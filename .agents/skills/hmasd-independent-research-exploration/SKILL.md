@@ -1,6 +1,6 @@
 ---
 name: hmasd-independent-research-exploration
-description: Use in the user-controlled HMASD Independent Research Explorer task for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with research outputs confined to local_research and explicit public handoffs confined to the shared outbound path.
+description: Use in the user-controlled HMASD Independent Research Explorer task for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with research outputs confined to local_research and explicit handoffs confined to the shared ignored temporary outbound path.
 ---
 
 # HMASD Independent Research Exploration
@@ -47,9 +47,9 @@ scientific packet requirements.
 Do not read `CURRENT_WORK.md`, active runtime/review state, implementation or
 scientific ledgers. During research execution, do not use Git or create project
 changes. Write advisory research files with `apply_patch` under
-`local_research`. The sole exception is an explicit mature-candidate handoff:
-write and Git-integrate only Explorer's files under
-`docs/project/handoffs/explorer_to_code_manager/`.
+`local_research`. An explicit mature-candidate handoff is a disposable copy
+under `temp/handoffs/explorer_to_code_manager/`; it is ignored and requires no
+Git operation.
 
 Workflow design is not an Explorer mode. Report one exact requirement or defect
 to the current Workflow Design Manager task through Codex-native
@@ -247,13 +247,13 @@ dispatch implementation or advance the formal workflow.
 
 When one or more mature candidates are ready for project intake, load
 `hmasd-explorer-project-validation`. Write self-contained semantic briefs under
-`docs/project/handoffs/explorer_to_code_manager/`; an optional manifest lists
+`temp/handoffs/explorer_to_code_manager/`; an optional manifest lists
 their public paths in the intended order. Each brief carries one candidate, but
 its format is not an admission gate and its order is not queue state or ranking.
 
-CPM reads the public brief, applies engineering judgment and may perform
+CPM reads the shared temporary brief, applies engineering judgment and may perform
 bounded safe read-only reconnaissance. It returns an understandable summary
-and exact evidence through its reverse public directory. Explorer does not ask
+and exact evidence through its reverse temporary directory. Explorer does not ask
 CPM to read `local_research/` and does not reinterpret prior mechanical BLOCKED
 receipts as candidate evidence. The handoff grants no Code Project Manager,
 compute, scientific or project-state authority; External Pro and explicit

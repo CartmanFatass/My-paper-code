@@ -17,18 +17,18 @@ workflow_git_authority=none
 workflow_change_request_route=workflow_design_manager
 code_authority=none
 runtime_authority=none
-git_authority=none_except_public_handoff_outbound
+git_authority=none
 current_work_read=forbidden
-write_scope=local_research_including_explorer_owned_pro_reviews|docs/project/handoffs/explorer_to_code_manager/
+write_scope=local_research_including_explorer_owned_pro_reviews|temp/handoffs/explorer_to_code_manager/
 local_research_single_writer=true
 local_research_write_tool=apply_patch_only
 local_research_shell_mutation=forbidden
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
 continuity_owner=independent_research_explorer
-public_handoff_outbound=docs/project/handoffs/explorer_to_code_manager/
-public_handoff_inbound_read=docs/project/handoffs/code_manager_to_explorer/
+public_handoff_outbound=temp/handoffs/explorer_to_code_manager/
+public_handoff_inbound_read=temp/handoffs/code_manager_to_explorer/
 public_handoff_write_tool=apply_patch_only
-public_handoff_git_authority=direct_for_own_outbound_files
+public_handoff_git_authority=none
 public_handoff_admission=semantic_judgment_no_mandatory_schema
 logical_assignment_count=derived_from_exact_work_roster
 runtime_concurrency=available_native_capacity
@@ -131,10 +131,10 @@ separate adversarial Pro assignment. The two reviews are separate turns; no
 transport operation crosses the barrier or treats either result as closure-only acceptance.
 
 For project validation, Explorer writes a self-contained semantic brief under
-`docs/project/handoffs/explorer_to_code_manager/` as defined in
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer may commit and
-push only its own outbound handoff files and may read, but never edit, CPM's
-reverse results. A brief remains advisory: it cannot adopt a project direction,
+`temp/handoffs/explorer_to_code_manager/` as defined in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Live exchange files are
+ignored temporary content and never require Git. Explorer may read, but never
+edit, CPM's reverse results. A brief remains advisory: it cannot adopt a project direction,
 assign code, authorize compute, contact External Pro or decide a result.
 Candidate isolation and supplied order organize the work without becoming
 admission states, ranking or cross-direction competition.

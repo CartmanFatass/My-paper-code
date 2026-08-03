@@ -90,8 +90,9 @@ if (Test-Path -LiteralPath $retiredExplorerValidationScriptPath) {
     throw 'Retired Explorer packet admission script remains'
 }
 foreach ($required in @(
-    'docs/project/handoffs/explorer_to_code_manager/',
-    'docs/project/handoffs/code_manager_to_explorer/',
+    'temp/handoffs/explorer_to_code_manager/',
+    'temp/handoffs/code_manager_to_explorer/',
+    'requires no Git operation',
     'semantic writing aids, not required field names',
     'bounded safe read-only reconnaissance',
     'not a packet validator, dispatcher, queue engine or state machine')) {
@@ -102,8 +103,9 @@ foreach ($required in @(
 foreach ($required in @(
     'explorer_toy_assignment_intake=pro_frozen_only',
     'explorer_toy_local_research_read=forbidden',
-    'explorer_public_handoff_inbound=docs/project/handoffs/explorer_to_code_manager/',
-    'explorer_public_result_outbound=docs/project/handoffs/code_manager_to_explorer/',
+    'explorer_public_handoff_inbound=temp/handoffs/explorer_to_code_manager/',
+    'explorer_public_result_outbound=temp/handoffs/code_manager_to_explorer/',
+    'explorer_public_handoff_git_authority=none',
     'explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance',
     'The brief is not a code assignment',
     'Read `local_research/`')) {
@@ -120,10 +122,11 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'Explorer alone creates, edits, commits and deletes its outbound files',
-    'Code Manager alone creates, edits, commits and deletes its outbound files',
+    'Explorer alone creates, edits and deletes its outbound files',
+    'Code Manager alone creates, edits and deletes its outbound files',
     'missing schema, `document_kind`, validator receipt, hash, byte count',
-    'begins with its natural-language conclusion and then appends the necessary exact evidence')) {
+    'begins with its natural-language conclusion and then appends the necessary exact evidence',
+    'live files never enter Git')) {
     if (-not $publicHandoffContractNormalized.Contains($required)) {
         throw "Public handoff contract missing: $required"
     }

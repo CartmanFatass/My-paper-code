@@ -73,20 +73,21 @@ The Agentify operator uses `temp/sessions/agentify_transport_operator/` for raw
 response handoffs. CPM or Explorer reads the named result, copies it into its
 own canonical archive, and performs its own scientific or mechanical intake.
 
-## Public semantic handoffs
+## Shared temporary semantic handoffs
 
-`docs/project/handoffs/` is a neutral tracked exchange surface, not a workflow
-state store. Explorer alone writes and deletes files under
-`explorer_to_code_manager/`; CPM reads them. CPM alone writes and deletes files
-under `code_manager_to_explorer/`; Explorer reads them. WDM owns the stable
-interface text and never writes, interprets or cleans live handoff content.
+`docs/project/handoffs/README.md` is the tracked contract; ignored
+`temp/handoffs/` is the live exchange, not a state store. Explorer owns the
+`explorer_to_code_manager/` direction and CPM owns
+`code_manager_to_explorer/`; each receiver is read-only. WDM owns only the
+contract text.
 
 Handoffs are self-contained human/model-readable briefs. Formats and suggested
 sections aid understanding but never become admission gates. The receiver uses
 judgment and bounded safe read-only reconnaissance, stopping only for a
 materially missing authority, scientific choice or concrete input object. An
 ordered manifest organizes one-candidate-at-a-time work without queue state.
-The sender removes the active file after intake; Git preserves history.
+The sender removes the temporary exchange copy after intake. It is never staged,
+committed or pushed; canonical owner records remain outside the exchange.
 
 ## Public current work
 
@@ -110,7 +111,7 @@ owner paths and are linked rather than copied.
 
 ## Git boundary
 
-WDM may fetch and push accepted workflow-control-plane paths. CPM, Explorer and
-other sessions may fetch and push only their non-workflow code, science,
-runtime, review, workspace and exact sender-owned public handoff paths. Every commit uses an exact owned path set,
+WDM may fetch and push accepted workflow-control-plane paths. Other sessions may
+push only their owned non-workflow durable paths; live temporary handoffs never
+enter Git. Every commit uses an exact owned path set,
 preserves disjoint edits and leaves unrelated index entries untouched.

@@ -103,8 +103,9 @@ if ((Test-Path -LiteralPath $retiredExplorerValidationScriptPath) -or
     throw 'Retired Explorer packet admission script/test remains'
 }
 foreach ($required in @(
-    'docs/project/handoffs/explorer_to_code_manager/',
-    'docs/project/handoffs/code_manager_to_explorer/',
+    'temp/handoffs/explorer_to_code_manager/',
+    'temp/handoffs/code_manager_to_explorer/',
+    'requires no Git operation',
     'semantic writing aids, not required field names',
     'bounded safe read-only reconnaissance',
     'not a packet validator, dispatcher, queue engine or state machine',
@@ -116,11 +117,11 @@ foreach ($required in @(
 foreach ($entry in @(
     @($codePmRole, 'explorer_toy_assignment_intake=pro_frozen_only'),
     @($codePmRole, 'explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance'),
-    @($independentResearchRole, 'public_handoff_outbound=docs/project/handoffs/explorer_to_code_manager/'),
-    @($independentResearchRole, 'public_handoff_git_authority=direct_for_own_outbound_files'),
+    @($independentResearchRole, 'public_handoff_outbound=temp/handoffs/explorer_to_code_manager/'),
+    @($independentResearchRole, 'public_handoff_git_authority=none'),
     @($independentResearchRole, 'project_toy_compute_authority=none'),
     @($proRole, 'semantically sufficient public candidate brief'),
-    @($proRoleNormalized, 'Code Project Manager archives the answer exactly and returns a conclusion-first, evidence-second brief through its outbound public handoff'),
+    @($proRoleNormalized, 'Code Project Manager archives the answer exactly and returns a conclusion-first, evidence-second brief through its outbound temporary handoff'),
     @($proRole, 'EXPLORER_TOY_DESIGN_ASSERTION_AUDIT'),
     @($proRole, 'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION'),
     @($proRole, 'TOY_CONTRACT_FROZEN|ADVISORY_REFINEMENT_REQUIRED|PARK_CANDIDATE'),
@@ -217,12 +218,13 @@ foreach ($retired in @(
 }
 foreach ($required in @(
     'independent_research_canonical_scientific_authority=none',
-    'independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews|docs/project/handoffs/explorer_to_code_manager/',
-    'independent_research_explorer_public_handoff_git_authority=direct_for_own_outbound_files',
-    'independent_research_explorer_public_handoff_read=docs/project/handoffs/code_manager_to_explorer/',
-    'code_project_manager_public_handoff_read=docs/project/handoffs/explorer_to_code_manager/',
-    'code_project_manager_public_handoff_write_and_git=docs/project/handoffs/code_manager_to_explorer/',
+    'independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews|temp/handoffs/explorer_to_code_manager/',
+    'independent_research_explorer_public_handoff_git_authority=none',
+    'independent_research_explorer_public_handoff_read=temp/handoffs/code_manager_to_explorer/',
+    'code_project_manager_public_handoff_read=temp/handoffs/explorer_to_code_manager/',
+    'code_project_manager_public_handoff_write_no_git=temp/handoffs/code_manager_to_explorer/',
     'public_semantic_handoff_contract=docs/project/handoffs/README.md',
+    'public_semantic_handoff_live_root=temp/handoffs',
     'public_semantic_handoff_admission=receiver_judgment_after_bounded_read_only_reconnaissance',
     'independent_research_continuity_entry=local_research/RESEARCH_CONTINUITY.md',
     'independent_research_continuity_owner=independent_research_explorer',
@@ -328,10 +330,10 @@ foreach ($required in @(
     'research_state_change_authority=direct_user_in_explorer_task_only',
     'wdm_cpm_scientific_command_effect=none',
     'external_pro_packet_effect=advisory_input_under_user_authorized_workflow',
-    'write_scope=local_research_including_explorer_owned_pro_reviews|docs/project/handoffs/explorer_to_code_manager/',
-    'public_handoff_outbound=docs/project/handoffs/explorer_to_code_manager/',
-    'public_handoff_inbound_read=docs/project/handoffs/code_manager_to_explorer/',
-    'public_handoff_git_authority=direct_for_own_outbound_files',
+    'write_scope=local_research_including_explorer_owned_pro_reviews|temp/handoffs/explorer_to_code_manager/',
+    'public_handoff_outbound=temp/handoffs/explorer_to_code_manager/',
+    'public_handoff_inbound_read=temp/handoffs/code_manager_to_explorer/',
+    'public_handoff_git_authority=none',
     'public_handoff_admission=semantic_judgment_no_mandatory_schema',
     'current_work_read=forbidden',
     'local_research_single_writer=true',
@@ -957,9 +959,10 @@ foreach ($required in @(
     'docs/project/current-work/common/<record-id>.md',
     'docs/project/current-work/sessions/<role_id>.md',
     'same_file_concurrent_writes=forbidden',
-    'docs/project/handoffs/',
+    'docs/project/handoffs/README.md',
+    'temp/handoffs/',
     'Formats and suggested sections aid understanding but never become admission gates',
-    'The sender removes the active file after intake; Git preserves history')) {
+    'It is never staged, committed or pushed')) {
     if (-not $sessionWorkspaceContract.Contains($required)) { throw "Session workspace contract missing: $required" }
 }
 foreach ($required in @(

@@ -1,6 +1,6 @@
 ---
 name: hmasd-explorer-project-validation
-description: Use for one semantic Explorer-to-project handoff through the shared public handoff surface while preserving advisory, science, code and compute authority boundaries.
+description: Use for one semantic Explorer-to-project handoff through the shared ignored temporary handoff surface while preserving advisory, science, code and compute authority boundaries.
 ---
 
 # Explorer project validation
@@ -13,8 +13,8 @@ current-work or project-state authority.
 ## Normal path
 
 Explorer writes one self-contained, human/model-readable Markdown or JSON brief
-under `docs/project/handoffs/explorer_to_code_manager/` and commits only its
-own outbound files. The brief explains one candidate's identity, target and
+under `temp/handoffs/explorer_to_code_manager/`. The live file is ignored and
+requires no Git operation. The brief explains one candidate's identity, target and
 version, intended outcome, concrete inputs, evidence and uncertainty, allowed
 and excluded effects, relevant authority boundary, completion evidence and
 return task. These are semantic writing aids, not required field names.
@@ -32,7 +32,7 @@ authority, External Pro scientific choice or concrete input object needed for
 the requested outcome.
 
 CPM returns a human-readable result under
-`docs/project/handoffs/code_manager_to_explorer/` containing an understandable
+`temp/handoffs/code_manager_to_explorer/` containing an understandable
 natural-language conclusion first and the necessary exact evidence second. A
 Codex-native message carrying the same semantic content is the simple fallback.
 Explorer reads but never edits CPM output.
@@ -41,7 +41,9 @@ If a referenced attachment is not readable by CPM, Explorer embeds the minimum
 necessary content in the same public brief; it does not create another wrapper
 or require CPM to read `local_research/`. Neither direction uses hashes, byte
 counts or fingerprints. After receiver intake, the file author removes the
-active handoff; Git remains the archive.
+temporary exchange copy. Canonical research, code, review and result records
+remain in their existing owner-controlled locations; the handoff itself is not
+an archive.
 
 ## Preserved authority
 

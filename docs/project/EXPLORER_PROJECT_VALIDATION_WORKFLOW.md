@@ -6,18 +6,19 @@ research into canonical science and grants no code or compute authority.
 
 ## Authority and public interface
 
-Explorer owns advisory research and writes only its outbound public handoffs.
+Explorer owns advisory research and writes only its outbound temporary handoffs.
 Code Project Manager owns project coordination, code, runtime and technical
 acceptance; it reads Explorer handoffs but never reads `local_research/`.
 External Pro owns scientific choices inside each submitted review boundary.
 Workflow Design Manager owns this stable interface, not its live handoff
 content.
 
-The shared interface is `docs/project/handoffs/`:
+The tracked stable contract is `docs/project/handoffs/README.md`. Live exchange
+files use the ignored shared root `temp/handoffs/`:
 
-- `explorer_to_code_manager/`: Explorer writes and deletes its own files; CPM
+- `temp/handoffs/explorer_to_code_manager/`: Explorer writes and deletes its own files; CPM
   reads them.
-- `code_manager_to_explorer/`: CPM writes and deletes its own files; Explorer
+- `temp/handoffs/code_manager_to_explorer/`: CPM writes and deletes its own files; Explorer
   reads them.
 
 A handoff is a self-contained Markdown or JSON brief, with attachments only
@@ -53,9 +54,10 @@ Mechanical field-only callbacks are insufficient.
 
 ## Lifecycle and failure ownership
 
-The sender owns its outbound file and removes it from the active tree after the
-receiver has completed intake; Git is the archive. There is no compatibility
-tree, registry, queue engine, retry state or duplicated history directory.
+The sender deletes its outbound temporary file after intake. No live handoff
+enters Git; canonical records remain in their existing owner locations. There
+is no compatibility tree, registry, queue engine, retry state or duplicated
+history directory.
 
 Explorer corrects missing advisory content. CPM owns implementation and
 operational recovery. External Pro owns estimand, mechanism, sufficiency and

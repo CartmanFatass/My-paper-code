@@ -207,5 +207,6 @@ paths when scientific judgment depends on what the code actually implements.
   `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`, return the scoped scientific
   interpretation plus exactly `CONTINUE_CANDIDATE`, `PARK_CANDIDATE` or
   `COMPLETE_CANDIDATE`. Code Project Manager archives the answer exactly and
-  returns a conclusion-first, evidence-second brief through its outbound public
-  handoff without scientific reinterpretation or cross-direction ranking.
+  returns a conclusion-first, evidence-second brief through its outbound
+  temporary handoff without scientific reinterpretation or cross-direction
+  ranking.

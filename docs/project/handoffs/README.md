@@ -1,20 +1,21 @@
 # Public Semantic Handoffs
 
-This directory is the neutral, tracked collaboration surface between
-Independent Research Explorer and Code Project Manager.
+This tracked file defines the stable collaboration interface between Independent
+Research Explorer and Code Project Manager. Live exchange files are ignored
+temporary files under `temp/handoffs/`, so ordinary handoffs require no Git.
 
 ## Ownership
 
-- `explorer_to_code_manager/`: Explorer alone creates, edits, commits and
+- `temp/handoffs/explorer_to_code_manager/`: Explorer alone creates, edits and
   deletes its outbound files. Code Manager reads them.
-- `code_manager_to_explorer/`: Code Manager alone creates, edits, commits and
-  deletes its outbound files. Explorer reads them.
+- `temp/handoffs/code_manager_to_explorer/`: Code Manager alone creates, edits
+  and deletes its outbound files. Explorer reads them.
 - Workflow Design Manager owns this interface contract but never authors,
   interprets or cleans live handoff content.
 
-Same-file concurrent writes are forbidden. A sender removes an active handoff
-after receiver intake; Git preserves history. No permanent duplicate history
-tree is maintained.
+Same-file concurrent writes are forbidden. The sender deletes the exchange copy
+after intake; live files never enter Git. Canonical records stay with their
+owners, with no handoff history tree.
 
 ## Semantic briefs
 
@@ -29,7 +30,7 @@ only for a materially missing authority, scientific choice or concrete input
 object. A missing schema, `document_kind`, validator receipt, hash, byte count
 or fingerprint is never a blocker.
 
-An optional manifest may list public brief paths in their intended order. It is
+An optional manifest may list temporary brief paths in their intended order. It is
 not a queue, registry, lease or state machine. Work remains one-candidate-at-a-
 time and candidate-specific. A result begins with its natural-language
 conclusion and then appends the necessary exact evidence; a mechanical envelope

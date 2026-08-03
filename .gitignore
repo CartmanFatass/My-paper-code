@@ -146,7 +146,7 @@ temp_collection_log/
 # User-controlled independent research is local-only and never enters Git.
 /local_research/
 
-# Temporary cross-task scratch remains local-only; public semantic briefs live under docs/project/handoffs.
+# Live cross-task semantic handoffs are ignored under temp/handoffs; only their stable contract is tracked.
 /temp/*
 !/temp/README.md
 

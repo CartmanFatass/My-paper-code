@@ -67,14 +67,14 @@ code_project_manager_experiment_dispatch_and_result_routing=exclusive
 code_project_manager_mechanical_result_acceptance=exclusive
 code_project_manager_scientific_authority=none
 code_project_manager_git_authority=direct_for_code_runtime_review_evidence_report_ledger_and_state
-code_project_manager_public_handoff_read=docs/project/handoffs/explorer_to_code_manager/
-code_project_manager_public_handoff_write_and_git=docs/project/handoffs/code_manager_to_explorer/
+code_project_manager_public_handoff_read=temp/handoffs/explorer_to_code_manager/
+code_project_manager_public_handoff_write_no_git=temp/handoffs/code_manager_to_explorer/
 code_project_manager_remote_repository_authority=permanent_user_grant
 code_project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
 independent_research_canonical_scientific_authority=none
-independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews|docs/project/handoffs/explorer_to_code_manager/
-independent_research_explorer_public_handoff_git_authority=direct_for_own_outbound_files
-independent_research_explorer_public_handoff_read=docs/project/handoffs/code_manager_to_explorer/
+independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews|temp/handoffs/explorer_to_code_manager/
+independent_research_explorer_public_handoff_git_authority=none
+independent_research_explorer_public_handoff_read=temp/handoffs/code_manager_to_explorer/
 independent_research_continuity_entry=local_research/RESEARCH_CONTINUITY.md
 independent_research_continuity_owner=independent_research_explorer
 independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews
@@ -99,6 +99,7 @@ independent_research_per_review_authorization=not_required_inside_active_explore
 independent_research_wdm_campaign_approval=none
 one_artifact_one_acceptance_owner=true
 public_semantic_handoff_contract=docs/project/handoffs/README.md
+public_semantic_handoff_live_root=temp/handoffs
 public_semantic_handoff_admission=receiver_judgment_after_bounded_read_only_reconnaissance
 public_semantic_handoff_order=work_organization_only
 cross_task_transport=codex_native_send_message_to_thread
@@ -213,7 +214,7 @@ No role reads every routed document. The active assignment or role charter names
 - `logs/<run-id>/` is Code Project Manager-owned runtime evidence written only by an exact assigned native operator or CPM.
 - `docs/project/CURRENT_WORK.md` is a WDM-owned public link/schema index. CPM owns project-operation records; WDM owns its workflow-control-plane session/common records.
 - `docs/project/` holds stable project principles and executable plans.
-- `docs/project/handoffs/` holds short-lived, sender-owned semantic briefs between Explorer and Code Manager; Git preserves removed history.
+- `docs/project/handoffs/README.md` is the tracked stable interface contract; ignored `temp/handoffs/<direction>/` holds disposable live briefs and results without Git operations.
 - `docs/research/cdc/` holds Pro-adjudicated scientific state mechanically recorded by Code Project Manager without reinterpretation.
 - `docs/external-review/` holds exact external evidence and transport facts.
 - `docs/report/ITERATION_<n>.md` is the Chinese valid-iteration report.
