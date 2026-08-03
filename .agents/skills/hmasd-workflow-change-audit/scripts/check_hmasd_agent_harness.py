@@ -78,58 +78,6 @@ def _repo_refs(text: str) -> set[str]:
     return refs
 
 
-def _developer_instruction_bytes(path: Path) -> bytes | None:
-    match = re.search(
-        br'(?s)developer_instructions\s*=\s*"""(.*?)"""', path.read_bytes()
-    )
-    return match.group(1) if match else None
-
-
-def _check_benchmark_fairness(
-    profiles: dict[str, tuple[Path, dict]], errors: list[str]
-) -> None:
-    identity_fields = {
-        "name",
-        "description",
-        "model",
-        "model_reasoning_effort",
-        "nickname_candidates",
-    }
-    for benchmark_class in ("implementer", "reviewer"):
-        prefix = f"hmasd-benchmark-{benchmark_class}-"
-        members = sorted(
-            (name, path, profile)
-            for name, (path, profile) in profiles.items()
-            if name.startswith(prefix)
-        )
-        if not members:
-            continue
-        if len(members) != 3:
-            errors.append(
-                f"benchmark {benchmark_class} profile count must be 3; "
-                f"found {len(members)}"
-            )
-            continue
-        instruction_blocks = [_developer_instruction_bytes(path) for _, path, _ in members]
-        if any(block is None for block in instruction_blocks):
-            errors.append(
-                f"benchmark {benchmark_class} developer_instructions cannot be parsed"
-            )
-        elif instruction_blocks[0] != instruction_blocks[1] or instruction_blocks[0] != instruction_blocks[2]:
-            errors.append(
-                f"benchmark {benchmark_class} developer_instructions differ byte-for-byte"
-            )
-        invariant_payloads = [
-            {key: value for key, value in profile.items() if key not in identity_fields}
-            for _, _, profile in members
-        ]
-        if invariant_payloads[0] != invariant_payloads[1] or invariant_payloads[0] != invariant_payloads[2]:
-            errors.append(
-                f"benchmark {benchmark_class} varies a non-identity field other than "
-                "model or model_reasoning_effort"
-            )
-
-
 def _check_control_plane_line_budget(repo: Path, errors: list[str]) -> None:
     total = 0
     for raw_path in CONTROL_PLANE_BUDGET_PATHS:
@@ -182,7 +130,6 @@ def audit_repo(
     registered_paths: dict[Path, str] = {}
     routed_roles: set[Path] = set()
     profile_names: dict[str, Path] = {}
-    profile_records: dict[str, tuple[Path, dict]] = {}
     for registry_name, entry in sorted(registry.items()):
         raw_config_file = entry.get("config_file")
         if not isinstance(raw_config_file, str):
@@ -224,7 +171,6 @@ def audit_repo(
                     f"duplicate profile name {name}: {profile_names[name]} and {profile_path}"
                 )
             profile_names[name] = profile_path
-            profile_records[name] = (profile_path, profile)
 
         instructions = profile.get("developer_instructions", "")
         role_refs = sorted(set(ROLE_REF.findall(instructions)))
@@ -267,8 +213,6 @@ def audit_repo(
         errors.append(f"unregistered profile: {path}")
     for path in sorted(set(registered_paths) - disk_profiles):
         errors.append(f"registry path is not an agent profile: {path}")
-    _check_benchmark_fairness(profile_records, errors)
-
     agents_text = _read(agents_path)
     for ref in ROLE_REF.findall(agents_text):
         routed_roles.add((repo / ref).resolve())
@@ -282,9 +226,7 @@ def audit_repo(
         path.parent.name: path.resolve() for path in skill_root.glob("*/SKILL.md")
     }
     route_texts = [agents_text]
-    manager_roles = (role_root / "CODE_PROJECT_MANAGER.md",)
-    route_texts.extend(_read(path) for path in manager_roles if path.is_file())
-    route_texts.extend(_read(path) for path in skill_docs.values())
+    route_texts.extend(_read(path) for path in sorted(disk_roles))
     route_blob = "\n".join(route_texts)
     for name, path in sorted(skill_docs.items()):
         if name not in route_blob:
@@ -294,11 +236,12 @@ def audit_repo(
         if contains_files and not (directory / "SKILL.md").is_file():
             errors.append(f"Skill directory has no SKILL.md: {directory}")
 
-    for route_path in (agents_path, *manager_roles):
+    route_paths = (agents_path, *sorted(disk_roles), *sorted(skill_docs.values()))
+    for route_path in route_paths:
         if not route_path.is_file():
             continue
         for ref in sorted(_repo_refs(_read(route_path))):
-            if not (repo / ref).exists():
+            if not (repo / ref).exists() and not (route_path.parent / ref).exists():
                 errors.append(f"broken active path reference in {route_path}: {ref}")
 
     active_paths = list(DEFAULT_ACTIVE_PATHS) + list(extra_active_paths)

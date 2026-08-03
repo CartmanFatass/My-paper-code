@@ -175,7 +175,7 @@ authority rules decide whether user input is required.
 ## Routed project mechanisms
 - Scientific principles and evidence complexity: `docs/project/ALGORITHM_PRINCIPLES.md`, `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`.
 - Longitudinal scientific-decision ledger: `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`.
-- Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`.
+- Pro-assisted design and code-science audits: `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md`; CPM owns request and intake, and the Agentify Transport Operator owns delivery.
 - Workflow-design authority and automation: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`.
 - Project coordination, code, technical acceptance, runtime and external-review intake: `.agents/roles/CODE_PROJECT_MANAGER.md`.
 - Agentify transport authority: `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`; normal mechanics: `.agents/skills/hmasd-agentify-transport/SKILL.md`. The Operator may read and control Agentify pages and create, select or switch conversations; independent reviews normally use clean conversations and true follow-ups reuse their matching context. CPM and Explorer write one minimal ordered batch file, send only its path, continue unrelated work, and later accept one batch result before performing their own archive and intake. A retry reuses the same batch file and requires no requester-side file change.

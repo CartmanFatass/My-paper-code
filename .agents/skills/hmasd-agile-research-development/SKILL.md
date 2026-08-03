@@ -89,9 +89,9 @@ A user-named one may be inspected only as reference.
    evaluation. Report commands, results, limits, and files. For new or materially
    changed claim-bearing code, Code Project Manager writes the commit-bound
    critical-point index, pushes the accepted implementation and routes the one
-   comparison-only `CODE_SCIENCE_ALIGNMENT_AUDIT` through the registered Project
-   Operations Operator before
-   a formal run. The audit may identify a concrete contract mismatch but cannot
+   comparison-only `CODE_SCIENCE_ALIGNMENT_AUDIT` through the registered
+   Agentify Transport Operator before a formal run. The audit may identify a
+   concrete contract mismatch but cannot
    design an algorithm, controller, solver or new evidence search.
 
 ## Active module boundary

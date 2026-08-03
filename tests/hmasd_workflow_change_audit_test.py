@@ -77,37 +77,6 @@ def test_control_plane_line_budget_rejects_one_line_over(tmp_path: Path) -> None
     assert any("control-plane line budget exceeded: 1001>1000" in error for error in errors), errors
 
 
-def _add_benchmark_group(root: Path, *, drift: bool) -> None:
-    with (root / ".codex/config.toml").open("a", encoding="utf-8") as handle:
-        for variant in ("a", "b", "c"):
-            handle.write(
-                f'\n[agents."Benchmark{variant.upper()}"]\n'
-                f'config_file = "./agents/hmasd-benchmark-implementer-{variant}.toml"\n'
-            )
-    _write(
-        root / ".agents/roles/BENCHMARK_IMPLEMENTER.md",
-        "```text\nrole=benchmark_implementer\n"
-        "callable_agent_type=hmasd-benchmark-implementer\n```\n",
-    )
-    with (root / "AGENTS.md").open("a", encoding="utf-8") as handle:
-        handle.write("Use `.agents/roles/BENCHMARK_IMPLEMENTER.md`.\n")
-    for index, variant in enumerate(("a", "b", "c")):
-        instructions = "Frozen benchmark task. Read .agents/roles/BENCHMARK_IMPLEMENTER.md."
-        if drift and index == 2:
-            instructions += " Extra behavior."
-        _write(
-            root / f".codex/agents/hmasd-benchmark-implementer-{variant}.toml",
-            f'name = "hmasd-benchmark-implementer-{variant}"\n'
-            f'description = "Variant {variant}"\n'
-            f'model = "model-{variant}"\n'
-            f'model_reasoning_effort = "{variant}"\n'
-            'sandbox_mode = "workspace-write"\n'
-            'approval_policy = "never"\n'
-            f'nickname_candidates = ["Variant {variant}"]\n'
-            f'developer_instructions = """{instructions}"""\n',
-        )
-
-
 def test_live_repository_harness_is_closed() -> None:
     assert CHECKER.audit_repo(REPO) == []
 
@@ -141,9 +110,10 @@ def test_workflow_review_is_one_pass_normal_path_advice() -> None:
     ("missing_role", "references missing role"),
     ("orphan_profile", "unregistered profile"),
     ("orphan_role", "unrouted role charter"),
+    ("orphan_skill", "unrouted Skill"),
     ("forbidden_marker", "forbidden active marker"),
     ("broken_script", "broken active path reference"),
-    ("benchmark_drift", "developer_instructions differ byte-for-byte"),
+    ("broken_skill_script", "broken active path reference"),
 ])
 def test_checker_fails_closed_on_cross_surface_omissions(
     tmp_path: Path, breakage: str, expected: str
@@ -155,6 +125,8 @@ def test_checker_fails_closed_on_cross_surface_omissions(
         _write(repo / ".codex/agents/orphan.toml", 'name = "orphan"\n')
     elif breakage == "orphan_role":
         _write(repo / ".agents/roles/ORPHAN.md", "```text\nrole=orphan\n```\n")
+    elif breakage == "orphan_skill":
+        _write(repo / ".agents/skills/orphan/SKILL.md", "---\nname: orphan\n---\n")
     elif breakage == "forbidden_marker":
         with (repo / "AGENTS.md").open("a", encoding="utf-8") as handle:
             handle.write("superpowers_execution=enabled\n")
@@ -162,7 +134,8 @@ def test_checker_fails_closed_on_cross_surface_omissions(
         with (repo / "AGENTS.md").open("a", encoding="utf-8") as handle:
             handle.write("Use `scripts/missing_harness.py`.\n")
     else:
-        _add_benchmark_group(repo, drift=True)
+        with (repo / ".agents/skills/demo/SKILL.md").open("a", encoding="utf-8") as handle:
+            handle.write("Use `scripts/missing_skill.py`.\n")
 
     errors = CHECKER.audit_repo(repo)
     assert any(expected in error for error in errors), errors

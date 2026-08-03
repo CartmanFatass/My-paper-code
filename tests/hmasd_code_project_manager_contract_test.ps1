@@ -261,9 +261,13 @@ if (-not $agileNormalized.Contains('Code Project Manager alone accepts code') -o
     -not $agileNormalized.Contains('owns runtime, transport and Git integration')) {
     throw 'Agile Skill does not preserve CPM ownership'
 }
-if ($agile.Contains('External Review Operator') -or
-    $agile.Contains('Project Operations Operator')) {
+if ($agileNormalized.Contains('External Review Operator') -or
+    $agileNormalized.Contains('Project Operations Operator')) {
     throw 'Agile Skill retains a stale or ambiguous review route'
+}
+if (-not $agileNormalized.Contains('CODE_SCIENCE_ALIGNMENT_AUDIT') -or
+    -not $agileNormalized.Contains('Agentify Transport Operator')) {
+    throw 'Agile Skill does not route the code-science audit through Agentify transport'
 }
 foreach ($surface in @($codePm, $agile)) {
     foreach ($required in @(
