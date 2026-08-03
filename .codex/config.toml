@@ -76,3 +76,8 @@ nickname_candidates = ["Research Critic", "Claim Critic", "Evidence Challenger"]
 description = "Read-only Sol-max analyst for one constructive RL-principles assessment."
 config_file = "./agents/hmasd-research-principles-analyst.toml"
 nickname_candidates = ["Research Principles Analyst", "RL Principles Analyst", "Learning Dynamics Analyst"]
+
+[mcp_servers.agentify-desktop]
+command = "node"
+args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
+tool_timeout_sec = 2700
