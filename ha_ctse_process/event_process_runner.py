@@ -149,7 +149,7 @@ def _open_iteration5_window(
 def _apply_iteration5_transaction_hooks(
     *, ledger, core, transaction, result, snapshot, process_state: Mapping[str, float]
 ) -> None:
-    from ha_ctse_process.variable_roster_event import event_action_hooks
+    from ha_ctse_process.variable_roster_event_types import event_action_hooks
 
     member_by_key = {str(member.lifecycle_key): member for member in snapshot.members}
     for hook in event_action_hooks(result):
@@ -301,11 +301,13 @@ def _run_iteration5_process_semantics_branch(config, args: argparse.Namespace, w
         apply_event_ppo_update,
         batched_low_step,
         event_model_only_checkpoint_payload,
+        pack_event_ppo_data,
+        vector_event_checkpoint_payload,
+    )
+    from ha_ctse_process.variable_roster_event_types import (
         event_action_hooks,
         lifecycle_boundary_hooks,
         low_row_index_hooks,
-        pack_event_ppo_data,
-        vector_event_checkpoint_payload,
     )
 
     enforce_iteration5_process_semantics_contract(config, args)

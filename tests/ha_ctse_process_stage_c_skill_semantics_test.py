@@ -224,7 +224,7 @@ def _stored_log_probabilities(actor):
 
 
 def _real_shaped_arm(arm: str, *, zero_actor: bool, lineage_shift: float = 0.0):
-    from ha_ctse_process.variable_roster_event import LowTransitionRow
+    from ha_ctse_process.variable_roster_event_types import LowTransitionRow
 
     actor = _make_actor(421 if arm == "f0" else 422, zero=zero_actor)
     stored_logp = _stored_log_probabilities(actor)
@@ -512,7 +512,7 @@ def test_run_audit_selects_f1_fails_closed_and_writes_one_json_safe_artifact(tmp
 def test_direct_script_execution_bootstraps_repo_root_for_checkpoint_dataclass_unpickling(
     tmp_path,
 ):
-    from ha_ctse_process.variable_roster_event import LowTransitionRow
+    from ha_ctse_process.variable_roster_event_types import LowTransitionRow
 
     arm_root = tmp_path / "arm"
     result_dir = arm_root / "result"

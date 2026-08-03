@@ -16,11 +16,11 @@ from ha_ctse_process.dynamic_roster_testbed import (
 )
 from ha_ctse_process.variable_roster_event import (
     JOIN,
-    MembershipDelta,
     REJOIN,
     TEMPORARY_LEAVE,
     TERMINAL_LEAVE,
 )
+from ha_ctse_process.variable_roster_event_types import MembershipDelta
 
 
 Profile = Literal["train", "iid", "held_out"]

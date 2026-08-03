@@ -29,17 +29,19 @@ from ha_ctse_process.variable_roster_event import (
     TEMPORARY_LEAVE,
     TERMINAL,
     TERMINAL_LEAVE,
+    VariableRosterEventCore,
+    apply_event_ppo_update,
+    batched_low_step,
+    centered_logits,
+    pack_event_ppo_data,
+)
+from ha_ctse_process.variable_roster_event_types import (
     ActiveRoutingView,
     BoundaryMember,
     BoundarySnapshot,
     MembershipDelta,
     MembershipTransaction,
     PackedActiveBatch,
-    VariableRosterEventCore,
-    apply_event_ppo_update,
-    batched_low_step,
-    centered_logits,
-    pack_event_ppo_data,
 )
 
 

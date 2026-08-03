@@ -43,13 +43,15 @@ from ha_ctse_process.variable_roster_event import (
     TEMPORARY_LEAVE,
     TERMINAL,
     TERMINAL_LEAVE,
-    EventTransactionResult,
-    MembershipTransaction,
-    PackedEventHighPPOData,
     VariableRosterEventCore,
     apply_event_high_ppo_update,
     event_high_ppo_losses_from_packed,
     pack_event_high_ppo_data,
+)
+from ha_ctse_process.variable_roster_event_types import (
+    EventTransactionResult,
+    MembershipTransaction,
+    PackedEventHighPPOData,
 )
 
 

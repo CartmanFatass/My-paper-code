@@ -22,15 +22,17 @@ from ha_ctse_process.variable_roster_event import (
     JOIN,
     SNAPSHOT_CAPABILITY_NAME,
     SNAPSHOT_CAPABILITY_VERSION,
-    BoundaryMember,
-    BoundarySnapshot,
-    MembershipDelta,
-    MembershipTransaction,
     VariableRosterEventCore,
     event_model_only_checkpoint_payload,
     restore_event_model_only_checkpoint,
     restore_vector_event_checkpoint,
     vector_event_checkpoint_payload,
+)
+from ha_ctse_process.variable_roster_event_types import (
+    BoundaryMember,
+    BoundarySnapshot,
+    MembershipDelta,
+    MembershipTransaction,
 )
 
 

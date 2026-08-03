@@ -31,7 +31,7 @@ from ha_ctse_process.dynamic_roster_direct import (
 from ha_ctse_process.dynamic_roster_spatial_testbed import (
     make_spatial_environment,
 )
-from ha_ctse_process.variable_roster_event import (
+from ha_ctse_process.variable_roster_event_types import (
     EventTransactionResult,
     LowTransitionRow,
     event_action_hooks,

@@ -15,16 +15,18 @@ from typing import Any, Mapping
 import numpy as np
 
 from ha_ctse_process.variable_roster_event import (
-    BoundaryMember,
-    BoundarySnapshot,
     JOIN,
-    MembershipDelta,
-    MembershipTransaction,
     REJOIN,
     SNAPSHOT_CAPABILITY_NAME,
     SNAPSHOT_CAPABILITY_VERSION,
     TEMPORARY_LEAVE,
     TERMINAL_LEAVE,
+)
+from ha_ctse_process.variable_roster_event_types import (
+    BoundaryMember,
+    BoundarySnapshot,
+    MembershipDelta,
+    MembershipTransaction,
 )
 
 
