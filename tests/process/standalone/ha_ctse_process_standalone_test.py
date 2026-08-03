@@ -80,6 +80,12 @@ def make_agent(config=None, num_envs=1, action_space_type="discrete"):
     )
 
 
+def test_retired_p3_module_is_not_part_of_agent_state():
+    agent = make_agent()
+
+    assert not hasattr(agent, "skill_" + "effect_discovery")
+
+
 def test_lifecycle_reset_mixin_owns_methods_and_preserves_reset_state():
     agent = make_agent(num_envs=2)
     method_names = (

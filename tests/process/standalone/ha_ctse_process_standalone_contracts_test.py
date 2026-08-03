@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import ast
+import inspect
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
+from ha_ctse_process import standalone_contracts
 from ha_ctse_process.standalone_contracts import (
     enforce_aem_contract,
     enforce_iteration5_process_semantics_contract,
@@ -132,3 +134,10 @@ def test_contract_predicates_and_fail_closed_errors() -> None:
             _args(r30_pair_gate=True),
             None,
         )
+
+
+def test_retired_p3_contract_switches_are_absent() -> None:
+    source = inspect.getsource(standalone_contracts)
+    retired = ("skill_" + "effect", "skill_" + "force", "skill_" + "forcing")
+
+    assert all(token not in source for token in retired)

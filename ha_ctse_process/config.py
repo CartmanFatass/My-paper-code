@@ -285,41 +285,6 @@ class Config(EnvConfig):
     topology_potential_discount_mode = "delta"  # delta, one_step, smdp
     topology_potential_positive_only = False
 
-    # P3 Stage A: reward-off skill-effect discovery probe.  This asks whether
-    # z_i adds conditional predictive power for short-horizon effects beyond
-    # context/duration/reward shortcuts.  It is OFF by default and must not
-    # inject reward until the Stage-A shortcut gates pass.
-    skill_effect_discovery_on = False
-    skill_effect_reward_on = False
-    skill_effect_reward_injection = "none"  # none, low_only (Stage B only)
-    skill_effect_horizons = (3, 5, 10, 20)
-    skill_effect_stride = 5
-    skill_effect_max_windows = 8192
-    skill_effect_hidden_dim = 256
-    skill_effect_group_balanced_loss = True
-    skill_effect_intervention_probe_on = False
-    skill_effect_intervention_max_samples = 256
-    skill_effect_warmup_steps = 80000
-    skill_effect_ctrl_coef = 0.02
-    skill_effect_use_coef = 0.02
-    skill_effect_reward_clip = 0.05
-    skill_effect_min_gain = 0.0
-    skill_effect_min_positive_frac = 0.55
-    # P3-4 forcing reward, default-off. This is not a communication-metric
-    # heuristic: by default the forcing discriminator uses only action plus
-    # motion/energy effect fields for intrinsic reward.
-    skill_force_probe_on = False
-    enable_skill_forcing_reward = False
-    skill_force_reward_injection = "low_only"  # low_only, none
-    skill_force_disc_coef = 0.02
-    skill_force_effect_coef = 0.0
-    skill_force_duration_entropy_coef = 0.0
-    skill_force_warmup_steps = 80000
-    skill_force_clip = 0.05
-    skill_force_shortcut_margin = 0.0
-    skill_force_kill_on_shortcut = True
-    skill_force_use_comm_fields = False
-
     # Intrinsic reward composition.  Segment-level intrinsic is allowed to
     # shape the high-level SMDP policy only after the posterior demonstrably
     # beats trivial duration/length/reward shortcuts.

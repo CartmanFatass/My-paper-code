@@ -74,10 +74,6 @@ from ha_ctse_process.recovery_potential import (
     compute_segment_shaping,
     empty_p2_metrics,
 )
-from ha_ctse_process.skill_effect_discovery import (
-    SkillEffectDiscoveryModule,
-    empty_skill_effect_metrics,
-)
 from ha_ctse_process.situation_substrate import (
     PerAgentSituationDebouncer,
     SituationDebounceConfig,
@@ -1014,27 +1010,6 @@ class StandaloneProcessAgent(
             max(getattr(config, "r24_qd_export_max_rows_per_update", 4096), 0)
         )
         self.r24_qd_export_seed = int(getattr(config, "r24_qd_export_seed", 17))
-        self.skill_effect_discovery = (
-            SkillEffectDiscoveryModule(
-                config=config,
-                obs_dim=self.obs_dim,
-                n_skills=self.n_skills,
-                n_agents=self.n_agents,
-                num_team_codes=num_team_codes,
-                num_duration_bins=len(self.duration_candidates),
-                device=self.device,
-                action_feature_dim=1 if self.action_space_type == "discrete" else self.action_dim,
-            )
-            if (
-                bool(getattr(config, "skill_effect_discovery_on", False))
-                or bool(getattr(config, "skill_effect_reward_on", False))
-                or bool(getattr(config, "skill_force_probe_on", False))
-                or bool(getattr(config, "enable_skill_forcing_probe", False))
-                or bool(getattr(config, "enable_skill_forcing_reward", False))
-                or bool(getattr(config, "skill_forcing_reward_on", False))
-            )
-            else None
-        )
         self.team_transition = (
             SituationTransitionPredictor(
                 num_situations=self.situation_num_kappa,
@@ -1367,7 +1342,6 @@ class StandaloneProcessAgent(
             "team_discriminator": self._count_parameters(self.team_discriminator),
             "team_conditioned_qd_probe": self._count_parameters(self.team_conditioned_qd_probe),
             "compact_return_head": self._count_parameters(self.compact_return_head),
-            "skill_effect_discovery": self._count_parameters(self.skill_effect_discovery),
             "situation_hazard": self._count_parameters(self.situation_hazard),
             "team_transition": self._count_parameters(self.team_transition),
         }
@@ -1394,7 +1368,6 @@ class StandaloneProcessAgent(
             + counts["prototype_discriminator"]
             + counts["team_discriminator"]
             + counts["team_conditioned_qd_probe"]
-            + counts["skill_effect_discovery"]
             + counts["team_transition"]
         )
         counts["total_trainable"] = int(
@@ -1414,7 +1387,6 @@ class StandaloneProcessAgent(
                     "prototype_discriminator",
                     "team_discriminator",
                     "compact_return_head",
-                    "skill_effect_discovery",
                     "situation_hazard",
                     "team_transition",
                 )
@@ -2682,82 +2654,6 @@ class StandaloneProcessAgent(
             if not np.isfinite(np.asarray(output[name])).all():
                 raise FloatingPointError(f"R27-G2 {name} contains non-finite values")
         return output
-
-    def _low_actor_forced_skill_outputs(
-        self,
-        obs_np: np.ndarray,
-        skills_np: np.ndarray,
-        team_codes_np: np.ndarray,
-        agent_ids_np: np.ndarray | None = None,
-    ) -> tuple[np.ndarray, np.ndarray]:
-        """Return low-actor action-distribution features under forced skills.
-
-        This is a diagnostic-only path for P3-2c.  It does not sample from or
-        mutate the rollout hidden state; recurrent actors use zero hidden state
-        so the same observation can be compared across all forced skill labels.
-        """
-        obs_t = torch.as_tensor(obs_np, dtype=torch.float32, device=self.device)
-        skills_t = torch.as_tensor(skills_np, dtype=torch.long, device=self.device)
-        team_t = torch.as_tensor(team_codes_np, dtype=torch.long, device=self.device)
-        count = int(obs_t.shape[0])
-
-        def _continuous_from_action_out(action_out, features: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
-            if hasattr(action_out, "_distribution"):
-                dist = action_out._distribution(features)
-                mean = torch.tanh(dist.mean) if action_out.__class__.__name__ == "TanhDiagGaussian" else dist.mean
-                entropy = dist.entropy()
-                if entropy.dim() > 1:
-                    entropy = entropy.sum(dim=-1)
-                return mean, entropy
-            if hasattr(action_out, "fc_mean"):
-                mean = action_out.fc_mean(features)
-                return mean, torch.zeros(mean.shape[0], dtype=torch.float32, device=features.device)
-            action, _logp = action_out(features, deterministic=True)
-            if action.dim() == 1:
-                action = action.unsqueeze(-1)
-            return action.float(), torch.zeros(action.shape[0], dtype=torch.float32, device=features.device)
-
-        with torch.no_grad():
-            if isinstance(self.low, standalone_models.StrictHMASDMAPPOLowLevelPolicy):
-                actor_hxs = torch.zeros(count, self.low.hidden_dim, dtype=torch.float32, device=self.device)
-                masks = torch.ones(count, 1, dtype=torch.float32, device=self.device)
-                actor_features = self.low._actor_features(obs_t, skills_t, team_t)
-                actor_features, _new_hxs = self.low.actor_rnn(actor_features, actor_hxs, masks)
-                if self.action_space_type == "discrete":
-                    dist = self.low.actor_act.action_out(actor_features)
-                    action_features = dist.probs.float()
-                    entropy = dist.entropy().float()
-                else:
-                    action_features, entropy = _continuous_from_action_out(self.low.actor_act.action_out, actor_features)
-            elif isinstance(self.low, standalone_models.RecurrentLowLevelPolicy):
-                actor_hxs = torch.zeros(count, self.low.hidden_dim, dtype=torch.float32, device=self.device)
-                actor_input = self.low._actor_features(obs_t, skills_t)
-                actor_h = self.low.actor_rnn(actor_input, actor_hxs)
-                dist, actor_out = self.low._dist(actor_h)
-                if self.action_space_type == "discrete":
-                    action_features = dist.probs.float()
-                    entropy = dist.entropy().float()
-                else:
-                    action_features = actor_out.float()
-                    entropy = dist.entropy()
-                    if entropy.dim() > 1:
-                        entropy = entropy.sum(dim=-1)
-            else:
-                features = self.low._features(obs_t, skills_t)
-                actor_out = self.low.actor(features)
-                if self.action_space_type == "discrete":
-                    dist = torch.distributions.Categorical(logits=actor_out)
-                    action_features = dist.probs.float()
-                    entropy = dist.entropy().float()
-                else:
-                    action_features = actor_out.float()
-                    std = torch.exp(self.low.log_std).expand_as(actor_out)
-                    entropy = torch.distributions.Normal(actor_out, std).entropy().sum(dim=-1)
-
-        return (
-            action_features.detach().cpu().numpy().astype(np.float32),
-            entropy.detach().cpu().numpy().astype(np.float32),
-        )
 
     def duration_only_accuracy(self, labels: np.ndarray, durations: np.ndarray) -> float:
         if labels.size == 0:
@@ -4164,7 +4060,6 @@ class StandaloneProcessAgent(
                 **team_intent_metrics,
                 **team_effect_metrics,
                 **empty_team_conditioned_qd_metrics(),
-                **empty_skill_effect_metrics(),
                 **r28_g1_metrics,
                 **r29_action_info_metrics,
                 **self._situation_diagnostics([]),
@@ -4181,19 +4076,6 @@ class StandaloneProcessAgent(
             valid,
             total_steps=total_steps,
         )
-        effect_metrics, effect_micro_rewards = (
-            self.skill_effect_discovery.update(valid, total_steps=total_steps)
-            if self.skill_effect_discovery is not None
-            else (empty_skill_effect_metrics(), {})
-        )
-        if self.skill_effect_discovery is not None:
-            effect_metrics.update(
-                self.skill_effect_discovery.intervention_audit(
-                    valid,
-                    action_probe_fn=self._low_actor_forced_skill_outputs,
-                )
-            )
-
         max_len = max(s.length for s in valid)
         obs = np.zeros((len(valid), max_len, valid[0].obs[0].shape[0]), dtype=np.float32)
         action_dim = valid[0].actions[0].size
@@ -4923,21 +4805,6 @@ class StandaloneProcessAgent(
             if 0 <= int(rollout_idx) < len(rollout.rewards) and 0 <= int(agent_id) < self.n_agents:
                 rollout.rewards[int(rollout_idx)][int(agent_id)] += float(reward_value)
 
-        if isinstance(effect_micro_rewards, dict):
-            micro_indices = effect_micro_rewards.get("rollout_indices", [])
-            micro_agents = np.asarray(effect_micro_rewards.get("agent_ids", []), dtype=np.int64).reshape(-1)
-            micro_rewards = np.asarray(effect_micro_rewards.get("rewards", []), dtype=np.float32).reshape(-1)
-            for indices, agent_id, reward_value in zip(micro_indices, micro_agents, micro_rewards):
-                step_indices = np.asarray(indices, dtype=np.int64).reshape(-1)
-                if step_indices.size <= 0 or not np.isfinite(float(reward_value)):
-                    continue
-                if not (0 <= int(agent_id) < self.n_agents):
-                    continue
-                per_step = float(reward_value) / float(step_indices.size)
-                for rollout_idx in step_indices:
-                    if 0 <= int(rollout_idx) < len(rollout.rewards):
-                        rollout.rewards[int(rollout_idx)][int(agent_id)] += per_step
-
         for segment, reward_value in zip(valid, combined_low_rewards):
             if segment.length <= 0:
                 continue
@@ -5163,7 +5030,6 @@ class StandaloneProcessAgent(
             **topology_potential_metrics,
             **p2_metrics,
             **team_transition_metrics,
-            **effect_metrics,
             **team_conditioned_qd_metrics,
             "duration_only_accuracy": duration_only_acc,
             "length_only_accuracy": length_only_acc,

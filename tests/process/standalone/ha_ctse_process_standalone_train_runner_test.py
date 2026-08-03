@@ -80,6 +80,13 @@ def test_train_loop_constructs_profiler_only_in_the_positive_interval_branch() -
     assert source.index("if profile_interval > 0:") < source.index("InfrastructureProfiler(")
 
 
+def test_retired_p3_runner_surface_is_absent() -> None:
+    source = inspect.getsource(standalone_train_runner)
+    retired = ("skill_" + "effect", "skill_" + "force", "skill_" + "forcing")
+
+    assert all(token not in source for token in retired)
+
+
 def test_standard_profile_cuda_sync_binds_the_configured_agent_device(monkeypatch) -> None:
     received = []
     monkeypatch.setattr(

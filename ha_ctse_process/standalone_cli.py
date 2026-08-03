@@ -250,36 +250,6 @@ def parse_args() -> argparse.Namespace:
         choices=("delta", "one_step", "smdp"),
         default="",
     )
-    parser.add_argument("--skill_effect_horizons", default="")
-    parser.add_argument("--skill_effect_stride", type=int, default=0)
-    parser.add_argument("--skill_effect_max_windows", type=int, default=0)
-    parser.add_argument("--skill_effect_hidden_dim", type=int, default=0)
-    parser.add_argument("--disable_skill_effect_group_balanced_loss", action="store_true")
-    parser.add_argument("--skill_effect_intervention_max_samples", type=int, default=0)
-    parser.add_argument("--skill_effect_warmup_steps", type=int, default=-1)
-    parser.add_argument("--skill_effect_ctrl_coef", type=float, default=None)
-    parser.add_argument("--skill_effect_use_coef", type=float, default=None)
-    parser.add_argument("--skill_effect_reward_clip", type=float, default=None)
-    parser.add_argument("--skill_effect_min_gain", type=float, default=None)
-    parser.add_argument("--skill_effect_min_positive_frac", type=float, default=None)
-    parser.add_argument(
-        "--skill_effect_reward_injection",
-        choices=("none", "low_only"),
-        default="",
-    )
-    parser.add_argument(
-        "--skill_force_reward_injection",
-        choices=("none", "low_only"),
-        default="",
-    )
-    parser.add_argument("--skill_force_disc_coef", type=float, default=None)
-    parser.add_argument("--skill_force_effect_coef", type=float, default=None)
-    parser.add_argument("--skill_force_duration_entropy_coef", type=float, default=None)
-    parser.add_argument("--skill_force_warmup_steps", type=int, default=-1)
-    parser.add_argument("--skill_force_clip", type=float, default=None)
-    parser.add_argument("--skill_force_shortcut_margin", type=float, default=None)
-    parser.add_argument("--disable_skill_force_shortcut_gate", action="store_true")
-    parser.add_argument("--skill_force_use_comm_fields", action="store_true")
     parser.add_argument("--semantic_shortcut_hard_stop_margin", type=float, default=None)
     parser.add_argument("--semantic_shortcut_hard_stop_min_segments", type=int, default=0)
     parser.add_argument("--g_intervention_kl_max_segments", type=int, default=0)
@@ -398,11 +368,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--enable_low_actor_team_code", action="store_true")
     parser.add_argument("--enable_topology_potential_shaping", action="store_true")
     parser.add_argument("--topology_potential_positive_only", action="store_true")
-    parser.add_argument("--enable_skill_effect_probe", action="store_true")
-    parser.add_argument("--enable_skill_effect_intervention_probe", action="store_true")
-    parser.add_argument("--enable_skill_effect_reward", action="store_true")
-    parser.add_argument("--enable_skill_forcing_probe", action="store_true")
-    parser.add_argument("--enable_skill_forcing_reward", action="store_true")
     # P2-lite recovery-window contribution credit (default OFF).
     parser.add_argument("--enable_p2_recovery_compute", action="store_true")
     parser.add_argument("--enable_p2_recovery_reward", action="store_true")
@@ -507,16 +472,6 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         "topology_role_reward_clip",
         "topology_potential_coef",
         "topology_potential_clip",
-        "skill_effect_ctrl_coef",
-        "skill_effect_use_coef",
-        "skill_effect_reward_clip",
-        "skill_effect_min_gain",
-        "skill_effect_min_positive_frac",
-        "skill_force_disc_coef",
-        "skill_force_effect_coef",
-        "skill_force_duration_entropy_coef",
-        "skill_force_clip",
-        "skill_force_shortcut_margin",
         "semantic_shortcut_hard_stop_margin",
         "g_info_coef_skill",
         "g_info_coef_duration",
@@ -588,50 +543,6 @@ def apply_standalone_overrides(config, args: argparse.Namespace) -> None:
         config.topology_potential_discount_mode = args.topology_potential_discount_mode
     if int(args.topology_potential_warmup_steps) >= 0:
         config.topology_potential_warmup_steps = int(args.topology_potential_warmup_steps)
-    effect_horizons = parse_int_tuple(args.skill_effect_horizons)
-    if effect_horizons:
-        config.skill_effect_horizons = effect_horizons
-    if int(args.skill_effect_stride) > 0:
-        config.skill_effect_stride = int(args.skill_effect_stride)
-    if int(args.skill_effect_max_windows) > 0:
-        config.skill_effect_max_windows = int(args.skill_effect_max_windows)
-    if int(args.skill_effect_hidden_dim) > 0:
-        config.skill_effect_hidden_dim = int(args.skill_effect_hidden_dim)
-    if args.disable_skill_effect_group_balanced_loss:
-        config.skill_effect_group_balanced_loss = False
-    if int(args.skill_effect_intervention_max_samples) > 0:
-        config.skill_effect_intervention_max_samples = int(args.skill_effect_intervention_max_samples)
-    if int(args.skill_effect_warmup_steps) >= 0:
-        config.skill_effect_warmup_steps = int(args.skill_effect_warmup_steps)
-    if args.skill_effect_reward_injection:
-        config.skill_effect_reward_injection = args.skill_effect_reward_injection
-    if args.skill_force_reward_injection:
-        config.skill_force_reward_injection = args.skill_force_reward_injection
-    if int(args.skill_force_warmup_steps) >= 0:
-        config.skill_force_warmup_steps = int(args.skill_force_warmup_steps)
-    if args.disable_skill_force_shortcut_gate:
-        config.skill_force_kill_on_shortcut = False
-    if args.skill_force_use_comm_fields:
-        config.skill_force_use_comm_fields = True
-    if args.enable_skill_effect_probe:
-        config.skill_effect_discovery_on = True
-    if args.enable_skill_effect_intervention_probe:
-        config.skill_effect_discovery_on = True
-        config.skill_effect_intervention_probe_on = True
-    if args.enable_skill_effect_reward:
-        config.skill_effect_reward_on = True
-        config.skill_effect_discovery_on = True
-        if not getattr(config, "skill_effect_reward_injection", "none") or config.skill_effect_reward_injection == "none":
-            config.skill_effect_reward_injection = "low_only"
-    if args.enable_skill_forcing_probe:
-        config.skill_force_probe_on = True
-        config.skill_effect_discovery_on = True
-    if args.enable_skill_forcing_reward:
-        config.enable_skill_forcing_reward = True
-        config.skill_force_probe_on = True
-        config.skill_effect_discovery_on = True
-        if not hasattr(config, "skill_force_reward_injection"):
-            config.skill_force_reward_injection = "low_only"
     if args.enable_p2_recovery_compute:
         config.p2_recovery_credit_compute_on = True
     if args.enable_p2_recovery_reward:

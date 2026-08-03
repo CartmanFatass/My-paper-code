@@ -150,6 +150,18 @@ def test_jsonable_and_pick_attrs_preserve_conversion_and_field_order(tmp_path):
     assert picked == {"first": "artifact", "second": 2}
 
 
+def test_retired_p3_fields_are_absent_from_manifest_schema():
+    retired = ("skill_" + "effect", "skill_" + "force", "skill_" + "forcing")
+    fields = (
+        standalone_manifest.ALGORITHM_MANIFEST_FIELDS
+        + standalone_manifest.TRAINING_MANIFEST_FIELDS
+        + standalone_manifest.MODEL_MANIFEST_FIELDS
+        + standalone_manifest.PHYSICAL_MANIFEST_FIELDS
+    )
+
+    assert all(not any(token in field for token in retired) for field in fields)
+
+
 class _FakeEnv:
     obs_dim = np.int64(7)
     state_dim = np.int64(11)

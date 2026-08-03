@@ -105,6 +105,11 @@ def test_metric_writers_preserve_tensorboard_and_update_csv_schema(tmp_path, mon
     standalone_metrics.log_eval_metrics(writer, 12, {"reward_mean": 2.0})
     assert ("Train/EnvRewardMean", 2.0, 12) in writer.scalars
     assert ("Eval/reward_mean", 2.0, 12) in writer.scalars
+    retired_tag_prefix = "Skill" + "Effect/"
+    assert not any(name.startswith(retired_tag_prefix) for name, _value, _step in writer.scalars)
+    assert not any(
+        field.startswith(("effect_", "force_")) for field in UPDATE_FIELDS
+    )
     assert writer.flush_count == 2
 
     plot_calls = []

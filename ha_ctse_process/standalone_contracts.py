@@ -161,9 +161,6 @@ def enforce_r28_g1_contract(
         "enable_team_transition_reward",
         "enable_assignment_actionability_reward",
         "enable_g_info_objective",
-        "enable_skill_forcing_reward",
-        "skill_forcing_reward_on",
-        "skill_effect_reward_on",
         "use_topology_potential_shaping",
         "p2_recovery_credit_reward_on",
         "duration_entropy_floor_enabled",
@@ -180,11 +177,6 @@ def enforce_r28_g1_contract(
         "topology_role_reward_coef",
         "topology_potential_coef",
         "p2_recovery_reward_coef",
-        "skill_effect_ctrl_coef",
-        "skill_effect_use_coef",
-        "skill_force_disc_coef",
-        "skill_force_effect_coef",
-        "skill_force_duration_entropy_coef",
         "assignment_actionability_coef",
         "g_info_coef_skill",
         "g_info_coef_duration",
@@ -201,8 +193,6 @@ def enforce_r28_g1_contract(
     config.outcome_residual_injection = "none"
     config.topology_role_injection = "none"
     config.topology_potential_injection = "none"
-    config.skill_effect_reward_injection = "none"
-    config.skill_force_reward_injection = "none"
 
 
 def enforce_r29_action_info_contract(
@@ -348,8 +338,6 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
         "enable_team_transition_reward",
         "enable_team_disc_reward",
         "enable_assignment_actionability_reward",
-        "enable_skill_effect_reward",
-        "enable_skill_forcing_reward",
         "p2_recovery_credit_reward_on",
         "enable_topology_potential_shaping",
     )
@@ -414,8 +402,6 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
         "enable_team_transition_reward",
         "enable_team_disc_reward",
         "enable_assignment_actionability_reward",
-        "skill_effect_reward_on",
-        "enable_skill_forcing_reward",
         "p2_recovery_credit_reward_on",
         "use_topology_potential_shaping",
     ):
@@ -424,8 +410,6 @@ def enforce_r30_contract(config, args: argparse.Namespace) -> None:
     config.outcome_residual_injection = "none"
     config.topology_role_injection = "none"
     config.topology_potential_injection = "none"
-    config.skill_effect_reward_injection = "none"
-    config.skill_force_reward_injection = "none"
     config.parallel_selection = False
     config.use_autoregressive_selection = True
     config.ar_prefix_mode = "roster"
@@ -755,13 +739,6 @@ def enforce_r30_pair_gate(
         "enable_assignment_actionability_probe",
         "enable_assignment_actionability_reward",
         "enable_g_info_objective",
-        "skill_effect_discovery_on",
-        "skill_effect_intervention_probe_on",
-        "skill_effect_reward_on",
-        "skill_force_probe_on",
-        "enable_skill_forcing_probe",
-        "enable_skill_forcing_reward",
-        "skill_forcing_reward_on",
         "use_topology_potential_shaping",
         "p2_recovery_credit_reward_on",
         "duration_entropy_floor_enabled",
@@ -780,11 +757,6 @@ def enforce_r30_pair_gate(
         "topology_role_reward_coef",
         "topology_potential_coef",
         "p2_recovery_reward_coef",
-        "skill_effect_ctrl_coef",
-        "skill_effect_use_coef",
-        "skill_force_disc_coef",
-        "skill_force_effect_coef",
-        "skill_force_duration_entropy_coef",
         "g_info_coef_skill",
         "g_info_coef_duration",
         "g_info_coef_edit",
@@ -803,8 +775,6 @@ def enforce_r30_pair_gate(
     config.outcome_residual_injection = "none"
     config.topology_role_injection = "none"
     config.topology_potential_injection = "none"
-    config.skill_effect_reward_injection = "none"
-    config.skill_force_reward_injection = "none"
     config.team_bridge_type = "deterministic_expected"
     config.low_actor_condition_on_team_code = False
     config.parallel_selection = False

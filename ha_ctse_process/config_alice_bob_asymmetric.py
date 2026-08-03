@@ -81,5 +81,3 @@ class Config(ProcessConfig):
     outcome_residual_injection = "none"
     topology_role_injection = "none"
     topology_potential_injection = "none"
-    skill_effect_reward_injection = "none"
-    skill_force_reward_injection = "none"

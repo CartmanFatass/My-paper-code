@@ -1,4 +1,5 @@
 import argparse
+import inspect
 import json
 from types import SimpleNamespace
 
@@ -89,3 +90,10 @@ def test_checkpoint_callers_use_owner_functions_without_wrappers():
     assert not hasattr(process_train, "checkpoint_payload")
     assert not hasattr(process_train, "migrate_legacy_high_to_r30")
     assert not hasattr(process_train, "load_reward_pure_legacy_high")
+
+
+def test_retired_p3_state_is_absent_from_checkpoint_codec():
+    source = inspect.getsource(checkpoint_io)
+    retired = ("skill_" + "effect", "skill_" + "force", "skill_" + "forcing")
+
+    assert all(token not in source for token in retired)

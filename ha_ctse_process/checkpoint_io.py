@@ -85,11 +85,6 @@ def checkpoint_payload(
             if getattr(agent, "situation_hazard", None) is not None
             else None
         ),
-        "skill_effect_discovery": (
-            agent.skill_effect_discovery.state_dict()
-            if getattr(agent, "skill_effect_discovery", None) is not None
-            else None
-        ),
         "team_transition": (
             agent.team_transition.state_dict()
             if getattr(agent, "team_transition", None) is not None
@@ -125,11 +120,6 @@ def checkpoint_payload(
         "prototype_disc_opt": (
             agent.prototype_disc_opt.state_dict()
             if getattr(agent, "prototype_disc_opt", None) is not None
-            else None
-        ),
-        "skill_effect_opt": (
-            agent.skill_effect_discovery.opt.state_dict()
-            if getattr(agent, "skill_effect_discovery", None) is not None
             else None
         ),
         "team_transition_opt": (
@@ -449,15 +439,6 @@ def load_checkpoint(
     ):
         agent.situation_hazard.load_state_dict(checkpoint["situation_hazard"], strict=False)
     if (
-        "skill_effect_discovery" in checkpoint
-        and checkpoint.get("skill_effect_discovery") is not None
-        and getattr(agent, "skill_effect_discovery", None) is not None
-    ):
-        try:
-            agent.skill_effect_discovery.load_state_dict(checkpoint["skill_effect_discovery"], strict=False)
-        except RuntimeError:
-            pass
-    if (
         "team_transition" in checkpoint
         and checkpoint.get("team_transition") is not None
         and getattr(agent, "team_transition", None) is not None
@@ -539,15 +520,6 @@ def load_checkpoint(
         ):
             try:
                 agent.prototype_disc_opt.load_state_dict(checkpoint["prototype_disc_opt"])
-            except ValueError:
-                pass
-        if (
-            "skill_effect_opt" in checkpoint
-            and checkpoint.get("skill_effect_opt") is not None
-            and getattr(agent, "skill_effect_discovery", None) is not None
-        ):
-            try:
-                agent.skill_effect_discovery.opt.load_state_dict(checkpoint["skill_effect_opt"])
             except ValueError:
                 pass
         if (
