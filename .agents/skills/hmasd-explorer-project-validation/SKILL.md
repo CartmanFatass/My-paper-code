@@ -55,6 +55,14 @@ scientific-semantic acceptance. Explorer archives and intakes the raw answer but
 does not substitute its own acceptance. CPM does not initiate this review and
 remains the sole technical acceptance owner.
 
+The audit asks a natural scientific decision question and supplies the frozen
+contract, exact revision and relevant evidence without pre-filling the answer as
+a list of findings to close. It asks Pro to reconstruct what proposition the
+code realizes, identify the strongest material hidden assumption or alternate
+explanation, assess whether the evidence is discriminating and scientifically
+useful, and only then give the bounded final disposition. Known concerns are
+context for judgment, not mandatory headings or an expected verdict.
+
 If a referenced attachment is not readable by CPM, Explorer embeds the minimum
 necessary content in the same public brief; it does not create another wrapper
 or require CPM to read `local_research/`. Neither direction uses hashes, byte

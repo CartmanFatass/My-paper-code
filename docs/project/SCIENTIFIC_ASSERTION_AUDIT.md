@@ -11,7 +11,7 @@ audit_model=two_stage_triggered
 review_stack=false
 backward_compatibility=false
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
-code_science_audit_mode=contract_diff_only
+code_science_audit_mode=independent_scientific_assessment_then_bounded_disposition
 code_science_audit_position=after_code_project_manager_implementation_acceptance
 routine_preimplementation_code_science_review=forbidden
 code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
@@ -121,17 +121,22 @@ code-science audit:
 4. Code Project Manager authors a `CODE_SCIENCE_ALIGNMENT_AUDIT` question naming
    that exact commit and index. The index is navigation, not a substitute for
    reading the named code.
-5. Ask only whether the code instantiates the scientific contract, whether a
-   test/probe could pass through the wrong mechanism, and whether an alternate
-   implementation explanation could change the registered conclusion.
+5. Ask Pro first to reconstruct the scientific proposition the code actually
+   realizes, then identify the strongest material hidden assumption or alternate
+   explanation, determine whether a test/probe could pass through the wrong
+   mechanism, and assess whether the supplied evidence is discriminating and
+   scientifically useful.
 
-This is a read-only conformance diff, not another design stage. Pro returns
-exactly one of `ALIGNED`, `MISMATCH` or `SCIENTIFIC_AMBIGUITY`. `MISMATCH` must
-name the exact frozen assertion and exact conflicting code path or behavior.
-`SCIENTIFIC_AMBIGUITY` must name one previously unstated result-changing choice.
-Neither output may introduce an algorithm, controller, solver, search,
-threshold, evidence volume or experiment that was absent from the frozen
-contract.
+This is an independent scientific assessment of the existing design, not
+another design stage. The question supplies evidence but does not prescribe a
+finding sequence, closure checklist or expected answer. Pro presents its
+scientific reasoning before ending with exactly one of `ALIGNED`, `MISMATCH` or
+`SCIENTIFIC_AMBIGUITY`. `MISMATCH` names the exact frozen assertion and exact
+conflicting code path or behavior. `SCIENTIFIC_AMBIGUITY` names one previously
+unstated result-changing choice. The assessment may challenge the premise or
+identify an omitted alternative, but it does not introduce an algorithm,
+controller, solver, search, threshold, evidence volume or experiment absent
+from the frozen contract.
 
 Do not ask for style, architecture taste, broad refactoring, coverage,
 compatibility or generic bug hunting. Code Project Manager remains the code

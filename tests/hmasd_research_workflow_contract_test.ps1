@@ -59,6 +59,7 @@ $workflowCollaboration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents
 $workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
 $workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/agents/openai.yaml')
 $sessionWorkspaceContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SESSION_WORKSPACE_CONTRACT.md')
+$sessionWorkspaceContractNormalized = $sessionWorkspaceContract -replace '\s+', ' '
 $independentResearchRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
 $researchScoutRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_SCOUT.md')
 $researchCriticRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_CRITIC.md')
@@ -109,6 +110,7 @@ foreach ($required in @(
     'semantic writing aids, not required field names',
     'bounded safe read-only reconnaissance',
     'not a packet validator, dispatcher, queue engine or state machine',
+    'Known concerns are context for judgment, not mandatory headings or an expected verdict',
     'one isolated candidate at a time')) {
     if (-not $explorerValidationSkillNormalized.Contains($required)) {
         throw "Explorer semantic handoff Skill missing: $required"
@@ -991,7 +993,7 @@ foreach ($required in @(
     'temp/handoffs/',
     'Formats and suggested sections aid understanding but never become admission gates',
     'It is never staged, committed or pushed')) {
-    if (-not $sessionWorkspaceContract.Contains($required)) { throw "Session workspace contract missing: $required" }
+    if (-not $sessionWorkspaceContractNormalized.Contains($required)) { throw "Session workspace contract missing: $required" }
 }
 foreach ($required in @(
     'nontrivial_task_strategy=bounded_reconnaissance_then_frozen_execution_plan',
@@ -1036,7 +1038,8 @@ foreach ($required in @(
     'independent_research_constructive_adversarial_barrier=explorer_new_advisory_version_required',
     'Other candidate records, the full portfolio',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
-    'code_science_audit_mode=contract_diff_only',
+    'code_science_audit_mode=independent_scientific_assessment_then_bounded_disposition',
+    'Question-authored concerns are leads, not a closure checklist or an expected answer',
     'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
     'code_science_audit_new_algorithm_or_evidence_search=forbidden')) {
     if (-not $proRoleNormalized.Contains($required)) { throw "External Pro role missing: $required" }
@@ -1065,10 +1068,11 @@ foreach ($required in @(
     'positive control is valid only when',
     'IMPLEMENTATION_ALIGNMENT_CLARIFICATION',
     'first-match branch reproduction',
-    'code_science_audit_mode=contract_diff_only',
+    'code_science_audit_mode=independent_scientific_assessment_then_bounded_disposition',
     'code_science_audit_position=after_code_project_manager_implementation_acceptance',
     'routine_preimplementation_code_science_review=forbidden',
     'code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY',
+    'finding sequence, closure checklist or expected answer',
     'CODE_SCIENCE_INDEX.md',
     'claim_id | frozen_assertion_path_and_section | code_path::symbol | observable_invariant | focused_test::test_name | alternate_explanation_excluded',
     'new_algorithm_design_during_code_audit=forbidden',

@@ -11,7 +11,7 @@ explorer_project_alignment_transport_owner=independent_research_explorer
 workflow_authority=none
 code_acceptance_authority=none
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
-code_science_audit_mode=contract_diff_only
+code_science_audit_mode=independent_scientific_assessment_then_bounded_disposition
 code_science_audit_outputs=ALIGNED|MISMATCH|SCIENTIFIC_AMBIGUITY
 code_science_audit_new_algorithm_or_evidence_search=forbidden
 active_grant_valid_result_adjudication=result_plus_portfolio_delta_required
@@ -55,10 +55,12 @@ what the code actually implements.
 - `DESIGN_ASSERTION_AUDIT`: estimand, source, controls/nulls, target-behavior
   necessity, gates, frozen result choices and scientific sufficiency before
   design freeze.
-- `CODE_SCIENCE_ALIGNMENT_AUDIT`: whether Code-PM-accepted code at an exact remote
-  commit instantiates the frozen scientific contract or introduces a
-  result-changing alternate explanation. This is a conformance diff only, not
-  a new design opportunity.
+- `CODE_SCIENCE_ALIGNMENT_AUDIT`: independently reconstruct the scientific
+  proposition realized by Code-PM-accepted code at an exact remote commit,
+  identify the strongest material hidden assumption or alternate explanation,
+  and decide whether the implementation and evidence support the frozen
+  contract. This is scientific assessment of the existing design, not a new
+  design opportunity.
 - `FORMAL_RESULT_SCIENTIFIC_DISPOSITION`: interpretation of a mechanically
   valid registered result, portfolio delta, retained live and parked directions,
   reactivation conditions and next scheduled scientific action.
@@ -124,6 +126,11 @@ what the code actually implements.
   archives and intakes this review after CPM technical acceptance. `ALIGNED` is
   the final scientific-semantic acceptance for the named implementation;
   `MISMATCH` or `SCIENTIFIC_AMBIGUITY` is returned for correction or resolution.
+- Before selecting that disposition, state the proposition the code actually
+  realizes, test its most material hidden assumption or alternate explanation,
+  and assess whether the supplied evidence is discriminating and scientifically
+  useful. Question-authored concerns are leads, not a closure checklist or an
+  expected answer.
 
 ## Must not
 
@@ -142,10 +149,11 @@ what the code actually implements.
   action or the applicable terminal disposition. Use balance completion when the
   conclusion-bearing balance is exhausted; otherwise use no-candidate closure
   only when the full portfolio has no in-scope executable candidate.
-- During `CODE_SCIENCE_ALIGNMENT_AUDIT`, introduce a new algorithm, controller,
-  solver, evidence search, threshold, evidence volume or experiment. Return
-  only `ALIGNED`, `MISMATCH` or `SCIENTIFIC_AMBIGUITY`; a mismatch cites the
-  frozen assertion and conflicting code behavior, while an ambiguity identifies
+- During `CODE_SCIENCE_ALIGNMENT_AUDIT`, turn the review into a new algorithm,
+  controller, solver, evidence search, threshold, evidence volume or experiment.
+  Complete the independent assessment first and finish with one bounded
+  `ALIGNED`, `MISMATCH` or `SCIENTIFIC_AMBIGUITY` disposition. A mismatch cites
+  the frozen assertion and conflicting code behavior; an ambiguity identifies
   one unstated result-changing scientific choice.
 - Propose or preserve nested rollout/replanning, horizon-growing candidate
   enumeration, or another evidence search above `O(H*K_search)`,
@@ -188,7 +196,9 @@ what the code actually implements.
 - For Explorer-origin implementation acceptance, one Explorer-authored
   `CODE_SCIENCE_ALIGNMENT_AUDIT` naming the public GitHub repository, exact
   pushed commit and relevant remote paths returned by CPM. Local filesystem
-  locators are not inputs.
+  locators are not inputs. The question states the scientific decision to make
+  and supplies evidence without prescribing a finding sequence or expected
+  disposition.
 
 ## Outputs and stop
 
@@ -206,6 +216,11 @@ what the code actually implements.
   external technical blocker, not a scientific choice or permission question.
   Code Project Manager accepts the exact archived answer and resumes mechanical
   operations. Neither CPM nor its native child reinterprets the science.
+- A code-science answer presents its independent scientific reasoning first:
+  realized proposition, strongest material alternative or hidden assumption,
+  and evidence sufficiency and usefulness. It places the single bounded
+  disposition at the end rather than using the disposition as a checklist
+  template for the analysis.
 - For `INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT`, return one format-complete
   `INDEPENDENT_RESEARCH_METHODOLOGY_PACKET` containing every question-declared
   field. It is advisory to the independent-research Skill and has no
