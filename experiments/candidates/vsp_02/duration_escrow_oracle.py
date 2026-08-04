@@ -54,12 +54,16 @@ class FutureBranch:
         return self.world, self.close_mode, self.cutoff, self.owner_departure
 
 
-CANDIDATE_Z0_FIELDS = COMPARATOR_Z0_FIELDS = ("context",)
-CANDIDATE_Z0_EXCLUDED_FIELDS = COMPARATOR_Z0_EXCLUDED_FIELDS = (
-    "world", "close_mode", "cutoff", "owner_departure", "action", "selector_tape",
+Z0_FULL_FIELDS = ("context", "tau", "public_history_at_tau", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version")
+CANDIDATE_Z0_USED_FIELDS = COMPARATOR_Z0_USED_FIELDS = ("context",)
+CANDIDATE_IGNORED_LEGAL_FIELDS = COMPARATOR_IGNORED_LEGAL_FIELDS = (
+    "tau", "public_history_at_tau", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version",
 )
 BRANCH_FIELDS = ("world", "close_mode", "cutoff", "owner_departure")
 SELECTOR_TAPE = tuple(Fraction(index, 8) for index in range(8))
+REGISTERED_SELECTOR_TAPE = (
+    Fraction(0), Fraction(1, 8), Fraction(1, 4), Fraction(3, 8), Fraction(1, 2), Fraction(5, 8), Fraction(3, 4), Fraction(7, 8),
+)
 COMPARATOR_PROBABILITIES: Mapping[Context, Fraction] = MappingProxyType({
     Context.F: Fraction(1, 4), Context.P: Fraction(3, 4),
 })
@@ -408,7 +412,7 @@ def registered_z0_conformance(
     candidate_select: Callable[[Context, Fraction], Action] = candidate_selector,
     comparator_select: Callable[[Context, Fraction], Action] = comparator_selector,
 ) -> dict[str, object]:
-    signatures = tuple(branch.key() for branch in law)
+    cases = tuple(cases); signatures = tuple(branch.key() for branch in law)
     law_frozen = (
         isinstance(law, tuple) and len(law) == 16 and len(set(signatures)) == 16
         and all(isinstance(branch, FutureBranch) and isinstance(branch.weight, Fraction)
@@ -422,39 +426,36 @@ def registered_z0_conformance(
                           for context, tape in product(Context, SELECTOR_TAPE)}
     candidate_values = candidate_integrated_values(cases, law)
     comparator_values = comparator_integrated_values(law)
-    expected_selector_domain = set(product(Context, SELECTOR_TAPE))
-    expected_value_domain = set(product(Context, Action))
-    candidate_selector_domain_exact = set(candidate_choices) == expected_selector_domain
-    comparator_selector_domain_exact = set(comparator_choices) == expected_selector_domain
-    candidate_value_domain_exact = set(candidate_values) == expected_value_domain
-    comparator_value_domain_exact = set(comparator_values) == expected_value_domain
-    selector_nested = set(candidate_choices).issubset(comparator_choices)
-    selector_equal_keys = set(candidate_choices) == set(comparator_choices)
-    value_nested = set(candidate_values).issubset(comparator_values)
-    value_equal_keys = set(candidate_values) == set(comparator_values)
-    branch_only_in_law = (all(set(BRANCH_FIELDS).issubset(fields_) for fields_ in (CANDIDATE_Z0_EXCLUDED_FIELDS, COMPARATOR_Z0_EXCLUDED_FIELDS))
-                          and all(set(BRANCH_FIELDS).isdisjoint(fields_) for fields_ in (CANDIDATE_Z0_FIELDS, COMPARATOR_Z0_FIELDS)))
-    same_information = (
-        CANDIDATE_Z0_FIELDS == COMPARATOR_Z0_FIELDS == ("context",)
-        and CANDIDATE_Z0_EXCLUDED_FIELDS == COMPARATOR_Z0_EXCLUDED_FIELDS == ("world", "close_mode", "cutoff", "owner_departure", "action", "selector_tape")
-        and candidate_selector_domain_exact and comparator_selector_domain_exact
-        and candidate_value_domain_exact and comparator_value_domain_exact
-        and branch_only_in_law
+    expected_selector_domain = set(product(Context, REGISTERED_SELECTOR_TAPE)); expected_value_domain = set(product(Context, Action))
+    tape_ordered_exact = SELECTOR_TAPE == REGISTERED_SELECTOR_TAPE; tape_length_exact = len(SELECTOR_TAPE) == 8
+    tape_unique_exact = len(set(SELECTOR_TAPE)) == 8; registered_selector_keys_exact = len(expected_selector_domain) == 16
+    candidate_selector_domain_exact = set(candidate_choices) == expected_selector_domain; comparator_selector_domain_exact = set(comparator_choices) == expected_selector_domain
+    candidate_value_domain_exact = set(candidate_values) == expected_value_domain; comparator_value_domain_exact = set(comparator_values) == expected_value_domain
+    selector_nested = set(candidate_choices).issubset(comparator_choices); selector_equal_keys = set(candidate_choices) == set(comparator_choices)
+    value_nested = set(candidate_values).issubset(comparator_values); value_equal_keys = set(candidate_values) == set(comparator_values)
+    branch_only_in_law = all(set(BRANCH_FIELDS).isdisjoint(fields_) for fields_ in (CANDIDATE_Z0_USED_FIELDS, COMPARATOR_Z0_USED_FIELDS))
+    used_is_strict_subset = all(set(fields_) < set(Z0_FULL_FIELDS) for fields_ in (CANDIDATE_Z0_USED_FIELDS, COMPARATOR_Z0_USED_FIELDS))
+    same_used_selector_information = (
+        CANDIDATE_Z0_USED_FIELDS == COMPARATOR_Z0_USED_FIELDS == ("context",)
+        and CANDIDATE_IGNORED_LEGAL_FIELDS == COMPARATOR_IGNORED_LEGAL_FIELDS == ("tau", "public_history_at_tau", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version")
+        and set(CANDIDATE_Z0_USED_FIELDS + CANDIDATE_IGNORED_LEGAL_FIELDS) == set(Z0_FULL_FIELDS)
+        and used_is_strict_subset and branch_only_in_law
     )
     probability_table_registered = dict(probabilities) == {Context.F: Fraction(1, 4), Context.P: Fraction(3, 4)}
-    selector_exact = candidate_choices == comparator_choices
-    value_exact = candidate_values == comparator_values
+    selector_exact = candidate_choices == comparator_choices; value_exact = candidate_values == comparator_values
     terminal_gate = all((
-        same_information, probability_table_registered, law_frozen,
-        candidate_selector_domain_exact, comparator_selector_domain_exact,
+        same_used_selector_information, probability_table_registered, law_frozen,
+        tape_ordered_exact, tape_length_exact, tape_unique_exact,
+        registered_selector_keys_exact, candidate_selector_domain_exact, comparator_selector_domain_exact,
         candidate_value_domain_exact, comparator_value_domain_exact,
         selector_nested, selector_equal_keys, selector_exact,
         value_nested, value_equal_keys, value_exact,
     ))
     return {
-        "name": "REGISTERED_Z0_FINITE_COMPARATOR", "same_information": same_information,
-        "candidate_z0_fields": list(CANDIDATE_Z0_FIELDS), "comparator_z0_fields": list(COMPARATOR_Z0_FIELDS),
-        "candidate_z0_excluded_fields": list(CANDIDATE_Z0_EXCLUDED_FIELDS), "comparator_z0_excluded_fields": list(COMPARATOR_Z0_EXCLUDED_FIELDS),
+        "name": "REGISTERED_Z0_FINITE_COMPARATOR", "same_used_selector_information": same_used_selector_information,
+        "z0_full_fields": list(Z0_FULL_FIELDS), "candidate_z0_used_fields": list(CANDIDATE_Z0_USED_FIELDS),
+        "comparator_z0_used_fields": list(COMPARATOR_Z0_USED_FIELDS), "candidate_ignored_legal_fields": list(CANDIDATE_IGNORED_LEGAL_FIELDS),
+        "comparator_ignored_legal_fields": list(COMPARATOR_IGNORED_LEGAL_FIELDS), "used_is_strict_subset_of_full": used_is_strict_subset,
         "branch_variables_marginalized_only": branch_only_in_law,
         "branch_law": {
             "fields": list(BRANCH_FIELDS), "branches_per_z0_action": len(law),
@@ -462,7 +463,10 @@ def registered_z0_conformance(
         },
         "probabilities": {context.value: _q(probabilities[context]) for context in Context},
         "selector": {
-            "tape_cells": len(SELECTOR_TAPE), "threshold": "LONG iff tape < p",
+            "runtime_tape_cells": len(SELECTOR_TAPE), "registered_tape_cells": len(REGISTERED_SELECTOR_TAPE),
+            "runtime_tape_ordered_exact": tape_ordered_exact, "runtime_tape_length_exact": tape_length_exact,
+            "runtime_tape_unique_exact": tape_unique_exact, "registered_entries": len(expected_selector_domain),
+            "registered_domain_exact": registered_selector_keys_exact, "threshold": "LONG iff tape < p",
             "candidate_entries": len(candidate_choices), "comparator_entries": len(comparator_choices),
             "candidate_domain_exact": candidate_selector_domain_exact,
             "comparator_domain_exact": comparator_selector_domain_exact,
@@ -470,6 +474,8 @@ def registered_z0_conformance(
             "exact_reproduction": selector_exact,
         },
         "values": {
+            "scope": "REGISTERED_16_BRANCH_SYNTHETIC_MIXTURE", "conditions_on_full_z0": False,
+            "marginalized_fields": ["world", "close_mode", "cutoff", "owner_departure", "associated_tau"], "marginalized_owner_departure_tau_values": sorted({case.physical.tau for case in cases if case.valid and case.physical}),
             "key_fields": ["context", "action"], "candidate_entries": len(candidate_values),
             "comparator_entries": len(comparator_values),
             "candidate_domain_exact": candidate_value_domain_exact,

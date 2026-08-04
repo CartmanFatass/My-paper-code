@@ -275,6 +275,7 @@ def test_stale_version_parameter_separation_and_record_shape(audit):
     retired = (
         "Version" + "Record", "_version" + "_record", '"ver' + 'sions"',
         "can_" + "advance", "exactly_" + "once", "version_" + "barrier",
+        "same_" + "information",
     )
     assert all(token not in corpus for token in retired)
 
@@ -451,21 +452,37 @@ def test_registered_z0_branch_law_selector_and_integrated_values(audit):
     assert all(
         oracle.candidate_selector(context, tape)
         is oracle.comparator_selector(context, tape)
-        for context, tape in product(oracle.Context, oracle.SELECTOR_TAPE)
+        for context, tape in product(oracle.Context, oracle.REGISTERED_SELECTOR_TAPE)
+    )
+    assert oracle.SELECTOR_TAPE == oracle.REGISTERED_SELECTOR_TAPE == (
+        Fraction(0), Fraction(1, 8), Fraction(1, 4), Fraction(3, 8),
+        Fraction(1, 2), Fraction(5, 8), Fraction(3, 4), Fraction(7, 8),
     )
     report = audit.report["comparator"]
-    assert report["candidate_z0_fields"] == report["comparator_z0_fields"] == ["context"]
-    excluded = ["world", "close_mode", "cutoff", "owner_departure", "action", "selector_tape"]
-    assert report["candidate_z0_excluded_fields"] == report["comparator_z0_excluded_fields"] == excluded
-    assert report["branch_variables_marginalized_only"] is report["same_information"] is True
+    full = ["context", "tau", "public_history_at_tau", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version"]
+    ignored = full[1:]
+    assert report["z0_full_fields"] == full
+    assert report["candidate_z0_used_fields"] == report["comparator_z0_used_fields"] == ["context"]
+    assert report["candidate_ignored_legal_fields"] == report["comparator_ignored_legal_fields"] == ignored
+    assert report["used_is_strict_subset_of_full"] is report["same_used_selector_information"] is True
+    assert report["branch_variables_marginalized_only"] is True
     assert report["branch_law"]["branches_per_z0_action"] == 16
     assert report["branch_law"]["normalized_full_support"] is True
     assert report["selector"] == {
-        "tape_cells": 8, "threshold": "LONG iff tape < p",
+        "runtime_tape_cells": 8, "registered_tape_cells": 8,
+        "runtime_tape_ordered_exact": True, "runtime_tape_length_exact": True,
+        "runtime_tape_unique_exact": True, "registered_entries": 16,
+        "registered_domain_exact": True, "threshold": "LONG iff tape < p",
         "candidate_entries": 16, "comparator_entries": 16,
         "candidate_domain_exact": True, "comparator_domain_exact": True,
         "candidate_nested": True, "equal_keys": True, "exact_reproduction": True,
     }
+    assert report["values"]["scope"] == "REGISTERED_16_BRANCH_SYNTHETIC_MIXTURE"
+    assert report["values"]["conditions_on_full_z0"] is False
+    assert report["values"]["marginalized_fields"] == [
+        "world", "close_mode", "cutoff", "owner_departure", "associated_tau",
+    ]
+    assert report["values"]["marginalized_owner_departure_tau_values"] == [100, 104]
     assert report["values"]["key_fields"] == ["context", "action"]
     assert all(report["values"][key] is True for key in (
         "candidate_domain_exact", "comparator_domain_exact",
@@ -525,23 +542,47 @@ def test_identical_extra_future_value_keys_fail_exact_domain(audit, monkeypatch)
     assert report["values"]["exact_reproduction"] is True
     assert report["values"]["candidate_domain_exact"] is False
     assert report["values"]["comparator_domain_exact"] is False
-    assert report["same_information"] is report["terminal_gate"] is False
+    assert report["same_used_selector_information"] is True
+    assert report["terminal_gate"] is False
     assert set(report["values"]["candidate"]) == {"F|SHORT", "F|LONG", "P|SHORT", "P|LONG"}
 
 
 @pytest.mark.parametrize(
     "field,value",
     [
-        ("CANDIDATE_Z0_FIELDS", ("context", "world")),
-        ("COMPARATOR_Z0_FIELDS", ("context", "world")),
-        ("CANDIDATE_Z0_EXCLUDED_FIELDS", ("close_mode", "cutoff", "owner_departure", "action", "selector_tape")),
-        ("COMPARATOR_Z0_EXCLUDED_FIELDS", ("close_mode", "cutoff", "owner_departure", "action", "selector_tape")),
+        ("Z0_FULL_FIELDS", ("context", "tau")),
+        ("CANDIDATE_Z0_USED_FIELDS", ("context", "tau")),
+        ("COMPARATOR_Z0_USED_FIELDS", ("context", "tau")),
+        ("CANDIDATE_IGNORED_LEGAL_FIELDS", ("tau",)),
+        ("COMPARATOR_IGNORED_LEGAL_FIELDS", ("tau",)),
     ],
 )
-def test_same_information_hidden_future_key_mutations_fail_closed(audit, monkeypatch, field, value):
+def test_same_used_selector_information_mutations_fail_closed(audit, monkeypatch, field, value):
     monkeypatch.setattr(oracle, field, value)
     report = oracle.registered_z0_conformance(case for case in audit.cases if case.valid)
-    assert report["same_information"] is False
+    assert report["same_used_selector_information"] is False
+    assert report["terminal_gate"] is False
+
+
+@pytest.mark.parametrize(
+    "mutation",
+    [
+        oracle.REGISTERED_SELECTOR_TAPE[:-1],
+        oracle.REGISTERED_SELECTOR_TAPE + (Fraction(1),),
+        oracle.REGISTERED_SELECTOR_TAPE[:-1] + (oracle.REGISTERED_SELECTOR_TAPE[-2],),
+        oracle.REGISTERED_SELECTOR_TAPE[:-1] + (Fraction(15, 16),),
+    ],
+    ids=["missing", "extra", "duplicate", "altered"],
+)
+def test_runtime_selector_tape_mutations_fail_registered_terminal(audit, monkeypatch, mutation):
+    monkeypatch.setattr(oracle, "SELECTOR_TAPE", mutation)
+    report = oracle.registered_z0_conformance(case for case in audit.cases if case.valid)
+    selector = report["selector"]
+    assert selector["registered_entries"] == 16
+    assert selector["registered_domain_exact"] is True
+    assert selector["runtime_tape_ordered_exact"] is False
+    assert selector["equal_keys"] is selector["exact_reproduction"] is True
+    assert selector["candidate_entries"] == selector["comparator_entries"]
     assert report["terminal_gate"] is False
 
 
