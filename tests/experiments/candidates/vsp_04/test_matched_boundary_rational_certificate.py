@@ -71,7 +71,7 @@ def test_primary_has_no_witness_and_exact_sparse_dual() -> None:
     assert cert.validate_dual(cert.PRIMARY_SYSTEM, dual.y) == dual
 
 
-def test_ind_baseline_is_feasible_and_only_or_ack_creates_conflict() -> None:
+def test_deleting_or_ack_leaves_all_other_twelve_rows_feasible() -> None:
     without_or_ack = replace(
         cert.PRIMARY_SYSTEM,
         rows=tuple(row for row in cert.PRIMARY_SYSTEM.rows if row.name != "OR.risk.ACK"),
@@ -88,6 +88,37 @@ def test_ind_baseline_is_feasible_and_only_or_ack_creates_conflict() -> None:
         F(0),
         F(1, 8),
     )
+
+
+def test_common_raw_plus_or_is_already_infeasible_with_explicit_forced_q() -> None:
+    path_raw_names = {
+        "COMMON.raw_propensity",
+        "OR.path.timing_metadata",
+        "OR.path.queue_retry_ack_cost",
+    }
+    path_raw = replace(cert.PRIMARY_SYSTEM, rows=tuple(row for row in cert.PRIMARY_ROWS if row.name in path_raw_names))
+    assert cert.solve_primal_vertices(path_raw) == (F(1, 2), F(1, 2), F(1, 2))
+    or_ack = next(row for row in cert.PRIMARY_ROWS if row.name == "OR.risk.ACK")
+    assert or_ack.coefficients == (F(0), F(1, 2), F(0))
+    assert or_ack.target / or_ack.coefficients[1] == F(3, 4)
+    common_or = replace(cert.PRIMARY_SYSTEM, rows=tuple(row for row in cert.PRIMARY_ROWS if row.mode in ("COMMON", "OR")))
+    assert cert.solve_primal_vertices(common_or) is None
+    assert cert.literal_subsystem_diagnostics() == {
+        "common_raw_plus_or": {
+            "infeasible": True,
+            "or_ack_forced_q1": "3/4",
+            "path_raw_forced_q": ["1/2", "1/2", "1/2"],
+        },
+        "delete_or_risk_ack": {"remaining_rows": 12, "witness": ["1/2", "1/2", "1/2"]},
+    }
+
+
+def test_literal_subsystem_diagnostic_fails_closed_on_changed_declared_rows(monkeypatch: pytest.MonkeyPatch) -> None:
+    rows = list(cert.PRIMARY_ROWS)
+    rows[7] = replace(rows[7], target=F(1, 4))
+    monkeypatch.setattr(cert, "PRIMARY_ROWS", tuple(rows))
+    with pytest.raises(AssertionError, match=r"OR\.risk\.ACK equation changed"):
+        cert.literal_subsystem_diagnostics()
 
 
 def test_dual_rejected_after_forcing_target_or_coefficient_mutation() -> None:
@@ -178,8 +209,24 @@ def test_cli_is_byte_stable_compact_sorted_json_and_narrow() -> None:
     assert first == second
     payload = json.loads(first)
     assert first == (json.dumps(payload, sort_keys=True, separators=(",", ":")) + "\n").encode()
-    assert payload["conclusion"] == "no common triad K exists under this frozen information contract"
+    assert payload["conclusion"] == "literal stacked PRIMARY_ROWS matrix is set-theoretically infeasible"
     assert payload["primary"]["witness"] is None
+    assert payload["primary"]["table_scope"] == {
+        "declared_finite_table": True,
+        "marginally_validated_by_lower_level_objects": False,
+        "mechanically_generated_from_lower_level_objects": False,
+    }
+    assert payload["literal_subsystems"]["common_raw_plus_or"] == {
+        "infeasible": True,
+        "or_ack_forced_q1": "3/4",
+        "path_raw_forced_q": ["1/2", "1/2", "1/2"],
+    }
+    assert payload["literal_subsystems"]["delete_or_risk_ack"] == {
+        "remaining_rows": 12,
+        "witness": ["1/2", "1/2", "1/2"],
+    }
+    assert payload["engineering_units"]["scope"] == "solver_checks_only"
+    assert payload["engineering_units"]["does_not_repair"] == ["coherence", "provenance", "exact Bernoulli calibration"]
     assert payload["certificate"]["margin"] == "1/8"
 
 
@@ -187,8 +234,25 @@ def test_code_science_index_binds_exact_raw_cli_output_and_nonclaims() -> None:
     text = INDEX.read_text(encoding="utf-8")
     bound = text.split("```json\n", 1)[1].split("\n```", 1)[0].encode() + b"\n"
     assert bound == _run_cli()
-    for nonclaim in ("authentic-request value", "training benefit", "return", "causality", "deployment", "universal impossibility"):
+    for nonclaim in (
+        "authentic-request value",
+        "cellwise H/W/U ancestry",
+        "coherent IND/OR/SOFT matched-boundary triad",
+        "cross-mode shared-K obstruction",
+        "exact Bernoulli calibration",
+        "generator-safe semantic binding",
+        "lower-level path/risk provenance",
+        "matched-carrier independence",
+        "training benefit",
+        "return",
+        "causality",
+        "deployment",
+        "universal impossibility",
+    ):
         assert nonclaim in text
+    assert "path/raw rows force `q=(1/2,1/2,1/2)`" in text
+    assert "`OR.risk.ACK` forces `q1=3/4`" in text
+    assert "deleting `OR.risk.ACK` leaves all other 12 rows feasible" in text
 
 
 def test_source_active_line_budget() -> None:

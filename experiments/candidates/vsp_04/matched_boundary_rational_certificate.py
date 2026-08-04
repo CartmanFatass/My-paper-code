@@ -102,7 +102,9 @@ def _row(
     return Row(name, kind, mode, path, action, coefficients, target)
 
 
-# These are independently registered frozen constants, not values synthesized from q.
+# PRIMARY_ROWS is a declared finite table.  It is not mechanically generated or
+# marginally validated by the loss, interface, policy, recurrent, shadow, or
+# ledger objects declared in this module.
 PRIMARY_ROWS = (
     _row("COMMON.raw_propensity", "raw", "COMMON", "raw", "ALL", (F(1, 4), F(1, 2), F(1, 4)), F(1, 2)),
     _row("IND.path.timing_metadata", "path", "IND", "timing_metadata", "ALL", (F(1, 4), F(0), F(0)), F(1, 8)),
@@ -118,7 +120,7 @@ PRIMARY_ROWS = (
     _row("SOFT.risk.ACK", "action_risk", "SOFT", "all", "ACK", (F(1, 4), F(1, 2), F(0)), F(3, 8)),
     _row("SOFT.risk.RETRY", "action_risk", "SOFT", "all", "RETRY", (F(0), F(1, 2), F(1, 4)), F(3, 8)),
 )
-PRIMARY_SYSTEM = System("primary_frozen_triad", CELLS, PRIMARY_ROWS)
+PRIMARY_SYSTEM = System("primary_declared_literal_stack", CELLS, PRIMARY_ROWS)
 
 FEASIBLE_ENGINEERING_SYSTEM = System(
     "engineering_minimal_feasible",
@@ -322,6 +324,53 @@ def row_inventory(system: System) -> Mapping[str, object]:
     }
 
 
+def literal_subsystem_diagnostics() -> Mapping[str, object]:
+    """Fail closed on the exact within-OR conflict and the row-removal witness."""
+    half = (F(1, 2), F(1, 2), F(1, 2))
+    path_raw_names = (
+        "COMMON.raw_propensity",
+        "OR.path.timing_metadata",
+        "OR.path.queue_retry_ack_cost",
+    )
+    path_raw_rows = tuple(row for row in PRIMARY_ROWS if row.name in path_raw_names)
+    if tuple(row.name for row in path_raw_rows) != path_raw_names:
+        raise AssertionError("declared common/raw-plus-OR path row set changed")
+    path_raw_system = System("declared_common_raw_plus_or_path_rows", CELLS, path_raw_rows)
+    if solve_primal_vertices(path_raw_system) != half:
+        raise AssertionError("declared common/raw-plus-OR path rows no longer force q=(1/2,1/2,1/2)")
+
+    or_ack = next(row for row in PRIMARY_ROWS if row.name == "OR.risk.ACK")
+    if or_ack.coefficients != (F(0), F(1, 2), F(0)) or or_ack.target != F(3, 8):
+        raise AssertionError("declared OR.risk.ACK equation changed")
+    or_ack_forced_q1 = or_ack.target / or_ack.coefficients[1]
+    if or_ack_forced_q1 != F(3, 4):
+        raise AssertionError("declared OR.risk.ACK no longer forces q1=3/4")
+
+    common_or_rows = tuple(row for row in PRIMARY_ROWS if row.mode in ("COMMON", "OR"))
+    common_or_system = System("declared_common_raw_plus_or", CELLS, common_or_rows)
+    if solve_primal_vertices(common_or_system) is not None:
+        raise AssertionError("declared common-raw-plus-OR subsystem unexpectedly became feasible")
+
+    without_or_ack = System(
+        "declared_primary_without_or_risk_ack",
+        CELLS,
+        tuple(row for row in PRIMARY_ROWS if row.name != "OR.risk.ACK"),
+    )
+    if len(without_or_ack.rows) != 12 or solve_primal_vertices(without_or_ack) != half:
+        raise AssertionError("deleting OR.risk.ACK no longer leaves the declared 12-row witness")
+    return {
+        "common_raw_plus_or": {
+            "infeasible": True,
+            "or_ack_forced_q1": _fraction(or_ack_forced_q1),
+            "path_raw_forced_q": [_fraction(value) for value in half],
+        },
+        "delete_or_risk_ack": {
+            "remaining_rows": len(without_or_ack.rows),
+            "witness": [_fraction(value) for value in half],
+        },
+    }
+
+
 def build_result() -> Mapping[str, object]:
     validate_frozen_contract()
     primary_witness = solve_primal_vertices(PRIMARY_SYSTEM)
@@ -334,6 +383,7 @@ def build_result() -> Mapping[str, object]:
     if feasible_q is None or infeasible_q is not None or engineering_dual is None:
         raise AssertionError("engineering branch evidence incomplete")
     paired = paired_tk_a0_checks(feasible_q, FEASIBLE_ENGINEERING_SYSTEM)
+    literal_subsystems = literal_subsystem_diagnostics()
     return {
         "candidate_id": CANDIDATE_ID,
         "certificate": {
@@ -345,22 +395,45 @@ def build_result() -> Mapping[str, object]:
             "y_sparse": {row.name: _fraction(value) for row, value in zip(PRIMARY_SYSTEM.rows, primary_dual.y) if value},
         },
         "checks": {
+            "declared_object_scope_only": True,
             "excluded_u_absent_from_g": True,
             "frozen_policy_recurrent_shadow_tables": True,
             "no_post_result_feature_adaptation": True,
             "support_floor": _fraction(SUPPORT_FLOOR),
         },
-        "conclusion": "no common triad K exists under this frozen information contract",
+        "conclusion": "literal stacked PRIMARY_ROWS matrix is set-theoretically infeasible",
         "engineering_units": {
+            "does_not_repair": ["coherence", "provenance", "exact Bernoulli calibration"],
             "feasible": {"paired": paired, "witness": [_fraction(value) for value in feasible_q]},
             "infeasible": {"margin": _fraction(engineering_dual.margin), "witness": None},
+            "scope": "solver_checks_only",
         },
-        "nonclaims": ["authentic-request value", "causality", "deployment", "return", "training benefit", "universal impossibility"],
+        "literal_subsystems": literal_subsystems,
+        "nonclaims": [
+            "authentic-request value",
+            "causality",
+            "cellwise H/W/U ancestry",
+            "coherent IND/OR/SOFT matched-boundary triad",
+            "cross-mode shared-K obstruction",
+            "deployment",
+            "exact Bernoulli calibration",
+            "generator-safe semantic binding",
+            "lower-level path/risk provenance",
+            "matched-carrier independence",
+            "return",
+            "training benefit",
+            "universal impossibility",
+        ],
         "primary": {
             "cells": list(CELLS),
             "omega": [_fraction(value) for value in OMEGA],
             "p_h": _fraction(P_H),
             "row_inventory": row_inventory(PRIMARY_SYSTEM),
+            "table_scope": {
+                "declared_finite_table": True,
+                "marginally_validated_by_lower_level_objects": False,
+                "mechanically_generated_from_lower_level_objects": False,
+            },
             "witness": None,
         },
         "treatment": TREATMENT,
