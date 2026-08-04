@@ -14,7 +14,7 @@ def test_actual_run_closes_exactly_five_intervention_checks() -> None:
     report = eociv.run_unit_closure()
 
     assert report["terminal"] == "PASS_INTERVENTION_CLOSURE"
-    assert report["actual_instance_status"] == "ABSENT_ACTIVE_EOCIV_OBJECTS"
+    assert report["actual_instance_status"] == "ACTUAL_BINDING_NOT_ESTABLISHED"
     assert report["closures"] == {
         "payload_pair_byte_closure": True,
         "always_real_pre_sampling_equivalence": True,
@@ -164,11 +164,28 @@ def test_ls_reads_only_d_l_cs_only_d_c_and_controls_are_always_real() -> None:
 
 
 @pytest.mark.parametrize("field", eociv.PROHIBITED_SELECTOR_FIELDS)
-def test_selector_fail_closes_every_prohibited_mutation(field: str) -> None:
+def test_every_prohibited_mutation_fail_closes_all_three_path_families(field: str) -> None:
+    config = eociv.build_unit_config()
     raw = {name: 0 for name in eociv.W_MINUS_FIELDS}
+    attempt = {field: "attempt"}
 
     with pytest.raises(eociv.ClosureError, match="outside W_minus"):
-        eociv.selector_view({**raw, field: "attempt"})
+        eociv.selector_view({**raw, **attempt})
+    for probe in (
+        lambda: eociv.support_cell(config, "route-a", attempt),
+        lambda: eociv.control_open(config, "route-a", 0, attempt),
+        lambda: eociv.sham_score(config, "route-a", 0, attempt),
+    ):
+        with pytest.raises(eociv.ClosureError, match="prohibited source"):
+            probe()
+
+
+def test_combined_three_family_mutation_result_is_terminal_bearing() -> None:
+    report = eociv.run_unit_closure()
+
+    assert report["forbidden_source_terminal"] == "PASS_THREE_FAMILY_CLOSURE"
+    assert set(report["mutations"]) == set(eociv.PROHIBITED_SELECTOR_FIELDS)
+    assert all(set(families.values()) == {"FAIL_CLOSED"} for families in report["mutations"].values())
 
 
 def test_w_minus_is_complete_and_rejects_missing_input() -> None:
@@ -243,15 +260,24 @@ def test_critical_edge_must_be_on_every_live_path_for_hard_open() -> None:
     edge = config.critical_graph[0]
     missing_edge = dataclasses.replace(
         config,
-        critical_graph=(dataclasses.replace(edge, live_paths=(("coordinator", "relay", "receiver"),)),),
+        critical_graph=(dataclasses.replace(
+            edge, live_paths=((('coordinator', 'relay', 4), ('relay', 'receiver', 5)),)
+        ),),
+    )
+    late_edge = dataclasses.replace(
+        config,
+        critical_graph=(dataclasses.replace(
+            edge, live_paths=((('coordinator', 'receiver', edge.deadline),),)
+        ),),
     )
 
     assert eociv.critical_paths_closed(config)
-    assert not eociv.critical_paths_closed(missing_edge)
-    with pytest.raises(eociv.ClosureError, match="every live path"):
-        eociv.validate_config(missing_edge)
-    with pytest.raises(eociv.ClosureError, match="without HARD_OPEN"):
-        eociv.actuate(missing_edge, "LS", True, "critical-no-neutral", b"body", False, False)
+    for malformed in (missing_edge, late_edge):
+        assert not eociv.critical_paths_closed(malformed)
+        with pytest.raises(eociv.ClosureError, match="every live path"):
+            eociv.run_unit_closure(malformed)
+        with pytest.raises(eociv.ClosureError, match="without HARD_OPEN"):
+            eociv.actuate(malformed, "LS", True, "critical-no-neutral", b"body", False, False)
 
 
 def test_overlap_illegal_neutral_and_unfrozen_calibration_fail_closed() -> None:
@@ -289,7 +315,7 @@ def test_report_is_byte_stable_and_states_only_intervention_nonclaims() -> None:
     assert b'"PASS_INTERVENTION_CLOSURE"' in first
 
 
-def test_candidate_is_isolated_small_and_has_no_production_consumer() -> None:
+def test_candidate_is_small_and_bounded_scan_finds_no_direct_production_consumer() -> None:
     root = Path(__file__).resolve().parents[4]
     source = root / "experiments/candidates/eociv_lite/arm_calibration_route_closure.py"
     active_lines = [
@@ -299,22 +325,23 @@ def test_candidate_is_isolated_small_and_has_no_production_consumer() -> None:
     ]
     assert len(active_lines) <= 500
 
-    needles = ("experiments.candidates.eociv_lite", "arm_calibration_route_closure")
+    needles = ("eociv_lite", "arm_calibration_route_closure")
     for top in ("ha_ctse_process", "envs", "scripts"):
-        for path in (root / top).rglob("*.py"):
-            text = path.read_text(encoding="utf-8", errors="ignore")
-            assert not any(needle in text for needle in needles), path
+        for path in (root / top).rglob("*"):
+            if path.is_file():
+                text = path.read_text(encoding="utf-8", errors="ignore")
+                assert not any(needle in text for needle in needles), path
 
 
 def test_report_records_actual_binding_gap_without_scientific_failure() -> None:
     report = eociv.run_unit_closure()
 
-    assert report["actual_instance_status"] == "ABSENT_ACTIVE_EOCIV_OBJECTS"
-    assert report["minimum_actual_objects"] == (
-        "registered lifecycle opportunity clock and W_minus schema",
-        "support-native neutral kernel with HARD_OPEN coverage",
-        "four disjoint ancestry pools plus frozen critical and route graphs",
-    )
+    assert report["actual_instance_status"] == "ACTUAL_BINDING_NOT_ESTABLISHED"
+    assert report["bounded_direct_consumer_scan"] == {
+        "roots": ("ha_ctse_process", "envs", "scripts"),
+        "result": "NO_DIRECT_PRODUCTION_CONSUMER_REFERENCE",
+    }
+    assert b"ABSENT_ACTIVE_EOCIV_OBJECTS" not in eociv.canonical_report_bytes()
     assert "outcome-bearing trial" in report["future_explorer_choice"]
     assert report["non_claims"] == (
         "targeting value",

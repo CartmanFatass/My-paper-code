@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass
 from fractions import Fraction
-from typing import Mapping, Sequence
+from typing import Callable, Mapping, Sequence
 
 
 ARMS = ("LS", "LR", "CS", "CR")
@@ -97,7 +97,7 @@ class CriticalEdge:
     sink: str
     information_class: str
     deadline: int
-    live_paths: tuple[tuple[str, ...], ...]
+    live_paths: tuple[tuple[tuple[str, str, int], ...], ...]
 
 
 @dataclass(frozen=True)
@@ -186,7 +186,7 @@ def build_unit_config() -> UnitConfig:
                 "receiver",
                 "deadline-bearing-intent",
                 6,
-                (("coordinator", "receiver"),),
+                ((("coordinator", "receiver", 5),),),
             ),
         ),
         parameter_routes=(
@@ -270,23 +270,30 @@ def frozen_q(config: UnitConfig) -> dict[str, Fraction]:
     return dict(config.frozen_q_by_cell)
 
 
-def _control_row(config: UnitConfig, cell: str, opportunity: int) -> ControlTape:
+def _reject_prohibited_sources(source_attempt: Mapping[str, object] | None) -> None:
+    if source_attempt and set(source_attempt).intersection(PROHIBITED_SELECTOR_FIELDS):
+        raise ClosureError("prohibited source reached sealed path")
+
+
+def _control_row(config: UnitConfig, cell: str, opportunity: int, source_attempt: Mapping[str, object] | None = None) -> ControlTape:
+    _reject_prohibited_sources(source_attempt)
     matches = tuple(row for row in config.control_table if (row.cell, row.opportunity) == (cell, opportunity))
     if len(matches) != 1:
         raise ClosureError(f"unsupported control opportunity: {cell}/{opportunity}")
     return matches[0]
 
 
-def control_open(config: UnitConfig, cell: str, opportunity: int) -> bool:
-    row = _control_row(config, cell, opportunity)
+def control_open(config: UnitConfig, cell: str, opportunity: int, source_attempt: Mapping[str, object] | None = None) -> bool:
+    row = _control_row(config, cell, opportunity, source_attempt)
     return row.tape >= frozen_q(config)[cell]
 
 
-def sham_score(config: UnitConfig, cell: str, opportunity: int) -> Fraction:
-    return _control_row(config, cell, opportunity).sham_score
+def sham_score(config: UnitConfig, cell: str, opportunity: int, source_attempt: Mapping[str, object] | None = None) -> Fraction:
+    return _control_row(config, cell, opportunity, source_attempt).sham_score
 
 
-def support_cell(config: UnitConfig, cell: str) -> SupportCell:
+def support_cell(config: UnitConfig, cell: str, source_attempt: Mapping[str, object] | None = None) -> SupportCell:
+    _reject_prohibited_sources(source_attempt)
     matches = tuple(item for item in config.support_cells if item.cell == cell)
     if len(matches) != 1:
         raise ClosureError(f"support cell cardinality is not one: {cell}")
@@ -403,13 +410,12 @@ def critical_paths_closed(config: UnitConfig) -> bool:
     if not config.critical_graph:
         return False
     for edge in config.critical_graph:
-        if edge.deadline > config.horizon or not edge.live_paths:
+        if not 0 < edge.deadline <= config.horizon or not edge.live_paths:
             return False
-        if any(
-            not any((src, dst) == (edge.source, edge.sink) for src, dst in zip(path, path[1:]))
-            for path in edge.live_paths
-        ):
-            return False
+        for path in edge.live_paths:
+            occurrences = tuple(time for source, sink, time in path if (source, sink) == (edge.source, edge.sink))
+            if not occurrences or min(occurrences) >= edge.deadline:
+                return False
     return True
 
 
@@ -488,16 +494,25 @@ def _outcome_null_closed(config: UnitConfig, threshold: Fraction, q: Mapping[str
     return all(cell.cost > 0 and cell.envelope for cell in config.support_cells)
 
 
-def _mutation_results() -> dict[str, str]:
+def _fails_closed(probe: Callable[[], object]) -> bool:
+    try: probe()
+    except ClosureError: return True
+    return False
+
+
+def _mutation_results(config: UnitConfig) -> dict[str, dict[str, str]]:
     raw = {field: 0 for field in W_MINUS_FIELDS}
-    results: dict[str, str] = {}
+    results: dict[str, dict[str, str]] = {}
     for field in PROHIBITED_SELECTOR_FIELDS:
-        try:
-            selector_view({**raw, field: "attempt"})
-        except ClosureError:
-            results[field] = "FAIL_CLOSED"
-        else:
-            results[field] = "LEAKED"
+        attempt = {field: "attempt"}
+        closed = tuple(_fails_closed(probe) for probe in (
+            lambda: selector_view({**raw, **attempt}), lambda: support_cell(config, "route-a", attempt),
+            lambda: control_open(config, "route-a", 0, attempt), lambda: sham_score(config, "route-a", 0, attempt)))
+        results[field] = {
+            "selector_view": "FAIL_CLOSED" if closed[0] else "LEAKED",
+            "support_native_neutral": "FAIL_CLOSED" if closed[1] else "LEAKED",
+            "control_open_and_sham_score": "FAIL_CLOSED" if all(closed[2:]) else "LEAKED",
+        }
     return results
 
 
@@ -506,7 +521,7 @@ def run_unit_closure(config: UnitConfig | None = None) -> dict[str, object]:
     validate_config(config)
     threshold = calibration_threshold(config)
     q = frozen_q(config)
-    mutations = _mutation_results()
+    mutations = _mutation_results(config)
     closures = {
         "payload_pair_byte_closure": _payload_pair_closed(config),
         "always_real_pre_sampling_equivalence": always_real_equivalent(
@@ -516,13 +531,13 @@ def run_unit_closure(config: UnitConfig | None = None) -> dict[str, object]:
         "zero_jacobian_and_pre_actuation": route_closure_closed(config),
         "outcome_sealed_null_conformance": _outcome_null_closed(config, threshold, q),
     }
-    if not all(closures.values()) or set(mutations.values()) != {"FAIL_CLOSED"}:
+    if not all(closures.values()) or not all(set(f.values()) == {"FAIL_CLOSED"} for f in mutations.values()):
         raise ClosureError("deterministic closure failed")
     return {
         "candidate": "CAND-VAP-EOCIV-LITE@adversarial-revision-v8",
         "treatment": "EOCIV-LITE-V8-ARM-CALIBRATION-ROUTE-CLOSURE",
         "terminal": "PASS_INTERVENTION_CLOSURE",
-        "actual_instance_status": "ABSENT_ACTIVE_EOCIV_OBJECTS",
+        "actual_instance_status": "ACTUAL_BINDING_NOT_ESTABLISHED",
         "threshold": threshold,
         "q_c": q,
         "pool_roots": tuple(pool.ancestry_root for pool in config.pools),
@@ -541,14 +556,14 @@ def run_unit_closure(config: UnitConfig | None = None) -> dict[str, object]:
         "closures": closures,
         "route_predicates": {
             "clock_run_law": clock_run_law_closed(config),
-            "critical_all_live_paths": critical_paths_closed(config),
+            "critical_all_live_paths_before_deadline": critical_paths_closed(config),
         },
         "mutations": mutations,
-        "minimum_actual_objects": (
-            "registered lifecycle opportunity clock and W_minus schema",
-            "support-native neutral kernel with HARD_OPEN coverage",
-            "four disjoint ancestry pools plus frozen critical and route graphs",
-        ),
+        "forbidden_source_terminal": "PASS_THREE_FAMILY_CLOSURE",
+        "bounded_direct_consumer_scan": {
+            "roots": ("ha_ctse_process", "envs", "scripts"),
+            "result": "NO_DIRECT_PRODUCTION_CONSUMER_REFERENCE",
+        },
         "future_explorer_choice": (
             "Which active lifecycle opportunity population and support-native neutral "
             "definition should replace the rational unit before any outcome-bearing trial?"
