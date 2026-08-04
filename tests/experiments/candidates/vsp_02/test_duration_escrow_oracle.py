@@ -459,11 +459,12 @@ def test_registered_z0_branch_law_selector_and_integrated_values(audit):
         Fraction(1, 2), Fraction(5, 8), Fraction(3, 4), Fraction(7, 8),
     )
     report = audit.report["comparator"]
-    full = ["context", "tau", "public_history_at_tau", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version"]
+    full = ["context", "tau", "remaining_horizon", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version"]
     ignored = full[1:]
     assert report["z0_full_fields"] == full
     assert report["candidate_z0_used_fields"] == report["comparator_z0_used_fields"] == ["context"]
     assert report["candidate_ignored_legal_fields"] == report["comparator_ignored_legal_fields"] == ignored
+    assert report["registered_remaining_horizon"] == oracle.HORIZON == 2
     assert report["used_is_strict_subset_of_full"] is report["same_used_selector_information"] is True
     assert report["branch_variables_marginalized_only"] is True
     assert report["branch_law"]["branches_per_z0_action"] == 16
@@ -550,11 +551,26 @@ def test_identical_extra_future_value_keys_fail_exact_domain(audit, monkeypatch)
 @pytest.mark.parametrize(
     "field,value",
     [
-        ("Z0_FULL_FIELDS", ("context", "tau")),
+        ("Z0_FULL_FIELDS", oracle.Z0_FULL_FIELDS[:-1]),
+        ("Z0_FULL_FIELDS", oracle.Z0_FULL_FIELDS + ("extra",)),
+        ("Z0_FULL_FIELDS", oracle.Z0_FULL_FIELDS + ("behavior_version",)),
+        ("Z0_FULL_FIELDS", ("tau", "context") + oracle.Z0_FULL_FIELDS[2:]),
+        ("Z0_FULL_FIELDS", oracle.Z0_FULL_FIELDS[:2] + ("altered",) + oracle.Z0_FULL_FIELDS[3:]),
+        ("CANDIDATE_Z0_USED_FIELDS", ()),
         ("CANDIDATE_Z0_USED_FIELDS", ("context", "tau")),
+        ("CANDIDATE_Z0_USED_FIELDS", ("context", "context")),
+        ("CANDIDATE_Z0_USED_FIELDS", ("altered",)),
+        ("COMPARATOR_Z0_USED_FIELDS", ()),
         ("COMPARATOR_Z0_USED_FIELDS", ("context", "tau")),
-        ("CANDIDATE_IGNORED_LEGAL_FIELDS", ("tau",)),
-        ("COMPARATOR_IGNORED_LEGAL_FIELDS", ("tau",)),
+        ("COMPARATOR_Z0_USED_FIELDS", ("context", "context")),
+        ("COMPARATOR_Z0_USED_FIELDS", ("altered",)),
+        *[(field, value) for field in ("CANDIDATE_IGNORED_LEGAL_FIELDS", "COMPARATOR_IGNORED_LEGAL_FIELDS") for value in (
+            oracle.CANDIDATE_IGNORED_LEGAL_FIELDS[:-1],
+            oracle.CANDIDATE_IGNORED_LEGAL_FIELDS + ("extra",),
+            oracle.CANDIDATE_IGNORED_LEGAL_FIELDS + ("behavior_version",),
+            ("remaining_horizon", "tau") + oracle.CANDIDATE_IGNORED_LEGAL_FIELDS[2:],
+            oracle.CANDIDATE_IGNORED_LEGAL_FIELDS[:1] + ("altered",) + oracle.CANDIDATE_IGNORED_LEGAL_FIELDS[2:],
+        )],
     ],
 )
 def test_same_used_selector_information_mutations_fail_closed(audit, monkeypatch, field, value):

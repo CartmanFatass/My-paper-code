@@ -54,10 +54,10 @@ class FutureBranch:
         return self.world, self.close_mode, self.cutoff, self.owner_departure
 
 
-Z0_FULL_FIELDS = ("context", "tau", "public_history_at_tau", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version")
+Z0_FULL_FIELDS = ("context", "tau", "remaining_horizon", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version")
 CANDIDATE_Z0_USED_FIELDS = COMPARATOR_Z0_USED_FIELDS = ("context",)
 CANDIDATE_IGNORED_LEGAL_FIELDS = COMPARATOR_IGNORED_LEGAL_FIELDS = (
-    "tau", "public_history_at_tau", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version",
+    "tau", "remaining_horizon", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version",
 )
 BRANCH_FIELDS = ("world", "close_mode", "cutoff", "owner_departure")
 SELECTOR_TAPE = tuple(Fraction(index, 8) for index in range(8))
@@ -436,8 +436,8 @@ def registered_z0_conformance(
     branch_only_in_law = all(set(BRANCH_FIELDS).isdisjoint(fields_) for fields_ in (CANDIDATE_Z0_USED_FIELDS, COMPARATOR_Z0_USED_FIELDS))
     used_is_strict_subset = all(set(fields_) < set(Z0_FULL_FIELDS) for fields_ in (CANDIDATE_Z0_USED_FIELDS, COMPARATOR_Z0_USED_FIELDS))
     same_used_selector_information = (
-        CANDIDATE_Z0_USED_FIELDS == COMPARATOR_Z0_USED_FIELDS == ("context",)
-        and CANDIDATE_IGNORED_LEGAL_FIELDS == COMPARATOR_IGNORED_LEGAL_FIELDS == ("tau", "public_history_at_tau", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version")
+        Z0_FULL_FIELDS == ("context", "tau", "remaining_horizon", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version") and CANDIDATE_Z0_USED_FIELDS == COMPARATOR_Z0_USED_FIELDS == ("context",)
+        and CANDIDATE_IGNORED_LEGAL_FIELDS == COMPARATOR_IGNORED_LEGAL_FIELDS == ("tau", "remaining_horizon", "focal_execution_phase", "public_partner_phase", "legal_duration_mask", "behavior_version")
         and set(CANDIDATE_Z0_USED_FIELDS + CANDIDATE_IGNORED_LEGAL_FIELDS) == set(Z0_FULL_FIELDS)
         and used_is_strict_subset and branch_only_in_law
     )
@@ -456,7 +456,7 @@ def registered_z0_conformance(
         "z0_full_fields": list(Z0_FULL_FIELDS), "candidate_z0_used_fields": list(CANDIDATE_Z0_USED_FIELDS),
         "comparator_z0_used_fields": list(COMPARATOR_Z0_USED_FIELDS), "candidate_ignored_legal_fields": list(CANDIDATE_IGNORED_LEGAL_FIELDS),
         "comparator_ignored_legal_fields": list(COMPARATOR_IGNORED_LEGAL_FIELDS), "used_is_strict_subset_of_full": used_is_strict_subset,
-        "branch_variables_marginalized_only": branch_only_in_law,
+        "branch_variables_marginalized_only": branch_only_in_law, "registered_remaining_horizon": HORIZON,
         "branch_law": {
             "fields": list(BRANCH_FIELDS), "branches_per_z0_action": len(law),
             "uniform_weight": _q(Fraction(1, 16)), "normalized_full_support": law_frozen,
