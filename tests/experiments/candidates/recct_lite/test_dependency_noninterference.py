@@ -26,6 +26,9 @@ def test_registered_zero_return_audit_passes_narrow_contract_and_is_byte_stable(
 
     assert first.terminal == "PASS_DEPENDENCY_NONINTERFERENCE_D0"
     assert first.selected_mask is recct.Mask.E1
+    assert first.feasible_masks == (recct.Mask.ZERO, recct.Mask.E1)
+    assert first.g_sd_selected_mask is recct.Mask.ZERO
+    assert first.g_sd_feasible_masks == (recct.Mask.ZERO,)
     assert first.orientation_swapped_mask is recct.Mask.E2
     assert first.rho_values == (F(3, 5), F(3, 5))
     assert dict(first.q_values) == {
@@ -93,33 +96,36 @@ def test_invalid_equality_epoch_rng_and_ancestry_fail_before_optimizer_evaluatio
     world = recct.build_world()
     gate = recct.build_gate_input(world)
 
-    for invalid in (
-        replace(gate, equality_valid=False),
-        replace(gate, epoch_valid=False),
-        replace(gate, rng_counters=gate.rng_counters + (("global", 1),)),
-        replace(
-            gate,
-            ancestry=replace(
-                gate.ancestry,
-                edges=gate.ancestry.edges + (("learner", "sealed_fold"),),
-            ),
-        ),
-        replace(
-            gate,
-            ancestry=replace(
-                gate.ancestry,
-                mutable_nodes=("normalizer",),
-            ),
-        ),
-    ):
+    for invalid in (replace(gate, equality_valid=False), replace(gate, epoch_valid=False),
+                    replace(gate, rng_counters=gate.rng_counters + (("global", 1),))):
         with pytest.raises(ValueError):
             recct.decide(invalid, world)
 
+    ancestry = gate.ancestry
+    negatives = (
+        replace(ancestry, edges=ancestry.edges[:-1]),
+        replace(ancestry, edges=ancestry.edges + (("mutable_live", "learner_checkpoint"),),
+                mutable_nodes=("mutable_live",)),
+        replace(ancestry, edges=ancestry.edges + (("shared", "sealed_fold"),
+                                                  ("shared", "learner_checkpoint"))),
+        replace(ancestry, edges=ancestry.edges + ((recct.SHADOW_NODES[0], "learner_checkpoint"),)),
+        replace(ancestry, mutable_nodes=(recct.FITTED_NODES[0],)),
+        replace(ancestry, fitted_nodes=ancestry.fitted_nodes + ("extra_fitted",)),
+        replace(ancestry, evaluation_nodes=ancestry.evaluation_nodes + ("shadow-extra",)),
+        replace(ancestry, fitted_nodes=()),
+        replace(ancestry, evaluation_nodes=ancestry.evaluation_nodes[:-1]),
+    )
+    for invalid in negatives:
+        assert not recct.validate_ancestry(invalid)
+        with pytest.raises(ValueError, match="ancestry graph"):
+            recct.decide(replace(gate, ancestry=invalid), world)
 
-def test_rho_signed_credit_and_support_threshold_cells_are_exact():
+
+def test_rho_q_derived_credit_and_support_threshold_cells_are_exact():
     config = recct.Config()
-    probe = recct.Probe("e1", True, F(0), F(3, 4), F(1), F(1, 2))
+    probe = recct.Probe("e1", True, F(0), F(3, 4), F(1))
 
+    assert "signed_credit" not in {field.name for field in fields(recct.Probe)}
     assert recct.rho(probe, config) == F(3, 5)
     assert recct.edge_feasible_values(True, F(1, 2), F(1, 4), config)
     assert not recct.edge_feasible_values(True, F(1, 2) - F(1, 100), F(1, 4), config)
@@ -140,6 +146,9 @@ def test_hysteresis_has_no_lexicographic_tie_and_requires_strict_gap():
         recct.Mask.BOTH: F(-2),
     }
     above = at | {recct.Mask.E1: config.eta + F(1, 100)}
+    nonleader_tie = {
+        recct.Mask.ZERO: F(0), recct.Mask.E1: F(2), recct.Mask.E2: F(2), recct.Mask.BOTH: F(1)
+    }
 
     assert recct.choose_mask(recct.Mask.ZERO, recct.MASKS, tie, config.eta) is recct.Mask.ZERO
     assert recct.choose_mask(recct.Mask.ZERO, recct.MASKS, at, config.eta) is recct.Mask.ZERO
@@ -150,6 +159,9 @@ def test_hysteresis_has_no_lexicographic_tie_and_requires_strict_gap():
         tie,
         config.eta,
     ) is recct.Mask.ZERO
+    assert recct.choose_mask(
+        recct.Mask.BOTH, recct.MASKS, nonleader_tie, config.eta
+    ) is recct.Mask.BOTH
 
 
 def test_literal_zero_initialization_and_complete_four_mask_enumeration_fail_closed():
@@ -172,12 +184,13 @@ def test_each_mask_restores_one_identical_world_and_one_optimizer_transition():
     assert world.roster_roles == ("r0", "r1", "k")
     assert {node for edge in gate.ancestry.edges for node in edge} >= {
         "preprocessor",
-        "recurrence",
-        "replay",
-        "normalizer",
-        "partner_checkpoint",
-        "owner_epoch",
+        "fitted_learner",
     }
+    assert set(recct.REQUIRED_ANCESTRY_EDGES) <= set(gate.ancestry.edges)
+    for family in recct.STATE_FAMILIES:
+        assert (f"{family}_checkpoint", f"{family}_state") in gate.ancestry.edges
+        assert all((f"{family}_state", shadow) in gate.ancestry.edges
+                   for shadow in recct.SHADOW_NODES)
     assert recct.world_bytes(world) == source
     assert len({item.clone_id for item in forward}) == 4
     assert len({item.source_digest for item in forward}) == 1
@@ -215,6 +228,8 @@ def test_exact_optimizer_states_costs_and_q_values_use_one_frozen_evaluator():
         recct.Mask.E2: F(-21, 20),
         recct.Mask.BOTH: F(9, 10),
     }
+    assert decision.feasible_masks == (recct.Mask.ZERO, recct.Mask.E1)
+    assert decision.selected_mask is recct.Mask.E1
 
 
 def test_owner_bijection_and_orientation_swap_are_equivariant():
@@ -258,7 +273,10 @@ def test_real_shadow_bytes_semantic_firewall_and_reporting_sink_are_closed():
     receipt = {"authenticated": True, "confirmation": True, "support_stratum": "s0"}
     assert recct.g_sem(receipt) != recct.g_pi(receipt)
     assert recct.world_bytes(world) == source
-    assert recct.g_sd(gate, world, (-1, 1)).evaluations == first.evaluations
+    sd = recct.g_sd(gate, world, (-1, 1))
+    assert sd.evaluations == first.evaluations
+    assert sd.feasible_masks == (recct.Mask.ZERO,)
+    assert sd.selected_mask is recct.Mask.ZERO
 
 
 def test_world_mismatch_semantic_schema_and_sign_contract_fail_closed():

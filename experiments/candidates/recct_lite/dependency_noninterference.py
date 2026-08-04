@@ -25,19 +25,18 @@ class Mask(str, Enum):
 
 
 MASKS = (Mask.ZERO, Mask.E1, Mask.E2, Mask.BOTH)
-ALLOWED_GATE_FIELDS = frozenset(
-    {
-        "fold_digest",
-        "world_digest",
-        "ancestry",
-        "rng_counters",
-        "equality_valid",
-        "epoch_valid",
-        "proposals",
-        "config",
-        "current_mask",
-    }
+SHADOW_NODES = tuple(f"shadow-{mask.value}" for mask in MASKS)
+STATE_FAMILIES = ("learner", "recurrence", "replay", "normalizer", "partner", "buffer", "optimizer")
+FITTED_NODES = ("fitted_learner",)
+REQUIRED_ANCESTRY_EDGES = (
+    (("sealed_fold", "preprocessor"), ("preprocessor", FITTED_NODES[0]))
+    + tuple((f"{f}_checkpoint", f"{f}_state") for f in STATE_FAMILIES)
+    + tuple((f"{f}_state", shadow) for f in STATE_FAMILIES for shadow in SHADOW_NODES)
 )
+ALLOWED_GATE_FIELDS = frozenset({
+    "fold_digest", "world_digest", "ancestry", "rng_counters", "equality_valid",
+    "epoch_valid", "proposals", "config", "current_mask",
+})
 
 
 @dataclass(frozen=True)
@@ -60,7 +59,6 @@ class Probe:
     mu0: F
     mu1: F
     sigma: F
-    signed_credit: F
 
 
 @dataclass(frozen=True)
@@ -132,6 +130,9 @@ class Decision:
 class AuditResult:
     terminal: str
     selected_mask: Mask
+    feasible_masks: tuple[Mask, ...]
+    g_sd_selected_mask: Mask
+    g_sd_feasible_masks: tuple[Mask, ...]
     orientation_swapped_mask: Mask
     q_values: tuple[tuple[str, F], ...]
     rho_values: tuple[F, F]
@@ -139,12 +140,14 @@ class AuditResult:
 
     def to_bytes(self) -> bytes:
         payload = {
+            "feasible_masks": [mask.value for mask in self.feasible_masks],
+            "g_sd_feasible_masks": [mask.value for mask in self.g_sd_feasible_masks],
+            "g_sd_selected_mask": self.g_sd_selected_mask.value,
             "invariants": {name: value for name, value in self.invariants},
             "orientation_swapped_mask": self.orientation_swapped_mask.value,
             "q_values": {name: _fs(value) for name, value in self.q_values},
             "rho_values": [_fs(value) for value in self.rho_values],
-            "selected_mask": self.selected_mask.value,
-            "terminal": self.terminal,
+            "selected_mask": self.selected_mask.value, "terminal": self.terminal,
         }
         return json.dumps(payload, separators=(",", ":"), sort_keys=True).encode()
 
@@ -217,20 +220,7 @@ def build_gate_input(
         raise ValueError("owner keys must be distinct")
     del owner_keys, audit_seed, audit_record
     source = world_bytes(world)
-    ancestry = Ancestry(
-        edges=(
-            ("sealed_fold", "preprocessor"),
-            ("preprocessor", "learner"),
-            ("learner_checkpoint", "recurrence"),
-            ("sealed_fold", "replay"),
-            ("partner_checkpoint", "partner"),
-            ("owner_epoch", "sealed_fold"),
-            ("sealed_fold", "normalizer"),
-        ),
-        mutable_nodes=(),
-        fitted_nodes=("sealed_fold", "normalizer"),
-        evaluation_nodes=("shadow00", "shadow10", "shadow01", "shadow11"),
-    )
+    ancestry = Ancestry(REQUIRED_ANCESTRY_EDGES, (), FITTED_NODES, SHADOW_NODES)
     raw = {
         "fold_digest": _digest(b"recct-fold-v1"),
         "world_digest": _digest(source),
@@ -239,8 +229,8 @@ def build_gate_input(
         "equality_valid": True,
         "epoch_valid": world.checkpoint_epoch == world.owner_epoch,
         "proposals": (
-            Probe("e1:a->b", True, F(0), F(3, 4), F(1), F(1, 2)),
-            Probe("e2:b->a", True, F(0), F(3, 4), F(1), F(1, 2)),
+            Probe("e1:a->b", True, F(0), F(3, 4), F(1)),
+            Probe("e2:b->a", True, F(0), F(3, 4), F(1)),
         ),
         "config": Config(),
         "current_mask": Mask.ZERO,
@@ -273,12 +263,25 @@ def gate_input_bytes(gate: GateInput) -> bytes:
 
 
 def validate_ancestry(manifest: Ancestry) -> bool:
-    reach = set(manifest.edges)
-    for _ in range(len({node for edge in reach for node in edge})):
+    edges = set(manifest.edges)
+    nodes = {node for edge in edges for node in edge}
+    required_nodes = {node for edge in REQUIRED_ANCESTRY_EDGES for node in edge}
+    fitted, evaluations = set(manifest.fitted_nodes), set(manifest.evaluation_nodes)
+    if not set(REQUIRED_ANCESTRY_EDGES) <= edges or not required_nodes <= nodes:
+        return False
+    if manifest.fitted_nodes != FITTED_NODES or manifest.evaluation_nodes != SHADOW_NODES:
+        return False
+    reach = set(edges)
+    for _ in range(len(nodes)):
         reach |= {(a, d) for a, b in reach for c, d in reach if b == c}
+    protected, mutable = fitted | evaluations, set(manifest.mutable_nodes)
+    fitted_ancestors = fitted | {node for node, target in reach if target in fitted}
+    evaluation_ancestors = evaluations | {node for node, target in reach if target in evaluations}
     acyclic = not any(parent == child for parent, child in reach)
-    protected = set(manifest.fitted_nodes) | set(manifest.evaluation_nodes)
-    return acyclic and not (set(manifest.mutable_nodes) & protected)
+    mutable_isolated = not mutable & protected and not any(
+        (node, target) in reach for node in mutable for target in protected
+    )
+    return acyclic and mutable_isolated and not fitted_ancestors & evaluation_ancestors
 
 
 def rho(probe: Probe, config: Config) -> F:
@@ -292,11 +295,7 @@ def edge_feasible_values(support: bool, rho_value: F, credit: F, config: Config)
     return support and rho_value >= config.rho_threshold and credit >= config.credit_threshold
 
 
-def optimizer_step(
-    world: WorldState,
-    mask: Mask,
-    config: Config,
-) -> WorldState:
+def optimizer_step(world: WorldState, mask: Mask, config: Config) -> WorldState:
     base, edge1, edge2 = world.gradients
     bits = mask.bits
     opt = world.optimizer
@@ -324,11 +323,8 @@ def four_step_evaluator(world: WorldState) -> F:
     return 4 * (2 * first - second)
 
 
-def evaluate_masks(
-    world: WorldState,
-    gate: GateInput,
-    order: Sequence[Mask] = MASKS,
-) -> tuple[ShadowEvaluation, ...]:
+def evaluate_masks(world: WorldState, gate: GateInput,
+                   order: Sequence[Mask] = MASKS) -> tuple[ShadowEvaluation, ...]:
     if set(order) != set(MASKS) or len(order) != 4:
         raise ValueError("mask enumeration must contain 00/10/01/11 exactly once")
     source = world_bytes(world)
@@ -361,10 +357,10 @@ def choose_mask(
     top = max(scores[mask] for mask in feasible)
     leaders = tuple(mask for mask in feasible if scores[mask] == top)
     if len(leaders) != 1:
-        return current if current in leaders else Mask.ZERO
+        return current if current in feasible else Mask.ZERO
     best = leaders[0]
-    if best is current:
-        return current
+    if best is current or len(feasible) == 1:
+        return best
     second = max(scores[mask] for mask in feasible if mask is not best)
     if top - second > eta:
         return best
@@ -375,22 +371,31 @@ def decide(
     gate: GateInput,
     world: WorldState,
     order: Sequence[Mask] = MASKS,
+    conditional_signs: tuple[int, int] = (1, 1),
 ) -> Decision:
     gate = validate_gate(gate)
     if gate.world_digest != _digest(world_bytes(world)):
         raise ValueError("gate and optimizer world differ")
     evaluations = evaluate_masks(world, gate, order)
     by_mask = {item.mask: item for item in evaluations}
-    edge_ok = tuple(
-        edge_feasible_values(
-            probe.support, rho(probe, gate.config), probe.signed_credit, gate.config
-        )
-        for probe in gate.proposals
+    if any(sign not in (-1, 1) for sign in conditional_signs):
+        raise ValueError("conditional credit signs must be +/-1")
+    credits = (
+        (by_mask[Mask.E1].q, by_mask[Mask.BOTH].q - by_mask[Mask.E2].q),
+        (by_mask[Mask.E2].q, by_mask[Mask.BOTH].q - by_mask[Mask.E1].q),
     )
     feasible = tuple(
         mask
         for mask in MASKS
-        if (not mask.bits[0] or edge_ok[0]) and (not mask.bits[1] or edge_ok[1])
+        if all(
+            not bit
+            or edge_feasible_values(
+                gate.proposals[index].support, rho(gate.proposals[index], gate.config),
+                conditional_signs[index] * credits[index][mask.bits[1 - index]],
+                gate.config,
+            )
+            for index, bit in enumerate(mask.bits)
+        )
     )
     selected = choose_mask(
         gate.current_mask,
@@ -402,28 +407,16 @@ def decide(
     return Decision(gate.current_mask, selected, feasible, ordered, by_mask[selected].state_bytes)
 
 
-def g_sc(
-    gate: GateInput,
-    world: WorldState,
-    psi: str,
-) -> Decision:
+def g_sc(gate: GateInput, world: WorldState, psi: str) -> Decision:
     semantic_branch_computed = bool(psi)
     del semantic_branch_computed
     return decide(gate, world)
 
 
-def g_sd(
-    gate: GateInput,
-    world: WorldState,
-    signs: tuple[int, int],
-) -> Decision:
+def g_sd(gate: GateInput, world: WorldState, signs: tuple[int, int]) -> Decision:
     if any(sign not in (-1, 1) for sign in signs):
         raise ValueError("G_SD signs must be +/-1")
-    probes = tuple(
-        replace(probe, signed_credit=abs(probe.signed_credit) * signs[index])
-        for index, probe in enumerate(gate.proposals)
-    )
-    return decide(replace(gate, proposals=probes), world)
+    return decide(gate, world, conditional_signs=signs)
 
 
 def g_sem(receipt: Mapping[str, object]) -> tuple[tuple[str, object], ...]:
@@ -457,6 +450,7 @@ def truth_table_complete(config: Config) -> bool:
         for credit in credits
     )
     tie_scores = {Mask.ZERO: F(1), Mask.E1: F(1), Mask.E2: F(0), Mask.BOTH: F(-1)}
+    nonleader_tie = {Mask.ZERO: F(0), Mask.E1: F(2), Mask.E2: F(2), Mask.BOTH: F(1)}
     at_gap = {Mask.ZERO: F(0), Mask.E1: config.eta, Mask.E2: F(-1), Mask.BOTH: F(-2)}
     above_gap = at_gap | {Mask.E1: config.eta + F(1, 16)}
     return threshold_cells and all(
@@ -465,6 +459,7 @@ def truth_table_complete(config: Config) -> bool:
             choose_mask(Mask.ZERO, MASKS, at_gap, config.eta) is Mask.ZERO,
             choose_mask(Mask.ZERO, MASKS, tie_scores, config.eta) is Mask.ZERO,
             choose_mask(Mask.E1, (Mask.ZERO, Mask.E2), tie_scores, config.eta) is Mask.ZERO,
+            choose_mask(Mask.BOTH, MASKS, nonleader_tie, config.eta) is Mask.BOTH,
         )
     )
 
@@ -531,14 +526,21 @@ def run_noninterference_audit() -> AuditResult:
             sem_report != pi_report and world_bytes(world) == world_bytes(build_world()),
         ),
         (
-            "matched_sign_null_preserves_optimizer_inputs",
-            sd.evaluations == decision.evaluations,
+            "q_derived_conditional_credit_intervention",
+            decision.feasible_masks == (Mask.ZERO, Mask.E1)
+            and decision.selected_mask is Mask.E1
+            and sd.evaluations == decision.evaluations
+            and sd.feasible_masks == (Mask.ZERO,)
+            and sd.selected_mask is Mask.ZERO,
         ),
     )
     passed = all(value for _, value in invariants)
     return AuditResult(
         "PASS_DEPENDENCY_NONINTERFERENCE_D0" if passed else "INVALID_DEPENDENCY_CONTRACT",
         decision.selected_mask,
+        decision.feasible_masks,
+        sd.selected_mask,
+        sd.feasible_masks,
         swapped.selected_mask,
         tuple((mask.value, evaluations[mask].q) for mask in MASKS),
         tuple(rho(probe, gate.config) for probe in gate.proposals),
