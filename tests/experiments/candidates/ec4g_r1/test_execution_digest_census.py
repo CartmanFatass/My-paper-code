@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import replace
+import json
 
 import pytest
 
@@ -9,17 +10,6 @@ from experiments.candidates.ec4g_r1 import execution_digest_census as census
 
 def _domain(cell: census.Cell) -> census.FrozenCensus:
     return census.FrozenCensus((cell.cell_id,), (cell,))
-
-
-def _continuation(
-    action: census.Action, body: bytes, cost: float = 0.0
-) -> census.Continuation:
-    return census.Continuation(
-        action,
-        body,
-        cost,
-        census.continuation_digest(body, cost),
-    )
 
 
 def _cell() -> census.Cell:
@@ -52,6 +42,18 @@ def test_exact_single_cell_witness_is_supported_behavioral_discordance():
     )
     assert comparison.point_difference == pytest.approx(-0.10)
     assert comparison.confidence_upper_bound == pytest.approx(-0.08)
+    decision = json.loads(result.to_bytes())["cells"][0]["direct_tau"]
+    assert decision == {
+        "action": "P",
+        "body_hex": comparison.direct_tau.body.hex(),
+        "continuation_digest": comparison.direct_tau.digest,
+        "delivery_channel": "synthetic-channel",
+        "envelope_bytes_hex": b"GOOD".hex(),
+        "envelope_id": "public-envelope-v1",
+        "execution_path": "probe",
+        "external_cost": 0.0,
+        "receipt_variant": "RV",
+    }
 
 
 def test_census_returns_all_four_and_only_four_terminal_classes():
@@ -67,12 +69,7 @@ def test_census_returns_all_four_and_only_four_terminal_classes():
     equivalent = census.run_census(_domain(both_probe))
 
     probe, no_probe, fallback = cell.continuations
-    label_only_probe = replace(
-        probe,
-        body=fallback.body,
-        external_cost=fallback.external_cost,
-        digest=fallback.digest,
-    )
+    label_only_probe = replace(fallback, action=probe.action)
     label_only = census.run_census(
         _domain(replace(cell, continuations=(label_only_probe, no_probe, fallback)))
     )
@@ -83,6 +80,7 @@ def test_census_returns_all_four_and_only_four_terminal_classes():
     assert label_only.classification is census.CensusClassification.LABEL_ONLY_DIFFERENCE
     assert label_only.comparisons[0].label_equal is False
     assert label_only.comparisons[0].behavior_equal is True
+    assert label_only_probe.action is not fallback.action
     assert behavioral.classification is census.CensusClassification.BEHAVIORAL_DISCORDANCE
     assert {item.value for item in census.CensusClassification} == {
         "INCOMPLETE_CONTRACT",
@@ -90,6 +88,26 @@ def test_census_returns_all_four_and_only_four_terminal_classes():
         "LABEL_ONLY_DIFFERENCE",
         "BEHAVIORAL_DISCORDANCE",
     }
+
+
+def test_body_and_cost_only_clone_is_still_behaviorally_different():
+    cell = _cell()
+    probe, no_probe, fallback = cell.continuations
+    values = (
+        probe.execution_path, probe.receipt_variant, probe.delivery_channel,
+        probe.envelope_id, probe.envelope_bytes, fallback.body, fallback.external_cost,
+    )
+    clone = replace(
+        probe, body=fallback.body, external_cost=fallback.external_cost,
+        digest=census.continuation_digest(*values),
+    )
+
+    result = census.run_census(_domain(replace(
+        cell, continuations=(clone, no_probe, fallback),
+    )))
+
+    assert result.classification is census.CensusClassification.BEHAVIORAL_DISCORDANCE
+    assert result.comparisons[0].behavior_equal is False
 
 
 def test_both_gate_branch_tables_cover_unsupported_probe_no_probe_and_abstain():
@@ -124,6 +142,36 @@ def test_both_gate_branch_tables_cover_unsupported_probe_no_probe_and_abstain():
     assert census.run_census(_domain(unsupported)).classification is (
         census.CensusClassification.INCOMPLETE_CONTRACT
     )
+
+
+@pytest.mark.parametrize(
+    ("supported", "measure"),
+    ((False, 1.0), (True, 0.0), (True, -1.0), (True, float("inf")), (True, float("nan"))),
+)
+def test_every_expected_row_must_be_supported_with_positive_finite_mass(
+    supported, measure,
+):
+    first = _cell()
+    gates = tuple((name, supported) for name in census.GATES)
+    second = replace(first, cell_id="x1", support_gates=gates, executor_measure=measure)
+    result = census.run_census(census.FrozenCensus(("x0", "x1"), (first, second)))
+
+    assert result.classification is census.CensusClassification.INCOMPLETE_CONTRACT
+    assert result.comparisons == ()
+    expected = "fully supported" if not supported else "finite and strictly positive"
+    assert any(expected in issue for issue in result.issues)
+
+
+def test_whole_positive_domain_classifies_all_rows_without_filtering():
+    first = _cell()
+    second = replace(
+        first, cell_id="x1", executor_measure=0.5,
+        measured_means=(0.0, 0.30, 0.10, 0.15, 0.0, 0.0, 0.0),
+    )
+    result = census.run_census(census.FrozenCensus(("x0", "x1"), (first, second)))
+
+    assert result.classification is census.CensusClassification.BEHAVIORAL_DISCORDANCE
+    assert tuple(item.cell_id for item in result.comparisons) == ("x0", "x1")
 
 
 def test_same_cell_object_reaches_both_maps_and_output_is_byte_stable(monkeypatch):
@@ -176,73 +224,44 @@ def test_cost_is_subtracted_once_and_pseudo_arms_are_report_only():
 @pytest.mark.parametrize(
     ("mutate", "message"),
     (
-        (
-            lambda cell: replace(
-                cell, receipts=replace(cell.receipts, assignment_visible=True)
-            ),
-            "assignment must be hidden",
-        ),
-        (
-            lambda cell: replace(
-                cell,
-                receipts=replace(
-                    cell.receipts, donor_event_id=cell.receipts.event_id
-                ),
-            ),
-            "same event",
-        ),
-        (
-            lambda cell: replace(
-                cell,
-                receipts=replace(
-                    cell.receipts, donor_trajectory_id=cell.receipts.trajectory_id
-                ),
-            ),
-            "same trajectory",
-        ),
-        (
-            lambda cell: replace(
-                cell,
-                receipts=replace(cell.receipts, donor_time=cell.receipts.event_time),
-            ),
-            "strictly pre-outcome",
-        ),
-        (
-            lambda cell: replace(
-                cell, receipts=replace(cell.receipts, registered_donors=())
-            ),
-            "unregistered",
-        ),
-        (
-            lambda cell: replace(
-                cell,
-                receipts=replace(cell.receipts, shuffled_payload=b"LONGER"),
-            ),
-            "preserve byte length",
-        ),
-        (
-            lambda cell: replace(
-                cell,
-                covariance=(
-                    (-1.0, *cell.covariance[0][1:]),
-                    *cell.covariance[1:],
-                ),
-            ),
-            "positive semidefinite",
-        ),
-        (
-            lambda cell: replace(
-                cell,
-                continuations=(
-                    replace(cell.continuations[0], digest="0" * 64),
-                    *cell.continuations[1:],
-                ),
-            ),
-            "digest mismatch",
-        ),
+        (lambda c: replace(c, receipts=replace(c.receipts, schema_id="other")), "schema/executor/source/version"),
+        (lambda c: replace(c, receipts=replace(c.receipts, executor_id="other")), "schema/executor/source/version"),
+        (lambda c: replace(c, receipts=replace(c.receipts, source_id="other")), "schema/executor/source/version"),
+        (lambda c: replace(c, receipts=replace(c.receipts, source_version="v2")), "schema/executor/source/version"),
+        (lambda c: replace(c, receipts=replace(c.receipts, latency_class="slow")), "latency/timestamp/delivery channel"),
+        (lambda c: replace(c, receipts=replace(c.receipts, timestamp_representation="float")), "latency/timestamp/delivery channel"),
+        (lambda c: replace(c, receipts=replace(c.receipts, delivery_channel="other")), "latency/timestamp/delivery channel"),
+        (lambda c: replace(c, receipts=replace(c.receipts, payload_support_id="other")), "payload support/byte-length/safe-action mask"),
+        (lambda c: replace(c, receipts=replace(c.receipts, byte_length_class="bytes:5")), "payload support/byte-length/safe-action mask"),
+        (lambda c: replace(c, receipts=replace(c.receipts, safe_action_mask_digest="0" * 64)), "payload support/byte-length/safe-action mask"),
+        (lambda c: replace(c, receipts=replace(c.receipts, visible_payload=b"FAKE")), "exact RV/RB/RS payloads"),
+        (lambda c: replace(c, receipts=replace(c.receipts, blinded_payload=b"FAIL")), "exact RV/RB/RS payloads"),
+        (lambda c: replace(c, receipts=replace(c.receipts, shuffled_payload=b"FAKE")), "exact RV/RB/RS payloads"),
+        (lambda c: replace(c, receipts=replace(c.receipts, blinded_payload=c.receipts.shuffled_payload)), "blinded and shuffled variants must differ"),
+        (lambda c: replace(c, receipts=replace(c.receipts, assignment_visible=True)), "exact event/donor relation"),
+        (lambda c: replace(c, receipts=replace(c.receipts, donor_event_id=c.receipts.event_id)), "exact event/donor relation"),
+        (lambda c: replace(c, receipts=replace(c.receipts, donor_trajectory_id=c.receipts.trajectory_id)), "exact event/donor relation"),
+        (lambda c: replace(c, receipts=replace(c.receipts, donor_source_id="other")), "exact event/donor relation"),
+        (lambda c: replace(c, receipts=replace(c.receipts, registered_donors=())), "exact event/donor relation"),
+        (lambda c: replace(c, receipts=replace(c.receipts, donor_time=float("nan"))), "donor time must be finite"),
     ),
 )
-def test_contract_and_donor_failures_return_incomplete_contract(mutate, message):
+def test_exact_receipt_registry_rejects_each_mismatch(mutate, message):
+    result = census.run_census(_domain(mutate(_cell())))
+
+    assert result.classification is census.CensusClassification.INCOMPLETE_CONTRACT
+    assert any(message in issue for issue in result.issues)
+    assert result.comparisons == ()
+
+
+@pytest.mark.parametrize(
+    ("mutate", "message"),
+    (
+        (lambda c: replace(c, covariance=((-1.0, *c.covariance[0][1:]), *c.covariance[1:])), "positive semidefinite"),
+        (lambda c: replace(c, continuations=(replace(c.continuations[0], digest="0" * 64), *c.continuations[1:])), "digest mismatch"),
+    ),
+)
+def test_other_contract_failures_return_incomplete_contract(mutate, message):
     result = census.run_census(_domain(mutate(_cell())))
 
     assert result.classification is census.CensusClassification.INCOMPLETE_CONTRACT
@@ -251,12 +270,22 @@ def test_contract_and_donor_failures_return_incomplete_contract(mutate, message)
 
 
 def test_continuation_digest_binds_cost_and_bytes_and_fallback_binding():
-    body = b"same continuation"
-    assert census.continuation_digest(body, 0.0) == census.continuation_digest(body, 0.0)
-    assert census.continuation_digest(body, 0.0) != census.continuation_digest(body, 1.0)
-    assert census.continuation_digest(body, 0.0) != census.continuation_digest(b"other", 0.0)
-
     cell = _cell()
+    item = cell.continuations[0]
+    values = [
+        item.execution_path, item.receipt_variant, item.delivery_channel,
+        item.envelope_id, item.envelope_bytes, item.body, item.external_cost,
+    ]
+    digest = census.continuation_digest(*values)
+    alternatives = [
+        "fallback", "RB", "other-channel", "other-envelope", b"FAKE", b"other", 1.0,
+    ]
+    assert digest == item.digest
+    for index, replacement in enumerate(alternatives):
+        changed = values.copy()
+        changed[index] = replacement
+        assert census.continuation_digest(*changed) != digest
+
     malformed = replace(cell, fallback_digest="f" * 64)
     result = census.run_census(_domain(malformed))
 

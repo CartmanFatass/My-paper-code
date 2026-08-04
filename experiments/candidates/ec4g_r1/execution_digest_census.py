@@ -16,16 +16,7 @@ import numpy as np
 
 
 ARMS = ("R0", "RV", "RB", "RS", "PV", "PB", "PS")
-GATES = (
-    "registered",
-    "positivity",
-    "executor",
-    "receipt",
-    "fold",
-    "clock",
-    "cost",
-    "fallback",
-)
+GATES = ("registered", "positivity", "executor", "receipt", "fold", "clock", "cost", "fallback")
 
 
 class CensusClassification(str, Enum):
@@ -70,10 +61,27 @@ class ReceiptContract:
     registered_donors: tuple[tuple[str, int], ...]
 
 
+_REGISTERED_RECEIPT = ReceiptContract(
+    schema_id="synthetic.receipt.v1", authorized=True,
+    executor_id="synthetic-executor", source_id="synthetic-source", source_version="v1",
+    latency_class="fixed-one-tick", byte_length_class="bytes:4",
+    timestamp_representation="integer-tick-v1", delivery_channel="synthetic-channel",
+    public_observability_id="public-envelope-v1", payload_support_id="four-byte-support-v1",
+    safe_action_mask_digest=hashlib.sha256(b"safe-actions").hexdigest(),
+    event_id="event-x0", trajectory_id="trajectory-x0", event_time=10,
+    visible_payload=b"GOOD", blinded_payload=b"\x00\x00\x00\x00",
+    shuffled_payload=b"SWAP", assignment_visible=False,
+    donor_event_id="event-donor", donor_trajectory_id="trajectory-donor", donor_time=5,
+    donor_source_id="registered-donor", donor_owner_epoch=3,
+    registered_donors=(("registered-donor", 3),),
+)
+
+
 @dataclass(frozen=True)
 class Continuation:
     action: Action
-    body: bytes
+    execution_path: str; receipt_variant: str; delivery_channel: str; envelope_id: str
+    envelope_bytes: bytes; body: bytes
     external_cost: float
     digest: str
 
@@ -138,7 +146,8 @@ class Contrasts:
 @dataclass(frozen=True)
 class Decision:
     action: Action
-    body: bytes
+    execution_path: str; receipt_variant: str; delivery_channel: str; envelope_id: str
+    envelope_bytes: bytes; body: bytes
     external_cost: float
     digest: str
 
@@ -161,11 +170,7 @@ class Comparison:
 
     @property
     def behavior_equal(self) -> bool:
-        return (
-            self.ec4g.body == self.direct_tau.body
-            and self.ec4g.external_cost == self.direct_tau.external_cost
-            and self.ec4g.digest == self.direct_tau.digest
-        )
+        return _behavior(self.ec4g) == _behavior(self.direct_tau)
 
 
 @dataclass(frozen=True)
@@ -185,14 +190,25 @@ class CensusResult:
         ).encode("utf-8")
 
 
-def continuation_digest(body: bytes, external_cost: float) -> str:
-    if not isinstance(body, bytes):
-        raise TypeError("continuation body must be bytes")
+def continuation_digest(
+    execution_path: str,
+    receipt_variant: str,
+    delivery_channel: str,
+    envelope_id: str,
+    envelope_bytes: bytes,
+    body: bytes,
+    external_cost: float,
+) -> str:
+    strings = (execution_path, receipt_variant, delivery_channel, envelope_id)
+    if any(not isinstance(value, str) or not value for value in strings):
+        raise ValueError("continuation identity fields must be nonempty strings")
+    if not isinstance(envelope_bytes, bytes) or not isinstance(body, bytes):
+        raise TypeError("continuation envelope and body must be bytes")
     cost = float(external_cost)
     if not math.isfinite(cost) or cost < 0.0:
         raise ValueError("continuation cost must be finite and nonnegative")
-    prefix = b"ec4g-r1-continuation-v1\x00" + format(cost, ".17g").encode("ascii")
-    return hashlib.sha256(prefix + b"\x00" + body).hexdigest()
+    payload = json.dumps([*strings, envelope_bytes.hex(), body.hex(), format(cost, ".17g")], ensure_ascii=True, separators=(",", ":")).encode("ascii")
+    return hashlib.sha256(b"ec4g-r1-continuation-v2\x00" + payload).hexdigest()
 
 
 def compute_contrasts(cell: Cell) -> Contrasts:
@@ -262,15 +278,6 @@ def run_census(frozen: FrozenCensus) -> CensusResult:
         issues = (f"contract validation failed: {type(exc).__name__}: {exc}",)
     if issues:
         return CensusResult(CensusClassification.INCOMPLETE_CONTRACT, issues=issues)
-    eligible_cells = tuple(
-        cell for cell in frozen.cells if cell.supported and cell.executor_measure > 0.0
-    )
-    if not eligible_cells:
-        return CensusResult(
-            CensusClassification.INCOMPLETE_CONTRACT,
-            issues=("finite domain has no supported positive-mass cell",),
-        )
-
     comparisons: list[Comparison] = []
     try:
         for cell in frozen.cells:
@@ -297,12 +304,9 @@ def run_census(frozen: FrozenCensus) -> CensusResult:
             issues=(f"gate execution failed: {type(exc).__name__}: {exc}",),
         )
 
-    eligible = tuple(
-        item for item in comparisons if item.supported and item.executor_measure > 0.0
-    )
-    if any(not item.behavior_equal for item in eligible):
+    if any(not item.behavior_equal for item in comparisons):
         result = CensusClassification.BEHAVIORAL_DISCORDANCE
-    elif any(not item.label_equal for item in eligible):
+    elif any(not item.label_equal for item in comparisons):
         result = CensusClassification.LABEL_ONLY_DIFFERENCE
     else:
         result = CensusClassification.EQUIVALENCE
@@ -312,37 +316,10 @@ def run_census(frozen: FrozenCensus) -> CensusResult:
 def build_synthetic_witness() -> FrozenCensus:
     """Return the exact fully-supported x0 witness from the execution brief."""
 
-    receipts = ReceiptContract(
-        schema_id="synthetic.receipt.v1",
-        authorized=True,
-        executor_id="synthetic-executor",
-        source_id="synthetic-source",
-        source_version="v1",
-        latency_class="fixed-one-tick",
-        byte_length_class="bytes:4",
-        timestamp_representation="integer-tick-v1",
-        delivery_channel="synthetic-channel",
-        public_observability_id="public-envelope-v1",
-        payload_support_id="four-byte-support-v1",
-        safe_action_mask_digest=hashlib.sha256(b"safe-actions").hexdigest(),
-        event_id="event-x0",
-        trajectory_id="trajectory-x0",
-        event_time=10,
-        visible_payload=b"GOOD",
-        blinded_payload=b"\x00\x00\x00\x00",
-        shuffled_payload=b"SWAP",
-        assignment_visible=False,
-        donor_event_id="event-donor",
-        donor_trajectory_id="trajectory-donor",
-        donor_time=5,
-        donor_source_id="registered-donor",
-        donor_owner_epoch=3,
-        registered_donors=(("registered-donor", 3),),
-    )
     continuations = (
-        _continuation(Action.PROBE, b"probe-once-then-frozen-continuation"),
-        _continuation(Action.NO_PROBE, b"no-probe-frozen-continuation"),
-        _continuation(Action.ABSTAIN, b"fallback-r0-frozen-continuation"),
+        _continuation(Action.PROBE, "probe", "RV", b"probe-once-then-frozen-continuation"),
+        _continuation(Action.NO_PROBE, "no-probe", "RB", b"no-probe-frozen-continuation"),
+        _continuation(Action.ABSTAIN, "fallback", "RS", b"fallback-r0-frozen-continuation"),
     )
     diagonal = (0.0003, 0.0001, 0.000125, 0.0003, 0.0, 0.0, 0.0)
     covariance = tuple(
@@ -357,7 +334,7 @@ def build_synthetic_witness() -> FrozenCensus:
         support_gates=tuple((name, True) for name in GATES),
         executor_measure=1.0,
         crossfit_id="synthetic-crossfit-v1",
-        receipts=receipts,
+        receipts=_REGISTERED_RECEIPT,
         fallback_policy="R0",
         fallback_interval=(0.0, 0.0),
         fallback_digest=continuations[2].digest,
@@ -400,15 +377,16 @@ def _validate_cell(cell: Cell) -> tuple[str, ...]:
         issues.append(f"{prefix} covariance must be symmetric")
     elif float(np.linalg.eigvalsh(covariance).min()) < -1e-12:
         issues.append(f"{prefix} covariance must be positive semidefinite")
-    if tuple(name for name, _ in cell.support_gates) != GATES or any(
-        type(value) is not bool for _, value in cell.support_gates
-    ):
+    gates_valid = tuple(name for name, _ in cell.support_gates) == GATES and all(
+        type(value) is bool for _, value in cell.support_gates
+    )
+    if not gates_valid:
         issues.append(f"{prefix} support gates must be the exact boolean conjunction")
+    elif not cell.supported:
+        issues.append(f"{prefix} expected row must be fully supported")
     measure = float(cell.executor_measure)
-    if not math.isfinite(measure) or measure < 0.0:
-        issues.append(f"{prefix} executor measure must be finite and nonnegative")
-    if cell.supported and measure <= 0.0:
-        issues.append(f"{prefix} supported cell must have positive executor measure")
+    if not math.isfinite(measure) or measure <= 0.0:
+        issues.append(f"{prefix} executor measure must be finite and strictly positive")
     if not cell.cell_id or not cell.crossfit_id or not cell.fallback_policy:
         issues.append(f"{prefix} identity/crossfit/fallback fields must be nonempty")
     if not math.isfinite(float(cell.kappa)) or cell.kappa < 0.0:
@@ -424,8 +402,23 @@ def _validate_cell(cell: Cell) -> tuple[str, ...]:
         issues.append(f"{prefix} must contain P/N/A continuations in exact order")
     else:
         for item in cell.continuations:
+            variants = {
+                "RV": cell.receipts.visible_payload,
+                "RB": cell.receipts.blinded_payload,
+                "RS": cell.receipts.shuffled_payload,
+            }
+            if item.execution_path not in {"probe", "no-probe", "fallback"}:
+                issues.append(f"{prefix} {item.action.value} execution path is invalid")
+            if item.receipt_variant not in variants:
+                issues.append(f"{prefix} {item.action.value} receipt variant is invalid")
+            elif item.envelope_bytes != variants[item.receipt_variant]:
+                issues.append(f"{prefix} {item.action.value} envelope bytes mismatch")
+            if item.delivery_channel != cell.receipts.delivery_channel:
+                issues.append(f"{prefix} {item.action.value} delivery channel mismatch")
+            if item.envelope_id != cell.receipts.public_observability_id:
+                issues.append(f"{prefix} {item.action.value} envelope identity mismatch")
             try:
-                expected = continuation_digest(item.body, item.external_cost)
+                expected = continuation_digest(*_behavior(item)[:-1])
             except Exception as exc:
                 issues.append(f"{prefix} invalid {item.action.value} continuation: {exc}")
             else:
@@ -439,58 +432,66 @@ def _validate_cell(cell: Cell) -> tuple[str, ...]:
 
 def _validate_receipts(item: ReceiptContract) -> tuple[str, ...]:
     issues: list[str] = []
-    strings = (
-        item.schema_id,
-        item.executor_id,
-        item.source_id,
-        item.source_version,
-        item.latency_class,
-        item.timestamp_representation,
-        item.delivery_channel,
-        item.public_observability_id,
-        item.payload_support_id,
-        item.event_id,
-        item.trajectory_id,
-        item.donor_event_id,
-        item.donor_trajectory_id,
-        item.donor_source_id,
+    groups = (
+        ("schema/executor/source/version", (
+            "schema_id", "authorized", "executor_id", "source_id", "source_version",
+        )),
+        ("latency/timestamp/delivery channel", (
+            "latency_class", "timestamp_representation", "delivery_channel",
+        )),
+        ("payload support/byte-length/safe-action mask", (
+            "payload_support_id", "byte_length_class", "safe_action_mask_digest",
+        )),
+        ("public envelope identity", ("public_observability_id",)),
+        ("exact RV/RB/RS payloads", (
+            "visible_payload", "blinded_payload", "shuffled_payload",
+        )),
+        ("exact event/donor relation", (
+            "event_id", "trajectory_id", "event_time", "assignment_visible",
+            "donor_event_id", "donor_trajectory_id", "donor_time",
+            "donor_source_id", "donor_owner_epoch", "registered_donors",
+        )),
     )
-    if any(not value for value in strings):
-        issues.append("receipt schema/provenance/envelope fields must be nonempty")
-    if item.authorized is not True:
-        issues.append("receipt domain is not authorized")
-    payloads = (item.visible_payload, item.blinded_payload, item.shuffled_payload)
-    if any(not isinstance(value, bytes) for value in payloads):
-        issues.append("visible/blinded/shuffled payloads must be bytes")
-    elif len({len(value) for value in payloads}) != 1:
-        issues.append("payload interventions must preserve byte length")
-    else:
-        if item.byte_length_class != f"bytes:{len(payloads[0])}":
-            issues.append("payload byte-length class mismatch")
-        if item.visible_payload in (item.blinded_payload, item.shuffled_payload):
-            issues.append("blinded/deranged payload must change visible bytes")
-    if item.assignment_visible is not False:
-        issues.append("V/B/S assignment must be hidden")
-    if item.donor_event_id == item.event_id:
-        issues.append("shuffle donor is from the same event")
-    if item.donor_trajectory_id == item.trajectory_id:
-        issues.append("shuffle donor is from the same trajectory")
-    if item.donor_time >= item.event_time:
-        issues.append("shuffle donor is not strictly pre-outcome")
-    if (item.donor_source_id, item.donor_owner_epoch) not in set(item.registered_donors):
-        issues.append("shuffle donor source/owner epoch is unregistered")
-    if not _is_sha256(item.safe_action_mask_digest):
-        issues.append("safe-action-mask compatibility digest is invalid")
+    for label, fields in groups:
+        if any(getattr(item, name) != getattr(_REGISTERED_RECEIPT, name) for name in fields):
+            issues.append(f"receipt does not match registered {label}")
+    if item.blinded_payload == item.shuffled_payload:
+        issues.append("receipt blinded and shuffled variants must differ")
+    try:
+        donor_time_is_finite = math.isfinite(float(item.donor_time))
+    except (TypeError, ValueError):
+        donor_time_is_finite = False
+    if not donor_time_is_finite:
+        issues.append("receipt donor time must be finite")
     return tuple(issues)
 
 
-def _continuation(action: Action, body: bytes, cost: float = 0.0) -> Continuation:
-    return Continuation(action, body, cost, continuation_digest(body, cost))
+def _behavior(item: Continuation | Decision) -> tuple[object, ...]:
+    return (
+        item.execution_path, item.receipt_variant, item.delivery_channel,
+        item.envelope_id, item.envelope_bytes, item.body, item.external_cost, item.digest,
+    )
+
+
+def _continuation(
+    action: Action, execution_path: str, receipt_variant: str, body: bytes, cost: float = 0.0
+) -> Continuation:
+    payloads = {
+        "RV": _REGISTERED_RECEIPT.visible_payload,
+        "RB": _REGISTERED_RECEIPT.blinded_payload,
+        "RS": _REGISTERED_RECEIPT.shuffled_payload,
+    }
+    values = (
+        execution_path, receipt_variant, _REGISTERED_RECEIPT.delivery_channel,
+        _REGISTERED_RECEIPT.public_observability_id, payloads[receipt_variant], body,
+        float(cost),
+    )
+    return Continuation(action, *values, continuation_digest(*values))
 
 
 def _decision(cell: Cell, action: Action) -> Decision:
     item = cell.continuation(action)
-    return Decision(action, item.body, float(item.external_cost), item.digest)
+    return Decision(action, *_behavior(item))
 
 
 def _action_interval(
@@ -557,21 +558,17 @@ def _comparison_payload(item: Comparison) -> dict[str, object]:
 def _decision_payload(item: Decision) -> dict[str, object]:
     return {
         "action": item.action.value,
+        "body_hex": item.body.hex(),
         "continuation_digest": item.digest,
+        "delivery_channel": item.delivery_channel,
+        "envelope_bytes_hex": item.envelope_bytes.hex(),
+        "envelope_id": item.envelope_id,
+        "execution_path": item.execution_path,
         "external_cost": _clean(item.external_cost),
+        "receipt_variant": item.receipt_variant,
     }
 
 
 def _clean(value: float) -> float:
     value = round(float(value), 12)
     return 0.0 if value == 0.0 else value
-
-
-def _is_sha256(value: object) -> bool:
-    if not isinstance(value, str) or len(value) != 64:
-        return False
-    try:
-        int(value, 16)
-    except ValueError:
-        return False
-    return True
