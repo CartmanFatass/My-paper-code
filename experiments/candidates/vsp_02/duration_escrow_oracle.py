@@ -6,58 +6,69 @@ from dataclasses import dataclass, fields
 from enum import Enum
 from fractions import Fraction
 from itertools import product
-from typing import Iterable
+from types import MappingProxyType
+from typing import Callable, Iterable, Mapping
 
 
-GAMMA, CURRENT_VERSION, HORIZON = Fraction(1, 2), 9, 2
-PRIMITIVE_TAPE, PARTNER_TAPE = ("hold", "advance"), ("silent", "ack")
+GAMMA, CURRENT_VERSION, HORIZON = Fraction(1, 2), 9, 2; PRIMITIVE_TAPE, PARTNER_TAPE = ("hold", "advance"), ("silent", "ack")
 
 
 class State(str, Enum):
-    VACANT = "VACANT"
-    OPEN_ACTIVE = "OPEN_ACTIVE"
-    OPEN_NATURAL = "OPEN_NATURAL"
-    OPEN_INTERRUPTED = "OPEN_INTERRUPTED"
-    TERMINAL_READY = "TERMINAL_READY"
-    HORIZON_READY = "HORIZON_READY"
-    RELEASED = "RELEASED"
-    INVALID = "INVALID"
+    VACANT = "VACANT"; OPEN_ACTIVE = "OPEN_ACTIVE"; OPEN_NATURAL = "OPEN_NATURAL"
+    OPEN_INTERRUPTED = "OPEN_INTERRUPTED"; TERMINAL_READY = "TERMINAL_READY"
+    HORIZON_READY = "HORIZON_READY"; RELEASED = "RELEASED"; INVALID = "INVALID"
 
 
 class Event(str, Enum):
-    CLAIM = "CLAIM"
-    NATURAL = "NATURAL"
-    INTERRUPT_NATURAL = "INTERRUPT_NATURAL"
-    HORIZON = "HORIZON"
-    TERMINAL_HORIZON = "TERMINAL_HORIZON"
-    RELEASE = "RELEASE"
-    STALE_VERSION = "STALE_VERSION"
-    ILLEGAL = "ILLEGAL"
+    CLAIM = "CLAIM"; NATURAL = "NATURAL"; INTERRUPT_NATURAL = "INTERRUPT_NATURAL"
+    HORIZON = "HORIZON"; TERMINAL_HORIZON = "TERMINAL_HORIZON"; RELEASE = "RELEASE"
+    STALE_VERSION = "STALE_VERSION"; ILLEGAL = "ILLEGAL"
 
 
 class World(str, Enum):
-    POSITIVE = "W+"
-    ZERO = "W0"
+    POSITIVE = "W+"; ZERO = "W0"
 
 
 class Context(str, Enum):
-    F = "F"
-    P = "P"
+    F = "F"; P = "P"
 
 
 class Action(str, Enum):
-    SHORT = "SHORT"
-    LONG = "LONG"
+    SHORT = "SHORT"; LONG = "LONG"
 
 
 class CloseMode(str, Enum):
-    NATURAL = "NATURAL"
-    SIMULTANEOUS_INTERRUPT_NATURAL = "SIMULTANEOUS_INTERRUPT_NATURAL"
+    NATURAL = "NATURAL"; SIMULTANEOUS_INTERRUPT_NATURAL = "SIMULTANEOUS_INTERRUPT_NATURAL"
 
 
 class Cutoff(str, Enum):
-    HORIZON = "HORIZON"
-    SIMULTANEOUS_TERMINAL_HORIZON = "SIMULTANEOUS_TERMINAL_HORIZON"
+    HORIZON = "HORIZON"; SIMULTANEOUS_TERMINAL_HORIZON = "SIMULTANEOUS_TERMINAL_HORIZON"
+
+
+@dataclass(frozen=True)
+class FutureBranch:
+    world: World; close_mode: CloseMode; cutoff: Cutoff
+    owner_departure: bool; weight: Fraction
+
+    def key(self) -> tuple[World, CloseMode, Cutoff, bool]:
+        return self.world, self.close_mode, self.cutoff, self.owner_departure
+
+
+CANDIDATE_Z0_FIELDS = COMPARATOR_Z0_FIELDS = ("context",)
+CANDIDATE_Z0_EXCLUDED_FIELDS = COMPARATOR_Z0_EXCLUDED_FIELDS = (
+    "world", "close_mode", "cutoff", "owner_departure", "action", "selector_tape",
+)
+BRANCH_FIELDS = ("world", "close_mode", "cutoff", "owner_departure")
+SELECTOR_TAPE = tuple(Fraction(index, 8) for index in range(8))
+COMPARATOR_PROBABILITIES: Mapping[Context, Fraction] = MappingProxyType({
+    Context.F: Fraction(1, 4), Context.P: Fraction(3, 4),
+})
+BRANCH_LAW = tuple(
+    FutureBranch(world, close, cutoff, departure, Fraction(1, 16))
+    for world, close, cutoff, departure in product(
+        World, CloseMode, Cutoff, (False, True)
+    )
+)
 
 
 EXPECTED_DELTAS = {
@@ -82,104 +93,60 @@ _LEGAL_TRANSITIONS = {
 
 
 def transition(state: State, event: Event) -> State:
-    if state is State.INVALID:
-        return State.INVALID
+    if state is State.INVALID: return State.INVALID
     return _LEGAL_TRANSITIONS.get((state, event), State.INVALID)
 
 
 def resolve_close(*, natural: bool, interrupt: bool) -> Event:
-    if interrupt:
-        return Event.INTERRUPT_NATURAL
-    if natural:
-        return Event.NATURAL
+    if interrupt: return Event.INTERRUPT_NATURAL
+    if natural: return Event.NATURAL
     raise ValueError("ambiguous close: neither natural nor interrupt")
 
 
 def resolve_cutoff(*, horizon: bool, terminal: bool) -> Event:
-    if terminal:
-        return Event.TERMINAL_HORIZON
-    if horizon:
-        return Event.HORIZON
+    if terminal: return Event.TERMINAL_HORIZON
+    if horizon: return Event.HORIZON
     raise ValueError("ambiguous cutoff: neither horizon nor terminal")
 
 
 @dataclass(frozen=True)
 class DecisionIdentity:
-    episode_id: str
-    source_owner_epoch: int
-    own_boundary_index: int
-    behavior_version: int
+    episode_id: str; source_owner_epoch: int; own_boundary_index: int; behavior_version: int
 
 
 @dataclass(frozen=True)
 class CaseSpec:
-    world: World
-    context: Context
-    action: Action
-    close_mode: CloseMode
-    cutoff: Cutoff
-    owner_departure: bool
-    behavior_version: int
-    base_index: int
+    world: World; context: Context; action: Action; close_mode: CloseMode
+    cutoff: Cutoff; owner_departure: bool; behavior_version: int; base_index: int
 
 
 @dataclass(frozen=True)
 class PhysicalTrace:
-    tau: int
-    horizon: int
-    terminal_time: int
-    rewards: tuple[Fraction, ...]
-    vbar: Fraction
-    close_outcome: str
-    cutoff_outcome: str
-    final_owner_epoch: int
-    primitive_tape: tuple[str, ...]
-    partner_tape: tuple[str, ...]
+    tau: int; horizon: int; terminal_time: int; rewards: tuple[Fraction, ...]
+    vbar: Fraction; close_outcome: str; cutoff_outcome: str; final_owner_epoch: int
+    primitive_tape: tuple[str, ...]; partner_tape: tuple[str, ...]
     timing: tuple[int, int, int, int]
 
 
 @dataclass(frozen=True)
 class EventRecord:
-    event_id: str
-    identity: DecisionIdentity
-    slot_index: int
-    event: Event
-    before: State
-    after: State
-    policy_clock: int
-    environment_clock: int
+    event_id: str; identity: DecisionIdentity; slot_index: int; event: Event
+    before: State; after: State; policy_clock: int; environment_clock: int
 
 
 @dataclass(frozen=True)
 class ScoreRecord:
-    identity: DecisionIdentity
-    target: Fraction
-    score: Fraction
-    action: Action
+    identity: DecisionIdentity; target: Fraction; score: Fraction; action: Action
 
 
 @dataclass(frozen=True)
 class TombstoneRecord:
-    identity: DecisionIdentity
-    final_state: State
-    target: Fraction | None
-    reason: str
+    identity: DecisionIdentity; final_state: State; target: Fraction | None; reason: str
 
 
 @dataclass(frozen=True)
 class ReleaseRecord:
-    identity: DecisionIdentity
-    target: Fraction
-    release_clock: int
-
-
-@dataclass(frozen=True)
-class VersionRecord:
-    behavior_version: int
-    record_count: int
-    released_count: int
-    invalid_count: int
-    can_advance: bool
+    identity: DecisionIdentity; target: Fraction; release_clock: int
 
 
 @dataclass(frozen=True)
@@ -189,35 +156,36 @@ class PolicyParameter:
 
 @dataclass(frozen=True)
 class FrozenBootstrap:
-    name: str
-    value: Fraction
-    trainable: bool = False
+    name: str; value: Fraction; trainable: bool = False
 
 
 @dataclass(frozen=True)
 class CaseResult:
-    spec: CaseSpec
-    identity: DecisionIdentity
-    slot_index: int
-    valid: bool
-    final_state: State
-    physical: PhysicalTrace | None
-    target: Fraction | None
-    target_recomputed: Fraction | None
-    events: tuple[EventRecord, ...]
-    scores: tuple[ScoreRecord, ...]
-    tombstones: tuple[TombstoneRecord, ...]
+    spec: CaseSpec; identity: DecisionIdentity; slot_index: int; valid: bool
+    final_state: State; physical: PhysicalTrace | None; target: Fraction | None
+    target_recomputed: Fraction | None; events: tuple[EventRecord, ...]
+    scores: tuple[ScoreRecord, ...]; tombstones: tuple[TombstoneRecord, ...]
     releases: tuple[ReleaseRecord, ...]
 
 
 @dataclass(frozen=True)
 class OracleAudit:
-    cases: tuple[CaseResult, ...]
-    report: dict[str, object]
+    cases: tuple[CaseResult, ...]; report: dict[str, object]
 
 
 def _probability(context: Context) -> Fraction:
     return Fraction(1, 4) if context is Context.F else Fraction(3, 4)
+
+
+def candidate_selector(context: Context, tape: Fraction) -> Action:
+    return Action.LONG if tape < _probability(context) else Action.SHORT
+
+
+def comparator_selector(
+    context: Context, tape: Fraction,
+    probabilities: Mapping[Context, Fraction] = COMPARATOR_PROBABILITIES,
+) -> Action:
+    return Action.LONG if tape < probabilities[context] else Action.SHORT
 
 
 def _occupancy(context: Context) -> Fraction:
@@ -287,22 +255,6 @@ def validate_parameter_separation(policy: object, bootstrap: object) -> None:
         raise ValueError("shared policy/bootstrap parameter")
     if getattr(bootstrap, "trainable", True):
         raise ValueError("Vbar must be frozen/stop-gradient")
-
-
-class EscrowRegistry:
-    def __init__(self) -> None:
-        self._slots: dict[DecisionIdentity, int] = {}
-        self._released: set[DecisionIdentity] = set()
-
-    def claim(self, identity: DecisionIdentity, slot_index: int) -> None:
-        if identity in self._slots:
-            raise ValueError("decision identity already claimed; slot cannot alias")
-        self._slots[identity] = slot_index
-
-    def release(self, identity: DecisionIdentity) -> None:
-        if identity not in self._slots or identity in self._released:
-            raise ValueError("missing or duplicate release")
-        self._released.add(identity)
 
 
 def _append_event(
@@ -412,42 +364,125 @@ def all_specs() -> tuple[CaseSpec, ...]:
     return tuple(specs)
 
 
-def _predecision_key(spec: CaseSpec) -> tuple[str, str, str, str, bool]:
+def _physical_key(spec: CaseSpec) -> tuple[str, str, str, str, bool]:
     return (
         spec.world.value, spec.context.value, spec.close_mode.value,
         spec.cutoff.value, spec.owner_departure,
     )
 
 
-def _candidate_mapping(cases: Iterable[CaseResult]) -> dict[tuple[object, ...], Fraction]:
+def candidate_integrated_values(
+    cases: Iterable[CaseResult], law: tuple[FutureBranch, ...] = BRANCH_LAW,
+) -> dict[tuple[Context, Action], Fraction]:
+    weights = {branch.key(): branch.weight for branch in law}
+    grouped: dict[tuple[Context, Action], dict[tuple[World, CloseMode, Cutoff, bool], Fraction]] = {}
+    for case in cases:
+        if not case.valid or case.target is None:
+            continue
+        key = (case.spec.context, case.spec.action)
+        branch = (case.spec.world, case.spec.close_mode, case.spec.cutoff, case.spec.owner_departure)
+        if branch in grouped.setdefault(key, {}): raise ValueError("duplicate future branch in candidate group")
+        grouped[key][branch] = case.target
+    if set(grouped) != set(product(Context, Action)): raise ValueError("candidate Z0/action domain mismatch")
+    if any(set(realized) != set(weights) for realized in grouped.values()): raise ValueError("candidate future branch support mismatch")
     return {
-        _predecision_key(case.spec) + (case.spec.action.value,): case.target
-        for case in cases if case.valid and case.target is not None
+        key: sum(weights[branch] * target for branch, target in realized.items())
+        for key, realized in grouped.items()
     }
 
 
-def horizon_flush_tabular_duration_null() -> dict[tuple[object, ...], Fraction]:
-    mapping: dict[tuple[object, ...], Fraction] = {}
-    for world, context, close, cutoff, departure, action in product(
-        World, Context, CloseMode, Cutoff, (False, True), Action
-    ):
-        value = Fraction(1 if context is Context.F else 2)
-        value += Fraction(1, 16) if close is CloseMode.SIMULTANEOUS_INTERRUPT_NATURAL else 0
-        value += Fraction(1, 8) if cutoff is Cutoff.SIMULTANEOUS_TERMINAL_HORIZON else 0
-        value += Fraction(1, 32) if departure else 0
-        if world is World.POSITIVE and action is Action.LONG:
-            value += -GAMMA / 2 if context is Context.F else GAMMA / 4
-        key = (world.value, context.value, close.value, cutoff.value, departure, action.value)
-        mapping[key] = value
-    return mapping
+def comparator_integrated_values(
+    law: tuple[FutureBranch, ...] = BRANCH_LAW,
+) -> dict[tuple[Context, Action], Fraction]:
+    values: dict[tuple[Context, Action], Fraction] = {}
+    for context, action in product(Context, Action):
+        values[(context, action)] = sum(branch.weight * absolute_target(physical_kernel(
+            CaseSpec(branch.world, context, action, branch.close_mode, branch.cutoff,
+                     branch.owner_departure, CURRENT_VERSION, 0))) for branch in law)
+    return values
 
 
-def _version_record(cases: tuple[CaseResult, ...], version: int) -> VersionRecord:
-    selected = tuple(case for case in cases if case.spec.behavior_version == version)
-    released = sum(len(case.releases) for case in selected)
-    invalid = sum(case.final_state is State.INVALID for case in selected)
-    can_advance = bool(selected) and released == len(selected) and invalid == 0
-    return VersionRecord(version, len(selected), released, invalid, can_advance)
+def registered_z0_conformance(
+    cases: Iterable[CaseResult], law: tuple[FutureBranch, ...] = BRANCH_LAW,
+    probabilities: Mapping[Context, Fraction] = COMPARATOR_PROBABILITIES,
+    candidate_select: Callable[[Context, Fraction], Action] = candidate_selector,
+    comparator_select: Callable[[Context, Fraction], Action] = comparator_selector,
+) -> dict[str, object]:
+    signatures = tuple(branch.key() for branch in law)
+    law_frozen = (
+        isinstance(law, tuple) and len(law) == 16 and len(set(signatures)) == 16
+        and all(isinstance(branch, FutureBranch) and isinstance(branch.weight, Fraction)
+                and branch.weight == Fraction(1, 16) for branch in law)
+        and sum((branch.weight for branch in law), Fraction(0)) == 1
+        and tuple(field.name for field in fields(FutureBranch)) == BRANCH_FIELDS + ("weight",)
+    )
+    candidate_choices = {(context, tape): candidate_select(context, tape)
+                         for context, tape in product(Context, SELECTOR_TAPE)}
+    comparator_choices = {(context, tape): comparator_select(context, tape, probabilities)
+                          for context, tape in product(Context, SELECTOR_TAPE)}
+    candidate_values = candidate_integrated_values(cases, law)
+    comparator_values = comparator_integrated_values(law)
+    expected_selector_domain = set(product(Context, SELECTOR_TAPE))
+    expected_value_domain = set(product(Context, Action))
+    candidate_selector_domain_exact = set(candidate_choices) == expected_selector_domain
+    comparator_selector_domain_exact = set(comparator_choices) == expected_selector_domain
+    candidate_value_domain_exact = set(candidate_values) == expected_value_domain
+    comparator_value_domain_exact = set(comparator_values) == expected_value_domain
+    selector_nested = set(candidate_choices).issubset(comparator_choices)
+    selector_equal_keys = set(candidate_choices) == set(comparator_choices)
+    value_nested = set(candidate_values).issubset(comparator_values)
+    value_equal_keys = set(candidate_values) == set(comparator_values)
+    branch_only_in_law = (all(set(BRANCH_FIELDS).issubset(fields_) for fields_ in (CANDIDATE_Z0_EXCLUDED_FIELDS, COMPARATOR_Z0_EXCLUDED_FIELDS))
+                          and all(set(BRANCH_FIELDS).isdisjoint(fields_) for fields_ in (CANDIDATE_Z0_FIELDS, COMPARATOR_Z0_FIELDS)))
+    same_information = (
+        CANDIDATE_Z0_FIELDS == COMPARATOR_Z0_FIELDS == ("context",)
+        and CANDIDATE_Z0_EXCLUDED_FIELDS == COMPARATOR_Z0_EXCLUDED_FIELDS == ("world", "close_mode", "cutoff", "owner_departure", "action", "selector_tape")
+        and candidate_selector_domain_exact and comparator_selector_domain_exact
+        and candidate_value_domain_exact and comparator_value_domain_exact
+        and branch_only_in_law
+    )
+    probability_table_registered = dict(probabilities) == {Context.F: Fraction(1, 4), Context.P: Fraction(3, 4)}
+    selector_exact = candidate_choices == comparator_choices
+    value_exact = candidate_values == comparator_values
+    terminal_gate = all((
+        same_information, probability_table_registered, law_frozen,
+        candidate_selector_domain_exact, comparator_selector_domain_exact,
+        candidate_value_domain_exact, comparator_value_domain_exact,
+        selector_nested, selector_equal_keys, selector_exact,
+        value_nested, value_equal_keys, value_exact,
+    ))
+    return {
+        "name": "REGISTERED_Z0_FINITE_COMPARATOR", "same_information": same_information,
+        "candidate_z0_fields": list(CANDIDATE_Z0_FIELDS), "comparator_z0_fields": list(COMPARATOR_Z0_FIELDS),
+        "candidate_z0_excluded_fields": list(CANDIDATE_Z0_EXCLUDED_FIELDS), "comparator_z0_excluded_fields": list(COMPARATOR_Z0_EXCLUDED_FIELDS),
+        "branch_variables_marginalized_only": branch_only_in_law,
+        "branch_law": {
+            "fields": list(BRANCH_FIELDS), "branches_per_z0_action": len(law),
+            "uniform_weight": _q(Fraction(1, 16)), "normalized_full_support": law_frozen,
+        },
+        "probabilities": {context.value: _q(probabilities[context]) for context in Context},
+        "selector": {
+            "tape_cells": len(SELECTOR_TAPE), "threshold": "LONG iff tape < p",
+            "candidate_entries": len(candidate_choices), "comparator_entries": len(comparator_choices),
+            "candidate_domain_exact": candidate_selector_domain_exact,
+            "comparator_domain_exact": comparator_selector_domain_exact,
+            "candidate_nested": selector_nested, "equal_keys": selector_equal_keys,
+            "exact_reproduction": selector_exact,
+        },
+        "values": {
+            "key_fields": ["context", "action"], "candidate_entries": len(candidate_values),
+            "comparator_entries": len(comparator_values),
+            "candidate_domain_exact": candidate_value_domain_exact,
+            "comparator_domain_exact": comparator_value_domain_exact,
+            "candidate_nested": value_nested, "equal_keys": value_equal_keys,
+            "exact_reproduction": value_exact,
+            "candidate": {f"{context.value}|{action.value}": _q(candidate_values[(context, action)])
+                          for context, action in product(Context, Action)},
+            "comparator": {f"{context.value}|{action.value}": _q(comparator_values[(context, action)])
+                           for context, action in product(Context, Action)},
+        },
+        "terminal_gate": terminal_gate,
+    }
 
 
 def _q(value: Fraction) -> str:
@@ -461,18 +496,13 @@ def run_oracle() -> OracleAudit:
         verify_case(case)
     valid = tuple(case for case in cases if case.valid)
     stale = tuple(case for case in cases if not case.valid)
-    candidate = _candidate_mapping(valid)
-    null = horizon_flush_tabular_duration_null()
-    raw_scores: dict[tuple[World, Context], set[Fraction]] = {
-        (world, context): set() for world in World for context in Context
-    }
+    comparator = registered_z0_conformance(valid)
+    raw_scores = {(world, context): set() for world in World for context in Context}
     raw_settings: Counter[tuple[World, Context]] = Counter()
     raw_matches, w0_matches = [], []
-    deltas: dict[tuple[World, Context], set[Fraction]] = {
-        (world, context): set() for world in World for context in Context
-    }
-    for key in sorted({_predecision_key(case.spec) for case in valid}):
-        pair = [case for case in valid if _predecision_key(case.spec) == key]
+    deltas = {(world, context): set() for world in World for context in Context}
+    for key in sorted({_physical_key(case.spec) for case in valid}):
+        pair = [case for case in valid if _physical_key(case.spec) == key]
         short = next(case for case in pair if case.spec.action is Action.SHORT)
         long = next(case for case in pair if case.spec.action is Action.LONG)
         context = short.spec.context
@@ -485,15 +515,10 @@ def run_oracle() -> OracleAudit:
         raw_scores[(short.spec.world, context)].add(raw)
         raw_settings[(short.spec.world, context)] += 1
         deltas[(short.spec.world, context)].add(delta)
-        if short.spec.world is World.ZERO:
-            w0_matches.append(short.physical == long.physical)
-    exact_deltas = {
-        (world, context): next(iter(values))
-        for (world, context), values in deltas.items() if len(values) == 1
-    }
+        if short.spec.world is World.ZERO: w0_matches.append(short.physical == long.physical)
+    exact_deltas = {(world, context): next(iter(values))
+                    for (world, context), values in deltas.items() if len(values) == 1}
     psi = exact_deltas[(World.POSITIVE, Context.P)] - exact_deltas[(World.POSITIVE, Context.F)]
-    current = _version_record(cases, CURRENT_VERSION)
-    stale_version = _version_record(cases, CURRENT_VERSION - 1)
     identity_fields = tuple(field.name for field in fields(DecisionIdentity))
     invariants = {
         "absolute_target_conserved_before_gradient": all(c.target == c.target_recomputed == absolute_target(c.physical) for c in valid),
@@ -504,19 +529,17 @@ def run_oracle() -> OracleAudit:
         "separate_policy_environment_clocks": all(e.policy_clock == c.spec.base_index and e.environment_clock in c.physical.timing for c in valid for e in c.events),
         "slot_excluded_from_identity": identity_fields == ("episode_id", "source_owner_epoch", "own_boundary_index", "behavior_version"),
         "owner_departure_identity_escrow": all(c.identity.source_owner_epoch == 7 and c.physical.final_owner_epoch == (8 if c.spec.owner_departure else 7) for c in valid),
-        "valid_score_release_tombstone_exactly_once": all(len(c.scores) == len(c.releases) == len(c.tombstones) == 1 and len(c.events) == 4 for c in valid),
+        "one_score_release_tombstone_per_realization": all(len(c.scores) == len(c.releases) == len(c.tombstones) == 1 and len(c.events) == 4 for c in valid),
         "stale_has_no_score_or_release": all(c.final_state is State.INVALID and len(c.events) == len(c.tombstones) == 1 and not c.scores and not c.releases for c in stale),
         "raw_expected_score_matches_analytic": all(raw_matches),
         "frozen_deltas_exact": exact_deltas == EXPECTED_DELTAS and psi == 3 * GAMMA / 4,
         "w0_paired_physical_equality_zero_gradient": all(w0_matches) and exact_deltas[(World.ZERO, Context.F)] == exact_deltas[(World.ZERO, Context.P)] == 0,
-        "tabular_null_exact_reproduction": candidate == null and set(candidate).issubset(null),
+        "registered_z0_selector_value_conformance": bool(comparator["terminal_gate"]),
     }
     if not all(invariants.values()):
         raise ValueError("aggregate invariant failure: " + ",".join(key for key, value in invariants.items() if not value))
-    schemas = {
-        cls.__name__: [field.name for field in fields(cls)]
-        for cls in (DecisionIdentity, EventRecord, TombstoneRecord, ReleaseRecord, VersionRecord)
-    }
+    schemas = {cls.__name__: [field.name for field in fields(cls)]
+               for cls in (DecisionIdentity, EventRecord, TombstoneRecord, ReleaseRecord)}
     report: dict[str, object] = {
         "candidate": "CAND-VSP-02@adversarial-revision-v8",
         "coverage": {
@@ -525,13 +548,10 @@ def run_oracle() -> OracleAudit:
             "axes": ["world", "context", "action", "close", "cutoff", "owner_departure", "version"],
             "shape": [2, 2, 2, 2, 2, 2, 2],
         },
-        "deltas": {
-            "W+|F": _q(exact_deltas[(World.POSITIVE, Context.F)]),
-            "W+|P": _q(exact_deltas[(World.POSITIVE, Context.P)]),
-            "W0|F": _q(exact_deltas[(World.ZERO, Context.F)]),
-            "W0|P": _q(exact_deltas[(World.ZERO, Context.P)]),
-            "psi": _q(psi),
-        },
+        "deltas": {"W+|F": _q(exact_deltas[(World.POSITIVE, Context.F)]),
+                   "W+|P": _q(exact_deltas[(World.POSITIVE, Context.P)]),
+                   "W0|F": _q(exact_deltas[(World.ZERO, Context.F)]),
+                   "W0|P": _q(exact_deltas[(World.ZERO, Context.P)]), "psi": _q(psi)},
         "invariants": invariants,
         "timing_tensor": {
             "axes": ["world", "context", "action", "close", "cutoff", "owner_departure"],
@@ -539,28 +559,21 @@ def run_oracle() -> OracleAudit:
             "tau_values": sorted({case.physical.tau for case in valid if case.physical}),
             "frozen": invariants["frozen_stop_gradient_vbar"],
         },
-        "null": {
-            "name": "HORIZON_FLUSH_TABULAR_DURATION_NULL",
-            "same_information": True, "full_horizon": True,
-            "finite_predecision_keys": len(null) // 2,
-            "action_entries": len(null), "candidate_entries": len(candidate),
-            "candidate_nested": set(candidate).issubset(null),
-            "exact_reproduction": candidate == null,
-        },
+        "comparator": comparator,
         "raw_expected_scores": {
             f"{world.value}|{context.value}": {
-                "value": _q(next(iter(raw_scores[(world, context)]))),
-                "settings": raw_settings[(world, context)],
-            }
+                "value": _q(next(iter(raw_scores[(world, context)]))), "settings": raw_settings[(world, context)]}
             for world in World for context in Context
             if len(raw_scores[(world, context)]) == 1
         },
         "schemas": schemas,
-        "versions": {
-            "current": current.__dict__, "stale": stale_version.__dict__,
+        "bookkeeping": {
+            "scope": "PER_REALIZATION_RECORD_SHAPE_ONLY",
+            "valid_record_counts": {"events": 4, "scores": 1, "releases": 1, "tombstones": 1},
+            "stale_record_counts": {"events": 1, "scores": 0, "releases": 0, "tombstones": 1},
         },
-        "terminal": "ADAPTIVE_DURATION_RETIRED",
-        "disposition": "BOOKKEEPING_TRANSPORT_CONFORMANCE_ONLY",
+        "terminal": "REGISTERED_Z0_SELECTOR_VALUE_CONFORMANCE",
+        "disposition": "NO_INCREMENT_OVER_REGISTERED_Z0_COMPARATOR",
     }
     return OracleAudit(cases, report)
 

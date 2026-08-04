@@ -254,33 +254,29 @@ def test_target_score_release_tombstone_and_terminal_bootstrap_mutations(audit):
         oracle.absolute_target(terminal.physical, bootstrap_on_terminal=True)
 
 
-def test_stale_version_parameter_separation_and_slot_alias(audit):
+def test_stale_version_parameter_separation_and_record_shape(audit):
     stale = next(case for case in audit.cases if not case.valid)
     oracle.verify_case(stale)
     with pytest.raises(ValueError, match="case record"):
         oracle.verify_case(replace(stale, spec=replace(stale.spec, behavior_version=oracle.CURRENT_VERSION)))
-    assert audit.report["versions"] == {
-        "current": {
-            "behavior_version": 9, "record_count": 64, "released_count": 64,
-            "invalid_count": 0, "can_advance": True,
-        },
-        "stale": {
-            "behavior_version": 8, "record_count": 64, "released_count": 0,
-            "invalid_count": 64, "can_advance": False,
-        },
-    }
     shared = oracle.PolicyParameter("shared")
     with pytest.raises(ValueError, match="shared policy/bootstrap"):
         oracle.validate_parameter_separation(shared, shared)
     with pytest.raises(ValueError, match="frozen"):
         oracle.validate_parameter_separation(shared, oracle.PolicyParameter("trainable_v"))
-    registry = oracle.EscrowRegistry()
-    registry.claim(stale.identity, 0)
-    with pytest.raises(ValueError, match="slot cannot alias"):
-        registry.claim(stale.identity, 99)
-    registry.release(stale.identity)
-    with pytest.raises(ValueError, match="duplicate release"):
-        registry.release(stale.identity)
+    assert audit.report["bookkeeping"] == {
+        "scope": "PER_REALIZATION_RECORD_SHAPE_ONLY",
+        "valid_record_counts": {"events": 4, "scores": 1, "releases": 1, "tombstones": 1},
+        "stale_record_counts": {"events": 1, "scores": 0, "releases": 0, "tombstones": 1},
+    }
+    corpus = "".join(path.read_text(encoding="utf-8") for path in (
+        SOURCE, Path(__file__), INDEX,
+    ))
+    retired = (
+        "Version" + "Record", "_version" + "_record", '"ver' + 'sions"',
+        "can_" + "advance", "exactly_" + "once", "version_" + "barrier",
+    )
+    assert all(token not in corpus for token in retired)
 
 
 @pytest.mark.parametrize(
@@ -430,27 +426,130 @@ def test_verify_rejects_stale_record_semantic_mutations(audit, mutation):
         oracle.verify_case(bad)
 
 
-def test_strongest_null_exactly_nests_and_reproduces_mapping(audit):
-    null = oracle.horizon_flush_tabular_duration_null()
-    candidate = {
-        (
-            case.spec.world.value, case.spec.context.value, case.spec.close_mode.value,
-            case.spec.cutoff.value, case.spec.owner_departure, case.spec.action.value,
-        ): case.target
-        for case in audit.cases if case.valid
+def test_registered_z0_branch_law_selector_and_integrated_values(audit):
+    expected_branches = set(product(
+        oracle.World, oracle.CloseMode, oracle.Cutoff, (False, True)
+    ))
+    assert isinstance(oracle.BRANCH_LAW, tuple) and len(oracle.BRANCH_LAW) == 16
+    assert {branch.key() for branch in oracle.BRANCH_LAW} == expected_branches
+    assert all(branch.weight == Fraction(1, 16) > 0 for branch in oracle.BRANCH_LAW)
+    assert sum(branch.weight for branch in oracle.BRANCH_LAW) == 1
+    valid = [case for case in audit.cases if case.valid]
+    assert all(
+        len([case for case in valid if (case.spec.context, case.spec.action) == key]) == 16
+        for key in product(oracle.Context, oracle.Action)
+    )
+    candidate = oracle.candidate_integrated_values(valid)
+    comparator = oracle.comparator_integrated_values()
+    assert set(candidate) == set(comparator) == set(product(oracle.Context, oracle.Action))
+    assert candidate == comparator == {
+        (oracle.Context.F, oracle.Action.SHORT): Fraction(71, 64),
+        (oracle.Context.F, oracle.Action.LONG): Fraction(63, 64),
+        (oracle.Context.P, oracle.Action.SHORT): Fraction(135, 64),
+        (oracle.Context.P, oracle.Action.LONG): Fraction(139, 64),
     }
-    assert len(null) == len(candidate) == 64
-    assert set(candidate).issubset(null)
-    assert candidate == null
-    assert audit.report["null"] == {
-        "name": "HORIZON_FLUSH_TABULAR_DURATION_NULL",
-        "same_information": True, "full_horizon": True,
-        "finite_predecision_keys": 32, "action_entries": 64,
-        "candidate_entries": 64, "candidate_nested": True,
-        "exact_reproduction": True,
+    assert all(
+        oracle.candidate_selector(context, tape)
+        is oracle.comparator_selector(context, tape)
+        for context, tape in product(oracle.Context, oracle.SELECTOR_TAPE)
+    )
+    report = audit.report["comparator"]
+    assert report["candidate_z0_fields"] == report["comparator_z0_fields"] == ["context"]
+    excluded = ["world", "close_mode", "cutoff", "owner_departure", "action", "selector_tape"]
+    assert report["candidate_z0_excluded_fields"] == report["comparator_z0_excluded_fields"] == excluded
+    assert report["branch_variables_marginalized_only"] is report["same_information"] is True
+    assert report["branch_law"]["branches_per_z0_action"] == 16
+    assert report["branch_law"]["normalized_full_support"] is True
+    assert report["selector"] == {
+        "tape_cells": 8, "threshold": "LONG iff tape < p",
+        "candidate_entries": 16, "comparator_entries": 16,
+        "candidate_domain_exact": True, "comparator_domain_exact": True,
+        "candidate_nested": True, "equal_keys": True, "exact_reproduction": True,
     }
-    assert audit.report["terminal"] == "ADAPTIVE_DURATION_RETIRED"
-    assert audit.report["disposition"] == "BOOKKEEPING_TRANSPORT_CONFORMANCE_ONLY"
+    assert report["values"]["key_fields"] == ["context", "action"]
+    assert all(report["values"][key] is True for key in (
+        "candidate_domain_exact", "comparator_domain_exact",
+        "candidate_nested", "equal_keys", "exact_reproduction",
+    ))
+    assert report["terminal_gate"] is True
+    assert audit.report["terminal"] == "REGISTERED_Z0_SELECTOR_VALUE_CONFORMANCE"
+    assert audit.report["disposition"] == "NO_INCREMENT_OVER_REGISTERED_Z0_COMPARATOR"
+
+
+def test_branch_weight_probability_threshold_and_value_mutations_fail_closed(audit, monkeypatch):
+    valid = [case for case in audit.cases if case.valid]
+    changed = list(oracle.BRANCH_LAW)
+    changed[0] = replace(changed[0], weight=Fraction(1, 32))
+    changed[1] = replace(changed[1], weight=Fraction(3, 32))
+    branch_report = oracle.registered_z0_conformance(valid, tuple(changed))
+    assert branch_report["branch_law"]["normalized_full_support"] is False
+    assert branch_report["terminal_gate"] is False
+    probabilities = {oracle.Context.F: Fraction(3, 8), oracle.Context.P: Fraction(3, 4)}
+    probability_report = oracle.registered_z0_conformance(valid, probabilities=probabilities)
+    assert probability_report["selector"]["exact_reproduction"] is False
+    assert probability_report["terminal_gate"] is False
+    inclusive = lambda context, tape, table: (
+        oracle.Action.LONG if tape <= table[context] else oracle.Action.SHORT
+    )
+    threshold_report = oracle.registered_z0_conformance(valid, comparator_select=inclusive)
+    assert threshold_report["selector"]["exact_reproduction"] is False
+    original = oracle.comparator_integrated_values
+    def mutated_values(law=oracle.BRANCH_LAW):
+        values = original(law)
+        values[(oracle.Context.F, oracle.Action.SHORT)] += 1
+        return values
+    monkeypatch.setattr(oracle, "comparator_integrated_values", mutated_values)
+    value_report = oracle.registered_z0_conformance(valid)
+    assert value_report["values"]["exact_reproduction"] is False
+    assert value_report["terminal_gate"] is False
+    with pytest.raises(ValueError, match="registered_z0_selector_value_conformance"):
+        oracle.run_oracle()
+
+
+def test_identical_extra_future_value_keys_fail_exact_domain(audit, monkeypatch):
+    original_candidate = oracle.candidate_integrated_values
+    original_comparator = oracle.comparator_integrated_values
+    extra = (oracle.Context.F, oracle.Action.SHORT, oracle.World.POSITIVE)
+    def candidate_with_extra(cases, law=oracle.BRANCH_LAW):
+        values = original_candidate(cases, law)
+        values[extra] = Fraction(71, 64)
+        return values
+    def comparator_with_extra(law=oracle.BRANCH_LAW):
+        values = original_comparator(law)
+        values[extra] = Fraction(71, 64)
+        return values
+    monkeypatch.setattr(oracle, "candidate_integrated_values", candidate_with_extra)
+    monkeypatch.setattr(oracle, "comparator_integrated_values", comparator_with_extra)
+    report = oracle.registered_z0_conformance(case for case in audit.cases if case.valid)
+    assert report["values"]["candidate_entries"] == report["values"]["comparator_entries"] == 5
+    assert report["values"]["exact_reproduction"] is True
+    assert report["values"]["candidate_domain_exact"] is False
+    assert report["values"]["comparator_domain_exact"] is False
+    assert report["same_information"] is report["terminal_gate"] is False
+    assert set(report["values"]["candidate"]) == {"F|SHORT", "F|LONG", "P|SHORT", "P|LONG"}
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("CANDIDATE_Z0_FIELDS", ("context", "world")),
+        ("COMPARATOR_Z0_FIELDS", ("context", "world")),
+        ("CANDIDATE_Z0_EXCLUDED_FIELDS", ("close_mode", "cutoff", "owner_departure", "action", "selector_tape")),
+        ("COMPARATOR_Z0_EXCLUDED_FIELDS", ("close_mode", "cutoff", "owner_departure", "action", "selector_tape")),
+    ],
+)
+def test_same_information_hidden_future_key_mutations_fail_closed(audit, monkeypatch, field, value):
+    monkeypatch.setattr(oracle, field, value)
+    report = oracle.registered_z0_conformance(case for case in audit.cases if case.valid)
+    assert report["same_information"] is False
+    assert report["terminal_gate"] is False
+
+
+def test_candidate_probability_mutation_fails_selector_gate(audit, monkeypatch):
+    monkeypatch.setattr(oracle, "_probability", lambda context: Fraction(1, 2))
+    report = oracle.registered_z0_conformance(case for case in audit.cases if case.valid)
+    assert report["selector"]["exact_reproduction"] is False
+    assert report["terminal_gate"] is False
 
 
 def test_cli_is_byte_stable_and_index_binds_raw_output():
