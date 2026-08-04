@@ -14,7 +14,7 @@ ASSIGNMENT_ID = "vsp05_sequence_11_semantic_veto_20260803"
 CANDIDATE = "CAND-VSP-05@adversarial-revision-v7"
 TREATMENT = "VSP-05-FINITE-CENSUS-SEMANTIC-VETO-D0"
 EVENT_CLASS = "E_SC1_SINGLE_OWNER_MONOTONE_SERVICE_COMPLETION"
-RAW_OUTPUT_BINDING = "vsp05.semantic_veto_census.sequence11.v3"
+RAW_OUTPUT_BINDING = "vsp05.semantic_veto_census.sequence11.v4"
 FIELDS = ("e_local", "r_relation", "p_public", "b_integrity", "b_contradiction", "b_validity")
 POSITIVE_X = (True, True, True, True, False, True)
 FOLDS = tuple(f"lineage_{name}_full" for name in ("alpha", "beta", "gamma", "delta", "epsilon", "zeta"))
@@ -29,7 +29,7 @@ X_INDEX = {x: index for index, x in enumerate(X_STAR)}
 
 @dataclass(frozen=True)
 class EventSpec:
-    event_class: str; kappa: str; owner: str; target: str; q: tuple[int, ...]
+    event_class: str; kappa: str; owner: str; target: str
 
 
 @dataclass(frozen=True)
@@ -82,25 +82,18 @@ class FrozenLookupArtifact:
             raise ValueError("artifact must be a frozen binary row for every registered X")
 
 
-def monotone_q(horizon: int = 4, transition_at: int = 1) -> tuple[int, ...]:
-    if not (0 < transition_at < horizon): raise ValueError("transition must be exactly once inside the registered horizon")
-    return tuple(0 if index < transition_at else 1 for index in range(horizon))
-
-
-def _validate_registered_tapes(raw_x_tape: Iterable[tuple[bool, ...]], q_kappa_tape: Iterable[tuple[int, int]]) -> tuple[tuple[tuple[bool, ...], ...], tuple[tuple[int, int], ...]]:
-    raw, q = tuple(raw_x_tape), tuple(q_kappa_tape)
+def _validate_registered_tapes(raw_x_tape: Iterable[tuple[bool, ...]]) -> tuple[tuple[bool, ...], ...]:
+    raw, q = tuple(raw_x_tape), Q_KAPPA_TAPE
     if len(raw) != 64 or len(set(raw)) != 64 or set(raw) != set(X_STAR): raise ValueError("raw-X tape must be one frozen full-support permutation")
-    if len(q) != 64 or sum(state == (0, 1) for state in q) != 1 or any(state not in ((0, 0), (0, 1), (1, 1)) for state in q): raise ValueError("Q_kappa tape must contain one monotone transition")
-    if any(left[1] != right[0] for left, right in zip(q, q[1:])): raise ValueError("Q_kappa states must form one connected monotone tape")
-    return raw, q
+    if len(q) != 64 or sum(state == (0, 1) for state in q) != 1 or any(state not in ((0, 0), (0, 1), (1, 1)) for state in q) or any(left[1] != right[0] for left, right in zip(q, q[1:])): raise ValueError("Q_kappa tape must contain one connected monotone transition")
+    return raw
 
 
-def physical_records(grid: tuple[Cell, ...], event: EventSpec, raw_x_tape: Iterable[tuple[bool, ...]], q_kappa_tape: Iterable[tuple[int, int]]) -> tuple[PhysicalRecord, ...]:
-    raw_tape, q_tape = _validate_registered_tapes(raw_x_tape, q_kappa_tape)
-    records = []
+def physical_records(grid: tuple[Cell, ...], event: EventSpec, raw_x_tape: Iterable[tuple[bool, ...]]) -> tuple[PhysicalRecord, ...]:
+    raw_tape = _validate_registered_tapes(raw_x_tape); records = []
     for cell in grid:
         for fold in FOLDS:
-            for index, (raw_x, q_state) in enumerate(zip(raw_tape, q_tape)):
+            for index, (raw_x, q_state) in enumerate(zip(raw_tape, Q_KAPPA_TAPE)):
                 identity = f"{cell.key}|{fold}|physical-opportunity-{index:02d}"
                 records.append(PhysicalRecord(Fraction(index, 64), index, q_state, event.kappa, True, cell, fold, identity, RawSources(*raw_x)))
     return tuple(records)
@@ -109,8 +102,8 @@ def physical_records(grid: tuple[Cell, ...], event: EventSpec, raw_x_tape: Itera
 def build_registry() -> Registry:
     dt = Fraction(1, 64)
     grid = tuple(Cell(a, s, d, r, o) for a, s, d, r, o in product((0 * dt, 8 * dt, 32 * dt), (Fraction(1, 2), Fraction(1), Fraction(2)), (0 * dt, 2 * dt, 8 * dt), (1, 2, 4), (0, 2, 4)))
-    event = EventSpec(EVENT_CLASS, "kappa_focal_001", "owner_focal", "target_focal", monotone_q())
-    records = list(physical_records(grid, event, RAW_X_TAPE, Q_KAPPA_TAPE))
+    event = EventSpec(EVENT_CLASS, "kappa_focal_001", "owner_focal", "target_focal")
+    records = list(physical_records(grid, event, RAW_X_TAPE))
     reference = records[0]
     records.extend((replace(reference, transaction_identity="other_kappa", opportunity_identity="audit-transaction-mismatch"), replace(reference, owner_epoch_valid=False, opportunity_identity="audit-invalid-owner-epoch")))
     return Registry((event,), FOLDS, grid, FIELDS, X_STAR, tuple(records), RAW_X_TAPE, Q_KAPPA_TAPE)
@@ -139,7 +132,13 @@ def extract_x(record: PhysicalRecord, *, dependencies: Iterable[str] = FIELDS) -
 
 
 def physical_y(record: PhysicalRecord) -> int:
-    return int(record.q_kappa_state == (0, 1) and record.transaction_identity == "kappa_focal_001" and record.owner_epoch_valid)
+    return int(record.q_kappa_state[1] == 1 and record.transaction_identity == "kappa_focal_001" and record.owner_epoch_valid)
+
+
+def _validate_q_binding(registry: Registry, records: Iterable[PhysicalRecord]) -> None:
+    if registry.q_kappa_tape is not Q_KAPPA_TAPE: raise ValueError("registry Q_kappa tape must be the canonical Q_KAPPA_TAPE object")
+    for record in records:
+        if type(index := record.physical_index) is not int or not 0 <= index < len(Q_KAPPA_TAPE) or record.q_kappa_state != Q_KAPPA_TAPE[index]: raise ValueError("physical record Q_kappa state is not bound to canonical tape position")
 
 
 def x_key(x: tuple[bool, ...]) -> str: return "".join("1" if bit else "0" for bit in x)
@@ -171,7 +170,8 @@ def deduplicate_records(records: Iterable[PhysicalRecord]) -> tuple[tuple[Physic
     return tuple(unique.values()), len(ordered) - len(unique)
 
 
-def materialize_tapes(records: Iterable[PhysicalRecord]) -> tuple[Tape, ...]:
+def materialize_tapes(registry: Registry, records: Iterable[PhysicalRecord]) -> tuple[Tape, ...]:
+    records = tuple(records); _validate_q_binding(registry, records)
     groups: dict[tuple[str, str], list[PhysicalRecord]] = {}
     for record in records:
         groups.setdefault((record.cell.key, record.fold), []).append(record)
@@ -189,7 +189,7 @@ def _signature(tape: Tape) -> tuple[tuple[str, ...], str]: return tuple(x_key(x)
 def census(registry: Registry) -> dict[str, object]:
     admitted, exclusions = admit_records(registry, registry.records)
     unique, duplicate_count = deduplicate_records(admitted)
-    tapes = materialize_tapes(unique)
+    tapes = materialize_tapes(registry, unique)
     counts = {x: [0, 0] for x in registry.x_star}
     fold_counts = {fold: Counter() for fold in registry.lineage_registry}
     support_exits = []
@@ -569,11 +569,11 @@ def build_report() -> dict[str, object]:
     clones = clone_report(tapes[0], rules)
     handoff = handoff_model_check()
     best_facts = sequential_fact(tapes[0], best)
-    coverage_ok = len(tapes) == len(registry.grid) * len(FOLDS) and all(facts["full_support"] for facts in count_report["folds"].values())
-    admission_ok = count_report["admission"] == {"admitted": 93_312, "exclusions_before_y": {"invalid_owner_epoch": 1, "transaction_mismatch": 1}}
+    expected_ys = tuple(state[1] for state in registry.q_kappa_tape); label_binding_ok = all(tape.ys == expected_ys for tape in tapes)
+    coverage_ok = len(tapes) == len(registry.grid) * len(FOLDS) and all(facts["full_support"] for facts in count_report["folds"].values()); admission_ok = count_report["admission"] == {"admitted": 93_312, "exclusions_before_y": {"invalid_owner_epoch": 1, "transaction_mismatch": 1}}
     dedup_ok = count_report["deduplication"]["duplicate_identity_count"] == 0
     sequential_ok = [best_facts[name] for name in ("first_latch_false_alias", "missed_positives", "capture_delay", "action_count")] == [0, 0, 0, 1] and best_facts["positive_captures"] == 1
-    physical_terminal = all((not count_report["contradictions"], not count_report["support_exits"], coverage_ok, admission_ok, dedup_ok, count_report["unique_tape_signature_count"] == 1, firewall["clean"], not clones["decision_drifts"], clones["negative_allowlisted_source_mutation"]["detected"], sequential_ok))
+    physical_terminal = all((not count_report["contradictions"], not count_report["support_exits"], coverage_ok, admission_ok, dedup_ok, label_binding_ok, count_report["positive_labels"] == 4_374, count_report["unique_tape_signature_count"] == 1, firewall["clean"], not clones["decision_drifts"], clones["negative_allowlisted_source_mutation"]["detected"], sequential_ok))
     q_transition = next(index for index, state in enumerate(registry.q_kappa_tape) if state == (0, 1))
     return {
         "assignment_id": ASSIGNMENT_ID,
@@ -581,12 +581,12 @@ def build_report() -> dict[str, object]:
         "census": count_report,
         "clone_invariance": clones,
         "conclusion": {"exactly_once_handoff_safety_holds_in_fixed_synthetic_instance": handoff["exactly_once_handoff_safety"], "finite_support_lookup_conformance_holds_in_fixed_synthetic_instance": physical_terminal},
-        "event": _state_event(registry.event_registry[0]),
+        "event": _state_event(registry.event_registry[0], registry.q_kappa_tape),
         "grid": {"cell_count": len(registry.grid), "dt": "1/64", "fold_count": len(registry.lineage_registry), "o_max": 4},
         "executable_firewall": firewall,
         "handoff": handoff,
         "objective": objective,
-        "physical_tape_registration": {"independent_tapes": True, "q_transition_index": q_transition, "raw_x_at_q_transition": x_key(registry.raw_x_tape[q_transition]), "rows": len(registry.raw_x_tape)},
+        "physical_tape_registration": {"canonical_q_source": "Q_KAPPA_TAPE", "independent_tapes": True, "positive_physical_indices": [index for index, state in enumerate(registry.q_kappa_tape) if state[1]], "q_current_suffix": "".join(str(state[1]) for state in registry.q_kappa_tape[-3:]), "q_transition_index": q_transition, "raw_x_at_q_transition": x_key(registry.raw_x_tape[q_transition]), "rows": len(registry.raw_x_tape)},
         "pointwise_diagnostic": {"derived_best_equals_handcrafted_lookup": best == lookup, "handcrafted_64_row_lookup_equals_pointwise": lookup == pointwise},
         "raw_output_binding": RAW_OUTPUT_BINDING,
         "rules": rule_summary(tapes, rules),
@@ -596,8 +596,8 @@ def build_report() -> dict[str, object]:
     }
 
 
-def _state_event(event: EventSpec) -> dict[str, object]:
-    return {"event_class": event.event_class, "kappa": event.kappa, "owner": event.owner, "q": list(event.q), "target": event.target}
+def _state_event(event: EventSpec, q_kappa_tape: tuple[tuple[int, int], ...]) -> dict[str, object]:
+    return {"event_class": event.event_class, "kappa": event.kappa, "owner": event.owner, "q_diagnostic": [q_kappa_tape[0][0], *(state[1] for state in q_kappa_tape[-3:])], "q_diagnostic_source": "Q_KAPPA_TAPE", "target": event.target}
 
 
 def raw_json() -> str:

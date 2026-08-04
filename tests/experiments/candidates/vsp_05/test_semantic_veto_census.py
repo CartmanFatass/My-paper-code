@@ -38,10 +38,10 @@ def test_registry_contains_immutable_physical_records_and_two_audit_exclusions(r
     assert len(registry.grid) == 243 and registry.schema == svc.FIELDS
     assert registry.lineage_registry == svc.FOLDS and len(set(svc.FOLDS)) == 6
     assert registry.x_star == tuple(product((False, True), repeat=6))
-    assert registry.raw_x_tape == svc.RAW_X_TAPE and registry.q_kappa_tape == svc.Q_KAPPA_TAPE
+    assert registry.raw_x_tape == svc.RAW_X_TAPE and registry.q_kappa_tape is svc.Q_KAPPA_TAPE
     constructor_source = source + inspect.getsource(svc.physical_records)
     assert "X_STAR.index" not in constructor_source and "POSITIVE_X" not in constructor_source
-    assert "zip(raw_tape, q_tape)" in constructor_source
+    assert "zip(raw_tape, Q_KAPPA_TAPE)" in constructor_source
     assert len(registry.records) == 243 * 6 * 64 + 2
     valid = [record for record in registry.records if record.transaction_identity == "kappa_focal_001" and record.owner_epoch_valid]
     assert len(valid) == 93_312
@@ -55,36 +55,49 @@ def test_registry_contains_immutable_physical_records_and_two_audit_exclusions(r
 
 def test_physical_record_to_x_and_y_are_separate_sources(registry: svc.Registry) -> None:
     admitted, _ = svc.admit_records(registry, registry.records)
-    positive = next(record for record in admitted if svc.physical_y(record))
-    assert positive.physical_index == 61 and positive.q_kappa_state == (0, 1)
-    assert svc.extract_x(positive) == svc.POSITIVE_X
+    positives = [record for record in admitted[:64] if svc.physical_y(record)]
+    assert [record.physical_index for record in positives] == [61, 62, 63]
+    assert [svc.x_key(svc.extract_x(record)) for record in positives] == ["111101", "111110", "111111"]
+    assert [record.q_kappa_state for record in positives] == [(0, 1), (1, 1), (1, 1)]
+    positive = positives[0]
     raw_mutation = replace(positive, raw_sources=replace(positive.raw_sources, e_local=False))
     assert svc.extract_x(raw_mutation) != svc.extract_x(positive)
     assert svc.physical_y(raw_mutation) == svc.physical_y(positive) == 1
-    q_mutation = replace(positive, q_kappa_state=(0, 0))
-    assert svc.extract_x(q_mutation) == svc.extract_x(positive)
-    assert svc.physical_y(q_mutation) == 0
+    assert svc.physical_y(replace(positives[1], q_kappa_state=(1, 0))) == 0
+    assert svc.physical_y(replace(positive, transaction_identity="other_kappa")) == 0
+    assert svc.physical_y(replace(positive, owner_epoch_valid=False)) == 0
     assert "extract_x" not in inspect.getsource(svc.physical_y)
     assert "physical_y" not in inspect.getsource(svc.extract_x)
 
 
 def test_independently_registered_raw_and_q_tapes_are_bidirectionally_invariant(registry: svc.Registry) -> None:
     event, cell = registry.event_registry[0], registry.grid[0]
-    baseline = svc.physical_records((cell,), event, svc.RAW_X_TAPE, svc.Q_KAPPA_TAPE)[:64]
+    baseline = svc.physical_records((cell,), event, svc.RAW_X_TAPE)[:64]
     raw_mutation = list(svc.RAW_X_TAPE)
     raw_mutation[0], raw_mutation[1] = raw_mutation[1], raw_mutation[0]
-    raw_changed = svc.physical_records((cell,), event, tuple(raw_mutation), svc.Q_KAPPA_TAPE)[:64]
+    raw_changed = svc.physical_records((cell,), event, tuple(raw_mutation))[:64]
     assert svc.extract_x(raw_changed[0]) != svc.extract_x(baseline[0])
     assert [record.q_kappa_state for record in raw_changed] == [record.q_kappa_state for record in baseline]
     assert [svc.physical_y(record) for record in raw_changed] == [svc.physical_y(record) for record in baseline]
-    q_mutation = ((0, 0),) * 60 + ((0, 1),) + ((1, 1),) * 3
-    q_changed = svc.physical_records((cell,), event, svc.RAW_X_TAPE, q_mutation)[:64]
+    q_changed = tuple(replace(record, q_kappa_state=(0, 0)) if record.physical_index == 61 else record for record in baseline)
     assert [svc.extract_x(record) for record in q_changed] == [svc.extract_x(record) for record in baseline]
     assert [svc.physical_y(record) for record in q_changed] != [svc.physical_y(record) for record in baseline]
     with pytest.raises(ValueError):
-        svc.physical_records((cell,), event, svc.RAW_X_TAPE[:-1] + (svc.RAW_X_TAPE[0],), svc.Q_KAPPA_TAPE)
-    with pytest.raises(ValueError):
-        svc.physical_records((cell,), event, svc.RAW_X_TAPE, ((0, 0),) * 64)
+        svc.physical_records((cell,), event, svc.RAW_X_TAPE[:-1] + (svc.RAW_X_TAPE[0],))
+    with pytest.raises(ValueError, match="not bound to canonical tape position"):
+        svc.materialize_tapes(registry, q_changed)
+
+
+def test_noncanonical_q_tape_or_record_fails_closed_before_positive_terminal(monkeypatch: pytest.MonkeyPatch, registry: svc.Registry) -> None:
+    noncanonical_tape = tuple(list(svc.Q_KAPPA_TAPE))
+    monkeypatch.setattr(svc, "build_registry", lambda: replace(registry, q_kappa_tape=noncanonical_tape))
+    with pytest.raises(ValueError, match="canonical Q_KAPPA_TAPE object"):
+        svc.build_report()
+    inconsistent_records = list(registry.records)
+    inconsistent_records[61] = replace(inconsistent_records[61], q_kappa_state=(0, 0))
+    monkeypatch.setattr(svc, "build_registry", lambda: replace(registry, records=tuple(inconsistent_records)))
+    with pytest.raises(ValueError, match="not bound to canonical tape position"):
+        svc.build_report()
 
 
 def test_label_blind_admission_exercises_both_reasons_before_y(monkeypatch: pytest.MonkeyPatch, registry: svc.Registry) -> None:
@@ -99,7 +112,7 @@ def test_materialization_sorts_deduplicates_and_reextracts_x(registry: svc.Regis
     report, counts, tapes = prepared
     assert report["admission"] == {"admitted": 93_312, "exclusions_before_y": {"invalid_owner_epoch": 1, "transaction_mismatch": 1}}
     assert report["deduplication"] == {"duplicate_identity_count": 0, "unique_records": 93_312}
-    assert report["opportunities"] == 93_312 and report["positive_labels"] == 1_458
+    assert report["opportunities"] == 93_312 and report["positive_labels"] == 4_374
     assert report["contradictions"] == report["support_exits"] == []
     assert report["unique_tape_signature_count"] == 1
     assert report["tape_signatures"][0]["multiplicity"] == 1_458
@@ -107,9 +120,12 @@ def test_materialization_sorts_deduplicates_and_reextracts_x(registry: svc.Regis
     assert all(tuple(record.physical_time for record in tape.records) == tuple(sorted(record.physical_time for record in tape.records)) for tape in tapes)
     assert all(tape.xs == tuple(svc.extract_x(record) for record in tape.records) for tape in tapes)
     sample = tapes[0]
+    assert sample.ys[-3:] == (1, 1, 1)
     unique, duplicates = svc.deduplicate_records(reversed(sample.records + (sample.records[0],)))
     assert duplicates == 1 and len(unique) == 64
     assert set(counts) == set(svc.X_STAR) and all(sum(values) == 1_458 for values in counts.values())
+    for key in ("111101", "111110", "111111"):
+        assert report["x_by_y"][key] == {"y0": 0, "y1": 1_458}
 
 
 @pytest.mark.parametrize("source", svc.FORBIDDEN_FAMILIES + tuple(svc.FORBIDDEN_PROXIES.values()))
@@ -147,11 +163,11 @@ def test_sequential_objective_uses_physical_tapes_and_first_latch_survival(prepa
     best = rules["BEST_DETERMINISTIC_TUPLE_ONLY_RULE"]
     assert objective["lexicographic_order"] == ["false_alias", "missed_positive", "capture_delay", "action_count"]
     assert objective["selected_score"] == [0, 0, 0, 1]
-    assert best == svc.saturated_lookup() == svc.derive_pointwise_rule(counts)
+    assert best == svc.saturated_lookup() and best != svc.derive_pointwise_rule(counts)
     facts = {name: svc.sequential_fact(tapes[0], rule) for name, rule in rules.items()}
     assert facts["NO_VETO"]["first_latch_false_alias"] == 1
     assert facts["NO_VETO"]["positive_captures"] == facts["NO_VETO"]["missed_positives"] == 0
-    assert facts["ALWAYS_VETO"]["missed_positives"] == 1
+    assert facts["ALWAYS_VETO"]["missed_positives"] == 3
     assert facts["SATURATED_ALLOWLIST_LOOKUP"]["positive_captures"] == 1
     late = replace(tapes[0], records=tapes[0].records[:2], xs=tapes[0].xs[:2], ys=(1, 1))
     late_rule = {x: 0 for x in svc.X_STAR}
@@ -197,7 +213,11 @@ def test_report_is_deterministic_and_terminals_are_separate() -> None:
     report = json.loads(first)
     assert report["terminals"] == {"fixed_single_transaction_handoff": True, "physical_census_tuple_only_first_latch": True}
     assert report["conclusion"] == {"exactly_once_handoff_safety_holds_in_fixed_synthetic_instance": True, "finite_support_lookup_conformance_holds_in_fixed_synthetic_instance": True}
-    assert report["pointwise_diagnostic"]["handcrafted_64_row_lookup_equals_pointwise"]
+    assert not report["pointwise_diagnostic"]["handcrafted_64_row_lookup_equals_pointwise"]
+    assert report["event"]["q_diagnostic"] == [0, 1, 1, 1]
+    assert report["event"]["q_diagnostic_source"] == "Q_KAPPA_TAPE"
+    assert report["physical_tape_registration"]["positive_physical_indices"] == [61, 62, 63]
+    assert report["physical_tape_registration"]["q_current_suffix"] == "111"
     assert report["handoff"]["reachable_states"] == 48
 
 
@@ -214,6 +234,13 @@ def test_handcrafted_lookup_cannot_control_physical_terminal(monkeypatch: pytest
     report = svc.build_report()
     assert report["terminals"]["physical_census_tuple_only_first_latch"]
     assert not report["pointwise_diagnostic"]["derived_best_equals_handcrafted_lookup"]
+
+
+def test_transition_only_label_cannot_reach_physical_terminal(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(svc, "physical_y", lambda record: int(record.q_kappa_state == (0, 1) and record.transaction_identity == "kappa_focal_001" and record.owner_epoch_valid))
+    report = svc.build_report()
+    assert report["census"]["positive_labels"] == 1_458
+    assert not report["terminals"]["physical_census_tuple_only_first_latch"]
 
 
 def test_source_scope_active_line_limit_and_no_forbidden_runtime_interfaces() -> None:
