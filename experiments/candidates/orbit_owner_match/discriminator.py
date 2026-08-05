@@ -60,28 +60,88 @@ from experiments.candidates.orbit_owner_match.trust import (
 # Execution ledger
 # ---------------------------------------------------------------------------
 
-EXECUTION_LEDGER = {"actor_calls": 0, "block_evaluations": 0,
-                    "calibration_runs": 0}
+LEDGER_COUNTERS = ("actor_calls", "block_evaluations", "calibration_runs")
+
+
+class ExecutionLedger:
+    """Increment-only counters for every scientific evaluation.
+
+    Round 7 broke D0.5's ledger in one line.  It was a module-level ``dict``,
+    so ``EXECUTION_LEDGER["actor_calls"] = 0`` restored an all-zero reading
+    after a full run and :func:`execution_ledger_gate` passed.  Removing the
+    ``reset`` HELPER, which is what D0.5 did, does not remove the ability to
+    reset a mutable mapping that is exported by name.
+
+    This class removes the ordinary spellings ON THE INSTANCE: there is no
+    ``__setitem__``, attribute assignment and deletion raise, and the
+    counters live in ``__slots__`` so no instance ``__dict__`` shadows them.
+
+    It does NOT defend the NAME.  An earlier version of this docstring said
+    it "removes the ordinary spellings" without that qualifier, which was
+    wrong: rebinding the module global IS the ordinary spelling, one scope
+    up, and
+
+        discriminator.EXECUTION_LEDGER = ExecutionLedger()
+
+    resets the reading with :func:`execution_ledger_gate` and both runtime
+    seals still passing.  ``PROCESS_STATE_GLOBALS`` pins this slot by type,
+    not by value, because the value is supposed to change.  A same-typed
+    replacement is therefore invisible to the seal by construction.  So is
+    neutering :meth:`increment`, whose code is outside every digest.
+
+    It is NOT tamper-proof and the contract does not claim it is; the
+    evidence that carries weight is an externally launched clean process,
+    not this counter.  See :func:`execution_ledger_gate`.
+    """
+
+    __slots__ = LEDGER_COUNTERS
+
+    def __init__(self) -> None:
+        for name in LEDGER_COUNTERS:
+            object.__setattr__(self, name, 0)
+
+    def __setattr__(self, name, value):
+        raise ContractError("execution ledger is increment-only", "T4")
+
+    def __delattr__(self, name):
+        raise ContractError("execution ledger is increment-only", "T4")
+
+    def increment(self, name: str) -> None:
+        if name not in LEDGER_COUNTERS:
+            raise ContractError("unknown ledger counter %r" % (name,), "T4")
+        object.__setattr__(self, name, object.__getattribute__(self, name) + 1)
+
+    def snapshot(self) -> dict:
+        return {name: object.__getattribute__(self, name)
+                for name in LEDGER_COUNTERS}
+
+
+EXECUTION_LEDGER = ExecutionLedger()
 
 
 def execution_ledger_gate() -> None:
-    """No scientific evaluation has happened in this process.
+    """The counters read zero at the moment this gate runs.
 
-    This is the freeze-evidence gate.  It is expected to FAIL once the
-    discriminator is authorized and actually run; at freeze time it must pass.
+    That is the whole claim, and D0.5 overstated it.  Its docstring said the
+    ledger was monotone and therefore that an all-zero reading PROVED the
+    process had never run the discriminator; the exported dict made that
+    false.  The counters are now increment-only against ordinary mutation,
+    but an in-process adversary with ``object.__setattr__`` is outside what
+    any in-process counter can exclude.
 
-    The ledger is MONOTONE: there is deliberately no reset.  An earlier
-    version exposed one, which meant the gate certified "not executed" only
-    relative to the last reset -- a full run followed by a reset produced
-    an all-zero ledger and a clean freeze.  Because the counters can only
-    rise, the evidence must be generated in a process that has never run the
-    discriminator, which is the property the freeze actually needs.
+    The freeze therefore does not rest on this gate alone.  It rests on this
+    gate plus ``scripts/orbit_owner_freeze_evidence.py``, which runs the
+    audit in a separately launched interpreter that imports the package and
+    does nothing else, and on :mod:`block` not importing this module at all --
+    a structural fact anyone can check by reading the import graph rather
+    than by trusting a counter.
     """
-    for name in sorted(EXECUTION_LEDGER):
-        if EXECUTION_LEDGER[name] != 0:
+    counts = EXECUTION_LEDGER.snapshot()
+    for name in sorted(counts):
+        if counts[name] != 0:
             raise ContractError(
-                "execution ledger is nonzero: %s=%d"
-                % (name, EXECUTION_LEDGER[name]), "T4")
+                "execution ledger is nonzero: %s=%d" % (name, counts[name]),
+                "T4")
 
 
 # ---------------------------------------------------------------------------
@@ -98,7 +158,7 @@ def owner_predicate_actor(actor_input: ActorInput_D2) -> tuple:
     """
     if type(actor_input) is not ActorInput_D2:
         raise ContractError("exact ActorInput_D2 required")
-    EXECUTION_LEDGER["actor_calls"] += 1
+    EXECUTION_LEDGER.increment("actor_calls")
     b, role = (int(value) for value in actor_input.actor_tensor[-2:])
     sign = 1.0 if actor_input.verified_owner_match else -1.0
     interaction = 0.5 if b == role else -0.5
@@ -121,8 +181,12 @@ def evaluate_block(cells: dict) -> dict:
 
     THIS EXECUTES THE DISCRIMINATOR.  It is not called by any gate, freeze
     routine or digest computation.
+
+    The result records a digest of the cells it actually read, so the
+    downstream estimand can be tied back to a specific census rather than to
+    "some evaluation dict" (round-7 correction D05-C06).
     """
-    EXECUTION_LEDGER["block_evaluations"] += 1
+    EXECUTION_LEDGER.increment("block_evaluations")
     logits = {}
     kernels = {}
     for key in sorted(cells):
@@ -131,7 +195,40 @@ def evaluate_block(cells: dict) -> dict:
         kernels[key] = tuple(_softmax(logit_pair))
     check_value_domain(logits, exact=False)
     check_value_domain(kernels, exact=False)
-    return {"logits": logits, "kernels": kernels}
+    return {"logits": logits, "kernels": kernels,
+            "census_digest": evaluated_census_digest(cells)}
+
+
+def evaluated_census_digest(cells: dict) -> str:
+    """Digest of the cells an evaluation read, in frozen key order."""
+    from experiments.candidates.orbit_owner_match.canon import (
+        _enc_str, serialize_struct,
+    )
+    from experiments.candidates.orbit_owner_match.records import (
+        SCHEMA_TARGET_CELL,
+    )
+    parts = []
+    for key in sorted(cells):
+        parts.append(_enc_str(repr(key)))
+        parts.append(serialize_struct(SCHEMA_TARGET_CELL, cells[key]))
+    return sha256_hex(b"".join(parts))
+
+
+def evaluation_census_gate(evaluation: dict, cells: dict) -> None:
+    """The evaluation is of THIS census.
+
+    Without it, ``estimand_authenticity_gate`` proves only that the estimand
+    matches the evaluation it was handed -- an internally consistent pair that
+    need not have anything to do with the census the block gates validated.
+    """
+    if type(evaluation) is not dict:
+        raise ContractError("exact dict evaluation required")
+    recorded = evaluation.get("census_digest")
+    if type(recorded) is not str:
+        raise ContractError("evaluation carries no census digest", "T1")
+    if recorded != evaluated_census_digest(cells):
+        raise ContractError(
+            "evaluation is not of the validated census", "T1")
 
 
 def float_accumulate(values_by_key: dict) -> tuple:
@@ -195,18 +292,22 @@ CALIBRATION_SNAPSHOT = Snapshot(
 
 REPLICA_IDS = ("A-cold", "A-warm", "B-cold", "B-warm")
 
+# (clone label, prior uses of that clone object) in execution order.  Cold is
+# the first evaluation on a freshly restored clone; warm is the second
+# evaluation on THAT SAME object.
+REPLICA_PROTOCOL = (("A", 0), ("A", 1), ("B", 0), ("B", 1))
 
-def _calibration_actor_input(replica_id: str) -> ActorInput_D2:
+
+def _calibration_actor_input(clone) -> ActorInput_D2:
     """Build one calibration replica's input on a disjoint fixture.
 
-    'cold' and 'warm' differ only in whether the clone is restored freshly
-    for this replica or reused from a prior restore in the same process;
-    'A'/'B' are two independent clone identities.  All four are the same
-    mathematical input, so any spread between them is pure evaluation noise,
-    which is exactly what the diameter measures.
+    Takes the clone rather than a replica name.  D0.5 took the name and
+    called ``restore_clone`` on every invocation, so all four replicas ran on
+    freshly restored objects: 'A-warm' and 'B-warm' were labels for
+    evaluations that were as cold as the other two, and the four-replica
+    diameter measured four repetitions of one condition instead of the
+    cold/warm structure accepted in round 4.
     """
-    source = serialize_snapshot(CALIBRATION_SNAPSHOT)
-    clone = restore_clone(source, "calibration-clone-" + replica_id[0])
     write = build_write_d2_with_b(CALIBRATION_SNAPSHOT, "W1", 0)
     verification = verify_write_d2(clone, write)
     predicate = declassify(verification)
@@ -217,16 +318,40 @@ def _calibration_actor_input(replica_id: str) -> ActorInput_D2:
 def four_replica_diameter() -> DiameterRecord:
     """Componentwise diameter over the four replicas.
 
-    Round 6 found this machinery entirely absent from D0.4 even though the
-    four-replica structure had been accepted in round 4.
+    Two clone objects, each evaluated twice: cold then warm, in that order,
+    on the same object.  The reuse is asserted by identity (``is``), not
+    inferred from the labels.
     """
-    EXECUTION_LEDGER["calibration_runs"] += 1
+    EXECUTION_LEDGER.increment("calibration_runs")
+    source = serialize_snapshot(CALIBRATION_SNAPSHOT)
+    clones = {label: restore_clone(source, "calibration-clone-" + label)
+              for label in ("A", "B")}
+    if clones["A"] is clones["B"]:
+        raise ContractError("calibration clones A and B are the same object")
+    uses = {"A": 0, "B": 0}
+    used_objects = {}
     replicas = []
-    for replica_id in REPLICA_IDS:
-        actor_input = _calibration_actor_input(replica_id)
+    for label, expected_prior in REPLICA_PROTOCOL:
+        clone = clones[label]
+        if uses[label] != expected_prior:
+            raise ContractError(
+                "calibration replica order violated at %s: %d prior uses, "
+                "protocol expects %d" % (label, uses[label], expected_prior))
+        if expected_prior == 0:
+            used_objects[label] = clone
+        elif used_objects[label] is not clone:
+            raise ContractError(
+                "warm replica %s did not reuse the cold replica's clone"
+                % (label,))
+        actor_input = _calibration_actor_input(clone)
+        uses[label] = expected_prior + 1
         logits = owner_predicate_actor(actor_input)
         kernel = tuple(_softmax(logits))
-        replicas.append(ReplicaRecord(replica_id, logits, kernel))
+        replicas.append(ReplicaRecord(
+            "%s-%s" % (label, "cold" if expected_prior == 0 else "warm"),
+            logits, kernel, clone.clone_id, expected_prior))
+    if tuple(r.replica_id for r in replicas) != REPLICA_IDS:
+        raise ContractError("replica ids are not the frozen protocol order")
     eta_logit = max(
         abs(a.logits[i] - b.logits[i])
         for a in replicas for b in replicas for i in (0, 1))
@@ -312,6 +437,22 @@ def calibration_authenticity_gate(calibration: CalibrationRecord) -> None:
     replicas = calibration.diameter.replicas
     if type(replicas) is not tuple or len(replicas) != 4:
         raise ContractError("four replicas required")
+    # The cold/warm protocol is part of what "four replicas" means: two clone
+    # labels, each appearing once cold and once warm, in the frozen order.
+    if tuple(r.replica_id for r in replicas) != REPLICA_IDS:
+        raise ContractError("replica ids are not the frozen protocol order")
+    for replica, (label, prior) in zip(replicas, REPLICA_PROTOCOL):
+        if type(replica) is not ReplicaRecord:
+            raise ContractError("exact ReplicaRecord required")
+        if replica.clone_label != "calibration-clone-" + label:
+            raise ContractError(
+                "replica %r is not on clone %s" % (replica.replica_id, label))
+        if replica.prior_uses != prior:
+            raise ContractError(
+                "replica %r records %d prior uses, protocol expects %d"
+                % (replica.replica_id, replica.prior_uses, prior))
+    if len({r.clone_label for r in replicas}) != 2:
+        raise ContractError("calibration does not use exactly two clones")
     eta_logit = max(abs(a.logits[i] - b.logits[i])
                     for a in replicas for b in replicas for i in (0, 1))
     eta_kernel = max(abs(a.kernel[i] - b.kernel[i])

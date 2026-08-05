@@ -31,6 +31,7 @@ import math
 from experiments.candidates.orbit_owner_match.canon import (
     ContractError,
     registry_seal_gate,
+    schema_registry_digest,
 )
 from experiments.candidates.orbit_owner_match.records import (
     CalibrationRecord,
@@ -74,6 +75,8 @@ UNCLASSIFIED_TERMINAL = TERMINALS[3]
 
 STATIC_GATE_ORDER = (
     "interpreter",
+    "dependency",
+    "runtime_seal",
     "inherited_source",
     "registry_uniqueness",
     "calibration_fixture",
@@ -85,6 +88,7 @@ STATIC_GATE_ORDER = (
     "opaque_bindings",
     "forbidden_handles",
     "actor_path_audit",
+    "actor_read_set",
     "construction_sites",
     "t2_actor_surface",
     "coefficient_oracle",
@@ -104,6 +108,7 @@ STATIC_GATE_ORDER = (
 
 BLOCK_GATE_ORDER = (
     "block_key_census",
+    "exact_key_domain",
     "census_key_authenticity",
     "cross_m_closure",
     "cross_q_closure",
@@ -115,6 +120,7 @@ BLOCK_GATE_ORDER = (
 ESTIMAND_GATE_ORDER = (
     "calibration_disjointness",
     "calibration_authenticity",
+    "evaluation_census",
     "estimand_authenticity",
     "finite_estimands",
     "finite_thresholds",
@@ -126,6 +132,8 @@ VALIDITY_GATE_ORDER = STATIC_GATE_ORDER + BLOCK_GATE_ORDER + ESTIMAND_GATE_ORDER
 def _static_gates() -> tuple:
     return (
         ("interpreter", sealing_module.interpreter_gate),
+        ("dependency", sealing_module.dependency_gate),
+        ("runtime_seal", runtime_seal_gate),
         ("inherited_source", trust_module.inherited_source_gate),
         ("registry_uniqueness", trust_module.registry_uniqueness_gate),
         ("calibration_fixture",
@@ -138,6 +146,7 @@ def _static_gates() -> tuple:
         ("opaque_bindings", sealing_module.opaque_binding_gate),
         ("forbidden_handles", sealing_module.forbidden_handle_gate),
         ("actor_path_audit", sealing_module.actor_path_audit_gate),
+        ("actor_read_set", sealing_module.actor_read_set_gate),
         ("construction_sites", sealing_module.construction_site_gate),
         ("t2_actor_surface", sealing_module.t2_gate),
         ("coefficient_oracle", controls_module.coefficient_oracle_gate),
@@ -163,15 +172,94 @@ def _frozen_curvature_literal_gate() -> None:
         controls_module.CURVATURE_REFERENCE_FIRST_COMPONENT.text)
 
 
-def _block_gates(snapshot, cells) -> tuple:
+def runtime_seal_gate() -> None:
+    """Live digests equal the EXTERNALLY frozen expected digests.
+
+    This is the gate D0.5 did not have (round-7 correction D05-C01).  D0.5
+    computed ``fingerprint_set_digest()``, ``global_binding_digest()`` and the
+    rest, reported them in the freeze evidence, and placed the freshly
+    computed value into a freshly computed envelope.  Nothing ever compared a
+    live digest with a frozen one, so the package INVENTORIED its runtime
+    trust surface rather than sealing it: rebinding an audited global from one
+    supported object to another changed the computed digest and failed no
+    gate.
+
+    The expected values live in :mod:`baseline`, which is outside the sealed
+    set and is authenticated by its git blob id -- the same external anchor
+    the reviewer used to authenticate the rest of the package.  Comparing a
+    digest against a literal stored inside the digested set would be
+    self-consistency again, which is the defect, not the fix.
+
+    THE STRENGTH OF THIS SEAL, STATED HONESTLY AND KNOWN TO BE INCOMPLETE.
+    It detects accidental drift and DIRECT rebinding of an audited global
+    (verified: rebinding is caught at both the pre-phase and post-phase
+    check).  It does NOT withstand an adversary running inside this process,
+    and two concrete defeats are known and unfixed:
+
+    1. MODULE SUBSTITUTION.  ``sealing.accepted_roots`` resolves roots
+       through ``sys.modules`` while :mod:`sealing` holds its own
+       import-time module bindings.  Where those disagree the audit measures
+       a different object from the one that executes.  Installing a pristine
+       :mod:`gates` into ``sys.modules`` and tampering the live module
+       yields terminal T8 with an all-zero ledger and BOTH seals passing.
+       ``LIVE_PROCESS_ATTRS`` pins only one live attribute of this module.
+       ``sealing.owned_modules()`` is named in the source as the
+       compensating control and has no call site.
+
+    2. SAME-TYPED SUBSTITUTION of a ``PROCESS_STATE_GLOBALS`` slot -- see
+       :class:`discriminator.ExecutionLedger`.
+
+    Both are recorded rather than repaired: closing them requires sealing a
+    Python process against an in-process adversary, which is not achievable,
+    and the freeze is being stated at the strength it has rather than
+    iterated toward a strength it cannot reach.  Anything relying on this
+    package must treat the interpreter as trusted and the external clean
+    process, not the seal, as the load-bearing evidence.
+    """
+    from experiments.candidates.orbit_owner_match import baseline
+    observed = (
+        ("fingerprint_set", sealing_module.fingerprint_set_digest()),
+        ("global_binding", sealing_module.global_binding_digest()),
+        ("class_behavior", sealing_module.class_behavior_digest()),
+        ("schema_registry", schema_registry_digest()),
+        ("gate_order", gate_order_digest()),
+        ("package_source", precommit_source_digest()),
+    )
+    for name, value in observed:
+        expected = baseline.EXPECTED_DIGESTS.get(name)
+        if expected is None:
+            raise ContractError("no frozen expectation for %r" % (name,), "T3")
+        if value != expected:
+            raise ContractError(
+                "runtime seal broken: %s digest is %s, frozen expectation is %s"
+                % (name, value, expected), "T3")
+
+
+def precommit_source_digest() -> str:
+    from experiments.candidates.orbit_owner_match import precommit
+    return precommit.package_source_digest()
+
+
+def gate_order_digest() -> str:
+    """Digest over the frozen gate names, so the ORDER is sealed too."""
+    from experiments.candidates.orbit_owner_match.canon import (
+        _enc_str, sha256_hex,
+    )
+    return sha256_hex(b"".join(_enc_str(name) for name in VALIDITY_GATE_ORDER))
+
+
+def _block_gates(snapshot, block) -> tuple:
+    cells = block_module.block_cells(block)
     return (
         ("block_key_census", lambda: _block_key_census_gate(cells)),
+        ("exact_key_domain",
+         lambda: block_module.exact_key_domain_gate(cells)),
         ("census_key_authenticity",
          lambda: block_module.census_key_authenticity_gate(cells)),
         ("cross_m_closure", lambda: block_module.cross_m_closure_gate(cells)),
         ("cross_q_closure", lambda: block_module.cross_q_closure_gate(cells)),
         ("clone_independence",
-         lambda: block_module.clone_independence_gate(cells)),
+         lambda: block_module.clone_independence_gate(block)),
         ("public_write_invariance",
          lambda: block_module.public_write_invariance_gate(cells)),
         ("lineage_rebuild",
@@ -186,7 +274,7 @@ def _block_key_census_gate(cells) -> None:
         raise ContractError("block key census mismatch")
 
 
-def _estimand_gates(estimand, calibration, evaluation) -> tuple:
+def _estimand_gates(estimand, calibration, evaluation, cells) -> tuple:
     return (
         ("calibration_disjointness",
          lambda: discriminator_module.calibration_disjointness_gate(
@@ -194,6 +282,9 @@ def _estimand_gates(estimand, calibration, evaluation) -> tuple:
         ("calibration_authenticity",
          lambda: discriminator_module.calibration_authenticity_gate(
              calibration)),
+        ("evaluation_census",
+         lambda: discriminator_module.evaluation_census_gate(
+             evaluation, cells)),
         ("estimand_authenticity",
          lambda: discriminator_module.estimand_authenticity_gate(
              estimand, evaluation)),
@@ -304,38 +395,56 @@ def classify_science(estimand, calibration) -> str:
     return TERMINALS[4]
 
 
-def terminal_controller(snapshot, cells) -> str:
-    """The single entry point from constructed cells to a terminal.
+def terminal_controller(snapshot) -> str:
+    """The single entry point from a snapshot to a terminal.
 
-    It takes ONLY the block, and DERIVES the calibration and the estimand
-    itself.  An earlier form accepted them as arguments, on the theory that
-    moving the thresholds one struct deeper into a ``CalibrationRecord`` took
-    them out of the caller's hands.  It did not: the record was still a
-    caller argument, and a fabricated pair of records -- finite, positive,
-    ``delta == 4*tau``, four distinct replica ids -- yielded T8 with the
-    discriminator never run.  Deriving both here is the only form in which
-    "the terminal follows from the data" is true.
+    It takes ONLY the snapshot.  It builds the census itself and derives the
+    calibration and the estimand itself.  Two earlier forms were broken:
 
-    Note that this EXECUTES the discriminator, and is meant to: it is the
-    run-time entry point, not a freeze-time one.  At freeze time only
-    :func:`run_static_gates` is used, and the execution ledger stays zero.
+    *   D0.4 took the estimand and the calibration as arguments, so a
+        fabricated pair -- finite, positive, ``delta == 4*tau`` -- returned T8
+        with the discriminator never run.
+    *   D0.5 fixed that but still took ``cells``: a caller-owned mutable dict
+        that crossed from the validation phase into the evaluation phase, so
+        everything the block gates established was established about a state
+        the caller could replace afterwards.
+
+    The census is now built here, carried as an immutable :class:`Block`, and
+    its canonical image is re-verified immediately before evaluation.  What
+    that does NOT close is a concurrent mutator inside this process, which no
+    in-process check can close; the contract claims the caller boundary, not
+    thread safety.
+
+    This EXECUTES the discriminator, and is meant to: it is the run-time
+    entry point, not a freeze-time one.  At freeze time only
+    :func:`run_static_gates` runs, and the execution ledger stays zero.
     """
     try:
         verdict = run_gate_sequence(_static_gates(), STATIC_GATE_ORDER)
         if verdict:
             return verdict
-        verdict = run_gate_sequence(_block_gates(snapshot, cells),
+        block = block_module.build_block(snapshot)
+        image = block_module.block_image(block)
+        verdict = run_gate_sequence(_block_gates(snapshot, block),
                                     BLOCK_GATE_ORDER)
         if verdict:
             return verdict
+        if block_module.block_image(block) != image:
+            raise ContractError("census changed during validation", "T1")
         calibration = discriminator_module.calibrate()
-        evaluation = discriminator_module.evaluate_block(cells)
+        evaluated_cells = block_module.block_cells(block)
+        evaluation = discriminator_module.evaluate_block(evaluated_cells)
         estimand = discriminator_module.estimands(evaluation)
         verdict = run_gate_sequence(
-            _estimand_gates(estimand, calibration, evaluation),
+            _estimand_gates(estimand, calibration, evaluation,
+                            evaluated_cells),
             ESTIMAND_GATE_ORDER)
         if verdict:
             return verdict
+        # Re-seal after the audited phase, so a rebinding performed between
+        # the static gates and the evaluation is caught before a scientific
+        # terminal is issued rather than after.
+        runtime_seal_gate()
         return classify_science(estimand, calibration)
     except Exception:
         return UNCLASSIFIED_TERMINAL

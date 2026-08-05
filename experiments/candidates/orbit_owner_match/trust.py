@@ -226,9 +226,18 @@ def key_id_for_writer(writer_id: str) -> str:
 # ---------------------------------------------------------------------------
 
 
-def binding_digest_hex() -> str:
-    return sha256_hex(serialize_struct(
-        "ExpectedOwnerBinding" + D2, EXPECTED_OWNER_BINDING))
+def binding_digest_hex(binding: ExpectedOwnerBinding = None) -> str:
+    """Digest of a binding; defaults to the discriminator's own.
+
+    The default exists for the precommit envelope, which pins the
+    discriminator binding by name.  Verification must pass the binding it
+    actually selected -- see :func:`compute_transcript`.
+    """
+    if binding is None:
+        binding = EXPECTED_OWNER_BINDING
+    if type(binding) is not ExpectedOwnerBinding:
+        raise ContractError("exact ExpectedOwnerBinding required")
+    return sha256_hex(serialize_struct("ExpectedOwnerBinding" + D2, binding))
 
 
 def compute_mac(key: bytes, writer_id: str, key_id: str,
@@ -246,10 +255,24 @@ def compute_mac(key: bytes, writer_id: str, key_id: str,
 
 
 def compute_transcript(sidecar: AuthSidecar_D2, auth_ok: bool,
-                       owner_match: bool) -> str:
+                       owner_match: bool,
+                       binding: ExpectedOwnerBinding) -> str:
+    """Transcript over the binding that ACTUALLY decided ``owner_match``.
+
+    Round 7 found this recording the wrong binding.  ``verify_write_d2``
+    selects a binding with ``binding_for_source`` -- since D0.5 there are two
+    admissible ones, the discriminator's and the calibration fixture's -- but
+    the transcript always serialized ``EXPECTED_OWNER_BINDING``.  Every
+    calibration verification therefore decided owner match under the
+    calibration binding and then registered a lineage record naming the
+    discriminator binding.  Nothing downstream read it, so no number moved;
+    the record was simply false.
+    """
+    if type(binding) is not ExpectedOwnerBinding:
+        raise ContractError("exact ExpectedOwnerBinding required")
     envelope = serialize_struct(SCHEMA_TRANSCRIPT_ENVELOPE, TranscriptEnvelope(
-        binding_digest_hex(), sidecar.writer_id, sidecar.key_id, sidecar.mac,
-        auth_ok, owner_match))
+        binding_digest_hex(binding), sidecar.writer_id, sidecar.key_id,
+        sidecar.mac, auth_ok, owner_match))
     return sha256_hex(envelope)
 
 
@@ -309,7 +332,7 @@ def verify_write_d2(clone: Clone, w: SiblingWrite_D2) -> VerificationResult:
     if binding.owner_epoch != clone.snapshot.owner_epoch:
         raise ContractError("binding/clone epoch mismatch")
     owner_match = sidecar.writer_id == binding.expected_owner_id
-    transcript = compute_transcript(sidecar, True, owner_match)
+    transcript = compute_transcript(sidecar, True, owner_match, binding)
     return VerificationResult(True, owner_match, sidecar.writer_id, transcript)
 
 

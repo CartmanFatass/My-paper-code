@@ -66,18 +66,35 @@ PACKAGE_MODULES = (
     "sealing.py",
     "gates.py",
     "precommit.py",
+    "baseline.py",
 )
+
+# ``baseline.py`` stores the frozen expectation that ``package_source`` is
+# compared against, so it cannot be inside the digest it records.  It is
+# authenticated externally, by git blob id -- see the module docstring there.
+# It still appears in PACKAGE_MODULES, so a change to it is visible in the
+# manifest and in the blob records; it is only excluded from the one digest it
+# would make self-referential.
+UNSEALED_MODULES = ("baseline.py",)
+
+SEALED_MODULES = tuple(name for name in PACKAGE_MODULES
+                       if name not in UNSEALED_MODULES)
 
 
 def package_source_records() -> tuple:
     records = []
-    for name in PACKAGE_MODULES:
+    for name in SEALED_MODULES:
         data = trust_module.normalized_source_bytes(PACKAGE_DIR / name)
         records.append((name, sha256_hex(data)))
     return tuple(records)
 
 
 def package_blob_records() -> tuple:
+    """Blob ids for EVERY module, baseline included.
+
+    The blob manifest is the external anchor, so it must cover the file that
+    the internal digest cannot.
+    """
     records = []
     for name in PACKAGE_MODULES:
         data = trust_module.normalized_source_bytes(PACKAGE_DIR / name)
@@ -131,7 +148,35 @@ def build_precommit_envelope() -> PrecommitEnvelope:
         _mpmath_version(),
         sealing_module.fingerprint_function(
             numerics_module.hp_curvature_reference),
+        sealing_module.global_binding_digest(),
+        sealing_module.class_behavior_digest(),
+        gates_module.gate_order_digest(),
+        blob_manifest_digest(),
+        "%s %d.%d.%d" % ((sys.implementation.name,) + sys.version_info[:3]),
+        execution_ledger_digest(),
     )
+
+
+def blob_manifest_digest() -> str:
+    parts = []
+    for name, blob in package_blob_records():
+        parts.append(_enc_str(name))
+        parts.append(_enc_str(blob))
+    return sha256_hex(b"".join(parts))
+
+
+def execution_ledger_digest() -> str:
+    """Digest of the ledger reading, so the envelope carries the claim.
+
+    D0.5 printed the ledger next to the envelope digest, which meant the
+    committed digest was compatible with any ledger at all.
+    """
+    counts = discriminator_module.EXECUTION_LEDGER.snapshot()
+    parts = []
+    for name in sorted(counts):
+        parts.append(_enc_str(name))
+        parts.append(_enc_str(str(counts[name])))
+    return sha256_hex(b"".join(parts))
 
 
 def _mpmath_version() -> str:
@@ -157,10 +202,29 @@ def precommit_digest(envelope=None) -> str:
 def freeze_evidence() -> dict:
     """Everything a reviewer needs to re-derive the freeze, in one call.
 
-    Includes the discriminator execution ledger, which must be all zeros:
-    that is the checkable form of "the contract was frozen without running
-    the experiment".  Because the ledger is monotone and has no reset, this
-    is only obtainable in a process that has never run the discriminator.
+    Includes the discriminator execution ledger, which must be all zeros.
+
+    WHAT THAT DOES AND DOES NOT SHOW.  An all-zero ledger read from a
+    freshly launched interpreter is evidence that THIS process never ran
+    the discriminator.  It is NOT evidence that no process ever did, and it
+    is NOT tamper-proof within its own process.  An earlier version of this
+    docstring claimed the ledger was monotone with no reset; that claim was
+    false and is withdrawn.  ExecutionLedger blocks __setattr__ and
+    __delattr__ on the instance, but the module global holding it is an
+    ordinary name, and
+
+        discriminator.EXECUTION_LEDGER = ExecutionLedger()
+
+    restores an all-zero ledger after a full run with every gate and both
+    runtime seals still passing, because PROCESS_STATE_GLOBALS pins that
+    slot by type and not by value.  Neutering ExecutionLedger.increment has
+    the same effect, because its methods are outside every digest.
+
+    The load-bearing control is therefore EXTERNAL, not this counter:
+    scripts/orbit_owner_freeze_evidence.py launches a clean interpreter and
+    the ledger is read from a process whose entire lifetime is visible in
+    the command that started it.  Read this field as a cheap consistency
+    check on an externally launched process, not as a tamper seal.
 
     The envelope is built ONCE and reused for both the reported fields and
     the reported digest; building it separately for each meant the digest
@@ -206,11 +270,20 @@ def freeze_evidence() -> dict:
         "precommit_digest": precommit_digest(envelope),
         "precommit_envelope_bytes": len(precommit_bytes(envelope)),
         "validity_gate_order": gates_module.VALIDITY_GATE_ORDER,
+        "gate_counts": {
+            "static": len(gates_module.STATIC_GATE_ORDER),
+            "block": len(gates_module.BLOCK_GATE_ORDER),
+            "estimand": len(gates_module.ESTIMAND_GATE_ORDER),
+            "total": len(gates_module.VALIDITY_GATE_ORDER),
+        },
+        "gate_order_digest": envelope.gate_order_digest,
+        "blob_manifest_digest": envelope.blob_manifest_digest,
+        "class_behavior_digest": envelope.class_behavior_digest,
         "interpreter": "%s %s" % (platform.implementation,
                                   platform.python_version),
         "platform_worst_log_relative_error": platform.worst_log_residual.text,
         "platform_worst_exp_relative_error": platform.worst_exp_residual.text,
         "platform_worst_recovery_residual":
             platform.worst_recovery_residual.text,
-        "execution_ledger": dict(discriminator_module.EXECUTION_LEDGER),
+        "execution_ledger": discriminator_module.EXECUTION_LEDGER.snapshot(),
     }

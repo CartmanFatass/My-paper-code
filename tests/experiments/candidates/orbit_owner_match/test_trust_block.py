@@ -27,8 +27,13 @@ def clone(snapshot):
 
 
 @pytest.fixture(scope="module")
-def cells(snapshot):
+def blk(snapshot):
     return block.build_block(snapshot)
+
+
+@pytest.fixture(scope="module")
+def cells(blk):
+    return block.block_cells(blk)
 
 
 def test_snapshot_digest_matches_the_frozen_literal(snapshot):
@@ -167,7 +172,6 @@ def test_relabelled_census_is_rejected(snapshot, cells):
 
     # The other gates really do pass -- this is what makes the hole subtle.
     block.cross_q_closure_gate(cells)
-    block.clone_independence_gate(relabelled)
     block.public_write_invariance_gate(relabelled)
     block.lineage_rebuild_gate(snapshot, relabelled)
     assert set(relabelled) == set(cells)
@@ -177,9 +181,60 @@ def test_relabelled_census_is_rejected(snapshot, cells):
     block.census_key_authenticity_gate(cells)
 
 
-def test_clone_independence_and_public_write_invariance(cells):
-    block.clone_independence_gate(cells)
+def test_clone_independence_and_public_write_invariance(blk, cells):
+    block.clone_independence_gate(blk)
     block.public_write_invariance_gate(cells)
+
+
+def test_one_reused_clone_is_rejected(snapshot):
+    """Rejects: sixteen cells built from ONE clone object.
+
+    D0.5 derived clone ids from each cell's labels, so this census produced
+    sixteen distinct names and passed every block gate -- including the one
+    named for clone independence -- while the "sixteen distinct clones"
+    proposition was false.  The witness observes the object by identity.
+    """
+    from experiments.candidates.orbit_owner_match.records import (
+        Block, BlockEntry,
+    )
+    shared = restore_clone(serialize_snapshot(snapshot), "shared")
+    cells, witnesses = {}, {}
+    for writer_id, b, role, q in block.BLOCK_REQUESTS:
+        cell, witness = block.build_target_cell(shared, writer_id, b, role, q)
+        key = cell.key.as_tuple()
+        cells[key] = cell
+        witnesses[key] = witness
+    order = sorted(cells)
+    forged = Block(
+        block.BLOCK_ID,
+        tuple(BlockEntry(cells[k].key, cells[k]) for k in order),
+        tuple(witnesses[k] for k in order))
+
+    # Everything else still passes: that is what made the hole invisible.
+    materialized = block.block_cells(forged)
+    block.census_key_authenticity_gate(materialized)
+    block.exact_key_domain_gate(materialized)
+    block.cross_m_closure_gate(materialized)
+    block.cross_q_closure_gate(materialized)
+    block.public_write_invariance_gate(materialized)
+    block.lineage_rebuild_gate(snapshot, materialized)
+
+    with pytest.raises(canon.ContractError):
+        block.clone_independence_gate(forged)
+
+
+def test_boolean_census_key_is_rejected(cells):
+    """Rejects: ``True`` standing in for ``1`` in an external census key.
+
+    Python set and dict semantics make ``True == 1`` and ``hash(True) ==
+    hash(1)``, so D0.5's key-set comparison and every ``cells[(q, m, b, r)]``
+    lookup admitted a boolean-typed label.
+    """
+    forged = dict(cells)
+    victim = (1, 1, 1, 1)
+    forged[(True, 1, 1, 1)] = forged.pop(victim)
+    with pytest.raises(canon.ContractError):
+        block.exact_key_domain_gate(forged)
 
 
 def test_raw_bit_comparison_sees_signed_zero():

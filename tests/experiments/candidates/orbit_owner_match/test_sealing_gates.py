@@ -45,7 +45,7 @@ def test_call_graph_reaches_the_inherited_callees():
     Round 6 found the inherited writer, verifier and adapter outside the
     advertised freeze entirely.
     """
-    graph = sealing.call_graph(sealing.ACCEPTED_ROOTS)
+    graph = sealing.call_graph(sealing.accepted_roots())
     reached = set(graph)
     for name in ("write_sibling", "verify_sibling", "q_adapter", "_softmax",
                  "actor", "restore_clone", "_digest"):
@@ -67,14 +67,13 @@ def test_construction_site_gate_catches_a_new_construction_site():
     def rogue():
         return records.VerifiedOwnerPredicate(True)
 
-    graph_roots = sealing.ACCEPTED_ROOTS + (rogue,)
-    original = sealing.ACCEPTED_ROOTS
-    sealing.ACCEPTED_ROOTS = graph_roots
+    original = sealing.accepted_roots
+    sealing.accepted_roots = lambda: original() + (rogue,)
     try:
         with pytest.raises(canon.ContractError):
             sealing.construction_site_gate()
     finally:
-        sealing.ACCEPTED_ROOTS = original
+        sealing.accepted_roots = original
     sealing.construction_site_gate()
 
 
@@ -94,14 +93,14 @@ def test_forbidden_handle_gate_blocks_name_free_construction():
     def via_type(existing):
         return type(existing)(True)
 
-    original = sealing.ACCEPTED_ROOTS
+    original = sealing.provenance_roots
     for rogue in (via_registry, via_type):
-        sealing.ACCEPTED_ROOTS = original + (rogue,)
+        sealing.provenance_roots = lambda r=rogue: original() + (r,)
         try:
             with pytest.raises(canon.ContractError):
                 sealing.forbidden_handle_gate()
         finally:
-            sealing.ACCEPTED_ROOTS = original
+            sealing.provenance_roots = original
     sealing.forbidden_handle_gate()
 
 
@@ -109,8 +108,10 @@ def test_interpreter_is_pinned():
     """Rejects: digests that silently mean different things per interpreter."""
     sealing.interpreter_gate()
     assert sealing.INTERPRETER_CONTRACT[0] == "cpython"
-    assert (sys.implementation.name, ) + sys.version_info[:2] == (
+    assert (sys.implementation.name, ) + sys.version_info[:3] == (
         sealing.INTERPRETER_CONTRACT)
+    assert len(sealing.INTERPRETER_CONTRACT) == 4, (
+        "the patch level must be pinned; 3.11.x is not 3.11.9")
 
 
 def test_type_tests_against_guarded_classes_stay_legal():
@@ -220,7 +221,8 @@ def test_nonfinite_estimand_is_rejected_not_classified():
 
 def _fabricated_calibration(delta=1e-300):
     diameter = records.DiameterRecord(
-        tuple(records.ReplicaRecord("R%d" % i, (0.5, -0.5), (0.6, 0.4))
+        tuple(records.ReplicaRecord("R%d" % i, (0.5, -0.5), (0.6, 0.4),
+                                    "calibration-clone-A", i % 2)
               for i in range(4)), 0.0, 0.0)
     tau = delta / 4.0
     return records.CalibrationRecord(
@@ -240,7 +242,7 @@ def test_terminal_controller_does_not_accept_an_estimand_or_calibration():
 
     parameters = list(
         inspect.signature(gates.terminal_controller).parameters)
-    assert parameters == ["snapshot", "cells"], parameters
+    assert parameters == ["snapshot"], parameters
 
 
 def test_calibration_authenticity_rejects_a_fabricated_ladder():
@@ -267,7 +269,8 @@ def test_classification_still_separates_pass_from_null():
 
 def test_delta_must_be_four_tau():
     diameter = records.DiameterRecord(
-        tuple(records.ReplicaRecord("R%d" % i, (0.5, -0.5), (0.6, 0.4))
+        tuple(records.ReplicaRecord("R%d" % i, (0.5, -0.5), (0.6, 0.4),
+                                    "calibration-clone-A", i % 2)
               for i in range(4)), 0.0, 0.0)
     broken = records.CalibrationRecord(
         "0" * 64, diameter, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 3.0, 4.0)
@@ -323,7 +326,7 @@ def test_fingerprint_set_covers_the_whole_accepted_graph():
     """Rejects: comparing a function's output to itself."""
     fingerprints = sealing.fingerprint_set()
     covered = {record.qualname for record in fingerprints}
-    assert covered == set(sealing.call_graph(sealing.ACCEPTED_ROOTS))
+    assert covered == set(sealing.call_graph(sealing.accepted_roots()))
     assert any(name.startswith(eight_cell_audit.__name__)
                for name in covered)
     assert len({record.fingerprint_hex for record in fingerprints}) == len(
@@ -334,22 +337,55 @@ def test_package_manifest_has_not_drifted():
     precommit.package_manifest_gate()
 
 
-def test_execution_ledger_is_monotone_and_notices_an_actor_call():
-    """Rejects: a resettable ledger.
-
-    A full run followed by ``reset_execution_ledger()`` used to produce an
-    all-zero ledger and a clean freeze, so the gate certified "not executed"
-    only relative to the last reset.
-    """
+def test_execution_ledger_notices_an_actor_call_in_a_clean_process():
+    """Rejects: a ledger that does not move when the actor runs."""
     assert not hasattr(discriminator, "reset_execution_ledger")
     output = _clean_process(
         "from experiments.candidates.orbit_owner_match import discriminator\n"
         "from experiments.candidates.orbit_owner_match import canon\n"
+        "from experiments.candidates.orbit_shadow_read.eight_cell_audit "
+        "import restore_clone, serialize_snapshot\n"
         "discriminator.execution_ledger_gate()\n"
-        "ai = discriminator._calibration_actor_input('A-cold')\n"
+        "src = serialize_snapshot(discriminator.CALIBRATION_SNAPSHOT)\n"
+        "ai = discriminator._calibration_actor_input("
+        "restore_clone(src, 'calibration-clone-A'))\n"
         "discriminator.owner_predicate_actor(ai)\n"
         "try:\n"
         "    discriminator.execution_ledger_gate(); print('LEAKED')\n"
         "except canon.ContractError:\n"
         "    print('CAUGHT')\n")
     assert output == "CAUGHT"
+
+
+def test_execution_ledger_refuses_the_ordinary_reset_spellings():
+    """Rejects: the one-line reset that defeated D0.5's ledger.
+
+    D0.5 exported a plain dict and claimed monotonicity because it had
+    removed the reset HELPER.  ``EXECUTION_LEDGER["actor_calls"] = 0``
+    restored an all-zero reading after a full run and the gate passed.
+    """
+    ledger = discriminator.EXECUTION_LEDGER
+    assert not hasattr(ledger, "__setitem__")
+    with pytest.raises(canon.ContractError):
+        ledger.actor_calls = 0
+    with pytest.raises(canon.ContractError):
+        del ledger.actor_calls
+    with pytest.raises(canon.ContractError):
+        ledger.increment("not_a_counter")
+    assert not hasattr(ledger, "__dict__"), (
+        "__slots__ must be real; an instance dict would shadow the counters")
+
+
+def test_execution_ledger_claim_is_not_overstated():
+    """The contract must not claim tamper-proofness it cannot deliver.
+
+    ``object.__setattr__`` still reaches the counters.  That is a fact about
+    CPython, not a defect to be papered over, and the docstring says so --
+    this test fails if someone re-asserts the stronger claim.
+    """
+    source = discriminator.execution_ledger_gate.__doc__
+    assert "object.__setattr__" in source
+    assert "orbit_owner_freeze_evidence" in source
+    probe = discriminator.ExecutionLedger()
+    object.__setattr__(probe, "actor_calls", 7)
+    assert probe.snapshot()["actor_calls"] == 7

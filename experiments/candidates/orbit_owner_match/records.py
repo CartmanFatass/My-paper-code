@@ -220,10 +220,83 @@ class BlockCensus:
 
 
 @dataclass(frozen=True)
+class CloneWitness:
+    """OBSERVED clone provenance for one cell (round-7 correction D05-C04).
+
+    ``serial`` is the index the clone object received in the process-wide
+    observation list at the moment the cell was built, and ``first_use`` says
+    whether that observation created the entry.  Both are read off the object
+    that was actually passed to the builder.
+
+    D0.5 had no such record: ``clone_independence_gate`` synthesized sixteen
+    clone ids from each cell's own ``(writer, b, role, q)`` labels and counted
+    the synthesized strings, so one clone object reused for all sixteen
+    constructions produced sixteen distinct names and passed.  Clone identity
+    never entered ``TargetCell``, so the lineage rebuild could not see the
+    reuse either.  The proposition "sixteen distinct clones" was false.
+    """
+
+    key: AnalysisKey
+    clone_id: str
+    serial: int
+    first_use: bool
+
+    def __post_init__(self) -> None:
+        if type(object.__getattribute__(self, "serial")) is not int:
+            raise ContractError("exact int serial required")
+        if type(object.__getattribute__(self, "first_use")) is not bool:
+            raise ContractError("exact bool first_use required")
+        if self.serial < 0:
+            raise ContractError("clone serial must be nonnegative")
+
+
+@dataclass(frozen=True)
+class BlockEntry:
+    """One (key, cell) pair of the immutable census image."""
+
+    key: AnalysisKey
+    cell: TargetCell
+
+
+@dataclass(frozen=True)
+class Block:
+    """The internally owned, immutable census (round-7 correction D05-C03).
+
+    D0.5 handed a plain mutable ``dict`` from the caller through the block
+    gates and then evaluated that same dict, leaving a validation/evaluation
+    window.  The census is now built inside the terminal path and carried as
+    a sorted tuple; consumers materialize a fresh mapping from it rather than
+    sharing one.
+    """
+
+    block_id: str
+    entries: tuple
+    witnesses: tuple
+
+
+@dataclass(frozen=True)
 class ReplicaRecord:
+    """One calibration replica.
+
+    ``clone_label`` and ``prior_uses`` are the OBSERVED reuse facts
+    (round-7 correction D05-C05): ``prior_uses == 0`` is a cold evaluation on
+    a freshly restored clone and ``prior_uses == 1`` is a warm evaluation on
+    that same object.  D0.5 named four replicas A-cold/A-warm/B-cold/B-warm
+    but restored a fresh clone on every one of the four, so no warm replica
+    existed and the labels described a protocol the code did not run.
+    """
+
     replica_id: str
     logits: tuple
     kernel: tuple
+    clone_label: str
+    prior_uses: int
+
+    def __post_init__(self) -> None:
+        if type(object.__getattribute__(self, "prior_uses")) is not int:
+            raise ContractError("exact int prior_uses required")
+        if self.prior_uses not in (0, 1):
+            raise ContractError("prior_uses must be 0 (cold) or 1 (warm)")
 
 
 @dataclass(frozen=True)
@@ -358,6 +431,16 @@ class PrecommitEnvelope:
     margin: RationalValue
     mpmath_version: str
     evaluator_fingerprint: str
+    # Round-7 correction D05-C12.  D0.5 reported these beside the envelope in
+    # the freeze evidence instead of binding them into it, so the committed
+    # digest said nothing about the runtime trust surface, the gate order, the
+    # interpreter or the object identities -- while the prose implied it did.
+    global_binding_digest: str
+    class_behavior_digest: str
+    gate_order_digest: str
+    blob_manifest_digest: str
+    interpreter: str
+    execution_ledger_digest: str
 
 
 # ---------------------------------------------------------------------------
@@ -374,6 +457,9 @@ SCHEMA_SIBLING_WRITE_D1 = "SiblingWrite_D1" + D1
 SCHEMA_ACTOR_INPUT_D1 = "ActorInput_D1" + D1
 SCHEMA_ACTOR_INPUT_D2 = "ActorInput_D2" + D2
 SCHEMA_TARGET_CELL = "TargetCell" + D2
+SCHEMA_CLONE_WITNESS = "CloneWitness" + D2
+SCHEMA_BLOCK_ENTRY = "BlockEntry" + D2
+SCHEMA_BLOCK = "Block" + D2
 SCHEMA_MAC_ENVELOPE = "orbit-owner-mac-v3"
 SCHEMA_TRANSCRIPT_ENVELOPE = "orbit-owner-transcript-v1"
 SCHEMA_PRECOMMIT = "orbit-owner-precommit-v1"
@@ -462,9 +548,23 @@ _SCHEMA_TABLE = (
         ("block_id", "str"),
         ("cells", "tuple[struct:CellEvidence" + D2 + ";16]"),
     )),
+    (SCHEMA_CLONE_WITNESS, CloneWitness, (
+        ("key", _ANALYSIS_KEY), ("clone_id", "str"),
+        ("serial", "int"), ("first_use", "bool"),
+    )),
+    (SCHEMA_BLOCK_ENTRY, BlockEntry, (
+        ("key", _ANALYSIS_KEY),
+        ("cell", "struct:" + SCHEMA_TARGET_CELL),
+    )),
+    (SCHEMA_BLOCK, Block, (
+        ("block_id", "str"),
+        ("entries", "tuple[struct:" + SCHEMA_BLOCK_ENTRY + ";16]"),
+        ("witnesses", "tuple[struct:" + SCHEMA_CLONE_WITNESS + ";16]"),
+    )),
     ("ReplicaRecord" + D2, ReplicaRecord, (
         ("replica_id", "str"), ("logits", "tuple[float;2]"),
         ("kernel", "tuple[float;2]"),
+        ("clone_label", "str"), ("prior_uses", "int"),
     )),
     ("DiameterRecord" + D2, DiameterRecord, (
         ("replicas", "tuple[struct:ReplicaRecord" + D2 + ";4]"),
@@ -535,6 +635,9 @@ _SCHEMA_TABLE = (
         ("tol_recover", _RATIONAL), ("tol_curv", _RATIONAL),
         ("margin", _RATIONAL),
         ("mpmath_version", "str"), ("evaluator_fingerprint", "str"),
+        ("global_binding_digest", "str"), ("class_behavior_digest", "str"),
+        ("gate_order_digest", "str"), ("blob_manifest_digest", "str"),
+        ("interpreter", "str"), ("execution_ledger_digest", "str"),
     )),
 )
 

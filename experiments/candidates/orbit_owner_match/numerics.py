@@ -15,10 +15,10 @@ Three round-6 omissions are closed here:
     uses, against an independent high-precision evaluator, and refuses to
     admit a platform that violates the contract the proof assumes.
 
-A counter distinct from the discriminator's execution ledger records that
-these numerical self-audits ran: they are properties of frozen, externally
-verified tables, not evaluations of the target, so they must not be confused
-with executing the discriminator.
+These self-audits are properties of frozen, externally verified tables, not
+evaluations of the target, so they must not be confused with executing the
+discriminator -- which is why they do not touch its execution ledger.  They no
+longer keep a counter of their own either; see the note below.
 """
 
 from __future__ import annotations
@@ -46,9 +46,14 @@ from experiments.candidates.orbit_owner_match.controls import (
 )
 
 
-NUMERIC_AUDIT_LEDGER = {"recovery_checks": 0, "curvature_checks": 0,
-                        "curvature_mutant_checks": 0,
-                        "platform_admissions": 0}
+# The per-process run counter that used to live here is gone (round-7
+# correction D05-C01).  It counted how many times the numeric self-audit had
+# run in this process, which is not a property of the contract, and it made
+# ``global_binding_digest`` -- and therefore the runtime seal -- change on
+# every audit.  A seal that moves when you check it cannot be compared with a
+# frozen expectation.  D0.5 had already excluded this counter from the freeze
+# evidence for the same reason; the seal simply made the exclusion mandatory
+# rather than cosmetic.
 
 # The relative-error contract the recovery derivation assumes of the platform
 # libm: log and exp correctly rounded to within one unit in the last place.
@@ -105,7 +110,6 @@ def recovery_gate() -> None:
     ``8 * tol_recover`` propagation is actually about.  The factor 8 is the
     total absolute coefficient mass: sixteen terms at ``1/2``.
     """
-    NUMERIC_AUDIT_LEDGER["recovery_checks"] += 1
     tolerance = TOL_RECOVER.as_fraction()
     worst = max(recovery_residuals())
     if worst > tolerance:
@@ -135,6 +139,25 @@ def recovery_gate() -> None:
             raise ContractError(
                 "propagated recovery envelope violated on component %d"
                 % (index,))
+
+    # And again through the LITERAL binary64 accumulator the discriminator
+    # runs (round-7 correction D05-V04).  The check above treats the recovered
+    # floats as exact rationals, so it bounds the mathematical operator, not
+    # the addition sequence in ``discriminator.float_accumulate``.  Both are
+    # inside the envelope, but only this one is a statement about the code
+    # that will actually produce the estimand.
+    from experiments.candidates.orbit_owner_match import (
+        discriminator as discriminator_module,
+    )
+    float_values = {key: (float(value[0]), float(value[1]))
+                    for key, value in recovered_values.items()}
+    float_contrast = discriminator_module.float_accumulate(float_values)
+    for index in (0, 1):
+        deviation = abs(Fraction(float_contrast[index]) - exact_contrast[index])
+        if deviation > envelope:
+            raise ContractError(
+                "binary64 accumulator leaves the recovery envelope on "
+                "component %d" % (index,))
 
 
 def recovery_worst_residual() -> Fraction:
@@ -194,7 +217,6 @@ def curvature_mutant_response_gate() -> None:
     This also gives :data:`MARGIN` its only real consumer: each mutant's
     deviation from the reference must exceed it.
     """
-    NUMERIC_AUDIT_LEDGER["curvature_mutant_checks"] += 1
     baseline = curvature_reference_float()
     if baseline == 0.0:
         raise ContractError("curvature reference is zero; cannot detect scale")
@@ -284,7 +306,6 @@ def curvature_reference_stability_gate() -> None:
 def curvature_gate() -> None:
     """The binary64 curvature value matches the frozen reference within
     ``tol_curv``, and the mutant margin dominates that tolerance."""
-    NUMERIC_AUDIT_LEDGER["curvature_checks"] += 1
     mpmath = _mpmath()
     with mpmath.workdps(60):
         reference = hp_curvature_reference(60)
@@ -349,7 +370,6 @@ def platform_admission() -> tuple:
     conditional on these staying within one ulp of relative error; without
     this check the conclusion is an assumption about an unexamined machine.
     """
-    NUMERIC_AUDIT_LEDGER["platform_admissions"] += 1
     mpmath = _mpmath()
     bound = None
     with mpmath.workdps(60):
