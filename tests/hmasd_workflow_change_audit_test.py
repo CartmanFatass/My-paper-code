@@ -93,11 +93,13 @@ def test_workflow_review_is_one_pass_normal_path_advice() -> None:
     ).read_text(encoding="utf-8")
     assert "actionable_finding_requires=supported_normal_path_reproduction" in reviewer
     assert "hypothetical_or_hostile_input_finding=residual_risk_only" in reviewer
-    assert "review_passes_per_change=1" in reviewer
+    assert "review_passes_per_reviewer=1" in reviewer
     assert "review_objective=contract_fidelity_and_net_workflow_value" in reviewer
     assert "finding_cost_test=expected_benefit_exceeds_complexity_time_and_maintenance_cost" in reviewer
-    assert "request at most one advisory" in skill
-    assert "never starts a re-review loop" in skill
+    assert "Workflow Reviewer by default" in skill
+    assert "parallel reviewers only for genuinely" in skill
+    assert "batch-scoped rather than per implementer" in skill
+    assert "no automatic second review" in skill
     assert "simple_operation_new_gate_state_identity_or_recovery=forbidden" in skill
     assert "simple_operation_control=one_line_runtime_checklist_only" in skill
     assert "theoretical_safety_hardening=reject_by_default" in skill

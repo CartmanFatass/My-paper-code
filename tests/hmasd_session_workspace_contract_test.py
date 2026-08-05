@@ -22,6 +22,9 @@ def test_wdm_is_the_single_workflow_owner() -> None:
         "workflow_child_acceptance_authority=none",
         "workflow_router_consistency_check=required_for_every_workflow_change",
         "workflow_implementer_parallelism=file_family_adaptive",
+        "child_assignment_brief=temp/sessions/<parent_role>/assignments/<assignment_id>.md",
+        "child_assignment_format=self_contained_natural_language_not_schema_admission",
+        "child_forked_context=background_only",
         "Workflow Design Manager is the sole owner",
     ):
         assert required in contract
@@ -57,6 +60,7 @@ def test_public_current_work_is_partitioned_and_owned() -> None:
 
 def test_durable_and_temporary_workspaces_remain_separate() -> None:
     contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
+    normalized = " ".join(contract.split())
     readme = _text("docs/session-workspaces/workflow_design_manager/README.md")
     for required in (
         "docs/session-workspaces/<role_id>/",
@@ -65,6 +69,11 @@ def test_durable_and_temporary_workspaces_remain_separate() -> None:
         "No hash, byte count or digest is required",
     ):
         assert required in contract
+    for required in (
+        "Suggested headings aid communication but never become required fields or an admission gate",
+        "Forked turns are background only",
+    ):
+        assert required in normalized
     assert "workflow_surface_owner=true" in readme
 
 
@@ -95,7 +104,7 @@ def test_non_workflow_role_ownership_is_preserved() -> None:
     assert "Code Project Manager keeps exclusive authority for code" in normalized
     assert "Independent Research Explorer keeps exclusive authority for advisory research" in normalized
     assert "Those role-local authorities do not include workflow" in normalized
-    assert "may fetch and push only their non-workflow code" in normalized
+    assert "push only their owned non-workflow durable paths" in normalized
 
 
 def test_explorer_research_and_session_artifacts_remain_explorer_owned() -> None:
@@ -108,8 +117,5 @@ def test_explorer_research_and_session_artifacts_remain_explorer_owned() -> None
         "acceptance does not grant workspace cleanup or write authority",
     ):
         assert required in contract
-    assert (
-        "centralized_explorer_workflow_acceptance_owner=workflow_design_manager_for_listed_artifacts_only"
-        in role
-    )
+    assert "workflow_acceptance_authority=exclusive" in role
     assert "centralized_explorer_workspace_cleanup_write_authority=none" in role

@@ -147,12 +147,16 @@ worktree path. Before editing, the child must verify that
 `git rev-parse --show-toplevel` equals that path exactly; a mismatch stops the
 child before any edit.
 
-Use auditors for disjoint impact families, one implementer per confirmed
-nonoverlapping file family at available native capacity. Use one reviewer only
-for authority/file ownership, locked routing/model, compute admission, an
-action-performing script/hook or unresolved cross-worker semantics. A reviewer
-must evaluate normal-path risk, complexity, maintenance and iteration delay;
-finding count is not value. Never create a review of the review.
+Use auditors for disjoint impact families and one implementer per confirmed
+nonoverlapping file family at available native capacity. WDM integrates all
+implementer results into one coherent batch, then uses one independent Workflow
+Reviewer by default. It may run parallel reviewers only for genuinely
+independent review questions; each reviewer receives a distinct focus and may
+read the whole integrated diff. Review is batch-scoped rather than per
+implementer. Reviewers evaluate normal-path risk, complexity, maintenance and
+iteration delay; finding count is not value. WDM performs one review phase and
+does not create an automatic second review round, reviewer-of-reviewer, schema
+admission gate, wrapper or state machine.
 
 ## Role and Skill capability standard
 

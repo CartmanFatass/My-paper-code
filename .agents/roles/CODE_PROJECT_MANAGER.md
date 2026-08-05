@@ -121,6 +121,17 @@ manager; there is no Research Operations Manager or persistent monitor.
   evidence without scientific reinterpretation.
 - Code-child assignments, source and code-test changes, proof-sized validation,
   repair, technical acceptance and code-side executable sufficiency.
+- Code-child assignments are natural-language contracts for outcome, intent,
+  protected semantics, local judgment and completion. Suggested fields and
+  formatting aid understanding but are never rigid schemas or admission gates.
+  Routine implementers use `fork_turns=3`; reviewers use `fork_turns=none`; the
+  readiness verifier uses `fork_turns=1` when its existing trigger fires.
+- After integrating a coherent group of implementer changes, dispatch one
+  independent reviewer by default against the complete integrated diff. Add
+  parallel reviewers only for genuinely independent review questions; each may
+  read the whole diff. Never review once per implementer and never create an
+  automatic re-review loop. Verifier dispatch remains conditional on the
+  existing readiness trigger for execution-entry and artifact-lifecycle risk.
 - Execution readiness for result-bearing runner/analyzer integration, changes to
   execution entry points, artifacts, serialization or phase connections, and
   repairs of code defects exposed by preflight. Focused tests alone are

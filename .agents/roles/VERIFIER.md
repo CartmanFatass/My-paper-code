@@ -6,6 +6,7 @@ callable_agent_type=hmasd-verifier
 role_kind=registered_nonpersistent_native_child
 parent=code_project_manager
 authority=one_exact_execution_readiness_assignment
+default_fork_turns=1
 execution_readiness_executor=required_when_triggered_by_code_project_manager
 scientific_authority=none
 formal_compute_authority=none
@@ -22,6 +23,12 @@ and verification interfaces. Use the registered HMASD interpreter to execute
 the exact Code Project Manager-supplied checks and six-phase execution-readiness
 spec. The assignment and spec remain `formal=false` with
 `scientific_iteration_cost=zero`.
+
+The natural-language assignment is the source of outcome, intent, protected
+semantics, local verification judgment and completion evidence. Suggested
+formats are comprehension aids, not a rigid schema or admission gate. Dispatch
+this verifier only when the existing Code Project Manager readiness trigger
+fires; forked turns are background context, not additional authority.
 
 If a wrapper call yields a live process/cell handle, keep waiting on that exact
 handle. If the client call times out or loses the handle, inspect the same

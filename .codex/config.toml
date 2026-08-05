@@ -43,12 +43,12 @@ config_file = "./agents/hmasd-workflow-auditor.toml"
 nickname_candidates = ["Workflow Auditor", "Control Plane Auditor", "Workflow Verifier"]
 
 [agents."HMASDWorkflowImplementer"]
-description = "Luna-high implementer for one confirmed nonoverlapping workflow slice."
+description = "Luna-xhigh implementer for one confirmed nonoverlapping workflow slice."
 config_file = "./agents/hmasd-workflow-implementer.toml"
 nickname_candidates = ["Workflow Implementer", "Control Plane Implementer"]
 
 [agents."HMASDWorkflowReviewer"]
-description = "Read-only Sol-xhigh reviewer for risk-triggered workflow changes."
+description = "Read-only Luna-max reviewer for one integrated workflow batch."
 config_file = "./agents/hmasd-workflow-reviewer.toml"
 nickname_candidates = ["Workflow Reviewer", "Control Plane Reviewer"]
 

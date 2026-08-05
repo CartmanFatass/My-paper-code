@@ -72,7 +72,7 @@ tool; any touched legacy branch must stay flat or shrink.
 ```text
 workflow_auditor=hmasd-workflow-auditor_optional_impact_map_or_postchange_verify
 workflow_implementer=hmasd-workflow-implementer_optional_exact_confirmed_slice
-workflow_reviewer=hmasd-workflow-reviewer_risk_triggered_only
+workflow_reviewer=hmasd-workflow-reviewer_integrated_batch_default
 workflow_child_parent=workflow_design_manager
 workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace
 workflow_child_acceptance_authority=none
@@ -89,11 +89,13 @@ two-implementer ceiling.
 Each child has exactly one existing role charter. Every profile is registered
 exactly once and receives a fresh-task profile smoke after registry changes.
 
-Use one Workflow Reviewer only for authority/file ownership, locked routing or
-model settings, compute admission, an action-performing
-script/hook or unresolved cross-worker semantics. Ordinary documentation needs
-no reviewer; request at most one advisory. The reviewer evaluates normal-path risk against complexity,
-maintenance, wall-clock and iteration-delay cost, and never starts a re-review loop.
+After WDM integrates all implementer results into one coherent batch, use one Workflow Reviewer by default.
+Add parallel reviewers only for genuinely
+independent review questions; each receives a distinct focus and may read the
+whole integrated diff. Review is batch-scoped rather than per implementer. The
+reviewers evaluate normal-path risk against complexity, maintenance, wall-clock
+and iteration-delay cost. Run one review phase only: no automatic second review,
+reviewer-of-reviewer, schema admission gate, wrapper or state machine.
 
 ## Continuous change loop
 
@@ -108,8 +110,10 @@ a scheduler, approval state or global blocker.
    `git rev-parse --show-toplevel` to equal the resolved ticket worktree path;
    a mismatch stops that isolated edit.
 3. **Focused check.** Run the smallest affected contract, the structural harness,
-   stale-term search and `git diff --check`. Request one reviewer only for a named
-   material risk; its advice cannot create a second pass.
+   stale-term search and `git diff --check`. When implementers were used, review
+   the integrated batch once by default; add parallel reviewers only for
+   genuinely independent questions.
+   Their advice cannot create a second pass.
 4. **Git and reload.** Inspect exact staged paths, commit and push the accepted
    workflow files. Require a fresh task only after router/profile discovery
    changes; ordinary Skill text is read from disk.

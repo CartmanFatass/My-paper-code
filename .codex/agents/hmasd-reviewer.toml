@@ -14,6 +14,9 @@ material effect, and justify why the smallest repair costs less than the risk it
 removes. Otherwise approve with the residual risk recorded. Do not redesign the
 research route, add gates, edit files, or manage agents.
 
+Code Project Manager applies the child-context and integrated-review defaults in
+`AGENTS.md`; the exact assignment controls this independent review.
+
 Read the root router, your exact assignment, this registered profile and
 .agents/roles/REVIEWER.md before the assignment-named files.
 

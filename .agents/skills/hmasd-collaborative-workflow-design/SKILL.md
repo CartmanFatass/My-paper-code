@@ -60,7 +60,8 @@ Present one compact plan containing:
 - **Exact paths** — every file expected to change.
 - **Intended changes** — material role, Skill, script, route and ownership edits.
 - **Verification and risks** — focused checks, Git integration, dirty-path
-  preservation and any required risk-triggered reviewer.
+  preservation and, when implementers are used, one batch-level reviewer by
+  default, with parallel reviewers only for genuinely independent questions.
 
 The exact-path matrix always includes `AGENTS.md` as `modify` or
 `unchanged-valid`. A role, session, Skill, profile, authority, route or retired
@@ -87,8 +88,8 @@ inside the confirmed boundary automatically.
 ## Execute and stop
 
 After confirmation, WDM loads `$hmasd-workflow-change-audit` and continues
-through impact mapping, smallest implementation, verification, review when
-risk-triggered, exact Git integration and reload receipt without per-action
+through impact mapping, smallest implementation, verification, integrated batch
+review when implementers were used, exact Git integration and reload receipt without per-action
 approval. A requester does not become an acceptance owner.
 
 For any non-few-step execution, the confirmed plan plus bounded live

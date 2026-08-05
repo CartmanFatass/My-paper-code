@@ -19,12 +19,17 @@ $currentWorkIndex = Get-Content -Raw -LiteralPath $currentWorkIndexPath
 $currentWorkSession = Get-Content -Raw -LiteralPath $currentWorkSessionPath
 $verifierRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/VERIFIER.md')
 $verifierProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-verifier.toml')
+$reviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/REVIEWER.md')
+$reviewerProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-reviewer.toml')
 $routineImplementerProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-implementer-terra.toml')
 $protectedImplementerProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-implementer.toml')
 $implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
 $codePmNormalized = $codePm -replace '\s+', ' '
 $verifierRoleNormalized = $verifierRole -replace '\s+', ' '
 $verifierProfileNormalized = $verifierProfile -replace '\s+', ' '
+$implementerRoleNormalized = $implementerRole -replace '\s+', ' '
+$reviewerRoleNormalized = $reviewerRole -replace '\s+', ' '
+$reviewerProfileNormalized = $reviewerProfile -replace '\s+', ' '
 $workflow = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
 $explorerValidationSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/SKILL.md')
@@ -292,9 +297,49 @@ foreach ($required in @('returned `resolved_worktree` as the only edit root',
 if (-not $implementerRole.Contains('reversible local engineering choice')) {
     throw 'Implementers lack bounded local engineering judgment'
 }
+foreach ($profile in @($routineImplementerProfile, $protectedImplementerProfile,
+        $reviewerProfile, $verifierProfile)) {
+    if (-not $profile.Contains('child-context') -or
+        -not $profile.Contains('exact assignment controls')) {
+        throw 'Code-child profile does not point to the shared assignment contract'
+    }
+}
+foreach ($required in @('default_fork_turns=3',
+        'natural-language assignment is the source of outcome',
+        'rigid schema or admission gate')) {
+    if (-not $implementerRoleNormalized.Contains($required)) {
+        throw "Implementer role missing assignment contract: $required"
+    }
+}
+foreach ($required in @('default_fork_turns=none',
+        'review_passes_per_reviewer=1',
+        'review_scope=coherent_integrated_batch_not_each_implementer',
+        'parallel_review_condition=genuinely_independent_questions_only',
+        'automatic_re_review=forbidden')) {
+    if (-not $reviewerRoleNormalized.Contains($required)) {
+        throw "Reviewer role missing batch-review contract: $required"
+    }
+}
 if (-not $verifierRoleNormalized.Contains('invocation/observation failure') -or
     -not $verifierRoleNormalized.Contains('Never start a second wrapper run')) {
     throw 'Verifier does not distinguish tool observation loss from phase evidence'
+}
+foreach ($required in @('default_fork_turns=1',
+        'existing Code Project Manager readiness trigger',
+        'rigid schema or admission gate')) {
+    if (-not $verifierRoleNormalized.Contains($required)) {
+        throw "Verifier role missing assignment contract: $required"
+    }
+}
+foreach ($surface in @($codePmNormalized, $agileNormalized)) {
+    foreach ($required in @('coherent group of implementer changes',
+            'one independent reviewer by default',
+            'genuinely independent review questions',
+            'Never review once per implementer', 'existing readiness trigger')) {
+        if (-not $surface.Contains($required)) {
+            throw "Code review batching contract missing: $required"
+        }
+    }
 }
 
 if ($codePm.Contains('Never load `docs/project/CURRENT_WORK.md`')) {

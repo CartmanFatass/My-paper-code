@@ -12,6 +12,9 @@ workflow_child_parent=workflow_design_manager
 workflow_child_acceptance_authority=none
 durable_workspace_root=docs/session-workspaces/<role_id>/
 temporary_workspace_root=temp/sessions/<role_id>/
+child_assignment_brief=temp/sessions/<parent_role>/assignments/<assignment_id>.md
+child_assignment_format=self_contained_natural_language_not_schema_admission
+child_forked_context=background_only
 same_file_concurrent_writes=forbidden
 public_current_work_partition_status=active_index_and_partitions
 public_current_work_index=docs/project/CURRENT_WORK.md
@@ -52,6 +55,15 @@ wdm_session_workspace=docs/session-workspaces/workflow_design_manager|temp/sessi
 
 Children return to WDM and never accept, stage, commit, push or route results.
 WDM resolves semantic junctions and performs final Git integration.
+
+Before spawning an Implementer, Reviewer or Verifier, WDM or Code Project
+Manager writes the exact user-readable natural-language assignment beneath its
+own temporary `assignments/` directory. The brief explains outcome, intent,
+protected boundaries, local judgment and completion evidence. Suggested
+headings aid communication but never become required fields or an admission
+gate. Forked turns are background only; the brief controls task scope and
+completion. A child uses bounded reconnaissance to resolve ordinary omissions
+and escalates only a material outcome, authority or path change.
 
 Workflow reports from other sessions are advisory inputs. WDM appends typed
 defect reports to its chronological incident log. The log preserves order but

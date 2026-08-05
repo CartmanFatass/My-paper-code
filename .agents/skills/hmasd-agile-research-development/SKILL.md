@@ -130,6 +130,13 @@ triggers execution readiness, the registered verifier is the required mechanical
 executor on the clean candidate commit. This is not a routine gate for ordinary
 code changes and creates no second acceptance owner.
 
+Assignments are natural-language contracts: they explain outcome, intent,
+protected semantics, local judgment and completion. Suggested fields are aids
+for intelligent model context, not rigid schemas or admission gates. Code
+implementers run with `fork_turns=3`; code reviewers with `fork_turns=none`; the
+readiness verifier with `fork_turns=1` only when the existing readiness trigger
+fires. Forked turns are background context and never replace the assignment.
+
 Select an oracle in this order when applicable: a hand-checkable exact case; a
 structural invariant or metamorphic relation; a differential comparison with a
 small simple reference; boundary and fail-closed behavior; then a deterministic
@@ -291,12 +298,16 @@ slice.
   file set directly; no relay or completion receipt exists.
 - Do not compute per-file hashes for handoff. Exact paths, the staged path set,
   and the resulting Git commit are sufficient code identity.
-- Subtasks close on evidence plus one fresh Code Project Manager check. The required Pro
-  code-science audit occurs once after Code Project Manager implementation acceptance; it is a
-  contract diff and owns scientific alignment, not code acceptance or
-  implementation design. Additional
-  code review is allowed only after a failed check or concrete engineering
-  anomaly; it diagnoses repair and is not another approval layer.
+- Subtasks close on evidence plus one fresh Code Project Manager check. After
+  Code Project Manager integrates a coherent group of implementer changes, one
+  independent reviewer by default examines the complete integrated diff. Parallel
+  reviewers are allowed only for genuinely independent review questions, and
+  each may read the whole diff. Never review once per implementer and do not
+  create an automatic re-review loop. The required Pro code-science audit occurs
+  once after Code Project Manager implementation acceptance; it is a contract
+  diff and owns scientific alignment, not code acceptance or implementation
+  design. Verifier dispatch remains conditional on the existing readiness
+  trigger.
 
 ## Quick reference
 

@@ -13,8 +13,8 @@ $skill = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/SKILL.md'
 
 $profiles = @(
     @('.agents/roles/WORKFLOW_AUDITOR.md', '.codex/agents/hmasd-workflow-auditor.toml', 'hmasd-workflow-auditor', '[agents."HMASDWorkflowAuditor"]', 'gpt-5.6-luna', 'high', 'read-only', 'WORKFLOW_IMPACT_PACKET'),
-    @('.agents/roles/WORKFLOW_IMPLEMENTER.md', '.codex/agents/hmasd-workflow-implementer.toml', 'hmasd-workflow-implementer', '[agents."HMASDWorkflowImplementer"]', 'gpt-5.6-luna', 'high', 'workspace-write', 'WORKFLOW_CHANGE_PACKET'),
-    @('.agents/roles/WORKFLOW_REVIEWER.md', '.codex/agents/hmasd-workflow-reviewer.toml', 'hmasd-workflow-reviewer', '[agents."HMASDWorkflowReviewer"]', 'gpt-5.6-sol', 'xhigh', 'read-only', 'WORKFLOW_REVIEW_PACKET'))
+    @('.agents/roles/WORKFLOW_IMPLEMENTER.md', '.codex/agents/hmasd-workflow-implementer.toml', 'hmasd-workflow-implementer', '[agents."HMASDWorkflowImplementer"]', 'gpt-5.6-luna', 'xhigh', 'workspace-write', 'WORKFLOW_CHANGE_PACKET'),
+    @('.agents/roles/WORKFLOW_REVIEWER.md', '.codex/agents/hmasd-workflow-reviewer.toml', 'hmasd-workflow-reviewer', '[agents."HMASDWorkflowReviewer"]', 'gpt-5.6-luna', 'max', 'read-only', 'WORKFLOW_REVIEW_PACKET'))
 
 foreach ($entry in $profiles) {
     $role = Read-RepoFile $entry[0]
@@ -69,7 +69,8 @@ foreach ($required in @(
     'simple_operation_paths=one_normal_plus_one_simple_fallback',
     'simple_operation_success=user_visible_requested_result',
     'passive_external_generation_wait_excluded_from_engineering_budget=true',
-    'request at most one advisory', 'never starts a re-review loop',
+    'one Workflow Reviewer by default', 'parallel reviewers only for genuinely',
+    'Their advice cannot create a second pass.',
     'workflow_single_mechanism_line_budget=100',
     'workflow_single_mechanism_terminal_state_budget=3',
     'workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch',
