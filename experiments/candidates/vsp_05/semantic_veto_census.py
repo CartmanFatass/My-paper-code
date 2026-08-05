@@ -14,7 +14,7 @@ ASSIGNMENT_ID = "vsp05_sequence_11_semantic_veto_20260803"
 CANDIDATE = "CAND-VSP-05@adversarial-revision-v7"
 TREATMENT = "VSP-05-FINITE-CENSUS-SEMANTIC-VETO-D0"
 EVENT_CLASS = "E_SC1_SINGLE_OWNER_MONOTONE_SERVICE_COMPLETION"
-RAW_OUTPUT_BINDING = "vsp05.semantic_veto_census.sequence11.v4"
+RAW_OUTPUT_BINDING = "vsp05.semantic_veto_census.sequence11.v5"
 FIELDS = ("e_local", "r_relation", "p_public", "b_integrity", "b_contradiction", "b_validity")
 POSITIVE_X = (True, True, True, True, False, True)
 FOLDS = tuple(f"lineage_{name}_full" for name in ("alpha", "beta", "gamma", "delta", "epsilon", "zeta"))
@@ -250,12 +250,12 @@ def sequential_fact(tape: Tape, rule: Mapping[tuple[bool, ...], int]) -> dict[st
     artifact = freeze_lookup(rule)
     decisions = tuple(runtime_decision(extract_x(record), artifact) for record in tape.records)
     surviving = 1
-    false_alias = captures = missed = delay = 0
+    false_alias = captures = missed = delay = executed = 0
     first_index = first_label = first_positive = None
     for index, (action, label) in enumerate(zip(decisions, tape.ys)):
         if surviving and label and first_positive is None:
             first_positive = index
-        false_alias += surviving * action * (1 - label)
+        executed += surviving * action; false_alias += surviving * action * (1 - label)
         captures += surviving * action * label
         missed += surviving * (1 - action) * label
         if surviving and action and label:
@@ -265,7 +265,7 @@ def sequential_fact(tape: Tape, rule: Mapping[tuple[bool, ...], int]) -> dict[st
         surviving *= 1 - action
     return {
         "action_decisions": "".join(map(str, decisions)),
-        "action_count": sum(rule.values()),
+        "action_count": executed,
         "capture_delay": delay,
         "first_latch_index_zero_based": first_index,
         "first_latch_label": first_label,
@@ -286,7 +286,7 @@ def derive_best_rule(tapes: tuple[Tape, ...]) -> tuple[dict[tuple[bool, ...], in
     selected = tape.xs[positive_positions[0]] if positive_positions else None
     rule = {x: int(x == selected) for x in X_STAR}
     facts = sequential_fact(tape, rule)
-    objective = {"constraints": ["binary_tuple_only", "one_shared_rule", "first_latch_absorbing", "single_unique_full_support_tape"], "derivation": "analytic earliest physical positive; all other actions deleted by final action-count tie-break", "lexicographic_order": ["false_alias", "missed_positive", "capture_delay", "action_count"], "selected_score": [facts["first_latch_false_alias"], facts["missed_positives"], facts["capture_delay"], facts["action_count"]]}
+    objective = {"constraints": ["binary_tuple_only", "one_shared_rule", "first_latch_absorbing", "single_unique_full_support_tape"], "derivation": "analytic earliest physical positive; every rule whose first executed action is that position shares the all-survival selected score; the singleton representative is fixed by the disclosed non-sequential representation convention", "lexicographic_order": ["false_alias", "missed_positive", "capture_delay", "action_count"], "representation_convention": "minimal_lookup_support_among_frozen_score_minimizers_not_part_of_frozen_objective", "selected_score": [facts["first_latch_false_alias"], facts["missed_positives"], facts["capture_delay"], facts["action_count"]]}
     return rule, objective
 
 

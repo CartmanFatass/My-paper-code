@@ -176,6 +176,32 @@ def test_sequential_objective_uses_physical_tapes_and_first_latch_survival(prepa
     assert (late_facts["missed_positives"], late_facts["positive_captures"], late_facts["capture_delay"]) == (1, 1, 1)
 
 
+def test_action_count_is_survival_weighted_executed_actions(prepared: tuple[dict, dict, tuple[svc.Tape, ...]]) -> None:
+    _, _, tapes = prepared
+    tape = tapes[0]
+    metrics = ("first_latch_false_alias", "missed_positives", "capture_delay", "action_count")
+    r_single = {x: int(x == tape.xs[61]) for x in svc.X_STAR}
+    r_three = {x: int(x in {tape.xs[61], tape.xs[62], tape.xs[63]}) for x in svc.X_STAR}
+    single_facts = svc.sequential_fact(tape, r_single)
+    three_facts = svc.sequential_fact(tape, r_three)
+    assert [single_facts[name] for name in metrics] == [0, 0, 0, 1]
+    assert [three_facts[name] for name in metrics] == [0, 0, 0, 1]
+    assert {k: v for k, v in single_facts.items() if k != "action_decisions"} == {k: v for k, v in three_facts.items() if k != "action_decisions"}
+    assert sum(r_three.values()) == 3 and sum(r_single.values()) == 1
+    rules, objective = svc.registered_rules(tapes)
+    facts = {name: svc.sequential_fact(tape, rule) for name, rule in rules.items()}
+    assert facts["NO_VETO"]["action_count"] == 1 and sum(rules["NO_VETO"].values()) == 64
+    assert facts["ALWAYS_VETO"]["action_count"] == 0
+    early_pair = {x: int(x in {tape.xs[0], tape.xs[5]}) for x in svc.X_STAR}
+    assert svc.sequential_fact(tape, early_pair)["action_count"] == 1
+    for subset in ((61,), (61, 62), (61, 63), (61, 62, 63)):
+        member = {x: int(x in {tape.xs[i] for i in subset}) for x in svc.X_STAR}
+        assert [svc.sequential_fact(tape, member)[name] for name in metrics] == [0, 0, 0, 1]
+    assert sum(rules["BEST_DETERMINISTIC_TUPLE_ONLY_RULE"].values()) == 1
+    assert objective["representation_convention"] == "minimal_lookup_support_among_frozen_score_minimizers_not_part_of_frozen_objective"
+    assert "tie-break" not in objective["derivation"]
+
+
 def test_physical_clone_invariance_and_allowed_source_negative_control(prepared: tuple[dict, dict, tuple[svc.Tape, ...]]) -> None:
     _, _, tapes = prepared
     rules, _ = svc.registered_rules(tapes)
