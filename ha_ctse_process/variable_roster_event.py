@@ -223,6 +223,9 @@ class VariableRosterEventCore:
         # materialized and no RNG is touched.  Installed only by the FOLR
         # experiment harness via `install_kernel_capture`.
         self._kernel_capture: Any | None = None
+        # FOLR S03 pre-frontier intervention.  None by default; see
+        # `install_preframe_intervention` for the registered write point.
+        self._preframe_intervention: Any | None = None
         self.high_ledger: list[EventTokenRow] = []
         self.closed_event_rows: list[ClosedEventRow] = []
         self.low_ledger: list[LowTransitionRow] = []
@@ -657,6 +660,14 @@ class VariableRosterEventCore:
                 trial[current.lifecycle_key].open_event_trace = None
         self.records = trial
 
+        # FOLR S03 registered write point.  External Pro fixed this exact
+        # boundary: "After membership state is committed, immediately before the
+        # target token reads pre_hidden."  The membership trial has been
+        # validated and committed on the line above, and no token has been
+        # processed yet.  With no intervention installed nothing executes here.
+        if self._preframe_intervention is not None:
+            self._preframe_intervention(self)
+
         result = self._process_frontier(
             post,
             teacher_order=teacher_order,
@@ -677,6 +688,26 @@ class VariableRosterEventCore:
         the sink; the experiment owns its semantics.
         """
         self._kernel_capture = sink
+
+    def install_preframe_intervention(self, intervention: Any | None) -> None:
+        """Install or clear the FOLR S03 payload write hook.
+
+        ``intervention`` is called as ``intervention(core)`` exactly once per
+        ``apply_transaction``, after the membership trial has been committed to
+        ``self.records`` and before any frontier token is processed.  That is
+        the write point External Pro registered for this experiment:
+
+            For this narrow access experiment, install the payload after the
+            membership trial has been validated and committed, but before the
+            target token materializes pre_hidden.
+
+        Passing ``None`` restores the unmodified execution path exactly.  As
+        with ``install_kernel_capture``, nothing in this module interprets the
+        callable; the experiment owns its semantics.  It runs before any RNG is
+        consumed by the frontier, so a hook that only writes record fields
+        cannot perturb determinism.
+        """
+        self._preframe_intervention = intervention
 
     def _process_frontier(
         self,
