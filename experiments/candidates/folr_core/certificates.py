@@ -357,9 +357,22 @@ def payload_read_certificate(
     target_expected = sb.vector_digest(binding.payload(expected_target_slot))
 
     keys = tuple(row.active_lifecycle_keys)
+    epochs = tuple(row.active_membership_epochs)
     shadow = binding.shadow_lifecycle_key
-    shadow_actual = sb.vector_digest(
-        np.asarray(row.active_high_hidden)[keys.index(shadow)]
+    # Pro §5: locating the shadow by key alone certifies a hidden vector without
+    # certifying whose epoch it belongs to. The index is resolved once and the
+    # (key, epoch) pair at that index is what gets checked, so the vector and
+    # the identity provably come from the same row.
+    shadow_index = keys.index(shadow) if shadow in keys else None
+    shadow_identity_matches = (
+        shadow_index is not None
+        and len(epochs) == len(keys)
+        and int(epochs[shadow_index]) == binding.shadow_membership_epoch
+    )
+    shadow_actual = (
+        sb.vector_digest(np.asarray(row.active_high_hidden)[shadow_index])
+        if shadow_index is not None
+        else "ABSENT"
     )
     if spec.kind == br.WRONG_OWNER:
         shadow_expected_name = spec.payload_slot
@@ -385,7 +398,14 @@ def payload_read_certificate(
             target_actual == target_expected,
             f"expected {expected_target_slot}, "
             f"digest {target_expected[:12]} vs actual {target_actual[:12]}",
-        )
+        ),
+        _condition(
+            "shadow_row_is_the_registered_owner_and_epoch",
+            shadow_identity_matches,
+            f"(key, epoch) at index {shadow_index} must be "
+            f"({shadow}, {binding.shadow_membership_epoch}); "
+            f"row carries keys={keys} epochs={epochs}",
+        ),
     ]
     if shadow_is_a_gate:
         conditions.append(

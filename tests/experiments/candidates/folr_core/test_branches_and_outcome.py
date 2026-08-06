@@ -165,6 +165,61 @@ def test_the_payload_vectors_differ_only_in_the_focal_coordinate():
     assert np.any(h0 != 0.0)
 
 
+def test_the_gate_witness_is_the_gate_the_gru_actually_evaluates():
+    """The defect Pro found: a bias-only witness is not the update gate.
+
+    ``weight_hh[:, 0] = 0`` stops h_0 reaching any gate but leaves the rest of
+    the focal update-gate ROW intact, so the preactivation is
+
+        20 + sum_{j>=1} W_hh[0, j] * h_j
+
+    and the nonfocal payload coordinates are deliberately nonzero.  The old
+    witness reported ``sigmoid(bias_ih + bias_hh)`` and called it z0, which
+    omits that term entirely -- it happened to be right and was not proved.
+
+    The input row must be zero for this to be certifiable at all: with a
+    nonzero ``W_ih[row, :]`` the preactivation would depend on the member
+    embedding, and no registration-only witness could establish it.
+    """
+    registration = reg.development_registration()
+    gate = registration.weight_witness["focal_update_gate"]
+
+    assert gate["update_gate_input_row_is_zero"], (
+        "with a nonzero input row the gate depends on the member embedding"
+    )
+    assert gate["update_gate_bias_sum"] == pytest.approx(reg.UPDATE_GATE_BIAS)
+    assert len(gate["focal_update_gate_recurrent_row"]) == 10
+    assert gate["focal_update_gate_recurrent_row"][reg.FOCAL_COORDINATE] == 0.0
+
+    # The recurrent term is REAL -- if it were identically zero the old
+    # bias-only witness would have been correct by accident and this test would
+    # not be testing anything.
+    contributions = {
+        row["recurrent_contribution"] for row in gate["per_payload"].values()
+    }
+    assert contributions != {0.0}
+    # ...and identical across the three payloads, which differ only in the
+    # focal column that the recurrent row zeroes.
+    assert len(contributions) == 1
+    assert gate["preactivation_equal_across_payloads"]
+
+    assert set(gate["per_payload"]) == {"h0", "h1", "h_neutral"}
+    for row in gate["per_payload"].values():
+        assert row["z0"] == 1.0
+        assert row["z0_is_bitwise_one"]
+    assert gate["exact_carry_established"]
+    assert gate["preactivation_headroom_over_threshold"] > 0.0
+
+
+def test_the_analytic_separation_refuses_a_gate_that_does_not_carry_exactly():
+    """Fail closed: the exact-carry number must not survive its premise."""
+    registration = reg.development_registration()
+    gate = dict(registration.weight_witness["focal_update_gate"])
+    gate["exact_carry_established"] = False
+    with pytest.raises(reg.ExactCarryNotEstablished, match="re-derived"):
+        reg.analytic_logit_separation({"focal_update_gate": gate})
+
+
 def test_the_cell_isolates_the_focal_coordinate():
     """The weight witness must reflect the surgery that was actually applied."""
     registration = reg.development_registration()
@@ -172,7 +227,6 @@ def test_the_cell_isolates_the_focal_coordinate():
     assert witness["focal_coordinate"] == reg.FOCAL_COORDINATE
     assert not witness["gate_reads_focal_hidden"]
     assert witness["decoder_rows_reading_focal"] == 1
-    assert witness["update_gate_slope_shortfall"] < 1e-8
     column = witness["skill_head_focal_column"]
     assert column[0] == pytest.approx(1.0)
     assert column[1] == pytest.approx(-1.0)
@@ -376,7 +430,7 @@ def test_a_sub_margin_contrast_is_neither_a_refutation_nor_a_contradiction(devel
     report = _decide(
         development, payload_contrast={"b0": margin / 2.0, "b1": margin / 3.0}
     )
-    assert report["harness_terminal"] == oc.INTERFACE_INSUFFICIENT
+    assert report["harness_terminal"] == oc.PAYLOAD_DEPENDENCE_BELOW_MATERIALITY
     assert "below the prospectively registered probability-space materiality" in (
         report["reason"]
     )
@@ -384,11 +438,27 @@ def test_a_sub_margin_contrast_is_neither_a_refutation_nor_a_contradiction(devel
     assert "contradict" not in report["reason"].split("neither")[0]
 
 
+def test_the_sub_margin_terminal_is_not_an_engineering_failure():
+    """Pro §6: routing a genuine sub-threshold effect there was inconsistent.
+
+    ``INTERFACE_OR_INSTANCE_INSUFFICIENT`` has ceiling "Engineering failure or
+    unexecuted design only" and forbids any scientific positive, while the
+    sub-margin reason asserts that the cell DOES exhibit payload dependence.
+    Both cannot describe one result, so the band has its own terminal.
+    """
+    ceiling = oc.MAXIMUM_CONCLUSION[oc.PAYLOAD_DEPENDENCE_BELOW_MATERIALITY]
+    assert "kernels differ" in ceiling
+    assert "Engineering failure" not in ceiling
+    forbidden = oc.FORBIDDEN[oc.PAYLOAD_DEPENDENCE_BELOW_MATERIALITY]
+    assert "NARROW_CLAIM_SUPPORTED" in forbidden
+    assert "materially large" in forbidden
+
+
 def test_the_positive_terminal_uses_the_minimum_over_b(development):
     """min_b, not "b0 happens to be large": one weak arm must block the claim."""
     margin = development["registration"].delta_cell
     report = _decide(development, payload_contrast={"b0": 1.0, "b1": margin / 2.0})
-    assert report["harness_terminal"] == oc.INTERFACE_INSUFFICIENT
+    assert report["harness_terminal"] == oc.PAYLOAD_DEPENDENCE_BELOW_MATERIALITY
 
 
 def test_a_null_without_an_analytic_guarantee_is_a_refutation(development):
@@ -634,6 +704,52 @@ def test_a_wrong_payload_read_is_caught(development):
     assert certificate["failed"] == ["target_pre_hidden_is_the_registered_payload"]
 
 
+def test_the_shadow_row_is_bound_by_key_and_epoch(development):
+    """Pro §5: certifying a hidden vector without certifying whose it is.
+
+    ``keys.index(shadow)`` finds a row; it does not establish that the row
+    belongs to the registered shadow *epoch*.  The identity is now read as the
+    (key, epoch) pair at that same index, so the vector and the identity
+    provably come from one row.
+    """
+    binding = development["registration"].binding
+    for name, entry in development["certificates"]["branches"].items():
+        condition = entry["payload_read"]["conditions"][
+            "shadow_row_is_the_registered_owner_and_epoch"
+        ]
+        assert condition["state"] == "PASS", name
+
+    for evidence in (r.evidence for r in development["results"].values()):
+        keys = tuple(evidence["active_lifecycle_keys"])
+        epochs = tuple(evidence["active_membership_epochs"])
+        assert len(keys) == len(epochs)
+        index = keys.index(binding.shadow_lifecycle_key)
+        assert epochs[index] == binding.shadow_membership_epoch
+
+
+def test_a_shadow_at_the_wrong_epoch_fails_the_interface_gate(development):
+    """The gate must catch a right-key/wrong-epoch row, not just a missing key."""
+    tampered = {}
+    for name, result in development["results"].items():
+        evidence = dict(result.evidence)
+        evidence["active_membership_epochs"] = tuple(
+            epoch + 7 for epoch in evidence["active_membership_epochs"]
+        )
+        tampered[name] = type(result)(
+            spec=result.spec, kernel=result.kernel, row=result.row, evidence=evidence
+        )
+    registration = development["registration"]
+    report = oc.decide(
+        results=tampered,
+        contrasts=development["contrasts"],
+        certificates=development["certificates"],
+        registration=registration,
+        expected_registration_digest=registration.registration_digest(),
+    )
+    assert report["harness_terminal"] == oc.INTERFACE_INSUFFICIENT
+    assert "shadow_resolves_to_the_registered_owner_and_epoch" in report["reason"]
+
+
 def test_the_complete_rng_state_is_compared_not_the_counter_subfield():
     """§6D. The cached-uint32 fields are part of the state and must count.
 
@@ -707,20 +823,59 @@ def test_the_object_graph_scope_is_inside_the_registration_digest():
     assert "DynamicRosterEventEnv" not in sentence
 
 
-def test_the_source_identity_travels_with_the_registration():
-    """§6C: "the durable execution report should carry that identity itself"."""
+def test_the_source_identity_covers_the_whole_executable_graph():
+    """Two dependencies the first pass missed, both found by Pro.
+
+    ``variable_roster_event_support.normalized_log_age`` is called by
+    ``encode_members``, so a change there moves the member embedding, the set
+    summary, the logits and the kernel without touching any of the three files
+    that were fingerprinted.  And freezing the actor path while leaving
+    ``branches.py`` / ``certificates.py`` / ``outcome.py`` free freezes the
+    wrong half: the executable scientific proposition could change with the
+    registration data intact.
+    """
     registration = reg.development_registration()
     identity = registration.source_identity
-    assert len(identity["actor_path_fingerprint"]) == 64
-    assert set(identity["actor_path_sources"]) == set(reg.ACTOR_PATH_SOURCES)
-    for digest in identity["actor_path_sources"].values():
+
+    assert "ha_ctse_process/variable_roster_event_support.py" in (
+        reg.ACTOR_PATH_SOURCES
+    )
+    for module in ("branches.py", "certificates.py", "outcome.py"):
+        assert f"experiments/candidates/folr_core/{module}" in reg.HARNESS_SOURCES
+    assert set(reg.SCIENTIFIC_GRAPH_SOURCES) == (
+        set(reg.ACTOR_PATH_SOURCES) | set(reg.HARNESS_SOURCES)
+    )
+
+    assert len(identity["scientific_graph_fingerprint"]) == 64
+    assert set(identity["registered_sources"]) == set(reg.SCIENTIFIC_GRAPH_SOURCES)
+    for digest in identity["registered_sources"].values():
         assert len(digest) == 64
+    # The finite-precision claims are library-dependent.
+    assert identity["torch_version"] and identity["numpy_version"]
     # A commit hash from a dirty tree authenticates nothing, so the record has
-    # to say which case it is instead of implying the stronger one.
+    # to say which case it is instead of implying the stronger one -- and the
+    # flag is named for what it measures, which is the registered sources and
+    # not the whole tree.
+    assert "source_tree_dirty" not in identity
     assert identity["commit_authenticates_the_registration"] is (
         identity["source_commit"] != "UNAVAILABLE"
-        and identity["source_tree_dirty"] is False
+        and identity["registered_sources_dirty"] is False
     )
+
+
+def test_a_harness_change_moves_the_registration_digest():
+    """The fingerprint must actually bind the harness, not just list it."""
+    from dataclasses import replace
+
+    registration = reg.development_registration()
+    tampered = replace(
+        registration,
+        source_identity={
+            **registration.source_identity,
+            "scientific_graph_fingerprint": "a" * 64,
+        },
+    )
+    assert tampered.registration_digest() != registration.registration_digest()
 
 
 def test_the_registration_digest_does_not_move_with_the_commit():
@@ -737,7 +892,7 @@ def test_the_registration_digest_does_not_move_with_the_commit():
         source_identity={
             **registration.source_identity,
             "source_commit": "0" * 40,
-            "source_tree_dirty": True,
+            "registered_sources_dirty": True,
         },
     )
     assert moved.registration_digest() == registration.registration_digest()
@@ -746,12 +901,21 @@ def test_the_registration_digest_does_not_move_with_the_commit():
         registration,
         source_identity={
             **registration.source_identity,
-            "actor_path_fingerprint": "f" * 64,
+            "scientific_graph_fingerprint": "f" * 64,
         },
     )
     assert refingerprinted.registration_digest() != (
         registration.registration_digest()
     )
+
+    # The library versions are inside the digest too, because the registered
+    # construction makes finite-precision claims about GRUCell, GELU, sigmoid
+    # and softmax.
+    relibraried = replace(
+        registration,
+        source_identity={**registration.source_identity, "torch_version": "0.0.0"},
+    )
+    assert relibraried.registration_digest() != registration.registration_digest()
 
 
 def test_the_positive_terminal_carries_the_core_only_sentence(development):

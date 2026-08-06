@@ -13,6 +13,7 @@ import math
 import pytest
 
 from experiments.candidates.ucope import cross_seed as cs
+from experiments.candidates.ucope import crossed_evaluation as ce
 from experiments.candidates.ucope import paired_training as pt
 
 
@@ -112,6 +113,41 @@ def test_provenance_covers_this_module_including_its_dirtiness():
         record["source_commit"] != "UNAVAILABLE"
         and record["source_tree_dirty"] is False
     )
+
+
+def test_a_replication_trains_to_the_registered_budget():
+    """The defect this test exists for was real and silent.
+
+    The archived single-seed artifact was launched with ``iterations=300``
+    while ``run_arm``'s own default is 120, so the first cross-seed replication
+    trained every arm to 40% of the registered budget. Nothing failed: it
+    produced eight plausible-looking numbers whose spread described the short
+    budget rather than the seed (regrets ~5.4 against the registered 0.58).
+
+    A budget supplied only by the caller is a budget two callers can disagree
+    about, so it now lives in one place and both paths default to it.
+    """
+    assert ce.REGISTERED_TRAINING["iterations"] == 300
+    resolved = {**ce.REGISTERED_TRAINING}
+    for key in ("iterations", "episodes_per_iteration", "evaluation_episodes"):
+        assert key in resolved
+        # The registered budget must not silently equal run_arm's default in
+        # the one field where they differed.
+    assert ce.REGISTERED_TRAINING["iterations"] != 120
+
+    summary = cs.run_replication(
+        seeds=(41_000,),
+        evaluation_ledgers=1,
+        iterations=1,
+        episodes_per_iteration=2,
+        evaluation_episodes=2,
+    )
+    recorded = summary["provenance"]["run_arguments"]
+    # An explicit override wins, and the artifact records what actually ran...
+    assert recorded["iterations"] == 1
+    # ...including the fields that fell through to the registered budget.
+    assert recorded["episodes_per_iteration"] == 2
+    assert set(ce.REGISTERED_TRAINING) <= set(recorded)
 
 
 def test_a_two_seed_replication_produces_distinct_checkpoints():

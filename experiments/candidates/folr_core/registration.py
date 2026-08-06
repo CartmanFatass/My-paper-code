@@ -150,28 +150,67 @@ OBJECT_GRAPH_SCOPE: dict[str, Any] = {
 
 #: The source files that implement the registered actor path
 #: ``pre_hidden -> GRUCell -> decoder -> skill head`` and the row types that
-#: carry its witnesses.  Pro's §6C: *"execution source commit or actor-path code
-#: fingerprint equals the approved source identity"* -- and *"the durable
-#: execution report should carry that identity itself"* rather than relying on
-#: the dispatch message to pin the commit externally.
+#: carry its witnesses.
+#:
+#: ``variable_roster_event_support`` is here because Pro found the dependency
+#: the first pass missed: *"EventCommitmentPolicy.encode_members calls
+#: variable_roster_event_support.normalized_log_age. A change in that helper can
+#: change the target member embedding, set summary, logits, and probability
+#: kernel without changing any of the three fingerprinted files."*
 ACTOR_PATH_SOURCES = (
     "ha_ctse_process/variable_roster_event.py",
     "ha_ctse_process/variable_roster_event_models.py",
     "ha_ctse_process/variable_roster_event_types.py",
+    "ha_ctse_process/variable_roster_event_support.py",
 )
+
+#: The candidate-side modules that install the intervention, clone and reset
+#: branch state, capture and digest the actor preimage, certify placement and
+#: freshness, construct the contrasts and route the terminal.
+#:
+#: Pro's §4.2, which is the sharper half of the objection: *"A later change to
+#: branches.py, certificates.py, or outcome.py could leave the registration data
+#: and three-file actor fingerprint unchanged while changing the executable
+#: scientific proposition."*  Freezing the model but not the harness freezes the
+#: wrong half.
+HARNESS_SOURCES = (
+    "experiments/candidates/folr_core/s03_binding.py",
+    "experiments/candidates/folr_core/branch_snapshot.py",
+    "experiments/candidates/folr_core/reset_manifest.py",
+    "experiments/candidates/folr_core/branches.py",
+    "experiments/candidates/folr_core/certificates.py",
+    "experiments/candidates/folr_core/registration.py",
+    "experiments/candidates/folr_core/outcome.py",
+)
+
+#: Everything the registered scientific proposition executes.
+SCIENTIFIC_GRAPH_SOURCES = tuple(sorted(HARNESS_SOURCES + ACTOR_PATH_SOURCES))
 
 
 def _repository_root() -> pathlib.Path:
     return pathlib.Path(__file__).resolve().parents[3]
 
 
+def _fingerprint(digests: Mapping[str, str], names: tuple[str, ...]) -> str:
+    hasher = hashlib.sha256()
+    for relative in names:
+        hasher.update(relative.encode("utf-8"))
+        hasher.update(digests[relative].encode("utf-8"))
+    return hasher.hexdigest()
+
+
 def actor_path_source_identity() -> dict[str, Any]:
-    """Commit, tree cleanliness and per-file digests of the actor path.
+    """Commit, worktree cleanliness and per-file digests of the whole graph.
 
     The digests are the durable half.  A commit hash taken from a dirty tree
     authenticates nothing, so the record says which case it is instead of
-    implying the stronger one -- the same correction the UCOPE provenance
-    record already carries.
+    implying the stronger one.
+
+    The cleanliness flag is named for what it actually measures.  Pro:
+    *"The field named source_tree_dirty is also computed from
+    `git status --porcelain -- <ACTOR_PATH_SOURCES>` so it means 'the three
+    selected actor-path files are clean,' not 'the source tree is clean.'"*
+    It is now ``registered_sources_dirty`` and covers the complete graph.
     """
     root = _repository_root()
 
@@ -190,29 +229,35 @@ def actor_path_source_identity() -> dict[str, Any]:
 
     head = _git("rev-parse", "HEAD")
     commit = head.strip() if head is not None else "UNAVAILABLE"
-    status = _git("status", "--porcelain", "--", *ACTOR_PATH_SOURCES)
+    status = _git("status", "--porcelain", "--", *SCIENTIFIC_GRAPH_SOURCES)
     dirty = None if status is None else bool(status.strip())
 
     digests = {}
-    for relative in ACTOR_PATH_SOURCES:
+    for relative in SCIENTIFIC_GRAPH_SOURCES:
         # LF-normalized: this worktree runs core.autocrlf=true, so raw bytes
         # would fingerprint differently on a fresh clone.
         digests[relative] = hashlib.sha256(
             (root / relative).read_bytes().replace(b"\r\n", b"\n")
         ).hexdigest()
 
-    fingerprint = hashlib.sha256()
-    for relative in ACTOR_PATH_SOURCES:
-        fingerprint.update(relative.encode("utf-8"))
-        fingerprint.update(digests[relative].encode("utf-8"))
-
     return {
         "source_commit": commit,
-        "source_tree_dirty": dirty,
+        "registered_sources_dirty": dirty,
         "commit_authenticates_the_registration": commit != "UNAVAILABLE" and dirty is False,
-        "actor_path_sources": digests,
-        # This, not the commit, is what the execution-time gate compares.
-        "actor_path_fingerprint": fingerprint.hexdigest(),
+        "registered_sources": digests,
+        "actor_path_fingerprint": _fingerprint(digests, ACTOR_PATH_SOURCES),
+        "harness_fingerprint": _fingerprint(digests, HARNESS_SOURCES),
+        # This, not the commit, is what the execution-time gate compares. Pro:
+        # "The fingerprint must enter the registration digest and be recomputed
+        # at execution."
+        "scientific_graph_fingerprint": _fingerprint(
+            digests, SCIENTIFIC_GRAPH_SOURCES
+        ),
+        # Pro: the registered construction makes finite-precision claims about
+        # GRUCell, GELU, sigmoid and softmax, so the libraries are part of the
+        # identity of what was proved.
+        "torch_version": torch.__version__,
+        "numpy_version": np.__version__,
     }
 
 
@@ -318,15 +363,20 @@ class Registration:
     def registration_digest(self) -> str:
         """The frozen identity of the registration.
 
-        ``source_identity`` enters through its **fingerprint only**, never
-        through the commit hash or the dirty flag.  Those two move whenever
-        HEAD moves for any unrelated reason, and Pro's §6C asks for two
-        separate gates: the current registration digest must equal the
-        precommitted expected digest (so it has to be stable), *and* the
-        execution source identity must equal the approved one (which the
-        content-addressed fingerprint answers exactly).  Folding a commit hash
-        into the digest would make the first gate fail on every later commit
-        and would say nothing the fingerprint does not already say.
+        ``source_identity`` enters through the **scientific-graph fingerprint**
+        and the library versions, never through the commit hash or the dirty
+        flag.  Those two move whenever HEAD moves for any unrelated reason, and
+        Pro asks for two separate gates: the current registration digest must
+        equal the precommitted expected digest (so it has to be stable), *and*
+        the execution source identity must equal the approved one (which the
+        content-addressed fingerprint answers exactly).  Pro accepted that
+        split: *"the content fingerprint belongs inside the registration digest;
+        a human-readable commit identity may travel alongside it."*
+
+        The fingerprint covers the actor path **and** the harness.  Freezing the
+        model while leaving ``branches.py`` / ``certificates.py`` /
+        ``outcome.py`` free would freeze the wrong half: the executable
+        scientific proposition could change with the registration data intact.
         """
         hasher = hashlib.sha256()
         hasher.update(RAW_OUTPUT_BINDING.encode("utf-8"))
@@ -343,9 +393,11 @@ class Registration:
                     "analytic_logit_separation": self.analytic_logit_separation,
                     "weight_witness": dict(self.weight_witness),
                     "object_graph_scope": _scope_record(self.object_graph_scope),
-                    "actor_path_fingerprint": str(
-                        self.source_identity["actor_path_fingerprint"]
+                    "scientific_graph_fingerprint": str(
+                        self.source_identity["scientific_graph_fingerprint"]
                     ),
+                    "torch_version": str(self.source_identity["torch_version"]),
+                    "numpy_version": str(self.source_identity["numpy_version"]),
                     "development_only": self.development_only,
                 }
             ).encode("utf-8")
@@ -399,19 +451,120 @@ class Registration:
         }
 
 
-def _weight_witness(policy: Any, *, high_hidden_dim: int) -> dict[str, Any]:
-    """The exact weight witness Pro's §7 freeze list requires."""
+class ExactCarryNotEstablished(RuntimeError):
+    """The focal update gate is not bitwise 1.0 at the registered boundary."""
+
+
+def _sigmoid_one_threshold() -> float:
+    """Smallest float32 preactivation whose float32 sigmoid is exactly 1.0.
+
+    Reported as headroom rather than assumed: the whole exact-carry claim rests
+    on the preactivation clearing this line, so how far it clears it by is part
+    of the witness.
+    """
+    low, high = 0.0, 64.0
+    for _ in range(200):
+        middle = 0.5 * (low + high)
+        value = torch.sigmoid(torch.tensor(middle, dtype=torch.float32))
+        if value.item() == 1.0:
+            high = middle
+        else:
+            low = middle
+    return high
+
+
+def focal_update_gate_witness(
+    policy: Any, *, high_hidden_dim: int, payloads: Mapping[str, np.ndarray]
+) -> dict[str, Any]:
+    """The registered-boundary finite-precision gate witness Pro's §1 requires.
+
+    The previous witness reported ``sigmoid(bias_ih + bias_hh)`` and called it
+    ``update_gate_z0``.  Pro caught that this is a **bias-only** quantity, not
+    the gate:
+
+        Zeroing weight_hh[:, 0] establishes that the focal hidden coordinate h_0
+        does not influence any GRU gate or candidate. It does not zero the
+        remainder of the focal update-gate row. […] The nonfocal payload
+        coordinates are deliberately nonzero, so the recurrent term is not
+        identically absent. […] It shows that the registration has not proved it.
+
+    Correct, and the repair is a witness rather than a weight change.  The
+    preactivation of the focal update gate is
+
+        a_z0 = bias_ih[r] + bias_hh[r] + (W_ih[r,:] @ x) + (W_hh[r,:] @ h)
+
+    and the cell zeroes ``W_ih[r,:]``, so the member embedding ``x`` drops out
+    entirely.  What remains depends only on the registered model weights and the
+    registered payload's NONFOCAL coordinates -- both frozen in this
+    registration.  So the gate is computable here exactly, with no runtime, no
+    actor input and no probability kernel observed.
+
+    ``W_hh[r,0]`` is zero (from the focal-column surgery) and h_1..h_9 are
+    identical across h0, h1 and h_neutral, so the three preactivations must
+    coincide.  That coincidence is asserted, not assumed: if the payloads ever
+    differ outside the focal coordinate, this is where it surfaces.
+    """
     update_row = high_hidden_dim + FOCAL_COORDINATE
     with torch.no_grad():
-        z0 = float(
-            torch.sigmoid(
-                policy.high_rnn.bias_ih[update_row] + policy.high_rnn.bias_hh[update_row]
-            )
-        )
+        gru = policy.high_rnn
+        recurrent_row = gru.weight_hh[update_row, :]
+        input_row_is_zero = bool(torch.all(gru.weight_ih[update_row, :] == 0.0))
+        bias = gru.bias_ih[update_row] + gru.bias_hh[update_row]
+
+        gates: dict[str, dict[str, Any]] = {}
+        for slot, vector in payloads.items():
+            hidden = torch.as_tensor(np.asarray(vector), dtype=torch.float32)
+            recurrent = torch.dot(recurrent_row, hidden)
+            preactivation = bias + recurrent
+            z0 = torch.sigmoid(preactivation)
+            gates[slot] = {
+                "recurrent_contribution": float(recurrent),
+                "preactivation": float(preactivation),
+                "z0": float(z0),
+                "z0_is_bitwise_one": z0.item() == 1.0,
+            }
+
+        preactivations = {row["preactivation"] for row in gates.values()}
+        equal_across_payloads = len(preactivations) == 1
+        exact_carry = all(row["z0_is_bitwise_one"] for row in gates.values())
+        threshold = _sigmoid_one_threshold()
+        reference = next(iter(gates.values()))["preactivation"]
+
+        nonfocal = {
+            slot: np.asarray(vector, dtype=np.float32)[
+                FOCAL_COORDINATE + 1 :
+            ].tolist()
+            for slot, vector in payloads.items()
+        }
         return {
             "focal_coordinate": FOCAL_COORDINATE,
-            "update_gate_z0": z0,
-            "update_gate_slope_shortfall": 1.0 - z0,
+            "focal_update_gate_row": update_row,
+            # Load-bearing: with a nonzero input row the preactivation would
+            # depend on the member embedding and could not be certified here.
+            "update_gate_input_row_is_zero": input_row_is_zero,
+            "update_gate_bias_sum": float(bias),
+            "focal_update_gate_recurrent_row": recurrent_row.tolist(),
+            "registered_nonfocal_payload_coordinates": nonfocal,
+            "per_payload": gates,
+            "preactivation_equal_across_payloads": equal_across_payloads,
+            "float32_sigmoid_saturation_threshold": threshold,
+            "preactivation_headroom_over_threshold": reference - threshold,
+            "exact_carry_established": bool(
+                exact_carry and equal_across_payloads and input_row_is_zero
+            ),
+        }
+
+
+def _weight_witness(
+    policy: Any, *, high_hidden_dim: int, payloads: Mapping[str, np.ndarray]
+) -> dict[str, Any]:
+    """The exact weight witness Pro's §7 freeze list requires."""
+    with torch.no_grad():
+        return {
+            "focal_coordinate": FOCAL_COORDINATE,
+            "focal_update_gate": focal_update_gate_witness(
+                policy, high_hidden_dim=high_hidden_dim, payloads=payloads
+            ),
             "gate_reads_focal_hidden": bool(
                 torch.any(policy.high_rnn.weight_hh[:, FOCAL_COORDINATE] != 0.0)
             ),
@@ -425,6 +578,27 @@ def _weight_witness(policy: Any, *, high_hidden_dim: int) -> dict[str, Any]:
             ].tolist(),
             "model_state_digest": sb.model_state_digest(policy),
         }
+
+
+def analytic_logit_separation(witness: Mapping[str, Any]) -> float:
+    """The logit displacement, derived from the gate that actually evaluates.
+
+    Only valid under exact carry.  If the gate is not bitwise 1.0 the correct
+    object is the frozen affine map ``h'_0 = (1 - z0) * n0 + z0 * h_0`` and the
+    corresponding GELU displacement, which needs the candidate ``n0`` and hence
+    the registered member embedding.  That case is refused rather than silently
+    approximated -- reporting the exact-carry number under a gate that does not
+    carry exactly is the defect Pro just caught, and it should fail closed.
+    """
+    gate = witness["focal_update_gate"]
+    if not gate["exact_carry_established"]:
+        raise ExactCarryNotEstablished(
+            "the focal update gate is not bitwise 1.0 across all registered "
+            "payloads at the registered boundary; the analytic witness must be "
+            "re-derived from h'_0 = (1 - z0) * n0 + z0 * h_0 using the frozen "
+            f"z0 values {gate['per_payload']}"
+        )
+    return ANALYTIC_LOGIT_SEPARATION
 
 
 def build_registration(
@@ -549,6 +723,11 @@ def build_registration(
         target_token_order=keys,
         legal_action_support=np.ones(n_skills, dtype=np.bool_),
     )
+    witness = _weight_witness(
+        core.commitment_model,
+        high_hidden_dim=high_hidden_dim,
+        payloads={slot: binding.payload(slot) for slot in sb.PAYLOAD_SLOTS},
+    )
     return Registration(
         cell_identifier=cell_identifier,
         binding=binding,
@@ -557,10 +736,10 @@ def build_registration(
         canonical_provenance_branch=canonical_provenance_branch,
         teacher_actions={key: 0 for key in keys},
         delta_cell=float(delta_cell),
-        analytic_logit_separation=ANALYTIC_LOGIT_SEPARATION,
-        weight_witness=_weight_witness(
-            core.commitment_model, high_hidden_dim=high_hidden_dim
-        ),
+        # Derived FROM the witness, so a cell whose gate does not carry exactly
+        # cannot silently inherit the exact-carry number.
+        analytic_logit_separation=analytic_logit_separation(witness),
+        weight_witness=witness,
         object_graph_scope=OBJECT_GRAPH_SCOPE,
         source_identity=actor_path_source_identity(),
         development_only=bool(development_only),

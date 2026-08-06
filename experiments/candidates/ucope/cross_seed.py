@@ -265,7 +265,16 @@ def run_replication(
     ledger_seed: int = 20_260_808,
     **training_kwargs,
 ) -> dict[str, object]:
-    """Run the registered experiment once per training seed and summarize."""
+    """Run the registered experiment once per training seed and summarize.
+
+    Training arguments not supplied fall through to
+    ``crossed_evaluation.REGISTERED_TRAINING``, so a replication trains to the
+    same budget as the archived single-seed run.  The first version of this
+    module did not, and every arm was trained to 40% of the registered budget;
+    the across-seed spread it produced was a statement about the short budget,
+    not about the seed.  ``run_arguments`` in the artifact records the budget
+    actually used, so the two can always be compared after the fact.
+    """
     if len(set(seeds)) != len(seeds):
         raise ValueError("replication seeds must be distinct")
     for left in seeds:
@@ -275,6 +284,10 @@ def run_replication(
                     f"seeds {left} and {right} are within the derived-seed span "
                     "(seed+1..seed+3); their streams would overlap"
                 )
+
+    # Resolved here rather than left to the callee, so the artifact records the
+    # budget that actually ran instead of the (possibly empty) override set.
+    training_kwargs = {**ce.REGISTERED_TRAINING, **training_kwargs}
 
     results: list[SeedResult] = []
     per_seed_reports: dict[str, object] = {}

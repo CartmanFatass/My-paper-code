@@ -442,6 +442,23 @@ def provenance(*, run_arguments: dict[str, object]) -> dict[str, object]:
 # The registered experiment
 # ---------------------------------------------------------------------------
 
+#: The training budget of the REGISTERED experiment -- the one the archived
+#: artifact reports and the one every replication must match.
+#:
+#: This lives here rather than in a caller's argument list because it already
+#: caused a real defect: the archived run was launched with ``iterations=300``
+#: while ``run_arm``'s own default is 120, so the first cross-seed replication
+#: silently trained every arm to 40% of the registered budget.  Its arms landed
+#: at optimization regrets of 5.4 against the registered run's 0.58, and the
+#: resulting across-seed spread described the short budget rather than the seed.
+#: A budget that is only ever supplied by the caller is a budget two callers can
+#: disagree about; naming it makes the disagreement impossible.
+REGISTERED_TRAINING: dict[str, int] = {
+    "iterations": 300,
+    "episodes_per_iteration": 16,
+    "evaluation_episodes": 64,
+}
+
 
 def run_registered_experiment(
     *,
@@ -449,7 +466,13 @@ def run_registered_experiment(
     ledger_seed: int = 20_260_808,
     **training_kwargs,
 ) -> dict[str, object]:
-    """Train the three arms, then evaluate on the exactly-weighted support."""
+    """Train the three arms, then evaluate on the exactly-weighted support.
+
+    Any training argument not supplied comes from ``REGISTERED_TRAINING``, so
+    calling this with only a seed reproduces the registered budget rather than
+    ``run_arm``'s smaller defaults.
+    """
+    training_kwargs = {**REGISTERED_TRAINING, **training_kwargs}
     runs = {arm: pt.run_arm(arm, **training_kwargs) for arm in pt.ARMS}
     ledgers = [
         evaluation_ledger(index, ledger_seed=ledger_seed)

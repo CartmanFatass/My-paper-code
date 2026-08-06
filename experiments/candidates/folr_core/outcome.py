@@ -62,6 +62,12 @@ PAYLOAD_ACCESS_REFUTED = "PAYLOAD_ACCESS_REFUTED"
 FIXED_PAYLOAD_NULL_FAILURE = "FIXED_PAYLOAD_NULL_FAILURE"
 RESET_NULL_FAILURE = "RESET_NULL_FAILURE"
 INTERFACE_INSUFFICIENT = "INTERFACE_OR_INSTANCE_INSUFFICIENT"
+#: Pro's §6 addition.  Routing a genuine sub-threshold effect into
+#: interface-insufficiency was semantically inconsistent: that terminal's
+#: ceiling reads "Engineering failure or unexecuted design only" and forbids any
+#: scientific positive, while the reason simultaneously asserted that the cell
+#: exhibits nonzero payload dependence.  Both cannot be true of one result.
+PAYLOAD_DEPENDENCE_BELOW_MATERIALITY = "PAYLOAD_DEPENDENCE_BELOW_MATERIALITY"
 
 #: Transcribed from Pro's §6 table.
 MAXIMUM_CONCLUSION = {
@@ -86,6 +92,12 @@ MAXIMUM_CONCLUSION = {
         "observation"
     ),
     INTERFACE_INSUFFICIENT: "Engineering failure or unexecuted design only",
+    PAYLOAD_DEPENDENCE_BELOW_MATERIALITY: (
+        "At the exact registered cell and boundary, the directly captured "
+        "probability kernels differ under h0 and h1, but the minimum contrast "
+        "across provenance branches does not exceed the prospectively "
+        "registered materiality threshold"
+    ),
 }
 
 FORBIDDEN = {
@@ -110,6 +122,11 @@ FORBIDDEN = {
     INTERFACE_INSUFFICIENT: (
         "Any scientific positive, negative or null conclusion"
     ),
+    PAYLOAD_DEPENDENCE_BELOW_MATERIALITY: (
+        "NARROW_CLAIM_SUPPORTED; describing the effect as materially large; "
+        "generalization beyond the registered cell; any environment, return, "
+        "retention, or learned-policy claim"
+    ),
 }
 
 #: Pro §7, on the constructed cell.  Applies whenever the positive terminal is
@@ -131,6 +148,30 @@ class Gate:
     detail: str
 
 
+def shadow_index(evidence: Mapping[str, Any], shadow: str) -> int | None:
+    """Position of the registered shadow in the row's active presentation."""
+    keys = tuple(evidence["active_lifecycle_keys"])
+    return keys.index(shadow) if shadow in keys else None
+
+
+def _shadow_identity(evidence: Mapping[str, Any]) -> tuple[str, int] | None:
+    """The (key, epoch) pair the row itself carries at the shadow's index.
+
+    Pro asked for exactly this pair rather than "the key is present" plus an
+    epoch read from somewhere else:
+
+        (active_lifecycle_keys[q], active_membership_epochs[q]) =
+        (binding.shadow_lifecycle_key, binding.shadow_membership_epoch)
+    """
+    keys = tuple(evidence["active_lifecycle_keys"])
+    epochs = tuple(evidence["active_membership_epochs"])
+    shadow = str(evidence["registered_shadow_lifecycle_key"])
+    if shadow not in keys or len(epochs) != len(keys):
+        return None
+    index = keys.index(shadow)
+    return (keys[index], int(epochs[index]))
+
+
 def _interface_gates(
     certificates: Mapping[str, Any],
     results: Mapping[str, Any],
@@ -148,8 +189,11 @@ def _interface_gates(
     registered_model_digest = str(registration.weight_witness["model_state_digest"])
     registered_mask = manifest.legal_action_support.tolist()
     current_digest = registration.registration_digest()
-    executed_fingerprint = reg.actor_path_source_identity()["actor_path_fingerprint"]
-    registered_fingerprint = str(registration.source_identity["actor_path_fingerprint"])
+    executed_identity = reg.actor_path_source_identity()
+    executed_fingerprint = executed_identity["scientific_graph_fingerprint"]
+    registered_fingerprint = str(
+        registration.source_identity["scientific_graph_fingerprint"]
+    )
 
     gates = [
         Gate(
@@ -211,12 +255,17 @@ def _interface_gates(
             f"registered support {registered_mask}",
         ),
         Gate(
+            # Pro §5: the absolute binding, taken from the row's OWN
+            # (keys, epochs) pair at one index rather than from a key lookup
+            # plus a separately-read epoch -- otherwise the epoch checked is not
+            # provably the epoch of the row whose hidden vector was certified.
             "shadow_resolves_to_the_registered_owner_and_epoch",
             all(
-                binding.shadow_lifecycle_key
-                in tuple(evidence["active_lifecycle_keys"])
-                and int(evidence["shadow_membership_epoch"])
-                == binding.shadow_membership_epoch
+                _shadow_identity(evidence)
+                == (
+                    binding.shadow_lifecycle_key,
+                    binding.shadow_membership_epoch,
+                )
                 for evidence in evidences
             ),
             f"shadow={binding.shadow_lifecycle_key}"
@@ -242,13 +291,38 @@ def _interface_gates(
             f"current {current_digest[:12]}",
         ),
         Gate(
-            # The content-addressed half of the source identity: the commit may
-            # legitimately have moved for unrelated reasons, but the actor path
-            # itself must be byte-identical to the approved one.
-            "execution_actor_path_matches_the_approved_source_identity",
+            # The content-addressed source identity: the commit may legitimately
+            # have moved for unrelated reasons, but every file that executes the
+            # registered proposition -- actor path AND harness -- must be
+            # byte-identical to the approved one.
+            "execution_scientific_graph_matches_the_approved_source_identity",
             executed_fingerprint == registered_fingerprint,
             f"registered {registered_fingerprint[:12]}, "
-            f"executed {executed_fingerprint[:12]}",
+            f"executed {executed_fingerprint[:12]} over "
+            f"{len(reg.SCIENTIFIC_GRAPH_SOURCES)} files",
+        ),
+        Gate(
+            # The finite-precision claims (GRUCell, GELU, sigmoid, softmax) are
+            # library-dependent, so the libraries are part of what was approved.
+            "execution_library_versions_match_the_registration",
+            executed_identity["torch_version"]
+            == registration.source_identity["torch_version"]
+            and executed_identity["numpy_version"]
+            == registration.source_identity["numpy_version"],
+            f"torch {registration.source_identity['torch_version']}, "
+            f"numpy {registration.source_identity['numpy_version']}",
+        ),
+        Gate(
+            # Pro §1: the exact-carry derivation is only licensed by the gate
+            # that actually evaluates at the registered boundary.
+            "focal_update_gate_carries_exactly_at_the_registered_boundary",
+            bool(
+                registration.weight_witness["focal_update_gate"][
+                    "exact_carry_established"
+                ]
+            ),
+            "z0 bitwise 1.0 for h0, h1 and h_neutral, with the input row zeroed "
+            "and the three preactivations equal",
         ),
     ]
     return gates
@@ -308,12 +382,17 @@ def _closure_gates(contrasts: Mapping[str, Any]) -> list[Gate]:
         Gate(
             "wrong_owner_actor_preimage_closure",
             bool(wrong["actor_preimage_digests_equal"]),
-            # Pro kept these branches after the critic finding: "The observed
-            # shadow-value movement is useful as a non-vacuity diagnostic [...]
-            # Neither replaces the target-kernel null."
-            "the shadow's payload moves the shadow's critic row by design; only "
-            "the target probability vector and the non-S03 preimage digest are "
-            "compared",
+            # Pro §9 corrected the earlier wording here. Saying the shadow's
+            # critic row "moves by design" is stronger than the construction
+            # establishes: the event critic is not surgically constrained to
+            # respond to that coordinate, so any movement is a DEVELOPMENT-cell
+            # observation, not a registered guarantee. The registered control is
+            # actor-side owner routing, and the payload-read certificate is what
+            # makes it non-vacuous -- it proves h_p really was installed in the
+            # shadow's private field.
+            "actor-side owner-routing control: only the target probability "
+            "vector and the non-S03 preimage digest are compared. Any critic-row "
+            "movement is a development diagnostic, not a registered guarantee.",
         )
     )
     return gates
@@ -398,7 +477,10 @@ def _route(
             f"materiality threshold {margin}"
         )
     if minimum > 0.0:
-        return INTERFACE_INSUFFICIENT, (
+        # Pro's §6: this is a scientific reading, not an engineering fault, so
+        # it gets its own terminal rather than borrowing one whose ceiling says
+        # "engineering failure or unexecuted design only".
+        return PAYLOAD_DEPENDENCE_BELOW_MATERIALITY, (
             "The registered cell exhibits nonzero payload dependence below the "
             "prospectively registered probability-space materiality threshold. "
             f"(min_b ||K_1b - K_0b||_inf = {minimum:.9g}, threshold {margin}.) "

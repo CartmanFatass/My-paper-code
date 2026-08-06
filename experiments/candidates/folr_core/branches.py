@@ -34,9 +34,17 @@ WHAT EACH BRANCH IS
 THE CRITIC READS WHAT THE ACTOR DOES NOT
 ----------------------------------------
 ``_process_frontier`` evaluates ``event_critic.values(...)`` over the whole
-active ``high_hidden`` array *before* the target's logits.  So in ``W_p`` the
-shadow's payload genuinely moves ``old_owner_value``.  Pro anticipated this and
-fixed the comparison accordingly:
+active ``high_hidden`` array *before* the target's logits, so in ``W_p`` the
+shadow's payload can reach ``old_owner_value``.
+
+It is a **development-cell observation** that it does, not a registered
+guarantee.  Pro's §9 correction: the event critic is not surgically constrained
+to have a nonzero response to that coordinate, so "the shadow's critic row moves
+by design" claims more than the construction establishes.  The registered
+wrong-owner control is actor-side owner routing; the payload-read certificate is
+what makes it non-vacuous, by proving ``h_p`` really was installed in the
+shadow's private field.  Pro anticipated the critic read and fixed the
+comparison accordingly:
 
     the direct outcome compared is the target probability vector and its
     actor-preimage digest, not complete equality of every critic-only row field.
@@ -302,6 +310,10 @@ def execute_branch(
             # gate can check that the shadow index resolves to the registered
             # owner rather than to whoever happens to sit at that position.
             "active_lifecycle_keys": tuple(row.active_lifecycle_keys),
+            "active_membership_epochs": tuple(row.active_membership_epochs),
+            "registered_shadow_lifecycle_key": (
+                registration.binding.shadow_lifecycle_key
+            ),
             "token_position": int(row.token_position),
             "policy_action_uniform": row.policy_action_uniform,
             "exact_legal_mask": row.exact_legal_mask.tolist(),
@@ -317,12 +329,6 @@ def execute_branch(
                 core.pending_membership_transaction is not None
             ),
             "target_membership_epoch": int(row.membership_epoch),
-            # Pro §6C asks that the target AND shadow indexes resolve to the
-            # registered owners *and epochs*; the target's epoch is on the row,
-            # the shadow's is not, so it is read from the record.
-            "shadow_membership_epoch": int(
-                core.records[registration.binding.shadow_lifecycle_key].membership_epoch
-            ),
             "core": core,
         }
     )
