@@ -399,17 +399,26 @@ def provenance(*, run_arguments: dict[str, object]) -> dict[str, object]:
     unavailable.
     """
     root = _repository_root()
-    try:
-        commit = subprocess.run(
-            ["git", "rev-parse", "HEAD"],
-            cwd=root,
-            capture_output=True,
-            text=True,
-            timeout=30,
-            check=True,
-        ).stdout.strip()
-    except (OSError, subprocess.SubprocessError):
-        commit = "UNAVAILABLE"
+
+    def _git(*arguments: str) -> str | None:
+        try:
+            return subprocess.run(
+                ["git", *arguments],
+                cwd=root,
+                capture_output=True,
+                text=True,
+                timeout=60,
+                check=True,
+            ).stdout
+        except (OSError, subprocess.SubprocessError):
+            return None
+
+    head = _git("rev-parse", "HEAD")
+    commit = head.strip() if head is not None else "UNAVAILABLE"
+    # A commit hash taken from a dirty tree authenticates nothing, so say so.
+    # The source digests below are the binding that survives either way.
+    status = _git("status", "--porcelain", "--", *_PROVENANCE_SOURCES)
+    dirty = None if status is None else bool(status.strip())
     digests = {}
     for relative in _PROVENANCE_SOURCES:
         path = root / relative
@@ -420,6 +429,8 @@ def provenance(*, run_arguments: dict[str, object]) -> dict[str, object]:
         ).hexdigest()
     return {
         "source_commit": commit,
+        "source_tree_dirty": dirty,
+        "commit_authenticates_the_run": commit != "UNAVAILABLE" and dirty is False,
         "run_arguments": dict(run_arguments),
         "source_digests": digests,
         "numpy_version": np.__version__,

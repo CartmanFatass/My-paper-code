@@ -175,6 +175,12 @@ def test_provenance_binds_the_sources_and_the_arguments():
     assert record["torch_version"] and record["numpy_version"]
     for relative in ce._PROVENANCE_SOURCES:
         assert len(record["source_digests"][relative]) == 64
+    # A commit hash read off a dirty tree authenticates nothing; the record must
+    # say which case it is rather than implying the stronger one.
+    assert "source_tree_dirty" in record
+    assert record["commit_authenticates_the_run"] is (
+        record["source_commit"] != "UNAVAILABLE" and record["source_tree_dirty"] is False
+    )
 
 
 def test_checkpoint_digest_tracks_the_weights():
