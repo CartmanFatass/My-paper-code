@@ -61,6 +61,7 @@ from typing import Sequence
 from experiments.candidates.ucope import capability_certificate as cc
 from experiments.candidates.ucope import crossed_evaluation as ce
 from experiments.candidates.ucope import paired_training as pt
+from experiments.candidates.ucope import registration as reg
 
 
 RAW_OUTPUT_BINDING = "ucope.cross_seed.v1"
@@ -283,6 +284,8 @@ def run_replication(
     evaluation_ledgers: int = 64,
     ledger_seed: int = 20_260_808,
     ledger_base: int = ce.DEFAULT_LEDGER_BASE,
+    design_identifier: str = "ucope_cross_seed_ad_hoc",
+    expected_registration_digest: str | None = None,
     **training_kwargs,
 ) -> dict[str, object]:
     """Run the registered experiment once per training seed and summarize.
@@ -325,6 +328,26 @@ def run_replication(
         ledger_base=ledger_base,
     )
 
+    # The gate UCOPE did not have. It runs BEFORE any training, so a design
+    # that is not the approved one costs nothing rather than an hour and a
+    # plausible-looking artifact. Both defects this module has carried -- the
+    # 120-vs-300 budget and the ledger_seed collision -- were possible only
+    # because nothing compared the design about to run against a registered one.
+    #
+    # `design_identifier` and the whole resolved `training_kwargs` go in, not a
+    # local name and a three-field subset: the digest a design prints for
+    # approval must be the digest its own run recomputes, and any training
+    # override must move it.
+    registration = reg.build_registration(
+        design_identifier=design_identifier,
+        seeds=seeds,
+        ledger_seed=ledger_seed,
+        ledger_base=ledger_base,
+        evaluation_ledgers=evaluation_ledgers,
+        training=training_kwargs,
+    )
+    gate = reg.require_registration(registration, expected_registration_digest)
+
     results: list[SeedResult] = []
     per_seed_reports: dict[str, object] = {}
     for seed in seeds:
@@ -348,6 +371,7 @@ def run_replication(
         "per_seed_reports": per_seed_reports,
         "provenance": provenance(
             run_arguments={
+                "design_identifier": design_identifier,
                 "seeds": list(seeds),
                 "evaluation_ledgers": evaluation_ledgers,
                 "ledger_seed": ledger_seed,
@@ -356,6 +380,7 @@ def run_replication(
             }
         ),
         "evaluation_support_disjointness": disjointness,
+        "registration": {**gate, **registration.frozen_record()},
         "design": {
             "unit_of_analysis": "training seed",
             "replications": len(seeds),
@@ -466,6 +491,12 @@ def run_replication(
         summary["terminal"] = "CROSS_SEED_PARTIAL"
     else:
         summary["terminal"] = "CROSS_SEED_MEASURED"
+    if not gate["gated"]:
+        # Silence and approval must not read the same in the artifact. The
+        # measurement is still emitted -- it is real -- but it is not a
+        # registered replication and the terminal says which it is.
+        summary["harness_terminal"] = summary["terminal"]
+        summary["terminal"] = "CROSS_SEED_UNREGISTERED"
 
     # Pro's replacement for reading the contrast against the certified 4.5.
     # The separately-trained-arm contrast is 4.5 - eps_I + eps_B, so its
@@ -505,6 +536,40 @@ def run_replication(
 
 
 if __name__ == "__main__":  # pragma: no cover
+    import argparse
     import json
 
-    print(json.dumps(run_replication(), indent=2, default=str))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--approved-digest",
+        help="the registration digest of the design being run, supplied as an "
+        "external literal; the replication refuses to train if the design "
+        "about to run differs. Print candidate digests with --list-designs.",
+    )
+    parser.add_argument("--held-out", action="store_true",
+                        help="use the ledger base that clears the training ids")
+    parser.add_argument(
+        "--list-designs",
+        action="store_true",
+        help="print each registrable design and its digest, and exit. The "
+        "digest is what goes to External Pro for approval; --approved-digest "
+        "then quotes the approved one back, so the two are separate acts.",
+    )
+    arguments = parser.parse_args()
+
+    if arguments.list_designs:
+        for candidate in (reg.archived_replication(), reg.held_out_replication()):
+            print(json.dumps(candidate.frozen_record(), indent=2, default=str))
+        raise SystemExit(0)
+    if not arguments.approved_digest:
+        parser.error("--approved-digest is required (see --list-designs)")
+
+    design = reg.held_out_replication() if arguments.held_out else reg.archived_replication()
+    print(json.dumps(
+        run_replication(
+            **design.run_arguments(),
+            expected_registration_digest=arguments.approved_digest,
+        ),
+        indent=2,
+        default=str,
+    ))

@@ -165,7 +165,10 @@ def test_a_two_seed_replication_produces_distinct_checkpoints():
         episodes_per_iteration=2,
         evaluation_episodes=2,
     )
-    assert summary["terminal"] in {"CROSS_SEED_MEASURED", "CROSS_SEED_PARTIAL"}
+    # No precommitment was supplied, so the terminal names that rather than
+    # reading as a registered replication; the measurement itself is unaffected.
+    assert summary["terminal"] == "CROSS_SEED_UNREGISTERED"
+    assert summary["harness_terminal"] in {"CROSS_SEED_MEASURED", "CROSS_SEED_PARTIAL"}
     assert len(summary["per_seed"]) == 2
     assert summary["distinct_informed_checkpoints"] == 2
     assert summary["between_arm_contrast_across_seeds"]["seeds"] == 2
