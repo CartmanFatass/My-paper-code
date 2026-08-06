@@ -152,6 +152,41 @@ class OpenEventTrace:
         self.elapsed_physical_time += 1
 
 
+@dataclass(frozen=True)
+class PartnerInteractionRow:
+    """One verifier-bound write of owner-local partner-interaction history.
+
+    Emitted only by the registered partner-interaction transition in
+    ``VariableRosterEventCore._process_frontier``.  Every field binds the write
+    to its provenance, so a P value can never be injected through a public setter
+    or supplied as an arm label: the write is traceable to the exact episode,
+    owner, membership epoch, partner, event index, prior/next value and writer.
+    """
+
+    episode_id: int
+    owner_lifecycle_key: str
+    membership_epoch: int
+    partner_lifecycle_key: str
+    event_index: int
+    prior_p: float
+    payload: float
+    next_p: float
+    writer_policy_version: int
+
+
+@dataclass(frozen=True)
+class PartnerInteractionHistory:
+    """Owner-local accumulated partner-interaction state — the MSSR ``P``.
+
+    ``current_p`` is the running partner-interaction value; ``rows`` is the
+    append-only provenance ledger of the writes that produced it.  Written only
+    by the registered partner-interaction transition; there is no public setter.
+    """
+
+    current_p: float
+    rows: tuple[PartnerInteractionRow, ...] = ()
+
+
 @dataclass
 class LifecycleRecord:
     lifecycle_key: str
@@ -168,6 +203,10 @@ class LifecycleRecord:
     policy_version: int
     is_genuine_join: bool = False
     is_rejoin: bool = False
+    # Owner-private support-native partner-interaction history (MSSR / Seq 12).
+    # ``None`` unless the registered partner-interaction transition is enabled;
+    # when disabled the field is inert and every existing rollout is unchanged.
+    partner_interaction_history: PartnerInteractionHistory | None = None
 
     def clone(self) -> "LifecycleRecord":
         return deepcopy(self)

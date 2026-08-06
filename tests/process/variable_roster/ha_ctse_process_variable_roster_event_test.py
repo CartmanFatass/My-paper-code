@@ -125,6 +125,7 @@ def make_core(
     environment_index=0,
     shared_models_from=None,
     device="cpu",
+    partner_interaction_enabled=False,
 ):
     torch.manual_seed(int(model_seed))
     return VariableRosterEventCore(
@@ -147,6 +148,7 @@ def make_core(
         rng_episode_id=rng_episode_id,
         device=device,
         shared_models_from=shared_models_from,
+        partner_interaction_enabled=partner_interaction_enabled,
     )
 
 
@@ -218,6 +220,30 @@ def low_then_transition(core, keys, reward):
     snapshot = boundary(core, keys)
     core.low_step(snapshot, deterministic=True)
     core.complete_primitive_transition(reward)
+
+
+def test_partner_interaction_writes_p_during_a_real_event():
+    # End-to-end: with the Seq-12 support-native transition enabled, a real
+    # apply_transaction over a >=2-member frontier writes each owner's P from a
+    # genuine other-member partner, bound to provenance.
+    core = make_core("f1", partner_interaction_enabled=True)
+    initial_join(core, keys=("a", "b"), actions={"a": 0, "b": 1})
+    for key in ("a", "b"):
+        history = core.records[key].partner_interaction_history
+        assert history is not None, f"P not written for {key}"
+        row = history.rows[-1]
+        assert row.owner_lifecycle_key == key
+        assert row.partner_lifecycle_key != key  # a genuine other member
+        assert row.partner_lifecycle_key in ("a", "b")
+        assert -1.0 <= history.current_p <= 1.0
+
+
+def test_no_partner_interaction_when_disabled_end_to_end():
+    # The same real event with the flag off (the default) writes no P at all.
+    core = make_core("f1")
+    initial_join(core, keys=("a", "b"), actions={"a": 0, "b": 1})
+    for key in ("a", "b"):
+        assert core.records[key].partner_interaction_history is None
 
 
 def run_trace():

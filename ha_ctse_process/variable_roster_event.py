@@ -40,6 +40,8 @@ from ha_ctse_process.variable_roster_event_types import (
     PackedActiveBatch,
     PackedEventHighPPOData,
     PackedEventHighReplay,
+    PartnerInteractionHistory,
+    PartnerInteractionRow,
     PackedEventLowReplay,
     PackedEventPPOData,
     event_action_hooks,
@@ -128,6 +130,7 @@ class VariableRosterEventCore:
         device: str | torch.device = "cpu",
         shared_models_from: "VariableRosterEventCore | None" = None,
         runtime_mode: str = LEARNED_LOW_RUNTIME,
+        partner_interaction_enabled: bool = False,
     ) -> None:
         mode = str(architecture_mode).lower()
         if mode not in EVENT_MODES:
@@ -141,6 +144,10 @@ class VariableRosterEventCore:
             raise ValueError("event runtime requires at least two skills")
         self.architecture_mode = mode
         self.runtime_mode = selected_runtime_mode
+        # MSSR (Seq 12) support-native partner-interaction transition.  Default
+        # OFF: when disabled the transition never executes, the actor has no
+        # first-action head, and every existing rollout is byte-identical.
+        self.partner_interaction_enabled = bool(partner_interaction_enabled)
         self.obs_dim = int(obs_dim)
         self.critic_member_dim = int(critic_member_dim)
         self.critic_global_dim = int(critic_global_dim)
@@ -176,6 +183,7 @@ class VariableRosterEventCore:
                 member_hidden_dim=self.member_hidden_dim,
                 high_hidden_dim=self.high_hidden_dim,
                 skill_embedding_dim=self.skill_embedding_dim,
+                partner_first_action=self.partner_interaction_enabled,
             ).to(self.device)
             self.event_critic = variable_roster_event_models.EventHighCritic(
                 critic_member_dim=self.critic_member_dim,
@@ -709,6 +717,74 @@ class VariableRosterEventCore:
         """
         self._preframe_intervention = intervention
 
+    def _write_partner_interaction(
+        self,
+        *,
+        record: LifecycleRecord,
+        owner_key: str,
+        owner_row: int,
+        active_keys: Sequence[str],
+        active_observations: torch.Tensor,
+        event_index: int,
+    ) -> None:
+        """Registered support-native partner-interaction transition (Seq 12).
+
+        Owner ``i``'s partner-interaction history ``P`` is advanced by a genuine
+        interaction with one specific other active member ``j`` -- the strongest
+        interactor by environment-observation alignment.  The payload is derived
+        from ``j``'s environment observation (``packed.member_obs``), not from any
+        event-core-internal hidden state, so the signal enters from the
+        environment side.  The write:
+
+        * depends on ``j``'s observation (a real cross-member dependency -- the
+          first in this runtime, which otherwise computes only self-local
+          per-owner state and set-level aggregates);
+        * is fully deterministic and consumes no RNG, so the action / frontier /
+          opportunity streams are untouched and a disabled run is byte-identical;
+        * goes only to the owner-private ``record.partner_interaction_history``
+          field -- there is no public setter, so P can be produced only here; and
+        * is bound to its full provenance tuple (episode, owner, membership
+          epoch, partner identity, event index, prior P, payload, next P,
+          writer/version).
+
+        A solitary owner (no other active member) has no partner and no write.
+        """
+        owner_vector = active_observations[owner_row].reshape(-1)
+        partner_index: int | None = None
+        best_alignment: float | None = None
+        for index in range(int(active_observations.shape[0])):
+            if index == owner_row:
+                continue
+            alignment = float(
+                torch.dot(owner_vector, active_observations[index].reshape(-1))
+            )
+            if best_alignment is None or alignment > best_alignment:
+                best_alignment = alignment
+                partner_index = index
+        if partner_index is None:
+            return
+        partner_key = active_keys[partner_index]
+        dimension = int(owner_vector.shape[0])
+        payload = float(np.tanh(best_alignment / max(dimension, 1) ** 0.5))
+        prior = record.partner_interaction_history
+        prior_p = float(prior.current_p) if prior is not None else 0.0
+        prior_rows = prior.rows if prior is not None else ()
+        next_p = float(np.clip(0.8 * prior_p + 0.2 * payload, -1.0, 1.0))
+        row = PartnerInteractionRow(
+            episode_id=int(self.rng_episode_id),
+            owner_lifecycle_key=str(owner_key),
+            membership_epoch=int(record.membership_epoch),
+            partner_lifecycle_key=str(partner_key),
+            event_index=int(event_index),
+            prior_p=prior_p,
+            payload=payload,
+            next_p=next_p,
+            writer_policy_version=int(self.policy_version),
+        )
+        record.partner_interaction_history = PartnerInteractionHistory(
+            current_p=next_p, rows=prior_rows + (row,)
+        )
+
     def _process_frontier(
         self,
         snapshot: BoundarySnapshot,
@@ -854,6 +930,19 @@ class VariableRosterEventCore:
             record.high_hidden = new_hidden.detach().cpu().numpy().astype(np.float32)
             record.last_policy_event_time = int(self.physical_time)
             record.policy_version = int(self.policy_version)
+            if self.partner_interaction_enabled:
+                # Registered partner-interaction transition writes the owner's
+                # support-native P from a genuine interaction with a specific
+                # other active member, using their environment observations.  No
+                # RNG, only the new owner-private field -- inert when disabled.
+                self._write_partner_interaction(
+                    record=record,
+                    owner_key=key,
+                    owner_row=row_index,
+                    active_keys=routing.lifecycle_keys,
+                    active_observations=observations,
+                    event_index=position,
+                )
             new_embedding = self.commitment_model.encode_members(
                 observations[row_index : row_index + 1],
                 working_skills[row_index : row_index + 1],
@@ -1436,7 +1525,7 @@ class VariableRosterEventCore:
         self.low_chunk_boundaries.clear()
 
     def architecture_state(self) -> dict[str, Any]:
-        return {
+        state = {
             "runtime_mode": self.runtime_mode,
             "obs_dim": self.obs_dim,
             "critic_member_dim": self.critic_member_dim,
@@ -1452,6 +1541,14 @@ class VariableRosterEventCore:
             "gae_lambda": self.gae_lambda,
             "age_reference_steps": AGE_REFERENCE_STEPS,
         }
+        # Seq-12 support-native partner-interaction adds a first-action head and
+        # a partner-interaction transition -- a distinct architecture.  Recorded
+        # ONLY when enabled, so a disabled core's architecture state (and every
+        # existing digest) is unchanged, while an enabled core is distinguished
+        # from a disabled one for the shared-model equality check.
+        if self.partner_interaction_enabled:
+            state["partner_interaction_enabled"] = True
+        return state
 
     @staticmethod
     def _record_to_state(record: LifecycleRecord) -> dict[str, Any]:

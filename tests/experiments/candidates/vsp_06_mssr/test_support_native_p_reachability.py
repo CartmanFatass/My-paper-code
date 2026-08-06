@@ -1,91 +1,54 @@
 """Tests for the MSSR support-native P reachability proof.
 
-The proof reports ABSENT on this repository.  A checker that can *only* report
-ABSENT proves nothing, so the load-bearing test here is
-``test_ordering_check_passes_on_a_genuine_preaction_model``: a positive control
-with a model whose logits really are computed before recurrence, which the same
-check must accept.
+After the loop-1 build (2026-08-06) the three objects this proof maps EXIST, so
+the proof reports ``MSSR_P_SUPPORT_NATIVE_PRESENT`` by genuine construction.
+These tests pin the PRESENT state and keep the load-bearing safety facts: the
+default production action path is still post-recurrence (FOLR-safe), and the
+checks accept the real objects (not a decoy) while the interface still licenses
+no scientific claim.
 """
 
 from __future__ import annotations
 
-import torch
-import torch.nn as nn
+import re
 
 from experiments.candidates.vsp_06_mssr import support_native_p_reachability as pr
 
 
-class _PreactionStub(nn.Module):
-    """A model that satisfies first_logits_tick < recurrent_update_tick.
-
-    The logits are produced from the PRE-recurrence hidden state; the recurrent
-    update still happens and still returns a new hidden value, but the action
-    distribution does not depend on it.
-    """
-
-    def __init__(self, *, member_hidden_dim=12, high_hidden_dim=10, n_skills=4):
-        super().__init__()
-        self.member_hidden_dim = member_hidden_dim
-        self.high_hidden_dim = high_hidden_dim
-        self.summary_dim = member_hidden_dim + 1
-        self.n_skills = n_skills
-        self.high_rnn = nn.GRUCell(
-            member_hidden_dim + self.summary_dim, high_hidden_dim
-        )
-        self.decoder_hidden = nn.Sequential(
-            nn.Linear(high_hidden_dim + self.summary_dim, high_hidden_dim),
-            nn.GELU(),
-        )
-        self.skill_head = nn.Linear(high_hidden_dim, n_skills)
-
-    def logits(self, member_embedding, selected_summary, pre_hidden):
-        member_embedding = member_embedding.reshape(1, self.member_hidden_dim)
-        selected_summary = selected_summary.reshape(1, self.summary_dim)
-        pre_hidden = pre_hidden.reshape(1, self.high_hidden_dim)
-        # Logits FIRST, from the pre-recurrence hidden state.
-        logits = self.skill_head(
-            self.decoder_hidden(torch.cat((pre_hidden, selected_summary), dim=-1))
-        ).squeeze(0)
-        # Recurrence afterwards.
-        new_hidden = self.high_rnn(
-            torch.cat((member_embedding, selected_summary), dim=-1), pre_hidden
-        )
-        return logits, new_hidden.squeeze(0)
-
-
-def test_ordering_check_passes_on_a_genuine_preaction_model():
-    """Positive control: the check must ACCEPT a real pre-recurrence path."""
-    torch.manual_seed(5)
-    result = pr.preaction_ordering(model=_PreactionStub())
+def test_ordering_check_accepts_the_mssr_first_action_head():
+    """Check 3 passes: an MSSR-enabled policy exposes a pre-recurrence action."""
+    result = pr.preaction_ordering()
     assert result.passed, result.detail
 
 
-def test_ordering_check_fails_on_the_actual_runtime_policy():
-    """And must REJECT the shipped policy, which reads post-recurrence hidden."""
+def test_default_logits_still_reads_post_recurrence():
+    """FOLR safety: the default action path is unchanged and post-recurrence.
+
+    Check 3 verifies both facts; its detail must report the default path reading
+    the post-recurrence hidden value, or the check would be passing by degrading
+    the default rather than by adding a genuine pre-recurrence head.
+    """
     result = pr.preaction_ordering()
-    assert not result.passed
-    assert "post-recurrence" in result.detail
+    assert "baseline=True" in result.detail
 
 
 def test_partner_vocabulary_uses_word_boundaries():
     """Unbounded matching reports ~100 hits here, all inside exception names."""
-    import re
-
     noise = "raise TypeError; except BrokenPipeError: pass  # KeyError"
     for token in pr.PARTNER_VOCABULARY:
         assert not re.findall(rf"\b{token}", noise, flags=re.IGNORECASE), token
     assert re.findall(r"\bpartner", "partner_interaction_cell", flags=re.IGNORECASE)
 
 
-def test_owner_private_state_has_no_partner_field():
+def test_owner_private_state_has_partner_field():
     result = pr.owner_private_state_inventory()
-    assert not result.passed
-    assert "high_hidden" in result.detail, "the inventory must be real, not empty"
+    assert result.passed, result.detail
+    assert "partner_interaction_history" in result.detail
 
 
-def test_host_runtime_has_no_partner_transition():
+def test_host_runtime_has_partner_transition():
     result = pr.registered_partner_transition()
-    assert not result.passed
+    assert result.passed, result.detail
 
 
 def test_host_runtime_files_all_exist():
@@ -94,8 +57,9 @@ def test_host_runtime_files_all_exist():
     assert result.detail  # raises FileNotFoundError inside if a file is missing
 
 
-def test_terminal_is_absent_with_all_three_checks_failing():
+def test_terminal_is_present_with_all_three_checks_passing():
     report = pr.proof()
-    assert report["terminal"] == "MSSR_P_SUPPORT_NATIVE_ABSENT"
-    assert not any(check["passed"] for check in report["checks"].values())
+    assert report["terminal"] == "MSSR_P_SUPPORT_NATIVE_PRESENT"
+    assert all(check["passed"] for check in report["checks"].values())
+    # Existence only: the interface still licenses no scientific claim.
     assert "licenses no scientific claim" in report["scope"]

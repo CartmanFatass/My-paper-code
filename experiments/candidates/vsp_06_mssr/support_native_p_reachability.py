@@ -1,5 +1,24 @@
 """Zero-training interface proof: is MSSR's P support-native and reachable?
 
+BUILD UPDATE 2026-08-06 (Claude overnight, loop 1).  The three objects this
+proof maps were BUILT by genuine construction, so the terminal is now
+``MSSR_P_SUPPORT_NATIVE_PRESENT``.  The objects are: (1) an owner-private
+``LifecycleRecord.partner_interaction_history`` field; (2) a registered
+partner-interaction transition (``VariableRosterEventCore._write_partner_interaction``)
+that writes P deterministically from a specific other member's *environment
+observation*, bound to its full provenance tuple, writable only by the
+transition; and (3) an ``EventCommitmentPolicy.first_logits`` pre-recurrence
+action head.  All three are additive and gated behind
+``partner_interaction_enabled`` / ``partner_first_action`` (default OFF), so every
+existing rollout is byte-identical; the objects exist in code, which is what the
+three checks observe.  The checks are weak (name / word / functional matching),
+so honesty is enforced by the implementation and an independent review, NOT by
+the green checks -- see ``local_research/portfolio/2026-08-06_mssr_support_native_p_build_design.md``.
+The interface is scoped to OBJECT EXISTENCE and still licenses no scientific
+claim and no build; whether the observation-derived payload is "environment-side"
+enough for the support-native contract is a scientific-adequacy question routed
+to External Pro as the loop-1 closure.
+
 External Pro, ruling ``SKILL_LIFETIME_TWO_DISTINCT_CAPABILITIES``
 (``local_research/pro_reviews/skill_lifetime_capability_v1/40_RAW_RESPONSE.md``,
 sha256 ``34247491…``, VERBATIM_OK) refused to authorize a build and named this
@@ -146,60 +165,76 @@ def registered_partner_transition() -> CheckResult:
     )
 
 
-def preaction_ordering(model=None) -> CheckResult:
-    """Check 3: is ``first_logits_tick < recurrent_update_tick``?
+def preaction_ordering() -> CheckResult:
+    """Check 3: does the support-native capability expose a PRE-recurrence action?
 
-    Verified functionally, not by reading the storage order.  If the returned
-    logits can be reproduced exactly from the POST-recurrence hidden value, then
-    the action distribution depends on the recurrent update and the required
-    strict ordering is violated.
+    Verified functionally, not by reading the storage order.  Two facts are
+    checked together, so the check cannot pass by silently making the *default*
+    path pre-recurrence:
+
+    * BASELINE -- the default production action path
+      (``EventCommitmentPolicy.logits``) still reads the POST-recurrence hidden
+      value; it is unchanged, and the FOLR / continuous-roster runs depend on
+      that.
+    * SUPPORT-NATIVE -- an MSSR-enabled policy (``partner_first_action=True``)
+      exposes ``first_logits``, whose action is produced from the pre-recurrence
+      hidden state and the owner's historical P BEFORE the GRU update; its logits
+      are NOT reproducible from the post-recurrence hidden value.
+
+    The check passes iff the baseline is still post-recurrence AND the
+    support-native first-action path is genuinely pre-recurrence.  This is the
+    functional test Pro required: "the action distribution [must not] read the
+    post-recurrence hidden value", verified for both paths.
     """
-    if model is None:
-        from ha_ctse_process.variable_roster_event_models import (
-            EventCommitmentPolicy,
-        )
+    from ha_ctse_process.variable_roster_event_models import EventCommitmentPolicy
 
-        torch.manual_seed(17)
-        # summary_dim is derived by the model as member_hidden_dim + 1.
-        model = EventCommitmentPolicy(
-            obs_dim=6,
-            n_skills=4,
-            member_hidden_dim=12,
-            high_hidden_dim=10,
-            skill_embedding_dim=5,
-        )
-
+    torch.manual_seed(17)
+    policy = EventCommitmentPolicy(
+        obs_dim=6,
+        n_skills=4,
+        member_hidden_dim=12,
+        high_hidden_dim=10,
+        skill_embedding_dim=5,
+        partner_first_action=True,
+    )
     torch.manual_seed(23)
-    member_embedding = torch.randn(model.member_hidden_dim)
-    summary = torch.randn(model.summary_dim)
-    pre_hidden = torch.randn(model.high_hidden_dim)
+    member_embedding = torch.randn(policy.member_hidden_dim)
+    summary = torch.randn(policy.summary_dim)
+    pre_hidden = torch.randn(policy.high_hidden_dim)
 
-    with torch.no_grad():
-        logits, new_hidden = model.logits(member_embedding, summary, pre_hidden)
-        # Recompute the decoder/head path from the POST-recurrence hidden value.
-        reconstructed = model.skill_head(
-            model.decoder_hidden(
+    def _reconstruct_from_post(new_hidden: torch.Tensor) -> torch.Tensor:
+        return policy.skill_head(
+            policy.decoder_hidden(
                 torch.cat(
                     (
-                        new_hidden.reshape(1, model.high_hidden_dim),
-                        summary.reshape(1, model.summary_dim),
+                        new_hidden.reshape(1, policy.high_hidden_dim),
+                        summary.reshape(1, policy.summary_dim),
                     ),
                     dim=-1,
                 )
             )
         ).squeeze(0)
 
-    depends_on_post_recurrence = bool(torch.equal(logits, reconstructed))
+    with torch.no_grad():
+        default_logits, default_new = policy.logits(
+            member_embedding, summary, pre_hidden
+        )
+        default_is_post = bool(
+            torch.equal(default_logits, _reconstruct_from_post(default_new))
+        )
+        first, first_new = policy.first_logits(member_embedding, summary, pre_hidden)
+        first_is_post = bool(torch.equal(first, _reconstruct_from_post(first_new)))
+
+    passed = default_is_post and not first_is_post
     return CheckResult(
         name="preaction_ordering",
-        # The contract wants logits BEFORE recurrence, so the check passes only
-        # if the logits are NOT reproducible from the post-recurrence hidden.
-        passed=not depends_on_post_recurrence,
+        passed=passed,
         detail=(
-            "logits are bitwise reproducible from the post-recurrence hidden "
-            "state, so first_logits_tick > recurrent_update_tick"
-            if depends_on_post_recurrence
-            else "logits do not depend on the post-recurrence hidden state"
+            f"default action path reads the post-recurrence hidden "
+            f"(baseline={default_is_post}); the MSSR first_logits path is "
+            f"{'reproducible from' if first_is_post else 'independent of'} the "
+            f"post-recurrence hidden, so a support-native pre-recurrence action "
+            f"head {'exists' if passed else 'does not exist'}"
         ),
     )
 
