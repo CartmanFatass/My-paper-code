@@ -64,6 +64,50 @@ receipt.
 - **Research first, edit second.** Establish what the code actually does before
   writing the change, not while writing it.
 
+## Experiment performance: backend, batching, parallelism — under one hard constraint
+
+Experiments here run far slower than they should when they step a pure-Python
+env one transition at a time and run independent seeds sequentially. Three
+levers, in order of leverage:
+
+1. **Compiled backend over pure Python.** Where a native/C++ backend exists for
+   an environment (e.g. `envs/continuous_roster/cpp_backend.py` →
+   `native/continuous_roster_toy_backend.cpp`) and covers the dynamics a
+   candidate needs, route through it instead of re-stepping the Python env. A
+   pure-Python reimplementation of an env that already has a compiled backend is
+   the first thing to question — that is exactly why the UCOPE sibling
+   (`runtime_capacity.py`, pure Python + numpy) is far slower than the Codex-era
+   cpp-backed toy env.
+2. **Batch the policy forward.** Thousands of batch-size-1 torch calls are
+   dominated by dispatch overhead, not compute. Step N envs in lockstep and do
+   one batch-N forward where the design allows.
+3. **Parallelize independent runs.** Independent (seed, arm) runs are
+   embarrassingly parallel; dispatch them across a process pool sized to the
+   machine (this box: AMD 8745H, 8 cores / 16 threads).
+
+**The hard constraint that governs all three:** a speedup must be EITHER
+behavior-preserving — byte-identical outputs, proven by a local same-seed
+comparison of old vs new — OR treated as a **new registered design**: re-freeze
+the registration digest, and re-dispatch to Pro any result whose licensed
+reading carries numbers. Bit-identity is a LOCAL mechanical check
+(`ORCHESTRATOR_WORKFLOW.md` §3 routing rule), never a Pro question.
+
+Which lever is which:
+
+- **Process-parallelism of independent deterministic runs is byte-identical** —
+  dispatch order cannot change a self-contained computation. Safe; only the
+  source-content digest moves, and equality is proven locally.
+- **Batching the rollout, changing the torch thread count, or swapping to a C++
+  backend with different float ops all CHANGE the numbers** (RNG consumption
+  order, matmul batch size, reduction order). Each is a new registration whose
+  reading goes back to Pro.
+
+Reproducibility note: results already silently depend on the ambient torch
+thread count (`torch.get_num_threads()` was 8 on this box), which the
+registration digest does not pin. Pin it explicitly when re-registering, and
+prefer `torch.set_num_threads(1)` inside a parallel worker so the pool does not
+oversubscribe.
+
 Historical handoffs, archived results and unreferenced files are not active
 instructions.
 
