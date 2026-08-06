@@ -31,21 +31,21 @@ def test_the_switching_rule_classification_needs_no_invented_tolerance():
     recovered = cs.classify_switching_rule(
         {"a": _row(0.30, 0.25), "b": _row(0.68, 0.75)}
     )
-    assert recovered["correct_at_every_state"]
+    assert recovered["state_conditional_mean_correct_at_every_state"]
     assert recovered["incorrect_states"] == ()
     assert recovered["states_checked"] == 2
 
     missed = cs.classify_switching_rule(
         {"a": _row(0.51, 0.25), "b": _row(0.68, 0.75)}
     )
-    assert not missed["correct_at_every_state"]
+    assert not missed["state_conditional_mean_correct_at_every_state"]
     assert missed["incorrect_states"] == ("a",)
 
 
 def test_the_deviation_is_descriptive_and_does_not_drive_the_verdict():
     """A large deviation on the correct side must not be called a failure."""
     result = cs.classify_switching_rule({"a": _row(0.49, 0.25)})
-    assert result["correct_at_every_state"]
+    assert result["state_conditional_mean_correct_at_every_state"]
     assert result["maximum_absolute_deviation_from_bayes"] == pytest.approx(0.24)
 
 
@@ -178,3 +178,105 @@ def test_a_two_seed_replication_produces_distinct_checkpoints():
     assert summary["all_seeds_severed_bit_identical_to_blind"]
     for row in summary["per_seed"]:
         assert set(row["checkpoint_digests"]) == set(pt.ARMS)
+
+
+def test_the_classification_says_what_it_measures():
+    """Pro's wording correction: it is the state-conditional MEAN, not coverage.
+
+        The implementation first averages all played efforts associated with a
+        count state and then classifies that state-conditional mean relative to
+        the action midpoint. It does not check that every individual
+        ledger/time/context realization remained on the correct side.
+
+    The key is named for the mean and the row says so, because "recovering the
+    switching rule everywhere" was read as per-instance coverage and is not.
+    """
+    result = cs.classify_switching_rule({"a": _row(0.30, 0.25)})
+    assert "state_conditional_mean_correct_at_every_state" in result
+    assert "correct_at_every_state" not in result
+    assert "not per-instance coverage" in result["measures"]
+
+
+def test_the_registered_evaluation_support_is_not_held_out_for_the_first_seed():
+    """The defect Pro found, pinned so it cannot be silently reintroduced.
+
+        The first replication seed is 20260806, while the fixed evaluation
+        ledger seed is 20260808. run_arm derives regime_seed = seed + 2 and uses
+        that same value as the training ledger's master_seed [...] Thus, for the
+        first replication, evaluation ledgers 0,...,63 are the same ledger
+        contexts encountered during its first 64 training episodes.
+
+    This asserts the collision on the constants the archived v2 artifact
+    actually ran under.  It is a record of a known limitation, not a target to
+    make pass by editing the constants -- the artifact must stay reproducible.
+    """
+    report = ce.evaluation_support_disjointness(
+        seeds=cs.REPLICATION_SEEDS,
+        ledger_seed=20_260_808,
+        evaluation_ledgers=64,
+        iterations=300,
+        episodes_per_iteration=16,
+    )
+    assert report["ledger_seed_collides_with_a_training_root"]
+    assert report["colliding_training_seeds"] == [20_260_806]
+    assert report["overlapping_ledger_ids"] == list(range(64))
+    assert not report["evaluation_support_is_held_out_for_every_seed"]
+
+
+def test_shifting_the_ledger_base_clears_the_overlap_for_every_seed():
+    """Pro named two remedies; this is the one robust to any seed choice.
+
+        A future evaluation seed should be outside every training-derived seed
+        root, or evaluation ledger IDs should be outside the training episode-ID
+        range.
+
+    The seed-side remedy fixes one seed at a time; shifting the ids fixes all of
+    them, because a ledger is (id, master_seed, profile) and disagreeing on the
+    id is enough.
+    """
+    clean = ce.evaluation_support_disjointness(
+        seeds=cs.REPLICATION_SEEDS,
+        ledger_seed=20_260_808,
+        evaluation_ledgers=64,
+        iterations=300,
+        episodes_per_iteration=16,
+        ledger_base=ce.CLEAN_LEDGER_BASE,
+    )
+    # The seed collision is untouched -- and that is fine, because the ids no
+    # longer meet.
+    assert clean["ledger_seed_collides_with_a_training_root"]
+    assert clean["overlapping_ledger_ids"] == []
+    assert clean["evaluation_support_is_held_out_for_every_seed"]
+
+    # ...and the seed-side remedy works on its own too.
+    other = ce.evaluation_support_disjointness(
+        seeds=cs.REPLICATION_SEEDS,
+        ledger_seed=77_777_777,
+        evaluation_ledgers=64,
+        iterations=300,
+        episodes_per_iteration=16,
+    )
+    assert not other["ledger_seed_collides_with_a_training_root"]
+    assert other["evaluation_support_is_held_out_for_every_seed"]
+
+
+def test_the_ledger_base_actually_changes_the_evaluation_ledgers():
+    """A shift that produced the same ledger would fix nothing.
+
+    The ledger's identity IS its ``episode_id``: it is what ``make_ledger``
+    keys the draw on and what a training episode would have to match for the
+    two contexts to coincide.  Compared field-wise because the dataclass holds
+    numpy arrays and ``==`` on it is ambiguous.
+    """
+    default = ce.evaluation_ledger(0, ledger_seed=20_260_808)
+    shifted = ce.evaluation_ledger(
+        0, ledger_seed=20_260_808, ledger_base=ce.CLEAN_LEDGER_BASE
+    )
+    assert default.episode_id == 0
+    assert shifted.episode_id == ce.CLEAN_LEDGER_BASE
+    # The archived behaviour is the ledger_base=0 path, unchanged.
+    assert ce.evaluation_ledger(
+        7, ledger_seed=20_260_808, ledger_base=0
+    ).episode_id == 7
+    # ...and the shift is what puts it clear of every training episode id.
+    assert shifted.episode_id >= 300 * 16

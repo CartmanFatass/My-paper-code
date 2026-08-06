@@ -150,7 +150,7 @@ class SeedResult:
     informed_regret: float
     blind_regret: float
     severed_is_bit_identical_to_blind: bool
-    switching_rule_correct_at_every_state: bool
+    state_conditional_mean_correct_at_every_state: bool
     incorrect_states: tuple[str, ...]
     maximum_absolute_deviation_from_bayes: float
     checkpoint_digests: dict[str, str]
@@ -159,11 +159,26 @@ class SeedResult:
 def classify_switching_rule(
     realized_readout: dict[str, dict[str, float]],
 ) -> dict[str, object]:
-    """Is the learned policy on the correct side of the switch everywhere?
+    """Is the STATE-CONDITIONAL MEAN effort on the correct side of the switch?
 
-    ``realized_readout`` rows carry both the mean effort actually played at a
-    count state and that state's certified Bayes-optimal effort.  A row is
-    correct when both fall on the same side of ``SWITCH_POINT``.
+    ``realized_readout`` rows carry the mean effort actually played at a count
+    state and that state's certified Bayes-optimal effort.  A row is correct
+    when both fall on the same side of ``SWITCH_POINT``.
+
+    The word "mean" is load-bearing, and the first version of this docstring
+    dropped it.  External Pro:
+
+        The implementation first averages all played efforts associated with a
+        count state and then classifies that state-conditional mean relative to
+        the action midpoint. It does not check that every individual
+        ledger/time/context realization remained on the correct side. […]
+        Admissible: "the on-manifold mean effort at every reachable count state
+        was on the correct side." Not yet admissible: "every action at every
+        reachable context was on the correct side."
+
+    Per-instance coverage would need the minimum/maximum over played efforts, or
+    the fraction of individual efforts on the Bayes-correct side, neither of
+    which this computes.  The returned keys are named for what is measured.
     """
     incorrect: list[str] = []
     deviations: list[float] = []
@@ -174,10 +189,14 @@ def classify_switching_rule(
         if (played < SWITCH_POINT) != (bayes < SWITCH_POINT):
             incorrect.append(state)
     return {
-        "correct_at_every_state": not incorrect,
+        "state_conditional_mean_correct_at_every_state": not incorrect,
         "incorrect_states": tuple(incorrect),
         "states_checked": len(realized_readout),
         "maximum_absolute_deviation_from_bayes": max(deviations) if deviations else 0.0,
+        "measures": (
+            "the side of the switch point taken by the MEAN effort at each count "
+            "state, not per-instance coverage over ledgers, times or contexts"
+        ),
     }
 
 
@@ -203,8 +222,8 @@ def _summarize_seed(seed: int, report: dict[str, object]) -> SeedResult:
         severed_is_bit_identical_to_blind=bool(
             report["training_side_severed_arm"]["checkpoints_are_bit_identical"]
         ),
-        switching_rule_correct_at_every_state=bool(
-            classification["correct_at_every_state"]
+        state_conditional_mean_correct_at_every_state=bool(
+            classification["state_conditional_mean_correct_at_every_state"]
         ),
         incorrect_states=tuple(classification["incorrect_states"]),
         maximum_absolute_deviation_from_bayes=float(
@@ -263,6 +282,7 @@ def run_replication(
     seeds: Sequence[int] = REPLICATION_SEEDS,
     evaluation_ledgers: int = 64,
     ledger_seed: int = 20_260_808,
+    ledger_base: int = ce.DEFAULT_LEDGER_BASE,
     **training_kwargs,
 ) -> dict[str, object]:
     """Run the registered experiment once per training seed and summarize.
@@ -289,12 +309,29 @@ def run_replication(
     # budget that actually ran instead of the (possibly empty) override set.
     training_kwargs = {**ce.REGISTERED_TRAINING, **training_kwargs}
 
+    # Pro found that the evaluation support was NOT held out for seed 20260806:
+    # run_arm uses regime_seed = seed + 2 as the training ledger's master seed,
+    # and 20260806 + 2 == 20260808 == ledger_seed, while training episode ids
+    # start at 0 and the evaluation ledger ids are 0..63.  Reported rather than
+    # raised, because the archived run must stay reproducible under the exact
+    # constants it used; `ledger_base=ce.CLEAN_LEDGER_BASE` clears it for every
+    # seed at once.
+    disjointness = ce.evaluation_support_disjointness(
+        seeds=seeds,
+        ledger_seed=ledger_seed,
+        evaluation_ledgers=evaluation_ledgers,
+        iterations=training_kwargs["iterations"],
+        episodes_per_iteration=training_kwargs["episodes_per_iteration"],
+        ledger_base=ledger_base,
+    )
+
     results: list[SeedResult] = []
     per_seed_reports: dict[str, object] = {}
     for seed in seeds:
         report = ce.run_registered_experiment(
             evaluation_ledgers=evaluation_ledgers,
             ledger_seed=ledger_seed,
+            ledger_base=ledger_base,
             seed=seed,
             **training_kwargs,
         )
@@ -314,9 +351,11 @@ def run_replication(
                 "seeds": list(seeds),
                 "evaluation_ledgers": evaluation_ledgers,
                 "ledger_seed": ledger_seed,
+                "ledger_base": ledger_base,
                 **training_kwargs,
             }
         ),
+        "evaluation_support_disjointness": disjointness,
         "design": {
             "unit_of_analysis": "training seed",
             "replications": len(seeds),
@@ -326,13 +365,20 @@ def run_replication(
                 "evidence_seed = seed + 3 from the same training seed"
             ),
             "what_is_held_fixed": (
-                "the evaluation support: the same ledger_seed and the same "
+                "the evaluation support: the same ledger_seed, ledger_base and "
                 "exactly-weighted crossed cells score every replication"
+            ),
+            "held_out": (
+                "NOT held out for a seed whose derived roots contain ledger_seed "
+                "while the ledger ids overlap the training episode-id range -- "
+                "see evaluation_support_disjointness, which reports exactly which"
             ),
             "not_decomposed": (
                 "initialization variance is not separated from training-stream "
                 "variance. A decomposition would hold the stream and vary only "
-                "torch.manual_seed; whether that is wanted is Pro's call."
+                "torch.manual_seed; External Pro ruled it is NOT required for the "
+                "licensed sentence -- only for attributing variance specifically "
+                "to initialization."
             ),
         },
         "per_seed": [row.__dict__ for row in results],
@@ -364,8 +410,8 @@ def run_replication(
     summary["seeds_with_a_positive_contrast"] = sum(
         1 for value in contrasts if value > 0.0
     )
-    summary["seeds_recovering_the_switching_rule_at_every_state"] = sum(
-        1 for row in admissible if row.switching_rule_correct_at_every_state
+    summary["seeds_whose_state_conditional_mean_is_correct_at_every_state"] = sum(
+        1 for row in admissible if row.state_conditional_mean_correct_at_every_state
     )
     summary["states_missed_by_seed"] = {
         str(row.seed): list(row.incorrect_states)
@@ -375,8 +421,45 @@ def run_replication(
     summary["maximum_absolute_deviation_from_bayes_over_all_seeds"] = max(
         row.maximum_absolute_deviation_from_bayes for row in admissible
     )
+    # Pro's distribution-free companion to the Student-t interval: under an
+    # equal-sign null with independent seed outcomes, all-positive has
+    # probability 2^-n.  Reported alongside the interval, not instead of it.
+    summary["all_positive_sign_probability_under_the_equal_sign_null"] = (
+        0.5 ** len(contrasts)
+        if summary["seeds_with_a_positive_contrast"] == len(contrasts)
+        else None
+    )
     summary["distinct_informed_checkpoints"] = len(
         {row.checkpoint_digests[pt.INFORMED] for row in admissible}
+    )
+    # Pro: this is plumbing, not a behavioral result.  Recorded next to the
+    # number so it cannot be quoted as evidence of behavioral diversity.
+    summary["distinct_informed_checkpoints_status"] = (
+        "an end-to-end seed-propagation safeguard: it shows the seed reached the "
+        "training process and the runs did not collapse to byte-identical "
+        "parameters. It does NOT establish that the policies implement different "
+        "functions, that the streams are statistically independent, or that "
+        "behavioral diversity exists -- distinct weights can represent nearly "
+        "identical policies. The behavioral evidence is the per-seed contrasts "
+        "and state-conditioned effort readouts. Final-checkpoint distinctness "
+        "alone also conflates initialization and stream; a future artifact "
+        "should record an initial-checkpoint digest and a training-stream "
+        "manifest digest separately."
+    )
+    # Pro: the current severance is OFF-MANIFOLD, so its magnitude is not an
+    # information-value estimate.  The caveat travels with the number.
+    summary["within_checkpoint_severance_status"] = (
+        "SEVERED replaces (positive count, completed epochs) with (0.0, 0.0) "
+        "while retaining the real later-episode time coordinate, creating inputs "
+        "such as 'completed epochs = 0 but time is in the second or third epoch' "
+        "that the informed checkpoint never saw in training. The magnitude "
+        "therefore combines genuine evidence dependence with out-of-distribution "
+        "behavior and must NOT be used as an information-value estimate or a "
+        "clean causal effect. A support-preserving severance would retain the "
+        "actual completed-epoch channel, replace the positive count with a draw "
+        "from its prior-predictive marginal conditional on completed epoch "
+        "independently of the actual regime, and average exactly over those "
+        "replacements on the crossed support."
     )
 
     if len(admissible) != len(results):
@@ -384,13 +467,38 @@ def run_replication(
     else:
         summary["terminal"] = "CROSS_SEED_MEASURED"
 
+    # Pro's replacement for reading the contrast against the certified 4.5.
+    # The separately-trained-arm contrast is 4.5 - eps_I + eps_B, so its
+    # proximity to 4.5 means the two arms have SIMILAR OPTIMIZATION REGRET -- not
+    # that the informed policies captured 99% of the information value.  Three
+    # individual contrasts exceeding 4.5 makes that decisive: the contrast can
+    # exceed the oracle gap whenever the blind arm sits farther below its own
+    # ceiling than the informed arm does.
+    informed_mean_across_seeds = statistics.fmean(
+        row.informed_mean for row in admissible
+    )
+    summary["oracle_ceiling_performance_normalization"] = {
+        "value": (informed_mean_across_seeds - pt.BLIND_OPTIMUM)
+        / (pt.INFORMED_OPTIMUM - pt.BLIND_OPTIMUM),
+        "definition": "(mean informed crossed value - 32) / (36.5 - 32)",
+        "status": (
+            "an oracle-ceiling PERFORMANCE normalization, not a literal "
+            "percentage of information captured. Do NOT compute "
+            "contrast/4.5: that ratio conflates information capture with the "
+            "difference in optimization regret between the two arms."
+        ),
+    }
+
     summary["scope"] = (
-        "Code-side measurement over training seeds. Whether this discharges "
-        "Pro's open item -- 'PPO reliably discovers the mechanism across "
-        "initializations' -- is a scientific reading that belongs to External "
-        "Pro in the capability conversation. Nothing here is a claim about "
-        "information acquisition, which this sibling cannot identify at all: "
-        f"the evidence distribution does not depend on the chosen effort "
+        "Code-side measurement over training seeds. External Pro ruled on the "
+        "reading: the closed statement is reproducibility across eight JOINT "
+        "initialization-and-training-stream seed realizations at the registered "
+        "budget -- not initialization-only robustness, and not universal PPO "
+        "reliability. 8/8 must not be translated into a 100% success "
+        "probability: treated as Bernoulli draws, eight successes give an exact "
+        "two-sided 95% lower bound of only about 0.631. Nothing here is a claim "
+        "about information acquisition, which this sibling cannot identify at "
+        f"all: the evidence distribution does not depend on the chosen effort "
         f"(PERIODS={cc.PERIODS})."
     )
     return summary

@@ -72,7 +72,7 @@ import subprocess
 from dataclasses import dataclass
 from fractions import Fraction
 from itertools import product
-from typing import Sequence
+from typing import Any, Sequence
 
 import numpy as np
 import torch
@@ -122,13 +122,102 @@ def crossed_support() -> tuple[tuple[str, tuple[int, ...], Fraction], ...]:
 CROSSED_SUPPORT = crossed_support()
 
 
-def evaluation_ledger(ledger_id: int, *, ledger_seed: int) -> roster_env.CapacityRosterLedger:
-    """One evaluation context.  The crossing happens *within* this ledger."""
+#: Offset applied to every evaluation ledger id.  ``0`` reproduces the archived
+#: runs exactly; ``CLEAN_LEDGER_BASE`` puts the evaluation ids outside any
+#: reachable training episode id.  See ``evaluation_support_disjointness``.
+DEFAULT_LEDGER_BASE = 0
+CLEAN_LEDGER_BASE = 900_000
+
+
+def evaluation_ledger(
+    ledger_id: int, *, ledger_seed: int, ledger_base: int = DEFAULT_LEDGER_BASE
+) -> roster_env.CapacityRosterLedger:
+    """One evaluation context.  The crossing happens *within* this ledger.
+
+    ``ledger_base`` shifts the ledger id.  It exists because External Pro found
+    that the evaluation support was not held out for the first replication seed:
+    a ledger is determined by ``(id, master_seed, profile)``, so an evaluation
+    ledger coincides with a training episode's ledger whenever the seeds AND the
+    ids coincide.  Shifting the ids fixes it for every seed at once, which the
+    seed-side fix does not.
+    """
+    identifier = ledger_base + ledger_id
     return roster_env.make_ledger(
-        ledger_id,
+        identifier,
         master_seed=ledger_seed,
-        profile=roster_env.TRAIN_PROFILES[ledger_id % len(roster_env.TRAIN_PROFILES)],
+        profile=roster_env.TRAIN_PROFILES[identifier % len(roster_env.TRAIN_PROFILES)],
     )
+
+
+def evaluation_support_disjointness(
+    *,
+    seeds: Sequence[int],
+    ledger_seed: int,
+    evaluation_ledgers: int,
+    iterations: int,
+    episodes_per_iteration: int,
+    ledger_base: int = DEFAULT_LEDGER_BASE,
+) -> dict[str, Any]:
+    """Is the evaluation support held out from training, for every seed?
+
+    External Pro's finding on the 8-seed replication, which this exists to make
+    impossible to reproduce silently:
+
+        The first replication seed is 20260806, while the fixed evaluation
+        ledger seed is 20260808. run_arm derives regime_seed = seed + 2 and uses
+        that same value as the training ledger's master_seed; training episode
+        IDs begin at zero. […] Thus, for the first replication, evaluation
+        ledgers 0,…,63 are the same ledger contexts encountered during its first
+        64 training episodes.
+
+    A training ledger and an evaluation ledger are the same object exactly when
+    both the master seed and the id agree, so BOTH conditions are reported.
+    Pro named both remedies -- *"A future evaluation seed should be outside every
+    training-derived seed root, or evaluation ledger IDs should be outside the
+    training episode-ID range"* -- and either one clears the diagnostic.
+
+    This is a diagnostic, not a gate: it is written into the artifact rather
+    than raising, because the archived run must stay reproducible under the
+    constants it actually used.
+    """
+    # run_arm consumes seed, seed+1 (generator), seed+2 (regime AND the training
+    # ledger master seed) and seed+3 (evidence).
+    derived_roots = {int(seed) + offset for seed in seeds for offset in range(4)}
+    seed_collision = ledger_seed in derived_roots
+    colliding_seeds = [
+        int(seed) for seed in seeds if ledger_seed in {int(seed) + o for o in range(4)}
+    ]
+
+    training_episode_ids = int(iterations) * int(episodes_per_iteration)
+    evaluation_ids = range(ledger_base, ledger_base + int(evaluation_ledgers))
+    id_overlap = sorted(
+        identifier for identifier in evaluation_ids if identifier < training_episode_ids
+    )
+
+    return {
+        "ledger_seed": int(ledger_seed),
+        "ledger_base": int(ledger_base),
+        "training_derived_seed_roots": sorted(derived_roots),
+        "ledger_seed_collides_with_a_training_root": bool(seed_collision),
+        "colliding_training_seeds": colliding_seeds,
+        "training_episode_id_range": [0, training_episode_ids - 1],
+        "evaluation_ledger_id_range": [
+            evaluation_ids.start,
+            evaluation_ids.stop - 1,
+        ],
+        "overlapping_ledger_ids": id_overlap,
+        # Held out iff the two objects cannot coincide: either no shared master
+        # seed, or no shared id.
+        "evaluation_support_is_held_out_for_every_seed": not (
+            seed_collision and id_overlap
+        ),
+        "remedy_if_not": (
+            "either choose a ledger_seed outside training_derived_seed_roots, or "
+            f"set ledger_base={CLEAN_LEDGER_BASE} so the evaluation ids sit "
+            "outside the training episode-id range; the second is robust to any "
+            "seed choice"
+        ),
+    }
 
 
 def cell_total(
@@ -464,6 +553,7 @@ def run_registered_experiment(
     *,
     evaluation_ledgers: int = 64,
     ledger_seed: int = 20_260_808,
+    ledger_base: int = DEFAULT_LEDGER_BASE,
     **training_kwargs,
 ) -> dict[str, object]:
     """Train the three arms, then evaluate on the exactly-weighted support.
@@ -475,9 +565,17 @@ def run_registered_experiment(
     training_kwargs = {**REGISTERED_TRAINING, **training_kwargs}
     runs = {arm: pt.run_arm(arm, **training_kwargs) for arm in pt.ARMS}
     ledgers = [
-        evaluation_ledger(index, ledger_seed=ledger_seed)
+        evaluation_ledger(index, ledger_seed=ledger_seed, ledger_base=ledger_base)
         for index in range(evaluation_ledgers)
     ]
+    disjointness = evaluation_support_disjointness(
+        seeds=(training_kwargs.get("seed", 20_260_806),),
+        ledger_seed=ledger_seed,
+        evaluation_ledgers=evaluation_ledgers,
+        iterations=training_kwargs["iterations"],
+        episodes_per_iteration=training_kwargs["episodes_per_iteration"],
+        ledger_base=ledger_base,
+    )
 
     readouts = {
         arm: crossed_readout(run.policy, arm=arm, ledgers=ledgers)
@@ -502,9 +600,13 @@ def run_registered_experiment(
             run_arguments={
                 "evaluation_ledgers": evaluation_ledgers,
                 "ledger_seed": ledger_seed,
+                "ledger_base": ledger_base,
                 **training_kwargs,
             }
         ),
+        # Pro §"Evaluation support is not held out for the first seed": travels
+        # with every artifact so the caveat can never be lost from the numbers.
+        "evaluation_support_disjointness": disjointness,
         "blind_ceiling_guard": guard,
         "certified_informed_optimum": pt.INFORMED_OPTIMUM,
         "certified_blind_optimum": pt.BLIND_OPTIMUM,
