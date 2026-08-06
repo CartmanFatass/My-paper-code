@@ -1,11 +1,13 @@
 """Tests for the MSSR support-native P reachability proof.
 
 After the loop-1 build (2026-08-06) the three objects this proof maps EXIST, so
-the proof reports ``MSSR_P_SUPPORT_NATIVE_PRESENT`` by genuine construction.
-These tests pin the PRESENT state and keep the load-bearing safety facts: the
-default production action path is still post-recurrence (FOLR-safe), and the
-checks accept the real objects (not a decoy) while the interface still licenses
-no scientific claim.
+the proof reports ``MSSR_P_REGISTERED_SOURCE_PRESENT`` by genuine construction
+(External Pro's loop-1 ruling renamed the terminal from the overclaiming
+``MSSR_P_SUPPORT_NATIVE_PRESENT``, which is reserved for the matched-support
+witness).  These tests pin the PRESENT state and keep the load-bearing safety
+facts: the default production action path is still post-recurrence (FOLR-safe),
+and the checks accept the real objects (not a decoy) while the interface still
+licenses no scientific claim.
 """
 
 from __future__ import annotations
@@ -59,7 +61,7 @@ def test_host_runtime_files_all_exist():
 
 def test_terminal_is_present_with_all_three_checks_passing():
     report = pr.proof()
-    assert report["terminal"] == "MSSR_P_SUPPORT_NATIVE_PRESENT"
+    assert report["terminal"] == "MSSR_P_REGISTERED_SOURCE_PRESENT"
     assert all(check["passed"] for check in report["checks"].values())
     # Existence only: the interface still licenses no scientific claim.
     assert "licenses no scientific claim" in report["scope"]

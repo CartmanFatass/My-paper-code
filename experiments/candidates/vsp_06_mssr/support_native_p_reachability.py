@@ -1,23 +1,39 @@
-"""Zero-training interface proof: is MSSR's P support-native and reachable?
+"""Zero-training interface proof: is MSSR's P a registered, non-injected source?
 
-BUILD UPDATE 2026-08-06 (Claude overnight, loop 1).  The three objects this
-proof maps were BUILT by genuine construction, so the terminal is now
-``MSSR_P_SUPPORT_NATIVE_PRESENT``.  The objects are: (1) an owner-private
+BUILD UPDATE 2026-08-06 (Claude overnight, loop 1) + PRO RULING.  The three
+objects this proof maps were BUILT by genuine construction, and External Pro
+ruled on them (ruling terminal
+``MSSR_P_SOURCE_INTERFACE_CLOSED_MATCHED_REACHABILITY_OPEN``, conversation
+``6a74326a``, archived at
+``local_research/pro_reviews/vsp06_mssr_support_native_p_v1/40_RAW_RESPONSE.md``,
+sha256 ``44d20b688afb485a71b30d5205ca6ca4b57c5e62a91662072094ca062571a343``,
+VERBATIM_OK).  Pro found the SOURCE INTERFACE closed -- owner-private P carrier,
+registered cross-member write transition, non-injected provenance-bound origin,
+and pre-GRU logit availability are all CLOSED -- but corrected the terminal:
+``MSSR_P_SUPPORT_NATIVE_PRESENT`` OVERCLAIMED, because the objects prove
+source-carrier existence, not the stronger matched-support reachability (two
+legally reachable histories differing only in historical P at one common current
+context).  Per Pro this proof now reports the narrower
+``MSSR_P_REGISTERED_SOURCE_PRESENT``; ``MSSR_P_SUPPORT_NATIVE_PRESENT`` is
+reserved for the matched-support witness, which is the next funded unit.
+
+The objects are: (1) an owner-private
 ``LifecycleRecord.partner_interaction_history`` field; (2) a registered
 partner-interaction transition (``VariableRosterEventCore._write_partner_interaction``)
 that writes P deterministically from a specific other member's *environment
 observation*, bound to its full provenance tuple, writable only by the
-transition; and (3) an ``EventCommitmentPolicy.first_logits`` pre-recurrence
-action head.  All three are additive and gated behind
+transition, and placed AFTER the sampled action (Pro condition 5A: the P write
+follows the actual action, so it is not a pre-logit recurrent update); and (3) an
+``EventCommitmentPolicy.first_logits`` pre-recurrence action head (a feasible
+surface -- not yet the actual action path, which remains ``.logits()``).  All
+three are additive and gated behind
 ``partner_interaction_enabled`` / ``partner_first_action`` (default OFF), so every
-existing rollout is byte-identical; the objects exist in code, which is what the
-three checks observe.  The checks are weak (name / word / functional matching),
-so honesty is enforced by the implementation and an independent review, NOT by
-the green checks -- see ``local_research/portfolio/2026-08-06_mssr_support_native_p_build_design.md``.
-The interface is scoped to OBJECT EXISTENCE and still licenses no scientific
-claim and no build; whether the observation-derived payload is "environment-side"
-enough for the support-native contract is a scientific-adequacy question routed
-to External Pro as the loop-1 closure.
+existing rollout is byte-identical.  The checks are weak (name / word / functional
+matching), so honesty rests on the implementation and independent review, NOT the
+green checks -- see
+``local_research/portfolio/2026-08-06_mssr_support_native_p_build_design.md``.
+The interface is OBJECT EXISTENCE only and licenses no scientific claim and no
+build.
 
 External Pro, ruling ``SKILL_LIFETIME_TWO_DISTINCT_CAPABILITIES``
 (``local_research/pro_reviews/skill_lifetime_capability_v1/40_RAW_RESPONSE.md``,
@@ -254,13 +270,20 @@ def proof() -> dict[str, object]:
             for check in checks
         },
         "terminal": (
-            "MSSR_P_SUPPORT_NATIVE_PRESENT"
+            "MSSR_P_REGISTERED_SOURCE_PRESENT"
             if reachable
-            else "MSSR_P_SUPPORT_NATIVE_ABSENT"
+            else "MSSR_P_REGISTERED_SOURCE_ABSENT"
         ),
         "scope": (
-            "Zero-training interface proof. Establishes object existence only; "
-            "it licenses no scientific claim about MSSR and no build."
+            "Zero-training SOURCE-INTERFACE proof. Establishes object existence "
+            "only -- a registered, non-injected, provenance-bound owner-private P "
+            "carrier and a feasible pre-GRU action surface -- and licenses no "
+            "scientific claim and no build. Per External Pro's loop-1 ruling "
+            "(terminal MSSR_P_SOURCE_INTERFACE_CLOSED_MATCHED_REACHABILITY_OPEN) the "
+            "stronger matched-support reachability -- two legally reachable histories "
+            "differing only in historical P at one common current context -- is a "
+            "SEPARATE open object, and MSSR_P_SUPPORT_NATIVE_PRESENT is reserved for "
+            "that witness."
         ),
     }
 
