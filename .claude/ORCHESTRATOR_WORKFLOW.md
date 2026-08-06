@@ -242,7 +242,44 @@ though it settled another; code shaped this way cannot express that error.
 **State what the round buys.** Before dispatching, say in one line what this
 round obtains that a local check could not. If the answer is "confirmation that
 my arithmetic or my reading of the source is right", do not dispatch — check
-it.
+it. This applies to numbers arriving *from* Pro as well: an arithmetic slip in
+a returned ruling is corrected locally and recorded with both derivations, not
+sent back.
+
+### 3.6 The enforcement, which is not this document
+
+Everything above is prose, and prose is what already failed once: Section 2
+carried a "self-check before dispatch" instruction while two mechanically
+findable defects were shipped. So the discipline is operationalized as a skill
+with a blocking script:
+
+```text
+.claude/skills/hmasd-science-dispatch/
+├── SKILL.md                        # the routing rule and the six-step path
+└── scripts/hmasd_dispatch_receipt.py
+```
+
+Invoke the skill before any dispatch. Two of its steps are mandatory and
+mechanical:
+
+1. **A clean-context document review.** `hmasd-reviewer`, holding the outgoing
+   document AND the source it describes, asked only "does this document
+   describe this code, and where did each number come from" — never the
+   science. Its verbatim output goes to `15_DOCUMENT_REVIEW.md` and must end
+   with `DOCUMENT_MATCHES_SOURCE`. This is the local stand-in for the reader
+   who found every prose/code mismatch so far, and it costs seconds.
+2. **The receipt gate.** `hmasd_dispatch_receipt.py` reads
+   `10_DISPATCH_MANIFEST.json`, proves every substantive figure in the question
+   traces to a declared truth source at the document's own precision, runs the
+   declared preconditions, requires the document review, and writes
+   `30_DISPATCH_RECEIPT.json`. It **exits non-zero**; that exit, not this
+   paragraph, is the guarantee. Never widen the whitelist to make a figure
+   pass — the whitelist is the list of numbers nobody recomputed and it travels
+   in the receipt.
+
+The item directory convention gains two slots, in order:
+`10_DISPATCH_MANIFEST.json` → `15_DOCUMENT_REVIEW.md` → `20_RAW_QUESTION.md` →
+`30_DISPATCH_RECEIPT.json` → `40_RAW_RESPONSE.md` → `60_ALIGNMENT_INTAKE.json`.
 
 ## 4. Review-item file conventions
 

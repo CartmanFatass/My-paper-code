@@ -143,6 +143,11 @@ test*.py
 # Candidate tests mirror experiments/candidates and remain visible to Git.
 !tests/experiments/
 !tests/experiments/**/*.py
+# Tests for the Claude-side tooling in .claude/ are tracked for the same reason:
+# the pre-dispatch gate's guarantee is that it exits non-zero, and an untracked
+# test suite guarantees nothing.
+!tests/claude/
+!tests/claude/**/*.py
 *.doc
 *.docx
 debug/
