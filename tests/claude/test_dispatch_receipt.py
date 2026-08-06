@@ -235,6 +235,35 @@ def test_a_document_review_that_found_a_mismatch_blocks_dispatch(tmp_path):
     assert receipt["document_review"]["terminal"] == "DOCUMENT_MISMATCH"
 
 
+def test_waiving_the_document_review_costs_a_written_reason(tmp_path):
+    """An off switch anybody can flip silently is not an escape hatch.
+
+    The clean-context review is a MUST in the workflow, and this script is what
+    the workflow cites as its mechanical backstop. A bare
+    ``document_review_required: false`` therefore blocks; a waiver with a reason
+    passes and the reason travels in the receipt where a later reader sees it.
+    """
+    root, item = _item(
+        tmp_path,
+        question="No numbers.",
+        truth={},
+        review=None,
+        manifest_extra={"document_review_required": False},
+    )
+    receipt = gate.build_receipt(item, root=root)
+    assert receipt["terminal"] == "DISPATCH_BLOCKED"
+    assert "silent waiver is refused" in receipt["document_review"]["detail"]
+
+    manifest = json.loads((item / gate.MANIFEST_NAME).read_text(encoding="utf-8"))
+    manifest["document_review_waiver_reason"] = (
+        "config-lane edit with no outgoing claim about source behaviour"
+    )
+    (item / gate.MANIFEST_NAME).write_text(json.dumps(manifest), encoding="utf-8")
+    receipt = gate.build_receipt(item, root=root)
+    assert receipt["terminal"] == "DISPATCH_PERMITTED"
+    assert receipt["document_review"]["waiver_reason"].startswith("config-lane")
+
+
 def test_a_missing_manifest_is_an_error_not_a_pass(tmp_path):
     """Fail closed: no manifest must never read as 'nothing to check'."""
     item = tmp_path / "local_research" / "pro_reviews" / "empty_v1"

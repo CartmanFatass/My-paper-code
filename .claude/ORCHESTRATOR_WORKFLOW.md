@@ -10,11 +10,15 @@ authority_note=adds_no_authority_over_AGENTS.md; AGENTS.md remains the sole
 orchestrator_model=any capable Claude model (written to be runnable by Opus;
   judgment calls are the orchestrator's, but every hard constraint and its
   reason is stated here rather than assumed)
-revision=2026-08-06 v3 (adds Section 3, the routing and pre-dispatch
-  verification contract, after a measured session in which roughly half the
-  external-review and compute cost was spent on questions the code side could
-  have answered locally; v2 was the post-takeover consolidation superseding
-  the v1 role-by-role mapping)
+revision=2026-08-06 v4 (rewrites Section 6 from a mapping table into the
+  orchestrator -> implementer -> reviewer workflow, modelled on the Codex Code
+  Project Manager process, after the user observed that the subagents were
+  defined but never actually used: a table says which agent, never when, so
+  the default was always "not yet". v3 added Section 3, the routing and
+  pre-dispatch verification contract, after a measured session in which
+  roughly half the external-review and compute cost was spent on questions the
+  code side could have answered locally; v2 was the post-takeover
+  consolidation superseding the v1 role-by-role mapping)
 ```
 
 ## 1. The actual logical model
@@ -41,10 +45,14 @@ a three-way split, and understanding it is prerequisite to everything else:
    ("科研判断提交外审即可"); the orchestrator does not self-certify it.
    Pro is never simulated, and a Pro response is archived verbatim with a
    byte comparison before anything else happens to it.
-3. **Subagents** (`.claude/agents/`: scout, mechanic, implementer, reviewer)
-   are task-level tools, not roles. They are stateless and single-shot;
-   their outputs are advisory inputs to the orchestrator, which alone
-   accepts, commits, and records. They never load Codex session charters.
+3. **Subagents** (`.claude/agents/`: implementer, reviewer, verifier,
+   experiment-operator, scout, mechanic — six, registered in
+   `.claude/CAPABILITY_MAP.md`) are task-level tools, not roles. They are
+   stateless and single-shot; their outputs are advisory inputs to the
+   orchestrator, which alone accepts, commits, and records. They never load
+   Codex session charters. Section 6 says when each one is mandatory; that
+   section is not optional reading, because the failure it fixes is these
+   contracts existing and never being reached for.
 
 **The user's role**: direction and scope ("work on X", "one demonstration of
 this task type is enough"), quota/budget control, and merge decisions.
@@ -86,10 +94,14 @@ One candidate at a time. Each cycle:
    claims; deterministic, byte-stable serialization; invariant tuples;
    proof-sized tests whose oracle preference is exact hand-checkable case >
    structural invariant > differential vs small reference > boundary/
-   fail-closed > seeded band.
+   fail-closed > seeded band. Delegation to `hmasd-implementer` is governed
+   by the trigger rule in Section 6.2 — a frozen contract is exactly the
+   precondition that makes delegation legitimate here.
 6. **Independent review.** `hmasd-reviewer` (clean context that has not
    seen the implementation reasoning) before technical acceptance; findings
-   resolved or explicitly risk-accepted with reasons, never silently.
+   resolved or explicitly risk-accepted with reasons, never silently. This
+   is MANDATORY for claim-bearing changes, not advisory — Section 6.2 states
+   the trigger and Section 6.4 the disposition record.
 7. **Commit + push.** Boundary check first (Section 7), isolated science
    commit, push the dedicated branch, verify via `git ls-remote` (local
    reflog write failures on this OneDrive checkout are cosmetic; ls-remote
@@ -329,18 +341,185 @@ Hard transport discipline, with the mechanics that make it non-negotiable:
   scientific result. Fresh conversation per independent review; reuse only
   for a true follow-up in the same constructive thread.
 
-## 6. Subagent and model mapping
+## 6. The subagent workflow: orchestrator → implementer → reviewer
 
-| Work | Executor | Model / effort |
-|---|---|---|
-| Bounded, well-specified implementation unit | `hmasd-implementer` | opus / high |
-| Independent engineering review (clean context) | `hmasd-reviewer` | opus / xhigh |
-| Read-only object-existence / semantics recon | `hmasd-scout` | sonnet / medium |
-| Read-only mechanical verification | `hmasd-mechanic` | haiku / low |
-| Science drafting, reconciliation, freezes, intake, acceptance, git | orchestrator, never delegated | session model |
+The process is: the orchestrator freezes an exact assignment, spawns a
+registered child with a named file scope, the child returns raw facts and
+**never accepts its own work**, an independent reviewer runs before technical
+acceptance, and the orchestrator alone stages, commits and pushes.
 
-Per-call `model` overrides are allowed for one-off calibration. Subagent
-output is advisory; acceptance stays in the orchestrator.
+This is a logical migration of the Code Manager process the Codex side ran, not
+a reference to it. Everything needed to execute it is stated here and in
+`.claude/CAPABILITY_MAP.md`; the Codex charters are dormant, hard read-only from
+this branch, and are never loaded as instructions. `AGENTS.md` remains the sole
+project authority and this section adds nothing to it.
+
+### 6.1 Why this needs a trigger rule and not a table
+
+Before this revision §6 was the mapping table now at §6.5, plus one sentence in
+§2 item 6, and **the subagents were still not used** — sessions ran end to end
+inline. A table answers "which agent for which work" but never says *when*, so
+the default is always "not yet". The trigger rule below is therefore written as
+a condition that can be checked, in the same shape as §3's routing rule.
+
+The structural argument is the same one in both directions. §3 says a Pro round
+is expensive and serialized, so mechanical questions stay local. Here the
+argument inverts: **a clean-context reader is the one thing the orchestrator
+structurally cannot be.** Once this session has written the implementation, it
+has also written the reasoning that makes the implementation look correct, and
+it cannot un-read it. That is not a discipline problem and no amount of care
+fixes it. Every registration round rejected for a prose/code mismatch was
+visible to a reader holding only the document and the source.
+
+### 6.2 The trigger rule
+
+**MUST spawn `hmasd-reviewer`, in a fresh agent, before:**
+
+- technical acceptance of any **claim-bearing** change — code whose output
+  reaches an artifact, a registration digest, a certificate, a portfolio
+  document or a Pro question;
+- any document dispatched to External Pro (also mandated by
+  `.claude/skills/hmasd-science-dispatch/` Step 3, whose gate script requires
+  `15_DOCUMENT_REVIEW.md` with terminal `DOCUMENT_MATCHES_SOURCE`).
+
+Not required for: config-lane edits, test-only maintenance, and changes whose
+whole content is already pinned by a failing-then-passing test the orchestrator
+wrote first.
+
+**MUST spawn `hmasd-implementer` when both hold:**
+
+- the brief is **already frozen** — a Pro-approved contract, a written revision
+  brief, or a named defect with a named fix and a named test; and
+- the orchestrator's context already holds reasoning the implementation should
+  not inherit (typically: this session argued the science, so it will
+  unconsciously implement toward its own argument).
+
+Also use it, without the second condition, when **two or more independent
+bounded units** exist — they run concurrently, which inline work cannot.
+
+Do **not** delegate implementation whose specification is still emerging. If
+the assignment block in §6.3 cannot be written, the unit is not ready to
+delegate — and that is usually a signal it is not ready to *build* either. Say
+so rather than spawning an agent to discover the spec.
+
+**MUST spawn `hmasd-scout` / `hmasd-mechanic` when** the alternative is
+guessing at a read-only fact (does a real producer/owner/clock object exist for
+this binding? what exactly is in these 90 files?). Absence is a first-class
+result; neither agent may invent a stand-in.
+
+**MUST spawn `hmasd-verifier` for** any of: a full test suite (not a single
+targeted test), an end-to-end CLI exercise, or a re-verification sweep after a
+change set. The enumeration is the trigger, deliberately — "long enough that
+the output would crowd out the reasoning" cannot be evaluated before running
+the command, and running it inline is exactly what the trigger exists to
+prevent. It returns a typed verdict per command and, crucially, classifies each
+non-pass as `CODE_DEFECT` versus `OPERATIONAL_FAILURE` versus `PRE_EXISTING`.
+Getting that split wrong in either direction is expensive: a real regression
+read as environmental is missed, and an environmental failure read as a defect
+sends this session to repair source that was never broken.
+
+**MUST spawn `hmasd-experiment-operator` for** any registered run measured in
+minutes or hours. The design is already frozen and approved before it is
+spawned; the operator changes nothing about it, interprets nothing, and returns
+locators plus the named summary fields. **A refusal is a complete result** — a
+`RegistrationMismatch` or a downgraded terminal comes straight back, never a
+re-run with different arguments.
+
+The last two exist for context, not independence. The orchestrator's window is
+the scarce resource in a long session, and raw output nobody will re-read is its
+largest consumer. `.claude/CAPABILITY_MAP.md` has the full pressure-source table.
+
+### 6.3 The assignment contract (freeze before spawning)
+
+A child that has to infer its own boundary produces work that has to be
+re-derived to be checked. Every assignment prompt names all five:
+
+```text
+frozen_brief=<path or inlined text — what is fixed and may not be re-decided>
+writable_scope=<exact files the child may edit; everything else is read-only>
+focused_tests=<exact commands, with the interpreter and --basetemp>
+completion_condition=<the observable that ends the unit>
+forbidden=<AGENTS.md, .agents/, .codex/, docs/project/, the two workspace
+  scripts, .claude/ — plus git commit/push/merge/rebase, always>
+```
+
+For `hmasd-reviewer` the first field is the brief the change *claims* to
+satisfy and the second becomes the diff scope (files or commit range) — its
+independence is worthless if it is told what the implementer concluded, so the
+assignment carries the brief and the diff, never the reasoning.
+
+### 6.4 Return, disposition, acceptance
+
+Children return **raw facts and no acceptance claim** — that is written into all
+six contracts and is the load-bearing property. A terminal line such as
+`VERIFICATION_PASSED` or `UNIT_COMPLETE` reports what the child observed; it is
+never an acceptance. The orchestrator converts the return into a disposition and
+records it:
+
+```text
+unit=<what was delegated>
+child=<agent type>            changed_files=<paths>
+writable_scope_honored=<yes | the paths written outside the assignment>
+tests=<commands + pass/fail tails, as observed here, not as reported>
+findings=<id | file:line | one-sentence defect | failure scenario>
+disposition=<APPLIED | RISK_ACCEPTED(reason) | REJECTED(reason)>   per finding
+active_line_delta=<added minus deleted>   superseded_deleted=<paths|none>
+commit=<40-char commit the accepted work landed in>
+blockers=<none | what remains outstanding>
+```
+
+Rules that make this more than paperwork:
+
+- **Re-run the child's tests yourself before accepting.** A pass reported by
+  the agent that wrote the code is not evidence; the same command run here is.
+- **Every finding gets an explicit disposition.** `RISK_ACCEPTED` is legitimate
+  and must carry a reason. Silence is not a disposition.
+- **`commit` and `blockers` are not optional.** Every other evidence record in
+  this workflow is commit-bound — §2 step 1 binds proposals to commit + blob
+  SHA, step 8 sends the exact pushed commit to the alignment audit — and an
+  acceptance record that names no commit is the one link in that chain that
+  cannot be checked later. `blockers=none` is an assertion someone made; an
+  absent field is not.
+- **Technical acceptance, git and science stay with the orchestrator.** No child
+  stages, commits, pushes, or decides that a result is good. One unit, one
+  acceptance owner.
+- A child's failure is **evidence, not a stop**. Choose bounded reassignment for
+  an operational failure and repair for a real defect; do not use a subagent as
+  an incremental debugger.
+
+### 6.5 Mapping
+
+| Work | Executor | Model / effort | Buys |
+|---|---|---|---|
+| Bounded implementation unit against a frozen brief | `hmasd-implementer` | opus / high | context + concurrency |
+| Independent engineering review (clean context) | `hmasd-reviewer` | opus / xhigh | **independence** |
+| Long verification exercise (suite, CLI, readiness) | `hmasd-verifier` | sonnet / high | context |
+| One registered experiment run | `hmasd-experiment-operator` | sonnet / high | context |
+| Read-only object-existence / semantics recon | `hmasd-scout` | sonnet / medium | context |
+| Read-only mechanical verification | `hmasd-mechanic` | haiku / low | context |
+| Science drafting, reconciliation, freezes, routing, Pro intake, technical acceptance, git | orchestrator, never delegated | session model | — |
+
+Only the reviewer buys independence, and it is the one thing this session cannot
+supply itself. Everything else buys context. Both are real, but they justify
+different things: independence is mandatory before acceptance, while context is
+a judgment about size.
+
+Full registry, including every Codex-era capability and where it went — or why
+it deliberately went nowhere — is `.claude/CAPABILITY_MAP.md`.
+
+Mechanics: `Agent` with `subagent_type`, one message carrying every independent
+call so they run concurrently. The definitions in `.claude/agents/` own the
+defaults. Subagent output is advisory in all cases.
+
+**When to override `model` on `hmasd-implementer`.** The Codex side ran two
+implementer profiles, routine and protected; here it is one contract and a
+parameter, so the criterion has to live somewhere and it lives here. Drop to
+`sonnet` for a **routine** package — behaviour-preserving modularization,
+localized repair, test maintenance, script cleanup, bounded performance work.
+Keep the `opus` default for anything touching an **estimand, an RL/MARL
+mechanism, numerical or training semantics, a registration, or any other
+protected invariant**. The override changes cost, never authority, and never
+substitutes for orchestrator acceptance.
 
 ## 7. Boundaries (checked at every commit)
 

@@ -33,7 +33,10 @@ what the code and tests actually establish.
 - **Completion**: return findings ranked by severity, each with file:line,
   a one-sentence defect statement, and a concrete failure scenario; state
   explicitly which brief requirements you verified as satisfied. An empty
-  findings list must still enumerate what was checked. You do not accept or
-  reject the package — acceptance belongs to the orchestrator.
+  findings list must still enumerate what was checked. End with exactly one
+  line, `FINDINGS_REPORTED` or `REVIEW_INCOMPLETE` (the latter when something
+  named in the assignment could not be checked). Neither is a verdict on the
+  package: you do not accept or reject it — acceptance belongs to the
+  orchestrator.
 
 Python interpreter: `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`.

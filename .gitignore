@@ -73,8 +73,13 @@ data/
 # Active candidate evidence mirrors candidate code under experiments/candidates.
 !docs/research/candidates/
 !docs/research/candidates/**/*.md
-# Custom subagent definitions are durable project tooling.
-!.claude/agents/*.md
+# The whole Claude control plane is durable project tooling, not scratch: agent
+# contracts, skills, the orchestrator workflow and the capability map. The
+# narrower `!.claude/agents/*.md` silently dropped SKILL.md from the commit that
+# created it, and would have dropped CAPABILITY_MAP.md the same way -- `git add`
+# on an ignored path errors, but `git add -A` just omits it without a word.
+!.claude/
+!.claude/**/*.md
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
 # User-requested isolated Git worktrees for parallel HMASD implementation.

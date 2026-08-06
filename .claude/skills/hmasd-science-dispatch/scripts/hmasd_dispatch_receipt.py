@@ -297,7 +297,7 @@ def check_preconditions(
 
 
 def check_document_review(
-    path: pathlib.Path | None, *, required: bool
+    path: pathlib.Path | None, *, required: bool, waiver_reason: str | None = None
 ) -> dict[str, Any]:
     """The clean-context reviewer's verdict on the outgoing document.
 
@@ -306,9 +306,24 @@ def check_document_review(
     reviewer proves the prose describes the code that computed it.  Every
     registration round that was rejected for a prose/code mismatch would have
     been visible to a reader holding both.
+
+    The escape hatch costs a written reason.  ``document_review_required: false``
+    alone now BLOCKS: an independent reviewer is a MUST in the workflow, so a
+    session skipping one must say why, in the receipt, where a later reader
+    sees it.  A boolean anybody can flip silently is not an escape hatch, it is
+    an off switch -- and the whole argument for this gate is that prose alone
+    did not hold.
     """
     if not required:
-        return {"required": False, "passed": True}
+        reason = (waiver_reason or "").strip()
+        if not reason:
+            return {
+                "required": False,
+                "passed": False,
+                "detail": "document_review_required=false needs a non-empty "
+                "document_review_waiver_reason; a silent waiver is refused",
+            }
+        return {"required": False, "passed": True, "waiver_reason": reason}
     if path is None or not path.is_file():
         return {
             "required": True,
@@ -363,6 +378,7 @@ def build_receipt(item: pathlib.Path, *, root: pathlib.Path) -> dict[str, Any]:
     review = check_document_review(
         item / review_name if review_name else None,
         required=bool(manifest.get("document_review_required", True)),
+        waiver_reason=manifest.get("document_review_waiver_reason"),
     )
 
     passed = numbers["passed"] and preconditions["passed"] and review["passed"]
