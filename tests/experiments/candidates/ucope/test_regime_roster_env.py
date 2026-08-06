@@ -36,8 +36,12 @@ def test_load_is_withheld_from_the_observation():
     active = view.active_mask
     published = view.observations[active, sibling.LOAD_INDEX]
     assert np.all(published == sibling.WITHHELD_LOAD_VALUE)
-    # ...while the reward still targets the true regime load.
-    assert view.realized_load == float(cc.LOAD[cc.S])
+    # The nested view's own load slot is withheld too, not only the published
+    # observation column.
+    assert view.base.load == float(sibling.WITHHELD_LOAD_VALUE)
+    # ...while the reward still targets the true regime load, reachable only
+    # through the environment's explicit accessor.
+    assert env.realized_load() == float(cc.LOAD[cc.S])
 
 
 def test_target_mix_is_still_exactly_observed():
@@ -63,7 +67,7 @@ def test_regime_changes_only_the_load_channel():
     assert np.array_equal(a.observations, b.observations), (
         "the regime must not be visible anywhere in the observation"
     )
-    assert a.realized_load != b.realized_load
+    assert small.realized_load() != large.realized_load()
 
 
 def test_evidence_arrives_after_the_epoch_not_before():
@@ -143,6 +147,79 @@ def test_evidence_likelihoods_are_regime_dependent():
         ]
         counts[regime] = sum(bits) / (400 * sibling.PERIODS)
     assert counts[cc.S] > counts[cc.L]
+
+
+def test_the_enabled_view_carries_no_reachable_load_anywhere():
+    """Pro: the environment boundary itself must be fail-closed, not just the
+    read set that `policy_features` happens to use today.
+
+    This walks every attribute a policy could reach from the handed-out view and
+    asserts the true regime load appears in none of them.  It is deliberately
+    mechanical: a future field that reintroduces the leak fails here rather than
+    surviving because nobody happened to read it.
+    """
+    for regime in cc.REGIMES:
+        env = sibling.UcopeRegimeRosterEnv(
+            _ledger(), regime=regime, evidence_bits=(1, 0, 1)
+        )
+        truth = float(cc.LOAD[regime])
+        assert env.realized_load() == truth, "the env must still know the load"
+
+        view = env.observe()
+        reachable: list[float] = []
+        for holder in (view, view.base):
+            for name in vars(holder):
+                value = getattr(holder, name)
+                if isinstance(value, (int, float, np.floating, np.integer)):
+                    reachable.append(float(value))
+                elif isinstance(value, np.ndarray) and value.dtype.kind == "f":
+                    reachable.extend(float(x) for x in value.reshape(-1))
+        assert reachable, "the walk must actually reach numeric fields"
+        assert truth not in reachable, (
+            f"the {regime} load {truth} is reachable from the view"
+        )
+
+
+def test_sibling_streams_are_disjoint_from_the_base_ledger():
+    """Pro: `_REGIME_STREAM = 0` collided with the base ledger's stream 0.
+
+    `paired_training` passes one seed as BOTH the regime seed and the ledger
+    master seed, so `default_rng((seed, episode, 0))` was literally the base
+    ledger's temporary-leave generator.  Disjointness is checked by enumeration
+    against the streams `make_ledger` actually consumes, so widening the base
+    stream set later breaks this test instead of silently re-colliding.
+    """
+    profile = max(
+        roster_env.TRAIN_PROFILES, key=lambda p: p.member_capacity
+    )
+    base_streams = {0, 1, 3, 4}
+    base_streams |= {100 + key for key in range(profile.member_capacity)}
+    base_streams |= {200 + key for key in range(profile.member_capacity)}
+    assert sibling._REGIME_STREAM not in base_streams
+    assert sibling._EVIDENCE_STREAM not in base_streams
+    assert sibling._REGIME_STREAM != sibling._EVIDENCE_STREAM
+
+    # ...and the far stronger property: even at the identical seed and episode
+    # the sibling's generator state differs from every base stream's, because
+    # the domain word sits in front of the entropy tuple.
+    seed, episode = 20_260_806, 17
+    sibling_draws = {
+        tuple(
+            sibling._sibling_rng(seed, episode, stream).random(4).tolist()
+        )
+        for stream in (sibling._REGIME_STREAM, sibling._EVIDENCE_STREAM)
+    }
+    base_draws = {
+        tuple(
+            np.random.default_rng(
+                np.random.SeedSequence([seed, episode, stream])
+            )
+            .random(4)
+            .tolist()
+        )
+        for stream in base_streams
+    }
+    assert not (sibling_draws & base_draws)
 
 
 def test_regime_draw_respects_the_prior():

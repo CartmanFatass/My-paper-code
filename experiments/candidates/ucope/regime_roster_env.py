@@ -91,10 +91,27 @@ LOAD_INDEX = 3
 
 @dataclass(frozen=True)
 class RegimeView:
-    """A base view plus the sibling's count state; load is withheld inside."""
+    """A base view plus the sibling's count state.  The load is NOT here.
+
+    This type is deliberately fail-closed on the withheld coordinate.  An
+    earlier revision carried the true load as a ``realized_load`` field and also
+    stored it in the nested ``CapacityRosterView.load`` slot, so the training
+    path was closed only because ``policy_features`` happened not to read either
+    one.  External Pro named that:
+
+        The hidden load is absent from observations, but remains
+        programmatically accessible as RegimeView.realized_load and as the load
+        field of the nested CapacityRosterView. The current policy_features read
+        set does not access either field, so this training path is closed; the
+        reusable environment boundary itself is not fail-closed.
+
+    The environment still needs the true load to compute the service target, so
+    it keeps it privately and exposes it only through the explicit
+    ``UcopeRegimeRosterEnv.realized_load()`` accessor.  A policy that is handed a
+    view cannot reach it at all.
+    """
 
     base: roster_env.CapacityRosterView
-    realized_load: float
     positive_count: int
     completed_epochs: int
 
@@ -111,15 +128,37 @@ class RegimeView:
         return self.base.target_mix
 
 
-#: Independent substream indices so the regime and evidence draws never share
-#: state with each other or with the base ledger.
-_REGIME_STREAM = 0
-_EVIDENCE_STREAM = 1
+#: Seed root for the sibling's own draws.
+#:
+#: The previous values were ``0`` and ``1``, which is exactly what
+#: ``runtime_capacity.make_ledger`` uses for its temporary-leave and
+#: terminal-leave choices.  Because ``paired_training`` passes one seed as BOTH
+#: the regime seed and the ledger master seed, ``default_rng((seed, episode, 0))``
+#: was literally the same generator state as the base ledger's stream 0, and the
+#: comment claiming independence from every base stream was false.  Pro found no
+#: operative leak -- the policy does not observe which members leave -- but a
+#: reusable environment must not depend on that.
+#:
+#: The fix is a reserved namespace on two axes at once: a distinct domain word in
+#: front of the entropy tuple (so the tuple has a different length and content
+#: from any base tuple), and stream ids far outside every base stream, which are
+#: ``0, 1, 3, 4`` and ``100+key`` / ``200+key`` for ``key`` below the member
+#: capacity.  ``test_sibling_streams_are_disjoint_from_the_base_ledger`` pins the
+#: disjointness by enumeration rather than by this comment.
+_SIBLING_SEED_DOMAIN = 0x_5C0_9E_03
+_REGIME_STREAM = 900_001
+_EVIDENCE_STREAM = 900_002
+
+
+def _sibling_rng(seed: int, episode_id: int, stream: int) -> np.random.Generator:
+    return np.random.default_rng(
+        (_SIBLING_SEED_DOMAIN, int(seed), int(episode_id), int(stream))
+    )
 
 
 def draw_regime(episode_id: int, *, regime_seed: int) -> str:
-    """Ledger-seeded, owner-agnostic regime draw at the certificate's prior."""
-    rng = np.random.default_rng((int(regime_seed), int(episode_id), _REGIME_STREAM))
+    """Owner-agnostic regime draw at the certificate's prior."""
+    rng = _sibling_rng(regime_seed, episode_id, _REGIME_STREAM)
     return cc.S if rng.random() < float(cc.PRIOR_S) else cc.L
 
 
@@ -127,9 +166,7 @@ def draw_evidence(
     episode_id: int, regime: str, *, evidence_seed: int
 ) -> tuple[int, ...]:
     """The episode's evidence bits, drawn at the precommitted likelihoods."""
-    rng = np.random.default_rng(
-        (int(evidence_seed), int(episode_id), _EVIDENCE_STREAM)
-    )
+    rng = _sibling_rng(evidence_seed, episode_id, _EVIDENCE_STREAM)
     probability = float(cc.EVIDENCE_POSITIVE[regime])
     return tuple(int(rng.random() < probability) for _ in range(PERIODS))
 
@@ -173,11 +210,18 @@ class UcopeRegimeRosterEnv:
 
     def observe(self) -> RegimeView:
         base_view = self._base.observe()
-        realized = self.realized_load()
         if not self.intervention_enabled:
-            return RegimeView(base_view, realized, 0, 0)
+            # The disabled path IS the base environment and claims no
+            # withholding, so the base view passes through untouched -- true
+            # load coordinate and all.  That is what makes the exact projection
+            # check in `regime_conformance.disabled_projection_matches_base`
+            # meaningful.
+            return RegimeView(base_view, 0, 0)
 
         # Ingredient 2: withhold the load coordinate.  Target mix is untouched.
+        # The view's own `load` slot is withheld too, not just the published
+        # observation column -- otherwise the coordinate is severed from the
+        # network's input while remaining one attribute access away.
         observations = base_view.observations.copy()
         observations[base_view.active_mask, LOAD_INDEX] = WITHHELD_LOAD_VALUE
         withheld = roster_env.CapacityRosterView(
@@ -186,12 +230,10 @@ class UcopeRegimeRosterEnv:
             base_view.active_mask,
             base_view.critic_state,
             base_view.membership_change,
-            realized,
+            float(WITHHELD_LOAD_VALUE),
             base_view.target_mix,
         )
-        return RegimeView(
-            withheld, realized, self.positive_count, self.completed_epochs
-        )
+        return RegimeView(withheld, self.positive_count, self.completed_epochs)
 
     def step(self, actions: np.ndarray) -> tuple[float, bool, dict[str, float]]:
         """Base step semantics with the realized load as the service target."""
@@ -214,7 +256,9 @@ class UcopeRegimeRosterEnv:
             np.sum(effort * (1.0 - mix) * capabilities[:, 1], dtype=np.float64),
         ))
         aggregate = capabilities.sum(axis=0, dtype=np.float64)
-        load, target_mix = view.realized_load, view.target_mix
+        # The load comes from the environment's private accessor, never from the
+        # view -- the view no longer carries it, which is the point.
+        load, target_mix = self.realized_load(), view.target_mix
         target = np.asarray((
             load * target_mix * aggregate[0],
             load * (1.0 - target_mix) * aggregate[1],

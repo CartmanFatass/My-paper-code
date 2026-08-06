@@ -15,19 +15,34 @@ WHAT THIS RUN ASKS
 ------------------
 The certificate proves an *oracle* that reads the evidence count does better
 than one that cannot.  That is a statement about the environment.  It says
-nothing about learning.  This run asks the different and harder question:
+nothing about learning.  This module trains three arms and asks the narrower
+question External Pro licensed:
 
-    does a policy trained by gradient descent actually discover and use the
-    count, and does the advantage vanish when the count is severed?
+    does count-enabled training outperform matched count-disabled training
+    under this finite budget?
 
-The certificate supplies exact bounds to read the answer against:
+Note the wording.  An earlier revision of this docstring asked whether a policy
+"actually discovers and uses the count", and Pro ruled that one step too strong:
+
+    The results show that count-enabled training outperformed count-disabled
+    training. They do not contain a causal intervention on the same learned
+    informed policy.
+
+That causal intervention now exists, in ``crossed_evaluation``: the frozen
+informed checkpoint is evaluated twice, with and without its count channels.
+This module trains; that one measures.
+
+The certificate supplies exact bounds:
 
     count-informed optimum   16 * 73/32 = 36.5
     count-blind optimum      16 * 2     = 32.0
 
-A learned informed arm should sit between those; a learned blind arm cannot
-exceed 32.0 no matter how long it trains, because no policy without the count
-can beat the prior-optimal effort.
+Those are expectations under the prior, NOT pointwise maxima for a finite block
+of drawn episodes -- the blind oracle earns 48 in regime S and 16 in regime L,
+so a block with more than half S episodes can legitimately average above 32.0.
+Treating 32.0 as a sample ceiling was a real error in the first pass; the valid
+form of that guard lives in ``crossed_evaluation.blind_ceiling_guard``, where
+the crossed estimator makes it an expectation again.
 
 DESIGN CHOICES, AND WHY
 -----------------------
@@ -45,8 +60,16 @@ and identical evidence bit sequences.  The comparison is paired.
 *Three arms, one code path.*  ``SEVERED`` accumulates the count exactly as
 ``INFORMED`` does and then zeroes it immediately before the policy reads it, so
 it is informationally identical to ``BLIND`` while executing the informed path.
-That separates "the count carries information" from "the extra input channels
-changed optimisation".
+
+Pro ruled on what that arm is worth, and it is less than the first pass claimed:
+under shared seeds BLIND and SEVERED receive identical ``(0.0, 0.0)`` channels
+and are therefore *the same computation*, so their exact equality is a
+determinism checksum rather than a replicated null.  Pro also ruled that it must
+NOT be repaired by making SEVERED differ in some non-information feature --
+*"That would make the control less matched"* -- so it is left exactly as it is
+and reported for what it is.  The informative severing evidence is the exact
+specification-side result in ``regime_conformance``, plus the within-checkpoint
+intervention in ``crossed_evaluation``.
 
 SCOPE
 -----
@@ -274,6 +297,9 @@ class ArmRun:
     final_return: float
     history: list[float] = field(default_factory=list)
     final_totals: list[float] = field(default_factory=list)
+    #: The trained weights.  Carried out of training so `crossed_evaluation`
+    #: can freeze this exact checkpoint, digest it, and intervene on it.
+    policy: "EffortPolicy | None" = None
 
 
 def run_arm(
@@ -335,6 +361,7 @@ def run_arm(
             run.history.append(evaluate(0))
     run.final_totals = evaluate_totals(0)
     run.final_return = statistics.fmean(run.final_totals)
+    run.policy = policy
     return run
 
 
@@ -360,11 +387,24 @@ def run_experiment(**kwargs) -> dict[str, object]:
     paired_informed = _paired(runs[INFORMED].final_totals, runs[BLIND].final_totals)
     paired_severed = _paired(runs[SEVERED].final_totals, runs[BLIND].final_totals)
 
-    # Validity guard.  No count-blind policy can exceed the certified blind
-    # optimum; 32.0 is the exact maximum of the prior-optimal effort.  If the
-    # measured blind arm sits above it by more than its own standard error, the
-    # estimate is noise-dominated and NO comparison from this run may be read as
-    # evidence either way.
+    # HEURISTIC WARNING ONLY -- deliberately not a validity theorem.
+    #
+    # The first pass called this a validity guard and claimed that a blind mean
+    # above 32.0 proved the estimate noise-dominated.  Pro falsified that:
+    #
+    #     The exact blind value 32 is an expectation under the prior, not a
+    #     pointwise maximum for every evaluation sample. [...] a finite
+    #     evaluation block containing more than 50% S episodes can therefore
+    #     have a blind-oracle sample mean above 32 without any policy error or
+    #     leakage.
+    #
+    # Pro also noted the code never actually refused -- it set the flag and
+    # emitted the comparison anyway.  Both defects are fixed by demotion: this
+    # is now named, and treated, as a heuristic sanity warning on a sampled
+    # block.  The refusal that IS a theorem lives in
+    # `crossed_evaluation.blind_ceiling_guard`, where the estimator is an exact
+    # expectation over the crossed support and the per-step bound 2/3 is
+    # therefore a genuine pointwise ceiling.
     blind_totals = runs[BLIND].final_totals
     blind_error = (
         statistics.stdev(blind_totals) / math.sqrt(len(blind_totals))
@@ -372,12 +412,19 @@ def run_experiment(**kwargs) -> dict[str, object]:
         else float("inf")
     )
     blind_excess = runs[BLIND].final_return - BLIND_OPTIMUM
-    measurement_valid = blind_excess <= blind_error
 
     return {
-        "measurement_valid": measurement_valid,
-        "blind_excess_over_certified_ceiling": blind_excess,
-        "blind_standard_error": blind_error,
+        "heuristic_blind_ceiling_warning": {
+            "sampled_blind_excess_over_prior_expectation": blind_excess,
+            "sampled_blind_standard_error": blind_error,
+            "warned": blind_excess > blind_error,
+            "status": (
+                "HEURISTIC ONLY. A sampled block is not bounded by the prior "
+                "expectation 32.0; the blind oracle earns 48 in regime S and 16 "
+                "in regime L. Use crossed_evaluation.blind_ceiling_guard for the "
+                "admissible refusal."
+            ),
+        },
         "paired_informed_minus_blind": paired_informed,
         "paired_severed_minus_blind": paired_severed,
         "raw_output_binding": RAW_OUTPUT_BINDING,
@@ -394,12 +441,26 @@ def run_experiment(**kwargs) -> dict[str, object]:
         },
         "learned_informed_minus_blind": informed_gain,
         "learned_severed_minus_blind": severed_gain,
-        "fraction_of_certified_gain_realized": (
+        # NOT an information-capture fraction.  Pro decomposed the quantity the
+        # first pass reported as "83% of the certified gain":
+        #
+        #     0.8308 = 1 - (eps_I - eps_B) / 4.5
+        #
+        # with optimization regrets eps_I = 1.7821 and eps_B = 1.0207.  It
+        # embeds the blind arm's under-convergence, which *enlarges* the learned
+        # contrast.  It is renamed to what it actually measures, and the regrets
+        # that drive it are reported alongside so it cannot be read as capture.
+        "fraction_of_oracle_gap_in_the_trained_contrast": (
             informed_gain / (INFORMED_OPTIMUM - BLIND_OPTIMUM)
         ),
+        "optimization_regret": {
+            INFORMED: INFORMED_OPTIMUM - runs[INFORMED].final_return,
+            BLIND: BLIND_OPTIMUM - runs[BLIND].final_return,
+        },
         "scope": (
-            "Code-side measurement. Scientific interpretation belongs to "
-            "External Pro in the existing capability conversation."
+            "Code-side measurement on a sampled block. Scientific "
+            "interpretation belongs to External Pro in the existing capability "
+            "conversation. The admissible estimator is crossed_evaluation."
         ),
     }
 
