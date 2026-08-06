@@ -5,9 +5,10 @@ Three tests carry the design.
 ``test_the_analytic_guarantee_matches_the_runtime`` checks External Pro's
 central objection to the naive prototype: opposite head weights guarantee
 nothing unless the payload really moves decoder coordinate zero through the GRU.
-The cell's closed-form prediction ``2 * (GELU(2) - GELU(0))`` is compared to what
-the actual actor path produces.  If the derivation in ``registration.py`` were
-wrong, this is where it shows.
+The cell's prediction ``2 * (GELU(y_1) - GELU(y_0))`` -- measured from the focal
+coordinates the frozen ``GRUCell`` returns, not asserted from the ideal payload
+values -- is compared to what the actual actor path produces.  If the derivation
+in ``registration.py`` were wrong, this is where it shows.
 
 ``test_the_write_hook_does_not_perturb_an_uninstrumented_run`` protects the
 runtime change.  A hook that altered the path would invalidate every branch it
@@ -211,13 +212,171 @@ def test_the_gate_witness_is_the_gate_the_gru_actually_evaluates():
     assert gate["preactivation_headroom_over_threshold"] > 0.0
 
 
-def test_the_analytic_separation_refuses_a_gate_that_does_not_carry_exactly():
-    """Fail closed: the exact-carry number must not survive its premise."""
+def test_the_executed_gru_returns_the_payload_coordinate_bitwise():
+    """Pro's §1 v4 defect: a saturated update gate is not an assignment.
+
+    PyTorch 2.7's CPU GRUCell computes ``(hidden - new_gate).mul_(input_gate)
+    .add_(new_gate)``, so at ``z0 == 1.0`` the executed focal operation is
+    ``fl(fl(h_0 - n_0) + n_0)`` -- which is not an identity in float32.  The
+    registration therefore has to measure the output, and this pins that it
+    does, per payload, in bytes.
+    """
     registration = reg.development_registration()
-    gate = dict(registration.weight_witness["focal_update_gate"])
-    gate["exact_carry_established"] = False
-    with pytest.raises(reg.ExactCarryNotEstablished, match="re-derived"):
-        reg.analytic_logit_separation({"focal_update_gate": gate})
+    output = registration.weight_witness["focal_gru_output"]
+
+    assert set(output["per_payload"]) == {"h0", "h1", "h_neutral"}
+    for slot, row in output["per_payload"].items():
+        # Both routes Pro allowed, required to agree bitwise.
+        assert row["replication_matches_the_executed_cell"], slot
+        assert row["focal_update_gate_is_bitwise_one"], slot
+        assert row["focal_output_y0_bytes"] == row["installed_focal_payload_bytes"]
+        assert row["carries_exactly"], slot
+        # The candidate is genuinely nonzero, so the subtract-and-restore really
+        # happens and the test is not vacuous.
+        assert row["focal_candidate_n0"] != 0.0
+
+    assert output["contrast_payloads_carry_exactly"]
+    # Pro: h_neutral's carry is not required for the h0/h1 contrast, but the
+    # claim "all three payloads carry exactly" needs it certified separately.
+    assert output["neutral_payload_carries_exactly"]
+    assert output["all_three_payloads_carry_exactly"]
+    assert output["candidate_equal_across_payloads"]
+
+
+def test_the_separation_is_measured_from_the_executed_outputs():
+    """Not asserted from the ideal payload values.
+
+    Under exact carry the measured number equals the ideal one; the point is
+    that it is *derived* from ``y_0``/``y_1`` rather than substituted for them,
+    so a cell that failed to carry could not inherit the ideal constant.
+    """
+    registration = reg.development_registration()
+    output = registration.weight_witness["focal_gru_output"]
+    y0 = output["per_payload"]["h0"]["focal_output_y0_executed"]
+    y1 = output["per_payload"]["h1"]["focal_output_y0_executed"]
+
+    assert registration.analytic_logit_separation == 2.0 * (
+        reg._gelu(y1) - reg._gelu(y0)
+    )
+    assert registration.analytic_logit_separation == reg.ANALYTIC_LOGIT_SEPARATION
+
+    # Move the measured outputs and the number moves with them.
+    moved = {
+        "focal_gru_output": {
+            "replication_matches_the_executed_cell": True,
+            "per_payload": {
+                "h0": {"focal_output_y0_executed": 0.0},
+                "h1": {"focal_output_y0_executed": 1.0},
+            },
+        }
+    }
+    assert reg.analytic_logit_separation(moved) == 2.0 * (
+        reg._gelu(1.0) - reg._gelu(0.0)
+    )
+    assert reg.analytic_logit_separation(moved) != reg.ANALYTIC_LOGIT_SEPARATION
+
+
+def test_the_separation_fails_closed_on_an_untrustworthy_witness():
+    """Two triggers: a replication disagreement, and no separation at all."""
+    disagreeing = {
+        "focal_gru_output": {
+            "replication_matches_the_executed_cell": False,
+            "per_payload": {
+                "h0": {"focal_output_y0_executed": 0.0},
+                "h1": {"focal_output_y0_executed": 2.0},
+            },
+        }
+    }
+    with pytest.raises(reg.FocalOutputWitnessInvalid, match="disagree"):
+        reg.analytic_logit_separation(disagreeing)
+
+    flat = {
+        "focal_gru_output": {
+            "replication_matches_the_executed_cell": True,
+            "per_payload": {
+                "h0": {"focal_output_y0_executed": 1.0},
+                "h1": {"focal_output_y0_executed": 1.0},
+            },
+        }
+    }
+    with pytest.raises(reg.FocalOutputWitnessInvalid, match="no positive focal"):
+        reg.analytic_logit_separation(flat)
+
+
+def test_exact_carry_is_asserted_from_bytes_not_from_saturation():
+    """``require_exact_carry`` reads measured output bytes and nothing else."""
+    registration = reg.development_registration()
+    assert reg.require_exact_carry(registration.weight_witness)
+
+    broken = {
+        "focal_gru_output": {
+            "contrast_payloads_carry_exactly": False,
+            "per_payload": {"h0": {"carries_exactly": False}},
+        }
+    }
+    with pytest.raises(reg.ExactCarryNotEstablished, match="does not return"):
+        reg.require_exact_carry(broken)
+
+
+def test_exact_carry_through_the_subtract_and_restore_is_not_generic():
+    """The witness is load-bearing, not ceremonial.
+
+    ``fl(fl(h - n) + n) == h`` fails for a large fraction of representable
+    candidates at h = 1 and h = 2.  If it held universally, Pro's objection
+    would have been formal and the registered cell would have been safe by luck.
+    It does not hold universally, so the cell is safe by measurement.
+    """
+    rng = np.random.default_rng(7)
+    candidates = rng.uniform(-1.0, 1.0, 200_000).astype(np.float32)
+    for value in (np.float32(1.0), np.float32(2.0)):
+        restored = ((value - candidates) * np.float32(1.0) + candidates).astype(
+            np.float32
+        )
+        assert np.any(restored != value), (
+            "if this ever passes, the finite-precision premise became an "
+            "identity and the witness would no longer be discriminating"
+        )
+    # ...and it IS an identity at h = 0, where the subtraction is a sign flip.
+    zero = ((np.float32(0.0) - candidates) * np.float32(1.0) + candidates).astype(
+        np.float32
+    )
+    assert np.all(zero == np.float32(0.0))
+
+
+def test_the_registered_preimage_is_the_one_the_runtime_presents(development):
+    """The witness's ``x`` must be the actor's ``x``, not a plausible rebuild.
+
+    Checked on the DEVELOPMENT cell, where branches may be executed: the
+    observations, event flags and initial skills/ages the capture sink recorded
+    at the target's first token must be exactly the ones the manifest-built
+    preimage packs.  The registered cell's preimage is built by the same code,
+    so validating the procedure here validates it there without observing a
+    registered kernel.
+    """
+    registration = development["registration"]
+    core = rm.construct_reset_runtime(registration.manifest)
+    packed, routing = core.pack_active(rm.boundary_snapshot(registration.manifest))
+    row = development["results"]["K_0_0"].row
+
+    assert tuple(routing.lifecycle_keys) == tuple(row.active_lifecycle_keys)
+    assert tuple(routing.membership_epochs) == tuple(row.active_membership_epochs)
+    assert np.array_equal(packed.member_obs.numpy(), row.active_observations)
+    assert np.array_equal(packed.event_flags.numpy(), row.event_flags)
+    assert np.array_equal(packed.skills.numpy(), row.initial_skills)
+    assert np.array_equal(packed.active_ages.numpy(), row.initial_ages)
+
+    preimage = reg.registered_first_token_preimage(
+        core.commitment_model,
+        manifest=registration.manifest,
+        binding=registration.binding,
+    )
+    assert preimage["record"]["target_row_index"] == list(
+        routing.lifecycle_keys
+    ).index(registration.binding.target_lifecycle_key)
+    assert (
+        preimage["record"]["model_state_digest"]
+        == registration.weight_witness["model_state_digest"]
+    )
 
 
 def test_the_cell_isolates_the_focal_coordinate():
@@ -421,10 +580,16 @@ def test_a_bitwise_null_is_an_engineering_failure_but_not_a_contradiction(develo
 def test_a_sub_margin_contrast_is_neither_a_refutation_nor_a_contradiction(development):
     """The band Pro added: nonzero dependence below the materiality threshold.
 
-    Routing this to engineering failure is right; routing it there *because the
-    logit construction was contradicted* is not, because a third dominant logit
-    can hold both softmax vectors within 1e-3 while logit_0 - logit_1 moves by
-    3.909.
+    Routing this to engineering failure is **wrong**, and the earlier version of
+    this docstring said it was right.  The band now has its own terminal,
+    ``PAYLOAD_DEPENDENCE_BELOW_MATERIALITY``: a result that asserts the cell
+    genuinely does depend on the payload cannot also carry a ceiling reading
+    "engineering failure or unexecuted design only".
+
+    What remains true is the narrower point -- calling it a *contradiction of the
+    logit construction* would be wrong in any terminal, because a third dominant
+    logit can hold both softmax vectors within 1e-3 while logit_0 - logit_1 moves
+    by 3.909.
     """
     margin = development["registration"].delta_cell
     report = _decide(

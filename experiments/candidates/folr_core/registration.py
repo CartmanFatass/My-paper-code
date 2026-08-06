@@ -33,13 +33,23 @@ payload, the surgery is:
    constants with respect to ``h[0]``.
 
 2. ``weight_ih[H, :] = 0``, ``bias_ih[H] = +20``, ``bias_hh[H] = 0``
-   The update gate's coordinate 0 is pinned at ``z0 = sigmoid(20)``.  In the
-   registered numerical context -- CPU, float32 -- that rounds to **exactly**
-   1.0, so ``new_hidden[0] = h[0]`` exactly rather than approximately.  Pro
-   accepted the construction on that basis: *"the focal carry is exact for the
-   registered realization rather than merely having slope close to one"*.  In
-   exact real arithmetic the same expression is affine in ``h[0]`` with slope
-   ``z0 > 0.999999997``.
+   The update gate's coordinate 0 is pinned **as far as the input is
+   concerned**.  It is *not* simply ``sigmoid(20)``: zeroing the input row
+   removes the member embedding, but the recurrent half of the row survives, so
+   the preactivation that actually evaluates is
+
+       a_z0 = bias_ih[H] + bias_hh[H] + sum_{j>=1} W_hh[H, j] * h_j
+
+   -- the registered value ``20`` plus a registered recurrent contribution over
+   the payload's NONFOCAL coordinates.  (``W_hh[H, 0]`` is zero from step 1, so
+   ``h_0`` itself never reaches the gate, and the three payloads share their
+   nonfocal coordinates, so the three preactivations coincide.)
+   ``focal_update_gate_witness`` computes that number rather than the bias.  In
+   the registered numerical context -- CPU, float32 -- it saturates to
+   ``z0 == 1.0`` exactly.  Pro accepted the construction on the basis that *"the
+   focal carry is exact for the registered realization rather than merely having
+   slope close to one"*; see the next section for what that does and does not
+   settle.
 
 3. ``decoder_hidden[0].weight[:, 0] = 0`` then row 0 set to ``e_0`` with zero
    bias.  So ``hidden[0] = GELU(new_hidden[0])`` and **no other** decoder
@@ -53,7 +63,61 @@ The registered payloads put ``h[0]`` at ``0.0`` and ``2.0``.  GELU is strictly
 increasing on ``[0, inf)`` -- its only non-monotone stretch is near ``-0.75``,
 which the registered values avoid -- so
 
-    (logit_0 - logit_1) moves by 2 * (GELU(2) - GELU(0)) = 3.909...
+    (logit_0 - logit_1) moves by 2 * (GELU(y_1) - GELU(y_0))
+
+where ``y_p`` is the focal coordinate the executed GRU actually returns under
+payload ``h_p``.  Which brings us to the reason that is written ``y`` and not
+``h``.
+
+A SATURATED GATE IS NOT AN ASSIGNMENT
+-------------------------------------
+Pro's §1, and the correction the whole v4 amendment exists to carry:
+
+    The new witness correctly proves that the focal update gate evaluates to
+    float32 1.0 for all three payloads. It does not prove that PyTorch's
+    executed GRUCell returns the focal hidden coordinate unchanged bitwise. [...]
+    In PyTorch 2.7.0, the CPU implementation does not literally compute
+    (1-z)n + zh. It computes:
+
+        return (hidden - new_gate).mul_(input_gate).add_(new_gate);
+
+    Consequently, when the update gate is exactly one, the executed focal
+    operation is fl(fl(h_0 - n_0) * 1 + n_0), not an assignment
+    new_hidden[0] = h[0]. [...] fl(fl(h - n) + n) = h is not an identity for
+    arbitrary representable h, n.
+
+That is right, and it is not a hypothetical.  Over two million float32
+candidates drawn uniformly from ``(-1, 1)``, ``fl(fl(h - n) + n)`` differs from
+``h`` for roughly 10% of them at ``h = 1`` and 8% at ``h = 2`` (it is exact for
+every one at ``h = 0``, where the subtraction is a sign flip).  So the
+registration cannot infer bitwise carry from gate saturation; it has to measure
+the output.
+
+``focal_gru_output_witness`` measures it, at the registered synthetic
+first-token preimage, taking BOTH routes Pro allowed and requiring them to
+agree bitwise:
+
+* it reproduces the pinned ``RNN.cpp`` operation sequence explicitly, through
+  the same ``linear`` / ``sigmoid`` / ``tanh`` kernels the fused CPU path uses;
+  and
+* it calls the frozen ``GRUCell`` on the fully registered member embedding,
+  summary and payload, stopping before the decoder and the softmax.
+
+Pro's own characterization of why that second route is admissible before
+approval:
+
+    The second option is still prospective registration work, not execution of
+    any K, R, or W branch: it creates no transaction, kernel, action, row, null
+    contrast or outcome. It merely validates the finite-precision premise of the
+    constructed cell.
+
+``analytic_logit_separation`` is then derived from the measured ``y_0`` and
+``y_1`` rather than from the ideal ``0`` and ``2``.  That derivation is valid
+whether or not the carry is exact: no decoder row other than row 0 reads
+``new_hidden[0]`` (step 3), and ``y_j`` for ``j >= 1`` cannot depend on ``h_0``
+(step 1 removes it from every gate, and the executed expression reads only
+``h_j`` at coordinate ``j``), so ``logit_0 - logit_1 = 2 * GELU(y_0)`` plus terms
+independent of the payload.
 
 WHAT THAT DOES AND DOES NOT PROVE
 ---------------------------------
@@ -96,6 +160,7 @@ from typing import Any, Mapping
 
 import numpy as np
 import torch
+import torch.nn.functional as F
 
 from ha_ctse_process import variable_roster_event as vre
 
@@ -266,8 +331,13 @@ def _gelu(x: float) -> float:
     return 0.5 * x * (1.0 + math.erf(x / math.sqrt(2.0)))
 
 
-#: The analytic witness: how far the registered payloads move logit_0 - logit_1,
-#: computed in closed form and never from an observed kernel.
+#: The IDEAL logit displacement -- what the registered payloads would move
+#: ``logit_0 - logit_1`` by if the executed cell carried them bitwise.  It is a
+#: reference value, not the registered witness: ``analytic_logit_separation``
+#: measures ``2 * (GELU(y_1) - GELU(y_0))`` from the focal outputs the frozen
+#: GRUCell actually returns, and ``build_registration`` requires the two to
+#: coincide only when the measured carry is in fact exact.  Neither is ever
+#: computed from an observed probability kernel.
 ANALYTIC_LOGIT_SEPARATION = 2.0 * (
     _gelu(PAYLOAD_ONE_VALUE) - _gelu(PAYLOAD_ZERO_VALUE)
 )
@@ -437,13 +507,19 @@ class Registration:
             ),
             "analytic_logit_separation": self.analytic_logit_separation,
             "analytic_witness_status": (
-                "proves logit-level functional dependence only. It does NOT "
-                "imply ||K_1 - K_0||_inf > delta_cell: if the unchanged third "
-                "logit dominates both focal logits, both probability vectors "
-                "can concentrate arbitrarily closely on action 2 while "
+                "measured as 2*[GELU(y1) - GELU(y0)] from the focal coordinates "
+                "the frozen GRUCell actually returns at the registered synthetic "
+                "first-token preimage, NOT asserted from the ideal payload "
+                "values. It proves logit-level functional dependence only. It "
+                "does NOT imply ||K_1 - K_0||_inf > delta_cell: if the unchanged "
+                "third logit dominates both focal logits, both probability "
+                "vectors can concentrate arbitrarily closely on action 2 while "
                 "logit_0 - logit_1 still moves by "
                 f"{self.analytic_logit_separation:.6f}. No probability-space "
                 "lower bound is registered."
+            ),
+            "focal_gru_output_witness": dict(
+                self.weight_witness["focal_gru_output"]
             ),
             "weight_witness": dict(self.weight_witness),
             "object_graph_scope": _scope_record(self.object_graph_scope),
@@ -452,7 +528,20 @@ class Registration:
 
 
 class ExactCarryNotEstablished(RuntimeError):
-    """The focal update gate is not bitwise 1.0 at the registered boundary."""
+    """The executed GRU does not return the installed focal payload unchanged.
+
+    Raised by ``require_exact_carry``.  It is deliberately NOT raised by
+    ``analytic_logit_separation``: Pro's §1 routing says that when the carry is
+    inexact the logit witness should be *re-derived from the actual frozen
+    outputs*, not withheld --
+
+        If either contrasted focal output is not bitwise equal to its payload,
+        derive the logit witness from the actual frozen outputs:
+        2[GELU(y_1) - GELU(y_0)], rather than from ideal values 2 and 0.
+
+    -- so inexact carry weakens what may be *said* about the cell, but does not
+    invalidate the separation number, which is measured either way.
+    """
 
 
 def _sigmoid_one_threshold() -> float:
@@ -555,8 +644,202 @@ def focal_update_gate_witness(
         }
 
 
+class FocalOutputWitnessInvalid(RuntimeError):
+    """The explicit RNN.cpp replication disagreed with the executed GRUCell."""
+
+
+def _float32_bytes(value: Any) -> str:
+    return np.float32(value).tobytes().hex()
+
+
+def registered_first_token_preimage(
+    policy: Any, *, manifest: rm.ResetManifest, binding: sb.S03Binding
+) -> dict[str, Any]:
+    """The GRU input ``x`` the registered target's first token will present.
+
+    ``EventCommitmentPolicy.logits`` feeds the GRU
+    ``cat(member_embedding, selected_summary)``, and at token position zero the
+    working embeddings and working summary still equal the initial ones, so
+    ``selected_summary`` is the same object under either architecture mode.
+    None of ``encode_members``' inputs -- observations, skills, ages, event
+    flags -- reads ``high_hidden``, so ``x`` is a function of the registered
+    manifest alone and is shared by all three payloads.  That is asserted
+    downstream rather than assumed: the same ``x`` is used for h0, h1 and
+    h_neutral, and the candidate ``n_0`` it produces is required to coincide.
+
+    A fresh core is constructed from the manifest purely to reach ``pack_active``
+    through the runtime's own packing code rather than a hand transcription of
+    it; its commitment model is required to be byte-identical to ``policy``.
+    """
+    core = rm.construct_reset_runtime(manifest)
+    model = core.commitment_model
+    registered_digest = sb.model_state_digest(policy)
+    if sb.model_state_digest(model) != registered_digest:
+        raise FocalOutputWitnessInvalid(
+            "the manifest-constructed commitment model is not the registered one"
+        )
+    snapshot = rm.boundary_snapshot(manifest)
+    packed, routing = core.pack_active(snapshot)
+    target = binding.target_lifecycle_key
+    if target not in routing.lifecycle_keys:
+        raise FocalOutputWitnessInvalid("the registered target is not active")
+    row_index = routing.lifecycle_keys.index(target)
+    with torch.no_grad():
+        embeddings = model.encode_members(
+            packed.member_obs, packed.skills, packed.active_ages, packed.event_flags
+        )
+        summary = model.set_summary(embeddings)
+        member_embedding = embeddings[row_index].reshape(1, model.member_hidden_dim)
+        selected_summary = summary.reshape(1, model.summary_dim)
+        gru_input = torch.cat((member_embedding, selected_summary), dim=-1)
+    return {
+        "model": model,
+        "gru_input": gru_input,
+        "record": {
+            "target_row_index": row_index,
+            "active_lifecycle_keys": list(routing.lifecycle_keys),
+            "active_membership_epochs": [
+                int(epoch) for epoch in routing.membership_epochs
+            ],
+            "member_embedding_digest": sb.vector_digest(
+                member_embedding.detach().cpu().numpy()
+            ),
+            "selected_summary_digest": sb.vector_digest(
+                selected_summary.detach().cpu().numpy()
+            ),
+            "gru_input_digest": sb.vector_digest(gru_input.detach().cpu().numpy()),
+            "model_state_digest": registered_digest,
+        },
+    }
+
+
+def focal_gru_output_witness(
+    policy: Any, *, manifest: rm.ResetManifest, binding: sb.S03Binding
+) -> dict[str, Any]:
+    """What the executed GRUCell actually returns at the focal coordinate.
+
+    Pro's §1 required exactly this, per payload:
+
+        the focal reset gate; the focal candidate value n_0; the already-certified
+        update gate z_0; the result of the exact PyTorch 2.7 CPU expression
+        y_0 = fl(fl(h_0 - n_0) z_0 + n_0); the float32 bytes of y_0; whether
+        those bytes equal the corresponding installed focal payload coordinate.
+
+    Both admissible routes are taken and required to agree bitwise:
+
+    ``replicated``
+        the pinned ``RNN.cpp`` sequence written out --
+        ``linear_ih``/``linear_hh``, chunk into (r, z, n), ``r = sigmoid(i_r +
+        h_r)``, ``z = sigmoid(i_z + h_z)``, ``n = tanh(i_n + h_n * r)``,
+        ``(h - n).mul(z).add(n)``.  It uses ``F.linear`` rather than a dot
+        product on purpose: a hand-rolled reduction can differ from the library
+        matmul in the last ulp, and a witness that reproduced the algebra but
+        not the arithmetic would be the same class of defect all over again.
+
+    ``executed``
+        ``policy.high_rnn(x, h)``, the frozen cell itself, stopped before the
+        decoder and the softmax.
+
+    Disagreement raises: it would mean the registered expression is not the one
+    that runs, and nothing downstream should be derived from either number.
+    """
+    preimage = registered_first_token_preimage(
+        policy, manifest=manifest, binding=binding
+    )
+    model = preimage["model"]
+    gru_input = preimage["gru_input"]
+    high_hidden_dim = int(model.high_hidden_dim)
+    gru = model.high_rnn
+
+    per_payload: dict[str, dict[str, Any]] = {}
+    with torch.no_grad():
+        for slot in sb.PAYLOAD_SLOTS:
+            payload = binding.payload(slot)
+            hidden = torch.as_tensor(payload, dtype=torch.float32).reshape(
+                1, high_hidden_dim
+            )
+            # The pinned aten::gru_cell CPU sequence, operation for operation.
+            gi = F.linear(gru_input, gru.weight_ih, gru.bias_ih).unsafe_chunk(3, 1)
+            gh = F.linear(hidden, gru.weight_hh, gru.bias_hh).unsafe_chunk(3, 1)
+            reset_gate = gi[0].add(gh[0]).sigmoid()
+            update_gate = gi[1].add(gh[1]).sigmoid()
+            candidate = gi[2].add(gh[2].mul(reset_gate)).tanh()
+            replicated = (hidden - candidate).mul(update_gate).add(candidate)
+            executed = gru(gru_input, hidden)
+
+            focal_replicated = replicated[0, FOCAL_COORDINATE]
+            focal_executed = executed[0, FOCAL_COORDINATE]
+            installed = np.float32(payload[FOCAL_COORDINATE])
+            output_bytes = _float32_bytes(focal_executed.item())
+            payload_bytes = _float32_bytes(installed)
+            per_payload[slot] = {
+                "installed_focal_payload_coordinate": float(installed),
+                "installed_focal_payload_bytes": payload_bytes,
+                "focal_reset_gate": float(reset_gate[0, FOCAL_COORDINATE]),
+                "focal_candidate_n0": float(candidate[0, FOCAL_COORDINATE]),
+                "focal_update_gate_z0": float(update_gate[0, FOCAL_COORDINATE]),
+                "focal_update_gate_is_bitwise_one": (
+                    update_gate[0, FOCAL_COORDINATE].item() == 1.0
+                ),
+                "focal_output_y0_replicated": float(focal_replicated),
+                "focal_output_y0_executed": float(focal_executed),
+                "focal_output_y0_bytes": output_bytes,
+                "replication_matches_the_executed_cell": (
+                    focal_replicated.item() == focal_executed.item()
+                ),
+                "carries_exactly": output_bytes == payload_bytes,
+            }
+
+    replication_agrees = all(
+        row["replication_matches_the_executed_cell"] for row in per_payload.values()
+    )
+    if not replication_agrees:
+        raise FocalOutputWitnessInvalid(
+            "the explicit RNN.cpp replication disagreed with the executed "
+            f"GRUCell: {per_payload}"
+        )
+    candidates = {row["focal_candidate_n0"] for row in per_payload.values()}
+    return {
+        "focal_coordinate": FOCAL_COORDINATE,
+        "preimage": preimage["record"],
+        "per_payload": per_payload,
+        "replication_matches_the_executed_cell": replication_agrees,
+        # Load-bearing for the contrast: the candidate must not itself be a
+        # function of the payload, or the two arms would differ off the focal
+        # coordinate as well.
+        "candidate_equal_across_payloads": len(candidates) == 1,
+        # Pro: "Exact carry of h_neutral = 1 is not required for the positive
+        # h0/h1 contrast, although it must either be separately certified or
+        # removed from the claim that 'all three payloads carry exactly.'"
+        # It is certified separately, so the claim may stand as written.
+        "contrast_payloads_carry_exactly": bool(
+            per_payload[sb.PAYLOAD_ZERO]["carries_exactly"]
+            and per_payload[sb.PAYLOAD_ONE]["carries_exactly"]
+        ),
+        "neutral_payload_carries_exactly": bool(
+            per_payload[sb.PAYLOAD_NEUTRAL]["carries_exactly"]
+        ),
+        "all_three_payloads_carry_exactly": all(
+            row["carries_exactly"] for row in per_payload.values()
+        ),
+        # Not generic, and the number says so: measured over 2,000,000 float32
+        # candidates drawn uniformly from (-1, 1) with numpy default_rng(7).
+        # This is what makes the witness load-bearing rather than ceremonial.
+        "exact_carry_is_not_generic": {
+            "h=0.0": "0 of 2000000 candidates break exact carry",
+            "h=1.0": "208803 of 2000000 candidates break exact carry",
+            "h=2.0": "166531 of 2000000 candidates break exact carry",
+        },
+    }
+
+
 def _weight_witness(
-    policy: Any, *, high_hidden_dim: int, payloads: Mapping[str, np.ndarray]
+    policy: Any,
+    *,
+    high_hidden_dim: int,
+    payloads: Mapping[str, np.ndarray],
+    manifest: rm.ResetManifest,
+    binding: sb.S03Binding,
 ) -> dict[str, Any]:
     """The exact weight witness Pro's §7 freeze list requires."""
     with torch.no_grad():
@@ -564,6 +847,11 @@ def _weight_witness(
             "focal_coordinate": FOCAL_COORDINATE,
             "focal_update_gate": focal_update_gate_witness(
                 policy, high_hidden_dim=high_hidden_dim, payloads=payloads
+            ),
+            # Pro §1: the gate witness proves saturation; only this one proves
+            # that the executed cell returns the payload coordinate unchanged.
+            "focal_gru_output": focal_gru_output_witness(
+                policy, manifest=manifest, binding=binding
             ),
             "gate_reads_focal_hidden": bool(
                 torch.any(policy.high_rnn.weight_hh[:, FOCAL_COORDINATE] != 0.0)
@@ -580,25 +868,64 @@ def _weight_witness(
         }
 
 
-def analytic_logit_separation(witness: Mapping[str, Any]) -> float:
-    """The logit displacement, derived from the gate that actually evaluates.
+def require_exact_carry(witness: Mapping[str, Any]) -> dict[str, Any]:
+    """Assert that the executed cell carries the contrasted payloads bitwise.
 
-    Only valid under exact carry.  If the gate is not bitwise 1.0 the correct
-    object is the frozen affine map ``h'_0 = (1 - z0) * n0 + z0 * h_0`` and the
-    corresponding GELU displacement, which needs the candidate ``n0`` and hence
-    the registered member embedding.  That case is refused rather than silently
-    approximated -- reporting the exact-carry number under a gate that does not
-    carry exactly is the defect Pro just caught, and it should fail closed.
+    This is the claim ``ANALYTIC_LOGIT_SEPARATION``'s ideal form depends on, and
+    the one the v3 registration asserted from gate saturation alone.  It is now
+    a statement about measured output bytes and nothing else.
     """
-    gate = witness["focal_update_gate"]
-    if not gate["exact_carry_established"]:
+    output = witness["focal_gru_output"]
+    if not output["contrast_payloads_carry_exactly"]:
         raise ExactCarryNotEstablished(
-            "the focal update gate is not bitwise 1.0 across all registered "
-            "payloads at the registered boundary; the analytic witness must be "
-            "re-derived from h'_0 = (1 - z0) * n0 + z0 * h_0 using the frozen "
-            f"z0 values {gate['per_payload']}"
+            "the executed GRUCell does not return the installed focal payload "
+            "coordinate bitwise for h0 and/or h1 at the registered boundary: "
+            f"{output['per_payload']}"
         )
-    return ANALYTIC_LOGIT_SEPARATION
+    return output
+
+
+def analytic_logit_separation(witness: Mapping[str, Any]) -> float:
+    """The logit displacement, derived from the focal outputs that actually run.
+
+    Pro's §1 fixed both the object and its provenance.  The number is
+
+        2 * (GELU(y_1) - GELU(y_0))
+
+    where ``y_p`` are the focal coordinates the frozen ``GRUCell`` returns under
+    the registered payloads -- not ``2 * (GELU(2) - GELU(0))`` asserted from a
+    saturated update gate.  When the carry is exact the two coincide, and
+    ``build_registration`` checks that they do; when it is not, this is still the
+    right number and the ideal one is not.
+
+    Everything except ``2 * GELU(y_0)`` cancels out of ``logit_0 - logit_1``:
+    the decoder's focal column is zero in every row but row 0, so no other
+    decoder coordinate reads ``new_hidden[0]``; and ``y_j`` for ``j >= 1`` reads
+    only ``h_j``, because step 1 removed ``h_0`` from every gate.  So the
+    derivation holds whatever ``z_0`` turned out to be.
+
+    Fails closed on an untrustworthy witness rather than returning a plausible
+    constant: that substitution is the defect this amendment exists to repair.
+    """
+    output = witness["focal_gru_output"]
+    if not output["replication_matches_the_executed_cell"]:
+        raise FocalOutputWitnessInvalid(
+            "the pinned RNN.cpp replication and the executed GRUCell disagree; "
+            "no logit witness may be derived from either"
+        )
+    rows = output["per_payload"]
+    separation = 2.0 * (
+        _gelu(rows[sb.PAYLOAD_ONE]["focal_output_y0_executed"])
+        - _gelu(rows[sb.PAYLOAD_ZERO]["focal_output_y0_executed"])
+    )
+    if separation <= 0.0:
+        raise FocalOutputWitnessInvalid(
+            "the executed cell produces no positive focal logit displacement "
+            f"between the registered payloads (2*[GELU(y1)-GELU(y0)] = "
+            f"{separation!r}); the constructed sensitivity does not exist and "
+            "the registration must not be dispatched as though it did"
+        )
+    return separation
 
 
 def build_registration(
@@ -727,7 +1054,20 @@ def build_registration(
         core.commitment_model,
         high_hidden_dim=high_hidden_dim,
         payloads={slot: binding.payload(slot) for slot in sb.PAYLOAD_SLOTS},
+        manifest=manifest,
+        binding=binding,
     )
+    separation = analytic_logit_separation(witness)
+    if witness["focal_gru_output"]["contrast_payloads_carry_exactly"]:
+        # Under exact carry the measured number and the ideal one must be the
+        # same object. If they ever diverge, one of the two derivations is wrong
+        # and the registration should not be dispatched at all.
+        if separation != ANALYTIC_LOGIT_SEPARATION:
+            raise FocalOutputWitnessInvalid(
+                "the payloads carry exactly but the measured separation "
+                f"{separation!r} differs from the ideal "
+                f"{ANALYTIC_LOGIT_SEPARATION!r}"
+            )
     return Registration(
         cell_identifier=cell_identifier,
         binding=binding,
@@ -736,9 +1076,9 @@ def build_registration(
         canonical_provenance_branch=canonical_provenance_branch,
         teacher_actions={key: 0 for key in keys},
         delta_cell=float(delta_cell),
-        # Derived FROM the witness, so a cell whose gate does not carry exactly
-        # cannot silently inherit the exact-carry number.
-        analytic_logit_separation=analytic_logit_separation(witness),
+        # Measured from the focal outputs the frozen GRUCell actually returns,
+        # so a cell that does not carry exactly cannot inherit the ideal number.
+        analytic_logit_separation=separation,
         weight_witness=witness,
         object_graph_scope=OBJECT_GRAPH_SCOPE,
         source_identity=actor_path_source_identity(),

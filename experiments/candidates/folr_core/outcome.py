@@ -20,10 +20,11 @@ THE ONE PIECE OF ROUTING THAT IS EASY TO GET BACKWARDS
     result belongs in interface/instance insufficient, not scientific
     refutation.
 
-The registered cell here *is* such a construction -- ``registration.py`` derives
-``2 * (GELU(2) - GELU(0))`` in closed form -- so a null payload contrast in this
-design is evidence that the harness is broken, never that the runtime lacks the
-access.
+The registered cell here *is* such a construction -- ``registration.py`` measures
+``2 * (GELU(y_1) - GELU(y_0))`` from the focal coordinates the frozen ``GRUCell``
+actually returns at the registered synthetic first-token preimage -- so a null
+payload contrast in this design is evidence that the harness is broken, never
+that the runtime lacks the access.
 
 AND THE PART OF THAT WHICH WAS OVERSTATED
 -----------------------------------------
@@ -33,13 +34,16 @@ separation.  Pro rejected the inference: the derivation bounds a **logit**
 displacement, and a logit displacement does not bound a probability-space
 infinity norm, because a third dominant logit can hold both softmax vectors
 arbitrarily close together.  So there are now three outcomes below the
-threshold, not one:
+threshold, not one, and the middle one has its **own terminal** rather than
+borrowing the engineering-failure ceiling:
 
-* ``min_b ||K_1b - K_0b||_inf > delta_cell`` -- supports the narrow claim;
-* ``0 < min_b ... <= delta_cell`` -- real but immaterial dependence, routed to
-  interface/instance insufficient with Pro's own sentence, and explicitly
-  neither a refutation nor a contradiction;
-* bitwise equal -- also interface/instance insufficient, describable as
+* ``min_b ||K_1b - K_0b||_inf > delta_cell`` -- ``NARROW_CLAIM_SUPPORTED``;
+* ``0 < min_b ... <= delta_cell`` -- ``PAYLOAD_DEPENDENCE_BELOW_MATERIALITY``:
+  real but immaterial dependence, explicitly neither a refutation nor a
+  contradiction, and explicitly not an engineering failure either.  A terminal
+  whose ceiling reads "engineering failure or unexecuted design only" cannot
+  also assert that the cell exhibits genuine payload dependence;
+* bitwise equal -- ``INTERFACE_OR_INSTANCE_INSUFFICIENT``, describable as
   inconsistent with the intended positive control, but *not* as a mathematical
   contradiction, since no finite-precision probability-separation witness is
   registered.
@@ -194,6 +198,11 @@ def _interface_gates(
     registered_fingerprint = str(
         registration.source_identity["scientific_graph_fingerprint"]
     )
+    gru_output = registration.weight_witness["focal_gru_output"]
+    contrast_carry = {
+        slot: gru_output["per_payload"][slot]["carries_exactly"]
+        for slot in ("h0", "h1")
+    }
 
     gates = [
         Gate(
@@ -313,16 +322,33 @@ def _interface_gates(
             f"numpy {registration.source_identity['numpy_version']}",
         ),
         Gate(
-            # Pro §1: the exact-carry derivation is only licensed by the gate
-            # that actually evaluates at the registered boundary.
-            "focal_update_gate_carries_exactly_at_the_registered_boundary",
-            bool(
-                registration.weight_witness["focal_update_gate"][
-                    "exact_carry_established"
-                ]
-            ),
-            "z0 bitwise 1.0 for h0, h1 and h_neutral, with the input row zeroed "
-            "and the three preactivations equal",
+            # Pro §1, v4.  The previous version of this gate read
+            # `focal_update_gate.exact_carry_established`, which certifies that
+            # z0 saturates to float32 1.0 -- NOT that the executed cell returns
+            # the payload coordinate unchanged:
+            #
+            #   when the update gate is exactly one, the executed focal operation
+            #   is fl(fl(h_0 - n_0) * 1 + n_0), not an assignment
+            #   new_hidden[0] = h[0]. [...] fl(fl(h - n) + n) = h is not an
+            #   identity for arbitrary representable h, n.
+            #
+            # and Pro's instruction for the replacement:
+            #
+            #   The accepting interface gate should then be based on the actual
+            #   GRU output witness, not merely on sigmoid saturation.
+            #
+            # So this gate now reads measured output bytes. The saturation
+            # witness is retained inside the registration as the explanation of
+            # *why* the outputs come out exact, not as the evidence that they do.
+            "focal_hidden_carries_exactly_through_the_executed_gru",
+            bool(gru_output["contrast_payloads_carry_exactly"])
+            and bool(gru_output["replication_matches_the_executed_cell"]),
+            "float32 bytes of GRUCell(x, h_p)[0] equal the installed focal "
+            f"payload coordinate for h0 and h1: {contrast_carry}; the pinned "
+            "RNN.cpp replication agrees with the executed cell: "
+            f"{gru_output['replication_matches_the_executed_cell']}; h_neutral "
+            f"carries exactly (certified separately, not required for the "
+            f"contrast): {gru_output['neutral_payload_carries_exactly']}",
         ),
     ]
     return gates
