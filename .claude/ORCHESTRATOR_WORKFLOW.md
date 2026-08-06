@@ -10,8 +10,11 @@ authority_note=adds_no_authority_over_AGENTS.md; AGENTS.md remains the sole
 orchestrator_model=any capable Claude model (written to be runnable by Opus;
   judgment calls are the orchestrator's, but every hard constraint and its
   reason is stated here rather than assumed)
-revision=2026-08-05 v2 (post-takeover consolidation; supersedes the v1
-  role-by-role mapping)
+revision=2026-08-06 v3 (adds Section 3, the routing and pre-dispatch
+  verification contract, after a measured session in which roughly half the
+  external-review and compute cost was spent on questions the code side could
+  have answered locally; v2 was the post-takeover consolidation superseding
+  the v1 role-by-role mapping)
 ```
 
 ## 1. The actual logical model
@@ -87,7 +90,7 @@ One candidate at a time. Each cycle:
 6. **Independent review.** `hmasd-reviewer` (clean context that has not
    seen the implementation reasoning) before technical acceptance; findings
    resolved or explicitly risk-accepted with reasons, never silently.
-7. **Commit + push.** Boundary check first (Section 6), isolated science
+7. **Commit + push.** Boundary check first (Section 7), isolated science
    commit, push the dedicated branch, verify via `git ls-remote` (local
    reflog write failures on this OneDrive checkout are cosmetic; ls-remote
    is authoritative).
@@ -106,12 +109,142 @@ purpose (e.g. the pattern is established and the remaining gap list is
 mechanical), record the state cleanly and check direction with the user
 rather than opening further rounds by default.
 
-**Self-check before dispatch.** Every exact-arithmetic claim in an outgoing
-document (tables, planted errors, magnitudes) is recomputed locally with
-`Fraction` before sending. Pro verifies everything; sending an arithmetic
-slip costs a full round.
+**Self-check before dispatch.** See Section 3, which generalizes this: every
+exact-arithmetic claim is recomputed locally with `Fraction` before sending,
+and so is everything else that is mechanically checkable.
 
-## 3. Review-item file conventions
+## 3. Routing: what Pro decides, and what the orchestrator must settle first
+
+This section exists because the loop research → code → experiment was running
+badly, and the cause was not the review. It was the orchestrator spending the
+expensive, serialized, scientific-judgment channel on questions the code side
+could have answered in seconds.
+
+### 3.1 The asymmetry, as numbers
+
+Write these down; they make the decision rule almost trivial, and not writing
+them down is what allowed the wrong default for months.
+
+```text
+External Pro round trip   15-40 min wall clock, STRICTLY SEQUENTIAL
+                          (one tab: a dispatch blocks every other direction),
+                          consumes the user's quota
+Local verification        seconds to minutes, parallel, free
+One training run          hours (UCOPE 8 seeds x 300 iterations ~ 1.5 h)
+```
+
+A local precondition check is two to three orders of magnitude cheaper than
+the review round it prevents, and three to four cheaper than the training run
+it prevents.
+
+### 3.2 The orchestrator's structural advantages on the code side
+
+These are not preferences; they are capabilities Pro does not have and cannot
+be given through a question:
+
+- **Direct access to the exact source at the exact commit**, including files
+  that are gitignored and therefore invisible to the reviewer. (Pro has stated
+  this limit twice: it could not authenticate the ORBIT module digest, and it
+  could not open the UCOPE result artifact.)
+- **Execution.** Pro reasons about what the code would do; the orchestrator
+  runs it and reads the bytes.
+- **Differential verification.** Two independent implementations of the same
+  quantity can be run and required to agree bitwise.
+- **Sweeps.** A claim of the form "this identity holds / this case is not
+  generic" can be measured over millions of points instead of argued.
+
+Any question whose answer these capabilities can produce is the orchestrator's
+to answer, and answering it is not optional.
+
+### 3.3 The routing rule
+
+**Goes to Pro. Pro alone decides:**
+
+- the estimand, the population, the null, the unit of analysis;
+- whether a design identifies what it claims to identify;
+- whether a registration is admissible for execution, before any registered
+  kernel is observed;
+- what a measured result may and may not be claimed to establish, and the
+  exact sentence that may be written;
+- whether a park, a closure or a reactivation is warranted;
+- the reading of a number whose arithmetic is not in dispute.
+
+**Never dispatched as a question. Settled locally first, always:**
+
+- whether a computed quantity is the quantity it is named after;
+- whether two objects are equal, disjoint, independent, held out or
+  non-overlapping — write the predicate and run it over the actual registered
+  constants;
+- whether a default equals the registered value;
+- whether a claimed identity holds in the executed library, at the executed
+  version, on the executed hardware — execute it;
+- arithmetic, digests, counts, file contents, source facts;
+- whether an inference is valid **given** facts that can be measured.
+
+The failure mode this prevents has a precise name: **outsourcing mechanical
+verification to the scientific-judgment channel.** It is expensive twice — it
+burns a serialized round, and it spends reviewer attention on arithmetic
+instead of on science.
+
+**Measured, 2026-08-06, so a future orchestrator knows this is not abstract.**
+Of four FOLR registration rounds: one was correctly routed (a logit-space
+bound reported as a probability-space bound — a scientific correction only a
+reviewer could make); **two were mechanical and avoidable** (a bias reported as
+the update gate; gate saturation reported as bitwise carry — in both, what Pro
+actually did was read the source and recompute); the fourth passed on the first
+try because the measurement preceded the document. In the same session UCOPE
+burned a full 8-seed training run on a wrong default budget, and let Pro find a
+seed collision (`ledger_seed == seed + 2`) that a ten-line predicate would have
+caught. Roughly half of that session's review and compute cost was self-
+inflicted.
+
+### 3.4 The pre-dispatch verification gate
+
+Run all of these before any dispatch. They are cheap; the round they protect
+is not.
+
+1. **Every witness or certificate is executed, and checked against an
+   independent path.** Where the claim is bitwise, require bitwise agreement.
+   Worked example: the FOLR focal-GRU witness reproduces the pinned `RNN.cpp`
+   operation sequence explicitly *and* calls the frozen `GRUCell`, and raises
+   if they differ. Use the library's own kernels in the replication — a
+   hand-rolled reduction can differ from the library matmul in the last ulp,
+   and a witness that reproduces the algebra but not the arithmetic is the same
+   defect one level down.
+2. **Every independence / holdout / disjointness / non-overlap claim gets a
+   predicate that is written and run.** Not inspected by eye. The UCOPE
+   evaluation support was described as held out for eight seeds while one seed
+   trained on the evaluation ledgers themselves.
+3. **Every constant with a default is asserted equal to the registered value,
+   in a test.** Two separate defects of exactly this class in one session. A
+   value only ever supplied by the caller is a value two callers can disagree
+   about.
+4. **Every "this is not generic / not a formality" claim is measured, before
+   the document is written.** FOLR v4 measured that exact float32 carry fails
+   for ~10% of candidate values at h=1 — which converted Pro's objection from
+   formal to load-bearing and determined how the whole amendment was written.
+5. **Every exact-arithmetic claim is recomputed with `Fraction`.**
+6. **Assume an adversarial reader with the source in hand**, because that is
+   literally what Pro is. Anything such a reader would check, check first.
+
+### 3.5 Order of operations, and shape
+
+**Measure, then argue.** Write the document from the measured numbers; never
+write the numbers from the document. A justification drafted before its
+measurement tends to describe the measurement its author expected.
+
+**Fail closed by construction.** Derive downstream numbers *from* the witness
+rather than keeping a constant that stays usable after its premise collapses,
+and make the claim and the number read different fields. The recurring defect
+across this portfolio is a quantity that is correct about one thing read as
+though it settled another; code shaped this way cannot express that error.
+
+**State what the round buys.** Before dispatching, say in one line what this
+round obtains that a local check could not. If the answer is "confirmation that
+my arithmetic or my reading of the source is right", do not dispatch — check
+it.
+
+## 4. Review-item file conventions
 
 Each Pro interaction is one item directory:
 `local_research/pro_reviews/<kind>_v<N>_<candidate>_<topic>[_<commit>]/`
@@ -121,7 +254,7 @@ SHA-256 recorded), and for audits `60_ALIGNMENT_INTAKE.json`. Reconciliation
 records live with the candidate, not the review item. Conversation URLs are
 recorded so session-independence lineage stays auditable.
 
-## 4. External Pro transport (Agentify desktop HTTP API)
+## 5. External Pro transport (Agentify desktop HTTP API)
 
 Transport is a Node script driving the local Agentify desktop endpoint —
 not a browser-automation session. A template script lives in the session
@@ -159,7 +292,7 @@ Hard transport discipline, with the mechanics that make it non-negotiable:
   scientific result. Fresh conversation per independent review; reuse only
   for a true follow-up in the same constructive thread.
 
-## 5. Subagent and model mapping
+## 6. Subagent and model mapping
 
 | Work | Executor | Model / effort |
 |---|---|---|
@@ -172,7 +305,7 @@ Hard transport discipline, with the mechanics that make it non-negotiable:
 Per-call `model` overrides are allowed for one-off calibration. Subagent
 output is advisory; acceptance stays in the orchestrator.
 
-## 6. Boundaries (checked at every commit)
+## 7. Boundaries (checked at every commit)
 
 - **Codex control plane is hard read-only**: `AGENTS.md`, `.agents/`,
   `.codex/`, `docs/project/`, `scripts/hmasd_workspace_ticket.py`,
@@ -190,7 +323,7 @@ output is advisory; acceptance stays in the orchestrator.
   results. No worktree/ticket deletion, no merges, without explicit user
   instruction.
 
-## 7. Engineering disciplines (house rules binding all implementation)
+## 8. Engineering disciplines (house rules binding all implementation)
 
 Small-change shape: ≤3 new tracked files and ≤500 new active lines per
 mechanism; refactors net-negative; files >1200 lines never grow; a successor
