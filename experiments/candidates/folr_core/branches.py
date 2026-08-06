@@ -141,12 +141,26 @@ def run_provenance_history(
 ) -> None:
     """Two genuinely different pretreatment histories.
 
-    They differ in the number of committed tokens, the actions taken, the
-    resulting hidden states, the ledger contents and all three RNG consumption
-    states.  ``normalize_to_manifest`` then puts the registered actor-read set
-    back, so what survives into the capture is exactly the residue the
-    registered normalization profile permits -- and ``K_{p,0} = K_{p,1}`` tests
-    that none of that residue reaches the kernel.
+    They differ in the number of committed tokens, the teacher actions taken,
+    the resulting hidden states, the ledger contents, the physical history and
+    the **opportunity** RNG consumption state.
+
+    They do NOT differ in all three RNG streams, and an earlier version of this
+    docstring wrongly said they did.  Pro:
+
+        teacher_order bypasses frontier sampling and teacher_actions bypasses
+        action sampling. Only the opportunity stream advances during those
+        histories.
+
+    That is by design -- it is the same property the freshness certificate
+    relies on to show no action or frontier draw preceded the capture -- but it
+    means the divergence between B=0 and B=1 is narrower than "all three
+    streams" claimed, and the claim is corrected rather than restated.
+
+    ``normalize_to_manifest`` then puts the registered actor-read set back, so
+    what survives into the capture is exactly the residue the registered
+    normalization profile permits -- and ``K_{p,0} = K_{p,1}`` tests that none
+    of that residue reaches the kernel.
     """
     manifest = registration.manifest
     keys = tuple(manifest.frontier)
@@ -284,6 +298,10 @@ def execute_branch(
     evidence.update(
         {
             "sampled_order": tuple(result.sampled_order),
+            # The presentation order of `active_high_hidden`, so the execution
+            # gate can check that the shadow index resolves to the registered
+            # owner rather than to whoever happens to sit at that position.
+            "active_lifecycle_keys": tuple(row.active_lifecycle_keys),
             "token_position": int(row.token_position),
             "policy_action_uniform": row.policy_action_uniform,
             "exact_legal_mask": row.exact_legal_mask.tolist(),
@@ -331,13 +349,78 @@ def contrasts(results: Mapping[str, BranchResult]) -> dict[str, Any]:
             "actor_preimage_digests_equal": (
                 a.actor_preimage_digest == b.actor_preimage_digest
             ),
+            # Pro §6F: "Equal kernels can arise from cancellation despite unequal
+            # reset inputs", so the input-side digests are reported for every
+            # pair rather than only where a null happens to be expected.
+            "common_snapshot_digests_equal": (
+                a.common_snapshot_digest == b.common_snapshot_digest
+            ),
+            "model_state_digests_equal": (
+                a.model_state_digest == b.model_state_digest
+            ),
             "infinity_norm": sb.kernel_infinity_norm(a, b),
+        }
+
+    def closure_at_fixed_b(left: str, right: str) -> dict[str, Any]:
+        """Everything except S03 must be identical ACROSS the payload contrast.
+
+        Pro called this "the most important missing gate":
+
+            It does not verify the more fundamental identifying closure at fixed
+            B: D(K_{0,0}) = D(K_{1,0}), D(K_{0,1}) = D(K_{1,1}). Without those
+            two gates, a positive contrast could be accompanied by an
+            unrecognized non-S03 input difference.
+
+        The fixed-payload nulls run the other way -- they hold the payload and
+        vary the provenance branch -- so neither implies the other.  This one is
+        the identifying assumption: if it fails, the measured contrast cannot be
+        attributed to the payload at all.
+
+        ``actor_preimage_digest`` excludes ``pre_token_high_hidden`` by
+        construction (it *is* S03), which is what makes the equality
+        non-vacuous here.
+        """
+        a, b = results[left], results[right]
+        left_kernel, right_kernel = a.kernel, b.kernel
+        return {
+            "pair": [left, right],
+            "actor_preimage_digests_equal": (
+                left_kernel.actor_preimage_digest
+                == right_kernel.actor_preimage_digest
+            ),
+            "common_snapshot_digests_equal": (
+                left_kernel.common_snapshot_digest
+                == right_kernel.common_snapshot_digest
+            ),
+            "model_state_digests_equal": (
+                left_kernel.model_state_digest == right_kernel.model_state_digest
+            ),
+            "legal_masks_equal": (
+                a.evidence["exact_legal_mask"] == b.evidence["exact_legal_mask"]
+            ),
+            "target_identity_equal": (
+                (
+                    left_kernel.owner_lifecycle_key,
+                    left_kernel.membership_epoch,
+                    left_kernel.token_position,
+                )
+                == (
+                    right_kernel.owner_lifecycle_key,
+                    right_kernel.membership_epoch,
+                    right_kernel.token_position,
+                )
+            ),
         }
 
     return {
         "raw_output_binding": RAW_OUTPUT_BINDING,
         # Pro: "The two fixed-payload nulls are K_{0,0} = K_{0,1}, K_{1,0} = K_{1,1}"
         "fixed_payload_nulls": [equal("K_0_0", "K_0_1"), equal("K_1_0", "K_1_1")],
+        # Pro §6A: the identifying closure, at fixed B across the payload arms.
+        "payload_closure": [
+            closure_at_fixed_b("K_0_0", "K_1_0"),
+            closure_at_fixed_b("K_0_1", "K_1_1"),
+        ],
         # Pro: "Add two information-matched wrong-owner branches ... require W_0 = W_1"
         "wrong_owner_null": equal("W_0", "W_1"),
         # Pro: reset kernels are calibration controls; require R_0 = R_1

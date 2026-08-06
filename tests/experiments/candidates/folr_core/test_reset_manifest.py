@@ -22,6 +22,7 @@ import pytest
 import torch
 
 from experiments.candidates.folr_core import branch_snapshot as bs
+from experiments.candidates.folr_core import certificates as ct
 from experiments.candidates.folr_core import reset_manifest as rm
 from ha_ctse_process import variable_roster_event as vre
 
@@ -150,14 +151,16 @@ def test_the_reset_runtime_reproduces_the_registered_actor_inputs():
         assert record.skill_active_age == owner.skill_active_age
         assert np.array_equal(record.high_hidden, owner.high_hidden)
     assert fresh.physical_time == manifest.physical_time
+    # Pro §6D: "complete PCG64 pre-state", not the nested "state" subfield --
+    # the cached-uint32 fields decide whether the next draw comes from a stored
+    # half-word, so a subfield match is not state equality.
     for name, generator in (
         ("opportunity_rng_state", fresh.opportunity_rng),
         ("frontier_order_rng_state", fresh.frontier_rng),
         ("policy_action_rng_state", fresh.action_rng),
     ):
-        assert (
-            generator.bit_generator.state["state"]
-            == manifest.rng_states[name]["state"]
+        assert ct.rng_state_digest(generator.bit_generator.state) == (
+            ct.rng_state_digest(manifest.rng_states[name])
         )
 
 
@@ -196,17 +199,16 @@ def test_normalization_profiles_differ_in_exactly_what_survives():
 
     other = make_core()
     history(other, branch=1)
-    before = bs.capture(other).rng_states["frontier_rng"]["state"]
+    before = ct.rng_state_digest(bs.capture(other).rng_states["frontier_rng"])
 
     rm.normalize_to_manifest(other, manifest, profile=rm.RECONSTRUCTED_HISTORY)
-    assert bs.capture(other).rng_states["frontier_rng"]["state"] == before, (
-        "RECONSTRUCTED_HISTORY must leave the RNG consumption state alone"
-    )
+    assert ct.rng_state_digest(
+        bs.capture(other).rng_states["frontier_rng"]
+    ) == before, "RECONSTRUCTED_HISTORY must leave the RNG consumption state alone"
 
     rm.normalize_to_manifest(other, manifest, profile=rm.PROVENANCE_LABEL)
-    assert (
-        bs.capture(other).rng_states["frontier_rng"]["state"]
-        == manifest.rng_states["frontier_order_rng_state"]["state"]
+    assert ct.rng_state_digest(bs.capture(other).rng_states["frontier_rng"]) == (
+        ct.rng_state_digest(manifest.rng_states["frontier_order_rng_state"])
     )
 
 

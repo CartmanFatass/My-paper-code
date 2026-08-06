@@ -133,7 +133,11 @@ class ResetManifest:
     architecture: Mapping[str, Any]
     # byte-identical model parameters
     model_states: Mapping[str, Any]
-    # immutable environment ledger and episode identity + exact PCG64 states
+    # The CORE's RNG episode id, master seeds and stream ids -- plus the exact
+    # PCG64 states below.  An earlier comment here called this "immutable
+    # environment ledger and episode identity"; Pro caught that the label was
+    # overbroad ("No environment ledger is present"), and it was: this manifest
+    # is core-only by design, per the registered OBJECT_GRAPH_SCOPE.
     rng_identity: Mapping[str, int]
     rng_states: Mapping[str, Any]
     # physical event time and policy version

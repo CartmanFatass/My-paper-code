@@ -222,8 +222,8 @@ def test_no_randomness_is_consumed_before_the_capture(development):
         evidence = result.evidence
         assert evidence["policy_action_uniform"] is None
         assert (
-            evidence["rng_states_before"]["action_rng"]["state"]
-            == evidence["rng_states_after"]["action_rng"]["state"]
+            ct.rng_state_digest(evidence["rng_states_before"]["action_rng"])
+            == ct.rng_state_digest(evidence["rng_states_after"]["action_rng"])
         )
         assert evidence["token_position"] == 0
         assert evidence["sampled_order"][0] == (
@@ -323,11 +323,15 @@ def test_the_freshness_certificate_names_the_condition_that_failed(development):
 
 def _decide(development, **overrides):
     contrasts = {**development["contrasts"], **overrides}
+    registration = development["registration"]
     return oc.decide(
         results=development["results"],
         contrasts=contrasts,
         certificates=development["certificates"],
-        registration=development["registration"],
+        registration=registration,
+        # Pro §6C: an accepting terminal requires the executed registration to
+        # equal the approved one, so every decide() call must name it.
+        expected_registration_digest=registration.registration_digest(),
     )
 
 
@@ -339,12 +343,52 @@ def test_the_development_cell_can_never_yield_a_scientific_conclusion(developmen
     assert report["explicitly_forbidden"] == oc.FORBIDDEN[oc.INTERFACE_INSUFFICIENT]
 
 
-def test_a_null_against_an_analytic_guarantee_is_an_engineering_failure(development):
-    """Pro's §6 qualification -- the routing rule that is easy to invert."""
+def test_a_bitwise_null_is_an_engineering_failure_but_not_a_contradiction(development):
+    """Pro's §6 qualification, with the overreach removed.
+
+    The first pass called a null a *contradiction* of the analytic construction.
+    Pro rejected that: the derivation bounds a logit displacement, and
+
+        it may be called a mathematical contradiction only after adding a
+        finite-precision probability-separation witness that rules out softmax
+        saturation, underflow, and rounding
+
+    which this registration does not carry.  So the terminal is unchanged and
+    the WORDING is the thing under test.
+    """
     report = _decide(development, payload_contrast={"b0": 0.0, "b1": 0.0})
     assert report["harness_terminal"] == oc.INTERFACE_INSUFFICIENT
-    assert "contradicts the construction" in report["reason"]
-    assert "refut" not in report["reason"].split("rather than")[0]
+    assert "inconsistent with the intended positive-control realization" in (
+        report["reason"]
+    )
+    assert "may NOT be called a mathematical contradiction" in report["reason"]
+
+
+def test_a_sub_margin_contrast_is_neither_a_refutation_nor_a_contradiction(development):
+    """The band Pro added: nonzero dependence below the materiality threshold.
+
+    Routing this to engineering failure is right; routing it there *because the
+    logit construction was contradicted* is not, because a third dominant logit
+    can hold both softmax vectors within 1e-3 while logit_0 - logit_1 moves by
+    3.909.
+    """
+    margin = development["registration"].delta_cell
+    report = _decide(
+        development, payload_contrast={"b0": margin / 2.0, "b1": margin / 3.0}
+    )
+    assert report["harness_terminal"] == oc.INTERFACE_INSUFFICIENT
+    assert "below the prospectively registered probability-space materiality" in (
+        report["reason"]
+    )
+    assert "neither a refutation nor a contradiction" in report["reason"]
+    assert "contradict" not in report["reason"].split("neither")[0]
+
+
+def test_the_positive_terminal_uses_the_minimum_over_b(development):
+    """min_b, not "b0 happens to be large": one weak arm must block the claim."""
+    margin = development["registration"].delta_cell
+    report = _decide(development, payload_contrast={"b0": 1.0, "b1": margin / 2.0})
+    assert report["harness_terminal"] == oc.INTERFACE_INSUFFICIENT
 
 
 def test_a_null_without_an_analytic_guarantee_is_a_refutation(development):
@@ -359,6 +403,9 @@ def test_a_null_without_an_analytic_guarantee_is_a_refutation(development):
         contrasts={**development["contrasts"], "payload_contrast": {"b0": 0.0, "b1": 0.0}},
         certificates=development["certificates"],
         registration=registration,
+        # The replaced registration is a DIFFERENT registration, so its own
+        # digest is the precommitment here -- not the unmodified one.
+        expected_registration_digest=registration.registration_digest(),
     )
     assert report["harness_terminal"] == oc.PAYLOAD_ACCESS_REFUTED
 
@@ -389,14 +436,337 @@ def test_interface_validity_outranks_everything(development):
         **development["certificates"],
         "all_direct_replay_agree": False,
     }
+    registration = development["registration"]
     report = oc.decide(
         results=development["results"],
         contrasts=development["contrasts"],
         certificates=certificates,
+        registration=registration,
+        expected_registration_digest=registration.registration_digest(),
+    )
+    assert report["harness_terminal"] == oc.INTERFACE_INSUFFICIENT
+    # The reason names WHICH gate failed; a bare "interface validity failed"
+    # sends the reader back to the gate list to find out what broke.
+    assert report["reason"] == (
+        "interface validity failed: ['direct_replay_agree']"
+    )
+
+
+def test_an_unnamed_precommitment_cannot_reach_an_accepting_terminal(development):
+    """Pro §6C: the executed registration must equal the approved one.
+
+    Omitting the precommitted digest is not a neutral default -- it means
+    nothing pinned which registration was approved, so the run cannot accept.
+    """
+    report = oc.decide(
+        results=development["results"],
+        contrasts=development["contrasts"],
+        certificates=development["certificates"],
         registration=development["registration"],
     )
     assert report["harness_terminal"] == oc.INTERFACE_INSUFFICIENT
-    assert report["reason"] == "interface validity failed"
+    assert "registration_digest_equals_the_precommitment" in report["reason"]
+
+
+def test_an_amended_registration_fails_against_the_old_precommitment(development):
+    """The gate has to catch a real amendment, not just a missing argument."""
+    from dataclasses import replace
+
+    amended = replace(development["registration"], delta_cell=1e-2)
+    assert amended.registration_digest() != (
+        development["registration"].registration_digest()
+    )
+    report = oc.decide(
+        results=development["results"],
+        contrasts=development["contrasts"],
+        certificates=development["certificates"],
+        registration=amended,
+        expected_registration_digest=(
+            development["registration"].registration_digest()
+        ),
+    )
+    assert report["harness_terminal"] == oc.INTERFACE_INSUFFICIENT
+    assert "registration_digest_equals_the_precommitment" in report["reason"]
+
+
+# --------------------------------------------------------------------------
+# Pro's bounded amendment, §6A--§6G
+# --------------------------------------------------------------------------
+
+
+def test_the_identifying_closure_holds_at_fixed_b(development):
+    """§6A, which Pro called "the most important missing gate".
+
+    The fixed-payload nulls vary B at a held payload.  This one varies the
+    payload at a held B, and it is the one that licenses attributing the
+    contrast to S03: if anything other than the payload differed between
+    K_0_b and K_1_b, the contrast would not be identified.
+    """
+    entries = development["contrasts"]["payload_closure"]
+    assert [entry["pair"] for entry in entries] == [
+        ["K_0_0", "K_1_0"],
+        ["K_0_1", "K_1_1"],
+    ]
+    for entry in entries:
+        assert entry["actor_preimage_digests_equal"], entry["pair"]
+        assert entry["common_snapshot_digests_equal"], entry["pair"]
+        assert entry["model_state_digests_equal"], entry["pair"]
+        assert entry["legal_masks_equal"], entry["pair"]
+        assert entry["target_identity_equal"], entry["pair"]
+
+
+def test_the_fixed_b_closure_is_not_vacuous(development):
+    """It must be able to fail, and it must outrank the contrast when it does.
+
+    ``actor_preimage_digest`` excludes ``pre_token_high_hidden`` by design --
+    otherwise the payload arms could never compare equal and the gate would be
+    a tautology in the other direction.  So the assertion worth making is that
+    a broken closure changes the terminal.
+    """
+    broken = [
+        {**entry, "actor_preimage_digests_equal": False}
+        for entry in development["contrasts"]["payload_closure"]
+    ]
+    report = _decide(development, payload_closure=broken)
+    assert report["harness_terminal"] == oc.FIXED_PAYLOAD_NULL_FAILURE
+
+
+def test_the_preimage_digest_would_notice_a_non_s03_difference():
+    """Sanity on the instrument: the digest is not blind to everything.
+
+    Equality across the payload arms only means something if the digest moves
+    when a genuinely different actor input is present.  S03 is excluded on
+    purpose -- everything else must register.
+    """
+    import experiments.candidates.folr_core.s03_binding as sb
+
+    base = {
+        "pre_token_high_hidden": np.zeros(4, dtype=np.float32),
+        "observations": np.asarray([[0.1, 0.2]], dtype=np.float32),
+        "working_skills": (1,),
+        "owner_lifecycle_key": "dev_target",
+    }
+    assert sb.actor_preimage_digest(base) == sb.actor_preimage_digest(
+        {**base, "pre_token_high_hidden": np.ones(4, dtype=np.float32)}
+    ), "S03 must be excluded, or the closure certificate is a tautology"
+    assert sb.actor_preimage_digest(base) != sb.actor_preimage_digest(
+        {**base, "working_skills": (2,)}
+    )
+    assert sb.actor_preimage_digest(base) != sb.actor_preimage_digest(
+        {**base, "observations": np.asarray([[0.1, 0.3]], dtype=np.float32)}
+    )
+
+
+def test_the_shadow_payload_never_enters_the_targets_actor_preimage(development):
+    """A stronger owner-locality statement than the ruling assumed was needed.
+
+    Pro's §5 kept the wrong-owner branches after finding that the critic reads
+    each row's own ``high_hidden``.  Measured here: K_0_0 and W_0 -- which
+    differ in the target's payload AND in the shadow's private recurrent field
+    -- produce the SAME non-S03 actor preimage digest.  The shadow's payload
+    does not reach the target's actor inputs at all; only the shadow's encoded
+    member features do, and those are unchanged.
+
+    This is why the wrong-owner null is a test of the runtime rather than of
+    the digest: the two W branches are compared on the target's probability
+    vector, and the preimage equality is a control that cannot fail for the
+    trivial reason that the digest ignores the difference -- it ignores it
+    because the actor does.
+    """
+    kernels = {
+        name: development["results"][name].kernel
+        for name in ("K_0_0", "W_0", "W_1")
+    }
+    assert kernels["W_0"].actor_preimage_digest == kernels["W_1"].actor_preimage_digest
+    assert (
+        kernels["K_0_0"].actor_preimage_digest == kernels["W_0"].actor_preimage_digest
+    )
+    # ...and the kernels themselves still differ, because K_0_0 carries h0 in
+    # the TARGET's field while W_0 holds the target at h_neutral.
+    assert not np.array_equal(
+        development["results"]["K_0_0"].kernel.probabilities,
+        development["results"]["W_0"].kernel.probabilities,
+    )
+
+
+def test_the_payload_read_certificate_covers_all_eight_branches(development):
+    """§6B: which vector actually reached the token, not which was registered."""
+    certificates = development["certificates"]
+    assert certificates["all_payload_reads_certified"]
+    assert set(certificates["payload_read_terminals"]) == {
+        spec.name for spec in br.BRANCHES
+    }
+    expected = {
+        "K_0_0": "h0", "K_1_0": "h1", "K_0_1": "h0", "K_1_1": "h1",
+        "R_0": "h_neutral", "R_1": "h_neutral",
+        "W_0": "h_neutral", "W_1": "h_neutral",
+    }
+    for name, slot in expected.items():
+        entry = certificates["branches"][name]["payload_read"]
+        assert entry["expected_target_slot"] == slot
+        assert entry["terminal"] == "PAYLOAD_READ_CERTIFIED"
+
+
+def test_the_wrong_owner_branches_certify_the_shadow_payload(development):
+    """W_p is only information-matched if h_p really reached the SHADOW."""
+    binding = development["registration"].binding
+    import experiments.candidates.folr_core.s03_binding as sb
+
+    for name, slot in (("W_0", "h0"), ("W_1", "h1")):
+        entry = development["certificates"]["branches"][name]["payload_read"]
+        assert entry["shadow_active_hidden_digest"] == sb.vector_digest(
+            binding.payload(slot)
+        )
+
+
+def test_a_wrong_payload_read_is_caught(development):
+    """Relabel K_0_0 as a K_1 branch: the certificate must refuse it."""
+    from dataclasses import replace
+
+    result = development["results"]["K_0_0"]
+    mislabelled = replace(
+        result, spec=replace(result.spec, name="K_1_0", payload_slot="h1")
+    )
+    certificate = ct.payload_read_certificate(
+        mislabelled, registration=development["registration"]
+    )
+    assert certificate["terminal"] == "PAYLOAD_READ_NOT_CERTIFIED"
+    assert certificate["failed"] == ["target_pre_hidden_is_the_registered_payload"]
+
+
+def test_the_complete_rng_state_is_compared_not_the_counter_subfield():
+    """§6D. The cached-uint32 fields are part of the state and must count.
+
+    Two PCG64 mappings can share the counter pair and still differ in
+    ``has_uint32``/``uinteger`` -- which is the difference between "the next
+    draw comes from a cached half-word" and "it does not".  The old comparison
+    read only the nested "state" member and would have called these equal.
+    """
+    left = {
+        "bit_generator": "PCG64",
+        "state": {"state": 12345, "inc": 67890},
+        "has_uint32": 0,
+        "uinteger": 0,
+    }
+    right = {**left, "has_uint32": 1, "uinteger": 4_294_967_295}
+    assert left["state"] == right["state"]
+    assert ct.rng_state_digest(left) != ct.rng_state_digest(right)
+    assert ct.rng_state_digest(left) == ct.rng_state_digest(dict(left))
+
+
+def test_the_reset_control_closes_on_its_inputs_too(development):
+    """§6F: equal kernels can come from cancellation over unequal inputs."""
+    gates = oc._reset_gates(development["contrasts"])
+    assert [gate.name for gate in gates] == [
+        "reset_null_R_0_R_1",
+        "reset_actor_preimage_digests_equal",
+        "reset_common_snapshot_digests_equal",
+    ]
+    assert all(gate.passed for gate in gates)
+
+    report = _decide(
+        development,
+        reset_null={
+            **development["contrasts"]["reset_null"],
+            # kernels still equal; the INPUTS disagree
+            "common_snapshot_digests_equal": False,
+        },
+    )
+    assert report["harness_terminal"] == oc.RESET_NULL_FAILURE
+
+
+def test_the_executed_model_must_be_the_registered_one(development):
+    """§4: eight branches could share the same WRONG model and pass identity."""
+    registered = development["registration"].weight_witness["model_state_digest"]
+    for result in development["results"].values():
+        assert result.evidence["model_state_digest_before"] == registered
+
+
+def test_the_object_graph_scope_is_inside_the_registration_digest():
+    """§3/§6G: the scope must be frozen, not merely documented."""
+    from dataclasses import replace
+
+    registration = reg.development_registration()
+    widened = replace(
+        registration,
+        object_graph_scope={
+            **registration.object_graph_scope,
+            "excludes": ("environment return",),
+        },
+    )
+    assert widened.registration_digest() != registration.registration_digest()
+
+    record = registration.frozen_record()
+    assert record["object_graph_scope"]["excludes"] == [
+        "DynamicRosterEventEnv",
+        "environment return",
+        "environment task dynamics",
+    ]
+    sentence = record["object_graph_scope"]["admissible_positive_sentence"]
+    assert sentence.startswith("VariableRosterEventCore")
+    assert "DynamicRosterEventEnv" not in sentence
+
+
+def test_the_source_identity_travels_with_the_registration():
+    """§6C: "the durable execution report should carry that identity itself"."""
+    registration = reg.development_registration()
+    identity = registration.source_identity
+    assert len(identity["actor_path_fingerprint"]) == 64
+    assert set(identity["actor_path_sources"]) == set(reg.ACTOR_PATH_SOURCES)
+    for digest in identity["actor_path_sources"].values():
+        assert len(digest) == 64
+    # A commit hash from a dirty tree authenticates nothing, so the record has
+    # to say which case it is instead of implying the stronger one.
+    assert identity["commit_authenticates_the_registration"] is (
+        identity["source_commit"] != "UNAVAILABLE"
+        and identity["source_tree_dirty"] is False
+    )
+
+
+def test_the_registration_digest_does_not_move_with_the_commit():
+    """It must be stable, or the precommitment gate fails on every later commit.
+
+    The commit and dirty flag stay OUT of the digest; the content-addressed
+    actor-path fingerprint is what the execution gate compares.
+    """
+    from dataclasses import replace
+
+    registration = reg.development_registration()
+    moved = replace(
+        registration,
+        source_identity={
+            **registration.source_identity,
+            "source_commit": "0" * 40,
+            "source_tree_dirty": True,
+        },
+    )
+    assert moved.registration_digest() == registration.registration_digest()
+
+    refingerprinted = replace(
+        registration,
+        source_identity={
+            **registration.source_identity,
+            "actor_path_fingerprint": "f" * 64,
+        },
+    )
+    assert refingerprinted.registration_digest() != (
+        registration.registration_digest()
+    )
+
+
+def test_the_positive_terminal_carries_the_core_only_sentence(development):
+    """A positive result must not read as though the environment ran."""
+    report = _decide(development)
+    assert report["harness_terminal"] == oc.NARROW_CLAIM_SUPPORTED
+    assert report["admissible_positive_sentence"].startswith(
+        "VariableRosterEventCore"
+    )
+    assert "DynamicRosterEventEnv has been exercised" in (
+        report["constructed_cell_exclusions"]
+    )
+    assert "DynamicRosterEventEnv" not in oc.MAXIMUM_CONCLUSION[
+        oc.NARROW_CLAIM_SUPPORTED
+    ]
 
 
 def test_every_terminal_carries_a_forbidden_list():

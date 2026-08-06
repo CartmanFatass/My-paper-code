@@ -33,16 +33,37 @@ Pro listed eleven conditions and required all of them before the word "first
 fresh" may be used.  Each is a named entry with its own detail string, so a
 failure says which one failed.
 
-ONE CONDITION IS DELIBERATELY LEFT UNRESOLVED
----------------------------------------------
-Condition 9 -- "all three PCG64 pre-states match the common manifest" -- is
-satisfiable literally only under the ``PROVENANCE_LABEL`` normalization profile.
-Under ``RECONSTRUCTED_HISTORY`` the RNG consumption states are part of the
-residual history difference by design, so the condition has to be read per
-branch instead.  Rather than quietly pass it under a reading Pro has not
-selected, the certificate returns ``UNRESOLVED`` for it and the terminal becomes
-``FRESHNESS_UNRESOLVED``.  Passing it vacuously would be the same class of error
-as the UCOPE ceiling guard that reported a flag and continued anyway.
+CONDITION 9 AND THE SELECTED PROFILE
+------------------------------------
+Condition 9 -- "all three PCG64 pre-states match the common manifest" -- reads
+literally only under one normalization profile, so the first pass left it
+``UNRESOLVED`` rather than passing it under a reading Pro had not selected.
+Pro then selected:
+
+    PROVENANCE_LABEL […] Under this profile, condition 9 reads literally:
+    Immediately before the registered capture transaction, the complete states
+    of opportunity_rng, frontier_rng, and action_rng must each equal the
+    corresponding state in the single registered reset manifest.
+
+Under the registered profile the condition is therefore a live PASS/FAIL gate.
+The ``UNRESOLVED`` branch is kept for ``RECONSTRUCTED_HISTORY``, which Pro
+called "a legitimate later robustness experiment, but not the registered
+primary design" -- there the RNG states are residual history by construction.
+
+WITNESS LAYER B -- WHICH PAYLOAD ACTUALLY REACHED THE TOKEN
+-----------------------------------------------------------
+    The binding digest proves which payload vectors were registered; it does
+    not prove which vector reached a particular token.
+
+``payload_read_certificate`` closes that with whole-vector dtype/shape/byte
+digests against the eight registered expectations.
+
+WHAT "COMPLETE" MEANS FOR AN RNG STATE
+--------------------------------------
+Pro's other correction here: the first pass compared only the nested ``state``
+member of each PCG64 mapping.  That omits ``has_uint32`` and ``uinteger``, the
+cached-32-bit-draw fields, so two generators could compare equal and still
+produce different next values.  ``rng_state_digest`` digests the whole mapping.
 """
 
 from __future__ import annotations
@@ -53,6 +74,7 @@ from typing import Any, Mapping
 import numpy as np
 
 from experiments.candidates.folr_core import branch_snapshot as bs
+from experiments.candidates.folr_core import branches as br
 from experiments.candidates.folr_core import registration as reg
 from experiments.candidates.folr_core import reset_manifest as rm
 from experiments.candidates.folr_core import s03_binding as sb
@@ -120,9 +142,30 @@ def direct_replay_certificate(core: Any, row: Any, kernel: sb.DirectKernel) -> d
 # ---------------------------------------------------------------------------
 
 
+def rng_state_digest(state: Mapping[str, Any]) -> str:
+    """Digest the COMPLETE canonical PCG64 state mapping.
+
+    Pro:
+
+        _rng_states_equal currently compares only each mapping's nested "state"
+        member. The condition says complete PCG64 pre-state, so the certificate
+        must compare the entire canonical state mapping, not a selected
+        subfield.
+
+    The old comparison ignored ``bit_generator``, ``has_uint32`` and
+    ``uinteger`` -- the last two are the cached-32-bit-draw fields, so two
+    generators could compare equal here and still produce different next
+    values.  ``bs.digest_of`` is the fail-closed serializer, which refuses any
+    type it cannot canonicalize rather than falling back to ``repr``.
+    """
+    return bs.digest_of(dict(state))
+
+
 def _rng_states_equal(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
+    if set(left) != set(right):
+        return False
     return all(
-        dict(left[name]).get("state") == dict(right[name]).get("state")
+        rng_state_digest(left[name]) == rng_state_digest(right[name])
         for name in left
     )
 
@@ -199,10 +242,14 @@ def freshness_certificate(
         _condition(
             "no_action_draw_before_capture",
             evidence["policy_action_uniform"] is None
-            and dict(evidence["rng_states_before"]["action_rng"]).get("state")
-            == dict(evidence["rng_states_after"]["action_rng"]).get("state"),
+            # Complete canonical state, not the nested "state" subfield: the
+            # cached-uint32 fields move on a 32-bit draw even when the counter
+            # pair does not, so a subfield comparison could miss a draw.
+            and rng_state_digest(evidence["rng_states_before"]["action_rng"])
+            == rng_state_digest(evidence["rng_states_after"]["action_rng"]),
             "teacher actions covered the frontier, so policy_action_uniform is "
-            "None and the action RNG state is unmoved across the transaction",
+            "None and the complete action-RNG state is unmoved across the "
+            "transaction",
         ),
         _condition(
             "no_prior_owner_token_after_restoration",
@@ -262,13 +309,137 @@ def freshness_certificate(
     }
 
 
+# ---------------------------------------------------------------------------
+# Which payload actually reached the token
+# ---------------------------------------------------------------------------
+
+
+def payload_read_certificate(
+    result: Any, *, registration: reg.Registration
+) -> dict[str, Any]:
+    """Prove which registered vector the token actually read.
+
+    Pro:
+
+        The binding digest proves which payload vectors were registered; it
+        does not prove which vector reached a particular token.
+
+    ``EventTokenRow`` already carries ``pre_token_high_hidden`` (the target's
+    own S03 input) and ``active_high_hidden`` (the whole active array, ordered
+    by ``active_lifecycle_keys``), so no new runtime hook is needed -- the
+    certificate reads witnesses the runtime already commits.
+
+    The eight registered expectations, verbatim from §6B:
+
+        K_{0,b}: target pre-hidden = h0
+        K_{1,b}: target pre-hidden = h1
+        R_b:     target pre-hidden = h_neutral
+        W_0:     target pre-hidden = h_neutral, shadow active-hidden = h0
+        W_1:     target pre-hidden = h_neutral, shadow active-hidden = h1
+
+    A ninth check goes beyond the list and is worth having: on the branches
+    where the shadow is *not* a treatment arm, its active-hidden row must still
+    equal the registered manifest value.  Without it, a payload leaking into the
+    shadow on a transplant branch would go unnoticed, and the wrong-owner null
+    would then be comparing two contaminated states rather than one clean pair.
+    """
+    binding = registration.binding
+    manifest = registration.manifest
+    spec = result.spec
+    row = result.row
+
+    if spec.kind in (br.RESET, br.WRONG_OWNER):
+        expected_target_slot = sb.PAYLOAD_NEUTRAL
+    else:
+        expected_target_slot = spec.payload_slot
+
+    target_actual = sb.vector_digest(np.asarray(row.pre_token_high_hidden))
+    target_expected = sb.vector_digest(binding.payload(expected_target_slot))
+
+    keys = tuple(row.active_lifecycle_keys)
+    shadow = binding.shadow_lifecycle_key
+    shadow_actual = sb.vector_digest(
+        np.asarray(row.active_high_hidden)[keys.index(shadow)]
+    )
+    if spec.kind == br.WRONG_OWNER:
+        shadow_expected_name = spec.payload_slot
+        shadow_expected = sb.vector_digest(binding.payload(spec.payload_slot))
+    else:
+        shadow_expected_name = "registered manifest value"
+        shadow_expected = sb.vector_digest(
+            np.asarray(manifest.owner(shadow).high_hidden, dtype=np.float32)
+        )
+
+    # Under RECONSTRUCTED_HISTORY the shadow's high_hidden is deliberately NOT
+    # normalized, so its manifest equality is residual history rather than a
+    # violation.  Only the selected profile makes it a gate.
+    shadow_is_a_gate = (
+        spec.kind == br.WRONG_OWNER
+        or registration.normalization_profile == rm.PROVENANCE_LABEL
+    )
+    shadow_matches = shadow_actual == shadow_expected
+
+    conditions = [
+        _condition(
+            "target_pre_hidden_is_the_registered_payload",
+            target_actual == target_expected,
+            f"expected {expected_target_slot}, "
+            f"digest {target_expected[:12]} vs actual {target_actual[:12]}",
+        )
+    ]
+    if shadow_is_a_gate:
+        conditions.append(
+            _condition(
+                "shadow_active_hidden_is_the_registered_value",
+                shadow_matches,
+                f"expected {shadow_expected_name}, "
+                f"digest {shadow_expected[:12]} vs actual {shadow_actual[:12]}",
+            )
+        )
+    else:
+        conditions.append(
+            Condition(
+                name="shadow_active_hidden_is_the_registered_value",
+                state=UNRESOLVED,
+                detail=(
+                    "profile=RECONSTRUCTED_HISTORY leaves the shadow's hidden "
+                    "state inside the residual history difference by design, so "
+                    "manifest equality is not required on this branch "
+                    f"(matches anyway: {shadow_matches})"
+                ),
+            )
+        )
+
+    states = [condition.state for condition in conditions]
+    return {
+        "raw_output_binding": RAW_OUTPUT_BINDING,
+        "branch": spec.name,
+        "terminal": (
+            "PAYLOAD_READ_NOT_CERTIFIED"
+            if FAIL in states
+            else "PAYLOAD_READ_UNRESOLVED"
+            if UNRESOLVED in states
+            else "PAYLOAD_READ_CERTIFIED"
+        ),
+        "expected_target_slot": expected_target_slot,
+        "target_pre_hidden_digest": target_actual,
+        "shadow_active_hidden_digest": shadow_actual,
+        "conditions": {
+            condition.name: {"state": condition.state, "detail": condition.detail}
+            for condition in conditions
+        },
+        "failed": [c.name for c in conditions if c.state == FAIL],
+    }
+
+
 def certify_branch(result: Any, *, registration: reg.Registration) -> dict[str, Any]:
-    """Both witness layers for one branch."""
+    """All three witness layers for one branch."""
     core = result.evidence["core"]
     return {
         "branch": result.spec.name,
         "direct_replay": direct_replay_certificate(core, result.row, result.kernel),
         "freshness": freshness_certificate(result.evidence, registration=registration),
+        "payload_read": payload_read_certificate(result, registration=registration),
         "kernel": {
             "owner": result.kernel.owner_lifecycle_key,
             "membership_epoch": result.kernel.membership_epoch,
@@ -297,4 +468,12 @@ def certify_all(
         "freshness_terminals": {
             name: entry["freshness"]["terminal"] for name, entry in certificates.items()
         },
+        "payload_read_terminals": {
+            name: entry["payload_read"]["terminal"]
+            for name, entry in certificates.items()
+        },
+        "all_payload_reads_certified": all(
+            entry["payload_read"]["terminal"] == "PAYLOAD_READ_CERTIFIED"
+            for entry in certificates.values()
+        ),
     }

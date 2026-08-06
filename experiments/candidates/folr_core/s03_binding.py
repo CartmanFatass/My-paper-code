@@ -75,6 +75,13 @@ def _digest_array(array: np.ndarray) -> str:
     return hasher.hexdigest()
 
 
+#: Public name for the same digest.  Pro's payload-read certificate asks for
+#: "whole-vector dtype/shape/byte digests", which is exactly what
+#: ``_digest_array`` computes, so the certificate reuses it rather than
+#: introducing a second hashing convention that could drift from the registry's.
+vector_digest = _digest_array
+
+
 def _as_float32(value: Any) -> np.ndarray:
     if isinstance(value, torch.Tensor):
         value = value.detach().cpu().numpy()

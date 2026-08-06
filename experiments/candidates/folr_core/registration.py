@@ -33,10 +33,13 @@ payload, the surgery is:
    constants with respect to ``h[0]``.
 
 2. ``weight_ih[H, :] = 0``, ``bias_ih[H] = +20``, ``bias_hh[H] = 0``
-   The update gate's coordinate 0 is pinned at ``z0 = sigmoid(20)``, which is
-   within ``2.1e-9`` of 1.  Hence
-   ``new_hidden[0] = z0 * h[0] + (1 - z0) * n0``, an affine function of
-   ``h[0]`` with slope ``z0 > 0.999999997``.
+   The update gate's coordinate 0 is pinned at ``z0 = sigmoid(20)``.  In the
+   registered numerical context -- CPU, float32 -- that rounds to **exactly**
+   1.0, so ``new_hidden[0] = h[0]`` exactly rather than approximately.  Pro
+   accepted the construction on that basis: *"the focal carry is exact for the
+   registered realization rather than merely having slope close to one"*.  In
+   exact real arithmetic the same expression is affine in ``h[0]`` with slope
+   ``z0 > 0.999999997``.
 
 3. ``decoder_hidden[0].weight[:, 0] = 0`` then row 0 set to ``e_0`` with zero
    bias.  So ``hidden[0] = GELU(new_hidden[0])`` and **no other** decoder
@@ -52,8 +55,21 @@ which the registered values avoid -- so
 
     (logit_0 - logit_1) moves by 2 * (GELU(2) - GELU(0)) = 3.909...
 
-and the softmax must move.  That is the analytic guarantee; it is not read off a
-kernel.
+WHAT THAT DOES AND DOES NOT PROVE
+---------------------------------
+Pro corrected an overreach here, and the correction matters:
+
+    That proves logit-level functional dependence. It does not by itself prove
+    ||K_1 - K_0||_inf > 10^-3. For example, if the unchanged third logit
+    dominates both focal logits by a sufficiently large amount, both
+    probability vectors can concentrate arbitrarily closely on action 2 even
+    while logit_0 - logit_1 moves by 3.909.
+
+So ``ANALYTIC_LOGIT_SEPARATION`` is a **logit-space** witness only.  No
+probability-space lower bound is registered, and ``outcome.py`` must not infer
+one: a sub-margin contrast is routed to interface/instance insufficiency
+because the probability bound was never established, not because the logit
+derivation was contradicted.
 
 WHAT THAT COSTS IN INTERPRETATION, VERBATIM
 -------------------------------------------
@@ -73,6 +89,8 @@ from __future__ import annotations
 
 import hashlib
 import math
+import pathlib
+import subprocess
 from dataclasses import dataclass
 from typing import Any, Mapping
 
@@ -97,6 +115,105 @@ NEUTRAL_VALUE = 1.0
 
 #: The update-gate bias that pins z0. sigmoid(20) = 1 - 2.06e-9.
 UPDATE_GATE_BIAS = 20.0
+
+#: Pro's §3 disposition.  The reset manifest rebuilds a ``VariableRosterEventCore``
+#: and nothing environment-side, so rather than add an environment merely to
+#: satisfy an overbroad label, the scope is registered explicitly and travels in
+#: the registration digest:
+#:
+#:     Do not add an environment merely to satisfy an overbroad label. Instead,
+#:     amend the registration with an explicit, digest-bearing scope.
+#:
+#: The admissible positive sentence names the core for the same reason: a run of
+#: this graph cannot say that ``DynamicRosterEventEnv`` has been exercised.
+OBJECT_GRAPH_SCOPE: dict[str, Any] = {
+    "includes": (
+        "VariableRosterEventCore",
+        "registered synthetic BoundarySnapshot",
+        "registered MembershipTransaction",
+        "constructed sensitivity model",
+    ),
+    "excludes": (
+        "DynamicRosterEventEnv",
+        "environment return",
+        "environment task dynamics",
+    ),
+    "admissible_positive_sentence": (
+        "VariableRosterEventCore correctly transports and reads the registered "
+        "owner-private recurrent payload at the registered synthetic boundary "
+        "in the constructed sensitivity cell."
+    ),
+    "must_not_say": (
+        "that DynamicRosterEventEnv has been exercised"
+    ),
+}
+
+#: The source files that implement the registered actor path
+#: ``pre_hidden -> GRUCell -> decoder -> skill head`` and the row types that
+#: carry its witnesses.  Pro's §6C: *"execution source commit or actor-path code
+#: fingerprint equals the approved source identity"* -- and *"the durable
+#: execution report should carry that identity itself"* rather than relying on
+#: the dispatch message to pin the commit externally.
+ACTOR_PATH_SOURCES = (
+    "ha_ctse_process/variable_roster_event.py",
+    "ha_ctse_process/variable_roster_event_models.py",
+    "ha_ctse_process/variable_roster_event_types.py",
+)
+
+
+def _repository_root() -> pathlib.Path:
+    return pathlib.Path(__file__).resolve().parents[3]
+
+
+def actor_path_source_identity() -> dict[str, Any]:
+    """Commit, tree cleanliness and per-file digests of the actor path.
+
+    The digests are the durable half.  A commit hash taken from a dirty tree
+    authenticates nothing, so the record says which case it is instead of
+    implying the stronger one -- the same correction the UCOPE provenance
+    record already carries.
+    """
+    root = _repository_root()
+
+    def _git(*arguments: str) -> str | None:
+        try:
+            return subprocess.run(
+                ["git", *arguments],
+                cwd=root,
+                capture_output=True,
+                text=True,
+                timeout=60,
+                check=True,
+            ).stdout
+        except (OSError, subprocess.SubprocessError):
+            return None
+
+    head = _git("rev-parse", "HEAD")
+    commit = head.strip() if head is not None else "UNAVAILABLE"
+    status = _git("status", "--porcelain", "--", *ACTOR_PATH_SOURCES)
+    dirty = None if status is None else bool(status.strip())
+
+    digests = {}
+    for relative in ACTOR_PATH_SOURCES:
+        # LF-normalized: this worktree runs core.autocrlf=true, so raw bytes
+        # would fingerprint differently on a fresh clone.
+        digests[relative] = hashlib.sha256(
+            (root / relative).read_bytes().replace(b"\r\n", b"\n")
+        ).hexdigest()
+
+    fingerprint = hashlib.sha256()
+    for relative in ACTOR_PATH_SOURCES:
+        fingerprint.update(relative.encode("utf-8"))
+        fingerprint.update(digests[relative].encode("utf-8"))
+
+    return {
+        "source_commit": commit,
+        "source_tree_dirty": dirty,
+        "commit_authenticates_the_registration": commit != "UNAVAILABLE" and dirty is False,
+        "actor_path_sources": digests,
+        # This, not the commit, is what the execution-time gate compares.
+        "actor_path_fingerprint": fingerprint.hexdigest(),
+    }
 
 
 def _gelu(x: float) -> float:
@@ -152,6 +269,14 @@ def payload_vectors(high_hidden_dim: int) -> tuple[np.ndarray, np.ndarray, np.nd
     return tuple(vectors)  # type: ignore[return-value]
 
 
+def _scope_record(scope: Mapping[str, Any]) -> dict[str, Any]:
+    """Plain JSON-shaped view of the scope, for digesting and reporting."""
+    return {
+        key: (list(value) if isinstance(value, (tuple, list)) else value)
+        for key, value in sorted(scope.items())
+    }
+
+
 @dataclass(frozen=True)
 class Registration:
     """Pro's §7 freeze list, complete, with one digest over all of it."""
@@ -170,6 +295,12 @@ class Registration:
     delta_cell: float
     analytic_logit_separation: float
     weight_witness: Mapping[str, Any]
+    #: Pro §3/§6G: the digest-bearing object-graph scope.  Frozen here so the
+    #: emitted outcome cannot quietly widen the claim to the environment.
+    object_graph_scope: Mapping[str, Any]
+    #: Pro §6C: the approved source identity, carried by the registration itself
+    #: rather than pinned only in the dispatch message.
+    source_identity: Mapping[str, Any]
     development_only: bool = False
 
     def __post_init__(self) -> None:
@@ -185,6 +316,18 @@ class Registration:
             raise ValueError("binding and manifest name different targets")
 
     def registration_digest(self) -> str:
+        """The frozen identity of the registration.
+
+        ``source_identity`` enters through its **fingerprint only**, never
+        through the commit hash or the dirty flag.  Those two move whenever
+        HEAD moves for any unrelated reason, and Pro's §6C asks for two
+        separate gates: the current registration digest must equal the
+        precommitted expected digest (so it has to be stable), *and* the
+        execution source identity must equal the approved one (which the
+        content-addressed fingerprint answers exactly).  Folding a commit hash
+        into the digest would make the first gate fail on every later commit
+        and would say nothing the fingerprint does not already say.
+        """
         hasher = hashlib.sha256()
         hasher.update(RAW_OUTPUT_BINDING.encode("utf-8"))
         hasher.update(
@@ -199,6 +342,10 @@ class Registration:
                     "delta_cell": self.delta_cell,
                     "analytic_logit_separation": self.analytic_logit_separation,
                     "weight_witness": dict(self.weight_witness),
+                    "object_graph_scope": _scope_record(self.object_graph_scope),
+                    "actor_path_fingerprint": str(
+                        self.source_identity["actor_path_fingerprint"]
+                    ),
                     "development_only": self.development_only,
                 }
             ).encode("utf-8")
@@ -229,8 +376,26 @@ class Registration:
             "normalization_profile": self.normalization_profile,
             "canonical_provenance_branch": self.canonical_provenance_branch,
             "delta_cell": self.delta_cell,
+            "delta_cell_status": (
+                "a prospectively registered minimum effect size (materiality "
+                "threshold), NOT a numerical-error tolerance: direct kernels are "
+                "compared as exact float32 outputs and replay is their exact "
+                "float64 widening, so numerical reproduction is handled "
+                "separately"
+            ),
             "analytic_logit_separation": self.analytic_logit_separation,
+            "analytic_witness_status": (
+                "proves logit-level functional dependence only. It does NOT "
+                "imply ||K_1 - K_0||_inf > delta_cell: if the unchanged third "
+                "logit dominates both focal logits, both probability vectors "
+                "can concentrate arbitrarily closely on action 2 while "
+                "logit_0 - logit_1 still moves by "
+                f"{self.analytic_logit_separation:.6f}. No probability-space "
+                "lower bound is registered."
+            ),
             "weight_witness": dict(self.weight_witness),
+            "object_graph_scope": _scope_record(self.object_graph_scope),
+            "source_identity": dict(self.source_identity),
         }
 
 
@@ -396,6 +561,8 @@ def build_registration(
         weight_witness=_weight_witness(
             core.commitment_model, high_hidden_dim=high_hidden_dim
         ),
+        object_graph_scope=OBJECT_GRAPH_SCOPE,
+        source_identity=actor_path_source_identity(),
         development_only=bool(development_only),
     )
 
