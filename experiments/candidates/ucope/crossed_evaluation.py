@@ -129,6 +129,90 @@ DEFAULT_LEDGER_BASE = 0
 CLEAN_LEDGER_BASE = 900_000
 
 
+# ---------------------------------------------------------------------------
+# The regime-marginal count distribution, for Pro's support-preserving severance
+# ---------------------------------------------------------------------------
+
+#: Readout label for the support-preserving severed arm.  It is deliberately NOT
+#: one of ``pt.ARMS``: no policy is trained on it.  It is the informed checkpoint
+#: evaluated with its positive-count channel replaced by a regime-independent
+#: draw, while the completed-epoch channel and the clock stay real.
+SUPPORT_PRESERVING_SEVERED = "COUNT_SUPPORT_PRESERVING_SEVERED"
+
+
+def count_marginal(completed: int) -> dict[int, Fraction]:
+    """``P(positive count = k | completed epochs)`` under the PRIOR over regime.
+
+    External Pro's support-preserving severance replaces the positive count with
+    a draw from *this* distribution -- the prior-predictive marginal of the count
+    given the number of completed epochs, taken independently of the actual
+    regime.  Each completed epoch emits one bit that is positive with probability
+    ``EVIDENCE_POSITIVE[regime]``, so the count given the regime is Binomial;
+    marginalising over the regime with its prior gives a two-component mixture.
+    Exact (``Fraction``): a float here would defeat the exactly-weighted crossed
+    estimator it feeds.
+    """
+    from math import comb
+
+    weights: dict[int, Fraction] = {}
+    for k in range(completed + 1):
+        probability = Fraction(0)
+        for regime in cc.REGIMES:
+            prior = cc.PRIOR_S if regime == cc.S else 1 - cc.PRIOR_S
+            positive = cc.EVIDENCE_POSITIVE[regime]
+            probability += (
+                prior
+                * comb(completed, k)
+                * positive**k
+                * (1 - positive) ** (completed - k)
+            )
+        weights[k] = probability
+    if sum(weights.values()) != Fraction(1):
+        raise RuntimeError(
+            f"count marginal at completed={completed} must sum to exactly 1, "
+            f"got {sum(weights.values())}"
+        )
+    return weights
+
+
+#: Reachable decision count-states are ``completed in {0, ..., PERIODS-1}``.  The
+#: first (``completed = 0``) is degenerate -- zero epochs, zero positives -- so
+#: only ``1..PERIODS-1`` carry a non-trivial marginal.
+COUNT_MARGINALS = {
+    completed: count_marginal(completed) for completed in range(cc.PERIODS)
+}
+
+
+def _epoch_count_assignments() -> tuple[tuple[dict[int, int], Fraction], ...]:
+    """Every independent per-epoch count assignment with its exact joint weight.
+
+    ``completed = 0`` is forced to ``0``; each later completed epoch draws its
+    count independently from its own marginal.  Independence (rather than the
+    real monotone/nested coupling of the true count) is deliberate: the
+    cross-epoch correlation of the true count is itself regime-informative, so
+    destroying it is part of severing the regime signal, while every individual
+    count the policy is shown remains a valid count for its epoch.
+    """
+    from itertools import product
+
+    later = [sorted(COUNT_MARGINALS[c].items()) for c in range(1, cc.PERIODS)]
+    assignments: list[tuple[dict[int, int], Fraction]] = []
+    for combination in product(*later):
+        counts = {0: 0}
+        weight = Fraction(1)
+        for completed, (k, probability) in enumerate(combination, start=1):
+            counts[completed] = k
+            weight *= probability
+        assignments.append((counts, weight))
+    return tuple(assignments)
+
+
+#: Precomputed once: the finite set of count assignments the exact severance
+#: expectation sums over.  For ``PERIODS = 3`` this is the 2x3 = 6 independent
+#: (completed=1, completed=2) count pairs.
+SEVERANCE_COUNT_ASSIGNMENTS = _epoch_count_assignments()
+
+
 def evaluation_ledger(
     ledger_id: int, *, ledger_seed: int, ledger_base: int = DEFAULT_LEDGER_BASE
 ) -> roster_env.CapacityRosterLedger:
@@ -362,6 +446,137 @@ def within_checkpoint_severance(
         else float("inf")
     )
     return {
+        "informed_crossed_mean": informed.mean,
+        "severed_crossed_mean": severed.mean,
+        "paired_difference_mean": mean,
+        "paired_difference_standard_error": error,
+        "t": (mean / error) if error not in (0.0, float("inf")) else float("nan"),
+        "per_ledger_difference": tuple(differences),
+    }
+
+
+def _severed_episode_total(
+    policy: pt.EffortPolicy,
+    ledger: roster_env.CapacityRosterLedger,
+    *,
+    regime: str,
+    bits: tuple[int, ...],
+    epoch_counts: dict[int, int],
+) -> float:
+    """One deterministic episode with the positive-count INPUT overridden.
+
+    The completed-epoch channel and every other input stay exactly what the
+    environment produces; only channel 0 (the positive count) is replaced, by
+    ``epoch_counts[completed]``, so the clock and roster remain consistent while
+    the regime signal carried by the count is removed.  The feature is built by
+    reusing ``pt.policy_features`` and overwriting one slot, so it cannot drift
+    from the informed feature construction and is byte-identical to the informed
+    feature when the override equals the real count.
+    """
+    env = sibling.UcopeRegimeRosterEnv(ledger, regime=regime, evidence_bits=bits)
+    terminated = False
+    while not terminated:
+        view = env.observe()
+        features = pt.policy_features(view, arm=pt.INFORMED).copy()
+        features[0] = np.float32(
+            epoch_counts[int(view.completed_epochs)] / sibling.PERIODS
+        )
+        with torch.no_grad():
+            mean, _log_std, _value = policy(torch.from_numpy(features).unsqueeze(0))
+        effort = pt._effort_from_action(mean[0])
+        _reward, terminated, _ = env.step(sibling.uniform_effort_actions(view, effort))
+    return env.episode_total()
+
+
+def support_preserving_severed_value(
+    policy: pt.EffortPolicy,
+    ledger: roster_env.CapacityRosterLedger,
+    *,
+    regime: str,
+    bits: tuple[int, ...],
+) -> float:
+    """Exact expectation of the return over the regime-marginal count draws.
+
+    The episode dynamics and reward use the ACTUAL ``regime`` and ``bits``; only
+    the count the policy reads is drawn from the regime-independent marginal, one
+    independent draw per completed epoch.  Pro's "exactly average over those
+    replacement counts" is a finite weighted sum over
+    ``SEVERANCE_COUNT_ASSIGNMENTS``, not a sample.
+    """
+    return float(
+        sum(
+            float(weight)
+            * _severed_episode_total(
+                policy, ledger, regime=regime, bits=bits, epoch_counts=counts
+            )
+            for counts, weight in SEVERANCE_COUNT_ASSIGNMENTS
+        )
+    )
+
+
+def support_preserving_severance(
+    policy: pt.EffortPolicy,
+    *,
+    ledgers: Sequence[roster_env.CapacityRosterLedger],
+    informed: CrossedReadout | None = None,
+) -> dict[str, object]:
+    """Pro's support-preserving severance: informed minus regime-marginal count.
+
+    This is the ablation ``within_checkpoint_severance`` above could not be.  Its
+    predecessor zeroed the completed-epoch channel too, so at epochs 1 and 2 it
+    asked the informed checkpoint about ``completed = 0`` while the clock said
+    otherwise -- off the training manifold, mixing evidence dependence with
+    out-of-distribution behaviour.  Here the completed-epoch channel is retained
+    and only the positive count is replaced, by an independent draw from its
+    prior-predictive marginal ``count_marginal`` conditional on the completed
+    epoch and independent of the regime, averaged exactly over those draws and
+    over the crossed support.  What remains is regime information destroyed with
+    valid count inputs and a consistent clock, so the paired drop is a cleaner
+    causal quantity than the off-manifold magnitude -- its reading is still
+    External Pro's.
+    """
+    informed = (
+        informed
+        if informed is not None
+        else crossed_readout(policy, arm=pt.INFORMED, ledgers=ledgers)
+    )
+    severed = CrossedReadout(
+        arm=SUPPORT_PRESERVING_SEVERED,
+        per_ledger=tuple(
+            float(
+                sum(
+                    float(weight)
+                    * support_preserving_severed_value(
+                        policy, ledger, regime=regime, bits=bits
+                    )
+                    for regime, bits, weight in CROSSED_SUPPORT
+                )
+            )
+            for ledger in ledgers
+        ),
+    )
+    differences = [a - b for a, b in zip(informed.per_ledger, severed.per_ledger)]
+    mean = statistics.fmean(differences) if differences else 0.0
+    error = (
+        statistics.stdev(differences) / len(differences) ** 0.5
+        if len(differences) > 1
+        else float("inf")
+    )
+    return {
+        "construction": (
+            "informed checkpoint minus itself with the positive-count channel "
+            "replaced by an independent draw from its prior-predictive marginal "
+            "conditional on the completed epoch and independent of the regime; "
+            "the completed-epoch channel and clock are retained; averaged exactly "
+            "over the crossed support and over the per-epoch replacement counts"
+        ),
+        "count_marginal": {
+            str(completed): {
+                str(k): [probability.numerator, probability.denominator]
+                for k, probability in marginal.items()
+            }
+            for completed, marginal in COUNT_MARGINALS.items()
+        },
         "informed_crossed_mean": informed.mean,
         "severed_crossed_mean": severed.mean,
         "paired_difference_mean": mean,
@@ -640,6 +855,14 @@ def run_registered_experiment(
         "within_checkpoint_severance": within_checkpoint_severance(
             runs[pt.INFORMED].policy, ledgers=ledgers
         ),
+        # Pro's prescribed remedy for the off-manifold predecessor above: retain
+        # the completed-epoch channel, replace the positive count with a draw
+        # from its regime-independent prior-predictive marginal, average exactly.
+        # It reuses the already-computed informed readout, so it adds no RNG draw
+        # and leaves the trained arms and their contrast byte-identical.
+        "support_preserving_severance": support_preserving_severance(
+            runs[pt.INFORMED].policy, ledgers=ledgers, informed=readouts[pt.INFORMED]
+        ),
         "training_side_severed_arm": {
             "status": (
                 "Determinism checksum only. BLIND and SEVERED receive identical "
@@ -684,6 +907,7 @@ def run_registered_experiment(
             report["arms"][arm].pop("crossed_mean", None)
         report.pop("between_arm_contrast", None)
         report.pop("within_checkpoint_severance", None)
+        report.pop("support_preserving_severance", None)
     else:
         report["terminal"] = "UCOPE_MEASUREMENT_ADMISSIBLE"
     return report

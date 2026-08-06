@@ -368,14 +368,48 @@ def held_out_replication() -> Registration:
     it is registered at the reproducible, machine-independent thread count from
     the start.  That also lets it run across a process pool without
     oversubscription while staying byte-identical to its own sequential run.  The
-    within-run contrast (informed minus blind) is thread-robust, so comparing
-    this design's contrast to the ambient-thread v2 record is sound; only the
-    absolute per-arm values would carry the thread difference.
+    contrast is internally matched -- both arms share this design's thread setting
+    -- but External Pro (held-out round, 2026-08-06) corrected the stronger claim
+    this docstring once made: it is NOT proven thread-INVARIANT, because the two
+    arms follow different optimization trajectories that a float reduction-order
+    change can interact with differently.  So this design's contrast estimates the
+    count-enabled-minus-count-disabled protocol contrast under ``threads=1``, and
+    the absolute v2->v3 shift stays confounded between held-outness and the thread
+    change and must not be attributed to either.
     """
     from experiments.candidates.ucope import cross_seed as cs
 
     return build_registration(
         design_identifier="ucope_cross_seed_v3_held_out",
+        seeds=cs.REPLICATION_SEEDS,
+        ledger_seed=20_260_808,
+        ledger_base=ce.CLEAN_LEDGER_BASE,
+        threads=1,
+    )
+
+
+def held_out_severance_replication() -> Registration:
+    """The held-out design, read for Pro's support-preserving severance.
+
+    Identical training and evaluation configuration to ``held_out_replication``
+    -- same eight seeds, same held-out ``ledger_base``, same ``threads=1`` -- so
+    it reproduces the v3 held-out contrast byte-for-byte.  Two separate reasons
+    its digest is distinct, and the docstring must not conflate them: at THIS
+    commit it differs from ``held_out_replication``'s digest by the
+    ``design_identifier`` alone -- the two share an identical source fingerprint;
+    and both differ from the HISTORICAL v3 artifact's approved digest
+    (``06ab5a7d…``), because the crossed-evaluation source now also computes
+    ``support_preserving_severance`` (retain the completed-epoch channel, replace
+    the positive count with a draw from its regime-independent prior-predictive
+    marginal, average exactly over the crossed support), which moved the content
+    fingerprint.  The severance itself adds no RNG draw, so the trained arms and
+    their contrast are unchanged; the v4 artifact's contrast equalling v3's is the
+    check that the addition perturbed nothing.
+    """
+    from experiments.candidates.ucope import cross_seed as cs
+
+    return build_registration(
+        design_identifier="ucope_cross_seed_v4_held_out_severance",
         seeds=cs.REPLICATION_SEEDS,
         ledger_seed=20_260_808,
         ledger_base=ce.CLEAN_LEDGER_BASE,

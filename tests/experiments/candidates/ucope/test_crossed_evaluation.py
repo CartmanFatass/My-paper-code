@@ -126,6 +126,94 @@ def test_a_count_blind_policy_cannot_separate_the_arms():
     assert all(value == 0.0 for value in result["per_ledger_difference"])
 
 
+def test_count_marginal_is_the_exact_regime_mixture():
+    """``p(K | c)`` is the prior-weighted mixture of the two regime Binomials.
+
+    Support-preserving severance replaces the positive count with a draw from
+    this distribution; a float or a wrong prior here would silently change the
+    quantity Pro specified.  The values are pinned exactly.
+    """
+    assert ce.COUNT_MARGINALS[0] == {0: Fraction(1)}
+    assert ce.COUNT_MARGINALS[1] == {0: Fraction(1, 2), 1: Fraction(1, 2)}
+    assert ce.COUNT_MARGINALS[2] == {
+        0: Fraction(5, 16),
+        1: Fraction(3, 8),
+        2: Fraction(5, 16),
+    }
+    # And it really is the prior-weighted mixture of the two regime Binomials,
+    # not just three memorised constants.
+    from math import comb
+
+    for completed, marginal in ce.COUNT_MARGINALS.items():
+        for k, probability in marginal.items():
+            expected = sum(
+                (cc.PRIOR_S if regime == cc.S else 1 - cc.PRIOR_S)
+                * comb(completed, k)
+                * cc.EVIDENCE_POSITIVE[regime] ** k
+                * (1 - cc.EVIDENCE_POSITIVE[regime]) ** (completed - k)
+                for regime in cc.REGIMES
+            )
+            assert probability == expected
+        assert sum(marginal.values()) == Fraction(1)
+        assert all(isinstance(p, Fraction) for p in marginal.values())
+
+
+def test_severance_count_assignments_are_independent_per_epoch_and_exhaustive():
+    """The exact expectation sums over independent per-epoch marginal draws.
+
+    ``completed = 0`` is forced to 0; the later epochs draw independently, so the
+    joint weight must be the product of the per-epoch marginals and the set must
+    be their full Cartesian product.  Independence (not the real monotone count)
+    is what removes the regime-informative cross-epoch correlation.
+    """
+    assignments = ce.SEVERANCE_COUNT_ASSIGNMENTS
+    assert all(counts[0] == 0 for counts, _weight in assignments)
+    assert len(assignments) == len(ce.COUNT_MARGINALS[1]) * len(ce.COUNT_MARGINALS[2])
+    assert sum(weight for _counts, weight in assignments) == Fraction(1)
+    for counts, weight in assignments:
+        assert weight == ce.COUNT_MARGINALS[1][counts[1]] * ce.COUNT_MARGINALS[2][counts[2]]
+
+
+def test_a_constant_policy_has_zero_support_preserving_severance():
+    """A policy that ignores its inputs cannot be moved by severing the count.
+
+    The mirror of ``test_a_count_blind_policy_cannot_separate_the_arms`` for the
+    new estimator: if a count-independent policy produced a nonzero difference,
+    the difference would be an artefact of the construction, not evidence.
+    """
+    ledgers = [_ledger(index) for index in range(4)]
+    result = ce.support_preserving_severance(
+        ConstantEffortPolicy(0.3), ledgers=ledgers
+    )
+    assert result["paired_difference_mean"] == 0.0
+    assert all(value == 0.0 for value in result["per_ledger_difference"])
+
+
+def test_support_preserving_severance_reproduces_informed_when_counts_are_real():
+    """Feeding the ACTUAL per-epoch counts must reproduce the informed episode.
+
+    The severed episode overrides only channel 0, and the real count at
+    ``completed = c`` is ``(0, b0, b0 + b1)`` for the three epochs.  Overriding
+    with exactly those values must give byte-identical returns to the informed
+    arm; if it does not, the override touched another channel or the count
+    semantics are wrong.  Run with a count-SENSITIVE policy so the equality is a
+    real constraint, not a triviality of a constant policy.
+    """
+    torch.manual_seed(7)
+    policy = pt.EffortPolicy()
+    ledger = _ledger()
+    for regime, bits, _weight in ce.CROSSED_SUPPORT:
+        b0, b1, _b2 = bits
+        real_counts = {0: 0, 1: b0, 2: b0 + b1}
+        severed = ce._severed_episode_total(
+            policy, ledger, regime=regime, bits=bits, epoch_counts=real_counts
+        )
+        informed = ce.cell_total(
+            policy, ledger, arm=pt.INFORMED, regime=regime, bits=bits
+        )
+        assert severed == informed, (regime, bits)
+
+
 def test_effort_readout_covers_exactly_the_reachable_count_states():
     """(positive, completed) with positive <= completed < PERIODS."""
     table = ce.effort_readout(ConstantEffortPolicy(0.25))

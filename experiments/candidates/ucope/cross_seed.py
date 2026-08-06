@@ -173,6 +173,7 @@ class SeedResult:
     contrast: float
     within_run_contrast_standard_error: float
     severance: float
+    support_preserving_severance: float
     informed_regret: float
     blind_regret: float
     severed_is_bit_identical_to_blind: bool
@@ -232,6 +233,7 @@ def _summarize_seed(seed: int, report: dict[str, object]) -> SeedResult:
     admissible = report["terminal"] == "UCOPE_MEASUREMENT_ADMISSIBLE"
     contrast = report.get("between_arm_contrast", {})
     severance = report.get("within_checkpoint_severance", {})
+    support_preserving = report.get("support_preserving_severance", {})
     return SeedResult(
         seed=seed,
         terminal=str(report["terminal"]),
@@ -243,6 +245,9 @@ def _summarize_seed(seed: int, report: dict[str, object]) -> SeedResult:
             contrast.get("standard_error", math.nan)
         ),
         severance=float(severance.get("paired_difference_mean", math.nan)),
+        support_preserving_severance=float(
+            support_preserving.get("paired_difference_mean", math.nan)
+        ),
         informed_regret=float(arms[pt.INFORMED]["optimization_regret"]),
         blind_regret=float(arms[pt.BLIND]["optimization_regret"]),
         severed_is_bit_identical_to_blind=bool(
@@ -492,6 +497,9 @@ def run_replication(
     summary["within_checkpoint_severance_across_seeds"] = across_seed_summary(
         [row.severance for row in admissible]
     )
+    summary["support_preserving_severance_across_seeds"] = across_seed_summary(
+        [row.support_preserving_severance for row in admissible]
+    )
     summary["informed_regret_across_seeds"] = across_seed_summary(
         [row.informed_regret for row in admissible]
     )
@@ -551,6 +559,20 @@ def run_replication(
         "from its prior-predictive marginal conditional on completed epoch "
         "independently of the actual regime, and average exactly over those "
         "replacements on the crossed support."
+    )
+    # The remedy above, now implemented and measured alongside it. Its magnitude
+    # is on-manifold and clock-consistent, but its READING -- whether it is the
+    # clean information-value estimate the off-manifold one could not be -- is
+    # still External Pro's, and the construction is stated for that round.
+    summary["support_preserving_severance_status"] = (
+        "The informed checkpoint minus itself with ONLY the positive-count "
+        "channel replaced by an independent draw from its prior-predictive "
+        "marginal p(count | completed epoch), regime-independent, with the "
+        "completed-epoch channel and clock retained, averaged exactly over the "
+        "crossed support AND over the per-epoch replacement counts (no sampling). "
+        "Every count the policy is shown is a valid count for its epoch and the "
+        "clock is consistent, so unlike within_checkpoint_severance this is not "
+        "off-manifold. Reading reserved to External Pro."
     )
 
     if len(admissible) != len(results):
@@ -615,6 +637,12 @@ if __name__ == "__main__":  # pragma: no cover
     parser.add_argument("--held-out", action="store_true",
                         help="use the ledger base that clears the training ids")
     parser.add_argument(
+        "--severance", action="store_true",
+        help="the held-out design plus Pro's support-preserving severance (v4). "
+        "Reproduces the held-out contrast byte-for-byte and adds the on-manifold "
+        "severance readout; distinct digest only because the source graph moved.",
+    )
+    parser.add_argument(
         "--workers", type=int, default=None,
         help="process-pool width for the independent per-seed runs. Pure "
         "dispatch: it does NOT enter the registration digest, because it cannot "
@@ -634,13 +662,22 @@ if __name__ == "__main__":  # pragma: no cover
     arguments = parser.parse_args()
 
     if arguments.list_designs:
-        for candidate in (reg.archived_replication(), reg.held_out_replication()):
+        for candidate in (
+            reg.archived_replication(),
+            reg.held_out_replication(),
+            reg.held_out_severance_replication(),
+        ):
             print(json.dumps(candidate.frozen_record(), indent=2, default=str))
         raise SystemExit(0)
     if not arguments.approved_digest:
         parser.error("--approved-digest is required (see --list-designs)")
 
-    design = reg.held_out_replication() if arguments.held_out else reg.archived_replication()
+    if arguments.severance:
+        design = reg.held_out_severance_replication()
+    elif arguments.held_out:
+        design = reg.held_out_replication()
+    else:
+        design = reg.archived_replication()
     print(json.dumps(
         run_replication(
             **design.run_arguments(),

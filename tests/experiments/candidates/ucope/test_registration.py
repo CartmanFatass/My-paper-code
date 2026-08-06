@@ -87,7 +87,9 @@ def test_the_approved_digest_admits_exactly_the_design_it_names(monkeypatch):
 
 
 @pytest.mark.parametrize(
-    "design", ("archived_replication", "held_out_replication"), ids=str
+    "design",
+    ("archived_replication", "held_out_replication", "held_out_severance_replication"),
+    ids=str,
 )
 def test_the_digest_printed_for_approval_is_the_digest_the_run_recomputes(
     monkeypatch, design
@@ -226,6 +228,27 @@ def test_thread_count_is_registered_but_dispatch_width_is_not():
     # The two registrable designs carry the thread counts their docstrings claim.
     assert reg.archived_replication().threads is None
     assert reg.held_out_replication().threads == 1
+
+
+def test_the_severance_design_is_the_held_out_config_under_a_new_identity():
+    """v4 must reproduce the held-out contrast, so it must share v3's whole config.
+
+    The support-preserving severance is a measurement added to the crossed
+    report; the trained arms are untouched.  So the v4 design must differ from v3
+    in nothing but its ``design_identifier`` -- same seeds, ledger seed, held-out
+    ledger base and ``threads=1`` -- while still carrying a distinct digest,
+    because the crossed-evaluation source that computes the severance moved the
+    content fingerprint.  If the two configs ever diverged, "v4 reproduces v3's
+    contrast" would stop being true.
+    """
+    v3 = reg.held_out_replication()
+    v4 = reg.held_out_severance_replication()
+    assert v4.threads == 1
+    assert v4.run_arguments()["ledger_base"] == ce.CLEAN_LEDGER_BASE
+    without_id = lambda args: {k: v for k, v in args.items() if k != "design_identifier"}
+    assert without_id(v4.run_arguments()) == without_id(v3.run_arguments())
+    assert v4.design_identifier != v3.design_identifier
+    assert v4.registration_digest() != v3.registration_digest()
 
 
 def test_the_digest_does_not_move_with_the_commit_or_the_dirty_flag():
