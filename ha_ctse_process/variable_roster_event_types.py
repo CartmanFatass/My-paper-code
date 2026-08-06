@@ -224,6 +224,20 @@ class EventTokenRow:
     old_token_log_probability: float
     old_owner_value: float
     action_kind: str
+    # --- FOLR S03 direct-kernel witness (optional; None unless a capture sink
+    # is installed on the core).  External Pro ruling FOLR_S03_BINDING_SELECTED
+    # requires that the immutable row carry the complete directly produced
+    # kernel, because `old_token_log_probability` records only the selected
+    # action's log probability and cannot witness the full readout.  Captured
+    # after masked_logits and softmax but BEFORE action selection, before
+    # action-RNG consumption and before opportunity-gap sampling.  Defaults keep
+    # every existing construction and equality comparison unchanged.
+    direct_masked_logits: np.ndarray | None = None
+    direct_probabilities: np.ndarray | None = None
+    actor_preimage_digest: str | None = None
+    model_state_digest: str | None = None
+    common_snapshot_digest: str | None = None
+    intervention_manifest_digest: str | None = None
 
 
 @dataclass

@@ -218,6 +218,11 @@ class VariableRosterEventCore:
             self.low_critic = shared_models_from.low_critic
 
         self.records: dict[str, LifecycleRecord] = {}
+        # FOLR S03 direct-kernel capture sink.  None by default, and while it is
+        # None `_process_frontier` behaves exactly as before: no extra tensor is
+        # materialized and no RNG is touched.  Installed only by the FOLR
+        # experiment harness via `install_kernel_capture`.
+        self._kernel_capture: Any | None = None
         self.high_ledger: list[EventTokenRow] = []
         self.closed_event_rows: list[ClosedEventRow] = []
         self.low_ledger: list[LowTransitionRow] = []
@@ -663,6 +668,16 @@ class VariableRosterEventCore:
             self.records[key].is_rejoin = False
         return result
 
+    def install_kernel_capture(self, sink: Any | None) -> None:
+        """Install or clear the FOLR S03 direct-kernel capture sink.
+
+        ``sink`` must expose ``capture(**kwargs)`` returning either ``None`` or
+        an object with ``row_fields() -> dict``.  Passing ``None`` restores the
+        unmodified execution path exactly.  Nothing in this module interprets
+        the sink; the experiment owns its semantics.
+        """
+        self._kernel_capture = sink
+
     def _process_frontier(
         self,
         snapshot: BoundarySnapshot,
@@ -745,6 +760,38 @@ class VariableRosterEventCore:
             legal_mask = torch.ones(self.n_skills, dtype=torch.bool, device=self.device)
             masked_logits = logits.masked_fill(~legal_mask, -torch.inf)
             log_probabilities = F.log_softmax(masked_logits, dim=-1)
+            # FOLR S03 direct-kernel capture.  External Pro fixed this exact
+            # point: after masked_logits is constructed, after softmax, before
+            # action selection, before action-RNG consumption and before
+            # opportunity-gap sampling.  Computing a softmax consumes no RNG, so
+            # an installed sink cannot perturb determinism; with no sink
+            # installed nothing here executes at all.
+            direct_kernel = None
+            if self._kernel_capture is not None:
+                direct_kernel = self._kernel_capture.capture(
+                    owner_lifecycle_key=key,
+                    membership_epoch=int(record.membership_epoch),
+                    token_position=position,
+                    masked_logits=masked_logits,
+                    probabilities=torch.softmax(masked_logits, dim=-1),
+                    # The complete actor-read preimage other than S03, so the
+                    # sink can digest it candidate-side.  Everything here is
+                    # already determined before the kernel is produced.
+                    preimage={
+                        "observations": observations,
+                        "event_flags": flags,
+                        "initial_skills": initial_skills,
+                        "initial_ages": initial_ages,
+                        "pre_token_working_skills": pre_skills,
+                        "pre_token_working_ages": pre_ages,
+                        "pre_token_high_hidden": pre_hidden,
+                        "legal_mask": legal_mask,
+                        "sampled_order": sampled_order,
+                        "active_lifecycle_keys": routing.lifecycle_keys,
+                        "active_membership_epochs": routing.membership_epochs,
+                        "architecture_mode": self.architecture_mode,
+                    },
+                )
             policy_action_uniform: float | None = None
             if teacher_actions is not None:
                 if key not in teacher_actions:
@@ -838,6 +885,7 @@ class VariableRosterEventCore:
                 old_token_log_probability=old_logp,
                 old_owner_value=old_value,
                 action_kind=action_kind,
+                **({} if direct_kernel is None else direct_kernel.row_fields()),
             )
             self.high_ledger.append(token_row)
             token_rows.append(token_row)
