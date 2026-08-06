@@ -192,6 +192,12 @@ class Registration:
     support_digest: str
     disjointness: Mapping[str, Any]
     source_identity: Mapping[str, Any]
+    #: torch intra-op thread count the run pins. It enters the digest because it
+    #: changes the update-matmul reduction order and therefore the trained
+    #: weights; ``None`` means "whatever the machine's torch default is", which
+    #: is not reproducible across core counts and is kept only for designs that
+    #: document an already-executed ambient-thread run.
+    threads: int | None = None
 
     def __post_init__(self) -> None:
         if len(set(self.seeds)) != len(self.seeds):
@@ -215,6 +221,9 @@ class Registration:
                     "evaluation_ledgers": self.evaluation_ledgers,
                     "ledger_seed": self.ledger_seed,
                     "ledger_base": self.ledger_base,
+                    # Thread count changes the trained weights, so a 1-thread
+                    # design and an ambient-thread design must never collide.
+                    "threads": self.threads,
                     "switch_point": self.switch_point,
                     "certified_informed_optimum": self.certified_informed_optimum,
                     "certified_blind_optimum": self.certified_blind_optimum,
@@ -252,6 +261,7 @@ class Registration:
             "evaluation_ledgers": self.evaluation_ledgers,
             "ledger_seed": self.ledger_seed,
             "ledger_base": self.ledger_base,
+            "threads": self.threads,
             **dict(self.training),
         }
 
@@ -278,6 +288,7 @@ def build_registration(
     ledger_base: int,
     evaluation_ledgers: int = 64,
     training: Mapping[str, int] | None = None,
+    threads: int | None = None,
 ) -> Registration:
     """Construct a frozen registration. Trains nothing and measures nothing.
 
@@ -285,6 +296,11 @@ def build_registration(
     registered fields.  ``run_arm`` accepts arbitrary extras through
     ``**training_kwargs``, so narrowing here would let an override change what
     trains without moving the digest.
+
+    ``threads`` is the pinned torch intra-op thread count. It is a science-
+    affecting field (it moves the trained weights), so it enters the digest;
+    ``max_workers`` -- the parallel dispatch width -- deliberately does not,
+    because dispatch order cannot change a deterministic per-seed result.
     """
     budget = dict(ce.REGISTERED_TRAINING if training is None else training)
     return Registration(
@@ -294,6 +310,7 @@ def build_registration(
         evaluation_ledgers=int(evaluation_ledgers),
         ledger_seed=int(ledger_seed),
         ledger_base=int(ledger_base),
+        threads=None if threads is None else int(threads),
         switch_point=float(_switch_point()),
         certified_informed_optimum=float(pt.INFORMED_OPTIMUM),
         certified_blind_optimum=float(pt.BLIND_OPTIMUM),
@@ -323,6 +340,11 @@ def archived_replication() -> Registration:
     Kept so the archived run stays reproducible and so its digest exists as a
     thing that can be named.  Its disjointness verdict is False; that is the
     honest record, not something to be fixed retroactively.
+
+    ``threads=None`` documents the original v2 run, which used the machine's
+    ambient torch default (8 on the box it ran on).  It is deliberately NOT
+    pinned to 1 here, because that would silently redefine what "the archived
+    run" reproduces.
     """
     from experiments.candidates.ucope import cross_seed as cs
 
@@ -331,6 +353,7 @@ def archived_replication() -> Registration:
         seeds=cs.REPLICATION_SEEDS,
         ledger_seed=20_260_808,
         ledger_base=ce.DEFAULT_LEDGER_BASE,
+        threads=None,
     )
 
 
@@ -340,6 +363,14 @@ def held_out_replication() -> Registration:
     The remedy External Pro named that is robust to any seed choice: a ledger is
     ``(id, master_seed, profile)``, so disagreeing on the id is enough, and
     shifting the ids clears every seed at once rather than one at a time.
+
+    ``threads=1`` because this design has no prior executed artifact to match, so
+    it is registered at the reproducible, machine-independent thread count from
+    the start.  That also lets it run across a process pool without
+    oversubscription while staying byte-identical to its own sequential run.  The
+    within-run contrast (informed minus blind) is thread-robust, so comparing
+    this design's contrast to the ambient-thread v2 record is sound; only the
+    absolute per-arm values would carry the thread difference.
     """
     from experiments.candidates.ucope import cross_seed as cs
 
@@ -348,6 +379,7 @@ def held_out_replication() -> Registration:
         seeds=cs.REPLICATION_SEEDS,
         ledger_seed=20_260_808,
         ledger_base=ce.CLEAN_LEDGER_BASE,
+        threads=1,
     )
 
 

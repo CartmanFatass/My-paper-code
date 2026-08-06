@@ -8,6 +8,7 @@ replications" are not independent.
 
 from __future__ import annotations
 
+import json
 import math
 
 import pytest
@@ -19,6 +20,51 @@ from experiments.candidates.ucope import paired_training as pt
 
 def _row(played: float, bayes: float) -> dict[str, float]:
     return {"mean_effort": played, "steps": 10, "bayes_optimal_effort": bayes}
+
+
+def _canonical(summary: dict) -> str:
+    """Everything a replication computes, minus the environment-provenance block."""
+    return json.dumps(
+        {key: value for key, value in summary.items() if key != "provenance"},
+        sort_keys=True,
+        default=str,
+    )
+
+
+def test_parallel_dispatch_is_byte_identical_to_the_sequential_run():
+    """The whole claim of the parallel runner: dispatch width changes nothing.
+
+    Each per-seed run is self-contained and deterministic (``torch.manual_seed``
+    plus an owned generator), so spreading the seeds across a process pool cannot
+    change any number -- only wall-clock. The proof is a same-thread-count
+    comparison: sequential and 3-worker runs at ``threads=1`` must produce
+    byte-identical output. If this ever fails, the parallel path is silently a
+    different experiment and its speedup is worthless.
+
+    ``max_workers`` is the ONLY thing that differs between the two calls; both
+    pin ``threads=1``, because thread count (unlike dispatch width) does change
+    the update-matmul reduction and is a registered field.
+    """
+    common = dict(
+        seeds=(31_000, 32_000, 33_000),
+        evaluation_ledgers=3,
+        ledger_seed=20_260_808,
+        ledger_base=ce.CLEAN_LEDGER_BASE,
+        design_identifier="ucope_cross_seed_v3_held_out",
+        iterations=2,
+        episodes_per_iteration=2,
+        evaluation_episodes=2,
+        threads=1,
+    )
+    sequential = cs.run_replication(**common, max_workers=None)
+    parallel = cs.run_replication(**common, max_workers=3)
+
+    assert _canonical(sequential) == _canonical(parallel)
+    # The dispatch width is recorded operationally but is not a registered field.
+    assert sequential["provenance"]["run_arguments"]["max_workers"] is None
+    assert parallel["provenance"]["run_arguments"]["max_workers"] == 3
+    # ...and the thread count that DOES affect the result is recorded on both.
+    assert sequential["provenance"]["run_arguments"]["threads"] == 1
 
 
 def test_the_switching_rule_classification_needs_no_invented_tolerance():

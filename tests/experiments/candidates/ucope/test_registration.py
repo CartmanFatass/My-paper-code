@@ -188,6 +188,8 @@ def test_every_registered_constant_moves_the_digest():
                 "evaluation_episodes": 2,
             }
         ),
+        # Thread count changes the trained weights, so it is a registered field.
+        "threads": dict(threads=1),
     }
     arguments = dict(
         design_identifier="probe",
@@ -199,6 +201,31 @@ def test_every_registered_constant_moves_the_digest():
     for field, override in variants.items():
         moved = reg.build_registration(**{**arguments, **override})
         assert moved.registration_digest() != base.registration_digest(), field
+
+
+def test_thread_count_is_registered_but_dispatch_width_is_not():
+    """The digest must separate what changes numbers from what only changes speed.
+
+    ``threads`` changes the update-matmul reduction and therefore the trained
+    weights, so it is in the digest and in ``run_arguments`` a conforming run
+    must reproduce. ``max_workers`` is pure dispatch width -- it cannot change a
+    self-contained per-seed result -- so it must appear in NEITHER, or an
+    approval granted for one worker count would spuriously reject another.
+    """
+    one = reg.build_registration(
+        design_identifier="probe", seeds=(31_000, 32_000),
+        ledger_seed=20_260_808, ledger_base=ce.DEFAULT_LEDGER_BASE, threads=1,
+    )
+    eight = reg.build_registration(
+        design_identifier="probe", seeds=(31_000, 32_000),
+        ledger_seed=20_260_808, ledger_base=ce.DEFAULT_LEDGER_BASE, threads=8,
+    )
+    assert one.registration_digest() != eight.registration_digest()
+    assert one.run_arguments()["threads"] == 1
+    assert "max_workers" not in one.run_arguments()
+    # The two registrable designs carry the thread counts their docstrings claim.
+    assert reg.archived_replication().threads is None
+    assert reg.held_out_replication().threads == 1
 
 
 def test_the_digest_does_not_move_with_the_commit_or_the_dirty_flag():

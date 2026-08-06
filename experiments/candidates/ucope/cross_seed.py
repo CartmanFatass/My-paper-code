@@ -53,6 +53,7 @@ from __future__ import annotations
 
 import hashlib
 import math
+import concurrent.futures
 import statistics
 import subprocess
 from dataclasses import dataclass
@@ -65,6 +66,30 @@ from experiments.candidates.ucope import registration as reg
 
 
 RAW_OUTPUT_BINDING = "ucope.cross_seed.v1"
+
+
+def _run_one_seed(payload: dict) -> dict:
+    """One seed's whole experiment, as a process-pool task.
+
+    Module-level and picklable so it survives a spawn-start worker on Windows.
+    It pins the torch thread count FIRST -- before any tensor op -- so a pool of
+    workers does not oversubscribe the cores and, more importantly, so each
+    seed's arithmetic is deterministic and machine-independent.  `threads` is
+    part of the registered design precisely because it changes the update-matmul
+    reduction order; `max_workers` never reaches here because dispatch width
+    cannot change a result.  The checkpoint tensors are dropped inside the worker
+    so the report that crosses the process boundary is plain JSON-able data.
+    """
+    import torch
+
+    threads = payload.pop("_threads", None)
+    if threads is not None:
+        torch.set_num_threads(int(threads))
+    from experiments.candidates.ucope import crossed_evaluation as _ce
+
+    report = _ce.run_registered_experiment(**payload)
+    report.pop("checkpoints", None)
+    return report
 
 #: Training seeds for the replication.  Spaced by 1000 because ``run_arm``
 #: consumes ``seed + 1``, ``seed + 2`` and ``seed + 3`` as the torch generator,
@@ -285,6 +310,8 @@ def run_replication(
     ledger_seed: int = 20_260_808,
     ledger_base: int = ce.DEFAULT_LEDGER_BASE,
     design_identifier: str = "ucope_cross_seed_ad_hoc",
+    threads: int | None = None,
+    max_workers: int | None = None,
     expected_registration_digest: str | None = None,
     **training_kwargs,
 ) -> dict[str, object]:
@@ -345,24 +372,57 @@ def run_replication(
         ledger_base=ledger_base,
         evaluation_ledgers=evaluation_ledgers,
         training=training_kwargs,
+        threads=threads,
     )
     gate = reg.require_registration(registration, expected_registration_digest)
 
+    # Thread count is part of the registered design -- it changes the update
+    # matmul's reduction order -- so it is pinned identically on both paths: here
+    # for the in-process run, and inside each pool worker for the parallel run.
+    # `max_workers` is dispatch width only and never enters the digest, because
+    # dispatch order cannot change a self-contained deterministic computation.
+    # That is exactly what makes the parallel path byte-identical to the
+    # sequential one at the same thread count.
+    if threads is not None:
+        import torch
+
+        torch.set_num_threads(int(threads))
+
     results: list[SeedResult] = []
     per_seed_reports: dict[str, object] = {}
-    for seed in seeds:
-        report = ce.run_registered_experiment(
-            evaluation_ledgers=evaluation_ledgers,
-            ledger_seed=ledger_seed,
-            ledger_base=ledger_base,
-            seed=seed,
+
+    def _payload(seed: int) -> dict:
+        return {
+            "evaluation_ledgers": evaluation_ledgers,
+            "ledger_seed": ledger_seed,
+            "ledger_base": ledger_base,
+            "seed": seed,
+            "_threads": threads,
             **training_kwargs,
-        )
-        # The per-seed checkpoint tensors are dropped: eight copies would be
-        # ~4 MB of JSON, and the digest already names the model exactly.
-        report.pop("checkpoints", None)
-        per_seed_reports[str(seed)] = report
-        results.append(_summarize_seed(seed, report))
+        }
+
+    if max_workers and max_workers > 1 and len(seeds) > 1:
+        # `map` preserves seed order, so per_seed_reports and results are built
+        # exactly as the sequential branch builds them.
+        with concurrent.futures.ProcessPoolExecutor(max_workers=max_workers) as pool:
+            reports = list(pool.map(_run_one_seed, [_payload(seed) for seed in seeds]))
+        for seed, report in zip(seeds, reports):
+            per_seed_reports[str(seed)] = report
+            results.append(_summarize_seed(seed, report))
+    else:
+        for seed in seeds:
+            report = ce.run_registered_experiment(
+                evaluation_ledgers=evaluation_ledgers,
+                ledger_seed=ledger_seed,
+                ledger_base=ledger_base,
+                seed=seed,
+                **training_kwargs,
+            )
+            # The per-seed checkpoint tensors are dropped: eight copies would be
+            # ~4 MB of JSON, and the digest already names the model exactly.
+            report.pop("checkpoints", None)
+            per_seed_reports[str(seed)] = report
+            results.append(_summarize_seed(seed, report))
 
     admissible = [row for row in results if row.terminal == "UCOPE_MEASUREMENT_ADMISSIBLE"]
 
@@ -376,6 +436,12 @@ def run_replication(
                 "evaluation_ledgers": evaluation_ledgers,
                 "ledger_seed": ledger_seed,
                 "ledger_base": ledger_base,
+                # `threads` is science-affecting and part of the digest; recorded
+                # here too so the artifact carries the exact thread count it ran
+                # at. `max_workers` is operational-only -- it records the dispatch
+                # width for transparency but is NOT part of the registered design.
+                "threads": threads,
+                "max_workers": max_workers,
                 **training_kwargs,
             }
         ),
@@ -549,6 +615,16 @@ if __name__ == "__main__":  # pragma: no cover
     parser.add_argument("--held-out", action="store_true",
                         help="use the ledger base that clears the training ids")
     parser.add_argument(
+        "--workers", type=int, default=None,
+        help="process-pool width for the independent per-seed runs. Pure "
+        "dispatch: it does NOT enter the registration digest, because it cannot "
+        "change a self-contained per-seed result. Omit for a sequential run. "
+        "When the design pins a thread count (held_out pins threads=1), the run "
+        "is byte-identical across any --workers; the archived design leaves "
+        "threads unpinned, so across a pool it only matches the machine's "
+        "ambient torch default, which is why it is not the parallel design.",
+    )
+    parser.add_argument(
         "--list-designs",
         action="store_true",
         help="print each registrable design and its digest, and exit. The "
@@ -568,6 +644,7 @@ if __name__ == "__main__":  # pragma: no cover
     print(json.dumps(
         run_replication(
             **design.run_arguments(),
+            max_workers=arguments.workers,
             expected_registration_digest=arguments.approved_digest,
         ),
         indent=2,
