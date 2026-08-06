@@ -211,12 +211,16 @@ def _interface_gates(
             f"registered support {registered_mask}",
         ),
         Gate(
-            "shadow_index_resolves_to_the_registered_owner",
+            "shadow_resolves_to_the_registered_owner_and_epoch",
             all(
-                binding.shadow_lifecycle_key in tuple(evidence["active_lifecycle_keys"])
+                binding.shadow_lifecycle_key
+                in tuple(evidence["active_lifecycle_keys"])
+                and int(evidence["shadow_membership_epoch"])
+                == binding.shadow_membership_epoch
                 for evidence in evidences
             ),
-            f"shadow={binding.shadow_lifecycle_key}",
+            f"shadow={binding.shadow_lifecycle_key}"
+            f"@{binding.shadow_membership_epoch}",
         ),
         Gate(
             "intervention_manifest_digest_matches_the_registry",

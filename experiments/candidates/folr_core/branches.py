@@ -317,6 +317,12 @@ def execute_branch(
                 core.pending_membership_transaction is not None
             ),
             "target_membership_epoch": int(row.membership_epoch),
+            # Pro §6C asks that the target AND shadow indexes resolve to the
+            # registered owners *and epochs*; the target's epoch is on the row,
+            # the shadow's is not, so it is read from the record.
+            "shadow_membership_epoch": int(
+                core.records[registration.binding.shadow_lifecycle_key].membership_epoch
+            ),
             "core": core,
         }
     )
