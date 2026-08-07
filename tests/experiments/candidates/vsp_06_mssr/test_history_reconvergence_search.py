@@ -169,9 +169,14 @@ def test_terminal_contract_and_scope(report):
     assert "seed 57057" in scope and "f1" in scope
     assert "15-dim" in scope and "NOT the 3-dim fixture" in scope
     if report["terminal"] == m.TERMINAL_NO_WITNESS:
-        assert "no witness in the registered budget" in scope
+        assert "no witness in the registered control budget" in scope
         assert "unreachab" not in scope
         assert "nullity" not in scope
+        # Pro's directed corrections on 7accc4c8: quotient antecedent, controlled
+        # arms, materiality threshold, and "anti-correlation" retired.
+        assert "SUFFICIENT ANTECEDENT" in scope and "QUOTIENT" in scope
+        assert "CONTROLLED" in scope and "MATERIALITY" in scope
+        assert "anti-correlation" not in scope.lower()
         residual = report["obstruction_residual"]
         counts = residual["counts"]
         assert "target_opportunities" in counts
@@ -194,13 +199,14 @@ def test_base_families_present_and_proof_is_byte_stable(report):
     )
 
 
-def test_anti_correlation_fields_are_measured(report):
-    """The anti-correlation Pro rules on is measured and reported.
+def test_joint_retention_fields_are_measured(report):
+    """The joint-retention observation Pro rules on is measured and reported.
 
     When the FULL Z_not_P (high_hidden included) reconverges, the retained P has
     reconverged too (delta_p == 0); and among opportunities where only
     Z_not_P-minus-high_hidden reconverges, the retained |delta_p| stays below the
-    precommitted DELTA and co-varies with the high_hidden gap.
+    precommitted DELTA and co-occurs with a nonzero high_hidden gap. Per Pro's
+    ruling on 7accc4c8 this is JOINT RETENTION / FORGETTING, not a correlation.
     """
     assert report["terminal"] == m.TERMINAL_NO_WITNESS
     residual = report["obstruction_residual"]
@@ -218,7 +224,11 @@ def test_anti_correlation_fields_are_measured(report):
         assert max_dp_gap > 0.0
     assert "reconverged_minus_hidden_min_high_hidden_l2_gap" in residual
     assert "reconverged_minus_hidden_min_gap_delta_p" in residual
-    assert isinstance(residual["anti_correlation_note"], str)
+    note = residual["joint_retention_note"]
+    assert isinstance(note, str)
+    # Pro retired "anti-correlation": the valid reading is joint retention/forgetting.
+    assert "JOINT RETENTION" in note and "anti-correlation" in note.lower()
+    assert "NOT a correlation" in note
 
 
 def test_witness_replays_or_residual_reports_counts(report):

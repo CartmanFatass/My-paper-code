@@ -15,7 +15,7 @@ behavior law and the production model (seed 57057, mode ``f1``, the 15-dim law -
 NOT the 3-dim fixture).  It licenses no scientific or value claim and wires no
 model head.  A positive EXACT replayable witness would be sufficient; when none
 is found in the registered budget the ONLY terminal it may assert is
-``MSSR_MATCHED_HISTORY_NO_WITNESS_IN_REGISTERED_BUDGET`` -- never structural
+``MSSR_MATCHED_HISTORY_NO_WITNESS_IN_REGISTERED_CONTROL_BUDGET`` -- never structural
 nullity or unreachability.  The residual ``high_hidden`` gap reported on a
 bounded failure is a MEASURED property of the finite search, not a nullity.
 
@@ -47,7 +47,7 @@ Terminal
 --------
 * POSITIVE witness iff some target opportunity has byte-identical full
   ``Z_not_P`` across arms AND ``|P_base - P_perturbed| >= DELTA``.
-* ELSE ``MSSR_MATCHED_HISTORY_NO_WITNESS_IN_REGISTERED_BUDGET`` with a
+* ELSE ``MSSR_MATCHED_HISTORY_NO_WITNESS_IN_REGISTERED_CONTROL_BUDGET`` with a
   machine-visible obstruction residual: among target opportunities where
   ``Z_not_P``-MINUS-``high_hidden`` reconverged (env + every active member's
   skills/ages/flags + the three RNG states all byte-identical) AND
@@ -871,15 +871,20 @@ def _obstruction_residual(result: SearchResult) -> dict[str, object]:
         residual["reconverged_minus_hidden_max_delta_p_high_hidden_l2_gap"] = 0.0
         residual["reconverged_minus_hidden_min_high_hidden_l2_gap"] = None
         residual["reconverged_minus_hidden_min_gap_delta_p"] = None
-    residual["anti_correlation_note"] = (
-        "MEASURED over ALL comparisons across the sym+asym base families: when the "
-        "FULL Z_not_P (high_hidden included) reconverges byte-identically the "
-        "retained |dP| is 0 (P has reconverged too), and among opportunities where "
-        "only Z_not_P-minus-high_hidden reconverges the retained |dP| and the "
-        "high_hidden L2 gap CO-VARY (a larger dP goes with a larger gap). This is a "
-        "property of the FINITE search, NOT a claim that the matched state is "
-        "impossible to reach, NOT a claim of structural emptiness, and NOT a claim "
-        "that the GRU carry is globally injective."
+    residual["joint_retention_note"] = (
+        "MEASURED conditional counts/extrema over the registered CONTROLLED "
+        "comparisons (External Pro ruling on 7accc4c8). This is NOT a correlation "
+        "(no coefficient is computed) and NOT an anti-correlation: the residuals "
+        "move in the SAME direction -- nonzero retained |dP| occurs WITH nonzero "
+        "retained high_hidden. The valid reading is JOINT RETENTION / JOINT "
+        "FORGETTING: within these designs, no P-only retention was observed after "
+        "the full non-P digest reconverged. The full-match aggregate is NOT yet "
+        "mechanistically diagnostic -- it mixes pre-perturbation, target-unexposed, "
+        "and genuine post-exposure opportunities; exposure stratification by the "
+        "target's PartnerInteractionRow provenance is deferred to the D1 unit. This "
+        "does NOT establish P_t = f(high_hidden_t), GRU injectivity, or that every P "
+        "difference entails a hidden difference (two deterministic folds of one "
+        "observation history can have different fibers)."
     )
 
     if not reconverged:
@@ -926,36 +931,45 @@ def _obstruction_residual(result: SearchResult) -> dict[str, object]:
 
 
 SCOPE = (
-    "Zero-training STRUCTURAL search over the FROZEN behavior law for two legally "
-    "supported histories reaching a byte-identical canonical non-P pre-action "
-    "state Z_not_P at one target owner opportunity with a different retained "
-    "partner-interaction value P. Uses the PRODUCTION 15-dim dynamic-roster law "
-    "and the PRODUCTION model (seed 57057, mode f1) -- NOT the 3-dim fixture. The "
-    "registered budget runs the search under three per-lifecycle base families -- "
-    "one symmetric control (sym_persist_idle) and two asymmetric families "
-    "(asym_parity_short, asym_thirds) that break the observation symmetry so a "
-    "partner perturbation can move the owner's retained payload -- with "
-    "perturbations placed near the target's last opportunities. The "
-    "anti-correlation between the retained P difference and the high_hidden gap is "
-    "MEASURED across those families, not proven impossible. A "
-    "bounded failure claims ONLY that there is no witness in the registered "
-    "budget: it makes no claim that the matched state is impossible to reach and "
-    "no claim that the underlying structure is empty. The residual high_hidden "
-    "gap is a MEASURED fact about the finite search, not a structural claim. This "
-    "does NOT conflate the current-write P_{t+1} with the historical P_t consumed "
-    "at the target: the target owner's P is read BEFORE its target-time token, so "
-    "the historical retained value a head would consume is the one compared. "
-    "Guards against Pro's false closures -- temporal-index (P read pre-token), "
-    "local-to-global and aggregate-alias (Z_not_P includes every active member's "
-    "observation and the owner's own pre-token state), fixture-to-environment "
-    "(production law and model), downstream-state (Z_not_P carries the pre-token "
-    "high_hidden the actor reads as pre_hidden), and unwired-head (no model head "
-    "is added, invoked or trained). Licenses no scientific or value claim and "
-    "wires no model head."
+    "Zero-training STRUCTURAL search for two legally supported CONTROLLED histories "
+    "reaching a byte-identical canonical non-P pre-action antecedent Z_not_P at one "
+    "target owner opportunity with a different retained partner-interaction value P. "
+    "Uses the PRODUCTION 15-dim dynamic-roster law and the PRODUCTION model (seed "
+    "57057, mode f1) -- NOT the 3-dim fixture. Three per-lifecycle base families "
+    "(symmetric control sym_persist_idle + asymmetric asym_parity_short, asym_thirds) "
+    "with perturbations near the target's last opportunities. "
+    "SCOPE CORRECTIONS (External Pro ruling on 7accc4c8): (1) Z_not_P is a canonical "
+    "SUFFICIENT ANTECEDENT for the target commitment actor under the fixed model, the "
+    "fixed same-episode ledger, the teacher-forced frontier path, and an EXPLICIT "
+    "QUOTIENT over causally inert sidecar state (clean-process actuator trace; other "
+    "owners' recurrent state, which does not enter the current actor's set summary; "
+    "model/ledger identical by construction) -- NOT literally all non-P runtime state. "
+    "(2) The digest is captured BEFORE apply_transaction (pre-membership-commit, "
+    "pre-earlier-frontier-tokens); because both arms share the same membership "
+    "transaction, order, teacher actions, model and starting digest, equality of this "
+    "antecedent still implies equality of the materialized target preimage, so the "
+    "NULL search is meaningful -- but this is NOT the literal target-token preimage, "
+    "which a positive witness must capture INSIDE _process_frontier at the target "
+    "token (after commit, after earlier tokens). (3) The two primitive tapes are "
+    "CONTROLLED legal-reachability arms (the high-level event actions have positive "
+    "model probability, but no stochastic PRIMITIVE behavior law is registered), which "
+    "is why the terminal names a CONTROL budget; sufficient for a zero-training "
+    "capability search, NOT for an observational support/overlap claim. (4) The "
+    "measured residual is JOINT RETENTION / JOINT FORGETTING, not a correlation. (5) "
+    "DELTA=0.05 is a MATERIALITY threshold for this budget, NOT a matched-support "
+    "impossibility (matched support requires P_minus = P_plus); the minimum difference "
+    "for a future action-head experiment must be derived from finite-precision and "
+    "logit-sensitivity calibration, not inherited from 0.05. "
+    "A bounded failure claims ONLY no witness in the registered control budget: no "
+    "claim that the matched state cannot be reached, that the structure is empty, or "
+    "that the GRU carry is injective. This reads the "
+    "HISTORICAL P_t (P read pre-token), not the current write P_{t+1}. Licenses no "
+    "scientific or value claim and wires no model head (first_logits stays unwired; "
+    "execution and replay still call .logits())."
 )
 
 TERMINAL_WITNESS = "MSSR_MATCHED_HISTORY_WITNESS_PRESENT"
-TERMINAL_NO_WITNESS = "MSSR_MATCHED_HISTORY_NO_WITNESS_IN_REGISTERED_BUDGET"
+TERMINAL_NO_WITNESS = "MSSR_MATCHED_HISTORY_NO_WITNESS_IN_REGISTERED_CONTROL_BUDGET"
 
 
 def _budget(designs: Sequence[Design]) -> dict[str, object]:
