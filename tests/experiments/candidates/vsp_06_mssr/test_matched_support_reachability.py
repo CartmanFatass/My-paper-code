@@ -12,9 +12,11 @@ import sys
 from experiments.candidates.vsp_06_mssr import matched_support_reachability as mssr
 
 
-def test_terminal_is_single_partner_coupled():
+def test_terminal_is_current_source_coupling_witness():
     result = mssr.proof()
-    assert result["terminal"] == "MSSR_MATCHED_SUPPORT_SINGLE_PARTNER_COUPLED"
+    # Pro's licensed reading (revision 2503340b): a CURRENT-source coupling
+    # witness, not any matched-support impossibility theorem.
+    assert result["terminal"] == "MSSR_CURRENT_SOURCE_SINGLE_PARTNER_COUPLING_WITNESS"
     assert result["raw_output_binding"] == "vsp_06_mssr.matched_support_reachability.v1"
 
 
@@ -57,9 +59,14 @@ def test_partner_is_always_a_summary_member():
 def test_scope_is_honestly_bounded():
     scope = mssr.proof()["scope"]
     assert "licenses no scientific claim" in scope
-    # Explicitly disclaims full unreachability via the sum-fiber reduction wording.
+    # Pins Pro's temporal correction: this is the CURRENT source, a different
+    # object from the HISTORICAL retained P_t, and asserts no unreachability.
+    assert "CURRENT source" in scope
+    assert "HISTORICAL" in scope
+    assert "different temporal object" in scope
+    assert "asserts NO unreachability" in scope
+    # The sum-fiber route is explicitly demoted to the wrong temporal object.
     assert "sum-fiber" in scope
-    assert "asserts NO full unreachability" in scope
 
 
 def test_module_imports_without_side_effects():

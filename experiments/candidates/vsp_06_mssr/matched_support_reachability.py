@@ -1,4 +1,4 @@
-"""Zero-training structural proof: is P's carrier retentive and single-partner coupled?
+"""Zero-training witness: P's carrier retention and CURRENT-source single-partner coupling.
 
 BUILD 2026-08-06 (Claude, MSSR matched-support successor unit).  The sibling
 ``support_native_p_reachability`` established, and External Pro ruled
@@ -19,10 +19,12 @@ particular environment law:
 
 1. The EMA carrier retains history: under a MATCHED current partner payload the
    resulting ``current_p`` still depends on the prior ``P`` (retention 0.8 > 0).
-2. A single legal PARTNER-observation change that moves the alignment
-   dot-product also moves the OWNER's actor context X0 (its ``selected_summary``
-   and its next ``high_hidden``).  So the P channel and X0 are COUPLED under a
-   single-partner variation: you cannot move one without the other.
+2. A MODEL-DOMAIN partner-observation perturbation (arbitrary fixture tensors,
+   NOT a legal-trajectory witness) that moves the alignment dot-product also
+   moves the OWNER's actor context X0: directly its ``selected_summary``, and --
+   downstream -- the GRU carry that becomes the NEXT event's ``pre_hidden``.  So
+   the CURRENT write's P channel and the current X0 are COUPLED under a
+   single-partner variation.
 3. The observation->member_embedding map has full column rank at the runtime's
    real dims, so no single observation direction is annihilated by the encoder
    (there is no obs dimension that moves the alignment while leaving the
@@ -33,15 +35,26 @@ particular environment law:
    ``EventCommitmentPolicy.set_summary`` sums ``encode()`` over that same active
    set.
 
-WHAT THIS PROVES AND DOES NOT
------------------------------
-Together these establish that SINGLE-PARTNER legal variation cannot change ``P``
-without changing the owner's actor context X0.  They REDUCE the still-open
-matched-support question to a precise remaining route: whether the frozen
-environment law can reach two active-set configurations with EQUAL summary-sum
-but DIFFERENT owner-alignment -- a multi-member "sum-fiber" route that this
-proof does NOT search.  It asserts NO full unreachability and licenses no
-scientific claim; it is object/relation existence only.
+WHAT THIS PROVES AND DOES NOT (External Pro ruling on revision 2503340b)
+-----------------------------------------------------------------------
+This is a CURRENT-SOURCE coupling witness, and is NOT decisive for matched
+support.  It shows that varying the CURRENT partner observation O_t moves both
+the current write payload g(O_t)->P_{t+1} and the current X0.  But matched
+support concerns the HISTORICAL retained P_t -- generated from observations
+BEFORE t -- against the current non-P state.  That is a DIFFERENT temporal
+object, so this witness does NOT establish P=f(X0), triggers no
+reconstructibility condition, and asserts NO unreachability.
+
+Crucially, check 1's carrier retention (0.8>0) is the very ingredient that keeps
+the historical route OPEN: distinct prior P_t survive a matched current payload.
+So the correct next unit (Pro-directed) is a LEGAL-HISTORY RECONVERGENCE search
+under the structured 15-dim dynamic-roster law -- two legal histories reaching a
+byte-identical current non-P state with different retained P.  The multi-member
+"sum-fiber" route is NOT that unit: it too addresses the current write, the
+wrong temporal object.  The terminal is licensed only as
+``MSSR_CURRENT_SOURCE_SINGLE_PARTNER_COUPLING_WITNESS``, not as any impossibility
+theorem.  This module licenses no scientific claim and no build; it is
+object/relation existence only.
 
 The measured facts are driven through the runtime's OWN registered transition
 (``_write_partner_interaction``) and its OWN model maps (``encode_members``,
@@ -172,16 +185,22 @@ def carrier_retains_history() -> CheckResult:
 
 
 def single_partner_variation_moves_owner_context() -> CheckResult:
-    """Check 2: a legal partner-obs change that moves the alignment also moves X0.
+    """Check 2: a model-domain partner-obs perturbation moving the alignment moves X0.
 
-    The owner's OWN observation is held fixed.  Two active sets are built that
-    differ only in one partner's observation, chosen so the owner-partner
-    alignment dot-product differs.  We measure, through the runtime's own model
-    maps: (a) the change in ``dot(owner_obs, partner_obs)`` (the P channel), (b)
-    the L2 change in the owner's ``selected_summary``
-    (``set_summary(encode_members(...))``), and (c) the L2 change in the owner's
-    next ``high_hidden`` (the GRU carry returned by ``logits``).  Coupled iff
-    the P channel moved AND both owner quantities moved.
+    MODEL-DOMAIN, not a legal-trajectory witness (Pro on 2503340b): the partner
+    observations here are arbitrary 3-dim tensors on the fixture, chosen to make
+    the point about the model maps -- they are NOT asserted to be reachable
+    states of any environment law.  The owner's OWN observation is held fixed.
+    Two active sets are built that differ only in one partner's observation,
+    chosen so the owner-partner alignment dot-product differs.  We measure,
+    through the runtime's own model maps: (a) the change in
+    ``dot(owner_obs, partner_obs)`` (the P channel), (b) the L2 change in the
+    owner's ``selected_summary`` (``set_summary(encode_members(...))``) -- the
+    DIRECT current-X0 change -- and (c) the L2 change in the owner's next
+    ``high_hidden`` (the GRU carry returned by ``logits``), which is a DOWNSTREAM
+    consequence that becomes the NEXT event's ``pre_hidden`` (X0 at this event
+    holds the PRIOR pre_hidden, an input we hold fixed).  Coupled iff the P
+    channel moved AND both owner quantities moved.
     """
     helpers = _load_core_helpers()
     core = helpers.make_core("f1", partner_interaction_enabled=True)
@@ -221,12 +240,14 @@ def single_partner_variation_moves_owner_context() -> CheckResult:
         name="single_partner_variation_moves_owner_context",
         passed=passed,
         detail=(
-            f"owner obs fixed; one partner obs varied so alignment dot moved "
-            f"{dot_1:.6f}->{dot_2:.6f} (|delta|={alignment_delta:.6f}); owner "
-            f"selected_summary moved by L2 {summary_delta:.6f} and owner next "
-            f"high_hidden moved by L2 {hidden_delta:.6f}; the P channel and X0 "
-            f"are {'coupled' if passed else 'not coupled'} under this "
-            f"single-partner variation (obs_dim={obs_dim})"
+            f"MODEL-DOMAIN (not legal-trajectory): owner obs fixed; one partner "
+            f"obs varied so alignment dot moved {dot_1:.6f}->{dot_2:.6f} "
+            f"(|delta|={alignment_delta:.6f}); owner selected_summary (direct "
+            f"current-X0) moved by L2 {summary_delta:.6f} and owner next "
+            f"high_hidden (downstream; next event's pre_hidden) moved by L2 "
+            f"{hidden_delta:.6f}; the current-write P channel and current X0 are "
+            f"{'coupled' if passed else 'not coupled'} under this single-partner "
+            f"variation (obs_dim={obs_dim})"
         ),
         numbers={
             "dot_1": dot_1,
@@ -366,7 +387,7 @@ def proof() -> dict[str, object]:
         encoder_has_no_obs_nullspace(),
         partner_source_is_a_summary_member(),
     )
-    coupled = all(check.passed for check in checks)
+    coupling_witnessed = all(check.passed for check in checks)
     return {
         "raw_output_binding": RAW_OUTPUT_BINDING,
         "checks": {
@@ -378,25 +399,38 @@ def proof() -> dict[str, object]:
             for check in checks
         },
         "terminal": (
-            "MSSR_MATCHED_SUPPORT_SINGLE_PARTNER_COUPLED"
-            if coupled
-            else "MSSR_MATCHED_SUPPORT_COUPLING_INCONCLUSIVE"
+            "MSSR_CURRENT_SOURCE_SINGLE_PARTNER_COUPLING_WITNESS"
+            if coupling_witnessed
+            else "MSSR_CURRENT_SOURCE_SINGLE_PARTNER_COUPLING_INCONCLUSIVE"
         ),
         "scope": (
             "Zero-training STRUCTURAL proof; object/relation existence only. "
-            "Finds that SINGLE-PARTNER variation cannot change P without changing "
-            "the owner's actor context X0 (its selected_summary and next "
-            "high_hidden): the EMA carrier retains history, the "
-            "partner-obs->alignment channel moves the owner's summary and GRU "
-            "carry (finitely demonstrated, check 2), the obs->embedding encoder "
-            "has no LOCAL obs null-space (full column rank, check 3; global "
-            "non-collision argued by non-generic codimension, not proven), and "
-            "P's partner is always a summary member. It "
-            "REDUCES the open matched-support question to whether the frozen "
-            "environment law can reach two active-set configurations with EQUAL "
-            "summary-sum but DIFFERENT owner-alignment -- a multi-member "
-            "'sum-fiber' route this proof does NOT search -- and asserts NO full "
-            "unreachability. It licenses no scientific claim and no build."
+            "TEMPORAL SCOPE (External Pro ruling on 2503340b): this witnesses the "
+            "CURRENT source only -- that varying the CURRENT partner observation "
+            "O_t moves both the current write payload g(O_t)->P_{t+1} AND the "
+            "current actor context X0. It is NOT decisive for matched support, "
+            "which concerns the HISTORICAL retained P_t (generated from "
+            "observations BEFORE t) against the current non-P state; that is a "
+            "different temporal object, so this does NOT establish P=f(X0) and "
+            "does NOT trigger any reconstructibility condition. On the contrary, "
+            "check 1's carrier retention (0.8>0) is precisely the ingredient that "
+            "keeps the HISTORICAL-reconvergence route OPEN: distinct prior P_t "
+            "survive a matched current payload. The four measured facts: the EMA "
+            "carrier retains history (check 1); a model-domain partner-obs "
+            "perturbation that moves the alignment moves the owner's "
+            "selected_summary -- and, downstream, the GRU carry that becomes the "
+            "NEXT event's pre_hidden (check 2; X0 itself holds the PRIOR "
+            "pre_hidden, so the direct current-X0 change is the summary); the "
+            "obs->embedding encoder has no LOCAL obs null-space (full column rank, "
+            "check 3; global non-collision argued by non-generic codimension, not "
+            "proven); and P's partner is always a summary member (check 4). The "
+            "correct next unit (Pro-directed) is a LEGAL-HISTORY RECONVERGENCE "
+            "search under the structured 15-dim dynamic-roster law: two legal "
+            "histories reaching a byte-identical current non-P state with "
+            "different retained P. The multi-member 'sum-fiber' route is NOT that "
+            "unit (it addresses the current write, the wrong temporal object). "
+            "This asserts NO unreachability, licenses no scientific claim and no "
+            "build."
         ),
     }
 
