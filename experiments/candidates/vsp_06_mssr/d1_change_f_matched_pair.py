@@ -43,7 +43,10 @@ effect.
 
 from __future__ import annotations
 
+import ast
 import hashlib
+import inspect
+import textwrap
 from dataclasses import dataclass
 from typing import Sequence
 
@@ -51,13 +54,20 @@ import numpy as np
 import torch
 
 from experiments.candidates.vsp_06_mssr.history_reconvergence_search import (
+    ACTION_SEED,
     DELTA,
     Design,
+    FRONTIER_SEED,
+    MODEL_SEED,
+    OPPORTUNITY_SEED,
     Tape,
+    TRAIN_LEDGER_SEED,
     BASE_FAMILY_BY_NAME,
+    RAW_OUTPUT_BINDING as SOURCE_SEARCH_BINDING,
     make_core,
     make_environment,
     registered_designs,
+    rollout,
     run_search,
     _partner_flip_primitive,
 )
@@ -78,6 +88,20 @@ torch.set_num_threads(1)
 RAW_OUTPUT_BINDING = "vsp_06_mssr.d1_change_f_matched_pair.v1"
 
 ACTIVE = "ACTIVE"
+
+# --- Terminal-gate tolerances (Pro loop-4 C1: kernel-native materiality) -----
+#: The centered two-arm ``first_logits`` difference must EXCEED this to count as
+#: a nonconstant (policy-kernel-visible) effect.  Raw logit L2 is insufficient:
+#: an action-constant shift leaves the softmax kernel unchanged.  The floor is a
+#: float-noise guard far below the observed effect (~1e-4), far above float32
+#: rounding of a deterministic single forward.
+TAU_NUMERIC = 1e-9
+#: The two-arm softmax total-variation distance must EXCEED this.
+TAU_KERNEL = 1e-9
+#: P-null collapse must be at or below this.  The two ablation calls feed
+#: byte-identical inputs to a deterministic forward, so exact 0.0 is required --
+#: the strictest tolerance that can hold, and it does hold.
+TAU_NULL = 0.0
 
 # --- Terminals ---------------------------------------------------------------
 TERMINAL_PRESENT = "MSSR_D1_CHANGE_F_POSTCOMMIT_MATCHED_PAIR_PRESENT"
@@ -201,8 +225,14 @@ class TargetTokenSink:
     """A kernel-capture sink that records the target's post-commit preimage.
 
     Installed via ``install_kernel_capture``; ``capture(**kwargs)`` fires INSIDE
-    ``_process_frontier`` at every token after ``masked_logits``/softmax and
-    before action selection.  This sink filters to the target owner AND the
+    ``_process_frontier`` at every token AFTER the ordinary ``.logits()`` head
+    (and its GRU computation and softmax) has already executed, and BEFORE
+    action selection, the ``high_hidden`` write, and the P write.  It is a
+    faithful POST-HOC MATERIALIZATION of the immutable pre-token inputs (plus
+    the directly produced ordinary logits) -- NOT a pre-head-execution capture
+    (Pro loop-4 C2 naming correction; pre-GRU placement of the candidate head
+    comes only from ``first_logits`` source order, gated structurally in
+    ``first_logits_report``).  This sink filters to the target owner AND the
     frozen physical time, deep-copies the preimage tensors for byte stability,
     and reads the historical (pre-write) ``current_p`` from the record.  It
     returns ``None`` (the runtime interprets nothing), so it perturbs no state.
@@ -466,6 +496,13 @@ def reconstruct_actor_inputs(
     every input here is part of the byte-identical Z_not_P preimage, the result
     is identical across the two arms BY CONSTRUCTION; the only cross-arm input to
     ``first_logits`` that differs is ``partner_p``.
+
+    Pro loop-4 C4 clarification: ``member_embedding`` is part of the ordinary
+    ``.logits()`` preimage and of the recurrent (``high_rnn``) update performed
+    AFTER the first logits, but it is NOT a direct input of the first action
+    head, which reads only ``pre_hidden``, ``selected_summary`` and
+    ``partner_p``.  Matching it across arms is conservative (it tightens the
+    quotient), not a statement that the first head consumes it.
     """
     if str(captured["architecture_mode"]) != "f1":
         raise ValueError("reconstruction is registered for architecture_mode='f1'")
@@ -528,6 +565,41 @@ def _param_checksum(model) -> str:
     return hasher.hexdigest()
 
 
+def first_head_precedes_recurrence(function_source: str) -> bool:
+    """AST source-order fingerprint (Pro loop-4 C1, reviewer-hardened).
+
+    True iff, in the given function source, the ``first_head`` attribute node
+    appears on an earlier line than BOTH the first ``high_rnn`` attribute node
+    and the first ``new_hidden`` name binding, with all three present.  Walks
+    the AST (not the raw text), so docstrings and comments can neither mask
+    nor fake the ordering; missing names make the fingerprint False, never
+    vacuously True.
+    """
+    function_node = ast.parse(textwrap.dedent(function_source)).body[0]
+    head_linenos = [
+        node.lineno
+        for node in ast.walk(function_node)
+        if isinstance(node, ast.Attribute) and node.attr == "first_head"
+    ]
+    rnn_linenos = [
+        node.lineno
+        for node in ast.walk(function_node)
+        if isinstance(node, ast.Attribute) and node.attr == "high_rnn"
+    ]
+    new_hidden_linenos = [
+        node.lineno
+        for node in ast.walk(function_node)
+        if isinstance(node, ast.Name) and node.id == "new_hidden"
+    ]
+    return bool(
+        head_linenos
+        and rnn_linenos
+        and new_hidden_linenos
+        and min(head_linenos) < min(rnn_linenos)
+        and min(head_linenos) < min(new_hidden_linenos)
+    )
+
+
 # ---------------------------------------------------------------------------
 # first_logits binding + P-null ablation + purity + trace.
 # ---------------------------------------------------------------------------
@@ -565,18 +637,30 @@ def first_logits_report(cap_minus: dict, cap_plus: dict) -> dict:
     param_before = _param_checksum(model)
 
     with torch.no_grad():
-        # Faithfulness: production ``.logits`` on the reconstructed inputs must
-        # reproduce the captured ``masked_logits`` byte-for-byte (legal_mask is
-        # all-ones, so masked_logits == logits).
+        # Faithfulness, BOTH arms (Pro loop-4 C1): production ``.logits`` on the
+        # reconstructed inputs must reproduce each arm's captured
+        # ``masked_logits`` byte-for-byte (legal_mask is all-ones, so
+        # masked_logits == logits).
         recon_logits, _ = model.logits(
             member_embedding, selected_summary, pre_hidden
         )
         captured_logits = torch.as_tensor(
             cap_minus["masked_logits"], dtype=torch.float32
         )
-        faithfulness_ok = (
+        faithfulness_minus_ok = (
             recon_logits.numpy().tobytes() == captured_logits.numpy().tobytes()
         )
+        recon_logits_plus, _ = model.logits(
+            member_embedding_plus, selected_summary_plus, pre_hidden_plus
+        )
+        captured_logits_plus = torch.as_tensor(
+            cap_plus["masked_logits"], dtype=torch.float32
+        )
+        faithfulness_plus_ok = (
+            recon_logits_plus.numpy().tobytes()
+            == captured_logits_plus.numpy().tobytes()
+        )
+        faithfulness_ok = faithfulness_minus_ok and faithfulness_plus_ok
 
         first_minus, _ = model.first_logits(
             member_embedding, selected_summary, pre_hidden, partner_p=p_minus
@@ -586,6 +670,18 @@ def first_logits_report(cap_minus: dict, cap_plus: dict) -> dict:
             partner_p=p_plus,
         )
         arm_l2 = float(torch.linalg.norm(first_minus - first_plus))
+        # Kernel-native arm effect (Pro loop-4 C1): an action-constant logit
+        # shift leaves the policy kernel unchanged, so gate the CENTERED logit
+        # difference and the softmax total-variation distance, not raw L2.
+        arm_diff = first_minus - first_plus
+        centered_arm_l2 = float(torch.linalg.norm(arm_diff - arm_diff.mean()))
+        kernel_tv = float(
+            0.5
+            * torch.abs(
+                torch.softmax(first_minus, dim=-1)
+                - torch.softmax(first_plus, dim=-1)
+            ).sum()
+        )
 
         # Replay: identical inputs -> byte-identical logits.
         first_minus_replay, _ = model.first_logits(
@@ -604,6 +700,17 @@ def first_logits_report(cap_minus: dict, cap_plus: dict) -> dict:
             partner_p=0.0,
         )
         ablation_l2 = float(torch.linalg.norm(ablate_minus - ablate_plus))
+        ablation_diff = ablate_minus - ablate_plus
+        ablation_centered_l2 = float(
+            torch.linalg.norm(ablation_diff - ablation_diff.mean())
+        )
+        ablation_kernel_tv = float(
+            0.5
+            * torch.abs(
+                torch.softmax(ablate_minus, dim=-1)
+                - torch.softmax(ablate_plus, dim=-1)
+            ).sum()
+        )
 
         # dLogit/dP by central finite difference at the retained P(-).
         eps = 1e-3
@@ -618,6 +725,22 @@ def first_logits_report(cap_minus: dict, cap_plus: dict) -> dict:
     rng_after = _rng_checksum(core)
     param_after = _param_checksum(model)
 
+    # Fresh-model identity (Pro loop-4 C1): the fresh core's head model must be
+    # the EXACT model both history arms ran with -- three-way parameter-checksum
+    # equality against the checksums captured inside each arm's preimage.
+    model_checksum_match = bool(
+        param_before == cap_minus["model_param_checksum"]
+        and param_before == cap_plus["model_param_checksum"]
+    )
+
+    # Structural source-order fingerprint (Pro loop-4 C1): in the executed
+    # model's ``first_logits`` CODE (AST, so the docstring cannot mask or fake
+    # it), the first action head is applied BEFORE the recurrent update
+    # (``high_rnn``) and before any binding of ``new_hidden``.
+    first_head_before_recurrence = first_head_precedes_recurrence(
+        inspect.getsource(type(model).first_logits)
+    )
+
     # SYMBOLIC re-assertion of the D0 ordering contract (first_logits precedes
     # the recurrent update), NOT an empirical measurement of this invocation --
     # the empirical purity of the actual call is rng_unchanged/param_unchanged
@@ -628,11 +751,28 @@ def first_logits_report(cap_minus: dict, cap_plus: dict) -> dict:
 
     return {
         "faithfulness_ok": bool(faithfulness_ok),
+        "faithfulness_minus_ok": bool(faithfulness_minus_ok),
+        "faithfulness_plus_ok": bool(faithfulness_plus_ok),
         "non_p_inputs_match_across_arms": bool(inputs_match),
         "p_minus": p_minus,
         "p_plus": p_plus,
         "arm_l2": arm_l2,
+        "centered_arm_l2": centered_arm_l2,
+        "centered_arm_l2_exceeds_tau": bool(centered_arm_l2 > TAU_NUMERIC),
+        "kernel_tv": kernel_tv,
+        "kernel_tv_exceeds_tau": bool(kernel_tv > TAU_KERNEL),
         "ablation_l2": ablation_l2,
+        "ablation_centered_l2": ablation_centered_l2,
+        "ablation_kernel_tv": ablation_kernel_tv,
+        "p_null_collapse_ok": bool(
+            ablation_centered_l2 <= TAU_NULL and ablation_kernel_tv <= TAU_NULL
+        ),
+        "tau_numeric": TAU_NUMERIC,
+        "tau_kernel": TAU_KERNEL,
+        "tau_null": TAU_NULL,
+        "fresh_model_checksum": param_before,
+        "model_checksum_match_across_arms": model_checksum_match,
+        "first_head_before_recurrence_fingerprint": first_head_before_recurrence,
         "replay_identical": bool(replay_identical),
         "rng_unchanged": bool(rng_before == rng_after),
         "param_unchanged": bool(param_before == param_after),
@@ -703,6 +843,58 @@ def source_exposure_positive_candidates(
         "exposure_positive": len(candidates),
     }
     return candidates, counts
+
+
+def source_certificate(pair: SourcedPair) -> dict:
+    """Loop-3 antecedent linkage making the D1 report SELF-CONTAINED (Pro C3).
+
+    Re-runs the loop-3 registered ``rollout`` on both arms and reads the
+    Opportunity at the sourced physical time, so the report itself carries the
+    source design identity, the antecedent digests whose equality sourced the
+    pair (the ``znp_minus_hidden`` quotient), the full-Z_not_P per-arm digests
+    (which DIFFER without CHANGE_F -- consistent with the causal control), the
+    source P values, and the model/environment registration constants -- a
+    reader no longer needs to reconstruct the linkage through
+    ``source_exposure_positive_candidates``.
+    """
+    base_opp = rollout(pair.base_tape())[pair.physical_time]
+    pert_opp = rollout(pair.perturbed_tape())[pair.physical_time]
+    return {
+        "source_binding": SOURCE_SEARCH_BINDING,
+        "source_design": {
+            "episode_id": 0,
+            "base_family": pair.base_family,
+            "target_key": pair.target_key,
+            "partner_key": pair.partner_key,
+            "window": list(pair.window),
+            "perturb_primitive": pair.design().perturb_primitive,
+            "physical_time": pair.physical_time,
+            "membership_epoch_minus": int(base_opp.membership_epoch),
+            "membership_epoch_plus": int(pert_opp.membership_epoch),
+        },
+        "antecedent_znp_minus_hidden_digest_minus": base_opp.znp_minus_hidden_digest,
+        "antecedent_znp_minus_hidden_digest_plus": pert_opp.znp_minus_hidden_digest,
+        "antecedent_znp_minus_hidden_match": bool(
+            base_opp.znp_minus_hidden_digest == pert_opp.znp_minus_hidden_digest
+        ),
+        "antecedent_znp_full_digest_minus": base_opp.znp_digest,
+        "antecedent_znp_full_digest_plus": pert_opp.znp_digest,
+        "antecedent_znp_full_match": bool(
+            base_opp.znp_digest == pert_opp.znp_digest
+        ),
+        "source_p_minus": float(base_opp.p_value),
+        "source_p_plus": float(pert_opp.p_value),
+        "registration": {
+            "model_seed": MODEL_SEED,
+            "opportunity_seed": OPPORTUNITY_SEED,
+            "frontier_seed": FRONTIER_SEED,
+            "action_seed": ACTION_SEED,
+            "train_ledger_seed": TRAIN_LEDGER_SEED,
+            "model_registration_checksum": _param_checksum(
+                make_core(0).commitment_model
+            ),
+        },
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -815,7 +1007,27 @@ SCOPE = (
     "byte-identical matched support is therefore established BY the CHANGE_F "
     "reset (necessary for the match), not already present without it, and "
     "CHANGE_F's observed effect at the capture point is exactly the F reset with "
-    "P preserved."
+    "P preserved. "
+    "(9) CAPTURE-POINT NAMING (Pro loop-4 C2/C4) -- the sink materializes the "
+    "preimage AFTER the ordinary post-GRU .logits() head and softmax have "
+    "already executed, and BEFORE action selection or any state write; it is a "
+    "faithful post-hoc materialization of the immutable pre-token inputs, NOT a "
+    "pre-head-execution capture. Pre-GRU placement of the candidate head is a "
+    "SOURCE-ORDER fact of first_logits (first_head before high_rnn), gated "
+    "structurally. member_embedding is part of the ordinary .logits() preimage "
+    "and the recurrent update but NOT a direct first-action-head input (the "
+    "first head reads only pre_hidden, selected_summary, partner_p); matching "
+    "it is conservative. "
+    "(10) HARDENED TERMINAL (Pro loop-4 C1) -- PRESENT additionally requires "
+    "both-arm faithfulness, three-way fresh/captured model-checksum equality, "
+    "the initializer condition, a NONCONSTANT centered-logit effect > "
+    "TAU_NUMERIC and a softmax total-variation effect > TAU_KERNEL (raw logit "
+    "L2 is not gated: an action-constant shift is kernel-null), EXACT P-null "
+    "collapse (centered and kernel measures <= TAU_NULL), and the "
+    "first-head-before-recurrence source fingerprint. The nonzero head effect "
+    "at untrained init remains an INTERFACE witness, not materiality; the "
+    "frozen pair's |dP| is a SELECTED MAXIMUM among sourced candidates, not a "
+    "representative effect estimate."
 )
 
 
@@ -841,30 +1053,43 @@ def proof() -> dict:
     rejected: list[dict] = []
     for pair in candidates:
         evaluation = evaluate_pair(pair)
-        # PAIR-level gate: matched digest, P difference, and the full
-        # without-CHANGE_F causal control (including P preservation under the op).
+        # PAIR-level gate: matched digest, the CHANGE_F initializer condition, P
+        # difference, and the full without-CHANGE_F causal control (including P
+        # preservation under the op).
         pair_ok = bool(
             evaluation["digest_match"]
+            and evaluation["pre_high_hidden_is_initializer"]
             and evaluation["abs_delta_p"] > 0.0
             and evaluation["without_change_f_digests_differ"]
             and evaluation["without_change_f_only_high_hidden_differs"]
             and evaluation["without_change_f_p_preserved"]
         )
-        # BINDING-validity gate: a degenerate first_logits binding (unfaithful
-        # reconstruction, cross-arm non-P input mismatch, non-replayable or
-        # impure read) may not emit the PRESENT terminal.  The head's arm_l2 /
-        # ablation_l2 / dLogit/dP MAGNITUDES stay reported facts, not gates.
+        # BINDING-validity gate (Pro loop-4 C1 hardening): a degenerate
+        # first_logits binding may not emit the PRESENT terminal.  Beyond the
+        # original purity/faithfulness conditions this now requires BOTH-arm
+        # faithfulness, three-way fresh/captured model-checksum equality, a
+        # NONCONSTANT (centered) logit effect above TAU_NUMERIC, a softmax
+        # kernel effect above TAU_KERNEL, EXACT P-null collapse (<= TAU_NULL on
+        # centered and kernel measures), and the first-head-before-recurrence
+        # source fingerprint.  Raw arm_l2 / dLogit/dP MAGNITUDES stay reported
+        # facts, not gates.
         head = (
             first_logits_report(evaluation["cap_minus"], evaluation["cap_plus"])
             if pair_ok
             else None
         )
         binding_ok = pair_ok and bool(
-            head["faithfulness_ok"]
+            head["faithfulness_minus_ok"]
+            and head["faithfulness_plus_ok"]
             and head["non_p_inputs_match_across_arms"]
             and head["replay_identical"]
             and head["rng_unchanged"]
             and head["param_unchanged"]
+            and head["model_checksum_match_across_arms"]
+            and head["centered_arm_l2_exceeds_tau"]
+            and head["kernel_tv_exceeds_tau"]
+            and head["p_null_collapse_ok"]
+            and head["first_head_before_recurrence_fingerprint"]
         )
         if not binding_ok:
             rejected.append(
@@ -924,6 +1149,9 @@ def proof() -> dict:
             ],
         }
         report["first_logits"] = head
+        # Self-containment (Pro loop-4 C3): the loop-3 antecedent linkage and
+        # registration constants travel INSIDE the report.
+        report["source_certificate"] = source_certificate(pair)
         report["rejected_before_match"] = rejected
         return report
 

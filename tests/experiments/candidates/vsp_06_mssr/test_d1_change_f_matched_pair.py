@@ -192,17 +192,83 @@ def test_without_change_f_control():
 
 def test_first_logits_consumes_p():
     """first_logits reads P: the two-arm logit difference is non-zero, and the
-    reconstruction is byte-faithful to the production .logits() the runtime ran."""
+    reconstruction is byte-faithful (BOTH arms) to the production .logits()."""
     head = _head()
     assert head["faithfulness_ok"], "reconstruction did not reproduce masked_logits"
+    assert head["faithfulness_minus_ok"] and head["faithfulness_plus_ok"]
     assert head["non_p_inputs_match_across_arms"]
     assert head["arm_l2"] > 0.0
 
 
+def test_hardened_gate_conditions():
+    """Pro loop-4 C1 hardening: the effect is NONCONSTANT (centered-logit norm
+    above TAU_NUMERIC), kernel-visible (softmax total variation above
+    TAU_KERNEL), the fresh head model is byte-identical to the model both arms
+    ran (three-way checksum equality), and the first head precedes the
+    recurrent update in the executed source."""
+    head = _head()
+    assert head["centered_arm_l2"] > d1.TAU_NUMERIC
+    assert head["centered_arm_l2_exceeds_tau"]
+    assert head["kernel_tv"] > d1.TAU_KERNEL
+    assert head["kernel_tv_exceeds_tau"]
+    # An action-constant shift would give centered_arm_l2 == 0 with arm_l2 > 0;
+    # the observed effect is genuinely nonconstant, bounded by raw L2.
+    assert head["centered_arm_l2"] <= head["arm_l2"] + 1e-12
+    assert head["model_checksum_match_across_arms"]
+    assert len(head["fresh_model_checksum"]) == 64
+    assert head["first_head_before_recurrence_fingerprint"]
+    assert head["tau_numeric"] == d1.TAU_NUMERIC
+    assert head["tau_kernel"] == d1.TAU_KERNEL
+    assert head["tau_null"] == 0.0
+
+
+def test_fingerprint_predicate_negative_cases():
+    """The AST fingerprint is falsifiable: inverted ordering and missing names
+    return False (never vacuously True), and the real model source returns
+    True."""
+    good = (
+        "def first_logits(self, x):\n"
+        '    """docstring mentioning new_hidden and high_rnn early."""\n'
+        "    first = self.first_head(x)\n"
+        "    new_hidden = self.high_rnn(x)\n"
+        "    return first, new_hidden\n"
+    )
+    assert d1.first_head_precedes_recurrence(good)
+    inverted = (
+        "def first_logits(self, x):\n"
+        "    new_hidden = self.high_rnn(x)\n"
+        "    first = self.first_head(new_hidden)\n"
+        "    return first, new_hidden\n"
+    )
+    assert not d1.first_head_precedes_recurrence(inverted)
+    missing_head = (
+        "def first_logits(self, x):\n"
+        "    new_hidden = self.high_rnn(x)\n"
+        "    return new_hidden\n"
+    )
+    assert not d1.first_head_precedes_recurrence(missing_head)
+    missing_rnn = (
+        "def first_logits(self, x):\n"
+        "    return self.first_head(x)\n"
+    )
+    assert not d1.first_head_precedes_recurrence(missing_rnn)
+    # The executed model's real source passes.
+    import inspect as _inspect
+
+    real = _inspect.getsource(
+        type(d1.make_core(0).commitment_model).first_logits
+    )
+    assert d1.first_head_precedes_recurrence(real)
+
+
 def test_p_null_ablation_removes_difference():
-    """Setting partner_p=0 on both arms collapses the logit difference to EXACTLY 0."""
+    """Setting partner_p=0 on both arms collapses the logit difference to EXACTLY
+    0 -- raw, centered, and kernel measures; the gated collapse boolean holds."""
     head = _head()
     assert head["ablation_l2"] == 0.0
+    assert head["ablation_centered_l2"] == 0.0
+    assert head["ablation_kernel_tv"] == 0.0
+    assert head["p_null_collapse_ok"]
 
 
 def test_first_logits_replayable_and_pure():
@@ -248,12 +314,62 @@ def test_terminal_present_on_sourced_pair():
     assert report["post_change_f"]["without_change_f_digests_differ"]
     assert report["post_change_f"]["without_change_f_only_high_hidden_differs"]
     assert report["post_change_f"]["without_change_f_p_preserved"]
+    assert report["post_change_f"]["pre_high_hidden_is_initializer"]
     assert report["first_logits"]["arm_l2"] > 0.0
     assert report["first_logits"]["ablation_l2"] == 0.0
+    # Hardened gate facts travel in the success record (Pro loop-4 C1).
+    head = report["first_logits"]
+    assert head["faithfulness_minus_ok"] and head["faithfulness_plus_ok"]
+    assert head["centered_arm_l2_exceeds_tau"]
+    assert head["kernel_tv_exceeds_tau"]
+    assert head["p_null_collapse_ok"]
+    assert head["model_checksum_match_across_arms"]
+    assert head["first_head_before_recurrence_fingerprint"]
     # Sourcing counts are machine-visible and non-vacuous.
     counts = report["sourcing_counts"]
     assert counts["exposure_positive"] >= 1
     assert counts["reconverged_and_p_different"] >= counts["exposure_positive"]
+
+
+def test_source_certificate_self_containment():
+    """Pro loop-4 C3: the success report carries the loop-3 antecedent linkage
+    -- source design identity, the matched znp-minus-hidden antecedent digests,
+    the per-arm full digests (which DIFFER: the raw arms are unmatched without
+    CHANGE_F), source P values, and the registration constants including the
+    model registration checksum the arms attested."""
+    report = _proof()
+    cert = report["source_certificate"]
+    assert cert["source_binding"] == "vsp_06_mssr.history_reconvergence_search.v1"
+    design = cert["source_design"]
+    assert design["base_family"] == PAIR.base_family
+    assert design["target_key"] == PAIR.target_key
+    assert design["partner_key"] == PAIR.partner_key
+    assert design["window"] == list(PAIR.window)
+    assert design["physical_time"] == PAIR.physical_time
+    # The antecedent quotient (minus-hidden) matched -- that is what sourced
+    # the pair -- while the full antecedent digests differ (F differs raw).
+    assert cert["antecedent_znp_minus_hidden_match"]
+    assert (
+        cert["antecedent_znp_minus_hidden_digest_minus"]
+        == cert["antecedent_znp_minus_hidden_digest_plus"]
+    )
+    assert len(cert["antecedent_znp_minus_hidden_digest_minus"]) == 64
+    assert not cert["antecedent_znp_full_match"]
+    assert (
+        cert["antecedent_znp_full_digest_minus"]
+        != cert["antecedent_znp_full_digest_plus"]
+    )
+    # Source P values reproduce the frozen |dP|.
+    assert abs(
+        abs(cert["source_p_minus"] - cert["source_p_plus"]) - PAIR.delta_p
+    ) < 1e-12
+    # Registration constants and the model identity chain to the captured arms.
+    registration = cert["registration"]
+    assert registration["model_seed"] == 57057
+    assert (
+        registration["model_registration_checksum"]
+        == report["first_logits"]["fresh_model_checksum"]
+    )
 
 
 def test_scope_states_required_caveats():
@@ -268,6 +384,12 @@ def test_scope_states_required_caveats():
     assert ".logits()" in d1.SCOPE  # execution / replay still use .logits()
     assert "p_t = f(high_hidden_t)" in scope
     assert "without-change_f causal control" in scope
+    # Pro loop-4 C2/C4/C1 clauses: capture-point naming, member_embedding
+    # non-input, hardened terminal, selected-maximum caveat.
+    assert "not a pre-head-execution capture" in scope
+    assert "not a direct first-action-head input" in scope
+    assert "hardened terminal" in scope
+    assert "selected maximum" in scope
     # Terminal vocabulary is present and bounded terminals never assert nullity.
     assert d1.TERMINAL_PRESENT.endswith("MATCHED_PAIR_PRESENT")
     assert "budget" in d1.TERMINAL_NO_EXPOSURE.lower()

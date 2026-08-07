@@ -10,13 +10,22 @@ from __future__ import annotations
 import pytest
 
 from experiments.candidates.vsp_06_mssr.exposure_stratification import (
+    DIFFER_KIND_PARTNER_IDENTITY_ONLY,
+    DIFFER_KIND_PAYLOAD_SEQUENCE,
+    DIFFER_KIND_ROW_COUNT,
+    EQUAL_PAYLOAD_CORRECTED_NAME,
     EXPOSURE_PRE_PERTURBATION,
     EXPOSURE_POST_PERTURBATION_TARGET_UNEXPOSED,
     EXPOSURE_TARGET_EXPOSED_EQUAL_PAYLOAD,
     EXPOSURE_TARGET_EXPOSED_DIFFERENT_PAYLOAD,
+    P_SUBCLASS_CANCELLED,
+    P_SUBCLASS_DECAYED,
+    P_SUBCLASS_NEVER_CHANGED,
+    P_SUBCLASS_STILL_DIFFERENT,
     PRIMARY_CLASSES,
     SCOPE,
     classify,
+    decompose_row_different,
     proof,
 )
 from experiments.candidates.vsp_06_mssr.history_reconvergence_search import (
@@ -109,6 +118,81 @@ def test_classify_unit_semantics():
         classify(_comparison(window=(10, 11), physical_time=20), {}, {})
 
 
+def _snap(rows, p):
+    return {"rows": rows, "current_p": float(p)}
+
+
+def test_decompose_row_different_unit_semantics():
+    """Pro loop-4 C5 differ-kind rule on synthetic inputs: row-count beats
+    payload beats partner-identity-only; P subclasses apply to the payload kind
+    only and follow the measured current_p trajectory."""
+    comparison = _comparison(window=(10,), physical_time=20)
+
+    # Row-count mismatch: a write occasion itself moved.
+    base = {12: _snap((ROW_A,), 0.5), 20: _snap((ROW_A, ROW_B), 0.4)}
+    pert = {12: _snap((ROW_A,), 0.5), 20: _snap((ROW_A,), 0.5)}
+    out = decompose_row_different(comparison, base, pert)
+    assert out["differ_kind"] == DIFFER_KIND_ROW_COUNT
+    assert out["p_subclass"] is None
+    assert out["row_count_differs"]
+
+    # Payload differs, P still different at the compared time.
+    base = {12: _snap((ROW_A,), 0.5), 20: _snap((ROW_A, ROW_B), 0.4)}
+    pert = {12: _snap((ROW_A,), 0.5), 20: _snap((ROW_A, ROW_C), 0.3)}
+    out = decompose_row_different(comparison, base, pert)
+    assert out["differ_kind"] == DIFFER_KIND_PAYLOAD_SEQUENCE
+    assert out["p_subclass"] == P_SUBCLASS_STILL_DIFFERENT
+    assert out["payload_diff_position_count"] == 1
+
+    # ONE payload difference, P differed earlier, exactly equal now: decayed.
+    base = {12: _snap((ROW_A,), 0.5), 16: _snap((ROW_A, ROW_B), 0.4),
+            20: _snap((ROW_A, ROW_B), 0.25)}
+    pert = {12: _snap((ROW_A,), 0.5), 16: _snap((ROW_A, ROW_C), 0.3),
+            20: _snap((ROW_A, ROW_C), 0.25)}
+    out = decompose_row_different(comparison, base, pert)
+    assert out["differ_kind"] == DIFFER_KIND_PAYLOAD_SEQUENCE
+    assert out["p_subclass"] == P_SUBCLASS_DECAYED
+    assert out["p_ever_differed_pre_comparison"]
+    assert out["p_equal_at_comparison"]
+
+    # TWO payload differences, P differed earlier, equal now: cancelled.
+    row_d = (1, "2", 0.75)
+    row_e = (1, "2", 0.1)
+    base = {16: _snap((ROW_A, ROW_B), 0.4), 20: _snap((ROW_A, ROW_B, row_d), 0.25)}
+    pert = {16: _snap((ROW_A, ROW_C), 0.3), 20: _snap((ROW_A, ROW_C, row_e), 0.25)}
+    out = decompose_row_different(comparison, base, pert)
+    assert out["differ_kind"] == DIFFER_KIND_PAYLOAD_SEQUENCE
+    assert out["p_subclass"] == P_SUBCLASS_CANCELLED
+    assert out["payload_diff_position_count"] == 2
+
+    # Payload differs but P never differed at any shared time.
+    base = {16: _snap((ROW_A,), 0.5), 20: _snap((ROW_A, ROW_B), 0.25)}
+    pert = {16: _snap((ROW_A,), 0.5), 20: _snap((ROW_A, ROW_C), 0.25)}
+    out = decompose_row_different(comparison, base, pert)
+    assert out["p_subclass"] == P_SUBCLASS_NEVER_CHANGED
+
+    # Partner identity only: NOT a differing scalar-P exposure; no P subclass.
+    row_same_payload_other_partner = (0, "3", 0.25)
+    base = {20: _snap((ROW_A, ROW_B), 0.25)}
+    pert = {20: _snap((ROW_A, row_same_payload_other_partner), 0.25)}
+    out = decompose_row_different(comparison, base, pert)
+    assert out["differ_kind"] == DIFFER_KIND_PARTNER_IDENTITY_ONLY
+    assert out["p_subclass"] is None
+    assert out["partner_diff_position_count"] == 1
+    assert out["payload_diff_position_count"] == 0
+
+    # Not row-different at the compared time: refuse to classify.
+    base = {20: _snap((ROW_A,), 0.5)}
+    with pytest.raises(ValueError):
+        decompose_row_different(comparison, base, dict(base))
+
+    # Single-step windows only.
+    with pytest.raises(ValueError):
+        decompose_row_different(
+            _comparison(window=(10, 11), physical_time=20), base, dict(base)
+        )
+
+
 def test_primary_classes_partition_all_comparisons():
     """The four primary classes partition every compared opportunity, and the
     set totals reproduce the frozen loop-3 / loop-4 counts (378/316/25/10)."""
@@ -164,6 +248,49 @@ def test_primary_classes_partition_all_comparisons():
         if row["primary"] != EXPOSURE_TARGET_EXPOSED_DIFFERENT_PAYLOAD:
             assert not row["post_exposure_environment_reconverged"]
             assert not row["post_exposure_full_non_p_reconverged"]
+            assert row["differ_kind"] is None and row["p_subclass"] is None
+        else:
+            assert row["differ_kind"] is not None
+
+    # Pro loop-4 C5: the corrected equal-payload semantics are registered.
+    rule = report["classification_rule"]
+    assert rule["equal_payload_corrected_name"] == EQUAL_PAYLOAD_CORRECTED_NAME
+
+    # Differ-kind decomposition of the row-different class is a partition, and
+    # P subclasses cover exactly the payload-sequence kind.
+    decomposition = report["row_different_decomposition"]
+    assert decomposition["total"] == 21
+    assert sum(decomposition["differ_kind"].values()) == decomposition["total"]
+    assert (
+        sum(decomposition["p_subclass"].values())
+        == decomposition["differ_kind"][DIFFER_KIND_PAYLOAD_SEQUENCE]
+    )
+    # Frozen MEASURED decomposition pins: 16 payload-sequence-different (ALL
+    # with the current P STILL different) and 5 partner-identity-only.
+    assert decomposition["differ_kind"] == {
+        DIFFER_KIND_PARTNER_IDENTITY_ONLY: 5,
+        DIFFER_KIND_PAYLOAD_SEQUENCE: 16,
+        DIFFER_KIND_ROW_COUNT: 0,
+    }
+    assert decomposition["p_subclass"] == {
+        P_SUBCLASS_STILL_DIFFERENT: 16,
+        P_SUBCLASS_NEVER_CHANGED: 0,
+        P_SUBCLASS_DECAYED: 0,
+        P_SUBCLASS_CANCELLED: 0,
+    }
+    # The five dP=0 row-different cases are each decomposed -- and every one is
+    # PARTNER-IDENTITY-ONLY with the P trajectory equal at every shared time:
+    # not a differing scalar-P exposure at all (the P update consumes payload),
+    # hence NOT evidence that P forgot while F retained.
+    zero_cases = decomposition["delta_p_zero_cases"]
+    assert len(zero_cases) == 5
+    for case in zero_cases:
+        assert case["differ_kind"] == DIFFER_KIND_PARTNER_IDENTITY_ONLY
+        assert case["p_subclass"] is None
+        assert case["payload_diff_position_count"] == 0
+        assert case["partner_diff_position_count"] >= 1
+        assert not case["row_count_differs"]
+        assert not case["p_ever_differed_pre_comparison"]
 
 
 def test_frozen_d1_pair_is_exposed_different():
