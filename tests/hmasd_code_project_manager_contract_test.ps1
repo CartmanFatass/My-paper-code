@@ -565,7 +565,7 @@ Assert-ExactHmasdKeyInventory -Actual $currentWorkIndexMap -ExpectedKeys @(
     'document_kind', 'schema_version', 'index_owner', 'state_updated',
     'session_record_ids', 'common_record_ids', 'legacy_snapshot') -Label 'CURRENT_WORK index'
 if ($currentWorkIndexMap.document_kind -cne 'current_work_index' -or
-    $currentWorkIndexMap.schema_version -cne '2' -or
+    $currentWorkIndexMap.schema_version -cne '3' -or
     $currentWorkIndexMap.index_owner -cne 'workflow_design_manager' -or
     $currentWorkIndexMap.state_updated -notmatch '^\d{4}-\d{2}-\d{2}$') {
     throw 'CURRENT_WORK index identity/schema is invalid'
