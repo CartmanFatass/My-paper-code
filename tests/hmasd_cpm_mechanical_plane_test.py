@@ -135,6 +135,61 @@ def test_verify_result_exact_identity_and_numeric_extraction(tmp_path: Path) -> 
     assert payload["observations"]["extractions"]["score_copy"] == 3.5
 
 
+def test_verify_result_accepts_utf8_bom_json_artifact(tmp_path: Path) -> None:
+    artifact = tmp_path / "receipt.json"
+    artifact.write_bytes(b"\xef\xbb\xbf" + json.dumps({"status": "ok"}).encode("utf-8"))
+    completed, payload = _run(
+        tmp_path,
+        "verify_result",
+        {
+            "required_artifacts": ["receipt.json"],
+            "required_json_fields": {"receipt.json": ["status"]},
+            "exact_equals": [{"artifact": "receipt.json", "field": "status", "expected": "ok"}],
+        },
+        reads=["receipt.json"],
+        writes=["result.json"],
+    )
+    assert completed.returncode == 0
+    assert payload["status"] == "COMPLETE"
+    assert payload["first_failure"] is None
+
+
+def test_assemble_handoff_success_writes_one_output(tmp_path: Path) -> None:
+    evidence = tmp_path / "evidence.json"
+    evidence.write_text(json.dumps({"status": "ok"}), encoding="utf-8")
+    output = tmp_path / "temp" / "handoff.json"
+    completed, payload = _run(
+        tmp_path,
+        "assemble_handoff",
+        {"evidence": ["evidence.json"], "output_path": "temp/handoff.json"},
+        reads=["evidence.json"],
+        writes=["result.json", "temp"],
+    )
+    assert completed.returncode == 0
+    assert payload["status"] == "COMPLETE"
+    assert payload["first_failure"] is None
+    assert payload["observations"]["handoff_path"] == str(output.resolve())
+    assert payload["output_paths"] == [str(output.resolve())]
+    assert output.is_file()
+
+
+def test_render_state_success_writes_one_output(tmp_path: Path) -> None:
+    output = tmp_path / "temp" / "proposed.md"
+    completed, payload = _run(
+        tmp_path,
+        "render_state",
+        {"proposed_files": [{"path": "temp/proposed.md", "content": "state\n"}]},
+        reads=[],
+        writes=["result.json", "temp"],
+    )
+    assert completed.returncode == 0
+    assert payload["status"] == "COMPLETE"
+    assert payload["first_failure"] is None
+    assert payload["observations"]["rendered_paths"] == [str(output.resolve())]
+    assert payload["output_paths"] == [str(output.resolve())]
+    assert output.read_text(encoding="utf-8") == "state\n"
+
+
 def test_render_state_rejects_canonical_owner_file(tmp_path: Path) -> None:
     completed, payload = _run(
         tmp_path,

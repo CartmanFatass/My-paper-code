@@ -360,7 +360,8 @@ def _load_artifact(raw: Any, index: int, root: Path, reads: list[str]) -> tuple[
     if not path.is_file():
         raise MechanicalError("MISSING_ARTIFACT", str(path), "required artifact is not a file")
     try:
-        content = path.read_text(encoding="utf-8")
+        encoding = "utf-8-sig" if json_required or path.suffix.lower() == ".json" else "utf-8"
+        content = path.read_text(encoding=encoding)
     except (OSError, UnicodeError) as exc:
         raise MechanicalError("UNREADABLE_ARTIFACT", str(path), str(exc)) from exc
     parsed: Any | None = None
@@ -484,7 +485,7 @@ def _task_verify_result(spec: Mapping[str, Any], root: Path, reads: list[str], w
     return {"artifacts": output_paths, "extractions": extractions}
 
 
-def _task_assemble_handoff(spec: Mapping[str, Any], root: Path, reads: list[str], writes: list[str]) -> tuple[dict[str, Any], list[str]]:
+def _task_assemble_handoff(spec: Mapping[str, Any], root: Path, reads: list[str], writes: list[str]) -> tuple[dict[str, Any], list[str], list[str]]:
     task = spec["task"]
     evidence_specs = task.get("evidence", task.get("artifacts", []))
     if not isinstance(evidence_specs, list):
@@ -503,7 +504,7 @@ def _task_assemble_handoff(spec: Mapping[str, Any], root: Path, reads: list[str]
         "evidence": evidence,
     }
     _atomic_write(output, json.dumps(payload, indent=2, sort_keys=True) + "\n")
-    return {"handoff_path": str(output), "evidence": evidence}, [str(output)]
+    return {"handoff_path": str(output), "evidence": evidence}, [str(output)], []
 
 
 def _temporary_owner_path(path: Path, root: Path) -> bool:
@@ -511,7 +512,7 @@ def _temporary_owner_path(path: Path, root: Path) -> bool:
     return relative == "temp" or relative.startswith("temp/")
 
 
-def _task_render_state(spec: Mapping[str, Any], root: Path, reads: list[str], writes: list[str]) -> tuple[dict[str, Any], list[str]]:
+def _task_render_state(spec: Mapping[str, Any], root: Path, reads: list[str], writes: list[str]) -> tuple[dict[str, Any], list[str], list[str]]:
     task = spec["task"]
     files = task.get("proposed_files", task.get("files", []))
     if not isinstance(files, list) or not files:
@@ -528,7 +529,7 @@ def _task_render_state(spec: Mapping[str, Any], root: Path, reads: list[str], wr
             content = json.dumps(content, indent=2, sort_keys=True) + "\n"
         _atomic_write(path, content)
         rendered.append(str(path))
-    return {"rendered_paths": rendered}, rendered
+    return {"rendered_paths": rendered}, rendered, []
 
 
 def _task_ticket_prepare(spec: Mapping[str, Any], root: Path, reads: list[str], writes: list[str]) -> tuple[dict[str, Any], list[str], list[str]]:
