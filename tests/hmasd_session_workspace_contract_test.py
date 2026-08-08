@@ -22,6 +22,7 @@ def test_wdm_is_the_single_workflow_owner() -> None:
         "workflow_child_acceptance_authority=none",
         "workflow_router_consistency_check=required_for_every_workflow_change",
         "workflow_implementer_parallelism=file_family_adaptive",
+        "assignment_writing_skill=hmasd-writing-agent-assignments",
         "child_assignment_brief=temp/sessions/<parent_role>/assignments/<assignment_id>.md",
         "child_assignment_format=self_contained_natural_language_not_schema_admission",
         "child_forked_context=background_only",
@@ -30,6 +31,31 @@ def test_wdm_is_the_single_workflow_owner() -> None:
         assert required in contract
     assert "workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces" in router
     assert "persistent_session_workflow_design_authority=none" in router
+    assert "workflow_assignment_writing_skill=hmasd-writing-agent-assignments" in router
+    assert "native_child_brief_content=" not in router
+    assert "Before designing, dispatching or materially revising any subagent or cross-session assignment/interface" in " ".join(router.split())
+
+
+def test_assignment_writing_preserves_semantic_context_over_file_only_anchors() -> None:
+    contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split())
+    router = " ".join(_text("AGENTS.md").split())
+    assert "hmasd-writing-agent-assignments" in contract
+    assert "hmasd-writing-agent-assignments" in router
+    assert "single assignment-writing contract" in contract
+    assert "rich natural-language brief" in contract
+    assert "Before designing or dispatching any registered child or cross-session task" in contract
+    for capability in (
+        "owned outcome",
+        "necessary observations",
+        "permitted actions",
+        "role-local judgment",
+        "bounded recovery",
+        "completion evidence",
+    ):
+        assert capability in contract
+    contract_lower = contract.lower()
+    assert "paths, statuses and schema fields are anchors, not meaning" in contract_lower
+    assert "never substitute for the semantic outcome or the child's judgment" in contract_lower
 
 
 def test_public_current_work_is_partitioned_and_owned() -> None:

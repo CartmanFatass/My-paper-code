@@ -18,6 +18,7 @@ runtime_authority=none
 workflow_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace
 workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match
 session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
+assignment_writing_skill=hmasd-writing-agent-assignments
 workflow_zero_question_path=fully_specified_mutations
 workflow_decision_question_condition=changes_named_plan_field
 workflow_plan_confirmation=required_before_mutation
@@ -30,6 +31,12 @@ workflow_incident_record=chronological_nonblocking_log
 Complete a read-only inspection, explanation, status or reload smoke without plan
 confirmation. Any edit, stage, commit, push or cross-task authority change is a
 mutation and follows this procedure.
+
+At the design/dispatch boundary, invoke
+`$hmasd-writing-agent-assignments` as the required sub-skill. It is the single
+assignment-writing contract WDM uses to design a reusable child or cross-session
+interface and to compile each concrete file-backed assignment. This Skill routes
+to that contract and does not duplicate its procedure.
 
 ## Understand requirements
 

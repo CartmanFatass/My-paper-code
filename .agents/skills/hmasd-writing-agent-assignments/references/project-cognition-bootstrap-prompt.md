@@ -1,5 +1,7 @@
 # HMASD Project Cognition Bootstrap Prompt
 
+This reusable cognition bootstrap is shared by the writing-assignment Skill; it remains a reference, not an authority source.
+
 **Use:** Paste the prompt below near the start of a persistent coding session, after the repository is available. Append the current user task at the end. This prompt supplies a reasoning philosophy, not authority. Repository instructions remain controlling.
 
 ---

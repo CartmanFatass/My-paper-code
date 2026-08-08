@@ -33,6 +33,7 @@ public_workflow_common_record=docs/project/current-work/common/workflow_control_
 workflow_collaboration_skill=hmasd-collaborative-workflow-design
 workflow_collaboration_scope=all_workflow_control_plane_mutations
 workflow_collaboration_runtime_authority=none
+workflow_assignment_writing_skill=hmasd-writing-agent-assignments
 workflow_audit_skill=hmasd-workflow-change-audit
 workflow_harness=.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py
 workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_principles|accepted_stable_workflow_contract|other_session_report
@@ -138,6 +139,15 @@ remain straightforward.
 WDM may use the registered Workflow Auditor, Implementer and Reviewer. Their
 fixed parent is WDM. Every assignment names
 `workflow_assignment_id`, exact `owned_paths` and `wdm_session_workspace`.
+Before designing or dispatching any child or cross-session task, WDM uses
+`$hmasd-writing-agent-assignments` both to design a reusable child or
+cross-session interface and to compile the concrete file-backed assignment.
+The parent retains semantic integration and must prove that the brief gives
+the child the owned outcome, necessary observations, permitted actions,
+role-local judgment, bounded recovery and completion evidence required for that
+outcome. Paths, statuses, schemas and forked context support the brief but do
+not substitute for its meaning. WDM reads
+`docs/project/SESSION_WORKSPACE_CONTRACT.md` as the stable boundary.
 Children add no authority: WDM resolves semantic junctions, reads the final
 diff, accepts the artifact and performs Git integration and cross-task routing.
 Every edit-capable child assignment also includes the exact resolved ticket
@@ -178,6 +188,10 @@ owns. Every role change checks six things in plain language: owned outcome,
 necessary observations, permitted actions, role-local judgment, bounded
 recovery and completion evidence. Authority limits prevent cross-owner effects;
 they do not replace observation, diagnosis or ordinary reversible judgment.
+
+WDM does not load code maps or code-context guides by default when writing or
+dispatching an assignment; it expands only to a concrete interface or
+authority dependency named by the confirmed slice.
 
 Keep the three instruction surfaces distinct. The role owns authority and the
 capability envelope. Its Skill owns the normal path and at most one simple

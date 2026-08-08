@@ -14,7 +14,12 @@ $harness = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/scripts/che
 $workflowMap = Read-RepoFile 'docs/project/WORKFLOW_MAP.md'
 $router = Read-RepoFile 'AGENTS.md'
 $sessionContract = Read-RepoFile 'docs/project/SESSION_WORKSPACE_CONTRACT.md'
+$collaborationSkill = Read-RepoFile '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md'
 $defectQueue = Read-RepoFile 'docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md'
+$normalizedManager = ($manager -replace '\s+', ' ').ToLowerInvariant()
+$normalizedRouter = ($router -replace '\s+', ' ').ToLowerInvariant()
+$normalizedSessionContract = ($sessionContract -replace '\s+', ' ').ToLowerInvariant()
+$normalizedCollaborationSkill = ($collaborationSkill -replace '\s+', ' ').ToLowerInvariant()
 
 $profiles = @(
     @('.agents/roles/WORKFLOW_AUDITOR.md', '.codex/agents/hmasd-workflow-auditor.toml', 'hmasd-workflow-auditor', '[agents."HMASDWorkflowAuditor"]', 'gpt-5.6-luna', 'high', 'read-only', 'WORKFLOW_IMPACT_PACKET'),
@@ -63,6 +68,46 @@ foreach ($required in @(
     'necessary observations', 'permitted actions',
     'exact resolved ticket', 'git rev-parse --show-toplevel')) {
     if (-not $manager.Contains($required)) { throw "WDM charter missing: $required" }
+}
+
+foreach ($required in @(
+    'workflow_assignment_writing_skill=hmasd-writing-agent-assignments',
+    'design a reusable child or cross-session interface',
+    'compile the concrete file-backed assignment',
+    'owned outcome, necessary observations, permitted actions, role-local judgment, bounded recovery and completion evidence',
+    'does not load code maps or code-context guides by default')) {
+    if (-not $normalizedManager.Contains($required.ToLowerInvariant())) { throw "WDM writing-agent routing contract missing: $required" }
+}
+
+foreach ($required in @(
+    'Before designing, dispatching or materially revising any subagent or cross-session assignment/interface',
+    'hmasd-writing-agent-assignments')) {
+    if (-not $normalizedRouter.Contains($required.ToLowerInvariant())) { throw "Router writing-agent routing contract missing: $required" }
+}
+
+foreach ($required in @(
+    'assignment_writing_skill=hmasd-writing-agent-assignments',
+    'required sub-skill',
+    'design a reusable child or cross-session interface',
+    'compile each concrete file-backed assignment')) {
+    if (-not $normalizedCollaborationSkill.Contains($required.ToLowerInvariant())) { throw "Collaborative Skill writing-agent contract missing: $required" }
+}
+
+foreach ($required in @(
+    'assignment_writing_skill=hmasd-writing-agent-assignments',
+    'single assignment-writing contract',
+    'rich natural-language brief',
+    'paths, statuses and schema fields are anchors, not meaning',
+    'never substitute for the semantic outcome or the child''s judgment')) {
+    if (-not $normalizedSessionContract.Contains($required.ToLowerInvariant())) { throw "Session assignment-writing contract missing: $required" }
+}
+
+$normalizedWorkflowMap = ($workflowMap -replace '\s+', ' ').ToLowerInvariant()
+foreach ($required in @(
+    'parent task model -> hmasd-writing-agent-assignments Skill -> self-contained',
+    'assignment -> child judgment/result',
+    'not a state machine, queue or admission gate')) {
+    if (-not $normalizedWorkflowMap.Contains($required.ToLowerInvariant())) { throw "Workflow Map assignment dependency missing: $required" }
 }
 
 foreach ($required in @(

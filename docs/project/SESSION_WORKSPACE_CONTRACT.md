@@ -8,6 +8,7 @@ shared_workflow_acceptance_authority=exclusive
 shared_workflow_git_authority=exclusive
 workflow_collaboration_skill=hmasd-collaborative-workflow-design
 workflow_audit_skill=hmasd-workflow-change-audit
+assignment_writing_skill=hmasd-writing-agent-assignments
 workflow_child_parent=workflow_design_manager
 workflow_child_acceptance_authority=none
 durable_workspace_root=docs/session-workspaces/<role_id>/
@@ -108,14 +109,19 @@ worktree is detached, at the expected HEAD and free of Git-visible changes.
 Retirement never uses force or discards work; a mismatch leaves both worktree
 and ticket intact.
 
-Before spawning an Implementer, Reviewer or Verifier, WDM or Code Project
-Manager writes the exact user-readable natural-language assignment beneath its
-own temporary `assignments/` directory. The brief explains outcome, intent,
-protected boundaries, local judgment and completion evidence. Suggested
-headings aid communication but never become required fields or an admission
-gate. Forked turns are background only; the brief controls task scope and
-completion. A child uses bounded reconnaissance to resolve ordinary omissions
-and escalates only a material outcome, authority or path change.
+Before designing or dispatching any registered child or cross-session task,
+its parent invokes `hmasd-writing-agent-assignments`, the single
+assignment-writing contract, and writes the exact user-readable brief beneath
+its own temporary `assignments/` directory. File-only transport carries this
+rich natural-language brief so the child can understand the owned outcome,
+intent, protected boundaries, necessary observations, permitted actions,
+role-local judgment, bounded recovery and completion evidence. Paths, statuses
+and schema fields are anchors, not meaning; they never substitute for the
+semantic outcome or the child's judgment. Suggested headings aid communication
+but never become required fields or an admission gate. Forked turns are
+background only; the brief controls task scope and completion. A child uses
+bounded reconnaissance to resolve ordinary omissions and escalates only a
+material outcome, authority or path change.
 
 Workflow reports from other sessions are advisory inputs. WDM appends typed
 defect reports to its chronological incident log. The log preserves order but

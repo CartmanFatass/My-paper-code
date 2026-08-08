@@ -147,10 +147,11 @@ improves ownership or serves multiple live callers.
 ## Project cognition references
 
 For a new persistent coding task, or when Code Project Manager clearly lacks the
-project mental model, read
-`references/project-cognition-bootstrap-prompt.md` once alongside the normally
-routed documents. It is a cognitive reference, not an authority source; never
-copied to each child assignment or loaded on every round.
+project mental model, read the reusable
+`.agents/skills/hmasd-writing-agent-assignments/references/project-cognition-bootstrap-prompt.md`
+once alongside the normally routed documents. It is a cognitive reference, not
+an authority source; never copied to each child assignment or loaded on every
+round.
 
 Use context depth deliberately rather than mechanically:
 
@@ -162,11 +163,13 @@ Use context depth deliberately rather than mechanically:
   assignment-named design, runtime boundary and claim evidence; existing
   readiness and review triggers still decide those actions.
 
-When compiling a child assignment, consult
-`references/assignment-brief-examples.md` only as an optional natural-language
-aid. The parent sends a shorter self-contained brief; forked turns are
-background context and never replace it. These references are judgment aids,
-not schemas or admission gates, and they do not define mandatory fields.
+When compiling a child assignment, use the
+`hmasd-writing-agent-assignments` Skill and its optional
+`.agents/skills/hmasd-writing-agent-assignments/references/assignment-brief-examples.md`
+as a natural-language aid. The parent sends a shorter self-contained brief;
+forked turns are background context and never replace it. The Skill and its
+references are judgment aids, not schemas or admission gates, and they do not
+define mandatory fields.
 
 Evaluate each change by coherent module responsibility, minimal public
 interfaces, directed dependencies, explicit state ownership, complexity

@@ -20,7 +20,7 @@ then procedural Skills. Use exactly one route:
 | Active identity | Read after this file | Do not load by default |
 |---|---|---|
 | Code Project Manager | `docs/project/CURRENT_WORK.md`, `.agents/roles/CODE_PROJECT_MANAGER.md`, then the active workstream's named paths | unrelated workstreams, research corpus and workflow history |
-| Workflow Design Manager | its assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, `CURRENT_WORK.md`, linked WDM records, `WORKFLOW_MAP.md`, collaborative-workflow Skill, then workflow-change-audit after plan confirmation | runtime, science and implementation state |
+| Workflow Design Manager | its assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, `CURRENT_WORK.md`, linked WDM records, `WORKFLOW_MAP.md`, collaborative-workflow Skill, writing-agent Skill at child/cross-session design or dispatch, then workflow-change-audit after plan confirmation | runtime, science and implementation state |
 | Agentify Transport child | its exact requester assignment, `.codex/agents/hmasd-agentify-transport.toml`, `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`, agentify Skill and its workspace | science, code, `CURRENT_WORK.md` and workflow history |
 | Independent Research Explorer | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, independent-research Skill, required principles and named sources | `CURRENT_WORK.md`, code, runtime and workflow state |
 | registered native child | its exact assignment, `.codex/agents/<profile>.toml`, named Role, then assignment-named files | `CURRENT_WORK.md`, persistent history and other roles |
@@ -30,6 +30,14 @@ A child never reconstructs task history. Missing identity, authority, path or
 completion condition fails closed. Persistent sessions route workflow defects
 and requirements to WDM; only WDM modifies or accepts workflow-control-plane
 surfaces.
+
+Before designing, dispatching or materially revising any subagent or
+cross-session assignment/interface, use
+`hmasd-writing-agent-assignments`. Read
+`docs/project/SESSION_WORKSPACE_CONTRACT.md` as the stable boundary. The Skill
+keeps the brief self-contained and natural-language; paths, schemas, statuses
+and forked context are anchors, not meaning, so the child can use local
+judgment without reconstructing the parent session.
 
 ## Authority and ownership
 
@@ -110,6 +118,7 @@ workflow_change_request_route=workflow_design_manager
 workflow_child_parent=workflow_design_manager|workflow_child_acceptance_authority=none|workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace|session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
 workflow_child_git_authority=none
 native_child_authority=exact_assignment_only
+workflow_assignment_writing_skill=hmasd-writing-agent-assignments
 workflow_implementer_parallelism=min(disjoint_owned_path_families,available_native_slots_minus_integrator)
 integrated_review=one_per_integrated_batch_by_default|parallel_only_for_independent_review_questions|no_automatic_rereview
 one_artifact_one_acceptance_owner=true

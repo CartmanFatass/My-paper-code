@@ -5,6 +5,7 @@ REPO = Path(__file__).resolve().parents[1]
 SKILL_PATH = REPO / ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md"
 UI_PATH = SKILL_PATH.parent / "agents/openai.yaml"
 ROLE_PATH = REPO / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md"
+ROUTER_PATH = REPO / "AGENTS.md"
 
 
 def test_collaborative_skill_is_the_only_design_collaboration_skill() -> None:
@@ -69,6 +70,27 @@ def test_role_routes_mutations_through_collaboration_before_audit() -> None:
     assert role.index("$hmasd-collaborative-workflow-design") < role.index(
         "$hmasd-workflow-change-audit"
     )
+
+
+def test_assignment_writing_skill_is_required_at_design_dispatch_boundary() -> None:
+    role = " ".join(ROLE_PATH.read_text(encoding="utf-8").split())
+    skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
+    router = " ".join(ROUTER_PATH.read_text(encoding="utf-8").split())
+    for text in (role, skill, router):
+        assert "hmasd-writing-agent-assignments" in text
+    assert "required sub-skill" in skill
+    assert "design a reusable child or cross-session interface" in skill
+    assert "compile each concrete file-backed assignment" in skill
+    for capability in (
+        "owned outcome",
+        "necessary observations",
+        "permitted actions",
+        "role-local judgment",
+        "bounded recovery",
+        "completion evidence",
+    ):
+        assert capability in role
+    assert "paths, statuses, schemas and forked context support the brief but do not substitute for its meaning" in role.lower()
 
 
 def test_wdm_is_the_single_workflow_owner_and_executes_after_confirmation() -> None:

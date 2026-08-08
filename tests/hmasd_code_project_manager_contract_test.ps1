@@ -13,9 +13,14 @@ $cpmWorkspacePath = Join-Path $repo 'docs/session-workspaces/code_project_manage
 $cpmFailureContainmentPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md'
 $currentWorkIndexPath = Join-Path $repo 'docs/project/CURRENT_WORK.md'
 $currentWorkSessionPath = Join-Path $repo 'docs/project/current-work/sessions/code_project_manager.md'
-$projectCognitionBootstrapPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/references/project-cognition-bootstrap-prompt.md'
+$writingAssignmentsSkillPath = Join-Path $repo '.agents/skills/hmasd-writing-agent-assignments/SKILL.md'
+$writingAssignmentsSkill = Get-Content -Raw -LiteralPath $writingAssignmentsSkillPath
+$writingAssignmentsSkillNormalized = $writingAssignmentsSkill -replace '\s+', ' '
+$projectCognitionBootstrapPath = Join-Path $repo '.agents/skills/hmasd-writing-agent-assignments/references/project-cognition-bootstrap-prompt.md'
 $codeContextGuidePath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/references/code-context-guide.md'
-$assignmentBriefExamplesPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/references/assignment-brief-examples.md'
+$assignmentBriefExamplesPath = Join-Path $repo '.agents/skills/hmasd-writing-agent-assignments/references/assignment-brief-examples.md'
+$retiredProjectCognitionBootstrapPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/references/project-cognition-bootstrap-prompt.md'
+$retiredAssignmentBriefExamplesPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/references/assignment-brief-examples.md'
 $obsoleteWdmPlanPath = Join-Path $repo 'docs/session-workspaces/workflow_design_manager/AGILE_MODULARIZATION_AND_SUBAGENT_EXECUTION_PLAN.md'
 $cpmWorkspace = Get-Content -Raw -LiteralPath $cpmWorkspacePath
 $cpmFailureContainment = Get-Content -Raw -LiteralPath $cpmFailureContainmentPath
@@ -308,6 +313,10 @@ $codeRequired = @(
 foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
 }
+if ((Test-Path -LiteralPath $retiredProjectCognitionBootstrapPath) -or
+    (Test-Path -LiteralPath $retiredAssignmentBriefExamplesPath)) {
+    throw 'General assignment-writing references remain under the code-only Agile Skill'
+}
 
 foreach ($retired in @(
     'AGENTIFY_REVIEW_BATCH_REQUEST',
@@ -466,9 +475,10 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'references/project-cognition-bootstrap-prompt.md',
+    'hmasd-writing-agent-assignments',
+    '.agents/skills/hmasd-writing-agent-assignments/references/project-cognition-bootstrap-prompt.md',
     'references/code-context-guide.md',
-    'references/assignment-brief-examples.md',
+    '.agents/skills/hmasd-writing-agent-assignments/references/assignment-brief-examples.md',
     'forked turns are background')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill missing project-cognition reference pointer: $required"

@@ -1,4 +1,4 @@
-# HMASD Code-Child Assignment Examples
+# HMASD Agent Assignment Examples
 
 These examples demonstrate information-rich natural-language assignments. They
 are not templates, mandatory headings, schemas, or admission gates. A shorter
@@ -26,6 +26,36 @@ environment construction.
 
 Completion is a focused failing-before/passing-after check plus a concise
 explanation of the defect and changed paths.
+
+## Example 5 — Non-code transport with an observable conflict
+
+An external-review transport child must answer a self-contained product-
+research question. The page reported that generation was complete, but the
+visible answer ended halfway through the requested comparison; a short
+response is not evidence that the requested outcome was completed. Treat this
+observed Agentify false completion as the RED baseline for the assignment.
+
+Read the context brief and the exact question, choose a matching conversation,
+and inspect the current composer state. If it shows High, open the model picker,
+select Pro, and verify that the composer visibly shows Pro after the selection
+before sending the question once. Treat an `expectedModel=Pro` argument, an
+available option or other recognition metadata as a capability hint only; none
+proves that the switch occurred. Completion also requires a nonempty
+natural-language answer that addresses every requested comparison and the
+visible page to be idle. If the page and structured status conflict, use local
+judgment to inspect the answer, preserve any completed rows, and recover without
+duplicating an active send.
+
+Do not infer completion from a `COMPLETE` token, provider-home URL, selected
+model label, or a response fragment. Do not redesign the transport protocol,
+add an admission schema, or decide the research conclusion. The child may
+retry one reversible page/session action when inspection shows it is safe, and
+must report the actual answer or the concrete unresolved conflict.
+
+Completion is a natural-language conclusion stating whether the requested
+comparison was answered, followed by the exact question/result paths and
+observable page evidence. A tool-recognition receipt without proof that the
+question was actually sent and answered is insufficient.
 
 ## Example 2 — Cross-module, behavior-preserving storage change
 

@@ -103,6 +103,11 @@ WDM semantic integration, acceptance and Git
 The arrows describe dependency and evidence flow, not a required state machine.
 Parallel Implementers are permitted only for disjoint owned path families.
 
+The stable assignment dependency is
+`parent task model -> hmasd-writing-agent-assignments Skill -> self-contained
+assignment -> child judgment/result`. This is context and evidence direction,
+not a state machine, queue or admission gate.
+
 ## Cost-aware adaptive delegation
 
 Delegation is primarily a cost boundary: WDM should place routine bounded work
@@ -129,8 +134,8 @@ met.
 
 The WDM normally starts with the exact assignment, its Role charter, the public
 current-work index, the linked WDM session/common records, this map and the
-named collaborative/workflow-change Skills. It expands only to the interfaces
-needed for the confirmed slice.
+named collaborative, assignment-writing and workflow-change Skills. It expands
+only to the interfaces needed for the confirmed slice.
 
 A Workflow Auditor, Implementer or Reviewer starts with its exact assignment,
 registered Profile, named Role and only assignment-named files. A child does
