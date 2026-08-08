@@ -54,6 +54,16 @@ def provision(
     return ticketing.provision_ticket(args)
 
 
+def retire(ticket: Path, assignment: str, expected_head: str) -> dict[str, object]:
+    return ticketing.retire_ticket(
+        argparse.Namespace(
+            ticket=ticket,
+            assignment_id=assignment,
+            expected_head=expected_head,
+        )
+    )
+
+
 def test_provision_resolve_and_verify_exact_scope(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -77,7 +87,121 @@ def test_provision_resolve_and_verify_exact_scope(
         argparse.Namespace(ticket=ticket, assignment_id="TASK_A")
     )
     assert verified["status"] == "WORKSPACE_TICKET_VERIFIED"
-    assert verified["changed_paths"] == ["pkg/worker.py"]
+    assert verified["git_visible_changed_paths"] == ["pkg/worker.py"]
+
+
+def test_retire_clean_detached_ticket_removes_worktree_and_ticket(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    created = provision(monkeypatch, source, worktree_root, base, assignment="TASK_RETIRE")
+    worktree = Path(str(created["resolved_worktree"]))
+    ticket = Path(str(created["ticket"]))
+
+    result = retire(ticket, "TASK_RETIRE", base)
+
+    assert result["status"] == "WORKSPACE_TICKET_RETIRED"
+    assert result["retry"] is False
+    assert not worktree.exists()
+    assert not ticket.exists()
+    assert "TASK_RETIRE" not in git(source, "worktree", "list")
+
+
+def test_retire_refuses_tracked_and_untracked_git_visible_dirtiness(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    tracked = provision(monkeypatch, source, worktree_root, base, assignment="TASK_DIRTY_TRACKED")
+    tracked_worktree = Path(str(tracked["resolved_worktree"]))
+    tracked_ticket = Path(str(tracked["ticket"]))
+    (tracked_worktree / "seed.txt").write_text("changed\n", encoding="utf-8")
+    with pytest.raises(ticketing.TicketError, match="dirty worktree"):
+        retire(tracked_ticket, "TASK_DIRTY_TRACKED", base)
+    assert tracked_worktree.exists()
+    assert ticketing._worktree_is_registered(source, tracked_worktree)
+
+    untracked = provision(monkeypatch, source, worktree_root, base, assignment="TASK_DIRTY_UNTRACKED")
+    untracked_worktree = Path(str(untracked["resolved_worktree"]))
+    untracked_ticket = Path(str(untracked["ticket"]))
+    (untracked_worktree / "untracked.txt").write_text("untracked\n", encoding="utf-8")
+    with pytest.raises(ticketing.TicketError, match="dirty worktree"):
+        retire(untracked_ticket, "TASK_DIRTY_UNTRACKED", base)
+    assert untracked_worktree.exists()
+    assert ticketing._worktree_is_registered(source, untracked_worktree)
+
+
+def test_retire_refuses_attached_branch_and_expected_head_mismatch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    attached = provision(monkeypatch, source, worktree_root, base, assignment="TASK_ATTACHED")
+    attached_worktree = Path(str(attached["resolved_worktree"]))
+    attached_ticket = Path(str(attached["ticket"]))
+    git(attached_worktree, "switch", "-c", "attached-branch")
+    with pytest.raises(ticketing.TicketError, match="detached HEAD"):
+        retire(attached_ticket, "TASK_ATTACHED", base)
+    assert attached_worktree.exists()
+
+    mismatch = provision(monkeypatch, source, worktree_root, base, assignment="TASK_HEAD_MISMATCH")
+    mismatch_worktree = Path(str(mismatch["resolved_worktree"]))
+    mismatch_ticket = Path(str(mismatch["ticket"]))
+    with pytest.raises(ticketing.TicketError, match="expected HEAD mismatch"):
+        retire(mismatch_ticket, "TASK_HEAD_MISMATCH", "0" * 40)
+    assert mismatch_worktree.exists()
+
+
+def test_retire_rejects_ticket_identity_substitution_and_non_ancestor_head(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    created = provision(monkeypatch, source, worktree_root, base, assignment="TASK_IDENTITY")
+    worktree = Path(str(created["resolved_worktree"]))
+    ticket = Path(str(created["ticket"]))
+    payload = json.loads(ticket.read_text(encoding="utf-8"))
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    payload["resolved_worktree"] = str(outside)
+    ticket.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ticketing.TicketError, match="outside the registered worktree root"):
+        retire(ticket, "TASK_IDENTITY", base)
+    assert worktree.exists()
+
+    payload["resolved_worktree"] = str(worktree)
+    ticket.write_text(json.dumps(payload), encoding="utf-8")
+    tree = git(worktree, "write-tree")
+    unrelated = git(worktree, "commit-tree", tree, "-m", "unrelated")
+    git(worktree, "checkout", "--detach", unrelated)
+    with pytest.raises(ticketing.TicketError, match="ancestor"):
+        retire(ticket, "TASK_IDENTITY", unrelated)
+    assert worktree.exists()
+
+
+def test_retire_retry_removes_ticket_after_worktree_removal(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    created = provision(monkeypatch, source, worktree_root, base, assignment="TASK_RETRY_RETIRE")
+    worktree = Path(str(created["resolved_worktree"]))
+    ticket = Path(str(created["ticket"]))
+    real_unlink = Path.unlink
+    failed = False
+
+    def fail_ticket_unlink(path: Path, *args: object, **kwargs: object) -> None:
+        nonlocal failed
+        if path == ticket and not failed:
+            failed = True
+            raise OSError("simulated ticket deletion failure")
+        real_unlink(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "unlink", fail_ticket_unlink)
+    with pytest.raises(ticketing.TicketError, match="retry retire"):
+        retire(ticket, "TASK_RETRY_RETIRE", base)
+    assert not worktree.exists()
+    assert ticket.exists()
+
+    result = retire(ticket, "TASK_RETRY_RETIRE", base)
+    assert result["retry"] is True
+    assert not ticket.exists()
 
 
 def test_ticket_rejects_external_substitution_and_out_of_scope_writes(
@@ -221,7 +345,7 @@ def test_long_checkout_uses_command_local_longpaths(
     verified = ticketing.verify_ticket(
         argparse.Namespace(ticket=Path(str(created["ticket"])), assignment_id="TASK_LONG_PATH")
     )
-    assert verified["changed_paths"] == []
+    assert verified["git_visible_changed_paths"] == []
     assert git(source, "config", "core.longpaths") == "false"
     assert any(
         args[:4] == ("-c", "core.longpaths=true", "worktree", "add")

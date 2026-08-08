@@ -275,14 +275,19 @@ def _load_ticket(ticket_path: Path, expected_assignment: str | None) -> dict[str
 
 
 def _resolve_payload(
-    ticket_path: Path, expected_assignment: str | None
+    ticket_path: Path, expected_assignment: str | None, *, allow_missing_worktree: bool = False
 ) -> tuple[dict[str, Any], Path, list[str]]:
     canonical_ticket = _canonical(ticket_path, label="workspace ticket")
     payload = _load_ticket(canonical_ticket, expected_assignment)
     raw_worktree = payload.get("resolved_worktree")
     if not isinstance(raw_worktree, str):
         raise TicketError("workspace ticket has no resolved_worktree")
-    worktree = _canonical(Path(raw_worktree), label="ticket worktree")
+    try:
+        worktree = _canonical(Path(raw_worktree), label="ticket worktree")
+    except TicketError:
+        if not allow_missing_worktree:
+            raise
+        worktree = Path(raw_worktree).resolve(strict=False)
     if not _same_path(worktree, Path(raw_worktree)):
         raise TicketError("ticket worktree is not canonical")
     root = _worktree_root()
@@ -292,9 +297,15 @@ def _resolve_payload(
     recorded_admin = payload.get("git_admin_dir")
     if not isinstance(recorded_admin, str):
         raise TicketError("workspace ticket has no git_admin_dir")
-    actual_admin = _git_admin_dir(worktree)
-    recorded_admin_path = _canonical(
-        Path(recorded_admin), label="recorded git admin directory"
+    actual_admin = (
+        Path(recorded_admin).resolve(strict=False)
+        if allow_missing_worktree and not worktree.exists()
+        else _git_admin_dir(worktree)
+    )
+    recorded_admin_path = (
+        Path(recorded_admin).resolve(strict=False)
+        if allow_missing_worktree and not worktree.exists()
+        else _canonical(Path(recorded_admin), label="recorded git admin directory")
     )
     if not _same_path(actual_admin, recorded_admin_path):
         raise TicketError("worktree git identity changed after ticket creation")
@@ -459,7 +470,86 @@ def verify_ticket(args: argparse.Namespace) -> dict[str, Any]:
         "resolved_worktree": str(worktree),
         "base_commit": actual_commit,
         "allowed_paths": allowed,
-        "changed_paths": changed_paths,
+        "git_visible_changed_paths": changed_paths,
+    }
+
+
+def _expected_head(raw: str) -> str:
+    expected = raw.strip()
+    if not re.fullmatch(r"[0-9a-f]{40}", expected):
+        raise TicketError("expected head must be exactly forty lowercase hexadecimal characters")
+    return expected
+
+
+def _retire_removed_ticket(args: argparse.Namespace) -> dict[str, Any]:
+    payload, worktree, _allowed = _resolve_payload(
+        args.ticket, args.assignment_id, allow_missing_worktree=True
+    )
+    if worktree.exists() or worktree.is_symlink():
+        raise TicketError("retire retry requires the registered worktree to be absent")
+    repo = _main_repository(REGISTERED_REPOSITORY)
+    if _worktree_is_registered(repo, worktree):
+        raise TicketError("retire retry requires registered worktree state to be absent")
+    expected = _expected_head(args.expected_head)
+    try:
+        _git(repo, "merge-base", "--is-ancestor", payload["base_commit"], expected)
+    except TicketError as exc:
+        raise TicketError("ticket base is not an ancestor of expected head") from exc
+    ticket_path = _canonical(args.ticket, label="workspace ticket")
+    try:
+        ticket_path.unlink()
+    except OSError as exc:
+        raise TicketError(f"cannot remove workspace ticket after worktree removal: {exc}") from exc
+    _verify_worktree_absent(repo, worktree, ticket_path)
+    return {
+        "status": "WORKSPACE_TICKET_RETIRED",
+        "assignment_id": payload["assignment_id"],
+        "resolved_worktree": str(worktree),
+        "expected_head": expected,
+        "git_visible_changed_paths": [],
+        "retry": True,
+    }
+
+
+def retire_ticket(args: argparse.Namespace) -> dict[str, Any]:
+    expected = _expected_head(args.expected_head)
+    try:
+        payload, worktree, allowed = _resolve_payload(args.ticket, args.assignment_id)
+    except TicketError:
+        return _retire_removed_ticket(args)
+
+    repo = _main_repository(REGISTERED_REPOSITORY)
+    actual_head = _git(worktree, "rev-parse", "HEAD")
+    if actual_head != expected:
+        raise TicketError(f"expected HEAD mismatch: expected {expected}, got {actual_head}")
+    if _git(worktree, "rev-parse", "--abbrev-ref", "HEAD") != "HEAD":
+        raise TicketError("retire requires a detached HEAD")
+    try:
+        _git(worktree, "merge-base", "--is-ancestor", payload["base_commit"], expected)
+    except TicketError as exc:
+        raise TicketError("ticket base is not an ancestor of expected head") from exc
+    changed_paths = _status_paths(worktree)
+    if changed_paths:
+        raise TicketError("cannot retire dirty worktree; git-visible paths: " + ", ".join(changed_paths))
+    _verify_registered_worktree_identity(worktree, _common_git_dir(repo))
+    _worktree_git(repo, "remove", str(worktree))
+    if worktree.exists() or _worktree_is_registered(repo, worktree):
+        raise TicketError("retire did not remove the registered worktree")
+    ticket_path = _canonical(args.ticket, label="workspace ticket")
+    try:
+        ticket_path.unlink()
+    except OSError as exc:
+        raise TicketError(
+            f"worktree retired but ticket removal failed; retry retire: {exc}"
+        ) from exc
+    _verify_worktree_absent(repo, worktree, ticket_path)
+    return {
+        "status": "WORKSPACE_TICKET_RETIRED",
+        "assignment_id": payload["assignment_id"],
+        "resolved_worktree": str(worktree),
+        "expected_head": expected,
+        "git_visible_changed_paths": [],
+        "retry": False,
     }
 
 
@@ -480,6 +570,11 @@ def parser() -> argparse.ArgumentParser:
         command.add_argument("--ticket", type=Path, required=True)
         command.add_argument("--assignment-id")
         command.set_defaults(handler=handler)
+    retire = subparsers.add_parser("retire")
+    retire.add_argument("--ticket", type=Path, required=True)
+    retire.add_argument("--assignment-id", required=True)
+    retire.add_argument("--expected-head", required=True)
+    retire.set_defaults(handler=retire_ticket)
     return root
 
 
