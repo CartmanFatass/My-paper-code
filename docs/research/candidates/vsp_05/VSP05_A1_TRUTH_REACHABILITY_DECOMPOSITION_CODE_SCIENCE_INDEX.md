@@ -1,12 +1,39 @@
 # VSP05-A1 truth-reachability decomposition code/science index
 
-This package prepares the single fixed recovery trace for
+This package implements and records the single fixed recovery trace for
 `VSP05-A1-TRUTH-REACHABILITY-DECOMPOSITION`. It is an evidence-level-A,
 nonintervening real-runtime observation of `CAND-VSP-05@adversarial-revision-v7`.
 It does not train a learner, modify the proposal or environment, advance a
-hypothetical transition, select a cell, or make a direction decision. The
-registered full pass is intentionally unexecuted in this implementation
-package; CPM owns its later dispatch and technical acceptance.
+hypothetical transition, select a cell, or make a direction decision. CPM
+technically accepted the one full trace from implementation source commit
+`1a09bccf9bd64c756865531bc55a871afa286dd3`; Explorer retains scientific
+intake and the next-action decision.
+
+## Accepted full trace
+
+The fresh nonformal run
+`vsp05_a1_truth_reachability_1a09bccf_r1` completed 432 episodes and 34,560
+real transitions over all six cells and seeds 68101–68103. It retained 15,971
+real frontier rows and 47,913 static hypothetical-incumbent rows. Environment,
+supplied-executor, lifecycle-core and trace-hook calls matched their declared
+real activity; learner, trainer, optimizer and hypothetical-environment calls
+were zero.
+
+Strict truth was physically present for at least one skill in 15,531 real
+frontier rows, but no real incumbent-bearing row had strict truth for a
+non-incumbent skill, no actual frozen proposal was strict-true, and no complete
+eligible strict-truth conjunction was observed. Static hypothetical-incumbent
+compatibility existed in 31,010 rows. The frozen finite decision map therefore
+returned branch 5,
+`COMPATIBILITY_ONLY_UNDER_STATIC_HYPOTHETICAL_INCUMBENTS`: lifecycle/incumbent
+occupancy remains the discriminator within this fixed cap. This is not a
+global reachability-impossibility, prevalence, learner-value or utility claim.
+
+The canonical compact result is
+`VSP05_A1_TRUTH_REACHABILITY_DECOMPOSITION_RESULT.json`. It retains the full
+256-row mask histogram, 64-row tied near-miss table, all requested
+zero-retaining marginals, the static joint table, exact counts and the raw
+artifact SHA-256. The local raw artifact retains every real and static row.
 
 | Protected assertion | Exact implementation symbols | Observable invariant | Focused test | Excluded alternate explanation |
 |---|---|---|---|---|
@@ -26,8 +53,7 @@ package; CPM owns its later dispatch and technical acceptance.
 
 The runner writes raw real frontier rows, all static compatibility rows,
 zero-filled tables, exact activity counts and one finite-evidence decision-map
-branch. A later CPM-owned full run may publish a compact public result while
-retaining its raw output under the frozen run identity. Until that run is
-technically accepted, this index records implementation/readiness claims only;
-it licenses no B learner comparison, C treatment, External Pro review,
-promotion, retirement, global reachability claim, or sibling/portfolio claim.
+branch. The technically accepted compact public result retains the audit
+tables while the raw output remains under the frozen run identity. Technical
+acceptance licenses no B learner comparison, C treatment, External Pro review,
+promotion, retirement, global reachability claim or sibling/portfolio claim.
