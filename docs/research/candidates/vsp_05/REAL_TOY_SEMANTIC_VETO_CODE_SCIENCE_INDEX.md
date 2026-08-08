@@ -81,3 +81,29 @@ completion is not scientific acceptance and does not establish promotion,
 retirement, utility, generalization, deployment value, production coverage or
 any broader semantic-veto claim. The result must be interpreted only within
 the exact registered environment, mechanism, arms, seeds and budget above.
+
+## Registered B1 execution receipt
+
+The one authorized fresh run `vsp05_b1_e50b43e3_r1` used source commit
+`e50b43e30b2010c5320f0e23d0f2ba5c28804b1e`. TRAIN, EVALUATE and ANALYZE all
+exited zero. The declared and actual counts matched exactly: 7,680 training
+transitions, 23,040 evaluation transitions, 30,720 total transitions, 768
+optimizer updates, 96 training episodes and 288 evaluated episodes. All seven
+real environment/policy/learner/trainer/evaluation/executor/core call flags
+were true.
+
+The fixed host instance produced alias-only support: training seeds yielded
+9, 6 and 6 alias records and zero strict-truth records; every evaluation arm
+had 23 gated alias opportunities and zero strict-truth opportunities. TARGET
+and SHAM therefore both vetoed all 23 gated opportunities, while DET adopted
+all 23. Their primary premature-handoff rates were respectively `0/23`,
+`0/23` and `23/23`; TARGET-minus-SHAM was exactly zero. Miss and event-rank
+delay remained undefined because strict-truth support was zero. These are
+mechanical observations, not a scientific direction decision.
+
+The tracked public evidence is
+[`REAL_TOY_SEMANTIC_VETO_RESULT.json`](REAL_TOY_SEMANTIC_VETO_RESULT.json).
+It preserves exact per-training-seed records, per-evaluation-seed/arm
+aggregates, total aggregates, configuration, call counts and the source-bound
+run locator. The full 288 episode rows remain in the run-owned raw artifact
+`logs/vsp05_b1_real_toy_semantic_veto_e50b43e3_r1/raw_result.json`.
