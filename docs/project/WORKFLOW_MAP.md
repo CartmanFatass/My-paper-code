@@ -16,23 +16,27 @@ exhaustive registry or procedure copy.
 | Owner | Stable responsibility | Interface handed onward |
 |---|---|---|
 | Workflow Design Manager (WDM) | user-confirmed workflow design, control-plane modification, semantic integration, acceptance and workflow Git | confirmed plan, self-contained child assignment, integrated change packet and successor brief |
-| Workflow Auditor | read-only local reconnaissance for an assigned workflow surface | bounded facts, dependency/ownership observations, conflicts and unknowns |
-| Workflow Implementer | one frozen non-overlapping workflow change slice | `WORKFLOW_CHANGE_PACKET` with changed paths, checks, boundaries and limitations |
-| Workflow Reviewer | independent review of one coherent integrated batch | review findings and disposition for WDM; no source edits or acceptance |
+| Workflow Auditor | read-only local reconnaissance for an assigned workflow surface | conclusion about bounded facts/conflicts, followed by optional dependency evidence |
+| Workflow Implementer | one frozen non-overlapping workflow change slice | conclusion about the owned outcome and checked consequence, followed by an optional `WORKFLOW_CHANGE_PACKET` factual tail |
+| Workflow Reviewer | independent review of one coherent integrated batch | conclusion and advisory disposition for WDM, followed by optional findings evidence; no source edits or acceptance |
 | Code Project Manager (CPM) | code, runtime, technical acceptance and project-operation records | code/runtime/review artifacts plus CPM-owned mechanical receipts |
 | Independent Research Explorer | advisory research direction, methodology and research workspace | named research handoff; no workflow authority |
-| Agentify Transport child | batch-scoped transport mechanics in its requester-assigned workspace | raw transport result for CPM or Explorer |
+| Agentify Transport child | batch-scoped transport mechanics in its requester-assigned workspace; WDM may parent only an exact workflow-acceptance smoke batch | raw transport result for CPM or Explorer, or direct smoke-test evidence for WDM |
 | External Pro | bounded independent scientific judgment | exact review result within the submitted question boundary |
 
 The stable CPM mechanical interface is a CPM-only child boundary:
-`hmasd-cpm-mechanical` receives one exact temporary
-`CPM_MECHANICAL_TASK_ASSIGNMENT` (`spec_path|result_path`) and returns one
-typed temporary `CPM_MECHANICAL_TASK_RESULT` (`status|result_path|error`). It
-is silent until its native terminal return and writes only assignment-named
-temporary outputs. CPM retains finalization, technical acceptance, source/Git
-and canonical-state ownership; the child has no experiment, readiness,
-Agentify, science, Git or acceptance authority. Activation requires a fresh
-profile reload and has no active research-state effect.
+`hmasd-cpm-mechanical` receives one self-contained natural-language mechanical
+brief plus one exact temporary `CPM_MECHANICAL_TASK_ASSIGNMENT`
+(`spec_path|result_path`). The brief supplies purpose, consumers, protected
+meaning, permitted observation/recovery and completion evidence; the spec is a
+deterministic execution anchor. The child returns a natural-language mechanical
+conclusion followed by temporary `CPM_MECHANICAL_TASK_RESULT`
+(`status|result_path|error`) anchors. It is silent until its native terminal
+return and writes only assignment-named temporary outputs. CPM retains
+sufficiency judgment, finalization, technical acceptance, source/Git and
+canonical-state ownership; the child has no experiment, readiness, Agentify,
+science, Git or acceptance authority. Activation requires a fresh profile
+reload and has no active research-state effect.
 
 ```text
 cpm_mechanical_child=hmasd-cpm-mechanical
@@ -74,28 +78,31 @@ not move back into the router or this map.
 
 WDM owns the workflow control plane and depends on the stable contracts named by
 the router. A child depends only on its self-contained assignment, registered
-Profile, Role charter and assignment-named references. Child output flows back
-to WDM as advisory or mechanical evidence; it never grants child design,
-routing, Git or acceptance authority. CPM and Explorer remain separate owner
-lanes. CPM may invoke its mechanical child through the exact file-only
-assignment/result boundary; the typed temporary receipt returns to CPM for
+Profile, Role charter and assignment-named references. Child output begins with
+a natural-language conclusion and may append a compact factual packet or
+receipt tail. It flows back to the parent as advisory, operational or
+mechanical evidence; it never grants child design, routing, Git or acceptance
+authority. CPM and Explorer remain separate owner lanes. CPM may invoke its
+mechanical child through the exact file-only assignment/result boundary; the
+conclusion and temporary receipt return to CPM for sufficiency judgment,
 finalization and acceptance. The registered Agentify transport child remains a
-requester-owned batch capability rather than a separate owner lane; WDM does
-not absorb live review traffic or results. External Pro remains a separate
-scientific lane.
+requester-owned batch capability rather than a separate owner lane; its full
+answer, conversation evidence and conclusion return to the requester. WDM does
+not absorb CPM/Explorer live review traffic or results. External Pro remains a
+separate scientific lane.
 
 ```text
-CPM -> hmasd-cpm-mechanical -> CPM_MECHANICAL_TASK_RESULT -> CPM finalization/technical acceptance
+CPM task model -> hmasd-cpm-mechanical -> conclusion + CPM_MECHANICAL_TASK_RESULT anchors -> CPM sufficiency/finalization/technical acceptance
 ```
 
 ```text
 user-confirmed plan
         ↓
-WDM assignment → Auditor observations (when needed)
+WDM assignment → Auditor conclusion/observations (when needed)
         ↓
-frozen owned slice → Implementer packet(s)
+frozen owned slice → Implementer conclusion + factual tail
         ↓
-coherent integrated batch → one Reviewer report
+coherent integrated batch → one Reviewer conclusion/report
         ↓
 WDM semantic integration, acceptance and Git
 ```

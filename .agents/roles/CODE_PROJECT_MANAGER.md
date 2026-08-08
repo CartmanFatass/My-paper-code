@@ -301,7 +301,8 @@ Verifier exclusively executes the ordered six-phase readiness wrapper, and
 Agentify Transport exclusively owns formal/Explorer review transport. These
 boundaries are separate from the CPM mechanical child. For formal or
 Explorer-to-project reviews, CPM freezes each standalone question and writes
-one minimal ordered batch file containing exactly `provider|question_paths`,
+one minimal ordered batch file containing exactly
+`provider|context_path|question_paths`,
 then chooses one exact `results_path`. CPM dispatches the reusable registered
 `hmasd-agentify-transport` native child with a self-contained
 `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` naming `batch_path|results_path` and
@@ -309,7 +310,7 @@ then chooses one exact `results_path`. CPM dispatches the reusable registered
 page/model/send/wait/recovery mechanics. It stays silent while live, with no
 progress, commentary, collaboration, or repeated wait/poll handling, and
 returns exactly once through one terminal native final with `COMPLETE` or
-`ERROR`, carrying `AGENTIFY_REVIEW_BATCH_RESULT` fields
+`ERROR`, carrying a conclusion followed by `AGENTIFY_REVIEW_BATCH_RESULT` fields
 `status|results_path|error`. The named result file retains its ordered raw
 response rows. CPM reads that file only after the terminal return, copies each
 raw response into its canonical archive and performs mechanical intake. A retry

@@ -6,14 +6,20 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $config = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/config.toml')
 $profilePath = Join-Path $repo '.codex/agents/hmasd-cpm-mechanical.toml'
 $rolePath = Join-Path $repo '.agents/roles/CPM_MECHANICAL_OPERATOR.md'
+$skillPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md'
 $scriptPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/scripts/hmasd_cpm_mechanical.py'
-foreach ($path in @($profilePath, $rolePath, $scriptPath)) {
+foreach ($path in @($profilePath, $rolePath, $skillPath, $scriptPath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing CPM mechanical path: $path" }
 }
 
 $profile = Get-Content -Raw -LiteralPath $profilePath
 $role = Get-Content -Raw -LiteralPath $rolePath
+$skill = Get-Content -Raw -LiteralPath $skillPath
 $script = Get-Content -Raw -LiteralPath $scriptPath
+
+foreach ($path in @($profilePath, $rolePath, $scriptPath)) {
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing CPM mechanical path: $path" }
+}
 
 foreach ($required in @(
     '[agents."HMASDCPMMechanical"]',
@@ -29,11 +35,10 @@ foreach ($required in @(
     'model_reasoning_effort = "low"',
     'sandbox_mode = "workspace-write"',
     '.agents/roles/CPM_MECHANICAL_OPERATOR.md',
-    'fork_turns=none',
     'CPM_MECHANICAL_TASK_ASSIGNMENT',
     'CPM_MECHANICAL_TASK_RESULT',
-    'PYTHONDONTWRITEBYTECODE=1',
-    'prepare-integrate')) {
+    'natural-language brief',
+    'deterministic execution anchor')) {
     if (-not $profile.Contains($required)) { throw "CPM mechanical profile missing: $required" }
 }
 foreach ($required in @(
@@ -46,9 +51,28 @@ foreach ($required in @(
     'assemble_handoff',
     'render_state',
     'ticket_prepare',
+    'semantic task authority',
+    'CPM consumers',
+    'protected',
+    'at most one',
+    'read-only observation recovery',
+    'automatic repair or retry',
+    'natural-language mechanical conclusion',
+    'direct consequence',
+    'residual uncertainty',
+    '`COMPLETE` means',
+    'accepted the underlying result',
     'Git',
     'acceptance')) {
     if (-not $role.Contains($required)) { throw "CPM mechanical role missing: $required" }
+}
+if ($profile.Contains('hmasd_cpm_mechanical.py run --spec') -or $profile.Contains('schema_version=1') -or $profile.Contains('PYTHONDONTWRITEBYTECODE=1')) {
+    throw 'CPM mechanical profile must remain thin; dispatcher procedure belongs to the role/Skill'
+}
+foreach ($required in @(
+    'native child. CPM writes one ordered batch file containing exactly',
+    'registered `hmasd-cpm-mechanical` child')) {
+    if (-not $skill.Contains($required)) { throw "Agile Skill context boundary missing: $required" }
 }
 foreach ($required in @(
     'SCHEMA_VERSION = 1',

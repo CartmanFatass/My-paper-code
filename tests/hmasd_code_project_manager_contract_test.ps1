@@ -2,6 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 $repo = Split-Path -Parent $PSScriptRoot
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
+$config = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/config.toml')
 $codePmPath = Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md'
 $oldPmPath = Join-Path $repo '.agents/roles/PROJECT_MANAGER.md'
 $oldOperatorPath = Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md'
@@ -244,7 +245,7 @@ $codeRequired = @(
     'protected_implementation_child=hmasd-implementer',
     'AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
     'AGENTIFY_REVIEW_BATCH_RESULT',
-    'provider|question_paths',
+    'provider|context_path|question_paths',
     'batch_path|results_path',
     'fork_turns=none',
     'COMPLETE',
@@ -388,18 +389,57 @@ foreach ($required in @(
     'model = "gpt-5.6-terra"',
     'model_reasoning_effort = "high"',
     '.agents/roles/IMPLEMENTER.md',
-    'behavior-preserving modularization',
-    'training semantic')) {
+    'registered child of Code Project Manager',
+    'exact assignment')) {
     if (-not $routineImplementerProfile.Contains($required)) {
         throw "Routine Terra implementer profile missing: $required"
     }
 }
 
+foreach ($registration in @(
+    @{ Agent = 'HMASDImplementer'; Profile = 'hmasd-implementer.toml'; Model = 'gpt-5.6-sol'; Effort = 'high' },
+    @{ Agent = 'HMASDRoutineImplementer'; Profile = 'hmasd-implementer-terra.toml'; Model = 'gpt-5.6-terra'; Effort = 'high' })) {
+    $header = '[agents."' + $registration.Agent + '"]'
+    $headerCount = [regex]::Matches($config, [regex]::Escape($header)).Count
+    if ($headerCount -ne 1) {
+        throw "Implementer registration must appear exactly once: $($registration.Agent)"
+    }
+    $configFile = 'config_file = "./agents/' + $registration.Profile + '"'
+    if ([regex]::Matches($config, [regex]::Escape($configFile)).Count -ne 1) {
+        throw "Implementer profile path must appear exactly once: $($registration.Profile)"
+    }
+}
+foreach ($profileRoute in @(
+    @{ Text = $protectedImplementerProfile; Model = 'gpt-5.6-sol'; Effort = 'high'; Label = 'protected Sol' },
+    @{ Text = $routineImplementerProfile; Model = 'gpt-5.6-terra'; Effort = 'high'; Label = 'routine Terra' })) {
+    foreach ($required in @(
+        ('model = "' + $profileRoute.Model + '"'),
+        ('model_reasoning_effort = "' + $profileRoute.Effort + '"'),
+        '.agents/roles/IMPLEMENTER.md')) {
+        if (-not $profileRoute.Text.Contains($required)) {
+            throw "$($profileRoute.Label) profile routing missing: $required"
+        }
+    }
+}
+
 foreach ($profile in @($routineImplementerProfile, $protectedImplementerProfile)) {
-    foreach ($required in @('workspace ticket', '.agents/roles/IMPLEMENTER.md',
-            'absolute `apply_patch` targets', '-c core.longpaths=true')) {
+    foreach ($required in @('exact assignment', '.agents/roles/IMPLEMENTER.md',
+            'registered child of Code Project Manager', 'Do not mutate Git')) {
         if (-not $profile.Contains($required)) {
-            throw "Ticketed implementer profile missing the shared edit-target rule: $required"
+            throw "Thin implementer profile missing the shared pointer/boundary: $required"
+        }
+    }
+    foreach ($forbidden in @(
+            'purpose, observed behavior or failure',
+            'necessary consequential scope',
+            'Every result must begin with a concise natural-language conclusion',
+            'scripts/hmasd_workspace_ticket.py',
+            'absolute `apply_patch` targets',
+            'core.longpaths=true',
+            'Use only the assignment-named runtime',
+            'Return status, changed files, checks')) {
+        if ($profile.Contains($forbidden)) {
+            throw "Thin implementer profile duplicates Role procedure: $forbidden"
         }
     }
 }
@@ -413,11 +453,44 @@ foreach ($required in @('returned `resolved_worktree` as the only edit root',
 if (-not $implementerRole.Contains('reversible local engineering choice')) {
     throw 'Implementers lack bounded local engineering judgment'
 }
-foreach ($profile in @($routineImplementerProfile, $protectedImplementerProfile,
-        $reviewerProfile, $verifierProfile)) {
+foreach ($required in @(
+        'purpose, observed behavior or failure, consumer relationships',
+        'frozen scientific or technical choices',
+        'necessary consequential scope',
+        'focused evidence',
+        'Assignment quality governs executability and outcome',
+        'model strength adds no authority and never substitutes for a complete assignment',
+        'Every result must begin with a concise natural-language conclusion',
+        'what outcome was achieved or remains unresolved',
+        'direct consumer or cross-module consequence checked',
+        'residual uncertainty',
+        'A mechanical status or changed-path list alone is not a complete result')) {
+    if (-not $implementerRoleNormalized.Contains(($required -replace '\s+', ' '))) {
+        throw "Implementer result/context contract missing: $required"
+    }
+}
+if (-not $routineImplementerProfile.Contains('material or outcome-changing') -or
+    -not $routineImplementerProfile.Contains('reversible internal organization') -or
+    $routineImplementerProfile.Contains('You do not choose scientific semantics, architecture direction')) {
+    throw 'Terra local-judgment boundary is not precise'
+}
+foreach ($required in @('protected Sol route', 'assignment-specified semantics')) {
+    if (-not $protectedImplementerProfile.Contains($required)) {
+        throw "Protected Sol routing distinction missing: $required"
+    }
+}
+foreach ($profile in @($reviewerProfile)) {
     if (-not $profile.Contains('child-context') -or
         -not $profile.Contains('exact assignment controls')) {
-        throw 'Code-child profile does not point to the shared assignment contract'
+        throw 'Reviewer profile does not point to the shared assignment contract'
+    }
+}
+foreach ($required in @(
+        'exact Code Project Manager readiness assignment',
+        '.agents/roles/VERIFIER.md',
+        "assignment's natural-language brief")) {
+    if (-not $verifierProfile.Contains($required)) {
+        throw "Verifier profile does not point to the shared assignment contract: $required"
     }
 }
 foreach ($required in @('default_fork_turns=3',

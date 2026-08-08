@@ -59,9 +59,11 @@ foreach ($surface in $childTokenSurfaces.GetEnumerator()) {
 
 foreach ($term in @(
     'agentify_transport_child_parent=code_project_manager|independent_research_explorer',
+    'agentify_transport_test_parent=workflow_design_manager',
+    'agentify_transport_wdm_test_scope=exact_workflow_acceptance_smoke_batch_only',
     'agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
     'agentify_transport_assignment_fields=batch_path|results_path',
-    'agentify_transport_batch_file_fields=provider|question_paths',
+    'agentify_transport_batch_file_fields=provider|context_path|question_paths',
     'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
     'agentify_transport_result_fields=status|results_path|error',
     'agentify_transport_terminal_status=COMPLETE|ERROR',
@@ -96,27 +98,52 @@ foreach ($term in @(
     'IN_PROGRESS',
     'exactly once',
     'silent',
+    'context brief is the semantic task authority',
+    'current composer model',
+    'open the model picker',
+    'select Pro',
+    'composer visibly shows Pro after the action',
+    'expectedModel=Pro',
+    'tool `COMPLETE` token',
+    'provider-home URL',
+    'partial response fragment',
+    'natural-language conclusion',
     'question_path',
-    'conversation_url'
+    'conversation_url',
+    'model_evidence',
+    'natural-language answer'
 )) {
     Require-ContractTerm $operator $term 'AGENTIFY_TRANSPORT_OPERATOR.md'
 }
 foreach ($term in @(
     'agentify_query',
+    'context_path',
     'expectedModel=Pro',
+    'current composer model',
+    'open the model picker',
+    'select Pro',
+    'composer visibly',
+    'status=COMPLETE',
+    'A tool',
+    'response fragment',
+    'modelEvidence=Pro',
+    'https://chatgpt.com/c/<id>',
     'IN_PROGRESS',
     'one ordered row per question',
     'at most one suitable page/session recovery',
     'exactly once',
     'silent',
     'question_path',
-    'conversation_url'
+    'conversation_url',
+    'model_evidence',
+    'Treat tool state as page evidence'
 )) {
     Require-ContractTerm $skill $term 'hmasd-agentify-transport Skill'
 }
 foreach ($term in @(
     'hmasd-agentify-transport',
     'batch_path',
+    'context_path',
     'results_path',
     'wait silently',
     'one native terminal result',

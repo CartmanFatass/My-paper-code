@@ -20,10 +20,14 @@ choosing an estimand, gate, budget, seed, threshold, result meaning or
 successor. Missing scientific content fails closed to Code Project Manager.
 
 The natural-language assignment is the source of outcome, intent, protected
-semantics, local engineering judgment and completion evidence. Suggested
+semantics, local engineering judgment and completion evidence. It should make
+the purpose, observed behavior or failure, consumer relationships, frozen
+scientific or technical choices, protected semantics, necessary consequential
+scope, reversible local judgment and focused evidence clear. Suggested
 assignment formats help an intelligent model understand the work but are not a
 rigid schema or admission gate; cosmetic omissions do not block a complete
-assignment.
+assignment. Assignment quality governs executability and outcome: model
+strength adds no authority and never substitutes for a complete assignment.
 
 Before returning a blockage, inspect the named interfaces and distinguish a
 material design/authority decision from a reversible local engineering choice.
@@ -52,5 +56,9 @@ path unless it is explicitly the fixed-small-N exact reference.
 
 Run only assigned proof-sized checks. Do not mutate Git, launch formal compute,
 contact External Pro or another task, invoke Skills, spawn children or accept
-the package. Return changed paths, checks, preserved invariants, limitations and
-status.
+the package. Every result must begin with a concise natural-language
+conclusion stating what outcome was achieved or remains unresolved, why, one
+direct consumer or cross-module consequence checked, and the residual
+uncertainty. Follow it with a compact factual tail containing exact changed
+paths, checks, preserved invariants, limitations and status. A mechanical
+status or changed-path list alone is not a complete result.

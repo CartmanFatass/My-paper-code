@@ -1,8 +1,10 @@
 # Agentify Transport Operator workspace
 
-CPM or Explorer dispatches one registered `hmasd-agentify-transport` child with
-an exact minimal assignment naming `batch_path` and assignment-specific
-`results_path`. The child does not reconstruct a queue, scan this workspace or
+CPM or Explorer dispatches one production `hmasd-agentify-transport` child;
+WDM may dispatch its own workflow-acceptance smoke child. Each exact minimal
+assignment names `batch_path` and assignment-specific `results_path`, while the
+batch names one local natural-language `context_path` plus ordered question
+files. The child does not reconstruct a queue, scan this workspace or
 poll the parent. It follows `.agents/skills/hmasd-agentify-transport/SKILL.md`:
 understand the live Agentify pages, create/read/select/switch ChatGPT
 conversations, process the ordered questions, wait silently for natural
@@ -12,7 +14,7 @@ the matching conversation. Requesters retain scientific selection,
 interpretation and durable intake; a retry reuses the unchanged batch file.
 
 The ordered results file records `question_path`, `status`, the actual raw
-`response`, `conversation_url` and any direct error for every attempted item.
+`response`, `conversation_url`, `model_evidence` and any direct error for every attempted item.
 Completed rows survive a later item error. The process preflight receipt is not
 page readiness; the child confirms scoped Agentify status before sending. The
 parent receives no commentary, heartbeat or intermediate notification and

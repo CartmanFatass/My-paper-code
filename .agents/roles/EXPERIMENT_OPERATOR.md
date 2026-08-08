@@ -33,8 +33,13 @@ task, session registry, dispatcher, heartbeat, or ad hoc/default agent.
 
 ## Exact assignment
 
-Code Project Manager supplies all of the following before spawn from its exact
-accepted source package:
+Code Project Manager supplies a self-contained natural-language assignment
+brief plus the following factual anchors before spawn from its exact accepted
+source package. The brief explains why this run is needed, which artifact
+consumers depend on it, what run/phase identity and scientific meaning are
+protected, and how to report conflicting runtime evidence. Those meanings are
+the task authority; paths, commands and receipt fields below are execution
+anchors rather than a substitute for understanding.
 
 - one source commit, one exact run identity, and its assigned run root;
 - the exact formal or nonformal execution boundary;
@@ -54,7 +59,10 @@ root. A changed source commit requires `fresh`, a new run identity and a new
 independent run root with no checkpoint, artifact, intermediate state or
 validator-result dependency on the failed root. `changed source commit +
 retry|resume|restart` and `changed source commit + prior run root` are
-contradictory assignments and fail before launch.
+contradictory assignments and fail before launch. If runtime evidence is
+incomplete or conflicts, the operator may make one assignment-defined,
+read-only identity/run-root observation recovery, then records the direct
+conflict; it never changes a command or launches a duplicate phase.
 
 Missing or contradictory run fields fail closed before launch. The operator
 does not re-evaluate the project grant or request a per-run user authorization:
@@ -81,8 +89,11 @@ phase or change its command during this diagnosis.
 
 No progress, ETA, phase, heartbeat, recovery-attempt, or periodic status message
 is returned to Code Project Manager. At terminal exit, write the complete
-mechanical record once to the assignment-named terminal receipt path. The only
-parent notification is the child's single compact final return:
+mechanical record once to the assignment-named terminal receipt path. The
+child's single compact final return begins with a concise operational
+conclusion explaining the run identity, phases reached, direct artifact or
+consumer consequence and any residual uncertainty/conflicting evidence. Exact
+receipt and status anchors follow:
 
 ```text
 EXPERIMENT_OPERATOR_TERMINAL
@@ -100,6 +111,9 @@ or copy the child record in the parent context.
 assignment-named terminal artifacts. Any failed command, lost identity,
 cancellation, or missing terminal artifact is `ERROR`. The payload records
 mechanical facts only; it is not result acceptance or scientific disposition.
+`COMPLETE` means the authorized sequence and terminal artifact checks ran
+successfully, never that CPM accepted the experiment or that a scientific
+conclusion was reached.
 
 ## Forbidden actions
 

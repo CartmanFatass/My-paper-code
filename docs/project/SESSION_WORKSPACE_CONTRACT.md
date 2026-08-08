@@ -33,9 +33,11 @@ authoritative_write_boundary=tool_os_sandbox|verified_ticket_identity|git_visibl
 workspace_ticket_retirement=registered_clean_detached_worktree_only
 agentify_transport_child=hmasd-agentify-transport
 agentify_transport_child_parent=code_project_manager|independent_research_explorer
+agentify_transport_test_parent=workflow_design_manager
+agentify_transport_wdm_test_scope=exact_workflow_acceptance_smoke_batch_only
 agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT
 agentify_transport_assignment_fields=batch_path|results_path
-agentify_transport_batch_file_fields=provider|question_paths
+agentify_transport_batch_file_fields=provider|context_path|question_paths
 agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
 agentify_transport_result_fields=status|results_path|error
 agentify_transport_terminal_status=COMPLETE|ERROR
@@ -98,7 +100,11 @@ wdm_session_workspace=docs/session-workspaces/workflow_design_manager|temp/sessi
 ```
 
 Children return to WDM and never accept, stage, commit, push or route results.
-WDM resolves semantic junctions and performs final Git integration.
+Every child result begins with a natural-language conclusion stating the owned
+outcome, why it is complete or unresolved, one checked direct consequence and
+residual uncertainty. Packet names, statuses, paths and receipts may follow as
+a compact factual tail; they never substitute for the conclusion. WDM resolves
+semantic junctions and performs final Git integration.
 
 The PreToolUse workspace guard fails closed for the mutation forms it recognizes
 and preserves all existing denials. It is a bounded syntactic preflight, not an
@@ -141,20 +147,28 @@ workspace. No hash, byte count or digest is required for a handoff.
 
 The registered Agentify transport child uses
 `temp/sessions/agentify_transport_operator/` for raw response handoffs. CPM or
-Explorer writes one exact `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` naming
-`batch_path|results_path`, then reads only that named result after the child's
-single native terminal return. Concurrent batches use distinct assignment-
-specific result paths; no parent polling, queue, monitor or inferred scan is
-allowed. CPM or Explorer copies the named result into its own canonical archive
-and performs its own scientific or mechanical intake.
+Explorer writes one production `AGENTIFY_REVIEW_BATCH_ASSIGNMENT`; WDM may write
+one exact workflow-acceptance smoke assignment. Each names
+`batch_path|results_path`, and the batch names a self-contained natural-language
+`context_path` plus ordered question paths. The child reads that local brief to
+understand outcome, intent, conversation relationship, local judgment and
+completion evidence, but transmits only question-file content. The parent then
+reads only the named result after the child's single native terminal return.
+Concurrent batches use distinct assignment-specific result paths; no parent
+polling, queue, monitor or inferred scan is allowed. A production requester
+copies the named result into its own canonical archive and performs its own
+scientific or mechanical intake.
 
-The CPM mechanical child uses the same file-only boundary: CPM writes one exact
-`spec_path` and names one exact `result_path` under its temporary workspace;
-the child writes only assignment-named temporary outputs and returns
-`status|result_path|error` with terminal status `COMPLETE|ERROR`. CPM alone
-finalizes, accepts and records the result. No queue, monitor, inferred path
-scan, experiment/readiness execution or active research-state transition is
-introduced.
+The CPM mechanical child uses the same file-only boundary: CPM writes one
+self-contained natural-language brief, one exact `spec_path` and one exact
+`result_path` under its temporary workspace. The brief carries purpose,
+consumer relationship, protected meaning, permitted observation/recovery and
+completion evidence; the spec is the deterministic execution anchor. The child
+writes only assignment-named temporary outputs and returns a mechanical
+conclusion followed by `status|result_path|error` anchors with terminal status
+`COMPLETE|ERROR`. CPM alone decides sufficiency, finalizes, accepts and records
+the result. No queue, monitor, inferred path scan, experiment/readiness
+execution or active research-state transition is introduced.
 
 ## Shared temporary semantic handoffs
 

@@ -27,15 +27,18 @@ spec. The assignment and spec remain `formal=false` with
 `scientific_iteration_cost=zero`; the candidate is the checked-out clean `HEAD`.
 
 The natural-language assignment is the source of outcome, intent, protected
-semantics, local verification judgment and completion evidence. Suggested
+candidate/readiness semantics, local verification judgment and completion
+evidence. It explains why the readiness exercise matters to its consumers and
+which candidate, phase or receipt conflicts must be reported. Suggested
 formats are comprehension aids, not a rigid schema or admission gate. Dispatch
 this verifier only when the existing Code Project Manager readiness trigger
 fires; forked turns are background context, not additional authority.
 
 If a wrapper call yields a live process/cell handle, keep waiting on that exact
-handle. If the client call times out or loses the handle, inspect the same
-process and assigned root once before reporting failure. Never start a second
-wrapper run; distinguish an invocation/observation failure from a phase result.
+handle. If the client call times out or loses the handle, perform at most one
+bounded, read-only observation recovery by inspecting the same process and
+assigned root once before reporting failure. Never start a second wrapper run;
+distinguish an invocation/observation failure from a phase result.
 
 Candidate-focused checks are separate from readiness phases: they do not repeat
 any spec phase argv and do not write the exercise root. Confirm the candidate,
@@ -65,7 +68,10 @@ first direct failure (when it did not). The receipt retains the full typed
 phase, invocation, cleanup and candidate evidence. Do not transcribe model or
 tool output into a parent file or reconstruct the receipt with `apply_patch`.
 
-The compact native terminal shape is:
+The compact native terminal shape is conclusion-first: state whether the
+candidate's readiness evidence was produced, the direct consequence for the
+readiness consumer and any residual uncertainty or first conflict. Exact
+receipt/status anchors follow and never accept code. Its factual tail is:
 
 ```text
 VERIFIER_TERMINAL

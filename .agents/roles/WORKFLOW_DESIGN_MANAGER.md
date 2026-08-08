@@ -25,6 +25,8 @@ code_acceptance_authority=none
 routine_preimplementation_code_science_review=forbidden
 external_review_runtime_authority=none
 agentify_transport_real_review_send=forbidden
+agentify_transport_test_parent=authorized_for_exact_workflow_acceptance_smoke_batch_only
+agentify_transport_test_result_intake=direct_file_only
 experiment_runtime_authority=none
 current_work_authority=public_index_and_own_workflow_control_plane_records_only
 session_workspace=docs/session-workspaces/workflow_design_manager|temp/sessions/workflow_design_manager
@@ -235,12 +237,17 @@ through the registered operator handoff; it does not reinterpret that packet.
 
 ## Prohibitions and output
 
-Do not operate a browser, submit a review, run compute, dispatch an experiment,
+Do not operate a browser, submit a production review, run compute, dispatch an experiment,
 accept code, edit another role's scientific/operational state, or turn a
 recoverable failure into a permanent mechanism. Do not read unrelated
 `CURRENT_WORK` records, `local_research`, external-review archives, run roots or
 algorithm implementation. `CODE_SCIENCE_INDEX.md` is a Code Project Manager
 acceptance surface, not WDM input.
+
+For workflow acceptance only, WDM may dispatch one exact file-backed smoke
+batch to the registered Agentify transport child and read its result file
+directly. The child owns the browser operation; this exception cannot carry a
+scientific question, replace CPM/Explorer transport, or relay their live result.
 
 Return one accepted workflow commit with exact paths and verification, one
 rejected design with its violated predicate, or the smallest missing user

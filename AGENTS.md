@@ -64,10 +64,12 @@ persistent_session_workflow_git_authority=none
 
 agentify_transport_child=hmasd-agentify-transport
 agentify_transport_child_parent=code_project_manager|independent_research_explorer
+agentify_transport_test_parent=workflow_design_manager
+agentify_transport_wdm_test_scope=exact_workflow_acceptance_smoke_batch_only
 agentify_transport_skill=hmasd-agentify-transport
 agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT
 agentify_transport_assignment_fields=batch_path|results_path
-agentify_transport_batch_file_fields=provider|question_paths
+agentify_transport_batch_file_fields=provider|context_path|question_paths
 agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
 agentify_transport_result_fields=status|results_path|error
 agentify_transport_terminal_status=COMPLETE|ERROR
@@ -130,9 +132,11 @@ cross_task_model_and_thinking_overrides=omit
 
 WDM's standing remote grant covers accepted workflow-control-plane paths and
 the named Agentify transport source workspace only. The requester-owned
-Agentify transport child receives one exact file assignment from CPM or
-Explorer and returns one native terminal result; WDM never relays a live
-review or result. There is no Controller, dispatcher, registry, semantic relay,
+Agentify transport child receives one exact production assignment from CPM or
+Explorer and returns one native terminal result. WDM may parent its own exact
+workflow-acceptance smoke batch and receives that test result directly; it
+never relays a CPM or Explorer live review or result. There is no Controller,
+dispatcher, registry, semantic relay,
 persistent Monitor, global lease or workflow queue.
 
 ## Hard project and workspace boundaries

@@ -22,13 +22,16 @@ agentify_authority=none
 fork_turns=none
 ```
 
-The native child reads only the assignment-named JSON spec and writes only the
+The parent assignment contains a natural-language mechanical brief and a JSON
+execution anchor. The brief is the semantic task authority: it explains why
+the inspection exists, which CPM consumers depend on it, what meaning is
+protected, what observation or recovery is permitted, and which incomplete or
+contradictory observation matters. The JSON spec is a deterministic anchor for
+identity, paths and commands, not a substitute for that meaning. The child
+reads the exact brief and assignment-named spec, and writes only the
 assignment-named result plus exact allow-listed temporary logs or proposed
-owner files. The spec is schema version 1 and is the complete authority. It
-contains the assignment and attempt identity, working directory, exact
-allow-listed read/write paths, result path and one bounded task object. The
-child uses the registered `hmasd-amd-cpu` interpreter and the stdlib
-dispatcher in the agile research-development skill.
+owner files. The child uses the registered `hmasd-amd-cpu` interpreter and the
+stdlib dispatcher in the agile research-development skill.
 
 The dispatcher supports these mechanical task classes:
 
@@ -45,8 +48,15 @@ The dispatcher supports these mechanical task classes:
   inside that registered script; the child runs no direct Git command and has
   no Git mutation authority.
 
-On success or failure, the result is atomically written with the common
-schema fields `observations`, `output_paths`, `log_paths`, `first_failure`,
-`retry_class` and `exit_code`. Monitoring, queues, automatic retry, Git,
-source/design edits, canonical-state mutation, scientific interpretation,
-acceptance and cross-task routing are outside this role.
+For incomplete or conflicting inputs, the child may perform at most one
+assignment-defined, read-only observation recovery (for example, re-reading
+the assigned artifact) and then records the direct conflict. It never applies
+an automatic repair or retry and never launches an experiment, readiness,
+Agentify or Git action. On success or failure, the native terminal result
+begins with a natural-language mechanical conclusion: what was inspected,
+which conflict or direct consequence was observed for CPM consumers, and what
+residual uncertainty remains. The JSON result and status fields follow as
+factual anchors. `COMPLETE` means the bounded inspection ran and its evidence
+was recorded; it never means CPM accepted the underlying result. Monitoring,
+queues, Git, source/design edits, canonical-state mutation, scientific
+interpretation, acceptance and cross-task routing are outside this role.

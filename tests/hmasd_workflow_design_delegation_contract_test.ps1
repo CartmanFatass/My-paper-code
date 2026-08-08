@@ -32,7 +32,7 @@ foreach ($entry in $profiles) {
     foreach ($required in @(
         "name = `"$($entry[2])`"", "model = `"$($entry[4])`"",
         "model_reasoning_effort = `"$($entry[5])`"", "sandbox_mode = `"$($entry[6])`"",
-        $entry[0], $entry[7])) {
+        $entry[0])) {
         if (-not $profile.Contains($required)) { throw "$($entry[2]) profile missing: $required" }
     }
     foreach ($required in @(
@@ -270,6 +270,60 @@ if (-not $workflowImplementerProfile.Contains('resolved_ticket_worktree_path')) 
 }
 if (-not $workflowImplementer.Contains('reversible')) {
     throw 'Workflow implementer lacks local reversible judgment'
+}
+
+# Registered workflow children receive semantic task models rather than packet
+# shaped completion gates.  Keep this contract source-level and heading-agnostic.
+$workflowChildSpecs = @(
+    @{ Role = '.agents/roles/WORKFLOW_AUDITOR.md'; Profile = '.codex/agents/hmasd-workflow-auditor.toml'; Tail = 'WORKFLOW_IMPACT_PACKET'; Recovery = 'alternate read-only observation' },
+    @{ Role = '.agents/roles/WORKFLOW_IMPLEMENTER.md'; Profile = '.codex/agents/hmasd-workflow-implementer.toml'; Tail = 'WORKFLOW_CHANGE_PACKET'; Recovery = 'reversible correction/re-run' },
+    @{ Role = '.agents/roles/WORKFLOW_REVIEWER.md'; Profile = '.codex/agents/hmasd-workflow-reviewer.toml'; Tail = 'WORKFLOW_REVIEW_PACKET'; Recovery = 'bounded re-read' })
+
+foreach ($child in $workflowChildSpecs) {
+    $childRole = Read-RepoFile $child.Role
+    $childProfile = Read-RepoFile $child.Profile
+    $normalizedChildRole = ($childRole -replace '\s+', ' ').ToLowerInvariant()
+    $normalizedChildProfile = ($childProfile -replace '\s+', ' ').ToLowerInvariant()
+    foreach ($required in @(
+        'self-contained natural-language task model',
+        'workflow_assignment_id', 'owned_paths', 'wdm_session_workspace',
+        'factual authority and scope anchors', 'never define task meaning',
+        'concise natural-language conclusion', 'owned outcome',
+        'complete or unresolved', 'direct consequence', 'residual uncertainty',
+        'compact factual', $child.Tail, 'never substitutes for the conclusion',
+        $child.Recovery)) {
+        if (-not $normalizedChildRole.Contains($required.ToLowerInvariant())) {
+            throw "$($child.Role) semantic contract missing: $required"
+        }
+    }
+    if ($childRole -match '(?i)return\s+(?:one\s+)?(?:the\s+)?(?:exactly\s+one\s+)?(?:`)?WORKFLOW_[A-Z_]+_PACKET(?:`)?\b' -or
+        $childRole -match '(?i)return\s+the\s+packet\s+only') {
+        throw "$($child.Role) still permits packet-only completion"
+    }
+    foreach ($required in @(
+        'fork_turns=none', '.agents/roles/', 'Workflow Design Manager',
+        'self-contained natural-language task model', 'authority')) {
+        if (-not $normalizedChildProfile.Contains($required.ToLowerInvariant())) {
+            throw "$($child.Profile) thin profile contract missing: $required"
+        }
+    }
+    foreach ($forbidden in @('Return exactly one', 'return exactly one', 'For impact_map,', 'A finding is actionable only when')) {
+        if ($normalizedChildProfile.Contains($forbidden.ToLowerInvariant())) {
+            throw "$($child.Profile) retains duplicated packet/review procedure: $forbidden"
+        }
+    }
+}
+
+$implementerRoleText = Read-RepoFile '.agents/roles/WORKFLOW_IMPLEMENTER.md'
+$normalizedImplementerRoleText = ($implementerRoleText -replace '\s+', ' ')
+if (-not $normalizedImplementerRoleText.Contains('exactly `git rev-parse --show-toplevel`') -or
+    -not $normalizedImplementerRoleText.Contains('sole permitted Git observation')) {
+    throw 'Workflow implementer lacks the exact read-only Git identity exception'
+}
+foreach ($forbidden in @('Git mutation', 'stage, commit, push', 'route cross-task messages')) {
+    if (-not $implementerRoleText.Contains($forbidden)) {
+        throw "Workflow implementer boundary missing: $forbidden"
+    }
 }
 
 Write-Output 'HMASD_WORKFLOW_DESIGN_DELEGATION_CONTRACT_OK'

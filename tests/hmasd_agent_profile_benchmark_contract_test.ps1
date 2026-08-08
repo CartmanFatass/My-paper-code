@@ -10,10 +10,21 @@ $result = Get-Content -Raw -LiteralPath (
     Join-Path $repo 'docs/project/AGENT_PROFILE_BENCHMARK_RESULT.md')
 $implementer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-implementer.toml')
+$routineImplementer = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.codex/agents/hmasd-implementer-terra.toml')
+$implementerRole = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/IMPLEMENTER.md')
+$implementerRoleNormalized = $implementerRole -replace '\s+', ' '
 $reviewer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-reviewer.toml')
+$reviewerRole = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/REVIEWER.md')
+$reviewerRoleNormalized = $reviewerRole -replace '\s+', ' '
 $experimentOperator = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-experiment-operator.toml')
+$experimentOperatorRole = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/EXPERIMENT_OPERATOR.md')
+$experimentOperatorRoleNormalized = $experimentOperatorRole -replace '\s+', ' '
 $mechanicalOperatorPath = Join-Path $repo '.codex/agents/hmasd-cpm-mechanical.toml'
 if (-not (Test-Path -LiteralPath $mechanicalOperatorPath)) {
     throw 'CPM mechanical child profile is missing'
@@ -37,7 +48,7 @@ $researchPrinciples = Get-Content -Raw -LiteralPath $researchPrinciplesPath
 foreach ($required in @(
     'model = "gpt-5.6-sol"',
     'model_reasoning_effort = "high"',
-    'Use only the assignment-named runtime')) {
+    '.agents/roles/IMPLEMENTER.md')) {
     if (-not $implementer.Contains($required)) {
         throw "Selected implementer profile missing: $required"
     }
@@ -46,10 +57,71 @@ foreach ($required in @(
     'name = "hmasd-experiment-operator"',
     'model = "gpt-5.6-luna"',
     'model_reasoning_effort = "low"',
-    'as delegated compute authority',
-    'Do not request or require a separate per-run user authorization reference')) {
+    '.agents/roles/EXPERIMENT_OPERATOR.md',
+    'delegated compute boundary')) {
     if (-not $experimentOperator.Contains($required)) {
         throw "Experiment Operator profile missing: $required"
+    }
+}
+foreach ($required in @(
+    'compute_authority=derived_from_valid_code_project_manager_assignment',
+    'per_run_user_authorization_reference=not_required',
+    'valid exact assignment from Code Project Manager is the delegated compute authority',
+    'begins with a concise operational conclusion')) {
+    if (-not $experimentOperatorRoleNormalized.Contains($required)) {
+        throw "Experiment Operator role missing delegated-compute contract: $required"
+    }
+}
+foreach ($profileRoute in @(
+    @{ Text = $implementer; Model = 'gpt-5.6-sol'; Effort = 'high'; Label = 'protected Sol' },
+    @{ Text = $routineImplementer; Model = 'gpt-5.6-terra'; Effort = 'high'; Label = 'routine Terra' })) {
+    foreach ($required in @(
+        ('model = "' + $profileRoute.Model + '"'),
+        ('model_reasoning_effort = "' + $profileRoute.Effort + '"'),
+        'sandbox_mode = "workspace-write"',
+        '.agents/roles/IMPLEMENTER.md',
+        'registered child of Code Project Manager',
+        'exact assignment',
+        'Do not mutate Git')) {
+        if (-not $profileRoute.Text.Contains($required)) {
+            throw "$($profileRoute.Label) implementer route missing: $required"
+        }
+    }
+    foreach ($forbidden in @(
+            'purpose, observed behavior or failure',
+            'necessary consequential scope',
+            'Every result must begin with a concise natural-language conclusion',
+            'scripts/hmasd_workspace_ticket.py',
+            'absolute `apply_patch` targets',
+            'core.longpaths=true',
+            'Use only the assignment-named runtime',
+            'Return status, changed files, checks')) {
+        if ($profileRoute.Text.Contains($forbidden)) {
+            throw "$($profileRoute.Label) profile duplicates Role procedure: $forbidden"
+        }
+    }
+}
+foreach ($required in @(
+    'Every result must begin with a concise natural-language conclusion',
+    'what outcome was achieved or remains unresolved',
+    'direct consumer or cross-module consequence checked',
+    'residual uncertainty',
+    'A mechanical status or changed-path list alone is not a complete result',
+    'necessary consequential scope',
+    'model strength adds no authority and never substitutes for a complete assignment',
+    'rigid schema or admission gate')) {
+    if (-not $implementerRoleNormalized.Contains($required)) {
+        throw "Implementer role conclusion/context contract missing: $required"
+    }
+}
+if (-not $routineImplementer.Contains('material or outcome-changing') -or
+    -not $routineImplementer.Contains('reversible internal organization') -or
+    $routineImplementer.Contains('You do not choose scientific semantics, architecture direction')) {
+    throw 'Terra implementer local-judgment distinction is missing'
+}
+foreach ($required in @('protected Sol route', 'assignment-specified semantics')) {
+    if (-not $implementer.Contains($required)) {
+        throw "Protected Sol routing distinction missing: $required"
     }
 }
 foreach ($required in @(
@@ -161,7 +233,8 @@ if (-not $config.Contains('max_depth = 1')) {
 foreach ($required in @(
     'model = "gpt-5.6-sol"',
     'model_reasoning_effort = "xhigh"',
-    'Inspect scalar device work')) {
+    '.agents/roles/REVIEWER.md',
+    'exact assignment controls')) {
     if (-not $reviewer.Contains($required)) {
         throw "Selected reviewer profile missing: $required"
     }
@@ -169,12 +242,22 @@ foreach ($required in @(
 foreach ($required in @(
     '[agents."HMASDImplementer"]',
     'config_file = "./agents/hmasd-implementer.toml"',
+    '[agents."HMASDRoutineImplementer"]',
+    'config_file = "./agents/hmasd-implementer-terra.toml"',
     '[agents."HMASDReviewer"]',
     'config_file = "./agents/hmasd-reviewer.toml"',
     '[agents."HMASDExperimentOperator"]',
     'config_file = "./agents/hmasd-experiment-operator.toml"')) {
     if (-not $config.Contains($required)) {
         throw "Selected normal profile is not registered: $required"
+    }
+}
+foreach ($required in @(
+    'actionable_finding_requires=normal_path_defect|material_effect|proportionate_repair',
+    'protected scientific semantics',
+    'coherent implementer batch')) {
+    if (-not $reviewerRoleNormalized.Contains($required)) {
+        throw "Reviewer Role protected-boundary contract missing: $required"
     }
 }
 foreach ($required in @(
@@ -186,6 +269,11 @@ foreach ($required in @(
 }
 if ([regex]::Matches($config, 'hmasd-cpm-mechanical\.toml').Count -ne 1) {
     throw 'CPM mechanical profile must be registered exactly once'
+}
+foreach ($profileName in @('hmasd-implementer.toml', 'hmasd-implementer-terra.toml')) {
+    if ([regex]::Matches($config, [regex]::Escape($profileName)).Count -ne 1) {
+        throw "Implementer profile must be registered exactly once: $profileName"
+    }
 }
 $temporaryProfiles = @(
     'hmasd-benchmark-implementer-sol-high.toml',

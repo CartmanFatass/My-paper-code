@@ -24,29 +24,14 @@ foreach ($required in @(
     'model_reasoning_effort = "low"',
     'sandbox_mode = "workspace-write"',
     'approval_policy = "never"',
-    'active Code Project Manager',
-    'already-authorized scientific boundary',
-    'Treat a complete, internally consistent assignment',
-    'as delegated compute authority',
-    'Do not request or require a separate per-run user authorization reference',
-    'terminal receipt path',
-    'compact final response',
-    'full mechanical fields in the receipt',
-    'Monitoring is silent',
-    'Do not emit commentary, progress updates, ETA messages',
-    'exactly once, through your final response',
-    'only at COMPLETE or ERROR',
-    'Do not detach with',
-    'do not repeatedly open its',
-    'progress file',
-    'fresh|retry|resume|restart execution mode',
-    'do not choose a recovery action',
-    'zero scientific iterations',
-    'no scientific disposition',
-    'not scientific abandonment',
-    'Do not spawn',
-    'agents.')) {
+    '.agents/roles/EXPERIMENT_OPERATOR.md',
+    'natural-language brief',
+    'artifact consumers',
+    'conclusion-first terminal handoff')) {
     if (-not $profile.Contains($required)) { throw "Operator profile missing: $required" }
+}
+if ($profile.Contains('Execute train') -or $profile.Contains('Do not emit commentary') -or $profile.Contains('Start a later phase')) {
+    throw 'Experiment operator profile must remain thin; procedure belongs to the role charter'
 }
 foreach ($required in @(
     'callable_agent_type=hmasd-experiment-operator',
@@ -61,6 +46,10 @@ foreach ($required in @(
     'terminal_values=COMPLETE|ERROR',
     'terminal_handoff=file_backed_compact_native_final',
     'terminal_receipt_path=assignment_named',
+    'conclusion',
+    'artifact consumers',
+    'protected',
+    'conflicting runtime evidence',
     'cross_session_send=forbidden_native_final_return_only',
     'Code Project Manager supplies',
     'execution mode from `fresh|retry|resume|restart`',
@@ -76,6 +65,12 @@ foreach ($required in @(
     'train -> evaluate -> analyze',
     'client timeout is not a process failure',
     'reattach and wait when the same live process',
+    'one assignment-defined',
+    'read-only identity/run-root observation recovery',
+    'never changes a command',
+    'concise operational',
+    'direct artifact or consumer consequence',
+    'residual uncertainty',
     'No progress, ETA, phase, heartbeat')) {
     if (-not $roleNormalized.Contains($required)) { throw "Operator role missing: $required" }
 }

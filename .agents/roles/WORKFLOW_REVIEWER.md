@@ -35,6 +35,13 @@ combined its results. One reviewer is the normal path; WDM may add parallel
 reviewers only for genuinely independent questions, with each reviewer given a
 distinct focus while retaining access to the whole diff.
 
+The exact assignment is a self-contained natural-language task model: it
+explains the owned outcome, intent, necessary observations, permitted actions,
+role-local judgment, bounded recovery and completion evidence. Its
+`workflow_assignment_id`, `owned_paths`, `wdm_session_workspace`, paths and
+modes are factual authority and scope anchors; they never define task meaning
+or completion.
+
 Check for obsolete or redundant context, semantic ambiguity or drift, needless
 caution and recurring cost, authority conflicts, file-ownership conflicts,
 incorrect document loading and divergence from the confirmed plan. Begin with
@@ -49,12 +56,20 @@ hostile inputs, arbitrary-command bypasses and retryable local failures belong
 only in residual risk and must not demand a permanent mechanism. Reviewer effort
 is not evidence that a repair is valuable.
 
-Return one `WORKFLOW_REVIEW_PACKET` with actionable findings by severity,
-tight path/phrase locations, material effect, minimal correction,
-proportionality rationale, areas checked and residual risk. `ACCEPTABLE` and
-`REVISION_REQUIRED` are advisory dispositions; WDM alone
-accepts the workflow artifact and may reject a finding under the minimum-design
-principles. Do not request a second review pass for the same change.
+Begin the result with a concise natural-language conclusion stating the owned
+outcome, why it is complete or unresolved, the direct consequence checked and
+residual uncertainty. Append a compact factual `WORKFLOW_REVIEW_PACKET` tail
+with actionable findings by severity, tight path/phrase locations, material
+effect, minimal correction, proportionality rationale, areas checked and
+residual risk. `ACCEPTABLE` and `REVISION_REQUIRED` are advisory dispositions;
+WDM alone accepts the workflow artifact and may reject a finding under the
+minimum-design principles. A packet name or terminal token never substitutes
+for the conclusion; dispositions remain advisory.
+
+If the integrated diff and assigned evidence conflict, make at most one
+bounded re-read or read-only reproduction of the named evidence. Record the
+result and residual uncertainty. This recovery may not start a second review
+round or request a reviewer-of-reviewer.
 
 Remain read-only. Do not edit, use Git, contact persistent tasks, invoke Skills,
 spawn children, run scientific compute, create a second review round or accept

@@ -58,13 +58,14 @@ A user-named one may be inspected only as reference.
 Formal and Explorer-to-project review transport is a file-only handoff from
 Code Project Manager to the reusable registered `hmasd-agentify-transport`
 native child. CPM writes one ordered batch file containing exactly
-`provider|question_paths`, chooses one exact `results_path`, and dispatches a
+`provider|context_path|question_paths`, chooses one exact `results_path`, and
+dispatches a
 self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` naming
 `batch_path|results_path` with `fork_turns=none`. The child owns page, model,
 send, wait and recovery mechanics; it is silent while live and emits no
 progress, commentary, collaboration, or repeated wait/poll handling. It
 returns exactly once through one terminal native final with `COMPLETE` or
-`ERROR`, carrying `AGENTIFY_REVIEW_BATCH_RESULT` fields
+`ERROR`, carrying a conclusion followed by `AGENTIFY_REVIEW_BATCH_RESULT` fields
 `status|results_path|error`. The named result file retains its ordered raw
 response rows. CPM continues unrelated work and reads the file only after that
 terminal return, then performs mechanical archival and intake. Retries reuse
@@ -80,12 +81,20 @@ technical/mechanical acceptance owner and sole code/Git/canonical-state
 integrator. For deterministic inspection, check collection, result extraction,
 handoff preparation and ticket preparation, it delegates one exact assignment
 to the registered `hmasd-cpm-mechanical` child and reads only its terminal
-receipt/result. The common mechanical result is file-backed and compact:
+receipt/result. The parent's natural-language brief remains the semantic task
+authority: it states purpose, CPM consumers, protected meaning, the
+contradiction that matters, permitted read-only observation/recovery and
+completion evidence. The JSON spec is a deterministic execution anchor, not
+the complete meaning. The common mechanical result is file-backed and compact:
 `schema_version|status|assignment_id|task_class|attempt_id|result_path|observations|output_paths|log_paths|first_failure|retry_class|exit_code`.
 The assignment binds `schema_version=1`, `assignment_id`, `task_class`,
 `attempt_id`, `working_directory`, `allowed_read_paths`, `allowed_write_paths`,
 `result_path` and `task`, and executes one exact `run --spec <json> --result
-<json>` invocation.
+<json>` invocation. The child may use at most one assignment-defined
+read-only observation recovery for incomplete/conflicting input; its
+natural-language mechanical conclusion and direct consequence precede the
+JSON/status anchors. `COMPLETE` records inspection evidence, never CPM
+acceptance.
 The child remains silent while live, performs no Git or acceptance, and never
 integrates files.
 

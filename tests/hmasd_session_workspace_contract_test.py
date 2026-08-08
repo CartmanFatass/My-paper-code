@@ -64,6 +64,7 @@ def test_public_current_work_is_partitioned_and_owned() -> None:
     wdm_session = _text("docs/project/current-work/sessions/workflow_design_manager.md")
     wdm_common = _text("docs/project/current-work/common/workflow_control_plane.md")
     normalized = " ".join(contract.split())
+    normalized_wdm_session = " ".join(wdm_session.split())
     for required in (
         "public_current_work_partition_status=active_index_and_partitions",
         "docs/project/current-work/common/",
@@ -80,7 +81,10 @@ def test_public_current_work_is_partitioned_and_owned() -> None:
     ):
         assert required in index
     assert "workflow_index_owner=" not in index
-    assert "session_owner_id=019fb73d-5635-7b63-b165-6c5129bc0217" in wdm_session
+    assert "session_owner_id=workflow_design_manager" in wdm_session
+    assert "continuity=role_based_successor_tasks" in wdm_session
+    assert "Continuity is attached to the stable WDM role" in normalized_wdm_session
+    assert "not to a historical thread" in normalized_wdm_session
     assert "owner_role=workflow_design_manager" in wdm_common
 
 
