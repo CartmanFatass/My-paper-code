@@ -194,17 +194,21 @@ class ArmEpisodeRunner:
         tape_seed: int,
         d_learned_fn,
         body_override: bytes | None = None,
+        body_fn=None,
         policy=None,
         d_control_fn=None,
     ):
         if arm not in sib.ARMS:
             raise ValueError(f"unknown arm: {arm}")
+        if body_override is not None and body_fn is not None:
+            raise ValueError("fixed and callable body overrides are mutually exclusive")
         self.env = env
         self.arm = arm
         self.tape_seed = int(tape_seed)
         self.d_learned_fn = d_learned_fn
         self.d_control_fn = d_control_fn
         self.body_override = body_override
+        self.body_fn = body_fn
         capacity = env.ledger.member_capacity
         # The Stage-0 capability path retains CommonPolicy as its exact
         # default.  Candidate-local experiments may inject an object with the
@@ -357,7 +361,12 @@ class ArmEpisodeRunner:
         opportunity = env.opportunity(event_index)
         view = env.observe()
         w_bytes = sib.w_minus(view, opportunity)
-        body = self.body_override if self.body_override is not None else env.focal_payload(event_index)
+        if self.body_override is not None:
+            body = self.body_override
+        elif self.body_fn is not None:
+            body = self.body_fn(event_index, env)
+        else:
+            body = env.focal_payload(event_index)
         d_learned = bool(self.d_learned_fn(w_bytes))
         d_control = (
             sib.control_tape_open(

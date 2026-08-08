@@ -172,11 +172,21 @@ def _make_env(
 class RecurrentActorCritic(nn.Module):
     """Small recurrent stochastic continuous actor with a scalar value head."""
 
-    def __init__(self, capacity: int, seed: int, hidden_dim: int = 16):
+    def __init__(
+        self,
+        capacity: int,
+        seed: int,
+        hidden_dim: int = 16,
+        *,
+        encoder_kind: str = "raw_byte",
+    ):
         super().__init__()
+        if encoder_kind not in {"raw_byte", "content_separating"}:
+            raise ValueError("encoder_kind must be 'raw_byte' or 'content_separating'")
         self.capacity = int(capacity)
         self.seed = int(seed)
         self.hidden_dim = int(hidden_dim)
+        self.encoder_kind = encoder_kind
         with torch.random.fork_rng(devices=[]):
             torch.manual_seed(self.seed)
             self.obs = nn.Linear(roster_env.OBSERVATION_DIM, hidden_dim, bias=False)
@@ -185,6 +195,10 @@ class RecurrentActorCritic(nn.Module):
             self.actor = nn.Linear(hidden_dim, roster_env.ACTION_DIM)
             self.value = nn.Linear(hidden_dim, 1)
             self.log_std = nn.Parameter(torch.full((roster_env.ACTION_DIM,), -1.2))
+            # Created after every legacy parameter so raw-byte initialization
+            # and outputs remain exact.  Both encoder conditions instantiate
+            # the same two slot modules in the same order.
+            self.content_embedding = nn.Embedding(4, hidden_dim)
         self._capture = False
         self._graph_hidden: torch.Tensor | None = None
         self._log_probs: list[torch.Tensor] = []
@@ -199,6 +213,79 @@ class RecurrentActorCritic(nn.Module):
         self._values = []
         return np.zeros((self.capacity, self.hidden_dim), dtype=np.float32)
 
+    @staticmethod
+    def _content_indices(slot_block: np.ndarray) -> np.ndarray:
+        slots = np.asarray(slot_block, dtype=np.float32)
+        if slots.ndim != 2 or slots.shape[1] != art.SLOT_DIM:
+            raise ValueError("content encoder slot block has wrong shape")
+        quantized = np.rint(slots * np.float32(255.0)).astype(np.uint8)
+        if not np.array_equal(
+            slots,
+            quantized.astype(np.float32) / np.float32(255.0),
+        ):
+            raise ValueError("content encoder requires exact receiver slot bytes")
+        registered = {
+            sib._pad_slot(b""): 0,
+            sib._pad_slot(sib.real_payload_body(sib.SHOCK_A)): 1,
+            sib._pad_slot(sib.real_payload_body(sib.SHOCK_B)): 2,
+            sib._pad_slot(sib.NEUTRAL_TOKEN): 3,
+        }
+        indices = np.empty(slots.shape[0], dtype=np.int64)
+        for row_index, row in enumerate(quantized):
+            body = bytes(row)
+            if body not in registered:
+                raise ValueError("unknown nonzero receiver slot bytes")
+            indices[row_index] = registered[body]
+        return indices
+
+    def _slot_hidden(self, slot_block: np.ndarray) -> torch.Tensor:
+        if self.encoder_kind == "raw_byte":
+            return self.slot(torch.as_tensor(slot_block, dtype=torch.float32))
+        indices = torch.as_tensor(self._content_indices(slot_block), dtype=torch.long)
+        return self.content_embedding(indices)
+
+    def _step_tensors(
+        self,
+        observations: np.ndarray,
+        active_mask: np.ndarray,
+        slot_block: np.ndarray,
+        previous: torch.Tensor,
+        noise: np.ndarray,
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+        obs = torch.as_tensor(observations, dtype=torch.float32)
+        mask = torch.as_tensor(active_mask, dtype=torch.bool)
+        eps = torch.as_tensor(noise, dtype=torch.float32)
+        candidate = torch.tanh(
+            self.obs(obs) + self.recurrent(previous) + self._slot_hidden(slot_block)
+        )
+        new_hidden = torch.where(mask[:, None], candidate, previous)
+        mean = self.actor(new_hidden)
+        std = torch.exp(torch.clamp(self.log_std, -4.0, 1.0))
+        raw = mean + std * eps
+        action = torch.tanh(raw)
+        action = torch.where(mask[:, None], action, torch.zeros_like(action))
+        return action, mean, new_hidden, mask
+
+    def diagnostic_step(
+        self,
+        observations: np.ndarray,
+        active_mask: np.ndarray,
+        slot_block: np.ndarray,
+        hidden: np.ndarray,
+        noise: np.ndarray,
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """Pure no-capture step for replaying recorded real input sequences."""
+        with torch.no_grad():
+            previous = torch.as_tensor(hidden, dtype=torch.float32)
+            action, mean, new_hidden, _ = self._step_tensors(
+                observations, active_mask, slot_block, previous, noise
+            )
+        return (
+            action.cpu().numpy().astype(np.float32),
+            mean.cpu().numpy().astype(np.float32),
+            new_hidden.cpu().numpy().astype(np.float32),
+        )
+
     def forward(
         self,
         observations: np.ndarray,
@@ -207,22 +294,17 @@ class RecurrentActorCritic(nn.Module):
         hidden: np.ndarray,
         noise: np.ndarray,
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-        obs = torch.as_tensor(observations, dtype=torch.float32)
-        mask = torch.as_tensor(active_mask, dtype=torch.bool)
-        slots = torch.as_tensor(slot_block, dtype=torch.float32)
-        eps = torch.as_tensor(noise, dtype=torch.float32)
         if self._capture and self._graph_hidden is not None:
             previous = self._graph_hidden
         else:
             previous = torch.as_tensor(hidden, dtype=torch.float32)
-        candidate = torch.tanh(self.obs(obs) + self.recurrent(previous) + self.slot(slots))
-        new_hidden = torch.where(mask[:, None], candidate, previous)
-        mean = self.actor(new_hidden)
-        std = torch.exp(torch.clamp(self.log_std, -4.0, 1.0))
-        raw = mean + std * eps
-        action = torch.tanh(raw)
-        action = torch.where(mask[:, None], action, torch.zeros_like(action))
+        action, mean, new_hidden, mask = self._step_tensors(
+            observations, active_mask, slot_block, previous, noise
+        )
         if self._capture:
+            std = torch.exp(torch.clamp(self.log_std, -4.0, 1.0))
+            eps = torch.as_tensor(noise, dtype=torch.float32)
+            raw = mean + std * eps
             distribution = torch.distributions.Normal(mean, std)
             log_prob_rows = distribution.log_prob(raw.detach()).sum(dim=-1)
             active_count = torch.clamp(mask.sum(), min=1)
