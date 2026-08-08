@@ -23,6 +23,15 @@ never verified an actuation binding.  This module supplies the required objects:
 The policy is untrained: its weights are drawn once from a registered seed.
 The gate's propositions are about the executable path and the environment
 mechanism, not about learned behavior.
+
+v2 (Pro's loop-7 C1 correction): the receipt verifier binds to the ACTUAL
+slot tensor fed into ``CommonPolicy.forward`` (focal row equals
+``slot_features(actuation.slot)``, all non-focal rows zero) and to the full
+current opportunity identity, route, decision source and ingestion cost;
+receipts carry the issuing runner's block identity so cross-runner receipts
+at the same tick are rejected; and every boundary action carries an
+``ActionReceipt`` (policy-input/kernel/action/recurrent-write digests) that
+the registered ``bound_step`` wrapper verifies before ``step()``.
 """
 
 from __future__ import annotations
@@ -35,7 +44,7 @@ import numpy as np
 from envs.continuous_roster import runtime_capacity as roster_env
 from experiments.candidates.eociv_lite import sibling_env as sib
 
-RAW_OUTPUT_BINDING = "eociv_lite.actuation_runtime.v1"
+RAW_OUTPUT_BINDING = "eociv_lite.actuation_runtime.v2"
 
 #: Registered weights seed for the one common policy graph.
 POLICY_WEIGHT_SEED = 730_101
@@ -56,12 +65,13 @@ class ReceiptError(RuntimeError):
 class ActuationReceipt:
     """Immutable single-use record binding an actuation to its boundary.
 
-    Single-use enforcement is TRAJECTORY-SCOPED: each ``ArmEpisodeRunner``
-    tracks consumption for its own trajectory (the registered design is one
-    runner per arm-episode).  Cross-runner replay at a DIFFERENT tick is
-    stopped by the staleness check; a harness that shared one receipt across
-    two runners at the same physical tick would need its own global registry
-    — do not build such a harness against this type.
+    Single-use enforcement is TRAJECTORY-SCOPED (the registered design is one
+    runner per arm-episode), and ``runner_binding`` carries the issuing
+    runner's full environment/block identity (arm, profile registration id,
+    episode id), so a receipt from another runner at the SAME physical tick
+    is rejected by identity, not merely documented as unsupported (Pro's
+    loop-7 C1 correction).  Cross-tick replay is stopped by the staleness
+    check.
     """
 
     opportunity_identity: sib.EdgeIdentity
@@ -70,9 +80,34 @@ class ActuationReceipt:
     decision_source: str
     slot_digest: str
     ingestion_cost: int
+    runner_binding: str
 
 
-def make_receipt(opportunity: sib.Opportunity, actuation: sib.Actuation) -> ActuationReceipt:
+@dataclass(frozen=True)
+class ActionReceipt:
+    """Immutable record binding one boundary action to its actuation receipt.
+
+    Created only after ``_verify_and_consume`` accepted the actuation receipt
+    against the ACTUAL policy-input tensors.  ``bound_step`` refuses any
+    boundary action that does not carry a matching one, so an action altered
+    after the forward pass fails closed.
+    """
+
+    actuation_receipt_digest: str
+    policy_input_digest: str
+    kernel_digest: str
+    sampled_action_digest: str
+    recurrent_write_digest: str
+    physical_tick: int
+
+
+def receipt_digest(receipt: ActuationReceipt) -> str:
+    return hashlib.sha256(repr(receipt).encode("utf-8")).hexdigest()
+
+
+def make_receipt(
+    opportunity: sib.Opportunity, actuation: sib.Actuation, *, runner_binding: str
+) -> ActuationReceipt:
     return ActuationReceipt(
         opportunity_identity=opportunity.identity,
         physical_tick=opportunity.physical_tick,
@@ -80,7 +115,35 @@ def make_receipt(opportunity: sib.Opportunity, actuation: sib.Actuation) -> Actu
         decision_source=actuation.decision_source,
         slot_digest=hashlib.sha256(actuation.slot).hexdigest(),
         ingestion_cost=actuation.ingestion_cost,
+        runner_binding=str(runner_binding),
     )
+
+
+def bound_step(
+    env: sib.EocivSiblingRosterEnv,
+    actions: np.ndarray,
+    action_receipt: ActionReceipt | None,
+) -> tuple[float, bool, dict[str, float]]:
+    """The registered bound-step wrapper for boundary actions.
+
+    Only an action carrying an ``ActionReceipt`` whose sampled-action digest
+    matches the submitted tensor at the current tick may enter ``step()``.
+    The wrapper's contract is exactly (tick, sampled-action digest); the
+    receipt's input/kernel/recurrent digests are provenance records — they
+    are computed from the verified forward pass inside ``run_episode`` and
+    bind the action to it there, not re-derived here (the wrapper has no
+    access to the policy internals to recompute them).
+    """
+    if action_receipt is None:
+        raise ReceiptError("missing action receipt at a bound step")
+    if action_receipt.physical_tick != env.time:
+        raise ReceiptError(
+            f"action receipt tick {action_receipt.physical_tick} "
+            f"vs env time {env.time}"
+        )
+    if _digest(actions) != action_receipt.sampled_action_digest:
+        raise ReceiptError("action altered after the verified forward pass")
+    return env.step(actions)
 
 
 def slot_features(slot: bytes) -> np.ndarray:
@@ -186,6 +249,12 @@ class ArmEpisodeRunner:
         self.tape_seed = int(tape_seed)
         self.d_learned_fn = d_learned_fn
         self.body_override = body_override
+        # Full environment/block identity of this runner: the registered
+        # design holds one runner per arm-episode, so (arm, profile, episode)
+        # IS the block identity a receipt must carry to be consumable here.
+        self.runner_binding = (
+            f"{arm}|{env.ledger.profile.name}|ep{env.ledger.episode_id}"
+        )
         capacity = env.ledger.member_capacity
         self.policy = CommonPolicy(capacity)
         self.hidden = self.policy.initial_state()
@@ -196,23 +265,60 @@ class ArmEpisodeRunner:
         )[:, 0, :, :]
         self._consumed: set[tuple] = set()
         self.boundary_records: list[BoundaryRecord] = []
+        self.action_receipts: list[ActionReceipt] = []
         self.step_traces: list[StepTrace] = []
 
     # -- receipt discipline --------------------------------------------------
 
-    def _verify_and_consume(self, receipt: ActuationReceipt | None, slot: bytes,
-                            focal_receiver: int) -> None:
+    def _verify_and_consume(
+        self,
+        receipt: ActuationReceipt | None,
+        opportunity: sib.Opportunity,
+        actuation: sib.Actuation,
+        slot_block: np.ndarray,
+        focal_receiver: int,
+    ) -> None:
+        """Fail-closed binding of the receipt to the ACTUAL policy input.
+
+        Pro's loop-7 C1 correction: the verifier must check the slot tensor
+        that entered ``CommonPolicy.forward`` — not separately saved bytes —
+        plus the complete current opportunity identity, route, decision
+        source, ingestion cost, and the issuing runner's block identity.
+        """
         if receipt is None:
             raise ReceiptError("missing actuation receipt at a boundary step")
+        if receipt.runner_binding != self.runner_binding:
+            raise ReceiptError(
+                f"cross-runner receipt: issued by {receipt.runner_binding!r}, "
+                f"consumed by {self.runner_binding!r}"
+            )
         if receipt.physical_tick != self.env.time:
             raise ReceiptError(
                 f"stale or post-action receipt: tick {receipt.physical_tick} "
                 f"vs env time {self.env.time}"
             )
+        if receipt.opportunity_identity != opportunity.identity:
+            raise ReceiptError(
+                "receipt identity does not match the current opportunity "
+                "(profile/episode/event/spell-epoch/member binding)"
+            )
         if receipt.opportunity_identity.receiver_member_key != focal_receiver:
             raise ReceiptError("wrong-owner receipt: focal receiver mismatch")
-        if hashlib.sha256(slot).hexdigest() != receipt.slot_digest:
+        if receipt.route != actuation.route:
+            raise ReceiptError("receipt route does not match the actuation")
+        if receipt.decision_source != actuation.decision_source:
+            raise ReceiptError("receipt decision source does not match the actuation")
+        if receipt.ingestion_cost != actuation.ingestion_cost:
+            raise ReceiptError("receipt ingestion cost does not match the actuation")
+        if hashlib.sha256(actuation.slot).hexdigest() != receipt.slot_digest:
             raise ReceiptError("slot digest does not match the bound receipt")
+        if not np.array_equal(slot_block[focal_receiver], slot_features(actuation.slot)):
+            raise ReceiptError(
+                "the focal policy slot tensor does not match the receipted slot"
+            )
+        nonfocal = np.delete(slot_block, focal_receiver, axis=0)
+        if np.count_nonzero(nonfocal):
+            raise ReceiptError("nonzero non-focal slot rows in the policy input")
         key = (receipt.opportunity_identity, receipt.physical_tick)
         if key in self._consumed:
             raise ReceiptError("duplicate receipt consumption for one opportunity")
@@ -220,7 +326,9 @@ class ArmEpisodeRunner:
 
     # -- the drive -----------------------------------------------------------
 
-    def _boundary(self, event_index: int) -> tuple[np.ndarray, ActuationReceipt, int]:
+    def _boundary(
+        self, event_index: int
+    ) -> tuple[np.ndarray, ActuationReceipt, int, sib.Opportunity, sib.Actuation]:
         env = self.env
         opportunity = env.opportunity(event_index)
         view = env.observe()
@@ -234,7 +342,9 @@ class ArmEpisodeRunner:
         actuation = sib.actuate(
             self.arm, opportunity, body, d_learned=d_learned, d_control=d_control
         )
-        receipt = make_receipt(opportunity, actuation)
+        receipt = make_receipt(
+            opportunity, actuation, runner_binding=self.runner_binding
+        )
         capacity = env.ledger.member_capacity
         slot_block = np.zeros((capacity, SLOT_DIM), dtype=np.float32)
         focal = opportunity.identity.receiver_member_key
@@ -242,7 +352,7 @@ class ArmEpisodeRunner:
         self.boundary_records.append(
             BoundaryRecord(receipt, w_bytes, actuation.route, actuation.slot)
         )
-        return slot_block, receipt, focal
+        return slot_block, receipt, focal, opportunity, actuation
 
     def run_episode(self) -> float:
         env = self.env
@@ -253,31 +363,47 @@ class ArmEpisodeRunner:
                 sib.EVENT_TIMES.index(time) if time in sib.EVENT_TIMES else None
             )
             if event_index is not None:
-                slot_block, receipt, focal = self._boundary(event_index)
+                slot_block, receipt, focal, opportunity, actuation = (
+                    self._boundary(event_index)
+                )
             else:
-                slot_block, receipt, focal = (
-                    np.zeros((capacity, SLOT_DIM), dtype=np.float32), None, None
+                slot_block, receipt, focal, opportunity, actuation = (
+                    np.zeros((capacity, SLOT_DIM), dtype=np.float32),
+                    None, None, None, None,
                 )
             view = env.observe()
             actions, kernel, new_hidden = self.policy.forward(
                 view.observations, view.active_mask, slot_block,
                 self.hidden, self.noise[time],
             )
-            if event_index is not None:
-                # The action is consumed by step() only after the binding
-                # between the actuation receipt and the fed slot verifies.
-                self._verify_and_consume(
-                    receipt, self.boundary_records[-1].slot, focal
-                )
-            self.step_traces.append(
-                StepTrace(
-                    time=time,
-                    input_digest=_digest(view.observations, view.active_mask, slot_block, self.hidden),
-                    kernel_digest=_digest(kernel),
-                    action_digest=_digest(actions),
-                    hidden_digest=_digest(new_hidden),
-                )
+            trace = StepTrace(
+                time=time,
+                input_digest=_digest(view.observations, view.active_mask, slot_block, self.hidden),
+                kernel_digest=_digest(kernel),
+                action_digest=_digest(actions),
+                hidden_digest=_digest(new_hidden),
             )
+            self.step_traces.append(trace)
             self.hidden = new_hidden
-            env.step(actions)
+            if event_index is not None:
+                # The binding chain (Pro's C1): the actuation receipt is
+                # verified against the ACTUAL slot tensor that entered the
+                # forward pass, then the resulting action carries an
+                # ActionReceipt, and only the bound-step wrapper may submit
+                # it to the environment.
+                self._verify_and_consume(
+                    receipt, opportunity, actuation, slot_block, focal
+                )
+                action_receipt = ActionReceipt(
+                    actuation_receipt_digest=receipt_digest(receipt),
+                    policy_input_digest=trace.input_digest,
+                    kernel_digest=trace.kernel_digest,
+                    sampled_action_digest=trace.action_digest,
+                    recurrent_write_digest=trace.hidden_digest,
+                    physical_tick=time,
+                )
+                self.action_receipts.append(action_receipt)
+                bound_step(env, actions, action_receipt)
+            else:
+                env.step(actions)
         return env.episode_total()

@@ -1,6 +1,7 @@
 """Focused tests for the executable actuation edge (receipt, policy, runner)."""
 
 import hashlib
+from dataclasses import replace
 
 import numpy as np
 import pytest
@@ -83,17 +84,150 @@ class TestRunner:
         actuation = sib.actuate(
             "LR", opportunity, env.focal_payload(0), d_learned=True, d_control=True
         )
-        receipt = art.make_receipt(opportunity, actuation)
+        receipt = art.make_receipt(
+            opportunity, actuation, runner_binding=runner.runner_binding
+        )
         focal = opportunity.identity.receiver_member_key
-        with pytest.raises(art.ReceiptError):
-            runner._verify_and_consume(None, actuation.slot, focal)
-        with pytest.raises(art.ReceiptError):
-            runner._verify_and_consume(receipt, actuation.slot, focal + 1)
-        with pytest.raises(art.ReceiptError):
-            runner._verify_and_consume(receipt, b"\x00" * sib.PAYLOAD_SLOT_BYTES, focal)
-        runner._verify_and_consume(receipt, actuation.slot, focal)
-        with pytest.raises(art.ReceiptError):
-            runner._verify_and_consume(receipt, actuation.slot, focal)
+        capacity = env.ledger.member_capacity
+
+        def block():
+            b = np.zeros((capacity, art.SLOT_DIM), dtype=np.float32)
+            b[focal, :] = art.slot_features(actuation.slot)
+            return b
+
+        with pytest.raises(art.ReceiptError, match="missing"):
+            runner._verify_and_consume(None, opportunity, actuation, block(), focal)
+        with pytest.raises(art.ReceiptError, match="focal receiver"):
+            runner._verify_and_consume(receipt, opportunity, actuation, block(), focal + 1)
+        with pytest.raises(art.ReceiptError, match="slot digest"):
+            runner._verify_and_consume(
+                receipt, opportunity,
+                replace(actuation, slot=sib._pad_slot(b"EOCIV-ALTERED")),
+                block(), focal,
+            )
+        runner._verify_and_consume(receipt, opportunity, actuation, block(), focal)
+        with pytest.raises(art.ReceiptError, match="duplicate"):
+            runner._verify_and_consume(receipt, opportunity, actuation, block(), focal)
+
+    def test_pro_c1_negative_matrix(self):
+        """Pro's seven required negative tests for the corrected binding."""
+        env = gate_mod._make_sibling(PROFILE, 1)
+        runner = art.ArmEpisodeRunner(
+            env, "LR", tape_seed=gate_mod.TAPE_SEED,
+            d_learned_fn=gate_mod.registered_learned_decision,
+        )
+        gate_mod._drive_to(env, sib.EVENT_TIMES[0])
+        opportunity = env.opportunity(0)
+        actuation = sib.actuate(
+            "LR", opportunity, env.focal_payload(0), d_learned=True, d_control=True
+        )
+        receipt = art.make_receipt(
+            opportunity, actuation, runner_binding=runner.runner_binding
+        )
+        focal = opportunity.identity.receiver_member_key
+        capacity = env.ledger.member_capacity
+
+        def block():
+            b = np.zeros((capacity, art.SLOT_DIM), dtype=np.float32)
+            b[focal, :] = art.slot_features(actuation.slot)
+            return b
+
+        # 1. Correct receipt but altered focal slot tensor.
+        altered = block()
+        altered[focal, 0] += np.float32(1.0 / 255.0)
+        with pytest.raises(art.ReceiptError, match="focal policy slot tensor"):
+            runner._verify_and_consume(receipt, opportunity, actuation, altered, focal)
+        # 2. Correct focal slot plus a nonzero non-focal slot.
+        leaky = block()
+        leaky[(focal + 1) % capacity, 5] = np.float32(0.25)
+        with pytest.raises(art.ReceiptError, match="non-focal"):
+            runner._verify_and_consume(receipt, opportunity, actuation, leaky, focal)
+        # 3. Correct slot but wrong source identity.
+        wrong_source = replace(
+            receipt,
+            opportunity_identity=replace(
+                receipt.opportunity_identity,
+                source_member_key=receipt.opportunity_identity.source_member_key + 1,
+            ),
+        )
+        with pytest.raises(art.ReceiptError, match="identity"):
+            runner._verify_and_consume(wrong_source, opportunity, actuation, block(), focal)
+        # 4. Wrong profile / episode / event / spell epoch.
+        for field, value in (
+            ("profile_registration_id", "train_5_3_7_6"),
+            ("episode_id", 2),
+            ("lifecycle_event_index", 1),
+            ("receiver_active_spell_epoch",
+             receipt.opportunity_identity.receiver_active_spell_epoch + 1),
+        ):
+            bad = replace(
+                receipt,
+                opportunity_identity=replace(
+                    receipt.opportunity_identity, **{field: value}
+                ),
+            )
+            with pytest.raises(art.ReceiptError, match="identity"):
+                runner._verify_and_consume(bad, opportunity, actuation, block(), focal)
+        # 5. Altered route, decision source, or ingestion cost.
+        with pytest.raises(art.ReceiptError, match="route"):
+            runner._verify_and_consume(
+                receipt, opportunity, replace(actuation, route="NEUTRAL"), block(), focal
+            )
+        with pytest.raises(art.ReceiptError, match="decision source"):
+            runner._verify_and_consume(
+                receipt, opportunity, replace(actuation, decision_source="D_C"),
+                block(), focal,
+            )
+        with pytest.raises(art.ReceiptError, match="ingestion cost"):
+            runner._verify_and_consume(
+                receipt, opportunity, replace(actuation, ingestion_cost=0),
+                block(), focal,
+            )
+        # 6. Correct policy input but altered action after the forward pass.
+        slot_block = block()
+        view = env.observe()
+        actions, kernel, hidden = runner.policy.forward(
+            view.observations, view.active_mask, slot_block,
+            runner.hidden, runner.noise[env.time],
+        )
+        runner._verify_and_consume(receipt, opportunity, actuation, slot_block, focal)
+        action_receipt = art.ActionReceipt(
+            actuation_receipt_digest=art.receipt_digest(receipt),
+            policy_input_digest=art._digest(
+                view.observations, view.active_mask, slot_block, runner.hidden
+            ),
+            kernel_digest=art._digest(kernel),
+            sampled_action_digest=art._digest(actions),
+            recurrent_write_digest=art._digest(hidden),
+            physical_tick=env.time,
+        )
+        tampered = actions.copy()
+        tampered[focal, 0] = np.float32(0.0) if tampered[focal, 0] else np.float32(0.5)
+        with pytest.raises(art.ReceiptError, match="altered after"):
+            art.bound_step(env, tampered, action_receipt)
+        with pytest.raises(art.ReceiptError, match="missing action receipt"):
+            art.bound_step(env, actions, None)
+        # The untampered action with its receipt is accepted.
+        reward, terminated, _ = art.bound_step(env, actions, action_receipt)
+        assert not terminated and 0.0 <= reward <= 1.0
+        # 7. A receipt from another runner at the same tick is rejected by
+        # full block identity.
+        env2 = gate_mod._make_sibling(PROFILE, 1)
+        other = art.ArmEpisodeRunner(
+            env2, "CR", tape_seed=gate_mod.TAPE_SEED,
+            d_learned_fn=gate_mod.registered_learned_decision,
+        )
+        cross = art.make_receipt(
+            opportunity, actuation, runner_binding=other.runner_binding
+        )
+        fresh = art.ArmEpisodeRunner(
+            gate_mod._make_sibling(PROFILE, 1), "LR",
+            tape_seed=gate_mod.TAPE_SEED,
+            d_learned_fn=gate_mod.registered_learned_decision,
+        )
+        gate_mod._drive_to(fresh.env, sib.EVENT_TIMES[0])
+        with pytest.raises(art.ReceiptError, match="cross-runner"):
+            fresh._verify_and_consume(cross, opportunity, actuation, block(), focal)
 
     def test_lr_cr_byte_identity_and_ls_divergence(self):
         lr = _runner("LR", episode_id=2)
