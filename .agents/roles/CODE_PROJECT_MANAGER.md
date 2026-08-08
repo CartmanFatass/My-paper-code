@@ -128,6 +128,22 @@ manager; there is no Research Operations Manager or persistent monitor.
   initiate the final acceptance review. Explorer freezes and submits that review;
   External Pro owns final scientific-semantic acceptance through the GitHub
   connection.
+- For every direction-specific Explorer brief, CPM works from the selected
+  direction's smallest set of canonical decision/source context rather than
+  importing portfolio context. An explicitly multi-direction brief may name a
+  direction set, but CPM does not add unrequested siblings. Its reverse result
+  begins with a conclusion and mirrors the same primary direction or explicitly
+  named direction set, exact candidate proposition, stage, source/evidence
+  revision boundary and the
+  smallest set of material parent/child/cross-direction relationships before
+  technical observations, counts, adjustments and locators. A Codex-native
+  message fallback carries the same binding and content; neither result
+  generalizes to sibling directions or implies portfolio-wide meaning. If identity,
+  proposition or revision binding is missing or contradictory, CPM preserves
+  the original handoff/artifact and asks exactly one concrete semantic
+  clarification while continuing unrelated work. It never guesses, merges
+  directions, rewrites the artifact or creates a `BLOCKED` state, and it never
+  reads `local_research/`.
 - Exact Experiment Operator assignments and recovery mode selection inside the
   unchanged authorized scientific boundary. A complete exact assignment
   delegates compute authority to the child automatically; CPM checks the

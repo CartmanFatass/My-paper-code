@@ -31,6 +31,20 @@ rest. Operational failure may receive one unchanged low-cost retry. A changed
 source boundary or project authority needs a new user decision; a new mechanism
 or subdirection inside the campaign is an opportunity-bound assignment.
 
+Direction-specific answers and Explorer-to-CPM handoffs use the single
+direction-local context binding defined in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Resolve one primary
+selected direction and its smallest set of canonical decision/source context;
+load the smallest set of parent/child/cross-direction edges only when
+material. An explicitly multi-direction question may name several directions,
+but never preload or merge unrequested siblings or the whole portfolio. The
+binding is semantic writing guidance covering the exact proposition, stage,
+source/evidence revision boundary, uncertainty, relationships, explicit
+sibling-direction exclusion unless explicitly named, requested action, direct
+consumer, completion evidence and return destination. A missing or contradictory
+identity/proposition/revision preserves the original artifact and gets exactly
+one concrete semantic clarification while unrelated work continues.
+
 For every registered research child, the Explorer calls the registered agent
 type with explicit `fork_turns="none"` and a self-contained natural-language
 assignment. Compile the research purpose, exact scientific question, source and

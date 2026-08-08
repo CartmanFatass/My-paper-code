@@ -180,7 +180,7 @@ def test_cpm_mechanical_child_is_file_bound_and_non_scientific() -> None:
         "hmasd-cpm-mechanical",
         "cpm_mechanical_assignment=CPM_MECHANICAL_TASK_ASSIGNMENT",
         "cpm_mechanical_result=CPM_MECHANICAL_TASK_RESULT",
-        "typed temporary receipt returns to CPM",
+            "conclusion and temporary receipt return to CPM",
         "no active research-state effect",
     ):
         assert required in workflow_map

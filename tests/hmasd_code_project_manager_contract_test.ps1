@@ -125,7 +125,12 @@ foreach ($required in @(
     'requires no Git operation',
     'semantic writing aids, not required field names',
     'bounded safe read-only reconnaissance',
-    'not a packet validator, dispatcher, queue engine or state machine')) {
+    'not a packet validator, dispatcher, queue engine or state machine',
+    'direction-local binding',
+    'smallest set of canonical decision/source context',
+    'do not preload or merge unrequested siblings',
+    'preserve the original handoff/artifact',
+    'ask exactly one concrete semantic clarification')) {
     if (-not $explorerValidationSkillNormalized.Contains($required)) {
         throw "Explorer semantic handoff Skill missing: $required"
     }
@@ -162,7 +167,15 @@ foreach ($required in @(
     'External Pro uses the GitHub connection to inspect the exact pushed revision',
     'Explorer never substitutes its own acceptance',
     'The review starts only after CPM technical acceptance and push',
-    'Missing formatting or a prior mechanical BLOCKED receipt is not candidate evidence')) {
+    'Missing formatting or a prior mechanical BLOCKED receipt is not candidate evidence',
+    'selected direction identity',
+    'Direction-local context binding',
+    'reverse result begins with its conclusion',
+    'mirrors that same primary direction or explicitly named direction set',
+    'Codex-native message fallback carries the same binding',
+    'preserves the original handoff/artifact',
+    'asks exactly one concrete semantic clarification',
+    'never reads `local_research/`')) {
     if (-not $explorerValidationContractNormalized.Contains($required)) {
         throw "Explorer validation contract missing semantic rule: $required"
     }
@@ -172,7 +185,10 @@ foreach ($required in @(
     'Code Manager alone creates, edits and deletes its outbound files',
     'missing schema, `document_kind`, validator receipt, hash, byte count',
     'begins with its natural-language conclusion and then appends the necessary exact evidence',
-    'live files never enter Git')) {
+    'live files never enter Git',
+    'Direction-specific briefs and reverse results follow the direction-local',
+    'Codex-native message fallback carries the same binding',
+    'ask exactly one concrete semantic clarification')) {
     if (-not $publicHandoffContractNormalized.Contains($required)) {
         throw "Public handoff contract missing: $required"
     }

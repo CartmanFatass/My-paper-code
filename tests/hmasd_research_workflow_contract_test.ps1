@@ -108,6 +108,24 @@ $handoff = if (Test-Path -LiteralPath $handoffPath -PathType Leaf) {
     $null
 }
 
+$directionBindingTerms = @(
+    'direction-specific Explorer answer',
+    'selected direction identity',
+    'smallest set of canonical',
+    'parent, child or cross-direction',
+    'preloading or merging the whole portfolio',
+    'candidate and exact current proposition',
+    'source/evidence revision boundary',
+    'explicit exclusion of sibling-direction generalization',
+    'one requested action and its direct consumer',
+    'completion evidence',
+    'CPM''s reverse result begins with its conclusion',
+    'mirrors that same primary direction or explicitly named direction set',
+    'Codex-native message fallback carries the same binding',
+    'preserves the original handoff/artifact',
+    'asks exactly one concrete semantic clarification',
+    'duplicate decision records')
+
 if (-not (Test-Path -LiteralPath $explorerValidationSkillPath -PathType Leaf) -or
     -not (Test-Path -LiteralPath $explorerValidationContractPath -PathType Leaf) -or
     -not (Test-Path -LiteralPath $publicHandoffContractPath -PathType Leaf)) {
@@ -256,6 +274,23 @@ foreach ($entry in @(
     @($agentifyTransportProfileNormalized, 'model_reasoning_effort = "medium"')) ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Explorer Agentify silent-child contract missing: $($entry[1])"
+    }
+}
+
+foreach ($required in $directionBindingTerms) {
+    if (-not $explorerValidationContractNormalized.Contains($required)) {
+        throw "Direction-local Explorer/CPM binding missing from stable contract: $required"
+    }
+}
+$directionBindingPointer = 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
+foreach ($surface in @(
+    $independentResearchRole,
+    $explorerValidationSkill,
+    $independentResearchSkill,
+    $parallelResearch,
+    $publicHandoffContract)) {
+    if (-not $surface.Contains($directionBindingPointer)) {
+        throw 'Direction-local context surface does not point to the stable contract'
     }
 }
 

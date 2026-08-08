@@ -14,6 +14,43 @@ External Pro owns scientific choices inside each submitted review boundary.
 Workflow Design Manager owns this stable interface, not its live handoff
 content.
 
+## Direction-local context binding
+
+Every direction-specific Explorer answer and Explorer-to-CPM handoff is
+direction-local. For an ordinary question or brief, Explorer resolves one
+primary selected direction identity and loads only the smallest set of
+canonical decision/source context needed for it. It loads only the smallest
+set of parent, child or cross-direction edges material to the exact question.
+An explicitly multi-direction user question may name multiple directions, but
+that never authorizes preloading or merging the whole portfolio; each named
+direction remains explicit, no unrequested sibling generalization is made and
+no result implies portfolio-wide meaning.
+
+The brief uses natural-language context cues rather than a schema: selected
+direction identity (or the explicitly named direction set); candidate and
+exact current proposition; current stage; source/evidence revision boundary;
+frozen facts and uncertainty; strongest alternative explanation; the smallest
+set of material parent/child/cross-direction relationships; explicit exclusion
+of sibling-direction generalization unless a direction is explicitly named;
+one requested action and its direct
+consumer; completion evidence; and return destination. These cues make the
+semantic binding understandable without
+creating required field names or a machine admission gate.
+
+CPM's reverse result begins with its conclusion and mirrors that same primary
+direction or explicitly named direction set, candidate, proposition, stage,
+revision boundary and material relationship binding before technical
+observations, counts, adjustments and locators. It never imports another
+direction or implies portfolio-wide
+meaning. A Codex-native message fallback carries the same binding and content.
+
+If the direction, proposition or revision binding is missing or contradictory,
+the receiver preserves the original handoff/artifact and asks exactly one
+concrete semantic clarification. It continues unrelated work; neither role
+guesses, merges directions, rewrites the artifact or creates a `BLOCKED` state.
+Portfolio, index, README and continuity surfaces remain pointer-only
+navigation or phase-barrier views and do not become duplicate decision records.
+
 ## Scientific-only intake boundary
 
 This boundary is prospective and begins after CPM technical acceptance. Explorer

@@ -91,6 +91,16 @@ answer, conversation evidence and conclusion return to the requester. WDM does
 not absorb CPM/Explorer live review traffic or results. External Pro remains a
 separate scientific lane.
 
+The Explorer↔CPM direction-local context binding is defined once by
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer and CPM use
+one primary selected direction's smallest canonical context, add only the
+smallest set of material relationship edges, and mirror the binding in the
+conclusion-first reverse result or Codex-native fallback. An explicitly
+multi-direction user question may name several directions without authorizing
+portfolio preload. Portfolio/index/README/continuity surfaces remain
+pointer-only; a missing binding gets one semantic clarification while
+unrelated work continues rather than a new workflow state.
+
 ```text
 CPM task model -> hmasd-cpm-mechanical -> conclusion + CPM_MECHANICAL_TASK_RESULT anchors -> CPM sufficiency/finalization/technical acceptance
 ```

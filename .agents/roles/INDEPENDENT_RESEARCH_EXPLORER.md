@@ -197,6 +197,23 @@ for a direction-changing decision, material result ambiguity, final science
 alignment, a conclusion-bearing claim, or an explicit C review; Pro is not a
 normal B precondition or per-iteration reviewer.
 
+For a direction-specific answer or outbound handoff, Explorer first resolves
+one primary selected direction and loads only the smallest set of its
+canonical decision/source context, adding the smallest set of parent, child or
+cross-direction edges material to the question. An explicitly multi-direction
+user question may name several directions; this never authorizes preloading or
+merging the portfolio or unrequested sibling generalization. The
+natural-language brief should make the selected direction or named direction
+set, exact candidate proposition, stage, source/evidence revision boundary,
+frozen facts and uncertainty, strongest alternative, material relationships,
+explicit exclusion of sibling-direction generalization unless explicitly
+named, requested action/direct consumer, completion evidence and return
+destination understandable, as defined by the single stable contract. If
+identity, proposition or revision binding is missing or
+contradictory, Explorer preserves the original handoff/artifact, asks exactly
+one concrete semantic clarification and continues unrelated work; it does not
+guess, merge directions, rewrite the artifact or create a `BLOCKED` state.
+
 After CPM technically accepts and pushes a result, it returns the exact commit
 and public GitHub repository/path locators. Ordinary B iteration may continue
 inside Explorer's advisory research state without automatic Pro review or a

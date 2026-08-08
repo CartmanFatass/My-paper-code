@@ -746,3 +746,78 @@ def test_scientific_only_intake_boundary_uses_one_explorer_decision_record() -> 
     assert "canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership" in role
     assert "portfolio_index_readme_continuity_role=pointer_navigation_barrier_only" in role
     assert "does not invoke External Pro" in " ".join(contract.split())
+
+
+def test_direction_local_context_binding_is_symmetric_and_preserves_artifacts() -> None:
+    contract = (
+        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    ).read_text(encoding="utf-8")
+    explorer_role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+        encoding="utf-8"
+    )
+    cpm_role = (REPO / ".agents" / "roles" / "CODE_PROJECT_MANAGER.md").read_text(
+        encoding="utf-8"
+    )
+    cpm_role_normalized = " ".join(cpm_role.split())
+    exploration_skill = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    parallel = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md"
+    ).read_text(encoding="utf-8")
+    validation_skill = (
+        REPO / ".agents" / "skills" / "hmasd-explorer-project-validation" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    validation_skill_normalized = " ".join(validation_skill.split())
+    handoffs = (REPO / "docs" / "project" / "handoffs" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    workflow_map = (REPO / "docs" / "project" / "WORKFLOW_MAP.md").read_text(encoding="utf-8")
+
+    normalized_contract = " ".join(contract.split())
+    for required in (
+        "direction-specific Explorer answer",
+        "selected direction identity",
+        "canonical decision/source context",
+        "parent, child or cross-direction",
+        "preloading or merging the whole portfolio",
+        "candidate and exact current proposition",
+        "source/evidence revision boundary",
+        "explicit exclusion of sibling-direction generalization",
+        "one requested action and its direct consumer",
+        "CPM's reverse result begins with its conclusion",
+        "mirrors that same primary direction or explicitly named direction set",
+        "Codex-native message fallback carries the same binding and content",
+        "preserves the original handoff/artifact",
+        "asks exactly one concrete semantic clarification",
+        "creates a `BLOCKED` state",
+        "pointer-only",
+    ):
+        assert required in normalized_contract
+
+    pointer = "docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    for surface in (explorer_role, exploration_skill, parallel, validation_skill, handoffs):
+        assert pointer in surface
+
+    for required in (
+        "selected direction",
+        "smallest set",
+        "sibling",
+        "semantic clarification",
+    ):
+        assert required in explorer_role
+        assert required in cpm_role_normalized
+
+    assert "explicitly multi-direction user question" in normalized_contract
+    assert "never imports another direction" in normalized_contract
+    assert "portfolio-wide meaning" in normalized_contract
+    assert "A Codex-native message fallback carries the same binding" in handoffs
+    assert "never preload or merge unrequested siblings" in exploration_skill
+    assert "preserve the original handoff/artifact" in validation_skill_normalized
+    assert "direction-local context binding" in workflow_map
+    assert "never reads `local_research/`" in cpm_role_normalized

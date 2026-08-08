@@ -20,6 +20,11 @@ $reviewer = Get-Content -Raw -LiteralPath (
 $reviewerRole = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.agents/roles/REVIEWER.md')
 $reviewerRoleNormalized = $reviewerRole -replace '\s+', ' '
+$codeScout = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.codex/agents/hmasd-code-scout.toml')
+$codeScoutRole = Get-Content -Raw -LiteralPath (
+    Join-Path $repo '.agents/roles/CODE_SCOUT.md')
+$codeScoutRoleNormalized = $codeScoutRole -replace '\s+', ' '
 $experimentOperator = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-experiment-operator.toml')
 $experimentOperatorRole = Get-Content -Raw -LiteralPath (
@@ -44,6 +49,10 @@ $researchScout = Get-Content -Raw -LiteralPath $researchScoutPath
 $researchInnovator = Get-Content -Raw -LiteralPath $researchInnovatorPath
 $researchCritic = Get-Content -Raw -LiteralPath $researchCriticPath
 $researchPrinciples = Get-Content -Raw -LiteralPath $researchPrinciplesPath
+$researchScoutRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_SCOUT.md')
+$researchInnovatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_INNOVATOR.md')
+$researchCriticRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_CRITIC.md')
+$researchPrinciplesRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_PRINCIPLES_ANALYST.md')
 
 foreach ($required in @(
     'model = "gpt-5.6-sol"',
@@ -146,72 +155,57 @@ foreach ($retired in @(
         throw "Retired duplicate direction-review profile remains registered: $retired"
     }
 }
-foreach ($required in @(
-    'name = "hmasd-research-innovator"',
-    'model = "gpt-5.6-sol"',
-    'model_reasoning_effort = "max"',
-    'sandbox_mode = "read-only"',
-    '.agents/roles/RESEARCH_INNOVATOR.md',
-    'research-methodology.md only for candidate_validation',
-    'ALGORITHM_INSPIRATION_PACKET',
-    'adapt, combine, develop',
-    'delete-retain-add ledger',
-    'Do not force an affirmative result',
-    'spawn children')) {
-    if (-not $researchInnovator.Contains($required)) {
-        throw "Research Innovator profile missing: $required"
+foreach ($profileRoute in @(
+    @{ Text = $codeScout; Name = 'hmasd-code-scout'; Model = 'gpt-5.6-luna'; Effort = 'medium'; Role = '.agents/roles/CODE_SCOUT.md' },
+    @{ Text = $reviewer; Name = 'hmasd-reviewer'; Model = 'gpt-5.6-sol'; Effort = 'xhigh'; Role = '.agents/roles/REVIEWER.md' },
+    @{ Text = $researchScout; Name = 'hmasd-research-scout'; Model = 'gpt-5.6-sol'; Effort = 'high'; Role = '.agents/roles/RESEARCH_SCOUT.md' },
+    @{ Text = $researchPrinciples; Name = 'hmasd-research-principles-analyst'; Model = 'gpt-5.6-sol'; Effort = 'max'; Role = '.agents/roles/RESEARCH_PRINCIPLES_ANALYST.md' },
+    @{ Text = $researchCritic; Name = 'hmasd-research-critic'; Model = 'gpt-5.6-sol'; Effort = 'max'; Role = '.agents/roles/RESEARCH_CRITIC.md' },
+    @{ Text = $researchInnovator; Name = 'hmasd-research-innovator'; Model = 'gpt-5.6-sol'; Effort = 'max'; Role = '.agents/roles/RESEARCH_INNOVATOR.md' })) {
+    foreach ($required in @(
+        ('name = "' + $profileRoute.Name + '"'),
+        ('model = "' + $profileRoute.Model + '"'),
+        ('model_reasoning_effort = "' + $profileRoute.Effort + '"'),
+        'sandbox_mode = "read-only"',
+        $profileRoute.Role,
+        'fork_turns=none',
+        'self-contained natural-language task model',
+        'Role charter owns',
+        'thin')) {
+        if (-not $profileRoute.Text.Contains($required)) {
+            throw "$($profileRoute.Name) thin profile missing: $required"
+        }
+    }
+    foreach ($forbidden in @(
+        'SOURCE_RESULT_PACKET',
+        'ALGORITHM_INSPIRATION_PACKET',
+        'RL_PRINCIPLE_ANALYSIS_PACKET',
+        'CRITIC_ASSESSMENT_PACKET',
+        'Metadata v2',
+        'structured JSON',
+        'PDF verification',
+        'Return exactly one',
+        'reopen one',
+        'reread one',
+        'recheck one')) {
+        if ($profileRoute.Text.Contains($forbidden)) {
+            throw "$($profileRoute.Name) profile duplicates Role procedure: $forbidden"
+        }
     }
 }
-foreach ($required in @(
-    'name = "hmasd-research-scout"',
-    'model = "gpt-5.6-sol"',
-    'model_reasoning_effort = "high"',
-    'sandbox_mode = "read-only"',
-    '.agents/roles/RESEARCH_SCOUT.md',
-    'catalog.v2',
-    'quality and provenance',
-    'structured JSON',
-    'PDF verification',
-    'SOURCE_RESULT_PACKET',
-    'source absorption, not idea competition')) {
-    if (-not $researchScout.Contains($required)) {
-        throw "Research Scout profile missing: $required"
-    }
-}
-foreach ($required in @(
-    'name = "hmasd-research-critic"',
-    'model = "gpt-5.6-sol"',
-    'model_reasoning_effort = "max"',
-    'sandbox_mode = "read-only"',
-    '.agents/roles/RESEARCH_CRITIC.md',
-    'research-methodology.md',
-    'only for candidate_validation',
-    'Metadata v2',
-    'quality and provenance',
-    'structured JSON',
-    'PDF verification',
-    'SOURCE_RESULT_PACKET',
-    'ALGORITHM_INSPIRATION_PACKET',
-    'RL_PRINCIPLE_ANALYSIS_PACKET',
-    'after constructive principles analysis',
-    'Formal proof and routine counterexample construction are not required')) {
-    if (-not $researchCritic.Contains($required)) {
-        throw "Research Critic profile missing: $required"
-    }
-}
-foreach ($required in @(
-    'name = "hmasd-research-principles-analyst"',
-    'model = "gpt-5.6-sol"',
-    'model_reasoning_effort = "max"',
-    'sandbox_mode = "read-only"',
-    '.agents/roles/RESEARCH_PRINCIPLES_ANALYST.md',
-    'information-theoretic',
-    'exploration/exploitation',
-    'posterior-collapse',
-    'RL_PRINCIPLE_ANALYSIS_PACKET',
-    'Do not demand a theorem')) {
-    if (-not $researchPrinciples.Contains($required)) {
-        throw "Research Principles Analyst profile missing: $required"
+
+foreach ($roleRoute in @(
+    @{ Text = $codeScoutRole; Name = 'Code Scout'; Required = @('default_fork_turns=none', 'self-contained natural-language task model', 'concise natural-language conclusion', 'reopen one named immediate interface once', 'not a schema or admission gate') },
+    @{ Text = $reviewerRole; Name = 'Reviewer'; Required = @('self-contained natural-language task model', 'concise natural-language conclusion', 'reread one indispensable changed artifact or immediate interface once', 'not a schema or admission gate') },
+    @{ Text = $researchScoutRole; Name = 'Research Scout'; Required = @('self-contained natural-language task model', 'SOURCE_RESULT_PACKET', 'concise natural-language conclusion', 'one JSON or PDF fidelity recheck at that disputed locator', 'not a schema or admission gate') },
+    @{ Text = $researchPrinciplesRole; Name = 'Research Principles Analyst'; Required = @('self-contained natural-language task model', 'RL_PRINCIPLE_ANALYSIS_PACKET', 'concise natural-language conclusion', 'reread one supplied candidate or source fact', 'not a schema or admission gate') },
+    @{ Text = $researchCriticRole; Name = 'Research Critic'; Required = @('self-contained natural-language task model', 'CRITIC_ASSESSMENT_PACKET', 'concise natural-language conclusion', 'recheck one named source or principles packet', 'not a schema or admission gate') },
+    @{ Text = $researchInnovatorRole; Name = 'Research Innovator'; Required = @('self-contained natural-language task model', 'ALGORITHM_INSPIRATION_PACKET', 'concise natural-language conclusion', 'reread one frozen input or named parent packet', 'not a schema or admission gate') })) {
+    $normalizedRole = $roleRoute.Text -replace '\s+', ' '
+    foreach ($required in $roleRoute.Required) {
+        if (-not $normalizedRole.Contains($required)) {
+            throw "$($roleRoute.Name) Role procedure missing: $required"
+        }
     }
 }
 foreach ($required in @(

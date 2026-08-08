@@ -89,6 +89,23 @@ dispatch a workflow implementer. Continue unrelated research when the defect is
 dependency-local. A WDM reload receipt has `research_state_effect=none` and
 cannot select, pause, resume or terminate research.
 
+For any direction-specific answer or Explorer-to-CPM handoff, apply the
+direction-local context binding in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`: resolve one selected
+primary direction and load only its smallest set of canonical decision/source
+context, adding the smallest set of parent, child or cross-direction edges only
+when material. An explicitly multi-direction user question may name several
+directions; never preload or merge unrequested siblings or the whole portfolio.
+Use natural-language cues for the selected direction or named direction set,
+exact candidate proposition, stage, source/evidence revision boundary, frozen
+facts and uncertainty, strongest alternative, material relationships, explicit
+exclusion of sibling-direction generalization unless explicitly named, one
+requested action/direct consumer, completion evidence and return destination. A missing
+or contradictory identity, proposition or revision binding preserves the
+original artifact and asks exactly one concrete semantic clarification while
+unrelated work continues; do not guess, merge directions, rewrite the artifact
+or create a `BLOCKED` state.
+
 ## Choose exactly one research mode
 
 Use **evidence review** to determine what existing sources establish. Create an

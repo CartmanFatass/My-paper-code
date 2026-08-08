@@ -19,6 +19,27 @@ mechanical packet, perform only Explorer-owned scientific interpretation, write
 one canonical scientific decision record, and keep derived views pointer-only.
 This Skill adds no second copy of that rule or technical admission gate.
 
+## Direction-local context
+
+For a direction-specific question or handoff, use the direction-local binding
+defined by the stable contract: resolve one selected direction, load only the
+smallest set of canonical decision/source context, and add the smallest set of
+parent, child or cross-direction edges only when material. An explicitly
+multi-direction question may name several directions; do not preload or merge
+unrequested siblings or the whole portfolio. The brief should make the
+selected direction or named direction set, exact candidate proposition, stage,
+source/evidence revision boundary, frozen facts and uncertainty, strongest
+alternative, material relationships, explicit exclusion of sibling-direction
+generalization unless explicitly named, requested action/direct consumer,
+completion evidence and return destination understandable. These are semantic
+writing cues, not
+required fields. CPM's conclusion-first reverse result and any Codex-native
+fallback carry the same binding before technical evidence. If identity,
+proposition or revision binding is missing or contradictory, preserve the
+original handoff/artifact and ask exactly one concrete semantic clarification;
+continue unrelated work without guessing, merging directions, rewriting the
+artifact or creating a `BLOCKED` state.
+
 ## Normal path
 
 Explorer writes one self-contained, human/model-readable Markdown or JSON brief

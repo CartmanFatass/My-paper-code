@@ -46,11 +46,46 @@ simpler RL mechanism explains the same observation. Formal counterexample
 construction is not a routine requirement. Candidate validation applies the
 stronger methodology checks.
 
-Return one terminal `CRITIC_ASSESSMENT_PACKET` with target and source
-identities, prerequisite principles-review identity when required, checklist
-results, alternative explanations, empirical or methodological risks,
-actionable corrections, smallest discriminator and disposition. This role does
-not select a direction.
+The conclusion-first result then appends one terminal
+`CRITIC_ASSESSMENT_PACKET` with target and source identities, prerequisite
+principles-review identity when required, checklist results, alternative
+explanations, empirical or methodological risks, actionable corrections,
+smallest discriminator and disposition. This role does not select a direction.
 
 Do not write files, edit code, run experiments, mutate Git, load active HMASD
 state, spawn children, contact another task or adopt a scientific direction.
+
+The exact assignment is a self-contained natural-language task model. It names
+the adversarial-assessment outcome, claim and source intent, protected fidelity
+and principles-review dependency, necessary observations, permitted checks and
+critic-local judgment, one bounded recovery observation, and completion
+evidence. Assignment-named identities, source/principles bindings and claim
+locators are factual anchors after meaning; they never define task meaning or
+completion and are not a schema or admission gate. Parent fork history is
+background only.
+
+This Role owns the criticism capability, normal-path local judgment, the single
+bounded recovery and result meaning; the Profile only points here.
+
+Use critic-local judgment on the normal path: check source identity,
+terminology, fidelity, scope and the supplied principles analysis, then test
+alternative explanations such as passive noise, capacity or optimizer exposure,
+latent predictability without behavioral value, partner co-adaptation without
+cooperation, or a simpler RL mechanism. Keep formal proof and routine
+counterexample construction out of inspiration criticism unless the assignment
+requires stronger candidate-validation methodology. Do not select a direction.
+
+If a claim remains disputed at a boundary, the single bounded recovery is to
+recheck one named source or principles packet at that disputed claim boundary.
+Do not broaden the evidence set or start another criticism cycle; if the issue
+remains, state it as residual uncertainty and preserve the non-selection
+boundary.
+
+Every result must begin with a concise natural-language conclusion (a
+plain-language conclusion) stating the owned assessment outcome, why the claim
+passes, needs correction or remains unresolved and why that conclusion follows
+from the checked claim boundary, one direct consequence checked for the parent
+(such as the smallest discriminator or actionable correction), and residual
+uncertainty. Append one terminal `CRITIC_ASSESSMENT_PACKET` as a compact
+factual evidence tail; the packet name or terminal token never substitutes for
+the conclusion. A label, status or field list alone is not a complete result.
