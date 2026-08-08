@@ -71,10 +71,11 @@ An edit-capable child assignment additionally carries the exact resolved ticket
 worktree path. The child verifies `git rev-parse --show-toplevel` equals that
 path before editing and stops on any mismatch.
 
-For a simple correction, keep the plan to at most five lines: goal, key unknown,
-smallest probe, one normal path plus one simple fallback, and stop condition.
-For every new mechanism state the irreversible error prevented, terminal
-condition, total recurring cost, old mechanism/text deleted and net line change.
+For a simple correction, keep the plan concise: goal, key unknown, smallest
+probe, one normal path plus one simple fallback, and stop condition. For every
+new mechanism state the irreversible error prevented, terminal condition, total
+recurring cost, and old mechanism/text deleted, then name the focused contract
+evidence and qualitative maintainability it preserves.
 A retryable failure receives a one-line runtime checklist, not a mechanism.
 A workflow cost audit explicitly requested by the user is the only cost-review path.
 

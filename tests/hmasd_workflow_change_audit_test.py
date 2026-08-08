@@ -53,28 +53,54 @@ def _fixture_repo(root: Path) -> Path:
     return root
 
 
-def _write_control_plane_budget_files(root: Path, first_file_lines: int) -> None:
-    for index, relative in enumerate(CHECKER.CONTROL_PLANE_BUDGET_PATHS):
-        line_count = first_file_lines if index == 0 else 1
-        _write(root / relative, "x\n" * line_count)
-
-
-def test_control_plane_line_budget_accepts_exact_limit(tmp_path: Path) -> None:
-    repo = _fixture_repo(tmp_path)
-    _write_control_plane_budget_files(
-        repo, CHECKER.CONTROL_PLANE_LINE_BUDGET - len(CHECKER.CONTROL_PLANE_BUDGET_PATHS) + 1
+def test_maintainability_contract_replaces_numeric_admission_gates() -> None:
+    manager = (REPO / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md").read_text(encoding="utf-8")
+    collaboration = (
+        REPO / ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md"
+    ).read_text(encoding="utf-8")
+    audit = (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md").read_text(
+        encoding="utf-8"
     )
-    errors = CHECKER.audit_repo(repo)
-    assert not any("control-plane line budget exceeded" in error for error in errors), errors
+    harness = CHECKER_PATH.read_text(encoding="utf-8")
+    workflow_text = "\n".join((manager, collaboration, audit, harness))
+    normalized_workflow_text = " ".join(workflow_text.split())
 
-
-def test_control_plane_line_budget_rejects_one_line_over(tmp_path: Path) -> None:
-    repo = _fixture_repo(tmp_path)
-    _write_control_plane_budget_files(
-        repo, CHECKER.CONTROL_PLANE_LINE_BUDGET - len(CHECKER.CONTROL_PLANE_BUDGET_PATHS) + 2
+    retired = (
+        "_".join(("single", "mechanism", "line", "budget")),
+        "_".join(("wdm", "core", "control", "plane", "line", "budget")),
+        "_".join(("workflow", "net", "line", "growth", "default")),
+        "_".join(("net", "active", "line", "growth", "default")),
+        "_".join(("workflow", "recovery", "path", "line", "share")),
+        "_".join(("CONTROL", "PLANE", "LINE", "BUDGET")),
+        "_".join(("CONTROL", "PLANE", "BUDGET", "PATHS")),
+        "-".join(("control", "plane")) + " " + " ".join(("line", "budget", "exceeded")),
+        " ".join(("net", "active-line", "change")),
+        " ".join(("at", "most", "five", "lines")),
     )
-    errors = CHECKER.audit_repo(repo)
-    assert any("control-plane line budget exceeded: 1001>1000" in error for error in errors), errors
+    for retired in retired:
+        assert retired not in workflow_text
+
+    for dimension in (
+        "interface quality",
+        "coherent responsibility",
+        "dependency direction",
+        "state ownership",
+        "decoupling",
+        "complexity isolation",
+        "change locality",
+        "focused contract evidence",
+    ):
+        assert dimension in normalized_workflow_text
+
+    assert "single_mechanism_terminal_state_budget=3" in workflow_text
+    assert "simple_operation_active_engineering_budget_minutes=20" in workflow_text
+    assert "simple_operation_failed_probe_budget=2" in workflow_text
+
+
+def test_harness_has_no_physical_line_gate() -> None:
+    assert not hasattr(CHECKER, "_".join(("CONTROL", "PLANE", "LINE", "BUDGET")))
+    assert not hasattr(CHECKER, "_".join(("CONTROL", "PLANE", "BUDGET", "PATHS")))
+    assert ("split" + "lines()") not in CHECKER_PATH.read_text(encoding="utf-8")
 
 
 def test_live_repository_harness_is_closed() -> None:

@@ -86,7 +86,7 @@ as a user-change plan. A retryable local failure remains with its operating owne
 
 The collaborative Skill owns plan stability. The audit Skill owns agile impact
 mapping, implementation, verification, Git integration and reload. The harness
-script performs mechanical structure and line-budget checks only; it never
+script performs bounded structural and stale-reference checks only; it never
 decides authority, science, sufficiency or acceptance.
 
 ## Minimal-control discipline
@@ -94,13 +94,10 @@ decides authority, science, sufficiency or acceptance.
 ```text
 workflow_mechanical_invariant_scope=irreversible_and_high_cost_actions_only
 retryable_failure_mechanism=forbidden_use_one_line_runtime_checklist
-single_mechanism_line_budget=100
 single_mechanism_terminal_state_budget=3
 workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch
-legacy_mechanism_policy=no_expansion_reduce_when_touched
-wdm_core_control_plane_line_budget=1000
+legacy_mechanism_policy=no_expansion_preserve_contract_when_touched
 new_mechanism_requires_named_deletion=true
-net_active_line_growth_default=negative_or_zero
 permanent_rule_minimum_independent_recurrences=2
 first_incident_response=root_cause_fix_plus_note_only
 workflow_hash_validation=forbidden
@@ -113,17 +110,18 @@ passive_external_generation_wait_excluded_from_engineering_budget=true
 
 If failure means only “try again”, do not create a state machine, lease,
 sentinel, identity ledger or approval gate. Any proposed mechanism names the
-text or mechanism it deletes, and acceptance uses net active-line change.
+text or mechanism it deletes, and acceptance uses focused contract evidence
+and qualitative maintainability.
 One incident may repair its root cause and record a note; only two independent
 recurrences justify a permanent rule. A simple operation stops engineering after
 20 active minutes or two failed probes, whichever comes first. Passive model
 generation time does not consume that budget and must not be interrupted.
 
-The 1000-line core budget covers exactly `AGENTS.md`, this charter, the
-collaborative Skill, audit Skill, routing Skill and
-`docs/project/SESSION_WORKSPACE_CONTRACT.md`. Tests, profiles and mechanical
-scripts do not count. A change that exceeds the budget must simplify or delete
-existing active text; raising the budget requires a new direct user decision.
+Maintainability is judged by interface quality, coherent responsibility,
+dependency direction, explicit state ownership, decoupling, complexity
+isolation, change locality and focused contract evidence. Line and file counts
+may be recorded as diagnostics, but they never reject a change, force a split
+or define acceptance.
 
 Hash, digest, byte-count or fingerprint values are never workflow admission,
 routing, handoff, recovery or acceptance predicates. Use owner/path boundaries,
@@ -131,9 +129,10 @@ provider-native message identities, typed fields and direct content reads.
 Scientific/checkpoint artifact integrity remains outside this workflow rule.
 Git revision identifiers remain source locators only; they are not recomputed
 payload/content-hash evidence and never substitute for direct contract checks.
-The 100-line and three-terminal budgets apply to each new or expanded gate or
-recovery branch. An existing tool is not reclassified wholesale as a new
-mechanism; when touched, its relevant branch must stay flat or shrink.
+The three-terminal limit applies to each new or expanded gate or recovery
+branch. An existing tool is not reclassified wholesale as a new mechanism;
+when touched, its relevant branch preserves the accepted contract and should
+remain straightforward.
 
 ## Workflow children
 

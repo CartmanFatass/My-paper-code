@@ -10,6 +10,7 @@ function Read-RepoFile([string]$Path) {
 $config = Read-RepoFile '.codex/config.toml'
 $manager = Read-RepoFile '.agents/roles/WORKFLOW_DESIGN_MANAGER.md'
 $skill = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/SKILL.md'
+$harness = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py'
 
 $profiles = @(
     @('.agents/roles/WORKFLOW_AUDITOR.md', '.codex/agents/hmasd-workflow-auditor.toml', 'hmasd-workflow-auditor', '[agents."HMASDWorkflowAuditor"]', 'gpt-5.6-luna', 'high', 'read-only', 'WORKFLOW_IMPACT_PACKET'),
@@ -71,10 +72,9 @@ foreach ($required in @(
     'passive_external_generation_wait_excluded_from_engineering_budget=true',
     'one Workflow Reviewer by default', 'parallel reviewers only for genuinely',
     'Their advice cannot create a second pass.',
-    'workflow_single_mechanism_line_budget=100',
     'workflow_single_mechanism_terminal_state_budget=3',
     'workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch',
-    'workflow_legacy_mechanism_policy=no_expansion_reduce_when_touched',
+    'workflow_legacy_mechanism_policy=no_expansion_preserve_contract_when_touched',
     'workflow_incident_to_permanent_rule_threshold=2_independent_recurrences',
     'workflow_hash_validation=forbidden',
     'the log is evidence', 'resolved ticket worktree path',
@@ -82,6 +82,33 @@ foreach ($required in @(
     'Prefer positive capability text',
     '`git rev-parse --show-toplevel`')) {
     if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing: $required" }
+}
+
+$normalizedMaintainabilityContract = (($manager + "`n" + $skill) -replace '\s+', ' ')
+foreach ($required in @(
+    'interface quality', 'coherent responsibility', 'dependency direction',
+    'state ownership', 'decoupling', 'complexity isolation', 'change locality',
+    'focused contract evidence')) {
+    if (-not $normalizedMaintainabilityContract.Contains($required)) {
+        throw "Qualitative maintainability contract missing: $required"
+    }
+}
+
+foreach ($retired in @(
+    (@('single', 'mechanism', 'line', 'budget') -join '_'),
+    (@('wdm', 'core', 'control', 'plane', 'line', 'budget') -join '_'),
+    (@('workflow', 'net', 'line', 'growth', 'default') -join '_'),
+    (@('net', 'active', 'line', 'growth', 'default') -join '_'),
+    (@('workflow', 'recovery', 'path', 'line', 'share') -join '_'),
+    (@('CONTROL', 'PLANE', 'LINE', 'BUDGET') -join '_'),
+    (@('CONTROL', 'PLANE', 'BUDGET', 'PATHS') -join '_'),
+    ((@('control', 'plane') -join '-') + ' ' + (@('line', 'budget', 'exceeded') -join ' ')),
+    (@('net', 'active-line', 'change') -join ' '),
+    (@('at', 'most', 'five', 'lines') -join ' '))) {
+    if ($manager.Contains($retired) -or $skill.Contains($retired) -or
+        $harness.Contains($retired)) {
+        throw "Retired numeric workflow gate remains: $retired"
+    }
 }
 
 foreach ($forbidden in @(

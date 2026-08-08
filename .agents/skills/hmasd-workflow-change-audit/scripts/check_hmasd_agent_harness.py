@@ -28,16 +28,6 @@ DEFAULT_FORBIDDEN = (
     "path_hash_source_status",
     "hmasd-dispatch-task",
 )
-CONTROL_PLANE_LINE_BUDGET = 1000
-CONTROL_PLANE_BUDGET_PATHS = (
-    "AGENTS.md",
-    ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
-    ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md",
-    ".agents/skills/hmasd-workflow-change-audit/SKILL.md",
-    "docs/project/SESSION_WORKSPACE_CONTRACT.md",
-)
-
-
 def _read(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
@@ -78,24 +68,6 @@ def _repo_refs(text: str) -> set[str]:
     return refs
 
 
-def _check_control_plane_line_budget(repo: Path, errors: list[str]) -> None:
-    total = 0
-    for raw_path in CONTROL_PLANE_BUDGET_PATHS:
-        path = (repo / raw_path).resolve()
-        if not _within(path, repo) or not path.is_file():
-            errors.append(f"missing control-plane budget path: {raw_path}")
-            continue
-        try:
-            total += len(_read(path).splitlines())
-        except (OSError, UnicodeDecodeError) as exc:
-            errors.append(f"unreadable control-plane budget path {raw_path}: {exc}")
-    if total > CONTROL_PLANE_LINE_BUDGET:
-        errors.append(
-            "control-plane line budget exceeded: "
-            f"{total}>{CONTROL_PLANE_LINE_BUDGET}"
-        )
-
-
 def audit_repo(
     repo: Path,
     extra_active_paths: Iterable[str] = (),
@@ -114,8 +86,6 @@ def audit_repo(
             errors.append(f"missing harness surface: {required}")
     if errors:
         return errors
-
-    _check_control_plane_line_budget(repo, errors)
 
     config = _load_toml(config_path, errors)
     agents_table = config.get("agents", {})
