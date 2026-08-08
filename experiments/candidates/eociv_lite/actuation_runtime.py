@@ -194,6 +194,8 @@ class ArmEpisodeRunner:
         tape_seed: int,
         d_learned_fn,
         body_override: bytes | None = None,
+        policy=None,
+        d_control_fn=None,
     ):
         if arm not in sib.ARMS:
             raise ValueError(f"unknown arm: {arm}")
@@ -201,9 +203,14 @@ class ArmEpisodeRunner:
         self.arm = arm
         self.tape_seed = int(tape_seed)
         self.d_learned_fn = d_learned_fn
+        self.d_control_fn = d_control_fn
         self.body_override = body_override
         capacity = env.ledger.member_capacity
-        self.policy = CommonPolicy(capacity)
+        # The Stage-0 capability path retains CommonPolicy as its exact
+        # default.  Candidate-local experiments may inject an object with the
+        # same initial_state/forward surface; no runner or receipt semantics
+        # change when the seam is unused.
+        self.policy = CommonPolicy(capacity) if policy is None else policy
         self.hidden = self.policy.initial_state()
         self.action_noise_seed_identity = sib.profile_stream_identity(
             sib.ACTION_NOISE_STREAM,
@@ -352,9 +359,15 @@ class ArmEpisodeRunner:
         w_bytes = sib.w_minus(view, opportunity)
         body = self.body_override if self.body_override is not None else env.focal_payload(event_index)
         d_learned = bool(self.d_learned_fn(w_bytes))
-        d_control = sib.control_tape_open(
-            env.ledger.profile.name, env.ledger.episode_id, event_index,
-            tape_seed=self.tape_seed,
+        d_control = (
+            sib.control_tape_open(
+                env.ledger.profile.name,
+                env.ledger.episode_id,
+                event_index,
+                tape_seed=self.tape_seed,
+            )
+            if self.d_control_fn is None
+            else bool(self.d_control_fn(w_bytes))
         )
         actuation = sib.actuate(
             self.arm, opportunity, body, d_learned=d_learned, d_control=d_control
