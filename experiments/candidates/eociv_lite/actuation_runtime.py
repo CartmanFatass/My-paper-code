@@ -241,6 +241,10 @@ class ArmEpisodeRunner:
         tape_seed: int,
         d_learned_fn,
         body_override: bytes | None = None,
+        policy=None,
+        action_noise_seed: int | None = None,
+        runner_binding: str | None = None,
+        d_control_fn=None,
     ):
         if arm not in sib.ARMS:
             raise ValueError(f"unknown arm: {arm}")
@@ -248,19 +252,39 @@ class ArmEpisodeRunner:
         self.arm = arm
         self.tape_seed = int(tape_seed)
         self.d_learned_fn = d_learned_fn
+        # D_C source.  Default: the gate-support Bernoulli probe
+        # (sib.control_tape_open) under tape_seed — the CLOSED gate
+        # population's registered control.  The Stage-0 outcome harness
+        # passes its exact-rate permutation-tape decisions here instead; the
+        # registered outcome design forbids the gate probe, and supplying
+        # d_control_fn means the probe is never called on that path.
+        self.d_control_fn = d_control_fn
         self.body_override = body_override
-        # Full environment/block identity of this runner: the registered
-        # design holds one runner per arm-episode, so (arm, profile, episode)
-        # IS the block identity a receipt must carry to be consumable here.
+        # Full environment/block identity of this runner.  The default —
+        # (arm, profile, episode) — is the block identity of the CLOSED gate
+        # population (one runner per arm-episode).  The Stage-0 outcome
+        # harness passes the COMPLETE registered block identity (pool, actor
+        # training seed, profile, episode, arm, event scope, member/spell
+        # epochs) through ``runner_binding`` instead, per the acceptance
+        # ruling's 6.2.
         self.runner_binding = (
-            f"{arm}|{env.ledger.profile.name}|ep{env.ledger.episode_id}"
+            runner_binding
+            if runner_binding is not None
+            else f"{arm}|{env.ledger.profile.name}|ep{env.ledger.episode_id}"
         )
         capacity = env.ledger.member_capacity
-        self.policy = CommonPolicy(capacity)
+        # The policy must expose the CommonPolicy interface:
+        # initial_state() and forward(obs, mask, slot_block, hidden, noise).
+        # The default keeps the accepted gate probe; the Stage-0 harness
+        # passes the trainable actor through the SAME verified path.
+        self.policy = policy if policy is not None else CommonPolicy(capacity)
         self.hidden = self.policy.initial_state()
         self.noise = roster_env.make_action_noise(
             [env.ledger.episode_id],
-            action_seed=ACTION_NOISE_SEED,
+            action_seed=(
+                ACTION_NOISE_SEED if action_noise_seed is None
+                else int(action_noise_seed)
+            ),
             member_capacity=capacity,
         )[:, 0, :, :]
         self._consumed: set[tuple] = set()
@@ -335,9 +359,13 @@ class ArmEpisodeRunner:
         w_bytes = sib.w_minus(view, opportunity)
         body = self.body_override if self.body_override is not None else env.focal_payload(event_index)
         d_learned = bool(self.d_learned_fn(w_bytes))
-        d_control = sib.control_tape_open(
-            env.ledger.profile.name, env.ledger.episode_id, event_index,
-            tape_seed=self.tape_seed,
+        d_control = (
+            bool(self.d_control_fn(event_index))
+            if self.d_control_fn is not None
+            else sib.control_tape_open(
+                env.ledger.profile.name, env.ledger.episode_id, event_index,
+                tape_seed=self.tape_seed,
+            )
         )
         actuation = sib.actuate(
             self.arm, opportunity, body, d_learned=d_learned, d_control=d_control
