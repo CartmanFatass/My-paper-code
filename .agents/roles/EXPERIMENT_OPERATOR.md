@@ -102,10 +102,37 @@ receipt_path=<exact assignment-named terminal receipt path>
 reason=<none or exact direct error>
 ```
 
-The receipt retains `run`, `source_commit`, `phase`, `exit_codes`, `artifacts`,
-`last_progress`, `process_live` and the direct error as mechanical fields. A
-file-backed receipt write failure is `ERROR`; it is not a reason to reconstruct
-or copy the child record in the parent context.
+The receipt is produced by the deterministic standard-library helper
+`.agents/skills/hmasd-agile-research-development/scripts/hmasd_experiment_operator_receipt.py`:
+
+```powershell
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
+  .agents/skills/hmasd-agile-research-development/scripts/hmasd_experiment_operator_receipt.py `
+  write --record <operator-local-input-json> --receipt <assignment-named-json>
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
+  .agents/skills/hmasd-agile-research-development/scripts/hmasd_experiment_operator_receipt.py `
+  check --receipt <assignment-named-json>
+```
+
+The receipt retains the mechanical run, source commit, execution mode, phase,
+exit codes, artifacts, last progress, process-live flag, direct error, and
+derived terminal; it is file-backed and assignment-named.
+
+The local input keys and output receipt keys are exact. The local input is
+`run`, `source_commit`, `execution_mode`, `phase`, `exit_codes`, `artifacts`,
+`last_progress`, `process_live`, and `direct_error`; the output adds only
+`terminal`. `phase` is the last attempted/reached phase (`NONE|TRAIN|EVALUATE|ANALYZE`),
+never a terminal status. The helper derives `terminal` as `COMPLETE` or `ERROR`
+and rejects missing/extra keys (including legacy `error`), slash-combined
+phases, live processes, incomplete or nonzero exits without a direct error,
+and mismatched checked terminals. It writes UTF-8 without a BOM by an atomic
+same-directory replace only after validation; the receipt parent must already
+exist. The operator invokes `write` once after the ordered sequence or direct
+error and uses the derived terminal in its single conclusion-first native
+final. The file-backed receipt write failure is `ERROR`; a helper or
+receipt-write failure is operational `ERROR` and never
+authorizes a rerun or phase reconstruction by the operator or parent. It is
+not a reason to reconstruct or copy the child record in the parent context.
 
 `COMPLETE` requires successful train, evaluate, and analyze exits plus all
 assignment-named terminal artifacts. Any failed command, lost identity,

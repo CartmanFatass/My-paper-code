@@ -6,13 +6,21 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $configPath = Join-Path $repo '.codex/config.toml'
 $profilePath = Join-Path $repo '.codex/agents/hmasd-experiment-operator.toml'
 $rolePath = Join-Path $repo '.agents/roles/EXPERIMENT_OPERATOR.md'
+$skillPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md'
+$receiptHelperPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/scripts/hmasd_experiment_operator_receipt.py'
 $config = Get-Content -Raw -LiteralPath $configPath
 $profile = Get-Content -Raw -LiteralPath $profilePath
 $role = Get-Content -Raw -LiteralPath $rolePath
+$skill = Get-Content -Raw -LiteralPath $skillPath
 $manager = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md')
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $roleNormalized = $role -replace '\s+', ' '
+$skillNormalized = $skill -replace '\s+', ' '
 $managerNormalized = $manager -replace '\s+', ' '
+
+if (-not (Test-Path -LiteralPath $receiptHelperPath -PathType Leaf)) {
+    throw 'Experiment operator receipt helper is missing'
+}
 
 if (-not $config.Contains('[agents."HMASDExperimentOperator"]') -or
     -not $config.Contains('config_file = "./agents/hmasd-experiment-operator.toml"')) {
@@ -71,8 +79,40 @@ foreach ($required in @(
     'concise operational',
     'direct artifact or consumer consequence',
     'residual uncertainty',
-    'No progress, ETA, phase, heartbeat')) {
+    'No progress, ETA, phase, heartbeat',
+    'The receipt is produced by the deterministic standard-library helper',
+    'hmasd_experiment_operator_receipt.py',
+    'write --record <operator-local-input-json> --receipt <assignment-named-json>',
+    'check --receipt <assignment-named-json>',
+    'The local input keys and output receipt keys are exact',
+    'run',
+    'source_commit',
+    'execution_mode',
+    'phase',
+    'exit_codes',
+    'artifacts',
+    'last_progress',
+    'process_live',
+    'direct_error',
+    'the output adds only `terminal`',
+    'phase` is the last attempted/reached phase',
+    'never a terminal status',
+    'legacy `error`',
+    'slash-combined',
+    'atomic',
+    'derived terminal',
+    'never authorizes a rerun')) {
     if (-not $roleNormalized.Contains($required)) { throw "Operator role missing: $required" }
+}
+foreach ($required in @(
+    'Experiment Operator''s assignment-named terminal receipt',
+    'hmasd_experiment_operator_receipt.py',
+    'derives the terminal field',
+    'validates the exact mechanical keys',
+    'single atomic write/check',
+    'operational `ERROR`',
+    'no runtime rerun authority')) {
+    if (-not $skillNormalized.Contains($required)) { throw "Agile Skill receipt pointer missing: $required" }
 }
 if ($profile.Contains('active Workflow Design Manager') -or $role.Contains('parent=workflow_design_manager')) {
     throw 'Experiment runtime is still assigned to Workflow Design Manager'

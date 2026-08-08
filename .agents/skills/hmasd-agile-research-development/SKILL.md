@@ -106,6 +106,14 @@ exclusive for `train -> evaluate -> analyze`, the readiness Verifier remains
 exclusive for the six ordered readiness phases, and Agentify Transport remains
 separate for formal/Explorer review transport.
 
+The Experiment Operator's assignment-named terminal receipt is governed by
+the role charter and the deterministic helper
+`.agents/skills/hmasd-agile-research-development/scripts/hmasd_experiment_operator_receipt.py`;
+this Skill does not duplicate that receipt procedure. The helper derives the
+terminal field, validates the exact mechanical keys, and performs the single
+atomic write/check. A helper failure is an operational `ERROR` with no runtime
+rerun authority.
+
 ## Operating loop
 
 1. **Align.** For conclusion-bearing work, require an exact Pro scientific
