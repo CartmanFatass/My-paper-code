@@ -68,3 +68,19 @@ valve quality, B1 four-arm effects, natural-distribution value, superiority,
 promotion, retirement, deployment, or a C-level outcome claim. Missing
 support, instability, encoder equivalence, or an indistinguishable contrast is
 an exploratory diagnosis rather than a direction decision.
+
+## Completed fixed run
+
+The accepted implementation was executed once at source commit
+`2e704ae640e4404135771e672936f493dd429463` under run identity
+`eociv_b2_payload_content_learnability_2e704ae_r2`. The public compact result is
+`docs/research/candidates/eociv_lite/PAYLOAD_CONTENT_LEARNABILITY_RESULT.json`;
+the complete ignored raw evidence remains under the run root named there.
+
+The mechanical run completed 48,384 environment transitions, 576 actor/critic
+updates, 576 training episodes and 432 matched evaluation episodes. The
+content-separating encoder produced a much larger A/B action-kernel response
+than raw bytes, but the fixed reward-only run did not produce a stable positive
+CORRECT-versus-SWAPPED or CORRECT-versus-NATIVE_NEUTRAL return contrast across
+seeds and profiles. This is a nonconfirmatory B diagnostic with no scientific
+disposition; C remains unlicensed.

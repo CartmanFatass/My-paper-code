@@ -1,0 +1,293 @@
+{
+  "document_kind": "eociv_b2_payload_content_learnability_result_v1",
+  "treatment": "EOCIV-B2-PAYLOAD-CONTENT-LEARNABILITY",
+  "run": "eociv_b2_payload_content_learnability_2e704ae_r2",
+  "source_commit": "2e704ae640e4404135771e672936f493dd429463",
+  "formal": false,
+  "stage": "B_EXPLORATORY_REAL_TOY_EXPERIMENT",
+  "scientific_disposition": null,
+  "registered_c_outcome_experiment_licensed": false,
+  "mechanical_status": "MECHANICAL_ANALYSIS_COMPLETE",
+  "technical_acceptance": {
+    "status": "PASSED",
+    "actor_rows": 6,
+    "evaluation_rows": 144,
+    "matched_initialization": true,
+    "registered_alphabet_covered": true,
+    "contrasts_recomputed": true
+  },
+  "counts": {
+    "environment_transitions": 48384,
+    "policy_calls": 48384,
+    "actor_critic_optimizer_steps": 576,
+    "training_episodes": 576,
+    "evaluation_episodes": 432
+  },
+  "fixed_configuration": {
+    "encoders": [
+      "raw_byte",
+      "content_separating"
+    ],
+    "actor_seeds": [
+      86031,
+      86032,
+      86033
+    ],
+    "profiles": [
+      "train_4_3_6_5",
+      "train_5_3_7_6",
+      "train_6_4_8_6"
+    ],
+    "evaluation_arms": [
+      "CORRECT",
+      "SWAPPED",
+      "NATIVE_NEUTRAL"
+    ],
+    "horizon": 48,
+    "train_episodes_per_encoder_seed_profile": 32,
+    "evaluation_roots_per_encoder_seed_profile": 8,
+    "training_transitions": 27648,
+    "evaluation_transitions": 20736,
+    "maximum_transitions": 48384,
+    "k_search": 0
+  },
+  "ab_kernel_diagnostics": {
+    "raw_byte": {
+      "initial_kernel_l1_mean": 0.0000814176337034614,
+      "trained_kernel_l1_mean": 0.00007955635104466367
+    },
+    "content_separating": {
+      "initial_kernel_l1_mean": 0.3031050978159463,
+      "trained_kernel_l1_mean": 0.24025365406716312
+    }
+  },
+  "overall_return_contrasts": {
+    "raw_byte": {
+      "correct_minus_swapped": {
+        "count": 72,
+        "mean": 0.00001080306926945804,
+        "population_std": 0.00003926718172421071,
+        "minimum": -0.00011018168185472632,
+        "maximum": 0.0001841845562466915
+      },
+      "correct_minus_native_neutral": {
+        "count": 72,
+        "mean": -0.00040282325446516776,
+        "population_std": 0.008225432634460269,
+        "minimum": -0.022897761079267553,
+        "maximum": 0.02584504488700823
+      }
+    },
+    "content_separating": {
+      "correct_minus_swapped": {
+        "count": 72,
+        "mean": -0.036903802375396956,
+        "population_std": 0.08264809873126039,
+        "minimum": -0.30201572322770076,
+        "maximum": 0.10530250237632544
+      },
+      "correct_minus_native_neutral": {
+        "count": 72,
+        "mean": -0.02461979909060403,
+        "population_std": 0.08371854287928907,
+        "minimum": -0.4409610886582094,
+        "maximum": 0.1409478576348846
+      }
+    }
+  },
+  "grouped_return_contrasts": [
+    {
+      "encoder": "content_separating",
+      "seed": 86031,
+      "profile": "train_4_3_6_5",
+      "roots": 8,
+      "mean_correct_minus_swapped": -0.009566632699651965,
+      "positive_swapped_roots": 3,
+      "mean_correct_minus_native_neutral": -0.015165767450782353,
+      "positive_neutral_roots": 3
+    },
+    {
+      "encoder": "content_separating",
+      "seed": 86031,
+      "profile": "train_5_3_7_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": 0.011884842628716807,
+      "positive_swapped_roots": 4,
+      "mean_correct_minus_native_neutral": -0.012944226280874327,
+      "positive_neutral_roots": 4
+    },
+    {
+      "encoder": "content_separating",
+      "seed": 86031,
+      "profile": "train_6_4_8_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": -0.009639530275471153,
+      "positive_swapped_roots": 4,
+      "mean_correct_minus_native_neutral": -0.02033263520059747,
+      "positive_neutral_roots": 1
+    },
+    {
+      "encoder": "content_separating",
+      "seed": 86032,
+      "profile": "train_4_3_6_5",
+      "roots": 8,
+      "mean_correct_minus_swapped": -0.0031744685342314227,
+      "positive_swapped_roots": 6,
+      "mean_correct_minus_native_neutral": -0.020205367279256592,
+      "positive_neutral_roots": 4
+    },
+    {
+      "encoder": "content_separating",
+      "seed": 86032,
+      "profile": "train_5_3_7_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": -0.001394772535621147,
+      "positive_swapped_roots": 4,
+      "mean_correct_minus_native_neutral": -0.001911492003727311,
+      "positive_neutral_roots": 3
+    },
+    {
+      "encoder": "content_separating",
+      "seed": 86032,
+      "profile": "train_6_4_8_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": 0.004607574168380424,
+      "positive_swapped_roots": 4,
+      "mean_correct_minus_native_neutral": 0.025142482811385758,
+      "positive_neutral_roots": 6
+    },
+    {
+      "encoder": "content_separating",
+      "seed": 86033,
+      "profile": "train_4_3_6_5",
+      "roots": 8,
+      "mean_correct_minus_swapped": -0.09972022897866806,
+      "positive_swapped_roots": 1,
+      "mean_correct_minus_native_neutral": -0.09047497048737574,
+      "positive_neutral_roots": 2
+    },
+    {
+      "encoder": "content_separating",
+      "seed": 86033,
+      "profile": "train_5_3_7_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": -0.13141077429902515,
+      "positive_swapped_roots": 0,
+      "mean_correct_minus_native_neutral": -0.003438309172340228,
+      "positive_neutral_roots": 4
+    },
+    {
+      "encoder": "content_separating",
+      "seed": 86033,
+      "profile": "train_6_4_8_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": -0.09372023085300096,
+      "positive_swapped_roots": 1,
+      "mean_correct_minus_native_neutral": -0.082247906751868,
+      "positive_neutral_roots": 1
+    },
+    {
+      "encoder": "raw_byte",
+      "seed": 86031,
+      "profile": "train_4_3_6_5",
+      "roots": 8,
+      "mean_correct_minus_swapped": 0.000012183578921964866,
+      "positive_swapped_roots": 5,
+      "mean_correct_minus_native_neutral": -0.0008970364086771099,
+      "positive_neutral_roots": 4
+    },
+    {
+      "encoder": "raw_byte",
+      "seed": 86031,
+      "profile": "train_5_3_7_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": 0.00002151120108695448,
+      "positive_swapped_roots": 6,
+      "mean_correct_minus_native_neutral": 0.0006910311164973759,
+      "positive_neutral_roots": 4
+    },
+    {
+      "encoder": "raw_byte",
+      "seed": 86031,
+      "profile": "train_6_4_8_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": 0.0000018040693083865023,
+      "positive_swapped_roots": 5,
+      "mean_correct_minus_native_neutral": 0.001773105127862773,
+      "positive_neutral_roots": 5
+    },
+    {
+      "encoder": "raw_byte",
+      "seed": 86032,
+      "profile": "train_4_3_6_5",
+      "roots": 8,
+      "mean_correct_minus_swapped": 0.000003620237855717079,
+      "positive_swapped_roots": 6,
+      "mean_correct_minus_native_neutral": -0.004079779358823643,
+      "positive_neutral_roots": 3
+    },
+    {
+      "encoder": "raw_byte",
+      "seed": 86032,
+      "profile": "train_5_3_7_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": 0.000006094210230678243,
+      "positive_swapped_roots": 7,
+      "mean_correct_minus_native_neutral": -0.0001173960779019545,
+      "positive_neutral_roots": 3
+    },
+    {
+      "encoder": "raw_byte",
+      "seed": 86032,
+      "profile": "train_6_4_8_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": 0.000002362617029127989,
+      "positive_swapped_roots": 5,
+      "mean_correct_minus_native_neutral": 0.0005639520158031708,
+      "positive_neutral_roots": 4
+    },
+    {
+      "encoder": "raw_byte",
+      "seed": 86033,
+      "profile": "train_4_3_6_5",
+      "roots": 8,
+      "mean_correct_minus_swapped": 0.00002202235563442123,
+      "positive_swapped_roots": 4,
+      "mean_correct_minus_native_neutral": 0.003136501291058691,
+      "positive_neutral_roots": 5
+    },
+    {
+      "encoder": "raw_byte",
+      "seed": 86033,
+      "profile": "train_5_3_7_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": 0.00002856763936343043,
+      "positive_swapped_roots": 6,
+      "mean_correct_minus_native_neutral": -0.0019785451481939553,
+      "positive_neutral_roots": 4
+    },
+    {
+      "encoder": "raw_byte",
+      "seed": 86033,
+      "profile": "train_6_4_8_6",
+      "roots": 8,
+      "mean_correct_minus_swapped": -0.000000938286005558453,
+      "positive_swapped_roots": 5,
+      "mean_correct_minus_native_neutral": -0.0027172418478118576,
+      "positive_neutral_roots": 2
+    }
+  ],
+  "natural_language_conclusion": "The content-separating representation created a materially larger A-versus-B action-kernel response than raw bytes, so the real actor path can distinguish the registered payload bodies. The fixed reward-only training run did not turn that capacity into a stable positive CORRECT-versus-SWAPPED or CORRECT-versus-NATIVE_NEUTRAL return contrast: seeds 86031 and 86032 were mixed and close to zero, while seed 86033 was consistently negative and drove the negative overall content-encoder mean. This is a valid nonconfirmatory B diagnostic, not a scientific disposition or a direction decision.",
+  "interpretation_limits": [
+    "The content encoder intervention changes all four registered slot embeddings, including empty and native-neutral, not only A/B separability.",
+    "No untrained three-arm outcome baseline was run; initial and trained A/B kernel diagnostics bound representation sensitivity but do not by themselves identify reward causation.",
+    "The result does not tune or evaluate the valve, rerun B1, establish natural-distribution value, license C, or support superiority, promotion, retirement, or deployment."
+  ],
+  "local_raw_evidence": {
+    "root": "logs/eociv_b2_payload_content_learnability_2e704ae_r2",
+    "raw_result": "logs/eociv_b2_payload_content_learnability_2e704ae_r2/raw_result.json",
+    "validation": "logs/eociv_b2_payload_content_learnability_2e704ae_r2/evaluation_validation.json",
+    "analysis": "logs/eociv_b2_payload_content_learnability_2e704ae_r2/analysis.json",
+    "preserved_validator_attempt": "logs/eociv_b2_payload_content_learnability_2e704ae_r2/error_evaluate_attempt1.json"
+  }
+}
