@@ -42,6 +42,32 @@ assumptions and independence, exclusions, allowed local judgment and
 completion meaning. This is writing guidance, not a mandatory schema, file,
 validator or admission gate.
 
+## Mechanical literal-fact organization
+
+Explorer uses one or two direct deterministic tool commands when sufficient,
+then an already-existing exact deterministic script when it truly covers the
+task. It delegates to the registered `hmasd-explorer-mechanical` child only
+when exact inputs and literal output fields are frozen, the heterogeneous work
+is materially larger, and context isolation reduces repeated Explorer burden;
+this route does not add a script. Follow the dedicated
+[`hmasd-explorer-mechanical` Skill](../hmasd-explorer-mechanical/SKILL.md) for
+its bounded mechanics. The parent assignment remains self-contained and names
+why the work is needed, exact inputs, requested extraction/comparison, literal
+fields to preserve, forbidden inference, completion evidence and missing or
+conflict behavior. The child returns one conclusion-first native response; no
+mandatory result schema/file or new Explorer workspace is introduced.
+
+Explorer retains dispatch economics and semantic sufficiency intake. This is a
+mechanical rather than scientific capability: it creates no scientific roster,
+barrier, peer comparison, evidence vote or campaign effect, and failure has
+`research_state_effect=none`. For CPM-accepted packets it may only present,
+rearrange or extract named accepted facts. It may report literal existence or
+inaccessibility for an exact assignment-named local file or evidence locator,
+but cannot decide locator validity, completeness, public accessibility or
+technical sufficiency; it never rereads raw runtime evidence or recomputes
+schema readability/readiness, receipts, activity counts, retry history or
+technical consistency.
+
 ## Adaptive scientific question dispatch (not a fourth research mode)
 
 An Explorer may prospectively delegate one clear, bounded unresolved scientific

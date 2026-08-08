@@ -955,3 +955,59 @@ def test_direction_local_context_binding_is_symmetric_and_preserves_artifacts() 
     assert "preserve the original handoff/artifact" in validation_skill_normalized
     assert "direction-local context binding" in workflow_map
     assert "never reads `local_research/`" in cpm_role_normalized
+
+
+def test_explorer_mechanical_child_is_context_isolated_from_science() -> None:
+    """The mechanical lane organizes literals without joining research rosters."""
+    role_path = REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md"
+    skill_path = REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
+    parallel_path = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md"
+    )
+    profile_path = REPO / ".codex" / "agents" / "hmasd-explorer-mechanical.toml"
+    assert profile_path.is_file()
+
+    role = " ".join(role_path.read_text(encoding="utf-8").split())
+    skill = " ".join(skill_path.read_text(encoding="utf-8").split())
+    parallel = " ".join(parallel_path.read_text(encoding="utf-8").split())
+    assert "hmasd-explorer-mechanical" in role
+    assert "hmasd-explorer-mechanical" in skill
+
+    for required in (
+        "explorer_mechanical_child=hmasd-explorer-mechanical",
+        "explorer_mechanical_parent=independent_research_explorer",
+        "explorer_mechanical_dispatch_order=direct_deterministic_commands|existing_exact_script|mechanical_child",
+        "explorer_mechanical_task=literal_fact_organization_only",
+        "explorer_mechanical_write_authority=none",
+        "explorer_mechanical_scientific_authority=none",
+        "explorer_mechanical_research_state_effect=none",
+        "mechanical rather than scientific",
+        "context isolation",
+        "literal existence or inaccessibility",
+        "locator validity, completeness, public accessibility or technical sufficiency",
+    ):
+        assert required in role.lower()
+    for required in (
+        "hmasd-explorer-mechanical",
+        "direct deterministic tool commands",
+        "read-only",
+        "self-contained",
+        "this route does not add a script",
+        "mechanical rather than scientific",
+        "no scientific roster, barrier, peer comparison, evidence vote",
+    ):
+        assert required in skill.lower()
+    for required in (
+        "explorer_mechanical_child=hmasd-explorer-mechanical",
+        "explorer_mechanical_scientific_roster=excluded",
+        "explorer_mechanical_barrier=none",
+        "explorer_mechanical_peer_independence=not_applicable",
+        "explorer_mechanical_evidence_role=literal_fact_organization_not_scientific_evidence",
+        "explorer_mechanical_campaign_effect=none",
+    ):
+        assert required in parallel.lower()

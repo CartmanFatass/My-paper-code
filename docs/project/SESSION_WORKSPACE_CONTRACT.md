@@ -58,6 +58,19 @@ cpm_mechanical_runtime_authority=no_experiment_no_readiness_no_agentify
 cpm_mechanical_finalize_owner=code_project_manager
 cpm_mechanical_activation=after_fresh_profile_reload
 cpm_mechanical_active_research_state_effect=none
+explorer_mechanical_child=hmasd-explorer-mechanical
+explorer_mechanical_parent=independent_research_explorer
+explorer_mechanical_assignment=native_self_contained_natural_language
+explorer_mechanical_result=native_conclusion_first_response
+explorer_mechanical_result_file=forbidden
+explorer_mechanical_write_scope=none
+explorer_mechanical_workspace=none
+explorer_mechanical_scientific_authority=none
+explorer_mechanical_technical_acceptance_authority=none
+explorer_mechanical_git_authority=none
+explorer_mechanical_runtime_authority=none
+explorer_mechanical_research_state_effect=none
+explorer_mechanical_cpm_isolation=separate_parent_task_and_state
 ```
 
 ## Ownership model
@@ -117,17 +130,22 @@ and ticket intact.
 
 Before designing or dispatching any registered child or cross-session task,
 its parent invokes `hmasd-writing-agent-assignments`, the single
-assignment-writing contract, and writes the exact user-readable brief beneath
-its own temporary `assignments/` directory. File-only transport carries this
-rich natural-language brief so the child can understand the owned outcome,
-intent, protected boundaries, necessary observations, permitted actions,
-role-local judgment, bounded recovery and completion evidence. Paths, statuses
-and schema fields are anchors, not meaning; they never substitute for the
-semantic outcome or the child's judgment. Suggested headings aid communication
-but never become required fields or an admission gate. Forked turns are
-background only; the brief controls task scope and completion. A child uses
-bounded reconnaissance to resolve ordinary omissions and escalates only a
-material outcome, authority or path change.
+assignment-writing contract. WDM workflow children receive the exact
+user-readable brief beneath the parent's temporary `assignments/` directory;
+a registered native read-only child may instead receive that same rich task
+model directly in its native assignment when its Role explicitly defines that
+boundary. A native brief does not grant a workspace, output file or weaker
+semantic contract. File-backed or native transport carries this rich
+natural-language brief and must let the child understand the owned outcome,
+intent, protected boundaries, necessary
+observations, permitted actions, role-local judgment, bounded recovery and
+completion evidence. Paths, statuses and schema fields are anchors, not
+meaning; they never substitute for the semantic outcome or the child's
+judgment. Suggested headings aid communication but never become required
+fields or an admission gate. Forked turns are background only; the brief
+controls task scope and completion. A child uses bounded reconnaissance to
+resolve ordinary omissions and escalates only a material outcome, authority or
+path change.
 
 Workflow reports from other sessions are advisory inputs. WDM appends typed
 defect reports to its chronological incident log. The log preserves order but
@@ -169,6 +187,18 @@ conclusion followed by `status|result_path|error` anchors with terminal status
 `COMPLETE|ERROR`. CPM alone decides sufficiency, finalizes, accepts and records
 the result. No queue, monitor, inferred path scan, experiment/readiness
 execution or active research-state transition is introduced.
+
+The Explorer mechanical child is an Explorer-only context-isolation
+capability. Explorer sends one self-contained native assignment naming the
+frozen materials and literal organization need, and receives one
+conclusion-first native response; no mandatory result schema, result file,
+durable workspace or temporary workspace is required or granted. The child is
+read-only and has no write, Git, runtime, science, technical-acceptance,
+spawn or cross-task authority. It may not read CPM's active assignment,
+workspace or acceptance state, and CPM's mechanical child may not read the
+Explorer lane; the two parent, task-meaning and state boundaries remain
+separate. The native assignment is the writing-agent Skill's rich brief for
+this Role; it is not an exception to the semantic assignment contract.
 
 ## Shared temporary semantic handoffs
 

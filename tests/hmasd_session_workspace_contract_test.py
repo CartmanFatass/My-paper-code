@@ -44,6 +44,8 @@ def test_assignment_writing_preserves_semantic_context_over_file_only_anchors() 
     assert "single assignment-writing contract" in contract
     assert "rich natural-language brief" in contract
     assert "Before designing or dispatching any registered child or cross-session task" in contract
+    assert "a registered native read-only child may instead receive that same rich task model directly" in contract
+    assert "A native brief does not grant a workspace, output file or weaker semantic contract" in contract
     for capability in (
         "owned outcome",
         "necessary observations",
@@ -149,3 +151,26 @@ def test_explorer_research_and_session_artifacts_remain_explorer_owned() -> None
         assert required in contract
     assert "workflow_acceptance_authority=exclusive" in role
     assert "centralized_explorer_workspace_cleanup_write_authority=none" in role
+
+
+def test_explorer_mechanical_child_keeps_native_no_write_session_boundary() -> None:
+    contract_path = ROOT / "docs/project/SESSION_WORKSPACE_CONTRACT.md"
+    profile_path = ROOT / ".codex/agents/hmasd-explorer-mechanical.toml"
+    role_path = ROOT / ".agents/roles/EXPLORER_MECHANICAL_OPERATOR.md"
+    assert profile_path.is_file()
+    assert role_path.is_file()
+
+    contract = " ".join(contract_path.read_text(encoding="utf-8").split())
+    assert "hmasd-explorer-mechanical" in contract
+    for required in (
+        "hmasd-explorer-mechanical",
+        "explorer_mechanical_parent=independent_research_explorer",
+        "explorer_mechanical_assignment=native_self_contained_natural_language",
+        "explorer_mechanical_result=native_conclusion_first_response",
+        "explorer_mechanical_result_file=forbidden",
+        "explorer_mechanical_write_scope=none",
+        "explorer_mechanical_workspace=none",
+        "explorer_mechanical_research_state_effect=none",
+        "explorer_mechanical_cpm_isolation=separate_parent_task_and_state",
+    ):
+        assert required in contract

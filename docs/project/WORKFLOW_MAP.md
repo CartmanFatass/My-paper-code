@@ -57,6 +57,25 @@ cpm_mechanical_activation=after_fresh_profile_reload
 cpm_mechanical_active_research_state_effect=none
 ```
 
+The Explorer mechanical child is a separate, read-only context-isolation
+capability for literal-fact organization. It receives only named frozen
+materials, returns a conclusion-first native response and leaves dispatch
+economics and semantic sufficiency with Explorer; it is not a scientific
+consultant, campaign phase, roster member or acceptance owner. No result file
+or new durable or temporary workspace is part of this boundary, and the CPM
+mechanical lane remains isolated.
+
+```text
+explorer_mechanical_child=hmasd-explorer-mechanical
+explorer_mechanical_parent=independent_research_explorer
+explorer_mechanical_assignment=native_self_contained_natural_language
+explorer_mechanical_result=native_conclusion_first_response
+explorer_mechanical_write_scope=none
+explorer_mechanical_scientific_authority=none
+explorer_mechanical_technical_acceptance_authority=none
+explorer_mechanical_cpm_isolation=separate_parent_task_and_state
+```
+
 The router, Role charters, Skills, Profiles and focused contract tests form a
 layered interface:
 
@@ -100,6 +119,19 @@ multi-direction user question may name several directions without authorizing
 portfolio preload. Portfolio/index/README/continuity surfaces remain
 pointer-only; a missing binding gets one semantic clarification while
 unrelated work continues rather than a new workflow state.
+
+The Explorer mechanical dependency is:
+
+```text
+Explorer task model + named frozen materials
+        -> hmasd-explorer-mechanical
+        -> literal-fact organization conclusion
+        -> Explorer semantic sufficiency/intake
+```
+
+This dependency carries no scientific evidence vote, roster or barrier and
+does not allow the child to read CPM assignments, workspaces or acceptance
+state.
 
 Canonical research campaigns retain their exact ordered phase rosters and
 barriers. Adaptive scientific questions are a separate prospective capability:
@@ -174,8 +206,11 @@ request the Agentify transport child through its file-only assignment; the
 child follows its registered profile, role and Skill without a persistent task
 lane. CPM's mechanical child likewise receives only the exact task spec and
 result locator named by CPM; it does not load research, readiness, experiment
-or workflow history. External Pro follows its own router lane and owner
-contract. The map is an orientation aid, not a reason to load every document.
+or workflow history. Explorer's mechanical child receives only its
+self-contained assignment and named frozen materials; it has no result file or
+workspace and does not load CPM state. External Pro follows its own router
+lane and owner contract. The map is an orientation aid, not a reason to load
+every document.
 
 ## Role-based successor continuity
 

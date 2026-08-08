@@ -24,6 +24,12 @@ restart_identity=role|model|current_task
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
 continuity_owner=independent_research_explorer
 project_validation_intake_contract=docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md
+explorer_mechanical_child=hmasd-explorer-mechanical
+explorer_mechanical_scientific_roster=excluded
+explorer_mechanical_barrier=none
+explorer_mechanical_peer_independence=not_applicable
+explorer_mechanical_evidence_role=literal_fact_organization_not_scientific_evidence
+explorer_mechanical_campaign_effect=none
 ```
 
 ## Canonical campaign intake and barrier
@@ -85,6 +91,13 @@ automatic-Pro path or persistent mechanism. The Explorer remains the single
 writer and integrates answers into one decision. Strict methodology is scoped
 to conclusion-bearing C work or a named science-review trigger, not all
 candidate validation.
+
+Mechanical literal-fact organization is outside every scientific roster and
+phase or adaptive barrier. Its child is not a peer, its output is not evidence
+for voting or priority, and completion order cannot affect scientific ordering
+or portfolio meaning. A singleton mechanical task has no campaign or research
+state effect; Explorer alone performs semantic sufficiency intake and any
+scientific interpretation.
 
 ## Restart continuity
 

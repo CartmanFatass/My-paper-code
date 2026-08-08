@@ -115,6 +115,17 @@ independent_research_continuity_owner=independent_research_explorer
 independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 formal_compute_authority=user_only
+explorer_mechanical_child=hmasd-explorer-mechanical
+explorer_mechanical_parent=independent_research_explorer
+explorer_mechanical_role=read_only_literal_fact_organization
+explorer_mechanical_write_authority=none
+explorer_mechanical_git_authority=none
+explorer_mechanical_runtime_authority=none
+explorer_mechanical_scientific_authority=none
+explorer_mechanical_technical_acceptance_authority=none
+explorer_mechanical_spawn_authority=none
+explorer_mechanical_cross_task_authority=none
+explorer_mechanical_research_state_effect=none
 
 workflow_change_request_route=workflow_design_manager
 workflow_child_parent=workflow_design_manager|workflow_child_acceptance_authority=none|workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace|session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
@@ -181,6 +192,13 @@ campaign barriers and research authority remain unchanged. Detailed selection
 and question-roster guidance lives in the independent-research Skill and its
 parallel-workflow reference.
 
+The Explorer's registered `hmasd-explorer-mechanical` child is a separate
+read-only literal-fact organization capability, not a scientific consultant or
+campaign member; it has no write, Git, runtime, science, technical-acceptance,
+spawn or cross-task authority. Its profile and role are
+`.codex/agents/hmasd-explorer-mechanical.toml` and
+`.agents/roles/EXPLORER_MECHANICAL_OPERATOR.md`.
+
 WDM is the semantic integrator and acceptance owner. To reduce cost, routine
 bounded work is normally delegated to these cheaper registered children: an
 Implementer handles a frozen mechanical slice, an Auditor supplies local facts
@@ -196,7 +214,7 @@ the stable decision rules live in `docs/project/WORKFLOW_MAP.md`.
 - WDM public state: `docs/project/CURRENT_WORK.md`, `docs/project/current-work/sessions/workflow_design_manager.md`, `docs/project/current-work/common/workflow_control_plane.md`.
 - WDM durable/temporary workspace: `docs/session-workspaces/workflow_design_manager/`, `temp/sessions/workflow_design_manager/`.
 - Collaborative design and workflow-change mechanics: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
-- Explorer research, validation and methodology pointers: `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`.
+- Explorer research, validation and methodology pointers: `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `.agents/skills/hmasd-explorer-mechanical/SKILL.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`.
 - Code orientation (CPM-owned): `docs/project/PROJECT_MAP.md`.
 - Boundary and ticket checks: `scripts/hmasd_workspace_boundary_guard.py`, `scripts/hmasd_workspace_ticket.py`.
 - Other role contracts: `.agents/roles/CODE_PROJECT_MANAGER.md`, `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`, `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/roles/EXTERNAL_PRO.md`.

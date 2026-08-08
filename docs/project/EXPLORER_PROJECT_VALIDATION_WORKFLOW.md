@@ -80,6 +80,19 @@ necessary to one Explorer decision, while ordinary B remains B and does not
 automatically invoke Pro. One accepted packet still produces exactly one
 Explorer-authored canonical scientific decision.
 
+After CPM technical acceptance, Explorer may separately use the registered
+`hmasd-explorer-mechanical` child to present, rearrange or extract literal
+fields from already accepted packets or named reverse briefs. This is
+context-isolation organization, not a scientific consultant or a second
+acceptance path: the child may report literal existence or inaccessibility for
+an exact assignment-named local file or evidence locator, but does not decide
+locator validity, completeness, public accessibility or technical
+sufficiency. It does not reread raw runtime evidence or recompute schema
+readability/readiness, receipts, activity counts, retry history or technical
+consistency. Missing, duplicate or contradictory literal facts return to
+Explorer for semantic sufficiency handling; CPM remains the technical
+acceptance owner and Explorer remains the single scientific intake writer.
+
 When useful, that optional micro-panel routes constructive learning-dynamics,
 information-flow or credit-flow questions to Principles Analyst; strongest
 alternative, confound or falsifier questions to Critic; repair or smallest-next-

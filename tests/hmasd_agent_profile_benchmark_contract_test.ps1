@@ -35,6 +35,16 @@ if (-not (Test-Path -LiteralPath $mechanicalOperatorPath)) {
     throw 'CPM mechanical child profile is missing'
 }
 $mechanicalOperator = Get-Content -Raw -LiteralPath $mechanicalOperatorPath
+$explorerMechanicalOperatorPath = Join-Path $repo '.codex/agents/hmasd-explorer-mechanical.toml'
+if (-not (Test-Path -LiteralPath $explorerMechanicalOperatorPath)) {
+    throw 'Explorer mechanical child profile is missing'
+}
+$explorerMechanicalOperator = Get-Content -Raw -LiteralPath $explorerMechanicalOperatorPath
+$explorerMechanicalRolePath = Join-Path $repo '.agents/roles/EXPLORER_MECHANICAL_OPERATOR.md'
+if (-not (Test-Path -LiteralPath $explorerMechanicalRolePath)) {
+    throw 'Explorer mechanical child Role is missing'
+}
+$explorerMechanicalRole = Get-Content -Raw -LiteralPath $explorerMechanicalRolePath
 $researchScoutPath = Join-Path $repo '.codex/agents/hmasd-research-scout.toml'
 $researchInnovatorPath = Join-Path $repo '.codex/agents/hmasd-research-innovator.toml'
 $researchCriticPath = Join-Path $repo '.codex/agents/hmasd-research-critic.toml'
@@ -145,6 +155,50 @@ foreach ($required in @(
     if (-not $mechanicalOperator.Contains($required)) {
         throw "CPM mechanical profile missing: $required"
     }
+}
+
+# Verify the TOML route and thin Role pointer without imposing a packet schema
+# or copying Role procedure into the profile.
+foreach ($required in @(
+    'name = "hmasd-explorer-mechanical"',
+    'model = "gpt-5.6-luna"',
+    'model_reasoning_effort = "low"',
+    'sandbox_mode = "read-only"',
+    'approval_policy = "never"',
+    '.agents/roles/EXPLORER_MECHANICAL_OPERATOR.md',
+    '.agents/skills/hmasd-explorer-mechanical/SKILL.md',
+    'fork_turns=none',
+    'self-contained natural-language task model',
+    'one conclusion-first native result')) {
+    if (-not $explorerMechanicalOperator.Contains($required)) {
+        throw "Explorer mechanical profile missing: $required"
+    }
+}
+foreach ($forbidden in @(
+    'Return one native terminal result only',
+    'If the first observation exposes one missing or disputed named fact',
+    'There is no mandatory output file')) {
+    if ($explorerMechanicalOperator.Contains($forbidden)) {
+        throw "Explorer mechanical profile duplicates Role procedure: $forbidden"
+    }
+}
+foreach ($required in @(
+    'role=explorer_mechanical_operator',
+    'callable_agent_type=hmasd-explorer-mechanical',
+    'parent=independent_research_explorer',
+    'write_authority=none',
+    'scientific_authority=none',
+    'technical_acceptance_authority=none',
+    'child_authority=none',
+    'cross_task_contact_authority=none',
+    'self-contained natural-language task model',
+    'Return one native terminal result only')) {
+    if (-not (($explorerMechanicalRole -replace '\s+', ' ').Contains($required))) {
+        throw "Explorer Mechanical Role contract missing: $required"
+    }
+}
+if ([regex]::Matches($config, 'hmasd-explorer-mechanical\.toml').Count -ne 1) {
+    throw 'Explorer Mechanical profile must be registered exactly once'
 }
 foreach ($retired in @(
     '[agents."HMASDIndependentResearchReviewOperator"]',

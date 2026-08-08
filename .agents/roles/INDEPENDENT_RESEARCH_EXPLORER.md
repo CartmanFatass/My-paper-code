@@ -49,6 +49,22 @@ project_validation_code_acceptance=none
 logical_assignment_count=derived_from_exact_work_roster
 research_child_dispatch=registered_child_type|fork_turns=none|self_contained_natural_language_assignment
 research_child_assignment_context=research_purpose|exact_question|named_sources_and_prerequisite_packets|protected_assumptions_and_independence|exclusions|permitted_local_judgment|completion_meaning
+explorer_mechanical_child=hmasd-explorer-mechanical
+explorer_mechanical_parent=independent_research_explorer
+explorer_mechanical_dispatch_authority=independent_research_explorer
+explorer_mechanical_dispatch_order=direct_deterministic_commands|existing_exact_script|mechanical_child
+explorer_mechanical_dispatch_economics=materially_larger_heterogeneous_work_and_context_isolation
+explorer_mechanical_task=literal_fact_organization_only
+explorer_mechanical_assignment=one_self_contained_natural_language_assignment
+explorer_mechanical_result=one_conclusion_first_native_response
+explorer_mechanical_write_authority=none
+explorer_mechanical_git_authority=none
+explorer_mechanical_runtime_authority=none
+explorer_mechanical_scientific_authority=none
+explorer_mechanical_technical_acceptance_authority=none
+explorer_mechanical_spawn_authority=none
+explorer_mechanical_cross_task_authority=none
+explorer_mechanical_research_state_effect=none
 runtime_concurrency=available_native_capacity
 resource_consuming_experiment_action=one_at_a_time_for_attribution
 read_only_scientific_analysis_parallelism=available_native_capacity
@@ -114,6 +130,27 @@ judgment and completion meaning. The exact assignment and its named packets
 are the child's complete task context; inherited parent history is neither
 task meaning nor authority. No per-child assignment file or mandatory machine
 envelope is required.
+
+The Explorer also owns a separate mechanical delegation boundary for large,
+heterogeneous literal-fact organization. It first considers one or two direct
+deterministic tool commands, then an already-existing exact deterministic
+script; it uses `hmasd-explorer-mechanical` only when those are insufficient,
+the exact inputs and literal output fields are frozen, the work is materially
+larger, and context isolation reduces repeated Explorer burden. The child is
+mechanical rather than scientific: it preserves explicit facts and locators,
+reports missing, duplicate or contradictory inputs, and never infers evidence
+relevance, support, mechanism, alternatives, discriminators, priorities or
+A/B/C/Pro action. Explorer retains dispatch economics and semantic sufficiency
+intake. A singleton task creates no scientific roster, barrier or campaign
+effect; failure has `research_state_effect=none`.
+
+For CPM-accepted inputs, this child may only rearrange or extract the named
+accepted facts. It may report literal existence or inaccessibility for one
+exact assignment-named local file or evidence locator, but never decides
+locator validity, completeness, public accessibility or technical
+sufficiency. It never rereads raw runtime evidence or recomputes schema
+readability/readiness, receipts, activity counts, retry history or technical
+consistency; those remain with CPM and Explorer's semantic intake.
 
 Separately from the campaign loop, Explorer may ask one registered read-only
 research child one clear, bounded, decision-relevant question when the

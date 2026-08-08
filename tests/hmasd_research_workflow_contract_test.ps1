@@ -40,7 +40,8 @@ $expectedRoles = @(
     'WORKFLOW_AUDITOR.md',
     'WORKFLOW_DESIGN_MANAGER.md',
     'WORKFLOW_IMPLEMENTER.md',
-    'WORKFLOW_REVIEWER.md') | Sort-Object
+    'WORKFLOW_REVIEWER.md',
+    'EXPLORER_MECHANICAL_OPERATOR.md') | Sort-Object
 if (Compare-Object $expectedRoles $roles) {
     throw "Unexpected active role set: $($roles -join ',')"
 }
@@ -86,6 +87,17 @@ if (-not (Test-Path -LiteralPath $agentifyTransportProfilePath -PathType Leaf)) 
     throw 'Registered Agentify transport child profile is missing'
 }
 $agentifyTransportProfile = Get-Content -Raw -LiteralPath $agentifyTransportProfilePath
+$explorerMechanicalProfilePath = Join-Path $repo '.codex/agents/hmasd-explorer-mechanical.toml'
+$explorerMechanicalRolePath = Join-Path $repo '.agents/roles/EXPLORER_MECHANICAL_OPERATOR.md'
+$explorerMechanicalSkillPath = Join-Path $repo '.agents/skills/hmasd-explorer-mechanical/SKILL.md'
+foreach ($requiredPath in @($explorerMechanicalProfilePath, $explorerMechanicalRolePath, $explorerMechanicalSkillPath)) {
+    if (-not (Test-Path -LiteralPath $requiredPath -PathType Leaf)) {
+        throw "Explorer Mechanical surface is missing: $requiredPath"
+    }
+}
+$explorerMechanicalProfile = Get-Content -Raw -LiteralPath $explorerMechanicalProfilePath
+$explorerMechanicalRole = Get-Content -Raw -LiteralPath $explorerMechanicalRolePath
+$explorerMechanicalSkill = Get-Content -Raw -LiteralPath $explorerMechanicalSkillPath
 $algorithmPrinciples = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/ALGORITHM_PRINCIPLES.md')
 $algorithmPrinciplesNormalized = $algorithmPrinciples -replace '\s+', ' '
 $publicHandoffContractPath = Join-Path $repo 'docs/project/handoffs/README.md'
@@ -310,6 +322,57 @@ foreach ($stale in @(
         if ($surface.Contains($stale)) {
             throw "Retired Explorer Agentify transport wording remains: $stale"
         }
+    }
+}
+
+# Keep this workflow-level test focused on positive ownership and isolation
+# facts rather than a packet schema.
+$explorerMechanicalIntegrated = ($null -ne $explorerMechanicalProfile) -and
+    ($null -ne $explorerMechanicalRole) -and
+    ($null -ne $explorerMechanicalSkill) -and
+    $agents.Contains('hmasd-explorer-mechanical') -and
+    $independentResearchRole.Contains('hmasd-explorer-mechanical') -and
+    $independentResearchSkill.Contains('hmasd-explorer-mechanical') -and
+    $parallelResearch.Contains('hmasd-explorer-mechanical') -and
+    $sessionWorkspaceContract.Contains('hmasd-explorer-mechanical') -and
+    $workflowMap.Contains('hmasd-explorer-mechanical') -and
+    $explorerValidationContract.Contains('hmasd-explorer-mechanical')
+if (-not $explorerMechanicalIntegrated) {
+    throw 'Explorer Mechanical integration is incomplete'
+}
+foreach ($required in @(
+    'model = "gpt-5.6-luna"',
+    'model_reasoning_effort = "low"',
+    'sandbox_mode = "read-only"',
+    'approval_policy = "never"')) {
+    if (-not $explorerMechanicalProfile.Contains($required)) {
+        throw "Explorer Mechanical profile integration missing: $required"
+    }
+}
+foreach ($required in @(
+    'explorer_mechanical_task=literal_fact_organization_only',
+    'explorer_mechanical_write_scope=none',
+    'explorer_mechanical_scientific_authority=none',
+    'explorer_mechanical_barrier=none',
+    'research_state_effect=none')) {
+    $surfaces = @(
+        $independentResearchRole,
+        $independentResearchSkill,
+        $parallelResearch,
+        $sessionWorkspaceContract,
+        $workflowMap,
+        $explorerValidationContract)
+    if (-not (($surfaces -join " ").ToLowerInvariant().Contains($required.ToLowerInvariant()))) {
+        throw "Explorer Mechanical integration fact missing: $required"
+    }
+}
+foreach ($required in @(
+    'role=explorer_mechanical_operator',
+    'parent=independent_research_explorer',
+    'write_authority=none',
+    'scientific_authority=none')) {
+    if (-not (($explorerMechanicalRole -replace '\s+', ' ').Contains($required))) {
+        throw "Explorer Mechanical Role integration missing: $required"
     }
 }
 

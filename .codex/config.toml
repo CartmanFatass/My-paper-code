@@ -27,6 +27,11 @@ description = "Silent Luna-low native child for one exact CPM mechanical task as
 config_file = "./agents/hmasd-cpm-mechanical.toml"
 nickname_candidates = ["CPM Mechanical", "Mechanical Operator", "CPM Task Child"]
 
+[agents."HMASDExplorerMechanical"]
+description = "Silent Luna-low native child for one exact Explorer mechanical evidence-organization assignment."
+config_file = "./agents/hmasd-explorer-mechanical.toml"
+nickname_candidates = ["Explorer Mechanical", "Evidence Organizer", "Mechanical Reader"]
+
 [agents."HMASDRoutineImplementer"]
 description = "Terra-high implementation worker for one frozen routine engineering package."
 config_file = "./agents/hmasd-implementer-terra.toml"
