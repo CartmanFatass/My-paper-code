@@ -13,6 +13,8 @@ capability, six-phase order, typed mechanical evidence, timeout/tree cleanup,
 Git-visible cleanliness, receipt non-overwrite and idempotent same-content
 finalization. The assignment controls candidate paths, commands, root and
 completion; forked context is background only.
+Code Project Manager applies the child-context defaults in `AGENTS.md`; the
+exact assignment controls this task.
 
 Read the root router, exact assignment, this profile and
 `.agents/roles/VERIFIER.md`. Use
