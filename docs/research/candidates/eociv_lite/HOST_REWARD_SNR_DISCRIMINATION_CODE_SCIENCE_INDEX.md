@@ -27,3 +27,35 @@ extended into a rescue, second B5, favorable-seed selection, reward shaping,
 valve, auxiliary loss, model widening, VSP learner comparison, External Pro
 request or C treatment. The Code Project Manager owns integration, full-run
 execution, result interpretation and technical acceptance.
+
+## Accepted full result
+
+The sole result-bearing execution is
+`logs/eociv_b5_host_reward_snr_4e70d911_r2`, bound to implementation commit
+`4e70d911f393fcea9793cf0fc08dc6df726f6f9f`. It completed the real
+train/evaluate/analyze path with exactly 58,752 transitions and policy calls,
+576 training/learner episodes, 144 four-episode optimizer updates and 648
+natural-prior evaluation episodes. The compact canonical record is
+`HOST_REWARD_SNR_DISCRIMINATION_RESULT.json`; full block/episode/evaluation
+rows remain in the ignored raw evidence root.
+
+Mechanically, balancing did not improve the registered block SNR: the
+BALANCED-minus-IID difference was positive in 16/72 actor blocks and 24/72
+critic blocks. One IID actor block and one IID critic block had degenerate
+near-zero noise, making ratio means extremely outlier-sensitive. The paired
+BALANCED-minus-IID `FINAL_MINUS_INIT` semantic changes were also not broadly
+positive: 3/9 cells for `CORRECT-SWAPPED` (mean `-0.0053685883126714335`) and
+3/9 for `CORRECT-NATIVE_NEUTRAL` (mean `-0.000050425827131266805`). All 144
+updates exceeded the unchanged 0.5 pre-clip threshold, while both conditions
+retained nonzero FINAL late-lag 4-11 recurrent and reward-contrast evidence.
+These are complete frozen observations, not a scientific disposition or a
+license for another B5/C run.
+
+The earlier r1 root failed before candidate import because the temporary phase
+adapter lacked the project-root bootstrap; it produced no raw result and cost
+zero scientific iterations. The r2 operator native final returned COMPLETE,
+but its file receipt omitted the registered `terminal`, `execution_mode` and
+`direct_error` envelope fields. CPM independently verified the manifest,
+status, zero phase exits and all result artifacts, accepted the unique r2
+scientific execution, and routed that workflow-only receipt defect to WDM
+without rerunning science.
