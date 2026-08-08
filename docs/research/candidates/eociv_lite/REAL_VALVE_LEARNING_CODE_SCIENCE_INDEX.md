@@ -87,3 +87,13 @@ Technical acceptance evidence:
   control-decision seam and counts actual boundary routes;
 - registered phases: `TRAIN:0`, `EVALUATE:0`, `ANALYZE:0`, validation `PASSED`,
   analysis `MECHANICAL_ANALYSIS_COMPLETE`.
+
+Execution-readiness attempt `eociv_b1_r1` on candidate `cd4de194` is terminal
+failed and must not be reused. Its first five phases passed; `analyze_entry`
+then rejected only because the temporary validator searched for the literal
+substring `not a direction pause`, while this index states the stronger exact
+boundary `not ... whole-direction pause decisions`. This was a deterministic
+validator-construction defect with zero scientific iteration cost and no
+candidate effect. The replacement validator checks the recorded B-level stage,
+null scientific disposition, unlicensed C experiment, and the actual
+whole-direction-pause boundary without relying on that mismatched substring.
