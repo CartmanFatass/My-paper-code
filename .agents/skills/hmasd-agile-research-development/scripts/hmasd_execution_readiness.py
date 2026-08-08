@@ -162,8 +162,8 @@ def _load_spec(path: Path, repo: Path, *, fresh: bool, require_current_head: boo
     if not isinstance(exercise_root, str) or not exercise_root.strip():
         raise ReadinessError("exercise_root must be a non-empty path")
     exercise_path = _resolve_artifact(repo, exercise_root)
-    if fresh and exercise_path.exists() and (not exercise_path.is_dir() or any(exercise_path.iterdir())):
-        raise ReadinessError("exercise_root must be absent or empty before readiness starts")
+    if fresh and exercise_path.exists():
+        raise ReadinessError("exercise_root must be absent before readiness starts")
     if not fresh and not exercise_path.is_dir():
         raise ReadinessError("exercise_root must exist before receipt finalization")
 
@@ -311,17 +311,23 @@ def _run_phase(repo: Path, exercise_path: Path, name: str, phase_spec: dict[str,
             kwargs["start_new_session"] = True
         process = subprocess.Popen(phase_spec["argv"], **kwargs)
     except (OSError, ValueError, TypeError) as exc:
-        stdout_path.write_bytes(b"")
-        stderr_path.write_text(str(exc), encoding="utf-8", errors="replace")
+        failure_kind = "launch_error"
+        detail = str(exc)
+        try:
+            stdout_path.write_bytes(b"")
+            stderr_path.write_text(detail, encoding="utf-8", errors="replace")
+        except OSError as log_exc:
+            failure_kind = "log_write_error"
+            detail = f"launch_error: {exc}; log_error: {log_exc}"
         return {
             **base,
             "status": "FAILED",
-            "failure_kind": "launch_error",
+            "failure_kind": failure_kind,
             "process_tree_terminated": False,
             "exit_code": None,
             "duration_seconds": round(time.monotonic() - started, 3),
             "stdout_tail": "",
-            "stderr_tail": str(exc),
+            "stderr_tail": detail[-TAIL_CHARS:],
         }
 
     stdout_pump = _StreamPump(process.stdout, stdout_path)
@@ -594,8 +600,12 @@ def hook_stop() -> int:
         elif readiness == "passed":
             if not receipt_field:
                 raise ReadinessError("CODE_ACCEPTED does not name the exact readiness receipt")
-            receipt = json.loads(Path(receipt_field).resolve().read_text(encoding="utf-8"))
+            receipt_path = Path(receipt_field).resolve()
+            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
             _validate_historical_receipt(receipt)
+            expected_receipt = _final_receipt_path(repo, commit, receipt["attempt_id"])
+            if receipt_path != expected_receipt:
+                raise ReadinessError("CODE_ACCEPTED receipt is not the finalized Git-private receipt")
             if receipt.get("candidate_commit") != commit:
                 raise ReadinessError("receipt candidate identity does not match CODE_ACCEPTED")
             if receipt.get("exact_paths") != [item for item in exact_paths.split("|") if item]:
