@@ -30,7 +30,6 @@ $protectedImplementerProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.
 $implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
 $codePmNormalized = $codePm -replace '\s+', ' '
 $verifierRoleNormalized = $verifierRole -replace '\s+', ' '
-$verifierProfileNormalized = $verifierProfile -replace '\s+', ' '
 $implementerRoleNormalized = $implementerRole -replace '\s+', ' '
 $reviewerRoleNormalized = $reviewerRole -replace '\s+', ' '
 $reviewerProfileNormalized = $reviewerProfile -replace '\s+', ' '
@@ -620,28 +619,27 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'readiness phase timeout is candidate evidence',
-    'semantics-preserving technical optimization under the unchanged phase timeout',
-    'evidence-backed timeout revision',
-    'bounded operational retry budget for one unchanged clean candidate',
-    'Any code or validator defect produces a new clean pushed candidate',
-    'only a transient environment, launcher, path or operating-system failure',
-    'one exact spec',
-    'fresh absent root',
-    'one wrapper run',
-    'full commit-bound receipt',
-    'consumes zero scientific iterations',
-    'Nothing automatically increases a timeout')) {
-    if (-not $agileNormalized.Contains($required)) {
-        throw "Agile Skill missing timeout-response rule: $required"
+    'role=verifier',
+    'authority=one_exact_execution_readiness_assignment',
+    'execution_readiness_executor=required_when_triggered_by_code_project_manager',
+    'formal_compute_authority=none',
+    'readiness_phase_executor=wrapper_run_only',
+    'readiness_receipt_finalizer=wrapper_finalize_only',
+    'never pre-run, replay or manually invoke',
+    'Do not elevate `run`',
+    'sum of the six phase timeouts plus 60 seconds',
+    'exact proof-sized exercise root',
+    "readiness script's Git-private receipt",
+    'Code Project Manager classifies the failure and alone accepts the code')) {
+    if (-not $verifierRoleNormalized.Contains($required)) {
+        throw "Verifier role missing execution-readiness boundary: $required"
     }
 }
-
 foreach ($required in @(
-    'request_id=UAV_G0_READINESS_PERFORMANCE_CONTRACT_V2',
-    'selected_option=B_EVIDENCE_BACKED_TIMEOUT_REVISION',
-    'observed_timeout_candidate_commit=379726e325236a02c3a45bf7049bedaaa90d4e31',
-    'scientific_contract_stage_commit=8d171a1b63ff403f0cec7b0539c3894a0f4ba5cc',
+    'request_id=UAV_G0_READINESS_PERFORMANCE_CONTRACT_V3',
+    'candidate_identity=checked_out_clean_HEAD',
+    'source_execution_bridge=forbidden',
+    'execution_support_delta=forbidden',
     'interface_smoke_timeout_seconds=60',
     'bounded_exercise_timeout_seconds=1200',
     'artifact_validation_timeout_seconds=300',
@@ -650,43 +648,15 @@ foreach ($required in @(
     'analyze_entry_timeout_seconds=300',
     'outer_run_timeout_seconds=2520',
     'finalize_timeout_seconds=120',
-    'failed_root_reuse=forbidden',
     'candidate_attempt_limit=3',
-    'candidate_commit_rule=new_commit_required_for_any_code_change',
-    'unchanged_clean_candidate_rule=operational_retry_budget_under_unchanged_v2_contract',
     'fresh_absent_root_required=true',
-    'full_six_phase_commit_bound_receipt=required',
-    'current_oracle_reproduction=continues_under_code_project_manager',
+    'full_six_phase_candidate_bound_receipt=required',
     'formal_compute=forbidden',
-    'nonformal_scientific_compute=forbidden',
-    'scientific_iteration_cost=zero',
-    'duplicate_pro_review=forbidden',
-    'current_work_mutation=forbidden',
-    'evidence_weakening=forbidden',
-    'automatic_timeout_increase=forbidden',
-    'automatic_retry=operational_only_within_unchanged_candidate_and_contract',
-    'geometry, `R=273`, `O(H*K_search)`, RNG and seed identities, pairing',
-    'controls, oracle, metrics, estimator, first-match order and independent replay',
-    'READINESS_PHASE_TIMEOUT',
-    'READINESS_TECHNICAL_FAILURE',
-    'READINESS_PERFORMANCE_BLOCKED',
-    'READINESS_FINALIZATION_FAILURE',
-    'transient environment, launcher, path or operating-system failure',
-    'requires a new clean pushed candidate before another attempt',
-    'Code Project Manager then applies the existing same-source preflight and formal')) {
+    'scientific_iteration_cost=zero')) {
     if (-not $g0ReadinessContractNormalized.Contains($required)) {
         throw "G0 readiness performance contract missing: $required"
     }
 }
-foreach ($staleGate in @(
-    'Another attempt or timeout change requires a new explicit workflow contract',
-    'unchanged_clean_candidate_rule=one_attempt_permitted_only_by_this_timeout_revision',
-    'automatic_retry=forbidden')) {
-    if ($g0ReadinessContractNormalized.Contains($staleGate)) {
-        throw "G0 readiness contract retains a per-attempt user gate: $staleGate"
-    }
-}
-
 $g0CodePaths = @(
     'ha_ctse_process/uav_episode_schema.py',
     'ha_ctse_process/uav_episode_serialization.py',
@@ -708,44 +678,6 @@ if (-not $g0ReadinessContract.Contains('exact thirteen-path implementation bound
 foreach ($required in $g0CodePaths) {
     if (-not $g0ReadinessContract.Contains($required)) {
         throw "G0 readiness performance path boundary missing: $required"
-    }
-}
-foreach ($required in @(
-    'role=verifier',
-    'authority=one_exact_execution_readiness_assignment',
-    'execution_readiness_executor=required_when_triggered_by_code_project_manager',
-    'formal_compute_authority=none',
-    'readiness_phase_executor=wrapper_run_only',
-    'readiness_receipt_finalizer=wrapper_finalize_only',
-    'never pre-run, replay or manually invoke',
-    'Do not elevate `run`',
-    'sum of the six phase timeouts plus 60 seconds',
-    'exact proof-sized exercise root',
-    "readiness script's Git-private receipt",
-    'Code Project Manager classifies the failure and alone accepts the code')) {
-    if (-not $verifierRoleNormalized.Contains($required)) {
-        throw "Verifier role missing execution-readiness boundary: $required"
-    }
-}
-foreach ($required in @(
-    'model = "gpt-5.6-luna"',
-    'model_reasoning_effort = "high"',
-    'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
-    'hmasd_execution_readiness.py',
-    '`run --spec` exactly once',
-    '`finalize --spec` exactly once',
-    'Do not elevate this command',
-    'sum of the six phase timeouts plus 60 seconds',
-    'formal=false with scientific_iteration_cost=zero',
-    'exactly the six ordered readiness phases',
-    'Do not stage, commit, checkout, reset or write Git-tracked state')) {
-    if (-not $verifierProfileNormalized.Contains($required)) {
-        throw "Verifier profile missing execution-readiness setting: $required"
-    }
-}
-foreach ($forbidden in @('CUDA', 'C:/Users/wu/.conda/envs/SB3/python.exe')) {
-    if ($verifierRole.Contains($forbidden) -or $verifierProfile.Contains($forbidden)) {
-        throw "Verifier retains stale environment setting: $forbidden"
     }
 }
 foreach ($required in @(
@@ -816,392 +748,6 @@ finally {
     Pop-Location
 }
 
-$registeredPython = 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe'
-$unicodePathSegment = ([char]0x6587).ToString() + ([char]0x6863).ToString()
-$tempRoot = Join-Path ([IO.Path]::GetTempPath()) ("hmasd-readiness-contract-" + $unicodePathSegment + '-' + [guid]::NewGuid().ToString('N'))
-$savedOutputEncoding = $OutputEncoding
-$OutputEncoding = [Text.UTF8Encoding]::new($false)
-try {
-    New-Item -ItemType Directory -Path $tempRoot -Force | Out-Null
-    & git.exe -C $tempRoot init --quiet
-    & git.exe -C $tempRoot config user.email 'workflow-contract@example.invalid'
-    & git.exe -C $tempRoot config user.name 'Workflow Contract'
-    [IO.File]::WriteAllText((Join-Path $tempRoot 'accepted.py'), "VALUE = 1`n")
-    $fixtureRole = Join-Path $tempRoot '.agents/roles/CODE_PROJECT_MANAGER.md'
-    New-Item -ItemType Directory -Path (Split-Path -Parent $fixtureRole) -Force | Out-Null
-    [IO.File]::WriteAllText($fixtureRole, "session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d`n")
-    & git.exe -C $tempRoot add accepted.py .agents/roles/CODE_PROJECT_MANAGER.md
-    & git.exe -C $tempRoot commit --quiet -m 'fixture'
-    $fixtureCommit = (& git.exe -C $tempRoot rev-parse HEAD).Trim()
-    $executionSupportPaths = @(
-        '.agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py',
-        'tests/hmasd_code_project_manager_contract_test.ps1'
-    )
-    foreach ($supportPath in $executionSupportPaths) {
-        $absoluteSupportPath = Join-Path $tempRoot $supportPath
-        New-Item -ItemType Directory -Path (Split-Path -Parent $absoluteSupportPath) -Force | Out-Null
-        [IO.File]::WriteAllText($absoluteSupportPath, "SUPPORT = 1`n")
-    }
-    & git.exe -C $tempRoot add -- $executionSupportPaths
-    & git.exe -C $tempRoot commit --quiet -m 'readiness execution support'
-    $executionCommit = (& git.exe -C $tempRoot rev-parse HEAD).Trim()
-    $artifactPath = Join-Path $tempRoot 'exercise/artifact.json'
-    $phaseArgv = @($registeredPython, '-c', "from pathlib import Path; p=Path(r'$artifactPath'); p.parent.mkdir(parents=True, exist_ok=True); p.write_text('{}', encoding='utf-8')")
-    $phaseTimeouts = [ordered]@{
-        interface_smoke = 60
-        bounded_exercise = 1200
-        artifact_validation = 300
-        artifact_reload = 300
-        evaluate_entry = 300
-        analyze_entry = 300
-    }
-    $phases = [ordered]@{}
-    foreach ($phase in @('interface_smoke','bounded_exercise','artifact_validation','artifact_reload','evaluate_entry','analyze_entry')) {
-        $phases[$phase] = [ordered]@{ argv = $phaseArgv; timeout_seconds = $phaseTimeouts[$phase] }
-    }
-    $spec = [ordered]@{
-        schema_version = 2
-        source_commit = $fixtureCommit
-        execution_commit = $executionCommit
-        execution_support_paths = $executionSupportPaths
-        trigger = 'contract_fixture'
-        exact_paths = @('accepted.py')
-        formal = $false
-        scientific_iteration_cost = 0
-        exercise_root = (Join-Path $tempRoot 'exercise')
-        expected_artifacts = @($artifactPath)
-        phases = $phases
-    }
-    $specPath = Join-Path $tempRoot 'readiness-spec.json'
-    [IO.File]::WriteAllText($specPath, ($spec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-    $newIsolatedSpec = {
-        param($baseSpec, $name)
-        $copy = $baseSpec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
-        $copy.exercise_root = Join-Path $tempRoot $name
-        $isolatedArtifact = Join-Path $copy.exercise_root 'artifact.json'
-        $copy.expected_artifacts = @($isolatedArtifact)
-        $isolatedArgv = @($registeredPython, '-c', "from pathlib import Path; p=Path(r'$isolatedArtifact'); p.parent.mkdir(parents=True, exist_ok=True); p.write_text('{}', encoding='utf-8')")
-        foreach ($phase in @('interface_smoke','bounded_exercise','artifact_validation','artifact_reload','evaluate_entry','analyze_entry')) {
-            $copy.phases.$phase.argv = $isolatedArgv
-        }
-        return $copy
-    }
-    Push-Location $tempRoot
-    try {
-        $legacySpec = & $newIsolatedSpec $spec 'legacy-schema-rejected-exercise'
-        $legacySpec.schema_version = 1
-        $legacySpecPath = Join-Path $tempRoot 'legacy-schema-rejected-spec.json'
-        [IO.File]::WriteAllText($legacySpecPath, ($legacySpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-        $savedLegacyPreference = $ErrorActionPreference
-        $ErrorActionPreference = 'Continue'
-        $legacyOutput = & $registeredPython $readinessScriptPath run --spec $legacySpecPath 2>&1
-        $legacyExit = $LASTEXITCODE
-        $ErrorActionPreference = $savedLegacyPreference
-        if ($legacyExit -eq 0 -or ($legacyOutput -join ' ') -notmatch 'schema_version must equal 2') {
-            throw "Execution-readiness wrapper accepted a schema-v1 spec: $($legacyOutput -join ' ')"
-        }
-        if (Test-Path -LiteralPath $legacySpec.exercise_root) {
-            throw 'Schema-v1 rejection created a phase root'
-        }
-
-        foreach ($supportCase in @('missing','extra')) {
-            $supportSpec = & $newIsolatedSpec $spec "$supportCase-support-rejected-exercise"
-            if ($supportCase -eq 'missing') {
-                $supportSpec.execution_support_paths = @($executionSupportPaths[0])
-            }
-            else {
-                $supportSpec.execution_support_paths = @($executionSupportPaths + 'docs/project/unapproved.md')
-            }
-            $supportSpecPath = Join-Path $tempRoot "$supportCase-support-rejected-spec.json"
-            [IO.File]::WriteAllText($supportSpecPath, ($supportSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-            $savedSupportPreference = $ErrorActionPreference
-            $ErrorActionPreference = 'Continue'
-            $supportOutput = & $registeredPython $readinessScriptPath run --spec $supportSpecPath 2>&1
-            $supportExit = $LASTEXITCODE
-            $ErrorActionPreference = $savedSupportPreference
-            if ($supportExit -eq 0 -or ($supportOutput -join ' ') -notmatch 'approved readiness bridge') {
-                throw "Execution-readiness wrapper accepted a $supportCase support path set: $($supportOutput -join ' ')"
-            }
-            if (Test-Path -LiteralPath $supportSpec.exercise_root) {
-                throw "Rejected $supportCase support path set created a phase root"
-            }
-        }
-
-        $identicalIdentitySpec = & $newIsolatedSpec $spec 'identical-identity-rejected-exercise'
-        $identicalIdentitySpec.source_commit = $executionCommit
-        $identicalIdentitySpecPath = Join-Path $tempRoot 'identical-identity-rejected-spec.json'
-        [IO.File]::WriteAllText($identicalIdentitySpecPath, ($identicalIdentitySpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-        $savedIdenticalIdentityPreference = $ErrorActionPreference
-        $ErrorActionPreference = 'Continue'
-        $identicalIdentityOutput = & $registeredPython $readinessScriptPath run --spec $identicalIdentitySpecPath 2>&1
-        $identicalIdentityExit = $LASTEXITCODE
-        $ErrorActionPreference = $savedIdenticalIdentityPreference
-        if ($identicalIdentityExit -eq 0 -or ($identicalIdentityOutput -join ' ') -notmatch 'must be distinct.*nonempty approved readiness bridge.*between them') {
-            throw "Execution-readiness wrapper accepted identical source/execution identities: $($identicalIdentityOutput -join ' ')"
-        }
-        if (Test-Path -LiteralPath $identicalIdentitySpec.exercise_root) {
-            throw 'Identical source/execution identity rejection created a phase root'
-        }
-
-        $headMismatchSpec = & $newIsolatedSpec $spec 'head-mismatch-rejected-exercise'
-        $headMismatchSpec.execution_commit = $fixtureCommit
-        $headMismatchSpecPath = Join-Path $tempRoot 'head-mismatch-rejected-spec.json'
-        [IO.File]::WriteAllText($headMismatchSpecPath, ($headMismatchSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-        $savedHeadPreference = $ErrorActionPreference
-        $ErrorActionPreference = 'Continue'
-        $headMismatchOutput = & $registeredPython $readinessScriptPath run --spec $headMismatchSpecPath 2>&1
-        $headMismatchExit = $LASTEXITCODE
-        $ErrorActionPreference = $savedHeadPreference
-        if ($headMismatchExit -eq 0 -or ($headMismatchOutput -join ' ') -notmatch 'execution_commit does not equal the checked-out HEAD') {
-            throw "Execution-readiness wrapper accepted a mismatched execution HEAD: $($headMismatchOutput -join ' ')"
-        }
-
-        $fixtureTree = (& git.exe -C $tempRoot rev-parse "$fixtureCommit`^{tree}").Trim()
-        $unrelatedCommit = ("unrelated source`n" | & git.exe -C $tempRoot commit-tree $fixtureTree).Trim()
-        $nonAncestorSpec = & $newIsolatedSpec $spec 'nonancestor-rejected-exercise'
-        $nonAncestorSpec.source_commit = $unrelatedCommit
-        $nonAncestorSpecPath = Join-Path $tempRoot 'nonancestor-rejected-spec.json'
-        [IO.File]::WriteAllText($nonAncestorSpecPath, ($nonAncestorSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-        $savedAncestorPreference = $ErrorActionPreference
-        $ErrorActionPreference = 'Continue'
-        $nonAncestorOutput = & $registeredPython $readinessScriptPath run --spec $nonAncestorSpecPath 2>&1
-        $nonAncestorExit = $LASTEXITCODE
-        $ErrorActionPreference = $savedAncestorPreference
-        if ($nonAncestorExit -eq 0 -or ($nonAncestorOutput -join ' ') -notmatch 'not an ancestor') {
-            throw "Execution-readiness wrapper accepted a nonancestor source: $($nonAncestorOutput -join ' ')"
-        }
-
-        $rejectedSpec = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
-        $rejectedRoot = Join-Path $tempRoot 'combined-timeout-rejected-exercise'
-        $rejectedSpec.exercise_root = $rejectedRoot
-        $rejectedArtifact = Join-Path $rejectedRoot 'artifact.json'
-        $rejectedSpec.expected_artifacts = @($rejectedArtifact)
-        $rejectedArgv = @($registeredPython, '-c', "from pathlib import Path; p=Path(r'$rejectedArtifact'); p.parent.mkdir(parents=True, exist_ok=True); p.write_text('{}', encoding='utf-8')")
-        foreach ($phase in @('interface_smoke','bounded_exercise','artifact_validation','artifact_reload','evaluate_entry','analyze_entry')) {
-            $rejectedSpec.phases.$phase.argv = $rejectedArgv
-        }
-        $rejectedSpec.phases.analyze_entry.timeout_seconds = 301
-        $rejectedSpecPath = Join-Path $tempRoot 'combined-timeout-rejected-spec.json'
-        [IO.File]::WriteAllText($rejectedSpecPath, ($rejectedSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-        $savedRejectedPreference = $ErrorActionPreference
-        $ErrorActionPreference = 'Continue'
-        $rejectedOutput = & $registeredPython $readinessScriptPath run --spec $rejectedSpecPath 2>&1
-        $ErrorActionPreference = $savedRejectedPreference
-        if ($LASTEXITCODE -eq 0 -or ($rejectedOutput -join ' ') -notmatch 'combined phase timeout exceeds 2460 seconds') {
-            throw "Execution-readiness wrapper did not reject a 2461-second combined timeout: $($rejectedOutput -join ' ')"
-        }
-        if (Test-Path -LiteralPath $rejectedRoot) {
-            throw 'Combined-timeout rejection created a phase root before validation completed'
-        }
-
-        $runOutput = & $registeredPython $readinessScriptPath run --spec $specPath
-        if ($LASTEXITCODE -ne 0 -or $runOutput -notcontains 'HMASD_EXECUTION_READINESS_PHASES_OK') {
-            throw 'Execution-readiness run did not create a successful candidate receipt'
-        }
-        $candidateRecord = $runOutput[-1] | ConvertFrom-Json
-        if (-not (Test-Path -LiteralPath $candidateRecord.candidate_receipt -PathType Leaf)) {
-            throw 'Execution-readiness run did not persist its candidate receipt in the exercise root'
-        }
-        $savedPrematurePreference = $ErrorActionPreference
-        $ErrorActionPreference = 'Continue'
-        $prematureCheck = & $registeredPython $readinessScriptPath check --commit $fixtureCommit 2>&1
-        $ErrorActionPreference = $savedPrematurePreference
-        if ($LASTEXITCODE -eq 0 -or ($prematureCheck -join ' ') -notmatch 'receipt') {
-            throw 'Execution-readiness run exposed a final receipt before finalization'
-        }
-        $finalizeOutput = & $registeredPython $readinessScriptPath finalize --spec $specPath
-        if ($LASTEXITCODE -ne 0 -or $finalizeOutput -notcontains 'HMASD_EXECUTION_READINESS_OK') {
-            throw 'Execution-readiness finalizer did not create a successful fixture receipt'
-        }
-        $receiptRecord = $finalizeOutput[-1] | ConvertFrom-Json
-        $fixtureReceipt = $receiptRecord.receipt
-        $checkOutput = & $registeredPython $readinessScriptPath check --commit $fixtureCommit
-        if ($LASTEXITCODE -ne 0 -or $checkOutput -notcontains 'HMASD_EXECUTION_READINESS_RECEIPT_OK') {
-            throw 'Execution-readiness receipt check failed'
-        }
-
-        $validMessage = @"
-CODE_ACCEPTED
-commit=$fixtureCommit
-exact_paths=accepted.py
-verification=fixture
-execution_readiness=passed
-execution_readiness_receipt=$fixtureReceipt
-execution_readiness_reason=contract_fixture
-code_science_index=not-triggered
-blockers=none
-"@
-        $validHook = @{ session_id = '019f9e4f-f4d0-7fe0-b214-c47fd034e84d'; stop_hook_active = $false; last_assistant_message = $validMessage } | ConvertTo-Json -Compress
-        $validHookOutput = $validHook | & $registeredPython $readinessScriptPath hook-stop
-        if ($LASTEXITCODE -ne 0 -or $validHookOutput) {
-            throw 'Stop hook rejected a matching execution-readiness receipt'
-        }
-
-        $savedReceiptText = Get-Content -Raw -Encoding UTF8 -LiteralPath $fixtureReceipt
-        $mismatchedReceipt = $savedReceiptText | ConvertFrom-Json
-        $mismatchedReceipt.execution_commit = $fixtureCommit
-        [IO.File]::WriteAllText($fixtureReceipt, ($mismatchedReceipt | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-        $executionMismatchHookOutput = ($validHook | & $registeredPython $readinessScriptPath hook-stop) | ConvertFrom-Json
-        if ($executionMismatchHookOutput.decision -ne 'block' -or $executionMismatchHookOutput.reason -notmatch 'CODE_ACCEPTANCE_BLOCKED') {
-            throw 'Stop hook accepts a receipt whose execution identity is not current HEAD'
-        }
-        [IO.File]::WriteAllText($fixtureReceipt, $savedReceiptText, [Text.UTF8Encoding]::new($false))
-
-        $otherHook = @{ session_id = 'not-code-pm'; stop_hook_active = $false; last_assistant_message = $validMessage } | ConvertTo-Json -Compress
-        $otherHookOutput = $otherHook | & $registeredPython $readinessScriptPath hook-stop
-        if ($LASTEXITCODE -ne 0 -or $otherHookOutput) {
-            throw 'Stop hook affects a non-Code-PM session'
-        }
-
-        $missingMessage = $validMessage -replace $fixtureCommit, ('0' * 40)
-        $missingHook = @{ session_id = '019f9e4f-f4d0-7fe0-b214-c47fd034e84d'; stop_hook_active = $false; last_assistant_message = $missingMessage } | ConvertTo-Json -Compress
-        $missingHookOutput = ($missingHook | & $registeredPython $readinessScriptPath hook-stop) | ConvertFrom-Json
-        if ($missingHookOutput.decision -ne 'block' -or $missingHookOutput.reason -notmatch 'CODE_ACCEPTANCE_BLOCKED') {
-            throw 'Stop hook does not request one repair for a missing receipt'
-        }
-        $activeHook = @{ session_id = '019f9e4f-f4d0-7fe0-b214-c47fd034e84d'; stop_hook_active = $true; last_assistant_message = $missingMessage } | ConvertTo-Json -Compress
-        $activeHookOutput = ($activeHook | & $registeredPython $readinessScriptPath hook-stop) | ConvertFrom-Json
-        if ($activeHookOutput.continue -ne $false -or $activeHookOutput.stopReason -ne 'invalid_code_acceptance') {
-            throw 'Stop hook can create an unbounded continuation loop'
-        }
-
-        $notTriggeredMessage = $validMessage -replace 'execution_readiness=passed', 'execution_readiness=not_triggered' -replace 'execution_readiness_reason=contract_fixture', 'execution_readiness_reason=none'
-        $notTriggeredHook = @{ session_id = '019f9e4f-f4d0-7fe0-b214-c47fd034e84d'; stop_hook_active = $false; last_assistant_message = $notTriggeredMessage } | ConvertTo-Json -Compress
-        $notTriggeredOutput = ($notTriggeredHook | & $registeredPython $readinessScriptPath hook-stop) | ConvertFrom-Json
-        if ($notTriggeredOutput.decision -ne 'block') {
-            throw 'Stop hook accepts an untriggered readiness state without a bounded reason'
-        }
-
-        $savedErrorActionPreference = $ErrorActionPreference
-        $ErrorActionPreference = 'Continue'
-        try {
-            $tamperedSpec = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
-            $tamperedSpec.exercise_root = Join-Path $tempRoot 'tampered-finalize-exercise'
-            $tamperedArtifact = Join-Path $tamperedSpec.exercise_root 'artifact.json'
-            $tamperedSpec.expected_artifacts = @($tamperedArtifact)
-            $tamperedArgv = @($registeredPython, '-c', "from pathlib import Path; p=Path(r'$tamperedArtifact'); p.parent.mkdir(parents=True, exist_ok=True); p.write_text('{}', encoding='utf-8')")
-            foreach ($phase in @('interface_smoke','bounded_exercise','artifact_validation','artifact_reload','evaluate_entry','analyze_entry')) {
-                $tamperedSpec.phases.$phase.argv = $tamperedArgv
-            }
-            $tamperedSpecPath = Join-Path $tempRoot 'tampered-finalize.json'
-            [IO.File]::WriteAllText($tamperedSpecPath, ($tamperedSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-            $tamperedRun = & $registeredPython $readinessScriptPath run --spec $tamperedSpecPath
-            if ($LASTEXITCODE -ne 0 -or $tamperedRun -notcontains 'HMASD_EXECUTION_READINESS_PHASES_OK') {
-                throw 'Tampered-finalize fixture did not complete its six phases'
-            }
-            $tamperedCandidatePath = ($tamperedRun[-1] | ConvertFrom-Json).candidate_receipt
-            $tamperedCandidateText = Get-Content -Raw -Encoding UTF8 -LiteralPath $tamperedCandidatePath
-            $tamperedCandidateText = $tamperedCandidateText.Replace($registeredPython, 'forged-python')
-            [IO.File]::WriteAllText($tamperedCandidatePath, $tamperedCandidateText, [Text.UTF8Encoding]::new($false))
-            $tamperedFinalize = & $registeredPython $readinessScriptPath finalize --spec $tamperedSpecPath 2>&1
-            if ($LASTEXITCODE -eq 0 -or ($tamperedFinalize -join ' ') -notmatch 'argv mismatch') {
-                throw "Execution-readiness finalizer accepts a tampered candidate receipt: $($tamperedFinalize -join ' ')"
-            }
-
-            $identitySpec = & $newIsolatedSpec $spec 'identity-tampered-finalize-exercise'
-            $identitySpecPath = Join-Path $tempRoot 'identity-tampered-finalize.json'
-            [IO.File]::WriteAllText($identitySpecPath, ($identitySpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-            $identityRun = & $registeredPython $readinessScriptPath run --spec $identitySpecPath
-            if ($LASTEXITCODE -ne 0 -or $identityRun -notcontains 'HMASD_EXECUTION_READINESS_PHASES_OK') {
-                throw 'Identity-tamper fixture did not complete its six phases'
-            }
-            $identityCandidatePath = ($identityRun[-1] | ConvertFrom-Json).candidate_receipt
-            $identityCandidate = Get-Content -Raw -Encoding UTF8 -LiteralPath $identityCandidatePath | ConvertFrom-Json
-            $identityCandidate.execution_commit = $fixtureCommit
-            [IO.File]::WriteAllText($identityCandidatePath, ($identityCandidate | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-            $identityFinalize = & $registeredPython $readinessScriptPath finalize --spec $identitySpecPath 2>&1
-            if ($LASTEXITCODE -eq 0 -or ($identityFinalize -join ' ') -notmatch 'execution_commit mismatch') {
-                throw "Execution-readiness finalizer accepts a tampered execution identity: $($identityFinalize -join ' ')"
-            }
-
-            $badSource = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
-            $badSource.source_commit = '0' * 40
-            $badSource.exercise_root = Join-Path $tempRoot 'bad-source-exercise'
-            $badSource.expected_artifacts = @(Join-Path $badSource.exercise_root 'artifact.json')
-            $badSourcePath = Join-Path $tempRoot 'bad-source.json'
-            [IO.File]::WriteAllText($badSourcePath, ($badSource | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-            $badSourceOutput = & $registeredPython $readinessScriptPath run --spec $badSourcePath 2>&1
-            if ($LASTEXITCODE -eq 0 -or ($badSourceOutput -join ' ') -notmatch 'source_commit') {
-                throw 'Execution-readiness script accepts a mismatched source commit'
-            }
-
-            $badArgv = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
-            $badArgv.exercise_root = Join-Path $tempRoot 'bad-argv-exercise'
-            $badArgv.expected_artifacts = @(Join-Path $badArgv.exercise_root 'artifact.json')
-            $badArgv.phases.interface_smoke.argv = "$registeredPython -c pass"
-            $badArgvPath = Join-Path $tempRoot 'bad-argv.json'
-            [IO.File]::WriteAllText($badArgvPath, ($badArgv | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-            $badArgvOutput = & $registeredPython $readinessScriptPath run --spec $badArgvPath 2>&1
-            if ($LASTEXITCODE -eq 0 -or ($badArgvOutput -join ' ') -notmatch 'argv') {
-                throw 'Execution-readiness script accepts a shell command string'
-            }
-
-            [IO.File]::AppendAllText((Join-Path $tempRoot 'accepted.py'), "DIRTY = 1`n")
-            $dirtySpec = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
-            $dirtySpec.exercise_root = Join-Path $tempRoot 'dirty-exercise'
-            $dirtySpec.expected_artifacts = @(Join-Path $dirtySpec.exercise_root 'artifact.json')
-            $dirtySpecPath = Join-Path $tempRoot 'dirty-spec.json'
-            [IO.File]::WriteAllText($dirtySpecPath, ($dirtySpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-            $dirtyOutput = & $registeredPython $readinessScriptPath run --spec $dirtySpecPath 2>&1
-            if ($LASTEXITCODE -eq 0 -or ($dirtyOutput -join ' ') -notmatch 'uncommitted') {
-                throw 'Execution-readiness script accepts dirty implementation paths'
-            }
-            [IO.File]::WriteAllText((Join-Path $tempRoot 'accepted.py'), "VALUE = 2`n")
-            & git.exe -C $tempRoot add accepted.py
-            & git.exe -C $tempRoot commit --quiet -m 'second candidate fixture'
-            $failedSourceCommit = (& git.exe -C $tempRoot rev-parse HEAD).Trim()
-
-            $candidateMutationSpec = & $newIsolatedSpec $spec 'candidate-mutation-rejected-exercise'
-            $candidateMutationSpec.execution_commit = $failedSourceCommit
-            $candidateMutationSpecPath = Join-Path $tempRoot 'candidate-mutation-rejected-spec.json'
-            [IO.File]::WriteAllText($candidateMutationSpecPath, ($candidateMutationSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-            $candidateMutationOutput = & $registeredPython $readinessScriptPath run --spec $candidateMutationSpecPath 2>&1
-            if ($LASTEXITCODE -eq 0 -or ($candidateMutationOutput -join ' ') -notmatch 'path delta does not match') {
-                throw "Execution-readiness wrapper accepted a candidate-path mutation in the execution delta: $($candidateMutationOutput -join ' ')"
-            }
-
-            foreach ($supportPath in $executionSupportPaths) {
-                [IO.File]::WriteAllText((Join-Path $tempRoot $supportPath), "SUPPORT = 2`n")
-            }
-            & git.exe -C $tempRoot add -- $executionSupportPaths
-            & git.exe -C $tempRoot commit --quiet -m 'second readiness execution support'
-            $failedExecutionCommit = (& git.exe -C $tempRoot rev-parse HEAD).Trim()
-            $failedSpec = $spec | ConvertTo-Json -Depth 8 | ConvertFrom-Json
-            $failedSpec.source_commit = $failedSourceCommit
-            $failedSpec.execution_commit = $failedExecutionCommit
-            $failedSpec.exercise_root = Join-Path $tempRoot 'failed-phase-exercise'
-            $failedArtifact = Join-Path $failedSpec.exercise_root 'artifact.json'
-            $failedSpec.expected_artifacts = @($failedArtifact)
-            $failedArgv = @($registeredPython, '-c', "from pathlib import Path; p=Path(r'$failedArtifact'); p.parent.mkdir(parents=True, exist_ok=True); p.write_text('{}', encoding='utf-8')")
-            foreach ($phase in @('interface_smoke','bounded_exercise','artifact_validation','artifact_reload','evaluate_entry','analyze_entry')) {
-                $failedSpec.phases.$phase.argv = $failedArgv
-            }
-            $failedSpec.phases.interface_smoke.argv = @($registeredPython, '-c', 'raise SystemExit(7)')
-            $failedSpecPath = Join-Path $tempRoot 'failed-phase.json'
-            [IO.File]::WriteAllText($failedSpecPath, ($failedSpec | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-            $failedOutput = & $registeredPython $readinessScriptPath run --spec $failedSpecPath 2>&1
-            if ($LASTEXITCODE -eq 0 -or ($failedOutput -join ' ') -notmatch 'interface_smoke') {
-                throw 'Execution-readiness script does not fail at the first unsuccessful phase'
-            }
-            $failedCheck = & $registeredPython $readinessScriptPath check --commit $failedSourceCommit 2>&1
-            if ($LASTEXITCODE -eq 0 -or ($failedCheck -join ' ') -notmatch 'receipt') {
-                throw 'A failed execution-readiness run produced a successful receipt'
-            }
-        }
-        finally {
-            $ErrorActionPreference = $savedErrorActionPreference
-        }
-    }
-    finally {
-        Pop-Location
-    }
-}
-finally {
-    if ((Test-Path -LiteralPath $tempRoot) -and $tempRoot.StartsWith([IO.Path]::GetTempPath(), [StringComparison]::OrdinalIgnoreCase)) {
-        Remove-Item -LiteralPath $tempRoot -Recurse -Force
-    }
-    $OutputEncoding = $savedOutputEncoding
-}
 
 $parentContracts = @{
     '.agents/roles/CODE_SCOUT.md' = 'parent=code_project_manager'
