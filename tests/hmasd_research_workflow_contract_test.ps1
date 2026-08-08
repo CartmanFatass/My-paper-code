@@ -58,6 +58,12 @@ $workflowAuditNormalized = $workflowAudit -replace '\s+', ' '
 $workflowCollaboration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md')
 $workflowCollaborationNormalized = $workflowCollaboration -replace '\s+', ' '
 $workflowCollaborationUi = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-collaborative-workflow-design/agents/openai.yaml')
+$workflowMapPath = Join-Path $repo 'docs/project/WORKFLOW_MAP.md'
+if (-not (Test-Path -LiteralPath $workflowMapPath -PathType Leaf)) {
+    throw 'Workflow Map pointer target is missing'
+}
+$workflowMap = Get-Content -Raw -LiteralPath $workflowMapPath
+$workflowMapNormalized = $workflowMap -replace '\s+', ' '
 $sessionWorkspaceContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SESSION_WORKSPACE_CONTRACT.md')
 $sessionWorkspaceContractNormalized = $sessionWorkspaceContract -replace '\s+', ' '
 $independentResearchRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
@@ -175,10 +181,10 @@ foreach ($required in @(
     'all_workspace_agents_auto_load_this_file=true',
     'project_history_in_router=forbidden',
     'role_specific_procedure_in_router=forbidden',
-    'dedicated Workflow Design Manager task',
-    'Code Project Manager task',
-    'registered native child',
-    'docs/project/CURRENT_WORK.md` is a WDM-owned public link/schema index',
+    'workflow_design_owner=workflow_design_manager',
+    'workflow_design_charter=WORKFLOW_DESIGN_MANAGER.md',
+    'docs/project/CURRENT_WORK.md',
+    'docs/project/WORKFLOW_MAP.md',
     'workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces',
     'workflow_design_manager_workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces',
     'workflow_design_manager_workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces',
@@ -202,36 +208,12 @@ foreach ($required in @(
     'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
     'code_project_manager_experiment_dispatch_and_result_routing=exclusive',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
-    'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST',
-    'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
-    'agentify_transport_request_fields=batch_path|return_task_id',
     'hmasd-collaborative-workflow-design',
     'workflow_change_skill=hmasd-workflow-change-audit',
-    'superpowers_execution=disabled',
-    'backward_compatibility=not_required',
-    'test_scope=proof_sized',
-    'hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
-    'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
-    'codebase_policy=architecture_first_module_boundaries',
-    'maintainability_acceptance=clear_ownership|minimal_public_surface|directed_dependencies|state_and_complexity_isolation|change_locality|focused_contract_evidence',
-    'line_and_file_counts=diagnostic_only_never_admission_or_acceptance',
-    'per_file_hash_handoff=forbidden',
-    'isolated_worktree_identity=workspace_ticket_only',
-    'hmasd_worktree_root=C:/worktrees/HMASD',
     'project_write_scope=current_checkout_plus_verified_ticket_worktree',
     'external_workspace_access=read_only',
-    'raw_external_worktree_creation=forbidden',
-    'drive_or_path_alias_creation=forbidden',
-    'workflow_gate_form=budget_grant_or_scope_decision_only',
-    'per_action_confirmation_inside_active_grant=forbidden',
-    'reversible_internal_action_user_gate=forbidden',
-    'internal_role_handoff_within_active_grant=no_user_authority_required',
-    'scripts/hmasd_workspace_ticket.py',
-    'scripts/hmasd_workspace_boundary_guard.py',
     'cross_task_transport=codex_native_send_message_to_thread',
-    'cross_task_target=current_thread_id_from_user_or_native_task_context',
     'cross_task_model_and_thinking_overrides=omit',
-    'code_project_manager_formal_review_workstreams=formal_toy_research|uav_validation',
     'same_file_concurrent_writes=forbidden')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
@@ -244,34 +226,10 @@ foreach ($retired in @(
     if ($agents.Contains($retired)) { throw "AGENTS retains retired fixed routing: $retired" }
 }
 foreach ($required in @(
-    'independent_research_canonical_scientific_authority=none',
-    'independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews|temp/handoffs/explorer_to_code_manager/',
-    'independent_research_explorer_public_handoff_git_authority=none',
-    'independent_research_explorer_public_handoff_read=temp/handoffs/code_manager_to_explorer/',
-    'code_project_manager_public_handoff_read=temp/handoffs/explorer_to_code_manager/',
-    'code_project_manager_public_handoff_write_no_git=temp/handoffs/code_manager_to_explorer/',
-    'public_semantic_handoff_contract=docs/project/handoffs/README.md',
-    'public_semantic_handoff_live_root=temp/handoffs',
-    'public_semantic_handoff_admission=receiver_judgment_after_bounded_read_only_reconnaissance',
-    'explorer_project_handoff_instruction_owner=independent_research_explorer',
-    'explorer_project_handoff_instruction=explicit_named_actions_no_receiver_inference',
-    'explorer_project_handoff_instruction_effect=authorizes_code_project_manager_named_treatment_execution',
-    'explorer_project_validation_read_authority=project_wide_read_only_as_needed',
-    'explorer_project_validation_semantic_acceptance_owner=external_pro',
-    'explorer_project_validation_acceptance_request_owner=independent_research_explorer',
-    'explorer_project_validation_acceptance_source=public_github_exact_pushed_revision',
-    'code_project_manager_explorer_acceptance_review_request_authority=none',
-    'code_project_manager_treatment_substitution_authority=none',
-    'independent_research_continuity_entry=local_research/RESEARCH_CONTINUITY.md',
-    'independent_research_continuity_owner=independent_research_explorer',
-    'independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews',
-    'independent_research_per_review_authorization=not_required_inside_active_explorer_grant',
-    'independent_research_wdm_campaign_approval=none',
-    'research_child_fork_defaults=research_scout:none|research_innovator:none|research_principles_analyst:none|research_critic:none',
     '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md',
     'hmasd-independent-research-exploration',
     'hmasd-independent-research-pro-review')) {
-    if (-not $agents.Contains($required)) { throw "AGENTS missing research route: $required" }
+    if (-not $agents.Contains($required)) { throw "AGENTS missing routed pointer: $required" }
 }
 foreach ($required in @(
     'owns both independent-research direction reviews and methodology',
@@ -537,10 +495,6 @@ foreach ($required in @(
     }
 }
 foreach ($entry in @(
-    @($agents, 'explorer_project_treatment_levels=A_read_only_reconnaissance_or_nonintervening_probe|B_small_exploratory_real_toy_algorithm_experiment|C_conclusion_bearing_promotion_retirement_or_expensive_experiment'),
-    @($agents, 'explorer_project_default_treatment=B_after_implementable_differentiating_comparator_backed_mechanism'),
-    @($agents, 'explorer_project_missing_engineering_objects=code_project_manager_constructs_or_connects_minimal_objects'),
-    @($agents, 'explorer_project_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review'),
     @($independentResearchRole, 'research_treatment_levels=A_read_only_reconnaissance_or_nonintervening_probe|B_small_exploratory_real_toy_algorithm_experiment|C_conclusion_bearing_promotion_retirement_or_expensive_experiment'),
     @($independentResearchRole, 'methodology_reference=research-methodology.md_required_for_C_or_named_science_review_trigger'),
     @($independentResearchRole, 'research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review'),
@@ -1132,6 +1086,42 @@ foreach ($required in @(
     if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 foreach ($required in @(
+    'workflow_delegation_economics=cheaper_registered_children_by_default',
+    'workflow_direct_edit_boundary=indivisible_semantic_junctions|integration_conflict_repair|final_acceptance_git_reload|no_child_action_needed',
+    'workflow_known_local_work=direct_single_implementer',
+    'workflow_missing_interface_facts=workflow_auditor_before_freeze',
+    'workflow_nonoverlapping_families=one_implementer_per_family',
+    'workflow_simple_mechanical_edit=single_implementer_without_scout_or_per_edit_reviewer',
+    'workflow_delegation_shape=adaptive_composition_not_fixed_state_machine',
+    'workflow_context_model=compact_task_model_plus_docs/project/WORKFLOW_MAP.md',
+    'workflow_context_loading=compact_child_conclusions_and_final_diff',
+    'workflow_context_expansion=concrete_interface_or_authority_dependency_only',
+    'workflow_successor_continuity=fresh_wdm_task_after_coherent_batch',
+    'workflow_successor_brief=short_reload_receipt_without_task_creation_registry_or_approval_state',
+    'workflow_map_owner=workflow_design_manager',
+    'workflow_map_maintenance=stable_role_interface_dependency_or_context_boundary_change_same_commit')) {
+    if (-not $workflowAuditNormalized.Contains($required)) {
+        throw "Workflow delegation/context contract missing: $required"
+    }
+}
+$obsoleteDispatchRule = @('Do not', 'create', 'a', 'child', 'when', 'dispatch/packet', 'review', 'costs', 'more', 'than', 'the') -join ' '
+if ($workflowAudit.Contains($obsoleteDispatchRule)) {
+    throw 'Workflow audit Skill retains the obsolete dispatch-cost discouragement'
+}
+foreach ($required in @(
+    'owner_role=workflow_design_manager',
+    'Owner roles and stable outputs',
+    'Dependency direction',
+    'Minimum context loading',
+    'Event-triggered maintenance',
+    'no timer',
+    'no freshness checker',
+    'no registry')) {
+    if (-not $workflowMapNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+        throw "Workflow Map contract missing: $required"
+    }
+}
+foreach ($required in @(
     'shared_workflow_surface_owner=workflow_design_manager',
     'shared_workflow_design_authority=exclusive',
     'shared_workflow_acceptance_authority=exclusive',
@@ -1159,11 +1149,11 @@ foreach ($required in @(
     if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 foreach ($required in @(
-    'nontrivial_task_strategy=bounded_reconnaissance_then_frozen_execution_plan',
-    'formal_plan_threshold=more_than_few_steps_or_material_uncertainty',
-    'plan_invalidated_action=stop_affected_branch|update_from_evidence|resume',
-    'plan_first_user_confirmation_effect=none_inside_active_grant')) {
-    if (-not $agents.Contains($required)) { throw "AGENTS missing plan-first execution rule: $required" }
+    'workflow_execution_plan=bounded_reconnaissance_then_frozen_execution_plan',
+    'workflow_formal_plan_threshold=more_than_few_steps_or_material_uncertainty',
+    'workflow_plan_invalidated_action=stop_affected_branch|update_from_evidence|resume',
+    'workflow_plan_first_user_confirmation_effect=none_inside_active_grant')) {
+    if (-not $workflowCollaborationNormalized.Contains($required)) { throw "Workflow collaboration Skill missing plan-first execution rule: $required" }
 }
 foreach ($required in @(
     'runtime_authority=none',
@@ -1183,6 +1173,20 @@ foreach ($required in @(
     'workflow cost audit explicitly requested by the user',
     'present the complete revised plan')) {
     if (-not $workflowCollaborationNormalized.Contains($required)) { throw "Workflow collaboration Skill missing: $required" }
+}
+foreach ($required in @(
+    'workflow_context_model=compact_task_model_plus_docs/project/WORKFLOW_MAP.md',
+    'workflow_context_loading=compact_child_conclusions_and_final_diff',
+    'workflow_context_expansion=concrete_interface_or_authority_dependency_only',
+    'workflow_delegation_economics=cheaper_registered_children_by_default',
+    'workflow_delegation_shape=adaptive_composition_not_fixed_state_machine',
+    'workflow_successor_continuity=fresh_wdm_task_after_coherent_batch',
+    'workflow_successor_brief=short_reload_receipt_without_task_creation_registry_or_approval_state',
+    'workflow_map_owner=workflow_design_manager',
+    'workflow_map_maintenance=stable_role_interface_dependency_or_context_boundary_change_same_commit')) {
+    if (-not $workflowCollaborationNormalized.Contains($required)) {
+        throw "Workflow collaboration context/delegation contract missing: $required"
+    }
 }
 if (-not $workflowCollaborationUi.Contains('allow_implicit_invocation: false')) {
     throw 'Workflow collaboration Skill permits implicit invocation'

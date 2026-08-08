@@ -5,7 +5,6 @@ role=workflow_reviewer
 callable_agent_type=hmasd-workflow-reviewer
 role_kind=registered_nonpersistent_native_child
 parent=workflow_design_manager
-parent_session_id=019fb73d-5635-7b63-b165-6c5129bc0217
 assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace
 model=gpt-5.6-luna
 reasoning_effort=max

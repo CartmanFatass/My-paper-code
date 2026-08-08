@@ -11,6 +11,7 @@ $config = Read-RepoFile '.codex/config.toml'
 $manager = Read-RepoFile '.agents/roles/WORKFLOW_DESIGN_MANAGER.md'
 $skill = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/SKILL.md'
 $harness = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py'
+$workflowMap = Read-RepoFile 'docs/project/WORKFLOW_MAP.md'
 
 $profiles = @(
     @('.agents/roles/WORKFLOW_AUDITOR.md', '.codex/agents/hmasd-workflow-auditor.toml', 'hmasd-workflow-auditor', '[agents."HMASDWorkflowAuditor"]', 'gpt-5.6-luna', 'high', 'read-only', 'WORKFLOW_IMPACT_PACKET'),
@@ -28,10 +29,13 @@ foreach ($entry in $profiles) {
     }
     foreach ($required in @(
         "callable_agent_type=$($entry[2])", 'parent=workflow_design_manager',
-        'parent_session_id=019fb73d-5635-7b63-b165-6c5129bc0217',
+        'role_kind=registered_nonpersistent_native_child',
         'assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace',
         'acceptance_authority=none', 'child_authority=none', 'current_work_read=forbidden')) {
         if (-not $role.Contains($required)) { throw "$($entry[2]) role missing: $required" }
+    }
+    if ($role -match '(?m)^parent_session_id=') {
+        throw "$($entry[2]) retains a fixed historical session identity"
     }
     if (-not $config.Contains($entry[3]) -or
         -not $config.Contains("config_file = `"./agents/$($entry[2]).toml`"")) {
@@ -63,8 +67,8 @@ foreach ($required in @(
     'workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace',
     'workflow_child_acceptance_authority=none',
     'workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match',
-    'For six or more paths', 'one implementer per exact nonoverlapping file family',
-    'do not impose a fixed', 'two-implementer ceiling',
+    'For six or more paths', 'workflow_nonoverlapping_families=one_implementer_per_family',
+    'do not impose a fixed', 'two-Implementer ceiling',
     'simple_operation_active_engineering_budget_minutes=20',
     'simple_operation_failed_probe_budget=2',
     'simple_operation_paths=one_normal_plus_one_simple_fallback',
@@ -82,6 +86,42 @@ foreach ($required in @(
     'Prefer positive capability text',
     '`git rev-parse --show-toplevel`')) {
     if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing: $required" }
+}
+
+foreach ($required in @(
+    'workflow_delegation_economics=cheaper_registered_children_by_default',
+    'workflow_direct_edit_boundary=indivisible_semantic_junctions|integration_conflict_repair|final_acceptance_git_reload|no_child_action_needed',
+    'workflow_known_local_work=direct_single_implementer',
+    'workflow_missing_interface_facts=workflow_auditor_before_freeze',
+    'workflow_nonoverlapping_families=one_implementer_per_family',
+    'workflow_simple_mechanical_edit=single_implementer_without_scout_or_per_edit_reviewer',
+    'workflow_delegation_shape=adaptive_composition_not_fixed_state_machine',
+    'workflow_context_model=compact_task_model_plus_docs/project/WORKFLOW_MAP.md',
+    'workflow_context_loading=compact_child_conclusions_and_final_diff',
+    'workflow_context_expansion=concrete_interface_or_authority_dependency_only',
+    'workflow_successor_continuity=fresh_wdm_task_after_coherent_batch',
+    'workflow_successor_brief=short_reload_receipt_without_task_creation_registry_or_approval_state',
+    'workflow_map_owner=workflow_design_manager',
+    'workflow_map_maintenance=stable_role_interface_dependency_or_context_boundary_change_same_commit')) {
+    if (-not $skill.Contains($required)) { throw "Workflow delegation/context contract missing: $required" }
+}
+$obsoleteDispatchRule = @('Do not', 'create', 'a', 'child', 'when', 'dispatch/packet', 'review', 'costs', 'more', 'than', 'the') -join ' '
+if ($skill.Contains($obsoleteDispatchRule)) {
+    throw 'Workflow audit Skill retains the obsolete dispatch-cost discouragement'
+}
+
+foreach ($required in @(
+    'owner_role=workflow_design_manager',
+    'Owner roles and stable outputs',
+    'Dependency direction',
+    'Minimum context loading',
+    'Event-triggered maintenance',
+    'no timer',
+    'no freshness checker',
+    'no registry')) {
+    if (-not (($workflowMap -replace '\s+', ' ').ToLowerInvariant()).Contains($required.ToLowerInvariant())) {
+        throw "Workflow Map contract missing: $required"
+    }
 }
 
 $normalizedMaintainabilityContract = (($manager + "`n" + $skill) -replace '\s+', ' ')

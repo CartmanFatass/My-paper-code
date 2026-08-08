@@ -81,15 +81,37 @@ workflow_child_parent=workflow_design_manager
 workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace
 workflow_child_acceptance_authority=none
 workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match
+workflow_delegation_economics=cheaper_registered_children_by_default
+workflow_direct_edit_boundary=indivisible_semantic_junctions|integration_conflict_repair|final_acceptance_git_reload|no_child_action_needed
+workflow_known_local_work=direct_single_implementer
+workflow_missing_interface_facts=workflow_auditor_before_freeze
+workflow_nonoverlapping_families=one_implementer_per_family
+workflow_simple_mechanical_edit=single_implementer_without_scout_or_per_edit_reviewer
+workflow_delegation_shape=adaptive_composition_not_fixed_state_machine
+workflow_context_model=compact_task_model_plus_docs/project/WORKFLOW_MAP.md
+workflow_context_loading=compact_child_conclusions_and_final_diff
+workflow_context_expansion=concrete_interface_or_authority_dependency_only
+workflow_successor_continuity=fresh_wdm_task_after_coherent_batch
+workflow_successor_brief=short_reload_receipt_without_task_creation_registry_or_approval_state
+workflow_map_owner=workflow_design_manager
+workflow_map_maintenance=stable_role_interface_dependency_or_context_boundary_change_same_commit
 ```
 
-Children reduce context and mechanical effort; WDM retains authority, semantic
-junctions, conflict resolution, final diff inspection, acceptance, Git and
-routing. Do not create a child when dispatch/packet review costs more than the
-direct edit. For six or more paths, auditors may map disjoint families.
-Dispatch one implementer per exact nonoverlapping file family up to available
-native slots, reserving one slot for WDM integration; do not impose a fixed
-two-implementer ceiling.
+Children are the default cost-routing path for bounded mechanical work: they
+move routine tasks to cheaper registered models while WDM retains authority,
+semantic junctions, conflict resolution, final diff inspection, acceptance,
+Git and routing. WDM edits directly only indivisible semantic junctions,
+integration or conflict repair, final acceptance/Git/reload, or cases needing
+no child action.
+
+Known local work may go directly to one Implementer. Missing interface facts use
+the Workflow Auditor as Scout before freezing. For six or more paths, auditors
+may map disjoint families, and WDM dispatches one Implementer per exact
+non-overlapping file family up to available native slots, reserving one slot
+for WDM integration; do not impose a fixed two-Implementer ceiling. A spelling
+or local mechanical edit may use one Implementer without a Scout or a per-edit
+Reviewer. This is adaptive composition, not a fixed Scout→Implementer→Reviewer
+state machine.
 Each child has exactly one existing role charter. Every profile is registered
 exactly once and receives a fresh-task profile smoke after registry changes.
 
@@ -100,6 +122,14 @@ whole integrated diff. Review is batch-scoped rather than per implementer. The
 reviewers evaluate normal-path risk against complexity, maintenance, wall-clock
 and iteration-delay cost. Run one review phase only: no automatic second review,
 reviewer-of-reviewer, schema admission gate, wrapper or state machine.
+
+WDM starts each task with a compact task model and the stable
+`docs/project/WORKFLOW_MAP.md`. It consumes compact child conclusions and the
+final integrated diff, expanding context only along a concrete interface or
+authority dependency. After a coherent batch it prefers a fresh successor WDM
+task rather than carrying unrelated historical batches. A reload receipt may
+include a short successor brief, but it cannot create a task, registry or new
+approval state.
 
 ## Continuous change loop
 

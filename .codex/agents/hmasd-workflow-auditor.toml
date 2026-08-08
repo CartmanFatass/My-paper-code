@@ -25,5 +25,5 @@ Python where applicable and report the first causal failure without repair.
 
 Do not edit files, use Git mutations, contact tasks, invoke Skills or spawn
 agents. Return exactly one WORKFLOW_IMPACT_PACKET or WORKFLOW_VERIFY_PACKET to
-Workflow Design Manager session 019fb73d-5635-7b63-b165-6c5129bc0217.
+the Workflow Design Manager native task context.
 """

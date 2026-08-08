@@ -15,6 +15,11 @@ temporary_workspace_root=temp/sessions/<role_id>/
 child_assignment_brief=temp/sessions/<parent_role>/assignments/<assignment_id>.md
 child_assignment_format=self_contained_natural_language_not_schema_admission
 child_forked_context=background_only
+workflow_session_identity=role_based
+workflow_session_owner_id=workflow_design_manager
+workflow_successor_rotation=integrated_batch_completion
+workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface
+workflow_thread_registry=forbidden
 same_file_concurrent_writes=forbidden
 public_current_work_partition_status=active_index_and_partitions
 public_current_work_index=docs/project/CURRENT_WORK.md
@@ -129,7 +134,12 @@ and concurrent writes to one file are forbidden.
 
 The WDM session record is
 `docs/project/current-work/sessions/workflow_design_manager.md`; its common
-record is `docs/project/current-work/common/workflow_control_plane.md`.
+record is `docs/project/current-work/common/workflow_control_plane.md`. Both
+use `session_owner_id=workflow_design_manager` as the stable role identity.
+Batch completion is the preferred successor-task rotation boundary. A compact
+successor brief may name the current workflow commit, accepted stable changes,
+any real unfinished item, the next user goal and the next map/interface section
+to load. The workspace contract creates no task and stores no thread registry.
 Canonical science, code, runtime and review evidence remain in their existing
 owner paths and are linked rather than copied.
 

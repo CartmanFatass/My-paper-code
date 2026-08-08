@@ -5,7 +5,6 @@
 ```text
 role=workflow_design_manager
 role_kind=dedicated_persistent_central_workflow_design_authority_task
-session_id=019fb73d-5635-7b63-b165-6c5129bc0217
 workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces
 workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces
 workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces
@@ -146,16 +145,31 @@ worktree path. Before editing, the child must verify that
 `git rev-parse --show-toplevel` equals that path exactly; a mismatch stops the
 child before any edit.
 
-Use auditors for disjoint impact families and one implementer per confirmed
-nonoverlapping file family at available native capacity. WDM integrates all
-implementer results into one coherent batch, then uses one independent Workflow
-Reviewer by default. It may run parallel reviewers only for genuinely
-independent review questions; each reviewer receives a distinct focus and may
-read the whole integrated diff. Review is batch-scoped rather than per
-implementer. Reviewers evaluate normal-path risk, complexity, maintenance and
-iteration delay; finding count is not value. WDM performs one review phase and
-does not create an automatic second review round, reviewer-of-reviewer, schema
-admission gate, wrapper or state machine.
+The Workflow Auditor is WDM's read-only Scout: it expands only the
+assignment-named control-plane question and returns compact interface and
+dependency evidence. It does not choose the design, add paths or accept the
+result.
+
+Delegation is an economic default, not a complexity threshold. WDM is the
+high-capability semantic integrator and normally assigns bounded mechanical
+implementation to the registered Implementer tier, including simple edits,
+so that expensive semantic context stays in WDM. Known local work may go
+straight to one Implementer; uncertain interfaces add the read-only Scout;
+one Reviewer checks a coherent integrated batch rather than every small edit.
+WDM edits directly only for an indivisible semantic junction, integration or
+conflict repair, final diff acceptance, Git/reload work, or when no child action
+is actually needed.
+
+Use one Implementer per confirmed nonoverlapping file family at available
+native capacity. WDM integrates all implementer results into one coherent
+batch, then uses one independent Workflow Reviewer by default. It may run
+parallel reviewers only for genuinely independent review questions; each
+reviewer receives a distinct focus and may read the whole integrated diff.
+Review is batch-scoped rather than per implementer. Reviewers evaluate normal-
+path risk, complexity, maintenance and iteration delay; finding count is not
+value. WDM performs one review phase and does not create an automatic second
+review round, reviewer-of-reviewer, schema admission gate, wrapper or state
+machine.
 
 ## Role and Skill capability standard
 
@@ -182,6 +196,13 @@ science, review result or runtime state. The durable workspace holds compact
 plans and receipts; the temporary workspace holds scratch and handoffs.
 Other sessions retain their own operational/scientific records and durable/temp
 content, but those paths grant no workflow-design authority.
+
+WDM retains user intent, the stable Workflow Map, frozen decisions, compact
+child conclusions and the final integrated diff. It does not repeatedly load
+full task history or every local control-plane surface. At a coherent batch
+boundary, prefer successor-task rotation through stable records and brief
+receipts; identity follows the role and native task context, with no registry
+and no automatic task creation.
 
 Every workflow change classifies `AGENTS.md` as `modify` or
 `unchanged-valid`. Any role, session, Skill, profile, authority, route or retired
