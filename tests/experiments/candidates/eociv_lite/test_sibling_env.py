@@ -52,6 +52,31 @@ class TestLifecycleFsm:
         fsm.apply(roster_env.MembershipChange(rejoined=(0,)), 24)
         assert fsm.receipt(0, 24).spell_epoch == 2
 
+    def test_fsm_terminal_state_is_distinct(self):
+        # Pro's hardening: a rejoin after TERMINAL departure must be rejected.
+        fsm = sib.LifecycleFsm(4)
+        fsm.apply(roster_env.MembershipChange(joined=(0,)), 0)
+        fsm.apply(roster_env.MembershipChange(terminally_left=(0,)), 36)
+        with pytest.raises(sib.LifecycleError):
+            fsm.apply(roster_env.MembershipChange(rejoined=(0,)), 40)
+        with pytest.raises(sib.LifecycleError):
+            fsm.apply(roster_env.MembershipChange(joined=(0,)), 40)
+
+    def test_fsm_receipt_validation(self):
+        fsm = sib.LifecycleFsm(4)
+        with pytest.raises(sib.LifecycleError):
+            fsm.apply(roster_env.MembershipChange(joined=(0, 0)), 0)
+        with pytest.raises(sib.LifecycleError):
+            fsm.apply(roster_env.MembershipChange(joined=(9,)), 0)
+        fsm.apply(roster_env.MembershipChange(joined=(0,)), 0)
+        with pytest.raises(sib.LifecycleError):
+            fsm.apply(
+                roster_env.MembershipChange(
+                    temporarily_left=(0,), terminally_left=(0,)
+                ),
+                12,
+            )
+
     def test_age_is_not_the_epoch(self):
         # Pro's correction: rejoined members retain age; fresh joins reset it.
         # The FSM's epochs must disagree with any age-derived notion.
@@ -74,7 +99,7 @@ class TestShockModel:
         assert states[0] in (sib.SHOCK_A, sib.SHOCK_B)
         assert states[2] in (sib.SHOCK_A, sib.SHOCK_B)
         # Measured draw for episode 0 under the registered seeds.
-        assert states == (sib.SHOCK_A, sib.SHOCK_NONE, sib.SHOCK_B)
+        assert states == (sib.SHOCK_A, sib.SHOCK_NONE, sib.SHOCK_A)
 
     def test_shock_not_disclosed_in_observations(self):
         forced_a = sib.EocivSiblingRosterEnv(
@@ -122,6 +147,7 @@ class TestOpportunity:
         _drive_to(env, 12)
         opportunity = env.opportunity(0)
         assert opportunity.identity == sib.EdgeIdentity(
+            profile_registration_id="train_4_3_6_5",
             episode_id=0,
             receiver_member_key=1,
             receiver_active_spell_epoch=1,
@@ -130,7 +156,7 @@ class TestOpportunity:
             lifecycle_event_index=0,
         )
         assert opportunity.eligible and opportunity.cell_class == "CRITICAL"
-        assert opportunity.cluster_id == "ep0-ev0"
+        assert opportunity.cluster_id == "train_4_3_6_5-ep0-ev0"
 
     def test_opportunity_only_at_the_boundary(self):
         env = sib.EocivSiblingRosterEnv(_ledger(), sibling_seed=SIBLING_SEED)
@@ -208,14 +234,25 @@ class TestActuation:
 
 
 class TestControlTape:
-    def test_tape_is_deterministic_and_body_free(self):
-        first = sib.control_tape_open(3, 1, tape_seed=41211)
-        second = sib.control_tape_open(3, 1, tape_seed=41211)
+    def test_tape_is_deterministic_body_free_and_profile_qualified(self):
+        first = sib.control_tape_open("train_4_3_6_5", 3, 1, tape_seed=41211)
+        second = sib.control_tape_open("train_4_3_6_5", 3, 1, tape_seed=41211)
         assert first == second
         import inspect
 
         parameters = inspect.signature(sib.control_tape_open).parameters
-        assert set(parameters) == {"episode_id", "event_index", "tape_seed"}
+        assert set(parameters) == {
+            "profile_registration_id", "episode_id", "event_index", "tape_seed"
+        }
+        draws_by_profile = {
+            profile.name: tuple(
+                sib.control_tape_open(profile.name, episode, event, tape_seed=41211)
+                for episode in range(8)
+                for event in range(3)
+            )
+            for profile in roster_env.TRAIN_PROFILES
+        }
+        assert len(set(draws_by_profile.values())) == 3
 
 
 class TestDisabledProjection:

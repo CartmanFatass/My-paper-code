@@ -142,9 +142,30 @@ class LifecycleError(RuntimeError):
     """The fail-closed lifecycle FSM saw an inadmissible transition."""
 
 
-def _sibling_rng(seed: int, episode_id: int, stream: int) -> np.random.Generator:
+def profile_registration_int(profile_registration_id: str) -> int:
+    """Stable 64-bit integer for a profile registration id (seed material)."""
+    import hashlib
+
+    digest = hashlib.sha256(profile_registration_id.encode("ascii")).digest()
+    return int.from_bytes(digest[:8], "big")
+
+
+def _sibling_rng(
+    profile_registration_id: str, seed: int, episode_id: int, stream: int
+) -> np.random.Generator:
+    # The profile is part of the scientific opportunity identity (Pro's
+    # profile-qualification correction): the same episode id under different
+    # profiles must never share a generator.  CRN across profiles, if ever
+    # wanted, goes through a separate world_block_id — never through this
+    # identity.
     return np.random.default_rng(
-        (_SIBLING_SEED_DOMAIN, int(seed), int(episode_id), int(stream))
+        (
+            _SIBLING_SEED_DOMAIN,
+            profile_registration_int(profile_registration_id),
+            int(seed),
+            int(episode_id),
+            int(stream),
+        )
     )
 
 
@@ -164,42 +185,75 @@ class SpellReceipt:
 
 
 class LifecycleFsm:
-    """Fail-closed spell tracker driven only by MembershipChange receipts."""
+    """Fail-closed spell tracker driven only by MembershipChange receipts.
+
+    Temporary and terminal departures are DISTINCT closed states (Pro's
+    hardening correction): a rejoin is legal only after a temporary closure —
+    a synthetic rejoin after terminal departure is rejected, as are
+    overlapping membership-change fields, duplicate keys within a receipt,
+    and keys outside the registered capacity.
+    """
 
     _INACTIVE = "INACTIVE"
     _ACTIVE = "ACTIVE"
-    _CLOSED = "CLOSED"
+    _TEMPORARILY_CLOSED = "TEMPORARILY_CLOSED"
+    _TERMINALLY_CLOSED = "TERMINALLY_CLOSED"
 
     def __init__(self, capacity: int):
+        self._capacity = int(capacity)
         self._state = [self._INACTIVE] * capacity
         self._epoch = [0] * capacity
         self._opened_at = [-1] * capacity
         self._departed_at: dict[int, int] = {}
 
+    def _validate_receipt(self, change: roster_env.MembershipChange) -> None:
+        fields = (
+            change.joined, change.rejoined, change.temporarily_left,
+            change.terminally_left,
+        )
+        for keys in fields:
+            if len(set(keys)) != len(keys):
+                raise LifecycleError(f"duplicate keys within a receipt: {keys}")
+            for key in keys:
+                if not 0 <= int(key) < self._capacity:
+                    raise LifecycleError(
+                        f"member key outside registered capacity: {key}"
+                    )
+        flat = [key for keys in fields for key in keys]
+        if len(set(flat)) != len(flat):
+            raise LifecycleError(
+                "overlapping membership-change fields in one receipt"
+            )
+
     def apply(self, change: roster_env.MembershipChange, time: int) -> None:
+        self._validate_receipt(change)
         for key in change.joined:
-            if self._state[key] == self._CLOSED:
-                raise LifecycleError(f"fresh join over a closed spell: member {key}")
-            if self._state[key] == self._ACTIVE:
-                raise LifecycleError(f"join of an active member: member {key}")
+            if self._state[key] != self._INACTIVE:
+                raise LifecycleError(
+                    f"fresh join requires an inactive member: member {key} "
+                    f"is {self._state[key]}"
+                )
             self._state[key] = self._ACTIVE
             self._epoch[key] += 1
             self._opened_at[key] = time
         for key in change.rejoined:
-            if self._state[key] != self._CLOSED:
-                raise LifecycleError(f"rejoin without a closed spell: member {key}")
+            if self._state[key] != self._TEMPORARILY_CLOSED:
+                raise LifecycleError(
+                    f"rejoin requires a temporarily closed spell: member {key} "
+                    f"is {self._state[key]}"
+                )
             self._state[key] = self._ACTIVE
             self._epoch[key] += 1
             self._opened_at[key] = time
         for key in change.temporarily_left:
             if self._state[key] != self._ACTIVE:
                 raise LifecycleError(f"temporary leave of inactive member {key}")
-            self._state[key] = self._CLOSED
+            self._state[key] = self._TEMPORARILY_CLOSED
             self._departed_at[key] = time
         for key in change.terminally_left:
             if self._state[key] != self._ACTIVE:
                 raise LifecycleError(f"terminal leave of inactive member {key}")
-            self._state[key] = self._CLOSED
+            self._state[key] = self._TERMINALLY_CLOSED
             self._departed_at[key] = time
 
     def receipt(self, member_key: int, time: int) -> SpellReceipt:
@@ -218,8 +272,15 @@ class LifecycleFsm:
 
 @dataclass(frozen=True)
 class EdgeIdentity:
-    """Pro's complete edge identity tuple."""
+    """Pro's complete edge identity tuple, profile-qualified.
 
+    The registered gate population reuses episode ids across profiles, so the
+    profile registration id is part of the scientific opportunity identity —
+    without it, 72 rows collapse onto 24 arm/tape keys (Pro's identity
+    correction).
+    """
+
+    profile_registration_id: str
     episode_id: int
     receiver_member_key: int
     receiver_active_spell_epoch: int
@@ -317,14 +378,23 @@ def _array_hex(values: np.ndarray) -> str:
     return hashlib.sha256(np.ascontiguousarray(values).tobytes()).hexdigest()
 
 
-def control_tape_open(episode_id: int, event_index: int, *, tape_seed: int) -> bool:
-    """D_C: precommitted propensity draw keyed ONLY by pre-outcome cluster ids.
+def control_tape_open(
+    profile_registration_id: str, episode_id: int, event_index: int, *, tape_seed: int
+) -> bool:
+    """D_C for GATE SUPPORT ONLY: a propensity draw keyed by pre-outcome
+    cluster identifiers (profile-qualified per Pro's identity correction).
 
     The function signature is the guarantee: no payload body, reward,
     post-event state or learned decision can reach it, because none of them is
-    a parameter.
+    a parameter.  This Bernoulli-0.5 probe is NOT the registered outcome
+    control — the frozen experiment uses an exact-rate, profile-matched
+    permutation tape (see capability_gate.REGISTERED_OUTCOME_EXPERIMENT), and
+    the gate asserts the focal outcome design does not reuse this function.
     """
-    rng = _sibling_rng(tape_seed, episode_id, _CONTROL_TAPE_STREAM + event_index)
+    rng = _sibling_rng(
+        profile_registration_id, tape_seed, episode_id,
+        _CONTROL_TAPE_STREAM + event_index,
+    )
     return bool(rng.random() < 0.5)
 
 
@@ -409,7 +479,8 @@ class EocivSiblingRosterEnv:
                 states.append(SHOCK_NONE)
                 continue
             rng = _sibling_rng(
-                self.sibling_seed, self.ledger.episode_id, _SHOCK_STREAM + event_index
+                self.ledger.profile.name, self.sibling_seed,
+                self.ledger.episode_id, _SHOCK_STREAM + event_index,
             )
             states.append(SHOCK_A if rng.random() < float(CRITICAL_PRIOR[SHOCK_A]) else SHOCK_B)
         return tuple(states)
@@ -457,12 +528,15 @@ class EocivSiblingRosterEnv:
         if len(active_keys) < 2:
             raise RuntimeError("EOCIV opportunity requires two active members")
 
+        profile_id = self.ledger.profile.name
         carrier_rng = _sibling_rng(
-            self.sibling_seed, self.ledger.episode_id, _CARRIER_STREAM + event_index
+            profile_id, self.sibling_seed, self.ledger.episode_id,
+            _CARRIER_STREAM + event_index,
         )
         source_key = int(active_keys[carrier_rng.integers(len(active_keys))])
         receiver_rng = _sibling_rng(
-            self.sibling_seed, self.ledger.episode_id, _RECEIVER_STREAM + event_index
+            profile_id, self.sibling_seed, self.ledger.episode_id,
+            _RECEIVER_STREAM + event_index,
         )
         receiver_candidates = [key for key in active_keys if key != source_key]
         receiver_key = int(receiver_candidates[receiver_rng.integers(len(receiver_candidates))])
@@ -480,6 +554,7 @@ class EocivSiblingRosterEnv:
             eligible, reason = False, "unauthenticated_spell_epoch"
 
         identity = EdgeIdentity(
+            profile_registration_id=profile_id,
             episode_id=self.ledger.episode_id,
             receiver_member_key=receiver_key,
             receiver_active_spell_epoch=receiver_receipt.spell_epoch,
@@ -491,7 +566,7 @@ class EocivSiblingRosterEnv:
             identity=identity,
             physical_tick=tick,
             cell_class=CELL_CLASS[event_index],
-            cluster_id=f"ep{self.ledger.episode_id}-ev{event_index}",
+            cluster_id=f"{profile_id}-ep{self.ledger.episode_id}-ev{event_index}",
             receiver_receipt=receiver_receipt,
             source_receipt=source_receipt,
             eligible=eligible,
