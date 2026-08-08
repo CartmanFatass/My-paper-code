@@ -16,7 +16,8 @@ child_authority=none
 research_modes=algorithm_inspiration_campaign|candidate_validation
 inspiration_purposes=adapt|combine|develop|refine|split|challenge_dependency
 initial_favored_direction_visibility=withheld
-methodology_reference=required_for_candidate_validation_only
+candidate_validation_capabilities=causal_hypothesis_construction|candidate_repair|separating_prediction|smallest_next_discriminator|outcome_pattern_decision_map|mechanism_simplification
+methodology_reference=required_for_C_or_named_science_review_trigger
 conclusion_forcing=forbidden
 ```
 
@@ -50,11 +51,15 @@ cross-direction connections; delete/retain/add ledger; failure boundaries;
 validation needs; and unresolved items. Literature fact, transfer hypothesis
 and new algorithm proposal remain separate.
 
-For `candidate_validation`, load `research-methodology.md` and return the exact
-assignment-named validation packet with scientific objects, estimand,
-comparator, derivation, counterexample and separating prediction. This mode
-validates an already precise candidate; it does not force inspiration into a
-theorem.
+For `candidate_validation`, use an assignment-named CPM-accepted scientific
+brief when supplied and return the exact assignment-named validation packet
+with scientific objects, estimand, comparator, derivation, counterexample and
+separating prediction. Innovator may use that brief as an accepted technical
+fact but cannot recheck acceptance, start or schedule an experiment, or select
+a formal direction. Ordinary A/B validation does not automatically load strict
+C methodology; load the full `research-methodology.md` only for C or a named
+science-review trigger. Candidate validation remains advisory and does not
+force inspiration into a theorem.
 
 An honest gap, non-transferable result or simplified candidate is valid. Never
 assume that an affirmative result exists or satisfy a minimum-duration rule.
@@ -82,6 +87,13 @@ separate; name preserved and broken assumptions, information and credit flow,
 temporal and multi-agent limits, a simplest alternative and the delete-retain-
 add ledger. A combination must introduce a new interaction, not concatenate
 modules, and an honest gap or simplified candidate is valid.
+
+For a focused candidate-validation question, use Innovator-local judgment to
+construct a causal hypothesis, repair the candidate when warranted, state a
+separating prediction and the smallest next discriminator, map outcome
+patterns to decisions, and simplify the mechanism where possible. Keep these
+advisory constructions distinct from technical acceptance and formal direction
+selection.
 
 If transfer assumptions conflict, the single bounded recovery is to reread one
 frozen input or named parent packet once at the disputed assumption. Do not

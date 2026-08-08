@@ -175,6 +175,12 @@ The fixed registered workflow children are:
 - Workflow Implementer: `.codex/agents/hmasd-workflow-implementer.toml` and `.agents/roles/WORKFLOW_IMPLEMENTER.md`.
 - Workflow Reviewer: `.codex/agents/hmasd-workflow-reviewer.toml` and `.agents/roles/WORKFLOW_REVIEWER.md`.
 
+The Independent Research Explorer may use the four already registered
+read-only research children for one exact adaptive scientific question per dispatch;
+campaign barriers and research authority remain unchanged. Detailed selection
+and question-roster guidance lives in the independent-research Skill and its
+parallel-workflow reference.
+
 WDM is the semantic integrator and acceptance owner. To reduce cost, routine
 bounded work is normally delegated to these cheaper registered children: an
 Implementer handles a frozen mechanical slice, an Auditor supplies local facts

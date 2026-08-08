@@ -68,6 +68,28 @@ the candidate's existing `local_research/` ownership. Portfolio, index, README
 and continuity surfaces are pointer, navigation or phase-barrier views and do
 not repeat scientific reasoning.
 
+After CPM technical acceptance, Explorer may provide an exact accepted result
+brief and only the necessary named scientific evidence to zero, one or more
+matching registered read-only research children for targeted questions. These
+children do not inspect raw evidence roots or recompute schema, readability,
+receipts, activity counts, locators, retry history or technical consistency. A
+scientifically material technical ambiguity returns to CPM as one precise
+clarification. This is an optional capability example, not a fixed panel or
+pipeline: a B result may use a small micro-panel only when its named answers are
+necessary to one Explorer decision, while ordinary B remains B and does not
+automatically invoke Pro. One accepted packet still produces exactly one
+Explorer-authored canonical scientific decision.
+
+When useful, that optional micro-panel routes constructive learning-dynamics,
+information-flow or credit-flow questions to Principles Analyst; strongest
+alternative, confound or falsifier questions to Critic; repair or smallest-next-
+discriminator questions to Innovator; and source, terminology or metric-fidelity
+questions to Scout. Explorer may use zero, one or several of them and never
+treats this capability map as a required panel.
+Several read-only questions may run in parallel, while Explorer keeps at most
+one resource-consuming experiment action active so the observed effect remains
+attributable.
+
 This boundary is semantic guidance rather than a mandatory packet schema or
 validator admission gate. This boundary does not invoke External Pro, migrate
 research records, change the active direction or alter ordinary B iteration. Existing named
@@ -140,7 +162,8 @@ controls, but expense alone neither supplies terminal scientific meaning nor
 requires irrelevant decision thresholds.
 It prepares an exact review only when the brief explicitly requests one or the
 work is direction-changing, materially ambiguous, final science alignment,
-formal/conclusion-bearing, or an explicitly requested C review. An unclear
+formal/conclusion-bearing, an explicitly requested C review, or an explicit
+user request. An unclear
 treatment returns one precise question to Explorer without blocking unrelated
 candidates. The instruction is not a canonical scientific conclusion, but it
 is sufficient authority for CPM to perform the named project-validation task.
@@ -160,7 +183,8 @@ and public GitHub repository/path locators. Ordinary B iteration may continue
 as advisory research without automatic Pro review and without claiming final
 scientific acceptance. For a direction-changing decision, material result
 ambiguity, final science alignment, a formal/conclusion-bearing result or an
-explicit C review, Explorer freezes one `CODE_SCIENCE_ALIGNMENT_AUDIT` after
+explicit C review or explicit user request, Explorer freezes one
+`CODE_SCIENCE_ALIGNMENT_AUDIT` after
 CPM technical acceptance and push. The review starts only after CPM technical
 acceptance and push. Explorer dispatches the audit through the
 registered `hmasd-agentify-transport` child using the file-only

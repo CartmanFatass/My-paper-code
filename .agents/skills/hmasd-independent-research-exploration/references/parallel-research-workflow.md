@@ -3,7 +3,11 @@
 ```text
 logical_assignment_count=derived_from_exact_work_roster
 runtime_concurrency=available_native_capacity
-merge_barrier=required
+canonical_campaign_phase_roster=exact_ordered_work_roster
+canonical_campaign_phase_barriers=required
+adaptive_question_roster=singleton_or_exact_joint_roster
+adaptive_singleton_global_barrier=none
+adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary
 completion_order_priority=forbidden
 single_writer=independent_research_explorer
 child_depth=0
@@ -11,6 +15,7 @@ automatic_formal_workflow_promotion=forbidden
 automatic_campaign_progression=allowed_until_convergence
 unbounded_source_expansion=forbidden
 first_innovation_roster_independence_shielding=required
+adaptive_first_round_peer_reading=forbidden
 later_cycle_collaboration_brief=required
 research_child_default_fork_turns=none
 research_child_dispatch_contract=registered_agent_type|fork_turns="none"|self_contained_natural_language_assignment
@@ -21,11 +26,12 @@ continuity_owner=independent_research_explorer
 project_validation_intake_contract=docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md
 ```
 
-## Shared intake and barrier
+## Canonical campaign intake and barrier
 
 Freeze one exact mode, campaign direction or evidence question, mission link,
 authorized source boundary, exclusions and completion meaning before dispatch.
-Every phase freezes an exact logical work roster. Runtime launches as many
+For the canonical evidence-review and algorithm-inspiration campaign, every
+phase freezes an exact logical work roster. Runtime launches as many
 independent assignments as available native capacity permits and queues the
 rest. Operational failure may receive one unchanged low-cost retry. A changed
 source boundary or project authority needs a new user decision; a new mechanism
@@ -60,6 +66,25 @@ or exact operational-failure record. Reject missing identity, locator,
 provenance, unauthorized source expansion or authority claims. Never use
 completion order as evidence priority. An operational failure records its
 stable signature and `scientific_output=false`; it cannot be cited as evidence.
+
+## Adaptive question rosters
+
+Adaptive dispatch is a prospective capability inside any existing
+user-authorized research mode, not a fourth mode or a campaign phase. A singleton adaptive question creates no
+global barrier. An exact joint roster has a local merge barrier only when every
+named answer is a necessary input to one Explorer decision. First-round
+assignments do not read peers or a favored answer; completion order is never
+priority. A failure affects only its question and records
+`scientific_output=false`; one unchanged low-cost retry is allowed for that
+question. Later collaboration reads only an Explorer-authored compact brief
+and named prior answers. Preserve disagreements as advisory inputs; never vote
+or collapse them into a quorum.
+
+There is no fixed adaptive count, concurrency, quorum, every-B panel,
+automatic-Pro path or persistent mechanism. The Explorer remains the single
+writer and integrates answers into one decision. Strict methodology is scoped
+to conclusion-bearing C work or a named science-review trigger, not all
+candidate validation.
 
 ## Restart continuity
 
@@ -155,7 +180,8 @@ scientific decision or technical packet rules.
 
 ## Candidate-validation methodology
 
-Only `candidate_validation` loads `research-methodology.md`. It instantiates the
+Only conclusion-bearing C work or a named science-review trigger loads
+`research-methodology.md`. It instantiates the
 game and information objects, membership process, identity ownership, clocks,
 strategic dependence, estimand, sampling, identification, strongest simple
 null, counterexample, replacement ledger and discriminator. Mechanical
@@ -165,7 +191,10 @@ completeness never means scientific truth.
 
 The workflow defines no fixed per-role parallel count. Exact source and
 opportunity rosters determine logical work; current Codex capacity determines
-how many run simultaneously. Phase dependencies remain ordered. Children
+how many read-only analyses run simultaneously. Explorer names at most one
+resource-consuming experiment action at a time so its effect remains
+attributable; this does not limit parallel read-only scientific questions.
+Phase dependencies remain ordered. Children
 cannot spawn, write, use Git, contact persistent tasks or access active HMASD
 state. There is no minimum-duration rule or forced large-agent target. Only the
 user may expand the source/project authority boundary or initiate formal work.

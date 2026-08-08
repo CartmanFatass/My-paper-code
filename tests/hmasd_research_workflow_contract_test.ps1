@@ -479,7 +479,12 @@ foreach ($required in @(
     'local_research_shell_mutation=forbidden',
     'logical_assignment_count=derived_from_exact_work_roster',
     'runtime_concurrency=available_native_capacity',
-    'phase_barrier=required',
+    'resource_consuming_experiment_action=one_at_a_time_for_attribution',
+    'read_only_scientific_analysis_parallelism=available_native_capacity',
+    'canonical_phase_barrier=required_for_algorithm_inspiration_campaign_only',
+    'adaptive_question_dispatch=bounded_registered_child_consultation',
+    'adaptive_question_barrier=none_for_singleton|exact_local_roster_only_when_joint',
+    'adaptive_question_result_effect=consultation_only',
     'completion_order_priority=forbidden',
     'research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation',
     'automatic_campaign_progression=allowed_until_convergence_within_authorized_boundary',
@@ -517,6 +522,110 @@ foreach ($required in @(
     'PARTIAL_CAMPAIGN_RESOURCE_BOUND')) {
     if (-not $independentResearchProcedure.Contains($required)) {
         throw "Independent Research Explorer procedure missing: $required"
+    }
+}
+
+# Adaptive scientific delegation is a bounded consultation capability layered
+# inside the existing Explorer grant; it is not a campaign phase or a new
+# portfolio-gate mode.
+$adaptiveRoleNormalized = $independentResearchRole -replace '\s+', ' '
+$adaptiveSkillNormalized = $independentResearchSkill -replace '\s+', ' '
+$adaptiveParallelNormalized = $parallelResearch -replace '\s+', ' '
+foreach ($required in @(
+    'one clear, bounded, decision-relevant question',
+    'expected information gain exceeds dispatch and synthesis cost',
+    'no code, runtime, write, technical acceptance or formal scientific acceptance',
+    'If evidence is sufficient and the next step is cheap and reversible, Explorer decides directly.',
+    'The child result is consultation only',
+    'Explorer remains the portfolio integrator and writes exactly one canonical scientific decision',
+    'First-round children see neither peer answers nor a favored answer',
+    'completion order is not evidence priority',
+    'disagreement is not voting',
+    'no fixed panel, quorum, concurrency requirement, every-B review or automatic Pro review',
+    'sole recovery is one low-cost retry with the identical question and source boundary',
+    'These adaptive consultations do not alter the campaign phase barriers or the existing External Pro triggers.')) {
+    if (-not $adaptiveRoleNormalized.Contains($required)) {
+        throw "Explorer adaptive consultation contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'Adaptive scientific question dispatch (not a fourth research mode)',
+    'matching registered read-only research child',
+    'information gain, next discriminator or selected A/B/C or named-Pro action',
+    'one child capability is a clear match',
+    'expected gain exceeds dispatch and synthesis cost',
+    'When evidence is sufficient and the next step is cheap and reversible, Explorer decides directly.',
+    'not a fourth research mode or an automatic pipeline',
+    'A child answer is advisory input to one Explorer decision',
+    'Canonical campaign rosters, ordered barriers and single-writer authority remain unchanged.')) {
+    if (-not $adaptiveSkillNormalized.Contains($required)) {
+        throw "Independent research adaptive Skill contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'adaptive_question_roster=singleton_or_exact_joint_roster',
+    'adaptive_singleton_global_barrier=none',
+    'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
+    'adaptive_first_round_peer_reading=forbidden',
+    'There is no fixed adaptive count, concurrency, quorum, every-B panel, automatic-Pro path or persistent mechanism.',
+    'Preserve disagreements as advisory inputs; never vote or collapse them into a quorum.',
+    'The Explorer remains the single writer and integrates answers into one decision.',
+    'Explorer names at most one resource-consuming experiment action at a time',
+    'parallel read-only scientific questions',
+    'Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.')) {
+    if (-not $adaptiveParallelNormalized.Contains($required)) {
+        throw "Adaptive roster contract missing: $required"
+    }
+}
+foreach ($pair in @(
+    @{ Text=$researchScoutRole; Required=@(
+        'candidate_validation_scope=exact_source_terminology_metric_citation_counterevidence_or_evidence_boundary_fidelity') },
+    @{ Text=$researchInnovatorRole; Required=@(
+        'candidate_validation_capabilities=causal_hypothesis_construction|candidate_repair|separating_prediction|smallest_next_discriminator|outcome_pattern_decision_map|mechanism_simplification',
+        'cannot recheck acceptance, start or schedule an experiment') },
+    @{ Text=$researchPrinciplesRole; Required=@(
+        'review_nature=constructive_not_adversarial',
+        'without redoing technical acceptance or promoting a formal direction') },
+    @{ Text=$researchCriticRole; Required=@(
+        'criticism_modes=canonical_campaign|adaptive_bounded',
+        'Only canonical campaign criticism requires that terminal',
+        'Adaptive bounded criticism has no campaign-barrier effect') })) {
+    foreach ($required in $pair.Required) {
+        if (-not ($pair.Text -replace '\s+', ' ').Contains($required)) {
+            throw "Adaptive child capability boundary missing: $required"
+        }
+    }
+}
+foreach ($required in @(
+    'project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous',
+    'project_validation_technical_facts_not_recomputed=schema|readability|receipts|activity_counts|locators|retry|technical_consistency')) {
+    if (-not $independentResearchRole.Contains($required)) {
+        throw "Explorer accepted-result boundary missing: $required"
+    }
+}
+foreach ($required in @(
+    'does not recompute schema, readability, receipts, activity counts, locators',
+    'necessary to one Explorer decision',
+    'Several read-only questions may run in parallel',
+    'one resource-consuming experiment action active',
+    'ordinary B remains B and does not automatically invoke Pro',
+    'consumes no formal iteration')) {
+    if (-not $explorerValidationContractNormalized.Contains($required)) {
+        throw "Explorer targeted-result intake boundary missing: $required"
+    }
+}
+foreach ($required in @(
+    'research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review_or_explicit_user_request',
+    'ordinary B may continue as advisory iteration without Pro')) {
+    if (-not ($independentResearchRole.Contains($required) -or $independentResearchSkillNormalized.Contains($required))) {
+        throw "Existing External Pro trigger boundary missing: $required"
+    }
+}
+foreach ($required in @(
+    'This capability adds no dispatcher, queue, registry, monitor, fixed panel or',
+    'Canonical research campaigns retain their exact ordered phase rosters and barriers.')) {
+    if (-not $workflowMapNormalized.Contains($required)) {
+        throw "Workflow Map adaptive boundary missing: $required"
     }
 }
 $codePmRoleNormalized = $codePmRole -replace '\s+', ' '
@@ -558,7 +667,7 @@ foreach ($pair in @(
         'research_modes=algorithm_inspiration_campaign|candidate_validation',
         'inspiration_purposes=adapt|combine|develop|refine|split|challenge_dependency',
         'initial_favored_direction_visibility=withheld',
-        'methodology_reference=required_for_candidate_validation_only',
+        'methodology_reference=required_for_C_or_named_science_review_trigger',
         'conclusion_forcing=forbidden',
         'ALGORITHM_INSPIRATION_PACKET') },
     @{ Text=$researchCriticRole; Required=@(
@@ -639,7 +748,7 @@ foreach ($required in @(
 foreach ($entry in @(
     @($independentResearchRole, 'research_treatment_levels=A_read_only_reconnaissance_or_nonintervening_probe|B_small_exploratory_real_toy_algorithm_experiment|C_conclusion_bearing_promotion_retirement_or_expensive_experiment'),
     @($independentResearchRole, 'methodology_reference=research-methodology.md_required_for_C_or_named_science_review_trigger'),
-    @($independentResearchRole, 'research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review'),
+    @($independentResearchRole, 'research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review_or_explicit_user_request'),
     @($proRole, 'explorer_toy_review_timing=not_a_normal_B_precondition_or_per_iteration_review'),
     @($proRoleNormalized, 'A normal exploratory B iteration may proceed'),
     @($proRoleNormalized, 'real environment, policy, learner, trainer and evaluation runner calls'),
@@ -668,7 +777,7 @@ foreach ($entry in @(
 }
 foreach ($entry in @(
     @($independentResearchSkillNormalized, 'ordinary B may continue as advisory iteration without Pro'),
-    @($independentResearchSkillNormalized, 'Only for the named C/direction-change/material-ambiguity/final-alignment/ conclusion trigger'),
+    @($independentResearchSkillNormalized, 'Only for the named C/direction-change/material-ambiguity/final-alignment/ conclusion or explicit-user-request trigger'),
     @($independentResearchSkillNormalized, 'External Pro owns final scientific-semantic acceptance when invoked'))) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Explorer proportional Pro trigger missing: $($entry[1])"
@@ -768,7 +877,9 @@ foreach ($required in @(
 foreach ($required in @(
     'logical_assignment_count=derived_from_exact_work_roster',
     'runtime_concurrency=available_native_capacity',
-    'merge_barrier=required',
+    'canonical_campaign_phase_barriers=required',
+    'adaptive_singleton_global_barrier=none',
+    'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
     'completion_order_priority=forbidden',
     'single_writer=independent_research_explorer',
     'automatic_campaign_progression=allowed_until_convergence',

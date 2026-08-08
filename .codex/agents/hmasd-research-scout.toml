@@ -1,5 +1,5 @@
 name = "hmasd-research-scout"
-description = "Read-only Sol-high scout for one exact source-result assignment."
+description = "Read-only Sol-high scout for one bounded source/evidence-fidelity scientific question or campaign source assignment."
 model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"

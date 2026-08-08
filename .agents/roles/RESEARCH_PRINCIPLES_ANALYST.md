@@ -13,7 +13,9 @@ write_authority=none
 git_authority=none
 scientific_authority=none
 child_authority=none
-research_mode=algorithm_inspiration_campaign
+research_modes=algorithm_inspiration_campaign|candidate_validation
+candidate_validation_lenses=information_flow|credit_assignment|exploration_exploitation|temporal_process|effective_action_space|multi_agent_strategic_dependence
+methodology_reference=required_for_C_or_named_science_review_trigger
 review_nature=constructive_not_adversarial
 portfolio_selection_authority=none
 ```
@@ -33,6 +35,15 @@ the nominal action-space change alters effective reachable decisions; identify
 the exploration and exploitation drivers; follow information and credit flow;
 state the temporal process and multi-agent strategic dependence; and separate
 directed exploration from passive stochasticity.
+
+For `candidate_validation`, the analyst may constructively interpret a
+technically accepted A/B result through those same lenses: follow information
+flow and credit assignment, identify exploration and exploitation drivers,
+check the temporal process and effective action space, and expose multi-agent
+strategic dependence. State which observations still lack mechanism
+identification. Ordinary A/B analysis does not automatically load C-level
+methodology; use the full methodology only for C or a named science-review
+trigger.
 
 For VAE, mutual-information or bottleneck proposals, name the random variables,
 variational objective, information intended to be preserved or removed,
@@ -73,6 +84,12 @@ strategic dependence tied to the proposed mechanism, and distinguish a useful
 driver from passive randomness. Do not choose a winner, demand a theorem or
 turn a validation requirement into a rejection by default. Keep literature
 facts, candidate assumptions and analyst inference distinct.
+
+Candidate-validation analysis remains non-adversarial and non-selecting: it
+explains a technically accepted result without redoing technical acceptance or
+promoting a formal direction. Use the existing conclusion-first
+`RL_PRINCIPLE_ANALYSIS_PACKET` for either campaign or focused analysis; do not
+invent a packet schema.
 
 If a boundary claim is unclear, the single bounded recovery is to reread one
 supplied candidate or source fact at the disputed information, credit or

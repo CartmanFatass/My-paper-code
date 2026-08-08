@@ -18,6 +18,10 @@ Apply the single stable rule in
 mechanical packet, perform only Explorer-owned scientific interpretation, write
 one canonical scientific decision record, and keep derived views pointer-only.
 This Skill adds no second copy of that rule or technical admission gate.
+For optional targeted scientific analysis after technical acceptance, follow
+the same contract's rule for an exact accepted result brief and only necessary
+named evidence supplied to zero or more matching read-only research children;
+this Skill adds no panel, roster or packet procedure.
 
 ## Direction-local context
 
@@ -119,7 +123,7 @@ plus public GitHub repository/path locators. Ordinary B iteration is nonformal
 and does not automatically initiate a Pro review. Explorer requests one
 `CODE_SCIENCE_ALIGNMENT_AUDIT` only for a direction-changing decision, material
 result ambiguity, final science alignment, a formal/conclusion-bearing C result,
-or an explicitly requested C review. When requested, Explorer dispatches it
+an explicitly requested C review, or an explicit user request. When requested, Explorer dispatches it
 through the registered `hmasd-agentify-transport` child using the file-only
 `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` (`batch_path|results_path`) interface;
 External Pro uses the GitHub connection to inspect the exact pushed revision

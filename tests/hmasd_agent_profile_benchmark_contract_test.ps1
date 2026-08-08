@@ -194,6 +194,31 @@ foreach ($profileRoute in @(
     }
 }
 
+# Research profiles advertise both their bounded adaptive-question capability
+# and their canonical campaign use in the description while leaving procedure
+# and packet/phase meaning in the Role charter.
+foreach ($profileRoute in @(
+    @{ Text = $researchScout; Name = 'hmasd-research-scout'; Description = 'one bounded source/evidence-fidelity scientific question or campaign source assignment' },
+    @{ Text = $researchInnovator; Name = 'hmasd-research-innovator'; Description = 'one bounded mechanism, repair, discriminator, or campaign innovation assignment' },
+    @{ Text = $researchPrinciples; Name = 'hmasd-research-principles-analyst'; Description = 'one bounded constructive learning-dynamics/mechanism question or campaign principles analysis' },
+    @{ Text = $researchCritic; Name = 'hmasd-research-critic'; Description = 'one bounded exact criticism or canonical campaign adversarial assessment' })) {
+    if (-not $profileRoute.Text.Contains($profileRoute.Description)) {
+        throw "$($profileRoute.Name) description must cover adaptive and canonical use: $($profileRoute.Description)"
+    }
+    if ($profileRoute.Text.Contains('campaign phase')) {
+        throw "$($profileRoute.Name) profile must not define a campaign phase"
+    }
+    foreach ($packet in @(
+        'SOURCE_RESULT_PACKET',
+        'ALGORITHM_INSPIRATION_PACKET',
+        'RL_PRINCIPLE_ANALYSIS_PACKET',
+        'CRITIC_ASSESSMENT_PACKET')) {
+        if ($profileRoute.Text.Contains($packet)) {
+            throw "$($profileRoute.Name) profile must leave packet procedure to its Role"
+        }
+    }
+}
+
 foreach ($roleRoute in @(
     @{ Text = $codeScoutRole; Name = 'Code Scout'; Required = @('default_fork_turns=none', 'self-contained natural-language task model', 'concise natural-language conclusion', 'reopen one named immediate interface once', 'not a schema or admission gate') },
     @{ Text = $reviewerRole; Name = 'Reviewer'; Required = @('self-contained natural-language task model', 'concise natural-language conclusion', 'reread one indispensable changed artifact or immediate interface once', 'not a schema or admission gate') },

@@ -1,5 +1,5 @@
 name = "hmasd-research-innovator"
-description = "Read-only Sol-max innovator for one source-bound algorithm-inspiration assignment."
+description = "Read-only Sol-max innovator for one bounded mechanism, repair, discriminator, or campaign innovation assignment."
 model = "gpt-5.6-sol"
 model_reasoning_effort = "max"
 sandbox_mode = "read-only"

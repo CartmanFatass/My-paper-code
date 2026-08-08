@@ -499,6 +499,140 @@ def test_open_inspiration_reference_preserves_source_first_dynamic_portfolio() -
         assert required in reference
 
 
+def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() -> None:
+    """Cover adaptive routing as prose contracts, without creating a scheduler."""
+    role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+        encoding="utf-8"
+    )
+    role_normalized = " ".join(role.split())
+    skill = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    skill_normalized = " ".join(skill.split())
+    parallel = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md"
+    ).read_text(encoding="utf-8")
+    parallel_normalized = " ".join(parallel.split())
+    validation_contract = (
+        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    ).read_text(encoding="utf-8")
+    validation_normalized = " ".join(validation_contract.split())
+    workflow_map = (REPO / "docs" / "project" / "WORKFLOW_MAP.md").read_text(
+        encoding="utf-8"
+    )
+    workflow_map_normalized = " ".join(workflow_map.split())
+
+    for required in (
+        "adaptive_question_dispatch=bounded_registered_child_consultation",
+        "adaptive_question_barrier=none_for_singleton|exact_local_roster_only_when_joint",
+        "adaptive_question_result_effect=consultation_only",
+        "resource_consuming_experiment_action=one_at_a_time_for_attribution",
+        "read_only_scientific_analysis_parallelism=available_native_capacity",
+        "one clear, bounded, decision-relevant question",
+        "expected information gain exceeds dispatch and synthesis cost",
+        "no code, runtime, write, technical acceptance or formal scientific acceptance",
+        "If evidence is sufficient and the next step is cheap and reversible, Explorer decides directly.",
+        "The child result is consultation only",
+        "Explorer remains the portfolio integrator and writes exactly one canonical scientific decision",
+        "completion order is not evidence priority",
+        "disagreement is not voting",
+        "sole recovery is one low-cost retry with the identical question and source boundary",
+        "These adaptive consultations do not alter the campaign phase barriers or the existing External Pro triggers.",
+    ):
+        assert required in role_normalized
+
+    for required in (
+        "Adaptive scientific question dispatch (not a fourth research mode)",
+        "matching registered read-only research child",
+        "Route source or metric fidelity to",
+        "constructive mechanism analysis",
+        "alternative/confound/falsifier analysis",
+        "causal-hypothesis, repair or discriminator design",
+        "When evidence is sufficient and the next step is cheap and reversible, Explorer decides directly.",
+        "not a fourth research mode or an automatic pipeline",
+        "A child answer is advisory input to one Explorer decision",
+        "Canonical campaign rosters, ordered barriers and single-writer authority remain unchanged.",
+    ):
+        assert required in skill_normalized
+
+    for required in (
+        "adaptive_question_roster=singleton_or_exact_joint_roster",
+        "adaptive_singleton_global_barrier=none",
+        "adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary",
+        "adaptive_first_round_peer_reading=forbidden",
+        "First-round assignments do not read peers or a favored answer",
+        "Preserve disagreements as advisory inputs; never vote or collapse them into a quorum.",
+        "There is no fixed adaptive count, concurrency, quorum, every-B panel, automatic-Pro path or persistent mechanism.",
+        "The Explorer remains the single writer and integrates answers into one decision.",
+        "Explorer names at most one resource-consuming experiment action at a time",
+        "parallel read-only scientific questions",
+        "Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.",
+    ):
+        assert required in parallel_normalized
+
+    child_roles = {
+        "scout": (REPO / ".agents" / "roles" / "RESEARCH_SCOUT.md").read_text(
+            encoding="utf-8"
+        ),
+        "innovator": (REPO / ".agents" / "roles" / "RESEARCH_INNOVATOR.md").read_text(
+            encoding="utf-8"
+        ),
+        "principles": (
+            REPO / ".agents" / "roles" / "RESEARCH_PRINCIPLES_ANALYST.md"
+        ).read_text(encoding="utf-8"),
+        "critic": (REPO / ".agents" / "roles" / "RESEARCH_CRITIC.md").read_text(
+            encoding="utf-8"
+        ),
+    }
+    child_expectations = {
+        "scout": (
+            "candidate_validation_scope=exact_source_terminology_metric_citation_counterevidence_or_evidence_boundary_fidelity",
+        ),
+        "innovator": (
+            "candidate_validation_capabilities=causal_hypothesis_construction|candidate_repair|separating_prediction|smallest_next_discriminator|outcome_pattern_decision_map|mechanism_simplification",
+            "cannot recheck acceptance, start or schedule an experiment",
+        ),
+        "principles": (
+            "review_nature=constructive_not_adversarial",
+            "without redoing technical acceptance or promoting a formal direction",
+        ),
+        "critic": (
+            "criticism_modes=canonical_campaign|adaptive_bounded",
+            "Only canonical campaign criticism requires that terminal",
+            "Adaptive bounded criticism has no campaign-barrier effect",
+        ),
+    }
+    for name, required_terms in child_expectations.items():
+        child_normalized = " ".join(child_roles[name].split())
+        for required in required_terms:
+            assert required in child_normalized
+
+    for required in (
+        "does not recompute schema, readability, receipts, activity counts, locators",
+        "necessary to one Explorer decision",
+        "Several read-only questions may run in parallel",
+        "one resource-consuming experiment action active",
+        "ordinary B remains B and does not automatically invoke Pro",
+        "consumes no formal iteration",
+    ):
+        assert required in validation_normalized
+    for required in (
+        "research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review_or_explicit_user_request",
+        "Only for the named C/direction-change/material-ambiguity/final-alignment/ conclusion or explicit-user-request trigger",
+    ):
+        assert required in role or required in skill_normalized
+    for required in (
+        "Canonical research campaigns retain their exact ordered phase rosters and barriers.",
+        "This capability adds no dispatcher, queue, registry, monitor, fixed panel or",
+    ):
+        assert required in workflow_map_normalized
+
+
 def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated() -> None:
     role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
         encoding="utf-8"

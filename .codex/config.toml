@@ -68,22 +68,22 @@ config_file = "./agents/hmasd-experiment-operator.toml"
 nickname_candidates = ["HMASD Experiment Operator", "Run Operator", "Formal Run Operator"]
 
 [agents."HMASDResearchScout"]
-description = "Read-only Sol-high scout for one bounded independent research axis."
+description = "Read-only Sol-high scout for one bounded source/evidence-fidelity scientific question or campaign source assignment."
 config_file = "./agents/hmasd-research-scout.toml"
 nickname_candidates = ["Research Scout", "Evidence Scout", "Counterexample Scout"]
 
 [agents."HMASDResearchInnovator"]
-description = "Read-only Sol-max innovator for one bounded advisory research direction."
+description = "Read-only Sol-max innovator for one bounded mechanism, repair, discriminator, or campaign innovation assignment."
 config_file = "./agents/hmasd-research-innovator.toml"
 nickname_candidates = ["Research Innovator", "Mechanism Explorer", "Direction Builder"]
 
 [agents."HMASDResearchCritic"]
-description = "Read-only Sol-max critic for one post-principles adversarial assessment."
+description = "Read-only Sol-max critic for one bounded exact criticism or canonical campaign adversarial assessment."
 config_file = "./agents/hmasd-research-critic.toml"
 nickname_candidates = ["Research Critic", "Claim Critic", "Evidence Challenger"]
 
 [agents."HMASDResearchPrinciplesAnalyst"]
-description = "Read-only Sol-max analyst for one constructive RL-principles assessment."
+description = "Read-only Sol-max analyst for one bounded constructive learning-dynamics/mechanism question or campaign principles analysis."
 config_file = "./agents/hmasd-research-principles-analyst.toml"
 nickname_candidates = ["Research Principles Analyst", "RL Principles Analyst", "Learning Dynamics Analyst"]
 

@@ -419,6 +419,19 @@ def test_candidate_validation_rejects_missing_separating_prediction() -> None:
         gate.validate_record(record, "cycle")
 
 
+def test_adaptive_scientific_question_is_not_a_portfolio_gate_mode() -> None:
+    """Adaptive consultation stays outside canonical campaign gate records."""
+    record = inspiration_record()
+    record["intake"]["mode"] = "adaptive_scientific_question"
+    with pytest.raises(gate.GateError, match="unsupported mode"):
+        gate.validate_record(record, "intake")
+
+    # The canonical campaign record remains the only accepted portfolio shape.
+    assert gate.validate_record(inspiration_record(), "intake")["mode"] == (
+        "algorithm_inspiration_campaign"
+    )
+
+
 def test_load_record_rejects_path_outside_local_research(tmp_path: Path) -> None:
     path = tmp_path / "record.json"
     path.write_text("{}", encoding="utf-8")

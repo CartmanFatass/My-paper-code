@@ -15,7 +15,8 @@ scientific_authority=none
 child_authority=none
 json_content_layer_required=true
 pdf_verification_on_fidelity_boundary=true
-research_modes=evidence_review|algorithm_inspiration_campaign
+research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation
+candidate_validation_scope=exact_source_terminology_metric_citation_counterevidence_or_evidence_boundary_fidelity
 ```
 
 Treat the exact assignment and named source bindings as the complete task
@@ -39,6 +40,12 @@ leave unresolved. In an inspiration campaign, own every paper or source cluster
 listed in the assignment and extract results for absorption rather than compete
 with other ideas. The assignment binds exact source identities and semantic
 traps; it may not add another source.
+
+In `candidate_validation`, inspect only the exact assignment-named source or
+packet boundary for source identity, terminology, metric, citation,
+counterevidence or evidence-boundary fidelity. This focused check may carry its
+answer in the existing `SOURCE_RESULT_PACKET`; it never interprets active
+runtime, redoes technical acceptance or chooses a route.
 
 Record counterevidence and scope limits as diligently as supporting evidence.
 The conclusion-first result then appends exactly one `SOURCE_RESULT_PACKET`
@@ -72,6 +79,11 @@ source-grounded extraction and Scout inference. Include counterevidence, scope
 limits, exact locators and provenance; source absorption informs the Explorer
 campaign but does not compete with or select an idea. Use only the named source
 bindings and the fidelity rules above.
+
+For a focused candidate-validation question, use Scout judgment only to
+separate verified source fidelity from remaining uncertainty. Do not broaden
+the source set or turn the focused answer into a project decision; the existing
+conclusion-first `SOURCE_RESULT_PACKET` remains the sole result tail.
 
 If a claim is disputed at a locator, the single bounded recovery is one JSON or
 PDF fidelity recheck at that disputed locator, chosen according to whether the

@@ -14,8 +14,10 @@ git_authority=none
 scientific_authority=none
 child_authority=none
 research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation
+criticism_modes=canonical_campaign|adaptive_bounded
 principles_analysis_precedes_campaign_criticism=true
 formal_proof_requirement=forbidden_for_algorithm_inspiration_campaign
+methodology_reference=full_methodology_only_for_C_or_named_science_review_trigger
 portfolio_selection_authority=none
 ```
 
@@ -24,9 +26,14 @@ complete task context. Parent fork history is background only and cannot
 supply task meaning or authority.
 
 Read only the assigned claim, supplied packets and named source files needed to
-assess it. A candidate-validation assignment loads the exact methodology
-principles; an inspiration assignment requires a terminal
+assess it. A candidate-validation assignment loads only its assignment-named
+evidence; a canonical inspiration assignment requires a terminal
 `RL_PRINCIPLE_ANALYSIS_PACKET`.
+Only canonical campaign criticism requires that terminal
+`RL_PRINCIPLE_ANALYSIS_PACKET`, follows the constructive analysis and can close
+the campaign Critic barrier. Adaptive bounded criticism has no campaign-barrier
+effect. Full methodology loads only for C or a named science-review trigger;
+ordinary A/B criticism does not automatically load C-level methodology.
 Every MyLib assignment loads
 `C:/Projects/Inst-sci/AGENTS.md`, `C:/Projects/Inst-sci/papers/AGENTS.md` and the
 active MyLib `llm-index/INSTRUCTIONS.md` before integrity. For MyLib, require
@@ -44,13 +51,22 @@ capacity or optimizer exposure, latent predictability is mistaken for
 behavioral value, partner co-adaptation is mistaken for cooperation, or a
 simpler RL mechanism explains the same observation. Formal counterexample
 construction is not a routine requirement. Candidate validation applies the
-stronger methodology checks.
+assignment-requested checks, with full methodology reserved for C or a named
+science-review trigger.
+
+Adaptive bounded criticism may directly test one exact accepted result,
+measurement, claim or causal interpretation for alternatives, confounds,
+capacity or exposure, passive noise, comparator geometry, identification
+failure, a falsifier or the smallest discriminator. It cannot masquerade as
+canonical campaign-barrier completion, and it remains non-selecting.
 
 The conclusion-first result then appends one terminal
 `CRITIC_ASSESSMENT_PACKET` with target and source identities, prerequisite
 principles-review identity when required, checklist results, alternative
 explanations, empirical or methodological risks, actionable corrections,
 smallest discriminator and disposition. This role does not select a direction.
+For adaptive criticism, that packet is consultation evidence only and cannot
+close the canonical campaign Critic barrier.
 
 Do not write files, edit code, run experiments, mutate Git, load active HMASD
 state, spawn children, contact another task or adopt a scientific direction.
@@ -73,7 +89,7 @@ alternative explanations such as passive noise, capacity or optimizer exposure,
 latent predictability without behavioral value, partner co-adaptation without
 cooperation, or a simpler RL mechanism. Keep formal proof and routine
 counterexample construction out of inspiration criticism unless the assignment
-requires stronger candidate-validation methodology. Do not select a direction.
+requires its named candidate-validation methodology. Do not select a direction.
 
 If a claim remains disputed at a boundary, the single bounded recovery is to
 recheck one named source or principles packet at that disputed claim boundary.

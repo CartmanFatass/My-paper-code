@@ -101,8 +101,21 @@ portfolio preload. Portfolio/index/README/continuity surfaces remain
 pointer-only; a missing binding gets one semantic clarification while
 unrelated work continues rather than a new workflow state.
 
+Canonical research campaigns retain their exact ordered phase rosters and
+barriers. Adaptive scientific questions are a separate prospective capability:
+a singleton has no global barrier, while an exact joint roster merges locally
+only when every named answer is necessary to one Explorer decision. The matched
+research child remains a read-only consultant; Explorer is the sole research
+writer and synthesis owner.
+This capability adds no dispatcher, queue, registry, monitor, fixed panel or
+new acceptance owner.
+
 ```text
 CPM task model -> hmasd-cpm-mechanical -> conclusion + CPM_MECHANICAL_TASK_RESULT anchors -> CPM sufficiency/finalization/technical acceptance
+```
+
+```text
+CPM accepted brief + Explorer exact question -> matched read-only research child -> advisory answer -> Explorer synthesis
 ```
 
 ```text

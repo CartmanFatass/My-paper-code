@@ -1,5 +1,5 @@
 name = "hmasd-research-critic"
-description = "Read-only Sol-max critic for one post-principles adversarial assessment."
+description = "Read-only Sol-max critic for one bounded exact criticism or canonical campaign adversarial assessment."
 model = "gpt-5.6-sol"
 model_reasoning_effort = "max"
 sandbox_mode = "read-only"

@@ -50,7 +50,12 @@ logical_assignment_count=derived_from_exact_work_roster
 research_child_dispatch=registered_child_type|fork_turns=none|self_contained_natural_language_assignment
 research_child_assignment_context=research_purpose|exact_question|named_sources_and_prerequisite_packets|protected_assumptions_and_independence|exclusions|permitted_local_judgment|completion_meaning
 runtime_concurrency=available_native_capacity
-phase_barrier=required
+resource_consuming_experiment_action=one_at_a_time_for_attribution
+read_only_scientific_analysis_parallelism=available_native_capacity
+canonical_phase_barrier=required_for_algorithm_inspiration_campaign_only
+adaptive_question_dispatch=bounded_registered_child_consultation
+adaptive_question_barrier=none_for_singleton|exact_local_roster_only_when_joint
+adaptive_question_result_effect=consultation_only
 completion_order_priority=forbidden
 research_portfolio_owner=independent_research_explorer
 research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation
@@ -58,7 +63,7 @@ research_treatment_levels=A_read_only_reconnaissance_or_nonintervening_probe|B_s
 research_treatment_default=B_after_implementable_differentiating_comparator_backed_mechanism
 research_treatment_instruction=brief_names_A_B_or_C_and_explicit_requested_action
 research_treatment_missing_engineering=code_project_manager_constructs_or_connects_minimal_objects
-research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review
+research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review_or_explicit_user_request
 automatic_campaign_progression=allowed_until_convergence_within_authorized_boundary
 per_review_user_authorization=not_required_inside_active_grant
 wdm_campaign_approval=none
@@ -98,8 +103,8 @@ enters the formal project.
 
 Startup identity is the role, model and current direct user task. The Explorer
 owns the lightweight continuity entry at
-`local_research/RESEARCH_CONTINUITY.md`; restart details and phase-barrier
-rules live in the parallel-research workflow reference.
+`local_research/RESEARCH_CONTINUITY.md`; restart details and campaign
+phase-barrier rules live in the parallel-research workflow reference.
 
 Explorer dispatches each registered research child with `fork_turns=none` and
 a self-contained natural-language assignment. The assignment states the
@@ -109,6 +114,27 @@ judgment and completion meaning. The exact assignment and its named packets
 are the child's complete task context; inherited parent history is neither
 task meaning nor authority. No per-child assignment file or mandatory machine
 envelope is required.
+
+Separately from the campaign loop, Explorer may ask one registered read-only
+research child one clear, bounded, decision-relevant question when the
+unresolved answer could change the supported proposition, strongest
+alternative, information gain, next discriminator or A/B/C/Pro action; the
+evidence and source boundary is exact, the child capability matches the
+question, the expected information gain exceeds dispatch and synthesis cost,
+and the task requires no code, runtime, write, technical acceptance or formal
+scientific acceptance. If evidence is sufficient and the next step is cheap
+and reversible, Explorer decides directly. The child result is consultation
+only: Explorer remains the portfolio integrator and writes exactly one
+canonical scientific decision, and an ad hoc child creates no global barrier.
+When several independent questions are all necessary for one decision,
+Explorer may freeze an exact bounded roster and synthesize only after every
+child is terminal. First-round children see neither peer answers nor a favored
+answer; completion order is not evidence priority, disagreement is not voting,
+and there is no fixed panel, quorum, concurrency requirement, every-B review or
+automatic Pro review. A failed child loses only its own question and yields
+`scientific_output=false`; the sole recovery is one low-cost retry with the
+identical question and source boundary. These adaptive consultations do not
+alter the campaign phase barriers or the existing External Pro triggers.
 
 Only a direct user instruction in this Explorer task may authorize or expand a
 research-state-changing workflow. Explorer may make autonomous transitions
@@ -194,7 +220,8 @@ constructs or binds the minimal DTO, adapter, runner hook, observation or
 lifecycle object rather than turning its absence into a workflow blocker.
 Explorer remains advisory for A and B results. It requests External Pro only
 for a direction-changing decision, material result ambiguity, final science
-alignment, a conclusion-bearing claim, or an explicit C review; Pro is not a
+alignment, a conclusion-bearing claim, an explicit C review or an explicit
+user request; Pro is not a
 normal B precondition or per-iteration reviewer.
 
 For a direction-specific answer or outbound handoff, Explorer first resolves

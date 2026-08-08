@@ -42,6 +42,28 @@ assumptions and independence, exclusions, allowed local judgment and
 completion meaning. This is writing guidance, not a mandatory schema, file,
 validator or admission gate.
 
+## Adaptive scientific question dispatch (not a fourth research mode)
+
+An Explorer may prospectively delegate one clear, bounded unresolved scientific
+question to a matching registered read-only research child. Use this path only
+when the answer could change the supported proposition, strongest alternative,
+information gain, next discriminator or selected A/B/C or named-Pro action;
+the question has bounded named evidence; one child capability is a clear match;
+the expected gain exceeds dispatch and synthesis cost; and no code, runtime,
+write, technical-acceptance or formal-acceptance authority is required. Route
+source or metric fidelity to `hmasd-research-scout`, constructive mechanism
+analysis to `hmasd-research-principles-analyst`, alternative/confound/falsifier
+analysis to `hmasd-research-critic`, and causal-hypothesis, repair or
+discriminator design to `hmasd-research-innovator`.
+
+This is a prospective capability, not a fourth research mode or an automatic
+pipeline. Its work unit is the unresolved scientific question, not a result
+file or fixed workflow position. When evidence is sufficient and the next step is cheap and
+reversible, Explorer decides directly. A child answer is advisory input to one
+Explorer decision; it may reuse an existing packet tail when useful, but does
+not require a new schema. Canonical campaign rosters, ordered barriers and
+single-writer authority remain unchanged.
+
 ## Start safely
 
 1. Confirm the active task has the Explorer role, registered model and current
@@ -117,7 +139,8 @@ Use **algorithm inspiration campaign** for a broad direction such as variable
 skill period or variable agent population. Recall and lock a versioned relevant
 corpus first. Assignment count is derived from that corpus, not a fixed range;
 run independent assignments at available native capacity and queue the rest.
-After every `SOURCE_RESULT_PACKET` crosses the absorption barrier, the Explorer
+Within this canonical campaign, after every `SOURCE_RESULT_PACKET` crosses the
+absorption barrier, the Explorer
 creates one `SOURCE_ABSORPTION_BRIEF`. Innovation, constructive principles
 analysis, adversarial review and portfolio update then proceed in that order.
 
@@ -237,16 +260,16 @@ Use `search`, `locate`, `validate-pdf` and `smoke` subcommands as routed in the
 reference. `--output` is forbidden in this route; durable advisory output is
 written only by the Explorer through `apply_patch`.
 
-## Require mode-specific packets
+## Require mode-specific campaign packets
 
-Every Scout returns one `SOURCE_RESULT_PACKET` with exact assignment and source
-identities, evidence locators, author claims, experimental support, mechanism
-primitives, learning signal, information and temporal structure,
-action/policy-space effect, failure boundaries, transferable results,
-non-transferable assumptions, possible HMASD connections and cross-paper
-questions. Source fact and Scout inference remain distinct.
+In canonical campaign work, every Scout returns one `SOURCE_RESULT_PACKET` with
+exact assignment and source identities, evidence locators, author claims,
+experimental support, mechanism primitives, learning signal, information and
+temporal structure, action/policy-space effect, failure boundaries, transferable
+results, non-transferable assumptions, possible HMASD connections and
+cross-paper questions. Source fact and Scout inference remain distinct.
 
-Every campaign Innovator returns one `ALGORITHM_INSPIRATION_PACKET` with exact
+Every canonical campaign Innovator returns one `ALGORITHM_INSPIRATION_PACKET` with exact
 source-result and parent identities, opportunity kind, target problem,
 transferable primitive, transformation, mechanism, learning driver, effective
 state/observation/action change, information and credit flow, temporal and
@@ -254,7 +277,8 @@ multi-agent assumptions, predicted effect, simplest alternative,
 cross-direction connections, `delete|retain|add` ledger, failure boundaries,
 validation needs and unresolved items.
 
-Every selected Principles Analyst returns one `RL_PRINCIPLE_ANALYSIS_PACKET`
+Every selected canonical campaign Principles Analyst returns one
+`RL_PRINCIPLE_ANALYSIS_PACKET`
 with candidate and source identities, RL problem formulation, effective action
 space, exploration and exploitation drivers, information and credit flow,
 temporal process, multi-agent strategic effect, statistical interpretation,
@@ -270,10 +294,10 @@ explanations, empirical risks, actionable corrections, smallest discriminator
 and disposition. Inspiration criticism does not require a formal proof or
 counterexample. Candidate validation may use the stronger methodology packet.
 
-Reject a packet that substitutes index excerpts for content evidence, omits an
-assigned identity, reads legacy Markdown, expands its source or opportunity,
-claims project authority or collapses several retained directions into an
-unassigned unique winner.
+Reject a canonical campaign packet that substitutes index excerpts for content
+evidence, omits an assigned identity, reads legacy Markdown, expands its source
+or opportunity, claims project authority or collapses several retained
+directions into an unassigned unique winner.
 
 ## Gate the campaign mechanically
 
@@ -302,11 +326,13 @@ may use available native capacity; the gate imposes no first-wave task count.
 The checker validates the convergence record but never decides relevance,
 novelty, correctness, importance or actual scientific convergence. Resource
 exhaustion is `PARTIAL_CAMPAIGN_RESOURCE_BOUND`, not `CONVERGED`.
+Adaptive scientific questions are not portfolio-gate modes or records and do
+not enter this checker.
 
 ## Synthesize without promotion
 
-After every phase barrier, the Explorer reconciles conflicts and updates one
-multi-direction portfolio. Preserve source-result identities, parent and child
+After every canonical campaign phase barrier, the Explorer reconciles conflicts
+and updates one multi-direction portfolio. Preserve source-result identities, parent and child
 directions, cross-pollination edges, constructive analyses, adversarial
 corrections and reactivation conditions. Generate a
 `NEXT_CYCLE_OPPORTUNITY_MAP` before claiming convergence.
@@ -349,7 +375,7 @@ per-run fixed revision/configuration/seeds/budget, real activity counts and ever
 recorded between-run adjustment. After CPM technical
 acceptance and push, ordinary B may continue as advisory iteration without Pro.
 Only for the named C/direction-change/material-ambiguity/final-alignment/
-conclusion trigger does Explorer freeze one `CODE_SCIENCE_ALIGNMENT_AUDIT`
+conclusion or explicit-user-request trigger does Explorer freeze one `CODE_SCIENCE_ALIGNMENT_AUDIT`
 using the returned exact commit and public GitHub locators, dispatch it through
 the registered `hmasd-agentify-transport` child with the same file-only
 assignment, and archive and intake the answer only after the child's terminal
