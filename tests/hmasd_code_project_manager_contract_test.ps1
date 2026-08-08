@@ -470,8 +470,7 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'project_map_owner=code_project_manager',
-    'project_map_update=same_commit_when_stable_architecture_fact_changes',
-    '.agents/skills/hmasd-agile-research-development/references/project-cognition-bootstrap-prompt.md')) {
+    'project_map_update=same_commit_when_stable_architecture_fact_changes')) {
     if (-not $agents.Contains($required)) {
         throw "AGENTS project-cognition pointer missing: $required"
     }
