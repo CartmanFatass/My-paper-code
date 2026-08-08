@@ -54,7 +54,8 @@ execution_readiness_owner=code_project_manager
 execution_readiness_executor=hmasd-verifier_when_triggered
 execution_readiness_skill=hmasd-agile-research-development
 execution_readiness_receipt=required_when_triggered
-execution_readiness_phase_executor=wrapper_run_only
+execution_readiness_identity=clean_candidate_commit_equals_HEAD
+execution_readiness_phase_executor=wrapper_ordered_run_only
 execution_readiness_receipt_finalizer=wrapper_finalize_only
 test_acceptance_basis=risk_and_claim_coverage
 test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof
@@ -145,10 +146,15 @@ manager; there is no Research Operations Manager or persistent monitor.
 - Execution readiness for result-bearing runner/analyzer integration, changes to
   execution entry points, artifacts, serialization or phase connections, and
   repairs of code defects exposed by preflight. Focused tests alone are
-  insufficient for those changes. Code Project Manager prepares the exact spec
-  and dispatches the registered `hmasd-verifier` on the clean candidate commit
-  to execute the production-entry interface smoke and bounded artifact-lifecycle
-  exercise before acceptance.
+  insufficient for those changes. Code Project Manager prepares one candidate-
+  bound spec and dispatches the registered `hmasd-verifier` on the clean
+  candidate commit to execute the production-entry interface smoke and bounded
+  artifact-lifecycle exercise before acceptance.
+- Readiness has one identity: the checked-out clean candidate commit must equal
+  `HEAD`. There is no source/execution bridge, execution-support delta or second
+  readiness commit. The wrapper owns only ordered execution, typed mechanical
+  outcomes, logs, Git-visible worktree observation and receipt recording; CPM
+  chooses the commands and proves phase semantics through candidate evidence.
 - The verifier assignment separates focused checks from the readiness spec.
   Focused checks never repeat a phase argv and never write the exercise root.
   The assignment supplies the exact `run --spec` and `finalize --spec` commands,
@@ -241,7 +247,7 @@ blockers=none
 ```
 
 `execution_readiness=passed` is valid only when the receipt is bound to the
-returned commit and exact paths and records successful `interface_smoke`,
+returned clean HEAD commit and exact paths and records successful `interface_smoke`,
 `bounded_exercise`, `artifact_validation`, `artifact_reload`, `evaluate_entry`
 and `analyze_entry` phases. Code Project Manager keeps the repair loop until
 that boundary passes or returns one scoped diagnosis under the failure-

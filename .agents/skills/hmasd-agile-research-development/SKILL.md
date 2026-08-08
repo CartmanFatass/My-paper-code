@@ -179,8 +179,12 @@ history. Run a broad suite only for an actually changed shared surface.
 
 Code Project Manager prepares the exact candidate-bound spec and assigns the
 registered `hmasd-verifier`. Candidate-focused checks never duplicate a phase
-argv or write the exercise root. The verifier uses the registered interpreter
-and the Skill-owned script in two mechanical steps:
+argv or write the exercise root. Readiness binds to one clean candidate commit
+equal to `HEAD`; there is no source/execution bridge or execution-support delta.
+The wrapper owns only ordered execution, typed mechanical outcomes, logs,
+Git-visible worktree observation and receipt recording. CPM owns the exact
+commands and phase semantics. The verifier uses the registered interpreter and
+the Skill-owned script in two mechanical steps:
 
 ```powershell
 & 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
@@ -209,9 +213,10 @@ writes only the Git-private receipt. The result-bearing `run` is never elevated,
 so its compiler, native-extension cache and candidate environment do not change
 between focused evidence and readiness execution.
 
-The temporary JSON spec binds one candidate commit, exact accepted paths,
-`formal=false`, `scientific_iteration_cost=zero`, one independent proof-sized
-exercise root, expected artifacts and argv arrays for these ordered phases:
+The temporary JSON spec binds one candidate commit equal to clean `HEAD`, exact
+accepted paths, `formal=false`, `scientific_iteration_cost=zero`, one
+independent proof-sized exercise root, expected artifacts and argv arrays for
+these ordered phases:
 
 ```text
 interface_smoke -> bounded_exercise -> artifact_validation -> artifact_reload -> evaluate_entry -> analyze_entry
@@ -226,12 +231,16 @@ never use a formal authorization token, formal budget or scientific threshold
 disposition.
 
 The script executes argv arrays without a shell, fails at the first unsuccessful
-phase and checks the expected artifacts. It exposes the successful Git-private
-receipt only after `finalize` revalidates all six phases on the exact clean
-candidate commit. The receipt is mechanical evidence, is not Git-tracked and is
-not another acceptance owner. The verifier returns the receipt or distinguishes
-a pre-phase invocation failure, the first causal phase failure, and a
-zero-compute finalization failure without repair.
+phase and checks the expected artifacts. It records typed launch, timeout and
+process-tree termination evidence, phase logs and Git-visible cleanliness after
+each phase; it makes no ignored-file security claim. It exposes the successful
+Git-private receipt only after `finalize` revalidates all six phases on the exact
+clean candidate commit. The receipt is mechanical evidence, is not Git-tracked
+and is not another acceptance owner. A receipt cannot overwrite a different
+candidate or attempt; a same-content finalizer retry is idempotent and reruns no
+phase. Historical receipts are checked with `check --receipt`. The verifier
+returns the receipt or distinguishes a pre-phase invocation failure, the first
+causal phase failure, and a zero-compute finalization failure without repair.
 Code Project Manager classifies that evidence, owns any reassignment or repair,
 and alone accepts the candidate.
 For a deterministic post-acceptance defect with plausible recurrence, add one
@@ -240,15 +249,15 @@ proof-sized regression before rerunning the procedure.
 A readiness phase timeout is candidate evidence, not authority to replay the
 same proof root or relax its timeout. A new or revised workflow contract chooses
 a semantics-preserving technical optimization under the unchanged phase timeout
-or an evidence-backed timeout revision. That contract may also define a bounded
-operational retry budget for one unchanged clean candidate. Every attempt still
-requires one exact spec, one fresh absent root, one wrapper run, the same ordered
-six phases and a full commit-bound receipt. Any code or validator defect produces
-a new clean pushed candidate; only a transient environment, launcher, path or
-operating-system failure may consume an explicitly defined retry budget. A
-timeout, technical failure or finalization failure consumes zero scientific
-iterations, produces no scientific disposition and leaves its root terminal.
-Nothing automatically increases a timeout or switches the selected response.
+or an evidence-backed timeout revision. A bounded unchanged-candidate attempt
+budget may be stated by that contract; each attempt still requires one exact
+spec, one fresh absent root, one wrapper run, the same ordered six phases and a
+full candidate-bound receipt. Any code or validator defect produces a new clean
+pushed candidate; only a transient environment, launcher, path or
+operating-system failure may consume the stated budget. A timeout, technical
+failure or finalization failure consumes zero scientific iterations, produces no
+scientific disposition and leaves its root terminal. Nothing automatically
+increases a timeout or switches the selected response.
 
 The project `Stop` hook is a last-message guard only. It runs no validation
 command. In the fixed Code Project Manager task, a `CODE_ACCEPTED` return with

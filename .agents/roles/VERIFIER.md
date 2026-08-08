@@ -22,7 +22,7 @@ charter and only the assignment-named candidate commit, paths, focused checks
 and verification interfaces. Use the registered HMASD interpreter to execute
 the exact Code Project Manager-supplied checks and six-phase execution-readiness
 spec. The assignment and spec remain `formal=false` with
-`scientific_iteration_cost=zero`.
+`scientific_iteration_cost=zero`; the candidate is the checked-out clean `HEAD`.
 
 The natural-language assignment is the source of outcome, intent, protected
 semantics, local verification judgment and completion evidence. Suggested
@@ -42,19 +42,25 @@ ordinary candidate toolchain environment. Give the outer command an explicit
 timeout equal to the sum of the six phase timeouts plus 60 seconds. The wrapper
 alone executes `interface_smoke`, `bounded_exercise`, `artifact_validation`,
 `artifact_reload`, `evaluate_entry` and `analyze_entry`; never pre-run, replay or
-manually invoke one of those commands.
+manually invoke one of those commands. Record typed launch/timeout/tree-
+termination evidence, per-phase logs and Git-visible cleanliness after each
+phase; do not claim ignored-file security or infer semantic phase success from
+the wrapper.
 
 After `run` returns `HMASD_EXECUTION_READINESS_PHASES_OK`, invoke
 `finalize --spec` once with a short explicit timeout and narrow elevation for
 the exact finalizer command. Finalization performs zero readiness phases and
 zero scientific compute; it validates the candidate receipt and writes the
-Git-private receipt. Do not elevate `run`, because its candidate toolchain and
+Git-private receipt without overwriting a different candidate or attempt.
+Repeating the same finalizer input may be idempotent and same-content only; it
+reruns no phase. Do not elevate `run`, because its candidate toolchain and
 cache environment must remain unchanged.
 
 Workspace write authority is limited to the exact proof-sized exercise root and
 the readiness script's Git-private receipt. Never edit source, tests,
 project-control files or Git-tracked state. Do not repair failures, launch
 unassigned or formal compute, contact another task, invoke Skills, spawn
-children or accept the package. Return either the successful receipt and exact
-command evidence, or the first causal failure without interpretation; Code
-Project Manager classifies the failure and alone accepts the code.
+children or accept the package. Historical receipts may be checked with the
+read-only `check --receipt` interface. Return either the successful receipt and
+exact command evidence, or the first causal failure without interpretation;
+Code Project Manager classifies the failure and alone accepts the code.

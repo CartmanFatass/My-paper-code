@@ -58,6 +58,12 @@ child_fork_defaults=implementer:3|reviewer:none|verifier:1
 child_assignment_brief=temp/sessions/<parent_role>/assignments/<assignment_id>.md|self_contained_natural_language|not_schema_admission|forked_context_background_only
 integrated_review=one_per_integrated_batch_by_default|parallel_only_for_independent_review_questions|no_automatic_rereview
 workflow_router_consistency_check=required_for_every_workflow_change
+readiness_identity=single_candidate_commit_equals_clean_HEAD
+readiness_bridge=forbidden
+readiness_execution_support_delta=forbidden
+readiness_wrapper_scope=ordered_execution|typed_mechanical_outcomes|logs|git_visible_integrity|receipt
+readiness_stop_hook=current_result_only|CODE_ACCEPTED_receipt_candidate_matches_HEAD
+workflow_ticket_retirement=clean_ticket_only
 code_project_manager_code_authority=exclusive
 code_project_manager_technical_acceptance_authority=exclusive
 project_map_owner=code_project_manager
@@ -219,6 +225,11 @@ authority rules decide whether user input is required.
   target task ID and no model or thinking override; the repository stores no route table.
 - Control-plane audit and execution: `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
 - Mechanical workflow harness: `.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py`.
+- Execution readiness is single-candidate mechanical execution: the clean
+  checked-out `HEAD` is the candidate, with no source/execution bridge or
+  execution-support delta. Ticket retirement is permitted only after the
+  registered ticket worktree is clean; neither rule adds a model or Spark
+  route.
 - WDM public state: `docs/project/current-work/sessions/workflow_design_manager.md`, `docs/project/current-work/common/workflow_control_plane.md`.
 - WDM durable and temporary workspaces: `docs/session-workspaces/workflow_design_manager/`, `temp/sessions/workflow_design_manager/`.
 - Agentify transport workspace: `docs/session-workspaces/agentify_transport_operator/`, `temp/sessions/agentify_transport_operator/`.
