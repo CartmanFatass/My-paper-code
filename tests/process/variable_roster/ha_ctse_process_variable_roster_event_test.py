@@ -44,6 +44,8 @@ from ha_ctse_process.variable_roster_event_types import (
     MembershipDelta,
     MembershipTransaction,
     PackedActiveBatch,
+    PartnerInteractionHistory,
+    PartnerInteractionRow,
 )
 from ha_ctse_process.variable_roster_event_support import (
     ROLLOUT_TRUNCATION,
@@ -125,6 +127,7 @@ def make_core(
     environment_index=0,
     shared_models_from=None,
     device="cpu",
+    partner_interaction_enabled=False,
 ):
     torch.manual_seed(int(model_seed))
     return VariableRosterEventCore(
@@ -147,6 +150,7 @@ def make_core(
         rng_episode_id=rng_episode_id,
         device=device,
         shared_models_from=shared_models_from,
+        partner_interaction_enabled=partner_interaction_enabled,
     )
 
 
@@ -218,6 +222,30 @@ def low_then_transition(core, keys, reward):
     snapshot = boundary(core, keys)
     core.low_step(snapshot, deterministic=True)
     core.complete_primitive_transition(reward)
+
+
+def test_partner_interaction_writes_p_during_a_real_event():
+    # End-to-end: with the Seq-12 support-native transition enabled, a real
+    # apply_transaction over a >=2-member frontier writes each owner's P from a
+    # genuine other-member partner, bound to provenance.
+    core = make_core("f1", partner_interaction_enabled=True)
+    initial_join(core, keys=("a", "b"), actions={"a": 0, "b": 1})
+    for key in ("a", "b"):
+        history = core.records[key].partner_interaction_history
+        assert history is not None, f"P not written for {key}"
+        row = history.rows[-1]
+        assert row.owner_lifecycle_key == key
+        assert row.partner_lifecycle_key != key  # a genuine other member
+        assert row.partner_lifecycle_key in ("a", "b")
+        assert -1.0 <= history.current_p <= 1.0
+
+
+def test_no_partner_interaction_when_disabled_end_to_end():
+    # The same real event with the flag off (the default) writes no P at all.
+    core = make_core("f1")
+    initial_join(core, keys=("a", "b"), actions={"a": 0, "b": 1})
+    for key in ("a", "b"):
+        assert core.records[key].partner_interaction_history is None
 
 
 def run_trace():
@@ -722,6 +750,79 @@ def test_schema3_checkpoint_roundtrip_restores_runtime_collector_and_rngs(tmp_pa
         wrong_mode.restore_checkpoint_payload(
             payload, collector=SyncEnvCollector([SnapshotEnv()])
         )
+
+
+def test_partner_interaction_checkpoint_roundtrip_restores_and_appends(tmp_path):
+    core = make_core("f1", partner_interaction_enabled=True)
+    initial_join(core, keys=("a", "b"), actions={"a": 0, "b": 1})
+    expected_histories = {
+        key: deepcopy(core.records[key].partner_interaction_history)
+        for key in ("a", "b")
+    }
+    payload = core.checkpoint_payload(
+        collector_snapshot=SyncEnvCollector([SnapshotEnv(value=23)]).snapshot_event_runtime(),
+        current_observation_state_boundary={"time": core.physical_time},
+        optimizer_states={"high": {"steps": 0}, "low": {"steps": 0}},
+        normalizer_states={"high": {"mean": 0.0}, "low": {"mean": 0.0}},
+    )
+    record_states = payload["event_architecture"]["lifecycle_records"]
+    for state in record_states.values():
+        history = state["partner_interaction_history"]
+        state["partner_interaction_history"] = {
+            "current_p": history.current_p,
+            "rows": [deepcopy(row.__dict__) for row in history.rows],
+        }
+    checkpoint_path = tmp_path / "partner_interaction_schema3.pt"
+    torch.save(payload, checkpoint_path)
+    reloaded_payload = torch.load(
+        checkpoint_path, map_location="cpu", weights_only=False
+    )
+
+    malformed = deepcopy(reloaded_payload)
+    malformed["event_architecture"]["lifecycle_records"]["a"][
+        "partner_interaction_history"
+    ]["rows"] = {"not": "an ordered row sequence"}
+    with pytest.raises(
+        ValueError, match="partner interaction history rows must be a list or tuple"
+    ):
+        make_core("f1", partner_interaction_enabled=True).restore_checkpoint_payload(
+            malformed, collector=SyncEnvCollector([SnapshotEnv()])
+        )
+
+    restored = make_core(
+        "f1", model_seed=999, opportunity_seed=999, partner_interaction_enabled=True
+    )
+    restored.restore_checkpoint_payload(
+        reloaded_payload, collector=SyncEnvCollector([SnapshotEnv(value=-1)])
+    )
+    for key in ("a", "b"):
+        expected = expected_histories[key]
+        actual = restored.records[key].partner_interaction_history
+        assert isinstance(actual, PartnerInteractionHistory)
+        assert actual.current_p == expected.current_p
+        assert actual.rows == expected.rows
+        assert all(isinstance(row, PartnerInteractionRow) for row in actual.rows)
+
+    restored_row_counts = {
+        key: len(restored.records[key].partner_interaction_history.rows)
+        for key in ("a", "b")
+    }
+    low_then_transition(restored, ("a", "b"), 0.25)
+    assert set(restored.due_frontier()) == {"a", "b"}
+    restored.apply_transaction(
+        no_membership_transaction(restored, ("a", "b"), ("a", "b")),
+        teacher_order=("a", "b"),
+        teacher_actions={"a": 2, "b": 1},
+    )
+    for key in ("a", "b"):
+        history = restored.records[key].partner_interaction_history
+        assert len(history.rows) == restored_row_counts[key] + 1
+        assert history.rows[:-1] == expected_histories[key].rows
+        appended = history.rows[-1]
+        assert appended.owner_lifecycle_key == key
+        assert appended.partner_lifecycle_key in {"a", "b"} - {key}
+        assert appended.prior_p == expected_histories[key].current_p
+        assert appended.next_p == history.current_p
 
 
 def test_event_dispatch_is_early_fail_closed_and_legacy_signature_is_unchanged(monkeypatch):

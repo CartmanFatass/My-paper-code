@@ -40,6 +40,8 @@ from ha_ctse_process.variable_roster_event_types import (
     PackedActiveBatch,
     PackedEventHighPPOData,
     PackedEventHighReplay,
+    PartnerInteractionHistory,
+    PartnerInteractionRow,
     PackedEventLowReplay,
     PackedEventPPOData,
     event_action_hooks,
@@ -128,6 +130,7 @@ class VariableRosterEventCore:
         device: str | torch.device = "cpu",
         shared_models_from: "VariableRosterEventCore | None" = None,
         runtime_mode: str = LEARNED_LOW_RUNTIME,
+        partner_interaction_enabled: bool = False,
     ) -> None:
         mode = str(architecture_mode).lower()
         if mode not in EVENT_MODES:
@@ -141,6 +144,10 @@ class VariableRosterEventCore:
             raise ValueError("event runtime requires at least two skills")
         self.architecture_mode = mode
         self.runtime_mode = selected_runtime_mode
+        # MSSR (Seq 12) support-native partner-interaction transition.  Default
+        # OFF: when disabled the transition never executes, the actor has no
+        # first-action head, and every existing rollout is byte-identical.
+        self.partner_interaction_enabled = bool(partner_interaction_enabled)
         self.obs_dim = int(obs_dim)
         self.critic_member_dim = int(critic_member_dim)
         self.critic_global_dim = int(critic_global_dim)
@@ -176,6 +183,7 @@ class VariableRosterEventCore:
                 member_hidden_dim=self.member_hidden_dim,
                 high_hidden_dim=self.high_hidden_dim,
                 skill_embedding_dim=self.skill_embedding_dim,
+                partner_first_action=self.partner_interaction_enabled,
             ).to(self.device)
             self.event_critic = variable_roster_event_models.EventHighCritic(
                 critic_member_dim=self.critic_member_dim,
@@ -218,6 +226,14 @@ class VariableRosterEventCore:
             self.low_critic = shared_models_from.low_critic
 
         self.records: dict[str, LifecycleRecord] = {}
+        # FOLR S03 direct-kernel capture sink.  None by default, and while it is
+        # None `_process_frontier` behaves exactly as before: no extra tensor is
+        # materialized and no RNG is touched.  Installed only by the FOLR
+        # experiment harness via `install_kernel_capture`.
+        self._kernel_capture: Any | None = None
+        # FOLR S03 pre-frontier intervention.  None by default; see
+        # `install_preframe_intervention` for the registered write point.
+        self._preframe_intervention: Any | None = None
         self.high_ledger: list[EventTokenRow] = []
         self.closed_event_rows: list[ClosedEventRow] = []
         self.low_ledger: list[LowTransitionRow] = []
@@ -652,6 +668,14 @@ class VariableRosterEventCore:
                 trial[current.lifecycle_key].open_event_trace = None
         self.records = trial
 
+        # FOLR S03 registered write point.  External Pro fixed this exact
+        # boundary: "After membership state is committed, immediately before the
+        # target token reads pre_hidden."  The membership trial has been
+        # validated and committed on the line above, and no token has been
+        # processed yet.  With no intervention installed nothing executes here.
+        if self._preframe_intervention is not None:
+            self._preframe_intervention(self)
+
         result = self._process_frontier(
             post,
             teacher_order=teacher_order,
@@ -662,6 +686,104 @@ class VariableRosterEventCore:
             self.records[key].is_genuine_join = False
             self.records[key].is_rejoin = False
         return result
+
+    def install_kernel_capture(self, sink: Any | None) -> None:
+        """Install or clear the FOLR S03 direct-kernel capture sink.
+
+        ``sink`` must expose ``capture(**kwargs)`` returning either ``None`` or
+        an object with ``row_fields() -> dict``.  Passing ``None`` restores the
+        unmodified execution path exactly.  Nothing in this module interprets
+        the sink; the experiment owns its semantics.
+        """
+        self._kernel_capture = sink
+
+    def install_preframe_intervention(self, intervention: Any | None) -> None:
+        """Install or clear the FOLR S03 payload write hook.
+
+        ``intervention`` is called as ``intervention(core)`` exactly once per
+        ``apply_transaction``, after the membership trial has been committed to
+        ``self.records`` and before any frontier token is processed.  That is
+        the write point External Pro registered for this experiment:
+
+            For this narrow access experiment, install the payload after the
+            membership trial has been validated and committed, but before the
+            target token materializes pre_hidden.
+
+        Passing ``None`` restores the unmodified execution path exactly.  As
+        with ``install_kernel_capture``, nothing in this module interprets the
+        callable; the experiment owns its semantics.  It runs before any RNG is
+        consumed by the frontier, so a hook that only writes record fields
+        cannot perturb determinism.
+        """
+        self._preframe_intervention = intervention
+
+    def _write_partner_interaction(
+        self,
+        *,
+        record: LifecycleRecord,
+        owner_key: str,
+        owner_row: int,
+        active_keys: Sequence[str],
+        active_observations: torch.Tensor,
+        event_index: int,
+    ) -> None:
+        """Registered support-native partner-interaction transition (Seq 12).
+
+        Owner ``i``'s partner-interaction history ``P`` is advanced by a genuine
+        interaction with one specific other active member ``j`` -- the strongest
+        interactor by environment-observation alignment.  The payload is derived
+        from ``j``'s environment observation (``packed.member_obs``), not from any
+        event-core-internal hidden state, so the signal enters from the
+        environment side.  The write:
+
+        * depends on ``j``'s observation (a real cross-member dependency -- the
+          first in this runtime, which otherwise computes only self-local
+          per-owner state and set-level aggregates);
+        * is fully deterministic and consumes no RNG, so the action / frontier /
+          opportunity streams are untouched and a disabled run is byte-identical;
+        * goes only to the owner-private ``record.partner_interaction_history``
+          field -- there is no public setter, so P can be produced only here; and
+        * is bound to its full provenance tuple (episode, owner, membership
+          epoch, partner identity, event index, prior P, payload, next P,
+          writer/version).
+
+        A solitary owner (no other active member) has no partner and no write.
+        """
+        owner_vector = active_observations[owner_row].reshape(-1)
+        partner_index: int | None = None
+        best_alignment: float | None = None
+        for index in range(int(active_observations.shape[0])):
+            if index == owner_row:
+                continue
+            alignment = float(
+                torch.dot(owner_vector, active_observations[index].reshape(-1))
+            )
+            if best_alignment is None or alignment > best_alignment:
+                best_alignment = alignment
+                partner_index = index
+        if partner_index is None:
+            return
+        partner_key = active_keys[partner_index]
+        dimension = int(owner_vector.shape[0])
+        payload = float(np.tanh(best_alignment / max(dimension, 1) ** 0.5))
+        prior = record.partner_interaction_history
+        prior_p = float(prior.current_p) if prior is not None else 0.0
+        prior_rows = prior.rows if prior is not None else ()
+        next_p = float(np.clip(0.8 * prior_p + 0.2 * payload, -1.0, 1.0))
+        row = PartnerInteractionRow(
+            episode_id=int(self.rng_episode_id),
+            owner_lifecycle_key=str(owner_key),
+            membership_epoch=int(record.membership_epoch),
+            partner_lifecycle_key=str(partner_key),
+            event_index=int(event_index),
+            prior_p=prior_p,
+            payload=payload,
+            next_p=next_p,
+            writer_policy_version=int(self.policy_version),
+        )
+        record.partner_interaction_history = PartnerInteractionHistory(
+            current_p=next_p, rows=prior_rows + (row,)
+        )
 
     def _process_frontier(
         self,
@@ -745,6 +867,38 @@ class VariableRosterEventCore:
             legal_mask = torch.ones(self.n_skills, dtype=torch.bool, device=self.device)
             masked_logits = logits.masked_fill(~legal_mask, -torch.inf)
             log_probabilities = F.log_softmax(masked_logits, dim=-1)
+            # FOLR S03 direct-kernel capture.  External Pro fixed this exact
+            # point: after masked_logits is constructed, after softmax, before
+            # action selection, before action-RNG consumption and before
+            # opportunity-gap sampling.  Computing a softmax consumes no RNG, so
+            # an installed sink cannot perturb determinism; with no sink
+            # installed nothing here executes at all.
+            direct_kernel = None
+            if self._kernel_capture is not None:
+                direct_kernel = self._kernel_capture.capture(
+                    owner_lifecycle_key=key,
+                    membership_epoch=int(record.membership_epoch),
+                    token_position=position,
+                    masked_logits=masked_logits,
+                    probabilities=torch.softmax(masked_logits, dim=-1),
+                    # The complete actor-read preimage other than S03, so the
+                    # sink can digest it candidate-side.  Everything here is
+                    # already determined before the kernel is produced.
+                    preimage={
+                        "observations": observations,
+                        "event_flags": flags,
+                        "initial_skills": initial_skills,
+                        "initial_ages": initial_ages,
+                        "pre_token_working_skills": pre_skills,
+                        "pre_token_working_ages": pre_ages,
+                        "pre_token_high_hidden": pre_hidden,
+                        "legal_mask": legal_mask,
+                        "sampled_order": sampled_order,
+                        "active_lifecycle_keys": routing.lifecycle_keys,
+                        "active_membership_epochs": routing.membership_epochs,
+                        "architecture_mode": self.architecture_mode,
+                    },
+                )
             policy_action_uniform: float | None = None
             if teacher_actions is not None:
                 if key not in teacher_actions:
@@ -776,6 +930,19 @@ class VariableRosterEventCore:
             record.high_hidden = new_hidden.detach().cpu().numpy().astype(np.float32)
             record.last_policy_event_time = int(self.physical_time)
             record.policy_version = int(self.policy_version)
+            if self.partner_interaction_enabled:
+                # Registered partner-interaction transition writes the owner's
+                # support-native P from a genuine interaction with a specific
+                # other active member, using their environment observations.  No
+                # RNG, only the new owner-private field -- inert when disabled.
+                self._write_partner_interaction(
+                    record=record,
+                    owner_key=key,
+                    owner_row=row_index,
+                    active_keys=routing.lifecycle_keys,
+                    active_observations=observations,
+                    event_index=position,
+                )
             new_embedding = self.commitment_model.encode_members(
                 observations[row_index : row_index + 1],
                 working_skills[row_index : row_index + 1],
@@ -838,6 +1005,7 @@ class VariableRosterEventCore:
                 old_token_log_probability=old_logp,
                 old_owner_value=old_value,
                 action_kind=action_kind,
+                **({} if direct_kernel is None else direct_kernel.row_fields()),
             )
             self.high_ledger.append(token_row)
             token_rows.append(token_row)
@@ -1357,7 +1525,7 @@ class VariableRosterEventCore:
         self.low_chunk_boundaries.clear()
 
     def architecture_state(self) -> dict[str, Any]:
-        return {
+        state = {
             "runtime_mode": self.runtime_mode,
             "obs_dim": self.obs_dim,
             "critic_member_dim": self.critic_member_dim,
@@ -1373,10 +1541,105 @@ class VariableRosterEventCore:
             "gae_lambda": self.gae_lambda,
             "age_reference_steps": AGE_REFERENCE_STEPS,
         }
+        # Seq-12 support-native partner-interaction adds a first-action head and
+        # a partner-interaction transition -- a distinct architecture.  Recorded
+        # ONLY when enabled, so a disabled core's architecture state (and every
+        # existing digest) is unchanged, while an enabled core is distinguished
+        # from a disabled one for the shared-model equality check.
+        if self.partner_interaction_enabled:
+            state["partner_interaction_enabled"] = True
+        return state
 
     @staticmethod
     def _record_to_state(record: LifecycleRecord) -> dict[str, Any]:
         return deepcopy(record.__dict__)
+
+    @staticmethod
+    def _partner_interaction_row_from_state(
+        state: PartnerInteractionRow | Mapping[str, Any], *, index: int
+    ) -> PartnerInteractionRow:
+        if isinstance(state, PartnerInteractionRow):
+            data = deepcopy(state.__dict__)
+        elif isinstance(state, Mapping):
+            data = deepcopy(dict(state))
+        else:
+            raise ValueError(
+                f"partner interaction row {index} must be a mapping or "
+                "PartnerInteractionRow"
+            )
+        expected = set(PartnerInteractionRow.__dataclass_fields__)
+        if set(data) != expected:
+            raise ValueError(
+                f"partner interaction row {index} fields mismatch: "
+                f"expected {sorted(expected)}, got {sorted(data)}"
+            )
+        for name in (
+            "episode_id",
+            "membership_epoch",
+            "event_index",
+            "writer_policy_version",
+        ):
+            value = data[name]
+            if isinstance(value, (bool, np.bool_)) or not isinstance(
+                value, (int, np.integer)
+            ):
+                raise ValueError(
+                    f"partner interaction row {index} field {name} must be an integer"
+                )
+            data[name] = int(value)
+        for name in ("owner_lifecycle_key", "partner_lifecycle_key"):
+            if not isinstance(data[name], str):
+                raise ValueError(
+                    f"partner interaction row {index} field {name} must be a string"
+                )
+        for name in ("prior_p", "payload", "next_p"):
+            value = data[name]
+            if isinstance(value, (bool, np.bool_)) or not isinstance(
+                value, (int, float, np.integer, np.floating)
+            ):
+                raise ValueError(
+                    f"partner interaction row {index} field {name} must be numeric"
+                )
+            data[name] = float(value)
+        return PartnerInteractionRow(**data)
+
+    @staticmethod
+    def _partner_interaction_history_from_state(
+        state: PartnerInteractionHistory | Mapping[str, Any] | None,
+    ) -> PartnerInteractionHistory | None:
+        if state is None:
+            return None
+        if isinstance(state, PartnerInteractionHistory):
+            current_p = state.current_p
+            raw_rows = state.rows
+        elif isinstance(state, Mapping):
+            data = deepcopy(dict(state))
+            expected = set(PartnerInteractionHistory.__dataclass_fields__)
+            if set(data) != expected:
+                raise ValueError(
+                    "partner interaction history fields mismatch: "
+                    f"expected {sorted(expected)}, got {sorted(data)}"
+                )
+            current_p = data["current_p"]
+            raw_rows = data["rows"]
+        else:
+            raise ValueError(
+                "partner interaction history must be a mapping or "
+                "PartnerInteractionHistory"
+            )
+        if isinstance(current_p, (bool, np.bool_)) or not isinstance(
+            current_p, (int, float, np.integer, np.floating)
+        ):
+            raise ValueError("partner interaction history current_p must be numeric")
+        if not isinstance(raw_rows, (list, tuple)):
+            raise ValueError("partner interaction history rows must be a list or tuple")
+        rows = tuple(
+            VariableRosterEventCore._partner_interaction_row_from_state(
+                row, index=index
+            )
+            for index, row in enumerate(raw_rows)
+        )
+        return PartnerInteractionHistory(current_p=float(current_p), rows=rows)
 
     @staticmethod
     def _record_from_state(state: Mapping[str, Any]) -> LifecycleRecord:
@@ -1384,6 +1647,11 @@ class VariableRosterEventCore:
         trace = data.get("open_event_trace")
         if isinstance(trace, Mapping):
             data["open_event_trace"] = OpenEventTrace(**dict(trace))
+        data["partner_interaction_history"] = (
+            VariableRosterEventCore._partner_interaction_history_from_state(
+                data.get("partner_interaction_history")
+            )
+        )
         for name in ("low_actor_hidden", "low_critic_hidden", "high_hidden"):
             data[name] = np.asarray(data[name], dtype=np.float32).copy()
         return LifecycleRecord(**data)

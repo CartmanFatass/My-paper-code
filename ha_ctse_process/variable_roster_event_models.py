@@ -24,6 +24,7 @@ class EventCommitmentPolicy(nn.Module):
         member_hidden_dim: int,
         high_hidden_dim: int,
         skill_embedding_dim: int,
+        partner_first_action: bool = False,
     ) -> None:
         super().__init__()
         self.obs_dim = int(obs_dim)
@@ -32,6 +33,7 @@ class EventCommitmentPolicy(nn.Module):
         self.high_hidden_dim = int(high_hidden_dim)
         self.skill_embedding_dim = int(skill_embedding_dim)
         self.summary_dim = self.member_hidden_dim + 1
+        self.partner_first_action = bool(partner_first_action)
 
         self.skill_embedding = nn.Embedding(self.n_skills, self.skill_embedding_dim)
         member_input_dim = self.obs_dim + self.skill_embedding_dim + 3
@@ -51,6 +53,25 @@ class EventCommitmentPolicy(nn.Module):
             nn.GELU(),
         )
         self.skill_head = nn.Linear(self.member_hidden_dim, self.n_skills)
+        if self.partner_first_action:
+            # Seq-12 support-native pre-recurrence action head.  Emits
+            # first-logits from the pre-recurrence hidden state and the owner's
+            # historical partner-interaction value (P) BEFORE the GRU update, so
+            # first_logits_tick < recurrent_update_tick.  Constructed LAST and
+            # only when enabled, so a disabled policy has a byte-identical
+            # parameter set and identical initialization RNG consumption -- the
+            # existing FOLR / continuous-roster runs are unperturbed.  The input
+            # carries one extra scalar slot for the historical P value.  (This is
+            # the separate support-native P precondition, not the full skill
+            # commitment contract, so no full-contract binding token is used.)
+            self.first_decoder = nn.Sequential(
+                nn.Linear(
+                    self.high_hidden_dim + self.summary_dim + 1,
+                    self.member_hidden_dim,
+                ),
+                nn.GELU(),
+            )
+            self.first_head = nn.Linear(self.member_hidden_dim, self.n_skills)
 
     def encode_members(
         self,
@@ -117,6 +138,50 @@ class EventCommitmentPolicy(nn.Module):
         )
         hidden = self.decoder_hidden(torch.cat((new_hidden, selected_summary), dim=-1))
         return self.skill_head(hidden).squeeze(0), new_hidden.squeeze(0)
+
+    def first_logits(
+        self,
+        member_embedding: torch.Tensor,
+        selected_summary: torch.Tensor,
+        pre_hidden: torch.Tensor,
+        partner_p: torch.Tensor | float | None = None,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """Seq-12 support-native pre-recurrence action head.
+
+        Produces the action logits from the PRE-recurrence hidden state and the
+        owner's historical partner-interaction value ``partner_p`` BEFORE the
+        recurrent update runs, so the returned logits carry no computational
+        dependence on the post-recurrence hidden value.  The recurrent update
+        still executes and its ``new_hidden`` is returned for the state carry,
+        exactly as ``logits`` does, but the action head does not read it.
+        """
+        if not self.partner_first_action:
+            raise RuntimeError(
+                "first_logits requires the policy to be built with "
+                "partner_first_action=True"
+            )
+        member_embedding = member_embedding.reshape(1, self.member_hidden_dim)
+        selected_summary = selected_summary.reshape(1, self.summary_dim)
+        pre_hidden = pre_hidden.reshape(1, self.high_hidden_dim)
+        if partner_p is None:
+            p_value = torch.zeros(
+                1, 1, dtype=pre_hidden.dtype, device=pre_hidden.device
+            )
+        else:
+            p_value = torch.as_tensor(
+                partner_p, dtype=pre_hidden.dtype, device=pre_hidden.device
+            ).reshape(1, 1)
+        # Action logits FIRST, from the pre-recurrence hidden and historical P.
+        first_hidden = self.first_decoder(
+            torch.cat((pre_hidden, selected_summary, p_value), dim=-1)
+        )
+        first = self.first_head(first_hidden)
+        # Recurrent update AFTERWARDS; carried but not read by the action head.
+        new_hidden = self.high_rnn(
+            torch.cat((member_embedding, selected_summary), dim=-1),
+            pre_hidden,
+        )
+        return first.squeeze(0), new_hidden.squeeze(0)
 
     def zero_summary_path(self) -> None:
         """Create the registered action-independent reduction control."""
