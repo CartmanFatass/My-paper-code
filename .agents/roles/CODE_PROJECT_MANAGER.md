@@ -90,6 +90,16 @@ manager; there is no Research Operations Manager or persistent monitor.
   balance, current assignment and next boundary live only in the applicable
   common record.
 - Architecture and implementation choices inside an exact Pro-frozen contract.
+- `docs/project/PROJECT_MAP.md` accuracy and maintenance. Code Project Manager
+  owns map accuracy and updates the map in the same code commit when a stable
+  lineage role, default execution shape, load-bearing state owner, stable
+  dependency direction, or isolated/legacy membership in the default route
+  changes. Ordinary local internals, temporary experiments and routine local
+  renames do not trigger an update. If a discovered discrepancy makes the map
+  stale, correct it as a necessary consequential change before accepting the
+  code. The integrated reviewer checks map consistency only when one of these
+  stable-architecture triggers applies; this adds no additional reviewer or
+  approval gate.
 - For an Explorer-origin candidate, read the named self-contained public brief,
   use engineering judgment and perform bounded safe read-only reconnaissance.
   Missing formatting or an input object is not an intake blocker. CPM constructs

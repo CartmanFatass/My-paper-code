@@ -13,6 +13,10 @@ $cpmWorkspacePath = Join-Path $repo 'docs/session-workspaces/code_project_manage
 $cpmFailureContainmentPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md'
 $currentWorkIndexPath = Join-Path $repo 'docs/project/CURRENT_WORK.md'
 $currentWorkSessionPath = Join-Path $repo 'docs/project/current-work/sessions/code_project_manager.md'
+$projectCognitionBootstrapPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/references/project-cognition-bootstrap-prompt.md'
+$codeContextGuidePath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/references/code-context-guide.md'
+$assignmentBriefExamplesPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/references/assignment-brief-examples.md'
+$obsoleteWdmPlanPath = Join-Path $repo 'docs/session-workspaces/workflow_design_manager/AGILE_MODULARIZATION_AND_SUBAGENT_EXECUTION_PLAN.md'
 $cpmWorkspace = Get-Content -Raw -LiteralPath $cpmWorkspacePath
 $cpmFailureContainment = Get-Content -Raw -LiteralPath $cpmFailureContainmentPath
 $currentWorkIndex = Get-Content -Raw -LiteralPath $currentWorkIndexPath
@@ -40,6 +44,22 @@ $publicHandoffContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/pr
 $publicHandoffContractNormalized = $publicHandoffContract -replace '\s+', ' '
 $retiredExplorerValidationScriptPath = Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/scripts/explorer_project_packet.py'
 $agileNormalized = $agile -replace '\s+', ' '
+$projectCognitionReferencePaths = @(
+    $projectCognitionBootstrapPath,
+    $codeContextGuidePath,
+    $assignmentBriefExamplesPath
+)
+foreach ($referencePath in $projectCognitionReferencePaths) {
+    if (-not (Test-Path -LiteralPath $referencePath -PathType Leaf)) {
+        throw "Project cognition reference is missing: $referencePath"
+    }
+}
+$projectCognitionBootstrap = Get-Content -Raw -LiteralPath $projectCognitionBootstrapPath
+$codeContextGuide = Get-Content -Raw -LiteralPath $codeContextGuidePath
+$assignmentBriefExamples = Get-Content -Raw -LiteralPath $assignmentBriefExamplesPath
+$projectCognitionBootstrapNormalized = $projectCognitionBootstrap -replace '\s+', ' '
+$codeContextGuideNormalized = $codeContextGuide -replace '\s+', ' '
+$assignmentBriefExamplesNormalized = $assignmentBriefExamples -replace '\s+', ' '
 $assertion = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SCIENTIFIC_ASSERTION_AUDIT.md')
 $assertionNormalized = $assertion -replace '\s+', ' '
 $readinessScriptPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py'
@@ -344,6 +364,73 @@ foreach ($surface in @($codePmNormalized, $agileNormalized)) {
 
 if ($codePm.Contains('Never load `docs/project/CURRENT_WORK.md`')) {
     throw 'Code Project Manager retains the obsolete CURRENT_WORK read prohibition'
+}
+
+foreach ($required in @(
+    'new persistent coding task',
+    'clearly lacks the project mental model',
+    'never copied to each child',
+    'Local tasks remain local',
+    'Coupled tasks read only the relevant',
+    'Load-bearing tasks read only the relevant',
+    'not schemas or admission gates')) {
+    if (-not $agileNormalized.Contains($required)) {
+        throw "Agile Skill missing project-cognition loading rule: $required"
+    }
+}
+foreach ($required in @(
+    'references/project-cognition-bootstrap-prompt.md',
+    'references/code-context-guide.md',
+    'references/assignment-brief-examples.md',
+    'forked turns are background')) {
+    if (-not $agileNormalized.Contains($required)) {
+        throw "Agile Skill missing project-cognition reference pointer: $required"
+    }
+}
+foreach ($required in @(
+    'smallest sufficient understanding',
+    'context depth',
+    'parent is a context compiler')) {
+    if (-not $projectCognitionBootstrapNormalized.Contains($required) -and
+        -not $codeContextGuideNormalized.Contains($required)) {
+        throw "Project cognition references missing structural cue: $required"
+    }
+}
+if (-not $assignmentBriefExamplesNormalized.Contains('natural-language assignments') -or
+    -not $assignmentBriefExamplesNormalized.Contains('not templates')) {
+    throw 'Assignment brief examples are missing their non-schema contract'
+}
+foreach ($required in @(
+    'PROJECT_MAP.md',
+    'owns map accuracy',
+    'same code commit',
+    'stable lineage role',
+    'default execution shape',
+    'load-bearing state owner',
+    'stable dependency direction',
+    'isolated/legacy membership in the default route',
+    'Ordinary local internals',
+    'temporary experiments',
+    'discovered discrepancy',
+    'integrated reviewer checks map consistency only when',
+    'no additional reviewer or approval gate')) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "Code Project Manager map-maintenance contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'project_map_owner=code_project_manager',
+    'project_map_update=same_commit_when_stable_architecture_fact_changes',
+    '.agents/skills/hmasd-agile-research-development/references/project-cognition-bootstrap-prompt.md')) {
+    if (-not $agents.Contains($required)) {
+        throw "AGENTS project-cognition pointer missing: $required"
+    }
+}
+if (-not $currentWorkIndex.Contains('docs/project/PROJECT_MAP.md')) {
+    throw 'CURRENT_WORK index is missing the stable project-map pointer'
+}
+if (Test-Path -LiteralPath $obsoleteWdmPlanPath) {
+    throw 'Obsolete WDM modularization plan remains live'
 }
 
 if (-not $workflow.Contains('workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces') -or

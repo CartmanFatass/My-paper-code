@@ -103,6 +103,30 @@ module has one state owner or responsibility; do not mix environment dynamics,
 policy decisions, metrics and artifact I/O. Extract shared code only after two
 live callers require it.
 
+## Project cognition references
+
+For a new persistent coding task, or when Code Project Manager clearly lacks the
+project mental model, read
+`references/project-cognition-bootstrap-prompt.md` once alongside the normally
+routed documents. It is a cognitive reference, not an authority source; never
+copied to each child assignment or loaded on every round.
+
+Use context depth deliberately rather than mechanically:
+
+- Local tasks remain local and do not load `docs/project/PROJECT_MAP.md`.
+- Coupled tasks read only the relevant project-map and
+  `references/code-context-guide.md` sections, then the direct responsibility
+  owner, producers, consumers and focused contract evidence.
+- Load-bearing tasks read only the relevant map/context sections plus the exact
+  assignment-named design, runtime boundary and claim evidence; existing
+  readiness and review triggers still decide those actions.
+
+When compiling a child assignment, consult
+`references/assignment-brief-examples.md` only as an optional natural-language
+aid. The parent sends a shorter self-contained brief; forked turns are
+background context and never replace it. These references are judgment aids,
+not schemas or admission gates, and they do not define mandatory fields.
+
 Refactors must reduce active lines. A new scientific mechanism may add at most
 500 active lines and three tracked source files. A file already above 1200 lines
 must stay flat or shrink. These limits prevent another full `Gxx` copy; they do

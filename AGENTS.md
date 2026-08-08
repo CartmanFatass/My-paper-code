@@ -60,6 +60,8 @@ integrated_review=one_per_integrated_batch_by_default|parallel_only_for_independ
 workflow_router_consistency_check=required_for_every_workflow_change
 code_project_manager_code_authority=exclusive
 code_project_manager_technical_acceptance_authority=exclusive
+project_map_owner=code_project_manager
+project_map_update=same_commit_when_stable_architecture_fact_changes
 code_project_manager_routine_implementation_agent=hmasd-implementer-terra
 code_project_manager_protected_implementation_agent=hmasd-implementer
 code_review_owner=code_project_manager|code_review_unit=integrated_change_batch
@@ -204,6 +206,12 @@ authority rules decide whether user input is required.
 - External Pro interface: `.agents/roles/EXTERNAL_PRO.md`; Pro performs independent scientific analysis before returning the bounded final disposition.
 - CPU/runtime facts, only when needed: `docs/project/AGENT_CONTEXT.md`.
 - Implementation mechanics: `.agents/skills/hmasd-agile-research-development/SKILL.md`.
+- Stable code orientation when needed: `docs/project/PROJECT_MAP.md`; Code
+  Project Manager owns its accuracy and updates it in the same code commit when
+  stable architecture facts change. The agile Skill's optional cognition
+  references at
+  `.agents/skills/hmasd-agile-research-development/references/project-cognition-bootstrap-prompt.md`
+  provide the task-model and assignment context aids.
 - Claude-side bounded helpers: `.claude/agents/`; each file is only a thin entry
   profile for its shared `.agents/roles/` charter and adds no authority or procedure.
 - Collaborative workflow design: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`.

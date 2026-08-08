@@ -32,3 +32,4 @@ and sessions do not share a write surface.
 - Evidence complexity: `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
 - Scientific direction ledger: `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
 - Runtime facts when assigned: `docs/project/AGENT_CONTEXT.md`
+- Stable code map (Code Project Manager-owned): `docs/project/PROJECT_MAP.md`
