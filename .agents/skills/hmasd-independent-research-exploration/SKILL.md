@@ -18,7 +18,8 @@ uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
   adversarial checks. The persistent Explorer owns each review item and sends
-  one ordered file-backed set of frozen question paths to the dedicated Agentify task.
+  one ordered file-backed set of frozen question paths to the registered
+  `hmasd-agentify-transport` child.
 
 Restart continuity is owned by the Explorer and specified once in
 `references/parallel-research-workflow.md`; this Skill keeps the mode loop and
@@ -116,12 +117,18 @@ per-review user or WDM confirmation. Load
 `hmasd-independent-research-pro-review`, then Explorer freezes each exact
 assignment, review mode and standalone `RAW_QUESTION`. Write one minimal batch
 file containing provider and the ordered paths of all currently eligible frozen
-questions, then send its path in one `AGENTIFY_REVIEW_BATCH_REQUEST` to the
-dedicated Agentify task. Continue unrelated research while it runs. On
-`AGENTIFY_REVIEW_BATCH_RESULT`, archive each raw response under its review item
-and reconcile it; an item error affects only that review. Pro/Gemini labels and all local metadata
-stay outside the transmitted question. Page, adapter and recovery details
-remain inside the Agentify task.
+questions (`provider|question_paths`), choose one exact `results_path`, and
+dispatch one self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the
+registered `hmasd-agentify-transport` child with `fork_turns=none`, naming only
+`batch_path|results_path`. Continue unrelated research while it runs. The child
+is silent while live and returns exactly once through its native final response
+with `AGENTIFY_REVIEW_BATCH_RESULT` fields `status|results_path|error`, using
+terminal status `COMPLETE|ERROR`. Read the named result only after that terminal
+final return; Explorer performs no polling, progress handling or parent-task
+result relay. Archive each raw response under its review item and reconcile it;
+an item error affects only that review. Pro/Gemini labels and all local metadata
+stay outside the transmitted question. Page, adapter, wait and recovery details
+remain inside the transport child.
 
 Before sending, check once that the raw question contains no local filesystem
 path, task history or unrelated corpus. Use a public remote GitHub URL when the
@@ -291,8 +298,8 @@ The final advisory report includes the campaign direction, corpus coverage,
 source-result matrix, absorption brief, several retained or parked directions,
 mechanism/transfer/combination/split graph, principle analyses, adversarial
 findings, validation-ready candidates, residual gaps, resource disposition and
-convergence basis. The Explorer contacts External Pro only through the dedicated
-Agentify task procedure above; it cannot change CDC state, authorize compute,
+convergence basis. The Explorer contacts External Pro only through the
+registered `hmasd-agentify-transport` child procedure above; it cannot change CDC state, authorize compute,
 dispatch implementation or advance the formal workflow.
 
 ## Project-validation handoff (advisory only)
@@ -318,8 +325,10 @@ recorded between-run adjustment. After CPM technical
 acceptance and push, ordinary B may continue as advisory iteration without Pro.
 Only for the named C/direction-change/material-ambiguity/final-alignment/
 conclusion trigger does Explorer freeze one `CODE_SCIENCE_ALIGNMENT_AUDIT`
-using the returned exact commit and public GitHub locators, submit it through
-the dedicated Agentify task, and archive and intake the answer. External Pro
+using the returned exact commit and public GitHub locators, dispatch it through
+the registered `hmasd-agentify-transport` child with the same file-only
+assignment, and archive and intake the answer only after the child's terminal
+native final return. External Pro
 owns final scientific-semantic acceptance when invoked; Explorer does not
 substitute its own judgment.
 Explorer does not ask

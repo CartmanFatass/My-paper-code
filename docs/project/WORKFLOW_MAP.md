@@ -21,7 +21,7 @@ exhaustive registry or procedure copy.
 | Workflow Reviewer | independent review of one coherent integrated batch | review findings and disposition for WDM; no source edits or acceptance |
 | Code Project Manager (CPM) | code, runtime, technical acceptance and project-operation records | code/runtime/review artifacts through CPM-owned contracts |
 | Independent Research Explorer | advisory research direction, methodology and research workspace | named research handoff; no workflow authority |
-| Agentify Transport Operator | transport mechanics in its explicitly granted workspace | raw transport result for the requesting owner |
+| Agentify Transport child | batch-scoped transport mechanics in its requester-assigned workspace | raw transport result for CPM or Explorer |
 | External Pro | bounded independent scientific judgment | exact review result within the submitted question boundary |
 
 The router, Role charters, Skills, Profiles and focused contract tests form a
@@ -47,8 +47,10 @@ WDM owns the workflow control plane and depends on the stable contracts named by
 the router. A child depends only on its self-contained assignment, registered
 Profile, Role charter and assignment-named references. Child output flows back
 to WDM as advisory or mechanical evidence; it never grants child design,
-routing, Git or acceptance authority. CPM, Explorer, Transport Operator and
-External Pro remain separate owner lanes; WDM does not absorb their artifacts.
+routing, Git or acceptance authority. CPM and Explorer remain separate owner
+lanes, while the registered Agentify transport child is a requester-owned
+batch capability rather than a separate owner lane; WDM does not absorb live
+review traffic or results. External Pro remains a separate scientific lane.
 
 ```text
 user-confirmed plan
@@ -96,10 +98,11 @@ needed for the confirmed slice.
 
 A Workflow Auditor, Implementer or Reviewer starts with its exact assignment,
 registered Profile, named Role and only assignment-named files. A child does
-not reconstruct history or load unrelated current work. CPM, Explorer,
-Transport Operator and External Pro each follow their own router lane and
-owner contract. The map is an orientation aid, not a reason to load every
-document.
+not reconstruct history or load unrelated current work. CPM and Explorer each
+request the Agentify transport child through its file-only assignment; the
+child follows its registered profile, role and Skill without a persistent task
+lane. External Pro follows its own router lane and owner contract. The map is
+an orientation aid, not a reason to load every document.
 
 ## Role-based successor continuity
 

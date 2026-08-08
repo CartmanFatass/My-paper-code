@@ -62,7 +62,15 @@ cross_task_model_and_thinking_overrides=omit
 independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:
 independent_pro_review_item_root=local_research/pro_reviews/<review-id>/
 independent_pro_review_request_and_intake_authority=exclusive_for_explorer_direction_and_methodology_reviews
-independent_pro_review_transport_execution=dedicated_agentify_transport_task
+agentify_transport_child=hmasd-agentify-transport
+agentify_transport_parent=independent_research_explorer
+agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT
+agentify_transport_assignment_fields=batch_path|results_path
+agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
+agentify_transport_result_fields=status|results_path|error
+agentify_transport_terminal_status=COMPLETE|ERROR
+agentify_transport_wait_visibility=silent_until_terminal_native_final
+independent_pro_review_transport_execution=registered_agentify_transport_child
 independent_review_provider_contract=agentify_file_batch_result
 independent_review_transmitted_payload=standalone_RAW_QUESTION_only
 independent_pro_review_terminal_intake=exact_archived_response_fifo
@@ -124,14 +132,20 @@ authority over Explorer's scientific ordering, interpretation or continuation.
 
 Inside an active user-authorized Explorer research grant, the Explorer may
 freeze and conduct exact candidate reviews without per-review user or WDM
-authorization. It writes one minimal batch file containing only provider and
-the ordered paths of all currently eligible frozen questions, sends one
-`AGENTIFY_REVIEW_BATCH_REQUEST` naming that file and the Explorer task, then
-continues unrelated research. On `AGENTIFY_REVIEW_BATCH_RESULT`, it archives
-each raw response in its review item and performs scientific intake. A retry
-reuses the same batch file and changes no Explorer file. Pro-canonical and Gemini-advisory labels remain local and never
-enter the question. Page, provider-adapter and recovery details remain inside
-the Agentify task.
+authorization. It writes one minimal batch file containing only the provider
+and ordered paths of all currently eligible frozen questions, chooses one exact
+`results_path`, and dispatches one self-contained
+`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the registered
+`hmasd-agentify-transport` child with `fork_turns=none`, naming only
+`batch_path|results_path`. It then continues unrelated research. The child is
+silent while live and returns exactly once through its native final response,
+with `AGENTIFY_REVIEW_BATCH_RESULT` fields `status|results_path|error` and
+terminal status `COMPLETE|ERROR`. Explorer reads the named result only after
+that terminal final return; it performs no polling, progress handling or
+parent-task result relay. A retry reuses the same batch file and changes no Explorer
+file. Pro-canonical and Gemini-advisory labels remain local and never enter the
+question. Page, provider-adapter, wait and recovery details remain inside the
+transport child.
 
 Before sending, Explorer uses one model-authored checklist: the raw
 question contains no local filesystem locator, task history or unrelated
@@ -180,8 +194,10 @@ and public GitHub repository/path locators. Ordinary B iteration may continue
 inside Explorer's advisory research state without automatic Pro review or a
 claim of final scientific acceptance. For a named Pro trigger, Explorer may
 inspect project material read-only as needed, then freezes one
-`CODE_SCIENCE_ALIGNMENT_AUDIT`, submits it through the dedicated Agentify
-transport task, and archives and intakes the raw answer. External Pro uses the
+`CODE_SCIENCE_ALIGNMENT_AUDIT`, submits it through the registered
+`hmasd-agentify-transport` child using the same file-only assignment, and
+archives and intakes the raw answer only after the child's terminal native
+final return. External Pro uses the
 GitHub connection to inspect that exact pushed revision and owns final
 scientific-semantic acceptance; Explorer never substitutes its own acceptance.
 CPM remains the sole code and runtime technical acceptance owner. This advisory

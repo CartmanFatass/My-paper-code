@@ -80,6 +80,11 @@ $retiredExplorerValidationTestPath = Join-Path $repo 'tests/hmasd_explorer_proje
 $explorerValidationContractPath = Join-Path $repo 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
 $explorerValidationContract = Get-Content -Raw -LiteralPath $explorerValidationContractPath
 $explorerValidationContractNormalized = $explorerValidationContract -replace '\s+', ' '
+$agentifyTransportProfilePath = Join-Path $repo '.codex/agents/hmasd-agentify-transport.toml'
+if (-not (Test-Path -LiteralPath $agentifyTransportProfilePath -PathType Leaf)) {
+    throw 'Registered Agentify transport child profile is missing'
+}
+$agentifyTransportProfile = Get-Content -Raw -LiteralPath $agentifyTransportProfilePath
 $algorithmPrinciples = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/ALGORITHM_PRINCIPLES.md')
 $algorithmPrinciplesNormalized = $algorithmPrinciples -replace '\s+', ' '
 $publicHandoffContractPath = Join-Path $repo 'docs/project/handoffs/README.md'
@@ -112,6 +117,8 @@ if ((Test-Path -LiteralPath $retiredExplorerValidationScriptPath) -or
     throw 'Retired Explorer packet admission script/test remains'
 }
 $independentResearchSkillNormalized = $independentResearchSkill -replace '\s+', ' '
+$independentReviewSkillNormalized = $independentReviewSkill -replace '\s+', ' '
+$agentifyTransportProfileNormalized = $agentifyTransportProfile -replace '\s+', ' '
 foreach ($required in @(
     'temp/handoffs/explorer_to_code_manager/',
     'temp/handoffs/code_manager_to_explorer/',
@@ -168,6 +175,62 @@ foreach ($entry in @(
     @($publicHandoffContractNormalized, 'begins with its natural-language conclusion and then appends the necessary exact evidence')) ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Explorer project-validation role/contract coupling missing: $($entry[1])"
+    }
+}
+
+foreach ($entry in @(
+    @($independentResearchRole, 'runtime_authority=none'),
+    @($independentResearchRole, 'agentify_transport_child=hmasd-agentify-transport'),
+    @($independentResearchRole, 'agentify_transport_parent=independent_research_explorer'),
+    @($independentResearchRole, 'agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT'),
+    @($independentResearchRole, 'agentify_transport_assignment_fields=batch_path|results_path'),
+    @($independentResearchRole, 'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT'),
+    @($independentResearchRole, 'agentify_transport_result_fields=status|results_path|error'),
+    @($independentResearchRole, 'agentify_transport_terminal_status=COMPLETE|ERROR'),
+    @($independentResearchRole, 'agentify_transport_wait_visibility=silent_until_terminal_native_final'),
+    @($independentResearchRole, 'independent_pro_review_transport_execution=registered_agentify_transport_child'),
+    @($independentResearchSkillNormalized, 'provider|question_paths'),
+    @($independentResearchSkillNormalized, 'registered `hmasd-agentify-transport` child'),
+    @($independentResearchSkillNormalized, 'fork_turns=none'),
+    @($independentResearchSkillNormalized, 'AGENTIFY_REVIEW_BATCH_ASSIGNMENT'),
+    @($independentResearchSkillNormalized, 'batch_path|results_path'),
+    @($independentResearchSkillNormalized, 'silent while live'),
+    @($independentResearchSkillNormalized, 'exactly once through its native final response'),
+    @($independentResearchSkillNormalized, 'status|results_path|error'),
+    @($independentResearchSkillNormalized, 'terminal status `COMPLETE|ERROR`'),
+    @($independentResearchSkillNormalized, 'no polling, progress handling or parent-task result relay'),
+    @($independentReviewSkillNormalized, 'registered `hmasd-agentify-transport` child'),
+    @($independentReviewSkillNormalized, 'AGENTIFY_REVIEW_BATCH_ASSIGNMENT'),
+    @($independentReviewSkillNormalized, 'batch_path|results_path'),
+    @($independentReviewSkillNormalized, 'silent while live'),
+    @($independentReviewSkillNormalized, 'exactly once through its native final response'),
+    @($independentReviewSkillNormalized, 'status|results_path|error'),
+    @($independentReviewSkillNormalized, 'terminal status `COMPLETE|ERROR`'),
+    @($independentReviewSkillNormalized, 'no polling, progress handling or parent-task result relay'),
+    @($agentifyTransportProfileNormalized, 'name = "hmasd-agentify-transport"'),
+    @($agentifyTransportProfileNormalized, 'model = "gpt-5.6-luna"'),
+    @($agentifyTransportProfileNormalized, 'model_reasoning_effort = "medium"')) ) {
+    if (-not $entry[0].Contains($entry[1])) {
+        throw "Explorer Agentify silent-child contract missing: $($entry[1])"
+    }
+}
+
+$explorerTransportSurfaces = @(
+    $independentResearchRole,
+    $independentResearchSkill,
+    $independentReviewSkill,
+    $explorerValidationSkill,
+    $explorerValidationContract)
+foreach ($stale in @(
+    'return_task_id',
+    'dedicated Agentify task',
+    'dedicated transport task',
+    'cross-task return',
+    'AGENTIFY_REVIEW_BATCH_REQUEST')) {
+    foreach ($surface in $explorerTransportSurfaces) {
+        if ($surface.Contains($stale)) {
+            throw "Retired Explorer Agentify transport wording remains: $stale"
+        }
     }
 }
 
@@ -769,7 +832,7 @@ foreach ($surface in @($agents, $codePmRole, $workflowDesignManagerRole, $indepe
 foreach ($required in @(
     'scientific_authority=none',
     'formal_compute_authority=user_only',
-    'Page and recovery details remain inside the Agentify task')) {
+    'Page, model, send, wait and recovery details remain outside CPM context')) {
     if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
 }
 foreach ($required in @(
@@ -1012,7 +1075,7 @@ foreach ($required in @(
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
     'formal_review_transport=agentify_file_batch_result',
-    'AGENTIFY_REVIEW_BATCH_REQUEST',
+    'AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
     'AGENTIFY_REVIEW_BATCH_RESULT',
     'experiment_child=hmasd-experiment-operator',
     'cross_task_transport=codex_native_send_message_to_thread',

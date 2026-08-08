@@ -30,6 +30,15 @@ workflow_implementer_parallelism=file_family_adaptive
 workspace_boundary_guard=fail_closed_for_recognized_pretooluse_cases
 authoritative_write_boundary=tool_os_sandbox|verified_ticket_identity|git_visible_checks
 workspace_ticket_retirement=registered_clean_detached_worktree_only
+agentify_transport_child=hmasd-agentify-transport
+agentify_transport_child_parent=code_project_manager|independent_research_explorer
+agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT
+agentify_transport_assignment_fields=batch_path|results_path
+agentify_transport_batch_file_fields=provider|question_paths
+agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
+agentify_transport_result_fields=status|results_path|error
+agentify_transport_terminal_status=COMPLETE|ERROR
+agentify_transport_wait_visibility=silent_until_terminal_native_final
 ```
 
 ## Ownership model
@@ -42,10 +51,11 @@ edit or accept workflow surfaces.
 
 Code Project Manager keeps exclusive authority for code, technical acceptance,
 runtime and project operational records. Independent Research Explorer keeps
-exclusive authority for advisory research and its research artifacts. Agentify
-Transport Operator keeps exclusive authority for transport mechanics and writes
-only its temporary workspace. Those role-local authorities do not include
-workflow design, workflow acceptance or workflow Git.
+exclusive authority for advisory research and its research artifacts. CPM or
+Explorer may request the registered Agentify transport child, which keeps
+exclusive batch-scoped authority for transport mechanics and writes only its
+temporary workspace. Those role-local authorities do not include workflow
+design, workflow acceptance or workflow Git.
 
 The Explorer remains the sole owner of its research plans, continuity notes,
 candidate and scientific research artifacts, and all temporary/session research
@@ -98,9 +108,14 @@ science, code, runtime evidence or review archives. A receiver reads only an
 assignment-named sender handoff; it does not write or clean another role's
 workspace. No hash, byte count or digest is required for a handoff.
 
-The Agentify operator uses `temp/sessions/agentify_transport_operator/` for raw
-response handoffs. CPM or Explorer reads the named result, copies it into its
-own canonical archive, and performs its own scientific or mechanical intake.
+The registered Agentify transport child uses
+`temp/sessions/agentify_transport_operator/` for raw response handoffs. CPM or
+Explorer writes one exact `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` naming
+`batch_path|results_path`, then reads only that named result after the child's
+single native terminal return. Concurrent batches use distinct assignment-
+specific result paths; no parent polling, queue, monitor or inferred scan is
+allowed. CPM or Explorer copies the named result into its own canonical archive
+and performs its own scientific or mechanical intake.
 
 ## Shared temporary semantic handoffs
 

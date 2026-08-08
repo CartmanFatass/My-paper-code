@@ -52,6 +52,11 @@ description = "Read-only Luna-max reviewer for one integrated workflow batch."
 config_file = "./agents/hmasd-workflow-reviewer.toml"
 nickname_candidates = ["Workflow Reviewer", "Control Plane Reviewer"]
 
+[agents."HMASDAgentifyTransport"]
+description = "Silent native Agentify transport child for one CPM or Explorer file assignment."
+config_file = "./agents/hmasd-agentify-transport.toml"
+nickname_candidates = ["Agentify Transport", "Review Transport Child"]
+
 [agents."HMASDExperimentOperator"]
 description = "Silent mechanical operator for one authorized HMASD train-evaluate-analyze run."
 config_file = "./agents/hmasd-experiment-operator.toml"

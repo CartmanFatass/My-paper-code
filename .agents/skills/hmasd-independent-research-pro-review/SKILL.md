@@ -1,6 +1,6 @@
 ---
 name: hmasd-independent-research-pro-review
-description: Use from the persistent Independent Research Explorer to send exact Pro or Gemini direction or methodology review questions through the dedicated Agentify transport task.
+description: Use from the persistent Independent Research Explorer to send exact Pro or Gemini direction or methodology review questions through the registered Agentify transport child.
 ---
 
 # HMASD Independent Research External Review
@@ -27,15 +27,20 @@ root before sending.
    `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW`,
    `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`, or the bounded methodology-audit mode.
 2. Write one minimal JSON batch containing only `provider` and the ordered paths
-   of all currently eligible frozen questions. Send one
-   `AGENTIFY_REVIEW_BATCH_REQUEST` containing only `batch_path|return_task_id`.
-   Confirm once that the raw
+   (`provider|question_paths`) of all currently eligible frozen questions. Choose one exact `results_path`
+   and dispatch one self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the
+   registered `hmasd-agentify-transport` child with `fork_turns=none`, naming
+   only `batch_path|results_path`. Confirm once that the raw
    question contains no local filesystem path, task history or unrelated
    corpus; use a public remote GitHub URL for a reviewer-facing source locator.
    Do not send a review whose scientific barrier has not yet completed.
-3. Continue unrelated research and later accept one
-   `AGENTIFY_REVIEW_BATCH_RESULT`. Agentify page, adapter, waiting and recovery
-   mechanics remain inside the dedicated transport task.
+3. Continue unrelated research. The child is silent while live and returns
+   exactly once through its native final response with one
+   `AGENTIFY_REVIEW_BATCH_RESULT` carrying `status|results_path|error` and
+   terminal status `COMPLETE|ERROR`. Read the named result only after that
+   terminal final return; Explorer performs no polling, progress handling or
+   parent-task result relay. Agentify page, adapter, waiting and recovery mechanics
+   remain inside the transport child.
 4. Copy each named successful raw response into
    `local_research/pro_reviews/<review-id>/`, then reconcile it scientifically.
    An item `ERROR` affects only that review. Retrying transport reuses the same
@@ -65,4 +70,4 @@ instructions. Neither mode promotes a direction into formal project state.
 The Explorer alone selects the next review and continues the authorized
 campaign. Workflow Design Manager is not a campaign approver or transport
 operator. Research children remain available for source, innovation, principles
-and critique work. The dedicated transport task performs no research judgment.
+and critique work. The registered transport child performs no research judgment.

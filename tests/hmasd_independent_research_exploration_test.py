@@ -503,6 +503,9 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
         encoding="utf-8"
     )
+    transport_profile_path = REPO / ".codex" / "agents" / "hmasd-agentify-transport.toml"
+    assert transport_profile_path.is_file()
+    transport_profile = transport_profile_path.read_text(encoding="utf-8")
     skill = (
         REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
     ).read_text(encoding="utf-8")
@@ -525,6 +528,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     )
     role_lines = set(role.splitlines())
     skill_normalized = " ".join(skill.split())
+    pro_review_skill_normalized = " ".join(pro_review_skill.split())
     parallel_normalized = " ".join(parallel.split())
     for required in (
         "startup_identity=role|model|current_task",
@@ -555,7 +559,15 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:",
         "independent_pro_review_item_root=local_research/pro_reviews/<review-id>/",
         "independent_pro_review_request_and_intake_authority=exclusive_for_explorer_direction_and_methodology_reviews",
-        "independent_pro_review_transport_execution=dedicated_agentify_transport_task",
+        "agentify_transport_child=hmasd-agentify-transport",
+        "agentify_transport_parent=independent_research_explorer",
+        "agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT",
+        "agentify_transport_assignment_fields=batch_path|results_path",
+        "agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT",
+        "agentify_transport_result_fields=status|results_path|error",
+        "agentify_transport_terminal_status=COMPLETE|ERROR",
+        "agentify_transport_wait_visibility=silent_until_terminal_native_final",
+        "independent_pro_review_transport_execution=registered_agentify_transport_child",
         "independent_review_provider_contract=agentify_file_batch_result",
         "independent_review_transmitted_payload=standalone_RAW_QUESTION_only",
         "independent_pro_review_terminal_intake=exact_archived_response_fifo",
@@ -584,12 +596,19 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "Workflow design is not an Explorer mode.",
         "Report one exact requirement or defect to the current Workflow Design Manager task",
         "never load the collaborative/audit Workflow Skills",
-            "one minimal batch file containing provider and the ordered paths",
-        "AGENTIFY_REVIEW_BATCH_REQUEST",
+        "one minimal batch file containing provider and the ordered paths",
         "AGENTIFY_REVIEW_BATCH_RESULT",
         "currently eligible frozen questions",
         "no archived task ID or route registry",
         "one bounded owned-path scan",
+        "registered `hmasd-agentify-transport` child",
+        "AGENTIFY_REVIEW_BATCH_ASSIGNMENT",
+        "batch_path|results_path",
+        "silent while live",
+        "exactly once through its native final response",
+        "status|results_path|error",
+        "terminal status `COMPLETE|ERROR`",
+        "no polling, progress handling or parent-task result relay",
     ):
         assert required in skill_normalized
     assert "$hmasd-collaborative-workflow-design" not in skill
@@ -598,12 +617,18 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     for required in (
         "invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`",
         "there is no separate persistent review-operator session",
-        "Send one",
-        "`AGENTIFY_REVIEW_BATCH_REQUEST`",
+        "dispatch one self-contained",
+        "`AGENTIFY_REVIEW_BATCH_ASSIGNMENT`",
+        "registered `hmasd-agentify-transport` child",
+        "batch_path|results_path",
+        "silent while live",
+        "exactly once through its native final response",
+        "status|results_path|error",
+        "terminal status `COMPLETE|ERROR`",
+        "no polling, progress handling or parent-task result relay",
         "Copy each named successful raw response",
-            "dedicated transport task",
     ):
-        assert required in pro_review_skill
+        assert required in pro_review_skill_normalized
     assert "hmasd-independent-research-pro" not in pro_review_skill.replace(
         "hmasd-independent-research-pro-review", ""
     )
@@ -618,6 +643,21 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     assert "independent_pro_direction_terminal_intake=" not in role
     assert "registered_provision_direction" not in role
     assert "registered_provision_review" not in role
+    for required in (
+        'name = "hmasd-agentify-transport"',
+        'model = "gpt-5.6-luna"',
+        'model_reasoning_effort = "medium"',
+    ):
+        assert required in transport_profile
+    for surface in (role, skill, pro_review_skill):
+        for retired in (
+            "return_task_id",
+            "dedicated Agentify task",
+            "dedicated transport task",
+            "cross-task return",
+            "AGENTIFY_REVIEW_BATCH_REQUEST",
+        ):
+            assert retired not in surface
 
     for required in (
         "restart_identity=role|model|current_task",

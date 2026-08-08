@@ -90,11 +90,13 @@ plus public GitHub repository/path locators. Ordinary B iteration is nonformal
 and does not automatically initiate a Pro review. Explorer requests one
 `CODE_SCIENCE_ALIGNMENT_AUDIT` only for a direction-changing decision, material
 result ambiguity, final science alignment, a formal/conclusion-bearing C result,
-or an explicitly requested C review. When requested, Explorer sends it through
-the dedicated Agentify transport task; External Pro uses the GitHub connection
-to inspect the exact pushed revision and owns final scientific-semantic
-acceptance. Explorer archives and intakes the raw answer but does not substitute
-its own acceptance. CPM does not initiate this review and remains the sole
+or an explicitly requested C review. When requested, Explorer dispatches it
+through the registered `hmasd-agentify-transport` child using the file-only
+`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` (`batch_path|results_path`) interface;
+External Pro uses the GitHub connection to inspect the exact pushed revision
+and owns final scientific-semantic acceptance. Explorer archives and intakes
+the raw answer only after the child's terminal native final return, but does
+not substitute its own acceptance. CPM does not initiate this review and remains the sole
 technical acceptance owner.
 
 The audit asks a natural scientific decision question and supplies the frozen

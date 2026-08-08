@@ -11,6 +11,13 @@ runtime_authority=exclusive
 current_work_authority=exclusive_for_project_operational_records
 formal_external_review_request_and_intake_authority=exclusive
 formal_review_transport=agentify_file_batch_result
+agentify_transport_child=hmasd-agentify-transport
+agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT
+agentify_transport_assignment_fields=batch_path|results_path
+agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
+agentify_transport_result_fields=status|results_path|error
+agentify_transport_terminal_status=COMPLETE|ERROR
+agentify_transport_wait_visibility=silent_until_terminal_native_final
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
 scientific_authority=none
@@ -122,8 +129,10 @@ manager; there is no Research Operations Manager or persistent monitor.
   delegates compute authority to the child automatically; CPM checks the
   active grant and remaining balance before dispatch, and neither CPM nor the
   child asks for per-run authorization while the run remains in that grant.
-- Formal and Explorer-to-project Pro review questions, direct requests to the
-  dedicated Agentify task, exact archival and mechanical result acceptance.
+- Formal and Explorer-to-project Pro review questions, review selection and
+  batch-file creation, direct parent dispatch of the reusable registered
+  `hmasd-agentify-transport` native child, exact archival and mechanical result
+  acceptance.
 - Exact recording of External Pro dispositions, reports, ledgers and runtime
   evidence without scientific reinterpretation.
 - Code-child assignments, source and code-test changes, proof-sized validation,
@@ -270,13 +279,23 @@ acceptance owner.
 
 For an experiment, CPM supplies one complete run assignment and the Experiment
 Operator alone executes `train -> evaluate -> analyze`. For formal or
-Explorer-to-project reviews, CPM freezes each standalone question, writes one
-minimal ordered batch file, and sends one `AGENTIFY_REVIEW_BATCH_REQUEST` naming
-that file and the CPM task. CPM continues unrelated work while it runs. On
-`AGENTIFY_REVIEW_BATCH_RESULT`, CPM copies each raw response into its canonical
-archive and performs local intake. A retry reuses the same batch file and
-changes no CPM file. Page and recovery details
-remain inside the Agentify task.
+Explorer-to-project reviews, CPM freezes each standalone question and writes
+one minimal ordered batch file containing exactly `provider|question_paths`,
+then chooses one exact `results_path`. CPM dispatches the reusable registered
+`hmasd-agentify-transport` native child with a self-contained
+`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` naming `batch_path|results_path` and
+`fork_turns=none`, then continues unrelated work. The child alone owns
+page/model/send/wait/recovery mechanics. It stays silent while live, with no
+progress, commentary, collaboration, or repeated wait/poll handling, and
+returns exactly once through one terminal native final with `COMPLETE` or
+`ERROR`, carrying `AGENTIFY_REVIEW_BATCH_RESULT` fields
+`status|results_path|error`. The named result file retains its ordered raw
+response rows. CPM reads that file only after the terminal return, copies each
+raw response into its canonical archive and performs mechanical intake. A retry
+reuses the unchanged batch file and changes no CPM file. Page, model, send,
+wait and recovery details remain outside CPM context; this interface has no
+separate persistent task, task-id return field, cross-task result relay, or
+polling/progress loop.
 
 Before sending, CPM uses one model-authored checklist: the raw question contains no local filesystem
 locator, task history or unrelated corpus; and any reviewer-facing source

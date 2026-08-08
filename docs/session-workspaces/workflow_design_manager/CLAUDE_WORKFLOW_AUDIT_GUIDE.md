@@ -66,11 +66,11 @@ Workflow Design Manager（WDM）。不要自行修复。
 | Workflow Design Manager | 唯一工作流控制面设计、修改、验收和相关 Git owner；无代码、科研、运行时权力 | `.agents/roles/WORKFLOW_DESIGN_MANAGER.md` |
 | Code Project Manager | 项目协调、代码范围、技术验收、运行时、实验调度、正式外审请求和 intake | `.agents/roles/CODE_PROJECT_MANAGER.md` |
 | Independent Research Explorer | 独立科研探索、候选形成、科研子代理调度、独立外审请求和 intake | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md` |
-| Agentify Transport Operator | 批量读取问题路径、控制 Agentify 页面、投递、等待和返回原始响应；不解释科研 | `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md` |
+| Agentify Transport child | 由 CPM 或 Explorer 按文件分配批量读取问题路径、控制 Agentify 页面、投递、静默等待并返回原始响应；不解释科研 | `.codex/agents/hmasd-agentify-transport.toml` + `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md` |
 | External Pro | 在用户给定问题边界内作科学判断；不是代码或工作流 owner | `.agents/roles/EXTERNAL_PRO.md` |
 
 审计重点：WDM 不能成为每个操作的批准门；CPM 不能修改工作流；
-Explorer 不能把科研判断交给 WDM；Transport Operator 必须有完成页面任务
+Explorer 不能把科研判断交给 WDM；Agentify transport child 必须有完成页面任务
 所需的页面观察和可逆控制能力，但不得吸收科研决策。
 
 ## 5. Code Manager 子代理
@@ -152,7 +152,7 @@ Claude 入口中的 model/tool frontmatter 只负责启动；共享 charter 才�
 
 | Skill | 使用者与用途 | 路径 |
 |---|---|---|
-| Agentify transport | Transport Operator 完成一个有序文件批次 | `.agents/skills/hmasd-agentify-transport/SKILL.md` |
+| Agentify transport | 注册 native child 完成一个有序文件批次并在终态 native final 返回 | `.agents/skills/hmasd-agentify-transport/SKILL.md` |
 | Agile research development | CPM、Implementer、Verifier 的实现和 proof-sized 验证合同 | `.agents/skills/hmasd-agile-research-development/SKILL.md` |
 | Collaborative workflow design | WDM 把用户请求或 defect 变成一个完整计划 | `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md` |
 | Workflow change audit | 计划确认后由 WDM 实现、验证、Git 和 reload | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |

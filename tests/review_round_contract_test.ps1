@@ -1,62 +1,143 @@
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path -Parent $PSScriptRoot
 
-$router = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
-$cpm = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md')
-$explorer = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
-$operator = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md')
-$skill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agentify-transport/SKILL.md')
-$researchSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
-$preflightPath = Join-Path $repo '.agents/skills/hmasd-agentify-transport/scripts/ensure_agentify_runtime.ps1'
+function Read-RepoFile([string] $relativePath) {
+    $path = Join-Path $repo $relativePath
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+        throw "Required Agentify contract file is missing: $relativePath"
+    }
+    return Get-Content -Raw -LiteralPath $path
+}
 
-foreach ($entry in @(
-    @($router, 'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST'),
-    @($router, 'agentify_transport_request_fields=batch_path|return_task_id'),
-    @($router, 'agentify_transport_batch_file_fields=provider|question_paths'),
-    @($router, 'agentify_transport_page_authority=read_create_show_close_navigate_list_open_and_switch_conversations'),
-    @($router, 'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT'),
-    @($router, 'agentify_transport_result_fields=status|results_path|error'),
-    @($cpm, 'formal_review_transport=agentify_file_batch_result'),
-    @($explorer, 'independent_review_provider_contract=agentify_file_batch_result'),
-    @($operator, 'request_fields=batch_path|return_task_id'),
-    @($operator, 'result_fields=status|results_path|error'),
-    @($operator, 'terminal_status=COMPLETE|ERROR'),
-    @($operator, 'runtime_process_receipt=AGENTIFY_RUNTIME_PROCESS_READY'),
-    @($operator, 'one row per question'),
-    @($operator, 'never scans temporary directories'),
-    @($operator, 'Starting at `https://chatgpt.com/`'),
-    @($operator, 'create a clean conversation'),
-    @($operator, 'navigate between conversations'),
-    @($skill, 'Do not scan'),
-    @($skill, 'promptPath=<question path>'),
-    @($skill, 'expectedModel=Pro'),
-    @($skill, 'agentify_wait_response'),
-    @($skill, '`IN_PROGRESS` means the answer remains pending'),
-    @($skill, 'agentify_list_conversations'),
-    @($skill, 'agentify_new_conversation'),
-    @($skill, 'agentify_open_conversation'),
-    @($skill, 'Only structured `COMPLETE` plus the actual response'),
-    @($skill, 'processes are present'),
-    @($skill, 'one ordered row per question'),
-    @($skill, 'at most one suitable page/session recovery'),
-    @($skill, 'Never ask the requester to rewrite an'),
-    @($researchSkill, 'batch_path|return_task_id'),
-    @($researchSkill, 'requires no Explorer file change')
-)) {
-    if (-not $entry[0].Contains($entry[1])) {
-        throw "Simple Agentify contract missing: $($entry[1])"
+function Require-ContractTerm([string] $content, [string] $term, [string] $surface) {
+    if (-not $content.Contains($term)) {
+        throw "Agentify contract missing on $surface`: $term"
     }
 }
 
+$router = Read-RepoFile 'AGENTS.md'
+$config = Read-RepoFile '.codex/config.toml'
+$profile = Read-RepoFile '.codex/agents/hmasd-agentify-transport.toml'
+$operator = Read-RepoFile '.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md'
+$skill = Read-RepoFile '.agents/skills/hmasd-agentify-transport/SKILL.md'
+$workflowMap = Read-RepoFile 'docs/project/WORKFLOW_MAP.md'
+$workspaceContract = Read-RepoFile 'docs/project/SESSION_WORKSPACE_CONTRACT.md'
+$workspaceReadme = Read-RepoFile 'docs/session-workspaces/agentify_transport_operator/README.md'
+$auditGuide = Read-RepoFile 'docs/session-workspaces/workflow_design_manager/CLAUDE_WORKFLOW_AUDIT_GUIDE.md'
+
+# The two requester roles are intentionally read-only inputs to this focused
+# transport contract check; they are owned by CPM/Explorer implementers.
+$cpm = Read-RepoFile '.agents/roles/CODE_PROJECT_MANAGER.md'
+$explorer = Read-RepoFile '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md'
+$researchSkill = Read-RepoFile '.agents/skills/hmasd-independent-research-pro-review/SKILL.md'
+
+$contractSurfaces = @{
+    router = $router
+    config = $config
+    profile = $profile
+    operator = $operator
+    skill = $skill
+    workflowMap = $workflowMap
+    workspaceContract = $workspaceContract
+    workspaceReadme = $workspaceReadme
+    auditGuide = $auditGuide
+    cpm = $cpm
+    explorer = $explorer
+    researchSkill = $researchSkill
+}
+
+$childTokenSurfaces = @{
+    router = $router
+    operator = $operator
+    skill = $skill
+    cpm = $cpm
+    explorer = $explorer
+}
+foreach ($surface in $childTokenSurfaces.GetEnumerator()) {
+    Require-ContractTerm $surface.Value 'agentify_transport_child=hmasd-agentify-transport' $surface.Key
+}
+
+foreach ($term in @(
+    'agentify_transport_child_parent=code_project_manager|independent_research_explorer',
+    'agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
+    'agentify_transport_assignment_fields=batch_path|results_path',
+    'agentify_transport_batch_file_fields=provider|question_paths',
+    'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
+    'agentify_transport_result_fields=status|results_path|error',
+    'agentify_transport_terminal_status=COMPLETE|ERROR',
+    'agentify_transport_wait_visibility=silent_until_terminal_native_final'
+)) {
+    Require-ContractTerm $router $term 'AGENTS.md'
+    Require-ContractTerm $operator $term 'AGENTIFY_TRANSPORT_OPERATOR.md'
+    Require-ContractTerm $workspaceContract $term 'SESSION_WORKSPACE_CONTRACT.md'
+}
+
+foreach ($term in @(
+    '[agents."HMASDAgentifyTransport"]',
+    'config_file = "./agents/hmasd-agentify-transport.toml"'
+)) {
+    Require-ContractTerm $config $term '.codex/config.toml'
+}
+foreach ($term in @(
+    'model = "gpt-5.6-luna"',
+    'model_reasoning_effort = "medium"',
+    'sandbox_mode = "workspace-write"',
+    'approval_policy = "on-request"',
+    '.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md',
+    '.agents/skills/hmasd-agentify-transport/SKILL.md',
+    'AGENTIFY_REVIEW_BATCH_RESULT',
+    'silent until COMPLETE or ERROR'
+)) {
+    Require-ContractTerm $profile $term 'hmasd-agentify-transport.toml'
+}
+
+foreach ($term in @(
+    'runtime_process_receipt=AGENTIFY_RUNTIME_PROCESS_READY',
+    'IN_PROGRESS',
+    'exactly once',
+    'silent',
+    'question_path',
+    'conversation_url'
+)) {
+    Require-ContractTerm $operator $term 'AGENTIFY_TRANSPORT_OPERATOR.md'
+}
+foreach ($term in @(
+    'agentify_query',
+    'expectedModel=Pro',
+    'IN_PROGRESS',
+    'one ordered row per question',
+    'at most one suitable page/session recovery',
+    'exactly once',
+    'silent',
+    'question_path',
+    'conversation_url'
+)) {
+    Require-ContractTerm $skill $term 'hmasd-agentify-transport Skill'
+}
+foreach ($term in @(
+    'hmasd-agentify-transport',
+    'batch_path',
+    'results_path',
+    'wait silently',
+    'one native terminal result',
+    'question_path',
+    'conversation_url'
+)) {
+    Require-ContractTerm $workspaceReadme $term 'agentify transport workspace README'
+}
+
+$preflightPath = Join-Path $repo '.agents/skills/hmasd-agentify-transport/scripts/ensure_agentify_runtime.ps1'
 if (-not (Test-Path -LiteralPath $preflightPath -PathType Leaf)) {
     throw 'Agentify runtime preflight script is missing'
 }
 $preflight = Get-Content -Raw -LiteralPath $preflightPath
-foreach ($term in @('Get-Process', 'Start-Process', 'AGENTIFY_RUNTIME_PROCESS_READY',
-        'process_presence_only_use_scoped_agentify_status_for_runtime_readiness')) {
-    if (-not $preflight.Contains($term)) {
-        throw "Agentify runtime preflight script missing: $term"
-    }
+foreach ($term in @(
+    'Get-Process',
+    'Start-Process',
+    'AGENTIFY_RUNTIME_PROCESS_READY',
+    'process_presence_only_use_scoped_agentify_status_for_runtime_readiness'
+)) {
+    Require-ContractTerm $preflight $term 'ensure_agentify_runtime.ps1'
 }
 
 $probeRejected = $false
@@ -72,10 +153,16 @@ if (-not $probeRejected) {
     throw 'Agentify process preflight did not reject absent processes'
 }
 
-$active = $router + $cpm + $explorer + $operator + $skill + $researchSkill
+# The old top-level/cross-task contract must not remain active anywhere in the
+# requester, child, router or transport surfaces.
+$active = ($contractSurfaces.Values -join "`n")
 foreach ($retired in @(
+    'AGENTIFY_REVIEW_BATCH_REQUEST',
     'AGENTIFY_REVIEW_REQUEST',
     'AGENTIFY_REVIEW_RESULT',
+    'return_task_id',
+    'dedicated-task',
+    'dedicated top-level',
     'batch_id|manifest_path|return_task_id',
     'request_id|review_channel|provider|expected_model|question_path',
     'stable_key',
@@ -83,7 +170,6 @@ foreach ($retired in @(
     'idempotency',
     'prepare -> submit -> verify -> archive',
     'submit --verify-existing',
-    'heartbeat',
     'BOOT -> PAGE',
     'protectedTab=true',
     'Do not create another page',

@@ -21,7 +21,7 @@ then procedural Skills. Use exactly one route:
 |---|---|---|
 | Code Project Manager | `docs/project/CURRENT_WORK.md`, `.agents/roles/CODE_PROJECT_MANAGER.md`, then the active workstream's named paths | unrelated workstreams, research corpus and workflow history |
 | Workflow Design Manager | its assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, `CURRENT_WORK.md`, linked WDM records, `WORKFLOW_MAP.md`, collaborative-workflow Skill, then workflow-change-audit after plan confirmation | runtime, science and implementation state |
-| Agentify Transport Operator | its request, `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`, agentify Skill and its workspace | science, code, `CURRENT_WORK.md` and workflow history |
+| Agentify Transport child | its exact requester assignment, `.codex/agents/hmasd-agentify-transport.toml`, `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`, agentify Skill and its workspace | science, code, `CURRENT_WORK.md` and workflow history |
 | Independent Research Explorer | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, independent-research Skill, required principles and named sources | `CURRENT_WORK.md`, code, runtime and workflow state |
 | registered native child | its exact assignment, `.codex/agents/<profile>.toml`, named Role, then assignment-named files | `CURRENT_WORK.md`, persistent history and other roles |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` | repository state outside the question |
@@ -53,6 +53,17 @@ workflow_design_owner=workflow_design_manager
 persistent_session_workflow_design_authority=none
 persistent_session_workflow_acceptance_authority=none
 persistent_session_workflow_git_authority=none
+
+agentify_transport_child=hmasd-agentify-transport
+agentify_transport_child_parent=code_project_manager|independent_research_explorer
+agentify_transport_skill=hmasd-agentify-transport
+agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT
+agentify_transport_assignment_fields=batch_path|results_path
+agentify_transport_batch_file_fields=provider|question_paths
+agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
+agentify_transport_result_fields=status|results_path|error
+agentify_transport_terminal_status=COMPLETE|ERROR
+agentify_transport_wait_visibility=silent_until_terminal_native_final
 
 code_project_manager_code_authority=exclusive
 code_project_manager_technical_acceptance_authority=exclusive
@@ -93,8 +104,11 @@ cross_task_model_and_thinking_overrides=omit
 ```
 
 WDM's standing remote grant covers accepted workflow-control-plane paths and
-the named Agentify transport workspace only. There is no Controller, dispatcher,
-registry, semantic relay, persistent Monitor, global lease or workflow queue.
+the named Agentify transport source workspace only. The requester-owned
+Agentify transport child receives one exact file assignment from CPM or
+Explorer and returns one native terminal result; WDM never relays a live
+review or result. There is no Controller, dispatcher, registry, semantic relay,
+persistent Monitor, global lease or workflow queue.
 
 ## Hard project and workspace boundaries
 
@@ -160,6 +174,6 @@ contracts. No role reads every routed document.
 
 Git-tracked code and tests, runtime evidence, scientific records and reports
 remain with CPM; advisory research remains with Explorer; transport mechanics
-remain with the Agentify operator. `docs/project/CURRENT_WORK.md` is only a WDM
+remain with the requester-owned Agentify transport child. `docs/project/CURRENT_WORK.md` is only a WDM
 link/schema index. Handoffs under `temp/handoffs/` are disposable and never
 replace canonical owner records or enter Git.

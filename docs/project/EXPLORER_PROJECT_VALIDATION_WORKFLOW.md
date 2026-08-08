@@ -101,8 +101,12 @@ as advisory research without automatic Pro review and without claiming final
 scientific acceptance. For a direction-changing decision, material result
 ambiguity, final science alignment, a formal/conclusion-bearing result or an
 explicit C review, Explorer freezes one `CODE_SCIENCE_ALIGNMENT_AUDIT` after
-CPM technical acceptance and push. It submits the audit through the dedicated
-Agentify transport task and archives and intakes the raw answer. External Pro
+CPM technical acceptance and push. The review starts only after CPM technical
+acceptance and push. Explorer dispatches the audit through the
+registered `hmasd-agentify-transport` child using the file-only
+`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` (`batch_path|results_path`) interface and
+archives and intakes the raw answer only after the child's terminal native
+final return. External Pro
 uses the GitHub connection to inspect the exact pushed revision and owns final
 scientific-semantic acceptance. Explorer never substitutes its own acceptance,
 and CPM does not initiate the review.

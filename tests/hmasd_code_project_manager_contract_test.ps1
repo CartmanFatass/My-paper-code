@@ -187,7 +187,6 @@ if ((Test-Path $oldPmPath) -or (Test-Path $oldOperatorPath) -or
 
 $routerRequired = @(
     'cross_task_transport=codex_native_send_message_to_thread',
-    'cross_task_target=current_thread_id_from_user_or_native_task_context',
     'cross_task_model_and_thinking_overrides=omit',
     'code_project_manager_code_authority=exclusive',
     'code_project_manager_technical_acceptance_authority=exclusive',
@@ -196,18 +195,17 @@ $routerRequired = @(
     'code_project_manager_runtime_authority=exclusive',
     'code_project_manager_current_work_authority=exclusive',
     'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
-    'code_project_manager_formal_review_workstreams=formal_toy_research|uav_validation',
     'code_project_manager_mechanical_result_acceptance=exclusive',
-    'operational_recovery_owner=code_project_manager',
     '.agents/roles/CODE_PROJECT_MANAGER.md',
-    'external_review_transport_execution=dedicated_agentify_transport_task',
-    'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST',
-    'agentify_transport_request_fields=batch_path|return_task_id',
+    'agentify_transport_child=hmasd-agentify-transport',
+    'agentify_transport_child_parent=code_project_manager|independent_research_explorer',
+    'agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
+    'agentify_transport_assignment_fields=batch_path|results_path',
     'agentify_transport_skill=hmasd-agentify-transport',
     'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
-    'codebase_policy=architecture_first_module_boundaries',
-    'maintainability_acceptance=clear_ownership|minimal_public_surface|directed_dependencies|state_and_complexity_isolation|change_locality|focused_contract_evidence',
-    'line_and_file_counts=diagnostic_only_never_admission_or_acceptance'
+    'agentify_transport_result_fields=status|results_path|error',
+    'agentify_transport_terminal_status=COMPLETE|ERROR',
+    'agentify_transport_wait_visibility=silent_until_terminal_native_final'
 )
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
@@ -239,10 +237,19 @@ $codeRequired = @(
     'code_children=code_scout|implementer|reviewer|verifier',
     'routine_implementation_child=hmasd-implementer-terra',
     'protected_implementation_child=hmasd-implementer',
-    'AGENTIFY_REVIEW_BATCH_REQUEST',
+    'AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
     'AGENTIFY_REVIEW_BATCH_RESULT',
-    'retry reuses the same batch file',
-    'Page and recovery details remain inside the Agentify task',
+    'provider|question_paths',
+    'batch_path|results_path',
+    'fork_turns=none',
+    'COMPLETE',
+    'ERROR',
+    'status|results_path|error',
+    'silent while live',
+    'returns exactly once',
+    'reads that file only after the terminal return',
+    'reuses the unchanged batch file',
+    'Page, model, send, wait and recovery details remain outside CPM context',
     'experiment_child=hmasd-experiment-operator',
     'CODE_ACCEPTED',
     'CODE_SCIENCE_INDEX.md',
@@ -285,6 +292,30 @@ $codeRequired = @(
 )
 foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
+}
+
+foreach ($retired in @(
+    'AGENTIFY_REVIEW_BATCH_REQUEST',
+    'dedicated Agentify task',
+    'dedicated_agentify_transport_task',
+    'return_task_id',
+    'cross-task return',
+    'repeated wait/poll/progress')) {
+    if ($codePm.Contains($retired) -or $agile.Contains($retired)) {
+        throw "Retired Agentify transport wording remains: $retired"
+    }
+}
+
+foreach ($required in @(
+    '## Agentify review transport boundary',
+    'hmasd-agentify-transport',
+    'AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
+    'COMPLETE',
+    'ERROR',
+    'status|results_path|error')) {
+    if (-not $agileNormalized.Contains($required)) {
+        throw "Agile Skill Agentify child contract missing: $required"
+    }
 }
 
 $retiredArchitectureGates = @(

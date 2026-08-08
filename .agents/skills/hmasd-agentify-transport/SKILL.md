@@ -1,24 +1,28 @@
 ---
 name: hmasd-agentify-transport
-description: Use only in the dedicated Agentify Transport Operator task to complete one ordered file-backed external-review batch through Agentify pages and return the raw responses.
+description: Use in the registered Agentify transport child to complete one ordered file-backed external-review batch through Agentify pages and return the raw responses.
 ---
 
 # HMASD Agentify Transport
 
+`agentify_transport_child=hmasd-agentify-transport`
+
 ## Assignment
 
-The request is exactly:
+The requester assignment is exactly:
 
 ```text
-AGENTIFY_REVIEW_BATCH_REQUEST
+AGENTIFY_REVIEW_BATCH_ASSIGNMENT
 batch_path=<absolute UTF-8 JSON file containing provider and question_paths>
-return_task_id=<requester task>
+results_path=<exact assignment-specific output path>
 ```
 
-Read that exact file once. `question_paths` order is the batch order. Do not scan
-temporary directories or reconstruct paths from item names. The sent payload is
-only the exact UTF-8 question file; local metadata, paths, logs, context bundles,
-attachments and requester history stay local.
+Read that exact `batch_path` once and write only the exact `results_path` under
+`temp/sessions/agentify_transport_operator/`. `question_paths` order is the
+batch order. Do not scan temporary directories, infer a result path or
+reconstruct question paths from item names. The sent payload is only the exact
+UTF-8 question file; local metadata, paths, logs, context bundles, attachments
+and requester history stay local.
 
 ## Understand the live page
 
@@ -48,11 +52,13 @@ For each question path:
    it with the account heading or the separate `GPT-5.6 Sol` option. Agentify owns
    whole-file insertion, visible model selection and the single send.
 3. If generation continues, call `agentify_wait_response` on that same page.
-   `IN_PROGRESS` means the answer remains pending; continue observing without a
-   new query. Only structured `COMPLETE` plus the actual response permits archive
-   and advancement.
-4. Save the response, question path, conversation URL and item status in one
-   results file under `temp/sessions/agentify_transport_operator/`.
+   `IN_PROGRESS` means the answer remains pending; continue observing silently
+   without a new query. Do not emit commentary, progress, ETA, heartbeat,
+   collaboration or intermediate parent notification while waiting. Only
+   structured `COMPLETE` plus the actual response permits archive and
+   advancement.
+4. Save the response, question path, conversation URL and item status in the
+   exact assigned `results_path`.
 
 The results file has one ordered row per question with `question_path`,
 `status`, `response`, `conversation_url` and an actual error when present.
@@ -60,12 +66,12 @@ Preserve completed rows if a later item fails. Batch `COMPLETE` requires every
 row to contain the actual completed response; otherwise return `ERROR` with the
 partial results path.
 
-Then return:
+Then return exactly once through the native child final response:
 
 ```text
 AGENTIFY_REVIEW_BATCH_RESULT
 status=COMPLETE|ERROR
-results_path=<path or empty>
+results_path=<exact assigned path or empty>
 error=<empty or actual error>
 ```
 
@@ -82,4 +88,6 @@ batch solely to retry transport.
 
 Never interrupt an active answer, duplicate a possibly submitted question, send
 a placeholder, or activate Continue, Retry, Stop or Answer now. Perform no
-scientific interpretation, project mutation, Git or workflow design.
+scientific interpretation, project mutation, Git or workflow design. The
+native child returns exactly once, only at terminal `COMPLETE` or `ERROR`; never
+use a task id, cross-task result relay or parent polling loop.

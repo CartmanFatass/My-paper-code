@@ -53,6 +53,25 @@ The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the marker
 above explicitly disable it. Never invoke or chain generic Superpowers Skills.
 A user-named one may be inspected only as reference.
 
+## Agentify review transport boundary
+
+Formal and Explorer-to-project review transport is a file-only handoff from
+Code Project Manager to the reusable registered `hmasd-agentify-transport`
+native child. CPM writes one ordered batch file containing exactly
+`provider|question_paths`, chooses one exact `results_path`, and dispatches a
+self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` naming
+`batch_path|results_path` with `fork_turns=none`. The child owns page, model,
+send, wait and recovery mechanics; it is silent while live and emits no
+progress, commentary, collaboration, or repeated wait/poll handling. It
+returns exactly once through one terminal native final with `COMPLETE` or
+`ERROR`, carrying `AGENTIFY_REVIEW_BATCH_RESULT` fields
+`status|results_path|error`. The named result file retains its ordered raw
+response rows. CPM continues unrelated work and reads the file only after that
+terminal return, then performs mechanical archival and intake. Retries reuse
+the unchanged batch file. Page, model, send, wait and recovery details never
+enter CPM context, and no separate persistent task, task-id return field,
+cross-task result relay, or polling/progress loop is part of this interface.
+
 ## Operating loop
 
 1. **Align.** For conclusion-bearing work, require an exact Pro scientific
