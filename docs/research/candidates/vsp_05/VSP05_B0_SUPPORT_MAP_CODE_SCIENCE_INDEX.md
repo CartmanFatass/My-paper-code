@@ -15,6 +15,16 @@ retirement, utility, or generalization claim.
 | The result retains every zero support stratum | `_empty_bucket`, `_bucket_payload`, `run_support_map` | Complete cell/seed/proposed-skill/lifecycle Cartesian grid with zero rows and all membership delta kinds | `test_smoke_uses_real_runtime_and_emits_complete_zero_filled_grid` | Dropping zeros or reporting only favorable cells |
 | The evidence is deterministic and nonselective | `run_support_map`, `write_result` | Canonical JSON equality on repeat; `K_search=0`; learner/trainer/update calls are zero; no best-cell field | `test_smoke_is_canonical_and_has_no_adaptive_or_best_cell_field` | Learner training, learned veto, reject tuning, cell selection, B1/C/Pro action |
 
-The public full-result JSON is intentionally absent from this implementation
-package.  CPM owns the one authorized full run, mechanical verification,
-technical acceptance, canonical result, commit and push.
+## Accepted full result
+
+CPM technically accepted the fixed full run from source commit
+`27c45eb399bce9de0f706ee65ec51a37c53d87ce`. The canonical compact result is
+`VSP05_B0_SUPPORT_MAP_RESULT.json`; the raw evidence remains under
+`logs/vsp05_b0_support_map_27c45eb3_r1/`.
+
+All six cells and all zero strata were retained. Across 432 episodes and
+34,560 real transitions, the map observed 141 gated examples, all of them
+alias, and zero strict-truth examples. No cell was two-sided. This is a
+mechanical descriptive observation only; `scientific_disposition` remains
+null and the run licenses no learner comparison, C treatment, External Pro
+review, or change to the queued EOCIV-B5 decision.

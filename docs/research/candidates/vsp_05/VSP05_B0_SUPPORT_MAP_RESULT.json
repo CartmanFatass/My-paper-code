@@ -1,0 +1,215 @@
+{
+  "treatment": "VSP05-B0-SUPPORT-MAP",
+  "candidate_id": "CAND-VSP-05@adversarial-revision-v7",
+  "stage": "experiment",
+  "evidence_level": "A_NONINTERVENING_REAL_RUNTIME_RECONNAISSANCE",
+  "implementation_source_commit": "27c45eb399bce9de0f706ee65ec51a37c53d87ce",
+  "run_identity": "vsp05_b0_support_map_27c45eb3_r1",
+  "formal": false,
+  "route": "DET_GATE_ONLY",
+  "operator_terminal": "COMPLETE",
+  "evaluation_validation_status": "PASSED",
+  "analysis_status": "MECHANICAL_ANALYSIS_COMPLETE",
+  "technical_acceptance": "ACCEPTED",
+  "counts": {
+    "cells": 6,
+    "task_seeds": 3,
+    "episodes_per_seed_per_cell": 24,
+    "episodes": 432,
+    "horizon": 80,
+    "environment_transitions": 34560,
+    "proposal_policy_calls": 15971,
+    "supplied_executor_calls": 34560,
+    "variable_roster_event_core_transactions": 34560,
+    "learner_calls": 0,
+    "trainer_calls": 0,
+    "optimizer_updates": 0,
+    "aggregate_rows": 162,
+    "membership_coverage_rows": 18
+  },
+  "configuration": {
+    "task_seeds": [68101, 68102, 68103],
+    "episode_namespace_base": 20000000,
+    "cell_namespace_stride": 100000,
+    "seed_namespace_stride": 1000,
+    "cell_roster_frozen_before_results": true,
+    "K_search": 0,
+    "hypothetical_transitions": 0,
+    "cells": [
+      {
+        "cell": "REFERENCE",
+        "dynamics": [0.75, 0.25, 0.125],
+        "geometry": [0.125, 0.25, 0.25, 0.0625]
+      },
+      {
+        "cell": "THRESHOLD_MID",
+        "dynamics": [0.75, 0.25, 0.125],
+        "geometry": [0.125, 0.1875, 0.25, 0.125]
+      },
+      {
+        "cell": "THRESHOLD_NEAR_GATE",
+        "dynamics": [0.75, 0.25, 0.125],
+        "geometry": [0.125, 0.15625, 0.25, 0.1875]
+      },
+      {
+        "cell": "DRIVE_HIGH",
+        "dynamics": [0.75, 0.375, 0.125],
+        "geometry": [0.125, 0.25, 0.25, 0.0625]
+      },
+      {
+        "cell": "STEP_HIGH",
+        "dynamics": [0.75, 0.25, 0.1875],
+        "geometry": [0.125, 0.25, 0.25, 0.0625]
+      },
+      {
+        "cell": "DRIVE_STEP_HIGH",
+        "dynamics": [0.75, 0.375, 0.1875],
+        "geometry": [0.125, 0.25, 0.25, 0.0625]
+      }
+    ]
+  },
+  "cell_summaries": [
+    {
+      "cell": "REFERENCE",
+      "episodes": 72,
+      "frontier_opportunities": 2692,
+      "different_successor_opportunities": 2260,
+      "gated": 30,
+      "strict_truth": 0,
+      "alias": 30,
+      "unresolved": 2230,
+      "two_sided_observed": false,
+      "episode_return_mean": 0.6316550925925927
+    },
+    {
+      "cell": "THRESHOLD_MID",
+      "episodes": 72,
+      "frontier_opportunities": 2639,
+      "different_successor_opportunities": 2207,
+      "gated": 24,
+      "strict_truth": 0,
+      "alias": 24,
+      "unresolved": 2183,
+      "two_sided_observed": false,
+      "episode_return_mean": 0.6171513310185186
+    },
+    {
+      "cell": "THRESHOLD_NEAR_GATE",
+      "episodes": 72,
+      "frontier_opportunities": 2618,
+      "different_successor_opportunities": 2186,
+      "gated": 21,
+      "strict_truth": 0,
+      "alias": 21,
+      "unresolved": 2165,
+      "two_sided_observed": false,
+      "episode_return_mean": 0.6013454861111112
+    },
+    {
+      "cell": "DRIVE_HIGH",
+      "episodes": 72,
+      "frontier_opportunities": 2665,
+      "different_successor_opportunities": 2233,
+      "gated": 0,
+      "strict_truth": 0,
+      "alias": 0,
+      "unresolved": 2233,
+      "two_sided_observed": false,
+      "episode_return_mean": 0.5
+    },
+    {
+      "cell": "STEP_HIGH",
+      "episodes": 72,
+      "frontier_opportunities": 2658,
+      "different_successor_opportunities": 2226,
+      "gated": 66,
+      "strict_truth": 0,
+      "alias": 66,
+      "unresolved": 2160,
+      "two_sided_observed": false,
+      "episode_return_mean": 0.53515625
+    },
+    {
+      "cell": "DRIVE_STEP_HIGH",
+      "episodes": 72,
+      "frontier_opportunities": 2699,
+      "different_successor_opportunities": 2267,
+      "gated": 0,
+      "strict_truth": 0,
+      "alias": 0,
+      "unresolved": 2267,
+      "two_sided_observed": false,
+      "episode_return_mean": 0.5
+    }
+  ],
+  "seed_summaries": [
+    {
+      "task_seed": 68101,
+      "frontier_opportunities": 5346,
+      "different_successor_opportunities": 4482,
+      "gated": 39,
+      "strict_truth": 0,
+      "alias": 39,
+      "unresolved": 4443,
+      "two_sided_observed": false
+    },
+    {
+      "task_seed": 68102,
+      "frontier_opportunities": 5308,
+      "different_successor_opportunities": 4444,
+      "gated": 54,
+      "strict_truth": 0,
+      "alias": 54,
+      "unresolved": 4390,
+      "two_sided_observed": false
+    },
+    {
+      "task_seed": 68103,
+      "frontier_opportunities": 5317,
+      "different_successor_opportunities": 4453,
+      "gated": 48,
+      "strict_truth": 0,
+      "alias": 48,
+      "unresolved": 4405,
+      "two_sided_observed": false
+    }
+  ],
+  "support_totals": {
+    "frontier_opportunities": 15971,
+    "different_successor_opportunities": 13379,
+    "gated": 141,
+    "strict_truth": 0,
+    "alias": 141,
+    "unresolved": 13238,
+    "two_sided_cell_count": 0
+  },
+  "membership_event_coverage_per_cell_seed": {
+    "JOIN": 144,
+    "TEMPORARY_LEAVE": 48,
+    "TERMINAL_LEAVE": 48,
+    "REJOIN": 48,
+    "all_18_cell_seed_rows_equal": true
+  },
+  "mechanical_observation": "All six frozen cells remained single-class: strict_truth was zero in every cell and seed. Alias support was 30, 24, 21, 0, 66, and 0 in table order. STEP_HIGH increased observed alias support relative to REFERENCE, both threshold-only cells reduced it, and DRIVE_HIGH plus DRIVE_STEP_HIGH eliminated gated support; none exposed both classes.",
+  "strongest_remaining_support_limitation": "The fixed map observed no strict_truth example, so it did not establish two-sided supervised support for any later learner comparison.",
+  "scientific_disposition": null,
+  "c_treatment_licensed": false,
+  "claim_boundary": "Candidate-independent descriptive support only; no cell selection, prevalence claim, learner comparison, promotion, retirement, generalization, utility, scientific acceptance, C treatment, External Pro review, or EOCIV-B5 decision change.",
+  "execution_history": {
+    "initial_dispatch": {
+      "status": "PRELAUNCH_PATH_ENCODING_FAILURE",
+      "commands_launched": 0,
+      "scientific_iteration_cost": 0,
+      "run_root_created": false
+    },
+    "ascii_safe_retry": {
+      "status": "TECHNICALLY_ACCEPTED_FULL_RUN",
+      "scientific_iteration_cost": 1,
+      "raw_evidence_root": "logs/vsp05_b0_support_map_27c45eb3_r1"
+    }
+  },
+  "raw_result": "logs/vsp05_b0_support_map_27c45eb3_r1/raw_result.json",
+  "evaluation_validation": "logs/vsp05_b0_support_map_27c45eb3_r1/evaluation_validation.json",
+  "analysis": "logs/vsp05_b0_support_map_27c45eb3_r1/analysis.json",
+  "operator_terminal_receipt": "logs/vsp05_b0_support_map_27c45eb3_r1/operator_terminal_receipt.json"
+}
