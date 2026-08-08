@@ -1,0 +1,118 @@
+{
+  "treatment": "EOCIV-B4-RECURRENT-RETENTION-LEARNABILITY",
+  "stage": "B_EXPLORATORY_REAL_TOY_EXPERIMENT",
+  "implementation_source_commit": "508bdf408840ec66d0cd78eed2ab47265b89ff7b",
+  "run_identity": "eociv_b4_recurrent_retention_learnability_508bdf40_r2",
+  "formal": false,
+  "operator_terminal": "COMPLETE",
+  "mechanical_status": "MECHANICAL_B4_COMPLETE",
+  "evaluation_validation_status": "B4_EVALUATION_VALIDATED",
+  "analysis_status": "B4_ANALYSIS_COMPLETE",
+  "counts": {
+    "environment_transitions": 58752,
+    "policy_calls": 58752,
+    "actor_critic_optimizer_steps": 576,
+    "training_episodes": 576,
+    "evaluation_episodes": 648,
+    "evaluation_root_rows": 216,
+    "paired_lag_rows": 10368,
+    "lag_summaries": 216,
+    "paired_condition_cells": 9
+  },
+  "configuration": {
+    "conditions": ["EPHEMERAL_RNN", "SEGMENT_LATCH_RNN"],
+    "learner": "GAE_NORM",
+    "actor_seeds": [86031, 86032, 86033],
+    "profiles": ["train_4_3_6_5", "train_5_3_7_6", "train_6_4_8_6"],
+    "checkpoints": ["INIT", "MID", "FINAL"],
+    "evaluation_arms": ["CORRECT", "SWAPPED", "NATIVE_NEUTRAL"],
+    "horizon": 48,
+    "event_times": [12, 24, 36],
+    "segment_length": 12,
+    "mid_update": 48,
+    "final_update": 96,
+    "actor_lr": 0.0003,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "grad_norm_cap": 0.5,
+    "training_transitions": 27648,
+    "evaluation_transitions": 31104,
+    "hypothetical_transitions": 0,
+    "k_search": 0,
+    "ordinary_external_team_reward_only": true
+  },
+  "matching_proof": {
+    "same_initial_state_by_seed": true,
+    "same_training_root_profile_episode_noise_order_by_seed": true,
+    "same_content_separating_architecture": true,
+    "same_trainable_parameter_count_no_latch_parameters": true,
+    "same_adam_learning_rate_gamma_lambda_grad_cap": true,
+    "same_gae_norm_loss": true,
+    "same_training_budget_and_checkpoint_schedule": true,
+    "same_evaluation_roots_between_conditions": true,
+    "same_host_horizon_segments_shock_reward_and_external_channel": true,
+    "all_evaluation_arm_matching_predicates": true
+  },
+  "segment_latch_minus_ephemeral_final_minus_init": {
+    "correct_minus_native_neutral": {
+      "mean": -0.11594189546080932,
+      "positive_cells": 3,
+      "negative_cells": 6,
+      "zero_cells": 0
+    },
+    "correct_minus_swapped": {
+      "mean": 0.08212414405077466,
+      "positive_cells": 6,
+      "negative_cells": 3,
+      "zero_cells": 0
+    }
+  },
+  "final_minus_init_condition_difference_by_seed_profile": [
+    {"actor_seed": 86031, "profile": "train_4_3_6_5", "correct_minus_native_neutral": -0.38934201453612083, "correct_minus_swapped": -0.3422673402548677},
+    {"actor_seed": 86031, "profile": "train_5_3_7_6", "correct_minus_native_neutral": -0.039190348542899045, "correct_minus_swapped": 0.00055036397526953},
+    {"actor_seed": 86031, "profile": "train_6_4_8_6", "correct_minus_native_neutral": -0.4851992957829141, "correct_minus_swapped": -0.3464644709719735},
+    {"actor_seed": 86032, "profile": "train_4_3_6_5", "correct_minus_native_neutral": -0.022810114182137742, "correct_minus_swapped": 0.3985975080341615},
+    {"actor_seed": 86032, "profile": "train_5_3_7_6", "correct_minus_native_neutral": 0.01289234726650923, "correct_minus_swapped": 0.36987937639907864},
+    {"actor_seed": 86032, "profile": "train_6_4_8_6", "correct_minus_native_neutral": 0.11461112777120697, "correct_minus_swapped": 0.040016633993468},
+    {"actor_seed": 86033, "profile": "train_4_3_6_5", "correct_minus_native_neutral": -0.11813713669033188, "correct_minus_swapped": 0.8395951814897611},
+    {"actor_seed": 86033, "profile": "train_5_3_7_6", "correct_minus_native_neutral": -0.5230936184249182, "correct_minus_swapped": -1.0489849082118936},
+    {"actor_seed": 86033, "profile": "train_6_4_8_6", "correct_minus_native_neutral": 0.40679199397432164, "correct_minus_swapped": 0.828194952003968}
+  ],
+  "final_checkpoint_lag_absolute_reward_mass": [
+    {"condition": "EPHEMERAL_RNN", "contrast": "CORRECT_MINUS_NATIVE_NEUTRAL", "event_time": 12, "early_lag_0_3_share": 0.9859656628764897, "late_lag_4_11_share": 0.01403433712351036},
+    {"condition": "EPHEMERAL_RNN", "contrast": "CORRECT_MINUS_SWAPPED", "event_time": 12, "early_lag_0_3_share": 0.9781565380221173, "late_lag_4_11_share": 0.02184346197788277},
+    {"condition": "EPHEMERAL_RNN", "contrast": "CORRECT_MINUS_NATIVE_NEUTRAL", "event_time": 36, "early_lag_0_3_share": 0.9753872932471879, "late_lag_4_11_share": 0.024612706752812148},
+    {"condition": "EPHEMERAL_RNN", "contrast": "CORRECT_MINUS_SWAPPED", "event_time": 36, "early_lag_0_3_share": 0.9814088928709008, "late_lag_4_11_share": 0.018591107129099213},
+    {"condition": "SEGMENT_LATCH_RNN", "contrast": "CORRECT_MINUS_NATIVE_NEUTRAL", "event_time": 12, "early_lag_0_3_share": 0.38288932919170643, "late_lag_4_11_share": 0.6171106708082936},
+    {"condition": "SEGMENT_LATCH_RNN", "contrast": "CORRECT_MINUS_SWAPPED", "event_time": 12, "early_lag_0_3_share": 0.3424855021184844, "late_lag_4_11_share": 0.6575144978815156},
+    {"condition": "SEGMENT_LATCH_RNN", "contrast": "CORRECT_MINUS_NATIVE_NEUTRAL", "event_time": 36, "early_lag_0_3_share": 0.3083004728581085, "late_lag_4_11_share": 0.6916995271418914},
+    {"condition": "SEGMENT_LATCH_RNN", "contrast": "CORRECT_MINUS_SWAPPED", "event_time": 36, "early_lag_0_3_share": 0.28805483905881357, "late_lag_4_11_share": 0.7119451609411864}
+  ],
+  "training_diagnostics": [
+    {"condition": "EPHEMERAL_RNN", "actor_seed": 86031, "episodes": 96, "all_finite": true, "mean_critic_loss": 18.435183255622785, "mean_value_target_error": 3.5732838548719883, "mean_pre_clip_grad_norm": 12.306610540797314, "grad_clip_exceed_count": 96},
+    {"condition": "EPHEMERAL_RNN", "actor_seed": 86032, "episodes": 96, "all_finite": true, "mean_critic_loss": 42.62849644819895, "mean_value_target_error": 5.854945043722789, "mean_pre_clip_grad_norm": 18.32555364569028, "grad_clip_exceed_count": 96},
+    {"condition": "EPHEMERAL_RNN", "actor_seed": 86033, "episodes": 96, "all_finite": true, "mean_critic_loss": 37.74120917916298, "mean_value_target_error": 5.4590342318018275, "mean_pre_clip_grad_norm": 18.059560815493267, "grad_clip_exceed_count": 96},
+    {"condition": "SEGMENT_LATCH_RNN", "actor_seed": 86031, "episodes": 96, "all_finite": true, "mean_critic_loss": 18.827899482101202, "mean_value_target_error": 3.6151286711295447, "mean_pre_clip_grad_norm": 11.429681596656641, "grad_clip_exceed_count": 96},
+    {"condition": "SEGMENT_LATCH_RNN", "actor_seed": 86032, "episodes": 96, "all_finite": true, "mean_critic_loss": 41.49574273824692, "mean_value_target_error": 5.708371512591839, "mean_pre_clip_grad_norm": 16.054977148771286, "grad_clip_exceed_count": 96},
+    {"condition": "SEGMENT_LATCH_RNN", "actor_seed": 86033, "episodes": 96, "all_finite": true, "mean_critic_loss": 35.73703716198603, "mean_value_target_error": 5.234183962146441, "mean_pre_clip_grad_norm": 15.48123269279798, "grad_clip_exceed_count": 96}
+  ],
+  "mechanical_observation": "The parameter-free segment latch moved FINAL absolute reward-difference mass from late lags 4-11 shares of 0.0140-0.0246 under EPHEMERAL_RNN to 0.6171-0.7119 under SEGMENT_LATCH_RNN. Its paired FINAL-minus-INIT effect was heterogeneous: mean -0.11594 in CORRECT-minus-NATIVE_NEUTRAL (3/9 positive) and +0.08212 in CORRECT-minus-SWAPPED (6/9 positive). All values were finite, while every one of the 576 updates exceeded the fixed 0.5 pre-clip gradient threshold.",
+  "scientific_disposition": null,
+  "registered_c_outcome_experiment_licensed": false,
+  "claim_boundary": "Strictly nonterminal result-aware B diagnostic, not a B3 rerun or rescue. No outcome licenses C, tunes a valve, or establishes superiority, promotion, retirement, natural-distribution value, return, deployment, or generalization.",
+  "execution_history": {
+    "r1": {
+      "status": "PRE_IMPORT_HELPER_PATH_FAILURE",
+      "scientific_iteration_cost": 0,
+      "preserved_root": "logs/eociv_b4_recurrent_retention_learnability_508bdf40_r1"
+    },
+    "r2": {
+      "status": "TECHNICALLY_ACCEPTED_FULL_RUN",
+      "raw_evidence_root": "logs/eociv_b4_recurrent_retention_learnability_508bdf40_r2"
+    }
+  },
+  "raw_result": "logs/eociv_b4_recurrent_retention_learnability_508bdf40_r2/raw_result.json",
+  "evaluation_validation": "logs/eociv_b4_recurrent_retention_learnability_508bdf40_r2/evaluation_validation.json",
+  "analysis": "logs/eociv_b4_recurrent_retention_learnability_508bdf40_r2/analysis.json",
+  "operator_terminal_receipt": "logs/eociv_b4_recurrent_retention_learnability_508bdf40_r2/operator_terminal_receipt.json"
+}

@@ -59,6 +59,23 @@ license stays false regardless of observed signs.
 | Required discriminating evidence | Focal 24-step raw traces, paired lag metrics, root distributions, checkpoint and paired-condition changes | `_lag_evidence`, `_paired_lag_rows`, `_condition_summaries`, `_paired_condition_changes`, `_lag_summaries` | `test_lag_schema_and_early_late_mass_math_are_exact`, `test_registered_smoke_is_real_matched_complete_and_canonical` | Favorable-only filtering, full-capacity trace expansion, early/late aggregation ambiguity |
 | Interpretation rule and boundary | Mechanical completion never encodes a scientific gate or direction | `run_experiment` result envelope and `interpretation_boundary` | `test_registered_smoke_is_real_matched_complete_and_canonical` | Promotion/retirement/C licensing inferred from sign |
 
+## Accepted exploratory result
+
+The one full accepted run is
+`eociv_b4_recurrent_retention_learnability_508bdf40_r2`; its public compact
+record is `RECURRENT_RETENTION_LEARNABILITY_RESULT.json`, and its ignored raw
+evidence root is
+`logs/eociv_b4_recurrent_retention_learnability_508bdf40_r2`. The preceding
+`r1` attempt failed before import or scientific execution and remains
+preserved with scientific iteration cost zero.
+
+The matched result is mechanically complete and numerically finite. At FINAL,
+the segment latch moved the absolute reward-difference mass into lags 4--11,
+but its paired FINAL-minus-INIT direction was heterogeneous across the two
+registered contrasts and nine seed/profile cells. This is a nonterminal B
+diagnosis only: scientific disposition remains null and the registered C
+license remains false.
+
 ## Interpretation limit
 
 The implementation can establish only that the frozen matched experiment ran
