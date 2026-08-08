@@ -74,6 +74,8 @@ $retiredExplorerValidationTestPath = Join-Path $repo 'tests/hmasd_explorer_proje
 $explorerValidationContractPath = Join-Path $repo 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
 $explorerValidationContract = Get-Content -Raw -LiteralPath $explorerValidationContractPath
 $explorerValidationContractNormalized = $explorerValidationContract -replace '\s+', ' '
+$algorithmPrinciples = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/ALGORITHM_PRINCIPLES.md')
+$algorithmPrinciplesNormalized = $algorithmPrinciples -replace '\s+', ' '
 $publicHandoffContractPath = Join-Path $repo 'docs/project/handoffs/README.md'
 $publicHandoffContract = Get-Content -Raw -LiteralPath $publicHandoffContractPath
 $publicHandoffContractNormalized = $publicHandoffContract -replace '\s+', ' '
@@ -127,6 +129,7 @@ foreach ($entry in @(
     @($independentResearchRole, 'project_validation_semantic_acceptance_owner=external_pro'),
     @($independentResearchRole, 'project_validation_acceptance_review_request_and_intake=exclusive_for_explorer_origin'),
     @($independentResearchRole, 'project_validation_acceptance_review_mode=CODE_SCIENCE_ALIGNMENT_AUDIT'),
+    @($independentResearchRole, 'project_validation_acceptance_review_timing=after_cpm_technical_acceptance_push_and_remote_locator_return_when_named_pro_trigger'),
     @($independentResearchRole, 'project_validation_alignment_packet_effect=authoritative_scientific_semantic_acceptance'),
     @($codePmRole, 'explorer_treatment_substitution_authority=none'),
     @($codePmRole, 'explorer_task_instruction_intake=execute_named_treatment_without_extra_confirmation'),
@@ -149,7 +152,7 @@ foreach ($entry in @(
     @($explorerValidationContractNormalized, 'instead of creating a `BLOCKED` state'),
     @($explorerValidationContractNormalized, 'External Pro uses the GitHub connection to inspect the exact pushed revision'),
     @($explorerValidationContractNormalized, 'Explorer never substitutes its own acceptance'),
-    @($explorerValidationContractNormalized, 'The review starts only after CPM technical acceptance and push'),
+    @($explorerValidationContractNormalized, 'Ordinary B iteration may continue as advisory research without automatic Pro review'),
     @($proRole, 'cannot consume a formal iteration, update the CDC portfolio'),
     @($explorerValidationSkillNormalized, 'does not update the CDC portfolio'),
     @($explorerValidationSkill, 'current_work_mutation=forbidden'),
@@ -383,7 +386,7 @@ foreach ($required in @(
     'per_review_user_authorization=not_required_inside_active_grant',
     'wdm_campaign_approval=none',
     'unbounded_source_expansion=forbidden',
-    'methodology_reference=research-methodology.md_required_for_candidate_validation',
+    'methodology_reference=research-methodology.md_required_for_C_or_named_science_review_trigger',
     'research_child_dispatch=registered_child_type|fork_turns=none|self_contained_natural_language_assignment',
     'research_child_assignment_context=research_purpose|exact_question|named_sources_and_prerequisite_packets|protected_assumptions_and_independence|exclusions|permitted_local_judgment|completion_meaning',
     'cross_task_transport=codex_native_send_message_to_thread',
@@ -532,6 +535,87 @@ foreach ($required in @(
     if (-not $independentResearchSkillNormalized.Contains($required)) {
         throw "Independent research Skill missing: $required"
     }
+}
+foreach ($entry in @(
+    @($agents, 'explorer_project_treatment_levels=A_read_only_reconnaissance_or_nonintervening_probe|B_small_exploratory_real_toy_algorithm_experiment|C_conclusion_bearing_promotion_retirement_or_expensive_experiment'),
+    @($agents, 'explorer_project_default_treatment=B_after_implementable_differentiating_comparator_backed_mechanism'),
+    @($agents, 'explorer_project_missing_engineering_objects=code_project_manager_constructs_or_connects_minimal_objects'),
+    @($agents, 'explorer_project_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review'),
+    @($independentResearchRole, 'research_treatment_levels=A_read_only_reconnaissance_or_nonintervening_probe|B_small_exploratory_real_toy_algorithm_experiment|C_conclusion_bearing_promotion_retirement_or_expensive_experiment'),
+    @($independentResearchRole, 'methodology_reference=research-methodology.md_required_for_C_or_named_science_review_trigger'),
+    @($independentResearchRole, 'research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review'),
+    @($proRole, 'explorer_toy_review_timing=not_a_normal_B_precondition_or_per_iteration_review'),
+    @($proRoleNormalized, 'A normal exploratory B iteration may proceed'),
+    @($proRoleNormalized, 'real environment, policy, learner, trainer and evaluation runner calls'),
+    @($proRoleNormalized, 'Ordinary B technical acceptance supplies no Pro input'),
+    @($algorithmPrinciplesNormalized, 'Use the default loop `Conjecture -> minimum necessary derivation or counterexample -> real algorithm implementation -> environment experiment -> interpretation -> revision or retirement`'),
+    @($algorithmPrinciplesNormalized, 'Explorer may interpret A/B observations only inside its advisory research state'),
+    @($algorithmPrinciplesNormalized, 'External Pro owns scoped scientific acceptance and conclusion-bearing decisions when invoked'),
+    @($algorithmPrinciplesNormalized, 'A — engineering/evidence reconnaissance or a read-only runtime probe'),
+    @($algorithmPrinciplesNormalized, 'B — small exploratory toy algorithm experiment'),
+    @($algorithmPrinciplesNormalized, 'C — conclusion-bearing, promotion/retirement or expensive experiment'),
+    @($algorithmPrinciplesNormalized, 'environment, policy, learner, trainer and evaluation runner'),
+    @($algorithmPrinciplesNormalized, 'alone, are neither an algorithm implementation nor an experiment'),
+    @($explorerValidationContractNormalized, 'Ordinary B iteration may continue as advisory research without automatic Pro review'),
+    @($explorerValidationContractNormalized, 'A B result shows real calls to the environment, policy, learner, trainer and evaluation runner'),
+    @($explorerValidationContractNormalized, 'External Pro owns final scoped estimand, mechanism, sufficiency and result meaning when a C or other named review trigger is invoked'))) {
+    if (-not $entry[0].Contains($entry[1])) {
+        throw "Explorer proportional experiment surface missing: $($entry[1])"
+    }
+}
+foreach ($entry in @(
+    @($independentResearchSkillNormalized, 'ordinary B may continue as advisory iteration without Pro'),
+    @($independentResearchSkillNormalized, 'Only for the named C/direction-change/material-ambiguity/final-alignment/ conclusion trigger'),
+    @($independentResearchSkillNormalized, 'External Pro owns final scientific-semantic acceptance when invoked'))) {
+    if (-not $entry[0].Contains($entry[1])) {
+        throw "Explorer proportional Pro trigger missing: $($entry[1])"
+    }
+}
+foreach ($required in @(
+    'The proportional A/B/C evidence definitions live in `docs/project/ALGORITHM_PRINCIPLES.md`',
+    'A is read-only engineering or runtime reconnaissance',
+    'B is a small exploratory toy algorithm experiment',
+    'C is conclusion-bearing, promotion/retirement or otherwise expensive work',
+    'The strict methodology reference is C-only',
+    'B normally means preparing a direct implementation/experiment handoff',
+    'Additional fixture, census, enumerator, certificate or byte-stability work must name the unresolved result-relevant scientific question',
+    'real toy environment, policy, learner, trainer and evaluation runner',
+    'produce nonzero transitions, updates or evaluations',
+    'tests and truth tables alone do not qualify')) {
+    if (-not $independentResearchSkillNormalized.Contains($required)) {
+        throw "Independent research proportional experiment contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'selected A/B/C treatment and one named action',
+    'The detailed A/B/C definitions are maintained in `docs/project/ALGORITHM_PRINCIPLES.md`',
+    'A is a read-only engineering/evidence reconnaissance or runtime probe',
+    'one question, a named path, a non-intervention boundary and a fixed resource cap',
+    'it cannot establish algorithm effect',
+    'B is a small exploratory toy algorithm experiment',
+    'candidate and matched comparator',
+    'toy environment/config/seeds',
+    'environment, policy, learner, trainer and evaluation runner',
+    'nonzero transitions, updates or evaluations',
+    'Tests, truth tables, enumerators, censuses, certificates and byte-stability checks alone are not B experiments',
+    'C is conclusion-bearing, promotion/retirement or expensive work',
+    'Null, negative and capability-missing results remain valid results',
+    'Introduce a sibling environment only when the scientific question independently requires it',
+    'never design one backwards to make the candidate win',
+    'current stage as `conjecture`, `derivation`, `algorithm implementation` or `experiment`',
+    'real calls, transition/update/evaluation counts, observed result, strongest alternative explanation and next step',
+    'A missing DTO, adapter, runner hook, observation or lifecycle object is an engineering implementation task for CPM',
+    'Only a choice that changes the scientific question returns to Explorer',
+    'Ordinary B iteration is nonformal and does not automatically initiate a Pro review',
+    'direction-changing decision, material result ambiguity, final science alignment',
+    'formal/conclusion-bearing C result')) {
+    if (-not $explorerValidationSkillNormalized.Contains($required)) {
+        throw "Explorer project-validation proportional experiment contract missing: $required"
+    }
+}
+if ($explorerValidationSkillNormalized.Contains(
+        'After technical acceptance, CPM pushes the result and returns its exact commit plus public GitHub repository/path locators. Explorer may inspect project material read-only as needed, then freezes one')) {
+    throw 'Explorer project-validation retains an unconditional post-technical-acceptance Pro rule'
 }
 foreach ($stale in @(
     'For ROM',

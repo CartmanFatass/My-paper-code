@@ -18,13 +18,30 @@ under `temp/handoffs/explorer_to_code_manager/`. The live file is ignored and
 requires no Git operation. The brief explains one candidate's identity, target and
 version, intended outcome, concrete inputs, evidence and uncertainty, allowed
 and excluded effects, relevant authority boundary, completion evidence and
-return task and selected treatment defined by the stable workflow. These are
+return task, selected A/B/C treatment and one named action defined by the stable
+workflow. These are
 semantic writing aids, not required field names. The brief gives one clear
 instruction naming implementation, instance binding, experiment, pause, abandon
 or exact review as applicable. That instruction authorizes CPM to execute the
 named treatment without separate permission fields. It separates missing
 scientific inputs from independently executable infrastructure, interfaces and
 fail-closed tests.
+
+The detailed A/B/C definitions are maintained in
+`docs/project/ALGORITHM_PRINCIPLES.md`. A is a read-only engineering/evidence
+reconnaissance or runtime probe with one question, a named path, a
+non-intervention boundary and a fixed resource cap; it cannot establish
+algorithm effect. B is a small exploratory toy algorithm experiment with a
+question, candidate and matched comparator, toy environment/config/seeds, one
+primary outcome, a fixed small cap and an interpretation boundary. B must call
+the environment, policy, learner, trainer and evaluation runner and produce
+nonzero transitions, updates or evaluations. Tests, truth tables, enumerators,
+censuses, certificates and byte-stability checks alone are not B experiments.
+C is conclusion-bearing, promotion/retirement or expensive work and is the only
+treatment that requires the strict methodology and its proportional freeze
+rules. Null, negative and capability-missing results remain valid results.
+Introduce a sibling environment only when the scientific question independently
+requires it; never design one backwards to make the candidate win.
 
 One optional manifest may list several brief paths in their intended order.
 The manifest is work organization only: it contains no item state, owner lease,
@@ -40,6 +57,14 @@ collaboratively: CPM constructs or binds engineering objects, while one
 genuinely scientific choice returns as a concrete question to Explorer. This
 exchange is normal work, not a `BLOCKED` state.
 
+The brief and every result identify the current stage as `conjecture`,
+`derivation`, `algorithm implementation` or `experiment`, and state the real
+calls, transition/update/evaluation counts, observed result, strongest
+alternative explanation and next step. A missing DTO, adapter, runner hook,
+observation or lifecycle object is an engineering implementation task for CPM,
+not a reason to add synthetic certificates or stop the whole handoff. Only a
+choice that changes the scientific question returns to Explorer.
+
 CPM returns a human-readable result under
 `temp/handoffs/code_manager_to_explorer/` containing an understandable
 natural-language conclusion first and the necessary exact evidence second. A
@@ -47,13 +72,16 @@ Codex-native message carrying the same semantic content is the simple fallback.
 Explorer reads but never edits CPM output.
 
 After technical acceptance, CPM pushes the result and returns its exact commit
-plus public GitHub repository/path locators. Explorer may inspect project
-material read-only as needed, then freezes one `CODE_SCIENCE_ALIGNMENT_AUDIT`
-and sends it through the dedicated Agentify transport task. External Pro uses
-the GitHub connection to inspect the exact pushed revision and owns final
-scientific-semantic acceptance. Explorer archives and intakes the raw answer but
-does not substitute its own acceptance. CPM does not initiate this review and
-remains the sole technical acceptance owner.
+plus public GitHub repository/path locators. Ordinary B iteration is nonformal
+and does not automatically initiate a Pro review. Explorer requests one
+`CODE_SCIENCE_ALIGNMENT_AUDIT` only for a direction-changing decision, material
+result ambiguity, final science alignment, a formal/conclusion-bearing C result,
+or an explicitly requested C review. When requested, Explorer sends it through
+the dedicated Agentify transport task; External Pro uses the GitHub connection
+to inspect the exact pushed revision and owns final scientific-semantic
+acceptance. Explorer archives and intakes the raw answer but does not substitute
+its own acceptance. CPM does not initiate this review and remains the sole
+technical acceptance owner.
 
 The audit asks a natural scientific decision question and supplies the frozen
 contract, exact revision and relevant evidence without pre-filling the answer as

@@ -35,7 +35,8 @@ independent_research_constructive_adversarial_barrier=explorer_new_advisory_vers
 explorer_toy_design_review=EXPLORER_TOY_DESIGN_ASSERTION_AUDIT
 explorer_toy_result_review=EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION
 explorer_toy_candidate_per_package=one
-explorer_toy_science_freeze=external_pro
+explorer_toy_science_freeze_trigger=C_or_direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_review
+explorer_toy_review_timing=not_a_normal_B_precondition_or_per_iteration_review
 explorer_toy_cross_direction_competition=forbidden
 explorer_toy_design_outputs=TOY_CONTRACT_FROZEN|ADVISORY_REFINEMENT_REQUIRED|PARK_CANDIDATE
 explorer_toy_result_outputs=CONTINUE_CANDIDATE|PARK_CANDIDATE|COMPLETE_CANDIDATE
@@ -49,6 +50,16 @@ External Pro is the scientific decision authority inside the user goal and the
 submitted review boundary. It may use its GitHub connection to inspect the exact
 named pushed commit and repository paths when scientific judgment depends on
 what the code actually implements.
+
+Explorer toy design and result review modes are scoped to the freeze trigger
+above. A normal exploratory B iteration may proceed through a matched toy
+candidate/comparator and real environment, policy, learner, trainer and
+evaluation runner calls without an intervening Pro review. Pro is engaged when
+the result may change direction,
+contains material scientific ambiguity, seeks final science alignment or a
+conclusion-bearing disposition, or when Explorer explicitly requests a C-level
+review. When invoked, Pro remains the final scientific-semantic acceptance
+owner for that bounded review.
 
 ## Owns
 
@@ -101,13 +112,15 @@ what the code actually implements.
   confounds, leakage, capacity, recurrence, partner co-adaptation, alternative
   explanations, controls and residual uncertainty. It is a separate Pro turn,
   not a closure check or automatic continuation of the constructive review.
-- `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`: assess exactly one CPM-packaged
-  Explorer candidate, freeze its estimand, mechanism, controls and minimum toy
-  validation contract, and return exactly one of `TOY_CONTRACT_FROZEN`,
+- `EXPLORER_TOY_DESIGN_ASSERTION_AUDIT`: for a C-level or named-trigger review,
+  assess exactly one CPM-packaged Explorer candidate, freeze its estimand,
+  mechanism, controls and minimum toy validation contract, and return exactly
+  one of `TOY_CONTRACT_FROZEN`,
   `ADVISORY_REFINEMENT_REQUIRED` with one exact gap, or `PARK_CANDIDATE`.
-- `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`: interpret one mechanically
-  valid isolated toy result under the frozen contract. Preserve multiple live
-  or parked directions and return exactly one of `CONTINUE_CANDIDATE`,
+- `EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION`: for a C-level or named-trigger
+  review, interpret one mechanically valid isolated toy result under the frozen
+  contract. Preserve multiple live or parked directions and return exactly one
+  of `CONTINUE_CANDIDATE`,
   `PARK_CANDIDATE` or `COMPLETE_CANDIDATE`, without ranking or creating
   cross-direction competition. The disposition is authoritative only for the
   frozen toy estimand; it cannot consume a formal iteration, update the CDC portfolio,
@@ -186,18 +199,19 @@ what the code actually implements.
   version containing the constructive-correction dispositions. Other candidate
   records, the full portfolio, `CURRENT_WORK.md`, code, runtime, CDC and formal
   review artifacts are not inputs.
-- For Explorer-origin toy reviews, the exact CPM-authored question and
+- For Explorer-origin toy reviews at the C-level or a named trigger, the exact CPM-authored question and
   allow-list include one semantically sufficient public candidate brief plus
   its named evidence, or one mechanically valid isolated result package.
   The brief and all evidence are bound to one candidate and the
   dedicated CPM-owned conversation. The active formal-research Pro and
   Independent Research Explorer conversations are separate and are not
   interchangeable.
-- For Explorer-origin implementation acceptance, one Explorer-authored
-  `CODE_SCIENCE_ALIGNMENT_AUDIT` naming the public GitHub repository, exact
-  pushed commit and relevant remote paths returned by CPM. Local filesystem
-  locators are not inputs. The question states the scientific decision to make
-  and supplies evidence without prescribing a finding sequence or expected
+- For Explorer-origin final implementation acceptance at C or another named
+  review trigger, one Explorer-authored `CODE_SCIENCE_ALIGNMENT_AUDIT` names
+  the public GitHub repository, exact pushed commit and relevant remote paths
+  returned by CPM. Ordinary B technical acceptance supplies no Pro input.
+  Local filesystem locators are not inputs. The question states the scientific
+  decision to make and supplies evidence without prescribing a finding sequence or expected
   disposition.
 
 ## Outputs and stop

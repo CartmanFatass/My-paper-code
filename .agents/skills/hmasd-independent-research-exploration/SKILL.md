@@ -58,8 +58,17 @@ validator or admission gate.
    bounded owned-path scan and create it exactly as that reference specifies.
 7. For algorithm inspiration, read
    [references/open-algorithm-inspiration.md](references/open-algorithm-inspiration.md).
-   For candidate validation only, also read
+   For a conclusion-bearing candidate validation, also read
    [references/research-methodology.md](references/research-methodology.md).
+
+The proportional A/B/C evidence definitions live in
+`docs/project/ALGORITHM_PRINCIPLES.md`; this Skill points to that source rather
+than duplicating its full scientific discipline. A is read-only engineering or
+runtime reconnaissance, B is a small exploratory toy algorithm experiment, and
+C is conclusion-bearing, promotion/retirement or otherwise expensive work.
+Treat A and B as normal research progress when their stated question and
+resource boundary are clear. The strict methodology reference is C-only; it is
+not a prerequisite for ordinary B iteration.
 
 Do not preload `CURRENT_WORK.md`, active runtime/review state, implementation or
 scientific ledgers during ordinary research. The project-validation phase may
@@ -131,8 +140,21 @@ may resend the unchanged question path without modifying research files.
 
 Use **candidate validation** only for a mature candidate with a precise defect,
 mechanism, algorithm delta, strongest simple explanation and separating
-prediction. Load the strict methodology reference and produce an advisory
-validation design without executing evidence.
+prediction. Classify the requested work as A, B or C using the stable principles
+before deciding what evidence is proportionate. Once a candidate is implementable,
+has a differentiating prediction and a matched comparator, and no unresolved
+contradiction changes the question, B normally means preparing a direct
+implementation/experiment handoff rather than ending at theory-only design.
+Load the strict methodology reference only for C or an explicitly requested
+conclusion-bearing audit; an A/B design may proceed to its named treatment
+without a Pro review on every iteration.
+
+Additional fixture, census, enumerator, certificate or byte-stability work must
+name the unresolved result-relevant scientific question it answers. These
+engineering/evidence objects are not a default substitute for an algorithm
+implementation or experiment. A B experiment must use the real toy
+environment, policy, learner, trainer and evaluation runner and produce nonzero
+transitions, updates or evaluations; tests and truth tables alone do not qualify.
 
 Never substitute an Innovator for source absorption, a Principles Analyst for
 literature fidelity, or a Critic for constructive RL reasoning. A broad request
@@ -280,10 +302,13 @@ engineering object. Missing objects are collaboration topics, not task states.
 CPM reads the shared temporary brief, applies engineering judgment and may perform
 bounded safe read-only reconnaissance. It returns an understandable summary
 and exact evidence through its reverse temporary directory. After CPM technical
-acceptance and push, Explorer freezes one `CODE_SCIENCE_ALIGNMENT_AUDIT` using
-the returned exact commit and public GitHub locators, submits it through the
-dedicated Agentify task, and archives and intakes the answer. External Pro owns
-scientific-semantic acceptance; Explorer does not substitute its own judgment.
+acceptance and push, ordinary B may continue as advisory iteration without Pro.
+Only for the named C/direction-change/material-ambiguity/final-alignment/
+conclusion trigger does Explorer freeze one `CODE_SCIENCE_ALIGNMENT_AUDIT`
+using the returned exact commit and public GitHub locators, submit it through
+the dedicated Agentify task, and archive and intake the answer. External Pro
+owns final scientific-semantic acceptance when invoked; Explorer does not
+substitute its own judgment.
 Explorer does not ask
 CPM to read `local_research/` and does not reinterpret prior mechanical BLOCKED
 receipts as candidate evidence. The explicit instruction authorizes CPM to

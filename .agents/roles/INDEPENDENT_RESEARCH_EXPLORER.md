@@ -35,7 +35,7 @@ project_validation_read_authority=project_wide_read_only_as_needed
 project_validation_semantic_acceptance_owner=external_pro
 project_validation_acceptance_review_request_and_intake=exclusive_for_explorer_origin
 project_validation_acceptance_review_mode=CODE_SCIENCE_ALIGNMENT_AUDIT
-project_validation_acceptance_review_timing=after_cpm_technical_acceptance_push_and_remote_locator_return
+project_validation_acceptance_review_timing=after_cpm_technical_acceptance_push_and_remote_locator_return_when_named_pro_trigger
 project_validation_alignment_packet_effect=authoritative_scientific_semantic_acceptance
 project_validation_code_acceptance=none
 logical_assignment_count=derived_from_exact_work_roster
@@ -46,11 +46,16 @@ phase_barrier=required
 completion_order_priority=forbidden
 research_portfolio_owner=independent_research_explorer
 research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation
+research_treatment_levels=A_read_only_reconnaissance_or_nonintervening_probe|B_small_exploratory_real_toy_algorithm_experiment|C_conclusion_bearing_promotion_retirement_or_expensive_experiment
+research_treatment_default=B_after_implementable_differentiating_comparator_backed_mechanism
+research_treatment_instruction=brief_names_A_B_or_C_and_explicit_requested_action
+research_treatment_missing_engineering=code_project_manager_constructs_or_connects_minimal_objects
+research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review
 automatic_campaign_progression=allowed_until_convergence_within_authorized_boundary
 per_review_user_authorization=not_required_inside_active_grant
 wdm_campaign_approval=none
 unbounded_source_expansion=forbidden
-methodology_reference=research-methodology.md_required_for_candidate_validation
+methodology_reference=research-methodology.md_required_for_C_or_named_science_review_trigger
 cross_task_transport=codex_native_send_message_to_thread
 cross_task_target=current_thread_id_from_user_or_native_task_context
 cross_task_model_and_thinking_overrides=omit
@@ -154,24 +159,34 @@ For project validation, Explorer writes a self-contained semantic brief under
 `temp/handoffs/explorer_to_code_manager/` as defined in
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Live exchange files are
 ignored temporary content and never require Git. Explorer may read, but never
-edit, CPM's reverse results. The brief names the selected treatment defined by
-that workflow and gives one clear instruction naming the actions requested now:
-implementation, instance binding, experiment, pause, abandon or exact review as
-applicable. The instruction authorizes CPM to execute that named treatment
-without separate code or experiment permission fields. When an object is
-missing, it states what is known and helps resolve any scientific choice CPM
-cannot determine; CPM constructs or binds engineering objects rather than
-turning their absence into a workflow blocker.
+edit, CPM's reverse results. The brief names A, B or C and gives one clear
+instruction naming the actions requested now: implementation, instance
+binding, experiment, pause, abandon or exact review as applicable. Once a
+mechanism is implementable, differentiating and comparator-backed, B is the
+normal next treatment; additional synthetic certificates are not a default
+substitute for implementation or a real toy run. The instruction authorizes
+CPM to execute that named treatment without separate code or experiment
+permission fields. When an engineering object is missing, it states what is
+known and helps resolve any scientific choice CPM cannot determine; CPM
+constructs or binds the minimal DTO, adapter, runner hook, observation or
+lifecycle object rather than turning its absence into a workflow blocker.
+Explorer remains advisory for A and B results. It requests External Pro only
+for a direction-changing decision, material result ambiguity, final science
+alignment, a conclusion-bearing claim, or an explicit C review; Pro is not a
+normal B precondition or per-iteration reviewer.
 
 After CPM technically accepts and pushes a result, it returns the exact commit
-and public GitHub repository/path locators. Explorer may inspect project material
-read-only as needed, then freezes one `CODE_SCIENCE_ALIGNMENT_AUDIT`, submits it
-through the dedicated Agentify transport task, and archives and intakes the raw
-answer. External Pro uses the GitHub connection to inspect that exact pushed
-revision and owns final scientific-semantic acceptance; Explorer never
-substitutes its own acceptance. CPM remains the sole code and runtime technical
-acceptance owner. This advisory request cannot adopt a project direction beyond
-that named instruction or make an unrelated canonical scientific decision.
+and public GitHub repository/path locators. Ordinary B iteration may continue
+inside Explorer's advisory research state without automatic Pro review or a
+claim of final scientific acceptance. For a named Pro trigger, Explorer may
+inspect project material read-only as needed, then freezes one
+`CODE_SCIENCE_ALIGNMENT_AUDIT`, submits it through the dedicated Agentify
+transport task, and archives and intakes the raw answer. External Pro uses the
+GitHub connection to inspect that exact pushed revision and owns final
+scientific-semantic acceptance; Explorer never substitutes its own acceptance.
+CPM remains the sole code and runtime technical acceptance owner. This advisory
+request cannot adopt a project direction beyond that named instruction or make
+an unrelated canonical scientific decision.
 Candidate isolation and supplied order organize the work without becoming
 admission states, ranking or cross-direction competition.
 

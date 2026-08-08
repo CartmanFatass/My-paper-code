@@ -97,12 +97,53 @@ diagnostic predictability, or added capacity is not an algorithmic contribution.
 
 ## 3. CDC Open Research Loop
 
-Use Conjecture -> Derivation -> Counterexample or Disproof -> Correction.
-Operate this loop under the canonical role contracts. External Pro owns
-scientific design, result interpretation and successor selection; Project
-Manager owns code realization and technical acceptance. New conclusion-bearing
-designs use the triggered design and code-science audits in
-`docs/project/SCIENTIFIC_ASSERTION_AUDIT.md` before formal compute.
+Use the default loop `Conjecture -> minimum necessary derivation or
+counterexample -> real algorithm implementation -> environment experiment ->
+interpretation -> revision or retirement`. Operate it under the canonical role
+contracts: Explorer may interpret A/B observations only inside its advisory
+research state; External Pro owns scoped scientific acceptance and
+conclusion-bearing decisions when invoked; Project Manager owns code
+realization, runtime execution and technical acceptance. A useful next action
+is not delayed until every possible interpretation is frozen. Once a mechanism is implementable, has a
+differentiating prediction and a simple matched comparator, has no
+meaning-changing internal contradiction, and can use a real toy path or an
+independently justified sibling environment, implementation and a small
+experiment are the default next steps. Additional synthetic fixtures,
+certificates or enumerations require a named unresolved question whose answer
+could change the result or next decision; they are not the default substitute
+for implementation or experiment.
+
+Classify the next evidence action by its scientific burden:
+
+- **A — engineering/evidence reconnaissance or a read-only runtime probe.**
+  State one question, the data or runtime path, the non-intervention boundary
+  and a fixed small resource cap. A probe may reveal a new observation or
+  establish that an existing object is reusable, but it does not establish an
+  algorithm effect.
+- **B — small exploratory toy algorithm experiment.** State the question,
+  candidate and matched comparator, toy environment/configuration and seeds,
+  one primary outcome, a fixed small budget cap and the interpretation boundary.
+  B is the normal path once the conditions above hold. It must call the real
+  environment, policy, learner, trainer and evaluation runner and produce nonzero
+  transitions, updates or evaluations. Tests, truth tables, enumerators,
+  censuses, certificates and byte-stability checks are useful evidence but,
+  alone, are neither an algorithm implementation nor an experiment. Zero,
+  negative and capability-missing results are valid outcomes.
+- **C — conclusion-bearing, promotion/retirement or expensive experiment.**
+  Freeze the outcome or estimand, null and comparator, instance or population,
+  stop rule, budget and interpretation boundary. Require thresholds,
+  confidence, checkpoint/exclusion and multiple-comparison controls only when
+  omitting them could change the conclusion. Formal compute authority remains
+  user-only. The strict methodology in `research-methodology.md` is a C-level
+  reference, not a prerequisite for ordinary B iteration.
+
+Reports identify the current stages `conjecture | derivation | algorithm
+implementation | experiment` and state the real calls, transition/update/
+evaluation counts, result, strongest alternative explanation and next step.
+Binding, closure, PASS counts or certificate production cannot stand in for
+those stages. New conclusion-bearing designs use the triggered design and
+code-science audits in `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md` before
+formal compute.
 
 Maintain several live conjectures when evidence permits. Each states its scope,
 mechanism-to-behavior-to-capability edge, strongest simpler explanation, and
@@ -123,17 +164,21 @@ live or parked with a reactivation condition.
 
 ## 4. Evidence Design
 
-Freeze evidence, not theory. Before observing a conclusion-bearing result,
-freeze provenance, primary estimand, comparator information and resource
-boundaries, probability and credit authority, external/intrinsic reward
-semantics, leakage boundaries and conclusion-bearing metrics. Afterward,
+Freeze evidence, not theory. For A, record only the local question, path,
+non-intervention boundary and fixed resource cap. For B, record the candidate,
+matched comparator, toy configuration/seeds, one primary outcome, fixed small
+budget and interpretation boundary in the natural-language task brief; do not
+turn these cues into a required file, schema or admission checklist. Before a
+C result, freeze provenance, primary estimand, comparator information and
+resource boundaries, probability and credit authority, external/intrinsic
+reward semantics, leakage boundaries and conclusion-bearing metrics. Afterward,
 preserve the observation and its registered meaning while allowing the
 conjecture, definition, scope, benchmark or architecture to be corrected.
 
-An evidence note states the local question, implicated conjectures, cheapest
-separating observation, matched controls, frozen estimand and metrics, budget
-and optimizer exposure, prohibited changes and plausible portfolio deltas. It
-does not claim that all future theoretical interpretations are exhausted.
+An evidence note states the cheapest separating observation and the controls
+needed for its selected A/B/C burden. It does not claim that all future
+theoretical interpretations are exhausted, and it must not smuggle C-level
+freeze requirements into ordinary exploratory work.
 
 Match the comparator to the claim. Use diagnostic nulls for incremental signal,
 mechanism-matched controls for a component claim, temporal controls for a
@@ -144,20 +189,21 @@ capacity, optimizer exposure, environment, seed, or evaluation changes.
 Report both environment interaction and optimizer-update exposure. Equal
 environment steps do not imply equal learning opportunity.
 
-Create an implementation plan only when implementation is the cheapest
-necessary evidence action and the research object is precise enough that two
-reasonable implementations instantiate the same estimand. Add at most one
+Create an implementation plan when implementation is the cheapest necessary
+evidence action and the research object is precise enough that two reasonable
+implementations instantiate the same intended comparison. Add at most one
 focused operational check for a concrete corruption risk the evidence-bearing
 run cannot cheaply expose. Do not repeatedly re-prove accepted facts without a
-concrete contradiction.
+concrete contradiction or named result-relevant question.
 
-Before design freeze, evaluate claimed learning signals at the forced initial
-state, prove that a positive control makes the target behavior necessary rather
-than merely permitted, construct witnesses for result gates, check threshold
-arithmetic and zero denominators, and freeze result-sensitive choices. Before a
-formal run, External Pro reads the pushed implementation commit and decides
-whether code and scientific contract align. These are scientific assertion
-checks, not generic review layers.
+For C, evaluate claimed learning signals at the forced initial state, prove
+that a positive control makes the target behavior necessary rather than merely
+permitted, construct witnesses for result gates, check threshold arithmetic
+and zero denominators, and freeze result-sensitive choices. Before a formal or
+conclusion-bearing run, External Pro reads the pushed implementation commit
+and decides whether code and scientific contract align. These are scoped
+scientific assertion checks, not generic review layers or a per-iteration gate
+on B.
 
 ## 5. Toys, Access, and Transfer
 

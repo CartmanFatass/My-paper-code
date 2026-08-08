@@ -29,13 +29,19 @@ excluded effects, authority boundary, completion evidence and return task easy
 to understand. It also makes Explorer's selected treatment understandable:
 experiment, instance binding, pause, abandon or one exact external-review need.
 Explorer gives one clear instruction naming implementation, instance binding,
-experiment, pause, abandon or exact review as applicable. That instruction
-authorizes CPM to execute the named treatment without separate code or experiment
-permission fields, and CPM does not infer omitted actions. If an object is
-missing, the brief states what is known. CPM constructs or binds engineering
-objects; Explorer answers any genuinely scientific choice CPM cannot determine.
-These are semantic completeness cues, not a schema or admission check. No
-`document_kind`, packet version, validator receipt, hash or byte count is required.
+experiment, pause, abandon or exact review as applicable, and identifies the
+proportional evidence level A reconnaissance/probe, B exploratory toy
+experiment or C conclusion-bearing/expensive experiment. For B, the brief
+states the candidate, matched comparator, toy path/configuration and seeds, one
+primary outcome, fixed small cap and interpretation boundary; it need not
+freeze C-level estimands or request Pro for every iteration. That instruction
+authorizes CPM to execute the named treatment without separate code or
+experiment permission fields, and CPM does not infer omitted actions. If an
+object is missing, the brief states what is known. CPM constructs or binds
+engineering objects; Explorer answers any genuinely scientific choice CPM
+cannot determine. These are semantic completeness cues, not a schema or
+admission check. No `document_kind`, packet version, validator receipt, hash or
+byte count is required.
 
 ## Intelligent intake and ordering
 
@@ -51,13 +57,22 @@ not block unrelated work or change another candidate's scientific status.
 
 For an Explorer-origin candidate, CPM implements the selected treatment as an
 engineering task and does not substitute External Pro for experiment, instance
-binding, pause or abandon. It prepares an exact review only when the brief
-explicitly requests one. An unclear treatment returns one precise question to
-Explorer without blocking unrelated candidates. The instruction is not a
-canonical scientific conclusion, but it is sufficient authority for CPM to
-perform the named project-validation task. CPM resolves engineering gaps and
-Explorer resolves scientific choices; neither treats a missing object as a
-workflow terminal.
+binding, pause or abandon. It may run a named B experiment under existing
+runtime authority and return technical evidence without automatic Pro review.
+A B result shows real calls to the environment, policy, learner, trainer and
+evaluation runner plus nonzero transitions, updates or evaluations; synthetic
+checks alone do not satisfy that experiment boundary.
+It prepares an exact review only when the brief explicitly requests one or the
+work is direction-changing, materially ambiguous, final science alignment,
+formal/conclusion-bearing, or an explicitly requested C review. An unclear
+treatment returns one precise question to Explorer without blocking unrelated
+candidates. The instruction is not a canonical scientific conclusion, but it
+is sufficient authority for CPM to perform the named project-validation task.
+CPM resolves engineering gaps and Explorer resolves scientific choices; neither
+treats a missing object as a workflow terminal. Explorer remains advisory for
+A/B iteration and never substitutes its own final scientific acceptance;
+External Pro owns the scoped final scientific-semantic acceptance after CPM
+technical acceptance and push.
 
 After work on one candidate, CPM returns an explanatory brief that begins with
 the natural-language conclusion and then appends the necessary exact evidence.
@@ -65,13 +80,16 @@ A native task message carrying the same content is the single fallback.
 Mechanical field-only callbacks are insufficient.
 
 After technical acceptance, CPM pushes the result and returns its exact commit
-and public GitHub repository/path locators. CPM does not initiate the final
-acceptance review. Explorer may inspect project material read-only as needed,
-then freezes one `CODE_SCIENCE_ALIGNMENT_AUDIT`, submits it through the dedicated
-Agentify transport task, and archives and intakes the raw answer. External Pro
+and public GitHub repository/path locators. Ordinary B iteration may continue
+as advisory research without automatic Pro review and without claiming final
+scientific acceptance. For a direction-changing decision, material result
+ambiguity, final science alignment, a formal/conclusion-bearing result or an
+explicit C review, Explorer freezes one `CODE_SCIENCE_ALIGNMENT_AUDIT` after
+CPM technical acceptance and push. It submits the audit through the dedicated
+Agentify transport task and archives and intakes the raw answer. External Pro
 uses the GitHub connection to inspect the exact pushed revision and owns final
-scientific-semantic acceptance. Explorer never substitutes its own acceptance.
-The review starts only after CPM technical acceptance and push.
+scientific-semantic acceptance. Explorer never substitutes its own acceptance,
+and CPM does not initiate the review.
 
 ## Lifecycle and failure ownership
 
@@ -81,8 +99,10 @@ is no compatibility tree, registry, queue engine, retry state or duplicated
 history directory.
 
 Explorer corrects missing advisory content. CPM owns implementation and
-operational recovery. External Pro owns estimand, mechanism, sufficiency and
-result meaning. WDM repairs only this interface. Missing formatting or a prior
+operational recovery. Explorer may interpret ordinary A/B observations only
+inside its advisory research state. External Pro owns final scoped estimand,
+mechanism, sufficiency and result meaning when a C or other named review trigger
+is invoked. WDM repairs only this interface. Missing formatting or a prior
 mechanical BLOCKED receipt is not candidate evidence and does not support or
 refute a proposition.
 
