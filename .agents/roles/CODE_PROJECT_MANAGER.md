@@ -42,13 +42,9 @@ cross_task_target=current_thread_id_from_user_or_native_task_context
 cross_task_model_and_thinking_overrides=omit
 research_stage=EXPLORATION|FORMALIZATION
 default_research_stage=EXPLORATION
-code_change_shape=one_owned_module_plus_one_focused_check
-new_tracked_source_files_per_change<=3
-refactor_active_line_delta<0
-new_mechanism_active_line_growth<=500
-existing_file_over_1200_lines=must_not_grow
+code_change_shape=coherent_module_responsibility_with_focused_evidence
 successor_replaces_predecessor=same_commit_delete_code_runner_direction_test
-shared_abstraction_minimum_live_callers=2
+shared_abstraction_justification=ownership_or_multiple_live_callers
 versioned_scientific_filenames=forbidden_git_is_history
 execution_readiness_owner=code_project_manager
 execution_readiness_executor=hmasd-verifier_when_triggered
@@ -188,10 +184,13 @@ manager; there is no Research Operations Manager or persistent monitor.
   frozen core outputs in one direction. A runner performs configuration and
   wiring only. No module mixes environment dynamics, policy decisions, metrics
   and artifact I/O. Git, not a new `Gxx` filename, preserves iteration history.
-- A refactor is accepted only with a negative active-line delta. A new mechanism
-  may add at most 500 active lines and three tracked source files, and deletes its
-  superseded implementation in the same commit. A file already above 1200 lines
-  does not grow. Extract a shared abstraction only for two live callers.
+- A change is evaluated by coherent module responsibility, minimal public
+  interfaces, directed dependencies, explicit state ownership, complexity
+  isolation, change locality, preserved behavior and focused evidence. Line and
+  file statistics may be reported as optional diagnostics, but they cannot reject
+  work, force arbitrary slicing or substitute for architecture review. A
+  successor deletes its superseded implementation in the same commit. Extract a
+  shared abstraction when it improves ownership or serves multiple live callers.
 
 - Direct Git integration for each exact accepted code, runtime, review,
   evidence, report, ledger or state path set.
@@ -239,7 +238,6 @@ execution_readiness=<passed|not_triggered>
 execution_readiness_receipt=<git-private-receipt-path-or-not-triggered>
 execution_readiness_reason=<trigger-or-bounded-not-triggered-reason>
 code_science_index=<path-or-not-triggered>
-active_line_delta=<added-minus-deleted>
 superseded_paths_deleted=<paths-or-none-with-reason>
 direction_local_artifacts_deleted=<paths-or-not_applicable>
 module_boundary=<single-owner-module>

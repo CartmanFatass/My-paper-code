@@ -27,7 +27,7 @@ nested_rollout_replanning=forbidden
 nonformal_wall_clock_cap_minutes=20
 formal_iteration_wall_clock_cap_hours=8
 scalable_algorithm_target=O(N*k_neighbor)_or_O(N*logN)
-codebase_policy=small_active_line_only
+codebase_policy=architecture_first_module_boundaries
 workflow_hash_validation=disabled
 per_file_hash_handoff=forbidden
 test_acceptance_basis=risk_and_claim_coverage
@@ -43,13 +43,9 @@ cpm_decision_surface=semantic_next_action_only
 local_failure_default=continue_next_legal_action
 research_stage=EXPLORATION|FORMALIZATION
 default_research_stage=EXPLORATION
-code_change_shape=one_owned_module_plus_one_focused_check
-new_tracked_source_files_per_change<=3
-refactor_active_line_delta<0
-new_mechanism_active_line_growth<=500
-existing_file_over_1200_lines=must_not_grow
+code_change_shape=coherent_module_responsibility_with_focused_evidence
 successor_replaces_predecessor=same_commit_delete_code_runner_direction_test
-shared_abstraction_minimum_live_callers=2
+shared_abstraction_justification=ownership_or_multiple_live_callers
 versioned_scientific_filenames=forbidden_git_is_history
 ```
 
@@ -73,11 +69,11 @@ A user-named one may be inspected only as reference.
    brainstorm, plan, worktree, ledger or approval when known.
 3. **Probe.** Observe the smallest failing test for new behavior or plausible
    regression. For throwaway measurement/configuration, use a diagnostic.
-4. **Implement.** No backward compatibility. Make the smallest active-line
-   discriminator; remove replaced interfaces, adapters, migrations, fallbacks,
-   state, and tests. Git history is the archive. Use one stable semantic module,
-   not a new generation-number copy. A successor deletes predecessor code,
-   runner and direction-local test in the same change.
+4. **Implement.** No backward compatibility. Make the smallest coherent module
+   change; remove replaced interfaces, adapters, migrations, fallbacks, state,
+   and tests. Git history is the archive. Use one stable semantic module, not a
+   new generation-number copy. A successor deletes predecessor code, runner and
+   direction-local test in the same change.
 5. **Verify.** Proof proportional to the claim: rerun the focused check fresh.
    For result-bearing runner/analyzer integration, execution-entry, artifact,
    serialization or phase-connection changes, and code defects exposed by
@@ -100,8 +96,9 @@ The default active architecture is `source -> controller -> episode -> metrics
 -> analysis`. Optional formalization consumes frozen core outputs and never
 feeds back into the core. Runners contain configuration and wiring only. A
 module has one state owner or responsibility; do not mix environment dynamics,
-policy decisions, metrics and artifact I/O. Extract shared code only after two
-live callers require it.
+policy decisions, metrics and artifact I/O. Keep public interfaces minimal,
+dependencies directed, and complexity isolated. Extract shared code when it
+improves ownership or serves multiple live callers.
 
 ## Project cognition references
 
@@ -127,11 +124,13 @@ aid. The parent sends a shorter self-contained brief; forked turns are
 background context and never replace it. These references are judgment aids,
 not schemas or admission gates, and they do not define mandatory fields.
 
-Refactors must reduce active lines. A new scientific mechanism may add at most
-500 active lines and three tracked source files. A file already above 1200 lines
-must stay flat or shrink. These limits prevent another full `Gxx` copy; they do
-not require artificial file splitting when one responsibility is genuinely
-inseparable.
+Evaluate each change by coherent module responsibility, minimal public
+interfaces, directed dependencies, explicit state ownership, complexity
+isolation, change locality, preserved behavior and focused evidence. Line and
+file statistics are optional diagnostics only: they cannot reject work, force
+arbitrary slicing or substitute for architecture review. These criteria prevent
+another full `Gxx` copy without requiring artificial file splitting when one
+responsibility is genuinely inseparable.
 
 ## Proof-sized test selection
 

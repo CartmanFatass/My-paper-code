@@ -204,7 +204,10 @@ $routerRequired = @(
     'agentify_transport_request=AGENTIFY_REVIEW_BATCH_REQUEST',
     'agentify_transport_request_fields=batch_path|return_task_id',
     'agentify_transport_skill=hmasd-agentify-transport',
-    'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT'
+    'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
+    'codebase_policy=architecture_first_module_boundaries',
+    'maintainability_acceptance=clear_ownership|minimal_public_surface|directed_dependencies|state_and_complexity_isolation|change_locality|focused_contract_evidence',
+    'line_and_file_counts=diagnostic_only_never_admission_or_acceptance'
 )
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
@@ -257,17 +260,15 @@ $codeRequired = @(
     'cross_task_model_and_thinking_overrides=omit',
     'passing no model or thinking override',
     'research_stage=EXPLORATION|FORMALIZATION',
-    'code_change_shape=one_owned_module_plus_one_focused_check',
-    'new_tracked_source_files_per_change<=3',
-    'refactor_active_line_delta<0',
-    'new_mechanism_active_line_growth<=500',
-    'existing_file_over_1200_lines=must_not_grow',
+    'code_change_shape=coherent_module_responsibility_with_focused_evidence',
     'successor_replaces_predecessor=same_commit_delete_code_runner_direction_test',
-    'shared_abstraction_minimum_live_callers=2',
-    'active_line_delta=<added-minus-deleted>',
+    'shared_abstraction_justification=ownership_or_multiple_live_callers',
     'superseded_paths_deleted=<paths-or-none-with-reason>',
     'direction_local_artifacts_deleted=<paths-or-not_applicable>',
     'module_boundary=<single-owner-module>',
+    'coherent module responsibility, minimal public interfaces, directed dependencies, explicit state ownership, complexity isolation, change locality, preserved behavior and focused evidence',
+    'Line and file statistics may be reported as optional diagnostics, but they cannot reject work, force arbitrary slicing or substitute for architecture review',
+    'Extract a shared abstraction when it improves ownership or serves multiple live callers',
     'Focused tests alone are insufficient',
     '`interface_smoke`',
     '`bounded_exercise`',
@@ -284,6 +285,25 @@ $codeRequired = @(
 )
 foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
+}
+
+$retiredArchitectureGates = @(
+    'small_' + 'active_line_only',
+    'new_tracked_source_files_per_change<=' + '3',
+    'refactor_' + 'active_line_delta<0',
+    'new_mechanism_' + 'active_line_growth<=500',
+    'existing_file_over_' + '1200_lines=must_not_grow',
+    'active_' + 'line_delta=<added-minus-deleted>',
+    'negative active-' + 'line delta',
+    'at most 500 active ' + 'lines',
+    'three tracked source files',
+    'file already above 1200 ' + 'lines')
+foreach ($surface in @($agents, $codePm, $agile)) {
+    foreach ($retired in $retiredArchitectureGates) {
+        if ($surface.Contains($retired)) {
+            throw "Retired line/file acceptance gate remains: $retired"
+        }
+    }
 }
 
 foreach ($required in @(

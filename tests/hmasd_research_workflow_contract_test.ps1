@@ -208,6 +208,9 @@ foreach ($required in @(
     'test_scope=proof_sized',
     'hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
     'evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md',
+    'codebase_policy=architecture_first_module_boundaries',
+    'maintainability_acceptance=clear_ownership|minimal_public_surface|directed_dependencies|state_and_complexity_isolation|change_locality|focused_contract_evidence',
+    'line_and_file_counts=diagnostic_only_never_admission_or_acceptance',
     'per_file_hash_handoff=forbidden',
     'isolated_worktree_identity=workspace_ticket_only',
     'hmasd_worktree_root=C:/worktrees/HMASD',
@@ -677,19 +680,6 @@ foreach ($surface in @($agents, $codePmRole, $workflowDesignManagerRole, $indepe
     }
 }
 
-$wdmCorePaths = @(
-    'AGENTS.md',
-    '.agents/roles/WORKFLOW_DESIGN_MANAGER.md',
-    '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md',
-    '.agents/skills/hmasd-workflow-change-audit/SKILL.md',
-    'docs/project/SESSION_WORKSPACE_CONTRACT.md')
-$wdmCoreLineCount = ($wdmCorePaths |
-    ForEach-Object { (Get-Content -LiteralPath (Join-Path $repo $_)).Count } |
-    Measure-Object -Sum).Sum
-if ($wdmCoreLineCount -gt 1000) {
-    throw 'WDM core control plane exceeds 1000 physical lines'
-}
-
 foreach ($required in @(
     'scientific_authority=none',
     'formal_compute_authority=user_only',
@@ -850,15 +840,34 @@ foreach ($required in @(
     'cross_task_model_and_thinking_overrides=omit',
     'passing no model or thinking override',
     'research_stage=EXPLORATION|FORMALIZATION',
-    'code_change_shape=one_owned_module_plus_one_focused_check',
-    'new_tracked_source_files_per_change<=3',
-    'refactor_active_line_delta<0',
-    'new_mechanism_active_line_growth<=500',
-    'existing_file_over_1200_lines=must_not_grow',
+    'code_change_shape=coherent_module_responsibility_with_focused_evidence',
+    'shared_abstraction_justification=ownership_or_multiple_live_callers',
     'successor_replaces_predecessor=same_commit_delete_code_runner_direction_test',
+    'coherent module responsibility, minimal public interfaces, directed dependencies, explicit state ownership, complexity isolation, change locality, preserved behavior and focused evidence',
+    'Line and file statistics may be reported as optional diagnostics, but they cannot reject work, force arbitrary slicing or substitute for architecture review',
+    'Extract a shared abstraction when it improves ownership or serves multiple live callers',
     'CODE_SCIENCE_INDEX.md',
     'CODE_ACCEPTED')) {
     if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
+}
+
+$retiredArchitectureGates = @(
+    'small_' + 'active_line_only',
+    'new_tracked_source_files_per_change<=' + '3',
+    'refactor_' + 'active_line_delta<0',
+    'new_mechanism_' + 'active_line_growth<=500',
+    'existing_file_over_' + '1200_lines=must_not_grow',
+    'active_' + 'line_delta=<added-minus-deleted>',
+    'negative active-' + 'line delta',
+    'at most 500 active ' + 'lines',
+    'three tracked source files',
+    'file already above 1200 ' + 'lines')
+foreach ($surface in @($agents, $codePmRole, $agile)) {
+    foreach ($retired in $retiredArchitectureGates) {
+        if ($surface.Contains($retired)) {
+            throw "Retired line/file acceptance gate remains: $retired"
+        }
+    }
 }
 foreach ($required in @(
     'role=workflow_design_manager',
@@ -941,10 +950,18 @@ if (-not $workflowAudit.Contains('written only on explicit user request')) {
 foreach ($required in @(
     'superpowers_execution=disabled',
     'workflow_hash_validation=disabled',
+    'codebase_policy=architecture_first_module_boundaries',
+    'code_change_shape=coherent_module_responsibility_with_focused_evidence',
+    'shared_abstraction_justification=ownership_or_multiple_live_callers',
     'valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED',
     'early_termination_boundary=unrecoverable_external_technical_impossibility_only',
     'CODE_SCIENCE_ALIGNMENT_AUDIT')) {
     if (-not $agile.Contains($required)) { throw "Agile Skill missing: $required" }
+}
+foreach ($required in @(
+    'Keep public interfaces minimal, dependencies directed, and complexity isolated',
+    'Evaluate each change by coherent module responsibility, minimal public interfaces, directed dependencies, explicit state ownership, complexity isolation, change locality, preserved behavior and focused evidence')) {
+    if (-not $agileNormalized.Contains($required)) { throw "Agile Skill missing architecture criterion: $required" }
 }
 foreach ($required in @(
     'search_complexity_ceiling=O(H*K_search)',
@@ -962,7 +979,9 @@ foreach ($required in @(
     'workflow_mechanical_invariant_scope=irreversible_and_high_cost_actions_only',
     'workflow_retryable_failure_mechanism=forbidden_use_one_line_runtime_checklist',
     'workflow_new_mechanism_requires_named_deletion=true',
-    'workflow_net_line_growth_default=negative_or_zero',
+    'workflow_legacy_mechanism_policy=no_expansion_preserve_contract_when_touched',
+    'Maintainability is judged by interface quality, coherent responsibility, dependency direction, explicit state ownership, decoupling, complexity isolation, change locality and focused contract evidence',
+    'Line and file counts may be recorded as diagnostics, but they never reject a change, force a split or define acceptance',
     'workflow_incident_to_permanent_rule_threshold=2_independent_recurrences',
     'workflow_rule_single_source=one_defining_file_others_point',
     'simple_operation_active_engineering_budget_minutes=20',
