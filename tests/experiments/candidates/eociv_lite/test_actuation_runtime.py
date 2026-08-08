@@ -1,6 +1,7 @@
 """Focused tests for the executable actuation edge (receipt, policy, runner)."""
 
 import hashlib
+from dataclasses import replace
 
 import numpy as np
 import pytest
@@ -19,6 +20,21 @@ def _runner(arm: str, episode_id: int = 0, **kwargs) -> art.ArmEpisodeRunner:
         env, arm, tape_seed=gate_mod.TAPE_SEED,
         d_learned_fn=gate_mod.registered_learned_decision, **kwargs
     )
+
+
+def _boundary_materials(runner: art.ArmEpisodeRunner):
+    gate_mod._drive_to(runner.env, sib.EVENT_TIMES[0])
+    slot, receipt, opportunity, actuation, _ = runner._boundary(0)
+    view = runner.env.observe()
+    kwargs = dict(
+        opportunity=opportunity,
+        actuation=actuation,
+        observations=view.observations,
+        active_mask=view.active_mask,
+        slot_block=slot,
+        noise=runner.noise[runner.env.time],
+    )
+    return receipt, kwargs
 
 
 class TestSlotAndPolicy:
@@ -70,30 +86,79 @@ class TestRunner:
             assert record.receipt.physical_tick == tick
             assert record.receipt.route == "REAL"
             assert record.receipt.slot_digest == hashlib.sha256(record.slot).hexdigest()
+            trace = runner.step_traces[tick]
+            assert record.action_receipt.policy_input_digest == trace.input_digest
+            assert record.action_receipt.kernel_digest == trace.kernel_digest
+            assert record.action_receipt.sampled_action_digest == trace.action_digest
+            assert record.action_receipt.recurrent_write_digest == trace.hidden_digest
         assert total == sum(runner.env.reward_trace)
 
     def test_receipt_fail_closed_modes(self):
-        env = gate_mod._make_sibling(PROFILE, 1)
-        runner = art.ArmEpisodeRunner(
-            env, "LR", tape_seed=gate_mod.TAPE_SEED,
-            d_learned_fn=gate_mod.registered_learned_decision,
+        runner = _runner("LR", episode_id=1)
+        receipt, kwargs = _boundary_materials(runner)
+        with pytest.raises(art.ReceiptError):
+            runner.bound_step(receipt=None, **kwargs)
+        other = _runner("LR", episode_id=2)
+        other_receipt, _ = _boundary_materials(other)
+        with pytest.raises(art.ReceiptError):
+            runner.bound_step(receipt=other_receipt, **kwargs)
+        focal = kwargs["opportunity"].identity.receiver_member_key
+        wrong_identity = replace(
+            receipt.opportunity_identity,
+            receiver_member_key=(focal + 1) % runner.env.ledger.member_capacity,
         )
-        gate_mod._drive_to(env, sib.EVENT_TIMES[0])
-        opportunity = env.opportunity(0)
-        actuation = sib.actuate(
-            "LR", opportunity, env.focal_payload(0), d_learned=True, d_control=True
+        with pytest.raises(art.ReceiptError):
+            runner.bound_step(
+                receipt=replace(receipt, opportunity_identity=wrong_identity),
+                **kwargs,
+            )
+        altered_focal = kwargs["slot_block"].copy()
+        altered_focal[focal, 0] += np.float32(1.0 / 255.0)
+        with pytest.raises(art.ReceiptError):
+            runner.bound_step(
+                receipt=receipt, **{**kwargs, "slot_block": altered_focal}
+            )
+        nonfocal = kwargs["slot_block"].copy()
+        nonfocal[(focal + 1) % nonfocal.shape[0], 0] = np.float32(1.0)
+        with pytest.raises(art.ReceiptError):
+            runner.bound_step(receipt=receipt, **{**kwargs, "slot_block": nonfocal})
+        for altered in (
+            replace(receipt, route="NEUTRAL"),
+            replace(receipt, decision_source="D_L"),
+            replace(receipt, ingestion_cost=receipt.ingestion_cost + 1),
+        ):
+            with pytest.raises(art.ReceiptError):
+                runner.bound_step(receipt=altered, **kwargs)
+        runner.bound_step(receipt=receipt, **kwargs)
+        with pytest.raises(art.ReceiptError):
+            runner.bound_step(receipt=receipt, **kwargs)
+
+    def test_action_receipt_rejects_altered_digest_material(self):
+        runner = _runner("LR", episode_id=3)
+        receipt, kwargs = _boundary_materials(runner)
+        actions, kernel, new_hidden, action_receipt = runner.bound_step(
+            receipt=receipt, **kwargs
         )
-        receipt = art.make_receipt(opportunity, actuation)
-        focal = opportunity.identity.receiver_member_key
         with pytest.raises(art.ReceiptError):
-            runner._verify_and_consume(None, actuation.slot, focal)
+            runner.verify_action_receipt(
+                replace(action_receipt, sampled_action_digest="0" * 64),
+                opportunity=kwargs["opportunity"],
+                actuation=kwargs["actuation"],
+                observations=kwargs["observations"],
+                active_mask=kwargs["active_mask"],
+                slot_block=kwargs["slot_block"],
+                hidden=runner.hidden,
+                kernel=kernel,
+                actions=actions,
+                new_hidden=new_hidden,
+            )
+
+    def test_stale_post_action_receipt_fails_closed(self):
+        runner = _runner("LR", episode_id=4)
+        receipt, kwargs = _boundary_materials(runner)
+        runner.env.step(roster_env.constructive_actions(runner.env.observe()))
         with pytest.raises(art.ReceiptError):
-            runner._verify_and_consume(receipt, actuation.slot, focal + 1)
-        with pytest.raises(art.ReceiptError):
-            runner._verify_and_consume(receipt, b"\x00" * sib.PAYLOAD_SLOT_BYTES, focal)
-        runner._verify_and_consume(receipt, actuation.slot, focal)
-        with pytest.raises(art.ReceiptError):
-            runner._verify_and_consume(receipt, actuation.slot, focal)
+            runner.bound_step(receipt=receipt, **kwargs)
 
     def test_lr_cr_byte_identity_and_ls_divergence(self):
         lr = _runner("LR", episode_id=2)

@@ -42,7 +42,7 @@ from __future__ import annotations
 
 import hashlib
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from fractions import Fraction
 
 import numpy as np
@@ -51,7 +51,7 @@ from envs.continuous_roster import runtime_capacity as roster_env
 from experiments.candidates.eociv_lite import actuation_runtime as art
 from experiments.candidates.eociv_lite import sibling_env as sib
 
-RAW_OUTPUT_BINDING = "eociv_lite.capability_gate.v2"
+RAW_OUTPUT_BINDING = "eociv_lite.capability_gate.v3"
 
 #: Registered gate population: every training profile, eight episodes each.
 GATE_PROFILES = roster_env.TRAIN_PROFILES
@@ -59,11 +59,17 @@ GATE_EPISODES = tuple(range(8))
 MASTER_SEED = 20260807
 SIBLING_SEED = 90731
 TAPE_SEED = 41211
+PROFILE_STREAM_MANIFEST = sib.registered_profile_stream_manifest(
+    tuple(profile.name for profile in GATE_PROFILES),
+    world_seed=MASTER_SEED,
+    action_noise_seed=art.ACTION_NOISE_SEED,
+)
 
 #: Wiring tolerance for the kernel conformance check (exact reward of the
 #: executed quantized action vs the environment's float result).  Floor: the
 #: base env's float32 kernel arithmetic, ~2**-24 relative per step.
 CONFORMANCE_TOL = 1e-6
+SEGMENT_CONFORMANCE_TOL = sib.SEGMENT_LENGTH * CONFORMANCE_TOL
 
 #: The full-support exact reveal floor every critical cell must clear.
 REVEAL_FLOOR = Fraction(1, 1000)
@@ -162,8 +168,11 @@ def _drive_to(env, time: int) -> None:
 
 
 def _make_sibling(profile, episode_id: int, **kwargs) -> sib.EocivSiblingRosterEnv:
+    world_seed = sib.profile_stream_identity(
+        sib.BASE_WORLD_STREAM, MASTER_SEED, profile.name
+    )
     ledger = roster_env.make_ledger(
-        episode_id, master_seed=MASTER_SEED, profile=profile
+        episode_id, master_seed=world_seed, profile=profile
     )
     return sib.EocivSiblingRosterEnv(ledger, sibling_seed=SIBLING_SEED, **kwargs)
 
@@ -286,6 +295,7 @@ class FullSupportOracle:
     reveal_value: Fraction
     optimal_sets_disjoint_every_step: bool
     per_step_optima: dict[str, tuple[tuple[Fraction, Fraction], ...]]
+    per_step_blind_optima: tuple[tuple[Fraction, Fraction], ...]
 
 
 def full_support_oracle(ledger, event_index: int, receiver_key: int) -> FullSupportOracle:
@@ -313,6 +323,7 @@ def full_support_oracle(ledger, event_index: int, receiver_key: int) -> FullSupp
     blind_value = Fraction(0)
     disjoint_every_step = True
     per_step_optima: dict[str, list[tuple[Fraction, Fraction]]] = {s: [] for s in states}
+    per_step_blind_optima: list[tuple[Fraction, Fraction]] = []
 
     for time in range(start, start + sib.SEGMENT_LENGTH):
         geometry = StepGeometry(
@@ -334,14 +345,16 @@ def full_support_oracle(ledger, event_index: int, receiver_key: int) -> FullSupp
             per_step_optima[state].append(best_point)
             informed_value += prior[state] * best
         blind_best = None
+        blind_point = None
         for point in candidates:
             value = sum(
                 (prior[state] * geometry.reward(state, *point) for state in states),
                 Fraction(0),
             )
             if blind_best is None or value > blind_best:
-                blind_best = value
+                blind_best, blind_point = value, point
         blind_value += blind_best
+        per_step_blind_optima.append(blind_point)
         if len(states) == 2:
             # Disjointness of the FULL optimal sets, certified over the joint
             # arrangement: the A-optimal set is a union of faces whose
@@ -373,6 +386,7 @@ def full_support_oracle(ledger, event_index: int, receiver_key: int) -> FullSupp
         reveal_value=informed_value - blind_value,
         optimal_sets_disjoint_every_step=disjoint_every_step,
         per_step_optima={s: tuple(v) for s, v in per_step_optima.items()},
+        per_step_blind_optima=tuple(per_step_blind_optima),
     )
 
 
@@ -391,6 +405,72 @@ def _quantized_reward(
     effort = (Fraction(float(a0)) + 1) / 2
     mu = (Fraction(float(a1)) + 1) / 2
     return geometry.reward(state, effort * mu, effort * (1 - mu))
+
+
+def registered_blind_action(
+    oracle: FullSupportOracle, step_index: int, mix: Fraction
+) -> tuple[np.float32, np.float32]:
+    """Quantized action selected by the registered exact blind optimizer."""
+    if not 0 <= step_index < sib.SEGMENT_LENGTH:
+        raise ValueError("blind optimizer step is outside the segment")
+    return _quantized_action(oracle.per_step_blind_optima[step_index], mix)
+
+
+def blind_optimizer_conformance(
+    ledger, event_index: int, oracle: FullSupportOracle
+) -> tuple[Fraction, Fraction]:
+    """Return (realized quantized total, exact-minus-realized envelope)."""
+    cell_class = sib.CELL_CLASS[event_index]
+    states = CRITICAL_STATES if cell_class == "CRITICAL" else (sib.SHOCK_NONE,)
+    prior = (
+        {state: sib.CRITICAL_PRIOR[state] for state in states}
+        if cell_class == "CRITICAL"
+        else {sib.SHOCK_NONE: Fraction(1)}
+    )
+    keys = _active_keys_in_segment(ledger, event_index)
+    receiver = oracle.receiver_key
+    receiver_caps = (
+        _frac(ledger.capabilities[receiver, 0]),
+        _frac(ledger.capabilities[receiver, 1]),
+    )
+    aggregate = (
+        sum((_frac(ledger.capabilities[key, 0]) for key in keys), Fraction(0)),
+        sum((_frac(ledger.capabilities[key, 1]) for key in keys), Fraction(0)),
+    )
+    realized = Fraction(0)
+    start = sib.EVENT_TIMES[event_index]
+    for step_index, time in enumerate(range(start, start + sib.SEGMENT_LENGTH)):
+        geometry = StepGeometry(
+            load=_frac(ledger.load[time]),
+            mix=_frac(ledger.target_mix[time]),
+            receiver_caps=receiver_caps,
+            aggregate=aggregate,
+        )
+        point = oracle.per_step_blind_optima[step_index]
+        candidates = _candidate_points(geometry, states)
+        if point not in candidates:
+            raise RuntimeError("registered blind point is outside exact support")
+        exact_step = sum(
+            (prior[state] * geometry.reward(state, *point) for state in states),
+            Fraction(0),
+        )
+        if exact_step != max(
+            sum(
+                (prior[state] * geometry.reward(state, *candidate) for state in states),
+                Fraction(0),
+            )
+            for candidate in candidates
+        ):
+            raise RuntimeError("registered blind optimizer does not reproduce exact optimum")
+        a0, a1 = registered_blind_action(oracle, step_index, geometry.mix)
+        realized += sum(
+            (prior[state] * _quantized_reward(geometry, state, a0, a1) for state in states),
+            Fraction(0),
+        )
+    envelope = oracle.blind_value - realized
+    if envelope < 0:
+        raise RuntimeError("quantized blind optimizer exceeds exact blind optimum")
+    return realized, envelope
 
 
 # ---------------------------------------------------------------------------
@@ -580,17 +660,6 @@ def check_4_receipt_discipline_and_ordering() -> dict[str, object]:
         )
     )
 
-    env = _make_sibling(GATE_PROFILES[0], 1)
-    probe = art.ArmEpisodeRunner(
-        env, "LR", tape_seed=TAPE_SEED, d_learned_fn=registered_learned_decision
-    )
-    _drive_to(env, sib.EVENT_TIMES[0])
-    opportunity = env.opportunity(0)
-    body = env.focal_payload(0)
-    actuation = sib.actuate("LR", opportunity, body, d_learned=True, d_control=True)
-    receipt = art.make_receipt(opportunity, actuation)
-    focal = opportunity.identity.receiver_member_key
-
     fails = {}
     def _closed(name, fn):
         try:
@@ -599,21 +668,90 @@ def check_4_receipt_discipline_and_ordering() -> dict[str, object]:
         except art.ReceiptError:
             fails[name] = True
 
-    _closed("missing", lambda: probe._verify_and_consume(None, actuation.slot, focal))
-    _closed("wrong_owner", lambda: probe._verify_and_consume(receipt, actuation.slot, focal + 1))
-    _closed("slot_mismatch", lambda: probe._verify_and_consume(receipt, b"\x00" * sib.PAYLOAD_SLOT_BYTES, focal))
-    probe._verify_and_consume(receipt, actuation.slot, focal)          # legal first use
-    _closed("duplicate", lambda: probe._verify_and_consume(receipt, actuation.slot, focal))
-    env.step(roster_env.constructive_actions(env.observe()))
-    receipt_late = art.ActuationReceipt(
-        receipt.opportunity_identity, receipt.physical_tick, receipt.route,
-        receipt.decision_source, receipt.slot_digest, receipt.ingestion_cost,
+    def _materials(episode_id: int):
+        probe = _boundary_runner(GATE_PROFILES[0], episode_id, "LR")
+        _drive_to(probe.env, sib.EVENT_TIMES[0])
+        slot, receipt, opportunity, actuation, _ = probe._boundary(0)
+        view = probe.env.observe()
+        kwargs = dict(
+            opportunity=opportunity,
+            actuation=actuation,
+            observations=view.observations,
+            active_mask=view.active_mask,
+            slot_block=slot,
+            noise=probe.noise[probe.env.time],
+        )
+        return probe, receipt, kwargs
+
+    probe, receipt, kwargs = _materials(1)
+    _closed("missing", lambda: probe.bound_step(receipt=None, **kwargs))
+
+    other, other_receipt, _ = _materials(2)
+    del other
+    _closed("cross_runner_identity", lambda: probe.bound_step(receipt=other_receipt, **kwargs))
+
+    focal = kwargs["opportunity"].identity.receiver_member_key
+    wrong_identity = replace(
+        receipt.opportunity_identity,
+        receiver_member_key=(focal + 1) % probe.env.ledger.member_capacity,
     )
-    probe2 = art.ArmEpisodeRunner(
-        env, "LR", tape_seed=TAPE_SEED, d_learned_fn=registered_learned_decision
+    _closed(
+        "wrong_focal_owner",
+        lambda: probe.bound_step(
+            receipt=replace(receipt, opportunity_identity=wrong_identity), **kwargs
+        ),
     )
-    _closed("stale_post_action", lambda: probe2._verify_and_consume(receipt_late, actuation.slot, focal))
-    outcome_unavailable = env.time < roster_env.HORIZON
+    altered_focal = kwargs["slot_block"].copy()
+    altered_focal[focal, 0] += np.float32(1.0 / 255.0)
+    _closed(
+        "altered_focal_row",
+        lambda: probe.bound_step(receipt=receipt, **{**kwargs, "slot_block": altered_focal}),
+    )
+    nonfocal = kwargs["slot_block"].copy()
+    nonfocal[(focal + 1) % nonfocal.shape[0], 0] = np.float32(1.0)
+    _closed(
+        "nonzero_nonfocal_row",
+        lambda: probe.bound_step(receipt=receipt, **{**kwargs, "slot_block": nonfocal}),
+    )
+    for field, value in (
+        ("route", "NEUTRAL"),
+        ("decision_source", "D_L"),
+        ("ingestion_cost", receipt.ingestion_cost + 1),
+    ):
+        _closed(
+            f"altered_{field}",
+            lambda field=field, value=value: probe.bound_step(
+                receipt=replace(receipt, **{field: value}), **kwargs
+            ),
+        )
+
+    actions, kernel, new_hidden, action_receipt = probe.bound_step(
+        receipt=receipt, **kwargs
+    )
+    _closed("duplicate", lambda: probe.bound_step(receipt=receipt, **kwargs))
+    _closed(
+        "altered_action_digest",
+        lambda: probe.verify_action_receipt(
+            replace(action_receipt, sampled_action_digest="0" * 64),
+            opportunity=kwargs["opportunity"],
+            actuation=kwargs["actuation"],
+            observations=kwargs["observations"],
+            active_mask=kwargs["active_mask"],
+            slot_block=kwargs["slot_block"],
+            hidden=probe.hidden,
+            kernel=kernel,
+            actions=actions,
+            new_hidden=new_hidden,
+        ),
+    )
+
+    late_probe, late_receipt, late_kwargs = _materials(3)
+    late_probe.env.step(roster_env.constructive_actions(late_probe.env.observe()))
+    _closed(
+        "stale_post_action",
+        lambda: late_probe.bound_step(receipt=late_receipt, **late_kwargs),
+    )
+    outcome_unavailable = late_probe.env.time < roster_env.HORIZON
     return {
         "passed": bool(ordering_ok and all(fails.values()) and outcome_unavailable),
         "fail_closed": fails,
@@ -657,6 +795,8 @@ def check_6_full_support_strict_value() -> dict[str, object]:
     min_reveal: Fraction | None = None
     worst_quant = Fraction(0)
     worst_conformance = 0.0
+    worst_blind_quant = Fraction(0)
+    blind_conformance_ok = True
     for profile in GATE_PROFILES:
         for episode_id in GATE_EPISODES:
             for event_index, cell_class in enumerate(sib.CELL_CLASS):
@@ -673,6 +813,13 @@ def check_6_full_support_strict_value() -> dict[str, object]:
                         "passed": False,
                         "detail": f"insufficient full-support reveal at {opportunity.identity}",
                     }
+                blind_realized, blind_gap = blind_optimizer_conformance(
+                    env_a.ledger, event_index, oracle
+                )
+                blind_conformance_ok = blind_conformance_ok and (
+                    blind_realized <= oracle.blind_value and blind_gap >= 0
+                )
+                worst_blind_quant = max(worst_blind_quant, blind_gap)
                 for state, env_forced in ((sib.SHOCK_A, env_a), (sib.SHOCK_B, env_b)):
                     quant_gap, conf = _envelopes_for_state(
                         env_forced, opportunity, oracle, state
@@ -693,18 +840,24 @@ def check_6_full_support_strict_value() -> dict[str, object]:
                         "reveal_value": str(oracle.reveal_value),
                     }
                 )
-    envelope_sum = float(worst_quant) + worst_conformance
+    envelope_sum = (
+        float(worst_quant) + float(worst_blind_quant) + worst_conformance
+    )
     dominance_ok = float(min_reveal) >= DOMINANCE_FACTOR * envelope_sum
     return {
         "passed": bool(
             rows
-            and worst_conformance <= CONFORMANCE_TOL
+            and worst_conformance <= SEGMENT_CONFORMANCE_TOL
+            and blind_conformance_ok
             and dominance_ok
         ),
         "critical_cells": len(rows),
         "min_reveal_value": str(min_reveal),
         "max_action_quantization_gap": float(worst_quant),
         "max_kernel_conformance_error": worst_conformance,
+        "max_blind_action_quantization_gap": float(worst_blind_quant),
+        "blind_optimizer_conformance": blind_conformance_ok,
+        "segment_conformance_tol": SEGMENT_CONFORMANCE_TOL,
         "envelope_sum": envelope_sum,
         "dominance_ok": dominance_ok,
         "rows": rows,
@@ -725,8 +878,8 @@ def _envelopes_for_state(env, opportunity, oracle: FullSupportOracle, state: str
         sum((_frac(ledger.capabilities[key, 0]) for key in keys), Fraction(0)),
         sum((_frac(ledger.capabilities[key, 1]) for key in keys), Fraction(0)),
     )
-    worst_quant = Fraction(0)
-    worst_conf = 0.0
+    total_quant = Fraction(0)
+    total_conf = 0.0
     for step_index in range(sib.SEGMENT_LENGTH):
         view = env.observe()
         geometry = StepGeometry(
@@ -737,13 +890,13 @@ def _envelopes_for_state(env, opportunity, oracle: FullSupportOracle, state: str
         ideal = geometry.reward(state, *point)
         a0, a1 = _quantized_action(point, geometry.mix)
         quantized = _quantized_reward(geometry, state, a0, a1)
-        worst_quant = max(worst_quant, ideal - quantized)
+        total_quant += ideal - quantized
         actions = roster_env.constructive_actions(view)
         actions[receiver, 0] = a0
         actions[receiver, 1] = a1
         reward, _, _ = env.step(actions)
-        worst_conf = max(worst_conf, abs(reward - float(quantized)))
-    return worst_quant, worst_conf
+        total_conf += abs(reward - float(quantized))
+    return total_quant, total_conf
 
 
 def check_7_neutral_zero_reveal() -> dict[str, object]:
@@ -922,6 +1075,7 @@ def gate() -> dict[str, object]:
             "tape_seed": TAPE_SEED,
             "policy_weight_seed": art.POLICY_WEIGHT_SEED,
             "action_noise_seed": art.ACTION_NOISE_SEED,
+            "profile_stream_manifest": PROFILE_STREAM_MANIFEST,
             "cell_classes": list(sib.CELL_CLASS),
             "shock_coefficients": {k: str(v) for k, v in sib.SHOCK_COEFF.items()},
             "critical_prior": {k: str(v) for k, v in sib.CRITICAL_PRIOR.items()},

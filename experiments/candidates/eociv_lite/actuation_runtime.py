@@ -35,7 +35,7 @@ import numpy as np
 from envs.continuous_roster import runtime_capacity as roster_env
 from experiments.candidates.eociv_lite import sibling_env as sib
 
-RAW_OUTPUT_BINDING = "eociv_lite.actuation_runtime.v1"
+RAW_OUTPUT_BINDING = "eociv_lite.actuation_runtime.v2"
 
 #: Registered weights seed for the one common policy graph.
 POLICY_WEIGHT_SEED = 730_101
@@ -70,6 +70,21 @@ class ActuationReceipt:
     decision_source: str
     slot_digest: str
     ingestion_cost: int
+
+
+@dataclass(frozen=True)
+class ActionReceipt:
+    """Immutable receipt for the exact policy input and resulting writes."""
+
+    opportunity_identity: sib.EdgeIdentity
+    physical_tick: int
+    route: str
+    decision_source: str
+    ingestion_cost: int
+    policy_input_digest: str
+    kernel_digest: str
+    sampled_action_digest: str
+    recurrent_write_digest: str
 
 
 def make_receipt(opportunity: sib.Opportunity, actuation: sib.Actuation) -> ActuationReceipt:
@@ -144,6 +159,7 @@ class BoundaryRecord:
     """What the runner did at one lifecycle boundary."""
 
     receipt: ActuationReceipt
+    action_receipt: ActionReceipt
     w_minus: bytes
     actuation_route: str
     slot: bytes
@@ -189,9 +205,14 @@ class ArmEpisodeRunner:
         capacity = env.ledger.member_capacity
         self.policy = CommonPolicy(capacity)
         self.hidden = self.policy.initial_state()
+        self.action_noise_seed_identity = sib.profile_stream_identity(
+            sib.ACTION_NOISE_STREAM,
+            ACTION_NOISE_SEED,
+            env.ledger.profile.name,
+        )
         self.noise = roster_env.make_action_noise(
             [env.ledger.episode_id],
-            action_seed=ACTION_NOISE_SEED,
+            action_seed=self.action_noise_seed_identity,
             member_capacity=capacity,
         )[:, 0, :, :]
         self._consumed: set[tuple] = set()
@@ -200,8 +221,13 @@ class ArmEpisodeRunner:
 
     # -- receipt discipline --------------------------------------------------
 
-    def _verify_and_consume(self, receipt: ActuationReceipt | None, slot: bytes,
-                            focal_receiver: int) -> None:
+    def _verify_pre_receipt(
+        self,
+        receipt: ActuationReceipt | None,
+        opportunity: sib.Opportunity,
+        actuation: sib.Actuation,
+        slot_block: np.ndarray,
+    ) -> None:
         if receipt is None:
             raise ReceiptError("missing actuation receipt at a boundary step")
         if receipt.physical_tick != self.env.time:
@@ -209,18 +235,117 @@ class ArmEpisodeRunner:
                 f"stale or post-action receipt: tick {receipt.physical_tick} "
                 f"vs env time {self.env.time}"
             )
-        if receipt.opportunity_identity.receiver_member_key != focal_receiver:
-            raise ReceiptError("wrong-owner receipt: focal receiver mismatch")
-        if hashlib.sha256(slot).hexdigest() != receipt.slot_digest:
+        if receipt.opportunity_identity != opportunity.identity:
+            raise ReceiptError("wrong or cross-runner opportunity identity")
+        if receipt.physical_tick != opportunity.physical_tick:
+            raise ReceiptError("receipt tick does not match opportunity")
+        if (
+            receipt.route != actuation.route
+            or receipt.decision_source != actuation.decision_source
+            or receipt.ingestion_cost != actuation.ingestion_cost
+        ):
+            raise ReceiptError("receipt route/source/cost does not match actuation")
+        if hashlib.sha256(actuation.slot).hexdigest() != receipt.slot_digest:
             raise ReceiptError("slot digest does not match the bound receipt")
+        expected_shape = (self.env.ledger.member_capacity, SLOT_DIM)
+        if slot_block.shape != expected_shape or slot_block.dtype != np.float32:
+            raise ReceiptError("policy slot block has wrong shape or dtype")
+        focal = opportunity.identity.receiver_member_key
+        if not np.array_equal(slot_block[focal], slot_features(actuation.slot)):
+            raise ReceiptError("actual focal row differs from receipt-bound slot")
+        nonfocal = slot_block.copy()
+        nonfocal[focal, :] = np.float32(0.0)
+        if np.any(nonfocal != np.float32(0.0)):
+            raise ReceiptError("actual policy input contains nonzero non-focal row")
+        key = (receipt.opportunity_identity, receipt.physical_tick)
+        if key in self._consumed:
+            raise ReceiptError("duplicate receipt consumption for one opportunity")
+
+    def _consume(self, receipt: ActuationReceipt) -> None:
         key = (receipt.opportunity_identity, receipt.physical_tick)
         if key in self._consumed:
             raise ReceiptError("duplicate receipt consumption for one opportunity")
         self._consumed.add(key)
 
+    def verify_action_receipt(
+        self,
+        receipt: ActionReceipt,
+        *,
+        opportunity: sib.Opportunity,
+        actuation: sib.Actuation,
+        observations: np.ndarray,
+        active_mask: np.ndarray,
+        slot_block: np.ndarray,
+        hidden: np.ndarray,
+        kernel: np.ndarray,
+        actions: np.ndarray,
+        new_hidden: np.ndarray,
+    ) -> None:
+        expected = ActionReceipt(
+            opportunity_identity=opportunity.identity,
+            physical_tick=opportunity.physical_tick,
+            route=actuation.route,
+            decision_source=actuation.decision_source,
+            ingestion_cost=actuation.ingestion_cost,
+            policy_input_digest=_digest(observations, active_mask, slot_block, hidden),
+            kernel_digest=_digest(kernel),
+            sampled_action_digest=_digest(actions),
+            recurrent_write_digest=_digest(new_hidden),
+        )
+        if receipt != expected:
+            raise ReceiptError("action receipt does not match executed digest material")
+
+    def bound_step(
+        self,
+        *,
+        receipt: ActuationReceipt | None,
+        opportunity: sib.Opportunity,
+        actuation: sib.Actuation,
+        observations: np.ndarray,
+        active_mask: np.ndarray,
+        slot_block: np.ndarray,
+        noise: np.ndarray,
+    ) -> tuple[np.ndarray, np.ndarray, np.ndarray, ActionReceipt]:
+        """Validate input, execute the common policy, seal writes, then consume."""
+        self._verify_pre_receipt(receipt, opportunity, actuation, slot_block)
+        actions, kernel, new_hidden = self.policy.forward(
+            observations, active_mask, slot_block, self.hidden, noise
+        )
+        action_receipt = ActionReceipt(
+            opportunity_identity=opportunity.identity,
+            physical_tick=opportunity.physical_tick,
+            route=actuation.route,
+            decision_source=actuation.decision_source,
+            ingestion_cost=actuation.ingestion_cost,
+            policy_input_digest=_digest(observations, active_mask, slot_block, self.hidden),
+            kernel_digest=_digest(kernel),
+            sampled_action_digest=_digest(actions),
+            recurrent_write_digest=_digest(new_hidden),
+        )
+        self.verify_action_receipt(
+            action_receipt,
+            opportunity=opportunity,
+            actuation=actuation,
+            observations=observations,
+            active_mask=active_mask,
+            slot_block=slot_block,
+            hidden=self.hidden,
+            kernel=kernel,
+            actions=actions,
+            new_hidden=new_hidden,
+        )
+        if receipt is None:  # guarded above; keeps the type boundary explicit.
+            raise ReceiptError("missing actuation receipt at consumption")
+        self._consume(receipt)
+        return actions, kernel, new_hidden, action_receipt
+
     # -- the drive -----------------------------------------------------------
 
-    def _boundary(self, event_index: int) -> tuple[np.ndarray, ActuationReceipt, int]:
+    def _boundary(
+        self, event_index: int
+    ) -> tuple[
+        np.ndarray, ActuationReceipt, sib.Opportunity, sib.Actuation, bytes
+    ]:
         env = self.env
         opportunity = env.opportunity(event_index)
         view = env.observe()
@@ -239,10 +364,7 @@ class ArmEpisodeRunner:
         slot_block = np.zeros((capacity, SLOT_DIM), dtype=np.float32)
         focal = opportunity.identity.receiver_member_key
         slot_block[focal, :] = slot_features(actuation.slot)
-        self.boundary_records.append(
-            BoundaryRecord(receipt, w_bytes, actuation.route, actuation.slot)
-        )
-        return slot_block, receipt, focal
+        return slot_block, receipt, opportunity, actuation, w_bytes
 
     def run_episode(self) -> float:
         env = self.env
@@ -253,21 +375,38 @@ class ArmEpisodeRunner:
                 sib.EVENT_TIMES.index(time) if time in sib.EVENT_TIMES else None
             )
             if event_index is not None:
-                slot_block, receipt, focal = self._boundary(event_index)
-            else:
-                slot_block, receipt, focal = (
-                    np.zeros((capacity, SLOT_DIM), dtype=np.float32), None, None
+                slot_block, receipt, opportunity, actuation, w_bytes = self._boundary(
+                    event_index
                 )
+            else:
+                slot_block = np.zeros((capacity, SLOT_DIM), dtype=np.float32)
             view = env.observe()
-            actions, kernel, new_hidden = self.policy.forward(
-                view.observations, view.active_mask, slot_block,
-                self.hidden, self.noise[time],
-            )
             if event_index is not None:
-                # The action is consumed by step() only after the binding
-                # between the actuation receipt and the fed slot verifies.
-                self._verify_and_consume(
-                    receipt, self.boundary_records[-1].slot, focal
+                actions, kernel, new_hidden, action_receipt = self.bound_step(
+                    receipt=receipt,
+                    opportunity=opportunity,
+                    actuation=actuation,
+                    observations=view.observations,
+                    active_mask=view.active_mask,
+                    slot_block=slot_block,
+                    noise=self.noise[time],
+                )
+                self.boundary_records.append(
+                    BoundaryRecord(
+                        receipt,
+                        action_receipt,
+                        w_bytes,
+                        actuation.route,
+                        actuation.slot,
+                    )
+                )
+            else:
+                actions, kernel, new_hidden = self.policy.forward(
+                    view.observations,
+                    view.active_mask,
+                    slot_block,
+                    self.hidden,
+                    self.noise[time],
                 )
             self.step_traces.append(
                 StepTrace(

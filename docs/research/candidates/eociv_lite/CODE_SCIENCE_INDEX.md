@@ -1,5 +1,22 @@
 # EOCIV-LITE arm/calibration/route closure
 
+## Loop-8 bounded engineering closure
+
+This candidate-local closure keeps the outcome experiment unlicensed and adds
+no training, return estimate, controller search, or production import. It
+closes three mechanical claims over the existing untrained gate:
+
+| Claim | Stable symbols | Focused evidence |
+|---|---|---|
+| The receipt binds the tensor actually consumed by the common policy, and the completed action receipt binds every downstream write. | `ActuationReceipt`, `ActionReceipt`, `ArmEpisodeRunner.bound_step`, `verify_action_receipt` | `test_receipt_fail_closed_modes`, `test_action_receipt_rejects_altered_digest_material`, `check_4_receipt_discipline_and_ordering` |
+| The reveal and all error envelopes are twelve-step segment totals; the independently checked blind optimizer reproduces the exact finite-support optimum before quantization. | `FullSupportOracle.per_step_blind_optima`, `registered_blind_action`, `blind_optimizer_conformance`, `_envelopes_for_state` | `test_blind_optimizer_reproduces_segment_total_on_same_scale`, `test_reveal_extremes_and_dominance`, `check_6_full_support_strict_value` |
+| Candidate world and action-noise streams are profile-qualified and collision checked while remaining reproducible within one profile. | `profile_stream_identity`, `registered_profile_stream_manifest`, `PROFILE_STREAM_MANIFEST` | `test_manifest_is_reproducible_separated_and_collision_checked`, `test_equal_episode_ids_do_not_alias_world_or_noise_across_profiles` |
+
+The evidence remains bounded at `H=48`, `K_search=0`: it evaluates the one
+registered deterministic gate and introduces no hypothetical rollout. LR/CR
+still share common noise within a profile and block; profile separation only
+prevents equal local episode ids in different registrations from aliasing.
+
 ## 结论
 
 这个隔离候选通过了 `EOCIV-LITE-V8-ARM-CALIBRATION-ROUTE-CLOSURE` 的五项确定性检查。结果只说明 rational unit configuration 中的四臂干预、校准、native-neutral、critical-route 与 gradient firewall 是机械闭合且可解释的；它不支持 targeting value、generic masking value、semantic staleness、utility 或 return 结论。

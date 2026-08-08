@@ -73,6 +73,7 @@ transitions raise instead of guessing.
 
 from __future__ import annotations
 
+import hashlib
 import json
 from dataclasses import dataclass
 from fractions import Fraction
@@ -136,6 +137,10 @@ _SHOCK_STREAM = 910_000
 _CARRIER_STREAM = 920_000
 _RECEIVER_STREAM = 930_000
 _CONTROL_TAPE_STREAM = 940_000
+_PROFILE_SEED_NAMESPACE = "eociv_lite.profile_stream.v1"
+_PROFILE_SEED_REFERENCE = "train_4_3_6_5"
+BASE_WORLD_STREAM = "base_world"
+ACTION_NOISE_STREAM = "action_noise"
 
 
 class LifecycleError(RuntimeError):
@@ -144,10 +149,62 @@ class LifecycleError(RuntimeError):
 
 def profile_registration_int(profile_registration_id: str) -> int:
     """Stable 64-bit integer for a profile registration id (seed material)."""
-    import hashlib
-
     digest = hashlib.sha256(profile_registration_id.encode("ascii")).digest()
     return int.from_bytes(digest[:8], "big")
+
+
+def profile_stream_identity(
+    stream_namespace: str, registered_seed: int, profile_registration_id: str
+) -> int:
+    """Return the stable 64-bit identity for one profile-owned stream.
+
+    The namespace is explicit so a base-world seed can never alias an action-
+    noise seed even when their registered integers happen to match.
+    """
+    if stream_namespace not in (BASE_WORLD_STREAM, ACTION_NOISE_STREAM):
+        raise ValueError(f"unregistered EOCIV stream namespace: {stream_namespace!r}")
+    def _profile_word(profile_id: str) -> int:
+        material = (
+            f"{_PROFILE_SEED_NAMESPACE}\0{stream_namespace}\0{profile_id}"
+        ).encode("ascii")
+        return int.from_bytes(hashlib.sha256(material).digest()[:8], "big")
+
+    # Anchor the historical primary registration while separating every other
+    # profile.  The XOR is a bijection on the 64-bit profile namespace.
+    return (
+        int(registered_seed)
+        ^ _profile_word(profile_registration_id)
+        ^ _profile_word(_PROFILE_SEED_REFERENCE)
+    ) & ((1 << 64) - 1)
+
+
+def registered_profile_stream_manifest(
+    profile_registration_ids: tuple[str, ...],
+    *,
+    world_seed: int,
+    action_noise_seed: int,
+) -> tuple[dict[str, object], ...]:
+    """Build a deterministic, collision-checked world/noise seed manifest."""
+    rows = tuple(
+        {
+            "profile_registration_id": profile_id,
+            "world_seed_identity": profile_stream_identity(
+                BASE_WORLD_STREAM, world_seed, profile_id
+            ),
+            "action_noise_seed_identity": profile_stream_identity(
+                ACTION_NOISE_STREAM, action_noise_seed, profile_id
+            ),
+        }
+        for profile_id in profile_registration_ids
+    )
+    identities = tuple(
+        int(row[field])
+        for row in rows
+        for field in ("world_seed_identity", "action_noise_seed_identity")
+    )
+    if len(identities) != len(set(identities)):
+        raise ValueError("duplicate EOCIV profile stream identity")
+    return rows
 
 
 def _sibling_rng(

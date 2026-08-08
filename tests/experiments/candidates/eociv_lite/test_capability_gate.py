@@ -67,6 +67,22 @@ class TestFullSupportOracle:
         )
         assert oracle.reveal_value == 0
 
+    def test_blind_optimizer_reproduces_segment_total_on_same_scale(self):
+        env, _ = gate_mod._forced_pair(gate_mod.GATE_PROFILES[0], 0, 0)
+        opportunity = env.opportunity(0)
+        oracle = gate_mod.full_support_oracle(
+            env.ledger, 0, opportunity.identity.receiver_member_key
+        )
+        realized, envelope = gate_mod.blind_optimizer_conformance(
+            env.ledger, 0, oracle
+        )
+        assert len(oracle.per_step_blind_optima) == sib.SEGMENT_LENGTH
+        assert realized <= oracle.blind_value
+        assert envelope == oracle.blind_value - realized
+        assert 0 <= float(envelope) < 1e-7
+        # A one-step maximum cannot masquerade as the registered segment total.
+        assert oracle.blind_value > 1
+
 
 class TestGate:
     def test_full_gate_terminal_and_counts(self):
@@ -86,9 +102,15 @@ class TestGate:
         four = checks["4_receipt_discipline_and_ordering"]
         assert four["fail_closed"] == {
             "missing": True,
-            "wrong_owner": True,
-            "slot_mismatch": True,
+            "cross_runner_identity": True,
+            "wrong_focal_owner": True,
+            "altered_focal_row": True,
+            "nonzero_nonfocal_row": True,
+            "altered_route": True,
+            "altered_decision_source": True,
+            "altered_ingestion_cost": True,
             "duplicate": True,
+            "altered_action_digest": True,
             "stale_post_action": True,
         }
         five = checks["5_identical_w_minus_disjoint_full_support_optima"]
@@ -96,16 +118,22 @@ class TestGate:
         six = checks["6_full_support_strict_value_with_envelopes"]
         assert six["critical_cells"] == 48
         assert six["min_reveal_value"] == (
-            "33029367329065267099970516619425633618760375227/"
-            "24289297430485184514310814667806889932013611700"
+            "4006373723506941012813514474530777786529678359834693971904620747694484/"
+            "2942466151782517510224626170689821337592819255507855782176966403586809"
         )
         # The envelopes are wiring quantities: deterministic on one box but
         # sensitive to numpy/BLAS reduction order across platforms, so the
         # test pins the bounds the science needs, not the 16th digit.  The
         # measured values on the registration box are recorded in the loop-7
         # portfolio document (7.636763256388432e-09 and 8.921690147767336e-08).
-        assert 0 < six["max_action_quantization_gap"] < 1e-7
-        assert 0 < six["max_kernel_conformance_error"] <= gate_mod.CONFORMANCE_TOL
+        assert 0 < six["max_action_quantization_gap"] < 1e-6
+        assert 0 < six["max_blind_action_quantization_gap"] < 1e-6
+        assert six["blind_optimizer_conformance"] is True
+        assert (
+            0
+            < six["max_kernel_conformance_error"]
+            <= gate_mod.SEGMENT_CONFORMANCE_TOL
+        )
         assert six["dominance_ok"] is True
         assert checks["7_neutral_cells_zero_reveal_value"]["neutral_cells"] == 24
         nine = checks["9_controls_execute_and_lr_cr_byte_identity"]
@@ -127,7 +155,7 @@ class TestGate:
         report = gate_mod.gate()
         six = report["checks"]["6_full_support_strict_value_with_envelopes"]
         values = sorted(Fraction(row["reveal_value"]) for row in six["rows"])
-        assert float(values[0]) == 1.3598321410322283
+        assert float(values[0]) == 1.3615700289636021
         assert float(values[-1]) == 3.3693454610424074
         assert values[0] >= gate_mod.REVEAL_FLOOR
         assert float(values[0]) >= gate_mod.DOMINANCE_FACTOR * six["envelope_sum"]
