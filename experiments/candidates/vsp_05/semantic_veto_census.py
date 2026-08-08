@@ -330,11 +330,10 @@ def clone_report(tape: Tape, rules: Mapping[str, Mapping[tuple[bool, ...], int]]
                 comparisons += 1
                 if clone_x != extract_x(record) or runtime_decision(clone_x, artifact) != runtime_decision(extract_x(record), artifact):
                     drifts.append((x_key(extract_x(record)), str(age), occupancy, frame_refinement, name))
-    (selected_x,) = tuple(x for x, value in rules["BEST_DETERMINISTIC_TUPLE_ONLY_RULE"].items() if value)
-    positive = next(record for record in tape.records if extract_x(record) == selected_x)
-    mutated = replace(positive, raw_sources=replace(positive.raw_sources, e_local=False))
     artifact = artifacts["BEST_DETERMINISTIC_TUPLE_ONLY_RULE"]
-    before_x, after_x = extract_x(positive), extract_x(mutated)
+    control_record = next(record for record, label in zip(tape.records, tape.ys) if label)
+    mutated = replace(control_record, raw_sources=replace(control_record.raw_sources, e_local=False))
+    before_x, after_x = extract_x(control_record), extract_x(mutated)
     before, after = runtime_decision(before_x, artifact), runtime_decision(after_x, artifact)
     return {
         "registered_clone_cases": len(clones),
