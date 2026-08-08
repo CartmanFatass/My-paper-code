@@ -1,0 +1,135 @@
+{
+  "treatment": "EOCIV-B3-REWARD-CREDIT-LEARNABILITY",
+  "stage": "B_EXPLORATORY_REAL_TOY_EXPERIMENT",
+  "implementation_source_commit": "d5c9297f936dc5023386765d0a7b0ff22ee7a293",
+  "run_identity": "eociv_b3_reward_credit_learnability_d5c9297_r1",
+  "mechanical_status": "MECHANICAL_B3_COMPLETE",
+  "evaluation_validation_status": "PASSED",
+  "counts": {
+    "environment_transitions": 58752,
+    "policy_calls": 58752,
+    "actor_critic_optimizer_steps": 576,
+    "training_episodes": 576,
+    "evaluation_episodes": 648
+  },
+  "matching_proof": {
+    "same_initial_state_by_seed": true,
+    "same_training_root_profile_episode_noise_order_by_seed": true,
+    "same_content_separating_architecture": true,
+    "same_adam_learning_rate": true,
+    "same_gamma_and_grad_cap": true,
+    "same_training_budget": true,
+    "same_evaluation_roots_between_learners": true,
+    "all_evaluation_arm_matching_predicates": true
+  },
+  "outcome_by_learner_checkpoint": {
+    "MC_RETURN": {
+      "INIT": {
+        "correct_minus_swapped": {"count": 36, "mean": -0.006292566321712329, "population_std": 0.09642610509112144},
+        "correct_minus_native_neutral": {"count": 36, "mean": -0.020846263472748303, "population_std": 0.10558102494297708}
+      },
+      "MID": {
+        "correct_minus_swapped": {"count": 36, "mean": -0.06443624771541456, "population_std": 0.11167091670008747},
+        "correct_minus_native_neutral": {"count": 36, "mean": -0.04864639016566557, "population_std": 0.10682535665753384}
+      },
+      "FINAL": {
+        "correct_minus_swapped": {"count": 36, "mean": -0.004598631259190651, "population_std": 0.09681653164410275},
+        "correct_minus_native_neutral": {"count": 36, "mean": -0.02173668610135297, "population_std": 0.08225071991736793}
+      }
+    },
+    "GAE_NORM": {
+      "INIT": {
+        "correct_minus_swapped": {"count": 36, "mean": -0.006292566321712329, "population_std": 0.09642610509112144},
+        "correct_minus_native_neutral": {"count": 36, "mean": -0.020846263472748303, "population_std": 0.10558102494297708}
+      },
+      "MID": {
+        "correct_minus_swapped": {"count": 36, "mean": -0.05164613412424145, "population_std": 0.10557446246017059},
+        "correct_minus_native_neutral": {"count": 36, "mean": -0.05422055192284203, "population_std": 0.10814332712329829}
+      },
+      "FINAL": {
+        "correct_minus_swapped": {"count": 36, "mean": 0.0056619347877386135, "population_std": 0.08774477973540225},
+        "correct_minus_native_neutral": {"count": 36, "mean": -0.010140334458428399, "population_std": 0.0966133316226106}
+      }
+    }
+  },
+  "checkpoint_changes": {
+    "MC_RETURN": {
+      "MID_MINUS_INIT": {"correct_minus_swapped": -0.05814368139370223, "correct_minus_native_neutral": -0.027800126692917267},
+      "FINAL_MINUS_INIT": {"correct_minus_swapped": 0.0016939350625216777, "correct_minus_native_neutral": -0.0008904226286046667}
+    },
+    "GAE_NORM": {
+      "MID_MINUS_INIT": {"correct_minus_swapped": -0.04535356780252912, "correct_minus_native_neutral": -0.03337428845009373},
+      "FINAL_MINUS_INIT": {"correct_minus_swapped": 0.011954501109450942, "correct_minus_native_neutral": 0.010705929014319904}
+    }
+  },
+  "final_minus_init_by_seed_profile": [
+    {"learner": "MC_RETURN", "actor_seed": 86031, "profile": "train_4_3_6_5", "correct_minus_swapped": -0.045435457955671055, "correct_minus_native_neutral": -0.08190746006492544},
+    {"learner": "MC_RETURN", "actor_seed": 86031, "profile": "train_5_3_7_6", "correct_minus_swapped": -0.04784939774983421, "correct_minus_native_neutral": -0.08681679682189047},
+    {"learner": "MC_RETURN", "actor_seed": 86031, "profile": "train_6_4_8_6", "correct_minus_swapped": -0.008326323602176888, "correct_minus_native_neutral": -0.019331378305856184},
+    {"learner": "MC_RETURN", "actor_seed": 86032, "profile": "train_4_3_6_5", "correct_minus_swapped": 0.032120044836098316, "correct_minus_native_neutral": 0.03877715035377083},
+    {"learner": "MC_RETURN", "actor_seed": 86032, "profile": "train_5_3_7_6", "correct_minus_swapped": 0.013249694792383693, "correct_minus_native_neutral": 0.12042633707496986},
+    {"learner": "MC_RETURN", "actor_seed": 86032, "profile": "train_6_4_8_6", "correct_minus_swapped": -0.0020238729915451614, "correct_minus_native_neutral": 0.01278192482197138},
+    {"learner": "MC_RETURN", "actor_seed": 86033, "profile": "train_4_3_6_5", "correct_minus_swapped": -0.005287817007238793, "correct_minus_native_neutral": -0.1110174053863009},
+    {"learner": "MC_RETURN", "actor_seed": 86033, "profile": "train_5_3_7_6", "correct_minus_swapped": 0.034016759420077314, "correct_minus_native_neutral": 0.045976204532449216},
+    {"learner": "MC_RETURN", "actor_seed": 86033, "profile": "train_6_4_8_6", "correct_minus_swapped": 0.04478178582060188, "correct_minus_native_neutral": 0.07309762013836973},
+    {"learner": "GAE_NORM", "actor_seed": 86031, "profile": "train_4_3_6_5", "correct_minus_swapped": -0.04516276541407893, "correct_minus_native_neutral": -0.08125060838267673},
+    {"learner": "GAE_NORM", "actor_seed": 86031, "profile": "train_5_3_7_6", "correct_minus_swapped": -0.046225526890367075, "correct_minus_native_neutral": -0.08504917295783754},
+    {"learner": "GAE_NORM", "actor_seed": 86031, "profile": "train_6_4_8_6", "correct_minus_swapped": -0.005084961097294283, "correct_minus_native_neutral": -0.01489694401603936},
+    {"learner": "GAE_NORM", "actor_seed": 86032, "profile": "train_4_3_6_5", "correct_minus_swapped": 0.031099861428486086, "correct_minus_native_neutral": 0.03349905930180608},
+    {"learner": "GAE_NORM", "actor_seed": 86032, "profile": "train_5_3_7_6", "correct_minus_swapped": 0.014348736945978935, "correct_minus_native_neutral": 0.1288704586009084},
+    {"learner": "GAE_NORM", "actor_seed": 86032, "profile": "train_6_4_8_6", "correct_minus_swapped": 0.0086100471635433, "correct_minus_native_neutral": 0.02637042878276219},
+    {"learner": "GAE_NORM", "actor_seed": 86033, "profile": "train_4_3_6_5", "correct_minus_swapped": 0.0022150758939618598, "correct_minus_native_neutral": -0.09976617098875984},
+    {"learner": "GAE_NORM", "actor_seed": 86033, "profile": "train_5_3_7_6", "correct_minus_swapped": 0.07905005400017995, "correct_minus_native_neutral": 0.10853241323091911},
+    {"learner": "GAE_NORM", "actor_seed": 86033, "profile": "train_6_4_8_6", "correct_minus_swapped": 0.06873998795464864, "correct_minus_native_neutral": 0.08004389755779684}
+  ],
+  "final_minus_init_sign_counts": {
+    "MC_RETURN": {
+      "correct_minus_swapped": {"positive_cells": 4, "negative_cells": 5},
+      "correct_minus_native_neutral": {"positive_cells": 5, "negative_cells": 4}
+    },
+    "GAE_NORM": {
+      "correct_minus_swapped": {"positive_cells": 6, "negative_cells": 3},
+      "correct_minus_native_neutral": {"positive_cells": 5, "negative_cells": 4}
+    }
+  },
+  "gae_minus_mc_final_minus_init": {
+    "correct_minus_swapped": {"mean": 0.010260566046929265, "positive_cells": 8, "negative_cells": 1},
+    "correct_minus_native_neutral": {"mean": 0.01159635164292457, "positive_cells": 8, "negative_cells": 1}
+  },
+  "ab_distance_means": {
+    "MC_RETURN": {
+      "INIT": {"kernel_l1": 0.2996980200211207, "sampled_action_l1": 0.2538570319474847, "recurrent_state_l1": 0.666673060644556},
+      "MID": {"kernel_l1": 0.28354636924686255, "sampled_action_l1": 0.24349311145919342, "recurrent_state_l1": 0.6511591777757362},
+      "FINAL": {"kernel_l1": 0.23924852397154878, "sampled_action_l1": 0.20656718727615145, "recurrent_state_l1": 0.6127316068719935}
+    },
+    "GAE_NORM": {
+      "INIT": {"kernel_l1": 0.2996980200211207, "sampled_action_l1": 0.2538570319474847, "recurrent_state_l1": 0.666673060644556},
+      "MID": {"kernel_l1": 0.2687087525372152, "sampled_action_l1": 0.2303936713271671, "recurrent_state_l1": 0.645571288963159},
+      "FINAL": {"kernel_l1": 0.21490797096932376, "sampled_action_l1": 0.18603553622961044, "recurrent_state_l1": 0.5993364365012558}
+    }
+  },
+  "training_diagnostics": {
+    "MC_RETURN": {
+      "episodes": 288,
+      "mean_critic_loss": 111.4060166997628,
+      "mean_value_target_error": 8.635768194786376,
+      "mean_pre_clip_grad_norm": 29.936836120982964,
+      "grad_clip_exceed_count": 288
+    },
+    "GAE_NORM": {
+      "episodes": 288,
+      "mean_critic_loss": 32.53178419255548,
+      "mean_value_target_error": 4.930856854344408,
+      "mean_pre_clip_grad_norm": 16.091149309857023,
+      "grad_clip_exceed_count": 288
+    }
+  },
+  "mechanical_observation": "GAE_NORM reduced critic error and pre-clip gradient magnitude and improved paired FINAL-minus-INIT contrast relative to MC_RETURN in 8 of 9 seed/profile cells for both contrasts, but absolute correct-semantic direction remained heterogeneous and all 576 updates exceeded the 0.5 gradient cap.",
+  "scientific_disposition": null,
+  "registered_c_outcome_experiment_licensed": false,
+  "claim_boundary": "Exploratory fixed B diagnostic only; no stable-correct-semantics, superiority, promotion, retirement, valve, C-level, natural-return, deployment, or generalization conclusion.",
+  "raw_evidence_root": "logs/eociv_b3_reward_credit_learnability_d5c9297_r1",
+  "raw_result": "logs/eociv_b3_reward_credit_learnability_d5c9297_r1/raw_result.json",
+  "analysis": "logs/eociv_b3_reward_credit_learnability_d5c9297_r1/analysis.json",
+  "validator_history": "logs/eociv_b3_reward_credit_learnability_d5c9297_r1/error_evaluate_attempt1.json"
+}

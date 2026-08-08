@@ -48,6 +48,24 @@ checkpoints, uses six training updates per learner (MID after three), and one
 fresh evaluation root per checkpoint/profile/arm. It is a mechanical
 implementation check, not scientific evidence.
 
+## Completed fixed B run
+
+The fixed implementation at source commit
+`d5c9297f936dc5023386765d0a7b0ff22ee7a293` was executed once as
+`eociv_b3_reward_credit_learnability_d5c9297_r1`. The compact public result is
+`REWARD_CREDIT_LEARNABILITY_RESULT.json`; the ignored complete raw result and
+mechanical analysis remain under the run root recorded there.
+
+All 58,752 transitions/policy calls, 576 optimizer updates, 576 training
+episodes and 648 checkpoint evaluation episodes completed. GAE_NORM reduced
+mean critic loss, value-target error and pre-clip gradient magnitude relative
+to MC_RETURN, and its paired FINAL-minus-INIT contrast exceeded MC_RETURN in
+eight of nine seed/profile cells for both registered contrasts. Absolute
+correct-semantic direction nevertheless remained heterogeneous across cells,
+and all updates in both learners exceeded the 0.5 gradient cap. This is a
+nonterminal B diagnostic: it creates no scientific disposition and does not
+license the registered C experiment.
+
 ## Interpretation limits
 
 Mechanical completion does not assert that either credit estimator is better,
