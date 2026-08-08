@@ -22,6 +22,9 @@ public_current_work_index_owner=workflow_design_manager
 workflow_incident_log=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md
 workflow_router_consistency_check=required_for_every_workflow_change
 workflow_implementer_parallelism=file_family_adaptive
+workspace_boundary_guard=fail_closed_for_recognized_pretooluse_cases
+authoritative_write_boundary=tool_os_sandbox|verified_ticket_identity|git_visible_checks
+workspace_ticket_retirement=registered_clean_detached_worktree_only
 ```
 
 ## Ownership model
@@ -55,6 +58,15 @@ wdm_session_workspace=docs/session-workspaces/workflow_design_manager|temp/sessi
 
 Children return to WDM and never accept, stage, commit, push or route results.
 WDM resolves semantic junctions and performs final Git integration.
+
+The PreToolUse workspace guard fails closed for the mutation forms it recognizes
+and preserves all existing denials. It is a bounded syntactic preflight, not an
+arbitrary shell-semantics proof and not a replacement for tool/OS sandboxing,
+registered ticket identity or Git-visible pre/post checks. After integration,
+WDM retires a ticket only through the registered ticket script when its exact
+worktree is detached, at the expected HEAD and free of Git-visible changes.
+Retirement never uses force or discards work; a mismatch leaves both worktree
+and ticket intact.
 
 Before spawning an Implementer, Reviewer or Verifier, WDM or Code Project
 Manager writes the exact user-readable natural-language assignment beneath its

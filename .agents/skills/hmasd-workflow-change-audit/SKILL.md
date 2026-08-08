@@ -116,7 +116,16 @@ a scheduler, approval state or global blocker.
    Their advice cannot create a second pass.
 4. **Git and reload.** Inspect exact staged paths, commit and push the accepted
    workflow files. Require a fresh task only after router/profile discovery
-   changes; ordinary Skill text is read from disk.
+   changes; ordinary Skill text is read from disk. After an isolated child
+   commit is integrated, retire its clean detached ticket worktree only through
+   `scripts/hmasd_workspace_ticket.py retire` with the exact assignment, ticket
+   and expected HEAD. Retirement never uses force or discards Git-visible work;
+   any identity, HEAD or cleanliness mismatch preserves the worktree and ticket.
+
+The workspace PreToolUse guard fails closed for recognized mutation forms and
+preserves its existing denials. Treat it as bounded syntactic preflight rather
+than an arbitrary shell-semantics proof; tool/OS sandboxing, registered ticket
+identity and Git-visible checks remain authoritative.
 
 After a confirmed plan, these steps continue automatically. Stop only for
 material plan drift, same-file collision, unavailable required profile, or a

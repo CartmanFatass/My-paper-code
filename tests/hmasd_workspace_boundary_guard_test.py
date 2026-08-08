@@ -112,7 +112,7 @@ def test_main_checkout_allows_reads_and_internal_writes_but_denies_external_writ
         r"Set-Content -Path \\server\share\outside.txt -Value blocked",
     ),
 )
-def test_drive_alias_raw_worktree_and_external_directory_commands_fail_closed(
+def test_recognized_drive_alias_worktree_and_external_directory_cases_fail_closed(
     tmp_path: Path, command: str
 ) -> None:
     repo, _ = repository(tmp_path)

@@ -992,9 +992,20 @@ foreach ($required in @(
     'same_file_concurrent_writes=forbidden',
     'docs/project/handoffs/README.md',
     'temp/handoffs/',
+    'workspace_boundary_guard=fail_closed_for_recognized_pretooluse_cases',
+    'authoritative_write_boundary=tool_os_sandbox|verified_ticket_identity|git_visible_checks',
+    'workspace_ticket_retirement=registered_clean_detached_worktree_only',
+    'Retirement never uses force or discards work',
     'Formats and suggested sections aid understanding but never become admission gates',
     'It is never staged, committed or pushed')) {
     if (-not $sessionWorkspaceContractNormalized.Contains($required)) { throw "Session workspace contract missing: $required" }
+}
+foreach ($required in @(
+    'scripts/hmasd_workspace_ticket.py retire',
+    'Retirement never uses force or discards Git-visible work',
+    'fails closed for recognized mutation forms',
+    'bounded syntactic preflight')) {
+    if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 foreach ($required in @(
     'nontrivial_task_strategy=bounded_reconnaissance_then_frozen_execution_plan',

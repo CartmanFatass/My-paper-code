@@ -1,4 +1,10 @@
-"""Fail closed on agent-initiated writes outside the active HMASD workspace."""
+"""Fail closed for recognized writes outside the active HMASD workspace.
+
+This PreToolUse syntactic guard preserves its existing denials and complements
+the tool/OS sandbox, registered ticket identity and Git-visible checks. It does
+not replace those authoritative controls or claim to parse arbitrary shell
+semantics.
+"""
 
 from __future__ import annotations
 
@@ -54,7 +60,7 @@ PATCH_PATH = re.compile(
     r"(?m)^\*\*\* (?:(?:Add|Update|Delete) File:|Move to:) (.+?)\s*$"
 )
 class GuardError(RuntimeError):
-    """A fail-closed workspace-boundary decision."""
+    """A fail-closed decision for a recognized workspace-boundary case."""
 
 
 def _decision(reason: str) -> dict[str, Any]:
