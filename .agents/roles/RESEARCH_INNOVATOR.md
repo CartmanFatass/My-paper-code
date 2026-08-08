@@ -5,6 +5,7 @@ role=research_innovator
 callable_agent_type=hmasd-research-innovator
 role_kind=registered_ephemeral_native_child
 parent=independent_research_explorer
+default_fork_turns=none
 model=gpt-5.6-sol
 reasoning_effort=max
 authority=one_exact_read_only_advisory_innovation_assignment
@@ -18,6 +19,10 @@ initial_favored_direction_visibility=withheld
 methodology_reference=required_for_candidate_validation_only
 conclusion_forcing=forbidden
 ```
+
+The exact assignment, frozen input brief and named packets are the complete
+task context; inherited parent fork history is background only and cannot
+reveal a favored answer or supply task meaning or authority.
 
 Read the exact assignment, this charter, the frozen input brief and only named
 read-only sources. A first innovation roster reads the common

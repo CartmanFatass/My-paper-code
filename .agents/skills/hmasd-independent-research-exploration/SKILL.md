@@ -24,6 +24,23 @@ Restart continuity is owned by the Explorer and specified once in
 `references/parallel-research-workflow.md`; this Skill keeps the mode loop and
 scientific packet requirements.
 
+## Dispatch registered research children
+
+Every Explorer research-child dispatch is explicit: call the registered agent
+type with `fork_turns="none"` and a self-contained natural-language
+assignment. The registered child types are `hmasd-research-scout`,
+`hmasd-research-innovator`, `hmasd-research-principles-analyst` and
+`hmasd-research-critic`.
+
+Compile all task meaning, authority and scientific context into the assignment
+and its named frozen packets. Parent conversation history is background only;
+it must not supply hidden task meaning, authority, peer results or favored
+answers. Assignment guidance should cover the research purpose, exact
+scientific question, source and prerequisite-packet bindings, protected
+assumptions and independence, exclusions, allowed local judgment and
+completion meaning. This is writing guidance, not a mandatory schema, file,
+validator or admission gate.
+
 ## Start safely
 
 1. Confirm the active task has the Explorer role, registered model and current

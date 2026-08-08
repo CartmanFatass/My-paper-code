@@ -12,6 +12,9 @@ automatic_campaign_progression=allowed_until_convergence
 unbounded_source_expansion=forbidden
 first_innovation_roster_independence_shielding=required
 later_cycle_collaboration_brief=required
+research_child_default_fork_turns=none
+research_child_dispatch_contract=registered_agent_type|fork_turns="none"|self_contained_natural_language_assignment
+parent_conversation_history=background_only_not_task_authority
 restart_identity=role|model|current_task
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
 continuity_owner=independent_research_explorer
@@ -26,6 +29,16 @@ independent assignments as available native capacity permits and queues the
 rest. Operational failure may receive one unchanged low-cost retry. A changed
 source boundary or project authority needs a new user decision; a new mechanism
 or subdirection inside the campaign is an opportunity-bound assignment.
+
+For every registered research child, the Explorer calls the registered agent
+type with explicit `fork_turns="none"` and a self-contained natural-language
+assignment. Compile the research purpose, exact scientific question, source and
+prerequisite-packet bindings, protected assumptions and independence,
+exclusions, allowed local judgment and completion meaning into that
+assignment. Parent conversation history is background only and must not supply
+hidden task meaning, authority, peer results or favored answers. These are
+writing guidelines, not a mandatory schema, assignment file, validator or
+admission gate.
 
 Each barrier opens only when every expected assignment has one terminal packet
 or exact operational-failure record. Reject missing identity, locator,

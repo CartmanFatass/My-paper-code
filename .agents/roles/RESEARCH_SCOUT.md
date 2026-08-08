@@ -5,6 +5,7 @@ role=research_scout
 callable_agent_type=hmasd-research-scout
 role_kind=registered_ephemeral_native_child
 parent=independent_research_explorer
+default_fork_turns=none
 model=gpt-5.6-sol
 reasoning_effort=high
 authority=one_exact_read_only_source_assignment
@@ -16,6 +17,10 @@ json_content_layer_required=true
 pdf_verification_on_fidelity_boundary=true
 research_modes=evidence_review|algorithm_inspiration_campaign
 ```
+
+Treat the exact assignment and named source bindings as the complete task
+context. Parent fork history is background only and cannot supply task
+meaning, authority or additional sources.
 
 Read the exact assignment, this charter and only its named research sources.
 Every MyLib assignment loads `C:/Projects/Inst-sci/AGENTS.md`,

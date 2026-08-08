@@ -103,6 +103,7 @@ if ((Test-Path -LiteralPath $retiredExplorerValidationScriptPath) -or
     (Test-Path -LiteralPath $retiredExplorerValidationTestPath)) {
     throw 'Retired Explorer packet admission script/test remains'
 }
+$independentResearchSkillNormalized = $independentResearchSkill -replace '\s+', ' '
 foreach ($required in @(
     'temp/handoffs/explorer_to_code_manager/',
     'temp/handoffs/code_manager_to_explorer/',
@@ -263,6 +264,7 @@ foreach ($required in @(
     'independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews',
     'independent_research_per_review_authorization=not_required_inside_active_explorer_grant',
     'independent_research_wdm_campaign_approval=none',
+    'research_child_fork_defaults=research_scout:none|research_innovator:none|research_principles_analyst:none|research_critic:none',
     '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md',
     'hmasd-independent-research-exploration',
     'hmasd-independent-research-pro-review')) {
@@ -382,6 +384,8 @@ foreach ($required in @(
     'wdm_campaign_approval=none',
     'unbounded_source_expansion=forbidden',
     'methodology_reference=research-methodology.md_required_for_candidate_validation',
+    'research_child_dispatch=registered_child_type|fork_turns=none|self_contained_natural_language_assignment',
+    'research_child_assignment_context=research_purpose|exact_question|named_sources_and_prerequisite_packets|protected_assumptions_and_independence|exclusions|permitted_local_judgment|completion_meaning',
     'cross_task_transport=codex_native_send_message_to_thread',
     'cross_task_target=current_thread_id_from_user_or_native_task_context',
     'cross_task_model_and_thinking_overrides=omit',
@@ -434,6 +438,7 @@ foreach ($pair in @(
         'callable_agent_type=hmasd-research-scout',
         'model=gpt-5.6-sol',
         'reasoning_effort=high',
+        'default_fork_turns=none',
         'write_authority=none',
         'child_authority=none',
         'research_modes=evidence_review|algorithm_inspiration_campaign',
@@ -444,6 +449,7 @@ foreach ($pair in @(
         'callable_agent_type=hmasd-research-innovator',
         'model=gpt-5.6-sol',
         'reasoning_effort=max',
+        'default_fork_turns=none',
         'write_authority=none',
         'child_authority=none',
         'research_modes=algorithm_inspiration_campaign|candidate_validation',
@@ -456,6 +462,7 @@ foreach ($pair in @(
         'callable_agent_type=hmasd-research-critic',
         'model=gpt-5.6-sol',
         'reasoning_effort=max',
+        'default_fork_turns=none',
         'write_authority=none',
         'child_authority=none',
         'research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation',
@@ -467,6 +474,7 @@ foreach ($pair in @(
         'callable_agent_type=hmasd-research-principles-analyst',
         'model=gpt-5.6-sol',
         'reasoning_effort=max',
+        'default_fork_turns=none',
         'write_authority=none',
         'child_authority=none',
         'review_nature=constructive_not_adversarial',
@@ -513,8 +521,15 @@ foreach ($required in @(
     'cross_direction_inspiration',
     'available native capacity',
     'PARTIAL_CAMPAIGN_RESOURCE_BOUND',
-    'local_research')) {
-    if (-not $independentResearchSkill.Contains($required)) {
+    'local_research',
+    'fork_turns="none"',
+    'self-contained natural-language',
+    'Parent conversation history is background only',
+    'source and prerequisite-packet bindings',
+    'allowed local judgment',
+    'completion meaning',
+    'not a mandatory schema, file, validator or admission gate')) {
+    if (-not $independentResearchSkillNormalized.Contains($required)) {
         throw "Independent research Skill missing: $required"
     }
 }
@@ -529,6 +544,7 @@ foreach ($stale in @(
         throw "Retired ownership wording remains: $stale"
     }
 }
+$parallelResearchNormalized = $parallelResearch -replace '\s+', ' '
 foreach ($required in @(
     'llm-index/catalog.v2.jsonl',
     'metadata/v2/papers.v2.jsonl',
@@ -553,6 +569,9 @@ foreach ($required in @(
     'automatic_campaign_progression=allowed_until_convergence',
     'first_innovation_roster_independence_shielding=required',
     'later_cycle_collaboration_brief=required',
+    'research_child_default_fork_turns=none',
+    'research_child_dispatch_contract=registered_agent_type|fork_turns="none"|self_contained_natural_language_assignment',
+    'parent_conversation_history=background_only_not_task_authority',
     'SOURCE_RESULT_PACKET',
     'SOURCE_ABSORPTION_BRIEF',
     'ALGORITHM_INSPIRATION_PACKET',
@@ -561,8 +580,12 @@ foreach ($required in @(
     'Adversarial review',
     'Next-cycle opportunity map',
     'Resource exhaustion is partial',
-    'automatic_formal_workflow_promotion=forbidden')) {
-    if (-not $parallelResearch.Contains($required)) {
+    'automatic_formal_workflow_promotion=forbidden',
+    'self-contained natural-language',
+    'source and prerequisite-packet bindings',
+    'completion meaning',
+    'not a mandatory schema, assignment file, validator or admission gate')) {
+    if (-not $parallelResearchNormalized.Contains($required)) {
         throw "Parallel research workflow missing: $required"
     }
 }

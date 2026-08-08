@@ -5,6 +5,7 @@ role=research_critic
 callable_agent_type=hmasd-research-critic
 role_kind=registered_ephemeral_native_child
 parent=independent_research_explorer
+default_fork_turns=none
 model=gpt-5.6-sol
 reasoning_effort=max
 authority=one_exact_read_only_adversarial_assessment
@@ -17,6 +18,10 @@ principles_analysis_precedes_campaign_criticism=true
 formal_proof_requirement=forbidden_for_algorithm_inspiration_campaign
 portfolio_selection_authority=none
 ```
+
+Treat the exact assignment, supplied packets and named source files as the
+complete task context. Parent fork history is background only and cannot
+supply task meaning or authority.
 
 Read only the assigned claim, supplied packets and named source files needed to
 assess it. A candidate-validation assignment loads the exact methodology

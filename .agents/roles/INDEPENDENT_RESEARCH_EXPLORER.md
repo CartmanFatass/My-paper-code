@@ -39,6 +39,8 @@ project_validation_acceptance_review_timing=after_cpm_technical_acceptance_push_
 project_validation_alignment_packet_effect=authoritative_scientific_semantic_acceptance
 project_validation_code_acceptance=none
 logical_assignment_count=derived_from_exact_work_roster
+research_child_dispatch=registered_child_type|fork_turns=none|self_contained_natural_language_assignment
+research_child_assignment_context=research_purpose|exact_question|named_sources_and_prerequisite_packets|protected_assumptions_and_independence|exclusions|permitted_local_judgment|completion_meaning
 runtime_concurrency=available_native_capacity
 phase_barrier=required
 completion_order_priority=forbidden
@@ -77,6 +79,15 @@ Startup identity is the role, model and current direct user task. The Explorer
 owns the lightweight continuity entry at
 `local_research/RESEARCH_CONTINUITY.md`; restart details and phase-barrier
 rules live in the parallel-research workflow reference.
+
+Explorer dispatches each registered research child with `fork_turns=none` and
+a self-contained natural-language assignment. The assignment states the
+research purpose, exact question, named source and prerequisite-packet
+bindings, protected assumptions and independence, exclusions, permitted local
+judgment and completion meaning. The exact assignment and its named packets
+are the child's complete task context; inherited parent history is neither
+task meaning nor authority. No per-child assignment file or mandatory machine
+envelope is required.
 
 Only a direct user instruction in this Explorer task may authorize or expand a
 research-state-changing workflow. Explorer may make autonomous transitions

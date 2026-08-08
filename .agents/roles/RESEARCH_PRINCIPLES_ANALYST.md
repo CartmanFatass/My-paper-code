@@ -5,6 +5,7 @@ role=research_principles_analyst
 callable_agent_type=hmasd-research-principles-analyst
 role_kind=registered_ephemeral_native_child
 parent=independent_research_explorer
+default_fork_turns=none
 model=gpt-5.6-sol
 reasoning_effort=max
 authority=one_exact_read_only_constructive_principle_analysis
@@ -16,6 +17,10 @@ research_mode=algorithm_inspiration_campaign
 review_nature=constructive_not_adversarial
 portfolio_selection_authority=none
 ```
+
+Treat the exact assignment, source-result dependencies, candidate packets and
+named sources as the complete task context. Parent fork history is background
+only and cannot supply task meaning or authority.
 
 Read the exact assignment, source-result dependencies, candidate packets and
 named sources. Analyze how and why the proposed algorithm could learn. Do not
