@@ -341,6 +341,63 @@ class RecurrentActorCritic(nn.Module):
             "critic_loss": float(critic_loss.detach()),
         }
 
+    def episode_loss_gae_norm(
+        self,
+        rewards: Sequence[float],
+        *,
+        gae_lambda: float = 0.95,
+        normalization_epsilon: float = 1e-8,
+    ) -> tuple[torch.Tensor, dict[str, float]]:
+        """Terminal episode-local GAE with normalized policy advantages.
+
+        This candidate-local alternative deliberately keeps the existing
+        complete-episode Monte-Carlo loss untouched.  The terminal bootstrap
+        is exactly zero and the critic target is the detached lambda-return
+        ``raw_advantage + value``.
+        """
+        if len(rewards) != len(self._log_probs) or len(rewards) != roster_env.HORIZON:
+            raise RuntimeError("actor capture does not match one complete episode")
+        if not 0.0 <= float(gae_lambda) <= 1.0:
+            raise ValueError("gae_lambda must be in [0, 1]")
+        if not float(normalization_epsilon) > 0.0:
+            raise ValueError("normalization_epsilon must be positive")
+
+        reward_tensor = torch.as_tensor(tuple(float(value) for value in rewards), dtype=torch.float32)
+        values = torch.stack(self._values)
+        log_probs = torch.stack(self._log_probs)
+        detached_values = values.detach()
+        next_values = torch.cat(
+            (detached_values[1:], torch.zeros_like(detached_values[-1:])), dim=0
+        )
+        deltas = reward_tensor + GAMMA * next_values - detached_values
+        raw_advantages = torch.empty_like(deltas)
+        carry = torch.zeros((), dtype=deltas.dtype, device=deltas.device)
+        for index in range(len(deltas) - 1, -1, -1):
+            carry = deltas[index] + GAMMA * float(gae_lambda) * carry
+            raw_advantages[index] = carry
+
+        advantage_std = raw_advantages.std(unbiased=False)
+        divisor = torch.clamp(advantage_std, min=float(normalization_epsilon))
+        normalized_advantages = (
+            raw_advantages - raw_advantages.mean()
+        ) / divisor
+        value_target = (raw_advantages + values).detach()
+        value_error = value_target - values
+        actor_loss = -(log_probs * normalized_advantages.detach()).mean()
+        critic_loss = torch.square(value_error).mean()
+        loss = actor_loss + 0.5 * critic_loss
+        return loss, {
+            "actor_loss": float(actor_loss.detach()),
+            "critic_loss": float(critic_loss.detach()),
+            "value_target_error": float(torch.abs(value_error).mean().detach()),
+            "raw_advantage_mean": float(raw_advantages.mean()),
+            "raw_advantage_population_std": float(advantage_std),
+            "normalized_advantage_mean": float(normalized_advantages.mean()),
+            "normalized_advantage_population_std": float(
+                normalized_advantages.std(unbiased=False)
+            ),
+        }
+
 
 @dataclass(frozen=True)
 class ValveFeatureRecord:

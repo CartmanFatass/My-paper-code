@@ -334,6 +334,7 @@ def test_bounded_scan_finds_no_default_runtime_consumer_and_only_opt_in_script()
     assert script_consumers == [
         "scripts/run_eociv_b1_real_valve_learning.py",
         "scripts/run_eociv_b2_payload_content_learnability.py",
+        "scripts/run_eociv_b3_reward_credit_learnability.py",
     ]
 
 
