@@ -32,9 +32,11 @@ Explorer gives one clear instruction naming implementation, instance binding,
 experiment, pause, abandon or exact review as applicable, and identifies the
 proportional evidence level A reconnaissance/probe, B exploratory toy
 experiment or C conclusion-bearing/expensive experiment. For B, the brief
-states the candidate, matched comparator, toy path/configuration and seeds, one
-primary outcome, fixed small cap and interpretation boundary; it need not
-freeze C-level estimands or request Pro for every iteration. That instruction
+states the candidate, matched comparator and initial toy path. Each named run
+fixes its exact code revision, configuration, seeds and small budget cap; between
+runs Explorer may direct recorded changes to the host, threshold, observations,
+sample composition or training settings. B need not freeze C-level estimands,
+terminal thresholds or request Pro for every iteration. That instruction
 authorizes CPM to execute the named treatment without separate code or
 experiment permission fields, and CPM does not infer omitted actions. If an
 object is missing, the brief states what is known. CPM constructs or binds
@@ -60,8 +62,22 @@ engineering task and does not substitute External Pro for experiment, instance
 binding, pause or abandon. It may run a named B experiment under existing
 runtime authority and return technical evidence without automatic Pro review.
 A B result shows real calls to the environment, policy, learner, trainer and
-evaluation runner plus nonzero transitions, updates or evaluations; synthetic
+evaluation runner plus nonzero transitions, updates and evaluations; synthetic
 checks alone do not satisfy that experiment boundary.
+CPM returns all named runs, their fixed inputs and activity counts, and every
+between-run adjustment with its reason. Missing support, unstable learning,
+comparator equivalence and non-discrimination are valid diagnoses rather than
+terminal support or retirement decisions. A favorable adjusted run is not
+preregistered confirmation and cannot erase earlier results or establish a
+natural-distribution claim. Explorer uses the evidence to name the next
+separating B question; support mapping, a discriminating-host learnability check
+and a small multi-seed direction/variance estimate are a common progression, not
+a required state machine. Full estimand, null/comparator, population, budget,
+stop-rule and decision-criterion freeze begins only for C claims of superiority,
+promotion or retirement.
+An expensive exploratory treatment still follows its resource and compute
+controls, but expense alone neither supplies terminal scientific meaning nor
+requires irrelevant decision thresholds.
 It prepares an exact review only when the brief explicitly requests one or the
 work is direction-changing, materially ambiguous, final science alignment,
 formal/conclusion-bearing, or an explicitly requested C review. An unclear

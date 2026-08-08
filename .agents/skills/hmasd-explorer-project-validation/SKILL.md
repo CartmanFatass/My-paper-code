@@ -32,16 +32,30 @@ The detailed A/B/C definitions are maintained in
 reconnaissance or runtime probe with one question, a named path, a
 non-intervention boundary and a fixed resource cap; it cannot establish
 algorithm effect. B is a small exploratory toy algorithm experiment with a
-question, candidate and matched comparator, toy environment/config/seeds, one
-primary outcome, a fixed small cap and an interpretation boundary. B must call
-the environment, policy, learner, trainer and evaluation runner and produce
-nonzero transitions, updates or evaluations. Tests, truth tables, enumerators,
+question, candidate, matched comparator and an initial toy path. Each concrete
+run fixes its exact code revision, configuration, seeds and small budget cap for
+reproducibility. Between explicitly named runs, Explorer may direct recorded
+changes to the toy host, threshold, observations, sample composition or training
+settings. B must call the environment, policy, learner, trainer and evaluation
+runner and produce nonzero transitions, updates and evaluations. Tests, truth tables, enumerators,
 censuses, certificates and byte-stability checks alone are not B experiments.
-C is conclusion-bearing, promotion/retirement or expensive work and is the only
-treatment that requires the strict methodology and its proportional freeze
-rules. Null, negative and capability-missing results remain valid results.
+C is conclusion-bearing, promotion/retirement or expensive work. A
+conclusion-bearing C is the only treatment that requires the strict methodology
+and its proportional scientific freeze. Expensive exploratory work retains its
+resource and compute controls, but expense alone does not give it terminal
+scientific meaning. Null, negative and capability-missing results remain valid results.
 Introduce a sibling environment only when the scientific question independently
 requires it; never design one backwards to make the candidate win.
+
+Every B return preserves every named run and records its fixed inputs, real
+activity counts, result and each adjustment with its reason. Missing support,
+unstable training, comparator equivalence and non-discrimination guide the next
+question; they are not workflow failures. A favorable adjusted run is not
+preregistered confirmation, cannot erase earlier results and cannot establish
+value in a natural production distribution. A controlled host may expose both
+sides of a support or label distinction only to test controlled identifiability
+or learnability. Ordinary B does not make a terminal support, promotion or
+retirement decision; that decision belongs to a frozen C treatment.
 
 One optional manifest may list several brief paths in their intended order.
 The manifest is work organization only: it contains no item state, owner lease,
@@ -59,7 +73,7 @@ exchange is normal work, not a `BLOCKED` state.
 
 The brief and every result identify the current stage as `conjecture`,
 `derivation`, `algorithm implementation` or `experiment`, and state the real
-calls, transition/update/evaluation counts, observed result, strongest
+calls, transition, update and evaluation counts, observed result, strongest
 alternative explanation and next step. A missing DTO, adapter, runner hook,
 observation or lifecycle object is an engineering implementation task for CPM,
 not a reason to add synthetic certificates or stop the whole handoff. Only a

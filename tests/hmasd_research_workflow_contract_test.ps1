@@ -554,7 +554,14 @@ foreach ($entry in @(
     @($algorithmPrinciplesNormalized, 'A — engineering/evidence reconnaissance or a read-only runtime probe'),
     @($algorithmPrinciplesNormalized, 'B — small exploratory toy algorithm experiment'),
     @($algorithmPrinciplesNormalized, 'C — conclusion-bearing, promotion/retirement or expensive experiment'),
-    @($algorithmPrinciplesNormalized, 'environment, policy, learner, trainer and evaluation runner'),
+    @($algorithmPrinciplesNormalized, 'fix the exact code revision, configuration, seeds and small budget cap'),
+    @($algorithmPrinciplesNormalized, 'produce nonzero transitions, updates **and** evaluations'),
+    @($algorithmPrinciplesNormalized, 'favorable adjusted run must not be presented as preregistered confirmation'),
+    @($algorithmPrinciplesNormalized, 'judgment-guided questions, not required states'),
+    @($algorithmPrinciplesNormalized, 'expense alone does not make its diagnostics conclusion-bearing'),
+    @($algorithmPrinciplesNormalized, 'Before collecting or observing a run intended to support superiority'),
+    @($algorithmPrinciplesNormalized, 'stop rule, budget, decision criterion'),
+    @($algorithmPrinciplesNormalized, 'Do not rescue a valid conclusion-bearing C negative'),
     @($algorithmPrinciplesNormalized, 'alone, are neither an algorithm implementation nor an experiment'),
     @($explorerValidationContractNormalized, 'Ordinary B iteration may continue as advisory research without automatic Pro review'),
     @($explorerValidationContractNormalized, 'A B result shows real calls to the environment, policy, learner, trainer and evaluation runner'),
@@ -576,11 +583,14 @@ foreach ($required in @(
     'A is read-only engineering or runtime reconnaissance',
     'B is a small exploratory toy algorithm experiment',
     'C is conclusion-bearing, promotion/retirement or otherwise expensive work',
-    'The strict methodology reference is C-only',
+    'The strict methodology reference is for conclusion-bearing C work',
     'B normally means preparing a direct implementation/experiment handoff',
     'Additional fixture, census, enumerator, certificate or byte-stability work must name the unresolved result-relevant scientific question',
     'real toy environment, policy, learner, trainer and evaluation runner',
-    'produce nonzero transitions, updates or evaluations',
+    'produce nonzero transitions, updates and evaluations',
+    'Freeze the exact code revision, configuration, seeds and small budget for each concrete B run',
+    'preserves every earlier result',
+    'iterative pattern, not a state machine',
     'tests and truth tables alone do not qualify')) {
     if (-not $independentResearchSkillNormalized.Contains($required)) {
         throw "Independent research proportional experiment contract missing: $required"
@@ -593,17 +603,21 @@ foreach ($required in @(
     'one question, a named path, a non-intervention boundary and a fixed resource cap',
     'it cannot establish algorithm effect',
     'B is a small exploratory toy algorithm experiment',
-    'candidate and matched comparator',
-    'toy environment/config/seeds',
+    'candidate, matched comparator and an initial toy path',
+    'Each concrete run fixes its exact code revision, configuration, seeds and small budget cap',
     'environment, policy, learner, trainer and evaluation runner',
-    'nonzero transitions, updates or evaluations',
+    'nonzero transitions, updates and evaluations',
     'Tests, truth tables, enumerators, censuses, certificates and byte-stability checks alone are not B experiments',
     'C is conclusion-bearing, promotion/retirement or expensive work',
-    'Null, negative and capability-missing results remain valid results',
+    'A conclusion-bearing C is the only treatment that requires the strict methodology',
+    'expense alone does not give it terminal scientific meaning',
+    'Missing support, unstable training, comparator equivalence and non-discrimination guide the next question',
+    'A favorable adjusted run is not preregistered confirmation',
+    'Ordinary B does not make a terminal support, promotion or retirement decision',
     'Introduce a sibling environment only when the scientific question independently requires it',
     'never design one backwards to make the candidate win',
     'current stage as `conjecture`, `derivation`, `algorithm implementation` or `experiment`',
-    'real calls, transition/update/evaluation counts, observed result, strongest alternative explanation and next step',
+    'real calls, transition, update and evaluation counts, observed result, strongest alternative explanation and next step',
     'A missing DTO, adapter, runner hook, observation or lifecycle object is an engineering implementation task for CPM',
     'Only a choice that changes the scientific question returns to Explorer',
     'Ordinary B iteration is nonformal and does not automatically initiate a Pro review',
@@ -611,6 +625,17 @@ foreach ($required in @(
     'formal/conclusion-bearing C result')) {
     if (-not $explorerValidationSkillNormalized.Contains($required)) {
         throw "Explorer project-validation proportional experiment contract missing: $required"
+    }
+}
+foreach ($entry in @(
+    @($explorerValidationContractNormalized, 'Each named run fixes its exact code revision, configuration, seeds and small budget cap'),
+    @($explorerValidationContractNormalized, 'nonzero transitions, updates and evaluations'),
+    @($explorerValidationContractNormalized, 'every between-run adjustment with its reason'),
+    @($explorerValidationContractNormalized, 'a common progression, not a required state machine'),
+    @($explorerValidationContractNormalized, 'Full estimand, null/comparator, population, budget, stop-rule and decision-criterion freeze begins only for C'),
+    @($explorerValidationContractNormalized, 'expense alone neither supplies terminal scientific meaning'))) {
+    if (-not $entry[0].Contains($entry[1])) {
+        throw "Explorer iterative B/C freeze boundary missing: $($entry[1])"
     }
 }
 if ($explorerValidationSkillNormalized.Contains(

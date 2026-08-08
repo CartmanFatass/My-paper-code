@@ -67,8 +67,9 @@ than duplicating its full scientific discipline. A is read-only engineering or
 runtime reconnaissance, B is a small exploratory toy algorithm experiment, and
 C is conclusion-bearing, promotion/retirement or otherwise expensive work.
 Treat A and B as normal research progress when their stated question and
-resource boundary are clear. The strict methodology reference is C-only; it is
-not a prerequisite for ordinary B iteration.
+resource boundary are clear. The strict methodology reference is for
+conclusion-bearing C work; it is not a prerequisite for ordinary B iteration or
+an expensive exploratory run whose result remains diagnostic.
 
 Do not preload `CURRENT_WORK.md`, active runtime/review state, implementation or
 scientific ledgers during ordinary research. The project-validation phase may
@@ -145,8 +146,8 @@ before deciding what evidence is proportionate. Once a candidate is implementabl
 has a differentiating prediction and a matched comparator, and no unresolved
 contradiction changes the question, B normally means preparing a direct
 implementation/experiment handoff rather than ending at theory-only design.
-Load the strict methodology reference only for C or an explicitly requested
-conclusion-bearing audit; an A/B design may proceed to its named treatment
+Load the strict methodology reference only for conclusion-bearing C or an
+explicitly requested science audit; an A/B design may proceed to its named treatment
 without a Pro review on every iteration.
 
 Additional fixture, census, enumerator, certificate or byte-stability work must
@@ -154,7 +155,17 @@ name the unresolved result-relevant scientific question it answers. These
 engineering/evidence objects are not a default substitute for an algorithm
 implementation or experiment. A B experiment must use the real toy
 environment, policy, learner, trainer and evaluation runner and produce nonzero
-transitions, updates or evaluations; tests and truth tables alone do not qualify.
+transitions, updates and evaluations; tests and truth tables alone do not qualify.
+Freeze the exact code revision, configuration, seeds and small budget for each
+concrete B run, not the entire exploratory design. Explorer may explicitly ask
+for a later run with recorded changes to the toy host, threshold, observations,
+sample composition or training settings. It preserves every earlier result and
+must not describe a favorable adjusted run as preregistered confirmation or
+natural-distribution evidence. Missing support, unstable training, comparator
+equivalence and non-discrimination are valid diagnoses. Explorer normally uses
+them to choose the next separating question: map support, test learnability under
+a discriminating host, then estimate direction and variance with a small
+multi-seed run when warranted. This is an iterative pattern, not a state machine.
 
 Never substitute an Innovator for source absorption, a Principles Analyst for
 literature fidelity, or a Critic for constructive RL reasoning. A broad request
@@ -301,7 +312,9 @@ engineering object. Missing objects are collaboration topics, not task states.
 
 CPM reads the shared temporary brief, applies engineering judgment and may perform
 bounded safe read-only reconnaissance. It returns an understandable summary
-and exact evidence through its reverse temporary directory. After CPM technical
+and exact evidence through its reverse temporary directory, including the
+per-run fixed revision/configuration/seeds/budget, real activity counts and every
+recorded between-run adjustment. After CPM technical
 acceptance and push, ordinary B may continue as advisory iteration without Pro.
 Only for the named C/direction-change/material-ambiguity/final-alignment/
 conclusion trigger does Explorer freeze one `CODE_SCIENCE_ALIGNMENT_AUDIT`

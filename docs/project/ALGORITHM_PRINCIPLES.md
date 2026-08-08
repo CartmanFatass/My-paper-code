@@ -121,21 +121,30 @@ Classify the next evidence action by its scientific burden:
   establish that an existing object is reusable, but it does not establish an
   algorithm effect.
 - **B — small exploratory toy algorithm experiment.** State the question,
-  candidate and matched comparator, toy environment/configuration and seeds,
-  one primary outcome, a fixed small budget cap and the interpretation boundary.
-  B is the normal path once the conditions above hold. It must call the real
-  environment, policy, learner, trainer and evaluation runner and produce nonzero
-  transitions, updates or evaluations. Tests, truth tables, enumerators,
-  censuses, certificates and byte-stability checks are useful evidence but,
-  alone, are neither an algorithm implementation nor an experiment. Zero,
-  negative and capability-missing results are valid outcomes.
+  candidate and matched comparator, and an initial toy path. Before each named
+  run, fix the exact code revision, configuration, seeds and small budget cap so
+  that run is reproducible. Between named B runs, the toy host, threshold,
+  observations, sample composition and training settings may change when the
+  change and its reason are recorded. B is the normal path once the conditions
+  above hold. It must call the real environment, policy, learner, trainer and
+  evaluation runner and produce nonzero transitions, updates **and** evaluations.
+  Tests, truth tables, enumerators, censuses, certificates and byte-stability
+  checks are useful evidence but, alone, are neither an algorithm implementation
+  nor an experiment. Missing support, unstable training, comparator equivalence
+  and non-discriminating observations are valid B outcomes that guide the next
+  run; B does not itself make a terminal support, promotion or retirement claim.
 - **C — conclusion-bearing, promotion/retirement or expensive experiment.**
-  Freeze the outcome or estimand, null and comparator, instance or population,
-  stop rule, budget and interpretation boundary. Require thresholds,
+  Before collecting or observing a run intended to support superiority,
+  promotion or retirement, freeze the outcome or estimand, null and comparator,
+  instance or population, stop rule, budget, decision criterion and
+  interpretation boundary. Require thresholds,
   confidence, checkpoint/exclusion and multiple-comparison controls only when
   omitting them could change the conclusion. Formal compute authority remains
-  user-only. The strict methodology in `research-methodology.md` is a C-level
-  reference, not a prerequisite for ordinary B iteration.
+  user-only. An expensive exploratory run still obeys its resource and compute
+  controls, but expense alone does not make its diagnostics conclusion-bearing
+  or require irrelevant decision thresholds. The strict methodology in
+  `research-methodology.md` is a reference for conclusion-bearing C work, not a
+  prerequisite for ordinary B iteration.
 
 Reports identify the current stages `conjecture | derivation | algorithm
 implementation | experiment` and state the real calls, transition/update/
@@ -165,13 +174,22 @@ live or parked with a reactivation condition.
 ## 4. Evidence Design
 
 Freeze evidence, not theory. For A, record only the local question, path,
-non-intervention boundary and fixed resource cap. For B, record the candidate,
-matched comparator, toy configuration/seeds, one primary outcome, fixed small
-budget and interpretation boundary in the natural-language task brief; do not
-turn these cues into a required file, schema or admission checklist. Before a
-C result, freeze provenance, primary estimand, comparator information and
-resource boundaries, probability and credit authority, external/intrinsic
-reward semantics, leakage boundaries and conclusion-bearing metrics. Afterward,
+non-intervention boundary and fixed resource cap. For B, record each run's exact
+code revision, configuration, seeds, small budget cap, real calls and counts,
+then record every between-run change and its reason in the natural-language task
+or result brief; do not turn these cues into a required file, schema or admission
+checklist. A common exploratory progression is support mapping, then learnability
+under a discriminating host, then a small multi-seed estimate of direction,
+variance and failure modes. These are judgment-guided questions, not required
+states. A controlled host may be adjusted to expose both sides of a support or
+label distinction, but that result establishes only controlled identifiability
+or learnability, not value in a natural production distribution. Report every
+run: a favorable adjusted run must not be presented as preregistered confirmation
+or used to erase earlier null, unstable, equivalent or non-discriminating runs.
+Before collecting or observing a conclusion-bearing C result, freeze provenance,
+primary estimand, comparator information, resource boundaries, stop rule,
+decision criterion, probability and credit authority, external/intrinsic reward
+semantics, leakage boundaries and conclusion-bearing metrics. Afterward,
 preserve the observation and its registered meaning while allowing the
 conjecture, definition, scope, benchmark or architecture to be corrected.
 
@@ -244,11 +262,13 @@ Interpret outcomes narrowly and update the smallest implicated unit:
   scope;
 - a valid positive supports only the frozen causal claim.
 
-Mixed and underpowered results preserve unresolved explanations. Retry only a
-failed operational path. Do not rescue a valid negative by changing seed,
-budget, model, learning rate, metric, threshold, reward or name. Broad mechanism
-retirement requires a structural contradiction, equivalence proof or multiple
-independent identified counterexamples.
+Mixed and underpowered results preserve unresolved explanations. A B result may
+motivate a new named run with recorded changes, but the new run does not replace
+or reinterpret the earlier observation. Do not rescue a valid conclusion-bearing
+C negative by changing seed, budget, model, learning rate, metric, threshold,
+reward or name after the frozen decision contract. Broad mechanism retirement
+requires a structural contradiction, equivalence proof or multiple independent
+identified counterexamples.
 
 Every result records the smallest supported or refuted proposition, a retained
 lemma, any counterexample, what the result does not imply and the portfolio
