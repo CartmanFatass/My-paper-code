@@ -10,6 +10,7 @@ import shutil
 import stat
 import subprocess
 import sys
+import tempfile
 from pathlib import Path, PurePosixPath
 from typing import Any
 
@@ -26,9 +27,24 @@ class TicketError(RuntimeError):
     """Fail-closed workspace-ticket error."""
 
 
+class IntegrationError(TicketError):
+    """Typed, fail-closed integration error."""
+
+    def __init__(self, code: str, detail: str) -> None:
+        self.code = code
+        self.detail = detail
+        super().__init__(f"{code}: {detail}")
+
+
 def _git(root: Path, *args: str) -> str:
+    git_args = list(args)
+    if list(LONG_PATH_GIT_ARGS) not in [
+        git_args[index : index + len(LONG_PATH_GIT_ARGS)]
+        for index in range(max(0, len(git_args) - len(LONG_PATH_GIT_ARGS) + 1))
+    ]:
+        git_args = [*LONG_PATH_GIT_ARGS, *git_args]
     completed = subprocess.run(
-        ["git", "-C", str(root), *args],
+        ["git", "-C", str(root), *git_args],
         check=False,
         capture_output=True,
         text=True,
@@ -36,7 +52,7 @@ def _git(root: Path, *args: str) -> str:
     )
     if completed.returncode != 0:
         detail = completed.stderr.strip() or completed.stdout.strip()
-        raise TicketError(f"git {' '.join(args)} failed: {detail}")
+        raise TicketError(f"git {' '.join(git_args)} failed: {detail}")
     return completed.stdout.strip()
 
 
@@ -474,6 +490,536 @@ def verify_ticket(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
+INTEGRATION_SCHEMA_VERSION = 1
+INTEGRATION_OPERATIONS = {"ADD", "MODIFY", "DELETE"}
+
+
+def _integration_failure(code: str, detail: str) -> IntegrationError:
+    return IntegrationError(code, detail)
+
+
+def _status_entries(worktree: Path) -> list[tuple[str, str]]:
+    completed = subprocess.run(
+        [
+            "git",
+            *LONG_PATH_GIT_ARGS,
+            "-C",
+            str(worktree),
+            "status",
+            "--porcelain=v1",
+            "--untracked-files=all",
+            "-z",
+        ],
+        check=False,
+        capture_output=True,
+    )
+    if completed.returncode != 0:
+        detail = completed.stderr.decode("utf-8", errors="replace").strip()
+        raise TicketError(f"git status failed: {detail}")
+    entries = completed.stdout.split(b"\0")
+    result: list[tuple[str, str]] = []
+    index = 0
+    while index < len(entries):
+        entry = entries[index]
+        index += 1
+        if not entry:
+            continue
+        if len(entry) < 4:
+            raise TicketError("malformed git status entry")
+        status = entry[:2].decode("ascii", errors="strict")
+        path = entry[3:].decode("utf-8", errors="strict").replace("\\", "/")
+        result.append((status, path))
+        if "R" in status or "C" in status:
+            if index >= len(entries) or not entries[index]:
+                raise TicketError("malformed rename/copy status entry")
+            result.append(
+                (
+                    status,
+                    entries[index].decode("utf-8", errors="strict").replace("\\", "/"),
+                )
+            )
+            index += 1
+    return result
+
+
+def _integration_status_entries(worktree: Path) -> list[tuple[str, str]]:
+    try:
+        return _status_entries(worktree)
+    except TicketError as exc:
+        raise _integration_failure("GIT_STATUS_FAILED", str(exc)) from exc
+
+
+def _regular_file(path: Path) -> bool:
+    return path.is_file() and not path.is_symlink() and not _is_reparse_point(path)
+
+
+def _safe_descendant(root: Path, relative: str) -> Path:
+    candidate = root / Path(relative)
+    try:
+        candidate.relative_to(root)
+    except ValueError as exc:
+        raise _integration_failure(
+            "PATH_OUTSIDE_SCOPE", f"path escapes repository: {relative}"
+        ) from exc
+    current = candidate.parent
+    while _same_path(current, root) is False:
+        if current.is_symlink() or (current.exists() and _is_reparse_point(current)):
+            raise _integration_failure(
+                "PATH_REDIRECTED", f"path parent is redirected: {relative}"
+            )
+        current = current.parent
+    if candidate.exists() and (candidate.is_symlink() or _is_reparse_point(candidate)):
+        raise _integration_failure("PATH_REDIRECTED", f"path is redirected: {relative}")
+    return candidate
+
+
+def _source_operations(source: Path, allowed: list[str]) -> list[dict[str, str]]:
+    entries = _integration_status_entries(source)
+    changed = sorted({path for _status, path in entries})
+    disallowed = [path for path in changed if not _is_allowed(path, allowed)]
+    if disallowed:
+        raise _integration_failure(
+            "SOURCE_SCOPE_VIOLATION",
+            "changed path outside ticket scope: " + ", ".join(disallowed),
+        )
+    operations: list[dict[str, str]] = []
+    for status, relative in sorted(entries, key=lambda item: item[1]):
+        if "R" in status or "C" in status:
+            raise _integration_failure(
+                "SOURCE_OPERATION_UNSUPPORTED",
+                f"rename/copy is not a concrete regular-file operation: {relative}",
+            )
+        path = _safe_descendant(source, relative)
+        deleted = "D" in status and not path.exists()
+        if deleted:
+            kind = "DELETE"
+        elif not _regular_file(path):
+            raise _integration_failure(
+                "SOURCE_OPERATION_UNSUPPORTED",
+                f"source path is not a concrete regular file: {relative}",
+            )
+        elif status == "??" or "A" in status:
+            kind = "ADD"
+        else:
+            kind = "MODIFY"
+        operations.append({"path": relative, "operation": kind})
+    deduped: dict[str, dict[str, str]] = {}
+    for operation in operations:
+        previous = deduped.get(operation["path"])
+        if previous is not None and previous["operation"] != operation["operation"]:
+            raise _integration_failure(
+                "SOURCE_OPERATION_UNSUPPORTED",
+                f"conflicting status for source path: {operation['path']}",
+            )
+        deduped[operation["path"]] = operation
+    return [deduped[path] for path in sorted(deduped)]
+
+
+def _target_changed_paths(target: Path, base: str, head: str) -> list[str]:
+    try:
+        output = _git(target, "diff", "--name-only", "--no-renames", base, head, "--")
+    except TicketError as exc:
+        raise _integration_failure("TARGET_DIFF_FAILED", str(exc)) from exc
+    return sorted(
+        {
+            line.replace("\\", "/")
+            for line in output.splitlines()
+            if line.strip()
+        }
+    )
+
+
+def _target_head(target: Path, base: str) -> str:
+    try:
+        head = _git(target, "rev-parse", "HEAD")
+    except TicketError as exc:
+        raise _integration_failure("TARGET_INVALID", str(exc)) from exc
+    try:
+        _git(target, "merge-base", "--is-ancestor", base, head)
+    except TicketError as exc:
+        raise _integration_failure(
+            "TARGET_HEAD_DIVERGENCE",
+            f"ticket base is not an ancestor of target HEAD: {head}",
+        ) from exc
+    return head
+
+
+def _operations_from_receipt(raw: Any) -> list[dict[str, str]]:
+    if not isinstance(raw, list):
+        raise _integration_failure("RECEIPT_INVALID", "operations must be a list")
+    operations: list[dict[str, str]] = []
+    for item in raw:
+        if not isinstance(item, dict):
+            raise _integration_failure("RECEIPT_INVALID", "invalid integration operation")
+        path = item.get("path")
+        operation = item.get("operation", item.get("kind"))
+        if not isinstance(path, str) or not isinstance(operation, str):
+            raise _integration_failure("RECEIPT_INVALID", "invalid integration operation")
+        try:
+            normalized = _normalize_allowed(path)
+        except TicketError as exc:
+            raise _integration_failure("RECEIPT_INVALID", str(exc)) from exc
+        if normalized != path or operation not in INTEGRATION_OPERATIONS:
+            raise _integration_failure("RECEIPT_INVALID", "invalid integration operation")
+        operations.append({"path": path, "operation": operation})
+    if len({item["path"] for item in operations}) != len(operations):
+        raise _integration_failure("RECEIPT_INVALID", "duplicate integration operation")
+    return sorted(operations, key=lambda item: item["path"])
+
+
+def _integration_context(
+    ticket: Path,
+    assignment_id: str | None,
+    target_raw: Path,
+    *,
+    allow_target_allowed_dirty: bool = False,
+) -> tuple[dict[str, Any], Path, list[str], Path, str, list[dict[str, str]], str]:
+    try:
+        payload, source, allowed = _resolve_payload(ticket, assignment_id)
+    except IntegrationError:
+        raise
+    except TicketError as exc:
+        raise _integration_failure("TICKET_INVALID", str(exc)) from exc
+    try:
+        target = _main_repository(target_raw)
+    except TicketError as exc:
+        raise _integration_failure("TARGET_INVALID", str(exc)) from exc
+    if _same_path(source, target):
+        raise _integration_failure("TARGET_INVALID", "source worktree and target repository must differ")
+    try:
+        base = payload["base_commit"]
+        if not isinstance(base, str) or not re.fullmatch(r"[0-9a-f]{40}", base):
+            raise ValueError
+        source_head = _git(source, "rev-parse", "HEAD")
+    except (TicketError, ValueError) as exc:
+        if isinstance(exc, TicketError):
+            detail = str(exc)
+        else:
+            detail = "workspace ticket base commit is invalid"
+        raise _integration_failure("SOURCE_DRIFT", detail) from exc
+    if source_head != base:
+        raise _integration_failure(
+            "SOURCE_DRIFT", f"source HEAD drift: expected {base}, got {source_head}"
+        )
+    operations = _source_operations(source, allowed)
+    head = _target_head(target, base)
+    target_changed = _target_changed_paths(target, base, head)
+    target_allowed_divergence = [
+        path for path in target_changed if _is_allowed(path, allowed)
+    ]
+    if target_allowed_divergence:
+        raise _integration_failure(
+            "TARGET_ALLOWED_DIVERGENCE",
+            "target changed an allowed path: " + ", ".join(target_allowed_divergence),
+        )
+    target_entries = _integration_status_entries(target)
+    target_changed_worktree = sorted({path for _status, path in target_entries})
+    target_allowed_dirty = [
+        path for path in target_changed_worktree if _is_allowed(path, allowed)
+    ]
+    if target_allowed_dirty and not allow_target_allowed_dirty:
+        raise _integration_failure(
+            "TARGET_ALLOWED_DIRTY",
+            "target allowed path is dirty: " + ", ".join(target_allowed_dirty),
+        )
+    return payload, source, allowed, target, base, operations, head
+
+
+def _receipt_path(raw: Path) -> Path:
+    candidate = raw.expanduser().resolve(strict=False)
+    if candidate.exists() and candidate.is_dir():
+        raise _integration_failure("RECEIPT_INVALID", "receipt path is a directory")
+    if not candidate.parent.exists() or not candidate.parent.is_dir():
+        raise _integration_failure("RECEIPT_INVALID", "receipt parent directory does not exist")
+    return candidate
+
+
+def _receipt_payload(
+    *,
+    status: str,
+    operation: str,
+    ticket: Path,
+    source: Path,
+    target: Path,
+    base: str,
+    prepared_head: str,
+    allowed: list[str],
+    operations: list[dict[str, str]],
+) -> dict[str, Any]:
+    return {
+        "schema_version": INTEGRATION_SCHEMA_VERSION,
+        "operation": operation,
+        "status": status,
+        "assignment_id": None,
+        "ticket": str(ticket),
+        "source_worktree": str(source),
+        "target_repo": str(target),
+        "base_commit": base,
+        "prepared_target_head": prepared_head,
+        "allowed_paths": allowed,
+        "concrete_changed_paths": [item["path"] for item in operations],
+        "operations": operations,
+    }
+
+
+def _write_receipt(path: Path, payload: dict[str, Any]) -> None:
+    try:
+        with tempfile.NamedTemporaryFile(
+            "w", encoding="utf-8", dir=path.parent, prefix=f".{path.name}.", delete=False
+        ) as stream:
+            temporary = Path(stream.name)
+            json.dump(payload, stream, indent=2, sort_keys=True)
+            stream.write("\n")
+        os.replace(temporary, path)
+    except OSError as exc:
+        try:
+            if "temporary" in locals() and temporary.exists():
+                temporary.unlink()
+        except OSError:
+            pass
+        raise _integration_failure("RECEIPT_WRITE_FAILED", str(exc)) from exc
+
+
+def _load_integration_receipt(path: Path) -> tuple[dict[str, Any], Path]:
+    receipt = _receipt_path(path)
+    try:
+        payload = json.loads(receipt.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise _integration_failure("RECEIPT_INVALID", str(exc)) from exc
+    required = (
+        "schema_version",
+        "operation",
+        "status",
+        "assignment_id",
+        "ticket",
+        "source_worktree",
+        "target_repo",
+        "base_commit",
+        "prepared_target_head",
+        "allowed_paths",
+        "concrete_changed_paths",
+        "operations",
+    )
+    if any(key not in payload for key in required):
+        raise _integration_failure("RECEIPT_INVALID", "receipt is missing required metadata")
+    if payload["schema_version"] != INTEGRATION_SCHEMA_VERSION:
+        raise _integration_failure("RECEIPT_INVALID", "unsupported integration receipt schema")
+    if payload["operation"] != "prepare-integrate":
+        raise _integration_failure("RECEIPT_INVALID", "receipt operation is not prepare-integrate")
+    if payload["status"] not in {"WORKSPACE_INTEGRATION_READY", "WORKSPACE_INTEGRATED"}:
+        raise _integration_failure("RECEIPT_INVALID", "receipt status is invalid")
+    if not isinstance(payload["assignment_id"], str):
+        raise _integration_failure("RECEIPT_INVALID", "receipt assignment_id is invalid")
+    operations = _operations_from_receipt(payload["operations"])
+    if payload["concrete_changed_paths"] != [item["path"] for item in operations]:
+        raise _integration_failure("RECEIPT_INVALID", "receipt changed paths do not match operations")
+    return payload, receipt
+
+
+def _target_matches_operations(
+    source: Path, target: Path, operations: list[dict[str, str]]
+) -> bool:
+    for item in operations:
+        source_path = _safe_descendant(source, item["path"])
+        target_path = _safe_descendant(target, item["path"])
+        if item["operation"] == "DELETE":
+            if target_path.exists() or target_path.is_symlink():
+                return False
+            continue
+        if not _regular_file(source_path) or not _regular_file(target_path):
+            return False
+        try:
+            if not _files_equal(source_path, target_path):
+                return False
+        except OSError:
+            return False
+    return True
+
+
+def _files_equal(left: Path, right: Path) -> bool:
+    with left.open("rb") as left_stream, right.open("rb") as right_stream:
+        while True:
+            left_chunk = left_stream.read(1024 * 1024)
+            right_chunk = right_stream.read(1024 * 1024)
+            if left_chunk != right_chunk:
+                return False
+            if not left_chunk:
+                return True
+
+
+def _snapshot_target(
+    target: Path, operations: list[dict[str, str]], temporary_root: Path
+) -> list[tuple[Path, Path | None]]:
+    snapshots: list[tuple[Path, Path | None]] = []
+    for item in operations:
+        target_path = _safe_descendant(target, item["path"])
+        if target_path.exists() or target_path.is_symlink():
+            if not _regular_file(target_path):
+                raise _integration_failure(
+                    "TARGET_OPERATION_UNSUPPORTED",
+                    f"target path is not a regular file: {item['path']}",
+                )
+            backup = temporary_root / Path(item["path"])
+            backup.parent.mkdir(parents=True, exist_ok=True)
+            try:
+                shutil.copyfile(target_path, backup)
+            except OSError as exc:
+                raise _integration_failure("INTEGRATION_PREPARE_FAILED", str(exc)) from exc
+            snapshots.append((target_path, backup))
+        else:
+            snapshots.append((target_path, None))
+    return snapshots
+
+
+def _planned_target_directories(
+    target: Path, operations: list[dict[str, str]]
+) -> list[Path]:
+    missing: set[Path] = set()
+    for item in operations:
+        current = (target / Path(item["path"])).parent
+        while not _same_path(current, target):
+            if not current.exists():
+                missing.add(current)
+            current = current.parent
+    return sorted(missing, key=lambda path: len(path.parts), reverse=True)
+
+
+def _restore_snapshot(
+    snapshots: list[tuple[Path, Path | None]], created_dirs: list[Path]
+) -> None:
+    failures: list[str] = []
+    for target_path, backup in reversed(snapshots):
+        try:
+            if backup is None:
+                if target_path.exists() or target_path.is_symlink():
+                    target_path.unlink()
+            else:
+                target_path.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(backup, target_path)
+        except OSError as exc:
+            failures.append(f"{target_path}: {exc}")
+    if failures:
+        raise _integration_failure("INTEGRATION_ROLLBACK_FAILED", "; ".join(failures))
+    for directory in created_dirs:
+        try:
+            if directory.is_dir() and not directory.is_symlink() and not any(directory.iterdir()):
+                directory.rmdir()
+        except OSError as exc:
+            failures.append(f"{directory}: {exc}")
+    if failures:
+        raise _integration_failure("INTEGRATION_ROLLBACK_FAILED", "; ".join(failures))
+
+
+def prepare_integrate(args: argparse.Namespace) -> dict[str, Any]:
+    receipt = _receipt_path(Path(args.receipt))
+    target_raw = Path(getattr(args, "target_repo", getattr(args, "target", REGISTERED_REPOSITORY)))
+    assignment_id = getattr(args, "assignment_id", None)
+    try:
+        payload, source, allowed, target, base, operations, head = _integration_context(
+            Path(args.ticket), assignment_id, target_raw
+        )
+    except IntegrationError:
+        raise
+    receipt_payload = _receipt_payload(
+        status="WORKSPACE_INTEGRATION_READY",
+        operation="prepare-integrate",
+        ticket=_canonical(Path(args.ticket), label="workspace ticket"),
+        source=source,
+        target=target,
+        base=base,
+        prepared_head=head,
+        allowed=allowed,
+        operations=operations,
+    )
+    receipt_payload["assignment_id"] = payload["assignment_id"]
+    _write_receipt(receipt, receipt_payload)
+    return {**receipt_payload, "receipt": str(receipt)}
+
+
+def finalize_integrate(args: argparse.Namespace) -> dict[str, Any]:
+    receipt_payload, receipt = _load_integration_receipt(Path(args.receipt))
+    assignment_id = receipt_payload["assignment_id"]
+    target_raw = Path(receipt_payload["target_repo"])
+    ticket = Path(receipt_payload["ticket"])
+    payload, source, allowed, target, base, operations, head = _integration_context(
+        ticket, assignment_id, target_raw, allow_target_allowed_dirty=True
+    )
+    if str(source) != receipt_payload["source_worktree"] or str(target) != receipt_payload["target_repo"]:
+        raise _integration_failure("RECEIPT_INVALID", "receipt repository identity changed")
+    if base != receipt_payload["base_commit"] or allowed != receipt_payload["allowed_paths"]:
+        raise _integration_failure("RECEIPT_INVALID", "receipt ticket metadata changed")
+    if operations != _operations_from_receipt(receipt_payload["operations"]):
+        raise _integration_failure("SOURCE_DRIFT", "source operations changed after prepare")
+
+    target_entries = _integration_status_entries(target)
+    target_dirty = sorted({path for _status, path in target_entries if _is_allowed(path, allowed)})
+    if receipt_payload["status"] == "WORKSPACE_INTEGRATED" and not target_dirty:
+        if _target_matches_operations(source, target, operations):
+            return {
+                **receipt_payload,
+                "operation": "finalize-integrate",
+                "status": "WORKSPACE_ALREADY_INTEGRATED",
+                "receipt": str(receipt),
+            }
+        raise _integration_failure(
+            "INTEGRATION_VERIFY_FAILED",
+            "integrated receipt no longer matches the source and target files",
+        )
+    if target_dirty:
+        if operations and _target_matches_operations(source, target, operations):
+            return {
+                **receipt_payload,
+                "operation": "finalize-integrate",
+                "status": "WORKSPACE_ALREADY_INTEGRATED",
+                "receipt": str(receipt),
+            }
+        raise _integration_failure(
+            "TARGET_ALLOWED_DIRTY",
+            "target allowed path is dirty: " + ", ".join(target_dirty),
+        )
+
+    with tempfile.TemporaryDirectory(prefix="hmasd-ticket-integrate-") as temporary:
+        snapshots: list[tuple[Path, Path | None]] = []
+        created_dirs = _planned_target_directories(target, operations)
+        try:
+            snapshots = _snapshot_target(target, operations, Path(temporary))
+            for item in operations:
+                source_path = _safe_descendant(source, item["path"])
+                target_path = _safe_descendant(target, item["path"])
+                if item["operation"] == "DELETE":
+                    if target_path.exists() or target_path.is_symlink():
+                        target_path.unlink()
+                else:
+                    target_path.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(source_path, target_path)
+            if not _target_matches_operations(source, target, operations):
+                raise _integration_failure(
+                    "INTEGRATION_VERIFY_FAILED", "integrated files do not match source"
+                )
+            integrated_payload = dict(receipt_payload)
+            integrated_payload["status"] = "WORKSPACE_INTEGRATED"
+            _write_receipt(receipt, integrated_payload)
+        except IntegrationError:
+            try:
+                _restore_snapshot(snapshots, created_dirs)
+            except IntegrationError:
+                raise
+            raise
+        except OSError as exc:
+            try:
+                _restore_snapshot(snapshots, created_dirs)
+            except IntegrationError:
+                raise
+            raise _integration_failure("INTEGRATION_FAILED", str(exc)) from exc
+
+    return {
+        **integrated_payload,
+        "operation": "finalize-integrate",
+        "status": "WORKSPACE_INTEGRATED",
+        "receipt": str(receipt),
+    }
+
+
 def _expected_head(raw: str) -> str:
     expected = raw.strip()
     if not re.fullmatch(r"[0-9a-f]{40}", expected):
@@ -575,6 +1121,15 @@ def parser() -> argparse.ArgumentParser:
     retire.add_argument("--assignment-id", required=True)
     retire.add_argument("--expected-head", required=True)
     retire.set_defaults(handler=retire_ticket)
+    prepare = subparsers.add_parser("prepare-integrate")
+    prepare.add_argument("--ticket", type=Path, required=True)
+    prepare.add_argument("--assignment-id", required=True)
+    prepare.add_argument("--target-repo", type=Path, required=True)
+    prepare.add_argument("--receipt", type=Path, required=True)
+    prepare.set_defaults(handler=prepare_integrate)
+    finalize = subparsers.add_parser("finalize-integrate")
+    finalize.add_argument("--receipt", type=Path, required=True)
+    finalize.set_defaults(handler=finalize_integrate)
     return root
 
 
@@ -582,6 +1137,9 @@ def main(argv: list[str] | None = None) -> int:
     args = parser().parse_args(argv)
     try:
         result = args.handler(args)
+    except IntegrationError as exc:
+        print(f"WORKSPACE_TICKET_ERROR {exc.code}: {exc.detail}", file=sys.stderr)
+        return 1
     except TicketError as exc:
         print(f"WORKSPACE_TICKET_ERROR {exc}", file=sys.stderr)
         return 1

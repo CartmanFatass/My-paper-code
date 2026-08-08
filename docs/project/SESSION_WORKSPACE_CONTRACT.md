@@ -39,6 +39,22 @@ agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
 agentify_transport_result_fields=status|results_path|error
 agentify_transport_terminal_status=COMPLETE|ERROR
 agentify_transport_wait_visibility=silent_until_terminal_native_final
+cpm_mechanical_child=hmasd-cpm-mechanical
+cpm_mechanical_parent=code_project_manager
+cpm_mechanical_assignment=CPM_MECHANICAL_TASK_ASSIGNMENT
+cpm_mechanical_assignment_fields=spec_path|result_path
+cpm_mechanical_result=CPM_MECHANICAL_TASK_RESULT
+cpm_mechanical_result_fields=status|result_path|error
+cpm_mechanical_terminal_status=COMPLETE|ERROR
+cpm_mechanical_wait_visibility=silent_until_terminal_native_final
+cpm_mechanical_write_scope=assignment_named_temporary_outputs_only
+cpm_mechanical_acceptance_authority=none
+cpm_mechanical_git_authority=none
+cpm_mechanical_scientific_authority=none
+cpm_mechanical_runtime_authority=no_experiment_no_readiness_no_agentify
+cpm_mechanical_finalize_owner=code_project_manager
+cpm_mechanical_activation=after_fresh_profile_reload
+cpm_mechanical_active_research_state_effect=none
 ```
 
 ## Ownership model
@@ -56,6 +72,15 @@ Explorer may request the registered Agentify transport child, which keeps
 exclusive batch-scoped authority for transport mechanics and writes only its
 temporary workspace. Those role-local authorities do not include workflow
 design, workflow acceptance or workflow Git.
+
+The CPM mechanical child is a CPM-only, file-bound capability. CPM remains the
+sole technical acceptance, source/Git and canonical-state owner; the child
+receives one exact temporary `CPM_MECHANICAL_TASK_ASSIGNMENT` and returns one
+typed temporary `CPM_MECHANICAL_TASK_RESULT`. Its interface is registered by
+`spec_path|result_path`, remains silent until one native terminal return, and
+does not grant experiment, readiness, Agentify, science, Git or acceptance
+authority. Activation requires a fresh profile reload and has no active
+research-state effect.
 
 The Explorer remains the sole owner of its research plans, continuity notes,
 candidate and scientific research artifacts, and all temporary/session research
@@ -116,6 +141,14 @@ single native terminal return. Concurrent batches use distinct assignment-
 specific result paths; no parent polling, queue, monitor or inferred scan is
 allowed. CPM or Explorer copies the named result into its own canonical archive
 and performs its own scientific or mechanical intake.
+
+The CPM mechanical child uses the same file-only boundary: CPM writes one exact
+`spec_path` and names one exact `result_path` under its temporary workspace;
+the child writes only assignment-named temporary outputs and returns
+`status|result_path|error` with terminal status `COMPLETE|ERROR`. CPM alone
+finalizes, accepts and records the result. No queue, monitor, inferred path
+scan, experiment/readiness execution or active research-state transition is
+introduced.
 
 ## Shared temporary semantic handoffs
 

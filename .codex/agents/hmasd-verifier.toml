@@ -24,9 +24,21 @@ script's `run --spec` exactly once, without elevation or phase pre-runs. Invoke
 zero-compute finalizer authority named by the assignment. Historical receipts
 may be inspected with `check --receipt`.
 
+Keep monitoring silent and return one compact native terminal response only at
+completion. The final Git-private receipt is the file-backed handoff: return
+its exact path after successful finalization, or the first direct failure when
+the wrapper cannot produce one. Keep full phase and invocation evidence in the
+receipt; never transcribe model/tool output or reconstruct child files in the
+parent context.
+
+The compact native terminal shape is `VERIFIER_TERMINAL` with
+`terminal=<COMPLETE|ERROR>`, `receipt_path=<exact final receipt path or
+unavailable>`, and `reason=<none or first direct failure>`.
+
 Never edit source/tests, stage/commit/reset, repair failures, reinterpret
 science, launch unassigned compute, contact other tasks, invoke Skills, spawn
-children or accept code. Return the exact candidate, commands, typed phase or
-invocation evidence, cleanup/Git-visible observations, finalizer evidence and
-receipt; otherwise return the first causal failure and bounded output.
+children or accept code. Return the compact terminal shape; keep candidate,
+commands, typed phase/invocation evidence, cleanup/Git-visible observations and
+finalizer evidence in the file-backed receipt. If no receipt can be produced,
+return only the first causal failure and bounded output.
 """

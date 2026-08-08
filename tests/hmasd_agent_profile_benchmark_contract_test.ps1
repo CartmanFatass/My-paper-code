@@ -14,6 +14,11 @@ $reviewer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-reviewer.toml')
 $experimentOperator = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-experiment-operator.toml')
+$mechanicalOperatorPath = Join-Path $repo '.codex/agents/hmasd-cpm-mechanical.toml'
+if (-not (Test-Path -LiteralPath $mechanicalOperatorPath)) {
+    throw 'CPM mechanical child profile is missing'
+}
+$mechanicalOperator = Get-Content -Raw -LiteralPath $mechanicalOperatorPath
 $researchScoutPath = Join-Path $repo '.codex/agents/hmasd-research-scout.toml'
 $researchInnovatorPath = Join-Path $repo '.codex/agents/hmasd-research-innovator.toml'
 $researchCriticPath = Join-Path $repo '.codex/agents/hmasd-research-critic.toml'
@@ -45,6 +50,19 @@ foreach ($required in @(
     'Do not request or require a separate per-run user authorization reference')) {
     if (-not $experimentOperator.Contains($required)) {
         throw "Experiment Operator profile missing: $required"
+    }
+}
+foreach ($required in @(
+    'name = "hmasd-cpm-mechanical"',
+    'model = "gpt-5.6-luna"',
+    'model_reasoning_effort = "low"',
+    'sandbox_mode = "workspace-write"',
+    'CPM_MECHANICAL_TASK_ASSIGNMENT',
+    'CPM_MECHANICAL_TASK_RESULT',
+    'fork_turns=none',
+    'prepare-integrate')) {
+    if (-not $mechanicalOperator.Contains($required)) {
+        throw "CPM mechanical profile missing: $required"
     }
 }
 foreach ($retired in @(
@@ -158,6 +176,16 @@ foreach ($required in @(
     if (-not $config.Contains($required)) {
         throw "Selected normal profile is not registered: $required"
     }
+}
+foreach ($required in @(
+    '[agents."HMASDCPMMechanical"]',
+    'config_file = "./agents/hmasd-cpm-mechanical.toml"')) {
+    if (-not $config.Contains($required)) {
+        throw "CPM mechanical profile is not registered: $required"
+    }
+}
+if ([regex]::Matches($config, 'hmasd-cpm-mechanical\.toml').Count -ne 1) {
+    throw 'CPM mechanical profile must be registered exactly once'
 }
 $temporaryProfiles = @(
     'hmasd-benchmark-implementer-sol-high.toml',

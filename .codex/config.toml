@@ -22,6 +22,11 @@ description = "HMASD implementation worker for one frozen bounded work package."
 config_file = "./agents/hmasd-implementer.toml"
 nickname_candidates = ["HMASD Implementer", "Algorithm Implementer", "Runtime Implementer"]
 
+[agents."HMASDCPMMechanical"]
+description = "Silent Luna-low native child for one exact CPM mechanical task assignment."
+config_file = "./agents/hmasd-cpm-mechanical.toml"
+nickname_candidates = ["CPM Mechanical", "Mechanical Operator", "CPM Task Child"]
+
 [agents."HMASDRoutineImplementer"]
 description = "Terra-high implementation worker for one frozen routine engineering package."
 config_file = "./agents/hmasd-implementer-terra.toml"

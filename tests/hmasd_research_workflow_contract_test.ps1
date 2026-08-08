@@ -24,6 +24,7 @@ $roles = @(Get-ChildItem (Join-Path $repo '.agents/roles') -File -Filter '*.md' 
     Select-Object -ExpandProperty Name | Sort-Object)
 $expectedRoles = @(
     'AGENTIFY_TRANSPORT_OPERATOR.md',
+    'CPM_MECHANICAL_OPERATOR.md',
     'CODE_SCOUT.md',
     'EXPERIMENT_OPERATOR.md',
     'EXTERNAL_PRO.md',
@@ -178,6 +179,49 @@ foreach ($entry in @(
     }
 }
 
+$scientificOnlyNormalized = $explorerValidationContract -replace '\s+', ' '
+foreach ($required in @(
+    'mechanically verified packet',
+    'does not recompute schema, readability, receipts, activity counts, locators',
+    'scientifically ambiguous',
+    'supported proposition',
+    'strongest alternative explanation',
+    'information gain',
+    'next discriminator',
+    'A/B/C or named-Pro action',
+    'one canonical scientific decision record',
+    'existing `local_research/` ownership',
+    'Portfolio, index, README and continuity',
+    'pointer, navigation',
+    'mandatory packet schema or validator admission gate',
+    'ordinary B',
+    'named Pro triggers')) {
+    if (-not $scientificOnlyNormalized.Contains($required)) {
+        throw "Explorer scientific-only intake definition missing: $required"
+    }
+}
+$scientificOnlyPointer = 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
+foreach ($surface in @(
+    $independentResearchRole,
+    $explorerValidationSkill,
+    $independentResearchSkill,
+    $parallelResearch,
+    $publicHandoffContract)) {
+    if (-not $surface.Contains($scientificOnlyPointer)) {
+        throw 'Explorer scientific-only intake surface does not point to the single definition'
+    }
+}
+foreach ($required in @(
+    'project_validation_intake_boundary=scientific_only_after_cpm_technical_acceptance',
+    'project_validation_packet_dependency=cpm_technical_acceptance_and_mechanically_verified_packet',
+    'project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous',
+    'project_validation_technical_facts_not_recomputed=schema|readability|receipts|activity_counts|locators|retry|technical_consistency',
+    'canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership',
+    'portfolio_index_readme_continuity_role=pointer_navigation_barrier_only')) {
+    if (-not $independentResearchRole.Contains($required)) {
+        throw "Explorer role scientific-only key missing: $required"
+    }
+}
 foreach ($entry in @(
     @($independentResearchRole, 'runtime_authority=none'),
     @($independentResearchRole, 'agentify_transport_child=hmasd-agentify-transport'),

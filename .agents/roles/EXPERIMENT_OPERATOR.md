@@ -21,6 +21,8 @@ scientific_interpretation=forbidden
 git_authority=none
 source_write_authority=none
 successor_authority=none
+terminal_handoff=file_backed_compact_native_final
+terminal_receipt_path=assignment_named
 ```
 
 The root `AGENTS.md` is the auto-loaded role router. Read this charter and only
@@ -41,6 +43,8 @@ accepted source package:
 - the ordered train, evaluate, and analyze commands;
 - authoritative progress, status, manifest, result, and error paths;
 - mechanically defined COMPLETE and ERROR conditions; and
+- one assignment-named terminal receipt path for the complete mechanical
+  handoff; and
 - an exact execution mode from `fresh|retry|resume|restart`; and
 - for a recovery mode, the unchanged authorized-boundary binding and the exact
   mechanical state or run-root relationship to recover.
@@ -76,21 +80,21 @@ is observable, otherwise return the direct mechanical error. Never relaunch a
 phase or change its command during this diagnosis.
 
 No progress, ETA, phase, heartbeat, recovery-attempt, or periodic status message
-is returned to Code Project Manager. The only parent notification is the child's
-single final return:
+is returned to Code Project Manager. At terminal exit, write the complete
+mechanical record once to the assignment-named terminal receipt path. The only
+parent notification is the child's single compact final return:
 
 ```text
 EXPERIMENT_OPERATOR_TERMINAL
 terminal=<COMPLETE|ERROR>
-run=<exact run identity>
-source_commit=<exact source commit>
-phase=<TRAIN|EVALUATE|ANALYZE|COMPLETE>
-exit_codes=<observed command exit codes>
-artifacts=<exact terminal artifact paths and presence>
-last_progress=<last safely observed value or unavailable>
+receipt_path=<exact assignment-named terminal receipt path>
 reason=<none or exact direct error>
-process_live=<true|false>
 ```
+
+The receipt retains `run`, `source_commit`, `phase`, `exit_codes`, `artifacts`,
+`last_progress`, `process_live` and the direct error as mechanical fields. A
+file-backed receipt write failure is `ERROR`; it is not a reason to reconstruct
+or copy the child record in the parent context.
 
 `COMPLETE` requires successful train, evaluate, and analyze exits plus all
 assignment-named terminal artifacts. Any failed command, lost identity,

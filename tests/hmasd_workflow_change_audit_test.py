@@ -134,6 +134,67 @@ def test_workflow_review_is_one_pass_normal_path_advice() -> None:
     assert "Pro transport/recovery" not in skill
 
 
+def test_cpm_mechanical_child_is_file_bound_and_non_scientific() -> None:
+    router = (REPO / "AGENTS.md").read_text(encoding="utf-8")
+    session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(
+        encoding="utf-8"
+    )
+    session_normalized = " ".join(session.split())
+    workflow_map = (REPO / "docs/project/WORKFLOW_MAP.md").read_text(encoding="utf-8")
+    incidents = (
+        REPO / "docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md"
+    ).read_text(encoding="utf-8")
+
+    for required in (
+        "cpm_mechanical_child=hmasd-cpm-mechanical",
+        "cpm_mechanical_parent=code_project_manager",
+        "cpm_mechanical_assignment=CPM_MECHANICAL_TASK_ASSIGNMENT",
+        "cpm_mechanical_assignment_fields=spec_path|result_path",
+        "cpm_mechanical_result=CPM_MECHANICAL_TASK_RESULT",
+        "cpm_mechanical_result_fields=status|result_path|error",
+        "cpm_mechanical_terminal_status=COMPLETE|ERROR",
+        "cpm_mechanical_wait_visibility=silent_until_terminal_native_final",
+        "cpm_mechanical_write_scope=assignment_named_temporary_outputs_only",
+        "cpm_mechanical_acceptance_authority=none",
+        "cpm_mechanical_git_authority=none",
+        "cpm_mechanical_scientific_authority=none",
+        "cpm_mechanical_runtime_authority=no_experiment_no_readiness_no_agentify",
+        "cpm_mechanical_finalize_owner=code_project_manager",
+        "cpm_mechanical_activation=after_fresh_profile_reload",
+        "cpm_mechanical_active_research_state_effect=none",
+        "hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe",
+    ):
+        assert required in router
+
+    for required in (
+        "CPM_MECHANICAL_TASK_ASSIGNMENT",
+        "CPM_MECHANICAL_TASK_RESULT",
+        "spec_path|result_path",
+        "status|result_path|error",
+        "silent until one native terminal return",
+        "no active research-state effect",
+    ):
+        assert required in session_normalized
+
+    for required in (
+        "hmasd-cpm-mechanical",
+        "cpm_mechanical_assignment=CPM_MECHANICAL_TASK_ASSIGNMENT",
+        "cpm_mechanical_result=CPM_MECHANICAL_TASK_RESULT",
+        "typed temporary receipt returns to CPM",
+        "no active research-state effect",
+    ):
+        assert required in workflow_map
+
+    for required in (
+        "EXPLORER_MECHANICAL_OVERLOAD",
+        "TICKET_MODEL_OUTPUT_TRUNCATION",
+        "NONBLOCKING",
+        "closed by this accepted batch",
+        "CLOSED",
+    ):
+        assert required in incidents
+
+
 @pytest.mark.parametrize("breakage, expected", [
     ("missing_role", "references missing role"),
     ("orphan_profile", "unregistered profile"),

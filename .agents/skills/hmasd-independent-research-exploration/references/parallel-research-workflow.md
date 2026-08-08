@@ -18,6 +18,7 @@ parent_conversation_history=background_only_not_task_authority
 restart_identity=role|model|current_task
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
 continuity_owner=independent_research_explorer
+project_validation_intake_contract=docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md
 ```
 
 ## Shared intake and barrier
@@ -130,6 +131,13 @@ continuity.
     opportunity classes are closed. Resource exhaustion is partial, not
     convergence. Return the multi-direction portfolio and exact residual gaps;
     never force an affirmative result or automatically promote it.
+
+## Scientific-only project-validation intake
+
+The intake semantics live only in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. This parallel reference
+owns only barrier timing and continuity pointers; it does not duplicate the
+scientific decision or technical packet rules.
 
 ## Candidate-validation methodology
 

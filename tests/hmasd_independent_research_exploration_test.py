@@ -682,3 +682,67 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "docs/project/handoffs/README.md",
     ):
         assert required in workspace
+
+
+def test_scientific_only_intake_boundary_uses_one_explorer_decision_record() -> None:
+    role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+        encoding="utf-8"
+    )
+    validation_skill = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-explorer-project-validation"
+        / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    exploration_skill = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    parallel = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md"
+    ).read_text(encoding="utf-8")
+    contract = (
+        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    ).read_text(encoding="utf-8")
+    handoffs = (REPO / "docs" / "project" / "handoffs" / "README.md").read_text(
+        encoding="utf-8"
+    )
+
+    normalized_contract = " ".join(contract.split())
+    for required in (
+        "CPM's mechanically verified packet",
+        "does not recompute schema, readability, receipts, activity counts, locators",
+        "scientifically ambiguous",
+        "supported proposition",
+        "strongest alternative explanation",
+        "information gain",
+        "next discriminator",
+        "A/B/C or named-Pro action",
+        "one canonical scientific decision record",
+        "existing `local_research/` ownership",
+        "Portfolio, index, README and continuity",
+        "pointer, navigation",
+        "mandatory packet schema or validator admission gate",
+        "ordinary B",
+        "named Pro triggers",
+    ):
+        assert required in normalized_contract, f"missing defining intake clause: {required}"
+
+    pointer = "docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    for surface in (role, validation_skill, exploration_skill, parallel, handoffs):
+        assert pointer in surface, "scientific-only intake surface must point to its single source"
+
+    assert "project_validation_intake_boundary=scientific_only_after_cpm_technical_acceptance" in role
+    assert "project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous" in role
+    assert "canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership" in role
+    assert "portfolio_index_readme_continuity_role=pointer_navigation_barrier_only" in role
+    assert "does not invoke External Pro" in " ".join(contract.split())

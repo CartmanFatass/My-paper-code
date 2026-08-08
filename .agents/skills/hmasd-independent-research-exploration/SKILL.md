@@ -304,6 +304,14 @@ dispatch implementation or advance the formal workflow.
 
 ## Project-validation handoff (advisory only)
 
+### Scientific-only intake after technical acceptance
+
+Use the single intake contract at
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer consumes the
+CPM-accepted mechanical packet, records its one scientific decision, and does
+not reproduce technical validation or scientific reasoning across derived
+views.
+
 When one or more mature candidates are ready for project intake, load
 `hmasd-explorer-project-validation`. Write self-contained semantic briefs under
 `temp/handoffs/explorer_to_code_manager/`; an optional manifest lists

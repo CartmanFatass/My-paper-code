@@ -15,6 +15,8 @@ git_authority=none
 acceptance_authority=none
 readiness_phase_executor=wrapper_run_only
 readiness_receipt_finalizer=wrapper_finalize_only
+terminal_handoff=file_backed_compact_native_final
+terminal_receipt_path=assignment_named_final_receipt
 ```
 
 Read the root router, the exact assignment, the registered profile, this
@@ -56,11 +58,28 @@ Repeating the same finalizer input may be idempotent and same-content only; it
 reruns no phase. Do not elevate `run`, because its candidate toolchain and
 cache environment must remain unchanged.
 
+The final Git-private receipt is the file-backed terminal handoff. Keep the
+native final silent while the wrapper is live; at terminal exit return only a
+compact status, the exact receipt path (when finalization succeeded), and the
+first direct failure (when it did not). The receipt retains the full typed
+phase, invocation, cleanup and candidate evidence. Do not transcribe model or
+tool output into a parent file or reconstruct the receipt with `apply_patch`.
+
+The compact native terminal shape is:
+
+```text
+VERIFIER_TERMINAL
+terminal=<COMPLETE|ERROR>
+receipt_path=<exact final receipt path or unavailable>
+reason=<none or first direct failure>
+```
+
 Workspace write authority is limited to the exact proof-sized exercise root and
 the readiness script's Git-private receipt. Never edit source, tests,
 project-control files or Git-tracked state. Do not repair failures, launch
 unassigned or formal compute, contact another task, invoke Skills, spawn
 children or accept the package. Historical receipts may be checked with the
-read-only `check --receipt` interface. Return either the successful receipt and
-exact command evidence, or the first causal failure without interpretation;
-Code Project Manager classifies the failure and alone accepts the code.
+read-only `check --receipt` interface. Return the compact terminal shape; the
+successful receipt and exact command evidence remain file-backed, or return the
+first causal failure without interpretation when no receipt exists. Code Project
+Manager classifies the failure and alone accepts the code.

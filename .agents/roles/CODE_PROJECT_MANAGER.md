@@ -38,6 +38,10 @@ code_children=code_scout|implementer|reviewer|verifier
 routine_implementation_child=hmasd-implementer-terra
 protected_implementation_child=hmasd-implementer
 experiment_child=hmasd-experiment-operator
+mechanical_child=hmasd-cpm-mechanical
+mechanical_assignment_authority=exclusive
+mechanical_terminal_receipt=required
+ticket_finalize_integrate=direct_after_acceptance
 child_acceptance_authority=none
 one_artifact_one_acceptance_owner=true
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
@@ -264,6 +268,20 @@ that state machine; it chooses bounded reassignment for an operational failure
 or implementer repair for a code defect, then
 requires full verification on the new commit. It does not use runtime
 preflight as an incremental code debugger.
+
+For deterministic inspection, check collection, result extraction, handoff
+preparation and ticket preparation, Code Project Manager delegates one exact
+mechanical assignment to the registered `hmasd-cpm-mechanical` child and reads
+only its terminal receipt/result. CPM remains the orchestrator, engineering and
+technical-judgment owner, exact-assignment author, repair/retry chooser, sole
+technical/mechanical acceptance owner and sole code/Git/canonical-state
+integrator. The mechanical child has no Git or acceptance authority. CPM never
+transcribes model or tool output into files, reconstructs child files with
+`apply_patch`, runs raw duplicate worktree status, or manually reconstructs
+tool state. After acceptance, CPM invokes the ticket
+`finalize-integrate` command directly; the child does not integrate or accept
+its result.
+
 An unsuccessful phase is candidate evidence. A failure before `run` begins or
 during zero-compute finalization is an operational invocation failure. Code
 Project Manager preserves that distinction and never repairs source merely to
@@ -278,7 +296,10 @@ acceptance owner.
 ## Mechanical execution and external review
 
 For an experiment, CPM supplies one complete run assignment and the Experiment
-Operator alone executes `train -> evaluate -> analyze`. For formal or
+Operator exclusively executes `train -> evaluate -> analyze`. The readiness
+Verifier exclusively executes the ordered six-phase readiness wrapper, and
+Agentify Transport exclusively owns formal/Explorer review transport. These
+boundaries are separate from the CPM mechanical child. For formal or
 Explorer-to-project reviews, CPM freezes each standalone question and writes
 one minimal ordered batch file containing exactly `provider|question_paths`,
 then chooses one exact `results_path`. CPM dispatches the reusable registered
@@ -339,6 +360,11 @@ session workspace contract. Live handoff results never enter Git.
   portfolio or expand formal-compute authority.
 - Delegate technical acceptance, project-state acceptance or Git integration
   to a child or External Pro.
+- Delegate train/evaluate/analyze, six-phase readiness, or Agentify review
+  transport to the CPM mechanical child; those remain exclusively owned by
+  their registered operators.
+- Transcribe model/tool output, reconstruct child files with `apply_patch`, run
+  raw duplicate worktree status, or manually rebuild mechanical tool state.
 - Read `local_research/`, substitute a different scientific treatment, infer an
   omitted action or execute work outside the Explorer brief's explicit task.
 - Preserve obsolete compatibility paths, create hash handoffs, poll another

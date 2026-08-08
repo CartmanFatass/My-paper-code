@@ -12,6 +12,9 @@ $manager = Read-RepoFile '.agents/roles/WORKFLOW_DESIGN_MANAGER.md'
 $skill = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/SKILL.md'
 $harness = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py'
 $workflowMap = Read-RepoFile 'docs/project/WORKFLOW_MAP.md'
+$router = Read-RepoFile 'AGENTS.md'
+$sessionContract = Read-RepoFile 'docs/project/SESSION_WORKSPACE_CONTRACT.md'
+$defectQueue = Read-RepoFile 'docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md'
 
 $profiles = @(
     @('.agents/roles/WORKFLOW_AUDITOR.md', '.codex/agents/hmasd-workflow-auditor.toml', 'hmasd-workflow-auditor', '[agents."HMASDWorkflowAuditor"]', 'gpt-5.6-luna', 'high', 'read-only', 'WORKFLOW_IMPACT_PACKET'),
@@ -122,6 +125,47 @@ foreach ($required in @(
     if (-not (($workflowMap -replace '\s+', ' ').ToLowerInvariant()).Contains($required.ToLowerInvariant())) {
         throw "Workflow Map contract missing: $required"
     }
+}
+
+foreach ($required in @(
+    'cpm_mechanical_child=hmasd-cpm-mechanical',
+    'cpm_mechanical_parent=code_project_manager',
+    'cpm_mechanical_assignment=CPM_MECHANICAL_TASK_ASSIGNMENT',
+    'cpm_mechanical_assignment_fields=spec_path|result_path',
+    'cpm_mechanical_result=CPM_MECHANICAL_TASK_RESULT',
+    'cpm_mechanical_result_fields=status|result_path|error',
+    'cpm_mechanical_terminal_status=COMPLETE|ERROR',
+    'cpm_mechanical_wait_visibility=silent_until_terminal_native_final',
+    'cpm_mechanical_write_scope=assignment_named_temporary_outputs_only',
+    'cpm_mechanical_acceptance_authority=none',
+    'cpm_mechanical_git_authority=none',
+    'cpm_mechanical_scientific_authority=none',
+    'cpm_mechanical_runtime_authority=no_experiment_no_readiness_no_agentify',
+    'cpm_mechanical_finalize_owner=code_project_manager',
+    'cpm_mechanical_activation=after_fresh_profile_reload',
+    'cpm_mechanical_active_research_state_effect=none',
+    'hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe')) {
+    if (-not $router.Contains($required)) { throw "Router mechanical child contract missing: $required" }
+}
+
+foreach ($required in @(
+    'CPM_MECHANICAL_TASK_ASSIGNMENT',
+    'CPM_MECHANICAL_TASK_RESULT',
+    'spec_path|result_path',
+    'status|result_path|error',
+    'silent until one native terminal return',
+    'no active research-state effect')) {
+    if (-not (($sessionContract -replace '\s+', ' ').Contains($required))) {
+        throw "Session workspace mechanical contract missing: $required"
+    }
+}
+
+foreach ($required in @(
+    'EXPLORER_MECHANICAL_OVERLOAD',
+    'TICKET_MODEL_OUTPUT_TRUNCATION',
+    'NONBLOCKING',
+    'CLOSED')) {
+    if (-not $defectQueue.Contains($required)) { throw "Workflow incident log entry missing: $required" }
 }
 
 $normalizedMaintainabilityContract = (($manager + "`n" + $skill) -replace '\s+', ' ')

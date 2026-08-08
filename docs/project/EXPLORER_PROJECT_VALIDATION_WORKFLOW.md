@@ -14,8 +14,31 @@ External Pro owns scientific choices inside each submitted review boundary.
 Workflow Design Manager owns this stable interface, not its live handoff
 content.
 
-The tracked stable contract is `docs/project/handoffs/README.md`. Live exchange
-files use the ignored shared root `temp/handoffs/`:
+## Scientific-only intake boundary
+
+This boundary is prospective and begins after CPM technical acceptance. Explorer
+relies on CPM's mechanically verified packet and does not recompute schema,
+readability, receipts, activity counts, locators, retry history or technical
+consistency. Explorer may revisit one of those technical facts only when a
+scientifically ambiguous fact changes its interpretation; CPM remains the sole
+technical acceptance owner.
+
+Explorer alone performs the advisory scientific interpretation: supported
+proposition, strongest alternative explanation, information gain, next
+discriminator and the selected A/B/C or named-Pro action. For each accepted
+packet, Explorer writes exactly one canonical scientific decision record within
+the candidate's existing `local_research/` ownership. Portfolio, index, README
+and continuity surfaces are pointer, navigation or phase-barrier views and do
+not repeat scientific reasoning.
+
+This boundary is semantic guidance rather than a mandatory packet schema or
+validator admission gate. This boundary does not invoke External Pro, migrate
+research records, change the active direction or alter ordinary B iteration. Existing named
+Pro triggers remain unchanged.
+
+This document is the single defining source for scientific-only intake. The
+tracked exchange-file contract is `docs/project/handoffs/README.md`; live files
+use the ignored shared root `temp/handoffs/`:
 
 - `temp/handoffs/explorer_to_code_manager/`: Explorer writes and deletes its own files; CPM
   reads them.

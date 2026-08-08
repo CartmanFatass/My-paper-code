@@ -17,6 +17,13 @@ Same-file concurrent writes are forbidden. The sender deletes the exchange copy
 after intake; live files never enter Git. Canonical records stay with their
 owners, with no handoff history tree.
 
+## Scientific-only intake boundary
+
+Scientific intake is defined once in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. This handoff contract
+owns only the exchange-file boundary and does not duplicate scientific decisions
+or CPM's technical packet validation.
+
 ## Semantic briefs
 
 Markdown, JSON and receiver-readable attachments are allowed. A useful brief

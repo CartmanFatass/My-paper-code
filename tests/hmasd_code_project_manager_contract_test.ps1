@@ -251,6 +251,21 @@ $codeRequired = @(
     'reuses the unchanged batch file',
     'Page, model, send, wait and recovery details remain outside CPM context',
     'experiment_child=hmasd-experiment-operator',
+    'mechanical_child=hmasd-cpm-mechanical',
+    'mechanical_assignment_authority=exclusive',
+    'mechanical_terminal_receipt=required',
+    'ticket_finalize_integrate=direct_after_acceptance',
+    'reads only its terminal receipt/result',
+    'orchestrator, engineering and technical-judgment owner',
+    'exact-assignment author',
+    'repair/retry chooser',
+    'sole technical/mechanical acceptance owner',
+    'sole code/Git/canonical-state integrator',
+    'transcribes model or tool output',
+    'reconstructs child files with',
+    'raw duplicate worktree status',
+    'manually reconstructs tool state',
+    '`finalize-integrate` command directly',
     'CODE_ACCEPTED',
     'CODE_SCIENCE_INDEX.md',
     'execution_readiness_owner=code_project_manager',
@@ -316,6 +331,28 @@ foreach ($required in @(
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill Agentify child contract missing: $required"
     }
+}
+foreach ($required in @(
+    '## CPM mechanical protocol',
+    'hmasd-cpm-mechanical',
+    'deterministic inspection, check collection, result extraction, handoff preparation and ticket preparation',
+    'file-backed and compact',
+    'schema_version|status|assignment_id|task_class|attempt_id|result_path|observations|output_paths|log_paths|first_failure|retry_class|exit_code',
+    'working_directory',
+    'allowed_read_paths',
+    'allowed_write_paths',
+    'run --spec <json> --result <json>',
+    'performs no Git or acceptance',
+    'finalize-integrate',
+    'Experiment Operator remains exclusive',
+    'readiness Verifier remains exclusive',
+    'Agentify Transport remains separate')) {
+    if (-not $agileNormalized.Contains($required)) {
+        throw "Agile Skill mechanical protocol missing: $required"
+    }
+}
+if ($agile.Contains('no relay or completion receipt exists')) {
+    throw 'Agile Skill retains stale no-completion-receipt wording'
 }
 
 $retiredArchitectureGates = @(
@@ -680,6 +717,14 @@ foreach ($required in @(
     'sum of the six phase timeouts plus 60 seconds',
     'exact proof-sized exercise root',
     "readiness script's Git-private receipt",
+    'terminal_handoff=file_backed_compact_native_final',
+    'terminal_receipt_path=assignment_named_final_receipt',
+    'file-backed terminal handoff',
+    'compact status',
+    'VERIFIER_TERMINAL',
+    'receipt_path=<exact final receipt path or unavailable>',
+    'first direct failure',
+    'Do not transcribe model or',
     'Code Project Manager classifies the failure and alone accepts the code')) {
     if (-not $verifierRoleNormalized.Contains($required)) {
         throw "Verifier role missing execution-readiness boundary: $required"

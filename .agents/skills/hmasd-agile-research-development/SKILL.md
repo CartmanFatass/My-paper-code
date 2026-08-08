@@ -72,6 +72,31 @@ the unchanged batch file. Page, model, send, wait and recovery details never
 enter CPM context, and no separate persistent task, task-id return field,
 cross-task result relay, or polling/progress loop is part of this interface.
 
+## CPM mechanical protocol
+
+Code Project Manager remains the orchestrator, engineering and technical-
+judgment owner, exact-assignment author, repair/retry chooser, sole
+technical/mechanical acceptance owner and sole code/Git/canonical-state
+integrator. For deterministic inspection, check collection, result extraction,
+handoff preparation and ticket preparation, it delegates one exact assignment
+to the registered `hmasd-cpm-mechanical` child and reads only its terminal
+receipt/result. The common mechanical result is file-backed and compact:
+`schema_version|status|assignment_id|task_class|attempt_id|result_path|observations|output_paths|log_paths|first_failure|retry_class|exit_code`.
+The assignment binds `schema_version=1`, `assignment_id`, `task_class`,
+`attempt_id`, `working_directory`, `allowed_read_paths`, `allowed_write_paths`,
+`result_path` and `task`, and executes one exact `run --spec <json> --result
+<json>` invocation.
+The child remains silent while live, performs no Git or acceptance, and never
+integrates files.
+
+CPM does not transcribe model/tool output into files, reconstruct child files
+with `apply_patch`, run raw duplicate worktree status, or manually reconstruct
+tool state. After technical acceptance, CPM invokes the ticket
+`finalize-integrate` command directly. The Experiment Operator remains
+exclusive for `train -> evaluate -> analyze`, the readiness Verifier remains
+exclusive for the six ordered readiness phases, and Agentify Transport remains
+separate for formal/Explorer review transport.
+
 ## Operating loop
 
 1. **Align.** For conclusion-bearing work, require an exact Pro scientific
@@ -345,8 +370,11 @@ slice.
   ticket, an unregistered destination, a redirected path, identity mismatch or
   incomplete cleanup. Callers never run raw `worktree remove` or `worktree
   prune`, manually delete the path, or reuse the retired assignment.
-- Children do not perform Git. Code Project Manager integrates the exact accepted
-  file set directly; no relay or completion receipt exists.
+- Children do not perform Git or acceptance. Code Project Manager reads the
+  file-backed terminal mechanical receipt/result and, after acceptance,
+  integrates the exact accepted file set directly with ticket
+  `finalize-integrate`; this local receipt is evidence only and never delegates
+  acceptance.
 - Do not compute per-file hashes for handoff. Exact paths, the staged path set,
   and the resulting Git commit are sufficient code identity.
 - Subtasks close on evidence plus one fresh Code Project Manager check. After

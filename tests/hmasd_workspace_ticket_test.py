@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -62,6 +63,26 @@ def retire(ticket: Path, assignment: str, expected_head: str) -> dict[str, objec
             expected_head=expected_head,
         )
     )
+
+
+def prepare_integrate(
+    ticket: Path,
+    assignment: str,
+    target: Path,
+    receipt: Path,
+) -> dict[str, object]:
+    return ticketing.prepare_integrate(
+        argparse.Namespace(
+            ticket=ticket,
+            assignment_id=assignment,
+            target_repo=target,
+            receipt=receipt,
+        )
+    )
+
+
+def finalize_integrate(receipt: Path) -> dict[str, object]:
+    return ticketing.finalize_integrate(argparse.Namespace(receipt=receipt))
 
 
 def test_provision_resolve_and_verify_exact_scope(
@@ -346,7 +367,14 @@ def test_long_checkout_uses_command_local_longpaths(
         argparse.Namespace(ticket=Path(str(created["ticket"])), assignment_id="TASK_LONG_PATH")
     )
     assert verified["git_visible_changed_paths"] == []
-    assert git(source, "config", "core.longpaths") == "false"
+    stored_config = subprocess.run(
+        ["git", "-C", str(source), "config", "core.longpaths"],
+        check=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+    ).stdout.strip()
+    assert stored_config == "false"
     assert any(
         args[:4] == ("-c", "core.longpaths=true", "worktree", "add")
         for args in calls
@@ -653,3 +681,197 @@ def test_partial_recovery_fails_if_registered_state_remains_after_remove(
     assert not (worktree_root / "TASK_AFTER_RESIDUAL_STATE").exists()
     new_ticket = source / ".git" / ticketing.TICKET_DIRECTORY / "TASK_AFTER_RESIDUAL_STATE.json"
     assert not new_ticket.exists()
+
+
+def test_prepare_finalize_integrates_new_modified_deleted_and_is_idempotent(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    (source / "delete.txt").write_text("delete me\n", encoding="utf-8")
+    git(source, "add", "delete.txt")
+    git(source, "commit", "-m", "add delete fixture")
+    base = git(source, "rev-parse", "HEAD")
+    created = provision(
+        monkeypatch,
+        source,
+        worktree_root,
+        base,
+        assignment="TASK_INTEGRATE_BASIC",
+        allowed=("seed.txt", "delete.txt", "pkg/new.txt"),
+    )
+    worktree = Path(str(created["resolved_worktree"]))
+    ticket = Path(str(created["ticket"]))
+    (worktree / "seed.txt").write_text("modified\n", encoding="utf-8")
+    (worktree / "delete.txt").unlink()
+    (worktree / "pkg").mkdir()
+    (worktree / "pkg" / "new.txt").write_bytes(b"new\x00bytes")
+    receipt = tmp_path / "integration.json"
+
+    prepared = prepare_integrate(ticket, "TASK_INTEGRATE_BASIC", source, receipt)
+    assert prepared["status"] == "WORKSPACE_INTEGRATION_READY"
+    assert prepared["concrete_changed_paths"] == ["delete.txt", "pkg/new.txt", "seed.txt"]
+    assert prepared["operations"] == [
+        {"path": "delete.txt", "operation": "DELETE"},
+        {"path": "pkg/new.txt", "operation": "ADD"},
+        {"path": "seed.txt", "operation": "MODIFY"},
+    ]
+    result = finalize_integrate(receipt)
+    assert result["status"] == "WORKSPACE_INTEGRATED"
+    assert not (source / "delete.txt").exists()
+    assert (source / "pkg" / "new.txt").read_bytes() == b"new\x00bytes"
+    assert (source / "seed.txt").read_text(encoding="utf-8") == "modified\n"
+    assert finalize_integrate(receipt)["status"] == "WORKSPACE_ALREADY_INTEGRATED"
+
+
+def test_integrate_preserves_unrelated_target_head_and_dirty_paths(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    created = provision(
+        monkeypatch,
+        source,
+        worktree_root,
+        base,
+        assignment="TASK_INTEGRATE_UNRELATED",
+        allowed=("seed.txt",),
+    )
+    worktree = Path(str(created["resolved_worktree"]))
+    ticket = Path(str(created["ticket"]))
+    (worktree / "seed.txt").write_text("integrated\n", encoding="utf-8")
+    (source / "unrelated.txt").write_text("head advance\n", encoding="utf-8")
+    git(source, "add", "unrelated.txt")
+    git(source, "commit", "-m", "unrelated target advance")
+    (source / "unrelated-dirty.txt").write_text("keep dirty\n", encoding="utf-8")
+    receipt = tmp_path / "integration-unrelated.json"
+    prepare_integrate(ticket, "TASK_INTEGRATE_UNRELATED", source, receipt)
+    result = finalize_integrate(receipt)
+    assert result["status"] == "WORKSPACE_INTEGRATED"
+    assert (source / "unrelated.txt").read_text(encoding="utf-8") == "head advance\n"
+    assert (source / "unrelated-dirty.txt").read_text(encoding="utf-8") == "keep dirty\n"
+    assert (source / "seed.txt").read_text(encoding="utf-8") == "integrated\n"
+
+
+def test_integrated_receipt_rejects_target_restored_to_base(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    created = provision(
+        monkeypatch,
+        source,
+        worktree_root,
+        base,
+        assignment="TASK_INTEGRATE_RESTORED",
+        allowed=("seed.txt",),
+    )
+    worktree = Path(str(created["resolved_worktree"]))
+    ticket = Path(str(created["ticket"]))
+    (worktree / "seed.txt").write_text("integrated\n", encoding="utf-8")
+    receipt = tmp_path / "integration-restored.json"
+    prepare_integrate(ticket, "TASK_INTEGRATE_RESTORED", source, receipt)
+    assert finalize_integrate(receipt)["status"] == "WORKSPACE_INTEGRATED"
+
+    (source / "seed.txt").write_text("seed\n", encoding="utf-8")
+    with pytest.raises(ticketing.IntegrationError, match="INTEGRATION_VERIFY_FAILED"):
+        finalize_integrate(receipt)
+
+
+def test_integrate_rejects_target_allowed_divergence_without_mutation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    created = provision(
+        monkeypatch,
+        source,
+        worktree_root,
+        base,
+        assignment="TASK_INTEGRATE_DIVERGENCE",
+        allowed=("seed.txt",),
+    )
+    worktree = Path(str(created["resolved_worktree"]))
+    ticket = Path(str(created["ticket"]))
+    (worktree / "seed.txt").write_text("source\n", encoding="utf-8")
+    receipt = tmp_path / "integration-divergence.json"
+    prepare_integrate(ticket, "TASK_INTEGRATE_DIVERGENCE", source, receipt)
+    (source / "seed.txt").write_text("target\n", encoding="utf-8")
+    git(source, "add", "seed.txt")
+    git(source, "commit", "-m", "allowed target divergence")
+    with pytest.raises(ticketing.IntegrationError, match="TARGET_ALLOWED_DIVERGENCE"):
+        finalize_integrate(receipt)
+    assert (source / "seed.txt").read_text(encoding="utf-8") == "target\n"
+    assert not (source / "pkg").exists()
+
+
+def test_integrate_rejects_source_drift_and_scope_violation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    drift = provision(
+        monkeypatch,
+        source,
+        worktree_root,
+        base,
+        assignment="TASK_INTEGRATE_SOURCE_DRIFT",
+        allowed=("seed.txt",),
+    )
+    drift_worktree = Path(str(drift["resolved_worktree"]))
+    git(drift_worktree, "commit", "--allow-empty", "-m", "source drift")
+    with pytest.raises(ticketing.IntegrationError, match="SOURCE_DRIFT"):
+        prepare_integrate(
+            Path(str(drift["ticket"])),
+            "TASK_INTEGRATE_SOURCE_DRIFT",
+            source,
+            tmp_path / "drift.json",
+        )
+
+    scoped = provision(
+        monkeypatch,
+        source,
+        worktree_root,
+        base,
+        assignment="TASK_INTEGRATE_SCOPE",
+        allowed=("seed.txt",),
+    )
+    scoped_worktree = Path(str(scoped["resolved_worktree"]))
+    (scoped_worktree / "outside.txt").write_text("blocked\n", encoding="utf-8")
+    with pytest.raises(ticketing.IntegrationError, match="SOURCE_SCOPE_VIOLATION"):
+        prepare_integrate(
+            Path(str(scoped["ticket"])),
+            "TASK_INTEGRATE_SCOPE",
+            source,
+            tmp_path / "scope.json",
+        )
+
+
+def test_integrate_partial_failure_rolls_back_files_and_directories(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, worktree_root, base = repository(tmp_path)
+    created = provision(
+        monkeypatch,
+        source,
+        worktree_root,
+        base,
+        assignment="TASK_INTEGRATE_ROLLBACK",
+        allowed=("seed.txt", "pkg/new.txt"),
+    )
+    worktree = Path(str(created["resolved_worktree"]))
+    (worktree / "seed.txt").write_text("source\n", encoding="utf-8")
+    (worktree / "pkg").mkdir()
+    (worktree / "pkg" / "new.txt").write_text("new\n", encoding="utf-8")
+    receipt = tmp_path / "integration-rollback.json"
+    prepare_integrate(Path(str(created["ticket"])), "TASK_INTEGRATE_ROLLBACK", source, receipt)
+    real_copy = ticketing.shutil.copyfile
+    calls = 0
+
+    def fail_second_copy(src: Path, dst: Path, *args: object, **kwargs: object) -> str:
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            raise OSError("simulated copy failure")
+        return real_copy(src, dst, *args, **kwargs)
+
+    monkeypatch.setattr(ticketing.shutil, "copyfile", fail_second_copy)
+    with pytest.raises(ticketing.IntegrationError, match="INTEGRATION_FAILED"):
+        finalize_integrate(receipt)
+    assert (source / "seed.txt").read_text(encoding="utf-8") == "seed\n"
+    assert not (source / "pkg").exists()

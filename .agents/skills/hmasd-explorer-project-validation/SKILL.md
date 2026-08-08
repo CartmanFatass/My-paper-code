@@ -11,6 +11,14 @@ queue engine or state machine. Explorer's explicit instruction authorizes CPM
 to execute the named project-validation treatment; it does not give Explorer
 direct code/runtime control or promote canonical science.
 
+## Scientific-only intake boundary
+
+Apply the single stable rule in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`: consume CPM's accepted
+mechanical packet, perform only Explorer-owned scientific interpretation, write
+one canonical scientific decision record, and keep derived views pointer-only.
+This Skill adds no second copy of that rule or technical admission gate.
+
 ## Normal path
 
 Explorer writes one self-contained, human/model-readable Markdown or JSON brief

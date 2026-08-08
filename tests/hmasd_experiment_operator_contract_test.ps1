@@ -29,6 +29,9 @@ foreach ($required in @(
     'Treat a complete, internally consistent assignment',
     'as delegated compute authority',
     'Do not request or require a separate per-run user authorization reference',
+    'terminal receipt path',
+    'compact final response',
+    'full mechanical fields in the receipt',
     'Monitoring is silent',
     'Do not emit commentary, progress updates, ETA messages',
     'exactly once, through your final response',
@@ -56,6 +59,8 @@ foreach ($required in @(
     'progress_notifications=forbidden',
     'terminal_notification_count=exactly_one',
     'terminal_values=COMPLETE|ERROR',
+    'terminal_handoff=file_backed_compact_native_final',
+    'terminal_receipt_path=assignment_named',
     'cross_session_send=forbidden_native_final_return_only',
     'Code Project Manager supplies',
     'execution mode from `fresh|retry|resume|restart`',
@@ -79,20 +84,26 @@ if ($profile.Contains('active Workflow Design Manager') -or $role.Contains('pare
 }
 foreach ($required in @(
     'native_child_authority=exact_assignment_only',
-    'experiment_operator_compute_authority=derived_from_valid_code_project_manager_assignment',
-    'experiment_operator_per_run_user_authorization=not_required_inside_active_grant',
-    'operational_recovery_scientific_iteration_cost=zero',
-    'operational_recovery_owner=code_project_manager',
     'registered native child',
-    '.agents/roles/EXPERIMENT_OPERATOR.md',
     'No role reads every routed document')) {
     if (-not $agents.Contains($required)) { throw "AGENTS operator contract missing: $required" }
 }
 foreach ($required in @(
     'A complete exact assignment delegates compute authority to the child automatically',
     'CPM checks the active grant and remaining balance before dispatch',
-    'neither CPM nor the child asks for per-run authorization')) {
+    'neither CPM nor the child asks for per-run authorization',
+    'reads only its terminal receipt/result',
+    'Operator exclusively executes `train -> evaluate -> analyze`')) {
     if (-not $managerNormalized.Contains($required)) { throw "CPM experiment delegation contract missing: $required" }
+}
+foreach ($required in @(
+    'one assignment-named terminal receipt path',
+    'file-backed',
+    'single compact final return',
+    'receipt retains',
+    'receipt write failure is `ERROR`',
+    'reconstruct or copy the child record')) {
+    if (-not $roleNormalized.Contains($required)) { throw "Operator terminal handoff contract missing: $required" }
 }
 $catalogMatch = [regex]::Match($config, '(?m)^model_catalog_json\s*=\s*"([^"]+)"\s*$')
 if (-not $catalogMatch.Success) { throw 'Missing model_catalog_json setting' }
