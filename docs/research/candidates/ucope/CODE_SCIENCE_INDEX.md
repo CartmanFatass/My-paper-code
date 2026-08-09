@@ -176,3 +176,78 @@ does not turn that earlier certificate into the new A1 registered probe.
 Accepted source commit:
 `61f84b6f419df4c64078e37fdba9eff080a0361f`. The accepted result commit is the
 Git commit containing this index update and the byte-identical public result.
+
+## UCOPE-B1 implementation candidate
+
+Treatment `UCOPE-B1-PERSISTENT-COUNT-STATE-LEARNED-UTILITY` is implemented as
+a direction-local, `formal=false` train/evaluate/analyze package. This source
+entry records executable semantics only; no B1 full result or scientific
+disposition is represented by this implementation commit.
+
+The host owner is
+`experiments/candidates/ucope/persistent_count_state_host.py`. It executes one
+stateful five-transition block, precommits `E_S=E_L=2`, records only the four
+uncensored prefix first hits, freezes `d=N_L-N_S` before the sole policy call,
+rejects mixed executor/partner-policy/scheduler generations, keeps trial-5
+action/outcome/reward placeholders out of immutable ledger bytes, and discards
+the ledger at block close. Prefix periods are exactly `S,S,L,L`; trial-5
+physical-time AUC is `2` for an S hit, `1` for an L hit, and `0` otherwise.
+
+The controller/artifact owner is
+`experiments/candidates/ucope/persistent_count_state_learned_utility.py`.
+`COUNT_LEARNER` and `COUNT_BLIND_LEARNER` use the same zero-initialized
+float64 `5x2` table, sample-mean update, sealed balanced action tape, final-only
+checkpoint rule, training plan, reward and call budget. COUNT observes the
+frozen `d`; BLIND observes constant zero. The evaluation-only Bayes oracle has
+no training, checkpoint, label or realized-regime path. Persistent and
+trial-5-redraw replicas have separate controller state and deterministic
+SHA-derived tapes.
+
+Every retained evaluation row executes the real host path over the exact
+weighted 96-row persistent or 192-row redraw panel. Exact rational weights are
+the registered regime prior, prefix-history probability, redraw prior when
+applicable, and common-uniform masses `1/10,8/10,1/10`. Validators recompute
+training empirical means from the lossless sidecar, bind final checkpoints,
+and independently reconstruct every training producer row from its frozen
+manifest plan through the host literals. That reconstruction checks the sealed
+action, prefix marks, count, generation, ledger firewalls, trial-5 hit and
+physical-time return even if both learned-arm producer rows agree. Evaluation
+validation reconstructs panel completeness, exact weights, checkpoint-greedy
+actions and physical-time outcomes. Observed row comparisons derive the
+matching, version, reward, identity, state, equal-count, blind-invariance and
+nonclairvoyant-oracle witnesses; those are not unconditional assertions.
+
+The structured retained audit separates contract, leakage and calibration
+issues. Analysis applies those issue lists before later outcome gates, so the
+first three frozen labels are reachable and result-bearing. Result validation
+independently reproduces the audit without requiring a failed success gate to
+pass. The result envelope binds the claim, assignment, candidate, source/run
+identity, configuration, summary digests and artifact bindings. Registered
+evaluate and analyze reapply the tracked clean-HEAD source check; technical-only
+phases remain nonterminal.
+
+The registered cap encoded by the package is 65,536 training blocks / 327,680
+training transitions, 2,592 evaluation blocks / 12,960 evaluation transitions,
+68,128 total policy calls, and no search, retry, sweep, rescue or extra arm.
+`technical_only` uses a much smaller frozen exercise and always emits
+`branch=null`, `scientific_terminal_admitted=false`.
+
+### B1 traceability
+
+| Claim ID | Source symbol | Observable invariant | Focused evidence |
+|---|---|---|---|
+| `UCOPE_B1_HOST` | `PersistentCountStateHost` | Exactly five real transitions, fixed prefix, immutable version-closed ledger and pathwise physical-time AUC | `test_host_executes_exact_five_real_transitions_and_freezes_count_before_policy`; `test_host_rejects_mixed_or_midblock_versions_before_policy_and_discards_ledger` |
+| `UCOPE_B1_MATCHED_LEARNERS` | `TabularQController`; `observation`; `_training_plan` | Same float64 5x2 controller and paired sealed tapes; count access is the sole variable input | `test_controller_arms_are_exactly_matched_and_count_access_is_sole_delta`; `test_registered_training_tape_is_seed_deterministic_balanced_and_count_independent` |
+| `UCOPE_B1_REAL_RETURN_UPDATE` | `TabularQController.update`; `validate_train`; `validate_training_row_reconstruction` | Executed-cell Q equals retained empirical real return; each row reconstructs from manifest/host | `test_incremental_update_equals_logged_real_return_empirical_mean`; `test_training_row_reconstruction_rejects_independent_producer_tamper` |
+| `UCOPE_B1_EXACT_PANEL` | `_iter_panel_specs`; `_execute_panel_row`; `validate_evaluation` | Sole callback occurs inside host; complete normalized panels; oracle `26571/20000` persistent, `1` redraw; always-S `1` | `test_evaluation_policy_is_called_exactly_once_inside_host_without_action_injection`; `test_exact_panels_are_complete_normalized_and_oracle_matches_a1_boundary_values` |
+| `UCOPE_B1_CAP` | `expected_training_counts`; `expected_evaluation_counts`; `total_activity_counts` | Exact registered full call/transition cap and zero evidence search | `test_registered_and_smoke_activity_caps_are_exact` |
+| `UCOPE_B1_BRANCH` | `_retained_audit`; `select_branch_from_retained_audit`; `_branch_and_witnesses` | Structured retained issues reach contract, leakage and calibration labels before later gates | `test_integrated_retained_audit_artifact_reaches_each_early_branch`; `test_frozen_branch_precedence` |
+| `UCOPE_B1_LIFECYCLE` | `train`; `evaluate`; `analyze`; `validate_result_envelope_payload`; thin CLI | Write-once claim/artifacts; later full phases recheck clean source; terminal mode, identities, claim and artifact digests stay bound | `test_default_mode_result_envelope_rejects_terminal_identity_claim_and_artifact_drift`; `test_full_later_phases_reapply_clean_source_identity_but_technical_skips`; `test_gzip_lossless_rows_and_file_binding_reject_tamper` |
+
+Public source locators after CPM acceptance will be:
+
+- `experiments/candidates/ucope/persistent_count_state_host.py`
+- `experiments/candidates/ucope/persistent_count_state_learned_utility.py`
+- `scripts/run_ucope_b1_persistent_count_state_learned_utility.py`
+- `tests/experiments/candidates/ucope/test_persistent_count_state_learned_utility.py`
+- `docs/research/candidates/ucope/CODE_SCIENCE_INDEX.md`
