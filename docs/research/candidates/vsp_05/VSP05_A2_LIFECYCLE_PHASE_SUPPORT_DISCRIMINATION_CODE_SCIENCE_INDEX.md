@@ -5,6 +5,26 @@ This package implements the single frozen A2 treatment for
 discriminator. It does not contain a learner, optimizer, search, hypothetical
 transition, schedule tuning, or a second treatment.
 
+## Accepted full result and technical evidence
+
+The accepted full technical result has terminal label
+`CLOSED_LOOP_PATTERN_SURVIVES_THIS_PHASE_SHIFT`: exact historical-control
+reuse passed, `clean_two_sided_real_support_opened` is `false`, and
+`toy_route_must_park` is `true`. The complete compact public record is
+[`VSP05_A2_LIFECYCLE_PHASE_SUPPORT_DISCRIMINATION_RESULT.json`](VSP05_A2_LIFECYCLE_PHASE_SUPPORT_DISCRIMINATION_RESULT.json).
+
+- Treatment source is [`e40d1ed74751f6fbbbacc4ac109d174dfa14eb8a`](https://github.com/CartmanFatass/My-paper-code/blob/e40d1ed74751f6fbbbacc4ac109d174dfa14eb8a/experiments/candidates/vsp_05/lifecycle_phase_support_discrimination.py), with run identity `vsp05_a2_lifecycle_phase_support_e40d1ed7_r1`. The frozen [runner](https://github.com/CartmanFatass/My-paper-code/blob/e40d1ed74751f6fbbbacc4ac109d174dfa14eb8a/scripts/run_vsp05_a2_lifecycle_phase_support.py) and [focused tests](https://github.com/CartmanFatass/My-paper-code/blob/e40d1ed74751f6fbbbacc4ac109d174dfa14eb8a/tests/experiments/candidates/vsp_05/test_lifecycle_phase_support_discrimination.py) are bound to the same source revision.
+- The immutable reused A1 full control is source `1a09bccf9bd64c756865531bc55a871afa286dd3`, public-result revision `9f3c57f809a0c0ee11868e025adbeea762832a46`, and raw SHA-256 `d4ba7e00ae65c4f0cfd6f84b37c300e9e580868c42bd3c3f02eff20b0b3a3f2e`.
+- The new raw evidence is `logs/vsp05_a2_lifecycle_phase_support_e40d1ed7_r1/raw_result.json`, SHA-256 `117dcc2f20f5d3cf4dd4ccbb342626e3e5048fbdcfd20a86420952ef7249d1d2`: 432 episodes, 34,560 real environment transitions, and 15,896 proposal-policy/frontier rows.
+- The declared schedule and lineage receipts contain 864 shifted 20-to-19 leaves, 88 actually suppressed t19 control proposals, and 864 paired t40 rejoins. The known `STEP_HIGH/68102/20401022/key1` lineage records that suppression changes the t40 incumbent.
+- Learner calls, trainer calls, optimizer updates, and hypothetical environment transitions are all zero. The standard Operator `COMPLETE` receipt is `logs/vsp05_a2_lifecycle_phase_support_e40d1ed7_r1/operator_terminal_receipt.json`; CPM mechanical r3 verified it and the 82-transition technical-only equivalence receipt.
+- The bound evaluation and analysis evidence are `logs/vsp05_a2_lifecycle_phase_support_e40d1ed7_r1/evaluation_validation.json` and `logs/vsp05_a2_lifecycle_phase_support_e40d1ed7_r1/analysis.json`, respectively. The raw evidence retains the full zero-retaining tables, 864-row t40 pair table, and all 88 suppressed-t19 frontiers.
+
+This is a finite fixed A2 phase-intervention result only. It does not state
+scientific intake, prevalence, learner value, utility, return, generalization,
+superiority, C authorization, global impossibility, promotion or retirement,
+or a direction-wide conclusion.
+
 ## Frozen scientific delta
 
 The immutable accepted A1 full trace is the historical control. Its raw file
