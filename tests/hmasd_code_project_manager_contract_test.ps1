@@ -227,7 +227,10 @@ $routerRequired = @(
     'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
     'agentify_transport_result_fields=status|results_path|error',
     'agentify_transport_terminal_status=COMPLETE|ERROR',
-    'agentify_transport_wait_visibility=silent_until_terminal_native_final'
+    'agentify_transport_wait_visibility=silent_until_terminal_native_final',
+    'agentify_transport_conversation_semantics_owner=requester',
+    'agentify_transport_conversation_identity_source=provider_native',
+    'agentify_transport_tab_lifecycle_owner=agentify_transport_child_for_task_created_tabs_only'
 )
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
@@ -271,7 +274,6 @@ $codeRequired = @(
     'returns exactly once',
     'reads that file only after the terminal return',
     'reuses the unchanged batch file',
-    'Page, model, send, wait and recovery details remain outside CPM context',
     'experiment_child=hmasd-experiment-operator',
     'mechanical_child=hmasd-cpm-mechanical',
     'mechanical_assignment_authority=exclusive',
@@ -329,6 +331,20 @@ $codeRequired = @(
 )
 foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
+}
+
+# CPM owns conversation meaning; the child realizes the frozen brief.
+foreach ($required in @(
+    'CPM owns the technical/formal-review conversation intent for its questions.',
+    'one self-contained natural-language context brief that states for each question',
+    'CPM alone decides whether prior memory helps or contaminates the requested judgment',
+    'cannot infer same-direction grouping, scientific relationship, independence or future reuse',
+    'archives each raw response and returned conversation URL',
+    'later brief names an exact archived URL when CPM chooses continuation'
+)) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "CPM conversation authority contract missing: $required"
+    }
 }
 if ((Test-Path -LiteralPath $retiredProjectCognitionBootstrapPath) -or
     (Test-Path -LiteralPath $retiredAssignmentBriefExamplesPath)) {

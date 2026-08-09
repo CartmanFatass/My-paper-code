@@ -62,15 +62,31 @@ native child. CPM writes one ordered batch file containing exactly
 dispatches a
 self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` naming
 `batch_path|results_path` with `fork_turns=none`. The child owns page, model,
-send, wait and recovery mechanics; it is silent while live and emits no
-progress, commentary, collaboration, or repeated wait/poll handling. It
-returns exactly once through one terminal native final with `COMPLETE` or
-`ERROR`, carrying a conclusion followed by `AGENTIFY_REVIEW_BATCH_RESULT` fields
-`status|results_path|error`. The named result file retains its ordered raw
-response rows. CPM continues unrelated work and reads the file only after that
-terminal return, then performs mechanical archival and intake. Retries reuse
-the unchanged batch file. Page, model, send, wait and recovery details never
-enter CPM context, and no separate persistent task, task-id return field,
+send, wait, recovery and tab-cleanup mechanics; it is silent while live and
+emits no progress, commentary, collaboration, or repeated wait/poll handling.
+Before dispatch, CPM writes one self-contained natural-language context brief
+that states for each question whether it starts clean, continues
+an exact prior conversation URL, may run concurrently with named other
+questions, or must remain independent. CPM alone decides whether prior memory
+helps or contaminates the requested judgment and whether a returned
+conversation will be reused. This is semantic task meaning, not a
+`conversation_mode`, grouping field or other schema. The existing
+`context_path` anchor points to the local brief for transport realization; it
+adds no mandatory field, and transport does not include the local brief in
+provider payload.
+
+Transport may use operational judgment to realize the frozen brief, but cannot
+infer same-direction grouping, scientific relationship, independence or future
+reuse. It returns exactly once through one terminal native final with
+`COMPLETE` or `ERROR`, carrying a conclusion followed by
+`AGENTIFY_REVIEW_BATCH_RESULT` fields `status|results_path|error`. The named
+result file retains its ordered raw response rows. CPM continues unrelated work
+and reads the file only after that terminal return, archives raw responses and
+returned conversation URLs, and performs mechanical archival and intake. A
+later brief names an exact archived URL when CPM chooses continuation; absent
+that statement, the child must not guess from titles. Retries reuse the
+unchanged batch file. Page, model, send, wait, recovery and tab-cleanup details
+never enter CPM context, and no separate persistent task, task-id return field,
 cross-task result relay, or polling/progress loop is part of this interface.
 
 ## CPM mechanical protocol

@@ -21,7 +21,7 @@ exhaustive registry or procedure copy.
 | Workflow Reviewer | independent review of one coherent integrated batch | conclusion and advisory disposition for WDM, followed by optional findings evidence; no source edits or acceptance |
 | Code Project Manager (CPM) | code, runtime, technical acceptance and project-operation records | code/runtime/review artifacts plus CPM-owned mechanical receipts |
 | Independent Research Explorer | advisory research direction, methodology and research workspace | named research handoff; no workflow authority |
-| Agentify Transport child | batch-scoped transport mechanics in its requester-assigned workspace; WDM may parent only an exact workflow-acceptance smoke batch | raw transport result for CPM or Explorer, or direct smoke-test evidence for WDM |
+| Agentify Transport child | batch-scoped transport mechanics plus ephemeral task-owned tab lifecycle in its requester-assigned workspace; WDM may parent only an exact workflow-acceptance smoke batch | raw transport result for CPM or Explorer, or direct smoke-test evidence for WDM |
 | External Pro | bounded independent scientific judgment | exact review result within the submitted question boundary |
 
 The stable CPM mechanical interface is a CPM-only child boundary:
@@ -106,9 +106,18 @@ mechanical child through the exact file-only assignment/result boundary; the
 conclusion and temporary receipt return to CPM for sufficiency judgment,
 finalization and acceptance. The registered Agentify transport child remains a
 requester-owned batch capability rather than a separate owner lane; its full
-answer, conversation evidence and conclusion return to the requester. WDM does
-not absorb CPM/Explorer live review traffic or results. External Pro remains a
-separate scientific lane.
+answer, conversation evidence and conclusion return to the requester. The
+requester context brief freezes new-versus-exact-continuation, independence and
+permitted concurrency. The transport child observes provider-native
+conversation identity and realizes explicit intent while owning only ephemeral
+task-created tab lifecycle; it does not choose same-direction, independence,
+contamination or later-reuse meaning. Tabs are temporary containers rather than
+conversation memory or shared persistent state, and multiple requester-
+authorized Pro conversations may coexist. The child closes only tabs it created
+after full response capture and with no active generation, preserves
+default/pre-existing/unowned/active tabs, and returns conversation URLs to the
+requester for owner-decided later continuation. WDM does not absorb CPM/Explorer
+live review traffic or results. External Pro remains a separate scientific lane.
 
 The Explorer↔CPM direction-local context binding is defined once by
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer and CPM use

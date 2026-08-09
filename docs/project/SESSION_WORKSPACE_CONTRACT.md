@@ -177,6 +177,18 @@ polling, queue, monitor or inferred scan is allowed. A production requester
 copies the named result into its own canonical archive and performs its own
 scientific or mechanical intake.
 
+CPM or Explorer owns the natural-language context brief: it freezes whether a
+request is new or an exact continuation, its independence, and permitted
+concurrency. The transport child observes provider-native conversation identity
+and realizes explicit intent, but owns only ephemeral task-created tab
+lifecycle; it does not choose same-direction, independence, contamination, or
+later-reuse meaning. Browser tabs are containers, not conversation memory or
+shared persistent state. Multiple requester-authorized Pro conversations may
+coexist. The child closes only tabs it created after full response capture and
+when no generation is active; default, pre-existing, unowned and active tabs
+remain open. Conversation URLs return to the requester for owner-decided later
+continuation.
+
 The CPM mechanical child uses the same file-only boundary: CPM writes one
 self-contained natural-language brief, one exact `spec_path` and one exact
 `result_path` under its temporary workspace. The brief carries purpose,

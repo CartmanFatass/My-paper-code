@@ -50,6 +50,7 @@ $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $agile = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md')
 $agileNormalized = $agile -replace '\s+', ' '
 $codePmRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md')
+$codePmRoleNormalized = $codePmRole -replace '\s+', ' '
 $codexConfig = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/config.toml')
 $workflowDesignManagerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/WORKFLOW_DESIGN_MANAGER.md')
 $workflowDesignManagerRoleNormalized = $workflowDesignManagerRole -replace '\s+', ' '
@@ -149,7 +150,40 @@ if ((Test-Path -LiteralPath $retiredExplorerValidationScriptPath) -or
 }
 $independentResearchSkillNormalized = $independentResearchSkill -replace '\s+', ' '
 $independentReviewSkillNormalized = $independentReviewSkill -replace '\s+', ' '
+$independentResearchRoleNormalized = $independentResearchRole -replace '\s+', ' '
 $agentifyTransportProfileNormalized = $agentifyTransportProfile -replace '\s+', ' '
+$agentifyTransportSkillPath = Join-Path $repo '.agents/skills/hmasd-agentify-transport/SKILL.md'
+if (-not (Test-Path -LiteralPath $agentifyTransportSkillPath -PathType Leaf)) {
+    throw 'Agentify transport Skill is missing'
+}
+$agentifyTransportSkill = Get-Content -Raw -LiteralPath $agentifyTransportSkillPath
+$agentifyTransportSkillNormalized = $agentifyTransportSkill -replace '\s+', ' '
+
+# Requester roles own conversation meaning; transport realizes that brief and
+# keeps only operational page/tab judgment.
+foreach ($entry in @(
+    @($codePmRoleNormalized, 'CPM owns the technical/formal-review conversation intent for its questions.'),
+    @($independentResearchRoleNormalized, 'Explorer owns the scientific/advisory-review conversation intent for its questions.'),
+    @($independentReviewSkillNormalized, 'one self-contained natural-language context brief that states for each question'),
+    @($independentReviewSkillNormalized, 'Explorer alone decides whether prior memory helps or contaminates the requested judgment'),
+    @($agentifyTransportSkillNormalized, 'Follow those requested relationships; do not infer scientific direction, review independence, contamination risk, future reuse or grouping'),
+    @($agentifyTransportSkillNormalized, 'Requester-authorized independent conversations may perform these steps concurrently on separate owned tabs'),
+    @($agentifyTransportSkillNormalized, 'write result rows in the original `question_paths` order'),
+    @($agentifyTransportSkillNormalized, 'Never close the default tab, a pre-existing/unowned tab, or a tab with an active answer.'),
+    @($agentifyTransportSkillNormalized, 'never guess or silently substitute another conversation')
+)) {
+    if (-not $entry[0].Contains($entry[1])) {
+        throw "Conversation authority/capability contract missing: $($entry[1])"
+    }
+}
+foreach ($retired in @(
+    'Choose session continuity from the task itself',
+    'Start a clean conversation for an independent review; reuse the matching conversation'
+)) {
+    if ($agentifyTransportSkillNormalized.Contains($retired)) {
+        throw "Transport retains requester-owned conversation choice: $retired"
+    }
+}
 foreach ($required in @(
     'temp/handoffs/explorer_to_code_manager/',
     'temp/handoffs/code_manager_to_explorer/',
@@ -419,7 +453,10 @@ foreach ($required in @(
     'external_workspace_access=read_only',
     'cross_task_transport=codex_native_send_message_to_thread',
     'cross_task_model_and_thinking_overrides=omit',
-    'same_file_concurrent_writes=forbidden')) {
+    'same_file_concurrent_writes=forbidden',
+    'agentify_transport_conversation_semantics_owner=requester',
+    'agentify_transport_conversation_identity_source=provider_native',
+    'agentify_transport_tab_lifecycle_owner=agentify_transport_child_for_task_created_tabs_only')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($retired in @(
@@ -1085,7 +1122,7 @@ foreach ($surface in @($agents, $codePmRole, $workflowDesignManagerRole, $indepe
 foreach ($required in @(
     'scientific_authority=none',
     'formal_compute_authority=user_only',
-    'Page, model, send, wait and recovery details remain outside CPM context')) {
+    'Page, model, send, wait, recovery and tab-cleanup details remain outside CPM context')) {
     if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
 }
 foreach ($required in @(

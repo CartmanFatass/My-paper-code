@@ -26,30 +26,46 @@ root before sending.
    `IR_DIRECTION_REVIEW:` or `IR_METHODOLOGY_REVIEW:` and declares either
    `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW`,
    `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`, or the bounded methodology-audit mode.
-2. Write one minimal JSON batch containing only `provider` and the ordered paths
-   (`provider|question_paths`) of all currently eligible frozen questions. Choose one exact `results_path`
-   and dispatch one self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the
-   registered `hmasd-agentify-transport` child with `fork_turns=none`, naming
-   only `batch_path|results_path`. Confirm once that the raw
-   question contains no local filesystem path, task history or unrelated
-   corpus; use a public remote GitHub URL for a reviewer-facing source locator.
-   Do not send a review whose scientific barrier has not yet completed.
-3. Continue unrelated research. The child is silent while live and returns
-   exactly once through its native final response with one
-   `AGENTIFY_REVIEW_BATCH_RESULT` carrying `status|results_path|error` and
-   terminal status `COMPLETE|ERROR`. Read the named result only after that
-   terminal final return; Explorer performs no polling, progress handling or
-   parent-task result relay. Agentify page, adapter, waiting and recovery mechanics
-   remain inside the transport child.
-4. Copy each named successful raw response into
+   Before dispatch, write one self-contained natural-language context brief
+   that states for each question whether it starts clean, continues an
+   exact prior conversation URL, may run concurrently with named other
+   questions, or must remain independent. Explorer alone decides whether prior
+   memory helps or contaminates the requested judgment and whether a returned
+   conversation will be reused. This is semantic task meaning, not a
+   `conversation_mode`, grouping field or other schema.
+2. Write one minimal JSON batch retaining the existing
+   `provider|context_path|question_paths` contract for all currently eligible
+   frozen questions. The existing `context_path` anchor points to the local
+   brief for transport realization; it adds no mandatory field, and transport
+   does not include the local brief in provider payload. Choose one exact
+   `results_path` and dispatch
+   one self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the registered
+   `hmasd-agentify-transport` child with `fork_turns=none`, naming only
+   `batch_path|results_path`. Confirm once that the raw question contains no
+   local filesystem path, task history or unrelated corpus; use a public remote
+   GitHub URL for a reviewer-facing source locator. Do not send a review whose
+   scientific barrier has not yet completed.
+3. Continue unrelated research. Agentify transport exclusively performs page,
+   model, send, wait, recovery and tab-cleanup mechanics. It may use
+   operational judgment to realize the frozen brief but cannot infer
+   same-direction grouping, scientific relationship, independence or future
+   reuse. The child is silent while live and returns exactly once through its
+   native final response with one `AGENTIFY_REVIEW_BATCH_RESULT` carrying
+   `status|results_path|error` and terminal status `COMPLETE|ERROR`. Read the
+   named result only after that terminal final return; Explorer performs no
+   polling, progress handling or parent-task result relay.
+4. Copy each named successful raw response and returned conversation URL into
    `local_research/pro_reviews/<review-id>/`, then reconcile it scientifically.
-   An item `ERROR` affects only that review. Retrying transport reuses the same
-   batch file and requires no Explorer file change.
+   Explorer names an exact archived URL in a later brief when it chooses
+   continuation; if no continuation is stated, the child must not guess from
+   titles. An item `ERROR` affects only that review. Retrying transport reuses
+   the same batch file and requires no Explorer file change.
 
 When one paired protocol includes a common follow-up, freeze that follow-up as
 a second standalone natural-language question only after its prerequisite
-review is reconciled, then send it later for each provider's
-existing conversation. This does not create a second workflow or permit
+review is reconciled. Send it later for each provider only when the context
+brief explicitly chooses continuation and names the exact archived conversation
+URL; otherwise start clean. This does not create a second workflow or permit
 provider-specific prompt metadata.
 
 An incomplete call affects only that review and is not scientific evidence.

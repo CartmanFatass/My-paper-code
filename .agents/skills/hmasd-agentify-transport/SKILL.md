@@ -18,10 +18,15 @@ results_path=<exact assignment-specific output path>
 ```
 
 Read that exact `batch_path` once, then read its exact local UTF-8
-`context_path` before opening a page. The context brief explains in natural
-language why the batch exists, whether it is independent or a continuation,
-what a useful complete outcome means and which page/result conflicts require
-judgment. It is understanding input, not a schema or an outbound prompt. Write
+`context_path` before opening a page. The requester-owned context brief is the
+semantic input: it explains in natural language why the batch exists, what a
+useful complete outcome means, which page/result conflicts require judgment,
+and for each question whether to start clean, continue an exact prior
+conversation URL, run concurrently with named questions or remain independent.
+Follow those requested relationships; do not infer scientific direction, review
+independence, contamination risk, future reuse or grouping from question
+similarity or titles. It is understanding input, not a schema or an outbound
+prompt. Write
 only the exact `results_path` under `temp/sessions/agentify_transport_operator/`.
 `question_paths` order is the batch order. Do not scan temporary directories,
 infer a result path or reconstruct question paths from item names. The sent
@@ -39,17 +44,45 @@ starting point. Use `agentify_tab_create`, `agentify_show`,
 `agentify_new_conversation`, `agentify_open_conversation`, `agentify_navigate`
 and `agentify_tab_close` to establish useful pages and conversations.
 
-Choose rather than blindly reuse. Start a clean conversation for an independent
-review; reuse the matching conversation for a true continuation. Read the page
-and question to make that decision. The operator may switch conversations or
-tabs during the batch and keep multiple useful sessions available.
+Follow the conversation relationship already stated in the context brief. Use
+the page controls to create or open the requested conversation, and verify the
+actual conversation URL/ID shown by the page before binding a send or answer to
+it. ChatGPT creates the native conversation identity; the child only observes
+and returns it as transport evidence. For a requested exact continuation that
+cannot be opened, use one safe page/session recovery that cannot duplicate or
+interrupt a send; never guess or silently substitute another conversation, and
+report the actual error if it remains unavailable. The operator may switch
+conversations or tabs during the batch and keep multiple requester-authorized
+sessions available.
+
+Conversation memory and browser-tab ownership are different. Closing a tab does
+not delete its ChatGPT conversation, and a concrete saved conversation URL can
+reopen that memory. Follow the context brief's clean, exact-URL continuation,
+independence and concurrency relationships; do not make those semantic choices
+from the question or page. Across batches, the requester decides any later
+reuse; the child only returns the observed conversation URL/ID. Create only the
+non-default tabs actually useful for the requester-authorized relationships and
+live tool capacity, and remember only the IDs created during this native task.
+An owned idle tab may be reused when the requested relationship and observed
+conversation identity remain correct. Completion order may differ from question
+order; write result rows in the original `question_paths` order.
+
+After a tab's last intended response is fully saved and no generation is active,
+the normal cleanup path closes that tab only if this task created it. Never close
+the default tab, a pre-existing/unowned tab, or a tab with an active answer. If
+an owned-tab close fails, inspect its postcondition once and make one safe retry;
+if it remains open, report residual resource uncertainty while preserving any
+complete saved answer and the otherwise complete batch status.
 
 ## Complete the batch
 
-For each question path:
+Complete every question path and preserve the original path order in the result.
+Requester-authorized independent conversations may perform these steps
+concurrently on separate owned tabs; preserve every stated dependency within a
+conversation. For each question:
 
-1. Select or create the appropriate conversation and confirm that the requested
-   provider/model and composer are usable.
+1. Select or create the context-requested conversation and confirm that the
+   requested provider/model and composer are usable.
  2. Inspect the current composer model immediately before sending. If it shows
     High or any other non-Pro model, actively open the model picker, select Pro,
     and then read the composer again; continue only when the composer visibly

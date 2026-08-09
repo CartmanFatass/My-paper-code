@@ -316,22 +316,37 @@ Operator exclusively executes `train -> evaluate -> analyze`. The readiness
 Verifier exclusively executes the ordered six-phase readiness wrapper, and
 Agentify Transport exclusively owns formal/Explorer review transport. These
 boundaries are separate from the CPM mechanical child. For formal or
-Explorer-to-project reviews, CPM freezes each standalone question and writes
-one minimal ordered batch file containing exactly
-`provider|context_path|question_paths`,
-then chooses one exact `results_path`. CPM dispatches the reusable registered
+Explorer-to-project reviews, CPM freezes each standalone question. CPM owns the
+technical/formal-review conversation intent for its questions.
+Before dispatch, CPM writes one self-contained natural-language context brief
+that states for each question whether it starts
+clean, continues an exact prior conversation URL, may run concurrently with
+named other questions, or must remain independent. CPM alone decides whether
+prior memory helps or contaminates the requested judgment and whether a
+returned conversation will be reused. This is semantic task meaning, not a
+`conversation_mode`, grouping field or other schema.
+
+CPM then writes one minimal ordered batch file retaining the existing
+`provider|context_path|question_paths` contract and chooses one exact
+`results_path`. The existing `context_path` anchor points to the local brief
+for transport realization; it adds no mandatory field, and transport does not
+include the local brief in provider payload. CPM dispatches the reusable registered
 `hmasd-agentify-transport` native child with a self-contained
 `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` naming `batch_path|results_path` and
 `fork_turns=none`, then continues unrelated work. The child alone owns
-page/model/send/wait/recovery mechanics. It stays silent while live, with no
+page/model/send/wait/recovery mechanics and tab cleanup. It may use operational
+judgment to realize the frozen brief, but cannot infer same-direction grouping,
+scientific relationship, independence or future reuse. It stays silent while live, with no
 progress, commentary, collaboration, or repeated wait/poll handling, and
 returns exactly once through one terminal native final with `COMPLETE` or
 `ERROR`, carrying a conclusion followed by `AGENTIFY_REVIEW_BATCH_RESULT` fields
 `status|results_path|error`. The named result file retains its ordered raw
-response rows. CPM reads that file only after the terminal return, copies each
-raw response into its canonical archive and performs mechanical intake. A retry
-reuses the unchanged batch file and changes no CPM file. Page, model, send,
-wait and recovery details remain outside CPM context; this interface has no
+response rows. CPM reads that file only after the terminal return, archives each
+raw response and returned conversation URL, and performs mechanical intake. A
+later brief names an exact archived URL when CPM chooses continuation; with no
+such statement the child must not guess from titles. A retry reuses the
+unchanged batch file and changes no CPM file. Page, model, send, wait,
+recovery and tab-cleanup details remain outside CPM context; this interface has no
 separate persistent task, task-id return field, cross-task result relay, or
 polling/progress loop.
 

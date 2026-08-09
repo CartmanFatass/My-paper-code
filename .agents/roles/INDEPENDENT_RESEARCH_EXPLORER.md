@@ -203,20 +203,39 @@ authority over Explorer's scientific ordering, interpretation or continuation.
 
 Inside an active user-authorized Explorer research grant, the Explorer may
 freeze and conduct exact candidate reviews without per-review user or WDM
-authorization. It writes one minimal batch file containing only the provider
-and ordered paths of all currently eligible frozen questions, chooses one exact
-`results_path`, and dispatches one self-contained
-`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the registered
-`hmasd-agentify-transport` child with `fork_turns=none`, naming only
-`batch_path|results_path`. It then continues unrelated research. The child is
-silent while live and returns exactly once through its native final response,
-with `AGENTIFY_REVIEW_BATCH_RESULT` fields `status|results_path|error` and
-terminal status `COMPLETE|ERROR`. Explorer reads the named result only after
-that terminal final return; it performs no polling, progress handling or
-parent-task result relay. A retry reuses the same batch file and changes no Explorer
-file. Pro-canonical and Gemini-advisory labels remain local and never enter the
-question. Page, provider-adapter, wait and recovery details remain inside the
-transport child.
+authorization. Explorer owns the scientific/advisory-review conversation intent
+for its questions. Before dispatch, Explorer writes one self-contained
+natural-language context brief that states for each question whether it starts
+clean, continues an exact prior conversation
+URL, may run concurrently with named other questions, or must remain
+independent. Explorer alone decides whether prior memory helps or contaminates
+the requested judgment and whether a returned conversation will be reused.
+This is semantic task meaning, not a `conversation_mode`, grouping field or
+other schema.
+
+Explorer then writes one minimal ordered batch file retaining the existing
+`provider|context_path|question_paths` contract for all currently eligible
+frozen questions and chooses one exact `results_path`. The existing
+`context_path` anchor points to the local brief for transport realization; it
+adds no mandatory field, and transport does not include the local brief in
+provider payload. Explorer dispatches one self-contained
+`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the
+registered `hmasd-agentify-transport` child with `fork_turns=none`, naming only
+`batch_path|results_path`, then continues unrelated research. The child alone
+owns page/model/send/wait/recovery mechanics and tab cleanup. It may use
+operational judgment to realize the frozen brief, but cannot infer
+same-direction grouping, scientific relationship, independence or future reuse.
+It is silent while live and returns exactly once through its native final
+response, with `AGENTIFY_REVIEW_BATCH_RESULT` fields
+`status|results_path|error` and terminal status `COMPLETE|ERROR`. Explorer reads
+the named result only after that terminal final return; it performs no polling,
+progress handling or parent-task result relay. Explorer archives each returned
+conversation URL with its raw response and names an exact archived URL in a
+later brief when it chooses continuation; with no such statement the child
+must not guess from titles. A retry reuses the same batch file and changes no
+Explorer file. Pro-canonical and Gemini-advisory labels remain local and never
+enter the question. Page, provider-adapter, wait, recovery and tab-cleanup
+details remain inside the transport child.
 
 Before sending, Explorer uses one model-authored checklist: the raw
 question contains no local filesystem locator, task history or unrelated

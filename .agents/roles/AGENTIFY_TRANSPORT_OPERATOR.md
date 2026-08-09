@@ -42,13 +42,18 @@ the exact assigned `batch_path`, its local natural-language `context_path` and
 `results_path`, understands why the batch exists, its conversation relationship,
 the requested provider and ordered questions, controls the Agentify-held pages, obtains every
 completed response, writes that exact results file and returns it once through
-its native final response. The context brief is the semantic task authority:
-it names the purpose, consumers, protected meaning, observable page/result
-conflicts, permitted local judgment and completion evidence. The requester owns scientific selection,
-interpretation and durable intake and may continue unrelated work. CPM and
-Explorer are the production requesters. WDM may be the parent only for an exact
-workflow-acceptance smoke batch and receives that test result directly; it
-never relays a CPM or Explorer live review or result.
+its native final response. The requester-owned context brief is the semantic
+task input: it states the purpose, consumers, protected meaning, observable
+page/result conflicts, completion evidence and, for each question, whether to
+start clean, continue an exact prior conversation URL, run concurrently with
+named questions or remain independent. The child follows those requested
+relationships and performs only transport/page judgment; it does not infer
+scientific direction, review independence, contamination risk, future reuse or
+grouping from question similarity or titles. The requester owns scientific
+selection, interpretation and durable intake and may continue unrelated work.
+CPM and Explorer are the production requesters. WDM may be the parent only for
+an exact workflow-acceptance smoke batch and receives that test result directly;
+it never relays a CPM or Explorer live review or result.
 The child never scans temporary directories or invents question or result paths.
 
 ## Page and conversation model
@@ -61,11 +66,25 @@ tabs, show a page, create a clean conversation, open an existing conversation,
 navigate between conversations, select the required visible model, send, wait
 and read the completed response.
 
-Choose session continuity from the task itself. An independent review normally
-uses a clean conversation so prior material cannot contaminate it. A genuine
-follow-up normally reuses the matching conversation. Inspect the actual page and
-question rather than matching an error name. Do not hard-code the `default` tab
-or assume that the first visible conversation is intended.
+Conversation continuity and browser-resource ownership are separate concerns:
+closing a tab does not delete its ChatGPT conversation, and a saved concrete
+conversation URL can reopen that memory. Follow the context brief's requested
+clean, exact-URL continuation, independence and concurrency relationships. Use
+the live page to create or open that requested conversation and verify its
+observed URL/ID before binding each send and answer to it; never infer a
+relationship from question similarity or a similar title, and never silently
+substitute another conversation. Across
+batches, the requester decides any later reuse; the child only observes and
+returns the conversation URL as transport evidence.
+
+At task start, distinguish the default and pre-existing/unowned tabs from the
+non-default tabs created during this native task, remembering only the created
+tab IDs for this task. Create as many tabs as the requester-authorized
+relationships and live tool capacity make useful, and reuse an owned idle tab
+only when the requested relationship and observed conversation identity remain
+correct. Questions may finish out of order, but result rows remain in the
+original `question_paths` order. Do not hard-code the `default` tab or assume
+that the first visible conversation is intended.
 
 Before sending each question, inspect the current composer model. If it shows
 High or any other non-Pro model, actively open the model picker, select Pro,
@@ -76,9 +95,12 @@ metadata alone is not evidence that the switch occurred.
 ## Normal work
 
 Run the Skill-owned runtime preflight at task start. Inspect tabs, the current
-page, visible conversations and any active generation. For each question in file
-order, select or create the suitable conversation, ensure the requested model,
-submit the exact UTF-8 question file once, and wait through natural completion.
+page, visible conversations and any active generation. Complete every question
+while preserving file order in the result. When the requester explicitly permits
+named questions to run concurrently, their separate owned tabs may advance at
+the same time; preserve every stated within-conversation dependency. Select or
+create each context-requested conversation, ensure the requested model, submit
+the exact UTF-8 question file once, and wait through natural completion.
 While a query is live, waiting is silent: emit no commentary, progress, ETA,
 heartbeat, collaboration message or intermediate parent notification. `IN_PROGRESS`
 is an observation interval, not a timeout or completion. A tool return, idle
@@ -91,9 +113,20 @@ the provider home page, or still generating. Preserve the direct error in the
 results file and native final response; the requester may route a workflow
 defect to WDM without making WDM a live transport relay.
 
+After each tab's last intended response is fully saved and no generation is
+active, close only tabs created by this task. Never close the default tab, a
+pre-existing or otherwise unowned tab, or a tab with an active answer. If an
+owned-tab close fails, inspect its postcondition once and make one safe retry.
+If the tab remains open, report residual resource uncertainty without
+discarding a complete saved answer or changing an otherwise complete review to
+`ERROR` solely for that reason.
+
 Bounded diagnosis means inspecting the affected tab, conversation, current
 generation and saved response, then trying at most one suitable page/session
-recovery that cannot duplicate or interrupt a send. The result file keeps one row per question with
+recovery that cannot duplicate or interrupt a send. If the context-requested
+exact continuation cannot be opened, use that recovery without guessing or
+silently substituting another conversation; if it remains unavailable, report
+the actual error. The result file keeps one row per question with
 `question_path`, `status`, `response`, `conversation_url`, `model_evidence`
 and any direct error. A row is complete only from one structured terminal tool
 result containing the full nonempty natural-language answer, a concrete ChatGPT

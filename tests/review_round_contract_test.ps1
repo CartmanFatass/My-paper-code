@@ -20,6 +20,8 @@ $config = Read-RepoFile '.codex/config.toml'
 $profile = Read-RepoFile '.codex/agents/hmasd-agentify-transport.toml'
 $operator = Read-RepoFile '.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md'
 $skill = Read-RepoFile '.agents/skills/hmasd-agentify-transport/SKILL.md'
+$operatorNormalized = $operator -replace '\s+', ' '
+$skillNormalized = $skill -replace '\s+', ' '
 $workflowMap = Read-RepoFile 'docs/project/WORKFLOW_MAP.md'
 $workspaceContract = Read-RepoFile 'docs/project/SESSION_WORKSPACE_CONTRACT.md'
 $workspaceReadme = Read-RepoFile 'docs/session-workspaces/agentify_transport_operator/README.md'
@@ -73,6 +75,13 @@ foreach ($term in @(
     Require-ContractTerm $operator $term 'AGENTIFY_TRANSPORT_OPERATOR.md'
     Require-ContractTerm $workspaceContract $term 'SESSION_WORKSPACE_CONTRACT.md'
 }
+foreach ($term in @(
+    'agentify_transport_conversation_semantics_owner=requester',
+    'agentify_transport_conversation_identity_source=provider_native',
+    'agentify_transport_tab_lifecycle_owner=agentify_transport_child_for_task_created_tabs_only'
+)) {
+    Require-ContractTerm $router $term 'AGENTS.md'
+}
 
 foreach ($term in @(
     '[agents."HMASDAgentifyTransport"]',
@@ -98,7 +107,6 @@ foreach ($term in @(
     'IN_PROGRESS',
     'exactly once',
     'silent',
-    'context brief is the semantic task authority',
     'current composer model',
     'open the model picker',
     'select Pro',
@@ -178,6 +186,19 @@ try {
 }
 if (-not $probeRejected) {
     throw 'Agentify process preflight did not reject absent processes'
+}
+
+# The parent owns conversation meaning. Transport observes identity, realizes
+# the explicit brief and cleans only its task-owned idle tabs.
+foreach ($entry in @(
+    @($operatorNormalized, 'The requester-owned context brief is the semantic task input'),
+    @($operatorNormalized, 'it does not infer scientific direction, review independence, contamination risk, future reuse or grouping'),
+    @($operatorNormalized, 'Questions may finish out of order, but result rows remain in the original `question_paths` order.'),
+    @($skillNormalized, 'Requester-authorized independent conversations may perform these steps concurrently on separate owned tabs'),
+    @($skillNormalized, 'Never close the default tab, a pre-existing/unowned tab, or a tab with an active answer.'),
+    @($skillNormalized, 'never guess or silently substitute another conversation')
+)) {
+    Require-ContractTerm $entry[0] $entry[1] 'Agentify conversation authority/lifecycle'
 }
 
 # The old top-level/cross-task contract must not remain active anywhere in the
