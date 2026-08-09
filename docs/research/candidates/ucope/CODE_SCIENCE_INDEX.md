@@ -284,3 +284,41 @@ validators and exact mechanical result binding all completed successfully.
 The accepted result commit is the Git commit containing this index update and
 the canonical public result; Explorer retains the sole scientific intake and
 next-action authority.
+
+## UCOPE-B2 endogenous paid count acquisition
+
+`UCOPE-B2-ENDOGENOUS-PAID-COUNT-ACQUISITION` is a direction-local ordinary B
+package for `CAND-VSP-07-UCOPE@adversarial-revision-v6`. It asks whether the
+finite reward-trained controller buys the protected count on a shared five
+trial / fifteen physical-unit clock, rather than receiving the count for free.
+
+The candidate-local host exposes root choices `COMMIT_S`, `COMMIT_L`, and
+`BUY_SL`. BUY executes real S then L acquisition trials, freezes
+`E_S=E_L=1` and `d=N_L-N_S`, and commits one learned tail action for trials
+3--5. The acquisition AUC enters the root return but never the tail update.
+The two learned arms are matched stateless nine-value float64 controllers;
+COUNT access at the tail is their sole information delta.
+
+Training uses twelve fresh arm/stratum/seed replicas. Each tail table receives
+1,536 forced-BUY real episodes on an exactly balanced sealed S/L action tape;
+each frozen tail then supports 768 matched root triads. Q entries are exact
+running means of logged real returns. Evaluation reconstructs complete weighted
+real-transition panels for learned greedy-root, forced-BUY, and fixed immediate
+commit policies. Retained validators independently replay every training and
+evaluation row, bind exactly twelve final checkpoints, enforce visit/sample
+means and source identity, and apply the frozen six-label branch precedence.
+
+The registered full cap is 46,080 training episodes / 230,400 transitions,
+1,940 evaluation episodes / 9,700 transitions, 48,020 total episodes / 240,100
+transitions, and at most 58,788 policy calls. Search, hypothetical transitions,
+retry, sweep, rescue, transfer, extra seed/stratum/arm/checkpoint, C, and
+External Pro are absent. Technical-only mode is smaller, terminal-inadmissible,
+and emits `branch=null`.
+
+Public source locators are:
+
+- `experiments/candidates/ucope/endogenous_paid_count_acquisition_host.py`
+- `experiments/candidates/ucope/endogenous_paid_count_acquisition.py`
+- `scripts/run_ucope_b2_endogenous_paid_count_acquisition.py`
+- `tests/experiments/candidates/ucope/test_endogenous_paid_count_acquisition.py`
+- `docs/research/candidates/ucope/CODE_SCIENCE_INDEX.md`
