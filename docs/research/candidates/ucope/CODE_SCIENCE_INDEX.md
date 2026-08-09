@@ -177,12 +177,14 @@ Accepted source commit:
 `61f84b6f419df4c64078e37fdba9eff080a0361f`. The accepted result commit is the
 Git commit containing this index update and the byte-identical public result.
 
-## UCOPE-B1 implementation candidate
+## UCOPE-B1 accepted source and full result
 
 Treatment `UCOPE-B1-PERSISTENT-COUNT-STATE-LEARNED-UTILITY` is implemented as
-a direction-local, `formal=false` train/evaluate/analyze package. This source
-entry records executable semantics only; no B1 full result or scientific
-disposition is represented by this implementation commit.
+a direction-local, `formal=false` train/evaluate/analyze package. The accepted
+source commit is `155cd5afe790fea3293610658842b68ded4af69c`. The unique full
+run is `ucope_b1_persistent_count_state_learned_utility_155cd5af_r1`; this
+index records CPM technical acceptance only and does not select a scientific
+disposition or successor.
 
 The host owner is
 `experiments/candidates/ucope/persistent_count_state_host.py`. It executes one
@@ -244,10 +246,41 @@ training transitions, 2,592 evaluation blocks / 12,960 evaluation transitions,
 | `UCOPE_B1_BRANCH` | `_retained_audit`; `select_branch_from_retained_audit`; `_branch_and_witnesses` | Structured retained issues reach contract, leakage and calibration labels before later gates | `test_integrated_retained_audit_artifact_reaches_each_early_branch`; `test_frozen_branch_precedence` |
 | `UCOPE_B1_LIFECYCLE` | `train`; `evaluate`; `analyze`; `validate_result_envelope_payload`; thin CLI | Write-once claim/artifacts; later full phases recheck clean source; terminal mode, identities, claim and artifact digests stay bound | `test_default_mode_result_envelope_rejects_terminal_identity_claim_and_artifact_drift`; `test_full_later_phases_reapply_clean_source_identity_but_technical_skips`; `test_gzip_lossless_rows_and_file_binding_reject_tamper` |
 
-Public source locators after CPM acceptance will be:
+Public source locators are:
 
 - `experiments/candidates/ucope/persistent_count_state_host.py`
 - `experiments/candidates/ucope/persistent_count_state_learned_utility.py`
 - `scripts/run_ucope_b1_persistent_count_state_learned_utility.py`
 - `tests/experiments/candidates/ucope/test_persistent_count_state_learned_utility.py`
 - `docs/research/candidates/ucope/CODE_SCIENCE_INDEX.md`
+
+### B1 accepted result
+
+The canonical public result is
+`docs/research/candidates/ucope/UCOPE_B1_PERSISTENT_COUNT_STATE_LEARNED_UTILITY_RESULT.json`.
+It is byte-identical to the independently validated full-run `raw_result.json`
+(SHA-256 `bd8957d365080c87dcc576712877e7c1a09de2ca80b33d78201c623deef26cdd`).
+The frozen code-defined branch is
+`B1_LOCAL_LEARNED_COUNT_USE_AND_UTILITY_SUPPORTED`.
+
+All four master seeds (`1103`, `2207`, `3301`, `4409`) produced the same
+persistent COUNT action map `{-2:S,-1:S,0:S,1:L,2:L}` and persistent exact
+panel delta `6571/20000`. Their matched BLIND maps were constant `S`. In the
+trial-5-redraw stratum both learned arms were constant `S` and every exact
+delta was `0`. The evaluation-only oracle values were `26571/20000` for
+PERSISTENT and `1` for TRIAL5_REDRAW; always-S was `1` in both strata.
+
+The unique full retained exactly 65,536 training blocks, 327,680 training
+environment transitions, 65,536 learner/trainer/optimizer updates, 2,592
+evaluation blocks, 12,960 evaluation transitions, 68,128 total policy calls,
+and 340,640 total environment transitions. All registered contract, leakage
+and calibration issue lists are empty; all matching and information witnesses,
+visit floors and branch predicates serialized by the result validator passed.
+No retry, sweep, rescue, extra seed, extra stratum, post-hoc arm, hypothetical
+transition, C treatment or External Pro was used.
+
+The Experiment Operator receipt, independent retained train/evaluate/result
+validators and exact mechanical result binding all completed successfully.
+The accepted result commit is the Git commit containing this index update and
+the canonical public result; Explorer retains the sole scientific intake and
+next-action authority.

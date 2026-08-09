@@ -8,11 +8,11 @@ record_kind=workstream
 workstream_id=explorer_project_validation
 owner_role=code_project_manager
 status=AWAITING_EXPLORER_SCIENTIFIC_INTAKE
-active_assignment_id=UCOPE-A1-COUNT-STATE-EXACT-ENUMERATION
+active_assignment_id=UCOPE-B1-PERSISTENT-COUNT-STATE-LEARNED-UTILITY
 next_boundary=EXPLORER_SCIENTIFIC_INTAKE
 environment=toy_validation
-grant_or_authority_reference=temp/handoffs/explorer_to_code_manager/2026-08-09_ucope_a1_count_state_exact_enumeration.md
+grant_or_authority_reference=temp/handoffs/explorer_to_code_manager/2026-08-09_ucope_b1_persistent_count_state_learned_utility.md
 completed_candidate_ids=CAND-VAP-FOLR-CORE|CAND-VSP-02|CAND-VSP-05|CAND-VSP-07-UCOPE
 next_candidate_id=NONE
-current_evidence_pointer=docs/research/candidates/ucope/UCOPE_A1_COUNT_STATE_EXACT_ENUMERATION_RESULT.json
+current_evidence_pointer=docs/research/candidates/ucope/UCOPE_B1_PERSISTENT_COUNT_STATE_LEARNED_UTILITY_RESULT.json
 ```
