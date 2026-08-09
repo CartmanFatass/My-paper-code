@@ -195,7 +195,7 @@ foreach ($required in @(
     'bounded safe read-only reconnaissance',
     'not a packet validator, dispatcher, queue engine or state machine',
     'Known concerns are context for judgment, not mandatory headings or an expected verdict',
-    'one isolated candidate at a time')) {
+    'CPM may process independent direction-local candidates concurrently')) {
     if (-not $explorerValidationSkillNormalized.Contains($required)) {
         throw "Explorer semantic handoff Skill missing: $required"
     }
@@ -576,8 +576,14 @@ foreach ($required in @(
     'local_research_write_tool=apply_patch_only',
     'local_research_shell_mutation=forbidden',
     'logical_assignment_count=derived_from_exact_work_roster',
-    'runtime_concurrency=available_native_capacity',
-    'resource_consuming_experiment_action=one_at_a_time_for_attribution',
+    'runtime_concurrency=three_unit_cpm_capacity_pool',
+    'resource_consuming_experiment_action=capacity_controlled_per_direction',
+    'active_experiment_roster_owner=independent_research_explorer_scientific_view',
+    'runtime_capacity_admission_owner=code_project_manager',
+    'per_direction_result_bearing_default=one_active',
+    'same_direction_parallelism=exact_frozen_joint_roster_only',
+    'experiment_pool_exclusive_runtime=B_HEAVY_OR_C',
+    'capacity_wait_effect=pending_runtime_capacity_only_not_blocked',
     'read_only_scientific_analysis_parallelism=available_native_capacity',
     'canonical_phase_barrier=required_for_algorithm_inspiration_campaign_only',
     'adaptive_question_dispatch=bounded_registered_child_consultation',
@@ -668,8 +674,24 @@ foreach ($required in @(
     'There is no fixed adaptive count, concurrency, quorum, every-B panel, automatic-Pro path or persistent mechanism.',
     'Preserve disagreements as advisory inputs; never vote or collapse them into a quorum.',
     'The Explorer remains the single writer and integrates answers into one decision.',
-    'Explorer names at most one resource-consuming experiment action at a time',
-    'parallel read-only scientific questions',
+    'runtime_capacity_units_total=3',
+    'B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive',
+    'experiment_pool_exclusivity_scope=result_bearing_runtime_only',
+    'workflow_progress_during_exclusive_runtime=continues',
+    'three independent light treatments, or one medium plus one light',
+    'capacity_wait_state=pending_runtime_capacity_only',
+    'capacity_wait_effect=pending_runtime_capacity_only',
+    'Insufficient capacity is `pending_runtime_capacity`, never a direction, task or workflow `BLOCKED` state',
+    'creates no queue engine, lease, dispatcher or acceptance owner',
+    'Formal or explicitly heavy runtime may prevent another result-bearing experiment from starting, but it never pauses code work',
+    'read-only research, scientific intake, External Pro review or another non-runtime action',
+    'Every concurrent treatment has distinct direction/treatment identity, canonical design, CPM ticket/worktree, source freeze and accepted commit, run, evidence, checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator receipt, readiness/technical-acceptance record and Explorer decision',
+    'By default a direction has at most one result-bearing treatment active',
+    'until that predecessor is terminal and Explorer completes the direction''s scientific intake',
+    'freeze one exact joint roster before any member starts',
+    'Completion order is never scientific priority, voting or a cross-direction barrier',
+    'dispatch at most one new treatment',
+    'B completion or parallelism alone never does',
     'Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.')) {
     if (-not $adaptiveParallelNormalized.Contains($required)) {
         throw "Adaptive roster contract missing: $required"
@@ -705,7 +727,9 @@ foreach ($required in @(
     'does not recompute schema, readability, receipts, activity counts, locators',
     'necessary to one Explorer decision',
     'Several read-only questions may run in parallel',
-    'one resource-consuming experiment action active',
+    'one result-bearing experiment active per direction by default',
+    'Independent ordinary A/B treatments from different directions may overlap',
+    'exactly one CPM technical acceptance and one Explorer scientific intake',
     'ordinary B remains B and does not automatically invoke Pro',
     'consumes no formal iteration')) {
     if (-not $explorerValidationContractNormalized.Contains($required)) {
@@ -957,7 +981,10 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'logical_assignment_count=derived_from_exact_work_roster',
-    'runtime_concurrency=available_native_capacity',
+    'runtime_concurrency=three_unit_cpm_capacity_pool',
+    'runtime_capacity_units_total=3',
+    'active_experiment_roster_owner=independent_research_explorer_scientific_view',
+    'runtime_capacity_admission_owner=code_project_manager',
     'canonical_campaign_phase_barriers=required',
     'adaptive_singleton_global_barrier=none',
     'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
@@ -1467,12 +1494,31 @@ foreach ($required in @(
     'same_file_concurrent_writes=forbidden',
     'docs/project/handoffs/README.md',
     'temp/handoffs/',
+    'assignment-specific direction/treatment handoff files',
+    'never share a writable file',
+    'does not allocate runtime capacity or establish scientific priority',
     'workspace_boundary_guard=fail_closed_for_recognized_pretooluse_cases',
     'authoritative_write_boundary=tool_os_sandbox|verified_ticket_identity|git_visible_checks',
     'workspace_ticket_retirement=registered_clean_detached_worktree_only',
     'Formats and suggested sections aid understanding but never become admission gates',
     'It is never staged, committed or pushed')) {
     if (-not $sessionWorkspaceContractNormalized.Contains($required)) { throw "Session workspace contract missing: $required" }
+}
+foreach ($retired in @(
+    'resource_consuming_experiment_action=one_at_a_time_for_attribution',
+    'Explorer names at most one resource-consuming experiment action at a time',
+    'one resource-consuming experiment action active',
+    'one isolated candidate at a time',
+    'one-candidate-at-a-time',
+    'queued_capacity_state=',
+    'Insufficient capacity is `queued`')) {
+    if ($independentResearchRole.Contains($retired) -or
+        $parallelResearch.Contains($retired) -or
+        $explorerValidationContract.Contains($retired) -or
+        $explorerValidationSkill.Contains($retired) -or
+        $sessionWorkspaceContract.Contains($retired)) {
+        throw "Retired global experiment lock remains: $retired"
+    }
 }
 foreach ($required in @(
     'scripts/hmasd_workspace_ticket.py retire',

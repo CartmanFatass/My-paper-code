@@ -317,6 +317,45 @@ foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
 }
 
+foreach ($required in @(
+    'runtime_capacity_admission=exclusive',
+    'runtime_capacity_pool_units=3',
+    'runtime_capacity_source=parallel-research-workflow',
+    'runtime_resource_upclass_or_defer=allowed_before_start',
+    'runtime_resource_downclass=forbidden',
+    'sole operational owner of the three-unit runtime pool',
+    'Capacity deferral is `pending_runtime_capacity` for that treatment, never a task, direction or workflow `BLOCKED` state',
+    'An exclusive formal/heavy run reserves only experiment-runtime admission',
+    'CPM continues implementation, technical intake and every unrelated non-runtime action',
+    'Every artifact keeps one independent technical acceptance')) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "Code Project Manager runtime-capacity ownership missing: $required"
+    }
+}
+foreach ($required in @(
+    'sum the units of currently active result-bearing treatments',
+    'reserve all three units exclusively within the experiment pool for heavy/C work',
+    'Capacity shortage means mark only the not-yet-started treatment `pending_runtime_capacity`, never `BLOCKED`',
+    'may up-class for observed engineering resources but never down-class',
+    'distinct direction/treatment identity',
+    'shared writable files, mutable checkpoints or trainer state',
+    'at most one engineering recovery that preserves all scientific literals',
+    'one-full, no sweep and no implicit retry',
+    'without silently replaying it')) {
+    if (-not $agileNormalized.Contains($required)) {
+        throw "Agile runtime-capacity contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'code_project_manager_runtime_capacity_admission=exclusive',
+    'code_project_manager_runtime_capacity_pool_units=3',
+    'independent_research_runtime_capacity_owner=code_project_manager')) {
+    if (-not $agents.Contains($required)) { throw "Router capacity owner missing: $required" }
+}
+if ($codePm.Contains('one_at_a_time_for_attribution')) {
+    throw 'Retired global resource-consuming action lock remains in CPM role'
+}
+
 # CPM owns conversation meaning; the child realizes the frozen brief.
 $cpmConversationSurface = "$codePmNormalized $agileNormalized"
 foreach ($required in @(

@@ -67,6 +67,16 @@ foreach ($required in @(
     'new independent run root',
     'changed source commit + prior run root',
     'never reads a prior failed root',
+    'direction identity, treatment identity, seed/RNG namespace',
+    'evidence, checkpoint, result and temporary-session roots',
+    'result-bearing full',
+    'reused worktree/run root',
+    'shared mutable checkpoint or trainer state',
+    'overlapping output path',
+    'never reads a peer treatment''s intermediate result',
+    'one pre-full engineering recovery with unchanged scientific literals',
+    'never silently relaunches it',
+    'new parent-authorized treatment assignment and independent root',
     'selects among scientific outcomes',
     'costs zero scientific iterations',
     'no scientific disposition or abandonment',
@@ -140,6 +150,15 @@ foreach ($required in @(
     'CPM supplies the complete assignment and grant binding',
     '.agents/roles/EXPERIMENT_OPERATOR.md` owns `train -> evaluate -> analyze`')) {
     if (-not $managerNormalized.Contains($required)) { throw "CPM experiment delegation contract missing: $required" }
+}
+foreach ($required in @(
+    'the three-unit runtime pool and live process/resource observations',
+    'Capacity deferral is `pending_runtime_capacity` for that treatment',
+    'never a task, direction or workflow `BLOCKED` state',
+    'one independent technical acceptance and one conclusion-first reverse result',
+    'An exclusive formal/heavy run reserves only experiment-runtime admission',
+    'CPM continues implementation, technical intake and every unrelated non-runtime action')) {
+    if (-not $managerNormalized.Contains($required)) { throw "CPM runtime-capacity boundary missing: $required" }
 }
 foreach ($required in @(
     'one assignment-named terminal receipt path',

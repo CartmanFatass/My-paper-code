@@ -88,8 +88,13 @@ def test_durable_and_temporary_workspaces_remain_separate() -> None:
         "temp/sessions/<role_id>/",
         "same_file_concurrent_writes=forbidden",
         "No hash, byte count or digest is required",
+        "assignment-specific direction/treatment handoff files",
+        "never share a writable file",
+        "checkpoint or mutable trainer state",
+        "Manifest order does not allocate runtime capacity or establish scientific priority",
+        "No polling, queue or inferred path scan is part of this contract",
     ):
-        assert required in contract
+        assert required in normalized
     assert "child_forked_context=background_only" in normalized
     assert "Formats and suggested sections aid understanding but never become admission gates" in normalized
     assert "workflow_surface_owner=true" in readme

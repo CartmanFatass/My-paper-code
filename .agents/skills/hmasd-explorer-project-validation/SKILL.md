@@ -92,8 +92,11 @@ retirement decision; that decision belongs to a frozen C treatment.
 
 One optional manifest may list several brief paths in their intended order.
 The manifest is work organization only: it contains no item state, owner lease,
-retry record or admission status. CPM processes one isolated candidate at a
-time and preserves the supplied order without treating it as a ranking.
+retry record or admission status. CPM may process independent direction-local
+candidates concurrently when the capacity contract permits; the supplied order
+is organization rather than ranking, runtime admission or a cross-direction
+barrier. Every candidate keeps its own handoff, ticket, roots, receipt,
+technical acceptance and scientific intake.
 
 CPM reads the named public brief, uses engineering judgment and performs
 bounded safe read-only reconnaissance. It proceeds when the task is

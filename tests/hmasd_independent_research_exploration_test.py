@@ -539,7 +539,16 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "adaptive_question_dispatch=bounded_registered_child_consultation",
         "adaptive_question_barrier=none_for_singleton|exact_local_roster_only_when_joint",
         "adaptive_question_result_effect=consultation_only",
-        "resource_consuming_experiment_action=one_at_a_time_for_attribution",
+        "runtime_concurrency=three_unit_cpm_capacity_pool",
+        "resource_consuming_experiment_action=capacity_controlled_per_direction",
+        "active_experiment_roster_owner=independent_research_explorer_scientific_view",
+        "runtime_capacity_admission_owner=code_project_manager",
+        "per_direction_result_bearing_default=one_active",
+        "same_direction_parallelism=exact_frozen_joint_roster_only",
+        "experiment_pool_exclusive_runtime=B_HEAVY_OR_C",
+        "capacity_wait_effect=pending_runtime_capacity_only_not_blocked",
+        "No experiment-capacity condition blocks Explorer research, result intake, read-only analysis, Pro review or another non-runtime action.",
+        "A formal or other explicitly heavy treatment can reserve the experiment pool, not the workflow.",
         "read_only_scientific_analysis_parallelism=available_native_capacity",
         "one clear, bounded, decision-relevant question",
         "expected information gain exceeds dispatch and synthesis cost",
@@ -577,8 +586,22 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "Preserve disagreements as advisory inputs; never vote or collapse them into a quorum.",
         "There is no fixed adaptive count, concurrency, quorum, every-B panel, automatic-Pro path or persistent mechanism.",
         "The Explorer remains the single writer and integrates answers into one decision.",
-        "Explorer names at most one resource-consuming experiment action at a time",
-        "parallel read-only scientific questions",
+        "runtime_capacity_units_total=3",
+        "B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive",
+        "three independent light treatments, or one medium plus one light",
+        "capacity_wait_state=pending_runtime_capacity_only",
+        "capacity_wait_effect=pending_runtime_capacity_only",
+        "Insufficient capacity is `pending_runtime_capacity`, never a direction, task or workflow `BLOCKED` state",
+        "creates no queue engine, lease, dispatcher or acceptance owner",
+        "Formal or explicitly heavy runtime may prevent another result-bearing experiment from starting, but it never pauses code work",
+        "read-only research, scientific intake, External Pro review or another non-runtime action",
+        "Every concurrent treatment has distinct direction/treatment identity, canonical design, CPM ticket/worktree, source freeze and accepted commit, run, evidence, checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator receipt, readiness/technical-acceptance record and Explorer decision",
+        "By default a direction has at most one result-bearing treatment active",
+        "until that predecessor is terminal and Explorer completes the direction's scientific intake",
+        "freeze one exact joint roster before any member starts",
+        "Completion order is never scientific priority, voting or a cross-direction barrier",
+        "dispatch at most one new treatment",
+        "B completion or parallelism alone never does",
         "Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.",
     ):
         assert required in parallel_normalized
@@ -624,7 +647,9 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "does not recompute schema, readability, receipts, activity counts, locators",
         "necessary to one Explorer decision",
         "Several read-only questions may run in parallel",
-        "one resource-consuming experiment action active",
+        "one result-bearing experiment active per direction by default",
+        "Independent ordinary A/B treatments from different directions may overlap",
+        "exactly one CPM technical acceptance and one Explorer scientific intake",
         "ordinary B remains B and does not automatically invoke Pro",
         "consumes no formal iteration",
     ):
@@ -632,6 +657,16 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
     assert "research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review_or_explicit_user_request" in role
     assert "direction-local context binding" in workflow_map_normalized
     assert "Research and CPM operational dependency details remain in their owner contracts" in workflow_map_normalized
+    for retired in (
+        "resource_consuming_experiment_action=one_at_a_time_for_attribution",
+        "Explorer names at most one resource-consuming experiment action at a time",
+        "one resource-consuming experiment action active",
+        "one isolated candidate at a time",
+        "one-candidate-at-a-time",
+        "queued_capacity_state=",
+        "Insufficient capacity is `queued`",
+    ):
+        assert retired not in role + parallel + validation_contract
 
 
 def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated() -> None:
@@ -799,11 +834,12 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     for required in (
         "restart_identity=role|model|current_task",
         "continuity_entry=local_research/RESEARCH_CONTINUITY.md",
-        "last completed phase barrier",
+        "active_experiment_roster",
+        "last completed phase or direction-local intake barrier",
         "unfinished assignment or review",
         "next scientific action",
         "current authorized source boundary",
-        "Update it only at phase barriers, parked state or task end.",
+        "Update it only when the active roster changes",
         "one bounded scan",
     ):
         assert required in parallel_normalized

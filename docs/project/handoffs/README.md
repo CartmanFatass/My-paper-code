@@ -57,7 +57,9 @@ work; do not guess, merge directions, rewrite the artifact or create a
 `BLOCKED` state.
 
 An optional manifest may list temporary brief paths in their intended order. It is
-not a queue, registry, lease or state machine. Work remains one-candidate-at-a-
-time and candidate-specific. A result begins with its natural-language
+not a queue, registry, lease or state machine. Capacity-admitted work may be
+concurrent, but every entry remains direction/treatment-specific and uses
+distinct sender files; manifest order is not runtime admission, scientific
+priority or a cross-direction barrier. A result begins with its natural-language
 conclusion and then appends the necessary exact evidence; a mechanical envelope
 alone is insufficient.

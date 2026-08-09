@@ -83,7 +83,11 @@ Handoffs are self-contained human/model-readable briefs. Formats and suggested
 sections aid understanding but never become admission gates. The receiver uses
 judgment and bounded safe read-only reconnaissance, stopping only for a
 materially missing authority, scientific choice or concrete input object. An
-ordered manifest organizes one-candidate-at-a-time work without queue state.
+ordered manifest organizes candidate-specific work without queue state.
+Concurrent treatments use assignment-specific direction/treatment handoff files,
+role temporary paths and runtime roots; they never share a writable file,
+checkpoint or mutable trainer state. Manifest order does not allocate runtime
+capacity or establish scientific priority.
 The sender removes the temporary exchange copy after intake. It is never staged,
 committed or pushed; canonical owner records remain outside the exchange.
 

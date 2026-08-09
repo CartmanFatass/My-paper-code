@@ -20,6 +20,11 @@ agentify_transport_terminal_status=COMPLETE|ERROR
 agentify_transport_wait_visibility=silent_until_terminal_native_final
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
+runtime_capacity_admission=exclusive
+runtime_capacity_pool_units=3
+runtime_capacity_source=parallel-research-workflow
+runtime_resource_upclass_or_defer=allowed_before_start
+runtime_resource_downclass=forbidden
 scientific_authority=none
 workflow_design_authority=none
 workflow_modification_authority=none
@@ -144,6 +149,20 @@ manager; there is no Research Operations Manager or persistent monitor.
   clarification while continuing unrelated work. It never guesses, merges
   directions, rewrites the artifact or creates a `BLOCKED` state, and it never
   reads `local_research/`.
+- For result-bearing Explorer treatments, CPM is the sole operational owner of
+  the three-unit runtime pool and live process/resource observations. It admits
+  only treatments whose direction/treatment identities, accepted source,
+  worktree, run/evidence/checkpoint/result roots, RNG namespace and temporary
+  paths are isolated. CPM may up-class or defer a not-yet-started treatment when
+  actual resources require it, but never down-classes it, changes the scientific
+  question, rewrites Explorer priority or creates a cross-direction scientific
+  barrier. Capacity deferral is `pending_runtime_capacity` for that treatment,
+  never a task, direction or workflow `BLOCKED` state. Every artifact keeps
+  one independent technical acceptance and one conclusion-first reverse result;
+  no merged acceptance follows from concurrent execution or completion order.
+  An exclusive formal/heavy run reserves only experiment-runtime admission;
+  CPM continues implementation, technical intake and every unrelated non-runtime
+  action.
 - Exact Experiment Operator assignments and recovery mode selection inside the
   unchanged authorized scientific boundary. A complete exact assignment
   delegates compute authority to the child automatically; CPM checks the

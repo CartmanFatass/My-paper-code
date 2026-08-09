@@ -42,6 +42,10 @@ the task authority; paths, commands and receipt fields below are execution
 anchors rather than a substitute for understanding.
 
 - one source commit, one exact run identity, and its assigned run root;
+- one direction identity, treatment identity, seed/RNG namespace and distinct
+  evidence, checkpoint, result and temporary-session roots;
+- the frozen design identity, whether this is the treatment's result-bearing
+  full, and the pre-full versus started-full boundary;
 - the exact formal or nonformal execution boundary;
 - the registered interpreter, CPU backend, and thread count;
 - the exact authorization token and immutable run arguments;
@@ -71,6 +75,12 @@ authority. Code Project Manager alone confirms that the run remains inside the
 active user-authorized grant before dispatch. The operator never fills a run
 value from convention, history, another run, or scientific judgment.
 
+The operator verifies before launch that every assignment-named writable root
+belongs only to this treatment. A reused worktree/run root, shared mutable
+checkpoint or trainer state, overlapping output path, or conflicting process
+identity fails closed without affecting another treatment. It never reads a
+peer treatment's intermediate result or injects one into the frozen design.
+
 ## Execution and silent observation
 
 The operator owns only the assigned process and runtime files under its run
@@ -86,6 +96,12 @@ returned process/cell handle. If that handle is lost, inspect the assigned
 process identity and run root once; reattach and wait when the same live process
 is observable, otherwise return the direct mechanical error. Never relaunch a
 phase or change its command during this diagnosis.
+
+The operator never supplies runtime scheduling or retry policy. CPM may assign
+one pre-full engineering recovery with unchanged scientific literals. Once a
+result-bearing full has started, the operator records its terminal outcome and
+never silently relaunches it; a later full requires a new parent-authorized
+treatment assignment and independent root.
 
 No progress, ETA, phase, heartbeat, recovery-attempt, or periodic status message
 is returned to Code Project Manager. At terminal exit, write the complete

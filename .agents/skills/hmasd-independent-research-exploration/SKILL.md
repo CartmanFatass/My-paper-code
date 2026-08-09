@@ -85,7 +85,7 @@ single-writer authority remain unchanged.
    connection, authorized source boundary, exclusions and completion meaning.
    Ask the user only when a material boundary is missing.
 4. For MyLib, read [references/mylib.md](references/mylib.md) and run the
-   registered probe. Never write to MyLib.
+registered probe. Never write to MyLib.
 5. Read [references/parallel-research-workflow.md](references/parallel-research-workflow.md)
    before dispatching children.
 6. Load its Explorer-owned continuity entry. If it is absent, perform the one
@@ -142,7 +142,8 @@ create an autonomous algorithm portfolio.
 Use **algorithm inspiration campaign** for a broad direction such as variable
 skill period or variable agent population. Recall and lock a versioned relevant
 corpus first. Assignment count is derived from that corpus, not a fixed range;
-run independent assignments at available native capacity and queue the rest.
+run independent assignments at available native capacity and defer the rest as
+not-yet-started roster items.
 Within this canonical campaign, after every `SOURCE_RESULT_PACKET` crosses the
 absorption barrier, the Explorer
 creates one `SOURCE_ABSORPTION_BRIEF`. Innovation, constructive principles
@@ -203,6 +204,16 @@ equivalence and non-discrimination are valid diagnoses. Explorer normally uses
 them to choose the next separating question: map support, test learnability under
 a discriminating host, then estimate direction and variance with a small
 multi-seed run when warranted. This is an iterative pattern, not a state machine.
+
+Before dispatching any result-bearing treatment, use the capacity and
+direction-barrier rules in
+[`references/parallel-research-workflow.md`](references/parallel-research-workflow.md).
+Explorer maintains the scientific roster and freezes each design; CPM owns live
+capacity admission and runtime observations. An available token is permission to
+consider the next independently valuable treatment, not an automatic scientific
+priority or a reason to reactivate a parked direction. Each returned result may
+enter its own direction-local scientific intake immediately. No free runtime
+token is required for intake, analysis, review or other non-experiment work.
 
 Never substitute an Innovator for source absorption, a Principles Analyst for
 literature fidelity, or a Critic for constructive RL reasoning. A broad request

@@ -100,8 +100,12 @@ discriminator questions to Innovator; and source, terminology or metric-fidelity
 questions to Scout. Explorer may use zero, one or several of them and never
 treats this capability map as a required panel.
 Several read-only questions may run in parallel, while Explorer keeps at most
-one resource-consuming experiment action active so the observed effect remains
-attributable.
+one result-bearing experiment active per direction by default. Independent
+ordinary A/B treatments from different directions may overlap inside the
+three-unit CPM runtime pool. The exact capacity, direction-barrier and frozen
+joint-roster exception live in the exploration Skill's
+`parallel-research-workflow.md`; this bridge owns only direction-local binding
+and scientific intake.
 
 This boundary is semantic guidance rather than a mandatory packet schema or
 validator admission gate. This boundary does not invoke External Pro, migrate
@@ -149,8 +153,11 @@ gap through direct semantic exchange instead of creating a `BLOCKED` state.
 
 One manifest may preserve an ordered group of public brief paths. That order is
 work organization rather than queue state, ranking or scientific comparison.
-CPM processes one isolated candidate at a time; one candidate's problem does
-not block unrelated work or change another candidate's scientific status.
+CPM may process several capacity-admitted, direction-independent candidates in
+isolated tickets and roots. One candidate's problem does not block unrelated
+work or change another candidate's frozen design or scientific status. Each
+result retains exactly one CPM technical acceptance and one Explorer scientific
+intake; completion order creates no priority or merged acceptance.
 
 For an Explorer-origin candidate, CPM implements the selected treatment as an
 engineering task and does not substitute External Pro for experiment, instance

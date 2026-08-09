@@ -254,6 +254,28 @@ slice.
 ## Concurrency and review
 
 - One writer owns each file; disjoint paths may run in parallel. No global lease.
+- Explorer-origin result-bearing treatments use the three-unit capacity contract
+  defined by the exact `Concurrency and authority` section of
+  `.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md`.
+  CPM is the operational admission owner: sum the units of currently active
+  result-bearing treatments, admit only an isolated treatment that fits, and
+  reserve all three units exclusively within the experiment pool for heavy/C
+  work. Capacity shortage means mark only the not-yet-started treatment
+  `pending_runtime_capacity`, never `BLOCKED`. It does not pause implementation,
+  completed-result intake, review or other non-runtime work. CPM may up-class for
+  observed engineering resources but never down-class, reprioritize science or
+  alter the branch map.
+- Concurrent treatments must have distinct direction/treatment identity,
+  ticket/worktree, accepted commit, run/evidence/checkpoint/result roots, RNG
+  namespace, temporary paths and Operator receipt. Reject shared writable files,
+  mutable checkpoints or trainer state before launch. One treatment's terminal
+  failure or earlier completion neither cancels nor modifies another frozen
+  full, and every result receives a separate technical acceptance.
+- Before a result-bearing full starts, CPM may issue at most one engineering
+  recovery that preserves all scientific literals. A light treatment is one-full,
+  no sweep and no implicit retry. Once the full starts, CPM returns its terminal
+  outcome without silently replaying it; any later full is a newly authorized
+  treatment decision rather than operational recovery.
 - Isolated worktrees use `scripts/hmasd_workspace_ticket.py provision`. Code
   Project Manager supplies the main checkout, exact base commit, assignment and
   allowed paths; the command creates both the worktree beneath

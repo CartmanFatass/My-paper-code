@@ -65,8 +65,14 @@ explorer_mechanical_technical_acceptance_authority=none
 explorer_mechanical_spawn_authority=none
 explorer_mechanical_cross_task_authority=none
 explorer_mechanical_research_state_effect=none
-runtime_concurrency=available_native_capacity
-resource_consuming_experiment_action=one_at_a_time_for_attribution
+runtime_concurrency=three_unit_cpm_capacity_pool
+resource_consuming_experiment_action=capacity_controlled_per_direction
+active_experiment_roster_owner=independent_research_explorer_scientific_view
+runtime_capacity_admission_owner=code_project_manager
+per_direction_result_bearing_default=one_active
+same_direction_parallelism=exact_frozen_joint_roster_only
+experiment_pool_exclusive_runtime=B_HEAVY_OR_C
+capacity_wait_effect=pending_runtime_capacity_only_not_blocked
 read_only_scientific_analysis_parallelism=available_native_capacity
 canonical_phase_barrier=required_for_algorithm_inspiration_campaign_only
 adaptive_question_dispatch=bounded_registered_child_consultation
@@ -216,6 +222,20 @@ owns scientific/advisory interpretation. The validation Skill and
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` own brief/reverse-result
 mechanics, direction-local context and named Pro triggers;
 External Pro remains final scientific-semantic acceptance when invoked.
+
+Explorer maintains the scientific `active_experiment_roster`: each entry binds
+one direction, treatment, frozen design, declared resource class, direction-local
+dependency, handoff/CPM locator, last CPM-reported runtime observation and
+scientific-intake state. The roster is not an authoritative process monitor or
+queue engine. Explorer declares the class prospectively and controls scientific
+priority; CPM owns actual capacity admission and may up-class or defer a not-yet-
+started treatment for engineering resources, but may neither down-class it nor
+alter its scientific question, priority or branch map. The capacity model,
+direction barriers, heartbeat behavior and same-direction joint-roster exception
+are defined once in `parallel-research-workflow.md`.
+No experiment-capacity condition blocks Explorer research, result intake,
+read-only analysis, Pro review or another non-runtime action. A formal or other
+explicitly heavy treatment can reserve the experiment pool, not the workflow.
 
 ## Scientific procedure
 

@@ -65,6 +65,15 @@ portfolio preload. Portfolio/index/README/continuity surfaces remain
 pointer-only; a missing binding gets one semantic clarification while
 unrelated work continues rather than a new workflow state.
 
+For result-bearing experiments, Explorer owns the scientific active roster,
+direction dependencies, prospective class and per-result intake; CPM owns the
+three-unit runtime-capacity admission, live process/resource observations,
+isolated execution and per-artifact technical acceptance. The detailed pool and
+heartbeat rules remain in the parallel-research workflow reference. This edge
+does not create a shared scheduler, merged acceptance or cross-direction barrier.
+An exclusive formal/heavy run reserves only experiment admission; all non-runtime
+owner lanes continue.
+
 The Explorer mechanical edge is a native assignment to a literal-fact
 organization child; its storage boundary is defined by the Session Contract.
 

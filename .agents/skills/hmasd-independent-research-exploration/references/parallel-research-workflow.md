@@ -2,7 +2,17 @@
 
 ```text
 logical_assignment_count=derived_from_exact_work_roster
-runtime_concurrency=available_native_capacity
+runtime_concurrency=three_unit_cpm_capacity_pool
+runtime_capacity_units_total=3
+runtime_capacity_classes=A_READONLY_OR_ZERO_RUNTIME:0|B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive
+active_experiment_roster_owner=independent_research_explorer_scientific_view
+runtime_capacity_admission_owner=code_project_manager
+per_direction_result_bearing_default=one_active
+same_direction_parallelism=exact_frozen_joint_roster_only
+capacity_wait_state=pending_runtime_capacity_only
+capacity_wait_effect=pending_runtime_capacity_only
+experiment_pool_exclusivity_scope=result_bearing_runtime_only
+workflow_progress_during_exclusive_runtime=continues
 canonical_campaign_phase_roster=exact_ordered_work_roster
 canonical_campaign_phase_barriers=required
 adaptive_question_roster=singleton_or_exact_joint_roster
@@ -38,8 +48,9 @@ Freeze one exact mode, campaign direction or evidence question, mission link,
 authorized source boundary, exclusions and completion meaning before dispatch.
 For the canonical evidence-review and algorithm-inspiration campaign, every
 phase freezes an exact logical work roster. Runtime launches as many
-independent assignments as available native capacity permits and queues the
-rest. Operational failure may receive one unchanged low-cost retry. A changed
+independent assignments as available native capacity permits and defers the
+rest as not-yet-started roster items. This native child availability is separate
+from experiment-pool admission. Operational failure may receive one unchanged low-cost retry. A changed
 source boundary or project authority needs a new user decision; a new mechanism
 or subdirection inside the campaign is an opportunity-bound assignment.
 
@@ -103,13 +114,18 @@ scientific interpretation.
 
 The Explorer owns one lightweight entry at
 `local_research/RESEARCH_CONTINUITY.md`. It records only active campaign or
-artifact paths, the last completed phase barrier, unfinished assignment or
-review, the next scientific action and the current authorized source boundary.
-Update it only at phase barriers, parked state or task end. If absent, the new
-Explorer performs one bounded scan of its owned `local_research` paths and
-creates the entry with `apply_patch`. Continuity does not alter scientific
-ordering, source authority, read-only children or the Explorer single-writer
-rule.
+artifact paths, the `active_experiment_roster`, the last completed phase or
+direction-local intake barrier, unfinished assignment or review, the next
+scientific action and the current authorized source boundary. Each active
+treatment entry makes its direction, treatment, declared resource class and
+units, predecessor dependency, canonical design/handoff, CPM task locator, last
+CPM-reported runtime observation and intake state understandable. These are
+semantic continuity cues rather than required field names. Update it only when
+the active roster changes, an intake/phase barrier closes, a direction is parked,
+or the task ends. If absent, the new Explorer performs one bounded scan of its
+owned `local_research` paths and creates the entry with `apply_patch`.
+Continuity does not alter scientific ordering, source authority, read-only
+children or the Explorer single-writer rule.
 Do not add writer scripts, hashes, state machines, budgets or user gates to
 continuity.
 
@@ -146,7 +162,7 @@ continuity.
 
 3. **Parallel source absorption.** Derive one exact Scout assignment roster from
    the entire corpus. There is no workflow-level assignment-count cap. Launch at
-   available capacity and queue the rest. Every source is owned exactly once.
+   available capacity and defer the rest as not-yet-started roster items. Every source is owned exactly once.
 4. **Absorption barrier.** Require one terminal `SOURCE_RESULT_PACKET` or exact
    operational failure for every assignment. Only source-grounded packets may
    support the absorption brief.
@@ -204,10 +220,68 @@ completeness never means scientific truth.
 
 The workflow defines no fixed per-role parallel count. Exact source and
 opportunity rosters determine logical work; current Codex capacity determines
-how many read-only analyses run simultaneously. Explorer names at most one
-resource-consuming experiment action at a time so its effect remains
-attributable; this does not limit parallel read-only scientific questions.
-Phase dependencies remain ordered. Children
+how many read-only analyses run simultaneously. Runtime experiments use a
+three-unit pool owned operationally by CPM: `A_READONLY_OR_ZERO_RUNTIME` consumes
+zero, `B_TOY_LIGHT` one, `B_TOY_MEDIUM` two, and `B_HEAVY_OR_C` all three with
+experiment-pool exclusivity. Thus three independent light treatments, or one medium plus
+one light, may run; a heavy/C treatment requires every other result-bearing
+runtime treatment to be terminal. A fourth light remains
+`pending_runtime_capacity` until one unit is released. Explorer declares a prospective class from
+the frozen design. CPM may up-class or defer a not-yet-started treatment for
+actual CPU, memory, process, GPU, paid-service or output-root constraints, but
+never down-class it or change its scientific question, priority or branch map.
+Insufficient capacity is `pending_runtime_capacity`, never a direction, task or
+workflow `BLOCKED` state, and creates no queue engine, lease, dispatcher or
+acceptance owner. Formal or explicitly heavy runtime may prevent another
+result-bearing experiment from starting, but it never pauses code work,
+read-only research, scientific intake, External Pro review or another
+non-runtime action.
+
+A light treatment is normally CPU-only, uses no GPU, paid API or production
+service, stays at or below roughly 500,000 real transitions and 100,000 optimizer
+updates, has explicit memory/process/output-root bounds, and permits one full,
+no sweep and no implicit retry. The thresholds guide prospective admission rather
+than mechanically decide scientific meaning. Formal, expensive, GPU, paid-
+resource and C work is heavy/exclusive even if a superficial count is small.
+
+The attribution barrier is direction-local. Different directions' independent
+ordinary A/B treatments may run concurrently. By default a direction has at most
+one result-bearing treatment active, and its successor cannot be dispatched
+until that predecessor is terminal and Explorer completes the direction's
+scientific intake. Same-direction parallelism is exceptional: Explorer must
+freeze one exact joint roster before any member starts, every design must be
+independent of peer results, and no member may share a mutable scientific object.
+The joint roster still consumes the common capacity pool. Completion order is
+never scientific priority, voting or a cross-direction barrier. A completed
+result may be intaken immediately; it cannot modify the frozen design of another
+already-started full. Explorer may cancel a not-yet-started roster item whose
+value has fallen, but never mutates a result-bearing full.
+
+Every concurrent treatment has distinct direction/treatment identity, canonical
+design, CPM ticket/worktree, source freeze and accepted commit, run, evidence,
+checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator
+receipt, readiness/technical-acceptance record and Explorer decision. Same-file
+writes, reused run roots, shared mutable checkpoints or trainer state, and
+mid-run cross-treatment result injection fail closed. OOM, process conflict or
+shared-path conflict affects only the treatment that encountered it. CPM may
+leave a not-yet-started ticket pending under CPU or memory pressure without changing
+scientific ordering. One engineering recovery that preserves every scientific
+literal is allowed before the result-bearing full starts; after it starts there
+is no silent retry.
+
+On an Explorer continuation heartbeat, restore the active roster, perform one
+bounded status/wait for each named active CPM treatment, intake returned results
+first, and dispatch at most one new treatment only when capacity is available and
+that direction's local barrier is closed. After the task deadline, dispatch none
+and wait only to a safe handoff boundary. This is ordinary continuation behavior,
+not a persistent monitor or background scheduler. A heartbeat with no free
+runtime token still performs intake, analysis and other non-runtime work.
+External Pro may overlap a
+small B runtime, but only the existing direction-changing ambiguity, final
+alignment, C/formal boundary or explicit-user trigger starts Pro; B completion or
+parallelism alone never does.
+
+Campaign phase dependencies remain ordered. Children
 cannot spawn, write, use Git, contact persistent tasks or access active HMASD
 state. There is no minimum-duration rule or forced large-agent target. Only the
 user may expand the source/project authority boundary or initiate formal work.
