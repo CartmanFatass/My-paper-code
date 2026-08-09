@@ -6,10 +6,26 @@ Current treatment: `UCOPE-A1-COUNT-STATE-EXACT-ENUMERATION`
 
 Stage: derivation; treatment `A`; `formal=false`.
 
-Status: source candidate only. The implementation and technical-only exercise
-surface do not constitute a registered A1 result. Code Project Manager owns the
-later clean-source revision, one registered probe, technical acceptance,
-publication, result commit, and Explorer handoff.
+Status: technically accepted registered result. The source was frozen at
+`61f84b6f419df4c64078e37fdba9eff080a0361f`; the single registered probe was
+`ucope_a1_count_state_exact_enumeration_61f84b6f_r1`. Its retained artifact
+passed independent mechanical verification and is published byte-for-byte as
+`UCOPE_A1_COUNT_STATE_EXACT_ENUMERATION_RESULT.json`. Scientific intake and any
+later direction decision remain with Explorer.
+
+## Accepted registered result
+
+The unique frozen branch is
+`A1_COUNT_STATE_DECISION_RELEVANCE_SUPPORTED` with `first_failure_id=null`.
+The artifact retains all 48 rows over 16 reused histories and exactly 96
+regime-conditioned rational cells. It records UCOPE expected physical-time AUC
+`26571/20000`, count-blind AUC `1`, exact gain `6571/20000`, terminal coverage
+`1097/1250`, and terminal-coverage gain `236/625`. All eleven prohibited
+activity counters are zero. This is a family-local A1 technical result only;
+it does not authorize B, C, External Pro, or a portfolio decision.
+
+The published JSON is byte-identical to the accepted raw artifact (SHA-256
+`67f234b3dee9931d13cc98bc705fee6cdf64a273f51d4ad702b198827720e7a5`).
 
 ## Narrow question and frozen scope
 
@@ -149,12 +165,14 @@ legacy `ell`/`ell_prime` nominal accessors map read-only to the frozen
 its exact family constants and historical values. This compatibility surface
 does not turn that earlier certificate into the new A1 registered probe.
 
-## Public source locators
+## Public locators
 
 - `experiments/candidates/ucope/exact_enumerator.py`
 - `scripts/run_ucope_a1_count_state_exact_enumeration.py`
 - `tests/experiments/candidates/ucope/test_exact_enumerator.py`
 - `docs/research/candidates/ucope/CODE_SCIENCE_INDEX.md`
+- `docs/research/candidates/ucope/UCOPE_A1_COUNT_STATE_EXACT_ENUMERATION_RESULT.json`
 
-The public result locator and accepted source/result commits are intentionally
-absent until CPM performs and accepts the single registered probe.
+Accepted source commit:
+`61f84b6f419df4c64078e37fdba9eff080a0361f`. The accepted result commit is the
+Git commit containing this index update and the byte-identical public result.
