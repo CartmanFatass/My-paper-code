@@ -146,3 +146,31 @@ the same routing with more optimization, and the diagonal-to-changed split may
 favor pre-specified typed structure.  A failure does not establish that typed
 state is useless outside this host or that generic memory is universally
 sufficient.
+
+## Accepted full result
+
+Conclusion: the sole authorized full package is mechanically accepted and its
+canonical result is published without alteration.  The accepted run is
+`folr_b2_counterfactual_witness_gated_nuisance_transfer_e533993c_r1` from
+source commit `e533993cb842657a75a0962047bd2dfa52b6cf70`.  Its Experiment
+Operator receipt is `COMPLETE`; `validate-train --require-full`,
+`validate-evaluate --require-full`, and `validate-result --require-full` each
+passed.  The clean-candidate source-readiness receipt is schema-3 `PASSED`,
+attempt `folr_b2_e533993c_r2`, for the same candidate commit.
+
+The accepted full records 24 actor runs; 49,152 training episodes; 24,576
+evaluation episodes; 73,728 complete episodes; 221,184 environment transitions
+and policy calls; 768 learner/trainer/optimizer updates; zero hypothetical
+transitions; 24 final checkpoints; and all five admission predicates true.
+Its unique frozen code-produced branch is
+`RESET_LEAK_OR_NEW_PARTNER_CALIBRATION_FAILED`.
+
+The public canonical result is
+`docs/research/candidates/vap_folr_core/FOLR_B2_COUNTERFACTUAL_WITNESS_GATED_NUISANCE_TRANSFER_RESULT.json`.
+
+### Publication claim boundary
+
+This branch is a host-local, finite-budget code decision only.  Publication does
+not claim promotion, retirement, C readiness, formal validity, generic
+impossibility, cross-task generalization, sibling-direction meaning, or
+Explorer scientific intake.
