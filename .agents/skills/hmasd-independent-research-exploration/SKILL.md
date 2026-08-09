@@ -214,6 +214,16 @@ consider the next independently valuable treatment, not an automatic scientific
 priority or a reason to reactivate a parked direction. Each returned result may
 enter its own direction-local scientific intake immediately. No free runtime
 token is required for intake, analysis, review or other non-experiment work.
+When two or more independent treatments have already been scientifically
+selected and frozen, their local predecessor/intake barriers are closed, and
+capacity is available, follow the reference's normal path:
+`independent_ready_treatment_dispatch=parallel_first_within_capacity`.
+Do not silently apply a global serial fallback; it is forbidden without named
+direction-dependency or resource evidence. This is not a request to invent
+work, fill capacity, reprioritize or reactivate parked directions, and it does
+not change the heartbeat's at-most-one-new-treatment-per-turn bound, pending
+runtime-capacity/non-runtime continuation, Pro triggers or formal iteration
+behavior.
 
 Never substitute an Innovator for source absorption, a Principles Analyst for
 literature fidelity, or a Critic for constructive RL reasoning. A broad request

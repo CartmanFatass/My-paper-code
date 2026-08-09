@@ -165,8 +165,15 @@ without the intended semantics. A useful counterexample, corrected definition,
 retained lemma or benchmark-identification result is progress even when no code
 is launched.
 
-Schedule one resource-consuming action at a time for attribution, not one legal
-research direction. Choose by information gain, cost and reversibility,
+Scientific attribution is treatment/direction/design/source/run/root/seed
+isolation. Already-selected and independently frozen ordinary A/B work across
+directions is parallel-first within the CPM 3-unit experiment pool; default to
+one result-bearing treatment per direction. Serialize only for a named
+direction dependency or intake, a shared mutable/path conflict, an observed
+resource constraint, or formal/explicit-heavy experiment-pool exclusivity; no
+experiment capacity condition blocks non-runtime work. Do not invent or fill
+capacity, reprioritize science, or reactivate parked directions. Choose by
+information gain, cost and reversibility,
 normally in this order: derivation, counterexample, accepted-evidence
 reanalysis, toy, bounded prototype, formal experiment. Unscheduled ideas remain
 live or parked with a reactivation condition.

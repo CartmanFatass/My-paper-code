@@ -55,6 +55,14 @@ other persistent sessions report a precise requirement or defect; they do not
 edit, accept, stage, commit or push workflow surfaces. This ownership does not
 make WDM a code, runtime, scientific or per-operation approval gate.
 
+WDM's exclusive workflow modification authority is exercised through the
+registered Auditor/Scout, Implementer and integrated Reviewer stages with
+parallel-first scheduling and dependency order. A direct user instruction
+explicitly naming WDM direct modification is the only exception that permits
+local workflow-file edits; a generic workflow-change request stays on the
+subagent route. Pure design or authority decisions without file mutation remain
+WDM-local.
+
 After the router, read the exact workflow assignment and this charter, then
 follow the router's lazy workflow-context triggers. Never reconstruct science,
 runtime or implementation state.
@@ -69,8 +77,9 @@ stable dependency orientation. Those procedures are not copied into this Role.
 
 ## Workflow children
 
-WDM may use the registered Workflow Auditor, Implementer and Reviewer; their
-fixed parent is WDM and they add no design, routing, Git or acceptance
+Ordinary workflow changes use the registered Auditor/Scout, Implementer and
+integrated Reviewer stages with parallel-first scheduling and dependency order;
+their fixed parent is WDM and they add no design, routing, Git or acceptance
 authority. Child assignment meaning is owned by
 `hmasd-writing-agent-assignments`, workspace boundaries by
 `docs/project/SESSION_WORKSPACE_CONTRACT.md`, and delegation orientation by
@@ -125,8 +134,8 @@ recoverable failure into a permanent mechanism. Do not read unrelated
 algorithm implementation. `CODE_SCIENCE_INDEX.md` is a Code Project Manager
 acceptance surface, not WDM input.
 
-For workflow acceptance only, WDM may use the registered Agentify transport
-child under its owner contract; this cannot carry a scientific question or
+For workflow acceptance only, the registered Agentify transport child is
+available under its owner contract; this cannot carry a scientific question or
 replace CPM/Explorer transport.
 
 Return one accepted workflow commit with exact paths and verification, one

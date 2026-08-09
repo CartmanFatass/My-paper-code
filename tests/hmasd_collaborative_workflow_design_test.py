@@ -156,3 +156,51 @@ def test_wdm_owns_workflow_without_a_parallel_explorer_path_registry() -> None:
     assert "centralized_explorer_workflow_paths=" not in role
     assert "centralized_explorer_workflow_acceptance_owner=" not in role
     assert "centralized_explorer_workspace_cleanup_write_authority=none" in role
+
+
+def test_default_execution_policy_is_parallel_first_with_direct_exception() -> None:
+    router = ROUTER_PATH.read_text(encoding="utf-8")
+    role = ROLE_PATH.read_text(encoding="utf-8")
+    collaboration = SKILL_PATH.read_text(encoding="utf-8")
+    audit = (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    workflow_map = (REPO / "docs/project/WORKFLOW_MAP.md").read_text(encoding="utf-8")
+    normalized_router = " ".join(router.split()).lower()
+    normalized_role = " ".join(role.split()).lower()
+    normalized_collaboration = " ".join(collaboration.split()).lower()
+    normalized_audit = " ".join(audit.split()).lower()
+    normalized_map = " ".join(workflow_map.split()).lower()
+
+    assert "workflow_change_execution=subagent_workflow_by_default" in router
+    assert "workflow_subagent_parallelism=parallel_first_with_dependency_order" in router
+    assert (
+        "wdm_direct_modification=only_when_user_explicitly_instructs_wdm_to_modify_directly"
+        in normalized_router
+    )
+    for text in (normalized_router, normalized_role, normalized_collaboration, normalized_audit, normalized_map):
+        assert "ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order" in text
+        assert "direct user instruction explicitly naming wdm direct modification" in text
+    assert "dispatch read-only auditor/scout concurrently with already-freezable implementation slices" in normalized_collaboration
+    assert "run disjoint implementer file families concurrently" in normalized_collaboration
+    assert "serialize only actual information dependencies or same-file writers" in normalized_collaboration
+    assert "integrated reviewer follows the complete integrated batch" in normalized_collaboration
+    assert "pure wdm design or authority decisions without file mutation remain wdm-local" in normalized_router
+    assert "mechanism and simple-operation budgets constrain" in normalized_audit
+    assert "never decide delegate-vs-local routing" in normalized_audit
+    assert "task size, complexity, local feasibility, context cost, path count and benefit estimates never alter it" in normalized_audit
+    assert "ordinary workflow changes use the registered auditor/scout -> implementer -> reviewer" not in "\n".join((router, role, collaboration, audit, workflow_map)).lower()
+
+    for stale in (
+        "wdm may use",
+        "after confirmation, wdm may use",
+        "when implementers were used",
+        "delegation is judgment-guided",
+        "bounded slices may use registered children",
+        "no mandatory pipeline",
+        "cost-aware delegation path",
+        "local feasibility threshold",
+        "task size threshold",
+        "complexity threshold",
+    ):
+        assert stale not in "\n".join((router, role, collaboration, audit, workflow_map)).lower()

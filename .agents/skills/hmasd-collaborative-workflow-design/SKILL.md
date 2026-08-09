@@ -48,8 +48,8 @@ Repository facts are discovered; user decisions are not inferred.
 Classify the input before planning. `USER_REQUESTED_CHANGE` follows the
 confirmation procedure below. `REPORTED_WORKFLOW_DEFECT` is appended to WDM's
 chronological incident log. The reporting session supplies evidence and a suggestion, never
-authority or a scientific/runtime decision. WDM may use the zero-confirmation
-repair path only to restore an accepted stable contract without changing
+authority or a scientific/runtime decision. The zero-confirmation repair path
+is available only to restore an accepted stable contract without changing
 authority, policy, science, runtime or external effects. Otherwise move the
 item to the user-requested lane and present a complete plan.
 
@@ -67,8 +67,15 @@ Present one compact plan containing:
 - **Exact paths** — every file expected to change.
 - **Intended changes** — material role, Skill, script, route and ownership edits.
 - **Verification and risks** — focused checks, Git integration, dirty-path
-  preservation and, when implementers are used, one batch-level reviewer by
-  default, with parallel reviewers only for genuinely independent questions.
+  preservation; ordinary workflow changes use the registered Auditor/Scout,
+  Implementer and integrated Reviewer stages with parallel-first scheduling and
+  dependency order. Dispatch read-only Auditor/Scout concurrently with already-freezable
+  implementation slices, run disjoint Implementer file families
+  concurrently, and serialize only actual information dependencies or same-file
+  writers. The integrated Reviewer follows the complete integrated batch, with
+  parallel reviewers only for genuinely independent questions.
+  A direct user instruction explicitly naming WDM direct modification is the
+  only exception; generic workflow-change requests remain on the subagent route.
 
 The exact-path matrix always includes `AGENTS.md` as `modify` or
 `unchanged-valid`. A role, session, Skill, profile, authority, route or retired
@@ -85,6 +92,8 @@ recurring cost, and old mechanism/text deleted, then name the focused contract
 evidence and qualitative maintainability it preserves.
 A retryable failure receives a one-line runtime checklist, not a mechanism.
 A workflow cost audit explicitly requested by the user is the only cost-review path.
+Mechanism and simple-operation budgets constrain new gates, recovery branches and
+probe work; they do not decide delegate-vs-local routing.
 
 Perform no mutation until the user confirms the complete plan in natural
 language for `USER_REQUESTED_CHANGE`. If the user corrects it, present the

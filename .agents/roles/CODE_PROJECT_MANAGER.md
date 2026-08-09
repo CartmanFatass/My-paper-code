@@ -25,6 +25,8 @@ runtime_capacity_pool_units=3
 runtime_capacity_source=parallel-research-workflow
 runtime_resource_upclass_or_defer=allowed_before_start
 runtime_resource_downclass=forbidden
+independent_admitted_treatment_execution=parallel_first_within_capacity
+ordinary_ab_serialization_requires=exact_dependency_or_resource_evidence
 scientific_authority=none
 workflow_design_authority=none
 workflow_modification_authority=none
@@ -163,6 +165,18 @@ manager; there is no Research Operations Manager or persistent monitor.
   An exclusive formal/heavy run reserves only experiment-runtime admission;
   CPM continues implementation, technical intake and every unrelated non-runtime
   action.
+- Once Explorer has selected and frozen independent direction treatments and CPM
+  admits isolated tickets/worktrees within the three-unit pool, CPM implements
+  and runs those ordinary treatments parallel-first. The normal path is
+  `independent_admitted_treatment_execution=parallel_first_within_capacity`;
+  a global serial fallback is rejected unless one exact blocker is recorded:
+  actual direction/intake dependency supplied by Explorer, same-file/shared
+  mutable object/root conflict, observed CPU/memory/process/capacity constraint,
+  or formal/explicit-heavy experiment-pool exclusivity. Global attribution,
+  generic caution, convenience, completion order, and a `current sole action`
+  cannot serialize ordinary A/B. This does not force capacity filling, alter
+  scientific priority, down-class a treatment, modify a frozen design, or
+  change the formal nine-valid-iteration single-action lane.
 - Exact Experiment Operator assignments and recovery mode selection inside the
   unchanged authorized scientific boundary. A complete exact assignment
   delegates compute authority to the child automatically; CPM checks the

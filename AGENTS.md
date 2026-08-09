@@ -108,6 +108,9 @@ formal_compute_authority=user_only
 explorer_mechanical_child=hmasd-explorer-mechanical
 explorer_mechanical_parent=independent_research_explorer
 workflow_change_request_route=workflow_design_manager
+workflow_change_execution=subagent_workflow_by_default
+wdm_direct_modification=only_when_user_explicitly_instructs_WDM_to_modify_directly
+workflow_subagent_parallelism=parallel_first_with_dependency_order
 workflow_child_parent=workflow_design_manager|workflow_child_acceptance_authority=none|workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace|session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
 workflow_child_git_authority=none
 native_child_authority=exact_assignment_only
@@ -169,6 +172,17 @@ spawn or cross-task authority. Its profile and role are
 WDM is the semantic integrator and acceptance owner. Registered child roles and
 the stable delegation boundary are owned by their Role, Skill and
 `docs/project/WORKFLOW_MAP.md`; the router keeps only the child pointers above.
+
+Ordinary workflow changes use the registered Auditor/Scout, Implementer and
+integrated Reviewer stages with parallel-first scheduling and dependency order;
+serialize only actual information dependencies or same-file writers. The
+integrated Reviewer follows the complete integrated batch. Only a direct user
+instruction explicitly naming WDM direct modification permits WDM to edit
+workflow files locally; a generic workflow change request remains on the
+default subagent route. Pure WDM design or authority decisions without file
+mutation remain WDM-local.
+Delegate-vs-local routing does not use task size, complexity, local feasibility,
+context cost, path count or benefit estimates.
 
 ## Routed owner documents
 

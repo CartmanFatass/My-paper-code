@@ -97,6 +97,13 @@ candidates concurrently when the capacity contract permits; the supplied order
 is organization rather than ranking, runtime admission or a cross-direction
 barrier. Every candidate keeps its own handoff, ticket, roots, receipt,
 technical acceptance and scientific intake.
+For already selected and frozen independent treatments whose direction-local
+predecessor/intake barriers are closed, parallel-first dispatch within admitted
+capacity is the normal path. A global serial fallback requires named direction
+dependency or actual resource evidence; attribution, caution, completion order
+and convenience do not supply it. The reference contract retains the heartbeat
+one-new-treatment-per-turn limit and pending-runtime-capacity/non-runtime
+continuation without changing scientific priority or Pro triggers.
 
 CPM reads the named public brief, uses engineering judgment and performs
 bounded safe read-only reconnaissance. It proceeds when the task is

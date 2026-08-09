@@ -543,6 +543,8 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "resource_consuming_experiment_action=capacity_controlled_per_direction",
         "active_experiment_roster_owner=independent_research_explorer_scientific_view",
         "runtime_capacity_admission_owner=code_project_manager",
+        "independent_ready_treatment_dispatch=parallel_first_within_capacity",
+        "global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence",
         "per_direction_result_bearing_default=one_active",
         "same_direction_parallelism=exact_frozen_joint_roster_only",
         "experiment_pool_exclusive_runtime=B_HEAVY_OR_C",
@@ -603,6 +605,9 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "dispatch at most one new treatment",
         "B completion or parallelism alone never does",
         "Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.",
+        "normal path for two or more scientifically selected and frozen independent treatments is parallel-first",
+        "Attribution, generic caution, completion order, convenience and a current sole action are not dependency or resource evidence",
+        "heartbeat's at-most-one-new-treatment-per-turn bound",
     ):
         assert required in parallel_normalized
 
@@ -665,8 +670,77 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "one-candidate-at-a-time",
         "queued_capacity_state=",
         "Insufficient capacity is `queued`",
+        "global_serial_fallback=allowed",
+        "global_serial_fallback=default",
+        "global_serial_fallback=serial_by_default",
+        "attribution requires serialization",
+        "completion order determines dispatch",
     ):
         assert retired not in role + parallel + validation_contract
+
+
+def test_parallel_first_normal_path_rejects_attribution_lock_regression() -> None:
+    """Independent ready treatments cannot silently regain a global lock."""
+    role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+        encoding="utf-8"
+    )
+    parallel = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md"
+    ).read_text(encoding="utf-8")
+    exploration_skill = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    validation_skill = (
+        REPO / ".agents" / "skills" / "hmasd-explorer-project-validation" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    validation_contract = (
+        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    ).read_text(encoding="utf-8")
+    handoffs = (REPO / "docs" / "project" / "handoffs" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    principles = (REPO / "docs" / "project" / "ALGORITHM_PRINCIPLES.md").read_text(
+        encoding="utf-8"
+    )
+
+    role_normalized = " ".join(role.split())
+    parallel_normalized = " ".join(parallel.split())
+    surfaces = (role, parallel, exploration_skill, validation_skill, validation_contract, handoffs)
+    for required in (
+        "independent_ready_treatment_dispatch=parallel_first_within_capacity",
+        "global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence",
+    ):
+        assert required in role_normalized
+        assert required in parallel_normalized
+    for required in (
+        "selected and frozen",
+        "direction-local predecessor/intake barrier",
+        "parallel-first",
+        "same-direction rules",
+        "actual CPM-reported capacity/resource constraint",
+        "formal/explicit-heavy",
+        "pending-runtime-capacity",
+        "non-runtime continuation",
+        "at-most-one-new-treatment-per-turn",
+    ):
+        assert any(required.lower() in " ".join(surface.split()).lower() for surface in surfaces)
+
+    # The old producer sentence would reintroduce a global attribution lock.
+    section_three = principles.split("## 4. Evidence Design", 1)[0]
+    assert "Schedule one resource-consuming action at a time for attribution" not in section_three
+    for stale in (
+        "one resource-consuming action at a time for attribution",
+        "global serial lock by default",
+        "serialize independent treatments for attribution",
+        "current sole action permits serialization",
+    ):
+        normalized_surfaces = " ".join(" ".join(surface.lower().split()) for surface in surfaces)
+        assert stale.lower() not in normalized_surfaces
 
 
 def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated() -> None:

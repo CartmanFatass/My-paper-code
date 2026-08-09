@@ -63,3 +63,10 @@ distinct sender files; manifest order is not runtime admission, scientific
 priority or a cross-direction barrier. A result begins with its natural-language
 conclusion and then appends the necessary exact evidence; a mechanical envelope
 alone is insufficient.
+For two or more already selected and frozen independent treatments with closed
+direction-local predecessor/intake barriers, this interface follows the
+parallel-first normal path within available capacity. A global serial fallback
+requires named dependency or actual resource evidence; attribution, generic
+caution, completion order and convenience are not sufficient. The handoff
+interface does not fill capacity, reprioritize or reactivate directions, and
+retains the heartbeat one-new-treatment-per-turn bound.

@@ -323,6 +323,8 @@ foreach ($required in @(
     'runtime_capacity_source=parallel-research-workflow',
     'runtime_resource_upclass_or_defer=allowed_before_start',
     'runtime_resource_downclass=forbidden',
+    'independent_admitted_treatment_execution=parallel_first_within_capacity',
+    'ordinary_ab_serialization_requires=exact_dependency_or_resource_evidence',
     'sole operational owner of the three-unit runtime pool',
     'Capacity deferral is `pending_runtime_capacity` for that treatment, never a task, direction or workflow `BLOCKED` state',
     'An exclusive formal/heavy run reserves only experiment-runtime admission',
@@ -330,6 +332,24 @@ foreach ($required in @(
     'Every artifact keeps one independent technical acceptance')) {
     if (-not $codePmNormalized.Contains($required)) {
         throw "Code Project Manager runtime-capacity ownership missing: $required"
+    }
+}
+foreach ($required in @(
+    'selected and frozen independent direction treatments',
+    'admits isolated tickets/worktrees within the three-unit pool',
+    'ordinary treatments parallel-first',
+    'global serial fallback is rejected unless one exact blocker',
+    'actual direction/intake dependency supplied by Explorer',
+    'same-file/shared mutable object/root conflict',
+    'observed CPU/memory/process/capacity constraint',
+    'formal/explicit-heavy experiment-pool exclusivity',
+    'Global attribution, generic caution, convenience, completion order',
+    'current sole action',
+    'cannot serialize ordinary A/B',
+    'does not force capacity filling',
+    'change the formal nine-valid-iteration single-action lane')) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "Code Project Manager parallel-first contract missing: $required"
     }
 }
 foreach ($required in @(
@@ -341,7 +361,9 @@ foreach ($required in @(
     'shared writable files, mutable checkpoints or trainer state',
     'at most one engineering recovery that preserves all scientific literals',
     'one-full, no sweep and no implicit retry',
-    'without silently replaying it')) {
+    'without silently replaying it',
+    'formal nine-valid-iteration/one-new-action-per-turn lane',
+    'never an ordinary A/B global serial lock')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile runtime-capacity contract missing: $required"
     }
@@ -354,6 +376,15 @@ foreach ($required in @(
 }
 if ($codePm.Contains('one_at_a_time_for_attribution')) {
     throw 'Retired global resource-consuming action lock remains in CPM role'
+}
+foreach ($retired in @(
+    'ordinary_ab_global_serial_fallback=allowed',
+    'global_serial_fallback=ordinary_ab',
+    'ordinary_ab_serialization=always',
+    'serialize_independent_treatments=true')) {
+    if ($codePm.Contains($retired) -or $agile.Contains($retired)) {
+        throw "Retired ordinary global serial fallback remains: $retired"
+    }
 }
 
 # CPM owns conversation meaning; the child realizes the frozen brief.

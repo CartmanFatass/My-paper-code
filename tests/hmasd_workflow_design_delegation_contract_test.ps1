@@ -71,6 +71,24 @@ foreach ($required in @(
     'does not load code maps or code-context guides by default')) {
     if (-not $normalizedManager.Contains($required.ToLowerInvariant())) { throw "WDM writing-agent routing contract missing: $required" }
 }
+
+foreach ($required in @(
+    'workflow_change_execution=subagent_workflow_by_default',
+    'workflow_subagent_parallelism=parallel_first_with_dependency_order',
+    'wdm_direct_modification=only_when_user_explicitly_instructs_WDM_to_modify_directly',
+    'ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order',
+    'generic workflow change request remains on the default subagent route',
+    'pure wdm design or authority decisions without file mutation remain wdm-local',
+    'delegate-vs-local routing does not use task size, complexity, local feasibility, context cost, path count or benefit estimates')) {
+    if (-not $normalizedRouter.Contains($required.ToLowerInvariant())) { throw "Router execution policy missing: $required" }
+}
+
+foreach ($required in @(
+    "wdm's exclusive workflow modification authority is exercised through the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order",
+    'a direct user instruction explicitly naming wdm direct modification is the only exception',
+    'pure design or authority decisions without file mutation remain wdm-local')) {
+    if (-not $normalizedManager.Contains($required.ToLowerInvariant())) { throw "WDM execution policy missing: $required" }
+}
 if (-not $skill.Contains('workflow_hash_validation=forbidden')) {
     throw 'Workflow audit Skill missing hash prohibition'
 }
@@ -130,12 +148,17 @@ foreach ($required in @(
 }
 
 foreach ($required in @(
-    'After confirmation, WDM may use the registered Auditor, Implementer and',
-    'meaning remain with their Role and `hmasd-writing-agent-assignments`; workspace',
-    'and successor boundaries remain with',
-    'in `docs/project/WORKFLOW_MAP.md`',
-    'This Skill retains only the implementation')) {
-    if (-not $skill.Contains($required)) { throw "Workflow delegation/context contract missing: $required" }
+    'ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order',
+    'dispatch read-only auditor/scout concurrently with already-freezable implementation slices',
+    'run disjoint implementer file families concurrently',
+    'serialize only actual information dependencies or same-file writers',
+    'integrated reviewer follows the complete integrated batch',
+    'generic workflow-change requests remain on the subagent route',
+    'normal wdm checks and acceptance mechanics',
+    "do not invent a reviewer requirement beyond the user's rule",
+    'mechanism and simple-operation budgets constrain new gates, recovery branches and probe work; they never decide delegate-vs-local routing',
+    'task size, complexity, local feasibility, context cost, path count and benefit estimates never alter it')) {
+    if (-not (($skill -replace '\s+', ' ').ToLowerInvariant()).Contains($required.ToLowerInvariant())) { throw "Workflow delegation/context contract missing: $required" }
 }
 $obsoleteDispatchRule = @('Do not', 'create', 'a', 'child', 'when', 'dispatch/packet', 'review', 'costs', 'more', 'than', 'the') -join ' '
 if ($skill.Contains($obsoleteDispatchRule)) {
@@ -153,6 +176,51 @@ foreach ($required in @(
     'no registry')) {
     if (-not (($workflowMap -replace '\s+', ' ').ToLowerInvariant()).Contains($required.ToLowerInvariant())) {
         throw "Workflow Map contract missing: $required"
+    }
+}
+
+foreach ($retiredRoutingPhrase in @(
+    'WDM may use',
+    'After confirmation, WDM may use',
+    'when implementers were used',
+    'Delegation is judgment-guided',
+    'bounded slices may use registered children',
+    'no mandatory pipeline',
+    'cost-aware delegation path',
+    'local feasibility threshold',
+    'task size threshold',
+    'complexity threshold')) {
+    foreach ($surface in @($router, $manager, $collaborationSkill, $skill, $workflowMap)) {
+        if ($surface.ToLowerInvariant().Contains($retiredRoutingPhrase.ToLowerInvariant())) {
+            throw "Stale optional or threshold routing remains: $retiredRoutingPhrase"
+        }
+    }
+}
+
+if (-not $normalizedWorkflowMap.Contains('ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order') -or
+    -not $normalizedWorkflowMap.Contains('dispatch read-only auditor/scout concurrently with already-freezable implementation slices') -or
+    -not $normalizedWorkflowMap.Contains('generic workflow-change requests follow the default subagent route')) {
+    throw 'Workflow Map execution policy missing parallel-first stages or direct-request default'
+}
+
+foreach ($required in @(
+    'workflow_subagent_parallelism=parallel_first_with_dependency_order',
+    'ordinary workflow stages are mandatory and parallel-first with dependency order',
+    'integrated reviewer follows the complete integrated batch')) {
+    if (-not $normalizedRouter.Contains($required.ToLowerInvariant()) -and
+        -not $normalizedWorkflowMap.Contains($required.ToLowerInvariant())) {
+        throw "Parallel-first execution policy missing: $required"
+    }
+}
+
+foreach ($retiredSerialPhrase in @(
+    'ordinary workflow changes use the registered auditor/scout -> implementer -> reviewer sequence',
+    'ordinary workflow changes use the registered auditor/scout -> implementer -> reviewer workflow',
+    'ordinary workflow changes use the registered auditor/scout -> implementer -> reviewer')) {
+    foreach ($surface in @($router, $manager, $collaborationSkill, $skill, $workflowMap)) {
+        if ($surface.ToLowerInvariant().Contains($retiredSerialPhrase.ToLowerInvariant())) {
+            throw "Serial workflow wording remains: $retiredSerialPhrase"
+        }
     }
 }
 

@@ -49,6 +49,8 @@ foreach ($required in @(
     'compute_authority=derived_from_valid_code_project_manager_assignment',
     'per_run_user_authorization_reference=not_required',
     'grant_admission_owner=code_project_manager',
+    'concurrency_authority=isolation_only',
+    'scheduler_authority=none',
     'progress_notifications=forbidden',
     'terminal_notification_count=exactly_one',
     'terminal_values=COMPLETE|ERROR',
@@ -115,6 +117,13 @@ foreach ($required in @(
     if (-not $roleNormalized.Contains($required)) { throw "Operator role missing: $required" }
 }
 foreach ($required in @(
+    'receives and executes one exact treatment only',
+    'enforces that treatment''s worktree, run, evidence, checkpoint, result and temporary roots are isolated',
+    'no authority to schedule, serialize or coordinate peer treatments',
+    'Parallel-first admission and any permitted serialization decision belong to Code Project Manager')) {
+    if (-not $roleNormalized.Contains($required)) { throw "Operator isolation-only boundary missing: $required" }
+}
+foreach ($required in @(
     'uppercase enum',
     'operator-local input boundary',
     'exact complete lowercase key set',
@@ -136,6 +145,14 @@ foreach ($required in @(
 if ($profile.Contains('active Workflow Design Manager') -or $role.Contains('parent=workflow_design_manager')) {
     throw 'Experiment runtime is still assigned to Workflow Design Manager'
 }
+foreach ($retired in @(
+    'scheduler_authority=code_project_manager',
+    'peer_treatment_scheduler=enabled',
+    'global_serial_fallback=allowed')) {
+    if ($profile.Contains($retired) -or $role.Contains($retired)) {
+        throw "Retired Operator scheduling authority remains: $retired"
+    }
+}
 foreach ($required in @(
     'native_child_authority=exact_assignment_only',
     'registered native child',
@@ -153,6 +170,8 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'the three-unit runtime pool and live process/resource observations',
+    'independent_admitted_treatment_execution=parallel_first_within_capacity',
+    'global serial fallback is rejected unless one exact blocker',
     'Capacity deferral is `pending_runtime_capacity` for that treatment',
     'never a task, direction or workflow `BLOCKED` state',
     'one independent technical acceptance and one conclusion-first reverse result',

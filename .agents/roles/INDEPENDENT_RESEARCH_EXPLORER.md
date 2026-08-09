@@ -69,6 +69,8 @@ runtime_concurrency=three_unit_cpm_capacity_pool
 resource_consuming_experiment_action=capacity_controlled_per_direction
 active_experiment_roster_owner=independent_research_explorer_scientific_view
 runtime_capacity_admission_owner=code_project_manager
+independent_ready_treatment_dispatch=parallel_first_within_capacity
+global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence
 per_direction_result_bearing_default=one_active
 same_direction_parallelism=exact_frozen_joint_roster_only
 experiment_pool_exclusive_runtime=B_HEAVY_OR_C
@@ -236,6 +238,18 @@ are defined once in `parallel-research-workflow.md`.
 No experiment-capacity condition blocks Explorer research, result intake,
 read-only analysis, Pro review or another non-runtime action. A formal or other
 explicitly heavy treatment can reserve the experiment pool, not the workflow.
+
+When Explorer has scientifically selected and frozen two or more independent
+treatments, and every direction-local predecessor/intake barrier is closed,
+the normal dispatch path is parallel-first whenever the admitted capacity is
+available. Serialize only for an exact direction dependency, same-direction
+rules, a shared mutable object or path conflict, an actual CPM-reported
+capacity/resource constraint, or formal/explicit-heavy experiment-pool
+exclusivity. Attribution, generic caution, completion order, convenience or a
+current sole action never restores a global serial lock. This does not require
+inventing or reprioritizing work, filling capacity, or reactivating a parked
+direction; the heartbeat still dispatches at most one new treatment per turn,
+and the existing Pro triggers and formal iteration behavior are unchanged.
 
 ## Scientific procedure
 

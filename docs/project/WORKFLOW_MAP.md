@@ -84,8 +84,12 @@ this map keeps only the owner-lane edge.
 confirmed plan -> frozen owned slice -> integrated batch -> WDM acceptance/Git
 ```
 
-The edge describes dependency and evidence flow, not a required state machine;
-parallel implementation remains limited to disjoint owned path families.
+Ordinary workflow stages are mandatory and parallel-first with dependency order;
+dispatch read-only Auditor/Scout concurrently with already-freezable
+implementation slices, run disjoint Implementer file families concurrently,
+and serialize only actual information dependencies or same-file writers. The
+integrated Reviewer follows the complete integrated batch; parallel reviewers
+remain limited to genuinely independent questions.
 
 The stable assignment dependency is
 `parent task model -> hmasd-writing-agent-assignments Skill -> self-contained
@@ -94,10 +98,14 @@ not a state machine, queue or admission gate.
 
 ## Delegation orientation
 
-Delegation is judgment-guided: WDM retains design junctions, authority choices,
-integration and acceptance, while bounded slices may use registered children.
-The Roles and Audit Skill own the normal routing details; there is no mandatory
-pipeline, queue or context-cost gate.
+Ordinary workflow changes use the registered Auditor/Scout, Implementer and
+integrated Reviewer stages with parallel-first scheduling and dependency order.
+WDM's local workflow-file modification is reserved for a direct user
+instruction explicitly naming WDM direct modification; generic workflow-change
+requests follow the default subagent route. Pure design or authority decisions
+without file mutation remain WDM-local. The Roles and Audit Skill own detailed
+routing mechanics; serialize only actual information dependencies or same-file
+writers, and keep parallel reviewers limited to genuinely independent questions.
 
 ## Context loading
 
@@ -117,7 +125,7 @@ Session Workspace Contract and WDM current-work records.
 
 WDM updates this map in the same workflow commit when a stable fact changes:
 role ownership or authority, a public interface or dependency direction, the
-minimum context-loading boundary, the cost-aware delegation path, or the
+minimum context-loading boundary, the workflow execution policy, or the
 successor-continuity contract. A Reviewer or Auditor reports a conflict; WDM
 decides whether it is a stable change and repairs the map when required.
 

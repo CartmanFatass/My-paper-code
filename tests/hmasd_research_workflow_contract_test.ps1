@@ -580,6 +580,8 @@ foreach ($required in @(
     'resource_consuming_experiment_action=capacity_controlled_per_direction',
     'active_experiment_roster_owner=independent_research_explorer_scientific_view',
     'runtime_capacity_admission_owner=code_project_manager',
+    'independent_ready_treatment_dispatch=parallel_first_within_capacity',
+    'global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence',
     'per_direction_result_bearing_default=one_active',
     'same_direction_parallelism=exact_frozen_joint_roster_only',
     'experiment_pool_exclusive_runtime=B_HEAVY_OR_C',
@@ -692,6 +694,10 @@ foreach ($required in @(
     'Completion order is never scientific priority, voting or a cross-direction barrier',
     'dispatch at most one new treatment',
     'B completion or parallelism alone never does',
+    'normal path for two or more scientifically selected and frozen independent treatments is parallel-first',
+    'same-direction rules',
+    'Attribution, generic caution, completion order, convenience and a current sole action are not dependency or resource evidence',
+    'heartbeat''s at-most-one-new-treatment-per-turn bound',
     'Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.')) {
     if (-not $adaptiveParallelNormalized.Contains($required)) {
         throw "Adaptive roster contract missing: $required"
@@ -1435,7 +1441,7 @@ foreach ($required in @(
     'simple_operation_paths=one_normal_plus_one_simple_fallback',
     'simple_operation_success=user_visible_requested_result',
     'passive_external_generation_wait_excluded_from_engineering_budget=true',
-    'review the integrated batch once by default',
+    'reviews it once by default',
     'parallel reviewers only for genuinely',
     'Their advice cannot create a second pass.',
     'the log is evidence',
@@ -1446,14 +1452,18 @@ foreach ($required in @(
     if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 foreach ($required in @(
-    'Delegation is judgment-guided:',
-    'WDM retains design junctions, authority choices, integration and acceptance',
-    'bounded slices may use registered children',
+    'Ordinary workflow changes use the registered Auditor/Scout, Implementer and integrated Reviewer stages with parallel-first scheduling and dependency order',
+    'Dispatch read-only Auditor/Scout concurrently with already-freezable implementation slices',
+    'serialize only actual information dependencies or same-file writers',
+    'The integrated Reviewer follows the complete integrated batch',
+    'parallel reviewers are limited to genuinely independent review questions',
+    'Their authority and assignment meaning remain with their Role',
+    'Stable execution orientation is in',
+    'generic workflow-change requests remain on the subagent route',
+    'stable assignment dependency is',
+    'This is context and evidence direction, not a state machine, queue or admission gate',
     'A Reviewer or Auditor reports a conflict',
-    'one frozen non-overlapping workflow change slice',
     'Detailed procedures do',
-    'WDM and each child start with the exact assignment and Role',
-    'expand only to the owner surface named by the active interface or status dependency',
     'Role-based successor continuity',
     'Successor brief storage and reload semantics live in',
     'Owner roles and stable outputs',
@@ -1511,13 +1521,40 @@ foreach ($retired in @(
     'one isolated candidate at a time',
     'one-candidate-at-a-time',
     'queued_capacity_state=',
-    'Insufficient capacity is `queued`')) {
+    'Insufficient capacity is `queued`',
+    'global_serial_fallback=allowed',
+    'global_serial_fallback=default',
+    'global_serial_fallback=serial_by_default',
+    'attribution requires serialization',
+    'completion order determines dispatch')) {
     if ($independentResearchRole.Contains($retired) -or
         $parallelResearch.Contains($retired) -or
         $explorerValidationContract.Contains($retired) -or
         $explorerValidationSkill.Contains($retired) -or
         $sessionWorkspaceContract.Contains($retired)) {
         throw "Retired global experiment lock remains: $retired"
+    }
+}
+
+$principlesSection3 = ($algorithmPrinciples -split '## 4\. Evidence Design', 2)[0]
+if ($principlesSection3.Contains('Schedule one resource-consuming action at a time for attribution')) {
+    throw 'Algorithm principles retain the stale global attribution lock'
+}
+foreach ($stale in @(
+    'one resource-consuming action at a time for attribution',
+    'global serial lock by default',
+    'serialize independent treatments for attribution',
+    'current sole action permits serialization')) {
+    foreach ($surface in @(
+        $independentResearchRole,
+        $parallelResearch,
+        $independentResearchSkill,
+        $explorerValidationSkill,
+        $explorerValidationContract,
+        $publicHandoffContract)) {
+        if (($surface -replace '\s+', ' ').ToLowerInvariant().Contains($stale.ToLowerInvariant())) {
+            throw "Independent research retains weak serial fallback wording: $stale"
+        }
     }
 }
 foreach ($required in @(
@@ -1555,10 +1592,10 @@ foreach ($required in @(
 }
 foreach ($required in @(
     '`AGENTS.md` owns the lazy trigger table',
-    'expand only to the owner surface named by the active interface or status dependency',
-    'Delegation is judgment-guided',
-    'there is no mandatory pipeline, queue or context-cost gate',
-    'role ownership or authority, a public interface or dependency direction',
+    'Roles and Audit Skill own detailed routing mechanics',
+    'Delegation orientation',
+    'This is context and evidence direction, not a state machine, queue or admission gate',
+    'stable ownership, interface, dependency, context-loading, delegation or continuity change',
     'successor-continuity contract')) {
     if (-not $workflowMapNormalized.Contains($required)) {
         throw "Workflow map missing lazy context/delegation orientation: $required"

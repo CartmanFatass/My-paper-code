@@ -44,6 +44,11 @@ simple_operation_success=user_visible_requested_result
 passive_external_generation_wait_excluded_from_engineering_budget=true
 ```
 
+Mechanism and simple-operation budgets constrain new gates, recovery branches
+and probe work; they never decide delegate-vs-local routing.
+Delegate-vs-local routing is policy-fixed: task size, complexity, local
+feasibility, context cost, path count and benefit estimates never alter it.
+
 If failure means only “try again”, do not build a lease, sentinel, identity
 ledger, retry state machine or approval gate. Add the smallest direct diagnostic
 or one-line checklist. A new mechanism identifies the old text/mechanism it
@@ -73,13 +78,24 @@ or define acceptance.
 
 ## Workflow children
 
-After confirmation, WDM may use the registered Auditor, Implementer and
-Reviewer for bounded, non-overlapping slices. Their authority and assignment
-meaning remain with their Role and `hmasd-writing-agent-assignments`; workspace
-and successor boundaries remain with
-`docs/project/SESSION_WORKSPACE_CONTRACT.md`. Stable delegation orientation is
-in `docs/project/WORKFLOW_MAP.md`. This Skill retains only the implementation
-budgets, impact mapping, checks, review and Git/reload mechanics below.
+Ordinary workflow changes use the registered Auditor/Scout, Implementer and
+integrated Reviewer stages with parallel-first scheduling and dependency order
+for bounded, non-overlapping slices. Dispatch read-only Auditor/Scout
+concurrently with already-freezable implementation slices, run disjoint
+Implementer file families concurrently, and serialize only actual information
+dependencies or same-file writers. The integrated Reviewer follows the complete
+integrated batch; parallel reviewers are limited to genuinely independent
+review questions. Their authority and assignment meaning remain with their Role
+and `hmasd-writing-agent-assignments`; workspace and successor boundaries remain
+with `docs/project/SESSION_WORKSPACE_CONTRACT.md`. Stable execution orientation
+is in `docs/project/WORKFLOW_MAP.md`. A direct user instruction explicitly
+naming WDM direct modification is the only exception that permits local
+workflow-file edits; generic workflow-change requests remain on the subagent
+route. Pure WDM design or authority decisions without file mutation remain
+WDM-local. For that explicit direct-WDM exception, retain the normal WDM checks
+and acceptance mechanics and do not invent a reviewer requirement beyond the
+user's rule. This Skill retains only the implementation budgets, impact mapping,
+checks, review and Git/reload mechanics below.
 
 ## Continuous change loop
 
@@ -94,10 +110,12 @@ a scheduler, approval state or global blocker.
    `git rev-parse --show-toplevel` to equal the resolved ticket worktree path;
    a mismatch stops that isolated edit.
 3. **Focused check.** Run the smallest affected contract, the structural harness,
-   stale-term search and `git diff --check`. When implementers were used, review
-   the integrated batch once by default; add parallel reviewers only for
-   genuinely independent questions.
-   Their advice cannot create a second pass.
+   stale-term search and `git diff --check`. For ordinary subagent workflow
+   changes, the integrated Reviewer follows the complete integrated batch and
+   reviews it once by default; add parallel reviewers only for genuinely
+   independent questions. Their advice cannot create a second pass. The
+   explicit direct-WDM exception retains the normal WDM checks and acceptance
+   mechanics without adding a reviewer requirement.
 4. **Git and reload.** Inspect exact staged paths, commit and push the accepted
    workflow files. Require a fresh task only after router/profile discovery
    changes; ordinary Skill text is read from disk. After an isolated child

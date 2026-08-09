@@ -158,6 +158,15 @@ isolated tickets and roots. One candidate's problem does not block unrelated
 work or change another candidate's frozen design or scientific status. Each
 result retains exactly one CPM technical acceptance and one Explorer scientific
 intake; completion order creates no priority or merged acceptance.
+When Explorer has already selected and frozen two or more independent
+treatments, and each local predecessor/intake barrier is closed, dispatch is
+parallel-first within available capacity. Serialize only for a named direction
+dependency, same-direction rules, shared mutable object/path conflict, actual
+CPM-reported capacity/resource constraint, or formal/explicit-heavy
+experiment-pool exclusivity. Attribution, generic caution, completion order or
+convenience cannot restore a global serial fallback. This does not require
+filling capacity or changing priority, and preserves the heartbeat's
+at-most-one-new-treatment-per-turn limit and all existing Pro triggers.
 
 For an Explorer-origin candidate, CPM implements the selected treatment as an
 engineering task and does not substitute External Pro for experiment, instance

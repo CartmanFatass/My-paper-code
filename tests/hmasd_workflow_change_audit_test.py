@@ -123,7 +123,7 @@ def test_workflow_review_is_one_pass_normal_path_advice() -> None:
     assert "review_objective=contract_fidelity_and_net_workflow_value" in reviewer
     assert "finding_cost_test=expected_benefit_exceeds_complexity_time_and_maintenance_cost" in reviewer
     normalized_skill = " ".join(skill.split())
-    assert "integrated batch once by default" in normalized_skill
+    assert "integrated reviewer follows the complete integrated batch and reviews it once by default" in normalized_skill.lower()
     assert "parallel reviewers only for genuinely independent questions" in normalized_skill
     assert "Their advice cannot create a second pass" in normalized_skill
     assert "review_default=one_independent_reviewer" in reviewer
@@ -133,6 +133,49 @@ def test_workflow_review_is_one_pass_normal_path_advice() -> None:
     assert "simple_operation_active_engineering_budget_minutes=20" in skill
     assert "simple_operation_failed_probe_budget=2" in skill
     assert "Pro transport/recovery" not in skill
+
+
+def test_execution_policy_is_subagent_default_with_explicit_wdm_exception() -> None:
+    router = (REPO / "AGENTS.md").read_text(encoding="utf-8")
+    manager = (REPO / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md").read_text(encoding="utf-8")
+    collaboration = (
+        REPO / ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md"
+    ).read_text(encoding="utf-8")
+    audit = (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    workflow_map = (REPO / "docs/project/WORKFLOW_MAP.md").read_text(encoding="utf-8")
+    normalized = " ".join("\n".join((router, manager, collaboration, audit, workflow_map)).split()).lower()
+
+    assert "workflow_change_execution=subagent_workflow_by_default" in router
+    assert "workflow_subagent_parallelism=parallel_first_with_dependency_order" in router
+    assert "wdm_direct_modification=only_when_user_explicitly_instructs_wdm_to_modify_directly" in router.lower()
+    assert "ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order" in normalized
+    assert "direct user instruction explicitly naming wdm direct modification" in normalized
+    assert "generic workflow-change requests remain on the subagent route" in normalized
+    assert "pure wdm design or authority decisions without file mutation remain wdm-local" in normalized
+    assert "mechanism and simple-operation budgets constrain" in audit.lower()
+    assert "never decide delegate-vs-local routing" in audit.lower()
+    assert "task size, complexity, local feasibility, context cost, path count and benefit estimates never alter it" in " ".join(audit.split()).lower()
+    assert "dispatch read-only auditor/scout concurrently with already-freezable implementation slices" in normalized
+    assert "run disjoint implementer file families concurrently" in normalized
+    assert "serialize only actual information dependencies or same-file writers" in normalized
+    assert "integrated reviewer follows the complete integrated batch" in normalized
+    assert "ordinary workflow changes use the registered auditor/scout -> implementer -> reviewer" not in normalized
+
+    for stale in (
+        "wdm may use",
+        "after confirmation, wdm may use",
+        "when implementers were used",
+        "delegation is judgment-guided",
+        "bounded slices may use registered children",
+        "no mandatory pipeline",
+        "cost-aware delegation path",
+        "local feasibility threshold",
+        "task size threshold",
+        "complexity threshold",
+    ):
+        assert stale not in normalized
 
 
 def test_cpm_mechanical_child_is_file_bound_and_non_scientific() -> None:

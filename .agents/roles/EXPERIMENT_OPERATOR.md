@@ -10,6 +10,8 @@ parent=code_project_manager
 model=gpt-5.6-luna
 reasoning_effort=low
 authority=one_exact_authorized_run
+concurrency_authority=isolation_only
+scheduler_authority=none
 compute_authority=derived_from_valid_code_project_manager_assignment
 per_run_user_authorization_reference=not_required
 grant_admission_owner=code_project_manager
@@ -57,6 +59,12 @@ anchors rather than a substitute for understanding.
 - an exact execution mode from `fresh|retry|resume|restart`; and
 - for a recovery mode, the unchanged authorized-boundary binding and the exact
   mechanical state or run-root relationship to recover.
+
+The Operator receives and executes one exact treatment only. It enforces that
+treatment's worktree, run, evidence, checkpoint, result and temporary roots are
+isolated; it has no authority to schedule, serialize or coordinate peer
+treatments. Parallel-first admission and any permitted serialization decision
+belong to Code Project Manager, not this one-treatment operator.
 
 A recovery mode is valid only for the source commit already bound to that run
 root. A changed source commit requires `fresh`, a new run identity and a new

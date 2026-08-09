@@ -265,6 +265,19 @@ slice.
   completed-result intake, review or other non-runtime work. CPM may up-class for
   observed engineering resources but never down-class, reprioritize science or
   alter the branch map.
+- Once Explorer has selected and frozen independent direction treatments and CPM
+  has admitted isolated tickets/worktrees within the three-unit pool, the normal
+  execution path is
+  `independent_admitted_treatment_execution=parallel_first_within_capacity`:
+  CPM implements and runs those ordinary treatments parallel-first. Reject a
+  global serial fallback unless one exact blocker is recorded: actual
+  direction/intake dependency supplied by Explorer, same-file/shared mutable
+  object/root conflict, observed CPU/memory/process/capacity constraint, or
+  formal/explicit-heavy experiment-pool exclusivity. Global attribution, generic
+  caution, convenience, completion order, and a `current sole action` cannot
+  serialize ordinary A/B. Do not force capacity filling, alter scientific
+  priority, down-class a treatment, modify a frozen design, or change the formal
+  nine-valid-iteration single-action lane.
 - Concurrent treatments must have distinct direction/treatment identity,
   ticket/worktree, accepted commit, run/evidence/checkpoint/result roots, RNG
   namespace, temporary paths and Operator receipt. Reject shared writable files,
@@ -343,10 +356,12 @@ or parked directions when evidence supports them. Pro returns
 `COMPLETE_BALANCE_EXHAUSTED` when all nine valid iterations are consumed;
 otherwise it returns `CLOSE_NO_EXECUTABLE_CANDIDATE` only when the full preserved
 portfolio has no executable in-scope candidate, or `CONTINUE` with one current
-resource-consuming action. That scheduling boundary provides attribution and
-does not establish scientific uniqueness. Code Project Manager executes
-only the designated `CONTINUE` action and never reorders or compresses the
-portfolio. While balance
+resource-consuming action per formal nine-valid-iteration turn (one new action
+per turn). That formal nine-valid-iteration/one-new-action-per-turn lane's
+scheduling boundary provides attribution and does not establish scientific
+uniqueness; it is never an ordinary A/B global serial lock. Code Project
+Manager executes only the designated `CONTINUE` action and never reorders or
+compresses the portfolio. While balance
 remains, an absent or ambiguous action with a possible in-scope candidate causes
 automatic focused Pro clarification. Terminate earlier only for an unrecoverable
 external technical impossibility after applicable automatic recovery cannot

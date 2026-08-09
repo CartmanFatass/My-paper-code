@@ -7,6 +7,8 @@ runtime_capacity_units_total=3
 runtime_capacity_classes=A_READONLY_OR_ZERO_RUNTIME:0|B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive
 active_experiment_roster_owner=independent_research_explorer_scientific_view
 runtime_capacity_admission_owner=code_project_manager
+independent_ready_treatment_dispatch=parallel_first_within_capacity
+global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence
 per_direction_result_bearing_default=one_active
 same_direction_parallelism=exact_frozen_joint_roster_only
 capacity_wait_state=pending_runtime_capacity_only
@@ -216,7 +218,20 @@ strategic dependence, estimand, sampling, identification, strongest simple
 null, counterexample, replacement ledger and discriminator. Mechanical
 completeness never means scientific truth.
 
-## Concurrency and authority
+## Independent-treatment dispatch, concurrency and authority
+
+The normal path for two or more scientifically selected and frozen independent
+treatments is parallel-first when each direction's local predecessor/intake
+barrier is closed and admitted capacity is available. Serialize only an exact
+direction dependency, same-direction rules, shared mutable object/path
+conflict, actual CPM-reported capacity/resource constraint, or formal/explicit-
+heavy experiment-pool exclusivity. Attribution, generic caution, completion
+order, convenience and a current sole action are not dependency or resource
+evidence and cannot restore a global serial fallback. This rule does not make
+Explorer invent or select work, fill capacity, change scientific priority or
+reactivate a parked direction. It preserves pending-runtime-capacity and
+non-runtime continuation, the heartbeat's at-most-one-new-treatment-per-turn
+bound, existing Pro triggers and formal nine-iteration behavior.
 
 The workflow defines no fixed per-role parallel count. Exact source and
 opportunity rosters determine logical work; current Codex capacity determines
