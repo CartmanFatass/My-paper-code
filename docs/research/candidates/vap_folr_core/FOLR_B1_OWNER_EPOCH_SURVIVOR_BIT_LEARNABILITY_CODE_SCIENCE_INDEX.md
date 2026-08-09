@@ -1,59 +1,90 @@
 # FOLR-B1 owner-epoch survivor-bit learnability code/science index
 
-This index binds the implementation of
-`FOLR-B1-OWNER-EPOCH-SURVIVOR-BIT-LEARNABILITY` for
-`CAND-VAP-FOLR-CORE@constructive-revision-v6`. It is an engineering locator,
-not a scientific disposition. The registered result and publication commit are
-filled by Code Project Manager after the sole full run.
+## Conclusion and publication state
 
-## Frozen question and boundary
+The frozen decision-map output for the sole technically accepted full run is
+`S03_LEARNED_USE_WITH_GENERIC_CAPACITY_CONFIRMED`. This index and the public
+JSON materialize that accepted runtime evidence without adding a scientific
+intake or disposition. CPM technical acceptance concerns the exact source/run
+and evidence binding; it is not a promotion, C-treatment, retirement, or
+scientific conclusion.
 
-The exact host asks whether an ordinary cue writer can put a private bit into
-S03, preserve it through one real typed roster replacement, and use it for
-held-out terminal reward. Three matched backends are compared:
-`S03_KEEP`, `COMPLETE_RESET`, and `ONE_BIT_OWNER_EPOCH_LATCH`. A1 payload
-transplantation, constructed sensitivity weights, hand-aligned heads, critic,
-auxiliary loss, replay, recurrence outside the reader, sweeps, retries, rescue,
-checkpoint selection, extra arms, C, and External Pro are absent.
+| Frozen estimand | Value |
+|---|---:|
+| `J_COMPLETE_RESET` | 0.5 |
+| `J_S03_KEEP` | 0.85205078125 |
+| `J_ONE_BIT_OWNER_EPOCH_LATCH` | 0.97021484375 |
+| `Delta_S` | 0.35205078125 |
+| `Delta_L` | 0.47021484375 |
+| `G` | -0.1181640625 |
 
-The strongest possible result is local to the exact two-transition host and
-eight-seed finite panel. It cannot establish cross-task or cross-epoch
-generalization, delayed-credit correctness, coordination, sample efficiency,
-typed-memory superiority, promotion, retirement, C, or formal validation.
+## Eight-seed held-out evidence
 
-## Critical implementation points
+Every seed in the frozen paired panel is retained below, including the one S03
+seed that does not meet its per-seed PASS predicate. `S03 gate` and `Latch
+gate` apply the frozen per-seed `J >= 0.75` and paired-delta `>= 0.20`
+criterion; the registered arm PASS rule also requires its panel-level values.
 
-| Claim-bearing point | Code owner | Focused witness |
-|---|---|---|
-| Typed atomic `TERMINAL_LEAVE inert_q0@0` plus `JOIN inert_q1@0`; `owner_t@0` remains active | `experiments/candidates/folr_core/owner_epoch_survivor_bit_host.py` (`replacement_transaction`, `apply_replacement`) | `test_host_applies_typed_atomic_replacement_without_changing_owner_epoch`, `test_manual_or_changed_epoch_transaction_fails_closed` |
-| `LifecycleRecord.high_hidden` itself is the single tensor-backed differentiable S03 authority; typed commit preserves the same owner record and carrier, choice reads that field directly, and reset clears only that field | host module (`cue_transition`, `apply_replacement`, `_require_s03`, `choice_memory`) | `test_backends_preserve_gradient_or_exactly_expire_minimal_latch`, `test_choice_reads_current_committed_s03_and_never_a_stale_activation`, `test_reward_gradient_crosses_committed_registered_s03_to_cue_encoder` |
-| Positive control carries exactly raw `(owner key, epoch, bit)`, expires at terminal, and fails closed/clears itself on owner-epoch mismatch | host module (`OwnerEpochBitLatch`, `choice_memory`, `terminal_transition`) | backend test and `test_latch_fails_closed_and_expires_on_owner_epoch_mismatch` |
-| All arms share parameter names/order/shapes and matched fresh initialization | `experiments/candidates/folr_core/owner_epoch_survivor_bit_learnability.py` (`SurvivorBitActor`, `train`) | `test_actor_parameter_order_shape_and_initialization_match_across_arms` |
-| Environment, bit, initialization, action-sampling, and trainer RNG identities are separated; manifests are paired across arms | learnability module (`_derive_seed`, `build_frozen_manifest`) | `test_manifest_is_balanced_separated_and_paired_across_arms` |
-| Each episode has two transitions/two target calls; complete choice kernel is captured before sampling; update follows the complete batch | learnability module (`_episode_batch`, `train`) | three-phase smoke and sidecar validators |
-| Matched reset `b=0/b=1` kernels and uniforms are exact | learnability module (`_reset_kernel_evidence`) | `test_reset_matched_bit_kernels_are_bitwise_equal_before_sampling` |
-| REINFORCE is terminal-reward-only with batch-mean baseline, gamma 1, Adam 0.003, entropy 0.01, batch 64, one update/batch | learnability module (`registered_config`, `train`) | registered config assertions and canonical train validator |
-| `J`, per-bit metrics, complete curves, normalized AUC, seedwise contrasts, `Delta_S`, `Delta_L`, `G`, thresholds, and seven-branch precedence | learnability module (`analyze`, `validate_result`) | three-phase smoke and full fail-closed validator |
-| CLI is wiring only and exposes `train -> evaluate -> analyze` plus read-only validators | `scripts/run_folr_b1_owner_epoch_survivor_bit_learnability.py` | CLI help/interface smoke owned by CPM readiness |
+| Seed | `J_RESET` | `J_S03_KEEP` | `Delta_S` | `J_LATCH` | `Delta_L` | `G` | S03 gate | Latch gate |
+|---:|---:|---:|---:|---:|---:|---:|---|---|
+| 93031 | 0.5 | 0.779296875 | 0.279296875 | 0.97265625 | 0.47265625 | -0.193359375 | pass | pass |
+| 93032 | 0.5 | 0.806640625 | 0.306640625 | 0.998046875 | 0.498046875 | -0.19140625 | pass | pass |
+| 93033 | 0.5 | 0.845703125 | 0.345703125 | 0.984375 | 0.484375 | -0.138671875 | pass | pass |
+| 93034 | 0.5 | 0.91796875 | 0.41796875 | 0.98046875 | 0.48046875 | -0.0625 | pass | pass |
+| 93035 | 0.5 | 0.888671875 | 0.388671875 | 0.984375 | 0.484375 | -0.095703125 | pass | pass |
+| 93036 | 0.5 | 0.966796875 | 0.466796875 | 0.984375 | 0.484375 | -0.017578125 | pass | pass |
+| 93037 | 0.5 | 0.6640625 | 0.1640625 | 0.962890625 | 0.462890625 | -0.298828125 | fail | pass |
+| 93038 | 0.5 | 0.947265625 | 0.447265625 | 0.89453125 | 0.39453125 | 0.052734375 | pass | pass |
 
-## Artifact lifecycle
+The frozen raw thresholds report `RESET_VALID=true`,
+`PASS_S03_KEEP=true`, and `PASS_ONE_BIT_OWNER_EPOCH_LATCH=true`.
 
-`train` first writes `frozen_manifest.json`, then streams every training episode
-to deterministic gzip JSONL and writes one final-only checkpoint per arm/seed.
-`evaluate` reloads only those final checkpoints, performs no update or
-intervention, and streams every held-out episode. Compact summaries bind every
-sidecar/checkpoint by size and SHA-256. `analyze` reloads canonical summaries and
-sidecars, applies the frozen decision precedence, and emits `raw_result.json`.
-Technical smoke artifacts remain `technical_only=true`, use the same entries,
-and are rejected by full validators.
+## Fidelity, reset, and exact activity record
 
-The registered Experiment Operator receipt is not reimplemented here. Operator
-execution uses the current project helper
-`.agents/skills/hmasd-agile-research-development/scripts/hmasd_experiment_operator_receipt.py`.
+The full host record retains the ordinary cue writer, uninterrupted
+`owner_t@0` epoch, atomic typed replacement, same parameter schema and matched
+initialization, registered-S03-only reset, terminal-only reward, complete
+pre-sampling kernel capture, and all declared exclusions. The RESET gate is
+satisfied: `J_RESET=0.5`, all eight reset seed values are 0.5, empirical
+absolute action dependence on the bit is 0.0, matched root pairs are 2,048,
+exact complete reset-kernel equality is true, and `first_mismatch=null`.
 
-## Registered identities
+- 24 actors; 49,152 training plus 12,288 held-out evaluation episodes = 61,440 total.
+- 98,304 training plus 24,576 evaluation transitions/policy calls = 122,880 total.
+- 768 learner calls, 768 trainer calls, and 768 optimizer updates.
+- `K_search=0` and hypothetical transitions = 0.
 
-- Source commit: pending CPM freeze and push.
-- Run ID: pending CPM predeclaration.
-- Raw evidence: pending sole registered run.
-- Result commit and public result locator: pending CPM technical acceptance.
+## Artifact, code, and readiness bindings
+
+| Binding | Relative locator or identity |
+|---|---|
+| Accepted source commit | `2dcf0730d0ed75c1552cea4580b51cf0d40fc66e` |
+| Full run ID | `folr_b1_owner_epoch_survivor_bit_2dcf0730_r1` |
+| Raw result | `logs/folr_b1_owner_epoch_survivor_bit_2dcf0730_r1/raw_result.json` (22,984 bytes; SHA-256 `35038327959039f5867edac84af2689cbc99d167b8e7a8cffc1a696d53dacd1c`) |
+| Public result | `docs/research/candidates/vap_folr_core/FOLR_B1_OWNER_EPOCH_SURVIVOR_BIT_LEARNABILITY_RESULT.json` |
+| Host source | `experiments/candidates/folr_core/owner_epoch_survivor_bit_host.py` |
+| Learnability source | `experiments/candidates/folr_core/owner_epoch_survivor_bit_learnability.py` |
+| Production runner | `scripts/run_folr_b1_owner_epoch_survivor_bit_learnability.py` |
+| Focused tests | `tests/experiments/candidates/folr_core/test_owner_epoch_survivor_bit_learnability.py` |
+
+The source readiness receipt is schema 3, `PASSED`, `formal=false`, and
+`scientific_iteration_cost=0`; its attempt is `folr_b1_2dcf0730_r3` at
+`.git/worktrees/folr_b1_readiness_clean_candidate_20260809/hmasd/execution-readiness/2dcf0730d0ed75c1552cea4580b51cf0d40fc66e/folr_b1_2dcf0730_r3.json`.
+Independent lossless-sidecar recomputation completed and agrees with the
+published counts, reset evidence, estimands, and frozen branch.
+
+The terminal operator record has `TRAIN=0`, `EVALUATE=0`, and `ANALYZE=0`,
+with all required artifacts complete. The standard operator receipt is absent
+because its helper rejected the terminal record's uppercase `exit_codes` phase
+keys. This residual was not repaired or reconstructed, and the full run was
+not rerun.
+
+## Claim boundary and pending authority
+
+The finite exact-host claim boundary is: learned return-bearing `owner_t@0`
+memory use in this two-transition host and finite seed panel only. It excludes
+cross-task or cross-epoch generalization, delayed credit, coordination,
+sample efficiency, typed-memory superiority, promotion, C, and formal claims.
+
+Explorer scientific intake remains pending; `scientific_disposition=null`.
+No C treatment, External Pro request, promotion, or retirement is licensed.
