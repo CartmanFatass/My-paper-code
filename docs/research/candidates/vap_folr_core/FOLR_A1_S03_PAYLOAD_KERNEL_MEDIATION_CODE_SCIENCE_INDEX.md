@@ -1,7 +1,8 @@
 # FOLR A1 S03 payload-kernel mediation — code/science index
 
-Status: source package implemented; canonical scientific result pending the
-single CPM-authorized registered run.
+Status: accepted raw result materialized for CPM integration and push;
+Explorer scientific intake remains pending. Publication is not complete until
+CPM integrates and pushes the bounded result.
 
 ## Bound question
 
@@ -15,7 +16,9 @@ The production cell is fixed as
 `experiments.candidates.folr_core.registration.registered_cell()` with identifier
 `folr_s03_constructed_sensitivity_v1`, target `owner_t@0`, shadow `owner_q@0`,
 positive registered logit witness, and legal-action support `[true, true, true]`.
-No registered kernel has been observed while building or testing this package.
+The single accepted raw result contains the six frozen complete deterministic
+float32 kernel readouts and six policy forwards from one common snapshot/model,
+non-S03 preimage, owner epoch, and token identity.
 
 ## Responsibility map
 
@@ -92,7 +95,28 @@ I/O failures are process failures.
 
 ## Publication lifecycle
 
-The canonical result path and public source/result commit locators remain
-pending until CPM executes and technically accepts the one registered probe.
-Development smoke output is technical evidence only and must never be appended
-as the candidate result.
+Canonical result:
+`docs/research/candidates/vap_folr_core/FOLR_A1_S03_PAYLOAD_KERNEL_MEDIATION_RESULT.json`.
+It is a byte-for-byte materialization of the accepted raw result
+`logs/folr_a1_s03_payload_kernel_mediation_eed89a4c_r1/raw_result.json`, whose
+SHA-256 is `c8b0165f55d8f0392ece80bf58d72c9f4d696203557e06a8e28d6f1fbcb3a973`.
+
+The accepted source commit is `eed89a4c870a185b5caeac641c52a3fd57dc70b3` and
+the run ID is `folr_a1_s03_payload_kernel_mediation_eed89a4c_r1`. Its frozen
+decision is `S03_PAYLOAD_MEDIATION_ACCESS_SUPPORTED`: all completed admission
+checks are true; fixed-payload TVs are `0` and `0`; reset TV is `0`; and both
+within-branch payload TVs are `0.5252223461866379`. The artifact records six
+complete deterministic float32 kernel readouts and six policy forwards, with
+zero environment episodes, environment transitions, hypothetical transitions,
+learner calls, trainer calls, optimizer updates, and return evaluations.
+
+CPM owns technical acceptance and the remaining integration/push lifecycle;
+Explorer scientific intake remains pending. No result commit is asserted here,
+because it is not known until CPM integrates and pushes this exact file set.
+Development smoke output is technical evidence only and is not the candidate
+result.
+
+The finite claim boundary is unchanged: this is exact deterministic
+S03-to-kernel access in one registered cell only. It establishes no learning,
+return, task-value, generalization, promotion, retirement, B/C work, or
+External Pro authorization.

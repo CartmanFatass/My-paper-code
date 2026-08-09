@@ -1,0 +1,962 @@
+{
+  "analysis": {
+    "completed_admission": {
+      "all_pass": true,
+      "checks": {
+        "all_complete_vectors": true,
+        "all_ledgers_unchanged": true,
+        "all_models_unchanged": true,
+        "all_owner_epoch_exact": true,
+        "all_payloads_exact": true,
+        "all_pending_absent": true,
+        "all_rng_unchanged": true,
+        "all_sentinels_exact": true,
+        "all_single_forward": true,
+        "all_target_first": true,
+        "branch_metadata_not_in_runtime": true,
+        "exact_arm_roster": true,
+        "no_action_selection": true,
+        "no_cached_path": true,
+        "one_capture_clock": true,
+        "one_capture_lineage": true,
+        "one_common_source_snapshot": true,
+        "one_legal_mask": true,
+        "one_model_state": true,
+        "one_non_s03_actor_preimage": true,
+        "reset_hook_absent": true,
+        "reset_neutral": true,
+        "transplant_hook_once": true
+      }
+    },
+    "contrasts": {
+      "fixed_payload_nulls": {
+        "payload_0": 0.0,
+        "payload_1": 0.0
+      },
+      "formula": "0.5*sum(abs(p-q)) over complete float32 probability vectors",
+      "reset": 0.0,
+      "within_branch_payload": {
+        "branch_0": 0.5252223461866379,
+        "branch_1": 0.5252223461866379
+      }
+    },
+    "decision": "S03_PAYLOAD_MEDIATION_ACCESS_SUPPORTED",
+    "decision_precedence": [
+      "PREREQUISITE_UNAVAILABLE_OR_INVALID",
+      "BRANCH_LABEL_OR_ALTERNATE_PATH_LEAKAGE",
+      "RESET_DOES_NOT_ERASE",
+      "NO_S03_PAYLOAD_EFFECT",
+      "S03_PAYLOAD_MEDIATION_ACCESS_SUPPORTED"
+    ],
+    "no_materiality_threshold_or_epsilon": true,
+    "sample_or_monte_carlo_used": false
+  },
+  "arms": {
+    "K_(0<-0)": {
+      "arm_kind": "target_s03_transplant",
+      "common_source_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "intervention_digest": "4b88e3504f4697983df033f4f19ec1b61bb6985ba3822c5474fe223e99134008",
+      "kernel": {
+        "actor_preimage_digest_excluding_only_s03": "ee836856dcae7503fa0eae9cf400ea75fa0f952277a11a72c94fae05096b9a78",
+        "binding_manifest_digest": "94baf9cb14d5115a428614a64bc49ab48212168208322f91a4af0e4a49ffe7e9",
+        "common_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+        "masked_logits": {
+          "byte_order": "little-endian",
+          "bytes_base64": "3+/xPUb/0D1nVx09",
+          "bytes_sha256": "5098847aa3512e08bff9c9a2ba624b612d46fb9c8679758ef4f7ab9b77faa750",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "007ac3a588c056d60419e737beb62d62365ac7dfd1c0b8b7335f7ff3c62816ad",
+          "values": [
+            0.1181332990527153,
+            0.10204939544200897,
+            0.038413431495428085
+          ]
+        },
+        "membership_epoch": 0,
+        "model_state_digest": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "owner_lifecycle_key": "owner_t",
+        "probabilities": {
+          "byte_order": "little-endian",
+          "bytes_base64": "5hmwPptKrT5/m6I+",
+          "bytes_sha256": "12bc742da63718f39043b234906ffc5887e54edb80725991131bf3fe5aa48e05",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "5e9402554fe283239701c45d5d0d403c373e5842bca366a5baa3ba84c16a9227",
+          "values": [
+            0.3439475893974304,
+            0.3384598195552826,
+            0.317592591047287
+          ]
+        },
+        "token_position": 0
+      },
+      "name": "K_(0<-0)",
+      "payload_slot": "h0",
+      "runtime_prewrite_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "source_branch_identity": 0,
+      "source_branch_identity_role": "artifact_provenance_only",
+      "witnesses": {
+        "action_selection_reached": false,
+        "branch_identity_injected_into_runtime": false,
+        "cached_action_or_kernel_crossing": false,
+        "clock_after_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_hook": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_before": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "complete_legal_mask": [
+          true,
+          true,
+          true
+        ],
+        "complete_probability_vector": true,
+        "expected_target_payload_digest": "ee65476950e62f883c68b54d32aa550430d65115f0726df52380812afe4dd366",
+        "forbidden_branch_runtime_attributes": [],
+        "hook_after_payload_digest": "ee65476950e62f883c68b54d32aa550430d65115f0726df52380812afe4dd366",
+        "hook_before_payload_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+        "hook_calls": 1,
+        "hook_timing": "after_membership_trial_commit_before_first_target_logits",
+        "kernel_capture_count": 1,
+        "kernel_producing_policy_forwards": 1,
+        "ledgers_after": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_before": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_unchanged": true,
+        "lineage_digest_after_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_hook": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_before": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "model_parameters_unchanged": true,
+        "model_state_digest_after": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "model_state_digest_before": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "pending_membership_transaction_after": false,
+        "pending_membership_transaction_before": false,
+        "reset_target_neutral": true,
+        "rng_state_digests_after": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_state_digests_before": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_states_unchanged": true,
+        "sentinel_caught": true,
+        "slot_local_buffer_crossing": false,
+        "target_after_capture": {
+          "high_hidden_digest": "ee65476950e62f883c68b54d32aa550430d65115f0726df52380812afe4dd366",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_before": {
+          "high_hidden_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_payload_digest_at_capture": "ee65476950e62f883c68b54d32aa550430d65115f0726df52380812afe4dd366"
+      }
+    },
+    "K_(0<-1)": {
+      "arm_kind": "target_s03_transplant",
+      "common_source_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "intervention_digest": "03594d02bbae94e07a971fdc89ddf0d94c39d5c49868a98c3e3bf62c1770b281",
+      "kernel": {
+        "actor_preimage_digest_excluding_only_s03": "ee836856dcae7503fa0eae9cf400ea75fa0f952277a11a72c94fae05096b9a78",
+        "binding_manifest_digest": "94baf9cb14d5115a428614a64bc49ab48212168208322f91a4af0e4a49ffe7e9",
+        "common_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+        "masked_logits": {
+          "byte_order": "little-endian",
+          "bytes_base64": "BaYEQBYd7b9nVx09",
+          "bytes_sha256": "ffb3617924c04e1856101a1fe15d361ba0739c76cf72eb6aa874bd1077762b6d",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "17e34e46849b293dfd1c9b50edc9d00c8b760bec17eb4c78e649c2c99fd3eb9f",
+          "values": [
+            2.0726330280303955,
+            -1.8524501323699951,
+            0.038413431495428085
+          ]
+        },
+        "membership_epoch": 0,
+        "model_state_digest": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "owner_lifecycle_key": "owner_t",
+        "probabilities": {
+          "byte_order": "little-endian",
+          "bytes_base64": "7IFeP5yOjDz9zOg9",
+          "bytes_sha256": "975274e7ed5855aa023e7783bf512586fdb37f6367fafb2d7177df64c23b1c7c",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "606029715035fa955a0645ee677a150997fac3c74abdafd4eecb898e2269d470",
+          "values": [
+            0.8691699504852295,
+            0.017157845199108124,
+            0.11367223411798477
+          ]
+        },
+        "token_position": 0
+      },
+      "name": "K_(0<-1)",
+      "payload_slot": "h1",
+      "runtime_prewrite_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "source_branch_identity": 0,
+      "source_branch_identity_role": "artifact_provenance_only",
+      "witnesses": {
+        "action_selection_reached": false,
+        "branch_identity_injected_into_runtime": false,
+        "cached_action_or_kernel_crossing": false,
+        "clock_after_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_hook": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_before": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "complete_legal_mask": [
+          true,
+          true,
+          true
+        ],
+        "complete_probability_vector": true,
+        "expected_target_payload_digest": "b1418a2a2bd3656826989f1c3291e3ba513f840eab089f21eae14de0ede8a3ea",
+        "forbidden_branch_runtime_attributes": [],
+        "hook_after_payload_digest": "b1418a2a2bd3656826989f1c3291e3ba513f840eab089f21eae14de0ede8a3ea",
+        "hook_before_payload_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+        "hook_calls": 1,
+        "hook_timing": "after_membership_trial_commit_before_first_target_logits",
+        "kernel_capture_count": 1,
+        "kernel_producing_policy_forwards": 1,
+        "ledgers_after": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_before": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_unchanged": true,
+        "lineage_digest_after_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_hook": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_before": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "model_parameters_unchanged": true,
+        "model_state_digest_after": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "model_state_digest_before": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "pending_membership_transaction_after": false,
+        "pending_membership_transaction_before": false,
+        "reset_target_neutral": true,
+        "rng_state_digests_after": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_state_digests_before": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_states_unchanged": true,
+        "sentinel_caught": true,
+        "slot_local_buffer_crossing": false,
+        "target_after_capture": {
+          "high_hidden_digest": "b1418a2a2bd3656826989f1c3291e3ba513f840eab089f21eae14de0ede8a3ea",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_before": {
+          "high_hidden_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_payload_digest_at_capture": "b1418a2a2bd3656826989f1c3291e3ba513f840eab089f21eae14de0ede8a3ea"
+      }
+    },
+    "K_(1<-0)": {
+      "arm_kind": "target_s03_transplant",
+      "common_source_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "intervention_digest": "4b88e3504f4697983df033f4f19ec1b61bb6985ba3822c5474fe223e99134008",
+      "kernel": {
+        "actor_preimage_digest_excluding_only_s03": "ee836856dcae7503fa0eae9cf400ea75fa0f952277a11a72c94fae05096b9a78",
+        "binding_manifest_digest": "94baf9cb14d5115a428614a64bc49ab48212168208322f91a4af0e4a49ffe7e9",
+        "common_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+        "masked_logits": {
+          "byte_order": "little-endian",
+          "bytes_base64": "3+/xPUb/0D1nVx09",
+          "bytes_sha256": "5098847aa3512e08bff9c9a2ba624b612d46fb9c8679758ef4f7ab9b77faa750",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "007ac3a588c056d60419e737beb62d62365ac7dfd1c0b8b7335f7ff3c62816ad",
+          "values": [
+            0.1181332990527153,
+            0.10204939544200897,
+            0.038413431495428085
+          ]
+        },
+        "membership_epoch": 0,
+        "model_state_digest": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "owner_lifecycle_key": "owner_t",
+        "probabilities": {
+          "byte_order": "little-endian",
+          "bytes_base64": "5hmwPptKrT5/m6I+",
+          "bytes_sha256": "12bc742da63718f39043b234906ffc5887e54edb80725991131bf3fe5aa48e05",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "5e9402554fe283239701c45d5d0d403c373e5842bca366a5baa3ba84c16a9227",
+          "values": [
+            0.3439475893974304,
+            0.3384598195552826,
+            0.317592591047287
+          ]
+        },
+        "token_position": 0
+      },
+      "name": "K_(1<-0)",
+      "payload_slot": "h0",
+      "runtime_prewrite_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "source_branch_identity": 1,
+      "source_branch_identity_role": "artifact_provenance_only",
+      "witnesses": {
+        "action_selection_reached": false,
+        "branch_identity_injected_into_runtime": false,
+        "cached_action_or_kernel_crossing": false,
+        "clock_after_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_hook": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_before": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "complete_legal_mask": [
+          true,
+          true,
+          true
+        ],
+        "complete_probability_vector": true,
+        "expected_target_payload_digest": "ee65476950e62f883c68b54d32aa550430d65115f0726df52380812afe4dd366",
+        "forbidden_branch_runtime_attributes": [],
+        "hook_after_payload_digest": "ee65476950e62f883c68b54d32aa550430d65115f0726df52380812afe4dd366",
+        "hook_before_payload_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+        "hook_calls": 1,
+        "hook_timing": "after_membership_trial_commit_before_first_target_logits",
+        "kernel_capture_count": 1,
+        "kernel_producing_policy_forwards": 1,
+        "ledgers_after": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_before": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_unchanged": true,
+        "lineage_digest_after_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_hook": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_before": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "model_parameters_unchanged": true,
+        "model_state_digest_after": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "model_state_digest_before": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "pending_membership_transaction_after": false,
+        "pending_membership_transaction_before": false,
+        "reset_target_neutral": true,
+        "rng_state_digests_after": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_state_digests_before": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_states_unchanged": true,
+        "sentinel_caught": true,
+        "slot_local_buffer_crossing": false,
+        "target_after_capture": {
+          "high_hidden_digest": "ee65476950e62f883c68b54d32aa550430d65115f0726df52380812afe4dd366",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_before": {
+          "high_hidden_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_payload_digest_at_capture": "ee65476950e62f883c68b54d32aa550430d65115f0726df52380812afe4dd366"
+      }
+    },
+    "K_(1<-1)": {
+      "arm_kind": "target_s03_transplant",
+      "common_source_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "intervention_digest": "03594d02bbae94e07a971fdc89ddf0d94c39d5c49868a98c3e3bf62c1770b281",
+      "kernel": {
+        "actor_preimage_digest_excluding_only_s03": "ee836856dcae7503fa0eae9cf400ea75fa0f952277a11a72c94fae05096b9a78",
+        "binding_manifest_digest": "94baf9cb14d5115a428614a64bc49ab48212168208322f91a4af0e4a49ffe7e9",
+        "common_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+        "masked_logits": {
+          "byte_order": "little-endian",
+          "bytes_base64": "BaYEQBYd7b9nVx09",
+          "bytes_sha256": "ffb3617924c04e1856101a1fe15d361ba0739c76cf72eb6aa874bd1077762b6d",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "17e34e46849b293dfd1c9b50edc9d00c8b760bec17eb4c78e649c2c99fd3eb9f",
+          "values": [
+            2.0726330280303955,
+            -1.8524501323699951,
+            0.038413431495428085
+          ]
+        },
+        "membership_epoch": 0,
+        "model_state_digest": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "owner_lifecycle_key": "owner_t",
+        "probabilities": {
+          "byte_order": "little-endian",
+          "bytes_base64": "7IFeP5yOjDz9zOg9",
+          "bytes_sha256": "975274e7ed5855aa023e7783bf512586fdb37f6367fafb2d7177df64c23b1c7c",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "606029715035fa955a0645ee677a150997fac3c74abdafd4eecb898e2269d470",
+          "values": [
+            0.8691699504852295,
+            0.017157845199108124,
+            0.11367223411798477
+          ]
+        },
+        "token_position": 0
+      },
+      "name": "K_(1<-1)",
+      "payload_slot": "h1",
+      "runtime_prewrite_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "source_branch_identity": 1,
+      "source_branch_identity_role": "artifact_provenance_only",
+      "witnesses": {
+        "action_selection_reached": false,
+        "branch_identity_injected_into_runtime": false,
+        "cached_action_or_kernel_crossing": false,
+        "clock_after_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_hook": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_before": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "complete_legal_mask": [
+          true,
+          true,
+          true
+        ],
+        "complete_probability_vector": true,
+        "expected_target_payload_digest": "b1418a2a2bd3656826989f1c3291e3ba513f840eab089f21eae14de0ede8a3ea",
+        "forbidden_branch_runtime_attributes": [],
+        "hook_after_payload_digest": "b1418a2a2bd3656826989f1c3291e3ba513f840eab089f21eae14de0ede8a3ea",
+        "hook_before_payload_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+        "hook_calls": 1,
+        "hook_timing": "after_membership_trial_commit_before_first_target_logits",
+        "kernel_capture_count": 1,
+        "kernel_producing_policy_forwards": 1,
+        "ledgers_after": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_before": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_unchanged": true,
+        "lineage_digest_after_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_hook": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_before": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "model_parameters_unchanged": true,
+        "model_state_digest_after": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "model_state_digest_before": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "pending_membership_transaction_after": false,
+        "pending_membership_transaction_before": false,
+        "reset_target_neutral": true,
+        "rng_state_digests_after": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_state_digests_before": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_states_unchanged": true,
+        "sentinel_caught": true,
+        "slot_local_buffer_crossing": false,
+        "target_after_capture": {
+          "high_hidden_digest": "b1418a2a2bd3656826989f1c3291e3ba513f840eab089f21eae14de0ede8a3ea",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_before": {
+          "high_hidden_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_payload_digest_at_capture": "b1418a2a2bd3656826989f1c3291e3ba513f840eab089f21eae14de0ede8a3ea"
+      }
+    },
+    "K_reset_0": {
+      "arm_kind": "complete_reset",
+      "common_source_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "intervention_digest": "6cbe49e9f229288c7fbe33077dfb3472c340bcb90af9425a8c775439ef9d97df",
+      "kernel": {
+        "actor_preimage_digest_excluding_only_s03": "ee836856dcae7503fa0eae9cf400ea75fa0f952277a11a72c94fae05096b9a78",
+        "binding_manifest_digest": "94baf9cb14d5115a428614a64bc49ab48212168208322f91a4af0e4a49ffe7e9",
+        "common_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+        "masked_logits": {
+          "byte_order": "little-endian",
+          "bytes_base64": "WKB1P3ZCPb9nVx09",
+          "bytes_sha256": "879803bfed1d223d537e4cf2341c26461756e48c79cc5bc5c0927639a5e5b997",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "63a90c19d87ff8e002b75ce709372d00c7ffae0430d09923fa0835b1d94ddd73",
+          "values": [
+            0.9594779014587402,
+            -0.7392953634262085,
+            0.038413431495428085
+          ]
+        },
+        "membership_epoch": 0,
+        "model_state_digest": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "owner_lifecycle_key": "owner_t",
+        "probabilities": {
+          "byte_order": "little-endian",
+          "bytes_base64": "LOwhP2Tv7D3P64A+",
+          "bytes_sha256": "7cd25b267161f22f1b5003587d0a62989248214a1c32736fc50eb8751039f745",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "9c4d1dbfd393a1f86c17489dda5066f9750fb3ab294298828075015195386f25",
+          "values": [
+            0.6325099468231201,
+            0.11569097638130188,
+            0.251799076795578
+          ]
+        },
+        "token_position": 0
+      },
+      "name": "K_reset_0",
+      "payload_slot": "h_neutral",
+      "runtime_prewrite_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "source_branch_identity": 0,
+      "source_branch_identity_role": "artifact_provenance_only",
+      "witnesses": {
+        "action_selection_reached": false,
+        "branch_identity_injected_into_runtime": false,
+        "cached_action_or_kernel_crossing": false,
+        "clock_after_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_hook": null,
+        "clock_before": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "complete_legal_mask": [
+          true,
+          true,
+          true
+        ],
+        "complete_probability_vector": true,
+        "expected_target_payload_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+        "forbidden_branch_runtime_attributes": [],
+        "hook_after_payload_digest": null,
+        "hook_before_payload_digest": null,
+        "hook_calls": 0,
+        "hook_timing": "complete_reset_neutral_no_hook",
+        "kernel_capture_count": 1,
+        "kernel_producing_policy_forwards": 1,
+        "ledgers_after": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_before": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_unchanged": true,
+        "lineage_digest_after_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_hook": null,
+        "lineage_digest_before": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "model_parameters_unchanged": true,
+        "model_state_digest_after": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "model_state_digest_before": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "pending_membership_transaction_after": false,
+        "pending_membership_transaction_before": false,
+        "reset_target_neutral": true,
+        "rng_state_digests_after": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_state_digests_before": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_states_unchanged": true,
+        "sentinel_caught": true,
+        "slot_local_buffer_crossing": false,
+        "target_after_capture": {
+          "high_hidden_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_before": {
+          "high_hidden_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_payload_digest_at_capture": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646"
+      }
+    },
+    "K_reset_1": {
+      "arm_kind": "complete_reset",
+      "common_source_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "intervention_digest": "6cbe49e9f229288c7fbe33077dfb3472c340bcb90af9425a8c775439ef9d97df",
+      "kernel": {
+        "actor_preimage_digest_excluding_only_s03": "ee836856dcae7503fa0eae9cf400ea75fa0f952277a11a72c94fae05096b9a78",
+        "binding_manifest_digest": "94baf9cb14d5115a428614a64bc49ab48212168208322f91a4af0e4a49ffe7e9",
+        "common_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+        "masked_logits": {
+          "byte_order": "little-endian",
+          "bytes_base64": "WKB1P3ZCPb9nVx09",
+          "bytes_sha256": "879803bfed1d223d537e4cf2341c26461756e48c79cc5bc5c0927639a5e5b997",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "63a90c19d87ff8e002b75ce709372d00c7ffae0430d09923fa0835b1d94ddd73",
+          "values": [
+            0.9594779014587402,
+            -0.7392953634262085,
+            0.038413431495428085
+          ]
+        },
+        "membership_epoch": 0,
+        "model_state_digest": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "owner_lifecycle_key": "owner_t",
+        "probabilities": {
+          "byte_order": "little-endian",
+          "bytes_base64": "LOwhP2Tv7D3P64A+",
+          "bytes_sha256": "7cd25b267161f22f1b5003587d0a62989248214a1c32736fc50eb8751039f745",
+          "dtype": "float32",
+          "shape": [
+            3
+          ],
+          "typed_vector_sha256": "9c4d1dbfd393a1f86c17489dda5066f9750fb3ab294298828075015195386f25",
+          "values": [
+            0.6325099468231201,
+            0.11569097638130188,
+            0.251799076795578
+          ]
+        },
+        "token_position": 0
+      },
+      "name": "K_reset_1",
+      "payload_slot": "h_neutral",
+      "runtime_prewrite_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+      "source_branch_identity": 1,
+      "source_branch_identity_role": "artifact_provenance_only",
+      "witnesses": {
+        "action_selection_reached": false,
+        "branch_identity_injected_into_runtime": false,
+        "cached_action_or_kernel_crossing": false,
+        "clock_after_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_capture": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "clock_at_hook": null,
+        "clock_before": {
+          "physical_time": 0,
+          "policy_version": 0
+        },
+        "complete_legal_mask": [
+          true,
+          true,
+          true
+        ],
+        "complete_probability_vector": true,
+        "expected_target_payload_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+        "forbidden_branch_runtime_attributes": [],
+        "hook_after_payload_digest": null,
+        "hook_before_payload_digest": null,
+        "hook_calls": 0,
+        "hook_timing": "complete_reset_neutral_no_hook",
+        "kernel_capture_count": 1,
+        "kernel_producing_policy_forwards": 1,
+        "ledgers_after": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_before": {
+          "closed_event_rows": 0,
+          "high_ledger": 0,
+          "low_chunk_boundaries": 0,
+          "low_ledger": 0
+        },
+        "ledgers_unchanged": true,
+        "lineage_digest_after_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_capture": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "lineage_digest_at_hook": null,
+        "lineage_digest_before": "625ef80bdc9bbd4cc7f02326a74db9711422957b6111f8d696008fff69210ab5",
+        "model_parameters_unchanged": true,
+        "model_state_digest_after": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "model_state_digest_before": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+        "pending_membership_transaction_after": false,
+        "pending_membership_transaction_before": false,
+        "reset_target_neutral": true,
+        "rng_state_digests_after": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_state_digests_before": {
+          "action_rng": "bfdb4b484a25f30813d98c4b4e25fdc4323153e84bf50251850f7047070817ce",
+          "frontier_rng": "a6231f3aebb524eb63f1c674aaff805b36166eab0d25786f8a8aa0ba96a03802",
+          "opportunity_rng": "a00f8d5850a1300123920a606d0b7dca3d8e56000a5e681d318ddbf3f43294cd"
+        },
+        "rng_states_unchanged": true,
+        "sentinel_caught": true,
+        "slot_local_buffer_crossing": false,
+        "target_after_capture": {
+          "high_hidden_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_before": {
+          "high_hidden_digest": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646",
+          "membership_epoch": 0,
+          "owner_lifecycle_key": "owner_t",
+          "status": "ACTIVE"
+        },
+        "target_payload_digest_at_capture": "90267ddf0b298d93a16de36a19d48ac783c4c4798ec0d0226873559a77b1f646"
+      }
+    }
+  },
+  "assignment": "FOLR-A1-S03-PAYLOAD-KERNEL-MEDIATION",
+  "common_prewrite_snapshot_digest": "60f0d6625ac95bb33310d911875f02147f5490e9b82ee8755ec8c0733202d663",
+  "decision": "S03_PAYLOAD_MEDIATION_ACCESS_SUPPORTED",
+  "direction": "CAND-VAP-FOLR-CORE@constructive-revision-v6",
+  "exclusions": {
+    "cell_search": true,
+    "extra_arms": true,
+    "learner": true,
+    "optimizer": true,
+    "rescue": true,
+    "return_evaluation": true,
+    "sample_or_monte_carlo": true,
+    "trainer": true
+  },
+  "prerequisite_admission": {
+    "all_pass": true,
+    "analytic_logit_separation": 3.9089994722072836,
+    "binding_manifest_digest": "94baf9cb14d5115a428614a64bc49ab48212168208322f91a4af0e4a49ffe7e9",
+    "cell_identifier": "folr_s03_constructed_sensitivity_v1",
+    "checks": {
+      "all_registered_actions_legal": true,
+      "at_least_two_legal_actions": true,
+      "binding_epoch_matches_manifest": true,
+      "binding_target_matches_manifest": true,
+      "cell_identifier_exact": true,
+      "development_mode_matches": true,
+      "legal_action_vector_complete": true,
+      "model_digest_matches_weight_witness": true,
+      "positive_weight_witness": true,
+      "registered_shadow_exact": true,
+      "registered_target_exact": true,
+      "scientific_graph_identity_matches_registration": true,
+      "source_commit_matches_head": true,
+      "target_first_teacher_order": true,
+      "teacher_actions_cover_frontier": true
+    },
+    "frontier": [
+      "owner_t",
+      "owner_q"
+    ],
+    "legal_action_support": [
+      true,
+      true,
+      true
+    ],
+    "model_state_digest": "07d335e49ebe5d25269ef4401563d962aec410e3be3e9ee3fbab8a92eeea2bab",
+    "registration_digest": "2b8593143747dc9c963142f5f7f357a26e319e3c4c368c6797b8107ee84534dd",
+    "reset_manifest_digest": "7ab55b5b27b09065c82fa00d4d9dc2722160160740c2192cb48afdfbbb4c111a",
+    "shadow": [
+      "owner_q",
+      0
+    ],
+    "skill_head_focal_column": [
+      1.0,
+      -1.0,
+      0.0
+    ],
+    "source_identity": {
+      "actor_path_fingerprint": "17c6846cc0c2356a06bd927110891619e723dbefb99a2316629898a8c8d95250",
+      "commit_authenticates_the_registration": true,
+      "harness_fingerprint": "c345e16256962780287b0e638bd1d6a3c6972b1d599a221399baf2ccac61d625",
+      "numpy_version": "1.26.3",
+      "registered_sources": {
+        "experiments/candidates/folr_core/branch_snapshot.py": "29210da7a530375301554ce3808e0737c1f2bf303dde3f8d9c94ddf44814196a",
+        "experiments/candidates/folr_core/branches.py": "d4bc7fb232b5f254d98ea645f9e7e0b6418ea520f147921ec09f7d06d99f8263",
+        "experiments/candidates/folr_core/certificates.py": "8ec93ed31290f2b10baa5c290f599e5a631373661c528504515fc76f32198b1b",
+        "experiments/candidates/folr_core/outcome.py": "f9d1879fba69b37678ed71fcdb633844d83446a701085eec345a0a2f033e56b3",
+        "experiments/candidates/folr_core/registration.py": "f654e68a99aa942154ab7e6537856008ffeda0500b6bc4ec172f37b1dc633ca8",
+        "experiments/candidates/folr_core/reset_manifest.py": "050e698d05759441eea442db318087243242060f79854eee6d4af0a13b50903e",
+        "experiments/candidates/folr_core/s03_binding.py": "9d48725057acfab703186cf4b8391638976c839b0ebfd0aaeee290b6a47ca074",
+        "ha_ctse_process/variable_roster_event.py": "382a394b397c33ae4c463f97b18da5f35c51e440691710340e667751501e6d4a",
+        "ha_ctse_process/variable_roster_event_models.py": "2aeecfe877037a5064b1f073bf5bd0db508b85ab0461d0a92afb26aab3b55c99",
+        "ha_ctse_process/variable_roster_event_support.py": "5f54368b0c159ead2d5079f3949bd84971453a6e6389b5154c4edb50a6e0026b",
+        "ha_ctse_process/variable_roster_event_types.py": "0c1187ac0c52e35a1d567c7d77c7f997bcdd26a4e9f8f2fc6cb84c53083762d9"
+      },
+      "registered_sources_dirty": false,
+      "scientific_graph_fingerprint": "9cd69ea7e068ac035e1b50f7d72494c6b2e440085a5123f193c746d5d16d7eaa",
+      "source_commit": "eed89a4c870a185b5caeac641c52a3fd57dc70b3",
+      "torch_version": "2.7.0+cpu"
+    },
+    "target": [
+      "owner_t",
+      0
+    ],
+    "target_token_order": [
+      "owner_t",
+      "owner_q"
+    ]
+  },
+  "probe_boundary": {
+    "branch_identity_is_provenance_metadata_only": true,
+    "environment_or_trajectory_executed": false,
+    "horizon": 1,
+    "k_search": 1,
+    "one_exact_cell": "folr_s03_constructed_sensitivity_v1"
+  },
+  "raw_output_binding": "folr_core.s03_payload_kernel_mediation.v1",
+  "run_id": "folr_a1_s03_payload_kernel_mediation_eed89a4c_r1",
+  "scientific_activity_counts": {
+    "cells": 1,
+    "complete_kernel_readouts": 6,
+    "environment_episodes": 0,
+    "environment_transitions": 0,
+    "hypothetical_transitions": 0,
+    "learner_calls": 0,
+    "lifecycle_transactions_started": 6,
+    "optimizer_updates": 0,
+    "policy_forwards": 6,
+    "return_evaluations": 0,
+    "trainer_calls": 0
+  },
+  "scientific_terminal_admitted": true,
+  "source_commit": "eed89a4c870a185b5caeac641c52a3fd57dc70b3",
+  "technical_only": false
+}
