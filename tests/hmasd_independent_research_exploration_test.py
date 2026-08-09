@@ -1329,6 +1329,67 @@ def test_direction_local_context_binding_is_symmetric_and_preserves_artifacts() 
     assert "never reads `local_research/`" in cpm_role_normalized
 
 
+def test_concrete_next_hop_semantics_keep_owner_boundary_and_provenance_explicit() -> None:
+    """Status prose must carry an actionable loop hop and safe CPM inputs."""
+    paths = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md",
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md",
+        REPO / ".agents" / "skills" / "hmasd-explorer-project-validation" / "SKILL.md",
+        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md",
+    )
+    normalized = " ".join(" ".join(path.read_text(encoding="utf-8").split()) for path in paths)
+    for required in (
+        "Concrete next-hop semantics",
+        "ready",
+        "parked",
+        "pending",
+        "blocked",
+        "unlock",
+        "locked/unlocked",
+        "cannot proceed",
+        "next selection required",
+        "research → code → evidence → research-intake",
+        "code implementation/connection",
+        "CPM technical acceptance or public locator",
+        "Explorer scientific intake",
+        "real project instance/object",
+        "local scientific proposition closure",
+        "genuinely triggered External Pro question",
+        "exact next owner and decision-bearing action",
+        "exact canonical inputs",
+        "cooperative write paths",
+        "native result destination",
+        "completion evidence and the following intake owner/path",
+        "formal/runtime status",
+        "observed or anticipated resource vector",
+        "prospective scientific object",
+        "why code/runtime must not start now",
+        "are never sufficient descriptions by themselves",
+        "prose-first",
+    ):
+        assert required.lower() in normalized.lower(), required
+
+    for required in (
+        "selected direction identity",
+        "exact candidate proposition",
+        "source/evidence revision boundary",
+        "protected scientific meaning",
+        "local_research/.../DIRECTION.json",
+        "Explorer-only provenance",
+        "not a CPM-readable canonical input",
+        "assignment-embedded prose",
+        "exact project source, test and index paths",
+        "one exact, self-contained file under `temp/handoffs/explorer_to_code_manager/`",
+        "CPM never reads `local_research/`",
+    ):
+        assert required.lower() in normalized.lower(), required
+
+
 def test_explorer_mechanical_child_is_context_isolated_from_science() -> None:
     """The mechanical lane organizes literals without joining research rosters."""
     role_path = REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md"

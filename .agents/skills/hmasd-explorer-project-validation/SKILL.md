@@ -44,6 +44,14 @@ original handoff/artifact and ask exactly one concrete semantic clarification;
   continue unrelated work without guessing, merging directions, rewriting the
   artifact or creating a `BLOCKED` state.
 
+The canonical contract's `Direction-local context binding` and `Concrete
+next-hop semantics` sections define assignment-embedded identity/proposition/
+revision, protected scientific meaning, Explorer-only `DIRECTION.json`
+provenance, CPM-readable inputs, and every status/disposition owner boundary.
+Follow those sections rather than duplicating them here. This Skill retains only
+the project-validation handoff, ticket/worktree, native-result, and clarification
+procedures below.
+
 ## Assignment-scoped CPM treatment result
 
 When a Scheduler assignment has `owner_mode=treatment`, its self-contained

@@ -60,6 +60,38 @@ consumer; completion evidence; and return destination. These cues make the
 semantic binding understandable without
 creating required field names or a machine admission gate.
 
+An Explorer-generated CPM assignment or brief carries the selected direction
+identity, exact candidate proposition and source/evidence revision boundary in
+its own prose, along with the protected scientific meaning: frozen facts,
+uncertainty, strongest alternative and allowed/excluded interpretations. A
+`local_research/.../DIRECTION.json` locator is, if present, Explorer-only
+provenance; it is not a CPM-readable canonical input. CPM reads the
+assignment-embedded prose and exact project source, test and index paths. Only
+when extra bytes are genuinely needed may Explorer provide one exact,
+self-contained file under `temp/handoffs/explorer_to_code_manager/`; CPM never
+reads `local_research/`.
+
+### Concrete next-hop semantics
+
+Whenever a continuity entry or handoff describes a direction as **ready**,
+**parked**, **pending**, **blocked**, **unlock**, **locked/unlocked**, **cannot proceed**, or
+**next selection required**, the same prose paragraph or row must make the next
+hop understandable. It identifies the current research → code → evidence →
+research-intake stage and evidence already present; the concrete missing boundary
+(code implementation/connection, CPM technical acceptance or public locator, Explorer
+scientific intake, real project instance/object, local scientific proposition
+closure, or a genuinely triggered External Pro question); the exact next owner
+and decision-bearing action; exact canonical inputs, cooperative write paths and
+native result destination (including the native owner handle when applicable);
+completion evidence and the following intake owner/path; dependencies,
+exclusions, formal/runtime status, and the observed or anticipated resource
+vector. A parked direction also states the prospective scientific object that
+would justify reactivation and why code/runtime must not start now. `ready`,
+`parked`, `pending`, `blocked`, `unlock`, `locked/unlocked` and `next selection required`
+are never sufficient descriptions by themselves. This is natural-language
+judgment, not a required schema, enum, validator gate, queue, ledger, writer
+script, state machine or concurrency coupling.
+
 CPM's treatment result is returned directly over the exact native owner handle.
 It begins with its conclusion and mirrors that same primary direction or
 explicitly named direction set, candidate, proposition, stage, revision
@@ -166,6 +198,15 @@ version, intended outcome, concrete inputs, evidence, uncertainty, allowed and
 excluded effects, authority boundary, completion evidence and return task easy
 to understand. It also makes Explorer's selected treatment understandable:
 experiment, instance binding, pause, abandon or one exact external-review need.
+If it uses a ready/parked/pending/blocked/unlock/locked/unlocked/cannot-proceed or
+next-selection disposition, the same paragraph or row carries the concrete
+next-hop semantics above; do not substitute the status word for the owner
+boundary.
+The same brief embeds the direction identity, exact proposition/revision and
+protected scientific meaning described above. Any `local_research/.../DIRECTION.json`
+locator is Explorer-only provenance, never a CPM-readable input; CPM consumes
+assignment prose plus exact project source/test/index paths, or one exact
+self-contained temporary handoff only when extra bytes are genuinely needed.
 Explorer gives one clear instruction naming implementation, instance binding,
 experiment, pause, abandon or exact review as applicable, and identifies the
 proportional evidence level A reconnaissance/probe, B exploratory toy

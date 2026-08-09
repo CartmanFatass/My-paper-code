@@ -110,6 +110,13 @@ assignments with exact inputs, write paths, result destinations, dependencies
 and resource vectors. `ready` is a natural-language portfolio
 capsule/continuity decision, not a schema, queue or admission gate.
 
+Concrete next-hop status and Explorer-only provenance semantics are defined once
+by the canonical `Direction-local context binding` and `Concrete next-hop
+semantics` sections in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Apply that rule to every
+continuity capsule or ready/parked handoff; this reference retains only the
+portfolio ordering, resource-vector and owner-task procedure.
+
 Research Scheduler alone creates same-level direction owner tasks. The initial
 configured concurrency ceiling is 3 active same-level direction owner tasks;
 the portfolio owner, registered children and runtime treatments are outside
@@ -210,6 +217,10 @@ semantic continuity cues rather than required field names. Update it only when
 the active roster changes, an intake/phase barrier closes, a direction is parked,
 or the task ends. If absent, the new Explorer performs one bounded scan of its
 owned `local_research` paths and creates the entry with `apply_patch`.
+Apply the canonical contract's `Concrete next-hop semantics` section in the same
+paragraph or row whenever continuity describes a direction with a status or
+disposition; this reference retains only the continuity owner, update triggers,
+and single-writer constraints.
 Continuity does not alter scientific ordering, source authority, read-only
 children or the Explorer single-writer rule.
 Do not add writer scripts, hashes, state machines, budgets or user gates to

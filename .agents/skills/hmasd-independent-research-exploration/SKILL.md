@@ -171,6 +171,13 @@ contradictory binding preserves the original artifact and asks one concrete
 clarification while unrelated research continues; never guess, merge, rewrite
 or create a `BLOCKED` state.
 
+For assignment prose, status dispositions, and Explorer-only provenance, follow
+the single defining `Direction-local context binding` and `Concrete next-hop
+semantics` sections in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. This Skill retains only
+the Explorer trigger, direction selection, sibling exclusion, and clarification
+procedure; it does not duplicate the canonical semantic rule.
+
 ## Choose exactly one research mode
 
 Use **evidence review** to determine what existing sources establish. Create an
@@ -319,8 +326,11 @@ When a mature candidate is ready for project intake, load the single
 `.agents/skills/hmasd-explorer-project-validation/SKILL.md` and
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Write one
 self-contained semantic brief under `temp/handoffs/explorer_to_code_manager/`
-with the selected A/B/C treatment and direct CPM action. The dedicated workflow
-owns brief/native-treatment-result mechanics, direction-local context and the
-named Pro triggers. Explorer records one scientific decision after CPM
+with the selected A/B/C treatment and direct CPM action. Follow the canonical
+contract's `Direction-local context binding` and `Concrete next-hop semantics`
+sections for embedded direction identity/proposition/revision, protected
+scientific meaning, Explorer-only `DIRECTION.json` provenance and CPM-readable
+inputs. The dedicated workflow owns brief/native-treatment-result mechanics and
+the named Pro triggers. Explorer records one scientific decision after CPM
 technical acceptance; CPM remains the engineering/runtime acceptance owner, and
 External Pro owns final scientific-semantic acceptance when invoked.

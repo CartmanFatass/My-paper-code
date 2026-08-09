@@ -107,6 +107,7 @@ $publicHandoffContract = Get-Content -Raw -LiteralPath $publicHandoffContractPat
 $publicHandoffContractNormalized = $publicHandoffContract -replace '\s+', ' '
 $independentResearchMyLib = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/mylib.md')
 $parallelResearch = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md')
+$parallelResearchNormalized = $parallelResearch -replace '\s+', ' '
 $openInspiration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/open-algorithm-inspiration.md')
 $researchMethodology = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/research-methodology.md')
 $independentReviewSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
@@ -202,6 +203,42 @@ foreach ($required in @(
     'Independent direction-local candidates with disjoint observed resource vectors follow the parallel-first path')) {
     if (-not $explorerValidationSkillNormalized.Contains($required)) {
         throw "Explorer semantic handoff Skill missing: $required"
+    }
+}
+
+# The project-validation contract is the single semantic source for concrete
+# next-hop and Explorer-only provenance rules; sibling Skills retain pointers
+# and role-local procedures only.
+foreach ($required in @(
+    '### Concrete next-hop semantics',
+    'cannot proceed',
+    'next selection required',
+    'same prose paragraph or row',
+    'exact next owner',
+    'decision-bearing action',
+    'completion evidence and the following intake owner/path',
+    'prospective scientific object',
+    'why code/runtime must not start now',
+    'are never sufficient descriptions by themselves',
+    'not a required schema, enum, validator gate, queue, ledger, writer script, state machine or concurrency coupling',
+    'local_research/.../DIRECTION.json',
+    'Explorer-only provenance',
+    'not a CPM-readable canonical input',
+    'assignment-embedded prose',
+    'one exact, self-contained file under `temp/handoffs/explorer_to_code_manager/`',
+    'CPM never reads `local_research/`',
+    'CPM''s treatment result is returned directly over the exact native owner handle')) {
+    if (-not $explorerValidationContractNormalized.Contains($required)) {
+        throw "Canonical Explorer validation rule missing: $required"
+    }
+}
+foreach ($entry in @(
+    @($independentResearchSkillNormalized, 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'),
+    @($parallelResearchNormalized, 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'),
+    @($explorerValidationSkillNormalized, 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'),
+    @($codePmRoleNormalized, 'never reads `local_research/`'))) {
+    if (-not $entry[0].Contains($entry[1])) {
+        throw "Explorer validation pointer/CPM boundary missing: $($entry[1])"
     }
 }
 foreach ($entry in @(
