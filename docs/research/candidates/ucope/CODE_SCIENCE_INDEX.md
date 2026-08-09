@@ -322,3 +322,45 @@ Public source locators are:
 - `scripts/run_ucope_b2_endogenous_paid_count_acquisition.py`
 - `tests/experiments/candidates/ucope/test_endogenous_paid_count_acquisition.py`
 - `docs/research/candidates/ucope/CODE_SCIENCE_INDEX.md`
+
+### B2 accepted result
+
+The accepted source commit is
+`00ee2f5baa38620728cd203d2be8dba5721b102f`. The sole full run is
+`ucope_b2_endogenous_paid_count_acquisition_00ee2f5b_r1`; no retry, rescue,
+sweep, extra seed, stratum, arm or checkpoint was used. The code-defined
+branch is `B2_LOCAL_NET_ACQUISITION_SUPPORTED`. This is a CPM technical result
+only: Explorer retains the unique scientific intake and successor decision.
+
+Both seeds (`1709`, `2903`) produced identical registered maps. In
+`PERSISTENT_TARGET` and `PERSISTENT_POSITIVE`, COUNT selected root `BUY_SL`
+and tail `{-1:S,0:S,1:L}`, whereas COUNT_BLIND selected root `COMMIT_S` and a
+constant-S tail. In `REDRAW_AFTER_TWO`, both arms selected root `COMMIT_S` and
+constant-S tails. The exact retained panels for both seeds were:
+
+```text
+PERSISTENT_POSITIVE: A_B=9/2, A_C=6, B=5, U=3/2, Gamma=1
+PERSISTENT_TARGET:   A_B=9/2, A_C=213/40, B=5, U=33/40, Gamma=13/40
+REDRAW_AFTER_TWO:    A_B=9/2, A_C=9/2, B=5, U=0, Gamma=-1/2
+```
+
+The retained audit reports valid contract, calibration and visit-floor gates;
+all issue lists are empty. The shape/initialization/update match,
+count-access-only delta, real-host evaluation callback, evaluation-only fixed
+reference, equal-history/equal-count byte identity, root-observation identity,
+and version/reward/postdecision firewall witnesses are all true.
+
+The unique full retained 46,080 training episodes / 230,400 training
+transitions, 46,080 learner/trainer/optimizer updates, 1,940 evaluation
+episodes / 9,700 evaluation transitions, and 48,020 total episodes / 240,100
+total transitions. It made 58,144 policy calls under the frozen cap of 58,788,
+retained 12 final checkpoints, 1,552 learned evaluation rows and 388 fixed
+reference rows, with `full_runs=1` and every prohibited extra-action counter
+equal to zero.
+
+The canonical public artifact is
+`docs/research/candidates/ucope/UCOPE_B2_ENDOGENOUS_PAID_COUNT_ACQUISITION_RESULT.json`.
+It is byte-identical to the independently validated full-run result (SHA-256
+`72cd3b24132e1f3cc2983e0e59512fb20b12e9c609c4a5b05e296412eb274db9`).
+The accepted result commit is the Git commit containing this index update and
+the canonical public result.
