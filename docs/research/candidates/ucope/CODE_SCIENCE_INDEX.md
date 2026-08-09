@@ -1,113 +1,160 @@
-# UCOPE count-state D1: code-science index
+# UCOPE code-science index
 
 Candidate: `CAND-VSP-07-UCOPE@adversarial-revision-v6`
 
-Treatment: proof-sized deterministic `UCOPE-COUNT-STATE-D1`
+Current treatment: `UCOPE-A1-COUNT-STATE-EXACT-ENUMERATION`
 
-Status: exact finite-family implementation evidence only. It does not establish
-task return, acquisition, retirement, transfer, or multi-step value.
+Stage: derivation; treatment `A`; `formal=false`.
 
-## Frozen contract
+Status: source candidate only. The implementation and technical-only exercise
+surface do not constitute a registered A1 result. Code Project Manager owns the
+later clean-source revision, one registered probe, technical acceptance,
+publication, result commit, and Explorer handoff.
 
-The family has anonymous equal-weight cells `c1,c2`, effective periods
-`{s}->S`, `{ell,ell_prime}->L`, durations `d_S=1,d_L=2`, and a persistent
-latent `Theta` with prior `1/2`. `ell` and `ell_prime` share one exact execution
-law. The four forced trials are `(c1,S),(c2,S),(c1,L),(c2,L)`; the fifth trial
-chooses `S` or `L` at `c1`. Coverage resets each trial and the physical horizon
-is three.
+## Narrow question and frozen scope
 
-```text
-h(theta,p)=9/10 when theta=p, otherwise 1/10
-rho=L_S/(L_S+L_L)
-h_S=1/10+(8/10)rho
-h_L=9/10-(8/10)rho
-UCOPE(S)=2h_S
-UCOPE(L)=h_L
-```
+A1 asks whether, inside one frozen finite block-persistent marked-renewal
+family, completed first-hit counts can change the Bayes-optimal trial-5
+effective period when every allowed non-count state is matched. It makes no
+task-return, acquisition, retirement, transfer, learner, or portfolio claim.
 
-The objective-matched count-blind null uses the same prior and physical-time
-AUC objective but cannot read realized `N,E`; it therefore selects `S` with
-value `1`. The secondary `SG-RATE` diagnostic is explicitly `argmax(h_S,h_L)`
-with the same precommitted `S` tie-break. It does not enter the primary pass or
-the reported `Delta_AUC`.
+The exact family has anonymous cells `c1,c2`, each with weight `1`; raw periods
+`s,long_a,long_b` quotient to `S,L,L`; durations are `d_S=1,d_L=2`; the
+physical horizon is three. `long_a` and `long_b` have byte-identical execution
+laws. The persistent latent regime has prior `1/2` and hazards `9/10` when
+period and regime align and `1/10` otherwise. The pre-outcome prefix is
+`(c1,S),(c2,S),(c1,L),(c2,L)` and trial 5 chooses at `c1`.
 
-All count, likelihood, posterior, hazard, score, probability, expectation, and
-margin calculations use `fractions.Fraction`; no floating approximation enters
-the result.
-
-## Complete 16-history output
-
-`E` and `N` use order `(S,c1),(S,c2),(L,c1),(L,c2)`. `J5` is the selected
-fifth-trial expected physical-time AUC.
-
-|bits|E|N|rho|hS|hL|U_S|U_L|CB|SG|action|J5|
-|---|---|---|---|---|---|---|---|---|---|---|---|
-|0000|(1, 1, 1, 1)|(0, 0, 0, 0)|1/2|1/2|1/2|1|1/2|S|S|S|1|
-|0001|(1, 1, 1, 1)|(0, 0, 0, 1)|1/82|9/82|73/82|9/41|73/82|S|L|L|73/82|
-|0010|(1, 1, 1, 1)|(0, 0, 1, 0)|1/82|9/82|73/82|9/41|73/82|S|L|L|73/82|
-|0011|(1, 1, 1, 1)|(0, 0, 1, 1)|1/6562|657/6562|5905/6562|657/3281|5905/6562|S|L|L|5905/6562|
-|0100|(1, 1, 1, 1)|(0, 1, 0, 0)|81/82|73/82|9/82|73/41|9/82|S|S|S|73/41|
-|0101|(1, 1, 1, 1)|(0, 1, 0, 1)|1/2|1/2|1/2|1|1/2|S|S|S|1|
-|0110|(1, 1, 1, 1)|(0, 1, 1, 0)|1/2|1/2|1/2|1|1/2|S|S|S|1|
-|0111|(1, 1, 1, 1)|(0, 1, 1, 1)|1/82|9/82|73/82|9/41|73/82|S|L|L|73/82|
-|1000|(1, 1, 1, 1)|(1, 0, 0, 0)|81/82|73/82|9/82|73/41|9/82|S|S|S|73/41|
-|1001|(1, 1, 1, 1)|(1, 0, 0, 1)|1/2|1/2|1/2|1|1/2|S|S|S|1|
-|1010|(1, 1, 1, 1)|(1, 0, 1, 0)|1/2|1/2|1/2|1|1/2|S|S|S|1|
-|1011|(1, 1, 1, 1)|(1, 0, 1, 1)|1/82|9/82|73/82|9/41|73/82|S|L|L|73/82|
-|1100|(1, 1, 1, 1)|(1, 1, 0, 0)|6561/6562|5905/6562|657/6562|5905/3281|657/6562|S|S|S|5905/3281|
-|1101|(1, 1, 1, 1)|(1, 1, 0, 1)|81/82|73/82|9/82|73/41|9/82|S|S|S|73/41|
-|1110|(1, 1, 1, 1)|(1, 1, 1, 0)|81/82|73/82|9/82|73/41|9/82|S|S|S|73/41|
-|1111|(1, 1, 1, 1)|(1, 1, 1, 1)|1/2|1/2|1/2|1|1/2|S|S|S|1|
-
-Exact aggregate result:
+For the completed version-closed ledgers,
 
 ```text
-terminal=PASS_NARROW_COUNT_STATE_RELEVANCE
-E[J_AUC^UCOPE]=26571/20000
-E[J_AUC^CB-AUC]=1
-Delta_AUC=6571/20000
-H_S action=S, rho=6561/6562, margin=11153/6562
-H_L action=L, rho=1/6562, margin=4591/6562
-homogeneous-hazard count effect=0
-independent-redraw count effect=0
+rho = L_THETA_S / (L_THETA_S + L_THETA_L)
+h_S = 1/10 + (4/5)rho
+h_L = 9/10 - (4/5)rho
+UCOPE(S) = 2h_S
+UCOPE(L) = h_L
 ```
+
+The primary count-blind comparator is objective-matched `CB-AUC`, with scores
+`S=1,L=1/2` and canonical `S`-before-`L` ties. `SG-RATE` is emitted only as a
+secondary diagnostic and uses the same frozen count-blind scores
+`S=1,L=1/2`; it selects `S` for HS, HL and every row in all three modes. Every
+acceptance value is represented with `fractions.Fraction` and serialized as a
+canonical rational string; float and epsilon admission are rejected.
+
+## Enumeration and invariant surface
+
+The pure enumerator makes exactly three `enumerate_histories` calls over the
+canonical 16 lexicographic histories: primary persistent hazards, homogeneous
+`1/2` hazards, and an independently redrawn trial-5 regime. The same 16
+histories are reused in each mode: 48 serialized rows and exactly 96
+regime-conditioned rational cells. Alias, identity, state, tape and censor
+checks operate only on retained rows or structural projections and never add a
+fourth enumeration.
+The primary rows include all 32 regime-joint weights, pooled `N/E`, posterior,
+hazards, UCOPE/CB-AUC/SG-RATE scores and actions, margins, and conditional AUC
+under both regimes. Independent-redraw prefix history weights remain the
+primary persistent mixture, while each row's two trial-5 regime cells are both
+exactly half that history weight. They therefore represent a fresh independent
+`1/2` current-regime prior rather than the prefix's persistent-regime joint.
+
+The frozen exact aggregate identities checked by source and focused evidence
+are:
+
+```text
+E[J_AUC^UCOPE] = 26571/20000
+E[J_AUC^CB-AUC] = 1
+Delta_AUC = 6571/20000
+terminal coverage UCOPE = 1097/1250
+terminal coverage always-S = 1/2
+terminal coverage gain = 236/625
+HS=(1,1,0,0): action S, margin 11153/6562
+HL=(0,0,1,1): action L, margin 4591/6562
+```
+
+The negative-boundary projection retains every homogeneous and independent-
+redraw row and requires exact zero AUC difference. Additional pure invariants
+cover alias split/merge, administrative-limit-1 censoring, pre-outcome
+exposure, fixed tape, matched non-count state, identity permutations,
+version-mixing rejection, comparator identity, absence of reward/retirement/
+online update/post-outcome filtering, canonical history order, and exact
+resource counts. The result retains byte-identical HS/HL non-count-state
+witnesses covering opportunity, uncovered set, horizon, Q, costs, censor law,
+E, action sequence, executor/partner generations and empty non-count
+recurrent/policy state. It also retains the identity-free canonical projection
+and the exact zero-activity/forbidden-field witness. Identity labels never
+enter a score or key.
+
+## Branch and artifact lifecycle
+
+`build_a1_manifest` emits one total source-revision/run-bound manifest.
+`run_a1_probe` applies the fixed precedence:
+
+1. `A1_INVALID_MANIFEST`;
+2. `A1_INVALID_ENUMERATION`;
+3. `A1_SCIENTIFIC_STOP` with the lowest applicable `S01`-`S12` identifier;
+4. `A1_COUNT_STATE_DECISION_RELEVANCE_SUPPORTED`.
+
+Structural/literal/derived-table failures are retained as self-consistent
+`enumeration_errors` and select `A1_INVALID_ENUMERATION`. A complete retained
+predicate witness whose correctly derived S predicate is false instead selects
+`A1_SCIENTIFIC_STOP`, records the full ordered stop list and uses its lowest
+identifier. The payload-only validator independently derives both diagnostics
+and rejects any branch, list or first-failure mismatch without rerunning the
+enumerator.
+
+The CLI writes every manifest or artifact once through a same-directory atomic
+replacement and refuses an existing destination. `exercise` accepts only
+`technical_only=true`, emits no rows or boundary evidence, sets `branch=null`,
+and cannot admit a scientific terminal. `registered-probe` rejects a
+technical-only manifest. After a branch exists, the validator inspects only
+the retained payload against frozen literal tables and branch precedence. It
+does not call `run_a1_probe`, `_build_a1_evidence`, or `enumerate_histories`, so
+validation cannot become a second probe. It rejects drift, floats, incomplete
+activity counters, nonzero runtime activity, or missing/tampered witnesses.
+
+Before a registered claim, the CLI verifies that all four claim-bearing source
+paths are tracked and byte-clean relative to the declared HEAD. It then
+atomically creates `registered_claim.json` in the run root, binding assignment,
+candidate, run ID and source revision before enumeration. The only result name
+is `raw_result.json`; an existing claim or result fails closed, and the CLI has
+no alternate output option. After the claim exists, any failure is terminal and
+cannot be recovered by another output path or second invocation.
+
+The registered artifact has zero environment transitions, policy, learner,
+trainer, optimizer and evaluation calls, stochastic draws, seeds, gradients,
+retirement actions, and task-return observations. The runner neither retries
+nor provides a rescue or alternate family.
 
 ## Traceability
 
-| claim_id | frozen_assertion_path_and_section | code_path::symbol | observable_invariant | focused_test::test_name | alternate_explanation_excluded |
-|---|---|---|---|---|---|
-| UCOPE_D1_QUOTIENT | this file §Frozen contract | `experiments/candidates/ucope/exact_enumerator.py::validate_family` | Exact family/version, equal cells, `{s}->S`, `{ell,ell_prime}->L`, alias-law equality, structural Qstr, durations and pre-outcome tape | `tests/experiments/candidates/ucope/test_exact_enumerator.py::test_effective_period_alias_split_and_merge_are_execution_equivalent`; `::test_family_contract_failures_stop_before_enumeration` | Nominal aliases, partner labels, malformed support, and post-outcome schedule choice cannot manufacture a count effect. |
-| UCOPE_D1_LEDGER | this file §Frozen contract | `experiments/candidates/ucope/exact_enumerator.py::update_ledger` | Immutable version-keyed `N/E`; censoring makes no observation rather than a miss | `::test_censoring_is_unknown_and_ledgers_are_immutable_and_version_closed` | Censor-as-failure, stale version, and shared mutable state are rejected. |
-| UCOPE_D1_EXACT_ENUMERATION | this file §Complete 16-history output | `experiments/candidates/ucope/exact_enumerator.py::enumerate_histories`; `::_evaluate_history` | All 16 histories have exact posterior, hazards, UCOPE, CB-AUC, SG-RATE, action, probability and fifth-trial AUC | `::test_all_histories_are_exact_complete_and_canonical_output_is_byte_stable` | Sampling noise, float rounding, history omission, or output-order effects cannot explain the result. |
-| UCOPE_D1_MATCHED_SEPARATION | this file §Exact aggregate result | `experiments/candidates/ucope/exact_enumerator.py::run_registered_audit` | `H_S` selects S and `H_L` selects L with the registered exact margins while CB-AUC selects S in both | `::test_matched_histories_have_exact_posterior_hazards_actions_and_margins` | The separation is not a non-count-state or objective mismatch. |
-| UCOPE_D1_BOUNDARIES | this file §Exact aggregate result | `experiments/candidates/ucope/exact_enumerator.py::run_registered_audit` | Homogeneous hazards and an independent pre-trial-five redraw both make realized counts redundant with exact zero increment | `::test_homogeneous_and_independent_redraw_boundaries_are_exact_zero_effect` | A generic preference for S, raw duration, or count bookkeeping alone is not reported as identification. |
-| UCOPE_D1_INVARIANTS | this file §Exact aggregate result | `experiments/candidates/ucope/exact_enumerator.py::run_registered_audit` | Alias split/merge, pre-outcome tape, state-clone order, recurrence/version closure, censoring and partner-label permutation all hold | `::test_pre_outcome_tape_state_clone_and_partner_labels_cannot_change_result`; `::test_registered_audit_passes_exact_narrow_count_state_contract` | Identity, enumeration order, mutation, recurrence drift, and alias representation cannot drive the result. |
+| Claim ID | Code path and symbol | Observable invariant | Focused evidence | Alternate explanation excluded |
+|---|---|---|---|---|
+| `UCOPE_A1_MANIFEST` | `experiments/candidates/ucope/exact_enumerator.py::build_a1_manifest`; `::validate_a1_manifest` | Total exact literals, frozen source/run identity, full-mode caps, no float/epsilon | `test_a1_manifest_is_total_exact_and_rejects_float_or_literal_drift` | Configuration drift or an unfrozen source revision cannot be interpreted as A1. |
+| `UCOPE_A1_ENUMERATION` | `::enumerate_histories`; `::_build_a1_evidence`; `::_mode_payload` | Exactly three calls produce canonical 16 primary rows, 32 joint weights, 16 rows per negative boundary, 48 rows/96 regime cells, exact AUC and coverage aggregates | `test_a1_primary_table_has_all_exact_joint_weights_and_named_aggregates`; `test_a1_validator_rejects_history_missing_duplicate_and_order_drift`; `test_a1_registered_cli_enumerates_exactly_three_modes_and_validator_never_reruns` | Sampling, omitted histories, duplicate histories, extra invariant enumerations, redraw of the primary regime, or approximate arithmetic cannot produce the table. |
+| `UCOPE_A1_LEDGER` | `::update_ledger`; `::posterior` | Pre-outcome at-risk `E`, uncensored first-hit `N`, immutable family/executor generation | `test_censoring_is_unknown_and_ledgers_are_immutable_and_version_closed`; `test_a1_validator_rejects_frozen_semantic_corruptions` | Censor-as-failure, outcome-derived exposure, or version pooling cannot drive the switch. |
+| `UCOPE_A1_COMPARATORS` | `::_evaluate_history`; `::_a1_row_payload` | `CB-AUC` is primary; secondary `SG-RATE` has frozen count-blind `S=1,L=1/2` and selects S in every mode | `test_matched_histories_have_exact_posterior_hazards_actions_and_margins`; `test_a1_primary_table_has_all_exact_joint_weights_and_named_aggregates`; `test_a1_boundaries_alias_identity_tape_state_and_censor_are_explicit` | A posterior-dependent SG comparator cannot be mistaken for the frozen secondary null. |
+| `UCOPE_A1_BOUNDARIES` | `::_build_a1_evidence`; `::_alias_projection_witness`; `::_identity_projection_witness`; `::_matched_noncount_state_witness`; `::_stop_failures` | Homogeneous/redraw exact zero effect; structural alias proof; byte-identical matched state and identity-free projections; censor/tape/version witnesses | `test_a1_boundaries_alias_identity_tape_state_and_censor_are_explicit`; `test_a1_matched_state_identity_and_forbidden_dependency_witnesses_are_tamper_evident` | Alias representation, label leakage, unmatched non-count state, filtering, or lifecycle bookkeeping cannot manufacture the result. |
+| `UCOPE_A1_BRANCH` | `::select_a1_branch`; `::_assemble_a1_result`; `::validate_a1_artifact` | Manifest before structural enumeration diagnostics before correctly derived lowest `S01-S12` before support; technical-only has no terminal | `test_a1_branch_precedence_and_lowest_scientific_failure_are_frozen`; `test_a1_invalid_and_scientific_stop_artifacts_are_self_consistent_and_cli_writable`; `test_a1_technical_only_exercise_never_materializes_or_admits_a_branch` | Structural invalidity cannot masquerade as scientific stop, and a valid unfavorable predicate cannot be rejected merely for being false. |
+| `UCOPE_A1_ZERO_ACTIVITY` | `::zero_activity`; `::_validate_activity` | All eleven prohibited runtime/activity counters exist and equal zero | `test_a1_zero_activity_is_total_and_nonzero_activity_fails_closed` | Environment, policy, optimization, evaluation, stochastic, retirement, or task-return evidence cannot enter A1. |
+| `UCOPE_A1_ONE_SHOT` | `scripts/run_ucope_a1_count_state_exact_enumeration.py::_require_clean_claim_sources`; `::_claim_registered_run`; `::_registered_probe_command` | Four tracked clean source paths; source-bound claim before enumeration; only `raw_result.json`; second claim and alternate output rejected | `test_a1_registered_preflight_and_claim_fail_closed_before_enumeration`; `test_a1_invalid_and_scientific_stop_artifacts_are_self_consistent_and_cli_writable` | Dirty/untracked source, output-path substitution and post-claim retry cannot create another result. |
 
-## Bounded execution
+## Direct consumer compatibility
 
-The run enumerates sixteen exact histories and performs no environment step,
-training update, task-return rollout, parameter tuning, or rescue experiment.
+`tests/experiments/candidates/ucope/test_acquisition_park_certificate.py`
+continues to consume `build_family`, `enumerate_histories`,
+`run_registered_audit`, the existing dataclasses, and `Terminal.PASS`. The
+legacy `ell`/`ell_prime` nominal accessors map read-only to the frozen
+`long_a`/`long_b` aliases, so the accepted acquisition-park certificate retains
+its exact family constants and historical values. This compatibility surface
+does not turn that earlier certificate into the new A1 registered probe.
 
-```powershell
-& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' -c "from experiments.candidates.ucope.exact_enumerator import run_registered_audit as run; r=run(); print('terminal='+r.terminal.value); print('rows='+str(len(r.rows))); print('expected_ucope_auc='+str(r.expected_ucope_auc)); print('expected_cb_auc='+str(r.expected_cb_auc)); print('delta_auc='+str(r.delta_auc)); print('all_invariants='+str(all(v for _,v in r.invariants)))"
-```
+## Public source locators
 
-```text
-terminal=PASS_NARROW_COUNT_STATE_RELEVANCE
-rows=16
-expected_ucope_auc=26571/20000
-expected_cb_auc=1
-delta_auc=6571/20000
-all_invariants=True
-```
+- `experiments/candidates/ucope/exact_enumerator.py`
+- `scripts/run_ucope_a1_count_state_exact_enumeration.py`
+- `tests/experiments/candidates/ucope/test_exact_enumerator.py`
+- `docs/research/candidates/ucope/CODE_SCIENCE_INDEX.md`
 
-Fresh focused validation:
-
-```text
-12 passed in 0.14s
-```
-
-The complete row-level canonical output was also emitted by
-`run_registered_audit().to_bytes()`; the table above records every row and
-field needed to reproduce it. The accepted revision is the exact commit
-containing this index, source, and mirrored test.
+The public result locator and accepted source/result commits are intentionally
+absent until CPM performs and accepts the single registered probe.
