@@ -113,6 +113,26 @@ class ExperimentOperatorReceiptTests(unittest.TestCase):
             self.assertIn("terminal=COMPLETE", checked.stdout)
             self.assertEqual(list(root.glob(f".{receipt_path.name}.*.tmp")), [])
 
+    def test_uppercase_exit_code_input_normalizes_to_lowercase_receipt(self) -> None:
+        with temporary_directory() as temporary:
+            root = Path(temporary)
+            record = complete_record()
+            record["exit_codes"] = {"TRAIN": 0, "EVALUATE": 0, "ANALYZE": 0}
+            record_path = root / "record.json"
+            receipt_path = root / "receipt.json"
+            self.write_json(record_path, record)
+
+            written = self.run_helper(
+                "write", "--record", str(record_path), "--receipt", str(receipt_path)
+            )
+            self.assertEqual(written.returncode, 0, written.stderr)
+            payload = json.loads(receipt_path.read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["exit_codes"], {"train": 0, "evaluate": 0, "analyze": 0}
+            )
+            checked = self.run_helper("check", "--receipt", str(receipt_path))
+            self.assertEqual(checked.returncode, 0, checked.stderr)
+
     def test_error_with_zero_exits_and_missing_artifact_direct_error(self) -> None:
         with temporary_directory() as temporary:
             root = Path(temporary)
@@ -192,6 +212,23 @@ class ExperimentOperatorReceiptTests(unittest.TestCase):
         later_phase_after_evaluate["phase"] = "EVALUATE"
         later_phase_after_evaluate["exit_codes"] = {"train": 0, "evaluate": 0, "analyze": 0}
         invalid_records.append(later_phase_after_evaluate)
+
+        mixed_case_keys = complete_record()
+        mixed_case_keys["exit_codes"] = {"TRAIN": 0, "evaluate": 0, "analyze": 0}
+        invalid_records.append(mixed_case_keys)
+
+        missing_exit_code_key = complete_record()
+        missing_exit_code_key["exit_codes"] = {"train": 0, "evaluate": 0}
+        invalid_records.append(missing_exit_code_key)
+
+        extra_exit_code_key = complete_record()
+        extra_exit_code_key["exit_codes"] = {
+            "train": 0,
+            "evaluate": 0,
+            "analyze": 0,
+            "EXTRA": 0,
+        }
+        invalid_records.append(extra_exit_code_key)
 
         whitespace_run = complete_record()
         whitespace_run["run"] = "   "

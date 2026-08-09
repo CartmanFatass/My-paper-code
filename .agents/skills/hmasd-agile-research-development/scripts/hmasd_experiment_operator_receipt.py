@@ -27,6 +27,7 @@ OUTPUT_KEYS = INPUT_KEYS + ("terminal",)
 EXECUTION_MODES = {"fresh", "retry", "resume", "restart"}
 PHASES = ("NONE", "TRAIN", "EVALUATE", "ANALYZE")
 EXIT_KEYS = ("train", "evaluate", "analyze")
+UPPER_EXIT_KEYS = tuple(key.upper() for key in EXIT_KEYS)
 SOURCE_COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
 
 
@@ -54,13 +55,22 @@ def _require_exact_keys(value: dict[str, Any], expected: tuple[str, ...]) -> Non
         raise ReceiptError("exact keys required (" + "; ".join(details) + ")")
 
 
-def _validate_exit_codes(value: Any) -> dict[str, int | None]:
+def _validate_exit_codes(
+    value: Any, *, allow_uppercase: bool = True
+) -> dict[str, int | None]:
     if not isinstance(value, dict):
         raise ReceiptError("exit_codes must be an object")
-    _require_exact_keys(value, EXIT_KEYS)
+    if set(value) == set(EXIT_KEYS):
+        input_keys = EXIT_KEYS
+    elif allow_uppercase and set(value) == set(UPPER_EXIT_KEYS):
+        input_keys = UPPER_EXIT_KEYS
+    else:
+        _require_exact_keys(value, EXIT_KEYS)
+        input_keys = EXIT_KEYS
+
     normalized: dict[str, int | None] = {}
-    for key in EXIT_KEYS:
-        code = value[key]
+    for key, input_key in zip(EXIT_KEYS, input_keys):
+        code = value[input_key]
         if code is not None and (isinstance(code, bool) or not isinstance(code, int)):
             raise ReceiptError(f"exit_codes.{key} must be an integer or null")
         normalized[key] = code
@@ -100,7 +110,9 @@ def _validate_record(value: Any, *, receipt: bool) -> tuple[dict[str, Any], str]
     phase = value["phase"]
     if phase not in PHASES:
         raise ReceiptError("phase must be NONE, TRAIN, EVALUATE, or ANALYZE")
-    exit_codes = _validate_exit_codes(value["exit_codes"])
+    exit_codes = _validate_exit_codes(
+        value["exit_codes"], allow_uppercase=not receipt
+    )
 
     artifacts = value["artifacts"]
     if not isinstance(artifacts, (list, dict)):
@@ -139,6 +151,7 @@ def _validate_record(value: Any, *, receipt: bool) -> tuple[dict[str, Any], str]
     if receipt and value["terminal"] != terminal:
         raise ReceiptError("terminal does not match the derived terminal")
     normalized = {key: value[key] for key in INPUT_KEYS}
+    normalized["exit_codes"] = exit_codes
     if receipt:
         normalized["terminal"] = value["terminal"]
     return normalized, terminal

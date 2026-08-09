@@ -121,11 +121,18 @@ derived terminal; it is file-backed and assignment-named.
 The local input keys and output receipt keys are exact. The local input is
 `run`, `source_commit`, `execution_mode`, `phase`, `exit_codes`, `artifacts`,
 `last_progress`, `process_live`, and `direct_error`; the output adds only
-`terminal`. `phase` is the last attempted/reached phase (`NONE|TRAIN|EVALUATE|ANALYZE`),
-never a terminal status. The helper derives `terminal` as `COMPLETE` or `ERROR`
-and rejects missing/extra keys (including legacy `error`), slash-combined
-phases, live processes, incomplete or nonzero exits without a direct error,
-and mismatched checked terminals. It writes UTF-8 without a BOM by an atomic
+`terminal`. `phase` is the last attempted/reached phase and an uppercase enum
+(`NONE|TRAIN|EVALUATE|ANALYZE`), never a terminal status. At the operator-local input boundary, `exit_codes`
+may use either the exact complete lowercase key set
+(`train|evaluate|analyze`) or the exact complete uppercase phase-label key set
+(`TRAIN|EVALUATE|ANALYZE`); missing, extra, and mixed-case key sets are
+rejected. The Skill-owned helper performs deterministic normalization of
+uppercase input to lowercase keys, and the file-backed receipt is always
+canonical lowercase for consumers. The Role owns this semantic envelope; the
+Skill script owns this normalization. The helper derives `terminal` as
+`COMPLETE` or `ERROR` and rejects missing/extra keys (including legacy `error`),
+slash-combined phases, live processes, incomplete or nonzero exits without a
+direct error, and mismatched checked terminals. It writes UTF-8 without a BOM by an atomic
 same-directory replace only after validation; the receipt parent must already
 exist. The operator invokes `write` once after the ordered sequence or direct
 error and uses the derived terminal in its single conclusion-first native

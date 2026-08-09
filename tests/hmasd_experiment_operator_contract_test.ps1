@@ -105,6 +105,16 @@ foreach ($required in @(
     if (-not $roleNormalized.Contains($required)) { throw "Operator role missing: $required" }
 }
 foreach ($required in @(
+    'uppercase enum',
+    'operator-local input boundary',
+    'exact complete lowercase key set',
+    'exact complete uppercase phase-label key set',
+    'missing, extra, and mixed-case key sets are rejected',
+    'deterministic normalization of uppercase input to lowercase keys',
+    'file-backed receipt is always canonical lowercase')) {
+    if (-not $roleNormalized.Contains($required)) { throw "Operator receipt casing rule missing: $required" }
+}
+foreach ($required in @(
     'Experiment Operator''s assignment-named terminal receipt',
     'hmasd_experiment_operator_receipt.py',
     'derives the terminal field',
