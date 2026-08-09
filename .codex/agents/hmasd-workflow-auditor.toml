@@ -3,7 +3,7 @@ description = "Read-only Luna-high auditor for bounded workflow impact mapping o
 model = "gpt-5.6-luna"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
-approval_policy = "on-request"
+approval_policy = "never"
 nickname_candidates = ["Workflow Auditor", "Control Plane Auditor", "Workflow Verifier"]
 
 developer_instructions = """

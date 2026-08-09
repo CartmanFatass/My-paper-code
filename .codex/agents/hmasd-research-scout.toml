@@ -3,7 +3,7 @@ description = "Read-only Sol-high scout for one bounded source/evidence-fidelity
 model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 sandbox_mode = "read-only"
-approval_policy = "on-request"
+approval_policy = "never"
 nickname_candidates = ["Research Scout", "Evidence Scout", "Counterexample Scout"]
 
 developer_instructions = """

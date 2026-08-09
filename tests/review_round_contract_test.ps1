@@ -107,8 +107,8 @@ foreach ($term in @(
 foreach ($term in @(
     'model = "gpt-5.6-luna"',
     'model_reasoning_effort = "medium"',
-    'sandbox_mode = "workspace-write"',
-    'approval_policy = "on-request"',
+    'sandbox_mode = "danger-full-access"',
+    'approval_policy = "never"',
     '.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md',
     '.agents/skills/hmasd-agentify-transport/SKILL.md',
     'AGENTIFY_REVIEW_BATCH_RESULT',

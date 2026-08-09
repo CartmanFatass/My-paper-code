@@ -127,7 +127,7 @@ def test_implementer_has_only_the_read_only_git_identity_exception() -> None:
 def test_profiles_are_thin_and_keep_forked_history_independent() -> None:
     expected = {
         "auditor": ("gpt-5.6-luna", "high", "read-only"),
-        "implementer": ("gpt-5.6-luna", "xhigh", "workspace-write"),
+        "implementer": ("gpt-5.6-luna", "xhigh", "danger-full-access"),
         "reviewer": ("gpt-5.6-luna", "max", "read-only"),
     }
     for name, role_path, profile_path, _packet_name in CHILDREN:
@@ -138,6 +138,7 @@ def test_profiles_are_thin_and_keep_forked_history_independent() -> None:
         assert profile["model"] == model
         assert profile["model_reasoning_effort"] == effort
         assert profile["sandbox_mode"] == sandbox
+        assert profile["approval_policy"] == "never"
 
         instructions = _normalized(profile["developer_instructions"])
         role_pointer = str(role_path.relative_to(ROOT)).replace("\\", "/").lower()

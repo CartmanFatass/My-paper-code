@@ -3,7 +3,7 @@ description = "Read-only HMASD code scout for bounded interface mapping and safe
 model = "gpt-5.6-luna"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
-approval_policy = "on-request"
+approval_policy = "never"
 nickname_candidates = ["HMASD Scout", "Interface Scout", "Dependency Scout"]
 
 developer_instructions = """

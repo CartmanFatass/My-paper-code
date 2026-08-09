@@ -30,7 +30,7 @@ foreach ($required in @(
     'name = "hmasd-experiment-operator"',
     'model = "gpt-5.6-luna"',
     'model_reasoning_effort = "low"',
-    'sandbox_mode = "workspace-write"',
+    'sandbox_mode = "danger-full-access"',
     'approval_policy = "never"',
     '.agents/roles/EXPERIMENT_OPERATOR.md',
     'natural-language brief',
@@ -115,13 +115,12 @@ foreach ($required in @(
     if (-not $roleNormalized.Contains($required)) { throw "Operator receipt casing rule missing: $required" }
 }
 foreach ($required in @(
-    'Experiment Operator''s assignment-named terminal receipt',
+    '.agents/roles/EXPERIMENT_OPERATOR.md',
     'hmasd_experiment_operator_receipt.py',
-    'derives the terminal field',
-    'validates the exact mechanical keys',
-    'single atomic write/check',
-    'operational `ERROR`',
-    'no runtime rerun authority')) {
+    'train -> evaluate -> analyze',
+    'terminal receipt',
+    'does not reproduce those lanes',
+    'sole technical/mechanical acceptance owner')) {
     if (-not $skillNormalized.Contains($required)) { throw "Agile Skill receipt pointer missing: $required" }
 }
 if ($profile.Contains('active Workflow Design Manager') -or $role.Contains('parent=workflow_design_manager')) {
@@ -138,7 +137,8 @@ foreach ($required in @(
     'CPM checks the active grant and remaining balance before dispatch',
     'neither CPM nor the child asks for per-run authorization',
     'reads only its terminal receipt/result',
-    'Operator exclusively executes `train -> evaluate -> analyze`')) {
+    'CPM supplies the complete assignment and grant binding',
+    '.agents/roles/EXPERIMENT_OPERATOR.md` owns `train -> evaluate -> analyze`')) {
     if (-not $managerNormalized.Contains($required)) { throw "CPM experiment delegation contract missing: $required" }
 }
 foreach ($required in @(

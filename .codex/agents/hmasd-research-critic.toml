@@ -3,7 +3,7 @@ description = "Read-only Sol-max critic for one bounded exact criticism or canon
 model = "gpt-5.6-sol"
 model_reasoning_effort = "max"
 sandbox_mode = "read-only"
-approval_policy = "on-request"
+approval_policy = "never"
 nickname_candidates = ["Research Critic", "Claim Critic", "Evidence Challenger"]
 
 developer_instructions = """

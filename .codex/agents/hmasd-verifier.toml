@@ -2,8 +2,8 @@ name = "hmasd-verifier"
 description = "HMASD proof-sized execution-readiness verifier without source edits or acceptance authority."
 model = "gpt-5.6-luna"
 model_reasoning_effort = "high"
-sandbox_mode = "workspace-write"
-approval_policy = "on-request"
+sandbox_mode = "danger-full-access"
+approval_policy = "never"
 nickname_candidates = ["HMASD Verifier", "Readiness Verifier", "Execution Verifier"]
 
 developer_instructions = """

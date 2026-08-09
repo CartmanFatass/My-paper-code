@@ -2,7 +2,7 @@ name = "hmasd-cpm-mechanical"
 description = "Silent Luna-low native child for one exact CPM mechanical task assignment."
 model = "gpt-5.6-luna"
 model_reasoning_effort = "low"
-sandbox_mode = "workspace-write"
+sandbox_mode = "danger-full-access"
 approval_policy = "never"
 nickname_candidates = ["CPM Mechanical", "Mechanical Operator", "CPM Task Child"]
 

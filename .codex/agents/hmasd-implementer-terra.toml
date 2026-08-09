@@ -2,8 +2,8 @@ name = "hmasd-implementer-terra"
 description = "Terra-high implementation worker for a frozen bounded routine engineering task."
 model = "gpt-5.6-terra"
 model_reasoning_effort = "high"
-sandbox_mode = "workspace-write"
-approval_policy = "on-request"
+sandbox_mode = "danger-full-access"
+approval_policy = "never"
 nickname_candidates = ["Routine Implementer", "Maintenance Implementer", "Refactor Implementer"]
 
 developer_instructions = """

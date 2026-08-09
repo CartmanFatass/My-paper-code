@@ -23,7 +23,7 @@ $normalizedCollaborationSkill = ($collaborationSkill -replace '\s+', ' ').ToLowe
 
 $profiles = @(
     @('.agents/roles/WORKFLOW_AUDITOR.md', '.codex/agents/hmasd-workflow-auditor.toml', 'hmasd-workflow-auditor', '[agents."HMASDWorkflowAuditor"]', 'gpt-5.6-luna', 'high', 'read-only', 'WORKFLOW_IMPACT_PACKET'),
-    @('.agents/roles/WORKFLOW_IMPLEMENTER.md', '.codex/agents/hmasd-workflow-implementer.toml', 'hmasd-workflow-implementer', '[agents."HMASDWorkflowImplementer"]', 'gpt-5.6-luna', 'xhigh', 'workspace-write', 'WORKFLOW_CHANGE_PACKET'),
+    @('.agents/roles/WORKFLOW_IMPLEMENTER.md', '.codex/agents/hmasd-workflow-implementer.toml', 'hmasd-workflow-implementer', '[agents."HMASDWorkflowImplementer"]', 'gpt-5.6-luna', 'xhigh', 'danger-full-access', 'WORKFLOW_CHANGE_PACKET'),
     @('.agents/roles/WORKFLOW_REVIEWER.md', '.codex/agents/hmasd-workflow-reviewer.toml', 'hmasd-workflow-reviewer', '[agents."HMASDWorkflowReviewer"]', 'gpt-5.6-luna', 'max', 'read-only', 'WORKFLOW_REVIEW_PACKET'))
 
 foreach ($entry in $profiles) {
@@ -31,7 +31,7 @@ foreach ($entry in $profiles) {
     $profile = Read-RepoFile $entry[1]
     foreach ($required in @(
         "name = `"$($entry[2])`"", "model = `"$($entry[4])`"",
-        "model_reasoning_effort = `"$($entry[5])`"", "sandbox_mode = `"$($entry[6])`"",
+        "model_reasoning_effort = `"$($entry[5])`"", "sandbox_mode = `"$($entry[6])`"", 'approval_policy = "never"',
         $entry[0])) {
         if (-not $profile.Contains($required)) { throw "$($entry[2]) profile missing: $required" }
     }

@@ -53,6 +53,8 @@ def test_verifier_registration_and_model_routing() -> None:
     assert profile_path == VERIFIER_PROFILE
     assert profile["model"] == "gpt-5.6-luna"
     assert profile["model_reasoning_effort"] == "high"
+    assert profile["sandbox_mode"] == "danger-full-access"
+    assert profile["approval_policy"] == "never"
     instructions = profile.get("developer_instructions", "")
     assert ".agents/roles/VERIFIER.md" in instructions
 
@@ -78,6 +80,8 @@ def test_cpm_mechanical_registration_and_model_routing() -> None:
     assert profile_path == MECHANICAL_PROFILE
     assert profile["model"] == "gpt-5.6-luna"
     assert profile["model_reasoning_effort"] == "low"
+    assert profile["sandbox_mode"] == "danger-full-access"
+    assert profile["approval_policy"] == "never"
     instructions = profile.get("developer_instructions", "")
     assert "CPM_MECHANICAL_TASK_ASSIGNMENT" in instructions
     assert "fork_turns=none" in instructions
@@ -147,6 +151,8 @@ def test_implementer_registration_and_model_routing() -> None:
         assert profile_path == expected_path
         assert profile["model"] == expected_model
         assert profile["model_reasoning_effort"] == expected_effort
+        assert profile["sandbox_mode"] == "danger-full-access"
+        assert profile["approval_policy"] == "never"
         instructions = profile.get("developer_instructions", "")
         assert ".agents/roles/IMPLEMENTER.md" in instructions
         assert "exact assignment" in instructions

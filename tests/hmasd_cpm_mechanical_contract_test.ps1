@@ -15,6 +15,7 @@ foreach ($path in @($profilePath, $rolePath, $skillPath, $scriptPath)) {
 $profile = Get-Content -Raw -LiteralPath $profilePath
 $role = Get-Content -Raw -LiteralPath $rolePath
 $skill = Get-Content -Raw -LiteralPath $skillPath
+$skillNormalized = $skill -replace '\s+', ' '
 $script = Get-Content -Raw -LiteralPath $scriptPath
 
 foreach ($path in @($profilePath, $rolePath, $scriptPath)) {
@@ -33,7 +34,7 @@ foreach ($required in @(
     'name = "hmasd-cpm-mechanical"',
     'model = "gpt-5.6-luna"',
     'model_reasoning_effort = "low"',
-    'sandbox_mode = "workspace-write"',
+    'sandbox_mode = "danger-full-access"',
     '.agents/roles/CPM_MECHANICAL_OPERATOR.md',
     'CPM_MECHANICAL_TASK_ASSIGNMENT',
     'CPM_MECHANICAL_TASK_RESULT',
@@ -70,9 +71,11 @@ if ($profile.Contains('hmasd_cpm_mechanical.py run --spec') -or $profile.Contain
     throw 'CPM mechanical profile must remain thin; dispatcher procedure belongs to the role/Skill'
 }
 foreach ($required in @(
-    'native child. CPM writes one ordered batch file containing exactly',
-    'registered `hmasd-cpm-mechanical` child')) {
-    if (-not $skill.Contains($required)) { throw "Agile Skill context boundary missing: $required" }
+    'For deterministic inspection, result extraction, handoff preparation or ticket preparation',
+    'CPM may trigger `hmasd-cpm-mechanical`',
+    '.agents/roles/CPM_MECHANICAL_OPERATOR.md',
+    'mechanical result fields and bounded observation recovery')) {
+    if (-not $skillNormalized.Contains($required)) { throw "Agile Skill context boundary missing: $required" }
 }
 foreach ($required in @(
     'SCHEMA_VERSION = 1',
