@@ -52,3 +52,23 @@ shared-representation attribution. Comparator-arm damage cannot satisfy the
 absolute-`CORRECT` guard. No result licenses C, a rescue, a second B6 run,
 promotion, retirement, a valve, reward shaping, an auxiliary loss, or
 cross-direction generalization.
+
+## Technically accepted full result
+
+The exact source package was frozen at `2400f122ad09d70799d67962370e1380ab628dda` and the single full run is
+`eociv_b6_actor_anchored_critic_clip_root_cross_2400f122_r1`. A fresh operator attempt failed before project import and consumed
+zero scientific activity; the same source/run/root then completed under the
+standard `restart` receipt with the failure preserved in execution history.
+
+The frozen branch is **`UNIDENTIFIED`**. Every intervention-fidelity predicate
+passed, but `stable_semantic_improvement=false` and `root_dominance=false`;
+`exact_coverage_modulation=true` prevents either optimizer-only or public-root
+dominance attribution. The result licenses no rescue, second B6, favorable
+selection, C treatment, promotion, retirement or cross-direction claim.
+
+Canonical result: `ACTOR_ANCHORED_CRITIC_CLIP_ROOT_CROSS_RESULT.json`. Raw
+lossless vectors, retained parameters/moments and phase artifacts remain under
+`logs/eociv_b6_actor_anchored_critic_clip_root_cross_2400f122_r1/`; the public result binds `raw_result.json` by SHA-256 and retains
+all registered counts, matching, update-chain, semantic, cross-term,
+factorial, overlap and copied-Adam summaries. Scientific intake and next-action
+selection remain with the Independent Research Explorer.
