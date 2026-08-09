@@ -93,67 +93,9 @@ execution, reconfirm only material drift in goal, authority, path set,
 acceptance method or irreversible external effect; resolve mechanical details
 inside the confirmed boundary automatically.
 
-## Execute and stop
+## After confirmation
 
-After confirmation, WDM loads `$hmasd-workflow-change-audit` and continues
-through impact mapping, smallest implementation, verification, integrated batch
-review when implementers were used, exact Git integration and reload receipt without per-action
-approval. A requester does not become an acceptance owner.
-
-## Context model and delegation economics
-
-```text
-workflow_context_model=compact_task_model_plus_docs/project/WORKFLOW_MAP.md
-workflow_context_loading=compact_child_conclusions_and_final_diff
-workflow_context_expansion=concrete_interface_or_authority_dependency_only
-workflow_delegation_economics=cheaper_registered_children_by_default
-workflow_delegation_shape=adaptive_composition_not_fixed_state_machine
-workflow_successor_continuity=fresh_wdm_task_after_coherent_batch
-workflow_successor_brief=short_reload_receipt_without_task_creation_registry_or_approval_state
-workflow_map_owner=workflow_design_manager
-workflow_map_maintenance=stable_role_interface_dependency_or_context_boundary_change_same_commit
-workflow_execution_plan=bounded_reconnaissance_then_frozen_execution_plan
-workflow_formal_plan_threshold=more_than_few_steps_or_material_uncertainty
-workflow_plan_invalidated_action=stop_affected_branch|update_from_evidence|resume
-workflow_plan_first_user_confirmation_effect=none_inside_active_grant
-```
-
-WDM keeps a compact task model and consults the stable
-`docs/project/WORKFLOW_MAP.md` for role, interface and dependency orientation.
-It consumes compact child conclusions and the final integrated diff, expanding
-context only along a concrete interface or authority dependency. This keeps the
-high-performance WDM context at semantic junctions while routing bounded
-mechanical work to cheaper registered children by default.
-
-Delegation is adaptive composition rather than a fixed
-`Scout→Implementer→Reviewer` state machine:
-
-- known local work may go directly to one Implementer;
-- missing interface facts use the Workflow Auditor as Scout before freezing;
-- non-overlapping file families use one Implementer per family;
-- one independent Workflow Reviewer covers the coherent integrated batch.
-
-WDM edits directly only at indivisible semantic junctions, integration or
-conflict repair, final acceptance/Git/reload, or when no child action is needed.
-A spelling or local mechanical edit may therefore use one Implementer without a
-Scout or a per-edit Reviewer.
-
-After a coherent batch, WDM prefers a fresh successor WDM task instead of
-carrying unrelated historical batches. A reload receipt may include a short
-successor brief with the current workflow commit, accepted stable changes,
-unfinished work and the next goal, but it never creates a task, registry or new
-approval state.
-
-For any non-few-step execution, the confirmed plan plus bounded live
-reconnaissance is the frozen execution plan required by `AGENTS.md`; do not add
-a second plan artifact or confirmation. If implementation evidence invalidates
-a tool, interface, path set or recovery assumption, stop only that branch,
-update the plan from the evidence and resume automatically unless the change
-expands authority, outcome, irreversible external effect or another named
-material plan field.
-This replaces ad-hoc reactive tool or strategy switching and adds no workflow
-state, terminal or recurring approval.
-
-Do not create a handoff, review, child, runtime record or state machine merely
-to manage this collaboration. WDM returns its accepted workflow commit and
-exact verification, or the smallest missing user decision.
+After natural-language confirmation, load
+`$hmasd-workflow-change-audit`. That Skill owns implementation, verification,
+integrated review, Git integration and reload; this requirements Skill does not
+duplicate post-confirmation execution, delegation or successor procedures.

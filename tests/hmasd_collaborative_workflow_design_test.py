@@ -37,10 +37,9 @@ def test_read_only_and_fully_specified_requests_take_short_paths() -> None:
 def test_nontrivial_execution_reuses_one_plan_without_a_new_gate() -> None:
     router = (REPO / "AGENTS.md").read_text(encoding="utf-8")
     skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
-    assert "nontrivial_task_strategy=bounded_reconnaissance_then_frozen_execution_plan" in router
-    assert "plan_first_user_confirmation_effect=none_inside_active_grant" in router
-    assert "do not add a second plan artifact or confirmation" in skill
-    assert "stop only that branch" in skill
+    assert "The WDM default load is the exact assignment and WDM Role only." in " ".join(router.split())
+    assert "Confirmed plan is being implemented or verified" in " ".join(router.split())
+    assert "this requirements Skill does not duplicate post-confirmation execution" in skill
 
 
 def test_mutation_requires_one_visible_confirmed_plan() -> None:
@@ -67,9 +66,9 @@ def test_role_routes_mutations_through_collaboration_before_audit() -> None:
     assert "workflow_plan_confirmation=required_before_mutation" in skill
     assert "workflow_zero_question_path=" not in role
     assert "workflow_decision_question_condition=" not in role
-    assert role.index("$hmasd-collaborative-workflow-design") < role.index(
-        "$hmasd-workflow-change-audit"
-    )
+    role_normalized = " ".join(role.split()).lower()
+    assert "the collaborative skill owns requirements, planning and user confirmation" in role_normalized
+    assert "the audit skill owns post-confirmation" in role_normalized
 
 
 def test_assignment_writing_skill_is_required_at_design_dispatch_boundary() -> None:
@@ -90,7 +89,8 @@ def test_assignment_writing_skill_is_required_at_design_dispatch_boundary() -> N
         "completion evidence",
     ):
         assert capability in role
-    assert "paths, statuses, schemas and forked context support the brief but do not substitute for its meaning" in role.lower()
+    assert "child assignment meaning is owned by" in role.lower()
+    assert "hmasd-writing-agent-assignments" in role
 
 
 def test_wdm_is_the_single_workflow_owner_and_executes_after_confirmation() -> None:
@@ -102,16 +102,20 @@ def test_wdm_is_the_single_workflow_owner_and_executes_after_confirmation() -> N
         "workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces",
         "workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces",
         "workflow_git_authority=exclusive_for_workflow_control_plane_surfaces",
-        "Automatic continuous execution",
     ):
         assert token in role
     assert "invoked only by Workflow Design Manager" in skill
-    assert "without per-action approval" in normalized_skill
-    assert "workflow_hash_validation=forbidden" in role
-    assert "workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch" in role
-    assert "Git revision identifiers remain source locators only" in role
+    assert "without plan confirmation" in normalized_skill
+    assert "workflow_hash_validation=forbidden" not in role
+    assert "workflow_hash_validation=forbidden" in (
+        REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md"
+    ).read_text(encoding="utf-8")
+    assert "workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch" not in role
+    assert "Git revision identifiers are source locators" in (
+        REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md"
+    ).read_text(encoding="utf-8")
     assert "workflow_router_consistency_check=required_for_every_workflow_change" in role
-    assert "workflow_implementer_parallelism=min(disjoint_owned_path_families,available_native_slots_minus_integrator)" in role
+    assert "workflow_implementer_parallelism=" not in role
     assert "workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match" in role
     assert "`AGENTS.md` as `modify` or `unchanged-valid`" in normalized_skill
 
@@ -121,8 +125,9 @@ def test_user_changes_and_advisory_defects_use_distinct_nonblocking_lanes() -> N
     skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
     assert "workflow_input_lanes=USER_REQUESTED_CHANGE|REPORTED_WORKFLOW_DEFECT" in skill
     assert "workflow_incident_log=" in role
-    assert "does not serialize unrelated work" in role
-    assert "without user confirmation only when" in role
+    assert "does not serialize unrelated work" not in role
+    assert "workflow_defect_repair_authority=autonomous_within_accepted_stable_contract" in role
+    assert "workflow_defect_repair_authority=autonomous_within_accepted_stable_contract" in role
     assert "Otherwise move the item to the user-requested lane" in skill
 
 
@@ -132,7 +137,9 @@ def test_edit_children_pin_ticket_worktree_before_mutation() -> None:
     audit = (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md").read_text(
         encoding="utf-8"
     )
-    for text in (role, skill, audit):
+    assert "resolved ticket worktree path" not in " ".join(role.split())
+    assert "git rev-parse --show-toplevel" not in " ".join(role.split())
+    for text in (skill, audit):
         text = " ".join(text.split())
         assert "resolved ticket worktree path" in text
         assert "git rev-parse --show-toplevel" in text

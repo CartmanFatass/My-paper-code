@@ -2,20 +2,13 @@
 
 ```text
 document_kind=session_workspace_contract
-shared_workflow_surface_owner=workflow_design_manager
-shared_workflow_design_authority=exclusive
-shared_workflow_acceptance_authority=exclusive
-shared_workflow_git_authority=exclusive
-workflow_collaboration_skill=hmasd-collaborative-workflow-design
-workflow_audit_skill=hmasd-workflow-change-audit
-assignment_writing_skill=hmasd-writing-agent-assignments
 workflow_child_parent=workflow_design_manager
-workflow_child_acceptance_authority=none
 durable_workspace_root=docs/session-workspaces/<role_id>/
 temporary_workspace_root=temp/sessions/<role_id>/
 child_assignment_brief=temp/sessions/<parent_role>/assignments/<assignment_id>.md
 child_assignment_format=self_contained_natural_language_not_schema_admission
 child_forked_context=background_only
+workflow_assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace
 workflow_session_identity=role_based
 workflow_session_owner_id=workflow_design_manager
 workflow_successor_rotation=integrated_batch_completion
@@ -26,133 +19,35 @@ public_current_work_partition_status=active_index_and_partitions
 public_current_work_index=docs/project/CURRENT_WORK.md
 public_current_work_index_owner=workflow_design_manager
 workflow_incident_log=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md
-workflow_router_consistency_check=required_for_every_workflow_change
-workflow_implementer_parallelism=file_family_adaptive
 workspace_boundary_guard=fail_closed_for_recognized_pretooluse_cases
 authoritative_write_boundary=tool_os_sandbox|verified_ticket_identity|git_visible_checks
 workspace_ticket_retirement=registered_clean_detached_worktree_only
-agentify_transport_child=hmasd-agentify-transport
-agentify_transport_child_parent=code_project_manager|independent_research_explorer
-agentify_transport_test_parent=workflow_design_manager
-agentify_transport_wdm_test_scope=exact_workflow_acceptance_smoke_batch_only
+agentify_transport_workspace=temp/sessions/agentify_transport_operator/
 agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT
-agentify_transport_assignment_fields=batch_path|results_path
-agentify_transport_batch_file_fields=provider|context_path|question_paths
+agentify_transport_assignment_locators=batch_path|results_path
+agentify_transport_batch_locators=context_path|question_paths
 agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
-agentify_transport_result_fields=status|results_path|error
-agentify_transport_terminal_status=COMPLETE|ERROR
-agentify_transport_wait_visibility=silent_until_terminal_native_final
-cpm_mechanical_child=hmasd-cpm-mechanical
-cpm_mechanical_parent=code_project_manager
+agentify_transport_result_locator=results_path
 cpm_mechanical_assignment=CPM_MECHANICAL_TASK_ASSIGNMENT
-cpm_mechanical_assignment_fields=spec_path|result_path
+cpm_mechanical_assignment_locators=spec_path|result_path
 cpm_mechanical_result=CPM_MECHANICAL_TASK_RESULT
-cpm_mechanical_result_fields=status|result_path|error
-cpm_mechanical_terminal_status=COMPLETE|ERROR
-cpm_mechanical_wait_visibility=silent_until_terminal_native_final
-cpm_mechanical_write_scope=assignment_named_temporary_outputs_only
-cpm_mechanical_acceptance_authority=none
-cpm_mechanical_git_authority=none
-cpm_mechanical_scientific_authority=none
-cpm_mechanical_runtime_authority=no_experiment_no_readiness_no_agentify
-cpm_mechanical_finalize_owner=code_project_manager
-cpm_mechanical_activation=after_fresh_profile_reload
-cpm_mechanical_active_research_state_effect=none
-explorer_mechanical_child=hmasd-explorer-mechanical
-explorer_mechanical_parent=independent_research_explorer
-explorer_mechanical_assignment=native_self_contained_natural_language
-explorer_mechanical_result=native_conclusion_first_response
-explorer_mechanical_result_file=forbidden
-explorer_mechanical_write_scope=none
-explorer_mechanical_workspace=none
-explorer_mechanical_scientific_authority=none
-explorer_mechanical_technical_acceptance_authority=none
-explorer_mechanical_git_authority=none
-explorer_mechanical_runtime_authority=none
-explorer_mechanical_research_state_effect=none
-explorer_mechanical_cpm_isolation=separate_parent_task_and_state
+cpm_mechanical_result_locator=result_path
 ```
 
 ## Ownership model
 
-Workflow Design Manager is the sole owner of the router, workflow roles and
-profiles, workflow Skills, hooks, registries, workflow contracts and their
-tests. It plans, verifies, accepts, stages, commits and pushes those surfaces.
-All workflow-design requests and defects route to WDM; CPM and Explorer do not
-edit or accept workflow surfaces.
+Workflow-design, code, runtime and research authority remain with the owner
+Roles and the router. This contract defines only workspace roots, sender/receiver
+byte storage, owner write partitions and current-work links.
 
-Code Project Manager keeps exclusive authority for code, technical acceptance,
-runtime and project operational records. Independent Research Explorer keeps
-exclusive authority for advisory research and its research artifacts. CPM or
-Explorer may request the registered Agentify transport child, which keeps
-exclusive batch-scoped authority for transport mechanics and writes only its
-temporary workspace. Those role-local authorities do not include workflow
-design, workflow acceptance or workflow Git.
+## Assignment and write boundaries
 
-The CPM mechanical child is a CPM-only, file-bound capability. CPM remains the
-sole technical acceptance, source/Git and canonical-state owner; the child
-receives one exact temporary `CPM_MECHANICAL_TASK_ASSIGNMENT` and returns one
-typed temporary `CPM_MECHANICAL_TASK_RESULT`. Its interface is registered by
-`spec_path|result_path`, remains silent until one native terminal return, and
-does not grant experiment, readiness, Agentify, science, Git or acceptance
-authority. Activation requires a fresh profile reload and has no active
-research-state effect.
-
-The Explorer remains the sole owner of its research plans, continuity notes,
-candidate and scientific research artifacts, and all temporary/session research
-artifacts under its durable and temporary workspace. WDM is the single
-acceptance owner for the explicitly listed Explorer workflow artifacts; that
-acceptance does not grant workspace cleanup or write authority.
-
-WDM workflow children are advisory or mechanical only. Every assignment names:
-
-```text
-workflow_assignment_id=<locked assignment>
-owned_paths=<exact nonoverlapping paths>
-wdm_session_workspace=docs/session-workspaces/workflow_design_manager|temp/sessions/workflow_design_manager
-```
-
-Children return to WDM and never accept, stage, commit, push or route results.
-Every child result begins with a natural-language conclusion stating the owned
-outcome, why it is complete or unresolved, one checked direct consequence and
-residual uncertainty. Packet names, statuses, paths and receipts may follow as
-a compact factual tail; they never substitute for the conclusion. WDM resolves
-semantic junctions and performs final Git integration.
-
-The PreToolUse workspace guard fails closed for the mutation forms it recognizes
-and preserves all existing denials. It is a bounded syntactic preflight, not an
-arbitrary shell-semantics proof and not a replacement for tool/OS sandboxing,
-registered ticket identity or Git-visible pre/post checks. After integration,
-WDM retires a ticket only through the registered ticket script when its exact
-worktree is detached, at the expected HEAD and free of Git-visible changes.
-Retirement never uses force or discards work; a mismatch leaves both worktree
-and ticket intact.
-
-Before designing or dispatching any registered child or cross-session task,
-its parent invokes `hmasd-writing-agent-assignments`, the single
-assignment-writing contract. WDM workflow children receive the exact
-user-readable brief beneath the parent's temporary `assignments/` directory;
-a registered native read-only child may instead receive that same rich task
-model directly in its native assignment when its Role explicitly defines that
-boundary. A native brief does not grant a workspace, output file or weaker
-semantic contract. File-backed or native transport carries this rich
-natural-language brief and must let the child understand the owned outcome,
-intent, protected boundaries, necessary
-observations, permitted actions, role-local judgment, bounded recovery and
-completion evidence. Paths, statuses and schema fields are anchors, not
-meaning; they never substitute for the semantic outcome or the child's
-judgment. Suggested headings aid communication but never become required
-fields or an admission gate. Forked turns are background only; the brief
-controls task scope and completion. A child uses bounded reconnaissance to
-resolve ordinary omissions and escalates only a material outcome, authority or
-path change.
-
-Workflow reports from other sessions are advisory inputs. WDM appends typed
-defect reports to its chronological incident log. The log preserves order but
-does not serialize unrelated work, create an active state or block an operating
-owner's local recovery. Autonomous repair is limited to restoring an accepted stable contract;
-a material authority, policy, science, runtime or external-effect change moves
-to the user-confirmed change lane.
+The parent writes one self-contained brief at `child_assignment_brief` (or
+passes the same natural-language model natively when no workspace is granted).
+`workflow_assignment_identity` locates the owned paths and workspace; it does
+not replace the semantic assignment. A receiver reads only the named bytes,
+writes only its owned paths and returns its conclusion to the parent. Acceptance,
+Git and cross-task routing remain with the owner Role.
 
 ## Durable and temporary files
 
@@ -163,54 +58,18 @@ science, code, runtime evidence or review archives. A receiver reads only an
 assignment-named sender handoff; it does not write or clean another role's
 workspace. No hash, byte count or digest is required for a handoff.
 
-The registered Agentify transport child uses
-`temp/sessions/agentify_transport_operator/` for raw response handoffs. CPM or
-Explorer writes one production `AGENTIFY_REVIEW_BATCH_ASSIGNMENT`; WDM may write
-one exact workflow-acceptance smoke assignment. Each names
-`batch_path|results_path`, and the batch names a self-contained natural-language
-`context_path` plus ordered question paths. The child reads that local brief to
-understand outcome, intent, conversation relationship, local judgment and
-completion evidence, but transmits only question-file content. The parent then
-reads only the named result after the child's single native terminal return.
-Concurrent batches use distinct assignment-specific result paths; no parent
-polling, queue, monitor or inferred scan is allowed. A production requester
-copies the named result into its own canonical archive and performs its own
-scientific or mechanical intake.
+## File-backed transport locators
 
-CPM or Explorer owns the natural-language context brief: it freezes whether a
-request is new or an exact continuation, its independence, and permitted
-concurrency. The transport child observes provider-native conversation identity
-and realizes explicit intent, but owns only ephemeral task-created tab
-lifecycle; it does not choose same-direction, independence, contamination, or
-later-reuse meaning. Browser tabs are containers, not conversation memory or
-shared persistent state. Multiple requester-authorized Pro conversations may
-coexist. The child closes only tabs it created after full response capture and
-when no generation is active; default, pre-existing, unowned and active tabs
-remain open. Conversation URLs return to the requester for owner-decided later
-continuation.
+Agentify raw responses live under `agentify_transport_workspace`. A named
+`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` locates `batch_path|results_path`, and the
+batch locates `context_path|question_paths`; the parent reads only that result.
+Concurrent batches use distinct assignment-specific result paths. No polling,
+queue or inferred path scan is part of this contract.
 
-The CPM mechanical child uses the same file-only boundary: CPM writes one
-self-contained natural-language brief, one exact `spec_path` and one exact
-`result_path` under its temporary workspace. The brief carries purpose,
-consumer relationship, protected meaning, permitted observation/recovery and
-completion evidence; the spec is the deterministic execution anchor. The child
-writes only assignment-named temporary outputs and returns a mechanical
-conclusion followed by `status|result_path|error` anchors with terminal status
-`COMPLETE|ERROR`. CPM alone decides sufficiency, finalizes, accepts and records
-the result. No queue, monitor, inferred path scan, experiment/readiness
-execution or active research-state transition is introduced.
-
-The Explorer mechanical child is an Explorer-only context-isolation
-capability. Explorer sends one self-contained native assignment naming the
-frozen materials and literal organization need, and receives one
-conclusion-first native response; no mandatory result schema, result file,
-durable workspace or temporary workspace is required or granted. The child is
-read-only and has no write, Git, runtime, science, technical-acceptance,
-spawn or cross-task authority. It may not read CPM's active assignment,
-workspace or acceptance state, and CPM's mechanical child may not read the
-Explorer lane; the two parent, task-meaning and state boundaries remain
-separate. The native assignment is the writing-agent Skill's rich brief for
-this Role; it is not an exception to the semantic assignment contract.
+The CPM mechanical lane uses the same file-only boundary: its assignment
+locates `spec_path|result_path`, and its result locates
+`status|result_path|error`. The Explorer mechanical lane is native and carries
+no result file or workspace; its parent returns the response directly.
 
 ## Shared temporary semantic handoffs
 
@@ -245,13 +104,10 @@ and concurrent writes to one file are forbidden.
 The WDM session record is
 `docs/project/current-work/sessions/workflow_design_manager.md`; its common
 record is `docs/project/current-work/common/workflow_control_plane.md`. Both
-use `session_owner_id=workflow_design_manager` as the stable role identity.
-Batch completion is the preferred successor-task rotation boundary. A compact
-successor brief may name the current workflow commit, accepted stable changes,
-any real unfinished item, the next user goal and the next map/interface section
-to load. The workspace contract creates no task and stores no thread registry.
-Canonical science, code, runtime and review evidence remain in their existing
-owner paths and are linked rather than copied.
+use `session_owner_id=workflow_design_manager` as the stable role identity and
+retain only fenced identity/status headers plus links. Continuity details are
+loaded only when the router trigger requires them; canonical science, code,
+runtime and review evidence remain in their owner paths.
 
 ## Git boundary
 

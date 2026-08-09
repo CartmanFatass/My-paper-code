@@ -16,9 +16,5 @@ next_boundary=all_registered_sessions_reload_role_and_skill
 ```
 
 This record names the active control-plane owner and next reload boundary only.
-It also records the stable role identity used when a successor task reloads
-the workflow. A compact successor brief may identify the current workflow
-commit, accepted stable change, real unfinished item, next user goal and next
-map/interface section; no thread registry or automatic task creation exists.
 It contains no scientific conclusion, runtime state, code result or review
 response.

@@ -53,82 +53,32 @@ The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the marker
 above explicitly disable it. Never invoke or chain generic Superpowers Skills.
 A user-named one may be inspected only as reference.
 
-## Agentify review transport boundary
+## Triggered transport and mechanical lanes
 
-Formal and Explorer-to-project review transport is a file-only handoff from
-Code Project Manager to the reusable registered `hmasd-agentify-transport`
-native child. CPM writes one ordered batch file containing exactly
-`provider|context_path|question_paths`, chooses one exact `results_path`, and
-dispatches a
-self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` naming
-`batch_path|results_path` with `fork_turns=none`. The child owns page, model,
-send, wait, recovery and tab-cleanup mechanics; it is silent while live and
-emits no progress, commentary, collaboration, or repeated wait/poll handling.
-Before dispatch, CPM writes one self-contained natural-language context brief
-that states for each question whether it starts clean, continues
-an exact prior conversation URL, may run concurrently with named other
-questions, or must remain independent. CPM alone decides whether prior memory
-helps or contaminates the requested judgment and whether a returned
-conversation will be reused. This is semantic task meaning, not a
-`conversation_mode`, grouping field or other schema. The existing
-`context_path` anchor points to the local brief for transport realization; it
-adds no mandatory field, and transport does not include the local brief in
-provider payload.
+Formal and Explorer-to-project review transport remains a file-only handoff
+through the registered `hmasd-agentify-transport` child. When a review trigger
+fires, CPM freezes the questions, preserves their conversation meaning and
+consumes the named result only after the child's terminal return. The Agentify
+`.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md` and
+`.agents/skills/hmasd-agentify-transport/SKILL.md` own the
+`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` contract and all page/provider/wait,
+recovery and tab mechanics.
 
-Transport may use operational judgment to realize the frozen brief, but cannot
-infer same-direction grouping, scientific relationship, independence or future
-reuse. It returns exactly once through one terminal native final with
-`COMPLETE` or `ERROR`, carrying a conclusion followed by
-`AGENTIFY_REVIEW_BATCH_RESULT` fields `status|results_path|error`. The named
-result file retains its ordered raw response rows. CPM continues unrelated work
-and reads the file only after that terminal return, archives raw responses and
-returned conversation URLs, and performs mechanical archival and intake. A
-later brief names an exact archived URL when CPM chooses continuation; absent
-that statement, the child must not guess from titles. Retries reuse the
-unchanged batch file. Page, model, send, wait, recovery and tab-cleanup details
-never enter CPM context, and no separate persistent task, task-id return field,
-cross-task result relay, or polling/progress loop is part of this interface.
+CPM owns the per-question conversation intent. Its context brief states clean
+start versus one exact continuation URL, permitted concurrency versus required
+independence, and whether prior memory helps or contaminates later reuse. The
+transmitted question contains no local filesystem path, task history or
+unrelated corpus; reviewer-facing source locators use the public remote URL.
 
-## CPM mechanical protocol
-
-Code Project Manager remains the orchestrator, engineering and technical-
-judgment owner, exact-assignment author, repair/retry chooser, sole
-technical/mechanical acceptance owner and sole code/Git/canonical-state
-integrator. For deterministic inspection, check collection, result extraction,
-handoff preparation and ticket preparation, it delegates one exact assignment
-to the registered `hmasd-cpm-mechanical` child and reads only its terminal
-receipt/result. The parent's natural-language brief remains the semantic task
-authority: it states purpose, CPM consumers, protected meaning, the
-contradiction that matters, permitted read-only observation/recovery and
-completion evidence. The JSON spec is a deterministic execution anchor, not
-the complete meaning. The common mechanical result is file-backed and compact:
-`schema_version|status|assignment_id|task_class|attempt_id|result_path|observations|output_paths|log_paths|first_failure|retry_class|exit_code`.
-The assignment binds `schema_version=1`, `assignment_id`, `task_class`,
-`attempt_id`, `working_directory`, `allowed_read_paths`, `allowed_write_paths`,
-`result_path` and `task`, and executes one exact `run --spec <json> --result
-<json>` invocation. The child may use at most one assignment-defined
-read-only observation recovery for incomplete/conflicting input; its
-natural-language mechanical conclusion and direct consequence precede the
-JSON/status anchors. `COMPLETE` records inspection evidence, never CPM
-acceptance.
-The child remains silent while live, performs no Git or acceptance, and never
-integrates files.
-
-CPM does not transcribe model/tool output into files, reconstruct child files
-with `apply_patch`, run raw duplicate worktree status, or manually reconstruct
-tool state. After technical acceptance, CPM invokes the ticket
-`finalize-integrate` command directly. The Experiment Operator remains
-exclusive for `train -> evaluate -> analyze`, the readiness Verifier remains
-exclusive for the six ordered readiness phases, and Agentify Transport remains
-separate for formal/Explorer review transport.
-
-The Experiment Operator's assignment-named terminal receipt is governed by
-the role charter and the deterministic helper
-`.agents/skills/hmasd-agile-research-development/scripts/hmasd_experiment_operator_receipt.py`;
-this Skill does not duplicate that receipt procedure. The helper derives the
-terminal field, validates the exact mechanical keys, and performs the single
-atomic write/check. A helper failure is an operational `ERROR` with no runtime
-rerun authority.
+For deterministic inspection, result extraction, handoff preparation or ticket
+preparation, CPM may trigger `hmasd-cpm-mechanical`;
+`.agents/roles/CPM_MECHANICAL_OPERATOR.md` and its dispatcher own the
+mechanical result fields and bounded observation recovery. For an authorized
+experiment, `.agents/roles/EXPERIMENT_OPERATOR.md` and
+`scripts/hmasd_experiment_operator_receipt.py` own `train -> evaluate ->
+analyze` and its terminal receipt. This Skill does not reproduce those lanes;
+CPM remains the orchestrator, assignment author and sole technical/mechanical
+acceptance owner.
 
 ## Operating loop
 
@@ -155,7 +105,7 @@ rerun authority.
    For result-bearing runner/analyzer integration, execution-entry, artifact,
    serialization or phase-connection changes, and code defects exposed by
    preflight, focused tests alone are insufficient. Run the two-layer
-   execution-readiness procedure below. Use a broad suite only for a changed
+    triggered execution-readiness lane. Use a broad suite only for a changed
    shared surface.
 6. **Inspect and report.** Check protected semantics, RNG/replay/lifecycle,
    serialization, transfers, synchronization, packing, persistence, and serial
@@ -254,110 +204,25 @@ defect can recur on a remaining shared surface. Otherwise remove its code and
 test together when the direction leaves the active line; Git retains the
 history. Run a broad suite only for an actually changed shared surface.
 
-## Mechanical execution readiness
+## Triggered execution-readiness lane
 
-Code Project Manager prepares the exact candidate-bound spec and assigns the
-registered `hmasd-verifier`. Candidate-focused checks never duplicate a phase
-argv or write the exercise root. Readiness binds to one clean candidate commit
-equal to `HEAD`; there is no source/execution bridge or execution-support delta.
-The wrapper owns only ordered execution, typed mechanical outcomes, logs,
-Git-visible worktree observation and receipt recording. CPM owns the exact
-commands and phase semantics. The verifier uses the registered interpreter and
-the Skill-owned script in two mechanical steps:
+When result-bearing runner/analyzer integration, execution-entry, artifact,
+serialization or phase-connection risk (or a preflight-exposed code defect)
+triggers readiness, CPM dispatches the registered `hmasd-verifier` on the clean
+candidate commit. Candidate-focused checks remain separate; `.agents/roles/VERIFIER.md`
+and `.agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py`
+own the ordered six phases, process
+observation, candidate/exercise-root binding and Git-private receipt
+finalization. The dedicated owner preserves the `formal=false`, zero-compute
+boundary and distinguishes invocation failure, first causal phase failure and
+finalization failure.
 
-```powershell
-& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
-  .agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py `
-  run --spec <temporary-json-spec>
-```
-
-Invoke `run` once in the ordinary candidate toolchain environment without
-elevation. The outer tool timeout is explicit and equals the sum of the six
-`timeout_seconds` values plus 60 seconds. The script is the only executor of the
-phase argv arrays; neither Code Project Manager nor verifier pre-runs, replays or
-manually invokes them. Successful `run` writes a candidate receipt inside the
-exercise root and returns `HMASD_EXECUTION_READINESS_PHASES_OK`.
-
-```powershell
-& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' `
-  .agents/skills/hmasd-agile-research-development/scripts/hmasd_execution_readiness.py `
-  finalize --spec <temporary-json-spec>
-```
-
-Invoke `finalize` once only after the phase-success token. Give this
-zero-compute command a short explicit timeout and narrow exact-command
-elevation. It reruns no phase, validates the candidate receipt against the
-current clean commit, exact spec, phase argv/status and expected artifacts, and
-writes only the Git-private receipt. The result-bearing `run` is never elevated,
-so its compiler, native-extension cache and candidate environment do not change
-between focused evidence and readiness execution.
-
-The temporary JSON spec binds one candidate commit equal to clean `HEAD`, exact
-accepted paths, `formal=false`, `scientific_iteration_cost=zero`, one
-independent proof-sized exercise root, expected artifacts and argv arrays for
-these ordered phases:
-
-```text
-interface_smoke -> bounded_exercise -> artifact_validation -> artifact_reload -> evaluate_entry -> analyze_entry
-```
-
-`interface_smoke` instantiates the production configuration and calls the same
-entry method, argument shapes and return schema used by the production runner.
-Calling a lower-level projection method directly is not a substitute. The
-remaining phases exercise the real proof-sized entry, canonical validator,
-artifact reload and minimal real evaluate/analyze entries to completion. They
-never use a formal authorization token, formal budget or scientific threshold
-disposition.
-
-The script executes argv arrays without a shell, fails at the first unsuccessful
-phase and checks the expected artifacts. It records typed launch, timeout and
-process-tree termination evidence, phase logs and Git-visible cleanliness after
-each phase; it makes no ignored-file security claim. It exposes the successful
-Git-private receipt only after `finalize` revalidates all six phases on the exact
-clean candidate commit. The receipt is mechanical evidence, is not Git-tracked
-and is not another acceptance owner. A receipt cannot overwrite a different
-candidate or attempt; a same-content finalizer retry is idempotent and reruns no
-phase. Historical receipts are checked with `check --receipt`. The verifier
-returns the receipt or distinguishes a pre-phase invocation failure, the first
-causal phase failure, and a zero-compute finalization failure without repair.
-Code Project Manager classifies that evidence, owns any reassignment or repair,
-and alone accepts the candidate.
-For a deterministic post-acceptance defect with plausible recurrence, add one
-proof-sized regression before rerunning the procedure.
-
-A readiness phase timeout is candidate evidence, not authority to replay the
-same proof root or relax its timeout. A new or revised workflow contract chooses
-a semantics-preserving technical optimization under the unchanged phase timeout
-or an evidence-backed timeout revision. A bounded unchanged-candidate attempt
-budget may be stated by that contract; each attempt still requires one exact
-spec, one fresh absent root, one wrapper run, the same ordered six phases and a
-full candidate-bound receipt. Any code or validator defect produces a new clean
-pushed candidate; only a transient environment, launcher, path or
-operating-system failure may consume the stated budget. A timeout, technical
-failure or finalization failure consumes zero scientific iterations, produces no
-scientific disposition and leaves its root terminal. Nothing automatically
-increases a timeout or switches the selected response.
-
-The project `Stop` hook is a last-message guard only. It runs no validation
-command. In the fixed Code Project Manager task, a `CODE_ACCEPTED` return with
-`execution_readiness=passed` must name a matching successful receipt; an
-untriggered return must state its bounded reason. Other roles, ordinary turns
-and blocked returns are no-ops.
-
-An execution-readiness operational failure before `CODE_ACCEPTED` remains in
-the Code Project Manager verification loop and is never treated as a partial
-runtime handoff. Each runner, ticket, transport or readiness tool owns its
-mechanical lifecycle, counters and terminal state. Code Project Manager consumes
-the typed receipt or exit evidence and never reconstructs a parallel state
-machine from prose or memory. It chooses only the semantic next action: direct
-repair, a fresh authorized attempt, parking the affected workstream, or another
-legal task. Preserve the estimator, source, seed law, budgets, thresholds,
-backend constraints and branch semantics; never weaken checks or use recovery
-to select among scientific outcomes. Operational recovery uses zero scientific
-iterations and creates no scientific disposition. A valid scientific result is
-archived and routed to External Pro. An external hard technical impossibility is
-terminal only after applicable automatic recovery cannot make progress. Add a
-regression only for plausible recurrence of a code defect.
+CPM supplies the exact commands and phase semantics, consumes the typed receipt
+and alone accepts or repairs the candidate. Readiness is not a routine gate for
+ordinary code changes. A timeout or technical failure is candidate evidence,
+does not authorize replay or weakened checks, and consumes no scientific
+iteration; recovery and any fresh candidate remain within the Verifier Role and
+Code Project Manager failure-containment contracts.
 
 ## Complexity gate
 

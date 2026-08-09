@@ -483,11 +483,19 @@ def test_open_inspiration_reference_preserves_source_first_dynamic_portfolio() -
     for required in (
         "algorithm inspiration campaign",
         "SOURCE_RESULT_PACKET",
-        "RL_PRINCIPLE_ANALYSIS_PACKET",
         "NEXT_CYCLE_OPPORTUNITY_MAP",
         "available native capacity",
     ):
         assert required in skill
+    parallel = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md"
+    ).read_text(encoding="utf-8")
+    assert "RL_PRINCIPLE_ANALYSIS_PACKET" in parallel
     for required in (
         "source_result",
         "transferable_primitive",
@@ -621,16 +629,9 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "consumes no formal iteration",
     ):
         assert required in validation_normalized
-    for required in (
-        "research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review_or_explicit_user_request",
-        "Only for the named C/direction-change/material-ambiguity/final-alignment/ conclusion or explicit-user-request trigger",
-    ):
-        assert required in role or required in skill_normalized
-    for required in (
-        "Canonical research campaigns retain their exact ordered phase rosters and barriers.",
-        "This capability adds no dispatcher, queue, registry, monitor, fixed panel or",
-    ):
-        assert required in workflow_map_normalized
+    assert "research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review_or_explicit_user_request" in role
+    assert "direction-local context binding" in workflow_map_normalized
+    assert "Research and CPM operational dependency details remain in their owner contracts" in workflow_map_normalized
 
 
 def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated() -> None:
@@ -730,11 +731,13 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "Workflow design is not an Explorer mode.",
         "Report one exact requirement or defect to the current Workflow Design Manager task",
         "never load the collaborative/audit Workflow Skills",
-        "one minimal batch file containing provider and the ordered paths",
-        "AGENTIFY_REVIEW_BATCH_RESULT",
-        "currently eligible frozen questions",
         "no archived task ID or route registry",
         "one bounded owned-path scan",
+    ):
+        assert required in skill_normalized
+    for required in (
+        "one minimal JSON batch retaining the existing",
+        "AGENTIFY_REVIEW_BATCH_RESULT",
         "registered `hmasd-agentify-transport` child",
         "AGENTIFY_REVIEW_BATCH_ASSIGNMENT",
         "batch_path|results_path",
@@ -744,7 +747,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "terminal status `COMPLETE|ERROR`",
         "no polling, progress handling or parent-task result relay",
     ):
-        assert required in skill_normalized
+        assert required in pro_review_skill_normalized
     assert "$hmasd-collaborative-workflow-design" not in skill
     assert "$hmasd-workflow-change-audit" not in skill
 
@@ -938,20 +941,16 @@ def test_direction_local_context_binding_is_symmetric_and_preserves_artifacts() 
     for surface in (explorer_role, exploration_skill, parallel, validation_skill, handoffs):
         assert pointer in surface
 
-    for required in (
-        "selected direction",
-        "smallest set",
-        "sibling",
-        "semantic clarification",
-    ):
-        assert required in explorer_role
-        assert required in cpm_role_normalized
+    assert pointer in explorer_role
+    assert pointer in exploration_skill
+    assert pointer in validation_skill_normalized
+    assert "direction-specific Explorer" in cpm_role_normalized
 
     assert "explicitly multi-direction user question" in normalized_contract
     assert "never imports another direction" in normalized_contract
     assert "portfolio-wide meaning" in normalized_contract
     assert "A Codex-native message fallback carries the same binding" in handoffs
-    assert "never preload or merge unrequested siblings" in exploration_skill
+    assert "excluding unrequested siblings" in exploration_skill
     assert "preserve the original handoff/artifact" in validation_skill_normalized
     assert "direction-local context binding" in workflow_map
     assert "never reads `local_research/`" in cpm_role_normalized
@@ -961,6 +960,8 @@ def test_explorer_mechanical_child_is_context_isolated_from_science() -> None:
     """The mechanical lane organizes literals without joining research rosters."""
     role_path = REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md"
     skill_path = REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
+    mechanical_role_path = REPO / ".agents" / "roles" / "EXPLORER_MECHANICAL_OPERATOR.md"
+    mechanical_skill_path = REPO / ".agents" / "skills" / "hmasd-explorer-mechanical" / "SKILL.md"
     parallel_path = (
         REPO
         / ".agents"
@@ -974,6 +975,8 @@ def test_explorer_mechanical_child_is_context_isolated_from_science() -> None:
 
     role = " ".join(role_path.read_text(encoding="utf-8").split())
     skill = " ".join(skill_path.read_text(encoding="utf-8").split())
+    mechanical_role = " ".join(mechanical_role_path.read_text(encoding="utf-8").split())
+    mechanical_skill = " ".join(mechanical_skill_path.read_text(encoding="utf-8").split())
     parallel = " ".join(parallel_path.read_text(encoding="utf-8").split())
     assert "hmasd-explorer-mechanical" in role
     assert "hmasd-explorer-mechanical" in skill
@@ -986,22 +989,24 @@ def test_explorer_mechanical_child_is_context_isolated_from_science() -> None:
         "explorer_mechanical_write_authority=none",
         "explorer_mechanical_scientific_authority=none",
         "explorer_mechanical_research_state_effect=none",
-        "mechanical rather than scientific",
-        "context isolation",
-        "literal existence or inaccessibility",
-        "locator validity, completeness, public accessibility or technical sufficiency",
     ):
         assert required in role.lower()
     for required in (
+        "heterogeneous record handling out of its scientific context",
+        "literal existence or inaccessibility",
+        "does not judge locator validity",
+    ):
+        assert required in mechanical_role.lower()
+    for required in (
         "hmasd-explorer-mechanical",
-        "direct deterministic tool commands",
+        "exact deterministic read-only script",
         "read-only",
         "self-contained",
-        "this route does not add a script",
-        "mechanical rather than scientific",
-        "no scientific roster, barrier, peer comparison, evidence vote",
+        "do not add a custom script in this route",
+        "not a cheap scientific consultant",
+        "while keeping scientific purpose, interpretation and next-action decisions with the explorer",
     ):
-        assert required in skill.lower()
+        assert required in mechanical_skill.lower()
     for required in (
         "explorer_mechanical_child=hmasd-explorer-mechanical",
         "explorer_mechanical_scientific_roster=excluded",

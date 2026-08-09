@@ -122,10 +122,11 @@ def test_workflow_review_is_one_pass_normal_path_advice() -> None:
     assert "review_passes_per_reviewer=1" in reviewer
     assert "review_objective=contract_fidelity_and_net_workflow_value" in reviewer
     assert "finding_cost_test=expected_benefit_exceeds_complexity_time_and_maintenance_cost" in reviewer
-    assert "Workflow Reviewer by default" in skill
-    assert "parallel reviewers only for genuinely" in skill
-    assert "batch-scoped rather than per implementer" in skill
-    assert "no automatic second review" in skill
+    normalized_skill = " ".join(skill.split())
+    assert "integrated batch once by default" in normalized_skill
+    assert "parallel reviewers only for genuinely independent questions" in normalized_skill
+    assert "Their advice cannot create a second pass" in normalized_skill
+    assert "review_default=one_independent_reviewer" in reviewer
     assert "simple_operation_new_gate_state_identity_or_recovery=forbidden" in skill
     assert "simple_operation_control=one_line_runtime_checklist_only" in skill
     assert "theoretical_safety_hardening=reject_by_default" in skill
@@ -139,60 +140,27 @@ def test_cpm_mechanical_child_is_file_bound_and_non_scientific() -> None:
     session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(
         encoding="utf-8"
     )
-    session_normalized = " ".join(session.split())
-    workflow_map = (REPO / "docs/project/WORKFLOW_MAP.md").read_text(encoding="utf-8")
-    incidents = (
-        REPO / "docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md"
+    mechanical_role = (REPO / ".agents/roles/CPM_MECHANICAL_OPERATOR.md").read_text(
+        encoding="utf-8"
+    )
+    mechanical_skill = (
+        REPO
+        / ".agents/skills/hmasd-agile-research-development/scripts/hmasd_cpm_mechanical.py"
     ).read_text(encoding="utf-8")
-
-    for required in (
-        "cpm_mechanical_child=hmasd-cpm-mechanical",
-        "cpm_mechanical_parent=code_project_manager",
-        "cpm_mechanical_assignment=CPM_MECHANICAL_TASK_ASSIGNMENT",
-        "cpm_mechanical_assignment_fields=spec_path|result_path",
-        "cpm_mechanical_result=CPM_MECHANICAL_TASK_RESULT",
-        "cpm_mechanical_result_fields=status|result_path|error",
-        "cpm_mechanical_terminal_status=COMPLETE|ERROR",
-        "cpm_mechanical_wait_visibility=silent_until_terminal_native_final",
-        "cpm_mechanical_write_scope=assignment_named_temporary_outputs_only",
-        "cpm_mechanical_acceptance_authority=none",
-        "cpm_mechanical_git_authority=none",
-        "cpm_mechanical_scientific_authority=none",
-        "cpm_mechanical_runtime_authority=no_experiment_no_readiness_no_agentify",
-        "cpm_mechanical_finalize_owner=code_project_manager",
-        "cpm_mechanical_activation=after_fresh_profile_reload",
-        "cpm_mechanical_active_research_state_effect=none",
-        "hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe",
-    ):
-        assert required in router
-
-    for required in (
-        "CPM_MECHANICAL_TASK_ASSIGNMENT",
-        "CPM_MECHANICAL_TASK_RESULT",
-        "spec_path|result_path",
-        "status|result_path|error",
-        "silent until one native terminal return",
-        "no active research-state effect",
-    ):
-        assert required in session_normalized
-
-    for required in (
-        "hmasd-cpm-mechanical",
-        "cpm_mechanical_assignment=CPM_MECHANICAL_TASK_ASSIGNMENT",
-        "cpm_mechanical_result=CPM_MECHANICAL_TASK_RESULT",
-            "conclusion and temporary receipt return to CPM",
-        "no active research-state effect",
-    ):
-        assert required in workflow_map
-
-    for required in (
-        "EXPLORER_MECHANICAL_OVERLOAD",
-        "TICKET_MODEL_OUTPUT_TRUNCATION",
-        "NONBLOCKING",
-        "closed by this accepted batch",
-        "CLOSED",
-    ):
-        assert required in incidents
+    router_normalized = " ".join(router.split())
+    session_normalized = " ".join(session.split())
+    role_normalized = " ".join(mechanical_role.split())
+    assert "cpm_mechanical_child=hmasd-cpm-mechanical" in router
+    assert "cpm_mechanical_parent=code_project_manager" in router
+    assert "cpm_mechanical_assignment=" not in router
+    assert "cpm_mechanical_result_fields=" not in router
+    assert "authority=one_exact_CPM_MECHANICAL_TASK_ASSIGNMENT" in role_normalized
+    assert "assignment_fields=spec_path|result_path" in role_normalized
+    assert "terminal_values=COMPLETE|ERROR" in role_normalized
+    assert "never launches an experiment, readiness, Agentify or Git action" in role_normalized
+    assert "CPM_MECHANICAL_TASK_RESULT" in mechanical_skill
+    assert "docs/project/SESSION_WORKSPACE_CONTRACT.md" in router_normalized
+    assert "CPM_MECHANICAL_TASK_ASSIGNMENT" in session_normalized
 
 
 @pytest.mark.parametrize("breakage, expected", [

@@ -20,7 +20,7 @@ then procedural Skills. Use exactly one route:
 | Active identity | Read after this file | Do not load by default |
 |---|---|---|
 | Code Project Manager | `docs/project/CURRENT_WORK.md`, `.agents/roles/CODE_PROJECT_MANAGER.md`, then the active workstream's named paths | unrelated workstreams, research corpus and workflow history |
-| Workflow Design Manager | its assignment, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`, `CURRENT_WORK.md`, linked WDM records, `WORKFLOW_MAP.md`, collaborative-workflow Skill, writing-agent Skill at child/cross-session design or dispatch, then workflow-change-audit after plan confirmation | runtime, science and implementation state |
+| Workflow Design Manager | its exact assignment and `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`; expand only on a lazy trigger below | runtime, science and implementation state |
 | Agentify Transport child | its exact requester assignment, `.codex/agents/hmasd-agentify-transport.toml`, `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`, agentify Skill and its workspace | science, code, `CURRENT_WORK.md` and workflow history |
 | Independent Research Explorer | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, independent-research Skill, required principles and named sources | `CURRENT_WORK.md`, code, runtime and workflow state |
 | registered native child | its exact assignment, `.codex/agents/<profile>.toml`, named Role, then assignment-named files | `CURRENT_WORK.md`, persistent history and other roles |
@@ -31,13 +31,22 @@ completion condition fails closed. Persistent sessions route workflow defects
 and requirements to WDM; only WDM modifies or accepts workflow-control-plane
 surfaces.
 
-Before designing, dispatching or materially revising any subagent or
-cross-session assignment/interface, use
-`hmasd-writing-agent-assignments`. Read
-`docs/project/SESSION_WORKSPACE_CONTRACT.md` as the stable boundary. The Skill
-keeps the brief self-contained and natural-language; paths, schemas, statuses
-and forked context are anchors, not meaning, so the child can use local
-judgment without reconstructing the parent session.
+## Lazy workflow context triggers
+
+The WDM default load is the exact assignment and WDM Role only. Expand context
+only when the current task crosses one of these boundaries:
+
+| Trigger | Load the owner surface |
+|---|---|
+| User change or reported workflow defect requires a plan | `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md` |
+| Designing or dispatching a child or cross-session interface | `hmasd-writing-agent-assignments` and `docs/project/SESSION_WORKSPACE_CONTRACT.md` |
+| Confirmed plan is being implemented or verified | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
+| Stable owner, interface, dependency or context edge is material | `docs/project/WORKFLOW_MAP.md` |
+| Status, continuity or successor rotation is being updated | WDM `CURRENT_WORK` index and linked session/common records |
+
+Specialized Agentify, CPM-mechanical and Explorer-mechanical interfaces remain
+with their owner contracts; this router keeps only the registered pointers and
+cross-role boundaries.
 
 ## Authority and ownership
 
@@ -65,18 +74,6 @@ persistent_session_workflow_git_authority=none
 agentify_transport_child=hmasd-agentify-transport
 agentify_transport_child_parent=code_project_manager|independent_research_explorer
 agentify_transport_test_parent=workflow_design_manager
-agentify_transport_wdm_test_scope=exact_workflow_acceptance_smoke_batch_only
-agentify_transport_skill=hmasd-agentify-transport
-agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT
-agentify_transport_assignment_fields=batch_path|results_path
-agentify_transport_batch_file_fields=provider|context_path|question_paths
-agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
-agentify_transport_result_fields=status|results_path|error
-agentify_transport_terminal_status=COMPLETE|ERROR
-agentify_transport_wait_visibility=silent_until_terminal_native_final
-agentify_transport_conversation_semantics_owner=requester
-agentify_transport_conversation_identity_source=provider_native
-agentify_transport_tab_lifecycle_owner=agentify_transport_child_for_task_created_tabs_only
 
 code_project_manager_code_authority=exclusive
 code_project_manager_technical_acceptance_authority=exclusive
@@ -93,20 +90,6 @@ code_project_manager_routine_implementation_agent=hmasd-implementer-terra
 code_project_manager_protected_implementation_agent=hmasd-implementer
 cpm_mechanical_child=hmasd-cpm-mechanical
 cpm_mechanical_parent=code_project_manager
-cpm_mechanical_assignment=CPM_MECHANICAL_TASK_ASSIGNMENT
-cpm_mechanical_assignment_fields=spec_path|result_path
-cpm_mechanical_result=CPM_MECHANICAL_TASK_RESULT
-cpm_mechanical_result_fields=status|result_path|error
-cpm_mechanical_terminal_status=COMPLETE|ERROR
-cpm_mechanical_wait_visibility=silent_until_terminal_native_final
-cpm_mechanical_write_scope=assignment_named_temporary_outputs_only
-cpm_mechanical_acceptance_authority=none
-cpm_mechanical_git_authority=none
-cpm_mechanical_scientific_authority=none
-cpm_mechanical_runtime_authority=no_experiment_no_readiness_no_agentify
-cpm_mechanical_finalize_owner=code_project_manager
-cpm_mechanical_activation=after_fresh_profile_reload
-cpm_mechanical_active_research_state_effect=none
 project_map_owner=code_project_manager
 project_map_update=same_commit_when_stable_architecture_fact_changes
 
@@ -120,38 +103,15 @@ external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 formal_compute_authority=user_only
 explorer_mechanical_child=hmasd-explorer-mechanical
 explorer_mechanical_parent=independent_research_explorer
-explorer_mechanical_role=read_only_literal_fact_organization
-explorer_mechanical_write_authority=none
-explorer_mechanical_git_authority=none
-explorer_mechanical_runtime_authority=none
-explorer_mechanical_scientific_authority=none
-explorer_mechanical_technical_acceptance_authority=none
-explorer_mechanical_spawn_authority=none
-explorer_mechanical_cross_task_authority=none
-explorer_mechanical_research_state_effect=none
-
 workflow_change_request_route=workflow_design_manager
 workflow_child_parent=workflow_design_manager|workflow_child_acceptance_authority=none|workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace|session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
 workflow_child_git_authority=none
 native_child_authority=exact_assignment_only
 workflow_assignment_writing_skill=hmasd-writing-agent-assignments
-workflow_implementer_parallelism=min(disjoint_owned_path_families,available_native_slots_minus_integrator)
-integrated_review=one_per_integrated_batch_by_default|parallel_only_for_independent_review_questions|no_automatic_rereview
 one_artifact_one_acceptance_owner=true
-workflow_router_consistency_check=required_for_every_workflow_change
 workflow_design_charter=WORKFLOW_DESIGN_MANAGER.md
 cross_task_transport=codex_native_send_message_to_thread
-cross_task_model_and_thinking_overrides=omit
 ```
-
-WDM's standing remote grant covers accepted workflow-control-plane paths and
-the named Agentify transport source workspace only. The requester-owned
-Agentify transport child receives one exact production assignment from CPM or
-Explorer and returns one native terminal result. WDM may parent its own exact
-workflow-acceptance smoke batch and receives that test result directly; it
-never relays a CPM or Explorer live review or result. There is no Controller,
-dispatcher, registry, semantic relay,
-persistent Monitor, global lease or workflow queue.
 
 ## Hard project and workspace boundaries
 
@@ -202,12 +162,9 @@ spawn or cross-task authority. Its profile and role are
 `.codex/agents/hmasd-explorer-mechanical.toml` and
 `.agents/roles/EXPLORER_MECHANICAL_OPERATOR.md`.
 
-WDM is the semantic integrator and acceptance owner. To reduce cost, routine
-bounded work is normally delegated to these cheaper registered children: an
-Implementer handles a frozen mechanical slice, an Auditor supplies local facts
-when the surface is unclear, and one Reviewer examines a coherent integrated
-batch. This is adaptive judgment, not a mandatory three-stage state machine;
-the stable decision rules live in `docs/project/WORKFLOW_MAP.md`.
+WDM is the semantic integrator and acceptance owner. Registered child roles and
+the stable delegation boundary are owned by their Role, Skill and
+`docs/project/WORKFLOW_MAP.md`; the router keeps only the child pointers above.
 
 ## Routed owner documents
 

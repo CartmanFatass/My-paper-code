@@ -13,13 +13,6 @@ legacy_snapshot=docs/project/archive/CURRENT_WORK_LEGACY_2026-08-01.md
 This file is a link index. Active state is partitioned so unrelated workstreams
 and sessions do not share a write surface.
 
-Workflow continuity is role-based: the WDM session uses
-`session_owner_id=workflow_design_manager` across successor tasks rather than a
-historical thread identifier. Batch completion is the preferred rotation
-boundary; a successor brief may name the current commit, accepted stable
-change, real unfinished item, next user goal and the next map/interface section
-to load. This index never creates tasks or stores a thread registry.
-
 ## Session records
 
 - [Code Project Manager](current-work/sessions/code_project_manager.md)

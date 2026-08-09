@@ -131,26 +131,15 @@ are the child's complete task context; inherited parent history is neither
 task meaning nor authority. No per-child assignment file or mandatory machine
 envelope is required.
 
-The Explorer also owns a separate mechanical delegation boundary for large,
-heterogeneous literal-fact organization. It first considers one or two direct
-deterministic tool commands, then an already-existing exact deterministic
-script; it uses `hmasd-explorer-mechanical` only when those are insufficient,
-the exact inputs and literal output fields are frozen, the work is materially
-larger, and context isolation reduces repeated Explorer burden. The child is
-mechanical rather than scientific: it preserves explicit facts and locators,
-reports missing, duplicate or contradictory inputs, and never infers evidence
-relevance, support, mechanism, alternatives, discriminators, priorities or
-A/B/C/Pro action. Explorer retains dispatch economics and semantic sufficiency
-intake. A singleton task creates no scientific roster, barrier or campaign
-effect; failure has `research_state_effect=none`.
-
-For CPM-accepted inputs, this child may only rearrange or extract the named
-accepted facts. It may report literal existence or inaccessibility for one
-exact assignment-named local file or evidence locator, but never decides
-locator validity, completeness, public accessibility or technical
-sufficiency. It never rereads raw runtime evidence or recomputes schema
-readability/readiness, receipts, activity counts, retry history or technical
-consistency; those remain with CPM and Explorer's semantic intake.
+For large, heterogeneous literal-fact organization, Explorer may trigger the
+registered `hmasd-explorer-mechanical` child only after direct commands and an
+existing exact script are insufficient, the literal inputs/fields are frozen,
+and context isolation materially helps. `.agents/roles/EXPLORER_MECHANICAL_OPERATOR.md`
+and `.agents/skills/hmasd-explorer-mechanical/SKILL.md` own extraction, locator
+reporting and bounded recovery; the child is
+not scientific, creates no roster/barrier/campaign effect, and has
+`research_state_effect=none`. Explorer retains dispatch economics and semantic
+sufficiency intake, while CPM retains technical facts and runtime evidence.
 
 Separately from the campaign loop, Explorer may ask one registered read-only
 research child one clear, bounded, decision-relevant question when the
@@ -201,123 +190,32 @@ accepts, stages, commits or pushes a role charter, Skill, profile, hook,
 registry, stable workflow contract or workflow contract test. WDM has no
 authority over Explorer's scientific ordering, interpretation or continuation.
 
-Inside an active user-authorized Explorer research grant, the Explorer may
-freeze and conduct exact candidate reviews without per-review user or WDM
-authorization. Explorer owns the scientific/advisory-review conversation intent
-for its questions. Before dispatch, Explorer writes one self-contained
-natural-language context brief that states for each question whether it starts
-clean, continues an exact prior conversation
-URL, may run concurrently with named other questions, or must remain
-independent. Explorer alone decides whether prior memory helps or contaminates
-the requested judgment and whether a returned conversation will be reused.
-This is semantic task meaning, not a `conversation_mode`, grouping field or
-other schema.
-
-Explorer then writes one minimal ordered batch file retaining the existing
-`provider|context_path|question_paths` contract for all currently eligible
-frozen questions and chooses one exact `results_path`. The existing
-`context_path` anchor points to the local brief for transport realization; it
-adds no mandatory field, and transport does not include the local brief in
-provider payload. Explorer dispatches one self-contained
-`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the
-registered `hmasd-agentify-transport` child with `fork_turns=none`, naming only
-`batch_path|results_path`, then continues unrelated research. The child alone
-owns page/model/send/wait/recovery mechanics and tab cleanup. It may use
-operational judgment to realize the frozen brief, but cannot infer
-same-direction grouping, scientific relationship, independence or future reuse.
-It is silent while live and returns exactly once through its native final
-response, with `AGENTIFY_REVIEW_BATCH_RESULT` fields
-`status|results_path|error` and terminal status `COMPLETE|ERROR`. Explorer reads
-the named result only after that terminal final return; it performs no polling,
-progress handling or parent-task result relay. Explorer archives each returned
-conversation URL with its raw response and names an exact archived URL in a
-later brief when it chooses continuation; with no such statement the child
-must not guess from titles. A retry reuses the same batch file and changes no
-Explorer file. Pro-canonical and Gemini-advisory labels remain local and never
-enter the question. Page, provider-adapter, wait, recovery and tab-cleanup
-details remain inside the transport child.
-
-Before sending, Explorer uses one model-authored checklist: the raw
-question contains no local filesystem locator, task history or unrelated
-corpus; any reviewer-accessible source locator is the public remote GitHub URL.
-This is a question-quality check, not a new mechanical gate.
-
-Explorer archives the raw response under its assigned
-`local_research/pro_reviews/<review-id>/` item root before enqueuing it for local
-FIFO scientific reconciliation. The archived Pro content is consumed as
-`INDEPENDENT_RESEARCH_DIRECTION_PACKET`.
-Explorer preserves the
-reviewed campaign artifact and writes any advisory delta
-as a new version outside `pro_reviews`. Explorer alone chooses which candidate
-to review and what later research action follows; transport cannot reorder
-requests or promote a packet into formal project state. Workflow
-Design Manager is not a campaign approver, transport provisioner or recovery
-owner.
+Inside an active user-authorized Explorer grant, a direction review,
+methodology audit or project-alignment review is an explicit Pro trigger. The
+Explorer freezes the scientific question, preserves its conversation meaning,
+archives the raw response and reconciles it before any advisory revision.
+Dispatch the registered `hmasd-agentify-transport` child through the existing
+file-only assignment; `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md` and
+`.agents/skills/hmasd-agentify-transport/SKILL.md` own batch, page, provider,
+wait, recovery and tab mechanics. Explorer remains the review selector,
+scientific interpreter and intake owner.
 
 A constructive Pro review must finish before Explorer applies, rejects or parks
 its corrections in a new advisory version. Only that new version may support a
 separate adversarial Pro assignment. The two reviews are separate turns; no
 transport operation crosses the barrier or treats either result as closure-only acceptance.
 
-For project validation, Explorer writes a self-contained semantic brief under
-`temp/handoffs/explorer_to_code_manager/` as defined in
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Live exchange files are
-ignored temporary content and never require Git. Explorer may read, but never
-edit, CPM's reverse results. The brief names A, B or C and gives one clear
-instruction naming the actions requested now: implementation, instance
-binding, experiment, pause, abandon or exact review as applicable. Once a
-mechanism is implementable, differentiating and comparator-backed, B is the
-normal next treatment; additional synthetic certificates are not a default
-substitute for implementation or a real toy run. The instruction authorizes
-CPM to execute that named treatment without separate code or experiment
-permission fields. When an engineering object is missing, it states what is
-known and helps resolve any scientific choice CPM cannot determine; CPM
-constructs or binds the minimal DTO, adapter, runner hook, observation or
-lifecycle object rather than turning its absence into a workflow blocker.
-Explorer remains advisory for A and B results. It requests External Pro only
-for a direction-changing decision, material result ambiguity, final science
-alignment, a conclusion-bearing claim, an explicit C review or an explicit
-user request; Pro is not a
-normal B precondition or per-iteration reviewer.
-
-For a direction-specific answer or outbound handoff, Explorer first resolves
-one primary selected direction and loads only the smallest set of its
-canonical decision/source context, adding the smallest set of parent, child or
-cross-direction edges material to the question. An explicitly multi-direction
-user question may name several directions; this never authorizes preloading or
-merging the portfolio or unrequested sibling generalization. The
-natural-language brief should make the selected direction or named direction
-set, exact candidate proposition, stage, source/evidence revision boundary,
-frozen facts and uncertainty, strongest alternative, material relationships,
-explicit exclusion of sibling-direction generalization unless explicitly
-named, requested action/direct consumer, completion evidence and return
-destination understandable, as defined by the single stable contract. If
-identity, proposition or revision binding is missing or
-contradictory, Explorer preserves the original handoff/artifact, asks exactly
-one concrete semantic clarification and continues unrelated work; it does not
-guess, merge directions, rewrite the artifact or create a `BLOCKED` state.
-
-After CPM technically accepts and pushes a result, it returns the exact commit
-and public GitHub repository/path locators. Ordinary B iteration may continue
-inside Explorer's advisory research state without automatic Pro review or a
-claim of final scientific acceptance. For a named Pro trigger, Explorer may
-inspect project material read-only as needed, then freezes one
-`CODE_SCIENCE_ALIGNMENT_AUDIT`, submits it through the registered
-`hmasd-agentify-transport` child using the same file-only assignment, and
-archives and intakes the raw answer only after the child's terminal native
-final return. External Pro uses the
-GitHub connection to inspect that exact pushed revision and owns final
-scientific-semantic acceptance; Explorer never substitutes its own acceptance.
-CPM remains the sole code and runtime technical acceptance owner. This advisory
-request cannot adopt a project direction beyond that named instruction or make
-an unrelated canonical scientific decision.
-
-The stable scientific-only intake rule is defined once in
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. The keys above state
-Explorer's capability and ownership boundary; they do not create a second
-technical acceptance gate or canonical scientific authority.
-Candidate isolation and supplied order organize the work without becoming
-admission states, ranking or cross-direction competition.
+For a mature candidate or direction handoff, trigger
+`.agents/skills/hmasd-explorer-project-validation/SKILL.md` and the Explorer
+Project Validation Workflow. Write the self-contained brief under
+`temp/handoffs/explorer_to_code_manager/`, naming one selected A/B/C treatment
+and the direct CPM action; keep identity, proposition, revision binding,
+conclusion, strongest alternative, requested consumer and sibling-direction
+exclusion explicit. CPM owns engineering and technical acceptance; Explorer
+owns scientific/advisory interpretation. The validation Skill and
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` own brief/reverse-result
+mechanics, direction-local context and named Pro triggers;
+External Pro remains final scientific-semantic acceptance when invoked.
 
 ## Scientific procedure
 

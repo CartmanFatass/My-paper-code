@@ -12,9 +12,5 @@ rotation_boundary=integrated_batch_completion
 next_boundary=role_reload_receipts
 ```
 
-This record contains only WDM workflow-control-plane continuity. It does not
-copy project operation, science, runtime or review state. Continuity is attached
-to the stable WDM role, not to a historical thread. At a batch boundary a
-successor may receive a compact brief naming the current workflow commit,
-accepted stable changes, any real unfinished item, the next user goal and the
-map/interface section to load. No task or thread is created automatically.
+This record contains only WDM workflow-control-plane identity and status. It
+does not copy project operation, science, runtime or review state.

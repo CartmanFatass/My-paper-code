@@ -245,16 +245,11 @@ and never substitutes for CPM acceptance.
 Manager provisions an isolated worktree and its ticket together through
 `scripts/hmasd_workspace_ticket.py provision`; the fixed parent is
 `C:/worktrees/HMASD`. Raw external `git worktree` and drive-alias commands are
-forbidden. Children never stage, commit or accept code. For triggered execution
-readiness, the verifier may run the registered script's read-only Git identity
-checks and write only its exact Git-private receipt.
-The script's `run --spec` command is the only executor of the six phase argv
-arrays and writes a candidate receipt inside the exercise root. After it returns
-`HMASD_EXECUTION_READINESS_PHASES_OK`, the verifier invokes `finalize --spec`
-once with a short explicit timeout and exact-command elevation. Finalization
-reruns no phase and writes only the final Git-private receipt. Code Project
-Manager never asks a verifier to pre-run, replay or manually inspect a readiness
-phase.
+forbidden. Children never stage, commit or accept code. When the existing
+execution-readiness trigger fires, CPM dispatches the registered Verifier and
+consumes its candidate-bound receipt; `.agents/roles/VERIFIER.md` and the
+`hmasd_execution_readiness.py` helper own phase execution, finalization and
+mechanical receipt details.
 
 After acceptance, push the code commit and return exactly:
 
@@ -286,73 +281,42 @@ requires full verification on the new commit. It does not use runtime
 preflight as an incremental code debugger.
 
 For deterministic inspection, check collection, result extraction, handoff
-preparation and ticket preparation, Code Project Manager delegates one exact
-mechanical assignment to the registered `hmasd-cpm-mechanical` child and reads
-only its terminal receipt/result. CPM remains the orchestrator, engineering and
+preparation and ticket preparation, CPM may delegate one exact natural-language
+assignment to `hmasd-cpm-mechanical` and reads only its terminal receipt/result.
+`.agents/roles/CPM_MECHANICAL_OPERATOR.md` and its registered dispatcher own
+mechanical field and recovery details; CPM remains the orchestrator, engineering and
 technical-judgment owner, exact-assignment author, repair/retry chooser, sole
 technical/mechanical acceptance owner and sole code/Git/canonical-state
-integrator. The mechanical child has no Git or acceptance authority. CPM never
-transcribes model or tool output into files, reconstructs child files with
-`apply_patch`, runs raw duplicate worktree status, or manually reconstructs
-tool state. After acceptance, CPM invokes the ticket
-`finalize-integrate` command directly; the child does not integrate or accept
-its result.
+integrator. The child never integrates or accepts.
 
-An unsuccessful phase is candidate evidence. A failure before `run` begins or
-during zero-compute finalization is an operational invocation failure. Code
-Project Manager preserves that distinction and never repairs source merely to
-compensate for proof-root freshness, outer timeout, sandbox or receipt-write
-errors.
+An unsuccessful phase remains candidate or operational evidence according to
+its owner contract. CPM preserves that distinction and chooses the next legal
+semantic action; it does not reconstruct a parallel mechanical state machine.
 
 After acceptance, CPM owns code-science audit transport, preflight, formal
 execution and successor routing. It uses registered code and experiment
 children for their assigned mechanical work and remains the sole project-state
 acceptance owner.
 
-## Mechanical execution and external review
+## Triggered operators and external review
 
-For an experiment, CPM supplies one complete run assignment and the Experiment
-Operator exclusively executes `train -> evaluate -> analyze`. The readiness
-Verifier exclusively executes the ordered six-phase readiness wrapper, and
-Agentify Transport exclusively owns formal/Explorer review transport. These
-boundaries are separate from the CPM mechanical child. For formal or
-Explorer-to-project reviews, CPM freezes each standalone question. CPM owns the
-technical/formal-review conversation intent for its questions.
-Before dispatch, CPM writes one self-contained natural-language context brief
-that states for each question whether it starts
-clean, continues an exact prior conversation URL, may run concurrently with
-named other questions, or must remain independent. CPM alone decides whether
-prior memory helps or contaminates the requested judgment and whether a
-returned conversation will be reused. This is semantic task meaning, not a
-`conversation_mode`, grouping field or other schema.
+CPM retains formal and Explorer-to-project review intent, question selection,
+acceptance and archival ownership. When a review is requested, CPM freezes the
+standalone questions and dispatches the registered
+`hmasd-agentify-transport` child through the
+`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` file contract, then reads the named result
+only after the child's terminal return. `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`
+and `.agents/skills/hmasd-agentify-transport/SKILL.md` own page, provider, wait,
+recovery and tab mechanics; CPM preserves conversation meaning and performs
+mechanical intake.
 
-CPM then writes one minimal ordered batch file retaining the existing
-`provider|context_path|question_paths` contract and chooses one exact
-`results_path`. The existing `context_path` anchor points to the local brief
-for transport realization; it adds no mandatory field, and transport does not
-include the local brief in provider payload. CPM dispatches the reusable registered
-`hmasd-agentify-transport` native child with a self-contained
-`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` naming `batch_path|results_path` and
-`fork_turns=none`, then continues unrelated work. The child alone owns
-page/model/send/wait/recovery mechanics and tab cleanup. It may use operational
-judgment to realize the frozen brief, but cannot infer same-direction grouping,
-scientific relationship, independence or future reuse. It stays silent while live, with no
-progress, commentary, collaboration, or repeated wait/poll handling, and
-returns exactly once through one terminal native final with `COMPLETE` or
-`ERROR`, carrying a conclusion followed by `AGENTIFY_REVIEW_BATCH_RESULT` fields
-`status|results_path|error`. The named result file retains its ordered raw
-response rows. CPM reads that file only after the terminal return, archives each
-raw response and returned conversation URL, and performs mechanical intake. A
-later brief names an exact archived URL when CPM chooses continuation; with no
-such statement the child must not guess from titles. A retry reuses the
-unchanged batch file and changes no CPM file. Page, model, send, wait,
-recovery and tab-cleanup details remain outside CPM context; this interface has no
-separate persistent task, task-id return field, cross-task result relay, or
-polling/progress loop.
-
-Before sending, CPM uses one model-authored checklist: the raw question contains no local filesystem
-locator, task history or unrelated corpus; and any reviewer-facing source
-locator is the public remote GitHub URL. This is not a new mechanical gate.
+For an authorized experiment, CPM supplies the complete assignment and grant
+binding; `.agents/roles/EXPERIMENT_OPERATOR.md` owns
+`train -> evaluate -> analyze` and its terminal receipt. For a triggered
+production-entry or artifact-lifecycle check, `.agents/roles/VERIFIER.md` owns
+the six readiness phases and receipt finalization. These lanes remain separate
+from the CPM Mechanical Operator, which is used only for deterministic
+inspection and ticket preparation.
 
 ## Failure containment and continuation
 

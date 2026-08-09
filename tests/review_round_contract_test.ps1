@@ -71,16 +71,31 @@ foreach ($term in @(
     'agentify_transport_terminal_status=COMPLETE|ERROR',
     'agentify_transport_wait_visibility=silent_until_terminal_native_final'
 )) {
+    Require-ContractTerm $operatorNormalized $term 'AGENTIFY_TRANSPORT_OPERATOR.md'
+}
+foreach ($term in @(
+    'agentify_transport_child=hmasd-agentify-transport',
+    'agentify_transport_child_parent=code_project_manager|independent_research_explorer',
+    'agentify_transport_test_parent=workflow_design_manager'
+)) {
     Require-ContractTerm $router $term 'AGENTS.md'
-    Require-ContractTerm $operator $term 'AGENTIFY_TRANSPORT_OPERATOR.md'
+}
+foreach ($term in @(
+    'agentify_transport_workspace=temp/sessions/agentify_transport_operator/',
+    'agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
+    'agentify_transport_assignment_locators=batch_path|results_path',
+    'agentify_transport_batch_locators=context_path|question_paths',
+    'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
+    'agentify_transport_result_locator=results_path'
+)) {
     Require-ContractTerm $workspaceContract $term 'SESSION_WORKSPACE_CONTRACT.md'
 }
 foreach ($term in @(
-    'agentify_transport_conversation_semantics_owner=requester',
-    'agentify_transport_conversation_identity_source=provider_native',
-    'agentify_transport_tab_lifecycle_owner=agentify_transport_child_for_task_created_tabs_only'
+    'requester-owned context brief is the semantic task input',
+    'verify its observed URL/ID before binding each send and answer to it',
+    'close only tabs created by this task'
 )) {
-    Require-ContractTerm $router $term 'AGENTS.md'
+    Require-ContractTerm $operatorNormalized $term 'AGENTIFY_TRANSPORT_OPERATOR.md'
 }
 
 foreach ($term in @(

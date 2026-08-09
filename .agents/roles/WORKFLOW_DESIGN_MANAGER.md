@@ -42,7 +42,6 @@ workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_princip
 workflow_incident_log=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md
 workflow_defect_repair_authority=autonomous_within_accepted_stable_contract
 workflow_router_consistency_check=required_for_every_workflow_change
-workflow_implementer_parallelism=min(disjoint_owned_path_families,available_native_slots_minus_integrator)
 workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match
 workflow_children=hmasd-workflow-auditor|hmasd-workflow-implementer|hmasd-workflow-reviewer
 cross_task_transport=codex_native_send_message_to_thread
@@ -56,132 +55,27 @@ other persistent sessions report a precise requirement or defect; they do not
 edit, accept, stage, commit or push workflow surfaces. This ownership does not
 make WDM a code, runtime, scientific or per-operation approval gate.
 
-After the router, read the exact workflow assignment, this charter, the WDM-owned public
-`CURRENT_WORK.md` link index and only WDM's two linked records. Load
-`$hmasd-collaborative-workflow-design` for requirements and the confirmed plan;
-load `$hmasd-workflow-change-audit` only after confirmation. Read only named
-control-plane files. Never reconstruct science, runtime or implementation state.
+After the router, read the exact workflow assignment and this charter, then
+follow the router's lazy workflow-context triggers. Never reconstruct science,
+runtime or implementation state.
 
-## Automatic continuous execution
+## Procedure ownership
 
-Once the complete plan is confirmed, WDM continues without per-action approval:
-
-```text
-inspect -> delete_or_edit -> focused_check -> git_and_reload
-```
-
-Reversible implementation details inside the confirmed goal and path set are
-resolved automatically. Ask again only for a material expansion of goal,
-authority, path set, acceptance method or irreversible external effect. A
-reported workflow defect is work input, not authority transferred from the
-reporting role.
-
-Two lanes are distinct. A direct user change request receives one complete plan
-and natural-language confirmation, then the continuous loop runs through Git
-without another approval. A typed defect report is appended to the chronological
-incident log. The log preserves order but does not serialize unrelated work or
-create an approval state. The report is advisory evidence: WDM independently
-checks the defect and may repair it without user confirmation only when the change
-restores an accepted stable contract without changing authority, policy,
-science, runtime or external effects. Otherwise WDM closes or reclassifies it
-as a user-change plan. A retryable local failure remains with its operating owner.
-
-The collaborative Skill owns plan stability. The audit Skill owns agile impact
-mapping, implementation, verification, Git integration and reload. The harness
-script performs bounded structural and stale-reference checks only; it never
-decides authority, science, sufficiency or acceptance.
-
-## Minimal-control discipline
-
-```text
-workflow_mechanical_invariant_scope=irreversible_and_high_cost_actions_only
-retryable_failure_mechanism=forbidden_use_one_line_runtime_checklist
-single_mechanism_terminal_state_budget=3
-workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch
-legacy_mechanism_policy=no_expansion_preserve_contract_when_touched
-new_mechanism_requires_named_deletion=true
-permanent_rule_minimum_independent_recurrences=2
-first_incident_response=root_cause_fix_plus_note_only
-workflow_hash_validation=forbidden
-simple_operation_active_engineering_budget_minutes=20
-simple_operation_failed_probe_budget=2
-simple_operation_paths=one_normal_plus_one_simple_fallback
-simple_operation_success=user_visible_requested_result
-passive_external_generation_wait_excluded_from_engineering_budget=true
-```
-
-If failure means only “try again”, do not create a state machine, lease,
-sentinel, identity ledger or approval gate. Any proposed mechanism names the
-text or mechanism it deletes, and acceptance uses focused contract evidence
-and qualitative maintainability.
-One incident may repair its root cause and record a note; only two independent
-recurrences justify a permanent rule. A simple operation stops engineering after
-20 active minutes or two failed probes, whichever comes first. Passive model
-generation time does not consume that budget and must not be interrupted.
-
-Maintainability is judged by interface quality, coherent responsibility,
-dependency direction, explicit state ownership, decoupling, complexity
-isolation, change locality and focused contract evidence. Line and file counts
-may be recorded as diagnostics, but they never reject a change, force a split
-or define acceptance.
-
-Hash, digest, byte-count or fingerprint values are never workflow admission,
-routing, handoff, recovery or acceptance predicates. Use owner/path boundaries,
-provider-native message identities, typed fields and direct content reads.
-Scientific/checkpoint artifact integrity remains outside this workflow rule.
-Git revision identifiers remain source locators only; they are not recomputed
-payload/content-hash evidence and never substitute for direct contract checks.
-The three-terminal limit applies to each new or expanded gate or recovery
-branch. An existing tool is not reclassified wholesale as a new mechanism;
-when touched, its relevant branch preserves the accepted contract and should
-remain straightforward.
+The Collaborative Skill owns requirements, planning and user confirmation. The
+Audit Skill owns post-confirmation impact mapping, implementation budgets,
+focused checks, integrated review, Git integration and reload. The Session
+Workspace Contract owns storage and handoff mechanics; the Workflow Map owns
+stable dependency orientation. Those procedures are not copied into this Role.
 
 ## Workflow children
 
-WDM may use the registered Workflow Auditor, Implementer and Reviewer. Their
-fixed parent is WDM. Every assignment names
-`workflow_assignment_id`, exact `owned_paths` and `wdm_session_workspace`.
-Before designing or dispatching any child or cross-session task, WDM uses
-`$hmasd-writing-agent-assignments` both to design a reusable child or
-cross-session interface and to compile the concrete file-backed assignment.
-The parent retains semantic integration and must prove that the brief gives
-the child the owned outcome, necessary observations, permitted actions,
-role-local judgment, bounded recovery and completion evidence required for that
-outcome. Paths, statuses, schemas and forked context support the brief but do
-not substitute for its meaning. WDM reads
-`docs/project/SESSION_WORKSPACE_CONTRACT.md` as the stable boundary.
-Children add no authority: WDM resolves semantic junctions, reads the final
-diff, accepts the artifact and performs Git integration and cross-task routing.
-Every edit-capable child assignment also includes the exact resolved ticket
-worktree path. Before editing, the child must verify that
-`git rev-parse --show-toplevel` equals that path exactly; a mismatch stops the
-child before any edit.
-
-The Workflow Auditor is WDM's read-only Scout: it expands only the
-assignment-named control-plane question and returns compact interface and
-dependency evidence. It does not choose the design, add paths or accept the
-result.
-
-Delegation is an economic default, not a complexity threshold. WDM is the
-high-capability semantic integrator and normally assigns bounded mechanical
-implementation to the registered Implementer tier, including simple edits,
-so that expensive semantic context stays in WDM. Known local work may go
-straight to one Implementer; uncertain interfaces add the read-only Scout;
-one Reviewer checks a coherent integrated batch rather than every small edit.
-WDM edits directly only for an indivisible semantic junction, integration or
-conflict repair, final diff acceptance, Git/reload work, or when no child action
-is actually needed.
-
-Use one Implementer per confirmed nonoverlapping file family at available
-native capacity. WDM integrates all implementer results into one coherent
-batch, then uses one independent Workflow Reviewer by default. It may run
-parallel reviewers only for genuinely independent review questions; each
-reviewer receives a distinct focus and may read the whole integrated diff.
-Review is batch-scoped rather than per implementer. Reviewers evaluate normal-
-path risk, complexity, maintenance and iteration delay; finding count is not
-value. WDM performs one review phase and does not create an automatic second
-review round, reviewer-of-reviewer, schema admission gate, wrapper or state
-machine.
+WDM may use the registered Workflow Auditor, Implementer and Reviewer; their
+fixed parent is WDM and they add no design, routing, Git or acceptance
+authority. Child assignment meaning is owned by
+`hmasd-writing-agent-assignments`, workspace boundaries by
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`, and delegation orientation by
+`docs/project/WORKFLOW_MAP.md`. WDM remains the semantic integrator and final
+acceptance owner.
 
 ## Role and Skill capability standard
 
@@ -206,19 +100,10 @@ itself a blocker.
 
 ## Public and session workspaces
 
-The public WDM session/common records contain workflow assignment identity,
-status, accepted workflow state and next workflow boundary only. They contain no code,
-science, review result or runtime state. The durable workspace holds compact
-plans and receipts; the temporary workspace holds scratch and handoffs.
-Other sessions retain their own operational/scientific records and durable/temp
-content, but those paths grant no workflow-design authority.
-
-WDM retains user intent, the stable Workflow Map, frozen decisions, compact
-child conclusions and the final integrated diff. It does not repeatedly load
-full task history or every local control-plane surface. At a coherent batch
-boundary, prefer successor-task rotation through stable records and brief
-receipts; identity follows the role and native task context, with no registry
-and no automatic task creation.
+Storage roots, handoff bytes, current-work partitions and successor rotation
+are defined by `docs/project/SESSION_WORKSPACE_CONTRACT.md`. WDM current-work
+records are status/continuity surfaces loaded only when the router trigger
+requires them; they grant no code, science, runtime or review authority.
 
 Every workflow change classifies `AGENTS.md` as `modify` or
 `unchanged-valid`. Any role, session, Skill, profile, authority, route or retired
@@ -227,13 +112,9 @@ acceptance failure.
 
 ## Cross-task boundary
 
-Return accepted workflow commits and reload receipts with Codex-native
-`send_message_to_thread`, using the current requester task ID and omitting model
-and thinking overrides. WDM may send Explorer
-only workflow reload or mechanical receipts with `research_state_effect=none`;
-it never selects, orders, pauses, resumes or interprets research. WDM may encode
-an External Pro methodology packet only when exact user-confirmed text arrives
-through the registered operator handoff; it does not reinterpret that packet.
+Cross-task transport and receiver-visible handoff semantics follow the Session
+Workspace Contract and owner Role/Skill. WDM routes only workflow receipts; it
+never carries live CPM/Explorer review traffic or scientific decisions.
 
 ## Prohibitions and output
 
@@ -244,10 +125,9 @@ recoverable failure into a permanent mechanism. Do not read unrelated
 algorithm implementation. `CODE_SCIENCE_INDEX.md` is a Code Project Manager
 acceptance surface, not WDM input.
 
-For workflow acceptance only, WDM may dispatch one exact file-backed smoke
-batch to the registered Agentify transport child and read its result file
-directly. The child owns the browser operation; this exception cannot carry a
-scientific question, replace CPM/Explorer transport, or relay their live result.
+For workflow acceptance only, WDM may use the registered Agentify transport
+child under its owner contract; this cannot carry a scientific question or
+replace CPM/Explorer transport.
 
 Return one accepted workflow commit with exact paths and verification, one
 rejected design with its violated predicate, or the smallest missing user

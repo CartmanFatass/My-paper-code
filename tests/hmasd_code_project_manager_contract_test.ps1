@@ -209,7 +209,6 @@ if ((Test-Path $oldPmPath) -or (Test-Path $oldOperatorPath) -or
 
 $routerRequired = @(
     'cross_task_transport=codex_native_send_message_to_thread',
-    'cross_task_model_and_thinking_overrides=omit',
     'code_project_manager_code_authority=exclusive',
     'code_project_manager_technical_acceptance_authority=exclusive',
     'code_project_manager_routine_implementation_agent=hmasd-implementer-terra',
@@ -221,19 +220,20 @@ $routerRequired = @(
     '.agents/roles/CODE_PROJECT_MANAGER.md',
     'agentify_transport_child=hmasd-agentify-transport',
     'agentify_transport_child_parent=code_project_manager|independent_research_explorer',
-    'agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
-    'agentify_transport_assignment_fields=batch_path|results_path',
-    'agentify_transport_skill=hmasd-agentify-transport',
-    'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
-    'agentify_transport_result_fields=status|results_path|error',
-    'agentify_transport_terminal_status=COMPLETE|ERROR',
-    'agentify_transport_wait_visibility=silent_until_terminal_native_final',
-    'agentify_transport_conversation_semantics_owner=requester',
-    'agentify_transport_conversation_identity_source=provider_native',
-    'agentify_transport_tab_lifecycle_owner=agentify_transport_child_for_task_created_tabs_only'
+    'workflow_change_request_route=workflow_design_manager',
+    'docs/project/SESSION_WORKSPACE_CONTRACT.md'
 )
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
+}
+foreach ($retiredRouterDetail in @(
+    'agentify_transport_assignment_fields=',
+    'agentify_transport_result_fields=',
+    'cpm_mechanical_result_fields=',
+    'explorer_mechanical_result_fields=')) {
+    if ($agents.Contains($retiredRouterDetail)) {
+        throw "AGENTS duplicates delegated transport/mechanical schema: $retiredRouterDetail"
+    }
 }
 foreach ($retired in @('cross_task_routing=', 'cross_task_routing_skill=', 'code_project_manager_session=')) {
     if ($agents.Contains($retired)) { throw "AGENTS retains retired fixed routing: $retired" }
@@ -264,16 +264,6 @@ $codeRequired = @(
     'protected_implementation_child=hmasd-implementer',
     'AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
     'AGENTIFY_REVIEW_BATCH_RESULT',
-    'provider|context_path|question_paths',
-    'batch_path|results_path',
-    'fork_turns=none',
-    'COMPLETE',
-    'ERROR',
-    'status|results_path|error',
-    'silent while live',
-    'returns exactly once',
-    'reads that file only after the terminal return',
-    'reuses the unchanged batch file',
     'experiment_child=hmasd-experiment-operator',
     'mechanical_child=hmasd-cpm-mechanical',
     'mechanical_assignment_authority=exclusive',
@@ -285,11 +275,6 @@ $codeRequired = @(
     'repair/retry chooser',
     'sole technical/mechanical acceptance owner',
     'sole code/Git/canonical-state integrator',
-    'transcribes model or tool output',
-    'reconstructs child files with',
-    'raw duplicate worktree status',
-    'manually reconstructs tool state',
-    '`finalize-integrate` command directly',
     'CODE_ACCEPTED',
     'CODE_SCIENCE_INDEX.md',
     'execution_readiness_owner=code_project_manager',
@@ -297,7 +282,6 @@ $codeRequired = @(
     'execution_readiness_receipt=required_when_triggered',
     'execution_readiness_phase_executor=wrapper_ordered_run_only',
     'execution_readiness_receipt_finalizer=wrapper_finalize_only',
-    'sum of the six phase timeouts plus 60 seconds',
     'only zero-compute `finalize` receives narrow elevation',
     'test_acceptance_basis=risk_and_claim_coverage',
     'test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof',
@@ -334,15 +318,16 @@ foreach ($required in $codeRequired) {
 }
 
 # CPM owns conversation meaning; the child realizes the frozen brief.
+$cpmConversationSurface = "$codePmNormalized $agileNormalized"
 foreach ($required in @(
-    'CPM owns the technical/formal-review conversation intent for its questions.',
-    'one self-contained natural-language context brief that states for each question',
-    'CPM alone decides whether prior memory helps or contaminates the requested judgment',
-    'cannot infer same-direction grouping, scientific relationship, independence or future reuse',
-    'archives each raw response and returned conversation URL',
-    'later brief names an exact archived URL when CPM chooses continuation'
+    'CPM owns the per-question conversation intent',
+    'context brief states clean start versus one exact continuation URL',
+    'prior memory helps or contaminates later reuse',
+    'transmitted question contains no local filesystem path, task history or unrelated corpus',
+    'reviewer-facing source locators use the public remote URL',
+    'preserves conversation meaning and performs mechanical intake'
 )) {
-    if (-not $codePmNormalized.Contains($required)) {
+    if (-not $cpmConversationSurface.Contains($required)) {
         throw "CPM conversation authority contract missing: $required"
     }
 }
@@ -364,31 +349,23 @@ foreach ($retired in @(
 }
 
 foreach ($required in @(
-    '## Agentify review transport boundary',
+    '## Triggered transport and mechanical lanes',
     'hmasd-agentify-transport',
+    '.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md',
+    '.agents/skills/hmasd-agentify-transport/SKILL.md',
     'AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
-    'COMPLETE',
-    'ERROR',
-    'status|results_path|error')) {
+    'CPM owns the per-question conversation intent')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill Agentify child contract missing: $required"
     }
 }
 foreach ($required in @(
-    '## CPM mechanical protocol',
+    '## Triggered transport and mechanical lanes',
     'hmasd-cpm-mechanical',
-    'deterministic inspection, check collection, result extraction, handoff preparation and ticket preparation',
-    'file-backed and compact',
-    'schema_version|status|assignment_id|task_class|attempt_id|result_path|observations|output_paths|log_paths|first_failure|retry_class|exit_code',
-    'working_directory',
-    'allowed_read_paths',
-    'allowed_write_paths',
-    'run --spec <json> --result <json>',
-    'performs no Git or acceptance',
-    'finalize-integrate',
-    'Experiment Operator remains exclusive',
-    'readiness Verifier remains exclusive',
-    'Agentify Transport remains separate')) {
+    '.agents/roles/CPM_MECHANICAL_OPERATOR.md',
+    'its dispatcher own the mechanical result fields',
+    'CPM remains the orchestrator, assignment author and sole technical/mechanical acceptance owner',
+    '.agents/roles/EXPERIMENT_OPERATOR.md')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill mechanical protocol missing: $required"
     }
@@ -805,17 +782,12 @@ foreach ($recordId in $cpmRecordIds) {
 }
 
 foreach ($required in @(
-    'Mechanical execution readiness',
+    '## Triggered execution-readiness lane',
     'focused tests alone are insufficient',
-    'interface_smoke -> bounded_exercise -> artifact_validation -> artifact_reload -> evaluate_entry -> analyze_entry',
-    'Calling a lower-level projection method directly is not a substitute',
-    'executes argv arrays without a shell',
-    'Git-private receipt',
-    'HMASD_EXECUTION_READINESS_PHASES_OK',
-    'finalize --spec',
-    'reruns no phase',
-    'ordinary candidate toolchain environment without elevation',
-    'runs no validation command')) {
+    'hmasd-verifier',
+    '.agents/roles/VERIFIER.md',
+    'hmasd_execution_readiness.py',
+    'consumes the typed receipt and alone accepts or repairs the candidate')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill missing execution-readiness rule: $required"
     }

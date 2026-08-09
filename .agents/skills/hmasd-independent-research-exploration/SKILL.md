@@ -42,31 +42,16 @@ assumptions and independence, exclusions, allowed local judgment and
 completion meaning. This is writing guidance, not a mandatory schema, file,
 validator or admission gate.
 
-## Mechanical literal-fact organization
+## Triggered mechanical fact organization
 
-Explorer uses one or two direct deterministic tool commands when sufficient,
-then an already-existing exact deterministic script when it truly covers the
-task. It delegates to the registered `hmasd-explorer-mechanical` child only
-when exact inputs and literal output fields are frozen, the heterogeneous work
-is materially larger, and context isolation reduces repeated Explorer burden;
-this route does not add a script. Follow the dedicated
-[`hmasd-explorer-mechanical` Skill](../hmasd-explorer-mechanical/SKILL.md) for
-its bounded mechanics. The parent assignment remains self-contained and names
-why the work is needed, exact inputs, requested extraction/comparison, literal
-fields to preserve, forbidden inference, completion evidence and missing or
-conflict behavior. The child returns one conclusion-first native response; no
-mandatory result schema/file or new Explorer workspace is introduced.
-
-Explorer retains dispatch economics and semantic sufficiency intake. This is a
-mechanical rather than scientific capability: it creates no scientific roster,
-barrier, peer comparison, evidence vote or campaign effect, and failure has
-`research_state_effect=none`. For CPM-accepted packets it may only present,
-rearrange or extract named accepted facts. It may report literal existence or
-inaccessibility for an exact assignment-named local file or evidence locator,
-but cannot decide locator validity, completeness, public accessibility or
-technical sufficiency; it never rereads raw runtime evidence or recomputes
-schema readability/readiness, receipts, activity counts, retry history or
-technical consistency.
+When direct deterministic commands and an existing exact script are
+insufficient for materially larger heterogeneous literal-fact work, trigger
+the registered `hmasd-explorer-mechanical` child with frozen inputs and literal
+output fields. `.agents/roles/EXPLORER_MECHANICAL_OPERATOR.md` and the dedicated
+[`hmasd-explorer-mechanical` Skill](../hmasd-explorer-mechanical/SKILL.md) own
+extraction, locator reporting and bounded recovery. Explorer retains dispatch
+economics and semantic sufficiency intake; this route is not scientific,
+creates no roster/barrier/campaign effect and has `research_state_effect=none`.
 
 ## Adaptive scientific question dispatch (not a fourth research mode)
 
@@ -137,21 +122,14 @@ dispatch a workflow implementer. Continue unrelated research when the defect is
 dependency-local. A WDM reload receipt has `research_state_effect=none` and
 cannot select, pause, resume or terminate research.
 
-For any direction-specific answer or Explorer-to-CPM handoff, apply the
-direction-local context binding in
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`: resolve one selected
-primary direction and load only its smallest set of canonical decision/source
-context, adding the smallest set of parent, child or cross-direction edges only
-when material. An explicitly multi-direction user question may name several
-directions; never preload or merge unrequested siblings or the whole portfolio.
-Use natural-language cues for the selected direction or named direction set,
-exact candidate proposition, stage, source/evidence revision boundary, frozen
-facts and uncertainty, strongest alternative, material relationships, explicit
-exclusion of sibling-direction generalization unless explicitly named, one
-requested action/direct consumer, completion evidence and return destination. A missing
-or contradictory identity, proposition or revision binding preserves the
-original artifact and asks exactly one concrete semantic clarification while
-unrelated work continues; do not guess, merge directions, rewrite the artifact
+For any direction-specific answer or Explorer-to-CPM handoff, trigger
+`.agents/skills/hmasd-explorer-project-validation/SKILL.md` and
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Resolve one selected
+primary direction, exact candidate proposition/revision, requested consumer and
+completion evidence while excluding unrequested siblings; the dedicated
+workflow owns direction-local context and brief/reverse mechanics. A missing or
+contradictory binding preserves the original artifact and asks one concrete
+clarification while unrelated research continues; never guess, merge, rewrite
 or create a `BLOCKED` state.
 
 ## Choose exactly one research mode
@@ -177,29 +155,15 @@ dispatch. Keep all useful parent and child directions. Stop only at recorded
 convergence, a resource boundary, an external-source expansion or work that
 requires code, compute or formal adoption.
 
-A direction review or bounded methodology audit inside the active
-user-authorized Explorer grant is external advisory input and needs no
-per-review user or WDM confirmation. Load
-`hmasd-independent-research-pro-review`, then Explorer freezes each exact
-assignment, review mode and standalone `RAW_QUESTION`. Write one minimal batch
-file containing provider and the ordered paths of all currently eligible frozen
-questions (`provider|question_paths`), choose one exact `results_path`, and
-dispatch one self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the
-registered `hmasd-agentify-transport` child with `fork_turns=none`, naming only
-`batch_path|results_path`. Continue unrelated research while it runs. The child
-is silent while live and returns exactly once through its native final response
-with `AGENTIFY_REVIEW_BATCH_RESULT` fields `status|results_path|error`, using
-terminal status `COMPLETE|ERROR`. Read the named result only after that terminal
-final return; Explorer performs no polling, progress handling or parent-task
-result relay. Archive each raw response under its review item and reconcile it;
-an item error affects only that review. Pro/Gemini labels and all local metadata
-stay outside the transmitted question. Page, adapter, wait and recovery details
-remain inside the transport child.
-
-Before sending, check once that the raw question contains no local filesystem
-path, task history or unrelated corpus. Use a public remote GitHub URL when the
-reviewer needs a source locator. Do not turn this checklist into a script,
-fingerprint or approval gate.
+An in-grant direction review or bounded methodology audit is an explicit
+advisory trigger. Load `hmasd-independent-research-pro-review`, freeze the
+standalone question and dispatch it through the registered
+`hmasd-agentify-transport` child using the existing file-only assignment. The
+Agentify Transport Role and Skill own batch, page/provider, wait, recovery and
+tab mechanics; Explorer reads the named terminal result, archives the raw
+response and reconciles it. A review error affects only that item and does not
+change unrelated research. Keep local labels/metadata out of the transmitted
+question and use public remote source locators.
 
 Use `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW` first. Preserve its exact packet and
 explicitly apply, reject or park every correction in a new advisory version.
@@ -244,116 +208,34 @@ Never substitute an Innovator for source absorption, a Principles Analyst for
 literature fidelity, or a Critic for constructive RL reasoning. A broad request
 starts in algorithm inspiration rather than candidate validation.
 
-## Use MyLib evidence correctly
+## Triggered MyLib evidence
 
-Read live `metadata/integrity.json` first; never hard-code corpus counts or
-missing IDs. Require its `metadata_v2.status=validated`, then use the exact
-registered sequence: `llm-index/catalog.v2.jsonl` for lightweight recall,
-`metadata/v2/papers.v2.jsonl` for the selected records, and
-`metadata/v2/schema.v2.json` plus `quality-report.v2.json` for interpretation.
-For every candidate inspect `quality.grade`, `quality.warnings` and
-`provenance.field_evidence` before opening content. Never use the retired
-`catalog.jsonl` or a Metadata v2 staging file from `papers/temp`.
+When a source question needs MyLib, follow
+[`references/mylib.md`](references/mylib.md) and run its registered probe.
+That reference owns integrity status, metadata/PDF locator fidelity, retired
+source exclusions and the `search|locate|validate-pdf|smoke` subcommands. The
+Explorer route remains read-only (`--output` is forbidden); durable advisory
+evidence is written only under `local_research/` with `apply_patch`.
 
-Metadata v2 algorithm, setting, benchmark, contribution and related research
-facets are Luna analyses grounded in the title or abstract. They improve recall
-but do not verify full-text details. Empty arrays and `unspecified` remain
-unknown; never fill them from domain knowledge. Method details, equations,
-experimental values and limitations must return to the candidate JSON by page
-and element, with PDF verification when required.
+## Campaign packet and gate references
 
-`structured JSON is the formal LLM content layer`. Record its absolute path and
-page/element/bbox locator for claims derived from it. `PDF is required for original verification, formula/figure/table semantics, or missing JSON`.
-Use assets only with their JSON coordinates. `legacy Markdown is excluded`:
-never search or cite `papers/temp/acquisition/legacy-markdown-*`.
+For an algorithm-inspiration campaign, load
+[`references/parallel-research-workflow.md`](references/parallel-research-workflow.md)
+before dispatch. That reference owns versioned corpus recall, source/absorption/
+innovation/principles/adversarial packet identities, exact rosters and ordered
+barriers, the version-3 portfolio record and its read-only gate checker. It also
+defines opportunity bindings, convergence/resource outcomes and restart
+continuity. Explorer remains the portfolio integrator: source fact and child
+inference stay distinct, every useful direction is retained or explicitly
+parked, and the gate never decides scientific relevance or convergence.
+The deterministic checker remains
+`.agents/skills/hmasd-independent-research-exploration/scripts/research_portfolio_gate.py`
+with `check --record <record> --phase <phase>`; load it only for a canonical
+campaign boundary.
 
-For a record whose structured JSON is missing, the exact official abstract and
-its `evidence_url` may guide recall only when the full metadata marks it
-`abstract_only`. Any method-detail claim still requires the original PDF.
-
-The probe performs mechanical integrity, catalog, JSON and PDF checks. In this
-Explorer route it is invoked without `--output` and returns only stdout; the
-shell never writes a receipt:
-
-```powershell
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
-  .agents/skills/hmasd-independent-research-exploration/scripts/mylib_research_probe.py `
-  --mylib-root "C:/Projects/Inst-sci/papers/MyLib" `
-  --local-research-root "./local_research" status
-```
-
-Use `search`, `locate`, `validate-pdf` and `smoke` subcommands as routed in the
-reference. `--output` is forbidden in this route; durable advisory output is
-written only by the Explorer through `apply_patch`.
-
-## Require mode-specific campaign packets
-
-In canonical campaign work, every Scout returns one `SOURCE_RESULT_PACKET` with
-exact assignment and source identities, evidence locators, author claims,
-experimental support, mechanism primitives, learning signal, information and
-temporal structure, action/policy-space effect, failure boundaries, transferable
-results, non-transferable assumptions, possible HMASD connections and
-cross-paper questions. Source fact and Scout inference remain distinct.
-
-Every canonical campaign Innovator returns one `ALGORITHM_INSPIRATION_PACKET` with exact
-source-result and parent identities, opportunity kind, target problem,
-transferable primitive, transformation, mechanism, learning driver, effective
-state/observation/action change, information and credit flow, temporal and
-multi-agent assumptions, predicted effect, simplest alternative,
-cross-direction connections, `delete|retain|add` ledger, failure boundaries,
-validation needs and unresolved items.
-
-Every selected canonical campaign Principles Analyst returns one
-`RL_PRINCIPLE_ANALYSIS_PACKET`
-with candidate and source identities, RL problem formulation, effective action
-space, exploration and exploitation drivers, information and credit flow,
-temporal process, multi-agent strategic effect, statistical interpretation,
-simple explanation, constructive refinements, cross-candidate connections,
-validation requirements and unresolved principle questions. A VAE or
-information-bottleneck proposal also binds its random variables, objective,
-preserved/removed information, behavioral role, leakage and posterior-collapse
-risks.
-
-Every campaign Critic assignment names the terminal principles packet it
-follows and returns one `CRITIC_ASSESSMENT_PACKET` with alternative
-explanations, empirical risks, actionable corrections, smallest discriminator
-and disposition. Inspiration criticism does not require a formal proof or
-counterexample. Candidate validation may use the stronger methodology packet.
-
-Reject a canonical campaign packet that substitutes index excerpts for content
-evidence, omits an assigned identity, reads legacy Markdown, expands its source
-or opportunity, claims project authority or collapses several retained
-directions into an unassigned unique winner.
-
-## Gate the campaign mechanically
-
-Keep a version-3 JSON record under `local_research/` and check it with:
-
-```powershell
-C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
-  .agents/skills/hmasd-independent-research-exploration/scripts/research_portfolio_gate.py `
-  check --record "./local_research/<record>.json" --phase <intake|absorption|cycle|convergence>
-```
-
-The checker validates mode, authorized source boundary, corpus manifest and
-deltas, exact work rosters, source ownership, terminal packet coverage, ordered
-absorption/innovation/principles/adversarial/portfolio barriers, parent and
-subdirection identities, opportunity bindings, resource-bound reporting and
-recorded convergence predicates. It emits JSON to stdout and never writes.
-
-An opportunity uses exactly one kind:
-`new_mechanism|transfer|combination|important_correction|subdirection_split|cross_direction_inspiration`.
-It binds sources or parents, a material delta, expected portfolio effect,
-required role and completion condition. A combination has at least two parents;
-a transfer has source and target contexts; a split has a parent plus a distinct
-assumption, learning driver or prediction. All independent planned assignments
-may use available native capacity; the gate imposes no first-wave task count.
-
-The checker validates the convergence record but never decides relevance,
-novelty, correctness, importance or actual scientific convergence. Resource
-exhaustion is `PARTIAL_CAMPAIGN_RESOURCE_BOUND`, not `CONVERGED`.
-Adaptive scientific questions are not portfolio-gate modes or records and do
-not enter this checker.
+Candidate validation uses the methodology reference only for its conclusion-
+bearing trigger; adaptive scientific questions are consultations, not campaign
+records or gate modes.
 
 ## Synthesize without promotion
 
@@ -364,52 +246,21 @@ corrections and reactivation conditions. Generate a
 `NEXT_CYCLE_OPPORTUNITY_MAP` before claiming convergence.
 
 The final advisory report includes the campaign direction, corpus coverage,
-source-result matrix, absorption brief, several retained or parked directions,
-mechanism/transfer/combination/split graph, principle analyses, adversarial
+source-result matrix, retained or parked directions, mechanism and principle
 findings, validation-ready candidates, residual gaps, resource disposition and
-convergence basis. The Explorer contacts External Pro only through the
-registered `hmasd-agentify-transport` child procedure above; it cannot change CDC state, authorize compute,
-dispatch implementation or advance the formal workflow.
+convergence basis. External Pro contact remains an explicit review trigger
+through the registered `hmasd-agentify-transport` child; Explorer cannot change
+CDC state, authorize compute, dispatch implementation or advance the formal
+workflow.
 
-## Project-validation handoff (advisory only)
+## Triggered project-validation handoff
 
-### Scientific-only intake after technical acceptance
-
-Use the single intake contract at
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer consumes the
-CPM-accepted mechanical packet, records its one scientific decision, and does
-not reproduce technical validation or scientific reasoning across derived
-views.
-
-When one or more mature candidates are ready for project intake, load
-`hmasd-explorer-project-validation`. Write self-contained semantic briefs under
-`temp/handoffs/explorer_to_code_manager/`; an optional manifest lists
-their public paths in the intended order. Each brief carries one candidate, but
-its format is not an admission gate and its order is not queue state or ranking.
-The brief names the selected treatment defined by the stable validation workflow
-and gives one clear instruction naming implementation, instance binding,
-experiment, pause, abandon or exact review as applicable. That instruction
-authorizes CPM to execute the named treatment without separate permission fields.
-If an object is missing, the brief states what is known and Explorer answers any
-scientific choice CPM cannot determine; CPM owns constructing or binding the
-engineering object. Missing objects are collaboration topics, not task states.
-
-CPM reads the shared temporary brief, applies engineering judgment and may perform
-bounded safe read-only reconnaissance. It returns an understandable summary
-and exact evidence through its reverse temporary directory, including the
-per-run fixed revision/configuration/seeds/budget, real activity counts and every
-recorded between-run adjustment. After CPM technical
-acceptance and push, ordinary B may continue as advisory iteration without Pro.
-Only for the named C/direction-change/material-ambiguity/final-alignment/
-conclusion or explicit-user-request trigger does Explorer freeze one `CODE_SCIENCE_ALIGNMENT_AUDIT`
-using the returned exact commit and public GitHub locators, dispatch it through
-the registered `hmasd-agentify-transport` child with the same file-only
-assignment, and archive and intake the answer only after the child's terminal
-native final return. External Pro
-owns final scientific-semantic acceptance when invoked; Explorer does not
-substitute its own judgment.
-Explorer does not ask
-CPM to read `local_research/` and does not reinterpret prior mechanical BLOCKED
-receipts as candidate evidence. The explicit instruction authorizes CPM to
-execute the named treatment; External Pro remains the final scientific-semantic
-acceptance owner.
+When a mature candidate is ready for project intake, load the single
+`.agents/skills/hmasd-explorer-project-validation/SKILL.md` and
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Write one
+self-contained semantic brief under `temp/handoffs/explorer_to_code_manager/`
+with the selected A/B/C treatment and direct CPM action. The dedicated workflow
+owns brief/reverse-result mechanics, direction-local context and the named Pro
+triggers. Explorer records one scientific decision after CPM technical
+acceptance; CPM remains the engineering/runtime acceptance owner, and External
+Pro owns final scientific-semantic acceptance when invoked.

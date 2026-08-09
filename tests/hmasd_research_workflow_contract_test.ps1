@@ -159,11 +159,14 @@ if (-not (Test-Path -LiteralPath $agentifyTransportSkillPath -PathType Leaf)) {
 $agentifyTransportSkill = Get-Content -Raw -LiteralPath $agentifyTransportSkillPath
 $agentifyTransportSkillNormalized = $agentifyTransportSkill -replace '\s+', ' '
 
-# Requester roles own conversation meaning; transport realizes that brief and
-# keeps only operational page/tab judgment.
+# Requester roles/Skills own conversation meaning; transport realizes that brief
+# and keeps only operational page/tab judgment.
 foreach ($entry in @(
-    @($codePmRoleNormalized, 'CPM owns the technical/formal-review conversation intent for its questions.'),
-    @($independentResearchRoleNormalized, 'Explorer owns the scientific/advisory-review conversation intent for its questions.'),
+    @($agileNormalized, 'CPM owns the per-question conversation intent.'),
+    @($agileNormalized, 'clean start versus one exact continuation URL'),
+    @($agileNormalized, 'permitted concurrency versus required independence'),
+    @($agileNormalized, 'public remote URL'),
+    @($codePmRoleNormalized, 'CPM preserves conversation meaning and performs mechanical intake.'),
     @($independentReviewSkillNormalized, 'one self-contained natural-language context brief that states for each question'),
     @($independentReviewSkillNormalized, 'Explorer alone decides whether prior memory helps or contaminates the requested judgment'),
     @($agentifyTransportSkillNormalized, 'Follow those requested relationships; do not infer scientific direction, review independence, contamination risk, future reuse or grouping'),
@@ -297,16 +300,16 @@ foreach ($entry in @(
     @($independentResearchRole, 'agentify_transport_terminal_status=COMPLETE|ERROR'),
     @($independentResearchRole, 'agentify_transport_wait_visibility=silent_until_terminal_native_final'),
     @($independentResearchRole, 'independent_pro_review_transport_execution=registered_agentify_transport_child'),
-    @($independentResearchSkillNormalized, 'provider|question_paths'),
+    @($independentReviewSkillNormalized, 'provider|context_path|question_paths'),
     @($independentResearchSkillNormalized, 'registered `hmasd-agentify-transport` child'),
-    @($independentResearchSkillNormalized, 'fork_turns=none'),
-    @($independentResearchSkillNormalized, 'AGENTIFY_REVIEW_BATCH_ASSIGNMENT'),
-    @($independentResearchSkillNormalized, 'batch_path|results_path'),
-    @($independentResearchSkillNormalized, 'silent while live'),
-    @($independentResearchSkillNormalized, 'exactly once through its native final response'),
-    @($independentResearchSkillNormalized, 'status|results_path|error'),
-    @($independentResearchSkillNormalized, 'terminal status `COMPLETE|ERROR`'),
-    @($independentResearchSkillNormalized, 'no polling, progress handling or parent-task result relay'),
+    @($independentReviewSkillNormalized, 'fork_turns=none'),
+    @($independentReviewSkillNormalized, 'AGENTIFY_REVIEW_BATCH_ASSIGNMENT'),
+    @($independentReviewSkillNormalized, 'batch_path|results_path'),
+    @($independentReviewSkillNormalized, 'silent while live'),
+    @($independentReviewSkillNormalized, 'exactly once through its native final response'),
+    @($independentReviewSkillNormalized, 'status|results_path|error'),
+    @($independentReviewSkillNormalized, 'terminal status `COMPLETE|ERROR`'),
+    @($independentReviewSkillNormalized, 'no polling, progress handling or parent-task result relay'),
     @($independentReviewSkillNormalized, 'registered `hmasd-agentify-transport` child'),
     @($independentReviewSkillNormalized, 'AGENTIFY_REVIEW_BATCH_ASSIGNMENT'),
     @($independentReviewSkillNormalized, 'batch_path|results_path'),
@@ -368,8 +371,6 @@ $explorerMechanicalIntegrated = ($null -ne $explorerMechanicalProfile) -and
     $independentResearchRole.Contains('hmasd-explorer-mechanical') -and
     $independentResearchSkill.Contains('hmasd-explorer-mechanical') -and
     $parallelResearch.Contains('hmasd-explorer-mechanical') -and
-    $sessionWorkspaceContract.Contains('hmasd-explorer-mechanical') -and
-    $workflowMap.Contains('hmasd-explorer-mechanical') -and
     $explorerValidationContract.Contains('hmasd-explorer-mechanical')
 if (-not $explorerMechanicalIntegrated) {
     throw 'Explorer Mechanical integration is incomplete'
@@ -385,7 +386,7 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'explorer_mechanical_task=literal_fact_organization_only',
-    'explorer_mechanical_write_scope=none',
+    'explorer_mechanical_write_authority=none',
     'explorer_mechanical_scientific_authority=none',
     'explorer_mechanical_barrier=none',
     'research_state_effect=none')) {
@@ -452,11 +453,8 @@ foreach ($required in @(
     'project_write_scope=current_checkout_plus_verified_ticket_worktree',
     'external_workspace_access=read_only',
     'cross_task_transport=codex_native_send_message_to_thread',
-    'cross_task_model_and_thinking_overrides=omit',
     'same_file_concurrent_writes=forbidden',
-    'agentify_transport_conversation_semantics_owner=requester',
-    'agentify_transport_conversation_identity_source=provider_native',
-    'agentify_transport_tab_lifecycle_owner=agentify_transport_child_for_task_created_tabs_only')) {
+    '.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($retired in @(
@@ -612,14 +610,14 @@ foreach ($required in @(
         throw "Independent Research Explorer role missing: $required"
     }
 }
-$independentResearchProcedure = "$independentResearchSkill $parallelResearch"
+$independentResearchProcedure = "$independentResearchSkill $parallelResearch $independentResearchMyLib $openInspiration $researchMethodology"
+$independentResearchProcedureNormalized = $independentResearchProcedure -replace '\s+', ' '
 foreach ($required in @(
     'SOURCE_ABSORPTION_BRIEF',
     'RL_PRINCIPLE_ANALYSIS_PACKET',
     'new_mechanism',
     'subdirection_split',
-    'cross_direction_inspiration',
-    'PARTIAL_CAMPAIGN_RESOURCE_BOUND')) {
+    'cross_direction_inspiration')) {
     if (-not $independentResearchProcedure.Contains($required)) {
         throw "Independent Research Explorer procedure missing: $required"
     }
@@ -716,14 +714,14 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review_or_explicit_user_request',
-    'ordinary B may continue as advisory iteration without Pro')) {
+    'without a Pro review on every iteration')) {
     if (-not ($independentResearchRole.Contains($required) -or $independentResearchSkillNormalized.Contains($required))) {
         throw "Existing External Pro trigger boundary missing: $required"
     }
 }
 foreach ($required in @(
-    'This capability adds no dispatcher, queue, registry, monitor, fixed panel or',
-    'Canonical research campaigns retain their exact ordered phase rosters and barriers.')) {
+    'not a state machine, queue or admission gate',
+    'No timer, no periodic audit, no freshness checker and no registry drives')) {
     if (-not $workflowMapNormalized.Contains($required)) {
         throw "Workflow Map adaptive boundary missing: $required"
     }
@@ -739,7 +737,7 @@ foreach ($forbidden in @(
 foreach ($required in @(
     'Cross-task messages arrive through Codex-native `send_message_to_thread` with no model or thinking override',
     'Explorer may make autonomous transitions inside that exact authorization.',
-    'WDM may send Explorer only workflow reload or mechanical receipts with `research_state_effect=none`')) {
+    'Workflow Design Manager and Code Project Manager messages cannot initiate those transitions.')) {
     $allAuthoritySurfaces = "$workflowDesignManagerRoleNormalized $codePmRoleNormalized $($independentResearchRole -replace '\s+', ' ')"
     if (-not $allAuthoritySurfaces.Contains($required)) {
         throw "Independent-research role boundary missing: $required"
@@ -810,30 +808,13 @@ foreach ($authority in @(
     }
 }
 foreach ($required in @(
-    'docs/project/ALGORITHM_PRINCIPLES.md sections 1 and 3',
-    'metadata/integrity.json',
-    'structured JSON is the formal LLM content layer',
-    'PDF is required for original verification, formula/figure/table semantics, or missing JSON',
-    'legacy Markdown is excluded',
-    'SOURCE_RESULT_PACKET',
-    'ALGORITHM_INSPIRATION_PACKET',
-    'RL_PRINCIPLE_ANALYSIS_PACKET',
-    'CRITIC_ASSESSMENT_PACKET',
-    'evidence review',
-    'algorithm inspiration campaign',
-    'candidate validation',
-    'NEXT_CYCLE_OPPORTUNITY_MAP',
-    'delete|retain|add',
-    '`--output` is forbidden in this route',
-    'new_mechanism',
-    'transfer',
-    'combination',
-    'important_correction',
-    'subdirection_split',
-    'cross_direction_inspiration',
-    'available native capacity',
-    'PARTIAL_CAMPAIGN_RESOURCE_BOUND',
+    'docs/project/ALGORITHM_PRINCIPLES.md',
+    'references/mylib.md',
+    'references/parallel-research-workflow.md',
+    'hmasd-independent-research-pro-review',
+    'hmasd-explorer-project-validation',
     'local_research',
+    'Explorer route remains read-only (`--output` is forbidden)',
     'fork_turns="none"',
     'self-contained natural-language',
     'Parent conversation history is background only',
@@ -841,7 +822,7 @@ foreach ($required in @(
     'allowed local judgment',
     'completion meaning',
     'not a mandatory schema, file, validator or admission gate')) {
-    if (-not $independentResearchSkillNormalized.Contains($required)) {
+    if (-not $independentResearchProcedureNormalized.Contains($required)) {
         throw "Independent research Skill missing: $required"
     }
 }
@@ -876,8 +857,8 @@ foreach ($entry in @(
     }
 }
 foreach ($entry in @(
-    @($independentResearchSkillNormalized, 'ordinary B may continue as advisory iteration without Pro'),
-    @($independentResearchSkillNormalized, 'Only for the named C/direction-change/material-ambiguity/final-alignment/ conclusion or explicit-user-request trigger'),
+    @($independentResearchSkillNormalized, 'it is not a prerequisite for ordinary B iteration'),
+    @($independentResearchSkillNormalized, 'An in-grant direction review or bounded methodology audit is an explicit advisory trigger.'),
     @($independentResearchSkillNormalized, 'External Pro owns final scientific-semantic acceptance when invoked'))) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Explorer proportional Pro trigger missing: $($entry[1])"
@@ -1122,7 +1103,9 @@ foreach ($surface in @($agents, $codePmRole, $workflowDesignManagerRole, $indepe
 foreach ($required in @(
     'scientific_authority=none',
     'formal_compute_authority=user_only',
-    'Page, model, send, wait, recovery and tab-cleanup details remain outside CPM context')) {
+    '.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md',
+    '.agents/skills/hmasd-agentify-transport/SKILL.md',
+    'CPM preserves conversation meaning and performs mechanical intake.')) {
     if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
 }
 foreach ($required in @(
@@ -1411,10 +1394,7 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'Workflow Design Manager is the sole workflow design, modification, acceptance',
-    'WDM retains authority, semantic junctions, conflict resolution, final diff inspection, acceptance, Git and routing',
-    'workflow_child_parent=workflow_design_manager',
-    'workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace',
-    'workflow_child_acceptance_authority=none',
+    'This Skill grants no science, code, code acceptance, runtime or project-state authority.',
     'workflow_mechanical_invariant_scope=irreversible_and_high_cost_actions_only',
     'workflow_retryable_failure_mechanism=forbidden_use_one_line_runtime_checklist',
     'workflow_new_mechanism_requires_named_deletion=true',
@@ -1428,32 +1408,31 @@ foreach ($required in @(
     'simple_operation_paths=one_normal_plus_one_simple_fallback',
     'simple_operation_success=user_visible_requested_result',
     'passive_external_generation_wait_excluded_from_engineering_budget=true',
-    'one Workflow Reviewer by default',
+    'review the integrated batch once by default',
     'parallel reviewers only for genuinely',
     'Their advice cannot create a second pass.',
     'the log is evidence',
-    'exactly one existing role charter',
-    'Every profile is registered',
-    'fresh-task profile smoke',
+    'keep authority/capability in the role',
+    'model/sandbox plus a role pointer in the profile',
+    'Run with the registered interpreter:',
     'check_hmasd_agent_harness.py')) {
     if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 foreach ($required in @(
-    'workflow_delegation_economics=cheaper_registered_children_by_default',
-    'workflow_direct_edit_boundary=indivisible_semantic_junctions|integration_conflict_repair|final_acceptance_git_reload|no_child_action_needed',
-    'workflow_known_local_work=direct_single_implementer',
-    'workflow_missing_interface_facts=workflow_auditor_before_freeze',
-    'workflow_nonoverlapping_families=one_implementer_per_family',
-    'workflow_simple_mechanical_edit=single_implementer_without_scout_or_per_edit_reviewer',
-    'workflow_delegation_shape=adaptive_composition_not_fixed_state_machine',
-    'workflow_context_model=compact_task_model_plus_docs/project/WORKFLOW_MAP.md',
-    'workflow_context_loading=compact_child_conclusions_and_final_diff',
-    'workflow_context_expansion=concrete_interface_or_authority_dependency_only',
-    'workflow_successor_continuity=fresh_wdm_task_after_coherent_batch',
-    'workflow_successor_brief=short_reload_receipt_without_task_creation_registry_or_approval_state',
-    'workflow_map_owner=workflow_design_manager',
-    'workflow_map_maintenance=stable_role_interface_dependency_or_context_boundary_change_same_commit')) {
-    if (-not $workflowAuditNormalized.Contains($required)) {
+    'Delegation is judgment-guided:',
+    'WDM retains design junctions, authority choices, integration and acceptance',
+    'bounded slices may use registered children',
+    'A Reviewer or Auditor reports a conflict',
+    'one frozen non-overlapping workflow change slice',
+    'Detailed procedures do',
+    'WDM and each child start with the exact assignment and Role',
+    'expand only to the owner surface named by the active interface or status dependency',
+    'Role-based successor continuity',
+    'Successor brief storage and reload semantics live in',
+    'Owner roles and stable outputs',
+    'Maintenance is event-triggered only')) {
+    $workflowDelegationSurface = "$workflowAuditNormalized $workflowMapNormalized $workflowDesignManagerRoleNormalized"
+    if (-not (($workflowDelegationSurface -replace '\s+', ' ').Contains($required))) {
         throw "Workflow delegation/context contract missing: $required"
     }
 }
@@ -1465,7 +1444,7 @@ foreach ($required in @(
     'owner_role=workflow_design_manager',
     'Owner roles and stable outputs',
     'Dependency direction',
-    'Minimum context loading',
+    'Context loading',
     'Event-triggered maintenance',
     'no timer',
     'no freshness checker',
@@ -1475,12 +1454,14 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'shared_workflow_surface_owner=workflow_design_manager',
-    'shared_workflow_design_authority=exclusive',
-    'shared_workflow_acceptance_authority=exclusive',
-    'shared_workflow_git_authority=exclusive',
+    'document_kind=session_workspace_contract',
+    'workflow_child_parent=workflow_design_manager',
     'docs/session-workspaces/<role_id>/',
     'temp/sessions/<role_id>/',
+    'workflow_assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace',
+    'workflow_successor_rotation=integrated_batch_completion',
+    'workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
+    'workflow_thread_registry=forbidden',
     'docs/project/current-work/common/<record-id>.md',
     'docs/project/current-work/sessions/<role_id>.md',
     'same_file_concurrent_writes=forbidden',
@@ -1489,7 +1470,6 @@ foreach ($required in @(
     'workspace_boundary_guard=fail_closed_for_recognized_pretooluse_cases',
     'authoritative_write_boundary=tool_os_sandbox|verified_ticket_identity|git_visible_checks',
     'workspace_ticket_retirement=registered_clean_detached_worktree_only',
-    'Retirement never uses force or discards work',
     'Formats and suggested sections aid understanding but never become admission gates',
     'It is never staged, committed or pushed')) {
     if (-not $sessionWorkspaceContractNormalized.Contains($required)) { throw "Session workspace contract missing: $required" }
@@ -1502,10 +1482,10 @@ foreach ($required in @(
     if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 foreach ($required in @(
-    'workflow_execution_plan=bounded_reconnaissance_then_frozen_execution_plan',
-    'workflow_formal_plan_threshold=more_than_few_steps_or_material_uncertainty',
-    'workflow_plan_invalidated_action=stop_affected_branch|update_from_evidence|resume',
-    'workflow_plan_first_user_confirmation_effect=none_inside_active_grant')) {
+    'workflow_decision_question_condition=changes_named_plan_field',
+    'workflow_plan_confirmation=required_before_mutation',
+    'workflow_read_only_plan_confirmation=not_required',
+    'workflow_material_plan_drift=reconfirmation_required')) {
     if (-not $workflowCollaborationNormalized.Contains($required)) { throw "Workflow collaboration Skill missing plan-first execution rule: $required" }
 }
 foreach ($required in @(
@@ -1528,17 +1508,22 @@ foreach ($required in @(
     if (-not $workflowCollaborationNormalized.Contains($required)) { throw "Workflow collaboration Skill missing: $required" }
 }
 foreach ($required in @(
-    'workflow_context_model=compact_task_model_plus_docs/project/WORKFLOW_MAP.md',
-    'workflow_context_loading=compact_child_conclusions_and_final_diff',
-    'workflow_context_expansion=concrete_interface_or_authority_dependency_only',
-    'workflow_delegation_economics=cheaper_registered_children_by_default',
-    'workflow_delegation_shape=adaptive_composition_not_fixed_state_machine',
-    'workflow_successor_continuity=fresh_wdm_task_after_coherent_batch',
-    'workflow_successor_brief=short_reload_receipt_without_task_creation_registry_or_approval_state',
-    'workflow_map_owner=workflow_design_manager',
-    'workflow_map_maintenance=stable_role_interface_dependency_or_context_boundary_change_same_commit')) {
-    if (-not $workflowCollaborationNormalized.Contains($required)) {
-        throw "Workflow collaboration context/delegation contract missing: $required"
+    '`AGENTS.md` owns the lazy trigger table',
+    'expand only to the owner surface named by the active interface or status dependency',
+    'Delegation is judgment-guided',
+    'there is no mandatory pipeline, queue or context-cost gate',
+    'role ownership or authority, a public interface or dependency direction',
+    'successor-continuity contract')) {
+    if (-not $workflowMapNormalized.Contains($required)) {
+        throw "Workflow map missing lazy context/delegation orientation: $required"
+    }
+}
+foreach ($required in @(
+    'workflow_successor_rotation=integrated_batch_completion',
+    'workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
+    'workflow_thread_registry=forbidden')) {
+    if (-not $sessionWorkspaceContractNormalized.Contains($required)) {
+        throw "Session workspace contract missing successor boundary: $required"
     }
 }
 if (-not $workflowCollaborationUi.Contains('allow_implicit_invocation: false')) {
