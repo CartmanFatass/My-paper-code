@@ -16,6 +16,17 @@ and must serialize or be re-sliced; disjoint direction paths remain
 parallel-first. This is mutation-scope isolation, not science scheduling, a
 queue or a new schema.
 
+## Direct-user-frozen twelve-direction portfolio contract
+
+The portfolio Explorer owns the scientific target of exactly 12 direction
+identities, with no-padding shortfall handling and assignment-scoped direction
+versus portfolio writes. Research Scheduler and WDM/CPM have no Explorer
+scientific authority. The complete capsule, continuity, intake, readiness,
+ordering and concurrency procedure is specified once in
+[`references/parallel-research-workflow.md`](references/parallel-research-workflow.md);
+read that reference before dispatch. This Skill supplies the mode loop and
+dispatch trigger only and does not duplicate the procedure.
+
 ## Purpose
 
 Explore HMASD-relevant ideas without entering the formal project workflow.

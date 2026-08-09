@@ -14,6 +14,35 @@ resource_admission_owner=code_project_manager_runtime_authority
 resource_conflict_serialization=only_named_dependency_or_observed_vector_or_mutable_conflict
 evidence_level_runtime_orthogonal=true
 
+# Direct-user-frozen portfolio control-plane contract
+portfolio_direction_target=12
+portfolio_target_is_exact=true
+portfolio_target_counts=scientific_direction_identities_only
+portfolio_canonical_surfaces=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md
+portfolio_shortfall_policy=record_exact_ambiguity_or_shortfall_never_pad
+direction_owner_write_scope=one_disjoint_direction_capsule_only
+direction_owner_shared_continuity_write=forbidden
+direction_owner_sibling_write=forbidden
+portfolio_integration_boundary=stable_portfolio_integration_boundary
+portfolio_intake=exact_direction_results
+portfolio_scientific_fields=identities|status|eligibility|priority|dependencies
+portfolio_ready_assignment=conclusion_first_self_contained_ready_next_owner_assignment
+portfolio_ready_assignment_fields=exact_inputs|write_paths|result_destinations|dependencies|resource_vectors
+research_scheduler_task_creation=alone_same_level_direction_owner_tasks
+initial_configured_concurrency_ceiling=3
+initial_ceiling_counts=active_same_level_direction_owner_tasks_only
+scheduler_launch_policy=at_most_ceiling_and_fewer_on_actual_write_or_resource_conflicts
+scheduler_ready_order=mechanically_preserve_explorer_ready_order
+scheduler_conflict_skip=may_pass_over_conflicting_ready_item_for_later_disjoint_item
+scheduler_scientific_authority=none
+scheduler_forbidden_semantics=invent|fill_slots|reprioritize|merge|retire|select_directions
+direction_completion_successor_gate=exact_portfolio_intake_and_continuity_update_before_successor_ready
+completion_order_priority=forbidden
+portfolio_size_separate_from_active_concurrency_window=true
+active_concurrency_window=flexible_per_run_ceiling
+fixed_runtime_pool=forbidden
+wdm_cpm_scheduler_scientific_authority=none
+
 ```text
 logical_assignment_count=derived_from_exact_work_roster
 active_experiment_roster_owner=independent_research_explorer_scientific_view
@@ -54,6 +83,38 @@ explorer_mechanical_peer_independence=not_applicable
 explorer_mechanical_evidence_role=literal_fact_organization_not_scientific_evidence
 explorer_mechanical_campaign_effect=none
 ```
+
+The portfolio Explorer's target is exactly 12 distinct scientific direction
+identities. It is represented by one direction-specific canonical capsule per
+direction plus the shared `local_research/RESEARCH_CONTINUITY.md` entry. The
+target never counts source assignments, candidate records or subdirection
+opportunities. If canonical evidence cannot honestly yield 12, the portfolio
+records the exact ambiguity or shortfall and never pads, invents, silently
+merges or silently selects a direction.
+
+A direction owner writes only its one disjoint direction capsule and never
+edits shared continuity or siblings. At a stable portfolio integration
+boundary, one portfolio Explorer alone intakes exact direction results,
+updates shared continuity and the scientific identities, status, eligibility,
+priority and dependencies, and emits conclusion-first self-contained ready
+next-owner assignments with exact inputs, write paths, result destinations,
+dependencies and resource vectors. `ready` is a natural-language portfolio
+capsule/continuity decision, not a schema, queue or admission gate.
+
+Research Scheduler alone creates same-level direction owner tasks. The initial
+configured concurrency ceiling is 3 active same-level direction owner tasks;
+the portfolio owner, registered children and runtime treatments are outside
+that window. Scheduler may launch fewer on actual write/resource conflicts and
+mechanically preserves Explorer ready ordering. It may pass over a currently
+conflicting ready item to launch a later disjoint item without changing the
+preserved scientific priority or order. It cannot invent or fill slots,
+reprioritize, merge, retire or select directions. Direction completion triggers
+exact portfolio intake and continuity update before its successor becomes
+ready, and completion order is never priority. Portfolio size 12 is separate
+from active concurrency window 3; the ceiling remains flexible per run and is
+not a fixed runtime pool. WDM, CPM and Scheduler have no scientific authority.
+This reference states the boundary and does not duplicate Scheduler's command
+procedure.
 
 ## Canonical campaign intake and barrier
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import io
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -96,6 +97,208 @@ def assert_denied(payload: dict[str, object] | None, fragment: str) -> None:
     assert isinstance(output, dict)
     assert output["permissionDecision"] == "deny"
     assert fragment in str(output["permissionDecisionReason"])
+
+
+def identity_command(
+    assignment_id: str = "TASK_IDENTITY",
+    thread_id: str = "thread-123",
+    host_id: str = "local",
+) -> str:
+    return (
+        "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe "
+        "scripts/hmasd_workspace_boundary_guard.py observe-owner-session "
+        f"--assignment-id {assignment_id} --thread-id {thread_id} "
+        f"--host-id {host_id}"
+    )
+
+
+def identity_path(repo: Path, assignment_id: str = "TASK_IDENTITY") -> Path:
+    return (
+        repo
+        / "temp"
+        / "sessions"
+        / "research_scheduler"
+        / "identity_observations"
+        / f"{assignment_id}.json"
+    )
+
+
+def test_owner_identity_observation_persists_minimal_payload_and_keeps_binding_denial(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo, _ = repository(tmp_path)
+    monkeypatch.setenv("CODEX_THREAD_ID", "thread-123")
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {"command": identity_command()},
+            session_id="actual-session-id",
+        )
+        is None
+    )
+    path = identity_path(repo)
+    observation = json.loads(path.read_text(encoding="utf-8"))
+    assert set(observation) == {"assignment_id", "thread_id", "host_id", "session_id"}
+    assert observation == {
+        "assignment_id": "TASK_IDENTITY",
+        "thread_id": "thread-123",
+        "host_id": "local",
+        "session_id": "actual-session-id",
+    }
+    assert "tool_input" not in observation
+    assert not (repo / "temp/sessions/research_scheduler/bindings/TASK_IDENTITY.json").exists()
+    _binding(repo)
+    assert_denied(
+        invoke(
+            repo,
+            "apply_patch",
+            "*** Begin Patch\n*** Add File: local_research/directions/example.md\n*** End Patch",
+            session_id="other-session",
+        ),
+        "exact active session binding",
+    )
+
+
+def test_owner_identity_observation_accepts_thread_id_distinct_from_session_id(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo, _ = repository(tmp_path)
+    monkeypatch.setenv("CODEX_THREAD_ID", "thread-different")
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {"command": identity_command(thread_id="thread-different")},
+            session_id="session-different",
+        )
+        is None
+    )
+    assert json.loads(identity_path(repo).read_text(encoding="utf-8"))["session_id"] == (
+        "session-different"
+    )
+
+
+@pytest.mark.parametrize("session_id", (None, "", "session with whitespace"))
+def test_owner_identity_observation_rejects_missing_empty_or_invalid_session(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, session_id: object
+) -> None:
+    repo, _ = repository(tmp_path)
+    monkeypatch.setenv("CODEX_THREAD_ID", "thread-123")
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": identity_command()},
+            session_id=session_id,  # type: ignore[arg-type]
+        ),
+        "valid payload session_id",
+    )
+    assert not identity_path(repo).exists()
+
+
+def test_owner_identity_observation_rejects_absent_or_mismatched_inherited_thread(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo, _ = repository(tmp_path)
+    monkeypatch.delenv("CODEX_THREAD_ID", raising=False)
+    assert_denied(
+        invoke(repo, "shell_command", {"command": identity_command()}),
+        "CODEX_THREAD_ID",
+    )
+    monkeypatch.setenv("CODEX_THREAD_ID", "wrong-thread")
+    assert_denied(
+        invoke(repo, "shell_command", {"command": identity_command()}),
+        "does not match CODEX_THREAD_ID",
+    )
+    assert not identity_path(repo).exists()
+
+
+@pytest.mark.parametrize(
+    "command",
+    (
+        identity_command(assignment_id="../unsafe"),
+        identity_command(thread_id="thread unsafe"),
+        identity_command(host_id="remote"),
+        identity_command() + " --unexpected extra",
+        '"C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe" '
+        "scripts/hmasd_workspace_boundary_guard.py observe-owner-session "
+        "--assignment-id TASK_IDENTITY --thread-id thread-123 --host-id local",
+    ),
+)
+def test_owner_identity_observation_rejects_malformed_or_unsafe_commands(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, command: str
+) -> None:
+    repo, _ = repository(tmp_path)
+    monkeypatch.setenv("CODEX_THREAD_ID", "thread-123")
+    assert_denied(
+        invoke(repo, "shell_command", {"command": command}),
+        "identity observation command",
+    )
+    assert not identity_path(repo).exists()
+
+
+def test_owner_identity_observation_conflict_never_overwrites(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo, _ = repository(tmp_path)
+    path = identity_path(repo)
+    path.parent.mkdir(parents=True)
+    original = {
+        "assignment_id": "TASK_IDENTITY",
+        "thread_id": "thread-123",
+        "host_id": "local",
+        "session_id": "original-session",
+    }
+    path.write_text(json.dumps(original), encoding="utf-8")
+    monkeypatch.setenv("CODEX_THREAD_ID", "thread-123")
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": identity_command()},
+            session_id="replacement-session",
+        ),
+        "will not be overwritten",
+    )
+    assert json.loads(path.read_text(encoding="utf-8")) == original
+
+
+def test_owner_identity_cli_reads_only_exact_observation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repo, _ = repository(tmp_path)
+    monkeypatch.setenv("CODEX_THREAD_ID", "thread-123")
+    assert (
+        invoke(
+            repo,
+            "shell_command",
+            {"command": identity_command()},
+            session_id="cli-session",
+        )
+        is None
+    )
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "observe-owner-session",
+            "--assignment-id",
+            "TASK_IDENTITY",
+            "--thread-id",
+            "thread-123",
+            "--host-id",
+            "local",
+        ],
+        cwd=repo,
+        env={**os.environ, "CODEX_THREAD_ID": "thread-123"},
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+    )
+    assert result.returncode == 0, result.stderr
+    assert json.loads(result.stdout) == json.loads(identity_path(repo).read_text(encoding="utf-8"))
 
 
 def _binding(repo: Path, **overrides: object) -> None:

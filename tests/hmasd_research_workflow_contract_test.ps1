@@ -1070,6 +1070,92 @@ foreach ($required in @(
         throw "Open algorithm inspiration workflow missing: $required"
     }
 }
+# Direct-user-frozen portfolio target: one canonical key and one detailed reference.
+$explorerPortfolioOwnerSurfaces = @($independentResearchRole, $independentResearchSkill)
+$explorerPortfolioOwnerNormalized = ($explorerPortfolioOwnerSurfaces -join ' ') -replace '\s+', ' '
+$explorerPortfolioReferenceNormalized = $parallelResearch -replace '\s+', ' '
+$explorerPortfolioSurfaces = @($independentResearchRole, $independentResearchSkill, $parallelResearch)
+$explorerPortfolioNormalized = ($explorerPortfolioSurfaces -join ' ') -replace '\s+', ' '
+foreach ($required in @(
+    'portfolio_direction_target=12',
+    'direction_owner_write_scope=one_disjoint_direction_capsule_only',
+    'direction_owner_shared_continuity_write=forbidden',
+    'direction_owner_sibling_write=forbidden',
+    'scheduler_scientific_authority=none',
+    'wdm_cpm_scheduler_scientific_authority=none',
+    'detailed capsule, intake, readiness, ordering, ceiling and shortfall procedure is defined once in',
+    'references/parallel-research-workflow.md')) {
+    if (-not $explorerPortfolioOwnerNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+        throw "Frozen twelve-direction owner pointer missing: $required"
+    }
+}
+foreach ($required in @(
+    'portfolio_direction_target=12',
+    'portfolio_target_counts=scientific_direction_identities_only',
+    'portfolio_canonical_surfaces=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md',
+    'portfolio_shortfall_policy=record_exact_ambiguity_or_shortfall_never_pad',
+    'direction_owner_write_scope=one_disjoint_direction_capsule_only',
+    'portfolio_integration_boundary=stable_portfolio_integration_boundary',
+    'portfolio_intake=exact_direction_results',
+    'portfolio_scientific_fields=identities|status|eligibility|priority|dependencies',
+    'portfolio_ready_assignment=conclusion_first_self_contained_ready_next_owner_assignment',
+    'portfolio_ready_assignment_fields=exact_inputs|write_paths|result_destinations|dependencies|resource_vectors',
+    'research_scheduler_task_creation=alone_same_level_direction_owner_tasks',
+    'initial_configured_concurrency_ceiling=3',
+    'initial_ceiling_counts=active_same_level_direction_owner_tasks_only',
+    'scheduler_launch_policy=at_most_ceiling_and_fewer_on_actual_write_or_resource_conflicts',
+    'scheduler_ready_order=mechanically_preserve_explorer_ready_order',
+    'scheduler_conflict_skip=may_pass_over_conflicting_ready_item_for_later_disjoint_item',
+    'scheduler_forbidden_semantics=invent|fill_slots|reprioritize|merge|retire|select_directions',
+    'direction_completion_successor_gate=exact_portfolio_intake_and_continuity_update_before_successor_ready',
+    'portfolio_size_separate_from_active_concurrency_window=true',
+    'active_concurrency_window=flexible_per_run_ceiling',
+    'fixed_runtime_pool=forbidden',
+    'exact ambiguity or shortfall',
+    'never pad',
+    'natural-language portfolio capsule/continuity decision, not a schema, queue or admission gate',
+    "Scheduler's command procedure")) {
+    if (-not $explorerPortfolioReferenceNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+        throw "Frozen twelve-direction reference missing: $required"
+    }
+}
+foreach ($detailed in @(
+    'portfolio_canonical_surfaces=',
+    'portfolio_intake=exact_direction_results',
+    'initial_configured_concurrency_ceiling=3',
+    'scheduler_ready_order=',
+    'direction_completion_successor_gate=',
+    'portfolio size 12 is separate from active concurrency window 3')) {
+    if ($explorerPortfolioOwnerNormalized.ToLowerInvariant().Contains($detailed.ToLowerInvariant())) {
+        throw "Detailed portfolio procedure was duplicated into Role/Skill: $detailed"
+    }
+}
+foreach ($alias in @(
+    'portfolio_size=12',
+    'portfolio_target_direction_count=12',
+    'portfolio_direction_identity_count=12')) {
+    if ($explorerPortfolioNormalized.ToLowerInvariant().Contains($alias.ToLowerInvariant())) {
+        throw "Redundant portfolio target alias remains: $alias"
+    }
+}
+foreach ($stale in @(
+    'three directions portfolio',
+    'three-direction portfolio',
+    'portfolio of three directions',
+    'portfolio_size=3')) {
+    if ($explorerPortfolioNormalized.ToLowerInvariant().Contains($stale.ToLowerInvariant())) {
+        throw "Stale three-direction portfolio conflation remains: $stale"
+    }
+}
+if (-not $explorerPortfolioReferenceNormalized.ToLowerInvariant().Contains(
+        'initial configured concurrency ceiling is 3 active same-level direction owner tasks')) {
+    throw 'Initial concurrency ceiling is not limited to active direction owner tasks'
+}
+if (-not $explorerPortfolioReferenceNormalized.ToLowerInvariant().Contains(
+        'portfolio size 12 is separate from active concurrency window 3')) {
+    throw 'Portfolio size and active concurrency window are conflated'
+}
+
 foreach ($required in @(
     'MRM-01_OBJECT_BEFORE_MECHANISM',
     'MRM-02_DECOMPOSE_MEMBERSHIP_NONSTATIONARITY',

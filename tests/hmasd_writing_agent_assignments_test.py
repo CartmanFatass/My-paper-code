@@ -132,3 +132,20 @@ def test_scheduler_binding_is_a_factual_tail_not_task_context() -> None:
     assert "mutation-boundary identity" in text
     assert "not task context" in text
     assert "assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active" in text
+
+
+def test_scheduler_probe_and_binding_ready_followups_preserve_prose_first_meaning() -> None:
+    text = _normalized(SKILL)
+    for cue in (
+        "keep desktop follow-ups distinct",
+        "identity-probe follow-up",
+        "read-only",
+        "deterministic owner-session observation",
+        "separate binding-ready follow-up",
+        "only after the exact identity facts are mechanically matched",
+        "permits owner mutation",
+        "neither follow-up replaces the self-contained assignment",
+        "probe observation is not task context",
+        "not task context, a queue, registry, ledger, semantic result or acceptance",
+    ):
+        assert cue in text

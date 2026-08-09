@@ -751,6 +751,103 @@ def test_parallel_first_normal_path_rejects_attribution_lock_regression() -> Non
         assert stale.lower() not in normalized_surfaces
 
 
+def test_frozen_twelve_direction_portfolio_is_distinct_from_concurrency_window() -> None:
+    """The reference owns the detailed portfolio procedure and the target is not a pool."""
+    role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+        encoding="utf-8"
+    )
+    skill = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    parallel = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md"
+    ).read_text(encoding="utf-8")
+    role_normalized = " ".join(role.split())
+    skill_normalized = " ".join(skill.split())
+    parallel_normalized = " ".join(parallel.split())
+    surfaces_normalized = " ".join((role_normalized, skill_normalized, parallel_normalized))
+    for required in (
+        "portfolio_direction_target=12",
+        "direction_owner_write_scope=one_disjoint_direction_capsule_only",
+        "direction_owner_shared_continuity_write=forbidden",
+        "direction_owner_sibling_write=forbidden",
+        "scheduler_scientific_authority=none",
+        "wdm_cpm_scheduler_scientific_authority=none",
+        "detailed capsule, intake, readiness, ordering, ceiling and shortfall procedure is defined once in",
+        "references/parallel-research-workflow.md",
+    ):
+        assert required.lower() in role_normalized.lower() + skill_normalized.lower(), required
+
+    # Detailed semantics live in the parallel reference, not Role/Skill copies.
+    for required in (
+        "portfolio_direction_target=12",
+        "portfolio_target_counts=scientific_direction_identities_only",
+        "portfolio_canonical_surfaces=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md",
+        "portfolio_shortfall_policy=record_exact_ambiguity_or_shortfall_never_pad",
+        "direction_owner_write_scope=one_disjoint_direction_capsule_only",
+        "portfolio_integration_boundary=stable_portfolio_integration_boundary",
+        "portfolio_intake=exact_direction_results",
+        "portfolio_scientific_fields=identities|status|eligibility|priority|dependencies",
+        "portfolio_ready_assignment=conclusion_first_self_contained_ready_next_owner_assignment",
+        "portfolio_ready_assignment_fields=exact_inputs|write_paths|result_destinations|dependencies|resource_vectors",
+        "research_scheduler_task_creation=alone_same_level_direction_owner_tasks",
+        "initial_configured_concurrency_ceiling=3",
+        "initial_ceiling_counts=active_same_level_direction_owner_tasks_only",
+        "scheduler_launch_policy=at_most_ceiling_and_fewer_on_actual_write_or_resource_conflicts",
+        "scheduler_ready_order=mechanically_preserve_explorer_ready_order",
+        "scheduler_conflict_skip=may_pass_over_conflicting_ready_item_for_later_disjoint_item",
+        "scheduler_forbidden_semantics=invent|fill_slots|reprioritize|merge|retire|select_directions",
+        "direction_completion_successor_gate=exact_portfolio_intake_and_continuity_update_before_successor_ready",
+        "portfolio_size_separate_from_active_concurrency_window=true",
+        "active_concurrency_window=flexible_per_run_ceiling",
+        "fixed_runtime_pool=forbidden",
+        "exact ambiguity or shortfall",
+        "never pad",
+        "natural-language portfolio capsule/continuity decision, not a schema, queue or admission gate",
+        "Scheduler's command procedure",
+    ):
+        assert required.lower() in parallel_normalized.lower(), required
+
+    # The detailed keys/prose are intentionally not copied into Role or Skill.
+    for detailed in (
+        "portfolio_canonical_surfaces=",
+        "portfolio_intake=exact_direction_results",
+        "initial_configured_concurrency_ceiling=3",
+        "scheduler_ready_order=",
+        "direction_completion_successor_gate=",
+        "portfolio size 12 is separate from active concurrency window 3",
+    ):
+        assert detailed.lower() not in (role_normalized + skill_normalized).lower(), detailed
+
+    # Remove redundant aliases: one canonical target key only.
+    for alias in (
+        "portfolio_size=12",
+        "portfolio_target_direction_count=12",
+        "portfolio_direction_identity_count=12",
+    ):
+        assert alias.lower() not in surfaces_normalized.lower(), alias
+
+    # Source assignments, candidates and opportunities never inflate the 12.
+    for excluded in (
+        "source assignments are directions",
+        "candidate records are directions",
+        "subdirection opportunities are directions",
+        "three directions portfolio",
+        "three-direction portfolio",
+        "portfolio of three directions",
+        "portfolio_size=3",
+    ):
+        assert excluded.lower() not in surfaces_normalized.lower(), excluded
+    # The active window is explicitly three direction owner tasks, not 12.
+    assert "initial configured concurrency ceiling is 3 active same-level direction owner tasks" in parallel_normalized.lower()
+    assert "portfolio size 12 is separate from active concurrency window 3" in parallel_normalized.lower()
+
+
 def test_desktop_owner_modes_are_isolated_and_children_keep_their_contracts() -> None:
     """Scheduler owner tasks carry explicit direction/portfolio scope only."""
     role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(

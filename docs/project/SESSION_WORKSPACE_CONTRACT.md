@@ -27,6 +27,10 @@ research_scheduler_live_roster=temp/sessions/research_scheduler/ACTIVE_ASSIGNMEN
 research_scheduler_binding_directory=temp/sessions/research_scheduler/bindings/
 research_scheduler_binding_keys=assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active
 research_scheduler_binding_purpose=mutation_boundary_identity_only
+research_scheduler_identity_observation_directory=temp/sessions/research_scheduler/identity_observations/
+research_scheduler_identity_observation_path=temp/sessions/research_scheduler/identity_observations/<assignment_id>.json
+research_scheduler_identity_observation_keys=assignment_id|thread_id|host_id|session_id
+research_scheduler_identity_observation_purpose=observation_only_not_activation_or_task_context
 research_scheduler_binding_task_context=false
 research_scheduler_binding_queue=false
 research_scheduler_procedure_pointer=.agents/skills/hmasd-research-scheduler/SKILL.md
@@ -84,8 +88,10 @@ workspace. No hash, byte count or digest is required for a handoff.
 The Scheduler durable pointer is
 `docs/session-workspaces/research_scheduler/README.md`. Its active roster and
 bindings are temporary only; no tracked live state is created. The roster is a
-human-readable locator, while each binding contains only the six identity keys
-in `research_scheduler_binding_keys`.
+human-readable locator, identity observations use the declared temporary
+directory and four keys, and each binding contains only the six identity keys
+in `research_scheduler_binding_keys`. Identity observations are not activation,
+task context, queue, registry, ledger, semantic result or acceptance state.
 
 ## File-backed transport locators
 

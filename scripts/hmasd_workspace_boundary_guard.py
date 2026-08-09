@@ -13,6 +13,7 @@ import os
 import re
 import subprocess
 import sys
+import stat
 from pathlib import Path
 from typing import Any
 
@@ -59,6 +60,19 @@ UNC_PATH = re.compile(r"(?<![\\])((?:\\\\|//)[^\s;|>'\"\)\]]+)")
 PATCH_PATH = re.compile(
     r"(?m)^\*\*\* (?:(?:Add|Update|Delete) File:|Move to:) (.+?)\s*$"
 )
+IDENTITY_OBSERVATION_DIRECTORY = (
+    Path("temp") / "sessions" / "research_scheduler" / "identity_observations"
+)
+IDENTITY_OBSERVATION_KEYS = frozenset(
+    {"assignment_id", "thread_id", "host_id", "session_id"}
+)
+IDENTITY_OBSERVATION_INTERPRETER = (
+    "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe"
+)
+IDENTITY_OBSERVATION_SCRIPT = "scripts/hmasd_workspace_boundary_guard.py"
+IDENTITY_THREAD_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$")
+
+
 class GuardError(RuntimeError):
     """A fail-closed decision for a recognized workspace-boundary case."""
 
@@ -144,6 +158,214 @@ def _registered_python(repo: Path) -> str | None:
         router.read_text(encoding="utf-8"),
     )
     return matches[0] if len(matches) == 1 else None
+
+
+def _valid_identity_session(value: Any) -> bool:
+    return (
+        isinstance(value, str)
+        and bool(value)
+        and not any(character.isspace() for character in value)
+    )
+
+
+def _valid_identity_thread(value: Any) -> bool:
+    return isinstance(value, str) and bool(IDENTITY_THREAD_ID.fullmatch(value))
+
+
+def _parse_identity_observation_command(command: Any) -> tuple[str, str]:
+    if not isinstance(command, str):
+        raise GuardError("owner identity observation command is not a string")
+    pattern = re.compile(
+        rf"^{re.escape(IDENTITY_OBSERVATION_INTERPRETER)} "
+        rf"{re.escape(IDENTITY_OBSERVATION_SCRIPT)} observe-owner-session "
+        r"--assignment-id (?P<assignment>[A-Za-z0-9][A-Za-z0-9_-]{0,95}) "
+        r"--thread-id (?P<thread>[A-Za-z0-9][A-Za-z0-9._:-]{0,255}) "
+        r"--host-id local$"
+    )
+    match = pattern.fullmatch(command)
+    if match is None:
+        raise GuardError("owner identity observation command is malformed or unsafe")
+    assignment_id = match.group("assignment")
+    thread_id = match.group("thread")
+    if not ticketing.ASSIGNMENT_ID.fullmatch(assignment_id):
+        raise GuardError("owner identity observation assignment_id is unsafe")
+    if not _valid_identity_thread(thread_id):
+        raise GuardError("owner identity observation thread_id is unsafe")
+    return assignment_id, thread_id
+
+
+def _identity_observation_root(repo: Path, *, create: bool) -> Path:
+    repository = _canonical(repo)
+    expected_parent = repository / "temp" / "sessions" / "research_scheduler"
+    parent = expected_parent.resolve(strict=False)
+    if not _same(parent, expected_parent):
+        raise GuardError("identity observation directory is redirected")
+    requested = repository / IDENTITY_OBSERVATION_DIRECTORY
+    if requested.exists() and (
+        requested.is_symlink()
+        or bool(
+            getattr(requested.stat(), "st_file_attributes", 0)
+            & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
+        )
+    ):
+        raise GuardError("identity observation directory is redirected")
+    if create:
+        requested.mkdir(parents=True, exist_ok=True)
+    if not requested.is_dir():
+        raise GuardError("identity observation directory is not a directory")
+    return requested
+
+
+def _identity_observation_path(
+    repo: Path, assignment_id: str, *, create_root: bool
+) -> Path:
+    if not ticketing.ASSIGNMENT_ID.fullmatch(assignment_id):
+        raise GuardError("owner identity observation assignment_id is unsafe")
+    root = _identity_observation_root(repo, create=create_root)
+    path = root / f"{assignment_id}.json"
+    if path.exists() and path.is_symlink():
+        raise GuardError("identity observation file is redirected")
+    resolved = path.resolve(strict=False)
+    if not _inside(resolved, root) or not _same(resolved, path):
+        raise GuardError("identity observation file is redirected")
+    return path
+
+
+def _validate_identity_observation(
+    value: Any,
+    *,
+    assignment_id: str,
+    thread_id: str,
+) -> dict[str, str]:
+    if not isinstance(value, dict) or set(value) != IDENTITY_OBSERVATION_KEYS:
+        raise GuardError("identity observation is malformed")
+    if value.get("assignment_id") != assignment_id:
+        raise GuardError("identity observation assignment_id does not match")
+    if value.get("thread_id") != thread_id:
+        raise GuardError("identity observation thread_id does not match")
+    if value.get("host_id") != "local":
+        raise GuardError("identity observation host_id is not local")
+    if not _valid_identity_session(value.get("session_id")):
+        raise GuardError("identity observation session_id is malformed")
+    return {
+        "assignment_id": assignment_id,
+        "thread_id": thread_id,
+        "host_id": "local",
+        "session_id": value["session_id"],
+    }
+
+
+def _read_identity_observation(
+    repo: Path, assignment_id: str, thread_id: str
+) -> dict[str, str]:
+    path = _identity_observation_path(repo, assignment_id, create_root=False)
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise GuardError(f"identity observation cannot be read: {exc}") from exc
+    return _validate_identity_observation(
+        value, assignment_id=assignment_id, thread_id=thread_id
+    )
+
+
+def _persist_identity_observation(
+    repo: Path,
+    *,
+    assignment_id: str,
+    thread_id: str,
+    session_id: str,
+) -> None:
+    observation = {
+        "assignment_id": assignment_id,
+        "thread_id": thread_id,
+        "host_id": "local",
+        "session_id": session_id,
+    }
+    path = _identity_observation_path(repo, assignment_id, create_root=True)
+    if path.exists():
+        try:
+            current = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise GuardError(f"identity observation is malformed: {exc}") from exc
+        validated = _validate_identity_observation(
+            current, assignment_id=assignment_id, thread_id=thread_id
+        )
+        if validated == observation:
+            return
+        raise GuardError("conflicting identity observation will not be overwritten")
+    try:
+        with path.open("x", encoding="utf-8", newline="\n") as handle:
+            json.dump(observation, handle, sort_keys=True, separators=(",", ":"))
+            handle.write("\n")
+    except FileExistsError:
+        # A concurrent identical write may have won the create race. Re-read
+        # and apply the same conflict/malformed checks without overwriting.
+        current = _read_identity_observation(repo, assignment_id, thread_id)
+        if current != observation:
+            raise GuardError("conflicting identity observation will not be overwritten")
+
+
+def _observe_owner_session(
+    repo: Path,
+    cwd: Path,
+    linked: bool,
+    payload: dict[str, Any],
+    command: str,
+) -> None:
+    assignment_id, thread_id = _parse_identity_observation_command(command)
+    session_id = payload.get("session_id")
+    if not _valid_identity_session(session_id):
+        raise GuardError("owner identity observation requires a valid payload session_id")
+    inherited_thread_id = os.environ.get("CODEX_THREAD_ID")
+    if not _valid_identity_thread(inherited_thread_id):
+        raise GuardError("owner identity observation requires CODEX_THREAD_ID")
+    if inherited_thread_id != thread_id:
+        raise GuardError("owner identity observation thread_id does not match CODEX_THREAD_ID")
+    observation_repo = ticketing.main_checkout(repo) if linked else repo
+    _persist_identity_observation(
+        observation_repo,
+        assignment_id=assignment_id,
+        thread_id=thread_id,
+        session_id=session_id,
+    )
+
+
+def _run_observe_owner_session_cli(argv: list[str]) -> int:
+    if len(argv) != 7 or argv[0] != "observe-owner-session":
+        print("malformed observe-owner-session arguments", file=sys.stderr)
+        return 2
+    if argv[1] != "--assignment-id" or argv[3] != "--thread-id" or argv[5] != "--host-id":
+        print("malformed observe-owner-session arguments", file=sys.stderr)
+        return 2
+    assignment_id, thread_id = argv[2], argv[4]
+    if not ticketing.ASSIGNMENT_ID.fullmatch(assignment_id):
+        print("unsafe observe-owner-session assignment_id", file=sys.stderr)
+        return 2
+    if not _valid_identity_thread(thread_id):
+        print("unsafe observe-owner-session thread_id", file=sys.stderr)
+        return 2
+    if argv[6] != "local":
+        print("observe-owner-session host_id must be local", file=sys.stderr)
+        return 2
+    inherited_thread_id = os.environ.get("CODEX_THREAD_ID")
+    if not _valid_identity_thread(inherited_thread_id):
+        print("observe-owner-session requires CODEX_THREAD_ID", file=sys.stderr)
+        return 2
+    if inherited_thread_id != thread_id:
+        print("observe-owner-session thread_id does not match CODEX_THREAD_ID", file=sys.stderr)
+        return 2
+    try:
+        cwd = _canonical(Path.cwd())
+        repo, _, linked = _workspace_scope(cwd)
+        observation_repo = ticketing.main_checkout(repo) if linked else repo
+        observation = _read_identity_observation(
+            observation_repo, assignment_id, thread_id
+        )
+    except (GuardError, OSError, ticketing.TicketError) as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    print(json.dumps(observation, sort_keys=True, separators=(",", ":")))
+    return 0
 
 
 def _registered_script_prefix(command: str, interpreter: str, script: Path) -> bool:
@@ -392,6 +614,16 @@ def main() -> int:
             raise GuardError("hook payload has no working directory")
         cwd = _canonical(Path(cwd_raw))
         repo, allowed_roots, linked = _workspace_scope(cwd)
+        if tool_name in SHELL_TOOLS:
+            tool_input = payload.get("tool_input")
+            command = (
+                tool_input.get("command")
+                if isinstance(tool_input, dict)
+                else None
+            )
+            if isinstance(command, str) and "observe-owner-session" in command:
+                _observe_owner_session(repo, cwd, linked, payload, command)
+                return 0
         shell_allowed_roots = allowed_roots
         binding_repo = ticketing.main_checkout(repo) if linked else repo
         session_id = payload.get("session_id")
@@ -480,4 +712,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        raise SystemExit(_run_observe_owner_session_cli(sys.argv[1:]))
     raise SystemExit(main())

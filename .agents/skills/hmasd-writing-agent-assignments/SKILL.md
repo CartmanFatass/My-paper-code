@@ -59,6 +59,14 @@ has only
 is mutation-boundary identity, not task context, a queue or a semantic
 completion gate.
 
+Keep Desktop follow-ups distinct in the prose-first interface: an identity-probe
+follow-up is read-only and requests deterministic owner-session observation,
+while a separate binding-ready follow-up is sent only after the exact identity
+facts are mechanically matched and is the action that permits owner mutation.
+Neither follow-up replaces the self-contained assignment, and the probe
+observation is not task context, a queue, registry, ledger, semantic result or
+acceptance.
+
 ## Important distinctions
 
 Keep these concepts separate when writing or reviewing an interface:

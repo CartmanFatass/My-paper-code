@@ -25,23 +25,28 @@ locator facts; it never replaces that task model.
    `create_thread`, `environment=local`, and no model or thinking override unless
    the user explicitly chose one. Call creation once.
 2. Persist the returned exact `threadId` and `hostId` in
-   `temp/sessions/research_scheduler/ACTIVE_ASSIGNMENTS.md`. Create the minimal
-   binding at `temp/sessions/research_scheduler/bindings/<assignment_id>.json`
-   with exactly
-   `assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active`.
-   The initial owner prompt forbids mutation until the Scheduler sends one
-   binding-ready follow-up naming that exact binding.
-   The roster retains the returned exact `threadId`+`hostId` pair as
-   task-observation locators. The binding's `session_id` is the exact owner hook
-   session identity carried by the owner PreToolUse/Stop hook payloads. Use a
-   Desktop-exposed locator-to-hook-session mapping only when it is observable;
-   never substitute `hostId` or `threadId` for `session_id`, and never infer
-   the mapping from titles or history. Before sending the binding-ready
-   follow-up, mechanically match the returned task locator to that exact hook
-   session identity. If the mapping is unavailable or ambiguous, do not
-   activate the binding or authorize mutation; record one unresolved
-   observation in the roster and require exact Desktop/user resolution. Do not
-   create a second owner, retry, or scan threads.
+   `temp/sessions/research_scheduler/ACTIVE_ASSIGNMENTS.md`. Send exactly one
+   read-only identity-probe follow-up to that exact `threadId`+`hostId`, asking
+   the owner to execute exactly:
+   `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_workspace_boundary_guard.py observe-owner-session --assignment-id <id> --thread-id <threadId> --host-id local`.
+   The existing PreToolUse guard observes the real payload `session_id`,
+   requires inherited `CODEX_THREAD_ID==threadId` and host `local`, and writes
+   exactly four keys
+   `assignment_id|thread_id|host_id|session_id` to
+   `temp/sessions/research_scheduler/identity_observations/<assignment_id>.json`.
+   This identity observation is read-only: it does not authorize mutation or
+   activate a binding, and is not task context, a queue, registry, ledger,
+   semantic result or acceptance. Mechanically match all four observed facts to
+   the exact create result and assignment. Only after that match create the
+   unchanged binding at
+   `temp/sessions/research_scheduler/bindings/<assignment_id>.json` with exactly
+   `assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active`,
+   then send one separate binding-ready follow-up naming that exact binding.
+   The initial owner prompt forbids mutation until that binding-ready follow-up.
+   If the observation is missing or conflicting, the binding stays inactive
+   (or remains absent) and one unresolved observation is recorded in the roster
+   for exact Desktop/user resolution. Never scan, infer, substitute `hostId` or
+   `threadId`, create a replacement, or retry blindly.
 3. Observe active owners with one bounded `wait_threads` call over exact IDs, at
    most eight targets per call. Then use `read_thread` for each exact task that
    completed or needs attention. Do not scan tasks or infer liveness from time.
@@ -77,13 +82,31 @@ the Scheduler never becomes their parent, relays their answer, or creates a
 child-of-child owner. Parent conversation history is background only. The
 canonical owner assignment and result capsule are the restart boundary.
 
+## Explorer portfolio routing
+
+The Explorer owns portfolio target/state `12`, including scientific
+selection, readiness marking, intake and successor readiness. For one portfolio
+run, the Scheduler has an initial owner concurrency ceiling of `3`, counting
+only active same-level `owner_mode=direction` tasks. The ceiling excludes the
+portfolio owner, registered native children and the result-bearing runtime pool.
+The Scheduler may launch fewer than three and mechanically scans the exact
+Explorer-authored ready assignments in their preserved order. It may pass over
+an item only for its named dependency or an observed write/resource conflict so
+that a later disjoint item can proceed; it never fills slots, invents readiness,
+reprioritizes, merges, retires or scientifically selects assignments. When an
+owner completes, return the result to the portfolio Explorer for intake before
+any successor is marked ready. Ready state and order remain assignment/capsule
+semantics, never binding, roster, queue or Scheduler state.
+
 ## Resource-conflict routing
 
-There is no fixed capacity pool. Compare observed CPU, memory, GPU, process, I/O,
-network, paid-service, mutable-path, mutable-object and output-root facts for the
-exact assignments. Serialize only a named dependency, an observed resource
-shortage, or an actual mutable resource conflict. Scientific evidence level
-A/B/C is orthogonal to this resource vector and cannot be changed by routing.
+The per-run direction-owner ceiling is not a runtime capacity pool; there is no
+fixed runtime capacity pool. Compare observed CPU, memory, GPU, process, I/O,
+network, paid-service, mutable-path,
+mutable-object and output-root facts for the exact assignments. Serialize only a
+named dependency, an observed resource shortage, or an actual mutable resource
+conflict. Scientific evidence level A/B/C is orthogonal to this resource vector
+and cannot be changed by routing.
 
 The local formal result-bearing runtime excludes only conflicting local experiment
 runtime. The boundary is explicit: non-runtime work continues, including

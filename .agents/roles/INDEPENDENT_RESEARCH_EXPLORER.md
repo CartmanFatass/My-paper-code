@@ -135,14 +135,35 @@ independent_pro_constructive_adversarial_barrier=required
 project_toy_validation_authority=none
 project_toy_compute_authority=none
 project_toy_cross_direction_competition=forbidden
+
+# Direct-user-frozen portfolio control-plane contract
+portfolio_direction_target=12
+portfolio_target_is_exact=true
+portfolio_shortfall_policy=record_exact_ambiguity_or_shortfall_never_pad
+portfolio_scientific_integrator=independent_research_explorer
+direction_owner_write_scope=one_disjoint_direction_capsule_only
+direction_owner_shared_continuity_write=forbidden
+direction_owner_sibling_write=forbidden
+scheduler_scientific_authority=none
+wdm_cpm_scheduler_scientific_authority=none
 ```
 
 Each same-level user-owned Desktop Explorer owner task is assignment-scoped.
 In `owner_mode=direction` it reads and writes one named direction and never
 preloads sibling context. In `owner_mode=portfolio` it integrates only the
 explicitly named direction set. It remains the only writer for its exact
-advisory research surface and does not select canonical science; the user alone
-decides whether any result later enters the formal project.
+advisory research surface and does not select formal-project science; the user
+alone decides whether any result later enters the formal project. The portfolio
+Explorer remains the scientific owner of the exact 12-direction portfolio and
+its shared continuity record, while direction and portfolio write boundaries
+remain assignment-scoped. The detailed capsule, intake, readiness, ordering,
+ceiling and shortfall procedure is defined once in
+`references/parallel-research-workflow.md` and is required before dispatch.
+
+The portfolio owner integrates the explicitly named direction set; a direction
+owner writes only its one disjoint capsule. Research Scheduler has no Explorer
+scientific authority. The reference owns the Scheduler boundary and command
+procedure; this Role does not duplicate it.
 
 The self-contained natural-language assignment names exact canonical inputs,
 write paths and result destination. Completion is a conclusion-first canonical
