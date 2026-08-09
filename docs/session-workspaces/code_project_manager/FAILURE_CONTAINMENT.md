@@ -2,8 +2,8 @@
 
 ```text
 document_kind=code_project_manager_role_local_failure_containment_contract
-session_owner_role=code_project_manager
-session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
+owner_task_source=research_scheduler
+owner_mode=treatment|integration
 mechanical_operation_state_owner=originating_tool_or_script
 typed_terminal_evidence=registered_receipt_or_exit_evidence
 model_authored_operation_state_machine=forbidden

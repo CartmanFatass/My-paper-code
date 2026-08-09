@@ -539,19 +539,29 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "adaptive_question_dispatch=bounded_registered_child_consultation",
         "adaptive_question_barrier=none_for_singleton|exact_local_roster_only_when_joint",
         "adaptive_question_result_effect=consultation_only",
-        "runtime_concurrency=three_unit_cpm_capacity_pool",
-        "resource_consuming_experiment_action=capacity_controlled_per_direction",
+        "owner_task_scheduler=same_level_user_owned_Desktop_Explorer_task",
+        "owner_mode=direction|portfolio",
+        "owner_task_assignment=self_contained_natural_language",
+        "owner_task_exact_inputs=canonical_inputs_named_by_assignment",
+        "owner_task_write_paths=canonical_write_paths_named_by_assignment",
+        "owner_task_result_destination=canonical_result_destination_named_by_assignment",
+        "owner_task_result=conclusion_first_canonical_capsule",
+        "resource_model=observed_resource_vector_and_conflict_set",
+        "resource_vector_dimensions=cpu|memory|gpu|process|io|network|paid_service|mutable_path|mutable_object|output_root",
+        "resource_observation_owner=scheduler_observes_actual_vectors_and_conflicts",
+        "resource_admission_owner=code_project_manager_runtime_authority",
+        "resource_conflict_serialization=only_named_dependency_or_observed_vector_or_mutable_conflict",
         "active_experiment_roster_owner=independent_research_explorer_scientific_view",
-        "runtime_capacity_admission_owner=code_project_manager",
-        "independent_ready_treatment_dispatch=parallel_first_within_capacity",
-        "global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence",
+        "independent_ready_treatment_dispatch=parallel_first_when_vectors_are_disjoint",
+        "global_serial_fallback=forbidden_without_named_dependency_or_observed_conflict",
         "per_direction_result_bearing_default=one_active",
         "same_direction_parallelism=exact_frozen_joint_roster_only",
-        "experiment_pool_exclusive_runtime=B_HEAVY_OR_C",
-        "capacity_wait_effect=pending_runtime_capacity_only_not_blocked",
-        "No experiment-capacity condition blocks Explorer research, result intake, read-only analysis, Pro review or another non-runtime action.",
-        "A formal or other explicitly heavy treatment can reserve the experiment pool, not the workflow.",
-        "read_only_scientific_analysis_parallelism=available_native_capacity",
+        "formal_local_runtime_exclusivity=explicit_formal_result_bearing_local_runtime_only",
+        "formal_local_runtime_scope=conflicting_local_experiment_runtime_only",
+        "formal_local_runtime_nonblocking=research|intake|code|review|Pro|unrelated_nonruntime",
+        "resource_wait_effect=pending_observed_resource_conflict_only_nonruntime_continues",
+        "evidence_level_runtime_orthogonal=true",
+        "No resource condition blocks research, result intake, read-only analysis, Pro review or another non-runtime action.",
         "one clear, bounded, decision-relevant question",
         "expected information gain exceeds dispatch and synthesis cost",
         "no code, runtime, write, technical acceptance or formal scientific acceptance",
@@ -586,28 +596,20 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "adaptive_first_round_peer_reading=forbidden",
         "First-round assignments do not read peers or a favored answer",
         "Preserve disagreements as advisory inputs; never vote or collapse them into a quorum.",
-        "There is no fixed adaptive count, concurrency, quorum, every-B panel, automatic-Pro path or persistent mechanism.",
+        "There is no fixed adaptive count, concurrency, quorum, every-B panel or automatic-Pro path.",
         "The Explorer remains the single writer and integrates answers into one decision.",
-        "runtime_capacity_units_total=3",
-        "B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive",
-        "three independent light treatments, or one medium plus one light",
-        "capacity_wait_state=pending_runtime_capacity_only",
-        "capacity_wait_effect=pending_runtime_capacity_only",
-        "Insufficient capacity is `pending_runtime_capacity`, never a direction, task or workflow `BLOCKED` state",
-        "creates no queue engine, lease, dispatcher or acceptance owner",
-        "Formal or explicitly heavy runtime may prevent another result-bearing experiment from starting, but it never pauses code work",
-        "read-only research, scientific intake, External Pro review or another non-runtime action",
+        "resource_model=observed_resource_vector_and_conflict_set",
+        "resource_vector_dimensions=cpu|memory|gpu|process|io|network|paid_service|mutable_path|mutable_object|output_root",
+        "Resource waits leave research, intake, code, review, Pro and other non-runtime owner tasks runnable",
         "Every concurrent treatment has distinct direction/treatment identity, canonical design, CPM ticket/worktree, source freeze and accepted commit, run, evidence, checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator receipt, readiness/technical-acceptance record and Explorer decision",
         "By default a direction has at most one result-bearing treatment active",
-        "until that predecessor is terminal and Explorer completes the direction's scientific intake",
-        "freeze one exact joint roster before any member starts",
+        "successor waits until the predecessor is terminal and Explorer completes that direction's scientific intake",
+        "Explorer freezes one exact joint roster before any member starts",
         "Completion order is never scientific priority, voting or a cross-direction barrier",
-        "dispatch at most one new treatment",
-        "B completion or parallelism alone never does",
+        "Scheduler owner-task lifecycle events replace polling or background scheduling",
         "Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.",
         "normal path for two or more scientifically selected and frozen independent treatments is parallel-first",
-        "Attribution, generic caution, completion order, convenience and a current sole action are not dependency or resource evidence",
-        "heartbeat's at-most-one-new-treatment-per-turn bound",
+        "Attribution, generic caution, completion order and convenience are not resource evidence",
     ):
         assert required in parallel_normalized
 
@@ -652,7 +654,7 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "does not recompute schema, readability, receipts, activity counts, locators",
         "necessary to one Explorer decision",
         "Several read-only questions may run in parallel",
-        "one result-bearing experiment active per direction by default",
+        "a direction keeps at most one result-bearing treatment active by default",
         "Independent ordinary A/B treatments from different directions may overlap",
         "exactly one CPM technical acceptance and one Explorer scientific intake",
         "ordinary B remains B and does not automatically invoke Pro",
@@ -668,8 +670,12 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "one resource-consuming experiment action active",
         "one isolated candidate at a time",
         "one-candidate-at-a-time",
-        "queued_capacity_state=",
-        "Insufficient capacity is `queued`",
+        "runtime_concurrency=three_unit_cpm_capacity_pool",
+        "runtime_capacity_units_total=3",
+        "runtime_capacity_classes=",
+        "three-unit CPM runtime pool",
+        "heartbeat",
+        "persistent Explorer",
         "global_serial_fallback=allowed",
         "global_serial_fallback=default",
         "global_serial_fallback=serial_by_default",
@@ -712,8 +718,8 @@ def test_parallel_first_normal_path_rejects_attribution_lock_regression() -> Non
     parallel_normalized = " ".join(parallel.split())
     surfaces = (role, parallel, exploration_skill, validation_skill, validation_contract, handoffs)
     for required in (
-        "independent_ready_treatment_dispatch=parallel_first_within_capacity",
-        "global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence",
+        "independent_ready_treatment_dispatch=parallel_first_when_vectors_are_disjoint",
+        "global_serial_fallback=forbidden_without_named_dependency_or_observed_conflict",
     ):
         assert required in role_normalized
         assert required in parallel_normalized
@@ -722,11 +728,11 @@ def test_parallel_first_normal_path_rejects_attribution_lock_regression() -> Non
         "direction-local predecessor/intake barrier",
         "parallel-first",
         "same-direction rules",
-        "actual CPM-reported capacity/resource constraint",
-        "formal/explicit-heavy",
-        "pending-runtime-capacity",
-        "non-runtime continuation",
-        "at-most-one-new-treatment-per-turn",
+        "observed resource-vector conflict",
+        "formal local result-bearing runtime",
+        "resource wait",
+        "non-runtime work",
+        "owner-task lifecycle",
     ):
         assert any(required.lower() in " ".join(surface.split()).lower() for surface in surfaces)
 
@@ -738,9 +744,111 @@ def test_parallel_first_normal_path_rejects_attribution_lock_regression() -> Non
         "global serial lock by default",
         "serialize independent treatments for attribution",
         "current sole action permits serialization",
+        "heartbeat",
+        "three-unit",
     ):
         normalized_surfaces = " ".join(" ".join(surface.lower().split()) for surface in surfaces)
         assert stale.lower() not in normalized_surfaces
+
+
+def test_desktop_owner_modes_are_isolated_and_children_keep_their_contracts() -> None:
+    """Scheduler owner tasks carry explicit direction/portfolio scope only."""
+    role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+        encoding="utf-8"
+    )
+    exploration = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    parallel = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md"
+    ).read_text(encoding="utf-8")
+    validation = (
+        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    ).read_text(encoding="utf-8")
+    handoffs = (REPO / "docs" / "project" / "handoffs" / "README.md").read_text(
+        encoding="utf-8"
+    )
+    surfaces = (role, exploration, parallel, validation, handoffs)
+    normalized = " ".join(" ".join(surface.split()) for surface in surfaces)
+    parallel_normalized = " ".join(parallel.split())
+    for required in (
+        "same-level user-owned Desktop Explorer owner task",
+        "owner_mode=direction",
+        "owner_mode=portfolio",
+        "one named direction",
+        "explicitly named direction set",
+        "self-contained natural-language",
+        "exact canonical inputs",
+        "write paths",
+        "result destination",
+        "conclusion-first canonical capsule",
+        "resource vectors",
+        "resource-vector conflict",
+        "Evidence level A/B/C is orthogonal",
+        "formal local result-bearing runtime",
+        "non-runtime work",
+        "selects and freezes already-valued work",
+        "requests/routes that work through Research Scheduler",
+        "Research Scheduler alone creates the same-level user-owned Desktop Explorer owner task",
+        "never creates a new owner assignment",
+        "Scheduler has no semantic authority",
+        "local experiment-runtime admission",
+    ):
+        assert required.lower() in normalized.lower(), required
+    for required in (
+        "owner_assignment_write_scope=exact_direction_or_portfolio_files_or_strict_descendants_under_local_research|optional_one_strict_descendant_under_temp_handoffs/explorer_to_code_manager",
+        "owner_assignment_root_write_forbidden=true",
+        "active_owner_write_path_overlap=equal_or_ancestor_descendant_overlap_fails_closed",
+        "active_owner_write_path_conflict=serialize_or_re_slice",
+        "disjoint_owner_write_paths=parallel_first",
+        "owner_write_scope_isolation=mutation_scope_only_not_science_scheduling_queue_or_schema",
+    ):
+        assert required in role
+    for required in (
+        "exact direction- or portfolio-owned files",
+        "strict descendants under `local_research/`",
+        "at most one exact strict descendant under `temp/handoffs/explorer_to_code_manager/`",
+        "A root path never grants the whole root",
+        "equal or ancestor/descendant-overlapping write paths fail closed",
+        "must serialize or be re-sliced",
+        "disjoint direction paths remain parallel-first",
+        "mutation-scope isolation, not science scheduling, a queue or a new schema",
+    ):
+        assert required.lower() in normalized.lower(), required
+    assert (
+        "never preloads sibling" in normalized.lower()
+        or "without_sibling_preload" in normalized.lower()
+    )
+    assert "Explorer calls the registered agent type" in parallel_normalized
+    assert "self-contained natural-language assignment" in parallel_normalized
+
+    for profile_name in (
+        "hmasd-research-scout.toml",
+        "hmasd-research-innovator.toml",
+        "hmasd-research-principles-analyst.toml",
+        "hmasd-research-critic.toml",
+        "hmasd-explorer-mechanical.toml",
+        "hmasd-agentify-transport.toml",
+    ):
+        profile = (REPO / ".codex" / "agents" / profile_name).read_text(encoding="utf-8")
+        assert "owner_mode=" not in profile
+        assert "same-level user-owned Desktop Explorer" not in profile
+
+    for forbidden in (
+        "runtime_concurrency=three_unit_cpm_capacity_pool",
+        "runtime_capacity_units_total=3",
+        "three-unit CPM runtime pool",
+        "heartbeat",
+        "persistent Explorer",
+        "current sole action permits serialization",
+        "experiment-pool admission",
+    ):
+        assert forbidden.lower() not in normalized.lower(), forbidden
 
 
 def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated() -> None:
@@ -756,6 +864,10 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     pro_review_skill = (
         REPO / ".agents" / "skills" / "hmasd-independent-research-pro-review" / "SKILL.md"
     ).read_text(encoding="utf-8")
+    pro_review_agent_prompt = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-pro-review" / "agents" / "openai.yaml"
+    ).read_text(encoding="utf-8")
+    pro_role = (REPO / ".agents" / "roles" / "EXTERNAL_PRO.md").read_text(encoding="utf-8")
     parallel = (
         REPO
         / ".agents"
@@ -775,7 +887,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     pro_review_skill_normalized = " ".join(pro_review_skill.split())
     parallel_normalized = " ".join(parallel.split())
     for required in (
-        "startup_identity=role|model|current_task",
+        "startup_identity=role|owner_assignment|canonical_inputs",
         "workflow_authority=none",
         "workflow_modification_authority=none",
         "workflow_acceptance_authority=none",
@@ -840,7 +952,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "Workflow design is not an Explorer mode.",
         "Report one exact requirement or defect to the current Workflow Design Manager task",
         "never load the collaborative/audit Workflow Skills",
-        "no archived task ID or route registry",
+        "The prose-first assignment supplies the exact canonical inputs",
         "one bounded owned-path scan",
     ):
         assert required in skill_normalized
@@ -861,8 +973,8 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     assert "$hmasd-workflow-change-audit" not in skill
 
     for required in (
-        "invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`",
-        "there is no separate persistent review-operator session",
+        "invoked only from an assignment-scoped same-level user-owned Desktop Explorer owner task",
+        "there is no separate review-operator owner task",
         "dispatch one self-contained",
         "`AGENTIFY_REVIEW_BATCH_ASSIGNMENT`",
         "registered `hmasd-agentify-transport` child",
@@ -875,6 +987,16 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "Copy each named successful raw response",
     ):
         assert required in pro_review_skill_normalized
+    for required in (
+        "assignment-scoped direction/portfolio owner",
+        "exact review boundary",
+        "owner_mode=direction|portfolio",
+        "exact canonical inputs",
+        "exact canonical write paths",
+        "exact result destination",
+    ):
+        assert required.lower() in pro_review_skill_normalized.lower()
+    assert "assignment-scoped same-level user-owned Desktop Explorer owner task" in pro_review_agent_prompt
     assert "hmasd-independent-research-pro" not in pro_review_skill.replace(
         "hmasd-independent-research-pro-review", ""
     )
@@ -883,6 +1005,20 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
     assert "IR_METHODOLOGY_REVIEW:" in pro_review_skill
     assert "local_research/pro_reviews/<review-id>/" in pro_review_skill
     assert "IR_UNSUPPORTED_REVIEW:" not in pro_review_skill
+    pro_role_normalized = " ".join(pro_role.split())
+    for required in (
+        "review_owner_task=same_level_user_owned_Desktop_Explorer_owner",
+        "review_owner_mode=direction|portfolio",
+        "review_boundary=assignment_scoped_exact_direction_or_named_direction_set",
+        "review_exact_inputs=canonical_inputs_named_by_assignment",
+        "review_write_paths=canonical_write_paths_named_by_assignment",
+        "review_result_destination=canonical_result_destination_named_by_assignment",
+        "scheduled_resource_consuming_action_scope=assignment_named_only",
+        "scheduled_resource_consuming_action_count=not_global_scheduler_field",
+    ):
+        assert required in pro_role_normalized
+    for forbidden in ("persistent Explorer", "persistent conversation", "current resource-consuming action"):
+        assert forbidden.lower() not in pro_role_normalized.lower()
     assert "independent_pro_direction_transport_authority=" not in role
     assert "independent_pro_direction_transport_execution=" not in role
     assert "independent_pro_direction_stable_key=" not in role
@@ -906,7 +1042,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
             assert retired not in surface
 
     for required in (
-        "restart_identity=role|model|current_task",
+        "restart_identity=owner_assignment|canonical_capsules|exact_result_destination",
         "continuity_entry=local_research/RESEARCH_CONTINUITY.md",
         "active_experiment_roster",
         "last completed phase or direction-local intake barrier",
@@ -919,8 +1055,10 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         assert required in parallel_normalized
 
     for required in (
-        "session_owner_role=independent_research_explorer",
-        "startup_identity=role|model|current_task",
+        "owner_role=independent_research_explorer",
+        "owner_task_source=research_scheduler",
+        "owner_mode=direction|portfolio",
+        "startup_identity=role|owner_assignment|canonical_inputs",
         "continuity_entry=local_research/RESEARCH_CONTINUITY.md",
         "durable_workspace=docs/session-workspaces/independent_research_explorer/",
         "temporary_workspace=temp/sessions/independent_research_explorer/",

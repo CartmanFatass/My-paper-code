@@ -11,7 +11,11 @@ Read the root router, the role contract, and brief. This procedure grants no
 science, formal compute, transport, or acceptance authority. External Pro owns
 scientific decisions. Code Project Manager alone accepts code, coordinates the
 project, directs engineering repair, and owns runtime, transport and Git
-integration. A bounded child requires an exact
+integration within its exact `owner_mode=treatment|integration` assignment.
+Research Scheduler observes and routes only same-level Desktop owner task
+lifecycle and resource conflicts; it cannot change science, priority, code,
+acceptance or budget. Owner identity and workspace locators follow
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`. A bounded child requires an exact
 assignment and never scopes, accepts, or commits its work.
 
 ```text
@@ -52,6 +56,21 @@ versioned_scientific_filenames=forbidden_git_is_history
 The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the markers
 above explicitly disable it. Never invoke or chain generic Superpowers Skills.
 A user-named one may be inspected only as reference.
+
+## Assignment-scoped treatment transport
+
+For `owner_mode=treatment`, the self-contained owner assignment and Scheduler
+binding identify exactly two physical locations: ticket-local paths inside one
+registered ticket/worktree and one exact strict descendant in the main checkout
+under `temp/handoffs/code_manager_to_explorer/`. The named descendant, never the
+handoff root or a sibling, carries the conclusion-first reverse handoff and
+points to the exact treatment artifact, evidence and technical-acceptance
+locators named by the assignment. This disposable exchange is not a canonical
+artifact, acceptance record, result ledger, queue, Scheduler semantic relay or
+Git object. Treatment Git and shell operations stay ticket-worktree-scoped; the
+named main-checkout handoff file uses `apply_patch` only and has no Git authority.
+`owner_mode=integration` retains its existing shared-mainline integration
+semantics and does not repeat treatment runtime or treatment acceptance.
 
 ## Triggered transport and mechanical lanes
 
@@ -129,7 +148,7 @@ improves ownership or serves multiple live callers.
 
 ## Project cognition references
 
-For a new persistent coding task, or when Code Project Manager clearly lacks the
+For a new Research Scheduler assignment-scoped coding owner task, or when Code Project Manager clearly lacks the
 project mental model, read the reusable
 `.agents/skills/hmasd-writing-agent-assignments/references/project-cognition-bootstrap-prompt.md`
 once alongside the normally routed documents. It is a cognitive reference, not
@@ -254,30 +273,27 @@ slice.
 ## Concurrency and review
 
 - One writer owns each file; disjoint paths may run in parallel. No global lease.
-- Explorer-origin result-bearing treatments use the three-unit capacity contract
-  defined by the exact `Concurrency and authority` section of
-  `.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md`.
-  CPM is the operational admission owner: sum the units of currently active
-  result-bearing treatments, admit only an isolated treatment that fits, and
-  reserve all three units exclusively within the experiment pool for heavy/C
-  work. Capacity shortage means mark only the not-yet-started treatment
-  `pending_runtime_capacity`, never `BLOCKED`. It does not pause implementation,
-  completed-result intake, review or other non-runtime work. CPM may up-class for
-  observed engineering resources but never down-class, reprioritize science or
-  alter the branch map.
+- Explorer-origin result-bearing treatments use observed resource vectors: there
+  is no numeric global runtime pool. CPM must observe actual CPU, RAM, GPU, process,
+  port, path, mutable-checkpoint, RNG, local-disk, network and cloud-reservation
+  conflicts and owns runtime admission. Scheduler observes and routes lifecycle
+  and resource facts only. A resource conflict affects only the conflicting
+  local experiment runtime; CPM continues implementation, technical intake and
+  every unrelated non-runtime action. CPM may up-class for observed engineering
+  resources but never down-class, reprioritize science or alter the branch map.
 - Once Explorer has selected and frozen independent direction treatments and CPM
-  has admitted isolated tickets/worktrees within the three-unit pool, the normal
-  execution path is
-  `independent_admitted_treatment_execution=parallel_first_within_capacity`:
-  CPM implements and runs those ordinary treatments parallel-first. Reject a
-  global serial fallback unless one exact blocker is recorded: actual
+  has admitted isolated tickets/worktrees with disjoint resource observations,
+  the normal execution path is
+  `independent_treatment_execution=parallel_first_when_resources_are_disjoint`.
+  Reject a global serial fallback unless one exact blocker is recorded: actual
   direction/intake dependency supplied by Explorer, same-file/shared mutable
-  object/root conflict, observed CPU/memory/process/capacity constraint, or
-  formal/explicit-heavy experiment-pool exclusivity. Global attribution, generic
-  caution, convenience, completion order, and a `current sole action` cannot
-  serialize ordinary A/B. Do not force capacity filling, alter scientific
-  priority, down-class a treatment, modify a frozen design, or change the formal
-  nine-valid-iteration single-action lane.
+  object/root conflict, observed CPU/RAM/GPU/process/port/path/mutable checkpoint/
+  RNG/local disk/network/cloud reservation conflict, or formal local
+  result-bearing runtime excluding conflicting local experiment runtime. Global
+  attribution, generic caution, convenience, completion order and a `current
+  sole action` cannot serialize ordinary A/B. Do not force resource saturation,
+  alter scientific priority, down-class a treatment, modify a frozen design, or
+  change the formal nine-valid-iteration single-action lane.
 - Concurrent treatments must have distinct direction/treatment identity,
   ticket/worktree, accepted commit, run/evidence/checkpoint/result roots, RNG
   namespace, temporary paths and Operator receipt. Reject shared writable files,
@@ -291,8 +307,8 @@ slice.
   treatment decision rather than operational recovery.
 - Isolated worktrees use `scripts/hmasd_workspace_ticket.py provision`. Code
   Project Manager supplies the main checkout, exact base commit, assignment and
-  allowed paths; the command creates both the worktree beneath
-  `C:/worktrees/HMASD` and its Git-private ticket. Raw external `git worktree`,
+  allowed paths; the command creates both the worktree beneath the repo-local ticket root
+  `temp/worktrees/HMASD` and its Git-private ticket. Raw external `git worktree`,
   `subst` and path-alias setup are forbidden. The child resolves the ticket
   before editing, and Code Project Manager verifies it after return. Never
   transcribe, infer or repair an absolute worktree path in prose.

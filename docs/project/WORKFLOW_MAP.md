@@ -22,6 +22,7 @@ exhaustive registry or procedure copy.
 | Code Project Manager (CPM) | code, runtime, technical acceptance and project-operation records | code/runtime/review artifacts plus CPM-owned mechanical receipts |
 | Independent Research Explorer | advisory research direction, methodology and research workspace | named research handoff; no workflow authority |
 | Agentify Transport child | requester-assigned batch transport mechanics; WDM may parent only an exact workflow-acceptance smoke batch | raw transport result for CPM or Explorer, or direct smoke-test evidence for WDM |
+| Desktop Research Scheduler | user-owned persistent Desktop lifecycle and resource-conflict routing for same-level ephemeral owner tasks | exact owner thread IDs, binding identity and canonical result locators; no science, code or acceptance |
 | External Pro | bounded independent scientific judgment | exact review result within the submitted question boundary |
 
 CPM-mechanical and Explorer-mechanical wire locators live in
@@ -63,16 +64,34 @@ conclusion-first reverse result or Codex-native fallback. An explicitly
 multi-direction user question may name several directions without authorizing
 portfolio preload. Portfolio/index/README/continuity surfaces remain
 pointer-only; a missing binding gets one semantic clarification while
-unrelated work continues rather than a new workflow state.
+unrelated work continues rather than a new workflow state. This owner-level
+binding is not Scheduler semantic relay or sibling preload.
+
+The Desktop Research Scheduler replaces persistent single Explorer/CPM
+coordination with one user-visible persistent Desktop task. It creates
+same-level ephemeral owner tasks for Explorer `direction|portfolio` work and
+CPM `treatment|integration` work. Owner tasks retain their existing registered
+children at `max_depth=1`; the Scheduler is not a registered child, has no
+`.codex` profile, and never becomes a science, code, runtime, technical
+acceptance, Git or semantic-relay owner.
+
+Each owner assignment remains a self-contained natural-language task model.
+The bounded Desktop lifecycle, result locator and ambiguous-action fallback are
+defined once by `.agents/skills/hmasd-research-scheduler/SKILL.md`; this map
+keeps only the stable owner/task edge and does not repeat command-level
+procedure.
+
+Explorer direction-local binding remains an owner concern when it is named by
+the assignment; the Scheduler does not preload sibling context or relay its
+meaning. Portfolio/index/README/continuity surfaces remain pointer-only.
 
 For result-bearing experiments, Explorer owns the scientific active roster,
 direction dependencies, prospective class and per-result intake; CPM owns the
-three-unit runtime-capacity admission, live process/resource observations,
-isolated execution and per-artifact technical acceptance. The detailed pool and
-heartbeat rules remain in the parallel-research workflow reference. This edge
-does not create a shared scheduler, merged acceptance or cross-direction barrier.
-An exclusive formal/heavy run reserves only experiment admission; all non-runtime
-owner lanes continue.
+runtime observations, isolated execution and per-artifact technical
+acceptance. The Scheduler carries only the resource-conflict pointer; the
+resource policy is defined once by
+`.agents/skills/hmasd-research-scheduler/SKILL.md`. This edge creates no merged
+acceptance or cross-direction semantic barrier.
 
 The Explorer mechanical edge is a native assignment to a literal-fact
 organization child; its storage boundary is defined by the Session Contract.
@@ -113,6 +132,11 @@ writers, and keep parallel reviewers limited to genuinely independent questions.
 assignment and Role, then expand only to the owner surface named by the active
 interface or status dependency. This map is an orientation aid, not a reason to
 load every document.
+
+The Desktop Research Scheduler starts with its user assignment and Scheduler
+Role, then expands lazily only to the Session Workspace Contract, owner-role
+contract or resource reference named by that assignment. It never preloads
+Explorer, CPM or sibling context.
 
 ## Role-based successor continuity
 

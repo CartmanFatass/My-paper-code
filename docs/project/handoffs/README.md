@@ -9,13 +9,41 @@ temporary files under `temp/handoffs/`, so ordinary handoffs require no Git.
 - `temp/handoffs/explorer_to_code_manager/`: Explorer alone creates, edits and
   deletes its outbound files. Code Manager reads them.
 - `temp/handoffs/code_manager_to_explorer/`: Code Manager alone creates, edits
-  and deletes its outbound files. Explorer reads them.
+  and deletes its outbound files. For a treatment assignment, the assignment
+  names one exact descendant under this root; Explorer reads only that file.
 - Workflow Design Manager owns this interface contract but never authors,
   interprets or cleans live handoff content.
+
+Scheduler creates the handoff's same-level user-owned Desktop Explorer owner
+task. Each assignment declares `owner_mode=direction` for one named direction
+or `owner_mode=portfolio` for an explicitly named direction set, with a
+self-contained natural-language brief, exact canonical inputs, write paths and
+result destination. Direction mode excludes sibling preload; portfolio mode
+does not infer unnamed directions. The terminal owner task returns a
+conclusion-first canonical capsule and is archived. Existing registered child
+profiles and authority are unchanged.
 
 Same-file concurrent writes are forbidden. The sender deletes the exchange copy
 after intake; live files never enter Git. Canonical records stay with their
 owners, with no handoff history tree.
+
+## CPM treatment reverse-handoff scope
+
+The CPM `owner_mode=treatment` assignment has exactly two physical write scopes:
+ticket-local paths inside one registered ticket/worktree and one exact
+strict-descendant main-checkout transport path under
+`temp/handoffs/code_manager_to_explorer/`. Treatment Git and shell mutation
+remain ticket-worktree-scoped. The one main-checkout handoff file is written
+with `apply_patch` only and has no Git authority; it is conclusion-first,
+disposable transport that points to the exact assignment-named treatment
+artifact/evidence/technical-acceptance locators. It is not the canonical
+technical artifact, acceptance record, result ledger, queue, Scheduler semantic
+relay or Git object. Explorer reads only the exact named handoff/technical
+locators and performs exactly one scientific intake, then existing sender and
+receiver cleanup applies. Scheduler routes/checks locators mechanically and does
+not interpret the result. `owner_mode=integration` keeps the existing
+shared-mainline integration semantics and does not repeat treatment runtime or
+treatment acceptance.
 
 ## Scientific-only intake boundary
 
@@ -57,16 +85,18 @@ work; do not guess, merge directions, rewrite the artifact or create a
 `BLOCKED` state.
 
 An optional manifest may list temporary brief paths in their intended order. It is
-not a queue, registry, lease or state machine. Capacity-admitted work may be
-concurrent, but every entry remains direction/treatment-specific and uses
-distinct sender files; manifest order is not runtime admission, scientific
-priority or a cross-direction barrier. A result begins with its natural-language
-conclusion and then appends the necessary exact evidence; a mechanical envelope
-alone is insufficient.
+not a queue, registry, lease or state machine. Scheduler observes resource
+vectors and conflict sets; independent entries may be concurrent when their
+writers and vectors are disjoint. Manifest order is not runtime admission,
+scientific priority or a cross-direction barrier. A result begins with its
+natural-language conclusion and then appends the necessary exact evidence; a
+mechanical envelope alone is insufficient.
 For two or more already selected and frozen independent treatments with closed
 direction-local predecessor/intake barriers, this interface follows the
-parallel-first normal path within available capacity. A global serial fallback
-requires named dependency or actual resource evidence; attribution, generic
-caution, completion order and convenience are not sufficient. The handoff
-interface does not fill capacity, reprioritize or reactivate directions, and
-retains the heartbeat one-new-treatment-per-turn bound.
+parallel-first normal path when observed vectors and writers are disjoint. A
+global serial fallback requires a named dependency, same writer/mutable
+path/object or observed resource conflict; attribution, generic caution,
+completion order and convenience are not sufficient. A design explicitly
+marked formal local result-bearing runtime may exclude only conflicting local
+experiment runtime. Owner-task lifecycle replaces polling-loop scheduling and a
+resource wait never blocks non-runtime work or changes scientific priority.

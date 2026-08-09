@@ -21,6 +21,11 @@ from collections import deque
 from pathlib import Path, PurePosixPath
 from typing import Any
 
+_PROJECT_SCRIPTS = Path(__file__).resolve().parents[4] / "scripts"
+if str(_PROJECT_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_SCRIPTS))
+import hmasd_workspace_ticket as ticketing  # noqa: E402
+
 
 SCHEMA_VERSION = 3
 PHASES = (
@@ -66,6 +71,14 @@ def _git(repo: Path, *args: str) -> str:
 def _repo_root(start: Path | None = None) -> Path:
     start = (start or Path.cwd()).resolve()
     return Path(_git(start, "rev-parse", "--show-toplevel")).resolve()
+
+
+def _main_checkout(start: Path | None = None) -> Path:
+    top = _repo_root(start)
+    try:
+        return ticketing.main_checkout(top)
+    except ticketing.TicketError as exc:
+        raise ReadinessError(str(exc)) from exc
 
 
 def _repo_state(repo: Path) -> tuple[str, str]:
@@ -545,14 +558,6 @@ def check_receipt(receipt_path: Path) -> int:
     return 0
 
 
-def _code_pm_session(repo: Path) -> str:
-    role = (repo / ".agents/roles/CODE_PROJECT_MANAGER.md").read_text(encoding="utf-8")
-    matches = re.findall(r"(?m)^session_owner_id=([^\s]+)$", role)
-    if len(matches) != 1:
-        raise ReadinessError("Code PM role must contain exactly one session owner")
-    return matches[0]
-
-
 def _message_field(message: str, name: str) -> str | None:
     match = re.search(rf"(?m)^{re.escape(name)}=(.*)$", message)
     return match.group(1).strip() if match else None
@@ -570,30 +575,82 @@ def hook_stop() -> int:
         payload = json.load(sys.stdin)
     except (json.JSONDecodeError, TypeError):
         return 0
-    try:
-        repo = _repo_root()
-        session = _code_pm_session(repo)
-    except (ReadinessError, OSError):
-        return 0
-    if payload.get("session_id") != session:
-        return 0
     message = payload.get("last_assistant_message") or ""
     if not re.search(r"(?m)^CODE_ACCEPTED\s*$", message):
         return 0
     already_active = payload.get("stop_hook_active") is True
+    session_id = payload.get("session_id")
+    if not isinstance(session_id, str) or not session_id.strip():
+        print(
+            json.dumps(
+                _hook_feedback(
+                    "CODE_ACCEPTED requires a non-empty exact session_id.",
+                    already_active,
+                ),
+                ensure_ascii=False,
+            )
+        )
+        return 0
+    try:
+        start = payload.get("cwd")
+        if not isinstance(start, str) or not start.strip():
+            raise ReadinessError("CODE_ACCEPTED has no valid cwd.")
+        repo = _main_checkout(Path(start))
+        binding = ticketing.resolve_scheduler_binding(
+            repo,
+            session_id=session_id,
+            owner_role="code_project_manager",
+            owner_mode="treatment",
+        )
+        if binding is None:
+            integration_binding = ticketing.resolve_scheduler_binding(
+                repo,
+                session_id=session_id,
+                owner_role="code_project_manager",
+                owner_mode="integration",
+            )
+            if integration_binding is not None:
+                return 0
+            print(
+                json.dumps(
+                    _hook_feedback(
+                        "CODE_ACCEPTED session_id does not match an active CPM Scheduler binding.",
+                        already_active,
+                    ),
+                    ensure_ascii=False,
+                )
+            )
+            return 0
+    except ticketing.SchedulerBindingError as exc:
+        print(json.dumps(_hook_feedback(str(exc), already_active), ensure_ascii=False))
+        return 0
+    except (ReadinessError, OSError, ticketing.TicketError) as exc:
+        reason = str(exc).strip() or "CODE_ACCEPTED workspace or binding resolution failed."
+        print(json.dumps(_hook_feedback(reason, already_active), ensure_ascii=False))
+        return 0
+    # Integration ownership deliberately does not re-run treatment readiness.
+    if binding is None:
+        return 0
     commit = _message_field(message, "commit")
     exact_paths = _message_field(message, "exact_paths")
     readiness = _message_field(message, "execution_readiness")
     receipt_field = _message_field(message, "execution_readiness_receipt")
     reason = _message_field(message, "execution_readiness_reason")
     try:
-        current = _git(repo, "rev-parse", "HEAD")
+        _, worktree, ticket_allowed = ticketing.resolve_binding_ticket(repo, binding)
+        current = _git(worktree, "rev-parse", "HEAD")
         if not commit or not COMMIT_RE.fullmatch(commit):
             raise ReadinessError("CODE_ACCEPTED has no exact 40-character commit.")
         if current != commit:
-            raise ReadinessError("CODE_ACCEPTED commit is not current HEAD.")
+            raise ReadinessError("CODE_ACCEPTED commit is not current treatment HEAD.")
         if not exact_paths:
             raise ReadinessError("CODE_ACCEPTED has no exact_paths.")
+        parsed_paths = [item for item in exact_paths.split("|") if item]
+        if not parsed_paths or any(
+            not ticketing._is_allowed(item.replace("\\", "/"), ticket_allowed)
+            for item in parsed_paths
+        ):
+            raise ReadinessError("CODE_ACCEPTED exact_paths exceed treatment ticket scope.")
         if readiness == "not_triggered":
             if not reason or reason in {"none", "not-triggered", "not_triggered"}:
                 raise ReadinessError("Untriggered execution readiness needs a bounded reason.")
@@ -608,7 +665,7 @@ def hook_stop() -> int:
                 raise ReadinessError("CODE_ACCEPTED receipt is not the finalized Git-private receipt")
             if receipt.get("candidate_commit") != commit:
                 raise ReadinessError("receipt candidate identity does not match CODE_ACCEPTED")
-            if receipt.get("exact_paths") != [item for item in exact_paths.split("|") if item]:
+            if receipt.get("exact_paths") != parsed_paths:
                 raise ReadinessError("receipt exact_paths do not match CODE_ACCEPTED")
         else:
             raise ReadinessError("CODE_ACCEPTED has no passed execution_readiness state.")

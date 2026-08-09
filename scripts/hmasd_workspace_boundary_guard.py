@@ -135,24 +135,6 @@ def _workspace_scope(cwd: Path) -> tuple[Path, list[Path], bool]:
     return top, allowed_roots, True
 
 
-def _registered_research_sessions(repo: Path) -> dict[str, str]:
-    role_path = repo / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md"
-    if not role_path.is_file():
-        return {}
-    text = role_path.read_text(encoding="utf-8")
-    fields = {"explorer": "session_id"}
-    sessions: dict[str, str] = {}
-    for role, field in fields.items():
-        matches = re.findall(rf"(?m)^{field}=([^\s]+)\s*$", text)
-        if len(matches) > 1:
-            raise GuardError(f"role charter has multiple {role} sessions")
-        if matches:
-            sessions[role] = matches[0]
-    if len(set(sessions.values())) != len(sessions):
-        raise GuardError("independent research roles share one session identity")
-    return sessions
-
-
 def _registered_python(repo: Path) -> str | None:
     router = repo / "AGENTS.md"
     if not router.is_file():
@@ -225,6 +207,76 @@ def _extract_absolute_paths(command: str) -> list[Path]:
     return unique
 
 
+def _binding_owned_roots(repo: Path) -> tuple[Path, ...]:
+    return tuple(
+        _canonical(repo / relative)
+        for relative in (
+            Path("local_research"),
+            Path("temp") / "handoffs" / "explorer_to_code_manager",
+            ticketing.TREATMENT_TRANSPORT_DIRECTORY,
+        )
+    )
+
+
+def _binding_scope_requires_exact_session(
+    repo: Path,
+    cwd: Path,
+    linked: bool,
+    tool_name: str,
+    tool_input: Any,
+) -> bool:
+    """Identify mutations that cannot be authorized without an exact owner binding."""
+
+    if tool_name in PATCH_TOOLS:
+        try:
+            raw_paths = PATCH_PATH.findall(_patch_text(tool_input))
+        except GuardError:
+            return False
+        candidates = [
+            _canonical(
+                Path(raw.strip())
+                if Path(raw.strip()).is_absolute()
+                else cwd / Path(raw.strip())
+            )
+            for raw in raw_paths
+        ]
+        return any(
+            _inside(candidate, root)
+            for candidate in candidates
+            for root in _binding_owned_roots(repo)
+        ) or linked
+    if tool_name not in SHELL_TOOLS:
+        return False
+    if not isinstance(tool_input, dict) or not isinstance(tool_input.get("command"), str):
+        return False
+    command = tool_input["command"]
+    mutating = bool(
+        MUTATION.search(command)
+        or re.search(r"(?m)(?<![<>=])-?>{1,2}(?![=])", command)
+    )
+    if not mutating:
+        return False
+    if linked:
+        return True
+    normalized_command = command.replace("\\", "/").lower()
+    if any(
+        marker in normalized_command
+        for marker in (
+            "local_research",
+            "temp/handoffs/explorer_to_code_manager",
+            "temp/handoffs/code_manager_to_explorer",
+        )
+    ):
+        return True
+    absolute_paths = _extract_absolute_paths(command)
+    candidates = absolute_paths or [cwd]
+    return any(
+        _inside(candidate, root)
+        for candidate in candidates
+        for root in _binding_owned_roots(repo)
+    )
+
+
 def _trusted_provision(command: str, repo: Path, linked: bool) -> bool:
     lowered = command.lower().replace("/", "\\")
     if linked or "hmasd_workspace_ticket.py" not in lowered or " provision " not in f" {lowered} ":
@@ -279,11 +331,11 @@ def _guard_shell(
         if GIT_MUTATION.search(command) or re.search(
             r"(?i)(?:^|\s)git(?:\.exe)?(?:\s|$)", command
         ):
-            raise GuardError("Git mutation is forbidden for the independent research session")
+            raise GuardError("Git mutation is forbidden for the independent research owner task")
         if RESEARCH_UNSAFE_EXPRESSION.search(command):
             raise GuardError("nested or executable shell expression is forbidden")
         if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
-            raise GuardError("compound shell commands are forbidden for the research session")
+            raise GuardError("compound shell commands are forbidden for the research owner task")
         if _trusted_research_script(command, repo, research_role):
             return
         if RESEARCH_UNSAFE_READ_OPTION.search(command):
@@ -340,27 +392,72 @@ def main() -> int:
             raise GuardError("hook payload has no working directory")
         cwd = _canonical(Path(cwd_raw))
         repo, allowed_roots, linked = _workspace_scope(cwd)
-        registered = _registered_research_sessions(repo)
+        shell_allowed_roots = allowed_roots
+        binding_repo = ticketing.main_checkout(repo) if linked else repo
         session_id = payload.get("session_id")
-        research_role = next(
-            (
-                role
-                for role, registered_session in registered.items()
-                if isinstance(session_id, str) and session_id == registered_session
-            ),
-            None,
+        valid_session = (
+            isinstance(session_id, str)
+            and bool(session_id)
+            and not any(character.isspace() for character in session_id)
+        )
+        binding = (
+            ticketing.resolve_scheduler_binding(binding_repo, session_id=session_id)
+            if valid_session
+            else None
+        )
+        if binding is None and _binding_scope_requires_exact_session(
+            binding_repo,
+            cwd,
+            linked,
+            tool_name,
+            payload.get("tool_input"),
+        ):
+            raise GuardError("binding-scoped mutation requires an exact active session binding")
+        research_role = (
+            "explorer"
+            if binding is not None
+            and binding["owner_role"] == "independent_research_explorer"
+            else None
         )
         review_root = _canonical(repo / "local_research" / "pro_reviews")
         if research_role is None:
-            if _inside(cwd, review_root):
+            if _inside(cwd, review_root) and binding is None:
                 raise GuardError(
-                    "local_research/pro_reviews requires the registered persistent session"
+                    "local_research/pro_reviews requires an active Scheduler Explorer binding"
                 )
         forbidden_roots: tuple[Path, ...] = ()
         if research_role is not None:
             if linked:
                 raise GuardError("independent research is confined to the main checkout")
-            allowed_roots = [_canonical(repo / "local_research")]
+            allowed_roots = [
+                _canonical(repo / Path(relative))
+                for relative in binding["allowed_write_paths"]
+            ]
+            shell_allowed_roots = allowed_roots
+        elif binding is not None and binding["owner_role"] == "code_project_manager":
+            if binding["owner_mode"] == "treatment":
+                if not linked:
+                    raise GuardError("treatment binding requires its registered linked worktree")
+                _, binding_worktree, binding_allowed = ticketing.resolve_binding_ticket(binding_repo, binding)
+                if not _same(binding_worktree, cwd):
+                    raise GuardError("treatment binding does not match the active worktree")
+                allowed_roots = []
+                shell_allowed_roots = []
+                for relative in binding_allowed:
+                    if ticketing.is_treatment_transport_path(binding_repo, relative):
+                        allowed_roots.append(_canonical(binding_repo / Path(relative)))
+                    else:
+                        root = _canonical(cwd / Path(relative))
+                        allowed_roots.append(root)
+                        shell_allowed_roots.append(root)
+            else:
+                if linked:
+                    raise GuardError("integration binding is confined to the main checkout")
+                allowed_roots = [
+                    _canonical(repo / Path(relative))
+                    for relative in binding["allowed_write_paths"]
+                ]
+                shell_allowed_roots = allowed_roots
         if tool_name in PATCH_TOOLS:
             _guard_patch(
                 cwd,
@@ -372,7 +469,7 @@ def main() -> int:
             _guard_shell(
                 repo,
                 cwd,
-                allowed_roots,
+                shell_allowed_roots,
                 linked,
                 payload.get("tool_input"),
                 research_role,

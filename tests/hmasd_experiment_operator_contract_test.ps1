@@ -169,15 +169,15 @@ foreach ($required in @(
     if (-not $managerNormalized.Contains($required)) { throw "CPM experiment delegation contract missing: $required" }
 }
 foreach ($required in @(
-    'the three-unit runtime pool and live process/resource observations',
-    'independent_admitted_treatment_execution=parallel_first_within_capacity',
+    'resource observations for CPU/RAM/GPU/process/port/path/mutable_checkpoint/RNG/local_disk/network/cloud_reservation',
+    'independent_treatment_execution=parallel_first_when_resources_are_disjoint',
     'global serial fallback is rejected unless one exact blocker',
-    'Capacity deferral is `pending_runtime_capacity` for that treatment',
-    'never a task, direction or workflow `BLOCKED` state',
+    'resource conflict affects only the conflicting local experiment runtime',
+    'never changes science, priority, code, acceptance or budget',
     'one independent technical acceptance and one conclusion-first reverse result',
-    'An exclusive formal/heavy run reserves only experiment-runtime admission',
+    'formal local result-bearing runtime excludes conflicting local experiment runtime',
     'CPM continues implementation, technical intake and every unrelated non-runtime action')) {
-    if (-not $managerNormalized.Contains($required)) { throw "CPM runtime-capacity boundary missing: $required" }
+    if (-not $managerNormalized.Contains($required)) { throw "CPM runtime-resource boundary missing: $required" }
 }
 foreach ($required in @(
     'one assignment-named terminal receipt path',

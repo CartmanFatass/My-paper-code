@@ -1,20 +1,31 @@
 # Parallel independent research workflow
 
+owner_task_scheduler=same_level_user_owned_Desktop_Explorer_task
+owner_mode=direction|portfolio
+owner_task_assignment=self_contained_natural_language
+owner_task_exact_inputs=canonical_inputs_named_by_assignment
+owner_task_write_paths=canonical_write_paths_named_by_assignment
+owner_task_result_destination=canonical_result_destination_named_by_assignment
+owner_task_result=conclusion_first_canonical_capsule
+resource_model=observed_resource_vector_and_conflict_set
+resource_vector_dimensions=cpu|memory|gpu|process|io|network|paid_service|mutable_path|mutable_object|output_root
+resource_observation_owner=scheduler_observes_actual_vectors_and_conflicts
+resource_admission_owner=code_project_manager_runtime_authority
+resource_conflict_serialization=only_named_dependency_or_observed_vector_or_mutable_conflict
+evidence_level_runtime_orthogonal=true
+
 ```text
 logical_assignment_count=derived_from_exact_work_roster
-runtime_concurrency=three_unit_cpm_capacity_pool
-runtime_capacity_units_total=3
-runtime_capacity_classes=A_READONLY_OR_ZERO_RUNTIME:0|B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive
 active_experiment_roster_owner=independent_research_explorer_scientific_view
-runtime_capacity_admission_owner=code_project_manager
-independent_ready_treatment_dispatch=parallel_first_within_capacity
-global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence
+independent_ready_treatment_dispatch=parallel_first_when_vectors_are_disjoint
+global_serial_fallback=forbidden_without_named_dependency_or_observed_conflict
 per_direction_result_bearing_default=one_active
 same_direction_parallelism=exact_frozen_joint_roster_only
-capacity_wait_state=pending_runtime_capacity_only
-capacity_wait_effect=pending_runtime_capacity_only
-experiment_pool_exclusivity_scope=result_bearing_runtime_only
-workflow_progress_during_exclusive_runtime=continues
+formal_local_runtime_exclusivity=explicit_formal_result_bearing_local_runtime_only
+formal_local_runtime_scope=conflicting_local_experiment_runtime_only
+formal_local_runtime_nonblocking=research|intake|code|review|Pro|unrelated_nonruntime
+resource_wait_effect=pending_observed_resource_conflict_only_nonruntime_continues
+evidence_level_runtime_orthogonal=true
 canonical_campaign_phase_roster=exact_ordered_work_roster
 canonical_campaign_phase_barriers=required
 adaptive_question_roster=singleton_or_exact_joint_roster
@@ -32,7 +43,7 @@ later_cycle_collaboration_brief=required
 research_child_default_fork_turns=none
 research_child_dispatch_contract=registered_agent_type|fork_turns="none"|self_contained_natural_language_assignment
 parent_conversation_history=background_only_not_task_authority
-restart_identity=role|model|current_task
+restart_identity=owner_assignment|canonical_capsules|exact_result_destination
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
 continuity_owner=independent_research_explorer
 project_validation_intake_contract=docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md
@@ -52,7 +63,7 @@ For the canonical evidence-review and algorithm-inspiration campaign, every
 phase freezes an exact logical work roster. Runtime launches as many
 independent assignments as available native capacity permits and defers the
 rest as not-yet-started roster items. This native child availability is separate
-from experiment-pool admission. Operational failure may receive one unchanged low-cost retry. A changed
+from local experiment-runtime admission. Operational failure may receive one unchanged low-cost retry. A changed
 source boundary or project authority needs a new user decision; a new mechanism
 or subdirection inside the campaign is an opportunity-bound assignment.
 
@@ -99,8 +110,8 @@ question. Later collaboration reads only an Explorer-authored compact brief
 and named prior answers. Preserve disagreements as advisory inputs; never vote
 or collapse them into a quorum.
 
-There is no fixed adaptive count, concurrency, quorum, every-B panel,
-automatic-Pro path or persistent mechanism. The Explorer remains the single
+There is no fixed adaptive count, concurrency, quorum, every-B panel or
+automatic-Pro path. There is no persistent mechanism. The Explorer remains the single
 writer and integrates answers into one decision. Strict methodology is scoped
 to conclusion-bearing C work or a named science-review trigger, not all
 candidate validation.
@@ -119,9 +130,9 @@ The Explorer owns one lightweight entry at
 artifact paths, the `active_experiment_roster`, the last completed phase or
 direction-local intake barrier, unfinished assignment or review, the next
 scientific action and the current authorized source boundary. Each active
-treatment entry makes its direction, treatment, declared resource class and
-units, predecessor dependency, canonical design/handoff, CPM task locator, last
-CPM-reported runtime observation and intake state understandable. These are
+treatment entry makes its direction, treatment, scientific evidence level,
+observed resource vector, predecessor dependency, canonical design/handoff, CPM
+task locator, last named resource observation and intake state understandable. These are
 semantic continuity cues rather than required field names. Update it only when
 the active roster changes, an intake/phase barrier closes, a direction is parked,
 or the task ends. If absent, the new Explorer performs one bounded scan of its
@@ -222,79 +233,56 @@ completeness never means scientific truth.
 
 The normal path for two or more scientifically selected and frozen independent
 treatments is parallel-first when each direction's local predecessor/intake
-barrier is closed and admitted capacity is available. Serialize only an exact
-direction dependency, same-direction rules, shared mutable object/path
-conflict, actual CPM-reported capacity/resource constraint, or formal/explicit-
-heavy experiment-pool exclusivity. Attribution, generic caution, completion
-order, convenience and a current sole action are not dependency or resource
+barrier is closed and their observed resource vectors are disjoint. Serialize
+only an exact direction dependency, same-direction rule, shared mutable
+object/path, observed resource-vector conflict, or explicit formal local
+result-bearing runtime that conflicts with another local experiment.
+Attribution, generic caution, completion order and convenience are not resource
 evidence and cannot restore a global serial fallback. This rule does not make
-Explorer invent or select work, fill capacity, change scientific priority or
-reactivate a parked direction. It preserves pending-runtime-capacity and
-non-runtime continuation, the heartbeat's at-most-one-new-treatment-per-turn
-bound, existing Pro triggers and formal nine-iteration behavior.
+Explorer invent work, saturate resources, change scientific priority or
+reactivate a parked direction.
 
-The workflow defines no fixed per-role parallel count. Exact source and
-opportunity rosters determine logical work; current Codex capacity determines
-how many read-only analyses run simultaneously. Runtime experiments use a
-three-unit pool owned operationally by CPM: `A_READONLY_OR_ZERO_RUNTIME` consumes
-zero, `B_TOY_LIGHT` one, `B_TOY_MEDIUM` two, and `B_HEAVY_OR_C` all three with
-experiment-pool exclusivity. Thus three independent light treatments, or one medium plus
-one light, may run; a heavy/C treatment requires every other result-bearing
-runtime treatment to be terminal. A fourth light remains
-`pending_runtime_capacity` until one unit is released. Explorer declares a prospective class from
-the frozen design. CPM may up-class or defer a not-yet-started treatment for
-actual CPU, memory, process, GPU, paid-service or output-root constraints, but
-never down-class it or change its scientific question, priority or branch map.
-Insufficient capacity is `pending_runtime_capacity`, never a direction, task or
-workflow `BLOCKED` state, and creates no queue engine, lease, dispatcher or
-acceptance owner. Formal or explicitly heavy runtime may prevent another
-result-bearing experiment from starting, but it never pauses code work,
-read-only research, scientific intake, External Pro review or another
-non-runtime action.
+Evidence level A/B/C is orthogonal to the runtime resource vector. Explorer
+owns the scientific level, priority and direction dependency. Scheduler observes
+actual CPU, memory, GPU, process, I/O, network, paid-service, mutable-path,
+mutable-object and output-root facts; CPM owns runtime admission and execution.
+An observed shortage or conflict affects only the exact treatment. Resource
+waits leave research, intake, code, review, Pro and other non-runtime owner tasks
+runnable and do not create a workflow `BLOCKED` state. Cloud use requires the
+user's explicit provider, budget, credential and egress grant.
 
-A light treatment is normally CPU-only, uses no GPU, paid API or production
-service, stays at or below roughly 500,000 real transitions and 100,000 optimizer
-updates, has explicit memory/process/output-root bounds, and permits one full,
-no sweep and no implicit retry. The thresholds guide prospective admission rather
-than mechanically decide scientific meaning. Formal, expensive, GPU, paid-
-resource and C work is heavy/exclusive even if a superficial count is small.
-
-The attribution barrier is direction-local. Different directions' independent
-ordinary A/B treatments may run concurrently. By default a direction has at most
-one result-bearing treatment active, and its successor cannot be dispatched
-until that predecessor is terminal and Explorer completes the direction's
-scientific intake. Same-direction parallelism is exceptional: Explorer must
-freeze one exact joint roster before any member starts, every design must be
-independent of peer results, and no member may share a mutable scientific object.
-The joint roster still consumes the common capacity pool. Completion order is
-never scientific priority, voting or a cross-direction barrier. A completed
-result may be intaken immediately; it cannot modify the frozen design of another
-already-started full. Explorer may cancel a not-yet-started roster item whose
-value has fallen, but never mutates a result-bearing full.
+Different directions' independent ordinary A/B treatments may run concurrently.
+By default a direction has at most one result-bearing treatment active, and its
+successor waits until the predecessor is terminal and Explorer completes that
+direction's scientific intake. Same-direction parallelism is exceptional:
+Explorer freezes one exact joint roster before any member starts, every design
+is independent of peer results and no member shares a mutable scientific object.
+Completion order is never scientific priority, voting or a cross-direction barrier. A
+returned result may be intaken immediately and cannot modify another already-
+started full. After one joint-roster member starts, peer results cannot cause a
+remaining member to be rewritten or selectively cancelled; an explicitly named
+operational impossibility or user-directed whole-roster abandon is recorded as
+an incomplete joint roster, never joint evidence.
 
 Every concurrent treatment has distinct direction/treatment identity, canonical
 design, CPM ticket/worktree, source freeze and accepted commit, run, evidence,
-checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator
-receipt, readiness/technical-acceptance record and Explorer decision. Same-file
-writes, reused run roots, shared mutable checkpoints or trainer state, and
-mid-run cross-treatment result injection fail closed. OOM, process conflict or
-shared-path conflict affects only the treatment that encountered it. CPM may
-leave a not-yet-started ticket pending under CPU or memory pressure without changing
-scientific ordering. One engineering recovery that preserves every scientific
-literal is allowed before the result-bearing full starts; after it starts there
-is no silent retry.
+checkpoint and result roots, seed/RNG namespace, temporary session paths,
+Operator receipt, readiness/technical-acceptance record and Explorer decision.
+Same-file writes, reused roots, shared mutable checkpoints/trainer state and
+mid-run result injection fail closed for that treatment. One engineering
+recovery that preserves every scientific literal is allowed before the
+result-bearing full starts; after it starts there is no silent retry.
 
-On an Explorer continuation heartbeat, restore the active roster, perform one
-bounded status/wait for each named active CPM treatment, intake returned results
-first, and dispatch at most one new treatment only when capacity is available and
-that direction's local barrier is closed. After the task deadline, dispatch none
-and wait only to a safe handoff boundary. This is ordinary continuation behavior,
-not a persistent monitor or background scheduler. A heartbeat with no free
-runtime token still performs intake, analysis and other non-runtime work.
-External Pro may overlap a
-small B runtime, but only the existing direction-changing ambiguity, final
-alignment, C/formal boundary or explicit-user trigger starts Pro; B completion or
-parallelism alone never does.
+Scheduler owner-task lifecycle events replace polling or background scheduling.
+The portfolio owner restores only its exact canonical roster/capsules, intakes
+returned results first, selects and freezes already-valued work with a closed
+local barrier, then requests/routes that work through Research Scheduler.
+Research Scheduler alone creates the same-level user-owned Desktop Explorer
+owner task; the portfolio owner never creates a new owner assignment and the
+Scheduler has no semantic authority. External Pro may overlap ordinary
+runtime, but only existing direction-changing ambiguity, final alignment,
+C/formal boundary or explicit-user triggers start Pro; completion or parallelism
+alone never does.
 
 Campaign phase dependencies remain ordered. Children
 cannot spawn, write, use Git, contact persistent tasks or access active HMASD

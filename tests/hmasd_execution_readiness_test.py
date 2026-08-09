@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import argparse
 from pathlib import Path
 
 
@@ -28,7 +29,7 @@ class ReadinessEngineTest(unittest.TestCase):
         self._git("init", "-q")
         self._git("config", "user.email", "test@example.invalid")
         self._git("config", "user.name", "Readiness Test")
-        (self.repo / ".gitignore").write_text("logs/\n", encoding="utf-8")
+        (self.repo / ".gitignore").write_text("logs/\ntemp/\n", encoding="utf-8")
         (self.repo / "candidate.txt").write_text("candidate\n", encoding="utf-8")
         role = self.repo / ".agents/roles/CODE_PROJECT_MANAGER.md"
         role.parent.mkdir(parents=True)
@@ -37,6 +38,35 @@ class ReadinessEngineTest(unittest.TestCase):
         self._git("commit", "-qm", "fixture")
         self.candidate = self._git("rev-parse", "HEAD")
         self.exercise = "logs/readiness"
+        self.ticketing = READINESS.ticketing
+        self.ticketing.REGISTERED_REPOSITORY = self.repo
+        self.ticketing.WORKTREE_ROOT = self.repo / "temp/worktrees/HMASD"
+        treatment_handoff = (
+            Path(self.ticketing.TREATMENT_TRANSPORT_DIRECTORY) / "TREATMENT.json"
+        ).as_posix()
+        self.ticketing.provision_ticket(
+            argparse.Namespace(
+                repo=self.repo,
+                assignment_id="TREATMENT",
+                base_commit=self.candidate,
+                allow=["candidate.txt", treatment_handoff],
+            )
+        )
+        bindings = self.repo / "temp/sessions/research_scheduler/bindings"
+        bindings.mkdir(parents=True)
+        (bindings / "TREATMENT.json").write_text(
+            json.dumps(
+                {
+                    "assignment_id": "TREATMENT",
+                    "session_id": "test-session",
+                    "owner_role": "code_project_manager",
+                    "owner_mode": "treatment",
+                    "allowed_write_paths": ["candidate.txt", treatment_handoff],
+                    "active": True,
+                }
+            ),
+            encoding="utf-8",
+        )
 
     def tearDown(self) -> None:
         self.tmp.cleanup()
@@ -78,9 +108,16 @@ class ReadinessEngineTest(unittest.TestCase):
         path.write_text(json.dumps(value), encoding="utf-8")
         return path
 
-    def _hook_output(self, receipt: Path) -> str:
+    def _hook_output(
+        self,
+        receipt: Path,
+        *,
+        session_id: object = "test-session",
+        include_session_id: bool = True,
+        cwd: object | None = None,
+        include_cwd: bool = True,
+    ) -> str:
         payload = {
-            "session_id": "test-session",
             "last_assistant_message": "\n".join(
                 (
                     "CODE_ACCEPTED",
@@ -91,6 +128,10 @@ class ReadinessEngineTest(unittest.TestCase):
                 )
             ),
         }
+        if include_cwd:
+            payload["cwd"] = str(self.repo) if cwd is None else cwd
+        if include_session_id:
+            payload["session_id"] = session_id
         old_stdin, old_stdout = sys.stdin, sys.stdout
         output = io.StringIO()
         try:
@@ -100,6 +141,68 @@ class ReadinessEngineTest(unittest.TestCase):
         finally:
             sys.stdin, sys.stdout = old_stdin, old_stdout
         return output.getvalue()
+
+    def test_hook_requires_exact_treatment_session_identity(self) -> None:
+        spec = self._spec()
+        old = Path.cwd()
+        os.chdir(self.repo)
+        try:
+            self.assertEqual(READINESS.run_spec(spec), 0)
+            self.assertEqual(READINESS.finalize_spec(spec), 0)
+            final = self.repo / ".git/hmasd/execution-readiness" / self.candidate / "a1.json"
+
+            self.assertEqual(self._hook_output(final), "")
+            invalid = (
+                self._hook_output(final, include_session_id=False),
+                self._hook_output(final, session_id=None),
+                self._hook_output(final, session_id=123),
+                self._hook_output(final, session_id=""),
+                self._hook_output(final, session_id="wrong-session"),
+            )
+            for output in invalid:
+                payload = json.loads(output)
+                self.assertEqual(payload["decision"], "block")
+                self.assertIn("session_id", payload["reason"])
+        finally:
+            os.chdir(old)
+
+    def test_hook_workspace_resolution_fail_closed_after_code_accepted(self) -> None:
+        receipt = self.repo / "not-used.json"
+        missing_cwd = json.loads(self._hook_output(receipt, include_cwd=False))
+        self.assertEqual(missing_cwd["decision"], "block")
+        self.assertIn("cwd", missing_cwd["reason"])
+
+        invalid_cwd = json.loads(
+            self._hook_output(receipt, cwd=str(self.repo / "missing-repository"))
+        )
+        self.assertEqual(invalid_cwd["decision"], "block")
+        self.assertTrue(invalid_cwd["reason"])
+
+    def test_hook_exact_integration_session_is_a_treatment_noop(self) -> None:
+        spec = self._spec()
+        old = Path.cwd()
+        os.chdir(self.repo)
+        try:
+            self.assertEqual(READINESS.run_spec(spec), 0)
+            self.assertEqual(READINESS.finalize_spec(spec), 0)
+            final = self.repo / ".git/hmasd/execution-readiness" / self.candidate / "a1.json"
+            bindings = self.repo / "temp/sessions/research_scheduler/bindings"
+            (bindings / "INTEGRATION.json").write_text(
+                json.dumps(
+                    {
+                        "assignment_id": "INTEGRATION",
+                        "session_id": "integration-session",
+                        "owner_role": "code_project_manager",
+                        "owner_mode": "integration",
+                        "allowed_write_paths": ["candidate.txt"],
+                        "active": True,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            self.assertEqual(self._hook_output(final, session_id="integration-session"), "")
+        finally:
+            os.chdir(old)
 
     def test_ordered_run_logs_utf8_and_finalize_is_idempotent(self) -> None:
         spec = self._spec()

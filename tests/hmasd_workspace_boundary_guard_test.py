@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import io
 import json
 import subprocess
 import sys
@@ -66,12 +67,273 @@ def invoke(
     return json.loads(result.stdout) if result.stdout.strip() else None
 
 
+def invoke_local(
+    repo: Path,
+    tool: str,
+    tool_input: object,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    *,
+    session_id: object = "guard-test",
+    cwd: Path | None = None,
+) -> dict[str, object] | None:
+    payload = {
+        "session_id": session_id,
+        "cwd": str(cwd or repo),
+        "hook_event_name": "PreToolUse",
+        "tool_name": tool,
+        "tool_input": tool_input,
+    }
+    monkeypatch.setattr(guard.sys, "stdin", io.StringIO(json.dumps(payload)))
+    assert guard.main() == 0
+    output = capsys.readouterr().out
+    return json.loads(output) if output.strip() else None
+
+
 def assert_denied(payload: dict[str, object] | None, fragment: str) -> None:
     assert payload is not None
     output = payload["hookSpecificOutput"]
     assert isinstance(output, dict)
     assert output["permissionDecision"] == "deny"
     assert fragment in str(output["permissionDecisionReason"])
+
+
+def _binding(repo: Path, **overrides: object) -> None:
+    values: dict[str, object] = {
+        "assignment_id": "TASK_BINDING",
+        "session_id": "binding-session",
+        "owner_role": "independent_research_explorer",
+        "owner_mode": "direction",
+        "allowed_write_paths": ["local_research/directions/example.md"],
+        "active": True,
+    }
+    values.update(overrides)
+    path = repo / "temp/sessions/research_scheduler/bindings"
+    path.mkdir(parents=True, exist_ok=True)
+    (path / "TASK_BINDING.json").write_text(json.dumps(values), encoding="utf-8")
+
+
+def _write_binding(
+    repo: Path,
+    assignment: str,
+    session: str,
+    *,
+    owner_role: str,
+    owner_mode: str,
+    allowed_write_paths: list[str],
+    active: bool = True,
+) -> None:
+    path = repo / "temp/sessions/research_scheduler/bindings"
+    path.mkdir(parents=True, exist_ok=True)
+    (path / f"{assignment}.json").write_text(
+        json.dumps(
+            {
+                "assignment_id": assignment,
+                "session_id": session,
+                "owner_role": owner_role,
+                "owner_mode": owner_mode,
+                "allowed_write_paths": allowed_write_paths,
+                "active": active,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+
+@pytest.mark.parametrize(
+    "overrides,fragment",
+    [
+        ({"active": False}, "inactive"),
+        ({"owner_role": "independent_research_explorer", "owner_mode": "treatment"}, "role/mode"),
+        ({"allowed_write_paths": ["../outside"]}, "unsafe"),
+    ],
+)
+def test_scheduler_binding_rejects_stale_wrong_role_or_escape(
+    tmp_path: Path, overrides: dict[str, object], fragment: str
+) -> None:
+    repo, _ = repository(tmp_path)
+    _binding(repo, **overrides)
+    with pytest.raises(ticketing.SchedulerBindingError, match=fragment):
+        ticketing.resolve_scheduler_binding(repo, session_id="binding-session")
+
+
+def test_scheduler_explorer_binding_allows_only_owned_research_and_outbound_handoff(
+    tmp_path: Path,
+) -> None:
+    repo, _ = repository(tmp_path)
+    _binding(
+        repo,
+        allowed_write_paths=[
+            "local_research/directions/example.md",
+            "temp/handoffs/explorer_to_code_manager/example.md",
+        ],
+    )
+    binding = ticketing.resolve_scheduler_binding(repo, session_id="binding-session")
+    assert binding is not None
+    assert binding["allowed_write_paths"] == [
+        "local_research/directions/example.md",
+        "temp/handoffs/explorer_to_code_manager/example.md",
+    ]
+
+
+@pytest.mark.parametrize("session_id", (None, "", "other-session", 17))
+def test_binding_scoped_explorer_mutation_requires_exact_active_session(
+    tmp_path: Path, session_id: object
+) -> None:
+    repo, _ = repository(tmp_path)
+    _binding(repo)
+    assert_denied(
+        invoke(
+            repo,
+            "apply_patch",
+            "*** Begin Patch\n*** Add File: local_research/directions/example.md\n*** End Patch",
+            session_id=session_id,  # type: ignore[arg-type]
+        ),
+        "exact active session binding",
+    )
+    assert_denied(
+        invoke(
+            repo,
+            "shell_command",
+            {"command": "Set-Content local_research/directions/example.md -Value blocked"},
+            session_id=session_id,  # type: ignore[arg-type]
+        ),
+        "exact active session binding",
+    )
+
+
+def test_cpm_treatment_binding_maps_exact_reverse_handoff_to_main_checkout(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    repo, base = repository(tmp_path)
+    worktree_root = tmp_path / "worktrees" / "HMASD"
+    worktree_root.mkdir(parents=True)
+    monkeypatch.setattr(ticketing, "WORKTREE_ROOT", worktree_root)
+    monkeypatch.setattr(ticketing, "REGISTERED_REPOSITORY", repo)
+    created = ticketing.provision_ticket(
+        argparse.Namespace(
+            repo=repo,
+            assignment_id="TASK_TREATMENT_HANDOFF",
+            base_commit=base,
+            allow=["pkg/worker.py"],
+        )
+    )
+    worktree = Path(str(created["resolved_worktree"]))
+    transport = repo / "temp/handoffs/code_manager_to_explorer/report.json"
+    _write_binding(
+        repo,
+        "TASK_TREATMENT_HANDOFF",
+        "treatment-session",
+        owner_role="code_project_manager",
+        owner_mode="treatment",
+        allowed_write_paths=[
+            "pkg/worker.py",
+            "temp/handoffs/code_manager_to_explorer/report.json",
+        ],
+    )
+
+    assert (
+        invoke_local(
+            worktree,
+            "apply_patch",
+            f"*** Begin Patch\n*** Add File: {transport}\n*** End Patch",
+            monkeypatch,
+            capsys,
+            session_id="treatment-session",
+        )
+        is None
+    )
+    assert (
+        invoke_local(
+            worktree,
+            "apply_patch",
+            "*** Begin Patch\n*** Add File: pkg/worker.py\n*** End Patch",
+            monkeypatch,
+            capsys,
+            session_id="treatment-session",
+        )
+        is None
+    )
+    assert_denied(
+        invoke_local(
+            worktree,
+            "shell_command",
+            {"command": f'Set-Content -LiteralPath "{transport}" -Value blocked'},
+            monkeypatch,
+            capsys,
+            session_id="treatment-session",
+        ),
+        "outside the writable scope",
+    )
+    assert_denied(
+        invoke_local(
+            worktree,
+            "apply_patch",
+            "*** Begin Patch\n*** Add File: outside.py\n*** End Patch",
+            monkeypatch,
+            capsys,
+            session_id="treatment-session",
+        ),
+        "outside the writable scope",
+    )
+
+
+def test_cpm_treatment_binding_rejects_reverse_handoff_root_itself(
+    tmp_path: Path,
+) -> None:
+    repo, _ = repository(tmp_path)
+    _write_binding(
+        repo,
+        "TASK_TREATMENT_ROOT",
+        "treatment-root-session",
+        owner_role="code_project_manager",
+        owner_mode="treatment",
+        allowed_write_paths=["temp/handoffs/code_manager_to_explorer"],
+    )
+    with pytest.raises(ticketing.SchedulerBindingError, match="strict descendants"):
+        ticketing.resolve_scheduler_binding(repo, session_id="treatment-root-session")
+
+
+def test_cpm_treatment_binding_rejects_reverse_handoff_sibling_outside_ticket_scope(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    repo, base = repository(tmp_path)
+    worktree_root = tmp_path / "worktrees" / "HMASD"
+    worktree_root.mkdir(parents=True)
+    monkeypatch.setattr(ticketing, "WORKTREE_ROOT", worktree_root)
+    monkeypatch.setattr(ticketing, "REGISTERED_REPOSITORY", repo)
+    created = ticketing.provision_ticket(
+        argparse.Namespace(
+            repo=repo,
+            assignment_id="TASK_TREATMENT_SIBLING",
+            base_commit=base,
+            allow=["pkg/worker.py"],
+        )
+    )
+    worktree = Path(str(created["resolved_worktree"]))
+    _write_binding(
+        repo,
+        "TASK_TREATMENT_SIBLING",
+        "treatment-sibling-session",
+        owner_role="code_project_manager",
+        owner_mode="treatment",
+        allowed_write_paths=[
+            "pkg/worker.py",
+            "temp/handoffs/code_manager_to_explorer/valid.json",
+            "temp/handoffs/code_manager_to_explorer_sibling/report.json",
+        ],
+    )
+    assert_denied(
+        invoke_local(
+            worktree,
+            "apply_patch",
+            "*** Begin Patch\n*** Add File: pkg/worker.py\n*** End Patch",
+            monkeypatch,
+            capsys,
+            session_id="treatment-sibling-session",
+        ),
+        "treatment binding path exceeds ticket allowed_paths",
+    )
 
 
 def test_main_checkout_allows_reads_and_internal_writes_but_denies_external_writes(
@@ -216,9 +478,25 @@ def test_unregistered_linked_worktree_cannot_mutate(tmp_path: Path) -> None:
 def test_registered_research_session_writes_only_local_research(tmp_path: Path) -> None:
     repo, _ = repository(tmp_path)
     (repo / "AGENTS.md").write_text("hmasd_python_interpreter=C:/Python/python.exe\n", encoding="utf-8")
-    role = repo / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md"
-    role.parent.mkdir(parents=True)
-    role.write_text("session_id=research-session\n", encoding="utf-8")
+    bindings = repo / "temp/sessions/research_scheduler/bindings"
+    bindings.mkdir(parents=True)
+    (bindings / "RESEARCH.json").write_text(
+        json.dumps(
+            {
+                "assignment_id": "RESEARCH",
+                "session_id": "research-session",
+                "owner_role": "independent_research_explorer",
+                "owner_mode": "portfolio",
+                "allowed_write_paths": [
+                    "local_research/patch-note.md",
+                    "local_research/pro_reviews/item/raw.md",
+                    "local_research/portfolio.json",
+                ],
+                "active": True,
+            }
+        ),
+        encoding="utf-8",
+    )
     local_research = repo / "local_research"
     local_research.mkdir()
     pro_reviews = local_research / "pro_reviews"
@@ -489,9 +767,21 @@ def test_other_session_keeps_main_checkout_scope_when_research_is_registered(
     tmp_path: Path,
 ) -> None:
     repo, _ = repository(tmp_path)
-    role = repo / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md"
-    role.parent.mkdir(parents=True)
-    role.write_text("session_id=research-session\n", encoding="utf-8")
+    bindings = repo / "temp/sessions/research_scheduler/bindings"
+    bindings.mkdir(parents=True)
+    (bindings / "RESEARCH.json").write_text(
+        json.dumps(
+            {
+                "assignment_id": "RESEARCH",
+                "session_id": "research-session",
+                "owner_role": "independent_research_explorer",
+                "owner_mode": "direction",
+                "allowed_write_paths": ["local_research/directions/placeholder.md"],
+                "active": True,
+            }
+        ),
+        encoding="utf-8",
+    )
     ordinary = repo / "ordinary.md"
     assert (
         invoke(

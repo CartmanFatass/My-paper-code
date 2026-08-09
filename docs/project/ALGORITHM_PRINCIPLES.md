@@ -167,12 +167,15 @@ is launched.
 
 Scientific attribution is treatment/direction/design/source/run/root/seed
 isolation. Already-selected and independently frozen ordinary A/B work across
-directions is parallel-first within the CPM 3-unit experiment pool; default to
-one result-bearing treatment per direction. Serialize only for a named
-direction dependency or intake, a shared mutable/path conflict, an observed
-resource constraint, or formal/explicit-heavy experiment-pool exclusivity; no
-experiment capacity condition blocks non-runtime work. Do not invent or fill
-capacity, reprioritize science, or reactivate parked directions. Choose by
+directions is parallel-first when Scheduler observes disjoint resource vectors;
+default to one result-bearing treatment per direction. Serialize only for a
+named direction dependency or intake, a shared writer/mutable path/object
+conflict, an observed resource-vector conflict, or a design explicitly marked
+formal local result-bearing runtime that excludes conflicting local experiment
+runtime. Evidence level A/B/C is orthogonal to the observed runtime envelope;
+no runtime resource condition blocks research, intake, code, review, Pro or
+other non-runtime work. Do not invent or fill resources, reprioritize science,
+or reactivate parked directions. Choose by
 information gain, cost and reversibility,
 normally in this order: derivation, counterexample, accepted-evidence
 reanalysis, toy, bounded prototype, formal experiment. Unscheduled ideas remain

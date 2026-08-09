@@ -123,3 +123,12 @@ def test_reference_ownership_moves_general_material_out_of_agile_skill() -> None
     assert ".agents/skills/hmasd-agile-research-development/references/assignment-brief-examples.md" not in agile
     assert "code context" in guide
     assert "focused on code context" in guide
+
+
+def test_scheduler_binding_is_a_factual_tail_not_task_context() -> None:
+    text = _normalized(SKILL)
+    assert "prose-first" in text
+    assert "binding" in text
+    assert "mutation-boundary identity" in text
+    assert "not task context" in text
+    assert "assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active" in text

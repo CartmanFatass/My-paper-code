@@ -20,6 +20,9 @@ def test_wdm_is_the_single_workflow_owner() -> None:
         "child_forked_context=background_only",
         "workflow_assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace",
         "public_current_work_index_owner=workflow_design_manager",
+        "research_scheduler_kind=user_owned_persistent_desktop_task",
+        "research_scheduler_registered_child=false",
+        "research_scheduler_binding_keys=assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active",
     ):
         assert required in contract
     assert "workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces" in router
@@ -40,7 +43,7 @@ def test_assignment_writing_preserves_semantic_context_over_file_only_anchors() 
     assert "Acceptance, Git and cross-task routing remain with the owner Role" in contract
     assert "workflow_successor_rotation=integrated_batch_completion" in contract
     assert "workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface" in contract
-    assert "workflow_thread_registry=forbidden" in contract
+    assert "workflow_thread_registry=forbidden_except_scheduler_active_assignment_locators" in contract
     assert "agentify_transport_assignment_locators=batch_path|results_path" in contract
     assert "agentify_transport_result_locator=results_path" in contract
     assert "cpm_mechanical_assignment_locators=spec_path|result_path" in contract
@@ -65,8 +68,9 @@ def test_public_current_work_is_partitioned_and_owned() -> None:
     ):
         assert required in normalized
     for required in (
-        "session_record_ids=code_project_manager|workflow_design_manager",
+        "session_record_ids=workflow_design_manager|research_scheduler",
         "index_owner=workflow_design_manager",
+        "research_scheduler_session=docs/project/current-work/sessions/research_scheduler.md",
         "workflow_control_plane",
         "current-work/sessions/workflow_design_manager.md",
     ):
@@ -144,3 +148,18 @@ def test_explorer_mechanical_child_keeps_native_no_write_session_boundary() -> N
     assert "role=explorer_mechanical_operator" in role
     assert "write_authority=none" in role
     assert "scientific_authority=none" in role
+
+
+def test_desktop_scheduler_is_same_level_and_lazy() -> None:
+    contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split())
+    workflow_map = " ".join(_text("docs/project/WORKFLOW_MAP.md").split())
+    for required in (
+        "same-level ephemeral owner tasks",
+        "ACTIVE_ASSIGNMENTS.md",
+        "research_scheduler_procedure_pointer=.agents/skills/hmasd-research-scheduler/SKILL.md",
+        "research_scheduler_resource_policy_pointer=.agents/skills/hmasd-research-scheduler/SKILL.md",
+    ):
+        assert required in (contract + " " + workflow_map)
+    for command_level in ("create_thread", "wait_threads", "read_thread"):
+        assert command_level not in contract
+        assert command_level not in workflow_map

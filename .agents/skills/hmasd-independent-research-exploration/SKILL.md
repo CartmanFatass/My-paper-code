@@ -5,19 +5,32 @@ description: Use in the user-controlled HMASD Independent Research Explorer task
 
 # HMASD Independent Research Exploration
 
+## Temporary owner write-scope binding
+
+Every same-level owner assignment names exact direction- or portfolio-owned
+files, or strict descendants under `local_research/`, and may name at most one
+exact strict descendant under `temp/handoffs/explorer_to_code_manager/` when a
+handoff is needed. A root path never grants the whole root. Active owner
+bindings with equal or ancestor/descendant-overlapping write paths fail closed
+and must serialize or be re-sliced; disjoint direction paths remain
+parallel-first. This is mutation-scope isolation, not science scheduling, a
+queue or a new schema.
+
 ## Purpose
 
 Explore HMASD-relevant ideas without entering the formal project workflow.
 Preserve the initial mission and several-live-directions discipline, but do not
 make a canonical scientific decision.
 
-The active Explorer is the `gpt-5.6-sol/ultra` research role in the current
-direct user task and the only writer; no archived task ID or route registry is
-required. It
+The active Explorer is an assignment-scoped, same-level user-owned Desktop
+owner task in `owner_mode=direction|portfolio`, using the
+`gpt-5.6-sol/ultra` research role and remaining the only writer for its exact
+named surface. The prose-first assignment supplies the exact canonical inputs,
+write paths and result destination; conversation history is background only. It
 uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
-  adversarial checks. The persistent Explorer owns each review item and sends
+  adversarial checks. The assignment-scoped Explorer owns each review item and sends
   one ordered file-backed set of frozen question paths to the registered
   `hmasd-agentify-transport` child.
 
@@ -77,8 +90,8 @@ single-writer authority remain unchanged.
 
 ## Start safely
 
-1. Confirm the active task has the Explorer role, registered model and current
-   direct user assignment.
+1. Confirm the active task has the Explorer role, Scheduler assignment, exact
+   owner mode and current direct user assignment.
 2. Read the Explorer role and only
    `docs/project/ALGORITHM_PRINCIPLES.md sections 1 and 3`.
 3. Freeze exactly one mode, one campaign direction or evidence question, mission
@@ -205,25 +218,25 @@ them to choose the next separating question: map support, test learnability unde
 a discriminating host, then estimate direction and variance with a small
 multi-seed run when warranted. This is an iterative pattern, not a state machine.
 
-Before dispatching any result-bearing treatment, use the capacity and
+Before dispatching any result-bearing treatment, use the resource-vector and
 direction-barrier rules in
 [`references/parallel-research-workflow.md`](references/parallel-research-workflow.md).
-Explorer maintains the scientific roster and freezes each design; CPM owns live
-capacity admission and runtime observations. An available token is permission to
-consider the next independently valuable treatment, not an automatic scientific
-priority or a reason to reactivate a parked direction. Each returned result may
-enter its own direction-local scientific intake immediately. No free runtime
-token is required for intake, analysis, review or other non-experiment work.
+Explorer maintains the scientific roster and freezes each design; Research
+Scheduler observes actual resource vectors/conflicts and CPM owns runtime
+admission and execution observations. Evidence level A/B/C is orthogonal to the
+resource vector. A free resource does not create scientific priority or
+reactivate a parked direction. Each returned result may enter its own
+direction-local scientific intake immediately; resource waits leave research,
+intake, review, Pro and other non-runtime work runnable.
 When two or more independent treatments have already been scientifically
 selected and frozen, their local predecessor/intake barriers are closed, and
-capacity is available, follow the reference's normal path:
-`independent_ready_treatment_dispatch=parallel_first_within_capacity`.
+their observed resource vectors are disjoint, follow the reference's normal
+path: `independent_ready_treatment_dispatch=parallel_first_when_vectors_are_disjoint`.
 Do not silently apply a global serial fallback; it is forbidden without named
-direction-dependency or resource evidence. This is not a request to invent
-work, fill capacity, reprioritize or reactivate parked directions, and it does
-not change the heartbeat's at-most-one-new-treatment-per-turn bound, pending
-runtime-capacity/non-runtime continuation, Pro triggers or formal iteration
-behavior.
+direction dependency or observed resource/mutable conflict. This is not a
+request to invent work, saturate resources, reprioritize or reactivate parked
+directions. Owner-task lifecycle events replace polling-based scheduling;
+the existing Pro triggers and formal iteration behavior remain unchanged.
 
 Never substitute an Innovator for source absorption, a Principles Analyst for
 literature fidelity, or a Critic for constructive RL reasoning. A broad request

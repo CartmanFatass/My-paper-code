@@ -16,11 +16,30 @@ from typing import Any
 
 
 SCHEMA_VERSION = 2
-WORKTREE_ROOT = Path(r"C:\worktrees\HMASD")
 REGISTERED_REPOSITORY = Path(__file__).resolve().parents[1]
+DEFAULT_WORKTREE_ROOT = Path("temp") / "worktrees" / "HMASD"
+# Tests and narrowly scoped callers may replace this with an explicit root.
+# ``None`` keeps the production default relative to the registered checkout.
+WORKTREE_ROOT: Path | None = None
 TICKET_DIRECTORY = "hmasd-workspace-tickets"
 ASSIGNMENT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,95}$")
 LONG_PATH_GIT_ARGS = ("-c", "core.longpaths=true")
+BINDING_DIRECTORY = Path("temp") / "sessions" / "research_scheduler" / "bindings"
+TREATMENT_TRANSPORT_DIRECTORY = (
+    Path("temp") / "handoffs" / "code_manager_to_explorer"
+)
+BINDING_KEYS = {
+    "assignment_id",
+    "session_id",
+    "owner_role",
+    "owner_mode",
+    "allowed_write_paths",
+    "active",
+}
+BINDING_MODES = {
+    "independent_research_explorer": {"direction", "portfolio"},
+    "code_project_manager": {"treatment", "integration"},
+}
 
 
 class TicketError(RuntimeError):
@@ -34,6 +53,10 @@ class IntegrationError(TicketError):
         self.code = code
         self.detail = detail
         super().__init__(f"{code}: {detail}")
+
+
+class SchedulerBindingError(TicketError):
+    """Fail-closed scheduler mutation-authorization error."""
 
 
 def _git(root: Path, *args: str) -> str:
@@ -83,16 +106,301 @@ def _is_reparse_point(path: Path) -> bool:
 
 
 def _worktree_root() -> Path:
-    root = _canonical(WORKTREE_ROOT, label="registered worktree root")
-    if not _same_path(root, WORKTREE_ROOT) or root.is_symlink() or _is_reparse_point(root):
+    registered = _canonical(REGISTERED_REPOSITORY, label="registered repository")
+    configured = WORKTREE_ROOT
+    explicit = configured is not None
+    requested = configured if explicit else registered / DEFAULT_WORKTREE_ROOT
+    if not explicit:
+        expected_parent = registered / "temp" / "worktrees"
+        parent = expected_parent.resolve(strict=False)
+        if not _same_path(parent, expected_parent) or (
+            parent.exists() and (parent.is_symlink() or _is_reparse_point(parent))
+        ):
+            raise TicketError("default worktree root parent is redirected")
+    requested = Path(requested)
+    try:
+        requested.mkdir(parents=True, exist_ok=True)
+    except OSError as exc:
+        raise TicketError(f"cannot create registered worktree root: {requested}: {exc}") from exc
+    root = _canonical(requested, label="registered worktree root")
+    if not _same_path(root, requested) or root.is_symlink() or _is_reparse_point(root):
         raise TicketError("registered worktree root is redirected")
+    if not explicit:
+        expected = (registered / DEFAULT_WORKTREE_ROOT).resolve(strict=False)
+        if not _same_path(root, expected) or not _inside_path(root, registered / "temp" / "worktrees"):
+            raise TicketError("default worktree root is outside the repository")
     return root
+
+
+def _inside_path(path: Path, root: Path) -> bool:
+    try:
+        path.relative_to(root)
+    except ValueError:
+        return False
+    return True
+
+
+def _paths_overlap(left: Path, right: Path) -> bool:
+    """Return whether two physical write scopes are equal or nested."""
+
+    return (
+        _same_path(left, right)
+        or _inside_path(left, right)
+        or _inside_path(right, left)
+    )
 
 
 def _assignment_id(raw: str) -> str:
     if not ASSIGNMENT_ID.fullmatch(raw):
         raise TicketError(f"unsafe assignment_id: {raw!r}")
     return raw
+
+
+def _binding_root(repo: Path) -> Path:
+    repository = _canonical(repo, label="binding repository")
+    requested = repository / BINDING_DIRECTORY
+    parent = (repository / "temp" / "sessions" / "research_scheduler").resolve(strict=False)
+    if not _same_path(parent, repository / "temp" / "sessions" / "research_scheduler"):
+        raise SchedulerBindingError("scheduler binding directory is redirected")
+    if requested.exists() and (requested.is_symlink() or _is_reparse_point(requested)):
+        raise SchedulerBindingError("scheduler binding directory is redirected")
+    return requested
+
+
+def _binding_path(repo: Path, assignment_id: str) -> Path:
+    _assignment_id(assignment_id)
+    return _binding_root(repo) / f"{assignment_id}.json"
+
+
+def _binding_allowed_path(repo: Path, raw: Any) -> str:
+    if not isinstance(raw, str) or not raw:
+        raise SchedulerBindingError("binding allowed_write_paths entries must be non-empty strings")
+    normalized = raw.replace("\\", "/")
+    candidate = PurePosixPath(normalized)
+    if (
+        not normalized
+        or candidate.is_absolute()
+        or any(part in {"", ".", ".."} for part in candidate.parts)
+        or ":" in candidate.parts[0]
+    ):
+        raise SchedulerBindingError(f"binding allowed path is unsafe: {raw!r}")
+    lexical = Path(os.path.abspath(str(repo / Path(candidate.as_posix()))))
+    resolved = (repo / Path(candidate.as_posix())).resolve(strict=False)
+    if not _same_path(lexical, resolved):
+        raise SchedulerBindingError(f"binding allowed path is redirected: {raw!r}")
+    if not _inside_path(resolved, repo):
+        raise SchedulerBindingError(f"binding allowed path escapes repository: {raw!r}")
+    return candidate.as_posix()
+
+
+def is_treatment_transport_path(repo: Path, relative: str) -> bool:
+    """Whether a normalized path is a strict descendant of the CPM reverse handoff root."""
+
+    repository = _canonical(repo, label="binding repository")
+    root = (repository / TREATMENT_TRANSPORT_DIRECTORY).resolve(strict=False)
+    candidate = (repository / Path(relative)).resolve(strict=False)
+    return not _same_path(candidate, root) and _inside_path(candidate, root)
+
+
+def load_scheduler_bindings(repo: Path) -> list[dict[str, Any]]:
+    """Load the scheduler's exact mutation-authorization records.
+
+    Binding files intentionally contain no task context. Every record is
+    structurally validated before use. Inactive records remain visible so a
+    selector cannot accidentally revive one; only active records participate
+    in duplicate-session admission.
+    """
+
+    root = _binding_root(repo)
+    if not root.exists():
+        return []
+    try:
+        candidates = sorted(root.glob("*.json"))
+    except OSError as exc:
+        raise SchedulerBindingError(f"cannot enumerate scheduler bindings: {exc}") from exc
+    records: list[dict[str, Any]] = []
+    sessions: set[str] = set()
+    assignments: set[str] = set()
+    active_main_scopes: list[tuple[str, str, list[Path]]] = []
+    repository = _canonical(repo, label="binding repository")
+    for path in candidates:
+        if path.is_symlink() or _is_reparse_point(path):
+            raise SchedulerBindingError(f"scheduler binding is redirected: {path}")
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise SchedulerBindingError(f"invalid scheduler binding: {path}: {exc}") from exc
+        if not isinstance(payload, dict) or set(payload) != BINDING_KEYS:
+            raise SchedulerBindingError(f"scheduler binding has unexpected keys: {path}")
+        assignment = payload.get("assignment_id")
+        session = payload.get("session_id")
+        role = payload.get("owner_role")
+        mode = payload.get("owner_mode")
+        if not isinstance(assignment, str):
+            raise SchedulerBindingError(f"scheduler binding assignment_id is invalid: {path}")
+        _assignment_id(assignment)
+        if not isinstance(session, str) or not session or any(ch.isspace() for ch in session):
+            raise SchedulerBindingError(f"scheduler binding session_id is invalid: {path}")
+        if role not in BINDING_MODES or mode not in BINDING_MODES[role]:
+            raise SchedulerBindingError(f"scheduler binding role/mode is invalid: {path}")
+        if not isinstance(payload.get("active"), bool):
+            raise SchedulerBindingError(f"scheduler binding active flag is invalid: {path}")
+        raw_allowed = payload.get("allowed_write_paths")
+        if not isinstance(raw_allowed, list) or not raw_allowed:
+            raise SchedulerBindingError(f"scheduler binding allowed_write_paths is invalid: {path}")
+        allowed = [_binding_allowed_path(repository, item) for item in raw_allowed]
+        if len(set(allowed)) != len(allowed):
+            raise SchedulerBindingError(f"scheduler binding allowed_write_paths are duplicated: {path}")
+        if role == "independent_research_explorer":
+            explorer_roots = tuple(
+                (
+                    repository / "local_research",
+                    repository / "temp" / "handoffs" / "explorer_to_code_manager",
+                )
+            )
+            physical_allowed = [
+                (repository / Path(relative)).resolve(strict=False)
+                for relative in allowed
+            ]
+            physical_roots = [root.resolve(strict=False) for root in explorer_roots]
+            for relative, physical in zip(allowed, physical_allowed):
+                matching_roots = [
+                    root for root in physical_roots if _inside_path(physical, root)
+                ]
+                if not matching_roots:
+                    raise SchedulerBindingError(
+                        "Explorer binding writes outside local_research or its outbound handoff"
+                    )
+                if any(_same_path(physical, root) for root in matching_roots):
+                    raise SchedulerBindingError(
+                        "Explorer binding paths must be strict descendants of an owned root"
+                    )
+            main_scopes = physical_allowed
+        elif role == "code_project_manager" and mode == "treatment":
+            transport_root = (
+                repository / TREATMENT_TRANSPORT_DIRECTORY
+            ).resolve(strict=False)
+            main_scopes = []
+            transport_entries = [
+                relative
+                for relative in allowed
+                if is_treatment_transport_path(repository, relative)
+            ]
+            for relative in allowed:
+                physical = (repository / Path(relative)).resolve(strict=False)
+                if _same_path(physical, transport_root):
+                    raise SchedulerBindingError(
+                        "CPM treatment transport paths must be strict descendants of the reverse handoff root"
+                    )
+                if is_treatment_transport_path(repository, relative):
+                    main_scopes.append(physical)
+            if len(transport_entries) != 1 or len(transport_entries) == len(allowed):
+                raise SchedulerBindingError(
+                    "CPM treatment binding requires exactly one reverse handoff path and at least one ticket-local path"
+                )
+        elif role == "code_project_manager" and mode == "integration":
+            main_scopes = [
+                (repository / Path(relative)).resolve(strict=False)
+                for relative in allowed
+            ]
+        else:
+            main_scopes = []
+        if payload["active"] is True and session in sessions:
+            raise SchedulerBindingError("duplicate active scheduler session")
+        if payload["active"] is True and assignment in assignments:
+            raise SchedulerBindingError("duplicate active scheduler assignment")
+        if payload["active"] is True and main_scopes:
+            for prior_assignment, prior_session, prior_scopes in active_main_scopes:
+                if any(
+                    _paths_overlap(current, prior)
+                    for current in main_scopes
+                    for prior in prior_scopes
+                ):
+                    raise SchedulerBindingError(
+                        "active main-checkout binding write scopes overlap across assignments/sessions"
+                    )
+            active_main_scopes.append((assignment, session, main_scopes))
+        if payload["active"] is True:
+            sessions.add(session)
+            assignments.add(assignment)
+        expected_name = f"{assignment}.json"
+        if path.name != expected_name:
+            raise SchedulerBindingError("scheduler binding filename does not match assignment_id")
+        records.append(
+            {
+                "assignment_id": assignment,
+                "session_id": session,
+                "owner_role": role,
+                "owner_mode": mode,
+                "allowed_write_paths": allowed,
+                "active": payload["active"],
+            }
+        )
+    return records
+
+
+def resolve_scheduler_binding(
+    repo: Path,
+    *,
+    session_id: str | None = None,
+    assignment_id: str | None = None,
+    owner_role: str | None = None,
+    owner_mode: str | None = None,
+) -> dict[str, Any] | None:
+    records = load_scheduler_bindings(repo)
+    matches = [
+        record
+        for record in records
+        if (session_id is None or record["session_id"] == session_id)
+        and (assignment_id is None or record["assignment_id"] == assignment_id)
+        and (owner_role is None or record["owner_role"] == owner_role)
+        and (owner_mode is None or record["owner_mode"] == owner_mode)
+    ]
+    exact_identity = session_id is not None or assignment_id is not None
+    active_matches = [record for record in matches if record["active"] is True]
+    if exact_identity:
+        if len(active_matches) > 1:
+            raise SchedulerBindingError("scheduler binding selector is ambiguous")
+        if active_matches:
+            return active_matches[0]
+        if matches:
+            raise SchedulerBindingError("scheduler binding is inactive")
+        return None
+    if len(active_matches) > 1:
+        raise SchedulerBindingError("scheduler binding selector is ambiguous")
+    return active_matches[0] if active_matches else None
+
+
+def resolve_binding_ticket(repo: Path, binding: dict[str, Any]) -> tuple[dict[str, Any], Path, list[str]]:
+    """Resolve a treatment binding through its exact registered ticket."""
+
+    common = _common_git_dir(_canonical(repo, label="ticket repository"))
+    ticket = _ticket_path(common, binding["assignment_id"])
+    payload, worktree, ticket_allowed = _resolve_payload(ticket, binding["assignment_id"])
+    binding_allowed = binding["allowed_write_paths"]
+    is_treatment = (
+        binding.get("owner_role") == "code_project_manager"
+        and binding.get("owner_mode") == "treatment"
+    )
+    if is_treatment:
+        transport_entries = [
+            relative
+            for relative in binding_allowed
+            if is_treatment_transport_path(repo, relative)
+        ]
+        if len(transport_entries) != 1 or len(transport_entries) == len(binding_allowed):
+            raise SchedulerBindingError(
+                "CPM treatment binding requires exactly one reverse handoff path and at least one ticket-local path"
+            )
+    for relative in binding_allowed:
+        is_transport = (
+            binding.get("owner_role") == "code_project_manager"
+            and binding.get("owner_mode") == "treatment"
+            and is_treatment_transport_path(repo, relative)
+        )
+        if not is_transport and not _is_allowed(relative, ticket_allowed):
+            raise SchedulerBindingError("treatment binding path exceeds ticket allowed_paths")
+    return payload, worktree, binding_allowed
 
 
 def _main_repository(raw: Path) -> Path:
@@ -104,6 +412,25 @@ def _main_repository(raw: Path) -> Path:
     if not _same_path(repo, top) or not (repo / ".git").is_dir():
         raise TicketError("provision requires the main HMASD checkout root")
     return repo
+
+
+def main_checkout(start: Path) -> Path:
+    """Return the primary checkout for either a checkout or linked worktree."""
+
+    top = _canonical(start, label="active checkout")
+    if (top / ".git").is_dir():
+        return top
+    marker = top / ".git"
+    if not marker.is_file():
+        raise TicketError("active workspace is neither a checkout nor linked worktree")
+    entries = _git(top, "worktree", "list", "--porcelain").splitlines()
+    for line in entries:
+        if not line.startswith("worktree "):
+            continue
+        candidate = _canonical(Path(line[len("worktree ") :]), label="primary checkout")
+        if (candidate / ".git").is_dir():
+            return candidate
+    raise TicketError("primary checkout could not be resolved")
 
 
 def _common_git_dir(repo: Path) -> Path:

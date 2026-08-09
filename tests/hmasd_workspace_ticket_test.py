@@ -85,6 +85,310 @@ def finalize_integrate(receipt: Path) -> dict[str, object]:
     return ticketing.finalize_integrate(argparse.Namespace(receipt=receipt))
 
 
+def write_scheduler_binding(
+    repo: Path,
+    assignment: str,
+    session: str,
+    *,
+    owner_role: str = "independent_research_explorer",
+    owner_mode: str = "direction",
+    allowed: tuple[str, ...] = ("local_research/directions/example.md",),
+    active: bool = True,
+) -> None:
+    bindings = repo / "temp/sessions/research_scheduler/bindings"
+    bindings.mkdir(parents=True, exist_ok=True)
+    (bindings / f"{assignment}.json").write_text(
+        json.dumps(
+            {
+                "assignment_id": assignment,
+                "session_id": session,
+                "owner_role": owner_role,
+                "owner_mode": owner_mode,
+                "allowed_write_paths": list(allowed),
+                "active": active,
+            }
+        ),
+        encoding="utf-8",
+    )
+
+
+@pytest.mark.parametrize(
+    "root",
+    ("local_research", "temp/handoffs/explorer_to_code_manager"),
+)
+def test_scheduler_explorer_binding_rejects_owned_root_itself(
+    tmp_path: Path, root: str
+) -> None:
+    source, _, _ = repository(tmp_path)
+    write_scheduler_binding(source, "EXPLORER_ROOT", "explorer-root", allowed=(root,))
+    with pytest.raises(ticketing.SchedulerBindingError, match="strict descendants"):
+        ticketing.load_scheduler_bindings(source)
+
+
+def test_scheduler_binding_rejects_reparse_redirected_allowed_path(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _, _ = repository(tmp_path)
+    target = source / "local_research" / "redirected.md"
+    redirected = source / "local_research" / "actual.md"
+    write_scheduler_binding(
+        source,
+        "EXPLORER_REDIRECTED",
+        "explorer-redirected",
+        allowed=("local_research/redirected.md",),
+    )
+    real_resolve = Path.resolve
+
+    def resolve_with_redirect(path: Path, strict: bool = False) -> Path:
+        resolved = real_resolve(path, strict=strict)
+        if path == target:
+            return redirected
+        return resolved
+
+    monkeypatch.setattr(Path, "resolve", resolve_with_redirect)
+    with pytest.raises(ticketing.SchedulerBindingError, match="redirected"):
+        ticketing.load_scheduler_bindings(source)
+
+
+def test_scheduler_explorer_binding_rejects_equal_active_scope_overlap(
+    tmp_path: Path,
+) -> None:
+    source, _, _ = repository(tmp_path)
+    scope = "local_research/directions/shared.md"
+    write_scheduler_binding(source, "EXPLORER_ONE", "explorer-one", allowed=(scope,))
+    write_scheduler_binding(source, "EXPLORER_TWO", "explorer-two", allowed=(scope,))
+    with pytest.raises(ticketing.SchedulerBindingError, match="overlap"):
+        ticketing.load_scheduler_bindings(source)
+
+
+def test_scheduler_explorer_binding_rejects_ancestor_descendant_active_overlap(
+    tmp_path: Path,
+) -> None:
+    source, _, _ = repository(tmp_path)
+    write_scheduler_binding(
+        source,
+        "EXPLORER_PARENT",
+        "explorer-parent",
+        allowed=("local_research/directions",),
+    )
+    write_scheduler_binding(
+        source,
+        "EXPLORER_CHILD",
+        "explorer-child",
+        allowed=("local_research/directions/child.md",),
+    )
+    with pytest.raises(ticketing.SchedulerBindingError, match="overlap"):
+        ticketing.load_scheduler_bindings(source)
+
+
+def test_scheduler_explorer_binding_allows_disjoint_active_direction_scopes(
+    tmp_path: Path,
+) -> None:
+    source, _, _ = repository(tmp_path)
+    write_scheduler_binding(
+        source,
+        "EXPLORER_LEFT",
+        "explorer-left",
+        allowed=("local_research/directions/left.md",),
+    )
+    write_scheduler_binding(
+        source,
+        "EXPLORER_RIGHT",
+        "explorer-right",
+        allowed=("local_research/directions/right.md",),
+    )
+    records = ticketing.load_scheduler_bindings(source)
+    assert {record["assignment_id"] for record in records} == {
+        "EXPLORER_LEFT",
+        "EXPLORER_RIGHT",
+    }
+
+
+@pytest.mark.parametrize(
+    "first,second",
+    [
+        (
+            "temp/handoffs/code_manager_to_explorer/report.json",
+            "temp/handoffs/code_manager_to_explorer/report.json",
+        ),
+        (
+            "temp/handoffs/code_manager_to_explorer/reports",
+            "temp/handoffs/code_manager_to_explorer/reports/item.json",
+        ),
+    ],
+)
+def test_scheduler_active_treatment_handoff_scopes_reject_overlap(
+    tmp_path: Path, first: str, second: str
+) -> None:
+    source, _, _ = repository(tmp_path)
+    write_scheduler_binding(
+        source,
+        "CPM_TREATMENT_ONE",
+        "cpm-treatment-one",
+        owner_role="code_project_manager",
+        owner_mode="treatment",
+        allowed=(first, "pkg/one.py"),
+    )
+    write_scheduler_binding(
+        source,
+        "CPM_TREATMENT_TWO",
+        "cpm-treatment-two",
+        owner_role="code_project_manager",
+        owner_mode="treatment",
+        allowed=(second, "pkg/two.py"),
+    )
+    with pytest.raises(ticketing.SchedulerBindingError, match="overlap"):
+        ticketing.load_scheduler_bindings(source)
+
+
+@pytest.mark.parametrize(
+    "allowed",
+    [
+        ("pkg/worker.py",),
+        (
+            "pkg/worker.py",
+            "temp/handoffs/code_manager_to_explorer/one.json",
+            "temp/handoffs/code_manager_to_explorer/two.json",
+        ),
+    ],
+)
+def test_scheduler_treatment_binding_requires_one_handoff_and_ticket_scope(
+    tmp_path: Path, allowed: tuple[str, ...]
+) -> None:
+    source, _, _ = repository(tmp_path)
+    write_scheduler_binding(
+        source,
+        "CPM_TREATMENT_CARDINALITY",
+        "cpm-treatment-cardinality",
+        owner_role="code_project_manager",
+        owner_mode="treatment",
+        allowed=allowed,
+    )
+    with pytest.raises(ticketing.SchedulerBindingError, match="exactly one reverse handoff"):
+        ticketing.load_scheduler_bindings(source)
+
+
+def test_scheduler_active_main_scopes_reject_explorer_integration_overlap(
+    tmp_path: Path,
+) -> None:
+    source, _, _ = repository(tmp_path)
+    scope = "local_research/directions/shared.md"
+    write_scheduler_binding(source, "EXPLORER_MAIN", "explorer-main", allowed=(scope,))
+    write_scheduler_binding(
+        source,
+        "CPM_INTEGRATION_MAIN",
+        "cpm-integration-main",
+        owner_role="code_project_manager",
+        owner_mode="integration",
+        allowed=(scope,),
+    )
+    with pytest.raises(ticketing.SchedulerBindingError, match="overlap"):
+        ticketing.load_scheduler_bindings(source)
+
+
+def test_scheduler_active_main_scopes_allow_disjoint_owner_paths(
+    tmp_path: Path,
+) -> None:
+    source, _, _ = repository(tmp_path)
+    write_scheduler_binding(
+        source,
+        "EXPLORER_MAIN_LEFT",
+        "explorer-main-left",
+        allowed=("local_research/directions/left.md",),
+    )
+    write_scheduler_binding(
+        source,
+        "CPM_INTEGRATION_MAIN_RIGHT",
+        "cpm-integration-main-right",
+        owner_role="code_project_manager",
+        owner_mode="integration",
+        allowed=("temp/handoffs/code_manager_to_explorer/right.md",),
+    )
+    assert len(ticketing.load_scheduler_bindings(source)) == 2
+
+
+def test_scheduler_binding_active_discovery_ignores_archived_rows(
+    tmp_path: Path,
+) -> None:
+    source, _, _ = repository(tmp_path)
+    write_scheduler_binding(
+        source,
+        "EXPLORER_ARCHIVED_ONE",
+        "explorer-archived-one",
+        allowed=("local_research/directions/archived-one.md",),
+        active=False,
+    )
+    write_scheduler_binding(
+        source,
+        "EXPLORER_ARCHIVED_TWO",
+        "explorer-archived-two",
+        allowed=("local_research/directions/archived-two.md",),
+        active=False,
+    )
+    write_scheduler_binding(
+        source,
+        "EXPLORER_ACTIVE",
+        "explorer-active",
+        allowed=("local_research/directions/active.md",),
+    )
+    binding = ticketing.resolve_scheduler_binding(
+        source,
+        owner_role="independent_research_explorer",
+        owner_mode="direction",
+    )
+    assert binding is not None
+    assert binding["assignment_id"] == "EXPLORER_ACTIVE"
+
+
+def test_scheduler_binding_active_discovery_returns_none_for_only_archived_rows(
+    tmp_path: Path,
+) -> None:
+    source, _, _ = repository(tmp_path)
+    write_scheduler_binding(
+        source,
+        "EXPLORER_ARCHIVED",
+        "explorer-archived",
+        active=False,
+    )
+    assert (
+        ticketing.resolve_scheduler_binding(
+            source,
+            owner_role="independent_research_explorer",
+            owner_mode="direction",
+        )
+        is None
+    )
+
+
+@pytest.mark.parametrize("selector", ("session_id", "assignment_id"))
+def test_scheduler_binding_exact_archived_identity_fails_closed(
+    tmp_path: Path, selector: str
+) -> None:
+    source, _, _ = repository(tmp_path)
+    write_scheduler_binding(
+        source,
+        "EXPLORER_ARCHIVED",
+        "explorer-archived",
+        active=False,
+    )
+    with pytest.raises(ticketing.SchedulerBindingError, match="inactive"):
+        ticketing.resolve_scheduler_binding(
+            source,
+            **{selector: "explorer-archived" if selector == "session_id" else "EXPLORER_ARCHIVED"},
+        )
+
+
+def test_default_worktree_root_is_repo_contained(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    source, _, _ = repository(tmp_path)
+    monkeypatch.setattr(ticketing, "REGISTERED_REPOSITORY", source)
+    monkeypatch.setattr(ticketing, "WORKTREE_ROOT", None)
+    root = ticketing._worktree_root()
+    assert root == (source / "temp/worktrees/HMASD").resolve()
+    assert root.parent == (source / "temp/worktrees").resolve()
+
+
 def test_provision_resolve_and_verify_exact_scope(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

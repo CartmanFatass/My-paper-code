@@ -48,6 +48,17 @@ Those anchors narrow execution; they do not carry the task's meaning. A parent
 is a context compiler, not a field copier. A shorter brief is correct when it
 contains enough meaning for the bounded task.
 
+For a Desktop Research Scheduler owner task, preserve this prose-first model
+for every owner and child assignment. The scheduler factual tail may name exact
+`threadId`, `hostId`, owner mode, workspace path, allowed write paths, result
+locator and bounded Desktop action. Keep that tail distinct from the machine
+binding at
+`temp/sessions/research_scheduler/bindings/<assignment_id>.json`: the binding
+has only
+`assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active` and
+is mutation-boundary identity, not task context, a queue or a semantic
+completion gate.
+
 ## Important distinctions
 
 Keep these concepts separate when writing or reviewing an interface:

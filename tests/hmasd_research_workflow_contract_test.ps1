@@ -34,6 +34,7 @@ $expectedRoles = @(
     'RESEARCH_CRITIC.md',
     'RESEARCH_INNOVATOR.md',
     'RESEARCH_PRINCIPLES_ANALYST.md',
+    'RESEARCH_SCHEDULER.md',
     'RESEARCH_SCOUT.md',
     'REVIEWER.md',
     'VERIFIER.md',
@@ -190,12 +191,18 @@ foreach ($retired in @(
 foreach ($required in @(
     'temp/handoffs/explorer_to_code_manager/',
     'temp/handoffs/code_manager_to_explorer/',
+    'exactly two physical write scopes',
+    'one exact strict-descendant main-checkout transport path',
+    'ticket-local paths inside one registered ticket/worktree',
+    'main-checkout handoff file is written with `apply_patch` only',
+    'Explorer reads only the exact named handoff/technical locators',
+    'Scheduler routes and checks those locators mechanically',
     'requires no Git operation',
     'semantic writing aids, not required field names',
     'bounded safe read-only reconnaissance',
     'not a packet validator, dispatcher, queue engine or state machine',
     'Known concerns are context for judgment, not mandatory headings or an expected verdict',
-    'CPM may process independent direction-local candidates concurrently')) {
+    'Independent direction-local candidates with disjoint observed resource vectors follow the parallel-first path')) {
     if (-not $explorerValidationSkillNormalized.Contains($required)) {
         throw "Explorer semantic handoff Skill missing: $required"
     }
@@ -239,10 +246,30 @@ foreach ($entry in @(
     @($explorerValidationSkill, 'current_work_mutation=forbidden'),
     @($explorerValidationContract, 'consumes no formal iteration'),
     @($explorerValidationContractNormalized, 'Candidate evidence, run roots, artifacts and results remain candidate-specific'),
-    @($publicHandoffContractNormalized, 'A missing schema, `document_kind`, validator receipt, hash, byte count or fingerprint is never a blocker'),
-    @($publicHandoffContractNormalized, 'begins with its natural-language conclusion and then appends the necessary exact evidence')) ) {
+     @($publicHandoffContractNormalized, 'A missing schema, `document_kind`, validator receipt, hash, byte count or fingerprint is never a blocker'),
+     @($publicHandoffContractNormalized, 'begins with its natural-language conclusion and then appends the necessary exact evidence'),
+     @($explorerValidationContractNormalized, 'exactly two physical write scopes'),
+     @($explorerValidationContractNormalized, 'one exact strict-descendant main-checkout transport path'),
+     @($explorerValidationContractNormalized, 'Explorer reads only the exact named handoff and technical locators'),
+     @($explorerValidationContractNormalized, 'Scheduler routes and checks locators mechanically'),
+     @($publicHandoffContractNormalized, 'The CPM `owner_mode=treatment` assignment has exactly two physical write scopes'),
+     @($publicHandoffContractNormalized, 'written with `apply_patch` only and has no Git authority'),
+     @($sessionWorkspaceContractNormalized, 'cpm_treatment_write_scope_count=2'),
+     @($sessionWorkspaceContractNormalized, 'cpm_treatment_write_scopes=ticket_local_paths_inside_one_registered_worktree|one_exact_strict_descendant_main_checkout_transport_path'),
+     @($sessionWorkspaceContractNormalized, 'cpm_treatment_reverse_handoff_locator=assignment_named_exact_strict_descendant'),
+     @($sessionWorkspaceContractNormalized, 'cpm_treatment_main_checkout_mutation=apply_patch_only_reverse_handoff_no_git'),
+     @($sessionWorkspaceContractNormalized, 'cpm_treatment_canonical_result=assignment_named_treatment_artifact_evidence_acceptance_record')) ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Explorer project-validation role/contract coupling missing: $($entry[1])"
+    }
+}
+
+foreach ($stale in @(
+    'allowed_write_paths=temp/handoffs/code_manager_to_explorer/',
+    'owner_mode=treatment_write_scope=temp/handoffs/code_manager_to_explorer/',
+    'treatment may write every file under temp/handoffs/code_manager_to_explorer/')) {
+    foreach ($surface in @($codePmRole, $agile, $explorerValidationSkill, $explorerValidationContract, $publicHandoffContract, $sessionWorkspaceContract)) {
+        if ($surface.Contains($stale)) { throw "Broad treatment handoff scope remains: $stale" }
     }
 }
 
@@ -444,7 +471,7 @@ foreach ($required in @(
     'code_project_manager_code_authority=exclusive',
     'code_project_manager_technical_acceptance_authority=exclusive',
     'code_project_manager_runtime_authority=exclusive',
-    'code_project_manager_current_work_authority=exclusive',
+    'code_project_manager_current_work_authority=exact_assignment_named_project_operational_records_only',
     'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
     'code_project_manager_experiment_dispatch_and_result_routing=exclusive',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
@@ -476,19 +503,19 @@ foreach ($required in @(
     'Copy each named successful raw response',
     'Workflow Design Manager',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET')) {
-    if (-not $independentReviewSkill.Contains($required)) {
+    if (-not $independentReviewSkillNormalized.Contains($required)) {
         throw "Independent research Pro-review Skill missing: $required"
     }
 }
 foreach ($required in @(
-    'invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`',
-    'there is no separate persistent review-operator session',
+    'invoked only from an assignment-scoped same-level user-owned Desktop Explorer owner task',
+    'there is no separate review-operator owner task',
     'local_research/pro_reviews/<review-id>/',
     'PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW',
     'PRO_ADVERSARIAL_SCIENTIFIC_REVIEW',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'Copy each named successful raw response')) {
-    if (-not $independentReviewSkill.Contains($required)) {
+    if (-not $independentReviewSkillNormalized.Contains($required)) {
         throw "Independent research Pro-review Skill missing direct Explorer contract: $required"
     }
 }
@@ -576,17 +603,28 @@ foreach ($required in @(
     'local_research_write_tool=apply_patch_only',
     'local_research_shell_mutation=forbidden',
     'logical_assignment_count=derived_from_exact_work_roster',
-    'runtime_concurrency=three_unit_cpm_capacity_pool',
-    'resource_consuming_experiment_action=capacity_controlled_per_direction',
+    'owner_task_scheduler=same_level_user_owned_Desktop_Explorer_task',
+    'owner_mode=direction|portfolio',
+    'owner_task_assignment=self_contained_natural_language',
+    'owner_task_exact_inputs=canonical_inputs_named_by_assignment',
+    'owner_task_write_paths=canonical_write_paths_named_by_assignment',
+    'owner_task_result_destination=canonical_result_destination_named_by_assignment',
+    'owner_task_result=conclusion_first_canonical_capsule',
+    'resource_model=observed_resource_vector_and_conflict_set',
+    'resource_vector_dimensions=cpu|memory|gpu|process|io|network|paid_service|mutable_path|mutable_object|output_root',
+    'resource_observation_owner=scheduler_observes_actual_vectors_and_conflicts',
+    'resource_admission_owner=code_project_manager_runtime_authority',
+    'resource_conflict_serialization=only_named_dependency_or_observed_vector_or_mutable_conflict',
     'active_experiment_roster_owner=independent_research_explorer_scientific_view',
-    'runtime_capacity_admission_owner=code_project_manager',
-    'independent_ready_treatment_dispatch=parallel_first_within_capacity',
-    'global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence',
+    'independent_ready_treatment_dispatch=parallel_first_when_vectors_are_disjoint',
+    'global_serial_fallback=forbidden_without_named_dependency_or_observed_conflict',
     'per_direction_result_bearing_default=one_active',
     'same_direction_parallelism=exact_frozen_joint_roster_only',
-    'experiment_pool_exclusive_runtime=B_HEAVY_OR_C',
-    'capacity_wait_effect=pending_runtime_capacity_only_not_blocked',
-    'read_only_scientific_analysis_parallelism=available_native_capacity',
+    'formal_local_runtime_exclusivity=explicit_formal_result_bearing_local_runtime_only',
+    'formal_local_runtime_scope=conflicting_local_experiment_runtime_only',
+    'formal_local_runtime_nonblocking=research|intake|code|review|Pro|unrelated_nonruntime',
+    'resource_wait_effect=pending_observed_resource_conflict_only_nonruntime_continues',
+    'evidence_level_runtime_orthogonal=true',
     'canonical_phase_barrier=required_for_algorithm_inspiration_campaign_only',
     'adaptive_question_dispatch=bounded_registered_child_consultation',
     'adaptive_question_barrier=none_for_singleton|exact_local_roster_only_when_joint',
@@ -613,7 +651,7 @@ foreach ($required in @(
     'independent_pro_constructive_adversarial_barrier=required',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'Only that new version may support a',
-    'research architect, portfolio integrator and only')) {
+    'Each same-level user-owned Desktop Explorer owner task is assignment-scoped')) {
     if (-not $independentResearchRole.Contains($required)) {
         throw "Independent Research Explorer role missing: $required"
     }
@@ -673,31 +711,21 @@ foreach ($required in @(
     'adaptive_singleton_global_barrier=none',
     'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
     'adaptive_first_round_peer_reading=forbidden',
-    'There is no fixed adaptive count, concurrency, quorum, every-B panel, automatic-Pro path or persistent mechanism.',
+    'There is no fixed adaptive count, concurrency, quorum, every-B panel or automatic-Pro path.',
     'Preserve disagreements as advisory inputs; never vote or collapse them into a quorum.',
     'The Explorer remains the single writer and integrates answers into one decision.',
-    'runtime_capacity_units_total=3',
-    'B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive',
-    'experiment_pool_exclusivity_scope=result_bearing_runtime_only',
-    'workflow_progress_during_exclusive_runtime=continues',
-    'three independent light treatments, or one medium plus one light',
-    'capacity_wait_state=pending_runtime_capacity_only',
-    'capacity_wait_effect=pending_runtime_capacity_only',
-    'Insufficient capacity is `pending_runtime_capacity`, never a direction, task or workflow `BLOCKED` state',
-    'creates no queue engine, lease, dispatcher or acceptance owner',
-    'Formal or explicitly heavy runtime may prevent another result-bearing experiment from starting, but it never pauses code work',
-    'read-only research, scientific intake, External Pro review or another non-runtime action',
+    'resource_model=observed_resource_vector_and_conflict_set',
+    'resource_vector_dimensions=cpu|memory|gpu|process|io|network|paid_service|mutable_path|mutable_object|output_root',
+    'Resource waits leave research, intake, code, review, Pro and other non-runtime owner tasks runnable',
     'Every concurrent treatment has distinct direction/treatment identity, canonical design, CPM ticket/worktree, source freeze and accepted commit, run, evidence, checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator receipt, readiness/technical-acceptance record and Explorer decision',
     'By default a direction has at most one result-bearing treatment active',
-    'until that predecessor is terminal and Explorer completes the direction''s scientific intake',
-    'freeze one exact joint roster before any member starts',
+    'successor waits until the predecessor is terminal and Explorer completes that direction''s scientific intake',
+    'Explorer freezes one exact joint roster before any member starts',
     'Completion order is never scientific priority, voting or a cross-direction barrier',
-    'dispatch at most one new treatment',
-    'B completion or parallelism alone never does',
+    'Scheduler owner-task lifecycle events replace polling or background scheduling',
     'normal path for two or more scientifically selected and frozen independent treatments is parallel-first',
-    'same-direction rules',
-    'Attribution, generic caution, completion order, convenience and a current sole action are not dependency or resource evidence',
-    'heartbeat''s at-most-one-new-treatment-per-turn bound',
+    'same-direction rule',
+    'Attribution, generic caution, completion order and convenience are not resource evidence',
     'Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.')) {
     if (-not $adaptiveParallelNormalized.Contains($required)) {
         throw "Adaptive roster contract missing: $required"
@@ -733,7 +761,7 @@ foreach ($required in @(
     'does not recompute schema, readability, receipts, activity counts, locators',
     'necessary to one Explorer decision',
     'Several read-only questions may run in parallel',
-    'one result-bearing experiment active per direction by default',
+    'a direction keeps at most one result-bearing treatment active by default',
     'Independent ordinary A/B treatments from different directions may overlap',
     'exactly one CPM technical acceptance and one Explorer scientific intake',
     'ordinary B remains B and does not automatically invoke Pro',
@@ -987,10 +1015,12 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'logical_assignment_count=derived_from_exact_work_roster',
-    'runtime_concurrency=three_unit_cpm_capacity_pool',
-    'runtime_capacity_units_total=3',
+    'owner_task_scheduler=same_level_user_owned_Desktop_Explorer_task',
+    'owner_mode=direction|portfolio',
+    'resource_model=observed_resource_vector_and_conflict_set',
+    'resource_vector_dimensions=cpu|memory|gpu|process|io|network|paid_service|mutable_path|mutable_object|output_root',
     'active_experiment_roster_owner=independent_research_explorer_scientific_view',
-    'runtime_capacity_admission_owner=code_project_manager',
+    'resource_admission_owner=code_project_manager_runtime_authority',
     'canonical_campaign_phase_barriers=required',
     'adaptive_singleton_global_barrier=none',
     'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
@@ -1142,10 +1172,17 @@ foreach ($required in @(
     if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
 }
 foreach ($required in @(
+    'review_owner_task=same_level_user_owned_Desktop_Explorer_owner',
+    'review_owner_mode=direction|portfolio',
+    'review_boundary=assignment_scoped_exact_direction_or_named_direction_set',
+    'review_exact_inputs=canonical_inputs_named_by_assignment',
+    'review_write_paths=canonical_write_paths_named_by_assignment',
+    'review_result_destination=canonical_result_destination_named_by_assignment',
     'active_grant_valid_result_adjudication=result_plus_portfolio_delta_required',
     'scientific_portfolio=multiple_live_or_parked_directions_when_supported',
     'portfolio_adjudication_authority=exclusive',
-    'scheduled_resource_consuming_action_count=one',
+    'scheduled_resource_consuming_action_scope=assignment_named_only',
+    'scheduled_resource_consuming_action_count=not_global_scheduler_field',
     'scheduled_action_scientific_uniqueness=false',
     'unselected_direction_retention=live_or_parked_with_reactivation_conditions',
     'missing_scheduled_action_with_remaining_balance_and_possible_candidate_response=focused_clarification_required',
@@ -1180,7 +1217,8 @@ if (-not $agileNormalized.Contains('CODE_SCIENCE_ALIGNMENT_AUDIT') -or
 foreach ($surface in @($codePmRole, $agile)) {
     foreach ($required in @(
         'scripts/hmasd_workspace_ticket.py provision',
-        'C:/worktrees/HMASD',
+        'repo-local ticket root',
+        'temp/worktrees/HMASD',
         'Raw external `git worktree`')) {
         if (-not $surface.Contains($required)) {
             throw "Worktree provisioning contract missing: $required"
@@ -1279,10 +1317,12 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'role=code_project_manager',
-    'role_kind=persistent_project_coordination_code_runtime_and_acceptance_task',
+    'role_kind=assignment_scoped_same_level_desktop_owner_task',
+    'owner_task_source=research_scheduler',
+    'owner_mode=treatment|integration',
     'code_authority=exclusive',
     'runtime_authority=exclusive',
-    'current_work_authority=exclusive_for_project_operational_records',
+    'current_work_authority=exact_assignment_named_project_operational_records_only',
     'formal_external_review_request_and_intake_authority=exclusive',
     'experiment_dispatch_and_result_routing=exclusive',
     'mechanical_result_acceptance=exclusive',
@@ -1377,7 +1417,7 @@ foreach ($required in @(
     'role=code_project_manager',
     'formal_external_review_request_and_intake_authority=exclusive',
     'runtime_authority=exclusive',
-    'current_work_authority=exclusive',
+    'current_work_authority=exact_assignment_named_project_operational_records_only',
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
     'formal_review_transport=agentify_file_batch_result',
@@ -1498,7 +1538,7 @@ foreach ($required in @(
     'workflow_assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace',
     'workflow_successor_rotation=integrated_batch_completion',
     'workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
-    'workflow_thread_registry=forbidden',
+    'workflow_thread_registry=forbidden_except_scheduler_active_assignment_locators',
     'docs/project/current-work/common/<record-id>.md',
     'docs/project/current-work/sessions/<role_id>.md',
     'same_file_concurrent_writes=forbidden',
@@ -1533,6 +1573,59 @@ foreach ($retired in @(
         $explorerValidationSkill.Contains($retired) -or
         $sessionWorkspaceContract.Contains($retired)) {
         throw "Retired global experiment lock remains: $retired"
+    }
+}
+
+$desktopOwnerSurfaces = @(
+    $independentResearchRole,
+    $independentResearchSkill,
+    $parallelResearch,
+    $explorerValidationSkill,
+    $explorerValidationContract,
+    $publicHandoffContract,
+    $proRole,
+    $algorithmPrinciples)
+$desktopOwnerNormalized = ($desktopOwnerSurfaces -join ' ') -replace '\s+', ' '
+foreach ($required in @(
+    'same-level user-owned Desktop Explorer owner task',
+    'owner_mode=direction',
+    'owner_mode=portfolio',
+    'one named direction',
+    'explicitly named direction set',
+    'exact canonical inputs',
+    'write paths',
+    'result destination',
+    'conclusion-first canonical capsule',
+    'resource vector',
+    'formal local result-bearing runtime',
+    'Evidence level A/B/C is orthogonal')) {
+    if (-not $desktopOwnerNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+        throw "Desktop Explorer owner-task contract missing: $required"
+    }
+}
+foreach ($retired in @(
+    'runtime_concurrency=three_unit_cpm_capacity_pool',
+    'runtime_capacity_units_total=3',
+    'three-unit CPM runtime pool',
+    'heartbeat',
+    'persistent Explorer',
+    'persistent conversation',
+    'current resource-consuming action',
+    'current sole action permits serialization')) {
+    if ($desktopOwnerNormalized.ToLowerInvariant().Contains($retired.ToLowerInvariant())) {
+        throw "Desktop Explorer owner-task regression remains: $retired"
+    }
+}
+foreach ($profileName in @(
+    'hmasd-research-scout.toml',
+    'hmasd-research-innovator.toml',
+    'hmasd-research-principles-analyst.toml',
+    'hmasd-research-critic.toml',
+    'hmasd-explorer-mechanical.toml',
+    'hmasd-agentify-transport.toml')) {
+    $profileText = Get-Content -Raw (Join-Path $repo (Join-Path '.codex/agents' $profileName))
+    if ($profileText.Contains('owner_mode=') -or $profileText.Contains('same-level user-owned Desktop Explorer')) {
+        throw "Child profile was changed by owner-task scheduling: $profileName"
     }
 }
 
@@ -1604,7 +1697,7 @@ foreach ($required in @(
 foreach ($required in @(
     'workflow_successor_rotation=integrated_batch_completion',
     'workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
-    'workflow_thread_registry=forbidden')) {
+    'workflow_thread_registry=forbidden_except_scheduler_active_assignment_locators')) {
     if (-not $sessionWorkspaceContractNormalized.Contains($required)) {
         throw "Session workspace contract missing successor boundary: $required"
     }

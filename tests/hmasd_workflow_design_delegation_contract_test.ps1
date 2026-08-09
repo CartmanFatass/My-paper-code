@@ -119,7 +119,7 @@ foreach ($required in @(
     'child_forked_context=background_only',
     'workflow_successor_rotation=integrated_batch_completion',
     'workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
-    'workflow_thread_registry=forbidden')) {
+    'workflow_thread_registry=forbidden_except_scheduler_active_assignment_locators')) {
     if (-not $normalizedSessionContract.Contains($required.ToLowerInvariant())) { throw "Session assignment-writing contract missing: $required" }
 }
 
@@ -369,6 +369,51 @@ if (-not $normalizedImplementerRoleText.Contains('exactly `git rev-parse --show-
 foreach ($forbidden in @('Git mutation', 'stage, commit, push', 'route cross-task messages')) {
     if (-not $implementerRoleText.Contains($forbidden)) {
         throw "Workflow implementer boundary missing: $forbidden"
+    }
+}
+
+$schedulerRolePath = '.agents/roles/RESEARCH_SCHEDULER.md'
+$schedulerSkillPath = '.agents/skills/hmasd-research-scheduler/SKILL.md'
+$schedulerRole = Read-RepoFile $schedulerRolePath
+$schedulerSkill = Read-RepoFile $schedulerSkillPath
+$schedulerText = (($schedulerRole + "`n" + $schedulerSkill) -replace '\s+', ' ').ToLowerInvariant()
+foreach ($required in @(
+    'user_owned_persistent_desktop_task',
+    'registered_child=false',
+    'profile_path=none',
+    'task_lifecycle_and_resource_conflict_routing_only',
+    'same-level ephemeral owner tasks',
+    'create_thread', 'environment=local', 'threadid', 'hostid',
+    'wait_threads', 'read_thread', 'canonical locator',
+    'binding-ready follow-up', 'at most eight',
+    'active_assignments.md',
+    'assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active',
+    'mutation-boundary identity',
+    'one unresolved observation', 'direct exact-id resolution')) {
+    if (-not $schedulerText.Contains($required.ToLowerInvariant())) {
+        throw "Research Scheduler contract missing: $required"
+    }
+}
+foreach ($forbidden in @(
+    'research-scheduler.toml',
+    'fixed unit pool')) {
+    if ($config.Contains($forbidden)) { throw "Scheduler profile/config drifted: $forbidden" }
+}
+foreach ($required in @(
+    'science_authority=none', 'code_authority=none',
+    'technical_acceptance_authority=none', 'git_authority=none',
+    'runtime_execution_authority=none', 'semantic_relay_authority=none',
+    'sibling_preload_authority=none')) {
+    if (-not $schedulerRole.Contains($required)) { throw "Scheduler boundary missing: $required" }
+}
+foreach ($surface in @($router, $sessionContract, $workflowMap)) {
+    if (-not $surface.Contains('.agents/skills/hmasd-research-scheduler/SKILL.md')) {
+        throw 'Scheduler procedure/resource pointer missing'
+    }
+    foreach ($commandLevel in @('create_thread', 'wait_threads', 'read_thread')) {
+        if ($surface.Contains($commandLevel)) {
+            throw "Scheduler command-level procedure duplicated outside Skill: $commandLevel"
+        }
     }
 }
 

@@ -47,6 +47,8 @@ $explorerValidationContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'do
 $explorerValidationContractNormalized = $explorerValidationContract -replace '\s+', ' '
 $publicHandoffContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/handoffs/README.md')
 $publicHandoffContractNormalized = $publicHandoffContract -replace '\s+', ' '
+$sessionWorkspaceContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SESSION_WORKSPACE_CONTRACT.md')
+$sessionWorkspaceContractNormalized = $sessionWorkspaceContract -replace '\s+', ' '
 $retiredExplorerValidationScriptPath = Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/scripts/explorer_project_packet.py'
 $agileNormalized = $agile -replace '\s+', ' '
 $projectCognitionReferencePaths = @(
@@ -122,6 +124,14 @@ if (Test-Path -LiteralPath $retiredExplorerValidationScriptPath) {
 foreach ($required in @(
     'temp/handoffs/explorer_to_code_manager/',
     'temp/handoffs/code_manager_to_explorer/',
+    'exactly two physical write scopes',
+    'one exact strict-descendant main-checkout transport path',
+    'ticket-local paths inside one registered ticket/worktree',
+    'main-checkout handoff file is written with `apply_patch` only',
+    'handoff is disposable transport only',
+    'canonical technical artifact, acceptance record, result ledger, queue',
+    'Explorer reads only the exact named handoff/technical locators',
+    'Scheduler routes and checks those locators mechanically',
     'requires no Git operation',
     'semantic writing aids, not required field names',
     'bounded safe read-only reconnaissance',
@@ -214,7 +224,12 @@ $routerRequired = @(
     'code_project_manager_routine_implementation_agent=hmasd-implementer-terra',
     'code_project_manager_protected_implementation_agent=hmasd-implementer',
     'code_project_manager_runtime_authority=exclusive',
-    'code_project_manager_current_work_authority=exclusive',
+    'code_project_manager_current_work_authority=exact_assignment_named_project_operational_records_only',
+    'code_project_manager_current_work_index_edit=forbidden',
+    'code_project_manager_public_session_record_partition=none',
+    'workflow_design_manager_current_work_index=docs/project/CURRENT_WORK.md',
+    'workflow_design_manager_current_work_index_owner=workflow_design_manager',
+    'research_scheduler_current_work_authority=lifecycle_locators_only',
     'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
     'code_project_manager_mechanical_result_acceptance=exclusive',
     '.agents/roles/CODE_PROJECT_MANAGER.md',
@@ -244,7 +259,7 @@ $codeRequired = @(
     'code_authority=exclusive',
     'technical_acceptance_authority=exclusive',
     'runtime_authority=exclusive',
-    'current_work_authority=exclusive_for_project_operational_records',
+    'current_work_authority=exact_assignment_named_project_operational_records_only',
     'formal_external_review_request_and_intake_authority=exclusive',
     'formal_review_transport=agentify_file_batch_result',
     'scientific_authority=none',
@@ -253,9 +268,16 @@ $codeRequired = @(
     'workflow_acceptance_authority=none',
     'workflow_git_authority=none',
     'workflow_change_request_route=workflow_design_manager',
-    'session_owner_role=code_project_manager',
-    'session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
-    'session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager',
+    'current_work_index_access=assignment_named_links_read_only',
+    'current_work_index_edit=forbidden',
+    'current_work_session_pointer=docs/project/current-work/sessions/code_project_manager.md',
+    'current_work_session_pointer_status=retired_historical_pointer_only',
+    'current_work_public_session_record_partition=none',
+    'current_work_lifecycle_locator_owner=research_scheduler',
+    'owner_task_source=research_scheduler',
+    'owner_mode=treatment|integration',
+    'owner_assignment_fields=parent_owner_assignment|owner_mode|direction_or_treatment|ticket|worktree|base_commit|owned_paths|result_destination',
+    'session_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md',
     'failure_containment_contract=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md',
     'local_failure_task_terminal=false',
     'git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state',
@@ -316,46 +338,115 @@ $codeRequired = @(
 foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
 }
+foreach ($required in @(
+    'Assignment-named project operational owner records and result locators',
+    'may read only exact links named by its assignment',
+    'does not edit that index or acquire a public session-record partition',
+    'former CPM session document is only a retired historical pointer',
+    'never edits the index or the retired historical pointer',
+    'lifecycle locators remain Scheduler-owned')) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "Code Project Manager current-work boundary missing: $required"
+    }
+}
+foreach ($stale in @(
+    'The public `CURRENT_WORK.md` link index, the Code Project Manager session roster',
+    'Update only the CPM session record and common records')) {
+    if ($codePmNormalized.Contains($stale)) {
+        throw "Code Project Manager retains retired current-work ownership wording: $stale"
+    }
+}
+foreach ($required in @(
+    'treatment owns exactly one registered ticket/worktree',
+    'frozen treatment implementation/runtime/evidence',
+    'exactly one technical acceptance',
+    'integration owns the exact already-accepted commit/ticket set',
+    'shared-mainline integration/conflict repair and integration checks only',
+    'must not repeat treatment runtime/science/treatment technical acceptance',
+    'does not use completion order as priority',
+    'parent owner assignment',
+    'direction/treatment',
+    'ticket/worktree/base',
+    'owned paths',
+    'result destination',
+    'integration-specific conclusion/receipt',
+    'does not repeat CODE_ACCEPTED')) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "Code Project Manager owner-mode contract missing: $required"
+    }
+}
 
 foreach ($required in @(
-    'runtime_capacity_admission=exclusive',
-    'runtime_capacity_pool_units=3',
-    'runtime_capacity_source=parallel-research-workflow',
+    'owner_mode_treatment_write_scopes=exactly_two|ticket_local_paths_inside_one_registered_worktree|one_exact_strict_descendant_main_checkout_transport_path',
+    'owner_mode_treatment_reverse_handoff_root=temp/handoffs/code_manager_to_explorer/',
+    'owner_mode_treatment_reverse_handoff_locator=assignment_named_exact_strict_descendant',
+    'owner_mode_treatment_main_checkout_mutation=apply_patch_only_reverse_handoff_no_git',
+    'owner_mode_integration_main_checkout_semantics=unchanged_shared_mainline_integration_only')) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "Code Project Manager treatment write-boundary key missing: $required"
+    }
+}
+foreach ($required in @(
+    'cpm_treatment_write_scope_count=2',
+    'cpm_treatment_write_scopes=ticket_local_paths_inside_one_registered_worktree|one_exact_strict_descendant_main_checkout_transport_path',
+    'cpm_treatment_reverse_handoff_locator=assignment_named_exact_strict_descendant',
+    'cpm_treatment_main_checkout_mutation=apply_patch_only_reverse_handoff_no_git',
+    'cpm_treatment_canonical_result=assignment_named_treatment_artifact_evidence_acceptance_record')) {
+    if (-not $sessionWorkspaceContract.Contains($required)) {
+        throw "Session workspace treatment write-boundary key missing: $required"
+    }
+}
+foreach ($stale in @(
+    'allowed_write_paths=temp/handoffs/code_manager_to_explorer/',
+    'owner_mode=treatment_write_scope=temp/handoffs/code_manager_to_explorer/',
+    'treatment may write every file under temp/handoffs/code_manager_to_explorer/')) {
+    foreach ($surface in @($codePm, $agile, $explorerValidationSkill, $explorerValidationContract, $publicHandoffContract, $sessionWorkspaceContract)) {
+        if ($surface.Contains($stale)) { throw "Broad treatment handoff scope remains: $stale" }
+    }
+}
+
+foreach ($required in @(
+    'runtime_execution_and_admission=exclusive',
+    'runtime_resource_observations=CPU|RAM|GPU|process|port|path|mutable_checkpoint|RNG|local_disk|network|cloud_reservation',
+    'runtime_conflict_observation=actual_overlap_or_exhaustion_only',
     'runtime_resource_upclass_or_defer=allowed_before_start',
     'runtime_resource_downclass=forbidden',
-    'independent_admitted_treatment_execution=parallel_first_within_capacity',
-    'ordinary_ab_serialization_requires=exact_dependency_or_resource_evidence',
-    'sole operational owner of the three-unit runtime pool',
-    'Capacity deferral is `pending_runtime_capacity` for that treatment, never a task, direction or workflow `BLOCKED` state',
-    'An exclusive formal/heavy run reserves only experiment-runtime admission',
+    'independent_treatment_execution=parallel_first_when_resources_are_disjoint',
+    'ordinary_ab_serialization_requires=exact_dependency_or_resource_conflict_observation',
+    'scientific_abc_orthogonal_to_resources=true',
+    'formal_local_result_runtime_excludes=conflicting_local_experiment_runtime_only',
+    'nonruntime_and_nonconflicting_cloud_authorized_work=continues',
+    'research_scheduler_role=observes_and_routes_only',
+    'research_scheduler_cannot_alter=science|priority|code|acceptance|budget',
+    'one independent technical acceptance',
     'CPM continues implementation, technical intake and every unrelated non-runtime action',
     'Every artifact keeps one independent technical acceptance')) {
     if (-not $codePmNormalized.Contains($required)) {
-        throw "Code Project Manager runtime-capacity ownership missing: $required"
+        throw "Code Project Manager runtime-resource ownership missing: $required"
     }
 }
 foreach ($required in @(
     'selected and frozen independent direction treatments',
-    'admits isolated tickets/worktrees within the three-unit pool',
+    'admits isolated tickets/worktrees with disjoint resource observations',
     'ordinary treatments parallel-first',
     'global serial fallback is rejected unless one exact blocker',
     'actual direction/intake dependency supplied by Explorer',
     'same-file/shared mutable object/root conflict',
-    'observed CPU/memory/process/capacity constraint',
-    'formal/explicit-heavy experiment-pool exclusivity',
+    'observed CPU/RAM/GPU/process/port/path/mutable checkpoint/RNG/local disk/network/cloud reservation conflict',
+    'formal local result-bearing runtime excludes conflicting local experiment runtime',
     'Global attribution, generic caution, convenience, completion order',
     'current sole action',
     'cannot serialize ordinary A/B',
-    'does not force capacity filling',
+    'does not force resource saturation',
     'change the formal nine-valid-iteration single-action lane')) {
     if (-not $codePmNormalized.Contains($required)) {
         throw "Code Project Manager parallel-first contract missing: $required"
     }
 }
 foreach ($required in @(
-    'sum the units of currently active result-bearing treatments',
-    'reserve all three units exclusively within the experiment pool for heavy/C work',
-    'Capacity shortage means mark only the not-yet-started treatment `pending_runtime_capacity`, never `BLOCKED`',
+    'observe actual CPU, RAM, GPU, process, port, path, mutable-checkpoint, RNG, local-disk, network and cloud-reservation conflicts',
+    'no numeric global runtime pool',
+    'resource conflict affects only the conflicting local experiment runtime',
     'may up-class for observed engineering resources but never down-class',
     'distinct direction/treatment identity',
     'shared writable files, mutable checkpoints or trainer state',
@@ -365,14 +456,11 @@ foreach ($required in @(
     'formal nine-valid-iteration/one-new-action-per-turn lane',
     'never an ordinary A/B global serial lock')) {
     if (-not $agileNormalized.Contains($required)) {
-        throw "Agile runtime-capacity contract missing: $required"
+        throw "Agile runtime-resource contract missing: $required"
     }
 }
-foreach ($required in @(
-    'code_project_manager_runtime_capacity_admission=exclusive',
-    'code_project_manager_runtime_capacity_pool_units=3',
-    'independent_research_runtime_capacity_owner=code_project_manager')) {
-    if (-not $agents.Contains($required)) { throw "Router capacity owner missing: $required" }
+foreach ($required in @('code_project_manager_runtime_authority=exclusive')) {
+    if (-not $agents.Contains($required)) { throw "Router runtime owner missing: $required" }
 }
 if ($codePm.Contains('one_at_a_time_for_attribution')) {
     throw 'Retired global resource-consuming action lock remains in CPM role'
@@ -615,7 +703,7 @@ if ($codePm.Contains('Never load `docs/project/CURRENT_WORK.md`')) {
 }
 
 foreach ($required in @(
-    'new persistent coding task',
+    'Research Scheduler',
     'clearly lacks the project mental model',
     'never copied to each child',
     'Local tasks remain local',
@@ -634,6 +722,17 @@ foreach ($required in @(
     'forked turns are background')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill missing project-cognition reference pointer: $required"
+    }
+}
+foreach ($required in @(
+    'Research Scheduler observes and routes',
+    'same-level Desktop owner task',
+    'docs/project/SESSION_WORKSPACE_CONTRACT.md',
+    'repo-local ticket root',
+    'temp/worktrees/HMASD',
+    'owner_mode=treatment|integration')) {
+    if (-not $agileNormalized.Contains($required)) {
+        throw "Agile Skill missing Scheduler/owner/session pointer: $required"
     }
 }
 foreach ($required in @(
@@ -700,7 +799,8 @@ if (-not $agileNormalized.Contains('CODE_SCIENCE_ALIGNMENT_AUDIT') -or
 foreach ($surface in @($codePm, $agile)) {
     foreach ($required in @(
         'scripts/hmasd_workspace_ticket.py provision',
-        'C:/worktrees/HMASD',
+        'repo-local ticket root',
+        'temp/worktrees/HMASD',
         'Raw external `git worktree`')) {
         if (-not $surface.Contains($required)) {
             throw "Code-PM worktree provisioning contract missing: $required"
@@ -717,8 +817,9 @@ if ($workflow.Contains('Project-Manager workflow-design assignment')) {
 }
 
 foreach ($required in @(
-    'session_owner_role=code_project_manager',
-    'session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
+    'owner_task_source=research_scheduler',
+    'owner_mode=treatment|integration',
+    'owner_assignment_fields=parent_owner_assignment|owner_mode|direction_or_treatment|ticket|worktree|base_commit|owned_paths|result_destination',
     'durable_workspace=docs/session-workspaces/code_project_manager/',
     'temporary_workspace=temp/sessions/code_project_manager/')) {
     if (-not $cpmWorkspace.Contains($required)) {
@@ -762,7 +863,8 @@ foreach ($forbidden in @(
 $currentWorkIndexMap = ConvertTo-HmasdRecordMap -Text $currentWorkIndex -Label 'CURRENT_WORK index'
 Assert-ExactHmasdKeyInventory -Actual $currentWorkIndexMap -ExpectedKeys @(
     'document_kind', 'schema_version', 'index_owner', 'state_updated',
-    'session_record_ids', 'common_record_ids', 'legacy_snapshot') -Label 'CURRENT_WORK index'
+    'session_record_ids', 'common_record_ids', 'legacy_snapshot',
+    'research_scheduler_session') -Label 'CURRENT_WORK index'
 if ($currentWorkIndexMap.document_kind -cne 'current_work_index' -or
     $currentWorkIndexMap.schema_version -cne '3' -or
     $currentWorkIndexMap.index_owner -cne 'workflow_design_manager' -or
@@ -771,14 +873,15 @@ if ($currentWorkIndexMap.document_kind -cne 'current_work_index' -or
 }
 
 $currentWorkSessionMap = ConvertTo-HmasdRecordMap -Text $currentWorkSession -Label 'Code PM current-work session'
-Assert-ExactHmasdKeyInventory -Actual $currentWorkSessionMap -ExpectedKeys @(
-    'document_kind', 'schema_version', 'session_owner_role', 'session_owner_id',
-    'workstream_ids', 'external_pointer_ids') -Label 'Code PM current-work session'
-if ($currentWorkSessionMap.document_kind -cne 'current_work_session' -or
-    $currentWorkSessionMap.schema_version -cne '1' -or
-    $currentWorkSessionMap.session_owner_role -cne 'code_project_manager' -or
-    $currentWorkSessionMap.session_owner_id -cne '019f9e4f-f4d0-7fe0-b214-c47fd034e84d') {
-    throw 'Code PM current-work session identity/schema is invalid'
+Assert-HmasdRequiredKeys -Actual $currentWorkSessionMap -RequiredKeys @(
+    'document_kind', 'schema_version', 'successor_owner', 'successor_locator',
+    'workstream_ids', 'external_pointer_ids') -Label 'retired Code PM current-work pointer'
+if ($currentWorkSessionMap.document_kind -cne 'retired_current_work_session_pointer' -or
+    $currentWorkSessionMap.successor_owner -cne 'research_scheduler') {
+    throw 'Code PM persistent current-work record was not retired to Research Scheduler'
+}
+if (-not $currentWorkIndex.Contains('research_scheduler')) {
+    throw 'CURRENT_WORK index is missing the Research Scheduler routing link'
 }
 
 $stateBearingKeys = @(
@@ -806,10 +909,11 @@ $indexedRecordIds = @($currentWorkIndexMap.common_record_ids -split '\|')
 if (($cpmRecordIds | Sort-Object -Unique).Count -ne $cpmRecordIds.Count -or
     ($publicSessionIds | Sort-Object -Unique).Count -ne $publicSessionIds.Count -or
     ($indexedRecordIds | Sort-Object -Unique).Count -ne $indexedRecordIds.Count -or
-    $publicSessionIds -cnotcontains 'code_project_manager' -or
     $publicSessionIds -cnotcontains 'workflow_design_manager' -or
+    $publicSessionIds -cnotcontains 'research_scheduler' -or
+    $publicSessionIds -ccontains 'code_project_manager' -or
     $indexedRecordIds -cnotcontains 'workflow_control_plane') {
-    throw 'Current-work session/index inventories contain duplicates or omit Code PM'
+    throw 'Current-work inventories do not reflect retired CPM and active Scheduler/WDM owners'
 }
 foreach ($recordId in $cpmRecordIds) {
     if ($indexedRecordIds -cnotcontains $recordId) {
@@ -847,7 +951,7 @@ foreach ($recordId in $cpmRecordIds) {
             throw "Current-work external pointer identity mismatch: $recordId"
         }
     } else {
-        throw "Common record is not owned by the Code PM session roster: $recordId"
+        throw "Common record is not an assignment-named Code PM operational record: $recordId"
     }
 }
 
@@ -964,10 +1068,6 @@ if (-not (Test-Path -LiteralPath $readinessScriptPath -PathType Leaf)) {
     throw 'Execution-readiness script is missing'
 }
 $readinessScript = Get-Content -Raw -LiteralPath $readinessScriptPath
-if ($readinessScript.Contains('019f9e4f-f4d0-7fe0-b214-c47fd034e84d') -or
-    -not $readinessScript.Contains('session_owner_id=')) {
-    throw 'Execution-readiness hook duplicates the fixed Code PM session instead of reading the role charter'
-}
 if (-not (Test-Path -LiteralPath $hooksPath -PathType Leaf)) {
     throw 'Code acceptance hook configuration is missing'
 }
