@@ -14,9 +14,11 @@ project, directs engineering repair, and owns runtime, transport and Git
 integration within its exact `owner_mode=treatment|integration` assignment.
 Research Scheduler observes and routes only same-level Desktop owner task
 lifecycle and resource conflicts; it cannot change science, priority, code,
-acceptance or budget. Owner identity and workspace locators follow
-`docs/project/SESSION_WORKSPACE_CONTRACT.md`. A bounded child requires an exact
-assignment and never scopes, accepts, or commits its work.
+acceptance or budget. Its exact native `{threadId, hostId}` handle is lifecycle
+and routing identity only, never a write grant or semantic relay. Owner identity
+and workspace locators follow `docs/project/SESSION_WORKSPACE_CONTRACT.md`. A
+bounded child requires an exact assignment and never scopes, accepts, or commits
+its work.
 
 ```text
 superpowers_plugin=reference_only
@@ -59,18 +61,15 @@ A user-named one may be inspected only as reference.
 
 ## Assignment-scoped treatment transport
 
-For `owner_mode=treatment`, the self-contained owner assignment and Scheduler
-binding identify exactly two physical locations: ticket-local paths inside one
-registered ticket/worktree and one exact strict descendant in the main checkout
-under `temp/handoffs/code_manager_to_explorer/`. The named descendant, never the
-handoff root or a sibling, carries the conclusion-first reverse handoff and
-points to the exact treatment artifact, evidence and technical-acceptance
-locators named by the assignment. This disposable exchange is not a canonical
-artifact, acceptance record, result ledger, queue, Scheduler semantic relay or
-Git object. Treatment Git and shell operations stay ticket-worktree-scoped; the
-named main-checkout handoff file uses `apply_patch` only and has no Git authority.
-`owner_mode=integration` retains its existing shared-mainline integration
-semantics and does not repeat treatment runtime or treatment acceptance.
+For `owner_mode=treatment`, the self-contained owner assignment names one
+registered ticket worktree and the exact ticket paths CPM owns. CPM returns its
+conclusion and result directly through the native owner handle; treatment does
+not write the shared mainline. Exact assignment paths are cooperative ownership
+policy, not authorization; generic filesystem and ticket guards remain
+defense-in-depth. For `owner_mode=integration`, CPM is the sole serialized writer
+of the shared mainline for the exact already-accepted commit set: no shared
+mainline writers run concurrently. Integration does not repeat treatment runtime
+or treatment acceptance.
 
 ## Triggered transport and mechanical lanes
 
@@ -273,6 +272,11 @@ slice.
 ## Concurrency and review
 
 - One writer owns each file; disjoint paths may run in parallel. No global lease.
+  Assignment exact paths are cooperative ownership policy; generic filesystem
+  and ticket guards remain defense-in-depth. Treatment CPM writes only its one
+  registered ticket worktree. Integration CPM is the sole serialized writer of
+  the shared mainline for exact accepted commits; no shared-mainline concurrent
+  writers are allowed.
 - Explorer-origin result-bearing treatments use observed resource vectors: there
   is no numeric global runtime pool. CPM must observe actual CPU, RAM, GPU, process,
   port, path, mutable-checkpoint, RNG, local-disk, network and cloud-reservation

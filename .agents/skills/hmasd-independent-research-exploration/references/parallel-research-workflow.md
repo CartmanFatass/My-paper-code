@@ -3,6 +3,8 @@
 owner_task_scheduler=same_level_user_owned_Desktop_Explorer_task
 owner_mode=direction|portfolio
 owner_task_assignment=self_contained_natural_language
+owner_task_handle=native_owner_task_handle
+cooperative_file_ownership=assignment_named_strict_disjoint_paths
 owner_task_exact_inputs=canonical_inputs_named_by_assignment
 owner_task_write_paths=canonical_write_paths_named_by_assignment
 owner_task_result_destination=canonical_result_destination_named_by_assignment
@@ -15,19 +17,21 @@ resource_conflict_serialization=only_named_dependency_or_observed_vector_or_muta
 evidence_level_runtime_orthogonal=true
 
 # Direct-user-frozen portfolio control-plane contract
-portfolio_direction_target=12
-portfolio_target_is_exact=true
-portfolio_target_counts=scientific_direction_identities_only
-portfolio_canonical_surfaces=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md
-portfolio_shortfall_policy=record_exact_ambiguity_or_shortfall_never_pad
-direction_owner_write_scope=one_disjoint_direction_capsule_only
+portfolio_direction_cardinality=derived_from_canonical_facts
+portfolio_cardinality_sources=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md
+portfolio_cardinality_policy=use_observed_count_record_exact_ambiguity_or_shortfall_never_pad_or_compress
+portfolio_cardinality_scope=scientific_direction_identities_only
+direction_owner_write_scope=assignment_named_strict_disjoint_direction_capsule_files
 direction_owner_shared_continuity_write=forbidden
+direction_owner_shared_portfolio_write=forbidden
 direction_owner_sibling_write=forbidden
 portfolio_integration_boundary=stable_portfolio_integration_boundary
 portfolio_intake=exact_direction_results
 portfolio_scientific_fields=identities|status|eligibility|priority|dependencies
 portfolio_ready_assignment=conclusion_first_self_contained_ready_next_owner_assignment
 portfolio_ready_assignment_fields=exact_inputs|write_paths|result_destinations|dependencies|resource_vectors
+portfolio_shared_writer=one_portfolio_explorer_at_integration_boundary
+portfolio_shared_write_scope=shared_RESEARCH_CONTINUITY_and_portfolio_records_at_integration_boundary_only
 research_scheduler_task_creation=alone_same_level_direction_owner_tasks
 initial_configured_concurrency_ceiling=3
 initial_ceiling_counts=active_same_level_direction_owner_tasks_only
@@ -38,10 +42,13 @@ scheduler_scientific_authority=none
 scheduler_forbidden_semantics=invent|fill_slots|reprioritize|merge|retire|select_directions
 direction_completion_successor_gate=exact_portfolio_intake_and_continuity_update_before_successor_ready
 completion_order_priority=forbidden
-portfolio_size_separate_from_active_concurrency_window=true
+portfolio_cardinality_separate_from_active_concurrency_window=true
 active_concurrency_window=flexible_per_run_ceiling
 fixed_runtime_pool=forbidden
 wdm_cpm_scheduler_scientific_authority=none
+mutation_ownership_gate=file_writes|runtime_actions|external_actions|cross_owner_actions
+read_only_consultation_scope=user_authorized_exact_scope_registered_read_only_research_children
+read_only_consultation_authority=none_for_acceptance_or_writes
 
 ```text
 logical_assignment_count=derived_from_exact_work_roster
@@ -84,21 +91,23 @@ explorer_mechanical_evidence_role=literal_fact_organization_not_scientific_evide
 explorer_mechanical_campaign_effect=none
 ```
 
-The portfolio Explorer's target is exactly 12 distinct scientific direction
-identities. It is represented by one direction-specific canonical capsule per
-direction plus the shared `local_research/RESEARCH_CONTINUITY.md` entry. The
-target never counts source assignments, candidate records or subdirection
-opportunities. If canonical evidence cannot honestly yield 12, the portfolio
-records the exact ambiguity or shortfall and never pads, invents, silently
-merges or silently selects a direction.
+The portfolio Explorer derives cardinality from canonical facts: the distinct
+scientific direction identities represented by direction-specific canonical
+capsules plus the shared `local_research/RESEARCH_CONTINUITY.md` entry. The
+count never includes source assignments, candidate records or subdirection
+opportunities. If canonical facts yield 15, the portfolio uses 15; it does not
+force compression. If the facts cannot establish a cardinality, record the
+exact ambiguity or shortfall and never pad, invent, silently merge or silently
+select a direction.
 
-A direction owner writes only its one disjoint direction capsule and never
-edits shared continuity or siblings. At a stable portfolio integration
-boundary, one portfolio Explorer alone intakes exact direction results,
-updates shared continuity and the scientific identities, status, eligibility,
-priority and dependencies, and emits conclusion-first self-contained ready
-next-owner assignments with exact inputs, write paths, result destinations,
-dependencies and resource vectors. `ready` is a natural-language portfolio
+A direction owner writes only its assignment-named strict-disjoint
+direction/capsule files and never edits shared `RESEARCH_CONTINUITY.md`, shared
+portfolio records or siblings. At a stable portfolio integration boundary,
+one portfolio Explorer alone intakes exact direction results, updates shared
+continuity and the scientific identities, status, eligibility, priority and
+dependencies, and emits conclusion-first self-contained ready next-owner
+assignments with exact inputs, write paths, result destinations, dependencies
+and resource vectors. `ready` is a natural-language portfolio
 capsule/continuity decision, not a schema, queue or admission gate.
 
 Research Scheduler alone creates same-level direction owner tasks. The initial
@@ -110,11 +119,14 @@ conflicting ready item to launch a later disjoint item without changing the
 preserved scientific priority or order. It cannot invent or fill slots,
 reprioritize, merge, retire or select directions. Direction completion triggers
 exact portfolio intake and continuity update before its successor becomes
-ready, and completion order is never priority. Portfolio size 12 is separate
-from active concurrency window 3; the ceiling remains flexible per run and is
-not a fixed runtime pool. WDM, CPM and Scheduler have no scientific authority.
-This reference states the boundary and does not duplicate Scheduler's command
-procedure.
+ready, and completion order is never priority. Observed portfolio cardinality
+is separate from the active concurrency window 3; the ceiling remains flexible
+per run and is not a fixed runtime pool. WDM, CPM and Scheduler have no
+scientific authority. Cooperative ownership gates every file write, runtime
+action, external action and cross-owner action. A user-authorized exact-scope
+registered read-only research child may consult within its named scope before
+an owner-scoped write, but has no acceptance or write authority. This reference states the boundary and does not
+duplicate Scheduler's command procedure.
 
 ## Canonical campaign intake and barrier
 

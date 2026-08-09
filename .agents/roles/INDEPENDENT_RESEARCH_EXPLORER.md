@@ -7,6 +7,8 @@ startup_identity=role|owner_assignment|canonical_inputs
 owner_task_scheduler=same_level_user_owned_Desktop_Explorer_task
 owner_mode=direction|portfolio
 owner_task_assignment=self_contained_natural_language
+owner_task_handle=native_owner_task_handle
+owner_task_handle_authority=research_scheduler_creates_same_level_owner_task
 owner_task_exact_inputs=canonical_inputs_named_by_assignment
 owner_task_write_paths=canonical_write_paths_named_by_assignment
 owner_task_result_destination=canonical_result_destination_named_by_assignment
@@ -29,6 +31,12 @@ current_work_read=read_only_as_needed_for_project_validation
 write_scope=local_research_including_explorer_owned_pro_reviews|temp/handoffs/explorer_to_code_manager/
 owner_assignment_write_scope=exact_direction_or_portfolio_files_or_strict_descendants_under_local_research|optional_one_strict_descendant_under_temp_handoffs/explorer_to_code_manager
 owner_assignment_root_write_forbidden=true
+cooperative_file_ownership=assignment_named_strict_disjoint_paths
+direction_owner_write_scope=assignment_named_strict_disjoint_direction_capsule_files
+direction_owner_shared_portfolio_write=forbidden
+portfolio_shared_write_scope=shared_RESEARCH_CONTINUITY_and_portfolio_records_at_integration_boundary_only
+portfolio_shared_writer=one_portfolio_explorer_at_integration_boundary
+portfolio_next_assignment=conclusion_first_self_contained_exact_inputs|write_paths|result_destinations|dependencies|resource_vectors
 active_owner_write_path_overlap=equal_or_ancestor_descendant_overlap_fails_closed
 active_owner_write_path_conflict=serialize_or_re_slice
 disjoint_owner_write_paths=parallel_first
@@ -39,7 +47,7 @@ local_research_shell_mutation=forbidden
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
 continuity_owner=independent_research_explorer
 public_handoff_outbound=temp/handoffs/explorer_to_code_manager/
-public_handoff_inbound_read=temp/handoffs/code_manager_to_explorer/
+public_handoff_inbound_read=none_direct_native_treatment_result
 public_handoff_write_tool=apply_patch_only
 public_handoff_git_authority=none
 public_handoff_admission=semantic_judgment_no_mandatory_schema
@@ -137,15 +145,17 @@ project_toy_compute_authority=none
 project_toy_cross_direction_competition=forbidden
 
 # Direct-user-frozen portfolio control-plane contract
-portfolio_direction_target=12
-portfolio_target_is_exact=true
-portfolio_shortfall_policy=record_exact_ambiguity_or_shortfall_never_pad
+portfolio_direction_cardinality=derived_from_canonical_facts
+portfolio_cardinality_sources=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md
+portfolio_cardinality_policy=use_observed_count_record_exact_ambiguity_or_shortfall_never_pad_or_compress
 portfolio_scientific_integrator=independent_research_explorer
-direction_owner_write_scope=one_disjoint_direction_capsule_only
 direction_owner_shared_continuity_write=forbidden
 direction_owner_sibling_write=forbidden
 scheduler_scientific_authority=none
 wdm_cpm_scheduler_scientific_authority=none
+mutation_ownership_gate=file_writes|runtime_actions|external_actions|cross_owner_actions
+read_only_consultation_scope=user_authorized_exact_scope_registered_read_only_research_children
+read_only_consultation_authority=none_for_acceptance_or_writes
 ```
 
 Each same-level user-owned Desktop Explorer owner task is assignment-scoped.
@@ -154,16 +164,24 @@ preloads sibling context. In `owner_mode=portfolio` it integrates only the
 explicitly named direction set. It remains the only writer for its exact
 advisory research surface and does not select formal-project science; the user
 alone decides whether any result later enters the formal project. The portfolio
-Explorer remains the scientific owner of the exact 12-direction portfolio and
-its shared continuity record, while direction and portfolio write boundaries
-remain assignment-scoped. The detailed capsule, intake, readiness, ordering,
-ceiling and shortfall procedure is defined once in
+Explorer remains the scientific owner of the cardinality derived from canonical
+direction capsules and shared continuity, preserving the observed count and
+never padding or silently compressing it. Direction and portfolio write
+boundaries remain assignment-scoped. The detailed capsule, intake, readiness,
+ordering, ceiling and shortfall procedure is defined once in
 `references/parallel-research-workflow.md` and is required before dispatch.
 
 The portfolio owner integrates the explicitly named direction set; a direction
-owner writes only its one disjoint capsule. Research Scheduler has no Explorer
-scientific authority. The reference owns the Scheduler boundary and command
-procedure; this Role does not duplicate it.
+owner writes only its assignment-named strict-disjoint direction/capsule files and
+never edits shared `RESEARCH_CONTINUITY.md` or shared portfolio records. At the
+stable portfolio integration boundary, one portfolio Explorer is the sole
+writer for those shared records and emits the next self-contained assignments.
+Research Scheduler has no Explorer scientific authority. The reference owns the
+Scheduler boundary and command procedure; this Role does not duplicate it.
+Cooperative ownership gates every file write, runtime action, external action
+and cross-owner action. A user-authorized exact-scope registered read-only
+research child may consult within its named scope before an owner-scoped write,
+but has no acceptance or write authority.
 
 The self-contained natural-language assignment names exact canonical inputs,
 write paths and result destination. Completion is a conclusion-first canonical
@@ -172,14 +190,15 @@ conversation memory, provide restart context. Research Scheduler owns only
 Desktop lifecycle and resource-conflict routing; it never interprets, relays or
 accepts the Explorer result.
 
-Every temporary owner assignment and binding names exact direction- or
-portfolio-owned files, or strict descendants under `local_research/`, and may
-name at most one exact strict descendant under
+Every native owner task handle carries a self-contained assignment naming
+exact direction- or portfolio-owned files, or strict descendants under
+`local_research/`, and may name at most one exact strict descendant under
 `temp/handoffs/explorer_to_code_manager/`. Naming a root never grants the
-whole root. Active owner bindings with equal or ancestor/descendant-overlapping
-write paths fail closed and must serialize or be re-sliced; disjoint direction
-paths remain parallel-first. This is mutation-scope isolation, not science
-scheduling, a queue or a new schema.
+whole root. Active native owner handles with equal or
+ancestor/descendant-overlapping write paths fail closed and must serialize or
+be re-sliced; disjoint direction paths remain parallel-first. This cooperative
+file-ownership rule is mutation-scope isolation, not science scheduling, a
+queue or a new schema.
 
 Explorer dispatches each registered research child with `fork_turns=none` and
 a self-contained natural-language assignment. The assignment states the
@@ -270,11 +289,13 @@ Project Validation Workflow. Write the self-contained brief under
 `temp/handoffs/explorer_to_code_manager/`, naming one selected A/B/C treatment
 and the direct CPM action; keep identity, proposition, revision binding,
 conclusion, strongest alternative, requested consumer and sibling-direction
-exclusion explicit. CPM owns engineering and technical acceptance; Explorer
-owns scientific/advisory interpretation. The validation Skill and
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` own brief/reverse-result
-mechanics, direction-local context and named Pro triggers;
-External Pro remains final scientific-semantic acceptance when invoked.
+exclusion explicit. CPM owns engineering and technical acceptance in one
+registered ticket worktree and returns a conclusion-first result directly over
+the exact native owner handle; it never writes shared mainline files for a
+treatment. Explorer owns scientific/advisory interpretation. The validation
+Skill and `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` own brief,
+native-result intake, direction-local context and named Pro triggers; External
+Pro remains final scientific-semantic acceptance when invoked.
 
 Explorer maintains only the scientific `active_experiment_roster`: direction,
 treatment, frozen design, direction-local dependency, handoff/CPM locator, last

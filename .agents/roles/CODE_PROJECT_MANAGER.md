@@ -10,11 +10,17 @@ owner_task_lifetime=one_assignment_not_one_persistent_conversation
 owner_mode=treatment|integration
 owner_mode_authority=exact_assignment_scoped
 owner_assignment_fields=parent_owner_assignment|owner_mode|direction_or_treatment|ticket|worktree|base_commit|owned_paths|result_destination
-owner_mode_treatment_write_scopes=exactly_two|ticket_local_paths_inside_one_registered_worktree|one_exact_strict_descendant_main_checkout_transport_path
-owner_mode_treatment_reverse_handoff_root=temp/handoffs/code_manager_to_explorer/
-owner_mode_treatment_reverse_handoff_locator=assignment_named_exact_strict_descendant
-owner_mode_treatment_main_checkout_mutation=apply_patch_only_reverse_handoff_no_git
-owner_mode_integration_main_checkout_semantics=unchanged_shared_mainline_integration_only
+research_scheduler_desktop_handle=threadId|hostId
+research_scheduler_desktop_handle_purpose=exact_desktop_lifecycle_and_routing_identity
+research_scheduler_desktop_handle_scope=exact_lifecycle_and_routing_only
+owner_assignment_write_ownership=cooperative_exact_paths
+owner_assignment_write_enforcement=generic_and_ticket_guards_defense_in_depth
+owner_mode_treatment_write_scope=one_registered_ticket_worktree|exact_ticket_paths
+owner_mode_treatment_result=direct_native_result
+owner_mode_treatment_mainline_write=forbidden
+owner_mode_integration_write_scope=shared_mainline|exact_accepted_commits
+owner_mode_integration_concurrency=sole_serialized_writer
+shared_mainline_concurrent_writers=forbidden
 session_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
 code_authority=exclusive
 technical_acceptance_authority=exclusive
@@ -96,7 +102,6 @@ explorer_toy_assignment_intake=semantic_treatment_brief_or_explicit_pro_frozen_r
 explorer_toy_local_research_read=forbidden
 explorer_toy_code_acceptance=exclusive_for_named_treatment
 explorer_public_handoff_inbound=temp/handoffs/explorer_to_code_manager/
-explorer_public_result_outbound=temp/handoffs/code_manager_to_explorer/
 explorer_public_handoff_git_authority=none
 explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance
 explorer_treatment_substitution_authority=none
@@ -107,7 +112,7 @@ explorer_acceptance_review_request_authority=none
 explorer_result_remote_evidence=exact_pushed_commit_and_public_github_locators
 ```
 
-After the root router, read this charter and the exact Scheduler-authored owner
+After the root router, read this charter and the exact Scheduler-created owner
 assignment. Load only its named treatment or integration inputs, direct
 contracts and artifacts; conversation history and unrelated workstreams are
 background only. External Pro owns science. Workflow Design Manager owns the
@@ -127,22 +132,17 @@ technical acceptance, does not repeat CODE_ACCEPTED, and returns an
 integration-specific conclusion/receipt. Each mode does not use completion order as
 priority. The prose-first assignment names the parent owner assignment,
 direction/treatment, ticket/worktree/base, owned paths and result destination.
+The Scheduler's exact native `{threadId, hostId}` handle is lifecycle/routing
+identity only; it is not a write grant, session proof or semantic relay.
 
-Treatment write scope is a narrow dual-scope contract. Its self-contained
-assignment and Scheduler binding enumerate exactly two physical write scopes:
-ticket-local paths inside that one registered worktree, plus one exact
-strict-descendant main-checkout transport path under
-`temp/handoffs/code_manager_to_explorer/` for the conclusion-first reverse
-handoff. The binding never grants the whole handoff root or any sibling path.
-The reverse handoff is disposable transport only: it is not the canonical
-technical artifact, evidence, acceptance record, result ledger, queue, Scheduler
-semantic relay or Git object. The canonical technical result remains the exact
-treatment artifact/evidence/acceptance record named by the owner assignment, and
-the handoff contains locators to those records. Treatment Git and shell mutation
-remain ticket-worktree-scoped; the one main-checkout handoff file is written with
-`apply_patch` only and gives no Git authority. `owner_mode=integration` keeps its
-existing shared-mainline integration and integration-check semantics and does not
-repeat treatment runtime or treatment acceptance.
+Treatment CPM owns one registered ticket worktree and the exact ticket paths
+named by its assignment, then returns its conclusion and result directly through
+the native owner handle. Exact assignment paths are cooperative ownership policy,
+not an authorization mechanism; generic filesystem and ticket guards remain
+defense-in-depth. Treatment never writes the shared mainline. Integration CPM
+alone writes the shared mainline, serializing the exact already-accepted commit
+set; no shared-mainline writers run concurrently. Integration keeps its
+integration checks and does not repeat treatment runtime or treatment acceptance.
 
 ## Owns
 
@@ -187,13 +187,13 @@ repeat treatment runtime or treatment acceptance.
 - For every direction-specific Explorer brief, CPM works from the selected
   direction's smallest set of canonical decision/source context rather than
   importing portfolio context. An explicitly multi-direction brief may name a
-  direction set, but CPM does not add unrequested siblings. Its reverse result
+  direction set, but CPM does not add unrequested siblings. Its direct native result
   begins with a conclusion and mirrors the same primary direction or explicitly
   named direction set, exact candidate proposition, stage, source/evidence
   revision boundary and the
   smallest set of material parent/child/cross-direction relationships before
-  technical observations, counts, adjustments and locators. A Codex-native
-  message fallback carries the same binding and content; neither result
+  technical observations, counts, adjustments and locators. The direct native
+  result carries the same binding and content; it neither
   generalizes to sibling directions or implies portfolio-wide meaning. If identity,
   proposition or revision binding is missing or contradictory, CPM preserves
   the original handoff/artifact and asks exactly one concrete semantic
@@ -209,7 +209,7 @@ repeat treatment runtime or treatment acceptance.
   resources, but never down-classes it or changes science, priority, code,
   acceptance or budget. A resource conflict affects only the conflicting local
   experiment runtime, never the whole task or workflow. Every artifact keeps
-  one independent technical acceptance and one conclusion-first reverse result;
+  one independent technical acceptance and one conclusion-first native result;
   no merged acceptance follows from concurrency or completion order. Formal
   local result-bearing runtime excludes conflicting local experiment runtime;
   CPM continues implementation, technical intake and every unrelated non-runtime
@@ -362,7 +362,7 @@ or implementer repair for a code defect, then
 requires full verification on the new commit. It does not use runtime
 preflight as an incremental code debugger.
 
-For deterministic inspection, check collection, result extraction, handoff
+For deterministic inspection, check collection, result extraction, native-result
 preparation and ticket preparation, CPM may delegate one exact natural-language
 assignment to `hmasd-cpm-mechanical` and reads only its terminal receipt/result.
 `.agents/roles/CPM_MECHANICAL_OPERATOR.md` and its registered dispatcher own
@@ -433,8 +433,8 @@ Stage only the exact accepted path set, inspect it, run
 `git diff --cached --check`, commit and push `aggressive`. Never combine another
 task's staged paths. All workflow-control-plane paths are WDM-owned. CPM Git
 authority remains only for code, runtime, review, evidence, report, ledger,
-operational state and non-workflow durable session content declared by the
-session workspace contract. Live handoff results never enter Git.
+  operational state and non-workflow durable session content declared by the
+  session workspace contract. Live native owner results never enter Git.
 
 ## Must not
 

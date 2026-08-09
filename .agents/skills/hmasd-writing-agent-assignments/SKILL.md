@@ -49,23 +49,26 @@ is a context compiler, not a field copier. A shorter brief is correct when it
 contains enough meaning for the bounded task.
 
 For a Desktop Research Scheduler owner task, preserve this prose-first model
-for every owner and child assignment. The scheduler factual tail may name exact
-`threadId`, `hostId`, owner mode, workspace path, allowed write paths, result
-locator and bounded Desktop action. Keep that tail distinct from the machine
-binding at
-`temp/sessions/research_scheduler/bindings/<assignment_id>.json`: the binding
-has only
-`assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active` and
-is mutation-boundary identity, not task context, a queue or a semantic
-completion gate.
+for every owner and child assignment. The scheduler factual tail may name the
+exact native Desktop handle `{threadId, hostId}` (`threadId+hostId`), owner mode, workspace path,
+exact cooperative write paths, result locator and bounded Desktop action. The
+handle returned by the one `create_thread` call is lifecycle/routing identity;
+canonical files are artifacts or continuity only and never proof of LLM
+identity. An optional human-readable roster may retain the handle as a restart
+locator, but it is not authority. Do not add file-based identity machinery.
 
-Keep Desktop follow-ups distinct in the prose-first interface: an identity-probe
-follow-up is read-only and requests deterministic owner-session observation,
-while a separate binding-ready follow-up is sent only after the exact identity
-facts are mechanically matched and is the action that permits owner mutation.
-Neither follow-up replaces the self-contained assignment, and the probe
-observation is not task context, a queue, registry, ledger, semantic result or
-acceptance.
+The owner assignment must carry all semantic meaning and action capability:
+why the task exists, intended outcome, canonical inputs, protected decisions,
+exclusions, permitted local judgment, bounded recovery, exact cooperative write
+ownership, canonical result destination and observable completion evidence.
+Writers of one exact file serialize; disjoint exact files may overlap. A
+direction owner writes/returns only its named disjoint direction files; the
+portfolio Explorer alone writes shared portfolio continuity/capsule state; a
+treatment CPM owner writes only its ticket worktree and declared result
+destination; an integration CPM owner writes the shared mainline integration
+surface for the accepted set. Same-file writers serialize; disjoint exact files
+may overlap. The Scheduler waits, reads and archives by the exact native handle
+and does not relay semantic results, scan tasks or maintain a queue/monitor/registry.
 
 ## Important distinctions
 

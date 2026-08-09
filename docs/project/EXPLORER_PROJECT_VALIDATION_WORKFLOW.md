@@ -60,12 +60,13 @@ consumer; completion evidence; and return destination. These cues make the
 semantic binding understandable without
 creating required field names or a machine admission gate.
 
-CPM's reverse result begins with its conclusion and mirrors that same primary
-direction or explicitly named direction set, candidate, proposition, stage,
-revision boundary and material relationship binding before technical
-observations, counts, adjustments and locators. It never imports another
-direction or implies portfolio-wide
-meaning. A Codex-native message fallback carries the same binding and content.
+CPM's treatment result is returned directly over the exact native owner handle.
+It begins with its conclusion and mirrors that same primary direction or
+explicitly named direction set, candidate, proposition, stage, revision
+boundary and material relationship binding before technical observations,
+counts, adjustments and locators. It never imports another direction or implies
+portfolio-wide meaning. A native task result is the normal transport, not a
+file-backed transport.
 
 If the direction, proposition or revision binding is missing or contradictory,
 the receiver preserves the original handoff/artifact and asks exactly one
@@ -105,7 +106,7 @@ Explorer-authored canonical scientific decision.
 
 After CPM technical acceptance, Explorer may separately use the registered
 `hmasd-explorer-mechanical` child to present, rearrange or extract literal
-fields from already accepted packets or named reverse briefs. This is
+fields from already accepted packets or named result briefs. This is
 context-isolation organization, not a scientific consultant or a second
 acceptance path: the child may report literal existence or inaccessibility for
 an exact assignment-named local file or evidence locator, but does not decide
@@ -130,26 +131,21 @@ direction-barrier and frozen-joint-roster exception live in the exploration Skil
 `parallel-research-workflow.md`; this bridge owns only direction-local binding
 and scientific intake.
 
-### CPM treatment reverse-handoff scope
+### CPM treatment result scope
 
 For a Scheduler-created CPM assignment with `owner_mode=treatment`, the
-self-contained assignment and binding enumerate exactly two physical write
-scopes: ticket-local paths inside one registered ticket/worktree and one exact
-strict-descendant main-checkout transport path under
-`temp/handoffs/code_manager_to_explorer/`. CPM writes the conclusion-first
-reverse handoff only at that named descendant; it cannot write the whole root or
-any sibling path. The handoff is disposable transport only and points to the
-exact treatment artifact, evidence and technical-acceptance locators named by
-the owner assignment. It is not a canonical technical artifact, acceptance
-record, result ledger, queue, Scheduler semantic relay or Git object. Treatment
-Git and shell mutation remain ticket-worktree-scoped; the main-checkout handoff
-is written with `apply_patch` only and gives no Git authority. `owner_mode=integration`
-retains its existing shared-mainline integration semantics and does not repeat
-treatment runtime or treatment acceptance.
+self-contained assignment names one registered ticket/worktree and exact
+ticket-local paths. CPM writes only those paths and never writes the shared
+main checkout for a treatment. CPM returns a conclusion-first result directly
+over the exact native owner handle, naming the exact treatment artifact,
+evidence and technical-acceptance locators. The native result is transport
+only; it is not a canonical technical artifact, acceptance record, result
+ledger, Scheduler semantic relay or Git object. `owner_mode=integration` is the
+sole serialized shared-mainline writer and does not repeat treatment runtime or
+treatment acceptance.
 
-Explorer reads only the exact named handoff and technical locators, performs
-exactly one scientific intake, and then sender/receiver cleanup follows the
-existing handoff rules. Scheduler routes and checks locators mechanically; it
+Explorer performs exactly one scientific intake from the native result and
+named canonical locators. Scheduler routes the owner handle mechanically and
 does not interpret the technical or scientific result.
 
 This boundary is semantic guidance rather than a mandatory packet schema or
@@ -162,8 +158,6 @@ tracked exchange-file contract is `docs/project/handoffs/README.md`; live files
 use the ignored shared root `temp/handoffs/`:
 
 - `temp/handoffs/explorer_to_code_manager/`: Explorer writes and deletes its own files; CPM
-  reads them.
-- `temp/handoffs/code_manager_to_explorer/`: CPM writes and deletes its own files; Explorer
   reads them.
 
 A handoff is a self-contained Markdown or JSON brief, with attachments only

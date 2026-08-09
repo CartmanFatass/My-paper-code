@@ -125,27 +125,27 @@ def test_reference_ownership_moves_general_material_out_of_agile_skill() -> None
     assert "focused on code context" in guide
 
 
-def test_scheduler_binding_is_a_factual_tail_not_task_context() -> None:
+def test_scheduler_native_handle_is_a_factual_tail_not_task_context() -> None:
     text = _normalized(SKILL)
     assert "prose-first" in text
-    assert "binding" in text
-    assert "mutation-boundary identity" in text
-    assert "not task context" in text
-    assert "assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active" in text
+    assert "exact native desktop handle `{threadid, hostid}`" in text
+    assert "lifecycle/routing identity" in text
+    assert "canonical files are artifacts or continuity only" in text
+    assert "never proof of llm identity" in text
 
 
-def test_scheduler_probe_and_binding_ready_followups_preserve_prose_first_meaning() -> None:
+def test_scheduler_write_ownership_is_explicit_and_file_identity_is_not_required() -> None:
     text = _normalized(SKILL)
     for cue in (
-        "keep desktop follow-ups distinct",
-        "identity-probe follow-up",
-        "read-only",
-        "deterministic owner-session observation",
-        "separate binding-ready follow-up",
-        "only after the exact identity facts are mechanically matched",
-        "permits owner mutation",
-        "neither follow-up replaces the self-contained assignment",
-        "probe observation is not task context",
-        "not task context, a queue, registry, ledger, semantic result or acceptance",
+        "exact cooperative write paths",
+        "direction owner writes/returns only",
+        "portfolio explorer alone writes shared portfolio continuity/capsule state",
+        "treatment cpm owner writes only its ticket worktree",
+        "integration cpm owner writes the shared mainline integration surface",
+        "writers of one exact file serialize",
+        "disjoint exact files may overlap",
+        "does not relay semantic results, scan tasks or maintain a queue/monitor/registry",
     ):
         assert cue in text
+    for stale in ("handshake", "binding-ready", "identity_observation", "session binding"):
+        assert stale not in text

@@ -5,24 +5,38 @@ description: Use in the user-controlled HMASD Independent Research Explorer task
 
 # HMASD Independent Research Exploration
 
-## Temporary owner write-scope binding
+## Cooperative exact file ownership
 
-Every same-level owner assignment names exact direction- or portfolio-owned
-files, or strict descendants under `local_research/`, and may name at most one
-exact strict descendant under `temp/handoffs/explorer_to_code_manager/` when a
-handoff is needed. A root path never grants the whole root. Active owner
-bindings with equal or ancestor/descendant-overlapping write paths fail closed
-and must serialize or be re-sliced; disjoint direction paths remain
-parallel-first. This is mutation-scope isolation, not science scheduling, a
-queue or a new schema.
+owner_task_handle=native_owner_task_handle
+cooperative_file_ownership=assignment_named_strict_disjoint_paths
 
-## Direct-user-frozen twelve-direction portfolio contract
+Every same-level native owner task handle carries an assignment naming exact
+direction- or portfolio-owned files, or strict descendants under
+`local_research/`, and may name at most one exact strict descendant under
+`temp/handoffs/explorer_to_code_manager/` when a handoff is needed. A root path
+never grants the whole root. Direction owners write only their assignment-named
+strict-disjoint direction/capsule files; they never write shared
+`RESEARCH_CONTINUITY.md` or shared portfolio records. At the stable portfolio
+integration boundary, one portfolio Explorer is the sole writer for those
+shared records and emits the next self-contained assignments. Equal or
+ancestor/descendant-overlapping write paths fail closed and must serialize or
+be re-sliced; disjoint direction paths remain parallel-first. This is
+cooperative mutation-scope isolation, not science scheduling, a queue or a new
+schema.
 
-The portfolio Explorer owns the scientific target of exactly 12 direction
-identities, with no-padding shortfall handling and assignment-scoped direction
-versus portfolio writes. Research Scheduler and WDM/CPM have no Explorer
-scientific authority. The complete capsule, continuity, intake, readiness,
-ordering and concurrency procedure is specified once in
+## Direct-user-frozen derived-cardinality portfolio contract
+
+The portfolio Explorer derives scientific direction cardinality from canonical
+direction capsules and shared continuity, uses the observed count (for example,
+15 remains 15), and records exact ambiguity or shortfall without padding,
+inventing, silently merging or forcing compression. Direction versus portfolio
+writes remain assignment-scoped under native owner task handles. Research
+Scheduler and WDM/CPM have no Explorer scientific authority. Cooperative
+ownership gates file writes, runtime, external and cross-owner actions; a
+user-authorized exact-scope registered read-only research child may consult
+within its named scope before an owner-scoped write but has no acceptance or
+write authority. The complete capsule, continuity, intake, readiness, ordering
+and concurrency procedure is specified once in
 [`references/parallel-research-workflow.md`](references/parallel-research-workflow.md);
 read that reference before dispatch. This Skill supplies the mode loop and
 dispatch trigger only and does not duplicate the procedure.
@@ -151,7 +165,8 @@ For any direction-specific answer or Explorer-to-CPM handoff, trigger
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Resolve one selected
 primary direction, exact candidate proposition/revision, requested consumer and
 completion evidence while excluding unrequested siblings; the dedicated
-workflow owns direction-local context and brief/reverse mechanics. A missing or
+workflow owns direction-local context and brief/native-treatment-result
+mechanics. A missing or
 contradictory binding preserves the original artifact and asks one concrete
 clarification while unrelated research continues; never guess, merge, rewrite
 or create a `BLOCKED` state.
@@ -305,7 +320,7 @@ When a mature candidate is ready for project intake, load the single
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Write one
 self-contained semantic brief under `temp/handoffs/explorer_to_code_manager/`
 with the selected A/B/C treatment and direct CPM action. The dedicated workflow
-owns brief/reverse-result mechanics, direction-local context and the named Pro
-triggers. Explorer records one scientific decision after CPM technical
-acceptance; CPM remains the engineering/runtime acceptance owner, and External
-Pro owns final scientific-semantic acceptance when invoked.
+owns brief/native-treatment-result mechanics, direction-local context and the
+named Pro triggers. Explorer records one scientific decision after CPM
+technical acceptance; CPM remains the engineering/runtime acceptance owner, and
+External Pro owns final scientific-semantic acceptance when invoked.

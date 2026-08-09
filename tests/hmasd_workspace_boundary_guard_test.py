@@ -46,7 +46,7 @@ def invoke(
     tool: str,
     tool_input: object,
     *,
-    session_id: str = "guard-test",
+    session_id: object = "ignored-session-metadata",
     cwd: Path | None = None,
 ) -> dict[str, object] | None:
     payload = {
@@ -75,11 +75,10 @@ def invoke_local(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
     *,
-    session_id: object = "guard-test",
     cwd: Path | None = None,
 ) -> dict[str, object] | None:
     payload = {
-        "session_id": session_id,
+        "session_id": None,
         "cwd": str(cwd or repo),
         "hook_event_name": "PreToolUse",
         "tool_name": tool,
@@ -99,443 +98,26 @@ def assert_denied(payload: dict[str, object] | None, fragment: str) -> None:
     assert fragment in str(output["permissionDecisionReason"])
 
 
-def identity_command(
-    assignment_id: str = "TASK_IDENTITY",
-    thread_id: str = "thread-123",
-    host_id: str = "local",
-) -> str:
-    return (
-        "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe "
-        "scripts/hmasd_workspace_boundary_guard.py observe-owner-session "
-        f"--assignment-id {assignment_id} --thread-id {thread_id} "
-        f"--host-id {host_id}"
-    )
-
-
-def identity_path(repo: Path, assignment_id: str = "TASK_IDENTITY") -> Path:
-    return (
-        repo
-        / "temp"
-        / "sessions"
-        / "research_scheduler"
-        / "identity_observations"
-        / f"{assignment_id}.json"
-    )
-
-
-def test_owner_identity_observation_persists_minimal_payload_and_keeps_binding_denial(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
+def test_outer_exec_and_unrecognized_tools_are_ignored(tmp_path: Path) -> None:
     repo, _ = repository(tmp_path)
-    monkeypatch.setenv("CODEX_THREAD_ID", "thread-123")
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": identity_command()},
-            session_id="actual-session-id",
-        )
-        is None
-    )
-    path = identity_path(repo)
-    observation = json.loads(path.read_text(encoding="utf-8"))
-    assert set(observation) == {"assignment_id", "thread_id", "host_id", "session_id"}
-    assert observation == {
-        "assignment_id": "TASK_IDENTITY",
-        "thread_id": "thread-123",
-        "host_id": "local",
-        "session_id": "actual-session-id",
-    }
-    assert "tool_input" not in observation
-    assert not (repo / "temp/sessions/research_scheduler/bindings/TASK_IDENTITY.json").exists()
-    _binding(repo)
-    assert_denied(
-        invoke(
-            repo,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: local_research/directions/example.md\n*** End Patch",
-            session_id="other-session",
-        ),
-        "exact active session binding",
-    )
+    assert invoke(repo, "exec", "await tools.shell_command({command: arbitrary()});") is None
+    assert invoke(repo, "unknown_tool", {"anything": "goes"}) is None
 
 
-def test_owner_identity_observation_accepts_thread_id_distinct_from_session_id(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    repo, _ = repository(tmp_path)
-    monkeypatch.setenv("CODEX_THREAD_ID", "thread-different")
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": identity_command(thread_id="thread-different")},
-            session_id="session-different",
-        )
-        is None
-    )
-    assert json.loads(identity_path(repo).read_text(encoding="utf-8"))["session_id"] == (
-        "session-different"
-    )
-
-
-@pytest.mark.parametrize("session_id", (None, "", "session with whitespace"))
-def test_owner_identity_observation_rejects_missing_empty_or_invalid_session(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, session_id: object
-) -> None:
-    repo, _ = repository(tmp_path)
-    monkeypatch.setenv("CODEX_THREAD_ID", "thread-123")
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": identity_command()},
-            session_id=session_id,  # type: ignore[arg-type]
-        ),
-        "valid payload session_id",
-    )
-    assert not identity_path(repo).exists()
-
-
-def test_owner_identity_observation_rejects_absent_or_mismatched_inherited_thread(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    repo, _ = repository(tmp_path)
-    monkeypatch.delenv("CODEX_THREAD_ID", raising=False)
-    assert_denied(
-        invoke(repo, "shell_command", {"command": identity_command()}),
-        "CODEX_THREAD_ID",
-    )
-    monkeypatch.setenv("CODEX_THREAD_ID", "wrong-thread")
-    assert_denied(
-        invoke(repo, "shell_command", {"command": identity_command()}),
-        "does not match CODEX_THREAD_ID",
-    )
-    assert not identity_path(repo).exists()
-
-
-@pytest.mark.parametrize(
-    "command",
-    (
-        identity_command(assignment_id="../unsafe"),
-        identity_command(thread_id="thread unsafe"),
-        identity_command(host_id="remote"),
-        identity_command() + " --unexpected extra",
-        '"C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe" '
-        "scripts/hmasd_workspace_boundary_guard.py observe-owner-session "
-        "--assignment-id TASK_IDENTITY --thread-id thread-123 --host-id local",
-    ),
-)
-def test_owner_identity_observation_rejects_malformed_or_unsafe_commands(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, command: str
-) -> None:
-    repo, _ = repository(tmp_path)
-    monkeypatch.setenv("CODEX_THREAD_ID", "thread-123")
-    assert_denied(
-        invoke(repo, "shell_command", {"command": command}),
-        "identity observation command",
-    )
-    assert not identity_path(repo).exists()
-
-
-def test_owner_identity_observation_conflict_never_overwrites(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    repo, _ = repository(tmp_path)
-    path = identity_path(repo)
-    path.parent.mkdir(parents=True)
-    original = {
-        "assignment_id": "TASK_IDENTITY",
-        "thread_id": "thread-123",
-        "host_id": "local",
-        "session_id": "original-session",
-    }
-    path.write_text(json.dumps(original), encoding="utf-8")
-    monkeypatch.setenv("CODEX_THREAD_ID", "thread-123")
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": identity_command()},
-            session_id="replacement-session",
-        ),
-        "will not be overwritten",
-    )
-    assert json.loads(path.read_text(encoding="utf-8")) == original
-
-
-def test_owner_identity_cli_reads_only_exact_observation(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    repo, _ = repository(tmp_path)
-    monkeypatch.setenv("CODEX_THREAD_ID", "thread-123")
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": identity_command()},
-            session_id="cli-session",
-        )
-        is None
-    )
-    result = subprocess.run(
-        [
-            sys.executable,
-            str(SCRIPT),
-            "observe-owner-session",
-            "--assignment-id",
-            "TASK_IDENTITY",
-            "--thread-id",
-            "thread-123",
-            "--host-id",
-            "local",
-        ],
-        cwd=repo,
-        env={**os.environ, "CODEX_THREAD_ID": "thread-123"},
-        check=False,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-    )
-    assert result.returncode == 0, result.stderr
-    assert json.loads(result.stdout) == json.loads(identity_path(repo).read_text(encoding="utf-8"))
-
-
-def _binding(repo: Path, **overrides: object) -> None:
-    values: dict[str, object] = {
-        "assignment_id": "TASK_BINDING",
-        "session_id": "binding-session",
-        "owner_role": "independent_research_explorer",
-        "owner_mode": "direction",
-        "allowed_write_paths": ["local_research/directions/example.md"],
-        "active": True,
-    }
-    values.update(overrides)
-    path = repo / "temp/sessions/research_scheduler/bindings"
-    path.mkdir(parents=True, exist_ok=True)
-    (path / "TASK_BINDING.json").write_text(json.dumps(values), encoding="utf-8")
-
-
-def _write_binding(
-    repo: Path,
-    assignment: str,
-    session: str,
-    *,
-    owner_role: str,
-    owner_mode: str,
-    allowed_write_paths: list[str],
-    active: bool = True,
-) -> None:
-    path = repo / "temp/sessions/research_scheduler/bindings"
-    path.mkdir(parents=True, exist_ok=True)
-    (path / f"{assignment}.json").write_text(
-        json.dumps(
-            {
-                "assignment_id": assignment,
-                "session_id": session,
-                "owner_role": owner_role,
-                "owner_mode": owner_mode,
-                "allowed_write_paths": allowed_write_paths,
-                "active": active,
-            }
-        ),
-        encoding="utf-8",
-    )
-
-
-@pytest.mark.parametrize(
-    "overrides,fragment",
-    [
-        ({"active": False}, "inactive"),
-        ({"owner_role": "independent_research_explorer", "owner_mode": "treatment"}, "role/mode"),
-        ({"allowed_write_paths": ["../outside"]}, "unsafe"),
-    ],
-)
-def test_scheduler_binding_rejects_stale_wrong_role_or_escape(
-    tmp_path: Path, overrides: dict[str, object], fragment: str
-) -> None:
-    repo, _ = repository(tmp_path)
-    _binding(repo, **overrides)
-    with pytest.raises(ticketing.SchedulerBindingError, match=fragment):
-        ticketing.resolve_scheduler_binding(repo, session_id="binding-session")
-
-
-def test_scheduler_explorer_binding_allows_only_owned_research_and_outbound_handoff(
-    tmp_path: Path,
-) -> None:
-    repo, _ = repository(tmp_path)
-    _binding(
-        repo,
-        allowed_write_paths=[
-            "local_research/directions/example.md",
-            "temp/handoffs/explorer_to_code_manager/example.md",
-        ],
-    )
-    binding = ticketing.resolve_scheduler_binding(repo, session_id="binding-session")
-    assert binding is not None
-    assert binding["allowed_write_paths"] == [
-        "local_research/directions/example.md",
-        "temp/handoffs/explorer_to_code_manager/example.md",
-    ]
-
-
-@pytest.mark.parametrize("session_id", (None, "", "other-session", 17))
-def test_binding_scoped_explorer_mutation_requires_exact_active_session(
+@pytest.mark.parametrize("session_id", (None, "", "session with whitespace", 17))
+def test_main_checkout_scope_is_independent_of_session_metadata(
     tmp_path: Path, session_id: object
 ) -> None:
     repo, _ = repository(tmp_path)
-    _binding(repo)
-    assert_denied(
-        invoke(
-            repo,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: local_research/directions/example.md\n*** End Patch",
-            session_id=session_id,  # type: ignore[arg-type]
-        ),
-        "exact active session binding",
-    )
-    assert_denied(
+    target = repo / "ordinary.md"
+    assert (
         invoke(
             repo,
             "shell_command",
-            {"command": "Set-Content local_research/directions/example.md -Value blocked"},
-            session_id=session_id,  # type: ignore[arg-type]
-        ),
-        "exact active session binding",
-    )
-
-
-def test_cpm_treatment_binding_maps_exact_reverse_handoff_to_main_checkout(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
-) -> None:
-    repo, base = repository(tmp_path)
-    worktree_root = tmp_path / "worktrees" / "HMASD"
-    worktree_root.mkdir(parents=True)
-    monkeypatch.setattr(ticketing, "WORKTREE_ROOT", worktree_root)
-    monkeypatch.setattr(ticketing, "REGISTERED_REPOSITORY", repo)
-    created = ticketing.provision_ticket(
-        argparse.Namespace(
-            repo=repo,
-            assignment_id="TASK_TREATMENT_HANDOFF",
-            base_commit=base,
-            allow=["pkg/worker.py"],
-        )
-    )
-    worktree = Path(str(created["resolved_worktree"]))
-    transport = repo / "temp/handoffs/code_manager_to_explorer/report.json"
-    _write_binding(
-        repo,
-        "TASK_TREATMENT_HANDOFF",
-        "treatment-session",
-        owner_role="code_project_manager",
-        owner_mode="treatment",
-        allowed_write_paths=[
-            "pkg/worker.py",
-            "temp/handoffs/code_manager_to_explorer/report.json",
-        ],
-    )
-
-    assert (
-        invoke_local(
-            worktree,
-            "apply_patch",
-            f"*** Begin Patch\n*** Add File: {transport}\n*** End Patch",
-            monkeypatch,
-            capsys,
-            session_id="treatment-session",
+            {"command": f'Set-Content -LiteralPath "{target}" -Value ok'},
+            session_id=session_id,
         )
         is None
-    )
-    assert (
-        invoke_local(
-            worktree,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: pkg/worker.py\n*** End Patch",
-            monkeypatch,
-            capsys,
-            session_id="treatment-session",
-        )
-        is None
-    )
-    assert_denied(
-        invoke_local(
-            worktree,
-            "shell_command",
-            {"command": f'Set-Content -LiteralPath "{transport}" -Value blocked'},
-            monkeypatch,
-            capsys,
-            session_id="treatment-session",
-        ),
-        "outside the writable scope",
-    )
-    assert_denied(
-        invoke_local(
-            worktree,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: outside.py\n*** End Patch",
-            monkeypatch,
-            capsys,
-            session_id="treatment-session",
-        ),
-        "outside the writable scope",
-    )
-
-
-def test_cpm_treatment_binding_rejects_reverse_handoff_root_itself(
-    tmp_path: Path,
-) -> None:
-    repo, _ = repository(tmp_path)
-    _write_binding(
-        repo,
-        "TASK_TREATMENT_ROOT",
-        "treatment-root-session",
-        owner_role="code_project_manager",
-        owner_mode="treatment",
-        allowed_write_paths=["temp/handoffs/code_manager_to_explorer"],
-    )
-    with pytest.raises(ticketing.SchedulerBindingError, match="strict descendants"):
-        ticketing.resolve_scheduler_binding(repo, session_id="treatment-root-session")
-
-
-def test_cpm_treatment_binding_rejects_reverse_handoff_sibling_outside_ticket_scope(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
-) -> None:
-    repo, base = repository(tmp_path)
-    worktree_root = tmp_path / "worktrees" / "HMASD"
-    worktree_root.mkdir(parents=True)
-    monkeypatch.setattr(ticketing, "WORKTREE_ROOT", worktree_root)
-    monkeypatch.setattr(ticketing, "REGISTERED_REPOSITORY", repo)
-    created = ticketing.provision_ticket(
-        argparse.Namespace(
-            repo=repo,
-            assignment_id="TASK_TREATMENT_SIBLING",
-            base_commit=base,
-            allow=["pkg/worker.py"],
-        )
-    )
-    worktree = Path(str(created["resolved_worktree"]))
-    _write_binding(
-        repo,
-        "TASK_TREATMENT_SIBLING",
-        "treatment-sibling-session",
-        owner_role="code_project_manager",
-        owner_mode="treatment",
-        allowed_write_paths=[
-            "pkg/worker.py",
-            "temp/handoffs/code_manager_to_explorer/valid.json",
-            "temp/handoffs/code_manager_to_explorer_sibling/report.json",
-        ],
-    )
-    assert_denied(
-        invoke_local(
-            worktree,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: pkg/worker.py\n*** End Patch",
-            monkeypatch,
-            capsys,
-            session_id="treatment-sibling-session",
-        ),
-        "treatment binding path exceeds ticket allowed_paths",
     )
 
 
@@ -545,23 +127,11 @@ def test_main_checkout_allows_reads_and_internal_writes_but_denies_external_writ
     repo, _ = repository(tmp_path)
     outside = tmp_path / "outside.txt"
     assert invoke(repo, "shell_command", {"command": f'Get-Content "{outside}"'}) is None
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f'Set-Content -LiteralPath "{repo / "inside.txt"}" -Value ok'},
-        )
-        is None
-    )
+    assert invoke(repo, "shell_command", {"command": f'Set-Content -LiteralPath "{repo / "inside.txt"}" -Value ok'}) is None
     assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f'Set-Content -LiteralPath "{outside}" -Value blocked'},
-        ),
+        invoke(repo, "shell_command", {"command": f'Set-Content -LiteralPath "{outside}" -Value blocked'}),
         "outside the writable scope",
     )
-    assert not outside.exists()
 
 
 @pytest.mark.parametrize(
@@ -577,45 +147,78 @@ def test_main_checkout_allows_reads_and_internal_writes_but_denies_external_writ
         r"Set-Content -Path \\server\share\outside.txt -Value blocked",
     ),
 )
-def test_recognized_drive_alias_worktree_and_external_directory_cases_fail_closed(
-    tmp_path: Path, command: str
-) -> None:
+def test_drive_alias_worktree_and_unc_mutations_fail_closed(tmp_path: Path, command: str) -> None:
     repo, _ = repository(tmp_path)
     assert_denied(invoke(repo, "Bash", {"command": command}), "HMASD_WORKSPACE_BOUNDARY_DENY")
 
 
-def test_apply_patch_targets_are_normalized_against_the_checkout(tmp_path: Path) -> None:
+def test_direct_git_mutations_fail_closed(tmp_path: Path) -> None:
+    repo, _ = repository(tmp_path)
+    assert_denied(
+        invoke(repo, "shell_command", {"command": "git add seed.txt"}),
+        "Git mutation is forbidden",
+    )
+
+
+def test_patch_targets_are_normalized_against_the_checkout_and_existing_symlinks(
+    tmp_path: Path,
+) -> None:
     repo, _ = repository(tmp_path)
     inside = "*** Begin Patch\n*** Update File: seed.txt\n*** End Patch"
-    outside = (
-        "*** Begin Patch\n*** Add File: "
-        + str(tmp_path / "outside.txt")
-        + "\n*** End Patch"
-    )
+    outside = f"*** Begin Patch\n*** Add File: {tmp_path / 'outside.txt'}\n*** End Patch"
     assert invoke(repo, "apply_patch", inside) is None
     assert_denied(invoke(repo, "ApplyPatch", {"patch": outside}), "outside the writable scope")
 
+    escape = repo / "escape"
+    try:
+        os.symlink(tmp_path, escape, target_is_directory=True)
+    except OSError as exc:
+        pytest.skip(f"symlink creation unavailable: {exc}")
+    assert_denied(
+        invoke(repo, "apply_patch", "*** Begin Patch\n*** Add File: escape/outside.txt\n*** End Patch"),
+        "outside the writable scope",
+    )
 
-def test_only_registered_provision_command_can_cross_the_main_checkout_boundary(
-    tmp_path: Path,
-) -> None:
+
+def test_only_registered_provision_command_can_cross_the_main_checkout_boundary(tmp_path: Path) -> None:
     repo, base = repository(tmp_path)
     command = (
         f'"{sys.executable}" scripts/hmasd_workspace_ticket.py provision '
-        f'--repo "{repo}" --assignment-id TASK_A --base-commit {base} '
-        "--allow pkg/worker.py"
+        f'--repo "{repo}" --assignment-id TASK_A --base-commit {base} --allow pkg/worker.py'
     )
     assert invoke(repo, "shell_command", {"command": command}) is None
-    recovery_command = command + " --recover-partial-assignment TASK_OLD"
-    assert invoke(repo, "shell_command", {"command": recovery_command}) is None
+    assert invoke(repo, "shell_command", {"command": command + " --recover-partial-assignment TASK_OLD"}) is None
     assert_denied(
         invoke(repo, "shell_command", {"command": command + "; New-Item C:\\wtp"}),
         "outside the writable scope",
     )
 
 
+@pytest.mark.parametrize(
+    "suffix",
+    (
+        " > C:/outside.txt",
+        " < C:/outside.txt",
+        "\nSet-Content -LiteralPath C:/outside.txt -Value blocked",
+    ),
+)
+def test_registered_provision_rejects_redirection_and_newline_suffixes(
+    tmp_path: Path, suffix: str
+) -> None:
+    repo, base = repository(tmp_path)
+    command = (
+        f'"{sys.executable}" scripts/hmasd_workspace_ticket.py provision '
+        f'--repo "{repo}" --assignment-id TASK_A --base-commit {base} --allow pkg/worker.py'
+        f"{suffix}"
+    )
+    assert_denied(
+        invoke(repo, "shell_command", {"command": command}),
+        "outside the writable scope",
+    )
+
+
 def test_ticketed_worktree_limits_patch_and_absolute_shell_targets(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
     repo, base = repository(tmp_path)
     worktree_root = tmp_path / "worktrees" / "HMASD"
@@ -623,45 +226,26 @@ def test_ticketed_worktree_limits_patch_and_absolute_shell_targets(
     monkeypatch.setattr(ticketing, "WORKTREE_ROOT", worktree_root)
     monkeypatch.setattr(ticketing, "REGISTERED_REPOSITORY", repo)
     created = ticketing.provision_ticket(
-        argparse.Namespace(
-            repo=repo,
-            assignment_id="TASK_A",
-            base_commit=base,
-            allow=["pkg/worker.py"],
-        )
+        argparse.Namespace(repo=repo, assignment_id="TASK_A", base_commit=base, allow=["pkg/worker.py"])
     )
     worktree = Path(str(created["resolved_worktree"]))
     allowed = worktree / "pkg" / "worker.py"
     outside_scope = worktree / "other.py"
 
-    _, allowed_roots, linked = guard._workspace_scope(worktree)
-    assert linked is True
-    guard._guard_patch(
-        worktree,
-        allowed_roots,
-        "*** Begin Patch\n*** Add File: pkg/worker.py\n*** End Patch",
+    assert invoke_local(worktree, "apply_patch", "*** Begin Patch\n*** Add File: pkg/worker.py\n*** End Patch", monkeypatch, capsys) is None
+    assert invoke_local(worktree, "shell_command", {"command": f'Set-Content -Path "{allowed}" -Value ok'}, monkeypatch, capsys) is None
+    assert_denied(
+        invoke_local(worktree, "apply_patch", "*** Begin Patch\n*** Add File: other.py\n*** End Patch", monkeypatch, capsys),
+        "outside the writable scope",
     )
-    guard._guard_shell(
-        worktree,
-        worktree,
-        allowed_roots,
-        linked,
-        {"command": f'Set-Content -Path "{allowed}" -Value ok'},
+    assert_denied(
+        invoke_local(worktree, "shell_command", {"command": f'Set-Content -Path "{outside_scope}" -Value blocked'}, monkeypatch, capsys),
+        "outside the writable scope",
     )
-    with pytest.raises(guard.GuardError, match="outside the writable scope"):
-        guard._guard_patch(
-            worktree,
-            allowed_roots,
-            "*** Begin Patch\n*** Add File: other.py\n*** End Patch",
-        )
-    with pytest.raises(guard.GuardError, match="outside the writable scope"):
-        guard._guard_shell(
-            worktree,
-            worktree,
-            allowed_roots,
-            linked,
-            {"command": f'Set-Content -Path "{outside_scope}" -Value blocked'},
-        )
+    assert_denied(
+        invoke_local(worktree, "shell_command", {"command": "Set-Content pkg/worker.py -Value blocked"}, monkeypatch, capsys),
+        "must name an allowed absolute target",
+    )
 
 
 def test_unregistered_linked_worktree_cannot_mutate(tmp_path: Path) -> None:
@@ -669,329 +253,28 @@ def test_unregistered_linked_worktree_cannot_mutate(tmp_path: Path) -> None:
     unregistered = tmp_path / "unregistered"
     git(repo, "worktree", "add", "--detach", str(unregistered), base)
     assert_denied(
-        invoke(
-            unregistered,
-            "shell_command",
-            {"command": "Set-Content -Path seed.txt -Value blocked"},
-        ),
+        invoke(unregistered, "shell_command", {"command": "Set-Content -Path seed.txt -Value blocked"}),
         "no unique valid workspace ticket",
     )
 
 
-def test_registered_research_session_writes_only_local_research(tmp_path: Path) -> None:
-    repo, _ = repository(tmp_path)
-    (repo / "AGENTS.md").write_text("hmasd_python_interpreter=C:/Python/python.exe\n", encoding="utf-8")
-    bindings = repo / "temp/sessions/research_scheduler/bindings"
-    bindings.mkdir(parents=True)
-    (bindings / "RESEARCH.json").write_text(
-        json.dumps(
-            {
-                "assignment_id": "RESEARCH",
-                "session_id": "research-session",
-                "owner_role": "independent_research_explorer",
-                "owner_mode": "portfolio",
-                "allowed_write_paths": [
-                    "local_research/patch-note.md",
-                    "local_research/pro_reviews/item/raw.md",
-                    "local_research/portfolio.json",
-                ],
-                "active": True,
-            }
-        ),
-        encoding="utf-8",
-    )
-    local_research = repo / "local_research"
-    local_research.mkdir()
-    pro_reviews = local_research / "pro_reviews"
-    pro_reviews.mkdir()
-
-    inside = local_research / "note.md"
-    outside = repo / "outside.md"
-    assert_denied(
-        invoke(
-            local_research,
-            "shell_command",
-            {"command": f'Set-Content -LiteralPath "{inside}" -Value ok'},
-            session_id="research-session",
-        ),
-        "shell mutation is forbidden",
-    )
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "Get-Content -Raw AGENTS.md"},
-            session_id="research-session",
-        )
-        is None
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {
-                "command": (
-                    f'C:/Python/python.exe "{repo}/.agents/skills/'
-                    "hmasd-independent-research-exploration/scripts/"
-                    'research_portfolio_gate.py" check --record '
-                    f'"{pro_reviews / "forbidden.json"}" --phase merge'
-                )
-            },
-            session_id="research-session",
-        ),
-        "use a registered research script or apply_patch",
-    )
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {
-                "command": (
-                    f'C:/Python/python.exe "{repo}/.agents/skills/'
-                    "hmasd-independent-research-exploration/scripts/"
-                    'research_portfolio_gate.py" check --record '
-                    f'"{local_research / "portfolio.json"}" --phase merge'
-                )
-            },
-            session_id="research-session",
-        )
-        is None
-    )
-    assert (
-        invoke(
-            repo,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: local_research/pro_reviews/item/raw.md\n*** End Patch",
-            session_id="research-session",
-        )
-        is None
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {
-                "command": (
-                    f'C:/Python/python.exe "{repo}/.agents/skills/'
-                    "hmasd-independent-research-exploration/scripts/"
-                    'unregistered.py"'
-                )
-            },
-            session_id="research-session",
-        ),
-        "use a registered research script or apply_patch",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {
-                "command": (
-                    f'C:/Python/python.exe "{repo}/.agents/skills/'
-                    "hmasd-independent-research-exploration/scripts/"
-                    'research_portfolio_gate.py" (Start-Process cmd.exe)'
-                )
-            },
-            session_id="research-session",
-        ),
-        "nested or executable shell expression",
-    )
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {
-                "command": (
-                    f'C:/Python/python.exe "{repo}/.agents/skills/'
-                    "hmasd-independent-research-exploration/scripts/"
-                    'mylib_research_probe.py" --local-research-root '
-                    f'"{local_research}" status'
-                )
-            },
-            session_id="research-session",
-        )
-        is None
-    )
-    assert (
-        invoke(
-            repo,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: local_research/patch-note.md\n*** End Patch",
-            session_id="research-session",
-        )
-        is None
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: project-note.md\n*** End Patch",
-            session_id="research-session",
-        ),
-        "outside the writable scope",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "apply_patch",
-            (
-                "*** Begin Patch\n"
-                "*** Update File: local_research/patch-note.md\n"
-                "*** Move to: AGENTS.md\n"
-                "*** End Patch"
-            ),
-            session_id="research-session",
-        ),
-        "outside the writable scope",
-    )
-    assert_denied(
-        invoke(
-            local_research,
-            "shell_command",
-            {"command": "Set-Content -LiteralPath ..\\AGENTS.md -Value bad"},
-            session_id="research-session",
-        ),
-        "shell mutation is forbidden",
-    )
-    assert_denied(
-        invoke(
-            local_research,
-            "shell_command",
-            {"command": f'Copy-Item -LiteralPath "{inside}" -Destination ..\\AGENTS.md'},
-            session_id="research-session",
-        ),
-        "shell mutation is forbidden",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f'Set-Content -LiteralPath "{outside}" -Value blocked'},
-            session_id="research-session",
-        ),
-        "shell mutation is forbidden",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "git add local_research/note.md"},
-            session_id="research-session",
-        ),
-        "Git mutation is forbidden",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "python -c \"from pathlib import Path; Path('AGENTS.md').write_text('bad')\""},
-            session_id="research-session",
-        ),
-        "nested or executable shell expression",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "[IO.File]::WriteAllText('AGENTS.md','bad')"},
-            session_id="research-session",
-        ),
-        "nested or executable shell expression",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f"Get-Item ([IO.File]::WriteAllText('{outside}','bad'))"},
-            session_id="research-session",
-        ),
-        "nested or executable shell expression",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "Get-Item (Start-Process cmd.exe)"},
-            session_id="research-session",
-        ),
-        "nested or executable shell expression",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "rg --pre malicious pattern ."},
-            session_id="research-session",
-        ),
-        "option can execute or write",
-    )
-    executable = local_research / "escape.cmd"
-    executable.write_text("@echo off\r\necho bad>..\\AGENTS.md\r\n", encoding="utf-8")
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f'rg --hostname-bin="{executable}" pattern .'},
-            session_id="research-session",
-        ),
-        "option can execute or write",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "git diff --output=AGENTS.md"},
-            session_id="research-session",
-        ),
-        "Git mutation is forbidden",
-    )
-    for option in ("--ext-diff", "--textconv"):
-        assert_denied(
-            invoke(
-                repo,
-                "shell_command",
-                {"command": f"git diff {option}"},
-                session_id="research-session",
-            ),
-            "Git mutation is forbidden",
-        )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "git status --short"},
-            session_id="research-session",
-        ),
-        "Git mutation is forbidden",
-    )
-
-
-def test_other_session_keeps_main_checkout_scope_when_research_is_registered(
-    tmp_path: Path,
+def test_ticket_registration_is_resolved_from_the_active_worktree_not_session(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    repo, _ = repository(tmp_path)
-    bindings = repo / "temp/sessions/research_scheduler/bindings"
-    bindings.mkdir(parents=True)
-    (bindings / "RESEARCH.json").write_text(
-        json.dumps(
-            {
-                "assignment_id": "RESEARCH",
-                "session_id": "research-session",
-                "owner_role": "independent_research_explorer",
-                "owner_mode": "direction",
-                "allowed_write_paths": ["local_research/directions/placeholder.md"],
-                "active": True,
-            }
-        ),
-        encoding="utf-8",
+    repo, base = repository(tmp_path)
+    worktree_root = tmp_path / "worktrees" / "HMASD"
+    worktree_root.mkdir(parents=True)
+    monkeypatch.setattr(ticketing, "WORKTREE_ROOT", worktree_root)
+    monkeypatch.setattr(ticketing, "REGISTERED_REPOSITORY", repo)
+    created = ticketing.provision_ticket(
+        argparse.Namespace(repo=repo, assignment_id="TASK_B", base_commit=base, allow=["pkg/worker.py"])
     )
-    ordinary = repo / "ordinary.md"
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f'Set-Content -LiteralPath "{ordinary}" -Value ok'},
-            session_id="another-session",
-        )
-        is None
+    worktree = Path(str(created["resolved_worktree"]))
+    payload = invoke_local(
+        worktree,
+        "apply_patch",
+        "*** Begin Patch\n*** Add File: pkg/worker.py\n*** End Patch",
+        monkeypatch,
+        capsys,
     )
+    assert payload is None

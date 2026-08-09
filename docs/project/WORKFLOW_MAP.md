@@ -19,10 +19,10 @@ exhaustive registry or procedure copy.
 | Workflow Auditor | read-only local reconnaissance for an assigned workflow surface | conclusion about bounded facts/conflicts, followed by optional dependency evidence |
 | Workflow Implementer | one frozen non-overlapping workflow change slice | conclusion about the owned outcome and checked consequence, followed by an optional `WORKFLOW_CHANGE_PACKET` factual tail |
 | Workflow Reviewer | independent review of one coherent integrated batch | conclusion and advisory disposition for WDM, followed by optional findings evidence; no source edits or acceptance |
-| Code Project Manager (CPM) | code, runtime, technical acceptance and project-operation records | code/runtime/review artifacts plus CPM-owned mechanical receipts |
+| Code Project Manager (CPM) | code, runtime, technical acceptance and project-operation records | treatment ticket/worktree artifacts plus direct native results; serialized integration of exact accepted commits |
 | Independent Research Explorer | advisory research direction, methodology and research workspace | named research handoff; no workflow authority |
 | Agentify Transport child | requester-assigned batch transport mechanics; WDM may parent only an exact workflow-acceptance smoke batch | raw transport result for CPM or Explorer, or direct smoke-test evidence for WDM |
-| Desktop Research Scheduler | user-owned persistent Desktop lifecycle and resource-conflict routing for same-level ephemeral owner tasks | exact owner thread IDs, binding identity and canonical result locators; no science, code or acceptance |
+| Desktop Research Scheduler | user-owned persistent Desktop lifecycle and resource-conflict routing for same-level ephemeral owner tasks | exact native `{threadId, hostId}` lifecycle handles and canonical result locators; no science, code or acceptance |
 | External Pro | bounded independent scientific judgment | exact review result within the submitted question boundary |
 
 CPM-mechanical and Explorer-mechanical wire locators live in
@@ -53,14 +53,14 @@ its self-contained assignment, registered Profile, Role charter and
 assignment-named references. Child output flows to the parent as advisory or
 mechanical evidence and never grants design, routing, Git or acceptance
 authority. CPM and Explorer remain separate owner lanes; Agentify transport is
-requester-owned and WDM does not absorb their live review traffic. File/native
-wire locators are defined by `docs/project/SESSION_WORKSPACE_CONTRACT.md`.
+requester-owned and WDM does not absorb their live review traffic. Workspace and
+native-result locators are defined by `docs/project/SESSION_WORKSPACE_CONTRACT.md`.
 
 The Explorer↔CPM direction-local context binding is defined once by
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer and CPM use
 one primary selected direction's smallest canonical context, add only the
 smallest set of material relationship edges, and mirror the binding in the
-conclusion-first reverse result or Codex-native fallback. An explicitly
+conclusion-first direct-native treatment result. An explicitly
 multi-direction user question may name several directions without authorizing
 portfolio preload. Portfolio/index/README/continuity surfaces remain
 pointer-only; a missing binding gets one semantic clarification while
@@ -73,7 +73,12 @@ same-level ephemeral owner tasks for Explorer `direction|portfolio` work and
 CPM `treatment|integration` work. Owner tasks retain their existing registered
 children at `max_depth=1`; the Scheduler is not a registered child, has no
 `.codex` profile, and never becomes a science, code, runtime, technical
-acceptance, Git or semantic-relay owner.
+acceptance, Git or semantic-relay owner. Its exact native `{threadId, hostId}`
+handle is lifecycle/routing identity only, not write authorization. Assignments
+carry cooperative exact write ownership: treatment CPM owns one registered
+ticket worktree and exact ticket paths and returns a direct native result;
+integration CPM alone serializes writes to the shared mainline for exact
+accepted commits, with no shared-mainline concurrent writers.
 
 Each owner assignment remains a self-contained natural-language task model.
 The bounded Desktop lifecycle, result locator and ambiguous-action fallback are

@@ -174,10 +174,18 @@ foreach ($required in @(
     'global serial fallback is rejected unless one exact blocker',
     'resource conflict affects only the conflicting local experiment runtime',
     'never changes science, priority, code, acceptance or budget',
-    'one independent technical acceptance and one conclusion-first reverse result',
+    'one independent technical acceptance and one conclusion-first native result',
     'formal local result-bearing runtime excludes conflicting local experiment runtime',
     'CPM continues implementation, technical intake and every unrelated non-runtime action')) {
     if (-not $managerNormalized.Contains($required)) { throw "CPM runtime-resource boundary missing: $required" }
+}
+foreach ($required in @(
+    'owner_mode_treatment_result=direct_native_result',
+    'Treatment CPM owns one registered ticket worktree',
+    'exact ticket paths named by its assignment',
+    'returns its conclusion and result directly through the native owner handle',
+    'Treatment never writes the shared mainline')) {
+    if (-not $managerNormalized.Contains($required)) { throw "CPM native treatment result contract missing: $required" }
 }
 foreach ($required in @(
     'one assignment-named terminal receipt path',

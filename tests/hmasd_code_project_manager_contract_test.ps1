@@ -123,15 +123,11 @@ if (Test-Path -LiteralPath $retiredExplorerValidationScriptPath) {
 }
 foreach ($required in @(
     'temp/handoffs/explorer_to_code_manager/',
-    'temp/handoffs/code_manager_to_explorer/',
-    'exactly two physical write scopes',
-    'one exact strict-descendant main-checkout transport path',
-    'ticket-local paths inside one registered ticket/worktree',
-    'main-checkout handoff file is written with `apply_patch` only',
-    'handoff is disposable transport only',
-    'canonical technical artifact, acceptance record, result ledger, queue',
-    'Explorer reads only the exact named handoff/technical locators',
-    'Scheduler routes and checks those locators mechanically',
+    'one registered ticket/worktree and exact ticket-local paths',
+    'native result is transport only',
+    'second canonical record, Scheduler semantic relay or Git object',
+    'Explorer performs exactly one scientific intake from that native result',
+    'Scheduler routes owner handles mechanically',
     'requires no Git operation',
     'semantic writing aids, not required field names',
     'bounded safe read-only reconnaissance',
@@ -150,7 +146,6 @@ foreach ($required in @(
     'explorer_toy_local_research_read=forbidden',
     'explorer_toy_code_acceptance=exclusive_for_named_treatment',
     'explorer_public_handoff_inbound=temp/handoffs/explorer_to_code_manager/',
-    'explorer_public_result_outbound=temp/handoffs/code_manager_to_explorer/',
     'explorer_public_handoff_git_authority=none',
     'explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance',
     'explorer_treatment_substitution_authority=none',
@@ -180,9 +175,9 @@ foreach ($required in @(
     'Missing formatting or a prior mechanical BLOCKED receipt is not candidate evidence',
     'selected direction identity',
     'Direction-local context binding',
-    'reverse result begins with its conclusion',
+    'CPM''s treatment result is returned directly over the exact native owner handle',
     'mirrors that same primary direction or explicitly named direction set',
-    'Codex-native message fallback carries the same binding',
+    'native task result is the normal transport',
     'preserves the original handoff/artifact',
     'asks exactly one concrete semantic clarification',
     'never reads `local_research/`')) {
@@ -192,12 +187,10 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'Explorer alone creates, edits and deletes its outbound files',
-    'Code Manager alone creates, edits and deletes its outbound files',
     'missing schema, `document_kind`, validator receipt, hash, byte count',
     'begins with its natural-language conclusion and then appends the necessary exact evidence',
     'live files never enter Git',
-    'Direction-specific briefs and reverse results follow the direction-local',
-    'Codex-native message fallback carries the same binding',
+    'Direction-specific briefs and native treatment results follow the direction-local',
     'ask exactly one concrete semantic clarification')) {
     if (-not $publicHandoffContractNormalized.Contains($required)) {
         throw "Public handoff contract missing: $required"
@@ -377,31 +370,24 @@ foreach ($required in @(
 }
 
 foreach ($required in @(
-    'owner_mode_treatment_write_scopes=exactly_two|ticket_local_paths_inside_one_registered_worktree|one_exact_strict_descendant_main_checkout_transport_path',
-    'owner_mode_treatment_reverse_handoff_root=temp/handoffs/code_manager_to_explorer/',
-    'owner_mode_treatment_reverse_handoff_locator=assignment_named_exact_strict_descendant',
-    'owner_mode_treatment_main_checkout_mutation=apply_patch_only_reverse_handoff_no_git',
-    'owner_mode_integration_main_checkout_semantics=unchanged_shared_mainline_integration_only')) {
+    'Treatment CPM owns one registered ticket worktree',
+    'exact ticket paths named by its assignment',
+    'returns its conclusion and result directly through the native owner handle',
+    'Exact assignment paths are cooperative ownership policy, not an authorization mechanism',
+    'Treatment never writes the shared mainline',
+    'Integration CPM alone writes the shared mainline',
+    'no shared-mainline writers run concurrently')) {
     if (-not $codePmNormalized.Contains($required)) {
-        throw "Code Project Manager treatment write-boundary key missing: $required"
+        throw "Code Project Manager structural treatment boundary missing: $required"
     }
 }
 foreach ($required in @(
-    'cpm_treatment_write_scope_count=2',
-    'cpm_treatment_write_scopes=ticket_local_paths_inside_one_registered_worktree|one_exact_strict_descendant_main_checkout_transport_path',
-    'cpm_treatment_reverse_handoff_locator=assignment_named_exact_strict_descendant',
-    'cpm_treatment_main_checkout_mutation=apply_patch_only_reverse_handoff_no_git',
-    'cpm_treatment_canonical_result=assignment_named_treatment_artifact_evidence_acceptance_record')) {
+    'research_scheduler_treatment_write_scope=exact_cpm_ticket_worktree_only',
+    'research_scheduler_integration_write_scope=shared_mainline_only',
+    'workspace_boundary_guard=fail_closed_for_recognized_pretooluse_cases',
+    'authoritative_write_boundary=tool_os_sandbox|verified_ticket_identity|git_visible_checks')) {
     if (-not $sessionWorkspaceContract.Contains($required)) {
-        throw "Session workspace treatment write-boundary key missing: $required"
-    }
-}
-foreach ($stale in @(
-    'allowed_write_paths=temp/handoffs/code_manager_to_explorer/',
-    'owner_mode=treatment_write_scope=temp/handoffs/code_manager_to_explorer/',
-    'treatment may write every file under temp/handoffs/code_manager_to_explorer/')) {
-    foreach ($surface in @($codePm, $agile, $explorerValidationSkill, $explorerValidationContract, $publicHandoffContract, $sessionWorkspaceContract)) {
-        if ($surface.Contains($stale)) { throw "Broad treatment handoff scope remains: $stale" }
+        throw "Session workspace structural treatment boundary missing: $required"
     }
 }
 
@@ -1073,7 +1059,9 @@ if (-not (Test-Path -LiteralPath $hooksPath -PathType Leaf)) {
 }
 $hooks = Get-Content -Raw -LiteralPath $hooksPath | ConvertFrom-Json
 $preHooks = @($hooks.hooks.PreToolUse)
-$boundaryHooks = @($preHooks | Where-Object { $_.matcher -match 'shell_command' })
+$boundaryHooks = @($preHooks | Where-Object {
+    $_.matcher -eq '^(shell_command|Bash|unified_exec|exec_command|apply_patch|ApplyPatch)$'
+})
 if ($boundaryHooks.Count -ne 1 -or
     @($boundaryHooks[0].hooks).Count -ne 1 -or
     $boundaryHooks[0].hooks[0].command -notmatch 'hmasd_workspace_boundary_guard\.py' -or

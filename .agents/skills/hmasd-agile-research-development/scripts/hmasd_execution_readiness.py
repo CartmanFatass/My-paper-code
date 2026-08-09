@@ -81,6 +81,35 @@ def _main_checkout(start: Path | None = None) -> Path:
         raise ReadinessError(str(exc)) from exc
 
 
+def _linked_treatment_ticket(active_checkout: Path) -> tuple[Path, list[str]]:
+    """Resolve the one registered ticket for the active linked worktree."""
+
+    common = Path(_git(active_checkout, "rev-parse", "--git-common-dir"))
+    if not common.is_absolute():
+        common = active_checkout / common
+    ticket_root = common.resolve() / ticketing.TICKET_DIRECTORY
+    try:
+        ticket_paths = sorted(ticket_root.glob("*.json"))
+    except OSError as exc:
+        raise ReadinessError(f"cannot inspect registered workspace tickets: {exc}") from exc
+
+    matches: list[dict[str, Any]] = []
+    for ticket_path in ticket_paths:
+        try:
+            resolved = ticketing.resolve_ticket(
+                argparse.Namespace(ticket=ticket_path, assignment_id=None)
+            )
+        except ticketing.TicketError:
+            continue
+        if Path(resolved["resolved_worktree"]).resolve() == active_checkout:
+            matches.append(resolved)
+    if len(matches) != 1:
+        raise ReadinessError(
+            "linked treatment worktree must resolve exactly one valid registered workspace ticket"
+        )
+    return active_checkout, matches[0]["allowed_paths"]
+
+
 def _repo_state(repo: Path) -> tuple[str, str]:
     return (
         _git(repo, "rev-parse", "HEAD"),
@@ -579,57 +608,20 @@ def hook_stop() -> int:
     if not re.search(r"(?m)^CODE_ACCEPTED\s*$", message):
         return 0
     already_active = payload.get("stop_hook_active") is True
-    session_id = payload.get("session_id")
-    if not isinstance(session_id, str) or not session_id.strip():
-        print(
-            json.dumps(
-                _hook_feedback(
-                    "CODE_ACCEPTED requires a non-empty exact session_id.",
-                    already_active,
-                ),
-                ensure_ascii=False,
-            )
-        )
-        return 0
     try:
         start = payload.get("cwd")
         if not isinstance(start, str) or not start.strip():
             raise ReadinessError("CODE_ACCEPTED has no valid cwd.")
-        repo = _main_checkout(Path(start))
-        binding = ticketing.resolve_scheduler_binding(
-            repo,
-            session_id=session_id,
-            owner_role="code_project_manager",
-            owner_mode="treatment",
-        )
-        if binding is None:
-            integration_binding = ticketing.resolve_scheduler_binding(
-                repo,
-                session_id=session_id,
-                owner_role="code_project_manager",
-                owner_mode="integration",
-            )
-            if integration_binding is not None:
-                return 0
-            print(
-                json.dumps(
-                    _hook_feedback(
-                        "CODE_ACCEPTED session_id does not match an active CPM Scheduler binding.",
-                        already_active,
-                    ),
-                    ensure_ascii=False,
-                )
-            )
+        active_checkout = _repo_root(Path(start))
+        repo = _main_checkout(active_checkout)
+        # Integration acceptance is serialized separately; only linked treatment
+        # worktrees carry a ticket and require execution-readiness evidence here.
+        if active_checkout == repo:
             return 0
-    except ticketing.SchedulerBindingError as exc:
-        print(json.dumps(_hook_feedback(str(exc), already_active), ensure_ascii=False))
-        return 0
+        worktree, ticket_allowed = _linked_treatment_ticket(active_checkout)
     except (ReadinessError, OSError, ticketing.TicketError) as exc:
-        reason = str(exc).strip() or "CODE_ACCEPTED workspace or binding resolution failed."
+        reason = str(exc).strip() or "CODE_ACCEPTED workspace or ticket resolution failed."
         print(json.dumps(_hook_feedback(reason, already_active), ensure_ascii=False))
-        return 0
-    # Integration ownership deliberately does not re-run treatment readiness.
-    if binding is None:
         return 0
     commit = _message_field(message, "commit")
     exact_paths = _message_field(message, "exact_paths")
@@ -637,7 +629,6 @@ def hook_stop() -> int:
     receipt_field = _message_field(message, "execution_readiness_receipt")
     reason = _message_field(message, "execution_readiness_reason")
     try:
-        _, worktree, ticket_allowed = ticketing.resolve_binding_ticket(repo, binding)
         current = _git(worktree, "rev-parse", "HEAD")
         if not commit or not COMMIT_RE.fullmatch(commit):
             raise ReadinessError("CODE_ACCEPTED has no exact 40-character commit.")
@@ -645,10 +636,13 @@ def hook_stop() -> int:
             raise ReadinessError("CODE_ACCEPTED commit is not current treatment HEAD.")
         if not exact_paths:
             raise ReadinessError("CODE_ACCEPTED has no exact_paths.")
-        parsed_paths = [item for item in exact_paths.split("|") if item]
-        if not parsed_paths or any(
-            not ticketing._is_allowed(item.replace("\\", "/"), ticket_allowed)
-            for item in parsed_paths
+        parsed_paths = [
+            _safe_relative_path(item, "CODE_ACCEPTED exact_paths")
+            for item in exact_paths.split("|")
+            if item
+        ]
+        if not parsed_paths or len(set(parsed_paths)) != len(parsed_paths) or any(
+            not ticketing._is_allowed(item, ticket_allowed) for item in parsed_paths
         ):
             raise ReadinessError("CODE_ACCEPTED exact_paths exceed treatment ticket scope.")
         if readiness == "not_triggered":

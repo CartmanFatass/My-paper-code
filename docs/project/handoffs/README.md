@@ -8,9 +8,6 @@ temporary files under `temp/handoffs/`, so ordinary handoffs require no Git.
 
 - `temp/handoffs/explorer_to_code_manager/`: Explorer alone creates, edits and
   deletes its outbound files. Code Manager reads them.
-- `temp/handoffs/code_manager_to_explorer/`: Code Manager alone creates, edits
-  and deletes its outbound files. For a treatment assignment, the assignment
-  names one exact descendant under this root; Explorer reads only that file.
 - Workflow Design Manager owns this interface contract but never authors,
   interprets or cleans live handoff content.
 
@@ -27,23 +24,18 @@ Same-file concurrent writes are forbidden. The sender deletes the exchange copy
 after intake; live files never enter Git. Canonical records stay with their
 owners, with no handoff history tree.
 
-## CPM treatment reverse-handoff scope
+## CPM treatment result scope
 
-The CPM `owner_mode=treatment` assignment has exactly two physical write scopes:
-ticket-local paths inside one registered ticket/worktree and one exact
-strict-descendant main-checkout transport path under
-`temp/handoffs/code_manager_to_explorer/`. Treatment Git and shell mutation
-remain ticket-worktree-scoped. The one main-checkout handoff file is written
-with `apply_patch` only and has no Git authority; it is conclusion-first,
-disposable transport that points to the exact assignment-named treatment
-artifact/evidence/technical-acceptance locators. It is not the canonical
-technical artifact, acceptance record, result ledger, queue, Scheduler semantic
-relay or Git object. Explorer reads only the exact named handoff/technical
-locators and performs exactly one scientific intake, then existing sender and
-receiver cleanup applies. Scheduler routes/checks locators mechanically and does
-not interpret the result. `owner_mode=integration` keeps the existing
-shared-mainline integration semantics and does not repeat treatment runtime or
-treatment acceptance.
+The CPM `owner_mode=treatment` assignment has one physical write scope:
+exact ticket-local paths inside one registered ticket/worktree. Treatment Git
+and shell mutation remain ticket-worktree-scoped and never write the shared
+main checkout. CPM returns a conclusion-first result directly over the exact
+native owner handle, naming the assignment-scoped treatment artifact,
+evidence and technical-acceptance locators. It is transport only, not a second
+canonical record, Scheduler semantic relay or Git object. Explorer performs
+exactly one scientific intake from that native result. `owner_mode=integration`
+remains the sole serialized shared-mainline writer and does not repeat
+treatment runtime or treatment acceptance.
 
 ## Scientific-only intake boundary
 
@@ -67,7 +59,7 @@ only for a materially missing authority, scientific choice or concrete input
 object. A missing schema, `document_kind`, validator receipt, hash, byte count
 or fingerprint is never a blocker.
 
-Direction-specific briefs and reverse results follow the direction-local
+Direction-specific briefs and native treatment results follow the direction-local
 context binding in
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer selects one
 primary direction and supplies only its smallest set of canonical
@@ -78,7 +70,7 @@ generalized unless explicitly named. The result begins with a conclusion and
 mirrors the same primary direction or explicitly named direction set,
 candidate/proposition, stage,
 source/evidence revision boundary and material relationships before technical
-evidence. A Codex-native message fallback carries the same binding. If the
+evidence. The native treatment result carries the same binding. If the
 binding is missing or contradictory, preserve the original brief/artifact and
 ask exactly one concrete semantic clarification while continuing unrelated
 work; do not guess, merge directions, rewrite the artifact or create a

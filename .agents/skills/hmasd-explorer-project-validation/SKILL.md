@@ -37,34 +37,28 @@ alternative, material relationships, explicit exclusion of sibling-direction
 generalization unless explicitly named, requested action/direct consumer,
 completion evidence and return destination understandable. These are semantic
 writing cues, not
-required fields. CPM's conclusion-first reverse result and any Codex-native
+required fields. CPM's conclusion-first native result and any Codex-native
 fallback carry the same binding before technical evidence. If identity,
 proposition or revision binding is missing or contradictory, preserve the
 original handoff/artifact and ask exactly one concrete semantic clarification;
   continue unrelated work without guessing, merging directions, rewriting the
   artifact or creating a `BLOCKED` state.
 
-## Assignment-scoped CPM treatment reverse handoff
+## Assignment-scoped CPM treatment result
 
 When a Scheduler assignment has `owner_mode=treatment`, its self-contained
-assignment and binding name exactly two physical write scopes: ticket-local
-paths inside one registered ticket/worktree and one exact strict-descendant
-main-checkout transport path under `temp/handoffs/code_manager_to_explorer/`.
-CPM may write only that named descendant for the conclusion-first reverse
-handoff; the root and sibling paths are not writable. The handoff is disposable
-transport only and points to the exact treatment artifact, evidence and
-technical-acceptance locators named by the assignment. It is not a canonical
-technical artifact, acceptance record, result ledger, queue, Scheduler semantic
-relay or Git object. Treatment Git and shell mutation remain ticket-worktree-
-scoped; the main-checkout handoff file is written with `apply_patch` only and
-gives no Git authority. `owner_mode=integration` keeps its existing
-shared-mainline integration semantics and does not repeat treatment runtime or
-acceptance.
+assignment names one registered ticket/worktree and exact ticket-local paths.
+CPM writes only those paths and never writes the shared main checkout for a
+treatment. CPM returns a conclusion-first result directly over the exact
+native owner handle, naming the treatment artifact, evidence and technical-
+acceptance locators. The native result is transport only; it is not a second
+canonical record, Scheduler semantic relay or Git object. `owner_mode=integration`
+remains the sole serialized shared-mainline writer and does not repeat
+treatment runtime or treatment acceptance.
 
-Explorer reads only the exact named handoff/technical locators and performs
-exactly one scientific intake; sender/receiver cleanup follows the existing
-handoff rules. Scheduler routes and checks those locators mechanically; it does
-not interpret the result.
+Explorer performs exactly one scientific intake from that native result and
+the named canonical locators. Scheduler routes owner handles mechanically and
+does not interpret the result.
 
 ## Normal path
 
@@ -144,12 +138,10 @@ observation or lifecycle object is an engineering implementation task for CPM,
 not a reason to add synthetic certificates or stop the whole handoff. Only a
 choice that changes the scientific question returns to Explorer.
 
-CPM returns a human-readable result at the exact assignment-named strict
-descendant under `temp/handoffs/code_manager_to_explorer/`, containing an
-understandable natural-language conclusion first and the necessary exact
-locators/evidence second. A Codex-native message carrying the same semantic
-content is the simple fallback. Explorer reads only that named handoff and its
-named technical locators; it never edits CPM output.
+CPM returns a human-readable conclusion-first result directly on the exact
+native owner handle, followed by the necessary exact locators/evidence.
+Explorer reads that native result and its named technical locators; it never
+edits CPM output.
 
 After technical acceptance, CPM pushes the result and returns its exact commit
 plus public GitHub repository/path locators. Ordinary B iteration is nonformal

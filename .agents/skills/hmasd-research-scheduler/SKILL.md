@@ -24,50 +24,35 @@ locator facts; it never replaces that task model.
    or CPM `treatment|integration`. Create one same-level owner task with
    `create_thread`, `environment=local`, and no model or thinking override unless
    the user explicitly chose one. Call creation once.
-2. Persist the returned exact `threadId` and `hostId` in
-   `temp/sessions/research_scheduler/ACTIVE_ASSIGNMENTS.md`. Send exactly one
-   read-only identity-probe follow-up to that exact `threadId`+`hostId`, asking
-   the owner to execute exactly:
-   `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe scripts/hmasd_workspace_boundary_guard.py observe-owner-session --assignment-id <id> --thread-id <threadId> --host-id local`.
-   The existing PreToolUse guard observes the real payload `session_id`,
-   requires inherited `CODEX_THREAD_ID==threadId` and host `local`, and writes
-   exactly four keys
-   `assignment_id|thread_id|host_id|session_id` to
-   `temp/sessions/research_scheduler/identity_observations/<assignment_id>.json`.
-   This identity observation is read-only: it does not authorize mutation or
-   activate a binding, and is not task context, a queue, registry, ledger,
-   semantic result or acceptance. Mechanically match all four observed facts to
-   the exact create result and assignment. Only after that match create the
-   unchanged binding at
-   `temp/sessions/research_scheduler/bindings/<assignment_id>.json` with exactly
-   `assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active`,
-   then send one separate binding-ready follow-up naming that exact binding.
-   The initial owner prompt forbids mutation until that binding-ready follow-up.
-   If the observation is missing or conflicting, the binding stays inactive
-   (or remains absent) and one unresolved observation is recorded in the roster
-   for exact Desktop/user resolution. Never scan, infer, substitute `hostId` or
-   `threadId`, create a replacement, or retry blindly.
-3. Observe active owners with one bounded `wait_threads` call over exact IDs, at
-   most eight targets per call. Then use `read_thread` for each exact task that
-   completed or needs attention. Do not scan tasks or infer liveness from time.
-4. The owner writes and returns its conclusion-first canonical capsule. Read the
-   direct exact task with `read_thread`, then mechanically confirm that the
-   canonical result locator is durable and the assignment/owner identity match.
-   Before requesting archive/close, change only the existing six-key binding's
-   `active` value to `false` (`active=false`); this revokes owner mutation
-   authority before archival. Request archive/close for the exact thread only
-   after that deactivation. Inspect only the canonical locator and
-   assignment/owner identity; semantic intake and acceptance stay with the
-   declared owner.
-
-   If archive succeeds, remove the task's entry from the human-readable active
-   roster. Canonical assignment/result locators remain restart/archive evidence
-   in their declared owner surfaces, not a Scheduler result ledger. If
-   archive/close is ambiguous, keep the binding inactive and leave exactly one
-   unresolved observation in the roster until direct exact-ID or user
-   resolution. Never reactivate, blindly retry, or create a replacement owner.
-   Reload and selection discover only `active=true` bindings; an exact stale
-   identity remains fail-closed under the separate mechanical identity contract.
+2. Treat the exact `{threadId, hostId}` returned by `create_thread` as the
+   native Desktop lifecycle/routing handle. Keep it in the optional
+   human-readable `temp/sessions/research_scheduler/ACTIVE_ASSIGNMENTS.md`
+   roster only as a restart locator. The roster, assignment files and canonical
+   result files are artifacts/continuity, never proof of LLM identity. Do not
+   create any extra identity machinery or file-based activation; do not inspect
+   hooks or infer a handle from a file.
+3. Send the owner a self-contained natural-language assignment. It must state
+   why the task exists, intended outcome, canonical inputs, protected decisions,
+   exclusions, permitted local judgment, bounded recovery, exact cooperative
+   write ownership, canonical result destination and observable completion
+   evidence. Serialize writers of the same exact file; disjoint exact files may
+   overlap. Direction owners write/return only their named disjoint files; the
+   portfolio Explorer alone writes shared portfolio continuity/capsule state; a
+   treatment CPM owner writes only its ticket worktree and declared result
+   destination; an integration CPM owner writes the shared mainline integration
+   surface for the accepted set.
+4. Observe active owners with one bounded `wait_threads` call over exact native
+   handles, at most eight targets per call. Use `read_thread` for each exact
+   handle that completed or needs attention. Do not scan tasks, infer liveness
+   from time, maintain a queue/monitor/registry, or relay semantic results.
+5. The owner writes and returns its conclusion-first canonical capsule. Read
+   the direct exact handle with `read_thread`, then mechanically confirm only
+   the named canonical result locator and assignment completion evidence.
+   Archive/close that exact native handle after the direct read; on success,
+   it may remove its roster locator. If archive/close is ambiguous, keep the
+   owner live, resolve the exact handle or ask the user, and never blindly
+   retry; never create a replacement. Reload and selection use known exact handles
+   only; no task scan exists.
 
 ## Owner and child routing
 
@@ -84,19 +69,21 @@ canonical owner assignment and result capsule are the restart boundary.
 
 ## Explorer portfolio routing
 
-The Explorer owns portfolio target/state `12`, including scientific
-selection, readiness marking, intake and successor readiness. For one portfolio
-run, the Scheduler has an initial owner concurrency ceiling of `3`, counting
-only active same-level `owner_mode=direction` tasks. The ceiling excludes the
-portfolio owner, registered native children and the result-bearing runtime pool.
-The Scheduler may launch fewer than three and mechanically scans the exact
-Explorer-authored ready assignments in their preserved order. It may pass over
-an item only for its named dependency or an observed write/resource conflict so
-that a later disjoint item can proceed; it never fills slots, invents readiness,
+The Explorer derives the current portfolio cardinality from canonical
+scientific facts and records the live count only in its continuity/capsule
+surfaces. The workflow never compresses, pads, fills, merges or otherwise
+changes that scientific set. For one portfolio run, the Scheduler has an
+initial owner concurrency ceiling of `3`, counting only active same-level
+`owner_mode=direction` tasks. The ceiling excludes the portfolio owner,
+registered native children and the result-bearing runtime pool. The Scheduler
+may launch fewer than three and mechanically scans the exact Explorer-authored
+ready assignments in their preserved order. It may pass over an item only for
+its named dependency or an observed write/resource conflict so that a later
+disjoint item can proceed; it never fills slots, invents readiness,
 reprioritizes, merges, retires or scientifically selects assignments. When an
 owner completes, return the result to the portfolio Explorer for intake before
-any successor is marked ready. Ready state and order remain assignment/capsule
-semantics, never binding, roster, queue or Scheduler state.
+any successor is marked ready. Ready state and order remain
+assignment/capsule semantics, never roster state or Scheduler semantic state.
 
 ## Resource-conflict routing
 
@@ -119,17 +106,17 @@ increase that grant, change priority or choose a scientific treatment.
 
 ## One fallback
 
-For an ambiguous create, send or archive action, record one unresolved
-observation in the roster and use direct exact-ID resolution. Do not retry
-blindly, create a second owner, scan threads or infer success. If the exact ID
-cannot resolve the ambiguity, return it to the user/WDM without changing the
-owner assignment.
+For an ambiguous create, send or archive action, record one unresolved locator
+in the optional roster and use the direct exact native handle. Do not retry
+blindly, create a second owner, scan threads or infer success. If the exact
+handle cannot resolve the ambiguity, return it to the user/WDM without changing
+the owner assignment.
 
 There is no polling loop, daemon, lease, CAS, token/hash/epoch, revision,
 idempotency protocol, thread scan, blind retry, CLI assumption or background
-shell wakeup. The existing six-key binding is unchanged: no new lifecycle
-fields, queue state or state machine is introduced. Reload uses the canonical
-assignment/result locators and known exact IDs only.
+shell wakeup. There is no queue, monitor, registry or lifecycle state machine.
+Reload uses canonical assignment/result locators and known exact native handles
+only.
 
 ## Quick reference
 
@@ -145,7 +132,7 @@ assignment/result locators and known exact IDs only.
 
 | Mistake | Correction |
 |---|---|
-| treat a binding as the prompt | use the prose-first assignment; binding is mutation-boundary identity |
+| treat a file as the prompt or identity proof | use the prose-first assignment and the exact native handle |
 | wait by progress polling | one bounded exact-ID wait/read cycle |
 | use completion order as priority | preserve owner-frozen scientific priority |
 | route missing local capacity to unspecified cloud | fail closed until the user grants provider, budget, credential and egress |

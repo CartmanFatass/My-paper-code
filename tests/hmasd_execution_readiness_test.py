@@ -31,9 +31,6 @@ class ReadinessEngineTest(unittest.TestCase):
         self._git("config", "user.name", "Readiness Test")
         (self.repo / ".gitignore").write_text("logs/\ntemp/\n", encoding="utf-8")
         (self.repo / "candidate.txt").write_text("candidate\n", encoding="utf-8")
-        role = self.repo / ".agents/roles/CODE_PROJECT_MANAGER.md"
-        role.parent.mkdir(parents=True)
-        role.write_text("session_owner_id=test-session\n", encoding="utf-8")
         self._git("add", ".")
         self._git("commit", "-qm", "fixture")
         self.candidate = self._git("rev-parse", "HEAD")
@@ -41,32 +38,16 @@ class ReadinessEngineTest(unittest.TestCase):
         self.ticketing = READINESS.ticketing
         self.ticketing.REGISTERED_REPOSITORY = self.repo
         self.ticketing.WORKTREE_ROOT = self.repo / "temp/worktrees/HMASD"
-        treatment_handoff = (
-            Path(self.ticketing.TREATMENT_TRANSPORT_DIRECTORY) / "TREATMENT.json"
-        ).as_posix()
-        self.ticketing.provision_ticket(
+        provisioned = self.ticketing.provision_ticket(
             argparse.Namespace(
                 repo=self.repo,
                 assignment_id="TREATMENT",
                 base_commit=self.candidate,
-                allow=["candidate.txt", treatment_handoff],
+                allow=["candidate.txt"],
             )
         )
-        bindings = self.repo / "temp/sessions/research_scheduler/bindings"
-        bindings.mkdir(parents=True)
-        (bindings / "TREATMENT.json").write_text(
-            json.dumps(
-                {
-                    "assignment_id": "TREATMENT",
-                    "session_id": "test-session",
-                    "owner_role": "code_project_manager",
-                    "owner_mode": "treatment",
-                    "allowed_write_paths": ["candidate.txt", treatment_handoff],
-                    "active": True,
-                }
-            ),
-            encoding="utf-8",
-        )
+        self.ticket = Path(provisioned["ticket"])
+        self.worktree = Path(provisioned["resolved_worktree"])
 
     def tearDown(self) -> None:
         self.tmp.cleanup()
@@ -112,26 +93,24 @@ class ReadinessEngineTest(unittest.TestCase):
         self,
         receipt: Path,
         *,
-        session_id: object = "test-session",
-        include_session_id: bool = True,
         cwd: object | None = None,
         include_cwd: bool = True,
+        exact_paths: str = "candidate.txt",
     ) -> str:
         payload = {
             "last_assistant_message": "\n".join(
                 (
                     "CODE_ACCEPTED",
                     f"commit={self._git('rev-parse', 'HEAD')}",
-                    "exact_paths=candidate.txt",
+                    f"exact_paths={exact_paths}",
                     "execution_readiness=passed",
                     f"execution_readiness_receipt={receipt}",
                 )
             ),
         }
         if include_cwd:
-            payload["cwd"] = str(self.repo) if cwd is None else cwd
-        if include_session_id:
-            payload["session_id"] = session_id
+            selected_cwd = self.worktree if cwd is None else cwd
+            payload["cwd"] = str(selected_cwd) if isinstance(selected_cwd, Path) else selected_cwd
         old_stdin, old_stdout = sys.stdin, sys.stdout
         output = io.StringIO()
         try:
@@ -142,7 +121,7 @@ class ReadinessEngineTest(unittest.TestCase):
             sys.stdin, sys.stdout = old_stdin, old_stdout
         return output.getvalue()
 
-    def test_hook_requires_exact_treatment_session_identity(self) -> None:
+    def test_hook_uses_linked_ticket_without_session_handshake(self) -> None:
         spec = self._spec()
         old = Path.cwd()
         os.chdir(self.repo)
@@ -152,17 +131,6 @@ class ReadinessEngineTest(unittest.TestCase):
             final = self.repo / ".git/hmasd/execution-readiness" / self.candidate / "a1.json"
 
             self.assertEqual(self._hook_output(final), "")
-            invalid = (
-                self._hook_output(final, include_session_id=False),
-                self._hook_output(final, session_id=None),
-                self._hook_output(final, session_id=123),
-                self._hook_output(final, session_id=""),
-                self._hook_output(final, session_id="wrong-session"),
-            )
-            for output in invalid:
-                payload = json.loads(output)
-                self.assertEqual(payload["decision"], "block")
-                self.assertIn("session_id", payload["reason"])
         finally:
             os.chdir(old)
 
@@ -178,7 +146,24 @@ class ReadinessEngineTest(unittest.TestCase):
         self.assertEqual(invalid_cwd["decision"], "block")
         self.assertTrue(invalid_cwd["reason"])
 
-    def test_hook_exact_integration_session_is_a_treatment_noop(self) -> None:
+    def test_hook_main_checkout_integration_is_a_noop(self) -> None:
+        self.assertEqual(
+            self._hook_output(self.repo / "not-used.json", cwd=self.repo), ""
+        )
+
+    def test_hook_missing_linked_ticket_fails_closed(self) -> None:
+        self.ticket.unlink()
+        payload = json.loads(self._hook_output(self.repo / "not-used.json"))
+        self.assertEqual(payload["decision"], "block")
+        self.assertIn("registered workspace ticket", payload["reason"])
+
+    def test_hook_invalid_linked_ticket_fails_closed(self) -> None:
+        self.ticket.write_text("{not-json", encoding="utf-8")
+        payload = json.loads(self._hook_output(self.repo / "not-used.json"))
+        self.assertEqual(payload["decision"], "block")
+        self.assertIn("registered workspace ticket", payload["reason"])
+
+    def test_hook_rejects_linked_head_drift_and_ticket_scope_escape(self) -> None:
         spec = self._spec()
         old = Path.cwd()
         os.chdir(self.repo)
@@ -186,21 +171,21 @@ class ReadinessEngineTest(unittest.TestCase):
             self.assertEqual(READINESS.run_spec(spec), 0)
             self.assertEqual(READINESS.finalize_spec(spec), 0)
             final = self.repo / ".git/hmasd/execution-readiness" / self.candidate / "a1.json"
-            bindings = self.repo / "temp/sessions/research_scheduler/bindings"
-            (bindings / "INTEGRATION.json").write_text(
-                json.dumps(
-                    {
-                        "assignment_id": "INTEGRATION",
-                        "session_id": "integration-session",
-                        "owner_role": "code_project_manager",
-                        "owner_mode": "integration",
-                        "allowed_write_paths": ["candidate.txt"],
-                        "active": True,
-                    }
-                ),
+            scope_failure = json.loads(
+                self._hook_output(final, exact_paths="outside.txt")
+            )
+            self.assertEqual(scope_failure["decision"], "block")
+            self.assertIn("ticket scope", scope_failure["reason"])
+            subprocess.run(
+                ["git", "-C", str(self.worktree), "commit", "--allow-empty", "-qm", "drift"],
+                check=True,
+                capture_output=True,
+                text=True,
                 encoding="utf-8",
             )
-            self.assertEqual(self._hook_output(final, session_id="integration-session"), "")
+            head_failure = json.loads(self._hook_output(final))
+            self.assertEqual(head_failure["decision"], "block")
+            self.assertIn("current treatment HEAD", head_failure["reason"])
         finally:
             os.chdir(old)
 

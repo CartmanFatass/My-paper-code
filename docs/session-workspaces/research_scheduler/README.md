@@ -8,33 +8,53 @@ workflow_surface_owner=true
 workspace_owner=research_scheduler
 durable_workspace=docs/session-workspaces/research_scheduler/
 live_roster_locator=temp/sessions/research_scheduler/ACTIVE_ASSIGNMENTS.md
-binding_locator=temp/sessions/research_scheduler/bindings/<assignment_id>.json
-binding_keys=assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active
-identity_observation_locator=temp/sessions/research_scheduler/identity_observations/<assignment_id>.json
-identity_observation_keys=assignment_id|thread_id|host_id|session_id
-identity_observation_purpose=observation_only_not_activation_or_task_context
+live_roster_required=false
+desktop_handle=threadId|hostId
+desktop_handle_identity=threadId+hostId
+desktop_handle_purpose=exact_desktop_lifecycle_and_routing_identity
+desktop_handle_source=single_create_thread_return
+roster_purpose=human_readable_restart_locator_only
+canonical_file_role=artifact_and_continuity_only_not_llm_identity_proof
+same_file_concurrency=serialize
+disjoint_exact_file_concurrency=overlap_allowed
+portfolio_cardinality=dynamic_explorer_derived
+portfolio_initial_direction_ceiling=3
+direction_write_scope=exact_named_disjoint_files_only
+portfolio_shared_write_owner=independent_research_explorer_only
+treatment_write_scope=exact_cpm_ticket_worktree_only
+integration_write_scope=shared_mainline_only
+live_owner_interruption=forbidden
 procedure_pointer=.agents/skills/hmasd-research-scheduler/SKILL.md
 portfolio_interface_pointer=.agents/skills/hmasd-research-scheduler/SKILL.md
 tracked_live_state=false
 ```
 
-The roster is a human-readable locator for active ephemeral owner tasks. The
-binding is a minimal mutation-boundary identity record, not task context,
-queue state or a result ledger. The four-key identity observation is temporary
-mechanical evidence only: it is not activation, task context, queue, registry,
-ledger, semantic result or acceptance. Do not create a tracked live roster or a
-Scheduler `.codex` profile; lifecycle, identity-probe and portfolio procedures
-remain single-sourced by `procedure_pointer`.
+The Scheduler creates one same-level Explorer or CPM owner task and retains the
+exact native `{threadId, hostId}` (`threadId+hostId`) returned by `create_thread`. That handle is
+the complete lifecycle and routing identity. The optional roster merely helps a
+human restart or resolve a known task; it is not an authority record, identity
+proof, queue, monitor or registry. Assignment files, canonical artifacts and
+continuity records likewise describe work and results but never prove which
+LLM is running.
 
-After the Scheduler reads the direct exact-task result and mechanically confirms
-the canonical result locator, it changes the existing binding's `active` value
-to `false` (`active=false`) before requesting archive/close. This revokes owner
-mutation authority before archival. A successful archive removes that task's
-entry from the active roster; canonical assignment/result locators remain
-restart/archive evidence in their declared owner surfaces, not a Scheduler
-result ledger. If archive/close is ambiguous, the binding remains inactive and
-exactly one unresolved observation stays in the roster until direct exact-ID or
-user resolution. Inactive bindings are ignored for active discovery, while an
-exact stale identity remains fail-closed under the separate mechanical identity
-contract. The six-key binding is unchanged: no new lifecycle fields, queue
-state, or state machine is added.
+Each owner receives a self-contained natural-language assignment carrying why
+the task exists, the intended outcome, canonical inputs, protected decisions,
+exclusions, permitted local judgment, bounded recovery, exact cooperative write
+ownership, canonical result destination and observable completion evidence.
+The Scheduler does not add a file-based activation step, inspect hooks, scan
+tasks or relay semantic results. Writers of one exact file serialize; disjoint
+exact files may overlap. Direction owners write/return only their named
+disjoint direction files. The portfolio Explorer alone writes shared portfolio
+continuity/capsule state. Treatment CPM owners write only their ticket worktree
+and declared result destination; integration CPM owners write the shared
+mainline integration surface for an already-accepted set.
+
+The Scheduler waits, reads and archives by direct exact native handle. It
+mechanically checks the assignment's named canonical result locator before
+archive and may remove the optional roster locator after successful archive.
+If an action is ambiguous, preserve the owner and use direct exact-handle or
+user resolution; never blindly retry or create a replacement. Reload and
+selection use known exact handles only, with no task scan or inferred path
+discovery. Portfolio cardinality and scientific readiness remain Explorer-owned
+and the initial same-level direction-owner ceiling remains `3` as defined by
+the procedure pointer.

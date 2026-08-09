@@ -22,7 +22,7 @@ def test_wdm_is_the_single_workflow_owner() -> None:
         "public_current_work_index_owner=workflow_design_manager",
         "research_scheduler_kind=user_owned_persistent_desktop_task",
         "research_scheduler_registered_child=false",
-        "research_scheduler_binding_keys=assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active",
+        "research_scheduler_desktop_handle=threadId|hostId",
     ):
         assert required in contract
     assert "workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces" in router
@@ -43,7 +43,7 @@ def test_assignment_writing_preserves_semantic_context_over_file_only_anchors() 
     assert "Acceptance, Git and cross-task routing remain with the owner Role" in contract
     assert "workflow_successor_rotation=integrated_batch_completion" in contract
     assert "workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface" in contract
-    assert "workflow_thread_registry=forbidden_except_scheduler_active_assignment_locators" in contract
+    assert "workflow_thread_registry=forbidden" in contract
     assert "agentify_transport_assignment_locators=batch_path|results_path" in contract
     assert "agentify_transport_result_locator=results_path" in contract
     assert "cpm_mechanical_assignment_locators=spec_path|result_path" in contract
@@ -129,8 +129,7 @@ def test_non_workflow_role_ownership_is_preserved() -> None:
 def test_explorer_research_and_session_artifacts_remain_explorer_owned() -> None:
     contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split())
     role = _text(".agents/roles/WORKFLOW_DESIGN_MANAGER.md")
-    assert "Explorer owns the `explorer_to_code_manager/` direction" in contract
-    assert "each receiver is read-only" in contract
+    assert "Explorer owns the `explorer_to_code_manager/` direction and CPM is read-only for that exchange" in contract
     assert "workflow_acceptance_authority=exclusive" in role
     assert "centralized_explorer_workspace_cleanup_write_authority=none" in role
 

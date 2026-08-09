@@ -751,8 +751,8 @@ def test_parallel_first_normal_path_rejects_attribution_lock_regression() -> Non
         assert stale.lower() not in normalized_surfaces
 
 
-def test_frozen_twelve_direction_portfolio_is_distinct_from_concurrency_window() -> None:
-    """The reference owns the detailed portfolio procedure and the target is not a pool."""
+def test_derived_portfolio_cardinality_is_distinct_from_concurrency_window() -> None:
+    """Canonical facts determine portfolio size; the active window remains three owners."""
     role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
         encoding="utf-8"
     )
@@ -772,12 +772,19 @@ def test_frozen_twelve_direction_portfolio_is_distinct_from_concurrency_window()
     parallel_normalized = " ".join(parallel.split())
     surfaces_normalized = " ".join((role_normalized, skill_normalized, parallel_normalized))
     for required in (
-        "portfolio_direction_target=12",
-        "direction_owner_write_scope=one_disjoint_direction_capsule_only",
+        "owner_task_handle=native_owner_task_handle",
+        "cooperative_file_ownership=assignment_named_strict_disjoint_paths",
+        "portfolio_direction_cardinality=derived_from_canonical_facts",
+        "portfolio_cardinality_sources=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md",
+        "portfolio_cardinality_policy=use_observed_count_record_exact_ambiguity_or_shortfall_never_pad_or_compress",
+        "direction_owner_write_scope=assignment_named_strict_disjoint_direction_capsule_files",
         "direction_owner_shared_continuity_write=forbidden",
         "direction_owner_sibling_write=forbidden",
         "scheduler_scientific_authority=none",
         "wdm_cpm_scheduler_scientific_authority=none",
+        "mutation_ownership_gate=file_writes|runtime_actions|external_actions|cross_owner_actions",
+        "read_only_consultation_scope=user_authorized_exact_scope_registered_read_only_research_children",
+        "read_only_consultation_authority=none_for_acceptance_or_writes",
         "detailed capsule, intake, readiness, ordering, ceiling and shortfall procedure is defined once in",
         "references/parallel-research-workflow.md",
     ):
@@ -785,16 +792,20 @@ def test_frozen_twelve_direction_portfolio_is_distinct_from_concurrency_window()
 
     # Detailed semantics live in the parallel reference, not Role/Skill copies.
     for required in (
-        "portfolio_direction_target=12",
-        "portfolio_target_counts=scientific_direction_identities_only",
-        "portfolio_canonical_surfaces=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md",
-        "portfolio_shortfall_policy=record_exact_ambiguity_or_shortfall_never_pad",
-        "direction_owner_write_scope=one_disjoint_direction_capsule_only",
+        "portfolio_direction_cardinality=derived_from_canonical_facts",
+        "portfolio_cardinality_sources=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md",
+        "portfolio_cardinality_policy=use_observed_count_record_exact_ambiguity_or_shortfall_never_pad_or_compress",
+        "portfolio_cardinality_scope=scientific_direction_identities_only",
+        "direction_owner_write_scope=assignment_named_strict_disjoint_direction_capsule_files",
+        "direction_owner_shared_continuity_write=forbidden",
+        "direction_owner_shared_portfolio_write=forbidden",
         "portfolio_integration_boundary=stable_portfolio_integration_boundary",
         "portfolio_intake=exact_direction_results",
         "portfolio_scientific_fields=identities|status|eligibility|priority|dependencies",
         "portfolio_ready_assignment=conclusion_first_self_contained_ready_next_owner_assignment",
         "portfolio_ready_assignment_fields=exact_inputs|write_paths|result_destinations|dependencies|resource_vectors",
+        "portfolio_shared_writer=one_portfolio_explorer_at_integration_boundary",
+        "portfolio_shared_write_scope=shared_RESEARCH_CONTINUITY_and_portfolio_records_at_integration_boundary_only",
         "research_scheduler_task_creation=alone_same_level_direction_owner_tasks",
         "initial_configured_concurrency_ceiling=3",
         "initial_ceiling_counts=active_same_level_direction_owner_tasks_only",
@@ -803,12 +814,19 @@ def test_frozen_twelve_direction_portfolio_is_distinct_from_concurrency_window()
         "scheduler_conflict_skip=may_pass_over_conflicting_ready_item_for_later_disjoint_item",
         "scheduler_forbidden_semantics=invent|fill_slots|reprioritize|merge|retire|select_directions",
         "direction_completion_successor_gate=exact_portfolio_intake_and_continuity_update_before_successor_ready",
-        "portfolio_size_separate_from_active_concurrency_window=true",
+        "portfolio_cardinality_separate_from_active_concurrency_window=true",
         "active_concurrency_window=flexible_per_run_ceiling",
         "fixed_runtime_pool=forbidden",
+        "If canonical facts yield 15, the portfolio uses 15",
+        "does not force compression",
         "exact ambiguity or shortfall",
         "never pad",
         "natural-language portfolio capsule/continuity decision, not a schema, queue or admission gate",
+        "mutation_ownership_gate=file_writes|runtime_actions|external_actions|cross_owner_actions",
+        "read_only_consultation_scope=user_authorized_exact_scope_registered_read_only_research_children",
+        "read_only_consultation_authority=none_for_acceptance_or_writes",
+        "registered read-only research child may consult within its named scope before",
+        "no acceptance or write authority",
         "Scheduler's command procedure",
     ):
         assert required.lower() in parallel_normalized.lower(), required
@@ -820,19 +838,24 @@ def test_frozen_twelve_direction_portfolio_is_distinct_from_concurrency_window()
         "initial_configured_concurrency_ceiling=3",
         "scheduler_ready_order=",
         "direction_completion_successor_gate=",
-        "portfolio size 12 is separate from active concurrency window 3",
+        "portfolio size 12",
     ):
         assert detailed.lower() not in (role_normalized + skill_normalized).lower(), detailed
 
-    # Remove redundant aliases: one canonical target key only.
+    # Reject the retired exact-12 contract and aliases.
     for alias in (
+        "portfolio_direction_target=12",
         "portfolio_size=12",
         "portfolio_target_direction_count=12",
         "portfolio_direction_identity_count=12",
+        "target is exactly 12",
+        "exactly 12 distinct",
+        "exact 12-direction",
+        "twelve-direction portfolio",
     ):
         assert alias.lower() not in surfaces_normalized.lower(), alias
 
-    # Source assignments, candidates and opportunities never inflate the 12.
+    # Source assignments, candidates and opportunities never inflate cardinality.
     for excluded in (
         "source assignments are directions",
         "candidate records are directions",
@@ -843,9 +866,14 @@ def test_frozen_twelve_direction_portfolio_is_distinct_from_concurrency_window()
         "portfolio_size=3",
     ):
         assert excluded.lower() not in surfaces_normalized.lower(), excluded
-    # The active window is explicitly three direction owner tasks, not 12.
+    # The active window is explicitly three direction owner tasks, not portfolio size.
     assert "initial configured concurrency ceiling is 3 active same-level direction owner tasks" in parallel_normalized.lower()
-    assert "portfolio size 12 is separate from active concurrency window 3" in parallel_normalized.lower()
+    assert "observed portfolio cardinality is separate from the active concurrency window 3" in parallel_normalized.lower()
+
+    # Native owner handles and cooperative file ownership replace identity
+    # handshakes; the retired binding-ready/prebinding vocabulary is absent.
+    for forbidden in ("file identity handshake", "binding-ready", "pre_binding", "pre-binding", "mutation_binding"):
+        assert forbidden not in surfaces_normalized.lower(), forbidden
 
 
 def test_desktop_owner_modes_are_isolated_and_children_keep_their_contracts() -> None:
@@ -997,7 +1025,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "continuity_entry=local_research/RESEARCH_CONTINUITY.md",
         "continuity_owner=independent_research_explorer",
         "public_handoff_outbound=temp/handoffs/explorer_to_code_manager/",
-        "public_handoff_inbound_read=temp/handoffs/code_manager_to_explorer/",
+        "public_handoff_inbound_read=none_direct_native_treatment_result",
         "public_handoff_git_authority=none",
         "public_handoff_admission=semantic_judgment_no_mandatory_schema",
         "project_validation_instruction_authority=authorize_cpm_named_treatment_execution",
@@ -1272,9 +1300,9 @@ def test_direction_local_context_binding_is_symmetric_and_preserves_artifacts() 
         "source/evidence revision boundary",
         "explicit exclusion of sibling-direction generalization",
         "one requested action and its direct consumer",
-        "CPM's reverse result begins with its conclusion",
+        "CPM's treatment result is returned directly over the exact native owner handle",
         "mirrors that same primary direction or explicitly named direction set",
-        "Codex-native message fallback carries the same binding and content",
+        "native task result is the normal transport",
         "preserves the original handoff/artifact",
         "asks exactly one concrete semantic clarification",
         "creates a `BLOCKED` state",
@@ -1294,7 +1322,7 @@ def test_direction_local_context_binding_is_symmetric_and_preserves_artifacts() 
     assert "explicitly multi-direction user question" in normalized_contract
     assert "never imports another direction" in normalized_contract
     assert "portfolio-wide meaning" in normalized_contract
-    assert "A Codex-native message fallback carries the same binding" in handoffs
+    assert "CPM returns a conclusion-first result directly over the exact native owner handle" in validation_skill_normalized
     assert "excluding unrequested siblings" in exploration_skill
     assert "preserve the original handoff/artifact" in validation_skill_normalized
     assert "direction-local context binding" in workflow_map

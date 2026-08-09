@@ -13,7 +13,7 @@ workflow_session_identity=stable_role_plus_assignment_scoped_owner_task
 workflow_session_owner_id=workflow_design_manager
 workflow_successor_rotation=integrated_batch_completion
 workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface
-workflow_thread_registry=forbidden_except_scheduler_active_assignment_locators
+workflow_thread_registry=forbidden
 same_file_concurrent_writes=forbidden
 research_scheduler_kind=user_owned_persistent_desktop_task
 research_scheduler_registered_child=false
@@ -24,15 +24,22 @@ research_scheduler_forbidden_authority=science|code|technical_acceptance|git|run
 research_scheduler_owner_task_modes=explorer_direction|explorer_portfolio|cpm_treatment|cpm_integration
 research_scheduler_owner_task_depth=1
 research_scheduler_live_roster=temp/sessions/research_scheduler/ACTIVE_ASSIGNMENTS.md
-research_scheduler_binding_directory=temp/sessions/research_scheduler/bindings/
-research_scheduler_binding_keys=assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active
-research_scheduler_binding_purpose=mutation_boundary_identity_only
-research_scheduler_identity_observation_directory=temp/sessions/research_scheduler/identity_observations/
-research_scheduler_identity_observation_path=temp/sessions/research_scheduler/identity_observations/<assignment_id>.json
-research_scheduler_identity_observation_keys=assignment_id|thread_id|host_id|session_id
-research_scheduler_identity_observation_purpose=observation_only_not_activation_or_task_context
-research_scheduler_binding_task_context=false
-research_scheduler_binding_queue=false
+research_scheduler_live_roster_required=false
+research_scheduler_desktop_handle=threadId|hostId
+research_scheduler_desktop_handle_identity=threadId+hostId
+research_scheduler_desktop_handle_purpose=exact_desktop_lifecycle_and_routing_identity
+research_scheduler_desktop_handle_source=single_native_thread_creation_return
+research_scheduler_roster_purpose=human_readable_restart_locator_only
+research_scheduler_canonical_file_role=artifact_and_continuity_only_not_llm_identity_proof
+research_scheduler_same_file_concurrency=serialize
+research_scheduler_disjoint_exact_file_concurrency=overlap_allowed
+research_scheduler_portfolio_cardinality=dynamic_explorer_derived
+research_scheduler_portfolio_initial_direction_ceiling=3
+research_scheduler_direction_write_scope=exact_named_disjoint_files_only
+research_scheduler_portfolio_shared_write_owner=independent_research_explorer_only
+research_scheduler_treatment_write_scope=exact_cpm_ticket_worktree_only
+research_scheduler_integration_write_scope=shared_mainline_only
+research_scheduler_live_owner_interruption=forbidden
 research_scheduler_procedure_pointer=.agents/skills/hmasd-research-scheduler/SKILL.md
 research_scheduler_resource_policy_pointer=.agents/skills/hmasd-research-scheduler/SKILL.md
 public_current_work_partition_status=active_index_and_partitions
@@ -52,13 +59,12 @@ cpm_mechanical_assignment=CPM_MECHANICAL_TASK_ASSIGNMENT
 cpm_mechanical_assignment_locators=spec_path|result_path
 cpm_mechanical_result=CPM_MECHANICAL_TASK_RESULT
 cpm_mechanical_result_locator=result_path
-cpm_treatment_write_scope_count=2
-cpm_treatment_write_scopes=ticket_local_paths_inside_one_registered_worktree|one_exact_strict_descendant_main_checkout_transport_path
-cpm_treatment_reverse_handoff_root=temp/handoffs/code_manager_to_explorer/
-cpm_treatment_reverse_handoff_locator=assignment_named_exact_strict_descendant
-cpm_treatment_main_checkout_mutation=apply_patch_only_reverse_handoff_no_git
+cpm_treatment_write_scope_count=1
+cpm_treatment_write_scopes=ticket_local_paths_inside_one_registered_worktree
+cpm_treatment_result_transport=conclusion_first_direct_native_owner_handle
 cpm_treatment_canonical_result=assignment_named_treatment_artifact_evidence_acceptance_record
 cpm_integration_main_checkout_semantics=unchanged_shared_mainline_integration_only
+cpm_integration_shared_mainline_writer=sole_serialized_integration_cpm
 ```
 
 ## Ownership model
@@ -86,12 +92,11 @@ assignment-named sender handoff; it does not write or clean another role's
 workspace. No hash, byte count or digest is required for a handoff.
 
 The Scheduler durable pointer is
-`docs/session-workspaces/research_scheduler/README.md`. Its active roster and
-bindings are temporary only; no tracked live state is created. The roster is a
-human-readable locator, identity observations use the declared temporary
-directory and four keys, and each binding contains only the six identity keys
-in `research_scheduler_binding_keys`. Identity observations are not activation,
-task context, queue, registry, ledger, semantic result or acceptance state.
+`docs/session-workspaces/research_scheduler/README.md`. Its optional roster is
+temporary only; no tracked live state is created. The roster may retain the
+exact native `{threadId, hostId}` handle as a human-readable restart locator,
+but it is not authority or identity proof. Canonical assignment, artifact and
+continuity files carry work meaning and results only.
 
 ## File-backed transport locators
 
@@ -116,17 +121,21 @@ configuration. It owns lifecycle and resource-conflict routing only, with no
 science, code, technical acceptance, Git, runtime execution, semantic relay or
 sibling-preload authority.
 
-The frozen Desktop lifecycle, initial-prompt guard and ambiguous-action
-fallback are defined once by `research_scheduler_procedure_pointer`; this
-workspace contract does not repeat command-level procedure.
+The frozen Desktop lifecycle and ambiguous-action fallback are defined once by
+`research_scheduler_procedure_pointer`; this workspace contract does not repeat
+command-level procedure. The exact `{threadId, hostId}` (`threadId+hostId`) returned by one native
+owner creation is the Scheduler's lifecycle/routing identity. The
+Scheduler waits, reads and archives by that exact native handle. No extra
+identity machinery, hook inspection, file-based activation, task scan, queue,
+monitor, registry, semantic relay or live-owner interruption is part of this
+contract.
 
-The human-readable live roster is
+The optional human-readable roster is
 `temp/sessions/research_scheduler/ACTIVE_ASSIGNMENTS.md` and remains ignored
-temporary state. The machine record is
-`temp/sessions/research_scheduler/bindings/<assignment_id>.json` with exactly
-`assignment_id|session_id|owner_role|owner_mode|allowed_write_paths|active`.
-This binding is mutation-boundary identity only; it is not task context, queue
-state or a result ledger.
+temporary state. It may list exact handles and canonical locators for restart,
+but it is not a machine authority record, queue state, monitor, registry or
+result ledger. Assignment files and canonical artifacts are owned continuity,
+not LLM identity proof.
 
 Resource-conflict policy and its exclusions are defined once by
 `research_scheduler_resource_policy_pointer`; this contract stores the
@@ -136,13 +145,10 @@ workspace and identity boundary only.
 
 `docs/project/handoffs/README.md` is the tracked contract; ignored
 `temp/handoffs/` is the live exchange, not a state store. Explorer owns the
-`explorer_to_code_manager/` direction and CPM owns
-`code_manager_to_explorer/`; each receiver is read-only. For a CPM
-`owner_mode=treatment` assignment, the binding names exactly two physical write
-scopes: ticket-local paths inside one registered worktree and one exact
-strict-descendant main-checkout transport path under
-`temp/handoffs/code_manager_to_explorer/`. The descendant is the only allowed
-main-checkout treatment write; the root and sibling paths are never granted.
+`explorer_to_code_manager/` direction and CPM is read-only for that exchange.
+For a CPM `owner_mode=treatment` assignment, the self-contained brief names
+one physical write scope: exact ticket-local paths inside one registered
+worktree. Treatment never writes the shared main checkout.
 WDM owns only the contract text.
 
 Handoffs are self-contained human/model-readable briefs. Formats and suggested
@@ -157,16 +163,14 @@ capacity or establish scientific priority.
 The sender removes the temporary exchange copy after intake. It is never staged,
 committed or pushed; canonical owner records remain outside the exchange.
 
-The CPM treatment reverse handoff is disposable transport only. It points to the
-exact assignment-named treatment artifact, evidence and technical-acceptance
-record; it is not that canonical result, an acceptance record, result ledger,
-queue, Scheduler semantic relay or Git object. Treatment Git and shell mutation
-remain ticket-worktree-scoped, while the one named main-checkout handoff file is
-written with `apply_patch` only and has no Git authority. Explorer reads only the
-exact named handoff/technical locators and performs exactly one scientific
-intake. Scheduler routes/checks locators mechanically and does not interpret the
-result. `owner_mode=integration` retains its existing shared-mainline semantics
-and does not repeat treatment runtime or acceptance.
+The CPM treatment result is returned conclusion-first directly over the exact
+native owner handle and names the assignment-scoped treatment artifact,
+evidence and technical-acceptance locators. It is not a Scheduler semantic
+relay or a second canonical record. Treatment Git and shell mutation remain
+ticket-worktree-scoped. Explorer performs its single scientific intake from
+that native result and named canonical locators. `owner_mode=integration`
+retains the existing shared-mainline semantics and is the sole serialized
+shared-mainline writer; it does not repeat treatment runtime or acceptance.
 
 ## Public current work
 
@@ -178,7 +182,7 @@ index.
 The user-owned Scheduler pointer is
 `docs/project/current-work/sessions/research_scheduler.md`; it records only the
 role/workspace locator and stable status links. Live owner assignments remain
-under the ignored Scheduler roster and binding paths above.
+under the optional ignored Scheduler roster and exact native handles above.
 
 Registered persistent control tasks and assignment-scoped owner tasks may read
 only index records relevant to their assignment. An owner may edit only its
