@@ -91,3 +91,22 @@ exclusive semantics before calling the reservation-gated registered audit.
 Claims are never recycled after source execution begins; a failure leaves the
 reservation in place so neither a new output name nor a retry can consume a
 second registered audit.
+
+## Accepted VSPC1-A1 publication receipt
+
+- Source commit: `01ccf191d268a99bd97f2dd93cae95765a5049f3` (branch
+  `A1_HOST_RECTANGLE_UNREACHABLE`).
+- Source readiness receipt: `temp/sessions/code_project_manager/vspc1_a1_source_readiness_r2.json`.
+- Registered audit: `1`; focused production kernel calls: `0`; all runtime,
+  learner, trainer, optimizer, return, stochastic, sweep/retry/rescue,
+  construction and predictor-fit counts are zero.
+- Validator: pass (retained raw result is valid JSON and byte-identical to the
+  registered-audit result; SHA-256 `BECAE21752B7A0431B8F8D02E7D9B0D454BA4CF66521B5EE51557295CFE0A4E8`).
+- Operator receipt: terminal `ERROR` solely because this single-audit runner
+  has no evaluate/analyze phases (N/A),
+  `temp/sessions/code_project_manager/vspc1_a1_operator_receipt.json`.
+- Result: `docs/research/candidates/vsp_c1/VSPC1_A1_CONSTRAINED_FOURTH_CORNER_LOGIT_COMPLETION_RESULT.json`;
+  source: `experiments/candidates/vsp_c1/constrained_fourth_corner_logit_completion.py`;
+  receipt: `temp/sessions/code_project_manager/vspc1_a1_operator_receipt.json`.
+- Nonclaims: no B/C/Pro disposition, no successor selection, and no new
+  science or acceptance beyond the recorded unreachable-host branch.
