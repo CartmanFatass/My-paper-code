@@ -334,3 +334,21 @@ It is not an observed `0.25` result, map/program comparison, return/value
 claim, A2 repair, runtime readiness decision, technical acceptance, or census
 authorization. The registered audit, result publication, readiness receipt and
 CPM acceptance are deliberately not executed by this source package.
+
+### Registered A3 publication
+
+The retained `EC4G-A3-RER3-COMPLETE-PROSPECTIVE-BINDING-AUDIT` result is
+`EC4G_A3_RER3_COMPLETE_PROSPECTIVE_BINDING_AUDIT_RESULT.json`, sourced from
+C0 commit/blob `c0beef960f5f731f0c994ecd2298a1e889210c7b` /
+`6d37b33c933ee16f89186a507e67e1080b674ca0` (SHA-256
+`0d0c9b6f24ae2bb96fc0a3f542c737557f1cd66be1edbdb72d809dfce9bb0183`) and
+C1/source commit `ba9eae5cfc21c014f210e061561fe7b8f47f5592`. It records branch
+`A3_COMPLETE_PROSPECTIVE_CONTRACT_BINDING`, result id
+`ec4g-a3-3eaec2a3e9c6d26f990e0dbfd40e48309f21c2b38ba0964e2e7bff3ffe725b4c`,
+one audit/freeze, two blobs, fourteen roles, three cells, twenty-one arms and
+243 support points. Map/compile/compare/`D_RER3`, runtime, learning,
+stochastic, retry, rescue and rescan counts are all zero. The operator receipt
+is `COMPLETE`. A bounded preflight parent-directory recovery was observed:
+the first command failed before audit/output and the internal registered-audit
+count remains one. Eligibility is strict and audit-only: non-census,
+non-value, with no successor boundary.
