@@ -82,44 +82,22 @@ acceptance owner.
 
 ## Action-bearing Explorer↔CPM interface
 
-The detailed semantic source is
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. CPM must reject action
-from status-only `parked|ready|pending|accepted|blocked|waiting for CM|intake complete|next selection required|CODE_ACCEPTED` and require a complete
-brief/return to state current evidence and exact paths, frozen/unfrozen meaning
-and exclusions, why CPM or Explorer is or is not needed, exact owner/action,
-concrete inputs/locators, completion evidence, and the return/intake boundary.
-Missing or contradictory meaning preserves the original, asks one exact
-clarification and continues unrelated work without guessing or `BLOCKED`.
-The `parked` disposition is Explorer-local (parked is Explorer-local) and means
-no scientifically complete frozen live successor handoff; CPM does not park,
-retire or invent successor science. Missing DTO/adapter/runner/test
-connection/ordinary engineering object is pending implementation and belongs to
-CPM, never a reason to park. `pending_runtime_capacity` remains only runtime
-admission for a not-yet-started frozen treatment. Parking never pauses siblings,
-existing treatments, read-only science or portfolio exploration; `retired` is a
-separate Explorer scientific terminal disposition (retired is a separate
-Explorer scientific terminal disposition).
+Use `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` as the single
+detailed source. CPM consumes and returns action-bearing prose; it never infers
+an action from a status-only token. `parked` is Explorer-local when no frozen
+live successor exists, while ordinary engineering gaps go to CPM. A missing or
+contradictory meaning preserves the original, asks one exact clarification and
+continues unrelated work.
 
-The existing runtime ownership remains `runtime_capacity_pool_units=3`,
+The normal runtime path remains the existing
+`runtime_capacity_pool_units=3`,
 `independent_admitted_treatment_execution=parallel_first_within_capacity`, and
-`runtime_admission_judgment=admit|up-class|pending_runtime_capacity`; the
-parallel-research reference retains event-driven continuation and scheduler
-ownership.
-
-On its next owner update CPM maintains the mandatory human-readable Technical
-Treatment View at
-`docs/project/current-work/common/explorer_project_validation.md`, containing
-only complete Explorer handoffs (parked without a successor is absent). Exact
-columns are: `Direction/treatment` | `Explorer request and handoff locator` |
-`frozen scientific meaning and explicit exclusions` | `CPM engineering/runtime
-action` | `current technical phase in full prose` | `completed technical
-evidence` | `missing engineering object` | `runtime class/units and current
-admission reason` | `dependency/path/resource conflict` | `result destination` |
-`next owner and return/intake boundary`. Every cell is meaningful. The view is
-an owner-local human-readable projection, not a schema, queue, scheduler,
-process monitor, runtime-capacity source, admission source or acceptance source;
-`active_assignment_id` remains only the foreground pointer. This is not a
-runtime validator, state machine or new queue.
+`runtime_admission_judgment=admit|up-class|pending_runtime_capacity` contract
+in the parallel-research reference; event-driven continuation has no
+clock-driven scheduler or polling.
+CPM maintains its owner-local view at
+`docs/project/current-work/common/explorer_project_validation.md`; the view is
+not a second semantic source.
 
 ## Operating loop
 

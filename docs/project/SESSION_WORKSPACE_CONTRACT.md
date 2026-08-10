@@ -122,17 +122,11 @@ Code Project Manager must maintain the mandatory human-readable Technical
 Treatment View on its next owner update at
 `docs/project/current-work/common/explorer_project_validation.md`. The view is
 allowed as a CPM-owned owner-local projection while this contract preserves the
-current-work index, record ownership and pointer semantics. It contains only
-complete Explorer handoffs; a parked handoff without a frozen live successor is
-absent. Its exact columns are `Direction/treatment` | `Explorer request and
-handoff locator` | `frozen scientific meaning and explicit exclusions` | `CPM
-engineering/runtime action` | `current technical phase in full prose` |
-`completed technical evidence` | `missing engineering object` | `runtime
-class/units and current admission reason` | `dependency/path/resource conflict`
-| `result destination` | `next owner and return/intake boundary`. Each cell must
-be meaningful. This projection is not a schema, queue, scheduler, process
-monitor, runtime-capacity source, admission source or acceptance source, and
-`active_assignment_id` remains only the foreground pointer.
+current-work index, record ownership and pointer semantics. It is a
+human-readable view/pointer only, not a schema, queue, scheduler, process
+monitor, runtime-capacity source, admission source or acceptance source;
+`active_assignment_id` remains only the foreground pointer. The canonical
+Explorer↔CPM contract owns its detailed meaning and columns.
 
 ## Git boundary
 

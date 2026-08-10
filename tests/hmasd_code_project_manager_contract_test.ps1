@@ -188,21 +188,10 @@ foreach ($required in @(
 $actionBearingSurfaces = @($codePmNormalized, $agileNormalized, $sessionWorkspaceContractNormalized) -join ' '
 foreach ($required in @(
     'docs/project/current-work/common/explorer_project_validation.md',
-    'Direction/treatment',
-    'Explorer request and handoff locator',
-    'frozen scientific meaning and explicit exclusions',
-    'CPM engineering/runtime action',
-    'current technical phase in full prose',
-    'completed technical evidence',
-    'missing engineering object',
-    'runtime class/units and current admission reason',
-    'dependency/path/resource conflict',
-    'result destination',
-    'next owner and return/intake boundary',
-    'only complete Explorer handoffs',
-    'parked without a successor is absent',
-    'Every cell is meaningful',
-    'owner-local human-readable projection',
+    'owner-local',
+    'pointer/view only',
+    'canonical contract remains the sole detailed source',
+    'not a second semantic source',
     'not a schema, queue, scheduler, process monitor, runtime-capacity source, admission source or acceptance source',
     '`active_assignment_id` remains only the foreground pointer')) {
     if (-not $actionBearingSurfaces.Contains($required)) {
@@ -210,31 +199,65 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'status-only `parked|ready|pending|accepted|blocked|waiting for CM|intake complete|next selection required|CODE_ACCEPTED`',
-    'current evidence and exact paths',
-    'frozen/unfrozen scientific meaning and explicit exclusions',
-    'why CPM or Explorer is or is not needed',
-    'exact owner/action',
-    'concrete inputs/locators',
-    'completion evidence',
-    'return/intake boundary',
-    'Missing or contradictory meaning preserves the original',
+    'status-only token never supplies an action',
+    'never infers an action from a status-only token',
+    '`parked` is Explorer-local',
+    'ordinary engineering gaps belong to CPM',
     'asks one exact clarification',
-    'continues unrelated work',
-    'never guesses or emits `BLOCKED`',
-    'parked is Explorer-local',
-    'no scientifically complete frozen live successor handoff',
-    'CPM never parks or retires a direction and never invents successor science',
-    'retired is a separate Explorer scientific terminal disposition',
-    'Missing DTO/adapter/runner/test connection/ordinary engineering object is pending implementation and belongs to CPM, never a reason to park',
-    'pending_runtime_capacity` remains only runtime admission for a not-yet-started frozen treatment',
-    'parked route does not pause siblings, existing treatments, read-only science or portfolio exploration')) {
+    'continues unrelated work')) {
     if (-not $actionBearingSurfaces.Contains($required)) {
         throw "Action-bearing Explorer/CPM semantics missing: $required"
     }
 }
 foreach ($required in @(
-    'accepted-plan/VALIDATING',
+    'Status-only text is insufficient',
+    '## Explorer scientific dispositions and action map',
+    'Direction | current scientific question',
+    'CPM Technical Treatment View at')) {
+    if (-not $explorerValidationContractNormalized.Contains($required)) {
+        throw "Canonical Explorer-to-CPM source missing: $required"
+    }
+}
+$forbiddenCopiedViewTokens = @(
+    'Direction/treatment',
+    'Explorer request and handoff locator',
+    'current technical phase in full prose',
+    'runtime class/units and current admission reason',
+    'dependency/path/resource conflict')
+foreach ($surface in @($codePmNormalized, $agileNormalized, $sessionWorkspaceContractNormalized)) {
+    foreach ($forbidden in $forbiddenCopiedViewTokens) {
+        if ($surface.Contains($forbidden)) {
+            throw "Detailed Technical Treatment View column copied outside canonical source: $forbidden"
+        }
+    }
+}
+foreach ($forbidden in @(
+    '`parked` is an Explorer-local scientific disposition only when no scientifically complete frozen CPM successor exists',
+    'A parked direction reactivates only when its recorded prospective condition is met',
+    '`retired` is a separate explicit terminal disposition')) {
+    if ($actionBearingSurfaces.Contains($forbidden)) {
+        throw "Explorer disposition procedure copied outside canonical source: $forbidden"
+    }
+}
+$conclusionIndex = $codePmNormalized.IndexOf('After technical acceptance, CPM first returns a conclusion-first action-bearing')
+$acceptedIndex = $codePmNormalized.IndexOf('CODE_ACCEPTED')
+if ($conclusionIndex -lt 0 -or $acceptedIndex -lt 0 -or $conclusionIndex -ge $acceptedIndex) {
+    throw 'CPM action-bearing conclusion must precede the factual CODE_ACCEPTED tail'
+}
+foreach ($required in @(
+    'current evidence and exact paths',
+    'frozen/unfrozen meaning',
+    'why each owner is or is not needed',
+    'exact next owner/action',
+    'completion evidence',
+    'return/intake boundary')) {
+    $requiredIndex = $codePmNormalized.IndexOf($required)
+    if ($requiredIndex -lt 0 -or $requiredIndex -ge $acceptedIndex) {
+        throw "CPM conclusion-first result is missing before CODE_ACCEPTED: $required"
+    }
+}
+foreach ($required in @(
+    'accepted-contract/CLOSED',
     'scheduler=false',
     'global_blocker=false',
     'science/runtime effect=none',
