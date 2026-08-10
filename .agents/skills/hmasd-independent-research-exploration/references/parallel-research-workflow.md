@@ -24,14 +24,17 @@ experiment_pool_exclusivity_scope=result_bearing_runtime_only
 workflow_progress_during_exclusive_runtime=continues
 read_only_science_lane_capacity=independent_of_cpm_pool_by_default
 science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only
-persistent_explorer_progress=event_driven_or_user_resumed
+task_tree_explorer_progress=event_driven_or_root_resumed
+persistent_explorer_progress=forbidden
 canonical_campaign_phase_roster=exact_ordered_work_roster
 canonical_campaign_phase_barriers=required
 adaptive_question_roster=singleton_or_exact_joint_roster
 adaptive_singleton_global_barrier=none
 adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary
 completion_order_priority=forbidden
-single_writer=independent_research_explorer
+semantic_writer=independent_research_explorer
+ordinary_artifact_writer=research_artifact_writer
+continuity_physical_writer=root_after_accepted_explorer_proposal
 child_depth=0
 automatic_formal_workflow_promotion=forbidden
 automatic_campaign_progression=allowed_until_convergence
@@ -42,15 +45,21 @@ later_cycle_collaboration_brief=required
 research_child_default_fork_turns=none
 research_child_dispatch_contract=registered_agent_type|fork_turns="none"|self_contained_natural_language_assignment
 independent_direction_question_default=best_matching_registered_read_only_child|fork_turns="none"
-independent_direction_question_direct_root_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task
-root_explorer_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness
+independent_direction_question_direct_explorer_l1_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task
+explorer_l1_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness
 cpm_accepted_result_interpretation=optional_direction_specific_read_only_child|technical_acceptance_not_repeated
 parent_conversation_history=background_only_not_task_authority
 restart_identity=role|model|current_task
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
-continuity_owner=independent_research_explorer
+continuity_semantic_owner=independent_research_explorer
+continuity_write_route=explorer_proposal_to_root_after_revision_check
 project_validation_intake_contract=docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md
 explorer_mechanical_child=hmasd-explorer-mechanical
+explorer_transport_callable=hmasd-explorer-agentify-transport
+explorer_transport_parent=independent_research_explorer
+explorer_transport_requester_partition=required
+explorer_transport_return=explorer_to_root
+shared_explorer_transport_profile=absent
 explorer_mechanical_scientific_roster=excluded
 explorer_mechanical_barrier=none
 explorer_mechanical_peer_independence=not_applicable
@@ -109,8 +118,8 @@ admission gate.
 Independent direction-local detailed scientific questions use the best-matching
 registered read-only child by default with `fork_turns="none"`. Explorer may
 handle a cheap, reversible singleton directly only when dispatch overhead
-exceeds the question. The root retains the direction pointer, exact dependency,
-compact returned conclusion and CPM readiness. An accepted CPM result may first
+exceeds the question. Explorer L1 retains the direction pointer, exact
+dependency, compact returned conclusion and CPM readiness. An accepted CPM result may first
 go to one direction-specific read-only child for interpretation; that child
 does not redo technical acceptance, and no fixed panel or scientific-authority
 transfer is created.
@@ -135,8 +144,9 @@ and named prior answers. Preserve disagreements as advisory inputs; never vote
 or collapse them into a quorum.
 
 There is no fixed adaptive count, concurrency, quorum, every-B panel,
-automatic-Pro path or persistent mechanism. The Explorer remains the single
-writer and integrates answers into one decision. Strict methodology is scoped
+automatic-Pro path or durable mechanism. Explorer L1 remains the semantic
+author and integrates answers into one exact advisory decision; Research Artifact
+Writer and Root perform only the bounded physical writes described above. Strict methodology is scoped
 to conclusion-bearing C work or a named science-review trigger, not all
 candidate validation.
 
@@ -149,20 +159,23 @@ scientific interpretation.
 
 ## Restart continuity
 
-The Explorer owns one lightweight entry at
-`local_research/RESEARCH_CONTINUITY.md`. It records only active campaign or
+Explorer L1 semantically proposes one lightweight entry at
+`local_research/RESEARCH_CONTINUITY.md`; Root alone physically writes it only
+after the accepted proposal/revision check. It records only active campaign or
 artifact paths, the `active_experiment_roster`, the last completed phase or
 direction-local intake barrier, unfinished assignment or review, the next
 scientific action and the current authorized source boundary. Each active
 treatment entry makes its direction, treatment, declared resource class and
 units, predecessor dependency, canonical design/handoff, CPM task locator, last
 CPM-reported runtime observation and intake state understandable. These are
-semantic continuity cues rather than required field names. Update it only when
-the active roster changes, an intake/phase barrier closes, a direction is parked,
-or the task ends. If absent, the new Explorer performs one bounded scan of its
-owned `local_research` paths and creates the entry with `apply_patch`.
+semantic continuity cues rather than required field names. Propose an update
+only when the active roster changes, an intake/phase barrier closes, a direction
+is parked, or the task ends. If absent, the task-scoped Explorer performs one
+bounded scan of its owned `local_research` paths and returns the entry proposal
+to Root; Explorer does not physically create or modify this continuity file.
 Continuity does not alter scientific ordering, source authority, read-only
-children or the Explorer single-writer rule.
+children, the Explorer L1 semantic-author rule or Root's physical-writer
+boundary.
 Do not add writer scripts, hashes, state machines, budgets or user gates to
 continuity.
 The continuity entry's mandatory human-readable Direction Action Map and its
@@ -170,7 +183,7 @@ park/reactivation semantics are defined by
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`; this reference adds no
 machine fields or acceptance role. Runtime/admission mechanics remain defined
 only in this reference, including the three-unit pool and event-driven or
-user-resumed continuation; there is no clock-driven scheduler or polling loop.
+Root-resumed continuation; there is no clock-driven scheduler or polling loop.
 
 ## Evidence-review mode
 
@@ -186,8 +199,10 @@ user-resumed continuation; there is no clock-driven scheduler or polling loop.
    claim, and map support, conflict, fidelity boundaries and uncovered evidence.
 5. **Targeted criticism.** Select only central, conflicting or high-consequence
    source claims and bind exact packet identities.
-6. **Evidence synthesis and stop.** Write one advisory evidence report. This
-   mode has no approach-family registry or additional research wave.
+6. **Evidence synthesis and stop.** Explorer L1 semantically authors one
+   advisory evidence report; the Research Artifact Writer physically writes
+   only its exact Explorer-approved ordinary/research bytes. This mode has no
+   approach-family registry or additional research wave.
 
 ## Algorithm-inspiration campaign
 
@@ -209,9 +224,11 @@ user-resumed continuation; there is no clock-driven scheduler or polling loop.
 4. **Absorption barrier.** Require one terminal `SOURCE_RESULT_PACKET` or exact
    operational failure for every assignment. Only source-grounded packets may
    support the absorption brief.
-5. **Absorption synthesis.** The Explorer writes a versioned
+5. **Absorption synthesis.** Explorer L1 semantically authors a versioned
    `SOURCE_ABSORPTION_BRIEF` with source results, mechanism primitives, transfer
-   boundaries, cross-paper connections, conflicts and unresolved opportunities.
+   boundaries, cross-paper connections, conflicts and unresolved opportunities;
+   the Research Artifact Writer physically writes only the exact
+   Explorer-approved ordinary/research bytes.
 6. **Innovation roster.** Derive exact adaptation, development, combination,
    refinement, split or dependency-challenge assignments from the brief. The
    first roster receives no peer packet or favored answer. Require one terminal
@@ -335,7 +352,7 @@ resource and C work is heavy/exclusive even if a superficial count is small.
 
 The attribution barrier is direction-local. Different directions' independent
 ordinary A/B treatments may run concurrently. By default a direction has at most
-one result-bearing treatment active, and its successor cannot be dispatched
+one result-bearing treatment active, and its next treatment cannot be dispatched
 until that predecessor is terminal and Explorer completes the direction's
 scientific intake. Same-direction parallelism is exceptional: Explorer must
 freeze one exact joint roster before any member starts, every design must be
@@ -347,19 +364,20 @@ already-started full. Explorer may cancel a not-yet-started roster item whose
 value has fallen, but never mutates a result-bearing full.
 
 Every concurrent treatment has distinct direction/treatment identity, canonical
-design, CPM ticket/worktree, source freeze and accepted commit, run, evidence,
+design/assignment, source freeze and accepted candidate revision, run, evidence,
 checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator
 receipt, readiness/technical-acceptance record and Explorer decision. Same-file
 writes, reused run roots, shared mutable checkpoints or trainer state, and
 mid-run cross-treatment result injection fail closed. OOM, process conflict or
 shared-path conflict affects only the treatment that encountered it. CPM may
-leave a not-yet-started ticket pending under CPU or memory pressure without changing
+leave a not-yet-started candidate treatment pending under CPU or memory pressure without changing
 scientific ordering. One engineering recovery that preserves every scientific
 literal is allowed before the result-bearing full starts; after it starts there
 is no silent retry.
 
-Explorer progress is event-driven or user-resumed. On a returned CPM result or
-user continuation event, restore the active roster, intake returned results
+Explorer progress is event-driven or Root-resumed. A persistent Explorer
+progress form is not part of this workflow. On a returned CPM result or Root
+continuation event, restore the active roster, intake returned results
 first, and consider any treatment whose exact predecessor/intake barrier is
 closed and whose admission permits start. No clock-driven activation, forced
 termination, dispatch quota, polling loop or scheduler is part of this workflow.
@@ -371,6 +389,6 @@ alignment, C/formal boundary or explicit-user trigger starts Pro; B completion o
 parallelism alone never does.
 
 Campaign phase dependencies remain ordered. Children
-cannot spawn, write, use Git, contact persistent tasks or access active HMASD
-state. There is no minimum-duration rule or forced large-agent target. Only the
+cannot spawn, write, use Git, contact sibling/other tasks or access active
+HMASD state. There is no minimum-duration rule or forced large-agent target. Only the
 user may expand the source/project authority boundary or initiate formal work.

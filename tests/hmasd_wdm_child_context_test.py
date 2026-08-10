@@ -61,7 +61,6 @@ def test_each_role_uses_a_semantic_task_model_and_conclusion_first_result() -> N
             "self-contained natural-language task model",
             "workflow_assignment_id",
             "owned_paths",
-            "wdm_session_workspace",
             "factual authority and scope anchors",
             "never define task meaning",
             "never define task meaning or completion",
@@ -116,18 +115,24 @@ def test_bounded_recovery_is_tailored_without_a_second_state_machine() -> None:
         assert required in reviewer
 
 
-def test_implementer_has_only_the_read_only_git_identity_exception() -> None:
+def test_children_are_leaves_and_return_to_the_wdm_parent() -> None:
     role = _normalized(_text(CHILDREN[1][1]))
-    assert "exactly `git rev-parse --show-toplevel`" in role
-    assert "sole permitted git observation" in role
-    for forbidden in ("git mutation", "stage", "commit", "push", "route cross-task messages"):
-        assert forbidden in role
+    for child_role, _ in ((CHILDREN[0][1], "auditor"), (CHILDREN[1][1], "implementer"), (CHILDREN[2][1], "reviewer")):
+        text = _normalized(_text(child_role))
+        assert "agent_tree_level=2" in text
+        assert "parent=workflow_design_manager" in text
+        for required in ("spawn_authority=none", "user_contact_authority=none", "cross_branch_transport=none"):
+            assert required in text
+        assert "return" in text and "parent" in text
+        assert "resolved_ticket_worktree_path" not in text
+        assert "scripts/hmasd_workspace_ticket.py" not in text
+    assert "git" in role
 
 
 def test_profiles_are_thin_and_keep_forked_history_independent() -> None:
     expected = {
         "auditor": ("gpt-5.6-luna", "high", "read-only"),
-        "implementer": ("gpt-5.6-luna", "xhigh", "danger-full-access"),
+        "implementer": ("gpt-5.6-luna", "xhigh", "workspace-write"),
         "reviewer": ("gpt-5.6-luna", "max", "read-only"),
     }
     for name, role_path, profile_path, _packet_name in CHILDREN:

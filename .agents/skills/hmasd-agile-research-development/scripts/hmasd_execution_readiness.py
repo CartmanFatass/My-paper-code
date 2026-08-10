@@ -65,7 +65,10 @@ def _git(repo: Path, *args: str) -> str:
 
 def _repo_root(start: Path | None = None) -> Path:
     start = (start or Path.cwd()).resolve()
-    return Path(_git(start, "rev-parse", "--show-toplevel")).resolve()
+    try:
+        return Path(_git(start, "rev-parse", "--show-toplevel")).resolve()
+    except ReadinessError as exc:
+        raise ReadinessError("execution readiness requires a Git repository") from exc
 
 
 def _repo_state(repo: Path) -> tuple[str, str]:
@@ -545,78 +548,6 @@ def check_receipt(receipt_path: Path) -> int:
     return 0
 
 
-def _code_pm_session(repo: Path) -> str:
-    role = (repo / ".agents/roles/CODE_PROJECT_MANAGER.md").read_text(encoding="utf-8")
-    matches = re.findall(r"(?m)^session_owner_id=([^\s]+)$", role)
-    if len(matches) != 1:
-        raise ReadinessError("Code PM role must contain exactly one session owner")
-    return matches[0]
-
-
-def _message_field(message: str, name: str) -> str | None:
-    match = re.search(rf"(?m)^{re.escape(name)}=(.*)$", message)
-    return match.group(1).strip() if match else None
-
-
-def _hook_feedback(reason: str, already_active: bool) -> dict[str, Any]:
-    if already_active:
-        return {"continue": False, "stopReason": "invalid_code_acceptance", "systemMessage": reason}
-    return {"decision": "block", "reason": reason + " Run the Skill script or return CODE_ACCEPTANCE_BLOCKED."}
-
-
-def hook_stop() -> int:
-    _configure_utf8_stdio()
-    try:
-        payload = json.load(sys.stdin)
-    except (json.JSONDecodeError, TypeError):
-        return 0
-    try:
-        repo = _repo_root()
-        session = _code_pm_session(repo)
-    except (ReadinessError, OSError):
-        return 0
-    if payload.get("session_id") != session:
-        return 0
-    message = payload.get("last_assistant_message") or ""
-    if not re.search(r"(?m)^CODE_ACCEPTED\s*$", message):
-        return 0
-    already_active = payload.get("stop_hook_active") is True
-    commit = _message_field(message, "commit")
-    exact_paths = _message_field(message, "exact_paths")
-    readiness = _message_field(message, "execution_readiness")
-    receipt_field = _message_field(message, "execution_readiness_receipt")
-    reason = _message_field(message, "execution_readiness_reason")
-    try:
-        current = _git(repo, "rev-parse", "HEAD")
-        if not commit or not COMMIT_RE.fullmatch(commit):
-            raise ReadinessError("CODE_ACCEPTED has no exact 40-character commit.")
-        if current != commit:
-            raise ReadinessError("CODE_ACCEPTED commit is not current HEAD.")
-        if not exact_paths:
-            raise ReadinessError("CODE_ACCEPTED has no exact_paths.")
-        if readiness == "not_triggered":
-            if not reason or reason in {"none", "not-triggered", "not_triggered"}:
-                raise ReadinessError("Untriggered execution readiness needs a bounded reason.")
-        elif readiness == "passed":
-            if not receipt_field:
-                raise ReadinessError("CODE_ACCEPTED does not name the exact readiness receipt")
-            receipt_path = Path(receipt_field).resolve()
-            receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
-            _validate_historical_receipt(receipt)
-            expected_receipt = _final_receipt_path(repo, commit, receipt["attempt_id"])
-            if receipt_path != expected_receipt:
-                raise ReadinessError("CODE_ACCEPTED receipt is not the finalized Git-private receipt")
-            if receipt.get("candidate_commit") != commit:
-                raise ReadinessError("receipt candidate identity does not match CODE_ACCEPTED")
-            if receipt.get("exact_paths") != [item for item in exact_paths.split("|") if item]:
-                raise ReadinessError("receipt exact_paths do not match CODE_ACCEPTED")
-        else:
-            raise ReadinessError("CODE_ACCEPTED has no passed execution_readiness state.")
-    except (ReadinessError, OSError, json.JSONDecodeError) as exc:
-        print(json.dumps(_hook_feedback(str(exc), already_active), ensure_ascii=False))
-    return 0
-
-
 def main() -> int:
     _configure_utf8_stdio()
     parser = argparse.ArgumentParser()
@@ -627,7 +558,6 @@ def main() -> int:
     finalize_parser.add_argument("--spec", type=Path, required=True)
     check_parser = subparsers.add_parser("check")
     check_parser.add_argument("--receipt", type=Path, required=True)
-    subparsers.add_parser("hook-stop")
     args = parser.parse_args()
     try:
         if args.command == "run":
@@ -636,7 +566,6 @@ def main() -> int:
             return finalize_spec(args.spec)
         if args.command == "check":
             return check_receipt(args.receipt)
-        return hook_stop()
     except ReadinessError as exc:
         print(f"HMASD_EXECUTION_READINESS_ERROR {exc}", file=sys.stderr)
         return 1

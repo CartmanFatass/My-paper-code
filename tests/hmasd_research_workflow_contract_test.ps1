@@ -12,10 +12,12 @@ $requiredSkills = @(
     'hmasd-agile-research-development',
     'hmasd-collaborative-workflow-design',
     'hmasd-explorer-project-validation',
+    'hmasd-explorer-mechanical',
     'hmasd-agentify-transport',
     'hmasd-independent-research-exploration',
     'hmasd-independent-research-pro-review',
-    'hmasd-workflow-change-audit') | Sort-Object
+    'hmasd-workflow-change-audit',
+    'hmasd-writing-agent-assignments') | Sort-Object
 foreach ($required in $requiredSkills) {
     if ($required -notin $skills) { throw "Missing routed workflow Skill: $required" }
 }
@@ -23,19 +25,22 @@ foreach ($required in $requiredSkills) {
 $roles = @(Get-ChildItem (Join-Path $repo '.agents/roles') -File -Filter '*.md' |
     Select-Object -ExpandProperty Name | Sort-Object)
 $expectedRoles = @(
-    'AGENTIFY_TRANSPORT_OPERATOR.md',
+    'CPM_AGENTIFY_TRANSPORT_OPERATOR.md',
     'CPM_MECHANICAL_OPERATOR.md',
     'CODE_SCOUT.md',
     'EXPERIMENT_OPERATOR.md',
     'EXTERNAL_PRO.md',
+    'EXPLORER_AGENTIFY_TRANSPORT_OPERATOR.md',
     'IMPLEMENTER.md',
     'CODE_PROJECT_MANAGER.md',
     'INDEPENDENT_RESEARCH_EXPLORER.md',
+    'RESEARCH_ARTIFACT_WRITER.md',
     'RESEARCH_CRITIC.md',
     'RESEARCH_INNOVATOR.md',
     'RESEARCH_PRINCIPLES_ANALYST.md',
     'RESEARCH_SCOUT.md',
     'REVIEWER.md',
+    'ROUTINE_IMPLEMENTER.md',
     'VERIFIER.md',
     'WORKFLOW_AUDITOR.md',
     'WORKFLOW_DESIGN_MANAGER.md',
@@ -44,6 +49,33 @@ $expectedRoles = @(
     'EXPLORER_MECHANICAL_OPERATOR.md') | Sort-Object
 if (Compare-Object $expectedRoles $roles) {
     throw "Unexpected active role set: $($roles -join ',')"
+}
+$profiles = @(Get-ChildItem (Join-Path $repo '.codex/agents') -File -Filter '*.toml' |
+    Select-Object -ExpandProperty Name | Sort-Object)
+$expectedProfiles = @(
+    'hmasd-code-project-manager.toml',
+    'hmasd-code-scout.toml',
+    'hmasd-cpm-agentify-transport.toml',
+    'hmasd-cpm-mechanical.toml',
+    'hmasd-experiment-operator.toml',
+    'hmasd-explorer-agentify-transport.toml',
+    'hmasd-explorer-mechanical.toml',
+    'hmasd-implementer-terra.toml',
+    'hmasd-implementer.toml',
+    'hmasd-independent-research-explorer.toml',
+    'hmasd-research-artifact-writer.toml',
+    'hmasd-research-critic.toml',
+    'hmasd-research-innovator.toml',
+    'hmasd-research-principles-analyst.toml',
+    'hmasd-research-scout.toml',
+    'hmasd-reviewer.toml',
+    'hmasd-verifier.toml',
+    'hmasd-workflow-auditor.toml',
+    'hmasd-workflow-design-manager.toml',
+    'hmasd-workflow-implementer.toml',
+    'hmasd-workflow-reviewer.toml') | Sort-Object
+if (Compare-Object $expectedProfiles $profiles) {
+    throw "Unexpected registered profile set: $($profiles -join ',')"
 }
 
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
@@ -83,11 +115,15 @@ $retiredExplorerValidationTestPath = Join-Path $repo 'tests/hmasd_explorer_proje
 $explorerValidationContractPath = Join-Path $repo 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
 $explorerValidationContract = Get-Content -Raw -LiteralPath $explorerValidationContractPath
 $explorerValidationContractNormalized = $explorerValidationContract -replace '\s+', ' '
-$agentifyTransportProfilePath = Join-Path $repo '.codex/agents/hmasd-agentify-transport.toml'
-if (-not (Test-Path -LiteralPath $agentifyTransportProfilePath -PathType Leaf)) {
-    throw 'Registered Agentify transport child profile is missing'
+$cpmAgentifyTransportProfilePath = Join-Path $repo '.codex/agents/hmasd-cpm-agentify-transport.toml'
+$explorerAgentifyTransportProfilePath = Join-Path $repo '.codex/agents/hmasd-explorer-agentify-transport.toml'
+foreach ($transportProfilePath in @($cpmAgentifyTransportProfilePath, $explorerAgentifyTransportProfilePath)) {
+    if (-not (Test-Path -LiteralPath $transportProfilePath -PathType Leaf)) {
+        throw "Registered parent-specific Agentify transport profile is missing: $transportProfilePath"
+    }
 }
-$agentifyTransportProfile = Get-Content -Raw -LiteralPath $agentifyTransportProfilePath
+$cpmAgentifyTransportProfile = Get-Content -Raw -LiteralPath $cpmAgentifyTransportProfilePath
+$explorerAgentifyTransportProfile = Get-Content -Raw -LiteralPath $explorerAgentifyTransportProfilePath
 $explorerMechanicalProfilePath = Join-Path $repo '.codex/agents/hmasd-explorer-mechanical.toml'
 $explorerMechanicalRolePath = Join-Path $repo '.agents/roles/EXPLORER_MECHANICAL_OPERATOR.md'
 $explorerMechanicalSkillPath = Join-Path $repo '.agents/skills/hmasd-explorer-mechanical/SKILL.md'
@@ -132,11 +168,11 @@ $directionBindingTerms = @(
     'explicit exclusion of sibling-direction generalization',
     'one requested action and its direct consumer',
     'completion evidence',
-    'CPM''s reverse result begins with its conclusion',
+    'CPM''s reverse result, returned through Root, begins with its conclusion',
     'mirrors that same primary direction or explicitly named direction set',
     'Codex-native message fallback carries the same binding',
     'preserves the original handoff/artifact',
-    'asks exactly one concrete semantic clarification',
+    'returns exactly one concrete semantic clarification',
     'duplicate decision records')
 
 if (-not (Test-Path -LiteralPath $explorerValidationSkillPath -PathType Leaf) -or
@@ -151,7 +187,9 @@ if ((Test-Path -LiteralPath $retiredExplorerValidationScriptPath) -or
 $independentResearchSkillNormalized = $independentResearchSkill -replace '\s+', ' '
 $independentReviewSkillNormalized = $independentReviewSkill -replace '\s+', ' '
 $independentResearchRoleNormalized = $independentResearchRole -replace '\s+', ' '
-$agentifyTransportProfileNormalized = $agentifyTransportProfile -replace '\s+', ' '
+$workflowOrchestrationSurfaces = "$workflowMapNormalized $independentResearchRoleNormalized $independentResearchSkillNormalized $explorerValidationContractNormalized"
+$cpmAgentifyTransportProfileNormalized = $cpmAgentifyTransportProfile -replace '\s+', ' '
+$agentifyTransportProfileNormalized = $explorerAgentifyTransportProfile -replace '\s+', ' '
 $agentifyTransportSkillPath = Join-Path $repo '.agents/skills/hmasd-agentify-transport/SKILL.md'
 if (-not (Test-Path -LiteralPath $agentifyTransportSkillPath -PathType Leaf)) {
     throw 'Agentify transport Skill is missing'
@@ -210,14 +248,14 @@ foreach ($entry in @(
     @($independentResearchRole, 'project_validation_semantic_acceptance_owner=external_pro'),
     @($independentResearchRole, 'project_validation_acceptance_review_request_and_intake=exclusive_for_explorer_origin'),
     @($independentResearchRole, 'project_validation_acceptance_review_mode=CODE_SCIENCE_ALIGNMENT_AUDIT'),
-    @($independentResearchRole, 'project_validation_acceptance_review_timing=after_cpm_technical_acceptance_push_and_remote_locator_return_when_named_pro_trigger'),
+    @($independentResearchRole, 'project_validation_acceptance_review_timing=after_root_applied_cpm_technical_acceptance_and_locator_return_when_named_pro_trigger'),
     @($independentResearchRole, 'project_validation_alignment_packet_effect=authoritative_scientific_semantic_acceptance'),
     @($codePmRole, 'explorer_treatment_substitution_authority=none'),
     @($codePmRole, 'explorer_task_instruction_intake=execute_named_treatment_without_extra_confirmation'),
     @($codePmRole, 'explorer_result_semantic_acceptance_owner=external_pro'),
     @($codePmRole, 'explorer_acceptance_review_request_authority=none'),
     @($codePmRole, 'explorer_result_remote_evidence=exact_pushed_commit_and_public_github_locators'),
-    @($codePmRole, 'explorer_acceptance_review_route=explorer_to_agentify_after_cpm_technical_acceptance'),
+    @($codePmRole, 'explorer_acceptance_review_route=explorer_to_hmasd-explorer-agentify-transport_after_cpm_technical_acceptance'),
     @($independentResearchRole, 'project_toy_compute_authority=none'),
     @($proRole, 'semantically sufficient public candidate brief'),
     @($proRoleNormalized, 'Code Project Manager archives the answer exactly and returns a conclusion-first, evidence-second brief through its outbound temporary handoff'),
@@ -230,8 +268,8 @@ foreach ($entry in @(
     @($explorerValidationContractNormalized, 'Explorer gives one clear instruction naming implementation, instance binding'),
     @($explorerValidationContractNormalized, 'without separate code or experiment permission fields'),
     @($explorerValidationContractNormalized, 'does not reject a handoff because of formatting or a missing object'),
-    @($explorerValidationContractNormalized, 'instead of creating a `BLOCKED` state'),
-    @($explorerValidationContractNormalized, 'External Pro uses the GitHub connection to inspect the exact pushed revision'),
+    @($explorerValidationContractNormalized, 'or creates a `BLOCKED` state'),
+    @($explorerValidationContractNormalized, 'External Pro uses the supplied repository/path locator and accepted revision'),
     @($explorerValidationContractNormalized, 'Explorer never substitutes its own acceptance'),
     @($explorerValidationContractNormalized, 'Ordinary B iteration may continue as advisory research without automatic Pro review'),
     @($proRole, 'cannot consume a formal iteration, update the CDC portfolio'),
@@ -256,7 +294,7 @@ foreach ($required in @(
     'information gain',
     'next discriminator',
     'A/B/C or named-Pro action',
-    'one canonical scientific decision record',
+    'exactly one advisory scientific decision proposal',
     'existing `local_research/` ownership',
     'Portfolio, index, README and continuity',
     'pointer, navigation',
@@ -291,7 +329,7 @@ foreach ($required in @(
 }
 foreach ($entry in @(
     @($independentResearchRole, 'runtime_authority=none'),
-    @($independentResearchRole, 'agentify_transport_child=hmasd-agentify-transport'),
+    @($independentResearchRole, 'agentify_transport_child=hmasd-explorer-agentify-transport'),
     @($independentResearchRole, 'agentify_transport_parent=independent_research_explorer'),
     @($independentResearchRole, 'agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT'),
     @($independentResearchRole, 'agentify_transport_assignment_fields=batch_path|results_path'),
@@ -299,13 +337,13 @@ foreach ($entry in @(
     @($independentResearchRole, 'agentify_transport_result_fields=status|results_path|error'),
     @($independentResearchRole, 'agentify_transport_terminal_status=COMPLETE|ERROR'),
     @($independentResearchRole, 'agentify_transport_wait_visibility=silent_until_terminal_native_final'),
-    @($independentResearchRole, 'root_explorer_state_retention=per_direction_compact_continuity_projection(direction_pointer|dependency|compact_returned_conclusion|cpm_readiness)|comparison_relevant_portfolio_evidence_and_relationship_edges'),
+    @($independentResearchRole, 'explorer_l1_state_retention=per_direction_compact_continuity_projection(direction_pointer|dependency|compact_returned_conclusion|cpm_readiness)|comparison_relevant_portfolio_evidence_and_relationship_edges'),
     @($independentResearchRole, 'independent_pro_review_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py'),
     @($independentResearchRole, 'independent_pro_review_result_guard_timing=after_terminal_before_read'),
     @($independentResearchRole, 'independent_pro_review_result_guard_failure=reject_actual_error_no_fallback'),
     @($independentResearchRole, 'independent_pro_review_transport_execution=registered_agentify_transport_child'),
     @($independentReviewSkillNormalized, 'provider|context_path|question_paths'),
-    @($independentResearchSkillNormalized, 'registered `hmasd-agentify-transport` child'),
+    @($independentResearchSkillNormalized, 'registered `hmasd-explorer-agentify-transport` child'),
     @($independentReviewSkillNormalized, 'fork_turns=none'),
     @($independentReviewSkillNormalized, 'AGENTIFY_REVIEW_BATCH_ASSIGNMENT'),
     @($independentReviewSkillNormalized, 'batch_path|results_path'),
@@ -317,7 +355,7 @@ foreach ($entry in @(
     @($independentReviewSkillNormalized, 'hmasd_agentify_result_path_guard.py'),
     @($independentReviewSkillNormalized, 'returned terminal anchor'),
     @($independentReviewSkillNormalized, 'do not infer a fallback path'),
-    @($independentReviewSkillNormalized, 'registered `hmasd-agentify-transport` child'),
+    @($independentReviewSkillNormalized, 'registered `hmasd-explorer-agentify-transport` child'),
     @($independentReviewSkillNormalized, 'AGENTIFY_REVIEW_BATCH_ASSIGNMENT'),
     @($independentReviewSkillNormalized, 'batch_path|results_path'),
     @($independentReviewSkillNormalized, 'silent while live'),
@@ -325,9 +363,12 @@ foreach ($entry in @(
     @($independentReviewSkillNormalized, 'status|results_path|error'),
     @($independentReviewSkillNormalized, 'terminal status `COMPLETE|ERROR`'),
     @($independentReviewSkillNormalized, 'no polling, progress handling or parent-task result relay'),
-    @($agentifyTransportProfileNormalized, 'name = "hmasd-agentify-transport"'),
+    @($agentifyTransportProfileNormalized, 'name = "hmasd-explorer-agentify-transport"'),
     @($agentifyTransportProfileNormalized, 'model = "gpt-5.6-luna"'),
-    @($agentifyTransportProfileNormalized, 'model_reasoning_effort = "medium"')) ) {
+    @($agentifyTransportProfileNormalized, 'model_reasoning_effort = "medium"'),
+    @($cpmAgentifyTransportProfileNormalized, 'name = "hmasd-cpm-agentify-transport"'),
+    @($cpmAgentifyTransportProfileNormalized, 'parent=code_project_manager'),
+    @($agentifyTransportProfileNormalized, 'parent=independent_research_explorer')) ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Explorer Agentify silent-child contract missing: $($entry[1])"
     }
@@ -374,7 +415,7 @@ foreach ($stale in @(
 $explorerMechanicalIntegrated = ($null -ne $explorerMechanicalProfile) -and
     ($null -ne $explorerMechanicalRole) -and
     ($null -ne $explorerMechanicalSkill) -and
-    $agents.Contains('hmasd-explorer-mechanical') -and
+    ($agents -replace '\s+', ' ').Contains("Explorer's research/mechanical leaves") -and
     $independentResearchRole.Contains('hmasd-explorer-mechanical') -and
     $independentResearchSkill.Contains('hmasd-explorer-mechanical') -and
     $parallelResearch.Contains('hmasd-explorer-mechanical') -and
@@ -426,42 +467,63 @@ if (-not $WorkflowDesignOnly) {
 foreach ($required in @(
     'document_kind=role_router',
     'all_workspace_agents_auto_load_this_file=true',
-    'project_history_in_router=forbidden',
-    'role_specific_procedure_in_router=forbidden',
-    'workflow_design_owner=workflow_design_manager',
-    'workflow_design_charter=WORKFLOW_DESIGN_MANAGER.md',
+    'topology=cli_root_depth_0|task_scoped_level1|task_scoped_level2_leaf',
+    'max_subagent_depth=2',
+    'root_user_interaction_authority=exclusive',
+    'root_cross_owner_relay_authority=exclusive',
+    'root_agent_tree_and_lifecycle_authority=exclusive',
+    'root_top_level_owned_path_freeze=exclusive',
+    'root_canonical_state_physical_write_authority=accepted_proposals_only',
+    'root_final_git_integration_authority=accepted_paths_only',
+    'root_semantic_owner_authority=none',
+    'root_domain_acceptance_authority=none',
     'docs/project/CURRENT_WORK.md',
     'docs/project/WORKFLOW_MAP.md',
-    'workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces',
-    'workflow_design_manager_workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces',
-    'workflow_design_manager_workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces',
-    'workflow_design_manager_git_authority=exclusive_for_workflow_control_plane_surfaces',
-    'persistent_session_workflow_design_authority=none',
-    'persistent_session_workflow_acceptance_authority=none',
-    'persistent_session_workflow_git_authority=none',
-    'workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace',
-    'workflow_child_parent=workflow_design_manager',
-    'workflow_child_acceptance_authority=none',
-    'session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md',
-    'workflow_design_manager_workflow_runtime_authority=none',
-    'workflow_design_manager_current_work_authority=public_index_and_own_workflow_control_plane_records_only',
-    'workflow_design_manager_git_authority=exclusive_for_workflow_control_plane_surfaces',
-    'workflow_design_manager_external_review_runtime_authority=none',
-    'workflow_design_manager_experiment_runtime_authority=none',
+    'workflow_design_manager_parent=root',
+    'workflow_design_manager_role_kind=registered_task_scoped_level1_orchestrator',
+    'workflow_design_manager_agent_tree_level=1',
+    'workflow_design_manager_workflow_design_authority=exclusive',
+    'workflow_design_manager_workflow_modification_authority=exclusive_via_assigned_L2',
+    'workflow_design_manager_workflow_acceptance_authority=exclusive',
+    'code_project_manager_parent=root',
+    'code_project_manager_role_kind=registered_task_scoped_level1_orchestrator',
+    'code_project_manager_agent_tree_level=1',
     'code_project_manager_code_authority=exclusive',
     'code_project_manager_technical_acceptance_authority=exclusive',
     'code_project_manager_runtime_authority=exclusive',
-    'code_project_manager_current_work_authority=exclusive',
-    'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
-    'code_project_manager_experiment_dispatch_and_result_routing=exclusive',
-    'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
+    'independent_research_explorer_parent=root',
+    'independent_research_explorer_role_kind=registered_task_scoped_level1_orchestrator',
+    'independent_research_explorer_agent_tree_level=1',
+    'independent_research_canonical_scientific_authority=none',
+    'independent_research_user_grant_authority=direct_user_in_explorer_task_only',
+    'level1_physical_write_authority=none',
+    'level1_canonical_state_write_authority=none',
+    'level1_git_authority=none',
+    'level1_user_contact_authority=none',
+    'level1_sibling_contact_authority=none',
+    'level1_return_route=return_to_root',
+    'level1_followup_route=followup_within_same_root_tree',
+    'level2_spawn_authority=none',
+    'level2_user_contact_authority=none',
+    'level2_cross_branch_transport=none',
+    'level2_canonical_state_write_authority=none',
+    'level2_git_authority=none',
     'hmasd-collaborative-workflow-design',
-    'workflow_change_skill=hmasd-workflow-change-audit',
-    'project_write_scope=current_checkout_plus_verified_ticket_worktree',
-    'external_workspace_access=read_only',
-    'cross_task_transport=codex_native_send_message_to_thread',
+    '.agents/skills/hmasd-workflow-change-audit/SKILL.md',
+    'project_write_scope=current_checkout_or_user_named_workspace',
+    'cross_owner_route=owner->Root->owner',
+    'cross_task_transport=return_to_root',
+    'cross_task_transport_legacy=forbidden',
+    'successor_route=fresh_Root_spawn_plus_canonical_reload',
+    'background_callback=forbidden',
+    'mandatory_ticket_identity=forbidden_for_subagent_authority',
+    'workflow_subagent_parallelism=parallel_first_with_dependency_order',
     'same_file_concurrent_writes=forbidden',
-    '.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md')) {
+    'isolated_worktree_identity=optional_provenance_only',
+    'ticket_worktree_precondition=none',
+    'raw_external_worktree_creation=forbidden',
+    'hmasd-cpm-agentify-transport',
+    'hmasd-explorer-agentify-transport')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing: $required" }
 }
 foreach ($retired in @(
@@ -474,28 +536,28 @@ foreach ($retired in @(
 }
 foreach ($required in @(
     '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md',
-    'hmasd-independent-research-exploration',
-    'hmasd-independent-research-pro-review')) {
+    '.agents/skills/',
+    'External Pro (non-agent, outside the CLI tree)')) {
     if (-not $agents.Contains($required)) { throw "AGENTS missing routed pointer: $required" }
 }
 foreach ($required in @(
-    'owns both independent-research direction reviews and methodology',
-    'Copy each named successful raw response',
+    'The Explorer owns both independent-research direction reviews and methodology audits',
+    'copy each named successful raw response',
     'Workflow Design Manager',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET')) {
-    if (-not $independentReviewSkill.Contains($required)) {
+    if (-not $independentReviewSkillNormalized.Contains($required)) {
         throw "Independent research Pro-review Skill missing: $required"
     }
 }
 foreach ($required in @(
-    'invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`',
-    'there is no separate persistent review-operator session',
+    'invoked only by the task-scoped Root-owned `INDEPENDENT_RESEARCH_EXPLORER` L1',
+    'there is no separate review-operator task or manager-session continuity',
     'local_research/pro_reviews/<review-id>/',
     'PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW',
     'PRO_ADVERSARIAL_SCIENTIFIC_REVIEW',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
-    'Copy each named successful raw response')) {
-    if (-not $independentReviewSkill.Contains($required)) {
+    'copy each named successful raw response')) {
+    if (-not $independentReviewSkillNormalized.Contains($required)) {
         throw "Independent research Pro-review Skill missing direct Explorer contract: $required"
     }
 }
@@ -567,21 +629,22 @@ foreach ($staleRegistration in @(
 foreach ($required in @(
     'role=independent_research_explorer',
     'model=gpt-5.6-sol',
-    'reasoning_effort=ultra',
+    'reasoning_effort=max',
     'canonical_scientific_authority=none',
     'research_state_change_authority=direct_user_in_explorer_task_only',
     'wdm_cpm_scientific_command_effect=none',
     'external_pro_packet_effect=advisory_input_under_user_authorized_workflow',
-    'write_scope=local_research_including_explorer_owned_pro_reviews|temp/handoffs/explorer_to_code_manager/',
+    'write_scope=none_at_L1',
     'public_handoff_outbound=temp/handoffs/explorer_to_code_manager/',
     'public_handoff_inbound_read=temp/handoffs/code_manager_to_explorer/',
     'public_handoff_git_authority=none',
     'public_handoff_admission=semantic_judgment_no_mandatory_schema',
     'project_validation_instruction_authority=authorize_cpm_named_treatment_execution',
-    'current_work_read=read_only_as_needed_for_project_validation',
-    'local_research_single_writer=true',
-    'local_research_write_tool=apply_patch_only',
+    'current_work_read=read_only_as_needed_for_named_assignment',
+    'local_research_single_writer=research_artifact_writer_L2_for_ordinary_research_or_outbound_temporary_bytes|root_for_continuity',
+    'local_research_write_tool=delegated_L2_or_root_proposal',
     'local_research_shell_mutation=forbidden',
+    'project_validation_read_authority=project_wide_read_only_as_needed',
     'logical_assignment_count=derived_from_exact_work_roster',
     'runtime_concurrency=three_unit_cpm_capacity_pool',
     'resource_consuming_experiment_action=capacity_controlled_per_direction',
@@ -591,7 +654,7 @@ foreach ($required in @(
     'read_only_science_lane_capacity=independent_of_cpm_pool_by_default',
     'science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only',
     'cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict',
-    'persistent_explorer_progress=event_driven_or_user_resumed',
+    'task_tree_explorer_progress=event_driven_or_root_resumed',
     'global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence',
     'per_direction_result_bearing_default=one_active',
     'same_direction_parallelism=exact_frozen_joint_roster_only',
@@ -611,8 +674,8 @@ foreach ($required in @(
     'methodology_reference=research-methodology.md_required_for_C_or_named_science_review_trigger',
     'research_child_dispatch=registered_child_type|fork_turns=none|self_contained_natural_language_assignment',
     'research_child_assignment_context=research_purpose|exact_question|named_sources_and_prerequisite_packets|protected_assumptions_and_independence|exclusions|permitted_local_judgment|completion_meaning',
-    'cross_task_transport=codex_native_send_message_to_thread',
-    'cross_task_target=current_thread_id_from_user_or_native_task_context',
+    'cross_task_transport=return_to_root',
+    'cross_task_target=root_task_context',
     'cross_task_model_and_thinking_overrides=omit',
     'independent_pro_direction_packet_effect=advisory_revision_only',
     'independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:',
@@ -624,8 +687,8 @@ foreach ($required in @(
     'independent_pro_constructive_adversarial_barrier=required',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'Only that new version may support a',
-    'research architect, portfolio integrator and only')) {
-    if (-not $independentResearchRole.Contains($required)) {
+    'research architect and portfolio integrator for advisory research outside the formal HMASD workflow')) {
+    if (-not $independentResearchRoleNormalized.Contains($required)) {
         throw "Independent Research Explorer role missing: $required"
     }
 }
@@ -652,9 +715,9 @@ foreach ($required in @(
     'one clear, bounded, decision-relevant question',
     'expected information gain exceeds dispatch and synthesis cost',
     'no code, runtime, write, technical acceptance or formal scientific acceptance',
-    'If evidence is sufficient and the next step is cheap and reversible, Explorer decides directly.',
+    'If evidence is sufficient and the next step is cheap and reversible, Explorer L1 decides directly.',
     'The child result is consultation only',
-    'Explorer remains the portfolio integrator and writes exactly one advisory local-research scientific decision',
+    'Explorer L1 remains the portfolio integrator and sole semantic local-research intake and decision owner',
     'First-round children see neither peer answers nor a favored answer',
     'completion order is not evidence priority',
     'disagreement is not voting',
@@ -677,7 +740,7 @@ foreach ($required in @(
     'Canonical campaign rosters, ordered barriers and single-writer authority remain unchanged.',
     'best-matching registered read-only research child',
     'For each direction, the compact continuity projection contains the direction pointer, exact dependency, compact returned conclusion and CPM readiness.',
-    'Separately, the root retains and reads Explorer-owned comparison-relevant portfolio evidence and relationship edges needed for relative information value, cross-direction dependencies/conflicts/combinations, portfolio ordering/readiness and the sole Explorer-owned advisory portfolio decision.')) {
+    'The Explorer L1 itself compares directions by relative information value, cross-direction dependencies, conflicts and combinations, portfolio ordering and readiness, and makes the sole Explorer-owned advisory portfolio decision.')) {
     if (-not $adaptiveSkillNormalized.Contains($required)) {
         throw "Independent research adaptive Skill contract missing: $required"
     }
@@ -691,9 +754,9 @@ foreach ($required in @(
     'adaptive_singleton_global_barrier=none',
     'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
     'adaptive_first_round_peer_reading=forbidden',
-    'There is no fixed adaptive count, concurrency, quorum, every-B panel, automatic-Pro path or persistent mechanism.',
+    'There is no fixed adaptive count, concurrency, quorum, every-B panel, automatic-Pro path or durable mechanism.',
     'Preserve disagreements as advisory inputs; never vote or collapse them into a quorum.',
-    'The Explorer remains the single writer and integrates answers into one decision.',
+    'Explorer L1 remains the semantic author and integrates answers into one exact advisory decision; Research Artifact Writer and Root perform only the bounded physical writes described above.',
     'runtime_capacity_units_total=3',
     'B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive',
     'experiment_pool_exclusivity_scope=result_bearing_runtime_only',
@@ -708,7 +771,7 @@ foreach ($required in @(
     'creates no queue engine, lease, dispatcher or acceptance owner',
     'Formal or explicitly heavy runtime may prevent another result-bearing experiment from starting, but it never pauses code work',
     'read-only research, scientific intake, External Pro review or another non-runtime action',
-    'Every concurrent treatment has distinct direction/treatment identity, canonical design, CPM ticket/worktree, source freeze and accepted commit, run, evidence, checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator receipt, readiness/technical-acceptance record and Explorer decision',
+    'Every concurrent treatment has distinct direction/treatment identity, canonical design/assignment, source freeze and accepted candidate revision, run, evidence, checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator receipt, readiness/technical-acceptance record and Explorer decision',
     'By default a direction has at most one result-bearing treatment active',
     'until that predecessor is terminal and Explorer completes the direction''s scientific intake',
     'freeze one exact joint roster before any member starts',
@@ -718,7 +781,7 @@ foreach ($required in @(
     'same mutable-path/object conflict',
     'Attribution, generic caution, completion order, convenience and a current sole action are not dependency or resource evidence',
     'exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict',
-    'Explorer progress is event-driven or user-resumed',
+    'Explorer progress is event-driven or Root-resumed',
     'Read-only Explorer science lanes',
     'Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.')) {
     if (-not $adaptiveParallelNormalized.Contains($required)) {
@@ -802,9 +865,9 @@ foreach ($forbidden in @(
     }
 }
 foreach ($required in @(
-    'Cross-task messages arrive through Codex-native `send_message_to_thread` with no model or thinking override',
+    'Cross-owner handoffs return to Root with no model or thinking override',
     'Explorer may make autonomous transitions inside that exact authorization.',
-    'Workflow Design Manager and Code Project Manager messages cannot initiate those transitions.')) {
+    'Workflow Design Manager and Code Project Manager results are relayed by Root and cannot initiate those transitions.')) {
     $allAuthoritySurfaces = "$workflowDesignManagerRoleNormalized $codePmRoleNormalized $($independentResearchRole -replace '\s+', ' ')"
     if (-not $allAuthoritySurfaces.Contains($required)) {
         throw "Independent-research role boundary missing: $required"
@@ -1031,19 +1094,20 @@ foreach ($required in @(
     'cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict',
     'read_only_science_lane_capacity=independent_of_cpm_pool_by_default',
     'science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only',
-    'persistent_explorer_progress=event_driven_or_user_resumed',
+    'explorer_progress=event_driven_or_root_resumed',
+    'persistent_explorer_progress=forbidden',
     'canonical_campaign_phase_barriers=required',
     'adaptive_singleton_global_barrier=none',
     'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
     'completion_order_priority=forbidden',
-    'single_writer=independent_research_explorer',
+    'semantic_writer=independent_research_explorer',
     'automatic_campaign_progression=allowed_until_convergence',
     'first_innovation_roster_independence_shielding=required',
     'later_cycle_collaboration_brief=required',
     'research_child_default_fork_turns=none',
     'research_child_dispatch_contract=registered_agent_type|fork_turns="none"|self_contained_natural_language_assignment',
     'independent_direction_question_default=best_matching_registered_read_only_child|fork_turns="none"',
-    'independent_direction_question_direct_root_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task',
+    'independent_direction_question_direct_explorer_l1_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task',
     'cpm_accepted_result_interpretation=optional_direction_specific_read_only_child|technical_acceptance_not_repeated',
     'parent_conversation_history=background_only_not_task_authority',
     'SOURCE_RESULT_PACKET',
@@ -1180,7 +1244,7 @@ foreach ($surface in @($agents, $codePmRole, $workflowDesignManagerRole, $indepe
 foreach ($required in @(
     'scientific_authority=none',
     'formal_compute_authority=user_only',
-    '.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md',
+    '.agents/roles/CPM_AGENTIFY_TRANSPORT_OPERATOR.md',
     '.agents/skills/hmasd-agentify-transport/SKILL.md',
     'CPM preserves conversation meaning and performs mechanical intake.')) {
     if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
@@ -1218,17 +1282,26 @@ if ($agileNormalized.Contains('External Review Operator') -or
     throw 'Agile Skill retains a stale or ambiguous review route'
 }
 if (-not $agileNormalized.Contains('CODE_SCIENCE_ALIGNMENT_AUDIT') -or
-    -not $agileNormalized.Contains('Agentify Transport Operator')) {
-    throw 'Agile Skill does not route the code-science audit through Agentify transport'
+    -not $agileNormalized.Contains('hmasd-cpm-agentify-transport')) {
+    throw 'Agile Skill does not route the code-science audit through the CPM-specific Agentify transport'
 }
-foreach ($surface in @($codePmRole, $agile)) {
-    foreach ($required in @(
-        'scripts/hmasd_workspace_ticket.py provision',
-        'C:/worktrees/HMASD',
-        'Raw external `git worktree`')) {
-        if (-not $surface.Contains($required)) {
-            throw "Worktree provisioning contract missing: $required"
-        }
+foreach ($required in @(
+    'mandatory_ticket_identity=forbidden_for_subagent_authority',
+    'isolated_worktree_identity=optional_provenance_only',
+    'raw_external_worktree_creation=forbidden',
+    'root_final_git_integration_authority=accepted_paths_only')) {
+    if (-not $agents.Contains($required)) {
+        throw "Root-first no-ticket/optional-provenance admission contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'ticket_identity=not_required',
+    'worktree_identity=not_required',
+    'prepare_integrate_identity=forbidden',
+    'finalize_integrate_identity=forbidden',
+    'ticket_finalize_integrate=forbidden_as_identity_or_precondition')) {
+    if (-not $codePmRole.Contains($required)) {
+        throw "CPM no-ticket identity contract missing: $required"
     }
 }
 if ($assertionNormalized.Contains('Research Operations Manager') -or
@@ -1282,8 +1355,15 @@ if (-not (Test-Path -LiteralPath (Join-Path $repo $header['legacy_snapshot']) -P
 }
 foreach ($id in @($header['session_record_ids'].Split('|') | Where-Object { $_ })) {
     $record = Read-FencedRecord "docs/project/current-work/sessions/$id.md" "CURRENT_WORK session $id"
-    if ($record['document_kind'] -ne 'current_work_session' -or $record['session_owner_role'] -ne $id) {
-        throw "CURRENT_WORK session identity mismatch: $id"
+    $ownerIdentity = if ($record.ContainsKey('owner_role')) {
+        $record['owner_role']
+    } elseif ($record.ContainsKey('session_owner_role')) {
+        $record['session_owner_role']
+    } else {
+        $null
+    }
+    if ($record['document_kind'] -ne 'current_work_session' -or $ownerIdentity -ne $id) {
+        throw "CURRENT_WORK owner identity mismatch: $id"
     }
 }
 $common = @{}
@@ -1323,10 +1403,9 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'role=code_project_manager',
-    'role_kind=persistent_project_coordination_code_runtime_and_acceptance_task',
+    'role_kind=registered_task_scoped_level1_orchestrator',
     'code_authority=exclusive',
     'runtime_authority=exclusive',
-    'current_work_authority=exclusive_for_project_operational_records',
     'formal_external_review_request_and_intake_authority=exclusive',
     'experiment_dispatch_and_result_routing=exclusive',
     'mechanical_result_acceptance=exclusive',
@@ -1334,10 +1413,10 @@ foreach ($required in @(
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
     'experiment_child=hmasd-experiment-operator',
-    'cross_task_transport=codex_native_send_message_to_thread',
-    'cross_task_target=current_thread_id_from_user_or_native_task_context',
+    'parent=root',
+    'agent_tree_level=1',
+    'return_to_root',
     'cross_task_model_and_thinking_overrides=omit',
-    'passing no model or thinking override',
     'research_stage=EXPLORATION|FORMALIZATION',
     'code_change_shape=coherent_module_responsibility_with_focused_evidence',
     'shared_abstraction_justification=ownership_or_multiple_live_callers',
@@ -1370,13 +1449,13 @@ foreach ($surface in @($agents, $codePmRole, $agile)) {
 }
 foreach ($required in @(
     'role=workflow_design_manager',
-    'role_kind=dedicated_persistent_central_workflow_design_authority_task',
+    'role_kind=registered_task_scoped_level1_orchestrator',
     'workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces',
     'workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces',
     'workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces',
-    'workflow_git_authority=exclusive_for_workflow_control_plane_surfaces',
+    'workflow_git_authority=none',
     'public_workflow_session_record=docs/project/current-work/sessions/workflow_design_manager.md',
-    'session_workspace=docs/session-workspaces/workflow_design_manager|temp/sessions/workflow_design_manager',
+    'session_workspace=task_scoped_assignment_workspace|temp/sessions/workflow_design_manager',
     'workflow_runtime_authority=none',
     'current_work_authority=public_index_and_own_workflow_control_plane_records_only',
     'external_review_runtime_authority=none',
@@ -1387,10 +1466,10 @@ foreach ($required in @(
     'independent_research_cross_task_output=control_plane_reload_or_mechanical_receipt_only',
     'code_authority=none',
     'code_acceptance_authority=none',
-    'cross_task_transport=codex_native_send_message_to_thread',
-    'cross_task_target=current_thread_id_from_user_or_native_task_context',
-    'cross_task_model_and_thinking_overrides=omit',
-    'not make WDM a code, runtime, scientific or per-operation approval gate',
+    'parent=root',
+    'agent_tree_level=1',
+    'return_to_root',
+    'This ownership does not make Root a workflow-design or per-operation approval gate.',
     'workflow_collaboration_skill=hmasd-collaborative-workflow-design',
     'workflow_collaboration_scope=all_workflow_control_plane_mutations',
     'workflow_collaboration_runtime_authority=none',
@@ -1421,16 +1500,15 @@ foreach ($required in @(
     'role=code_project_manager',
     'formal_external_review_request_and_intake_authority=exclusive',
     'runtime_authority=exclusive',
-    'current_work_authority=exclusive',
+    'parent=root',
+    'agent_tree_level=1',
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
     'formal_review_transport=agentify_file_batch_result',
     'AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
     'AGENTIFY_REVIEW_BATCH_RESULT',
     'experiment_child=hmasd-experiment-operator',
-    'cross_task_transport=codex_native_send_message_to_thread',
-    'cross_task_target=current_thread_id_from_user_or_native_task_context',
-    'cross_task_model_and_thinking_overrides=omit',
+    'return_to_root',
     'Workflow Design Manager')) {
     if (-not $codePmRole.Contains($required)) {
         throw "Code Project Manager role missing: $required"
@@ -1470,7 +1548,7 @@ foreach ($required in @(
     if (-not $agile.Contains($required)) { throw "Agile Skill missing complexity rule: $required" }
 }
 foreach ($required in @(
-    'Workflow Design Manager is the sole workflow design, modification, acceptance',
+    'Workflow Design Manager is the sole workflow design, modification and acceptance authority',
     'This Skill grants no science, code, code acceptance, runtime or project-state authority.',
     'workflow_mechanical_invariant_scope=irreversible_and_high_cost_actions_only',
     'workflow_retryable_failure_mechanism=forbidden_use_one_line_runtime_checklist',
@@ -1503,14 +1581,14 @@ foreach ($required in @(
     'parallel reviewers are limited to genuinely independent review questions',
     'Their authority and assignment meaning remain with their Role',
     'Stable execution orientation is in',
-    'generic workflow-change requests remain on the subagent route',
-    'stable assignment dependency is',
-    'This is context and evidence direction, not a state machine, queue or admission gate',
-    'A Reviewer or Auditor reports a conflict',
-    'Detailed procedures do',
-    'Role-based successor continuity',
-    'Successor brief storage and reload semantics live in',
-    'Owner roles and stable outputs',
+    'every workflow-file mutation remains on the registered L2 subagent route',
+    'workspace and fresh-Root boundaries remain with `docs/project/SESSION_WORKSPACE_CONTRACT.md`',
+    'the log is evidence, not a scheduler, approval state or global blocker',
+    'Their advice cannot create a second pass.',
+    'This Skill retains only the implementation budgets, focused checks, review and Root reload boundary below.',
+    'A later CLI invocation starts a fresh Root/L1 tree and reloads canonical files',
+    'A durable restart handoff is written only on explicit user request',
+    'For every role, Skill or profile change, inspect the owned outcome',
     'Maintenance is event-triggered only')) {
     $workflowDelegationSurface = "$workflowAuditNormalized $workflowMapNormalized $workflowDesignManagerRoleNormalized"
     if (-not (($workflowDelegationSurface -replace '\s+', ' ').Contains($required))) {
@@ -1535,7 +1613,7 @@ foreach ($required in @(
     }
 }
 
-# Persistent Explorer/CPM orchestration is an orientation edge. Assert only
+# Task-tree Explorer/CPM orchestration is an orientation edge. Assert only
 # the compact ownership boundary here; detailed behavior remains in owner
 # Roles and Skills.
 foreach ($required in @(
@@ -1543,14 +1621,14 @@ foreach ($required in @(
     'decompose work and delegate bounded detail',
     'synthesize results, retain owner decisions',
     'continue unrelated safe work while children run',
-    'root Explorer owns cross-direction advisory portfolio comparison',
+    'Explorer L1 owns decomposition, selection, dependency/concurrency, science synthesis and continuity semantics, cross-direction comparison',
     'CPM retains architecture, runtime admission, integration and technical acceptance',
     'Explorer outputs remain advisory portfolio/local-research comparisons, intakes and decisions',
     'Formal/project canonical science remains with the user/External Pro contract',
     'Exact assignment, child-lane, waiting and recovery mechanics remain in the owner Roles and Skills',
-    'direction-local handoff boundary is distinct from the root Explorer',
+    'children provide bounded answers only and never replace Explorer L1''s cross-direction comparison',
     'without authorizing portfolio preload')) {
-    if (-not $workflowMapNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+    if (-not $workflowOrchestrationSurfaces.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
         throw "Workflow orchestrator orientation missing: $required"
     }
 }
@@ -1590,23 +1668,36 @@ foreach ($forbiddenPattern in @(
 foreach ($required in @(
     'document_kind=session_workspace_contract',
     'workflow_child_parent=workflow_design_manager',
-    'docs/session-workspaces/<role_id>/',
-    'temp/sessions/<role_id>/',
+    'durable_workspace_root=docs/session-workspaces/<role_id>/',
+    'temporary_workspace_root=temp/sessions/<role_id>/',
+    'compatibility_path_semantics=stable_role_locator_not_live_session_thread_or_admission_identity',
+    'task_scope=fresh_cli_root_task|exact_assignment',
+    'child_assignment_brief=temp/sessions/<parent_role>/assignments/<assignment_id>.md',
+    'child_assignment_format=self_contained_natural_language_not_schema_admission',
+    'child_forked_context=background_only',
     'workflow_assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace',
-    'workflow_successor_rotation=integrated_batch_completion',
-    'workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
+    'workflow_assignment_identity_semantics=scope_anchor_only_not_task_meaning_or_completion',
+    'workflow_root_reload=fresh_root_task_canonical_reload',
+    'workflow_root_reload_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
     'workflow_thread_registry=forbidden',
-    'docs/project/current-work/common/<record-id>.md',
-    'docs/project/current-work/sessions/<role_id>.md',
     'same_file_concurrent_writes=forbidden',
+    'public_current_work_partition_status=active_index_and_partitions',
+    'public_current_work_index=docs/project/CURRENT_WORK.md',
+    'public_current_work_index_owner=workflow_design_manager',
+    'docs/project/current-work/common/<record-id>.md',
+    'workspace_admission=fresh_cli_root_with_exact_assignment_owned_paths',
+    'workspace_identity_precondition=none',
+    'authoritative_write_boundary=assignment_exact_owned_paths|root_accepted_proposal|root_git_integration',
+    'hooks={}|disabled_non_authoritative_never_enabled_trusted_or_invoked',
+    'agentify_transport_workspace_code_project_manager=temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/',
+    'agentify_transport_workspace_independent_research_explorer=temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/',
+    'agentify_transport_parent_wdm=forbidden',
     'docs/project/handoffs/README.md',
     'temp/handoffs/',
     'assignment-specific direction/treatment handoff files',
     'never share a writable file',
     'does not allocate runtime capacity or establish scientific priority',
     'workspace_boundary_guard=fail_closed_for_recognized_pretooluse_cases',
-    'authoritative_write_boundary=tool_os_sandbox|verified_ticket_identity|git_visible_checks',
-    'workspace_ticket_retirement=registered_clean_detached_worktree_only',
     'Formats and suggested sections aid understanding but never become admission gates',
     'It is never staged, committed or pushed')) {
     if (-not $sessionWorkspaceContractNormalized.Contains($required)) { throw "Session workspace contract missing: $required" }
@@ -1655,11 +1746,11 @@ foreach ($stale in @(
     }
 }
 foreach ($required in @(
-    'scripts/hmasd_workspace_ticket.py retire',
-    'Retirement never uses force or discards Git-visible work',
-    'fails closed for recognized mutation forms',
-    'bounded syntactic preflight')) {
-    if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Skill missing: $required" }
+    'Root owns physical application, lifecycle and Git mechanics',
+    'no external workspace identity precondition',
+    'this Skill does not promise a current commit, push or external workspace cleanup',
+    'No Hook Stop route is part of this workflow')) {
+    if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Root-first contract missing: $required" }
 }
 foreach ($required in @(
     'workflow_decision_question_condition=changes_named_plan_field',
@@ -1699,8 +1790,8 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'workflow_successor_rotation=integrated_batch_completion',
-    'workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
+    'workflow_root_reload=fresh_root_task_canonical_reload',
+    'workflow_root_reload_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
     'workflow_thread_registry=forbidden')) {
     if (-not $sessionWorkspaceContractNormalized.Contains($required)) {
         throw "Session workspace contract missing successor boundary: $required"

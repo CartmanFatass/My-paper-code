@@ -1,6 +1,7 @@
+"""Proof-sized, identity-neutral contracts for the global PreToolUse guard."""
+
 from __future__ import annotations
 
-import argparse
 import json
 import subprocess
 import sys
@@ -9,51 +10,41 @@ from pathlib import Path
 import pytest
 
 
-REPO = Path(__file__).resolve().parents[1]
-SCRIPT = REPO / "scripts" / "hmasd_workspace_boundary_guard.py"
-sys.path.insert(0, str(REPO / "scripts"))
-import hmasd_workspace_boundary_guard as guard  # noqa: E402
-import hmasd_workspace_ticket as ticketing  # noqa: E402
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / "scripts" / "hmasd_workspace_boundary_guard.py"
 
 
-def git(root: Path, *args: str) -> str:
-    completed = subprocess.run(
-        ["git", "-C", str(root), *args],
-        check=True,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-    )
-    return completed.stdout.strip()
+def workspace(tmp_path: Path) -> Path:
+    """Create a Gitless fixture with the stable project-root markers."""
 
-
-def repository(tmp_path: Path) -> tuple[Path, str]:
-    repo = tmp_path / "repo"
-    repo.mkdir()
-    git(repo, "init")
-    git(repo, "config", "user.name", "HMASD Guard Test")
-    git(repo, "config", "user.email", "guard-test@example.invalid")
-    (repo / "seed.txt").write_text("seed\n", encoding="utf-8")
-    git(repo, "add", "seed.txt")
-    git(repo, "commit", "-m", "seed")
-    return repo, git(repo, "rev-parse", "HEAD")
+    root = tmp_path / "workspace"
+    (root / ".codex").mkdir(parents=True)
+    (root / ".codex" / "config.toml").write_text("[features]\nmulti_agent_v2 = true\n", encoding="utf-8")
+    (root / "AGENTS.md").write_text("# fixture root\n", encoding="utf-8")
+    (root / "inside.txt").write_text("seed\n", encoding="utf-8")
+    return root
 
 
 def invoke(
-    repo: Path,
+    root: Path,
     tool: str,
     tool_input: object,
     *,
-    session_id: str = "guard-test",
-    cwd: Path | None = None,
+    session_id: str = "session-a",
+    agent_type: str | None = None,
+    agent_id: str | None = None,
 ) -> dict[str, object] | None:
-    payload = {
+    payload: dict[str, object] = {
         "session_id": session_id,
-        "cwd": str(cwd or repo),
+        "cwd": str(root),
         "hook_event_name": "PreToolUse",
         "tool_name": tool,
         "tool_input": tool_input,
     }
+    if agent_type is not None:
+        payload["agent_type"] = agent_type
+    if agent_id is not None:
+        payload["agent_id"] = agent_id
     result = subprocess.run(
         [sys.executable, str(SCRIPT)],
         input=json.dumps(payload),
@@ -66,439 +57,120 @@ def invoke(
     return json.loads(result.stdout) if result.stdout.strip() else None
 
 
-def assert_denied(payload: dict[str, object] | None, fragment: str) -> None:
+def assert_denied(payload: dict[str, object] | None, fragment: str | None = None) -> None:
     assert payload is not None
-    output = payload["hookSpecificOutput"]
+    output = payload.get("hookSpecificOutput")
     assert isinstance(output, dict)
-    assert output["permissionDecision"] == "deny"
-    assert fragment in str(output["permissionDecisionReason"])
+    assert output.get("hookEventName") == "PreToolUse"
+    assert output.get("permissionDecision") == "deny"
+    reason = output.get("permissionDecisionReason")
+    assert isinstance(reason, str)
+    assert reason.startswith("HMASD_WORKSPACE_BOUNDARY_DENY ")
+    if fragment:
+        assert fragment.lower() in reason.lower()
 
 
-def test_main_checkout_allows_reads_and_internal_writes_but_denies_external_writes(
-    tmp_path: Path,
-) -> None:
-    repo, _ = repository(tmp_path)
+def test_gitless_stable_markers_allow_reads_and_in_scope_writes(tmp_path: Path) -> None:
+    root = workspace(tmp_path)
     outside = tmp_path / "outside.txt"
-    assert invoke(repo, "shell_command", {"command": f'Get-Content "{outside}"'}) is None
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f'Set-Content -LiteralPath "{repo / "inside.txt"}" -Value ok'},
-        )
-        is None
-    )
+    assert invoke(root, "Bash", {"command": "Get-Content AGENTS.md"}) is None
+    assert invoke(root, "Bash", {"command": f'Set-Content -LiteralPath "{root / "new.txt"}" -Value ok'}) is None
     assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f'Set-Content -LiteralPath "{outside}" -Value blocked'},
-        ),
+        invoke(root, "Bash", {"command": f'Set-Content -LiteralPath "{outside}" -Value blocked'}),
         "outside the writable scope",
     )
-    assert not outside.exists()
+
+
+def test_apply_patch_uses_canonical_tool_input_command_and_normalizes_targets(tmp_path: Path) -> None:
+    root = workspace(tmp_path)
+    inside = "*** Begin Patch\n*** Add File: patch-note.md\n*** End Patch"
+    outside = "*** Begin Patch\n*** Add File: " + str(tmp_path / "outside.md") + "\n*** End Patch"
+    assert invoke(root, "apply_patch", {"command": inside}) is None
+    assert_denied(invoke(root, "apply_patch", {"command": outside}), "outside the writable scope")
+
+
+def test_nearest_marker_ancestor_controls_a_child_working_directory(tmp_path: Path) -> None:
+    root = workspace(tmp_path)
+    child = root / "nested"
+    child.mkdir()
+    assert invoke(child, "Bash", {"command": f'Set-Content -LiteralPath "{child / "new.txt"}" -Value ok'}) is None
+
+
+def test_identity_fields_do_not_change_global_policy(tmp_path: Path) -> None:
+    root = workspace(tmp_path)
+    command = f'Set-Content -LiteralPath "{tmp_path / "outside.txt"}" -Value blocked'
+    first = invoke(root, "Bash", {"command": command}, session_id="one", agent_type="manager", agent_id="a")
+    second = invoke(root, "Bash", {"command": command}, session_id="two", agent_type="leaf", agent_id="b")
+    assert_denied(first, "outside the writable scope")
+    assert_denied(second, "outside the writable scope")
+    assert first == second
 
 
 @pytest.mark.parametrize(
-    "command",
+    "command,fragment",
     (
-        r"subst X: C:\repo",
-        r"New-PSDrive -Name X -PSProvider FileSystem -Root C:\repo",
-        r"git worktree add C:\wtp HEAD",
-        r"git worktree remove --force C:\wtp",
-        r"git worktree prune",
-        r"New-Item -ItemType Junction -Path C:\wtp -Target C:\repo",
-        r"New-Item -ItemType Directory -Path C:\wtp_tmp",
-        r"Set-Content -Path \\server\share\outside.txt -Value blocked",
+        (r"subst X: C:\workspace", "boundary"),
+        (r"New-PSDrive -Name X -PSProvider FileSystem -Root C:\workspace", "boundary"),
+        (r"New-Item -ItemType Junction -Path C:\alias -Target C:\workspace", "boundary"),
+        (r"Remove-Item -LiteralPath . -Recurse -Force", "recursive deletion"),
     ),
 )
-def test_recognized_drive_alias_worktree_and_external_directory_cases_fail_closed(
-    tmp_path: Path, command: str
+def test_alias_and_broad_destruction_fail_closed(
+    tmp_path: Path, command: str, fragment: str
 ) -> None:
-    repo, _ = repository(tmp_path)
-    assert_denied(invoke(repo, "Bash", {"command": command}), "HMASD_WORKSPACE_BOUNDARY_DENY")
+    assert_denied(invoke(workspace(tmp_path), "Bash", {"command": command}), fragment)
 
 
-def test_apply_patch_targets_are_normalized_against_the_checkout(tmp_path: Path) -> None:
-    repo, _ = repository(tmp_path)
-    inside = "*** Begin Patch\n*** Update File: seed.txt\n*** End Patch"
-    outside = (
-        "*** Begin Patch\n*** Add File: "
-        + str(tmp_path / "outside.txt")
-        + "\n*** End Patch"
-    )
-    assert invoke(repo, "apply_patch", inside) is None
-    assert_denied(invoke(repo, "ApplyPatch", {"patch": outside}), "outside the writable scope")
-
-
-def test_only_registered_provision_command_can_cross_the_main_checkout_boundary(
-    tmp_path: Path,
-) -> None:
-    repo, base = repository(tmp_path)
-    command = (
-        f'"{sys.executable}" scripts/hmasd_workspace_ticket.py provision '
-        f'--repo "{repo}" --assignment-id TASK_A --base-commit {base} '
-        "--allow pkg/worker.py"
-    )
-    assert invoke(repo, "shell_command", {"command": command}) is None
-    recovery_command = command + " --recover-partial-assignment TASK_OLD"
-    assert invoke(repo, "shell_command", {"command": recovery_command}) is None
+def test_recursive_deletion_of_marker_root_or_an_unresolved_scope_fails_closed(tmp_path: Path) -> None:
+    root = workspace(tmp_path)
     assert_denied(
-        invoke(repo, "shell_command", {"command": command + "; New-Item C:\\wtp"}),
-        "outside the writable scope",
+        invoke(root, "Bash", {"command": f'Remove-Item -LiteralPath "{root}" -Recurse -Force'}),
+        "recursive deletion",
+    )
+    assert_denied(
+        invoke(root, "Bash", {"command": "Remove-Item -Recurse -Force"}),
+        "recursive deletion",
     )
 
 
-def test_ticketed_worktree_limits_patch_and_absolute_shell_targets(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    repo, base = repository(tmp_path)
-    worktree_root = tmp_path / "worktrees" / "HMASD"
-    worktree_root.mkdir(parents=True)
-    monkeypatch.setattr(ticketing, "WORKTREE_ROOT", worktree_root)
-    monkeypatch.setattr(ticketing, "REGISTERED_REPOSITORY", repo)
-    created = ticketing.provision_ticket(
-        argparse.Namespace(
-            repo=repo,
-            assignment_id="TASK_A",
-            base_commit=base,
-            allow=["pkg/worker.py"],
-        )
-    )
-    worktree = Path(str(created["resolved_worktree"]))
-    allowed = worktree / "pkg" / "worker.py"
-    outside_scope = worktree / "other.py"
-
-    _, allowed_roots, linked = guard._workspace_scope(worktree)
-    assert linked is True
-    guard._guard_patch(
-        worktree,
-        allowed_roots,
-        "*** Begin Patch\n*** Add File: pkg/worker.py\n*** End Patch",
-    )
-    guard._guard_shell(
-        worktree,
-        worktree,
-        allowed_roots,
-        linked,
-        {"command": f'Set-Content -Path "{allowed}" -Value ok'},
-    )
-    with pytest.raises(guard.GuardError, match="outside the writable scope"):
-        guard._guard_patch(
-            worktree,
-            allowed_roots,
-            "*** Begin Patch\n*** Add File: other.py\n*** End Patch",
-        )
-    with pytest.raises(guard.GuardError, match="outside the writable scope"):
-        guard._guard_shell(
-            worktree,
-            worktree,
-            allowed_roots,
-            linked,
-            {"command": f'Set-Content -Path "{outside_scope}" -Value blocked'},
-        )
+def test_git_add_and_commit_remain_syntactically_allowed(tmp_path: Path) -> None:
+    root = workspace(tmp_path)
+    assert invoke(root, "Bash", {"command": "git add inside.txt"}) is None
+    assert invoke(root, "Bash", {"command": "git commit -m local"}) is None
 
 
-def test_unregistered_linked_worktree_cannot_mutate(tmp_path: Path) -> None:
-    repo, base = repository(tmp_path)
-    unregistered = tmp_path / "unregistered"
-    git(repo, "worktree", "add", "--detach", str(unregistered), base)
+def test_relative_path_aliases_fail_closed(tmp_path: Path) -> None:
+    root = workspace(tmp_path)
     assert_denied(
-        invoke(
-            unregistered,
-            "shell_command",
-            {"command": "Set-Content -Path seed.txt -Value blocked"},
-        ),
-        "no unique valid workspace ticket",
+        invoke(root, "Bash", {"command": r"Set-Content -LiteralPath ..\outside.txt -Value blocked"}),
+        "path alias",
     )
 
 
-def test_registered_research_session_writes_only_local_research(tmp_path: Path) -> None:
-    repo, _ = repository(tmp_path)
-    (repo / "AGENTS.md").write_text("hmasd_python_interpreter=C:/Python/python.exe\n", encoding="utf-8")
-    role = repo / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md"
-    role.parent.mkdir(parents=True)
-    role.write_text("session_id=research-session\n", encoding="utf-8")
-    local_research = repo / "local_research"
-    local_research.mkdir()
-    pro_reviews = local_research / "pro_reviews"
-    pro_reviews.mkdir()
-
-    inside = local_research / "note.md"
-    outside = repo / "outside.md"
+def test_symlink_target_alias_fails_closed_when_supported(tmp_path: Path) -> None:
+    root = workspace(tmp_path)
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    alias = root / "alias"
+    try:
+        alias.symlink_to(outside, target_is_directory=True)
+    except (OSError, NotImplementedError):
+        pytest.skip("symlink creation is unavailable on this platform")
     assert_denied(
-        invoke(
-            local_research,
-            "shell_command",
-            {"command": f'Set-Content -LiteralPath "{inside}" -Value ok'},
-            session_id="research-session",
-        ),
-        "shell mutation is forbidden",
-    )
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "Get-Content -Raw AGENTS.md"},
-            session_id="research-session",
-        )
-        is None
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {
-                "command": (
-                    f'C:/Python/python.exe "{repo}/.agents/skills/'
-                    "hmasd-independent-research-exploration/scripts/"
-                    'research_portfolio_gate.py" check --record '
-                    f'"{pro_reviews / "forbidden.json"}" --phase merge'
-                )
-            },
-            session_id="research-session",
-        ),
-        "use a registered research script or apply_patch",
-    )
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {
-                "command": (
-                    f'C:/Python/python.exe "{repo}/.agents/skills/'
-                    "hmasd-independent-research-exploration/scripts/"
-                    'research_portfolio_gate.py" check --record '
-                    f'"{local_research / "portfolio.json"}" --phase merge'
-                )
-            },
-            session_id="research-session",
-        )
-        is None
-    )
-    assert (
-        invoke(
-            repo,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: local_research/pro_reviews/item/raw.md\n*** End Patch",
-            session_id="research-session",
-        )
-        is None
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {
-                "command": (
-                    f'C:/Python/python.exe "{repo}/.agents/skills/'
-                    "hmasd-independent-research-exploration/scripts/"
-                    'unregistered.py"'
-                )
-            },
-            session_id="research-session",
-        ),
-        "use a registered research script or apply_patch",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {
-                "command": (
-                    f'C:/Python/python.exe "{repo}/.agents/skills/'
-                    "hmasd-independent-research-exploration/scripts/"
-                    'research_portfolio_gate.py" (Start-Process cmd.exe)'
-                )
-            },
-            session_id="research-session",
-        ),
-        "nested or executable shell expression",
-    )
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {
-                "command": (
-                    f'C:/Python/python.exe "{repo}/.agents/skills/'
-                    "hmasd-independent-research-exploration/scripts/"
-                    'mylib_research_probe.py" --local-research-root '
-                    f'"{local_research}" status'
-                )
-            },
-            session_id="research-session",
-        )
-        is None
-    )
-    assert (
-        invoke(
-            repo,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: local_research/patch-note.md\n*** End Patch",
-            session_id="research-session",
-        )
-        is None
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "apply_patch",
-            "*** Begin Patch\n*** Add File: project-note.md\n*** End Patch",
-            session_id="research-session",
-        ),
-        "outside the writable scope",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "apply_patch",
-            (
-                "*** Begin Patch\n"
-                "*** Update File: local_research/patch-note.md\n"
-                "*** Move to: AGENTS.md\n"
-                "*** End Patch"
-            ),
-            session_id="research-session",
-        ),
-        "outside the writable scope",
-    )
-    assert_denied(
-        invoke(
-            local_research,
-            "shell_command",
-            {"command": "Set-Content -LiteralPath ..\\AGENTS.md -Value bad"},
-            session_id="research-session",
-        ),
-        "shell mutation is forbidden",
-    )
-    assert_denied(
-        invoke(
-            local_research,
-            "shell_command",
-            {"command": f'Copy-Item -LiteralPath "{inside}" -Destination ..\\AGENTS.md'},
-            session_id="research-session",
-        ),
-        "shell mutation is forbidden",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f'Set-Content -LiteralPath "{outside}" -Value blocked'},
-            session_id="research-session",
-        ),
-        "shell mutation is forbidden",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "git add local_research/note.md"},
-            session_id="research-session",
-        ),
-        "Git mutation is forbidden",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "python -c \"from pathlib import Path; Path('AGENTS.md').write_text('bad')\""},
-            session_id="research-session",
-        ),
-        "nested or executable shell expression",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "[IO.File]::WriteAllText('AGENTS.md','bad')"},
-            session_id="research-session",
-        ),
-        "nested or executable shell expression",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f"Get-Item ([IO.File]::WriteAllText('{outside}','bad'))"},
-            session_id="research-session",
-        ),
-        "nested or executable shell expression",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "Get-Item (Start-Process cmd.exe)"},
-            session_id="research-session",
-        ),
-        "nested or executable shell expression",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "rg --pre malicious pattern ."},
-            session_id="research-session",
-        ),
-        "option can execute or write",
-    )
-    executable = local_research / "escape.cmd"
-    executable.write_text("@echo off\r\necho bad>..\\AGENTS.md\r\n", encoding="utf-8")
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f'rg --hostname-bin="{executable}" pattern .'},
-            session_id="research-session",
-        ),
-        "option can execute or write",
-    )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "git diff --output=AGENTS.md"},
-            session_id="research-session",
-        ),
-        "Git mutation is forbidden",
-    )
-    for option in ("--ext-diff", "--textconv"):
-        assert_denied(
-            invoke(
-                repo,
-                "shell_command",
-                {"command": f"git diff {option}"},
-                session_id="research-session",
-            ),
-            "Git mutation is forbidden",
-        )
-    assert_denied(
-        invoke(
-            repo,
-            "shell_command",
-            {"command": "git status --short"},
-            session_id="research-session",
-        ),
-        "Git mutation is forbidden",
+        invoke(root, "Bash", {"command": f'Set-Content -LiteralPath "{alias / "new.txt"}" -Value blocked'}),
+        "path alias",
     )
 
 
-def test_other_session_keeps_main_checkout_scope_when_research_is_registered(
-    tmp_path: Path,
-) -> None:
-    repo, _ = repository(tmp_path)
-    role = repo / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md"
-    role.parent.mkdir(parents=True)
-    role.write_text("session_id=research-session\n", encoding="utf-8")
-    ordinary = repo / "ordinary.md"
-    assert (
-        invoke(
-            repo,
-            "shell_command",
-            {"command": f'Set-Content -LiteralPath "{ordinary}" -Value ok'},
-            session_id="another-session",
-        )
-        is None
-    )
+def test_external_unc_and_dynamic_targets_fail_closed(tmp_path: Path) -> None:
+    root = workspace(tmp_path)
+    for command in (
+        r"Set-Content -LiteralPath \\server\share\outside.txt -Value blocked",
+        r"Set-Content -LiteralPath $env:TEMP\outside.txt -Value blocked",
+    ):
+        assert_denied(invoke(root, "Bash", {"command": command}))
+
+
+def test_unsupported_payload_is_a_valid_json_deny_not_a_hook_process_failure(tmp_path: Path) -> None:
+    payload = invoke(workspace(tmp_path), "apply_patch", {"unexpected": "shape"})
+    assert_denied(payload, "payload")

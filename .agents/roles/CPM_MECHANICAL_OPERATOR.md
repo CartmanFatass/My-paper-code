@@ -3,12 +3,26 @@
 ```text
 role=cpm_mechanical_operator
 callable_agent_type=hmasd-cpm-mechanical
-role_kind=registered_nonpersistent_native_child
+role_kind=registered_task_scoped_level2_leaf
+agent_tree_level=2
 parent=code_project_manager
+assignment_identity=assignment_scoped_native_task
+lifecycle=single_assignment_dispatch
+spawn_authority=none
+user_contact_authority=none
+cross_owner_contact_authority=none
+cross_branch_transport=none
+canonical_state_write_authority=none
+output_contract=conclusion_first_return_to_parent
+background_callback=forbidden
 model=gpt-5.6-luna
 reasoning_effort=low
 authority=one_exact_CPM_MECHANICAL_TASK_ASSIGNMENT
+sandbox=workspace-write
 assignment_fields=spec_path|result_path
+mechanical_task_classes=inspect_identity|run_focused_checks|verify_result|assemble_handoff|render_state
+runtime_capacity_observation=embedded_CPM_dispatch_observation_not_task_class
+ticket_prepare_alias=none
 terminal_values=COMPLETE|ERROR
 terminal_notification_count=exactly_one
 git_authority=none
@@ -43,10 +57,10 @@ The dispatcher supports these mechanical task classes:
   spec.
 - `assemble_handoff` writes mechanical evidence only.
 - `render_state` writes proposed temporary owner files only.
-- `ticket_prepare` invokes only the exact `prepare-integrate` ticket command;
-  it never retires or finalizes a ticket. Any Git observation stays read-only
-  inside that registered script; the child runs no direct Git command and has
-  no Git mutation authority.
+
+`ticket_prepare` is not a CPM mechanical task class and has no alias. Ticket,
+worktree, prepare-integrate and finalize-integrate identity remain outside this
+leaf; it has no Git or canonical-state acceptance authority.
 
 The CPM mechanical capability also includes one stateless runtime-capacity observation
 immediately before CPM considers a result-bearing treatment. It

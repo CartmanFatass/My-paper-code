@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import importlib.util
-import io
 import json
 import os
 import subprocess
@@ -30,9 +29,6 @@ class ReadinessEngineTest(unittest.TestCase):
         self._git("config", "user.name", "Readiness Test")
         (self.repo / ".gitignore").write_text("logs/\n", encoding="utf-8")
         (self.repo / "candidate.txt").write_text("candidate\n", encoding="utf-8")
-        role = self.repo / ".agents/roles/CODE_PROJECT_MANAGER.md"
-        role.parent.mkdir(parents=True)
-        role.write_text("session_owner_id=test-session\n", encoding="utf-8")
         self._git("add", ".")
         self._git("commit", "-qm", "fixture")
         self.candidate = self._git("rev-parse", "HEAD")
@@ -78,29 +74,6 @@ class ReadinessEngineTest(unittest.TestCase):
         path.write_text(json.dumps(value), encoding="utf-8")
         return path
 
-    def _hook_output(self, receipt: Path) -> str:
-        payload = {
-            "session_id": "test-session",
-            "last_assistant_message": "\n".join(
-                (
-                    "CODE_ACCEPTED",
-                    f"commit={self._git('rev-parse', 'HEAD')}",
-                    "exact_paths=candidate.txt",
-                    "execution_readiness=passed",
-                    f"execution_readiness_receipt={receipt}",
-                )
-            ),
-        }
-        old_stdin, old_stdout = sys.stdin, sys.stdout
-        output = io.StringIO()
-        try:
-            sys.stdin = io.StringIO(json.dumps(payload))
-            sys.stdout = output
-            self.assertEqual(READINESS.hook_stop(), 0)
-        finally:
-            sys.stdin, sys.stdout = old_stdin, old_stdout
-        return output.getvalue()
-
     def test_ordered_run_logs_utf8_and_finalize_is_idempotent(self) -> None:
         spec = self._spec()
         old = Path.cwd()
@@ -113,15 +86,16 @@ class ReadinessEngineTest(unittest.TestCase):
             self.assertEqual(READINESS.finalize_spec(spec), 0)
             self.assertEqual(final.read_bytes(), before)
             self.assertEqual(READINESS.check_receipt(final), 0)
-            self.assertEqual(self._hook_output(final), "")
             receipt = json.loads(before)
             self.assertEqual(receipt["candidate_commit"], self.candidate)
             self.assertEqual([p["name"] for p in receipt["phases"]], list(READINESS.PHASES))
             self.assertIn("阶段-✓", receipt["phases"][0]["stdout_tail"])
             self.assertTrue((self.repo / "logs/readiness/.hmasd-readiness-logs/interface_smoke.stdout").is_file())
-            (self.repo / "successor.txt").write_text("next\n", encoding="utf-8")
-            self._git("add", "successor.txt")
+            (self.repo / "later.txt").write_text("next\n", encoding="utf-8")
+            self._git("add", "later.txt")
             self._git("commit", "-qm", "advance head")
+            with self.assertRaisesRegex(READINESS.ReadinessError, "does not equal"):
+                READINESS._load_spec(spec, self.repo, fresh=True, require_current_head=True)
             self.assertEqual(READINESS.check_receipt(final), 0)
         finally:
             os.chdir(old)
@@ -164,6 +138,36 @@ class ReadinessEngineTest(unittest.TestCase):
                 READINESS._load_spec(self._spec(), self.repo, fresh=True, require_current_head=True)
         finally:
             os.chdir(old)
+
+    def test_non_git_provenance_fails_closed(self) -> None:
+        spec = self._spec()
+        old = Path.cwd()
+        os.chdir(Path(self.tmp.name))
+        try:
+            with self.assertRaisesRegex(READINESS.ReadinessError, "requires a Git repository"):
+                READINESS.run_spec(spec)
+        finally:
+            os.chdir(old)
+
+    def test_cli_exposes_only_readiness_operations(self) -> None:
+        help_result = subprocess.run(
+            [sys.executable, str(SCRIPT), "--help"],
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        self.assertIn("{run,finalize,check}", help_result.stdout)
+        retired_command = "-".join(("hook", "stop"))
+        self.assertNotIn(retired_command, help_result.stdout)
+        retired = subprocess.run(
+            [sys.executable, str(SCRIPT), retired_command],
+            check=False,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        self.assertNotEqual(retired.returncode, 0)
 
     def test_launch_error_and_phase_git_mutation_are_typed(self) -> None:
         spec = self._spec()
@@ -208,7 +212,6 @@ class ReadinessEngineTest(unittest.TestCase):
         try:
             self.assertEqual(READINESS.run_spec(spec), 0)
             candidate_path = self.repo / "logs/readiness/.hmasd-readiness-candidate.json"
-            self.assertIn('"decision": "block"', self._hook_output(candidate_path))
             final = self.repo / ".git/hmasd/execution-readiness" / self.candidate / "a1.json"
             final.parent.mkdir(parents=True)
             final.write_text(json.dumps({"different": True}), encoding="utf-8")

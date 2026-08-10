@@ -1,11 +1,17 @@
-# Agentify Transport Operator workspace
+# Agentify Transport Operator compatibility paths
 
-CPM or Explorer dispatches one production `hmasd-agentify-transport` child;
-WDM may dispatch its own workflow-acceptance smoke child. Each exact minimal
-assignment names `batch_path` and assignment-specific `results_path`, while the
-batch names one local natural-language `context_path` plus ordered question
-files. The child does not reconstruct a queue, scan this workspace or
-poll the parent. It follows `.agents/skills/hmasd-agentify-transport/SKILL.md`:
+CPM or Explorer dispatches one requester-specific registered production
+transport child: `hmasd-cpm-agentify-transport` or
+`hmasd-explorer-agentify-transport`. WDM is not a production transport parent.
+The only production requester partitions are
+`temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/`
+and
+`temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/`.
+Each exact minimal assignment names `batch_path` and assignment-specific
+`results_path`, while the batch names one local natural-language `context_path`
+plus ordered question files. The child does not reconstruct a queue, scan
+another requester partition or infer a path, or poll the parent. It follows
+`.agents/skills/hmasd-agentify-transport/SKILL.md`:
 understand the live Agentify pages, create/read/select/switch ChatGPT
 conversations, process the ordered questions, wait silently for natural
 completion, write the exact results file and return one native terminal result.
@@ -27,10 +33,11 @@ After writing and before terminal `COMPLETE`, the child runs
 `.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
 with the assignment path and returned terminal anchor. Explorer and CPM run
 the same guard after terminal return and before reading/accepting the file.
-The guard requires a strict physical assignment descendant, rejects redirects
-and the shared root-level `results.json`, and reports `ERROR` with an empty
-`results_path` on mismatch or missing/non-regular files. It never reads,
-copies or rewrites response contents.
+The guard requires a strict physical descendant of the requesting partition and
+assignment, rejects cross-partition paths, redirects and any shared root-level
+`results.json`, and reports `ERROR` with an empty `results_path` on mismatch or
+missing/non-regular files. It never reads, copies or rewrites response
+contents.
 
 Tabs are browser containers, while conversations hold the memory: closing a tab
 does not delete its conversation, and a saved conversation URL can reopen it.

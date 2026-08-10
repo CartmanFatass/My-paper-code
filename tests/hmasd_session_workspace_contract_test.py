@@ -22,11 +22,18 @@ def test_wdm_is_the_single_workflow_owner() -> None:
         "public_current_work_index_owner=workflow_design_manager",
     ):
         assert required in contract
-    assert "workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces" in router
-    assert "persistent_session_workflow_design_authority=none" in router
-    assert "workflow_assignment_writing_skill=hmasd-writing-agent-assignments" in router
+    for required in (
+        "workflow_design_manager_workflow_design_authority=exclusive",
+        "root_canonical_state_physical_write_authority=accepted_proposals_only",
+        "root_final_git_integration_authority=accepted_paths_only",
+        "root_cross_owner_relay_authority=exclusive",
+    ):
+        assert required in router
+    assert "compatibility_path_semantics=stable_role_locator_not_live_session_thread_or_admission_identity" in contract
+    assert "task_scope=fresh_cli_root_task|exact_assignment" in contract
+    assert "designing an assignment/interface" in router
     assert "native_child_brief_content=" not in router
-    assert "Designing or dispatching a child or cross-session interface" in " ".join(router.split())
+    assert "hmasd-writing-agent-assignments" in router
 
 
 def test_assignment_writing_preserves_semantic_context_over_file_only_anchors() -> None:
@@ -37,9 +44,10 @@ def test_assignment_writing_preserves_semantic_context_over_file_only_anchors() 
     assert "workflow_assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace" in contract
     assert "does not replace the semantic assignment" in contract
     assert "returns its conclusion to the parent" in contract
-    assert "Acceptance, Git and cross-task routing remain with the owner Role" in contract
-    assert "workflow_successor_rotation=integrated_batch_completion" in contract
-    assert "workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface" in contract
+    assert "Root retains canonical writes, Git, lifecycle and cross-owner routing" in contract
+    assert "Manager proposals may be kept in an assignment-specific temporary state-proposal file, but a proposal is not canonical state until Root accepts and writes it" in router
+    assert "workflow_root_reload=fresh_root_task_canonical_reload" in contract
+    assert "workflow_root_reload_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface" in contract
     assert "workflow_thread_registry=forbidden" in contract
     assert "agentify_transport_assignment_locators=batch_path|results_path" in contract
     assert "agentify_transport_result_locator=results_path" in contract
@@ -65,7 +73,7 @@ def test_public_current_work_is_partitioned_and_owned() -> None:
         "public_current_work_partition_status=active_index_and_partitions",
         "docs/project/current-work/common/",
         "docs/project/current-work/sessions/",
-        "A session may edit only its own session record",
+        "A task may edit only its own role record and common records whose `owner_role` is that role",
         "workflow_control_plane",
     ):
         assert required in normalized
@@ -78,7 +86,12 @@ def test_public_current_work_is_partitioned_and_owned() -> None:
         assert required in index
     assert "workflow_index_owner=" not in index
     assert "session_owner_id=workflow_design_manager" in wdm_session
-    assert "continuity=role_based_successor_tasks" in wdm_session
+    for required in (
+        "task_scope=fresh_cli_root_task|exact_assignment",
+        "workflow_root_reload=fresh_root_task_canonical_reload",
+        "workflow_thread_registry=forbidden",
+    ):
+        assert required in normalized
     assert "rotation_boundary=integrated_batch_completion" in normalized_wdm_session
     assert "This record contains only WDM workflow-control-plane identity and status" in normalized_wdm_session
     assert "owner_role=workflow_design_manager" in wdm_common
@@ -182,14 +195,14 @@ def test_non_workflow_role_ownership_is_preserved() -> None:
     contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
     normalized = " ".join(contract.split())
     assert "Workflow-design, code, runtime and research authority remain with the owner Roles and the router" in normalized
-    assert "push only their owned non-workflow durable paths" in normalized
+    assert "No role, task, compatibility label or workspace path grants Git integration or push authority" in normalized
 
 
 def test_explorer_research_and_session_artifacts_remain_explorer_owned() -> None:
     contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split())
     role = _text(".agents/roles/WORKFLOW_DESIGN_MANAGER.md")
-    assert "Explorer owns the `explorer_to_code_manager/` direction" in contract
-    assert "each receiver is read-only" in contract
+    assert "Root alone relays accepted material to another owner, and the receiving owner does not intake directly from a sibling" in contract
+    assert "A receiver reads only an assignment-named sender handoff; it does not write another role's workspace" in contract
     assert "workflow_acceptance_authority=exclusive" in role
     assert "centralized_explorer_workspace_cleanup_write_authority=none" in role
 

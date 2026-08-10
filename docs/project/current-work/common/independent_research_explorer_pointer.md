@@ -2,17 +2,22 @@
 
 ```text
 document_kind=current_work_common_record
-schema_version=1
+schema_version=2
 record_id=independent_research_explorer_pointer
-record_kind=external_owner_pointer
-owner_role=code_project_manager
+record_kind=owner_continuity_pointer
+owner_role=independent_research_explorer
+semantic_owner=independent_research_explorer
+physical_writer=root_after_explorer_accepted_proposal
 pointer_id=independent_research_explorer
-subject_owner_role=independent_research_explorer
-session_id=019fbded-24cb-7541-aa16-0111b626b945
-state_source=external_owner_local_research
-latest_artifact_pointer=local_research/2026-07-30_variable_skill_period_inspiration_campaign_v3.json
+continuity_entry=local_research/RESEARCH_CONTINUITY.md
+continuity_revision_source=continuity_entry
+reload_boundary=each_independent_research_explorer_l1_spawn
+scientific_state_replication=forbidden
 project_state_replication=forbidden
+authority_effect=none
 ```
 
-This CPM-owned public record is a pointer only. It does not copy or authorize
-Independent Research Explorer state.
+This Root-maintained public record is a pointer only. Explorer owns the pointer
+meaning; Root writes accepted Explorer proposals. CPM and WDM may read it only
+when their Root assignment names it. It neither copies nor authorizes Explorer
+science, and no session or task identifier carries continuity.

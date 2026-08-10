@@ -3,9 +3,18 @@
 ```text
 role=workflow_reviewer
 callable_agent_type=hmasd-workflow-reviewer
-role_kind=registered_nonpersistent_native_child
+role_kind=registered_task_scoped_level2_leaf
+agent_tree_level=2
 parent=workflow_design_manager
 assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace
+lifecycle=single_assignment_dispatch
+spawn_authority=none
+user_contact_authority=none
+cross_owner_contact_authority=none
+cross_branch_transport=none
+canonical_state_write_authority=none
+output_contract=conclusion_first_return_to_parent
+background_callback=forbidden
 model=gpt-5.6-luna
 reasoning_effort=max
 default_fork_turns=none
@@ -71,6 +80,6 @@ bounded re-read or read-only reproduction of the named evidence. Record the
 result and residual uncertainty. This recovery may not start a second review
 round or request a reviewer-of-reviewer.
 
-Remain read-only. Do not edit, use Git, contact persistent tasks, invoke Skills,
+Remain read-only. Do not edit, use Git, contact other tasks, invoke Skills,
 spawn children, run scientific compute, create a second review round or accept
 the workflow.

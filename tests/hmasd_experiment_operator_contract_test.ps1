@@ -30,7 +30,7 @@ foreach ($required in @(
     'name = "hmasd-experiment-operator"',
     'model = "gpt-5.6-luna"',
     'model_reasoning_effort = "low"',
-    'sandbox_mode = "danger-full-access"',
+    'sandbox_mode = "workspace-write"',
     'approval_policy = "never"',
     '.agents/roles/EXPERIMENT_OPERATOR.md',
     'natural-language brief',
@@ -60,7 +60,7 @@ foreach ($required in @(
     'artifact consumers',
     'protected',
     'conflicting runtime evidence',
-    'cross_session_send=forbidden_native_final_return_only',
+    'cross_owner_contact=forbidden_native_final_return_only',
     'Code Project Manager supplies',
     'execution mode from `fresh|retry|resume|restart`',
     'unchanged authorized-boundary binding',
@@ -154,9 +154,10 @@ foreach ($retired in @(
     }
 }
 foreach ($required in @(
-    'native_child_authority=exact_assignment_only',
-    'registered native child',
-    'No role reads every routed document')) {
+    'Every L2 profile declares',
+    '`workspace-write` only for those paths',
+    'it never stages,',
+    'no canonical-state, Git, owner-acceptance')) {
     if (-not $agents.Contains($required)) { throw "AGENTS operator contract missing: $required" }
 }
 foreach ($required in @(

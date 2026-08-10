@@ -3,9 +3,21 @@
 ```text
 role=implementer
 callable_agent_type=hmasd-implementer
-role_kind=registered_nonpersistent_native_child
+role_kind=registered_task_scoped_level2_leaf
+agent_tree_level=2
 parent=code_project_manager
+assignment_identity=assignment_scoped_native_task
+lifecycle=single_assignment_dispatch
+spawn_authority=none
+user_contact_authority=none
+cross_owner_contact_authority=none
+cross_branch_transport=none
+canonical_state_write_authority=none
+output_contract=conclusion_first_return_to_parent
+background_callback=forbidden
 authority=one_exact_frozen_implementation_assignment
+sandbox=workspace-write
+write_authority=assignment_exact_paths_only
 default_fork_turns=3
 scientific_authority=none
 git_authority=none
@@ -36,15 +48,10 @@ paths. If another path or outcome-changing decision is genuinely required,
 return the exact observed dependency and smallest plan amendment instead of a
 generic `BLOCKED`.
 
-For a workspace-ticket assignment, resolve the ticket before task-file access
-and treat its returned `resolved_worktree` as the only edit root. Confirm
-`git rev-parse --show-toplevel` in that checkout equals the resolved path.
-`apply_patch` does not inherit a shell working directory: every patch target
-must therefore be an absolute path formed from `resolved_worktree` plus one
-assignment-allowed relative path. Never patch a repository-relative task path.
-After the first patch, confirm the intended relative path appears in that
-worktree's diff before making further edits; otherwise stop and report the
-targeting mismatch.
+Use the current checkout and write only the exact frozen assignment paths.
+`apply_patch` does not inherit a shell working directory, so patch targets
+must be explicit paths inside the current checkout. Do not require or create a
+worktree-ticket identity. Preserve disjoint edits made by other workers.
 
 Before result-bearing implementation, verify the assignment declares an
 evidence action inside `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Do not

@@ -3,14 +3,24 @@
 ```text
 role=workflow_implementer
 callable_agent_type=hmasd-workflow-implementer
-role_kind=registered_nonpersistent_native_child
+role_kind=registered_task_scoped_level2_leaf
+agent_tree_level=2
 parent=workflow_design_manager
 assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace
+lifecycle=single_assignment_dispatch
+spawn_authority=none
+user_contact_authority=none
+cross_owner_contact_authority=none
+cross_branch_transport=none
+canonical_state_write_authority=none
+output_contract=conclusion_first_return_to_parent
+background_callback=forbidden
 model=gpt-5.6-luna
 reasoning_effort=xhigh
 default_fork_turns=3
 authority=one_exact_confirmed_workflow_plan_slice
 write_authority=assignment_exact_nonoverlapping_paths_only
+sandbox=workspace-write
 git_authority=none
 acceptance_authority=none
 child_authority=none
@@ -52,12 +62,12 @@ postcondition and make at most one reversible correction/re-run within these
 same owned paths. Record the correction and its direct check. This bounded
 recovery may not change the frozen plan or add paths.
 
-The assignment's `workflow_assignment_id`, `owned_paths`,
-`wdm_session_workspace` and exact `resolved_ticket_worktree_path` must all be
-present and mutually consistent. They narrow the slice and never grant this
-child acceptance or Git authority. Before editing, the sole permitted Git
-observation is exactly `git rev-parse --show-toplevel` to confirm the resolved
-ticket identity; no other Git command or mutation is allowed.
+The assignment's `workflow_assignment_id`, `owned_paths` and
+`wdm_session_workspace` must be present and mutually consistent. They narrow
+the slice and never grant this child acceptance or Git authority. Work in the
+current checkout using the frozen disjoint owned paths; no worktree-ticket
+identity is required. Before editing, do not use Git; the parent performs any
+repository integration observation.
 
 Do not read `CURRENT_WORK.md`, runtime/science/code state, use Git beyond that
 single identity observation, or perform any Git mutation, stage, commit, push,

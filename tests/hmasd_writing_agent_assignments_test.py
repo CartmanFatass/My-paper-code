@@ -30,9 +30,17 @@ def _normalized(path: Path) -> str:
 
 def test_skill_trigger_and_task_model_recipe_are_explicit() -> None:
     text = _normalized(SKILL)
-    assert "designing a subagent or cross-session interface" in text
+    assert "designing a task-scoped subagent or root-relayed owner interface" in text
     assert "writing a concrete assignment or message" in text
     assert "reviewing whether an existing interface preserves enough meaning and capability" in text
+    assert "self-contained natural-language model" in text
+    assert "without reconstructing parent history" in text
+    assert 'fork_turns="1"' in text
+    assert "one forked turn is background only" in text
+    assert "fork_turns=none" in text
+    assert "never excuses omitting a self-contained brief" in text
+    assert "do not encode direct sibling contact" in text
+    assert "manager-session or replacement-task continuity" in text
     for cue in (
         "why the task exists now",
         "concrete failure, conflict or limitation",

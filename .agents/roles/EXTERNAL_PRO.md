@@ -5,6 +5,15 @@
 ```text
 role=external_pro
 role_kind=external_scientific_decision_authority_within_user_review_boundary
+codex_agent_registration=none
+agent_tree_membership=none
+codex_parent=none
+spawnable=false
+request_owner=independent_research_explorer
+return_owner=independent_research_explorer
+transport=hmasd-explorer-agentify-transport
+provider_conversation=transport_evidence_only
+results_return=independent_research_explorer_to_root
 formal_transport_owner=code_project_manager
 independent_methodology_transport_owner=independent_research_explorer
 explorer_project_alignment_transport_owner=independent_research_explorer
@@ -191,7 +200,8 @@ owner for that bounded review.
   scaling distinction and the 20-minute nonformal/eight-hour formal caps.
 - For `INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT`, the exact Workflow-Design-
   Manager-committed question and repository allow-list submitted by the
-  registered Independent Research Explorer from its persistent conversation.
+  registered Independent Research Explorer from its task-scoped Root
+  assignment.
   `CURRENT_WORK.md`, active portfolios, runs and formal review artifacts are
   not inputs.
 - For an independent direction review, one Explorer-frozen prompt and one exact

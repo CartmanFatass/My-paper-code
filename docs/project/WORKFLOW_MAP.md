@@ -15,13 +15,15 @@ exhaustive registry or procedure copy.
 
 | Owner | Stable responsibility | Interface handed onward |
 |---|---|---|
-| Workflow Design Manager (WDM) | user-confirmed workflow design, control-plane modification, semantic integration, acceptance and workflow Git | confirmed plan, self-contained child assignment, integrated change packet and successor brief |
+| Root | user communication, task routing, cross-owner relay, lifecycle and accepted physical writes, including separately authorized final Git integration; no scientific comparison/intake or domain acceptance | owner-routed assignments/results, accepted proposals and accepted-path integration evidence |
+| Workflow Design Manager (WDM) | user-confirmed workflow design, control-plane modification through assigned leaves, semantic integration and acceptance | confirmed plan, self-contained child assignment, integrated change packet and successor brief |
 | Workflow Auditor | read-only local reconnaissance for an assigned workflow surface | conclusion about bounded facts/conflicts, followed by optional dependency evidence |
 | Workflow Implementer | one frozen non-overlapping workflow change slice | conclusion about the owned outcome and checked consequence, followed by an optional `WORKFLOW_CHANGE_PACKET` factual tail |
 | Workflow Reviewer | independent review of one coherent integrated batch | conclusion and advisory disposition for WDM, followed by optional findings evidence; no source edits or acceptance |
 | Code Project Manager (CPM) | active engineering/runtime orchestrator for code, runtime, technical acceptance and project-operation records | decomposed implementation assignments, code/runtime/review artifacts and CPM-owned mechanical receipts |
-| Independent Research Explorer | active scientific/research orchestrator for direction, methodology and research workspace | decomposed research assignments, advisory portfolio/local-research comparisons, intakes and decisions |
-| Agentify Transport child | requester-assigned batch transport mechanics; WDM may parent only an exact workflow-acceptance smoke batch | raw transport result for CPM or Explorer, or direct smoke-test evidence for WDM |
+| Independent Research Explorer L1 | read-only scientific/research orchestrator for direction, methodology and research workspace; owns decomposition, selection, dependency/concurrency, science synthesis/continuity semantics, cross-direction comparison, advisory portfolio/local-research semantic intake and sole advisory decision authoring | semantically authored complete advisory decisions/handoffs and accepted proposals returned through Root |
+| CPM Agentify Transport child (`hmasd-cpm-agentify-transport`) | requester-assigned batch transport mechanics under CPM | raw transport result for CPM |
+| Explorer Agentify Transport child (`hmasd-explorer-agentify-transport`) | requester-assigned batch transport mechanics under Explorer | raw transport result for Explorer |
 | External Pro | bounded independent scientific judgment | exact review result within the submitted question boundary |
 
 CPM-mechanical and Explorer-mechanical wire locators live in
@@ -50,13 +52,16 @@ not move back into the router or this map.
 Explorer and CPM are active owners/orchestrators, not passive relays or
 schedulers. They decompose work and delegate bounded detail, synthesize
 results, retain owner decisions, and continue unrelated safe work while
-children run. The root Explorer owns cross-direction advisory portfolio
-comparison; CPM retains architecture, runtime admission, integration and
-technical acceptance. Explorer outputs remain advisory portfolio/local-research
-comparisons, intakes and decisions. Formal/project canonical science remains
-with the user/External Pro contract. Exact assignment, child-lane, waiting and
-recovery mechanics remain in the owner Roles and Skills; this paragraph is
-orientation only.
+children run. Independent Research Explorer L1 alone owns cross-direction
+advisory portfolio comparison; CPM retains architecture, runtime admission,
+integration and technical acceptance. Explorer outputs remain advisory
+portfolio/local-research comparisons, intakes and decisions. Explorer L1 is
+read-only and semantically authors the exact advisory decision/handoff; Root
+owns user communication, cross-owner relay, lifecycle and accepted physical
+writes, but has no scientific comparison/intake authority. Formal/project
+canonical science remains with the user/External Pro contract. Exact
+assignment, child-lane, waiting and recovery mechanics remain in the owner
+Roles and Skills; this paragraph is orientation only.
 
 ## Dependency direction
 
@@ -64,18 +69,24 @@ WDM depends on the stable contracts named by the router. A child depends only on
 its self-contained assignment, registered Profile, Role charter and
 assignment-named references. Child output flows to the parent as advisory or
 mechanical evidence and never grants design, routing, Git or acceptance
-authority. CPM and Explorer remain separate owner lanes; Agentify transport is
-requester-owned and WDM does not absorb their live review traffic. File/native
-wire locators are defined by `docs/project/SESSION_WORKSPACE_CONTRACT.md`.
+authority. CPM and Explorer remain separate owner lanes. Cross-owner requests
+and results use the Root relay: Explorer -> Root -> CPM and CPM -> Root ->
+Explorer; no direct sibling channel is implied. Agentify transport is
+parent-specific: CPM uses `hmasd-cpm-agentify-transport` and Explorer's only
+external-review transport is `hmasd-explorer-agentify-transport`, with its raw
+result returning to Explorer before any Explorer -> Root relay. WDM does not
+parent transport and does not absorb their live review traffic. File/native wire
+locators are defined by `docs/project/SESSION_WORKSPACE_CONTRACT.md`.
 
-The Explorer↔CPM direction-local context binding is defined once by
+The Root-routed Explorer -> Root -> CPM direction-local context binding is defined once by
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer and CPM use
 one primary selected direction's smallest canonical context, add only the
 smallest set of material relationship edges, and mirror the binding in the
-conclusion-first reverse result or Codex-native fallback. An explicitly
+conclusion-first reverse result or Codex-native fallback returned through Root. An explicitly
 multi-direction user question may name several directions without authorizing
-portfolio preload. That direction-local handoff boundary is distinct from the
-root Explorer's internal cross-direction advisory portfolio comparison.
+portfolio preload. That direction-local handoff boundary is distinct from
+Independent Research Explorer L1's internal cross-direction advisory portfolio
+comparison; Root performs no scientific comparison or intake.
 Portfolio/index/README/continuity surfaces remain
 pointer-only; a missing binding gets one semantic clarification while
 unrelated work continues rather than a new workflow state.
@@ -85,9 +96,10 @@ Explorer-local Direction Action Map. This map remains an owner-local continuity
 view, not a machine schema, queue, scheduler, runtime-admission or acceptance
 source; this orientation document does not duplicate it.
 
-For result-bearing experiments, Explorer owns the scientific active roster,
-direction-local predecessor context and advisory per-result local-research
-intake;
+For result-bearing experiments, Explorer L1 owns the scientific active roster,
+direction-local predecessor context, advisory per-result local-research
+semantic intake and sole advisory decision authoring; Explorer L1 remains
+read-only and returns complete accepted proposals to Root;
 CPM owns runtime-capacity admission, live process/resource
   observations, isolated execution and per-artifact technical acceptance. A
   handoff may describe prospective runtime class/units in prose, but its A/B/C
@@ -103,13 +115,15 @@ CPM owns runtime-capacity admission, live process/resource
   that does not contend for the observed bottleneck continues.
 
 The Explorer mechanical edge is a native assignment to a literal-fact
-organization child; its storage boundary is defined by the Session Contract.
+organization child; it never replaces Explorer L1 comparison, semantic intake
+or advisory decision authority, and its storage boundary is defined by the
+Session Contract.
 
 Research and CPM operational dependency details remain in their owner contracts;
 this map keeps only the owner-lane edge.
 
 ```text
-confirmed plan -> frozen owned slice -> integrated batch -> WDM acceptance/Git
+confirmed plan -> frozen owned slice -> integrated batch -> WDM semantic acceptance -> Root accepted-path Git integration
 ```
 
 Ordinary workflow stages are mandatory and parallel-first with dependency order;
@@ -128,12 +142,13 @@ not a state machine, queue or admission gate.
 
 Ordinary workflow changes use the registered Auditor/Scout, Implementer and
 integrated Reviewer stages with parallel-first scheduling and dependency order.
-WDM's local workflow-file modification is reserved for a direct user
-instruction explicitly naming WDM direct modification; generic workflow-change
-requests follow the default subagent route. Pure design or authority decisions
-without file mutation remain WDM-local. The Roles and Audit Skill own detailed
-routing mechanics; serialize only actual information dependencies or same-file
-writers, and keep parallel reviewers limited to genuinely independent questions.
+Workflow-file changes are performed by assigned Workflow Implementer leaves;
+WDM reviews and semantically accepts the integrated batch, while Root performs
+any separately authorized accepted-path Git mechanics. Pure design or
+authority decisions without file mutation remain WDM-local. The Roles and
+Audit Skill own detailed routing mechanics; serialize only actual information
+dependencies or same-file writers, and keep parallel reviewers limited to
+genuinely independent questions.
 
 ## Context loading
 
@@ -151,11 +166,13 @@ Session Workspace Contract and WDM current-work records.
 
 ## Event-triggered maintenance
 
-WDM updates this map in the same workflow commit when a stable fact changes:
-role ownership or authority, a public interface or dependency direction, the
-minimum context-loading boundary, the workflow execution policy, or the
-successor-continuity contract. A Reviewer or Auditor reports a conflict; WDM
-decides whether it is a stable change and repairs the map when required.
+When a stable fact changes—role ownership or authority, a public interface or
+dependency direction, the minimum context-loading boundary, the workflow
+execution policy, or the successor-continuity contract—WDM assigns the map
+change to a Workflow Implementer and semantically accepts the result. Root
+performs any separately authorized accepted-path Git mechanics. A Reviewer or
+Auditor reports a conflict; WDM decides whether it is a stable change and
+requests the repair when required.
 
 Maintenance is event-triggered only: a stable ownership, interface,
 dependency, context-loading, delegation or continuity change may update this

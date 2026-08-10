@@ -4,12 +4,14 @@ $repo = Split-Path -Parent $PSScriptRoot
 $agents = Get-Content -Raw -LiteralPath (Join-Path $repo 'AGENTS.md')
 $config = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/config.toml')
 $codePmPath = Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md'
+$cpmTransportRolePath = Join-Path $repo '.agents/roles/CPM_AGENTIFY_TRANSPORT_OPERATOR.md'
 $oldPmPath = Join-Path $repo '.agents/roles/PROJECT_MANAGER.md'
 $oldOperatorPath = Join-Path $repo '.agents/roles/EXTERNAL_REVIEW_OPERATOR.md'
 $retiredProjectOperationsProfilePath = Join-Path $repo '.codex/agents/hmasd-project-operations-operator.toml'
 $retiredIndependentReviewRolePath = Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_REVIEW_OPERATOR.md'
 $retiredIndependentReviewProfilePath = Join-Path $repo '.codex/agents/hmasd-independent-research-review-operator.toml'
 $codePm = Get-Content -Raw -LiteralPath $codePmPath
+$cpmTransportRole = Get-Content -Raw -LiteralPath $cpmTransportRolePath
 $cpmWorkspacePath = Join-Path $repo 'docs/session-workspaces/code_project_manager/README.md'
 $cpmFailureContainmentPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md'
 $currentWorkIndexPath = Join-Path $repo 'docs/project/CURRENT_WORK.md'
@@ -35,6 +37,7 @@ $routineImplementerProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.co
 $protectedImplementerProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-implementer.toml')
 $implementerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/IMPLEMENTER.md')
 $codePmNormalized = $codePm -replace '\s+', ' '
+$cpmTransportRoleNormalized = $cpmTransportRole -replace '\s+', ' '
 $verifierRoleNormalized = $verifierRole -replace '\s+', ' '
 $implementerRoleNormalized = $implementerRole -replace '\s+', ' '
 $reviewerRoleNormalized = $reviewerRole -replace '\s+', ' '
@@ -148,7 +151,7 @@ foreach ($required in @(
     'explorer_public_handoff_git_authority=none',
     'explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance',
     'explorer_treatment_substitution_authority=none',
-    'explorer_acceptance_review_route=explorer_to_agentify_after_cpm_technical_acceptance',
+    'explorer_acceptance_review_route=explorer_to_hmasd-explorer-agentify-transport_after_cpm_technical_acceptance',
     'explorer_task_instruction_intake=execute_named_treatment_without_extra_confirmation',
     'explorer_result_semantic_acceptance_owner=external_pro',
     'explorer_acceptance_review_request_authority=none',
@@ -168,17 +171,21 @@ foreach ($required in @(
     'Explorer gives one clear instruction naming implementation, instance binding',
     'without separate code or experiment permission fields',
     'does not reject a handoff because of formatting or a missing object',
-    'External Pro uses the GitHub connection to inspect the exact pushed revision',
+    'Root owns user communication, cross-owner relay, lifecycle and accepted physical writes; Root alone writes continuity after an accepted proposal and revision check and has no scientific comparison or intake authority',
+    'External Pro remains outside the agent tree and is reached only from Explorer through this transport child',
+    'The provider conversation and transport result are evidence for Explorer''s review intake, not a new owner or scientific acceptance',
+    'External Pro uses the supplied repository/path locator and accepted revision to inspect the scoped result',
     'Explorer never substitutes its own acceptance',
-    'The review starts only after CPM technical acceptance and push',
+    'The review starts only after that acceptance and evidence',
+    'CPM does not initiate the review',
     'Missing formatting or a prior mechanical BLOCKED receipt is not candidate evidence',
     'selected direction identity',
     'Direction-local context binding',
-    'reverse result begins with its conclusion',
+    'CPM''s reverse result, returned through Root, begins with its conclusion',
     'mirrors that same primary direction or explicitly named direction set',
     'Codex-native message fallback carries the same binding',
     'preserves the original handoff/artifact',
-    'asks exactly one concrete semantic clarification',
+    'returns exactly one concrete semantic clarification to Root for routing to the sender',
     'never reads `local_research/`')) {
     if (-not $explorerValidationContractNormalized.Contains($required)) {
         throw "Explorer validation contract missing semantic rule: $required"
@@ -267,12 +274,12 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'Explorer alone creates, edits and deletes its outbound files',
-    'Code Manager alone creates, edits and deletes its outbound files',
+    'Explorer L1 semantically authors and approves the handoff; its assigned Writer physically writes the exact outbound temporary file and may remove it only after Root confirms CPM intake',
+    'CPM returns its technical result to Root; Root writes and routes the exact reverse temporary copy to Explorer and may remove that copy only after Root confirms Explorer intake',
     'missing schema, `document_kind`, validator receipt, hash, byte count',
     'begins with its natural-language conclusion and then appends the necessary exact evidence',
-    'live files never enter Git',
-    'Direction-specific briefs and reverse results follow the direction-local',
+    'Live files never enter Git',
+    'Direction-specific briefs and Root-routed reverse results follow the direction-local',
     'Codex-native message fallback carries the same binding',
     'ask exactly one concrete semantic clarification')) {
     if (-not $publicHandoffContractNormalized.Contains($required)) {
@@ -294,20 +301,34 @@ if ((Test-Path $oldPmPath) -or (Test-Path $oldOperatorPath) -or
 }
 
 $routerRequired = @(
-    'cross_task_transport=codex_native_send_message_to_thread',
+    'root_cross_owner_relay_authority=exclusive',
+    'root_canonical_state_physical_write_authority=accepted_proposals_only',
+    'root_final_git_integration_authority=accepted_paths_only',
     'code_project_manager_code_authority=exclusive',
     'code_project_manager_technical_acceptance_authority=exclusive',
-    'code_project_manager_routine_implementation_agent=hmasd-implementer-terra',
-    'code_project_manager_protected_implementation_agent=hmasd-implementer',
     'code_project_manager_runtime_authority=exclusive',
-    'code_project_manager_current_work_authority=exclusive',
-    'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
-    'code_project_manager_mechanical_result_acceptance=exclusive',
+    'code_project_manager_parent=root',
+    'code_project_manager_role_kind=registered_task_scoped_level1_orchestrator',
+    'code_project_manager_agent_tree_level=1',
+    'level1_physical_write_authority=none',
+    'level1_canonical_state_write_authority=none',
+    'level1_git_authority=none',
+    'level1_user_contact_authority=none',
+    'level1_return_route=return_to_root',
+    'level2_spawn_authority=none',
+    'level2_user_contact_authority=none',
+    'level2_cross_branch_transport=none',
+    'level2_canonical_state_write_authority=none',
+    'level2_git_authority=none',
     '.agents/roles/CODE_PROJECT_MANAGER.md',
-    'agentify_transport_child=hmasd-agentify-transport',
-    'agentify_transport_child_parent=code_project_manager|independent_research_explorer',
-    'workflow_change_request_route=workflow_design_manager',
-    'docs/project/SESSION_WORKSPACE_CONTRACT.md'
+    'workflow_change_request_route=Root->WDM',
+    'code_runtime_request_route=Root->CPM',
+    'research_request_route=Root->Explorer',
+    'cross_owner_route=owner->Root->owner',
+    'cross_task_transport=return_to_root',
+    'cross_task_transport_legacy=forbidden',
+    'background_callback=forbidden',
+    'mandatory_ticket_identity=forbidden_for_subagent_authority'
 )
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
@@ -343,13 +364,10 @@ $codeRequired = @(
     'workflow_acceptance_authority=none',
     'workflow_git_authority=none',
     'workflow_change_request_route=workflow_design_manager',
-    'session_owner_role=code_project_manager',
-    'session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
-    'session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager',
     'failure_containment_contract=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md',
     'local_failure_task_terminal=false',
-    'git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state',
-    'code_children=code_scout|implementer|reviewer|verifier',
+    'git_execution=proposal_to_root_for_accepted_paths',
+    'code_children=hmasd-code-scout|hmasd-implementer-terra|hmasd-implementer|hmasd-reviewer|hmasd-verifier',
     'routine_implementation_child=hmasd-implementer-terra',
     'protected_implementation_child=hmasd-implementer',
     'AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
@@ -358,13 +376,12 @@ $codeRequired = @(
     'mechanical_child=hmasd-cpm-mechanical',
     'mechanical_assignment_authority=exclusive',
     'mechanical_terminal_receipt=required',
-    'ticket_finalize_integrate=direct_after_acceptance',
     'reads only its terminal receipt/result',
     'orchestrator, engineering and technical-judgment owner',
     'exact-assignment author',
     'repair/retry chooser',
     'sole technical/mechanical acceptance owner',
-    'sole code/Git/canonical-state integrator',
+    'Root is the physical code, canonical-state and Git integrator',
     'CODE_ACCEPTED',
     'CODE_SCIENCE_INDEX.md',
     'execution_readiness_owner=code_project_manager',
@@ -375,10 +392,7 @@ $codeRequired = @(
     'only zero-compute `finalize` receives narrow elevation',
     'test_acceptance_basis=risk_and_claim_coverage',
     'test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof',
-    'cross_task_transport=codex_native_send_message_to_thread',
-    'cross_task_target=current_thread_id_from_user_or_native_task_context',
-    'cross_task_model_and_thinking_overrides=omit',
-    'passing no model or thinking override',
+    'return_to_root',
     'research_stage=EXPLORATION|FORMALIZATION',
     'code_change_shape=coherent_module_responsibility_with_focused_evidence',
     'successor_replaces_predecessor=same_commit_delete_code_runner_direction_test',
@@ -398,7 +412,8 @@ $codeRequired = @(
     '`analyze_entry`',
     'dispatches the registered `hmasd-verifier` on the clean',
     'readiness wrapper owns its mechanical lifecycle and the verifier returns typed evidence',
-    'there is no Research Operations Manager',
+    'A fresh CLI invocation creates a new task-scoped CPM and reloads canonical files',
+    'no persistent manager, monitor or',
     'Workflow Design Manager',
     'workflow_change_request_route=workflow_design_manager',
     'does not edit, accept, stage, commit or push'
@@ -415,8 +430,7 @@ foreach ($required in @(
     'self-contained child assignments',
     'three-unit runtime admission',
     'action-bearing result synthesis',
-    'Git and current-work updates',
-    'user communication',
+    'Root owns user communication, physical writes, accepted canonical-state updates and Git',
     'coherent nontrivial implementation-plus-focused-test package',
     '`hmasd-implementer-terra` for routine frozen engineering',
     '`hmasd-implementer` for protected algorithm, numerical or training semantics',
@@ -492,7 +506,8 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'selected and frozen independent direction treatments',
-    'admits isolated tickets/worktrees within the three-unit pool',
+    'admits independent treatments within the three-unit pool',
+    'an optional ticket/worktree may provide provenance',
     'normal path remains `independent_admitted_treatment_execution=parallel_first_within_capacity`',
     'detailed event-driven continuation and serialization exceptions are maintained by the parallel-research workflow reference',
     'CPM treatment dispatch is constrained only by an exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict',
@@ -544,10 +559,11 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'code_project_manager_runtime_capacity_admission=exclusive',
-    'code_project_manager_runtime_capacity_pool_units=3',
-    'independent_research_runtime_capacity_owner=code_project_manager')) {
-    if (-not $agents.Contains($required)) { throw "Router capacity owner missing: $required" }
+    'runtime_capacity_admission=exclusive',
+    'runtime_capacity_pool_units=3',
+    'runtime_capacity_source=parallel-research-workflow',
+    'read_only_science_lane_capacity=independent_of_cpm_pool_by_default')) {
+    if (-not $codePmNormalized.Contains($required)) { throw "CPM capacity contract missing: $required" }
 }
 if ($codePm.Contains('one_at_a_time_for_attribution')) {
     throw 'Retired global resource-consuming action lock remains in CPM role'
@@ -608,13 +624,30 @@ foreach ($retired in @(
 
 foreach ($required in @(
     '## Triggered transport and mechanical lanes',
-    'hmasd-agentify-transport',
-    '.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md',
-    '.agents/skills/hmasd-agentify-transport/SKILL.md',
+    'hmasd-cpm-agentify-transport',
+    'parent-specific Role and the parent-neutral Agentify transport mechanics Skill',
     'AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
-    'CPM owns the per-question conversation intent')) {
+    'CPM owns the per-question conversation intent',
+    'Root owns cross-owner relay')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill Agentify child contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'role=cpm_agentify_transport_operator',
+    'callable_agent_type=hmasd-cpm-agentify-transport',
+    'parent=code_project_manager',
+    'cross_owner_contact_authority=none',
+    'cross_branch_transport=none',
+    'output_contract=conclusion_first_return_to_parent',
+    'requester_partition_root=temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/',
+    'git_authority=none',
+    'acceptance_authority=none',
+    'wdm_parent_exception=none',
+    'wdm_transport_smoke_exception=none',
+    'The existing Agentify transport Skill, result-path guard and shared schema/Role own')) {
+    if (-not $cpmTransportRoleNormalized.Contains($required)) {
+        throw "CPM Agentify transport Role contract missing: $required"
     }
 }
 foreach ($required in @(
@@ -655,7 +688,7 @@ foreach ($required in @(
     'name = "hmasd-implementer-terra"',
     'model = "gpt-5.6-terra"',
     'model_reasoning_effort = "high"',
-    '.agents/roles/IMPLEMENTER.md',
+    '.agents/roles/ROUTINE_IMPLEMENTER.md',
     'registered child of Code Project Manager',
     'exact assignment')) {
     if (-not $routineImplementerProfile.Contains($required)) {
@@ -677,30 +710,31 @@ foreach ($registration in @(
     }
 }
 foreach ($profileRoute in @(
-    @{ Text = $protectedImplementerProfile; Model = 'gpt-5.6-sol'; Effort = 'high'; Label = 'protected Sol' },
-    @{ Text = $routineImplementerProfile; Model = 'gpt-5.6-terra'; Effort = 'high'; Label = 'routine Terra' })) {
+    @{ Text = $protectedImplementerProfile; Model = 'gpt-5.6-sol'; Effort = 'high'; Role = '.agents/roles/IMPLEMENTER.md'; Label = 'protected Sol' },
+    @{ Text = $routineImplementerProfile; Model = 'gpt-5.6-terra'; Effort = 'high'; Role = '.agents/roles/ROUTINE_IMPLEMENTER.md'; Label = 'routine Terra' })) {
     foreach ($required in @(
         ('model = "' + $profileRoute.Model + '"'),
         ('model_reasoning_effort = "' + $profileRoute.Effort + '"'),
-        '.agents/roles/IMPLEMENTER.md')) {
+        $profileRoute.Role)) {
         if (-not $profileRoute.Text.Contains($required)) {
             throw "$($profileRoute.Label) profile routing missing: $required"
         }
     }
 }
 
-foreach ($profile in @($routineImplementerProfile, $protectedImplementerProfile)) {
-    foreach ($required in @('exact assignment', '.agents/roles/IMPLEMENTER.md',
+foreach ($profileRoute in @(
+    @{ Text = $protectedImplementerProfile; Role = '.agents/roles/IMPLEMENTER.md'; Label = 'protected Sol' },
+    @{ Text = $routineImplementerProfile; Role = '.agents/roles/ROUTINE_IMPLEMENTER.md'; Label = 'routine Terra' })) {
+    foreach ($required in @('exact assignment', $profileRoute.Role,
             'registered child of Code Project Manager', 'Do not mutate Git')) {
-        if (-not $profile.Contains($required)) {
-            throw "Thin implementer profile missing the shared pointer/boundary: $required"
+        if (-not $profileRoute.Text.Contains($required)) {
+            throw "$($profileRoute.Label) profile missing role pointer/boundary: $required"
         }
     }
     foreach ($forbidden in @(
             'purpose, observed behavior or failure',
             'necessary consequential scope',
             'Every result must begin with a concise natural-language conclusion',
-            'scripts/hmasd_workspace_ticket.py',
             'absolute `apply_patch` targets',
             'core.longpaths=true',
             'Use only the assignment-named runtime',
@@ -710,12 +744,9 @@ foreach ($profile in @($routineImplementerProfile, $protectedImplementerProfile)
         }
     }
 }
-foreach ($required in @('returned `resolved_worktree` as the only edit root',
-        '`apply_patch` does not inherit a shell working directory',
-        'every patch target', 'absolute path', 'After the first patch')) {
-    if (-not $implementerRole.Contains($required)) {
-        throw "Implementer role missing ticketed apply_patch targeting rule: $required"
-    }
+if ($implementerRole.Contains('resolved_ticket_worktree_path') -or
+    $implementerRole.Contains('scripts/hmasd_workspace_ticket.py')) {
+    throw 'Code implementer retains retired ticket identity'
 }
 if (-not $implementerRole.Contains('reversible local engineering choice')) {
     throw 'Implementers lack bounded local engineering judgment'
@@ -803,7 +834,7 @@ if ($codePm.Contains('Never load `docs/project/CURRENT_WORK.md`')) {
 }
 
 foreach ($required in @(
-    'new persistent coding task',
+    'For a new task-scoped coding assignment',
     'clearly lacks the project mental model',
     'never copied to each child',
     'Local tasks remain local',
@@ -856,10 +887,10 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'project_map_owner=code_project_manager',
-    'project_map_update=same_commit_when_stable_architecture_fact_changes')) {
-    if (-not $agents.Contains($required)) {
-        throw "AGENTS project-cognition pointer missing: $required"
+    'Code Project Manager owns map accuracy',
+    'updates the map in the same code commit when a stable')) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "Code Project Manager project-map ownership missing: $required"
     }
 }
 if (-not $currentWorkIndex.Contains('docs/project/PROJECT_MAP.md')) {
@@ -869,12 +900,13 @@ if (Test-Path -LiteralPath $obsoleteWdmPlanPath) {
     throw 'Obsolete WDM modularization plan remains live'
 }
 
-if (-not $workflow.Contains('workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces') -or
-    -not $workflow.Contains('other persistent sessions report a precise requirement or defect')) {
+$workflowNormalized = $workflow -replace '\s+', ' '
+if (-not $workflowNormalized.Contains('workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces') -or
+    -not $workflowNormalized.Contains('CPM and Explorer return workflow requirements or defects to Root rather than contacting WDM directly')) {
     throw 'Workflow Design Manager centralized ownership boundary is missing'
 }
-if (-not $agileNormalized.Contains('Code Project Manager alone accepts code') -or
-    -not $agileNormalized.Contains('owns runtime, transport and Git integration')) {
+if (-not $agileNormalized.Contains('Code Project Manager alone accepts code, coordinates the project, directs engineering repair, and owns runtime and transport') -or
+    -not $agileNormalized.Contains('Root owns cross-owner relay, physical canonical writes and Git mechanics')) {
     throw 'Agile Skill does not preserve CPM ownership'
 }
 if ($agileNormalized.Contains('External Review Operator') -or
@@ -882,17 +914,13 @@ if ($agileNormalized.Contains('External Review Operator') -or
     throw 'Agile Skill retains a stale or ambiguous review route'
 }
 if (-not $agileNormalized.Contains('CODE_SCIENCE_ALIGNMENT_AUDIT') -or
-    -not $agileNormalized.Contains('Agentify Transport Operator')) {
+    -not $agileNormalized.Contains('CPM Agentify transport')) {
     throw 'Agile Skill does not route the code-science audit through Agentify transport'
 }
 foreach ($surface in @($codePm, $agile)) {
-    foreach ($required in @(
-        'scripts/hmasd_workspace_ticket.py provision',
-        'C:/worktrees/HMASD',
-        'Raw external `git worktree`')) {
-        if (-not $surface.Contains($required)) {
-            throw "Code-PM worktree provisioning contract missing: $required"
-        }
+    if ($surface.Contains('scripts/hmasd_workspace_ticket.py provision') -or
+        $surface.Contains('C:/worktrees/HMASD')) {
+        throw 'Code-PM retains retired mandatory worktree ticket identity'
     }
 }
 if ($assertionNormalized.Contains('Research Operations Manager') -or
@@ -906,11 +934,13 @@ if ($workflow.Contains('Project-Manager workflow-design assignment')) {
 
 foreach ($required in @(
     'session_owner_role=code_project_manager',
-    'session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d',
-    'durable_workspace=docs/session-workspaces/code_project_manager/',
-    'temporary_workspace=temp/sessions/code_project_manager/')) {
-    if (-not $cpmWorkspace.Contains($required)) {
-        throw "Code PM session workspace missing: $required"
+    'temporary_workspace=temp/sessions/code_project_manager/',
+    'workflow_surface_owner=false',
+    'no workflow-design authority',
+    'routes workflow defects to WDM',
+    'retains code, runtime and operational ownership')) {
+    if (-not ($cpmWorkspace -replace '\s+', ' ').ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+        throw "Code PM workspace orientation missing: $required"
     }
 }
 foreach ($required in @(
@@ -960,17 +990,26 @@ if ($currentWorkIndexMap.document_kind -cne 'current_work_index' -or
 
 $currentWorkSessionMap = ConvertTo-HmasdRecordMap -Text $currentWorkSession -Label 'Code PM current-work session'
 Assert-ExactHmasdKeyInventory -Actual $currentWorkSessionMap -ExpectedKeys @(
-    'document_kind', 'schema_version', 'session_owner_role', 'session_owner_id',
-    'workstream_ids', 'external_pointer_ids') -Label 'Code PM current-work session'
+    'document_kind', 'schema_version', 'state_revision',
+    'compatibility_path_semantics', 'owner_role', 'physical_writer',
+    'state_update_route', 'continuity', 'reload_boundary', 'next_boundary',
+    'cross_owner_route', 'workstream_ids', 'external_pointer_ids') -Label 'Code PM current-work session'
 if ($currentWorkSessionMap.document_kind -cne 'current_work_session' -or
-    $currentWorkSessionMap.schema_version -cne '1' -or
-    $currentWorkSessionMap.session_owner_role -cne 'code_project_manager' -or
-    $currentWorkSessionMap.session_owner_id -cne '019f9e4f-f4d0-7fe0-b214-c47fd034e84d') {
+    $currentWorkSessionMap.schema_version -cne '2' -or
+    $currentWorkSessionMap.state_revision -cne '1' -or
+    $currentWorkSessionMap.compatibility_path_semantics -cne 'owner_state_not_live_session' -or
+    $currentWorkSessionMap.owner_role -cne 'code_project_manager' -or
+    $currentWorkSessionMap.physical_writer -cne 'root' -or
+    $currentWorkSessionMap.state_update_route -cne 'code_project_manager_accepted_proposal_to_root' -or
+    $currentWorkSessionMap.continuity -cne 'file_backed_owner_state' -or
+    $currentWorkSessionMap.reload_boundary -cne 'each_level1_spawn' -or
+    $currentWorkSessionMap.next_boundary -cne 'new_root_session_reload_router_and_relevant_owner_state' -or
+    $currentWorkSessionMap.cross_owner_route -cne 'return_to_root') {
     throw 'Code PM current-work session identity/schema is invalid'
 }
 
 $stateBearingKeys = @(
-    'status', 'active_assignment_id', 'next_boundary', 'environment',
+    'status', 'active_assignment_id', 'environment',
     'grant_or_authority_reference', 'grant_iterations_authorized',
     'grant_iterations_remaining', 'conclusion_bearing_iterations_consumed_total',
     'scientific_iteration_cost_current_boundary', 'completed_candidate_ids',
@@ -1012,8 +1051,7 @@ foreach ($recordId in $cpmRecordIds) {
     Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
         'document_kind', 'schema_version', 'record_id', 'record_kind', 'owner_role') -Label $recordId
     if ($record.document_kind -cne 'current_work_common_record' -or
-        $record.schema_version -cne '1' -or $record.record_id -cne $recordId -or
-        $record.owner_role -cne 'code_project_manager') {
+        $record.schema_version -cne '2' -or $record.record_id -cne $recordId) {
         throw "Current-work common record identity/schema mismatch: $recordId"
     }
     if (-not $currentWorkIndex.Contains("current-work/common/$recordId.md")) {
@@ -1023,15 +1061,21 @@ foreach ($recordId in $cpmRecordIds) {
         Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
             'workstream_id', 'status', 'active_assignment_id', 'next_boundary',
             'environment', 'grant_or_authority_reference', 'current_evidence_pointer') -Label $recordId
-        if ($record.record_kind -cne 'workstream' -or $record.workstream_id -cne $recordId) {
+        if ($record.record_kind -cne 'workstream' -or $record.workstream_id -cne $recordId -or
+            $record.owner_role -cne 'code_project_manager') {
             throw "Current-work workstream identity mismatch: $recordId"
         }
     } elseif ($sessionPointerIds -ccontains $recordId) {
         Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
-            'pointer_id', 'subject_owner_role', 'session_id', 'state_source',
-            'latest_artifact_pointer', 'project_state_replication') -Label $recordId
-        if ($record.record_kind -cne 'external_owner_pointer' -or
-            $record.project_state_replication -cne 'forbidden') {
+            'pointer_id', 'semantic_owner', 'physical_writer', 'continuity_entry',
+            'continuity_revision_source', 'reload_boundary',
+            'scientific_state_replication', 'project_state_replication',
+            'authority_effect') -Label $recordId
+        if ($record.record_kind -cne 'owner_continuity_pointer' -or
+            $record.owner_role -cne 'independent_research_explorer' -or
+            $record.project_state_replication -cne 'forbidden' -or
+            $record.scientific_state_replication -cne 'forbidden' -or
+            $record.authority_effect -cne 'none') {
             throw "Current-work external pointer identity mismatch: $recordId"
         }
     } else {
@@ -1152,46 +1196,39 @@ if (-not (Test-Path -LiteralPath $readinessScriptPath -PathType Leaf)) {
     throw 'Execution-readiness script is missing'
 }
 $readinessScript = Get-Content -Raw -LiteralPath $readinessScriptPath
-if ($readinessScript.Contains('019f9e4f-f4d0-7fe0-b214-c47fd034e84d') -or
-    -not $readinessScript.Contains('session_owner_id=')) {
-    throw 'Execution-readiness hook duplicates the fixed Code PM session instead of reading the role charter'
+if ($readinessScript.Contains('session_owner_id=') -or
+    $readinessScript.Contains('hook-stop') -or
+    $readinessScript.Contains('CODE_ACCEPTED')) {
+    throw 'Execution-readiness parser must not parse session identity, Hook Stop, or CODE_ACCEPTED'
+}
+foreach ($command in @('run', 'finalize', 'check')) {
+    if (-not $readinessScript.Contains($command)) {
+        throw "Execution-readiness parser command is missing: $command"
+    }
 }
 if (-not (Test-Path -LiteralPath $hooksPath -PathType Leaf)) {
     throw 'Code acceptance hook configuration is missing'
 }
 $hooks = Get-Content -Raw -LiteralPath $hooksPath | ConvertFrom-Json
-$preHooks = @($hooks.hooks.PreToolUse)
-$boundaryHooks = @($preHooks | Where-Object { $_.matcher -match 'shell_command' })
-if ($boundaryHooks.Count -ne 1 -or
-    @($boundaryHooks[0].hooks).Count -ne 1 -or
-    $boundaryHooks[0].hooks[0].command -notmatch 'hmasd_workspace_boundary_guard\.py' -or
-    $boundaryHooks[0].hooks[0].timeout -ne 5) {
-    throw 'Workspace-boundary PreToolUse hook is missing or ambiguous'
+if (@($hooks.hooks.PSObject.Properties).Count -ne 0) {
+    throw 'Hook configuration must remain explicitly empty'
 }
-$stopHooks = @($hooks.hooks.Stop)
-if ($stopHooks.Count -ne 1 -or
-    @($stopHooks[0].hooks).Count -ne 1 -or
-    $stopHooks[0].hooks[0].type -ne 'command' -or
-    $stopHooks[0].hooks[0].command -notmatch 'hmasd_execution_readiness\.py.*hook-stop' -or
-    $stopHooks[0].hooks[0].timeout -ne 10) {
-    throw 'Code acceptance Stop hook is not narrow and deterministic'
-}
-$configuredHookPayload = @{ session_id = 'non-code-pm-hook-command-smoke'; stop_hook_active = $false; last_assistant_message = 'ordinary turn' } | ConvertTo-Json -Compress
-Push-Location $repo
-try {
-    $configuredHookOutput = $configuredHookPayload | & cmd.exe /d /s /c $stopHooks[0].hooks[0].command
-    if ($LASTEXITCODE -ne 0 -or $configuredHookOutput) {
-        throw 'Configured Stop hook command is not executable from the repository root'
+foreach ($required in @(
+    'execution_readiness_dispatch=explicit_CPM_candidate_proposal',
+    'execution_readiness_root_git=physical_Git_only_when_separately_authorized',
+    'execution_readiness_hook_stop=forbidden',
+    'candidate-ready proposal only and CPM never emits `CODE_ACCEPTED`',
+    'same CPM verifies a clean checkout whose `HEAD` equals one exact 40-character candidate commit and validates the Verifier receipt')) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "CPM readiness lifecycle contract is missing: $required"
     }
-}
-finally {
-    Pop-Location
 }
 
 
 $parentContracts = @{
     '.agents/roles/CODE_SCOUT.md' = 'parent=code_project_manager'
     '.agents/roles/IMPLEMENTER.md' = 'parent=code_project_manager'
+    '.agents/roles/ROUTINE_IMPLEMENTER.md' = 'parent=code_project_manager'
     '.agents/roles/REVIEWER.md' = 'parent=code_project_manager'
     '.agents/roles/VERIFIER.md' = 'parent=code_project_manager'
     '.agents/roles/EXPERIMENT_OPERATOR.md' = 'parent=code_project_manager'

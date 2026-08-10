@@ -8,9 +8,29 @@ model_catalog_json = "C:\\project\\HMASD\\runtime\\model-catalog-v2-workaround.j
 multi_agent_v2 = true
 
 [agents]
-max_threads = 8
-max_depth = 1
+max_threads = 10
+max_depth = 2
 interrupt_message = true
+
+[agents."HMASDWorkflowDesignManager"]
+description = "Read-only Terra-high L1 Workflow Design Manager for one Root-scoped workflow assignment."
+config_file = "./agents/hmasd-workflow-design-manager.toml"
+nickname_candidates = ["Workflow Design Manager", "Workflow Architect", "Control Plane Designer"]
+
+[agents."HMASDCodeProjectManager"]
+description = "Read-only Sol-high L1 Code Project Manager for one Root-scoped implementation assignment."
+config_file = "./agents/hmasd-code-project-manager.toml"
+nickname_candidates = ["Code Project Manager", "Technical Manager", "Implementation Coordinator"]
+
+[agents."HMASDIndependentResearchExplorer"]
+description = "Read-only Sol-max L1 Independent Research Explorer for one Root-scoped research assignment."
+config_file = "./agents/hmasd-independent-research-explorer.toml"
+nickname_candidates = ["Independent Research Explorer", "Research Manager", "Scientific Explorer"]
+
+[agents."HMASDResearchArtifactWriter"]
+description = "Workspace-write L2 research artifact writer owned only by the Independent Research Explorer."
+config_file = "./agents/hmasd-research-artifact-writer.toml"
+nickname_candidates = ["Research Artifact Writer", "Research Writer", "Artifact Maintainer"]
 
 [agents."HMASDCodeScout"]
 description = "Read-only HMASD code scout for bounded interface mapping and safe parallel-work discovery."
@@ -62,10 +82,15 @@ description = "Read-only Luna-max reviewer for one integrated workflow batch."
 config_file = "./agents/hmasd-workflow-reviewer.toml"
 nickname_candidates = ["Workflow Reviewer", "Control Plane Reviewer"]
 
-[agents."HMASDAgentifyTransport"]
-description = "Silent native Agentify transport child for one CPM or Explorer file assignment."
-config_file = "./agents/hmasd-agentify-transport.toml"
-nickname_candidates = ["Agentify Transport", "Review Transport Child"]
+[agents."HMASDCPMAgentifyTransport"]
+description = "Silent native Agentify transport child for one Code Project Manager file assignment."
+config_file = "./agents/hmasd-cpm-agentify-transport.toml"
+nickname_candidates = ["CPM Agentify Transport", "Technical Review Transport"]
+
+[agents."HMASDExplorerAgentifyTransport"]
+description = "Silent native Agentify transport child for one Independent Research Explorer file assignment."
+config_file = "./agents/hmasd-explorer-agentify-transport.toml"
+nickname_candidates = ["Explorer Agentify Transport", "Research Review Transport"]
 
 [agents."HMASDExperimentOperator"]
 description = "Silent mechanical operator for one authorized HMASD train-evaluate-analyze run."

@@ -2,7 +2,7 @@ name = "hmasd-implementer-terra"
 description = "Terra-high implementation worker for a frozen bounded routine engineering task."
 model = "gpt-5.6-terra"
 model_reasoning_effort = "high"
-sandbox_mode = "danger-full-access"
+sandbox_mode = "workspace-write"
 approval_policy = "never"
 nickname_candidates = ["Routine Implementer", "Maintenance Implementer", "Refactor Implementer"]
 
@@ -10,7 +10,7 @@ developer_instructions = """
 You are the HMASD routine implementation worker, a registered child of Code Project Manager.
 Execute only the exact assignment; its owned paths and
 outcome are authoritative. Read the root router, exact assignment, this
-profile and `.agents/roles/IMPLEMENTER.md` before assignment-named
+profile and `.agents/roles/ROUTINE_IMPLEMENTER.md` before assignment-named
 interfaces. The Role charter owns task meaning, local judgment, evidence and
 the result contract.
 

@@ -92,14 +92,14 @@ foreach ($required in @(
     }
 }
 foreach ($profileRoute in @(
-    @{ Text = $implementer; Model = 'gpt-5.6-sol'; Effort = 'high'; Label = 'protected Sol' },
-    @{ Text = $routineImplementer; Model = 'gpt-5.6-terra'; Effort = 'high'; Label = 'routine Terra' })) {
+    @{ Text = $implementer; Model = 'gpt-5.6-sol'; Effort = 'high'; Role = '.agents/roles/IMPLEMENTER.md'; Label = 'protected Sol' },
+    @{ Text = $routineImplementer; Model = 'gpt-5.6-terra'; Effort = 'high'; Role = '.agents/roles/ROUTINE_IMPLEMENTER.md'; Label = 'routine Terra' })) {
     foreach ($required in @(
         ('model = "' + $profileRoute.Model + '"'),
         ('model_reasoning_effort = "' + $profileRoute.Effort + '"'),
-        'sandbox_mode = "danger-full-access"',
+        'sandbox_mode = "workspace-write"',
         'approval_policy = "never"',
-        '.agents/roles/IMPLEMENTER.md',
+        $profileRoute.Role,
         'registered child of Code Project Manager',
         'exact assignment',
         'Do not mutate Git')) {
@@ -148,12 +148,23 @@ foreach ($required in @(
     'name = "hmasd-cpm-mechanical"',
     'model = "gpt-5.6-luna"',
     'model_reasoning_effort = "low"',
-    'sandbox_mode = "danger-full-access"',
+    'sandbox_mode = "workspace-write"',
     'approval_policy = "never"',
+    '.agents/roles/CPM_MECHANICAL_OPERATOR.md',
     'CPM_MECHANICAL_TASK_ASSIGNMENT',
     'CPM_MECHANICAL_TASK_RESULT',
     'fork_turns=none',
-    'prepare-integrate')) {
+    'agent_tree_level=2',
+    'parent=code_project_manager',
+    'spawn_authority=none',
+    'user_contact_authority=none',
+    'cross_branch_transport=none',
+    'inspect_identity|run_focused_checks|verify_result|assemble_handoff|render_state',
+    'ticket and worktree admission is outside this leaf',
+    'There is no',
+    'Hook route, runtime',
+    'Git/canonical-state mutation or acceptance authority',
+    'workspace-write only for the exact assignment result path')) {
     if (-not $mechanicalOperator.Contains($required)) {
         throw "CPM mechanical profile missing: $required"
     }
@@ -192,7 +203,8 @@ foreach ($required in @(
     'scientific_authority=none',
     'technical_acceptance_authority=none',
     'child_authority=none',
-    'cross_task_contact_authority=none',
+    'cross_owner_contact_authority=none',
+    'cross_branch_transport=none',
     'self-contained natural-language task model',
     'Return one native terminal result only')) {
     if (-not (($explorerMechanicalRole -replace '\s+', ' ').Contains($required))) {
@@ -303,8 +315,10 @@ foreach ($required in @(
         throw "Independent research profile is not registered: $required"
     }
 }
-if (-not $config.Contains('max_depth = 1')) {
-    throw 'Independent research child no-spawn depth is not enforced'
+if (-not $config.Contains('max_threads = 10') -or
+    $config.Contains('max_concurrent_threads_per_session') -or
+    -not $config.Contains('max_depth = 2')) {
+    throw 'Two-level topology capacity/depth is not configured'
 }
 foreach ($required in @(
     'model = "gpt-5.6-sol"',
@@ -380,8 +394,6 @@ foreach ($required in @(
     'scientific_iteration_cost=0',
     'A failed attempt is evidence, not a global blocker',
     'multiple bounded repair turns',
-    'PM-created workspace ticket',
-    'child `resolve` and PM `verify`',
     'monetary_cost_unavailable')) {
     if (-not $benchmark.Contains($required)) {
         throw "Benchmark contract missing: $required"
@@ -392,8 +404,6 @@ foreach ($required in @(
     'implementer_winner=gpt-5.6-terra/high',
     'reviewer_winner=gpt-5.6-luna/max',
     'monetary_cost=unavailable_from_native_child_runtime',
-    'harness_failure=worktree_path_resolution',
-    'scripts/hmasd_workspace_ticket.py',
     'hidden_oracle=IMPLEMENTER_ORACLE_PASS')) {
     if (-not $result.Contains($required)) {
         throw "Benchmark result missing: $required"

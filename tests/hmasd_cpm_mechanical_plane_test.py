@@ -13,8 +13,7 @@ import pytest
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = REPOSITORY_ROOT / ".agents" / "skills" / "hmasd-agile-research-development" / "scripts" / "hmasd_cpm_mechanical.py"
-TICKET_SCRIPT = REPOSITORY_ROOT / "scripts" / "hmasd_workspace_ticket.py"
-REGISTERED_PYTHON = Path(r"C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe")
+DISPATCHER_PYTHON = Path(sys.executable).resolve()
 
 
 def _load_dispatcher():
@@ -41,13 +40,24 @@ def _run(tmp_path: Path, task_class: str, task: dict, *, reads: list[str], write
     spec_path = tmp_path / "spec.json"
     spec_path.write_text(json.dumps(spec), encoding="utf-8")
     completed = subprocess.run(
-        [str(REGISTERED_PYTHON), str(SCRIPT), "run", "--spec", str(spec_path), "--result", str(result)],
+        [str(DISPATCHER_PYTHON), str(SCRIPT), "run", "--spec", str(spec_path), "--result", str(result)],
         capture_output=True,
         text=True,
         check=False,
     )
     payload = json.loads(result.read_text(encoding="utf-8"))
     return completed, payload
+
+
+def test_task_classes_are_the_active_five_only() -> None:
+    dispatcher = _load_dispatcher()
+    assert dispatcher.TASK_CLASSES == {
+        "inspect_identity",
+        "run_focused_checks",
+        "verify_result",
+        "assemble_handoff",
+        "render_state",
+    }
 
 
 def test_inspect_identity_has_single_terminal_result(tmp_path: Path) -> None:
@@ -62,17 +72,17 @@ def test_inspect_identity_has_single_terminal_result(tmp_path: Path) -> None:
 def test_focused_checks_stop_at_first_failure_and_log(tmp_path: Path) -> None:
     checks = [
         {
-            "argv": [str(REGISTERED_PYTHON), "-c", "print('ok')"],
+            "argv": [str(DISPATCHER_PYTHON), "-c", "print('ok')"],
             "timeout_sec": 5,
             "log_path": "logs/one.log",
         },
         {
-            "argv": [str(REGISTERED_PYTHON), "-c", "raise SystemExit(7)"],
+            "argv": [str(DISPATCHER_PYTHON), "-c", "raise SystemExit(7)"],
             "timeout_sec": 5,
             "log_path": "logs/two.log",
         },
         {
-            "argv": [str(REGISTERED_PYTHON), "-c", "raise SystemExit(8)"],
+            "argv": [str(DISPATCHER_PYTHON), "-c", "raise SystemExit(8)"],
             "timeout_sec": 5,
             "log_path": "logs/three.log",
         },
@@ -98,7 +108,7 @@ def test_focused_check_timeout_preserves_byte_output(monkeypatch: pytest.MonkeyP
         "task": {
             "checks": [
                 {
-                    "argv": [str(REGISTERED_PYTHON), "-c", "print('unused')"],
+                    "argv": [str(DISPATCHER_PYTHON), "-c", "print('unused')"],
                     "timeout_sec": 0.01,
                     "log_path": "logs/timeout.log",
                 }
@@ -202,65 +212,46 @@ def test_render_state_rejects_canonical_owner_file(tmp_path: Path) -> None:
     assert payload["first_failure"]["code"] == "OWNER_FILE_NOT_TEMPORARY"
 
 
-def test_ticket_prepare_rejects_finalize_command(tmp_path: Path) -> None:
+def test_ticket_prepare_is_rejected_without_ticket_side_effects(tmp_path: Path) -> None:
     completed, payload = _run(
         tmp_path,
         "ticket_prepare",
-        {
-            "argv": [str(REGISTERED_PYTHON), str(TICKET_SCRIPT), "retire", "--ticket", "ticket.json"],
-            "timeout_sec": 5,
-        },
-        reads=["ticket.json"],
-        writes=["result.json"],
-    )
-    assert completed.returncode == 1
-    assert payload["first_failure"]["code"] == "INVOCATION_NOT_ALLOWED"
-    assert payload["retry_class"] == "INVOCATION"
-
-
-def test_ticket_prepare_requires_complete_file_bound_argv(tmp_path: Path) -> None:
-    completed, payload = _run(
-        tmp_path,
-        "ticket_prepare",
-        {"timeout_sec": 5},
+        {},
         reads=[],
         writes=["result.json"],
     )
     assert completed.returncode == 1
     assert payload["first_failure"]["code"] == "INVALID_SPEC"
+    assert payload["retry_class"] == "CHECK"
+    assert not (tmp_path / "ticket.json").exists()
+    assert not (tmp_path / "receipt.json").exists()
+    assert not (tmp_path / "logs").exists()
 
 
-def test_ticket_prepare_timeout_preserves_byte_output(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+def test_focused_checks_bind_to_dispatcher_interpreter(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     dispatcher = _load_dispatcher()
-    ticket = tmp_path / "ticket.json"
-    ticket.write_text("{}", encoding="utf-8")
-    receipt = tmp_path / "receipt.json"
-    log = tmp_path / "logs" / "ticket-timeout.log"
-    argv = [
-        str(REGISTERED_PYTHON),
-        str(dispatcher.TICKET_SCRIPT),
-        "prepare-integrate",
-        "--ticket",
-        str(ticket),
-        "--assignment-id",
-        "CPM-MECHANICAL-TEST",
-        "--target-repo",
-        str(tmp_path),
-        "--receipt",
-        str(receipt),
-    ]
+    launcher = tmp_path / "launcher-python.exe"
+    captured: list[list[str]] = []
 
-    def timeout(*args, **kwargs):
-        raise subprocess.TimeoutExpired(args[0], kwargs["timeout"], output=b"prepare-\xff", stderr=b"stderr")
+    def run(argv, **kwargs):
+        captured.append(argv)
+        return subprocess.CompletedProcess(argv, 0, stdout="ok", stderr="")
 
-    monkeypatch.setattr(dispatcher.subprocess, "run", timeout)
-    spec = {
-        "assignment_id": "CPM-MECHANICAL-TEST",
-        "task": {"argv": argv, "timeout_sec": 0.01, "log_path": str(log)},
-    }
-    with pytest.raises(dispatcher.MechanicalError) as caught:
-        dispatcher._task_ticket_prepare(spec, tmp_path, ["ticket.json"], ["receipt.json", "logs"])
+    monkeypatch.setattr(dispatcher.sys, "executable", str(launcher))
+    monkeypatch.setattr(dispatcher.subprocess, "run", run)
+    observations, _, log_paths = dispatcher._task_run_focused_checks(
+        {
+            "task": {
+                "checks": [
+                    {"argv": [str(launcher), "-c", "print('ok')"], "timeout_sec": 5, "log_path": "logs/check.log"}
+                ]
+            }
+        },
+        tmp_path,
+        [],
+        ["logs"],
+    )
 
-    assert caught.value.code == "CHECK_TIMEOUT"
-    assert caught.value.retry_class == "TIMEOUT"
-    assert log.read_text(encoding="utf-8") == "prepare-�stderr"
+    assert captured == [[str(launcher), "-c", "print('ok')"]]
+    assert observations["checks"][0]["argv"][0] == str(launcher)
+    assert log_paths == [str(tmp_path / "logs" / "check.log")]

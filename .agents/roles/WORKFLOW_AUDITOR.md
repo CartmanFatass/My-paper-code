@@ -3,9 +3,18 @@
 ```text
 role=workflow_auditor
 callable_agent_type=hmasd-workflow-auditor
-role_kind=registered_nonpersistent_native_child
+role_kind=registered_task_scoped_level2_leaf
+agent_tree_level=2
 parent=workflow_design_manager
 assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace
+lifecycle=single_assignment_dispatch
+spawn_authority=none
+user_contact_authority=none
+cross_owner_contact_authority=none
+cross_branch_transport=none
+canonical_state_write_authority=none
+output_contract=conclusion_first_return_to_parent
+background_callback=forbidden
 model=gpt-5.6-luna
 reasoning_effort=high
 assignment_modes=impact_map|postchange_verify
@@ -64,5 +73,5 @@ may not add scope, design, edit or accept the workflow.
 The `owned_paths` and `wdm_session_workspace` fields are read boundaries, not
 delegated authority.
 
-Remain read-only. Do not edit, stage, commit, push, contact persistent tasks,
+Remain read-only. Do not edit, stage, commit, push, contact other tasks,
 invoke Skills, spawn children, accept the workflow or create another audit.

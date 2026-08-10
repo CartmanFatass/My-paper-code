@@ -12,7 +12,6 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import shlex
 import subprocess
 import sys
 import tempfile
@@ -21,18 +20,12 @@ from typing import Any, Iterable, Mapping
 
 
 SCHEMA_VERSION = 1
-REGISTERED_INTERPRETER = Path(
-    r"C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe"
-)
-REPOSITORY_ROOT = Path(__file__).resolve().parents[4]
-TICKET_SCRIPT = REPOSITORY_ROOT / "scripts" / "hmasd_workspace_ticket.py"
 TASK_CLASSES = {
     "inspect_identity",
     "run_focused_checks",
     "verify_result",
     "assemble_handoff",
     "render_state",
-    "ticket_prepare",
 }
 RETRY_CLASSES = {"INVOCATION", "TIMEOUT", "CHECK", "NONE"}
 COMMON_SPEC_FIELDS = (
@@ -231,18 +224,6 @@ def _validate_common(spec: Mapping[str, Any]) -> tuple[Path, list[str], list[str
     return root, reads, writes, result
 
 
-def _ensure_registered_interpreter() -> None:
-    expected = _path_key(REGISTERED_INTERPRETER)
-    actual = _path_key(Path(sys.executable))
-    if actual != expected:
-        raise MechanicalError(
-            "IDENTITY_MISMATCH",
-            "interpreter",
-            f"registered interpreter mismatch: expected {REGISTERED_INTERPRETER}, got {sys.executable}",
-            retry_class="INVOCATION",
-        )
-
-
 def _task_inspect_identity(spec: Mapping[str, Any], root: Path, reads: list[str], writes: list[str]) -> dict[str, Any]:
     task = spec["task"]
     identity: dict[str, Any] = {
@@ -286,8 +267,8 @@ def _task_run_focused_checks(spec: Mapping[str, Any], root: Path, reads: list[st
         argv = raw_check.get("argv")
         if not isinstance(argv, list) or not argv or any(not isinstance(value, str) for value in argv):
             raise MechanicalError("INVALID_SPEC", f"task.checks[{index}].argv", "argv must be a non-empty string array")
-        if _path_key(Path(argv[0])) != _path_key(REGISTERED_INTERPRETER):
-            raise MechanicalError("INVOCATION_NOT_ALLOWED", f"task.checks[{index}].argv", "checks must use the registered interpreter", "INVOCATION")
+        if _path_key(Path(argv[0])) != _path_key(Path(sys.executable)):
+            raise MechanicalError("INVOCATION_NOT_ALLOWED", f"task.checks[{index}].argv", "checks must use this dispatcher's interpreter", "INVOCATION")
         lowered = " ".join(argv).lower()
         if any(token in lowered for token in ("py_compile", "compileall", "-m compile", ".pyc")):
             raise MechanicalError("BYTECODE_NOT_ALLOWED", f"task.checks[{index}].argv", "bytecode-producing checks are forbidden")
@@ -532,80 +513,6 @@ def _task_render_state(spec: Mapping[str, Any], root: Path, reads: list[str], wr
     return {"rendered_paths": rendered}, rendered, []
 
 
-def _task_ticket_prepare(spec: Mapping[str, Any], root: Path, reads: list[str], writes: list[str]) -> tuple[dict[str, Any], list[str], list[str]]:
-    task = spec["task"]
-    timeout = task.get("timeout_sec", task.get("timeout", 30))
-    if isinstance(timeout, bool) or not isinstance(timeout, (int, float)) or timeout <= 0:
-        raise MechanicalError("INVALID_SPEC", "task.timeout_sec", "timeout_sec must be positive")
-    raw_argv = task.get("argv")
-    if raw_argv is None:
-        raise MechanicalError(
-            "INVALID_SPEC",
-            "task.argv",
-            "ticket_prepare requires the complete prepare-integrate argv",
-        )
-    if not isinstance(raw_argv, list) or not raw_argv or any(not isinstance(value, str) for value in raw_argv):
-        raise MechanicalError("INVALID_SPEC", "task.argv", "ticket argv must be a string array")
-    if len(raw_argv) < 3 or _path_key(Path(raw_argv[0])) != _path_key(REGISTERED_INTERPRETER):
-        raise MechanicalError("INVOCATION_NOT_ALLOWED", "task.argv", "ticket_prepare must use registered interpreter", "INVOCATION")
-    if _path_key(Path(raw_argv[1])) != _path_key(TICKET_SCRIPT) or raw_argv[2] != "prepare-integrate":
-        raise MechanicalError("INVOCATION_NOT_ALLOWED", "task.argv", "only the exact prepare-integrate ticket command is allowed", "INVOCATION")
-    if len(raw_argv) != 11 or raw_argv[3::2] != [
-        "--ticket",
-        "--assignment-id",
-        "--target-repo",
-        "--receipt",
-    ]:
-        raise MechanicalError(
-            "INVOCATION_NOT_ALLOWED",
-            "task.argv",
-            "ticket_prepare requires the exact ticket, assignment, target and receipt arguments",
-            "INVOCATION",
-        )
-    _resolve_path(raw_argv[4], root=root, allow=reads, field="task.argv.ticket", must_exist=True)
-    if raw_argv[6] != spec["assignment_id"]:
-        raise MechanicalError("IDENTITY_MISMATCH", "task.argv.assignment_id", "ticket assignment identity mismatch")
-    target_repo = Path(raw_argv[8]).expanduser().resolve(strict=True)
-    if not _same_path(target_repo, root):
-        raise MechanicalError("PATH_NOT_ALLOWED", "task.argv.target_repo", "ticket target must be the assigned working directory")
-    _resolve_path(raw_argv[10], root=root, allow=writes, field="task.argv.receipt", write=True)
-    log_path_raw = task.get("log_path", task.get("log"))
-    log_path = None
-    if log_path_raw is not None:
-        log_path = _resolve_path(log_path_raw, root=root, allow=writes, field="task.log_path", write=True)
-    env = os.environ.copy()
-    env["PYTHONDONTWRITEBYTECODE"] = "1"
-    try:
-        completed = subprocess.run(
-            raw_argv,
-            cwd=str(root),
-            env=env,
-            shell=False,
-            capture_output=True,
-            text=True,
-            timeout=float(timeout),
-            check=False,
-        )
-    except subprocess.TimeoutExpired as exc:
-        if log_path:
-            _atomic_write(log_path, _captured_text(exc.stdout) + _captured_text(exc.stderr))
-        failure = MechanicalError("CHECK_TIMEOUT", str(log_path or TICKET_SCRIPT), f"ticket prepare timed out after {timeout}s", "TIMEOUT")
-        failure.log_paths = [] if log_path is None else [str(log_path)]
-        raise failure from exc
-    except OSError as exc:
-        raise MechanicalError("INVOCATION_ERROR", str(TICKET_SCRIPT), str(exc), "INVOCATION") from exc
-    output = (completed.stdout or "") + (completed.stderr or "")
-    log_paths: list[str] = []
-    if log_path:
-        _atomic_write(log_path, output)
-        log_paths.append(str(log_path))
-    if completed.returncode != 0:
-        failure = MechanicalError("CHECK_FAILED", str(log_path or TICKET_SCRIPT), f"prepare-integrate exited {completed.returncode}", "CHECK")
-        failure.log_paths = list(log_paths)
-        raise failure
-    return {"argv": list(raw_argv), "exit_code": completed.returncode}, [], log_paths
-
-
 def _execute_task(spec: Mapping[str, Any], root: Path, reads: list[str], writes: list[str]) -> tuple[dict[str, Any], list[str], list[str]]:
     task_class = spec["task_class"]
     if task_class == "inspect_identity":
@@ -618,8 +525,6 @@ def _execute_task(spec: Mapping[str, Any], root: Path, reads: list[str], writes:
         return _task_assemble_handoff(spec, root, reads, writes)
     if task_class == "render_state":
         return _task_render_state(spec, root, reads, writes)
-    if task_class == "ticket_prepare":
-        return _task_ticket_prepare(spec, root, reads, writes)
     raise MechanicalError("INVALID_SPEC", "task_class", f"unsupported task class: {task_class}")
 
 
@@ -662,7 +567,6 @@ def run(spec_path: Path, result_arg: Path) -> int:
             declared_path = spec_path.parent / declared_path
         if not _same_path(declared_path, result_arg):
             raise MechanicalError("RESULT_PATH_MISMATCH", "result_path", "--result must exactly match spec result_path")
-        _ensure_registered_interpreter()
         root, reads, writes, result_path = _validate_common(spec)
         if not _same_path(result_path, result_arg):
             raise MechanicalError("RESULT_PATH_MISMATCH", "result_path", "--result must resolve to spec result_path")

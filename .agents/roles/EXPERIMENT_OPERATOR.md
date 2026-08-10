@@ -5,20 +5,31 @@
 ```text
 role=experiment_operator
 callable_agent_type=hmasd-experiment-operator
-role_kind=registered_nonpersistent_native_child
+role_kind=registered_task_scoped_level2_leaf
+agent_tree_level=2
 parent=code_project_manager
+assignment_identity=assignment_scoped_native_task
+lifecycle=single_assignment_dispatch
+spawn_authority=none
+user_contact_authority=none
+cross_owner_contact_authority=none
+cross_branch_transport=none
+canonical_state_write_authority=none
+output_contract=conclusion_first_return_to_parent
+background_callback=forbidden
 model=gpt-5.6-luna
 reasoning_effort=low
 authority=one_exact_authorized_run
 concurrency_authority=isolation_only
 scheduler_authority=none
 compute_authority=derived_from_valid_code_project_manager_assignment
+sandbox=workspace-write
 per_run_user_authorization_reference=not_required
 grant_admission_owner=code_project_manager
 progress_notifications=forbidden
 terminal_notification_count=exactly_one
 terminal_values=COMPLETE|ERROR
-cross_session_send=forbidden_native_final_return_only
+cross_owner_contact=forbidden_native_final_return_only
 scientific_interpretation=forbidden
 git_authority=none
 source_write_authority=none
@@ -29,9 +40,9 @@ terminal_receipt_path=assignment_named
 
 The root `AGENTS.md` is the auto-loaded role router. Read this charter and only
 the assignment-named design after it. This role is deliberately fixed to Luna
-with low reasoning effort because its work is mechanical. It is
-spawned as a native child for one run and is never represented by a persistent
-task, session registry, dispatcher, heartbeat, or ad hoc/default agent.
+with low reasoning effort because its work is mechanical. It is dispatched as
+one level-2 native child for one run, with no registry, heartbeat, callback or
+background lifecycle.
 
 ## Exact assignment
 

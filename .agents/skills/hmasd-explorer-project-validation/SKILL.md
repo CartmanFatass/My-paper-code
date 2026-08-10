@@ -1,23 +1,33 @@
 ---
 name: hmasd-explorer-project-validation
-description: Use for one semantic Explorer-to-project handoff through the shared ignored temporary handoff surface while preserving advisory, science, code and compute authority boundaries.
+description: Use for one semantic Explorer-to-project handoff through the shared ignored temporary handoff surface and Root relay while preserving advisory, science, code and compute authority boundaries.
 ---
 
 # Explorer project validation
 
-This Skill is the lightweight collaboration path from Independent Research
-Explorer to Code Project Manager. It is not a packet validator, dispatcher,
-queue engine or state machine. Explorer's explicit instruction authorizes CPM
-to execute the named project-validation treatment; it does not give Explorer
-direct code/runtime control or promote canonical science.
+This Skill is the lightweight collaboration path from the task-scoped
+Independent Research Explorer L1 through Root to Code Project Manager. Explorer
+is read-only and semantically authors the request, the registered Research
+Artifact Writer may physically write only the exact Explorer-approved outbound
+bytes, Explorer returns the locator to Root, Root assigns CPM, and CPM returns
+technical acceptance to Root. The cross-owner route is Explorer -> Root -> CPM;
+CPM's reverse result returns CPM -> Root -> Explorer. It is not a packet
+validator, dispatcher, queue engine or state machine. Explorer's explicit
+instruction authorizes CPM to execute the named project-validation treatment;
+it does not give Explorer direct code/runtime control or promote canonical
+science.
 
 ## Scientific-only intake boundary
 
 Apply the single stable rule in
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`: consume CPM's accepted
-mechanical packet, perform only Explorer-owned scientific interpretation, write
-one canonical scientific decision record, and keep derived views pointer-only.
-This Skill adds no second copy of that rule or technical admission gate.
+mechanical packet, perform only Explorer L1-owned scientific interpretation and
+semantically author one exact advisory scientific decision, while keeping derived
+views pointer-only. The Research Artifact Writer physically writes only the
+exact Explorer-approved ordinary/research/outbound bytes; Root alone
+physically writes `local_research/RESEARCH_CONTINUITY.md` after accepting the
+Explorer proposal and revision check. This Skill adds no second copy of that
+rule or technical admission gate.
 For optional targeted scientific analysis after technical acceptance, follow
 the same contract's rule for an exact accepted result brief and only necessary
 named evidence supplied to zero or more matching read-only research children;
@@ -37,8 +47,9 @@ source/evidence revision boundary, frozen facts and uncertainty, strongest
   generalization unless explicitly named, requested action/direct consumer,
   completion evidence and return destination understandable. These are semantic
   writing cues, not
-  required fields. CPM's conclusion-first reverse result and any Codex-native
-fallback carry the same binding before technical evidence. If identity,
+required fields. CPM's reverse result, returned through Root, begins with its
+conclusion; any Root-relayed native fallback carries the same binding before
+technical evidence. If identity,
 proposition or revision binding is missing or contradictory, preserve the
 original handoff/artifact and ask exactly one concrete semantic clarification;
   continue unrelated work without guessing, merging directions, rewriting the
@@ -56,9 +67,12 @@ admission, barrier and resource behavior is defined only in
 
 ## Normal path
 
-Explorer writes one self-contained, human/model-readable Markdown or JSON brief
-under `temp/handoffs/explorer_to_code_manager/`. The live file is ignored and
-requires no Git operation. The brief explains one candidate's identity, target and
+Explorer semantically authors one self-contained, human/model-readable Markdown
+or JSON brief and dispatches the registered Research Artifact Writer to
+physically write only the exact named file under
+`temp/handoffs/explorer_to_code_manager/`. The Writer cannot write
+`local_research/RESEARCH_CONTINUITY.md`. The live file is ignored and requires
+no Git operation. The brief explains one candidate's identity, target and
 version, intended outcome, concrete inputs, evidence and uncertainty, allowed
 and excluded effects, relevant authority boundary, completion evidence and
 return task, selected A/B/C treatment and one named action defined by the stable
@@ -105,7 +119,7 @@ The manifest is work organization only: it contains no item state, owner lease,
 retry record or admission status. CPM may process independent direction-local
 candidates concurrently when the capacity contract permits; the supplied order
 is organization rather than ranking, runtime admission or a cross-direction
-barrier. Every candidate keeps its own handoff, ticket, roots, receipt,
+barrier. Every candidate keeps its own handoff, assignment, roots, receipt,
 technical acceptance and scientific intake. Runtime and admission mechanics are
 defined only by the referenced `parallel-research-workflow.md`; this Skill
 grants no second runtime procedure or serial fallback.
@@ -130,21 +144,22 @@ choice that changes the scientific question returns to Explorer.
 CPM returns a human-readable result under
 `temp/handoffs/code_manager_to_explorer/` containing an understandable
 natural-language conclusion first and the necessary exact evidence second. A
-Codex-native message carrying the same semantic content is the simple fallback.
-Explorer reads but never edits CPM output.
+Root-relayed native message carrying the same semantic content is the simple
+fallback. Explorer reads but never edits CPM output.
 
-After technical acceptance, CPM pushes the result and returns its exact commit
-plus public GitHub repository/path locators. Ordinary B iteration is nonformal
+After technical acceptance, CPM returns its acceptance and exact candidate
+locators to Root; Root performs any separately authorized local candidate commit
+and integration. Ordinary B iteration is nonformal
 and does not automatically initiate a Pro review. Explorer requests one
 `CODE_SCIENCE_ALIGNMENT_AUDIT` only for a direction-changing decision, material
 result ambiguity, final science alignment, a formal/conclusion-bearing C result,
 an explicitly requested C review, or an explicit user request. When requested, Explorer dispatches it
-through the registered `hmasd-agentify-transport` child using the file-only
+through the registered `hmasd-explorer-agentify-transport` child using the file-only
 `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` (`batch_path|results_path`) interface;
-External Pro uses the GitHub connection to inspect the exact pushed revision
-and owns final scientific-semantic acceptance. Explorer archives and intakes
-the raw answer only after the child's terminal native final return, but does
-not substitute its own acceptance. CPM does not initiate this review and remains the sole
+External Pro uses the GitHub connection to inspect the exact Root-applied revision
+and owns final scientific-semantic acceptance. Explorer intakes the raw answer
+only after the child's terminal native final return, but does not substitute
+its own acceptance. CPM does not initiate this review and remains the sole
 technical acceptance owner.
 
 The audit asks a natural scientific decision question and supplies the frozen
@@ -158,17 +173,20 @@ context for judgment, not mandatory headings or an expected verdict.
 If a referenced attachment is not readable by CPM, Explorer embeds the minimum
 necessary content in the same public brief; it does not create another wrapper
 or require CPM to read `local_research/`. Neither direction uses hashes, byte
-counts or fingerprints. After receiver intake, the file author removes the
-temporary exchange copy. Canonical research, code, review and result records
-remain in their existing owner-controlled locations; the handoff itself is not
-an archive.
+counts or fingerprints. After Root confirms CPM intake, Explorer may assign
+the Writer to remove the exact outbound copy. After Root confirms Explorer
+intake of a Root-written reverse copy, Root may remove that exact reverse copy.
+Canonical research, code, review and result records remain in their existing
+owner-controlled locations; the handoff itself is not an archive.
 
 ## Preserved authority
 
 Explorer remains advisory. CPM owns project coordination, code, runtime and
-technical acceptance. External Pro owns scoped scientific choices. Compute
-still requires the applicable explicit user grant. Candidate evidence, run
-roots, artifacts and results remain candidate-specific. This lane is
+technical acceptance. External Pro owns scoped scientific choices. Root owns
+user communication, cross-owner relay, lifecycle and accepted physical writes
+only; Root has no scientific comparison or intake authority. Compute still
+requires the applicable explicit user grant. Candidate evidence, run roots,
+artifacts and results remain candidate-specific. This lane is
 `formal=false`, consumes no formal iteration and does not update the CDC
 portfolio or `CURRENT_WORK.md` merely by exchanging a brief.
 

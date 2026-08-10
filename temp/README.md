@@ -1,13 +1,18 @@
-# Temporary session work
+# Temporary compatibility work
 
-`temp/sessions/<role>/` holds owner-local, short-lived working files. It is not a
-cross-task routing protocol or identity layer.
+`temp/sessions/<role>/` is a stable compatibility path holding short-lived,
+assignment-owned working files. It is not a live session, thread, successor,
+cross-task routing protocol or identity layer. A fresh CLI Root task uses only
+the exact path named by its assignment.
 
-Cross-task messages use Codex-native `send_message_to_thread` with the current
-target task ID and no model or thinking override. When a long payload genuinely
-needs a file, the sender may place a plain UTF-8 file in its own session folder
-and send only that relative path. Workflow admission never depends on byte
-counts, SHA-256, or a repository route table.
+Cross-owner and cross-task results return to Root; Root performs any permitted
+relay to another owner. A long payload may be a plain UTF-8 file in the
+writer's exact assignment path, with the parent receiving only that relative
+path. A temporary file is a bounded byte payload, not a direct sibling channel,
+semantic acceptance record or identity mechanism. Workflow admission never
+depends on byte counts, SHA-256, an external identity, or a repository route
+table.
 
-Actual temporary payloads are ignored by Git and are never deleted
-automatically. Only the owning session removes its temporary files.
+Actual temporary payloads are ignored by Git and never enter a commit or push.
+Root controls relay and lifecycle; only the assignment owner writes its exact
+temporary bytes, and cleanup follows Root's bounded lifecycle decision.

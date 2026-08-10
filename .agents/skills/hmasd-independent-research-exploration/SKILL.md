@@ -1,6 +1,6 @@
 ---
 name: hmasd-independent-research-exploration
-description: Use in the user-controlled HMASD Independent Research Explorer task for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with research outputs confined to local_research and explicit handoffs confined to the shared ignored temporary outbound path.
+description: Use in the task-scoped HMASD Independent Research Explorer L1 assignment for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with research outputs confined to local_research and explicit handoffs confined to the shared ignored temporary outbound path.
 ---
 
 # HMASD Independent Research Exploration
@@ -11,19 +11,20 @@ Explore HMASD-relevant ideas without entering the formal project workflow.
 Preserve the initial mission and several-live-directions discipline, but do not
 make a canonical scientific decision.
 
-The active Explorer is the `gpt-5.6-sol/ultra` research role in the current
-direct user task and the only writer; no archived task ID or route registry is
+The active Explorer is the `gpt-5.6-sol` task-scoped L1 in the current Root
+assignment; no archived task ID, manager-session registry or route registry is
 required. It
 uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
-  adversarial checks. The persistent Explorer owns each review item and sends
-  one ordered file-backed set of frozen question paths to the registered
-  `hmasd-agentify-transport` child.
+  adversarial checks. The Explorer L1 owns each review item and sends one ordered
+  file-backed set of frozen question paths to the registered
+  `hmasd-explorer-agentify-transport` child.
 
-Restart continuity is owned by the Explorer and specified once in
-`references/parallel-research-workflow.md`; this Skill keeps the mode loop and
-scientific packet requirements.
+Restart continuity is semantically proposed by Explorer L1 and physically
+written by Root alone after the accepted proposal/revision check, as specified
+once in `references/parallel-research-workflow.md`; this Skill keeps the mode
+loop and scientific packet requirements.
 
 ## Dispatch registered research children
 
@@ -42,46 +43,48 @@ assumptions and independence, exclusions, allowed local judgment and
 completion meaning. This is writing guidance, not a mandatory schema, file,
 validator or admission gate.
 
-## Keep orchestration and portfolio comparison at the root
+## Keep orchestration and portfolio comparison in Explorer L1
 
-The persistent Explorer is orchestrator-first. It decomposes the task, chooses
+The task-scoped Explorer L1 is orchestrator-first. It decomposes the task, chooses
 the matching child for direction-local detail, judges dependency and
-concurrency, synthesizes conclusions, maintains continuity and owns the sole
-Explorer-owned advisory portfolio/local-research intake and decision and user
-communication. This is never formal or project-canonical science; the user
-alone decides whether any result enters the formal project. Direction-local
-detailed
+concurrency, synthesizes conclusions, prepares continuity proposals and owns the sole
+Explorer-owned advisory portfolio/local-research semantic intake and advisory
+decision.
+Root owns user communication, cross-owner relay, lifecycle and accepted physical
+writes only; Root has no scientific comparison or intake authority. This is
+never formal or project-canonical science; the user alone decides whether any
+result enters the formal project. Direction-local detailed
 derivation, source fidelity, criticism and mechanism design default to the
 best-matching registered child. A child receives only the minimum direction
 context needed for its self-contained question; it must not depend on hidden
-parent history and cannot replace the root's cross-direction comparison.
+parent history and cannot replace Explorer L1's cross-direction comparison.
 
-The root Explorer itself compares directions by relative information value,
+The Explorer L1 itself compares directions by relative information value,
 cross-direction dependencies, conflicts and combinations, portfolio ordering
 and readiness, and makes the sole Explorer-owned advisory portfolio decision.
 This advisory portfolio decision is not formal or project canonical science;
 the user alone decides whether any result enters the formal project. Children may
 return evidence, alternatives or a proposed next action, but they do not vote,
 rank siblings, merge duplicated questions or decide which direction wins. Keep
-this comparison direct at the root rather than creating a fixed panel,
+this comparison direct in Explorer L1 rather than creating a fixed panel,
 microdelegating cheap work, transferring authority, or adding an external
 process controller.
 
 Every child return is conclusion-first and action-bearing enough for synthesis:
 it names the evidence/locator, the protected assumption or postcondition, and
-the permitted next action. The root verifies the protected scientific
-postcondition before advisory local-research intake. Each direction gets a
-compact continuity projection containing its pointer, exact dependency,
-returned conclusion and CPM readiness; the root's comparison context is not
+the permitted next action. Explorer L1 verifies the protected scientific
+postcondition before Explorer L1's advisory local-research semantic intake. Each direction gets a
+compact continuity proposal containing its pointer, exact dependency,
+returned conclusion and CPM readiness; the Explorer's comparison context is not
 limited to that projection.
 
 While one child or CPM result is outstanding, continue every other disjoint
 direction and read-only scientific action. Use a bounded wait only when every
 remaining safe scientific action depends on that outstanding result; an
-outstanding result never creates a global barrier. Direct root work remains
+outstanding result never creates a global barrier. Direct Explorer-L1 work remains
 appropriate for a cheap reversible singleton when dispatch overhead exceeds
-the question, for cross-direction comparison, advisory local-research intake, and frozen
-successor or park-retire decisions.
+the question, for cross-direction comparison, advisory local-research semantic intake, and frozen
+next-treatment or park-retire decisions.
 
 ## Triggered mechanical fact organization
 
@@ -121,30 +124,33 @@ read-only research child by default with `fork_turns="none"` and a self-containe
 assignment. Explorer may answer a cheap, reversible singleton directly only
 when dispatch overhead exceeds the question. For each direction, the compact
 continuity projection contains the direction pointer, exact dependency,
-compact returned conclusion and CPM readiness. Separately, the root retains
+compact returned conclusion and CPM readiness. Separately, the Explorer L1 retains
 and reads Explorer-owned comparison-relevant portfolio evidence and relationship
 edges needed for relative information value, cross-direction
 dependencies/conflicts/combinations, portfolio ordering/readiness and the sole
 Explorer-owned advisory portfolio decision. An accepted CPM result may first go
 to one direction-specific
 read-only child for scientific interpretation; that child does not redo
-technical acceptance or replace the root comparison.
+technical acceptance or replace Explorer L1's comparison.
 
 ## Start safely
 
-1. Confirm the active task has the Explorer role, registered model and current
-   direct user assignment.
+1. Confirm the active Root assignment has the Explorer role, registered model
+   and task-scoped assignment.
 2. Read the Explorer role and only
    `docs/project/ALGORITHM_PRINCIPLES.md sections 1 and 3`.
 3. Freeze exactly one mode, one campaign direction or evidence question, mission
    connection, authorized source boundary, exclusions and completion meaning.
-   Ask the user only when a material boundary is missing.
+   Ask Root to obtain user clarification only when a material boundary is
+   missing.
 4. For MyLib, read [references/mylib.md](references/mylib.md) and run the
 registered probe. Never write to MyLib.
 5. Read [references/parallel-research-workflow.md](references/parallel-research-workflow.md)
    before dispatching children.
-6. Load its Explorer-owned continuity entry. If it is absent, perform the one
-   bounded owned-path scan and create it exactly as that reference specifies.
+6. Load the Explorer semantic continuity entry. If it is absent, perform the one
+   bounded owned-path scan and return a continuity proposal exactly as that
+   reference specifies; Root alone performs the physical write after accepting
+   the proposal/revision check.
 7. For algorithm inspiration, read
    [references/open-algorithm-inspiration.md](references/open-algorithm-inspiration.md).
    For a conclusion-bearing candidate validation, also read
@@ -164,14 +170,18 @@ Do not preload `CURRENT_WORK.md`, active runtime/review state, implementation or
 scientific ledgers during ordinary research. The project-validation phase may
 inspect project material read-only as needed for reconnaissance and semantic
 acceptance. During research execution, do not use Git or create project
-changes. Write advisory research files with `apply_patch` under
-`local_research`. An explicit mature-candidate handoff is a disposable copy
-under `temp/handoffs/explorer_to_code_manager/`; it is ignored and requires no
-Git operation.
+changes. Explorer is read-only: it semantically authors exact advisory/handoff
+bytes and dispatches the registered Research Artifact Writer for the named
+ordinary/research/outbound file; that Writer physically writes only those
+Explorer-approved bytes and cannot write
+`local_research/RESEARCH_CONTINUITY.md`. Root alone physically writes continuity
+after the accepted proposal/revision check. An explicit mature-candidate handoff is a
+disposable copy under `temp/handoffs/explorer_to_code_manager/`; it is ignored
+and requires no Git operation.
 
-Workflow design is not an Explorer mode. Report one exact requirement or defect
-to the current Workflow Design Manager task through Codex-native
-`send_message_to_thread`, omitting model and thinking overrides; never load the
+Workflow design is not an Explorer mode. Return one exact requirement or defect
+to Root for relay to the current Workflow Design Manager task, omitting model
+and thinking overrides; never load the
 collaborative/audit Workflow Skills, edit or accept control-plane files, or
 dispatch a workflow implementer. Continue unrelated research when the defect is
 dependency-local. A WDM reload receipt has `research_state_effect=none` and
@@ -211,8 +221,8 @@ corpus first. Assignment count is derived from that corpus, not a fixed range;
 run independent assignments at available native capacity and defer the rest as
 not-yet-started roster items.
 Within this canonical campaign, after every `SOURCE_RESULT_PACKET` crosses the
-absorption barrier, the Explorer
-creates one `SOURCE_ABSORPTION_BRIEF`. Innovation, constructive principles
+absorption barrier, Explorer L1 semantically authors one
+`SOURCE_ABSORPTION_BRIEF`. Innovation, constructive principles
 analysis, adversarial review and portfolio update then proceed in that order.
 
 The campaign repeats automatically while a recorded new mechanism, transfer,
@@ -225,10 +235,14 @@ requires code, compute or formal adoption.
 An in-grant direction review or bounded methodology audit is an explicit
 advisory trigger. Load `hmasd-independent-research-pro-review`, freeze the
 standalone question and dispatch it through the registered
-`hmasd-agentify-transport` child using the existing file-only assignment. The
+`hmasd-explorer-agentify-transport` child using the existing file-only
+assignment. This is Explorer L1's parent-specific callable transport; no shared
+transport profile is used. Its temporary transport surface is requester-
+partitioned, and its terminal result returns to Explorer L1 for Explorer ->
+Root relay. The
 Agentify Transport Role and Skill own batch, page/provider, wait, recovery and
-tab mechanics; Explorer reads the named terminal result, archives the raw
-response and reconciles it. A review error affects only that item and does not
+tab mechanics; Explorer reads and intakes the named terminal result, and
+reconciles it. A review error affects only that item and does not
 change unrelated research. Keep local labels/metadata out of the transmitted
 question and use public remote source locators.
 
@@ -236,8 +250,8 @@ Use `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW` first. Preserve its exact packet and
 explicitly apply, reject or park every correction in a new advisory version.
 Only that version may support a separate
 `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW` assignment. Within that one review, do not
-compare candidates or turn the review into project adoption; the root Explorer
-still performs its separate portfolio comparison. The adversarial turn
+compare candidates or turn the review into project adoption; Explorer L1 still
+performs its separate portfolio comparison. The adversarial turn
 challenges
 confounds, leakage, capacity, recurrence, co-adaptation, alternative
 explanations, controls and residual uncertainty; it is not a closure-only
@@ -297,7 +311,7 @@ direction-dependency or resource evidence. This is not a request to invent
 work, fill capacity, reprioritize or reactivate parked directions. CPM treatment
 dispatch is constrained only by an exact scientific/dependency predecessor,
 capacity/admission, a formal or actually observed resource conflict, or a same
-mutable-path/object conflict. Explorer progress is event-driven or user-resumed;
+mutable-path/object conflict. Explorer progress is event-driven or Root-resumed;
 pending runtime capacity, non-runtime continuation, Pro triggers and formal
 iteration behavior are unchanged.
 
@@ -311,8 +325,10 @@ When a source question needs MyLib, follow
 [`references/mylib.md`](references/mylib.md) and run its registered probe.
 That reference owns integrity status, metadata/PDF locator fidelity, retired
 source exclusions and the `search|locate|validate-pdf|smoke` subcommands. The
-Explorer route remains read-only (`--output` is forbidden); durable advisory
-evidence is written only under `local_research/` with `apply_patch`.
+Explorer route remains read-only (`--output` is forbidden); Explorer
+semantically authors exact advisory bytes for the named ordinary artifact under
+`local_research/` and dispatches the Research Artifact Writer, which physically
+writes only the exact Explorer-approved ordinary/research bytes.
 
 ## Campaign packet and gate references
 
@@ -336,8 +352,10 @@ records or gate modes.
 
 ## Synthesize without promotion
 
-After every canonical campaign phase barrier, the Explorer reconciles conflicts
-and updates one multi-direction portfolio. Preserve source-result identities, parent and child
+After every canonical campaign phase barrier, Explorer L1 semantically
+reconciles conflicts and authors one multi-direction portfolio update. The
+Research Artifact Writer physically writes only the exact Explorer-approved
+ordinary/research bytes. Preserve source-result identities, parent and child
 directions, cross-pollination edges, constructive analyses, adversarial
 corrections and reactivation conditions. Generate a
 `NEXT_CYCLE_OPPORTUNITY_MAP` before claiming convergence.
@@ -346,7 +364,7 @@ The final advisory report includes the campaign direction, corpus coverage,
 source-result matrix, retained or parked directions, mechanism and principle
 findings, validation-ready candidates, residual gaps, resource disposition and
 convergence basis. External Pro contact remains an explicit review trigger
-through the registered `hmasd-agentify-transport` child; Explorer cannot change
+through the registered `hmasd-explorer-agentify-transport` child; Explorer cannot change
 CDC state, authorize compute, dispatch implementation or advance the formal
 workflow.
 
@@ -354,10 +372,16 @@ workflow.
 
 When a mature candidate is ready for project intake, load the single
 `.agents/skills/hmasd-explorer-project-validation/SKILL.md` and
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Write one
-self-contained semantic brief under `temp/handoffs/explorer_to_code_manager/`
-with the selected A/B/C treatment and direct CPM action. The dedicated workflow
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Author one exact,
+self-contained semantic brief and dispatch the registered Research Artifact
+Writer to write only the named bytes under
+`temp/handoffs/explorer_to_code_manager/`; the Writer cannot write
+`local_research/RESEARCH_CONTINUITY.md`. Return the resulting locator to Root.
+Root assigns CPM, CPM returns technical acceptance to Root, and Root relays the
+accepted result to Explorer L1 for scientific intake. The dedicated workflow
 owns brief/reverse-result mechanics, direction-local context and the named Pro
-triggers. Explorer records one scientific decision after CPM technical
-acceptance; CPM remains the engineering/runtime acceptance owner, and External
-Pro owns final scientific-semantic acceptance when invoked.
+triggers. Root physically writes
+`local_research/RESEARCH_CONTINUITY.md` only after the accepted Explorer
+proposal/revision check; CPM remains the engineering/runtime acceptance owner,
+and External Pro owns final
+scientific-semantic acceptance when invoked.

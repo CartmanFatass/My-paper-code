@@ -1,18 +1,21 @@
 ---
 name: hmasd-workflow-change-audit
-description: Use only in Workflow Design Manager after plan confirmation to implement, verify, accept, commit and route one centralized HMASD control-plane change.
+description: Use only in the task-scoped Workflow Design Manager L1 after plan confirmation to implement, verify, accept and route one centralized HMASD control-plane proposal.
 ---
 
 # HMASD Workflow Change Audit
 
 ## Contract boundary
 
-Workflow Design Manager is the sole workflow design, modification, acceptance
-and Git authority. This Skill grants no science, code, code acceptance, runtime
+Workflow Design Manager is the sole workflow design, modification and acceptance
+authority. Root owns physical application, lifecycle and Git mechanics. This
+Skill grants no science, code, code acceptance, runtime
 or project-state authority. CPM, Explorer and other sessions report exact
 requirements/defects and continue their non-workflow duties; they do not edit or
 accept control-plane surfaces.
-Workspace ownership remains defined by `docs/project/SESSION_WORKSPACE_CONTRACT.md`.
+Workspace ownership remains defined by `docs/project/SESSION_WORKSPACE_CONTRACT.md`;
+the active child boundary is the exact assignment-owned path set in the current
+Root task workspace, with no external workspace identity precondition.
 
 Use this Skill for router, role, Skill, profile, hook, registry, stable workflow
 contract, workflow script or focused workflow test changes. Operational state,
@@ -86,16 +89,13 @@ Implementer file families concurrently, and serialize only actual information
 dependencies or same-file writers. The integrated Reviewer follows the complete
 integrated batch; parallel reviewers are limited to genuinely independent
 review questions. Their authority and assignment meaning remain with their Role
-and `hmasd-writing-agent-assignments`; workspace and successor boundaries remain
+and `hmasd-writing-agent-assignments`; workspace and fresh-Root boundaries remain
 with `docs/project/SESSION_WORKSPACE_CONTRACT.md`. Stable execution orientation
-is in `docs/project/WORKFLOW_MAP.md`. A direct user instruction explicitly
-naming WDM direct modification is the only exception that permits local
-workflow-file edits; generic workflow-change requests remain on the subagent
-route. Pure WDM design or authority decisions without file mutation remain
-WDM-local. For that explicit direct-WDM exception, retain the normal WDM checks
-and acceptance mechanics and do not invent a reviewer requirement beyond the
-user's rule. This Skill retains only the implementation budgets, impact mapping,
-checks, review and Git/reload mechanics below.
+is in `docs/project/WORKFLOW_MAP.md`. Root remains the only user-contact and
+physical-application actor; every workflow-file mutation remains on the
+registered L2 subagent route. Pure WDM design or authority decisions without
+file mutation remain WDM-local. This Skill retains only the implementation budgets,
+ focused checks, review and Root reload boundary below.
 
 ## Continuous change loop
 
@@ -105,36 +105,33 @@ a scheduler, approval state or global blocker.
 1. **Inspect.** Read only named control-plane paths, declare the exact path set,
    preserve unrelated work and identify the smallest normal-path probe.
 2. **Delete or edit.** Remove superseded rules before adding text. Use an isolated
-   resolved ticket worktree path only when the main checkout is unsafe or concurrent writers
-   need separate path families. Before editing there, require its
-   `git rev-parse --show-toplevel` to equal the resolved ticket worktree path;
-   a mismatch stops that isolated edit.
+   task workspace only when the assignment explicitly names one. Otherwise edit
+   the exact assigned paths in the current Root task workspace; no external
+   workspace provisioning is part of this Skill.
 3. **Focused check.** Run the smallest affected contract, the structural harness,
    stale-term search and `git diff --check`. For ordinary subagent workflow
    changes, the integrated Reviewer follows the complete integrated batch and
    reviews it once by default; add parallel reviewers only for genuinely
-   independent questions. Their advice cannot create a second pass. The
-   explicit direct-WDM exception retains the normal WDM checks and acceptance
-   mechanics without adding a reviewer requirement.
-4. **Git and reload.** Inspect exact staged paths, commit and push the accepted
-   workflow files. Require a fresh task only after router/profile discovery
-   changes; ordinary Skill text is read from disk. After an isolated child
-   commit is integrated, retire its clean detached ticket worktree only through
-   `scripts/hmasd_workspace_ticket.py retire` with the exact assignment, ticket
-   and expected HEAD. Retirement never uses force or discards Git-visible work;
-   any identity, HEAD or cleanliness mismatch preserves the worktree and ticket.
+   independent questions. Their advice cannot create a second pass. Root
+   receives the accepted proposal and applies any authorized integration.
+4. **Return and reload.** Inspect exact changed paths and return the complete
+   accepted proposal, focused evidence and reload boundary to Root. Root applies
+   accepted workflow paths and performs any separately authorized Git mechanics;
+   this Skill does not promise a current commit, push or external workspace
+   cleanup.
 
-The workspace PreToolUse guard fails closed for recognized mutation forms and
-preserves its existing denials. Treat it as bounded syntactic preflight rather
-than an arbitrary shell-semantics proof; tool/OS sandboxing, registered ticket
-identity and Git-visible checks remain authoritative.
+The configured hooks remain empty and disabled. No Hook Stop route is part of
+this workflow. Tool/OS sandboxing and exact assignment paths remain the
+authoritative write boundary.
 
 After a confirmed plan, these steps continue automatically. Stop only for
 material plan drift, same-file collision, unavailable required profile, or a
 missing user decision. A recoverable tool/transport failure is diagnosed and
 continued or parked without blocking unrelated work.
 A durable restart handoff is written only on explicit user request; routine
-progress remains in WDM's existing session/common records.
+progress remains in the current Root task's WDM records. A later CLI invocation
+starts a fresh Root/L1 tree and reloads canonical files; no manager session,
+replacement task or background callback is presumed.
 
 For every role, Skill or profile change, inspect the owned outcome against the
 role's observation, action, judgment, recovery and completion capabilities.
@@ -163,6 +160,6 @@ only for change-specific stale references.
 
 Accept only when the impact matrix is closed, child packets are reconciled,
 focused and structural checks pass, stale references are explained, exact
-changed/staged paths are inspected and any required review has no unresolved
-finding. Return the pushed commit, exact paths,
-verification and reload boundary.
+changed paths are inspected and any required review has no unresolved finding.
+Return the accepted proposal, exact paths, verification and reload boundary to
+Root; Root decides whether a separately authorized candidate commit is needed.

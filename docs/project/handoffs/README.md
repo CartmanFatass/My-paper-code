@@ -1,21 +1,30 @@
 # Public Semantic Handoffs
 
-This tracked file defines the stable collaboration interface between Independent
-Research Explorer and Code Project Manager. Live exchange files are ignored
-temporary files under `temp/handoffs/`, so ordinary handoffs require no Git.
+This tracked file defines the stable Root-routed collaboration interface for
+Independent Research Explorer and Code Project Manager. Live exchange files
+are ignored temporary files under `temp/handoffs/`, so ordinary handoffs
+require no Git.
 
 ## Ownership
 
-- `temp/handoffs/explorer_to_code_manager/`: Explorer alone creates, edits and
-  deletes its outbound files. Code Manager reads them.
-- `temp/handoffs/code_manager_to_explorer/`: Code Manager alone creates, edits
-  and deletes its outbound files. Explorer reads them.
+- `temp/handoffs/explorer_to_code_manager/`: Explorer L1 semantically authors
+  and approves the handoff; its assigned Writer physically writes the exact
+  outbound temporary file and may remove it only after Root confirms CPM
+  intake. Root receives and routes it to Code Project Manager.
+- `temp/handoffs/code_manager_to_explorer/`: CPM returns its technical result
+  to Root; Root writes and routes the exact reverse temporary copy to Explorer
+  and may remove that copy only after Root confirms Explorer intake.
 - Workflow Design Manager owns this interface contract but never authors,
-  interprets or cleans live handoff content.
+  interprets or cleans live handoff content. Root owns user communication,
+  cross-owner relay, lifecycle and accepted physical writes, but has no
+  scientific comparison or intake authority.
 
-Same-file concurrent writes are forbidden. The sender deletes the exchange copy
-after intake; live files never enter Git. Canonical records stay with their
-owners, with no handoff history tree.
+Same-file concurrent writes are forbidden. After Root confirms CPM intake,
+Explorer may assign its Writer to remove the exact Explorer outbound copy. After
+Root confirms Explorer intake of a Root-written reverse copy, Root may remove
+exactly that copy. Live files never enter Git. Owner records stay with their
+owners, with no handoff history tree. Explorer and CPM do not contact each other
+directly.
 
 ## Scientific-only intake boundary
 
@@ -47,7 +56,7 @@ owner is or is not needed now, the permitted owner/action, completion evidence,
 and the return/intake boundary; status-only labels are insufficient. This file
 defines only the exchange-file ownership and temporary-copy boundary.
 
-Direction-specific briefs and reverse results follow the direction-local
+Direction-specific briefs and Root-routed reverse results follow the direction-local
 context binding in
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer selects one
 primary direction and supplies only its smallest set of canonical
@@ -77,8 +86,8 @@ parallel-first normal path within available capacity. A global serial fallback
 requires named dependency or actual resource evidence; attribution, generic
 caution, completion order and convenience are not sufficient. The handoff
 interface does not fill capacity, reprioritize or reactivate directions.
-Explorer progress is event-driven or user-resumed; CPM treatment dispatch is
-constrained only by an exact scientific/dependency predecessor, capacity/admission,
+Explorer progress is event-driven or user-resumed; after Root relay, CPM
+treatment dispatch is constrained only by an exact scientific/dependency predecessor, capacity/admission,
 a formal or actually observed resource conflict, or a same mutable-path/object
 conflict. Read-only Explorer science lanes remain independent of CPM
 pool/admission by default; only an exact question depending on an unreturned CPM

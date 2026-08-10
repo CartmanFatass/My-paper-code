@@ -5,7 +5,18 @@ description: Use in the registered Agentify transport child to complete one orde
 
 # HMASD Agentify Transport
 
-`agentify_transport_child=hmasd-agentify-transport`
+```text
+agentify_transport_child=parent-specific registered leaf
+production_requester_parents=code_project_manager|independent_research_explorer
+production_requester_partitions=temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/|temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/
+wdm_production_parent=none
+```
+
+The shared Skill supplies parent-neutral page and result mechanics. Production
+CPM requests use `hmasd-cpm-agentify-transport`; production Explorer requests
+use `hmasd-explorer-agentify-transport`. Each leaf has one requester, one exact
+assignment partition and one return route to that parent. Root relays any
+cross-owner conclusion; WDM is not a production Agentify parent.
 
 ## Assignment
 
@@ -13,8 +24,8 @@ The requester assignment is exactly:
 
 ```text
 AGENTIFY_REVIEW_BATCH_ASSIGNMENT
-batch_path=<absolute UTF-8 JSON file containing provider, context_path and question_paths>
-results_path=<exact assignment-specific output path>
+batch_path=<absolute UTF-8 JSON file in the caller's requester partition containing provider, context_path and question_paths>
+results_path=<exact assignment-specific output path in that same requester partition>
 ```
 
 Read that exact `batch_path` once, then read its exact local UTF-8
@@ -26,8 +37,16 @@ conversation URL, run concurrently with named questions or remain independent.
 Follow those requested relationships; do not infer scientific direction, review
 independence, contamination risk, future reuse or grouping from question
 similarity or titles. It is understanding input, not a schema or an outbound
-prompt. Write
-only the exact `results_path` under `temp/sessions/agentify_transport_operator/`.
+prompt. Before relying on any path or schema anchor, the context brief must
+state the owning requester and permitted action, frozen/protected meaning and
+exclusions, bounded non-duplicating recovery, and completion evidence. The
+terminal result remains conclusion-first and must identify the observable
+completed response/postcondition and any residual uncertainty. Write
+only the exact `results_path` under the caller's closed requester partition:
+`temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/`
+or `temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/`.
+Reject a batch/result path that crosses those partitions or uses the shared
+root-level generic locator. Do not write to the legacy root directly.
 `question_paths` order is the batch order. Do not scan temporary directories,
 infer a result path or reconstruct question paths from item names. The sent
 payload is only the exact UTF-8 question file; the local context brief,
@@ -110,7 +129,8 @@ conversation. For each question:
 Before returning `COMPLETE`, run the read-only result-path guard at
 `.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
 with `--repo`, `--expected-results-path` and `--returned-results-path`. It
-must validate the exact physical assignment file. On guard failure return
+must validate the exact physical assignment file and the caller's requester
+partition. On guard failure return
 `ERROR` with an empty `results_path` and the actual error; do not move, copy,
 rewrite or read result contents. The guard rejects the shared root-level
 `temp/sessions/agentify_transport_operator/results.json` locator.

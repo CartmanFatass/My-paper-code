@@ -2,7 +2,7 @@ name = "hmasd-experiment-operator"
 description = "Silent mechanical operator for exactly one authorized HMASD train-evaluate-analyze execution."
 model = "gpt-5.6-luna"
 model_reasoning_effort = "low"
-sandbox_mode = "danger-full-access"
+sandbox_mode = "workspace-write"
 approval_policy = "never"
 nickname_candidates = ["HMASD Experiment Operator", "Run Operator", "Formal Run Operator"]
 

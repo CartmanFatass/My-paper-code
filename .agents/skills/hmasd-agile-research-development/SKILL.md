@@ -7,12 +7,12 @@ description: Use when implementing, debugging, refactoring, or validating explor
 
 ## Contract boundary
 
-Read the root router, the role contract, and brief. This procedure grants no
+Read the root router, the role contract, and exact Root/CPM assignment brief. This procedure grants no
 science, formal compute, transport, or acceptance authority. External Pro owns
 scientific decisions. Code Project Manager alone accepts code, coordinates the
-project, directs engineering repair, and owns runtime, transport and Git
-integration. A bounded child requires an exact
-assignment and never scopes, accepts, or commits its work.
+project, directs engineering repair, and owns runtime and transport. Root owns
+cross-owner relay, physical canonical writes and Git mechanics. A bounded child
+requires an exact assignment and never scopes, accepts, or commits its work.
 
 ```text
 superpowers_plugin=reference_only
@@ -44,7 +44,7 @@ local_failure_default=continue_next_legal_action
 research_stage=EXPLORATION|FORMALIZATION
 default_research_stage=EXPLORATION
 code_change_shape=coherent_module_responsibility_with_focused_evidence
-successor_replaces_predecessor=same_commit_delete_code_runner_direction_test
+replacement_replaces_predecessor=same_commit_delete_code_runner_direction_test
 shared_abstraction_justification=ownership_or_multiple_live_callers
 versioned_scientific_filenames=forbidden_git_is_history
 ```
@@ -86,12 +86,12 @@ A user-named one may be inspected only as reference.
 
 ## Triggered transport and mechanical lanes
 
-Formal and Explorer-to-project review transport remains a file-only handoff
-through the registered `hmasd-agentify-transport` child. When a review trigger
+Formal review transport is a file-only handoff through the registered
+`hmasd-cpm-agentify-transport` child. When a review trigger
 fires, CPM freezes the questions, preserves their conversation meaning and
-consumes the named result only after the child's terminal return. The Agentify
-`.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md` and
-`.agents/skills/hmasd-agentify-transport/SKILL.md` own the
+consumes the named result only after the child's terminal return. The CPM
+transport leaf's parent-specific Role and the parent-neutral Agentify transport
+mechanics Skill own the
 `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` contract and all page/provider/wait,
 recovery and tab mechanics.
 
@@ -101,8 +101,8 @@ independence, and whether prior memory helps or contaminates later reuse. The
 transmitted question contains no local filesystem path, task history or
 unrelated corpus; reviewer-facing source locators use the public remote URL.
 
-For deterministic inspection, result extraction, handoff preparation or ticket
-preparation, CPM may trigger `hmasd-cpm-mechanical`;
+For deterministic inspection, result extraction, handoff preparation or state
+rendering, CPM may trigger `hmasd-cpm-mechanical`;
 `.agents/roles/CPM_MECHANICAL_OPERATOR.md` and its dispatcher own the
 mechanical result fields and bounded observation recovery. For an authorized
 experiment, `.agents/roles/EXPERIMENT_OPERATOR.md` and
@@ -116,7 +116,7 @@ acceptance owner.
 Use `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` as the single
 detailed source. CPM consumes and returns action-bearing prose; it never infers
 an action from a status-only token. `parked` is Explorer-local when no frozen
-live successor exists, while ordinary engineering gaps go to CPM. A missing or
+live replacement exists, while ordinary engineering gaps go to CPM. A missing or
 contradictory meaning preserves the original, asks one exact clarification and
 continues unrelated work.
 
@@ -143,13 +143,13 @@ not a second semantic source.
    files, engineering choices, exclusions and completion inside the Pro-frozen
    semantics. Before implementation, write the zero-compute `H`, fixed
    `K_search`, hypothetical-transition bound and projected wall clock. Add no
-   brainstorm, plan, worktree, ledger or approval when known.
+   brainstorm, ledger or approval when known.
 3. **Probe.** Observe the smallest failing test for new behavior or plausible
    regression. For throwaway measurement/configuration, use a diagnostic.
 4. **Implement.** No backward compatibility. Make the smallest coherent module
    change; remove replaced interfaces, adapters, migrations, fallbacks, state,
    and tests. Git history is the archive. Use one stable semantic module, not a
-   new generation-number copy. A successor deletes predecessor code, runner and
+   new generation-number copy. A replacement deletes predecessor code, runner and
    direction-local test in the same change.
 5. **Verify.** Proof proportional to the claim: rerun the focused check fresh.
    For result-bearing runner/analyzer integration, execution-entry, artifact,
@@ -159,11 +159,14 @@ not a second semantic source.
    shared surface.
 6. **Inspect and report.** Check protected semantics, RNG/replay/lifecycle,
    serialization, transfers, synchronization, packing, persistence, and serial
-   evaluation. Report commands, results, limits, and files. For new or materially
-   changed claim-bearing code, Code Project Manager writes the commit-bound
-   critical-point index, pushes the accepted implementation and routes the one
-   comparison-only `CODE_SCIENCE_ALIGNMENT_AUDIT` through the registered
-   Agentify Transport Operator before a formal run. The audit may identify a
+    evaluation. Report commands, results, limits, and files. For new or materially
+    changed claim-bearing code, Code Project Manager prepares the commit-bound
+    critical-point index and returns a candidate-ready proposal to Root. Only
+    when separately authorized does Root create one local candidate commit;
+    CPM then dispatches the Verifier for the same candidate, performs final
+    technical acceptance and routes the one comparison-only
+    `CODE_SCIENCE_ALIGNMENT_AUDIT` through the CPM Agentify transport when
+    required. The audit may identify a
    concrete contract mismatch but cannot
    design an algorithm, controller, solver or new evidence search.
 
@@ -179,7 +182,7 @@ improves ownership or serves multiple live callers.
 
 ## Project cognition references
 
-For a new persistent coding task, or when Code Project Manager clearly lacks the
+For a new task-scoped coding assignment, or when Code Project Manager clearly lacks the
 project mental model, read the reusable
 `.agents/skills/hmasd-writing-agent-assignments/references/project-cognition-bootstrap-prompt.md`
 once alongside the normally routed documents. It is a cognitive reference, not
@@ -314,7 +317,7 @@ slice.
   independent of runtime class; CPM never infers class or barrier from science
   or `local_research/`.
 - Once Explorer has selected and frozen independent direction treatments and CPM
-  has admitted isolated tickets/worktrees within the three-unit pool, the normal
+  has admitted isolated candidate treatments within the three-unit pool, the normal
   execution path remains
   `independent_admitted_treatment_execution=parallel_first_within_capacity`.
   Serialization exceptions, heavy-pool exclusivity and event-driven Explorer
@@ -336,30 +339,19 @@ slice.
   no sweep and no implicit retry. Once the full starts, CPM returns its terminal
   outcome without silently replaying it; any later full is a newly authorized
   treatment decision rather than operational recovery.
-- Isolated worktrees use `scripts/hmasd_workspace_ticket.py provision`. Code
-  Project Manager supplies the main checkout, exact base commit, assignment and
-  allowed paths; the command creates both the worktree beneath
-  `C:/worktrees/HMASD` and its Git-private ticket. Raw external `git worktree`,
-  `subst` and path-alias setup are forbidden. The child resolves the ticket
-  before editing, and Code Project Manager verifies it after return. Never
-  transcribe, infer or repair an absolute worktree path in prose.
-- Registered provision uses command-local `core.longpaths=true` without changing
-  repository or global Git configuration. A workflow-frozen replacement
-  assignment may name one earlier unticketed partial assignment with
-  `--recover-partial-assignment`. An already-clean state with no ticket,
-  destination or Git registration is an idempotent `PARTIAL_WORKSPACE_CLEANED`;
-  otherwise the script removes only the exact registered state, verifies its
-  absence, then provisions the new assignment. It fails closed on an existing
-  ticket, an unregistered destination, a redirected path, identity mismatch or
-  incomplete cleanup. Callers never run raw `worktree remove` or `worktree
-  prune`, manually delete the path, or reuse the retired assignment.
-- Children do not perform Git or acceptance. Code Project Manager reads the
-  file-backed terminal mechanical receipt/result and, after acceptance,
-  integrates the exact accepted file set directly with ticket
-  `finalize-integrate`; this local receipt is evidence only and never delegates
-  acceptance.
-- Do not compute per-file hashes for handoff. Exact paths, the staged path set,
-  and the resulting Git commit are sufficient code identity.
+- Each concurrent treatment has an exact assignment, candidate-specific source
+  freeze, accepted candidate revision, run/evidence/checkpoint/result roots,
+  seed/RNG namespace, temporary session paths and technical-acceptance record.
+  These are semantic candidate bindings, not Git identity requirements; the
+  assignment-owned paths remain the write boundary.
+- Children do not perform Git or acceptance. Explicit CPM readiness dispatch
+  yields a candidate-ready proposal to Root. Only when separately authorized,
+  Root creates one local candidate commit; CPM dispatches the same-candidate
+  Verifier check and performs final technical acceptance, after which Root may
+  integrate the accepted paths. No legacy integration-subcommand, Hook Stop or
+  current-Git-execution promise is part of this Skill.
+- Do not compute per-file hashes for handoff. Exact paths and the resulting Git
+  revision, when Root separately creates one, are sufficient code identity.
 - Subtasks close on evidence plus one fresh Code Project Manager check. After
   Code Project Manager integrates a coherent group of implementer changes, one
   independent reviewer by default examines the complete integrated diff. Parallel
@@ -421,7 +413,7 @@ question.
 |---|---|
 | preserve compatibility “just in case” | delete the superseded path |
 | equate quality with coverage or a full suite | test the actual claim |
-| follow a generic Skill's worktree/review/commit ritual | use this procedure only |
+| follow a generic Skill's Git/review/commit ritual | use this procedure only |
 | turn file hashes into a handoff or approval gate | use exact paths and Git identity |
 | ask again inside an active grant | continue unattended to Pro adjudication, balance exhaustion or terminal closure |
 | pause after an unfavorable result | archive it and follow the Pro continuation or terminal disposition |

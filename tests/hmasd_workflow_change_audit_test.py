@@ -147,12 +147,12 @@ def test_execution_policy_is_subagent_default_with_explicit_wdm_exception() -> N
     workflow_map = (REPO / "docs/project/WORKFLOW_MAP.md").read_text(encoding="utf-8")
     normalized = " ".join("\n".join((router, manager, collaboration, audit, workflow_map)).split()).lower()
 
-    assert "workflow_change_execution=subagent_workflow_by_default" in router
+    assert "workflow_design_manager_workflow_modification_authority=exclusive_via_assigned_L2" in router
     assert "workflow_subagent_parallelism=parallel_first_with_dependency_order" in router
-    assert "wdm_direct_modification=only_when_user_explicitly_instructs_wdm_to_modify_directly" in router.lower()
+    assert "every workflow-file mutation remains on the registered l2 subagent route" in normalized
     assert "ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order" in normalized
-    assert "direct user instruction explicitly naming wdm direct modification" in normalized
-    assert "generic workflow-change requests remain on the subagent route" in normalized
+    assert "direct user instruction may change the semantic scope, but it does not grant wdm physical write authority" in normalized
+    assert "the native default exception below is a caller action and creates no registered child, profile or role" in normalized
     assert "pure wdm design or authority decisions without file mutation remain wdm-local" in normalized
     assert "mechanism and simple-operation budgets constrain" in audit.lower()
     assert "never decide delegate-vs-local routing" in audit.lower()
@@ -164,7 +164,7 @@ def test_execution_policy_is_subagent_default_with_explicit_wdm_exception() -> N
     assert "ordinary workflow changes use the registered auditor/scout -> implementer -> reviewer" not in normalized
 
     for stale in (
-        "wdm may use",
+        "wdm direct modification",
         "after confirmation, wdm may use",
         "when implementers were used",
         "delegation is judgment-guided",
@@ -193,8 +193,8 @@ def test_cpm_mechanical_child_is_file_bound_and_non_scientific() -> None:
     router_normalized = " ".join(router.split())
     session_normalized = " ".join(session.split())
     role_normalized = " ".join(mechanical_role.split())
-    assert "cpm_mechanical_child=hmasd-cpm-mechanical" in router
-    assert "cpm_mechanical_parent=code_project_manager" in router
+    assert "callable_agent_type=hmasd-cpm-mechanical" in role_normalized
+    assert "parent=code_project_manager" in role_normalized
     assert "cpm_mechanical_assignment=" not in router
     assert "cpm_mechanical_result_fields=" not in router
     assert "authority=one_exact_CPM_MECHANICAL_TASK_ASSIGNMENT" in role_normalized
@@ -202,7 +202,7 @@ def test_cpm_mechanical_child_is_file_bound_and_non_scientific() -> None:
     assert "terminal_values=COMPLETE|ERROR" in role_normalized
     assert "never launches an experiment, readiness, Agentify or Git action" in role_normalized
     assert "CPM_MECHANICAL_TASK_RESULT" in mechanical_skill
-    assert "docs/project/SESSION_WORKSPACE_CONTRACT.md" in router_normalized
+    assert "document_kind=session_workspace_contract" in session_normalized
     assert "CPM_MECHANICAL_TASK_ASSIGNMENT" in session_normalized
 
 

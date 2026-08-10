@@ -2,11 +2,18 @@
 
 ```text
 document_kind=current_work_common_record
-schema_version=1
+schema_version=2
+state_revision=1
 record_id=formal_toy_research
 record_kind=workstream
 workstream_id=formal_toy_research
 owner_role=code_project_manager
+physical_writer=root
+state_update_route=code_project_manager_accepted_proposal_to_root
+continuity=file_backed_owner_state
+reload_boundary=each_level1_spawn
+cross_owner_route=return_to_root
+next_boundary_route=root_relay
 status=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
 active_assignment_id=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED
 next_boundary=G51_FORMAL_RESULT_REVIEW_TRANSPORT_BLOCKED

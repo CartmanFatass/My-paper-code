@@ -34,12 +34,13 @@ foreach ($required in @(
     'name = "hmasd-cpm-mechanical"',
     'model = "gpt-5.6-luna"',
     'model_reasoning_effort = "low"',
-    'sandbox_mode = "danger-full-access"',
+    'sandbox_mode = "workspace-write"',
     '.agents/roles/CPM_MECHANICAL_OPERATOR.md',
     'CPM_MECHANICAL_TASK_ASSIGNMENT',
     'CPM_MECHANICAL_TASK_RESULT',
     'natural-language brief',
-    'deterministic execution anchor')) {
+    'deterministic execution anchor',
+    'use direct Git commands or mutate Git')) {
     if (-not $profile.Contains($required)) { throw "CPM mechanical profile missing: $required" }
 }
 foreach ($required in @(
@@ -51,7 +52,10 @@ foreach ($required in @(
     'verify_result',
     'assemble_handoff',
     'render_state',
-    'ticket_prepare',
+    'mechanical_task_classes=inspect_identity|run_focused_checks|verify_result|assemble_handoff|render_state',
+    'canonical_state_write_authority=none',
+    'git_authority=none',
+    'acceptance_authority=none',
     'semantic task authority',
     'CPM consumers',
     'protected',
@@ -63,8 +67,7 @@ foreach ($required in @(
     'residual uncertainty',
     '`COMPLETE` means',
     'accepted the underlying result',
-    'Git',
-    'acceptance')) {
+    'no Git or canonical-state acceptance authority')) {
     if (-not $role.Contains($required)) { throw "CPM mechanical role missing: $required" }
 }
 foreach ($required in @(
@@ -94,7 +97,7 @@ if ($profile.Contains('hmasd_cpm_mechanical.py run --spec') -or $profile.Contain
     throw 'CPM mechanical profile must remain thin; dispatcher procedure belongs to the role/Skill'
 }
 foreach ($required in @(
-    'For deterministic inspection, result extraction, handoff preparation or ticket preparation',
+    'For deterministic inspection, result extraction, handoff preparation or state rendering',
     'CPM may trigger `hmasd-cpm-mechanical`',
     '.agents/roles/CPM_MECHANICAL_OPERATOR.md',
     'mechanical result fields and bounded observation recovery')) {
@@ -102,13 +105,16 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'SCHEMA_VERSION = 1',
-    'REGISTERED_INTERPRETER',
     'TASK_CLASSES',
+    'inspect_identity',
+    'run_focused_checks',
+    'verify_result',
+    'assemble_handoff',
+    'render_state',
     'run --spec',
     'shell=False',
     'PYTHONDONTWRITEBYTECODE',
     'subprocess.TimeoutExpired',
-    'prepare-integrate',
     'os.replace',
     'first_failure')) {
     if (-not $script.Contains($required)) { throw "CPM mechanical dispatcher missing: $required" }

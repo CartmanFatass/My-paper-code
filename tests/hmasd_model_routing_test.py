@@ -26,14 +26,37 @@ IMPLEMENTER_PROFILES = {
         REPOSITORY_ROOT / ".codex" / "agents" / "hmasd-implementer.toml",
         "gpt-5.6-sol",
         "high",
+        ".agents/roles/IMPLEMENTER.md",
     ),
     "hmasd-implementer-terra": (
         REPOSITORY_ROOT / ".codex" / "agents" / "hmasd-implementer-terra.toml",
         "gpt-5.6-terra",
         "high",
+        ".agents/roles/ROUTINE_IMPLEMENTER.md",
     ),
 }
 IMPLEMENTER_ROLE = REPOSITORY_ROOT / ".agents" / "roles" / "IMPLEMENTER.md"
+
+L1_PROFILES = {
+    "hmasd-workflow-design-manager": (
+        REPOSITORY_ROOT / ".codex/agents/hmasd-workflow-design-manager.toml",
+        REPOSITORY_ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
+        "gpt-5.6-terra",
+        "high",
+    ),
+    "hmasd-code-project-manager": (
+        REPOSITORY_ROOT / ".codex/agents/hmasd-code-project-manager.toml",
+        REPOSITORY_ROOT / ".agents/roles/CODE_PROJECT_MANAGER.md",
+        "gpt-5.6-sol",
+        "high",
+    ),
+    "hmasd-independent-research-explorer": (
+        REPOSITORY_ROOT / ".codex/agents/hmasd-independent-research-explorer.toml",
+        REPOSITORY_ROOT / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md",
+        "gpt-5.6-sol",
+        "max",
+    ),
+}
 
 
 def test_verifier_registration_and_model_routing() -> None:
@@ -53,7 +76,7 @@ def test_verifier_registration_and_model_routing() -> None:
     assert profile_path == VERIFIER_PROFILE
     assert profile["model"] == "gpt-5.6-luna"
     assert profile["model_reasoning_effort"] == "high"
-    assert profile["sandbox_mode"] == "danger-full-access"
+    assert profile["sandbox_mode"] == "workspace-write"
     assert profile["approval_policy"] == "never"
     instructions = profile.get("developer_instructions", "")
     assert ".agents/roles/VERIFIER.md" in instructions
@@ -80,7 +103,7 @@ def test_cpm_mechanical_registration_and_model_routing() -> None:
     assert profile_path == MECHANICAL_PROFILE
     assert profile["model"] == "gpt-5.6-luna"
     assert profile["model_reasoning_effort"] == "low"
-    assert profile["sandbox_mode"] == "danger-full-access"
+    assert profile["sandbox_mode"] == "workspace-write"
     assert profile["approval_policy"] == "never"
     instructions = profile.get("developer_instructions", "")
     assert "CPM_MECHANICAL_TASK_ASSIGNMENT" in instructions
@@ -140,7 +163,12 @@ def test_implementer_registration_and_model_routing() -> None:
         with profile_path.open("rb") as stream:
             profiles.append((profile_path, tomllib.load(stream)))
 
-    for name, (expected_path, expected_model, expected_effort) in IMPLEMENTER_PROFILES.items():
+    for name, (
+        expected_path,
+        expected_model,
+        expected_effort,
+        expected_role_pointer,
+    ) in IMPLEMENTER_PROFILES.items():
         registered = [
             (profile_path, profile)
             for profile_path, profile in profiles
@@ -151,10 +179,12 @@ def test_implementer_registration_and_model_routing() -> None:
         assert profile_path == expected_path
         assert profile["model"] == expected_model
         assert profile["model_reasoning_effort"] == expected_effort
-        assert profile["sandbox_mode"] == "danger-full-access"
+        assert profile["sandbox_mode"] == "workspace-write"
         assert profile["approval_policy"] == "never"
         instructions = profile.get("developer_instructions", "")
-        assert ".agents/roles/IMPLEMENTER.md" in instructions
+        assert expected_role_pointer in instructions
+        if name == "hmasd-implementer-terra":
+            assert ".agents/roles/IMPLEMENTER.md" not in instructions
         assert "exact assignment" in instructions
         assert "registered child of Code Project Manager" in instructions
         assert "Do not mutate Git" in instructions
@@ -191,6 +221,41 @@ def test_implementer_registration_and_model_routing() -> None:
     sol_text = IMPLEMENTER_PROFILES["hmasd-implementer"][0].read_text(encoding="utf-8")
     assert "protected Sol route" in sol_text
     assert "assignment-specified semantics" in sol_text
+
+
+def test_root_managers_are_read_only_l1_profiles_with_allow_lists() -> None:
+    profiles = []
+    for profile_path in sorted((REPOSITORY_ROOT / ".codex" / "agents").glob("*.toml")):
+        with profile_path.open("rb") as stream:
+            profiles.append((profile_path, tomllib.load(stream)))
+    for name, (expected_path, role_path, model, effort) in L1_PROFILES.items():
+        registered = [(path, data) for path, data in profiles if data.get("name") == name]
+        assert len(registered) == 1
+        path, profile = registered[0]
+        assert path == expected_path
+        assert profile["model"] == model
+        assert profile["model_reasoning_effort"] == effort
+        assert profile["sandbox_mode"] == "read-only"
+        assert profile["approval_policy"] == "never"
+        instructions = " ".join(str(profile.get("developer_instructions", "")).split()).lower()
+        assert "agent_tree_level=1" in instructions
+        assert "parent=root" in instructions
+        assert "return" in instructions and "root" in instructions
+        assert role_path.is_file()
+
+
+def test_leaf_roles_and_profiles_explicitly_forbid_spawn_and_cross_owner_contact() -> None:
+    role_paths = [
+        REPOSITORY_ROOT / ".agents/roles/WORKFLOW_AUDITOR.md",
+        REPOSITORY_ROOT / ".agents/roles/CODE_SCOUT.md",
+        REPOSITORY_ROOT / ".agents/roles/RESEARCH_SCOUT.md",
+        REPOSITORY_ROOT / ".agents/roles/EXPLORER_MECHANICAL_OPERATOR.md",
+    ]
+    for role_path in role_paths:
+        role = " ".join(role_path.read_text(encoding="utf-8").split()).lower()
+        assert "agent_tree_level=2" in role
+        assert "spawn_authority=none" in role
+        assert "return" in role and "parent" in role
 
 
 if __name__ == "__main__":

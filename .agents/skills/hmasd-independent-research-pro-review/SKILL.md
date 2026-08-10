@@ -1,15 +1,16 @@
 ---
 name: hmasd-independent-research-pro-review
-description: Use from the persistent Independent Research Explorer to send exact Pro or Gemini direction or methodology review questions through the registered Agentify transport child.
+description: Use from the task-scoped Root-owned Independent Research Explorer L1 to send exact Pro or Gemini direction or methodology review questions through the registered Explorer Agentify transport leaf.
 ---
 
 # HMASD Independent Research External Review
 
 ## Boundary
 
-This Skill is invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`.
-The Explorer owns both independent-research direction reviews and methodology
-audits; there is no separate persistent review-operator session.
+This Skill is invoked only by the task-scoped Root-owned
+`INDEPENDENT_RESEARCH_EXPLORER` L1. The Explorer owns both independent-research
+direction reviews and methodology audits; the Skill is non-spawnable and there
+is no separate review-operator task or manager-session continuity.
 
 This Skill grants no workflow-design, code, runtime, compute, Git, formal
 science or project-state authority. The response is advisory input to the
@@ -38,9 +39,10 @@ root before sending.
    frozen questions. The existing `context_path` anchor points to the local
    brief for transport realization; it adds no mandatory field, and transport
    does not include the local brief in provider payload. Choose one exact
-   `results_path` and dispatch
-   one self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the registered
-   `hmasd-agentify-transport` child with `fork_turns=none`, naming only
+   `results_path` under
+   `temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/`
+   and dispatch one self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the
+   registered `hmasd-explorer-agentify-transport` child with `fork_turns=none`, naming only
    `batch_path|results_path`. Confirm once that the raw question contains no
    local filesystem path, task history or unrelated corpus; use a public remote
    GitHub URL for a reviewer-facing source locator. Do not send a review whose
@@ -58,8 +60,11 @@ root before sending.
    returned terminal anchor. Reject any mismatch, redirect, root-level generic
    path or missing/non-regular file; do not infer a fallback path. Explorer
    performs no polling, progress handling or parent-task result relay.
-4. Copy each named successful raw response and returned conversation URL into
-   `local_research/pro_reviews/<review-id>/`, then reconcile it scientifically.
+4. Dispatch the Research Artifact Writer to copy each named successful raw
+   response and returned conversation URL as exact bytes into
+   `local_research/pro_reviews/<review-id>/`; the Writer cannot write
+   `local_research/RESEARCH_CONTINUITY.md`. Then reconcile the archived response
+   scientifically.
    Explorer names an exact archived URL in a later brief when it chooses
    continuation; if no continuation is stated, the child must not guess from
    titles. An item `ERROR` affects only that review. Retrying transport reuses

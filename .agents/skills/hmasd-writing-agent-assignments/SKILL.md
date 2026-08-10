@@ -1,20 +1,22 @@
 ---
 name: hmasd-writing-agent-assignments
-description: Use when designing a subagent or cross-session interface, writing a concrete assignment or message, or reviewing whether an interface preserves enough meaning and action capability.
+description: Use when designing a task-scoped subagent or Root-relayed owner interface, writing a concrete assignment or message, or reviewing whether an interface preserves enough meaning and action capability.
 ---
 
 # HMASD Writing Agent Assignments
 
 This Skill is a reusable writing and reasoning aid for parents who delegate a
-bounded task or hand work across sessions. It protects the semantic contract
+bounded task or prepare a Root-relayed owner interface. It protects the semantic contract
 between requester and child without creating another authority, validator,
 queue, approval state, or acceptance owner. The parent remains responsible for
 the assignment, routing and acceptance boundaries already defined by the role
-and workspace contract.
+and workspace contract. In the active CLI topology, Root is the sole user,
+cross-owner relay and lifecycle actor; same-level L1 owners use only their
+registered L2 allow-list, and an L2 leaf returns only to its single parent.
 
 ## When to use it
 
-Use this Skill when a parent is designing a subagent or cross-session
+Use this Skill when a parent is designing a subagent or Root-relayed
 interface, writing the concrete brief or message that will be sent, or
 reviewing whether an existing interface preserves enough meaning and
 capability. It applies to code, research, review, browser, transport and other
@@ -47,6 +49,42 @@ commands, schemas, result locations, model labels or `fork_turns` settings.
 Those anchors narrow execution; they do not carry the task's meaning. A parent
 is a context compiler, not a field copier. A shorter brief is correct when it
 contains enough meaning for the bounded task.
+
+### Native default temporary-task exception
+
+When an L1 has no listed specialist leaf that can perform the bounded task, a
+native default child may be used only as the narrow temporary L2 exception
+defined by the active role and router. Its self-contained brief must state,
+before factual anchors:
+
+- why no listed specialist matches or can perform this task, and why the
+  specialist-first condition is satisfied;
+- the exact caller-owned temporary paths and the mode, which is read-only
+  unless the brief explicitly grants writes only to those exact temporary
+  paths;
+- every frozen authority limit: no spawn, user/sibling/cross-owner/cross-branch
+  contact, canonical-state or Git write, owner acceptance, routing, compute,
+  external-review, science, code-acceptance, runtime or transport authority,
+  no durable, project-code or non-temporary write, and return only to the
+  invoking L1 for any Root relay or acceptance;
+- the expected observable completion product and the direct evidence that
+  distinguishes completion from recognition or a status-only response; and
+- the literal caller-action anchors `agent_type="default"`,
+  `model="gpt-5.6-luna"`, `reasoning_effort="high"`, and
+  `fork_turns="1"`, with the last being a caller action whose one forked turn
+  is background only, not a profile/TOML field.
+
+This exception does not create a generic profile or Role and never displaces a
+matching professional leaf. The brief must preserve the named caller's
+task-scoped temporary root and the existing Root-to-L1-to-L2 return boundary.
+
+For a cross-owner dependency, describe the Root relay explicitly: the sending
+owner returns the smallest complete request or conclusion to Root, Root assigns
+the receiving same-level owner, and the receiver returns its acceptance or
+result to Root. Do not encode direct sibling contact, manager-session or
+replacement-task continuity. A production Agentify request names only the
+parent-specific transport leaf and its requester partition; WDM is not a
+production transport parent.
 
 ## Important distinctions
 

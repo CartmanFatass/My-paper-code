@@ -2,11 +2,18 @@
 
 ```text
 document_kind=current_work_common_record
-schema_version=1
+schema_version=2
+state_revision=1
 record_id=explorer_project_validation
 record_kind=workstream
 workstream_id=explorer_project_validation
 owner_role=code_project_manager
+physical_writer=root
+state_update_route=code_project_manager_accepted_proposal_to_root
+continuity=file_backed_owner_state
+reload_boundary=each_level1_spawn
+cross_owner_route=return_to_root
+next_boundary_route=root_relay
 status=NO_ACTIVE_TECHNICAL_TREATMENT
 active_assignment_id=NONE
 active_assignment_semantics=foreground_technical_acceptance_and_handoff_pointer_only
@@ -32,4 +39,4 @@ observations and direction-local assignment roots.
 
 | Direction/treatment | Explorer request and handoff locator | Current technical phase in full prose | Runtime class/units and current admission reason | Dependency/path/resource conflict | Exact CPM next action and completion evidence | Return/intake boundary |
 |---|---|---|---|---|---|---|
-| None | No accepted Explorer handoff remains in CPM ownership. | VSP02-B2 completed with accepted branch `B2_DIRECT_SUCCEEDED_ORIGINAL_FAILED`; EC4G-B1 completed as `CODE_NOT_ACCEPTED` technical no-result after its sole full exposed a treatment-level activity-gate omission. Both packets were routed to Explorer. | 0/3 units occupied; this row is not a live capacity observation and authorizes no admission. | No active mutable path, process or dependency is represented here. | Stop after writing the requested CPM restart handoff; accept no new action without an explicit user or Explorer handoff. | Explorer owns any scientific intake or successor choice; CPM currently owns no treatment action. |
+| None | No accepted Explorer handoff remains in CPM ownership. | VSP02-B2 completed with accepted branch `B2_DIRECT_SUCCEEDED_ORIGINAL_FAILED`; EC4G-B1 completed as `CODE_NOT_ACCEPTED` technical no-result after its sole full exposed a treatment-level activity-gate omission. Both packets were routed to Explorer. | 0/3 units occupied; this row is not a live capacity observation and authorizes no admission. | No active mutable path, process or dependency is represented here. | Return the requested CPM handoff to Root; accept no new action without an explicit user or Explorer handoff relayed by Root. | Explorer owns any scientific intake or successor choice; CPM currently owns no treatment action. Any future intake returns through Root. |

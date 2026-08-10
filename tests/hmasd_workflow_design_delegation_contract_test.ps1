@@ -23,7 +23,7 @@ $normalizedCollaborationSkill = ($collaborationSkill -replace '\s+', ' ').ToLowe
 
 $profiles = @(
     @('.agents/roles/WORKFLOW_AUDITOR.md', '.codex/agents/hmasd-workflow-auditor.toml', 'hmasd-workflow-auditor', '[agents."HMASDWorkflowAuditor"]', 'gpt-5.6-luna', 'high', 'read-only', 'WORKFLOW_IMPACT_PACKET'),
-    @('.agents/roles/WORKFLOW_IMPLEMENTER.md', '.codex/agents/hmasd-workflow-implementer.toml', 'hmasd-workflow-implementer', '[agents."HMASDWorkflowImplementer"]', 'gpt-5.6-luna', 'xhigh', 'danger-full-access', 'WORKFLOW_CHANGE_PACKET'),
+    @('.agents/roles/WORKFLOW_IMPLEMENTER.md', '.codex/agents/hmasd-workflow-implementer.toml', 'hmasd-workflow-implementer', '[agents."HMASDWorkflowImplementer"]', 'gpt-5.6-luna', 'xhigh', 'workspace-write', 'WORKFLOW_CHANGE_PACKET'),
     @('.agents/roles/WORKFLOW_REVIEWER.md', '.codex/agents/hmasd-workflow-reviewer.toml', 'hmasd-workflow-reviewer', '[agents."HMASDWorkflowReviewer"]', 'gpt-5.6-luna', 'max', 'read-only', 'WORKFLOW_REVIEW_PACKET'))
 
 foreach ($entry in $profiles) {
@@ -37,8 +37,8 @@ foreach ($entry in $profiles) {
     }
     foreach ($required in @(
         "callable_agent_type=$($entry[2])", 'parent=workflow_design_manager',
-        'role_kind=registered_nonpersistent_native_child',
-        'assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace',
+        'role_kind=registered_task_scoped_level2_leaf',
+        'assignment_identity=workflow_assignment_id|owned_paths',
         'acceptance_authority=none', 'child_authority=none', 'current_work_read=forbidden')) {
         if (-not $role.Contains($required)) { throw "$($entry[2]) role missing: $required" }
     }
@@ -55,11 +55,10 @@ foreach ($required in @(
     'workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces',
     'workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces',
     'workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces',
-    'workflow_git_authority=exclusive_for_workflow_control_plane_surfaces',
+    'workflow_git_authority=none',
     'current_work_authority=public_index_and_own_workflow_control_plane_records_only',
-    'workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_principles|accepted_stable_workflow_contract|other_session_report',
+    'workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_principles|accepted_stable_workflow_contract|root_handoff',
     'workflow_incident_log=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md',
-    'workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match',
     'Role and Skill capability standard',
     'necessary observations', 'permitted actions')) {
     if (-not $manager.Contains($required)) { throw "WDM charter missing: $required" }
@@ -73,19 +72,14 @@ foreach ($required in @(
 }
 
 foreach ($required in @(
-    'workflow_change_execution=subagent_workflow_by_default',
-    'workflow_subagent_parallelism=parallel_first_with_dependency_order',
-    'wdm_direct_modification=only_when_user_explicitly_instructs_WDM_to_modify_directly',
-    'ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order',
-    'generic workflow change request remains on the default subagent route',
-    'pure wdm design or authority decisions without file mutation remain wdm-local',
-    'delegate-vs-local routing does not use task size, complexity, local feasibility, context cost, path count or benefit estimates')) {
+    'workflow_change_request_route=root->wdm',
+    'cross_task_transport=return_to_root',
+    'workflow_subagent_parallelism=parallel_first_with_dependency_order')) {
     if (-not $normalizedRouter.Contains($required.ToLowerInvariant())) { throw "Router execution policy missing: $required" }
 }
 
 foreach ($required in @(
-    "wdm's exclusive workflow modification authority is exercised through the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order",
-    'a direct user instruction explicitly naming wdm direct modification is the only exception',
+    'ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order',
     'pure design or authority decisions without file mutation remain wdm-local')) {
     if (-not $normalizedManager.Contains($required.ToLowerInvariant())) { throw "WDM execution policy missing: $required" }
 }
@@ -95,12 +89,9 @@ if (-not $skill.Contains('workflow_hash_validation=forbidden')) {
 foreach ($required in @('simple_operation_active_engineering_budget_minutes=20','simple_operation_failed_probe_budget=2')) {
     if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing simple-operation budget: $required" }
 }
-foreach ($required in @('resolved ticket worktree path','git rev-parse --show-toplevel')) {
-    if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing ticket identity check: $required" }
-}
 
 foreach ($required in @(
-    'Designing or dispatching a child or cross-session interface',
+    'designing an assignment/interface',
     'hmasd-writing-agent-assignments')) {
     if (-not $normalizedRouter.Contains($required.ToLowerInvariant())) { throw "Router writing-agent routing contract missing: $required" }
 }
@@ -117,8 +108,8 @@ foreach ($required in @(
     'child_assignment_brief=temp/sessions/<parent_role>/assignments/<assignment_id>.md',
     'child_assignment_format=self_contained_natural_language_not_schema_admission',
     'child_forked_context=background_only',
-    'workflow_successor_rotation=integrated_batch_completion',
-    'workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
+    'workflow_root_reload=fresh_root_task_canonical_reload',
+    'workflow_root_reload_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
     'workflow_thread_registry=forbidden')) {
     if (-not $normalizedSessionContract.Contains($required.ToLowerInvariant())) { throw "Session assignment-writing contract missing: $required" }
 }
@@ -140,10 +131,10 @@ foreach ($required in @(
     'workflow_legacy_mechanism_policy=no_expansion_preserve_contract_when_touched',
     'workflow_incident_to_permanent_rule_threshold=2_independent_recurrences',
     'workflow_hash_validation=forbidden',
-    'the log is evidence', 'resolved ticket worktree path',
+    'the log is evidence', 'exact assignment-owned path set',
     'observation, action, judgment, recovery and completion capabilities',
     'Prefer positive capability text',
-    '`git rev-parse --show-toplevel`')) {
+    'no external workspace identity precondition')) {
     if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 
@@ -153,9 +144,9 @@ foreach ($required in @(
     'run disjoint implementer file families concurrently',
     'serialize only actual information dependencies or same-file writers',
     'integrated reviewer follows the complete integrated batch',
-    'generic workflow-change requests remain on the subagent route',
-    'normal wdm checks and acceptance mechanics',
-    "do not invent a reviewer requirement beyond the user's rule",
+    'every workflow-file mutation remains on the registered l2 subagent route',
+    'focused checks, review and root reload boundary below',
+    'parallel reviewers are limited to genuinely independent review questions',
     'mechanism and simple-operation budgets constrain new gates, recovery branches and probe work; they never decide delegate-vs-local routing',
     'task size, complexity, local feasibility, context cost, path count and benefit estimates never alter it')) {
     if (-not (($skill -replace '\s+', ' ').ToLowerInvariant()).Contains($required.ToLowerInvariant())) { throw "Workflow delegation/context contract missing: $required" }
@@ -180,7 +171,6 @@ foreach ($required in @(
 }
 
 foreach ($retiredRoutingPhrase in @(
-    'WDM may use',
     'After confirmation, WDM may use',
     'when implementers were used',
     'Delegation is judgment-guided',
@@ -199,8 +189,8 @@ foreach ($retiredRoutingPhrase in @(
 
 if (-not $normalizedWorkflowMap.Contains('ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order') -or
     -not $normalizedWorkflowMap.Contains('dispatch read-only auditor/scout concurrently with already-freezable implementation slices') -or
-    -not $normalizedWorkflowMap.Contains('generic workflow-change requests follow the default subagent route')) {
-    throw 'Workflow Map execution policy missing parallel-first stages or direct-request default'
+    -not $normalizedWorkflowMap.Contains('workflow-file changes are performed by assigned workflow implementer leaves')) {
+    throw 'Workflow Map execution policy missing parallel-first stages or registered implementer route'
 }
 
 foreach ($required in @(
@@ -224,13 +214,6 @@ foreach ($retiredSerialPhrase in @(
     }
 }
 
-foreach ($required in @(
-    'cpm_mechanical_child=hmasd-cpm-mechanical',
-    'cpm_mechanical_parent=code_project_manager',
-    'explorer_mechanical_child=hmasd-explorer-mechanical',
-    'explorer_mechanical_parent=independent_research_explorer')) {
-    if (-not $router.Contains($required)) { throw "Router mechanical child pointer missing: $required" }
-}
 foreach ($forbidden in @(
     'agentify_transport_assignment_fields=',
     'agentify_transport_result_fields=',
@@ -302,7 +285,7 @@ if (-not $legacyVerifier.Contains('parent=code_project_manager') -or
     -not $legacyReviewer.Contains('parent=code_project_manager')) {
     throw 'Code-side verifier/reviewer ownership drifted'
 }
-if (-not $config.Contains('max_depth = 1')) { throw 'Workflow children may spawn descendants' }
+if (-not $config.Contains('max_depth = 2')) { throw 'Two-level depth is not configured' }
 
 $workflowAuditor = Read-RepoFile '.agents/roles/WORKFLOW_AUDITOR.md'
 if (-not (($workflowAuditor -replace '\s+', ' ').ToLowerInvariant().Contains(
@@ -311,8 +294,9 @@ if (-not (($workflowAuditor -replace '\s+', ' ').ToLowerInvariant().Contains(
 }
 $workflowImplementer = Read-RepoFile '.agents/roles/WORKFLOW_IMPLEMENTER.md'
 $workflowImplementerProfile = Read-RepoFile '.codex/agents/hmasd-workflow-implementer.toml'
-if (-not $workflowImplementerProfile.Contains('resolved_ticket_worktree_path')) {
-    throw 'Workflow implementer assignment lacks the exact ticket worktree'
+if ($workflowImplementerProfile.Contains('resolved_ticket_worktree_path') -or
+    $workflowImplementerProfile.Contains('scripts/hmasd_workspace_ticket.py')) {
+    throw 'Workflow implementer retains retired ticket identity'
 }
 if (-not $workflowImplementer.Contains('reversible')) {
     throw 'Workflow implementer lacks local reversible judgment'
@@ -362,9 +346,10 @@ foreach ($child in $workflowChildSpecs) {
 
 $implementerRoleText = Read-RepoFile '.agents/roles/WORKFLOW_IMPLEMENTER.md'
 $normalizedImplementerRoleText = ($implementerRoleText -replace '\s+', ' ')
-if (-not $normalizedImplementerRoleText.Contains('exactly `git rev-parse --show-toplevel`') -or
-    -not $normalizedImplementerRoleText.Contains('sole permitted Git observation')) {
-    throw 'Workflow implementer lacks the exact read-only Git identity exception'
+if (-not $normalizedImplementerRoleText.Contains('agent_tree_level=2') -or
+    -not $normalizedImplementerRoleText.Contains('spawn_authority=none') -or
+    -not $normalizedImplementerRoleText.Contains('return')) {
+    throw 'Workflow implementer lacks the L2 leaf boundary'
 }
 foreach ($forbidden in @('Git mutation', 'stage, commit, push', 'route cross-task messages')) {
     if (-not $implementerRoleText.Contains($forbidden)) {

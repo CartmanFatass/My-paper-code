@@ -11,13 +11,11 @@ from __future__ import annotations
 import json
 import os
 import re
+import stat
 import subprocess
 import sys
 from pathlib import Path
 from typing import Any
-
-import hmasd_workspace_ticket as ticketing
-
 
 SHELL_TOOLS = {"bash", "exec_command", "shell_command", "unified_exec"}
 PATCH_TOOLS = {"apply_patch", "applypatch"}
@@ -27,24 +25,6 @@ GLOBAL_MUTATION = re.compile(
     r"(?:add|move|remove|prune|lock|unlock|repair)\b|"
     r"-itemtype\s+(?:junction|symboliclink)|\bnew-item\b[^\r\n]*"
     r"-itemtype\s+(?:junction|symboliclink))"
-)
-GIT_MUTATION = re.compile(
-    r"(?i)\bgit(?:\.exe)?\b[^\r\n;&|]*\b(?:add|am|apply|branch|checkout|"
-    r"cherry-pick|clean|clone|commit|fetch|init|merge|mv|pull|push|rebase|"
-    r"reset|restore|revert|rm|stash|switch|tag|worktree)\b"
-)
-RESEARCH_READ_ONLY_COMMAND = re.compile(
-    r"(?i)^\s*(?:get-content|get-childitem|get-item|get-filehash|select-string|"
-    r"test-path|resolve-path|measure-object|compare-object|rg(?:\.exe)?|"
-    r"git(?:\.exe)?\s+(?:status|diff|log|show|rev-parse|ls-files|check-ignore))\b"
-)
-RESEARCH_UNSAFE_READ_OPTION = re.compile(
-    r"(?i)(?:^|\s)(?:--pre(?:-glob)?(?:=|\s)|--output(?:=|\s)|"
-    r"--exec-path(?:=|\s)|--hostname-bin(?:=|\s)|"
-    r"--ext-diff(?:\s|$)|--textconv(?:\s|$))"
-)
-RESEARCH_UNSAFE_EXPRESSION = re.compile(
-    r"(?i)(?:[\(\)\{\}\[\]]|::|\b(?:start-process|invoke-expression|iex)\b)"
 )
 MUTATION = re.compile(
     r"(?i)(?:\bnew-item\b|\bmkdir\b|\bset-content\b|\badd-content\b|"
@@ -58,6 +38,14 @@ BARE_WINDOWS_PATH = re.compile(r"(?i)(?<![A-Za-z0-9_])([A-Z]:[\\/][^\s;|>'\"\)\]
 UNC_PATH = re.compile(r"(?<![\\])((?:\\\\|//)[^\s;|>'\"\)\]]+)")
 PATCH_PATH = re.compile(
     r"(?m)^\*\*\* (?:(?:Add|Update|Delete) File:|Move to:) (.+?)\s*$"
+)
+PATH_ARGUMENT = re.compile(
+    r'''(?ix)(?:-\s*(?:literalpath|path|destination|target|filepath)\s+|(?<![<>=])>{1,2}\s*)(?:"([^"]*)"|'([^']*)'|([^\s;|]+))'''
+)
+PATH_ALIAS = re.compile(r"(?:^|[\\/])(?:\.{1,2})(?=$|[\\/])")
+RECURSIVE_DELETE = re.compile(
+    r"(?is)\b(?:remove-item|rmdir|rd|del|erase|rm)(?:\.exe)?\b[^\r\n;&|]*"
+    r"(?:-\s*recurse\b|-\s*r\b|/s\b)"
 )
 class GuardError(RuntimeError):
     """A fail-closed decision for a recognized workspace-boundary case."""
@@ -107,107 +95,91 @@ def _inside(path: Path, root: Path) -> bool:
         return False
 
 
-def _workspace_scope(cwd: Path) -> tuple[Path, list[Path], bool]:
-    if not cwd.exists():
-        raise GuardError(f"working directory does not exist: {cwd}")
-    top = _canonical(Path(_git(cwd, "rev-parse", "--show-toplevel")))
-    marker = top / ".git"
-    if marker.is_dir():
-        return top, [top], False
-    if not marker.is_file():
-        raise GuardError("active workspace is neither the main checkout nor a linked worktree")
+def _is_reparse_point(path: Path) -> bool:
+    """Return whether *path* is a Windows symlink/junction-like reparse point."""
 
-    common_raw = Path(_git(top, "rev-parse", "--git-common-dir"))
-    common = _canonical(common_raw if common_raw.is_absolute() else top / common_raw)
-    registry = common / ticketing.TICKET_DIRECTORY
-    matches: list[tuple[Path, list[str]]] = []
-    if registry.is_dir():
-        for candidate in registry.glob("*.json"):
-            try:
-                _, worktree, allowed = ticketing._resolve_payload(candidate, None)
-            except ticketing.TicketError:
-                continue
-            if _same(worktree, top):
-                matches.append((candidate, allowed))
-    if len(matches) != 1:
-        raise GuardError("linked worktree has no unique valid workspace ticket")
-    allowed_roots = [_canonical(top / Path(relative)) for relative in matches[0][1]]
-    return top, allowed_roots, True
-
-
-def _registered_research_sessions(repo: Path) -> dict[str, str]:
-    role_path = repo / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md"
-    if not role_path.is_file():
-        return {}
-    text = role_path.read_text(encoding="utf-8")
-    fields = {"explorer": "session_id"}
-    sessions: dict[str, str] = {}
-    for role, field in fields.items():
-        matches = re.findall(rf"(?m)^{field}=([^\s]+)\s*$", text)
-        if len(matches) > 1:
-            raise GuardError(f"role charter has multiple {role} sessions")
-        if matches:
-            sessions[role] = matches[0]
-    if len(set(sessions.values())) != len(sessions):
-        raise GuardError("independent research roles share one session identity")
-    return sessions
-
-
-def _registered_python(repo: Path) -> str | None:
-    router = repo / "AGENTS.md"
-    if not router.is_file():
-        return None
-    matches = re.findall(
-        r"(?m)^hmasd_python_interpreter=([^\r\n]+?)\s*$",
-        router.read_text(encoding="utf-8"),
-    )
-    return matches[0] if len(matches) == 1 else None
-
-
-def _registered_script_prefix(command: str, interpreter: str, script: Path) -> bool:
-    normalized = command.strip().replace("\\", "/")
-    normalized_interpreter = interpreter.replace("\\", "/")
-    registered = str(script).replace("\\", "/")
-    prefix = re.compile(
-        rf'^"?{re.escape(normalized_interpreter)}"?\s+'
-        rf'"?{re.escape(registered)}"?(?:\s|$)',
-        re.IGNORECASE,
-    )
-    return bool(prefix.match(normalized))
-
-
-def _trusted_research_script(
-    command: str,
-    repo: Path,
-    role: str,
-) -> bool:
-    if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
+    try:
+        attributes = path.stat(follow_symlinks=False).st_file_attributes
+    except (AttributeError, OSError):
         return False
-    interpreter = _registered_python(repo)
-    if interpreter is None:
-        return False
-    if role == "explorer":
-        forbidden = str(repo / "local_research" / "pro_reviews").replace("\\", "/")
-        normalized = command.replace("\\", "/")
-        if (
-            forbidden.lower() in normalized.lower()
-            or "local_research/pro_reviews" in normalized.lower()
-        ):
+    return bool(attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400))
+
+
+def _has_path_alias(path: Path) -> bool:
+    """Reject lexical aliases and existing symlink/junction components."""
+
+    if PATH_ALIAS.search(str(path)):
+        return True
+    candidate = path if path.is_absolute() else Path.cwd() / path
+    while True:
+        if candidate.is_symlink() or _is_reparse_point(candidate):
+            return True
+        parent = candidate.parent
+        if parent == candidate:
             return False
-        for basename in ("mylib_research_probe.py", "research_portfolio_gate.py"):
-            script = (
-                repo
-                / ".agents"
-                / "skills"
-                / "hmasd-independent-research-exploration"
-                / "scripts"
-                / basename
-            )
-            if _registered_script_prefix(command, interpreter, script):
-                return True
-        return False
+        candidate = parent
 
-    return False
+
+def _target_path(raw: str, cwd: Path) -> Path:
+    """Validate one syntactic target and return its canonical path."""
+
+    value = raw.strip()
+    if value.startswith(("\\\\", "//")):
+        raise GuardError("UNC mutation targets are outside the HMASD workspace")
+    candidate = Path(value)
+    if _has_path_alias(candidate):
+        raise GuardError("symlink, junction, or path alias mutation target is forbidden")
+    if not candidate.is_absolute():
+        candidate = cwd / candidate
+    if _has_path_alias(candidate):
+        raise GuardError("symlink, junction, or path alias mutation target is forbidden")
+    return _canonical(candidate)
+
+
+def _marker_root(start: Path) -> Path:
+    """Resolve the project from stable control-plane markers.
+
+    Hook payloads occasionally contain a not-yet-created child directory.  Walk
+    from its nearest existing ancestor instead of treating that normal case as
+    a hook failure.  The markers deliberately work in Gitless test copies.
+    """
+    candidate = _canonical(start)
+    if not candidate.exists():
+        candidate = candidate.parent
+    if candidate.is_file():
+        candidate = candidate.parent
+    for ancestor in (candidate, *candidate.parents):
+        if (ancestor / "AGENTS.md").is_file() and (ancestor / ".codex" / "config.toml").is_file():
+            return ancestor
+    raise GuardError(
+        "cannot resolve HMASD workspace from AGENTS.md and .codex/config.toml markers "
+        f"(start={start!s}; process_cwd={Path.cwd()!s})"
+    )
+
+
+def _workspace_scope(cwd: Path) -> tuple[Path, list[Path], bool]:
+    """Return marker root, writable project scope and optional Git status.
+
+    Git is useful for diagnostics but is not an identity or admission gate.  A
+    copied project with the two stable markers is therefore still guarded.
+    """
+    root = _marker_root(cwd)
+    git_verified = False
+    git_dir = root / ".git"
+    if git_dir.exists() or git_dir.is_symlink():
+        if _has_path_alias(git_dir):
+            raise GuardError("symlink, junction, or path alias Git root is forbidden")
+        try:
+            git_top = _canonical(Path(_git(root, "rev-parse", "--show-toplevel")))
+        except (GuardError, OSError):
+            git_top = root
+        else:
+            if not _same(git_top, root):
+                raise GuardError(
+                    f"resolved Git workspace top does not match marker root: {git_top}"
+                )
+        git_verified = _same(git_top, root)
+    return root, [root], git_verified
 
 
 def _extract_absolute_paths(command: str) -> list[Path]:
@@ -219,27 +191,77 @@ def _extract_absolute_paths(command: str) -> list[Path]:
         raise GuardError("UNC mutation targets are outside the HMASD workspace")
     unique: list[Path] = []
     for value in raw:
-        candidate = _canonical(Path(value))
+        candidate = _target_path(value, Path.cwd())
         if not any(_same(candidate, prior) for prior in unique):
             unique.append(candidate)
     return unique
 
 
-def _trusted_provision(command: str, repo: Path, linked: bool) -> bool:
-    lowered = command.lower().replace("/", "\\")
-    if linked or "hmasd_workspace_ticket.py" not in lowered or " provision " not in f" {lowered} ":
+def _extract_target_paths(command: str, cwd: Path) -> list[Path]:
+    """Return canonical paths named by recognized path options/redirections."""
+
+    targets: list[Path] = []
+    for match in PATH_ARGUMENT.finditer(command):
+        value = match.group(1) or match.group(2) or match.group(3)
+        if value is None:
+            continue
+        target = _target_path(value, cwd)
+        if not any(_same(target, prior) for prior in targets):
+            targets.append(target)
+    return targets
+
+
+def _recursive_delete_is_broad(command: str, cwd: Path, repo: Path) -> bool:
+    """Identify recursive deletion of cwd/root or an unresolved broad target."""
+
+    if not RECURSIVE_DELETE.search(command):
         return False
-    if re.search(r"(?:;|&&|\|\||\r|\n|>|<)", command):
-        return False
-    registered = _canonical(repo / "scripts" / "hmasd_workspace_ticket.py")
-    return str(registered).lower() in lowered or "scripts\\hmasd_workspace_ticket.py" in lowered
+    try:
+        targets = _extract_target_paths(command, cwd)
+    except GuardError:
+        # Aliased and unresolved recursive targets are broad by definition.
+        return True
+    command_match = re.search(
+        r"(?is)\b(?:remove-item|rmdir|rd|del|erase|rm)(?:\.exe)?\b([^\r\n;&|]*)",
+        command,
+    )
+    if command_match:
+        args = command_match.group(1)
+        for token in re.findall(r'''"[^"]*"|'[^']*'|[^\s]+''', args):
+            value = token.strip('"\'')
+            if not value or value.startswith("/"):
+                continue
+            if value.startswith("-"):
+                continue
+            try:
+                target = _target_path(value, cwd)
+            except GuardError:
+                return True
+            if not any(_same(target, prior) for prior in targets):
+                targets.append(target)
+            break
+    for target in targets:
+        if _same(target, cwd) or _same(target, repo):
+            return True
+    # A wildcard or no recognizable target leaves the deletion scope unresolved.
+    if re.search(r"(?i)(?:-\s*(?:literalpath|path)\s+)[^\r\n;&|]*\*", command):
+        return True
+    if command_match:
+        args = command_match.group(1)
+        # A recursive delete without a recognized path is cwd-wide by default.
+        if not targets and not re.search(r"(?<![\w-])(?:[A-Za-z]:[\\/]|[^\s-]+)", args):
+            return True
+    return not targets
 
 
 def _patch_text(tool_input: Any) -> str:
     if isinstance(tool_input, str):
         return tool_input
     if isinstance(tool_input, dict):
-        for key in ("patch", "input"):
+        # Current apply_patch sends the patch in `command`; older clients used
+        # `patch` or `input`.  Accept all three without accepting arbitrary
+        # nested transcript fields.
+        for key in ("command", "patch", "input"):
             value = tool_input.get(key)
             if isinstance(value, str):
                 return value
@@ -256,8 +278,7 @@ def _guard_patch(
     if not paths:
         raise GuardError("apply_patch payload has no recognized file paths")
     for raw in paths:
-        candidate = Path(raw.strip())
-        resolved = _canonical(candidate if candidate.is_absolute() else cwd / candidate)
+        resolved = _target_path(raw, cwd)
         if any(_inside(resolved, root) for root in forbidden_roots):
             raise GuardError(f"apply_patch target is reserved for another role: {resolved}")
         if not any(_inside(resolved, root) for root in allowed_roots):
@@ -268,42 +289,20 @@ def _guard_shell(
     repo: Path,
     cwd: Path,
     allowed_roots: list[Path],
-    linked: bool,
     tool_input: Any,
-    research_role: str | None = None,
 ) -> None:
-    if not isinstance(tool_input, dict) or not isinstance(tool_input.get("command"), str):
+    if isinstance(tool_input, str):
+        command = tool_input
+    elif isinstance(tool_input, dict):
+        command = tool_input.get("command")
+        if not isinstance(command, str):
+            command = tool_input.get("cmd")
+        if not isinstance(command, str):
+            command = tool_input.get("script")
+    else:
+        command = None
+    if not isinstance(command, str) or not command.strip():
         raise GuardError("shell payload has no command")
-    command = tool_input["command"]
-    if research_role is not None:
-        if GIT_MUTATION.search(command) or re.search(
-            r"(?i)(?:^|\s)git(?:\.exe)?(?:\s|$)", command
-        ):
-            raise GuardError("Git mutation is forbidden for the independent research session")
-        if RESEARCH_UNSAFE_EXPRESSION.search(command):
-            raise GuardError("nested or executable shell expression is forbidden")
-        if re.search(r"(?:;|&&|\|\||\||&|\r|\n|>|<|`|\$\()", command):
-            raise GuardError("compound shell commands are forbidden for the research session")
-        if _trusted_research_script(command, repo, research_role):
-            return
-        if RESEARCH_UNSAFE_READ_OPTION.search(command):
-            raise GuardError("shell option can execute or write and is forbidden")
-        known_mutation = bool(
-            MUTATION.search(command)
-            or re.search(r"(?m)(?<![<>=])-?>{1,2}(?![=])", command)
-        )
-        if known_mutation:
-            raise GuardError(
-                "research shell mutation is forbidden; use apply_patch under local_research"
-            )
-        if not RESEARCH_READ_ONLY_COMMAND.search(command):
-            raise GuardError(
-                "research shell command is not an approved read-only form; "
-                "use a registered research script or apply_patch under local_research"
-            )
-        return
-    if _trusted_provision(command, repo, linked):
-        return
     if GLOBAL_MUTATION.search(command):
         raise GuardError("drive mapping, path alias, or raw Git worktree mutation is forbidden")
 
@@ -312,14 +311,16 @@ def _guard_shell(
         return
     if DYNAMIC_TARGET.search(command):
         raise GuardError("dynamic mutation target cannot be proven inside the writable scope")
+    if _recursive_delete_is_broad(command, cwd, repo):
+        raise GuardError("recursive deletion target is broad or unresolved")
+    target_paths = _extract_target_paths(command, cwd)
     absolute_paths = _extract_absolute_paths(command)
-    if not absolute_paths:
-        if linked:
-            raise GuardError("linked-worktree shell mutation must name an allowed absolute target")
+    candidates = target_paths + [path for path in absolute_paths if not any(_same(path, prior) for prior in target_paths)]
+    if not candidates:
         if not any(_inside(cwd, root) for root in allowed_roots):
             raise GuardError(f"working directory is outside the writable scope: {cwd}")
         return
-    for candidate in absolute_paths:
+    for candidate in candidates:
         if not any(_inside(candidate, root) for root in allowed_roots):
             raise GuardError(f"mutation target is outside the writable scope: {candidate}")
 
@@ -329,55 +330,51 @@ def main() -> int:
         payload = json.load(sys.stdin)
     except (json.JSONDecodeError, OSError) as exc:
         return _emit_deny(f"invalid hook payload: {exc}")
-    if payload.get("hook_event_name") != "PreToolUse":
+    event_name = payload.get("hook_event_name") or payload.get("event_name") or payload.get("event")
+    if str(event_name).replace("_", "").lower() != "pretooluse":
         return 0
-    tool_name = str(payload.get("tool_name", "")).lower()
+    tool_name = str(payload.get("tool_name") or payload.get("toolName") or "").lower()
     if tool_name not in SHELL_TOOLS | PATCH_TOOLS:
         return 0
     try:
-        cwd_raw = payload.get("cwd")
-        if not isinstance(cwd_raw, str) or not cwd_raw:
-            raise GuardError("hook payload has no working directory")
-        cwd = _canonical(Path(cwd_raw))
-        repo, allowed_roots, linked = _workspace_scope(cwd)
-        registered = _registered_research_sessions(repo)
-        session_id = payload.get("session_id")
-        research_role = next(
-            (
-                role
-                for role, registered_session in registered.items()
-                if isinstance(session_id, str) and session_id == registered_session
-            ),
-            None,
-        )
-        review_root = _canonical(repo / "local_research" / "pro_reviews")
-        if research_role is None:
-            if _inside(cwd, review_root):
-                raise GuardError(
-                    "local_research/pro_reviews requires the registered persistent session"
-                )
-        forbidden_roots: tuple[Path, ...] = ()
-        if research_role is not None:
-            if linked:
-                raise GuardError("independent research is confined to the main checkout")
-            allowed_roots = [_canonical(repo / "local_research")]
+        cwd_raw = payload.get("cwd") or payload.get("working_directory")
+        # The CLI normally supplies cwd.  If an older hook payload omits it,
+        # the launcher itself is already running from the project root.
+        cwd_input = Path(cwd_raw) if isinstance(cwd_raw, str) and cwd_raw else Path.cwd()
+        if _has_path_alias(cwd_input):
+            raise GuardError("symlink, junction, or path alias working directory is forbidden")
+        cwd = _canonical(cwd_input)
+        try:
+            repo, allowed_roots, _git_verified = _workspace_scope(cwd)
+        except GuardError:
+            # Windows PowerShell 5 can corrupt a non-ASCII path while
+            # forwarding redirected hook JSON.  Recover only when that
+            # decoded path does not exist and the independently inherited
+            # process cwd has the same drive and final component, then require
+            # the normal HMASD marker check on the inherited cwd.
+            process_cwd = _canonical(Path.cwd())
+            if (
+                cwd.exists()
+                or os.path.normcase(cwd.drive) != os.path.normcase(process_cwd.drive)
+                or os.path.normcase(cwd.name) != os.path.normcase(process_cwd.name)
+            ):
+                raise
+            cwd = process_cwd
+            repo, allowed_roots, _git_verified = _workspace_scope(cwd)
         if tool_name in PATCH_TOOLS:
             _guard_patch(
                 cwd,
                 allowed_roots,
                 payload.get("tool_input"),
-                forbidden_roots,
             )
         else:
             _guard_shell(
                 repo,
                 cwd,
                 allowed_roots,
-                linked,
                 payload.get("tool_input"),
-                research_role,
             )
-    except (GuardError, OSError, ticketing.TicketError) as exc:
+    except (GuardError, OSError) as exc:
         return _emit_deny(str(exc))
     return 0
 

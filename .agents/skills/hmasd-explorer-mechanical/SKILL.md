@@ -5,7 +5,8 @@ description: Bounded read-only mechanical evidence organization for Explorer ass
 
 # HMASD Explorer Mechanical Skill
 
-Use this thin Skill only when the Independent Research Explorer has a bounded
+Use this thin Skill only when the Root-scoped Independent Research Explorer L1
+has a bounded
 mechanical organization question whose answer is already explicit in a bounded,
 assignment-named set of read-only records. Dispatch the registered
 `hmasd-explorer-mechanical` child with `fork_turns=none` and a self-contained
@@ -21,7 +22,9 @@ expected information gain is concrete and the input boundary is frozen. Use
 the Explorer directly when the facts are already adjacent, when interpretation
 is required, or when dispatch would cost more than a short local extraction.
 This child is not a cheap scientific consultant, validator, dispatcher,
-writer, reviewer or acceptance owner.
+writer, reviewer or acceptance owner. It returns once to Explorer; Explorer
+returns any semantic proposal or locator to Root and never routes directly to a
+sibling owner.
 
 When an already-existing exact deterministic read-only script fully covers the
 named mechanical task, prefer that script. Do not add a custom script in this
@@ -36,7 +39,7 @@ for literal record/config differences, and `Test-Path` for named path or
 locator existence. It preserves the input's literal values, source locations,
 empty or unspecified states and explicit conflicts while producing the compact
 list, count, delta, roster, matrix or extraction requested by the assignment.
-No custom script, output file, persistent queue or source mutation is part of
+No custom script, output file, queue or source mutation is part of
 this Skill.
 
 For CPM-accepted facts, only rearrange or extract literal values. A direct

@@ -3,8 +3,16 @@
 ```text
 role=explorer_mechanical_operator
 callable_agent_type=hmasd-explorer-mechanical
-role_kind=registered_nonpersistent_native_child
+role_kind=registered_task_scoped_level2_leaf
+agent_tree_level=2
 parent=independent_research_explorer
+assignment_identity=assignment_scoped_native_task
+lifecycle=single_assignment_dispatch
+spawn_authority=none
+user_contact_authority=none
+canonical_state_write_authority=none
+output_contract=conclusion_first_return_to_parent
+background_callback=forbidden
 default_fork_turns=none
 model=gpt-5.6-luna
 reasoning_effort=low
@@ -15,12 +23,15 @@ scientific_authority=none
 technical_acceptance_authority=none
 child_authority=none
 runtime_authority=none
-cross_task_contact_authority=none
+cross_owner_contact_authority=none
+cross_branch_transport=none
 state_scan_authority=none
 failure_research_state_effect=none
+state_registry=none
 ```
 
-The Independent Research Explorer is the sole parent. The exact assignment
+The Independent Research Explorer is the sole parent. Cross-owner and
+cross-branch transport remain none; the exact assignment
 is a self-contained natural-language task model and its named inputs are the
 complete task context. Parent history and forked context are background only;
 active research, roster and barrier state is not context and may be read only

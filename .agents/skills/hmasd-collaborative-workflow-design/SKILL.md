@@ -1,22 +1,22 @@
 ---
 name: hmasd-collaborative-workflow-design
-description: Use only in the persistent HMASD Workflow Design Manager task to turn one workflow requirement or defect into a complete user-confirmed central control-plane plan.
+description: Use only in the task-scoped HMASD Workflow Design Manager L1 to turn one workflow requirement or defect into a complete user-confirmed central control-plane plan.
 ---
 
 # HMASD Collaborative Workflow Design
 
 ## Boundary
 
-This Skill is invoked only by Workflow Design Manager. It grants no runtime,
+This Skill is invoked only by the Root-assigned Workflow Design Manager L1. It grants no runtime,
 current-work state beyond WDM's own records, science, code or code-acceptance
-authority. Other persistent sessions send WDM requirements or defects and never
-invoke this Skill to mutate workflow surfaces.
+authority. CPM and Explorer return exact requirements or defects through Root;
+they never invoke this Skill or mutate workflow surfaces.
 
 ```text
 workflow_design_owner=workflow_design_manager
 runtime_authority=none
 workflow_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace
-workflow_child_edit_worktree=resolved_ticket_worktree_path|pre_edit_git_rev_parse_toplevel_exact_match
+workflow_child_edit_workspace=assignment_owned_paths_in_current_root_task_workspace
 session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
 assignment_writing_skill=hmasd-writing-agent-assignments
 workflow_zero_question_path=fully_specified_mutations
@@ -74,16 +74,16 @@ Present one compact plan containing:
   concurrently, and serialize only actual information dependencies or same-file
   writers. The integrated Reviewer follows the complete integrated batch, with
   parallel reviewers only for genuinely independent questions.
-  A direct user instruction explicitly naming WDM direct modification is the
-  only exception; generic workflow-change requests remain on the subagent route.
+  Root remains the only user-contact and physical-application actor; every
+  workflow-file mutation remains on the registered L2 subagent route.
 
 The exact-path matrix always includes `AGENTS.md` as `modify` or
 `unchanged-valid`. A role, session, Skill, profile, authority, route or retired
 name change requires a same-commit router update.
 
-An edit-capable child assignment additionally carries the exact resolved ticket
-worktree path. The child verifies `git rev-parse --show-toplevel` equals that
-path before editing and stops on any mismatch.
+An edit-capable child assignment additionally carries the exact owned paths and
+task-scoped workspace. The child verifies the current checkout identity before
+editing and stops on a mismatch; no external workspace identity is required.
 
 For a simple correction, keep the plan concise: goal, key unknown, smallest
 probe, one normal path plus one simple fallback, and stop condition. For every
@@ -107,4 +107,4 @@ inside the confirmed boundary automatically.
 After natural-language confirmation, load
 `$hmasd-workflow-change-audit`. That Skill owns implementation, verification,
 integrated review, Git integration and reload; this requirements Skill does not
-duplicate post-confirmation execution, delegation or successor procedures.
+duplicate post-confirmation execution, delegation or replacement-task procedures.

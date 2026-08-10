@@ -18,6 +18,11 @@ class GuardError(Exception):
         self.code = code
 
 
+_REQUESTER_PARTITIONS = frozenset(
+    {"code_project_manager", "independent_research_explorer"}
+)
+
+
 class _GuardParser(argparse.ArgumentParser):
     """Keep argument failures on the same machine-readable output channel."""
 
@@ -65,15 +70,22 @@ def _canonical_path(raw: str) -> Path:
     return resolved
 
 
-def _strict_assignment_descendant(path: Path, root: Path) -> None:
+def _strict_assignment_descendant(path: Path, root: Path) -> str | None:
     try:
         relative = path.relative_to(root)
     except ValueError as exc:
         raise GuardError("RESULT_PATH_SCOPE_INVALID") from exc
-    # The first component is the assignment directory. A direct child such as
-    # <transport-root>/results.json is the retired shared generic locator.
+    # Legacy shared assignments used <transport-root>/<assignment>/<file> and
+    # remain readable until their later retirement slice. Production callers
+    # use <transport-root>/<requester-role>/<assignment>/<file>; returning a
+    # path in another requester partition must never be accepted.
     if len(relative.parts) < 2:
         raise GuardError("RESULT_PATH_SCOPE_INVALID")
+    if relative.parts[0] in _REQUESTER_PARTITIONS:
+        if len(relative.parts) < 3 or not relative.parts[1]:
+            raise GuardError("RESULT_PATH_SCOPE_INVALID")
+        return relative.parts[0]
+    return None
 
 
 def validate(repo: str, expected_results_path: str, returned_results_path: str) -> None:
@@ -89,8 +101,10 @@ def validate(repo: str, expected_results_path: str, returned_results_path: str) 
     if _norm(expected) != _norm(returned):
         raise GuardError("RESULT_PATH_MISMATCH")
 
-    _strict_assignment_descendant(expected, root)
-    _strict_assignment_descendant(returned, root)
+    expected_partition = _strict_assignment_descendant(expected, root)
+    returned_partition = _strict_assignment_descendant(returned, root)
+    if expected_partition != returned_partition:
+        raise GuardError("RESULT_PATH_PARTITION_MISMATCH")
 
     try:
         result_stat = os.stat(os.fspath(expected), follow_symlinks=False)

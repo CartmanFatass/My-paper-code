@@ -1,210 +1,203 @@
-# HMASD Role Router
+# HMASD Root-First Role Router
 
 ```text
 document_kind=role_router
 all_workspace_agents_auto_load_this_file=true
-project_history_in_router=forbidden
-role_specific_procedure_in_router=forbidden
+topology=cli_root_depth_0|task_scoped_level1|task_scoped_level2_leaf
+root=the_current_cli_task_root
+max_subagent_depth=2
 ```
 
-This file is the minimum identity, authority and routing contract. History,
-results, budgets, procedures and implementation detail belong to the named
-Role, Skill, Profile, contract or workflow record.
+This file is the minimum identity, authority and routing contract. A fresh
+CLI invocation starts at Root and reloads canonical files; it does not resume a
+Desktop session, thread, successor or background callback. History, results,
+budgets and procedures belong to the named assignment, Role, Skill or
+canonical record.
 
 ## Precedence and role resolution
 
-Precedence is: direct user instruction, this router, the applicable role
-charter, an authorized current-state read, the named design/science contract,
-then procedural Skills. Use exactly one route:
+The Root reads this router first, identifies the owner lanes, and dispatches
+task-scoped L1 managers only when the task needs them. An L1 reads its exact
+assignment, its registered profile and Role, then dispatches only its named L2
+allow-list. An L2 reads only its exact assignment, profile, Role and immediate
+references. Missing identity, parent, owned paths or completion evidence fails
+closed and returns to Root.
 
-| Active identity | Read after this file | Do not load by default |
-|---|---|---|
-| Code Project Manager | `docs/project/CURRENT_WORK.md`, `.agents/roles/CODE_PROJECT_MANAGER.md`, then the active workstream's named paths | unrelated workstreams, research corpus and workflow history |
-| Workflow Design Manager | its exact assignment and `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`; expand only on a lazy trigger below | runtime, science and implementation state |
-| Agentify Transport child | its exact requester assignment, `.codex/agents/hmasd-agentify-transport.toml`, `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`, agentify Skill and its workspace | science, code, `CURRENT_WORK.md` and workflow history |
-| Independent Research Explorer | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, independent-research Skill, required principles and named sources | `CURRENT_WORK.md`, code, runtime and workflow state |
-| registered native child | its exact assignment, `.codex/agents/<profile>.toml`, named Role, then assignment-named files | `CURRENT_WORK.md`, persistent history and other roles |
-| external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` | repository state outside the question |
+| Tree position | Identity | Read after this file | Do not load by default |
+|---|---|---|---|
+| Root, depth 0 | current CLI task root | user request, this router, confirmed plan and required canonical files | owner semantics before dispatch |
+| L1, depth 1 | WDM | exact assignment, `.codex/agents/hmasd-workflow-design-manager.toml`, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md` | code, runtime and science state |
+| L1, depth 1 | CPM | exact assignment, `.codex/agents/hmasd-code-project-manager.toml`, `.agents/roles/CODE_PROJECT_MANAGER.md` | workflow-control and research corpus |
+| L1, depth 1 | Explorer | exact assignment, `.codex/agents/hmasd-independent-research-explorer.toml`, `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md` | project runtime and unrelated workflow state |
+| L2, depth 2 | registered leaf | exact assignment, its profile, named Role and immediate references | user, sibling lanes, unrelated history |
 
-A child never reconstructs task history. Missing identity, authority, path or
-completion condition fails closed. Persistent sessions route workflow defects
-and requirements to WDM; only WDM modifies or accepts workflow-control-plane
-surfaces.
+L1 managers are same-level children of Root, one active instance per owner per
+Root tree. They use `followup_task` within the same tree when assignment meaning
+and context remain valid. They never contact the user or a sibling directly;
+cross-owner information is returned to Root for relay. When a CLI task ends,
+all descendants end or are explicitly reported by Root. A later invocation
+starts a fresh Root and reloads canonical state; no thread/session identity or
+successor task is presumed.
 
-## Lazy workflow context triggers
-
-The WDM default load is the exact assignment and WDM Role only. Expand context
-only when the current task crosses one of these boundaries:
-
-| Trigger | Load the owner surface |
-|---|---|
-| User change or reported workflow defect requires a plan | `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md` |
-| Designing or dispatching a child or cross-session interface | `hmasd-writing-agent-assignments` and `docs/project/SESSION_WORKSPACE_CONTRACT.md` |
-| Confirmed plan is being implemented or verified | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
-| Stable owner, interface, dependency or context edge is material | `docs/project/WORKFLOW_MAP.md` |
-| Status, continuity or successor rotation is being updated | WDM `CURRENT_WORK` index and linked session/common records |
-
-Specialized Agentify, CPM-mechanical and Explorer-mechanical interfaces remain
-with their owner contracts; this router keeps only the registered pointers and
-cross-role boundaries.
-
-## Authority and ownership
+## Root authority and owner boundaries
 
 ```text
-workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces
-workflow_design_manager_workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces
-workflow_design_manager_workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces
-workflow_design_manager_workflow_runtime_authority=none
-workflow_design_manager_scientific_authority=none
-workflow_design_manager_code_acceptance_authority=none
-workflow_design_manager_current_work_authority=public_index_and_own_workflow_control_plane_records_only
-workflow_design_manager_git_authority=exclusive_for_workflow_control_plane_surfaces
-workflow_design_manager_remote_repository_authority=permanent_user_grant
-workflow_design_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
-workflow_design_manager_agentify_source_authority=permanent_user_grant_for_hmasd_transport_only
-workflow_design_manager_agentify_workspace=C:/Projects/agentify-desktop
-workflow_design_manager_agentify_git_authority=direct_modify_commit_and_push
-workflow_design_manager_external_review_runtime_authority=none
-workflow_design_manager_experiment_runtime_authority=none
-workflow_design_owner=workflow_design_manager
-persistent_session_workflow_design_authority=none
-persistent_session_workflow_acceptance_authority=none
-persistent_session_workflow_git_authority=none
+root_user_interaction_authority=exclusive
+root_cross_owner_relay_authority=exclusive
+root_agent_tree_and_lifecycle_authority=exclusive
+root_top_level_owned_path_freeze=exclusive
+root_canonical_state_physical_write_authority=accepted_proposals_only
+root_final_git_integration_authority=accepted_paths_only
+root_semantic_owner_authority=none
+root_domain_acceptance_authority=none
 
-agentify_transport_child=hmasd-agentify-transport
-agentify_transport_child_parent=code_project_manager|independent_research_explorer
-agentify_transport_test_parent=workflow_design_manager
+workflow_design_manager_parent=root
+workflow_design_manager_role_kind=registered_task_scoped_level1_orchestrator
+workflow_design_manager_agent_tree_level=1
+workflow_design_manager_workflow_design_authority=exclusive
+workflow_design_manager_workflow_modification_authority=exclusive_via_assigned_L2
+workflow_design_manager_workflow_acceptance_authority=exclusive
 
+code_project_manager_parent=root
+code_project_manager_role_kind=registered_task_scoped_level1_orchestrator
+code_project_manager_agent_tree_level=1
 code_project_manager_code_authority=exclusive
 code_project_manager_technical_acceptance_authority=exclusive
 code_project_manager_runtime_authority=exclusive
-code_project_manager_current_work_authority=exclusive
-code_project_manager_scientific_authority=none
-code_project_manager_git_authority=direct_for_code_runtime_review_evidence_report_ledger_and_state
-code_project_manager_remote_repository_authority=permanent_user_grant
-code_project_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
-code_project_manager_formal_external_review_request_and_intake_authority=exclusive
-code_project_manager_experiment_dispatch_and_result_routing=exclusive
-code_project_manager_mechanical_result_acceptance=exclusive
-code_project_manager_runtime_capacity_admission=exclusive
-code_project_manager_runtime_capacity_pool_units=3
-code_project_manager_routine_implementation_agent=hmasd-implementer-terra
-code_project_manager_protected_implementation_agent=hmasd-implementer
-cpm_mechanical_child=hmasd-cpm-mechanical
-cpm_mechanical_parent=code_project_manager
-project_map_owner=code_project_manager
-project_map_update=same_commit_when_stable_architecture_fact_changes
 
+independent_research_explorer_parent=root
+independent_research_explorer_role_kind=registered_task_scoped_level1_orchestrator
+independent_research_explorer_agent_tree_level=1
 independent_research_canonical_scientific_authority=none
-independent_research_explorer_write_scope=local_research_including_explorer_owned_pro_reviews|temp/handoffs/explorer_to_code_manager/
-independent_research_explorer_public_handoff_git_authority=none
-independent_research_continuity_entry=local_research/RESEARCH_CONTINUITY.md
-independent_research_continuity_owner=independent_research_explorer
-independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews
-independent_research_experiment_roster_owner=scientific_direction_dependency_design_and_intake_only
-independent_research_runtime_capacity_owner=code_project_manager
-external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
-formal_compute_authority=user_only
-explorer_mechanical_child=hmasd-explorer-mechanical
-explorer_mechanical_parent=independent_research_explorer
-workflow_change_request_route=workflow_design_manager
-workflow_change_execution=subagent_workflow_by_default
-wdm_direct_modification=only_when_user_explicitly_instructs_WDM_to_modify_directly
-workflow_subagent_parallelism=parallel_first_with_dependency_order
-workflow_child_parent=workflow_design_manager|workflow_child_acceptance_authority=none|workflow_child_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace|session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
-workflow_child_git_authority=none
-native_child_authority=exact_assignment_only
-workflow_assignment_writing_skill=hmasd-writing-agent-assignments
-one_artifact_one_acceptance_owner=true
-workflow_design_charter=WORKFLOW_DESIGN_MANAGER.md
-cross_task_transport=codex_native_send_message_to_thread
+independent_research_user_grant_authority=direct_user_in_explorer_task_only
+
+level1_physical_write_authority=none
+level1_canonical_state_write_authority=none
+level1_git_authority=none
+level1_user_contact_authority=none
+level1_sibling_contact_authority=none
+level1_return_route=return_to_root
+level1_followup_route=followup_within_same_root_tree
+level2_spawn_authority=none
+level2_user_contact_authority=none
+level2_cross_branch_transport=none
+level2_canonical_state_write_authority=none
+level2_git_authority=none
 ```
 
-## Hard project and workspace boundaries
+Semantic ownership and acceptance remain with WDM, CPM and Explorer. Physical
+canonical writes are Root operations applied only after the relevant owner
+returns a complete accepted proposal. Root checks path, revision and
+consistency; it does not rewrite domain conclusions. Manager proposals may be
+kept in an assignment-specific temporary state-proposal file, but a proposal
+is not canonical state until Root accepts and writes it.
+
+## Routing and lifecycle
 
 ```text
-development_mode=agile_algorithm_research
-project_development_skill=hmasd-agile-research-development
-workflow_change_skill=hmasd-workflow-change-audit
-hmasd_python_interpreter=C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
-test_scope=proof_sized
-workflow_hash_validation=disabled
-per_file_hash_handoff=forbidden
-workflow_hash_admission=forbidden
-same_file_concurrent_writes=forbidden
-disjoint_file_parallelism=allowed
-workflow_parallel_implementation=file_family_adaptive
-isolated_worktree_identity=workspace_ticket_only
-hmasd_worktree_root=C:/worktrees/HMASD
-project_write_scope=current_checkout_plus_verified_ticket_worktree
-external_workspace_access=read_only
-raw_external_worktree_creation=forbidden
-drive_or_path_alias_creation=forbidden
+workflow_change_request_route=Root->WDM
+code_runtime_request_route=Root->CPM
+research_request_route=Root->Explorer
+cross_owner_route=owner->Root->owner
+cross_task_transport=return_to_root
+cross_task_transport_legacy=forbidden
+successor_route=fresh_Root_spawn_plus_canonical_reload
+background_callback=forbidden
+mandatory_ticket_identity=forbidden_for_subagent_authority
 ```
 
-Agents write only within the current checkout or a verified registered ticket
-worktree. Project-external reads are allowed; project-external writes require a
-new exact user instruction except for WDM's standing Agentify transport grant.
-Children do not stage, commit, push, route or accept. Git-visible checks and
-ticket retirement remain WDM-owned for workflow surfaces.
+The current Root may run disjoint owner lanes in parallel, subject to actual
+capacity and same-path dependencies. Completion order does not establish
+semantic priority. Root waits only when every remaining safe action depends on
+an outstanding result, and reports the smallest missing user decision when a
+decision would change the outcome.
 
-## Registered child pointers and normal delegation
+## Registered L2 leaves
 
-The fixed registered workflow children are:
+Every L2 profile declares `role_kind=registered_task_scoped_level2_leaf`,
+`agent_tree_level=2`, its single `parent`, `spawn_authority=none`,
+`user_contact_authority=none`, `cross_branch_transport=none`, and exact owned
+paths. L2 may use `workspace-write` only for those paths; it never stages,
+commits, pushes, updates canonical coordination state or performs final
+acceptance. WDM, CPM and Explorer each maintain their own explicit L2 allow-list
+in the corresponding Role/profile.
 
-- Workflow Auditor/Scout: `.codex/agents/hmasd-workflow-auditor.toml` and `.agents/roles/WORKFLOW_AUDITOR.md`.
-- Workflow Implementer: `.codex/agents/hmasd-workflow-implementer.toml` and `.agents/roles/WORKFLOW_IMPLEMENTER.md`.
-- Workflow Reviewer: `.codex/agents/hmasd-workflow-reviewer.toml` and `.agents/roles/WORKFLOW_REVIEWER.md`.
+The registered callable topology keeps WDM's three workflow leaves, CPM's
+code/mechanical leaves plus `hmasd-cpm-agentify-transport`, and Explorer's
+research/mechanical leaves plus `hmasd-explorer-agentify-transport`.
+The shared production identity is retired; production transport is exactly the
+two parent-specific registered types `hmasd-cpm-agentify-transport` and
+`hmasd-explorer-agentify-transport`, and WDM is not a production parent.
+The CPM and Explorer transport leaves write only their own requester-partitioned
+temporary transport roots under
+`temp/sessions/agentify_transport_operator/<requester>/<assignment>/`.
 
-The Independent Research Explorer may use the four already registered
-read-only research children for one exact adaptive scientific question per dispatch;
-campaign barriers and research authority remain unchanged. Detailed selection
-and question-roster guidance lives in the independent-research Skill and its
-parallel-workflow reference.
+The listed specialist leaves remain the first-choice and authoritative route.
+As a narrow temporary-task exception, an L1 caller may invoke the native
+default child as an L2 only when no listed specialist leaf can perform the
+bounded task. The caller action must use exactly
+`agent_type="default"`, `model="gpt-5.6-luna"`,
+`reasoning_effort="high"`, and `fork_turns="1"`; the single forked turn is
+background only, and `fork_turns="1"` is not a TOML/profile enforcement
+field. The caller must provide a self-contained brief under
+`hmasd-writing-agent-assignments` and confine any permitted writes to exact
+temporary paths under that caller's task-scoped temporary root. The default
+mode is read-only; the child never writes durable state, project code or a
+non-temporary path.
 
-The Explorer's registered `hmasd-explorer-mechanical` child is a separate
-read-only literal-fact organization capability, not a scientific consultant or
-campaign member; it has no write, Git, runtime, science, technical-acceptance,
-spawn or cross-task authority. Its profile and role are
-`.codex/agents/hmasd-explorer-mechanical.toml` and
-`.agents/roles/EXPLORER_MECHANICAL_OPERATOR.md`.
+The native child remains an L2 with no spawn, user, sibling, cross-owner or
+cross-branch contact; no canonical-state, Git, owner-acceptance, compute,
+external-review, science, code-acceptance, runtime or transport authority; and
+no ability to bypass Root relay. It returns only to its invoking L1 parent,
+which retains routing and acceptance. This exception creates no generic
+profile or Role and never displaces a matching professional leaf.
 
-WDM is the semantic integrator and acceptance owner. Registered child roles and
-the stable delegation boundary are owned by their Role, Skill and
-`docs/project/WORKFLOW_MAP.md`; the router keeps only the child pointers above.
+## Workspace and Git boundaries
 
-Ordinary workflow changes use the registered Auditor/Scout, Implementer and
-integrated Reviewer stages with parallel-first scheduling and dependency order;
-serialize only actual information dependencies or same-file writers. The
-integrated Reviewer follows the complete integrated batch. Only a direct user
-instruction explicitly naming WDM direct modification permits WDM to edit
-workflow files locally; a generic workflow change request remains on the
-default subagent route. Pure WDM design or authority decisions without file
-mutation remain WDM-local.
-Delegate-vs-local routing does not use task size, complexity, local feasibility,
-context cost, path count or benefit estimates.
+```text
+workflow_subagent_parallelism=parallel_first_with_dependency_order
+same_file_concurrent_writes=forbidden
+project_write_scope=current_checkout_or_user_named_workspace
+isolated_worktree_identity=optional_provenance_only
+ticket_worktree_precondition=none
+raw_external_worktree_creation=forbidden
+```
+
+The Root freezes top-level path families before dispatch. Managers and leaves
+write only the exact assignment paths in their own sandbox. Git is optional for
+topology execution: in a Git project Root performs final accepted-path staging,
+commit and push; in a no-Git copy Root emits a local verification receipt.
+Ticket/worktree helpers are provenance tools, never child identity or a
+precondition for ordinary subagent execution.
+
+Hook posture is disabled and non-authoritative: `.codex/hooks.json` remains an
+empty hook map under the direct user-disabled configuration. Routing, identity,
+authority and acceptance come only from this router, the exact assignment,
+registered profiles, Roles and Skills; no hook is enabled, trusted or required.
+
+## Lazy context triggers
+
+| Trigger | Owner surface |
+|---|---|
+| user change or workflow defect requiring a plan | `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md` |
+| designing an assignment/interface | `hmasd-writing-agent-assignments` and named contract |
+| confirmed plan implementation or verification | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
+| stable owner/interface/dependency edge | `docs/project/WORKFLOW_MAP.md` |
+| canonical status/continuity reload | the exact owner record named by Root |
+
+Remaining lower-level text that still describes the retired Desktop persistent
+route is non-authoritative until it is updated in a resumed migration phase.
+Active routing always follows this Root-first contract.
 
 ## Routed owner documents
 
-- Workflow authority and roles: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md` and `.agents/roles/WORKFLOW_*.md`.
-- Stable workflow orientation: `docs/project/WORKFLOW_MAP.md`.
-- Shared session/workspace contract: `docs/project/SESSION_WORKSPACE_CONTRACT.md`.
-- WDM public state: `docs/project/CURRENT_WORK.md`, `docs/project/current-work/sessions/workflow_design_manager.md`, `docs/project/current-work/common/workflow_control_plane.md`.
-- WDM durable/temporary workspace: `docs/session-workspaces/workflow_design_manager/`, `temp/sessions/workflow_design_manager/`.
-- Collaborative design and workflow-change mechanics: `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md`, `.agents/skills/hmasd-workflow-change-audit/SKILL.md`.
-- Explorer research, validation and methodology pointers: `.agents/skills/hmasd-independent-research-exploration/SKILL.md`, `.agents/skills/hmasd-explorer-project-validation/SKILL.md`, `.agents/skills/hmasd-explorer-mechanical/SKILL.md`, `.agents/skills/hmasd-independent-research-pro-review/SKILL.md`.
-- Code orientation (CPM-owned): `docs/project/PROJECT_MAP.md`.
-- Boundary and ticket checks: `scripts/hmasd_workspace_boundary_guard.py`, `scripts/hmasd_workspace_ticket.py`.
-- Other role contracts: `.agents/roles/CODE_PROJECT_MANAGER.md`, `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`, `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, `.agents/roles/EXTERNAL_PRO.md`.
+- Workflow roles and Skills: `.agents/roles/WORKFLOW_*.md`, `.agents/skills/`.
+- Code and runtime orientation: `.agents/roles/CODE_PROJECT_MANAGER.md`.
+- Research orientation: `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`.
+- External Pro (non-agent, outside the CLI tree): `.agents/roles/EXTERNAL_PRO.md`.
+- Canonical state: `docs/project/CURRENT_WORK.md` and exact owner records.
+- Temporary proposals: `temp/sessions/<owner>/<root-assignment>/state-proposals/`.
 
-Role charters own authority and capability; Skills own normal paths and one
-fallback; Profiles own model, sandbox and pointers; focused tests verify their
-contracts. No role reads every routed document.
-
-## Repository ownership summary
-
-Git-tracked code and tests, runtime evidence, scientific records and reports
-remain with CPM; advisory research remains with Explorer; transport mechanics
-remain with the requester-owned Agentify transport child. `docs/project/CURRENT_WORK.md` is only a WDM
-link/schema index. Handoffs under `temp/handoffs/` are disposable and never
-replace canonical owner records or enter Git.
+Role charters own authority and capability; Skills own normal procedures;
+profiles own model, sandbox and child pointers. No child reconstructs task
+history or infers authority from inherited context.

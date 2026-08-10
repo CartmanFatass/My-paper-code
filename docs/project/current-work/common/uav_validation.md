@@ -2,11 +2,18 @@
 
 ```text
 document_kind=current_work_common_record
-schema_version=1
+schema_version=2
+state_revision=1
 record_id=uav_validation
 record_kind=workstream
 workstream_id=uav_validation
 owner_role=code_project_manager
+physical_writer=root
+state_update_route=code_project_manager_accepted_proposal_to_root
+continuity=file_backed_owner_state
+reload_boundary=each_level1_spawn
+cross_owner_route=return_to_root
+next_boundary_route=root_relay
 status=G0_DEAD_ZONE_BOUND_SCALAR_GATE_IDENTITY_CLARIFICATION_STAGED
 active_assignment_id=UAV_G0_DEAD_ZONE_BOUND_SCALAR_GATE_IDENTITY_AND_N_GATE_CLARIFICATION
 next_boundary=UAV_G0_DEAD_ZONE_BOUND_SCALAR_GATE_IDENTITY_PRO_TRANSPORT
