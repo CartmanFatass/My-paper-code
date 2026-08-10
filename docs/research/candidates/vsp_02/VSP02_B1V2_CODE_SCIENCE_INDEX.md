@@ -34,7 +34,25 @@ artifact_lifecycle=frozen_manifest.json->registered_claim.json->training.json->e
 artifact_kinds=vsp02_b1v2_frozen_manifest|vsp02_b1v2_registered_full_claim|vsp02_b1v2_training|vsp02_b1v2_evaluation|vsp02_b1v2_analysis|vsp02_b1v2_result
 root_marker=vsp02_b1v2_learned_cue_conditioned_lifecycle_control
 retry_rescue_sweep_checkpoint_selection=0
-implementation_status=SOURCE_ONLY_PENDING_CPM_ACCEPTANCE_AND_REGISTERED_FULL
+implementation_status=REGISTERED_RESULT_PENDING_CPM_PUBLICATION_AND_FINAL_READINESS
+source_commit=89fe924883b3ee768e30126ed51cc49644dfcf72
+retained_branch=B1V2_FULL_LEARNER_FAILED
+full_gate=false
+x_memory_exact_positive=5/5
+x_memory_exact_J=1.35
+full_mapping_exact=0/5
+retry_rescue_sweep_checkpoint_selection=0
+claim_bearing_fulls=1
+scientific_activity_retries_rescues_sweeps=0
+validator_status=VALID
+operator_status=COMPLETE
+postfull_retained_check=temp/sessions/code_project_manager/vsp02_b1v2_postfull_retained_checks_result.json
+result_locator=docs/research/candidates/vsp_02/VSP02_B1V2_LEARNED_CUE_CONDITIONED_LIFECYCLE_CONTROL_RESULT.json
+source_readiness_receipt=.git/worktrees/vsp02_b1v2_source_readiness_clean_candidate_20260810/hmasd/execution-readiness/89fe924883b3ee768e30126ed51cc49644dfcf72/vsp02_b1v2_source_readiness_r2.json
+operator_receipt=temp/sessions/code_project_manager/vsp02_b1v2_operator_receipt.json
+disclosure=Operator reported an initial manifest-path command mismatch prelaunch; it was not retained or log-order-verifiable. Artifacts contain no second claim-bearing lifecycle and no scientific-activity retry.
+retained_exact_counts=1 full|30 fits|30720 training episodes|135556 training transitions|145348 total transitions|2176 evaluation episodes|65792 policy-observation calls|30720 learner calls|30720 trainer calls|640 neural updates|10240 tabular updates|5 seeds
+no_claims=value_or_learning_interpretation|B_or_C_or_Pro_status|successor_choice
 ```
 
 ## Protected host, learner, and retention semantics
