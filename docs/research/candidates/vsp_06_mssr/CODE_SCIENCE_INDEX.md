@@ -48,6 +48,25 @@ exhaustive repository-absence claim.
 
 ## VSP06-A1 joint production binding (2026-08-09)
 
+Accepted registered result:
+`A1_JOINT_PRODUCTION_BINDING_AND_MATCHED_SUPPORT_WITNESS_ESTABLISHED` at
+source commit `6ee1ee4efeddcc71175a0860ca52a9aa15bb2c1d`. The public zero-activity
+registered result is
+`docs/research/candidates/vsp_06_mssr/VSP06_A1_JOINT_PRODUCTION_BINDING_RESULT.json`
+(SHA-256
+`069d06628c40c8d32adc9a06404ba3f28c55b7e59d0878e3a87f57241137ff2c`).
+The separately retained two-history production witness is
+`docs/research/candidates/vsp_06_mssr/VSP06_A1_MATCHED_SUPPORT_WITNESS.json`
+(SHA-256
+`61f2cb83e5cb12a91c297d6a1be81925e308caca2b030ef8e75b914a00752d22`).
+The unique registered CLI invocation constructed the real factories and
+recorded zero environment/policy/learner/trainer/optimizer/evaluation/RNG
+activity. The focused witness is explicitly technical-test evidence, not part
+of that zero-activity count: it exercised two legal histories (four production
+token decisions per history, including the final unforced kernel action) to
+retain the complete traces. This separation is reported rather than treating
+the focused production calls as registered-probe activity.
+
 `experiments/candidates/vsp_06_mssr/joint_production_binding.py` registers the
 zero-policy A1 production-factory probe for
 `CAND-VSP-06-MSSR@adversarial-revision-v8`.  The production consumer is
