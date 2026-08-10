@@ -7,6 +7,11 @@ description: Use only in the task-scoped HMASD Workflow Design Manager L1 to tur
 
 ## Boundary
 
+```text
+activation_trigger=user_workflow_change_or_reported_workflow_defect_requiring_plan
+startup_preload=false
+```
+
 This Skill is invoked only by the Root-assigned Workflow Design Manager L1. It grants no runtime,
 current-work state beyond WDM's own records, science, code or code-acceptance
 authority. CPM and Explorer return exact requirements or defects through Root;
@@ -17,6 +22,9 @@ workflow_design_owner=workflow_design_manager
 runtime_authority=none
 workflow_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace
 workflow_child_edit_workspace=assignment_owned_paths_in_current_root_task_workspace
+workflow_tracked_writer_worktree=root_managed_worktree_provisioned_by_root
+workflow_worktree_exemptions=read_only|ignored_only|temporary_only
+workflow_worktree_mixed_write_classification=tracked_writer
 session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
 assignment_writing_skill=hmasd-writing-agent-assignments
 workflow_zero_question_path=fully_specified_mutations

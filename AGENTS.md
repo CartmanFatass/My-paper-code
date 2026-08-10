@@ -157,18 +157,35 @@ profile or Role and never displaces a matching professional leaf.
 ```text
 workflow_subagent_parallelism=parallel_first_with_dependency_order
 same_file_concurrent_writes=forbidden
-project_write_scope=current_checkout_or_user_named_workspace
-isolated_worktree_identity=optional_provenance_only
-ticket_worktree_precondition=none
+project_write_scope=current_checkout_for_exemptions_or_root_managed_worktree_for_tracked_writers
+tracked_writer_workspace=root_managed_worktree_required
+tracked_writer_includes=workflow_writer|code_writer|runtime_writer|any_writer_touching_tracked_path
+tracked_writer_mixed_write_classification=tracked_writer
+tracked_writer_exemptions=read_only|ignored_only|temporary_only
+root_managed_worktree_authority=root_only
+root_managed_worktree_helper=scripts/hmasd_root_managed_worktree.py
+root_managed_worktree_lifecycle=root_provision|root_record|root_integrate|root_release_or_retain
+root_managed_worktree_receipt=root_controlled_lifecycle_receipt_returned_to_root
+root_managed_worktree_one_nonterminal=at_most_one_nonterminal_receipt_per_assignment
+root_managed_worktree_local_failure=receipt_records_local_failure_and_stays_nonterminal_for_root_retry_or_park
+root_managed_worktree_legacy_isolation=legacy_worktrees_untouched_and_not_adopted_by_managed_lifecycle
+raw_child_git_worktree=forbidden
 raw_external_worktree_creation=forbidden
 ```
 
-The Root freezes top-level path families before dispatch. Managers and leaves
-write only the exact assignment paths in their own sandbox. Git is optional for
-topology execution: in a Git project Root performs final accepted-path staging,
-commit and push; in a no-Git copy Root emits a local verification receipt.
-Ticket/worktree helpers are provenance tools, never child identity or a
-precondition for ordinary subagent execution.
+The Root freezes top-level path families before dispatch. Any writer that can
+touch a tracked path, including a WDM workflow writer, runs in a Root-managed
+worktree provisioned and tracked by the Root-controlled helper. Read-only,
+ignored-only and temporary-only assignments are exempt; a mixed tracked and
+ignored assignment is still a tracked writer. Root alone provisions, records,
+integrates and releases or retains the managed worktree and its lifecycle
+receipt. A receipt-local failure is diagnosed, retried or parked by Root without
+making unrelated work terminal. At most one nonterminal receipt is active for
+an assignment. Existing legacy worktrees remain isolated and untouched by this
+lifecycle. Children never invoke the helper or run raw child `git worktree`
+lifecycle operations. Git remains Root-only: after owner acceptance Root applies
+the exact accepted path set and performs any separately authorized integration;
+in a no-Git copy Root emits a local verification receipt.
 
 Hook posture is disabled and non-authoritative: `.codex/hooks.json` remains an
 empty hook map under the direct user-disabled configuration. Routing, identity,
@@ -177,9 +194,15 @@ registered profiles, Roles and Skills; no hook is enabled, trusted or required.
 
 ## Lazy context triggers
 
+The concise L1 startup index is
+`docs/project/L1_STARTUP_CONTEXT.md`. It points to each owner's default core
+inputs and action-triggered Skills without replacing the router, Role charters,
+profiles or scientific/current-work records. The index is pointer-only and is
+not a preload of every owner surface.
+
 | Trigger | Owner surface |
 |---|---|
-| user change or workflow defect requiring a plan | `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md` |
+| user workflow change or workflow defect requiring a plan | `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md` |
 | designing an assignment/interface | `hmasd-writing-agent-assignments` and named contract |
 | confirmed plan implementation or verification | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
 | stable owner/interface/dependency edge | `docs/project/WORKFLOW_MAP.md` |

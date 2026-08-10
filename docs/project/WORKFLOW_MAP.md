@@ -15,7 +15,7 @@ exhaustive registry or procedure copy.
 
 | Owner | Stable responsibility | Interface handed onward |
 |---|---|---|
-| Root | user communication, task routing, cross-owner relay, lifecycle and accepted physical writes, including separately authorized final Git integration; no scientific comparison/intake or domain acceptance | owner-routed assignments/results, accepted proposals and accepted-path integration evidence |
+| Root | user communication, task routing, cross-owner relay, lifecycle, Root-managed worktree helper/receipt control and accepted physical writes, including separately authorized final Git integration; no scientific comparison/intake or domain acceptance | owner-routed assignments/results, lifecycle receipts, accepted proposals and accepted-path integration evidence |
 | Workflow Design Manager (WDM) | user-confirmed workflow design, control-plane modification through assigned leaves, semantic integration and acceptance | confirmed plan, self-contained child assignment, integrated change packet and successor brief |
 | Workflow Auditor | read-only local reconnaissance for an assigned workflow surface | conclusion about bounded facts/conflicts, followed by optional dependency evidence |
 | Workflow Implementer | one frozen non-overlapping workflow change slice | conclusion about the owned outcome and checked consequence, followed by an optional `WORKFLOW_CHANGE_PACKET` factual tail |
@@ -46,6 +46,17 @@ focused contract tests and bounded execution checks
 The router points; Roles decide authority; Skills describe mechanics; Profiles
 register callable children; tests verify the contracts. Detailed procedures do
 not move back into the router or this map.
+
+Any writer that may touch a tracked path, including a WDM workflow writer, uses
+a Root-provisioned managed worktree. Read-only, ignored-only and temporary-only
+assignments are exempt; mixed tracked and ignored writes remain tracked-writer
+assignments. Root alone invokes the helper, owns the lifecycle receipt, applies
+accepted paths and releases or retains the worktree. At most one nonterminal
+receipt is active per assignment; a local failure remains nonterminal for Root
+retry or parking while unrelated work continues. Legacy worktrees stay isolated
+and untouched. Children never invoke the helper or run raw child `git worktree`
+operations. The Session Workspace Contract is the defining workspace source;
+this paragraph is orientation only.
 
 ## Persistent owner/orchestrator edge
 
@@ -152,10 +163,12 @@ genuinely independent questions.
 
 ## Context loading
 
-`AGENTS.md` owns the lazy trigger table. WDM and each child start with the exact
-assignment and Role, then expand only to the owner surface named by the active
-interface or status dependency. This map is an orientation aid, not a reason to
-load every document.
+`AGENTS.md` owns the lazy trigger table and
+`docs/project/L1_STARTUP_CONTEXT.md` is the concise pointer index for WDM, CPM
+and Explorer default core inputs and action triggers. Each L1 starts with the
+exact assignment, registered Profile and Role, then expands only to the Skill
+or owner surface named by the active interface or status dependency. The index
+and this map are orientation aids, not reasons to load every document.
 
 ## Role-based successor continuity
 

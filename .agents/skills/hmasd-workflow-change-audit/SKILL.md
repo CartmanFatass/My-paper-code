@@ -7,6 +7,11 @@ description: Use only in the task-scoped Workflow Design Manager L1 after plan c
 
 ## Contract boundary
 
+```text
+activation_trigger=confirmed_workflow_plan_execution_or_verification
+startup_preload=false
+```
+
 Workflow Design Manager is the sole workflow design, modification and acceptance
 authority. Root owns physical application, lifecycle and Git mechanics. This
 Skill grants no science, code, code acceptance, runtime
@@ -15,7 +20,11 @@ requirements/defects and continue their non-workflow duties; they do not edit or
 accept control-plane surfaces.
 Workspace ownership remains defined by `docs/project/SESSION_WORKSPACE_CONTRACT.md`;
 the active child boundary is the exact assignment-owned path set in the current
-Root task workspace, with no external workspace identity precondition.
+Root task workspace. Any writer that may touch a tracked path, including a WDM
+workflow writer, uses a Root-provisioned managed worktree; read-only,
+ignored-only and temporary-only work is exempt, while mixed writes remain
+tracked-writer work. This Skill never invokes the helper or runs raw child
+`git worktree` lifecycle operations.
 
 Use this Skill for router, role, Skill, profile, hook, registry, stable workflow
 contract, workflow script or focused workflow test changes. Operational state,
@@ -104,10 +113,12 @@ a scheduler, approval state or global blocker.
 
 1. **Inspect.** Read only named control-plane paths, declare the exact path set,
    preserve unrelated work and identify the smallest normal-path probe.
-2. **Delete or edit.** Remove superseded rules before adding text. Use an isolated
-   task workspace only when the assignment explicitly names one. Otherwise edit
-   the exact assigned paths in the current Root task workspace; no external
-   workspace provisioning is part of this Skill.
+2. **Delete or edit.** Remove superseded rules before adding text. A tracked
+   writer edits its exact assigned paths in the Root-provisioned managed
+   worktree; read-only, ignored-only and temporary-only work uses the named
+   current task workspace. Root alone provisions, records the lifecycle receipt,
+   integrates accepted paths and releases or retains the worktree; no helper
+   lifecycle is part of this Skill.
 3. **Focused check.** Run the smallest affected contract, the structural harness,
    stale-term search and `git diff --check`. For ordinary subagent workflow
    changes, the integrated Reviewer follows the complete integrated batch and

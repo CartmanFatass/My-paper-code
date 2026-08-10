@@ -13,7 +13,7 @@ max_depth = 2
 interrupt_message = true
 
 [agents."HMASDWorkflowDesignManager"]
-description = "Read-only Terra-high L1 Workflow Design Manager for one Root-scoped workflow assignment."
+description = "Read-only Sol-high L1 Workflow Design Manager for one Root-scoped workflow assignment."
 config_file = "./agents/hmasd-workflow-design-manager.toml"
 nickname_candidates = ["Workflow Design Manager", "Workflow Architect", "Control Plane Designer"]
 
