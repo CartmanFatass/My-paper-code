@@ -210,3 +210,63 @@ Narrow nonclaims: this proves synthetic contract and action-map conformance
 only. It does not establish an empirical EC4G cell, natural receipt
 availability, positive deployed executor mass, transport safety, causal effect,
 or operational value.
+
+## EC4G-A2 prospective contract-binding audit implementation
+
+`EC4G-A2-PROSPECTIVE-CONTRACT-BINDING-AUDIT` is a read-only analyzer for the
+immutable publication snapshot
+`497d1429beaf648b0cb6672523d0e87370ad736e`. Before inspecting any scientific
+role it freezes exactly the five A1 result/source/runner/test/index paths plus
+only same-commit project paths directly named by this index, resolving those
+references once and deduplicating them. A declaration may point only into that
+already-frozen inventory; an outside locator is an incoherent witness and never
+extends the inventory.
+
+The analyzer inspects exactly fourteen roles in frozen order: objective
+contract; `K`; `R_k`; coherent seven-arm mean/covariance; cost object; decision
+parameters; `M_E`; `M_D`; fallback `F`; donor `J`; canonicalizer/equality
+`Gamma`; support `s`; deployed measure `m`; and freeze manifest. An admissible
+pre-existing declaration must bind immutable identity and same-snapshot
+provenance (including the exact frozen source-blob digest), totality, freeze ordinal, and one
+cross-object population/horizon/unit/snapshot/domain/ordering/serialization/
+freeze-order tuple. The freeze manifest must exactly bind the publication
+commit, frozen inventory path order, and fourteen-role order.
+
+The A1 result is retained only as negative evidence about its absent bindings;
+it is never promoted into an A2 role object. The synthetic `x0` conformance
+cell, narrative intent, analyzer defaults, and source-level class definitions
+are likewise ineligible. The analyzer performs no copy, amendment,
+normalization, inference, imputation, or repair and never adds a path after
+role inspection begins.
+
+Terminal precedence is frozen as:
+
+1. `A2_INVENTORY_FREEZE_INVALID`;
+2. `A2_POST_FREEZE_OBJECT_OR_REPAIR`;
+3. `A2_AMBIGUOUS_BINDING`;
+4. `A2_PARTIAL_OR_INCOHERENT_BINDING`;
+5. `A2_COMPLETE_PREEXISTING_BINDING`.
+
+Only branch 5 marks eligibility to *consider* a newly frozen census; the A2
+runner never performs that census. Every other branch parks the route pending a
+future complete prospective contract, without retry, rescan, or same-audit
+repair. The artifact carries the frozen inventory, a fourteen-row role witness
+table, first failure, all retained missing/ambiguous/incoherent witnesses,
+source/publication identities, commit-pinned inventory locators, one
+CPM-owned technical acceptance identifier, and exact activity counters.
+
+The one-shot runner is
+`scripts/run_ec4g_a2_prospective_contract_binding_audit.py`; it rejects an
+existing output before inventory freeze or analyzer construction and creates a
+new artifact with exclusive `xb` semantics. Environment transitions, policy,
+learner, trainer, optimizer, return evaluation, model-fit, and stochastic calls
+are all structurally fixed at zero. The registered A2 audit and result
+publication are not part of this implementation receipt and remain CPM-owned.
+
+### A2 traceability
+
+| Assertion | Implementation | Focused proof |
+|---|---|---|
+| Finite same-commit inventory is resolved once and frozen before roles | `experiments/candidates/ec4g_r1/prospective_contract_binding_audit.py::freeze_inventory` | `tests/experiments/candidates/ec4g_r1/test_prospective_contract_binding_audit.py::test_real_publication_inventory_freezes_exact_five_paths_before_role_inspection` |
+| Exact fourteen-role validation, A1/synthetic exclusion, and frozen precedence | `::audit_frozen_inventory`; `::_candidate_issues`; `::_cross_object_issues` | `::test_publication_snapshot_technical_smoke_is_partial_and_retains_fourteen_missing_witnesses`; `::test_ambiguous_binding_precedes_missing_and_retains_both_witness_sets`; `::test_complete_preexisting_binding_requires_all_fourteen_exact_coherent_objects` |
+| One-shot artifact and zero runtime/stochastic activity | `scripts/run_ec4g_a2_prospective_contract_binding_audit.py::main`; `::_write_new` | `::test_runner_existing_output_aborts_before_inventory_freeze`; `::test_runner_writes_one_canonical_registered_artifact`; `::test_all_runtime_and_stochastic_activity_is_exactly_zero` |
