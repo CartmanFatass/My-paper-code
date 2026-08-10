@@ -16,6 +16,11 @@ selection_basis=critical_quality_then_accumulated_end_to_end_cost_proxy
 This benchmark selects code workers only. It makes no algorithmic or scientific
 claim and consumed no conclusion-bearing iteration.
 
+The rows and raw terminal facts below are retained as historical benchmark
+evidence. They do not define the current route: the persistent Workflow Design
+Manager route is `gpt-5.6-sol/high`, and ticket/worktree identity is superseded
+policy rather than a child admission or authority requirement.
+
 ## Frozen task and fairness
 
 Three implementers received the same member-state-rebinding contract from one
@@ -179,7 +184,7 @@ The selected profiles own no scientific authority. External Pro remains the
 scientific authority; Project Manager remains the sole code-side acceptance
 owner.
 
-## Harness repair adopted from the A rerun
+## Historical harness repair adopted from the A rerun (superseded policy)
 
 The first Sol-high failure was caused by a copied worktree UUID from another
 task, not by implementation reasoning. Isolated-worktree identity is now

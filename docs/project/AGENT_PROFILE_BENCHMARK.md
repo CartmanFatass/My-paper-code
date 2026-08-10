@@ -11,6 +11,7 @@ same_class_instructions=byte_identical
 same_task=true
 blinded=true
 project_acceptance_owner=project_manager_code_side
+current_persistent_wdm_route=gpt-5.6-sol/high
 ```
 
 This is a code-worker selection experiment, not an algorithm experiment. It
@@ -23,9 +24,9 @@ need the most expensive worker profile.
 - Launch the three implementers concurrently from one exact base commit in
   separate isolated worktrees with the same assignment, named interfaces,
   write scope, runtime and focused-check budget.
-- Every future isolated-worktree launch uses a PM-created workspace ticket.
-  Assignments carry the ticket path, not a hand-written absolute worktree path;
-  child `resolve` and PM `verify` are mandatory harness checks.
+- All tracked writers use Root-managed worktrees. Read-only, ignored-only and
+  temp-only work is exempt. A ticket, ticket identity or ticket precondition is
+  not part of child authority or workspace admission.
 - The three implementer profile `developer_instructions` blocks must be byte
   identical. Only profile name/description, model and reasoning effort differ.
 - Launch the three reviewers concurrently against the same anonymous candidate
@@ -133,7 +134,12 @@ plus the declared model tier only as an explicit proxy, never as exact currency.
   exhausted remains a valid failed end-to-end sample. It does not prevent a
   winner from being selected among accepted variants.
 
-Record raw outputs, PM gold scoring and the selection in
+Record raw outputs, PM gold scoring and the historical selection in
 `docs/project/AGENT_PROFILE_BENCHMARK_RESULT.md`. After selection, update the
 normal registered implementer/reviewer profile, delete losing benchmark
 profiles and temporary fixtures/worktrees, and restart before using the winner.
+
+The benchmark result is historical evidence. The current persistent Workflow
+Design Manager route is `gpt-5.6-sol/high`; benchmark-era ticket/worktree
+identity procedures are superseded policy and must not be reintroduced as an
+admission or authority requirement.

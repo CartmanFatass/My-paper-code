@@ -605,10 +605,13 @@ physics and reward, a hidden future burst ledger, visible current per-user
 demand without desired-UAV assignment, and the registered constructive/null/
 feasibility checks before implementation.
 
-The code-worker benchmark selects Terra-high implementer and Luna-max reviewer.
-The registered profiles are loaded after restart. Machine-resolved workspace
-tickets protect isolated worktrees. Code Project Manager directly owns Agentify
-Pro transport and exact raw archival for formal and Explorer-to-project review;
+The historical code-worker benchmark selected Terra-high implementer and
+Luna-max reviewer; those rows remain historical evidence. The current persistent
+Workflow Design Manager route is Sol/high. Registered profiles are loaded after
+restart. All tracked writers use Root-managed worktrees; read-only, ignored-only
+and temp-only work is exempt, and ticket identity is not a child admission
+requirement. Code Project Manager directly owns Agentify Pro transport and exact
+raw archival for formal and Explorer-to-project review;
 the Independent Research Explorer directly owns its independent direction
 reviews, while Workflow Design Manager owns only stable workflow contract
 design. Every cross-task send explicitly passes the assignment-current target

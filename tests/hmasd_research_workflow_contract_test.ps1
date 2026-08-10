@@ -510,7 +510,6 @@ foreach ($required in @(
     'level2_git_authority=none',
     'hmasd-collaborative-workflow-design',
     '.agents/skills/hmasd-workflow-change-audit/SKILL.md',
-    'project_write_scope=current_checkout_or_user_named_workspace',
     'cross_owner_route=owner->Root->owner',
     'cross_task_transport=return_to_root',
     'cross_task_transport_legacy=forbidden',
@@ -519,8 +518,6 @@ foreach ($required in @(
     'mandatory_ticket_identity=forbidden_for_subagent_authority',
     'workflow_subagent_parallelism=parallel_first_with_dependency_order',
     'same_file_concurrent_writes=forbidden',
-    'isolated_worktree_identity=optional_provenance_only',
-    'ticket_worktree_precondition=none',
     'raw_external_worktree_creation=forbidden',
     'hmasd-cpm-agentify-transport',
     'hmasd-explorer-agentify-transport')) {
@@ -533,6 +530,20 @@ foreach ($retired in @(
     'code_project_manager_session=',
     'independent_research_explorer_session=')) {
     if ($agents.Contains($retired)) { throw "AGENTS retains retired fixed routing: $retired" }
+}
+$agentsNormalized = $agents -replace '\s+', ' '
+foreach ($required in @('tracked writers', 'root-managed worktree', 'read-only', 'ignored-only', 'temp-only', 'ticket identity')) {
+    if (-not $agentsNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+        throw "AGENTS tracked-writer workspace contract missing: $required"
+    }
+}
+
+foreach ($forbidden in @('OneDrive root', 'OneDrive', 'legacy scan', 'legacy prune', 'legacy repair', 'scan/prune/repair')) {
+    foreach ($surface in @($agents, $workflowAudit, $workflowCollaboration, $workflowMap, $sessionWorkspaceContract)) {
+        if ($surface.ToLowerInvariant().Contains($forbidden.ToLowerInvariant())) {
+            throw "Retired workspace/legacy control remains: $forbidden"
+        }
+    }
 }
 foreach ($required in @(
     '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md',
@@ -1686,7 +1697,6 @@ foreach ($required in @(
     'public_current_work_index_owner=workflow_design_manager',
     'docs/project/current-work/common/<record-id>.md',
     'workspace_admission=fresh_cli_root_with_exact_assignment_owned_paths',
-    'workspace_identity_precondition=none',
     'authoritative_write_boundary=assignment_exact_owned_paths|root_accepted_proposal|root_git_integration',
     'hooks={}|disabled_non_authoritative_never_enabled_trusted_or_invoked',
     'agentify_transport_workspace_code_project_manager=temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/',
@@ -1747,7 +1757,6 @@ foreach ($stale in @(
 }
 foreach ($required in @(
     'Root owns physical application, lifecycle and Git mechanics',
-    'no external workspace identity precondition',
     'this Skill does not promise a current commit, push or external workspace cleanup',
     'No Hook Stop route is part of this workflow')) {
     if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Root-first contract missing: $required" }

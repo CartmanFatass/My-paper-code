@@ -394,7 +394,11 @@ foreach ($required in @(
     'scientific_iteration_cost=0',
     'A failed attempt is evidence, not a global blocker',
     'multiple bounded repair turns',
-    'monetary_cost_unavailable')) {
+    'monetary_cost_unavailable',
+    'All tracked writers use Root-managed worktrees',
+    'Read-only, ignored-only and temp-only work is exempt',
+    'ticket, ticket identity or ticket precondition is not part of child authority or workspace admission',
+    'current_persistent_wdm_route=gpt-5.6-sol/high')) {
     if (-not $benchmark.Contains($required)) {
         throw "Benchmark contract missing: $required"
     }
@@ -404,7 +408,10 @@ foreach ($required in @(
     'implementer_winner=gpt-5.6-terra/high',
     'reviewer_winner=gpt-5.6-luna/max',
     'monetary_cost=unavailable_from_native_child_runtime',
-    'hidden_oracle=IMPLEMENTER_ORACLE_PASS')) {
+    'hidden_oracle=IMPLEMENTER_ORACLE_PASS',
+    'historical benchmark evidence',
+    'persistent Workflow Design Manager route is `gpt-5.6-sol/high`',
+    'ticket/worktree identity is superseded policy')) {
     if (-not $result.Contains($required)) {
         throw "Benchmark result missing: $required"
     }

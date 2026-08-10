@@ -1,9 +1,8 @@
 """Fail closed for recognized writes outside the active HMASD workspace.
 
 This PreToolUse syntactic guard preserves its existing denials and complements
-the tool/OS sandbox, registered ticket identity and Git-visible checks. It does
-not replace those authoritative controls or claim to parse arbitrary shell
-semantics.
+the tool/OS sandbox and Git-visible checks. It does not replace those
+authoritative controls or claim to parse arbitrary shell semantics.
 """
 
 from __future__ import annotations

@@ -333,6 +333,12 @@ $routerRequired = @(
 foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
 }
+$routerNormalized = $agents -replace '\s+', ' '
+foreach ($required in @('tracked writers', 'Root-managed worktree', 'read-only', 'ignored-only', 'temp-only')) {
+    if (-not $routerNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+        throw "AGENTS tracked-writer workspace contract missing: $required"
+    }
+}
 foreach ($retiredRouterDetail in @(
     'agentify_transport_assignment_fields=',
     'agentify_transport_result_fields=',
@@ -507,7 +513,9 @@ foreach ($required in @(
 foreach ($required in @(
     'selected and frozen independent direction treatments',
     'admits independent treatments within the three-unit pool',
-    'an optional ticket/worktree may provide provenance',
+    'tracked writers use Root-managed worktrees',
+    'read-only, ignored-only and temp-only work is exempt',
+    'ticket identity is not a child admission or authority requirement',
     'normal path remains `independent_admitted_treatment_execution=parallel_first_within_capacity`',
     'detailed event-driven continuation and serialization exceptions are maintained by the parallel-research workflow reference',
     'CPM treatment dispatch is constrained only by an exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict',
@@ -919,7 +927,8 @@ if (-not $agileNormalized.Contains('CODE_SCIENCE_ALIGNMENT_AUDIT') -or
 }
 foreach ($surface in @($codePm, $agile)) {
     if ($surface.Contains('scripts/hmasd_workspace_ticket.py provision') -or
-        $surface.Contains('C:/worktrees/HMASD')) {
+        $surface.Contains('C:/worktrees/HMASD') -or
+        $surface.Contains('OneDrive')) {
         throw 'Code-PM retains retired mandatory worktree ticket identity'
     }
 }

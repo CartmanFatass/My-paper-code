@@ -121,6 +121,21 @@ def test_alias_and_broad_destruction_fail_closed(
     assert_denied(invoke(workspace(tmp_path), "Bash", {"command": command}), fragment)
 
 
+@pytest.mark.parametrize(
+    "command",
+    (
+        "git worktree add C:\\child-worktree HEAD",
+        "git worktree move C:\\child-worktree C:\\moved-worktree",
+        "git worktree remove C:\\child-worktree",
+        "git worktree prune",
+        "git worktree repair C:\\child-worktree",
+    ),
+)
+def test_raw_child_worktree_mutations_remain_denied(tmp_path: Path, command: str) -> None:
+    """Root-managed worktrees do not make raw child worktree mutation admissible."""
+    assert_denied(invoke(workspace(tmp_path), "Bash", {"command": command}), "worktree")
+
+
 def test_recursive_deletion_of_marker_root_or_an_unresolved_scope_fails_closed(tmp_path: Path) -> None:
     root = workspace(tmp_path)
     assert_denied(

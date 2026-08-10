@@ -154,7 +154,9 @@ def test_cpm_action_bearing_technical_treatment_view_is_projection_only() -> Non
 
 def test_durable_and_temporary_workspaces_remain_separate() -> None:
     contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
+    router = _text("AGENTS.md")
     normalized = " ".join(contract.split())
+    normalized_router = " ".join(router.split())
     readme = _text("docs/session-workspaces/workflow_design_manager/README.md")
     for required in (
         "docs/session-workspaces/<role_id>/",
@@ -168,6 +170,11 @@ def test_durable_and_temporary_workspaces_remain_separate() -> None:
         "No polling, queue or inferred path scan is part of this contract",
     ):
         assert required in normalized
+    assert "Root-managed worktree" in normalized_router
+    assert "tracked writers" in normalized_router
+    for exemption in ("read-only", "ignored-only", "temp-only"):
+        assert exemption in normalized_router
+    assert "ticket identity is not a child admission or authority requirement" in normalized_router
     assert "child_forked_context=background_only" in normalized
     assert "Formats and suggested sections aid understanding but never become admission gates" in normalized
     assert "workflow_surface_owner=true" in readme

@@ -164,7 +164,7 @@ def test_user_changes_and_advisory_defects_use_distinct_nonblocking_lanes() -> N
     assert "Otherwise move the item to the user-requested lane" in skill
 
 
-def test_edit_children_use_assigned_paths_without_ticket_worktree_prerequisite() -> None:
+def test_tracked_writers_use_root_managed_worktrees_without_ticket_identity() -> None:
     router = ROUTER_PATH.read_text(encoding="utf-8")
     role = ROLE_PATH.read_text(encoding="utf-8")
     skill = SKILL_PATH.read_text(encoding="utf-8")
@@ -175,15 +175,14 @@ def test_edit_children_use_assigned_paths_without_ticket_worktree_prerequisite()
     normalized_role = " ".join(role.split())
     normalized_skill = " ".join(skill.split())
     normalized_audit = " ".join(audit.split())
-    assert "workflow_child_edit_worktree=assignment_owned_paths_in_current_task_workspace" in role
-    assert "ticket_worktree_precondition=none" in router
-    assert "isolated_worktree_identity=optional_provenance_only" in router
-    assert "mandatory_ticket_identity=forbidden_for_subagent_authority" in router
-    assert "mandatory_ticket_identity=forbidden" in role
-    assert "no external workspace identity is required" in normalized_skill
-    assert "no external workspace identity precondition" in normalized_audit
+    assert "tracked writer" in normalized_router
+    assert "root-managed worktree" in normalized_router
+    for exemption in ("read-only", "ignored-only", "temp-only"):
+        assert exemption in normalized_router
+    assert "mandatory_ticket_identity=forbidden_for_subagent_authority" in normalized_router
     for text in (normalized_router, normalized_role, normalized_skill, normalized_audit):
         assert "resolved ticket worktree path" not in text
+        assert "scripts/hmasd_workspace_ticket.py" not in text
         assert "git rev-parse --show-toplevel" not in text
 
 

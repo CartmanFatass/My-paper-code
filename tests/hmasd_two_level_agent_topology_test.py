@@ -22,7 +22,7 @@ MANAGERS = {
         "profile": ROOT / ".codex/agents/hmasd-workflow-design-manager.toml",
         "role": ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
         "parent": "workflow_design_manager",
-        "model": "gpt-5.6-terra",
+        "model": "gpt-5.6-sol",
         "effort": "high",
         "allow": ("hmasd-workflow-auditor", "hmasd-workflow-implementer", "hmasd-workflow-reviewer"),
     },

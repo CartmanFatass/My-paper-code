@@ -41,7 +41,7 @@ L1_PROFILES = {
     "hmasd-workflow-design-manager": (
         REPOSITORY_ROOT / ".codex/agents/hmasd-workflow-design-manager.toml",
         REPOSITORY_ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
-        "gpt-5.6-terra",
+        "gpt-5.6-sol",
         "high",
     ),
     "hmasd-code-project-manager": (

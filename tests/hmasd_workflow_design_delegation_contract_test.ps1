@@ -74,7 +74,10 @@ foreach ($required in @(
 foreach ($required in @(
     'workflow_change_request_route=root->wdm',
     'cross_task_transport=return_to_root',
-    'workflow_subagent_parallelism=parallel_first_with_dependency_order')) {
+    'workflow_subagent_parallelism=parallel_first_with_dependency_order',
+    'All tracked writers use Root-managed worktrees',
+    'Read-only, ignored-only and temp-only work is exempt',
+    'ticket identity is not a child admission or authority requirement')) {
     if (-not $normalizedRouter.Contains($required.ToLowerInvariant())) { throw "Router execution policy missing: $required" }
 }
 
@@ -133,8 +136,7 @@ foreach ($required in @(
     'workflow_hash_validation=forbidden',
     'the log is evidence', 'exact assignment-owned path set',
     'observation, action, judgment, recovery and completion capabilities',
-    'Prefer positive capability text',
-    'no external workspace identity precondition')) {
+    'Prefer positive capability text')) {
     if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 
@@ -183,6 +185,14 @@ foreach ($retiredRoutingPhrase in @(
     foreach ($surface in @($router, $manager, $collaborationSkill, $skill, $workflowMap)) {
         if ($surface.ToLowerInvariant().Contains($retiredRoutingPhrase.ToLowerInvariant())) {
             throw "Stale optional or threshold routing remains: $retiredRoutingPhrase"
+        }
+    }
+}
+
+foreach ($forbidden in @('OneDrive root', 'legacy scan', 'legacy prune', 'legacy repair', 'scan/prune/repair')) {
+    foreach ($surface in @($router, $manager, $collaborationSkill, $skill, $workflowMap)) {
+        if ($surface.ToLowerInvariant().Contains($forbidden.ToLowerInvariant())) {
+            throw "Stale workspace/legacy control remains: $forbidden"
         }
     }
 }
