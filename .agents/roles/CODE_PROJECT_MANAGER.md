@@ -18,6 +18,10 @@ agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
 agentify_transport_result_fields=status|results_path|error
 agentify_transport_terminal_status=COMPLETE|ERROR
 agentify_transport_wait_visibility=silent_until_terminal_native_final
+formal_review_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py
+formal_review_result_guard_timing=after_terminal_before_read
+formal_review_result_guard_inputs=repo|expected_results_path|returned_results_path
+formal_review_result_guard_failure=reject_actual_error_no_fallback
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
 runtime_capacity_admission=exclusive
@@ -25,8 +29,13 @@ runtime_capacity_pool_units=3
 runtime_capacity_source=parallel-research-workflow
 runtime_resource_upclass_or_defer=allowed_before_start
 runtime_resource_downclass=forbidden
+runtime_admission_observation=stateless_per_admission
+runtime_admission_judgment=admit|up-class|pending_runtime_capacity
+scientific_evidence_level_vs_runtime_class=independent
 independent_admitted_treatment_execution=parallel_first_within_capacity
 ordinary_ab_serialization_requires=exact_dependency_or_resource_evidence
+cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict
+read_only_science_lane_capacity=independent_of_cpm_pool_by_default
 scientific_authority=none
 workflow_design_authority=none
 workflow_modification_authority=none
@@ -152,31 +161,39 @@ manager; there is no Research Operations Manager or persistent monitor.
   directions, rewrites the artifact or creates a `BLOCKED` state, and it never
   reads `local_research/`.
 - For result-bearing Explorer treatments, CPM is the sole operational owner of
-  the three-unit runtime pool and live process/resource observations. It admits
-  only treatments whose direction/treatment identities, accepted source,
-  worktree, run/evidence/checkpoint/result roots, RNG namespace and temporary
-  paths are isolated. CPM may up-class or defer a not-yet-started treatment when
-  actual resources require it, but never down-classes it, changes the scientific
-  question, rewrites Explorer priority or creates a cross-direction scientific
-  barrier. Capacity deferral is `pending_runtime_capacity` for that treatment,
-  never a task, direction or workflow `BLOCKED` state. Every artifact keeps
-  one independent technical acceptance and one conclusion-first reverse result;
-  no merged acceptance follows from concurrent execution or completion order.
-  An exclusive formal/heavy run reserves only experiment-runtime admission;
-  CPM continues implementation, technical intake and every unrelated non-runtime
-  action.
+  the three-unit runtime pool and live process/resource observations. The
+  detailed handoff cues, stateless per-admission observation, class/unit rules,
+  direction-local predecessor/intake barriers and resource-conflict behavior
+  live in
+  `.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md`.
+  CPM's only runtime judgment is `admit`, `up-class` or
+  `pending_runtime_capacity`. Capacity deferral applies only to the
+  not-yet-started treatment and never creates a task, direction or workflow `BLOCKED`
+  state. Every artifact keeps one independent technical acceptance and one
+  conclusion-first reverse result; no merged acceptance follows from concurrent
+  execution or completion order.
+- A result-bearing handoff explains its prospective runtime class/units and
+  direction-local predecessor/intake barrier closure in natural-language prose;
+  these are semantic cues, not a required schema. The scientific A/B/C evidence
+  level is independent of runtime class. CPM never infers class, units or
+  barrier closure from a science label or `local_research/`; if a cue is
+  genuinely missing, it preserves the handoff and asks exactly one concrete
+  clarification while unrelated work continues. An exclusive formal/heavy run
+  reserves only experiment-runtime admission. All non-experiment work that does
+  not contend for the observed bottleneck continues; one command contending for
+  that same actual resource may be delayed without creating `BLOCKED`.
 - Once Explorer has selected and frozen independent direction treatments and CPM
-  admits isolated tickets/worktrees within the three-unit pool, CPM implements
-  and runs those ordinary treatments parallel-first. The normal path is
-  `independent_admitted_treatment_execution=parallel_first_within_capacity`;
-  a global serial fallback is rejected unless one exact blocker is recorded:
-  actual direction/intake dependency supplied by Explorer, same-file/shared
-  mutable object/root conflict, observed CPU/memory/process/capacity constraint,
-  or formal/explicit-heavy experiment-pool exclusivity. Global attribution,
-  generic caution, convenience, completion order, and a `current sole action`
-  cannot serialize ordinary A/B. This does not force capacity filling, alter
-  scientific priority, down-class a treatment, modify a frozen design, or
-  change the formal nine-valid-iteration single-action lane.
+  admits isolated tickets/worktrees within the three-unit pool, the normal path
+  remains `independent_admitted_treatment_execution=parallel_first_within_capacity`.
+  The detailed event-driven continuation and serialization exceptions are
+  maintained by the parallel-research workflow reference; this role grants no
+  global serial fallback, scientific reprioritization or down-classing. CPM
+  treatment dispatch is constrained only by an exact scientific/dependency
+  predecessor, capacity/admission, a formal or actually observed resource
+  conflict, or a same mutable-path/object conflict. Read-only Explorer science
+  lanes remain independent of CPM pool/admission by default; only an exact
+  question depending on an unreturned CPM result creates a direction-local
+  science barrier.
 - Exact Experiment Operator assignments and recovery mode selection inside the
   unchanged authorized scientific boundary. A complete exact assignment
   delegates compute authority to the child automatically; CPM checks the
@@ -342,6 +359,11 @@ only after the child's terminal return. `.agents/roles/AGENTIFY_TRANSPORT_OPERAT
 and `.agents/skills/hmasd-agentify-transport/SKILL.md` own page, provider, wait,
 recovery and tab mechanics; CPM preserves conversation meaning and performs
 mechanical intake.
+Before reading or accepting that result, CPM runs
+`.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
+with the expected assignment path and returned terminal anchor. Mismatch,
+redirect, root-level generic path or missing/non-regular file is an actual
+intake error; CPM does not scan or infer a fallback path.
 
 For an authorized experiment, CPM supplies the complete assignment and grant
 binding; `.agents/roles/EXPERIMENT_OPERATOR.md` owns

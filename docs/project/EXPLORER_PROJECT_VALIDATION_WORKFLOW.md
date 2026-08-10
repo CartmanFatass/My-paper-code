@@ -33,9 +33,19 @@ frozen facts and uncertainty; strongest alternative explanation; the smallest
 set of material parent/child/cross-direction relationships; explicit exclusion
 of sibling-direction generalization unless a direction is explicitly named;
 one requested action and its direct
-consumer; completion evidence; and return destination. These cues make the
-semantic binding understandable without
-creating required field names or a machine admission gate.
+  consumer; completion evidence; and return destination. These cues make the
+  semantic binding understandable without
+  creating required field names or a machine admission gate.
+
+For a result-bearing handoff, the same prose should explain the treatment's
+ prospective runtime class and units and whether its direction-local predecessor
+ and intake barrier are closed. The scientific A/B/C evidence level is
+ independent of runtime class; it is a separate scientific description and
+never determines units or barrier closure. CPM never infers class, units or
+barrier closure from a science label or `local_research/`. If a cue is
+genuinely missing, CPM preserves the original
+handoff and asks exactly one concrete clarification while unrelated work
+continues; it does not guess, rewrite the artifact or create `BLOCKED`.
 
 CPM's reverse result begins with its conclusion and mirrors that same primary
 direction or explicitly named direction set, candidate, proposition, stage,
@@ -105,7 +115,11 @@ ordinary A/B treatments from different directions may overlap inside the
 three-unit CPM runtime pool. The exact capacity, direction-barrier and frozen
 joint-roster exception live in the exploration Skill's
 `parallel-research-workflow.md`; this bridge owns only direction-local binding
-and scientific intake.
+and scientific intake. The parallel-research reference is the single detailed
+source for capacity, stateless per-admission observation, runtime class/units,
+barrier and resource behavior; this bridge grants no second runtime procedure.
+Detailed capacity, admission, barrier and resource behavior is defined only by
+that parallel-research reference.
 
 This boundary is semantic guidance rather than a mandatory packet schema or
 validator admission gate. This boundary does not invoke External Pro, migrate
@@ -157,16 +171,9 @@ CPM may process several capacity-admitted, direction-independent candidates in
 isolated tickets and roots. One candidate's problem does not block unrelated
 work or change another candidate's frozen design or scientific status. Each
 result retains exactly one CPM technical acceptance and one Explorer scientific
-intake; completion order creates no priority or merged acceptance.
-When Explorer has already selected and frozen two or more independent
-treatments, and each local predecessor/intake barrier is closed, dispatch is
-parallel-first within available capacity. Serialize only for a named direction
-dependency, same-direction rules, shared mutable object/path conflict, actual
-CPM-reported capacity/resource constraint, or formal/explicit-heavy
-experiment-pool exclusivity. Attribution, generic caution, completion order or
-convenience cannot restore a global serial fallback. This does not require
-filling capacity or changing priority, and preserves the heartbeat's
-at-most-one-new-treatment-per-turn limit and all existing Pro triggers.
+intake; completion order creates no priority or merged acceptance. The detailed
+parallel-first, direction-local barrier, capacity and resource rules are defined
+only in `parallel-research-workflow.md`; this contract does not duplicate them.
 
 For an Explorer-origin candidate, CPM implements the selected treatment as an
 engineering task and does not substitute External Pro for experiment, instance

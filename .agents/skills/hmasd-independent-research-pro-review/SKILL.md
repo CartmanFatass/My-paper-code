@@ -52,8 +52,12 @@ root before sending.
    reuse. The child is silent while live and returns exactly once through its
    native final response with one `AGENTIFY_REVIEW_BATCH_RESULT` carrying
    `status|results_path|error` and terminal status `COMPLETE|ERROR`. Read the
-   named result only after that terminal final return; Explorer performs no
-   polling, progress handling or parent-task result relay.
+   named result only after that terminal final return. Before reading it,
+   invoke `.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
+   with the repository, the assignment's expected `results_path` and the
+   returned terminal anchor. Reject any mismatch, redirect, root-level generic
+   path or missing/non-regular file; do not infer a fallback path. Explorer
+   performs no polling, progress handling or parent-task result relay.
 4. Copy each named successful raw response and returned conversation URL into
    `local_research/pro_reviews/<review-id>/`, then reconcile it scientifically.
    Explorer names an exact archived URL in a later brief when it chooses

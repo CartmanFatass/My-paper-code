@@ -66,13 +66,20 @@ pointer-only; a missing binding gets one semantic clarification while
 unrelated work continues rather than a new workflow state.
 
 For result-bearing experiments, Explorer owns the scientific active roster,
-direction dependencies, prospective class and per-result intake; CPM owns the
-three-unit runtime-capacity admission, live process/resource observations,
-isolated execution and per-artifact technical acceptance. The detailed pool and
-heartbeat rules remain in the parallel-research workflow reference. This edge
-does not create a shared scheduler, merged acceptance or cross-direction barrier.
-An exclusive formal/heavy run reserves only experiment admission; all non-runtime
-owner lanes continue.
+direction-local predecessor/intake context and per-result scientific intake;
+CPM owns the three-unit runtime-capacity admission, live process/resource
+  observations, isolated execution and per-artifact technical acceptance. A
+  handoff may describe prospective runtime class/units in prose, but its A/B/C
+  scientific evidence level is independent and CPM never infers runtime class or
+  barrier closure from science or `local_research/`. The detailed stateless
+  observation, pool, barrier, resource and event-driven continuation rules
+  remain only in `parallel-research-workflow.md`; this map keeps the owner-lane
+  edge and does not create a shared scheduler, merged acceptance or
+  cross-direction barrier. Read-only Explorer science lanes remain independent
+  of CPM pool/admission by default; only an exact question depending on an
+  unreturned CPM result creates a direction-local science barrier. An exclusive
+  formal/heavy run reserves only experiment admission; all non-experiment work
+  that does not contend for the observed bottleneck continues.
 
 The Explorer mechanical edge is a native assignment to a literal-fact
 organization child; its storage boundary is defined by the Session Contract.

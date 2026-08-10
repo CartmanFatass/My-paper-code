@@ -14,6 +14,11 @@ agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
 agentify_transport_result_fields=status|results_path|error
 agentify_transport_terminal_status=COMPLETE|ERROR
 agentify_transport_wait_visibility=silent_until_terminal_native_final
+agentify_transport_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py
+agentify_transport_result_guard_inputs=repo|expected_results_path|returned_results_path
+agentify_transport_result_guard_timing=after_result_write_before_terminal_COMPLETE
+agentify_transport_result_guard_error=terminal_ERROR_empty_results_path_actual_error
+agentify_transport_result_guard_scope=strict_assignment_descendant_no_root_generic
 agentify_transport_runtime_authority=exclusive
 agentify_transport_response_completeness_judgment=exclusive
 agentify_page_authority=read_create_show_close_navigate_list_open_and_switch_conversations
@@ -42,7 +47,13 @@ the exact assigned `batch_path`, its local natural-language `context_path` and
 `results_path`, understands why the batch exists, its conversation relationship,
 the requested provider and ordered questions, controls the Agentify-held pages, obtains every
 completed response, writes that exact results file and returns it once through
-its native final response. The requester-owned context brief is the semantic
+its native final response. Immediately after the write, it runs
+`.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
+against the repository, expected assignment path and returned terminal path.
+Any mismatch, redirect or missing/non-regular file yields terminal `ERROR`
+with an empty `results_path` and the actual guard error; the response is never
+moved, copied, rewritten or read by this check. The requester-owned context
+brief is the semantic
 task input: it states the purpose, consumers, protected meaning, observable
 page/result conflicts, completion evidence and, for each question, whether to
 start clean, continue an exact prior conversation URL, run concurrently with

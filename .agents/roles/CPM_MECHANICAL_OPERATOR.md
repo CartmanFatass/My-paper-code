@@ -48,6 +48,24 @@ The dispatcher supports these mechanical task classes:
   inside that registered script; the child runs no direct Git command and has
   no Git mutation authority.
 
+The CPM mechanical capability also includes one stateless runtime-capacity observation
+immediately before CPM considers a result-bearing treatment. It
+may read CPM-supplied active treatment/process/unit/path facts and the prospective class/units,
+observe one set of Windows CPU, memory and process facts, compare exact output/writable path claims,
+perform fixed three-unit arithmetic, and write an assignment-named temporary factual snapshot. This
+observation emits facts or a direct factual error only; it does not emit an
+admission or acceptance result. CPM remains the sole owner of
+`admit|up-class|pending_runtime_capacity`. Incomplete live facts are reported
+as incomplete rather than inferred, and the observation is not a monitor,
+retry, lease, queue or persistent roster. It does not create a state machine.
+The arithmetic records reserved and free units before and after the request.
+The snapshot also records explicit GPU, paid-service and prospective-process
+claims/conflicts alongside CPU, memory, process, output-path and writable-path
+facts. CPM-supplied CPU-unit and memory-byte claims are compared with the one-shot host facts for direct pressure conflicts;
+missing host fields remain incomplete. No external paid-service call or GPU inference is performed.
+Its active-treatment summary preserves one complete row per input treatment,
+including identity, PIDs, units, resource claims and paths in input order.
+
 For incomplete or conflicting inputs, the child may perform at most one
 assignment-defined, read-only observation recovery (for example, re-reading
 the assigned artifact) and then records the direct conflict. It never applies

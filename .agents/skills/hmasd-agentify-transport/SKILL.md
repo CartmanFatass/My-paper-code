@@ -104,8 +104,16 @@ conversation. For each question:
     commentary, progress, ETA, heartbeat, collaboration or intermediate parent
     notification while waiting. Only the actual complete answer plus its
     concrete conversation URL permits archive and advancement.
- 5. Save the response, question path, conversation URL and item status in the
+5. Save the response, question path, conversation URL and item status in the
    exact assigned `results_path`.
+
+Before returning `COMPLETE`, run the read-only result-path guard at
+`.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
+with `--repo`, `--expected-results-path` and `--returned-results-path`. It
+must validate the exact physical assignment file. On guard failure return
+`ERROR` with an empty `results_path` and the actual error; do not move, copy,
+rewrite or read result contents. The guard rejects the shared root-level
+`temp/sessions/agentify_transport_operator/results.json` locator.
 
 The results file has one ordered row per question with `question_path`,
 `status`, `response`, `conversation_url`, `model_evidence` and an actual error

@@ -5,16 +5,26 @@ logical_assignment_count=derived_from_exact_work_roster
 runtime_concurrency=three_unit_cpm_capacity_pool
 runtime_capacity_units_total=3
 runtime_capacity_classes=A_READONLY_OR_ZERO_RUNTIME:0|B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive
+runtime_handoff_context=natural_language_prose_not_required_schema
+runtime_handoff_prospective_cues=runtime_class_and_units|direction_local_predecessor_and_intake_barrier_closure
+scientific_evidence_level=A|B|C_is_independent_of_runtime_class
+runtime_class_not_inferred_from_science_or_local_research=true
+runtime_admission_observation=stateless_per_admission
+runtime_admission_judgment=admit|up-class|pending_runtime_capacity
 active_experiment_roster_owner=independent_research_explorer_scientific_view
 runtime_capacity_admission_owner=code_project_manager
 independent_ready_treatment_dispatch=parallel_first_within_capacity
 global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence
+cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict
 per_direction_result_bearing_default=one_active
 same_direction_parallelism=exact_frozen_joint_roster_only
 capacity_wait_state=pending_runtime_capacity_only
 capacity_wait_effect=pending_runtime_capacity_only
 experiment_pool_exclusivity_scope=result_bearing_runtime_only
 workflow_progress_during_exclusive_runtime=continues
+read_only_science_lane_capacity=independent_of_cpm_pool_by_default
+science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only
+persistent_explorer_progress=event_driven_or_user_resumed
 canonical_campaign_phase_roster=exact_ordered_work_roster
 canonical_campaign_phase_barriers=required
 adaptive_question_roster=singleton_or_exact_joint_roster
@@ -31,6 +41,10 @@ adaptive_first_round_peer_reading=forbidden
 later_cycle_collaboration_brief=required
 research_child_default_fork_turns=none
 research_child_dispatch_contract=registered_agent_type|fork_turns="none"|self_contained_natural_language_assignment
+independent_direction_question_default=best_matching_registered_read_only_child|fork_turns="none"
+independent_direction_question_direct_root_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task
+root_explorer_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness
+cpm_accepted_result_interpretation=optional_direction_specific_read_only_child|technical_acceptance_not_repeated
 parent_conversation_history=background_only_not_task_authority
 restart_identity=role|model|current_task
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
@@ -70,6 +84,18 @@ consumer, completion evidence and return destination. A missing or contradictory
 identity/proposition/revision preserves the original artifact and gets exactly
 one concrete semantic clarification while unrelated work continues.
 
+For a result-bearing Explorer-to-CPM handoff, the natural-language brief should
+also explain the treatment's prospective runtime class and units and whether
+that direction's local predecessor and intake barrier are closed. These are
+semantic cues, never required field names, packet keys or a validator schema.
+The scientific evidence level (A reconnaissance/probe, B exploratory toy or C
+conclusion-bearing/expensive work) is a separate scientific description and
+does not determine the runtime class or units. CPM never infers a class, units
+or predecessor/intake closure from an A/B/C label or from `local_research/`.
+When one of these runtime or barrier cues is genuinely missing, CPM preserves
+the handoff and asks Explorer one exact clarification while unrelated work
+continues; it does not guess, rewrite the brief or create `BLOCKED`.
+
 For every registered research child, the Explorer calls the registered agent
 type with explicit `fork_turns="none"` and a self-contained natural-language
 assignment. Compile the research purpose, exact scientific question, source and
@@ -79,6 +105,15 @@ assignment. Parent conversation history is background only and must not supply
 hidden task meaning, authority, peer results or favored answers. These are
 writing guidelines, not a mandatory schema, assignment file, validator or
 admission gate.
+
+Independent direction-local detailed scientific questions use the best-matching
+registered read-only child by default with `fork_turns="none"`. Explorer may
+handle a cheap, reversible singleton directly only when dispatch overhead
+exceeds the question. The root retains the direction pointer, exact dependency,
+compact returned conclusion and CPM readiness. An accepted CPM result may first
+go to one direction-specific read-only child for interpretation; that child
+does not redo technical acceptance, and no fixed panel or scientific-authority
+transfer is created.
 
 Each barrier opens only when every expected assignment has one terminal packet
 or exact operational-failure record. Reject missing identity, locator,
@@ -220,18 +255,41 @@ completeness never means scientific truth.
 
 ## Independent-treatment dispatch, concurrency and authority
 
+### Stateless per-admission observation
+
+For each result-bearing treatment that is not yet started, CPM creates a
+stateless observation only for that admission decision. The observation uses
+the handoff's prospective class/units and direction-local predecessor/intake
+closure as semantic inputs, then checks the currently active result-bearing
+treatments, their consumed units and heavy exclusivity, the treatment's
+identity and writable-root isolation, one-shot observed CPU, memory and process
+facts, CPM-supplied GPU/paid-service claims or conflicts, and exact output-root
+or other writable-path claims. The observation is
+discarded after the decision; it is not a queue record, lease, registry,
+history entry or scheduler state, and it never reads `local_research/`.
+CPM makes no external GPU/paid-service call or inference; it compares only the
+supplied claims/conflicts and exact paths with the frozen treatment boundary.
+
+CPM alone makes the per-admission runtime judgment: `admit`, `up-class`, or
+`pending_runtime_capacity`. `up-class` is allowed only before a treatment
+starts when an observed engineering bottleneck requires a stronger class;
+down-classing is forbidden. `pending_runtime_capacity` applies only to the
+not-yet-started treatment that cannot fit the observed pool or bottleneck and
+never creates a task, direction or workflow `BLOCKED` state. A missing semantic
+class/unit or predecessor/intake cue is a clarification, not a capacity
+judgment.
+
 The normal path for two or more scientifically selected and frozen independent
 treatments is parallel-first when each direction's local predecessor/intake
 barrier is closed and admitted capacity is available. Serialize only an exact
-direction dependency, same-direction rules, shared mutable object/path
-conflict, actual CPM-reported capacity/resource constraint, or formal/explicit-
-heavy experiment-pool exclusivity. Attribution, generic caution, completion
-order, convenience and a current sole action are not dependency or resource
-evidence and cannot restore a global serial fallback. This rule does not make
-Explorer invent or select work, fill capacity, change scientific priority or
-reactivate a parked direction. It preserves pending-runtime-capacity and
-non-runtime continuation, the heartbeat's at-most-one-new-treatment-per-turn
-bound, existing Pro triggers and formal nine-iteration behavior.
+scientific/dependency predecessor, capacity/admission, a formal or actually
+observed resource conflict, or a same mutable-path/object conflict. Attribution,
+generic caution, completion order, convenience and a current sole action are
+not dependency or resource evidence and cannot restore a global serial fallback.
+This rule does not make Explorer invent or select work, fill capacity, change
+scientific priority or reactivate a parked direction. It preserves
+pending-runtime-capacity and non-runtime continuation, existing Pro triggers and
+formal nine-iteration behavior.
 
 The workflow defines no fixed per-role parallel count. Exact source and
 opportunity rosters determine logical work; current Codex capacity determines
@@ -243,14 +301,24 @@ one light, may run; a heavy/C treatment requires every other result-bearing
 runtime treatment to be terminal. A fourth light remains
 `pending_runtime_capacity` until one unit is released. Explorer declares a prospective class from
 the frozen design. CPM may up-class or defer a not-yet-started treatment for
-actual CPU, memory, process, GPU, paid-service or output-root constraints, but
+one-shot observed CPU, memory or process facts, CPM-supplied GPU/paid-service
+claims or conflicts, or exact output-root/path constraints, but
 never down-class it or change its scientific question, priority or branch map.
 Insufficient capacity is `pending_runtime_capacity`, never a direction, task or
 workflow `BLOCKED` state, and creates no queue engine, lease, dispatcher or
 acceptance owner. Formal or explicitly heavy runtime may prevent another
 result-bearing experiment from starting, but it never pauses code work,
 read-only research, scientific intake, External Pro review or another
-non-runtime action.
+non-runtime action. All non-experiment work that does not contend for the
+observed bottleneck continues. One command that contends for that same actual
+resource may be delayed without creating `BLOCKED`; that delay is local to the
+command and is not a workflow barrier.
+
+Read-only Explorer science lanes (direction children, Critic, Principles,
+Innovator, Scout and Pro review) are independent of CPM pool/admission by
+default. Only an exact scientific question that depends on an unreturned CPM
+result creates a direction-local science barrier; capacity and admission never
+throttle an independent read-only lane.
 
 A light treatment is normally CPU-only, uses no GPU, paid API or production
 service, stays at or below roughly 500,000 real transitions and 100,000 optimizer
@@ -284,13 +352,13 @@ scientific ordering. One engineering recovery that preserves every scientific
 literal is allowed before the result-bearing full starts; after it starts there
 is no silent retry.
 
-On an Explorer continuation heartbeat, restore the active roster, perform one
-bounded status/wait for each named active CPM treatment, intake returned results
-first, and dispatch at most one new treatment only when capacity is available and
-that direction's local barrier is closed. After the task deadline, dispatch none
-and wait only to a safe handoff boundary. This is ordinary continuation behavior,
-not a persistent monitor or background scheduler. A heartbeat with no free
-runtime token still performs intake, analysis and other non-runtime work.
+Explorer progress is event-driven or user-resumed. On a returned CPM result or
+user continuation event, restore the active roster, intake returned results
+first, and consider any treatment whose exact predecessor/intake barrier is
+closed and whose admission permits start. No clock-driven activation, forced
+termination, dispatch quota, polling loop or scheduler is part of this workflow.
+A continuation event with no free runtime token still permits intake, analysis
+and other non-runtime work.
 External Pro may overlap a
 small B runtime, but only the existing direction-changing ambiguity, final
 alignment, C/formal boundary or explicit-user trigger starts Pro; B completion or

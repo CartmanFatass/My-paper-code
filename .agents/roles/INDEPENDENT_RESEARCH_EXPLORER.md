@@ -49,6 +49,10 @@ project_validation_code_acceptance=none
 logical_assignment_count=derived_from_exact_work_roster
 research_child_dispatch=registered_child_type|fork_turns=none|self_contained_natural_language_assignment
 research_child_assignment_context=research_purpose|exact_question|named_sources_and_prerequisite_packets|protected_assumptions_and_independence|exclusions|permitted_local_judgment|completion_meaning
+independent_direction_question_default=best_matching_registered_read_only_child|fork_turns="none"
+independent_direction_question_direct_root_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task
+root_explorer_state_retention=direction_pointer|dependency|compact_returned_conclusion|sole_canonical_intake_and_decision|cpm_readiness
+cpm_accepted_result_interpretation=optional_direction_specific_read_only_child|technical_acceptance_not_repeated
 explorer_mechanical_child=hmasd-explorer-mechanical
 explorer_mechanical_parent=independent_research_explorer
 explorer_mechanical_dispatch_authority=independent_research_explorer
@@ -76,6 +80,10 @@ same_direction_parallelism=exact_frozen_joint_roster_only
 experiment_pool_exclusive_runtime=B_HEAVY_OR_C
 capacity_wait_effect=pending_runtime_capacity_only_not_blocked
 read_only_scientific_analysis_parallelism=available_native_capacity
+read_only_science_lane_capacity=independent_of_cpm_pool_by_default
+science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only
+cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict
+persistent_explorer_progress=event_driven_or_user_resumed
 canonical_phase_barrier=required_for_algorithm_inspiration_campaign_only
 adaptive_question_dispatch=bounded_registered_child_consultation
 adaptive_question_barrier=none_for_singleton|exact_local_roster_only_when_joint
@@ -107,6 +115,10 @@ agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
 agentify_transport_result_fields=status|results_path|error
 agentify_transport_terminal_status=COMPLETE|ERROR
 agentify_transport_wait_visibility=silent_until_terminal_native_final
+independent_pro_review_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py
+independent_pro_review_result_guard_timing=after_terminal_before_read
+independent_pro_review_result_guard_inputs=repo|expected_results_path|returned_results_path
+independent_pro_review_result_guard_failure=reject_actual_error_no_fallback
 independent_pro_review_transport_execution=registered_agentify_transport_child
 independent_review_provider_contract=agentify_file_batch_result
 independent_review_transmitted_payload=standalone_RAW_QUESTION_only
@@ -166,9 +178,19 @@ child is terminal. First-round children see neither peer answers nor a favored
 answer; completion order is not evidence priority, disagreement is not voting,
 and there is no fixed panel, quorum, concurrency requirement, every-B review or
 automatic Pro review. A failed child loses only its own question and yields
-`scientific_output=false`; the sole recovery is one low-cost retry with the
-identical question and source boundary. These adaptive consultations do not
-alter the campaign phase barriers or the existing External Pro triggers.
+  `scientific_output=false`; the sole recovery is one low-cost retry with the
+  identical question and source boundary. These adaptive consultations do not
+  alter the campaign phase barriers or the existing External Pro triggers.
+
+Independent direction-local detailed scientific questions default to the
+best-matching registered read-only research child with `fork_turns="none"` and
+a self-contained assignment. Explorer may handle a cheap, reversible singleton
+directly only when dispatch overhead exceeds the question. The root Explorer
+retains only the direction pointer, exact dependency, compact returned
+conclusion and CPM readiness. An accepted CPM result may first go to one
+direction-specific read-only child for scientific interpretation; that child
+does not redo technical acceptance, and no fixed panel or scientific-authority
+transfer is created.
 
 Only a direct user instruction in this Explorer task may authorize or expand a
 research-state-changing workflow. Explorer may make autonomous transitions
@@ -207,6 +229,11 @@ file-only assignment; `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md` and
 `.agents/skills/hmasd-agentify-transport/SKILL.md` own batch, page, provider,
 wait, recovery and tab mechanics. Explorer remains the review selector,
 scientific interpreter and intake owner.
+After the child terminal return, Explorer runs
+`.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
+with the expected assignment path and returned terminal anchor before reading
+or accepting the file. A failure is routed as the actual intake error; no
+scan, inferred fallback or root-level generic result is permitted.
 
 A constructive Pro review must finish before Explorer applies, rejects or parks
 its corrections in a new advisory version. Only that new version may support a
@@ -233,11 +260,16 @@ queue engine. Explorer declares the class prospectively and controls scientific
 priority; CPM owns actual capacity admission and may up-class or defer a not-yet-
 started treatment for engineering resources, but may neither down-class it nor
 alter its scientific question, priority or branch map. The capacity model,
-direction barriers, heartbeat behavior and same-direction joint-roster exception
-are defined once in `parallel-research-workflow.md`.
+direction barriers, event-driven continuation and same-direction joint-roster
+exception are defined once in `parallel-research-workflow.md`.
 No experiment-capacity condition blocks Explorer research, result intake,
 read-only analysis, Pro review or another non-runtime action. A formal or other
 explicitly heavy treatment can reserve the experiment pool, not the workflow.
+Read-only Explorer science lanes (direction children, Critic, Principles,
+Innovator, Scout and Pro review) are independent of CPM pool/admission by
+default. Only an exact question that depends on an unreturned CPM result makes a
+direction-local science barrier; CPM treatment capacity never throttles those
+independent lanes.
 
 When Explorer has scientifically selected and frozen two or more independent
 treatments, and every direction-local predecessor/intake barrier is closed,
@@ -248,8 +280,11 @@ capacity/resource constraint, or formal/explicit-heavy experiment-pool
 exclusivity. Attribution, generic caution, completion order, convenience or a
 current sole action never restores a global serial lock. This does not require
 inventing or reprioritizing work, filling capacity, or reactivating a parked
-direction; the heartbeat still dispatches at most one new treatment per turn,
-and the existing Pro triggers and formal iteration behavior are unchanged.
+direction. CPM treatment dispatch is constrained only by an exact
+scientific/dependency predecessor, capacity/admission, a formal or actually
+observed resource conflict, or a same mutable-path/object conflict. Explorer
+progress is event-driven or user-resumed; the existing Pro triggers and formal
+iteration behavior are unchanged.
 
 ## Scientific procedure
 

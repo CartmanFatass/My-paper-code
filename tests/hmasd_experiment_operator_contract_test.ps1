@@ -170,13 +170,17 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'the three-unit runtime pool and live process/resource observations',
-    'independent_admitted_treatment_execution=parallel_first_within_capacity',
-    'global serial fallback is rejected unless one exact blocker',
-    'Capacity deferral is `pending_runtime_capacity` for that treatment',
-    'never a task, direction or workflow `BLOCKED` state',
+    'runtime_admission_observation=stateless_per_admission',
+    'runtime_admission_judgment=admit|up-class|pending_runtime_capacity',
+    'CPM''s only runtime judgment is `admit`, `up-class` or `pending_runtime_capacity`',
+    'Capacity deferral applies only to the not-yet-started treatment',
+    'never creates a task, direction or workflow `BLOCKED` state',
+    'scientific A/B/C evidence level is independent of runtime class',
+    'never infers class, units or barrier closure from a science label or `local_research/`',
     'one independent technical acceptance and one conclusion-first reverse result',
     'An exclusive formal/heavy run reserves only experiment-runtime admission',
-    'CPM continues implementation, technical intake and every unrelated non-runtime action')) {
+    'All non-experiment work that does not contend for the observed bottleneck continues',
+    'one command contending for that same actual resource may be delayed without creating `BLOCKED`')) {
     if (-not $managerNormalized.Contains($required)) { throw "CPM runtime-capacity boundary missing: $required" }
 }
 foreach ($required in @(

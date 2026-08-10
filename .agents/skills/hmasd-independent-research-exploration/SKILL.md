@@ -75,6 +75,14 @@ Explorer decision; it may reuse an existing packet tail when useful, but does
 not require a new schema. Canonical campaign rosters, ordered barriers and
 single-writer authority remain unchanged.
 
+Independent direction-local detailed questions use the best-matching registered
+read-only research child by default with `fork_turns="none"` and a self-contained
+assignment. Explorer may answer a cheap, reversible singleton directly only
+when dispatch overhead exceeds the question. The root retains only the direction
+pointer, exact dependency, compact returned conclusion and CPM readiness. An
+accepted CPM result may first go to one direction-specific read-only child for
+scientific interpretation; that child does not redo technical acceptance.
+
 ## Start safely
 
 1. Confirm the active task has the Explorer role, registered model and current
@@ -214,16 +222,23 @@ consider the next independently valuable treatment, not an automatic scientific
 priority or a reason to reactivate a parked direction. Each returned result may
 enter its own direction-local scientific intake immediately. No free runtime
 token is required for intake, analysis, review or other non-experiment work.
+Read-only Explorer science lanes (direction children, Critic, Principles,
+Innovator, Scout and Pro review) are independent of CPM pool/admission by
+default. Only an exact question depending on an unreturned CPM result creates a
+direction-local science barrier; capacity and admission never throttle those
+independent lanes.
 When two or more independent treatments have already been scientifically
 selected and frozen, their local predecessor/intake barriers are closed, and
 capacity is available, follow the reference's normal path:
 `independent_ready_treatment_dispatch=parallel_first_within_capacity`.
 Do not silently apply a global serial fallback; it is forbidden without named
 direction-dependency or resource evidence. This is not a request to invent
-work, fill capacity, reprioritize or reactivate parked directions, and it does
-not change the heartbeat's at-most-one-new-treatment-per-turn bound, pending
-runtime-capacity/non-runtime continuation, Pro triggers or formal iteration
-behavior.
+work, fill capacity, reprioritize or reactivate parked directions. CPM treatment
+dispatch is constrained only by an exact scientific/dependency predecessor,
+capacity/admission, a formal or actually observed resource conflict, or a same
+mutable-path/object conflict. Explorer progress is event-driven or user-resumed;
+pending runtime capacity, non-runtime continuation, Pro triggers and formal
+iteration behavior are unchanged.
 
 Never substitute an Innovator for source absorption, a Principles Analyst for
 literature fidelity, or a Critic for constructive RL reasoning. A broad request

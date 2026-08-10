@@ -33,16 +33,26 @@ multi-direction question may name several directions; do not preload or merge
 unrequested siblings or the whole portfolio. The brief should make the
 selected direction or named direction set, exact candidate proposition, stage,
 source/evidence revision boundary, frozen facts and uncertainty, strongest
-alternative, material relationships, explicit exclusion of sibling-direction
-generalization unless explicitly named, requested action/direct consumer,
-completion evidence and return destination understandable. These are semantic
-writing cues, not
-required fields. CPM's conclusion-first reverse result and any Codex-native
+  alternative, material relationships, explicit exclusion of sibling-direction
+  generalization unless explicitly named, requested action/direct consumer,
+  completion evidence and return destination understandable. These are semantic
+  writing cues, not
+  required fields. CPM's conclusion-first reverse result and any Codex-native
 fallback carry the same binding before technical evidence. If identity,
 proposition or revision binding is missing or contradictory, preserve the
 original handoff/artifact and ask exactly one concrete semantic clarification;
-continue unrelated work without guessing, merging directions, rewriting the
-artifact or creating a `BLOCKED` state.
+  continue unrelated work without guessing, merging directions, rewriting the
+  artifact or creating a `BLOCKED` state.
+
+For a result-bearing treatment, the prose should additionally explain its
+prospective runtime class and units and whether the direction-local predecessor
+and intake barrier are closed. These are semantic cues, never a required schema.
+The scientific A/B/C evidence level is independent of runtime class. CPM never
+infers class, units or barrier closure from a science label or `local_research/`;
+if one cue is genuinely missing, it preserves the handoff and asks exactly one
+concrete clarification while unrelated work continues. Detailed capacity,
+admission, barrier and resource behavior is defined only in
+`.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md`.
 
 ## Normal path
 
@@ -96,14 +106,11 @@ retry record or admission status. CPM may process independent direction-local
 candidates concurrently when the capacity contract permits; the supplied order
 is organization rather than ranking, runtime admission or a cross-direction
 barrier. Every candidate keeps its own handoff, ticket, roots, receipt,
-technical acceptance and scientific intake.
-For already selected and frozen independent treatments whose direction-local
-predecessor/intake barriers are closed, parallel-first dispatch within admitted
-capacity is the normal path. A global serial fallback requires named direction
-dependency or actual resource evidence; attribution, caution, completion order
-and convenience do not supply it. The reference contract retains the heartbeat
-one-new-treatment-per-turn limit and pending-runtime-capacity/non-runtime
-continuation without changing scientific priority or Pro triggers.
+technical acceptance and scientific intake. The three-unit pool, stateless
+per-admission observation, parallel-first rule, direction-local barriers,
+heavy-pool exclusivity and pending-runtime-capacity continuation are defined
+only by the referenced parallel-research workflow; this Skill grants no second
+runtime procedure or serial fallback.
 
 CPM reads the named public brief, uses engineering judgment and performs
 bounded safe read-only reconnaissance. It proceeds when the task is

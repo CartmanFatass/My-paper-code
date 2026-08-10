@@ -67,6 +67,29 @@ foreach ($required in @(
     'acceptance')) {
     if (-not $role.Contains($required)) { throw "CPM mechanical role missing: $required" }
 }
+foreach ($required in @(
+    'stateless runtime-capacity observation',
+    'active treatment/process/unit/path facts',
+    'prospective class/units',
+    'Windows CPU, memory and process facts',
+    'exact output/writable path claims',
+    'fixed three-unit arithmetic',
+    'assignment-named temporary factual snapshot',
+    'admit|up-class|pending_runtime_capacity',
+    'Incomplete live facts are reported',
+    'not a monitor',
+    'retry, lease, queue or persistent roster',
+    'does not create a state machine',
+    'reserved and free units before and after the request',
+    'explicit GPU, paid-service and prospective-process',
+    'CPU, memory, process, output-path and writable-path',
+    'CPM-supplied CPU-unit and memory-byte claims',
+    'one-shot host facts for direct pressure conflicts',
+    'missing host fields remain incomplete',
+    'No external paid-service call or GPU inference',
+    'active-treatment summary preserves one complete row per input treatment')) {
+    if (-not $role.Contains($required)) { throw "CPM mechanical capacity capability missing: $required" }
+}
 if ($profile.Contains('hmasd_cpm_mechanical.py run --spec') -or $profile.Contains('schema_version=1') -or $profile.Contains('PYTHONDONTWRITEBYTECODE=1')) {
     throw 'CPM mechanical profile must remain thin; dispatcher procedure belongs to the role/Skill'
 }

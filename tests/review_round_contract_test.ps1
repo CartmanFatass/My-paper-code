@@ -86,7 +86,10 @@ foreach ($term in @(
     'agentify_transport_assignment_locators=batch_path|results_path',
     'agentify_transport_batch_locators=context_path|question_paths',
     'agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT',
-    'agentify_transport_result_locator=results_path'
+    'agentify_transport_result_locator=results_path',
+    'agentify_transport_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py',
+    'agentify_transport_result_guard_timing=child_after_write_before_COMPLETE|requester_after_terminal_before_read',
+    'agentify_transport_result_guard_scope=strict_assignment_descendant_no_root_generic'
 )) {
     Require-ContractTerm $workspaceContract $term 'SESSION_WORKSPACE_CONTRACT.md'
 }
@@ -170,6 +173,9 @@ foreach ($term in @(
     'results_path',
     'wait silently',
     'one native terminal result',
+    'hmasd_agentify_result_path_guard.py',
+    'strict physical assignment descendant',
+    'root-level `results.json`',
     'question_path',
     'conversation_url'
 )) {
@@ -179,6 +185,15 @@ foreach ($term in @(
 $preflightPath = Join-Path $repo '.agents/skills/hmasd-agentify-transport/scripts/ensure_agentify_runtime.ps1'
 if (-not (Test-Path -LiteralPath $preflightPath -PathType Leaf)) {
     throw 'Agentify runtime preflight script is missing'
+}
+
+$guardPath = Join-Path $repo '.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py'
+if (-not (Test-Path -LiteralPath $guardPath -PathType Leaf)) {
+    throw 'Agentify result-path guard script is missing'
+}
+$guard = Get-Content -Raw -LiteralPath $guardPath
+foreach ($term in @('RESULT_PATH_MISMATCH', 'RESULT_PATH_REDIRECT', 'RESULT_FILE_MISSING', 'RESULT_PATH_SCOPE_INVALID', '"status": "VALID"')) {
+    Require-ContractTerm $guard $term 'hmasd_agentify_result_path_guard.py'
 }
 $preflight = Get-Content -Raw -LiteralPath $preflightPath
 foreach ($term in @(

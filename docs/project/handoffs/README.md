@@ -68,5 +68,10 @@ direction-local predecessor/intake barriers, this interface follows the
 parallel-first normal path within available capacity. A global serial fallback
 requires named dependency or actual resource evidence; attribution, generic
 caution, completion order and convenience are not sufficient. The handoff
-interface does not fill capacity, reprioritize or reactivate directions, and
-retains the heartbeat one-new-treatment-per-turn bound.
+interface does not fill capacity, reprioritize or reactivate directions.
+Explorer progress is event-driven or user-resumed; CPM treatment dispatch is
+constrained only by an exact scientific/dependency predecessor, capacity/admission,
+a formal or actually observed resource conflict, or a same mutable-path/object
+conflict. Read-only Explorer science lanes remain independent of CPM
+pool/admission by default; only an exact question depending on an unreturned CPM
+result creates a direction-local science barrier.

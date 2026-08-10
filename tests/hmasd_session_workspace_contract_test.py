@@ -43,6 +43,11 @@ def test_assignment_writing_preserves_semantic_context_over_file_only_anchors() 
     assert "workflow_thread_registry=forbidden" in contract
     assert "agentify_transport_assignment_locators=batch_path|results_path" in contract
     assert "agentify_transport_result_locator=results_path" in contract
+    assert "agentify_transport_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py" in contract
+    assert "agentify_transport_result_guard_inputs=repo|expected_results_path|returned_results_path" in contract
+    assert "agentify_transport_result_guard_timing=child_after_write_before_COMPLETE|requester_after_terminal_before_read" in contract
+    assert "agentify_transport_result_guard_scope=strict_assignment_descendant_no_root_generic" in contract
+    assert "agentify_transport_result_guard_error=ERROR_empty_results_path_actual_error" in contract
     assert "cpm_mechanical_assignment_locators=spec_path|result_path" in contract
     assert "cpm_mechanical_result_locator=result_path" in contract
     assert "agentify_transport_result_paths=" not in contract

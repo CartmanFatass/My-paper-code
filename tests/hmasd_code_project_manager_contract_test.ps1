@@ -247,6 +247,10 @@ $codeRequired = @(
     'current_work_authority=exclusive_for_project_operational_records',
     'formal_external_review_request_and_intake_authority=exclusive',
     'formal_review_transport=agentify_file_batch_result',
+    'formal_review_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py',
+    'formal_review_result_guard_timing=after_terminal_before_read',
+    'formal_review_result_guard_inputs=repo|expected_results_path|returned_results_path',
+    'formal_review_result_guard_failure=reject_actual_error_no_fallback',
     'scientific_authority=none',
     'workflow_design_authority=none',
     'workflow_modification_authority=none',
@@ -323,12 +327,24 @@ foreach ($required in @(
     'runtime_capacity_source=parallel-research-workflow',
     'runtime_resource_upclass_or_defer=allowed_before_start',
     'runtime_resource_downclass=forbidden',
+    'runtime_admission_observation=stateless_per_admission',
+    'runtime_admission_judgment=admit|up-class|pending_runtime_capacity',
+    'scientific_evidence_level_vs_runtime_class=independent',
     'independent_admitted_treatment_execution=parallel_first_within_capacity',
     'ordinary_ab_serialization_requires=exact_dependency_or_resource_evidence',
     'sole operational owner of the three-unit runtime pool',
-    'Capacity deferral is `pending_runtime_capacity` for that treatment, never a task, direction or workflow `BLOCKED` state',
+    'CPM''s only runtime judgment is `admit`, `up-class` or `pending_runtime_capacity`',
+    'Capacity deferral applies only to the not-yet-started treatment',
+    'never creates a task, direction or workflow `BLOCKED` state',
+    'stateless per-admission observation',
+    'prospective runtime class/units',
+    'direction-local predecessor/intake barrier closure',
+    'scientific A/B/C evidence level is independent of runtime class',
+    'never infers class, units or barrier closure from a science label or `local_research/`',
+    'asks exactly one concrete clarification while unrelated work continues',
     'An exclusive formal/heavy run reserves only experiment-runtime admission',
-    'CPM continues implementation, technical intake and every unrelated non-runtime action',
+    'All non-experiment work that does not contend for the observed bottleneck continues',
+    'one command contending for that same actual resource may be delayed without creating `BLOCKED`',
     'Every artifact keeps one independent technical acceptance')) {
     if (-not $codePmNormalized.Contains($required)) {
         throw "Code Project Manager runtime-capacity ownership missing: $required"
@@ -337,33 +353,25 @@ foreach ($required in @(
 foreach ($required in @(
     'selected and frozen independent direction treatments',
     'admits isolated tickets/worktrees within the three-unit pool',
-    'ordinary treatments parallel-first',
-    'global serial fallback is rejected unless one exact blocker',
-    'actual direction/intake dependency supplied by Explorer',
-    'same-file/shared mutable object/root conflict',
-    'observed CPU/memory/process/capacity constraint',
-    'formal/explicit-heavy experiment-pool exclusivity',
-    'Global attribution, generic caution, convenience, completion order',
-    'current sole action',
-    'cannot serialize ordinary A/B',
-    'does not force capacity filling',
-    'change the formal nine-valid-iteration single-action lane')) {
+    'normal path remains `independent_admitted_treatment_execution=parallel_first_within_capacity`',
+    'detailed event-driven continuation and serialization exceptions are maintained by the parallel-research workflow reference',
+    'CPM treatment dispatch is constrained only by an exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict',
+    'Read-only Explorer science lanes remain independent of CPM pool/admission by default',
+    'no global serial fallback, scientific reprioritization or down-classing')) {
     if (-not $codePmNormalized.Contains($required)) {
         throw "Code Project Manager parallel-first contract missing: $required"
     }
 }
 foreach ($required in @(
-    'sum the units of currently active result-bearing treatments',
-    'reserve all three units exclusively within the experiment pool for heavy/C work',
-    'Capacity shortage means mark only the not-yet-started treatment `pending_runtime_capacity`, never `BLOCKED`',
-    'may up-class for observed engineering resources but never down-class',
-    'distinct direction/treatment identity',
-    'shared writable files, mutable checkpoints or trainer state',
-    'at most one engineering recovery that preserves all scientific literals',
-    'one-full, no sweep and no implicit retry',
-    'without silently replaying it',
-    'formal nine-valid-iteration/one-new-action-per-turn lane',
-    'never an ordinary A/B global serial lock')) {
+    'three-unit capacity, admission, barrier and resource contract defined only by',
+    'stateless per-admission judgment',
+    'Capacity deferral applies only to a not-yet-started treatment',
+    'never creates `BLOCKED`',
+    'All non-experiment work that does not contend for the observed bottleneck continues',
+    'one command contending for that same actual resource may be delayed without `BLOCKED`',
+    'event-driven Explorer continuation',
+    'CPM treatment dispatch is constrained only by an exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict',
+    'Read-only Explorer science lanes remain independent of CPM pool/admission by default')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile runtime-capacity contract missing: $required"
     }
@@ -376,6 +384,19 @@ foreach ($required in @(
 }
 if ($codePm.Contains('one_at_a_time_for_attribution')) {
     throw 'Retired global resource-consuming action lock remains in CPM role'
+}
+foreach ($stale in @(
+    'heartbeat',
+    'timed wake',
+    'deadline stop',
+    'at-most-one-new-treatment-per-turn',
+    'one-new-treatment-per-heartbeat',
+    'per-heartbeat')) {
+    foreach ($surface in @($codePmRole, $agile)) {
+        if (($surface -replace '\s+', ' ').ToLowerInvariant().Contains($stale.ToLowerInvariant())) {
+            throw "Retired Explorer continuation wording remains: $stale"
+        }
+    }
 }
 foreach ($retired in @(
     'ordinary_ab_global_serial_fallback=allowed',

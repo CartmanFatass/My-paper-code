@@ -552,6 +552,10 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "No experiment-capacity condition blocks Explorer research, result intake, read-only analysis, Pro review or another non-runtime action.",
         "A formal or other explicitly heavy treatment can reserve the experiment pool, not the workflow.",
         "read_only_scientific_analysis_parallelism=available_native_capacity",
+        "read_only_science_lane_capacity=independent_of_cpm_pool_by_default",
+        "science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only",
+        "cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict",
+        "persistent_explorer_progress=event_driven_or_user_resumed",
         "one clear, bounded, decision-relevant question",
         "expected information gain exceeds dispatch and synthesis cost",
         "no code, runtime, write, technical acceptance or formal scientific acceptance",
@@ -576,6 +580,9 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "not a fourth research mode or an automatic pipeline",
         "A child answer is advisory input to one Explorer decision",
         "Canonical campaign rosters, ordered barriers and single-writer authority remain unchanged.",
+        "best-matching registered read-only research child",
+        "The root retains only the direction pointer, exact dependency, compact returned conclusion and CPM readiness.",
+        "accepted CPM result may first go to one direction-specific read-only child",
     ):
         assert required in skill_normalized
 
@@ -590,6 +597,12 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "The Explorer remains the single writer and integrates answers into one decision.",
         "runtime_capacity_units_total=3",
         "B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive",
+        "runtime_handoff_context=natural_language_prose_not_required_schema",
+        "runtime_handoff_prospective_cues=runtime_class_and_units|direction_local_predecessor_and_intake_barrier_closure",
+        "scientific_evidence_level=A|B|C_is_independent_of_runtime_class",
+        "runtime_class_not_inferred_from_science_or_local_research=true",
+        "runtime_admission_observation=stateless_per_admission",
+        "runtime_admission_judgment=admit|up-class|pending_runtime_capacity",
         "three independent light treatments, or one medium plus one light",
         "capacity_wait_state=pending_runtime_capacity_only",
         "capacity_wait_effect=pending_runtime_capacity_only",
@@ -602,14 +615,27 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "until that predecessor is terminal and Explorer completes the direction's scientific intake",
         "freeze one exact joint roster before any member starts",
         "Completion order is never scientific priority, voting or a cross-direction barrier",
-        "dispatch at most one new treatment",
         "B completion or parallelism alone never does",
         "Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.",
         "normal path for two or more scientifically selected and frozen independent treatments is parallel-first",
+        "creates a stateless observation only for that admission decision",
+        "CPM alone makes the per-admission runtime judgment",
+        "A missing semantic class/unit or predecessor/intake cue is a clarification, not a capacity judgment",
         "Attribution, generic caution, completion order, convenience and a current sole action are not dependency or resource evidence",
-        "heartbeat's at-most-one-new-treatment-per-turn bound",
+        "exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict",
+        "Explorer progress is event-driven or user-resumed",
     ):
         assert required in parallel_normalized
+
+    for stale in (
+        "heartbeat",
+        "timed wake",
+        "deadline stop",
+        "at-most-one-new-treatment-per-turn",
+        "one-new-treatment-per-heartbeat",
+        "per-heartbeat",
+    ):
+        assert stale not in " ".join((role_normalized, skill_normalized, parallel_normalized)).lower()
 
     child_roles = {
         "scout": (REPO / ".agents" / "roles" / "RESEARCH_SCOUT.md").read_text(
@@ -651,6 +677,11 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
     for required in (
         "does not recompute schema, readability, receipts, activity counts, locators",
         "necessary to one Explorer decision",
+        "prospective runtime class and units",
+        "direction-local predecessor and intake barrier are closed",
+        "scientific A/B/C evidence level is independent of runtime class",
+        "never infers class, units or barrier closure from a science label or `local_research/`",
+        "Detailed capacity, admission, barrier and resource behavior is defined only",
         "Several read-only questions may run in parallel",
         "one result-bearing experiment active per direction by default",
         "Independent ordinary A/B treatments from different directions may overlap",
@@ -721,12 +752,12 @@ def test_parallel_first_normal_path_rejects_attribution_lock_regression() -> Non
         "selected and frozen",
         "direction-local predecessor/intake barrier",
         "parallel-first",
-        "same-direction rules",
+        "same mutable-path/object conflict",
         "actual CPM-reported capacity/resource constraint",
         "formal/explicit-heavy",
         "pending-runtime-capacity",
         "non-runtime continuation",
-        "at-most-one-new-treatment-per-turn",
+        "event-driven or user-resumed",
     ):
         assert any(required.lower() in " ".join(surface.split()).lower() for surface in surfaces)
 
@@ -741,6 +772,61 @@ def test_parallel_first_normal_path_rejects_attribution_lock_regression() -> Non
     ):
         normalized_surfaces = " ".join(" ".join(surface.lower().split()) for surface in surfaces)
         assert stale.lower() not in normalized_surfaces
+
+
+def test_runtime_admission_contract_is_single_detailed_source_and_science_independent() -> None:
+    """Capacity mechanics stay in the parallel reference; owner surfaces point to it."""
+    parallel = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md"
+    ).read_text(encoding="utf-8")
+    cpm_role = (REPO / ".agents" / "roles" / "CODE_PROJECT_MANAGER.md").read_text(
+        encoding="utf-8"
+    )
+    agile = (REPO / ".agents" / "skills" / "hmasd-agile-research-development" / "SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    validation_skill = (
+        REPO / ".agents" / "skills" / "hmasd-explorer-project-validation" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    validation_contract = (
+        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    ).read_text(encoding="utf-8")
+    workflow_map = (REPO / "docs" / "project" / "WORKFLOW_MAP.md").read_text(
+        encoding="utf-8"
+    )
+
+    parallel_normalized = " ".join(parallel.split())
+    for required in (
+        "creates a stateless observation only for that admission decision",
+        "CPM alone makes the per-admission runtime judgment: `admit`, `up-class`, or `pending_runtime_capacity`",
+        "The observation is discarded after the decision",
+        "not a queue record, lease, registry, history entry or scheduler state",
+        "never reads `local_research/`",
+        "All non-experiment work that does not contend for the observed bottleneck continues",
+        "One command that contends for that same actual resource may be delayed without creating `BLOCKED`",
+        "one-shot observed CPU, memory and process facts",
+        "CPM-supplied GPU/paid-service claims or conflicts",
+        "CPM makes no external GPU/paid-service call or inference",
+    ):
+        assert required in parallel_normalized
+
+    for surface in (cpm_role, agile, validation_skill, validation_contract, workflow_map):
+        normalized = " ".join(surface.split())
+        assert "parallel-research-workflow.md" in normalized
+        assert "scientific A/B/C evidence level is independent of runtime class" in normalized or (
+            "A/B/C scientific evidence level is independent" in normalized
+        ) or "A/B/C evidence level remains independent" in normalized
+
+    # Detailed pool mechanics belong to the reference, not repeated owner prose.
+    for surface in (cpm_role, agile, validation_skill, validation_contract, workflow_map):
+        normalized = " ".join(surface.split())
+        assert "three independent light treatments, or one medium plus one light" not in normalized
+        assert "sum the units of currently active result-bearing treatments" not in normalized
 
 
 def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated() -> None:

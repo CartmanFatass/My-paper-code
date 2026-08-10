@@ -254,36 +254,33 @@ slice.
 ## Concurrency and review
 
 - One writer owns each file; disjoint paths may run in parallel. No global lease.
-- Explorer-origin result-bearing treatments use the three-unit capacity contract
-  defined by the exact `Concurrency and authority` section of
+- Explorer-origin result-bearing treatments use the three-unit capacity,
+  admission, barrier and resource contract defined only by
   `.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md`.
-  CPM is the operational admission owner: sum the units of currently active
-  result-bearing treatments, admit only an isolated treatment that fits, and
-  reserve all three units exclusively within the experiment pool for heavy/C
-  work. Capacity shortage means mark only the not-yet-started treatment
-  `pending_runtime_capacity`, never `BLOCKED`. It does not pause implementation,
-  completed-result intake, review or other non-runtime work. CPM may up-class for
-  observed engineering resources but never down-class, reprioritize science or
-  alter the branch map.
+  CPM is the operational owner and makes a stateless per-admission judgment of
+  `admit`, `up-class` or `pending_runtime_capacity`; this Skill adds no second
+  capacity procedure. Capacity deferral applies only to a not-yet-started
+  treatment and never creates `BLOCKED`. The scientific A/B/C evidence level is
+  independent of runtime class; CPM never infers class or barrier from science
+  or `local_research/`.
 - Once Explorer has selected and frozen independent direction treatments and CPM
   has admitted isolated tickets/worktrees within the three-unit pool, the normal
-  execution path is
-  `independent_admitted_treatment_execution=parallel_first_within_capacity`:
-  CPM implements and runs those ordinary treatments parallel-first. Reject a
-  global serial fallback unless one exact blocker is recorded: actual
-  direction/intake dependency supplied by Explorer, same-file/shared mutable
-  object/root conflict, observed CPU/memory/process/capacity constraint, or
-  formal/explicit-heavy experiment-pool exclusivity. Global attribution, generic
-  caution, convenience, completion order, and a `current sole action` cannot
-  serialize ordinary A/B. Do not force capacity filling, alter scientific
-  priority, down-class a treatment, modify a frozen design, or change the formal
-  nine-valid-iteration single-action lane.
-- Concurrent treatments must have distinct direction/treatment identity,
-  ticket/worktree, accepted commit, run/evidence/checkpoint/result roots, RNG
-  namespace, temporary paths and Operator receipt. Reject shared writable files,
-  mutable checkpoints or trainer state before launch. One treatment's terminal
-  failure or earlier completion neither cancels nor modifies another frozen
-  full, and every result receives a separate technical acceptance.
+  execution path remains
+  `independent_admitted_treatment_execution=parallel_first_within_capacity`.
+  Serialization exceptions, heavy-pool exclusivity and event-driven Explorer
+  continuation are defined by the parallel-research workflow reference. CPM
+  treatment dispatch is constrained only by an exact scientific/dependency
+  predecessor, capacity/admission, a formal or actually observed resource
+  conflict, or a same mutable-path/object conflict. Read-only Explorer science
+  lanes remain independent of CPM pool/admission by default; only an exact
+  question depending on an unreturned CPM result creates a direction-local
+  science barrier. All non-experiment work that does not contend for the
+  observed bottleneck continues; one command contending for that same actual
+  resource may be delayed without `BLOCKED`.
+- Concurrent-treatment identity, isolated roots, shared-mutable-state rejection,
+  failure containment and one-acceptance-per-result remain required as defined by
+  the parallel-research workflow reference; this Skill does not duplicate those
+  resource and barrier mechanics.
 - Before a result-bearing full starts, CPM may issue at most one engineering
   recovery that preserves all scientific literals. A light treatment is one-full,
   no sweep and no implicit retry. Once the full starts, CPM returns its terminal

@@ -23,6 +23,15 @@ page readiness; the child confirms scoped Agentify status before sending. The
 parent receives no commentary, heartbeat or intermediate notification and
 reads only the exact returned file after `COMPLETE` or `ERROR`.
 
+After writing and before terminal `COMPLETE`, the child runs
+`.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
+with the assignment path and returned terminal anchor. Explorer and CPM run
+the same guard after terminal return and before reading/accepting the file.
+The guard requires a strict physical assignment descendant, rejects redirects
+and the shared root-level `results.json`, and reports `ERROR` with an empty
+`results_path` on mismatch or missing/non-regular files. It never reads,
+copies or rewrites response contents.
+
 Tabs are browser containers, while conversations hold the memory: closing a tab
 does not delete its conversation, and a saved conversation URL can reopen it.
 The child uses page controls to create or open the context-requested

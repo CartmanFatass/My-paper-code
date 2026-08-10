@@ -299,6 +299,10 @@ foreach ($entry in @(
     @($independentResearchRole, 'agentify_transport_result_fields=status|results_path|error'),
     @($independentResearchRole, 'agentify_transport_terminal_status=COMPLETE|ERROR'),
     @($independentResearchRole, 'agentify_transport_wait_visibility=silent_until_terminal_native_final'),
+    @($independentResearchRole, 'root_explorer_state_retention=direction_pointer|dependency|compact_returned_conclusion|sole_canonical_intake_and_decision|cpm_readiness'),
+    @($independentResearchRole, 'independent_pro_review_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py'),
+    @($independentResearchRole, 'independent_pro_review_result_guard_timing=after_terminal_before_read'),
+    @($independentResearchRole, 'independent_pro_review_result_guard_failure=reject_actual_error_no_fallback'),
     @($independentResearchRole, 'independent_pro_review_transport_execution=registered_agentify_transport_child'),
     @($independentReviewSkillNormalized, 'provider|context_path|question_paths'),
     @($independentResearchSkillNormalized, 'registered `hmasd-agentify-transport` child'),
@@ -310,6 +314,9 @@ foreach ($entry in @(
     @($independentReviewSkillNormalized, 'status|results_path|error'),
     @($independentReviewSkillNormalized, 'terminal status `COMPLETE|ERROR`'),
     @($independentReviewSkillNormalized, 'no polling, progress handling or parent-task result relay'),
+    @($independentReviewSkillNormalized, 'hmasd_agentify_result_path_guard.py'),
+    @($independentReviewSkillNormalized, 'returned terminal anchor'),
+    @($independentReviewSkillNormalized, 'do not infer a fallback path'),
     @($independentReviewSkillNormalized, 'registered `hmasd-agentify-transport` child'),
     @($independentReviewSkillNormalized, 'AGENTIFY_REVIEW_BATCH_ASSIGNMENT'),
     @($independentReviewSkillNormalized, 'batch_path|results_path'),
@@ -581,6 +588,10 @@ foreach ($required in @(
     'active_experiment_roster_owner=independent_research_explorer_scientific_view',
     'runtime_capacity_admission_owner=code_project_manager',
     'independent_ready_treatment_dispatch=parallel_first_within_capacity',
+    'read_only_science_lane_capacity=independent_of_cpm_pool_by_default',
+    'science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only',
+    'cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict',
+    'persistent_explorer_progress=event_driven_or_user_resumed',
     'global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence',
     'per_direction_result_bearing_default=one_active',
     'same_direction_parallelism=exact_frozen_joint_roster_only',
@@ -663,7 +674,9 @@ foreach ($required in @(
     'When evidence is sufficient and the next step is cheap and reversible, Explorer decides directly.',
     'not a fourth research mode or an automatic pipeline',
     'A child answer is advisory input to one Explorer decision',
-    'Canonical campaign rosters, ordered barriers and single-writer authority remain unchanged.')) {
+    'Canonical campaign rosters, ordered barriers and single-writer authority remain unchanged.',
+    'best-matching registered read-only research child',
+    'The root retains only the direction pointer, exact dependency, compact returned conclusion and CPM readiness')) {
     if (-not $adaptiveSkillNormalized.Contains($required)) {
         throw "Independent research adaptive Skill contract missing: $required"
     }
@@ -681,6 +694,9 @@ foreach ($required in @(
     'experiment_pool_exclusivity_scope=result_bearing_runtime_only',
     'workflow_progress_during_exclusive_runtime=continues',
     'three independent light treatments, or one medium plus one light',
+    'one-shot observed CPU, memory and process facts',
+    'CPM-supplied GPU/paid-service claims or conflicts',
+    'CPM makes no external GPU/paid-service call or inference',
     'capacity_wait_state=pending_runtime_capacity_only',
     'capacity_wait_effect=pending_runtime_capacity_only',
     'Insufficient capacity is `pending_runtime_capacity`, never a direction, task or workflow `BLOCKED` state',
@@ -692,15 +708,31 @@ foreach ($required in @(
     'until that predecessor is terminal and Explorer completes the direction''s scientific intake',
     'freeze one exact joint roster before any member starts',
     'Completion order is never scientific priority, voting or a cross-direction barrier',
-    'dispatch at most one new treatment',
     'B completion or parallelism alone never does',
     'normal path for two or more scientifically selected and frozen independent treatments is parallel-first',
-    'same-direction rules',
+    'same mutable-path/object conflict',
     'Attribution, generic caution, completion order, convenience and a current sole action are not dependency or resource evidence',
-    'heartbeat''s at-most-one-new-treatment-per-turn bound',
+    'exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict',
+    'Explorer progress is event-driven or user-resumed',
+    'Read-only Explorer science lanes',
     'Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.')) {
     if (-not $adaptiveParallelNormalized.Contains($required)) {
         throw "Adaptive roster contract missing: $required"
+    }
+}
+
+foreach ($stale in @(
+    'heartbeat',
+    'timed wake',
+    'deadline stop',
+    'at-most-one-new-treatment-per-turn',
+    'one-new-treatment-per-heartbeat',
+    'per-heartbeat')) {
+    foreach ($surface in @($independentResearchRole, $independentResearchSkill, $parallelResearch,
+        $codePmRole, $agile, $workflowMap, $publicHandoffContract)) {
+        if (($surface -replace '\s+', ' ').ToLowerInvariant().Contains($stale.ToLowerInvariant())) {
+            throw "Retired Explorer continuation wording remains: $stale"
+        }
     }
 }
 foreach ($pair in @(
@@ -991,6 +1023,10 @@ foreach ($required in @(
     'runtime_capacity_units_total=3',
     'active_experiment_roster_owner=independent_research_explorer_scientific_view',
     'runtime_capacity_admission_owner=code_project_manager',
+    'cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict',
+    'read_only_science_lane_capacity=independent_of_cpm_pool_by_default',
+    'science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only',
+    'persistent_explorer_progress=event_driven_or_user_resumed',
     'canonical_campaign_phase_barriers=required',
     'adaptive_singleton_global_barrier=none',
     'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
@@ -1001,6 +1037,9 @@ foreach ($required in @(
     'later_cycle_collaboration_brief=required',
     'research_child_default_fork_turns=none',
     'research_child_dispatch_contract=registered_agent_type|fork_turns="none"|self_contained_natural_language_assignment',
+    'independent_direction_question_default=best_matching_registered_read_only_child|fork_turns="none"',
+    'independent_direction_question_direct_root_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task',
+    'cpm_accepted_result_interpretation=optional_direction_specific_read_only_child|technical_acceptance_not_repeated',
     'parent_conversation_history=background_only_not_task_authority',
     'SOURCE_RESULT_PACKET',
     'SOURCE_ABSORPTION_BRIEF',
