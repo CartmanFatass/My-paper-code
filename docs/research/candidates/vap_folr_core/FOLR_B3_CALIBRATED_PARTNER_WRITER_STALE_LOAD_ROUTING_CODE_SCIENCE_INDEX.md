@@ -1,9 +1,10 @@
 # FOLR-B3 calibrated partner-writer stale-load routing: code-science index
 
 This index binds the frozen `CAND-VAP-FOLR-CORE@constructive-revision-v6`
-question to one prospective implementation package. It records no result and
-does not authorize a run, acceptance, successor, C treatment, formal compute,
-or External Pro request.
+question to one prospective implementation package and its retained result.
+Source commit: `1c6f11c244d3131a2295d21dbddb7078715f8b31`. The registered
+phase-P run stopped naturally at `B3_PARTNER_WRITE_CALIBRATION_FAILED`; phase R
+did not run and no comparison or scientific disposition is identified.
 
 ## Two-phase stop boundary
 
@@ -109,3 +110,16 @@ routing value after prospective writer calibration. Generic sufficiency is an
 equally valid result. Calibration or control failure leaves the comparison
 unidentified. No branch establishes general value, generic impossibility,
 promotion, retirement, or a successor.
+
+## Retained result materialization
+
+Aggregate phase-P calibration accuracy was `0.94482421875` (threshold `0.95`);
+seeds `95036` and `95037` were below `0.90`. Exact retained activity was
+`20480` complete episodes (`16384` training, `4096` evaluation), `61440`
+environment transitions and policy calls, `256` learner/trainer/optimizer
+updates, and `8` final checkpoints; there was one full and no retry, rescue,
+sweep, or checkpoint selection. The corrected `validate-result` invocation
+passed (exit 0); the operator receipt's ERROR was solely the earlier missing
+`--result` invocation. Validator contract evidence passed. The result remains
+technical evidence only: phase-R comparison is absent and no scientific
+acceptance or disposition is made.
