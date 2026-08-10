@@ -202,3 +202,126 @@ performance, generalization, or scientific nonclaims beyond the recorded
 mechanical binding. The Experiment Operator terminal `ERROR` is solely because
 the train/evaluate/analyze receipt schema does not apply to this single audit;
 the underlying runner exited 0 and retained mechanical validation passed.
+
+---
+
+# RECCT-B1 orientation-paired relay cancellation: code-science index
+
+Candidate: `CAND-VAP-RECCT-LITE@authenticated-edge-intervention-revision-v9`
+
+Treatment: `RECCT-B1-ORIENTATION-PAIRED-RELAY-CANCELLATION`
+
+Status: prospective protected implementation. No registered full has been
+started, no result branch has been selected, and no scientific conclusion,
+publication, readiness acceptance, or successor is claimed. Code Project
+Manager owns commit binding, the unique full, execution-readiness verification,
+technical acceptance, and result publication.
+
+## Real host and learner boundary
+
+`orientation_paired_relay_host.py` implements the real 32-joint-step
+`reset`/`step` host. Its eight four-step roster epochs alternate active counts
+`3,2,3,2,3,2,3,2`, alternate L/R replacement, alternate fresh/rejoining
+visits, preserve only survivor recurrent state, and independently permute
+active slots at every boundary. The exact 15-D observation is assembled from
+the declared phase, graph-role, active-count, cue/message, previous-reward,
+survivor, and rejoin fields. Instance identity, slot identity, orientation,
+seed, capsule digest, and useful-edge label are absent. Actions are two binary
+components mapped to signed message/prediction values; only the phase-0 source
+message and phase-3 receiver prediction affect the environment.
+
+`RelayPolicy` is the frozen shared
+`Linear(15,32)->Tanh->GRUCell(32,32)` policy with two-class message and
+prediction heads, scalar value head, and detached sigmoid return head. During
+execution, all encoded contributions enter receiver contexts. During replay,
+the two authenticated L->R and R->L terms are independently gated before each
+receiver sum by value-preserving detach seams. No mask changes observations,
+messages, actions, rewards, execution recurrence, or communication values.
+
+## Capsule, shadows, selection, and commit
+
+`OrientationPairedRelayLearner.seal_capsule` binds complete model and Adam
+state, the immutable 32-step real episode batch, policy generation, parent
+ancestry, the exact site-counter allowlist, and the two-port registry. Only the
+owning learner mints opaque handles. Public handles expose one opaque digest;
+the private object-identity registry binds capsule, direction, learner,
+payload schema, and mint provenance. Digest, owner, cross-capsule, forged,
+copied, reordered, reused-RNG, and live-ancestry violations fail closed.
+
+Every `run_update` restores the original capsule for masks `00`, `10`, `01`,
+and `11`. Each shadow recomputes recurrent replay, actor-critic loss,
+detached-return BCE, directed terms, backward, global clipping, and one Adam
+transition without mutating live state. Confirmation scores are negative BCEs
+of each shadow-state detached-return prediction against already observed team
+rewards on halves A `(1,5)` and B `(3,7)`. The exact four companion-condition
+deltas produce support 4 and rho; `G_SD` applies absolute value before the same
+credit/selector machinery. `G_AGG_SYM` uses only the mean of the two
+directional gradient-distance magnitudes for both edges and a site-keyed
+balanced coin. `ALL_11` always chooses both ports. All arms consume the coin
+draw and all five transition calls.
+
+The selector applies support `==4`, rho `>=0.75`, kappa `0.0025`, margin
+`0.005`, current-mask retention, and lexical `00,10,01,11` fallback exactly.
+The learner authenticates the resulting selection receipt. `commit` accepts no
+shadow state, gradient, optimizer, or model payload: it performs an independent
+fifth restoration and recomputation from the original capsule, verifies the
+live ancestry, then and only then advances the live model and Adam state. A
+public `TransitionReceipt` contains diagnostics and digests only; the complete
+post-transition model/Adam bytes remain inside the learner call and are never a
+receipt field. Only the private bytes produced by the fresh fifth recomputation
+are applied to live state.
+
+The identifying port terms act on the same
+`message_head.weight[0,0]` coordinate with exactly opposite isolated gradients;
+their norm ratio is 1, cosine is -1, and support is four. This establishes only
+the frozen finite host geometry, not edge-owned parameters or unique
+responsibility.
+
+## Traceability
+
+| claim_id | code path and symbol | observable invariant | focused evidence |
+|---|---|---|---|
+| RECCT_B1_HOST | `orientation_paired_relay_host.py::OrientationPairedRelayHost`; `::make_episode_plan`; `::validate_orientation_pair` | real reset/step host, exact 15-D schema, signed MultiDiscrete actions, churn/recurrent reset law, paired plans differ only by orientation | `test_real_host_has_exact_churn_observation_action_and_reward_contract`; `test_orientation_complement_changes_only_hidden_source_receiver_assignment` |
+| RECCT_B1_AUTH | `orientation_paired_relay_cancellation.py::SealedCapsule`; `::OpaqueDirectedHandle`; `::OrientationPairedRelayLearner.seal_capsule` | learner ownership, complete state/batch ancestry, opaque object-identity provenance, tamper rejection, zero forbidden manifest fields | `test_capsule_handles_are_opaque_authenticated_and_tamper_evident` |
+| RECCT_B1_PORT | `RelayPolicy.forward_roster`; `::directed_port_inventory`; `::factorial_gradient_residual` | each named source term is gated before receiver aggregation; duplicate and postaggregate paths are zero; four gradients conserve; changes stay on encoder/declared shared relay coordinate | `test_four_shadows_are_pure_conserved_and_port_local` |
+| RECCT_B1_GEOMETRY | `::geometry_receipt`; `::credit_from_shadows`; `::select_credit_mask` | shared coordinate, opposite isolated gradients, support four, exact rho/sign destruction/cost/hysteresis gates | `test_geometry_support_rho_and_sign_destroyed_transform_reject_wrong_semantics` |
+| RECCT_B1_COMMIT | `OrientationPairedRelayLearner.commit`; `::run_update`; `::TransitionReceipt` | four pure shadows leave live state unchanged; public receipts contain no decodable post-transition model/Adam payload; fifth selected recomputation matches the selected shadow except lineage and alone advances live state using its own private bytes | `test_fresh_commit_recomputes_selected_shadow_and_advances_only_live_state`; `test_public_shadow_receipt_contains_no_decodable_post_transition_state` |
+| RECCT_B1_LIFECYCLE | `run_recct_b1_orientation_paired_relay_cancellation.py::RunConfiguration`; `::validate_retained_artifacts`; `::_reconstruct_credit_receipt`; `::_counts`; `::train`; `::evaluate`; `::analyze`; `::select_branch` | exact seeds/arms/pairs/pools/final checkpoints and sidecars; independent reconstruction of fit/update/evaluation schedules, complemented orientation/exogenous identities, conditional-value credit/rho, evolving prior masks, arm-specific selection, mask direction codes and row-derived activity; full-cap equality; zero retry/sweep/rescue/early-stop; technical branch suppression; structural/tamper rejection before metrics or branch | `test_rng_split_checkpoint_tamper_branch_and_exact_activity_contract`; `test_retained_artifact_validator_reconstructs_rows_and_rejects_tampering` |
+
+## Frozen accounting and execution boundary
+
+The full configuration algebraically validates exactly one named run, 1,024
+training episodes, 512 evaluation episodes, 49,152 joint environment
+transitions, 122,880 active-agent policy calls, 1,024 live commits, 4,096 pure
+shadows, 5,120 learner calls, 5,120 Adam transitions, and 32 model fits. It
+contains exactly four arms, seeds `1701..1704`, two exact orientation
+complements, 32 training episodes, 16 fixed held-out evaluation seeds, disjoint
+`T0..T7`/`E0..E7` pools, and final checkpoints only. Sweep, retry, rescue,
+extra seed/arm, checkpoint selection, and early stop counts are zero.
+
+The runner refuses a nonempty run root, an unbound full source commit, an
+incorrect full authorization token, altered full configuration, checkpoint or
+sidecar tampering, or configuration/train/evaluation digest mismatch. Before
+any metric or branch, the pure retained-artifact validator independently
+reconstructs every expected fit, update and evaluation row, its exact seeds,
+orientation complement, exogenous digest, pool, mask-derived direction code,
+per-row call counts and row-derived activity totals. It also recomputes each
+edge's credit and rho from the four retained conditional values, advances each
+fit's selector state from initial mask `00`, and reapplies signed/sign-destroyed,
+balanced direction-blind, or forced-`11` selection exactly. Missing, duplicate,
+mislabeled, tampered, or producer-count-only evidence fails closed. Metrics and
+matching gates consume only the validator's immutable reconstructed rows. The
+reduced exercise retains all four arms and both complements but is permanently
+labeled `technical_only`, has zero named full runs, and emits only
+`TECHNICAL_ONLY_SCIENTIFIC_BRANCH_SUPPRESSED`.
+
+Implementation-worker proof used component-sized real-host fixtures only:
+
+```text
+9 passed in 9.34s
+```
+
+No reduced lifecycle, registered full, execution-readiness phase, publication,
+or acceptance action was performed by the implementation worker. The unique
+full train entry remains reserved for a CPM-bound clean candidate commit and
+isolated run root.
