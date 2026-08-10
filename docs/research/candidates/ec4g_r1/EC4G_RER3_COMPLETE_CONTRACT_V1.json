@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "document_kind": "explorer_direction_revision",
+  "owner": "independent_research_explorer",
+  "direction_id": "CAND-VAP-EC4G-R1",
+  "version_id": "CAND-VAP-EC4G-R1@rer3-prospective-complete-v8",
+  "prior_version_id": "CAND-VAP-EC4G-R1@adversarial-revision-v7",
+  "contract_id": "EC4G-RER3-CONTRACT@1.0.0",
+  "title": "Roster-Event Receipt-Value Three-Cell Microdeployment",
+  "status": "frozen_explorer_scientific_specification_pending_cpm_materialization",
+  "scientific_motivation": "Prospectively define a finite, total roster-event microdeployment in which receipt-value gates separate EC4G from a matched Direct-tau ablation across join, leave and rejoin. This is a new contract, not an A2 repair, rescan, imputation or claim that the missing historical objects existed.",
+  "delete_retain_add": {
+    "delete": [
+      "recovery of unspecified historical objects",
+      "hidden-cause labels",
+      "synthetic-x0 provenance reuse",
+      "same-commit self-referential provenance"
+    ],
+    "retain": [
+      "one-probe event cap",
+      "fixed-horizon net task value",
+      "seven-arm contrasts",
+      "three gate actions P N A",
+      "matched Direct-tau comparator",
+      "exact execution-program equality"
+    ],
+    "add": [
+      "finite roster-event host",
+      "complete state observation action reward law",
+      "total failure continuations",
+      "configured positive-mass start law",
+      "non-self-referential two-snapshot freeze protocol"
+    ]
+  },
+  "common_literals": {
+    "agent_order": ["a0", "a1", "a2"],
+    "arm_order": ["R0", "RV", "RB", "RS", "PV", "PB", "PS"],
+    "gate_action_order": ["P", "N", "A"],
+    "tick_domain": [0, 1],
+    "reward_unit": "integer_task_point",
+    "weight_encoding": "exact_base10_decimal_string",
+    "serialization_id": "ec4g-rer3-cjson-v1",
+    "population_id": "ec4g-rer3-configured-start-law-v1",
+    "horizon_id": "two-tick-post-roster-event-v1",
+    "domain_id": "ec4g-rer3-three-cell-domain-v1",
+    "ordering_id": "agents-a0a1a2_arms-R0RV_RBRS_PVPBPS_actions-PNA-v1",
+    "semantic_snapshot_id": "ec4g-rer3-semantic-freeze-v1",
+    "freeze_order_id": "objective-K-Rk-moments-cost-theta-ME-MD-F-J-Gamma-s-m-manifest-v1",
+    "canonical_json": "UTF-8; keys lexicographically sorted; array order preserved; no whitespace; signed base-10 integers without leading zero; exact nonintegers encoded as strings; duplicate keys and nonfinite numbers forbidden"
+  },
+  "ordered_role_bindings": [
+    {"ordinal": 0, "role": "objective_contract", "object_id": "ec4g.rer3.v1.objective"},
+    {"ordinal": 1, "role": "cell_registry_K", "object_id": "ec4g.rer3.v1.K"},
+    {"ordinal": 2, "role": "receipt_registry_R_k", "object_id": "ec4g.rer3.v1.R"},
+    {"ordinal": 3, "role": "seven_arm_mean_and_covariance", "object_id": "ec4g.rer3.v1.moments"},
+    {"ordinal": 4, "role": "cost_object", "object_id": "ec4g.rer3.v1.cost"},
+    {"ordinal": 5, "role": "decision_parameters", "object_id": "ec4g.rer3.v1.theta"},
+    {"ordinal": 6, "role": "total_EC4G_action_map_M_E", "object_id": "ec4g.rer3.v1.M_E"},
+    {"ordinal": 7, "role": "total_Direct_tau_action_map_M_D", "object_id": "ec4g.rer3.v1.M_D"},
+    {"ordinal": 8, "role": "fallback_program_F", "object_id": "ec4g.rer3.v1.F"},
+    {"ordinal": 9, "role": "donor_operator_J", "object_id": "ec4g.rer3.v1.J"},
+    {"ordinal": 10, "role": "canonicalizer_equality_Gamma", "object_id": "ec4g.rer3.v1.Gamma"},
+    {"ordinal": 11, "role": "support_predicate_s", "object_id": "ec4g.rer3.v1.s"},
+    {"ordinal": 12, "role": "deployed_measure_m", "object_id": "ec4g.rer3.v1.m"},
+    {"ordinal": 13, "role": "cross_cutting_freeze_manifest", "object_id": "ec4g.rer3.v1.freeze"}
+  ],
+  "objective_contract": {
+    "estimand": "D_RER3 = sum over k of m(k) times indicator s(k) times indicator Gamma(k,M_E(k)) differs from Gamma(k,M_D(k))",
+    "null": "D_RER3=0",
+    "alternative": "D_RER3>0",
+    "meaning": "execution-program discordance only",
+    "excluded_meanings": ["reward superiority", "causal value", "hidden-cause recovery", "deployment generalization", "learning performance"]
+  },
+  "cell_registry_K": {
+    "state_tuple": ["cell", "phase", "probe_budget", "receipt_state", "active_mask", "memory"],
+    "phase_domain": ["event", "receipt", "terminal"],
+    "probe_budget_domain": [1, 0],
+    "receipt_state_domain": ["NONE", "RV", "RB", "RS", "PV", "PB", "PS", "MALFORMED", "LATE"],
+    "terminal_absorbing": true,
+    "cells": [
+      {"cell": "k_join", "event": "join", "active_pre": "110", "active_post": "111", "memory_pre": [3, 5, "NONE"], "memory_post": [3, 5, 0], "probe_target": "a2", "mass": "0.50"},
+      {"cell": "k_leave", "event": "leave", "active_pre": "111", "active_post": "110", "memory_pre": [4, 6, 8], "memory_post": [4, 6, 8], "probe_target": "a1", "mass": "0.25"},
+      {"cell": "k_rejoin", "event": "rejoin", "active_pre": "110", "active_post": "111", "memory_pre": [7, 9, 11], "memory_post": [7, 9, 11], "probe_target": "a2", "mass": "0.25"}
+    ],
+    "memory_rule": "Survivor memories remain byte-identical. a2 resets only on join and its stored value is restored on rejoin.",
+    "tick0_observation": ["cell_id", "event_kind", "pre_mask", "post_mask", "visible_survivor_memory_tuple", "returning_memory_present", "probe_budget=1", "safe_action_set_id"],
+    "tick0_hidden": ["arm_assignment", "donor_trajectory", "reward_noise", "physical_cause"]
+  },
+  "receipt_registry_R_k": {
+    "schema_id": "ec4g.rer3.receipt.v1",
+    "executor_id": "a0",
+    "event_tick": 0,
+    "delivery_tick": 1,
+    "latency_ticks": 1,
+    "channel": "public-roster-receipt",
+    "envelope_id": "rer3-envelope-v1",
+    "envelope_bytes_hex": "52335631",
+    "body_length_bytes": 4,
+    "safe_action_set_id": "rer3-safe-actions-v1",
+    "own_body_hex": {"k_join": "4a4f494e", "k_leave": "4c454156", "k_rejoin": "52454a4e"},
+    "arm_semantics": {
+      "R0": "no receipt",
+      "RV": "physical native-safe-probe-v1 plus cell own body",
+      "RB": "physical native-safe-probe-v1 plus 00000000",
+      "RS": "physical native-safe-probe-v1 plus exact donor body from J",
+      "PV": "sham-receipt-injector-v1 own body with no physical probe",
+      "PB": "sham-receipt-injector-v1 blind body with no physical probe",
+      "PS": "sham-receipt-injector-v1 donor body with no physical probe"
+    },
+    "arm_identity_visible_to_policy": false
+  },
+  "seven_arm_mean_and_covariance": {
+    "noise": {
+      "noisy_arms": ["R0", "RV", "RB", "RS"],
+      "support": [-1, 0, 1],
+      "probabilities": ["0.25", "0.50", "0.25"],
+      "independent_components": true,
+      "zero_noise_arms": ["PV", "PB", "PS"],
+      "outcome_vectors_per_cell": 81,
+      "total_outcome_vectors": 243
+    },
+    "gross_mean_by_cell_in_arm_order": {
+      "k_join": [0, 14, 6, 5, 0, 0, 0],
+      "k_leave": [0, 14, 13, 16, 0, 0, 0],
+      "k_rejoin": [0, 0, 1, 1, 0, 0, 0]
+    },
+    "covariance": {"diagonal": ["0.5", "0.5", "0.5", "0.5", "0", "0", "0"], "off_diagonal": "0"},
+    "epistemic_status": "finite oracle fixture truth, not empirical measurement"
+  },
+  "cost_object": {
+    "external_cost_in_arm_order": [0, 2, 2, 2, 0, 0, 0],
+    "subtract_exactly_once": true,
+    "net_mean_by_cell_in_arm_order": {
+      "k_join": [0, 12, 4, 3, 0, 0, 0],
+      "k_leave": [0, 12, 11, 14, 0, 0, 0],
+      "k_rejoin": [0, -2, -1, -1, 0, 0, 0]
+    },
+    "unlisted_cost": false
+  },
+  "decision_parameters": {
+    "kappa": 1,
+    "delta_T": 2,
+    "delta_C": 2,
+    "delta_V": 2,
+    "tau_F": 0,
+    "s_F": 0,
+    "fallback_interval": [0, 0],
+    "contrast_standard_error": 1,
+    "expected_intervals": {
+      "k_join": {"T": [11, 13], "B": [3, 5], "A": [-2, 0], "C": [8, 10], "V": [7, 9]},
+      "k_leave": {"T": [11, 13], "B": [10, 12], "A": [2, 4], "C": [-3, -1], "V": [0, 2]},
+      "k_rejoin": {"T": [-3, -1], "B": [-2, 0], "A": [-1, 1], "C": [-2, 0], "V": [-2, 0]}
+    }
+  },
+  "total_EC4G_action_map_M_E": {
+    "ordered_rule": [
+      "if not s(k), return A",
+      "else if L_T > max(0,U_F)+2 and L_C > 2 and L_V > 2, return P",
+      "else if U_T <= 0 and U_F <= 0, return N",
+      "else return A"
+    ],
+    "predeclared_prediction": {"k_join": "P", "k_leave": "A", "k_rejoin": "N"}
+  },
+  "total_Direct_tau_action_map_M_D": {
+    "matching": "Receives identical immutable cell statistics, costs, support, fallback and compiler; only the C and V conjuncts are removed.",
+    "ordered_rule": [
+      "if not s(k), return A",
+      "else if L_T > max(0,U_F)+2, return P",
+      "else if U_T <= 0 and U_F <= 0, return N",
+      "else return A"
+    ],
+    "predeclared_prediction": {"k_join": "P", "k_leave": "P", "k_rejoin": "N"}
+  },
+  "fallback_program_F": {
+    "domain": {"cell": ["k_join", "k_leave", "k_rejoin"], "spent": [0, 1]},
+    "spent_0": "No probe; tick-1 safe_hold; cost 0; terminal reward law equals R0.",
+    "spent_1": "No second probe; tick-1 safe_hold_after_probe; cost 2; terminal gross-reward law equals R0.",
+    "state_effect": "Active mask and persistent memory remain at post-event values.",
+    "routing": "Missing, malformed or late receipt after P invokes F(k,1); unsupported pre-probe state invokes F(k,0)."
+  },
+  "donor_operator_J": {
+    "pool": {
+      "d_join": {"trajectory": "donor-join", "tick": -1, "body_hex": "4a4f494e"},
+      "d_leave": {"trajectory": "donor-leave", "tick": -1, "body_hex": "4c454156"},
+      "d_rejoin": {"trajectory": "donor-rejoin", "tick": -1, "body_hex": "52454a4e"}
+    },
+    "mapping": {"k_join": "d_leave", "k_leave": "d_rejoin", "k_rejoin": "d_join"},
+    "validation": "Copy all four donor bytes unchanged; donor trajectory differs from recipient; donor tick is less than zero; length is four; any failure invalidates with no replacement donor."
+  },
+  "canonicalizer_equality_Gamma": {
+    "primitive_action_set": ["native_safe_probe", "no_probe", "baseline_continue", "receipt_continue_valid", "receipt_continue_blind", "receipt_continue_swap", "safe_hold", "safe_hold_after_probe"],
+    "P_transition": "event,budget=1 to receipt,budget=0 via native_safe_probe; exact RV/RB/RS selects named continuation; malformed/late/missing selects F(k,1); then terminal",
+    "N_transition": "no_probe then baseline_continue then terminal",
+    "A_transition": "F(k,0) then terminal",
+    "calibration_only_arms": ["PV", "PB", "PS"],
+    "failure_rule": "Second probe, wrong-phase action or unsafe primitive fails closed to the appropriate F branch.",
+    "canonical_fields": ["cell", "phase_transitions", "primitive_actions", "receipt_branches", "envelope_and_body_literals", "probe_budget_changes", "cost_and_reward_rules", "post_mask", "memory_rule"],
+    "excluded_fields": ["map_identity", "symbolic_gate_label"],
+    "equality": "exact canonical-object equality; hashes are audit evidence only",
+    "predeclared_separation": {"k_join": "P_equals_P", "k_leave": "A_differs_from_P", "k_rejoin": "N_equals_N", "predicted_D_RER3": "0.25"}
+  },
+  "support_predicate_s": {
+    "map_independent": true,
+    "rule": "True exactly when the registered cell has a one-agent roster event, correct survivor continuity, permitted probe target, complete receipt registry, safe primitive set, valid finite reward law, exact cost vector and valid donor relation.",
+    "forbidden_inputs": ["M_E", "M_D", "map_output", "program_equality", "D_RER3"],
+    "values": {"k_join": true, "k_leave": true, "k_rejoin": true},
+    "unknown_cell_rule": "reject rather than assign zero mass"
+  },
+  "deployed_measure_m": {
+    "meaning": "configured RER3 host start law, not empirical field frequency",
+    "values": {"k_join": "0.50", "k_leave": "0.25", "k_rejoin": "0.25"},
+    "all_positive": true,
+    "exact_normalization": "1.00"
+  },
+  "cross_cutting_freeze_manifest": {
+    "future_contract_path": "docs/research/candidates/ec4g_r1/EC4G_RER3_COMPLETE_CONTRACT_V1.json",
+    "future_binding_record_path": "docs/research/candidates/ec4g_r1/EC4G_RER3_BINDING_RECORD_V1.json",
+    "scientific_field_lock": "all_fields",
+    "freeze_protocol": "two_snapshot_non_self_referential_v1",
+    "steps": [
+      "Materialize this exact semantic contract unchanged and commit it as C0.",
+      "Deterministically derive a binding record from C0; each role records object ID, JSON pointer, C0, contract blob SHA-256, object-payload SHA-256, ordinal, coherence tuple and total=true.",
+      "Commit the binding record as C1 while the contract blob remains byte-identical.",
+      "Freeze the C0 contract pair and C1 binding-record pair before role inspection; record C1 externally in the audit result, never predict its own containing commit inside the binding record.",
+      "Any scientific-byte change requires a new version and audit, never in-audit repair."
+    ],
+    "future_commit_values": "C0 and C1 are future byte facts and are intentionally not invented by Explorer."
+  },
+  "prospective_prediction": {
+    "M_E": {"k_join": "P", "k_leave": "A", "k_rejoin": "N"},
+    "M_D": {"k_join": "P", "k_leave": "P", "k_rejoin": "N"},
+    "predicted_D_RER3": "0.25",
+    "audit_boundary": "A3 must not invoke maps, compile or compare programs, or calculate D_RER3."
+  },
+  "smallest_supported_proposition": "A complete new finite, total and internally coherent roster-event execution contract with a matched comparator and prospective positive-mass separating prediction is now scientifically specified for materialization and one binding audit.",
+  "strongest_alternative": "RER3 remains a deliberately constructed conformance microdeployment; even complete binding would not show natural receipt prevalence, learned estimation or operational return value.",
+  "nonclaims": ["no repair or reinterpretation of A2", "no natural receipt prevalence", "no learning or return result", "no execution census result", "no B C formal compute promotion retirement or External Pro trigger"],
+  "state_as_of": "2026-08-10"
+}
+
