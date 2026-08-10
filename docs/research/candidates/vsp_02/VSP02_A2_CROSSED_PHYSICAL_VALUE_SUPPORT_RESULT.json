@@ -1,0 +1,593 @@
+{
+  "activity": {
+    "b_runs": 0,
+    "c_runs": 0,
+    "environment_transitions": 0,
+    "evaluation_episodes": 0,
+    "exact_fraction_cells": 4,
+    "formal_compute_runs": 0,
+    "learner_calls": 0,
+    "model_fits": 0,
+    "optimizer_updates": 0,
+    "policy_calls": 0,
+    "registered_a_invocations": 1,
+    "rescues": 0,
+    "retries": 0,
+    "stochastic_draws": 0,
+    "sweeps": 0,
+    "trainer_calls": 0
+  },
+  "artifact_kind": "vsp02_a2_crossed_physical_value_support_result",
+  "branch": "A2_REGISTERED_STRICT_CROSSING_SUPPORTED",
+  "manifest": {
+    "artifact_kind": "vsp02_a2_frozen_manifest",
+    "assignment_id": "VSP02-A2-CROSSED-PHYSICAL-VALUE-SUPPORT",
+    "candidate": "CAND-VSP-02@adversarial-revision-v8",
+    "evidence_level": "A",
+    "formal": false,
+    "frozen_contract": {
+      "continuation_policy": "AFTER_FORCED_HOLD_COMMIT_ONE_FROZEN_PRIMITIVE_THEN_NATURAL_CLOSE",
+      "contract_id": "VSP02-A2-PUBLIC-CUTOFF-PHYSICAL-V1",
+      "cue": {
+        "decision_clock": 1,
+        "forbidden_fields": [
+          "branch",
+          "delta",
+          "future_reward",
+          "future_termination",
+          "hidden_tape",
+          "q_value",
+          "realized_end_cause",
+          "treatment"
+        ],
+        "mapping": {
+          "false": "X_b=0",
+          "true": "X_b=1"
+        },
+        "observation_clock": 0,
+        "registered_labels": [
+          "X_b=1",
+          "X_b=0"
+        ],
+        "semantics": "prospective public cutoff request; never relabeled",
+        "source_fields": [
+          "public_cutoff_request"
+        ]
+      },
+      "discount": "1/2",
+      "horizon": 4,
+      "lifecycle": {
+        "backend": "CANDIDATE",
+        "command_alphabet": [
+          "HOLD",
+          "RELEASE"
+        ],
+        "command_bandwidth_bits": 1,
+        "release_has_stopping_edge": true,
+        "reward_contract_boundary": "NO_CLAIM_RELEASE_DURATION_OR_END_REWARD",
+        "source": "VSP02-A1-OWNER-ACTION-RESPONSIVE-LIFECYCLE"
+      },
+      "matched_exogenous_tapes": [
+        {
+          "continuation_reward": "-1",
+          "cue": "X_b=1",
+          "future_interrupt": false,
+          "future_terminal": false,
+          "natural_close_reward": "0",
+          "owner_departure": false,
+          "public_cutoff_request": true,
+          "tape_id": "VSP02-A2-PUBLIC-CUTOFF-REQUEST",
+          "weight": "1/2"
+        },
+        {
+          "continuation_reward": "2",
+          "cue": "X_b=0",
+          "future_interrupt": false,
+          "future_terminal": false,
+          "natural_close_reward": "0",
+          "owner_departure": false,
+          "public_cutoff_request": false,
+          "tape_id": "VSP02-A2-PUBLIC-PRODUCTIVE-WINDOW",
+          "weight": "1/2"
+        }
+      ],
+      "owner": {
+        "behavior_version": 8,
+        "owner_epoch": 17,
+        "owner_id": "owner-A"
+      },
+      "partner_policy": "FROZEN_PARTNER_NOOP_V1",
+      "primitive_policy": "FROZEN_PRIMITIVE_V1",
+      "reward": {
+        "hold_continuation_by_public_state": {
+          "X_b=0": "2",
+          "X_b=1": "-1"
+        },
+        "lifecycle_event_bonus": "0",
+        "natural_close_reward": "0",
+        "release_physical_settlement": "1"
+      },
+      "target_score": {
+        "score": "the same exact physical return, with no fit or bootstrap",
+        "target": "exact discounted physical return under the forced action"
+      },
+      "transition": {
+        "decision_clock": 1,
+        "hold_close_clock": 2,
+        "hold_close_phase": "ENDED_NATURAL",
+        "hold_intermediate_phase": "ACTIVE",
+        "release_next_phase": "ENDED_RELEASE",
+        "terminal_precedence": [
+          "TERMINAL",
+          "INTERRUPT",
+          "AUTHORIZED_RELEASE",
+          "NATURAL",
+          "HORIZON"
+        ]
+      }
+    },
+    "pool_units": 0,
+    "registered_invocation_cap": 1,
+    "required_cells": [
+      "X_b=1|RELEASE",
+      "X_b=1|HOLD",
+      "X_b=0|RELEASE",
+      "X_b=0|HOLD"
+    ],
+    "resource_class": "A_READONLY_OR_ZERO_RUNTIME",
+    "retry_permitted": false,
+    "run_id": "vsp02_a2_c8bf3d8e_r1",
+    "schema_version": 1,
+    "source_revision": "c8bf3d8e71985d404bd742257c6ca3cb28cbcf9b",
+    "support_design": {
+      "cue_probability": {
+        "X_b=0": "1/2",
+        "X_b=1": "1/2"
+      },
+      "evaluation": "exact forced-action enumeration; no stochastic draw",
+      "forced_action_propensity": {
+        "X_b=0|HOLD": "1/2",
+        "X_b=0|RELEASE": "1/2",
+        "X_b=1|HOLD": "1/2",
+        "X_b=1|RELEASE": "1/2"
+      },
+      "joint_support": {
+        "X_b=0|HOLD": "1/4",
+        "X_b=0|RELEASE": "1/4",
+        "X_b=1|HOLD": "1/4",
+        "X_b=1|RELEASE": "1/4"
+      }
+    },
+    "technical_only": false,
+    "terminal_branch_precedence": [
+      "A2_INVALID_CONTRACT_OR_INFORMATION_LEAK",
+      "A2_CUE_OR_ACTION_SUPPORT_ABSENT",
+      "A2_REGISTERED_STRICT_CROSSING_SUPPORTED",
+      "A2_REVERSED_STRICT_CROSSING",
+      "A2_NONZERO_BUT_NOT_CROSSED",
+      "A2_BOTH_DELTAS_ZERO"
+    ]
+  },
+  "report": {
+    "branch": "A2_REGISTERED_STRICT_CROSSING_SUPPORTED",
+    "cells": {
+      "X_b=0|HOLD": {
+        "action": "HOLD",
+        "cue": "X_b=0",
+        "lifecycle": {
+          "behavior_version": 8,
+          "command_log": [
+            "HOLD",
+            "HOLD"
+          ],
+          "final_end_cause": "NATURAL",
+          "final_phase": "ENDED_NATURAL",
+          "owner_epoch": 17,
+          "owner_id": "owner-A",
+          "postdecision_phase": "ACTIVE",
+          "predecision_phase": "ACTIVE",
+          "release_ledger": []
+        },
+        "observation": {
+          "a1_observation": {
+            "committed_phase": "ACTIVE",
+            "opaque_post_claim_cue": "X_b=0",
+            "own_boundary_clock": 0,
+            "owner_epoch_token": [
+              "owner-A",
+              17,
+              8
+            ],
+            "physical_clock": 0,
+            "primitive_clock": 0,
+            "prior_acknowledgements": [
+              "CLAIM_ACCEPTED"
+            ],
+            "visible_roster": [
+              "owner-A",
+              "partner-B"
+            ]
+          },
+          "a1_observation_firewall_valid": true,
+          "cue": "X_b=0",
+          "decision_clock": 1,
+          "observation_clock": 0,
+          "public_cutoff_request": false
+        },
+        "q_value": "2",
+        "registered_action_propensity": "1/2",
+        "reward_sequence": [
+          "2",
+          "0"
+        ],
+        "score": "2",
+        "tape_id": "VSP02-A2-PUBLIC-PRODUCTIVE-WINDOW",
+        "tape_weight": "1/2",
+        "target": "2"
+      },
+      "X_b=0|RELEASE": {
+        "action": "RELEASE",
+        "cue": "X_b=0",
+        "lifecycle": {
+          "behavior_version": 8,
+          "command_log": [
+            "RELEASE"
+          ],
+          "final_end_cause": "RELEASE",
+          "final_phase": "ENDED_RELEASE",
+          "owner_epoch": 17,
+          "owner_id": "owner-A",
+          "postdecision_phase": "ENDED_RELEASE",
+          "predecision_phase": "ACTIVE",
+          "release_ledger": [
+            "VSP02-A2-PUBLIC-PRODUCTIVE-WINDOW-release"
+          ]
+        },
+        "observation": {
+          "a1_observation": {
+            "committed_phase": "ACTIVE",
+            "opaque_post_claim_cue": "X_b=0",
+            "own_boundary_clock": 0,
+            "owner_epoch_token": [
+              "owner-A",
+              17,
+              8
+            ],
+            "physical_clock": 0,
+            "primitive_clock": 0,
+            "prior_acknowledgements": [
+              "CLAIM_ACCEPTED"
+            ],
+            "visible_roster": [
+              "owner-A",
+              "partner-B"
+            ]
+          },
+          "a1_observation_firewall_valid": true,
+          "cue": "X_b=0",
+          "decision_clock": 1,
+          "observation_clock": 0,
+          "public_cutoff_request": false
+        },
+        "q_value": "1",
+        "registered_action_propensity": "1/2",
+        "reward_sequence": [
+          "1"
+        ],
+        "score": "1",
+        "tape_id": "VSP02-A2-PUBLIC-PRODUCTIVE-WINDOW",
+        "tape_weight": "1/2",
+        "target": "1"
+      },
+      "X_b=1|HOLD": {
+        "action": "HOLD",
+        "cue": "X_b=1",
+        "lifecycle": {
+          "behavior_version": 8,
+          "command_log": [
+            "HOLD",
+            "HOLD"
+          ],
+          "final_end_cause": "NATURAL",
+          "final_phase": "ENDED_NATURAL",
+          "owner_epoch": 17,
+          "owner_id": "owner-A",
+          "postdecision_phase": "ACTIVE",
+          "predecision_phase": "ACTIVE",
+          "release_ledger": []
+        },
+        "observation": {
+          "a1_observation": {
+            "committed_phase": "ACTIVE",
+            "opaque_post_claim_cue": "X_b=1",
+            "own_boundary_clock": 0,
+            "owner_epoch_token": [
+              "owner-A",
+              17,
+              8
+            ],
+            "physical_clock": 0,
+            "primitive_clock": 0,
+            "prior_acknowledgements": [
+              "CLAIM_ACCEPTED"
+            ],
+            "visible_roster": [
+              "owner-A",
+              "partner-B"
+            ]
+          },
+          "a1_observation_firewall_valid": true,
+          "cue": "X_b=1",
+          "decision_clock": 1,
+          "observation_clock": 0,
+          "public_cutoff_request": true
+        },
+        "q_value": "-1",
+        "registered_action_propensity": "1/2",
+        "reward_sequence": [
+          "-1",
+          "0"
+        ],
+        "score": "-1",
+        "tape_id": "VSP02-A2-PUBLIC-CUTOFF-REQUEST",
+        "tape_weight": "1/2",
+        "target": "-1"
+      },
+      "X_b=1|RELEASE": {
+        "action": "RELEASE",
+        "cue": "X_b=1",
+        "lifecycle": {
+          "behavior_version": 8,
+          "command_log": [
+            "RELEASE"
+          ],
+          "final_end_cause": "RELEASE",
+          "final_phase": "ENDED_RELEASE",
+          "owner_epoch": 17,
+          "owner_id": "owner-A",
+          "postdecision_phase": "ENDED_RELEASE",
+          "predecision_phase": "ACTIVE",
+          "release_ledger": [
+            "VSP02-A2-PUBLIC-CUTOFF-REQUEST-release"
+          ]
+        },
+        "observation": {
+          "a1_observation": {
+            "committed_phase": "ACTIVE",
+            "opaque_post_claim_cue": "X_b=1",
+            "own_boundary_clock": 0,
+            "owner_epoch_token": [
+              "owner-A",
+              17,
+              8
+            ],
+            "physical_clock": 0,
+            "primitive_clock": 0,
+            "prior_acknowledgements": [
+              "CLAIM_ACCEPTED"
+            ],
+            "visible_roster": [
+              "owner-A",
+              "partner-B"
+            ]
+          },
+          "a1_observation_firewall_valid": true,
+          "cue": "X_b=1",
+          "decision_clock": 1,
+          "observation_clock": 0,
+          "public_cutoff_request": true
+        },
+        "q_value": "1",
+        "registered_action_propensity": "1/2",
+        "reward_sequence": [
+          "1"
+        ],
+        "score": "1",
+        "tape_id": "VSP02-A2-PUBLIC-CUTOFF-REQUEST",
+        "tape_weight": "1/2",
+        "target": "1"
+      }
+    },
+    "contract_checks": {
+      "a1_candidate_release_edge_preserved": true,
+      "a1_horizon_preserved": true,
+      "a1_primitive_policy_preserved": true,
+      "cue_labels_prospectively_fixed": true,
+      "cue_source_is_predecision_only": true,
+      "matched_tapes_positive_and_normalized": true,
+      "owner_epoch_and_version_frozen": true,
+      "terminal_precedence_preserved": true
+    },
+    "deltas": {
+      "Delta_0": "-1",
+      "Delta_1": "2"
+    },
+    "frozen_physical_object": {
+      "continuation_policy": "AFTER_FORCED_HOLD_COMMIT_ONE_FROZEN_PRIMITIVE_THEN_NATURAL_CLOSE",
+      "contract_id": "VSP02-A2-PUBLIC-CUTOFF-PHYSICAL-V1",
+      "cue": {
+        "decision_clock": 1,
+        "forbidden_fields": [
+          "branch",
+          "delta",
+          "future_reward",
+          "future_termination",
+          "hidden_tape",
+          "q_value",
+          "realized_end_cause",
+          "treatment"
+        ],
+        "mapping": {
+          "false": "X_b=0",
+          "true": "X_b=1"
+        },
+        "observation_clock": 0,
+        "registered_labels": [
+          "X_b=1",
+          "X_b=0"
+        ],
+        "semantics": "prospective public cutoff request; never relabeled",
+        "source_fields": [
+          "public_cutoff_request"
+        ]
+      },
+      "discount": "1/2",
+      "horizon": 4,
+      "lifecycle": {
+        "backend": "CANDIDATE",
+        "command_alphabet": [
+          "HOLD",
+          "RELEASE"
+        ],
+        "command_bandwidth_bits": 1,
+        "release_has_stopping_edge": true,
+        "reward_contract_boundary": "NO_CLAIM_RELEASE_DURATION_OR_END_REWARD",
+        "source": "VSP02-A1-OWNER-ACTION-RESPONSIVE-LIFECYCLE"
+      },
+      "matched_exogenous_tapes": [
+        {
+          "continuation_reward": "-1",
+          "cue": "X_b=1",
+          "future_interrupt": false,
+          "future_terminal": false,
+          "natural_close_reward": "0",
+          "owner_departure": false,
+          "public_cutoff_request": true,
+          "tape_id": "VSP02-A2-PUBLIC-CUTOFF-REQUEST",
+          "weight": "1/2"
+        },
+        {
+          "continuation_reward": "2",
+          "cue": "X_b=0",
+          "future_interrupt": false,
+          "future_terminal": false,
+          "natural_close_reward": "0",
+          "owner_departure": false,
+          "public_cutoff_request": false,
+          "tape_id": "VSP02-A2-PUBLIC-PRODUCTIVE-WINDOW",
+          "weight": "1/2"
+        }
+      ],
+      "owner": {
+        "behavior_version": 8,
+        "owner_epoch": 17,
+        "owner_id": "owner-A"
+      },
+      "partner_policy": "FROZEN_PARTNER_NOOP_V1",
+      "primitive_policy": "FROZEN_PRIMITIVE_V1",
+      "reward": {
+        "hold_continuation_by_public_state": {
+          "X_b=0": "2",
+          "X_b=1": "-1"
+        },
+        "lifecycle_event_bonus": "0",
+        "natural_close_reward": "0",
+        "release_physical_settlement": "1"
+      },
+      "target_score": {
+        "score": "the same exact physical return, with no fit or bootstrap",
+        "target": "exact discounted physical return under the forced action"
+      },
+      "transition": {
+        "decision_clock": 1,
+        "hold_close_clock": 2,
+        "hold_close_phase": "ENDED_NATURAL",
+        "hold_intermediate_phase": "ACTIVE",
+        "release_next_phase": "ENDED_RELEASE",
+        "terminal_precedence": [
+          "TERMINAL",
+          "INTERRUPT",
+          "AUTHORIZED_RELEASE",
+          "NATURAL",
+          "HORIZON"
+        ]
+      }
+    },
+    "nonclaims": [
+      "learner support or learner superiority",
+      "B execution or B support",
+      "C support",
+      "escrow or adaptive superiority",
+      "promotion, retirement, or formal readiness"
+    ],
+    "q_values": {
+      "X_b=0|HOLD": "2",
+      "X_b=0|RELEASE": "1",
+      "X_b=1|HOLD": "-1",
+      "X_b=1|RELEASE": "1"
+    },
+    "support": {
+      "cue_probability": {
+        "X_b=0": "1/2",
+        "X_b=1": "1/2"
+      },
+      "forced_action_propensity": {
+        "X_b=0|HOLD": "1/2",
+        "X_b=0|RELEASE": "1/2",
+        "X_b=1|HOLD": "1/2",
+        "X_b=1|RELEASE": "1/2"
+      },
+      "joint_support": {
+        "X_b=0|HOLD": "1/4",
+        "X_b=0|RELEASE": "1/4",
+        "X_b=1|HOLD": "1/4",
+        "X_b=1|RELEASE": "1/4"
+      },
+      "witnesses": {
+        "X_b=0|HOLD": {
+          "action": "HOLD",
+          "action_propensity": "1/2",
+          "behavior_version": 8,
+          "cue": "X_b=0",
+          "final_phase": "ENDED_NATURAL",
+          "legal": true,
+          "owner_epoch": 17,
+          "owner_id": "owner-A",
+          "postdecision_phase": "ACTIVE",
+          "tape_id": "VSP02-A2-PUBLIC-PRODUCTIVE-WINDOW",
+          "tape_weight": "1/2"
+        },
+        "X_b=0|RELEASE": {
+          "action": "RELEASE",
+          "action_propensity": "1/2",
+          "behavior_version": 8,
+          "cue": "X_b=0",
+          "final_phase": "ENDED_RELEASE",
+          "legal": true,
+          "owner_epoch": 17,
+          "owner_id": "owner-A",
+          "postdecision_phase": "ENDED_RELEASE",
+          "tape_id": "VSP02-A2-PUBLIC-PRODUCTIVE-WINDOW",
+          "tape_weight": "1/2"
+        },
+        "X_b=1|HOLD": {
+          "action": "HOLD",
+          "action_propensity": "1/2",
+          "behavior_version": 8,
+          "cue": "X_b=1",
+          "final_phase": "ENDED_NATURAL",
+          "legal": true,
+          "owner_epoch": 17,
+          "owner_id": "owner-A",
+          "postdecision_phase": "ACTIVE",
+          "tape_id": "VSP02-A2-PUBLIC-CUTOFF-REQUEST",
+          "tape_weight": "1/2"
+        },
+        "X_b=1|RELEASE": {
+          "action": "RELEASE",
+          "action_propensity": "1/2",
+          "behavior_version": 8,
+          "cue": "X_b=1",
+          "final_phase": "ENDED_RELEASE",
+          "legal": true,
+          "owner_epoch": 17,
+          "owner_id": "owner-A",
+          "postdecision_phase": "ENDED_RELEASE",
+          "tape_id": "VSP02-A2-PUBLIC-CUTOFF-REQUEST",
+          "tape_weight": "1/2"
+        }
+      }
+    }
+  },
+  "schema_version": 1
+}

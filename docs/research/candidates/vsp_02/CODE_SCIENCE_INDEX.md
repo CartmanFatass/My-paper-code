@@ -92,10 +92,10 @@ retirement, B/C readiness, or formal-compute readiness.
 
 ## Crossed physical-value support A2 source
 
-This is the prospective source index for
-`VSP02-A2-CROSSED-PHYSICAL-VALUE-SUPPORT`; no registered A2 audit or accepted
-A2 result is recorded here.  The immutable manifest is built before its four
-value cells and contains no `q_values`, `deltas`, branch, or result field.
+This is the publication binding for
+`VSP02-A2-CROSSED-PHYSICAL-VALUE-SUPPORT`. The sole registered A invocation
+supports the strict crossing branch below; this records only the frozen exact
+audit and makes no scientific disposition.
 
 ```text
 treatment=VSP02-A2-CROSSED-PHYSICAL-VALUE-SUPPORT
@@ -108,8 +108,25 @@ arithmetic=exact Fraction
 cells=(X_b=1,RELEASE)|(X_b=1,HOLD)|(X_b=0,RELEASE)|(X_b=0,HOLD)
 contrasts=Delta_1=Q_1(RELEASE)-Q_1(HOLD)|Delta_0=Q_0(RELEASE)-Q_0(HOLD)
 registered_activity_cap=one deterministic A invocation; all environment/policy/learner/trainer/optimizer/evaluation-episode/model-fit/stochastic activity zero
-registered_audit_status=NOT_RUN
+registered_audit_status=COMPLETE
+registered_audit_binding_source=c8bf3d8e71985d404bd742257c6ca3cb28cbcf9b
+branch=A2_REGISTERED_STRICT_CROSSING_SUPPORTED
+q_cells=X_b=1|RELEASE=1;X_b=1|HOLD=-1;X_b=0|RELEASE=1;X_b=0|HOLD=2
+delta_cells=Delta_1=2;Delta_0=-1
+registered_a_invocation=1
+all_other_activity_retry_B_C_formal=0
+strict_nonclaims=no scientific disposition; no learning, deployment, promotion, retirement, B/C, Pro, or formal-compute claim
 ```
+
+The byte-exact public result is
+`docs/research/candidates/vsp_02/VSP02_A2_CROSSED_PHYSICAL_VALUE_SUPPORT_RESULT.json`
+(SHA-256
+`61f3f645bcc903a21f9210605b6a6ef57c0bc5a77f38cb0ba925ae23d1f9dd31`). It
+contains exactly the four required cue/action cells, with Q values
+`X_b=1: RELEASE=1, HOLD=-1` and `X_b=0: RELEASE=1, HOLD=2`, hence
+`Delta_1=2` and `Delta_0=-1`. This is a registered A read-only/zero-runtime
+materialization only; all retry, B/C, and formal activity are zero. No
+scientific disposition is made.
 
 `frozen_contract()` owns the single reward, transition, discount, horizon,
 continuation/partner/primitive-policy, owner/version, target/score, cue, and
