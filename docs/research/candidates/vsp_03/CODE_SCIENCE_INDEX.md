@@ -39,3 +39,18 @@ This is a causal-information-interface result with no natural value, novelty, re
   transitions are zero.
 - No registered result artifact, readiness receipt, or scientific disposition
   is created by this implementation package.
+
+## Publication receipt (mechanical)
+
+- Source `22024051_r1` is published byte-for-byte from the registered audit;
+  SHA-256 is `54690645D300A43FC0239A6AA2A77F643550AE682349D3683034756AEE1030DF`.
+- Branch: `A1_INVALID_EVENT_CAUSALITY_OR_SCOPE`; source is unbound with no
+  authenticated causal source. Lookup evaluations and all runtime activity are
+  zero. Validator pass is recorded in the source readiness receipt.
+- Source readiness receipt: `temp/sessions/code_project_manager/vsp03_a1_source_readiness_22024051_r1.py`.
+- Operator receipt file is authoritative: `temp/sessions/code_project_manager/vsp03_a1_operator_receipt.json`
+  reports terminal `ERROR`, phase `NONE`, direct error code branch despite
+  runner exit 0; the final message inconsistency is retained as observation.
+- Exact publication result: `docs/research/candidates/vsp_03/VSP03_A1_EVENT_CERTIFIED_BOUNDARY_CONFIRMATION_RESULT.json`.
+- No supported divergence, value, learning, B/C, Pro, or successor claim is
+  made.
