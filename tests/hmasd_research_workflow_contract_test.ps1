@@ -299,7 +299,7 @@ foreach ($entry in @(
     @($independentResearchRole, 'agentify_transport_result_fields=status|results_path|error'),
     @($independentResearchRole, 'agentify_transport_terminal_status=COMPLETE|ERROR'),
     @($independentResearchRole, 'agentify_transport_wait_visibility=silent_until_terminal_native_final'),
-    @($independentResearchRole, 'root_explorer_state_retention=direction_pointer|dependency|compact_returned_conclusion|sole_canonical_intake_and_decision|cpm_readiness'),
+    @($independentResearchRole, 'root_explorer_state_retention=per_direction_compact_continuity_projection(direction_pointer|dependency|compact_returned_conclusion|cpm_readiness)|comparison_relevant_portfolio_evidence_and_relationship_edges'),
     @($independentResearchRole, 'independent_pro_review_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py'),
     @($independentResearchRole, 'independent_pro_review_result_guard_timing=after_terminal_before_read'),
     @($independentResearchRole, 'independent_pro_review_result_guard_failure=reject_actual_error_no_fallback'),
@@ -654,7 +654,7 @@ foreach ($required in @(
     'no code, runtime, write, technical acceptance or formal scientific acceptance',
     'If evidence is sufficient and the next step is cheap and reversible, Explorer decides directly.',
     'The child result is consultation only',
-    'Explorer remains the portfolio integrator and writes exactly one canonical scientific decision',
+    'Explorer remains the portfolio integrator and writes exactly one advisory local-research scientific decision',
     'First-round children see neither peer answers nor a favored answer',
     'completion order is not evidence priority',
     'disagreement is not voting',
@@ -676,10 +676,15 @@ foreach ($required in @(
     'A child answer is advisory input to one Explorer decision',
     'Canonical campaign rosters, ordered barriers and single-writer authority remain unchanged.',
     'best-matching registered read-only research child',
-    'The root retains only the direction pointer, exact dependency, compact returned conclusion and CPM readiness')) {
+    'For each direction, the compact continuity projection contains the direction pointer, exact dependency, compact returned conclusion and CPM readiness.',
+    'Separately, the root retains and reads Explorer-owned comparison-relevant portfolio evidence and relationship edges needed for relative information value, cross-direction dependencies/conflicts/combinations, portfolio ordering/readiness and the sole Explorer-owned advisory portfolio decision.')) {
     if (-not $adaptiveSkillNormalized.Contains($required)) {
         throw "Independent research adaptive Skill contract missing: $required"
     }
+}
+if ($adaptiveRoleNormalized.Contains('the root retains only') -or
+    $adaptiveSkillNormalized.Contains('the root retains only')) {
+    throw 'Independent research adaptive contract retains stale root-only state wording'
 }
 foreach ($required in @(
     'adaptive_question_roster=singleton_or_exact_joint_roster',
