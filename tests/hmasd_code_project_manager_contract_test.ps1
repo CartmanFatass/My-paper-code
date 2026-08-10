@@ -407,6 +407,60 @@ foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
 }
 
+# CPM is the orchestrator; registered children realize bounded mechanics.
+foreach ($required in @(
+    'orchestrator-first engineering/runtime owner',
+    'owns problem decomposition, architecture and technical choices',
+    'dependency and concurrency planning',
+    'self-contained child assignments',
+    'three-unit runtime admission',
+    'action-bearing result synthesis',
+    'Git and current-work updates',
+    'user communication',
+    'coherent nontrivial implementation-plus-focused-test package',
+    '`hmasd-implementer-terra` for routine frozen engineering',
+    '`hmasd-implementer` for protected algorithm, numerical or training semantics',
+    'registered code scout',
+    '`hmasd-cpm-mechanical`',
+    'one integrated Reviewer follows coherent integration',
+    'Verifier is used only when the existing execution-readiness trigger fires',
+    'cheap reversible singleton',
+    'owner-exclusive architecture, integration, acceptance or Git decision',
+    'no microdelegation threshold or rigid assignment schema',
+    'Disjoint file families and admitted treatments run parallel-first',
+    'While any child or experiment is outstanding',
+    'bounded waiting is used only when every remaining safe action depends on that result',
+    'children provide evidence, not acceptance',
+    'never accept, stage, commit, push, change science, choose runtime admission or update canonical CPM state',
+    'action-bearing conclusion and concrete postcondition',
+    'passively relaying a status or completion receipt',
+    'one integrated review rather than one review per implementer',
+    'No scheduler, queue or registry is introduced',
+    'no time-triggered wake-up loop',
+    'does not change science or runtime state')) {
+    if (-not $codePmNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+        throw "CPM orchestrator-first contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'Orchestrator-first delegation path',
+    'first decomposes the request',
+    'self-contained natural-language assignment',
+    'single simple fallback',
+    'direct execution of a cheap reversible singleton',
+    'There is no microdelegation threshold',
+    'passive relay path',
+    'concrete postconditions',
+    'parallel-first path',
+    'waits in a bounded fashion only when every remaining safe action depends on that result',
+    'children never accept, stage, commit, push, change science, choose runtime admission or update canonical CPM state',
+    'adds no scheduler, queue or registry',
+    'uses no time-triggered wake-up loop')) {
+    if (-not $agileNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+        throw "Agile orchestrator-first delegation contract missing: $required"
+    }
+}
+
 foreach ($required in @(
     'runtime_capacity_admission=exclusive',
     'runtime_capacity_pool_units=3',

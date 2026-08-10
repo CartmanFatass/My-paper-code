@@ -1314,3 +1314,55 @@ def test_runtime_capacity_and_event_driven_rules_have_one_detailed_source() -> N
         normalized = " ".join(surface.split())
         assert "parallel-research-workflow.md" in normalized
         assert "three-unit runtime-capacity" not in normalized
+
+
+def test_explorer_orchestrates_and_owns_cross_direction_comparison() -> None:
+    """Direction children advise; the root Explorer compares and decides."""
+    role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+        encoding="utf-8"
+    )
+    skill = (
+        REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
+    ).read_text(encoding="utf-8")
+    role_normalized = " ".join(role.split())
+    skill_normalized = " ".join(skill.split())
+
+    # Orchestrator-first delegation keeps direction-local detail with the
+    # matching child while retaining decomposition and synthesis at the root.
+    for required in (
+        "explorer_orchestration_owner=decomposition|child_selection|dependency_and_concurrency_judgment|result_synthesis|continuity|sole_canonical_intake_and_user_communication",
+        "independent_direction_question_default=best_matching_registered_read_only_child|fork_turns=\"none\"",
+        "child_direction_context=minimal_direction_context_only|never_hidden_parent_context|cannot_replace_root_cross_direction_comparison",
+        "Direction-local source fidelity, criticism, mechanism design and detailed derivation normally stay with that child.",
+        "The root Explorer itself compares directions by relative information value",
+        "cross-direction dependencies, conflicts and combinations",
+        "portfolio ordering and readiness",
+        "sole advisory portfolio decision",
+        "cannot replace the root Explorer's cross-direction comparison",
+    ):
+        assert required in role_normalized or required in skill_normalized, required
+
+    # Outstanding child/CPM work cannot serialize disjoint directions or block
+    # safe read-only progress, but a bounded wait is allowed for a true dependency.
+    for required in (
+        "root_explorer_nonblocking_progress=advance_disjoint_directions_and_read_only_work_while_child_or_cpm_result_outstanding",
+        "root_explorer_bounded_wait=only_when_every_remaining_safe_scientific_action_depends_on_outstanding_result",
+        "While one child or CPM result is outstanding, continue every other disjoint direction and read-only scientific action.",
+        "Use a bounded wait only when every remaining safe scientific action depends on that outstanding result",
+    ):
+        assert required in role_normalized or required in skill_normalized, required
+
+    # Cheap reversible singleton reasoning and owner-exclusive portfolio work
+    # stay direct; authority and the protected postcondition remain with root.
+    for required in (
+        "direct_root_work_exceptions=cheap_reversible_singleton|cross_direction_comparison|canonical_intake|frozen_successor|park_or_retire_decision",
+        "Direct root work remains appropriate for a cheap reversible singleton",
+        "Every child return is conclusion-first and action-bearing enough for synthesis",
+        "The root verifies the protected scientific postcondition before canonical intake",
+        "research_portfolio_owner=independent_research_explorer",
+        "canonical_scientific_authority=none",
+        "Do not microdelegate",
+        "fixed panel",
+        "scientific-authority transfer",
+    ):
+        assert required in role_normalized or required in skill_normalized, required

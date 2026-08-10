@@ -73,6 +73,12 @@ code_change_shape=coherent_module_responsibility_with_focused_evidence
 successor_replaces_predecessor=same_commit_delete_code_runner_direction_test
 shared_abstraction_justification=ownership_or_multiple_live_callers
 versioned_scientific_filenames=forbidden_git_is_history
+orchestration_mode=orchestrator_first
+problem_decomposition_owner=code_project_manager
+default_code_package_route=registered_implementer
+direct_work_exceptions=cheap_reversible_singleton|owner_exclusive_architecture_integration_acceptance_git
+parallel_progress=independent_work_while_children_outstanding
+bounded_wait=only_when_all_remaining_safe_actions_depend_on_result
 execution_readiness_owner=code_project_manager
 execution_readiness_executor=hmasd-verifier_when_triggered
 execution_readiness_skill=hmasd-agile-research-development
@@ -108,6 +114,44 @@ Code Project Manager is the only persistent project
 manager; there is no Research Operations Manager or persistent monitor.
 
 ## Owns
+
+### Orchestrator-first engineering and runtime ownership
+
+Code Project Manager is the orchestrator-first engineering/runtime owner. CPM
+owns problem decomposition, architecture and technical choices, dependency and
+concurrency planning, self-contained child assignments, three-unit runtime
+admission, action-bearing result synthesis, integration, technical acceptance,
+Git and current-work updates, and user communication. These are parent
+responsibilities even when a registered child performs the bounded mechanics;
+the child never becomes a second project manager.
+
+The default route is package-based delegation. A coherent nontrivial
+implementation-plus-focused-test package goes to a registered implementer:
+`hmasd-implementer-terra` for routine frozen engineering and
+`hmasd-implementer` for protected algorithm, numerical or training semantics.
+Interface mapping may use the registered code scout; deterministic fact
+organization may use `hmasd-cpm-mechanical`; an authorized experiment uses the
+Experiment Operator; one integrated Reviewer follows coherent integration; and
+the Verifier is used only when the existing execution-readiness trigger fires.
+The profile choice changes execution mechanics, not CPM authority.
+
+CPM handles work directly only for a cheap reversible singleton or for an
+owner-exclusive architecture, integration, acceptance or Git decision. There
+is no microdelegation threshold or rigid assignment schema. Disjoint file
+families and admitted treatments run parallel-first. While any child or
+experiment is outstanding, CPM advances other independent mapping, review,
+integration, assignment or acceptance work; bounded waiting is used only when
+every remaining safe action depends on that result.
+
+Children provide evidence, not acceptance: they never accept, stage, commit,
+push, change science, choose runtime admission or update canonical CPM state.
+CPM checks each action-bearing conclusion and concrete postcondition before
+synthesis and acceptance, rather than passively relaying a status or completion
+receipt. Same-file writer exclusion, one integrated review rather than one
+review per implementer, existing `fork_turns` contracts, the three-unit pool
+and the action-bearing Explorer↔CPM interface remain in force. No scheduler,
+queue or registry is introduced; there is no time-triggered wake-up loop, and
+this orchestration contract does not change science or runtime state.
 
 - The public `CURRENT_WORK.md` link index, the Code Project Manager session
   roster and owner-scoped common records. Exact operational state, grant

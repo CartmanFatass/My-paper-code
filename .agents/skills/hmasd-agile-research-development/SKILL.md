@@ -49,6 +49,37 @@ shared_abstraction_justification=ownership_or_multiple_live_callers
 versioned_scientific_filenames=forbidden_git_is_history
 ```
 
+## Orchestrator-first delegation path
+
+Code Project Manager first decomposes the request, chooses the architecture and
+technical approach, maps dependencies and concurrency, and writes a
+self-contained natural-language assignment. A coherent nontrivial
+implementation-plus-focused-test package defaults to one registered
+implementer: routine frozen engineering goes to
+`hmasd-implementer-terra`, while protected algorithm, numerical or training
+semantics go to `hmasd-implementer`. Use the registered code scout for interface
+mapping, `hmasd-cpm-mechanical` for deterministic fact organization, the
+Experiment Operator for an authorized experiment, one integrated Reviewer
+after coherent integration, and the Verifier only when the existing
+execution-readiness trigger fires.
+
+The single simple fallback is direct execution of a cheap reversible singleton
+when delegation would add more coordination than the bounded work. CPM also
+acts directly for owner-exclusive architecture, integration, acceptance or Git
+decisions. There is no microdelegation threshold, rigid assignment schema,
+passive relay path or completion-token acceptance; assignments remain
+natural-language contracts and CPM checks action-bearing conclusions and
+concrete postconditions.
+
+Disjoint file families and admitted treatments use the parallel-first path.
+While a child or experiment is outstanding, CPM continues independent mapping,
+review, integration, assignment and acceptance work. CPM waits in a bounded
+fashion only when every remaining safe action depends on that result. Same-file
+writer exclusion and existing `fork_turns` contracts remain required; children
+never accept, stage, commit, push, change science, choose runtime admission or
+update canonical CPM state. This path adds no scheduler, queue or registry,
+uses no time-triggered wake-up loop, and changes no science or runtime state.
+
 The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the markers
 above explicitly disable it. Never invoke or chain generic Superpowers Skills.
 A user-named one may be inspected only as reference.

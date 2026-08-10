@@ -52,6 +52,14 @@ research_child_assignment_context=research_purpose|exact_question|named_sources_
 independent_direction_question_default=best_matching_registered_read_only_child|fork_turns="none"
 independent_direction_question_direct_root_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task
 root_explorer_state_retention=direction_pointer|dependency|compact_returned_conclusion|sole_canonical_intake_and_decision|cpm_readiness
+explorer_orchestration_owner=decomposition|child_selection|dependency_and_concurrency_judgment|result_synthesis|continuity|sole_canonical_intake_and_user_communication
+root_explorer_multi_direction_comparison=relative_information_value|cross_direction_dependencies_conflicts_combinations|portfolio_ordering_readiness|sole_advisory_portfolio_decision
+child_direction_context=minimal_direction_context_only|never_hidden_parent_context|cannot_replace_root_cross_direction_comparison
+root_explorer_nonblocking_progress=advance_disjoint_directions_and_read_only_work_while_child_or_cpm_result_outstanding
+root_explorer_bounded_wait=only_when_every_remaining_safe_scientific_action_depends_on_outstanding_result
+child_result_contract=conclusion_first|action_bearing|root_verifies_protected_scientific_postcondition
+direct_root_work_exceptions=cheap_reversible_singleton|cross_direction_comparison|canonical_intake|frozen_successor|park_or_retire_decision
+orchestrator_anti_patterns=microdelegation|fixed_panels|voting|duplicated_questions|hidden_parent_context_dependence|authority_transfer|external_process_controller
 cpm_accepted_result_interpretation=optional_direction_specific_read_only_child|technical_acceptance_not_repeated
 explorer_mechanical_child=hmasd-explorer-mechanical
 explorer_mechanical_parent=independent_research_explorer
@@ -142,14 +150,21 @@ owns the lightweight continuity entry at
 `local_research/RESEARCH_CONTINUITY.md`; restart details and campaign
 phase-barrier rules live in the parallel-research workflow reference.
 
-Explorer dispatches each registered research child with `fork_turns=none` and
-a self-contained natural-language assignment. The assignment states the
-research purpose, exact question, named source and prerequisite-packet
-bindings, protected assumptions and independence, exclusions, permitted local
-judgment and completion meaning. The exact assignment and its named packets
-are the child's complete task context; inherited parent history is neither
-task meaning nor authority. No per-child assignment file or mandatory machine
-envelope is required.
+Explorer is orchestrator-first: it decomposes the user task, selects the
+best-matching child for direction-local detail, judges dependencies and
+concurrency, synthesizes returned conclusions, maintains continuity and owns
+the sole canonical intake, decision and user communication. It dispatches
+each registered research child with `fork_turns=none` and a self-contained
+natural-language assignment. Direction-local source fidelity, criticism,
+mechanism design and detailed derivation normally stay with that child. The
+assignment states the research purpose, exact question, named source and
+prerequisite-packet bindings, protected assumptions and independence,
+exclusions, permitted local judgment and completion meaning. A child receives
+only the minimum direction context needed for its question; the exact
+assignment and its named packets are the child's complete task context, so
+inherited parent history is neither task meaning nor authority. A child cannot
+replace the root Explorer's cross-direction comparison, and no per-child
+assignment file or mandatory machine envelope is required.
 
 For large, heterogeneous literal-fact organization, Explorer may trigger the
 registered `hmasd-explorer-mechanical` child only after direct commands and an
@@ -187,10 +202,23 @@ best-matching registered read-only research child with `fork_turns="none"` and
 a self-contained assignment. Explorer may handle a cheap, reversible singleton
 directly only when dispatch overhead exceeds the question. The root Explorer
 retains only the direction pointer, exact dependency, compact returned
-conclusion and CPM readiness. An accepted CPM result may first go to one
-direction-specific read-only child for scientific interpretation; that child
-does not redo technical acceptance, and no fixed panel or scientific-authority
-transfer is created.
+conclusion and CPM readiness, then compares directions itself: relative
+information value, cross-direction dependencies, conflicts and combinations,
+portfolio ordering and readiness, and the sole advisory portfolio decision.
+Children normally see only their minimum direction context and cannot make
+that comparison or decide the portfolio. While a child or CPM result is
+outstanding, Explorer advances every other disjoint direction and read-only
+scientific action; it uses a bounded wait only when every remaining safe
+scientific action depends on that result. Child returns begin with a conclusion
+and an action-bearing recommendation; Explorer verifies the protected
+scientific postcondition before intake. Direct root work remains appropriate
+for the cheap reversible singleton, this cross-direction comparison,
+canonical intake, or a frozen successor/park-retire decision. An accepted CPM
+result may first go to one direction-specific read-only child for scientific
+interpretation; that child does not redo technical acceptance, and no fixed
+panel, voting scheme or scientific-authority transfer is created. Do not
+microdelegate, duplicate questions or introduce hidden parent-context
+dependence, an external process controller, or any authority transfer.
 
 Only a direct user instruction in this Explorer task may authorize or expand a
 research-state-changing workflow. Explorer may make autonomous transitions

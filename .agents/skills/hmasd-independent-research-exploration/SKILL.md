@@ -42,6 +42,43 @@ assumptions and independence, exclusions, allowed local judgment and
 completion meaning. This is writing guidance, not a mandatory schema, file,
 validator or admission gate.
 
+## Keep orchestration and portfolio comparison at the root
+
+The persistent Explorer is orchestrator-first. It decomposes the task, chooses
+the matching child for direction-local detail, judges dependency and
+concurrency, synthesizes conclusions, maintains continuity and owns the sole
+canonical intake, decision and user communication. Direction-local detailed
+derivation, source fidelity, criticism and mechanism design default to the
+best-matching registered child. A child receives only the minimum direction
+context needed for its self-contained question; it must not depend on hidden
+parent history and cannot replace the root's cross-direction comparison.
+
+The root Explorer itself compares directions by relative information value,
+cross-direction dependencies, conflicts and combinations, portfolio ordering
+and readiness, and makes the sole advisory portfolio decision. This advisory
+portfolio decision is not formal or project canonical science; the user alone
+decides whether any result enters the formal project. Children may
+return evidence, alternatives or a proposed next action, but they do not vote,
+rank siblings, merge duplicated questions or decide which direction wins. Keep
+this comparison direct at the root rather than creating a fixed panel,
+microdelegating cheap work, transferring authority, or adding an external
+process controller.
+
+Every child return is conclusion-first and action-bearing enough for synthesis:
+it names the evidence/locator, the protected assumption or postcondition, and
+the permitted next action. The root verifies the protected scientific
+postcondition before canonical intake and records only the compact direction
+pointer, exact dependency, returned conclusion and CPM readiness needed for
+continuity.
+
+While one child or CPM result is outstanding, continue every other disjoint
+direction and read-only scientific action. Use a bounded wait only when every
+remaining safe scientific action depends on that outstanding result; an
+outstanding result never creates a global barrier. Direct root work remains
+appropriate for a cheap reversible singleton when dispatch overhead exceeds
+the question, for cross-direction comparison, canonical intake, and frozen
+successor or park-retire decisions.
+
 ## Triggered mechanical fact organization
 
 When direct deterministic commands and an existing exact script are
@@ -79,9 +116,12 @@ Independent direction-local detailed questions use the best-matching registered
 read-only research child by default with `fork_turns="none"` and a self-contained
 assignment. Explorer may answer a cheap, reversible singleton directly only
 when dispatch overhead exceeds the question. The root retains only the direction
-pointer, exact dependency, compact returned conclusion and CPM readiness. An
-accepted CPM result may first go to one direction-specific read-only child for
-scientific interpretation; that child does not redo technical acceptance.
+pointer, exact dependency, compact returned conclusion and CPM readiness. It
+then performs the multi-direction comparison itself (relative information value,
+dependencies/conflicts/combinations, ordering/readiness and the sole portfolio
+decision). An accepted CPM result may first go to one direction-specific
+read-only child for scientific interpretation; that child does not redo
+technical acceptance or replace the root comparison.
 
 ## Start safely
 
@@ -188,10 +228,13 @@ question and use public remote source locators.
 Use `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW` first. Preserve its exact packet and
 explicitly apply, reject or park every correction in a new advisory version.
 Only that version may support a separate
-`PRO_ADVERSARIAL_SCIENTIFIC_REVIEW` assignment. The adversarial turn challenges
+`PRO_ADVERSARIAL_SCIENTIFIC_REVIEW` assignment. Within that one review, do not
+compare candidates or turn the review into project adoption; the root Explorer
+still performs its separate portfolio comparison. The adversarial turn
+challenges
 confounds, leakage, capacity, recurrence, co-adaptation, alternative
 explanations, controls and residual uncertainty; it is not a closure-only
-check. Never compare candidates or turn either review into project adoption.
+check. This review remains advisory and is not a portfolio decision.
 
 An `ERROR` affects only that review; Explorer continues unrelated research and
 may resend the unchanged question path without modifying research files.
