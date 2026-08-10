@@ -334,8 +334,11 @@ foreach ($required in $routerRequired) {
     if (-not $agents.Contains($required)) { throw "AGENTS split authority missing: $required" }
 }
 $routerNormalized = $agents -replace '\s+', ' '
-foreach ($required in @('tracked writers', 'Root-managed worktree', 'read-only', 'ignored-only', 'temp-only')) {
-    if (-not $routerNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+foreach ($required in @(
+    'tracked_writer_workspace=root_managed_worktree_required',
+    'tracked_writer_mixed_write_classification=tracked_writer',
+    'tracked_writer_exemptions=read_only|ignored_only|temporary_only')) {
+    if (-not $agents.Contains($required)) {
         throw "AGENTS tracked-writer workspace contract missing: $required"
     }
 }
@@ -513,9 +516,9 @@ foreach ($required in @(
 foreach ($required in @(
     'selected and frozen independent direction treatments',
     'admits independent treatments within the three-unit pool',
-    'tracked writers use Root-managed worktrees',
-    'read-only, ignored-only and temp-only work is exempt',
-    'ticket identity is not a child admission or authority requirement',
+    'tracked_write_worktree_predicate=assignment_may_write_tracked_path_or_mixed_tracked_ignored_output',
+    'tracked_write_worktree_exemptions=read_only|ignored_only|temporary_only',
+    'worktree_identity_semantics=not_agent_ticket_or_authority_identity',
     'normal path remains `independent_admitted_treatment_execution=parallel_first_within_capacity`',
     'detailed event-driven continuation and serialization exceptions are maintained by the parallel-research workflow reference',
     'CPM treatment dispatch is constrained only by an exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict',
@@ -910,7 +913,7 @@ if (Test-Path -LiteralPath $obsoleteWdmPlanPath) {
 
 $workflowNormalized = $workflow -replace '\s+', ' '
 if (-not $workflowNormalized.Contains('workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces') -or
-    -not $workflowNormalized.Contains('CPM and Explorer return workflow requirements or defects to Root rather than contacting WDM directly')) {
+    -not $workflowNormalized.Contains('cross_task_transport=return_to_root')) {
     throw 'Workflow Design Manager centralized ownership boundary is missing'
 }
 if (-not $agileNormalized.Contains('Code Project Manager alone accepts code, coordinates the project, directs engineering repair, and owns runtime and transport') -or

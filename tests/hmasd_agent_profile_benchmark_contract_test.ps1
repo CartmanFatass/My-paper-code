@@ -6,8 +6,10 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $config = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/config.toml')
 $benchmark = Get-Content -Raw -LiteralPath (
     Join-Path $repo 'docs/project/AGENT_PROFILE_BENCHMARK.md')
+$benchmarkNormalized = $benchmark -replace '\s+', ' '
 $result = Get-Content -Raw -LiteralPath (
     Join-Path $repo 'docs/project/AGENT_PROFILE_BENCHMARK_RESULT.md')
+$resultNormalized = $result -replace '\s+', ' '
 $implementer = Get-Content -Raw -LiteralPath (
     Join-Path $repo '.codex/agents/hmasd-implementer.toml')
 $routineImplementer = Get-Content -Raw -LiteralPath (
@@ -399,7 +401,7 @@ foreach ($required in @(
     'Read-only, ignored-only and temp-only work is exempt',
     'ticket, ticket identity or ticket precondition is not part of child authority or workspace admission',
     'current_persistent_wdm_route=gpt-5.6-sol/high')) {
-    if (-not $benchmark.Contains($required)) {
+    if (-not $benchmarkNormalized.Contains($required)) {
         throw "Benchmark contract missing: $required"
     }
 }
@@ -412,7 +414,7 @@ foreach ($required in @(
     'historical benchmark evidence',
     'persistent Workflow Design Manager route is `gpt-5.6-sol/high`',
     'ticket/worktree identity is superseded policy')) {
-    if (-not $result.Contains($required)) {
+    if (-not $resultNormalized.Contains($required)) {
         throw "Benchmark result missing: $required"
     }
 }

@@ -59,15 +59,16 @@ foreach ($required in @(
     'current_work_authority=public_index_and_own_workflow_control_plane_records_only',
     'workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_principles|accepted_stable_workflow_contract|root_handoff',
     'workflow_incident_log=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md',
-    'Role and Skill capability standard',
-    'necessary observations', 'permitted actions')) {
+    'workflow_audit_skill=hmasd-workflow-change-audit',
+    'workflow_harness=.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py',
+    'workflow_defect_repair_authority=autonomous_within_accepted_stable_contract')) {
     if (-not $manager.Contains($required)) { throw "WDM charter missing: $required" }
 }
 
 foreach ($required in @(
     'workflow_assignment_writing_skill=hmasd-writing-agent-assignments',
-    'owned outcome, necessary observations, permitted actions, role-local judgment, bounded recovery and completion evidence',
-    'does not load code maps or code-context guides by default')) {
+    'exact changed paths plus focused verification as completion evidence',
+    'Expand to a named Skill or reference only when its action trigger fires')) {
     if (-not $normalizedManager.Contains($required.ToLowerInvariant())) { throw "WDM writing-agent routing contract missing: $required" }
 }
 
@@ -75,15 +76,15 @@ foreach ($required in @(
     'workflow_change_request_route=root->wdm',
     'cross_task_transport=return_to_root',
     'workflow_subagent_parallelism=parallel_first_with_dependency_order',
-    'All tracked writers use Root-managed worktrees',
-    'Read-only, ignored-only and temp-only work is exempt',
-    'ticket identity is not a child admission or authority requirement')) {
+    'tracked_writer_workspace=root_managed_worktree_required',
+    'tracked_writer_exemptions=read_only|ignored_only|temporary_only',
+    'mandatory_ticket_identity=forbidden_for_subagent_authority')) {
     if (-not $normalizedRouter.Contains($required.ToLowerInvariant())) { throw "Router execution policy missing: $required" }
 }
 
 foreach ($required in @(
-    'ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order',
-    'pure design or authority decisions without file mutation remain wdm-local')) {
+    'ordinary workflow changes use the registered auditor, implementer and integrated reviewer stages with parallel-first scheduling and dependency order',
+    'WDM owns workflow semantic design, modification and acceptance')) {
     if (-not $normalizedManager.Contains($required.ToLowerInvariant())) { throw "WDM execution policy missing: $required" }
 }
 if (-not $skill.Contains('workflow_hash_validation=forbidden')) {

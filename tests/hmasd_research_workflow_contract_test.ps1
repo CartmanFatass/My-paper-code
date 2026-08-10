@@ -532,8 +532,12 @@ foreach ($retired in @(
     if ($agents.Contains($retired)) { throw "AGENTS retains retired fixed routing: $retired" }
 }
 $agentsNormalized = $agents -replace '\s+', ' '
-foreach ($required in @('tracked writers', 'root-managed worktree', 'read-only', 'ignored-only', 'temp-only', 'ticket identity')) {
-    if (-not $agentsNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+foreach ($required in @(
+    'tracked_writer_workspace=root_managed_worktree_required',
+    'tracked_writer_mixed_write_classification=tracked_writer',
+    'tracked_writer_exemptions=read_only|ignored_only|temporary_only',
+    'mandatory_ticket_identity=forbidden_for_subagent_authority')) {
+    if (-not $agents.Contains($required)) {
         throw "AGENTS tracked-writer workspace contract missing: $required"
     }
 }
@@ -1298,7 +1302,7 @@ if (-not $agileNormalized.Contains('CODE_SCIENCE_ALIGNMENT_AUDIT') -or
 }
 foreach ($required in @(
     'mandatory_ticket_identity=forbidden_for_subagent_authority',
-    'isolated_worktree_identity=optional_provenance_only',
+    'project_write_scope=current_checkout_for_exemptions_or_root_managed_worktree_for_tracked_writers',
     'raw_external_worktree_creation=forbidden',
     'root_final_git_integration_authority=accepted_paths_only')) {
     if (-not $agents.Contains($required)) {
@@ -1480,12 +1484,12 @@ foreach ($required in @(
     'parent=root',
     'agent_tree_level=1',
     'return_to_root',
-    'This ownership does not make Root a workflow-design or per-operation approval gate.',
+    'workflow_final_git_mechanics=root_only_after_WDM_semantic_acceptance',
     'workflow_collaboration_skill=hmasd-collaborative-workflow-design',
     'workflow_collaboration_scope=all_workflow_control_plane_mutations',
-    'workflow_collaboration_runtime_authority=none',
+    'workflow_audit_skill=hmasd-workflow-change-audit',
     'routine_preimplementation_code_science_review=forbidden',
-    'CODE_SCIENCE_INDEX.md')) {
+    'docs/project/WORKFLOW_MAP.md')) {
     if (-not $workflowDesignManagerRoleNormalized.Contains($required)) { throw "Workflow Design Manager role missing: $required" }
 }
 if ($workflowDesignManagerRole.Contains('current_work_owner=exclusive') -or
@@ -1520,7 +1524,7 @@ foreach ($required in @(
     'AGENTIFY_REVIEW_BATCH_RESULT',
     'experiment_child=hmasd-experiment-operator',
     'return_to_root',
-    'Workflow Design Manager')) {
+    'workflow_change_request_route=workflow_design_manager')) {
     if (-not $codePmRole.Contains($required)) {
         throw "Code Project Manager role missing: $required"
     }
