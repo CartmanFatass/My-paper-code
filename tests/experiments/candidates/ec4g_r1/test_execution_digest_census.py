@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 from dataclasses import replace
+from decimal import Decimal
+import io
 import json
+from pathlib import Path
 
 import pytest
 
 from experiments.candidates.ec4g_r1 import execution_digest_census as census
+from scripts import run_ec4g_a1_execution_digest_census as project_runner
 
 
 def _domain(cell: census.Cell) -> census.FrozenCensus:
@@ -291,3 +295,289 @@ def test_continuation_digest_binds_cost_and_bytes_and_fallback_binding():
 
     assert result.classification is census.CensusClassification.INCOMPLETE_CONTRACT
     assert any("does not bind fallback" in issue for issue in result.issues)
+
+
+def _project_program(
+    command: str, *, supplied_digest: str | None = None
+) -> census.CanonicalExecutionProgram:
+    branch = census.ExecutionBranch(
+        branch_id="no-receipt/donor-none",
+        receipt_id="NO_RECEIPT",
+        donor_id="NO_DONOR",
+        command=command,
+        command_parameters=(("parameter", "fixed"),),
+        timing="event-conditioned",
+        receipt_access="none",
+        donor_operation="identity",
+        donor_arguments=(("payload", "preserved"),),
+        downstream_payload_rule="preserve",
+        fallback="fixed-fallback",
+        resources=(("cpu", "0"),),
+        charged_cost=Decimal("0"),
+        randomization_kernel="deterministic-delta",
+    )
+    return census.CanonicalExecutionProgram((branch,), supplied_digest)
+
+
+def _complete_project_binding(
+    rows: tuple[census.ProjectCensusRow, ...],
+) -> census.ProjectCensusBinding:
+    bindings = tuple(
+        census.FrozenObjectBinding(
+            object_id=object_id,
+            identity=f"sha256:{index:064x}",
+            source_locator=f"project://{object_id}",
+            frozen=True,
+            total=True,
+            coherent=True,
+            detail="focused complete object",
+        )
+        for index, object_id in enumerate(census.REQUIRED_PROJECT_OBJECTS, start=1)
+    )
+    return census.ProjectCensusBinding(
+        source_revision="a" * 40,
+        run_id="focused-project-census",
+        object_order=census.REQUIRED_PROJECT_OBJECTS,
+        object_bindings=bindings,
+        row_order=tuple(row.row_key for row in rows),
+        rows=rows,
+    )
+
+
+def _project_row(
+    *,
+    ec4g_program: census.CanonicalExecutionProgram,
+    direct_program: census.CanonicalExecutionProgram,
+    ec4g_label: str = "EC4G-LABEL",
+    direct_label: str = "DIRECT-LABEL",
+    supported: bool = True,
+    mass: str = "1",
+) -> census.ProjectCensusRow:
+    return census.ProjectCensusRow(
+        row_key="k0",
+        ec4g_label=ec4g_label,
+        direct_tau_label=direct_label,
+        ec4g_program=ec4g_program,
+        direct_tau_program=direct_program,
+        supported=supported,
+        deployed_mass=Decimal(mass),
+    )
+
+
+def test_registered_project_binding_fails_closed_with_exact_missing_objects():
+    binding = census.build_registered_project_binding(
+        source_revision="b" * 40,
+        run_id="ec4g-a1-registered",
+    )
+
+    result = census.run_project_census(binding)
+    payload = json.loads(result.to_bytes())
+
+    assert result.terminal_branch is census.ProjectCensusBranch.INCOMPLETE_CONTRACT
+    assert result.contract_complete is False
+    assert result.rows == ()
+    assert result.summary["D_A"] is None
+    assert result.vacuous_active_domain is None
+    assert tuple(
+        witness.object_id for witness in result.missing_object_witnesses[:14]
+    ) == census.REQUIRED_PROJECT_OBJECTS
+    assert all(
+        witness.failure == "INVALID_OR_INCOMPLETE_OBJECT"
+        for witness in result.missing_object_witnesses[:14]
+    )
+    assert tuple(
+        witness.failure for witness in result.missing_object_witnesses[14:]
+    ) == ("EMPTY_DECISION_CELL_REGISTRY", "MASS_NOT_NORMALIZED")
+    assert payload["schema_version"] == census.PROJECT_RESULT_SCHEMA_VERSION
+    assert payload["document_kind"] == "ec4g_a1_execution_digest_census_result"
+    assert payload["terminal_branch"] == "INCOMPLETE_CONTRACT"
+    assert payload["freeze_manifest"]["object_order"] == list(
+        census.REQUIRED_PROJECT_OBJECTS
+    )
+    assert tuple(item["object_id"] for item in payload["object_bindings"]) == (
+        census.REQUIRED_PROJECT_OBJECTS
+    )
+    assert payload["activity_counts"] == {
+        "environment_transitions": 0,
+        "learner_calls": 0,
+        "model_fits": 0,
+        "optimizer_updates": 0,
+        "policy_calls": 0,
+        "registered_census_runs": 1,
+        "return_evaluations": 0,
+        "trainer_calls": 0,
+    }
+
+
+def test_project_terminal_precedence_and_exact_discordance_mass():
+    left = _project_program("EC4G-COMMAND")
+    right = _project_program("DIRECT-COMMAND")
+    row = _project_row(ec4g_program=left, direct_program=right)
+    complete = _complete_project_binding((row,))
+
+    positive = census.run_project_census(complete)
+    incomplete = census.run_project_census(replace(complete, object_bindings=()))
+
+    assert positive.terminal_branch is (
+        census.ProjectCensusBranch.SUPPORTED_POSITIVE_MASS_BEHAVIORAL_DISCORDANCE
+    )
+    assert positive.summary["D_A"] == "1"
+    assert positive.summary["active_behavioral_discordance_count"] == 1
+    assert len(positive.summary["domain_checksum"]) == 64
+    assert len(positive.summary["mass_checksum"]) == 64
+    assert all(item["coherent"] for item in positive.object_bindings)
+    assert positive.rows[0]["ec4g_program"]["branches"]
+    assert positive.rows[0]["direct_tau_program"]["branches"]
+    assert incomplete.terminal_branch is census.ProjectCensusBranch.INCOMPLETE_CONTRACT
+    assert incomplete.summary["D_A"] is None
+
+
+def test_empty_declared_registry_is_incomplete_not_vacuously_equivalent():
+    result = census.run_project_census(_complete_project_binding(()))
+
+    assert result.terminal_branch is census.ProjectCensusBranch.INCOMPLETE_CONTRACT
+    assert result.contract_complete is False
+    assert result.summary["D_A"] is None
+    assert result.vacuous_active_domain is None
+    witnesses = {
+        (witness.object_id, witness.failure, witness.detail)
+        for witness in result.missing_object_witnesses
+    }
+    assert (
+        "decision_cell_registry",
+        "EMPTY_DECISION_CELL_REGISTRY",
+        "a complete project census requires at least one frozen decision row",
+    ) in witnesses
+    assert (
+        "prospective_deployed_mass_registry",
+        "MASS_NOT_NORMALIZED",
+        "exact total deployed mass is 0, expected 1",
+    ) in witnesses
+
+
+def test_label_only_execution_equivalent_and_vacuous_branches():
+    program = _project_program("SAME-COMMAND")
+    label_only = census.run_project_census(
+        _complete_project_binding(
+            (_project_row(ec4g_program=program, direct_program=program),)
+        )
+    )
+    equivalent = census.run_project_census(
+        _complete_project_binding(
+            (
+                _project_row(
+                    ec4g_program=program,
+                    direct_program=program,
+                    ec4g_label="SAME",
+                    direct_label="SAME",
+                ),
+            )
+        )
+    )
+    vacuous = census.run_project_census(
+        _complete_project_binding(
+            (
+                _project_row(
+                    ec4g_program=_project_program("UNSUPPORTED-LEFT"),
+                    direct_program=_project_program("UNSUPPORTED-RIGHT"),
+                    supported=False,
+                ),
+            )
+        )
+    )
+
+    assert label_only.terminal_branch is census.ProjectCensusBranch.LABEL_ONLY_DIFFERENCE
+    assert label_only.summary["D_A"] == "0"
+    assert equivalent.terminal_branch is census.ProjectCensusBranch.EXECUTION_EQUIVALENT
+    assert equivalent.vacuous_active_domain is False
+    assert vacuous.terminal_branch is census.ProjectCensusBranch.EXECUTION_EQUIVALENT
+    assert vacuous.vacuous_active_domain is True
+    assert vacuous.summary["unsupported_or_zero_mass_difference_count"] == 1
+    assert vacuous.rows[0]["row_class"] == "AUDIT_ONLY_OUTSIDE_ACTIVE_DOMAIN"
+
+
+def test_complete_program_equality_overrides_a_supplied_digest_collision():
+    collision = "c" * 64
+    left = _project_program("LEFT-COMMAND", supplied_digest=collision)
+    right = _project_program("RIGHT-COMMAND", supplied_digest=collision)
+
+    result = census.run_project_census(
+        _complete_project_binding(
+            (
+                _project_row(
+                    ec4g_program=left,
+                    direct_program=right,
+                    ec4g_label="SAME-LABEL",
+                    direct_label="SAME-LABEL",
+                ),
+            )
+        )
+    )
+
+    assert result.terminal_branch is (
+        census.ProjectCensusBranch.SUPPORTED_POSITIVE_MASS_BEHAVIORAL_DISCORDANCE
+    )
+    assert result.rows[0]["supplied_digest_collision"] is True
+    assert result.rows[0]["execution_difference"] is True
+
+
+def test_runner_source_freeze_and_one_shot_output_are_fail_closed():
+    project_runner._require_source_revision("a" * 40, "a" * 40)
+    with pytest.raises(ValueError, match="source revision mismatch"):
+        project_runner._require_source_revision("a" * 40, "b" * 40)
+
+    class RetainedBytesIO(io.BytesIO):
+        def close(self):
+            pass
+
+    class FakeOneShotPath:
+        def __init__(self):
+            self.handle = RetainedBytesIO()
+            self.open_count = 0
+
+        def open(self, mode):
+            assert mode == "xb"
+            self.open_count += 1
+            if self.open_count > 1:
+                raise FileExistsError("already exists")
+            return self.handle
+
+        def __str__(self):
+            return "fake-one-shot.json"
+
+    output = FakeOneShotPath()
+    project_runner._write_new(output, b"{}\n")
+    assert output.handle.getvalue() == b"{}\n"
+    with pytest.raises(FileExistsError, match="refusing to overwrite"):
+        project_runner._write_new(output, b"second\n")
+
+
+def test_runner_existing_output_preflight_never_constructs_or_analyzes(monkeypatch):
+    calls = {"binding": 0, "analyzer": 0}
+
+    def binding_spy(**kwargs):
+        calls["binding"] += 1
+        raise AssertionError("binding construction must not run")
+
+    def analyzer_spy(binding):
+        calls["analyzer"] += 1
+        raise AssertionError("analyzer must not run")
+
+    monkeypatch.setattr(project_runner, "_source_revision", lambda: "a" * 40)
+    monkeypatch.setattr(project_runner, "build_registered_project_binding", binding_spy)
+    monkeypatch.setattr(project_runner, "run_project_census", analyzer_spy)
+    existing_output = Path(__file__).resolve()
+
+    with pytest.raises(SystemExit, match="refusing to overwrite one-shot result"):
+        project_runner.main(
+            [
+                "--source-revision",
+                "a" * 40,
+                "--run-id",
+                "preflight-existing-output",
+                "--output",
+                str(existing_output),
+            ]
+        )
+
+    assert calls == {"binding": 0, "analyzer": 0}

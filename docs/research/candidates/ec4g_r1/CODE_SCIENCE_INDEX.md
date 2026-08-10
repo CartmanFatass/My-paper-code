@@ -1,15 +1,85 @@
-# EC4G-R1 execution-digest census: code-science index
+# EC4G-R1 execution-digest censuses: code-science index
 
 Candidate: `CAND-VAP-EC4G-R1@adversarial-revision-v7`
 
-Treatment: proof-sized deterministic `EC4G-EXECUTION-DIGEST-CENSUS-D1`
+Project treatment: zero-runtime deterministic
+`EC4G-A1-EXECUTION-DIGEST-CENSUS`
 
-Status of this evidence: synthetic implementation conformance only.
+Predecessor treatment: proof-sized deterministic synthetic conformance unit
+`EC4G-EXECUTION-DIGEST-CENSUS-D1/x0`.
+
+These are separate evidence surfaces. The synthetic x0 cell below is retained
+only as a legacy action-map/conformance unit and is never a row, support fact,
+mass declaration, or contract object for the registered A1 project census.
 
 This tracked index is self-contained so an external reviewer can inspect the
 exact pushed revision without access to temporary cross-role handoff files. It
 does not claim that an empirical project EC4G cell exists or that EC4G has
 operational value.
+
+## Registered A1 project-binding census
+
+The A1 source adds a pure validator/analyzer and a thin one-shot runner. The
+project census requires independently bound identities for the objective,
+ordered decision-cell and receipt registries, coherent seven-arm joint moments,
+costs, immutable decision parameters and both total maps, fallback programs,
+payload-preserving donor operation, canonical execution compiler, prospective
+support and deployed mass, and the source/order freeze manifest. Missing,
+unfrozen, non-total, or incoherent objects return `INCOMPLETE_CONTRACT` with an
+exact object witness. Missing objects are not converted into empty registries,
+zero mass, synthetic rows, or vacuous support.
+
+At the implementation revision, the project package contains no complete
+prospective binding for those objects. In particular, the synthetic x0
+`executor_measure=1` is not a prospective deployed-mass registry. Therefore
+`build_registered_project_binding` binds no fabricated rows and records every
+required object as absent. The unique registered invocation can naturally and
+technically return `INCOMPLETE_CONTRACT`; `D_A` remains undefined in that
+branch.
+
+For a complete future binding supplied without changing the frozen analyzer,
+the terminal precedence is:
+
+1. `INCOMPLETE_CONTRACT` for any global or row-bound contract failure;
+2. `SUPPORTED_POSITIVE_MASS_BEHAVIORAL_DISCORDANCE` when the exact active
+   discordance mass `D_A` is positive;
+3. `LABEL_ONLY_DIFFERENCE` when `D_A=0` and an active literal label differs;
+4. `EXECUTION_EQUIVALENT` otherwise, with `vacuous_active_domain=true` only
+   when a nonempty complete registry has no supported positive-mass row. An
+   empty decision-cell registry is an incomplete contract, and its deployed
+   mass total of zero separately fails the exact normalization check.
+
+Program equality compares every literal receipt/donor execution branch. The
+stored SHA-256 digest is audit evidence only: an equal digest never makes
+unequal complete programs equivalent. Unsupported and zero-mass differences
+remain full row witnesses but cannot promote the terminal branch.
+
+The one-shot runner requires the declared lowercase 40-hex source revision to
+equal checkout `HEAD`. It rejects an existing result path before binding or
+analyzing any project object, then uses exclusive `xb` creation as the atomic
+write guard. The
+result schema carries the frozen source revision and run identity, complete
+missing-object evidence, complete row programs for every admitted row, exact
+decimal masses/cross-tabs, and activity counters. It invokes no environment,
+policy, learner, trainer, optimizer, return evaluator, model fit, or RNG.
+
+### A1 traceability
+
+| Assertion | Implementation | Focused proof |
+|---|---|---|
+| Synthetic x0 cannot enter the project census; every absent project object is an explicit fail-closed witness | `experiments/candidates/ec4g_r1/execution_digest_census.py::build_registered_project_binding`; `::run_project_census` | `tests/experiments/candidates/ec4g_r1/test_execution_digest_census.py::test_registered_project_binding_fails_closed_with_exact_missing_objects` |
+| Exact terminal precedence, exact decimal `D_A`, label-only and vacuous handling, and audit-only unsupported differences | `::run_project_census`; `::_validate_project_binding` | `::test_project_terminal_precedence_and_exact_discordance_mass`; `::test_label_only_execution_equivalent_and_vacuous_branches` |
+| Complete execution programs, not supplied digests, determine equality | `CanonicalExecutionProgram.execution_equal` | `::test_complete_program_equality_overrides_a_supplied_digest_collision` |
+| Source revision is frozen and result creation is one-shot | `scripts/run_ec4g_a1_execution_digest_census.py::_require_source_revision`; `::_write_new` | `::test_runner_source_freeze_and_one_shot_output_are_fail_closed` |
+| Empty registries and zero total deployed mass fail closed; existing output aborts before analyzer activity | `::_validate_project_binding`; `scripts/run_ec4g_a1_execution_digest_census.py::main` | `::test_empty_declared_registry_is_incomplete_not_vacuously_equivalent`; `::test_runner_existing_output_preflight_never_constructs_or_analyzes` |
+
+A1 nonclaims: `INCOMPLETE_CONTRACT` establishes neither equivalence nor
+discordance. A positive discordance in a complete contract would establish
+only supported positive-mass program difference, not positive return, causal
+benefit, receipt-content value, executor invariance, transfer, promotion,
+retirement, B/C readiness, External Pro need, or formal-compute readiness.
+
+## Legacy synthetic conformance unit
 
 ## Frozen object
 
