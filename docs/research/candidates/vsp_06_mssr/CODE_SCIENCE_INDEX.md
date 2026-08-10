@@ -54,10 +54,14 @@ source commit `6ee1ee4efeddcc71175a0860ca52a9aa15bb2c1d`. The public zero-activi
 registered result is
 `docs/research/candidates/vsp_06_mssr/VSP06_A1_JOINT_PRODUCTION_BINDING_RESULT.json`
 (SHA-256
+`4683bf8b6822cd41dff810e224583b8dcf963af667ff3f8de219b5631edc431c`
+over the canonical Git blob; the external CRLF runtime copy hashes to
 `069d06628c40c8d32adc9a06404ba3f28c55b7e59d0878e3a87f57241137ff2c`).
 The separately retained two-history production witness is
 `docs/research/candidates/vsp_06_mssr/VSP06_A1_MATCHED_SUPPORT_WITNESS.json`
 (SHA-256
+`904171500289526798d9e86a11055e7bedb1d6a851519bfa58ed4429318cb91e`
+over the canonical Git blob; the external CRLF runtime copy hashes to
 `61f2cb83e5cb12a91c297d6a1be81925e308caca2b030ef8e75b914a00752d22`).
 The unique registered CLI invocation constructed the real factories and
 recorded zero environment/policy/learner/trainer/optimizer/evaluation/RNG
