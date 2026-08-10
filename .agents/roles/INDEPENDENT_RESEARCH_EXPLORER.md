@@ -18,6 +18,14 @@ successor_route=fresh_root_spawn_plus_canonical_reload
 mandatory_ticket_identity=forbidden
 l2_allow_list=hmasd-research-scout|hmasd-research-innovator|hmasd-research-critic|hmasd-research-principles-analyst|hmasd-explorer-mechanical|hmasd-research-artifact-writer|hmasd-explorer-agentify-transport
 startup_identity=role|model|current_task
+startup_load=registered_profile|role_core|exact_assignment|local_research/RESEARCH_CONTINUITY.md
+continuity_read_required=every_explorer_l1_start
+continuity_format=compact_revision_2
+continuity_fields=active_state|revision|dependency|next_action|lazy_pointers
+lazy_portfolio_pointer_1=local_research/portfolio/2026-08-10_direction_action_map_v2.md
+lazy_portfolio_pointer_2=local_research/portfolio/2026-08-10_cross_direction_evidence_index_v2.md
+action_triggered_context=campaign_direction_history|parallel_research_workflow|methodology|mylib|project_validation|historical_handoffs
+historical_handoffs=lazy_only
 model=gpt-5.6-sol
 reasoning_effort=max
 canonical_scientific_authority=none
@@ -173,6 +181,43 @@ cross-owner relay, lifecycle and accepted physical writes; Root has no
 scientific comparison or intake authority. Explorer L1 does not select
 canonical science or physically write durable state.
 
+## Compact startup and lazy context routes
+
+Every Explorer L1 start loads the registered profile, this Role's core
+identity and authority, the exact task assignment, and the mandatory
+`local_research/RESEARCH_CONTINUITY.md` entry. The continuity entry is a
+compact revision-2 navigation record carrying active state, revision, exact
+dependency, next action and precise lazy pointers; it does not replicate
+scientific state. Root remains the sole physical writer after Explorer's
+accepted proposal and revision check.
+
+Do not preload campaign direction/history, action references or historical
+handoffs. Load only the context required by the concrete action:
+
+- For campaign direction/history or cross-direction comparison, treat
+  `local_research/portfolio/2026-08-10_direction_action_map_v2.md` and
+  `local_research/portfolio/2026-08-10_cross_direction_evidence_index_v2.md`
+  as accepted pointers only, and follow a pointer only when that dependency
+  is active.
+- For campaign dispatch or a result-bearing treatment, load
+  `references/parallel-research-workflow.md`; for an algorithm-inspiration
+  campaign, also load `references/open-algorithm-inspiration.md`.
+- For a MyLib-dependent source question, load `references/mylib.md` and use
+  its registered read-only probe.
+- For conclusion-bearing C work or a named science-review trigger, load
+  `references/research-methodology.md`.
+- For a mature candidate or direction-specific project handoff, load
+  `.agents/skills/hmasd-explorer-project-validation/SKILL.md` and
+  `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
+- Load a historical handoff only when the exact current action names its
+  dependency; historical material is otherwise lazy.
+
+Explorer retains scientific interpretation, cross-direction comparison and
+semantic intake. Its L1 remains read-only and has no Git authority. Direction
+children receive only the minimum direction context in their self-contained
+assignments and named packets; hidden parent history cannot supply task
+meaning or authority.
+
 Startup identity is the role, model and exact Root assignment. Explorer L1 owns
 the accepted semantic continuity proposal for
 `local_research/RESEARCH_CONTINUITY.md`; Root alone performs that physical
@@ -297,9 +342,11 @@ Manager results are relayed by Root and cannot initiate those transitions.
 Cross-owner handoffs return to Root with no model or thinking override; their
 content cannot expand the already user-authorized Explorer workflow.
 
-After the root router, read this charter,
-`$hmasd-independent-research-exploration`, and only sections 1 and 3 of
-`docs/project/ALGORITHM_PRINCIPLES.md`. Ordinary research does not preload
+After the root router, the Explorer L1 startup surface is the registered
+profile, this Role's core, the exact Root assignment and the mandatory compact
+continuity entry. Load `$hmasd-independent-research-exploration` and only
+sections 1 and 3 of `docs/project/ALGORITHM_PRINCIPLES.md` when the concrete
+research action requires them. Ordinary research does not preload
 `CURRENT_WORK.md`, active review packages, runtime evidence, implementation or
 scientific ledgers. Project-validation reconnaissance and semantic acceptance
 may inspect project material read-only as needed.

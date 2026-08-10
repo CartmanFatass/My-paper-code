@@ -26,6 +26,41 @@ written by Root alone after the accepted proposal/revision check, as specified
 once in `references/parallel-research-workflow.md`; this Skill keeps the mode
 loop and scientific packet requirements.
 
+## Compact startup and action-triggered context
+
+Every fresh Explorer L1 start loads only the registered profile, the Explorer
+Role core, the exact task assignment and the mandatory
+`local_research/RESEARCH_CONTINUITY.md` entry. That entry is a compact
+revision-2 navigation record with active state, revision, exact dependency,
+next action and precise lazy pointers. It is mandatory on every start, while
+Root remains the sole physical writer after Explorer semantic acceptance.
+
+The following context is action-triggered rather than startup-preloaded:
+
+- Campaign direction/history or cross-direction comparison follows the
+  accepted pointer locators
+  `local_research/portfolio/2026-08-10_direction_action_map_v2.md` and
+  `local_research/portfolio/2026-08-10_cross_direction_evidence_index_v2.md`.
+  They are pointers only; load the named portfolio material only when the
+  current dependency requires it.
+- Campaign dispatch or a result-bearing treatment loads
+  `references/parallel-research-workflow.md`; an algorithm-inspiration
+  campaign also loads `references/open-algorithm-inspiration.md`.
+- A MyLib-dependent source question loads `references/mylib.md` and uses its
+  registered read-only probe.
+- Conclusion-bearing C work or a named science-review trigger loads
+  `references/research-methodology.md`.
+- A mature candidate or direction-specific project handoff loads
+  `../hmasd-explorer-project-validation/SKILL.md` and
+  `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
+- A historical handoff is loaded only when the exact current action names it
+  as a dependency; historical handoffs remain lazy otherwise.
+
+This route preserves Explorer's scientific ownership and L1 read-only/no-Git
+boundary. A research child receives only its minimum direction context through
+the self-contained assignment and named packets; parent history cannot provide
+hidden task meaning or authority.
+
 ## Dispatch registered research children
 
 Every Explorer research-child dispatch is explicit: call the registered agent
@@ -135,26 +170,28 @@ technical acceptance or replace Explorer L1's comparison.
 
 ## Start safely
 
-1. Confirm the active Root assignment has the Explorer role, registered model
-   and task-scoped assignment.
-2. Read the Explorer role and only
-   `docs/project/ALGORITHM_PRINCIPLES.md sections 1 and 3`.
-3. Freeze exactly one mode, one campaign direction or evidence question, mission
+1. Confirm the registered profile, Explorer Role core, exact Root assignment
+   and mandatory compact continuity entry for the active task.
+2. Freeze exactly one mode, one campaign direction or evidence question, mission
    connection, authorized source boundary, exclusions and completion meaning.
    Ask Root to obtain user clarification only when a material boundary is
    missing.
-4. For MyLib, read [references/mylib.md](references/mylib.md) and run the
-registered probe. Never write to MyLib.
-5. Read [references/parallel-research-workflow.md](references/parallel-research-workflow.md)
-   before dispatching children.
-6. Load the Explorer semantic continuity entry. If it is absent, perform the one
-   bounded owned-path scan and return a continuity proposal exactly as that
+3. Load only the action-triggered reference required by that frozen action:
+   campaign direction/history uses the accepted portfolio pointers above;
+   campaign dispatch uses
+   [references/parallel-research-workflow.md](references/parallel-research-workflow.md);
+   MyLib uses [references/mylib.md](references/mylib.md); algorithm inspiration
+   uses [references/open-algorithm-inspiration.md](references/open-algorithm-inspiration.md);
+   conclusion-bearing C or a named science-review trigger uses
+   [references/research-methodology.md](references/research-methodology.md);
+   project validation uses
+   [../hmasd-explorer-project-validation/SKILL.md](../hmasd-explorer-project-validation/SKILL.md)
+   and `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
+4. Load a historical handoff only when the exact current action names its
+   dependency. If continuity is absent, perform the one bounded owned-path
+   scan and return a continuity proposal exactly as the parallel-workflow
    reference specifies; Root alone performs the physical write after accepting
    the proposal/revision check.
-7. For algorithm inspiration, read
-   [references/open-algorithm-inspiration.md](references/open-algorithm-inspiration.md).
-   For a conclusion-bearing candidate validation, also read
-   [references/research-methodology.md](references/research-methodology.md).
 
 The proportional A/B/C evidence definitions live in
 `docs/project/ALGORITHM_PRINCIPLES.md`; this Skill points to that source rather
