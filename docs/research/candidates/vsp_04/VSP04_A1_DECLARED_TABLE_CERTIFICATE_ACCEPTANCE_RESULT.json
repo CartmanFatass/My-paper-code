@@ -1,0 +1,79 @@
+{
+  "document_kind": "technical_acceptance_evidence",
+  "schema_version": 1,
+  "conclusion": "The frozen literal declared-table package supports the action-level branch A1_LITERAL_DECLARED_TABLE_CERTIFICATE_ACCEPTED: its recorded 13-row table is infeasible under the sparse separator, while removing OR.risk.ACK restores the recorded 12-row witness. This is a solver-check-only acceptance boundary, not a lower-level semantic result.",
+  "action": {
+    "treatment": "VSP04-A1-DECLARED-TABLE-RATIONAL-CERTIFICATE-ACCEPTANCE",
+    "payload_treatment": "VSP-04-STACKED-FINITE-CELL-KNOCKOFF-CERT-D0",
+    "candidate_id": "CAND-VSP-04-MATCHED-BOUNDARY-REQUEST-TRIAD@adversarial-revision-v8",
+    "package_anchor": "1236cdc096fe913d7854892275284c652d7df00b",
+    "branch": "A1_LITERAL_DECLARED_TABLE_CERTIFICATE_ACCEPTED",
+    "evidence_status": "COMPLETE_FOR_CPM_TECHNICAL_ACCEPTANCE"
+  },
+  "literal_table_certificate": {
+    "row_inventory": {
+      "path": {"IND": 2, "OR": 2, "SOFT": 2},
+      "action_risk": {"IND": 2, "OR": 2, "SOFT": 2},
+      "raw": 1,
+      "total": 13
+    },
+    "sparse_separator": {"IND.risk.ACK": "-1", "OR.risk.ACK": "1"},
+    "lhs": "1/8",
+    "rhs": "0",
+    "margin": "1/8",
+    "primary_witness": null,
+    "delete_OR_risk_ACK": {
+      "remaining_rows": 12,
+      "witness": ["1/2", "1/2", "1/2"]
+    }
+  },
+  "technical_checks": {
+    "focused_test": {
+      "path": "tests/experiments/candidates/vsp_04/test_matched_boundary_rational_certificate.py",
+      "passed": 17,
+      "receipt": "17 passed"
+    },
+    "solver_entry_point": "experiments/candidates/vsp_04/matched_boundary_rational_certificate.py",
+    "solver_exit_code": 0,
+    "source_test_index_match_package_anchor": true
+  },
+  "activity_counts": {
+    "environment_transitions": 0,
+    "policy_calls": 0,
+    "learner_calls": 0,
+    "trainer_calls": 0,
+    "optimizer_calls": 0,
+    "evaluation_episodes": 0
+  },
+  "acceptance_boundary": {
+    "declared_table_and_solver_checks_only": true,
+    "does_not_establish": [
+      "lower-level H/W/U generation",
+      "lower-level path/risk provenance",
+      "cellwise H/W/U ancestry",
+      "causality",
+      "value or authentic-request relevance",
+      "natural-instance relevance",
+      "matched-carrier independence",
+      "generator-safe semantic binding",
+      "coherent IND/OR/SOFT matched-boundary triad",
+      "cross-mode shared-K obstruction",
+      "exact Bernoulli calibration",
+      "training benefit or return",
+      "deployment validity",
+      "universal impossibility"
+    ]
+  },
+  "public_locators": {
+    "result": "docs/research/candidates/vsp_04/VSP04_A1_DECLARED_TABLE_CERTIFICATE_ACCEPTANCE_RESULT.json",
+    "index": "docs/research/candidates/vsp_04/CODE_SCIENCE_INDEX.md",
+    "source": "experiments/candidates/vsp_04/matched_boundary_rational_certificate.py",
+    "test": "tests/experiments/candidates/vsp_04/test_matched_boundary_rational_certificate.py"
+  },
+  "publication": {
+    "source_anchor": "1236cdc096fe913d7854892275284c652d7df00b",
+    "publication_commit": null,
+    "publication_commit_assignment": "CPM records this only during its later Git publication."
+  },
+  "residual_uncertainty": "The accepted certificate authenticates only the declared finite table and its solver result; all lower-level generation, provenance, semantic, causal, value, natural-relevance and universal claims remain outside this action."
+}
