@@ -85,6 +85,22 @@ owner completes, return the result to the portfolio Explorer for intake before
 any successor is marked ready. Ready state and order remain
 assignment/capsule semantics, never roster state or Scheduler semantic state.
 
+### Effective-cycle counting
+
+One completed Scheduler cycle is one Explorer-owned C-level key breakthrough.
+Increment the lifecycle count only after a direct read shows that an
+Independent Research Explorer-owned canonical result explicitly declares and
+substantiates one C-level key breakthrough and exposes the exact canonical
+result locator. The Scheduler mechanically confirms only that declaration and
+locator; it must not infer C from technical facts, evaluate the science,
+rewrite or merge the result, or relay its meaning. Portfolio freeze or portfolio
+selection, CPM `CODE_ACCEPTED`, technical acceptance or integration, ordinary
+Explorer intake, wait/archive, resource or admission events, and lifecycle
+terminals are non-counting examples. Start from 0 confirmed C-level
+breakthrough cycles until Explorer canonical artifacts explicitly say otherwise.
+This is lifecycle counting only and does not reinterpret existing research
+state.
+
 ## Resource-conflict routing
 
 The per-run direction-owner ceiling is not a runtime capacity pool; there is no

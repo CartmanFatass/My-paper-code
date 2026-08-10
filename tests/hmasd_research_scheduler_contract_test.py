@@ -106,6 +106,39 @@ def test_portfolio_cardinality_and_ceiling_remain_explorer_owned() -> None:
         assert cue in skill
 
 
+def test_effective_cycle_requires_explicit_explorer_canonical_breakthrough() -> None:
+    text = _joined(ROLE, SKILL)
+    for cue in (
+        "one completed scheduler cycle is one explorer-owned c-level key breakthrough",
+        "independent research explorer-owned canonical result",
+        "explicitly declares and substantiates",
+        "exact canonical result locator",
+        "mechanically confirm only",
+        "must not infer c from technical facts",
+        "0 confirmed c-level breakthrough cycles",
+        "does not reinterpret existing research state",
+    ):
+        assert cue in text
+
+
+def test_effective_cycle_excludes_lifecycle_and_technical_events() -> None:
+    text = _joined(ROLE, SKILL)
+    for event in (
+        "portfolio freeze",
+        "portfolio selection",
+        "cpm `code_accepted`",
+        "technical acceptance",
+        "integration",
+        "ordinary explorer intake",
+        "wait/archive",
+        "resource or admission events",
+        "lifecycle terminals",
+    ):
+        assert event in text
+    assert "are non-counting" in text
+    assert "non-counting examples" in text
+
+
 def test_scheduler_has_no_queue_monitor_registry_or_task_scan() -> None:
     text = _joined(ROLE, SKILL, README, CONTRACT)
     for cue in (

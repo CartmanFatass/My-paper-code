@@ -42,6 +42,12 @@ portfolio_cardinality=dynamic_explorer_derived
 portfolio_initial_owner_concurrency_ceiling=3
 portfolio_completion_owner=independent_research_explorer
 portfolio_procedure_pointer=.agents/skills/hmasd-research-scheduler/SKILL.md
+effective_cycle_event=one_explorer_owned_c_level_key_breakthrough
+effective_cycle_owner=independent_research_explorer
+effective_cycle_count_authority=explicit_canonical_result_declaration_only
+effective_cycle_scheduler_observation=mechanically_confirm_declaration_and_exact_canonical_result_locator
+effective_cycle_science_inference=forbidden
+effective_cycle_initial_count=0_confirmed_c_level_breakthrough_cycles
 post_result_lifecycle=direct_exact_handle_read|archive_exact_handle|optional_roster_cleanup
 archive_ambiguity=direct_exact_handle_or_user_resolution
 reload_active_discovery=known_exact_handles_only
@@ -94,6 +100,20 @@ order belong to the Explorer assignment/capsule. The Scheduler may launch
 fewer than three and serializes only a named dependency or observed resource or
 write conflict; it never fills slots, invents readiness, reprioritizes, merges,
 retires or scientifically selects assignments.
+
+An effective cycle is one completed Explorer-owned C-level key breakthrough.
+The Scheduler increments the lifecycle count only when an Independent Research
+Explorer-owned canonical result explicitly declares and substantiates one
+C-level key breakthrough and provides its exact canonical result locator. The
+Scheduler may mechanically confirm that declaration and locator, but it must
+not infer C from technical facts, evaluate the science, rewrite or merge the
+result, or relay a semantic conclusion. Portfolio freeze or portfolio selection, CPM
+`CODE_ACCEPTED`, technical acceptance or integration, ordinary Explorer
+intake, wait/archive, resource or admission events, and lifecycle terminals are
+non-counting even when they are useful prerequisites. The corrected run count
+is 0 confirmed C-level breakthrough cycles until Explorer canonical artifacts
+explicitly say otherwise; this changes lifecycle counting only and does not
+reinterpret research state.
 
 Post-result capability is direct `read_thread`/archive against the exact
 `threadId`+`hostId` handle. The Scheduler mechanically confirms only the
