@@ -67,3 +67,22 @@ This package does not read or reconstruct any earlier-treatment artifact,
 checkpoint, optimizer state, RNG state, seed, root, trajectory or result. No
 terminal authorizes retry, rescue, sweep, added cells, C, formal compute,
 promotion, retirement, or External Pro.
+
+## Retained publication result
+
+- Source commit: `8f3bba4a8e86a4706bd7510f070f97377ff873ec`.
+- Retained full run: one full run, no retry; operator receipt is `ERROR` and
+  validator status is `B7 artifact validation failed: fidelity witness failed`.
+- Code-defined terminal branch: `B7_INVALID_OR_UNIDENTIFIED`.
+- Activity counts are exact: 918 unique complete episodes, 44,064 transitions
+  and policy calls, 144 learner/trainer calls and optimizer updates, 288
+  physical trajectory references, and 576 learner-batch episode references
+  (with 144 common-data episodes, 486 evaluation episodes, 288 prefix
+  episodes, 144 clip calls, and zero retry/rescue/sweep/checkpoint selection).
+- The first failed fidelity witness is
+  `grad_component_sum_exact=false`, with maximum absolute discrepancy
+  `5.960464477539062e-07`; all other retained structural, configuration,
+  count, panel, clone, clip, finite, evaluation, and coherence witnesses are
+  preserved as recorded in the result artifact.
+- This is a mechanical invalid/unidentified outcome only: no reconstruction,
+  rescue, retry, expansion, or scientific acceptance is permitted or implied.
