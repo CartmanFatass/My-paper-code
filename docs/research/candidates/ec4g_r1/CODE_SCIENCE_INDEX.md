@@ -284,3 +284,53 @@ publication are not part of this implementation receipt and remain CPM-owned.
 | Finite same-commit inventory is resolved once and frozen before roles | `experiments/candidates/ec4g_r1/prospective_contract_binding_audit.py::freeze_inventory` | `tests/experiments/candidates/ec4g_r1/test_prospective_contract_binding_audit.py::test_real_publication_inventory_freezes_exact_five_paths_before_role_inspection` |
 | Exact fourteen-role validation, A1/synthetic exclusion, and frozen precedence | `::audit_frozen_inventory`; `::_candidate_issues`; `::_cross_object_issues` | `::test_publication_snapshot_technical_smoke_is_partial_and_retains_fourteen_missing_witnesses`; `::test_ambiguous_binding_precedes_missing_and_retains_both_witness_sets`; `::test_complete_preexisting_binding_requires_all_fourteen_exact_coherent_objects` |
 | One-shot artifact and zero runtime/stochastic activity | `scripts/run_ec4g_a2_prospective_contract_binding_audit.py::main`; `::_write_new` | `::test_runner_existing_output_aborts_before_inventory_freeze`; `::test_runner_writes_one_canonical_registered_artifact`; `::test_all_runtime_and_stochastic_activity_is_exactly_zero` |
+
+## EC4G-A3 complete RER3 prospective binding audit source
+
+`EC4G-A3-RER3-COMPLETE-PROSPECTIVE-BINDING-AUDIT` is a zero-runtime,
+two-snapshot binding audit for
+`CAND-VAP-EC4G-R1@rer3-prospective-complete-v8`. The immutable C0 source is
+`docs/research/candidates/ec4g_r1/EC4G_RER3_COMPLETE_CONTRACT_V1.json` at
+commit `c0beef960f5f731f0c994ecd2298a1e889210c7b`, blob
+`6d37b33c933ee16f89186a507e67e1080b674ca0`, and SHA-256
+`0d0c9b6f24ae2bb96fc0a3f542c737557f1cd66be1edbdb72d809dfce9bb0183`.
+The deterministic C1 source is
+`docs/research/candidates/ec4g_r1/EC4G_RER3_BINDING_RECORD_V1.json`: exactly
+fourteen ordered rows, each binding the role/object ID, RFC6901 pointer, C0
+commit/path/blob/SHA, canonical subtree SHA, exact `common_literals` tuple and
+`total=true`. It contains no predicted C1 identity.
+
+The runner requires the externally supplied actual C1 checkout commit, rejects
+an existing output before snapshot or role inspection, freezes only the C0
+contract blob and C1 binding blob, and writes one canonical artifact with
+exclusive creation. The analyzer rejects invalid UTF-8, duplicate keys,
+nonfinite/bare noninteger numbers and noncanonical binding bytes. It applies
+the frozen precedence `A3_FREEZE_PAIR_INVALID`,
+`A3_POST_FREEZE_CHANGE_OR_IMPORT`, `A3_AMBIGUOUS_ROLE_BINDING`,
+`A3_PARTIAL_OR_SCIENTIFICALLY_INCOHERENT_CONTRACT`, then
+`A3_COMPLETE_PROSPECTIVE_CONTRACT_BINDING`.
+
+On the complete branch it inspects exactly fourteen roles and declares three
+cells, twenty-one cell-arms, and 243 finite outcome-support points. It checks
+the exact coherence tuple, dimensions, probabilities, diagonal PSD covariance,
+one-time costs, total state/receipt/fallback/donor/compiler/support definitions,
+positive configured mass and exact normalization. It only inspects the two map
+definitions and their predeclared predictions: map calls, program compilation,
+program comparison and `D_RER3` calculation are structurally fixed at zero,
+along with every runtime, learning, stochastic, retry, rescue and rescan count.
+
+### A3 source traceability
+
+| Assertion | Implementation | Focused proof |
+|---|---|---|
+| Exact deterministic fourteen-row C0-derived record, canonical subtree hashes, coherence and no C1 self-reference | `experiments/candidates/ec4g_r1/rer3_complete_prospective_binding_audit.py::derive_binding_record`; `::freeze_snapshot_pair` | `tests/experiments/candidates/ec4g_r1/test_rer3_complete_prospective_binding_audit.py::test_c0_worktree_materialization_normalizes_to_the_exact_read_only_blob_identity`; `::test_binding_record_is_exact_canonical_deterministic_fourteen_row_derivation`; `::test_c1_self_reference_invalidates_the_freeze_pair` |
+| Strict two-blob freeze, branch precedence and fourteen retained witnesses | `::freeze_snapshot_pair`; `::audit_frozen_pair` | `::test_strict_utf8_duplicate_nonfinite_and_canonical_mutations_invalidate_freeze`; `::test_post_freeze_change_precedes_all_role_inspection`; `::test_ambiguous_binding_precedes_missing_and_retains_both_witness_sets` |
+| Exact scientific structure is inspected without maps, compilation, comparison or D calculation | `::_scientific_issues`; `::_result` | `::test_complete_pair_inspects_exact_counts_and_never_executes_forbidden_activity`; `::test_scientific_literal_validators_reject_probability_psd_cost_support_and_mass_mutations` |
+| Actual external C1 identity, pre-inspection output guard and write-once canonical artifact | `scripts/run_ec4g_a3_rer3_complete_prospective_binding_audit.py::main`; `::_write_new` | `::test_runner_preflights_existing_output_before_source_or_snapshot_inspection`; `::test_runner_rejects_declared_c1_that_is_not_the_actual_checkout`; `::test_runner_writes_one_canonical_registered_result` |
+
+A complete A3 branch establishes only immutable complete prospective binding
+and eligibility for Explorer to consider a separately frozen future census.
+It is not an observed `0.25` result, map/program comparison, return/value
+claim, A2 repair, runtime readiness decision, technical acceptance, or census
+authorization. The registered audit, result publication, readiness receipt and
+CPM acceptance are deliberately not executed by this source package.
