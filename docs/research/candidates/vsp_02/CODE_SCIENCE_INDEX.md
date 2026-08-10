@@ -51,6 +51,31 @@ used-information comparator in the fixed synthetic instance. It does not support
 policy value, adaptive-duration retirement in general, production bookkeeping,
 return, deployment, or new physical worlds.
 
+## Owner-action-responsive lifecycle A1 source
+
+```text
+treatment=VSP02-A1-OWNER-ACTION-RESPONSIVE-LIFECYCLE
+candidate=CAND-VSP-02@adversarial-revision-v8
+source=experiments/candidates/vsp_02/owner_action_responsive_lifecycle.py
+runner=scripts/run_vsp02_a1_owner_action_responsive_lifecycle.py
+tests=tests/experiments/candidates/vsp_02/test_owner_action_responsive_lifecycle.py
+evidence=A_READONLY_OR_ZERO_RUNTIME
+registered_activity_cap=one deterministic invocation; all environment/policy/learner/trainer/optimizer/return/model-fit counts zero
+scope=lifecycle actionability certificate only
+```
+
+This A1 package is independent of the earlier duration-escrow value
+conformance above.  It binds an immutable owner epoch and behavior version,
+separates authoritative membership from visible roster state, makes candidate
+`RELEASE` an idempotent causal stopping edge, and keeps the matched Z0
+post-claim `RELEASE` command log-only.  Its registered first observation is
+the committed post-boundary phase on one matched positive-survival tape.
+
+The package does not reuse the earlier synthetic return calculation as a
+lifecycle certificate.  It makes no claim about learning, value, escrow
+superiority, adaptive superiority, production deployment, promotion,
+retirement, B/C readiness, or formal-compute readiness.
+
 ## Byte-stable raw audit output
 
 Command: `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -B experiments/candidates/vsp_02/duration_escrow_oracle.py`
