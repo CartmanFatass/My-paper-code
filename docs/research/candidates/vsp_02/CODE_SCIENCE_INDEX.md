@@ -53,6 +53,20 @@ return, deployment, or new physical worlds.
 
 ## Owner-action-responsive lifecycle A1 source
 
+Accepted registered result:
+`A1_OWNER_ACTION_RESPONSIVE_LIFECYCLE_SUPPORTED`. The sole invocation was
+`vsp02_a1_617290fb_r1` at source commit
+`617290fb333d3dcd5ebf47525fcca04e05b0cce9`. The byte-exact public artifact is
+`docs/research/candidates/vsp_02/VSP02_A1_OWNER_ACTION_RESPONSIVE_LIFECYCLE_RESULT.json`
+(SHA-256
+`68e91ead4d1cc2ab838de79f6fffcbf8665c266f11de95ea8ab9b083d25e9b4f`).
+Its matched 2x2 separator is candidate `RELEASE=ENDED_RELEASE`, candidate
+`HOLD=ACTIVE`, Z0 `RELEASE=ACTIVE`, and Z0 `HOLD=ACTIVE`. The artifact records
+one registered deterministic A invocation and zero environment, policy,
+learner, trainer, optimizer, return-evaluation, model-fit, stochastic, or
+retry/rescue/sweep activity. This certifies only the frozen lifecycle action
+edge and its matched-control boundary.
+
 ```text
 treatment=VSP02-A1-OWNER-ACTION-RESPONSIVE-LIFECYCLE
 candidate=CAND-VSP-02@adversarial-revision-v8
