@@ -180,3 +180,25 @@ Registered result command (reserved for CPM-authorized result execution):
 ```powershell
 & 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' scripts/run_recct_a1_directed_edge_masked_update_binding.py
 ```
+
+## RECCT-A1 registered audit publication (2026-08-10)
+
+The technically verified result is materialized at
+`RECCT_A1_DIRECTED_EDGE_MASKED_UPDATE_BINDING_RESULT.json` from the
+PowerShell-captured UTF-16LE input
+`temp/sessions/code_project_manager/recct_a1_registered_audit_010da9a8_r1/raw_result.json`.
+The source commit is `010da9a8bc3204d2363cfebaed022b130baa08e1` on branch
+`A1_DIRECTED_EDGE_BINDING_PASS`. Input SHA-256 is
+`86acb6f2a1ebe978421a632f25ea1fde5233df3b677c89dc70007e92ff56aef1`;
+canonical public UTF-8 (sorted keys, indent=2, LF) SHA-256 is
+`11880d1db9e9c8c2691c26ca4442756d4567f2d08a9eeeec8d891627f5febd8e`.
+Independent parsing of both encodings asserted semantic equality.
+
+The receipt records masks `00`, `10`, `01`, `11`, plus a fresh selected `10`
+commit; five learner calls and five optimizer transitions; and zero environment,
+policy, trainer, evaluation, model-fit, and retry calls. All seven checks are
+true. Claims are strict finite-host observations only and make no value,
+performance, generalization, or scientific nonclaims beyond the recorded
+mechanical binding. The Experiment Operator terminal `ERROR` is solely because
+the train/evaluate/analyze receipt schema does not apply to this single audit;
+the underlying runner exited 0 and retained mechanical validation passed.
