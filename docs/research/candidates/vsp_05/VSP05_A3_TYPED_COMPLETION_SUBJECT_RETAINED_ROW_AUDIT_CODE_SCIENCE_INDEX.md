@@ -79,3 +79,14 @@ This implementation index records code semantics only. It is not a published
 A3 result or technical acceptance record. Even the strongest scientific branch
 could only make a separately named B design question askable; this package does
 not select or implement B, C, External Pro, promotion, or retirement.
+
+## Registered publication receipt (source commit 021d9bdfe733fc17cdfb9289a1b33e32008917fe)
+
+The sole registered invocation terminated at `A3_INVALID_CONTRACT`: the runner
+rejected the absolute accepted input path at registered-path binding. Therefore
+`real_rows_read=0`, `registered_offline_audits=1`, and every runtime, retry,
+recovery, rescue, expansion, transition, proposal, executor, learner, trainer,
+optimizer, evaluation, and new-trace count is zero. The operator receipt is
+`ERROR`; there was no corrected invocation, retry, new trace, runtime, or
+recovery. This is a technical-acceptance rejection of the attempted audit
+artifact and carries no scientific implication.
