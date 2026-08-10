@@ -45,10 +45,14 @@ $explorerValidationSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agen
 $explorerValidationSkillNormalized = $explorerValidationSkill -replace '\s+', ' '
 $explorerValidationContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md')
 $explorerValidationContractNormalized = $explorerValidationContract -replace '\s+', ' '
+$sessionWorkspaceContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SESSION_WORKSPACE_CONTRACT.md')
+$workflowDefectQueue = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md')
 $publicHandoffContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/handoffs/README.md')
 $publicHandoffContractNormalized = $publicHandoffContract -replace '\s+', ' '
 $retiredExplorerValidationScriptPath = Join-Path $repo '.agents/skills/hmasd-explorer-project-validation/scripts/explorer_project_packet.py'
 $agileNormalized = $agile -replace '\s+', ' '
+$sessionWorkspaceContractNormalized = $sessionWorkspaceContract -replace '\s+', ' '
+$workflowDefectQueueNormalized = $workflowDefectQueue -replace '\s+', ' '
 $projectCognitionReferencePaths = @(
     $projectCognitionBootstrapPath,
     $codeContextGuidePath,
@@ -178,6 +182,65 @@ foreach ($required in @(
     'never reads `local_research/`')) {
     if (-not $explorerValidationContractNormalized.Contains($required)) {
         throw "Explorer validation contract missing semantic rule: $required"
+    }
+}
+
+$actionBearingSurfaces = @($codePmNormalized, $agileNormalized, $sessionWorkspaceContractNormalized) -join ' '
+foreach ($required in @(
+    'docs/project/current-work/common/explorer_project_validation.md',
+    'Direction/treatment',
+    'Explorer request and handoff locator',
+    'frozen scientific meaning and explicit exclusions',
+    'CPM engineering/runtime action',
+    'current technical phase in full prose',
+    'completed technical evidence',
+    'missing engineering object',
+    'runtime class/units and current admission reason',
+    'dependency/path/resource conflict',
+    'result destination',
+    'next owner and return/intake boundary',
+    'only complete Explorer handoffs',
+    'parked without a successor is absent',
+    'Every cell is meaningful',
+    'owner-local human-readable projection',
+    'not a schema, queue, scheduler, process monitor, runtime-capacity source, admission source or acceptance source',
+    '`active_assignment_id` remains only the foreground pointer')) {
+    if (-not $actionBearingSurfaces.Contains($required)) {
+        throw "Action-bearing Technical Treatment View contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'status-only `parked|ready|pending|accepted|blocked|waiting for CM|intake complete|next selection required|CODE_ACCEPTED`',
+    'current evidence and exact paths',
+    'frozen/unfrozen scientific meaning and explicit exclusions',
+    'why CPM or Explorer is or is not needed',
+    'exact owner/action',
+    'concrete inputs/locators',
+    'completion evidence',
+    'return/intake boundary',
+    'Missing or contradictory meaning preserves the original',
+    'asks one exact clarification',
+    'continues unrelated work',
+    'never guesses or emits `BLOCKED`',
+    'parked is Explorer-local',
+    'no scientifically complete frozen live successor handoff',
+    'CPM never parks or retires a direction and never invents successor science',
+    'retired is a separate Explorer scientific terminal disposition',
+    'Missing DTO/adapter/runner/test connection/ordinary engineering object is pending implementation and belongs to CPM, never a reason to park',
+    'pending_runtime_capacity` remains only runtime admission for a not-yet-started frozen treatment',
+    'parked route does not pause siblings, existing treatments, read-only science or portfolio exploration')) {
+    if (-not $actionBearingSurfaces.Contains($required)) {
+        throw "Action-bearing Explorer/CPM semantics missing: $required"
+    }
+}
+foreach ($required in @(
+    'accepted-plan/VALIDATING',
+    'scheduler=false',
+    'global_blocker=false',
+    'science/runtime effect=none',
+    'ACTION_BEARING_STATUS_ONLY_HANDOFF_GAP')) {
+    if (-not $workflowDefectQueueNormalized.Contains($required)) {
+        throw "Action-bearing workflow incident missing: $required"
     }
 }
 foreach ($required in @(
@@ -360,6 +423,33 @@ foreach ($required in @(
     'no global serial fallback, scientific reprioritization or down-classing')) {
     if (-not $codePmNormalized.Contains($required)) {
         throw "Code Project Manager parallel-first contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'runtime_capacity_pool_units=3',
+    'sole operational owner of the three-unit runtime pool',
+    'independent_admitted_treatment_execution=parallel_first_within_capacity',
+    'runtime_admission_judgment=admit|up-class|pending_runtime_capacity')) {
+    if (-not $codePmNormalized.Contains($required)) {
+        throw "Three-unit CPM ownership must remain in the Role: $required"
+    }
+}
+foreach ($required in @(
+    'runtime_capacity_pool_units=3',
+    'event-driven Explorer continuation',
+    'independent_admitted_treatment_execution=parallel_first_within_capacity',
+    'runtime_admission_judgment=admit|up-class|pending_runtime_capacity')) {
+    if (-not $agileNormalized.Contains($required)) {
+        throw "Three-unit/event-driven CPM ownership must remain in the Skill: $required"
+    }
+}
+foreach ($required in @(
+    'scheduler=false',
+    'global_blocker=false',
+    'No polling, queue or inferred path scan is part of this contract')) {
+    if (-not $workflowDefectQueueNormalized.Contains($required) -and
+        -not $sessionWorkspaceContractNormalized.Contains($required)) {
+        throw "Workflow remains non-scheduler/non-queue: $required"
     }
 }
 foreach ($required in @(

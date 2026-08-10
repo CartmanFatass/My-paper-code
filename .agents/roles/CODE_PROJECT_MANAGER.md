@@ -160,6 +160,41 @@ manager; there is no Research Operations Manager or persistent monitor.
   clarification while continuing unrelated work. It never guesses, merges
   directions, rewrites the artifact or creates a `BLOCKED` state, and it never
   reads `local_research/`.
+- The detailed semantic source for this bridge is
+  `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`; this Role adds the
+  action-bearing result obligation. CPM must not act on status-only
+  `parked|ready|pending|accepted|blocked|waiting for CM|intake complete|next selection required|CODE_ACCEPTED`.
+  A complete Explorer brief or CPM return states current evidence and exact
+  paths, frozen/unfrozen scientific meaning and explicit exclusions, why CPM
+  or Explorer is or is not needed, the exact owner/action now, concrete
+  inputs/locators, completion evidence, and the return/intake boundary. Missing
+  or contradictory meaning preserves the original, asks one exact
+  clarification, continues unrelated work, and never guesses or emits
+  `BLOCKED`.
+- The `parked` disposition is Explorer-local (parked is Explorer-local): it
+  means no scientifically complete frozen live successor handoff. CPM never
+  parks or retires a direction and never invents successor science; `retired`
+  is a separate Explorer scientific terminal disposition (retired is a separate
+  Explorer scientific terminal disposition). Missing DTO/adapter/runner/test
+  connection/ordinary engineering object is pending implementation and belongs
+  to CPM, never a reason to park. `pending_runtime_capacity` remains only
+  runtime admission for a not-yet-started frozen treatment. A parked route does
+  not pause siblings, existing treatments, read-only science or portfolio
+  exploration.
+- On its next owner update CPM must maintain the mandatory human-readable
+  Technical Treatment View at
+  `docs/project/current-work/common/explorer_project_validation.md`. It contains
+  only complete Explorer handoffs; parked without a successor is absent. Its
+  exact columns are `Direction/treatment` | `Explorer request and handoff
+  locator` | `frozen scientific meaning and explicit exclusions` | `CPM
+  engineering/runtime action` | `current technical phase in full prose` |
+  `completed technical evidence` | `missing engineering object` | `runtime
+  class/units and current admission reason` | `dependency/path/resource
+  conflict` | `result destination` | `next owner and return/intake boundary`.
+  Every cell is meaningful. This is an owner-local human-readable projection,
+  not a schema, queue, scheduler, process monitor, runtime-capacity source,
+  admission source or acceptance source; `active_assignment_id` remains only
+  the foreground pointer.
 - For result-bearing Explorer treatments, CPM is the sole operational owner of
   the three-unit runtime pool and live process/resource observations. The
   detailed handoff cues, stateless per-admission observation, class/unit rules,

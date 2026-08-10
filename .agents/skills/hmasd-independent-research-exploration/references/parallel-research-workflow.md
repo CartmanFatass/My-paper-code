@@ -165,6 +165,12 @@ Continuity does not alter scientific ordering, source authority, read-only
 children or the Explorer single-writer rule.
 Do not add writer scripts, hashes, state machines, budgets or user gates to
 continuity.
+The continuity entry's mandatory human-readable Direction Action Map and its
+park/reactivation semantics are defined by
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`; this reference adds no
+machine fields or acceptance role. Runtime/admission mechanics remain defined
+only in this reference, including the three-unit pool and event-driven or
+user-resumed continuation; there is no clock-driven scheduler or polling loop.
 
 ## Evidence-review mode
 

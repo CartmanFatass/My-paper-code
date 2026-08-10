@@ -140,6 +140,17 @@ contradictory binding preserves the original artifact and asks one concrete
 clarification while unrelated research continues; never guess, merge, rewrite
 or create a `BLOCKED` state.
 
+The same contract is the single source for the strong action-bearing semantic
+minimum. Every Explorer brief, CPM result and native fallback is human-readable
+and must state current evidence with exact paths/locators, frozen versus
+unfrozen facts/choices, why CPM or Explorer is or is not needed now, the exact
+owner and permitted action, concrete inputs, completion evidence, and the return
+destination/intake boundary. A status-only label never supplies that meaning.
+The contract also defines the Explorer-local parked, pending-implementation,
+pending-runtime and retired distinctions and the mandatory owner-local
+Direction Action Map; this Skill points to it without creating a schema or
+editing `local_research/`.
+
 ## Choose exactly one research mode
 
 Use **evidence review** to determine what existing sources establish. Create an

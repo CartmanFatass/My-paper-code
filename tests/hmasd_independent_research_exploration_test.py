@@ -1212,3 +1212,105 @@ def test_explorer_mechanical_child_is_context_isolated_from_science() -> None:
         "explorer_mechanical_campaign_effect=none",
     ):
         assert required in parallel.lower()
+
+
+def test_action_bearing_minimum_rejects_status_only_handoffs() -> None:
+    """A label cannot stand in for an actionable Explorer/CPM conversation."""
+    contract = (
+        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    ).read_text(encoding="utf-8")
+    normalized = " ".join(contract.split())
+    for required in (
+        "Every Explorer brief, CPM result and Codex-native fallback is a human-readable",
+        "current evidence and exact paths",
+        "which facts and choices are frozen",
+        "which facts or choices remain unfrozen",
+        "why CPM is needed now",
+        "why Explorer is needed now",
+        "the exact owner and the permitted action now",
+        "concrete inputs and locators",
+        "evidence that will demonstrate completion",
+        "return destination and the scientific/intake boundary",
+        "Status-only text is insufficient",
+        "parked",
+        "waiting for CM",
+        "CODE_ACCEPTED",
+        "does not infer an action from a token",
+    ):
+        assert required in normalized, required
+
+
+def test_parked_pending_and_retired_are_distinct_scientific_dispositions() -> None:
+    contract = (
+        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    ).read_text(encoding="utf-8")
+    normalized = " ".join(contract.split())
+    for required in (
+        "Explorer-local scientific disposition only",
+        "meaning-changing scientific object",
+        "objective, information object, population/support, intervention, estimand, comparator",
+        "not retired, pending implementation, pending runtime",
+        "a queue state, `BLOCKED` or a global barrier",
+        "missing DTO, adapter, runner, test connection",
+        "routes to CPM and cannot be parked",
+        "`retired` is a separate explicit terminal disposition",
+        "reactivates only when its recorded prospective condition is met",
+        "Parking never pauses siblings, active CPM treatments, read-only science",
+        "CPM reads a park as no live successor handoff and must not invent an experiment",
+    ):
+        assert required in normalized, required
+
+
+def test_direction_action_map_is_exact_and_non_authoritative() -> None:
+    contract_path = REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    contract = contract_path.read_text(encoding="utf-8")
+    normalized = " ".join(contract.split())
+    exact_columns = (
+        "Direction | current scientific question | existing evidence and paths | "
+        "missing object | scientific disposition in full prose | whether CPM is needed now and why | "
+        "exact next owner | exact next action | trigger/dependency | handoff/result locator | "
+        "runtime class/units when applicable | post-return intake/reactivation action"
+    )
+    assert exact_columns in contract
+    for required in (
+        "mandatory human-readable, owner-local Direction Action Map",
+        "local_research/RESEARCH_CONTINUITY.md",
+        "Every cell contains meaningful current facts",
+        "not a machine schema, queue, scheduler, registry, runtime-admission source or acceptance source",
+        "docs/project/current-work/common/explorer_project_validation.md",
+        "CPM-owned projection/pointer only",
+        "a park without a frozen successor is absent",
+        "This slice never edits that CPM-owned view",
+    ):
+        assert required in normalized, required
+
+
+def test_runtime_capacity_and_event_driven_rules_have_one_detailed_source() -> None:
+    parallel_path = (
+        REPO
+        / ".agents"
+        / "skills"
+        / "hmasd-independent-research-exploration"
+        / "references"
+        / "parallel-research-workflow.md"
+    )
+    parallel = " ".join(parallel_path.read_text(encoding="utf-8").split())
+    contract = (
+        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+    ).read_text(encoding="utf-8")
+    workflow_map = (REPO / "docs" / "project" / "WORKFLOW_MAP.md").read_text(
+        encoding="utf-8"
+    )
+    for required in (
+        "runtime_capacity_units_total=3",
+        "B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive",
+        "runtime_admission_judgment=admit|up-class|pending_runtime_capacity",
+        "Explorer progress is event-driven or user-resumed",
+        "there is no clock-driven scheduler or polling loop",
+        "not a queue record, lease, registry, history entry or scheduler state",
+    ):
+        assert required in parallel, required
+    for surface in (contract, workflow_map):
+        normalized = " ".join(surface.split())
+        assert "parallel-research-workflow.md" in normalized
+        assert "three-unit runtime-capacity" not in normalized

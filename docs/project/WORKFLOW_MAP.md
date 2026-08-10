@@ -64,10 +64,15 @@ multi-direction user question may name several directions without authorizing
 portfolio preload. Portfolio/index/README/continuity surfaces remain
 pointer-only; a missing binding gets one semantic clarification while
 unrelated work continues rather than a new workflow state.
+The same contract is the single source for the human-readable action-bearing
+brief/result minimum, parked-versus-pending/retired dispositions and the
+Explorer-local Direction Action Map. This map remains an owner-local continuity
+view, not a machine schema, queue, scheduler, runtime-admission or acceptance
+source; this orientation document does not duplicate it.
 
 For result-bearing experiments, Explorer owns the scientific active roster,
 direction-local predecessor/intake context and per-result scientific intake;
-CPM owns the three-unit runtime-capacity admission, live process/resource
+CPM owns runtime-capacity admission, live process/resource
   observations, isolated execution and per-artifact technical acceptance. A
   handoff may describe prospective runtime class/units in prose, but its A/B/C
   scientific evidence level is independent and CPM never infers runtime class or

@@ -39,6 +39,14 @@ only for a materially missing authority, scientific choice or concrete input
 object. A missing schema, `document_kind`, validator receipt, hash, byte count
 or fingerprint is never a blocker.
 
+The strong action-bearing semantic minimum for every Explorer brief, CPM result
+and Codex-native fallback is defined once in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. The prose must carry
+current evidence and exact locators, frozen and unfrozen facts/choices, why each
+owner is or is not needed now, the permitted owner/action, completion evidence,
+and the return/intake boundary; status-only labels are insufficient. This file
+defines only the exchange-file ownership and temporary-copy boundary.
+
 Direction-specific briefs and reverse results follow the direction-local
 context binding in
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer selects one

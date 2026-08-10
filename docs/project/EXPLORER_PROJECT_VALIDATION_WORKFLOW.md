@@ -61,6 +61,62 @@ guesses, merges directions, rewrites the artifact or creates a `BLOCKED` state.
 Portfolio, index, README and continuity surfaces remain pointer-only
 navigation or phase-barrier views and do not become duplicate decision records.
 
+## Strong action-bearing semantic minimum
+
+Every Explorer brief, CPM result and Codex-native fallback is a human-readable,
+conclusion-first action brief. It must state in complete prose (a label may
+follow, but never replace the prose):
+
+- the current evidence and exact paths or other concrete locators;
+- which facts and choices are frozen, and which facts or choices remain
+  unfrozen;
+- why CPM is needed now, or why CPM is not needed now, and why Explorer is
+  needed now, or why Explorer is not needed now;
+- the exact owner and the permitted action now, including concrete inputs and
+  locators;
+- the evidence that will demonstrate completion; and
+- the return destination and the scientific/intake boundary after return.
+
+Status-only text is insufficient. `parked`, `ready`, `pending`, `accepted`,
+`blocked`, `waiting for CM`, `intake complete`, `next selection required` and
+`CODE_ACCEPTED` (or any equivalent terminal/status token) may appear only after
+that complete meaning is written. A receiver preserves the original brief and
+asks one exact clarification when this meaning is missing or contradictory; it
+does not infer an action from a token.
+
+## Explorer scientific dispositions and action map
+
+`parked` is an Explorer-local scientific disposition only when no scientifically
+complete frozen CPM successor exists because a meaning-changing scientific
+object is missing: an objective, information object, population/support,
+intervention, estimand, comparator or equivalent. It is not retired, pending
+implementation, pending runtime (pending-implementation/pending-runtime), a
+queue state, `BLOCKED` or a global barrier. A missing DTO, adapter, runner, test
+connection or other ordinary engineering object routes to CPM and cannot be
+parked. `retired` is a separate explicit
+terminal disposition. A parked direction reactivates only when its recorded
+prospective condition is met and Explorer freezes a successor. Parking never
+pauses siblings, active CPM treatments, read-only science or portfolio
+exploration; CPM reads a park as no live successor handoff and must not invent an
+experiment.
+
+Explorer maintains a mandatory human-readable, owner-local Direction Action Map
+in `local_research/RESEARCH_CONTINUITY.md`. This contract defines the map
+only; WDM and workflow children do not edit `local_research/`. The exact columns
+are:
+
+```text
+Direction | current scientific question | existing evidence and paths | missing object | scientific disposition in full prose | whether CPM is needed now and why | exact next owner | exact next action | trigger/dependency | handoff/result locator | runtime class/units when applicable | post-return intake/reactivation action
+```
+
+Every cell contains meaningful current facts, not a status-only token. The map
+is not a machine schema, queue, scheduler, registry, runtime-admission source
+or acceptance source. The CPM Technical Treatment View at
+`docs/project/current-work/common/explorer_project_validation.md` is a
+CPM-owned projection/pointer only: it contains treatments with complete Explorer
+handoffs, while a park without a frozen successor is absent. This slice never
+edits that CPM-owned view.
+
 ## Scientific-only intake boundary
 
 This boundary is prospective and begins after CPM technical acceptance. Explorer
@@ -111,15 +167,13 @@ questions to Scout. Explorer may use zero, one or several of them and never
 treats this capability map as a required panel.
 Several read-only questions may run in parallel, while Explorer keeps at most
 one result-bearing experiment active per direction by default. Independent
-ordinary A/B treatments from different directions may overlap inside the
-three-unit CPM runtime pool. The exact capacity, direction-barrier and frozen
-joint-roster exception live in the exploration Skill's
-`parallel-research-workflow.md`; this bridge owns only direction-local binding
-and scientific intake. The parallel-research reference is the single detailed
-source for capacity, stateless per-admission observation, runtime class/units,
-barrier and resource behavior; this bridge grants no second runtime procedure.
-Detailed capacity, admission, barrier and resource behavior is defined only by
-that parallel-research reference.
+ordinary A/B treatments from different directions may overlap when the
+capacity contract permits. Runtime/admission, direction-barrier and
+frozen-joint-roster mechanics live only in the exploration Skill's
+`parallel-research-workflow.md`; this bridge owns direction-local binding and
+scientific intake and grants no second runtime procedure. Detailed capacity,
+admission, barrier and resource behavior is defined only by that
+parallel-research reference.
 
 This boundary is semantic guidance rather than a mandatory packet schema or
 validator admission gate. This boundary does not invoke External Pro, migrate

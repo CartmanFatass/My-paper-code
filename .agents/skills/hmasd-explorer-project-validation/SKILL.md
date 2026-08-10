@@ -106,11 +106,9 @@ retry record or admission status. CPM may process independent direction-local
 candidates concurrently when the capacity contract permits; the supplied order
 is organization rather than ranking, runtime admission or a cross-direction
 barrier. Every candidate keeps its own handoff, ticket, roots, receipt,
-technical acceptance and scientific intake. The three-unit pool, stateless
-per-admission observation, parallel-first rule, direction-local barriers,
-heavy-pool exclusivity and pending-runtime-capacity continuation are defined
-only by the referenced parallel-research workflow; this Skill grants no second
-runtime procedure or serial fallback.
+technical acceptance and scientific intake. Runtime and admission mechanics are
+defined only by the referenced `parallel-research-workflow.md`; this Skill
+grants no second runtime procedure or serial fallback.
 
 CPM reads the named public brief, uses engineering judgment and performs
 bounded safe read-only reconnaissance. It proceeds when the task is

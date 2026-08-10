@@ -252,6 +252,15 @@ owns scientific/advisory interpretation. The validation Skill and
 mechanics, direction-local context and named Pro triggers;
 External Pro remains final scientific-semantic acceptance when invoked.
 
+That workflow contract is the single semantic source for the strong
+action-bearing minimum: every Explorer brief, CPM result and native fallback
+must explain evidence and exact locators, frozen and unfrozen facts/choices,
+why each owner is or is not needed now, the permitted owner/action, completion
+evidence and the return/intake boundary. Status-only labels never substitute
+for that meaning. The contract also defines the Explorer-local parked-versus-
+pending/retired dispositions and the mandatory Direction Action Map; this Role
+does not create a second schema or edit the Explorer continuity file.
+
 Explorer maintains the scientific `active_experiment_roster`: each entry binds
 one direction, treatment, frozen design, declared resource class, direction-local
 dependency, handoff/CPM locator, last CPM-reported runtime observation and

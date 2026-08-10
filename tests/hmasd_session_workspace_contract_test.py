@@ -84,6 +84,63 @@ def test_public_current_work_is_partitioned_and_owned() -> None:
     assert "owner_role=workflow_design_manager" in wdm_common
 
 
+def test_cpm_action_bearing_technical_treatment_view_is_projection_only() -> None:
+    contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split())
+    role = " ".join(_text(".agents/roles/CODE_PROJECT_MANAGER.md").split())
+    agile = " ".join(_text(".agents/skills/hmasd-agile-research-development/SKILL.md").split())
+    surfaces = " ".join((contract, role, agile))
+    for required in (
+        "docs/project/current-work/common/explorer_project_validation.md",
+        "Direction/treatment",
+        "Explorer request and handoff locator",
+        "frozen scientific meaning and explicit exclusions",
+        "CPM engineering/runtime action",
+        "current technical phase in full prose",
+        "completed technical evidence",
+        "missing engineering object",
+        "runtime class/units and current admission reason",
+        "dependency/path/resource conflict",
+        "result destination",
+        "next owner and return/intake boundary",
+        "only complete Explorer handoffs",
+        "parked without a successor is absent",
+        "Every cell is meaningful",
+        "owner-local human-readable projection",
+        "not a schema, queue, scheduler, process monitor, runtime-capacity source, admission source or acceptance source",
+        "`active_assignment_id` remains only the foreground pointer",
+    ):
+        assert required in surfaces
+
+    for required in (
+        "status-only `parked|ready|pending|accepted|blocked|waiting for CM|intake complete|next selection required|CODE_ACCEPTED`",
+        "current evidence and exact paths",
+        "frozen/unfrozen scientific meaning and explicit exclusions",
+        "why CPM or Explorer is or is not needed",
+        "exact owner/action",
+        "concrete inputs/locators",
+        "completion evidence",
+        "return/intake boundary",
+        "Missing or contradictory meaning preserves the original",
+        "asks one exact clarification",
+        "continues unrelated work",
+        "never guesses or emits `BLOCKED`",
+        "parked is Explorer-local",
+        "no scientifically complete frozen live successor handoff",
+        "CPM never parks or retires a direction and never invents successor science",
+        "retired is a separate Explorer scientific terminal disposition",
+        "Missing DTO/adapter/runner/test connection/ordinary engineering object is pending implementation and belongs to CPM, never a reason to park",
+        "pending_runtime_capacity` remains only runtime admission for a not-yet-started frozen treatment",
+        "parked route does not pause siblings, existing treatments, read-only science or portfolio exploration",
+    ):
+        assert required in surfaces
+
+    assert "runtime_capacity_pool_units=3" in role
+    assert "event-driven Explorer continuation" in agile
+    assert "independent_admitted_treatment_execution=parallel_first_within_capacity" in role
+    assert "runtime_admission_judgment=admit|up-class|pending_runtime_capacity" in role
+    assert "This is not a runtime validator, state machine or new queue." in agile
+
+
 def test_durable_and_temporary_workspaces_remain_separate() -> None:
     contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
     normalized = " ".join(contract.split())
@@ -116,6 +173,9 @@ def test_wdm_defect_reports_are_logged_without_becoming_a_scheduler() -> None:
         "global_blocker=false",
         "report_authority=advisory_only",
         "hash_identity=forbidden",
+        "ACTION_BEARING_STATUS_ONLY_HANDOFF_GAP",
+        "accepted-plan/VALIDATING",
+        "science/runtime effect=none",
     ):
         assert required in queue
 
