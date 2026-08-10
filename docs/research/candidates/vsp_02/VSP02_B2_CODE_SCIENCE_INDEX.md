@@ -106,3 +106,15 @@ finite-cap learner-path contrast, not evidence of actor-critic incapacity,
 fixed-representation sufficiency, the cause of B1V2, temporal-credit or
 optimizer causality, sample efficiency, independently on-policy superiority,
 architecture superiority, lifecycle value, C, Pro, promotion, or retirement.
+
+## Registered full publication
+
+```text
+source_commit=bd0da64f851718cf0b5d59b144d99a7006ff2a73
+branch=B2_DIRECT_SUCCEEDED_ORIGINAL_FAILED
+aggregates=RL_ORIGINAL(mean_J_eval=0.9397548469844077,mean_kappa=0.003299876010273839,exact_correct_units=0/5)|SUP_TRUE(mean_J_eval=1.3270742974252738,mean_kappa=0.7692414868151642,exact_correct_units=5/5)|SUP_FLIP(mean_J_eval=0.17292570257472628,mean_kappa=-0.7692414868151644,exact_inverse_units=5/5)
+activity=environment_transitions=30160|training_episodes=5120|optimizer_updates=1920|evaluation_episodes=1920|checkpoints=15|result_bearing_runs=1
+caps=transitions<=145348|training_episodes<=5120|evaluation_episodes<=1920|updates<=1920|retry_rescue_sweep_extra_arm_seed_checkpoint=0
+full=one_registered_full|pure_validator=VALID|operator_receipt=temp/sessions/code_project_manager/vsp02_b2_operator_receipt.json
+nonclaims=localization-only; no actor-critic incapacity, temporal-credit, optimizer causality, sample efficiency, architecture superiority, lifecycle value, C, Pro, promotion, or retirement claim
+```
