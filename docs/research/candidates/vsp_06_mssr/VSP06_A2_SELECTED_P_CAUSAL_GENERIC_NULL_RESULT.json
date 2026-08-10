@@ -1,0 +1,371 @@
+{
+  "accepted_commits": {
+    "a1_final_package": "a62892e9487c8aad30cff1c83b1bbc46cb0df588",
+    "a1_result": "575e6cefa6d3cf7d1e84b782806147cd5e7f11f7",
+    "a1_source": "6ee1ee4efeddcc71175a0860ca52a9aa15bb2c1d"
+  },
+  "activity_counts": {
+    "action_rng_draws": 0,
+    "environment_rng_draws": 0,
+    "environment_transitions": 0,
+    "evaluation_episodes": 0,
+    "learner_calls": 0,
+    "model_fit_calls": 0,
+    "optimizer_updates": 0,
+    "production_kernel_calls": 10,
+    "trainer_calls": 0
+  },
+  "arms": {
+    "left": {
+      "authenticated_selected_p_cross_swap": {
+        "centered_logits": [
+          0.12384415417909622,
+          -0.15192927420139313,
+          0.028085120022296906
+        ],
+        "logits": [
+          0.1634232997894287,
+          -0.11235012859106064,
+          0.0676642656326294
+        ],
+        "probabilities": [
+          0.3748592734336853,
+          0.2845125198364258,
+          0.3406282365322113
+        ],
+        "recurrence_digest": "fc5948653297196c02b68e3479a540d922b77420ebef0ddfe6f6e81b38e5eb9a",
+        "selected_argmax": 0
+      },
+      "current_non_p_context_digest": "093c714ced17c0557eec25bce064dfd782f096324a9ed110a8651581d948cbb7",
+      "decoy_or_unauthenticated_perturbation": {
+        "baseline": {
+          "centered_logits": [
+            0.12384246289730072,
+            -0.15056736767292023,
+            0.026724904775619507
+          ],
+          "logits": [
+            0.16607443988323212,
+            -0.10833539068698883,
+            0.0689568817615509
+          ],
+          "probabilities": [
+            0.3748871088027954,
+            0.28492188453674316,
+            0.3401910364627838
+          ],
+          "recurrence_digest": "fc5948653297196c02b68e3479a540d922b77420ebef0ddfe6f6e81b38e5eb9a",
+          "selected_argmax": 0,
+          "selection_trace": {
+            "presented_carrier_count": 2,
+            "selected_carrier": "authenticated_selected_p",
+            "selected_p_digest": "c6b5dafd1abf08b10dbe3be8542fd3b6365af0baa1bfbf55b43cb125d36b3557",
+            "selected_provenance_digest": "1478cf96bba6b59800c62d52365cbdc821a228c99f3b63ccd17cef9780c22ffa",
+            "unselected_authenticated": false,
+            "unselected_carrier": "unauthenticated_decoy_left",
+            "unselected_payload": -0.125,
+            "unselected_payload_digest": "aa4322baa13e07ce86a5547b2963e53f4142ba1fd23f9c2ecc0fdad5c4b6680b",
+            "unselected_selected": false
+          }
+        },
+        "decoy_authenticated": false,
+        "decoy_selected": false,
+        "kernel_error": 0.0,
+        "perturbed": {
+          "centered_logits": [
+            0.12384246289730072,
+            -0.15056736767292023,
+            0.026724904775619507
+          ],
+          "logits": [
+            0.16607443988323212,
+            -0.10833539068698883,
+            0.0689568817615509
+          ],
+          "probabilities": [
+            0.3748871088027954,
+            0.28492188453674316,
+            0.3401910364627838
+          ],
+          "recurrence_digest": "fc5948653297196c02b68e3479a540d922b77420ebef0ddfe6f6e81b38e5eb9a",
+          "selected_argmax": 0,
+          "selection_trace": {
+            "presented_carrier_count": 2,
+            "selected_carrier": "authenticated_selected_p",
+            "selected_p_digest": "c6b5dafd1abf08b10dbe3be8542fd3b6365af0baa1bfbf55b43cb125d36b3557",
+            "selected_provenance_digest": "1478cf96bba6b59800c62d52365cbdc821a228c99f3b63ccd17cef9780c22ffa",
+            "unselected_authenticated": false,
+            "unselected_carrier": "unauthenticated_decoy_left",
+            "unselected_payload": 0.125,
+            "unselected_payload_digest": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "unselected_selected": false
+          }
+        },
+        "selected_p_fixed": true
+      },
+      "factual_keep": {
+        "centered_logits": [
+          0.12384246289730072,
+          -0.15056736767292023,
+          0.026724904775619507
+        ],
+        "logits": [
+          0.16607443988323212,
+          -0.10833539068698883,
+          0.0689568817615509
+        ],
+        "probabilities": [
+          0.3748871088027954,
+          0.28492188453674316,
+          0.3401910364627838
+        ],
+        "recurrence_digest": "fc5948653297196c02b68e3479a540d922b77420ebef0ddfe6f6e81b38e5eb9a",
+        "selected_argmax": 0
+      },
+      "full_current_rebuild": {
+        "B_P_X": 0.0,
+        "centered_logits": [
+          0.12383637328942618,
+          -0.1512476901213328,
+          0.02741131683190664
+        ],
+        "centered_residual": [
+          6.089607874543157e-06,
+          0.0006803224484125681,
+          -0.000686412056287132
+        ],
+        "error": 0.000686412056287132,
+        "logits": [
+          0.16474556922912598,
+          -0.110338494181633,
+          0.06832051277160645
+        ],
+        "probabilities": [
+          0.3748707175254822,
+          0.2847174108028412,
+          0.34041184186935425
+        ],
+        "recurrence_digest": "fc5948653297196c02b68e3479a540d922b77420ebef0ddfe6f6e81b38e5eb9a",
+        "selected_argmax": 0
+      },
+      "generic_compiler_error": 0.0,
+      "selected_p_hex": "7b226279746573223a223266663034653364222c226474797065223a22666c6f61743332222c226b696e64223a2274656e736f72222c227368617065223a5b312c315d7d",
+      "selected_p_provenance_digest": "1478cf96bba6b59800c62d52365cbdc821a228c99f3b63ccd17cef9780c22ffa"
+    },
+    "right": {
+      "authenticated_selected_p_cross_swap": {
+        "centered_logits": [
+          0.12384246289730072,
+          -0.15056736767292023,
+          0.026724904775619507
+        ],
+        "logits": [
+          0.16607443988323212,
+          -0.10833539068698883,
+          0.0689568817615509
+        ],
+        "probabilities": [
+          0.3748871088027954,
+          0.28492188453674316,
+          0.3401910364627838
+        ],
+        "recurrence_digest": "fc5948653297196c02b68e3479a540d922b77420ebef0ddfe6f6e81b38e5eb9a",
+        "selected_argmax": 0
+      },
+      "current_non_p_context_digest": "093c714ced17c0557eec25bce064dfd782f096324a9ed110a8651581d948cbb7",
+      "decoy_or_unauthenticated_perturbation": {
+        "baseline": {
+          "centered_logits": [
+            0.12384415417909622,
+            -0.15192927420139313,
+            0.028085120022296906
+          ],
+          "logits": [
+            0.1634232997894287,
+            -0.11235012859106064,
+            0.0676642656326294
+          ],
+          "probabilities": [
+            0.3748592734336853,
+            0.2845125198364258,
+            0.3406282365322113
+          ],
+          "recurrence_digest": "fc5948653297196c02b68e3479a540d922b77420ebef0ddfe6f6e81b38e5eb9a",
+          "selected_argmax": 0,
+          "selection_trace": {
+            "presented_carrier_count": 2,
+            "selected_carrier": "authenticated_selected_p",
+            "selected_p_digest": "4251b528c5755128b0519ea306fa6e4f74cf4c01dc60ec6b87498ef513563e06",
+            "selected_provenance_digest": "407de6a6b3edf9e017ad5ea4fc9eb2fd65e67e0cb5ea9fbd9e5c75fedae508fc",
+            "unselected_authenticated": false,
+            "unselected_carrier": "unauthenticated_decoy_right",
+            "unselected_payload": -0.125,
+            "unselected_payload_digest": "aa4322baa13e07ce86a5547b2963e53f4142ba1fd23f9c2ecc0fdad5c4b6680b",
+            "unselected_selected": false
+          }
+        },
+        "decoy_authenticated": false,
+        "decoy_selected": false,
+        "kernel_error": 0.0,
+        "perturbed": {
+          "centered_logits": [
+            0.12384415417909622,
+            -0.15192927420139313,
+            0.028085120022296906
+          ],
+          "logits": [
+            0.1634232997894287,
+            -0.11235012859106064,
+            0.0676642656326294
+          ],
+          "probabilities": [
+            0.3748592734336853,
+            0.2845125198364258,
+            0.3406282365322113
+          ],
+          "recurrence_digest": "fc5948653297196c02b68e3479a540d922b77420ebef0ddfe6f6e81b38e5eb9a",
+          "selected_argmax": 0,
+          "selection_trace": {
+            "presented_carrier_count": 2,
+            "selected_carrier": "authenticated_selected_p",
+            "selected_p_digest": "4251b528c5755128b0519ea306fa6e4f74cf4c01dc60ec6b87498ef513563e06",
+            "selected_provenance_digest": "407de6a6b3edf9e017ad5ea4fc9eb2fd65e67e0cb5ea9fbd9e5c75fedae508fc",
+            "unselected_authenticated": false,
+            "unselected_carrier": "unauthenticated_decoy_right",
+            "unselected_payload": 0.125,
+            "unselected_payload_digest": "31b67dba7cfd6e2d7540f9c96d90a45b8f2d44956620723024d4e1beeacd4602",
+            "unselected_selected": false
+          }
+        },
+        "selected_p_fixed": true
+      },
+      "factual_keep": {
+        "centered_logits": [
+          0.12384415417909622,
+          -0.15192927420139313,
+          0.028085120022296906
+        ],
+        "logits": [
+          0.1634232997894287,
+          -0.11235012859106064,
+          0.0676642656326294
+        ],
+        "probabilities": [
+          0.3748592734336853,
+          0.2845125198364258,
+          0.3406282365322113
+        ],
+        "recurrence_digest": "fc5948653297196c02b68e3479a540d922b77420ebef0ddfe6f6e81b38e5eb9a",
+        "selected_argmax": 0
+      },
+      "full_current_rebuild": {
+        "B_P_X": 0.0,
+        "centered_logits": [
+          0.12383637328942618,
+          -0.1512476901213328,
+          0.02741131683190664
+        ],
+        "centered_residual": [
+          7.780889670044866e-06,
+          -0.0006815840800603323,
+          0.0006738031903902666
+        ],
+        "error": 0.0006815840800603323,
+        "logits": [
+          0.16474556922912598,
+          -0.110338494181633,
+          0.06832051277160645
+        ],
+        "probabilities": [
+          0.3748707175254822,
+          0.2847174108028412,
+          0.34041184186935425
+        ],
+        "recurrence_digest": "fc5948653297196c02b68e3479a540d922b77420ebef0ddfe6f6e81b38e5eb9a",
+        "selected_argmax": 0
+      },
+      "generic_compiler_error": 0.0,
+      "selected_p_hex": "7b226279746573223a223266663034656264222c226474797065223a22666c6f61743332222c226b696e64223a2274656e736f72222c227368617065223a5b312c315d7d",
+      "selected_p_provenance_digest": "407de6a6b3edf9e017ad5ea4fc9eb2fd65e67e0cb5ea9fbd9e5c75fedae508fc"
+    }
+  },
+  "branch": "A2_SELECTED_P_CAUSAL_EFFECT_GENERIC_NULL_COMPILES",
+  "candidate": "CAND-VSP-06-MSSR@adversarial-revision-v8",
+  "controls": {
+    "cross_swap_provenance_authenticated": true,
+    "current_source_fixed": true,
+    "decoy_carriers_unauthenticated": true,
+    "decoy_selected_p_fixed": true,
+    "decoy_side_channel_present": false,
+    "deterministic_argmax": true,
+    "factual_a1_replay_error": 0.0,
+    "full_current_non_p_bytes_equal": true,
+    "legal_mask_and_order_fixed": true,
+    "registered_production_path": "mssr_joint_spf_pre_recurrence_v1",
+    "teacher_action_used": false,
+    "weight_digest_after": "0b30fac218f5763f9b52325ab81c48752c3fb6e378499c504a22aa01b40fdea2",
+    "weight_digest_before": "0b30fac218f5763f9b52325ab81c48752c3fb6e378499c504a22aa01b40fdea2"
+  },
+  "evidence": {
+    "call_budget_valid": true,
+    "contract_valid": true,
+    "cross_swap_provenance_authenticated": true,
+    "current_rebuild_error": 0.000686412056287132,
+    "decoy_carriers_unauthenticated": true,
+    "decoy_kernel_error": 0.0,
+    "decoy_selected_p_fixed": true,
+    "evaluation_conditions_frozen": true,
+    "generic_compiler_error": 0.0,
+    "generic_equal_information": true,
+    "generic_matched_capacity": true,
+    "non_p_byte_equal": true,
+    "provenance_authenticated": true,
+    "registered_path": true,
+    "selected_p_centered_logit_effect": 0.0013619065284729004,
+    "selected_p_kernel_effect": 0.00043720006942749023,
+    "selected_p_raw_logit_effect": 0.004014737904071808,
+    "tolerance": 7.62939453125e-06,
+    "weights_unchanged": true
+  },
+  "generic_compiler": {
+    "action_dimension": 3,
+    "compiled_scalar_count": 6,
+    "error": 0.0,
+    "information_fields": [
+      "X",
+      "P",
+      "provenance",
+      "recurrence",
+      "legal_mask",
+      "sampled_order",
+      "production_path"
+    ],
+    "kind": "exact_finite_lookup",
+    "matched_capacity": true,
+    "model_fit_calls": 0,
+    "production_head_scalar_capacity": 611,
+    "reserved_scalar_capacity": 605,
+    "scalar_capacity": 611,
+    "support_cardinality": 2
+  },
+  "limitations": "A2 is one deterministic two-history production-kernel causal/null audit. It establishes no learning, return, deployment, promotion, retirement, B, or C conclusion.",
+  "public_locators": {
+    "a1_result": "docs/research/candidates/vsp_06_mssr/VSP06_A1_JOINT_PRODUCTION_BINDING_RESULT.json",
+    "a1_witness": "docs/research/candidates/vsp_06_mssr/VSP06_A1_MATCHED_SUPPORT_WITNESS.json",
+    "a2_runner": "scripts/run_vsp06_a2_selected_p_causal_generic_null.py",
+    "a2_source": "experiments/candidates/vsp_06_mssr/selected_p_causal_generic_null.py",
+    "a2_test": "tests/experiments/candidates/vsp_06_mssr/test_selected_p_causal_generic_null.py",
+    "code_science_index": "docs/research/candidates/vsp_06_mssr/CODE_SCIENCE_INDEX.md",
+    "production_core": "ha_ctse_process/variable_roster_event.py",
+    "production_model": "ha_ctse_process/variable_roster_event_models.py"
+  },
+  "raw_output_binding": "vsp_06_mssr.selected_p_causal_generic_null.a2.v1",
+  "tolerance": {
+    "absolute": 7.62939453125e-06,
+    "dtype": "float32",
+    "epsilon": 1.1920928955078125e-07,
+    "frozen_before_observation": true,
+    "multiplier": 64
+  },
+  "treatment": "VSP06-A2-SELECTED-P-CAUSAL-AND-GENERIC-COMPILE-NULL"
+}

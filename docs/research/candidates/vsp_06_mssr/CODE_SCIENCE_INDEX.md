@@ -143,14 +143,19 @@ The exact fail-closed precedence is:
 6. `A2_GENERIC_COMPILER_DOES_NOT_MATCH_WITH_EQUAL_INFORMATION`
 7. `A2_SELECTED_P_CAUSAL_EFFECT_GENERIC_NULL_COMPILES`
 
-The registered activity budget is exactly ten focused production-kernel
-calls, below the cap of 24, and zero environment transitions, learner/trainer
-calls, optimizer updates, evaluation episodes, model fits and RNG draws.  The
-audit has not been executed by implementation or proof-sized fixture checks;
-the registered result branch and arm values remain result-bearing CPM-owned
-evidence.  Branch 7 would establish only selected-P-specific production-kernel
-causality plus an equal-information generic compile null; it would make one
-ordinary B freeze-ready solely as an inductive-bias/credit-efficiency test.
+The accepted registered audit is sourced at commit
+`a188c1e75f3d689ca6b00e4f6f9323050bf8913d`.  Its result branch is
+`A2_SELECTED_P_CAUSAL_EFFECT_GENERIC_NULL_COMPILES`, with exactly ten
+production-kernel calls and zero environment transitions, learner/trainer
+calls, optimizer updates, evaluation episodes, model fits or environment/action
+RNG draws.  Retained witnesses cover selected-P effect, decoy/unauthenticated
+payload invariance, factual KEEP, full-current rebuild and the equal-information
+generic compiler (`error=0.0`, matched capacity); raw result SHA-256 is
+`89a56253e016e5588f7b2e103f25ea57ee5e0585da2d42e52854f3f646caa385`.
+The result is an action-kernel-only descriptive audit: it makes no claims about
+environment, learner, trainer, optimizer, evaluation, model fit, deployment,
+promotion, retirement, B or C.  Branch 7 would make one separately named B
+design question askable solely as an inductive-bias/credit-efficiency test.
 No learning, value, return, B/C, promotion, retirement, sibling-direction or
 deployment conclusion is licensed by A2.
 
