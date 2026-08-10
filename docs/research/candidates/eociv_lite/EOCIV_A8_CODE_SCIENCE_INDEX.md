@@ -66,3 +66,13 @@ checkpoint, stochastic-draw, retry, rescue, and sweep counter is fixed at zero.
 `registered_audits` is exactly one. The technical fixture tests validators and
 synthetic source manifests directly; it does not invoke the registered audit.
 
+
+## Registered publication receipt (mechanical)
+
+- source_commit: `317348bf1d8fc5b82484910be0c762aa3fd4ac67`
+- terminal_branch: `A8_INVALID_SOURCE_OR_ACTIVITY_CONTRACT`
+- exact seed-span failures: observed `4840223/6840223` vs frozen `4840123/6840123`
+- `registered_audits=1`; all runtime/RNG/retry/pool counters are zero
+- eight certificates are false/not evaluated; `b8_authorized=false`
+- source-readiness receipt and operator status are `ERROR` solely for the branch; no train/evaluate phases ran
+- strict boundary: no constructibility, B8, effect, or science claims
