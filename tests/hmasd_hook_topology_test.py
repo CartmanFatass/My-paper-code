@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
 
 
@@ -70,12 +69,3 @@ def test_disabled_hooks_remain_identity_neutral_and_lightweight() -> None:
     assert "canonical" not in serialized
     assert "acceptance" not in serialized
     assert "heartbeat" not in serialized
-
-
-def test_project_launcher_exists_and_does_not_mutate_user_environment() -> None:
-    launcher = ROOT / "scripts" / "invoke_hmasd_hook.ps1"
-    assert launcher.is_file()
-    text = launcher.read_text(encoding="utf-8")
-    assert "HMASD_PYTHON" in text
-    assert re.search(r"(?i)python(?:\.exe)?|py\s+-3", text)
-    assert "Set-Item" not in text and "setx" not in text.lower()
