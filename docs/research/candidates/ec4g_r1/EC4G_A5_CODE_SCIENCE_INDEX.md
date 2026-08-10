@@ -86,3 +86,23 @@ Operator transport, mutate Git, or technically accept the package. Those
 actions remain CPM-owned. No branch establishes natural prevalence, causal or
 reward value, learning, B/C/formal/Pro need, promotion, retirement or an
 automatic successor.
+
+## Registered A5 publication
+
+The registered one-shot result is `A5_COMPLETE_PORTABLE_TWO_PHASE_EXECUTION_CENSUS`
+(`result_id=ec4g-a5-ec4g_a5_454e7622_r1`) from source commit
+`454e762241d145c94af2874405dd77b64071632e`. The accepted source-entry and cwd
+bindings are the registered audit worktree
+`C:\\worktrees\\HMASD\\ec4g_a5_registered_audit_454e7622_r1_20260810`, with
+runner, runtime-core and pure-algorithm dependency paths bound beneath that
+root before any scientific call. Counts are exactly 6 map calls, 6 compiler
+calls, 6 sealed objects, 1 write-once snapshot, 3 comparisons, 3 pair
+witnesses and 1 D computation. `D_RER3=1/4`; join is equal, leave unequal and
+rejoin equal. Snapshot and manifest hashes are recorded in the published JSON
+result (`snapshot_sha256=c3bd77755248e4e3f941ae55d13a39621d0710c2a830ff67de8e1f0fd1e6aaaa`,
+`manifest_sha256=9afb0d0fd92a839b1ad1bae775fc669c82186b75d6572033b557aa4f26400efd`).
+The operator receipt is `COMPLETE`. Environment/policy/learner/trainer/
+optimizer/evaluation/model-fit/stochastic, retry, repair, corrected-invocation,
+rescan and reconstruction activity are all zero. This publication is limited
+to prospective contract eligibility/census evidence: it makes no claim about
+value, B/C/Pro, or a scientific successor.
