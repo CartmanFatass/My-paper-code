@@ -1,0 +1,729 @@
+{
+  "artifact_kind": "VSP05_A4_BLIND_PORTABLE_LOCATOR_DTO_RETAINED_FIELD_ADMISSION",
+  "attestations": {
+    "code_semantic_inference_used": false,
+    "environment_specific_absolute_identity_emitted": false,
+    "fallback_or_alternate_used": false,
+    "reconstruction_used": false,
+    "row_samples_or_presence_vectors_emitted": 0,
+    "semantic_values_read": 0,
+    "source_reopened_after_structural_pass": false
+  },
+  "branch_precedence_applied": [
+    "A4_BLINDNESS_OR_SCOPE_VIOLATION",
+    "A4_IMMUTABLE_SOURCE_OR_PORTABLE_LOCATOR_INVALID",
+    "A4_DTO_SEMANTIC_BINDING_UNAVAILABLE",
+    "A4_REQUIRED_RETENTION_INCOMPLETE",
+    "A4_BLIND_ADMISSION_SUFFICIENT"
+  ],
+  "candidate_id": "CAND-VSP-05@adversarial-revision-v7",
+  "claim_boundary": "retention addressability only; no semantic audit, learner, successor, promotion, or retirement",
+  "counters": {
+    "code_semantics_reads": 0,
+    "environment_policy_executor_learning_training_optimizer_evaluation_activity": 0,
+    "locator_resolutions": 1,
+    "new_trace_or_hypothetical_activity": 0,
+    "opaque_hash_passes": 1,
+    "registered_admission_audits": 1,
+    "retry_rescue_or_fallback": 0,
+    "row_samples_or_presence_vectors_emitted": 0,
+    "row_schema_envelopes": 15971,
+    "row_semantic_values_read": 0,
+    "structural_schema_passes": 1
+  },
+  "dto_binding": {
+    "authenticated_by_immutable_sha256": true,
+    "closed_handoff_allowlist": {
+      "closed": null,
+      "members": [],
+      "status": "unbound"
+    },
+    "embedded_key": "vsp05_a4_retained_field_self_description",
+    "first_failure": "authenticated embedded self-description is absent",
+    "slots": {
+      "actual_executor": {
+        "actual executor input subject/skill": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "real primitive command": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "supplied-executor event identity/order and lifecycle linkage": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "supplied-executor identity where represented": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        }
+      },
+      "actual_handoff": {
+        "commit-event field": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "completion-latch state supplied to handoff": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "handoff event identity/order and lifecycle linkage": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "pending state": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "pending successor q": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "persisted incumbent immediately after commit": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "persisted incumbent immediately before commit": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        }
+      },
+      "closed_handoff_allowlist": {
+        "causal-prior order/linkage metadata": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "explicit schema-declared enumeration of every causally prior allowlist input/flag": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "one serialized field for every enumerated member": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        }
+      },
+      "same_subject_current_frontier": {
+        "actual persisted incumbent i": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "current membership/lifecycle category including no-incumbent or JOIN": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "same-current-time hard gate G_i": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "same-current-time hard gate G_q": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "same-current-time strict truth T_i": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "same-current-time strict truth T_q": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "unchanged actual proposal q": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        }
+      },
+      "temporal_same_lifecycle": {
+        "cell identity": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "complete row identity": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "episode identity": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "explicit incumbent epoch": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "explicit linkage keys spanning frontier handoff and executor": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "lifecycle key": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "seed": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        },
+        "time index or frontier ordinal": {
+          "binding_basis": null,
+          "declared_types": null,
+          "nullable": null,
+          "presence": "unbound",
+          "source_path": null
+        }
+      }
+    },
+    "status": "unavailable"
+  },
+  "first_failure": "authenticated embedded self-description is absent",
+  "formal": false,
+  "publication": {
+    "operator_receipt": null,
+    "public_index_locator": "docs/research/candidates/vsp_05/VSP05_A4_CODE_SCIENCE_INDEX.md",
+    "public_result_locator": "docs/research/candidates/vsp_05/VSP05_A4_BLIND_PORTABLE_LOCATOR_DTO_RETAINED_FIELD_ADMISSION_RESULT.json"
+  },
+  "residual_uncertainty": "field names and values cannot resolve the missing or ambiguous semantic binding",
+  "schema_presence_manifest": [
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "integer"
+      ],
+      "path": "/actual_proposal",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/actual_proposal_gate",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/actual_proposal_strict_truth",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "object"
+      ],
+      "path": "/all_skill_classification",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "object"
+      ],
+      "path": "/all_skill_classification/0",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/all_skill_classification/0/gate",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/all_skill_classification/0/strict_truth",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "object"
+      ],
+      "path": "/all_skill_classification/1",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/all_skill_classification/1/gate",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/all_skill_classification/1/strict_truth",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "object"
+      ],
+      "path": "/all_skill_classification/2",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/all_skill_classification/2/gate",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/all_skill_classification/2/strict_truth",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "string"
+      ],
+      "path": "/capture_boundary",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "string"
+      ],
+      "path": "/cell",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/committed_record_present",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "object"
+      ],
+      "path": "/complete_mask",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/complete_mask/actual_proposal_gate",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/complete_mask/different_successor",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/complete_mask/eligible_strict_truth",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/complete_mask/frontier_present",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/complete_mask/incumbent_present",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/complete_mask/truth_actual_proposal",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/complete_mask/truth_any_skill",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/complete_mask/truth_non_incumbent_skill",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "integer"
+      ],
+      "path": "/completed_primitive_transitions_at_capture",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/different_successor",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "integer"
+      ],
+      "path": "/environment_step",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "integer"
+      ],
+      "path": "/episode_id",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "integer"
+      ],
+      "path": "/episode_index",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "integer"
+      ],
+      "path": "/event_rank",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/incumbent_present",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": true,
+      "observed_json_types": [
+        "integer",
+        "null"
+      ],
+      "path": "/incumbent_skill",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "string"
+      ],
+      "path": "/lifecycle_category",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "string"
+      ],
+      "path": "/lifecycle_key",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "integer"
+      ],
+      "path": "/mask_code",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "array"
+      ],
+      "path": "/missing_predicates",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "string"
+      ],
+      "path": "/missing_predicates/*",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "integer"
+      ],
+      "path": "/physical_time",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "number"
+      ],
+      "path": "/position",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "string"
+      ],
+      "path": "/real_frontier_id",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "boolean"
+      ],
+      "path": "/real_reachable_evidence",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "string"
+      ],
+      "path": "/semantic_near_miss_class",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "integer"
+      ],
+      "path": "/task_seed",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "array"
+      ],
+      "path": "/truth_skill_set",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": false,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "integer"
+      ],
+      "path": "/truth_skill_set/*",
+      "present_rows": 15531
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "string"
+      ],
+      "path": "/truth_skill_set_label",
+      "present_rows": 15971
+    },
+    {
+      "complete_presence": true,
+      "nullable_observed": false,
+      "observed_json_types": [
+        "number"
+      ],
+      "path": "/velocity",
+      "present_rows": 15971
+    }
+  ],
+  "schema_version": 1,
+  "scientific_disposition": null,
+  "scope_violations": [],
+  "source_binding": {
+    "absolute_path_emitted": false,
+    "accepted_publication_commit": "9f3c57f809a0c0ee11868e025adbeea762832a46",
+    "accepted_source_commit": "1a09bccf9bd64c756865531bc55a871afa286dd3",
+    "expected_locator": "logs/vsp05_a1_truth_reachability_1a09bccf_r1/raw_result.json",
+    "expected_row_containers": 15971,
+    "expected_sha256": "d4ba7e00ae65c4f0cfd6f84b37c300e9e580868c42bd3c3f02eff20b0b3a3f2e",
+    "first_failure": null,
+    "normalized_relative_locator": "logs/vsp05_a1_truth_reachability_1a09bccf_r1/raw_result.json",
+    "observed_row_containers": 15971,
+    "observed_sha256": "d4ba7e00ae65c4f0cfd6f84b37c300e9e580868c42bd3c3f02eff20b0b3a3f2e",
+    "opaque_bytes_read": 63736472,
+    "parser_status": "valid",
+    "portable_locator_kind": "repository_relative_posix",
+    "root_containment": true,
+    "row_container_pointer": "/real_frontier_rows",
+    "status": "valid",
+    "verified_checkout_root_supplied": true
+  },
+  "strongest_alternative": "the bytes might retain useful fields, but no authenticated self-description binds them to required slots",
+  "successor_selected": false,
+  "terminal_branch": "A4_DTO_SEMANTIC_BINDING_UNAVAILABLE",
+  "treatment_id": "VSP05-A4-BLIND-PORTABLE-LOCATOR-DTO-RETAINED-FIELD-ADMISSION-AUDIT"
+}

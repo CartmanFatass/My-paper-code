@@ -132,3 +132,11 @@ Implementation verification uses only synthetic opaque component fixtures.
 It does not invoke the registered audit or perform a structural pass over the
 real accepted A1 artifact. The evidence action has `H=0`, `K_search=0`, zero
 hypothetical transitions, and no experiment-pool or formal-compute activity.
+
+## Registered publication — VSP05-A4
+
+- Source commit: `ec12cc37f91629a19b05e9a14c0f723fe68b6b20`; terminal branch: `A4_DTO_SEMANTIC_BINDING_UNAVAILABLE`.
+- Public result: `VSP05_A4_BLIND_PORTABLE_LOCATOR_DTO_RETAINED_FIELD_ADMISSION_RESULT.json` (byte-for-byte raw audit publication; SHA-256 `313373A2C58BD66DB4F7E3E072FFB3B4AC3A9DFED9341CBDC53E9F7F929555A`).
+- Audit evidence: one locator/hash/schema pass, 15,971 row-schema envelopes, semantic values/code reads/samples/runtime/retry/fallback all zero; no semantic audit, learner, successor, promotion, retirement, B/C/Pro authorization.
+- Source readiness: `.git/worktrees/vsp05_a4_source_readiness_clean_candidate_20260810/hmasd/execution-readiness/ec12cc37f91629a19b05e9a14c0f723fe68b6b20/vsp05_a4_source_readiness_r1.json`.
+- Operator receipt: `temp/sessions/code_project_manager/vsp05_a4_operator_receipt.json` (`ERROR` solely because offline phases are `N/A`; no runtime was attempted).
