@@ -6,9 +6,19 @@ Candidate: `CAND-VAP-ORBIT-LITE@verified-owner-binding-revision-v9`
 
 Treatment: `ORBIT-A2-VERIFIED-OWNER-BINDING-REACHABILITY`
 
-Status: implementation candidate only. The single registered audit has not
-been run by the implementer, so this section records the frozen executable
-contract and observables rather than a scientific result.
+Status: verified owner-binding reachability result materialized from source
+commit `655bd6bfef48dfe6a679acce63d7289cf6c85e5c`. Initial main-HEAD source
+preflight was rejected before claim/calls; the sole actual audit ran in a clean
+source worktree. It made 15 route calls and selected
+`A2_OWNER_BINDING_REACHES_FIRST_ACTION_KERNEL`: candidate mixed logit `4` and
+mixed kernel `0.5752553931680987`, with zero owner main effects and zero mixed
+and main effects for both comparators. All invariants and witnesses are true;
+invalid handling is exact `ZERO_PATH`. Environment, learner, trainer,
+optimizer, return, and model-fit counts are zero. Claims remain strictly
+actionability-only; no learned meaning, utility, persistence, return, or
+generalization claim is made.
+
+Result artifact: `ORBIT_A2_VERIFIED_OWNER_BINDING_REACHABILITY_RESULT.json`.
 
 ### Typed actor boundary
 
