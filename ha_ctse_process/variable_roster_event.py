@@ -57,6 +57,12 @@ EVENT_MODES = ("f0", "f1")
 LEARNED_LOW_RUNTIME = "learned_low"
 SUPPLIED_EXECUTOR_RUNTIME = "supplied_executor"
 EVENT_RUNTIME_MODES = (LEARNED_LOW_RUNTIME, SUPPLIED_EXECUTOR_RUNTIME)
+ORDINARY_PRODUCTION_ACTION_PATH = "ordinary_post_recurrence_v1"
+MSSR_JOINT_PRODUCTION_ACTION_PATH = "mssr_joint_spf_pre_recurrence_v1"
+PRODUCTION_ACTION_PATHS = (
+    ORDINARY_PRODUCTION_ACTION_PATH,
+    MSSR_JOINT_PRODUCTION_ACTION_PATH,
+)
 OPPORTUNITY_SCHEDULE_NAME = "uniform_active_gap_v1"
 OPPORTUNITY_K0 = 10
 OPPORTUNITY_GAP_LOW = 1
@@ -131,6 +137,7 @@ class VariableRosterEventCore:
         shared_models_from: "VariableRosterEventCore | None" = None,
         runtime_mode: str = LEARNED_LOW_RUNTIME,
         partner_interaction_enabled: bool = False,
+        production_action_path: str = ORDINARY_PRODUCTION_ACTION_PATH,
     ) -> None:
         mode = str(architecture_mode).lower()
         if mode not in EVENT_MODES:
@@ -144,10 +151,21 @@ class VariableRosterEventCore:
             raise ValueError("event runtime requires at least two skills")
         self.architecture_mode = mode
         self.runtime_mode = selected_runtime_mode
-        # MSSR (Seq 12) support-native partner-interaction transition.  Default
-        # OFF: when disabled the transition never executes, the actor has no
-        # first-action head, and every existing rollout is byte-identical.
-        self.partner_interaction_enabled = bool(partner_interaction_enabled)
+        selected_action_path = str(production_action_path)
+        if selected_action_path not in PRODUCTION_ACTION_PATHS:
+            raise ValueError(
+                f"production action path must be one of {PRODUCTION_ACTION_PATHS}"
+            )
+        # MSSR (Seq 12) support-native partner-interaction transition.  The
+        # established capability flag is now the registered joint production
+        # mode: it enables the writer and pre-recurrence actor as one indivisible
+        # path.  No new instance field is introduced (the FOLR snapshot closure
+        # guard therefore remains exact).  Ordinary is still the default and
+        # retains its exact parameter/RNG behavior.
+        self.partner_interaction_enabled = bool(
+            partner_interaction_enabled
+            or selected_action_path == MSSR_JOINT_PRODUCTION_ACTION_PATH
+        )
         self.obs_dim = int(obs_dim)
         self.critic_member_dim = int(critic_member_dim)
         self.critic_global_dim = int(critic_global_dim)
@@ -255,6 +273,18 @@ class VariableRosterEventCore:
             self.rng_episode_id,
             self.action_stream_id,
         )
+
+    @property
+    def production_action_path(self) -> str:
+        return (
+            MSSR_JOINT_PRODUCTION_ACTION_PATH
+            if self.partner_interaction_enabled
+            else ORDINARY_PRODUCTION_ACTION_PATH
+        )
+
+    @property
+    def mssr_joint_production_enabled(self) -> bool:
+        return bool(self.partner_interaction_enabled)
 
     def model_signature(self) -> dict[str, dict[str, tuple[int, ...]]]:
         return {
@@ -365,6 +395,15 @@ class VariableRosterEventCore:
                 record.active_gap_remaining = 0
                 record.is_genuine_join = False
                 record.is_rejoin = True
+                if self.mssr_joint_production_enabled:
+                    # Selective lifecycle routing: S (skill/age) and the
+                    # provenance-authenticated P carrier survive the temporary
+                    # absence, while F (the fast recurrent control state) is
+                    # renewed.  This is what permits legal non-P reconvergence
+                    # without injecting or rewriting historical P.
+                    record.high_hidden = np.zeros(
+                        self.high_hidden_dim, dtype=np.float32
+                    )
             elif delta.kind == TERMINAL_LEAVE:
                 if record.status not in (ACTIVE, TEMPORARILY_ABSENT):
                     raise ValueError("terminal leave references a terminal lifecycle")
@@ -785,6 +824,67 @@ class VariableRosterEventCore:
             current_p=next_p, rows=prior_rows + (row,)
         )
 
+    def _authenticated_partner_p(self, record: LifecycleRecord) -> float:
+        """Return retained P only after validating its complete provenance.
+
+        A genuine join has the registered zero initializer.  Every later MSSR
+        production decision must carry an append-only writer ledger; malformed,
+        cross-owner or discontinuous rows fail before action logits are read.
+        """
+
+        history = record.partner_interaction_history
+        if history is None:
+            if record.is_genuine_join and int(record.membership_epoch) == 0:
+                return 0.0
+            raise ValueError(
+                "MSSR production action requires authenticated historical P"
+            )
+        if not history.rows:
+            raise ValueError("MSSR historical P has no provenance rows")
+        if not math.isfinite(float(history.current_p)):
+            raise ValueError("MSSR historical P tail is non-finite")
+        prior = 0.0
+        last_epoch = -1
+        last_event_index = -1
+        last_writer_version = -1
+        for row in history.rows:
+            numeric = (row.prior_p, row.payload, row.next_p)
+            if not all(math.isfinite(float(value)) for value in numeric):
+                raise ValueError("MSSR historical P provenance is non-finite")
+            if (
+                row.owner_lifecycle_key != record.lifecycle_key
+                or not row.partner_lifecycle_key
+                or row.partner_lifecycle_key == record.lifecycle_key
+                or row.partner_lifecycle_key not in self.records
+                or int(row.episode_id) < 0
+                or int(row.episode_id) != int(self.rng_episode_id)
+                or int(row.membership_epoch) < 0
+                or int(row.membership_epoch) < last_epoch
+                or int(row.membership_epoch) > int(record.membership_epoch)
+                or int(row.event_index) < 0
+                or int(row.event_index) <= last_event_index
+                or int(row.writer_policy_version) < 0
+                or int(row.writer_policy_version) < last_writer_version
+                or int(row.writer_policy_version) > int(self.policy_version)
+                or not -1.0 <= float(row.payload) <= 1.0
+                or not -1.0 <= float(row.next_p) <= 1.0
+            ):
+                raise ValueError("MSSR historical P provenance identity is invalid")
+            if float(row.prior_p) != float(prior):
+                raise ValueError("MSSR historical P provenance chain is discontinuous")
+            expected_next = float(
+                np.clip(0.8 * prior + 0.2 * float(row.payload), -1.0, 1.0)
+            )
+            if float(row.next_p) != expected_next:
+                raise ValueError("MSSR historical P transition equation is invalid")
+            prior = float(row.next_p)
+            last_epoch = int(row.membership_epoch)
+            last_event_index = int(row.event_index)
+            last_writer_version = int(row.writer_policy_version)
+        if float(history.current_p) != prior:
+            raise ValueError("MSSR historical P does not match its provenance tail")
+        return prior
+
     def _process_frontier(
         self,
         snapshot: BoundarySnapshot,
@@ -861,9 +961,24 @@ class VariableRosterEventCore:
             selected_summary = (
                 initial_summary if self.architecture_mode == "f0" else working_summary
             )
-            logits, new_hidden = self.commitment_model.logits(
-                working_embeddings[row_index], selected_summary, pre_hidden
-            )
+            mssr_partition = None
+            if self.mssr_joint_production_enabled:
+                authenticated_p = self._authenticated_partner_p(record)
+                mssr_partition = self.commitment_model.selective_spf_partition(
+                    selected_summary,
+                    pre_hidden,
+                    authenticated_p,
+                )
+                logits, new_hidden = self.commitment_model.first_logits(
+                    working_embeddings[row_index],
+                    selected_summary,
+                    pre_hidden,
+                    partition=mssr_partition,
+                )
+            else:
+                logits, new_hidden = self.commitment_model.logits(
+                    working_embeddings[row_index], selected_summary, pre_hidden
+                )
             legal_mask = torch.ones(self.n_skills, dtype=torch.bool, device=self.device)
             masked_logits = logits.masked_fill(~legal_mask, -torch.inf)
             log_probabilities = F.log_softmax(masked_logits, dim=-1)
@@ -875,6 +990,28 @@ class VariableRosterEventCore:
             # installed nothing here executes at all.
             direct_kernel = None
             if self._kernel_capture is not None:
+                capture_preimage = {
+                    "observations": observations,
+                    "event_flags": flags,
+                    "initial_skills": initial_skills,
+                    "initial_ages": initial_ages,
+                    "pre_token_working_skills": pre_skills,
+                    "pre_token_working_ages": pre_ages,
+                    "pre_token_high_hidden": pre_hidden,
+                    "legal_mask": legal_mask,
+                    "sampled_order": sampled_order,
+                    "active_lifecycle_keys": routing.lifecycle_keys,
+                    "active_membership_epochs": routing.membership_epochs,
+                    "architecture_mode": self.architecture_mode,
+                }
+                if mssr_partition is not None:
+                    capture_preimage["mssr_spf_partition"] = {
+                        "S": mssr_partition.slow_context,
+                        "P": mssr_partition.partner_history,
+                        "F": mssr_partition.fast_control,
+                        "owners": mssr_partition.owners,
+                        "production_action_path": self.production_action_path,
+                    }
                 direct_kernel = self._kernel_capture.capture(
                     owner_lifecycle_key=key,
                     membership_epoch=int(record.membership_epoch),
@@ -884,20 +1021,7 @@ class VariableRosterEventCore:
                     # The complete actor-read preimage other than S03, so the
                     # sink can digest it candidate-side.  Everything here is
                     # already determined before the kernel is produced.
-                    preimage={
-                        "observations": observations,
-                        "event_flags": flags,
-                        "initial_skills": initial_skills,
-                        "initial_ages": initial_ages,
-                        "pre_token_working_skills": pre_skills,
-                        "pre_token_working_ages": pre_ages,
-                        "pre_token_high_hidden": pre_hidden,
-                        "legal_mask": legal_mask,
-                        "sampled_order": sampled_order,
-                        "active_lifecycle_keys": routing.lifecycle_keys,
-                        "active_membership_epochs": routing.membership_epochs,
-                        "architecture_mode": self.architecture_mode,
-                    },
+                    preimage=capture_preimage,
                 )
             policy_action_uniform: float | None = None
             if teacher_actions is not None:
@@ -941,7 +1065,12 @@ class VariableRosterEventCore:
                     owner_row=row_index,
                     active_keys=routing.lifecycle_keys,
                     active_observations=observations,
-                    event_index=position,
+                    event_index=(
+                        0
+                        if record.partner_interaction_history is None
+                        else int(record.partner_interaction_history.rows[-1].event_index)
+                        + 1
+                    ),
                 )
             new_embedding = self.commitment_model.encode_members(
                 observations[row_index : row_index + 1],
@@ -1548,6 +1677,8 @@ class VariableRosterEventCore:
         # from a disabled one for the shared-model equality check.
         if self.partner_interaction_enabled:
             state["partner_interaction_enabled"] = True
+        if self.mssr_joint_production_enabled:
+            state["production_action_path"] = self.production_action_path
         return state
 
     @staticmethod

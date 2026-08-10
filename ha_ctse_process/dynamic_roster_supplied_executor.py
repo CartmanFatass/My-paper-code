@@ -99,6 +99,11 @@ SEED_CONTRACT = {
     "bootstrap": BOOTSTRAP_SEED,
 }
 
+# Public identity for the only supplied-executor production factory that binds
+# the MSSR S/P/F action path.  The core owns the authoritative registry; the
+# factories below fail closed until that registry exposes this exact identity.
+MSSR_JOINT_PRODUCTION_ACTION_PATH = "mssr_joint_spf_pre_recurrence_v1"
+
 HIGH_COUNTER_FIELDS = {
     "update_index",
     "step_in_update",
@@ -214,6 +219,60 @@ def make_model_owner(device: str | torch.device) -> VariableRosterEventCore:
             action_stream_id=ACTION_STREAM_ID,
             device=selected,
         )
+
+
+def _registered_mssr_joint_action_path() -> str:
+    """Resolve the core-owned MSSR path without weakening ordinary imports."""
+
+    from ha_ctse_process import variable_roster_event as event_runtime
+
+    registered = getattr(event_runtime, "MSSR_JOINT_PRODUCTION_ACTION_PATH", None)
+    if registered != MSSR_JOINT_PRODUCTION_ACTION_PATH:
+        raise RuntimeError(
+            "VariableRosterEventCore does not expose the registered MSSR "
+            "joint production action path"
+        )
+    return MSSR_JOINT_PRODUCTION_ACTION_PATH
+
+
+def make_mssr_joint_model_owner(
+    device: str | torch.device,
+) -> VariableRosterEventCore:
+    """Create the registered MSSR supplied-executor model owner.
+
+    This is an explicit factory rather than a new default.  It preserves the
+    ordinary owner's model seed and caller-RNG isolation while selecting the
+    core-owned joint S/P/F pre-recurrence production path.
+    """
+
+    selected = torch.device(device)
+    action_path = _registered_mssr_joint_action_path()
+    with torch.random.fork_rng(devices=_fork_devices(selected)):
+        torch.manual_seed(MODEL_SEED)
+        if selected.type == "cuda":
+            torch.cuda.manual_seed_all(MODEL_SEED)
+        owner = VariableRosterEventCore(
+            architecture_mode="f1",
+            runtime_mode=SUPPLIED_EXECUTOR_RUNTIME,
+            obs_dim=OBSERVATION_DIM,
+            critic_member_dim=OBSERVATION_DIM,
+            critic_global_dim=8,
+            n_skills=ACTION_COUNT,
+            action_dim=ACTION_COUNT,
+            environment_index=0,
+            opportunity_seed=OPPORTUNITY_FRONTIER_SEED,
+            frontier_seed=OPPORTUNITY_FRONTIER_SEED,
+            action_seed=ACTION_SEED,
+            rng_episode_id=0,
+            opportunity_stream_id=OPPORTUNITY_STREAM_ID,
+            frontier_stream_id=FRONTIER_STREAM_ID,
+            action_stream_id=ACTION_STREAM_ID,
+            device=selected,
+            production_action_path=action_path,
+        )
+    if getattr(owner, "production_action_path", None) != action_path:
+        raise RuntimeError("MSSR model owner did not bind the registered action path")
+    return owner
 
 
 def high_parameters(core: VariableRosterEventCore) -> tuple[torch.nn.Parameter, ...]:
@@ -356,6 +415,53 @@ def _make_runtime_core(
         device=model_owner.device,
         shared_models_from=model_owner,
     )
+
+
+def make_mssr_joint_runtime_core(
+    model_owner: VariableRosterEventCore,
+    *,
+    environment_index: int,
+    episode_id: int,
+) -> VariableRosterEventCore:
+    """Create one MSSR runtime core sharing the registered model owner.
+
+    An ordinary model owner is rejected before construction; this API never
+    upgrades or relabels a caller's existing graph implicitly.
+    """
+
+    action_path = _registered_mssr_joint_action_path()
+    if not isinstance(model_owner, VariableRosterEventCore):
+        raise TypeError("MSSR runtime requires a VariableRosterEventCore model owner")
+    if (
+        model_owner.runtime_mode != SUPPLIED_EXECUTOR_RUNTIME
+        or getattr(model_owner, "production_action_path", None) != action_path
+    ):
+        raise ValueError(
+            "MSSR runtime requires a registered MSSR supplied-executor model owner"
+        )
+    core = VariableRosterEventCore(
+        architecture_mode="f1",
+        runtime_mode=SUPPLIED_EXECUTOR_RUNTIME,
+        obs_dim=OBSERVATION_DIM,
+        critic_member_dim=OBSERVATION_DIM,
+        critic_global_dim=8,
+        n_skills=ACTION_COUNT,
+        action_dim=ACTION_COUNT,
+        environment_index=int(environment_index),
+        opportunity_seed=OPPORTUNITY_FRONTIER_SEED,
+        frontier_seed=OPPORTUNITY_FRONTIER_SEED,
+        action_seed=ACTION_SEED,
+        rng_episode_id=int(episode_id),
+        opportunity_stream_id=OPPORTUNITY_STREAM_ID,
+        frontier_stream_id=FRONTIER_STREAM_ID,
+        action_stream_id=ACTION_STREAM_ID,
+        device=model_owner.device,
+        shared_models_from=model_owner,
+        production_action_path=action_path,
+    )
+    if getattr(core, "production_action_path", None) != action_path:
+        raise RuntimeError("MSSR runtime core did not bind the registered action path")
+    return core
 
 
 @dataclass

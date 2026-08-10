@@ -1,6 +1,12 @@
 # VSP-06 MSSR Sequence 12 code-science evidence index
 
-This isolated package implements `CAND-VSP-06-MSSR@adversarial-revision-v8`, treatment `MSSR-D0-PREACT-CLOSURE-AND-REACHABILITY`. It binds one fixed rational synthetic S/P/F unit and separately probes three bounded active production surfaces. It changes no production module, trains no model, advances no rollout, and tunes no parameter.
+This index preserves the historical Sequence-12 predecessor for
+`CAND-VSP-06-MSSR@adversarial-revision-v8` and records the current VSP06-A1
+production binding below.  The predecessor treatment
+`MSSR-D0-PREACT-CLOSURE-AND-REACHABILITY` bound a fixed rational synthetic
+S/P/F unit and inspected three then-current production surfaces; its
+`CONTRACT_NOT_CLOSED` terminal is historical revision-scoped evidence, not the
+current A1 conclusion.
 
 ## Exact raw-output binding
 
@@ -26,7 +32,7 @@ The same registered `X0` and provenance supports historical `P=-1` and `P=+1`, e
 
 The independently written `G_MSSR` and frozen factorized null agree on every legal mask, so the honest gate result is `GATE_EXACTLY_FACTORIZED`. No gate novelty is claimed.
 
-## Active binding boundary
+## Historical predecessor active binding boundary
 
 The commit-scoped probe is limited to these active surfaces at unchanged production base revision `c628683ae04e102620246e440b0e8193955f1e3c`:
 
@@ -34,10 +40,56 @@ The commit-scoped probe is limited to these active surfaces at unchanged product
 - `ha_ctse_process/standalone_models.py`: registered actor recurrence precedes action-distribution construction.
 - `ha_ctse_process/variable_roster_event_models.py`: registered actor recurrence precedes action-distribution construction.
 
-Within only these bounded active-surface probes, there is no registered selective S/P/F partition, authenticated support-native P, or action-before-recurrence first-logit expression. Therefore the active binding terminal is `CONTRACT_NOT_CLOSED`. This is not an exhaustive repository-absence claim.
+At that predecessor revision, those bounded active-surface probes found no
+registered selective S/P/F partition, authenticated support-native P, or
+action-before-recurrence first-logit expression.  Their historical terminal was
+`CONTRACT_NOT_CLOSED`; it is neither a current-source conclusion nor an
+exhaustive repository-absence claim.
 
-## Claim boundary
+## VSP06-A1 joint production binding (2026-08-09)
 
-The smallest conclusion is: a pre-action P residual path is mechanically possible in the fixed rational unit; its gate is exactly factorized; the inspected production surfaces do not close the actual MSSR contract. This package does not establish task value, semantic memory, partner transport, training benefit, return, deployment, broad multiscale utility, actual partner semantics, or production reachability.
+`experiments/candidates/vsp_06_mssr/joint_production_binding.py` registers the
+zero-policy A1 production-factory probe for
+`CAND-VSP-06-MSSR@adversarial-revision-v8`.  The production consumer is
+`VariableRosterEventCore.apply_transaction -> _process_frontier` under the
+explicit `mssr_joint_spf_pre_recurrence_v1` action-path identity.  That single
+path validates the retained owner-private P ledger, constructs the typed
+S/P/F partition owned by `unit.slow_context`, `unit.partner_interaction`, and
+`unit.fast_control`, and makes `EventCommitmentPolicy.first_logits` consume all
+three before the GRU recurrence.  Its post-action partner write remains the
+only P writer.  The ordinary default continues to use the original
+post-recurrence `logits` path.
+
+The focused test constructs two legal transaction histories: source-specific
+initial interactions write different authenticated P; temporary leave plus a
+terminal old source and common replacement source removes the historical
+current-source difference; rejoin retains P while selectively renewing F.
+Both histories then reach byte-identical current non-P actor context, action
+set, order, source and production path with different authenticated P.  Their
+final action is the deterministic argmax of the complete production kernel;
+no teacher action is supplied.  The registered CLI performs no dynamic policy
+execution and reports zero environment,
+policy, learner, trainer, optimizer, evaluation, environment-RNG and action-RNG
+activity; deterministic production-factory construction is reported separately;
+dynamic history execution is technical-test evidence only.
+
+Public implementation/test locators:
+
+- `ha_ctse_process/variable_roster_event.py`
+- `ha_ctse_process/variable_roster_event_models.py`
+- `experiments/candidates/vsp_06_mssr/joint_production_binding.py`
+- `scripts/run_vsp06_a1_joint_production_binding.py`
+- `tests/experiments/candidates/vsp_06_mssr/test_joint_production_binding.py`
+
+Claim boundary: A-level production binding and legal-history matched-support
+support only.  No learner, training, return, algorithm-effect, B/C, promotion,
+retirement, sibling-direction, or deployment conclusion is licensed.
+
+## Historical predecessor claim boundary
+
+The predecessor's smallest conclusion was: a pre-action P residual path was
+mechanically possible in its fixed rational unit and its gate was exactly
+factorized, while the production surfaces inspected at that revision did not
+close the MSSR contract.  It is retained only as predecessor provenance.
 
 Technical acceptance is proof-sized: all manifest, closure, illegal-mask, initializer, current-rebuild, support, side-channel, action-order, no-update, residual-null, gate-equality, production-probe, stable-CLI, source-size and index-binding checks must pass.
