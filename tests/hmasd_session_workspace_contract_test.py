@@ -44,7 +44,7 @@ def test_assignment_writing_preserves_semantic_context_over_file_only_anchors() 
     assert "workflow_assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace" in contract
     assert "does not replace the semantic assignment" in contract
     assert "returns its conclusion to the parent" in contract
-    assert "Root retains canonical writes, Git, lifecycle and cross-owner routing" in contract
+    assert "Root retains canonical writes, Git, helper lifecycle/receipt control and cross-owner routing" in contract
     assert "Manager proposals may be kept in an assignment-specific temporary state-proposal file, but a proposal is not canonical state until Root accepts and writes it" in router
     assert "workflow_root_reload=fresh_root_task_canonical_reload" in contract
     assert "workflow_root_reload_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface" in contract
@@ -171,10 +171,11 @@ def test_durable_and_temporary_workspaces_remain_separate() -> None:
     ):
         assert required in normalized
     assert "Root-managed worktree" in normalized_router
-    assert "tracked writers" in normalized_router
-    for exemption in ("read-only", "ignored-only", "temp-only"):
+    assert "tracked writer" in normalized_router
+    assert "mixed tracked and ignored assignment is still a tracked writer" in normalized_router
+    for exemption in ("read-only", "ignored-only", "temporary-only"):
         assert exemption in normalized_router
-    assert "ticket identity is not a child admission or authority requirement" in normalized_router
+    assert "mandatory_ticket_identity=forbidden_for_subagent_authority" in normalized_router
     assert "child_forked_context=background_only" in normalized
     assert "Formats and suggested sections aid understanding but never become admission gates" in normalized
     assert "workflow_surface_owner=true" in readme

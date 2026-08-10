@@ -151,8 +151,9 @@ def test_execution_policy_is_subagent_default_with_explicit_wdm_exception() -> N
     assert "workflow_subagent_parallelism=parallel_first_with_dependency_order" in router
     assert "every workflow-file mutation remains on the registered l2 subagent route" in normalized
     assert "ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order" in normalized
-    assert "direct user instruction may change the semantic scope, but it does not grant wdm physical write authority" in normalized
-    assert "the native default exception below is a caller action and creates no registered child, profile or role" in normalized
+    assert "root remains the only user-contact and physical-application actor" in normalized
+    assert "native default child" in normalized
+    assert "exact bounded temporary task" in normalized
     assert "pure wdm design or authority decisions without file mutation remain wdm-local" in normalized
     assert "mechanism and simple-operation budgets constrain" in audit.lower()
     assert "never decide delegate-vs-local routing" in audit.lower()

@@ -123,14 +123,18 @@ def test_three_root_registered_l1_managers_have_frozen_routing() -> None:
         assert "spawn_authority=none" not in instructions
 
         for required in (
-            "native default temporary-task exception",
             'agent_type="default"',
             'model="gpt-5.6-luna"',
             'reasoning_effort="high"',
             'fork_turns="1"',
-            "adds no generic profile or role",
         ):
             assert required in role, (name, required)
+        assert "native default" in role, (name, "native default")
+        assert "exact bounded" in role, (name, "exact bounded")
+        assert (
+            "adds no generic profile or role" in role
+            or "never gains durable, git, routing, science, runtime or acceptance authority" in role
+        ), (name, "native default scope")
 
     callable_leaves = [child for spec in MANAGERS.values() for child in spec["allow"]]
     assert len(callable_leaves) == len(set(callable_leaves)) == len(LEAF_ROLES)
