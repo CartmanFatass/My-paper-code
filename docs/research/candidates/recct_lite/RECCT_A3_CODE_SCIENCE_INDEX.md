@@ -167,3 +167,19 @@ Even a future passing branch certifies only finite construction and
 noninterference for this one selected pair. It supplies no signed-credit
 validity, policy value, learning, natural incidence, LR/RL equality,
 generalization, B1 repair, automatic B2 license, C or Pro claim.
+
+## A3 prospective provenance-failure publication (source 3267ba1ab60785540de0cf2a74a4315c12045a53)
+
+The registered publication records branch `A3_PROSPECTIVE_PAIR_CAPSULE_OR_CREDIT_PROVENANCE_FAILURE`.
+The first failure was no pre-existing immutable registered credit-source DTO.
+Exactly one named audit was observed; pair/capsule/shadow/optimizer/cell/
+selector/sentinel/runtime/retry/open counts are all zero, and no synthetic
+credit was created. Source readiness is `r3`; the operator is `ERROR` solely
+because this branch does not evaluate. The raw result is byte-identical to
+the authoritative source log at
+`recct_a3_common_one_port_update_bank_noninterference_3267ba1a_r1/raw_result.json`.
+
+Nonclaims: this branch provides no construction, noninterference, signed-credit
+validity, policy-value, learning, natural-incidence, LR/RL-equality,
+generalization, B1-repair, C, or Pro claim. It is not a B2 license; B2 is
+forbidden from being inferred or authorized from this provenance failure.
