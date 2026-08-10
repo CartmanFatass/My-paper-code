@@ -14,6 +14,17 @@ project, directs engineering repair, and owns runtime and transport. Root owns
 cross-owner relay, physical canonical writes and Git mechanics. A bounded child
 requires an exact assignment and never scopes, accepts, or commits its work.
 
+This Skill is action-triggered context, not CPM default startup context: load it
+only for an assignment-named implementation, debugging, refactoring or
+validation action. For such an action, apply the Root-managed tracked-write
+worktree contract in
+`docs/session-workspaces/code_project_manager/README.md` before writing tracked
+paths or mixed tracked/ignored output; read-only, ignored-only and
+temporary-only work is exempt. The worktree is a Root-owned physical resource,
+not identity, authority or runtime admission, and consumes zero units; CPM's
+runtime pool remains three. L2 children never create/manage worktrees or use
+raw child worktree commands.
+
 ```text
 superpowers_plugin=reference_only
 superpowers_execution=disabled
@@ -111,7 +122,14 @@ analyze` and its terminal receipt. This Skill does not reproduce those lanes;
 CPM remains the orchestrator, assignment author and sole technical/mechanical
 acceptance owner.
 
-## Action-bearing Explorer↔CPM interface
+## Action-triggered references and action-bearing Explorer↔CPM interface
+
+Load the parallel-research runtime reference only for a result-bearing
+treatment/admission action; load the execution-readiness Role and helper only
+when the existing execution-entry, artifact-lifecycle, serialization or
+phase-connection trigger fires. Load the Explorer↔CPM contract and project
+maps/views only when the assignment names an Explorer handoff or a coupled or
+load-bearing project task. These references remain outside default startup.
 
 Use `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` as the single
 detailed source. CPM consumes and returns action-bearing prose; it never infers
@@ -180,14 +198,14 @@ policy decisions, metrics and artifact I/O. Keep public interfaces minimal,
 dependencies directed, and complexity isolated. Extract shared code when it
 improves ownership or serves multiple live callers.
 
-## Project cognition references
+## Action-triggered project cognition references
 
-For a new task-scoped coding assignment, or when Code Project Manager clearly lacks the
-project mental model, read the reusable
+For a new task-scoped coding assignment, or when Code Project Manager clearly
+lacks the project mental model during an assignment action, read the reusable
 `.agents/skills/hmasd-writing-agent-assignments/references/project-cognition-bootstrap-prompt.md`
-once alongside the normally routed documents. It is a cognitive reference, not
-an authority source; never copied to each child assignment or loaded on every
-round.
+once alongside the normally routed documents. This is an action-triggered read,
+not default startup context. It is a cognitive reference, not an authority
+source; never copied to each child assignment or loaded on every round.
 
 Use context depth deliberately rather than mechanically:
 
@@ -342,8 +360,10 @@ slice.
 - Each concurrent treatment has an exact assignment, candidate-specific source
   freeze, accepted candidate revision, run/evidence/checkpoint/result roots,
   seed/RNG namespace, temporary session paths and technical-acceptance record.
-  These are semantic candidate bindings, not Git identity requirements; the
-  assignment-owned paths remain the write boundary.
+  These are semantic candidate bindings, not Git or worktree identity
+  requirements; when the assignment may write tracked paths, the Root-managed
+  worktree is provisioned under the separate contract above. Assignment-owned
+  paths remain the write boundary.
 - Children do not perform Git or acceptance. Explicit CPM readiness dispatch
   yields a candidate-ready proposal to Root. Only when separately authorized,
   Root creates one local candidate commit; CPM dispatches the same-candidate

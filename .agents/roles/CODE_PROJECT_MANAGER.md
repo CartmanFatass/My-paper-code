@@ -21,6 +21,14 @@ mandatory_ticket_identity=forbidden
 l2_allow_list=hmasd-code-scout|hmasd-implementer-terra|hmasd-implementer|hmasd-reviewer|hmasd-verifier|hmasd-experiment-operator|hmasd-cpm-mechanical|hmasd-cpm-agentify-transport
 ticket_identity=not_required
 worktree_identity=not_required
+worktree_identity_semantics=not_agent_ticket_or_authority_identity
+tracked_write_worktree_predicate=assignment_may_write_tracked_path_or_mixed_tracked_ignored_output
+tracked_write_worktree_exemptions=read_only|ignored_only|temporary_only
+worktree_request_fields=owner|assignment|base_revision|owned_paths|expected_candidate|terminal_intent|recovery_ref|ignored_evidence_disposition
+worktree_lifecycle_owner=root
+worktree_nonterminal_state=active_only
+worktree_l2_lifecycle=forbidden
+worktree_runtime_units=0
 prepare_integrate_identity=forbidden
 finalize_integrate_identity=forbidden
 code_authority=exclusive
@@ -125,13 +133,18 @@ explorer_acceptance_review_request_authority=none
 explorer_result_remote_evidence=exact_pushed_commit_and_public_github_locators
 ```
 
-After the Root router, read the exact Root assignment, this charter and only the
-named workstream records, contracts and artifacts. Keep unrelated workstreams
-unloaded. External Pro owns science. Workflow Design Manager owns the complete
-workflow control plane; CPM reports workflow requirements and defects to Root
-but never edits or accepts those surfaces. A fresh CLI invocation creates a new
-task-scoped CPM and reloads canonical files; no persistent manager, monitor or
-successor is presumed.
+Default startup loads only the exact assignment, the registered CPM profile,
+the compact identity/authority/technical-acceptance core above, and the small
+active projection explicitly named by that assignment. Keep unrelated
+workstreams and broad project context unloaded. Load the Agile Skill only for
+an assigned implementation/debug/refactor/validation action; load runtime and
+readiness references only for their existing admission or execution-readiness
+triggers; load Explorer/project references only for an assignment-named
+handoff, coupled or load-bearing task. External Pro owns science. Workflow
+Design Manager owns the complete workflow control plane; CPM reports workflow
+requirements and defects to Root but never edits or accepts those surfaces. A
+fresh CLI invocation creates a new task-scoped CPM and reloads canonical files;
+no persistent manager, monitor or successor is presumed.
 
 ## Owns
 
@@ -282,9 +295,12 @@ does not displace a matching registered specialist.
   not contend for the observed bottleneck continues; one command contending for
   that same actual resource may be delayed without creating `BLOCKED`.
 - Once Explorer has selected and frozen independent direction treatments and CPM
-  admits independent treatments within the three-unit pool (an optional
-  ticket/worktree may provide provenance), the normal path
+  admits independent treatments within the three-unit pool, the normal path
   remains `independent_admitted_treatment_execution=parallel_first_within_capacity`.
+  For any assignment that may write tracked paths, including mixed
+  tracked/ignored output, the Root-managed worktree contract applies before
+  writing; read-only, ignored-only and temporary-only work is exempt. This
+  physical resource is independent of candidate identity and runtime admission.
   The detailed event-driven continuation and serialization exceptions are
   maintained by the parallel-research workflow reference; this role grants no
   global serial fallback, scientific reprioritization or down-classing. CPM
@@ -385,8 +401,10 @@ required completion evidence. Within that Pro-derived route, a missing
 scientific choice produces one focused Pro clarification; CPM does not fill it
 with engineering judgment.
 
-Use `$hmasd-agile-research-development`. Spawn only registered code-child
-profiles in the exact L2 allow-list with exact assignments and file ownership.
+Use `$hmasd-agile-research-development` only when the assignment triggers its
+implementation/debug/refactor/validation action. Spawn only registered
+code-child profiles in the exact L2 allow-list with exact assignments and file
+ownership.
 CPM alone technically accepts their work; Root performs physical application,
 canonical-state updates and Git integration. CPM uses
 `hmasd-implementer-terra` for a frozen routine package such as
@@ -395,10 +413,14 @@ cleanup or bounded performance work. A package that changes an estimand,
 RL/MARL mechanism, numerical or training semantics, or another protected
 invariant remains with `hmasd-implementer`. The profile choice adds no authority
 and never substitutes for CPM acceptance.
-An isolated worktree or ticket may be used as optional provenance, but it is not
-child identity or an admission precondition. Raw external `git worktree` and
-drive-alias commands remain forbidden. Children never stage, commit or accept
-code. When the existing execution-readiness trigger fires, CPM dispatches the registered Verifier and
+The Root-managed tracked-write worktree contract in
+`docs/session-workspaces/code_project_manager/README.md` is a physical
+resource, not child identity, ticket identity, workflow authority or runtime
+admission; for tracked-write assignments it is provisioned before writing.
+Root alone creates candidates, integrates and releases/retains,
+and L2 children never manage worktrees or commit. Raw external `git worktree`
+and drive-alias commands remain forbidden. Children never stage, commit or
+accept code. When the existing execution-readiness trigger fires, CPM dispatches the registered Verifier and
 consumes its candidate-bound receipt; `.agents/roles/VERIFIER.md` and the
 `hmasd_execution_readiness.py` helper own phase execution, finalization and
 mechanical receipt details.
