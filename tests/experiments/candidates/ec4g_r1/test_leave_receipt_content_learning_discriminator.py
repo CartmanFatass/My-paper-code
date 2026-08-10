@@ -5,6 +5,8 @@ from copy import deepcopy
 import inspect
 import json
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 import torch
@@ -13,6 +15,18 @@ from experiments.candidates.ec4g_r1 import (
     leave_receipt_content_learning_discriminator as b1,
 )
 from scripts import run_ec4g_b1_leave_receipt_content_learning_discriminator as runner
+
+
+def test_runner_help_is_callable_outside_repository(tmp_path: Path) -> None:
+    completed = subprocess.run(
+        [sys.executable, str(Path(runner.__file__).resolve()), "--help"],
+        cwd=tmp_path,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "registered-full" in completed.stdout
 
 
 @pytest.fixture(scope="module")
