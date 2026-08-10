@@ -2,6 +2,12 @@
 
 This isolated package implements `CAND-VSP-06-MSSR@adversarial-revision-v8`, treatment `MSSR-D0-PREACT-CLOSURE-AND-REACHABILITY`. It binds one fixed rational synthetic S/P/F unit and separately probes three bounded active production surfaces. It changes no production module, trains no model, advances no rollout, and tunes no parameter.
 
+## Exact-revision reconciliation
+
+The embedded `CONTRACT_NOT_CLOSED` report below is a historical active-surface finding bound to production comparison anchor `c628683ae04e102620246e440b0e8193955f1e3c`; it is not a present-revision absence statement. At inspected package revision `1236cdc096fe913d7854892275284c652d7df00b`, later source and tests establish a registered provenance-bound P carrier and an opt-in action-before-recurrence `first_logits` surface. They do not establish a production selective S/P/F partition or matched-support reachability for historical P at one common current non-P context. The bounded technical package is therefore accepted while the joint production contract remains `CONTRACT_NOT_CLOSED`.
+
+The assignment-specific reconciliation, per-object findings, focused receipts, limits, and exact missing engineering object are recorded in [`REVISION_RECONCILIATION.md`](REVISION_RECONCILIATION.md). This is A-only technical evidence and is not a Scheduler C-cycle event.
+
 ## Exact raw-output binding
 
 - Binding: `vsp06_mssr.preaction_closure.sequence12.v1`

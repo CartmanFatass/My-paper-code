@@ -17,6 +17,7 @@ from experiments.candidates.vsp_06_mssr import preaction_closure_certificate as 
 ROOT = Path(__file__).resolve().parents[4]
 SOURCE = ROOT / "experiments/candidates/vsp_06_mssr/preaction_closure_certificate.py"
 INDEX = ROOT / "docs/research/candidates/vsp_06_mssr/CODE_SCIENCE_INDEX.md"
+RECONCILIATION = ROOT / "docs/research/candidates/vsp_06_mssr/REVISION_RECONCILIATION.md"
 
 
 def assert_failure(label: str, callback) -> None:
@@ -254,6 +255,22 @@ def test_index_binds_exact_cli_output_and_claim_boundary() -> None:
     assert "bounded active-surface" in index
     for prohibited in ("task value", "semantic memory", "partner transport", "training benefit", "return", "deployment"):
         assert prohibited in index
+
+
+def test_index_reconciles_historical_terminal_with_later_objects() -> None:
+    index = INDEX.read_text(encoding="utf-8")
+    result = RECONCILIATION.read_text(encoding="utf-8")
+    assert "c628683ae04e102620246e440b0e8193955f1e3c" in index
+    assert "1236cdc096fe913d7854892275284c652d7df00b" in index
+    assert "historical active-surface finding" in index
+    assert "registered provenance-bound P carrier" in index
+    assert "not a Scheduler C-cycle event" in index
+    assert "technical_disposition=ACCEPTED_BOUNDED_PACKAGE" in result
+    assert "joint_contract_terminal=CONTRACT_NOT_CLOSED" in result
+    assert "Present in the fixed rational synthetic unit; absent as a registered production partition." in result
+    assert "Present as a registered source/carrier; insufficient for matched support." in result
+    assert "Present as an opt-in feasible surface." in result
+    assert "does not qualify as a Scheduler C-cycle event" in result
 
 
 def test_source_has_no_production_import_or_training_path() -> None:
