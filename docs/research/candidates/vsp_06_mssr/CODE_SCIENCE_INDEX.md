@@ -108,6 +108,52 @@ Claim boundary: A-level production binding and legal-history matched-support
 support only.  No learner, training, return, algorithm-effect, B/C, promotion,
 retirement, sibling-direction, or deployment conclusion is licensed.
 
+## VSP06-A2 selected-P causal and generic-compile null (2026-08-09)
+
+The direction-local registered producer is
+`experiments/candidates/vsp_06_mssr/selected_p_causal_generic_null.py`, with
+CLI `scripts/run_vsp06_a2_selected_p_causal_generic_null.py` and proof-sized
+isolated technical checks in
+`tests/experiments/candidates/vsp_06_mssr/test_selected_p_causal_generic_null.py`.
+Its raw binding is `vsp_06_mssr.selected_p_causal_generic_null.a2.v1` and it
+consumes only the accepted public A1 two-history witness at final package commit
+`a62892e9487c8aad30cff1c83b1bbc46cb0df588`.
+
+The one registered audit freezes the accepted production path and model owner,
+the byte-complete equal current non-P actor preimage (including recurrence,
+legal mask and order), both authenticated P carriers and complete writer
+provenance, deterministic argmax conditions, and a predeclared tolerance of
+`64 * float32 epsilon`.  It retains factual KEEP, authenticated selected-P
+cross-swaps at identical X, the accepted full-current `B_P(X)=0` rebuild,
+paired perturbations of one actual unselected unauthenticated P carrier at the
+production selection boundary with selected P/provenance fixed, and an
+exact two-row generic finite compiler receiving X, P, provenance, recurrence,
+mask, order and path.  Its total scalar capacity exactly matches the registered
+production `first_decoder + first_head`; six slots compile the retained
+two-by-three centered-logit mapping and the remaining matched slots are inert.
+No model fit is performed.
+
+The exact fail-closed precedence is:
+
+1. `A2_INVALID_CONTRACT_PROVENANCE_OR_UNMATCHED_NULL`
+2. `A2_SELECTED_P_ACTION_NULL`
+3. `A2_DECOY_OR_UNAUTHENTICATED_PAYLOAD_SENSITIVE`
+4. `A2_SELECTED_P_LOGIT_ONLY`
+5. `A2_CURRENT_REBUILD_COMPILES_BOTH_HISTORIES`
+6. `A2_GENERIC_COMPILER_DOES_NOT_MATCH_WITH_EQUAL_INFORMATION`
+7. `A2_SELECTED_P_CAUSAL_EFFECT_GENERIC_NULL_COMPILES`
+
+The registered activity budget is exactly ten focused production-kernel
+calls, below the cap of 24, and zero environment transitions, learner/trainer
+calls, optimizer updates, evaluation episodes, model fits and RNG draws.  The
+audit has not been executed by implementation or proof-sized fixture checks;
+the registered result branch and arm values remain result-bearing CPM-owned
+evidence.  Branch 7 would establish only selected-P-specific production-kernel
+causality plus an equal-information generic compile null; it would make one
+ordinary B freeze-ready solely as an inductive-bias/credit-efficiency test.
+No learning, value, return, B/C, promotion, retirement, sibling-direction or
+deployment conclusion is licensed by A2.
+
 ## Historical predecessor claim boundary
 
 The predecessor's smallest conclusion was: a pre-action P residual path was
