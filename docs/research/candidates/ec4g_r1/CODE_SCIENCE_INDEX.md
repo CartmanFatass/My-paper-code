@@ -213,6 +213,20 @@ or operational value.
 
 ## EC4G-A2 prospective contract-binding audit implementation
 
+### Registered A2 publication result
+
+The registered A2 audit is published at
+`docs/research/candidates/ec4g_r1/EC4G_A2_PROSPECTIVE_CONTRACT_BINDING_AUDIT_RESULT.json`
+for source commit `3ca57cb2969de0f9a307219d6844f29a1be52797`, auditing the
+published A1 artifact at commit `497d1429beaf648b0cb6672523d0e87370ad736e`.
+It records exactly one registered audit, a five-entry frozen inventory, and
+fourteen missing roles. The first failure is
+`objective_contract/MISSING_PREEXISTING_BINDING`; terminal branch is
+`A2_PARTIAL_OR_INCOHERENT_BINDING`. Environment, policy, learner, trainer,
+optimizer, return-evaluation, model-fit, and stochastic activity are each
+zero. This publication is a byte-materialized audit only: it makes no repair,
+inference, scientific disposition, or future-action claim.
+
 `EC4G-A2-PROSPECTIVE-CONTRACT-BINDING-AUDIT` is a read-only analyzer for the
 immutable publication snapshot
 `497d1429beaf648b0cb6672523d0e87370ad736e`. Before inspecting any scientific
