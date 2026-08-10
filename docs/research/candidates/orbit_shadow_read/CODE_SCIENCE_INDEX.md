@@ -1,4 +1,103 @@
-# ORBIT eight-cell cloned shadow-read: code-science index
+# ORBIT verified-owner-binding reachability: code-science index
+
+## Active prospective interface revision
+
+Candidate: `CAND-VAP-ORBIT-LITE@verified-owner-binding-revision-v9`
+
+Treatment: `ORBIT-A2-VERIFIED-OWNER-BINDING-REACHABILITY`
+
+Status: implementation candidate only. The single registered audit has not
+been run by the implementer, so this section records the frozen executable
+contract and observables rather than a scientific result.
+
+### Typed actor boundary
+
+`VerifiedOwnerBindingView` applies checks in the registered order: trusted
+principal, authorization, signature, schema, epoch, payload digest, then source
+snapshot digest. A valid certificate exposes exactly
+`(VALID, opaque_owner_handle, epoch, payload_digest,
+source_snapshot_digest)`. Every invalid cause exposes exactly
+`(INVALID, bottom, bottom, bottom, bottom)` and quarantines the payload outside
+the actor boundary. Raw certificates, signatures, key IDs, certificate
+digests, trust-store indices, cache addresses, internal IDs, payload bytes and
+principal IDs are absent from `ActorInput`.
+
+Two independently controlled trusted principals sign one byte-identical sealed
+statement. Their handles are distinct equal-format opaque categorical tokens.
+Only `owner_by_role_residual` consumes such a token. Its embedding row is unit
+normalized and its two equally weighted structural-role residuals sum to zero,
+so the owner main effect is zero by construction. The nonprincipal base path is
+separate and unrestricted by the owner slice.
+
+The matched `owner_blind` route substitutes one principal-invariant anonymous
+owner row while preserving branch width. The `validity_only` route retains
+generic validity and a shape-matched zero owner slice. Invalid views on all
+three routes invoke `zero_path_owner_bypass(current_state, action_space)`, which
+returns centered logits and a masked first-action kernel over the unchanged
+ordered legal actions.
+
+### Frozen audit and branch table
+
+The single registered audit freezes float64-scaled logit and kernel tolerances
+before any observation. It evaluates four valid cells (two principals crossed
+with two structurally cloned roles) and one signature-corrupted invalid cell on
+each of three isolated routes: exactly 15 route-cell calls. Model bytes,
+recurrence bytes, current state, mask/action order, clocks, roster,
+communication state and evaluation mode are identical across fresh clones.
+Evaluation clones contain no clone ID, principal label or role metadata;
+human-readable reporting IDs are attached only after evaluation completes.
+There is no RNG, latency, batch, padding, address, cache, lookup or evaluation
+order input. Each route-cell call evaluates its original input and a jointly
+relabeled-owner/permuted-embedding-row counterpart, and requires exact equality
+of both centered logits and the masked kernel.
+
+Branch precedence is fixed as:
+
+1. `A2_INVALID_CONTROL`
+2. `A2_OWNER_ALIAS_NOT_CONSUMED`
+3. `A2_NO_LOGIT_ESTIMAND`
+4. `A2_FAIL_OPEN_INVALID`
+5. `A2_LEAKAGE_OR_UNCONTROLLED_PATH`
+6. `A2_GENERIC_PROVENANCE_GATE`
+7. `A2_OWNER_MAIN_EFFECT_ONLY`
+8. `A2_LOGIT_REACHABILITY_ONLY`
+9. `A2_OWNER_BINDING_REACHES_FIRST_ACTION_KERNEL`
+
+Branch 9 requires candidate owner-by-role mixed differences above the frozen
+tolerances in centered logits and the masked first-action kernel, candidate
+owner main effects within tolerance, both comparator mixed differences within
+tolerance, and byte-exact invalid ZERO_PATH fallback. It supports only
+interface actionability. It does not establish learned owner meaning, natural
+use, utility, persistence, task return or generalization.
+
+### Traceability
+
+| claim_id | frozen assertion | code path and symbol | observable invariant | focused test | alternate explanation excluded |
+|---|---|---|---|---|---|
+| ORBIT_A2_VIEW | Authentication yields only the typed valid tuple or the all-bottom invalid tuple | `experiments/candidates/orbit_shadow_read/verified_owner_binding_reachability.py::verify_owner_binding`; `::VerifiedOwnerBindingView` | Same sealed content produces distinct equal-format opaque handles; every invalid cause quarantines and returns all bottom | `tests/experiments/candidates/orbit_shadow_read/test_verified_owner_binding_reachability.py::test_verified_view_binds_distinct_opaque_owners_to_identical_content`; `::test_every_invalid_cause_is_all_bottom_and_quarantines_payload` | A raw principal identifier, certificate field, malformed partial view, or unauthenticated payload cannot reach the actor. |
+| ORBIT_A2_RESIDUAL | The handle enters only a normalized owner-by-role residual with zero role-weighted owner main effect | `::owner_by_role_residual`; `::build_actor_input` | Unit row norm, exact two-role zero mean, identical nonprincipal tensor under principal swaps | `::test_owner_residual_is_normalized_zero_main_effect_and_alias_row_permutation_invariant`; `::test_principal_swap_is_identical_outside_handle_slice_and_nulls_are_invariant` | A principal-dependent base feature or owner main effect cannot masquerade as the mixed difference. |
+| ORBIT_A2_NULLS | Owner-blind and validity-only routes preserve structure without a swappable owner category | `::Route`; `::build_actor_input`; `::_principal_invariant` | Both comparator outputs are principal-invariant at each role and have zero mixed differences within frozen tolerances | `::test_principal_swap_is_identical_outside_handle_slice_and_nulls_are_invariant` | Generic validity, branch presence, or owner-slice capacity cannot explain candidate specificity. |
+| ORBIT_A2_INVALID | Every invalid route uses the registered current-state-only bypass | `::zero_path_owner_bypass`; `::evaluate_route_cell` | Centered logits and masked kernel equal the bypass exactly; legal action identity/order is unchanged | `::test_invalid_routes_fail_closed_to_exact_current_state_only_bypass` | A fail-open invalid payload, owner-dependent invalid path, or action-mask substitution is rejected. |
+| ORBIT_A2_CONTROL | Route observations use fresh isolated equal-state clones and no reporting-identity side channel | `::RouteClone`; `::evaluate_route_cell`; `::_attach_reporting_identity`; `::run_verified_owner_binding_audit` | Evaluator clone metadata has no clone/principal/role ID; report-only IDs are attached after output; every original versus jointly relabeled/permuted evaluation has exactly equal logits and kernels | `::test_regression_reporting_clone_id_cannot_feed_the_evaluator`; `::test_owner_residual_is_normalized_zero_main_effect_and_alias_row_permutation_invariant`; `::test_registered_audit_is_deterministic_branch_nine_and_uses_exactly_fifteen_cells` | A P0/P1-encoded clone ID, sequential recurrence, mask/order, clock, roster, communication, RNG, lookup or address variation cannot create the contrast. |
+| ORBIT_A2_BRANCH | The nine-way terminal is ordered and fail closed | `::Branch`; `::BranchWitnesses`; `::select_branch` | Every earlier failed witness selects its earlier registered branch | `::test_branch_precedence_is_exact_and_fail_closed` | A later favorable witness cannot override an earlier invalid control or leakage finding. |
+
+### Bounded execution
+
+The audit has `H=0`, `K_search=0`, zero hypothetical transitions and exactly 15
+pure route-cell calls. Environment transitions, learner/trainer calls,
+optimizer updates, return evaluations and model fits are all hard-coded zero.
+The runner creates a write-once claim before the first route call and offers no
+retry, rescue, sweep, technical-result substitute, B or C path.
+
+The result-bearing command is intentionally not included here until CPM binds
+the accepted source commit and registered isolated run root. CLI surface-only
+inspection is available with:
+
+```powershell
+& 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe' scripts/run_orbit_a2_verified_owner_binding_reachability.py --help
+```
+
+## Predecessor v8 evidence retained for contrast
 
 Candidate: `CAND-VAP-ORBIT-LITE@adversarial-revision-v8`
 
