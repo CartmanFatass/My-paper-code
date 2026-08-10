@@ -2,16 +2,6 @@
 
 ```text
 campaign_unit=one_broad_research_direction
-owner_modes=direction|portfolio
-direction_owner_scope=one_named_direction_without_sibling_preload
-portfolio_owner_scope=explicit_named_direction_set_only
-owner_task_result=conclusion_first_canonical_capsule
-evidence_level_runtime_orthogonal=true
-resource_model=observed_resource_vector_and_conflict_set
-resource_conflict_serialization=only_named_dependency_or_observed_vector_or_mutable_conflict
-owner_task_exact_inputs=canonical_inputs_named_by_assignment
-owner_task_write_paths=canonical_write_paths_named_by_assignment
-owner_task_result_destination=canonical_result_destination_named_by_assignment
 source_first=true
 fixed_first_wave_count=forbidden
 phase_order=corpus_lock|source_absorption|innovation|principles_review|adversarial_review|portfolio_update
@@ -21,11 +11,6 @@ formal_promotion=forbidden
 ```
 
 ## Research object
-
-Each campaign phase runs in a same-level owner task. Direction mode remains
-one named direction without sibling preload; portfolio mode integrates only an
-explicitly named direction set. The task assignment is self-contained and
-returns one conclusion-first canonical capsule for archival.
 
 This campaign is for a fuzzy but bounded direction such as variable skill
 period or variable agent population. It is not a contest among prewritten

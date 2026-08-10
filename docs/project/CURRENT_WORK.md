@@ -4,9 +4,8 @@
 document_kind=current_work_index
 schema_version=3
 index_owner=workflow_design_manager
-research_scheduler_session=docs/project/current-work/sessions/research_scheduler.md
 state_updated=2026-08-08
-session_record_ids=workflow_design_manager|research_scheduler
+session_record_ids=code_project_manager|workflow_design_manager
 common_record_ids=formal_toy_research|uav_validation|explorer_project_validation|independent_research_explorer_pointer|workflow_control_plane
 legacy_snapshot=docs/project/archive/CURRENT_WORK_LEGACY_2026-08-01.md
 ```
@@ -16,8 +15,7 @@ and sessions do not share a write surface.
 
 ## Session records
 
-- [Retired Code Project Manager pointer](current-work/sessions/code_project_manager.md)
-- [Research Scheduler](current-work/sessions/research_scheduler.md)
+- [Code Project Manager](current-work/sessions/code_project_manager.md)
 - [Workflow Design Manager](current-work/sessions/workflow_design_manager.md)
 
 ## Common records

@@ -1,24 +1,15 @@
 ---
 name: hmasd-independent-research-pro-review
-description: Use when an assignment-scoped Independent Research Explorer owner task needs an exact Pro or Gemini direction or methodology review.
+description: Use from the persistent Independent Research Explorer to send exact Pro or Gemini direction or methodology review questions through the registered Agentify transport child.
 ---
 
 # HMASD Independent Research External Review
 
 ## Boundary
 
-This Skill is invoked only from an assignment-scoped same-level user-owned
-Desktop Explorer owner task. The owner is `owner_mode=direction|portfolio` and
-the review remains inside its exact direction or explicitly named direction set.
+This Skill is invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`.
 The Explorer owns both independent-research direction reviews and methodology
-audits; there is no separate review-operator owner task.
-
-The self-contained natural-language review assignment names the exact canonical
-inputs, permitted write paths and result destination. These owner facts stay in
-the local brief and never enter `RAW_QUESTION` or become transport schema.
-Each assignment-scoped direction/portfolio owner freezes an exact review
-boundary. The local brief names `owner_mode=direction|portfolio`, exact
-canonical inputs, exact canonical write paths and exact result destination.
+audits; there is no separate persistent review-operator session.
 
 This Skill grants no workflow-design, code, runtime, compute, Git, formal
 science or project-state authority. The response is advisory input to the

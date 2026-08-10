@@ -14,29 +14,6 @@ External Pro owns scientific choices inside each submitted review boundary.
 Workflow Design Manager owns this stable interface, not its live handoff
 content.
 
-## Desktop Scheduler owner-task interface
-
-Scheduler creates a same-level user-owned Desktop Explorer owner task for each
-assignment. The task carries `owner_mode=direction` for one named direction or
-`owner_mode=portfolio` for an explicitly named direction set. Direction mode
-does not preload siblings; portfolio mode does not infer or merge directions
-outside its named set. The assignment is self-contained natural language and
-names the exact canonical inputs, write paths and result destination. Existing
-registered research, mechanical and Agentify children remain available with
-their existing profiles and authority. A terminal owner task returns a
-conclusion-first canonical capsule and is archived.
-
-Evidence level A/B/C describes scientific meaning only; it is orthogonal to
-the observed runtime resource envelope. Scheduler observes resource vectors
-and conflict sets (including CPU, memory, GPU, process, I/O, network,
-paid-service, mutable-path, mutable-object and output-root claims). CPM owns
-runtime admission and observations. Disjoint vectors and writers permit the
-parallel-first path; serialization requires a named dependency, same writer
-or mutable object/path, an observed vector conflict, or an explicitly marked
-formal local result-bearing runtime that excludes only conflicting local
-experiment runtime. A resource wait never blocks research, intake, code,
-review, Pro or unrelated non-runtime work.
-
 ## Direction-local context binding
 
 Every direction-specific Explorer answer and Explorer-to-CPM handoff is
@@ -60,45 +37,12 @@ consumer; completion evidence; and return destination. These cues make the
 semantic binding understandable without
 creating required field names or a machine admission gate.
 
-An Explorer-generated CPM assignment or brief carries the selected direction
-identity, exact candidate proposition and source/evidence revision boundary in
-its own prose, along with the protected scientific meaning: frozen facts,
-uncertainty, strongest alternative and allowed/excluded interpretations. A
-`local_research/.../DIRECTION.json` locator is, if present, Explorer-only
-provenance; it is not a CPM-readable canonical input. CPM reads the
-assignment-embedded prose and exact project source, test and index paths. Only
-when extra bytes are genuinely needed may Explorer provide one exact,
-self-contained file under `temp/handoffs/explorer_to_code_manager/`; CPM never
-reads `local_research/`.
-
-### Concrete next-hop semantics
-
-Whenever a continuity entry or handoff describes a direction as **ready**,
-**parked**, **pending**, **blocked**, **unlock**, **locked/unlocked**, **cannot proceed**, or
-**next selection required**, the same prose paragraph or row must make the next
-hop understandable. It identifies the current research → code → evidence →
-research-intake stage and evidence already present; the concrete missing boundary
-(code implementation/connection, CPM technical acceptance or public locator, Explorer
-scientific intake, real project instance/object, local scientific proposition
-closure, or a genuinely triggered External Pro question); the exact next owner
-and decision-bearing action; exact canonical inputs, cooperative write paths and
-native result destination (including the native owner handle when applicable);
-completion evidence and the following intake owner/path; dependencies,
-exclusions, formal/runtime status, and the observed or anticipated resource
-vector. A parked direction also states the prospective scientific object that
-would justify reactivation and why code/runtime must not start now. `ready`,
-`parked`, `pending`, `blocked`, `unlock`, `locked/unlocked` and `next selection required`
-are never sufficient descriptions by themselves. This is natural-language
-judgment, not a required schema, enum, validator gate, queue, ledger, writer
-script, state machine or concurrency coupling.
-
-CPM's treatment result is returned directly over the exact native owner handle.
-It begins with its conclusion and mirrors that same primary direction or
-explicitly named direction set, candidate, proposition, stage, revision
-boundary and material relationship binding before technical observations,
-counts, adjustments and locators. It never imports another direction or implies
-portfolio-wide meaning. A native task result is the normal transport, not a
-file-backed transport.
+CPM's reverse result begins with its conclusion and mirrors that same primary
+direction or explicitly named direction set, candidate, proposition, stage,
+revision boundary and material relationship binding before technical
+observations, counts, adjustments and locators. It never imports another
+direction or implies portfolio-wide
+meaning. A Codex-native message fallback carries the same binding and content.
 
 If the direction, proposition or revision binding is missing or contradictory,
 the receiver preserves the original handoff/artifact and asks exactly one
@@ -138,7 +82,7 @@ Explorer-authored canonical scientific decision.
 
 After CPM technical acceptance, Explorer may separately use the registered
 `hmasd-explorer-mechanical` child to present, rearrange or extract literal
-fields from already accepted packets or named result briefs. This is
+fields from already accepted packets or named reverse briefs. This is
 context-isolation organization, not a scientific consultant or a second
 acceptance path: the child may report literal existence or inaccessibility for
 an exact assignment-named local file or evidence locator, but does not decide
@@ -155,30 +99,13 @@ alternative, confound or falsifier questions to Critic; repair or smallest-next-
 discriminator questions to Innovator; and source, terminology or metric-fidelity
 questions to Scout. Explorer may use zero, one or several of them and never
 treats this capability map as a required panel.
-Several read-only questions may run in parallel, while a direction keeps at
-most one result-bearing treatment active by default. Independent ordinary A/B
-treatments from different directions may overlap whenever Scheduler observes
-disjoint resource vectors and writers. The exact resource-conflict,
-direction-barrier and frozen-joint-roster exception live in the exploration Skill's
+Several read-only questions may run in parallel, while Explorer keeps at most
+one result-bearing experiment active per direction by default. Independent
+ordinary A/B treatments from different directions may overlap inside the
+three-unit CPM runtime pool. The exact capacity, direction-barrier and frozen
+joint-roster exception live in the exploration Skill's
 `parallel-research-workflow.md`; this bridge owns only direction-local binding
 and scientific intake.
-
-### CPM treatment result scope
-
-For a Scheduler-created CPM assignment with `owner_mode=treatment`, the
-self-contained assignment names one registered ticket/worktree and exact
-ticket-local paths. CPM writes only those paths and never writes the shared
-main checkout for a treatment. CPM returns a conclusion-first result directly
-over the exact native owner handle, naming the exact treatment artifact,
-evidence and technical-acceptance locators. The native result is transport
-only; it is not a canonical technical artifact, acceptance record, result
-ledger, Scheduler semantic relay or Git object. `owner_mode=integration` is the
-sole serialized shared-mainline writer and does not repeat treatment runtime or
-treatment acceptance.
-
-Explorer performs exactly one scientific intake from the native result and
-named canonical locators. Scheduler routes the owner handle mechanically and
-does not interpret the technical or scientific result.
 
 This boundary is semantic guidance rather than a mandatory packet schema or
 validator admission gate. This boundary does not invoke External Pro, migrate
@@ -191,6 +118,8 @@ use the ignored shared root `temp/handoffs/`:
 
 - `temp/handoffs/explorer_to_code_manager/`: Explorer writes and deletes its own files; CPM
   reads them.
+- `temp/handoffs/code_manager_to_explorer/`: CPM writes and deletes its own files; Explorer
+  reads them.
 
 A handoff is a self-contained Markdown or JSON brief, with attachments only
 when every receiver can read them. It should make the target, candidate and
@@ -198,15 +127,6 @@ version, intended outcome, concrete inputs, evidence, uncertainty, allowed and
 excluded effects, authority boundary, completion evidence and return task easy
 to understand. It also makes Explorer's selected treatment understandable:
 experiment, instance binding, pause, abandon or one exact external-review need.
-If it uses a ready/parked/pending/blocked/unlock/locked/unlocked/cannot-proceed or
-next-selection disposition, the same paragraph or row carries the concrete
-next-hop semantics above; do not substitute the status word for the owner
-boundary.
-The same brief embeds the direction identity, exact proposition/revision and
-protected scientific meaning described above. Any `local_research/.../DIRECTION.json`
-locator is Explorer-only provenance, never a CPM-readable input; CPM consumes
-assignment prose plus exact project source/test/index paths, or one exact
-self-contained temporary handoff only when extra bytes are genuinely needed.
 Explorer gives one clear instruction naming implementation, instance binding,
 experiment, pause, abandon or exact review as applicable, and identifies the
 proportional evidence level A reconnaissance/probe, B exploratory toy
@@ -238,16 +158,15 @@ isolated tickets and roots. One candidate's problem does not block unrelated
 work or change another candidate's frozen design or scientific status. Each
 result retains exactly one CPM technical acceptance and one Explorer scientific
 intake; completion order creates no priority or merged acceptance.
-When the owner task has already selected and frozen two or more independent
+When Explorer has already selected and frozen two or more independent
 treatments, and each local predecessor/intake barrier is closed, dispatch is
-parallel-first when observed vectors and writers are disjoint. Serialize only
-for a named direction dependency, same-direction rules, a shared writer or
-mutable object/path conflict, an observed resource-vector conflict, or a design
-explicitly marked formal local result-bearing runtime that excludes conflicting
-local experiment runtime. Attribution, generic caution, completion order or
-convenience cannot restore a global serial fallback. Owner-task lifecycle events
-replace polling-loop scheduling; a resource wait leaves non-runtime work runnable
-and preserves all existing Pro triggers.
+parallel-first within available capacity. Serialize only for a named direction
+dependency, same-direction rules, shared mutable object/path conflict, actual
+CPM-reported capacity/resource constraint, or formal/explicit-heavy
+experiment-pool exclusivity. Attribution, generic caution, completion order or
+convenience cannot restore a global serial fallback. This does not require
+filling capacity or changing priority, and preserves the heartbeat's
+at-most-one-new-treatment-per-turn limit and all existing Pro triggers.
 
 For an Explorer-origin candidate, CPM implements the selected treatment as an
 engineering task and does not substitute External Pro for experiment, instance

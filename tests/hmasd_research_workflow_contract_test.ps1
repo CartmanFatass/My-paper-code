@@ -34,7 +34,6 @@ $expectedRoles = @(
     'RESEARCH_CRITIC.md',
     'RESEARCH_INNOVATOR.md',
     'RESEARCH_PRINCIPLES_ANALYST.md',
-    'RESEARCH_SCHEDULER.md',
     'RESEARCH_SCOUT.md',
     'REVIEWER.md',
     'VERIFIER.md',
@@ -107,7 +106,6 @@ $publicHandoffContract = Get-Content -Raw -LiteralPath $publicHandoffContractPat
 $publicHandoffContractNormalized = $publicHandoffContract -replace '\s+', ' '
 $independentResearchMyLib = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/mylib.md')
 $parallelResearch = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md')
-$parallelResearchNormalized = $parallelResearch -replace '\s+', ' '
 $openInspiration = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/open-algorithm-inspiration.md')
 $researchMethodology = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-exploration/references/research-methodology.md')
 $independentReviewSkill = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/skills/hmasd-independent-research-pro-review/SKILL.md')
@@ -134,9 +132,9 @@ $directionBindingTerms = @(
     'explicit exclusion of sibling-direction generalization',
     'one requested action and its direct consumer',
     'completion evidence',
-    'CPM''s treatment result is returned directly over the exact native owner handle',
+    'CPM''s reverse result begins with its conclusion',
     'mirrors that same primary direction or explicitly named direction set',
-    'native task result is the normal transport',
+    'Codex-native message fallback carries the same binding',
     'preserves the original handoff/artifact',
     'asks exactly one concrete semantic clarification',
     'duplicate decision records')
@@ -191,54 +189,15 @@ foreach ($retired in @(
 }
 foreach ($required in @(
     'temp/handoffs/explorer_to_code_manager/',
-    'one registered ticket/worktree',
-    'one registered ticket/worktree and exact ticket-local paths',
-    'CPM returns a conclusion-first result directly over the exact native owner handle',
-    'Scheduler routes owner handles mechanically',
+    'temp/handoffs/code_manager_to_explorer/',
     'requires no Git operation',
     'semantic writing aids, not required field names',
     'bounded safe read-only reconnaissance',
     'not a packet validator, dispatcher, queue engine or state machine',
     'Known concerns are context for judgment, not mandatory headings or an expected verdict',
-    'Independent direction-local candidates with disjoint observed resource vectors follow the parallel-first path')) {
+    'CPM may process independent direction-local candidates concurrently')) {
     if (-not $explorerValidationSkillNormalized.Contains($required)) {
         throw "Explorer semantic handoff Skill missing: $required"
-    }
-}
-
-# The project-validation contract is the single semantic source for concrete
-# next-hop and Explorer-only provenance rules; sibling Skills retain pointers
-# and role-local procedures only.
-foreach ($required in @(
-    '### Concrete next-hop semantics',
-    'cannot proceed',
-    'next selection required',
-    'same prose paragraph or row',
-    'exact next owner',
-    'decision-bearing action',
-    'completion evidence and the following intake owner/path',
-    'prospective scientific object',
-    'why code/runtime must not start now',
-    'are never sufficient descriptions by themselves',
-    'not a required schema, enum, validator gate, queue, ledger, writer script, state machine or concurrency coupling',
-    'local_research/.../DIRECTION.json',
-    'Explorer-only provenance',
-    'not a CPM-readable canonical input',
-    'assignment-embedded prose',
-    'one exact, self-contained file under `temp/handoffs/explorer_to_code_manager/`',
-    'CPM never reads `local_research/`',
-    'CPM''s treatment result is returned directly over the exact native owner handle')) {
-    if (-not $explorerValidationContractNormalized.Contains($required)) {
-        throw "Canonical Explorer validation rule missing: $required"
-    }
-}
-foreach ($entry in @(
-    @($independentResearchSkillNormalized, 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'),
-    @($parallelResearchNormalized, 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'),
-    @($explorerValidationSkillNormalized, 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'),
-    @($codePmRoleNormalized, 'never reads `local_research/`'))) {
-    if (-not $entry[0].Contains($entry[1])) {
-        throw "Explorer validation pointer/CPM boundary missing: $($entry[1])"
     }
 }
 foreach ($entry in @(
@@ -280,35 +239,10 @@ foreach ($entry in @(
     @($explorerValidationSkill, 'current_work_mutation=forbidden'),
     @($explorerValidationContract, 'consumes no formal iteration'),
     @($explorerValidationContractNormalized, 'Candidate evidence, run roots, artifacts and results remain candidate-specific'),
-     @($publicHandoffContractNormalized, 'A missing schema, `document_kind`, validator receipt, hash, byte count or fingerprint is never a blocker'),
-     @($publicHandoffContractNormalized, 'begins with its natural-language conclusion and then appends the necessary exact evidence'),
-     @($explorerValidationContractNormalized, 'one registered ticket/worktree and exact ticket-local paths'),
-     @($explorerValidationContractNormalized, 'Explorer performs exactly one scientific intake from the native result'),
-     @($explorerValidationContractNormalized, 'Scheduler routes the owner handle mechanically'),
-     @($publicHandoffContractNormalized, 'The CPM `owner_mode=treatment` assignment has one physical write scope'),
-     @($publicHandoffContractNormalized, 'never write the shared main checkout'),
-     @($sessionWorkspaceContractNormalized, 'cpm_treatment_write_scope_count=1'),
-     @($sessionWorkspaceContractNormalized, 'cpm_treatment_write_scopes=ticket_local_paths_inside_one_registered_worktree'),
-     @($sessionWorkspaceContractNormalized, 'cpm_treatment_result_transport=conclusion_first_direct_native_owner_handle'),
-     @($sessionWorkspaceContractNormalized, 'cpm_integration_shared_mainline_writer=sole_serialized_integration_cpm'),
-     @($sessionWorkspaceContractNormalized, 'cpm_treatment_canonical_result=assignment_named_treatment_artifact_evidence_acceptance_record')) ) {
+    @($publicHandoffContractNormalized, 'A missing schema, `document_kind`, validator receipt, hash, byte count or fingerprint is never a blocker'),
+    @($publicHandoffContractNormalized, 'begins with its natural-language conclusion and then appends the necessary exact evidence')) ) {
     if (-not $entry[0].Contains($entry[1])) {
         throw "Explorer project-validation role/contract coupling missing: $($entry[1])"
-    }
-}
-
-foreach ($stale in @(
-    'temp/handoffs/code_manager_to_explorer/',
-    'one exact strict-descendant main-checkout transport path',
-    'cpm_treatment_write_scope_count=2',
-    'cpm_treatment_reverse_handoff',
-    'main-checkout handoff',
-    'reverse handoff',
-    'allowed_write_paths=temp/handoffs/code_manager_to_explorer/',
-    'owner_mode=treatment_write_scope=temp/handoffs/code_manager_to_explorer/',
-    'treatment may write every file under temp/handoffs/code_manager_to_explorer/')) {
-    foreach ($surface in @($codePmRole, $agile, $explorerValidationSkill, $explorerValidationContract, $publicHandoffContract, $sessionWorkspaceContract)) {
-        if ($surface.Contains($stale)) { throw "Broad treatment handoff scope remains: $stale" }
     }
 }
 
@@ -510,7 +444,7 @@ foreach ($required in @(
     'code_project_manager_code_authority=exclusive',
     'code_project_manager_technical_acceptance_authority=exclusive',
     'code_project_manager_runtime_authority=exclusive',
-    'code_project_manager_current_work_authority=exact_assignment_named_project_operational_records_only',
+    'code_project_manager_current_work_authority=exclusive',
     'code_project_manager_formal_external_review_request_and_intake_authority=exclusive',
     'code_project_manager_experiment_dispatch_and_result_routing=exclusive',
     'external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary',
@@ -542,19 +476,19 @@ foreach ($required in @(
     'Copy each named successful raw response',
     'Workflow Design Manager',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET')) {
-    if (-not $independentReviewSkillNormalized.Contains($required)) {
+    if (-not $independentReviewSkill.Contains($required)) {
         throw "Independent research Pro-review Skill missing: $required"
     }
 }
 foreach ($required in @(
-    'invoked only from an assignment-scoped same-level user-owned Desktop Explorer owner task',
-    'there is no separate review-operator owner task',
+    'invoked only by the persistent `INDEPENDENT_RESEARCH_EXPLORER`',
+    'there is no separate persistent review-operator session',
     'local_research/pro_reviews/<review-id>/',
     'PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW',
     'PRO_ADVERSARIAL_SCIENTIFIC_REVIEW',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'Copy each named successful raw response')) {
-    if (-not $independentReviewSkillNormalized.Contains($required)) {
+    if (-not $independentReviewSkill.Contains($required)) {
         throw "Independent research Pro-review Skill missing direct Explorer contract: $required"
     }
 }
@@ -633,7 +567,7 @@ foreach ($required in @(
     'external_pro_packet_effect=advisory_input_under_user_authorized_workflow',
     'write_scope=local_research_including_explorer_owned_pro_reviews|temp/handoffs/explorer_to_code_manager/',
     'public_handoff_outbound=temp/handoffs/explorer_to_code_manager/',
-    'public_handoff_inbound_read=none_direct_native_treatment_result',
+    'public_handoff_inbound_read=temp/handoffs/code_manager_to_explorer/',
     'public_handoff_git_authority=none',
     'public_handoff_admission=semantic_judgment_no_mandatory_schema',
     'project_validation_instruction_authority=authorize_cpm_named_treatment_execution',
@@ -642,28 +576,17 @@ foreach ($required in @(
     'local_research_write_tool=apply_patch_only',
     'local_research_shell_mutation=forbidden',
     'logical_assignment_count=derived_from_exact_work_roster',
-    'owner_task_scheduler=same_level_user_owned_Desktop_Explorer_task',
-    'owner_mode=direction|portfolio',
-    'owner_task_assignment=self_contained_natural_language',
-    'owner_task_exact_inputs=canonical_inputs_named_by_assignment',
-    'owner_task_write_paths=canonical_write_paths_named_by_assignment',
-    'owner_task_result_destination=canonical_result_destination_named_by_assignment',
-    'owner_task_result=conclusion_first_canonical_capsule',
-    'resource_model=observed_resource_vector_and_conflict_set',
-    'resource_vector_dimensions=cpu|memory|gpu|process|io|network|paid_service|mutable_path|mutable_object|output_root',
-    'resource_observation_owner=scheduler_observes_actual_vectors_and_conflicts',
-    'resource_admission_owner=code_project_manager_runtime_authority',
-    'resource_conflict_serialization=only_named_dependency_or_observed_vector_or_mutable_conflict',
+    'runtime_concurrency=three_unit_cpm_capacity_pool',
+    'resource_consuming_experiment_action=capacity_controlled_per_direction',
     'active_experiment_roster_owner=independent_research_explorer_scientific_view',
-    'independent_ready_treatment_dispatch=parallel_first_when_vectors_are_disjoint',
-    'global_serial_fallback=forbidden_without_named_dependency_or_observed_conflict',
+    'runtime_capacity_admission_owner=code_project_manager',
+    'independent_ready_treatment_dispatch=parallel_first_within_capacity',
+    'global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence',
     'per_direction_result_bearing_default=one_active',
     'same_direction_parallelism=exact_frozen_joint_roster_only',
-    'formal_local_runtime_exclusivity=explicit_formal_result_bearing_local_runtime_only',
-    'formal_local_runtime_scope=conflicting_local_experiment_runtime_only',
-    'formal_local_runtime_nonblocking=research|intake|code|review|Pro|unrelated_nonruntime',
-    'resource_wait_effect=pending_observed_resource_conflict_only_nonruntime_continues',
-    'evidence_level_runtime_orthogonal=true',
+    'experiment_pool_exclusive_runtime=B_HEAVY_OR_C',
+    'capacity_wait_effect=pending_runtime_capacity_only_not_blocked',
+    'read_only_scientific_analysis_parallelism=available_native_capacity',
     'canonical_phase_barrier=required_for_algorithm_inspiration_campaign_only',
     'adaptive_question_dispatch=bounded_registered_child_consultation',
     'adaptive_question_barrier=none_for_singleton|exact_local_roster_only_when_joint',
@@ -690,7 +613,7 @@ foreach ($required in @(
     'independent_pro_constructive_adversarial_barrier=required',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'Only that new version may support a',
-    'Each same-level user-owned Desktop Explorer owner task is assignment-scoped')) {
+    'research architect, portfolio integrator and only')) {
     if (-not $independentResearchRole.Contains($required)) {
         throw "Independent Research Explorer role missing: $required"
     }
@@ -750,21 +673,31 @@ foreach ($required in @(
     'adaptive_singleton_global_barrier=none',
     'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
     'adaptive_first_round_peer_reading=forbidden',
-    'There is no fixed adaptive count, concurrency, quorum, every-B panel or automatic-Pro path.',
+    'There is no fixed adaptive count, concurrency, quorum, every-B panel, automatic-Pro path or persistent mechanism.',
     'Preserve disagreements as advisory inputs; never vote or collapse them into a quorum.',
     'The Explorer remains the single writer and integrates answers into one decision.',
-    'resource_model=observed_resource_vector_and_conflict_set',
-    'resource_vector_dimensions=cpu|memory|gpu|process|io|network|paid_service|mutable_path|mutable_object|output_root',
-    'Resource waits leave research, intake, code, review, Pro and other non-runtime owner tasks runnable',
+    'runtime_capacity_units_total=3',
+    'B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive',
+    'experiment_pool_exclusivity_scope=result_bearing_runtime_only',
+    'workflow_progress_during_exclusive_runtime=continues',
+    'three independent light treatments, or one medium plus one light',
+    'capacity_wait_state=pending_runtime_capacity_only',
+    'capacity_wait_effect=pending_runtime_capacity_only',
+    'Insufficient capacity is `pending_runtime_capacity`, never a direction, task or workflow `BLOCKED` state',
+    'creates no queue engine, lease, dispatcher or acceptance owner',
+    'Formal or explicitly heavy runtime may prevent another result-bearing experiment from starting, but it never pauses code work',
+    'read-only research, scientific intake, External Pro review or another non-runtime action',
     'Every concurrent treatment has distinct direction/treatment identity, canonical design, CPM ticket/worktree, source freeze and accepted commit, run, evidence, checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator receipt, readiness/technical-acceptance record and Explorer decision',
     'By default a direction has at most one result-bearing treatment active',
-    'successor waits until the predecessor is terminal and Explorer completes that direction''s scientific intake',
-    'Explorer freezes one exact joint roster before any member starts',
+    'until that predecessor is terminal and Explorer completes the direction''s scientific intake',
+    'freeze one exact joint roster before any member starts',
     'Completion order is never scientific priority, voting or a cross-direction barrier',
-    'Scheduler owner-task lifecycle events replace polling or background scheduling',
+    'dispatch at most one new treatment',
+    'B completion or parallelism alone never does',
     'normal path for two or more scientifically selected and frozen independent treatments is parallel-first',
-    'same-direction rule',
-    'Attribution, generic caution, completion order and convenience are not resource evidence',
+    'same-direction rules',
+    'Attribution, generic caution, completion order, convenience and a current sole action are not dependency or resource evidence',
+    'heartbeat''s at-most-one-new-treatment-per-turn bound',
     'Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.')) {
     if (-not $adaptiveParallelNormalized.Contains($required)) {
         throw "Adaptive roster contract missing: $required"
@@ -800,7 +733,7 @@ foreach ($required in @(
     'does not recompute schema, readability, receipts, activity counts, locators',
     'necessary to one Explorer decision',
     'Several read-only questions may run in parallel',
-    'a direction keeps at most one result-bearing treatment active by default',
+    'one result-bearing experiment active per direction by default',
     'Independent ordinary A/B treatments from different directions may overlap',
     'exactly one CPM technical acceptance and one Explorer scientific intake',
     'ordinary B remains B and does not automatically invoke Pro',
@@ -1054,12 +987,10 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'logical_assignment_count=derived_from_exact_work_roster',
-    'owner_task_scheduler=same_level_user_owned_Desktop_Explorer_task',
-    'owner_mode=direction|portfolio',
-    'resource_model=observed_resource_vector_and_conflict_set',
-    'resource_vector_dimensions=cpu|memory|gpu|process|io|network|paid_service|mutable_path|mutable_object|output_root',
+    'runtime_concurrency=three_unit_cpm_capacity_pool',
+    'runtime_capacity_units_total=3',
     'active_experiment_roster_owner=independent_research_explorer_scientific_view',
-    'resource_admission_owner=code_project_manager_runtime_authority',
+    'runtime_capacity_admission_owner=code_project_manager',
     'canonical_campaign_phase_barriers=required',
     'adaptive_singleton_global_barrier=none',
     'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
@@ -1109,121 +1040,6 @@ foreach ($required in @(
         throw "Open algorithm inspiration workflow missing: $required"
     }
 }
-# Direct-user-frozen portfolio cardinality: canonical facts and one detailed reference.
-$explorerPortfolioOwnerSurfaces = @($independentResearchRole, $independentResearchSkill)
-$explorerPortfolioOwnerNormalized = ($explorerPortfolioOwnerSurfaces -join ' ') -replace '\s+', ' '
-$explorerPortfolioReferenceNormalized = $parallelResearch -replace '\s+', ' '
-$explorerPortfolioSurfaces = @($independentResearchRole, $independentResearchSkill, $parallelResearch)
-$explorerPortfolioNormalized = ($explorerPortfolioSurfaces -join ' ') -replace '\s+', ' '
-foreach ($required in @(
-    'owner_task_handle=native_owner_task_handle',
-    'cooperative_file_ownership=assignment_named_strict_disjoint_paths',
-    'portfolio_direction_cardinality=derived_from_canonical_facts',
-    'portfolio_cardinality_sources=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md',
-    'portfolio_cardinality_policy=use_observed_count_record_exact_ambiguity_or_shortfall_never_pad_or_compress',
-    'direction_owner_write_scope=assignment_named_strict_disjoint_direction_capsule_files',
-    'direction_owner_shared_continuity_write=forbidden',
-    'direction_owner_sibling_write=forbidden',
-    'scheduler_scientific_authority=none',
-    'wdm_cpm_scheduler_scientific_authority=none',
-    'mutation_ownership_gate=file_writes|runtime_actions|external_actions|cross_owner_actions',
-    'read_only_consultation_scope=user_authorized_exact_scope_registered_read_only_research_children',
-    'read_only_consultation_authority=none_for_acceptance_or_writes',
-    'detailed capsule, intake, readiness, ordering, ceiling and shortfall procedure is defined once in',
-    'references/parallel-research-workflow.md')) {
-    if (-not $explorerPortfolioOwnerNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
-        throw "Derived-cardinality owner pointer missing: $required"
-    }
-}
-foreach ($required in @(
-    'portfolio_direction_cardinality=derived_from_canonical_facts',
-    'portfolio_cardinality_sources=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md',
-    'portfolio_cardinality_policy=use_observed_count_record_exact_ambiguity_or_shortfall_never_pad_or_compress',
-    'portfolio_cardinality_scope=scientific_direction_identities_only',
-    'direction_owner_write_scope=assignment_named_strict_disjoint_direction_capsule_files',
-    'direction_owner_shared_continuity_write=forbidden',
-    'direction_owner_shared_portfolio_write=forbidden',
-    'portfolio_integration_boundary=stable_portfolio_integration_boundary',
-    'portfolio_intake=exact_direction_results',
-    'portfolio_scientific_fields=identities|status|eligibility|priority|dependencies',
-    'portfolio_ready_assignment=conclusion_first_self_contained_ready_next_owner_assignment',
-    'portfolio_ready_assignment_fields=exact_inputs|write_paths|result_destinations|dependencies|resource_vectors',
-    'portfolio_shared_writer=one_portfolio_explorer_at_integration_boundary',
-    'portfolio_shared_write_scope=shared_RESEARCH_CONTINUITY_and_portfolio_records_at_integration_boundary_only',
-    'research_scheduler_task_creation=alone_same_level_direction_owner_tasks',
-    'initial_configured_concurrency_ceiling=3',
-    'initial_ceiling_counts=active_same_level_direction_owner_tasks_only',
-    'scheduler_launch_policy=at_most_ceiling_and_fewer_on_actual_write_or_resource_conflicts',
-    'scheduler_ready_order=mechanically_preserve_explorer_ready_order',
-    'scheduler_conflict_skip=may_pass_over_conflicting_ready_item_for_later_disjoint_item',
-    'scheduler_forbidden_semantics=invent|fill_slots|reprioritize|merge|retire|select_directions',
-    'direction_completion_successor_gate=exact_portfolio_intake_and_continuity_update_before_successor_ready',
-    'portfolio_cardinality_separate_from_active_concurrency_window=true',
-    'active_concurrency_window=flexible_per_run_ceiling',
-    'fixed_runtime_pool=forbidden',
-    'If canonical facts yield 15, the portfolio uses 15',
-    'does not force compression',
-    'exact ambiguity or shortfall',
-    'never pad',
-    'natural-language portfolio capsule/continuity decision, not a schema, queue or admission gate',
-    'mutation_ownership_gate=file_writes|runtime_actions|external_actions|cross_owner_actions',
-    'read_only_consultation_scope=user_authorized_exact_scope_registered_read_only_research_children',
-    'read_only_consultation_authority=none_for_acceptance_or_writes',
-    'registered read-only research child may consult within its named scope before',
-    'no acceptance or write authority',
-    "Scheduler's command procedure")) {
-    if (-not $explorerPortfolioReferenceNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
-        throw "Derived-cardinality reference missing: $required"
-    }
-}
-foreach ($detailed in @(
-    'portfolio_canonical_surfaces=',
-    'portfolio_intake=exact_direction_results',
-    'initial_configured_concurrency_ceiling=3',
-    'scheduler_ready_order=',
-    'direction_completion_successor_gate=',
-    'portfolio size 12')) {
-    if ($explorerPortfolioOwnerNormalized.ToLowerInvariant().Contains($detailed.ToLowerInvariant())) {
-        throw "Detailed portfolio procedure was duplicated into Role/Skill: $detailed"
-    }
-}
-foreach ($alias in @(
-    'portfolio_direction_target=12',
-    'portfolio_size=12',
-    'portfolio_target_direction_count=12',
-    'portfolio_direction_identity_count=12',
-    'target is exactly 12',
-    'exactly 12 distinct',
-    'exact 12-direction',
-    'twelve-direction portfolio')) {
-    if ($explorerPortfolioNormalized.ToLowerInvariant().Contains($alias.ToLowerInvariant())) {
-        throw "Redundant portfolio target alias remains: $alias"
-    }
-}
-foreach ($stale in @(
-    'three directions portfolio',
-    'three-direction portfolio',
-    'portfolio of three directions',
-    'portfolio_size=3')) {
-    if ($explorerPortfolioNormalized.ToLowerInvariant().Contains($stale.ToLowerInvariant())) {
-        throw "Stale three-direction portfolio conflation remains: $stale"
-    }
-}
-if (-not $explorerPortfolioReferenceNormalized.ToLowerInvariant().Contains(
-        'initial configured concurrency ceiling is 3 active same-level direction owner tasks')) {
-    throw 'Initial concurrency ceiling is not limited to active direction owner tasks'
-}
-if (-not $explorerPortfolioReferenceNormalized.ToLowerInvariant().Contains(
-        'observed portfolio cardinality is separate from the active concurrency window 3')) {
-    throw 'Portfolio cardinality and active concurrency window are conflated'
-}
-
-foreach ($forbidden in @('file identity handshake', 'binding-ready', 'pre_binding', 'pre-binding', 'mutation_binding')) {
-    if ($explorerPortfolioNormalized.ToLowerInvariant().Contains($forbidden.ToLowerInvariant())) {
-        throw "Retired identity-handshake vocabulary remains: $forbidden"
-    }
-}
-
 foreach ($required in @(
     'MRM-01_OBJECT_BEFORE_MECHANISM',
     'MRM-02_DECOMPOSE_MEMBERSHIP_NONSTATIONARITY',
@@ -1326,17 +1142,10 @@ foreach ($required in @(
     if (-not $codePmRoleNormalized.Contains($required)) { throw "Code Project Manager role missing: $required" }
 }
 foreach ($required in @(
-    'review_owner_task=same_level_user_owned_Desktop_Explorer_owner',
-    'review_owner_mode=direction|portfolio',
-    'review_boundary=assignment_scoped_exact_direction_or_named_direction_set',
-    'review_exact_inputs=canonical_inputs_named_by_assignment',
-    'review_write_paths=canonical_write_paths_named_by_assignment',
-    'review_result_destination=canonical_result_destination_named_by_assignment',
     'active_grant_valid_result_adjudication=result_plus_portfolio_delta_required',
     'scientific_portfolio=multiple_live_or_parked_directions_when_supported',
     'portfolio_adjudication_authority=exclusive',
-    'scheduled_resource_consuming_action_scope=assignment_named_only',
-    'scheduled_resource_consuming_action_count=not_global_scheduler_field',
+    'scheduled_resource_consuming_action_count=one',
     'scheduled_action_scientific_uniqueness=false',
     'unselected_direction_retention=live_or_parked_with_reactivation_conditions',
     'missing_scheduled_action_with_remaining_balance_and_possible_candidate_response=focused_clarification_required',
@@ -1371,8 +1180,7 @@ if (-not $agileNormalized.Contains('CODE_SCIENCE_ALIGNMENT_AUDIT') -or
 foreach ($surface in @($codePmRole, $agile)) {
     foreach ($required in @(
         'scripts/hmasd_workspace_ticket.py provision',
-        'repo-local ticket root',
-        'temp/worktrees/HMASD',
+        'C:/worktrees/HMASD',
         'Raw external `git worktree`')) {
         if (-not $surface.Contains($required)) {
             throw "Worktree provisioning contract missing: $required"
@@ -1471,12 +1279,10 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'role=code_project_manager',
-    'role_kind=assignment_scoped_same_level_desktop_owner_task',
-    'owner_task_source=research_scheduler',
-    'owner_mode=treatment|integration',
+    'role_kind=persistent_project_coordination_code_runtime_and_acceptance_task',
     'code_authority=exclusive',
     'runtime_authority=exclusive',
-    'current_work_authority=exact_assignment_named_project_operational_records_only',
+    'current_work_authority=exclusive_for_project_operational_records',
     'formal_external_review_request_and_intake_authority=exclusive',
     'experiment_dispatch_and_result_routing=exclusive',
     'mechanical_result_acceptance=exclusive',
@@ -1571,7 +1377,7 @@ foreach ($required in @(
     'role=code_project_manager',
     'formal_external_review_request_and_intake_authority=exclusive',
     'runtime_authority=exclusive',
-    'current_work_authority=exact_assignment_named_project_operational_records_only',
+    'current_work_authority=exclusive',
     'scientific_authority=none',
     'technical_acceptance_authority=exclusive',
     'formal_review_transport=agentify_file_batch_result',
@@ -1693,14 +1499,6 @@ foreach ($required in @(
     'workflow_successor_rotation=integrated_batch_completion',
     'workflow_successor_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface',
     'workflow_thread_registry=forbidden',
-    'workflow_session_identity=stable_role_plus_assignment_scoped_owner_task',
-    'research_scheduler_live_roster_required=false',
-    'research_scheduler_desktop_handle=threadId|hostId',
-    'research_scheduler_desktop_handle_identity=threadId+hostId',
-    'research_scheduler_roster_purpose=human_readable_restart_locator_only',
-    'research_scheduler_canonical_file_role=artifact_and_continuity_only_not_llm_identity_proof',
-    'The roster may retain the exact native `{threadId, hostId}` handle as a human-readable restart locator',
-    'but it is not authority or identity proof',
     'docs/project/current-work/common/<record-id>.md',
     'docs/project/current-work/sessions/<role_id>.md',
     'same_file_concurrent_writes=forbidden',
@@ -1735,59 +1533,6 @@ foreach ($retired in @(
         $explorerValidationSkill.Contains($retired) -or
         $sessionWorkspaceContract.Contains($retired)) {
         throw "Retired global experiment lock remains: $retired"
-    }
-}
-
-$desktopOwnerSurfaces = @(
-    $independentResearchRole,
-    $independentResearchSkill,
-    $parallelResearch,
-    $explorerValidationSkill,
-    $explorerValidationContract,
-    $publicHandoffContract,
-    $proRole,
-    $algorithmPrinciples)
-$desktopOwnerNormalized = ($desktopOwnerSurfaces -join ' ') -replace '\s+', ' '
-foreach ($required in @(
-    'same-level user-owned Desktop Explorer owner task',
-    'owner_mode=direction',
-    'owner_mode=portfolio',
-    'one named direction',
-    'explicitly named direction set',
-    'exact canonical inputs',
-    'write paths',
-    'result destination',
-    'conclusion-first canonical capsule',
-    'resource vector',
-    'formal local result-bearing runtime',
-    'Evidence level A/B/C is orthogonal')) {
-    if (-not $desktopOwnerNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
-        throw "Desktop Explorer owner-task contract missing: $required"
-    }
-}
-foreach ($retired in @(
-    'runtime_concurrency=three_unit_cpm_capacity_pool',
-    'runtime_capacity_units_total=3',
-    'three-unit CPM runtime pool',
-    'heartbeat',
-    'persistent Explorer',
-    'persistent conversation',
-    'current resource-consuming action',
-    'current sole action permits serialization')) {
-    if ($desktopOwnerNormalized.ToLowerInvariant().Contains($retired.ToLowerInvariant())) {
-        throw "Desktop Explorer owner-task regression remains: $retired"
-    }
-}
-foreach ($profileName in @(
-    'hmasd-research-scout.toml',
-    'hmasd-research-innovator.toml',
-    'hmasd-research-principles-analyst.toml',
-    'hmasd-research-critic.toml',
-    'hmasd-explorer-mechanical.toml',
-    'hmasd-agentify-transport.toml')) {
-    $profileText = Get-Content -Raw (Join-Path $repo (Join-Path '.codex/agents' $profileName))
-    if ($profileText.Contains('owner_mode=') -or $profileText.Contains('same-level user-owned Desktop Explorer')) {
-        throw "Child profile was changed by owner-task scheduling: $profileName"
     }
 }
 
@@ -1863,9 +1608,6 @@ foreach ($required in @(
     if (-not $sessionWorkspaceContractNormalized.Contains($required)) {
         throw "Session workspace contract missing successor boundary: $required"
     }
-}
-if ($sessionWorkspaceContractNormalized.Contains('workflow_thread_registry=forbidden_except_scheduler_active_assignment_locators')) {
-    throw 'Retired Scheduler registry exception remains in Session workspace contract'
 }
 if (-not $workflowCollaborationUi.Contains('allow_implicit_invocation: false')) {
     throw 'Workflow collaboration Skill permits implicit invocation'

@@ -1,9 +1,8 @@
 # Code Project Manager workspace
 
 ```text
-owner_task_source=research_scheduler
-owner_mode=treatment|integration
-owner_assignment_fields=parent_owner_assignment|owner_mode|direction_or_treatment|ticket|worktree|base_commit|owned_paths|result_destination
+session_owner_role=code_project_manager
+session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
 durable_workspace=docs/session-workspaces/code_project_manager/
 temporary_workspace=temp/sessions/code_project_manager/
 workflow_surface_owner=false
@@ -15,9 +14,9 @@ does not duplicate scientific state, runtime evidence or another session's
 context. CPM routes workflow defects to WDM and retains code, runtime and
 operational ownership.
 
-An assignment-scoped CPM owner task sends an authorized External Pro question
-through the registered Agentify transport child and archives the returned raw
-response. Treatment and integration scopes remain separate.
+CPM sends External Pro questions directly with Agentify in the persistent
+session and archives the returned raw response. No separate transport contract,
+wrapper, monitor or transport child exists.
 
 Authority and path ownership come from
 `docs/project/SESSION_WORKSPACE_CONTRACT.md`.

@@ -2,17 +2,8 @@
 
 ```text
 role=independent_research_explorer
-role_kind=user_owned_desktop_explorer_owner_task
-startup_identity=role|owner_assignment|canonical_inputs
-owner_task_scheduler=same_level_user_owned_Desktop_Explorer_task
-owner_mode=direction|portfolio
-owner_task_assignment=self_contained_natural_language
-owner_task_handle=native_owner_task_handle
-owner_task_handle_authority=research_scheduler_creates_same_level_owner_task
-owner_task_exact_inputs=canonical_inputs_named_by_assignment
-owner_task_write_paths=canonical_write_paths_named_by_assignment
-owner_task_result_destination=canonical_result_destination_named_by_assignment
-owner_task_result=conclusion_first_canonical_capsule
+role_kind=user_controlled_persistent_research_task
+startup_identity=role|model|current_task
 model=gpt-5.6-sol
 reasoning_effort=ultra
 canonical_scientific_authority=none
@@ -29,25 +20,13 @@ runtime_authority=none
 git_authority=none
 current_work_read=read_only_as_needed_for_project_validation
 write_scope=local_research_including_explorer_owned_pro_reviews|temp/handoffs/explorer_to_code_manager/
-owner_assignment_write_scope=exact_direction_or_portfolio_files_or_strict_descendants_under_local_research|optional_one_strict_descendant_under_temp_handoffs/explorer_to_code_manager
-owner_assignment_root_write_forbidden=true
-cooperative_file_ownership=assignment_named_strict_disjoint_paths
-direction_owner_write_scope=assignment_named_strict_disjoint_direction_capsule_files
-direction_owner_shared_portfolio_write=forbidden
-portfolio_shared_write_scope=shared_RESEARCH_CONTINUITY_and_portfolio_records_at_integration_boundary_only
-portfolio_shared_writer=one_portfolio_explorer_at_integration_boundary
-portfolio_next_assignment=conclusion_first_self_contained_exact_inputs|write_paths|result_destinations|dependencies|resource_vectors
-active_owner_write_path_overlap=equal_or_ancestor_descendant_overlap_fails_closed
-active_owner_write_path_conflict=serialize_or_re_slice
-disjoint_owner_write_paths=parallel_first
-owner_write_scope_isolation=mutation_scope_only_not_science_scheduling_queue_or_schema
 local_research_single_writer=true
 local_research_write_tool=apply_patch_only
 local_research_shell_mutation=forbidden
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
 continuity_owner=independent_research_explorer
 public_handoff_outbound=temp/handoffs/explorer_to_code_manager/
-public_handoff_inbound_read=none_direct_native_treatment_result
+public_handoff_inbound_read=temp/handoffs/code_manager_to_explorer/
 public_handoff_write_tool=apply_patch_only
 public_handoff_git_authority=none
 public_handoff_admission=semantic_judgment_no_mandatory_schema
@@ -86,21 +65,17 @@ explorer_mechanical_technical_acceptance_authority=none
 explorer_mechanical_spawn_authority=none
 explorer_mechanical_cross_task_authority=none
 explorer_mechanical_research_state_effect=none
-resource_model=observed_resource_vector_and_conflict_set
-resource_vector_dimensions=cpu|memory|gpu|process|io|network|paid_service|mutable_path|mutable_object|output_root
-resource_observation_owner=scheduler_observes_actual_vectors_and_conflicts
-resource_admission_owner=code_project_manager_runtime_authority
-resource_conflict_serialization=only_named_dependency_or_observed_vector_or_mutable_conflict
+runtime_concurrency=three_unit_cpm_capacity_pool
+resource_consuming_experiment_action=capacity_controlled_per_direction
 active_experiment_roster_owner=independent_research_explorer_scientific_view
-independent_ready_treatment_dispatch=parallel_first_when_vectors_are_disjoint
-global_serial_fallback=forbidden_without_named_dependency_or_observed_conflict
+runtime_capacity_admission_owner=code_project_manager
+independent_ready_treatment_dispatch=parallel_first_within_capacity
+global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence
 per_direction_result_bearing_default=one_active
 same_direction_parallelism=exact_frozen_joint_roster_only
-formal_local_runtime_exclusivity=explicit_formal_result_bearing_local_runtime_only
-formal_local_runtime_scope=conflicting_local_experiment_runtime_only
-formal_local_runtime_nonblocking=research|intake|code|review|Pro|unrelated_nonruntime
-resource_wait_effect=pending_observed_resource_conflict_only_nonruntime_continues
-evidence_level_runtime_orthogonal=true
+experiment_pool_exclusive_runtime=B_HEAVY_OR_C
+capacity_wait_effect=pending_runtime_capacity_only_not_blocked
+read_only_scientific_analysis_parallelism=available_native_capacity
 canonical_phase_barrier=required_for_algorithm_inspiration_campaign_only
 adaptive_question_dispatch=bounded_registered_child_consultation
 adaptive_question_barrier=none_for_singleton|exact_local_roster_only_when_joint
@@ -143,62 +118,17 @@ independent_pro_constructive_adversarial_barrier=required
 project_toy_validation_authority=none
 project_toy_compute_authority=none
 project_toy_cross_direction_competition=forbidden
-
-# Direct-user-frozen portfolio control-plane contract
-portfolio_direction_cardinality=derived_from_canonical_facts
-portfolio_cardinality_sources=direction_specific_canonical_capsules|local_research/RESEARCH_CONTINUITY.md
-portfolio_cardinality_policy=use_observed_count_record_exact_ambiguity_or_shortfall_never_pad_or_compress
-portfolio_scientific_integrator=independent_research_explorer
-direction_owner_shared_continuity_write=forbidden
-direction_owner_sibling_write=forbidden
-scheduler_scientific_authority=none
-wdm_cpm_scheduler_scientific_authority=none
-mutation_ownership_gate=file_writes|runtime_actions|external_actions|cross_owner_actions
-read_only_consultation_scope=user_authorized_exact_scope_registered_read_only_research_children
-read_only_consultation_authority=none_for_acceptance_or_writes
 ```
 
-Each same-level user-owned Desktop Explorer owner task is assignment-scoped.
-In `owner_mode=direction` it reads and writes one named direction and never
-preloads sibling context. In `owner_mode=portfolio` it integrates only the
-explicitly named direction set. It remains the only writer for its exact
-advisory research surface and does not select formal-project science; the user
-alone decides whether any result later enters the formal project. The portfolio
-Explorer remains the scientific owner of the cardinality derived from canonical
-direction capsules and shared continuity, preserving the observed count and
-never padding or silently compressing it. Direction and portfolio write
-boundaries remain assignment-scoped. The detailed capsule, intake, readiness,
-ordering, ceiling and shortfall procedure is defined once in
-`references/parallel-research-workflow.md` and is required before dispatch.
+This persistent task is the research architect, portfolio integrator and only
+writer for advisory research outside the formal HMASD workflow. It does not
+select canonical science. The user alone decides whether any result later
+enters the formal project.
 
-The portfolio owner integrates the explicitly named direction set; a direction
-owner writes only its assignment-named strict-disjoint direction/capsule files and
-never edits shared `RESEARCH_CONTINUITY.md` or shared portfolio records. At the
-stable portfolio integration boundary, one portfolio Explorer is the sole
-writer for those shared records and emits the next self-contained assignments.
-Research Scheduler has no Explorer scientific authority. The reference owns the
-Scheduler boundary and command procedure; this Role does not duplicate it.
-Cooperative ownership gates every file write, runtime action, external action
-and cross-owner action. A user-authorized exact-scope registered read-only
-research child may consult within its named scope before an owner-scoped write,
-but has no acceptance or write authority.
-
-The self-contained natural-language assignment names exact canonical inputs,
-write paths and result destination. Completion is a conclusion-first canonical
-capsule. `local_research/RESEARCH_CONTINUITY.md` and exact named capsules, not
-conversation memory, provide restart context. Research Scheduler owns only
-Desktop lifecycle and resource-conflict routing; it never interprets, relays or
-accepts the Explorer result.
-
-Every native owner task handle carries a self-contained assignment naming
-exact direction- or portfolio-owned files, or strict descendants under
-`local_research/`, and may name at most one exact strict descendant under
-`temp/handoffs/explorer_to_code_manager/`. Naming a root never grants the
-whole root. Active native owner handles with equal or
-ancestor/descendant-overlapping write paths fail closed and must serialize or
-be re-sliced; disjoint direction paths remain parallel-first. This cooperative
-file-ownership rule is mutation-scope isolation, not science scheduling, a
-queue or a new schema.
+Startup identity is the role, model and current direct user task. The Explorer
+owns the lightweight continuity entry at
+`local_research/RESEARCH_CONTINUITY.md`; restart details and campaign
+phase-barrier rules live in the parallel-research workflow reference.
 
 Explorer dispatches each registered research child with `fork_turns=none` and
 a self-contained natural-language assignment. The assignment states the
@@ -289,35 +219,37 @@ Project Validation Workflow. Write the self-contained brief under
 `temp/handoffs/explorer_to_code_manager/`, naming one selected A/B/C treatment
 and the direct CPM action; keep identity, proposition, revision binding,
 conclusion, strongest alternative, requested consumer and sibling-direction
-exclusion explicit. CPM owns engineering and technical acceptance in one
-registered ticket worktree and returns a conclusion-first result directly over
-the exact native owner handle; it never writes shared mainline files for a
-treatment. Explorer owns scientific/advisory interpretation. The validation
-Skill and `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` own brief,
-native-result intake, direction-local context and named Pro triggers; External
-Pro remains final scientific-semantic acceptance when invoked.
+exclusion explicit. CPM owns engineering and technical acceptance; Explorer
+owns scientific/advisory interpretation. The validation Skill and
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` own brief/reverse-result
+mechanics, direction-local context and named Pro triggers;
+External Pro remains final scientific-semantic acceptance when invoked.
 
-Explorer maintains only the scientific `active_experiment_roster`: direction,
-treatment, frozen design, direction-local dependency, handoff/CPM locator, last
-named resource observation and scientific-intake state. It is not a process
-monitor, task registry or queue. Scientific evidence level A/B/C is orthogonal
-to resource vectors. Scheduler may observe actual vectors and conflicts; CPM
-owns runtime admission and may up-class or defer a not-yet-started treatment for
-engineering resources, but neither may down-class it or alter the scientific
-question, priority or branch map.
+Explorer maintains the scientific `active_experiment_roster`: each entry binds
+one direction, treatment, frozen design, declared resource class, direction-local
+dependency, handoff/CPM locator, last CPM-reported runtime observation and
+scientific-intake state. The roster is not an authoritative process monitor or
+queue engine. Explorer declares the class prospectively and controls scientific
+priority; CPM owns actual capacity admission and may up-class or defer a not-yet-
+started treatment for engineering resources, but may neither down-class it nor
+alter its scientific question, priority or branch map. The capacity model,
+direction barriers, heartbeat behavior and same-direction joint-roster exception
+are defined once in `parallel-research-workflow.md`.
+No experiment-capacity condition blocks Explorer research, result intake,
+read-only analysis, Pro review or another non-runtime action. A formal or other
+explicitly heavy treatment can reserve the experiment pool, not the workflow.
 
-When two or more scientifically selected and frozen treatments have closed
-direction-local predecessor/intake barriers and disjoint observed resource
-vectors, the normal dispatch path is parallel-first. Serialize only for an exact
-direction dependency, same-direction rule, shared mutable object/path, observed
-resource-vector conflict, or explicit formal local result-bearing runtime that
-conflicts with another local experiment. Attribution, caution, completion order
-or convenience never restores a global lock. Resource waits leave research,
-intake, code, review, Pro and unrelated non-runtime work runnable. No resource
-condition blocks research, result intake, read-only analysis, Pro review or
-another non-runtime action. Owner-task lifecycle events replace polling-based
-scheduling; they do not invent,
-reprioritize or reactivate scientific work.
+When Explorer has scientifically selected and frozen two or more independent
+treatments, and every direction-local predecessor/intake barrier is closed,
+the normal dispatch path is parallel-first whenever the admitted capacity is
+available. Serialize only for an exact direction dependency, same-direction
+rules, a shared mutable object or path conflict, an actual CPM-reported
+capacity/resource constraint, or formal/explicit-heavy experiment-pool
+exclusivity. Attribution, generic caution, completion order, convenience or a
+current sole action never restores a global serial lock. This does not require
+inventing or reprioritizing work, filling capacity, or reactivating a parked
+direction; the heartbeat still dispatches at most one new treatment per turn,
+and the existing Pro triggers and formal iteration behavior are unchanged.
 
 ## Scientific procedure
 

@@ -5,57 +5,19 @@ description: Use in the user-controlled HMASD Independent Research Explorer task
 
 # HMASD Independent Research Exploration
 
-## Cooperative exact file ownership
-
-owner_task_handle=native_owner_task_handle
-cooperative_file_ownership=assignment_named_strict_disjoint_paths
-
-Every same-level native owner task handle carries an assignment naming exact
-direction- or portfolio-owned files, or strict descendants under
-`local_research/`, and may name at most one exact strict descendant under
-`temp/handoffs/explorer_to_code_manager/` when a handoff is needed. A root path
-never grants the whole root. Direction owners write only their assignment-named
-strict-disjoint direction/capsule files; they never write shared
-`RESEARCH_CONTINUITY.md` or shared portfolio records. At the stable portfolio
-integration boundary, one portfolio Explorer is the sole writer for those
-shared records and emits the next self-contained assignments. Equal or
-ancestor/descendant-overlapping write paths fail closed and must serialize or
-be re-sliced; disjoint direction paths remain parallel-first. This is
-cooperative mutation-scope isolation, not science scheduling, a queue or a new
-schema.
-
-## Direct-user-frozen derived-cardinality portfolio contract
-
-The portfolio Explorer derives scientific direction cardinality from canonical
-direction capsules and shared continuity, uses the observed count (for example,
-15 remains 15), and records exact ambiguity or shortfall without padding,
-inventing, silently merging or forcing compression. Direction versus portfolio
-writes remain assignment-scoped under native owner task handles. Research
-Scheduler and WDM/CPM have no Explorer scientific authority. Cooperative
-ownership gates file writes, runtime, external and cross-owner actions; a
-user-authorized exact-scope registered read-only research child may consult
-within its named scope before an owner-scoped write but has no acceptance or
-write authority. The complete capsule, continuity, intake, readiness, ordering
-and concurrency procedure is specified once in
-[`references/parallel-research-workflow.md`](references/parallel-research-workflow.md);
-read that reference before dispatch. This Skill supplies the mode loop and
-dispatch trigger only and does not duplicate the procedure.
-
 ## Purpose
 
 Explore HMASD-relevant ideas without entering the formal project workflow.
 Preserve the initial mission and several-live-directions discipline, but do not
 make a canonical scientific decision.
 
-The active Explorer is an assignment-scoped, same-level user-owned Desktop
-owner task in `owner_mode=direction|portfolio`, using the
-`gpt-5.6-sol/ultra` research role and remaining the only writer for its exact
-named surface. The prose-first assignment supplies the exact canonical inputs,
-write paths and result destination; conversation history is background only. It
+The active Explorer is the `gpt-5.6-sol/ultra` research role in the current
+direct user task and the only writer; no archived task ID or route registry is
+required. It
 uses read-only Sol-high Scouts to absorb source results, read-only Sol-max
 Research Innovators to adapt and combine them, Sol-max Research Principles
 Analysts for constructive RL analysis, and Sol-max Critics for later targeted
-  adversarial checks. The assignment-scoped Explorer owns each review item and sends
+  adversarial checks. The persistent Explorer owns each review item and sends
   one ordered file-backed set of frozen question paths to the registered
   `hmasd-agentify-transport` child.
 
@@ -115,8 +77,8 @@ single-writer authority remain unchanged.
 
 ## Start safely
 
-1. Confirm the active task has the Explorer role, Scheduler assignment, exact
-   owner mode and current direct user assignment.
+1. Confirm the active task has the Explorer role, registered model and current
+   direct user assignment.
 2. Read the Explorer role and only
    `docs/project/ALGORITHM_PRINCIPLES.md sections 1 and 3`.
 3. Freeze exactly one mode, one campaign direction or evidence question, mission
@@ -165,18 +127,10 @@ For any direction-specific answer or Explorer-to-CPM handoff, trigger
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Resolve one selected
 primary direction, exact candidate proposition/revision, requested consumer and
 completion evidence while excluding unrequested siblings; the dedicated
-workflow owns direction-local context and brief/native-treatment-result
-mechanics. A missing or
+workflow owns direction-local context and brief/reverse mechanics. A missing or
 contradictory binding preserves the original artifact and asks one concrete
 clarification while unrelated research continues; never guess, merge, rewrite
 or create a `BLOCKED` state.
-
-For assignment prose, status dispositions, and Explorer-only provenance, follow
-the single defining `Direction-local context binding` and `Concrete next-hop
-semantics` sections in
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. This Skill retains only
-the Explorer trigger, direction selection, sibling exclusion, and clarification
-procedure; it does not duplicate the canonical semantic rule.
 
 ## Choose exactly one research mode
 
@@ -251,25 +205,25 @@ them to choose the next separating question: map support, test learnability unde
 a discriminating host, then estimate direction and variance with a small
 multi-seed run when warranted. This is an iterative pattern, not a state machine.
 
-Before dispatching any result-bearing treatment, use the resource-vector and
+Before dispatching any result-bearing treatment, use the capacity and
 direction-barrier rules in
 [`references/parallel-research-workflow.md`](references/parallel-research-workflow.md).
-Explorer maintains the scientific roster and freezes each design; Research
-Scheduler observes actual resource vectors/conflicts and CPM owns runtime
-admission and execution observations. Evidence level A/B/C is orthogonal to the
-resource vector. A free resource does not create scientific priority or
-reactivate a parked direction. Each returned result may enter its own
-direction-local scientific intake immediately; resource waits leave research,
-intake, review, Pro and other non-runtime work runnable.
+Explorer maintains the scientific roster and freezes each design; CPM owns live
+capacity admission and runtime observations. An available token is permission to
+consider the next independently valuable treatment, not an automatic scientific
+priority or a reason to reactivate a parked direction. Each returned result may
+enter its own direction-local scientific intake immediately. No free runtime
+token is required for intake, analysis, review or other non-experiment work.
 When two or more independent treatments have already been scientifically
 selected and frozen, their local predecessor/intake barriers are closed, and
-their observed resource vectors are disjoint, follow the reference's normal
-path: `independent_ready_treatment_dispatch=parallel_first_when_vectors_are_disjoint`.
+capacity is available, follow the reference's normal path:
+`independent_ready_treatment_dispatch=parallel_first_within_capacity`.
 Do not silently apply a global serial fallback; it is forbidden without named
-direction dependency or observed resource/mutable conflict. This is not a
-request to invent work, saturate resources, reprioritize or reactivate parked
-directions. Owner-task lifecycle events replace polling-based scheduling;
-the existing Pro triggers and formal iteration behavior remain unchanged.
+direction-dependency or resource evidence. This is not a request to invent
+work, fill capacity, reprioritize or reactivate parked directions, and it does
+not change the heartbeat's at-most-one-new-treatment-per-turn bound, pending
+runtime-capacity/non-runtime continuation, Pro triggers or formal iteration
+behavior.
 
 Never substitute an Innovator for source absorption, a Principles Analyst for
 literature fidelity, or a Critic for constructive RL reasoning. A broad request
@@ -326,11 +280,8 @@ When a mature candidate is ready for project intake, load the single
 `.agents/skills/hmasd-explorer-project-validation/SKILL.md` and
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Write one
 self-contained semantic brief under `temp/handoffs/explorer_to_code_manager/`
-with the selected A/B/C treatment and direct CPM action. Follow the canonical
-contract's `Direction-local context binding` and `Concrete next-hop semantics`
-sections for embedded direction identity/proposition/revision, protected
-scientific meaning, Explorer-only `DIRECTION.json` provenance and CPM-readable
-inputs. The dedicated workflow owns brief/native-treatment-result mechanics and
-the named Pro triggers. Explorer records one scientific decision after CPM
-technical acceptance; CPM remains the engineering/runtime acceptance owner, and
-External Pro owns final scientific-semantic acceptance when invoked.
+with the selected A/B/C treatment and direct CPM action. The dedicated workflow
+owns brief/reverse-result mechanics, direction-local context and the named Pro
+triggers. Explorer records one scientific decision after CPM technical
+acceptance; CPM remains the engineering/runtime acceptance owner, and External
+Pro owns final scientific-semantic acceptance when invoked.

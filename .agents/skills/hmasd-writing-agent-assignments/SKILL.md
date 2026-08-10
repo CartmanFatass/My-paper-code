@@ -48,28 +48,6 @@ Those anchors narrow execution; they do not carry the task's meaning. A parent
 is a context compiler, not a field copier. A shorter brief is correct when it
 contains enough meaning for the bounded task.
 
-For a Desktop Research Scheduler owner task, preserve this prose-first model
-for every owner and child assignment. The scheduler factual tail may name the
-exact native Desktop handle `{threadId, hostId}` (`threadId+hostId`), owner mode, workspace path,
-exact cooperative write paths, result locator and bounded Desktop action. The
-handle returned by the one `create_thread` call is lifecycle/routing identity;
-canonical files are artifacts or continuity only and never proof of LLM
-identity. An optional human-readable roster may retain the handle as a restart
-locator, but it is not authority. Do not add file-based identity machinery.
-
-The owner assignment must carry all semantic meaning and action capability:
-why the task exists, intended outcome, canonical inputs, protected decisions,
-exclusions, permitted local judgment, bounded recovery, exact cooperative write
-ownership, canonical result destination and observable completion evidence.
-Writers of one exact file serialize; disjoint exact files may overlap. A
-direction owner writes/returns only its named disjoint direction files; the
-portfolio Explorer alone writes shared portfolio continuity/capsule state; a
-treatment CPM owner writes only its ticket worktree and declared result
-destination; an integration CPM owner writes the shared mainline integration
-surface for the accepted set. Same-file writers serialize; disjoint exact files
-may overlap. The Scheduler waits, reads and archives by the exact native handle
-and does not relay semantic results, scan tasks or maintain a queue/monitor/registry.
-
 ## Important distinctions
 
 Keep these concepts separate when writing or reviewing an interface:

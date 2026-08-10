@@ -85,17 +85,6 @@ def finalize_integrate(receipt: Path) -> dict[str, object]:
     return ticketing.finalize_integrate(argparse.Namespace(receipt=receipt))
 
 
-def test_default_worktree_root_is_repo_contained(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
-) -> None:
-    source, _, _ = repository(tmp_path)
-    monkeypatch.setattr(ticketing, "REGISTERED_REPOSITORY", source)
-    monkeypatch.setattr(ticketing, "WORKTREE_ROOT", None)
-    root = ticketing._worktree_root()
-    assert root == (source / "temp/worktrees/HMASD").resolve()
-    assert root.parent == (source / "temp/worktrees").resolve()
-
-
 def test_provision_resolve_and_verify_exact_scope(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

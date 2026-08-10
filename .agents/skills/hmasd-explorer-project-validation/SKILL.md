@@ -37,36 +37,12 @@ alternative, material relationships, explicit exclusion of sibling-direction
 generalization unless explicitly named, requested action/direct consumer,
 completion evidence and return destination understandable. These are semantic
 writing cues, not
-required fields. CPM's conclusion-first native result and any Codex-native
+required fields. CPM's conclusion-first reverse result and any Codex-native
 fallback carry the same binding before technical evidence. If identity,
 proposition or revision binding is missing or contradictory, preserve the
 original handoff/artifact and ask exactly one concrete semantic clarification;
-  continue unrelated work without guessing, merging directions, rewriting the
-  artifact or creating a `BLOCKED` state.
-
-The canonical contract's `Direction-local context binding` and `Concrete
-next-hop semantics` sections define assignment-embedded identity/proposition/
-revision, protected scientific meaning, Explorer-only `DIRECTION.json`
-provenance, CPM-readable inputs, and every status/disposition owner boundary.
-Follow those sections rather than duplicating them here. This Skill retains only
-the project-validation handoff, ticket/worktree, native-result, and clarification
-procedures below.
-
-## Assignment-scoped CPM treatment result
-
-When a Scheduler assignment has `owner_mode=treatment`, its self-contained
-assignment names one registered ticket/worktree and exact ticket-local paths.
-CPM writes only those paths and never writes the shared main checkout for a
-treatment. CPM returns a conclusion-first result directly over the exact
-native owner handle, naming the treatment artifact, evidence and technical-
-acceptance locators. The native result is transport only; it is not a second
-canonical record, Scheduler semantic relay or Git object. `owner_mode=integration`
-remains the sole serialized shared-mainline writer and does not repeat
-treatment runtime or treatment acceptance.
-
-Explorer performs exactly one scientific intake from that native result and
-the named canonical locators. Scheduler routes owner handles mechanically and
-does not interpret the result.
+continue unrelated work without guessing, merging directions, rewriting the
+artifact or creating a `BLOCKED` state.
 
 ## Normal path
 
@@ -116,18 +92,18 @@ retirement decision; that decision belongs to a frozen C treatment.
 
 One optional manifest may list several brief paths in their intended order.
 The manifest is work organization only: it contains no item state, owner lease,
-retry record or admission status. Independent direction-local candidates with
-disjoint observed resource vectors follow the parallel-first path; supplied
-order is organization rather than ranking, runtime admission or a cross-
-direction barrier. Every candidate keeps its own handoff, ticket, roots,
-receipt, technical acceptance and scientific intake.
+retry record or admission status. CPM may process independent direction-local
+candidates concurrently when the capacity contract permits; the supplied order
+is organization rather than ranking, runtime admission or a cross-direction
+barrier. Every candidate keeps its own handoff, ticket, roots, receipt,
+technical acceptance and scientific intake.
 For already selected and frozen independent treatments whose direction-local
-predecessor/intake barriers are closed, serialize only a named dependency,
-shared mutable object/path or observed resource-vector conflict. Evidence level
-A/B/C is orthogonal to resource routing. Scheduler owner-task lifecycle events
-replace periodic scheduling; resource waits leave scientific intake, research,
-review, Pro and other non-runtime work runnable without changing priority or Pro
-triggers.
+predecessor/intake barriers are closed, parallel-first dispatch within admitted
+capacity is the normal path. A global serial fallback requires named direction
+dependency or actual resource evidence; attribution, caution, completion order
+and convenience do not supply it. The reference contract retains the heartbeat
+one-new-treatment-per-turn limit and pending-runtime-capacity/non-runtime
+continuation without changing scientific priority or Pro triggers.
 
 CPM reads the named public brief, uses engineering judgment and performs
 bounded safe read-only reconnaissance. It proceeds when the task is
@@ -146,10 +122,11 @@ observation or lifecycle object is an engineering implementation task for CPM,
 not a reason to add synthetic certificates or stop the whole handoff. Only a
 choice that changes the scientific question returns to Explorer.
 
-CPM returns a human-readable conclusion-first result directly on the exact
-native owner handle, followed by the necessary exact locators/evidence.
-Explorer reads that native result and its named technical locators; it never
-edits CPM output.
+CPM returns a human-readable result under
+`temp/handoffs/code_manager_to_explorer/` containing an understandable
+natural-language conclusion first and the necessary exact evidence second. A
+Codex-native message carrying the same semantic content is the simple fallback.
+Explorer reads but never edits CPM output.
 
 After technical acceptance, CPM pushes the result and returns its exact commit
 plus public GitHub repository/path locators. Ordinary B iteration is nonformal

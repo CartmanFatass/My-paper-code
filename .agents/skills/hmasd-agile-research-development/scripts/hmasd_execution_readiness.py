@@ -21,11 +21,6 @@ from collections import deque
 from pathlib import Path, PurePosixPath
 from typing import Any
 
-_PROJECT_SCRIPTS = Path(__file__).resolve().parents[4] / "scripts"
-if str(_PROJECT_SCRIPTS) not in sys.path:
-    sys.path.insert(0, str(_PROJECT_SCRIPTS))
-import hmasd_workspace_ticket as ticketing  # noqa: E402
-
 
 SCHEMA_VERSION = 3
 PHASES = (
@@ -71,43 +66,6 @@ def _git(repo: Path, *args: str) -> str:
 def _repo_root(start: Path | None = None) -> Path:
     start = (start or Path.cwd()).resolve()
     return Path(_git(start, "rev-parse", "--show-toplevel")).resolve()
-
-
-def _main_checkout(start: Path | None = None) -> Path:
-    top = _repo_root(start)
-    try:
-        return ticketing.main_checkout(top)
-    except ticketing.TicketError as exc:
-        raise ReadinessError(str(exc)) from exc
-
-
-def _linked_treatment_ticket(active_checkout: Path) -> tuple[Path, list[str]]:
-    """Resolve the one registered ticket for the active linked worktree."""
-
-    common = Path(_git(active_checkout, "rev-parse", "--git-common-dir"))
-    if not common.is_absolute():
-        common = active_checkout / common
-    ticket_root = common.resolve() / ticketing.TICKET_DIRECTORY
-    try:
-        ticket_paths = sorted(ticket_root.glob("*.json"))
-    except OSError as exc:
-        raise ReadinessError(f"cannot inspect registered workspace tickets: {exc}") from exc
-
-    matches: list[dict[str, Any]] = []
-    for ticket_path in ticket_paths:
-        try:
-            resolved = ticketing.resolve_ticket(
-                argparse.Namespace(ticket=ticket_path, assignment_id=None)
-            )
-        except ticketing.TicketError:
-            continue
-        if Path(resolved["resolved_worktree"]).resolve() == active_checkout:
-            matches.append(resolved)
-    if len(matches) != 1:
-        raise ReadinessError(
-            "linked treatment worktree must resolve exactly one valid registered workspace ticket"
-        )
-    return active_checkout, matches[0]["allowed_paths"]
 
 
 def _repo_state(repo: Path) -> tuple[str, str]:
@@ -587,6 +545,14 @@ def check_receipt(receipt_path: Path) -> int:
     return 0
 
 
+def _code_pm_session(repo: Path) -> str:
+    role = (repo / ".agents/roles/CODE_PROJECT_MANAGER.md").read_text(encoding="utf-8")
+    matches = re.findall(r"(?m)^session_owner_id=([^\s]+)$", role)
+    if len(matches) != 1:
+        raise ReadinessError("Code PM role must contain exactly one session owner")
+    return matches[0]
+
+
 def _message_field(message: str, name: str) -> str | None:
     match = re.search(rf"(?m)^{re.escape(name)}=(.*)$", message)
     return match.group(1).strip() if match else None
@@ -604,47 +570,30 @@ def hook_stop() -> int:
         payload = json.load(sys.stdin)
     except (json.JSONDecodeError, TypeError):
         return 0
+    try:
+        repo = _repo_root()
+        session = _code_pm_session(repo)
+    except (ReadinessError, OSError):
+        return 0
+    if payload.get("session_id") != session:
+        return 0
     message = payload.get("last_assistant_message") or ""
     if not re.search(r"(?m)^CODE_ACCEPTED\s*$", message):
         return 0
     already_active = payload.get("stop_hook_active") is True
-    try:
-        start = payload.get("cwd")
-        if not isinstance(start, str) or not start.strip():
-            raise ReadinessError("CODE_ACCEPTED has no valid cwd.")
-        active_checkout = _repo_root(Path(start))
-        repo = _main_checkout(active_checkout)
-        # Integration acceptance is serialized separately; only linked treatment
-        # worktrees carry a ticket and require execution-readiness evidence here.
-        if active_checkout == repo:
-            return 0
-        worktree, ticket_allowed = _linked_treatment_ticket(active_checkout)
-    except (ReadinessError, OSError, ticketing.TicketError) as exc:
-        reason = str(exc).strip() or "CODE_ACCEPTED workspace or ticket resolution failed."
-        print(json.dumps(_hook_feedback(reason, already_active), ensure_ascii=False))
-        return 0
     commit = _message_field(message, "commit")
     exact_paths = _message_field(message, "exact_paths")
     readiness = _message_field(message, "execution_readiness")
     receipt_field = _message_field(message, "execution_readiness_receipt")
     reason = _message_field(message, "execution_readiness_reason")
     try:
-        current = _git(worktree, "rev-parse", "HEAD")
+        current = _git(repo, "rev-parse", "HEAD")
         if not commit or not COMMIT_RE.fullmatch(commit):
             raise ReadinessError("CODE_ACCEPTED has no exact 40-character commit.")
         if current != commit:
-            raise ReadinessError("CODE_ACCEPTED commit is not current treatment HEAD.")
+            raise ReadinessError("CODE_ACCEPTED commit is not current HEAD.")
         if not exact_paths:
             raise ReadinessError("CODE_ACCEPTED has no exact_paths.")
-        parsed_paths = [
-            _safe_relative_path(item, "CODE_ACCEPTED exact_paths")
-            for item in exact_paths.split("|")
-            if item
-        ]
-        if not parsed_paths or len(set(parsed_paths)) != len(parsed_paths) or any(
-            not ticketing._is_allowed(item, ticket_allowed) for item in parsed_paths
-        ):
-            raise ReadinessError("CODE_ACCEPTED exact_paths exceed treatment ticket scope.")
         if readiness == "not_triggered":
             if not reason or reason in {"none", "not-triggered", "not_triggered"}:
                 raise ReadinessError("Untriggered execution readiness needs a bounded reason.")
@@ -659,7 +608,7 @@ def hook_stop() -> int:
                 raise ReadinessError("CODE_ACCEPTED receipt is not the finalized Git-private receipt")
             if receipt.get("candidate_commit") != commit:
                 raise ReadinessError("receipt candidate identity does not match CODE_ACCEPTED")
-            if receipt.get("exact_paths") != parsed_paths:
+            if receipt.get("exact_paths") != [item for item in exact_paths.split("|") if item]:
                 raise ReadinessError("receipt exact_paths do not match CODE_ACCEPTED")
         else:
             raise ReadinessError("CODE_ACCEPTED has no passed execution_readiness state.")

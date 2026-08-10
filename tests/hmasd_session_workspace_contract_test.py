@@ -20,9 +20,6 @@ def test_wdm_is_the_single_workflow_owner() -> None:
         "child_forked_context=background_only",
         "workflow_assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace",
         "public_current_work_index_owner=workflow_design_manager",
-        "research_scheduler_kind=user_owned_persistent_desktop_task",
-        "research_scheduler_registered_child=false",
-        "research_scheduler_desktop_handle=threadId|hostId",
     ):
         assert required in contract
     assert "workflow_design_manager_workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces" in router
@@ -68,9 +65,8 @@ def test_public_current_work_is_partitioned_and_owned() -> None:
     ):
         assert required in normalized
     for required in (
-        "session_record_ids=workflow_design_manager|research_scheduler",
+        "session_record_ids=code_project_manager|workflow_design_manager",
         "index_owner=workflow_design_manager",
-        "research_scheduler_session=docs/project/current-work/sessions/research_scheduler.md",
         "workflow_control_plane",
         "current-work/sessions/workflow_design_manager.md",
     ):
@@ -129,7 +125,8 @@ def test_non_workflow_role_ownership_is_preserved() -> None:
 def test_explorer_research_and_session_artifacts_remain_explorer_owned() -> None:
     contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split())
     role = _text(".agents/roles/WORKFLOW_DESIGN_MANAGER.md")
-    assert "Explorer owns the `explorer_to_code_manager/` direction and CPM is read-only for that exchange" in contract
+    assert "Explorer owns the `explorer_to_code_manager/` direction" in contract
+    assert "each receiver is read-only" in contract
     assert "workflow_acceptance_authority=exclusive" in role
     assert "centralized_explorer_workspace_cleanup_write_authority=none" in role
 
@@ -147,18 +144,3 @@ def test_explorer_mechanical_child_keeps_native_no_write_session_boundary() -> N
     assert "role=explorer_mechanical_operator" in role
     assert "write_authority=none" in role
     assert "scientific_authority=none" in role
-
-
-def test_desktop_scheduler_is_same_level_and_lazy() -> None:
-    contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split())
-    workflow_map = " ".join(_text("docs/project/WORKFLOW_MAP.md").split())
-    for required in (
-        "same-level ephemeral owner tasks",
-        "ACTIVE_ASSIGNMENTS.md",
-        "research_scheduler_procedure_pointer=.agents/skills/hmasd-research-scheduler/SKILL.md",
-        "research_scheduler_resource_policy_pointer=.agents/skills/hmasd-research-scheduler/SKILL.md",
-    ):
-        assert required in (contract + " " + workflow_map)
-    for command_level in ("create_thread", "wait_threads", "read_thread"):
-        assert command_level not in contract
-        assert command_level not in workflow_map

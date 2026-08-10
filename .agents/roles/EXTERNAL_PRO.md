@@ -8,12 +8,6 @@ role_kind=external_scientific_decision_authority_within_user_review_boundary
 formal_transport_owner=code_project_manager
 independent_methodology_transport_owner=independent_research_explorer
 explorer_project_alignment_transport_owner=independent_research_explorer
-review_owner_task=same_level_user_owned_Desktop_Explorer_owner
-review_owner_mode=direction|portfolio
-review_boundary=assignment_scoped_exact_direction_or_named_direction_set
-review_exact_inputs=canonical_inputs_named_by_assignment
-review_write_paths=canonical_write_paths_named_by_assignment
-review_result_destination=canonical_result_destination_named_by_assignment
 workflow_authority=none
 code_acceptance_authority=none
 evidence_complexity_policy=docs/project/EVIDENCE_COMPLEXITY_POLICY.md
@@ -23,8 +17,7 @@ code_science_audit_new_algorithm_or_evidence_search=forbidden
 active_grant_valid_result_adjudication=result_plus_portfolio_delta_required
 scientific_portfolio=multiple_live_or_parked_directions_when_supported
 portfolio_adjudication_authority=exclusive
-scheduled_resource_consuming_action_scope=assignment_named_only
-scheduled_resource_consuming_action_count=not_global_scheduler_field
+scheduled_resource_consuming_action_count=one
 scheduled_action_scientific_uniqueness=false
 unselected_direction_retention=live_or_parked_with_reactivation_conditions
 missing_scheduled_action_with_remaining_balance_and_possible_candidate_response=focused_clarification_required
@@ -84,10 +77,10 @@ owner for that bounded review.
   reactivation conditions and next scheduled scientific action.
 - For every valid success, failure, mixed or underpowered result inside the
   active grant, adjudicate the result and maintain every supported in-scope
-  direction. When the formal grant continues, designate one assignment-named
-  in-scope scientific action and preserve the other directions as live or
-  parked. This formal scientific selection is not a Scheduler field, global
-  runtime mutex or statement of scientific uniqueness.
+  direction. When the grant continues, designate one current resource-consuming
+  action for execution and preserve the other directions as live or parked.
+  Scheduling is an attribution boundary and does not establish scientific
+  uniqueness.
 - Return terminal authorized-chain closure only after considering the full
   preserved portfolio and determining that no in-scope executable candidate
   remains. Return terminal balance completion when the supplied
@@ -198,7 +191,7 @@ owner for that bounded review.
   scaling distinction and the 20-minute nonformal/eight-hour formal caps.
 - For `INDEPENDENT_RESEARCH_METHODOLOGY_AUDIT`, the exact Workflow-Design-
   Manager-committed question and repository allow-list submitted by the
-  assignment-scoped Explorer owner task.
+  registered Independent Research Explorer from its persistent conversation.
   `CURRENT_WORK.md`, active portfolios, runs and formal review artifacts are
   not inputs.
 - For an independent direction review, one Explorer-frozen prompt and one exact
@@ -209,9 +202,10 @@ owner for that bounded review.
 - For Explorer-origin toy reviews at the C-level or a named trigger, the exact CPM-authored question and
   allow-list include one semantically sufficient public candidate brief plus
   its named evidence, or one mechanically valid isolated result package.
-  The brief and all evidence are bound to one candidate and exact owner
-  assignment. Formal-review and Explorer-owner boundaries remain separate and
-  are not interchangeable.
+  The brief and all evidence are bound to one candidate and the
+  dedicated CPM-owned conversation. The active formal-research Pro and
+  Independent Research Explorer conversations are separate and are not
+  interchangeable.
 - For Explorer-origin final implementation acceptance at C or another named
   review trigger, one Explorer-authored `CODE_SCIENCE_ALIGNMENT_AUDIT` names
   the public GitHub repository, exact pushed commit and relevant remote paths

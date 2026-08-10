@@ -16,11 +16,8 @@ from typing import Any
 
 
 SCHEMA_VERSION = 2
+WORKTREE_ROOT = Path(r"C:\worktrees\HMASD")
 REGISTERED_REPOSITORY = Path(__file__).resolve().parents[1]
-DEFAULT_WORKTREE_ROOT = Path("temp") / "worktrees" / "HMASD"
-# Tests and narrowly scoped callers may replace this with an explicit root.
-# ``None`` keeps the production default relative to the registered checkout.
-WORKTREE_ROOT: Path | None = None
 TICKET_DIRECTORY = "hmasd-workspace-tickets"
 ASSIGNMENT_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,95}$")
 LONG_PATH_GIT_ARGS = ("-c", "core.longpaths=true")
@@ -86,38 +83,10 @@ def _is_reparse_point(path: Path) -> bool:
 
 
 def _worktree_root() -> Path:
-    registered = _canonical(REGISTERED_REPOSITORY, label="registered repository")
-    configured = WORKTREE_ROOT
-    explicit = configured is not None
-    requested = configured if explicit else registered / DEFAULT_WORKTREE_ROOT
-    if not explicit:
-        expected_parent = registered / "temp" / "worktrees"
-        parent = expected_parent.resolve(strict=False)
-        if not _same_path(parent, expected_parent) or (
-            parent.exists() and (parent.is_symlink() or _is_reparse_point(parent))
-        ):
-            raise TicketError("default worktree root parent is redirected")
-    requested = Path(requested)
-    try:
-        requested.mkdir(parents=True, exist_ok=True)
-    except OSError as exc:
-        raise TicketError(f"cannot create registered worktree root: {requested}: {exc}") from exc
-    root = _canonical(requested, label="registered worktree root")
-    if not _same_path(root, requested) or root.is_symlink() or _is_reparse_point(root):
+    root = _canonical(WORKTREE_ROOT, label="registered worktree root")
+    if not _same_path(root, WORKTREE_ROOT) or root.is_symlink() or _is_reparse_point(root):
         raise TicketError("registered worktree root is redirected")
-    if not explicit:
-        expected = (registered / DEFAULT_WORKTREE_ROOT).resolve(strict=False)
-        if not _same_path(root, expected) or not _inside_path(root, registered / "temp" / "worktrees"):
-            raise TicketError("default worktree root is outside the repository")
     return root
-
-
-def _inside_path(path: Path, root: Path) -> bool:
-    try:
-        path.relative_to(root)
-    except ValueError:
-        return False
-    return True
 
 
 def _assignment_id(raw: str) -> str:
@@ -135,25 +104,6 @@ def _main_repository(raw: Path) -> Path:
     if not _same_path(repo, top) or not (repo / ".git").is_dir():
         raise TicketError("provision requires the main HMASD checkout root")
     return repo
-
-
-def main_checkout(start: Path) -> Path:
-    """Return the primary checkout for either a checkout or linked worktree."""
-
-    top = _canonical(start, label="active checkout")
-    if (top / ".git").is_dir():
-        return top
-    marker = top / ".git"
-    if not marker.is_file():
-        raise TicketError("active workspace is neither a checkout nor linked worktree")
-    entries = _git(top, "worktree", "list", "--porcelain").splitlines()
-    for line in entries:
-        if not line.startswith("worktree "):
-            continue
-        candidate = _canonical(Path(line[len("worktree ") :]), label="primary checkout")
-        if (candidate / ".git").is_dir():
-            return candidate
-    raise TicketError("primary checkout could not be resolved")
 
 
 def _common_git_dir(repo: Path) -> Path:

@@ -10,7 +10,6 @@ import subprocess
 import sys
 import tempfile
 import unittest
-import argparse
 from pathlib import Path
 
 
@@ -29,25 +28,15 @@ class ReadinessEngineTest(unittest.TestCase):
         self._git("init", "-q")
         self._git("config", "user.email", "test@example.invalid")
         self._git("config", "user.name", "Readiness Test")
-        (self.repo / ".gitignore").write_text("logs/\ntemp/\n", encoding="utf-8")
+        (self.repo / ".gitignore").write_text("logs/\n", encoding="utf-8")
         (self.repo / "candidate.txt").write_text("candidate\n", encoding="utf-8")
+        role = self.repo / ".agents/roles/CODE_PROJECT_MANAGER.md"
+        role.parent.mkdir(parents=True)
+        role.write_text("session_owner_id=test-session\n", encoding="utf-8")
         self._git("add", ".")
         self._git("commit", "-qm", "fixture")
         self.candidate = self._git("rev-parse", "HEAD")
         self.exercise = "logs/readiness"
-        self.ticketing = READINESS.ticketing
-        self.ticketing.REGISTERED_REPOSITORY = self.repo
-        self.ticketing.WORKTREE_ROOT = self.repo / "temp/worktrees/HMASD"
-        provisioned = self.ticketing.provision_ticket(
-            argparse.Namespace(
-                repo=self.repo,
-                assignment_id="TREATMENT",
-                base_commit=self.candidate,
-                allow=["candidate.txt"],
-            )
-        )
-        self.ticket = Path(provisioned["ticket"])
-        self.worktree = Path(provisioned["resolved_worktree"])
 
     def tearDown(self) -> None:
         self.tmp.cleanup()
@@ -89,28 +78,19 @@ class ReadinessEngineTest(unittest.TestCase):
         path.write_text(json.dumps(value), encoding="utf-8")
         return path
 
-    def _hook_output(
-        self,
-        receipt: Path,
-        *,
-        cwd: object | None = None,
-        include_cwd: bool = True,
-        exact_paths: str = "candidate.txt",
-    ) -> str:
+    def _hook_output(self, receipt: Path) -> str:
         payload = {
+            "session_id": "test-session",
             "last_assistant_message": "\n".join(
                 (
                     "CODE_ACCEPTED",
                     f"commit={self._git('rev-parse', 'HEAD')}",
-                    f"exact_paths={exact_paths}",
+                    "exact_paths=candidate.txt",
                     "execution_readiness=passed",
                     f"execution_readiness_receipt={receipt}",
                 )
             ),
         }
-        if include_cwd:
-            selected_cwd = self.worktree if cwd is None else cwd
-            payload["cwd"] = str(selected_cwd) if isinstance(selected_cwd, Path) else selected_cwd
         old_stdin, old_stdout = sys.stdin, sys.stdout
         output = io.StringIO()
         try:
@@ -120,74 +100,6 @@ class ReadinessEngineTest(unittest.TestCase):
         finally:
             sys.stdin, sys.stdout = old_stdin, old_stdout
         return output.getvalue()
-
-    def test_hook_uses_linked_ticket_without_session_handshake(self) -> None:
-        spec = self._spec()
-        old = Path.cwd()
-        os.chdir(self.repo)
-        try:
-            self.assertEqual(READINESS.run_spec(spec), 0)
-            self.assertEqual(READINESS.finalize_spec(spec), 0)
-            final = self.repo / ".git/hmasd/execution-readiness" / self.candidate / "a1.json"
-
-            self.assertEqual(self._hook_output(final), "")
-        finally:
-            os.chdir(old)
-
-    def test_hook_workspace_resolution_fail_closed_after_code_accepted(self) -> None:
-        receipt = self.repo / "not-used.json"
-        missing_cwd = json.loads(self._hook_output(receipt, include_cwd=False))
-        self.assertEqual(missing_cwd["decision"], "block")
-        self.assertIn("cwd", missing_cwd["reason"])
-
-        invalid_cwd = json.loads(
-            self._hook_output(receipt, cwd=str(self.repo / "missing-repository"))
-        )
-        self.assertEqual(invalid_cwd["decision"], "block")
-        self.assertTrue(invalid_cwd["reason"])
-
-    def test_hook_main_checkout_integration_is_a_noop(self) -> None:
-        self.assertEqual(
-            self._hook_output(self.repo / "not-used.json", cwd=self.repo), ""
-        )
-
-    def test_hook_missing_linked_ticket_fails_closed(self) -> None:
-        self.ticket.unlink()
-        payload = json.loads(self._hook_output(self.repo / "not-used.json"))
-        self.assertEqual(payload["decision"], "block")
-        self.assertIn("registered workspace ticket", payload["reason"])
-
-    def test_hook_invalid_linked_ticket_fails_closed(self) -> None:
-        self.ticket.write_text("{not-json", encoding="utf-8")
-        payload = json.loads(self._hook_output(self.repo / "not-used.json"))
-        self.assertEqual(payload["decision"], "block")
-        self.assertIn("registered workspace ticket", payload["reason"])
-
-    def test_hook_rejects_linked_head_drift_and_ticket_scope_escape(self) -> None:
-        spec = self._spec()
-        old = Path.cwd()
-        os.chdir(self.repo)
-        try:
-            self.assertEqual(READINESS.run_spec(spec), 0)
-            self.assertEqual(READINESS.finalize_spec(spec), 0)
-            final = self.repo / ".git/hmasd/execution-readiness" / self.candidate / "a1.json"
-            scope_failure = json.loads(
-                self._hook_output(final, exact_paths="outside.txt")
-            )
-            self.assertEqual(scope_failure["decision"], "block")
-            self.assertIn("ticket scope", scope_failure["reason"])
-            subprocess.run(
-                ["git", "-C", str(self.worktree), "commit", "--allow-empty", "-qm", "drift"],
-                check=True,
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-            )
-            head_failure = json.loads(self._hook_output(final))
-            self.assertEqual(head_failure["decision"], "block")
-            self.assertIn("current treatment HEAD", head_failure["reason"])
-        finally:
-            os.chdir(old)
 
     def test_ordered_run_logs_utf8_and_finalize_is_idempotent(self) -> None:
         spec = self._spec()

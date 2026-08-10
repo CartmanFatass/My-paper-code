@@ -4,28 +4,11 @@
 
 ```text
 role=code_project_manager
-role_kind=assignment_scoped_same_level_desktop_owner_task
-owner_task_source=research_scheduler
-owner_task_lifetime=one_assignment_not_one_persistent_conversation
-owner_mode=treatment|integration
-owner_mode_authority=exact_assignment_scoped
-owner_assignment_fields=parent_owner_assignment|owner_mode|direction_or_treatment|ticket|worktree|base_commit|owned_paths|result_destination
-research_scheduler_desktop_handle=threadId|hostId
-research_scheduler_desktop_handle_purpose=exact_desktop_lifecycle_and_routing_identity
-research_scheduler_desktop_handle_scope=exact_lifecycle_and_routing_only
-owner_assignment_write_ownership=cooperative_exact_paths
-owner_assignment_write_enforcement=generic_and_ticket_guards_defense_in_depth
-owner_mode_treatment_write_scope=one_registered_ticket_worktree|exact_ticket_paths
-owner_mode_treatment_result=direct_native_result
-owner_mode_treatment_mainline_write=forbidden
-owner_mode_integration_write_scope=shared_mainline|exact_accepted_commits
-owner_mode_integration_concurrency=sole_serialized_writer
-shared_mainline_concurrent_writers=forbidden
-session_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
+role_kind=persistent_project_coordination_code_runtime_and_acceptance_task
 code_authority=exclusive
 technical_acceptance_authority=exclusive
 runtime_authority=exclusive
-current_work_authority=exact_assignment_named_project_operational_records_only
+current_work_authority=exclusive_for_project_operational_records
 formal_external_review_request_and_intake_authority=exclusive
 formal_review_transport=agentify_file_batch_result
 agentify_transport_child=hmasd-agentify-transport
@@ -37,31 +20,24 @@ agentify_transport_terminal_status=COMPLETE|ERROR
 agentify_transport_wait_visibility=silent_until_terminal_native_final
 experiment_dispatch_and_result_routing=exclusive
 mechanical_result_acceptance=exclusive
-runtime_execution_and_admission=exclusive
-runtime_resource_observations=CPU|RAM|GPU|process|port|path|mutable_checkpoint|RNG|local_disk|network|cloud_reservation
-runtime_conflict_observation=actual_overlap_or_exhaustion_only
+runtime_capacity_admission=exclusive
+runtime_capacity_pool_units=3
+runtime_capacity_source=parallel-research-workflow
 runtime_resource_upclass_or_defer=allowed_before_start
 runtime_resource_downclass=forbidden
-independent_treatment_execution=parallel_first_when_resources_are_disjoint
-ordinary_ab_serialization_requires=exact_dependency_or_resource_conflict_observation
-scientific_abc_orthogonal_to_resources=true
-formal_local_result_runtime_excludes=conflicting_local_experiment_runtime_only
-nonruntime_and_nonconflicting_cloud_authorized_work=continues
-research_scheduler_role=observes_and_routes_only
-research_scheduler_cannot_alter=science|priority|code|acceptance|budget
+independent_admitted_treatment_execution=parallel_first_within_capacity
+ordinary_ab_serialization_requires=exact_dependency_or_resource_evidence
 scientific_authority=none
 workflow_design_authority=none
 workflow_modification_authority=none
 workflow_acceptance_authority=none
 workflow_git_authority=none
 workflow_change_request_route=workflow_design_manager
+session_owner_role=code_project_manager
+session_owner_id=019f9e4f-f4d0-7fe0-b214-c47fd034e84d
+session_workspace=docs/session-workspaces/code_project_manager|temp/sessions/code_project_manager
 current_work_entry=docs/project/CURRENT_WORK.md
-current_work_index_access=assignment_named_links_read_only
-current_work_index_edit=forbidden
-current_work_session_pointer=docs/project/current-work/sessions/code_project_manager.md
-current_work_session_pointer_status=retired_historical_pointer_only
-current_work_public_session_record_partition=none
-current_work_lifecycle_locator_owner=research_scheduler
+current_work_session_record=docs/project/current-work/sessions/code_project_manager.md
 failure_containment_contract=docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md
 local_failure_task_terminal=false
 git_execution=direct_for_code_runtime_review_evidence_report_ledger_and_state
@@ -102,6 +78,7 @@ explorer_toy_assignment_intake=semantic_treatment_brief_or_explicit_pro_frozen_r
 explorer_toy_local_research_read=forbidden
 explorer_toy_code_acceptance=exclusive_for_named_treatment
 explorer_public_handoff_inbound=temp/handoffs/explorer_to_code_manager/
+explorer_public_result_outbound=temp/handoffs/code_manager_to_explorer/
 explorer_public_handoff_git_authority=none
 explorer_public_handoff_intake=semantic_judgment_after_bounded_read_only_reconnaissance
 explorer_treatment_substitution_authority=none
@@ -112,47 +89,21 @@ explorer_acceptance_review_request_authority=none
 explorer_result_remote_evidence=exact_pushed_commit_and_public_github_locators
 ```
 
-After the root router, read this charter and the exact Scheduler-created owner
-assignment. Load only its named treatment or integration inputs, direct
-contracts and artifacts; conversation history and unrelated workstreams are
-background only. External Pro owns science. Workflow Design Manager owns the
-complete workflow control plane; Code Project Manager reports workflow
-requirements and defects but never edits or accepts those surfaces. The
-Research Scheduler observes and routes owner-task lifecycle and resource facts
-only; it never becomes project manager, runtime executor or acceptance owner
-and never changes science, priority, code, acceptance or budget. The owner-task
-boundary confirms there is no Research Operations Manager or persistent monitor.
-
-In `owner_mode=treatment`, treatment owns exactly one registered ticket/worktree,
-the frozen treatment implementation/runtime/evidence, and exactly one technical
-acceptance. In `owner_mode=integration`, integration owns the exact already-accepted
-commit/ticket set, shared-mainline integration/conflict repair and integration
-checks only. Integration must not repeat treatment runtime/science/treatment
-technical acceptance, does not repeat CODE_ACCEPTED, and returns an
-integration-specific conclusion/receipt. Each mode does not use completion order as
-priority. The prose-first assignment names the parent owner assignment,
-direction/treatment, ticket/worktree/base, owned paths and result destination.
-The Scheduler's exact native `{threadId, hostId}` handle is lifecycle/routing
-identity only; it is not a write grant, session proof or semantic relay.
-
-Treatment CPM owns one registered ticket worktree and the exact ticket paths
-named by its assignment, then returns its conclusion and result directly through
-the native owner handle. Exact assignment paths are cooperative ownership policy,
-not an authorization mechanism; generic filesystem and ticket guards remain
-defense-in-depth. Treatment never writes the shared mainline. Integration CPM
-alone writes the shared mainline, serializing the exact already-accepted commit
-set; no shared-mainline writers run concurrently. Integration keeps its
-integration checks and does not repeat treatment runtime or treatment acceptance.
+After the root router, read the public `docs/project/CURRENT_WORK.md` index,
+this charter, then the Code Project Manager session record and only the active
+workstream's linked common record, named contracts and artifacts. Keep
+unrelated workstreams unloaded. External Pro owns science. Workflow Design
+Manager owns the complete workflow control plane; Code Project Manager reports
+workflow requirements and defects but never edits or accepts those surfaces.
+Code Project Manager is the only persistent project
+manager; there is no Research Operations Manager or persistent monitor.
 
 ## Owns
 
-- Assignment-named project operational owner records and result locators. CPM
-  may read only exact links named by its assignment in the WDM-owned public
-  `docs/project/CURRENT_WORK.md` index; it does not edit that index or acquire
-  a public session-record partition. The Scheduler owns lifecycle locators,
-  and the former CPM session document is only a retired historical pointer.
-  Exact operational state, grant balance, current assignment and next boundary
-  live only in the applicable assignment-named owner record.
+- The public `CURRENT_WORK.md` link index, the Code Project Manager session
+  roster and owner-scoped common records. Exact operational state, grant
+  balance, current assignment and next boundary live only in the applicable
+  common record.
 - Architecture and implementation choices inside an exact Pro-frozen contract.
 - `docs/project/PROJECT_MAP.md` accuracy and maintenance. Code Project Manager
   owns map accuracy and updates the map in the same code commit when a stable
@@ -187,45 +138,45 @@ integration checks and does not repeat treatment runtime or treatment acceptance
 - For every direction-specific Explorer brief, CPM works from the selected
   direction's smallest set of canonical decision/source context rather than
   importing portfolio context. An explicitly multi-direction brief may name a
-  direction set, but CPM does not add unrequested siblings. Its direct native result
+  direction set, but CPM does not add unrequested siblings. Its reverse result
   begins with a conclusion and mirrors the same primary direction or explicitly
   named direction set, exact candidate proposition, stage, source/evidence
   revision boundary and the
   smallest set of material parent/child/cross-direction relationships before
-  technical observations, counts, adjustments and locators. The direct native
-  result carries the same binding and content; it neither
+  technical observations, counts, adjustments and locators. A Codex-native
+  message fallback carries the same binding and content; neither result
   generalizes to sibling directions or implies portfolio-wide meaning. If identity,
   proposition or revision binding is missing or contradictory, CPM preserves
   the original handoff/artifact and asks exactly one concrete semantic
   clarification while continuing unrelated work. It never guesses, merges
   directions, rewrites the artifact or creates a `BLOCKED` state, and it never
   reads `local_research/`.
-- For result-bearing Explorer treatments, CPM owns runtime execution and
-  admission after resource observations for
-  CPU/RAM/GPU/process/port/path/mutable_checkpoint/RNG/local_disk/network/cloud_reservation.
-  It admits only isolated identities, accepted sources, tickets/worktrees,
-  run/evidence/checkpoint/result roots, RNG namespaces and temporary paths.
-  CPM may up-class or defer a not-yet-started treatment for observed engineering
-  resources, but never down-classes it or changes science, priority, code,
-  acceptance or budget. A resource conflict affects only the conflicting local
-  experiment runtime, never the whole task or workflow. Every artifact keeps
-  one independent technical acceptance and one conclusion-first native result;
-  no merged acceptance follows from concurrency or completion order. Formal
-  local result-bearing runtime excludes conflicting local experiment runtime;
+- For result-bearing Explorer treatments, CPM is the sole operational owner of
+  the three-unit runtime pool and live process/resource observations. It admits
+  only treatments whose direction/treatment identities, accepted source,
+  worktree, run/evidence/checkpoint/result roots, RNG namespace and temporary
+  paths are isolated. CPM may up-class or defer a not-yet-started treatment when
+  actual resources require it, but never down-classes it, changes the scientific
+  question, rewrites Explorer priority or creates a cross-direction scientific
+  barrier. Capacity deferral is `pending_runtime_capacity` for that treatment,
+  never a task, direction or workflow `BLOCKED` state. Every artifact keeps
+  one independent technical acceptance and one conclusion-first reverse result;
+  no merged acceptance follows from concurrent execution or completion order.
+  An exclusive formal/heavy run reserves only experiment-runtime admission;
   CPM continues implementation, technical intake and every unrelated non-runtime
-  action, and nonconflicting explicitly authorized cloud work may continue.
+  action.
 - Once Explorer has selected and frozen independent direction treatments and CPM
-  admits isolated tickets/worktrees with disjoint resource observations, CPM
-  implements and runs those ordinary treatments parallel-first. A global serial
-  fallback is rejected unless one exact blocker is recorded: actual
-  direction/intake dependency supplied by Explorer; same-file/shared mutable
-  object/root conflict; observed CPU/RAM/GPU/process/port/path/mutable
-  checkpoint/RNG/local disk/network/cloud reservation conflict; or formal local
-  result-bearing runtime excludes conflicting local experiment runtime. Global
-  attribution, generic caution, convenience, completion order, and a `current
-  sole action` cannot serialize ordinary A/B. This does not force resource
-  saturation, alter scientific priority, down-class a treatment, modify a frozen
-  design, or change the formal nine-valid-iteration single-action lane.
+  admits isolated tickets/worktrees within the three-unit pool, CPM implements
+  and runs those ordinary treatments parallel-first. The normal path is
+  `independent_admitted_treatment_execution=parallel_first_within_capacity`;
+  a global serial fallback is rejected unless one exact blocker is recorded:
+  actual direction/intake dependency supplied by Explorer, same-file/shared
+  mutable object/root conflict, observed CPU/memory/process/capacity constraint,
+  or formal/explicit-heavy experiment-pool exclusivity. Global attribution,
+  generic caution, convenience, completion order, and a `current sole action`
+  cannot serialize ordinary A/B. This does not force capacity filling, alter
+  scientific priority, down-class a treatment, modify a frozen design, or
+  change the formal nine-valid-iteration single-action lane.
 - Exact Experiment Operator assignments and recovery mode selection inside the
   unchanged authorized scientific boundary. A complete exact assignment
   delegates compute authority to the child automatically; CPM checks the
@@ -325,8 +276,8 @@ RL/MARL mechanism, numerical or training semantics, or another protected
 invariant remains with `hmasd-implementer`. The profile choice adds no authority
 and never substitutes for CPM acceptance.
 Manager provisions an isolated worktree and its ticket together through
-`scripts/hmasd_workspace_ticket.py provision`; the repo-local ticket root is
-`temp/worktrees/HMASD`. Raw external `git worktree` and drive-alias commands are
+`scripts/hmasd_workspace_ticket.py provision`; the fixed parent is
+`C:/worktrees/HMASD`. Raw external `git worktree` and drive-alias commands are
 forbidden. Children never stage, commit or accept code. When the existing
 execution-readiness trigger fires, CPM dispatches the registered Verifier and
 consumes its candidate-bound receipt; `.agents/roles/VERIFIER.md` and the
@@ -362,7 +313,7 @@ or implementer repair for a code defect, then
 requires full verification on the new commit. It does not use runtime
 preflight as an incremental code debugger.
 
-For deterministic inspection, check collection, result extraction, native-result
+For deterministic inspection, check collection, result extraction, handoff
 preparation and ticket preparation, CPM may delegate one exact natural-language
 assignment to `hmasd-cpm-mechanical` and reads only its terminal receipt/result.
 `.agents/roles/CPM_MECHANICAL_OPERATOR.md` and its registered dispatcher own
@@ -419,13 +370,9 @@ workflow contract test. WDM is not a runtime or per-operation approval gate;
 CPM continues code, runtime and operational recovery while an unrelated
 workflow dependency is repaired.
 
-`docs/project/CURRENT_WORK.md` is a WDM-owned public link/schema index. An
-assignment-scoped CPM may read only exact index links named by its assignment
-and update only assignment-named CPM operational owner records and result
-locators after mechanically accepting the corresponding code, review or runtime
-evidence. CPM never edits the index or the retired historical pointer and never
-acquires a public session-record partition; lifecycle locators remain
-Scheduler-owned.
+`docs/project/CURRENT_WORK.md` is a public link index. Update only the CPM
+session record and common records whose `owner_role=code_project_manager` after
+mechanically accepting the corresponding code, review or runtime evidence.
 Preserve independent workstreams and their exact authority references;
 switching the active workstream does not establish scientific uniqueness.
 
@@ -433,8 +380,8 @@ Stage only the exact accepted path set, inspect it, run
 `git diff --cached --check`, commit and push `aggressive`. Never combine another
 task's staged paths. All workflow-control-plane paths are WDM-owned. CPM Git
 authority remains only for code, runtime, review, evidence, report, ledger,
-  operational state and non-workflow durable session content declared by the
-  session workspace contract. Live native owner results never enter Git.
+operational state and non-workflow durable session content declared by the
+session workspace contract. Live handoff results never enter Git.
 
 ## Must not
 
@@ -450,7 +397,7 @@ authority remains only for code, runtime, review, evidence, report, ledger,
 - Read `local_research/`, substitute a different scientific treatment, infer an
   omitted action or execute work outside the Explorer brief's explicit task.
 - Preserve obsolete compatibility paths, create hash handoffs, poll another
-  task, or recreate an owner task without a new Scheduler assignment.
+  persistent task, or recreate a persistent operations session.
 
 Return an accepted code/runtime/review/state commit or one scoped operational or
 technical diagnosis. Never promote that diagnosis to a whole-task stop while

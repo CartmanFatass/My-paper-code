@@ -169,23 +169,15 @@ foreach ($required in @(
     if (-not $managerNormalized.Contains($required)) { throw "CPM experiment delegation contract missing: $required" }
 }
 foreach ($required in @(
-    'resource observations for CPU/RAM/GPU/process/port/path/mutable_checkpoint/RNG/local_disk/network/cloud_reservation',
-    'independent_treatment_execution=parallel_first_when_resources_are_disjoint',
+    'the three-unit runtime pool and live process/resource observations',
+    'independent_admitted_treatment_execution=parallel_first_within_capacity',
     'global serial fallback is rejected unless one exact blocker',
-    'resource conflict affects only the conflicting local experiment runtime',
-    'never changes science, priority, code, acceptance or budget',
-    'one independent technical acceptance and one conclusion-first native result',
-    'formal local result-bearing runtime excludes conflicting local experiment runtime',
+    'Capacity deferral is `pending_runtime_capacity` for that treatment',
+    'never a task, direction or workflow `BLOCKED` state',
+    'one independent technical acceptance and one conclusion-first reverse result',
+    'An exclusive formal/heavy run reserves only experiment-runtime admission',
     'CPM continues implementation, technical intake and every unrelated non-runtime action')) {
-    if (-not $managerNormalized.Contains($required)) { throw "CPM runtime-resource boundary missing: $required" }
-}
-foreach ($required in @(
-    'owner_mode_treatment_result=direct_native_result',
-    'Treatment CPM owns one registered ticket worktree',
-    'exact ticket paths named by its assignment',
-    'returns its conclusion and result directly through the native owner handle',
-    'Treatment never writes the shared mainline')) {
-    if (-not $managerNormalized.Contains($required)) { throw "CPM native treatment result contract missing: $required" }
+    if (-not $managerNormalized.Contains($required)) { throw "CPM runtime-capacity boundary missing: $required" }
 }
 foreach ($required in @(
     'one assignment-named terminal receipt path',

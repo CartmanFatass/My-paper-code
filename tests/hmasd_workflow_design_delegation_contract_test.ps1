@@ -13,8 +13,6 @@ $skill = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/SKILL.md'
 $harness = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py'
 $workflowMap = Read-RepoFile 'docs/project/WORKFLOW_MAP.md'
 $router = Read-RepoFile 'AGENTS.md'
-$codePmRole = Read-RepoFile '.agents/roles/CODE_PROJECT_MANAGER.md'
-$agileSkill = Read-RepoFile '.agents/skills/hmasd-agile-research-development/SKILL.md'
 $sessionContract = Read-RepoFile 'docs/project/SESSION_WORKSPACE_CONTRACT.md'
 $collaborationSkill = Read-RepoFile '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md'
 $defectQueue = Read-RepoFile 'docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md'
@@ -22,8 +20,6 @@ $normalizedManager = ($manager -replace '\s+', ' ').ToLowerInvariant()
 $normalizedRouter = ($router -replace '\s+', ' ').ToLowerInvariant()
 $normalizedSessionContract = ($sessionContract -replace '\s+', ' ').ToLowerInvariant()
 $normalizedCollaborationSkill = ($collaborationSkill -replace '\s+', ' ').ToLowerInvariant()
-$normalizedCodePmRole = ($codePmRole -replace '\s+', ' ').ToLowerInvariant()
-$normalizedAgileSkill = ($agileSkill -replace '\s+', ' ').ToLowerInvariant()
 
 $profiles = @(
     @('.agents/roles/WORKFLOW_AUDITOR.md', '.codex/agents/hmasd-workflow-auditor.toml', 'hmasd-workflow-auditor', '[agents."HMASDWorkflowAuditor"]', 'gpt-5.6-luna', 'high', 'read-only', 'WORKFLOW_IMPACT_PACKET'),
@@ -373,118 +369,6 @@ if (-not $normalizedImplementerRoleText.Contains('exactly `git rev-parse --show-
 foreach ($forbidden in @('Git mutation', 'stage, commit, push', 'route cross-task messages')) {
     if (-not $implementerRoleText.Contains($forbidden)) {
         throw "Workflow implementer boundary missing: $forbidden"
-    }
-}
-
-$schedulerRolePath = '.agents/roles/RESEARCH_SCHEDULER.md'
-$schedulerSkillPath = '.agents/skills/hmasd-research-scheduler/SKILL.md'
-$schedulerRole = Read-RepoFile $schedulerRolePath
-$schedulerSkill = Read-RepoFile $schedulerSkillPath
-$schedulerText = (($schedulerRole + "`n" + $schedulerSkill) -replace '\s+', ' ').ToLowerInvariant()
-foreach ($required in @(
-    'user_owned_persistent_desktop_task',
-    'registered_child=false',
-    'profile_path=none',
-    'task_lifecycle_and_resource_conflict_routing_only',
-    'same-level ephemeral owner tasks',
-    'create_thread', 'environment=local', 'threadid', 'hostid',
-    'wait_threads', 'read_thread', 'canonical locator',
-    'at most eight', 'active_assignments.md',
-    'exact_desktop_lifecycle_and_routing_identity',
-    'single_create_thread_return',
-    'self-contained natural-language assignment',
-    'exact cooperative write ownership',
-    'known exact handles only', 'never blindly retry')) {
-    if (-not $schedulerText.Contains($required.ToLowerInvariant())) {
-        throw "Research Scheduler contract missing: $required"
-    }
-}
-foreach ($forbidden in @(
-    'research-scheduler.toml',
-    'fixed unit pool')) {
-    if ($config.Contains($forbidden)) { throw "Scheduler profile/config drifted: $forbidden" }
-}
-foreach ($required in @(
-    'science_authority=none', 'code_authority=none',
-    'technical_acceptance_authority=none', 'git_authority=none',
-    'runtime_execution_authority=none', 'semantic_relay_authority=none',
-    'sibling_preload_authority=none')) {
-    if (-not $schedulerRole.Contains($required)) { throw "Scheduler boundary missing: $required" }
-}
-foreach ($surface in @($router, $sessionContract, $workflowMap)) {
-    if (-not $surface.Contains('.agents/skills/hmasd-research-scheduler/SKILL.md')) {
-        throw 'Scheduler procedure/resource pointer missing'
-    }
-    foreach ($commandLevel in @('create_thread', 'wait_threads', 'read_thread')) {
-        if ($surface -match "(?<![A-Za-z0-9_])$([regex]::Escape($commandLevel))(?![A-Za-z0-9_])") {
-            throw "Scheduler command-level procedure duplicated outside Skill: $commandLevel"
-        }
-    }
-}
-
-# Scheduler handles own lifecycle/routing only.  Assignment paths are
-# cooperative ownership policy; generic and ticket guards remain defense in
-# depth, while CPM owns the ticket and serialized shared-mainline boundaries.
-foreach ($required in @(
-    'research_scheduler_desktop_handle=threadId|hostId',
-    'research_scheduler_desktop_handle_purpose=exact_desktop_lifecycle_and_routing_identity',
-    'research_scheduler_desktop_handle_scope=exact_lifecycle_and_routing_only',
-    'research_scheduler_assignment_write_ownership=cooperative_exact_paths',
-    'cpm_treatment_write_ownership=one_registered_ticket_worktree|exact_ticket_paths|direct_native_result',
-    'cpm_integration_write_ownership=sole_serialized_shared_mainline_writer|exact_accepted_commits',
-    'shared_mainline_concurrent_writers=forbidden')) {
-    if (-not $router.Contains($required)) { throw "Native ownership router contract missing: $required" }
-}
-foreach ($required in @(
-    'research_scheduler_desktop_handle=threadid|hostid',
-    'research_scheduler_desktop_handle_purpose=exact_desktop_lifecycle_and_routing_identity',
-    'research_scheduler_desktop_handle_scope=exact_lifecycle_and_routing_only',
-    'owner_assignment_write_ownership=cooperative_exact_paths',
-    'owner_assignment_write_enforcement=generic_and_ticket_guards_defense_in_depth',
-    'owner_mode_treatment_write_scope=one_registered_ticket_worktree|exact_ticket_paths',
-    'owner_mode_treatment_result=direct_native_result',
-    'owner_mode_treatment_mainline_write=forbidden',
-    'owner_mode_integration_write_scope=shared_mainline|exact_accepted_commits',
-    'owner_mode_integration_concurrency=sole_serialized_writer',
-    'shared_mainline_concurrent_writers=forbidden',
-    'the scheduler''s exact native `{threadid, hostid}` handle is lifecycle/routing identity only',
-    'treatment cpm owns one registered ticket worktree and the exact ticket paths',
-    'returns its conclusion and result directly through the native owner handle',
-    'integration cpm alone writes the shared mainline',
-    'no shared-mainline writers run concurrently')) {
-    if (-not $normalizedCodePmRole.Contains($required)) { throw "CPM native ownership contract missing: $required" }
-}
-foreach ($required in @(
-    'for `owner_mode=treatment`, the self-contained owner assignment names one registered ticket worktree and the exact ticket paths cpm owns',
-    'returns its conclusion and result directly through the native owner handle',
-    'exact assignment paths are cooperative ownership policy, not authorization',
-    'generic filesystem and ticket guards remain defense-in-depth',
-    'cpm is the sole serialized writer of the shared mainline',
-    'no shared mainline writers run concurrently')) {
-    if (-not $normalizedAgileSkill.Contains($required)) { throw "Agile native ownership contract missing: $required" }
-}
-foreach ($required in @(
-    'exact native `{threadid, hostid}` handle is lifecycle/routing identity only, not write authorization',
-    'assignments carry cooperative exact write ownership',
-    'treatment cpm owns one registered ticket worktree and exact ticket paths and returns a direct native result',
-    'integration cpm alone serializes writes to the shared mainline for exact accepted commits',
-    'no shared-mainline concurrent writers')) {
-    if (-not $normalizedWorkflowMap.Contains($required)) { throw "Workflow Map native ownership contract missing: $required" }
-}
-foreach ($surface in @($codePmRole, $agileSkill, $router, $workflowMap)) {
-    foreach ($stale in @(
-        'owner_mode_treatment_write_scopes=exactly_two|',
-        'owner_mode_treatment_reverse_handoff_root=',
-        'owner_mode_treatment_reverse_handoff_locator=',
-        'owner_mode_treatment_main_checkout_mutation=apply_patch_only_reverse_handoff_no_git',
-        'assignment and scheduler binding enumerate exactly two physical write scopes',
-        'scheduler binding as authorization',
-        'file identity handshake',
-        'temporary identity handshake',
-        'session binding')) {
-        if ($surface.ToLowerInvariant().Contains($stale.ToLowerInvariant())) {
-            throw "Retired Scheduler binding/treatment handoff authorization remains: $stale"
-        }
     }
 }
 

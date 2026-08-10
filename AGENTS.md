@@ -19,16 +19,15 @@ then procedural Skills. Use exactly one route:
 
 | Active identity | Read after this file | Do not load by default |
 |---|---|---|
-| Code Project Manager owner task | its Scheduler assignment, `.agents/roles/CODE_PROJECT_MANAGER.md`, then exact treatment/integration paths | unrelated workstreams, research corpus, sibling tickets and workflow history |
+| Code Project Manager | `docs/project/CURRENT_WORK.md`, `.agents/roles/CODE_PROJECT_MANAGER.md`, then the active workstream's named paths | unrelated workstreams, research corpus and workflow history |
 | Workflow Design Manager | its exact assignment and `.agents/roles/WORKFLOW_DESIGN_MANAGER.md`; expand only on a lazy trigger below | runtime, science and implementation state |
 | Agentify Transport child | its exact requester assignment, `.codex/agents/hmasd-agentify-transport.toml`, `.agents/roles/AGENTIFY_TRANSPORT_OPERATOR.md`, agentify Skill and its workspace | science, code, `CURRENT_WORK.md` and workflow history |
-| Independent Research Explorer owner task | its Scheduler assignment, `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, independent-research Skill, required principles and named sources | `CURRENT_WORK.md`, sibling directions, code, runtime and workflow state |
-| Desktop Research Scheduler | `.agents/roles/RESEARCH_SCHEDULER.md`, research-scheduler Skill, and the exact assignment | science, code, runtime and sibling context unless named by the assignment |
+| Independent Research Explorer | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md`, independent-research Skill, required principles and named sources | `CURRENT_WORK.md`, code, runtime and workflow state |
 | registered native child | its exact assignment, `.codex/agents/<profile>.toml`, named Role, then assignment-named files | `CURRENT_WORK.md`, persistent history and other roles |
 | external GPT-5.6 Pro | the submitted question, its allow-list and `.agents/roles/EXTERNAL_PRO.md` | repository state outside the question |
 
 A child never reconstructs task history. Missing identity, authority, path or
-completion condition fails closed. Owner tasks and persistent control tasks route workflow defects
+completion condition fails closed. Persistent sessions route workflow defects
 and requirements to WDM; only WDM modifies or accepts workflow-control-plane
 surfaces.
 
@@ -59,8 +58,6 @@ workflow_design_manager_workflow_runtime_authority=none
 workflow_design_manager_scientific_authority=none
 workflow_design_manager_code_acceptance_authority=none
 workflow_design_manager_current_work_authority=public_index_and_own_workflow_control_plane_records_only
-workflow_design_manager_current_work_index=docs/project/CURRENT_WORK.md
-workflow_design_manager_current_work_index_owner=workflow_design_manager
 workflow_design_manager_git_authority=exclusive_for_workflow_control_plane_surfaces
 workflow_design_manager_remote_repository_authority=permanent_user_grant
 workflow_design_manager_authorized_remote_repository=https://github.com/CartmanFatass/My-paper-code.git
@@ -81,9 +78,7 @@ agentify_transport_test_parent=workflow_design_manager
 code_project_manager_code_authority=exclusive
 code_project_manager_technical_acceptance_authority=exclusive
 code_project_manager_runtime_authority=exclusive
-code_project_manager_current_work_authority=exact_assignment_named_project_operational_records_only
-code_project_manager_current_work_index_edit=forbidden
-code_project_manager_public_session_record_partition=none
+code_project_manager_current_work_authority=exclusive
 code_project_manager_scientific_authority=none
 code_project_manager_git_authority=direct_for_code_runtime_review_evidence_report_ledger_and_state
 code_project_manager_remote_repository_authority=permanent_user_grant
@@ -91,6 +86,8 @@ code_project_manager_authorized_remote_repository=https://github.com/CartmanFata
 code_project_manager_formal_external_review_request_and_intake_authority=exclusive
 code_project_manager_experiment_dispatch_and_result_routing=exclusive
 code_project_manager_mechanical_result_acceptance=exclusive
+code_project_manager_runtime_capacity_admission=exclusive
+code_project_manager_runtime_capacity_pool_units=3
 code_project_manager_routine_implementation_agent=hmasd-implementer-terra
 code_project_manager_protected_implementation_agent=hmasd-implementer
 cpm_mechanical_child=hmasd-cpm-mechanical
@@ -105,7 +102,7 @@ independent_research_continuity_entry=local_research/RESEARCH_CONTINUITY.md
 independent_research_continuity_owner=independent_research_explorer
 independent_research_explorer_external_review_request_and_intake_authority=exclusive_for_independent_research_reviews
 independent_research_experiment_roster_owner=scientific_direction_dependency_design_and_intake_only
-independent_research_runtime_admission_owner=code_project_manager
+independent_research_runtime_capacity_owner=code_project_manager
 external_pro_scientific_authority=exclusive_within_user_goal_and_review_boundary
 formal_compute_authority=user_only
 explorer_mechanical_child=hmasd-explorer-mechanical
@@ -119,26 +116,6 @@ workflow_child_git_authority=none
 native_child_authority=exact_assignment_only
 workflow_assignment_writing_skill=hmasd-writing-agent-assignments
 one_artifact_one_acceptance_owner=true
-research_scheduler_kind=user_owned_persistent_desktop_task
-research_scheduler_registered_child=false
-research_scheduler_profile_path=none
-research_scheduler_owner=user
-research_scheduler_authority=task_lifecycle_and_resource_conflict_routing_only
-research_scheduler_current_work_authority=lifecycle_locators_only
-research_scheduler_forbidden_authority=science|code|technical_acceptance|git|runtime_execution|semantic_relay|sibling_preload
-research_scheduler_owner_task_modes=explorer_direction|explorer_portfolio|cpm_treatment|cpm_integration
-research_scheduler_owner_task_depth=1
-research_scheduler_live_roster=optional:temp/sessions/research_scheduler/ACTIVE_ASSIGNMENTS.md
-research_scheduler_desktop_handle=threadId|hostId
-research_scheduler_desktop_handle_purpose=exact_desktop_lifecycle_and_routing_identity
-research_scheduler_desktop_handle_scope=exact_lifecycle_and_routing_only
-research_scheduler_canonical_files=artifact_and_continuity_only_not_llm_identity_proof
-research_scheduler_assignment_write_ownership=cooperative_exact_paths
-research_scheduler_same_file_concurrency=serialize
-research_scheduler_disjoint_exact_file_concurrency=overlap_allowed
-cpm_treatment_write_ownership=one_registered_ticket_worktree|exact_ticket_paths|direct_native_result
-cpm_integration_write_ownership=sole_serialized_shared_mainline_writer|exact_accepted_commits
-shared_mainline_concurrent_writers=forbidden
 workflow_design_charter=WORKFLOW_DESIGN_MANAGER.md
 cross_task_transport=codex_native_send_message_to_thread
 ```
@@ -158,7 +135,7 @@ same_file_concurrent_writes=forbidden
 disjoint_file_parallelism=allowed
 workflow_parallel_implementation=file_family_adaptive
 isolated_worktree_identity=workspace_ticket_only
-hmasd_worktree_root=temp/worktrees/HMASD
+hmasd_worktree_root=C:/worktrees/HMASD
 project_write_scope=current_checkout_plus_verified_ticket_worktree
 external_workspace_access=read_only
 raw_external_worktree_creation=forbidden
@@ -178,11 +155,6 @@ The fixed registered workflow children are:
 - Workflow Auditor/Scout: `.codex/agents/hmasd-workflow-auditor.toml` and `.agents/roles/WORKFLOW_AUDITOR.md`.
 - Workflow Implementer: `.codex/agents/hmasd-workflow-implementer.toml` and `.agents/roles/WORKFLOW_IMPLEMENTER.md`.
 - Workflow Reviewer: `.codex/agents/hmasd-workflow-reviewer.toml` and `.agents/roles/WORKFLOW_REVIEWER.md`.
-
-The Desktop Research Scheduler is not a registered child: do not add a
-`.codex` profile or configuration for it. Its same-level ephemeral owner tasks
-use the existing registered Explorer and CPM child profiles and remain at
-`max_depth=1`.
 
 The Independent Research Explorer may use the four already registered
 read-only research children for one exact adaptive scientific question per dispatch;
@@ -215,7 +187,6 @@ context cost, path count or benefit estimates.
 ## Routed owner documents
 
 - Workflow authority and roles: `.agents/roles/WORKFLOW_DESIGN_MANAGER.md` and `.agents/roles/WORKFLOW_*.md`.
-- Desktop Research Scheduler role and procedure: `.agents/roles/RESEARCH_SCHEDULER.md` and `.agents/skills/hmasd-research-scheduler/SKILL.md`.
 - Stable workflow orientation: `docs/project/WORKFLOW_MAP.md`.
 - Shared session/workspace contract: `docs/project/SESSION_WORKSPACE_CONTRACT.md`.
 - WDM public state: `docs/project/CURRENT_WORK.md`, `docs/project/current-work/sessions/workflow_design_manager.md`, `docs/project/current-work/common/workflow_control_plane.md`.
