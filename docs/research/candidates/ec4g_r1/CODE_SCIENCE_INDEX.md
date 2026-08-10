@@ -19,6 +19,20 @@ operational value.
 
 ## Registered A1 project-binding census
 
+Accepted registered result: `INCOMPLETE_CONTRACT`. The sole invocation was
+`ec4g_a1_d4248863_r1` at source commit
+`d4248863c55bdac294cb2b494e794ffa680f5222`. Its byte-exact public artifact is
+`docs/research/candidates/ec4g_r1/EC4G_A1_EXECUTION_DIGEST_CENSUS_RESULT.json`
+(SHA-256
+`db6e751ab0c1a5479f40c65f119be1672c2e64f1c78315ac0197c11e02cdd707`).
+It retains 14 absent project-object bindings plus the empty-registry and
+mass-normalization witnesses. Consequently `D_A`, every active-domain
+aggregate, and `vacuous_active_domain` are null rather than inferred from an
+empty or synthetic domain. The result records exactly one registered census
+run and zero environment, policy, learner, trainer, optimizer, return-evaluation,
+and model-fit activity. This is a technical acceptance of the incomplete
+contract boundary, not an execution-equivalence or value conclusion.
+
 The A1 source adds a pure validator/analyzer and a thin one-shot runner. The
 project census requires independently bound identities for the objective,
 ordered decision-cell and receipt registries, coherent seven-arm joint moments,
