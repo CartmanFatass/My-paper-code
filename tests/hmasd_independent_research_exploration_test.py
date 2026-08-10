@@ -561,7 +561,7 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "no code, runtime, write, technical acceptance or formal scientific acceptance",
         "If evidence is sufficient and the next step is cheap and reversible, Explorer decides directly.",
         "The child result is consultation only",
-        "Explorer remains the portfolio integrator and writes exactly one canonical scientific decision",
+        "Explorer remains the portfolio integrator and writes exactly one advisory local-research scientific decision",
         "completion order is not evidence priority",
         "disagreement is not voting",
         "sole recovery is one low-cost retry with the identical question and source boundary",
@@ -581,7 +581,8 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "A child answer is advisory input to one Explorer decision",
         "Canonical campaign rosters, ordered barriers and single-writer authority remain unchanged.",
         "best-matching registered read-only research child",
-        "The root retains only the direction pointer, exact dependency, compact returned conclusion and CPM readiness.",
+        "For each direction, the compact continuity projection contains the direction pointer, exact dependency, compact returned conclusion and CPM readiness.",
+        "Separately, the root retains and reads Explorer-owned comparison-relevant portfolio evidence and relationship edges",
         "accepted CPM result may first go to one direction-specific read-only child",
     ):
         assert required in skill_normalized
@@ -1076,7 +1077,7 @@ def test_scientific_only_intake_boundary_uses_one_explorer_decision_record() -> 
 
     assert "project_validation_intake_boundary=scientific_only_after_cpm_technical_acceptance" in role
     assert "project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous" in role
-    assert "canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership" in role
+    assert "canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership|advisory_only_not_formal_project_science" in role
     assert "portfolio_index_readme_continuity_role=pointer_navigation_barrier_only" in role
     assert "does not invoke External Pro" in " ".join(contract.split())
 
@@ -1327,10 +1328,15 @@ def test_explorer_orchestrates_and_owns_cross_direction_comparison() -> None:
     role_normalized = " ".join(role.split())
     skill_normalized = " ".join(skill.split())
 
+    for surface in (role_normalized, skill_normalized):
+        assert "root retains only" not in surface.lower()
+        assert "root explorer retains only" not in surface.lower()
+
     # Orchestrator-first delegation keeps direction-local detail with the
     # matching child while retaining decomposition and synthesis at the root.
     for required in (
-        "explorer_orchestration_owner=decomposition|child_selection|dependency_and_concurrency_judgment|result_synthesis|continuity|sole_canonical_intake_and_user_communication",
+        "explorer_orchestration_owner=decomposition|child_selection|dependency_and_concurrency_judgment|result_synthesis|continuity|sole_advisory_portfolio_local_research_intake_and_decision_and_user_communication",
+        "root_explorer_state_retention=per_direction_compact_continuity_projection(direction_pointer|dependency|compact_returned_conclusion|cpm_readiness)|comparison_relevant_portfolio_evidence_and_relationship_edges",
         "independent_direction_question_default=best_matching_registered_read_only_child|fork_turns=\"none\"",
         "child_direction_context=minimal_direction_context_only|never_hidden_parent_context|cannot_replace_root_cross_direction_comparison",
         "Direction-local source fidelity, criticism, mechanism design and detailed derivation normally stay with that child.",
@@ -1338,6 +1344,12 @@ def test_explorer_orchestrates_and_owns_cross_direction_comparison() -> None:
         "cross-direction dependencies, conflicts and combinations",
         "portfolio ordering and readiness",
         "sole advisory portfolio decision",
+        "sole Explorer-owned advisory portfolio/local-research intake and decision",
+        "This is never formal or project-canonical science",
+        "the user alone decides whether any result later enters the formal project",
+        "project_validation_semantic_acceptance_owner=external_pro",
+        "project_validation_alignment_packet_effect=authoritative_scientific_semantic_acceptance",
+        "comparison-relevant portfolio evidence and relationship edges",
         "cannot replace the root Explorer's cross-direction comparison",
     ):
         assert required in role_normalized or required in skill_normalized, required
@@ -1355,10 +1367,10 @@ def test_explorer_orchestrates_and_owns_cross_direction_comparison() -> None:
     # Cheap reversible singleton reasoning and owner-exclusive portfolio work
     # stay direct; authority and the protected postcondition remain with root.
     for required in (
-        "direct_root_work_exceptions=cheap_reversible_singleton|cross_direction_comparison|canonical_intake|frozen_successor|park_or_retire_decision",
+        "direct_root_work_exceptions=cheap_reversible_singleton|cross_direction_comparison|advisory_local_research_intake|frozen_successor|park_or_retire_decision",
         "Direct root work remains appropriate for a cheap reversible singleton",
         "Every child return is conclusion-first and action-bearing enough for synthesis",
-        "The root verifies the protected scientific postcondition before canonical intake",
+        "The root verifies the protected scientific postcondition before advisory local-research intake",
         "research_portfolio_owner=independent_research_explorer",
         "canonical_scientific_authority=none",
         "Do not microdelegate",

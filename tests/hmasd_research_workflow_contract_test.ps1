@@ -1530,43 +1530,56 @@ foreach ($required in @(
     }
 }
 
-# Persistent Explorer/CPM orchestration is an orientation edge. Keep these
-# assertions compact; detailed authority and dispatch mechanics remain in the
-# owner Roles and Skills.
+# Persistent Explorer/CPM orchestration is an orientation edge. Assert only
+# the compact ownership boundary here; detailed behavior remains in owner
+# Roles and Skills.
 foreach ($required in @(
     'Explorer and CPM are active owners/orchestrators, not passive relays or schedulers',
-    'each decomposes its work, compiles self-contained assignments',
-    'runs disjoint children in parallel',
-    'continues independent safe work while a child is outstanding',
-    'direction-local depth defaults to the best-matching registered read-only child',
-    'root Explorer itself owns multi-direction scientific comparison, relative information value',
-    'cross-direction dependencies, conflicts and combinations, portfolio ordering/readiness',
-    'sole canonical scientific intake/decision',
-    'CPM delegates coherent nontrivial implementation packages by default to routine/protected implementers',
-    'mapping, mechanical, experiment, review and verifier lanes',
-    'retaining architecture, three-unit runtime admission, integration, technical acceptance, Git and `CURRENT_WORK`',
-    'there is no microtask schema or delegation gate',
-    'Waiting is bounded and permitted only when all remaining safe actions depend on one result',
-    'otherwise unrelated disjoint work continues',
-    'Same-file concurrent writes remain forbidden',
-    'no panel/vote, no per-implementer review',
-    'no scheduler, periodic wake, queue or registry',
-    'changes no science, runtime, formal-compute or cloud authority')) {
+    'decompose work and delegate bounded detail',
+    'synthesize results, retain owner decisions',
+    'continue unrelated safe work while children run',
+    'root Explorer owns cross-direction advisory portfolio comparison',
+    'CPM retains architecture, runtime admission, integration and technical acceptance',
+    'Explorer outputs remain advisory portfolio/local-research comparisons, intakes and decisions',
+    'Formal/project canonical science remains with the user/External Pro contract',
+    'Exact assignment, child-lane, waiting and recovery mechanics remain in the owner Roles and Skills',
+    'direction-local handoff boundary is distinct from the root Explorer',
+    'without authorizing portfolio preload')) {
     if (-not $workflowMapNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
         throw "Workflow orchestrator orientation missing: $required"
     }
 }
 foreach ($forbidden in @(
+    'orchestrator_owner_edge=',
+    'explorer_direction_local_default=',
+    'explorer_multi_direction_authority=',
+    'cpm_default_delegation=',
+    'cpm_retained_authority=',
+    'main_session_direct_work=',
+    'microtask_schema=',
+    'delegation_gate=',
+    'bounded_wait=',
+    'unrelated_disjoint_work_while_waiting=',
+    'panel_vote=',
+    'per_implementer_review=',
+    'scheduler_periodic_wake_queue_registry=',
     'Explorer is a passive relay',
     'CPM is a passive relay',
-    'delegation_gate=required',
-    'microtask_schema=required',
-    'fixed_panel=',
-    'per_implementer_review=required',
-    'scheduler_periodic_wake_queue_registry=enabled',
-    'science_runtime_formal_compute_cloud_authority_change=allowed')) {
+    'Main sessions handle directly only',
+    'Waiting is bounded and permitted only',
+    'Same-file concurrent writes remain forbidden',
+    'no panel/vote, no per-implementer review',
+    'no scheduler, periodic wake, queue or registry')) {
     if ($workflowMapNormalized.Contains($forbidden)) {
-        throw "Workflow Map retains forbidden orchestrator behavior: $forbidden"
+        throw "Workflow Map retains removed pseudo-schema/detail: $forbidden"
+    }
+}
+foreach ($forbiddenPattern in @(
+    '(?i)\b(one|sole)\s+canonical\s+scientific\s+(decision|intake)\b',
+    '(?i)\bowns acceptance and canonical decisions\b',
+    '(?i)\bcanonical_scientific_decision\b')) {
+    if ([regex]::IsMatch($workflowMapNormalized, $forbiddenPattern)) {
+        throw "Workflow Map uses unqualified canonical scientific wording: $forbiddenPattern"
     }
 }
 foreach ($required in @(

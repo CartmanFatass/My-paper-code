@@ -43,7 +43,7 @@ project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous
 project_validation_technical_facts_not_recomputed=schema|readability|receipts|activity_counts|locators|retry|technical_consistency
 project_validation_scientific_interpretation_owner=independent_research_explorer
 project_validation_scientific_interpretation=supported_proposition|strongest_alternative_explanation|information_gain|next_discriminator|A_B_C_or_named_Pro_action
-canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership
+canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership|advisory_only_not_formal_project_science
 portfolio_index_readme_continuity_role=pointer_navigation_barrier_only
 project_validation_code_acceptance=none
 logical_assignment_count=derived_from_exact_work_roster
@@ -51,14 +51,14 @@ research_child_dispatch=registered_child_type|fork_turns=none|self_contained_nat
 research_child_assignment_context=research_purpose|exact_question|named_sources_and_prerequisite_packets|protected_assumptions_and_independence|exclusions|permitted_local_judgment|completion_meaning
 independent_direction_question_default=best_matching_registered_read_only_child|fork_turns="none"
 independent_direction_question_direct_root_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task
-root_explorer_state_retention=direction_pointer|dependency|compact_returned_conclusion|sole_canonical_intake_and_decision|cpm_readiness
-explorer_orchestration_owner=decomposition|child_selection|dependency_and_concurrency_judgment|result_synthesis|continuity|sole_canonical_intake_and_user_communication
+root_explorer_state_retention=per_direction_compact_continuity_projection(direction_pointer|dependency|compact_returned_conclusion|cpm_readiness)|comparison_relevant_portfolio_evidence_and_relationship_edges
+explorer_orchestration_owner=decomposition|child_selection|dependency_and_concurrency_judgment|result_synthesis|continuity|sole_advisory_portfolio_local_research_intake_and_decision_and_user_communication
 root_explorer_multi_direction_comparison=relative_information_value|cross_direction_dependencies_conflicts_combinations|portfolio_ordering_readiness|sole_advisory_portfolio_decision
 child_direction_context=minimal_direction_context_only|never_hidden_parent_context|cannot_replace_root_cross_direction_comparison
 root_explorer_nonblocking_progress=advance_disjoint_directions_and_read_only_work_while_child_or_cpm_result_outstanding
 root_explorer_bounded_wait=only_when_every_remaining_safe_scientific_action_depends_on_outstanding_result
 child_result_contract=conclusion_first|action_bearing|root_verifies_protected_scientific_postcondition
-direct_root_work_exceptions=cheap_reversible_singleton|cross_direction_comparison|canonical_intake|frozen_successor|park_or_retire_decision
+direct_root_work_exceptions=cheap_reversible_singleton|cross_direction_comparison|advisory_local_research_intake|frozen_successor|park_or_retire_decision
 orchestrator_anti_patterns=microdelegation|fixed_panels|voting|duplicated_questions|hidden_parent_context_dependence|authority_transfer|external_process_controller
 cpm_accepted_result_interpretation=optional_direction_specific_read_only_child|technical_acceptance_not_repeated
 explorer_mechanical_child=hmasd-explorer-mechanical
@@ -153,7 +153,10 @@ phase-barrier rules live in the parallel-research workflow reference.
 Explorer is orchestrator-first: it decomposes the user task, selects the
 best-matching child for direction-local detail, judges dependencies and
 concurrency, synthesizes returned conclusions, maintains continuity and owns
-the sole canonical intake, decision and user communication. It dispatches
+the sole Explorer-owned advisory portfolio/local-research intake and decision
+and user communication. This is never formal or project-canonical science;
+the user alone decides whether any result later enters the formal project. It
+dispatches
 each registered research child with `fork_turns=none` and a self-contained
 natural-language assignment. Direction-local source fidelity, criticism,
 mechanism design and detailed derivation normally stay with that child. The
@@ -186,7 +189,8 @@ and the task requires no code, runtime, write, technical acceptance or formal
 scientific acceptance. If evidence is sufficient and the next step is cheap
 and reversible, Explorer decides directly. The child result is consultation
 only: Explorer remains the portfolio integrator and writes exactly one
-canonical scientific decision, and an ad hoc child creates no global barrier.
+advisory local-research scientific decision, and an ad hoc child creates no
+global barrier.
 When several independent questions are all necessary for one decision,
 Explorer may freeze an exact bounded roster and synthesize only after every
 child is terminal. First-round children see neither peer answers nor a favored
@@ -200,20 +204,23 @@ automatic Pro review. A failed child loses only its own question and yields
 Independent direction-local detailed scientific questions default to the
 best-matching registered read-only research child with `fork_turns="none"` and
 a self-contained assignment. Explorer may handle a cheap, reversible singleton
-directly only when dispatch overhead exceeds the question. The root Explorer
-retains only the direction pointer, exact dependency, compact returned
-conclusion and CPM readiness, then compares directions itself: relative
-information value, cross-direction dependencies, conflicts and combinations,
-portfolio ordering and readiness, and the sole advisory portfolio decision.
+directly only when dispatch overhead exceeds the question. For each direction,
+the compact continuity projection contains the direction pointer, exact
+dependency, compact returned conclusion and CPM readiness. Separately, the
+root Explorer retains and reads Explorer-owned comparison-relevant portfolio
+evidence and relationship edges needed for relative information value,
+cross-direction dependencies, conflicts and combinations, portfolio ordering
+and readiness, and the sole advisory portfolio decision.
 Children normally see only their minimum direction context and cannot make
 that comparison or decide the portfolio. While a child or CPM result is
 outstanding, Explorer advances every other disjoint direction and read-only
 scientific action; it uses a bounded wait only when every remaining safe
 scientific action depends on that result. Child returns begin with a conclusion
 and an action-bearing recommendation; Explorer verifies the protected
-scientific postcondition before intake. Direct root work remains appropriate
-for the cheap reversible singleton, this cross-direction comparison,
-canonical intake, or a frozen successor/park-retire decision. An accepted CPM
+scientific postcondition before advisory local-research intake. Direct root
+work remains appropriate for the cheap reversible singleton, this
+cross-direction comparison, advisory local-research intake, or a frozen
+successor/park-retire decision. An accepted CPM
 result may first go to one direction-specific read-only child for scientific
 interpretation; that child does not redo technical acceptance, and no fixed
 panel, voting scheme or scientific-authority transfer is created. Do not

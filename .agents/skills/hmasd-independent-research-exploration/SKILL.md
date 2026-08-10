@@ -47,7 +47,10 @@ validator or admission gate.
 The persistent Explorer is orchestrator-first. It decomposes the task, chooses
 the matching child for direction-local detail, judges dependency and
 concurrency, synthesizes conclusions, maintains continuity and owns the sole
-canonical intake, decision and user communication. Direction-local detailed
+Explorer-owned advisory portfolio/local-research intake and decision and user
+communication. This is never formal or project-canonical science; the user
+alone decides whether any result enters the formal project. Direction-local
+detailed
 derivation, source fidelity, criticism and mechanism design default to the
 best-matching registered child. A child receives only the minimum direction
 context needed for its self-contained question; it must not depend on hidden
@@ -55,9 +58,9 @@ parent history and cannot replace the root's cross-direction comparison.
 
 The root Explorer itself compares directions by relative information value,
 cross-direction dependencies, conflicts and combinations, portfolio ordering
-and readiness, and makes the sole advisory portfolio decision. This advisory
-portfolio decision is not formal or project canonical science; the user alone
-decides whether any result enters the formal project. Children may
+and readiness, and makes the sole Explorer-owned advisory portfolio decision.
+This advisory portfolio decision is not formal or project canonical science;
+the user alone decides whether any result enters the formal project. Children may
 return evidence, alternatives or a proposed next action, but they do not vote,
 rank siblings, merge duplicated questions or decide which direction wins. Keep
 this comparison direct at the root rather than creating a fixed panel,
@@ -67,16 +70,17 @@ process controller.
 Every child return is conclusion-first and action-bearing enough for synthesis:
 it names the evidence/locator, the protected assumption or postcondition, and
 the permitted next action. The root verifies the protected scientific
-postcondition before canonical intake and records only the compact direction
-pointer, exact dependency, returned conclusion and CPM readiness needed for
-continuity.
+postcondition before advisory local-research intake. Each direction gets a
+compact continuity projection containing its pointer, exact dependency,
+returned conclusion and CPM readiness; the root's comparison context is not
+limited to that projection.
 
 While one child or CPM result is outstanding, continue every other disjoint
 direction and read-only scientific action. Use a bounded wait only when every
 remaining safe scientific action depends on that outstanding result; an
 outstanding result never creates a global barrier. Direct root work remains
 appropriate for a cheap reversible singleton when dispatch overhead exceeds
-the question, for cross-direction comparison, canonical intake, and frozen
+the question, for cross-direction comparison, advisory local-research intake, and frozen
 successor or park-retire decisions.
 
 ## Triggered mechanical fact organization
@@ -115,11 +119,14 @@ single-writer authority remain unchanged.
 Independent direction-local detailed questions use the best-matching registered
 read-only research child by default with `fork_turns="none"` and a self-contained
 assignment. Explorer may answer a cheap, reversible singleton directly only
-when dispatch overhead exceeds the question. The root retains only the direction
-pointer, exact dependency, compact returned conclusion and CPM readiness. It
-then performs the multi-direction comparison itself (relative information value,
-dependencies/conflicts/combinations, ordering/readiness and the sole portfolio
-decision). An accepted CPM result may first go to one direction-specific
+when dispatch overhead exceeds the question. For each direction, the compact
+continuity projection contains the direction pointer, exact dependency,
+compact returned conclusion and CPM readiness. Separately, the root retains
+and reads Explorer-owned comparison-relevant portfolio evidence and relationship
+edges needed for relative information value, cross-direction
+dependencies/conflicts/combinations, portfolio ordering/readiness and the sole
+Explorer-owned advisory portfolio decision. An accepted CPM result may first go
+to one direction-specific
 read-only child for scientific interpretation; that child does not redo
 technical acceptance or replace the root comparison.
 

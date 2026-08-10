@@ -20,7 +20,7 @@ exhaustive registry or procedure copy.
 | Workflow Implementer | one frozen non-overlapping workflow change slice | conclusion about the owned outcome and checked consequence, followed by an optional `WORKFLOW_CHANGE_PACKET` factual tail |
 | Workflow Reviewer | independent review of one coherent integrated batch | conclusion and advisory disposition for WDM, followed by optional findings evidence; no source edits or acceptance |
 | Code Project Manager (CPM) | active engineering/runtime orchestrator for code, runtime, technical acceptance and project-operation records | decomposed implementation assignments, code/runtime/review artifacts and CPM-owned mechanical receipts |
-| Independent Research Explorer | active scientific/research orchestrator for direction, methodology and research workspace | decomposed research assignments, synthesized evidence and one canonical scientific decision |
+| Independent Research Explorer | active scientific/research orchestrator for direction, methodology and research workspace | decomposed research assignments, advisory portfolio/local-research comparisons, intakes and decisions |
 | Agentify Transport child | requester-assigned batch transport mechanics; WDM may parent only an exact workflow-acceptance smoke batch | raw transport result for CPM or Explorer, or direct smoke-test evidence for WDM |
 | External Pro | bounded independent scientific judgment | exact review result within the submitted question boundary |
 
@@ -48,49 +48,15 @@ not move back into the router or this map.
 ## Persistent owner/orchestrator edge
 
 Explorer and CPM are active owners/orchestrators, not passive relays or
-schedulers. Each decomposes its work, compiles self-contained assignments,
-runs disjoint children in parallel, synthesizes results, owns acceptance and
-canonical decisions within its authority, and continues independent safe work
-while a child is outstanding. Their exact authority, assignment and recovery
-mechanics remain in the owner Roles and Skills; this section is only the stable
-orientation edge.
-
-The Explorer's direction-local depth defaults to the best-matching registered
-read-only child. The root Explorer itself owns multi-direction scientific
-comparison, relative information value, cross-direction dependencies,
-conflicts and combinations, portfolio ordering/readiness, and sole canonical
-scientific intake/decision. CPM delegates coherent nontrivial implementation
-packages by default to routine/protected implementers and uses the existing
-mapping, mechanical, experiment, review and verifier lanes, while retaining
-architecture, three-unit runtime admission, integration, technical
-acceptance, Git and `CURRENT_WORK`.
-
-Main sessions handle directly only cheap reversible singleton work or
-owner-exclusive synthesis, acceptance and integration decisions; there is no
-microtask schema or delegation gate. Waiting is bounded and permitted only
-when all remaining safe actions depend on one result; otherwise unrelated
-disjoint work continues. Same-file concurrent writes remain forbidden, and
-child authority limits, no panel/vote, no per-implementer review and no
-scheduler, periodic wake, queue or registry are preserved. This relationship changes no
-science, runtime, formal-compute or cloud authority.
-
-```text
-orchestrator_owner_edge=explorer|cpm
-explorer_direction_local_default=best_matching_registered_read_only_child
-explorer_multi_direction_authority=comparison|relative_information_value|cross_direction_dependencies_conflicts_combinations|portfolio_ordering_readiness|sole_canonical_scientific_intake_and_decision
-cpm_default_delegation=coherent_nontrivial_implementation_packages_to_routine_or_protected_implementers
-cpm_retained_authority=architecture|three_unit_runtime_admission|integration|technical_acceptance|Git|CURRENT_WORK
-main_session_direct_work=cheap_reversible_singleton_or_owner_exclusive_synthesis_acceptance_integration_only
-microtask_schema=forbidden
-delegation_gate=forbidden
-bounded_wait=all_remaining_safe_actions_depend_on_one_result_only
-unrelated_disjoint_work_while_waiting=continues
-same_file_concurrent_writes=forbidden
-panel_vote=forbidden
-per_implementer_review=forbidden
-scheduler_periodic_wake_queue_registry=forbidden
-science_runtime_formal_compute_cloud_authority_change=forbidden
-```
+schedulers. They decompose work and delegate bounded detail, synthesize
+results, retain owner decisions, and continue unrelated safe work while
+children run. The root Explorer owns cross-direction advisory portfolio
+comparison; CPM retains architecture, runtime admission, integration and
+technical acceptance. Explorer outputs remain advisory portfolio/local-research
+comparisons, intakes and decisions. Formal/project canonical science remains
+with the user/External Pro contract. Exact assignment, child-lane, waiting and
+recovery mechanics remain in the owner Roles and Skills; this paragraph is
+orientation only.
 
 ## Dependency direction
 
@@ -108,7 +74,9 @@ one primary selected direction's smallest canonical context, add only the
 smallest set of material relationship edges, and mirror the binding in the
 conclusion-first reverse result or Codex-native fallback. An explicitly
 multi-direction user question may name several directions without authorizing
-portfolio preload. Portfolio/index/README/continuity surfaces remain
+portfolio preload. That direction-local handoff boundary is distinct from the
+root Explorer's internal cross-direction advisory portfolio comparison.
+Portfolio/index/README/continuity surfaces remain
 pointer-only; a missing binding gets one semantic clarification while
 unrelated work continues rather than a new workflow state.
 The same contract is the single source for the human-readable action-bearing
@@ -118,7 +86,8 @@ view, not a machine schema, queue, scheduler, runtime-admission or acceptance
 source; this orientation document does not duplicate it.
 
 For result-bearing experiments, Explorer owns the scientific active roster,
-direction-local predecessor/intake context and per-result scientific intake;
+direction-local predecessor context and advisory per-result local-research
+intake;
 CPM owns runtime-capacity admission, live process/resource
   observations, isolated execution and per-artifact technical acceptance. A
   handoff may describe prospective runtime class/units in prose, but its A/B/C
