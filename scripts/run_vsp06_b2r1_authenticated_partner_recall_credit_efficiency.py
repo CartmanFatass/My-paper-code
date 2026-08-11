@@ -2,6 +2,7 @@
 from __future__ import annotations
 import argparse
 import json
+import os
 from pathlib import Path
 import sys
 from typing import Any, Mapping, Sequence
@@ -24,7 +25,9 @@ class RunnerInvalid(RuntimeError):
     pass
 
 def _bytes(value: Any) -> bytes:
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+    return json.dumps(
+        value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
+    ).encode("utf-8")
 
 def _load(path: Path) -> Mapping[str, Any]:
     with path.open("r", encoding="utf-8", newline="") as stream:
@@ -35,13 +38,17 @@ def _load(path: Path) -> Mapping[str, Any]:
 
 def _authorization(path: Path) -> Mapping[str, Any]:
     path = selector.safe_existing_path(path)
-    value = _load(path)
+    bootstrap = _load(path)
+    selector.validate_stage2_authorization(bootstrap)
+    selector.authorize_read_path(bootstrap, path)
+    value = selector.authorized_json(bootstrap, path)
     selector.validate_stage2_authorization(value)
-    selector.authorize_read_path(value, path)
+    if value != bootstrap:
+        raise RunnerInvalid("Stage-2 authorization changed during secure load")
     return value
 
 def _authorized_load(authorization: Mapping[str, Any], path: Path) -> Mapping[str, Any]:
-    return _load(selector.authorize_read_path(authorization, path))
+    return selector.authorized_json(authorization, path)
 
 def stage1_status() -> Mapping[str, Any]:
     return {
@@ -52,61 +59,102 @@ def stage1_status() -> Mapping[str, Any]:
         "K_search": 0, "hypothetical_transitions": 0,
     }
 
-def prepare_catalog(output: Path, universe_output: Path, authorization_path: Path) -> Mapping[str, Any]:
-    authorization = _authorization(authorization_path)
-    if output.exists() or universe_output.exists():
-        raise RunnerInvalid("canonical catalog/universe destination already exists")
+def _claim_fixed_stage2_namespace(authorization: Mapping[str, Any]) -> None:
+    paths = selector.stage2_paths()
+    root = paths["session_root"]
+    if root.exists():
+        raise RunnerInvalid("fixed Stage-2 namespace already exists; retry/overwrite is forbidden")
+    try:
+        os.mkdir(root)
+    except FileExistsError as exc:
+        raise RunnerInvalid("fixed Stage-2 namespace claim was not exclusive") from exc
+    claim = {
+        "treatment": selector.TREATMENT_ID,
+        "final_commit": authorization["final_commit"],
+        "stage2_authorization_sha256": selector.sha256_bytes(_bytes(authorization)),
+        "ordinal": 1,
+        "activity_accounting": {"sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0},
+    }
+    selector.write_exclusive(paths["claim"], _bytes(claim) + b"\n")
+
+
+def simulate_fixed_root_claim(root: Path) -> Mapping[str, Any]:
+    """Synthetic-only exact-once namespace proof for temporary test roots."""
+
+    if root.resolve() == selector.STAGE2_SESSION_ROOT.resolve() or root.exists():
+        raise RunnerInvalid("synthetic fixed-root simulation requires one absent temporary root")
+    os.mkdir(root)
+    marker = root / "synthetic_namespace_claim.json"
+    selector.write_exclusive(marker, _bytes({
+        "synthetic_only": True, "domain": SYNTHETIC_DOMAIN,
+        "sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0,
+    }) + b"\n")
+    return {"root": str(root.resolve()), "marker": str(marker.resolve()), "synthetic_only": True}
+
+
+def orchestrate_stage2(stage2_authorization_path: Path) -> Mapping[str, Any]:
+    """The only canonical Stage-2 entry: fixed root, exact once, no alternatives."""
+
+    authorization = _authorization(stage2_authorization_path)
+    selector.verify_authorized_source_config(authorization)
+    if authorization["zero_start_activity"] != experiment.ACTIVITY_COUNTERS:
+        raise RunnerInvalid("zero-start activity binding failed")
+    _claim_fixed_stage2_namespace(authorization)
+    paths = selector.stage2_paths()
+    universe_spec = experiment.canonical_universe_spec(authorization)
+    selector.write_exclusive(paths["universe_spec"], _bytes(universe_spec) + b"\n")
     rows = list(experiment.canonical_catalog_rows(authorization))
     catalog = {"catalog_id": selector.CATALOG_ID, "salt": selector.SALT, "rows": rows}
     selector.parse_catalog(catalog)
-    selector.write_exclusive(output, _bytes(catalog) + b"\n")
-    universe={"universe_id":"VSP06-B2R1-INDEPENDENT-CANONICAL-UNIVERSE-V1","salt":selector.SALT,"rows":rows}
-    selector.write_exclusive(universe_output, _bytes(universe) + b"\n")
-    return {"catalog_path": str(output), "catalog_sha256": selector.sha256_file(output), "universe_path":str(universe_output),"universe_sha256":selector.sha256_file(universe_output),"row_count": len(rows)}
-
-def run_selector(args: argparse.Namespace) -> Mapping[str, Any]:
-    authorization = _authorization(Path(args.stage2_authorization))
-    counters = _authorized_load(authorization, Path(args.zero_counters))
-    if counters != experiment.ACTIVITY_COUNTERS:
-        raise RunnerInvalid("zero-start activity binding failed")
+    selector.write_exclusive(paths["catalog"], _bytes(catalog) + b"\n")
     return selector.run_two_replica_sequence(
-        catalog_path=Path(args.catalog), ledger_path=Path(args.ledger),
-        manifest_path=Path(args.manifest), verifier_path=Path(args.verifier),
-        universe_path=Path(args.universe), work_root=Path(args.work_root),
-        stage2_authorization_path=Path(args.stage2_authorization),
+        stage2_authorization_path=stage2_authorization_path
     )
 
-def run_full(args: argparse.Namespace) -> Mapping[str, Any]:
-    authorization = _authorization(Path(args.stage2_authorization))
-    for locator in (args.manifest, args.selector_receipt, args.verifier_report):
-        selector.authorize_read_path(authorization, Path(locator))
-    receipt = _authorized_load(authorization, Path(args.selector_receipt))
+
+def run_full(
+    stage2_authorization_path: Path, selector_receipt_sha256: str,
+) -> Mapping[str, Any]:
+    authorization = _authorization(stage2_authorization_path)
+    paths = selector.stage2_paths()
+    if (
+        not isinstance(selector_receipt_sha256, str)
+        or len(selector_receipt_sha256) != 64
+        or any(char not in "0123456789abcdef" for char in selector_receipt_sha256)
+    ):
+        raise RunnerInvalid("selector receipt digest anchor must be lowercase 64-hex")
+    actual_receipt_sha256 = selector.sha256_authorized_file(
+        authorization, paths["receipt"]
+    )
+    if actual_receipt_sha256 != selector_receipt_sha256:
+        raise RunnerInvalid("selector receipt digest anchor mismatch")
+    receipt = _authorized_load(authorization, paths["receipt"])
+    run_root = paths["session_root"] / "registered_full"
+    result_path = RESERVED_PATHS[0]
     return experiment.run_registered_full(
-        manifest_path=Path(args.manifest),
+        manifest_path=paths["manifest"],
         manifest_content_digest=str(receipt["manifest_content_sha256"]),
-        session_root=Path(args.session_root), selector_receipt_path=Path(args.selector_receipt),
-        verifier_report_path=Path(args.verifier_report), run_root=Path(args.run_root), result_path=Path(args.result),
+        session_root=paths["session_root"], selector_receipt_path=paths["receipt"],
+        verifier_report_path=paths["verifier_report"], run_root=run_root,
+        result_path=result_path,
         stage2_authorization=authorization,
+        selector_receipt_sha256=selector_receipt_sha256,
     )
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command")
     sub.add_parser("stage1-status")
-    catalog = sub.add_parser("prepare-catalog")
-    catalog.add_argument("--output", required=True); catalog.add_argument("--universe-output", required=True); catalog.add_argument("--stage2-authorization", required=True)
-    select = sub.add_parser("select")
-    for name in ("catalog", "universe", "ledger", "manifest", "verifier", "work-root", "zero-counters", "stage2-authorization"):
-        select.add_argument("--" + name, required=True)
+    select = sub.add_parser("stage2-seal")
+    select.add_argument("--stage2-authorization", required=True)
     full = sub.add_parser("run-full")
-    for name in ("manifest", "session-root", "selector-receipt", "verifier-report", "run-root", "result", "stage2-authorization"):
-        full.add_argument("--" + name, required=True)
+    full.add_argument("--stage2-authorization", required=True)
+    full.add_argument("--selector-receipt-sha256", required=True)
     args = parser.parse_args(argv)
     command = args.command or "stage1-status"
     if command == "stage1-status": result = stage1_status()
-    elif command == "prepare-catalog": result = prepare_catalog(Path(args.output), Path(args.universe_output), Path(args.stage2_authorization))
-    elif command == "select": result = run_selector(args)
-    else: result = run_full(args)
+    elif command == "stage2-seal": result = orchestrate_stage2(Path(args.stage2_authorization))
+    else: result = run_full(Path(args.stage2_authorization), args.selector_receipt_sha256)
     print(json.dumps(result, sort_keys=True, separators=(",", ":")))
     return 0
 
