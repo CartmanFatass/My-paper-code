@@ -27,6 +27,7 @@ default_core=AGENTS.md|exact_Root_assignment|profile|role
 | User workflow change or reported workflow defect requiring a plan | `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md` |
 | Confirmed workflow plan execution or verification | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
 | Assignment/interface design | `hmasd-writing-agent-assignments` and named contract |
+| Scope-keyed parallel WDM startup and convergence | `docs/project/SESSION_WORKSPACE_CONTRACT.md` and the exact WDM owner record |
 | Stable workflow edge | `docs/project/WORKFLOW_MAP.md` |
 | Named continuity reload | exact Root-named WDM owner record |
 

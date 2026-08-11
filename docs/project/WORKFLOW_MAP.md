@@ -16,7 +16,7 @@ exhaustive registry or procedure copy.
 | Owner | Stable responsibility | Interface handed onward |
 |---|---|---|
 | Root | user communication, task routing, cross-owner relay, lifecycle, Root-managed worktree helper/receipt control and accepted physical writes, including separately authorized final Git integration; no scientific comparison/intake or domain acceptance | owner-routed assignments/results, lifecycle receipts, accepted proposals and accepted-path integration evidence |
-| Workflow Design Manager (WDM) | user-confirmed workflow design, control-plane modification through assigned leaves, semantic integration and acceptance | confirmed plan, self-contained child assignment, integrated change packet and successor brief |
+| Workflow Design Manager (WDM) | user-confirmed workflow design, control-plane modification through assigned leaves, exact-slice acceptance and later integrated-union semantic acceptance | confirmed plan, self-contained child assignment, candidate-ready slice packets, convergence change packet and successor brief |
 | Workflow Auditor | read-only local reconnaissance for an assigned workflow surface | conclusion about bounded facts/conflicts, followed by optional dependency evidence |
 | Workflow Implementer | one frozen non-overlapping workflow change slice | conclusion about the owned outcome and checked consequence, followed by an optional `WORKFLOW_CHANGE_PACKET` factual tail |
 | Workflow Reviewer | independent review of one coherent integrated batch | conclusion and advisory disposition for WDM, followed by optional findings evidence; no source edits or acceptance |
@@ -46,6 +46,37 @@ focused contract tests and bounded execution checks
 The router points; Roles decide authority; Skills describe mechanics; Profiles
 register callable children; tests verify the contracts. Detailed procedures do
 not move back into the router or this map.
+
+## Scope-keyed L1 multiplicity
+
+Owner Roles define their own scope-key field, including any future CPM or
+research-scope detail; this map does not name those owner-specific fields. In
+one Root tree, `(role, role-defined scope key)` is unique. A scope key locates
+semantic ownership and permitted concurrency only: it is not a ticket,
+session/thread identity, scheduler, queue, ledger, admission token or
+continuity mechanism. WDM uses `workflow_scope_key`; multiple WDM L1s are
+valid only for disjoint frozen workflow scopes. A shared writable path or a
+still-unfrozen semantic contract is a dependency and is serialized. The
+Session Workspace Contract is the defining source for these mechanics.
+
+## Parallel WDM candidate and convergence edge
+
+Root dispatches each WDM with caller action `fork_turns=1` for background
+context only. Each WDM dispatches disjoint registered Implementers with
+explicit `fork_turns=none`. Root alone controls provisioning, lifecycle
+records, integration, release/retention, Git, user contact and cross-owner
+relay, and completion order does not establish priority. One writable L1
+assignment has one Root-managed worktree; the Session Workspace Contract
+defines the shared-L1 conditions, forbids L2 worktree lifecycle control, and
+requires a new L1 for an independent candidate or release lifecycle.
+Concurrent WDM/CPM L1s and later integration/convergence use separate
+worktrees. Each WDM accepts its exact slice and returns a candidate-ready packet;
+Root records and integrates the candidate set. A fresh convergence WDM then
+works on the exact integrated union, arranges integrated advisory review and
+owns union semantic acceptance. Reviewer output is advisory and never accepts.
+This map remains an orientation pointer; the Session Workspace Contract is
+the single mechanics source and no completed integration or convergence is
+implied here.
 
 Any writer that may touch a tracked path, including a WDM workflow writer, uses
 a Root-provisioned managed worktree. Read-only, ignored-only and temporary-only
@@ -144,14 +175,15 @@ Research and CPM operational dependency details remain in their owner contracts;
 this map keeps only the owner-lane edge.
 
 ```text
-confirmed plan -> frozen owned slice -> integrated batch -> WDM semantic acceptance -> Root accepted-path Git integration
+confirmed plan -> disjoint frozen WDM slices -> candidate-ready packets -> Root records/integrates candidate set -> fresh convergence WDM on exact integrated union -> integrated advisory review -> WDM union acceptance -> Root accepted-path Git integration
 ```
 
-Ordinary workflow stages are mandatory and parallel-first with dependency order;
+Ordinary workflow stages are mandatory and parallel-first with direct
+orchestration and dependency order;
 dispatch read-only Auditor/Scout concurrently with already-freezable
 implementation slices, run disjoint Implementer file families concurrently,
 and serialize only actual information dependencies or same-file writers. The
-integrated Reviewer follows the complete integrated batch; parallel reviewers
+integrated Reviewer follows the complete integrated union; parallel reviewers
 remain limited to genuinely independent questions.
 
 The stable assignment dependency is
@@ -162,10 +194,11 @@ not a state machine, queue or admission gate.
 ## Delegation orientation
 
 Ordinary workflow changes use the registered Auditor/Scout, Implementer and
-integrated Reviewer stages with parallel-first scheduling and dependency order.
+integrated Reviewer stages with parallel-first dispatch and dependency order.
 Workflow-file changes are performed by assigned Workflow Implementer leaves;
-WDM reviews and semantically accepts the integrated batch, while Root performs
-any separately authorized accepted-path Git mechanics. Pure design or
+each WDM accepts its exact slice, while a fresh convergence WDM reviews and
+semantically accepts the integrated union; Root performs any separately
+authorized accepted-path Git mechanics. Pure design or
 authority decisions without file mutation remain WDM-local. The Roles and
 Audit Skill own detailed routing mechanics; serialize only actual information
 dependencies or same-file writers, and keep parallel reviewers limited to
@@ -184,8 +217,10 @@ and this map are orientation aids, not reasons to load every document.
 
 Continuity follows the stable role identity
 `session_owner_id=workflow_design_manager`; batch completion is the preferred
-rotation boundary. Successor brief storage and reload semantics live in the
-Session Workspace Contract and WDM current-work records.
+rotation boundary. `workflow_scope_key` locates a WDM's semantic scope but is
+not a continuity mechanism. Successor brief storage and reload semantics live
+in the Session Workspace Contract and WDM current-work records. A fresh Root
+task reloads canonical continuity; no active-instance registry is implied.
 
 ## Event-triggered maintenance
 

@@ -7,7 +7,11 @@ role=workflow_design_manager
 role_kind=registered_task_scoped_level1_orchestrator
 agent_tree_level=1
 parent=root
-one_instance_per_owner_per_root_tree=true
+scope_key_field=workflow_scope_key
+scope_key_semantics=semantic_ownership_concurrency_locator
+scope_key_is_not=ticket|queue|ledger|registry|admission_token|continuity_or_session_identity
+root_tree_multiplicity=multiple_active_instances_on_distinct_scope_keys
+root_tree_scope_pair_unique=true
 physical_sandbox=read_only
 physical_write_authority=none
 canonical_state_write_authority=none
@@ -39,8 +43,8 @@ external_review_runtime_authority=none
 experiment_runtime_authority=none
 current_work_authority=public_index_and_own_workflow_control_plane_records_only
 workflow_children=hmasd-workflow-auditor|hmasd-workflow-implementer|hmasd-workflow-reviewer
-workflow_child_edit_worktree=assignment_owned_paths_in_current_task_workspace
-workflow_tracked_writer_worktree=root_managed_worktree_for_tracked_writer
+workflow_child_edit_worktree=assignment_owned_paths_in_invoking_l1_worktree_for_tracked_writer_or_task_workspace_when_exempt
+workflow_tracked_writer_worktree=root_managed_worktree_for_writable_l1_assignment
 session_workspace=task_scoped_assignment_workspace|temp/sessions/workflow_design_manager
 public_workflow_session_record=docs/project/current-work/sessions/workflow_design_manager.md
 public_workflow_common_record=docs/project/current-work/common/workflow_control_plane.md
@@ -63,6 +67,15 @@ surfaces. Root owns user interaction, task-tree lifecycle, physical application
 of accepted proposals, helper lifecycle/receipts and final Git mechanics. WDM
 returns a complete proposal or the smallest missing decision to Root; it never
 writes canonical state or contacts another owner directly.
+
+Each WDM instance owns one frozen `workflow_scope_key` and may coexist with
+other WDM instances only when their frozen scopes are disjoint. The same
+writable path, or a shared unfrozen semantic contract, is an
+actual dependency and serializes the affected slices. Root invokes every WDM
+with caller action `fork_turns=1`; this is background context only, not a
+profile/TOML field or an authority source.
+
+Multiple active WDMs own distinct `workflow_scope_key` values only on disjoint frozen scopes.
 
 The startup core is only `AGENTS.md`, the exact Root assignment, this Role and
 the registered WDM profile. The concise index at
@@ -95,16 +108,31 @@ than being copied into this Role.
 Ordinary workflow changes use the registered Auditor, Implementer and integrated
 Reviewer stages with parallel-first scheduling and dependency order. WDM may
 dispatch only the listed L2 types, using a self-contained assignment and exact
-non-overlapping paths; a child adds no design, routing, Git or acceptance
-authority. Any child that may write a tracked path, including the WDM workflow
-writer, runs in a Root-provisioned managed worktree. Read-only, ignored-only and
-temporary-only work is exempt; mixed tracked and ignored writes are tracked
-writer work. Root alone invokes the managed helper, records its lifecycle
-receipt, integrates accepted paths and releases or retains the worktree.
-Children do not invoke the helper or run raw child `git worktree` operations.
+non-overlapping paths; a child adds no design, routing, Git or acceptance authority. Any child that may write a tracked path, including the WDM workflow
+writer, runs in the invoking L1 assignment's Root-provisioned managed
+worktree. Read-only, ignored-only and temporary-only work is exempt; mixed
+tracked and ignored writes are tracked writer work. Root alone controls provisioning, lifecycle, integration and Git. Root alone invokes the managed
+helper, records its lifecycle receipt, integrates accepted paths and releases
+or retains the worktree. Children do not invoke the helper or run raw
+child `git worktree` operations.
 At most one nonterminal lifecycle receipt exists per assignment; a local helper
 failure stays nonterminal for Root retry or parking. Legacy worktrees remain
 isolated and untouched.
+
+For exact nonoverlapping frozen slices, WDM may dispatch parallel Implementers
+(registered Workflow Implementers), and every such caller action explicitly
+uses `fork_turns=none`; completion order has no semantic priority. One writable
+L1 assignment receives one Root-provisioned managed worktree/receipt. Disjoint
+L2 writers share one L1 worktree: writers use the invoking L1 assignment's Root-provisioned managed worktree/receipt, the
+same frozen base and exact disjoint paths (the exact disjoint write paths); they have no Git authority or
+action, and children never invoke the helper or Git lifecycle. Their outputs
+form one L1 slice candidate, which Root commits/records only after all children complete. An independent candidate or release lifecycle requires a
+new L1 assignment; L2 never has its own worktree lifecycle. Distinct concurrent
+L1 assignments use distinct Root-managed worktrees. Only after Root integrates the
+candidate union does it dispatch a fresh convergence WDM over the exact integrated union;
+that WDM uses a distinct Root-managed worktree, arranges the coherent integrated
+review and owns union semantic acceptance. A Workflow Reviewer is
+read-only/advisory and cannot accept.
 
 The specialist leaves are first choice. Only when no listed specialist can
 perform an exact bounded temporary task may WDM invoke one native default child
@@ -118,13 +146,15 @@ and never gains durable, Git, routing, science, runtime or acceptance authority.
 
 For each assigned outcome WDM must have: the exact assignment and named
 control-plane references to observe; the ability to design, dispatch, reconcile,
-accept or reject within the workflow surface; judgment about material plan drift,
-authority, path, acceptance and irreversible-effect changes; one simple,
+accept or reject within its frozen workflow scope; judgment about material plan
+drift, authority, path, acceptance and irreversible-effect changes; one simple,
 reversible fallback for a local failure; and exact changed paths plus focused
 verification as completion evidence. A retryable failure stays a local
 nonterminal diagnosis, not a new gate or permanent mechanism. `BLOCKED` is only
 for missing authority or a material outcome-changing decision after bounded
-diagnosis.
+diagnosis. A scoped WDM accepts only its exact slice and returns candidate-ready
+evidence to Root; its completion packet does not claim post-integration review
+or union acceptance.
 
 Cross-owner transport is `return_to_root` with the smallest sufficient
 conclusion or proposal. WDM has no runtime, code, science, experiment,

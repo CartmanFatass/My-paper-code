@@ -127,6 +127,29 @@ def test_children_are_leaves_and_return_to_the_wdm_parent() -> None:
         assert "resolved_ticket_worktree_path" not in text
         assert "scripts/hmasd_workspace_ticket.py" not in text
     assert "git" in role
+    implementer = _normalized(_text(CHILDREN[1][1]))
+    assert "never invoke" in implementer
+    assert "helper" in implementer
+    assert "git lifecycle" in implementer
+
+
+def test_implementer_slice_evidence_and_reviewer_advice_cannot_accept() -> None:
+    implementer = _normalized(_text(CHILDREN[1][1]))
+    reviewer = _normalized(_text(CHILDREN[2][1]))
+    for required in (
+        "owned",
+        "slice",
+        "candidate-ready evidence",
+        "fork_turns=none",
+    ):
+        assert required in implementer, required
+    for required in (
+        "read-only",
+        "advisory",
+        "acceptance_authority=none",
+        "cannot accept",
+    ):
+        assert required in reviewer, required
 
 
 def test_profiles_are_thin_and_keep_forked_history_independent() -> None:

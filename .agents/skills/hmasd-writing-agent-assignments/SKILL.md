@@ -14,6 +14,23 @@ and workspace contract. In the active CLI topology, Root is the sole user,
 cross-owner relay and lifecycle actor; same-level L1 owners use only their
 registered L2 allow-list, and an L2 leaf returns only to its single parent.
 
+When an L1 Role declares a scope-key field, the assignment names the concrete
+semantic scope represented by that field. Multiple instances of that Role may
+run in one Root tree only on distinct scope-key values, and the `(role,
+scope_key)` pair is unique. The key locates semantic ownership/concurrency; it
+is not a ticket, queue, ledger, registry, admission token or continuity/session
+identity. Same writable paths or shared semantic contracts that remain
+unfrozen are dependencies and serialize the affected slices.
+
+For a writable L1 assignment, the default worktree unit is exactly one
+Root-managed worktree. All disjoint L2 writers under that L1 use the invoking
+assignment's named worktree, same frozen base and exact disjoint paths, with no
+child Git authority or helper/lifecycle action. Their outputs form one L1
+slice candidate, which Root commits or records only after all writers finish.
+An independent candidate or release lifecycle requires a new L1 assignment;
+L2 has no worktree lifecycle. Distinct concurrent L1 assignments and later
+union convergence each use their own Root-managed worktree.
+
 ## When to use it
 
 Use this Skill when a parent is designing a subagent or Root-relayed
@@ -109,6 +126,12 @@ In short, distinguish file-only communication from low-semantic communication;
 `fork_turns=none` from zero context; deterministic script observations from
 semantic sufficiency/acceptance; model strength from assignment quality; and
 tool recognition from proven action capability.
+
+For WDM assignments, Root's `fork_turns=1` is a caller-action background
+setting for the L1, while a WDM's registered Workflow Implementer dispatch uses
+explicit `fork_turns=none`; neither setting creates authority or continuity.
+Disjoint-slice completion order has no semantic priority, and a scoped packet
+is candidate-ready only until Root integration and fresh convergence acceptance.
 
 - File-only communication describes where bytes are read or written. It does
   not imply that the child understands the purpose, conflict or completion

@@ -13,6 +13,14 @@ child_forked_context=background_only
 workflow_assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace
 workflow_assignment_identity_semantics=scope_anchor_only_not_task_meaning_or_completion
 workflow_role_label=workflow_design_manager
+owner_l1_multiplicity=role_defined_scope_keyed_within_root_tree
+owner_scope_key_uniqueness=one_l1_per(role,role_defined_scope_key)_within_root_tree
+owner_scope_key_semantics=semantic_ownership_and_concurrency_locator_only
+owner_scope_key_not=ticket|session_identity|thread_identity|scheduler|queue|ledger|admission_token|continuity_mechanism
+owner_roles_define_scope_key_fields=role_specific_and_future_evolvable
+workflow_scope_key_field=workflow_scope_key
+workflow_l1_parallelism=disjoint_frozen_workflow_scopes_only
+workflow_same_path_or_unfrozen_contract=dependency_order_or_serialization
 workflow_root_reload=fresh_root_task_canonical_reload
 workflow_root_reload_brief=current_commit|accepted_stable_change|real_unfinished_item|next_user_goal|next_map_or_interface
 workflow_thread_registry=forbidden
@@ -37,6 +45,26 @@ root_managed_worktree_local_failure=receipt_local_failure_is_nonterminal_and_roo
 root_managed_worktree_legacy_isolation=legacy_worktrees_are_untouched_and_never_adopted
 raw_child_git_worktree=forbidden
 hooks={}|disabled_non_authoritative_never_enabled_trusted_or_invoked
+runtime_invariants=max_threads=20|max_depth=2
+root_to_wdm_caller_action=fork_turns=1
+root_to_wdm_forked_context=background_only
+wdm_to_registered_implementer_action=fork_turns=none
+wdm_disjoint_implementer_dispatch=parallel_when_paths_and_contracts_are_disjoint
+completion_order_semantics=no_priority
+shared_l1_worktree_conditions=same_frozen_base|exact_disjoint_paths|no_l2_git|one_shared_l1_slice_candidate|Root_records_after_all_children_finish
+managed_worktree_allocation=one_writable_l1_assignment_one_root_managed_worktree
+l2_worktree_lifecycle=forbidden
+independent_candidate_or_release_lifecycle=new_l1_assignment_required
+concurrent_wdm_cpm_l1_worktrees=distinct_root_managed_worktrees
+convergence_worktree=separate_root_managed_worktree
+root_candidate_record_or_commit=after_all_l1_children_finish
+workflow_path=direct_orchestration_normal_path_plus_one_bounded_local_recovery
+workflow_forbidden_control_surfaces=scheduler|queue|ledger|ticket_registry|hash_admission|digest_admission|fingerprint_admission|polling|recovery_state_machine|new_global_gate
+workflow_slice_result=wdm_accepts_exact_slice_then_returns_candidate_ready_packet
+workflow_candidate_integration=Root_records_and_integrates_candidate_set_after_all_children_finish
+workflow_union_convergence=fresh_wdm_on_exact_integrated_union_arranges_advisory_review_and_owns_union_acceptance
+workflow_reviewer_authority=advice_only_no_acceptance
+workflow_union_acceptance_not_implied_by=slice_candidate|Root_integration|Reviewer_advice|commit
 agentify_transport_workspace_code_project_manager=temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/
 agentify_transport_workspace_independent_research_explorer=temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/
 agentify_transport_parent_wdm=forbidden
@@ -70,12 +98,15 @@ explorer_reverse_intake_retry_state_queue_receipt_validator=forbidden
 
 Workflow-design, code, runtime and research authority remain with the owner
 Roles and the router. This contract defines only workspace roots, sender/receiver
-byte storage, owner write partitions, current-work links and the Root-managed
-worktree boundary. Root alone relays user requests and owner results across
+byte storage, owner write partitions, scope-keyed L1 multiplicity, current-work
+links and the Root-managed worktree boundary. Each owner Role defines its own
+scope-key field; the generic uniqueness rule is `(role, role-defined scope key)`
+within one Root tree. Root alone relays user requests and owner results across
 lanes, controls task lifecycle, provisions/records/integrates/releases or
 retains managed worktrees, and physically writes canonical state only after the
-owning L1 accepts a proposal. The helper is a Root-controlled lifecycle tool,
-not a child identity, ticket, Git authority or admission substitute.
+owning L1 accepts a proposal. A scope key is not a live session, thread,
+continuity or admission identity. The helper is a Root-controlled lifecycle
+tool, not a child identity, ticket, Git authority or admission substitute.
 
 ## Assignment and write boundaries
 
@@ -90,13 +121,36 @@ assignments do not require one; mixed tracked and ignored writes do. The L1
 owner semantically accepts its result or proposal and returns it to Root; Root
 retains canonical writes, Git, helper lifecycle/receipt control and cross-owner
 routing. Children do not invoke the helper or run raw `git worktree` lifecycle
-operations.
+operations. Within a Root tree, multiple WDM L1s are valid only when their
+`workflow_scope_key` values identify disjoint frozen workflow scopes; a shared
+writable path or still-unfrozen semantic contract creates a dependency and is
+serialized. Root dispatches each WDM with `fork_turns=1`, which carries
+background context only. A WDM may dispatch disjoint registered Implementers
+with explicit `fork_turns=none`; all such L2 writers share the invoking L1's
+Root-provisioned managed worktree only with the same frozen base, exact
+disjoint paths, and no L2 Git or helper use. Root creates or records the one
+shared L1 slice candidate only after all children finish. An
+independent candidate or release lifecycle requires a new L1 assignment; an
+L2 never receives, owns or controls a separate worktree lifecycle.
+Concurrent WDM/CPM L1 assignments use distinct worktrees, and
+integration/convergence uses a separate worktree. Completion order does not
+establish priority.
 
 The Root-controlled lifecycle keeps at most one nonterminal receipt per
 assignment. A local helper failure is recorded as nonterminal so Root can retry
 or park that assignment while unrelated work continues. Existing legacy
 worktrees remain isolated and untouched; they are not adopted, migrated or
-released by the managed lifecycle.
+released by the managed lifecycle. The normal path has one bounded local
+recovery; no scheduler, queue, ledger, ticket registry, admission fingerprint,
+polling loop, recovery state machine or new global gate is introduced.
+
+For a parallel WDM change, each WDM accepts its exact frozen slice and returns
+a candidate-ready packet. Root records and integrates the candidate set. Only
+after that integration does a fresh convergence WDM receive the exact
+integrated union, arrange integrated advisory review and own union semantic
+acceptance. Reviewer output is advisory and never accepts the union. A slice
+candidate, Root integration, Reviewer advice or a commit does not by itself
+claim union acceptance.
 
 ## Durable and temporary files
 
