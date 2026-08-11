@@ -11,6 +11,13 @@ physical_writer=root_after_explorer_accepted_proposal
 pointer_id=independent_research_explorer
 macro_portfolio_owner=root
 direction_owner=independent_research_explorer(direction:<id>)
+research_team_loop=root_orchestrated_multi_direction
+direction_em_identity=on_demand|reusable|multi_turn|one_direction
+direction_consultability=new|active|retained_or_parked|closed_or_retired
+em_concurrency_effect=latency_only
+cross_direction_relay=Root_only|provenance_bound_inspiration|no_evidence_transfer
+joint_hypothesis_route=surviving_nonredundant_candidate_to_new_direction_EM
+logical_em_reuse=explicit_same_direction_packet|not_live_session_resume
 research_scope_key=direction:<id>
 scope_kinds=direction:<id>
 direction_scope_owner=independent_research_explorer_direction_execution
@@ -50,7 +57,8 @@ substitute for the real task tree. Each `direction:<id>` EM task loads only
 its exact assignment and named direction pointers; it does not preload global
 continuity, the whole portfolio or the project/runtime corpus. Root may follow
 compact continuity and the two portfolio locators above when its macro packet
-names that dependency; there is no portfolio L1. Historical handoffs remain
+names that dependency; `portfolio_l1=forbidden` forbids a child portfolio
+owner, not Root's central multi-direction research-team loop. Historical handoffs remain
 lazy and are loaded only for an exact action dependency. Explorer-to-Root-to-
 CPM and reverse packets retain `research_scope_key`, direction, candidate and
 revision.

@@ -24,6 +24,20 @@ project/runtime corpus, or implicit continuity. CM is a Root sibling; Root owns
 relay, user interaction, physical writes, macro comparison and full-map
 acceptance.
 
+Treat the EM as an on-demand, reusable, multi-turn teammate inside Root's
+central multi-direction research loop. Root may consult the same logical
+direction across new, active, retained, parked, closed or retired states; the
+consultation does not itself reopen, rerun or change disposition. Logical reuse
+means an explicit same-direction assignment packet, not continuation of a live
+process, worktree, browser conversation or hidden context.
+
+A Root-relayed cross-direction packet is provenance-bound inspiration. Use its
+named primitive, warning or prospective interaction only to ask whether it
+changes this direction's scientific judgment. Never import another
+direction's evidence, thresholds, observed rows, acceptance or authority. A
+surviving nonredundant joint hypothesis returns to Root for a new direction EM
+instead of widening this scope.
+
 Decompose work source-first into single-axis discriminator questions. Adaptive
 registered-child dispatch is prospective and bounded: use it only if its answer
 can change support, alternative explanation, information gain, next
@@ -32,11 +46,13 @@ Children receive exact questions, named sources/packets, protected assumptions,
 exclusions and completion meaning. Project Scout is a separate factual utility,
 not a scientific or acceptance substitute.
 
-Run independent work parallel-first where predecessors/resources do not
-conflict. Completion order and attribution never rank directions or transfer
-candidate evidence. Parked, pending-implementation, pending-runtime, and
-retired remain scientific dispositions, not machine admissions; engineering
-gaps remain CM work. Root provides one managed worktree per writable scope;
+Run independent child work parallel-first where predecessors/resources do not
+conflict. Concurrency among direction EMs changes latency only; Root retains
+the one portfolio loop. Completion order and attribution never rank directions
+or transfer candidate evidence. Parked, pending-implementation,
+pending-runtime, and retired remain scientific dispositions, not machine
+admissions; engineering gaps remain CM work. Root provides one managed
+worktree per writable scope;
 disjoint L2 writers share it. The Artifact Writer is restricted to exact
 approved ordinary bytes, temporary handoffs and a small semantic-delta patch;
 Explorer transport is parent-specific and its raw terminal evidence returns to

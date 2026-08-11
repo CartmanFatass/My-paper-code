@@ -14,6 +14,11 @@ git_authority=exclusive
 macro_portfolio_authority=exclusive
 root_research_leaf_scope=general_research_support|portfolio_advisory|cross_direction_advisory
 direction_research_scope=independent_research_explorer(direction:<id>)
+research_team_loop=root_orchestrated_multi_direction
+direction_em_relation=on_demand|reusable|multi_turn|one_direction
+em_concurrency_effect=latency_only
+portfolio_execution_economics=scientific_value|decision_information|time_to_discriminator|engineering_cost|runtime_cost|opportunity_cost|reuse
+cross_direction_relay=Root_only|provenance_bound_inspiration|no_evidence_transfer
 domain_scientific_acceptance=none
 domain_technical_acceptance=none
 ```
@@ -54,6 +59,62 @@ next-action or scientific-acceptance decision. When the work belongs to one
 persistent hypothesis, candidate, discriminator, or next action, dispatch an
 EM with exactly one `direction:<id>` instead. Root direct calls must never be
 used to bypass that single-direction owner.
+
+## Research-team portfolio loop
+
+Root's multi-direction workflow is the central research-team loop. Root owns
+idea discovery and screening, portfolio comparison and sequencing, direction
+creation, retention, closure and re-consultation, cross-direction synthesis,
+and the allocation of EM, CM, Operator and External-Pro attention. A direction
+EM is an on-demand, reusable, multi-turn scientific teammate for exactly one
+`direction:<id>`; it is not a logically parallel isolated workflow or a
+persistent live process. Concurrent EM execution reduces latency only and does
+not divide Root's portfolio loop.
+
+Root may create a direction or consult and re-consult an active, retained,
+parked, closed or retired direction. Consultation alone does not reopen a
+direction, authorize a rerun or change its disposition. Root sends follow-ups
+to the same logical direction EM when that direction still owns the scientific
+question. A surviving nonredundant cross-direction hypothesis receives a new
+`direction:<id>` and its own EM; agreement, code reuse or shared vocabulary is
+not enough to create one.
+
+Screen ideas in batches or coherent families. Do not compare every returned
+idea pairwise with every direction. Open or continue an EM only when its answer
+can materially change support, the strongest alternative, the next
+discriminator, fusion viability or portfolio action. Rank work by expected
+decision information relative to wall time, engineering and runtime cost,
+opportunity cost, reversibility and reusable evidence. Park low-value ideas
+with a falsifiable revisit trigger; prefer a discriminator that can eliminate
+a family over many weakly informative runs.
+
+Use CM at two useful boundaries. Before a treatment freeze, Root may ask the
+same direction's CM for bounded code-observable feasibility, dependency,
+runtime and implementation-cost evidence; CM does not invent the scientific
+treatment. Once a treatment is actionable, Root dispatches CM without waiting
+for unrelated directions to close. While one lane awaits EM, CM, Operator,
+runtime or Pro, Root advances the next independent high-value lane. An EM whose
+treatment is already in CM should prepare result interpretation, pursue the
+next answer-changing question or return instead of idling on implementation.
+Parallelism is a rolling pipeline, not a requirement to manufacture busywork
+or overload a shared compute resource.
+
+Cross-direction relays are Root-authored, provenance-bound inspiration packets
+that name the source, revision, claim and uncertainty. They may transfer a
+mechanism primitive, warning or prospective interaction; they never transfer
+direction evidence, thresholds, observed rows, acceptance or authority. Root
+does not rewrite either EM's scientific conclusion.
+
+External Pro is selective: use it for an answer-changing pre-freeze preview,
+published code-science alignment, result convergence, or an exhausted
+overnight blocker, not for routine low-value idea ranking. Root maintains only
+a minimal `direction:<id>` to conversation URL/ID mapping. One direction uses
+one page and continues that exact conversation for its preview, follow-ups and
+convergence. Mixed-direction inspiration stays in the relevant parent
+conversation until Root creates a formal new direction, which receives a new
+conversation. Transport assignments must use observed session and visible
+model facts without guessed parameters; the transport Role owns page operation
+and raw-response archival.
 
 ## Child dispatch
 

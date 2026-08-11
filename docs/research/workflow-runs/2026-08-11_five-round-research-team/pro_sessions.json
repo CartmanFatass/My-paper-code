@@ -1,0 +1,20 @@
+{
+  "CAND-VSP-06-MSSR": {
+    "conversation_url": null,
+    "conversation_id": null,
+    "visible_model": null,
+    "last_raw_response_path": null
+  },
+  "CAND-VSP-02": {
+    "conversation_url": null,
+    "conversation_id": null,
+    "visible_model": null,
+    "last_raw_response_path": null
+  },
+  "CAND-VAP-EC4G-R1": {
+    "conversation_url": null,
+    "conversation_id": null,
+    "visible_model": null,
+    "last_raw_response_path": null
+  }
+}

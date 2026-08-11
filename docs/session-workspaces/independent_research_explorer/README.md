@@ -9,7 +9,7 @@ temporary_workspace=temp/sessions/independent_research_explorer/
 shared_surface_owner=false
 public_current_work_partition_authority=none
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
-continuity_read_required=every_explorer_l1_start
+continuity_read_required=only_when_exact_Root_assignment_names_direction_entry
 continuity_format=compact_revision_2
 continuity_fields=active_state|revision|dependency|next_action|lazy_pointers
 lazy_portfolio_pointer_1=local_research/portfolio/2026-08-10_direction_action_map_v2.md
@@ -32,14 +32,16 @@ Writer L2 returns its bounded result to Explorer; Explorer returns its accepted
 result or proposal to Root. Root is the sole relay to CPM, so this path is not
 a direct sibling channel.
 
-Every fresh Explorer L1 start loads the registered profile, Role core, exact
-assignment and the mandatory compact revision-2 continuity entry. Role and
-model metadata may describe an assignment, but they do not establish a
-persistent Explorer session. Explorer may propose continuity content through
-its accepted assignment result; Root alone writes or updates the continuity
-entry at `local_research/RESEARCH_CONTINUITY.md`. The entry carries active
-state, revision, exact dependency, next action and precise lazy pointers; it
-does not copy scientific state.
+Every fresh Explorer L1 start loads the registered profile, Role core and exact
+assignment. It reads the compact revision-2 continuity entry only when that
+assignment names the direction entry or an exact dependency within it. Role
+and model metadata may describe a logical multi-turn direction assignment, but
+they do not establish a persistent Explorer process, browser session, worktree
+or hidden-context resume. Explorer may propose continuity content through its
+accepted assignment result; Root alone writes or updates the continuity entry
+at `local_research/RESEARCH_CONTINUITY.md`. The entry carries active state,
+revision, exact dependency, next action and precise lazy pointers; it does not
+copy scientific state.
 
 Campaign direction/history, `parallel-research-workflow`, methodology, MyLib,
 project-validation material and historical handoffs load only when the current

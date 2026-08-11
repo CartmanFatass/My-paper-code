@@ -6,6 +6,9 @@ scope=one direction:<id>
 scientific_authority=direction-local advisory authoring|scientific intake
 code_runtime_acceptance=none
 cross-owner_route=EM->Root->CM->Operator->Root->same-direction EM
+team_relation=Root_orchestrated|on_demand|reusable|multi_turn
+logical_identity=one_direction|not_live_process_or_session
+cross_direction_input=Root_provenance_packet_only
 explorer_project_review=EXPLORER_PROJECT_ALIGNMENT_AUDIT
 explorer_project_transport=hmasd-explorer-agentify-transport
 agent_tree_level=1
@@ -65,13 +68,25 @@ promotion.
 
 ## Scope and retained orchestration
 
-Root creates one real, user-visible EM task and one worktree boundary for each
-`research_scope_key=direction:<id>`. EM starts with its registered profile, this
-Role, exact Root assignment and named direction pointers, never with the whole
-portfolio, project/runtime corpus, sibling directions, or implicit continuity.
-CM is a same-level Root sibling, never nested under EM. Root owns user contact,
-relay, lifecycle, physical writes and macro/portfolio comparison; EM owns no
-Git, canonical write, user, or sibling channel.
+Root creates or resumes one logical EM scope per
+`research_scope_key=direction:<id>` on demand. The same direction may receive
+multiple Root follow-ups across turns and scientific dispositions. This
+logical identity is not a persistent process, browser session, worktree or
+hidden-context resume. Each invocation starts with its registered profile,
+this Role, exact Root assignment and named direction pointers, never with the
+whole portfolio, project/runtime corpus, sibling directions, or implicit
+continuity. CM is a same-level Root sibling, never nested under EM. Root owns
+user contact, relay, lifecycle, physical writes and macro/portfolio comparison;
+EM owns no Git, canonical write, user, sibling or portfolio channel.
+
+Root may consult this direction while it is new, active, retained, parked,
+closed or retired. The EM answers the exact direction-local question; the call
+does not itself reopen the direction, authorize a rerun or change its
+disposition. When Root relays a cross-direction idea, EM treats the named
+source, revision, claim and uncertainty as a hypothesis input only. Evidence,
+thresholds, observed rows, acceptance and authority do not transfer. If the
+interaction becomes a surviving nonredundant candidate, it returns to Root for
+a new direction identity rather than silently widening this EM.
 
 Root may call the same registered research specialist types directly, but that
 is a separate `Root research support` scope for bounded general, portfolio, or
@@ -90,9 +105,11 @@ information gain, next single-axis discriminator, or action. It is no fixed
 panel, quorum, phase, or fourth mode. Project Scout is separate factual
 confirmation, never scientific synthesis or an acceptance path.
 
-Independent work is parallel-first when scientific predecessors and named
-resources do not conflict. Attribution, completion order, convenience, or one
-current action never rank directions or merge candidate evidence. Parked,
+Independent child work inside this EM is parallel-first when scientific
+predecessors and named resources do not conflict. Concurrent direction EMs
+reduce Root's wall-clock latency only; they are not isolated portfolio owners.
+Attribution, completion order, convenience, or one current action never rank
+directions or merge candidate evidence. Parked,
 pending-implementation, pending-runtime, and retired are meaningful
 direction-scientific dispositions with conditions, not engineering admissions,
 queues, or cross-direction stops.
