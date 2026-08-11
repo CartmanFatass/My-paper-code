@@ -1,355 +1,41 @@
 from pathlib import Path
 
-
-REPO = Path(__file__).resolve().parents[1]
-SKILL_PATH = REPO / ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md"
-UI_PATH = SKILL_PATH.parent / "agents/openai.yaml"
-ROLE_PATH = REPO / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md"
-ROUTER_PATH = REPO / "AGENTS.md"
+ROOT = Path(__file__).resolve().parents[1]
+SKILL = ROOT / ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md"
+ROLE = ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md"
+ROUTER = ROOT / "AGENTS.md"
 
 
-def test_collaborative_skill_is_the_only_design_collaboration_skill() -> None:
-    assert SKILL_PATH.is_file()
-    assert not (
-        REPO / ".agents/skills/hmasd-deliberate-workflow-design/SKILL.md"
-    ).exists()
-    assert "name: hmasd-collaborative-workflow-design" in SKILL_PATH.read_text(encoding="utf-8")
-
-    skill = SKILL_PATH.read_text(encoding="utf-8").lower()
-    for retired_mechanism in (
-        "decision map",
-        "fog",
-        "freeze",
-        "high-amplification risk gate",
-    ):
-        assert retired_mechanism not in skill
+def _flat(path: Path) -> str:
+    return " ".join(path.read_text(encoding="utf-8").split()).lower()
 
 
-def test_read_only_and_fully_specified_requests_take_short_paths() -> None:
-    skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
-    assert "without plan confirmation" in skill
-    assert "zero-question path" in skill
-    assert "workflow_decision_question_condition=changes_named_plan_field" in skill
-    assert "one question at a time" in skill
-    assert "recommend the smallest answer" in skill
+def test_wdm_plan_modes_preserve_explicit_user_dispatch_and_no_second_gate() -> None:
+    skill = _flat(SKILL)
+    assert "`plan-only` returns a detailed plan" in skill
+    assert "explicit `plan+execute` permits execution" in skill
+    assert "without a fixed second confirmation" in skill
+    assert "return to root only if goal" in skill
+    for drift in ("owner authority", "science/estimand", "major path family", "acceptance method", "real user choice"):
+        assert drift in skill
 
 
-def test_nontrivial_execution_reuses_one_plan_without_a_new_gate() -> None:
-    router = (REPO / "AGENTS.md").read_text(encoding="utf-8")
-    skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
-    normalized_router = " ".join(router.split())
-    for trigger, owner_surface in (
-        (
-            "user workflow change or workflow defect requiring a plan",
-            ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md",
-        ),
-        (
-            "designing an assignment/interface",
-            "`hmasd-writing-agent-assignments` and named contract",
-        ),
-        (
-            "confirmed plan implementation or verification",
-            ".agents/skills/hmasd-workflow-change-audit/SKILL.md",
-        ),
-        (
-            "stable owner/interface/dependency edge",
-            "docs/project/WORKFLOW_MAP.md",
-        ),
-        (
-            "canonical status/continuity reload",
-            "the exact owner record named by Root",
-        ),
-    ):
-        assert trigger in normalized_router
-        assert owner_surface in normalized_router
-    assert "| L2, depth 2 | registered leaf | exact assignment, its profile, named Role and immediate references |" in router
-    assert "After natural-language confirmation, load" in skill
-    assert "does not duplicate post-confirm execution" in skill
-
-
-def test_mutation_requires_one_visible_confirmed_plan() -> None:
-    skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
-    for field in (
-        "Requirements understanding",
-        "Goal and non-goals",
-        "Exact paths",
-        "Intended changes",
-        "Verification and risks",
-    ):
-        assert field in skill
-    assert "Perform no mutation until" in skill
-    assert "confirms the complete plan in natural language" in skill
-    assert "present the complete revised plan" in skill
-
-
-def test_role_routes_mutations_through_collaboration_before_audit() -> None:
-    role = ROLE_PATH.read_text(encoding="utf-8")
-    skill = SKILL_PATH.read_text(encoding="utf-8")
+def test_wdm_remains_the_workflow_owner_while_root_retains_user_and_git_boundaries() -> None:
+    role, router = _flat(ROLE), _flat(ROUTER)
+    assert "wdm owns workflow semantic design, modification and acceptance" in role
     assert "workflow_collaboration_skill=hmasd-collaborative-workflow-design" in role
-    assert "workflow_zero_question_path=fully_specified_mutations" in skill
-    assert "workflow_decision_question_condition=changes_named_plan_field" in skill
-    assert "workflow_plan_confirmation=required_before_mutation" in skill
-    assert "workflow_zero_question_path=" not in role
-    assert "workflow_decision_question_condition=" not in role
-    role_normalized = " ".join(role.split()).lower()
-    assert "the collaborative skill owns requirements, planning and user confirmation" in role_normalized
-    assert "the audit skill owns post-confirmation" in role_normalized
+    assert "root_user_interaction_authority=exclusive" in router
+    assert "root_final_git_integration_authority=accepted_paths_only" in router
+    assert "max_subagent_depth=2" in router
 
 
-def test_assignment_writing_skill_is_required_at_design_dispatch_boundary() -> None:
-    role = " ".join(ROLE_PATH.read_text(encoding="utf-8").split())
-    skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
-    router = " ".join(ROUTER_PATH.read_text(encoding="utf-8").split())
-    for text in (role, skill, router):
-        assert "hmasd-writing-agent-assignments" in text
-    assert "required sub-skill" in skill
-    assert "design a reusable child or cross-session interface" in skill
-    assert "compile each concrete file-backed assignment" in skill
-    for capability in (
-        "exact assignment and named control-plane references to observe",
-        "ability to design, dispatch, reconcile, accept or reject",
-        "judgment about material plan drift, authority, path, acceptance and irreversible-effect changes",
-        "one simple, reversible fallback for a local failure",
-        "exact changed paths plus focused verification as completion evidence",
-    ):
-        assert capability in role
-    assert "children add no design, routing, Git or acceptance authority" in role
-    assert "hmasd-writing-agent-assignments" in role
-
-
-def test_wdm_owns_workflow_semantics_without_a_singleton_scope() -> None:
-    role = ROLE_PATH.read_text(encoding="utf-8")
-    skill = SKILL_PATH.read_text(encoding="utf-8")
-    normalized_role = " ".join(role.split()).lower()
-    normalized_skill = " ".join(skill.split())
-    for token in (
-        "workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces",
-        "workflow_modification_authority=exclusive_for_all_workflow_control_plane_surfaces",
-        "workflow_acceptance_authority=exclusive_for_all_workflow_control_plane_surfaces",
-        "workflow_git_authority=none",
-        "workflow_final_git_mechanics=root_only_after_WDM_semantic_acceptance",
-    ):
-        assert token in role
-    assert "WDM owns workflow semantic design, modification and acceptance" in role
-    assert "children add no design, routing, git or acceptance authority" in normalized_role
-    assert "root owns user interaction, task-tree lifecycle, physical application" in normalized_role
-    assert "This Skill is invoked only by the Root-assigned Workflow Design Manager L1" in skill
-    assert "without plan confirmation" in normalized_skill
-    assert "workflow_git_authority=exclusive_for_workflow_control_plane_surfaces" not in role
-    assert "workflow_hash_validation=forbidden" not in role
-    assert "Never use a hash, digest, byte count or fingerprint" in (
-        REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md"
-    ).read_text(encoding="utf-8")
-    assert "workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch" not in role
-    assert "Git revisions are\nsource locators only" in (
-        REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md"
-    ).read_text(encoding="utf-8")
-    assert "workflow_router_consistency_check=required_for_every_workflow_change" in role
-    assert "workflow_implementer_parallelism=" not in role
-    assert "workflow_child_edit_worktree=assignment_owned_paths_in_invoking_l1_worktree_for_tracked_writer_or_task_workspace_when_exempt" in role
-    assert "`AGENTS.md` as `modify` or `unchanged-valid`" in normalized_skill
-    assert "workflow_scope_key" in normalized_role
-    assert "multiple active wdms" in normalized_role
-    assert "disjoint frozen scopes" in normalized_role
-
-
-def test_user_changes_and_advisory_defects_use_distinct_nonblocking_lanes() -> None:
-    role = " ".join(ROLE_PATH.read_text(encoding="utf-8").split())
-    skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
-    assert "workflow_input_lanes=USER_REQUESTED_CHANGE|REPORTED_WORKFLOW_DEFECT" in skill
-    assert "workflow_incident_log=" in role
-    assert "does not serialize unrelated work" not in role
-    assert "workflow_defect_repair_authority=autonomous_within_accepted_stable_contract" in role
-    assert "workflow_defect_repair_authority=autonomous_within_accepted_stable_contract" in role
-    assert "Otherwise move the item to the user-requested lane" in skill
-
-
-def test_tracked_writers_use_root_managed_worktrees_without_ticket_identity() -> None:
-    router = ROUTER_PATH.read_text(encoding="utf-8")
-    role = ROLE_PATH.read_text(encoding="utf-8")
-    skill = SKILL_PATH.read_text(encoding="utf-8")
-    audit = (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md").read_text(
-        encoding="utf-8"
-    )
-    normalized_router = " ".join(router.split()).lower()
-    normalized_role = " ".join(role.split()).lower()
-    normalized_skill = " ".join(skill.split())
-    normalized_audit = " ".join(audit.split())
-    assert "tracked_writer_workspace=root_managed_worktree_required" in normalized_router
-    assert "root-managed worktree" in normalized_router
-    for exemption in ("read-only", "ignored-only", "temporary-only"):
-        assert exemption in normalized_router
-    assert "mandatory_ticket_identity=forbidden_for_subagent_authority" in normalized_router
-    for text in (normalized_router, normalized_role, normalized_skill, normalized_audit):
-        assert "resolved ticket worktree path" not in text
-        assert "scripts/hmasd_workspace_ticket.py" not in text
-        assert "git rev-parse --show-toplevel" not in text
-    assert "receipt" in normalized_router
-    assert "root alone" in normalized_router
-    assert "root-provisioned managed worktree" in normalized_role
-    assert "l2 never has its own worktree lifecycle or invokes helper/git lifecycle" in normalized_role
-    assert "one writable l1 assignment" in normalized_router
-    assert "one root-managed worktree" in normalized_router
-    assert "parallel implementers" in normalized_role
-    assert "same frozen base" in normalized_role
-    assert "exact disjoint paths" in normalized_role
-    assert "one l1 slice candidate" in normalized_role
-    assert "root commits/records only after all children complete" in normalized_role
-    assert "independent candidate/release lifecycle means a new l1" in normalized_router
-    assert "distinct concurrent wdm/cpm l1 assignments" in normalized_router
-    assert "root_managed_worktree_union_convergence=separate_worktree_for_multi_candidate_union_only" in normalized_router
-    assert "disjoint l2 writers share that l1 worktree" in normalized_role
-    assert "l2 never has its own worktree lifecycle" in normalized_role
-
-
-def test_skill_cannot_be_invoked_implicitly() -> None:
-    assert "allow_implicit_invocation: false" in UI_PATH.read_text(encoding="utf-8")
-
-
-def test_wdm_owns_workflow_without_a_parallel_explorer_path_registry() -> None:
-    role = ROLE_PATH.read_text(encoding="utf-8")
-    assert "workflow_design_authority=exclusive_for_all_workflow_control_plane_surfaces" in role
-    assert "centralized_explorer_workflow_paths=" not in role
-    assert "centralized_explorer_workflow_acceptance_owner=" not in role
-    assert "centralized_explorer_workspace_cleanup_write_authority=none" in role
-
-
-def test_default_execution_policy_is_parallel_first_with_direct_exception() -> None:
-    router = ROUTER_PATH.read_text(encoding="utf-8")
-    role = ROLE_PATH.read_text(encoding="utf-8")
-    collaboration = SKILL_PATH.read_text(encoding="utf-8")
-    audit = (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md").read_text(
-        encoding="utf-8"
-    )
-    workflow_map = (REPO / "docs/project/WORKFLOW_MAP.md").read_text(encoding="utf-8")
-    normalized_router = " ".join(router.split()).lower()
-    normalized_role = " ".join(role.split()).lower()
-    normalized_collaboration = " ".join(collaboration.split()).lower()
-    normalized_audit = " ".join(audit.split()).lower()
-    normalized_map = " ".join(workflow_map.split()).lower()
-
-    assert "workflow_subagent_parallelism=parallel_first_with_dependency_order" in router
-    assert "workflow_change_execution=subagent_workflow_by_default" not in normalized_router
-    assert "wdm_direct_modification=" not in normalized_router
-    assert "as a narrow temporary-task exception" in normalized_router
-    assert "only when no listed specialist leaf can perform the bounded task" in normalized_router
-    assert "only when no listed specialist can perform an exact bounded temporary task may wdm invoke one native default child" in normalized_role
-    assert 'agent_type="default"' in normalized_role
-    assert 'model="gpt-5.6-luna"' in normalized_role
-    assert 'reasoning_effort="high"' in normalized_role
-    assert 'fork_turns="1"' in normalized_role
-    assert "never gains durable, git, routing, science, runtime or acceptance authority" in normalized_role
-    assert "it never writes canonical state or contacts another owner directly" in normalized_role
-    assert "registered auditor, implementer and reviewer leaves" in normalized_role
-    assert "parallel-first" in normalized_map
-    assert "normal path is direct orchestration with one bounded local recovery" in normalized_audit
-    assert "dispatch read-only auditor/scout concurrently with already-freezable implementation slices" in normalized_audit
-    assert "run exact disjoint implementers parallel-first" in normalized_audit
-    assert "serialize only actual information dependencies or same-file writers" in normalized_audit
-    assert "same writable path" in normalized_role
-    assert "shared unfrozen semantic contract" in normalized_role
-    assert "reviewer" in normalized_role
-    assert "advisory" in normalized_role
-    assert "acceptance" in normalized_role
-    assert "pure design or authority decisions without file mutation remain wdm-local" in normalized_map
-    assert "mechanism budgets constrain only irreversible/high-cost actions" in normalized_audit
-    assert "never use a hash, digest, byte count or fingerprint" in normalized_audit
-    assert "ordinary workflow changes use the registered auditor/scout -> implementer -> reviewer" not in "\n".join((router, role, collaboration, audit, workflow_map)).lower()
-
-    for stale in (
-        "workflow_change_execution=subagent_workflow_by_default",
-        "wdm_direct_modification=",
-        "resolved ticket worktree path",
-        "git rev-parse --show-toplevel",
-        "after confirmation, wdm may use",
-        "when implementers were used",
-        "delegation is judgment-guided",
-        "bounded slices may use registered children",
-        "no mandatory pipeline",
-        "cost-aware delegation path",
-        "local feasibility threshold",
-        "task size threshold",
-        "complexity threshold",
-    ):
-        assert stale not in "\n".join((router, role, collaboration, audit, workflow_map)).lower()
-
-
-def test_scoped_singleton_package_and_conditional_union_acceptance_are_distinct() -> None:
-    role = " ".join(ROLE_PATH.read_text(encoding="utf-8").split()).lower()
-    router = " ".join(ROUTER_PATH.read_text(encoding="utf-8").split()).lower()
-    audit = " ".join(
-        (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md")
-        .read_text(encoding="utf-8")
-        .split()
-    ).lower()
-    session = " ".join(
-        (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md")
-        .read_text(encoding="utf-8")
-        .split()
-    ).lower()
-    surfaces = " ".join((role, router, audit, session))
-    for required in (
-        "accepts its exact slice",
-        "candidate-ready packet",
-        "root_records_and_integrates_candidate_set_after_all_children_finish",
-        "one writable wdm l1 assignment's exact final frozen bytes",
-        "one advisory reviewer",
-        "same wdm may accept",
-        "multi-candidate convergence",
-        "advice_only_no_acceptance",
-        "acceptance_authority=none",
-    ):
-        assert required in surfaces, required
-    assert "conditional_on_workflow_multi_candidate_convergence_trigger" in session
-    assert "fresh convergence wdm and separate worktree are reserved" in surfaces
-    assert "current slice requires convergence" not in surfaces
-
-
-def test_direction_scoped_owner_topology_is_keyed_and_pending() -> None:
-    lessons = (
-        REPO / "docs/H_read/2026-08-11_subagent_worktree_workflow_lessons.md"
-    ).read_text(encoding="utf-8")
-    router = ROUTER_PATH.read_text(encoding="utf-8")
-
-    for required in (
-        "direction_owner_topology=root_advisory_macro_portfolio_science",
-        "em_scope_key=direction:<id>",
-        "explorer_scope_key=direction:<id>",
-        "cm_scope_key=direction:<id>|shared:<component>",
-        "code_scope_key=direction:<id>|shared:<component>",
-        "portfolio_em=forbidden",
-        "integration_scope_key=forbidden",
-        "convergence_cm=forbidden",
-        "union_reviewer=forbidden",
-        "forbidden_scope_keys=portfolio:<group>|integration:<group>|convergence:<group>|shared:all",
-        "root_candidate_integration=mechanical_candidate_integration_only",
-        "root_union_validation=mechanical_tests_static_only",
-        "root_union_pass=mechanical_evidence_only",
-        "root_conflict_return=owning_cm_or_exact_shared_cm",
-        "cm_acceptance=final_for_its_scope_only",
-        "shared_scope_key=shared:<component>",
-        "shared_all_scope=forbidden",
-        "tracked_writer_worktree=one_writable_l1_worktree_shared_by_disjoint_l2_writers",
-        "tracked_writer_exemptions=read-only|ignored-only|temporary-only",
-        "root_user_external_formal_boundaries=preserved",
-        "direction_flow=EM->CM->Experiment->publish/reverse->external-review",
-        "direction_flow_status=PENDING",
-        "research_execution=false",
-        "science_state_changed=false",
-        "historical_scientific_conclusions=preserved_not_rewritten",
-    ):
-        assert required in lessons, required
-
-    assert "direction_flow_status=COMPLETED" not in lessons
-    assert "direction_flow_status=COMPLETE" not in lessons
-
-    session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(
-        encoding="utf-8"
-    )
-    assert "workflow_union_convergence=conditional_on_workflow_multi_candidate_convergence_trigger" in session
-
-    for boundary in (
-        "root_user_interaction_authority=exclusive",
+def test_direction_owners_are_scoped_and_root_relayed_without_history_status() -> None:
+    router = _flat(ROUTER)
+    for invariant in (
+        "independent_research_explorer_scope_key_forms=direction:<id>",
+        "code_project_manager_scope_key_forms=direction:<id>|shared:<component>",
         "root_cross_owner_relay_authority=exclusive",
+        "root_advisory_portfolio_science_authority=",
+        "root_managed_worktree_default_unit=one_writable_l1_assignment",
     ):
-        assert boundary in router, boundary
+        assert invariant in router

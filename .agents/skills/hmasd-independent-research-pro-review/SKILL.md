@@ -24,9 +24,11 @@ root before sending.
    `RAW_QUESTION`. The question contains only natural-language scientific
    content; assignment, authority, session, Git/path, provider and transport
    fields remain local. The local assignment identity begins with exactly
-   `IR_DIRECTION_REVIEW:` or `IR_METHODOLOGY_REVIEW:` and declares either
+   `IR_DIRECTION_REVIEW:`, `IR_METHODOLOGY_REVIEW:`, or
+   `EXPLORER_PROJECT_ALIGNMENT_AUDIT:` and declares either
    `PRO_CONSTRUCTIVE_MATHEMATICAL_REVIEW`,
-   `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`, or the bounded methodology-audit mode.
+   `PRO_ADVERSARIAL_SCIENTIFIC_REVIEW`, the bounded methodology-audit mode, or
+   the project-alignment mode defined below.
    Before dispatch, write one self-contained natural-language context brief
    that states for each question whether it starts clean, continues an
    exact prior conversation URL, may run concurrently with named other
@@ -79,6 +81,43 @@ provider-specific prompt metadata.
 
 An incomplete call affects only that review and is not scientific evidence.
 
+## Project-alignment branch
+
+`EXPLORER_PROJECT_ALIGNMENT_AUDIT` is a third, separate review branch. It does
+not rename, continue, or borrow the local/raw archival mechanics of
+`IR_DIRECTION_REVIEW` or `IR_METHODOLOGY_REVIEW`; those two remain independent
+branches with their existing local source and archival rules.
+
+EM selects the project-alignment question and retains its scientific intake. It
+may use this branch only after a named project-alignment trigger, or after an
+`OVERNIGHT_BRANCH_BLOCKER_REVIEW` trigger has been confirmed. Ordinary B never
+creates this trigger. The overnight trigger is available only after applicable
+in-scope recovery and legal owner relay are exhausted on the same overnight
+project branch. Workflow Design Manager has no production transport role.
+
+Before dispatch, Root must have completed `publication`: an owner-accepted exact
+path set has been ordinarily, non-force pushed to the configured upstream. The
+review brief supplies GitHub-readable remote,
+branch, exact pushed **aggressive** revision, and repository-relative paths.
+A local-only archive, unpushed revision, or filesystem-only locator is not a
+project-alignment input. External Pro uses its connector to inspect precisely
+that remote revision and paths.
+
+The Explorer uses only its parent-specific registered transport to send the
+frozen alignment question. Root manages the complete raw-response archive. Once
+the owner accepts its exact archive path, Root performs the local commit and
+ordinary non-force push of that archive before Root returns it to the original
+same-direction EM. The external side effect and its archive are evidence, never
+a permission, token, queue, ledger, gate, state machine, or transfer of owner
+authority.
+
+Neither Pro nor Root authors EM science, intakes CM's technical result, accepts
+CM code, or performs Operator mechanics. Within an already authorized overnight
+boundary, a legal owner may continue, revise, or stop; `user decision required`
+pauses only this review branch. The result returns to EM for its own
+direction-local scientific reconciliation and does not make a project,
+technical, or formal acceptance claim.
+
 ## Item records and packet semantics
 
 Each item keeps the frozen question, raw response and typed advisory packet
@@ -90,7 +129,9 @@ before the Explorer applies, rejects or parks its corrections in a new
 advisory version; only that version may receive a separate adversarial review.
 For a methodology audit, return the exact format-complete methodology packet
 to the Explorer's local FIFO without adding sources, claims or project
-instructions. Neither mode promotes a direction into formal project state.
+instructions. Neither mode promotes a direction into formal project state. For
+the project-alignment branch, Root-owned archival and publication occur as
+described above; EM alone reconciles the returned scientific answer.
 
 The Explorer alone selects the next review and continues the authorized
 campaign. Workflow Design Manager is not a campaign approver or transport

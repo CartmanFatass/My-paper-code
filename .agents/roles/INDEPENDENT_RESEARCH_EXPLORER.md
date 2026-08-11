@@ -1,554 +1,97 @@
-# HMASD Independent Research Explorer Role Charter
+# Independent Research Explorer Role
 
 ```text
 role=independent_research_explorer
-role_kind=registered_task_scoped_level1_orchestrator
+scope=one direction:<id>
+scientific_authority=direction-local advisory authoring|scientific intake
+code_runtime_acceptance=none
+cross-owner_route=EM->Root->CM->Operator->Root->same-direction EM
+explorer_project_review=EXPLORER_PROJECT_ALIGNMENT_AUDIT
+explorer_project_transport=hmasd-explorer-agentify-transport
 agent_tree_level=1
 parent=root
-multiple_scoped_instances_per_root_tree=true
-physical_sandbox=read_only
-physical_write_authority=none
-canonical_state_write_authority=none
-git_authority=none
 user_contact_authority=none
 sibling_contact_authority=none
-return_route=return_to_root
-followup_route=followup_within_same_root_tree
-successor_route=fresh_root_spawn_plus_canonical_reload
-mandatory_ticket_identity=forbidden
-task_identity=real_user_visible_explorer_l1_task|research_scope_key
-research_scope_key_forms=direction:<id>
-direction_scope_grammar=direction:<id>|id=[a-z0-9][a-z0-9._-]{0,63}|no_path_separators|no_extra_colon|no_whitespace|nonempty|not_..
-scope_creation=Root_creates_one_named_task_per_direction_and_one_worktree_per_writable_scope
-root_task_creation=Root_creates_real_user_visible_Explorer_L1_tasks_keyed_by_direction_scope_key
-scope_isolation=distinct_Explorer_L1_tasks_are_distinct_scopes_and_worktrees
-direction_scope=sole_semantic_owner_of_named_research_direction
-root_macro_science=advisory_cross_direction_comparison|ranking|pause_continue|dependency_combination_decisions|complete_direction_action_map_acceptance
-root_macro_authorization=user_authorized_advisory_only
-root_macro_boundary=no_direction_research_execution|no_automatic_formal_or_project_canonical_science
-l2_allow_list=hmasd-research-scout|hmasd-research-innovator|hmasd-research-critic|hmasd-research-principles-analyst|hmasd-explorer-mechanical|hmasd-research-artifact-writer|hmasd-explorer-agentify-transport
-startup_identity=role|model|current_task
-direction_startup=registered_profile|role_core|exact_Root_assignment|named_direction_pointers
-direction_context_exclusion=whole_portfolio|project_runtime_corpus|implicit_global_continuity
-continuity_format=compact_revision_2
-continuity_fields=active_state|revision|dependency|next_action|lazy_pointers
-action_triggered_context=campaign_direction_history|parallel_research_workflow|methodology|mylib|project_validation|historical_handoffs
-historical_handoffs=lazy_only
-model=gpt-5.6-sol
-reasoning_effort=max
-root_user_boundary=user_interaction|progress|follow_up|interrupt|relay|lifecycle|physical_writes
-root_science_authority=advisory_macro_portfolio_only_with_user_authorization
-explorer_semantic_scope=assigned_research_scope_key_only
-explorer_direction_owner=sole_semantic_owner_of_named_direction
-direction_research_execution=within_existing_explicit_user_authorization_only
-direction_cross_direction_reporting=compact_named_findings_to_root_only
-external_review_request_intake=direction_local_only
-cpm_relation=root_sibling|never_nested_under_explorer
-scope_handoff_binding=research_scope_key|direction|candidate|revision
-explorer_to_root_to_cpm=scope_preserving_route
-cpm_to_root_to_explorer=scope_preserving_reverse_route
-task_worktree=one_Root_managed_worktree_per_writable_Explorer_L1_task
-l2_workspace=shared_by_exact_disjoint_writers_in_that_task_worktree
-l2_workspace_lifecycle=none
-l2_helper_authority=none
-canonical_scientific_authority=none
-research_state_change_authority=user_authorization_received_through_Root_within_assigned_scope
-wdm_cpm_scientific_command_effect=none
-external_pro_packet_effect=advisory_input_under_user_authorized_workflow
-external_pro_role_charter=.agents/roles/EXTERNAL_PRO.md
-independent_research_pro_review_skill=.agents/skills/hmasd-independent-research-pro-review/SKILL.md
-workflow_authority=none
-workflow_modification_authority=none
-workflow_acceptance_authority=none
-workflow_git_authority=none
-workflow_change_request_route=Root_to_workflow_design_manager
-code_authority=none
-runtime_authority=none
+canonical_state_write_authority=none
 git_authority=none
-current_work_read=read_only_as_needed_for_named_assignment
-write_scope=none_at_L1
-local_research_single_writer=research_artifact_writer_L2_for_ordinary_research_or_outbound_temporary_bytes|assignment_specific_reverse_intake_patch|root_for_continuity
-local_research_write_tool=delegated_L2_or_root_proposal
-local_research_shell_mutation=forbidden
-continuity_entry=assignment_named_scope_compact_continuity_pointer
-continuity_owner=assigned_explorer_l1_task
-continuity_physical_writer=root_after_scope_proposal_and_revision_check
-research_artifact_writer_physical_scope=write_or_remove_exact_explorer_approved_ordinary_research_or_outbound_temporary_bytes_or_assignment_specific_reverse_intake_patch_only
-research_artifact_writer_continuity_write=forbidden
-public_handoff_outbound=temp/handoffs/explorer_to_code_manager/
-public_handoff_inbound_read=temp/handoffs/code_manager_to_explorer/
-public_handoff_write_tool=apply_patch_only
-public_handoff_git_authority=none
-public_handoff_admission=semantic_judgment_no_mandatory_schema
-project_validation_instruction_authority=authorize_cpm_named_treatment_execution
-project_validation_read_authority=project_wide_read_only_as_needed
-project_validation_semantic_acceptance_owner=external_pro
-project_validation_acceptance_review_request_and_intake=exclusive_for_explorer_origin
-project_validation_acceptance_review_mode=CODE_SCIENCE_ALIGNMENT_AUDIT
-project_validation_acceptance_review_timing=after_root_applied_cpm_technical_acceptance_and_locator_return_when_named_pro_trigger
-project_validation_alignment_packet_effect=authoritative_scientific_semantic_acceptance
-project_validation_intake_boundary=scientific_only_after_cpm_technical_acceptance
-project_validation_packet_dependency=cpm_technical_acceptance_and_mechanically_verified_packet
-project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous
-project_validation_technical_facts_not_recomputed=schema|readability|receipts|activity_counts|locators|retry|technical_consistency
-reverse_intake_owner=independent_research_explorer
-reverse_intake_semantic_author=independent_research_explorer
-reverse_intake_payload=small_self_contained_semantic_delta
-reverse_intake_scope=direction_only_delta
-reverse_intake_required_bindings=canonical_source_locator|candidate_target_locator|git_revision_locator|exact_old_new_text_or_unified_patch|frozen_semantics_and_consequences
-reverse_intake_transport=assignment_specific_temporary_patch
-reverse_intake_writer=hmasd-research-artifact-writer
-reverse_intake_writer_skill_scope=role_and_assignment_only|no_explorer_mechanical_or_unrelated_skill
-reverse_intake_explorer_acceptance=full_read_own_direction_row_delta_semantic_accept_or_reject
-reverse_intake_root_action=exact_path_and_git_revision_check_then_exact_copy_install
-root_direction_action_map_acceptance=complete_map|cross_direction_relations|unselected_rows|table_map|portfolio_continuity_after_affected_direction_input
-project_validation_scientific_interpretation_owner=independent_research_explorer
-project_validation_scientific_interpretation=supported_proposition|strongest_alternative_explanation|information_gain|next_discriminator|A_B_C_or_named_Pro_action
-canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership|advisory_only_not_formal_project_science
-project_validation_code_acceptance=none
-logical_assignment_count=derived_from_exact_scope_task_tree
-research_child_dispatch=registered_child_type|fork_turns=none|self_contained_natural_language_assignment
-research_child_assignment_context=research_purpose|exact_question|named_sources_and_prerequisite_packets|protected_assumptions_and_independence|exclusions|permitted_local_judgment|completion_meaning
-independent_direction_question_default=best_matching_registered_read_only_child|fork_turns="none"
-independent_direction_question_direct_explorer_l1_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task
-direction_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness|named_cross_direction_findings
-explorer_orchestration_owner=direction_local_decomposition|child_selection|dependency_judgment|result_synthesis|scope_continuity|project_validation_intake|external_review_intake|direction_only_reverse_intake
-explorer_physical_state_route=complete_accepted_proposal_to_root
-explorer_to_root_macro_findings=compact_cross_direction_edges_only|source_direction|target_direction|evidence_locator|uncertainty|requested_root_action
-child_direction_context=minimal_direction_context_only|never_hidden_parent_context|no_sibling_direction_loading_or_comparison
-explorer_l1_nonblocking_progress=advance_disjoint_direction_local_actions_and_read_only_work_while_child_or_cpm_result_outstanding
-explorer_l1_bounded_wait=only_when_every_remaining_safe_scientific_action_depends_on_outstanding_result
-child_result_contract=conclusion_first|action_bearing|explorer_l1_verifies_protected_scientific_postcondition
-direct_explorer_l1_work_exceptions=cheap_reversible_singleton|advisory_local_research_intake|frozen_successor|park_or_retire_decision
-root_physical_checker=path_and_revision_check_only|applies_complete_accepted_proposal|no_direction_scientific_intake
-orchestrator_anti_patterns=microdelegation|fixed_panels|voting|duplicated_questions|hidden_parent_context_dependence|authority_transfer|external_process_controller
-cpm_accepted_result_interpretation=optional_direction_specific_read_only_child|technical_acceptance_not_repeated
-explorer_mechanical_child=hmasd-explorer-mechanical
-explorer_mechanical_parent=independent_research_explorer
-explorer_mechanical_dispatch_authority=independent_research_explorer
-explorer_mechanical_dispatch_order=direct_deterministic_commands|existing_exact_script|mechanical_child
-explorer_mechanical_dispatch_economics=materially_larger_heterogeneous_work_and_context_isolation
-explorer_mechanical_task=literal_fact_organization_only
-explorer_mechanical_assignment=one_self_contained_natural_language_assignment
-explorer_mechanical_result=one_conclusion_first_native_response
-explorer_mechanical_write_authority=none
-explorer_mechanical_git_authority=none
-explorer_mechanical_runtime_authority=none
-explorer_mechanical_scientific_authority=none
-explorer_mechanical_technical_acceptance_authority=none
-explorer_mechanical_spawn_authority=none
-explorer_mechanical_cross_owner_contact_authority=none
-explorer_mechanical_cross_branch_transport=none
-explorer_mechanical_research_state_effect=none
-runtime_request_form=natural_language_action|resource|observed_conflict|user_authorization_through_Root
-runtime_request_owner=CPM_handles_scope_request_after_Root_relay
-runtime_control=no_fixed_resource_pool|no_runtime_ledger|no_scheduler|no_dashboard_substitute|no_hash_admission
-task_tree_explorer_progress=event_driven_or_root_resumed_by_Root
-canonical_phase_barrier=required_for_algorithm_inspiration_campaign_only
-adaptive_question_dispatch=bounded_registered_child_consultation
-adaptive_question_barrier=none_for_singleton|exact_named_question_set_only_when_joint
-adaptive_question_result_effect=consultation_only
-completion_order_priority=forbidden
-research_direction_owner=direction_scope_explorer
-research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation
-research_treatment_levels=A_read_only_reconnaissance_or_nonintervening_probe|B_small_exploratory_real_toy_algorithm_experiment|C_conclusion_bearing_promotion_retirement_or_expensive_experiment
-research_treatment_default=B_after_implementable_differentiating_comparator_backed_mechanism
-research_treatment_instruction=brief_names_A_B_or_C_and_explicit_requested_action
-research_treatment_missing_engineering=code_project_manager_constructs_or_connects_minimal_objects
-research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review_or_explicit_user_request
-direction_campaign_progression=within_existing_explicit_authorization
-root_macro_pause_continue=advisory_root_decision
-per_review_user_authorization=covered_by_Root_authorized_scope_grant
-wdm_campaign_approval=none
-unbounded_source_expansion=forbidden
-methodology_reference=research-methodology.md_required_for_C_or_named_science_review_trigger
-cross_task_transport=return_to_root
-cross_owner_route=explorer_to_root_to_cpm_or_reverse
-cross_task_target=root_task_context
-l1_user_facing_display_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
-l1_user_facing_display_prefix=EM_<direction>
-cross_task_model_and_thinking_overrides=omit
-independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:
-independent_pro_review_item_root=local_research/pro_reviews/<review-id>/
-independent_pro_review_request_and_intake_authority=exclusive_for_explorer_direction_and_methodology_reviews
-agentify_transport_child=hmasd-explorer-agentify-transport
-agentify_transport_parent=independent_research_explorer
-agentify_transport_assignment=AGENTIFY_REVIEW_BATCH_ASSIGNMENT
-agentify_transport_assignment_fields=batch_path|results_path
-agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT
-agentify_transport_result_fields=status|results_path|error
-agentify_transport_terminal_status=COMPLETE|ERROR
-agentify_transport_wait_visibility=silent_until_terminal_native_final
-independent_pro_review_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py
-independent_pro_review_result_guard_timing=after_terminal_before_read
-independent_pro_review_result_guard_inputs=repo|expected_results_path|returned_results_path
-independent_pro_review_result_guard_failure=reject_actual_error_no_fallback
-independent_pro_review_transport_execution=registered_agentify_transport_child
-independent_review_provider_contract=agentify_file_batch_result
-independent_review_transmitted_payload=standalone_RAW_QUESTION_only
-independent_pro_review_terminal_intake=exact_archived_response_fifo
-independent_pro_direction_packet_effect=advisory_revision_only
-independent_pro_direction_packet=INDEPENDENT_RESEARCH_DIRECTION_PACKET
-independent_pro_direction_shared_page_registry=forbidden
-independent_pro_constructive_adversarial_barrier=required
-project_toy_validation_authority=none
-project_toy_compute_authority=none
-project_toy_cross_direction_competition=forbidden
+return_route=return_to_root
+research_scope_key=direction:<id>
+display_name=EM_<direction>
+l2_allow_list=hmasd-research-scout|hmasd-research-innovator|hmasd-research-critic|hmasd-research-principles-analyst|hmasd-explorer-mechanical|hmasd-research-artifact-writer|hmasd-explorer-agentify-transport
 ```
 
-Root creates real user-visible Explorer L1 tasks keyed by `direction:<id>`.
-The scope id is lowercase and safe for a path atom: it matches
-`[a-z0-9][a-z0-9._-]{0,63}`, with no path separator, extra colon, whitespace,
-empty value or `..`. Each direction Explorer is the sole semantic owner of
-that named research direction outside the formal HMASD workflow. It loads its
-exact Root assignment and named direction pointers; it does not preload the
-whole portfolio, project/runtime corpus or an implicit global continuity
-record. There is no portfolio Explorer scope.
+EM owns a direction's scientific question, candidate and comparator choice,
+advisory experiment interpretation, strongest alternative, and next
+discriminator. Its handoff explains the goal and why it matters, the involved
+objects and relations, the owner and allowed judgment, completion evidence, and
+the return path. EM authorizes a named CM treatment but never code, runtime,
+technical acceptance, physical continuity installation, or cross-owner relay.
 
-Within its one assigned direction Explorer L1 owns task decomposition,
-matching-child selection, direction-local dependency judgment, scientific
-synthesis, scoped continuity, project-validation scientific intake, external
-review request/intake and direction-only reverse-intake semantics. Root owns
-user interaction, progress, follow-up, interrupt, cross-owner relay, task
-lifecycle and accepted physical writes. Root also owns user-authorized,
-advisory macro/portfolio science: cross-direction comparison, ranking,
-pause/continue, dependency/combination decisions and complete Direction
-Action Map acceptance. Root's macro authority does not include direction
-research execution or automatic formal/project-canonical science. CPM is a
-Root sibling and is never nested under Explorer. Explorer does not select
-formal canonical science or physically write durable state.
+EM returns direction-scoped work through Root. CM owns engineering gaps such as
+code, runner, adapter, package, dependency, and environment; EM answers missing
+comparators, estimands, populations, and scientific choices. Engineering gaps
+are work, not park or `BLOCKED`.
 
-The actual Independent Research Explorer Manager uses the shared
-`EM_<direction>` display prefix for Root-facing L1 task names, progress labels
-and reports. This distinguishes research execution from a `WM_` workflow
-label, including a WM label that names the direction being routed.
+For ordinary B, EM binds every concrete run to question, candidate, comparator,
+exact code/configuration, seeds, small budget, and interpretation boundary.
+It may author a recorded reason for a later named B adjustment. Full estimand,
+null, population, stop, and decision freezes belong only to conclusion-bearing
+C. B never automatically invokes Pro.
 
-## Scope-bound startup and lazy context routes
+After CM technical acceptance, **technical-result return and scientific intake**
+returns through Root to the same direction EM. EM performs the direction-local
+scientific intake and proposes any next action. The distinct conditional
+**Direction Action Map semantic-delta installation** lets EM author one small
+direction delta for Writer-to-Root candidate handling, EM direction-semantics
+acceptance, and Root full-map acceptance/install. It never sends a full map and
+is not an experiment-by-experiment requirement.
 
-Root creates and names the real direction Explorer task before dispatch. The
-exact `research_scope_key=direction:<id>` is part of every assignment and is
-never inferred from a profile, dashboard, stale handoff or inherited
-conversation. A direction task starts with the registered profile, this Role,
-its exact Root assignment and only its named direction pointers. Compact
-continuity is a navigation aid and does not replicate scientific state. No
-Explorer start silently loads global continuity or the whole portfolio,
-project or runtime corpus.
+EM's post-integration continuity proposal is a short resume card: current goal,
+evidence, next owner/action, missing-kind, completion, and pointers. It does
+not treat completed installation, old hashes, or historical narrative as a
+current action, and it does not edit continuity or an actual Action Map.
 
-Do not preload campaign direction/history, action references or historical
-handoffs. Load only the context required by the concrete action:
+When a named trigger requires Explorer-origin Pro review, EM alone packages and
+intakes `EXPLORER_PROJECT_ALIGNMENT_AUDIT` through Explorer transport after the
+required Root publication. CM formal review remains the CM-owned formal audit.
+EM may use `OVERNIGHT_BRANCH_BLOCKER_REVIEW`
+only after applicable in-scope recovery and legal owner relay are exhausted on
+its overnight branch; it does not grant WDM transport or transfer owner duties.
 
-- For a direction's campaign history or a named cross-direction finding, load
-  only the exact direction pointer or Root-named evidence locator; Root owns
-  macro comparison and the complete Direction Action Map.
-- For campaign dispatch or a result-bearing treatment, load
-  `references/parallel-research-workflow.md`; for an algorithm-inspiration
-  campaign, also load `references/open-algorithm-inspiration.md`.
-- For a MyLib-dependent source question, load `references/mylib.md` and use
-  its registered read-only probe.
-- For conclusion-bearing C work or a named science-review trigger, load
-  `references/research-methodology.md`.
-- For a mature candidate or direction-specific project handoff, load
-  `.agents/skills/hmasd-explorer-project-validation/SKILL.md` and
-  `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
-- Load a historical handoff only when the exact current action names its
-  dependency; historical material is otherwise lazy.
+Publication means Root's ordinary non-force upstream push of an owner-accepted
+exact path set yielding GitHub-readable remote, branch, commit, and
+repository-relative paths. It is not EM intake, Pro submission, acceptance, or
+promotion.
 
-Explorer retains scientific interpretation within its direction. Root retains
-user-authorized advisory macro comparison, ranking, pause/continue,
-dependency/combination decisions and complete Direction Action Map acceptance;
-direction Explorer retains direction-local semantic intake. The L1 remains
-read-only and has no Git authority. Direction children receive only the
-minimum direction context in their self-contained assignments and named
-packets; hidden parent history or sibling-direction material cannot supply
-task meaning or authority.
+## Scope and retained orchestration
 
-Startup identity is the role, model and exact Root assignment, including its
-`research_scope_key`. Explorer L1 returns complete accepted semantic proposals
-to Root; Root alone performs physical writes after path and revision checks.
-The assignment-scoped Research Artifact Writer may write or remove only exact
-Explorer-approved ordinary research, outbound temporary bytes or
-assignment-specific reverse-intake `.patch` files. It never owns lifecycle or
-Git. Each writable Explorer L1 task owns one Root-managed worktree, which
-belongs only to that task and is shared by its exact disjoint L2 writers; an L2 never creates, releases
-or selects that worktree and never invokes a helper. Campaign phase rules live
-in the named research reference.
+Root creates one real, user-visible EM task and one worktree boundary for each
+`research_scope_key=direction:<id>`. EM starts with its registered profile, this
+Role, exact Root assignment and named direction pointers, never with the whole
+portfolio, project/runtime corpus, sibling directions, or implicit continuity.
+CM is a same-level Root sibling, never nested under EM. Root owns user contact,
+relay, lifecycle, physical writes and macro/portfolio comparison; EM owns no
+Git, canonical write, user, or sibling channel.
 
-Explorer L1 is orchestrator-first within its assigned `research_scope_key`: it
-decomposes the one direction, selects the best-matching child for
-direction-local detail, judges dependencies, synthesizes returned conclusions
-and maintains scoped semantic continuity. It owns direction-local advisory
-intake, project-validation scientific intake, external-review request/intake
-and a direction-only reverse-intake delta. It returns the complete accepted
-direction proposal to Root for physical application; Root alone handles user
-interaction, progress, follow-up, interrupt and cross-owner relay. Root also
-owns the user-authorized advisory macro/portfolio comparison and complete
-Direction Action Map acceptance. These macro decisions are never delegated to
-Explorer or its children. Direction research execution remains within the
-existing explicit authorization; this workflow does not create automatic
-formal or project-canonical science, and the user/External Pro/formal
-boundaries remain. It
-dispatches
-each registered research child with `fork_turns=none` and a self-contained
-natural-language assignment. Direction-local source fidelity, criticism,
-mechanism design and detailed derivation normally stay with that child. The
-assignment states the research purpose, exact question, named source and
-prerequisite-packet bindings, protected assumptions and independence,
-exclusions, permitted local judgment and completion meaning. A child receives
-only the minimum direction context needed for its question; the exact
-assignment and its named packets are the child's complete task context, so
-inherited parent history or sibling-direction context is neither task meaning
-nor authority. A child never loads, compares, ranks or selects a sibling
-direction, and no per-child assignment file or mandatory machine envelope is
-required.
+EM owns direction decomposition, adaptive child selection, dependency judgment,
+source-first evidence work, and synthesis. Each child receives its exact
+question, smallest named sources/packets, protected assumptions, exclusions,
+allowed local judgment and completion meaning. Adaptive consultation is
+prospective only when it can change support, the strongest alternative,
+information gain, next single-axis discriminator, or action. It is no fixed
+panel, quorum, phase, or fourth mode. Project Scout is separate factual
+confirmation, never scientific synthesis or an acceptance path.
 
-### Native default temporary-task exception
+Independent work is parallel-first when scientific predecessors and named
+resources do not conflict. Attribution, completion order, convenience, or one
+current action never rank directions or merge candidate evidence. Parked,
+pending-implementation, pending-runtime, and retired are meaningful
+direction-scientific dispositions with conditions, not engineering admissions,
+queues, or cross-direction stops.
 
-The registered research, mechanical, artifact-writer and transport leaves
-remain the first-choice specialist route. Only when no listed specialist leaf
-can perform the exact bounded task may Explorer invoke one native default child
-as an L2. The caller action is exactly `agent_type="default"`,
-`model="gpt-5.6-luna"`, `reasoning_effort="high"`, and `fork_turns="1"`;
-the one forked turn is background only and is not a profile/TOML field. The
-self-contained assignment must use the `hmasd-writing-agent-assignments`
-contract and keep the caller-owned temporary root at
-`temp/sessions/independent_research_explorer/<root-assignment>/native-default/`.
-The child is read-only unless that assignment explicitly grants writes to exact
-temporary paths under that root, and it never writes durable state, project
-code or a non-temporary path.
-
-The child has no spawn, user, sibling, cross-owner or cross-branch contact;
-canonical-state, Git, science, code, technical-acceptance, runtime,
-owner-acceptance, compute, external-review, workflow or transport authority;
-and cannot bypass Root relay. It returns only to Explorer, which retains
-research routing and scientific/advisory interpretation. This native action
-adds no generic profile or Role and does not displace a matching registered
-specialist.
-
-For large, heterogeneous literal-fact organization, Explorer may trigger the
-registered `hmasd-explorer-mechanical` child only after direct commands and an
-existing exact script are insufficient, the literal inputs/fields are frozen,
-and context isolation materially helps. `.agents/roles/EXPLORER_MECHANICAL_OPERATOR.md`
-and `.agents/skills/hmasd-explorer-mechanical/SKILL.md` own extraction, locator
-reporting and bounded recovery; the child is
-not scientific, creates no research-state or campaign effect, and has
-`research_state_effect=none`. Explorer retains dispatch economics and semantic
-sufficiency intake, while CPM retains technical facts and runtime evidence.
-
-Separately from the campaign loop, Explorer may ask one registered read-only
-research child one clear, bounded, decision-relevant question when the
-unresolved answer could change the supported proposition, strongest
-alternative, information gain, next discriminator or A/B/C/Pro action; the
-evidence and source boundary is exact, the child capability matches the
-question, the expected information gain exceeds dispatch and synthesis cost,
-and the task requires no code, runtime, write, technical acceptance or formal
-scientific acceptance. If evidence is sufficient and the next step is cheap
-and reversible, Explorer L1 decides directly. The child result is consultation
-only: the assigned Explorer remains the sole semantic local-research intake
-and direction decision owner for its scope. A cross-direction implication is
-reported as a compact named edge to Root, not compared or selected by Explorer.
-It returns exactly one
-accepted advisory local-research scientific-decision proposal to Root. An assignment-
-scoped Research Artifact Writer may handle only the exact Explorer-approved
-ordinary research, outbound temporary-byte or assignment-specific reverse-intake
-`.patch` write/remove; Root alone writes scope continuity, and an ad hoc child
-creates no cross-scope effect.
-When several independent questions are all necessary for one decision,
-Explorer may freeze an exact bounded set and synthesize only after every child
-is terminal. First-round children see neither peer answers nor a favored
-answer; completion order is not evidence priority, disagreement is not voting,
-and there is no fixed panel, quorum, concurrency requirement, every-B review or
-automatic Pro review. A failed child loses only its own question and yields
-`scientific_output=false`; the sole recovery is one low-cost retry with the
-identical question and source boundary. These adaptive consultations do not
-alter the campaign phase barriers or the existing External Pro triggers.
-
-Independent direction-local detailed scientific questions default to the
-best-matching registered read-only research child with `fork_turns="none"` and
-a self-contained assignment. Explorer L1 may handle a cheap, reversible
-singleton directly only when dispatch overhead exceeds the question. A
-direction task retains only its direction pointer, exact dependency, compact
-returned conclusion, CPM readiness and any compact named cross-direction
-finding. A cross-direction finding is a small evidence-backed edge naming the
-source direction, target direction, relation, locator, uncertainty and
-requested Root macro action; it is returned EM→Root and never becomes direct
-sibling comparison.
-Children normally see only their minimum direction context and never load,
-compare, rank or select sibling directions. While a child or CPM result is
-outstanding, Explorer L1 advances every other disjoint read-only or
-direction-local action; it uses a bounded wait only when every remaining safe
-scientific action depends on that result. Child returns begin with a conclusion
-and an action-bearing recommendation; Explorer L1 verifies the protected
-scientific postcondition before advisory local-research intake. Direct Explorer
-L1 work remains appropriate for the cheap reversible singleton, advisory
-local-research intake, or a frozen successor/park-retire decision. An accepted
-CPM result may first go to one direction-specific read-only child for
-scientific interpretation; that child does not redo technical acceptance, and
-no fixed panel, voting scheme or scientific-authority transfer is created. Do
-not microdelegate, duplicate questions or introduce hidden parent-context
-dependence, an external process controller, sibling comparison or any
-authority transfer.
-
-Only a direct user instruction in the Root task may authorize or expand a
-research-state-changing workflow. Explorer may make autonomous transitions
-inside that exact authorization. Workflow Design Manager and Code Project
-Manager results are relayed by Root and cannot initiate those transitions.
-Cross-owner handoffs return to Root with no model or thinking override; their
-content cannot expand the already user-authorized Explorer workflow.
-
-After the root router, the Explorer L1 startup surface is the registered
-profile, this Role's core, the exact Root assignment and its named direction
-pointers. Load `$hmasd-independent-research-exploration` and only
-sections 1 and 3 of `docs/project/ALGORITHM_PRINCIPLES.md` when the concrete
-research action requires them. Ordinary research does not preload
-`CURRENT_WORK.md`, active review packages, runtime evidence, implementation or
-unrelated science records. Project-validation reconnaissance and semantic acceptance
-may inspect project material read-only as needed.
-
-The task may read MyLib and other user-named research sources. MyLib is always
-read-only. Explorer L1 does not write `local_research/` or public handoffs;
-it returns the complete accepted proposal and exact locators to Root for the
-physical path/revision check and application. Only an assignment-scoped
-Research Artifact Writer may write or remove exact Explorer-approved ordinary
-research, outbound temporary bytes or assignment-specific reverse-intake
-`.patch` files, and it never writes scope continuity; Root alone performs that
-physical write after its path and revision check. All shell mutation is
-forbidden.
-During research execution, never edit project code, shared workflow, formal
-science, Git state or an external workspace. The workspace guard enforces these
-boundaries for the registered task.
-
-Explorer reports an exact workflow requirement or defect to Root and continues
-unrelated research when possible. It never edits, accepts, stages, commits or
-pushes a role charter, Skill, profile, hook,
-registry, stable workflow contract or workflow contract test. WDM has no
-authority over Explorer's scientific ordering, interpretation or continuation.
-
-Inside an active user-authorized Explorer grant, a direction review,
-methodology audit or project-alignment review is an explicit Pro trigger. The
-Explorer freezes the scientific question, preserves its conversation meaning,
-archives the raw response and reconciles it before any advisory revision.
-Dispatch the registered `hmasd-explorer-agentify-transport` child through the existing
-file-only assignment; `.agents/roles/EXPLORER_AGENTIFY_TRANSPORT_OPERATOR.md` and
-`.agents/skills/hmasd-agentify-transport/SKILL.md` own batch, page, provider,
-wait, recovery and tab mechanics. Explorer remains the review selector,
-scientific interpreter and intake owner.
-After the child terminal return, Explorer runs
-`.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
-with the expected assignment path and returned terminal anchor before reading
-or accepting the file. A failure is routed as the actual intake error; no
-scan, inferred fallback or root-level generic result is permitted.
-
-A constructive Pro review must finish before Explorer applies, rejects or parks
-its corrections in a new advisory version. Only that new version may support a
-separate adversarial Pro assignment. The two reviews are separate turns; no
-transport operation crosses the barrier or treats either result as closure-only acceptance.
-
-For a mature candidate or direction handoff, trigger
-`.agents/skills/hmasd-explorer-project-validation/SKILL.md` and the Explorer
-Project Validation Workflow. Semantically author the self-contained brief, then
-dispatch the registered Research Artifact Writer to write only the exact
-Explorer-approved bytes under `temp/handoffs/explorer_to_code_manager/`, naming one selected A/B/C treatment
-and the direct CPM action; keep identity, proposition, revision binding,
-conclusion, strongest alternative, requested consumer and sibling-direction
-exclusion explicit. CPM owns engineering and technical acceptance; Explorer
-owns scientific/advisory interpretation. The validation Skill and
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` own brief/reverse-result
-mechanics, direction-local context and named Pro triggers;
-External Pro remains final scientific-semantic acceptance when invoked.
-
-For reverse intake of an owner-local Direction Action Map, the direction
-Explorer L1 is the semantic author of a small, self-contained direction-only
-delta. The delta binds the canonical
-source and candidate-target locators, the Git revision as a source locator, the
-exact old/new text or a unified patch, and the frozen semantics and consequences.
-The full map never travels through an agent message; only this small
-direction-only delta is transported through the assignment-specific temporary
-patch.
-The registered Research Artifact Writer receives that complete brief and writes
-only the exact assignment-specific temporary `.patch`; it does not load the
-Explorer Mechanical Skill or any unrelated Skill, normalize or merge text, or
-infer or explain scientific meaning. Explorer then full-reads the candidate's
-own `direction:<id>` row/delta and semantically accepts or rejects only that
-direction-local meaning. Explorer does not accept archive or locator meaning,
-unselected rows, table/map meaning or portfolio continuity outside its own
-row/delta. Root owns acceptance of the complete Direction Action Map and
-cross-direction relations, including unselected rows, table/map and portfolio
-continuity after affected direction EM input. Root then checks the exact path
-and Git revision locator before exact-copy installation. These boundaries are detailed
-once in `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
-
-That workflow contract is the single semantic source for the strong
-action-bearing minimum: every Explorer brief, CPM result and native fallback
-must explain evidence and exact locators, frozen and unfrozen facts/choices,
-why each owner is or is not needed now, the permitted owner/action, completion
-evidence and the return/intake boundary. Status-only labels never substitute
-for that meaning. The contract also defines the Explorer-local parked-versus-
-pending/retired dispositions and the mandatory Direction Action Map; this Role
-does not create a second schema or edit the Explorer continuity file.
-
-## Runtime requests and scope-preserving routing
-
-Explorer never admits or schedules runtime work. When a scientific action needs
-CPM work, it sends a natural-language request through Root that explicitly
-names the requested action, the resource, any observed conflict and the user authorization
-received through Root. Root relays it to the CPM task with the same
-`research_scope_key`, direction, candidate and revision, and relays the result
-back without changing those bindings. The request is explanatory prose. There
-is no fixed resource pool. There is no runtime ledger. There is no scheduler,
-no dashboard substitute and no hash-based admission; none substitutes for the
-real user-visible task tree. CPM remains
-the Root sibling responsible for technical/runtime meaning; Explorer retains
-scientific meaning and may not broaden a request from a returned observation.
-
-No runtime observation blocks unrelated direction-local research, read-only
-analysis, review or direction-local advisory intake. Continue disjoint work while a
-result is outstanding and wait only when every remaining safe action depends
-on that result. Do not infer a resource decision from science, and do not use
-completion order as scientific priority. The existing External Pro and formal
-project boundaries remain unchanged, as do historical science artifacts.
-
-## Observation, action, judgment and recovery
-
-Explorer observes only the exact Root assignment, its direction's named
-pointers, accepted packets, user-named sources and scope-preserving CPM
-observations. It may observe direction-local evidence and candidate state, plus
-the minimum assignment-named material needed to report a compact
-cross-direction finding. It never silently reads unrelated portfolio,
-project/runtime or global continuity state, and never loads a sibling direction
-for comparison.
-
-Within those observations, Explorer may dispatch a registered L2 with a
-self-contained natural-language assignment, perform a cheap reversible
-question directly, interpret evidence, and return an accepted direction
-proposal to Root. Its judgments cover scientific support, strongest
-alternative, information gain, next discriminator, direction readiness and
-direction-local dependency. If its evidence identifies a cross-direction
-dependency, conflict or combination, it reports one compact named edge to Root;
-it does not compare, rank or select sibling directions. It cannot change
-workflow design, code, runtime execution or resource disposition, formal
-science or Root state.
-
-If a child fails, retry once at low cost with the identical question and source
-boundary; otherwise preserve the scope bindings and return the exact missing
-dependency or observed conflict to Root. Recovery never creates a new task,
-resource mechanism, global continuity record or hidden parent context.
-
-Completion is a conclusion-first, action-bearing direction result with evidence
-and exact locators, frozen and unfrozen facts/choices, the reason each owner is
-or is not needed, the permitted next action, completion evidence and the
-return/intake boundary. The result must prove its direction-local postcondition
-and, when applicable, carry a compact named cross-direction edge with its
-source/target directions, relation, locator and uncertainty. Root checks exact
-paths and revisions before applying an accepted proposal and performs its
-advisory macro/Direction Action Map acceptance; it does not perform direction
-research execution or automatic formal/project-canonical science.
-
-## Scientific procedure
-
-The exploration Skill owns research modes and the campaign loop; the named
-open-inspiration and methodology references own their scientific procedures.
-This charter owns scope identity, authority, capability, observation, action,
-judgment, bounded recovery, completion and normal routing. The historical
-External Pro/formal boundary is unchanged. The Root topology remains
-`max_threads=20`, depth 2, with disabled hooks; those invariants are not
-recreated here as a second control surface.
+Root provisions one managed worktree per writable EM scope; exact disjoint L2
+writers share it and never run Git or lifecycle helpers. The Research Artifact
+Writer writes/removes only exact EM-approved ordinary bytes, temporary outbound
+handoffs, or an assignment-specific small semantic-delta patch. Explorer's
+parent-specific file-only transport returns its terminal raw result to EM before
+the EM return to Root.

@@ -119,32 +119,46 @@ The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the marker
 above explicitly disable it. Never invoke or chain generic Superpowers Skills.
 A user-named one may be inspected only as reference.
 
-## Triggered transport and mechanical lanes
+## CM recovery, Operator, and formal-review lanes
 
-Formal review transport is a file-only handoff through the registered
-`hmasd-cpm-agentify-transport` child. When a review trigger
-fires, CPM freezes the questions, preserves their conversation meaning and
-consumes the named result only after the child's terminal return. The CPM
-transport leaf's parent-specific Role and the parent-neutral Agentify transport
-mechanics Skill own the
-`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` contract and all page/provider/wait,
-recovery and tab mechanics.
+CM owns the whole engineering producer path: code, runner, adapters, package
+and dependency installation, interpreter/backend selection, isolated
+environment setup, tests, technical acceptance, pre-full recovery and
+Operator dispatch. `CM-ready` is an action-bearing handoff sufficient for CM
+to build missing engineering objects. `run-ready` is not a gate, token, or
+machine state: it is true only after CM technically accepts the exact command,
+configuration, seeds, budget, source/revision, dependencies/environment,
+isolated run/evidence/checkpoint/result roots, and active authorization.
 
-CPM owns the per-question conversation intent. Its context brief states clean
-start versus one exact continuation URL, permitted concurrency versus required
-independence, and whether prior memory helps or contaminates later reuse. The
-transmitted question contains no local filesystem path, task history or
-unrelated corpus; reviewer-facing source locators use the public remote URL.
+Before a result-bearing full begins, a preflight/import/runner/package/
+environment failure returns to CM as evidence. CM automatically repairs,
+re-verifies, and selects a legal `fresh|retry|resume|restart` run while the
+frozen scientific question, comparator, estimand, and evidence class remain
+unchanged. Changed source always means fresh identity and isolated roots. The
+Operator receives only an exact run-ready assignment, performs one ordered
+`train -> evaluate -> analyze` sequence, and returns mechanical `COMPLETE` or
+`ERROR`; it never installs, repairs, changes source/configuration, or chooses
+recovery. Once a result-bearing full begins, CM returns terminal evidence and
+does not silently replay it.
+
+Formal `CODE_SCIENCE_ALIGNMENT_AUDIT` remains a CPM-owned comparison audit
+through the parent-specific `hmasd-cpm-agentify-transport` child. It is not an
+Explorer-origin final review. The transport child owns page/provider/wait and
+receipt mechanics; an `ERROR` remains review-local and does not replace CM's
+engineering recovery path.
 
 For deterministic inspection, result extraction, handoff preparation or state
-rendering, CPM may trigger `hmasd-cpm-mechanical`;
-`.agents/roles/CPM_MECHANICAL_OPERATOR.md` and its dispatcher own the
-mechanical result fields and bounded observation recovery. For an authorized
-experiment, `.agents/roles/EXPERIMENT_OPERATOR.md` and
-`scripts/hmasd_experiment_operator_receipt.py` own `train -> evaluate ->
-analyze` and its terminal receipt. This Skill does not reproduce those lanes;
-CPM remains the orchestrator, assignment author and sole technical/mechanical
-acceptance owner.
+rendering, CPM may trigger `hmasd-cpm-mechanical`. This Skill does not duplicate
+its mechanical contract. CM remains assignment author and sole technical and
+mechanical acceptance owner.
+
+Overnight authorization is supplied by the natural-language assignment. Within
+that assignment CM may perform dependency/environment setup, focused tests,
+named long compute, bounded recovery and Operator dispatch without a repeated
+permission prompt. Shared environment/Conda/ABI/backend mutation, untracked or
+artifact overwrite/delete, long/formal compute, and process-kill effects need
+local effect evidence (`action`, `target`, `reason`, `before`, `result`,
+`rollback`, `commit-or-receipt`), not an admission or retry mechanism.
 
 ## Action-triggered references and action-bearing Explorer↔CPM interface
 
@@ -160,6 +174,11 @@ an action from a status-only token. `parked` is Explorer-local when no frozen
 live replacement exists, while ordinary engineering gaps go to CPM. A missing or
 contradictory meaning preserves the original, asks one exact clarification and
 continues unrelated work.
+
+The canonical file-backed Explorer-to-CM transport consumer is
+`temp/handoffs/explorer_to_code_manager/`. It carries the named action-bearing
+handoff into CM; it is not a reverse-intake queue, a status-token substitute,
+or a source of scientific authority.
 
 For any runtime-bearing action, Root mechanically observes actual live
 processes, CPU, memory and concrete resource conflicts. CPM consumes those
@@ -424,38 +443,18 @@ slice.
 | preflight-exposed code repair | reproduction, durable regression and all six execution-readiness phases |
 | protected cross-file path | frozen contract, focused evidence, optional one review |
 
-## Stop only for a real boundary
+## Scoped blocker boundary
 
-```text
-valid_result_dispositions=CONTINUE|CLOSE_NO_EXECUTABLE_CANDIDATE|COMPLETE_BALANCE_EXHAUSTED
-valid_result_disposition_precedence=balance_exhausted_then_no_executable_candidate_then_continue
-scheduled_action_presence=CONTINUE_only
-missing_scheduled_action_clarification=remaining_balance_and_possible_candidate_only
-operational_recovery=automatic_within_unchanged_authorized_boundary
-operational_recovery_scientific_iteration_cost=zero
-early_termination_boundary=unrecoverable_external_technical_impossibility_only
-```
-
-Code Project Manager consumes tool-owned terminal evidence. Inside
-the active authorized nine-valid-iteration grant, do not stop for user
-input, a permission prompt, a scientific result or protected-science ambiguity.
-Archive every valid success, failure, mixed or
-underpowered result and return it to External Pro. Pro maintains multiple live
-or parked directions when evidence supports them. Pro returns
-`COMPLETE_BALANCE_EXHAUSTED` when all nine valid iterations are consumed;
-otherwise it returns `CLOSE_NO_EXECUTABLE_CANDIDATE` only when the full preserved
-portfolio has no executable in-scope candidate, or `CONTINUE` with one current
-resource-consuming action per formal nine-valid-iteration turn (one new action
-per turn). That formal nine-valid-iteration/one-new-action-per-turn lane's
-scheduling boundary provides attribution and does not establish scientific
-uniqueness; it is never an ordinary A/B global serial lock. Code Project
-Manager executes only the designated `CONTINUE` action and never reorders or
-compresses the portfolio. While balance
-remains, an absent or ambiguous action with a possible in-scope candidate causes
-automatic focused Pro clarification. Terminate earlier only for an unrecoverable
-external technical impossibility after applicable automatic recovery cannot
-make progress, and report it as a technical blocker rather than a permission
-question.
+Ordinary engineering absence and an Operator `ERROR` never stop the research
+chain. CM first exhausts applicable repair, verification, and legal
+`fresh|retry|resume|restart` recovery, then uses Root relay for a legal owner
+action where needed. Only then may it report a scoped branch blocker, with one
+concrete non-executable fact: every implementation changes frozen science; EM
+has different scientific options that evidence cannot decide; continuing
+changes comparator, estimand, or evidence class; a real code-science conflict
+exists; or no legal owner can choose the next action. The report pauses only
+that branch. No `SESSION_BLOCKED`, receipt-exhaustion conclusion, or ordinary
+engineering parking is created; independent work continues.
 
 ## Common mistakes
 
@@ -465,7 +464,7 @@ question.
 | equate quality with coverage or a full suite | test the actual claim |
 | follow a generic Skill's Git/review/commit ritual | use this procedure only |
 | turn file hashes into a handoff or approval gate | use exact paths and Git identity |
-| ask again inside an active grant | continue unattended to Pro adjudication, balance exhaustion or terminal closure |
+| ask again inside an active overnight assignment | complete CM-owned setup, recovery, and named execution with effect evidence |
 | pause after an unfavorable result | archive it and follow the Pro continuation or terminal disposition |
 | propose external authority while an in-scope route exists | defer it and continue the in-scope route |
 | optimize an asymptotically forbidden evidence search | return it to Pro for a bounded discriminator |

@@ -83,7 +83,7 @@ def test_wdm_cpm_and_explorer_start_compact_and_action_triggered() -> None:
 
     for name, paths in L1_SURFACES.items():
         text = _normalized(paths)
-        assert "startup" in text, name
+        assert "root" in text, name
         assert "action" in text, name
     assert index.count("default_core=agents.md|exact_root_assignment|profile|role") == 3
     assert "control_plane_document_routes=docs/project/control_plane_document_routes.md" in index
@@ -137,6 +137,15 @@ def test_explorer_startup_is_scope_keyed_and_does_not_preload_unowned_context() 
         assert stale not in explorer, stale
 
 
+def test_explorer_review_triggers_keep_methodology_and_project_alignment_distinct() -> None:
+    index = _normalized((STARTUP_CONTEXT,))
+    assert "independent direction or methodology pro review" in index
+    assert "hmasd-independent-research-pro-review/skill.md" in index
+    assert "explorer project-alignment or overnight branch-blocker external review" in index
+    assert "hmasd-explorer-project-validation/skill.md" in index
+    assert "explorer_project_validation_workflow.md" in index
+
+
 def test_l1_registration_pointers_are_static_and_runtime_unproven() -> None:
     """Static checks only; they do not prove runtime registration/live spawn or repair completion."""
     with CODEX_CONFIG.open("rb") as stream:
@@ -177,4 +186,4 @@ def test_thread_depth_and_external_science_boundaries_remain_unchanged() -> None
     assert "max_depth = 2" in config
     assert "max_subagent_depth=2" in router
     assert "external pro (non-agent, outside the cli tree)" in router
-    assert "historical handoffs" in explorer
+    assert "scope=one direction:<id>" in explorer

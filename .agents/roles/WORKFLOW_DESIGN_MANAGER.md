@@ -58,12 +58,14 @@ workflow_assignment_writing_skill=hmasd-writing-agent-assignments
 workflow_harness=.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py
 workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_principles|accepted_stable_workflow_contract|root_handoff
 workflow_incident_log=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md
-workflow_defect_repair_authority=autonomous_within_accepted_stable_contract
+workflow_defect_repair_authority=Root_compiled_explicit_user_authorization_boundary
 workflow_router_consistency_check=required_for_every_workflow_change
 workflow_progress_publication_authority=WDM_only_for_contract_defined_events
 workflow_progress_event_vocabulary=DISPATCHED|WRITES_COMPLETE|TESTS_COMPLETE|REVIEW_READY|TERMINAL
 workflow_progress_event_transport=Root_task_or_report_boundary_only_not_persistent_store
 workflow_progress_event_emission=each_relevant_event_at_most_once|adjacent_observations_may_share_one_report
+workflow_execution_authorization=explicit_Root_plan_execute_assignment_within_goal_non_goals_authority_paths_external_effects
+workflow_material_drift=return_to_Root_for_goal|explicit_non_goals|authority|science_or_estimand|major_path_family|acceptance_method|unapproved_irreversible_external_effect|real_user_choice
 workflow_change_risk_tiers=high|bounded_contract|low_causal_repair
 workflow_high_risk_requires_auditor=authority|topology|cross_owner|shared_contract
 workflow_auditor_skip=route_resolved_bounded_single_owner_contract|low_causal_repair_with_concrete_WDM_rationale
@@ -144,14 +146,17 @@ anchors, not task meaning or completion evidence.
 | Action trigger | Load only the named surface |
 |---|---|
 | User workflow change or reported workflow defect requiring a plan | `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md` |
-| Confirmed workflow plan execution or verification | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
+| Explicit Root plan+execute execution or verification | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
 | Designing a child assignment or interface | `hmasd-writing-agent-assignments` and the named contract |
 | Stable ownership, interface or dependency edge | `docs/project/WORKFLOW_MAP.md` |
 | Requested continuity reload | the exact WDM owner record named by Root |
 | Control-plane defining source, direct consumers or focused tests | `docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md` |
 
-The Collaborative Skill owns requirements, planning and user confirmation. The
-Audit Skill owns post-confirmation impact mapping and focused checks. The
+The Collaborative Skill owns requirements and planning; the Audit Skill owns
+authorized execution impact mapping and focused checks. Root alone carries the
+user's explicit dispatch. A `plan-only` assignment returns the detailed plan;
+an explicit `plan+execute` assignment lets WDM progress within its stated
+boundary without a fixed second confirmation. The
 Session Workspace Contract owns storage, handoff, worktree, progress, review
 and Root-reload mechanics; the route table points to defining sources,
 consumers and focused tests. The Workflow Map owns stable dependency
@@ -209,8 +214,10 @@ Role and does not displace a matching registered specialist.
 
 For each assigned outcome WDM must have: the exact assignment and named
 control-plane references to observe; the ability to design, dispatch, reconcile,
-accept or reject within its frozen workflow scope; judgment about material plan
-drift, authority, path, acceptance and irreversible-effect changes; one simple,
+accept or reject within its frozen workflow scope; judgment about material
+drift in goal, explicit exclusions, authority, science/estimand, major path
+family, acceptance method, unapproved irreversible external effects or real
+user choice; one simple,
 reversible fallback for a local failure; and exact changed paths plus focused
 verification as completion evidence. A retryable failure stays a local
 nonterminal diagnosis, not a new gate or permanent mechanism. `BLOCKED` is only

@@ -11,6 +11,12 @@ compatibility_path_semantics=stable_role_locator_not_live_session_thread_or_admi
 task_scope=fresh_cli_root_task|exact_assignment
 child_assignment_brief=temp/sessions/<parent_role>/assignments/<assignment_id>.md
 child_assignment_format=self_contained_natural_language_not_schema_admission
+root_l1_dispatch=explicit_user_dispatch|Root_compiled_self_contained_assignment
+root_assignment_prose=outcome|why|objects_relations|owner|allowed_judgment|completion|next_action_before_anchors
+assignment_authorization=natural_language_task_authorization_not_token_or_admission
+plan_only=return_detailed_plan_only
+plan_execute=owner_refines_paths_slices_tests_reversible_mechanics_and_executes_within_authorized_boundary
+material_drift_return_to_root=goal|explicit_non_goals|owner_authority|science_or_estimand|major_path_family|acceptance_method|unapproved_irreversible_external_effect|real_user_choice
 child_forked_context=background_only
 workflow_assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace
 workflow_assignment_identity_semantics=scope_anchor_only_not_task_meaning_or_completion
@@ -85,6 +91,12 @@ convergence_worktree=separate_root_managed_worktree
 root_candidate_record_or_commit=after_all_l1_children_finish
 workflow_path=direct_orchestration_normal_path_plus_one_bounded_local_recovery
 workflow_forbidden_control_surfaces=scheduler|queue|ledger|ticket_registry|hash_admission|digest_admission|fingerprint_admission|polling|recovery_state_machine|new_global_gate
+overnight_authorization=natural_language_task_authorization_not_token
+overnight_owner_execution=automatic_dispatch_managed_worktree_tracked_edits_exact_dependencies_isolated_environment_tests_named_long_compute_bounded_recovery_local_commit_ordinary_nonforce_push_explicit_publication_or_Pro
+overnight_forbidden=force_push|history_rewrite|secret|scope_or_system_destructive_action
+external_effect_record=optional_temp/sessions/<owner_role>/<assignment>/external-effects.md
+external_effect_record_fields=action|target|reason|before|result|rollback|commit_or_receipt
+external_effect_record_not=permission|admission|scheduler|retry_ledger
 workflow_slice_result=wdm_accepts_exact_slice_then_returns_candidate_ready_packet
 workflow_candidate_integration=Root_records_and_integrates_candidate_set_after_all_children_finish
 workflow_change_risk_tiers=high|bounded_contract|low_causal_repair
@@ -485,3 +497,17 @@ handoffs never enter Git. Every integration uses an exact accepted path set,
 preserves disjoint edits and leaves unrelated index entries untouched. A
 managed-worktree receipt records Root lifecycle evidence; it is not a child
 acceptance, content-hash or Git-admission token.
+
+Automation operates only on `aggressive` or `origin/aggressive`. `main` is
+user-only and automation must never check it out, merge, rebase or push it.
+Root may make local commits more often than it pushes; an ordinary non-force
+push is reserved for a substantial coherent milestone, an exact External Pro
+boundary, or an explicit safety exception. Fresh sessions and External Pro use
+the exact pushed `aggressive` revision. Force pushes, history rewrites,
+secrets, and out-of-scope or system-destructive actions are forbidden.
+
+When a task includes a dangerous or external effect, its owner may record it
+in `temp/sessions/<owner_role>/<assignment>/external-effects.md` with action,
+target, reason, before state, result, rollback, and commit-or-receipt. Ordinary
+tracked edits need no such record. The record is evidence, never permission,
+admission, scheduler, or retry ledger.

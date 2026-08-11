@@ -28,7 +28,7 @@ receipt, queue, admission or acceptance data.
 | Owner | Stable responsibility | Interface handed onward |
 |---|---|---|
 | Root | user communication, task routing, cross-owner relay, lifecycle, Root-managed worktree helper/receipt control and accepted physical writes, including separately authorized final Git integration; advisory macro/portfolio science (cross-direction comparison, ranking, pause/continue, dependencies and complete-map acceptance); no direction research execution, code technical acceptance or automatic formal/project-canonical science | owner-routed assignments/results, lifecycle receipts, accepted proposals and accepted-path integration evidence |
-| Workflow Design Manager (WDM) | user-confirmed workflow design, registered-leaf control-plane modification, singleton frozen-package acceptance, and conditional true multi-candidate union acceptance | confirmed plan, self-contained child assignment, package/conditional-convergence packets and successor brief |
+| Workflow Design Manager (WDM) | Root-explicit workflow plan-only response or plan+execute control-plane modification within its authorized boundary, singleton frozen-package acceptance, and conditional true multi-candidate union acceptance | detailed plan or self-contained child assignment, package/conditional-convergence packets and successor brief |
 | Workflow Auditor | read-only local reconnaissance for an assigned workflow surface | conclusion about bounded facts/conflicts, followed by optional dependency evidence |
 | Workflow Implementer | one frozen non-overlapping workflow change slice | conclusion about the owned outcome and checked consequence, followed by an optional `WORKFLOW_CHANGE_PACKET` factual tail |
 | Workflow Reviewer | independent review of one coherent integrated batch | conclusion and advisory disposition for WDM, followed by optional findings evidence; no source edits or acceptance |
@@ -58,6 +58,12 @@ focused contract tests and bounded execution checks
 The router points; Roles decide authority; Skills describe mechanics; Profiles
 register callable children; tests verify the contracts. Detailed procedures do
 not move back into the router or this map.
+
+The stable dispatch edge is `explicit user request -> Root-compiled
+natural-language assignment -> plan-only result or WDM plan+execute -> child
+judgment/result`. It is not a confirmation token, second gate or state machine.
+Within a plan+execute boundary owners refine reversible mechanics automatically;
+only material drift returns to Root.
 
 ## Validation and progress pointers
 

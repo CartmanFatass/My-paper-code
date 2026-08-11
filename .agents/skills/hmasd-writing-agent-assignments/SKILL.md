@@ -116,6 +116,16 @@ Compile a self-contained natural-language model that lets a capable child act
 without reconstructing parent history. Explain, in whatever order best fits
 the task:
 
+For a Root→L1 assignment, say first whether it is `plan-only` or explicit
+`plan+execute`. `plan-only` asks for the detailed plan and authorizes no
+mutation. `plan+execute` authorizes professional execution inside its stated
+goal, non-goals, owner authority, path families and external-effect boundary;
+the owner may refine exact paths, slices, tests and reversible mechanics
+without a fixed second confirmation. It returns to Root only for material drift
+in goal, explicit non-goals, owner authority, science/estimand, major path
+family, acceptance method, an unapproved irreversible external effect or a
+real user choice.
+
 Every assignment message starts with concise outcome-first prose. State the
 requested outcome and the next responsible actor, and say why the outcome
 matters. Make the concrete files, objects or decisions in scope, their
@@ -146,6 +156,12 @@ commands, schemas, result locations, model labels or `fork_turns` settings.
 Those anchors narrow execution; they do not carry the task's meaning. A parent
 is a context compiler, not a field copier. A shorter brief is correct when it
 contains enough meaning for the bounded task.
+
+For Root→L1, the smallest relevant anchor tail may include direction or
+candidate/revision locators, isolation, authorization/run binding, managed
+worktree receipt, and exact owned paths. These are factual locators only: they
+never make a scientific or technical judgment and are not admission, permission
+or a second gate.
 
 An actionable assignment therefore has both layers: the ordinary explanation
 and the smallest task-relevant factual tail. Depending on the task, that tail

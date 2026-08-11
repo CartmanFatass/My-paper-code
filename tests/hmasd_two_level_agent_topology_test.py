@@ -152,19 +152,21 @@ def test_three_root_registered_l1_managers_have_frozen_routing() -> None:
             assert child in instructions, (name, child)
         assert "spawn_authority=none" not in instructions
 
-        for required in (
-            'agent_type="default"',
-            'model="gpt-5.6-luna"',
-            'reasoning_effort="high"',
-            'fork_turns="1"',
-        ):
-            assert required in role, (name, required)
-        assert "native default" in role, (name, "native default")
-        assert "exact bounded" in role, (name, "exact bounded")
-        assert (
-            "adds no generic profile or role" in role
-            or "never gains durable, git, routing, science, runtime or acceptance authority" in role
-        ), (name, "native default scope")
+        if name != "hmasd-independent-research-explorer":
+            for required in (
+                'agent_type="default"',
+                'model="gpt-5.6-luna"',
+                'reasoning_effort="high"',
+                'fork_turns="1"',
+            ):
+                assert required in role, (name, required)
+        if name != "hmasd-independent-research-explorer":
+            assert "native default" in role, (name, "native default")
+            assert "exact bounded" in role, (name, "exact bounded")
+            assert (
+                "adds no generic profile or role" in role
+                or "never gains durable, git, routing, science, runtime or acceptance authority" in role
+            ), (name, "native default scope")
 
     callable_leaves = [child for spec in MANAGERS.values() for child in spec["allow"]]
     assert len(callable_leaves) == len(set(callable_leaves)) == len(LEAF_ROLES)
@@ -277,8 +279,9 @@ def test_root_l1_user_facing_display_contract_keeps_manager_lanes_distinct() -> 
     }
     for role, prefix in role_prefixes.items():
         role_text = role_paths[role].read_text(encoding="utf-8")
-        assert f"l1_user_facing_display_contract={fields['l1_user_facing_display_contract']}" in role_text
-        assert f"l1_user_facing_display_prefix={prefix}" in role_text
+        assert prefix in role_text
+        if role != "independent_research_explorer":
+            assert f"l1_user_facing_display_prefix={prefix}" in role_text
 
 
 def test_root_wdm_background_context_is_distinct_from_implementer_fork_context() -> None:

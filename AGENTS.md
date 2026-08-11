@@ -26,6 +26,17 @@ useful exact scout question to its parent for optional Project Scout dispatch.
 Missing identity, parent, owned paths or completion evidence fails closed and
 returns to the caller.
 
+Root dispatches an L1 only from the user's explicit request. A Root-compiled
+self-contained assignment is natural-language authorization, not a token or a
+second gate: it states the outcome, why it matters, objects and relations,
+owner, allowed judgment, completion and next action before minimal anchors.
+`plan-only` returns a detailed plan. An explicit `plan+execute` assignment
+authorizes refinement of paths, slices, tests and reversible mechanics and
+execution within its goal, non-goals, authority, path-family and external-effect
+boundary. Return to Root only for material drift: goal, explicit exclusions,
+owner authority, science/estimand, major path family, acceptance method,
+unapproved irreversible external effect or a real user choice.
+
 The shared L1 multiplicity vocabulary is Role-defined: each L1 Role declares
 its own scope-key field, and one Root tree may contain multiple active
 instances of that Role on distinct scope-key values. The `(role, scope_key)`
@@ -35,7 +46,7 @@ admission token or continuity/session identity.
 
 | Tree position | Identity | Read after this file | Do not load by default |
 |---|---|---|---|
-| Root, depth 0 | current CLI task root | user request, this router, confirmed plan and required canonical files | owner semantics before dispatch |
+| Root, depth 0 | current CLI task root | explicit user request, this router, Root-compiled assignment and required canonical files | owner semantics before dispatch |
 | L1, depth 1 | WDM | exact assignment, `.codex/agents/hmasd-workflow-design-manager.toml`, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md` | code, runtime and science state |
 | L1, depth 1 | CPM | exact assignment, `.codex/agents/hmasd-code-project-manager.toml`, `.agents/roles/CODE_PROJECT_MANAGER.md` | workflow-control and research corpus |
 | L1, depth 1 | Explorer | exact assignment, `.codex/agents/hmasd-independent-research-explorer.toml`, `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md` | project runtime and unrelated workflow state |
@@ -62,6 +73,8 @@ root_agent_tree_and_lifecycle_authority=exclusive
 root_top_level_owned_path_freeze=exclusive
 root_canonical_state_physical_write_authority=accepted_proposals_only
 root_final_git_integration_authority=accepted_paths_only
+root_dispatch_authority=explicit_user_request_only
+root_assignment_authorization=natural_language_goal_boundary_not_token_or_admission
 root_semantic_owner_authority=macro_portfolio_advisory
 root_macro_portfolio_owner=Root
 root_advisory_portfolio_science_authority=cross_direction_compare|rank|pause_continue|dependencies|complete_map_acceptance
@@ -307,6 +320,11 @@ root_managed_worktree_local_failure=receipt_records_local_failure_and_stays_nont
 root_managed_worktree_legacy_isolation=legacy_worktrees_untouched_and_not_adopted_by_managed_lifecycle
 raw_child_git_worktree=forbidden
 raw_external_worktree_creation=forbidden
+git_automation_branch=aggressive|origin/aggressive
+git_main_policy=user_only_never_checkout_merge_rebase_or_push
+root_local_commit_cadence=may_be_finer_than_push_cadence
+ordinary_nonforce_push=Root_only_at_substantial_coherent_milestone|exact_External_Pro_boundary|explicit_safety_exception
+git_forbidden=force_push|history_rewrite|secret|scope_or_system_destructive_action
 ```
 
 Root freezes path families before dispatch. One writable L1 assignment gets
@@ -345,7 +363,10 @@ integration owner is routable.
 |---|---|
 | user workflow change or workflow defect requiring a plan | `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md` |
 | designing an assignment/interface | `hmasd-writing-agent-assignments` and named contract |
-| confirmed plan implementation or verification | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
+| explicit Root plan+execute implementation or verification | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
+| Explorer direction research or synthesis | `.agents/skills/hmasd-independent-research-exploration/SKILL.md` |
+| Explorer-to-project direction validation handoff | `.agents/skills/hmasd-explorer-project-validation/SKILL.md` |
+| named Explorer external Pro review | `.agents/skills/hmasd-independent-research-pro-review/SKILL.md` |
 | stable owner/interface/dependency edge | `docs/project/WORKFLOW_MAP.md` |
 | canonical status/continuity reload | the exact owner record named by Root |
 

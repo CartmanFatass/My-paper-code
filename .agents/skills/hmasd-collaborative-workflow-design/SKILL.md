@@ -1,6 +1,6 @@
 ---
 name: hmasd-collaborative-workflow-design
-description: Use only in the task-scoped HMASD Workflow Design Manager L1 to turn one workflow requirement or defect into a complete user-confirmed central control-plane plan.
+description: Use only in the task-scoped HMASD Workflow Design Manager L1 to turn an explicitly Root-dispatched workflow request into a plan, or execute it within an explicit plan+execute boundary.
 ---
 
 # HMASD Collaborative Workflow Design
@@ -26,10 +26,11 @@ control_plane_document_routes=docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md
 assignment_writing_skill=hmasd-writing-agent-assignments
 workflow_zero_question_path=fully_specified_mutations
 workflow_decision_question_condition=changes_named_plan_field
-workflow_plan_confirmation=required_before_mutation
-workflow_read_only_plan_confirmation=not_required
-workflow_material_plan_drift=reconfirmation_required
-workflow_input_lanes=USER_REQUESTED_CHANGE|REPORTED_WORKFLOW_DEFECT
+workflow_dispatch=Root_explicit_user_dispatch_only
+workflow_plan_only=return_detailed_plan_only
+workflow_plan_execute=execute_within_explicit_authorized_boundary_without_fixed_second_confirmation
+workflow_material_drift=return_to_Root_only
+workflow_input_lanes=USER_REQUESTED_CHANGE
 workflow_incident_record=chronological_nonblocking_log
 workflow_l1_multiplicity=role_defined_scope_key
 workflow_wdm_scope_key=workflow_scope_key
@@ -38,11 +39,13 @@ workflow_scope_key_semantics=semantic_ownership_concurrency_locator
 
 The Session Workspace Contract is the single mechanics source for workspace,
 lifecycle, progress, review, convergence, Root and Git boundaries. This Skill
-adds only the requirements, plan and confirmation consequences below. Complete
-a read-only inspection, explanation, status or reload smoke without plan
-confirmation. Any edit, stage, commit, push or cross-task authority change is a
-mutation and follows the confirmed-plan route.
-After confirmation, every workflow-file mutation is routed to a registered
+adds only the requirements and authorization consequences below. Root compiles
+the user's explicit request into a self-contained natural-language assignment:
+outcome, why, objects and relations, owner, allowed judgment, completion and
+next action precede the minimal anchors. `plan-only` returns a detailed plan;
+explicit `plan+execute` permits execution inside its stated goal, non-goals,
+authority, path-family and external-effect boundary. Every workflow-file
+mutation is routed to a registered
 Workflow Implementer L2 on exact owned paths; WDM never writes and Root remains
 the sole user, physical, lifecycle and Git actor.
 
@@ -64,14 +67,10 @@ answer changes a named plan field, name that field, ask one question at a time
 and recommend the smallest answer with its practical effect. Repository facts
 are discovered; user decisions are not inferred.
 
-Classify the input before planning. `USER_REQUESTED_CHANGE` follows the
-confirmation procedure below. `REPORTED_WORKFLOW_DEFECT` is appended to WDM's
-chronological incident log. The reporting session supplies evidence and a
-suggestion, never authority or a scientific/runtime decision. The
-zero-confirmation repair path is available only to restore an accepted stable
-contract without changing authority, policy, science, runtime or external
-effects. Otherwise move the item to the user-requested lane and present a
-complete plan.
+Classify the Root assignment as `plan-only` or explicit `plan+execute`.
+Reported defects are evidence for Root, not an autonomous repair lane. Do not
+turn a defect report into automatic workflow mutation; Root obtains explicit
+user dispatch and compiles its boundary.
 
 If goal, non-goals, exact paths, intended behavior, verification and risks are
 already fixed, take the zero-question path and present the complete plan. Stop
@@ -134,17 +133,18 @@ evidence and qualitative maintainability it preserves. A retryable failure
 receives a one-line runtime checklist, not a mechanism. A workflow cost audit
 explicitly requested by the user is the only cost-review path.
 
-Perform no mutation until the user confirms the complete plan in natural
-language for `USER_REQUESTED_CHANGE`. If the user corrects it, present the
-complete revised plan. During execution, reconfirm only material drift in goal,
-authority, path set, acceptance method or irreversible external effect; resolve
-mechanical details inside the confirmed boundary automatically.
+For `plan-only`, return the complete plan and do not mutate. For explicit
+`plan+execute`, refine paths, slices, focused tests and reversible mechanics
+and execute without a fixed second confirmation. Return to Root only if goal,
+explicit non-goals, owner authority, science/estimand, major path family,
+acceptance method, unapproved irreversible external effect, or a real user
+choice materially drifts. Resolve ordinary mechanics inside the boundary.
 
-## After confirmation
+## After authorized plan+execute dispatch
 
-After natural-language confirmation, load `$hmasd-workflow-change-audit`. That
-Skill owns post-confirm implementation, verification, the singleton or
+After explicit `plan+execute` dispatch, load `$hmasd-workflow-change-audit`.
+That Skill owns implementation, verification, the singleton or
 true-union review/acceptance route and its one bounded fallback. Root retains
 physical application, lifecycle, Git and reload. This requirements Skill remains
-requirements, plan and confirmation only and does not duplicate post-confirm
+requirements and plan boundaries only and does not duplicate execution
 execution, delegation or replacement-task procedures.

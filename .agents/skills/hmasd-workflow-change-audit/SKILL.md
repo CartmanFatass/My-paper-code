@@ -1,6 +1,6 @@
 ---
 name: hmasd-workflow-change-audit
-description: Use only in the task-scoped Workflow Design Manager L1 after plan confirmation to implement, verify, accept and route one centralized HMASD control-plane proposal.
+description: Use only in the task-scoped Workflow Design Manager L1 for an explicit Root plan+execute assignment to implement, verify, accept and route one centralized HMASD control-plane proposal.
 ---
 
 # HMASD Workflow Change Audit
@@ -8,7 +8,7 @@ description: Use only in the task-scoped Workflow Design Manager L1 after plan c
 ## Contract boundary
 
 ```text
-activation_trigger=confirmed_workflow_plan_execution_or_verification
+activation_trigger=explicit_Root_plan_execute_assignment_or_verification
 startup_preload=false
 ```
 
@@ -21,18 +21,22 @@ surfaces.
 
 The Session Workspace Contract is the single mechanics source for workspace,
 managed worktrees, lifecycle receipts, progress meanings, review, convergence,
-Root closure and Git boundaries. This Skill adds only the post-confirm route,
+Root closure and Git boundaries. This Skill adds only the authorized execution route,
 focused checks, bounded recovery and acceptance consequences below. Use it for
 router, role, Skill, profile, hook, registry, stable workflow contract,
 workflow script or focused workflow-test changes; operational state, review
 instances, run artifacts, scientific ledgers and implementation code are
 outside this procedure.
 
-User confirmation remains mandatory before mutation. Every mutation is carried
+Root's explicit user-authorized `plan+execute` assignment is sufficient for
+mutation within its goal, non-goals, authority, path-family and external-effect
+boundary; it is not a fixed second user confirmation. Every mutation is carried
 out by a registered Workflow Implementer L2 on its exact assigned paths; WDM
-never writes. The normal registered Auditor, Implementer and Reviewer types and
-the native-default exception remain unchanged. Children return only to WDM;
-Root remains the sole user, cross-owner, physical and lifecycle actor.
+never writes. Children return only to WDM; Root remains the sole user,
+cross-owner, physical and lifecycle actor. Return to Root only for material
+drift in goal, explicit exclusions, authority, science/estimand, major path
+family, acceptance method, unapproved irreversible external effect, or a real
+user choice.
 
 ## Routing, validation and review
 
@@ -132,7 +136,7 @@ source locators only.
 
 1. **Inspect.** Read the routed control-plane paths, declare the exact owned
    path set, preserve unrelated work and identify the smallest normal-path
-   probe. Do not mutate before confirmation.
+   probe. Execute when the explicit plan+execute boundary covers the change.
 2. **Delete or edit.** Remove superseded rules before adding text. WDM routes
    exact non-overlapping paths to registered Implementers; it does not write,
    stage or use Git. The Session contract supplies worktree and lifecycle

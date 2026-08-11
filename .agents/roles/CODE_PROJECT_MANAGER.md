@@ -148,7 +148,7 @@ execution_readiness_root_git=physical_Git_only_when_separately_authorized
 execution_readiness_hook_stop=forbidden
 test_acceptance_basis=risk_and_claim_coverage
 test_suite_purpose=technical_acceptance_not_cpm_scoring_or_scientific_proof
-formal_compute_authority=user_only
+formal_compute_authority=assignment_named_user_authorization_via_root
 explorer_toy_assignment_intake=semantic_treatment_brief_or_explicit_pro_frozen_review
 explorer_toy_local_research_read=forbidden
 explorer_toy_code_acceptance=exclusive_for_named_treatment
@@ -360,15 +360,23 @@ does not displace a matching registered specialist.
   acceptance and Root must not resolve or rewrite conflicts. Conflicts return
   to the owning direction CPM(s), or to a temporary named `shared:<component>`
   CPM for a shared dependency.
-- Exact Experiment Operator assignments and recovery mode selection inside the
-  unchanged authorized scientific boundary. A complete exact assignment
-  delegates compute authority to the child automatically; CPM checks the
-  active grant and remaining balance before dispatch, and neither CPM nor the
-  child asks for per-run authorization while the run remains in that grant.
-- Formal and Explorer-to-project Pro review questions, review selection and
-  batch-file creation, direct parent dispatch of the reusable registered
+- CM owns code, runner, adapter, package, dependency, interpreter/backend,
+  isolated environment setup, focused tests, technical acceptance, pre-full
+  recovery, and Experiment Operator dispatch. `CM-ready` is an action-bearing
+  handoff, even when CM still must construct engineering objects. `run-ready`
+  is an explanatory conclusion, never a gate/token: CM establishes it only
+  after technically accepting the exact command/config/seeds/budget,
+  source/revision, dependencies/environment, isolated run/evidence/checkpoint/
+  result roots, and active assignment authorization. A preflight/import/runner/
+  package/environment `ERROR` returns to CM for automatic in-scope repair and
+  fresh verification; CM selects `fresh|retry|resume|restart` without changing
+  frozen question, comparator, estimand, or evidence class. Source changes
+  require a fresh identity and isolated roots.
+- The formal `CODE_SCIENCE_ALIGNMENT_AUDIT` and only that formal CPM review
+  route use question selection, batch-file creation, direct parent dispatch of
+  the reusable registered
   `hmasd-cpm-agentify-transport` native child, exact archival and mechanical result
-  acceptance.
+  acceptance. It is not Explorer-origin final review.
 - Exact recording of External Pro dispositions, reports, ledgers and runtime
   evidence without scientific reinterpretation.
 - Code-child assignments, source and code-test changes, proof-sized validation,
@@ -516,8 +524,9 @@ containment contract. The readiness wrapper owns its mechanical lifecycle and
 the verifier returns typed evidence. Code Project Manager does not reconstruct
 that state machine; it chooses bounded reassignment for an operational failure
 or implementer repair for a code defect, then
-requires full verification on the new commit. It does not use runtime
-preflight as an incremental code debugger.
+requires full verification on the new commit. Preflight evidence is a CM-owned
+repair input: CM may diagnose and repair it before the result-bearing full,
+then rerun the required focused/readiness verification.
 
 For deterministic inspection, check collection, result extraction and handoff
 preparation, CPM may delegate one exact natural-language
@@ -540,9 +549,9 @@ acceptance owner.
 
 ## Triggered operators and external review
 
-CPM retains formal and Explorer-to-project review intent, question selection,
-acceptance and archival ownership. When a review is requested, CPM freezes the
-standalone questions and dispatches the registered
+CPM retains the formal `CODE_SCIENCE_ALIGNMENT_AUDIT` review intent, question
+selection, acceptance and archival ownership. When that audit is requested,
+CPM freezes the standalone questions and dispatches the registered
 `hmasd-cpm-agentify-transport` child through the
 `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` file contract, then reads the named result
 only after the child's terminal return. `.agents/roles/CPM_AGENTIFY_TRANSPORT_OPERATOR.md`
@@ -555,9 +564,14 @@ with the expected assignment path and returned terminal anchor. Mismatch,
 redirect, root-level generic path or missing/non-regular file is an actual
 intake error; CPM does not scan or infer a fallback path.
 
-For an authorized experiment, CPM supplies the complete assignment and grant
-binding; `.agents/roles/EXPERIMENT_OPERATOR.md` owns
-`train -> evaluate -> analyze` and its terminal receipt. For a triggered
+For a run-ready authorized experiment, CM supplies the complete exact
+assignment; `.agents/roles/EXPERIMENT_OPERATOR.md` owns one mechanical
+`train -> evaluate -> analyze` sequence and its terminal receipt. Operator
+`ERROR` is returned to CM, which repairs code/runner/package/dependency/
+interpreter/backend/environment or selects a legal fresh/retry/resume/restart
+within unchanged frozen science before any redispatch. The Operator never
+installs dependencies, changes source/configuration, or makes a recovery,
+science, or workflow decision. For a triggered
 production-entry or artifact-lifecycle check, `.agents/roles/VERIFIER.md` owns
 the six readiness phases and receipt finalization. These lanes remain separate
 from the CPM Mechanical Operator, which is used only for deterministic
@@ -567,9 +581,12 @@ inspection and factual handoff assembly.
 
 Apply `docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md` after
 every local failure terminal. The originating tool owns mechanical state; CPM
-consumes its evidence and selects the next legal semantic action without
-maintaining a parallel state machine. One parked workstream never pauses another.
-`SESSION_BLOCKED` requires the complete evidence defined by that single source.
+consumes its evidence and performs the applicable CM recovery or selects the
+next legal owner action without maintaining a parallel state machine. There is
+no global `SESSION_BLOCKED` or ordinary engineering parking. A true scoped
+branch blocker requires the contract's exhausted recovery/relay path and a
+concrete non-executable fact; it pauses only that branch while independent work
+continues.
 
 ## Workflow changes and Git
 

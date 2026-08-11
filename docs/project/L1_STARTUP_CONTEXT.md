@@ -51,8 +51,8 @@ default_core=AGENTS.md|exact_Root_assignment|profile|role
 
 | Action trigger | Pointer |
 |---|---|
-| User workflow change or reported workflow defect requiring a plan | `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md` |
-| Confirmed workflow plan execution or verification | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
+| Explicit Root workflow dispatch: plan-only or plan+execute | `.agents/skills/hmasd-collaborative-workflow-design/SKILL.md` |
+| Explicit Root plan+execute execution or verification | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
 | Assignment/interface design | `hmasd-writing-agent-assignments` and named contract |
 | Scope-keyed parallel WDM startup and convergence | `docs/project/SESSION_WORKSPACE_CONTRACT.md` and the exact WDM owner record |
 | WDM control-plane route lookup | `docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md` |
@@ -92,7 +92,8 @@ portfolio_l1=forbidden
 |---|---|
 | Bounded research exploration or synthesis | `.agents/skills/hmasd-independent-research-exploration/SKILL.md` |
 | Explorer-to-project validation handoff | `.agents/skills/hmasd-explorer-project-validation/SKILL.md` |
-| Named external-review action | `.agents/skills/hmasd-independent-research-pro-review/SKILL.md` |
+| Independent direction or methodology Pro review | `.agents/skills/hmasd-independent-research-pro-review/SKILL.md` |
+| Explorer project-alignment or overnight branch-blocker external review | `.agents/skills/hmasd-independent-research-pro-review/SKILL.md` and `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` |
 | Named Explorer continuity record | exact Root-named Explorer record |
 
 Cross-owner requests and results still use Root relay. This index does not
