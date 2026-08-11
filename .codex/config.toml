@@ -8,7 +8,7 @@ model_catalog_json = "C:\\Projects\\HMASD\\runtime\\model-catalog-v2-workaround.
 multi_agent_v2 = true
 
 [agents]
-max_threads = 10
+max_threads = 20
 max_depth = 2
 interrupt_message = true
 

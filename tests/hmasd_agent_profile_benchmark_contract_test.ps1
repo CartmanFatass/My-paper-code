@@ -317,7 +317,7 @@ foreach ($required in @(
         throw "Independent research profile is not registered: $required"
     }
 }
-if (-not $config.Contains('max_threads = 10') -or
+if (-not $config.Contains('max_threads = 20') -or
     $config.Contains('max_concurrent_threads_per_session') -or
     -not $config.Contains('max_depth = 2')) {
     throw 'Two-level topology capacity/depth is not configured'

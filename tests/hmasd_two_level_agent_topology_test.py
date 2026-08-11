@@ -91,10 +91,10 @@ def _flat(text: str) -> str:
     return " ".join(text.split()).lower()
 
 
-def test_config_declares_depth_two_and_ten_thread_capacity() -> None:
+def test_config_declares_depth_two_and_twenty_thread_capacity() -> None:
     config = _load(CONFIG)
     agents = config["agents"]
-    assert agents["max_threads"] == 10
+    assert agents["max_threads"] == 20
     assert agents["max_depth"] == 2
     assert "max_concurrent_threads_per_session" not in agents
     hooks = json.loads((ROOT / ".codex/hooks.json").read_text(encoding="utf-8"))
