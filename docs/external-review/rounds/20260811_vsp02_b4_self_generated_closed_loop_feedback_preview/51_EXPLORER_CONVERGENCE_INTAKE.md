@@ -36,4 +36,3 @@ Subsequent project disposition exactly: `B4_VALID_NONSEPARATING_PATTERN_INTAKEN_
 `NO_SUCCESSOR` means no successor is licensed from B4 or its mediator traces; it is not a claim that no independently motivated prospective route can ever exist. Direction is parked, not retired. One full is exhausted; no rerun/rescue/sweep/new seeds/threshold/checkpoint/identity; no CM/runtime action.
 
 External Pro role is scientific-only, not code/test/runtime/Git acceptance.
-
