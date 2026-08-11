@@ -21,7 +21,7 @@ authority=one_exact_CPM_MECHANICAL_TASK_ASSIGNMENT
 sandbox=workspace-write
 assignment_fields=spec_path|result_path
 mechanical_task_classes=inspect_identity|run_focused_checks|verify_result|assemble_handoff|render_state
-runtime_capacity_observation=embedded_CPM_dispatch_observation_not_task_class
+runtime_observation=consume_root_observed_facts_not_task_class
 ticket_prepare_alias=none
 terminal_values=COMPLETE|ERROR
 terminal_notification_count=exactly_one
@@ -62,23 +62,13 @@ The dispatcher supports these mechanical task classes:
 worktree, prepare-integrate and finalize-integrate identity remain outside this
 leaf; it has no Git or canonical-state acceptance authority.
 
-The CPM mechanical capability also includes one stateless runtime-capacity observation
-immediately before CPM considers a result-bearing treatment. It
-may read CPM-supplied active treatment/process/unit/path facts and the prospective class/units,
-observe one set of Windows CPU, memory and process facts, compare exact output/writable path claims,
-perform fixed three-unit arithmetic, and write an assignment-named temporary factual snapshot. This
-observation emits facts or a direct factual error only; it does not emit an
-admission or acceptance result. CPM remains the sole owner of
-`admit|up-class|pending_runtime_capacity`. Incomplete live facts are reported
-as incomplete rather than inferred, and the observation is not a monitor,
-retry, lease, queue or persistent roster. It does not create a state machine.
-The arithmetic records reserved and free units before and after the request.
-The snapshot also records explicit GPU, paid-service and prospective-process
-claims/conflicts alongside CPU, memory, process, output-path and writable-path
-facts. CPM-supplied CPU-unit and memory-byte claims are compared with the one-shot host facts for direct pressure conflicts;
-missing host fields remain incomplete. No external paid-service call or GPU inference is performed.
-Its active-treatment summary preserves one complete row per input treatment,
-including identity, PIDs, units, resource claims and paths in input order.
+Runtime observations are Root-owned. This leaf may inspect exact Root-supplied
+live-process, CPU, memory and concrete-resource-conflict facts as inputs to a
+scoped CPM assignment, but it does not observe host state, derive synthetic
+capacity, reserve execution, admit or authorize a run, retry, monitor, queue,
+or maintain persistent runtime state. It emits no runtime decision and launches no costly
+execution. Incomplete or contradictory Root facts are reported directly to the
+parent; CPM retains scope-local technical/runtime judgment.
 
 For incomplete or conflicting inputs, the child may perform at most one
 assignment-defined, read-only observation recovery (for example, re-reading

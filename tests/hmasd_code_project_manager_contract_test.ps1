@@ -359,7 +359,7 @@ $codeRequired = @(
     'role=code_project_manager',
     'code_authority=exclusive',
     'technical_acceptance_authority=exclusive',
-    'runtime_authority=exclusive',
+    'runtime_authority=scope_local_technical_runtime_judgment',
     'current_work_authority=exclusive_for_project_operational_records',
     'formal_external_review_request_and_intake_authority=exclusive',
     'formal_review_transport=agentify_file_batch_result',
@@ -421,8 +421,7 @@ $codeRequired = @(
     '`analyze_entry`',
     'dispatches the registered `hmasd-verifier` on the clean',
     'readiness wrapper owns its mechanical lifecycle and the verifier returns typed evidence',
-    'A fresh CLI invocation creates a new task-scoped CPM and reloads canonical files',
-    'no persistent manager, monitor or',
+    'No persistent manager, monitor or',
     'Workflow Design Manager',
     'workflow_change_request_route=workflow_design_manager',
     'does not edit, accept, stage, commit or push'
@@ -437,9 +436,9 @@ foreach ($required in @(
     'owns problem decomposition, architecture and technical choices',
     'dependency and concurrency planning',
     'self-contained child assignments',
-    'three-unit runtime admission',
+    'runtime_judgment_owner=code_project_manager_scope_local',
     'action-bearing result synthesis',
-    'Root owns user communication, physical writes, accepted canonical-state updates and Git',
+    'Root owns agent lifecycle, user communication, physical writes, managed-worktree lifecycle, accepted canonical-state updates, Git mechanics and cross-owner relay',
     'coherent nontrivial implementation-plus-focused-test package',
     '`hmasd-implementer-terra` for routine frozen engineering',
     '`hmasd-implementer` for protected algorithm, numerical or training semantics',
@@ -450,17 +449,16 @@ foreach ($required in @(
     'cheap reversible singleton',
     'owner-exclusive architecture, integration, acceptance or Git decision',
     'no microdelegation threshold or rigid assignment schema',
-    'Disjoint file families and admitted treatments run parallel-first',
+    'Disjoint file families and independent scoped assignments run parallel-first',
     'While any child or experiment is outstanding',
     'bounded waiting is used only when every remaining safe action depends on that result',
     'children provide evidence, not acceptance',
-    'never accept, stage, commit, push, change science, choose runtime admission or update canonical CPM state',
+    'never accept, stage, commit, push, change science, authorize costly runtime or update canonical CPM state',
     'action-bearing conclusion and concrete postcondition',
     'passively relaying a status or completion receipt',
     'one integrated review rather than one review per implementer',
     'No scheduler, queue or registry is introduced',
-    'no time-triggered wake-up loop',
-    'does not change science or runtime state')) {
+    'no time-triggered wake-up loop')) {
     if (-not $codePmNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
         throw "CPM orchestrator-first contract missing: $required"
     }
@@ -476,8 +474,8 @@ foreach ($required in @(
     'concrete postconditions',
     'parallel-first path',
     'waits in a bounded fashion only when every remaining safe action depends on that result',
-    'children never accept, stage, commit, push, change science, choose runtime admission or update canonical CPM state',
-    'adds no scheduler, queue or registry',
+    'children never accept, stage, commit, push, change science, authorize costly runtime or update canonical CPM state',
+    'adds no scheduler, queue, registry',
     'uses no time-triggered wake-up loop')) {
     if (-not $agileNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
         throw "Agile orchestrator-first delegation contract missing: $required"
@@ -485,65 +483,60 @@ foreach ($required in @(
 }
 
 foreach ($required in @(
-    'runtime_capacity_admission=exclusive',
-    'runtime_capacity_pool_units=3',
-    'runtime_capacity_source=parallel-research-workflow',
-    'runtime_resource_upclass_or_defer=allowed_before_start',
-    'runtime_resource_downclass=forbidden',
-    'runtime_admission_observation=stateless_per_admission',
-    'runtime_admission_judgment=admit|up-class|pending_runtime_capacity',
-    'scientific_evidence_level_vs_runtime_class=independent',
-    'independent_admitted_treatment_execution=parallel_first_within_capacity',
-    'ordinary_ab_serialization_requires=exact_dependency_or_resource_evidence',
-    'sole operational owner of the three-unit runtime pool',
-    'CPM''s only runtime judgment is `admit`, `up-class` or `pending_runtime_capacity`',
-    'Capacity deferral applies only to the not-yet-started treatment',
-    'never creates a task, direction or workflow `BLOCKED` state',
-    'stateless per-admission observation',
-    'prospective runtime class/units',
-    'direction-local predecessor/intake barrier closure',
-    'scientific A/B/C evidence level is independent of runtime class',
-    'never infers class, units or barrier closure from a science label or `local_research/`',
-    'asks exactly one concrete clarification while unrelated work continues',
-    'An exclusive formal/heavy run reserves only experiment-runtime admission',
-    'All non-experiment work that does not contend for the observed bottleneck continues',
-    'one command contending for that same actual resource may be delayed without creating `BLOCKED`',
-    'Every artifact keeps one independent technical acceptance')) {
-    if (-not $codePmNormalized.Contains($required)) {
-        throw "Code Project Manager runtime-capacity ownership missing: $required"
+    'multiple_scoped_instances_per_root_tree=true',
+    'cpm_instance_identity=code_scope_key',
+    'root_scope_dispatch=fork_turns=1|self_contained_assignment',
+    'scoped_cpm_l2_fanout=registered_l2_within_depth_2',
+    'scope_technical_acceptance=code_project_manager',
+    'convergence_cpm=fresh_root_dispatch_after_scope_integration',
+    'convergence_assignment=self_contained_union',
+    'convergence_acceptance=overall_technical_and_runtime',
+    'root_lifecycle_git_relay=exclusive',
+    'tracked_writer_worktree=one_root_managed_worktree_per_writable_l1_assignment',
+    'parallel_l2_writers_same_base_disjoint_paths=share_l1_worktree',
+    'parallel_cpm_assignments_worktrees=independent',
+    'integration_worktree=separate_root_managed_worktree',
+    'worktree_l2_lifecycle=forbidden',
+    'technical_acceptance_authority=exclusive',
+    'runtime_authority=scope_local_technical_runtime_judgment',
+    'runtime_unit_accounting=none',
+    'runtime_pool=none',
+    'runtime_class_quota=none',
+    'runtime_reservation=none',
+    'runtime_admission_ledger=none',
+    'runtime_observation_owner=root_mechanical',
+    'runtime_observation_facts=live_processes|cpu|memory|concrete_resource_conflicts',
+    'runtime_judgment_owner=code_project_manager_scope_local',
+    'high_cost_runtime_authorization=explicit_user_task_via_root',
+    'max_threads=20',
+    'max_threads_semantics=agent_concurrency_ceiling_only',
+    'max_threads_runtime_authorization=none',
+    'parallelism_runtime_authorization=none')) {
+    if (-not $codePmNormalized.Contains($required) -and -not $agileNormalized.Contains($required)) {
+        throw "Multi-CPM/no-runtime-pool anchor missing: $required"
     }
 }
 foreach ($required in @(
-    'selected and frozen independent direction treatments',
-    'admits independent treatments within the three-unit pool',
     'tracked_write_worktree_predicate=assignment_may_write_tracked_path_or_mixed_tracked_ignored_output',
     'tracked_write_worktree_exemptions=read_only|ignored_only|temporary_only',
-    'worktree_identity_semantics=not_agent_ticket_or_authority_identity',
-    'normal path remains `independent_admitted_treatment_execution=parallel_first_within_capacity`',
-    'detailed event-driven continuation and serialization exceptions are maintained by the parallel-research workflow reference',
-    'CPM treatment dispatch is constrained only by an exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict',
-    'Read-only Explorer science lanes remain independent of CPM pool/admission by default',
-    'no global serial fallback, scientific reprioritization or down-classing')) {
+    'worktree_identity_semantics=not_agent_ticket_or_authority_identity')) {
     if (-not $codePmNormalized.Contains($required)) {
         throw "Code Project Manager parallel-first contract missing: $required"
     }
 }
-foreach ($required in @(
+foreach ($retired in @(
     'runtime_capacity_pool_units=3',
-    'sole operational owner of the three-unit runtime pool',
-    'independent_admitted_treatment_execution=parallel_first_within_capacity',
-    'runtime_admission_judgment=admit|up-class|pending_runtime_capacity')) {
-    if (-not $codePmNormalized.Contains($required)) {
-        throw "Three-unit CPM ownership must remain in the Role: $required"
-    }
-}
-foreach ($required in @(
-    'runtime_capacity_pool_units=3',
-    'event-driven Explorer continuation',
-    'independent_admitted_treatment_execution=parallel_first_within_capacity',
-    'runtime_admission_judgment=admit|up-class|pending_runtime_capacity')) {
-    if (-not $agileNormalized.Contains($required)) {
-        throw "Three-unit/event-driven CPM ownership must remain in the Skill: $required"
+    'three-unit runtime pool',
+    'fixed three-unit arithmetic',
+    'runtime class/units',
+    'runtime_admission_observation=stateless_per_admission',
+    'runtime_admission_judgment=admit|up-class|pending_runtime_capacity',
+    'runtime admission ledger',
+    'reserved and free units',
+    'requested/free units',
+    'capacity/admission')) {
+    if ($codePm.Contains($retired) -or $agile.Contains($retired)) {
+        throw "Retired runtime-pool contract remains: $retired"
     }
 }
 foreach ($required in @(
@@ -556,25 +549,13 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'three-unit capacity, admission, barrier and resource contract defined only by',
-    'stateless per-admission judgment',
-    'Capacity deferral applies only to a not-yet-started treatment',
-    'never creates `BLOCKED`',
-    'All non-experiment work that does not contend for the observed bottleneck continues',
-    'one command contending for that same actual resource may be delayed without `BLOCKED`',
-    'event-driven Explorer continuation',
-    'CPM treatment dispatch is constrained only by an exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict',
-    'Read-only Explorer science lanes remain independent of CPM pool/admission by default')) {
-    if (-not $agileNormalized.Contains($required)) {
-        throw "Agile runtime-capacity contract missing: $required"
+    'runtime_observation_owner=root_mechanical',
+    'runtime_observation_facts=live_processes|cpu|memory|concrete_resource_conflicts',
+    'runtime_judgment_owner=code_project_manager_scope_local',
+    'parallelism_runtime_authorization=none')) {
+    if (-not $agileNormalized.Contains($required) -and -not $codePmNormalized.Contains($required)) {
+        throw "Agile no-pool runtime anchor missing: $required"
     }
-}
-foreach ($required in @(
-    'runtime_capacity_admission=exclusive',
-    'runtime_capacity_pool_units=3',
-    'runtime_capacity_source=parallel-research-workflow',
-    'read_only_science_lane_capacity=independent_of_cpm_pool_by_default')) {
-    if (-not $codePmNormalized.Contains($required)) { throw "CPM capacity contract missing: $required" }
 }
 if ($codePm.Contains('one_at_a_time_for_attribution')) {
     throw 'Retired global resource-consuming action lock remains in CPM role'
@@ -639,7 +620,7 @@ foreach ($required in @(
     'parent-specific Role and the parent-neutral Agentify transport mechanics Skill',
     'AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
     'CPM owns the per-question conversation intent',
-    'Root owns cross-owner relay')) {
+    'Root owns agent lifecycle, cross-owner relay, physical canonical writes, managed-worktree lifecycle and Git mechanics')) {
     if (-not $agileNormalized.Contains($required)) {
         throw "Agile Skill Agentify child contract missing: $required"
     }
@@ -916,8 +897,8 @@ if (-not $workflowNormalized.Contains('workflow_design_authority=exclusive_for_a
     -not $workflowNormalized.Contains('cross_task_transport=return_to_root')) {
     throw 'Workflow Design Manager centralized ownership boundary is missing'
 }
-if (-not $agileNormalized.Contains('Code Project Manager alone accepts code, coordinates the project, directs engineering repair, and owns runtime and transport') -or
-    -not $agileNormalized.Contains('Root owns cross-owner relay, physical canonical writes and Git mechanics')) {
+if (-not $agileNormalized.Contains('Code Project Manager alone accepts code, coordinates one `code_scope_key`, directs engineering repair, and makes scope-local technical and runtime judgments') -or
+    -not $agileNormalized.Contains('Root owns agent lifecycle, cross-owner relay, physical canonical writes, managed-worktree lifecycle and Git mechanics')) {
     throw 'Agile Skill does not preserve CPM ownership'
 }
 if ($agileNormalized.Contains('External Review Operator') -or
