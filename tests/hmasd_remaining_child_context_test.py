@@ -15,6 +15,16 @@ ROOT = Path(__file__).resolve().parents[1]
 
 CHILDREN = (
     (
+        "project_scout",
+        ROOT / ".agents/roles/PROJECT_SCOUT.md",
+        ROOT / ".codex/agents/hmasd-project-scout.toml",
+        "gpt-5.3-codex-spark",
+        "medium",
+        "read-only",
+        None,
+        "reopen one named locator or immediate reference once",
+    ),
+    (
         "code_scout",
         ROOT / ".agents/roles/CODE_SCOUT.md",
         ROOT / ".codex/agents/hmasd-code-scout.toml",

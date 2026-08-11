@@ -2,8 +2,8 @@
 
 ```text
 document_kind=root_restart_handoff
-handoff_revision=1
-handoff_parent_commit=89303a03f4ec0b9718bc5ecca2aeb8abcab8505f
+handoff_revision=2
+handoff_parent_commit=622825da44f3333c14ceb6c214fcfa7833302479
 canonical_branch=aggressive
 created_at=2026-08-11
 next_actor=fresh_root
@@ -13,10 +13,11 @@ science_state_changed=false
 
 ## Conclusion and restart objective
 
-The direction-scoped research/code control plane is integrated and verified.
-This invocation intentionally stopped before choosing or executing a real
-research direction. A fresh Root should reload canonical state, perform the
-small registration/scope smoke described below, select one currently available
+The direction-scoped research/code control plane, WDM efficiency repair and
+project-wide read-only Scout registration are integrated and verified. This
+invocation intentionally stopped before choosing or executing a real research
+direction. A fresh Root should reload canonical state, perform the small
+registration/scope smoke described below, select one currently available
 direction from compact research continuity, and then run one bounded complete
 `EM -> CM -> Experiment Operator -> publication -> reverse intake -> external
 review` flow.
@@ -50,6 +51,11 @@ test artifacts.
 - Native payload is authoritative when no assignment-file locator is supplied.
   Leaves may read their mandatory Role/Skill immediate references, but must not
   search for or reconstruct a nonexistent assignment file.
+- `hmasd-project-scout` is a generic project-local read-only utility using
+  `gpt-5.3-codex-spark/medium`. Root may call it at depth 1 and WDM, CPM or
+  Explorer may call it at depth 2 for bounded repository exploration or factual
+  confirmation. It is not `hmasd-research-scout`, does not search literature or
+  make scientific judgments, and never replaces a professional domain leaf.
 
 Formal or project-canonical scientific claims remain at the user/External Pro
 boundary. None of the changes above promotes an ordinary experiment result to
@@ -64,8 +70,14 @@ commits:
 - `5efa1fc2` - pointer-only project-operation owner records;
 - `89303a03` - cross-candidate contract alignment and case-sensitive
   `record_kind` dispatch.
+- `4283debe` - registered WDM Auditor, Implementer and Reviewer moved to the
+  user-selected Terra profiles;
+- `d830033f` - streamlined singleton WDM control path and document routes;
+- `e7faf87d` - closed the residual high-risk route and direct-consumer debt;
+- `622825da` - added producer/consumer ordering, aggregate repair and lightweight
+  validation preflight fields.
 
-The handoff commit is the commit containing this file; discover it after reload
+The current handoff commit also registers `hmasd-project-scout`. Discover it after reload
 with `git log -1 --format=%H -- docs/project/migration-validation/2026-08-11_direction_scoped_owner_restart_handoff.md`.
 
 Tests completed before this handoff:
@@ -74,8 +86,13 @@ Tests completed before this handoff:
   passed after the sole integrated Reviewer findings were closed.
 - Root cross-candidate union evidence: 91 pytest tests passed; CPM, research
   workflow, workflow delegation and profile benchmark PS1 contracts all passed.
-- Agent harness passed with 21 profiles, 22 Roles and 9 Skills.
-- 22 TOML files and two JSON files parsed; `git diff --check` passed.
+- Latest focused WDM union evidence: 64 pytest tests and the workflow delegation
+  PowerShell contract passed without an unrelated doctor run.
+- Project Scout registration evidence: the exact
+  `gpt-5.3-codex-spark/medium` read-only invocation returned `SPARK_MODEL_OK`;
+  31 focused topology/context tests passed.
+- Agent harness passed with 22 profiles, 23 Roles and 9 Skills.
+- 23 TOML files and two JSON files parsed; `git diff --check` passed.
 - `codex --strict-config doctor --summary` reported 17 ok, 0 warn and 0 fail.
 
 No real research, solver, training, result-bearing runtime, result publication
@@ -109,6 +126,15 @@ retained for audit:
 - receipt: `temp/sessions/workflow_design_manager/managed-worktrees/wm_plain_language_contract_f1.json`;
 - recovery ref: `refs/hmasd/root-managed-recovery/wm_plain_language_contract_f1`.
 
+The WDM route-debt repair and Root-planned causal-repair candidates are also
+integrated. Their checkouts were removed and their original candidate hashes
+remain protected by `RETAINED_FOR_RECOVERY` receipts:
+
+- `temp/sessions/workflow_design_manager/managed-worktrees/wm_wdm_efficiency_control_repair_f1.json`;
+- `refs/hmasd/root-managed-recovery/wm_wdm_efficiency_control_repair_f1`;
+- `temp/sessions/workflow_design_manager/managed-worktrees/wm_wdm_contract_debt_root_plan_f1.json`;
+- `refs/hmasd/root-managed-recovery/wm_wdm_contract_debt_root_plan_f1`.
+
 Two disposable external pytest roots remain because the command runner blocked
 the attempted recursive deletion even after exact-path validation:
 
@@ -130,10 +156,13 @@ and continue to leave unrelated paths untouched.
    `docs/project/SESSION_WORKSPACE_CONTRACT.md`. Do not preload owner corpora.
 2. Confirm the canonical branch contains this handoff and that tracked status
    is clean. Run a fresh registration/scope smoke for exact registered WM, EM
-   and CM types using `fork_turns=1`. Use valid keys such as
-   `direction:smoke-a` and `shared:smoke-component`; prove no default
-   substitution, no portfolio EM, no Convergence CM, no L3 and no write/runtime
-   action. This smoke is recognition/context evidence, not research.
+   and CM types using `fork_turns=1`, then smoke `hmasd-project-scout` once from
+   Root at depth 1 and once through an L1 at depth 2 with `fork_turns=none`.
+   Use valid keys such as `direction:smoke-a` and `shared:smoke-component`;
+   prove no default substitution, no portfolio EM, no Convergence CM, no L3
+   and no write/runtime action. Confirm that Project Scout performs only a
+   bounded repository fact check and remains distinct from the literature-focused
+   `hmasd-research-scout`. This smoke is recognition/context evidence, not research.
 3. Load `local_research/RESEARCH_CONTINUITY.md`, then follow only its exact lazy
    pointers to the current Direction Action Map and the smallest direction
    records needed for macro comparison. Root selects one genuinely available,
@@ -271,19 +300,16 @@ the whole schema/orientation assertion families once, and then submitted one
 final union to the Reviewer. That is the concrete prevention and recovery path
 for the same class of semantic drift.
 
-## Future requirement: WDM-maintained control-plane document routes
+## Implemented requirement: WDM-maintained control-plane document routes
 
-The user requires WDM to maintain one compact routing table for control-plane
-documents. The purpose is simple: before WDM audits a workflow change, it should
-be able to look up which document defines the affected meaning, which other
-documents directly consume it, and which focused tests check that relationship.
-WDM should not need to rediscover the same repository relationships on every
-assignment.
+WDM now maintains one compact routing table for control-plane documents. Before
+auditing a workflow change, it can look up which document defines the affected
+meaning, which other documents directly consume it, and which focused tests
+check that relationship. WDM no longer needs to rediscover the same repository
+relationships on every assignment.
 
-A future `WM_control_plane_routes` task should design and implement this table.
-The likely durable location is
-`docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md`, but the future WDM must confirm
-the exact path and coupled consumers before writing it.
+The durable table is `docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md`. Its
+high-risk precedence and direct-consumer coverage were repaired in `e7faf87d`.
 
 Each route should answer in ordinary language:
 
@@ -311,10 +337,7 @@ Expected operating rule:
    duplicated or contradictory; WDM still decides whether the relationship is
    semantically sufficient.
 
-This requirement is recorded only; it is not implemented by the current
-`WM_plain_language_contract` task. It is not a blocker for one bounded
-direction-flow smoke, but it should be completed before the next broad,
-multi-candidate control-plane redesign.
+This requirement is implemented and is no longer a future task or blocker.
 
 ## Implemented requirement: complete meaning plus mechanical facts
 
@@ -362,15 +385,21 @@ then append only the useful mechanical facts. This handoff retains the rule so
 future assignment and route-table work cannot regress to natural-language-only
 or fields-only reporting.
 
-## Workflow-efficiency follow-up (not a restart blocker)
+## Implemented workflow-efficiency follow-up
 
-This migration was slower than its edits because cross-candidate assertions ran
-late, first-failure authorization exposed stale prose serially, and a two-file
-test-only repair still paid the full Auditor/Implementer/Reviewer cost. Preserve
-WDM's workflow semantic authority, but a future user-confirmed workflow change
-should make risk tiers operational: full review for authority/topology/shared
-contracts, lighter bounded review for cross-file contracts, and one causal
-batch plus direct evidence for low-risk test recognizers. Run cross-candidate
-contract tests as soon as writer bytes freeze, before separate slice acceptance
-when possible. Do not redesign WDM as part of the live direction-flow test
-unless the user explicitly asks for that separate workflow change.
+The WDM follow-up is integrated. Route-table-first loading replaces repeated
+repository discovery; risk is classified as `high`, `bounded_contract` or
+`low_causal_repair`; one exact reviewed singleton package is accepted by the
+same WDM without a redundant convergence assignment; and true convergence is
+reserved for a distinct multi-candidate union. Progress observations may be
+merged, and detailed procedure remains in its defining source rather than being
+copied across Map, Session, Role and Skill.
+
+The later causal-repair contract also requires independent producers to freeze
+before final consumer-test work, collects all independently runnable focused
+failures before repair, groups failures into minimal exact-disjoint repair
+dispatches, and performs one lightweight host/basetemp preflight per validation
+layer. The preflight is explicitly not a doctor, global health check or
+acceptance gate. These changes address the observed common workflow debt; the
+earlier Generic-worker comparison remains only a rough experiment and is not a
+production instructions contract.

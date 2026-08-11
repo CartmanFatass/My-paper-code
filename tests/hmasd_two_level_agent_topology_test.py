@@ -74,8 +74,12 @@ LEAF_ROLES = {
     "hmasd-workflow-reviewer": "WORKFLOW_REVIEWER.md",
 }
 
-PROFILE_COUNT = 21
-ROLE_COUNT = 22
+UTILITY_ROLES = {
+    "hmasd-project-scout": "PROJECT_SCOUT.md",
+}
+
+PROFILE_COUNT = 22
+ROLE_COUNT = 23
 NON_LEAF_ROLE_FILES = {"EXTERNAL_PRO.md"}
 ACTIVE_AGENTIFY_TRANSPORTS = {
     "hmasd-cpm-agentify-transport",
@@ -329,13 +333,49 @@ def test_registered_l2_profiles_and_roles_are_non_spawning_leaves(leaf: str) -> 
     assert leaf != "default"
 
 
+def test_project_scout_is_a_dynamic_depth_read_only_utility_leaf() -> None:
+    name = "hmasd-project-scout"
+    profile_path = ROOT / ".codex/agents/hmasd-project-scout.toml"
+    role_path = ROOT / ".agents/roles/PROJECT_SCOUT.md"
+    profile = _load(profile_path)
+    role = _flat(role_path.read_text(encoding="utf-8"))
+    config = CONFIG.read_text(encoding="utf-8")
+    router = _flat((ROOT / "AGENTS.md").read_text(encoding="utf-8"))
+
+    assert profile["name"] == name
+    assert profile["model"] == "gpt-5.3-codex-spark"
+    assert profile["model_reasoning_effort"] == "medium"
+    assert profile["sandbox_mode"] == "read-only"
+    assert profile["approval_policy"] == "never"
+    assert 'config_file = "./agents/hmasd-project-scout.toml"' in config
+    for required in (
+        "role_kind=registered_task_scoped_read_only_utility_leaf",
+        "agent_tree_level=1_or_2",
+        "parent=root_or_registered_level1_with_spawn_authority",
+        "allowed_callers=root|workflow_design_manager|code_project_manager|independent_research_explorer",
+        "spawn_authority=none",
+        "write_authority=none",
+        "git_authority=none",
+        "review_authority=none",
+        "acceptance_authority=none",
+    ):
+        assert required in role, required
+    assert "every registered l1 is likewise encouraged to use it" in router
+    assert "an l2 has no spawn authority" in router
+    assert "never replaces their domain conclusions" in router
+
+
 def test_l2_profiles_are_registered_once_and_artifact_writer_covers_durable_research() -> None:
     config = CONFIG.read_text(encoding="utf-8")
     profile_paths = {path.stem for path in (ROOT / ".codex/agents").glob("*.toml")}
     assert len(profile_paths) == PROFILE_COUNT
-    assert profile_paths == set(MANAGERS) | set(LEAF_ROLES)
+    assert profile_paths == set(MANAGERS) | set(LEAF_ROLES) | set(UTILITY_ROLES)
     role_paths = {path.name for path in (ROOT / ".agents/roles").glob("*.md")}
-    expected_role_paths = {spec["role"].name for spec in MANAGERS.values()} | set(LEAF_ROLES.values())
+    expected_role_paths = (
+        {spec["role"].name for spec in MANAGERS.values()}
+        | set(LEAF_ROLES.values())
+        | set(UTILITY_ROLES.values())
+    )
     assert len(role_paths) == ROLE_COUNT
     assert role_paths == expected_role_paths | NON_LEAF_ROLE_FILES
     assert "hmasd-agentify-transport" not in LEAF_ROLES
@@ -345,6 +385,10 @@ def test_l2_profiles_are_registered_once_and_artifact_writer_covers_durable_rese
         profile = ROOT / ".codex/agents" / f"{leaf}.toml"
         assert profile.is_file(), leaf
         assert config.count(profile.name) == 1, leaf
+    for utility in UTILITY_ROLES:
+        profile = ROOT / ".codex/agents" / f"{utility}.toml"
+        assert profile.is_file(), utility
+        assert config.count(profile.name) == 1, utility
     continuity = ROOT / "local_research" / "RESEARCH_CONTINUITY.md"
     if continuity.is_file():
         writer = ROOT / ".codex/agents/hmasd-research-artifact-writer.toml"

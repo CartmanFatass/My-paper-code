@@ -27,6 +27,11 @@ description = "Read-only Sol-max L1 Independent Research Explorer for one Root-s
 config_file = "./agents/hmasd-independent-research-explorer.toml"
 nickname_candidates = ["Independent Research Explorer", "Research Manager", "Scientific Explorer"]
 
+[agents."HMASDProjectScout"]
+description = "Read-only Spark project scout for bounded repository exploration and factual confirmation."
+config_file = "./agents/hmasd-project-scout.toml"
+nickname_candidates = ["Project Scout", "Repository Scout", "Read-only Scout"]
+
 [agents."HMASDResearchArtifactWriter"]
 description = "Workspace-write L2 research artifact writer owned only by the Independent Research Explorer."
 config_file = "./agents/hmasd-research-artifact-writer.toml"

@@ -17,11 +17,14 @@ canonical record.
 ## Precedence and role resolution
 
 The Root reads this router first, identifies the owner lanes, and dispatches
-task-scoped L1 managers only when the task needs them. An L1 reads its exact
-assignment, its registered profile and Role, then dispatches only its named L2
-allow-list. An L2 reads only its exact assignment, profile, Role and immediate
-references. Missing identity, parent, owned paths or completion evidence fails
-closed and returns to Root.
+task-scoped L1 managers only when the task needs them. Root and each registered
+L1 may also dispatch the shared read-only Project Scout for one bounded
+repository exploration or factual confirmation. An L1 otherwise dispatches
+only its named specialist L2 allow-list. An L2 reads only its exact assignment,
+profile, Role and immediate references; because it cannot spawn, it returns a
+useful exact scout question to its parent for optional Project Scout dispatch.
+Missing identity, parent, owned paths or completion evidence fails closed and
+returns to the caller.
 
 The shared L1 multiplicity vocabulary is Role-defined: each L1 Role declares
 its own scope-key field, and one Root tree may contain multiple active
@@ -36,6 +39,7 @@ admission token or continuity/session identity.
 | L1, depth 1 | WDM | exact assignment, `.codex/agents/hmasd-workflow-design-manager.toml`, `.agents/roles/WORKFLOW_DESIGN_MANAGER.md` | code, runtime and science state |
 | L1, depth 1 | CPM | exact assignment, `.codex/agents/hmasd-code-project-manager.toml`, `.agents/roles/CODE_PROJECT_MANAGER.md` | workflow-control and research corpus |
 | L1, depth 1 | Explorer | exact assignment, `.codex/agents/hmasd-independent-research-explorer.toml`, `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md` | project runtime and unrelated workflow state |
+| L1 depth 1 or L2 depth 2 | Project Scout utility leaf | exact assignment, `.codex/agents/hmasd-project-scout.toml`, `.agents/roles/PROJECT_SCOUT.md` | owner semantics, unrelated state and mutation surfaces |
 | L2, depth 2 | registered leaf | exact assignment, its profile, named Role and immediate references | user, sibling lanes, unrelated history |
 
 L1 managers are same-level children of Root. Each L1 Role declares its own
@@ -109,6 +113,14 @@ independent_research_user_grant_authority=direct_user_in_explorer_task_only
 independent_research_explorer_scope_key_field=research_scope_key
 independent_research_explorer_scope_key_forms=direction:<id>
 
+project_scout_role_kind=registered_task_scoped_read_only_utility_leaf
+project_scout_agent_tree_level=1_or_2
+project_scout_parent=root_or_registered_level1_with_spawn_authority
+project_scout_allowed_callers=root|workflow_design_manager|code_project_manager|independent_research_explorer
+project_scout_l2_request_route=return_exact_read_only_question_to_parent_for_dispatch
+project_scout_authority=bounded_repository_exploration_or_factual_confirmation_only
+project_scout_write_git_runtime_science_design_review_acceptance=none
+
 scope_key_safe_atom=[a-z0-9][a-z0-9._-]{0,63}
 scope_key_reject=empty|extra_colon|separators|whitespace|..
 
@@ -139,6 +151,8 @@ is not canonical state until Root accepts and writes it.
 workflow_change_request_route=Root->WDM
 code_runtime_request_route=Root->CPM(direction:<id>|shared:<component>)
 research_request_route=Root->Explorer(direction:<id>)
+project_read_only_scout_route=Root_or_registered_L1->hmasd-project-scout
+project_read_only_scout_l2_route=L2->parent_exact_question->hmasd-project-scout
 portfolio_advisory_route=Root-local-macro-portfolio
 cross_owner_route=owner->Root->owner
 cross_task_transport=return_to_root
@@ -195,9 +209,34 @@ identifies Code Manager work. Immutable internal task IDs may differ. A WM
 label may name a research-routing target only when it remains visibly
 workflow/control-plane work; research execution is an EM concern.
 
+## Registered project-wide read-only Scout
+
+`hmasd-project-scout` is the shared project utility for bounded repository
+exploration and factual confirmation. Root should use it when an independent
+read-only lookup can proceed in parallel or avoid broad local discovery. Every
+registered L1 is likewise encouraged to use it for generic file, symbol,
+configuration, reference, caller/consumer or path-existence questions that do
+not require owner judgment. This is an efficiency route, not a mandatory gate.
+
+When Root calls it, the Scout is a non-spawning depth-1 utility leaf. When WDM,
+CPM or Explorer calls it, it is a non-spawning depth-2 utility leaf. An L2 has
+no spawn authority; it may return one exact useful read-only question to its
+parent, which decides whether to dispatch the Scout. The result returns only to
+the invoking parent and carries factual evidence, never user contact,
+cross-owner transport, mutation, design, audit, review, runtime, science or
+acceptance authority.
+
+Use the matching professional leaf when the task needs domain semantics:
+`hmasd-code-scout` remains CPM's code-interface mapper,
+`hmasd-research-scout` remains Explorer's scientific source/evidence scout,
+and `hmasd-workflow-auditor` remains WDM's workflow-impact authority. The
+Project Scout may confirm their factual premises but never replaces their
+domain conclusions.
+
 ## Registered L2 leaves
 
-Every L2 profile declares `role_kind=registered_task_scoped_level2_leaf`,
+Except for the separately defined dynamic-depth Project Scout utility, every
+specialist L2 profile declares `role_kind=registered_task_scoped_level2_leaf`,
 `agent_tree_level=2`, its single `parent`, `spawn_authority=none`,
 `user_contact_authority=none`, `cross_branch_transport=none`, and exact owned
 paths. L2 may use `workspace-write` only for those paths; it never stages,
