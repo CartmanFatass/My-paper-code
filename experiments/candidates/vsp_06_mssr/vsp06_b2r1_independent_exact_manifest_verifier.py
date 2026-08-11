@@ -36,6 +36,8 @@ REQUIRED_ORTOOLS = "9.12.4544"
 INVALID = "B2R1_SELECTOR_INVALID_NO_RUN"
 SYNTHETIC_DOMAIN = "VSP06-B2R1-SYNTHETIC-NONCANONICAL-V1"
 SYNTHETIC_SUCCESS = "SYNTHETIC_STRUCTURAL_VALID_ONLY"
+UNIVERSE_SPEC_ID = "VSP06-B2R1-INDEPENDENT-CANONICAL-UNIVERSE-SPEC-V1"
+SYNTHETIC_UNIVERSE_SPEC_ID = "VSP06-B2R1-INDEPENDENT-SYNTHETIC-UNIVERSE-SPEC-V1"
 PARAMETER_ASSIGNMENTS = {
     "num_search_workers": 1,
     "search_branching": "FIXED_SEARCH",
@@ -96,6 +98,16 @@ ACTIVITY_NAMES = (
     "environment_episodes", "environment_transitions", "policy_forwards", "learner_updates",
     "optimizer_steps", "evaluator_calls", "evaluation_episodes", "environment_rng_calls", "action_rng_calls",
 )
+SOURCE_CONFIG_RELATIVE_PATHS = (
+    "experiments/candidates/vsp_06_mssr/vsp06_b2r1_source_bound_exact_feasibility.py",
+    "experiments/candidates/vsp_06_mssr/vsp06_b2r1_independent_exact_manifest_verifier.py",
+    "experiments/candidates/vsp_06_mssr/vsp06_b2r1_authenticated_partner_recall_credit_efficiency.py",
+    "scripts/run_vsp06_b2r1_authenticated_partner_recall_credit_efficiency.py",
+    "tests/experiments/candidates/vsp_06_mssr/test_vsp06_b2r1_authenticated_partner_recall_credit_efficiency.py",
+    "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_CONSTRAINT_TARGET_LEDGER_V1.json",
+    "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_CODE_SCIENCE_INDEX.md",
+)
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 
 class VerificationError(RuntimeError):
@@ -103,7 +115,7 @@ class VerificationError(RuntimeError):
 
 
 def _validate_stage2_authorization(value: Mapping[str, Any]) -> None:
-    required = {"direction", "candidate", "treatment_id", "selector_id", "verifier_id", "scientific_parent", "final_commit", "source_build_read_allowlist", "formal", "synthetic_only", "zero_start_activity"}
+    required = {"direction", "candidate", "treatment_id", "selector_id", "verifier_id", "scientific_parent", "final_commit", "source_build_read_allowlist", "source_config_digest_map", "source_config_digest_map_sha256", "formal", "synthetic_only", "zero_start_activity"}
     fixed = {"direction": DIRECTION_ID, "candidate": CANDIDATE_ID, "treatment_id": TREATMENT_ID, "selector_id": SELECTOR_ID, "verifier_id": VERIFIER_ID, "scientific_parent": SCIENTIFIC_PARENT, "formal": False, "synthetic_only": False}
     if not isinstance(value, Mapping) or set(value) != required or any(value.get(k) != v for k, v in fixed.items()):
         raise VerificationError("missing or invalid Stage-2 authorization binding")
@@ -117,6 +129,21 @@ def _validate_stage2_authorization(value: Mapping[str, Any]) -> None:
         or any(char in item for char in "*?[") for item in allowlist
     ) or len(set(allowlist)) != len(allowlist) or not isinstance(activity, Mapping) or set(activity) != set(ACTIVITY_NAMES) or any(v != 0 or isinstance(v, bool) for v in activity.values()):
         raise VerificationError("invalid Stage-2 allowlist or zero-start binding")
+    digest_map = value.get("source_config_digest_map")
+    digest_map_digest = value.get("source_config_digest_map_sha256")
+    if (
+        not isinstance(digest_map, Mapping)
+        or set(digest_map) != set(SOURCE_CONFIG_RELATIVE_PATHS)
+        or any(
+            not isinstance(digest, str) or len(digest) != 64
+            or any(char not in "0123456789abcdef" for char in digest)
+            for digest in digest_map.values()
+        )
+        or not isinstance(digest_map_digest, str) or len(digest_map_digest) != 64
+        or any(char not in "0123456789abcdef" for char in digest_map_digest)
+        or digest_map_digest != _digest(_json_bytes(dict(digest_map)))
+    ):
+        raise VerificationError("invalid Explorer-audited source/config digest map")
 
 
 def _is_reparse(path: Path) -> bool:
@@ -148,6 +175,53 @@ def authorize_read_path(authorization: Mapping[str, Any], path: Path) -> Path:
     if str(path) != str(resolved) or str(resolved) not in authorization["source_build_read_allowlist"]:
         raise VerificationError("read locator is not the exact authorized canonical path")
     return resolved
+
+
+def _authorized_bytes(authorization: Mapping[str, Any], path: Path) -> bytes:
+    resolved = authorize_read_path(authorization, path)
+    before = os.stat(resolved, follow_symlinks=False)
+    flags = os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open(resolved, flags)
+    try:
+        opened = os.fstat(descriptor)
+        if not stat.S_ISREG(opened.st_mode) or (
+            before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns
+        ) != (opened.st_dev, opened.st_ino, opened.st_size, opened.st_mtime_ns):
+            raise VerificationError("authorized file changed between validation and open")
+        chunks: list[bytes] = []
+        while True:
+            block = os.read(descriptor, 1024 * 1024)
+            if not block:
+                break
+            chunks.append(block)
+        after_open = os.fstat(descriptor)
+    finally:
+        os.close(descriptor)
+    after_path = os.stat(authorize_read_path(authorization, path), follow_symlinks=False)
+    identity = (opened.st_dev, opened.st_ino, opened.st_size, opened.st_mtime_ns)
+    if identity != (
+        after_open.st_dev, after_open.st_ino, after_open.st_size, after_open.st_mtime_ns
+    ) or identity != (
+        after_path.st_dev, after_path.st_ino, after_path.st_size, after_path.st_mtime_ns
+    ):
+        raise VerificationError("authorized file changed during or after read")
+    return b"".join(chunks)
+
+
+def _authorized_digest(authorization: Mapping[str, Any], path: Path) -> str:
+    return _digest(_authorized_bytes(authorization, path))
+
+
+def _authorized_load(
+    authorization: Mapping[str, Any], path: Path,
+) -> Mapping[str, Any]:
+    try:
+        value = json.loads(_authorized_bytes(authorization, path).decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise VerificationError(f"authorized JSON is invalid: {path}") from exc
+    if not isinstance(value, Mapping):
+        raise VerificationError(f"JSON root must be an object: {path}")
+    return value
 
 
 def _json_bytes(value: Any) -> bytes:
@@ -199,14 +273,6 @@ def _expected_sat_parameter_bytes() -> bytes:
         else:
             raise VerificationError("unknown frozen protobuf wire type")
     return bytes(encoded)
-
-
-def _file_digest(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def _load(path: Path) -> Mapping[str, Any]:
@@ -279,6 +345,204 @@ def _parse_catalog(raw: Mapping[str, Any]) -> list[dict[str, Any]]:
             "split": _split(bucket),
         })
     return sorted(parsed, key=lambda item: item["bytes"])
+
+
+def _universe_decoy_patterns() -> tuple[list[list[Any]], ...]:
+    base = [[0, 0, 1, False], [1, 1, 2, True], [2, 2, 3, False], [3, 3, 0, True]]
+    return tuple(base[index:] + base[:index] for index in range(4))
+
+
+def _universe_raw_row(
+    *, consumer: str, seed_row: str, panel: str, branch: str,
+    retention_length: int, y: int, logical_index: int, nonce: int,
+) -> dict[str, Any]:
+    feature = logical_index % 4
+    identity = feature
+    version = (logical_index // 4) % 4
+    event_index = (logical_index // 16) % 4
+    decoy_index = (logical_index // 64) % 4
+    event_types = ("target_absent_payload", "unauth_target_decoy", "renewal_marker", "dummy_roster")
+    quartet = (
+        f"{seed_row}_q{logical_index // 4:04d}"
+        if consumer == "final_keep"
+        else f"{consumer}_{seed_row}_{panel}_{branch}_{retention_length}_{logical_index:06d}"
+    )
+    binding = _digest(_json_bytes([
+        consumer, seed_row, panel, branch, retention_length, y, logical_index
+    ]))
+    return {
+        "consumer": consumer, "seed_row": seed_row, "panel": panel,
+        "branch": branch, "retention_length": retention_length, "y": y,
+        "reset_y": (identity + version + event_index + decoy_index) % 4,
+        "target_identity": identity, "target_version": version,
+        "event_type": event_types[event_index],
+        "decoy_sequence": _universe_decoy_patterns()[decoy_index],
+        "current_bytes": _digest(_json_bytes(["current", quartet])),
+        "roster": "P0,P1,P2,P3,focal", "legal_mask": "1111",
+        "clock": f"L={retention_length}", "rng_binding": binding,
+        "quartet_base": quartet, "nonce": nonce,
+    }
+
+
+def _expected_universe_spec() -> dict[str, Any]:
+    primary = ["primary_1", "primary_2", "primary_3", "primary_4"]
+    return {
+        "universe_id": UNIVERSE_SPEC_ID,
+        "schema_version": 1,
+        "salt": SALT,
+        "tuple_fields": list(TUPLE_FIELDS),
+        "actions": [0, 1, 2, 3],
+        "primary_seeds": primary,
+        "checkpoints": [0, 512, 1024, 1536, 2048, 2560, 3072, 4096],
+        "regular_pools": [
+            {
+                "consumer": "primary_fit", "seed_rows": primary, "panels": ["fit"],
+                "branch_targets": {"KEEP": 384, "RESET": 64, "CURRENT": 64},
+                "retention_lengths": [4, 8], "required_split": "train",
+                "oversupply_multiplier": 4, "reset_multiplier": 4,
+            },
+            {
+                "consumer": "calibration_fit", "seed_rows": ["calibration"],
+                "panels": ["fit"], "branch_targets": {"CURRENT": 128},
+                "retention_lengths": [4], "required_split": "calibration",
+                "oversupply_multiplier": 32, "reset_multiplier": 4,
+            },
+            {
+                "consumer": "calibration_check", "seed_rows": ["calibration"],
+                "panels": ["check"], "branch_targets": {"CURRENT": 32},
+                "retention_lengths": [4], "required_split": "calibration",
+                "oversupply_multiplier": 32, "reset_multiplier": 4,
+            },
+            {
+                "consumer": "checkpoint", "seed_rows": primary,
+                "panels": ["0", "512", "1024", "1536", "2048", "2560", "3072", "4096"],
+                "branch_targets": {"KEEP": 16, "RESET": 8, "CURRENT": 8},
+                "retention_lengths": [6], "required_split": "evaluation",
+                "oversupply_multiplier": 32, "reset_multiplier": 4,
+            },
+        ],
+        "final_keep": {
+            "consumer": "final_keep", "seed_rows": primary,
+            "panel": "4096_keep_extra", "branch": "KEEP", "retention_length": 6,
+            "quartets_per_seed": 64, "nonce_start": 0, "nonce_stop": 256,
+            "required_split": "evaluation", "first_matching_nonce": True,
+            "reset_y": 0,
+        },
+        "derivation": {
+            "row_formula": "VSP06-B2R1-RAW-ROW-V1",
+            "final_keep_formula": "VSP06-B2R1-FINAL-KEEP-FIRST-EVAL-V1",
+            "bucket_formula": "sha256(utf8(salt)||canonical_tuple_bytes)[0]%8",
+        },
+    }
+
+
+def validate_declarative_universe_spec(spec: Mapping[str, Any]) -> None:
+    """Pure exact recipe validation; performs no canonical row reconstruction."""
+
+    if not isinstance(spec, Mapping) or dict(spec) != _expected_universe_spec():
+        raise VerificationError("declarative universe specification differs from frozen recipe")
+
+
+def _reconstruct_universe(spec: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Reconstruct the catalog from a recipe; no selector/generator is imported."""
+
+    validate_declarative_universe_spec(spec)
+
+    keys = {
+        "universe_id", "schema_version", "salt", "tuple_fields", "actions",
+        "primary_seeds", "checkpoints", "regular_pools", "final_keep", "derivation",
+    }
+    if (
+        not isinstance(spec, Mapping) or set(spec) != keys
+        or spec.get("universe_id") != UNIVERSE_SPEC_ID
+        or spec.get("schema_version") != 1 or spec.get("salt") != SALT
+        or spec.get("tuple_fields") != list(TUPLE_FIELDS)
+        or spec.get("actions") != [0, 1, 2, 3]
+        or spec.get("primary_seeds") != ["primary_1", "primary_2", "primary_3", "primary_4"]
+        or spec.get("checkpoints") != [0, 512, 1024, 1536, 2048, 2560, 3072, 4096]
+        or spec.get("derivation") != {
+            "row_formula": "VSP06-B2R1-RAW-ROW-V1",
+            "final_keep_formula": "VSP06-B2R1-FINAL-KEEP-FIRST-EVAL-V1",
+            "bucket_formula": "sha256(utf8(salt)||canonical_tuple_bytes)[0]%8",
+        }
+    ):
+        raise VerificationError("declarative universe specification envelope mismatch")
+    pools = spec["regular_pools"]
+    if not isinstance(pools, list) or len(pools) != 4:
+        raise VerificationError("declarative universe pool set mismatch")
+    pool_keys = {
+        "consumer", "seed_rows", "panels", "branch_targets", "retention_lengths",
+        "required_split", "oversupply_multiplier", "reset_multiplier",
+    }
+    rows: list[dict[str, Any]] = []
+    for pool in pools:
+        if not isinstance(pool, Mapping) or set(pool) != pool_keys:
+            raise VerificationError("declarative universe pool schema mismatch")
+        axes = (pool["seed_rows"], pool["panels"], pool["branch_targets"], pool["retention_lengths"])
+        if any(not isinstance(axis, (list, Mapping)) or not axis for axis in axes):
+            raise VerificationError("declarative universe pool axes are empty")
+        if not isinstance(pool["oversupply_multiplier"], int) or not isinstance(pool["reset_multiplier"], int):
+            raise VerificationError("declarative universe multiplier is invalid")
+        for seed in pool["seed_rows"]:
+            for panel in pool["panels"]:
+                for branch, target in pool["branch_targets"].items():
+                    for length in pool["retention_lengths"]:
+                        for y in spec["actions"]:
+                            multiplier = pool["oversupply_multiplier"]
+                            if branch == "RESET":
+                                multiplier *= pool["reset_multiplier"]
+                            for logical in range(target * multiplier):
+                                row = _universe_raw_row(
+                                    consumer=pool["consumer"], seed_row=seed, panel=panel,
+                                    branch=branch, retention_length=length, y=y,
+                                    logical_index=logical, nonce=logical,
+                                )
+                                if _split(_bucket(_tuple_bytes(row))) == pool["required_split"]:
+                                    rows.append(row)
+    final = spec["final_keep"]
+    final_keys = {
+        "consumer", "seed_rows", "panel", "branch", "retention_length",
+        "quartets_per_seed", "nonce_start", "nonce_stop", "required_split",
+        "first_matching_nonce", "reset_y",
+    }
+    if (
+        not isinstance(final, Mapping) or set(final) != final_keys
+        or final["consumer"] != "final_keep" or final["seed_rows"] != spec["primary_seeds"]
+        or final["panel"] != "4096_keep_extra" or final["branch"] != "KEEP"
+        or final["retention_length"] != 6 or final["quartets_per_seed"] != 64
+        or final["nonce_start"] != 0 or final["nonce_stop"] != 256
+        or final["required_split"] != "evaluation" or final["first_matching_nonce"] is not True
+        or final["reset_y"] != 0
+    ):
+        raise VerificationError("declarative final-KEEP universe specification mismatch")
+    events = ("target_absent_payload", "unauth_target_decoy", "renewal_marker", "dummy_roster")
+    for seed in final["seed_rows"]:
+        for quartet_index in range(final["quartets_per_seed"]):
+            identity = quartet_index % 4
+            version = (quartet_index // 4) % 4
+            event_index = (quartet_index // 16) % 4
+            decoy_index = (identity + version + event_index) % 4
+            for y in spec["actions"]:
+                for nonce in range(final["nonce_start"], final["nonce_stop"]):
+                    row = _universe_raw_row(
+                        consumer="final_keep", seed_row=seed, panel=final["panel"],
+                        branch="KEEP", retention_length=6, y=y,
+                        logical_index=quartet_index, nonce=nonce,
+                    )
+                    row["quartet_base"] = f"{seed}_q{quartet_index:04d}"
+                    row["target_identity"] = identity
+                    row["target_version"] = version
+                    row["event_type"] = events[event_index]
+                    row["decoy_sequence"] = _universe_decoy_patterns()[decoy_index]
+                    row["current_bytes"] = _digest(_json_bytes(["current", row["quartet_base"]]))
+                    row["rng_binding"] = _digest(_json_bytes(["quartet", row["quartet_base"]]))
+                    row["reset_y"] = 0
+                    if _split(_bucket(_tuple_bytes(row))) == "evaluation":
+                        rows.append(row)
+                        break
+                else:
+                    raise VerificationError("declarative final-KEEP nonce domain is incomplete")
+    return rows
 
 
 def _parse_ledger(raw: Mapping[str, Any]) -> list[Mapping[str, Any]]:
@@ -527,14 +791,20 @@ def _check_canonical_catalog_support(rows: Sequence[Mapping[str, Any]]) -> dict[
     return {"final_keep_rows": len(final_rows), "quartet_count": len(groups)}
 
 
-def _check_live_binding(expected: Mapping[str, Any]) -> None:
+def _check_live_binding(
+    expected: Mapping[str, Any], authorization: Mapping[str, Any]
+) -> None:
     if platform.python_implementation() != "CPython" or sys.version_info[:2] != (3, 11):
         raise VerificationError("canonical verifier requires live CPython 3.11")
     if (
         expected["python_implementation"] != platform.python_implementation()
         or expected["python_version"] != platform.python_version()
-        or Path(str(expected["python_executable"])).resolve() != Path(sys.executable).resolve()
-        or expected["python_executable_sha256"] != _file_digest(Path(sys.executable).resolve())
+        or authorize_read_path(
+            authorization, Path(str(expected["python_executable"]))
+        ) != authorize_read_path(authorization, Path(sys.executable).resolve())
+        or expected["python_executable_sha256"] != _authorized_digest(
+            authorization, Path(sys.executable).resolve()
+        )
         or expected["os"] != platform.system()
         or expected["os_release"] != platform.release()
         or expected["architecture"] != platform.machine()
@@ -546,12 +816,17 @@ def _check_live_binding(expected: Mapping[str, Any]) -> None:
         raise VerificationError(f"live ortools=={REQUIRED_ORTOOLS} is absent") from exc
     if distribution.version != REQUIRED_ORTOOLS or expected["ortools_version"] != REQUIRED_ORTOOLS or expected["ortools_source_tag"] != "v9.12":
         raise VerificationError("live OR-Tools version/source binding mismatch")
-    actual_artifacts = sorted(
-        [str(Path(distribution.locate_file(item)).resolve()), _file_digest(Path(distribution.locate_file(item)).resolve())]
-        for item in (distribution.files or ())
-        if Path(str(item)).suffix.lower() in {".pyd", ".so", ".dll"}
-        and Path(distribution.locate_file(item)).is_file()
-    )
+    actual_artifacts = []
+    for item in distribution.files or ():
+        if Path(str(item)).suffix.lower() not in {".pyd", ".so", ".dll"}:
+            continue
+        artifact = authorize_read_path(
+            authorization, Path(distribution.locate_file(item)).resolve()
+        )
+        actual_artifacts.append([
+            str(artifact), _authorized_digest(authorization, artifact)
+        ])
+    actual_artifacts.sort()
     if not actual_artifacts or expected["solver_artifacts"] != actual_artifacts:
         raise VerificationError("live solver artifact set mismatch")
     if expected["solver_artifact_set_sha256"] != _digest(_json_bytes(actual_artifacts)):
@@ -570,15 +845,44 @@ def _check_live_binding(expected: Mapping[str, Any]) -> None:
         raise VerificationError("serialized SatParameters digest mismatch")
 
 
+def _expected_sealed_path_schema() -> dict[str, str]:
+    root = PROJECT_ROOT / "temp/sessions/code_project_manager/vsp06_b2r1_source_bound_exact_feasibility_credit_efficiency"
+    selector_root = root / "selector"
+    result = {
+        "claim": str((root / "stage2_namespace_claim.json").resolve()),
+        "catalog": str((root / "canonical_catalog.json").resolve()),
+        "universe_spec": str((root / "declarative_universe_spec.json").resolve()),
+        "ledger": str((PROJECT_ROOT / SOURCE_CONFIG_RELATIVE_PATHS[5]).resolve()),
+        "bindings": str((selector_root / "frozen_bindings.json").resolve()),
+        "replica_1": str((selector_root / "cold_replica_1.json").resolve()),
+        "replica_2": str((selector_root / "cold_replica_2.json").resolve()),
+        "witness": str((selector_root / "membership_witness.json").resolve()),
+        "proposed_manifest": str((selector_root / "proposed_manifest.json").resolve()),
+        "verifier_report": str((selector_root / "independent_verifier_report.json").resolve()),
+        "receipt": str((selector_root / "selector_success_receipt.json").resolve()),
+        "manifest": str((root / "frozen_manifest.json").resolve()),
+    }
+    for replica in (1, 2):
+        base = selector_root / f"cold_replica_{replica}.json"
+        result[f"replica_{replica}_stdout"] = str(base.with_name(base.stem + ".stdout.log").resolve())
+        result[f"replica_{replica}_stderr"] = str(base.with_name(base.stem + ".stderr.log").resolve())
+        result[f"replica_{replica}_resource"] = str(base.with_name(base.stem + ".resource.json").resolve())
+    return result
+
+
 def verify(
     *, catalog_path: Path, ledger_path: Path, witness_path: Path,
     manifest_path: Path, bindings_path: Path, replica_paths: Sequence[Path],
     stage2_authorization_path: Path, universe_path: Path,
 ) -> dict[str, Any]:
     stage2_authorization_path = safe_existing_path(stage2_authorization_path)
-    authorization = _load(stage2_authorization_path)
+    bootstrap_authorization = _load(stage2_authorization_path)
+    _validate_stage2_authorization(bootstrap_authorization)
+    authorize_read_path(bootstrap_authorization, stage2_authorization_path)
+    authorization = _authorized_load(bootstrap_authorization, stage2_authorization_path)
     _validate_stage2_authorization(authorization)
-    authorize_read_path(authorization, stage2_authorization_path)
+    if authorization != bootstrap_authorization:
+        raise VerificationError("Stage-2 authorization changed during secure load")
     catalog_path = authorize_read_path(authorization, catalog_path)
     universe_path = authorize_read_path(authorization, universe_path)
     ledger_path = authorize_read_path(authorization, ledger_path)
@@ -588,20 +892,31 @@ def verify(
     replica_paths = tuple(authorize_read_path(authorization, path) for path in replica_paths)
     if len(replica_paths) != 2:
         raise VerificationError("exactly two replica reports are required")
-    replicas = [_load(path) for path in replica_paths]
+    sealed = _expected_sealed_path_schema()
+    exact_inputs = {
+        "catalog": catalog_path, "universe_spec": universe_path,
+        "ledger": ledger_path, "witness": witness_path,
+        "proposed_manifest": manifest_path, "bindings": bindings_path,
+    }
+    if any(str(path) != sealed[name] for name, path in exact_inputs.items()) or [
+        str(path) for path in replica_paths
+    ] != [sealed["replica_1"], sealed["replica_2"]]:
+        raise VerificationError("verifier input used an alternate sealed locator")
+    replicas = [_authorized_load(authorization, path) for path in replica_paths]
     replica_keys = ("selector_identity", "terminal_status", "membership_vector", "membership_vector_sha256", "selected_tuple_sha256", "manifest", "manifest_sha256")
     if replicas[0].get("terminal_status") not in {"FEASIBLE", "OPTIMAL"} or any(replicas[0].get(key) != replicas[1].get(key) for key in replica_keys):
         raise VerificationError("two complete replica reports disagree, including terminal status")
-    raw_catalog = _load(catalog_path)
-    raw_universe = _load(universe_path)
-    raw_ledger = _load(ledger_path)
-    witness = _load(witness_path)
-    manifest = _load(manifest_path)
-    bindings = _load(bindings_path)
+    raw_catalog = _authorized_load(authorization, catalog_path)
+    raw_universe = _authorized_load(authorization, universe_path)
+    raw_ledger = _authorized_load(authorization, ledger_path)
+    witness = _authorized_load(authorization, witness_path)
+    manifest = _authorized_load(authorization, manifest_path)
+    bindings = _authorized_load(authorization, bindings_path)
     rows = _parse_catalog(raw_catalog)
-    if set(raw_universe) != {"universe_id", "salt", "rows"} or raw_universe.get("universe_id") != "VSP06-B2R1-INDEPENDENT-CANONICAL-UNIVERSE-V1" or raw_universe.get("salt") != SALT:
-        raise VerificationError("independent universe envelope mismatch")
-    universe_rows = _parse_catalog({"catalog_id": CATALOG_ID, "salt": SALT, "rows": raw_universe.get("rows")})
+    universe_rows = _parse_catalog({
+        "catalog_id": CATALOG_ID, "salt": SALT,
+        "rows": _reconstruct_universe(raw_universe),
+    })
     if [row["bytes"] for row in universe_rows] != [row["bytes"] for row in rows]:
         raise VerificationError("catalog is partial, mutated, or out of independent universe")
     equations = _parse_ledger(raw_ledger)
@@ -610,12 +925,14 @@ def verify(
         raise VerificationError("frozen binding envelope is absent")
     required_binding_keys = {
         "selector_source_sha256", "verifier_source_sha256", "catalog_sha256",
+        "source_config_digest_map", "source_config_digest_map_sha256",
         "ledger_sha256", "python_implementation", "python_version",
         "python_executable", "python_executable_sha256", "ortools_version",
         "ortools_source_tag", "solver_artifacts", "solver_artifact_set_sha256",
         "sat_parameters_sha256", "sat_parameters_hex", "sat_parameter_assignments",
         "sat_parameter_assignments_sha256", "os", "os_release",
-        "architecture", "final_commit", "stage2_authorization_sha256", "universe_sha256",
+        "architecture", "final_commit", "stage2_authorization_sha256",
+        "universe_spec_sha256", "sealed_path_schema", "sealed_path_schema_sha256",
     }
     if set(expected) != required_binding_keys:
         raise VerificationError("source/build/parameter binding key set changed")
@@ -629,19 +946,39 @@ def verify(
     selector_path = authorize_read_path(authorization, selector_path)
     verifier_path = authorize_read_path(authorization, verifier_path)
 
+    source_map = expected["source_config_digest_map"]
+    if not isinstance(source_map, Mapping) or set(source_map) != set(SOURCE_CONFIG_RELATIVE_PATHS):
+        raise VerificationError("seven-path source/config digest map is incomplete")
+    actual_source_map = {
+        relative: _authorized_digest(authorization, PROJECT_ROOT / relative)
+        for relative in SOURCE_CONFIG_RELATIVE_PATHS
+    }
+    if (
+        dict(source_map) != dict(authorization["source_config_digest_map"])
+        or actual_source_map != dict(authorization["source_config_digest_map"])
+        or expected["source_config_digest_map_sha256"] != authorization["source_config_digest_map_sha256"]
+        or authorization["source_config_digest_map_sha256"] != _digest(_json_bytes(actual_source_map))
+    ):
+        raise VerificationError("seven-path final-commit source/config binding mismatch")
+
     if (
         verifier_path != Path(__file__).resolve()
-        or expected["verifier_source_sha256"] != _file_digest(verifier_path)
-        or expected["selector_source_sha256"] != _file_digest(selector_path)
-        or expected["catalog_sha256"] != _file_digest(catalog_path)
-        or expected["ledger_sha256"] != _file_digest(ledger_path)
-        or expected["universe_sha256"] != _file_digest(universe_path)
+        or selector_path != (PROJECT_ROOT / SOURCE_CONFIG_RELATIVE_PATHS[0]).resolve()
+        or expected["verifier_source_sha256"] != _authorized_digest(authorization, verifier_path)
+        or expected["selector_source_sha256"] != _authorized_digest(authorization, selector_path)
+        or expected["catalog_sha256"] != _authorized_digest(authorization, catalog_path)
+        or expected["ledger_sha256"] != _authorized_digest(authorization, ledger_path)
+        or expected["universe_spec_sha256"] != _authorized_digest(authorization, universe_path)
+        or expected["sealed_path_schema_sha256"] != _digest(
+            _json_bytes(expected["sealed_path_schema"])
+        )
+        or expected["sealed_path_schema"] != _expected_sealed_path_schema()
     ):
         raise VerificationError("source/input binding mismatch")
     if not synthetic_only:
         if raw_ledger.get("family_counts") != CANONICAL_FAMILY_COUNTS:
             raise VerificationError("canonical constraint-family counts mismatch")
-        _check_live_binding(expected)
+        _check_live_binding(expected, authorization)
         _check_canonical_catalog_support(rows)
     if witness.get("selector_identity") != SELECTOR_ID:
         raise VerificationError("membership witness selector identity mismatch")
@@ -692,13 +1029,20 @@ def verify(
         "synthetic_only": synthetic_only,
         "selected_count": len(selected),
         "constraint_families": family_reports,
-        "catalog_sha256": _file_digest(catalog_path),
-        "ledger_sha256": _file_digest(ledger_path),
+        "final_commit": authorization["final_commit"],
+        "stage2_authorization_sha256": _digest(_json_bytes(authorization)),
+        "source_config_digest_map_sha256": expected["source_config_digest_map_sha256"],
+        "catalog_sha256": _authorized_digest(authorization, catalog_path),
+        "universe_spec_sha256": _authorized_digest(authorization, universe_path),
+        "ledger_sha256": _authorized_digest(authorization, ledger_path),
         "selector_source_sha256": expected["selector_source_sha256"],
         "solver_artifact_set_sha256": expected["solver_artifact_set_sha256"],
         "sat_parameters_sha256": expected["sat_parameters_sha256"],
         "python_executable_sha256": expected["python_executable_sha256"],
-        "membership_witness_sha256": _file_digest(witness_path),
+        "membership_witness_sha256": _authorized_digest(authorization, witness_path),
+        "replica_sha256": [
+            _authorized_digest(authorization, path) for path in replica_paths
+        ],
         "membership_vector_sha256": witness["membership_vector_sha256"],
         "manifest_sha256": manifest_digest,
         "verifier_source_sha256": expected["verifier_source_sha256"],
@@ -733,19 +1077,65 @@ def _claimed_entries(entries: Any, label: str) -> list[tuple[str, bytes]]:
     return result
 
 
+def _reconstruct_synthetic_universe(spec: Mapping[str, Any]) -> list[dict[str, Any]]:
+    required = {
+        "universe_id", "salt", "synthetic_only", "domain", "fixture_id", "parameters"
+    }
+    if (
+        not isinstance(spec, Mapping) or set(spec) != required
+        or spec.get("universe_id") != SYNTHETIC_UNIVERSE_SPEC_ID
+        or spec.get("salt") != SALT or spec.get("synthetic_only") is not True
+        or spec.get("domain") != SYNTHETIC_DOMAIN
+        or spec.get("fixture_id") != "VSP06-B2R1-HAND-AUTHORED-20-ROW-PROOF-V1"
+        or spec.get("parameters") != {
+            "keep_y": [0, 1, 2, 3], "reset_cross_product": [0, 1, 2, 3]
+        }
+    ):
+        raise VerificationError("independent universe specification synthetic mismatch")
+
+    def base(y: int, nonce: int, quartet: str, branch: str) -> dict[str, Any]:
+        return {
+            "consumer": "synthetic", "seed_row": "s", "panel": "p",
+            "branch": branch, "retention_length": 6, "y": y, "reset_y": 0,
+            "target_identity": 0, "target_version": 0, "event_type": "e",
+            "decoy_sequence": [[0, 1, 2, False]], "current_bytes": "c",
+            "roster": "r", "legal_mask": "1111", "clock": "clock",
+            "rng_binding": "none", "quartet_base": quartet, "nonce": nonce,
+        }
+
+    rows = []
+    for y in range(4):
+        value = base(y, y, "q", "KEEP")
+        value["consumer"] = "final_keep"
+        rows.append(value)
+    events = ("target_absent_payload", "unauth_target_decoy", "renewal_marker", "dummy_roster")
+    for index, (y, fresh) in enumerate(product(range(4), repeat=2)):
+        value = base(y, 4 + index, f"reset-{index}", "RESET")
+        value["reset_y"] = fresh
+        value["target_identity"] = (y + fresh) % 4
+        value["target_version"] = (2 * y + fresh) % 4
+        value["event_type"] = events[(y + fresh) % 4]
+        value["decoy_sequence"] = [[
+            (y + fresh) % 4, (y + fresh + 1) % 4,
+            (y + fresh + 2) % 4, bool((y + fresh) % 2),
+        ]]
+        rows.append(value)
+    return rows
+
+
 def verify_synthetic(
     *, catalog: Mapping[str, Any], universe_spec: Mapping[str, Any], ledger: Mapping[str, Any],
     witness: Mapping[str, Any], replicas: Sequence[Mapping[str, Any]], proposed_manifest: Mapping[str, Any],
 ) -> Mapping[str, Any]:
     """Independent in-memory noncanonical proof; never admits canonical state."""
     catalog_keys = {"catalog_id", "salt", "synthetic_only", "domain", "rows"}
-    universe_keys = {"universe_id", "salt", "synthetic_only", "domain", "rows"}
+    universe_keys = {"universe_id", "salt", "synthetic_only", "domain", "fixture_id", "parameters"}
     if not isinstance(catalog, Mapping) or set(catalog) != catalog_keys or catalog.get("synthetic_only") is not True or catalog.get("domain") != SYNTHETIC_DOMAIN:
         raise VerificationError("synthetic catalog envelope mismatch")
-    if not isinstance(universe_spec, Mapping) or set(universe_spec) != universe_keys or universe_spec.get("universe_id") != "VSP06-B2R1-INDEPENDENT-SYNTHETIC-UNIVERSE-V1" or universe_spec.get("synthetic_only") is not True or universe_spec.get("domain") != SYNTHETIC_DOMAIN:
+    if not isinstance(universe_spec, Mapping) or set(universe_spec) != universe_keys or universe_spec.get("universe_id") != SYNTHETIC_UNIVERSE_SPEC_ID or universe_spec.get("synthetic_only") is not True or universe_spec.get("domain") != SYNTHETIC_DOMAIN:
         raise VerificationError("synthetic universe envelope mismatch")
     rows = _parse_catalog({"catalog_id": catalog["catalog_id"], "salt": catalog["salt"], "rows": catalog["rows"]})
-    universe = _parse_catalog({"catalog_id": CATALOG_ID, "salt": universe_spec["salt"], "rows": universe_spec["rows"]})
+    universe = _parse_catalog({"catalog_id": CATALOG_ID, "salt": universe_spec["salt"], "rows": _reconstruct_synthetic_universe(universe_spec)})
     if [row["bytes"] for row in rows] != [row["bytes"] for row in universe]:
         raise VerificationError("catalog is missing, mutated, or out of independent universe")
     witness_keys = {"synthetic_only", "domain", "selected_count", "vector", "selected"}
@@ -834,7 +1224,23 @@ def main(argv: Sequence[str] | None = None) -> int:
             bindings_path=Path(args.bindings), replica_paths=tuple(Path(item) for item in args.replica),
             stage2_authorization_path=Path(args.stage2_authorization), universe_path=Path(args.universe),
         )
-        _write_new(Path(args.report).resolve(), report)
+        authorization_path = safe_existing_path(Path(args.stage2_authorization))
+        bootstrap_authorization = _load(authorization_path)
+        _validate_stage2_authorization(bootstrap_authorization)
+        authorize_read_path(bootstrap_authorization, authorization_path)
+        authorization = _authorized_load(bootstrap_authorization, authorization_path)
+        _validate_stage2_authorization(authorization)
+        if authorization != bootstrap_authorization:
+            raise VerificationError("Stage-2 authorization changed before report write")
+        report_path = Path(args.report)
+        expected_report = _expected_sealed_path_schema()["verifier_report"]
+        if (
+            str(report_path) != str(report_path.resolve())
+            or str(report_path) != expected_report
+            or str(report_path) not in authorization["source_build_read_allowlist"]
+        ):
+            raise VerificationError("verifier report output is not an exact fixed-root locator")
+        _write_new(report_path, report)
         return 0
     except Exception as exc:
         sys.stderr.write(f"{INVALID}: {type(exc).__name__}: {exc}\n")
@@ -845,4 +1251,7 @@ if __name__ == "__main__":
     raise SystemExit(main())
 
 
-__all__ = ["VerificationError", "verify", "INVALID", "VERIFIER_ID"]
+__all__ = [
+    "VerificationError", "verify", "verify_synthetic", "reject_synthetic_for_canonical",
+    "validate_declarative_universe_spec", "INVALID", "VERIFIER_ID",
+]

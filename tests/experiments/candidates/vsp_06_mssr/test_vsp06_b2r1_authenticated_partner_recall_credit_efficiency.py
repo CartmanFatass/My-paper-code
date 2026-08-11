@@ -1,5 +1,6 @@
 from __future__ import annotations
 import ast
+import copy
 import hashlib
 import importlib.util
 import inspect
@@ -30,10 +31,16 @@ def row(y: int = 0, nonce: int = 0, base: str = "q", branch: str = "KEEP") -> di
             "clock":"clock","rng_binding":"none","quartet_base":base,"nonce":nonce}
 
 def authorization(paths: list[str] | None = None) -> dict[str, object]:
+    digest_map={relative:hashlib.sha256((ROOT/relative).read_bytes()).hexdigest()
+        for relative in selector.SOURCE_CONFIG_RELATIVE_PATHS}
+    digest_map_sha256=hashlib.sha256(json.dumps(
+        digest_map,sort_keys=True,separators=(",",":"),ensure_ascii=False,allow_nan=False
+    ).encode("utf-8")).hexdigest()
     return {"direction":"CAND-VSP-06-MSSR","candidate":"CAND-VSP-06-MSSR@adversarial-revision-v8",
             "treatment_id":selector.TREATMENT_ID,"selector_id":selector.SELECTOR_ID,"verifier_id":selector.VERIFIER_ID,
             "scientific_parent":"898af9e848ce45f3510560a96ae454651a9f0736","final_commit":"a"*40,
             "source_build_read_allowlist":paths or [str(SOURCE_PATHS[0])],"formal":False,"synthetic_only":False,
+            "source_config_digest_map":digest_map,"source_config_digest_map_sha256":digest_map_sha256,
             "zero_start_activity":dict(toy.ACTIVITY_COUNTERS)}
 
 def load_runner():
@@ -106,7 +113,10 @@ def synthetic_bundle() -> dict[str,object]:
         value["decoy_sequence"]=[[(y+fresh)%4,(y+fresh+1)%4,(y+fresh+2)%4,bool((y+fresh)%2)]]
         rows.append(value)
     catalog={"catalog_id":selector.CATALOG_ID,"salt":selector.SALT,"synthetic_only":True,"domain":DOMAIN,"rows":rows}
-    universe={"universe_id":"VSP06-B2R1-INDEPENDENT-SYNTHETIC-UNIVERSE-V1","salt":selector.SALT,"synthetic_only":True,"domain":DOMAIN,"rows":[dict(value) for value in rows]}
+    universe={"universe_id":verifier.SYNTHETIC_UNIVERSE_SPEC_ID,"salt":selector.SALT,
+        "synthetic_only":True,"domain":DOMAIN,
+        "fixture_id":"VSP06-B2R1-HAND-AUTHORED-20-ROW-PROOF-V1",
+        "parameters":{"keep_y":[0,1,2,3],"reset_cross_product":[0,1,2,3]}}
     templates=[{"name_template":"synthetic/"+family,"family":family,"axes":{},
         "terms":[{"coefficient":1,"predicate":{"in":{"branch":["KEEP","RESET","CURRENT"]}}}],"rhs":20}
         for family in verifier.CANONICAL_FAMILY_COUNTS]
@@ -160,7 +170,9 @@ def test_synthetic_completeness_replica_manifest_and_admission_negatives() -> No
     with pytest.raises(verifier.VerificationError,match="partial"): verifier.verify_synthetic(**partial)
     mutated=synthetic_bundle(); mutated["catalog"]["rows"][0]["nonce"]=999
     with pytest.raises(verifier.VerificationError,match="missing, mutated"): verifier.verify_synthetic(**mutated)
-    outside=synthetic_bundle(); outside["universe_spec"]["rows"].pop()
+    incomplete=synthetic_bundle(); incomplete["catalog"]["rows"].pop()
+    with pytest.raises(verifier.VerificationError,match="missing, mutated"): verifier.verify_synthetic(**incomplete)
+    outside=synthetic_bundle(); outside["universe_spec"]["parameters"]["keep_y"].pop()
     with pytest.raises(verifier.VerificationError,match="independent universe"): verifier.verify_synthetic(**outside)
     mismatch=synthetic_bundle(); mismatch["replicas"][1]["status"]="OPTIMAL"
     with pytest.raises(verifier.VerificationError,match="replica"): verifier.verify_synthetic(**mismatch)
@@ -188,11 +200,82 @@ def test_authorization_contract_and_guards_precede_canonical_work(tmp_path: Path
         with pytest.raises(toy.B2ContractError): toy.validate_stage2_authorization(bad)
     runner=load_runner()
     missing=tmp_path/"missing-authorization.json"
-    with pytest.raises(FileNotFoundError): runner.prepare_catalog(tmp_path/"catalog.json",tmp_path/"universe.json",missing)
-    assert not (tmp_path/"catalog.json").exists()
+    with pytest.raises(FileNotFoundError): runner.orchestrate_stage2(missing)
+    assert not selector.STAGE2_SESSION_ROOT.exists()
     assert "stage2_authorization" in inspect.signature(selector.solve_replica).parameters
     assert "stage2_authorization_path" in inspect.signature(selector.run_two_replica_sequence).parameters
     assert "stage2_authorization" in inspect.signature(toy.run_registered_full).parameters
+
+
+def test_explorer_audited_map_digest_and_live_source_drift_fail_closed() -> None:
+    all_sources=[str((ROOT/relative).resolve()) for relative in selector.SOURCE_CONFIG_RELATIVE_PATHS]
+    good=authorization(all_sources)
+    assert selector.verify_authorized_source_config(good)==good["source_config_digest_map"]
+    wrong_digest={**good,"source_config_digest_map_sha256":"0"*64}
+    with pytest.raises(selector.SelectorInvalid,match="digest map"):
+        selector.validate_stage2_authorization(wrong_digest)
+    drift=copy.deepcopy(good)
+    first=selector.SOURCE_CONFIG_RELATIVE_PATHS[0]
+    drift["source_config_digest_map"][first]="0"*64
+    drift["source_config_digest_map_sha256"]=hashlib.sha256(json.dumps(
+        drift["source_config_digest_map"],sort_keys=True,separators=(",",":"),ensure_ascii=False
+    ).encode("utf-8")).hexdigest()
+    with pytest.raises(selector.SelectorInvalid,match="differs from audited"):
+        selector.verify_authorized_source_config(drift)
+
+
+def test_runner_source_admission_precedes_claim_and_generator(monkeypatch: pytest.MonkeyPatch) -> None:
+    runner=load_runner(); events=[]
+    monkeypatch.setattr(runner,"_authorization",lambda _path:authorization())
+    def reject(_authorization: object) -> None:
+        events.append("verify_source")
+        raise selector.SelectorInvalid("synthetic source drift")
+    monkeypatch.setattr(runner.selector,"verify_authorized_source_config",reject)
+    monkeypatch.setattr(runner,"_claim_fixed_stage2_namespace",lambda _authorization:events.append("claim"))
+    monkeypatch.setattr(runner.experiment,"canonical_universe_spec",lambda _authorization:events.append("universe"))
+    monkeypatch.setattr(runner.experiment,"canonical_catalog_rows",lambda _authorization:events.append("catalog"))
+    with pytest.raises(selector.SelectorInvalid,match="source drift"):
+        runner.orchestrate_stage2(Path("synthetic-authorization-not-read.json"))
+    assert events==["verify_source"]
+
+
+def test_runner_secure_read_and_receipt_anchor_precede_receipt_fields(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner=load_runner(); receipt=tmp_path/"selector-receipt.json"
+    receipt.write_text('{"manifest_content_sha256":"attacker-controlled"}',encoding="utf-8")
+    auth=authorization([str(receipt.resolve())])
+    calls=[]
+    original=selector.authorized_json
+    def tracked(value: object,path: Path) -> object:
+        calls.append(path)
+        return original(value,path)
+    monkeypatch.setattr(runner.selector,"authorized_json",tracked)
+    assert runner._authorized_load(auth,receipt)=={"manifest_content_sha256":"attacker-controlled"}
+    assert calls==[receipt]
+    monkeypatch.setattr(runner,"_authorization",lambda _path:auth)
+    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:{"receipt":receipt})
+    monkeypatch.setattr(runner,"_authorized_load",lambda *_args:pytest.fail("receipt fields read before digest anchor"))
+    with pytest.raises(runner.RunnerInvalid,match="anchor mismatch"):
+        runner.run_full(Path("unused.json"),"0"*64)
+
+
+def test_run_full_requires_external_receipt_digest_cli() -> None:
+    runner=load_runner()
+    with pytest.raises(SystemExit) as error:
+        runner.main(["run-full","--stage2-authorization","unused.json"])
+    assert error.value.code==2
+
+
+def test_selector_receipt_schema_is_exact() -> None:
+    exact={key:None for key in selector.SELECTOR_RECEIPT_KEYS}
+    selector.validate_selector_receipt_schema(exact)
+    missing=dict(exact); missing.pop("manifest_content_sha256")
+    with pytest.raises(selector.SelectorInvalid,match="key schema"):
+        selector.validate_selector_receipt_schema(missing)
+    extra={**exact,"unsealed_extra":None}
+    with pytest.raises(selector.SelectorInvalid,match="key schema"):
+        selector.validate_selector_receipt_schema(extra)
 
 def test_exact_allowlist_glob_predecessor_link_and_valid_read_guards(tmp_path: Path,monkeypatch: pytest.MonkeyPatch) -> None:
     good=(tmp_path/"good.json"); good.write_text("{}",encoding="utf-8")
@@ -222,6 +305,49 @@ def test_forbidden_verifier_import_and_preexisting_exclusive_output(tmp_path: Pa
     output=tmp_path/"exclusive.json"; selector.write_exclusive(output,b"{}")
     with pytest.raises(selector.SelectorInvalid,match="already exists"): selector.write_exclusive(output,b"{}")
 
+
+def test_independent_declarative_universe_is_not_a_catalog_row_copy() -> None:
+    bundle=synthetic_bundle()
+    assert "rows" not in bundle["universe_spec"]
+    assert verifier._reconstruct_synthetic_universe(bundle["universe_spec"]) == bundle["catalog"]["rows"]
+    wrong=synthetic_bundle(); wrong["universe_spec"]["fixture_id"]="wrong"
+    with pytest.raises(verifier.VerificationError,match="universe specification"):
+        verifier.verify_synthetic(**wrong)
+
+
+def test_canonical_universe_recipe_every_field_family_is_exact_without_rows() -> None:
+    spec=toy.canonical_universe_spec(authorization())
+    verifier.validate_declarative_universe_spec(spec)
+    assert "rows" not in spec
+    mutations=[]
+    for key in ("universe_id","schema_version","salt","tuple_fields","actions",
+                "primary_seeds","checkpoints","derivation"):
+        value=copy.deepcopy(spec); value[key]=None; mutations.append(value)
+    for pool_index,pool in enumerate(spec["regular_pools"]):
+        for key in pool:
+            value=copy.deepcopy(spec); value["regular_pools"][pool_index][key]=None
+            mutations.append(value)
+    for key in spec["final_keep"]:
+        value=copy.deepcopy(spec); value["final_keep"][key]=None; mutations.append(value)
+    for mutated in mutations:
+        with pytest.raises(verifier.VerificationError,match="frozen recipe"):
+            verifier.validate_declarative_universe_spec(mutated)
+
+
+def test_fixed_root_exact_once_and_no_alternate_destination_cli(tmp_path: Path) -> None:
+    runner=load_runner(); synthetic_root=tmp_path/"one-shot"
+    receipt=runner.simulate_fixed_root_claim(synthetic_root)
+    assert receipt["synthetic_only"] is True
+    marker=json.loads((synthetic_root/"synthetic_namespace_claim.json").read_text(encoding="utf-8"))
+    assert marker|{"sweeps":0,"retries":0,"rescues":0,"extra_roots":0} == marker
+    with pytest.raises(runner.RunnerInvalid,match="absent"):
+        runner.simulate_fixed_root_claim(synthetic_root)
+    signature=inspect.signature(runner.orchestrate_stage2)
+    assert tuple(signature.parameters)==("stage2_authorization_path",)
+    source=inspect.getsource(runner.main)
+    for alternate in ("--catalog","--universe","--work-root","--manifest","--result"):
+        assert alternate not in source
+
 def episode_spec(branch: str) -> toy.EpisodeSpec:
     value=row(2,0,"q",branch); value.update({"consumer":"synthetic_only","seed_row":"synthetic",
         "target_identity":1,"target_version":1,"reset_y":3,"roster":"P0,P1,P2,P3,focal",
@@ -230,9 +356,8 @@ def episode_spec(branch: str) -> toy.EpisodeSpec:
 
 @pytest.mark.parametrize("branch,target,write,reset",[("KEEP",2,0,0),("RESET",3,1,1),("CURRENT",2,1,0)])
 def test_pure_keep_reset_current_semantics_without_training(branch: str,target: int,write:int,reset:int) -> None:
-    episode=toy.AuthenticatedPartnerRecallRelay().build(episode_spec(branch))
-    rejoin=next(step for step in episode.steps if step.phase=="REJOIN")
-    assert episode.terminal_target==target and rejoin.write==write and rejoin.reset==reset
+    actual_target,actual_write,actual_reset,_payload=toy.branch_terminal_contract(episode_spec(branch))
+    assert actual_target==target and actual_write==write and actual_reset==reset
     assert toy.terminal_reward(target,target)==1 and toy.terminal_reward((target+1)%4,target)==-1
 
 def test_control_and_equal_capacity_routing_structure_without_torch() -> None:
@@ -246,6 +371,31 @@ def test_control_and_equal_capacity_routing_structure_without_torch() -> None:
     assert toy.SEEDS["calibration"]=={"environment":8100501,"initialization":8100502,"minibatch":8100503,"evaluation":8100504}
     assert toy.THRESHOLDS["current_arm_aulc_gap"]==0.05
 
+
+def test_selected_p_cross_swap_is_payload_only_and_action_rng_paired() -> None:
+    values=[]
+    for y in range(4):
+        value=row(y,y,"quartet","KEEP")
+        value.update({"consumer":"final_keep","seed_row":"primary_1","panel":"4096_keep_extra",
+            "target_identity":3,"target_version":2,"reset_y":0,
+            "roster":"P0,P1,P2,P3,focal",
+            "decoy_sequence":[[0,0,1,False],[1,1,2,False],[2,2,3,False],[3,3,0,False]],
+            "current_bytes":"fixed-context","rng_binding":"fixed-routing"})
+        values.append(toy.EpisodeSpec.from_manifest_row(value))
+    plan=toy.selected_p_cross_swap_plan(values,expected_quartets=1)
+    assert [item["destination_index"] for item in plan]==[0,1,2,3]
+    assert [item["swapped_payload"] for item in plan]==[1,2,3,0]
+    assert all(values[int(item["destination_index"])].target_identity==3 for item in plan)
+    toy.validate_payload_only_cross_swap(values,values,[1,2,3,0],expected_quartets=1)
+    with pytest.raises(toy.B2ContractError,match="co-permuted"):
+        toy.validate_payload_only_cross_swap(values,values[1:]+values[:1],[1,2,3,0],expected_quartets=1)
+    seeds=toy.paired_control_action_seeds("primary_1")
+    assert set(seeds)=={"baseline","selected_p_zero","cross_swap","decoy_accuracy_delta"}
+    assert len(set(seeds.values()))==1
+    controls=inspect.getsource(toy._controls)
+    assert "cross_observations[:, 1, 16:20]" in controls
+    assert "cross_writes = writes" in controls and "cross_resets = resets" in controls
+
 def test_future_implementations_are_complete_not_stubs() -> None:
     assert "CpModel" in inspect.getsource(selector.solve_replica)
     assert "Popen" in inspect.getsource(selector._run_cold_replica)
@@ -257,6 +407,25 @@ def test_future_implementations_are_complete_not_stubs() -> None:
         "optimizer_steps":1100,"evaluator_calls":75,"evaluation_episodes":10500,
         "sweeps":0,"retries":0,"rescues":0,"extra_roots":0}
     assert toy.EXPECTED_FULL_ACTIVITY["model_fits"] == 10 and len(toy.SEEDS) == 5
+    assert all(toy.EXPECTED_FULL_ACTIVITY[name]==0 for name in ("sweeps","retries","rescues","extra_roots"))
+    missing=dict(toy.EXPECTED_FULL_ACTIVITY); missing.pop("sweeps")
+    assert toy._caps_valid(missing) is False
+
+
+def test_complete_seal_and_nonreplayable_admission_are_explicit() -> None:
+    assert len(selector.SOURCE_CONFIG_RELATIVE_PATHS)==7
+    assert set(selector.SOURCE_CONFIG_RELATIVE_PATHS)==set(verifier.SOURCE_CONFIG_RELATIVE_PATHS)
+    selector_source=inspect.getsource(selector.run_two_replica_sequence)
+    for literal in ("source_config_digest_map","sealed_objects","universe_spec_sha256",
+                    "stage2_authorization_sha256","python_executable_sha256","solver_artifacts"):
+        assert literal in selector_source
+    gate_source=inspect.getsource(toy.ManifestGate)
+    assert 'receipt.get("final_commit") != stage2_authorization["final_commit"]' in gate_source
+    assert 'receipt.get("stage2_authorization_sha256") != authorization_digest' in gate_source
+    assert "sealed_objects" in gate_source and "authorize_read_path" in gate_source
+    for read_source in (inspect.getsource(selector.authorized_read_bytes),inspect.getsource(verifier._authorized_bytes)):
+        assert read_source.count("authorize_read_path")>=2
+        assert "O_NOFOLLOW" in read_source and "fstat" in read_source
 
 def passing() -> dict[str, object]:
     return {"contract_valid":True,"activity_nonzero":True,"caps_valid":True,"paired_exposure":True,

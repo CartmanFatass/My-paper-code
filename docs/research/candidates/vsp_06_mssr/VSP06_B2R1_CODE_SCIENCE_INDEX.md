@@ -2,9 +2,9 @@
 
 ## Boundary
 
-This is the synthetic-only source/config package for
+This is the synthetic-only Stage-2 contract-repair source/config package for
 `VSP06-B2R1-AUTHENTICATED-PARTNER-RECALL-CREDIT-EFFICIENCY-SOURCE-BOUND-EXACT-FEASIBILITY`
-at engineering base `980f44df6739e21565539ef4a836c0a3f2033677` and corrected
+on the Root-selected repair base and corrected
 scientific parent `898af9e848ce45f3510560a96ae454651a9f0736`.
 Every executable Stage-1 fixture is marked `synthetic_only=true` in domain
 `VSP06-B2R1-SYNTHETIC-NONCANONICAL-V1`; its sole success token is
@@ -18,15 +18,29 @@ policy, learner, trainer, optimizer, evaluator, Torch, OR-Tools, and RNG action
 fail closed. The reserved public result, canonical session root, and operator
 receipt are intentionally absent.
 
-The source/config nevertheless contains the complete dormant Stage 2 producer:
-canonical catalog materialization, pinned CP-SAT construction, two cold
-sequential replicas, independent verification and sealing, matched-arm PPO,
-controls, analysis, and write-once result handling. None has a default
-authorization or canonical read locator. Every future entry requires a caller-
-supplied Stage 2 authorization binding the direction, candidate, corrected
-scientific parent, exact later 40-hex final commit, source/build/read allowlist,
-identities, `formal=false`, `synthetic_only=false`, and all-zero start activity
-before canonical input opens, dependency imports, output creation, or activity.
+The source/config nevertheless contains a dormant Stage 2 producer with one
+fixed canonical root and one exact-once entry. It exclusively claims the absent
+namespace before materialization, derives every destination internally, writes
+a compact declarative universe specification independently of catalog rows,
+then orders catalog -> cold replica 1 -> cold replica 2 -> stdlib verifier ->
+manifest/receipt seal. No alternate root, overwrite, retry, rescue, sweep,
+fallback, glob, latest locator, or adaptive intermediate choice exists. Every
+future entry requires a caller-supplied Stage 2 authorization binding the
+direction, candidate, corrected scientific parent, exact later 40-hex final
+commit, Explorer-audited exact seven-path source/config digest map and its
+canonical digest, exhaustive exact read allowlist, identities, `formal=false`,
+`synthetic_only=false`, and all-zero start activity before canonical activity.
+
+The seal binds the exact seven-path final-commit source/config digest map,
+authorization digest, executable locator/digest, native solver artifacts and
+parameters, catalog, ledger, universe specification, both complete replicas,
+witness, proposed/final manifests, verifier report, telemetry, and final
+receipt locator. Every consumed locator is independently exact-allowlisted and
+pre/post-open revalidated. Full admission compares its incoming final commit
+and authorization digest with the manifest/receipt-sealed values. It also
+requires the selector receipt's externally supplied lowercase SHA-256 anchor,
+verifies that anchor before reading any receipt field, and rejects any receipt
+whose exact key schema changes. The receipt is therefore not self-authorizing.
 
 ## Frozen identities and selector structure
 
@@ -54,14 +68,19 @@ before canonical input opens, dependency imports, output creation, or activity.
 | Fresh identities, salt/seed separation, real-NUL ordering, exact 18-field serializer, duplicate rejection | `vsp06_b2r1_source_bound_exact_feasibility.py` | hand-calculated golden bytes/digest/bucket/decision and collision test |
 | Nine exact ledger expansions `(3,144,10,660,6048,3200,16,60,5)` | ledger plus both independent expanders | exact 10,146-equation expansion and family corruption parameterization |
 | Replica agreement including identical complete status | selector plus independent verifier | same-status pass and mixed-status rejection/static independent check |
-| Independent universe completeness and nine-family equation checks | stdlib-only verifier | 20-row hand-authored KEEP/RESET bundle, all nine corrupted families, missing/mutated/out-of-universe negatives |
-| Exact canonical KEEP quartets and cross-swap structure | selector plus stdlib-only verifier | duplicate-Y/incomplete negatives and source assertions for 64 groups per seed |
+| Independent declarative-universe completeness and nine-family equation checks | compact recipe plus stdlib-only verifier reconstruction, with no selector/generator import | 20-row hand-authored recipe, wrong recipe, mutated/incomplete catalog, all nine corrupted families |
+| Exact canonical KEEP quartets and selected-P payload-only cross-swap | verifier plus pure toy projection contract | duplicate-Y/incomplete negatives; destination identity/version/context/order/routing fixed; wrong intact co-permutation rejected; action seeds paired |
 | Replica/witness/manifest order, binding, and synthetic isolation | stdlib-only verifier | partial witness, replica mismatch, manifest corruption, canonical/full rejection |
 | Same claimed digest with unequal tuple bytes | stdlib-only verifier | explicit collision negative, separate from permitted decision-digest tie-break |
-| Exact allowlisted canonical reads without discovery or aliases | selector, runner, verifier | valid exact read plus glob, predecessor, unauthorized, link/reparse negatives; static no-glob proof |
+| Exact allowlisted canonical reads without discovery or aliases, with pre/post-open revalidation | selector, runner, verifier, full gate | valid exact read plus glob, predecessor, unauthorized, link/reparse negatives; static no-glob and double-validation proof |
 | KEEP/RESET/CURRENT host and shared `+1/-1` semantics | self-contained toy/full source | three pure branch traces and terminal arithmetic without Torch |
 | Equal-information/equal-capacity arm and named controls | self-contained matched policies | routing-only source structure plus selected-P-zero/current-rebuild/cross-swap/decoy/CURRENT/RESET literals |
 | Normalized KEEP AULC and exact gate precedence | pure arithmetic | boundary and precedence parameterization |
+| Complete seven-path/object seal and non-replayable full admission | selector receipt, verifier report, manifest gate | exact key/path/digest scope assertions plus incoming final-commit/authorization-digest comparisons |
+| Explorer-audited commit-to-bytes binding | exact authorization schema and secure live seven-path rehash in runner, selector, verifier, and full gate | malformed map/digest and live-map drift negatives; runner ordering proves rehash precedes namespace claim and generation |
+| Externally anchored selector receipt | runner and manifest gate | required CLI/API digest, mismatch-before-field-read negative, and exact receipt-key missing/extra negatives |
+| Exact independent canonical universe recipe | pure stdlib validator before reconstruction | every top-level, four-pool field, and final-KEEP field family is mutated and rejected without materializing canonical rows |
+| Fixed-root exact-once lifecycle and explicit zero caps | wiring-only runner and exact activity schema | temporary synthetic claim collision, no alternate CLI destinations, missing zero-cap key rejection |
 | Canonical/full operations impossible without explicit commit-bound authorization and all Stage-1 activity zero | three guarded modules and wiring-only runner | invalid/missing authorization, lazy-import, zero-counter, and reserved-absence checks |
 
 ## Frozen ledger

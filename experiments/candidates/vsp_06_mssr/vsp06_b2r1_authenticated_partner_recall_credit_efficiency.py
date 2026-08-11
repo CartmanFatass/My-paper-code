@@ -94,6 +94,10 @@ EXPECTED_FULL_ACTIVITY = {
     "evaluation_episodes": 10496,
     "environment_rng_draws": 0,
     "action_rng_draws": 47584,
+    "sweeps": 0,
+    "retries": 0,
+    "rescues": 0,
+    "extra_roots": 0,
 }
 ACTIVITY_COUNTERS = {
     "canonical_generator_calls": 0, "canonical_rows_observed": 0, "canonical_ortools_processes": 0,
@@ -107,6 +111,16 @@ CANDIDATE_ID = "CAND-VSP-06-MSSR@adversarial-revision-v8"
 SCIENTIFIC_PARENT = "898af9e848ce45f3510560a96ae454651a9f0736"
 SYNTHETIC_DOMAIN = "VSP06-B2R1-SYNTHETIC-NONCANONICAL-V1"
 SYNTHETIC_SUCCESS = "SYNTHETIC_STRUCTURAL_VALID_ONLY"
+UNIVERSE_SPEC_ID = "VSP06-B2R1-INDEPENDENT-CANONICAL-UNIVERSE-SPEC-V1"
+SOURCE_CONFIG_RELATIVE_PATHS = (
+    "experiments/candidates/vsp_06_mssr/vsp06_b2r1_source_bound_exact_feasibility.py",
+    "experiments/candidates/vsp_06_mssr/vsp06_b2r1_independent_exact_manifest_verifier.py",
+    "experiments/candidates/vsp_06_mssr/vsp06_b2r1_authenticated_partner_recall_credit_efficiency.py",
+    "scripts/run_vsp06_b2r1_authenticated_partner_recall_credit_efficiency.py",
+    "tests/experiments/candidates/vsp_06_mssr/test_vsp06_b2r1_authenticated_partner_recall_credit_efficiency.py",
+    "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_CONSTRAINT_TARGET_LEDGER_V1.json",
+    "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_CODE_SCIENCE_INDEX.md",
+)
 
 
 def validate_stage2_authorization(value: Mapping[str, Any]) -> None:
@@ -116,7 +130,10 @@ def validate_stage2_authorization(value: Mapping[str, Any]) -> None:
         "verifier_id": "VSP06-B2R1-INDEPENDENT-EXACT-MANIFEST-VERIFIER-V1",
         "scientific_parent": SCIENTIFIC_PARENT, "formal": False, "synthetic_only": False,
     }
-    required = set(from_ids) | {"final_commit", "source_build_read_allowlist", "zero_start_activity"}
+    required = set(from_ids) | {
+        "final_commit", "source_build_read_allowlist", "source_config_digest_map",
+        "source_config_digest_map_sha256", "zero_start_activity",
+    }
     if not isinstance(value, Mapping) or set(value) != required or any(value.get(k) != v for k, v in from_ids.items()):
         raise B2ContractError("missing or invalid Stage-2 authorization binding")
     commit = value.get("final_commit")
@@ -124,6 +141,21 @@ def validate_stage2_authorization(value: Mapping[str, Any]) -> None:
         raise B2ContractError("invalid Stage-2 final commit binding")
     if not isinstance(value.get("source_build_read_allowlist"), list) or not value["source_build_read_allowlist"] or value.get("zero_start_activity") != ACTIVITY_COUNTERS:
         raise B2ContractError("invalid Stage-2 allowlist or zero-start binding")
+    digest_map = value.get("source_config_digest_map")
+    digest_map_digest = value.get("source_config_digest_map_sha256")
+    if (
+        not isinstance(digest_map, Mapping)
+        or set(digest_map) != set(SOURCE_CONFIG_RELATIVE_PATHS)
+        or any(
+            not isinstance(digest, str) or len(digest) != 64
+            or any(char not in "0123456789abcdef" for char in digest)
+            for digest in digest_map.values()
+        )
+        or not isinstance(digest_map_digest, str) or len(digest_map_digest) != 64
+        or any(char not in "0123456789abcdef" for char in digest_map_digest)
+        or digest_map_digest != hashlib.sha256(_json_bytes(dict(digest_map))).hexdigest()
+    ):
+        raise B2ContractError("invalid Explorer-audited source/config digest map")
 
 
 def reject_synthetic_envelope_for_full(envelope: Mapping[str, Any]) -> None:
@@ -256,6 +288,17 @@ class ToyEpisode:
     branch: str
 
 
+def branch_terminal_contract(spec: EpisodeSpec) -> tuple[int, int, int, int | None]:
+    """Pure KEEP/RESET/CURRENT terminal target and routing contract."""
+
+    spec.validate()
+    if spec.branch == "RESET":
+        return spec.reset_y, 1, 1, spec.reset_y
+    if spec.branch == "CURRENT":
+        return spec.y, 1, 0, spec.y
+    return spec.y, 0, 0, None
+
+
 class AuthenticatedPartnerRecallRelay:
     """Four-action, one-focal/four-scripted-partner deterministic toy builder."""
 
@@ -316,18 +359,9 @@ class AuthenticatedPartnerRecallRelay:
                 payload=decoy[2] if event_type in {"target_absent_payload", "unauth_target_decoy"} else None,
                 clock=clock + 1, branch=spec.branch,
             ), write=0, reset=0, phase="RETAIN"))
-        terminal_target = spec.y
-        rejoin_payload: int | None = None
-        reset = 0
-        write = 0
+        terminal_target, write, reset, rejoin_payload = branch_terminal_contract(spec)
         if spec.branch == "RESET":
             version = (version + 1) % 4
-            terminal_target = spec.reset_y
-            rejoin_payload = spec.reset_y
-            reset, write = 1, 1
-        elif spec.branch == "CURRENT":
-            rejoin_payload = spec.y
-            write = 1
         steps.append(Step(self._observation(
             phase="REJOIN", event_type="target_absent_payload", source=identity,
             version=version, authenticated=True, selected=True,
@@ -616,6 +650,66 @@ def _raw_row(
     }
 
 
+def canonical_universe_spec(stage2_authorization: Mapping[str, Any]) -> dict[str, Any]:
+    """Return the compact declarative recipe, never the emitted catalog rows."""
+
+    validate_stage2_authorization(stage2_authorization)
+    primary = ["primary_1", "primary_2", "primary_3", "primary_4"]
+    return {
+        "universe_id": UNIVERSE_SPEC_ID,
+        "schema_version": 1,
+        "salt": "8100799/",
+        "tuple_fields": [
+            "consumer", "seed_row", "panel", "branch", "retention_length", "y",
+            "reset_y", "target_identity", "target_version", "event_type",
+            "decoy_sequence", "current_bytes", "roster", "legal_mask", "clock",
+            "rng_binding", "quartet_base", "nonce",
+        ],
+        "actions": [0, 1, 2, 3],
+        "primary_seeds": primary,
+        "checkpoints": list(CHECKPOINTS),
+        "regular_pools": [
+            {
+                "consumer": "primary_fit", "seed_rows": primary, "panels": ["fit"],
+                "branch_targets": {"KEEP": 384, "RESET": 64, "CURRENT": 64},
+                "retention_lengths": [4, 8], "required_split": "train",
+                "oversupply_multiplier": 4, "reset_multiplier": 4,
+            },
+            {
+                "consumer": "calibration_fit", "seed_rows": ["calibration"],
+                "panels": ["fit"], "branch_targets": {"CURRENT": 128},
+                "retention_lengths": [4], "required_split": "calibration",
+                "oversupply_multiplier": 32, "reset_multiplier": 4,
+            },
+            {
+                "consumer": "calibration_check", "seed_rows": ["calibration"],
+                "panels": ["check"], "branch_targets": {"CURRENT": 32},
+                "retention_lengths": [4], "required_split": "calibration",
+                "oversupply_multiplier": 32, "reset_multiplier": 4,
+            },
+            {
+                "consumer": "checkpoint", "seed_rows": primary,
+                "panels": [str(value) for value in CHECKPOINTS],
+                "branch_targets": {"KEEP": 16, "RESET": 8, "CURRENT": 8},
+                "retention_lengths": [6], "required_split": "evaluation",
+                "oversupply_multiplier": 32, "reset_multiplier": 4,
+            },
+        ],
+        "final_keep": {
+            "consumer": "final_keep", "seed_rows": primary,
+            "panel": "4096_keep_extra", "branch": "KEEP", "retention_length": 6,
+            "quartets_per_seed": 64, "nonce_start": 0, "nonce_stop": 256,
+            "required_split": "evaluation", "first_matching_nonce": True,
+            "reset_y": 0,
+        },
+        "derivation": {
+            "row_formula": "VSP06-B2R1-RAW-ROW-V1",
+            "final_keep_formula": "VSP06-B2R1-FINAL-KEEP-FIRST-EVAL-V1",
+            "bucket_formula": "sha256(utf8(salt)||canonical_tuple_bytes)[0]%8",
+        },
+    }
+
+
 def canonical_catalog_rows(stage2_authorization: Mapping[str, Any]) -> Iterator[dict[str, Any]]:
     validate_stage2_authorization(stage2_authorization)
     """Enumerate the frozen catalog; callers must never use it to tune CP-SAT."""
@@ -712,60 +806,77 @@ class ManifestGate:
     def __init__(
         self, path: Path, content_digest: str, *, session_root: Path,
         selector_receipt_path: Path, verifier_report_path: Path,
+        stage2_authorization: Mapping[str, Any],
+        selector_receipt_sha256: str,
     ) -> None:
         from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
 
-        self.session_root = session_root.resolve()
-        self.path = path.resolve()
+        validate_stage2_authorization(stage2_authorization)
+        selector.verify_authorized_source_config(stage2_authorization)
+        self.authorization = stage2_authorization
+        canonical = selector.stage2_paths()
+        if session_root != canonical["session_root"]:
+            raise B2ContractError("full admission used an alternate Stage-2 root")
+        self.session_root = canonical["session_root"]
+        self.path = selector.authorize_read_path(stage2_authorization, path)
         self.content_digest = content_digest
-        self.selector_receipt_path = selector_receipt_path.resolve()
-        self.verifier_report_path = verifier_report_path.resolve()
-        selector_root = self.session_root / "selector"
-        exact_paths = {
-            "manifest": self.session_root / "frozen_manifest.json",
-            "receipt": selector_root / "selector_success_receipt.json",
-            "report": selector_root / "independent_verifier_report.json",
-            "bindings": selector_root / "frozen_bindings.json",
-            "witness": selector_root / "membership_witness.json",
-            "catalog": self.session_root / "canonical_catalog.json",
-        }
+        self.selector_receipt_path = selector.authorize_read_path(
+            stage2_authorization, selector_receipt_path
+        )
+        self.verifier_report_path = selector.authorize_read_path(
+            stage2_authorization, verifier_report_path
+        )
         if (
-            self.path != exact_paths["manifest"].resolve()
-            or self.selector_receipt_path != exact_paths["receipt"].resolve()
-            or self.verifier_report_path != exact_paths["report"].resolve()
+            self.path != canonical["manifest"].resolve()
+            or self.selector_receipt_path != canonical["receipt"].resolve()
+            or self.verifier_report_path != canonical["verifier_report"].resolve()
         ):
             raise B2ContractError("full admission artifacts are outside the exact canonical session locator")
+        if (
+            not isinstance(selector_receipt_sha256, str)
+            or len(selector_receipt_sha256) != 64
+            or any(char not in "0123456789abcdef" for char in selector_receipt_sha256)
+            or selector.sha256_authorized_file(
+                stage2_authorization, self.selector_receipt_path
+            ) != selector_receipt_sha256
+        ):
+            raise B2ContractError("external selector receipt digest anchor mismatch")
         if not self.path.exists() or self.path.stat().st_mode & stat.S_IWUSR:
             raise B2ContractError("verified manifest is absent or writable")
-        self.file_digest = hashlib.sha256(self.path.read_bytes()).hexdigest()
+        self.file_digest = selector.sha256_authorized_file(stage2_authorization, self.path)
         self.order_digest = ""
         self.consumer_receipts: list[dict[str, str]] = []
         self.reload("preclaim")
-        receipt = _load_mapping(self.selector_receipt_path)
-        report = _load_mapping(self.verifier_report_path)
-        bindings = _load_mapping(exact_paths["bindings"])
-        witness = _load_mapping(exact_paths["witness"])
-        manifest = _load_mapping(self.path)
-        catalog_path = Path(str(receipt.get("catalog_path", ""))).resolve()
-        ledger_path = Path(str(receipt.get("ledger_path", ""))).resolve()
-        if catalog_path != exact_paths["catalog"].resolve():
-            raise B2ContractError("selector receipt catalog locator mismatch")
+        receipt = selector.authorized_json(stage2_authorization, self.selector_receipt_path)
+        selector.validate_selector_receipt_schema(receipt)
+        report = selector.authorized_json(stage2_authorization, self.verifier_report_path)
+        bindings = selector.authorized_json(stage2_authorization, canonical["bindings"])
+        witness = selector.authorized_json(stage2_authorization, canonical["witness"])
+        manifest = selector.authorized_json(stage2_authorization, self.path)
+        catalog_path = selector.authorize_read_path(stage2_authorization, canonical["catalog"])
+        ledger_path = selector.authorize_read_path(stage2_authorization, canonical["ledger"])
+        universe_path = selector.authorize_read_path(stage2_authorization, canonical["universe_spec"])
         expected = bindings.get("expected")
+        authorization_digest = _digest(stage2_authorization)
         if (
             receipt.get("branch") != selector.VALID
+            or receipt.get("final_commit") != stage2_authorization["final_commit"]
+            or receipt.get("stage2_authorization_sha256") != authorization_digest
             or receipt.get("replica_count") != 2
             or receipt.get("replica_2_role") != "prospective_determinism_gate_not_retry"
-            or Path(str(receipt.get("manifest_path", ""))).resolve() != self.path
-            or Path(str(receipt.get("verifier_report_path", ""))).resolve() != self.verifier_report_path
-            or Path(str(receipt.get("bindings_path", ""))).resolve() != exact_paths["bindings"].resolve()
-            or Path(str(receipt.get("witness_path", ""))).resolve() != exact_paths["witness"].resolve()
+            or receipt.get("activity_accounting") != {"sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0}
+            or receipt.get("manifest_path") != str(self.path)
+            or receipt.get("verifier_report_path") != str(self.verifier_report_path)
+            or receipt.get("bindings_path") != str(canonical["bindings"].resolve())
+            or receipt.get("witness_path") != str(canonical["witness"].resolve())
             or receipt.get("manifest_file_sha256") != self.file_digest
             or receipt.get("manifest_content_sha256") != self.content_digest
-            or receipt.get("verifier_report_sha256") != _file_digest(self.verifier_report_path)
-            or receipt.get("bindings_sha256") != _file_digest(exact_paths["bindings"])
-            or receipt.get("witness_sha256") != _file_digest(exact_paths["witness"])
-            or receipt.get("catalog_sha256") != _file_digest(catalog_path)
-            or receipt.get("ledger_sha256") != _file_digest(ledger_path)
+            or receipt.get("verifier_report_sha256") != selector.sha256_authorized_file(stage2_authorization, self.verifier_report_path)
+            or receipt.get("bindings_sha256") != selector.sha256_authorized_file(stage2_authorization, canonical["bindings"])
+            or receipt.get("witness_sha256") != selector.sha256_authorized_file(stage2_authorization, canonical["witness"])
+            or receipt.get("catalog_sha256") != selector.sha256_authorized_file(stage2_authorization, catalog_path)
+            or receipt.get("universe_spec_sha256") != selector.sha256_authorized_file(stage2_authorization, universe_path)
+            or receipt.get("ledger_sha256") != selector.sha256_authorized_file(stage2_authorization, ledger_path)
         ):
             raise B2ContractError("selector success receipt binding mismatch")
         if not isinstance(expected, Mapping) or bindings.get("synthetic_only") is not False:
@@ -773,16 +884,20 @@ class ManifestGate:
         if (
             report.get("verdict") != "VERIFIED"
             or report.get("synthetic_only") is not False
+            or report.get("final_commit") != stage2_authorization["final_commit"]
+            or report.get("stage2_authorization_sha256") != authorization_digest
             or report.get("manifest_sha256") != self.content_digest
             or report.get("catalog_sha256") != expected.get("catalog_sha256")
 
             or report.get("ledger_sha256") != expected.get("ledger_sha256")
+            or report.get("universe_spec_sha256") != expected.get("universe_spec_sha256")
+            or report.get("source_config_digest_map_sha256") != expected.get("source_config_digest_map_sha256")
             or report.get("selector_source_sha256") != expected.get("selector_source_sha256")
             or report.get("solver_artifact_set_sha256") != expected.get("solver_artifact_set_sha256")
             or report.get("sat_parameters_sha256") != expected.get("sat_parameters_sha256")
             or report.get("python_executable_sha256") != expected.get("python_executable_sha256")
             or report.get("verifier_source_sha256") != expected.get("verifier_source_sha256")
-            or report.get("membership_witness_sha256") != _file_digest(exact_paths["witness"])
+            or report.get("membership_witness_sha256") != selector.sha256_authorized_file(stage2_authorization, canonical["witness"])
             or report.get("membership_vector_sha256") != witness.get("membership_vector_sha256")
             or report.get("common_two_arm_order_digest") != self.order_digest
             or report.get("global_rank_claim") is not False
@@ -790,6 +905,47 @@ class ManifestGate:
             raise B2ContractError("independent VERIFIED report binding mismatch")
         if manifest.get("bindings") != expected or manifest.get("rank_claim") is not False:
             raise B2ContractError("manifest source/build binding or rank nonclaim mismatch")
+        if (
+            expected.get("final_commit") != stage2_authorization["final_commit"]
+            or expected.get("stage2_authorization_sha256") != authorization_digest
+            or expected.get("source_config_digest_map") != stage2_authorization["source_config_digest_map"]
+            or expected.get("source_config_digest_map_sha256") != stage2_authorization["source_config_digest_map_sha256"]
+            or receipt.get("source_config_digest_map") != expected.get("source_config_digest_map")
+            or receipt.get("source_config_digest_map_sha256") != expected.get("source_config_digest_map_sha256")
+        ):
+            raise B2ContractError("incoming authorization is not the manifest-sealed authorization")
+        sealed_schema = expected.get("sealed_path_schema")
+        sealed_objects = receipt.get("sealed_objects")
+        if (
+            not isinstance(sealed_schema, Mapping)
+            or sealed_schema != selector._sealed_path_schema(canonical)
+            or receipt.get("sealed_path_schema") != sealed_schema
+            or receipt.get("sealed_path_schema_sha256") != _digest(sealed_schema)
+            or not isinstance(sealed_objects, Mapping)
+            or set(sealed_objects) != set(sealed_schema) - {"receipt"}
+            or receipt.get("receipt_path") != sealed_schema.get("receipt")
+            or receipt.get("receipt_self_digest_is_external") is not True
+        ):
+            raise B2ContractError("complete sealed-object path schema mismatch")
+        for name, item in sealed_objects.items():
+            if not isinstance(item, Mapping) or set(item) != {"path", "sha256"}:
+                raise B2ContractError("sealed-object envelope mismatch")
+            if item["path"] != sealed_schema[name]:
+                raise B2ContractError("sealed-object locator mismatch")
+            sealed_path = selector.authorize_read_path(stage2_authorization, Path(item["path"]))
+            if item["sha256"] != selector.sha256_authorized_file(stage2_authorization, sealed_path):
+                raise B2ContractError("sealed-object digest mismatch")
+        executable = selector.authorize_read_path(
+            stage2_authorization, Path(str(expected.get("python_executable", "")))
+        )
+        if expected.get("python_executable_sha256") != selector.sha256_authorized_file(stage2_authorization, executable):
+            raise B2ContractError("sealed interpreter executable mismatch")
+        for artifact in expected.get("solver_artifacts", []):
+            if not isinstance(artifact, list) or len(artifact) != 2:
+                raise B2ContractError("sealed solver artifact envelope mismatch")
+            artifact_path = selector.authorize_read_path(stage2_authorization, Path(artifact[0]))
+            if artifact[1] != selector.sha256_authorized_file(stage2_authorization, artifact_path):
+                raise B2ContractError("sealed solver artifact mismatch")
         selected = manifest.get("selected_rows")
         if not isinstance(selected, list):
             raise B2ContractError("manifest selected rows are absent")
@@ -807,7 +963,9 @@ class ManifestGate:
                 raise B2ContractError("manifest tuple hash/bucket/split mismatch")
 
     def reload(self, consumer: str) -> tuple[EpisodeSpec, ...]:
-        payload = self.path.read_bytes()
+        from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
+
+        payload = selector.authorized_read_bytes(self.authorization, self.path)
         if hashlib.sha256(payload).hexdigest() != self.file_digest:
             raise B2ContractError("manifest file bytes changed after fixation")
         manifest = json.loads(payload.decode("utf-8"))
@@ -832,20 +990,6 @@ def _spec_digest(spec: EpisodeSpec) -> str:
     })
 
 
-def _file_digest(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def _load_mapping(path: Path) -> Mapping[str, Any]:
-    try:
-        value = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        raise B2ContractError(f"required full-admission artifact is unreadable: {path}") from exc
-    if not isinstance(value, Mapping):
-        raise B2ContractError(f"required full-admission artifact is not an object: {path}")
-    return value
-
-
 def _activity_template() -> dict[str, int]:
     return {
         "model_fits": 0, "trainer_invocations": 0,
@@ -854,6 +998,7 @@ def _activity_template() -> dict[str, int]:
         "optimizer_steps": 0, "evaluator_calls": 0,
         "evaluation_episodes": 0, "environment_rng_draws": 0,
         "action_rng_draws": 0,
+        "sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0,
     }
 
 
@@ -987,15 +1132,19 @@ def _policy_panel(
         "targets": targets,
         "historical_targets": torch.tensor([episode.historical_target for episode in episodes], dtype=torch.long),
         "transition_count": sum(len(episode.steps) for episode in episodes),
+        "action_seed": int(action_seed),
     }
 
 
 def _evaluate(
     *, model: Any, specs: Sequence[EpisodeSpec], seed_row: str, arm: str,
     panel: str, gate: ManifestGate, activity: dict[str, int], count_episode: bool = True,
+    action_seed: int | None = None,
 ) -> dict[str, Any]:
     gate.reload(f"evaluation/{seed_row}/{arm}/{panel}")
-    result = _policy_panel(model, specs, SEEDS[seed_row]["evaluation"] + int(hashlib.sha256(panel.encode()).hexdigest()[:8], 16))
+    if action_seed is None:
+        action_seed = SEEDS[seed_row]["evaluation"] + int(hashlib.sha256(panel.encode()).hexdigest()[:8], 16)
+    result = _policy_panel(model, specs, action_seed)
     if count_episode:
         activity["evaluator_calls"] += 1
         activity["evaluation_episodes"] += len(specs)
@@ -1037,6 +1186,47 @@ def _cross_swap_indices(
     return tuple(source_for_destination)
 
 
+def selected_p_cross_swap_plan(
+    specs: Sequence[EpisodeSpec], *, expected_quartets: int,
+) -> tuple[dict[str, int | str], ...]:
+    """Pure destination-fixed plan; only the selected-P payload is sourced."""
+
+    indices = _cross_swap_indices(specs, expected_quartets=expected_quartets)
+    return tuple({
+        "destination_index": destination,
+        "source_index": source,
+        "quartet_base": specs[destination].quartet_base,
+        "destination_payload": specs[destination].y,
+        "swapped_payload": specs[source].y,
+    } for destination, source in enumerate(indices))
+
+
+def validate_payload_only_cross_swap(
+    destination_specs: Sequence[EpisodeSpec], projected_specs: Sequence[EpisodeSpec],
+    swapped_payloads: Sequence[int], *, expected_quartets: int,
+) -> None:
+    """Reject an intact observation/control/target co-permutation."""
+
+    plan = selected_p_cross_swap_plan(
+        destination_specs, expected_quartets=expected_quartets
+    )
+    if tuple(projected_specs) != tuple(destination_specs):
+        raise B2ContractError("cross-swap destination controls were co-permuted")
+    expected = tuple(int(item["swapped_payload"]) for item in plan)
+    if tuple(swapped_payloads) != expected:
+        raise B2ContractError("cross-swap changed more or less than selected-P payload")
+
+
+def paired_control_action_seeds(seed_row: str) -> dict[str, int]:
+    if seed_row not in SEEDS or seed_row == "calibration":
+        raise B2ContractError("paired control action seed requires a primary seed")
+    seed = SEEDS[seed_row]["evaluation"] + 101
+    return {
+        "baseline": seed, "selected_p_zero": seed,
+        "cross_swap": seed, "decoy_accuracy_delta": seed,
+    }
+
+
 def _control_partitions(
     final_panel: Sequence[EpisodeSpec], *, expected_current: int,
     expected_reset: int, expected_changed_reset: int, expected_joint: int,
@@ -1069,10 +1259,13 @@ def _controls(
 ) -> dict[str, float]:
     torch = _torch()
     observations, writes, resets, targets, _episodes = tensor_batch(final_keep)
+    paired_seeds = paired_control_action_seeds(seed_row)
+    if baseline.get("action_seed") != paired_seeds["baseline"]:
+        raise B2ContractError("baseline/control action randomness is not explicitly paired")
     zero_writes = torch.zeros_like(writes)
     gate.reload(f"controls/{seed_row}/{CANDIDATE_ARM}/selected_p_zero")
     selected_zero = _policy_panel(
-        model, final_keep, SEEDS[seed_row]["evaluation"] + 101,
+        model, final_keep, paired_seeds["selected_p_zero"],
         observations=observations, writes=zero_writes, resets=resets, targets=targets,
     )
     current_specs, reset_specs = _control_partitions(
@@ -1090,12 +1283,17 @@ def _controls(
     )
     gate.reload(f"controls/{seed_row}/{CANDIDATE_ARM}/cross_swap")
     cross_indices = list(_cross_swap_indices(final_keep, expected_quartets=64))
-    cross_observations = observations[cross_indices].clone()
-    cross_writes = writes[cross_indices].clone()
-    cross_resets = resets[cross_indices].clone()
-    cross_targets = targets[cross_indices].clone()
+    validate_payload_only_cross_swap(
+        final_keep, final_keep, [final_keep[index].y for index in cross_indices],
+        expected_quartets=64,
+    )
+    cross_observations = observations.clone()
+    cross_observations[:, 1, 16:20] = observations[cross_indices, 1, 16:20]
+    cross_writes = writes
+    cross_resets = resets
+    cross_targets = targets[cross_indices]
     cross = _policy_panel(
-        model, final_keep, SEEDS[seed_row]["evaluation"] + 103,
+        model, final_keep, paired_seeds["cross_swap"],
         observations=cross_observations, writes=cross_writes, resets=cross_resets,
         targets=cross_targets,
     )
@@ -1104,7 +1302,7 @@ def _controls(
     if decoy_observations.shape[1] > 4:
         decoy_observations[:, 2:-2, 16:20] = decoy_observations[:, 2:-2, 16:20].roll(1, dims=-1)
     decoy = _policy_panel(
-        model, final_keep, SEEDS[seed_row]["evaluation"] + 104,
+        model, final_keep, paired_seeds["decoy_accuracy_delta"],
         observations=decoy_observations, writes=writes, resets=resets, targets=targets,
     )
     for result, cardinality in (
@@ -1137,8 +1335,15 @@ def _public_panel(panel: Mapping[str, Any]) -> dict[str, Any]:
 
 
 def _caps_valid(activity: Mapping[str, int]) -> bool:
-
-    return all(activity.get(name, 0) <= cap for name, cap in CAPS.items() if name in activity)
+    return (
+        set(activity) == set(EXPECTED_FULL_ACTIVITY)
+        and set(CAPS).issubset(activity)
+        and all(
+            isinstance(activity[name], int) and not isinstance(activity[name], bool)
+            and activity[name] <= cap
+            for name, cap in CAPS.items()
+        )
+    )
 
 
 def run_registered_full(
@@ -1146,12 +1351,19 @@ def run_registered_full(
     session_root: Path, selector_receipt_path: Path,
     verifier_report_path: Path, run_root: Path, result_path: Path,
     stage2_authorization: Mapping[str, Any],
+    selector_receipt_sha256: str,
 ) -> dict[str, Any]:
     """Execute the unique manifest-gated full; never called by readiness/tests."""
 
     global _STAGE2_RUNTIME_AUTHORIZED
     validate_stage2_authorization(stage2_authorization)
     from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
+    expected_run_root = selector.STAGE2_SESSION_ROOT / "registered_full"
+    expected_result = selector.PROJECT_ROOT / "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_AUTHENTICATED_PARTNER_RECALL_CREDIT_EFFICIENCY_RESULT.json"
+    if run_root != expected_run_root or result_path != expected_result:
+        raise B2ContractError("registered full used an alternate root or result destination")
+    if run_root.exists():
+        raise B2ContractError("registered full root already exists; overwrite/retry is forbidden")
     manifest_path = selector.authorize_read_path(stage2_authorization, manifest_path)
     selector_receipt_path = selector.authorize_read_path(stage2_authorization, selector_receipt_path)
     verifier_report_path = selector.authorize_read_path(stage2_authorization, verifier_report_path)
@@ -1162,16 +1374,20 @@ def run_registered_full(
         manifest_path, manifest_content_digest, session_root=session_root,
         selector_receipt_path=selector_receipt_path,
         verifier_report_path=verifier_report_path,
+        stage2_authorization=stage2_authorization,
+        selector_receipt_sha256=selector_receipt_sha256,
     )
     specs = gate.reload("preclaim_complete_manifest")
-    run_root.mkdir(parents=True, exist_ok=True)
+    os.mkdir(run_root)
     claim_path = run_root / "registered_full_claim.json"
     claim = {
         "treatment": TREATMENT_ID, "full_ordinal": 1,
         "manifest_file_sha256": gate.file_digest,
         "manifest_content_sha256": gate.content_digest,
         "common_two_arm_order_digest": gate.order_digest,
-        "no_retry": True, "activity_at_claim": _activity_template(),
+        "no_retry": True,
+        "sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0,
+        "activity_at_claim": _activity_template(),
     }
     selector.write_exclusive(claim_path, _json_bytes(claim) + b"\n")
     activity = _activity_template()
@@ -1257,10 +1473,12 @@ def run_registered_full(
             final_specs = [spec for spec in by_consumer["final_keep"] if spec.seed_row == seed_row]
             final_panels = {}
             raw_final = {}
+            control_seeds = paired_control_action_seeds(seed_row)
             for arm in ARMS:
                 raw_final[arm] = _evaluate(
                     model=models[arm], specs=final_specs, seed_row=seed_row,
                     arm=arm, panel="4096_keep_extra", gate=gate, activity=activity,
+                    action_seed=control_seeds["baseline"],
                 )
                 final_panels[arm] = _public_panel(raw_final[arm])
             controls = _controls(
@@ -1322,7 +1540,8 @@ def run_registered_full(
             },
             "lifecycle": {
                 "claim_path": str(claim_path), "full_ordinal": 1,
-                "retry_count": 0, "rescue_count": 0, "result_write_once": True,
+                "sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0,
+                "result_write_once": True,
             },
             "limitations": "One manifest-conditioned four-seed toy full; no global-rank, deployment, promotion, retirement, sibling-direction, or generality claim.",
 
@@ -1341,6 +1560,7 @@ def run_registered_full(
             "error_type": type(exc).__name__, "error": str(exc),
             "traceback": traceback.format_exc(), "activity_counts": activity,
             "retry_authorized": False, "rescue_authorized": False,
+            "sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0,
         }
         failure_path = run_root / "registered_full_failure.json"
         if not failure_path.exists():
@@ -1353,7 +1573,9 @@ __all__ = [
     "build_policy", "paired_models", "trainable_contract", "tensor_batch",
     "ppo_complete_batch", "terminal_reward", "normalized_keep_aulc",
     "classify_result", "validate_manifest", "canonical_catalog_rows",
-    "canonical_final_keep_rows",
+    "canonical_final_keep_rows", "canonical_universe_spec",
+    "branch_terminal_contract", "selected_p_cross_swap_plan",
+    "validate_payload_only_cross_swap", "paired_control_action_seeds",
     "readiness_contract", "B2ContractError", "TREATMENT_ID", "ENVIRONMENT_ID",
     "ManifestGate", "run_registered_full",
     "CANDIDATE_ARM", "GENERIC_ARM", "SEEDS", "PPO", "CAPS", "THRESHOLDS",
