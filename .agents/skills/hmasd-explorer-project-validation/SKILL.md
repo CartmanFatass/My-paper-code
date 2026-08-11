@@ -17,6 +17,25 @@ instruction authorizes CPM to execute the named project-validation treatment;
 it does not give Explorer direct code/runtime control or promote canonical
 science.
 
+Root creates a real user-visible Explorer L1 task keyed by
+`research_scope_key`. A `direction:<id>` L1 owns only that direction's
+scientific meaning and loads the exact Root assignment and named direction
+pointers; it does not preload the whole portfolio, project/runtime corpus or
+implicit global continuity. A distinct `portfolio:<group>` L1 receives compact
+accepted direction packets and pointers and owns cross-direction comparison and
+advisory integration. Each scope has its own task and worktree boundary. CPM is
+a same-level Root sibling, never nested under Explorer.
+
+Explorer -> Root -> CPM and the reverse result preserve
+`research_scope_key`, direction, candidate and revision. Root alone owns user
+interaction, progress, follow-up, interruption, cross-owner relay, lifecycle
+and accepted physical writes; Root has no scientific comparison or intake
+authority. When a writable scope needs an exact L2 writer, Root provisions
+exactly one managed worktree for that L1 and all disjoint L2 writers share it.
+L2 never provisions, releases, integrates, invokes a helper or performs Git
+lifecycle actions. External Pro remains outside this boundary with its existing
+review role.
+
 ## Scientific-only intake boundary
 
 Apply the single stable rule in
@@ -27,7 +46,7 @@ views pointer-only. The Research Artifact Writer physically writes only the
 exact Explorer-approved ordinary/research/outbound bytes; Root alone
 physically writes `local_research/RESEARCH_CONTINUITY.md` after accepting the
 Explorer proposal and revision check. This Skill adds no second copy of that
-rule or technical admission gate.
+rule or technical gate.
 For optional targeted scientific analysis after technical acceptance, follow
 the same contract's rule for an exact accepted result brief and only necessary
 named evidence supplied to zero or more matching read-only research children;
@@ -55,14 +74,15 @@ original handoff/artifact and ask exactly one concrete semantic clarification;
   continue unrelated work without guessing, merging directions, rewriting the
   artifact or creating a `BLOCKED` state.
 
-For a result-bearing treatment, the prose should additionally explain its
-prospective runtime class and units and whether the direction-local predecessor
-and intake barrier are closed. These are semantic cues, never a required schema.
-The scientific A/B/C evidence level is independent of runtime class. CPM never
-infers class, units or barrier closure from a science label or `local_research/`;
-if one cue is genuinely missing, it preserves the handoff and asks exactly one
-concrete clarification while unrelated work continues. Detailed capacity,
-admission, barrier and resource behavior is defined only in
+For a result-bearing treatment, the prose must name the requested action,
+required resource, known conflict and explicit user authorization received
+through Root, and say whether the direction-local predecessor and intake
+barrier are closed. These are semantic cues, never a required schema. The
+scientific A/B/C evidence level is independent of the resource request. CPM
+does not infer an action, authorization or barrier closure from a science label
+or `local_research/`; if one cue is genuinely missing, it preserves the handoff
+and asks exactly one concrete clarification through Root while unrelated work
+continues. Detailed resource, barrier and parallel behavior is defined only in
 `.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md`.
 
 ## Low-context reverse-intake path
@@ -87,7 +107,7 @@ The only fallback is one concrete clarification naming the missing or
 contradictory locator, old/new text or frozen consequence. Preserve the original
 file and do not create retry state, a queue, receipt schema, automatic recovery
 or a validator. Git revision is a source locator only; integrity diagnostics do
-not become workflow admission or acceptance evidence.
+not become routing or acceptance evidence.
 
 ## Normal path
 
@@ -97,14 +117,17 @@ physically write only the exact named file under
 `temp/handoffs/explorer_to_code_manager/`. The Writer cannot write
 `local_research/RESEARCH_CONTINUITY.md`. The live file is ignored and requires
 no Git operation. The brief explains one candidate's identity, target and
-version, intended outcome, concrete inputs, evidence and uncertainty, allowed
+version, its `research_scope_key` and direction, intended outcome, concrete inputs, evidence and uncertainty, allowed
 and excluded effects, relevant authority boundary, completion evidence and
 return task, selected A/B/C treatment and one named action defined by the stable
 workflow. These are
 semantic writing aids, not required field names. The brief gives one clear
 instruction naming implementation, instance binding, experiment, pause, abandon
 or exact review as applicable. That instruction authorizes CPM to execute the
-named treatment without separate permission fields. It separates missing
+named treatment after Root confirms the user's explicit authorization. For
+runtime or compute work, the same prose names the requested action, required
+resource and known conflict; CPM does not infer omitted actions or authorization.
+It separates missing
 scientific inputs from independently executable infrastructure, interfaces and
 fail-closed tests.
 
@@ -140,13 +163,14 @@ retirement decision; that decision belongs to a frozen C treatment.
 
 One optional manifest may list several brief paths in their intended order.
 The manifest is work organization only: it contains no item state, owner lease,
-retry record or admission status. CPM may process independent direction-local
-candidates concurrently when the capacity contract permits; the supplied order
-is organization rather than ranking, runtime admission or a cross-direction
-barrier. Every candidate keeps its own handoff, assignment, roots, receipt,
-technical acceptance and scientific intake. Runtime and admission mechanics are
-defined only by the referenced `parallel-research-workflow.md`; this Skill
-grants no second runtime procedure or serial fallback.
+retry record or runtime-control state. CPM may process independent
+direction-local candidates concurrently when their named resources do not
+conflict; the supplied order is organization rather than ranking or a
+cross-direction barrier. Every candidate keeps its own handoff, assignment,
+roots, receipt, technical acceptance and scientific intake. Resource and
+dependency mechanics are defined only by the referenced
+`parallel-research-workflow.md`; this Skill grants no second runtime procedure
+or serial fallback.
 
 CPM reads the named public brief, uses engineering judgment and performs
 bounded safe read-only reconnaissance. It proceeds when the task is
@@ -167,9 +191,11 @@ choice that changes the scientific question returns to Explorer.
 
 CPM returns a human-readable result under
 `temp/handoffs/code_manager_to_explorer/` containing an understandable
-natural-language conclusion first and the necessary exact evidence second. A
-Root-relayed native message carrying the same semantic content is the simple
-fallback. Explorer reads but never edits CPM output.
+natural-language conclusion first and the necessary exact evidence second. The
+reverse result preserves `research_scope_key`, direction, candidate and
+revision before its technical evidence. A Root-relayed native message carrying
+the same semantic content is the simple fallback. Explorer reads but never
+edits CPM output.
 
 After technical acceptance, CPM returns its acceptance and exact candidate
 locators to Root; Root performs any separately authorized local candidate commit
@@ -196,8 +222,7 @@ context for judgment, not mandatory headings or an expected verdict.
 
 If a referenced attachment is not readable by CPM, Explorer embeds the minimum
 necessary content in the same public brief; it does not create another wrapper
-or require CPM to read `local_research/`. Neither direction uses hashes, byte
-counts or fingerprints. After Root confirms CPM intake, Explorer may assign
+or require CPM to read `local_research/`. After Root confirms CPM intake, Explorer may assign
 the Writer to remove the exact outbound copy. After Root confirms Explorer
 intake of a Root-written reverse copy, Root may remove that exact reverse copy.
 Canonical research, code, review and result records remain in their existing

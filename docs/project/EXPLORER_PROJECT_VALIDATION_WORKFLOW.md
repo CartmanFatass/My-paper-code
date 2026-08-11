@@ -25,13 +25,36 @@ directly. External Pro owns scientific choices inside each submitted review
 boundary. Workflow Design Manager owns this stable interface, not its live
 handoff content or relay mechanics.
 
+Root creates a real user-visible Explorer L1 task keyed by
+`research_scope_key`. A `direction:<id>` task solely owns that direction's
+scientific meaning and loads the exact Root assignment and named direction
+pointers; it does not preload the whole portfolio, project/runtime corpus or
+implicit global continuity. A distinct `portfolio:<group>` task receives
+compact accepted direction packets and pointers, owns cross-direction
+comparison and advisory integration, and may load compact continuity or lazy
+direction pointers. Each L1 scope has a separate task and worktree boundary.
+
+Explorer -> Root -> the relevant same-level CPM task and the reverse result
+preserve `research_scope_key`, direction, candidate and revision. CPM is never
+nested under Explorer. Root alone owns user interaction, progress, follow-up,
+interruption, cross-owner relay, lifecycle and accepted physical writes; Root
+does not own scientific meaning. For a writable scope, Root provisions exactly
+one managed worktree for that L1 and all exact disjoint L2 writers share it. L2
+does not provision, release, integrate, invoke a helper or perform Git
+lifecycle actions. External Pro remains outside the tree with its existing
+scientific-review boundary.
+
 ## Direction-local context binding
 
-Every direction-specific Explorer answer and Root-routed Explorer -> Root -> CPM handoff is
-direction-local. For an ordinary question or brief, Explorer resolves one
-primary selected direction identity and loads only the smallest set of
-canonical decision/source context needed for it. It loads only the smallest
-set of parent, child or cross-direction edges material to the exact question.
+Every direction-specific Explorer answer and Root-routed Explorer -> Root -> CPM
+handoff is scope-local. For a `direction:<id>` question or brief, that L1
+resolves one selected direction identity and loads only the exact Root
+assignment, named direction pointers and smallest set of canonical
+decision/source context needed for it. It does not implicitly load global
+continuity, the whole portfolio or project/runtime material. A `portfolio:<group>`
+L1 instead uses compact accepted direction packets and pointers and follows
+compact continuity or lazy direction pointers only when the comparison requires
+them. Each direction remains explicit and separate.
 An explicitly multi-direction user question may name multiple directions, but
 that never authorizes preloading or merging the whole portfolio; each named
 direction remains explicit, no unrequested sibling generalization is made and
@@ -46,20 +69,20 @@ of sibling-direction generalization unless a direction is explicitly named;
 one requested action and its direct
   consumer; completion evidence; and return destination. These cues make the
   semantic binding understandable without
-  creating required field names or a machine admission gate.
+  creating required field names or a machine gate.
 
-For a result-bearing handoff, the same prose should explain the treatment's
- prospective runtime class and units and whether its direction-local predecessor
- and intake barrier are closed. The scientific A/B/C evidence level is
- independent of runtime class; it is a separate scientific description and
-never determines units or barrier closure. CPM never infers class, units or
-barrier closure from a science label or `local_research/`. If a cue is
-genuinely missing, CPM preserves the original handoff and returns exactly one
-concrete clarification to Root for routing while unrelated work continues; it
-does not guess, rewrite the artifact or create `BLOCKED`.
+For a result-bearing handoff, the same prose must name the requested action,
+required resource, known conflict and explicit user authorization received
+through Root, and state whether its direction-local predecessor and intake
+barrier are closed. The scientific A/B/C evidence level is independent of that
+resource request. CPM never infers an action, authorization, resource need or
+barrier closure from a science label or `local_research/`. If a cue is genuinely
+missing, CPM preserves the original handoff and returns exactly one concrete
+clarification through Root while unrelated work continues; it does not guess,
+rewrite the artifact or create `BLOCKED`.
 
 CPM's reverse result, returned through Root, begins with its conclusion and
-mirrors that same primary direction or explicitly named direction set,
+mirrors that same `research_scope_key`, primary direction or explicitly named direction set,
 candidate, proposition, stage,
 revision boundary and material relationship binding before technical
 observations, counts, adjustments and locators. It never imports another
@@ -71,8 +94,9 @@ the receiver preserves the original handoff/artifact and returns exactly one
 concrete semantic clarification to Root for routing to the sender. It continues
 unrelated work; neither role guesses, merges directions, rewrites the artifact
 or creates a `BLOCKED` state.
-Portfolio, index, README and continuity surfaces remain pointer-only
-navigation or phase-barrier views and do not become duplicate decision records.
+Portfolio, index, README and continuity surfaces remain pointer-only navigation
+or phase-barrier views and do not become duplicate decision records or alternate
+task trees.
 
 ## Strong action-bearing semantic minimum
 
@@ -119,12 +143,12 @@ only; WDM and workflow children do not edit `local_research/`. The exact columns
 are:
 
 ```text
-Direction | current scientific question | existing evidence and paths | missing object | scientific disposition in full prose | whether CPM is needed now and why | exact next owner | exact next action | trigger/dependency | handoff/result locator | runtime class/units when applicable | post-return intake/reactivation action
+research_scope_key | Direction | current scientific question | existing evidence and paths | missing object | scientific disposition in full prose | whether CPM is needed now and why | exact next owner | exact next action | trigger/dependency | handoff/result locator | requested action/resource/conflict/Root authorization when applicable | post-return intake/reactivation action
 ```
 
 Every cell contains meaningful current facts, not a status-only token. The map
-is not a machine schema, queue, scheduler, registry, runtime-admission source
-or acceptance source. The CPM Technical Treatment View at
+is not a machine schema, workflow registry, runtime-control source or acceptance
+source. The CPM Technical Treatment View at
 `docs/project/current-work/common/explorer_project_validation.md` is a
 CPM-owned projection/pointer only: it contains treatments with complete Explorer
 handoffs, while a park without a frozen successor is absent. This slice never
@@ -138,8 +162,8 @@ transport. Explorer L1 retains the canonical source and semantically authors one
 small, self-contained delta containing the canonical source locator, candidate
 target locator, Git revision locator, exact old/new text or a unified patch, and
 the frozen semantics and consequences. The Git revision is only a source
-locator; no hash, digest, byte count, length, encoded fragment or JSON receipt
-is workflow admission, routing, handoff, recovery or acceptance evidence.
+locator; integrity metadata is not routing, handoff, recovery or acceptance
+evidence.
 
 The normal path is deliberately file-backed and low-context:
 
@@ -154,7 +178,7 @@ The normal path is deliberately file-backed and low-context:
    Root performs one ordinary exact-text patch against that candidate. An
    anchor occurring zero or more than once stops the operation and preserves
    the original file. At most one concrete small-delta clarification and retry
-   is allowed; there is no retry state, queue, receipt schema, automatic
+   is allowed; there is no retry state, receipt schema, automatic
    recovery or validator.
 3. Explorer full-reads the complete candidate and semantically accepts or
    rejects it, including unselected lines, archive meaning, locator meaning,
@@ -175,8 +199,8 @@ wrong Skill or writing the wrong path is assignment/path confinement; and (C)
 newline or pipe damage is a serialization-family failure. A locator or archive
 that remains wrong after decoding is a semantic-author or Explorer acceptance
 failure. These three observations must not be reported as one mechanism's
-independent recurrence. The WDM defect queue is evidence history only, never a
-dispatcher or scheduler. WDM owns this owner/transport/order/path interface;
+independent recurrence. The WDM defect record is evidence history only, never a
+dispatcher. WDM owns this owner/transport/order/path interface;
 Explorer owns artifact integrity, map meaning and semantic acceptance.
 
 ## Scientific-only intake boundary
@@ -237,16 +261,15 @@ questions to Scout. Explorer may use zero, one or several of them and never
 treats this capability map as a required panel.
 Several read-only questions may run in parallel, while Explorer keeps at most
 one result-bearing experiment active per direction by default. Independent
-ordinary A/B treatments from different directions may overlap when the
-capacity contract permits. Runtime/admission, direction-barrier and
-frozen-joint-roster mechanics live only in the exploration Skill's
+ordinary A/B treatments from different directions may overlap when their named
+resources do not conflict. Direction-barrier and frozen-joint-roster mechanics
+live only in the exploration Skill's
 `parallel-research-workflow.md`; this bridge owns direction-local binding and
-scientific intake and grants no second runtime procedure. Detailed capacity,
-admission, barrier and resource behavior is defined only by that
-parallel-research reference.
+scientific intake and grants no second runtime procedure. Detailed resource,
+barrier and parallel behavior is defined only by that reference.
 
 This boundary is semantic guidance rather than a mandatory packet schema or
-validator admission gate. This boundary does not invoke External Pro, migrate
+validator gate. This boundary does not invoke External Pro, migrate
 research records, change the active direction or alter ordinary B iteration. Existing named
 Pro triggers remain unchanged.
 
@@ -264,8 +287,8 @@ owner lanes:
   may remove that copy only after Root confirms Explorer intake.
 
 A handoff is a self-contained Markdown or JSON brief, with attachments only
-when every receiver can read them. It should make the target, candidate and
-version, intended outcome, concrete inputs, evidence, uncertainty, allowed and
+when every receiver can read them. It should make the `research_scope_key`,
+direction, target, candidate and version, intended outcome, concrete inputs, evidence, uncertainty, allowed and
 excluded effects, authority boundary, completion evidence and return task easy
 to understand. It also makes Explorer's selected treatment understandable:
 experiment, instance binding, pause, abandon or one exact external-review need.
@@ -277,13 +300,16 @@ states the candidate, matched comparator and initial toy path. Each named run
 fixes its exact code revision, configuration, seeds and small budget cap; between
 runs Explorer may direct recorded changes to the host, threshold, observations,
 sample composition or training settings. B need not freeze C-level estimands,
-terminal thresholds or request Pro for every iteration. That instruction
+terminal thresholds or request Pro for every iteration. For runtime or compute
+work, the brief also names the requested action, required resource, known
+conflict and explicit user authorization through Root. That instruction
 authorizes CPM to execute the named treatment without separate code or
-experiment permission fields, and CPM does not infer omitted actions. If an
+experiment permission fields, and CPM does not infer omitted actions or
+authorization. If an
 object is missing, the brief states what is known. CPM constructs or binds
 engineering objects; Explorer answers any genuinely scientific choice CPM
 cannot determine. These are semantic completeness cues, not a schema or
-admission check. No `document_kind`, packet version, validator receipt, hash or
+validator check. No `document_kind`, packet version, validator receipt or
 byte count is required.
 
 ## Intelligent intake and ordering
@@ -296,13 +322,13 @@ routing; neither owner uses a direct sibling channel or creates a `BLOCKED`
 state.
 
 One manifest may preserve an ordered group of public brief paths. That order is
-work organization rather than queue state, ranking or scientific comparison.
-CPM may process several capacity-admitted, direction-independent candidates in
+work organization rather than ranking or scientific comparison. CPM may process
+several direction-independent candidates in
 isolated execution roots. One candidate's problem does not block unrelated
 work or change another candidate's frozen design or scientific status. Each
 result retains exactly one CPM technical acceptance and one Explorer scientific
 intake; completion order creates no priority or merged acceptance. The detailed
-parallel-first, direction-local barrier, capacity and resource rules are defined
+parallel-first, direction-local barrier and resource-conflict rules are defined
 only in `parallel-research-workflow.md`; this contract does not duplicate them.
 
 For an Explorer-origin candidate, CPM implements the selected treatment as an

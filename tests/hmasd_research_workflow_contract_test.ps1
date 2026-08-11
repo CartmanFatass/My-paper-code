@@ -163,7 +163,7 @@ $directionBindingTerms = @(
     'direction-specific Explorer answer',
     'selected direction identity',
     'smallest set of canonical',
-    'parent, child or cross-direction',
+    'parent/child/cross-direction',
     'preloading or merging the whole portfolio',
     'candidate and exact current proposition',
     'source/evidence revision boundary',
@@ -171,7 +171,7 @@ $directionBindingTerms = @(
     'one requested action and its direct consumer',
     'completion evidence',
     'CPM''s reverse result, returned through Root, begins with its conclusion',
-    'mirrors that same primary direction or explicitly named direction set',
+    'mirrors that same `research_scope_key`, primary direction or explicitly named direction set',
     'Codex-native message fallback carries the same binding',
     'preserves the original handoff/artifact',
     'returns exactly one concrete semantic clarification',
@@ -305,7 +305,7 @@ foreach ($entry in @(
     @($proRole, 'EXPLORER_TOY_RESULT_SCIENTIFIC_DISPOSITION'),
     @($proRole, 'TOY_CONTRACT_FROZEN|ADVISORY_REFINEMENT_REQUIRED|PARK_CANDIDATE'),
     @($explorerValidationContract, 'current_work_mutation=forbidden'),
-    @($explorerValidationContractNormalized, 'order is work organization rather than queue state'),
+    @($explorerValidationContractNormalized, 'order is work organization rather than ranking or scientific comparison'),
     @($explorerValidationContractNormalized, 'Missing formatting or a prior mechanical BLOCKED receipt is not candidate evidence'),
     @($explorerValidationContractNormalized, 'Explorer gives one clear instruction naming implementation, instance binding'),
     @($explorerValidationContractNormalized, 'without separate code or experiment permission fields'),
@@ -340,7 +340,7 @@ foreach ($required in @(
     'existing `local_research/` ownership',
     'Portfolio, index, README and continuity',
     'pointer, navigation',
-    'mandatory packet schema or validator admission gate',
+    'mandatory packet schema or validator gate',
     'ordinary B',
     'named Pro triggers')) {
     if (-not $scientificOnlyNormalized.Contains($required)) {
@@ -364,7 +364,7 @@ foreach ($required in @(
     'project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous',
     'project_validation_technical_facts_not_recomputed=schema|readability|receipts|activity_counts|locators|retry|technical_consistency',
     'canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership',
-    'portfolio_index_readme_continuity_role=pointer_navigation_barrier_only')) {
+    'portfolio_index_readme_continuity_role=lazy_pointer_navigation_only_not_task_tree')) {
     if (-not $independentResearchRole.Contains($required)) {
         throw "Explorer role scientific-only key missing: $required"
     }
@@ -379,7 +379,8 @@ foreach ($entry in @(
     @($independentResearchRole, 'agentify_transport_result_fields=status|results_path|error'),
     @($independentResearchRole, 'agentify_transport_terminal_status=COMPLETE|ERROR'),
     @($independentResearchRole, 'agentify_transport_wait_visibility=silent_until_terminal_native_final'),
-    @($independentResearchRole, 'explorer_l1_state_retention=per_direction_compact_continuity_projection(direction_pointer|dependency|compact_returned_conclusion|cpm_readiness)|comparison_relevant_portfolio_evidence_and_relationship_edges'),
+    @($independentResearchRole, 'direction_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness'),
+    @($independentResearchRole, 'portfolio_state_retention=accepted_direction_packets|comparison_relevant_evidence|relationship_edges|integration_revision'),
     @($independentResearchRole, 'independent_pro_review_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py'),
     @($independentResearchRole, 'independent_pro_review_result_guard_timing=after_terminal_before_read'),
     @($independentResearchRole, 'independent_pro_review_result_guard_failure=reject_actual_error_no_fallback'),
@@ -430,6 +431,78 @@ foreach ($surface in @(
     $publicHandoffContract)) {
     if (-not $surface.Contains($directionBindingPointer)) {
         throw 'Direction-local context surface does not point to the stable contract'
+    }
+}
+
+# Explorer is a real Root-created task tree with explicit direction and
+# portfolio scopes.  Keep this contract at the existing owner/transport level;
+# it is not a second admission gate or a dashboard registry.
+$scopeContractSurfaces = @(
+    $agents,
+    $workflowDesignManagerRole,
+    $independentResearchRole,
+    $codePmRole,
+    $independentResearchSkill,
+    $parallelResearch,
+    $explorerValidationSkill,
+    $explorerValidationContract,
+    $sessionWorkspaceContract,
+    $workflowMap)
+$scopeContractNormalized = ($scopeContractSurfaces -join ' ') -replace '\s+', ' '
+$scopeContractLower = $scopeContractNormalized.ToLowerInvariant()
+foreach ($required in @(
+    'task_identity=real_user_visible_explorer_l1_task|research_scope_key',
+    'research_scope_key_forms=direction:<id>|portfolio:<group>',
+    'scope_creation=root_creates_one_named_task_per_scope_and_one_worktree_per_writable_scope',
+    'scope_isolation=distinct_explorer_l1_tasks_are_distinct_scopes_and_worktrees',
+    'direction_scope_owner=one_direction_scientific_meaning_only',
+    'portfolio_scope_owner=cross_direction_comparison_and_advisory_integration',
+    'scope_startup=exact_assignment_and_named_pointers',
+    'direction_context_exclusion=whole_portfolio|project_runtime_corpus|implicit_global_continuity',
+    'portfolio_context=compact_accepted_direction_packets|lazy_direction_pointers',
+    'root_owner=user-interaction|progress|follow-up|interrupt|relay|lifecycle|physical-writes',
+    'cpm_relation=same-level-root-sibling',
+    'relay_bindings=research_scope_key|direction|candidate|revision',
+    'explorer_to_root_to_cpm=scope_preserving_route',
+    'cpm_to_root_to_explorer=scope_preserving_reverse_route',
+    'scope_worktree=one-root-managed-worktree-per-writable-l1',
+    'l2_worktree_rule=all-exact-disjoint-writers-share-the-scope-worktree',
+    'l2_workspace_lifecycle=none',
+    'l2_helper_authority=none',
+    'cpm is never nested under explorer',
+    'Root owns user interaction',
+    'cross-direction comparison',
+    'advisory integration')) {
+    if (-not $scopeContractLower.Contains($required.ToLowerInvariant())) {
+        throw "Explorer scope/task-tree contract missing: $required"
+    }
+}
+if (-not (
+    $scopeContractLower.Contains('cpm remains a Root sibling'.ToLowerInvariant()) -or
+    ($agents.ToLowerInvariant().Contains('code_project_manager_parent=root') -and
+     $agents.ToLowerInvariant().Contains('independent_research_explorer_parent=root')))) {
+    throw 'CPM is not proven as a Root sibling of Explorer'
+}
+foreach ($stale in @(
+    'runtime_concurrency=three_unit_cpm_capacity_pool',
+    'runtime_capacity_units_total=3',
+    'runtime_capacity_admission_owner=code_project_manager',
+    'runtime_admission_judgment=admit|up-class|pending_runtime_capacity',
+    'B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive',
+    'three independent light treatments, or one medium plus one light',
+    'sum the units of currently active result-bearing treatments',
+    'experiment_pool_exclusive_runtime=',
+    'reservation/ledger',
+    'hash admission')) {
+    if ($scopeContractLower.Contains($stale.ToLowerInvariant())) {
+        throw "Retired fixed-pool/runtime admission vocabulary remains: $stale"
+    }
+}
+foreach ($required in @(
+    'runtime_request=ordinary-prose-requested-action|required-resource|known-conflict|Root-confirmed-user-authorization',
+    'serialization=exact-dependency-or-known-resource-or-mutable-path-conflict-only')) {
+    if (-not $scopeContractLower.Contains($required.ToLowerInvariant())) {
+        throw "Explicit runtime-request contract missing: $required"
     }
 }
 
@@ -703,24 +776,9 @@ foreach ($required in @(
     'local_research_shell_mutation=forbidden',
     'project_validation_read_authority=project_wide_read_only_as_needed',
     'logical_assignment_count=derived_from_exact_work_roster',
-    'runtime_concurrency=three_unit_cpm_capacity_pool',
-    'resource_consuming_experiment_action=capacity_controlled_per_direction',
-    'active_experiment_roster_owner=independent_research_explorer_scientific_view',
-    'runtime_capacity_admission_owner=code_project_manager',
-    'independent_ready_treatment_dispatch=parallel_first_within_capacity',
-    'read_only_science_lane_capacity=independent_of_cpm_pool_by_default',
-    'science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only',
-    'cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict',
-    'task_tree_explorer_progress=event_driven_or_root_resumed',
-    'global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence',
-    'per_direction_result_bearing_default=one_active',
-    'same_direction_parallelism=exact_frozen_joint_roster_only',
-    'experiment_pool_exclusive_runtime=B_HEAVY_OR_C',
-    'capacity_wait_effect=pending_runtime_capacity_only_not_blocked',
-    'read_only_scientific_analysis_parallelism=available_native_capacity',
     'canonical_phase_barrier=required_for_algorithm_inspiration_campaign_only',
     'adaptive_question_dispatch=bounded_registered_child_consultation',
-    'adaptive_question_barrier=none_for_singleton|exact_local_roster_only_when_joint',
+    'adaptive_question_barrier=none_for_singleton|exact_named_question_set_only_when_joint',
     'adaptive_question_result_effect=consultation_only',
     'completion_order_priority=forbidden',
     'research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation',
@@ -807,39 +865,12 @@ if ($adaptiveRoleNormalized.Contains('the root retains only') -or
     throw 'Independent research adaptive contract retains stale root-only state wording'
 }
 foreach ($required in @(
-    'adaptive_question_roster=singleton_or_exact_joint_roster',
-    'adaptive_singleton_global_barrier=none',
-    'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
+    'singleton adaptive question creates no global barrier',
+    'exact joint roster has a local merge barrier only when every named answer is a necessary input',
     'adaptive_first_round_peer_reading=forbidden',
     'There is no fixed adaptive count, concurrency, quorum, every-B panel, automatic-Pro path or durable mechanism.',
     'Preserve disagreements as advisory inputs; never vote or collapse them into a quorum.',
     'Explorer L1 remains the semantic author and integrates answers into one exact advisory decision; Research Artifact Writer and Root perform only the bounded physical writes described above.',
-    'runtime_capacity_units_total=3',
-    'B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive',
-    'experiment_pool_exclusivity_scope=result_bearing_runtime_only',
-    'workflow_progress_during_exclusive_runtime=continues',
-    'three independent light treatments, or one medium plus one light',
-    'one-shot observed CPU, memory and process facts',
-    'CPM-supplied GPU/paid-service claims or conflicts',
-    'CPM makes no external GPU/paid-service call or inference',
-    'capacity_wait_state=pending_runtime_capacity_only',
-    'capacity_wait_effect=pending_runtime_capacity_only',
-    'Insufficient capacity is `pending_runtime_capacity`, never a direction, task or workflow `BLOCKED` state',
-    'creates no queue engine, lease, dispatcher or acceptance owner',
-    'Formal or explicitly heavy runtime may prevent another result-bearing experiment from starting, but it never pauses code work',
-    'read-only research, scientific intake, External Pro review or another non-runtime action',
-    'Every concurrent treatment has distinct direction/treatment identity, canonical design/assignment, source freeze and accepted candidate revision, run, evidence, checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator receipt, readiness/technical-acceptance record and Explorer decision',
-    'By default a direction has at most one result-bearing treatment active',
-    'until that predecessor is terminal and Explorer completes the direction''s scientific intake',
-    'freeze one exact joint roster before any member starts',
-    'Completion order is never scientific priority, voting or a cross-direction barrier',
-    'B completion or parallelism alone never does',
-    'normal path for two or more scientifically selected and frozen independent treatments is parallel-first',
-    'same mutable-path/object conflict',
-    'Attribution, generic caution, completion order, convenience and a current sole action are not dependency or resource evidence',
-    'exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict',
-    'Explorer progress is event-driven or Root-resumed',
-    'Read-only Explorer science lanes',
     'Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.')) {
     if (-not $adaptiveParallelNormalized.Contains($required)) {
         throw "Adaptive roster contract missing: $required"
@@ -1144,14 +1175,6 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'logical_assignment_count=derived_from_exact_work_roster',
-    'runtime_concurrency=three_unit_cpm_capacity_pool',
-    'runtime_capacity_units_total=3',
-    'active_experiment_roster_owner=independent_research_explorer_scientific_view',
-    'runtime_capacity_admission_owner=code_project_manager',
-    'cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict',
-    'read_only_science_lane_capacity=independent_of_cpm_pool_by_default',
-    'science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only',
-    'explorer_progress=event_driven_or_root_resumed',
     'persistent_explorer_progress=forbidden',
     'canonical_campaign_phase_barriers=required',
     'adaptive_singleton_global_barrier=none',
@@ -1674,12 +1697,12 @@ foreach ($required in @(
 # the compact ownership boundary here; detailed behavior remains in owner
 # Roles and Skills.
 foreach ($required in @(
-    'Explorer and CPM are active owners/orchestrators, not passive relays or schedulers',
+    'Explorer and CPM are active owners/orchestrators, not passive relays',
     'decompose work and delegate bounded detail',
     'synthesize results, retain owner decisions',
     'continue unrelated safe work while children run',
     'Explorer L1 owns decomposition, selection, dependency/concurrency, science synthesis and continuity semantics, cross-direction comparison',
-    'CPM retains architecture, runtime admission, integration and technical acceptance',
+    'CPM retains architecture, runtime, integration and technical acceptance',
     'Explorer outputs remain advisory portfolio/local-research comparisons, intakes and decisions',
     'Formal/project canonical science remains with the user/External Pro contract',
     'Exact assignment, child-lane, waiting and recovery mechanics remain in the owner Roles and Skills',
@@ -1708,8 +1731,7 @@ foreach ($forbidden in @(
     'Main sessions handle directly only',
     'Waiting is bounded and permitted only',
     'Same-file concurrent writes remain forbidden',
-    'no panel/vote, no per-implementer review',
-    'no scheduler, periodic wake, queue or registry')) {
+    'no panel/vote, no per-implementer review')) {
     if ($workflowMapNormalized.Contains($forbidden)) {
         throw "Workflow Map retains removed pseudo-schema/detail: $forbidden"
     }

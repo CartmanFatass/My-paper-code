@@ -537,31 +537,14 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
 
     for required in (
         "adaptive_question_dispatch=bounded_registered_child_consultation",
-        "adaptive_question_barrier=none_for_singleton|exact_local_roster_only_when_joint",
+        "adaptive_question_barrier=none_for_singleton|exact_named_question_set_only_when_joint",
         "adaptive_question_result_effect=consultation_only",
-        "runtime_concurrency=three_unit_cpm_capacity_pool",
-        "resource_consuming_experiment_action=capacity_controlled_per_direction",
-        "active_experiment_roster_owner=independent_research_explorer_scientific_view",
-        "runtime_capacity_admission_owner=code_project_manager",
-        "independent_ready_treatment_dispatch=parallel_first_within_capacity",
-        "global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence",
-        "per_direction_result_bearing_default=one_active",
-        "same_direction_parallelism=exact_frozen_joint_roster_only",
-        "experiment_pool_exclusive_runtime=B_HEAVY_OR_C",
-        "capacity_wait_effect=pending_runtime_capacity_only_not_blocked",
-        "No experiment-capacity condition blocks Explorer research, result intake, read-only analysis, Pro review or another non-runtime action.",
-        "A formal or other explicitly heavy treatment can reserve the experiment pool, not the workflow.",
-        "read_only_scientific_analysis_parallelism=available_native_capacity",
-        "read_only_science_lane_capacity=independent_of_cpm_pool_by_default",
-        "science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only",
-        "cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict",
-        "task_tree_explorer_progress=event_driven_or_root_resumed",
         "one clear, bounded, decision-relevant question",
         "expected information gain exceeds dispatch and synthesis cost",
         "no code, runtime, write, technical acceptance or formal scientific acceptance",
         "If evidence is sufficient and the next step is cheap and reversible, Explorer L1 decides directly.",
         "The child result is consultation only",
-        "Explorer L1 remains the portfolio integrator and sole semantic local-research intake and decision owner",
+        "assigned Explorer remains the sole semantic local-research intake",
         "completion order is not evidence priority",
         "disagreement is not voting",
         "sole recovery is one low-cost retry with the identical question and source boundary",
@@ -588,44 +571,14 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         assert required in skill_normalized
 
     for required in (
-        "adaptive_question_roster=singleton_or_exact_joint_roster",
-        "adaptive_singleton_global_barrier=none",
-        "adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary",
+        "singleton adaptive question creates no global barrier",
+        "exact joint roster has a local merge barrier only when every named answer is a necessary input",
         "adaptive_first_round_peer_reading=forbidden",
         "persistent_explorer_progress=forbidden",
         "First-round assignments do not read peers or a favored answer",
         "Preserve disagreements as advisory inputs; never vote or collapse them into a quorum.",
         "There is no fixed adaptive count, concurrency, quorum, every-B panel, automatic-Pro path or durable mechanism.",
         "Explorer L1 remains the semantic author and integrates answers into one exact advisory decision; Research Artifact Writer and Root perform only the bounded physical writes described above.",
-        "runtime_capacity_units_total=3",
-        "B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive",
-        "runtime_handoff_context=natural_language_prose_not_required_schema",
-        "runtime_handoff_prospective_cues=runtime_class_and_units|direction_local_predecessor_and_intake_barrier_closure",
-        "scientific_evidence_level=A|B|C_is_independent_of_runtime_class",
-        "runtime_class_not_inferred_from_science_or_local_research=true",
-        "runtime_admission_observation=stateless_per_admission",
-        "runtime_admission_judgment=admit|up-class|pending_runtime_capacity",
-        "three independent light treatments, or one medium plus one light",
-        "capacity_wait_state=pending_runtime_capacity_only",
-        "capacity_wait_effect=pending_runtime_capacity_only",
-        "Insufficient capacity is `pending_runtime_capacity`, never a direction, task or workflow `BLOCKED` state",
-        "creates no queue engine, lease, dispatcher or acceptance owner",
-        "Formal or explicitly heavy runtime may prevent another result-bearing experiment from starting, but it never pauses code work",
-        "read-only research, scientific intake, External Pro review or another non-runtime action",
-        "Every concurrent treatment has distinct direction/treatment identity, canonical design/assignment, source freeze and accepted candidate revision, run, evidence, checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator receipt, readiness/technical-acceptance record and Explorer decision",
-        "By default a direction has at most one result-bearing treatment active",
-        "until that predecessor is terminal and Explorer completes the direction's scientific intake",
-        "freeze one exact joint roster before any member starts",
-        "Completion order is never scientific priority, voting or a cross-direction barrier",
-        "B completion or parallelism alone never does",
-        "Strict methodology is scoped to conclusion-bearing C work or a named science-review trigger, not all candidate validation.",
-        "normal path for two or more scientifically selected and frozen independent treatments is parallel-first",
-        "creates a stateless observation only for that admission decision",
-        "CPM alone makes the per-admission runtime judgment",
-        "A missing semantic class/unit or predecessor/intake cue is a clarification, not a capacity judgment",
-        "Attribution, generic caution, completion order, convenience and a current sole action are not dependency or resource evidence",
-        "exact scientific/dependency predecessor, capacity/admission, a formal or actually observed resource conflict, or a same mutable-path/object conflict",
-        "Explorer progress is event-driven or Root-resumed",
     ):
         assert required in parallel_normalized
 
@@ -679,14 +632,7 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
     for required in (
         "does not recompute schema, readability, receipts, activity counts, locators",
         "necessary to one Explorer decision",
-        "prospective runtime class and units",
-        "direction-local predecessor and intake barrier are closed",
-        "scientific A/B/C evidence level is independent of runtime class",
-        "never infers class, units or barrier closure from a science label or `local_research/`",
-        "Detailed capacity, admission, barrier and resource behavior is defined only",
         "Several read-only questions may run in parallel",
-        "one result-bearing experiment active per direction by default",
-        "Independent ordinary A/B treatments from different directions may overlap",
         "exactly one CPM technical acceptance and one Explorer scientific intake",
         "ordinary B remains B and does not automatically invoke Pro",
         "consumes no formal iteration",
@@ -745,21 +691,18 @@ def test_parallel_first_normal_path_rejects_attribution_lock_regression() -> Non
     parallel_normalized = " ".join(parallel.split())
     surfaces = (role, parallel, exploration_skill, validation_skill, validation_contract, handoffs)
     for required in (
-        "independent_ready_treatment_dispatch=parallel_first_within_capacity",
-        "global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence",
+        "parallel_dispatch=independent-ready-treatments-when-no-known-conflict",
+        "serialization=exact-dependency-or-known-resource-or-mutable-path-conflict-only",
     ):
-        assert required in role_normalized
         assert required in parallel_normalized
     for required in (
-        "selected and frozen",
-        "direction-local predecessor/intake barrier",
-        "parallel-first",
-        "same mutable-path/object conflict",
-        "actual CPM-reported capacity/resource constraint",
-        "formal/explicit-heavy",
-        "pending-runtime-capacity",
-        "non-runtime continuation",
-        "event-driven or user-resumed",
+        "parallel dispatch",
+        "known conflict",
+        "exact dependency",
+        "mutable-path",
+        "task tree",
+        "event-driven",
+        "Root-resumed",
     ):
         assert any(required.lower() in " ".join(surface.split()).lower() for surface in surfaces)
 
@@ -776,59 +719,70 @@ def test_parallel_first_normal_path_rejects_attribution_lock_regression() -> Non
         assert stale.lower() not in normalized_surfaces
 
 
-def test_runtime_admission_contract_is_single_detailed_source_and_science_independent() -> None:
-    """Capacity mechanics stay in the parallel reference; owner surfaces point to it."""
-    parallel = (
-        REPO
-        / ".agents"
-        / "skills"
-        / "hmasd-independent-research-exploration"
-        / "references"
-        / "parallel-research-workflow.md"
-    ).read_text(encoding="utf-8")
-    cpm_role = (REPO / ".agents" / "roles" / "CODE_PROJECT_MANAGER.md").read_text(
-        encoding="utf-8"
-    )
-    agile = (REPO / ".agents" / "skills" / "hmasd-agile-research-development" / "SKILL.md").read_text(
-        encoding="utf-8"
-    )
-    validation_skill = (
-        REPO / ".agents" / "skills" / "hmasd-explorer-project-validation" / "SKILL.md"
-    ).read_text(encoding="utf-8")
-    validation_contract = (
-        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
-    ).read_text(encoding="utf-8")
-    workflow_map = (REPO / "docs" / "project" / "WORKFLOW_MAP.md").read_text(
-        encoding="utf-8"
-    )
+def test_runtime_requests_are_explicit_and_have_no_fixed_admission_model() -> None:
+    """Runtime work is a Root-routed natural-language request, not a pool gate."""
+    surfaces = [
+        (REPO / "AGENTS.md").read_text(encoding="utf-8"),
+        (REPO / ".agents" / "roles" / "CODE_PROJECT_MANAGER.md").read_text(
+            encoding="utf-8"
+        ),
+        (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+            encoding="utf-8"
+        ),
+        (REPO / ".agents" / "skills" / "hmasd-agile-research-development" / "SKILL.md").read_text(
+            encoding="utf-8"
+        ),
+        (
+            REPO
+            / ".agents"
+            / "skills"
+            / "hmasd-explorer-project-validation"
+            / "SKILL.md"
+        ).read_text(encoding="utf-8"),
+        (
+            REPO
+            / ".agents"
+            / "skills"
+            / "hmasd-independent-research-exploration"
+            / "references"
+            / "parallel-research-workflow.md"
+        ).read_text(encoding="utf-8"),
+        (REPO / "docs" / "project" / "WORKFLOW_MAP.md").read_text(encoding="utf-8"),
+    ]
+    normalized = " ".join(" ".join(surface.split()) for surface in surfaces).lower()
 
-    parallel_normalized = " ".join(parallel.split())
     for required in (
-        "creates a stateless observation only for that admission decision",
-        "CPM alone makes the per-admission runtime judgment: `admit`, `up-class`, or `pending_runtime_capacity`",
-        "The observation is discarded after the decision",
-        "not a queue record, lease, registry, history entry or scheduler state",
-        "never reads `local_research/`",
-        "All non-experiment work that does not contend for the observed bottleneck continues",
-        "One command that contends for that same actual resource may be delayed without creating `BLOCKED`",
-        "one-shot observed CPU, memory and process facts",
-        "CPM-supplied GPU/paid-service claims or conflicts",
-        "CPM makes no external GPU/paid-service call or inference",
+        "runtime request",
+        "natural-language",
+        "requested-action",
+        "required-resource",
+        "known-conflict",
+        "root-confirmed-user-authorization",
+        "root",
+        "cpm",
     ):
-        assert required in parallel_normalized
+        assert required in normalized, required
 
-    for surface in (cpm_role, agile, validation_skill, validation_contract, workflow_map):
-        normalized = " ".join(surface.split())
-        assert "parallel-research-workflow.md" in normalized
-        assert "scientific A/B/C evidence level is independent of runtime class" in normalized or (
-            "A/B/C scientific evidence level is independent" in normalized
-        ) or "A/B/C evidence level remains independent" in normalized
+    # The former pool/class/unit vocabulary must not remain an active contract.
+    for stale in (
+        "runtime_concurrency=three_unit_cpm_capacity_pool",
+        "runtime_capacity_units_total=3",
+        "runtime_capacity_admission_owner=code_project_manager",
+        "runtime_admission_judgment=admit|up-class|pending_runtime_capacity",
+        "B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive",
+        "three independent light treatments, or one medium plus one light",
+        "sum the units of currently active result-bearing treatments",
+        "experiment_pool_exclusive_runtime",
+        "reservation/ledger",
+        "hash admission",
+    ):
+        assert stale.lower() not in normalized, stale
 
-    # Detailed pool mechanics belong to the reference, not repeated owner prose.
-    for surface in (cpm_role, agile, validation_skill, validation_contract, workflow_map):
-        normalized = " ".join(surface.split())
-        assert "three independent light treatments, or one medium plus one light" not in normalized
-        assert "sum the units of currently active result-bearing treatments" not in normalized
+    # CPM is a Root sibling and does not become a child of Explorer.
+    router = surfaces[0].lower()
+    assert "code_project_manager_parent=root" in router
+    assert "independent_research_explorer_parent=root" in router
+    assert "cpm" in router and "explorer" in router
 
 
 def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated() -> None:
@@ -873,13 +827,13 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "workflow_modification_authority=none",
         "workflow_acceptance_authority=none",
         "workflow_git_authority=none",
-        "workflow_change_request_route=workflow_design_manager",
+        "workflow_change_request_route=Root_to_workflow_design_manager",
         "git_authority=none",
         "current_work_read=read_only_as_needed_for_named_assignment",
         "local_research_write_tool=delegated_L2_or_root_proposal",
         "local_research_shell_mutation=forbidden",
-        "continuity_entry=local_research/RESEARCH_CONTINUITY.md",
-        "continuity_owner=independent_research_explorer",
+        "continuity_entry=assignment_named_scope_compact_continuity_pointer",
+        "continuity_owner=assigned_explorer_l1_task",
         "public_handoff_outbound=temp/handoffs/explorer_to_code_manager/",
         "public_handoff_inbound_read=temp/handoffs/code_manager_to_explorer/",
         "public_handoff_git_authority=none",
@@ -1011,14 +965,10 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
 
     for required in (
         "restart_identity=role|model|current_task",
+        "scope_startup=exact_assignment_and_named_pointers",
+        "direction_global_continuity=not_implicitly_loaded",
+        "portfolio_context=compact_accepted_direction_packets|lazy_direction_pointers",
         "continuity_entry=local_research/RESEARCH_CONTINUITY.md",
-        "active_experiment_roster",
-        "last completed phase or direction-local intake barrier",
-        "unfinished assignment or review",
-        "next scientific action",
-        "current authorized source boundary",
-        "Propose an update only when the active roster changes",
-        "one bounded scan",
     ):
         assert required in parallel_normalized
 
@@ -1082,7 +1032,7 @@ def test_scientific_only_intake_boundary_uses_one_explorer_decision_record() -> 
         "existing `local_research/` ownership",
         "Portfolio, index, README and continuity",
         "pointer, navigation",
-        "mandatory packet schema or validator admission gate",
+        "mandatory packet schema or validator gate",
         "ordinary B",
         "named Pro triggers",
     ):
@@ -1095,7 +1045,7 @@ def test_scientific_only_intake_boundary_uses_one_explorer_decision_record() -> 
     assert "project_validation_intake_boundary=scientific_only_after_cpm_technical_acceptance" in role
     assert "project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous" in role
     assert "canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership|advisory_only_not_formal_project_science" in role
-    assert "portfolio_index_readme_continuity_role=pointer_navigation_barrier_only" in role
+    assert "portfolio_index_readme_continuity_role=lazy_pointer_navigation_only_not_task_tree" in role
     assert "does not invoke External Pro" in " ".join(contract.split())
 
 
@@ -1135,14 +1085,14 @@ def test_direction_local_context_binding_is_symmetric_and_preserves_artifacts() 
         "direction-specific Explorer answer",
         "selected direction identity",
         "canonical decision/source context",
-        "parent, child or cross-direction",
+        "parent/child/cross-direction",
         "preloading or merging the whole portfolio",
         "candidate and exact current proposition",
         "source/evidence revision boundary",
         "explicit exclusion of sibling-direction generalization",
         "one requested action and its direct consumer",
         "CPM's reverse result, returned through Root, begins with its conclusion",
-        "mirrors that same primary direction or explicitly named direction set",
+        "mirrors that same `research_scope_key`, primary direction or explicitly named direction set",
         "Codex-native message fallback carries the same binding and content",
         "preserves the original handoff/artifact",
         "returns exactly one concrete clarification",
@@ -1223,11 +1173,7 @@ def test_explorer_mechanical_child_is_context_isolated_from_science() -> None:
         assert required in mechanical_skill.lower()
     for required in (
         "explorer_mechanical_child=hmasd-explorer-mechanical",
-        "explorer_mechanical_scientific_roster=excluded",
-        "explorer_mechanical_barrier=none",
-        "explorer_mechanical_peer_independence=not_applicable",
-        "explorer_mechanical_evidence_role=literal_fact_organization_not_scientific_evidence",
-        "explorer_mechanical_campaign_effect=none",
+        "explorer_mechanical_scientific_effect=none",
     ):
         assert required in parallel.lower()
 
@@ -1284,17 +1230,17 @@ def test_direction_action_map_is_exact_and_non_authoritative() -> None:
     contract = contract_path.read_text(encoding="utf-8")
     normalized = " ".join(contract.split())
     exact_columns = (
-        "Direction | current scientific question | existing evidence and paths | "
+        "research_scope_key | Direction | current scientific question | existing evidence and paths | "
         "missing object | scientific disposition in full prose | whether CPM is needed now and why | "
         "exact next owner | exact next action | trigger/dependency | handoff/result locator | "
-        "runtime class/units when applicable | post-return intake/reactivation action"
+        "requested action/resource/conflict/Root authorization when applicable | post-return intake/reactivation action"
     )
     assert exact_columns in contract
     for required in (
         "mandatory human-readable, owner-local Direction Action Map",
         "local_research/RESEARCH_CONTINUITY.md",
         "Every cell contains meaningful current facts",
-        "not a machine schema, queue, scheduler, registry, runtime-admission source or acceptance source",
+        "not a machine schema, workflow registry, runtime-control source or acceptance source",
         "docs/project/current-work/common/explorer_project_validation.md",
         "CPM-owned projection/pointer only",
         "a park without a frozen successor is absent",
@@ -1303,35 +1249,108 @@ def test_direction_action_map_is_exact_and_non_authoritative() -> None:
         assert required in normalized, required
 
 
-def test_runtime_capacity_and_event_driven_rules_have_one_detailed_source() -> None:
-    parallel_path = (
-        REPO
-        / ".agents"
-        / "skills"
-        / "hmasd-independent-research-exploration"
-        / "references"
-        / "parallel-research-workflow.md"
-    )
-    parallel = " ".join(parallel_path.read_text(encoding="utf-8").split())
-    contract = (
+def test_explorer_scope_tasks_preserve_direction_and_portfolio_context_boundaries() -> None:
+    """Real Explorer scopes carry only the context their scope authorizes."""
+    router = (REPO / "AGENTS.md").read_text(encoding="utf-8")
+    explorer_role = (
+        REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md"
+    ).read_text(encoding="utf-8")
+    explorer_profile = (
+        REPO / ".codex" / "agents" / "hmasd-independent-research-explorer.toml"
+    ).read_text(encoding="utf-8")
+    validation = (
         REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
     ).read_text(encoding="utf-8")
     workflow_map = (REPO / "docs" / "project" / "WORKFLOW_MAP.md").read_text(
         encoding="utf-8"
     )
+    combined = " ".join(
+        " ".join(surface.split())
+        for surface in (router, explorer_role, explorer_profile, validation, workflow_map)
+    ).lower()
+
     for required in (
-        "runtime_capacity_units_total=3",
-        "B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive",
-        "runtime_admission_judgment=admit|up-class|pending_runtime_capacity",
-        "Explorer progress is event-driven or Root-resumed",
-        "there is no clock-driven scheduler or polling loop",
-        "not a queue record, lease, registry, history entry or scheduler state",
+        "research_scope_key",
+        "direction:<id>",
+        "portfolio:<group>",
+        "real_user_visible_explorer_l1_task",
+        "root",
+        "exact assignment",
+        "direction pointer",
+        "compact accepted direction",
+        "cross-direction comparison",
+        "advisory portfolio",
+        "compact continuity",
+        "lazy direction pointer",
+        "direction_context_exclusion=whole_portfolio|project_runtime_corpus|implicit_global_continuity",
+        "portfolio_context=compact_continuity_plus_lazy_direction_pointers_only",
+        "distinct_explorer_l1_tasks_are_distinct_scopes_and_worktrees",
     ):
-        assert required in parallel, required
-    for surface in (contract, workflow_map):
-        normalized = " ".join(surface.split())
-        assert "parallel-research-workflow.md" in normalized
-        assert "three-unit runtime-capacity" not in normalized
+        assert required in combined, required
+
+    # Direction scopes are not granted an implicit portfolio or runtime corpus;
+    # the negative boundary is itself part of the active contract.
+    assert "does not implicitly load global continuity, the whole portfolio" in combined
+    assert "project/runtime material" in combined
+
+    # The portfolio scope integrates accepted compact packets/pointers; it does
+    # not manufacture a second task tree or transfer science to Root.
+    assert "root" in combined
+    assert "physical writes" in combined or "physical write" in combined
+    assert "scientific" in combined
+
+
+def test_scope_transport_and_worktree_ownership_stay_root_routed() -> None:
+    """Scope bindings survive relay while lifecycle and Git stay with Root."""
+    surfaces = (
+        (REPO / "AGENTS.md").read_text(encoding="utf-8"),
+        (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+            encoding="utf-8"
+        ),
+        (REPO / ".agents" / "roles" / "CODE_PROJECT_MANAGER.md").read_text(
+            encoding="utf-8"
+        ),
+        (
+            REPO
+            / "docs"
+            / "project"
+            / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
+        ).read_text(encoding="utf-8"),
+        (
+            REPO
+            / ".agents"
+            / "skills"
+            / "hmasd-independent-research-exploration"
+            / "references"
+            / "parallel-research-workflow.md"
+        ).read_text(encoding="utf-8"),
+    )
+    normalized = " ".join(" ".join(surface.split()) for surface in surfaces).lower()
+
+    for required in (
+        "explorer",
+        "root",
+        "cpm",
+        "research_scope_key",
+        "direction",
+        "candidate",
+        "revision",
+        "explorer_to_root_to_cpm",
+        "reverse",
+        "one-root-managed-worktree-per-writable-l1",
+        "all-exact-disjoint-writers-share-the-scope-worktree",
+        "l2_workspace_lifecycle=none",
+        "l2_helper_authority=none",
+        "git_authority=none",
+    ):
+        assert required in normalized, required
+
+    assert "cpm remains a root sibling" in normalized or (
+        "code_project_manager_parent=root" in normalized
+        and "independent_research_explorer_parent=root" in normalized
+    )
+    assert "never_nested_under_explorer" in normalized
+    assert "explorer -> cpm" not in normalized
 
 
 def test_explorer_orchestrates_and_owns_cross_direction_comparison() -> None:
@@ -1352,8 +1371,9 @@ def test_explorer_orchestrates_and_owns_cross_direction_comparison() -> None:
     # Orchestrator-first delegation keeps direction-local detail with the
     # matching child while retaining decomposition and synthesis at the root.
     for required in (
-        "explorer_orchestration_owner=decomposition|child_selection|dependency_and_concurrency_judgment|result_synthesis|continuity_semantics|sole_advisory_portfolio_local_research_semantic_intake_and_decision",
-        "explorer_l1_state_retention=per_direction_compact_continuity_projection(direction_pointer|dependency|compact_returned_conclusion|cpm_readiness)|comparison_relevant_portfolio_evidence_and_relationship_edges",
+        "explorer_orchestration_owner=scope_decomposition|child_selection|dependency_judgment|result_synthesis|scope_continuity|advisory_intake_and_decision",
+        "direction_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness",
+        "portfolio_state_retention=accepted_direction_packets|comparison_relevant_evidence|relationship_edges|integration_revision",
         "independent_direction_question_default=best_matching_registered_read_only_child|fork_turns=\"none\"",
         "child_direction_context=minimal_direction_context_only|never_hidden_parent_context|cannot_replace_explorer_l1_cross_direction_comparison",
         "Direction-local source fidelity, criticism, mechanism design and detailed derivation normally stay with that child.",
@@ -1361,7 +1381,7 @@ def test_explorer_orchestrates_and_owns_cross_direction_comparison() -> None:
         "cross-direction dependencies, conflicts and combinations",
         "portfolio ordering and readiness",
         "sole advisory portfolio decision",
-        "sole Explorer-owned advisory portfolio/local-research semantic intake and decision",
+        "advisory_intake_and_decision",
         "This is never formal or project-canonical science",
         "the user alone decides whether any result later enters the formal project",
         "project_validation_semantic_acceptance_owner=external_pro",
@@ -1388,7 +1408,7 @@ def test_explorer_orchestrates_and_owns_cross_direction_comparison() -> None:
         "Direct Explorer-L1 work remains appropriate for a cheap reversible singleton",
         "Every child return is conclusion-first and action-bearing enough for synthesis",
         "Explorer L1 verifies the protected scientific postcondition before advisory local-research intake",
-        "research_portfolio_owner=independent_research_explorer",
+        "explorer_portfolio_owner=cross_direction_comparison|advisory_integration",
         "canonical_scientific_authority=none",
         "Do not microdelegate",
         "fixed panel",
