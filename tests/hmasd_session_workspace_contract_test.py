@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 
@@ -228,3 +229,34 @@ def test_explorer_mechanical_child_keeps_native_no_write_session_boundary() -> N
     assert "role=explorer_mechanical_operator" in role
     assert "write_authority=none" in role
     assert "scientific_authority=none" in role
+
+
+def test_reverse_intake_patch_locator_and_candidate_copy_boundary() -> None:
+    contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split())
+    for required in (
+        "explorer_reverse_intake_patch_root=temp/sessions/independent_research_explorer/<root-assignment>/state-proposals/",
+        "explorer_reverse_intake_patch_locator=<patch-root>/<proposal>.patch",
+        "explorer_reverse_intake_payload=small_self_contained_semantic_delta",
+        "explorer_reverse_intake_writer_check=exact_destination|payload_presence|UTF-8/LF",
+        "explorer_reverse_intake_full_map_transport=forbidden",
+        "explorer_reverse_intake_root_install=exact_path_and_git_revision_check_then_exact_copy",
+        "explorer_reverse_intake_retry=one_concrete_delta_clarification_only",
+        "explorer_reverse_intake_retry_state_queue_receipt_validator=forbidden",
+        "not canonical state",
+        "task-scoped candidate copy once",
+        "exact-copy installation only after Explorer's full-read semantic acceptance",
+    ):
+        assert required in contract, required
+
+
+def test_workflow_defect_queue_received_order_is_chronological_evidence_only() -> None:
+    queue = _text("docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md")
+    received_order = [
+        int(match.group(1))
+        for line in queue.splitlines()
+        if (match := re.match(r"\|\s*(\d+)\s*\|", line))
+    ]
+    assert received_order == sorted(received_order)
+    assert received_order == list(range(1, len(received_order) + 1))
+    assert "scheduler=false" in queue
+    assert "reverse_intake_queue_role=evidence_log_only_not_dispatcher_or_scheduler" in queue

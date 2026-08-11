@@ -107,6 +107,16 @@ Explorer-local Direction Action Map. This map remains an owner-local continuity
 view, not a machine schema, queue, scheduler, runtime-admission or acceptance
 source; this orientation document does not duplicate it.
 
+The stable reverse-intake direction is a small Explorer-authored semantic delta
+to an assignment-specific temporary patch. The Research Artifact Writer is an
+exact-payload mechanical writer; Root retains canonical bytes and owns the
+path/revision check and exact-copy installation; Explorer full-reads and owns
+semantic acceptance of the candidate. The full map is not transported through
+messages or split/encoded payloads. Detailed patch, clarification and event
+classification rules remain only in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`; WDM owns the interface
+shape and does not own artifact integrity, map meaning or Explorer acceptance.
+
 For result-bearing experiments, Explorer L1 owns the scientific active roster,
 direction-local predecessor context, advisory per-result local-research
 semantic intake and sole advisory decision authoring; Explorer L1 remains

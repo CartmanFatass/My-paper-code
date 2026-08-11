@@ -44,13 +44,13 @@ runtime_authority=none
 git_authority=none
 current_work_read=read_only_as_needed_for_named_assignment
 write_scope=none_at_L1
-local_research_single_writer=research_artifact_writer_L2_for_ordinary_research_or_outbound_temporary_bytes|root_for_continuity
+local_research_single_writer=research_artifact_writer_L2_for_ordinary_research_or_outbound_temporary_bytes|assignment_specific_reverse_intake_patch|root_for_continuity
 local_research_write_tool=delegated_L2_or_root_proposal
 local_research_shell_mutation=forbidden
 continuity_entry=local_research/RESEARCH_CONTINUITY.md
 continuity_owner=independent_research_explorer
 continuity_physical_writer=root_after_explorer_accepted_proposal_and_revision_check
-research_artifact_writer_physical_scope=write_or_remove_exact_explorer_approved_ordinary_research_or_outbound_temporary_bytes_only
+research_artifact_writer_physical_scope=write_or_remove_exact_explorer_approved_ordinary_research_or_outbound_temporary_bytes_or_assignment_specific_reverse_intake_patch_only
 research_artifact_writer_continuity_write=forbidden
 public_handoff_outbound=temp/handoffs/explorer_to_code_manager/
 public_handoff_inbound_read=temp/handoffs/code_manager_to_explorer/
@@ -68,6 +68,15 @@ project_validation_intake_boundary=scientific_only_after_cpm_technical_acceptanc
 project_validation_packet_dependency=cpm_technical_acceptance_and_mechanically_verified_packet
 project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous
 project_validation_technical_facts_not_recomputed=schema|readability|receipts|activity_counts|locators|retry|technical_consistency
+reverse_intake_owner=independent_research_explorer
+reverse_intake_semantic_author=independent_research_explorer
+reverse_intake_payload=small_self_contained_semantic_delta
+reverse_intake_required_bindings=canonical_source_locator|candidate_target_locator|git_revision_locator|exact_old_new_text_or_unified_patch|frozen_semantics_and_consequences
+reverse_intake_transport=assignment_specific_temporary_patch
+reverse_intake_writer=hmasd-research-artifact-writer
+reverse_intake_writer_skill_scope=role_and_assignment_only|no_explorer_mechanical_or_unrelated_skill
+reverse_intake_explorer_acceptance=full_read_semantic_accept_or_reject
+reverse_intake_root_action=exact_path_and_git_revision_check_then_exact_copy_install
 project_validation_scientific_interpretation_owner=independent_research_explorer
 project_validation_scientific_interpretation=supported_proposition|strongest_alternative_explanation|information_gain|next_discriminator|A_B_C_or_named_Pro_action
 canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership|advisory_only_not_formal_project_science
@@ -223,7 +232,7 @@ the accepted semantic continuity proposal for
 `local_research/RESEARCH_CONTINUITY.md`; Root alone performs that physical
 continuity write after its path/revision check. The assignment-scoped Research
 Artifact Writer may write or remove only exact Explorer-approved ordinary
-research or outbound temporary bytes and never writes
+research, outbound temporary bytes or assignment-specific reverse-intake `.patch` files and never writes
 `local_research/RESEARCH_CONTINUITY.md`. Explorer L1 returns the complete
 accepted proposal to Root for physical application. Fresh Root invocations
 reload that file; no successor or background callback is presumed. Campaign
@@ -297,7 +306,8 @@ only: Explorer L1 remains the portfolio integrator and sole semantic
 local-research intake and decision owner, returning exactly one accepted
 advisory local-research scientific-decision proposal to Root. An assignment-
 scoped Research Artifact Writer may handle only the exact Explorer-approved
-ordinary research or outbound temporary-byte write/remove; Root alone writes
+ordinary research, outbound temporary-byte or assignment-specific reverse-intake
+`.patch` write/remove; Root alone writes
 continuity, and an ad hoc child creates no global barrier.
 When several independent questions are all necessary for one decision,
 Explorer may freeze an exact bounded roster and synthesize only after every
@@ -356,7 +366,8 @@ read-only. Explorer L1 does not write `local_research/` or public handoffs;
 it returns the complete accepted proposal and exact locators to Root for the
 physical path/revision check and application. Only an assignment-scoped
 Research Artifact Writer may write or remove exact Explorer-approved ordinary
-research or outbound temporary bytes, and it never writes
+research, outbound temporary bytes or assignment-specific reverse-intake
+`.patch` files, and it never writes
 `local_research/RESEARCH_CONTINUITY.md`; Root alone performs that continuity
 write. All shell mutation is forbidden.
 During research execution, never edit project code, shared workflow, formal
@@ -401,6 +412,19 @@ owns scientific/advisory interpretation. The validation Skill and
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` own brief/reverse-result
 mechanics, direction-local context and named Pro triggers;
 External Pro remains final scientific-semantic acceptance when invoked.
+
+For reverse intake of an owner-local Direction Action Map, Explorer L1 is the
+semantic author of a small, self-contained delta. The delta binds the canonical
+source and candidate-target locators, the Git revision as a source locator, the
+exact old/new text or a unified patch, and the frozen semantics and consequences.
+The registered Research Artifact Writer receives that complete brief and writes
+only the exact assignment-specific temporary `.patch`; it does not load the
+Explorer Mechanical Skill or any unrelated Skill, normalize or merge text, or
+infer or explain scientific meaning. Explorer then full-reads the candidate and
+semantically accepts or rejects unselected lines, archive and locator meaning,
+table meaning and scientific continuity. Root only checks the exact path and Git
+revision locator before exact-copy installation. These boundaries are detailed
+once in `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
 
 That workflow contract is the single semantic source for the strong
 action-bearing minimum: every Explorer brief, CPM result and native fallback

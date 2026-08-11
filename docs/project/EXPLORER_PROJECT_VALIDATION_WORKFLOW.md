@@ -130,6 +130,55 @@ CPM-owned projection/pointer only: it contains treatments with complete Explorer
 handoffs, while a park without a frozen successor is absent. This slice never
 edits that CPM-owned view.
 
+## Low-context reverse intake for the Direction Action Map
+
+This is the single detailed source for correcting a small owner-local map delta.
+The full map never travels through an agent message, encoded fragment or split
+transport. Explorer L1 retains the canonical source and semantically authors one
+small, self-contained delta containing the canonical source locator, candidate
+target locator, Git revision locator, exact old/new text or a unified patch, and
+the frozen semantics and consequences. The Git revision is only a source
+locator; no hash, digest, byte count, length, encoded fragment or JSON receipt
+is workflow admission, routing, handoff, recovery or acceptance evidence.
+
+The normal path is deliberately file-backed and low-context:
+
+1. Explorer sends the complete delta brief to the registered Research Artifact
+   Writer. The assignment names one exact temporary destination such as
+   `temp/sessions/independent_research_explorer/<root-assignment>/state-proposals/<proposal>.patch`.
+   The Writer copies the approved payload verbatim and performs only local
+   destination, payload-presence and UTF-8/LF checks. It does not load the
+   Explorer Mechanical Skill or another unrelated Skill, normalize or merge
+   text, infer a target, or interpret scientific meaning.
+2. Root retains the canonical source and creates a task-scoped candidate copy.
+   Root performs one ordinary exact-text patch against that candidate. An
+   anchor occurring zero or more than once stops the operation and preserves
+   the original file. At most one concrete small-delta clarification and retry
+   is allowed; there is no retry state, queue, receipt schema, automatic
+   recovery or validator.
+3. Explorer full-reads the complete candidate and semantically accepts or
+   rejects it, including unselected lines, archive meaning, locator meaning,
+   table meaning and scientific continuity. A Writer completion is not Explorer
+   acceptance.
+4. After Explorer acceptance, Root checks the exact source/target path and Git
+   revision locator and performs the exact-copy installation. Root does not
+   explain, reinterpret or rewrite the scientific content.
+
+The bounded fallback is one concrete clarification naming the missing or
+contradictory source/target locator, old/new text or frozen consequence. The
+original canonical bytes remain untouched while that clarification is made.
+No second independent mechanism is introduced.
+
+Reverse-intake defect records distinguish mechanism families: (A) a large
+message truncation is a payload-transport failure; (B) a Writer loading the
+wrong Skill or writing the wrong path is assignment/path confinement; and (C)
+newline or pipe damage is a serialization-family failure. A locator or archive
+that remains wrong after decoding is a semantic-author or Explorer acceptance
+failure. These three observations must not be reported as one mechanism's
+independent recurrence. The WDM defect queue is evidence history only, never a
+dispatcher or scheduler. WDM owns this owner/transport/order/path interface;
+Explorer owns artifact integrity, map meaning and semantic acceptance.
+
 ## Scientific-only intake boundary
 
 This boundary is prospective and begins after CPM technical acceptance. Explorer

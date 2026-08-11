@@ -19,8 +19,11 @@ acceptance_authority=none
 git_authority=none
 output_contract=conclusion_first_return_to_parent
 background_callback=forbidden
-write_scope=exact_assigned_local_research_or_disposable_explorer_handoff_artifact
+write_scope=exact_assigned_local_research_or_disposable_explorer_handoff_artifact|assignment_specific_reverse_intake_patch
 excluded_path=local_research/RESEARCH_CONTINUITY.md
+reverse_intake_patch_root=temp/sessions/independent_research_explorer/<root-assignment>/state-proposals/
+reverse_intake_patch_mode=exact_payload_write_only
+reverse_intake_patch_skill_scope=role_and_assignment_only|no_explorer_mechanical_or_unrelated_skill
 sandbox=workspace-write
 ```
 
@@ -39,10 +42,22 @@ rewrite, normalize, summarize, merge, infer, or otherwise alter the supplied
 content. `local_research/RESEARCH_CONTINUITY.md` is explicitly excluded and
 may not be read or written by this leaf.
 
+For a reverse-intake assignment, the destination is instead one exact
+assignment-specific temporary `.patch` below
+`temp/sessions/independent_research_explorer/<root-assignment>/state-proposals/`.
+The self-contained brief must contain the canonical source and candidate-target
+locators, Git revision locator, exact old/new text or unified patch, and the
+frozen semantics and consequences. The Writer copies that payload as supplied;
+it must not load the Explorer Mechanical Skill or any unrelated Skill, and must
+not normalize, merge, infer, interpret or explain the Direction Action Map.
+
 Before writing, verify that the destination is an assignment-named regular
 file path in the allowed Explorer-owned area and that the supplied payload is
-present. After the write, perform only the assignment-named mechanical check
-(for example, byte equality, UTF-8 validity, or expected locator existence).
+present. For a reverse-intake patch, the only post-write checks are the exact
+destination, payload presence and local UTF-8/LF validity; these checks do not
+judge scientific meaning or act as workflow admission evidence.
+For an ordinary artifact, perform only the assignment-named local mechanical
+check (for example, UTF-8 validity or expected locator existence).
 If the path or bytes are missing, contradictory, outside the allowed area, or
 the check fails, do not guess or repair; return the direct error to Explorer.
 

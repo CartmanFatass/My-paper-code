@@ -19,10 +19,14 @@ $router = Read-RepoFile 'AGENTS.md'
 $sessionContract = Read-RepoFile 'docs/project/SESSION_WORKSPACE_CONTRACT.md'
 $collaborationSkill = Read-RepoFile '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md'
 $defectQueue = Read-RepoFile 'docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md'
+$reverseValidation = Read-RepoFile 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
+$reverseExplorerRole = Read-RepoFile '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md'
+$reverseWriterRole = Read-RepoFile '.agents/roles/RESEARCH_ARTIFACT_WRITER.md'
 $normalizedManager = ($manager -replace '\s+', ' ').ToLowerInvariant()
 $normalizedRouter = ($router -replace '\s+', ' ').ToLowerInvariant()
 $normalizedSessionContract = ($sessionContract -replace '\s+', ' ').ToLowerInvariant()
 $normalizedCollaborationSkill = ($collaborationSkill -replace '\s+', ' ').ToLowerInvariant()
+$normalizedReverseContract = (($reverseValidation + $reverseExplorerRole + $reverseWriterRole + $workflowMap + $defectQueue) -replace '\s+', ' ').ToLowerInvariant()
 
 $canonicalCatalogPath = 'C:\Projects\HMASD\runtime\model-catalog-v2-workaround.json'
 $catalogMatch = [regex]::Match(
@@ -96,6 +100,20 @@ foreach ($required in @(
     'tracked_writer_exemptions=read_only|ignored_only|temporary_only',
     'mandatory_ticket_identity=forbidden_for_subagent_authority')) {
     if (-not $normalizedRouter.Contains($required.ToLowerInvariant())) { throw "Router execution policy missing: $required" }
+}
+
+foreach ($required in @(
+    'reverse_intake_payload=small_self_contained_semantic_delta',
+    'reverse_intake_transport=assignment_specific_temporary_patch',
+    'reverse_intake_writer=hmasd-research-artifact-writer',
+    'reverse_intake_explorer_acceptance=full_read_semantic_accept_or_reject',
+    'reverse_intake_root_action=exact_path_and_git_revision_check_then_exact_copy_install',
+    'WDM owns this owner/transport/order/path interface',
+    'does not own artifact integrity, map meaning or Explorer acceptance',
+    'defect queue is evidence history only')) {
+    if (-not $normalizedReverseContract.Contains($required.ToLowerInvariant())) {
+        throw "Workflow reverse-intake boundary missing: $required"
+    }
 }
 
 foreach ($required in @(

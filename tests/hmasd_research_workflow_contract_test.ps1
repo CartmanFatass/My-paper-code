@@ -102,6 +102,8 @@ $workflowMapNormalized = $workflowMap -replace '\s+', ' '
 $sessionWorkspaceContract = Get-Content -Raw -LiteralPath (Join-Path $repo 'docs/project/SESSION_WORKSPACE_CONTRACT.md')
 $sessionWorkspaceContractNormalized = $sessionWorkspaceContract -replace '\s+', ' '
 $independentResearchRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md')
+$researchArtifactWriterRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_ARTIFACT_WRITER.md')
+$researchArtifactWriterProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-research-artifact-writer.toml')
 $researchScoutRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_SCOUT.md')
 $researchCriticRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_CRITIC.md')
 $researchInnovatorRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/RESEARCH_INNOVATOR.md')
@@ -179,6 +181,46 @@ if (-not (Test-Path -LiteralPath $explorerValidationSkillPath -PathType Leaf) -o
     -not (Test-Path -LiteralPath $explorerValidationContractPath -PathType Leaf) -or
     -not (Test-Path -LiteralPath $publicHandoffContractPath -PathType Leaf)) {
     throw 'Explorer semantic handoff Skill/contract coupling is missing'
+}
+$reverseIntakeSurfaces = @(
+    $independentResearchRole,
+    $researchArtifactWriterRole,
+    $researchArtifactWriterProfile,
+    $independentResearchSkill,
+    $parallelResearch,
+    $explorerValidationSkill,
+    $explorerValidationContract,
+    $sessionWorkspaceContract,
+    $workflowMap)
+$reverseIntakeNormalized = ($reverseIntakeSurfaces -join ' ') -replace '\s+', ' '
+foreach ($required in @(
+    'reverse_intake_payload=small_self_contained_semantic_delta',
+    'reverse_intake_required_bindings=canonical_source_locator|candidate_target_locator|git_revision_locator|exact_old_new_text_or_unified_patch|frozen_semantics_and_consequences',
+    'reverse_intake_transport=assignment_specific_temporary_patch',
+    'reverse_intake_writer_skill_scope=role_and_assignment_only|no_explorer_mechanical_or_unrelated_skill',
+    'reverse_intake_explorer_acceptance=full_read_semantic_accept_or_reject',
+    'reverse_intake_root_action=exact_path_and_git_revision_check_then_exact_copy_install',
+    'state-proposals/<proposal>.patch',
+    'The full map never travels through an agent message',
+    'one ordinary exact-text patch',
+    'anchor occurring zero or more than once stops',
+    'one concrete small-delta clarification and retry',
+    'no retry state, queue, receipt schema, automatic recovery or validator',
+    'full-reads the complete candidate and semantically accepts or rejects',
+    'Root does not explain, reinterpret or rewrite the scientific content',
+    'large message truncation is a payload-transport failure',
+    'newline or pipe damage is a serialization-family failure')) {
+    if (-not $reverseIntakeNormalized.Contains($required)) {
+        throw "Low-context reverse-intake contract missing: $required"
+    }
+}
+foreach ($forbidden in @(
+    'scripts/hmasd_state_transform.py',
+    'source_sha256=',
+    'candidate_sha256=')) {
+    if ($reverseIntakeNormalized.Contains($forbidden)) {
+        throw "Retired reverse-intake mechanism remains: $forbidden"
+    }
 }
 if ((Test-Path -LiteralPath $retiredExplorerValidationScriptPath) -or
     (Test-Path -LiteralPath $retiredExplorerValidationTestPath)) {
@@ -656,7 +698,7 @@ foreach ($required in @(
     'public_handoff_admission=semantic_judgment_no_mandatory_schema',
     'project_validation_instruction_authority=authorize_cpm_named_treatment_execution',
     'current_work_read=read_only_as_needed_for_named_assignment',
-    'local_research_single_writer=research_artifact_writer_L2_for_ordinary_research_or_outbound_temporary_bytes|root_for_continuity',
+    'local_research_single_writer=research_artifact_writer_L2_for_ordinary_research_or_outbound_temporary_bytes|assignment_specific_reverse_intake_patch|root_for_continuity',
     'local_research_write_tool=delegated_L2_or_root_proposal',
     'local_research_shell_mutation=forbidden',
     'project_validation_read_authority=project_wide_read_only_as_needed',

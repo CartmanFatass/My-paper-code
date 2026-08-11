@@ -1395,3 +1395,54 @@ def test_explorer_orchestrates_and_owns_cross_direction_comparison() -> None:
         "scientific-authority transfer",
     ):
         assert required in role_normalized or required in skill_normalized, required
+
+
+def test_reverse_intake_is_small_file_backed_and_keeps_science_with_explorer() -> None:
+    explorer_role = (REPO / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+        encoding="utf-8"
+    )
+    writer_role = (REPO / ".agents/roles/RESEARCH_ARTIFACT_WRITER.md").read_text(
+        encoding="utf-8"
+    )
+    writer_profile = (REPO / ".codex/agents/hmasd-research-artifact-writer.toml").read_text(
+        encoding="utf-8"
+    )
+    validation = (REPO / "docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md").read_text(
+        encoding="utf-8"
+    )
+    session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(
+        encoding="utf-8"
+    )
+    combined = " ".join((explorer_role + writer_role + writer_profile + validation + session).split())
+
+    for required in (
+        "reverse_intake_payload=small_self_contained_semantic_delta",
+        "reverse_intake_required_bindings=canonical_source_locator|candidate_target_locator|git_revision_locator|exact_old_new_text_or_unified_patch|frozen_semantics_and_consequences",
+        "reverse_intake_transport=assignment_specific_temporary_patch",
+        "reverse_intake_explorer_acceptance=full_read_semantic_accept_or_reject",
+        "The full map never travels through an agent message",
+        "exact old/new text or a unified patch",
+        "the Git revision is only a source locator",
+        "one ordinary exact-text patch",
+        "anchor occurring zero or more than once stops",
+        "one concrete small-delta clarification and retry",
+        "no retry state, queue, receipt schema, automatic recovery or validator",
+        "full-reads the complete candidate and semantically accepts or rejects",
+        "Root does not explain, reinterpret or rewrite the scientific content",
+        "large message truncation is a payload-transport failure",
+        "newline or pipe damage is a serialization-family failure",
+        "assignment_specific_reverse_intake_patch",
+        "reverse_intake_patch_mode=exact_payload_write_only",
+        "excluded_path=local_research/RESEARCH_CONTINUITY.md",
+        "research_artifact_writer_continuity_write=forbidden",
+        "scientific_authority=none",
+        "reverse_intake_semantic_author=independent_research_explorer",
+    ):
+        assert required.lower() in combined.lower(), required
+
+    for forbidden in (
+        "scripts/hmasd_state_transform.py",
+        "source_sha256=",
+        "candidate_sha256=",
+    ):
+        assert forbidden not in combined

@@ -7,6 +7,8 @@ scheduler=false
 global_blocker=false
 report_authority=advisory_only
 hash_identity=forbidden
+reverse_intake_event_classes=payload_transport|assignment_path_confinement|serialization|semantic_intake
+reverse_intake_queue_role=evidence_log_only_not_dispatcher_or_scheduler
 ```
 
 Append each typed `WORKFLOW_DEFECT_REPORT` here for history. WDM independently
@@ -41,3 +43,4 @@ mechanism or terminal state.
 | 22 | TICKET_MODEL_OUTPUT_TRUNCATION | code_project_manager | `CPM_MECHANICAL_TASK_RESULT` | CLOSED | NONBLOCKING. Ticket model-output truncation is closed by this accepted batch through the exact temporary `result_path` receipt boundary and silent native terminal return; CPM retains source/Git, technical acceptance and canonical-state ownership. No active research-state effect. |
 | 23 | EXPERIMENT_OPERATOR_EXIT_CODE_KEY_CASE_MISMATCH | independent_research_explorer | `FOLR-B1-OWNER-EPOCH-SURVIVOR-BIT-LEARNABILITY` | CLOSED | NONBLOCKING. Accepted exact lowercase or exact uppercase local `exit_codes` key sets, normalized uppercase input to lowercase canonical receipt keys, and preserved rejection/no-write behavior for mixed, missing, or extra keys. Closed by this compatibility repair with no runtime, science, artifact, scheduling, or rerun effect. |
 | 24 | ACTION_BEARING_STATUS_ONLY_HANDOFF_GAP | workflow_design_manager | `accepted-contract/CLOSED; scheduler=false; global_blocker=false; science/runtime effect=none` | CLOSED | Accepted after integrated review and focused verification: every Explorer↔CPM exchange is action-bearing, status-only wording is insufficient, parked/retired/implementation/runtime meanings are distinct, and both owner-local planning views have explicit ownership and non-authoritative boundaries. No science or runtime treatment changed. |
+| 25 | LOW_CONTEXT_REVERSE_INTAKE_FAILURE_FAMILIES | independent_research_explorer | `Direction Action Map reverse-intake contract` | CLOSED | Accepted low-context repair: large-map truncation is payload transport; wrong Writer Skill/path is assignment/path confinement; newline/pipe damage is serialization; only a locator/archive still wrong after decoding reaches semantic author/acceptance. Explorer authors one small self-contained delta, the Writer writes one exact temporary patch, Root applies once to a candidate copy, and Explorer full-reads before Root path/revision check and exact-copy installation. The queue remains evidence history only; no hash/size/encoded payload, retry state, queue engine, receipt schema, validator or science acceptance moved into workflow. |

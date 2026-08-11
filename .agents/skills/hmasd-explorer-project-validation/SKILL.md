@@ -65,6 +65,30 @@ concrete clarification while unrelated work continues. Detailed capacity,
 admission, barrier and resource behavior is defined only in
 `.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md`.
 
+## Low-context reverse-intake path
+
+When an owner-local Direction Action Map needs a small correction, follow the
+single detailed procedure in
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. The normal path is one
+Explorer-authored, self-contained semantic delta with canonical source/target
+locators, a Git revision locator, exact old/new text or a unified patch, and the
+frozen semantics and consequences. The registered Research Artifact Writer
+writes that payload verbatim to the exact assignment-specific temporary `.patch`
+under `temp/sessions/independent_research_explorer/<root-assignment>/state-proposals/`.
+The Writer checks only destination, payload presence and UTF-8/LF locally; it
+does not load Explorer Mechanical or unrelated Skills, normalize/merge, infer,
+or interpret the map. The full map is never transported through a message,
+encoded fragment or split payload. Root applies one exact-text patch to a
+task-scoped candidate copy, preserving the canonical source, and Explorer
+full-reads and semantically accepts or rejects the candidate before Root's exact
+path/revision check and exact-copy installation.
+
+The only fallback is one concrete clarification naming the missing or
+contradictory locator, old/new text or frozen consequence. Preserve the original
+file and do not create retry state, a queue, receipt schema, automatic recovery
+or a validator. Git revision is a source locator only; integrity diagnostics do
+not become workflow admission or acceptance evidence.
+
 ## Normal path
 
 Explorer semantically authors one self-contained, human/model-readable Markdown
