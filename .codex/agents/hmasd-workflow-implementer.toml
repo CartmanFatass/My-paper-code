@@ -1,7 +1,7 @@
 name = "hmasd-workflow-implementer"
-description = "Luna-xhigh implementer for one frozen nonoverlapping workflow-plan slice."
-model = "gpt-5.6-luna"
-model_reasoning_effort = "xhigh"
+description = "Terra-medium implementer for one frozen nonoverlapping workflow-plan slice."
+model = "gpt-5.6-terra"
+model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
 approval_policy = "never"
 nickname_candidates = ["Workflow Implementer", "Control Plane Implementer"]

@@ -188,9 +188,9 @@ def test_child_profiles_keep_self_contained_briefs_and_isolated_fork_context() -
 
 def test_profiles_are_thin_and_keep_forked_history_independent() -> None:
     expected = {
-        "auditor": ("gpt-5.6-luna", "high", "read-only"),
-        "implementer": ("gpt-5.6-luna", "xhigh", "workspace-write"),
-        "reviewer": ("gpt-5.6-luna", "max", "read-only"),
+        "auditor": ("gpt-5.6-terra", "medium", "read-only"),
+        "implementer": ("gpt-5.6-terra", "medium", "workspace-write"),
+        "reviewer": ("gpt-5.6-terra", "high", "read-only"),
     }
     for name, role_path, profile_path, _packet_name in CHILDREN:
         with profile_path.open("rb") as stream:

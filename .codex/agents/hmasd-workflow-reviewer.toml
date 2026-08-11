@@ -1,7 +1,7 @@
 name = "hmasd-workflow-reviewer"
-description = "Read-only Luna-max reviewer for one integrated workflow batch."
-model = "gpt-5.6-luna"
-model_reasoning_effort = "max"
+description = "Read-only Terra-high reviewer for one integrated workflow batch."
+model = "gpt-5.6-terra"
+model_reasoning_effort = "high"
 sandbox_mode = "read-only"
 approval_policy = "never"
 nickname_candidates = ["Workflow Reviewer", "Control Plane Reviewer"]
