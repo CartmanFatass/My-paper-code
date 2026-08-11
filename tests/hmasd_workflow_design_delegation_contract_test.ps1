@@ -13,6 +13,7 @@ $config = Read-RepoFile '.codex/config.toml'
 $manager = Read-RepoFile '.agents/roles/WORKFLOW_DESIGN_MANAGER.md'
 $skill = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/SKILL.md'
 $harness = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py'
+$refreshScript = Read-RepoFile '.codex/refresh-model-catalog-v2-workaround.ps1'
 $workflowMap = Read-RepoFile 'docs/project/WORKFLOW_MAP.md'
 $router = Read-RepoFile 'AGENTS.md'
 $sessionContract = Read-RepoFile 'docs/project/SESSION_WORKSPACE_CONTRACT.md'
@@ -409,8 +410,23 @@ if (-not [string]::IsNullOrWhiteSpace($CatalogTestPath)) {
 if (-not (Test-Path -LiteralPath $catalogPath -PathType Leaf)) {
     throw "Selected model catalog is unavailable: $catalogPath"
 }
+$catalogBytes = [System.IO.File]::ReadAllBytes($catalogPath)
+if ($catalogBytes.Length -ge 3 -and
+    $catalogBytes[0] -eq 0xEF -and $catalogBytes[1] -eq 0xBB -and $catalogBytes[2] -eq 0xBF) {
+    throw "Selected model catalog must not start with a UTF-8 BOM: $catalogPath"
+}
 try {
-    $catalog = Get-Content -Raw -LiteralPath $catalogPath | ConvertFrom-Json
+    $catalogText = [System.Text.UTF8Encoding]::new($false, $true).GetString($catalogBytes)
+} catch {
+    throw "Selected model catalog is not strict UTF-8: $catalogPath"
+}
+$firstJsonCharacter = ($catalogText -replace '^\s+', '')
+if ([string]::IsNullOrEmpty($firstJsonCharacter) -or
+    ($firstJsonCharacter[0] -ne '{' -and $firstJsonCharacter[0] -ne '[')) {
+    throw "Selected model catalog must begin with { or [ after whitespace: $catalogPath"
+}
+try {
+    $catalog = $catalogText | ConvertFrom-Json
 } catch {
     throw "Selected model catalog is not valid JSON: $catalogPath"
 }
@@ -423,6 +439,16 @@ foreach ($targetSlug in @('gpt-5.6-luna', 'gpt-5.3-codex-spark')) {
     if ($target[0].multi_agent_version -ne 'v2') {
         throw "Selected model catalog must route $targetSlug through multi_agent_version=v2"
     }
+}
+
+if ($refreshScript -notmatch '(?i)\[System\.Text\.UTF8Encoding\]::new\(\$false\)') {
+    throw 'Catalog refresh script must construct UTF8Encoding(false) explicitly'
+}
+if ($refreshScript -notmatch '(?i)\[System\.IO\.File\]::WriteAllText\(\$OutputPath,\s*\$jsonText,\s*\[System\.Text\.UTF8Encoding\]::new\(\$false\)\)') {
+    throw 'Catalog refresh script must write catalog bytes through File.WriteAllText with the no-BOM encoding'
+}
+if ($refreshScript -match '(?im)Set-Content.*(?:\$OutputPath|OutputPath)') {
+    throw 'Catalog refresh script must not use Set-Content for the catalog output path'
 }
 
 $selectedRoutes = @()

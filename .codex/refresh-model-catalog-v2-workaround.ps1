@@ -18,7 +18,8 @@ foreach ($slug in $targets) {
 
 $parent = Split-Path -Parent $OutputPath
 if ($parent) { New-Item -ItemType Directory -Force -Path $parent | Out-Null }
-$catalog | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $OutputPath -Encoding utf8NoBOM
+$jsonText = $catalog | ConvertTo-Json -Depth 100
+[System.IO.File]::WriteAllText($OutputPath, $jsonText, [System.Text.UTF8Encoding]::new($false))
 $written = Get-Content -LiteralPath $OutputPath -Raw | ConvertFrom-Json
 if (@($written.models | Where-Object { $_.slug -in $targets -and $_.multi_agent_version -ne "v2" }).Count -ne 0) {
     throw "Generated catalog failed the v2 routing verification"
