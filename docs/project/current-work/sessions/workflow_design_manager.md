@@ -6,11 +6,18 @@ schema_version=2
 session_owner_role=workflow_design_manager
 session_owner_id=workflow_design_manager
 workstream_ids=workflow_control_plane
-status=CENTRAL_WORKFLOW_AUTHORITY_ACTIVE
+status=WDM_SLICE_ACCEPTED_PENDING_ROOT_CANDIDATE_RECORD_AND_INTEGRATION
 continuity=role_based_successor_tasks
 rotation_boundary=integrated_batch_completion
-next_boundary=role_reload_receipts
+workflow_scope_key=core_parallel_control
+worktree_allocation=one_writable_l1_assignment_one_root_managed_worktree
+l2_worktree_lifecycle=forbidden_new_l1_for_independent_candidate_or_release
+slice_status=exact_owned_document_slice_wdm_accepted
+next_boundary=Root_candidate_record_and_integration_then_fresh_convergence_wdm_union_acceptance
 ```
 
-This record contains only WDM workflow-control-plane identity and status. It
-does not copy project operation, science, runtime or review state.
+This record contains only WDM workflow-control-plane identity and status. Its
+scope-keyed candidate status names the next boundary. It is not an active-instance registry
+and does not claim Root candidate record/integration, commit, integrated
+Reviewer advice or fresh convergence acceptance. It does not copy project
+operation, science, runtime or review state.

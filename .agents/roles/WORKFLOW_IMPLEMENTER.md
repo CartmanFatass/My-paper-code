@@ -18,6 +18,7 @@ background_callback=forbidden
 model=gpt-5.6-luna
 reasoning_effort=xhigh
 default_fork_turns=none
+dispatch_fork_turns=none_explicit_caller_action
 authority=one_exact_confirmed_workflow_plan_slice
 write_authority=assignment_exact_nonoverlapping_paths_only
 sandbox=workspace-write
@@ -64,14 +65,15 @@ recovery may not change the frozen plan or add paths.
 
 The assignment's `workflow_assignment_id`, `owned_paths` and
 `wdm_session_workspace` must be present and mutually consistent. They narrow
-the slice and never grant this child acceptance or Git authority. Any
-assignment that may touch a tracked path must write only in the exact
-Root-provisioned managed worktree named by the assignment. The current
-checkout is allowed only for read-only, ignored-only, or temporary-only
-assignments. A mixed tracked+ignored assignment is still classified as a
-tracked writer. Root alone provisions, records, integrates, releases or
-retains the managed worktree and owns the Git lifecycle; this leaf does not
-invoke that lifecycle. No worktree-ticket identity is required.
+the slice and never grant this child acceptance or Git authority. Any tracked
+write uses the invoking L1 assignment's Root-provisioned managed worktree.
+One writable L1 assignment = one Root-managed worktree. Parallel Implementers may share that L1 worktree on the same frozen base and exact disjoint paths, forming one L1 slice candidate. Disjoint L2 writers share one L1 worktree. Root commits/records only after all children complete. L2 never has its own worktree lifecycle. An independent candidate/release lifecycle is a new L1. The current checkout is allowed only for read-only, ignored-only, or temporary-only assignments. A mixed tracked+ignored assignment is still classified as a tracked writer. Root alone provisions, records, integrates, releases or retains the managed worktree and owns the Git lifecycle. Children never invoke helper or Git lifecycle. This leaf has no Git/helper or worktree-lifecycle action. No worktree-ticket identity is required.
+
+The owning WDM dispatches this registered leaf only for an exact nonoverlapping
+frozen slice and explicitly sets `fork_turns=none`; this is caller context, not
+a new child authority or continuity identity. The implementer returns
+candidate-ready evidence for that scoped WDM and does not claim integrated
+review or union acceptance.
 
 Do not read `CURRENT_WORK.md`, runtime/science/code state, use Git beyond that
 single identity observation, or perform any Git mutation, stage, commit, push,

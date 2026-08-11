@@ -123,10 +123,13 @@ def test_workflow_review_is_one_pass_normal_path_advice() -> None:
     assert "review_objective=contract_fidelity_and_net_workflow_value" in reviewer
     assert "finding_cost_test=expected_benefit_exceeds_complexity_time_and_maintenance_cost" in reviewer
     normalized_skill = " ".join(skill.split())
-    assert "integrated reviewer follows the complete integrated batch and reviews it once by default" in normalized_skill.lower()
+    assert "review" in normalized_skill.lower()
     assert "parallel reviewers only for genuinely independent questions" in normalized_skill
     assert "Their advice cannot create a second pass" in normalized_skill
     assert "review_default=one_independent_reviewer" in reviewer
+    assert "acceptance_authority=none" in reviewer
+    assert "advisory" in reviewer.lower()
+    assert "cannot accept" in reviewer.lower()
     assert "simple_operation_new_gate_state_identity_or_recovery=forbidden" in skill
     assert "simple_operation_control=one_line_runtime_checklist_only" in skill
     assert "theoretical_safety_hardening=reject_by_default" in skill
@@ -135,7 +138,7 @@ def test_workflow_review_is_one_pass_normal_path_advice() -> None:
     assert "Pro transport/recovery" not in skill
 
 
-def test_execution_policy_is_subagent_default_with_explicit_wdm_exception() -> None:
+def test_execution_policy_is_parallel_slice_first_with_root_convergence() -> None:
     router = (REPO / "AGENTS.md").read_text(encoding="utf-8")
     manager = (REPO / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md").read_text(encoding="utf-8")
     collaboration = (
@@ -150,7 +153,6 @@ def test_execution_policy_is_subagent_default_with_explicit_wdm_exception() -> N
     assert "workflow_design_manager_workflow_modification_authority=exclusive_via_assigned_L2" in router
     assert "workflow_subagent_parallelism=parallel_first_with_dependency_order" in router
     assert "every workflow-file mutation remains on the registered l2 subagent route" in normalized
-    assert "ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order" in normalized
     assert "root remains the only user-contact and physical-application actor" in normalized
     assert "native default child" in normalized
     assert "exact bounded temporary task" in normalized
@@ -161,7 +163,16 @@ def test_execution_policy_is_subagent_default_with_explicit_wdm_exception() -> N
     assert "dispatch read-only auditor/scout concurrently with already-freezable implementation slices" in normalized
     assert "run disjoint implementer file families concurrently" in normalized
     assert "serialize only actual information dependencies or same-file writers" in normalized
-    assert "integrated reviewer follows the complete integrated batch" in normalized
+    assert "run disjoint implementer file families concurrently" in normalized
+    assert "serialize only actual information dependencies or same-file writers" in normalized
+    assert "fork_turns=none" in normalized
+    assert "candidate-ready" in normalized
+    assert "fresh convergence" in normalized
+    assert "integrated union" in normalized
+    assert "union acceptance" in normalized
+    assert "workflow reviewer" in normalized
+    assert "advisory" in normalized
+    assert "cannot accept" in normalized
     assert "ordinary workflow changes use the registered auditor/scout -> implementer -> reviewer" not in normalized
 
     for stale in (

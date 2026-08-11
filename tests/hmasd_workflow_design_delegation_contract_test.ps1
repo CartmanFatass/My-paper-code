@@ -11,6 +11,7 @@ function Read-RepoFile([string]$Path) {
 
 $config = Read-RepoFile '.codex/config.toml'
 $manager = Read-RepoFile '.agents/roles/WORKFLOW_DESIGN_MANAGER.md'
+$managerProfile = Read-RepoFile '.codex/agents/hmasd-workflow-design-manager.toml'
 $skill = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/SKILL.md'
 $harness = Read-RepoFile '.agents/skills/hmasd-workflow-change-audit/scripts/check_hmasd_agent_harness.py'
 $refreshScript = Read-RepoFile '.codex/refresh-model-catalog-v2-workaround.ps1'
@@ -98,8 +99,28 @@ foreach ($required in @(
     'workflow_subagent_parallelism=parallel_first_with_dependency_order',
     'tracked_writer_workspace=root_managed_worktree_required',
     'tracked_writer_exemptions=read_only|ignored_only|temporary_only',
-    'mandatory_ticket_identity=forbidden_for_subagent_authority')) {
+    'mandatory_ticket_identity=forbidden_for_subagent_authority',
+    'one writable l1 assignment',
+    'one root-managed worktree',
+    'distinct concurrent wdm/cpm l1 assignments',
+    'integration/convergence uses a distinct worktree',
+    'independent candidate/release lifecycle means a new l1')) {
     if (-not $normalizedRouter.Contains($required.ToLowerInvariant())) { throw "Router execution policy missing: $required" }
+}
+
+foreach ($required in @(
+    'scope-key',
+    '(role, scope_key)',
+    'unique per root tree',
+    'multiple active wdms',
+    'disjoint frozen scopes')) {
+    if (-not $normalizedRouter.Contains($required.ToLowerInvariant())) { throw "Router scope-key contract missing: $required" }
+}
+if (-not [regex]::IsMatch($router, '(?i)fork_turns\s*=\s*["'']?1["'']?')) {
+    throw 'Root-to-WDM fork_turns=1 background context is missing'
+}
+if ($managerProfile -match '(?im)^fork_turns\s*=') {
+    throw 'fork_turns must remain caller context rather than a WDM TOML field'
 }
 
 foreach ($required in @(
@@ -117,12 +138,29 @@ foreach ($required in @(
 }
 
 foreach ($required in @(
-    'ordinary workflow changes use the registered auditor, implementer and integrated reviewer stages with parallel-first scheduling and dependency order',
-    'WDM owns workflow semantic design, modification and acceptance')) {
+    'WDM owns workflow semantic design, modification and acceptance',
+    'workflow_scope_key',
+    'multiple active WDMs',
+    'disjoint frozen scopes')) {
     if (-not $normalizedManager.Contains($required.ToLowerInvariant())) { throw "WDM execution policy missing: $required" }
 }
 if (-not $skill.Contains('workflow_hash_validation=forbidden')) {
     throw 'Workflow audit Skill missing hash prohibition'
+}
+foreach ($required in @(
+    'accepts only its slice',
+    'candidate-ready evidence',
+    'root records/integrates candidates',
+    'fresh convergence',
+    'integrated union',
+    'union acceptance',
+    'workflow reviewer',
+    'advisory',
+    'cannot accept')) {
+    $controlPlane = ($normalizedManager + ' ' + $normalizedRouter + ' ' + $normalizedSessionContract + ' ' + $normalizedCollaborationSkill)
+    if (-not $controlPlane.Contains($required.ToLowerInvariant())) {
+        throw "Scoped WDM/convergence contract missing: $required"
+    }
 }
 foreach ($required in @('simple_operation_active_engineering_budget_minutes=20','simple_operation_failed_probe_budget=2')) {
     if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing simple-operation budget: $required" }
@@ -176,11 +214,12 @@ foreach ($required in @(
 }
 
 foreach ($required in @(
-    'ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order',
     'dispatch read-only auditor/scout concurrently with already-freezable implementation slices',
     'run disjoint implementer file families concurrently',
     'serialize only actual information dependencies or same-file writers',
-    'integrated reviewer follows the complete integrated batch',
+    'same writable path',
+    'shared unfrozen semantic contract',
+    'candidate-ready evidence',
     'every workflow-file mutation remains on the registered l2 subagent route',
     'focused checks, review and root reload boundary below',
     'parallel reviewers are limited to genuinely independent review questions',
@@ -232,16 +271,19 @@ foreach ($forbidden in @('OneDrive root', 'legacy scan', 'legacy prune', 'legacy
     }
 }
 
-if (-not $normalizedWorkflowMap.Contains('ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order') -or
-    -not $normalizedWorkflowMap.Contains('dispatch read-only auditor/scout concurrently with already-freezable implementation slices') -or
+if (-not $normalizedWorkflowMap.Contains('dispatch read-only auditor/scout concurrently with already-freezable implementation slices') -or
+    -not $normalizedWorkflowMap.Contains('run disjoint implementer file families concurrently') -or
+    -not $normalizedWorkflowMap.Contains('serialize only actual information dependencies or same-file writers') -or
     -not $normalizedWorkflowMap.Contains('workflow-file changes are performed by assigned workflow implementer leaves')) {
     throw 'Workflow Map execution policy missing parallel-first stages or registered implementer route'
 }
 
 foreach ($required in @(
     'workflow_subagent_parallelism=parallel_first_with_dependency_order',
-    'ordinary workflow stages are mandatory and parallel-first with dependency order',
-    'integrated reviewer follows the complete integrated batch')) {
+    'run disjoint implementer file families concurrently',
+    'serialize only actual information dependencies or same-file writers',
+    'one writable l1 assignment',
+    'one root-managed worktree')) {
     if (-not $normalizedRouter.Contains($required.ToLowerInvariant()) -and
         -not $normalizedWorkflowMap.Contains($required.ToLowerInvariant())) {
         throw "Parallel-first execution policy missing: $required"
@@ -400,7 +442,7 @@ foreach ($child in $workflowChildSpecs) {
 }
 
 $implementerRoleText = Read-RepoFile '.agents/roles/WORKFLOW_IMPLEMENTER.md'
-$normalizedImplementerRoleText = ($implementerRoleText -replace '\s+', ' ')
+$normalizedImplementerRoleText = ($implementerRoleText -replace '\s+', ' ').ToLowerInvariant()
 if (-not $normalizedImplementerRoleText.Contains('agent_tree_level=2') -or
     -not $normalizedImplementerRoleText.Contains('spawn_authority=none') -or
     -not $normalizedImplementerRoleText.Contains('return')) {
@@ -412,11 +454,20 @@ foreach ($forbidden in @('Git mutation', 'stage, commit, push', 'route cross-tas
     }
 }
 foreach ($required in @(
-    'assignment that may touch a tracked path must write only in the exact Root-provisioned managed worktree named by the assignment',
+    'one writable L1 assignment = one Root-managed worktree',
+    'parallel implementers may share that L1 worktree',
+    'same frozen base',
+    'exact disjoint paths',
+    'one L1 slice candidate',
+    'Root commits/records only after all children complete',
+    'disjoint L2 writers share one L1 worktree',
+    'L2 never has its own worktree lifecycle',
+    'independent candidate/release lifecycle is a new L1',
     'current checkout is allowed only for read-only, ignored-only, or temporary-only assignments',
     'mixed tracked+ignored assignment is still classified as a tracked writer',
-    'Root alone provisions, records, integrates, releases or retains the managed worktree and owns the Git lifecycle')) {
-    if (-not $normalizedImplementerRoleText.Contains($required)) {
+    'Root alone provisions, records, integrates, releases or retains the managed worktree and owns the Git lifecycle',
+    'children never invoke helper or Git lifecycle')) {
+    if (-not $normalizedImplementerRoleText.Contains($required.ToLowerInvariant())) {
         throw "Workflow implementer Root-managed writer contract missing: $required"
     }
 }

@@ -20,11 +20,18 @@ requirements/defects and continue their non-workflow duties; they do not edit or
 accept control-plane surfaces.
 Workspace ownership remains defined by `docs/project/SESSION_WORKSPACE_CONTRACT.md`;
 the active child boundary is the exact assignment-owned path set in the current
-Root task workspace. Any writer that may touch a tracked path, including a WDM
-workflow writer, uses a Root-provisioned managed worktree; read-only,
-ignored-only and temporary-only work is exempt, while mixed writes remain
-tracked-writer work. This Skill never invokes the helper or runs raw child
-`git worktree` lifecycle operations.
+Root task workspace. One writable L1 assignment, including a WDM workflow
+writer, uses one Root-provisioned managed worktree. All disjoint L2 writers
+under that WDM use the invoking L1 assignment's named worktree, same frozen
+base and exact disjoint paths; they have no Git authority or action and never
+invoke or control the helper or worktree lifecycle. Their outputs form one L1
+slice candidate, which Root commits or records only after all children complete.
+An independent candidate or release lifecycle requires a new L1 assignment;
+L2 never has its own worktree lifecycle. Distinct concurrent L1 assignments and
+later union integration/convergence each use a distinct Root-managed worktree.
+Read-only, ignored-only and temporary-only work is exempt, while mixed writes
+remain tracked-writer work. This Skill never invokes the helper or runs raw
+child `git worktree` lifecycle operations.
 
 Use this Skill for router, role, Skill, profile, hook, registry, stable workflow
 contract, workflow script or focused workflow test changes. Operational state,
@@ -36,6 +43,14 @@ outside this procedure.
 ```text
 workflow_mechanical_invariant_scope=irreversible_and_high_cost_actions_only
 workflow_retryable_failure_mechanism=forbidden_use_one_line_runtime_checklist
+workflow_l1_multiplicity=role_defined_scope_key
+workflow_wdm_scope_key=workflow_scope_key
+workflow_root_wdm_fork_turns=1_caller_action_only
+workflow_wdm_registered_implementer_fork_turns=none_explicit_caller_action
+workflow_l1_worktree_rule=one_writable_l1_assignment_one_root_managed_worktree
+workflow_l2_worktree=invoking_l1_assignment_named_worktree
+workflow_independent_candidate=new_l1_assignment_required
+workflow_union_convergence_worktree=separate_root_managed_worktree
 workflow_single_mechanism_terminal_state_budget=3
 workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch
 workflow_legacy_mechanism_policy=no_expansion_preserve_contract_when_touched
@@ -95,16 +110,23 @@ integrated Reviewer stages with parallel-first scheduling and dependency order
 for bounded, non-overlapping slices. Dispatch read-only Auditor/Scout
 concurrently with already-freezable implementation slices, run disjoint
 Implementer file families concurrently, and serialize only actual information
-dependencies or same-file writers. The integrated Reviewer follows the complete
-integrated batch; parallel reviewers are limited to genuinely independent
-review questions. Their authority and assignment meaning remain with their Role
-and `hmasd-writing-agent-assignments`; workspace and fresh-Root boundaries remain
-with `docs/project/SESSION_WORKSPACE_CONTRACT.md`. Stable execution orientation
-is in `docs/project/WORKFLOW_MAP.md`. Root remains the only user-contact and
+dependencies or same-file writers. A same writable path or shared unfrozen
+semantic contract is a dependency and serializes affected slices. The integrated
+Reviewer follows the complete integrated batch only after Root has integrated the
+exact candidate slices and a fresh convergence WDM has arranged that review;
+parallel reviewers are limited to genuinely independent review questions
+(parallel reviewers only for genuinely independent questions). A scoped WDM accepts only its exact slice and
+returns candidate-ready evidence to Root. Root records and integrates candidates; only the fresh
+convergence WDM over the exact integrated union owns coherent integrated review and union
+acceptance. The Workflow Reviewer is read-only/advisory and cannot accept. Their authority and
+assignment meaning remain with their Role and `hmasd-writing-agent-assignments`;
+workspace and fresh-Root boundaries remain with
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`. Stable execution orientation is
+in `docs/project/WORKFLOW_MAP.md`. Root remains the only user-contact and
 physical-application actor; every workflow-file mutation remains on the
 registered L2 subagent route. Pure WDM design or authority decisions without
-file mutation remain WDM-local. This Skill retains only the implementation budgets,
- focused checks, review and Root reload boundary below.
+file mutation remain WDM-local. This Skill retains only the implementation
+budgets, focused checks, review and Root reload boundary below.
 
 ## Continuous change loop
 
@@ -113,23 +135,27 @@ a scheduler, approval state or global blocker.
 
 1. **Inspect.** Read only named control-plane paths, declare the exact path set,
    preserve unrelated work and identify the smallest normal-path probe.
-2. **Delete or edit.** Remove superseded rules before adding text. A tracked
-   writer edits its exact assigned paths in the Root-provisioned managed
-   worktree; read-only, ignored-only and temporary-only work uses the named
-   current task workspace. Root alone provisions, records the lifecycle receipt,
-   integrates accepted paths and releases or retains the worktree; no helper
-   lifecycle is part of this Skill.
+2. **Delete or edit.** Remove superseded rules before adding text. One writable
+   L1 assignment uses one Root-provisioned managed worktree. Its disjoint L2
+   writers edit only their exact paths in that invoking L1 assignment's named
+   worktree, on the same frozen base, with no child Git/helper action; their
+   outputs form one L1 slice candidate and Root commits or records it only
+   after all writers finish. Read-only, ignored-only and temporary-only work
+   uses the named current task workspace. Root alone provisions, records the
+   lifecycle receipt, integrates accepted paths and releases or retains the
+   worktree; no helper lifecycle is part of this Skill.
 3. **Focused check.** Run the smallest affected contract, the structural harness,
-   stale-term search and `git diff --check`. For ordinary subagent workflow
-   changes, the integrated Reviewer follows the complete integrated batch and
-   reviews it once by default; add parallel reviewers only for genuinely
-   independent questions. Their advice cannot create a second pass. Root
-   receives the accepted proposal and applies any authorized integration.
-4. **Return and reload.** Inspect exact changed paths and return the complete
-   accepted proposal, focused evidence and reload boundary to Root. Root applies
-   accepted workflow paths and performs any separately authorized Git mechanics;
-   this Skill does not promise a current commit, push or external workspace
-   cleanup.
+   stale-term search and `git diff --check`. For a scoped slice, WDM reconciles
+   and accepts the exact slice, and the implementer packet is candidate-ready;
+   no integrated review or union acceptance is claimed at this stage. After
+   Root integrates the exact candidate union, a fresh convergence WDM arranges
+   one integrated Reviewer by default; parallel reviewers only for genuinely independent questions. Their advice cannot create a second pass. WDM owns union acceptance and Root performs authorized integration.
+4. **Return and reload.** Inspect exact changed paths and return the scoped
+   candidate-ready packet, focused evidence and reload boundary to Root. After
+   Root integration, the fresh convergence WDM returns the union accepted
+   proposal; Root applies accepted workflow paths and performs any separately
+   authorized Git mechanics. This Skill does not promise a current commit, push
+   or external workspace cleanup.
 
 The configured hooks remain empty and disabled. No Hook Stop route is part of
 this workflow. Tool/OS sandboxing and exact assignment paths remain the
@@ -169,8 +195,11 @@ only for change-specific stale references.
 
 ## Acceptance
 
-Accept only when the impact matrix is closed, child packets are reconciled,
-focused and structural checks pass, stale references are explained, exact
-changed paths are inspected and any required review has no unresolved finding.
-Return the accepted proposal, exact paths, verification and reload boundary to
-Root; Root decides whether a separately authorized candidate commit is needed.
+For a scoped slice, accept only when the impact matrix is closed, the child
+packet is reconciled, focused and structural checks pass, stale references are
+explained and exact changed paths are inspected; return a candidate-ready
+packet, without claiming integrated review or union acceptance. Only the fresh
+convergence WDM after Root integrates the exact union applies the additional
+integrated-review condition (no unresolved actionable finding) and returns the
+union accepted proposal, exact paths, verification and reload boundary to Root.
+Root decides whether a separately authorized candidate commit is needed.

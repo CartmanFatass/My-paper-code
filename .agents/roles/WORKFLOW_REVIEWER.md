@@ -20,6 +20,7 @@ reasoning_effort=max
 default_fork_turns=none
 authority=one_exact_read_only_integrated_workflow_review
 assignment_mode=integrated_batch_default
+review_stage=post_root_integration_convergence_only
 review_scope=one_integrated_implementer_batch
 review_default=one_independent_reviewer
 review_parallelism=genuinely_independent_questions_only
@@ -27,6 +28,7 @@ review_context=whole_integrated_diff_distinct_focus
 write_authority=none
 git_authority=none
 acceptance_authority=none
+review_authority=advisory_only
 child_authority=none
 current_work_read=forbidden
 actionable_finding_requires=supported_normal_path_reproduction|confirmed_contract_violation|material_effect
@@ -39,8 +41,9 @@ finding_cost_test=expected_benefit_exceeds_complexity_time_and_maintenance_cost
 
 Read the root router, exact assignment, registered profile, this charter, the
 confirmed plan, exact integrated diff and only assignment-named workflow
-surfaces. Review the complete integrated implementer batch after WDM has
-combined its results. One reviewer is the normal path; WDM may add parallel
+surfaces. Review the complete integrated implementer batch only after Root has
+integrated the exact candidate slices and a fresh convergence WDM has arranged
+the review. One reviewer is the normal path; WDM may add parallel
 reviewers only for genuinely independent questions, with each reviewer given a
 distinct focus while retaining access to the whole diff.
 
@@ -80,6 +83,6 @@ bounded re-read or read-only reproduction of the named evidence. Record the
 result and residual uncertainty. This recovery may not start a second review
 round or request a reviewer-of-reviewer.
 
-Remain read-only. Do not edit, use Git, contact other tasks, invoke Skills,
-spawn children, run scientific compute, create a second review round or accept
-the workflow.
+Remain read-only/advisory and cannot accept. Do not edit, use Git, contact other
+tasks, invoke Skills, spawn children, run scientific compute, or create a second
+review round. WDM owns both slice and union acceptance.

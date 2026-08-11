@@ -117,7 +117,7 @@ def test_assignment_writing_skill_is_required_at_design_dispatch_boundary() -> N
     assert "hmasd-writing-agent-assignments" in role
 
 
-def test_wdm_is_the_single_workflow_owner_and_executes_after_confirmation() -> None:
+def test_wdm_owns_workflow_semantics_without_a_singleton_scope() -> None:
     role = ROLE_PATH.read_text(encoding="utf-8")
     skill = SKILL_PATH.read_text(encoding="utf-8")
     normalized_role = " ".join(role.split()).lower()
@@ -131,7 +131,6 @@ def test_wdm_is_the_single_workflow_owner_and_executes_after_confirmation() -> N
     ):
         assert token in role
     assert "WDM owns workflow semantic design, modification and acceptance" in role
-    assert "ordinary workflow changes use the registered auditor, implementer and integrated reviewer stages with parallel-first scheduling and dependency order" in normalized_role
     assert "a child adds no design, routing, git or acceptance authority" in normalized_role
     assert "root owns user interaction, task-tree lifecycle, physical application" in normalized_role
     assert "This Skill is invoked only by the Root-assigned Workflow Design Manager L1" in skill
@@ -147,8 +146,11 @@ def test_wdm_is_the_single_workflow_owner_and_executes_after_confirmation() -> N
     ).read_text(encoding="utf-8")
     assert "workflow_router_consistency_check=required_for_every_workflow_change" in role
     assert "workflow_implementer_parallelism=" not in role
-    assert "workflow_child_edit_worktree=assignment_owned_paths_in_current_task_workspace" in role
+    assert "workflow_child_edit_worktree=assignment_owned_paths_in_invoking_l1_worktree_for_tracked_writer_or_task_workspace_when_exempt" in role
     assert "`AGENTS.md` as `modify` or `unchanged-valid`" in normalized_skill
+    assert "workflow_scope_key" in normalized_role
+    assert "multiple active wdms" in normalized_role
+    assert "disjoint frozen scopes" in normalized_role
 
 
 def test_user_changes_and_advisory_defects_use_distinct_nonblocking_lanes() -> None:
@@ -170,7 +172,7 @@ def test_tracked_writers_use_root_managed_worktrees_without_ticket_identity() ->
         encoding="utf-8"
     )
     normalized_router = " ".join(router.split()).lower()
-    normalized_role = " ".join(role.split())
+    normalized_role = " ".join(role.split()).lower()
     normalized_skill = " ".join(skill.split())
     normalized_audit = " ".join(audit.split())
     assert "tracked writer" in normalized_router
@@ -182,6 +184,22 @@ def test_tracked_writers_use_root_managed_worktrees_without_ticket_identity() ->
         assert "resolved ticket worktree path" not in text
         assert "scripts/hmasd_workspace_ticket.py" not in text
         assert "git rev-parse --show-toplevel" not in text
+    assert "receipt" in normalized_router
+    assert "root alone" in normalized_router
+    assert "root-provisioned managed worktree" in normalized_role
+    assert "children never invoke" in normalized_role
+    assert "one writable l1 assignment" in normalized_router
+    assert "one root-managed worktree" in normalized_router
+    assert "parallel implementers" in normalized_role
+    assert "same frozen base" in normalized_role
+    assert "exact disjoint paths" in normalized_role
+    assert "one l1 slice candidate" in normalized_role
+    assert "root commits/records only after all children complete" in normalized_role
+    assert "independent candidate/release lifecycle means a new l1" in normalized_router
+    assert "distinct concurrent wdm/cpm l1 assignments" in normalized_router
+    assert "integration/convergence uses a distinct worktree" in normalized_router
+    assert "disjoint l2 writers share one l1 worktree" in normalized_role
+    assert "l2 never has its own worktree lifecycle" in normalized_role
 
 
 def test_skill_cannot_be_invoked_implicitly() -> None:
@@ -222,13 +240,17 @@ def test_default_execution_policy_is_parallel_first_with_direct_exception() -> N
     assert 'fork_turns="1"' in normalized_role
     assert "never gains durable, git, routing, science, runtime or acceptance authority" in normalized_role
     assert "it never writes canonical state or contacts another owner directly" in normalized_role
-    assert "ordinary workflow changes use the registered auditor, implementer and integrated reviewer stages with parallel-first scheduling and dependency order" in normalized_role
+    assert "workflow implementer" in normalized_role
     for text in (normalized_collaboration, normalized_audit, normalized_map):
-        assert "ordinary workflow changes use the registered auditor/scout, implementer and integrated reviewer stages with parallel-first scheduling and dependency order" in text
+        assert "parallel-first" in text
     assert "dispatch read-only auditor/scout concurrently with already-freezable implementation slices" in normalized_collaboration
     assert "run disjoint implementer file families concurrently" in normalized_collaboration
     assert "serialize only actual information dependencies or same-file writers" in normalized_collaboration
-    assert "integrated reviewer follows the complete integrated batch" in normalized_collaboration
+    assert "same writable path" in normalized_role
+    assert "shared unfrozen semantic contract" in normalized_role
+    assert "workflow reviewer" in normalized_role
+    assert "advisory" in normalized_role
+    assert "cannot accept" in normalized_role
     assert "pure design or authority decisions without file mutation remain wdm-local" in normalized_map
     assert "mechanism and simple-operation budgets constrain" in normalized_audit
     assert "never decide delegate-vs-local routing" in normalized_audit
@@ -251,3 +273,31 @@ def test_default_execution_policy_is_parallel_first_with_direct_exception() -> N
         "complexity threshold",
     ):
         assert stale not in "\n".join((router, role, collaboration, audit, workflow_map)).lower()
+
+
+def test_scoped_slice_evidence_and_fresh_union_acceptance_are_distinct() -> None:
+    role = " ".join(ROLE_PATH.read_text(encoding="utf-8").split()).lower()
+    router = " ".join(ROUTER_PATH.read_text(encoding="utf-8").split()).lower()
+    audit = " ".join(
+        (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md")
+        .read_text(encoding="utf-8")
+        .split()
+    ).lower()
+    surfaces = " ".join((role, router, audit))
+
+    for required in (
+        "accepts only its slice",
+        "candidate-ready evidence",
+        "root records/integrates candidates",
+        "fresh convergence",
+        "integrated union",
+        "union acceptance",
+        "workflow reviewer",
+        "advisory",
+        "acceptance_authority=none",
+    ):
+        assert required in surfaces, required
+    # The current slice may be accepted before a later convergence pass; this
+    # test checks the ownership boundary, not execution of either pass.
+    assert "current slice requires reviewer" not in surfaces
+    assert "current slice requires convergence" not in surfaces

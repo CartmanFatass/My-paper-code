@@ -143,6 +143,44 @@ def test_three_root_registered_l1_managers_have_frozen_routing() -> None:
     assert "hmasd-agentify-transport" not in callable_leaves
 
 
+def test_l1_scope_keys_allow_disjoint_manager_instances_without_a_global_singleton() -> None:
+    router = _flat((ROOT / "AGENTS.md").read_text(encoding="utf-8"))
+    wdm_role = _flat(
+        (ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md").read_text(encoding="utf-8")
+    )
+
+    # Scope-key vocabulary is shared by the Root router, while the WDM Role
+    # supplies the workflow-specific key.  Do not require CPM or Explorer to
+    # expose detailed scope fields here: their scopes remain owner-defined.
+    for required in (
+        "scope-key",
+        "(role, scope_key)",
+        "unique per root tree",
+        "multiple active wdms",
+        "disjoint frozen scopes",
+    ):
+        assert required in router, required
+    assert "workflow_scope_key" in wdm_role
+
+
+def test_root_wdm_background_context_is_distinct_from_implementer_fork_context() -> None:
+    router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+    wdm_profile = _load(ROOT / ".codex/agents/hmasd-workflow-design-manager.toml")
+    wdm_role = _flat(
+        (ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md").read_text(encoding="utf-8")
+    )
+    implementer_role = _flat(
+        (ROOT / ".agents/roles/WORKFLOW_IMPLEMENTER.md").read_text(encoding="utf-8")
+    )
+
+    assert re.search(r"fork_turns\s*=\s*[\"']?1[\"']?", router, re.IGNORECASE)
+    assert "fork_turns" not in wdm_profile
+    assert "fork_turns=none" in wdm_role
+    assert "fork_turns=none" in implementer_role
+    assert "disjoint" in wdm_role
+    assert "same writable path" in wdm_role
+
+
 @pytest.mark.parametrize("leaf", sorted(LEAF_ROLES))
 def test_registered_l2_profiles_and_roles_are_non_spawning_leaves(leaf: str) -> None:
     profile_path = ROOT / ".codex" / "agents" / f"{leaf}.toml"

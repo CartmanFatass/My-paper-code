@@ -11,7 +11,7 @@ def _text(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
 
 
-def test_wdm_is_the_single_workflow_owner() -> None:
+def test_wdm_is_the_semantic_owner_for_each_scoped_workflow_slice() -> None:
     contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
     router = _text("AGENTS.md")
     for required in (
@@ -35,6 +35,11 @@ def test_wdm_is_the_single_workflow_owner() -> None:
     assert "designing an assignment/interface" in router
     assert "native_child_brief_content=" not in router
     assert "hmasd-writing-agent-assignments" in router
+    assert "scope-key" in router.lower()
+    assert "(role, scope_key)" in router
+    assert "unique per root tree" in router.lower()
+    assert "multiple active wdms" in router.lower()
+    assert "disjoint frozen scopes" in router.lower()
 
 
 def test_assignment_writing_preserves_semantic_context_over_file_only_anchors() -> None:
@@ -178,6 +183,21 @@ def test_durable_and_temporary_workspaces_remain_separate() -> None:
         assert exemption in normalized_router
     assert "mandatory_ticket_identity=forbidden_for_subagent_authority" in normalized_router
     assert "child_forked_context=background_only" in normalized
+    assert "managed worktree/receipt" in normalized_router.lower()
+    assert "root alone controls provisioning, lifecycle, integration, git" in normalized_router.lower()
+    assert "children never invoke helper or git lifecycle" in normalized_router.lower()
+    assert "one writable l1 assignment" in normalized_router.lower()
+    assert "one root-managed worktree" in normalized_router.lower()
+    assert "parallel implementers" in normalized_router.lower()
+    assert "same frozen base" in normalized_router.lower()
+    assert "exact disjoint paths" in normalized_router.lower()
+    assert "one l1 slice candidate" in normalized_router.lower()
+    assert "root commits/records only after all children complete" in normalized_router.lower()
+    assert "independent candidate/release lifecycle means a new l1" in normalized_router.lower()
+    assert "distinct concurrent wdm/cpm l1 assignments" in normalized_router.lower()
+    assert "integration/convergence uses a distinct worktree" in normalized_router.lower()
+    assert "disjoint l2 writers share one l1 worktree" in normalized_router.lower()
+    assert "l2 never has its own worktree lifecycle" in normalized_router.lower()
     assert "Formats and suggested sections aid understanding but never become admission gates" in normalized
     assert "workflow_surface_owner=true" in readme
 
@@ -214,6 +234,25 @@ def test_explorer_research_and_session_artifacts_remain_explorer_owned() -> None
     assert "A receiver reads only an assignment-named sender handoff; it does not write another role's workspace" in contract
     assert "workflow_acceptance_authority=exclusive" in role
     assert "centralized_explorer_workspace_cleanup_write_authority=none" in role
+
+
+def test_slice_acceptance_precedes_root_integration_and_fresh_union_acceptance() -> None:
+    contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split()).lower()
+    router = " ".join(_text("AGENTS.md").split()).lower()
+    role = " ".join(_text(".agents/roles/WORKFLOW_DESIGN_MANAGER.md").split()).lower()
+    surfaces = " ".join((contract, router, role))
+    for required in (
+        "accepts only its slice",
+        "candidate-ready evidence",
+        "root records/integrates candidates",
+        "fresh convergence",
+        "exact integrated union",
+        "union acceptance",
+        "workflow reviewer",
+        "read-only/advisory",
+        "cannot accept",
+    ):
+        assert required in surfaces, required
 
 
 def test_explorer_mechanical_child_keeps_native_no_write_session_boundary() -> None:
