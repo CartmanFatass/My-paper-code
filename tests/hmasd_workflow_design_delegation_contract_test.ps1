@@ -1,5 +1,7 @@
 [CmdletBinding()]
-param()
+param(
+    [string]$CatalogTestPath
+)
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 
@@ -20,6 +22,19 @@ $normalizedManager = ($manager -replace '\s+', ' ').ToLowerInvariant()
 $normalizedRouter = ($router -replace '\s+', ' ').ToLowerInvariant()
 $normalizedSessionContract = ($sessionContract -replace '\s+', ' ').ToLowerInvariant()
 $normalizedCollaborationSkill = ($collaborationSkill -replace '\s+', ' ').ToLowerInvariant()
+
+$canonicalCatalogPath = 'C:\Projects\HMASD\runtime\model-catalog-v2-workaround.json'
+$catalogMatch = [regex]::Match(
+    $config, '(?m)^model_catalog_json\s*=\s*"([^"]+)"\s*$')
+if (-not $catalogMatch.Success) { throw 'Missing model_catalog_json setting' }
+$configuredCatalogPath = $catalogMatch.Groups[1].Value -replace '\\\\', '\'
+if ($configuredCatalogPath -cne $canonicalCatalogPath) {
+    throw "model_catalog_json must be exactly the canonical HMASD path: $canonicalCatalogPath"
+}
+$normalizedConfig = ($config -replace '\\\\', '\').ToLowerInvariant()
+if ($normalizedConfig.Contains('c:\project\hmasd')) {
+    throw 'model_catalog_json retains the external C:\project\HMASD checkout'
+}
 
 $profiles = @(
     @('.agents/roles/WORKFLOW_AUDITOR.md', '.codex/agents/hmasd-workflow-auditor.toml', 'hmasd-workflow-auditor', '[agents."HMASDWorkflowAuditor"]', 'gpt-5.6-luna', 'high', 'read-only', 'WORKFLOW_IMPACT_PACKET'),
@@ -312,6 +327,16 @@ if ($workflowImplementerProfile.Contains('resolved_ticket_worktree_path') -or
 if (-not $workflowImplementer.Contains('reversible')) {
     throw 'Workflow implementer lacks local reversible judgment'
 }
+$roleForkMatch = [regex]::Match(
+    $workflowImplementer, '(?m)^default_fork_turns\s*=\s*([A-Za-z0-9_-]+)')
+$profileForkMatch = [regex]::Match(
+    $workflowImplementerProfile, 'fork_turns\s*=\s*([A-Za-z0-9_-]+)')
+if (-not $roleForkMatch.Success -or -not $profileForkMatch.Success -or
+    $roleForkMatch.Groups[1].Value -ne 'none' -or
+    $profileForkMatch.Groups[1].Value -ne 'none' -or
+    $roleForkMatch.Groups[1].Value -ne $profileForkMatch.Groups[1].Value) {
+    throw 'Workflow implementer Role/profile fork_turns are inconsistent'
+}
 
 # Registered workflow children receive semantic task models rather than packet
 # shaped completion gates.  Keep this contract source-level and heading-agnostic.
@@ -365,6 +390,62 @@ if (-not $normalizedImplementerRoleText.Contains('agent_tree_level=2') -or
 foreach ($forbidden in @('Git mutation', 'stage, commit, push', 'route cross-task messages')) {
     if (-not $implementerRoleText.Contains($forbidden)) {
         throw "Workflow implementer boundary missing: $forbidden"
+    }
+}
+foreach ($required in @(
+    'assignment that may touch a tracked path must write only in the exact Root-provisioned managed worktree named by the assignment',
+    'current checkout is allowed only for read-only, ignored-only, or temporary-only assignments',
+    'mixed tracked+ignored assignment is still classified as a tracked writer',
+    'Root alone provisions, records, integrates, releases or retains the managed worktree and owns the Git lifecycle')) {
+    if (-not $normalizedImplementerRoleText.Contains($required)) {
+        throw "Workflow implementer Root-managed writer contract missing: $required"
+    }
+}
+
+$catalogPath = $configuredCatalogPath
+if (-not [string]::IsNullOrWhiteSpace($CatalogTestPath)) {
+    $catalogPath = $CatalogTestPath
+}
+if (-not (Test-Path -LiteralPath $catalogPath -PathType Leaf)) {
+    throw "Selected model catalog is unavailable: $catalogPath"
+}
+try {
+    $catalog = Get-Content -Raw -LiteralPath $catalogPath | ConvertFrom-Json
+} catch {
+    throw "Selected model catalog is not valid JSON: $catalogPath"
+}
+if (-not $catalog.models) { throw 'Selected model catalog has no models array' }
+foreach ($targetSlug in @('gpt-5.6-luna', 'gpt-5.3-codex-spark')) {
+    $target = @($catalog.models | Where-Object { $_.slug -eq $targetSlug })
+    if ($target.Count -ne 1) {
+        throw "Selected model catalog must expose exactly one $targetSlug entry"
+    }
+    if ($target[0].multi_agent_version -ne 'v2') {
+        throw "Selected model catalog must route $targetSlug through multi_agent_version=v2"
+    }
+}
+
+$selectedRoutes = @()
+foreach ($profilePath in Get-ChildItem -LiteralPath (Join-Path $repo '.codex/agents') -Filter '*.toml' -File) {
+    $profileText = Get-Content -Raw -LiteralPath $profilePath.FullName
+    $modelRoute = [regex]::Match($profileText, '(?m)^model\s*=\s*"([^"]+)"')
+    $effortRoute = [regex]::Match($profileText, '(?m)^model_reasoning_effort\s*=\s*"([^"]+)"')
+    if ($modelRoute.Success -and $effortRoute.Success) {
+        $selectedRoutes += [pscustomobject]@{
+            Model = $modelRoute.Groups[1].Value
+            Effort = $effortRoute.Groups[1].Value
+            Profile = $profilePath.Name
+        }
+    }
+}
+foreach ($selected in $selectedRoutes) {
+    $model = @($catalog.models | Where-Object { $_.slug -eq $selected.Model })
+    if ($model.Count -ne 1) {
+        throw "Selected model catalog entry missing for $($selected.Profile): $($selected.Model)"
+    }
+    $efforts = @($model[0].supported_reasoning_levels | ForEach-Object { $_.effort })
+    if ($efforts -notcontains $selected.Effort) {
+        throw "Selected model catalog does not support $($selected.Model)/$($selected.Effort) from $($selected.Profile)"
     }
 }
 

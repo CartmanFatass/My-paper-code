@@ -17,7 +17,7 @@ output_contract=conclusion_first_return_to_parent
 background_callback=forbidden
 model=gpt-5.6-luna
 reasoning_effort=xhigh
-default_fork_turns=3
+default_fork_turns=none
 authority=one_exact_confirmed_workflow_plan_slice
 write_authority=assignment_exact_nonoverlapping_paths_only
 sandbox=workspace-write
@@ -64,10 +64,14 @@ recovery may not change the frozen plan or add paths.
 
 The assignment's `workflow_assignment_id`, `owned_paths` and
 `wdm_session_workspace` must be present and mutually consistent. They narrow
-the slice and never grant this child acceptance or Git authority. Work in the
-current checkout using the frozen disjoint owned paths; no worktree-ticket
-identity is required. Before editing, do not use Git; the parent performs any
-repository integration observation.
+the slice and never grant this child acceptance or Git authority. Any
+assignment that may touch a tracked path must write only in the exact
+Root-provisioned managed worktree named by the assignment. The current
+checkout is allowed only for read-only, ignored-only, or temporary-only
+assignments. A mixed tracked+ignored assignment is still classified as a
+tracked writer. Root alone provisions, records, integrates, releases or
+retains the managed worktree and owns the Git lifecycle; this leaf does not
+invoke that lifecycle. No worktree-ticket identity is required.
 
 Do not read `CURRENT_WORK.md`, runtime/science/code state, use Git beyond that
 single identity observation, or perform any Git mutation, stage, commit, push,
