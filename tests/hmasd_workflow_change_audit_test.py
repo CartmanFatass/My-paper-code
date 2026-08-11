@@ -205,6 +205,25 @@ def test_workflow_audit_requires_meaning_then_task_relevant_factual_evidence() -
     assert "relevant candidate/acceptance packet" in normalized_audit
 
 
+def test_workflow_audit_references_session_dependency_and_repair_fields() -> None:
+    audit = (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(
+        encoding="utf-8"
+    )
+
+    fields = (
+        "workflow_consumer_finalization",
+        "workflow_causal_observation_before_repair",
+        "workflow_product_repair_dispatch",
+        "workflow_validation_layer_preflight",
+    )
+    for field in fields:
+        assert _keyed_field(session, field)
+        assert field in audit
+
+
 def test_execution_policy_is_parallel_slice_first_with_root_convergence() -> None:
     router = (REPO / "AGENTS.md").read_text(encoding="utf-8")
     manager = (REPO / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md").read_text(encoding="utf-8")

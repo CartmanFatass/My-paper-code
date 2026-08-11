@@ -63,6 +63,17 @@ unchanged. Setup failures are repaired and rerun at the same layer; product
 failures repair the causal contract or implementation.
 The canonical timing pointer is
 `workflow_causal_check_timing=when_all_consumed_bytes_are_frozen_before_package_acceptance`.
+For every routed change, draw the producer/consumer dependency relation first.
+Dispatch independent producers in parallel, and finalize a consumer test write
+or run only after its direct producer bytes freeze, using
+`workflow_consumer_finalization`. At each validation layer, perform the one
+lightweight preflight required by `workflow_validation_layer_preflight` before
+product evidence. Collect terminal observations from all independently runnable
+focused causal commands before a product repair dispatch, following
+`workflow_causal_observation_before_repair`; then group the complete observed
+product failures into exact nonoverlapping owned-path repair dispatches as
+required by `workflow_product_repair_dispatch`. These Session keyed fields are
+the mechanics source; this Skill does not redefine them.
 
 WDM publishes the five Session-defined status observations
 `DISPATCHED`, `WRITES_COMPLETE`, `TESTS_COMPLETE`, `REVIEW_READY` and
@@ -126,13 +137,14 @@ source locators only.
    exact non-overlapping paths to registered Implementers; it does not write,
    stage or use Git. The Session contract supplies worktree and lifecycle
    mechanics.
-3. **Focused check.** Writers run their `slice_local` checks. After all
-   producer, consumer and test bytes freeze, run the focused causal-family
-   check once, then WDM runs the single `integration_cross_slice` suite. Run
-   the structural harness, stale-term search and `git diff --check` when they
-   are the smallest affected contract. Exactly one advisory Reviewer follows
-   the frozen evidence; the Reviewer is read-only and cannot accept or create
-   a second pass.
+3. **Focused check.** Follow the Session-defined producer/consumer ordering,
+   per-layer preflight, complete causal observation and owned-path repair
+   aggregation. Writers run their `slice_local` checks. After all producer,
+   consumer and test bytes freeze, run the focused causal-family check once,
+   then WDM runs the single `integration_cross_slice` suite. Run the structural
+   harness, stale-term search and `git diff --check` when they are the smallest
+   affected contract. Exactly one advisory Reviewer follows the frozen evidence;
+   the Reviewer is read-only and cannot accept or create a second pass.
 4. **Return and reload.** Inspect exact changed paths and begin the result in
    ordinary language: name the package or union, why it matters, the direct
    consequence checked, residual uncertainty and the next actor. Append only

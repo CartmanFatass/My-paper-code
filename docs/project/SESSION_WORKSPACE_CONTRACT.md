@@ -118,6 +118,10 @@ portfolio_context_preload=forbidden
 workflow_validation_failure_classes=environment_setup|product_assertion
 workflow_environment_setup_recovery=same_layer_rerun_without_retry_state
 workflow_product_failure_recovery=repair_causal_contract_or_implementation
+workflow_consumer_finalization=all_direct_producer_bytes_frozen_before_final_consumer_write_or_run|independent_producers_parallel
+workflow_causal_observation_before_repair=all_independently_runnable_focused_causal_commands_terminal_before_product_repair_dispatch|environment_or_parse_blocker_repair_same_layer_then_continue_observation
+workflow_product_repair_dispatch=complete_observed_product_failures_grouped_by_exact_nonoverlapping_owned_paths|minimal_repair_dispatches|not_stale_literal_serial_dispatch
+workflow_validation_layer_preflight=once_per_layer_before_product_evidence|lightweight_short_basetemp_parent_and_actual_command_host|not_doctor_or_global_health_check_or_acceptance_gate
 workflow_windows_basetemp=short_absolute_assignment_specific_under_root_controlled_parent
 workflow_windows_integration_basetemp=C:\Projects\ht\<assignment-run>
 workflow_progress_event_names=DISPATCHED|WRITES_COMPLETE|TESTS_COMPLETE|REVIEW_READY|TERMINAL
@@ -264,6 +268,17 @@ the Root-controlled parent; the integration verifier's host path is
 from product-assertion failures: setup is repaired and rerun at the same layer
 without retry state, while product failures repair the causal contract or
 implementation.
+
+Before product evidence at each validation layer, perform one lightweight
+preflight of that layer's short basetemp parent and actual command host. It is
+not a doctor, global health check or acceptance gate. Independent producers may
+run in parallel, but a final consumer write or run waits until all of its
+direct producer bytes freeze. Before dispatching a product repair, collect
+terminal observations from every independently runnable focused command in the
+causal family. Repair an environment or parse blocker at that same layer, then
+continue the observations. Group the complete observed product failures by
+exact nonoverlapping owned paths into as few repair dispatches as possible;
+never serially dispatch stale literal failures one at a time.
 
 ## Ownership model
 

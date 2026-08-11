@@ -65,6 +65,37 @@ def test_validation_layers_and_writer_scope_are_structural() -> None:
     )
 
 
+def test_dependency_observation_repair_and_preflight_contract_is_session_defined() -> None:
+    contract = SESSION_CONTRACT.read_text(encoding="utf-8")
+    manager = MANAGER_ROLE.read_text(encoding="utf-8")
+
+    assert _field(contract, "workflow_consumer_finalization") == (
+        "all_direct_producer_bytes_frozen_before_final_consumer_write_or_run|"
+        "independent_producers_parallel"
+    )
+    assert _field(contract, "workflow_causal_observation_before_repair") == (
+        "all_independently_runnable_focused_causal_commands_terminal_before_product_repair_dispatch|"
+        "environment_or_parse_blocker_repair_same_layer_then_continue_observation"
+    )
+    assert _field(contract, "workflow_product_repair_dispatch") == (
+        "complete_observed_product_failures_grouped_by_exact_nonoverlapping_owned_paths|"
+        "minimal_repair_dispatches|not_stale_literal_serial_dispatch"
+    )
+    assert _field(contract, "workflow_validation_layer_preflight") == (
+        "once_per_layer_before_product_evidence|"
+        "lightweight_short_basetemp_parent_and_actual_command_host|"
+        "not_doctor_or_global_health_check_or_acceptance_gate"
+    )
+    assert _field(manager, "workflow_dependency_validation_authority") == (
+        "producer_consumer_dependency_ordering|causal_failure_aggregation|"
+        "validation_layer_execution"
+    )
+    assert _field(manager, "workflow_dependency_validation_contract") == (
+        "docs/project/SESSION_WORKSPACE_CONTRACT.md|"
+        ".agents/skills/hmasd-workflow-change-audit/SKILL.md"
+    )
+
+
 def test_progress_vocabulary_is_exactly_status_only_and_nonaccepting() -> None:
     contract = SESSION_CONTRACT.read_text(encoding="utf-8")
     manager = MANAGER_ROLE.read_text(encoding="utf-8")

@@ -74,6 +74,8 @@ workflow_singleton_package=one_writable_WDM_L1_exact_final_frozen_bytes_reviewed
 workflow_singleton_acceptance=one_advisory_Reviewer_then_same_WDM_package_acceptance_before_Root_integration
 workflow_multi_candidate_convergence_trigger=two_or_more_independently_reviewed_WDM_candidates|actual_union_differs_from_every_reviewed_package
 workflow_causal_check_timing=when_all_consumed_bytes_are_frozen_before_package_acceptance
+workflow_dependency_validation_authority=producer_consumer_dependency_ordering|causal_failure_aggregation|validation_layer_execution
+workflow_dependency_validation_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md|.agents/skills/hmasd-workflow-change-audit/SKILL.md
 workflow_integration_review_authority=one_registered_read_only_advisory_Reviewer_then_WDM_package_or_union_acceptance
 workflow_convergence_worktree=separate_root_managed_worktree_for_multi_candidate_union_only
 cross_task_transport=return_to_root
@@ -95,6 +97,10 @@ WDM alone publishes the five contract-defined progress observations
 and adjacent observations may share one report; they are never scheduler,
 retry, admission or acceptance tokens. The Session Workspace Contract owns
 their transport, validation layers, review timing and Root runtime smoke.
+WDM is responsible for the Session-defined producer/consumer dependency
+ordering, causal-failure aggregation and validation-layer execution; the
+Session Workspace Contract and Workflow Change Audit Skill define the
+corresponding mechanics.
 Risk and route choices are the keyed policy above: high authority, topology,
 cross-owner or shared-contract work uses the Auditor; a clear route-resolved
 bounded contract or low causal repair may skip it only with a concrete WDM
