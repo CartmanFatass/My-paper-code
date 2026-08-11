@@ -179,6 +179,91 @@ The requested live-flow test is complete only when all of the following exist:
 - canonical commits plus terminal worktree/receipt disposition;
 - a final report that distinguishes Tests, Static checks and Semantic review.
 
+## Cross-candidate semantic-drift solution
+
+The observed failure was not a Git merge conflict. Two candidates were valid in
+their own worktrees, but one changed the owner-record schema while the other
+still tested the old schema and old prose. Candidate-local evidence therefore
+did not prove that the combined control plane had one coherent meaning. The
+solution is an explicit pre-main union semantic boundary, not more hashes,
+tickets or acceptance fields.
+
+```text
+freeze coupled slices and their direct consumers
+                    |
+parallel slice implementation and candidate-local evidence
+                    |
+slice owner acceptance = candidate-ready only
+                    |
+Root mechanically applies accepted candidates to one integration worktree
+                    |
+fresh WM_<union-purpose> reads the actual union and direct consumers
+                    |
+one causal repair batch -> one frozen union review -> WDM union acceptance
+                    |
+Root union Tests/Static -> canonical integration -> fresh smoke
+```
+
+Apply the following rules to a multi-candidate workflow/control-plane change:
+
+1. **Freeze the semantic dependency closure before dispatch.** Root and the
+   planning WDM name the producer surfaces, their direct consumer surfaces and
+   the tests that express the shared edge. This is ordinary assignment meaning,
+   not a manifest, registry or admission schema. Same-path writers and an
+   unfrozen shared semantic contract serialize; truly disjoint implementation
+   paths may remain parallel.
+2. **Keep slice acceptance provisional.** A scoped WDM or CM may accept its own
+   exact slice, but for a workflow union that means `candidate-ready`, not that
+   the combined control plane is semantically accepted. CM technical acceptance
+   remains final for CM-owned technical bytes; WDM cannot rewrite it, and Root
+   cannot replace it.
+3. **Integrate before final workflow acceptance.** Root records the accepted
+   slice candidates and mechanically applies them to a separate integration
+   worktree. Main remains unchanged. A fresh `WM_<union-purpose>` with its own
+   `workflow_scope_key` and `fork_turns=1` receives the actual integrated diff,
+   exact producer/consumer paths and prior owner acceptance packets.
+4. **Review the actual union once.** The union WDM checks authority, scope,
+   terminology, schema, lifecycle and direct-consumer consistency across the
+   integrated bytes. Its L2 writers share the one union WDM worktree. Exactly
+   one integrated advisory Reviewer sees the final frozen union, rather than a
+   new Reviewer for every small recognizer repair.
+5. **Repair by causal family, not one literal at a time.** Before editing, the
+   exact owner audits the complete affected assertion block and all named direct
+   consumers. It then fixes one bounded family in one batch, such as owner-record
+   schema dispatch, retired authority wording or enum case handling. A genuinely
+   different authority choice or out-of-scope production contradiction still
+   fails closed to Root.
+6. **Preserve domain acceptance.** A stale workflow test or workflow-owned
+   interface is repaired and accepted by WDM. A defect in CM-owned technical
+   source returns through Root to the exact direction/shared CM for renewed
+   technical acceptance. Root only relays and integrates; a union WDM does not
+   become a Convergence CM and Root does not make semantic rewrites.
+7. **Use stable contract assertions.** Prefer keyed fields, structural
+   relationships and owner/scope invariants over complete English sentences.
+   Dispatch controlled record kinds case-sensitively, validate each heterogeneous
+   kind in its own branch, and retain negative guards for retired authority or
+   topology. Exact prose is appropriate only when the literal wording itself is
+   the protected interface.
+8. **Gate canonical main on the combined evidence.** Before main integration,
+   require all affected domain-owner acceptances, WDM acceptance of the actual
+   workflow union, one union Tests/Static pass and a clean exact-path audit.
+   After main integration, Root performs canonical reload and the smallest fresh
+   runtime/registration smoke; that smoke cannot be replaced by static evidence.
+
+This boundary applies to workflow/control-plane union semantics. It does not
+create a standing convergence lane, a Convergence CM, a scheduler, a queue, a
+ledger, a hash gate or an extra domain-acceptance owner. Unrelated code candidates
+retain their direction/shared CM flow; a technical union conflict returns to
+the owning CM(s) or a temporary exact `CM_shared_<component>`.
+
+For the incident in this handoff, the missing pre-main union step would have
+loaded the accepted CM projection records together with the WDM contract tests,
+found the retired `workstream_ids`/`external_pointer_ids` assumptions and the
+generic `current_work_session` recognizer before canonical integration, repaired
+the whole schema/orientation assertion families once, and then submitted one
+final union to the Reviewer. That is the concrete prevention and recovery path
+for the same class of semantic drift.
+
 ## Workflow-efficiency follow-up (not a restart blocker)
 
 This migration was slower than its edits because cross-candidate assertions ran
