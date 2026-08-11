@@ -30,14 +30,40 @@ assignment-specific temporary-patch path defined by
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`; they never transport the
 full map through messages or split/encoded payloads.
 
+## Root-created Explorer scopes and task tree
+
+Root creates a real user-visible Explorer L1 task for each
+`research_scope_key`. A `direction:<id>` task owns only that direction's
+scientific meaning. It starts from the exact Root assignment and the named
+direction pointers; it does not preload the whole portfolio, project/runtime
+corpus or implicit global continuity. A `portfolio:<group>` task is a distinct
+Explorer L1. It receives compact accepted direction packets and pointers, owns
+cross-direction comparison and advisory integration, and may follow compact
+continuity or lazy direction pointers when that comparison requires them.
+
+Each Explorer L1 scope has its own task and worktree boundary. Root owns user
+interaction, progress, follow-up, interruption, cross-owner relay, lifecycle
+and accepted physical writes, but not scientific meaning. CPM remains a
+same-level Root sibling, never an Explorer child. Explorer-to-Root-to-CPM and
+the reverse result retain `research_scope_key`, direction, candidate and
+revision. External Pro remains outside the tree with its existing review
+boundary.
+
+When a writable Explorer L1 needs an exact L2 writer, Root provisions exactly
+one managed worktree for that scope and all of its disjoint L2 writers use that
+same worktree. L2 writers do not provision, release, integrate, use a helper,
+or perform Git lifecycle actions. A temporary handoff still uses the exact
+scope-owned destination and remains subject to the existing writer boundary.
+
 ## Compact startup and action-triggered context
 
-Every fresh Explorer L1 start loads only the registered profile, the Explorer
-Role core, the exact task assignment and the mandatory
-`local_research/RESEARCH_CONTINUITY.md` entry. That entry is a compact
-revision-2 navigation record with active state, revision, exact dependency,
-next action and precise lazy pointers. It is mandatory on every start, while
-Root remains the sole physical writer after Explorer semantic acceptance.
+Every fresh Explorer L1 start loads the registered profile, the Explorer Role
+core and the exact Root task assignment. A `direction:<id>` task then loads
+only its named direction pointers; it does not implicitly load
+`local_research/RESEARCH_CONTINUITY.md`, the whole portfolio or project/runtime
+material. A `portfolio:<group>` task may load that compact revision-2
+navigation record and lazy direction pointers when its accepted packets name
+them. Root remains the sole physical writer after Explorer semantic acceptance.
 
 The following context is action-triggered rather than startup-preloaded:
 
@@ -79,8 +105,8 @@ it must not supply hidden task meaning, authority, peer results or favored
 answers. Assignment guidance should cover the research purpose, exact
 scientific question, source and prerequisite-packet bindings, protected
 assumptions and independence, exclusions, allowed local judgment and
-completion meaning. This is writing guidance, not a mandatory schema, file,
-validator or admission gate.
+completion meaning. This is writing guidance, not a mandatory schema, file or
+validator gate.
 
 ## Keep orchestration and portfolio comparison in Explorer L1
 
@@ -151,7 +177,7 @@ analysis to `hmasd-research-critic`, and causal-hypothesis, repair or
 discriminator design to `hmasd-research-innovator`.
 
 This is a prospective capability, not a fourth research mode or an automatic
-pipeline. Its work unit is the unresolved scientific question, not a result
+pipeline. Its work is the unresolved scientific question, not a result
 file or fixed workflow position. When evidence is sufficient and the next step is cheap and
 reversible, Explorer decides directly. A child answer is advisory input to one
 Explorer decision; it may reuse an existing packet tail when useful, but does
@@ -192,10 +218,11 @@ technical acceptance or replace Explorer L1's comparison.
    [../hmasd-explorer-project-validation/SKILL.md](../hmasd-explorer-project-validation/SKILL.md)
    and `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
 4. Load a historical handoff only when the exact current action names its
-   dependency. If continuity is absent, perform the one bounded owned-path
-   scan and return a continuity proposal exactly as the parallel-workflow
-   reference specifies; Root alone performs the physical write after accepting
-   the proposal/revision check.
+   dependency. For a portfolio scope whose assignment names compact
+   continuity, if that entry is absent, perform the one bounded owned-path scan
+   and return a continuity proposal exactly as the parallel-workflow reference
+   specifies. A direction scope does not scan for global continuity merely
+   because it is absent; Root alone performs any accepted physical write.
 
 The proportional A/B/C evidence definitions live in
 `docs/project/ALGORITHM_PRINCIPLES.md`; this Skill points to that source rather
@@ -208,7 +235,7 @@ conclusion-bearing C work; it is not a prerequisite for ordinary B iteration or
 an expensive exploratory run whose result remains diagnostic.
 
 Do not preload `CURRENT_WORK.md`, active runtime/review state, implementation or
-scientific ledgers during ordinary research. The project-validation phase may
+scientific project records during ordinary research. The project-validation phase may
 inspect project material read-only as needed for reconnaissance and semantic
 acceptance. During research execution, do not use Git or create project
 changes. Explorer is read-only: it semantically authors exact advisory/handoff
@@ -303,7 +330,7 @@ may resend the unchanged question path without modifying research files.
 
 Use **candidate validation** only for a mature candidate with a precise defect,
 mechanism, algorithm delta, strongest simple explanation and separating
-prediction. Classify the requested work as A, B or C using the stable principles
+prediction. Describe the requested work as A, B or C using the stable principles
 before deciding what evidence is proportionate. Once a candidate is implementable,
 has a differentiating prediction and a matched comparator, and no unresolved
 contradiction changes the question, B normally means preparing a direct
@@ -329,32 +356,27 @@ them to choose the next separating question: map support, test learnability unde
 a discriminating host, then estimate direction and variance with a small
 multi-seed run when warranted. This is an iterative pattern, not a state machine.
 
-Before dispatching any result-bearing treatment, use the capacity and
-direction-barrier rules in
+Before dispatching any result-bearing treatment, use the scope-local dependency
+and resource-conflict rules in
 [`references/parallel-research-workflow.md`](references/parallel-research-workflow.md).
-Explorer maintains the scientific roster and freezes each design; CPM owns live
-capacity admission and runtime observations. An available token is permission to
-consider the next independently valuable treatment, not an automatic scientific
-priority or a reason to reactivate a parked direction. Each returned result may
-enter its own direction-local scientific intake immediately. No free runtime
-token is required for intake, analysis, review or other non-experiment work.
-Read-only Explorer science lanes (direction children, Critic, Principles,
-Innovator, Scout and Pro review) are independent of CPM pool/admission by
-default. Only an exact question depending on an unreturned CPM result creates a
-direction-local science barrier; capacity and admission never throttle those
-independent lanes.
-When two or more independent treatments have already been scientifically
-selected and frozen, their local predecessor/intake barriers are closed, and
-capacity is available, follow the reference's normal path:
-`independent_ready_treatment_dispatch=parallel_first_within_capacity`.
-Do not silently apply a global serial fallback; it is forbidden without named
-direction-dependency or resource evidence. This is not a request to invent
-work, fill capacity, reprioritize or reactivate parked directions. CPM treatment
-dispatch is constrained only by an exact scientific/dependency predecessor,
-capacity/admission, a formal or actually observed resource conflict, or a same
-mutable-path/object conflict. Explorer progress is event-driven or Root-resumed;
-pending runtime capacity, non-runtime continuation, Pro triggers and formal
-iteration behavior are unchanged.
+Explorer maintains the scientific roster and freezes each design; CPM evaluates
+the concrete resource facts for the requested action. Every runtime or compute
+request is ordinary prose naming the requested action, required resource,
+known conflict (if any), and the explicit user authorization that Root has
+received. Root relays that meaning to the relevant same-level CPM task; CPM
+does not infer omitted actions or authorization. Each returned result may enter
+its own direction-local scientific intake immediately. Read-only science and
+review continue independently unless an exact question depends on an
+unreturned CPM result.
+
+When two or more independent treatments are selected and frozen, their local
+predecessor/intake barriers are closed, and no concrete resource conflict is
+known, the normal path is parallel-first. Serialize only for an exact
+scientific/dependency predecessor, a formal or observed resource conflict, or a
+same mutable-path/object conflict. Do not invent work, reprioritize directions,
+or reactivate parked work. If a requested resource is unavailable, CPM returns
+that concrete fact through Root and Explorer continues safe non-runtime work;
+this does not create shared coordination state or a global serial fallback.
 
 Never substitute an Innovator for source absorption, a Principles Analyst for
 literature fidelity, or a Critic for constructive RL reasoning. A broad request

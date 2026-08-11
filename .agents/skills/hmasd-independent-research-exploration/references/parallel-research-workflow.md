@@ -1,41 +1,35 @@
 # Parallel independent research workflow
 
 ```text
+research_scope_key=Root-created-user-visible-Explorer-L1-task
+scope_kinds=direction:<id>|portfolio:<group>
+direction_scope_owner=one_direction_scientific_meaning_only
+portfolio_scope_owner=cross_direction_comparison_and_advisory_integration
+scope_startup=exact_assignment_and_named_pointers
+direction_global_continuity=not_implicitly_loaded
+portfolio_context=compact_accepted_direction_packets|lazy_direction_pointers
+scope_worktree=one-Root-managed-worktree-per-writable-L1
+l2_worktree_rule=all-exact-disjoint-writers-share-the-scope-worktree
+root_owner=user-interaction|progress|follow-up|interrupt|relay|lifecycle|physical-writes
+root_science_authority=none
+cpm_relation=same-level-Root-sibling
+relay_bindings=research_scope_key|direction|candidate|revision
+external_pro_boundary=unchanged
 logical_assignment_count=derived_from_exact_work_roster
-runtime_concurrency=three_unit_cpm_capacity_pool
-runtime_capacity_units_total=3
-runtime_capacity_classes=A_READONLY_OR_ZERO_RUNTIME:0|B_TOY_LIGHT:1|B_TOY_MEDIUM:2|B_HEAVY_OR_C:3_exclusive
-runtime_handoff_context=natural_language_prose_not_required_schema
-runtime_handoff_prospective_cues=runtime_class_and_units|direction_local_predecessor_and_intake_barrier_closure
-scientific_evidence_level=A|B|C_is_independent_of_runtime_class
-runtime_class_not_inferred_from_science_or_local_research=true
-runtime_admission_observation=stateless_per_admission
-runtime_admission_judgment=admit|up-class|pending_runtime_capacity
-active_experiment_roster_owner=independent_research_explorer_scientific_view
-runtime_capacity_admission_owner=code_project_manager
-independent_ready_treatment_dispatch=parallel_first_within_capacity
-global_serial_fallback=forbidden_without_named_dependency_or_resource_evidence
-cpm_dispatch_constraints=exact_scientific_or_dependency_predecessor|capacity_or_admission|formal_or_observed_resource_conflict|same_mutable_path_or_object_conflict
-per_direction_result_bearing_default=one_active
-same_direction_parallelism=exact_frozen_joint_roster_only
-capacity_wait_state=pending_runtime_capacity_only
-capacity_wait_effect=pending_runtime_capacity_only
-experiment_pool_exclusivity_scope=result_bearing_runtime_only
-workflow_progress_during_exclusive_runtime=continues
-read_only_science_lane_capacity=independent_of_cpm_pool_by_default
-science_barrier_condition=exact_question_depends_on_unreturned_cpm_result_only
-task_tree_explorer_progress=event_driven_or_root_resumed
+runtime_request=ordinary-prose-requested-action|required-resource|known-conflict|Root-confirmed-user-authorization
+scientific_evidence_level=A|B|C_is_independent_of_resource_request
+parallel_dispatch=independent-ready-treatments-when-no-known-conflict
+serialization=exact-dependency-or-known-resource-or-mutable-path-conflict-only
+per_direction_result_bearing_default=one-active
+science_barrier=exact-question-depends-on-unreturned-CPM-result-only
+task_tree_progress=event-driven-or-Root-resumed
 persistent_explorer_progress=forbidden
-canonical_campaign_phase_roster=exact_ordered_work_roster
 canonical_campaign_phase_barriers=required
-adaptive_question_roster=singleton_or_exact_joint_roster
 adaptive_singleton_global_barrier=none
-adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary
 completion_order_priority=forbidden
 semantic_writer=independent_research_explorer
 ordinary_artifact_writer=research_artifact_writer
 continuity_physical_writer=root_after_accepted_explorer_proposal
-child_depth=0
 automatic_formal_workflow_promotion=forbidden
 automatic_campaign_progression=allowed_until_convergence
 unbounded_source_expansion=forbidden
@@ -63,26 +57,43 @@ reverse_intake_contract=docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md
 reverse_intake_transport=assignment_specific_temporary_patch
 reverse_intake_full_map_transport=forbidden
 reverse_intake_retry=one_concrete_delta_clarification_only
-reverse_intake_queue_or_validator=forbidden
 shared_explorer_transport_profile=absent
-explorer_mechanical_scientific_roster=excluded
-explorer_mechanical_barrier=none
-explorer_mechanical_peer_independence=not_applicable
-explorer_mechanical_evidence_role=literal_fact_organization_not_scientific_evidence
-explorer_mechanical_campaign_effect=none
+explorer_mechanical_scientific_effect=none
 ```
+
+## Scope-local startup and Root relay
+
+Root creates and displays each Explorer L1 task under its exact
+`research_scope_key`. A `direction:<id>` task loads only the exact Root
+assignment and named direction pointers and owns that direction's scientific
+meaning. It does not implicitly load global continuity, the whole portfolio,
+or project/runtime material. A `portfolio:<group>` task is a separate L1 that
+receives compact accepted direction packets and pointers, owns cross-direction
+comparison and advisory integration, and may follow compact continuity or lazy
+direction pointers. Each L1 has a separate scope and worktree.
+
+Explorer returns one self-contained packet to Root. Root relays it to the
+relevant same-level CPM task and routes the reverse result back to the same
+scope. Both directions preserve `research_scope_key`, direction, candidate and
+revision. CPM is never nested under Explorer. Root owns user interaction,
+progress, follow-up, interruption, relay, lifecycle and physical writes; Root
+does not interpret scientific meaning.
+
+When a scope needs writing, Root provisions exactly one managed worktree for
+that writable Explorer L1. Every exact disjoint L2 writer for that L1 uses the
+same worktree. L2 never provisions or releases it, invokes a helper, runs Git,
+integrates changes or accepts the workflow.
 
 ## Canonical campaign intake and barrier
 
 Freeze one exact mode, campaign direction or evidence question, mission link,
 authorized source boundary, exclusions and completion meaning before dispatch.
 For the canonical evidence-review and algorithm-inspiration campaign, every
-phase freezes an exact logical work roster. Runtime launches as many
-independent assignments as available native capacity permits and defers the
-rest as not-yet-started roster items. This native child availability is separate
-from experiment-pool admission. Operational failure may receive one unchanged low-cost retry. A changed
-source boundary or project authority needs a new user decision; a new mechanism
-or subdirection inside the campaign is an opportunity-bound assignment.
+phase freezes an exact logical work roster. Independent research assignments
+may proceed in parallel when their direction-local dependencies are closed.
+Operational failure may receive one unchanged low-cost retry. A changed source
+boundary or project authority needs a new user decision; a new mechanism or
+subdirection inside the campaign is an opportunity-bound assignment.
 
 Direction-specific answers and Explorer-to-CPM handoffs use the single
 direction-local context binding defined in
@@ -98,17 +109,17 @@ consumer, completion evidence and return destination. A missing or contradictory
 identity/proposition/revision preserves the original artifact and gets exactly
 one concrete semantic clarification while unrelated work continues.
 
-For a result-bearing Explorer-to-CPM handoff, the natural-language brief should
-also explain the treatment's prospective runtime class and units and whether
-that direction's local predecessor and intake barrier are closed. These are
-semantic cues, never required field names, packet keys or a validator schema.
-The scientific evidence level (A reconnaissance/probe, B exploratory toy or C
-conclusion-bearing/expensive work) is a separate scientific description and
-does not determine the runtime class or units. CPM never infers a class, units
-or predecessor/intake closure from an A/B/C label or from `local_research/`.
-When one of these runtime or barrier cues is genuinely missing, CPM preserves
-the handoff and asks Explorer one exact clarification while unrelated work
-continues; it does not guess, rewrite the brief or create `BLOCKED`.
+For a result-bearing Explorer-to-CPM handoff, the natural-language brief must
+name the requested action, required resource, known conflict and explicit user
+authorization received through Root. It must also say whether the direction's
+local predecessor and intake barrier are closed. These are readable cues, not
+field names or a validator schema. The scientific evidence level (A
+reconnaissance/probe, B exploratory toy or C conclusion-bearing/expensive work)
+is independent of the resource request. CPM does not infer an action,
+authorization, dependency closure or resource need from an A/B/C label or from
+`local_research/`. If a cue is genuinely missing, CPM preserves the handoff and
+asks Explorer one exact clarification through Root while unrelated work
+continues.
 
 For every registered research child, the Explorer calls the registered agent
 type with explicit `fork_turns="none"` and a self-contained natural-language
@@ -117,8 +128,7 @@ prerequisite-packet bindings, protected assumptions and independence,
 exclusions, allowed local judgment and completion meaning into that
 assignment. Parent conversation history is background only and must not supply
 hidden task meaning, authority, peer results or favored answers. These are
-writing guidelines, not a mandatory schema, assignment file, validator or
-admission gate.
+writing guidelines, not a mandatory schema, assignment file or validator gate.
 
 Independent direction-local detailed scientific questions use the best-matching
 registered read-only child by default with `fork_turns="none"`. Explorer may
@@ -162,39 +172,32 @@ or portfolio meaning. A singleton mechanical task has no campaign or research
 state effect; Explorer alone performs semantic sufficiency intake and any
 scientific interpretation.
 
-## Restart continuity
+## Scope-local continuity
 
-Explorer L1 semantically proposes one lightweight entry at
-`local_research/RESEARCH_CONTINUITY.md`; Root alone physically writes it only
-after the accepted proposal/revision check. It records only active campaign or
-artifact paths, the `active_experiment_roster`, the last completed phase or
-direction-local intake barrier, unfinished assignment or review, the next
-scientific action and the current authorized source boundary. Each active
-treatment entry makes its direction, treatment, declared resource class and
-units, predecessor dependency, canonical design/handoff, CPM task locator, last
-CPM-reported runtime observation and intake state understandable. These are
-semantic continuity cues rather than required field names. Propose an update
-only when the active roster changes, an intake/phase barrier closes, a direction
-is parked, or the task ends. If absent, the task-scoped Explorer performs one
-bounded scan of its owned `local_research` paths and returns the entry proposal
-to Root; Explorer does not physically create or modify this continuity file.
-Continuity does not alter scientific ordering, source authority, read-only
-children, the Explorer L1 semantic-author rule or Root's physical-writer
-boundary.
-Do not add writer scripts, hashes, state machines, budgets or user gates to
-continuity.
-The continuity entry's mandatory human-readable Direction Action Map and its
-park/reactivation semantics are defined by
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`; this reference adds no
-machine fields or acceptance role. Runtime/admission mechanics remain defined
-only in this reference, including the three-unit pool and event-driven or
-Root-resumed continuation; there is no clock-driven scheduler or polling loop.
-A reverse-intake correction is a small Explorer-authored semantic delta written
-to one assignment-specific temporary patch; the full map is not carried through
-messages or split/encoded transport. The detailed source owns the exact
-source/target locators, old/new text, candidate-copy patch and Explorer semantic
-read/acceptance; this reference adds no second procedure, queue, receipt schema
-or validator.
+Explorer L1 semantically proposes any needed continuity update at
+`local_research/RESEARCH_CONTINUITY.md`; Root alone physically writes it after
+the accepted proposal and revision check. A `direction:<id>` task does not
+implicitly load this global continuity entry: it loads only the exact Root
+assignment and named direction pointers. A `portfolio:<group>` task may load
+compact continuity and lazy direction pointers when its accepted comparison
+packet names that dependency. Continuity is navigation only; the real Explorer
+task tree remains authoritative.
+
+An accepted proposal records only the active scope's scientific and handoff
+locators, dependency, next action and intake meaning. These are readable
+continuity cues, not a second workflow contract. Root remains the physical
+writer, and continuity does not alter scientific ordering, source authority,
+read-only children or the Explorer semantic-author boundary. Do not add writer
+scripts, machine coordination state, budgets or user gates to continuity.
+
+The human-readable Direction Action Map and its park/reactivation semantics are
+defined by `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`; this
+reference adds no second procedure. A reverse-intake correction is one small
+Explorer-authored semantic delta written to one assignment-specific temporary
+patch; the full map is not carried through messages or split/encoded transport.
+The detailed source owns exact source/target locators, old/new text,
+candidate-copy patch and Explorer semantic read/acceptance; this reference adds
+no second procedure or validator.
 
 ## Evidence-review mode
 
@@ -255,7 +258,7 @@ or validator.
 9. **Portfolio update.** Preserve every useful candidate, parent and child.
    Record source-result dependencies, mechanism and transfer edges, principle
    analyses, corrections, validation maturity, parked reasons and reactivation
-   conditions. Scheduling one direction never makes it the unique direction.
+    conditions. Choosing one direction never makes it the unique direction.
 10. **Next-cycle opportunity map.** Record every material in-boundary
     `new_mechanism|transfer|combination|important_correction|subdirection_split|cross_direction_inspiration`
     opportunity. Each binds exact sources or parents, novelty delta, expected
@@ -267,7 +270,7 @@ or validator.
 11. **Convergence or continuation.** Continue while a material opportunity
     remains inside the authorized boundary. Converge only after corpus coverage,
     principles reviews, required adversarial reviews, corrections and all six
-    opportunity classes are closed. Resource exhaustion is partial, not
+    opportunity categories are closed. Resource exhaustion is partial, not
     convergence. Return the multi-direction portfolio and exact residual gaps;
     never force an affirmative result or automatically promote it.
 
@@ -284,122 +287,59 @@ Only conclusion-bearing C work or a named science-review trigger loads
 `research-methodology.md`. It instantiates the
 game and information objects, membership process, identity ownership, clocks,
 strategic dependence, estimand, sampling, identification, strongest simple
-null, counterexample, replacement ledger and discriminator. Mechanical
+null, counterexample, replacement record and discriminator. Mechanical
 completeness never means scientific truth.
 
-## Independent-treatment dispatch, concurrency and authority
+## Runtime and compute requests
 
-### Stateless per-admission observation
+Runtime and compute requests remain ordinary natural-language requests. The
+Explorer brief must say exactly what action is requested, what resource it
+requires, what known conflict may affect it, and that the user authorized the
+request through Root. Root confirms and relays that meaning to the relevant
+same-level CPM task. CPM may inspect the named resource and observed conflict,
+but neither CPM nor Explorer invents an action, authorization or resource need.
+No fixed resource-control mechanism, persistent accounting, automated gate or
+integrity token is part of this workflow.
 
-For each result-bearing treatment that is not yet started, CPM creates a
-stateless observation only for that admission decision. The observation uses
-the handoff's prospective class/units and direction-local predecessor/intake
-closure as semantic inputs, then checks the currently active result-bearing
-treatments, their consumed units and heavy exclusivity, the treatment's
-identity and writable-root isolation, one-shot observed CPU, memory and process
-facts, CPM-supplied GPU/paid-service claims or conflicts, and exact output-root
-or other writable-path claims. The observation is
-discarded after the decision; it is not a queue record, lease, registry,
-history entry or scheduler state, and it never reads `local_research/`.
-CPM makes no external GPU/paid-service call or inference; it compares only the
-supplied claims/conflicts and exact paths with the frozen treatment boundary.
+The A/B/C evidence level remains a scientific description, not a resource
+request. A is read-only reconnaissance or a probe; B is a small exploratory toy
+experiment; C is conclusion-bearing, promotion/retirement or expensive work.
+Each named run fixes its code revision, configuration, seeds and budget cap.
+The brief names the real environment, policy, learner, trainer and evaluator
+calls when a B experiment is requested; synthetic checks alone are insufficient.
+Expense or a named resource does not supply scientific meaning or final
+acceptance.
 
-CPM alone makes the per-admission runtime judgment: `admit`, `up-class`, or
-`pending_runtime_capacity`. `up-class` is allowed only before a treatment
-starts when an observed engineering bottleneck requires a stronger class;
-down-classing is forbidden. `pending_runtime_capacity` applies only to the
-not-yet-started treatment that cannot fit the observed pool or bottleneck and
-never creates a task, direction or workflow `BLOCKED` state. A missing semantic
-class/unit or predecessor/intake cue is a clarification, not a capacity
-judgment.
+## Parallel dispatch, direction barriers and recovery
 
-The normal path for two or more scientifically selected and frozen independent
-treatments is parallel-first when each direction's local predecessor/intake
-barrier is closed and admitted capacity is available. Serialize only an exact
-scientific/dependency predecessor, capacity/admission, a formal or actually
-observed resource conflict, or a same mutable-path/object conflict. Attribution,
-generic caution, completion order, convenience and a current sole action are
-not dependency or resource evidence and cannot restore a global serial fallback.
-This rule does not make Explorer invent or select work, fill capacity, change
-scientific priority or reactivate a parked direction. It preserves
-pending-runtime-capacity and non-runtime continuation, existing Pro triggers and
-formal nine-iteration behavior.
+The normal path is parallel-first for scientifically selected independent
+treatments whose direction-local predecessor and intake barriers are closed and
+whose named resources do not conflict. Different directions retain separate
+identity, candidate revision, run/evidence roots, temporary paths and mutable
+objects. By default, a direction has at most one result-bearing treatment active;
+same-direction overlap requires an exact frozen joint roster in which designs
+do not depend on peer results or share mutable objects.
 
-The workflow defines no fixed per-role parallel count. Exact source and
-opportunity rosters determine logical work; current Codex capacity determines
-how many read-only analyses run simultaneously. Runtime experiments use a
-three-unit pool owned operationally by CPM: `A_READONLY_OR_ZERO_RUNTIME` consumes
-zero, `B_TOY_LIGHT` one, `B_TOY_MEDIUM` two, and `B_HEAVY_OR_C` all three with
-experiment-pool exclusivity. Thus three independent light treatments, or one medium plus
-one light, may run; a heavy/C treatment requires every other result-bearing
-runtime treatment to be terminal. A fourth light remains
-`pending_runtime_capacity` until one unit is released. Explorer declares a prospective class from
-the frozen design. CPM may up-class or defer a not-yet-started treatment for
-one-shot observed CPU, memory or process facts, CPM-supplied GPU/paid-service
-claims or conflicts, or exact output-root/path constraints, but
-never down-class it or change its scientific question, priority or branch map.
-Insufficient capacity is `pending_runtime_capacity`, never a direction, task or
-workflow `BLOCKED` state, and creates no queue engine, lease, dispatcher or
-acceptance owner. Formal or explicitly heavy runtime may prevent another
-result-bearing experiment from starting, but it never pauses code work,
-read-only research, scientific intake, External Pro review or another
-non-runtime action. All non-experiment work that does not contend for the
-observed bottleneck continues. One command that contends for that same actual
-resource may be delayed without creating `BLOCKED`; that delay is local to the
-command and is not a workflow barrier.
+Serialize only for an exact scientific/dependency predecessor, a formal or
+actually observed resource conflict, or a same mutable-path/object conflict.
+Attribution, completion order, convenience, or a current sole action never
+restores a global serial fallback. When CPM finds a real conflict or unavailable
+resource, it returns that concrete fact through Root; Explorer continues safe
+read-only analysis, intake, review and other non-runtime work. A treatment not
+yet started may wait locally for that named fact, but no task-wide state is
+created and unrelated work continues.
 
-Read-only Explorer science lanes (direction children, Critic, Principles,
-Innovator, Scout and Pro review) are independent of CPM pool/admission by
-default. Only an exact scientific question that depends on an unreturned CPM
-result creates a direction-local science barrier; capacity and admission never
-throttle an independent read-only lane.
+On a returned CPM result or Root continuation event, Explorer intakes returned
+results first, then considers work whose exact predecessor and resource facts
+are clear. One unchanged low-cost operational retry is allowed for a failed
+research-child question; one engineering recovery that preserves every frozen
+scientific literal is allowed before a result-bearing run starts. There is no
+clock-driven activation, polling loop or forced termination. External Pro
+triggers remain the existing direction-changing ambiguity, final alignment,
+C/formal boundary or explicit-user request; B completion or parallelism alone
+never starts Pro.
 
-A light treatment is normally CPU-only, uses no GPU, paid API or production
-service, stays at or below roughly 500,000 real transitions and 100,000 optimizer
-updates, has explicit memory/process/output-root bounds, and permits one full,
-no sweep and no implicit retry. The thresholds guide prospective admission rather
-than mechanically decide scientific meaning. Formal, expensive, GPU, paid-
-resource and C work is heavy/exclusive even if a superficial count is small.
-
-The attribution barrier is direction-local. Different directions' independent
-ordinary A/B treatments may run concurrently. By default a direction has at most
-one result-bearing treatment active, and its next treatment cannot be dispatched
-until that predecessor is terminal and Explorer completes the direction's
-scientific intake. Same-direction parallelism is exceptional: Explorer must
-freeze one exact joint roster before any member starts, every design must be
-independent of peer results, and no member may share a mutable scientific object.
-The joint roster still consumes the common capacity pool. Completion order is
-never scientific priority, voting or a cross-direction barrier. A completed
-result may be intaken immediately; it cannot modify the frozen design of another
-already-started full. Explorer may cancel a not-yet-started roster item whose
-value has fallen, but never mutates a result-bearing full.
-
-Every concurrent treatment has distinct direction/treatment identity, canonical
-design/assignment, source freeze and accepted candidate revision, run, evidence,
-checkpoint and result roots, seed/RNG namespace, temporary session paths, Operator
-receipt, readiness/technical-acceptance record and Explorer decision. Same-file
-writes, reused run roots, shared mutable checkpoints or trainer state, and
-mid-run cross-treatment result injection fail closed. OOM, process conflict or
-shared-path conflict affects only the treatment that encountered it. CPM may
-leave a not-yet-started candidate treatment pending under CPU or memory pressure without changing
-scientific ordering. One engineering recovery that preserves every scientific
-literal is allowed before the result-bearing full starts; after it starts there
-is no silent retry.
-
-Explorer progress is event-driven or Root-resumed. A persistent Explorer
-progress form is not part of this workflow. On a returned CPM result or Root
-continuation event, restore the active roster, intake returned results
-first, and consider any treatment whose exact predecessor/intake barrier is
-closed and whose admission permits start. No clock-driven activation, forced
-termination, dispatch quota, polling loop or scheduler is part of this workflow.
-A continuation event with no free runtime token still permits intake, analysis
-and other non-runtime work.
-External Pro may overlap a
-small B runtime, but only the existing direction-changing ambiguity, final
-alignment, C/formal boundary or explicit-user trigger starts Pro; B completion or
-parallelism alone never does.
-
-Campaign phase dependencies remain ordered. Children
-cannot spawn, write, use Git, contact sibling/other tasks or access active
-HMASD state. There is no minimum-duration rule or forced large-agent target. Only the
-user may expand the source/project authority boundary or initiate formal work.
+Campaign phase dependencies remain ordered. Children cannot spawn, write,
+use Git, contact a sibling or other task, or access active HMASD state. Only
+the user may expand the source/project authority boundary or initiate formal
+work.
