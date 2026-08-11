@@ -6,19 +6,22 @@ $repo = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $config = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/config.toml')
 $profilePath = Join-Path $repo '.codex/agents/hmasd-cpm-mechanical.toml'
 $rolePath = Join-Path $repo '.agents/roles/CPM_MECHANICAL_OPERATOR.md'
+$cpmRolePath = Join-Path $repo '.agents/roles/CODE_PROJECT_MANAGER.md'
 $skillPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/SKILL.md'
 $scriptPath = Join-Path $repo '.agents/skills/hmasd-agile-research-development/scripts/hmasd_cpm_mechanical.py'
-foreach ($path in @($profilePath, $rolePath, $skillPath, $scriptPath)) {
+foreach ($path in @($profilePath, $rolePath, $cpmRolePath, $skillPath, $scriptPath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing CPM mechanical path: $path" }
 }
 
 $profile = Get-Content -Raw -LiteralPath $profilePath
 $role = Get-Content -Raw -LiteralPath $rolePath
+$cpmRole = Get-Content -Raw -LiteralPath $cpmRolePath
 $skill = Get-Content -Raw -LiteralPath $skillPath
 $skillNormalized = $skill -replace '\s+', ' '
 $script = Get-Content -Raw -LiteralPath $scriptPath
+$runtimeAnchorSurface = @($cpmRole, $role, $skillNormalized) -join ' '
 
-foreach ($path in @($profilePath, $rolePath, $scriptPath)) {
+foreach ($path in @($profilePath, $rolePath, $cpmRolePath, $scriptPath)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing CPM mechanical path: $path" }
 }
 
@@ -70,28 +73,37 @@ foreach ($required in @(
     'no Git or canonical-state acceptance authority')) {
     if (-not $role.Contains($required)) { throw "CPM mechanical role missing: $required" }
 }
+# Runtime admission is no longer a mechanical child capability.  The active
+# contract records the absence of a unit pool while leaving scope-local
+# judgment with CPM and factual host observation with Root.
 foreach ($required in @(
-    'stateless runtime-capacity observation',
-    'active treatment/process/unit/path facts',
-    'prospective class/units',
-    'Windows CPU, memory and process facts',
-    'exact output/writable path claims',
+    'runtime_unit_accounting=none',
+    'runtime_pool=none',
+    'runtime_class_quota=none',
+    'runtime_reservation=none',
+    'runtime_admission_ledger=none',
+    'runtime_observation_owner=root_mechanical',
+    'runtime_observation_facts=live_processes|cpu|memory|concrete_resource_conflicts',
+    'runtime_judgment_owner=code_project_manager_scope_local',
+    'high_cost_runtime_authorization=explicit_user_task_via_root',
+    'max_threads=20',
+    'max_threads_semantics=agent_concurrency_ceiling_only',
+    'max_threads_runtime_authorization=none',
+    'parallelism_runtime_authorization=none')) {
+    if (-not $runtimeAnchorSurface.Contains($required)) {
+        throw "CPM runtime anchor missing: $required"
+    }
+}
+foreach ($retired in @(
     'fixed three-unit arithmetic',
-    'assignment-named temporary factual snapshot',
+    'runtime_capacity_pool_units=3',
     'admit|up-class|pending_runtime_capacity',
-    'Incomplete live facts are reported',
-    'not a monitor',
-    'retry, lease, queue or persistent roster',
-    'does not create a state machine',
     'reserved and free units before and after the request',
-    'explicit GPU, paid-service and prospective-process',
-    'CPU, memory, process, output-path and writable-path',
-    'CPM-supplied CPU-unit and memory-byte claims',
-    'one-shot host facts for direct pressure conflicts',
-    'missing host fields remain incomplete',
-    'No external paid-service call or GPU inference',
-    'active-treatment summary preserves one complete row per input treatment')) {
-    if (-not $role.Contains($required)) { throw "CPM mechanical capacity capability missing: $required" }
+    'runtime class/units',
+    'runtime admission ledger')) {
+    if ($role.Contains($retired) -or $skill.Contains($retired) -or $script.Contains($retired)) {
+        throw "Retired CPM runtime-pool contract remains: $retired"
+    }
 }
 if ($profile.Contains('hmasd_cpm_mechanical.py run --spec') -or $profile.Contains('schema_version=1') -or $profile.Contains('PYTHONDONTWRITEBYTECODE=1')) {
     throw 'CPM mechanical profile must remain thin; dispatcher procedure belongs to the role/Skill'

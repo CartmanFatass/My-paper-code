@@ -48,7 +48,6 @@ foreach ($required in @(
     'reasoning_effort=low',
     'compute_authority=derived_from_valid_code_project_manager_assignment',
     'per_run_user_authorization_reference=not_required',
-    'grant_admission_owner=code_project_manager',
     'concurrency_authority=isolation_only',
     'scheduler_authority=none',
     'progress_notifications=forbidden',
@@ -119,8 +118,7 @@ foreach ($required in @(
 foreach ($required in @(
     'receives and executes one exact treatment only',
     'enforces that treatment''s worktree, run, evidence, checkpoint, result and temporary roots are isolated',
-    'no authority to schedule, serialize or coordinate peer treatments',
-    'Parallel-first admission and any permitted serialization decision belong to Code Project Manager')) {
+    'no authority to schedule, serialize or coordinate peer treatments')) {
     if (-not $roleNormalized.Contains($required)) { throw "Operator isolation-only boundary missing: $required" }
 }
 foreach ($required in @(
@@ -170,19 +168,34 @@ foreach ($required in @(
     if (-not $managerNormalized.Contains($required)) { throw "CPM experiment delegation contract missing: $required" }
 }
 foreach ($required in @(
-    'the three-unit runtime pool and live process/resource observations',
+    'runtime_unit_accounting=none',
+    'runtime_pool=none',
+    'runtime_class_quota=none',
+    'runtime_reservation=none',
+    'runtime_admission_ledger=none',
+    'runtime_observation_owner=root_mechanical',
+    'runtime_observation_facts=live_processes|cpu|memory|concrete_resource_conflicts',
+    'runtime_judgment_owner=code_project_manager_scope_local',
+    'high_cost_runtime_authorization=explicit_user_task_via_root',
+    'max_threads=20',
+    'max_threads_semantics=agent_concurrency_ceiling_only',
+    'max_threads_runtime_authorization=none',
+    'parallelism_runtime_authorization=none')) {
+    if (-not $managerNormalized.Contains($required)) { throw "CPM no-runtime-pool anchor missing: $required" }
+}
+foreach ($retired in @(
+    'the three-unit runtime pool',
+    'runtime_capacity_pool_units=3',
     'runtime_admission_observation=stateless_per_admission',
     'runtime_admission_judgment=admit|up-class|pending_runtime_capacity',
-    'CPM''s only runtime judgment is `admit`, `up-class` or `pending_runtime_capacity`',
-    'Capacity deferral applies only to the not-yet-started treatment',
-    'never creates a task, direction or workflow `BLOCKED` state',
-    'scientific A/B/C evidence level is independent of runtime class',
-    'never infers class, units or barrier closure from a science label or `local_research/`',
-    'one independent technical acceptance and one conclusion-first reverse result',
-    'An exclusive formal/heavy run reserves only experiment-runtime admission',
-    'All non-experiment work that does not contend for the observed bottleneck continues',
-    'one command contending for that same actual resource may be delayed without creating `BLOCKED`')) {
-    if (-not $managerNormalized.Contains($required)) { throw "CPM runtime-capacity boundary missing: $required" }
+    'runtime class/units',
+    'reserves only experiment-runtime admission',
+    'reserved and free units',
+    'requested/free units',
+    'runtime admission ledger')) {
+    if ($manager.Contains($retired) -or $role.Contains($retired) -or $skill.Contains($retired)) {
+        throw "Retired experiment runtime-pool contract remains: $retired"
+    }
 }
 foreach ($required in @(
     'one assignment-named terminal receipt path',

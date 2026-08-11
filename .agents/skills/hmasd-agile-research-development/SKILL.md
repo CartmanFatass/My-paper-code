@@ -9,10 +9,12 @@ description: Use when implementing, debugging, refactoring, or validating explor
 
 Read the root router, the role contract, and exact Root/CPM assignment brief. This procedure grants no
 science, formal compute, transport, or acceptance authority. External Pro owns
-scientific decisions. Code Project Manager alone accepts code, coordinates the
-project, directs engineering repair, and owns runtime and transport. Root owns
-cross-owner relay, physical canonical writes and Git mechanics. A bounded child
-requires an exact assignment and never scopes, accepts, or commits its work.
+scientific decisions. Code Project Manager alone accepts code, coordinates one
+`code_scope_key`, directs engineering repair, and makes scope-local technical and
+runtime judgments. Root owns agent lifecycle, cross-owner relay, physical
+canonical writes, managed-worktree lifecycle and Git mechanics. Costly runtime
+requires an explicit user task routed through Root. A bounded child requires an
+exact assignment and never scopes, accepts, or commits its work.
 
 This Skill is action-triggered context, not CPM default startup context: load it
 only for an assignment-named implementation, debugging, refactoring or
@@ -20,10 +22,13 @@ validation action. For such an action, apply the Root-managed tracked-write
 worktree contract in
 `docs/session-workspaces/code_project_manager/README.md` before writing tracked
 paths or mixed tracked/ignored output; read-only, ignored-only and
-temporary-only work is exempt. The worktree is a Root-owned physical resource,
-not identity, authority or runtime admission, and consumes zero units; CPM's
-runtime pool remains three. L2 children never create/manage worktrees or use
-raw child worktree commands.
+temporary-only work is exempt. One writable L1 assignment uses one Root-managed
+worktree. Parallel L2 tracked writers with the same frozen base and
+exact disjoint paths share that worktree; Root waits for them and creates one
+slice candidate from their union. Different CPM assignments use independent
+worktrees and integration uses a separate worktree. This physical resource is
+not identity, authority or runtime authorization. L2 children never
+create/manage worktrees or use raw child worktree commands.
 
 ```text
 superpowers_plugin=reference_only
@@ -82,14 +87,20 @@ passive relay path or completion-token acceptance; assignments remain
 natural-language contracts and CPM checks action-bearing conclusions and
 concrete postconditions.
 
-Disjoint file families and admitted treatments use the parallel-first path.
-While a child or experiment is outstanding, CPM continues independent mapping,
-review, integration, assignment and acceptance work. CPM waits in a bounded
-fashion only when every remaining safe action depends on that result. Same-file
-writer exclusion and existing `fork_turns` contracts remain required; children
-never accept, stage, commit, push, change science, choose runtime admission or
-update canonical CPM state. This path adds no scheduler, queue or registry,
-uses no time-triggered wake-up loop, and changes no science or runtime state.
+Disjoint code-scope assignments use the parallel-first path. While a child or
+experiment is outstanding, CPM continues independent mapping, review,
+integration, assignment and acceptance work. CPM waits in a bounded fashion
+only when every remaining safe action depends on that result. Same-file writer
+exclusion and existing `fork_turns` contracts remain required; children never
+accept, stage, commit, push, change science, authorize costly runtime or update
+canonical CPM state. Root may dispatch multiple CPM L1 instances with caller
+action `fork_turns=1` and self-contained assignments; each scoped CPM may fan
+out registered L2 leaves within depth 2 and performs technical acceptance for
+its slice. After Root integrates accepted slices, Root dispatches a fresh
+Convergence CPM with a self-contained union assignment for overall technical
+and runtime acceptance. This path adds no scheduler, queue, registry, quota,
+reservation, retry mechanism or runtime ledger, uses no time-triggered wake-up
+loop, and changes no science or runtime state.
 
 The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the markers
 above explicitly disable it. Never invoke or chain generic Superpowers Skills.
@@ -124,12 +135,11 @@ acceptance owner.
 
 ## Action-triggered references and action-bearing Explorer↔CPM interface
 
-Load the parallel-research runtime reference only for a result-bearing
-treatment/admission action; load the execution-readiness Role and helper only
-when the existing execution-entry, artifact-lifecycle, serialization or
-phase-connection trigger fires. Load the Explorer↔CPM contract and project
-maps/views only when the assignment names an Explorer handoff or a coupled or
-load-bearing project task. These references remain outside default startup.
+Load the execution-readiness Role and helper only when its existing
+execution-entry, artifact-lifecycle, serialization or phase-connection trigger
+fires. Load the Explorer↔CPM contract and project maps/views only when the
+assignment names an Explorer handoff or a coupled or load-bearing project task.
+These references remain outside default startup.
 
 Use `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md` as the single
 detailed source. CPM consumes and returns action-bearing prose; it never infers
@@ -138,12 +148,16 @@ live replacement exists, while ordinary engineering gaps go to CPM. A missing or
 contradictory meaning preserves the original, asks one exact clarification and
 continues unrelated work.
 
-The normal runtime path remains the existing
-`runtime_capacity_pool_units=3`,
-`independent_admitted_treatment_execution=parallel_first_within_capacity`, and
-`runtime_admission_judgment=admit|up-class|pending_runtime_capacity` contract
-in the parallel-research reference; event-driven continuation has no
-clock-driven scheduler or polling.
+For any runtime-bearing action, Root mechanically observes actual live
+processes, CPU, memory and concrete resource conflicts. CPM consumes those
+observations for scope-local technical/runtime judgment. The active runtime
+contract is `runtime_unit_accounting=none`, `runtime_pool=none`,
+`runtime_class_quota=none`, `runtime_reservation=none`, and
+`runtime_admission_ledger=none`; this Skill adds no monitoring or stateful
+runtime control mechanism. High-cost runtime requires an
+explicit user task routed through Root. Path, worktree and code parallelism do
+not authorize costly runtime, and `max_threads=20` is an agent-concurrency
+ceiling only. No runtime or costly execution is authorized by this Skill alone.
 CPM maintains its owner-local view at
 `docs/project/current-work/common/explorer_project_validation.md`; the view is
 not a second semantic source.
@@ -324,34 +338,28 @@ slice.
 
 ## Concurrency and review
 
-- One writer owns each file; disjoint paths may run in parallel. No global lease.
-- Explorer-origin result-bearing treatments use the three-unit capacity,
-  admission, barrier and resource contract defined only by
-  `.agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md`.
-  CPM is the operational owner and makes a stateless per-admission judgment of
-  `admit`, `up-class` or `pending_runtime_capacity`; this Skill adds no second
-  capacity procedure. Capacity deferral applies only to a not-yet-started
-  treatment and never creates `BLOCKED`. The scientific A/B/C evidence level is
-  independent of runtime class; CPM never infers class or barrier from science
-  or `local_research/`.
-- Once Explorer has selected and frozen independent direction treatments and CPM
-  has admitted isolated candidate treatments within the three-unit pool, the normal
-  execution path remains
-  `independent_admitted_treatment_execution=parallel_first_within_capacity`.
-  Serialization exceptions, heavy-pool exclusivity and event-driven Explorer
-  continuation are defined by the parallel-research workflow reference. CPM
-  treatment dispatch is constrained only by an exact scientific/dependency
-  predecessor, capacity/admission, a formal or actually observed resource
-  conflict, or a same mutable-path/object conflict. Read-only Explorer science
-  lanes remain independent of CPM pool/admission by default; only an exact
-  question depending on an unreturned CPM result creates a direction-local
-  science barrier. All non-experiment work that does not contend for the
-  observed bottleneck continues; one command contending for that same actual
-  resource may be delayed without `BLOCKED`.
-- Concurrent-treatment identity, isolated roots, shared-mutable-state rejection,
-  failure containment and one-acceptance-per-result remain required as defined by
-  the parallel-research workflow reference; this Skill does not duplicate those
-  resource and barrier mechanics.
+- One writable L1 assignment owns one Root-managed worktree. Disjoint tracked
+  L2 writers under that L1 share its common frozen base and exact path boundary;
+  L2 children have no Git, helper or worktree-lifecycle authority. Root waits
+  for the L2 children and creates one CPM slice candidate from their union.
+- Different CPM L1 assignments use independent Root-managed worktrees, and
+  Root integrates accepted slices in a separate worktree. If an independent
+  candidate or lifecycle is needed, Root creates a new writable L1 assignment;
+  no L2 receives an independent worktree.
+- Root may dispatch multiple CPM L1 instances by unique `code_scope_key` with
+  caller action `fork_turns=1` and a self-contained assignment. Each scoped CPM
+  may fan out registered L2 leaves within depth 2 and technically accepts its
+  slice. After Root integrates accepted slices, Root dispatches a fresh
+  Convergence CPM with a self-contained union assignment for overall
+  technical/runtime acceptance.
+- Root mechanically observes live processes, CPU, memory and concrete resource
+  conflicts. CPM uses those observations for scope-local technical/runtime
+  judgment. Path, worktree and code parallelism never authorize costly runtime;
+  `max_threads=20` is an agent-concurrency ceiling only. High-cost runtime
+  requires an explicit user task routed through Root.
+- Children do not perform Git or acceptance. Focused checks and execution
+  readiness remain conditional on the existing triggers; no scheduler, queue,
+  registry, quota, reservation, retry mechanism or runtime ledger is added.
 - Before a result-bearing full starts, CPM may issue at most one engineering
   recovery that preserves all scientific literals. A light treatment is one-full,
   no sweep and no implicit retry. Once the full starts, CPM returns its terminal

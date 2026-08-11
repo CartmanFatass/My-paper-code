@@ -179,6 +179,57 @@ class SpecializedChildContextTest(unittest.TestCase):
         self.assertIn("semantic task authority", mechanical)
         self.assertIn("deterministic I/O anchors only", mechanical)
 
+    def test_multi_cpm_scope_and_no_runtime_pool_contract(self) -> None:
+        """Pin the active multi-CPM boundary without exercising runtime code."""
+        agents = compact(read("AGENTS.md"))
+        cpm = compact(read(".agents/roles/CODE_PROJECT_MANAGER.md"))
+        agile = compact(read(".agents/skills/hmasd-agile-research-development/SKILL.md"))
+
+        active = " ".join((agents, cpm, agile))
+        for term in (
+            "multiple_scoped_instances_per_root_tree=true",
+            "cpm_instance_identity=code_scope_key",
+            "root_scope_dispatch=fork_turns=1|self_contained_assignment",
+            "scoped_cpm_l2_fanout=registered_l2_within_depth_2",
+            "scope_technical_acceptance=code_project_manager",
+            "convergence_cpm=fresh_root_dispatch_after_scope_integration",
+            "convergence_assignment=self_contained_union",
+            "convergence_acceptance=overall_technical_and_runtime",
+            "root_lifecycle_git_relay=exclusive",
+            "tracked_writer_worktree=one_root_managed_worktree_per_writable_l1_assignment",
+            "parallel_l2_writers_same_base_disjoint_paths=share_l1_worktree",
+            "parallel_cpm_assignments_worktrees=independent",
+            "integration_worktree=separate_root_managed_worktree",
+            "worktree_l2_lifecycle=forbidden",
+            "technical_acceptance_authority=exclusive",
+            "runtime_authority=scope_local_technical_runtime_judgment",
+            "runtime_unit_accounting=none",
+            "runtime_pool=none",
+            "runtime_class_quota=none",
+            "runtime_reservation=none",
+            "runtime_admission_ledger=none",
+            "runtime_observation_owner=root_mechanical",
+            "runtime_observation_facts=live_processes|cpu|memory|concrete_resource_conflicts",
+            "runtime_judgment_owner=code_project_manager_scope_local",
+            "high_cost_runtime_authorization=explicit_user_task_via_root",
+            "max_threads=20",
+            "max_threads_semantics=agent_concurrency_ceiling_only",
+            "max_threads_runtime_authorization=none",
+            "parallelism_runtime_authorization=none",
+        ):
+            self.assertIn(term, active)
+
+        for retired in (
+            "runtime_capacity_pool_units=3",
+            "three-unit runtime pool",
+            "runtime_admission_observation=stateless_per_admission",
+            "runtime_admission_judgment=admit|up-class|pending_runtime_capacity",
+            "reserved and free units",
+            "requested/free units",
+            "runtime admission ledger",
+        ):
+            self.assertNotIn(retired, active)
+
 
 if __name__ == "__main__":
     unittest.main()
