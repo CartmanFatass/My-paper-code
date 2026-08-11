@@ -50,6 +50,21 @@ Those anchors narrow execution; they do not carry the task's meaning. A parent
 is a context compiler, not a field copier. A shorter brief is correct when it
 contains enough meaning for the bounded task.
 
+### Small reverse-intake patch brief
+
+For an Explorer Direction Action Map reverse intake, the self-contained brief
+must carry a small semantic delta rather than the full map. State the canonical
+source locator, candidate-target locator, Git revision locator, exact old/new
+text or unified patch, and the frozen semantics and consequences. Name one exact
+assignment-specific temporary `.patch` destination under
+`temp/sessions/independent_research_explorer/<root-assignment>/state-proposals/`.
+The Writer copies the supplied payload exactly and performs only destination,
+payload-presence and UTF-8/LF checks. It must not load Explorer Mechanical or
+another unrelated Skill, normalize or merge text, infer a target or interpret
+scientific meaning. No full-map message, split/encoded payload, hash, digest,
+byte count, length or JSON receipt is a workflow admission or acceptance
+condition; a Git revision is only a source locator.
+
 ### Native default temporary-task exception
 
 When an L1 has no listed specialist leaf that can perform the bounded task, a
@@ -136,6 +151,13 @@ when safe; do not duplicate an active send, turn an answer fragment into a
 success, or invent missing content. Report the unresolved conflict plainly so
 the owning parent can choose the next legal action. Recovery does not transfer
 acceptance authority.
+
+When a reverse-intake exchange fails, record the mechanism family precisely:
+large message truncation is payload transport; a Writer using the wrong Skill or
+path is assignment/path confinement; newline or pipe damage is serialization.
+Only a locator or archive that remains wrong after decoding is a semantic-author
+or acceptance issue. These observations are evidence for the owner, not a
+dispatcher, queue or automatic recovery mechanism.
 
 ## Progressive disclosure
 

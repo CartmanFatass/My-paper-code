@@ -59,6 +59,11 @@ explorer_transport_callable=hmasd-explorer-agentify-transport
 explorer_transport_parent=independent_research_explorer
 explorer_transport_requester_partition=required
 explorer_transport_return=explorer_to_root
+reverse_intake_contract=docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md
+reverse_intake_transport=assignment_specific_temporary_patch
+reverse_intake_full_map_transport=forbidden
+reverse_intake_retry=one_concrete_delta_clarification_only
+reverse_intake_queue_or_validator=forbidden
 shared_explorer_transport_profile=absent
 explorer_mechanical_scientific_roster=excluded
 explorer_mechanical_barrier=none
@@ -184,6 +189,12 @@ park/reactivation semantics are defined by
 machine fields or acceptance role. Runtime/admission mechanics remain defined
 only in this reference, including the three-unit pool and event-driven or
 Root-resumed continuation; there is no clock-driven scheduler or polling loop.
+A reverse-intake correction is a small Explorer-authored semantic delta written
+to one assignment-specific temporary patch; the full map is not carried through
+messages or split/encoded transport. The detailed source owns the exact
+source/target locators, old/new text, candidate-copy patch and Explorer semantic
+read/acceptance; this reference adds no second procedure, queue, receipt schema
+or validator.
 
 ## Evidence-review mode
 

@@ -1,6 +1,6 @@
 ---
 name: hmasd-independent-research-exploration
-description: Use in the task-scoped HMASD Independent Research Explorer L1 assignment for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with research outputs confined to local_research and explicit handoffs confined to the shared ignored temporary outbound path.
+description: Use in the task-scoped HMASD Independent Research Explorer L1 assignment for bounded evidence review, an adaptive source-absorption and algorithm-inspiration campaign, or advisory validation of one mature candidate, with research outputs confined to owner-controlled paths, explicit handoffs confined to the shared ignored temporary outbound path, and reverse-intake deltas confined to assignment-specific temporary patches.
 ---
 
 # HMASD Independent Research Exploration
@@ -25,6 +25,10 @@ Restart continuity is semantically proposed by Explorer L1 and physically
 written by Root alone after the accepted proposal/revision check, as specified
 once in `references/parallel-research-workflow.md`; this Skill keeps the mode
 loop and scientific packet requirements.
+Small Direction Action Map reverse-intake corrections use the separate
+assignment-specific temporary-patch path defined by
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`; they never transport the
+full map through messages or split/encoded payloads.
 
 ## Compact startup and action-triggered context
 

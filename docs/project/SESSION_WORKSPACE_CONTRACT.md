@@ -54,6 +54,16 @@ cpm_mechanical_assignment=CPM_MECHANICAL_TASK_ASSIGNMENT
 cpm_mechanical_assignment_locators=spec_path|result_path
 cpm_mechanical_result=CPM_MECHANICAL_TASK_RESULT
 cpm_mechanical_result_locator=result_path
+explorer_reverse_intake_patch_root=temp/sessions/independent_research_explorer/<root-assignment>/state-proposals/
+explorer_reverse_intake_patch_locator=<patch-root>/<proposal>.patch
+explorer_reverse_intake_payload=small_self_contained_semantic_delta
+explorer_reverse_intake_payload_bindings=canonical_source_locator|candidate_target_locator|git_revision_locator|exact_old_new_text_or_unified_patch|frozen_semantics_and_consequences
+explorer_reverse_intake_writer=hmasd-research-artifact-writer
+explorer_reverse_intake_writer_check=exact_destination|payload_presence|UTF-8/LF
+explorer_reverse_intake_full_map_transport=forbidden
+explorer_reverse_intake_root_install=exact_path_and_git_revision_check_then_exact_copy
+explorer_reverse_intake_retry=one_concrete_delta_clarification_only
+explorer_reverse_intake_retry_state_queue_receipt_validator=forbidden
 ```
 
 ## Ownership model
@@ -99,6 +109,17 @@ bytes. Neither path replaces canonical science, code, runtime evidence or
 review archives. A receiver reads only an assignment-named sender handoff; it
 does not write another role's workspace. Root controls relay and lifecycle for
 temporary bytes. No hash, byte count or digest is required for a handoff.
+
+The Explorer reverse-intake patch is an assignment-specific temporary proposal,
+not canonical state. Its brief carries one small semantic delta and the exact
+locators and old/new text needed to apply it; the full Direction Action Map is
+never moved through an agent message or split/encoded payload. The Writer uses
+only the exact destination and local UTF-8/LF checks. Root retains the canonical
+source, patches a task-scoped candidate copy once, and performs exact-copy
+installation only after Explorer's full-read semantic acceptance and Root's
+path/revision check. An anchor failure preserves the original and permits one
+concrete clarification only; this contract defines no retry state, queue,
+receipt schema, automatic recovery or validator.
 
 ## File-backed transport locators
 

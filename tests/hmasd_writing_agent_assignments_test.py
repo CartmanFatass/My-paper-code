@@ -131,3 +131,27 @@ def test_reference_ownership_moves_general_material_out_of_agile_skill() -> None
     assert ".agents/skills/hmasd-agile-research-development/references/assignment-brief-examples.md" not in agile
     assert "code context" in guide
     assert "focused on code context" in guide
+
+
+def test_reverse_intake_brief_forbids_full_map_transport_and_semantic_writer_inference() -> None:
+    text = _normalized(SKILL)
+    for cue in (
+        "small semantic delta rather than the full map",
+        "canonical source locator",
+        "candidate-target locator",
+        "git revision locator",
+        "exact old/new text or unified patch",
+        "frozen semantics and consequences",
+        "assignment-specific temporary `.patch`",
+        "payload-presence and utf-8/lf checks",
+        "must not load explorer mechanical",
+        "normalize or merge text",
+        "infer a target or interpret scientific meaning",
+        "full-map message",
+        "split/encoded payload",
+        "git revision is only a source locator",
+        "large message truncation is payload transport",
+        "newline or pipe damage is serialization",
+        "not a dispatcher, queue or automatic recovery mechanism",
+    ):
+        assert cue in text, cue
