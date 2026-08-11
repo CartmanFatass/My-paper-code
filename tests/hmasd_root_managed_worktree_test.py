@@ -70,6 +70,80 @@ def test_normal_lifecycle_provision_audit_and_clean_release(repo):
     assert git(repo[0], "worktree", "list", "--porcelain").count(str(repo[2])) == 0
 
 
+def test_one_l1_worktree_is_shared_by_two_disjoint_writer_slices(repo):
+    provisioned = provision(repo)
+    managed = repo[2]
+    receipt_before_writes = repo[3].read_bytes()
+
+    writer_a = managed / "writer_a.txt"
+    writer_b = managed / "writer_b.txt"
+    writer_a.write_text("slice A\n", encoding="utf-8")
+    writer_b.write_text("slice B\n", encoding="utf-8")
+
+    assert writer_a.read_text(encoding="utf-8") == "slice A\n"
+    assert writer_b.read_text(encoding="utf-8") == "slice B\n"
+    assert provisioned["receipt"]["assignment_id"] == args(repo)["assignment_id"]
+    assert provisioned["receipt"]["managed_path"] == str(managed)
+    assert repo[3].read_bytes() == receipt_before_writes
+    assert git(repo[0], "worktree", "list", "--porcelain").count(managed.as_posix()) == 1
+    assert list(repo[3].parent.glob("*.json")) == [repo[3]]
+
+
+def test_distinct_l1_assignments_have_distinct_worktrees_and_receipts(repo):
+    root, common, _, _, base = repo
+    first = {
+        "repo_top": root,
+        "git_common_dir": common,
+        "managed_path": root.parent / "managed-first",
+        "receipt_path": root.parent / "receipts" / "first.json",
+        "assignment_id": "L1-ASSIGNMENT-FIRST",
+    }
+    second = {
+        "repo_top": root,
+        "git_common_dir": common,
+        "managed_path": root.parent / "managed-second",
+        "receipt_path": root.parent / "receipts" / "second.json",
+        "assignment_id": "L1-ASSIGNMENT-SECOND",
+    }
+
+    first_result = helper.provision_worktree(**first, base_commit=base)
+    second_result = helper.provision_worktree(**second, base_commit=base)
+
+    assert first_result["receipt"]["assignment_id"] != second_result["receipt"]["assignment_id"]
+    assert first_result["receipt"]["managed_path"] != second_result["receipt"]["managed_path"]
+    assert first["receipt_path"] != second["receipt_path"]
+    worktrees = git(root, "worktree", "list", "--porcelain")
+    assert worktrees.count(first["managed_path"].as_posix()) == 1
+    assert worktrees.count(second["managed_path"].as_posix()) == 1
+
+    assert helper.release_worktree(**first)["status"] == "RELEASED"
+    assert helper.release_worktree(**second)["status"] == "RELEASED"
+
+
+def test_root_integration_is_separate_and_single_for_shared_writer_outputs(repo):
+    provisioned = provision(repo)
+    root, _, managed, _, base = repo
+    assert provisioned["receipt"]["status"] == "PROVISIONED"
+    assert git(root, "rev-parse", "HEAD") == base
+
+    (managed / "writer_a.txt").write_text("integrated A\n", encoding="utf-8")
+    (managed / "writer_b.txt").write_text("integrated B\n", encoding="utf-8")
+    git(managed, "add", "writer_a.txt", "writer_b.txt")
+    candidate = git(managed, "commit", "-m", "shared writer outputs")
+    candidate = git(managed, "rev-parse", "HEAD")
+
+    assert git(root, "rev-parse", "HEAD") == base
+    recorded = helper.record_candidate(**args(repo), candidate_commit=candidate)
+    assert recorded["receipt"]["status"] == "CANDIDATE_RECORDED"
+    assert git(root, "rev-parse", "HEAD") == base
+
+    git(root, "merge", "--ff-only", candidate)
+    assert git(root, "rev-parse", "HEAD") == candidate
+    released = helper.release_worktree(**args(repo), accepted=True)
+    assert released["status"] == "RELEASED"
+    assert not managed.exists()
+
+
 def test_exact_base_path_and_assignment_validation(repo):
     root, common, managed, receipt, base = repo
     with pytest.raises(helper.WorktreeError):
