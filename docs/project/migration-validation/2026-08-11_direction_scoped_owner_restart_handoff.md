@@ -264,6 +264,51 @@ the whole schema/orientation assertion families once, and then submitted one
 final union to the Reviewer. That is the concrete prevention and recovery path
 for the same class of semantic drift.
 
+## Future requirement: WDM-maintained control-plane document routes
+
+The user requires WDM to maintain one compact routing table for control-plane
+documents. The purpose is simple: before WDM audits a workflow change, it should
+be able to look up which document defines the affected meaning, which other
+documents directly consume it, and which focused tests check that relationship.
+WDM should not need to rediscover the same repository relationships on every
+assignment.
+
+A future `WM_control_plane_routes` task should design and implement this table.
+The likely durable location is
+`docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md`, but the future WDM must confirm
+the exact path and coupled consumers before writing it.
+
+Each route should answer in ordinary language:
+
+- what concrete file or change trigger starts the route;
+- which Role, Skill or stable document defines the meaning;
+- which exact documents or small path families directly consume that meaning;
+- which focused tests provide the first useful evidence;
+- when the relationship is unclear enough to require a broader Auditor read.
+
+The table must stay compact and lazy. It must not copy document contents or
+store current tasks, progress, assignment status, history, hashes, receipts,
+queues, tickets, admission decisions or acceptance results. It is a stable map
+of document relationships, not another control system.
+
+Expected operating rule:
+
+1. WDM checks the route table before preparing a workflow assignment.
+2. A clear route lets WDM load only the named defining and direct-consumer
+   surfaces and run their focused tests.
+3. A missing, ambiguous, authority-crossing or conflicting route causes WDM to
+   use a bounded Workflow Auditor rather than guess.
+4. If an accepted workflow change adds, removes or changes a stable document
+   relationship, WDM updates the route table in the same accepted change.
+5. Deterministic tests check that named paths exist and that routes are not
+   duplicated or contradictory; WDM still decides whether the relationship is
+   semantically sufficient.
+
+This requirement is recorded only; it is not implemented by the current
+`WM_plain_language_contract` task. It is not a blocker for one bounded
+direction-flow smoke, but it should be completed before the next broad,
+multi-candidate control-plane redesign.
+
 ## Workflow-efficiency follow-up (not a restart blocker)
 
 This migration was slower than its edits because cross-candidate assertions ran
