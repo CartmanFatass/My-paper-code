@@ -277,23 +277,31 @@ def test_child_briefs_name_validation_scope_and_evidence_ownership() -> None:
 def test_progress_events_are_the_exact_wdm_observation_vocabulary() -> None:
     section = _section(SKILL, "### Progress-event communication")
     text = _normalized_text(section)
-    events = (
+    contract = _text(SESSION_CONTRACT)
+    contract_match = re.search(
+        r"(?m)^workflow_progress_event_names=(?P<events>[A-Z_]+(?:\|[A-Z_]+){4})\s*$",
+        contract,
+    )
+    assert contract_match is not None
+    events = tuple(contract_match.group("events").split("|"))
+    assert events == (
         "DISPATCHED",
         "WRITES_COMPLETE",
         "TESTS_COMPLETE",
         "REVIEW_READY",
         "TERMINAL",
     )
-    vocabulary_prefix = section.split("WDM publishes", 1)[0]
-    assert tuple(re.findall(r"`([A-Z_]+)`", vocabulary_prefix)) == events
+    # Read only the Skill's canonical first paragraph.  Later mechanical
+    # tokens (for example a `COMPLETE` marker) are not progress events.
+    first_paragraph = section.split("### Progress-event communication", 1)[1].strip().split("\n\n", 1)[0]
+    assert tuple(re.findall(r"`([A-Z_]+)`", first_paragraph)) == events
     for cue in (
-        "wdm-owned status observation",
-        "owner and meaning",
-        "workflow_progress_event_owner",
-        "workflow_progress_event_meanings",
-        "defining contract",
-        "reporting procedure",
-        "status-only observations",
+        "five session-defined names",
+        "single reporting source",
+        "status-only, non-accepting observation",
+        "emit each named observation at most once",
+        "adjacent relevant observations may share one outcome-first report",
+        "workflow_progress_event_emission=each_relevant_event_at_most_once|adjacent_observations_may_share_one_report",
         "never acceptance",
         "scheduler",
         "queue",
@@ -301,45 +309,84 @@ def test_progress_events_are_the_exact_wdm_observation_vocabulary() -> None:
         "background callback",
         "retry state",
         "admission",
-        "only that the owner returned its terminal conclusion",
+        "not a second state machine",
+        "do not create continuity",
         "background-context isolation",
         "not zero context",
+        "event name never replaces the explanation",
+        "no named heading or fixed record shape is required",
     ):
         assert cue in text
+    for cue in (
+        "workflow_progress_event_owner=wdm",
+        "workflow_progress_event_meanings=dispatched:actions_started|writes_complete:all_writers_terminal_and_exact_changed_paths_frozen|tests_complete:required_test_layers_completed_with_evidence|review_ready:exact_union_and_evidence_frozen_for_one_reviewer|terminal:terminal_conclusion_returned_to_root",
+        "workflow_progress_event_semantics=status_observations_only|not_scheduler|not_queue|not_ledger|not_background_callback|not_retry_state|not_admission|not_acceptance_token",
+        "workflow_progress_event_transport=root_task_or_report_boundary_only",
+        "workflow_terminal_event_not_acceptance=true",
+    ):
+        assert cue in _normalized(SESSION_CONTRACT)
 
 
 def test_risk_reviewer_and_manager_capacity_guidance_is_explicit() -> None:
     text = _normalized_text(
         _section(SKILL, "### Risk, reviewer and manager-capacity guidance")
     )
+    contract = _normalized(SESSION_CONTRACT)
+    high_start = text.index("`high`")
+    bounded_start = text.index("`bounded_contract`")
+    high_clause = text[high_start:bounded_start]
+    assert all(
+        consequence in high_clause
+        for consequence in ("authority", "topology", "cross-owner", "shared-contract")
+    )
+    assert "requires the registered read-only auditor" in high_clause
+    assert "may skip" not in high_clause
     for cue in (
-        "high-risk",
-        "authority",
-        "topology",
-        "cross-owner",
-        "shared-contract",
-        "read-only auditor",
-        "low-risk",
-        "one-file wording",
-        "test-only",
-        "concrete rationale",
+        "classify the assignment package by semantic consequence before dispatch",
+        "never by file count",
+        "`high` covers authority, topology, cross-owner or shared-contract impact",
+        "requires the registered read-only auditor",
+        "`bounded_contract` covers a stable cross-file contract within one owner",
+        "a clear route may skip a new auditor when wdm records its rationale",
+        "`low_causal_repair` covers wording, a recognizer or one bounded assertion family",
+        "wdm may skip the auditor with rationale",
+        "routing choice, not an admission state, gate or second owner",
+        "workflow_change_risk_tiers",
+        "workflow_route_table_policy",
+        "missing, ambiguous, conflicting or authority-crossing route uses the bounded registered auditor",
         "exactly one integrated advisory reviewer",
+        "dispatched only after the paths and direct evidence are frozen",
+        "reviewer is read-only and advisory",
+        "its review cannot accept the package or replace wdm/root ownership",
+        "skipping the auditor never means skipping this reviewer",
         "paths and direct evidence are frozen",
+        "manager capacity is an actionability check",
         "useful owned work",
         "useful action or matching leaf capacity",
         "not a quota, reservation, scheduler or pool",
     ):
         assert cue in text
+    for cue in (
+        "workflow_auditor_policy=high_requires_auditor|bounded_contract_clear_route_may_skip_with_wdm_rationale|low_causal_repair_may_skip_with_wdm_rationale|missing_ambiguous_conflicting_or_authority_crossing_route_requires_auditor",
+        "workflow_auditor_skip_evidence=concrete_wdm_rationale|focused_causal_evidence_on_all_frozen_consumed_bytes",
+        "workflow_integrated_review=exactly_one_advisory_reviewer_after_tests_complete_and_review_ready",
+        "workflow_reviewer_authority=advice_only_no_acceptance",
+        "workflow_root_l1_start_guidance_not=quota|reservation|scheduler|admission_gate|pool|runtime_authorization",
+    ):
+        assert cue in contract
     naming_and_boundary = _normalized(SKILL)
     for cue in (
         "wm_<purpose>",
         "em_<direction>",
         "cm_<purpose_or_direction>",
-        "one root-managed worktree",
-        "exact-disjoint l2 writers",
-        "child git, routing and acceptance authority remain forbidden",
+        "session contract and registered roles define the shared worktree, child git, routing and acceptance boundaries",
     ):
         assert cue in naming_and_boundary
+    for cue in (
+        "managed_worktree_allocation=one_writable_l1_assignment_one_root_managed_worktree",
+        "shared_l1_worktree_conditions=same_frozen_base|exact_disjoint_paths|no_l2_git|one_shared_l1_slice_candidate|root_records_after_all_children_finish",
+    ):
+        assert cue in contract
 
 
 def test_skill_points_l1_display_labels_to_the_shared_contract() -> None:

@@ -106,7 +106,7 @@ def test_bounded_recovery_is_tailored_without_a_second_state_machine() -> None:
         assert required in implementer
 
     for required in (
-        "integrated diff and assigned evidence conflict",
+        "frozen review target and assigned evidence conflict",
         "at most one bounded re-read",
         "read-only reproduction",
         "may not start a second review round",

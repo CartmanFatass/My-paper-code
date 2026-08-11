@@ -144,6 +144,11 @@ def test_control_plane_route_table_is_six_rows_and_path_backed() -> None:
         "clear_route_loads_defining_source_direct_consumers_focused_tests|"
         "missing_ambiguous_conflicting_or_authority_crossing_route_requires_Auditor"
     )
+    assert _field(route_text, "workflow_route_table_auditor_priority") == (
+        "authority|topology|cross_owner|shared_contract=>"
+        "high_requires_registered_Workflow_Auditor_regardless_of_route_clarity|"
+        "skip_evidence_only_after_WDM_non-high_bounded_contract_or_low_causal_repair_classification"
+    )
 
     table_lines = [
         line.strip()
@@ -172,8 +177,65 @@ def test_control_plane_route_table_is_six_rows_and_path_backed() -> None:
     )
     assert re.search(
         r"`high`:\s*auditor required for authority, topology, cross-owner or shared-contract work"
-        r";\s*missing, ambiguous, conflicting or authority-crossing routes also require auditor",
+        r" regardless of route clarity;\s*missing, ambiguous, conflicting or authority-crossing routes also require auditor",
         authority_escalation,
+    )
+
+    rows_by_trigger = {row[0]: row for row in rows}
+    for trigger in (
+        "Authority and topology",
+        "Session, worktree and lifecycle",
+        "Risk, delegation and review",
+    ):
+        assert re.search(r"`high`.*auditor required", rows_by_trigger[trigger][4].lower())
+
+    # A clear route never authorizes an Auditor skip by itself. Skip evidence
+    # appears only after WDM has classified the change as non-high.
+    for trigger in (
+        "WDM planning and confirmation",
+        "Risk, delegation and review",
+        "L1 startup and context",
+        "Assignment and message contract",
+    ):
+        escalation = rows_by_trigger[trigger][4].lower()
+        assert "after wdm classifies the change as non-high" in escalation
+        assert "`workflow_auditor_skip_evidence`" in escalation
+    assert "clear plan route may skip only with" not in rows_by_trigger[
+        "WDM planning and confirmation"
+    ][4].lower()
+    assert "clear assignment route may skip only with" not in rows_by_trigger[
+        "Assignment and message contract"
+    ][4].lower()
+
+    expected_consumers = {
+        "Authority and topology": {
+            "AGENTS.md",
+            ".codex/agents/hmasd-workflow-design-manager.toml",
+            ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
+            ".codex/agents/hmasd-workflow-implementer.toml",
+            ".agents/roles/WORKFLOW_IMPLEMENTER.md",
+            ".codex/agents/hmasd-workflow-auditor.toml",
+            ".agents/roles/WORKFLOW_AUDITOR.md",
+            ".codex/agents/hmasd-workflow-reviewer.toml",
+            ".agents/roles/WORKFLOW_REVIEWER.md",
+        },
+        "Assignment and message contract": {
+            "AGENTS.md",
+            ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
+            ".agents/roles/WORKFLOW_AUDITOR.md",
+            ".agents/roles/WORKFLOW_IMPLEMENTER.md",
+            ".agents/roles/WORKFLOW_REVIEWER.md",
+            ".agents/roles/CODE_PROJECT_MANAGER.md",
+            ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md",
+        },
+    }
+    for trigger, consumers in expected_consumers.items():
+        actual = set(re.findall(r"`([^`]+)`", rows_by_trigger[trigger][2]))
+        assert actual == consumers
+        for path in consumers:
+            assert (REPO / path).is_file(), path
+    assert "docs/project/current-work/sessions/workflow_design_manager.md" not in (
+        rows_by_trigger["Assignment and message contract"][2]
     )
 
     # Every repo-relative backticked source/consumer/test path is live. The
