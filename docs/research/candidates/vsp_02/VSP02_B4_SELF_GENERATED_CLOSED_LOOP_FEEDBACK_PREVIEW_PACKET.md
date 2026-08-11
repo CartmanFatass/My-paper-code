@@ -9,6 +9,8 @@
 - `review_kind`: `INSPIRATIONAL_PRE_FREEZE_PREVIEW`
 - `conversation_intent`: `NEW_CONVERSATION`
 - `later_convergence_intent`: `EXACT_CONTINUATION_OF_THIS_CONVERSATION_AFTER_ACCEPTED_B4_RESULT`
+- `review_access`: `GITHUB_CONNECTOR_ONLY_AFTER_ROOT_PUBLICATION`
+- `review_scope`: `SCIENTIFIC_IDENTIFIABILITY_NOT_CODE_REVIEW`
 - `scientific_status`: `PROVISIONAL_CANDIDATE_NOT_FROZEN`
 - `authority_boundary`: External Pro may criticize the proposed single-axis identifiability. Explorer retains direction-local advisory freeze authority; Code Manager retains implementation, runtime, and technical-acceptance authority; Root retains publication, relay, and Git authority.
 
@@ -96,10 +98,10 @@ A positive branch supports only that closing the learner-to-future-data feedback
 
 The local literature makes the feedback edge scientifically coherent but does not validate this exact treatment:
 
-- `C:/Projects/Inst-sci/papers/MyLib/json/MARL-0014.json`, pp.2-3, restates policy-gradient expectations under policy-induced state and action distributions.
-- `C:/Projects/Inst-sci/papers/MyLib/json/MARL-0544.json`, pp.3-5, develops action and stationary-distribution correction for its own offline MARL setting.
-- `C:/Projects/Inst-sci/papers/MyLib/json/MARL-0670.json`, p.7, uses trajectory likelihood ratios for its own off-policy surrogate.
-- `C:/Projects/Inst-sci/papers/MyLib/json/MARL-0018.json`, pp.1-2, motivates behavior/learned-policy mismatch as a source of effective transition and value-estimation error.
+- `MARL-0014`, pp.2-3, restates policy-gradient expectations under policy-induced state and action distributions.
+- `MARL-0544`, pp.3-5, develops action and stationary-distribution correction for its own offline MARL setting.
+- `MARL-0670`, p.7, uses trajectory likelihood ratios for its own off-policy surrogate.
+- `MARL-0018`, pp.1-2, motivates behavior/learned-policy mismatch as a source of effective transition and value-estimation error.
 
 These sources do not prove that `c_i * abs(A_i)` is a valid advantage estimator, do not analyze this recurrent oracle-sign shadow construction, and do not support general actor-critic, recurrence, optimizer, or MARL claims.
 

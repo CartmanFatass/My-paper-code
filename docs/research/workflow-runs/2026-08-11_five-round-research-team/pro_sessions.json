@@ -6,10 +6,10 @@
     "last_raw_response_path": null
   },
   "CAND-VSP-02": {
-    "conversation_url": null,
-    "conversation_id": null,
-    "visible_model": null,
-    "last_raw_response_path": null
+    "conversation_url": "https://chatgpt.com/c/6a7b8d9b-aeac-83e8-b57c-2b7a2f092fcd",
+    "conversation_id": "6a7b8d9b-aeac-83e8-b57c-2b7a2f092fcd",
+    "visible_model": "Pro",
+    "last_raw_response_path": "temp/sessions/agentify_transport_operator/independent_research_explorer/vsp02_b4_pre_freeze_preview/results.json"
   },
   "CAND-VAP-EC4G-R1": {
     "conversation_url": null,

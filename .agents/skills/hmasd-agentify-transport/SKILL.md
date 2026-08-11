@@ -52,6 +52,15 @@ root-level generic locator. Do not write to the legacy root directly.
 infer a result path or reconstruct question paths from item names. The sent
 payload is only the exact UTF-8 question file; the local context brief,
 metadata, paths, logs, attachments and requester history stay local.
+The local `question_path` is an internal transport locator and is never copied
+into the Pro-visible payload. Before opening a page, fail closed if the exact
+question text contains a local absolute path such as a drive-letter path,
+`file://` URI, requester temp path or workspace absolute path. Outbound
+evidence locators must instead name the GitHub repository, configured remote,
+branch, full commit, direct commit-pinned URLs and repository-relative paths
+supplied after Root publication. The question asks for scientific judgment
+only; never turn Pro into a code, test, debugging, style, dependency or runtime
+reviewer.
 
 ## Understand the live page
 

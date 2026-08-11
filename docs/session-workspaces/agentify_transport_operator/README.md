@@ -22,6 +22,14 @@ independence, contamination risk, future reuse or grouping from similarity or
 titles. Requesters retain scientific selection, interpretation and durable
 intake; a retry reuses the unchanged batch file.
 
+The batch, context and question file locations are internal transport inputs.
+Their absolute paths never enter the Pro-visible question. Every outbound
+question instead names the GitHub repository, configured remote, branch, full
+commit, direct commit-pinned URLs and repository-relative paths after Root
+publication and contains no local absolute filesystem path. Pro is asked for
+scientific semantics and claim alignment only, never code correctness, tests,
+debugging, style, dependencies or runtime acceptance.
+
 The ordered results file records `question_path`, `status`, the actual raw
 `response`, `conversation_url`, `model_evidence` and any direct error for every attempted item.
 Completed rows survive a later item error. The process preflight receipt is not
