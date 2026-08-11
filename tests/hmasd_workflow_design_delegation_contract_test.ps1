@@ -102,6 +102,76 @@ foreach ($required in @(
     if (-not $normalizedManager.Contains($required.ToLowerInvariant())) { throw "WDM writing-agent routing contract missing: $required" }
 }
 
+# Plain-language is a small universal pointer in the router; the writing Skill
+# and Session Contract carry the detailed meaning.  Keep this source-level
+# check structural meaning rather than requiring one exact sentence or heading.
+$plainLanguageSurfaces = @($skill, $sessionContract)
+$normalizedPlainLanguageSurfaces = (($skill + "`n" + $sessionContract) -replace '\s+', ' ').ToLowerInvariant()
+if (-not ($plainLanguageSurfaces -join ' ').ToLowerInvariant().Contains('plain-language') -and
+    -not ($plainLanguageSurfaces -join ' ').ToLowerInvariant().Contains('plain language')) {
+    throw 'Plain-language-first contract is missing from the detailed sources'
+}
+foreach ($detailGroup in @(
+    'concrete objects|concrete files, objects or decisions',
+    'their relationship|how they relate|causal relationship',
+    'responsible owner|owner of the relevant action|next responsible actor',
+    'consequence|what breaks',
+    'paths, fields, abbreviations, commands, statuses, or evidence|fields, paths, abbreviations, commands, statuses or evidence|paths, commands, statuses and evidence|exact fields or other mechanical anchors')) {
+    $detailLowers = @($detailGroup.Split('|') | ForEach-Object { $_.ToLowerInvariant() })
+    if (-not ($detailLowers | Where-Object { $normalizedPlainLanguageSurfaces.Contains($_) })) {
+        throw "Detailed plain-language contract missing: $detailGroup"
+    }
+    # The router may state the small universal semantic rule (objects,
+    # relationship, owner and next action). Only detailed technical-tail
+    # wording must remain in the Skill/Session sources.
+    if ($detailGroup.StartsWith('paths, fields,') -and
+        ($detailLowers | Where-Object { $router.ToLowerInvariant().Contains($_) })) {
+        throw "Router duplicates detailed plain-language wording: $detailGroup"
+    }
+}
+if (-not ($router.ToLowerInvariant().Contains('plain-language') -or
+          $router.ToLowerInvariant().Contains('plain language') -or
+          $router.ToLowerInvariant().Contains('ordinary-language'))) {
+    throw 'Router lacks the universal plain-language pointer'
+}
+if (-not $router.ToLowerInvariant().Contains('hmasd-writing-agent-assignments') -or
+    -not $router.ToLowerInvariant().Contains('session_workspace_contract')) {
+    throw 'Router plain-language pointer does not name both detailed sources'
+}
+
+$plainExample = 'Root combined the frozen edits to `AGENTS.md` and `docs/project/SESSION_WORKSPACE_CONTRACT.md`. The two files must describe the same plain-language rule; WDM owns resolving any disagreement, and Root cannot accept the combined change until that conflict is resolved. This is the union-semantics check.'
+foreach ($cue in @('AGENTS.md', 'SESSION_WORKSPACE_CONTRACT.md', 'two files', 'WDM', 'conflict', 'cannot accept')) {
+    if (-not $plainExample.ToLowerInvariant().Contains($cue.ToLowerInvariant())) {
+        throw "Positive plain-language example lacks structural cue: $cue"
+    }
+}
+$ambiguousExample = 'Union semantics are complete; run integration.'
+foreach ($missingCue in @('AGENTS.md', 'SESSION_WORKSPACE_CONTRACT.md', 'two files', 'WDM', 'conflict')) {
+    if ($ambiguousExample.ToLowerInvariant().Contains($missingCue.ToLowerInvariant())) {
+        throw "Ambiguous shorthand unexpectedly names structural cue: $missingCue"
+    }
+}
+$plainTail = 'Paths/artifacts: `AGENTS.md` and `docs/project/SESSION_WORKSPACE_CONTRACT.md`; action/status: changed and ready; command/evidence: focused checks observed; WDM is next owner and no unresolved uncertainty remains.'
+$twoLayerExample = $plainExample + "`n`n" + $plainTail
+foreach ($tailCueGroup in @(
+    'paths|artifacts|scope',
+    'action|status|changed',
+    'command|evidence|observed',
+    'WDM|Root|next|unresolved|uncertain')) {
+    if (-not ($tailCueGroup.Split('|') | Where-Object { $plainTail.ToLowerInvariant().Contains($_.ToLowerInvariant()) })) {
+        throw "Positive factual tail lacks task-relevant cue: $tailCueGroup"
+    }
+}
+$narrativeOnly = 'Root combined the two files because they must describe one rule. WDM resolves any disagreement, and Root waits when the conflict is unresolved.'
+$fieldsOnly = 'status=TERMINAL; paths=`AGENTS.md`; command=integration; evidence=pending; owner=WDM.'
+if ($narrativeOnly.Contains('status=') -or $narrativeOnly.Contains('paths=')) {
+    throw 'Narrative-only negative unexpectedly has a fields-style factual tail'
+}
+if (-not $fieldsOnly.Contains('status=') -or -not $fieldsOnly.Contains('paths=') -or
+    -not $fieldsOnly.Contains('evidence=')) {
+    throw 'Fields-only negative lacks its deliberately mechanical tail'
+}
+
 foreach ($required in @(
     'workflow_change_request_route=root->wdm',
     'cross_task_transport=return_to_root',

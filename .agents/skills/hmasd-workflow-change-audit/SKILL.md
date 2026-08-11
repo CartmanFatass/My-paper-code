@@ -61,6 +61,22 @@ edit or accept, and no second review pass follows its advice.
 Return these observations through the current Root task/report boundary only;
 do not create a persistent event store or callback, queue or ledger transport.
 
+Every WDM assignment, five-event progress report and terminal result starts
+with concise outcome-first prose that makes the request or outcome, why it
+matters, the concrete objects and their relationship, the responsible owner,
+the next action and the consequence of unresolved work understandable without
+inherited context. It then appends only the task-relevant factual tail. A named
+heading or token is not required; an unheaded message is valid and not
+noteworthy. State the actual task or event meaning once rather than repeating
+this communication guidance as boilerplate. The event's existing status-only
+meaning and the rule that `TERMINAL` is not acceptance remain unchanged.
+Prefer ordinary words to a new abbreviation; keep an exact canonical field
+name only when needed and gloss its meaning once. Each actionable message
+needs both layers: narrative-only and fields-only messages are both
+insufficient; no irrelevant fields or giant fixed schema is required, and a
+hash is not invented unless an existing supplied locator or genuine integrity
+boundary already requires it.
+
 ### Root lifecycle normal path
 
 The Session Workspace Contract is the defining source for Root-turn closure.
@@ -73,6 +89,15 @@ release-or-retain action. A final response requires all required owner terminal
 conclusions and those authorized post-actions to be complete or explicitly
 reported blocked. A terminal mailbox update requires an active Root wait or a
 later user turn and does not reactivate an ended Root turn.
+
+Root's lifecycle reports use the same plain-language order. The report first
+names the concrete record, integration, reload, smoke or worktree action that
+is complete or still pending, why that state matters and which actor acts next;
+it then gives only the relevant exact identity/scope, paths or artifacts,
+action/status, commands or observed evidence, unresolved blocker and next
+owner, and residual uncertainty when applicable. A blocked report names the
+unresolved decision or authority and its consequence rather than reducing it
+to a status word.
 
 ### Root lifecycle fallback
 
@@ -210,12 +235,16 @@ a scheduler, approval state or global blocker.
    no integrated review or union acceptance is claimed at this point. After
    Root integrates the exact candidate union, a fresh convergence WDM arranges
    one integrated Reviewer by default; parallel reviewers only for genuinely independent questions. Their advice cannot create a second pass. WDM owns union acceptance and Root performs authorized integration.
-4. **Return and reload.** Inspect exact changed paths and return the scoped
-   candidate-ready packet, focused evidence and reload boundary to Root. After
-   Root integration, the fresh convergence WDM returns the union accepted
+4. **Return and reload.** Inspect exact changed paths and return a
+   plain-language conclusion first: name what the scoped candidate changes,
+   why it matters, the direct consequence checked, any residual uncertainty and
+   that Root acts next at the reload boundary. Append the candidate-ready
+   packet, focused evidence and exact reload locators afterward; keep that
+   factual tail limited to the candidate's relevant scope and observations.
+   After Root integration, the fresh convergence WDM returns the union accepted
    proposal; Root applies accepted workflow paths and performs any separately
-   authorized Git mechanics. This Skill does not promise a current commit, push
-   or external workspace cleanup.
+   authorized Git mechanics. This Skill does not promise a current commit,
+   push or external workspace cleanup.
 
 The configured hooks remain empty and disabled. No Hook Stop route is part of
 this workflow. Tool/OS sandboxing and exact assignment paths remain the
@@ -258,7 +287,11 @@ only for change-specific stale references.
 
 ## Acceptance
 
-For a scoped slice, accept only when the impact matrix is closed, the child
+For a scoped slice, the acceptance report opens in ordinary language with the
+concrete impact matrix, child result and direct checks considered, why the
+slice is or is not candidate-ready, what consequence was checked, what remains
+uncertain and which actor acts next. It may then append exact paths, commands,
+statuses and evidence. Accept only when the impact matrix is closed, the child
 packet is reconciled, focused and structural checks pass, stale references are
 explained and exact changed paths are inspected; return a candidate-ready
 packet, without claiming integrated review or union acceptance. Only the fresh

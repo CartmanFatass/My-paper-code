@@ -151,6 +151,66 @@ def test_workflow_review_is_one_pass_normal_path_advice() -> None:
     assert "Pro transport/recovery" not in skill
 
 
+def test_workflow_audit_carries_plain_language_through_assignment_progress_and_result() -> None:
+    writing = (REPO / ".agents/skills/hmasd-writing-agent-assignments/SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    audit = (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(
+        encoding="utf-8"
+    )
+    surfaces = " ".join((writing, audit, session)).lower()
+
+    for cue_group in (
+        ("requested or happened", "requested outcome"),
+        ("why it matters", "why the outcome matters"),
+        ("who acts next", "next responsible actor"),
+        ("concrete objects", "concrete files, objects or decisions"),
+        ("their relationship", "how they relate", "causal relationship"),
+        ("responsible owner", "owner of the relevant action", "who owns each action"),
+        ("consequence", "what breaks"),
+        ("child result", "child result"),
+        ("preserve", "mirror the meanings"),
+        ("meaning", "meanings"),
+        ("do not silently rename", "silently renaming"),
+    ):
+        assert any(cue in surfaces for cue in cue_group), cue_group
+
+    assert "workflow_progress_event_names=DISPATCHED|WRITES_COMPLETE|TESTS_COMPLETE|REVIEW_READY|TERMINAL" in session
+    assert "TERMINAL" in audit
+    assert "TERMINAL does not mean" in audit or "TERMINAL` is not acceptance" in audit
+    assert "terminal conclusion returned to" in audit
+    assert "Root completes" in audit
+    assert "one_pass_no_second_review" in session
+
+
+def test_workflow_audit_requires_meaning_then_task_relevant_factual_evidence() -> None:
+    audit = (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    writing = (REPO / ".agents/skills/hmasd-writing-agent-assignments/SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    surfaces = " ".join((audit, writing)).lower()
+    for cue_group in (
+        ("assignment", "scope", "owned paths"),
+        ("concrete files", "artifact", "record"),
+        ("action", "status", "outcome"),
+        ("commands", "evidence", "checks"),
+        ("unresolved", "next", "owner"),
+        ("residual uncertainty", "remains uncertain", "unfinished"),
+    ):
+        assert any(cue in surfaces for cue in cue_group), cue_group
+    assert "task-relevant factual tail" in surfaces
+    assert "exact paths" in surfaces
+    assert "commands" in surfaces
+    assert "evidence" in surfaces
+    assert "smallest task-relevant factual tail" in surfaces
+    assert "append the candidate-ready" in audit.lower()
+
+
 def test_execution_policy_is_parallel_slice_first_with_root_convergence() -> None:
     router = (REPO / "AGENTS.md").read_text(encoding="utf-8")
     manager = (REPO / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md").read_text(encoding="utf-8")

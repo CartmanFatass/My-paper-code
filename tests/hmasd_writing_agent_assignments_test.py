@@ -45,6 +45,41 @@ def _section(path: Path, heading: str) -> str:
     return text[start:end]
 
 
+def _opening_semantic_meaning_is_sufficient(message: str) -> bool:
+    """Test-only semantic probe; this is not a runtime message validator."""
+
+    blocks = message.strip().split("\n\n")
+    opening = blocks[0]
+    if len(blocks) > 1 and not any(
+        cue in opening.lower()
+        for cue in ("combined", "brought together", "must", "requested", "changed")
+    ):
+        # A heading may be present, but it is never required or prescribed.
+        opening = blocks[1]
+    normalized = opening.lower()
+    return (
+        any(cue in normalized for cue in ("combined", "brought together", "must", "requested", "changed"))
+        and any(cue in normalized for cue in ("agents.md", "session_workspace_contract.md"))
+        and any(cue in normalized for cue in ("two files", "both files", "relationship"))
+        and any(cue in normalized for cue in ("wdm", "owner", "responsible", "next"))
+        and any(cue in normalized for cue in ("conflict", "resolved", "cannot accept"))
+    )
+
+
+def _task_relevant_factual_tail_is_present(message: str) -> bool:
+    """Check only broad evidence layers; do not prescribe a packet or field list."""
+
+    if "\n\n" not in message:
+        return False
+    tail = message.strip().split("\n\n")[-1].lower()
+    return (
+        any(cue in tail for cue in ("paths", ".md", "artifact", "scope"))
+        and any(cue in tail for cue in ("action", "status", "changed", "terminal"))
+        and any(cue in tail for cue in ("command", "evidence", "checked", "observed"))
+        and any(cue in tail for cue in ("wdm", "root", "next", "unresolved", "uncertain"))
+    )
+
+
 def test_skill_trigger_and_task_model_recipe_are_explicit() -> None:
     text = _normalized(SKILL)
     assert "designing a task-scoped subagent or root-relayed owner interface" in text
@@ -70,6 +105,127 @@ def test_skill_trigger_and_task_model_recipe_are_explicit() -> None:
     ):
         assert cue in text
     assert "parent is a context compiler" in text
+
+
+def test_plain_language_first_contract_keeps_meaning_before_technical_detail() -> None:
+    text = _normalized(SKILL)
+    for cue_group in (
+        ("requested or happened", "requested outcome"),
+        ("why it matters", "why the outcome matters"),
+        ("who acts next", "next responsible actor"),
+        ("concrete objects", "concrete files, objects or decisions"),
+        ("their relationship", "how they relate", "causal relationship"),
+        (
+            "responsible owner",
+            "who owns each action",
+            "owner of the relevant action",
+            "owner of each action or decision",
+        ),
+        ("consequence", "what breaks"),
+        ("non-obvious task-local term", "non-obvious task-local term when it first appears"),
+        (
+            "paths, fields, abbreviations, commands, statuses, or evidence",
+            "fields, paths, abbreviations, commands or evidence",
+            "paths, commands, statuses and evidence",
+            "exact fields or other mechanical anchors",
+        ),
+    ):
+        assert any(cue in text for cue in cue_group), cue_group
+
+    result_section = _normalized_text(_section(SKILL, "## Results and recovery"))
+    conclusion_markers = ("outcome-first prose", "what was found or changed")
+    conclusion_positions = [
+        result_section.index(marker)
+        for marker in conclusion_markers
+        if marker in result_section
+    ]
+    assert conclusion_positions
+    assert min(conclusion_positions) < result_section.index("paths, commands, statuses and evidence")
+    for cue_group in (
+        ("assignment", "scope", "owned paths"),
+        ("artifact", "files", "paths"),
+        ("action", "status", "changed"),
+        ("commands", "evidence", "observed"),
+        ("unresolved", "next", "owner"),
+        ("residual uncertainty", "remains uncertain", "unfinished"),
+    ):
+        assert any(cue in text for cue in cue_group), cue_group
+
+
+def test_varied_openings_preserve_meaning_and_factual_tail_layers() -> None:
+    valid = (
+        "Root combined the frozen edits to `AGENTS.md` and "
+        "`docs/project/SESSION_WORKSPACE_CONTRACT.md`. The two files must describe "
+        "the same plain-language rule; WDM owns resolving any disagreement, and Root "
+        "cannot accept the combined change until that conflict is resolved. This is "
+        "the union-semantics check."
+    )
+    alternate_valid = (
+        "Root brought together the edits to `AGENTS.md` and "
+        "`docs/project/SESSION_WORKSPACE_CONTRACT.md`. Both files explain one rule, "
+        "WDM resolves a disagreement, and Root waits when the conflict is unresolved."
+    )
+    varied_valid = (
+        "The requested union change updates `AGENTS.md` and "
+        "`docs/project/SESSION_WORKSPACE_CONTRACT.md` so both files describe one rule. "
+        "WDM is responsible for the disagreement, and Root acts next after the conflict "
+        "is resolved."
+    )
+    ambiguous = "Union semantics are complete; run integration."
+    missing_owner = (
+        "Root combined edits to `AGENTS.md` and `docs/project/SESSION_WORKSPACE_CONTRACT.md`. "
+        "The two files must describe one rule, but the conflict remains unresolved."
+    )
+    missing_relationship = (
+        "Root combined the edits to `AGENTS.md` and `docs/project/SESSION_WORKSPACE_CONTRACT.md`. "
+        "WDM owns the result, and Root cannot accept it until the conflict is resolved."
+    )
+    valid_with_tail = (
+        valid
+        + "\n\n"
+        + "Paths/artifacts: `AGENTS.md` and `docs/project/SESSION_WORKSPACE_CONTRACT.md`; "
+        "action/status: changed and ready; command/evidence: focused checks observed; "
+        "WDM is next owner and no unresolved uncertainty remains."
+    )
+    headed_valid = (
+        "Integration outcome\n\n"
+        + valid
+        + "\n\n"
+        + "Paths/artifacts: `AGENTS.md` and `docs/project/SESSION_WORKSPACE_CONTRACT.md`; "
+        "action/status: changed and ready; command/evidence: focused checks observed; "
+        "WDM is next owner and no unresolved uncertainty remains."
+    )
+    narrative_only = (
+        "Root combined the two files because they must describe one rule. WDM resolves "
+        "any disagreement, and Root waits when the conflict is unresolved."
+    )
+    fields_only_tail = (
+        "status=TERMINAL; paths=`AGENTS.md`; command=integration; evidence=pending; "
+        "owner=WDM."
+    )
+    fields_only = "Technical details only follow.\n\n" + fields_only_tail
+
+    assert _opening_semantic_meaning_is_sufficient(valid)
+    assert _opening_semantic_meaning_is_sufficient(alternate_valid)
+    assert _opening_semantic_meaning_is_sufficient(varied_valid)
+    assert not _opening_semantic_meaning_is_sufficient(ambiguous)
+    assert not _opening_semantic_meaning_is_sufficient(missing_owner)
+    assert not _opening_semantic_meaning_is_sufficient(missing_relationship)
+    assert _opening_semantic_meaning_is_sufficient(valid_with_tail)
+    assert _task_relevant_factual_tail_is_present(valid_with_tail)
+    assert _opening_semantic_meaning_is_sufficient(headed_valid)
+    assert _task_relevant_factual_tail_is_present(headed_valid)
+    assert not _task_relevant_factual_tail_is_present(narrative_only)
+    assert not _opening_semantic_meaning_is_sufficient(fields_only)
+    assert _task_relevant_factual_tail_is_present(fields_only)
+    assert not (
+        _opening_semantic_meaning_is_sufficient(narrative_only)
+        and _task_relevant_factual_tail_is_present(narrative_only)
+    )
+    assert not (
+        _opening_semantic_meaning_is_sufficient(fields_only)
+        and _task_relevant_factual_tail_is_present(fields_only)
+    )
 
 
 def test_native_payload_and_file_backed_assignment_boundary_is_explicit() -> None:
@@ -209,7 +365,8 @@ def test_skill_preserves_semantics_without_a_schema_or_second_gate() -> None:
     for cue in (
         "not a schema",
         "another authority",
-        "do not require fixed headings, field names, a record schema",
+        "no named heading or token is required",
+        "no named heading, field list, record shape",
         "not a checklist admission gate",
         "packet validator",
         "not a queue",
@@ -255,12 +412,22 @@ def test_skill_requires_action_capability_and_rejects_false_completion() -> None
         assert cue in examples
 
 
-def test_result_shape_starts_with_natural_language_conclusion() -> None:
+def test_result_shape_has_semantic_conclusion_and_compact_factual_tail() -> None:
     text = _normalized(SKILL)
-    assert "begins with a natural-language conclusion" in text
-    assert "compact factual tail" in text
+    for cue_group in (
+        ("what was found or changed", "what was found or changed"),
+        ("why it satisfies", "why that matters"),
+        ("who acts next", "next responsible actor"),
+        ("direct consequence", "consequence"),
+        ("residual uncertainty", "remains uncertain"),
+        ("compact factual tail", "factual tail"),
+        ("paths", "artifact"),
+        ("commands", "statuses"),
+        ("evidence", "observed"),
+    ):
+        assert any(cue in text for cue in cue_group), cue_group
     assert "terminal token is useful only as an anchor" in text
-    assert "fixed headings, field names" in text
+    assert "no named heading or token is required" in text or "no named heading, field list, record shape" in text
 
 
 def test_reference_ownership_moves_general_material_out_of_agile_skill() -> None:

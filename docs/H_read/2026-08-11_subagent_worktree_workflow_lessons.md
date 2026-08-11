@@ -198,3 +198,34 @@ own scope. The upcoming EM → CM → Experiment → publish/reverse → externa
 flow remains **PENDING** here: this lesson records its intended control-plane
 route and does not claim execution, publication, reverse intake, or external
 review completion.
+
+## Plain-language-first communication lesson (non-authoritative)
+
+This note records the reason for the follow-on wording change; the defining
+rules live in `.agents/skills/hmasd-writing-agent-assignments/SKILL.md` and
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`. An isolated or compacted agent
+may retain shorthand such as a path, event name or packet label while losing
+the concrete object, relationship, owner and consequence. Concise outcome-first
+prose repairs that loss without removing exact technical evidence.
+
+A useful example is: “Root combined the frozen edits to `AGENTS.md` and
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`. The two files must describe the
+same plain-language rule; WDM owns resolving any disagreement, and Root cannot
+accept the combined change until that conflict is resolved. This is the
+union-semantics check.” The weaker “Union semantics are complete; run
+integration” does not name the objects, required relationship, owner of a
+disagreement or consequence of leaving it unresolved.
+
+For Root↔L1 and L1↔L2 assignments, progress reports and terminal results, the
+message should state what is requested or happened, why it matters, the
+concrete objects and relationship, the responsible owner and next action; the
+smallest relevant factual tail then pins that meaning to scope, paths or
+artifacts, actions/status and observed evidence, adding a blocker, next owner
+or residual uncertainty only when applicable. Prefer ordinary words to a new
+abbreviation; if an exact canonical field name is needed, gloss it once. A
+named heading or token is not required: an unheaded message is valid and not
+noteworthy. State the task or event meaning once rather than repeating
+boilerplate. This is rationale and an example only, not a schema, validator,
+queue, ledger, admission or acceptance rule. Narrative-only and fields-only
+messages are both insufficient; irrelevant fields, giant schemas and invented
+hashes are not part of this lesson.

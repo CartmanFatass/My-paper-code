@@ -183,6 +183,41 @@ authorized EM science result may provide contrary research or science evidence
 only when that result actually exists; the WM routing change and this naming
 contract perform no research and change no science state.
 
+## Plain-language-first cross-owner messages
+
+Every assignment, progress report and terminal result crossing Root↔L1 or
+L1↔L2 begins with concise outcome-first prose. It states the request or
+outcome, why it matters, the concrete files or objects and their relationship,
+the responsible owner, the next action and the consequence if work is missed
+or unresolved. Define every non-obvious task-local term on first use, and have
+a child result mirror the meanings in its assignment instead of silently
+renaming them. Then append the relevant factual tail. No named heading or
+token is required; an unheaded message is valid and not noteworthy. State the
+actual task or event meaning once rather than repeating this communication
+guidance as boilerplate. Prefer ordinary words to a new abbreviation; keep an
+exact canonical field name only when needed and gloss its meaning once.
+
+An actionable assignment, progress report or terminal result has both layers:
+the plain-language explanation above, followed by only the smallest
+task-relevant factual tail. As applicable, that tail identifies identity or
+scope, paths or artifacts, action or status, commands or observed evidence, an
+unresolved blocker and next owner, and residual uncertainty when applicable.
+Narrative-only
+messages cannot pin work to concrete objects, while fields-only messages omit
+the causal meaning; both are insufficient. No irrelevant fields or giant fixed
+schema is required, and hashes are not invented: an existing supplied locator
+or genuine integrity boundary may still require one under the established
+contract.
+
+This is a prose contract for readers without inherited thread context; it
+preserves technical detail after the explanation and requires both the
+semantic prose and the smallest relevant factual tail. Narrative-only and
+fields-only messages are insufficient. It is not a message schema, packet
+validator, queue, ledger, admission token or acceptance mechanism. The same
+meaning-first order applies to the five WDM status observations, Root
+lifecycle/return-reload reports and acceptance reports, while their existing
+owners, event meanings and acceptance boundaries remain unchanged.
+
 ## Workflow validation and progress vocabulary
 
 The keyed fields above are the single defining source for workflow validation,

@@ -11,6 +11,10 @@ def _text(path: str) -> str:
     return (ROOT / path).read_text(encoding="utf-8")
 
 
+def _normalized(path: str) -> str:
+    return " ".join(_text(path).split()).lower()
+
+
 def test_wdm_is_the_semantic_owner_for_each_scoped_workflow_slice() -> None:
     contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
     router = _text("AGENTS.md")
@@ -66,6 +70,80 @@ def test_assignment_writing_preserves_semantic_context_over_file_only_anchors() 
     assert "cpm_mechanical_result_locator=result_path" in contract
     assert "agentify_transport_result_paths=" not in contract
     assert "cpm_mechanical_result_paths=" not in contract
+
+
+def test_plain_language_rule_is_universal_in_router_and_detailed_in_its_sources() -> None:
+    router = _normalized("AGENTS.md")
+    skill = _normalized(".agents/skills/hmasd-writing-agent-assignments/SKILL.md")
+    contract = _normalized("docs/project/SESSION_WORKSPACE_CONTRACT.md")
+
+    assert any(cue in router for cue in ("plain-language", "plain language", "ordinary-language"))
+    assert "hmasd-writing-agent-assignments" in router
+    assert "session_workspace_contract" in router
+    assert "root↔l1" in contract
+    assert "l1↔l2" in contract
+    for detail_group in (
+        ("concrete objects", "concrete files, objects or decisions"),
+        ("their relationship", "how they relate", "causal relationship"),
+        ("responsible owner", "owner of the relevant action", "who owns each action"),
+        ("consequence", "what breaks"),
+        (
+            "paths, fields, abbreviations, commands, statuses, or evidence",
+            "fields, paths, abbreviations, commands or evidence",
+            "fields, paths, abbreviations, commands, statuses or evidence",
+            "paths, commands, statuses and evidence",
+        ),
+    ):
+        assert any(detail in skill or detail in contract for detail in detail_group), detail_group
+        # AGENTS.md may state the small universal semantic rule; only its
+        # detailed factual-tail wording belongs exclusively in the sources.
+        if detail_group[0].startswith("paths, fields,"):
+            assert not any(detail in router for detail in detail_group), detail_group
+
+
+def test_plain_language_messages_append_only_the_smallest_relevant_factual_tail() -> None:
+    contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
+    normalized = " ".join(contract.split()).lower()
+    start = normalized.index("## plain-language-first cross-owner messages")
+    end = normalized.index("## workflow validation and progress vocabulary", start)
+    section = normalized[start:end]
+    assert "assignment, progress report and terminal result" in section
+    assert section.index("states the request") < section.index("then append the relevant factual tail")
+    assert section.index("then append the relevant factual tail") < section.index("technical detail after")
+    for cue_group in (
+        ("assignment", "scope", "owned paths"),
+        ("files", "objects", "decisions", "artifact"),
+        ("action", "status", "outcome"),
+        ("commands", "evidence", "paths"),
+        ("unresolved", "next", "owner"),
+    ):
+        assert any(cue in section for cue in cue_group), cue_group
+    assert "preserves technical detail after the explanation" in section
+    assert "not a message schema" in section
+
+
+def test_progress_and_terminal_meanings_remain_wdm_status_only_and_not_acceptance() -> None:
+    contract = _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
+    normalized = " ".join(contract.split()).lower()
+    assert "workflow_progress_event_owner=WDM" in contract
+    assert (
+        _text("docs/project/SESSION_WORKSPACE_CONTRACT.md")
+        .count("workflow_progress_event_names=DISPATCHED|WRITES_COMPLETE|TESTS_COMPLETE|REVIEW_READY|TERMINAL")
+        == 1
+    )
+    for cue_group in (
+        ("status-only observations",),
+        ("not scheduler", "not_scheduler", "not scheduling"),
+        ("not queue", "not_queue", "not queuing"),
+        ("not ledger", "not_ledger"),
+        ("not acceptance token", "not_acceptance_token", "not acceptance"),
+        ("terminal does not mean accepted", "terminal` does not mean accepted"),
+        ("necessary but insufficient for root's final response",),
+        ("accepted-path record",),
+        ("canonical reload",),
+        ("runtime smoke",),
+    ):
+        assert any(cue in normalized for cue in cue_group), cue_group
 
 
 def test_public_current_work_is_partitioned_and_owned() -> None:

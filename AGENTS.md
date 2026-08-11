@@ -305,6 +305,21 @@ Remaining lower-level text that still describes the retired Desktop persistent
 route is non-authoritative until it is updated in a resumed migration phase.
 Active routing always follows this Root-first contract.
 
+## Plain-language-first owner messages
+
+Every assignment, progress report and terminal result exchanged across
+Root↔L1 or L1↔L2 starts with concise outcome-first prose that makes the request
+or result, why it matters, the concrete objects and relationship, the
+responsible owner and the next action understandable without inherited
+context. An actionable message then appends the smallest task-relevant factual
+tail; both layers are required, but no named heading or token is required.
+
+This is an ordinary-language writing rule, not a new workflow mechanism. The
+reusable guidance is in
+`.agents/skills/hmasd-writing-agent-assignments/SKILL.md`; the defining
+cross-owner contract is in
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`.
+
 ## Routed owner documents
 
 - Workflow roles and Skills: `.agents/roles/WORKFLOW_*.md`, `.agents/skills/`.

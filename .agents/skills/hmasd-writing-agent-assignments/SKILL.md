@@ -103,6 +103,17 @@ Compile a self-contained natural-language model that lets a capable child act
 without reconstructing parent history. Explain, in whatever order best fits
 the task:
 
+Every assignment message starts with concise outcome-first prose. State the
+requested outcome and the next responsible actor, and say why the outcome
+matters. Make the concrete files, objects or decisions in scope, their
+relationship, the owner of each action or decision and the consequence of
+missing or unresolved work understandable without inherited context. Define
+each non-obvious task-local term when it first appears, then append the factual
+tail described below. The prose may use any concise form: no named heading or
+token is required, and an unheaded message is valid and not noteworthy. Prefer
+ordinary words to a new abbreviation; keep an exact canonical field name only
+when it is needed and gloss its meaning once.
+
 - why the task exists now and the concrete user-visible, operational or
   scientific outcome that matters;
 - the concrete failure, conflict or limitation to resolve, when one is known;
@@ -122,6 +133,16 @@ commands, schemas, result locations, model labels or `fork_turns` settings.
 Those anchors narrow execution; they do not carry the task's meaning. A parent
 is a context compiler, not a field copier. A shorter brief is correct when it
 contains enough meaning for the bounded task.
+
+An actionable assignment therefore has both layers: the ordinary explanation
+and the smallest task-relevant factual tail. Depending on the task, that tail
+may identify scope, paths or artifacts, the requested action or current status,
+commands or observed evidence, an unresolved blocker and next owner, and
+residual uncertainty when applicable. Narrative alone cannot pin the work to
+the right objects, while fields alone cannot explain why the work matters;
+neither is sufficient. Do not require irrelevant fields or a giant fixed schema, and do
+not invent a hash—hashes remain only supplied locators or genuine integrity
+boundaries already required by the existing contract.
 
 ### Native payload and file-backed assignment boundary
 
@@ -233,6 +254,24 @@ machine and do not create continuity. `fork_turns=none` remains
 background-context isolation, not zero context: the child still needs the complete
 self-contained brief and may not infer meaning from an event name.
 
+Each WDM progress report first says in ordinary language what concrete work has
+started, finished or is waiting, why that observation matters and who acts
+next; it names the affected files or evidence and the owner of the next
+action, then appends the exact event name (`DISPATCHED`, `WRITES_COMPLETE`,
+`TESTS_COMPLETE`, `REVIEW_READY` or `TERMINAL`) and any paths, statuses or
+commands. The event name remains a status-only observation with its contract
+meaning; it never replaces the explanation or grants acceptance. State the
+actual event meaning once rather than repeating this communication guidance as
+boilerplate; a report without a named heading or token beyond its required
+event field is valid.
+
+The progress report must also carry both layers: after the explanation and
+event meaning, append only the factual tail relevant to that observation, such
+as the affected scope, paths or artifacts, action/status, commands or observed
+evidence, unresolved blocker and next owner, or residual uncertainty when
+applicable. A narrative-only progress report and a fields-only progress report
+are both insufficient.
+
 For WDM assignments, Root's `fork_turns=1` is a caller-action background
 setting for the L1, while a WDM's registered Workflow Implementer dispatch uses
 explicit `fork_turns=none`; neither setting creates authority or continuity.
@@ -266,13 +305,23 @@ the composer in Pro after that action and before sending the dependent prompt.
 
 ## Results and recovery
 
-A child result begins with a natural-language conclusion: what was found or
-changed, why it satisfies (or cannot yet satisfy) the outcome, which direct
-consequence was checked, and what residual uncertainty remains. It may then
-append a compact factual tail with paths, commands, statuses and evidence.
-Do not require fixed headings, field names, a record schema or a mechanical
-`COMPLETE` token as the admission condition. A terminal token is useful only as
-an anchor after the actual result has been inspected.
+A child result and any parent terminal report begin with concise outcome-first
+prose: what was found or changed, why it satisfies (or cannot yet satisfy) the
+outcome, why that matters, who acts next, which direct consequence was checked
+and what residual uncertainty remains.
+The explanation then names the concrete artifact or decision, its relationship
+to the assignment and its owner before appending a compact factual tail with
+paths, commands, statuses and evidence. A child result mirrors the meanings in
+its assignment instead of silently renaming an object, owner or consequence.
+Root lifecycle and acceptance reports follow the same writing order when they
+return through this boundary, but their existing authority remains unchanged.
+The factual tail stays minimal and task-relevant; it does not become a required
+record shape. Narrative-only and fields-only terminal results are both
+insufficient.
+No named heading, field list, record shape or mechanical `COMPLETE` token is a
+condition of compliance; an unheaded result is valid and its lack of a heading
+is not noteworthy. A terminal token is useful only as an anchor after the
+actual result has been inspected.
 
 When observations conflict, preserve completed work and inspect the concrete
 postcondition. Use ordinary local judgment and one bounded reversible recovery
