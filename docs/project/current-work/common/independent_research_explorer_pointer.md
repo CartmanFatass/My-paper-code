@@ -43,8 +43,8 @@ scope_reject=empty|extra_colon|separators|whitespace|..
 ```
 
 This Root-maintained public record is a pointer only. Root owns the macro/
-portfolio pointer semantics and writes accepted proposals; CPM and WDM may
-read it only when their Root assignment names it. It neither copies nor
+portfolio pointer semantics and writes accepted proposals; CPM may read it
+only when its Root assignment names it. It neither copies nor
 authorizes formal/project-canonical science, and it is not a dashboard or
 substitute for the real task tree. Each `direction:<id>` EM task loads only
 its exact assignment and named direction pointers; it does not preload global

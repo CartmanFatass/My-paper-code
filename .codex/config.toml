@@ -12,10 +12,8 @@ max_threads = 20
 max_depth = 2
 interrupt_message = true
 
-[agents."HMASDWorkflowDesignManager"]
-description = "Read-only Sol-high L1 Workflow Design Manager for one Root-scoped workflow assignment."
-config_file = "./agents/hmasd-workflow-design-manager.toml"
-nickname_candidates = ["Workflow Design Manager", "Workflow Architect", "Control Plane Designer"]
+# Every registered entry below is callable directly by Root. Manager-oriented
+# names describe domain semantics, not a caller gate; AGENTS.md owns dispatch.
 
 [agents."HMASDCodeProjectManager"]
 description = "Read-only Sol-high L1 Code Project Manager for one Root-scoped implementation assignment."
@@ -33,7 +31,7 @@ config_file = "./agents/hmasd-project-scout.toml"
 nickname_candidates = ["Project Scout", "Repository Scout", "Read-only Scout"]
 
 [agents."HMASDResearchArtifactWriter"]
-description = "Workspace-write L2 research artifact writer owned only by the Independent Research Explorer."
+description = "Workspace-write research artifact writer callable by Root or the Independent Research Explorer."
 config_file = "./agents/hmasd-research-artifact-writer.toml"
 nickname_candidates = ["Research Artifact Writer", "Research Writer", "Artifact Maintainer"]
 
@@ -48,12 +46,12 @@ config_file = "./agents/hmasd-implementer.toml"
 nickname_candidates = ["HMASD Implementer", "Algorithm Implementer", "Runtime Implementer"]
 
 [agents."HMASDCPMMechanical"]
-description = "Silent Luna-low native child for one exact CPM mechanical task assignment."
+description = "Silent Luna-low mechanical leaf callable by Root or Code Project Manager."
 config_file = "./agents/hmasd-cpm-mechanical.toml"
 nickname_candidates = ["CPM Mechanical", "Mechanical Operator", "CPM Task Child"]
 
 [agents."HMASDExplorerMechanical"]
-description = "Silent Luna-low native child for one exact Explorer mechanical evidence-organization assignment."
+description = "Silent Luna-low evidence leaf callable by Root or Independent Research Explorer."
 config_file = "./agents/hmasd-explorer-mechanical.toml"
 nickname_candidates = ["Explorer Mechanical", "Evidence Organizer", "Mechanical Reader"]
 
@@ -72,33 +70,18 @@ description = "Read-only HMASD reviewer for an integrated implementation package
 config_file = "./agents/hmasd-reviewer.toml"
 nickname_candidates = ["HMASD Reviewer", "Algorithm Reviewer", "Runtime Reviewer"]
 
-[agents."HMASDWorkflowAuditor"]
-description = "Read-only Terra-medium auditor for workflow impact mapping and verification."
-config_file = "./agents/hmasd-workflow-auditor.toml"
-nickname_candidates = ["Workflow Auditor", "Control Plane Auditor", "Workflow Verifier"]
-
-[agents."HMASDWorkflowImplementer"]
-description = "Terra-medium implementer for one confirmed nonoverlapping workflow slice."
-config_file = "./agents/hmasd-workflow-implementer.toml"
-nickname_candidates = ["Workflow Implementer", "Control Plane Implementer"]
-
-[agents."HMASDWorkflowReviewer"]
-description = "Read-only Terra-high reviewer for one integrated workflow batch."
-config_file = "./agents/hmasd-workflow-reviewer.toml"
-nickname_candidates = ["Workflow Reviewer", "Control Plane Reviewer"]
-
 [agents."HMASDCPMAgentifyTransport"]
-description = "Silent native Agentify transport child for one Code Project Manager file assignment."
+description = "Silent CPM Agentify transport leaf callable by Root or Code Project Manager."
 config_file = "./agents/hmasd-cpm-agentify-transport.toml"
 nickname_candidates = ["CPM Agentify Transport", "Technical Review Transport"]
 
 [agents."HMASDExplorerAgentifyTransport"]
-description = "Silent native Agentify transport child for one Independent Research Explorer file assignment."
+description = "Silent Explorer Agentify transport leaf callable by Root or Independent Research Explorer."
 config_file = "./agents/hmasd-explorer-agentify-transport.toml"
 nickname_candidates = ["Explorer Agentify Transport", "Research Review Transport"]
 
 [agents."HMASDExperimentOperator"]
-description = "Silent mechanical operator for one authorized HMASD train-evaluate-analyze run."
+description = "Silent mechanical operator callable by Root or Code Project Manager for one authorized HMASD train-evaluate-analyze run."
 config_file = "./agents/hmasd-experiment-operator.toml"
 nickname_candidates = ["HMASD Experiment Operator", "Run Operator", "Formal Run Operator"]
 

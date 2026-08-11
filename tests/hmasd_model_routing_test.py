@@ -42,12 +42,6 @@ IMPLEMENTER_PROFILES = {
 IMPLEMENTER_ROLE = REPOSITORY_ROOT / ".agents" / "roles" / "IMPLEMENTER.md"
 
 L1_PROFILES = {
-    "hmasd-workflow-design-manager": (
-        REPOSITORY_ROOT / ".codex/agents/hmasd-workflow-design-manager.toml",
-        REPOSITORY_ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
-        "gpt-5.6-sol",
-        "high",
-    ),
     "hmasd-code-project-manager": (
         REPOSITORY_ROOT / ".codex/agents/hmasd-code-project-manager.toml",
         REPOSITORY_ROOT / ".agents/roles/CODE_PROJECT_MANAGER.md",
@@ -97,18 +91,6 @@ L1_REGISTRY = {
             "hmasd-experiment-operator",
             "hmasd-cpm-mechanical",
             "hmasd-cpm-agentify-transport",
-        ),
-    },
-    "HMASDWorkflowDesignManager": {
-        "name": "hmasd-workflow-design-manager",
-        "profile": REPOSITORY_ROOT / ".codex/agents/hmasd-workflow-design-manager.toml",
-        "role": REPOSITORY_ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
-        "model": "gpt-5.6-sol",
-        "effort": "high",
-        "children": (
-            "hmasd-workflow-auditor",
-            "hmasd-workflow-implementer",
-            "hmasd-workflow-reviewer",
         ),
     },
     "HMASDIndependentResearchExplorer": {
@@ -208,7 +190,7 @@ def test_cpm_mechanical_registration_and_model_routing() -> None:
     assert profile["approval_policy"] == "never"
     instructions = profile.get("developer_instructions", "")
     assert "CPM_MECHANICAL_TASK_ASSIGNMENT" in instructions
-    assert "fork_turns=none" in instructions
+    assert "fork_turns=1" in instructions
     assert MECHANICAL_ROLE.is_file()
     role_text = MECHANICAL_ROLE.read_text(encoding="utf-8")
     assert "role=cpm_mechanical_operator" in role_text
@@ -238,7 +220,7 @@ def test_explorer_mechanical_registration_and_model_routing() -> None:
     for required in (
         ".agents/roles/EXPLORER_MECHANICAL_OPERATOR.md",
         ".agents/skills/hmasd-explorer-mechanical/SKILL.md",
-        "fork_turns=none",
+        "fork_turns=1",
         "self-contained natural-language task model",
         "one conclusion-first native result",
     ):
@@ -249,7 +231,7 @@ def test_explorer_mechanical_registration_and_model_routing() -> None:
     for required in (
         "role=explorer_mechanical_operator",
         "callable_agent_type=hmasd-explorer-mechanical",
-        "parent=independent_research_explorer",
+        "parent=root|independent_research_explorer",
         "write_authority=none",
         "scientific_authority=none",
         "technical_acceptance_authority=none",
@@ -287,7 +269,8 @@ def test_implementer_registration_and_model_routing() -> None:
         if name == "hmasd-implementer-terra":
             assert ".agents/roles/IMPLEMENTER.md" not in instructions
         assert "exact assignment" in instructions
-        assert "registered child of Code Project Manager" in instructions
+        assert "registered child invokable" in instructions
+        assert "Root" in instructions and "Code Project Manager" in instructions
         assert "Do not mutate Git" in instructions
         for duplicated in (
             "purpose, observed behavior or failure",
@@ -392,28 +375,23 @@ def test_l1_registry_uses_standard_schema_and_static_routing_contracts() -> None
         # they must not return under another top-level profile key.
         assert not (set(profile) & REJECTED_L1_PROFILE_KEYS), (table_name, set(profile))
 
-    for manager in ("HMASDWorkflowDesignManager", "HMASDIndependentResearchExplorer"):
+    for manager in ("HMASDIndependentResearchExplorer",):
         with L1_REGISTRY[manager]["profile"].open("rb") as stream:
             profile = tomllib.load(stream)
         instructions = " ".join(str(profile["developer_instructions"]).split()).lower()
         assert "root" in instructions and "fork_turns=1" in instructions, manager
 
-    assert "workflow_design_manager_root_fork_turns=1_caller_action_only" in router
-    assert "Root invokes every WDM L1 with caller action `fork_turns=1`" in router
-
-
 def test_leaf_roles_and_profiles_explicitly_forbid_spawn_and_cross_owner_contact() -> None:
     role_paths = [
-        REPOSITORY_ROOT / ".agents/roles/WORKFLOW_AUDITOR.md",
         REPOSITORY_ROOT / ".agents/roles/CODE_SCOUT.md",
         REPOSITORY_ROOT / ".agents/roles/RESEARCH_SCOUT.md",
         REPOSITORY_ROOT / ".agents/roles/EXPLORER_MECHANICAL_OPERATOR.md",
     ]
     for role_path in role_paths:
         role = " ".join(role_path.read_text(encoding="utf-8").split()).lower()
-        assert "agent_tree_level=2" in role
+        assert "agent_tree_level=1_or_2" in role
         assert "spawn_authority=none" in role
-        assert "return" in role and "parent" in role
+        assert "return" in role and "invoker" in role
 
 
 if __name__ == "__main__":

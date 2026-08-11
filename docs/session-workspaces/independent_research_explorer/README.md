@@ -19,7 +19,7 @@ historical_handoffs=lazy_only
 ```
 
 This tracked directory is a stable compatibility path for compact research
-plans and WDM reload receipts. A fresh CLI Root task uses only exact
+plans. A fresh CLI Root task uses only exact
 assignment-owned bytes beneath it; the directory name does not resume or
 identify a live Desktop session, thread or successor. It grants no
 workflow-design authority and contains no candidate content, scientific state,
@@ -48,6 +48,5 @@ and historical handoffs remain lazy. Explorer retains scientific ownership and
 L1 read-only/no-Git boundaries; exact child assignments provide only minimum
 direction context and named packets, without hidden parent history.
 
-Authority and path ownership come from the Explorer role charter and
-`docs/project/SESSION_WORKSPACE_CONTRACT.md`; this README does not duplicate or
-expand them.
+Authority and path ownership come from `AGENTS.md` and the Explorer role
+charter; this README does not duplicate or expand them.

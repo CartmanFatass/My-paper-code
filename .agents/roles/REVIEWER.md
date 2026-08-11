@@ -3,9 +3,9 @@
 ```text
 role=reviewer
 callable_agent_type=hmasd-reviewer
-role_kind=registered_task_scoped_level2_leaf
-agent_tree_level=2
-parent=code_project_manager
+role_kind=registered_task_scoped_leaf
+agent_tree_level=1_or_2
+parent=root|code_project_manager
 assignment_identity=assignment_scoped_native_task
 lifecycle=single_assignment_dispatch
 spawn_authority=none
@@ -13,10 +13,10 @@ user_contact_authority=none
 cross_owner_contact_authority=none
 cross_branch_transport=none
 canonical_state_write_authority=none
-output_contract=conclusion_first_return_to_parent
+output_contract=conclusion_first_return_to_invoker
 background_callback=forbidden
 authority=one_exact_read_only_scope_local_candidate_review
-default_fork_turns=none
+default_fork_turns=1
 scientific_authority=none
 write_authority=none
 git_authority=none
@@ -49,13 +49,14 @@ charter, the frozen design and only the immediate interfaces needed to validate
 The natural-language assignment is the source of the batch outcome, review
 intent, protected semantics, local reviewer judgment and completion evidence.
 Suggested formats are comprehension aids, not a rigid schema or admission gate.
-After the same Code Project Manager combines its L2 outputs into one coherent
+After Root or a Code Project Manager supplies one coherent
 scope-local candidate, one independent reviewer is the default. The reviewer
 may inspect the complete candidate for that one `direction:<id>` or named
 `shared:<component>` scope, but never performs a cross-direction or union
 review. Parallel reviewers are allowed only for genuinely independent review
 questions within that exact scope. Review remains advisory and never accepts
-the candidate; the owning CPM alone makes technical acceptance. Never review
+the candidate; the owning CPM alone makes technical acceptance for a domain
+package, while Root retains only ordinary non-domain task completion. Never review
 once per implementer and never start an automatic re-review loop.
 
 This is a trusted research repository, not an adversarial commercial security

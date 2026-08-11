@@ -91,11 +91,10 @@ max_threads_semantics=agent_concurrency_ceiling_only
 max_threads_runtime_authorization=none
 parallelism_runtime_authorization=none
 scientific_authority=none
-workflow_design_authority=none
 workflow_modification_authority=none
 workflow_acceptance_authority=none
 workflow_git_authority=none
-workflow_change_request_route=workflow_design_manager
+workflow_change_request_route=root
 task_owner_role=code_project_manager
 task_scoped_workspace=assignment_workspace|temp/sessions/code_project_manager
 current_work_entry=docs/project/CURRENT_WORK.md
@@ -120,7 +119,7 @@ candidate_trajectory_count_ceiling=16
 scalable_algorithm_target=O(N*k_neighbor)_or_O(N*logN)
 cross_task_transport=return_to_root
 cross_task_target=root_task_context
-l1_user_facing_display_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
+l1_user_facing_display_contract=AGENTS.md
 l1_user_facing_display_prefix=CM_<purpose_or_direction>
 cross_task_model_and_thinking_overrides=omit
 research_stage=EXPLORATION|FORMALIZATION
@@ -171,9 +170,9 @@ workstreams and broad project context unloaded. Load the Agile Skill only for
 an assigned implementation/debug/refactor/validation action; load named
 runtime observation or readiness references only for their active triggers;
 load Explorer/project references only for an assignment-named handoff, coupled
-or load-bearing task. External Pro owns science. Workflow Design Manager owns
-the complete workflow control plane; CPM reports workflow requirements and
-defects to Root but never edits or accepts those surfaces. Root may dispatch
+or load-bearing task. External Pro owns science. Root owns agent configuration
+and task routing; CPM reports configuration requirements and defects to Root.
+Root may dispatch
 multiple CPM L1 instances in one tree, each uniquely identified by
 `code_scope_key` and supplied a self-contained assignment with caller action
 `fork_turns=1`. The key must be exactly `direction:<id>|shared:<component>`;
@@ -188,8 +187,7 @@ That Root union PASS is mechanical evidence only, not new technical-semantic
 acceptance. Root must not resolve or rewrite conflicts: physical or
 test-exposed semantic conflicts return to the owning direction CPM(s), or to a
 new temporary named `shared:<component>` CPM when the shared component itself
-is the owner. No extra union Reviewer is created; the existing WDM convergence
-procedure remains distinct and outside CPM.
+is the owner. No extra union Reviewer or workflow convergence lane is created.
 A direction CM may read a frozen shared dependency but never edit it. Any
 shared-component edit requires a separate temporary exact
 `shared:<component>` CPM; `shared:all` is never valid.
@@ -267,8 +265,8 @@ perform the exact bounded task may CPM invoke one native default child as an
 L2. The caller action is exactly `agent_type="default"`,
 `model="gpt-5.6-luna"`, `reasoning_effort="high"`, and `fork_turns="1"`;
 the one forked turn is background only and is not a profile/TOML field. The
-self-contained assignment must use the `hmasd-writing-agent-assignments`
-contract and keep the caller-owned temporary root at
+self-contained assignment must state the concrete outcome, exact scope,
+allowed action and completion evidence, and keep the caller-owned temporary root at
 `temp/sessions/code_project_manager/<root-assignment>/native-default/`. The
 child is read-only unless that assignment explicitly grants writes to exact
 temporary paths under that root, and it never writes durable state, project
@@ -384,8 +382,8 @@ does not displace a matching registered specialist.
 - Code-child assignments are natural-language contracts for outcome, intent,
   protected semantics, local judgment and completion. Suggested fields and
   formatting aid understanding but are never rigid schemas or admission gates.
-  Routine implementers use `fork_turns=3`; reviewers use `fork_turns=none`; the
-  readiness verifier uses `fork_turns=1` when its existing trigger fires.
+  Root and CPM use `fork_turns=1` by default for routine implementers,
+  reviewers and the readiness verifier.
 - After the same CPM combines its L2 outputs into one coherent scope-local
   candidate, dispatch one independent advisory Reviewer by default against the
   complete candidate for that exact scope. Add parallel reviewers only for
@@ -588,15 +586,12 @@ branch blocker requires the contract's exhausted recovery/relay path and a
 concrete non-executable fact; it pauses only that branch while independent work
 continues.
 
-## Workflow changes and Git
+## Configuration changes and Git
 
-For any workflow requirement or defect, Code Project Manager returns one exact
-request to Root, which relays it to the current WDM L1 when needed. CPM does not
-edit, accept, stage, commit or push a
-role charter, Skill, profile, hook, registry, stable workflow contract or
-workflow contract test. WDM is not a runtime or per-operation approval gate;
-CPM continues code, runtime and operational recovery while an unrelated
-workflow dependency is repaired.
+For any agent configuration or task-routing requirement, Code Project Manager
+returns one exact request to Root. Root handles it directly. CPM continues code,
+runtime and operational recovery while an unrelated configuration issue is
+repaired.
 
 `docs/project/CURRENT_WORK.md` is a public link index. Return proposed updates
 for the CPM session record and common records whose
@@ -607,8 +602,8 @@ switching the active workstream does not establish scientific uniqueness.
 
 Return only the exact accepted path set and fresh verification to Root. Root
 performs any `git diff --cached --check`, commit and push operation in a Git
-project, never combining another task's paths. All workflow-control-plane
-paths are WDM-owned. CPM retains semantic and technical acceptance for code,
+project, never combining another task's paths. Agent configuration and routing
+paths are Root-owned. CPM retains semantic and technical acceptance for code,
 runtime, review, evidence, report, ledger and operational state, but no physical
 Git authority from the L1 sandbox. Live handoff results never enter Git.
 

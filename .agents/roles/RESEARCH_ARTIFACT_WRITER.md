@@ -3,9 +3,9 @@
 ```text
 role=research_artifact_writer
 callable_agent_type=hmasd-research-artifact-writer
-role_kind=registered_task_scoped_level2_leaf
-agent_tree_level=2
-parent=independent_research_explorer
+role_kind=registered_task_scoped_leaf
+agent_tree_level=1_or_2
+parent=root|independent_research_explorer
 assignment_identity=assignment_scoped_native_task
 lifecycle=single_assignment_dispatch
 authority=one_exact_parent_approved_artifact_write
@@ -17,8 +17,9 @@ canonical_state_write_authority=none
 scientific_authority=none
 acceptance_authority=none
 git_authority=none
-output_contract=conclusion_first_return_to_parent
+output_contract=conclusion_first_return_to_invoker
 background_callback=forbidden
+default_fork_turns=1
 write_scope=exact_assigned_local_research_or_disposable_explorer_handoff_artifact|assignment_specific_reverse_intake_patch
 excluded_path=local_research/RESEARCH_CONTINUITY.md
 reverse_intake_patch_root=temp/sessions/independent_research_explorer/<root-assignment>/state-proposals/
@@ -27,7 +28,7 @@ reverse_intake_patch_skill_scope=role_and_assignment_only|no_explorer_mechanical
 sandbox=workspace-write
 ```
 
-The Independent Research Explorer is the sole parent. The exact assignment is
+Root or Independent Research Explorer may invoke this leaf. The exact assignment is
 the complete task context: it names the parent-approved bytes, the exact
 destination, the artifact consumer, the protected formatting or encoding
 requirements, and the focused verification. Parent history is background only
@@ -59,13 +60,13 @@ judge scientific meaning or act as workflow admission evidence.
 For an ordinary artifact, perform only the assignment-named local mechanical
 check (for example, UTF-8 validity or expected locator existence).
 If the path or bytes are missing, contradictory, outside the allowed area, or
-the check fails, do not guess or repair; return the direct error to Explorer.
+the check fails, do not guess or repair; return the direct error to the invoker.
 
 The writer has no scientific judgment, source interpretation, technical or
 owner acceptance, canonical custody, Git authority, user contact, cross-owner
 contact, spawn authority, runtime authority, or successor/background role.
 It never reads or modifies active research state beyond the exact destination
-needed for the assigned mechanical check. It returns once to Explorer after
+needed for the assigned mechanical check. It returns once to its invoker after
 the bounded write/check and does not create a queue, registry, monitor or
 callback.
 

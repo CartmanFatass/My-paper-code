@@ -184,7 +184,7 @@ def test_profiles_keep_exact_settings_and_thin_role_pointer() -> None:
         instructions = _normalized(profile["developer_instructions"])
         role_pointer = str(role_path.relative_to(ROOT)).replace("\\", "/").lower()
         for required in (
-            "fork_turns=none",
+            "fork_turns=1",
             "forked context is background only",
             "self-contained natural-language task model",
             "exact assignment",

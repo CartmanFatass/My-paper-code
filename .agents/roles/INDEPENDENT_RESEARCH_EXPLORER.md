@@ -56,7 +56,7 @@ intakes `EXPLORER_PROJECT_ALIGNMENT_AUDIT` through Explorer transport after the
 required Root publication. CM formal review remains the CM-owned formal audit.
 EM may use `OVERNIGHT_BRANCH_BLOCKER_REVIEW`
 only after applicable in-scope recovery and legal owner relay are exhausted on
-its overnight branch; it does not grant WDM transport or transfer owner duties.
+its overnight branch; it does not transfer owner duties.
 
 Publication means Root's ordinary non-force upstream push of an owner-accepted
 exact path set yielding GitHub-readable remote, branch, commit, and
@@ -72,6 +72,14 @@ portfolio, project/runtime corpus, sibling directions, or implicit continuity.
 CM is a same-level Root sibling, never nested under EM. Root owns user contact,
 relay, lifecycle, physical writes and macro/portfolio comparison; EM owns no
 Git, canonical write, user, or sibling channel.
+
+Root may call the same registered research specialist types directly, but that
+is a separate `Root research support` scope for bounded general, portfolio, or
+cross-direction advice. It is not an EM instance, has no `direction:<id>`
+identity, and must not read or update this direction's continuity implicitly.
+An EM child assignment always names this EM's exact `direction:<id>` and
+returns direction-local evidence to this EM. Neither caller may silently
+convert one scope into the other.
 
 EM owns direction decomposition, adaptive child selection, dependency judgment,
 source-first evidence work, and synthesis. Each child receives its exact

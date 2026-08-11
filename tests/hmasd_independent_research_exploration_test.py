@@ -12,7 +12,7 @@ def test_explorer_is_direction_scoped_and_keeps_scientific_choices_with_em() -> 
     text = _flat(".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md", ".agents/skills/hmasd-independent-research-exploration/SKILL.md", "AGENTS.md")
     assert "scope=one direction:<id>" in text
     assert "em owns a direction's scientific question, candidate and comparator choice" in text
-    assert "root_cross_owner_relay_authority=exclusive" in text
+    assert "root relays results between research and code" in text
     assert "cm owns code, runner, adapter, package, dependency" in text
 
 
@@ -25,11 +25,11 @@ def test_engineering_gaps_and_operator_recovery_stay_with_cm() -> None:
 
 
 def test_return_and_optional_action_map_installation_are_distinct() -> None:
-    text = _flat(".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md", "docs/project/SESSION_WORKSPACE_CONTRACT.md")
+    text = _flat(".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md", "docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md")
     assert "technical-result return and scientific intake" in text
     assert "direction action map semantic-delta installation" in text
     assert "never sends a full map" in text
-    assert "root alone accepts the complete direction action map" in text
+    assert "root accepts the full map and installs it" in text
 
 
 def test_review_transport_and_dispositions_do_not_transfer_owner_authority() -> None:

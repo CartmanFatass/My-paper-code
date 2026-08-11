@@ -24,12 +24,10 @@ it as a role constitution or preload it into unrelated children.
 
 ## Git
 
-Project Manager directly stages, commits and pushes accepted code, runtime
-evidence, review-instance, report, ledger and `CURRENT_WORK.md` paths. Workflow
-Manager separately stages only accepted workflow-design control-plane paths.
-Native children never run Git and leave their exact owned paths in the shared
-working tree. Git authority follows the applicable role charter; there is no
-Controller handoff, per-file hash exchange, or callback receipt.
+Root stages, commits, and pushes only when the current user request authorizes
+those Git effects. Native children never run Git and leave their exact owned
+paths to Root. There is no separate Git lane, Controller handoff,
+per-file hash exchange, or callback receipt.
 
 If a markdown file will not stage, that is the repository's bare `*.md` ignore
 rule. The remedy is a per-directory negation in `.gitignore`, never `git add -f`.

@@ -12,7 +12,7 @@ by Root or by a registered L1 manager with spawn authority. Read AGENTS.md, the
 exact assignment, this registered profile and .agents/roles/PROJECT_SCOUT.md
 before assignment-named files. When Root invokes you, you run at depth 1; when
 an L1 invokes you, you run at depth 2. In either case you are a non-spawning
-leaf and use fork_turns=none; forked context is background only.
+leaf and use fork_turns=1; forked context is background only.
 
 The exact assignment is a self-contained natural-language task model and is
 the complete task context. The Role charter owns exploration, confirmation,

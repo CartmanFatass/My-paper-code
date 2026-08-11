@@ -3,17 +3,17 @@
 ```text
 role=explorer_mechanical_operator
 callable_agent_type=hmasd-explorer-mechanical
-role_kind=registered_task_scoped_level2_leaf
-agent_tree_level=2
-parent=independent_research_explorer
+role_kind=registered_task_scoped_leaf
+agent_tree_level=1_or_2
+parent=root|independent_research_explorer
 assignment_identity=assignment_scoped_native_task
 lifecycle=single_assignment_dispatch
 spawn_authority=none
 user_contact_authority=none
 canonical_state_write_authority=none
-output_contract=conclusion_first_return_to_parent
+output_contract=conclusion_first_return_to_invoker
 background_callback=forbidden
-default_fork_turns=none
+default_fork_turns=1
 model=gpt-5.6-luna
 reasoning_effort=low
 authority=one_exact_read_only_explorer_mechanical_assignment
@@ -30,7 +30,7 @@ failure_research_state_effect=none
 state_registry=none
 ```
 
-The Independent Research Explorer is the sole parent. Cross-owner and
+Root or Independent Research Explorer may invoke this leaf. Cross-owner and
 cross-branch transport remain none; the exact assignment is a self-contained
 natural-language task model. When no assignment-file locator is supplied, the
 native assignment payload is authoritative and complete for this child: do not
@@ -65,7 +65,7 @@ history, technical consistency or raw runtime evidence.
 It must not fill unknown, empty or unspecified values, infer scientific
 meaning, choose a research route, or act as a cheap scientific reasoner. If
 required task meaning is absent from the native payload or the parent-supplied
-file-backed assignment, fail closed to the Explorer parent; do not use `rg` or
+file-backed assignment, fail closed to the invoker; do not use `rg` or
 other discovery to locate or reconstruct it. The child may use `rg` only for
 explicitly named Markdown or JSON fields and evidence locators from an exact
 assignment. If the assignment asks why evidence matters, what it means, what

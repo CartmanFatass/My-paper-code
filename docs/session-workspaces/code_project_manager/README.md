@@ -11,8 +11,8 @@ workflow_surface_owner=false
 This tracked directory holds compact CPM project-operation plans, runtime
 contracts and accepted receipts. It contains no workflow-design authority and
 does not duplicate scientific state, runtime evidence or another session's
-context. CPM routes workflow defects to WDM and retains code, runtime and
-operational ownership.
+context. CPM returns agent-configuration issues to Root and retains code,
+runtime and operational ownership.
 
 CPM scope is exactly `direction:<id>|shared:<component>`, where each atom
 matches `[a-z0-9][a-z0-9._-]{0,63}` and rejects empty values, path separators,
@@ -61,5 +61,4 @@ worktrees are untouched. Worktree use adds no runtime accounting and does not
 authorize costly runtime; Root observes live resource facts and the owning CPM
 makes scope-local runtime judgment.
 
-Authority and path ownership come from
-`docs/project/SESSION_WORKSPACE_CONTRACT.md`.
+Authority and path ownership come from `AGENTS.md` and the CPM role charter.

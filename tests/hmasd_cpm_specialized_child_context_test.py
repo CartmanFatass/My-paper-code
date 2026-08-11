@@ -50,18 +50,15 @@ class SpecializedChildContextTest(unittest.TestCase):
         experiment = compact(read(".agents/roles/EXPERIMENT_OPERATOR.md"))
         experiment_profile = compact(read(".codex/agents/hmasd-experiment-operator.toml"))
         for term in (
-            "natural-language assignment brief",
-            "artifact consumers",
-            "protected",
-            "conflicting runtime evidence",
+            "one exact CM-authorized run",
+            "one source commit and run identity",
             "train -> evaluate -> analyze",
-            "one assignment-defined",
-            "read-only identity/run-root observation recovery",
+            "conflicting process identity fails closed",
+            "observe the assigned process identity and root once",
             "never changes a command",
-            "concise operational",
-            "direct artifact or consumer consequence",
-            "residual uncertainty",
-            "not result acceptance",
+            "mechanical evidence only",
+            "never CM technical acceptance",
+            "conclusion-first",
         ):
             self.assertIn(term, experiment)
         self.assertIn("natural-language brief", experiment_profile)
@@ -95,13 +92,13 @@ class SpecializedChildContextTest(unittest.TestCase):
         for term in (
             "role=cpm_agentify_transport_operator",
             "callable_agent_type=hmasd-cpm-agentify-transport",
-            "parent=code_project_manager",
+            "parent=root|code_project_manager",
             "requester_partition_root=temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/",
             "acceptance_authority=none",
             "technical_acceptance_authority=none",
             "cross_branch_transport=none",
-            "returns one conclusion-first result to CPM",
-            "Do not contact Root",
+            "returns one conclusion-first result to its invoker",
+            "Do not contact the user",
             "route across owners",
         ):
             self.assertIn(term, role)
@@ -158,8 +155,8 @@ class SpecializedChildContextTest(unittest.TestCase):
         self.assertIn("agentify_transport_assignment_fields=batch_path|results_path", cpm)
         self.assertIn("agentify_transport_result=AGENTIFY_REVIEW_BATCH_RESULT", cpm)
         self.assertIn("agentify_transport_result_fields=status|results_path|error", cpm)
-        self.assertIn("AGENTIFY_REVIEW_BATCH_ASSIGNMENT", agile)
-        self.assertIn("hmasd-cpm-agentify-transport", agile)
+        self.assertIn("Formal `CODE_SCIENCE_ALIGNMENT_AUDIT`", agile)
+        self.assertIn("parent-specific `hmasd-cpm-agentify-transport` child", agile)
 
     def test_specialized_profiles_declare_background_fork_context(self) -> None:
         profiles = (
@@ -170,7 +167,7 @@ class SpecializedChildContextTest(unittest.TestCase):
         )
         for relative in profiles:
             self.assertIn(
-                "fork_turns=none; forked context is background only.",
+                "fork_turns=1; forked context is background only.",
                 compact(read(relative)),
             )
 

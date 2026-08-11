@@ -44,7 +44,7 @@ root before sending.
    `results_path` under
    `temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/`
    and dispatch one self-contained `AGENTIFY_REVIEW_BATCH_ASSIGNMENT` to the
-   registered `hmasd-explorer-agentify-transport` child with `fork_turns=none`, naming only
+   registered `hmasd-explorer-agentify-transport` child with `fork_turns=1`, naming only
    `batch_path|results_path`. Confirm once that the raw question contains no
    local filesystem path, task history or unrelated corpus; use a public remote
    GitHub URL for a reviewer-facing source locator. Do not send a review whose
@@ -93,7 +93,7 @@ may use this branch only after a named project-alignment trigger, or after an
 `OVERNIGHT_BRANCH_BLOCKER_REVIEW` trigger has been confirmed. Ordinary B never
 creates this trigger. The overnight trigger is available only after applicable
 in-scope recovery and legal owner relay are exhausted on the same overnight
-project branch. Workflow Design Manager has no production transport role.
+project branch.
 
 Before dispatch, Root must have completed `publication`: an owner-accepted exact
 path set has been ordinarily, non-force pushed to the configured upstream. The
@@ -134,6 +134,5 @@ the project-alignment branch, Root-owned archival and publication occur as
 described above; EM alone reconciles the returned scientific answer.
 
 The Explorer alone selects the next review and continues the authorized
-campaign. Workflow Design Manager is not a campaign approver or transport
-operator. Research children remain available for source, innovation, principles
+campaign. Research children remain available for source, innovation, principles
 and critique work. The registered transport child performs no research judgment.

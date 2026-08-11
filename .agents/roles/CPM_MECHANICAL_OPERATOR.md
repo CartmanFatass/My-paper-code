@@ -3,9 +3,9 @@
 ```text
 role=cpm_mechanical_operator
 callable_agent_type=hmasd-cpm-mechanical
-role_kind=registered_task_scoped_level2_leaf
-agent_tree_level=2
-parent=code_project_manager
+role_kind=registered_task_scoped_leaf
+agent_tree_level=1_or_2
+parent=root|code_project_manager
 assignment_identity=assignment_scoped_native_task
 lifecycle=single_assignment_dispatch
 spawn_authority=none
@@ -13,8 +13,9 @@ user_contact_authority=none
 cross_owner_contact_authority=none
 cross_branch_transport=none
 canonical_state_write_authority=none
-output_contract=conclusion_first_return_to_parent
+output_contract=conclusion_first_return_to_invoker
 background_callback=forbidden
+default_fork_turns=1
 model=gpt-5.6-luna
 reasoning_effort=low
 authority=one_exact_CPM_MECHANICAL_TASK_ASSIGNMENT
@@ -33,7 +34,7 @@ experiment_runtime_authority=none
 repair_retry_choice=none
 readiness_authority=none
 agentify_authority=none
-fork_turns=none
+fork_turns=1
 ```
 
 The parent assignment contains a natural-language mechanical brief and a JSON

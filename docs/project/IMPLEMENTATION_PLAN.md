@@ -606,15 +606,12 @@ demand without desired-UAV assignment, and the registered constructive/null/
 feasibility checks before implementation.
 
 The historical code-worker benchmark selected Terra-high implementer and
-Luna-max reviewer; those rows remain historical evidence. The current persistent
-Workflow Design Manager route is Sol/high. Registered profiles are loaded after
-restart. All tracked writers use Root-managed worktrees; read-only, ignored-only
-and temp-only work is exempt, and ticket identity is not a child admission
-requirement. Code Project Manager directly owns Agentify Pro transport and exact
+Luna-max reviewer; those rows remain historical evidence. Root now handles
+agent configuration and routing directly. Registered profiles are loaded after
+restart. Code Project Manager directly owns Agentify Pro transport and exact
 raw archival for formal and Explorer-to-project review;
 the Independent Research Explorer directly owns its independent direction
-reviews, while Workflow Design Manager owns only stable workflow contract
-design. Every cross-task send explicitly passes the assignment-current target
+reviews. Every cross-task send explicitly passes the assignment-current target
 model and effort. These operational changes consume no conclusion-bearing
 iteration. Continue the G33 design audit under the remaining 13-iteration
 grant.

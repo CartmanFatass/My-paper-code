@@ -192,9 +192,8 @@ never supply additional authority or substitute for the brief. Fork defaults
 remain defined by `AGENTS.md` and the applicable role charter; do not duplicate
 them here.
 
-General assignment-writing guidance and examples live in the
-`.agents/skills/hmasd-writing-agent-assignments` Skill. Its examples are
-optional aids, not templates. This guide remains focused on code context.
+Keep child assignments short and self-contained. This guide remains focused on
+code context and does not depend on a separate assignment-writing framework.
 
 ## 6. Child autonomy and return
 

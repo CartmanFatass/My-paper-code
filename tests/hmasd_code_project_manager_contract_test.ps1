@@ -12,8 +12,8 @@ foreach ($required in @(
     'Operator receives only an exact run-ready assignment',
     'never installs, repairs, changes source/configuration',
     'root_lifecycle_git_relay=exclusive',
-    'root_final_git_integration_authority=accepted_paths_only',
-    'code_project_manager_scope_key_forms=direction:<id>|shared:<component>')) {
+    'code_scope_key_grammar=direction:<id>|shared:<component>',
+    'Root handles ordinary questions')) {
     if (-not $text.Contains($required)) { throw "CM ownership/safety contract missing: $required" }
 }
 Write-Output 'HMASD_CODE_PROJECT_MANAGER_CONTRACT_OK'

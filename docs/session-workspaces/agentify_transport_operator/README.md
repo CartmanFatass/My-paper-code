@@ -1,11 +1,11 @@
 # Agentify Transport Operator compatibility paths
 
-CPM or Explorer dispatches one requester-specific registered production
+Root research support, CPM, or Explorer dispatches one requester-specific registered production
 transport child: `hmasd-cpm-agentify-transport` or
-`hmasd-explorer-agentify-transport`. WDM is not a production transport parent.
-The only production requester partitions are
-`temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/`
-and
+`hmasd-explorer-agentify-transport`. Configuration tasks are not production transport parents.
+The production requester partitions are
+`temp/sessions/agentify_transport_operator/root/<assignment>/`,
+`temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/`, and
 `temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/`.
 Each exact minimal assignment names `batch_path` and assignment-specific
 `results_path`, while the batch names one local natural-language `context_path`
@@ -31,7 +31,7 @@ reads only the exact returned file after `COMPLETE` or `ERROR`.
 
 After writing and before terminal `COMPLETE`, the child runs
 `.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
-with the assignment path and returned terminal anchor. Explorer and CPM run
+with the assignment path and returned terminal anchor. Root, Explorer, and CPM run
 the same guard after terminal return and before reading/accepting the file.
 The guard requires a strict physical descendant of the requesting partition and
 assignment, rejects cross-partition paths, redirects and any shared root-level

@@ -150,7 +150,8 @@ engineering recovery path.
 For deterministic inspection, result extraction, handoff preparation or state
 rendering, CPM may trigger `hmasd-cpm-mechanical`. This Skill does not duplicate
 its mechanical contract. CM remains assignment author and sole technical and
-mechanical acceptance owner.
+mechanical acceptance owner. `.agents/roles/CPM_MECHANICAL_OPERATOR.md` owns
+the mechanical result fields and bounded observation recovery.
 
 Overnight authorization is supplied by the natural-language assignment. Within
 that assignment CM may perform dependency/environment setup, focused tests,
@@ -244,14 +245,11 @@ policy decisions, metrics and artifact I/O. Keep public interfaces minimal,
 dependencies directed, and complexity isolated. Extract shared code when it
 improves ownership or serves multiple live callers.
 
-## Action-triggered project cognition references
+## Action-triggered project cognition
 
-For a new task-scoped coding assignment, or when Code Project Manager clearly
-lacks the project mental model during an assignment action, read the reusable
-`.agents/skills/hmasd-writing-agent-assignments/references/project-cognition-bootstrap-prompt.md`
-once alongside the normally routed documents. This is an action-triggered read,
-not default startup context. It is a cognitive reference, not an authority
-source; never copied to each child assignment or loaded on every round.
+For a new task-scoped coding assignment, read only the directly relevant
+project map, owner, producer, consumer and focused test surfaces. Do not load a
+generic workflow or assignment-writing corpus.
 
 Use context depth deliberately rather than mechanically:
 
@@ -263,13 +261,9 @@ Use context depth deliberately rather than mechanically:
   assignment-named design, runtime boundary and claim evidence; existing
   readiness and review triggers still decide those actions.
 
-When compiling a child assignment, use the
-`hmasd-writing-agent-assignments` Skill and its optional
-`.agents/skills/hmasd-writing-agent-assignments/references/assignment-brief-examples.md`
-as a natural-language aid. The parent sends a shorter self-contained brief;
-forked turns are background context and never replace it. The Skill and its
-references are judgment aids, not schemas or admission gates, and they do not
-define mandatory fields.
+When compiling a child assignment, send a short self-contained brief with the
+outcome, exact scope, allowed action and completion evidence. Forked turns are
+background context and never replace the brief.
 
 Evaluate each change by coherent module responsibility, minimal public
 interfaces, directed dependencies, explicit state ownership, complexity
@@ -303,9 +297,9 @@ code changes and creates no second acceptance owner.
 Assignments are natural-language contracts: they explain outcome, intent,
 protected semantics, local judgment and completion. Suggested fields are aids
 for intelligent model context, not rigid schemas or admission gates. Code
-implementers run with `fork_turns=3`; code reviewers with `fork_turns=none`; the
-readiness verifier with `fork_turns=1` only when the existing readiness trigger
-fires. Forked turns are background context and never replace the assignment.
+implementers, code reviewers and the readiness verifier use the default
+`fork_turns=1`. Forked turns are background context and never replace the
+assignment.
 
 Select an oracle in this order when applicable: a hand-checkable exact case; a
 structural invariant or metamorphic relation; a differential comparison with a
@@ -363,10 +357,9 @@ deployment algorithm claimed to scale with dynamic agent count must target
 pairwise path. Any sparse or approximate physical model is a new scientific
 choice and requires its own design audit.
 
-Router, role, Skill, native-profile, registry and active workflow-contract
-changes belong to Workflow Design Manager under `hmasd-workflow-change-audit`. This
-Skill remains Code Project Manager's implementation loop for any separately assigned source-code
-slice.
+Router, role, Skill, native-profile and registry changes belong directly to
+Root. This Skill remains Code Project Manager's implementation loop for any
+separately assigned source-code slice.
 
 ## Concurrency and review
 

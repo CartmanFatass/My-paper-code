@@ -1,8 +1,8 @@
 """Proof-sized contracts for the Explorer Mechanical child boundary.
 
 These checks parse the registered profile and verify that the capability
-remains read-only, literal-fact organization only, and owned by the Explorer
-alone.
+remains read-only and literal-fact organization only when invoked by Root or
+the Explorer.
 """
 
 from __future__ import annotations
@@ -58,7 +58,7 @@ def test_explorer_mechanical_profile_is_registered_once_with_frozen_route() -> N
     for required in (
         ".agents/roles/EXPLORER_MECHANICAL_OPERATOR.md",
         ".agents/skills/hmasd-explorer-mechanical/SKILL.md",
-        "fork_turns=none",
+        "fork_turns=1",
         "self-contained natural-language task model",
         "one conclusion-first native result",
         "Do not write files",
@@ -81,7 +81,7 @@ def test_explorer_mechanical_role_and_skill_keep_literal_fact_boundary() -> None
     for required in (
         "role=explorer_mechanical_operator",
         "callable_agent_type=hmasd-explorer-mechanical",
-        "parent=independent_research_explorer",
+        "parent=root|independent_research_explorer",
         "assignment_identity=assignment_scoped_native_task",
         "user_contact_authority=none",
         "write_authority=none",
@@ -92,9 +92,9 @@ def test_explorer_mechanical_role_and_skill_keep_literal_fact_boundary() -> None
         "child_authority=none",
         "cross_owner_contact_authority=none",
         "cross_branch_transport=none",
-        "default_fork_turns=none",
-        "output_contract=conclusion_first_return_to_parent",
-        "The Independent Research Explorer is the sole parent",
+        "default_fork_turns=1",
+        "output_contract=conclusion_first_return_to_invoker",
+        "Root or Independent Research Explorer may invoke this leaf",
         "state_scan_authority=none",
         "self-contained natural-language task model",
         "locate, preserve, compare, group and compactly present",
@@ -109,9 +109,9 @@ def test_explorer_mechanical_role_and_skill_keep_literal_fact_boundary() -> None
 
     for required in (
         "Dispatch the registered `hmasd-explorer-mechanical` child",
-        "fork_turns=none",
-        "returns once to Explorer",
-        "never routes directly to a sibling owner",
+        "fork_turns=1",
+        "returns once to its invoker",
+        "Root relays the organized facts",
         "Prefer this child when heterogeneous record handling",
         "lowest-cost read-only observation first",
         "cannot decide locator validity, completeness, public accessibility or technical sufficiency",
@@ -163,7 +163,7 @@ def test_explorer_mechanical_assignment_intake_is_native_or_parent_file_backed()
             "closed missing meaning",
             (
                 "required task meaning is absent",
-                "fail closed to the Explorer parent",
+                "fail closed to the invoker",
                 "not use `rg` or other discovery",
             ),
         ),
@@ -192,9 +192,9 @@ def test_explorer_mechanical_assignment_intake_is_native_or_parent_file_backed()
             ),
         ),
         (
-            "parent file-backed assignment",
+            "invoker file-backed assignment",
             (
-                "parent must supply its exact path, hash and authority",
+                "invoker must supply its exact path, hash and authority",
                 "supplied hash is a locator/integrity fact",
                 "not an admission or acceptance decision",
             ),
@@ -203,7 +203,7 @@ def test_explorer_mechanical_assignment_intake_is_native_or_parent_file_backed()
             "closed missing meaning",
             (
                 "required assignment meaning is missing",
-                "fail closed to the Explorer parent",
+                "fail closed to the invoker",
                 "instead of using `rg` or discovery",
             ),
         ),

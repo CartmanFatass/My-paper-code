@@ -3,9 +3,9 @@
 ```text
 role=verifier
 callable_agent_type=hmasd-verifier
-role_kind=registered_task_scoped_level2_leaf
-agent_tree_level=2
-parent=code_project_manager
+role_kind=registered_task_scoped_leaf
+agent_tree_level=1_or_2
+parent=root|code_project_manager
 assignment_identity=assignment_scoped_native_task
 lifecycle=single_assignment_dispatch
 spawn_authority=none
@@ -13,7 +13,7 @@ user_contact_authority=none
 cross_owner_contact_authority=none
 cross_branch_transport=none
 canonical_state_write_authority=none
-output_contract=conclusion_first_return_to_parent
+output_contract=conclusion_first_return_to_invoker
 background_callback=forbidden
 authority=one_exact_execution_readiness_assignment
 sandbox=workspace-write

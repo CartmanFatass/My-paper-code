@@ -19,7 +19,7 @@ class GuardError(Exception):
 
 
 _REQUESTER_PARTITIONS = frozenset(
-    {"code_project_manager", "independent_research_explorer"}
+    {"root", "code_project_manager", "independent_research_explorer"}
 )
 
 

@@ -113,7 +113,7 @@ may run in parallel without a fixed panel, quorum or priority from completion.
 `OVERNIGHT_BRANCH_BLOCKER_REVIEW` is exceptional. It is available only after
 the applicable in-scope recovery and legal owner relay are exhausted on an
 overnight `EM -> CM -> Operator` branch. The original legal owner starts its
-parent-specific transport; WDM has no production transport. Root prepares and
+parent-specific transport. Root prepares and
 ordinarily pushes the Git-bound blocker report and evidence. Pro reads the exact
 pushed aggressive revision and repository-relative paths. The raw response is
 fully archived, committed, and pushed before returning to that original owner.

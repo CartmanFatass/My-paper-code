@@ -6,18 +6,15 @@ $cm = Read-RepoFile '.agents/roles/CODE_PROJECT_MANAGER.md'
 $pro = Read-RepoFile '.agents/roles/EXTERNAL_PRO.md'
 $research = Read-RepoFile '.agents/skills/hmasd-independent-research-exploration/SKILL.md'
 $agile = Read-RepoFile '.agents/skills/hmasd-agile-research-development/SKILL.md'
-$session = Read-RepoFile 'docs/project/SESSION_WORKSPACE_CONTRACT.md'
 $router = Read-RepoFile 'AGENTS.md'
-$startup = Read-RepoFile 'docs/project/L1_STARTUP_CONTEXT.md'
-$routes = Read-RepoFile 'docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md'
 $validation = Read-RepoFile 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
-$combined = (($em + $cm + $pro + $research + $agile + $session + $router + $startup + $routes + $validation) -replace '\s+', ' ')
+$combined = (($em + $cm + $pro + $research + $agile + $router + $validation) -replace '\s+', ' ')
 foreach ($required in @(
     'EM owns a direction''s scientific question, candidate and comparator choice',
     'CM owns code, runner, adapter, package, dependency',
     'technical-result return and scientific intake',
     'Direction Action Map semantic-delta installation',
-    'Root alone accepts the complete Direction Action Map',
+    'Root accepts the full map and installs it',
     'EXPLORER_PROJECT_ALIGNMENT_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
     'ordinary B has no automatic Pro call',
@@ -26,13 +23,12 @@ foreach ($required in @(
     'ordinary non-force',
     'raw response is completely archived, committed, and pushed',
     'max_subagent_depth=2',
-    'root_cross_owner_relay_authority=exclusive')) {
+    'Root relays results between research and code')) {
     if (-not $combined.Contains($required)) { throw "Research delivery relationship missing: $required" }
 }
 foreach ($required in @(
-    'Independent direction or methodology Pro review',
-    'Explorer project-alignment or overnight branch-blocker external review',
-    'EXPLORER_PROJECT_VALIDATION_WORKFLOW.md',
+    'EXPLORER_PROJECT_ALIGNMENT_AUDIT',
+    'OVERNIGHT_BRANCH_BLOCKER_REVIEW',
     'exact pushed aggressive revision',
     'raw response is fully archived, committed, and pushed')) {
     if (-not $combined.Contains($required)) { throw "Review-route relationship missing: $required" }

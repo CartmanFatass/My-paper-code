@@ -7,16 +7,16 @@ description: Use in the registered Agentify transport child to complete one orde
 
 ```text
 agentify_transport_child=parent-specific registered leaf
-production_requester_parents=code_project_manager|independent_research_explorer
-production_requester_partitions=temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/|temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/
-wdm_production_parent=none
+production_requester_parents=root|code_project_manager|independent_research_explorer
+production_requester_partitions=temp/sessions/agentify_transport_operator/root/<assignment>/|temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/|temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/
 ```
 
 The shared Skill supplies parent-neutral page and result mechanics. Production
-CPM requests use `hmasd-cpm-agentify-transport`; production Explorer requests
-use `hmasd-explorer-agentify-transport`. Each leaf has one requester, one exact
-assignment partition and one return route to that parent. Root relays any
-cross-owner conclusion; WDM is not a production Agentify parent.
+CPM requests use `hmasd-cpm-agentify-transport`; Explorer direction requests
+and Root research-support requests use `hmasd-explorer-agentify-transport` with
+their distinct requester partitions. Each call has one requester, one exact
+assignment partition and one return route to that invoker. Root relays any
+cross-owner conclusion; configuration tasks are not production Agentify parents.
 
 ## Assignment
 
@@ -43,7 +43,8 @@ exclusions, bounded non-duplicating recovery, and completion evidence. The
 terminal result remains conclusion-first and must identify the observable
 completed response/postcondition and any residual uncertainty. Write
 only the exact `results_path` under the caller's closed requester partition:
-`temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/`
+`temp/sessions/agentify_transport_operator/root/<assignment>/`,
+`temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/`,
 or `temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/`.
 Reject a batch/result path that crosses those partitions or uses the shared
 root-level generic locator. Do not write to the legacy root directly.

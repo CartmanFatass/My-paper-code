@@ -85,10 +85,8 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'compute_authority=derived_from_valid_code_project_manager_assignment',
-    'per_run_user_authorization_reference=not_required',
-    'valid exact assignment from Code Project Manager is the delegated compute authority',
-    'begins with a concise operational conclusion')) {
+    'compute_authority=derived_from_valid_root_or_code_project_manager_assignment',
+    'per_run_user_authorization_reference=not_required')) {
     if (-not $experimentOperatorRoleNormalized.Contains($required)) {
         throw "Experiment Operator role missing delegated-compute contract: $required"
     }
@@ -102,7 +100,7 @@ foreach ($profileRoute in @(
         'sandbox_mode = "workspace-write"',
         'approval_policy = "never"',
         $profileRoute.Role,
-        'registered child of Code Project Manager',
+        'registered child invokable',
         'exact assignment',
         'Do not mutate Git')) {
         if (-not $profileRoute.Text.Contains($required)) {
@@ -155,9 +153,9 @@ foreach ($required in @(
     '.agents/roles/CPM_MECHANICAL_OPERATOR.md',
     'CPM_MECHANICAL_TASK_ASSIGNMENT',
     'CPM_MECHANICAL_TASK_RESULT',
-    'fork_turns=none',
-    'agent_tree_level=2',
-    'parent=code_project_manager',
+    'fork_turns=1',
+    'agent_tree_level=1_or_2',
+    'parent=root|code_project_manager',
     'spawn_authority=none',
     'user_contact_authority=none',
     'cross_branch_transport=none',
@@ -182,7 +180,7 @@ foreach ($required in @(
     'approval_policy = "never"',
     '.agents/roles/EXPLORER_MECHANICAL_OPERATOR.md',
     '.agents/skills/hmasd-explorer-mechanical/SKILL.md',
-    'fork_turns=none',
+    'fork_turns=1',
     'self-contained natural-language task model',
     'one conclusion-first native result')) {
     if (-not $explorerMechanicalOperator.Contains($required)) {
@@ -200,7 +198,7 @@ foreach ($forbidden in @(
 foreach ($required in @(
     'role=explorer_mechanical_operator',
     'callable_agent_type=hmasd-explorer-mechanical',
-    'parent=independent_research_explorer',
+    'parent=root|independent_research_explorer',
     'write_authority=none',
     'scientific_authority=none',
     'technical_acceptance_authority=none',
@@ -239,7 +237,7 @@ foreach ($profileRoute in @(
         'sandbox_mode = "read-only"',
         'approval_policy = "never"',
         $profileRoute.Role,
-        'fork_turns=none',
+        'fork_turns=1',
         'self-contained natural-language task model',
         'Role charter owns',
         'thin')) {
@@ -291,7 +289,7 @@ foreach ($profileRoute in @(
 }
 
 foreach ($roleRoute in @(
-    @{ Text = $codeScoutRole; Name = 'Code Scout'; Required = @('default_fork_turns=none', 'self-contained natural-language task model', 'concise natural-language conclusion', 'reopen one named immediate interface once', 'not a schema or admission gate') },
+    @{ Text = $codeScoutRole; Name = 'Code Scout'; Required = @('default_fork_turns=1', 'self-contained natural-language task model', 'concise natural-language conclusion', 'reopen one named immediate interface once', 'not a schema or admission gate') },
     @{ Text = $reviewerRole; Name = 'Reviewer'; Required = @('self-contained natural-language task model', 'concise natural-language conclusion', 'reread one indispensable changed artifact or immediate interface once', 'not a schema or admission gate') },
     @{ Text = $researchScoutRole; Name = 'Research Scout'; Required = @('self-contained natural-language task model', 'SOURCE_RESULT_PACKET', 'concise natural-language conclusion', 'one JSON or PDF fidelity recheck at that disputed locator', 'not a schema or admission gate') },
     @{ Text = $researchPrinciplesRole; Name = 'Research Principles Analyst'; Required = @('self-contained natural-language task model', 'RL_PRINCIPLE_ANALYSIS_PACKET', 'concise natural-language conclusion', 'reread one supplied candidate or source fact', 'not a schema or admission gate') },
@@ -411,8 +409,7 @@ foreach ($required in @(
     'monetary_cost_unavailable',
     'All tracked writers use Root-managed worktrees',
     'Read-only, ignored-only and temp-only work is exempt',
-    'ticket, ticket identity or ticket precondition is not part of child authority or workspace admission',
-    'current_persistent_wdm_route=gpt-5.6-sol/high')) {
+    'ticket, ticket identity or ticket precondition is not part of child authority or workspace admission')) {
     if (-not $benchmarkNormalized.Contains($required)) {
         throw "Benchmark contract missing: $required"
     }
@@ -424,7 +421,6 @@ foreach ($required in @(
     'monetary_cost=unavailable_from_native_child_runtime',
     'hidden_oracle=IMPLEMENTER_ORACLE_PASS',
     'historical benchmark evidence',
-    'persistent Workflow Design Manager route is `gpt-5.6-sol/high`',
     'ticket/worktree identity is superseded policy')) {
     if (-not $resultNormalized.Contains($required)) {
         throw "Benchmark result missing: $required"
@@ -457,7 +453,6 @@ $standardL1Keys = @(
 $rejectedL1Keys = @('role', 'role_pointer', 'registered_child_pointers')
 $l1Routes = @(
     @{ Section = 'HMASDCodeProjectManager'; Name = 'hmasd-code-project-manager'; Model = 'gpt-5.6-sol'; Effort = 'high'; Role = '.agents/roles/CODE_PROJECT_MANAGER.md'; Children = @('hmasd-code-scout', 'hmasd-implementer', 'hmasd-implementer-terra', 'hmasd-reviewer', 'hmasd-verifier', 'hmasd-experiment-operator', 'hmasd-cpm-mechanical', 'hmasd-cpm-agentify-transport') },
-    @{ Section = 'HMASDWorkflowDesignManager'; Name = 'hmasd-workflow-design-manager'; Model = 'gpt-5.6-sol'; Effort = 'high'; Role = '.agents/roles/WORKFLOW_DESIGN_MANAGER.md'; Children = @('hmasd-workflow-auditor', 'hmasd-workflow-implementer', 'hmasd-workflow-reviewer') },
     @{ Section = 'HMASDIndependentResearchExplorer'; Name = 'hmasd-independent-research-explorer'; Model = 'gpt-5.6-sol'; Effort = 'max'; Role = '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md'; Children = @('hmasd-research-scout', 'hmasd-research-innovator', 'hmasd-research-critic', 'hmasd-research-principles-analyst', 'hmasd-explorer-mechanical', 'hmasd-research-artifact-writer', 'hmasd-explorer-agentify-transport') })
 foreach ($route in $l1Routes) {
     $sectionMatch = [regex]::Match(
@@ -503,7 +498,7 @@ foreach ($route in $l1Routes) {
             throw "L1 child allow-list missing: $($route.Name): $child"
         }
     }
-    if ($route.Name -in @('hmasd-workflow-design-manager', 'hmasd-independent-research-explorer') -and
+    if ($route.Name -eq 'hmasd-independent-research-explorer' -and
         (-not $instructions.Contains('root') -or -not $instructions.Contains('fork_turns=1'))) {
         throw "L1 Root caller fork_turns=1 contract missing: $($route.Name)"
     }

@@ -5,8 +5,8 @@ $role = Read-RepoFile '.agents/roles/EXPERIMENT_OPERATOR.md'
 $profile = Read-RepoFile '.codex/agents/hmasd-experiment-operator.toml'
 $text = (($role + $profile) -replace '\s+', ' ')
 foreach ($required in @(
-    'parent=code_project_manager',
-    'agent_tree_level=2',
+    'parent=root|code_project_manager',
+    'agent_tree_level=1_or_2',
     'user_contact_authority=none',
     'git_authority=none',
     'only to this treatment',

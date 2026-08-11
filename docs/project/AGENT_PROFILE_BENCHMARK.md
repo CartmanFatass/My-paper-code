@@ -11,7 +11,6 @@ same_class_instructions=byte_identical
 same_task=true
 blinded=true
 project_acceptance_owner=project_manager_code_side
-current_persistent_wdm_route=gpt-5.6-sol/high
 ```
 
 This is a code-worker selection experiment, not an algorithm experiment. It

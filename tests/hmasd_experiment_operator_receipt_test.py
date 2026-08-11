@@ -35,7 +35,7 @@ TEST_TEMP_ROOT = (
     REPO
     / "temp"
     / "sessions"
-    / "workflow_design_manager"
+    / "root"
     / "test-tmp"
     / "experiment-operator-receipt"
 )

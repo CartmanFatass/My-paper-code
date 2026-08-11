@@ -5,11 +5,11 @@ description: Bounded read-only mechanical evidence organization for Explorer ass
 
 # HMASD Explorer Mechanical Skill
 
-Use this thin Skill only when the Root-scoped Independent Research Explorer L1
+Use this thin Skill only when Root or a Root-scoped Independent Research Explorer
 has a bounded mechanical organization question whose answer is already
 explicit in a bounded set of read-only records named by the exact assignment
 payload. Dispatch the registered `hmasd-explorer-mechanical` child with
-`fork_turns=none` and a self-contained natural-language brief; name the exact
+`fork_turns=1` and a self-contained natural-language brief; name the exact
 evidence inputs and the requested literal organization, while keeping
 scientific purpose, interpretation and next-action decisions with the
 Explorer.
@@ -22,9 +22,8 @@ expected information gain is concrete and the input boundary is frozen. Use
 the Explorer directly when the facts are already adjacent, when interpretation
 is required, or when dispatch would cost more than a short local extraction.
 This child is not a cheap scientific consultant, validator, dispatcher,
-writer, reviewer or acceptance owner. It returns once to Explorer; Explorer
-returns any semantic proposal or locator to Root and never routes directly to a
-sibling owner.
+writer, reviewer or acceptance owner. It returns once to its invoker; the
+invoker has already selected the scope and retains all semantic routing.
 
 When an already-existing exact deterministic read-only script fully covers the
 named mechanical task, prefer that script. Do not add a custom script in this
@@ -35,14 +34,14 @@ route; a helper requires a separate confirmed change.
 Give the child the exact native assignment payload and only its named
 read-only inputs. When no assignment-file locator is supplied, that payload is
 the exact assignment; the child must not search for, reconstruct or infer an
-assignment file. If a file-backed assignment is required, the parent must
+assignment file. If a file-backed assignment is required, the invoker must
 supply its exact path, hash and authority. Preserve those values literally;
 the supplied hash is a locator/integrity fact, not an admission or acceptance
 decision. The Role and this Skill are mandatory immediate references, but they
 are contract inputs distinct from assignment-file reconstruction.
 
 If required assignment meaning is missing from the native payload or the
-parent-supplied file-backed assignment, fail closed to the Explorer parent
+invoker-supplied file-backed assignment, fail closed to the invoker
 instead of using `rg` or discovery. Once assignment meaning and inputs are
 present, use the lowest-cost read-only observation first: `rg` only for
 explicitly named Markdown or JSON fields and evidence locators, PowerShell
@@ -66,6 +65,6 @@ absence or contradiction if the second read does not resolve it. Do not add
 sources, infer values, retry repeatedly, repair records or choose a scientific
 action.
 
-The child returns one conclusion-first native result. The Explorer interprets
-the organized facts, decides why they matter and chooses any next research
-step; those decisions must not be smuggled into the mechanical result.
+The child returns one conclusion-first native result. The invoker interprets
+the organized facts and owns every next action; those decisions must not be
+smuggled into the mechanical result.

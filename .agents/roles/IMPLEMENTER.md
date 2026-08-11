@@ -3,9 +3,9 @@
 ```text
 role=implementer
 callable_agent_type=hmasd-implementer
-role_kind=registered_task_scoped_level2_leaf
-agent_tree_level=2
-parent=code_project_manager
+role_kind=registered_task_scoped_leaf
+agent_tree_level=1_or_2
+parent=root|code_project_manager
 assignment_identity=assignment_scoped_native_task
 lifecycle=single_assignment_dispatch
 spawn_authority=none
@@ -13,12 +13,12 @@ user_contact_authority=none
 cross_owner_contact_authority=none
 cross_branch_transport=none
 canonical_state_write_authority=none
-output_contract=conclusion_first_return_to_parent
+output_contract=conclusion_first_return_to_invoker
 background_callback=forbidden
 authority=one_exact_frozen_implementation_assignment
 sandbox=workspace-write
 write_authority=assignment_exact_paths_only
-default_fork_turns=3
+default_fork_turns=1
 scientific_authority=none
 git_authority=none
 acceptance_authority=none
@@ -29,7 +29,8 @@ Read the root router, the exact assignment, the registered profile, this
 charter and only the named design and code interfaces. Work only in the granted
 path set and preserve unrelated edits. Implement the frozen behavior without
 choosing an estimand, gate, budget, seed, threshold, result meaning or
-successor. Missing scientific content fails closed to Code Project Manager.
+successor. Missing scientific content fails closed to the invoker; Root relays
+domain-scientific ambiguity to the owning manager.
 
 The natural-language assignment is the source of outcome, intent, protected
 semantics, local engineering judgment and completion evidence. It should make
