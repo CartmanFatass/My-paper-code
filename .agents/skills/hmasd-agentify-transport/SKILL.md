@@ -84,6 +84,28 @@ report the actual error if it remains unavailable. The operator may switch
 conversations or tabs during the batch and keep multiple requester-authorized
 sessions available.
 
+## Prompt transport invariant
+
+There are two distinct send routes. For a genuinely new conversation, use the
+currently supported safe `agentify_query(promptPath=<exact question path>, ...)`
+route, record the caller-computed lowercase SHA-256 of the question file, then
+record the URL and ID created by ChatGPT; never invent an identity or a strict
+review receipt that this route does not return.
+For an exact existing conversation URL/ID, use `agentify_review_query`, not
+`agentify_query`, with the exact `promptPath`, caller-computed lowercase
+SHA-256 of that question file, assigned stable key/idempotency key, visible
+`Pro`, and `timeoutMs=2700000`. The strict endpoint itself enforces exact-one
+`prompt`/`promptPath` selection and validates the pre-send SHA.
+
+Never source outbound prompt text from shell output, and never place stdout, a
+tool result, JSON wrapper, or page wrapper in `prompt`. The question file is
+the sole outbound payload. Before treating an exact-continuation send as
+complete, require receipt `promptSha256` to equal the published/intended
+question-file SHA. For a new-conversation `agentify_query`, retain the locally
+computed question-file SHA and do not claim receipt-level SHA evidence. These
+rules apply identically in Root and Explorer requester partitions and do not
+add identity, authentication, or state-machine work.
+
 Conversation memory and browser-tab ownership are different. Closing a tab does
 not delete its ChatGPT conversation, and a concrete saved conversation URL can
 reopen that memory. Follow the context brief's clean, exact-URL continuation,
@@ -117,11 +139,15 @@ conversation. For each question:
     and then read the composer again; continue only when the composer visibly
     shows Pro after that action. `expectedModel=Pro`, an available option or
     recognition metadata alone cannot prove that the switch occurred.
- 3. Call `agentify_query` with `promptPath=<question path>`, the selected tab key
-    or id, `timeoutMs=2700000`, and the exact visible `expectedModel=Pro` for
-    ChatGPT. `Pro` is the current selectable intelligence label; do not replace
-    it with the account heading or the separate `GPT-5.6 Sol` option. Agentify owns
-    whole-file insertion, visible model selection and the single send.
+ 3. For a clean, genuinely new conversation, call `agentify_query` with
+    `promptPath=<question path>`, the selected tab key or id,
+    `timeoutMs=2700000`, and exact visible `expectedModel=Pro` for ChatGPT. For
+    an exact URL/ID continuation, call `agentify_review_query` with that exact
+    `promptPath`, caller-computed lowercase question SHA-256, stable key,
+    idempotency key, visible Pro and the same timeout. `Pro` is the current
+    selectable intelligence label; do not replace it with the account heading
+    or the separate `GPT-5.6 Sol` option. Agentify owns whole-file insertion,
+    visible model selection and the single send.
  4. Accept the query result only when its structured content reports
     `status=COMPLETE`, contains a full nonempty natural-language response,
     reports visible `modelEvidence=Pro` (or a full label ending in `Pro`), and
@@ -133,8 +159,10 @@ conversation. For each question:
     commentary, progress, ETA, heartbeat, collaboration or intermediate parent
     notification while waiting. Only the actual complete answer plus its
     concrete conversation URL permits archive and advancement.
-5. Save the response, question path, conversation URL and item status in the
-   exact assigned `results_path`.
+5. Save the response, question path, caller-computed question SHA-256,
+   conversation URL and item status in the exact assigned `results_path`. For
+   an exact-continuation review, also save receipt `promptSha256`; a `COMPLETE`
+   continuation row requires it to equal the published/intended question SHA.
 
 Before returning `COMPLETE`, run the read-only result-path guard at
 `.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
@@ -146,8 +174,10 @@ rewrite or read result contents. The guard rejects the shared root-level
 `temp/sessions/agentify_transport_operator/results.json` locator.
 
 The results file has one ordered row per question with `question_path`,
-`status`, `response`, `conversation_url`, `model_evidence` and an actual error
-when present. Copy response and metadata only from the structured terminal tool
+`question_sha256`, `status`, `response`, `conversation_url`, `model_evidence`,
+the strict continuation receipt `promptSha256` when that route was used, and
+an actual error when present. Copy response and metadata only from the
+structured terminal tool
 result; never substitute page chrome, a provider-home URL or a partial preview.
 Treat tool state as page evidence, not as the completeness decision. Read the
 actual answer and reconcile it with the live conversation: an abruptly cut-off
@@ -174,11 +204,16 @@ error=<empty or actual error>
 Do not follow an error-code decision table. Inspect the actual page, tabs,
 conversation, active query and saved responses, then use the same page controls
 to recover. A missing tab, provider home page, stale conversation, elapsed wait
-interval or one failed tool call is not terminal. After one failed action,
-inspect its postcondition and use at most one suitable page/session recovery
-that cannot duplicate or interrupt a send. Preserve completed responses and
-continue the remaining batch. Never ask the requester to rewrite an unchanged
-batch solely to retry transport.
+interval or one failed tool call is not terminal. On a fetch/client failure
+after an exact-continuation send, inspect the durable operation first, then use
+`agentify_review_query(verifyExisting=true, ...)` only with the exact original
+fingerprint (including stable key, idempotency key, conversation URL/ID, model,
+question SHA and timeout). It is observation, never a resend. Do not alter one
+field to bypass a conflict. After one failed action, inspect its postcondition
+and use at most one suitable page/session recovery that cannot duplicate or
+interrupt a send. Preserve completed responses and continue the remaining
+batch. Never ask the requester to rewrite an unchanged batch solely to retry
+transport.
 
 Never interrupt an active answer, duplicate a possibly submitted question, send
 a placeholder, or activate Continue, Retry, Stop or Answer now. Perform no

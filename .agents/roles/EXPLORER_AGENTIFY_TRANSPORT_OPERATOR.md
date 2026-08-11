@@ -42,6 +42,21 @@ page, provider, wait, recovery, tab and terminal mechanics; this Role does not
 duplicate or redesign them. There is no configuration-acceptance step
 exception.
 
+For a new conversation the leaf uses only the Skill's safe
+`agentify_query(promptPath=...)` route and returns the observed created URL/ID.
+For an assignment requiring an exact existing URL/ID, it uses only the strict
+`agentify_review_query` route with the exact question `promptPath`,
+caller-computed lowercase question SHA-256, assigned stable/idempotency keys,
+visible Pro and `2700000` ms. It never turns shell output, tool output or a
+wrapper into `prompt`; the receipt `promptSha256` must match the intended
+published question SHA before it reports `COMPLETE`. A new-conversation
+`agentify_query` records the caller-computed question SHA but does not invent a
+strict review receipt. After a fetch/client failure it
+observes the durable operation through `verifyExisting=true` using the exact
+original fingerprint and never resends or changes a field to evade conflict.
+Continue, Retry, Stop and Answer now remain forbidden; full response/archive
+and structured-result rules remain those in the Skill.
+
 Do not contact the user or another task, invoke another Skill, spawn a
 child, read or write canonical state, use Git, or make a scientific decision.
 Return the transport evidence and any direct mechanical error to the invoker only.
