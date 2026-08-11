@@ -145,7 +145,9 @@ Formal `CODE_SCIENCE_ALIGNMENT_AUDIT` remains a CPM-owned comparison audit
 through the parent-specific `hmasd-cpm-agentify-transport` child. It is not an
 Explorer-origin final review. The transport child owns page/provider/wait and
 receipt mechanics; an `ERROR` remains review-local and does not replace CM's
-engineering recovery path.
+engineering recovery path. The legacy audit name means scientific-contract
+alignment at one published revision, never code correctness, test review,
+debugging, style, dependency or runtime acceptance.
 
 For deterministic inspection, result extraction, handoff preparation or state
 rendering, CPM may trigger `hmasd-cpm-mechanical`. This Skill does not duplicate
@@ -233,7 +235,10 @@ not a second semantic source.
     `CODE_SCIENCE_ALIGNMENT_AUDIT` through the CPM Agentify transport when
     required. The audit may identify a
    concrete contract mismatch but cannot
-   design an algorithm, controller, solver or new evidence search.
+   design an algorithm, controller, solver or new evidence search. Its question
+   uses the GitHub repository, configured remote, branch, full commit, direct
+   commit-pinned URLs and repository-relative paths, contains no local absolute
+   filesystem path, and asks for scientific alignment only.
 
 ## Active module boundary
 
@@ -419,7 +424,7 @@ separately assigned source-code slice.
   for that exact scope. Parallel reviewers are allowed only for genuinely
   independent questions within that scope. Never review once per implementer,
   perform a cross-direction or union review, or create an automatic re-review
-  loop. The required Pro code-science audit occurs
+  loop. The required Pro scientific-contract alignment audit occurs
   once after Code Project Manager implementation acceptance; it is a contract
   diff and owns scientific alignment, not code acceptance or implementation
   design. Verifier dispatch remains conditional on the existing readiness

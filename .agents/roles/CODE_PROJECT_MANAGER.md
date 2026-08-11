@@ -374,7 +374,11 @@ does not displace a matching registered specialist.
   route use question selection, batch-file creation, direct parent dispatch of
   the reusable registered
   `hmasd-cpm-agentify-transport` native child, exact archival and mechanical result
-  acceptance. It is not Explorer-origin final review.
+  acceptance. It is not Explorer-origin final review. Despite its legacy name,
+  it asks only whether the published implementation-bound proposition preserves
+  the frozen scientific treatment and claim boundary. Pro never checks code
+  correctness, tests, debugging, style, dependencies or runtime acceptance;
+  those remain CPM duties.
 - Exact recording of External Pro dispositions, reports, ledgers and runtime
   evidence without scientific reinterpretation.
 - Code-child assignments, source and code-test changes, proof-sized validation,
@@ -556,6 +560,10 @@ only after the child's terminal return. `.agents/roles/CPM_AGENTIFY_TRANSPORT_OP
 and `.agents/skills/hmasd-agentify-transport/SKILL.md` own page, provider, wait,
 recovery and tab mechanics; CPM preserves conversation meaning and performs
 mechanical intake.
+The standalone question supplies the GitHub repository, configured remote,
+branch, full commit, direct commit-pinned URLs and repository-relative paths,
+contains no local absolute filesystem path, and asks only for
+scientific-contract alignment rather than code review.
 Before reading or accepting that result, CPM runs
 `.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
 with the expected assignment path and returned terminal anchor. Mismatch,

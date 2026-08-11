@@ -78,7 +78,11 @@ or a mandatory result return.
 
 Use Explorer transport only for Explorer-origin reviews. The review is
 `EXPLORER_PROJECT_ALIGNMENT_AUDIT`, distinct from CM's formal audit; it requires the named trigger and Root
-publication. `OVERNIGHT_BRANCH_BLOCKER_REVIEW` is available only after the
+publication. The Pro-visible packet uses the GitHub repository, configured
+remote, branch, full commit, direct commit-pinned URLs and repository-relative
+paths, never local absolute filesystem paths, and asks only for scientific
+judgment rather than code review, tests, debugging or technical acceptance.
+`OVERNIGHT_BRANCH_BLOCKER_REVIEW` is available only after the
 overnight branch exhausts applicable recovery and legal owner relay. Root
 prepares and pushes the Git-bound blocker evidence; Pro's raw response is
 archived, committed, pushed, and returned to the original owner. A required user

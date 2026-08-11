@@ -8,6 +8,8 @@ explorer_transport_owner=independent_research_explorer
 cm_formal_review=CODE_SCIENCE_ALIGNMENT_AUDIT
 explorer_project_review=EXPLORER_PROJECT_ALIGNMENT_AUDIT
 overnight_review=OVERNIGHT_BRANCH_BLOCKER_REVIEW
+review_scope=scientific_semantics_only
+code_review=forbidden
 ```
 
 External Pro supplies scientific judgment only inside a submitted,
@@ -19,19 +21,26 @@ Pro is outside the Codex tree. Explorer-origin requests travel only through
 Explorer's parent-specific transport and return to EM for direction-local intake;
 CM formal requests use CM's transport. Provider conversation and transport
 artifacts are evidence, not owner transfer. A submitted question names the
-authorized boundary, exact published remote/branch/commit/repository-relative
-paths, revision-bound evidence, scientific question, and uncertainty. Pro reads
-only the stated public remote inputs and returns its reasoning before any scoped
-disposition. Local filesystem paths alone are not review input.
+authorized boundary, exact published GitHub repository/configured remote/
+branch/full-commit/direct-commit-pinned URLs and repository-relative paths,
+revision-bound evidence, scientific question, and uncertainty. Pro uses the
+GitHub connector only for the stated public remote inputs and returns its
+reasoning before any scoped disposition. A Pro-visible question never contains
+a local absolute filesystem path.
 
-For the submitted review, Pro reconstructs the proposition realized by the code,
-tests the strongest material hidden assumption or alternative explanation, and
-assesses evidence discrimination and usefulness. It does not author EM science,
-intake technical results, accept CM code, operate the Operator, control Root
+For the submitted review, Pro reconstructs the scientific proposition bound by
+the published artifacts, tests the strongest material hidden assumption or
+alternative explanation, and assesses evidence discrimination, interpretation
+and usefulness. It may read an exact published code or result artifact only to
+resolve that scientific binding. It never performs line review,
+implementation-correctness review, test review, debugging, style review,
+dependency review or runtime acceptance. It does not author EM science, intake
+technical results, accept CM code, operate the Operator, control Root
 publication/relay, create an algorithm or evidence search, grant authority, or
 rank a portfolio.
 
-`CODE_SCIENCE_ALIGNMENT_AUDIT` remains the CM formal review. An Explorer-origin
+`CODE_SCIENCE_ALIGNMENT_AUDIT` is a legacy name for scientific-contract
+alignment at a published revision, not a code-quality review. An Explorer-origin
 implementation review is exclusively `EXPLORER_PROJECT_ALIGNMENT_AUDIT` and
 travels only through the Explorer parent-specific transport. It considers the
 realized proposition, a material alternative or hidden assumption, and evidence
