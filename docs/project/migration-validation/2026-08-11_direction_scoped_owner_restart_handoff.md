@@ -90,13 +90,22 @@ Tests completed before this handoff:
   PowerShell contract passed without an unrelated doctor run.
 - Project Scout registration evidence: the exact
   `gpt-5.3-codex-spark/medium` read-only invocation returned `SPARK_MODEL_OK`;
-  31 focused topology/context tests passed.
+  a fresh Root-level registered spawn returned identity
+  `hmasd-project-scout` with `AGENTS.md exists=true`; 44 focused
+  topology/context/routing tests passed.
 - Agent harness passed with 22 profiles, 23 Roles and 9 Skills.
 - 23 TOML files and two JSON files parsed; `git diff --check` passed.
 - `codex --strict-config doctor --summary` reported 17 ok, 0 warn and 0 fail.
 
 No real research, solver, training, result-bearing runtime, result publication
 or external review was started by this control-plane task.
+
+The attempted nested `codex exec` L1-to-Project-Scout live smoke was not
+completed because that ephemeral orchestrator could not register its parent
+thread (`no thread with id`). This is a tool-context limitation, not a model,
+profile or allow-list rejection. Static L1 routing is green; the native fresh
+Root startup sequence below retains exactly one depth-2 live smoke and creates
+no retry mechanism or new workflow gate.
 
 ## Lifecycle state
 
