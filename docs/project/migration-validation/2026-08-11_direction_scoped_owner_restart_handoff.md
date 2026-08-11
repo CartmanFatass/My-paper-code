@@ -309,6 +309,47 @@ This requirement is recorded only; it is not implemented by the current
 direction-flow smoke, but it should be completed before the next broad,
 multi-candidate control-plane redesign.
 
+## Future requirement: plain language plus mechanical facts
+
+The user clarified that `$hmasd-writing-agent-assignments` must not treat
+natural-language sufficiency as a replacement for mechanical reporting. Every
+actionable Root-to-L1, L1-to-L2, progress or terminal message needs two layers:
+
+1. **TL;DR and ELI18 meaning first.** Explain what is requested or what
+   happened, why it matters, the concrete relationship involved, and who acts
+   next. Define non-obvious local terms before relying on them.
+2. **A compact mechanical facts tail second.** Pin the explanation to the
+   smallest task-relevant facts that another agent or script can check.
+
+Depending on the task, the mechanical tail should preserve the relevant subset
+of:
+
+- exact role/display identity, parent and scope key;
+- exact worktree/base or source revision when identity depends on it;
+- exact owned, changed, deleted, read or produced paths and artifact locators;
+- actual action/progress status and the first unresolved blocker;
+- commands or observations used as evidence, including exit status and useful
+  pass/fail counts;
+- the next owner or remaining Root gate;
+- ignored/untracked residue and its explicit disposition when material.
+
+Do not require irrelevant fields, repeated boilerplate or hashes for ordinary
+communication. A hash remains useful only when an exact supplied locator or
+integrity boundary genuinely depends on it. The mechanical tail is evidence,
+not an admission record, acceptance token, queue or state machine.
+
+Both layers are mandatory when they carry relevant information. A narrative-only
+message can sound coherent while referring to the wrong paths or results. A
+fields-only message can preserve exact bytes while losing why they matter or who
+owns the decision. The semantic owner checks the explanation; deterministic
+tests or direct observations check the mechanical facts. Neither layer replaces
+the other.
+
+The current `WM_plain_language_contract` task may preserve this two-layer rule
+within its existing nine-file scope, but this handoff records it explicitly so
+future assignment and route-table work cannot regress to natural-language-only
+reporting.
+
 ## Workflow-efficiency follow-up (not a restart blocker)
 
 This migration was slower than its edits because cross-candidate assertions ran
