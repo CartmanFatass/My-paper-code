@@ -72,6 +72,29 @@ def test_skill_trigger_and_task_model_recipe_are_explicit() -> None:
     assert "parent is a context compiler" in text
 
 
+def test_native_payload_and_file_backed_assignment_boundary_is_explicit() -> None:
+    section = _normalized_text(
+        _section(SKILL, "### Native payload and file-backed assignment boundary")
+    )
+    for cue in (
+        "no assignment-file locator",
+        "complete native payload",
+        "exact authoritative assignment",
+        "must not search for, reconstruct or infer an assignment file",
+        "fails closed to the parent",
+        "file-backed assignment",
+        "exact path, hash and authority",
+        "locator or integrity fact",
+        "not a workflow admission, acceptance or continuity mechanism",
+        "mandatory role/skill immediate references",
+        "distinct from assignment reconstruction",
+        "`rg` remains",
+        "explicitly named fields or evidence locators",
+        "unsourced assignment discovery",
+    ):
+        assert cue in section
+
+
 def test_child_briefs_name_validation_scope_and_evidence_ownership() -> None:
     text = _normalized(SKILL)
     section = _normalized_text(

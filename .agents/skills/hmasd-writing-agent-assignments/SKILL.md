@@ -111,6 +111,19 @@ Those anchors narrow execution; they do not carry the task's meaning. A parent
 is a context compiler, not a field copier. A shorter brief is correct when it
 contains enough meaning for the bounded task.
 
+### Native payload and file-backed assignment boundary
+
+When the caller supplies no assignment-file locator, the complete native
+payload in the brief is the exact authoritative assignment. The child must not
+search for, reconstruct or infer an assignment file; missing required meaning
+fails closed to the parent instead of triggering discovery. If a file-backed
+assignment is required, the parent supplies its exact path, hash and authority.
+That hash is a supplied locator or integrity fact, not a workflow admission,
+acceptance or continuity mechanism. Mandatory Role/Skill immediate references
+remain allowed and are distinct from assignment reconstruction. `rg` remains
+valid for explicitly named fields or evidence locators; this boundary limits
+unsourced assignment discovery, not search generally.
+
 ### Validation ownership and evidence scope
 
 Every child brief must state, in ordinary language, the validation layer the

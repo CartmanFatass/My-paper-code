@@ -139,3 +139,15 @@ Root 负责 receipt 的 provision、record、integrate、release 或 retain，�
 - **Root 后续闸门**：Root 集成后必须 canonical reload，并用 `fork_turns=1` 对精确的 `hmasd-workflow-design-manager` 与 `hmasd-independent-research-explorer` 重新 fresh-smoke，同时确认 CPM 路由仍保持成功；本切片不替代该验证。
 - **等待纪律**：正常 writer/reviewer 返回应采用事件驱动的长 mailbox wait（建议 10–15 分钟，消息到达可提前返回）；只有稳定错误或明确 timeout 才做 status audit/safe interrupt。禁止 busy polling 和重复同义的状态查询；等待不是新的调度或 acceptance 权限。
 - `research_execution=false`；`science_state_changed=false`；本事故记录和静态覆盖未改变 science state。
+
+## Native assignment 边界与 fresh registry smoke lessons（2026-08-11）
+
+- **fresh registry 拓扑成功**：Root 以 `fork_turns=1` 精确启动 2 个 WM、2 个 CM、2 个 EM；相应 owner 再以 `fork_turns=none` 启动恰好四个注册 L2；十个 assignment 全部 terminal。最大深度为 2，没有 L3，没有写入、Git/helper、runtime、research 或 Hook 动作。
+- **scope 输入边界**：Root 的无作用域裸输入 `smoke_a` 是 smoke-input error；生产 Explorer scope 仍必须使用 `direction:<id>|portfolio:<group>`，不能把裸 smoke 名称升级为生产 scope。
+- **immediate reference 合法性**：Explorer Mechanical 必须读取其注册 Skill 是合法的 immediate-reference 行为；这与 assignment reconstruction 是两件事。
+- **缺陷分类**：完整 native assignment payload 已经随 brief 提供，却因没有 assignment-file locator 而用 `rg` 搜索不存在的 assignment 文件；这是 context/assignment defect，不是允许子代理自行发现上下文。
+- **正确规则**：没有 assignment-file locator 时，native payload 本身就是 exact authoritative assignment，子代理不得 search、reconstruct 或 infer assignment file；若确实要求 file-backed assignment，父 brief 必须给出 exact path、hash 和 authority。hash 仅是 supplied locator/integrity fact，不是新的 workflow admission 或 acceptance 机制；缺少必要 meaning 时应 fail closed 回父级。
+- **搜索工具边界**：上述规则不禁止 `rg`；对 brief 明确命名的字段或 evidence locator，`rg` 仍是有效的机械检查工具。禁止的是无 locator 时为 assignment meaning 进行 unsourced discovery。
+- **Root 后续闸门**：Root 完成 integration 与 canonical reload 后，仍需用合法的 `direction:smoke-a` 做 EM→mechanical re-smoke；本记录不替代该 pending 验证。
+- **等待纪律**：继续保持事件驱动的 10–15 分钟 mailbox wait，消息到达可提前返回；不得 busy polling，且等待不是新的调度或 acceptance 权限。
+- `research_execution=false`；`science_state_changed=false`；本节仅记录 topology、assignment boundary 与验证后续，不改变 science state。

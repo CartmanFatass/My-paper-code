@@ -22,6 +22,10 @@ SKILL = REPO / ".agents" / "skills" / "hmasd-explorer-mechanical" / "SKILL.md"
 CONFIG = REPO / ".codex" / "config.toml"
 
 
+def _normalized(path: Path) -> str:
+    return " ".join(path.read_text(encoding="utf-8").split())
+
+
 def _require_producer_surfaces() -> None:
     missing = [str(path.relative_to(REPO)) for path in (PROFILE, ROLE, SKILL) if not path.is_file()]
     assert not missing, "Explorer Mechanical producer surfaces are missing: " + ", ".join(missing)
@@ -71,13 +75,14 @@ def test_explorer_mechanical_profile_is_registered_once_with_frozen_route() -> N
 
 def test_explorer_mechanical_role_and_skill_keep_literal_fact_boundary() -> None:
     _require_producer_surfaces()
-    role = " ".join(ROLE.read_text(encoding="utf-8").split())
-    skill = " ".join(SKILL.read_text(encoding="utf-8").split())
+    role = _normalized(ROLE)
+    skill = _normalized(SKILL)
 
     for required in (
         "role=explorer_mechanical_operator",
         "callable_agent_type=hmasd-explorer-mechanical",
         "parent=independent_research_explorer",
+        "assignment_identity=assignment_scoped_native_task",
         "user_contact_authority=none",
         "write_authority=none",
         "git_authority=none",
@@ -87,6 +92,7 @@ def test_explorer_mechanical_role_and_skill_keep_literal_fact_boundary() -> None
         "child_authority=none",
         "cross_owner_contact_authority=none",
         "cross_branch_transport=none",
+        "default_fork_turns=none",
         "output_contract=conclusion_first_return_to_parent",
         "The Independent Research Explorer is the sole parent",
         "state_scan_authority=none",
@@ -129,7 +135,100 @@ def test_explorer_mechanical_role_and_skill_keep_literal_fact_boundary() -> None
         assert scientific_name in names
 
 
+def test_explorer_mechanical_assignment_intake_is_native_or_parent_file_backed() -> None:
+    """Cover assignment intake by normalized structural fragments."""
+
+    _require_producer_surfaces()
+    role = _normalized(ROLE)
+    skill = _normalized(SKILL)
+
+    role_structures = (
+        (
+            "native payload",
+            (
+                "When no assignment-file locator is supplied",
+                "native assignment payload is authoritative",
+                "do not search for, reconstruct or infer an assignment file",
+            ),
+        ),
+        (
+            "parent file-backed assignment",
+            (
+                "parent supplies its exact path, hash and authority",
+                "hash as a locator/integrity fact only",
+                "never as admission or acceptance",
+            ),
+        ),
+        (
+            "closed missing meaning",
+            (
+                "required task meaning is absent",
+                "fail closed to the Explorer parent",
+                "not use `rg` or other discovery",
+            ),
+        ),
+        (
+            "bounded rg",
+            ("use `rg` only for explicitly named Markdown or JSON fields and evidence locators",),
+        ),
+        (
+            "immediate references",
+            (
+                "mandatory Role and Explorer Mechanical Skill references",
+                "distinct from assignment-file reconstruction",
+            ),
+        ),
+    )
+    for label, fragments in role_structures:
+        assert all(fragment in role for fragment in fragments), f"Role structure missing: {label}"
+
+    skill_structures = (
+        (
+            "native payload",
+            (
+                "When no assignment-file locator is supplied",
+                "that payload is the exact assignment",
+                "must not search for, reconstruct or infer an assignment file",
+            ),
+        ),
+        (
+            "parent file-backed assignment",
+            (
+                "parent must supply its exact path, hash and authority",
+                "supplied hash is a locator/integrity fact",
+                "not an admission or acceptance decision",
+            ),
+        ),
+        (
+            "closed missing meaning",
+            (
+                "required assignment meaning is missing",
+                "fail closed to the Explorer parent",
+                "instead of using `rg` or discovery",
+            ),
+        ),
+        (
+            "bounded rg",
+            ("`rg` only for explicitly named Markdown or JSON fields and evidence locators",),
+        ),
+        (
+            "immediate references",
+            (
+                "Role and this Skill are mandatory immediate references",
+                "distinct from assignment-file reconstruction",
+            ),
+        ),
+    )
+    for label, fragments in skill_structures:
+        assert all(fragment in skill for fragment in fragments), f"Skill structure missing: {label}"
+
+    # Named evidence inputs remain valid; assignment-file discovery does not.
+    assert "assignment-named local file" not in role
+    assert "assignment-named local file" not in skill
+
+
 if __name__ == "__main__":
     test_explorer_mechanical_profile_is_registered_once_with_frozen_route()
     test_explorer_mechanical_role_and_skill_keep_literal_fact_boundary()
+    test_explorer_mechanical_assignment_intake_is_native_or_parent_file_backed()
     print("HMASD_EXPLORER_MECHANICAL_CONTRACT_OK")

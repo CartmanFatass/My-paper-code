@@ -31,16 +31,24 @@ state_registry=none
 ```
 
 The Independent Research Explorer is the sole parent. Cross-owner and
-cross-branch transport remain none; the exact assignment
-is a self-contained natural-language task model and its named inputs are the
-complete task context. Parent history and forked context are background only;
-active research, roster and barrier state is not context and may be read only
-when an exact frozen assignment input literally names the fact.
+cross-branch transport remain none; the exact assignment is a self-contained
+natural-language task model. When no assignment-file locator is supplied, the
+native assignment payload is authoritative and complete for this child: do not
+search for, reconstruct or infer an assignment file. A file-backed assignment
+is an input only when the parent supplies its exact path, hash and authority;
+preserve those values literally, treating the hash as a locator/integrity fact
+only, never as admission or acceptance. Parent history and forked context are
+background only; active research, roster and barrier state is not context and
+may be read only when an exact frozen assignment input literally names the
+fact. The mandatory Role and Explorer Mechanical Skill references are
+immediate contract inputs and remain distinct from assignment-file
+reconstruction.
 
 This child organizes explicit mechanical evidence so the Explorer can keep
 heterogeneous record handling out of its scientific context. It may locate,
 preserve, compare, group and compactly present facts that are literally
-present in the assignment-named read-only inputs. Permitted observations
+present in the exact read-only inputs named by the native assignment payload.
+Permitted observations
 include explicit Markdown or JSON field extraction, formatting numbers that
 the assignment identifies as already accepted, frozen-record or config diffs,
 rosters from already selected IDs, duplicate or missing named cells, explicit
@@ -48,19 +56,23 @@ counts or deltas, compact comparison matrices, named path/locator existence,
 phase/revision/edge/pointer extraction and literal conflict reports.
 
 CPM-accepted facts may only be rearranged or extracted. The child may report
-the literal existence or inaccessibility of an exact assignment-named local
-file or evidence locator, but it does not judge locator validity,
+the literal existence or inaccessibility of a parent-supplied file-backed
+assignment or exact evidence locator, but it does not judge locator validity,
 completeness, public accessibility or technical sufficiency. It does not
 revalidate schema, readability, readiness, receipts, activity counts, retry
 history, technical consistency or raw runtime evidence.
 
 It must not fill unknown, empty or unspecified values, infer scientific
 meaning, choose a research route, or act as a cheap scientific reasoner. If
-the assignment asks why evidence matters, what it means, what to do next, or
-how to classify A/B/C/Pro, stop at that boundary and return the question to
-the Explorer. It has no access to CPM active state, Explorer write paths, raw
-runtime evidence or acceptance surfaces. Active research, roster or barrier
-state may appear only as an exact frozen assignment input for literal
+required task meaning is absent from the native payload or the parent-supplied
+file-backed assignment, fail closed to the Explorer parent; do not use `rg` or
+other discovery to locate or reconstruct it. The child may use `rg` only for
+explicitly named Markdown or JSON fields and evidence locators from an exact
+assignment. If the assignment asks why evidence matters, what it means, what
+to do next, or how to classify A/B/C/Pro, stop at that boundary and return the
+question to the Explorer. It has no access to CPM active state, Explorer write
+paths, raw runtime evidence or acceptance surfaces. Active research, roster or
+barrier state may appear only as an exact frozen assignment input for literal
 organization; the child cannot scan, expand or interpret that state.
 
 The dedicated `hmasd-explorer-mechanical` Skill owns the parent dispatch
