@@ -47,6 +47,20 @@ The router points; Roles decide authority; Skills describe mechanics; Profiles
 register callable children; tests verify the contracts. Detailed procedures do
 not move back into the router or this map.
 
+## Validation and progress pointers
+
+`docs/project/SESSION_WORKSPACE_CONTRACT.md` is the defining source for the
+three validation layers, the exact five WDM progress observations, failure
+classification, Windows basetemp and one-reviewer policy. This map only
+orients the edge: writers cover `slice_local`, WDM owns one
+`integration_cross_slice` run after writes freeze, and Root owns the pending
+`runtime_fresh_smoke_after_root_integration_reload`. The Audit Skill carries
+the normal path; the Roles carry capability and authority. Root's useful-work
+L1-start guidance and the `max_threads=20` agent ceiling do not create a quota,
+pool, scheduler, admission gate or runtime authorization. Progress observations
+return through the current Root task/report boundary rather than a persistent
+store, callback, queue or ledger.
+
 ## Scope-keyed L1 multiplicity
 
 Owner Roles define their own scope-key field, including any future CPM or
@@ -74,6 +88,8 @@ worktrees. Each WDM accepts its exact slice and returns a candidate-ready packet
 Root records and integrates the candidate set. A fresh convergence WDM then
 works on the exact integrated union, arranges integrated advisory review and
 owns union semantic acceptance. Reviewer output is advisory and never accepts.
+The converged package uses exactly one integrated Reviewer after test evidence
+is frozen; that Reviewer is read-only/advisory and receives no second pass.
 This map remains an orientation pointer; the Session Workspace Contract is
 the single mechanics source and no completed integration or convergence is
 implied here.
@@ -178,8 +194,11 @@ this map keeps only the owner-lane edge.
 confirmed plan -> disjoint frozen WDM slices -> candidate-ready packets -> Root records/integrates candidate set -> fresh convergence WDM on exact integrated union -> integrated advisory review -> WDM union acceptance -> Root accepted-path Git integration
 ```
 
-Ordinary workflow stages are mandatory and parallel-first with direct
-orchestration and dependency order;
+High-risk workflow work uses the registered Auditor, Implementer and integrated
+Reviewer with parallel-first direct orchestration and dependency order; a
+low-risk one-file wording or test-only slice may skip a new Auditor only when
+WDM records a concrete rationale. Ordinary workflow work remains
+parallel-first with direct orchestration and dependency order;
 dispatch read-only Auditor/Scout concurrently with already-freezable
 implementation slices, run disjoint Implementer file families concurrently,
 and serialize only actual information dependencies or same-file writers. The
@@ -193,8 +212,8 @@ not a state machine, queue or admission gate.
 
 ## Delegation orientation
 
-Ordinary workflow changes use the registered Auditor/Scout, Implementer and
-integrated Reviewer stages with parallel-first dispatch and dependency order.
+The Audit Skill carries the risk-tiered Auditor choice; registered Implementer
+and integrated Reviewer work use parallel-first dispatch and dependency order.
 Workflow-file changes are performed by assigned Workflow Implementer leaves;
 each WDM accepts its exact slice, while a fresh convergence WDM reviews and
 semantically accepts the integrated union; Root performs any separately

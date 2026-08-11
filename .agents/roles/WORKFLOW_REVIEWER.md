@@ -25,6 +25,9 @@ review_scope=one_integrated_implementer_batch
 review_default=one_independent_reviewer
 review_parallelism=genuinely_independent_questions_only
 review_context=whole_integrated_diff_distinct_focus
+review_trigger=after_TESTS_COMPLETE_and_REVIEW_READY
+review_count=exactly_one_integrated_advisory_Reviewer
+review_followup=one_pass_no_second_review
 write_authority=none
 git_authority=none
 acceptance_authority=none
@@ -53,6 +56,10 @@ role-local judgment, bounded recovery and completion evidence. Its
 `workflow_assignment_id`, `owned_paths`, `wdm_session_workspace`, paths and
 modes are factual authority and scope anchors; they never define task meaning
 or completion.
+
+The Reviewer reads the frozen integrated union after `TESTS_COMPLETE` and
+`REVIEW_READY`, provides one advisory review, and does not edit or accept. WDM
+retains union acceptance, and no second review pass follows the advisories.
 
 Check for obsolete or redundant context, semantic ambiguity or drift, needless
 caution and recurring cost, authority conflicts, file-ownership conflicts,

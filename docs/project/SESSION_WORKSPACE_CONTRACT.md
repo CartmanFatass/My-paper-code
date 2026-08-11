@@ -77,6 +77,32 @@ workflow_candidate_integration=Root_records_and_integrates_candidate_set_after_a
 workflow_union_convergence=fresh_wdm_on_exact_integrated_union_arranges_advisory_review_and_owns_union_acceptance
 workflow_reviewer_authority=advice_only_no_acceptance
 workflow_union_acceptance_not_implied_by=slice_candidate|Root_integration|Reviewer_advice|commit
+workflow_validation_layers=slice_local|integration_cross_slice|runtime_fresh_smoke_after_root_integration_reload
+workflow_validation_ownership=slice_local:writer|integration_cross_slice:WDM|runtime_fresh_smoke_after_root_integration_reload:Root
+workflow_writer_validation_scope=owned_paths|smallest_affected_contracts
+workflow_writer_full_suite=forbidden
+workflow_wdm_integration_suite=exactly_one_after_WRITES_COMPLETE_and_writes_freeze
+workflow_root_runtime_smoke=Root_only_after_integration_and_canonical_reload
+workflow_validation_failure_classes=environment_setup|product_assertion
+workflow_environment_setup_recovery=same_layer_rerun_without_retry_state
+workflow_product_failure_recovery=repair_causal_contract_or_implementation
+workflow_windows_basetemp=short_absolute_assignment_specific_under_root_controlled_parent
+workflow_windows_integration_basetemp=C:\Projects\ht\<assignment-run>
+workflow_progress_event_names=DISPATCHED|WRITES_COMPLETE|TESTS_COMPLETE|REVIEW_READY|TERMINAL
+workflow_progress_event_owner=WDM
+workflow_progress_event_meanings=DISPATCHED:actions_started|WRITES_COMPLETE:all_writers_terminal_and_exact_changed_paths_frozen|TESTS_COMPLETE:required_test_layers_completed_with_evidence|REVIEW_READY:exact_union_and_evidence_frozen_for_one_Reviewer|TERMINAL:terminal_conclusion_returned_to_Root
+workflow_progress_event_semantics=status_observations_only|not_scheduler|not_queue|not_ledger|not_background_callback|not_retry_state|not_admission|not_acceptance_token
+workflow_progress_event_transport=Root_task_or_report_boundary_only
+workflow_progress_event_transport_not=persistent_store|background_callback|queue|ledger
+workflow_terminal_event_not_acceptance=true
+workflow_integrated_review=exactly_one_advisory_Reviewer_after_TESTS_COMPLETE_and_REVIEW_READY
+workflow_integrated_review_followup=one_pass_no_second_review
+workflow_auditor_policy=high_risk_authority_topology_cross_owner_shared_contract_requires_Auditor|low_risk_one_file_wording_or_test_only_may_skip_new_Auditor_with_WDM_rationale
+workflow_auditor_policy_not=gate|second_acceptance_owner
+workflow_root_l1_start_guidance=useful_owned_work_and_useful_action_or_matching_leaf_capacity
+workflow_root_l1_start_guidance_not=quota|reservation|scheduler|admission_gate|pool|runtime_authorization
+workflow_max_threads_semantics=20_agent_tree_ceiling_only_not_runtime_authorization
+workflow_runtime_pool=forbidden
 agentify_transport_workspace_code_project_manager=temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/
 agentify_transport_workspace_independent_research_explorer=temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/
 agentify_transport_parent_wdm=forbidden
@@ -123,6 +149,30 @@ that changes research routing reports the clarity fields
 authorized EM science result may provide contrary research or science evidence
 only when that result actually exists; the WM routing change and this naming
 contract perform no research and change no science state.
+
+## Workflow validation and progress vocabulary
+
+The keyed fields above are the single defining source for workflow validation,
+failure classification, progress observations and integrated review. Writers
+validate only their owned paths and the smallest affected contracts at the
+`slice_local` layer; WDM runs exactly one `integration_cross_slice` suite after
+writes freeze; and the `runtime_fresh_smoke_after_root_integration_reload`
+layer belongs exclusively to Root after Root integrates the accepted paths and
+reloads canonical state. That runtime layer is therefore pending until Root's
+post-integration action in any in-flight slice.
+
+The progress vocabulary is exactly `DISPATCHED`, `WRITES_COMPLETE`,
+`TESTS_COMPLETE`, `REVIEW_READY` and `TERMINAL`. WDM publishes these as
+status-only observations with the meanings in the keyed contract fields; they
+are not scheduling, queuing, ledger, callback, retry, admission or acceptance
+mechanisms, and `TERMINAL` does not mean accepted.
+
+Windows validation uses a short absolute assignment-specific basetemp below
+the Root-controlled parent; the integration verifier's host path is
+`C:\Projects\ht\<assignment-run>`. Environment-setup failures stay distinct
+from product-assertion failures: setup is repaired and rerun at the same layer
+without retry state, while product failures repair the causal contract or
+implementation.
 
 ## Ownership model
 

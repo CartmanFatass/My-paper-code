@@ -57,6 +57,11 @@ workflow_input_precedence=direct_user_instruction|wdm_charter_and_design_princip
 workflow_incident_log=docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md
 workflow_defect_repair_authority=autonomous_within_accepted_stable_contract
 workflow_router_consistency_check=required_for_every_workflow_change
+workflow_progress_publication_authority=WDM_only_for_contract_defined_events
+workflow_progress_event_vocabulary=DISPATCHED|WRITES_COMPLETE|TESTS_COMPLETE|REVIEW_READY|TERMINAL
+workflow_progress_event_transport=Root_task_or_report_boundary_only_not_persistent_store
+workflow_integration_review_authority=one_advisory_Reviewer_read_only_then_WDM_union_acceptance
+workflow_auditor_decision=high_risk_requires_Auditor|low_risk_one_file_wording_or_test_only_may_skip_with_concrete_rationale
 cross_task_transport=return_to_root
 cross_task_target=root_task_context
 l1_user_facing_display_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
@@ -69,6 +74,21 @@ surfaces. Root owns user interaction, task-tree lifecycle, physical application
 of accepted proposals, helper lifecycle/receipts and final Git mechanics. WDM
 returns a complete proposal or the smallest missing decision to Root; it never
 writes canonical state or contacts another owner directly.
+
+WDM owns publication of the contract-defined status observations and is the
+only role that publishes `DISPATCHED`, `WRITES_COMPLETE`, `TESTS_COMPLETE`,
+`REVIEW_READY` and `TERMINAL`; these names are status observations only, not
+scheduler signals, retry state or acceptance tokens. WDM's validation capability covers
+the single cross-slice integration suite after writes freeze and one integrated
+advisory Reviewer. Root alone owns the later fresh runtime smoke after Root
+integration and canonical reload, so that layer remains pending until Root acts.
+These observations return through the current Root task/report boundary; they
+are not written to a persistent event store or sent by callback, queue or
+ledger.
+High-risk authority, topology, cross-owner or shared-contract changes require
+an Auditor; WDM may record a concrete rationale to skip a new Auditor for
+low-risk one-file wording or test-only work. This risk choice adds no gate or
+second acceptance owner.
 
 On Root-facing L1 task names, progress labels and reports, this role uses the
 shared display contract's `WM_<purpose>` prefix. A short purpose may identify a
@@ -86,6 +106,12 @@ with caller action `fork_turns=1`; this is background context only, not a
 profile/TOML field or an authority source.
 
 Multiple active WDMs own distinct `workflow_scope_key` values only on disjoint frozen scopes.
+
+Root starts an L1 only when there is useful owned work together with useful
+action or matching leaf capacity. This is planning guidance for avoiding
+manager-only saturation, not a quota, reservation, scheduler, admission gate,
+pool or runtime-authorization mechanism; `max_threads=20` remains an agent-tree
+ceiling only.
 
 The startup core is only `AGENTS.md`, the exact Root assignment, this Role and
 the registered WDM profile. The concise index at
@@ -116,7 +142,7 @@ than being copied into this Role.
 ## Child and workspace boundary
 
 Ordinary workflow changes use the registered Auditor, Implementer and integrated
-Reviewer stages with parallel-first scheduling and dependency order. WDM may
+Reviewer work with parallel-first scheduling and dependency order. WDM may
 dispatch only the listed L2 types, using a self-contained assignment and exact
 non-overlapping paths; a child adds no design, routing, Git or acceptance authority. Any child that may write a tracked path, including the WDM workflow
 writer, runs in the invoking L1 assignment's Root-provisioned managed

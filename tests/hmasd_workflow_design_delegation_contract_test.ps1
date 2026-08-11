@@ -29,6 +29,13 @@ $normalizedSessionContract = ($sessionContract -replace '\s+', ' ').ToLowerInvar
 $normalizedCollaborationSkill = ($collaborationSkill -replace '\s+', ' ').ToLowerInvariant()
 $normalizedReverseContract = (($reverseValidation + $reverseExplorerRole + $reverseWriterRole + $workflowMap + $defectQueue) -replace '\s+', ' ').ToLowerInvariant()
 
+function Get-SessionField([string]$Name) {
+    $pattern = '(?m)^' + [regex]::Escape($Name) + '=(.+)$'
+    $match = [regex]::Match($sessionContract, $pattern)
+    if (-not $match.Success) { throw "Session keyed contract field missing: $Name" }
+    $match.Groups[1].Value.Trim()
+}
+
 $canonicalCatalogPath = 'C:\Projects\HMASD\runtime\model-catalog-v2-workaround.json'
 $catalogMatch = [regex]::Match(
     $config, '(?m)^model_catalog_json\s*=\s*"([^"]+)"\s*$')
@@ -151,17 +158,12 @@ if (-not $skill.Contains('workflow_hash_validation=forbidden')) {
     throw 'Workflow audit Skill missing hash prohibition'
 }
 foreach ($required in @(
-    'accepts only its slice',
-    'candidate-ready evidence',
-    'root records/integrates candidates',
-    'fresh convergence',
-    'integrated union',
-    'union acceptance',
-    'workflow reviewer',
-    'advisory',
-    'cannot accept')) {
-    $controlPlane = ($normalizedManager + ' ' + $normalizedRouter + ' ' + $normalizedSessionContract + ' ' + $normalizedCollaborationSkill)
-    if (-not $controlPlane.Contains($required.ToLowerInvariant())) {
+    'workflow_slice_result=wdm_accepts_exact_slice_then_returns_candidate_ready_packet',
+    'workflow_candidate_integration=Root_records_and_integrates_candidate_set_after_all_children_finish',
+    'workflow_union_convergence=fresh_wdm_on_exact_integrated_union_arranges_advisory_review_and_owns_union_acceptance',
+    'workflow_reviewer_authority=advice_only_no_acceptance')) {
+    $name, $expected = $required.Split('=', 2)
+    if ((Get-SessionField $name) -cne $expected) {
         throw "Scoped WDM/convergence contract missing: $required"
     }
 }
@@ -217,18 +219,17 @@ foreach ($required in @(
 }
 
 foreach ($required in @(
-    'dispatch read-only auditor/scout concurrently with already-freezable implementation slices',
-    'run disjoint implementer file families concurrently',
-    'serialize only actual information dependencies or same-file writers',
-    'same writable path',
-    'shared unfrozen semantic contract',
-    'candidate-ready evidence',
-    'every workflow-file mutation remains on the registered l2 subagent route',
-    'focused checks, review and root reload boundary below',
-    'parallel reviewers are limited to genuinely independent review questions',
-    'mechanism and simple-operation budgets constrain new gates, recovery branches and probe work; they never decide delegate-vs-local routing',
-    'task size, complexity, local feasibility, context cost, path count and benefit estimates never alter it')) {
-    if (-not (($skill -replace '\s+', ' ').ToLowerInvariant()).Contains($required.ToLowerInvariant())) { throw "Workflow delegation/context contract missing: $required" }
+    'workflow_validation_layers=slice_local|integration_cross_slice|runtime_fresh_smoke_after_root_integration_reload',
+    'workflow_writer_full_suite=forbidden',
+    'workflow_progress_event_names=DISPATCHED|WRITES_COMPLETE|TESTS_COMPLETE|REVIEW_READY|TERMINAL',
+    'workflow_progress_event_semantics=status_observations_only|not_scheduler|not_queue|not_ledger|not_background_callback|not_retry_state|not_admission|not_acceptance_token',
+    'workflow_integrated_review=exactly_one_advisory_Reviewer_after_TESTS_COMPLETE_and_REVIEW_READY',
+    'workflow_root_l1_start_guidance=useful_owned_work_and_useful_action_or_matching_leaf_capacity',
+    'workflow_windows_basetemp=short_absolute_assignment_specific_under_root_controlled_parent',
+    'workflow_validation_failure_classes=environment_setup|product_assertion',
+    'workflow_root_runtime_smoke=Root_only_after_integration_and_canonical_reload')) {
+    $name, $expected = $required.Split('=', 2)
+    if ((Get-SessionField $name) -cne $expected) { throw "Workflow keyed contract missing: $required" }
 }
 $obsoleteDispatchRule = @('Do not', 'create', 'a', 'child', 'when', 'dispatch/packet', 'review', 'costs', 'more', 'than', 'the') -join ' '
 if ($skill.Contains($obsoleteDispatchRule)) {
@@ -282,15 +283,14 @@ if (-not $normalizedWorkflowMap.Contains('dispatch read-only auditor/scout concu
 }
 
 foreach ($required in @(
-    'workflow_subagent_parallelism=parallel_first_with_dependency_order',
-    'run disjoint implementer file families concurrently',
-    'serialize only actual information dependencies or same-file writers',
-    'one writable l1 assignment',
-    'one root-managed worktree')) {
-    if (-not $normalizedRouter.Contains($required.ToLowerInvariant()) -and
-        -not $normalizedWorkflowMap.Contains($required.ToLowerInvariant())) {
-        throw "Parallel-first execution policy missing: $required"
-    }
+    'workflow_l1_parallelism=disjoint_frozen_workflow_scopes_only',
+    'managed_worktree_allocation=one_writable_l1_assignment_one_root_managed_worktree',
+    'l2_worktree_lifecycle=forbidden',
+    'root_managed_worktree_authority=root_only',
+    'workflow_max_threads_semantics=20_agent_tree_ceiling_only_not_runtime_authorization',
+    'workflow_runtime_pool=forbidden')) {
+    $name, $expected = $required.Split('=', 2)
+    if ((Get-SessionField $name) -cne $expected) { throw "Parallel-first execution policy missing: $required" }
 }
 
 foreach ($retiredSerialPhrase in @(

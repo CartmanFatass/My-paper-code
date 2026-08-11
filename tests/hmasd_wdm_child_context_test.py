@@ -152,6 +152,40 @@ def test_implementer_slice_evidence_and_reviewer_advice_cannot_accept() -> None:
         assert required in reviewer, required
 
 
+def test_child_interface_has_one_auditor_and_one_integrated_reviewer() -> None:
+    # This is an interface-shape check, not a duplicate of the Session
+    # Contract's routing procedure: the registered package has one of each
+    # review role, with the reviewer explicitly advisory and read-only.
+    names = [name for name, _role, _profile, _packet in CHILDREN]
+    assert names.count("auditor") == 1
+    assert names.count("reviewer") == 1
+    reviewer = _normalized(_text(CHILDREN[2][1]))
+    for required in (
+        "integrated",
+        "advisory",
+        "read-only",
+        "acceptance_authority=none",
+        "cannot accept",
+    ):
+        assert required in reviewer
+
+
+def test_child_profiles_keep_self_contained_briefs_and_isolated_fork_context() -> None:
+    for _name, role_path, profile_path, _packet_name in CHILDREN:
+        with profile_path.open("rb") as stream:
+            profile = tomllib.load(stream)
+        instructions = _normalized(profile["developer_instructions"])
+        for required in (
+            "self-contained natural-language task model",
+            "fork_turns=none",
+            "forked context is background only",
+            "exact assignment",
+        ):
+            assert required in instructions
+        assert "zero context" not in instructions
+        assert "owned_paths" in _normalized(_text(role_path))
+
+
 def test_profiles_are_thin_and_keep_forked_history_independent() -> None:
     expected = {
         "auditor": ("gpt-5.6-luna", "high", "read-only"),

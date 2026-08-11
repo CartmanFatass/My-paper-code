@@ -57,6 +57,33 @@ only a separate authorized EM science result that actually exists can supply
 different research or science evidence. The label change itself performs no
 research and changes no science state.
 
+### Risk, reviewer and manager-capacity guidance
+
+Classify the assignment package before dispatch. A high-risk authority,
+topology, cross-owner or shared-contract package requires the registered
+read-only Auditor. A low-risk one-file wording or test-only package may skip a
+new Auditor only when the WDM records a concrete rationale for that choice.
+The exception is a routing decision, not an admission state, and it does not
+change the child's exact paths or authority boundary.
+
+Each package requires exactly one integrated advisory Reviewer, dispatched only
+after the paths and direct evidence are frozen. The Reviewer is read-only and
+advisory; its review cannot accept the package or replace WDM/Root ownership.
+Skipping a new Auditor for a low-risk package never means skipping this one
+integrated Reviewer.
+
+Manager capacity is an actionability check: an L1 dispatch requires useful
+owned work and a useful action or matching leaf capacity. This is guidance for
+choosing actionable work, not a quota, reservation, scheduler or pool, and it
+does not create a queue or an admission mechanism.
+
+Keep the shared display naming intact: use `WM_<purpose>` for Workflow Manager
+control-plane work, `EM_<direction>` for the actual Independent Research
+Explorer Manager, and `CM_<purpose_or_direction>` for Code Manager work. One
+writable L1 assignment still has one Root-managed worktree shared by its
+exact-disjoint L2 writers on the same frozen base; child Git, routing and
+acceptance authority remain forbidden.
+
 ## The normal path: compile a task model
 
 Before choosing paths or a wire shape, understand the task in ordinary prose.
@@ -83,6 +110,24 @@ commands, schemas, result locations, model labels or `fork_turns` settings.
 Those anchors narrow execution; they do not carry the task's meaning. A parent
 is a context compiler, not a field copier. A shorter brief is correct when it
 contains enough meaning for the bounded task.
+
+### Validation ownership and evidence scope
+
+Every child brief must state, in ordinary language, the validation layer the
+child owns, its exact paths, the smallest direct evidence that can demonstrate
+that layer, and which later evidence belongs to WDM or Root. The validation
+layer is a real boundary: a writer may own its assigned wording or focused
+test, but does not own an integrated diff, a cross-slice conclusion, canonical
+state, Git integration or final acceptance unless its Role explicitly says so.
+Name the direct postcondition (for example, the changed file and its focused
+test) and name the later WDM or Root observation that remains outstanding.
+
+Do not assign a writer the whole suite. Keep test work to the smallest focused
+checks that exercise the owned paths and consequence; the WDM decides whether
+broader or integrated evidence is still needed. Exact paths constrain the
+child's action, while direct and later evidence explain the meaning of those
+paths. These are semantic brief contents, not a second schema or admission
+gate, and they do not grant validation or acceptance authority.
 
 ### Small reverse-intake patch brief
 
@@ -143,6 +188,25 @@ In short, distinguish file-only communication from low-semantic communication;
 `fork_turns=none` from zero context; deterministic script observations from
 semantic sufficiency/acceptance; model strength from assignment quality; and
 tool recognition from proven action capability.
+
+### Progress-event communication
+
+If a parent reports progress, use exactly these five event names:
+`DISPATCHED`, `WRITES_COMPLETE`, `TESTS_COMPLETE`, `REVIEW_READY`, and
+`TERMINAL`. WDM publishes these as status-only observations. Carry their owner
+and meaning from the keyed contract fields
+`workflow_progress_event_owner` and `workflow_progress_event_meanings` in
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`; that defining contract and its
+reporting procedure remain authoritative, so this Skill does not redefine the
+event meanings. These are WDM-owned status observations with an owner and
+meaning. The `TERMINAL` rule says only that the owner returned its
+terminal conclusion to Root; it never means WDM or Root accepted it.
+
+These observations are never acceptance, a scheduler, queue, ledger,
+background callback, retry state or admission. They are not a second state
+machine and do not create continuity. `fork_turns=none` remains
+background-context isolation, not zero context: the child still needs the complete
+self-contained brief and may not infer meaning from an event name.
 
 For WDM assignments, Root's `fork_turns=1` is a caller-action background
 setting for the L1, while a WDM's registered Workflow Implementer dispatch uses

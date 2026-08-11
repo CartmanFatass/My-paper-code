@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import re
 from pathlib import Path
 
 import pytest
@@ -15,6 +16,12 @@ SPEC = importlib.util.spec_from_file_location("check_hmasd_agent_harness", CHECK
 assert SPEC and SPEC.loader
 CHECKER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CHECKER)
+
+
+def _keyed_field(text: str, name: str) -> str:
+    match = re.search(rf"(?m)^{re.escape(name)}=(.+)$", text)
+    assert match, f"missing keyed contract field: {name}"
+    return match.group(1)
 
 
 def _write(path: Path, text: str) -> None:
@@ -114,6 +121,9 @@ def test_default_scan_stays_inside_workflow_design_surfaces() -> None:
 
 def test_workflow_review_is_one_pass_normal_path_advice() -> None:
     reviewer = (REPO / ".agents/roles/WORKFLOW_REVIEWER.md").read_text(encoding="utf-8")
+    session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(
+        encoding="utf-8"
+    )
     skill = (
         REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md"
     ).read_text(encoding="utf-8")
@@ -124,12 +134,15 @@ def test_workflow_review_is_one_pass_normal_path_advice() -> None:
     assert "finding_cost_test=expected_benefit_exceeds_complexity_time_and_maintenance_cost" in reviewer
     normalized_skill = " ".join(skill.split())
     assert "review" in normalized_skill.lower()
-    assert "parallel reviewers only for genuinely independent questions" in normalized_skill
-    assert "Their advice cannot create a second pass" in normalized_skill
+    assert _keyed_field(session, "workflow_integrated_review") == (
+        "exactly_one_advisory_Reviewer_after_TESTS_COMPLETE_and_REVIEW_READY"
+    )
+    assert _keyed_field(session, "workflow_integrated_review_followup") == (
+        "one_pass_no_second_review"
+    )
+    assert _keyed_field(session, "workflow_reviewer_authority") == "advice_only_no_acceptance"
     assert "review_default=one_independent_reviewer" in reviewer
     assert "acceptance_authority=none" in reviewer
-    assert "advisory" in reviewer.lower()
-    assert "cannot accept" in reviewer.lower()
     assert "simple_operation_new_gate_state_identity_or_recovery=forbidden" in skill
     assert "simple_operation_control=one_line_runtime_checklist_only" in skill
     assert "theoretical_safety_hardening=reject_by_default" in skill
@@ -147,32 +160,33 @@ def test_execution_policy_is_parallel_slice_first_with_root_convergence() -> Non
     audit = (REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md").read_text(
         encoding="utf-8"
     )
+    session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(
+        encoding="utf-8"
+    )
     workflow_map = (REPO / "docs/project/WORKFLOW_MAP.md").read_text(encoding="utf-8")
     normalized = " ".join("\n".join((router, manager, collaboration, audit, workflow_map)).split()).lower()
 
     assert "workflow_design_manager_workflow_modification_authority=exclusive_via_assigned_L2" in router
     assert "workflow_subagent_parallelism=parallel_first_with_dependency_order" in router
-    assert "every workflow-file mutation remains on the registered l2 subagent route" in normalized
-    assert "root remains the only user-contact and physical-application actor" in normalized
     assert "native default child" in normalized
     assert "exact bounded temporary task" in normalized
     assert "pure wdm design or authority decisions without file mutation remain wdm-local" in normalized
     assert "mechanism and simple-operation budgets constrain" in audit.lower()
     assert "never decide delegate-vs-local routing" in audit.lower()
     assert "task size, complexity, local feasibility, context cost, path count and benefit estimates never alter it" in " ".join(audit.split()).lower()
-    assert "dispatch read-only auditor/scout concurrently with already-freezable implementation slices" in normalized
-    assert "run disjoint implementer file families concurrently" in normalized
-    assert "serialize only actual information dependencies or same-file writers" in normalized
-    assert "run disjoint implementer file families concurrently" in normalized
-    assert "serialize only actual information dependencies or same-file writers" in normalized
-    assert "fork_turns=none" in normalized
-    assert "candidate-ready" in normalized
-    assert "fresh convergence" in normalized
-    assert "integrated union" in normalized
-    assert "union acceptance" in normalized
-    assert "workflow reviewer" in normalized
-    assert "advisory" in normalized
-    assert "cannot accept" in normalized
+    assert _keyed_field(session, "workflow_l1_parallelism") == (
+        "disjoint_frozen_workflow_scopes_only"
+    )
+    assert _keyed_field(session, "workflow_slice_result") == (
+        "wdm_accepts_exact_slice_then_returns_candidate_ready_packet"
+    )
+    assert _keyed_field(session, "workflow_candidate_integration") == (
+        "Root_records_and_integrates_candidate_set_after_all_children_finish"
+    )
+    assert _keyed_field(session, "workflow_union_convergence") == (
+        "fresh_wdm_on_exact_integrated_union_arranges_advisory_review_and_owns_union_acceptance"
+    )
+    assert _keyed_field(session, "workflow_reviewer_authority") == "advice_only_no_acceptance"
     assert "ordinary workflow changes use the registered auditor/scout -> implementer -> reviewer" not in normalized
 
     for stale in (

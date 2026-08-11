@@ -26,6 +26,10 @@ git_authority=none
 acceptance_authority=none
 child_authority=none
 current_work_read=forbidden
+validation_layer=slice_local
+validation_scope=owned_paths|smallest_affected_contracts
+whole_suite_authority=none
+progress_event_authority=none
 ```
 
 Read the root router, exact assignment, registered profile, this charter, the
@@ -57,6 +61,14 @@ residual uncertainty. Append a compact factual `WORKFLOW_CHANGE_PACKET` tail
 with plan-clause coverage, changed paths, commands, preserved boundaries,
 limitations and status for routing. A packet name or terminal token never
 substitutes for the conclusion.
+
+The implementer owns only `slice_local` evidence: checks stay on owned paths
+and the smallest affected contracts, never the whole suite. Environment-setup
+failures are reported separately from product-assertion failures; setup is
+repaired and rerun at this same layer without retry state, while a product
+failure repairs its causal contract or implementation. The implementer does
+not publish progress events, run the WDM cross-slice suite or perform Root's
+post-integration runtime smoke.
 
 If a focused local check exposes an implementation mistake, inspect the local
 postcondition and make at most one reversible correction/re-run within these

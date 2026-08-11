@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from pathlib import Path
 
 
@@ -29,6 +30,21 @@ def _normalized(path: Path) -> str:
     return " ".join(_text(path).split()).lower()
 
 
+def _normalized_text(text: str) -> str:
+    return " ".join(text.split()).lower()
+
+
+def _section(path: Path, heading: str) -> str:
+    """Return one markdown section without coupling tests to line wrapping."""
+
+    text = _text(path)
+    start = text.index(heading)
+    end = text.find("\n### ", start + len(heading))
+    if end == -1:
+        end = len(text)
+    return text[start:end]
+
+
 def test_skill_trigger_and_task_model_recipe_are_explicit() -> None:
     text = _normalized(SKILL)
     assert "designing a task-scoped subagent or root-relayed owner interface" in text
@@ -54,6 +70,97 @@ def test_skill_trigger_and_task_model_recipe_are_explicit() -> None:
     ):
         assert cue in text
     assert "parent is a context compiler" in text
+
+
+def test_child_briefs_name_validation_scope_and_evidence_ownership() -> None:
+    text = _normalized(SKILL)
+    section = _normalized_text(
+        _section(SKILL, "### Validation ownership and evidence scope")
+    )
+    for cue in (
+        "validation layer",
+        "exact paths",
+        "smallest direct evidence",
+        "later evidence",
+        "wdm or root",
+        "direct postcondition",
+        "integrated diff",
+        "cross-slice conclusion",
+        "whole suite",
+        "smallest focused checks",
+    ):
+        assert cue in section
+    # Semantic brief contents remain distinct from a mechanical schema or
+    # admission rule.
+    assert "not a second schema or admission gate" in section
+
+
+def test_progress_events_are_the_exact_wdm_observation_vocabulary() -> None:
+    section = _section(SKILL, "### Progress-event communication")
+    text = _normalized_text(section)
+    events = (
+        "DISPATCHED",
+        "WRITES_COMPLETE",
+        "TESTS_COMPLETE",
+        "REVIEW_READY",
+        "TERMINAL",
+    )
+    vocabulary_prefix = section.split("WDM publishes", 1)[0]
+    assert tuple(re.findall(r"`([A-Z_]+)`", vocabulary_prefix)) == events
+    for cue in (
+        "wdm-owned status observation",
+        "owner and meaning",
+        "workflow_progress_event_owner",
+        "workflow_progress_event_meanings",
+        "defining contract",
+        "reporting procedure",
+        "status-only observations",
+        "never acceptance",
+        "scheduler",
+        "queue",
+        "ledger",
+        "background callback",
+        "retry state",
+        "admission",
+        "only that the owner returned its terminal conclusion",
+        "background-context isolation",
+        "not zero context",
+    ):
+        assert cue in text
+
+
+def test_risk_reviewer_and_manager_capacity_guidance_is_explicit() -> None:
+    text = _normalized_text(
+        _section(SKILL, "### Risk, reviewer and manager-capacity guidance")
+    )
+    for cue in (
+        "high-risk",
+        "authority",
+        "topology",
+        "cross-owner",
+        "shared-contract",
+        "read-only auditor",
+        "low-risk",
+        "one-file wording",
+        "test-only",
+        "concrete rationale",
+        "exactly one integrated advisory reviewer",
+        "paths and direct evidence are frozen",
+        "useful owned work",
+        "useful action or matching leaf capacity",
+        "not a quota, reservation, scheduler or pool",
+    ):
+        assert cue in text
+    naming_and_boundary = _normalized(SKILL)
+    for cue in (
+        "wm_<purpose>",
+        "em_<direction>",
+        "cm_<purpose_or_direction>",
+        "one root-managed worktree",
+        "exact-disjoint l2 writers",
+        "child git, routing and acceptance authority remain forbidden",
+    ):
+        assert cue in naming_and_boundary
 
 
 def test_skill_points_l1_display_labels_to_the_shared_contract() -> None:

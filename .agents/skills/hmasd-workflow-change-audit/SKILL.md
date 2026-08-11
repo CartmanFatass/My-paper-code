@@ -38,6 +38,44 @@ contract, workflow script or focused workflow test changes. Operational state,
 review instances, run artifacts, scientific ledgers and implementation code are
 outside this procedure.
 
+## Validation, progress and review normal path
+
+The Session Workspace Contract is the single defining field source. The normal
+path has exactly three validation layers: writers run `slice_local` checks on
+owned paths and the smallest affected contracts; after all writes freeze, WDM
+runs exactly one `integration_cross_slice` suite; and Root alone performs
+`runtime_fresh_smoke_after_root_integration_reload` after Root integration and
+canonical reload. That runtime layer is pending until Root's post-integration
+action and is not a child or WDM check. Writers never run the whole suite.
+
+WDM publishes exactly these status-only progress events, in their defined
+meaning: `DISPATCHED` (actions started), `WRITES_COMPLETE` (all writers
+terminal and exact changed paths frozen), `TESTS_COMPLETE` (required test
+layers completed with evidence), `REVIEW_READY` (the exact union and evidence
+frozen for one Reviewer), and `TERMINAL` (the terminal conclusion returned to
+Root). These observations are not a scheduler, queue, ledger, background
+callback, retry state, admission or acceptance token; `TERMINAL` does not mean
+accepted. Use exactly one integrated advisory Reviewer after
+`TESTS_COMPLETE`/`REVIEW_READY`; the Reviewer reads the frozen union, cannot
+edit or accept, and no second review pass follows its advice.
+Return these observations through the current Root task/report boundary only;
+do not create a persistent event store or callback, queue or ledger transport.
+
+High-risk authority, topology, cross-owner or shared-contract changes require
+an Auditor. For low-risk one-file wording or test-only work, WDM may skip a
+new Auditor only with a concrete recorded rationale; this is not a gate or a
+second acceptance owner. Root's L1-start choice is planning guidance: begin
+only when useful owned work has useful action or matching leaf capacity. It is
+not a quota, reservation, scheduler, admission gate, pool or runtime
+authorization, and `max_threads=20` is an agent-tree ceiling only.
+
+On Windows, use a short absolute assignment-specific basetemp under the
+Root-controlled parent (`C:\Projects\ht\<assignment-run>` for integration
+verification). Classify environment-setup failures separately from
+product-assertion failures: repair setup and rerun at the same layer without
+retry state; repair the causal contract or implementation for product
+failures.
+
 ## Hard design budgets
 
 ```text
@@ -106,7 +144,7 @@ or define acceptance.
 ## Workflow children
 
 Ordinary workflow changes use the registered Auditor/Scout, Implementer and
-integrated Reviewer stages with parallel-first scheduling and dependency order
+integrated Reviewer work with parallel-first scheduling and dependency order
 for bounded, non-overlapping slices. Dispatch read-only Auditor/Scout
 concurrently with already-freezable implementation slices, run disjoint
 Implementer file families concurrently, and serialize only actual information
@@ -147,7 +185,7 @@ a scheduler, approval state or global blocker.
 3. **Focused check.** Run the smallest affected contract, the structural harness,
    stale-term search and `git diff --check`. For a scoped slice, WDM reconciles
    and accepts the exact slice, and the implementer packet is candidate-ready;
-   no integrated review or union acceptance is claimed at this stage. After
+   no integrated review or union acceptance is claimed at this point. After
    Root integrates the exact candidate union, a fresh convergence WDM arranges
    one integrated Reviewer by default; parallel reviewers only for genuinely independent questions. Their advice cannot create a second pass. WDM owns union acceptance and Root performs authorized integration.
 4. **Return and reload.** Inspect exact changed paths and return the scoped
