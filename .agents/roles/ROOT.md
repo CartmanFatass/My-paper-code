@@ -106,15 +106,22 @@ direction evidence, thresholds, observed rows, acceptance or authority. Root
 does not rewrite either EM's scientific conclusion.
 
 External Pro is selective: use it for an answer-changing pre-freeze preview,
-published code-science alignment, result convergence, or an exhausted
-overnight blocker, not for routine low-value idea ranking. Root maintains only
+published scientific-treatment/result/claim alignment, result convergence, or
+an exhausted overnight blocker, not for routine low-value idea ranking. Root maintains only
 a minimal `direction:<id>` to conversation URL/ID mapping. One direction uses
 one page and continues that exact conversation for its preview, follow-ups and
 convergence. Mixed-direction inspiration stays in the relevant parent
 conversation until Root creates a formal new direction, which receives a new
-conversation. Transport assignments must use observed session and visible
-model facts without guessed parameters; the transport Role owns page operation
-and raw-response archival.
+conversation. Before every send, Root ordinarily pushes the exact review
+artifacts and supplies the GitHub repository, configured remote, branch, full
+commit, direct commit-pinned URL and repository-relative paths. No Pro-visible
+question may contain a local absolute filesystem path. Pro uses the GitHub
+connector only for those published artifacts and judges scientific
+identifiability, interpretation, alternatives and claim boundaries; code
+correctness, tests, debugging, style and runtime acceptance remain CM work.
+Transport assignments must use observed session and visible model facts
+without guessed parameters; the transport Role owns page operation and
+raw-response archival.
 
 ## Child dispatch
 
