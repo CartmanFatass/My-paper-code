@@ -302,3 +302,38 @@ def test_l2_profiles_are_registered_once_and_artifact_writer_covers_durable_rese
         writer = ROOT / ".codex/agents/hmasd-research-artifact-writer.toml"
         assert writer.is_file()
         assert "research-artifact-writer" in config
+
+
+def test_terminal_mailbox_delivery_has_no_root_reactivation_authority() -> None:
+    fields = _contract_fields()
+
+    assert fields["subagent_terminal_delivery"] == (
+        "mailbox_update_requires_active_root_wait_or_later_user_turn;"
+        "does_not_reactivate_ended_root_turn"
+    )
+    assert fields["root_progress_response_channel"] == (
+        "commentary_while_required_dependencies_or_root_post_actions_remain"
+    )
+    assert fields["root_final_response_precondition"] == (
+        "all_required_owner_terminal_conclusions_received_and_root_authorized_post_actions_complete_or_explicitly_reported_blocked"
+    )
+    assert set(fields["root_continuation_forbidden"].split("|")) == {
+        "background_callback",
+        "scheduler",
+        "watcher",
+        "automatic_continuation",
+        "busy_polling",
+    }
+
+    contract = _flat(SESSION_CONTRACT.read_text(encoding="utf-8"))
+    assert re.search(
+        r"mailbox terminal updates.{0,120}active root wait.{0,120}"
+        r"later user turn",
+        contract,
+    )
+    assert re.search(r"never reactivate.{0,40}ended root turn", contract)
+    assert re.search(
+        r"background callbacks?.{0,30}schedulers?.{0,30}"
+        r"watchers?.{0,60}automatic continuation.{0,40}busy polling.{0,30}forbidden",
+        contract,
+    )

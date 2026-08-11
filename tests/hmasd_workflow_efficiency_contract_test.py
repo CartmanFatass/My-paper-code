@@ -160,3 +160,85 @@ def test_root_smoke_and_concurrency_boundaries_remain_explicit() -> None:
         "20_agent_tree_ceiling_only_not_runtime_authorization"
     )
     assert _field(contract, "workflow_runtime_pool") == "forbidden"
+
+
+def test_root_turn_progress_wait_and_final_response_are_keyed() -> None:
+    contract = SESSION_CONTRACT.read_text(encoding="utf-8")
+
+    # These three values are the literal control-plane definitions. Keep the
+    # exact-value assertions here so wording drift cannot broaden Root's turn.
+    assert _field(contract, "root_progress_response_channel") == (
+        "commentary_while_required_dependencies_or_root_post_actions_remain"
+    )
+    assert _field(contract, "root_final_response_precondition") == (
+        "all_required_owner_terminal_conclusions_received_and_root_authorized_post_actions_complete_or_explicitly_reported_blocked"
+    )
+    assert _field(contract, "subagent_terminal_delivery") == (
+        "mailbox_update_requires_active_root_wait_or_later_user_turn;"
+        "does_not_reactivate_ended_root_turn"
+    )
+
+    assert _field(contract, "root_wait_policy") == (
+        "bounded_wait_agent_while_safe_required_work_remains"
+    )
+    assert _field(contract, "root_progress_question_behavior") == (
+        "commentary_without_yielding_active_root_turn"
+    )
+    assert _field(contract, "root_wdm_terminal_requirement") == (
+        "depended_upon_WDM_TERMINAL_necessary_but_insufficient_for_Root_final"
+    )
+    assert _field(contract, "root_post_action_scope") == (
+        "accepted_path_record|integrate|canonical_reload|runtime_smoke|"
+        "release_or_retain_as_applicable"
+    )
+    assert _fields(contract, "root_final_exceptions") == {
+        "genuinely_blocked_on_new_user_authority_or_decision",
+        "user_explicitly_replaces_or_cancels",
+    }
+    assert _field(contract, "root_final_unfinished_work") == "explicit_report_required"
+    assert _fields(contract, "root_continuation_forbidden") == {
+        "background_callback",
+        "scheduler",
+        "watcher",
+        "automatic_continuation",
+        "busy_polling",
+    }
+
+
+def test_root_turn_lifecycle_prose_preserves_dependency_and_exception_edges() -> None:
+    contract = " ".join(SESSION_CONTRACT.read_text(encoding="utf-8").split()).lower()
+
+    # Structural windows tolerate line wrapping while preserving causal edges.
+    assert re.search(
+        r"safe required work remains.{0,100}bounded.{0,10}wait_agent",
+        contract,
+    )
+    assert re.search(
+        r"progress questions.{0,100}commentary.{0,100}without yielding",
+        contract,
+    )
+    assert re.search(
+        r"depended-upon wdm.{0,20}terminal.{0,100}necessary but insufficient",
+        contract,
+    )
+    assert re.search(
+        r"terminal.{0,180}(?:completes|explicitly reports blocked).{0,180}"
+        r"applicable (?:accepted-path )?record",
+        contract,
+    )
+    assert re.search(
+        r"final response with unfinished work.{0,220}"
+        r"genuinely blocked.{0,220}replaces or cancels",
+        contract,
+    )
+    assert re.search(r"blocked actions and unfinished work.{0,80}reported", contract)
+    assert re.search(
+        r"mailbox terminal updates.{0,120}active root wait.{0,120}"
+        r"later user turn.{0,120}never reactivate",
+        contract,
+    )
+    assert re.search(
+        r"background callbacks?, schedulers?, watchers?, automatic continuation"
+        r" and busy polling are forbidden",
+        contract,
+    )

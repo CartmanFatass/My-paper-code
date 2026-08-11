@@ -115,14 +115,16 @@ cross_task_transport=return_to_root
 cross_task_transport_legacy=forbidden
 successor_route=fresh_Root_spawn_plus_canonical_reload
 background_callback=forbidden
+root_lifecycle_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
 mandatory_ticket_identity=forbidden_for_subagent_authority
 ```
 
 The current Root may run disjoint owner lanes in parallel, subject to actual
 capacity and same-path dependencies. Completion order does not establish
-semantic priority. Root waits only when every remaining safe action depends on
-an outstanding result, and reports the smallest missing user decision when a
-decision would change the outcome.
+semantic priority. Root uses bounded `wait_agent` while safe required work
+remains and answers progress questions in commentary without yielding the
+active turn. Root final-response conditions and forbidden continuation surfaces
+are keyed in the Session Workspace Contract.
 
 Root invokes every WDM L1 with caller action `fork_turns=1`; this supplies
 background context only and is not a TOML/profile enforcement field or an

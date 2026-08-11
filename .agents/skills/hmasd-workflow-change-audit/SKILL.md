@@ -61,6 +61,28 @@ edit or accept, and no second review pass follows its advice.
 Return these observations through the current Root task/report boundary only;
 do not create a persistent event store or callback, queue or ledger transport.
 
+### Root lifecycle normal path
+
+The Session Workspace Contract is the defining source for Root-turn closure.
+While safe required work remains, Root uses bounded `wait_agent`; progress
+questions receive commentary without yielding the active Root turn. A
+depended-upon WDM `TERMINAL` is necessary but insufficient for Root's final
+response: Root completes or explicitly reports blocked each applicable
+accepted-path record, integrate, canonical reload, runtime smoke and
+release-or-retain action. A final response requires all required owner terminal
+conclusions and those authorized post-actions to be complete or explicitly
+reported blocked. A terminal mailbox update requires an active Root wait or a
+later user turn and does not reactivate an ended Root turn.
+
+### Root lifecycle fallback
+
+Root may finalize unfinished work only when genuinely blocked on new user
+authority or a decision, or when the user explicitly replaces or cancels the
+work; blocked actions and unfinished work are reported. Background callbacks,
+schedulers, watchers, automatic continuation and busy polling are forbidden.
+Root remains the sole user, lifecycle, Git and relay actor, while owner
+acceptance and the five WDM progress events retain their existing meanings.
+
 High-risk authority, topology, cross-owner or shared-contract changes require
 an Auditor. For low-risk one-file wording or test-only work, WDM may skip a
 new Auditor only with a concrete recorded rationale; this is not a gate or a
@@ -199,14 +221,17 @@ The configured hooks remain empty and disabled. No Hook Stop route is part of
 this workflow. Tool/OS sandboxing and exact assignment paths remain the
 authoritative write boundary.
 
-After a confirmed plan, these steps continue automatically. Stop only for
-material plan drift, same-file collision, unavailable required profile, or a
-missing user decision. A recoverable tool/transport failure is diagnosed and
-continued or parked without blocking unrelated work.
+After a confirmed plan, follow the Root lifecycle normal path only within the
+active Root turn. Stop for material plan drift, same-file collision,
+unavailable required profile, or a missing user decision; use the one Root
+lifecycle fallback above when a permitted exception applies. A recoverable
+tool/transport failure is diagnosed and continued or parked without blocking
+unrelated work.
 A durable restart handoff is written only on explicit user request; routine
-progress remains in the current Root task's WDM records. A later CLI invocation
-starts a fresh Root/L1 tree and reloads canonical files; no manager session,
-replacement task or background callback is presumed.
+progress remains in the current Root task's WDM records. A later CLI
+invocation starts a fresh Root/L1 tree and reloads canonical files; no manager
+session, replacement task, successor continuity or background callback is
+presumed.
 
 For every role, Skill or profile change, inspect the owned outcome against the
 role's observation, action, judgment, recovery and completion capabilities.

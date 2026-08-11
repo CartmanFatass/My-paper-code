@@ -95,6 +95,16 @@ workflow_progress_event_semantics=status_observations_only|not_scheduler|not_que
 workflow_progress_event_transport=Root_task_or_report_boundary_only
 workflow_progress_event_transport_not=persistent_store|background_callback|queue|ledger
 workflow_terminal_event_not_acceptance=true
+root_progress_response_channel=commentary_while_required_dependencies_or_root_post_actions_remain
+root_final_response_precondition=all_required_owner_terminal_conclusions_received_and_root_authorized_post_actions_complete_or_explicitly_reported_blocked
+subagent_terminal_delivery=mailbox_update_requires_active_root_wait_or_later_user_turn;does_not_reactivate_ended_root_turn
+root_wait_policy=bounded_wait_agent_while_safe_required_work_remains
+root_progress_question_behavior=commentary_without_yielding_active_root_turn
+root_wdm_terminal_requirement=depended_upon_WDM_TERMINAL_necessary_but_insufficient_for_Root_final
+root_post_action_scope=accepted_path_record|integrate|canonical_reload|runtime_smoke|release_or_retain_as_applicable
+root_final_exceptions=genuinely_blocked_on_new_user_authority_or_decision|user_explicitly_replaces_or_cancels
+root_final_unfinished_work=explicit_report_required
+root_continuation_forbidden=background_callback|scheduler|watcher|automatic_continuation|busy_polling
 workflow_integrated_review=exactly_one_advisory_Reviewer_after_TESTS_COMPLETE_and_REVIEW_READY
 workflow_integrated_review_followup=one_pass_no_second_review
 workflow_auditor_policy=high_risk_authority_topology_cross_owner_shared_contract_requires_Auditor|low_risk_one_file_wording_or_test_only_may_skip_new_Auditor_with_WDM_rationale
@@ -166,6 +176,19 @@ The progress vocabulary is exactly `DISPATCHED`, `WRITES_COMPLETE`,
 status-only observations with the meanings in the keyed contract fields; they
 are not scheduling, queuing, ledger, callback, retry, admission or acceptance
 mechanisms, and `TERMINAL` does not mean accepted.
+
+Root lifecycle closure is separate from WDM progress. While safe required work
+remains, Root uses bounded `wait_agent`; progress questions receive commentary
+without yielding the active Root turn. A depended-upon WDM `TERMINAL` is
+necessary but insufficient for Root's final response: Root still completes or
+explicitly reports blocked each applicable accepted-path record, integrate,
+canonical reload, runtime smoke and release-or-retain action. Mailbox terminal
+updates require an active Root wait or a later user turn and never reactivate
+an ended Root turn. Root may send a final response with unfinished work only
+when genuinely blocked on new user authority or a decision, or when the user
+explicitly replaces or cancels the work; the blocked actions and unfinished work
+must be reported. Background callbacks, schedulers, watchers, automatic
+continuation and busy polling are forbidden.
 
 Windows validation uses a short absolute assignment-specific basetemp below
 the Root-controlled parent; the integration verifier's host path is

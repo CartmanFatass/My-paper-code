@@ -76,7 +76,7 @@ WM/CM/EM 是可见方向，不是额外的队列层。L1 只在自身 owner lane
 
 以下示例刻意代表不同的语义，而不只是换一个文件名：
 
-**例一：WM 控制面文档切片。** `WM_workflow_efficiency` 在路径冻结后，把“只写一份 H_read 经验文档”的完整 brief 派给 Workflow Implementer：给出中文主题、必须覆盖的事件、仅一个 owned path、允许的直接检查和 force-add 提醒，使用 `fork_turns=none`。L2 不需要也不能自行寻找新的历史或改 Role。
+**例一：WM 控制面文档切片。** `WM_workflow_efficiency` 在路径冻结后，把“只写一份 H_read 经验文档”的完整 brief 派给 Workflow Implementer：给出中文主题、必须覆盖的事件、仅一个 owned path、允许的直接检查和历史首次纳入版本控制的 force-add 提醒，使用 `fork_turns=none`。L2 不需要也不能自行寻找新的历史或改 Role。
 
 **例二：CM 的机械接口检查。** Root 把一个 code lane 的精确测试夹具修复交给注册 CPM mechanical L2，路径只包含该测试文件；同一 L1 worktree 中另一个 L2 只改互不相交的静态映射文件。两者可并行，L1 在两者返回后才形成一个 candidate。该示例的语义所有权仍在 CM，不能由 WM 代收。
 
@@ -88,11 +88,7 @@ WM/CM/EM 是可见方向，不是额外的队列层。L1 只在自身 owner lane
 
 一个可写的 L1 assignment 由 Root 发放一个 Root-managed worktree 和 lifecycle receipt。该 worktree 有一个冻结 base；其下多个 L2 共享同一 worktree/base，但必须拥有精确不相交的路径。L2 不创建自己的 worktree，不调用 helper，不运行 Git，不 stage/commit/push。它们的结果合成一个 L1 slice candidate，待 Root 受理后才记录或整合。
 
-Root 负责 receipt 的 provision、record、integrate、release 或 retain，并确保每个 assignment 至多一个 nonterminal receipt。局部失败应记录为 receipt-local failure，由 Root 诊断、重试或 park，不拖累无关 lane，也不让 L2 把临时失败改称终止。完成后 Root 可在接受的精确路径上整合并释放；独立 candidate 或新的 release lifecycle 必须是新的 L1 assignment。当前本文件是 ignored-only 例外，但若要进入版本控制，WDM 接受后 Root 必须显式执行：
-
-```powershell
-git add -f -- docs/H_read/2026-08-11_subagent_worktree_workflow_lessons.md
-```
+Root 负责 receipt 的 provision、record、integrate、release 或 retain，并确保每个 assignment 至多一个 nonterminal receipt。局部失败应记录为 receipt-local failure，由 Root 诊断、重试或 park，不拖累无关 lane，也不让 L2 把临时失败改称终止。完成后 Root 可在接受的精确路径上整合并释放；独立 candidate 或新的 release lifecycle 必须是新的 L1 assignment。历史上首次纳入版本控制时，本文件需要 Root 显式 force-add；当前 base 已经跟踪该文件，现阶段不需要重复执行 force-add。
 
 ## Tests、Static checks 与 Semantic review 必须严格分离
 
@@ -124,4 +120,12 @@ git add -f -- docs/H_read/2026-08-11_subagent_worktree_workflow_lessons.md
 
 ## 本切片结论与直接检查
 
-本文件已按确认的效率 follow-on 切片写入指定位置，覆盖里程碑、事件分类、优化、拓扑、派发、worktree receipt、检查分层、进度事件、命名、非主张和 Root 待办。直接检查仅限：目标文件存在且可用 UTF-8 读取、内容无尾随空白、Markdown 标题基本可识别；未运行 whole suite、runtime 或 fresh smoke。WDM 接受后，Root 仍需按上文使用 `git add -f --` 显式纳入该 `*.md` 文件。
+本文件已按确认的效率 follow-on 切片写入指定位置，覆盖里程碑、事件分类、优化、拓扑、派发、worktree receipt、检查分层、进度事件、命名、非主张和 Root 待办。直接检查仅限：目标文件存在且可用 UTF-8 读取、内容无尾随空白、Markdown 标题基本可识别；未运行 whole suite、runtime 或 fresh smoke。历史首次纳入版本控制所需的 force-add 已完成；当前 base 已经跟踪该 `*.md` 文件，不需要当前 Root 重复执行 force-add。
+
+## Root 轮次终止与 mailbox 终端消息事故（2026-08-11）
+
+- **事故分类**：本次缺陷同时属于 Root 执行错误（在必需的后续动作完成前过早发送 final）与契约缺口（mailbox 的终端消息不会重新激活已经结束的 Root turn）。
+- **正确行为**：只要安全的必需工作仍在进行，Root 应进行有界 `wait_agent`；进度问题通过 commentary 回复而不 yield 或 finalize。依赖的 WDM `TERMINAL` 必须收到，但仍不足以关闭 Root；适用的 post-actions 必须完成，或明确报告为 blocked。
+- **交付边界**：queued mailbox delivery 只有在 active Root wait 或之后的 user turn 才能被处理；它不会触发 callback、scheduler、watcher、automatic continuation 或 busy polling，也不会复活已结束的 Root turn。
+- **未完成工作与慢审查**：慢审查的安全 interrupt 不能代替 Root final precondition；若仍有未完成动作，必须明确报告 unfinished/blocked。只有新的用户 authority/decision 确实阻塞，或用户明确替换/取消工作时，Root 才可在报告未完成工作的同时 final。
+- `research_execution=false`；`science_state_changed=false`；本切片未改变 science state。
