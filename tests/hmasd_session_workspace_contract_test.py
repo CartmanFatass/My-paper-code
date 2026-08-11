@@ -144,6 +144,7 @@ def test_progress_and_terminal_meanings_remain_wdm_status_only_and_not_acceptanc
         ("runtime smoke",),
     ):
         assert any(cue in normalized for cue in cue_group), cue_group
+    assert "workflow_progress_event_emission=each_relevant_event_at_most_once|adjacent_observations_may_share_one_report" in contract
 
 
 def test_public_current_work_is_partitioned_and_owned() -> None:
@@ -177,7 +178,7 @@ def test_public_current_work_is_partitioned_and_owned() -> None:
     ):
         assert required in normalized
     assert "rotation_boundary=integrated_batch_completion" in normalized_wdm_session
-    assert "This record contains only WDM workflow-control-plane identity and status" in normalized_wdm_session
+    assert "This pointer-only record contains WDM workflow-control-plane identity, status" in normalized_wdm_session
     assert "owner_role=workflow_design_manager" in wdm_common
 
 
@@ -267,14 +268,14 @@ def test_durable_and_temporary_workspaces_remain_separate() -> None:
     ):
         assert required in normalized
     assert "Root-managed worktree" in normalized_router
-    assert "tracked writer" in normalized_router
-    assert "mixed tracked and ignored assignment is still a tracked writer" in normalized_router
+    assert "tracked_writer_workspace=root_managed_worktree_required" in normalized_router
+    assert "tracked_writer_mixed_write_classification=tracked_writer" in normalized_router
     for exemption in ("read-only", "ignored-only", "temporary-only"):
         assert exemption in normalized_router
     assert "mandatory_ticket_identity=forbidden_for_subagent_authority" in normalized_router
     assert "child_forked_context=background_only" in normalized
     assert "managed worktree/receipt" in normalized_router.lower()
-    assert "root alone controls provisioning, lifecycle, integration, git" in normalized_router.lower()
+    assert "root alone provisions, records, integrates, releases or retains it and owns" in normalized_router.lower()
     assert "children never invoke helper or git lifecycle" in normalized_router.lower()
     assert "one writable l1 assignment" in normalized_router.lower()
     assert "one root-managed worktree" in normalized_router.lower()
@@ -285,7 +286,7 @@ def test_durable_and_temporary_workspaces_remain_separate() -> None:
     assert "root commits/records only after all children complete" in normalized_router.lower()
     assert "independent candidate/release lifecycle means a new l1" in normalized_router.lower()
     assert "distinct concurrent wdm/cpm l1 assignments" in normalized_router.lower()
-    assert "integration/convergence uses a distinct worktree" in normalized_router.lower()
+    assert "root_managed_worktree_union_convergence=separate_worktree_for_multi_candidate_union_only" in normalized_router.lower()
     assert "disjoint l2 writers share one l1 worktree" in normalized_router.lower()
     assert "l2 never has its own worktree lifecycle" in normalized_router.lower()
     assert "Formats and suggested sections aid understanding but never become admission gates" in normalized
@@ -326,23 +327,23 @@ def test_explorer_research_and_session_artifacts_remain_explorer_owned() -> None
     assert "centralized_explorer_workspace_cleanup_write_authority=none" in role
 
 
-def test_slice_acceptance_precedes_root_integration_and_fresh_union_acceptance() -> None:
+def test_singleton_package_acceptance_precedes_root_integration_and_union_is_conditional() -> None:
     contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split()).lower()
     router = " ".join(_text("AGENTS.md").split()).lower()
     role = " ".join(_text(".agents/roles/WORKFLOW_DESIGN_MANAGER.md").split()).lower()
     surfaces = " ".join((contract, router, role))
     for required in (
-        "accepts only its slice",
-        "candidate-ready evidence",
-        "root records/integrates candidates",
-        "fresh convergence",
-        "exact integrated union",
-        "union acceptance",
-        "workflow reviewer",
-        "read-only/advisory",
-        "cannot accept",
+        "workflow_slice_result=wdm_accepts_exact_slice_then_returns_candidate_ready_packet",
+        "workflow_candidate_integration=root_records_and_integrates_candidate_set_after_all_children_finish",
+        "workflow_singleton_package=one_writable_wdm_l1_exact_final_frozen_bytes_reviewed_together",
+        "workflow_singleton_acceptance=one_advisory_reviewer_then_same_wdm_package_acceptance_before_root_integration",
+        "workflow_multi_candidate_convergence_trigger=two_or_more_independently_reviewed_wdm_candidates|actual_union_differs_from_every_reviewed_package",
+        "workflow_union_convergence=conditional_on_workflow_multi_candidate_convergence_trigger",
+        "workflow_reviewer_authority=advice_only_no_acceptance",
+        "read-only advisory reviewer",
     ):
         assert required in surfaces, required
+    assert "fresh convergence wdm is required only when root combines" in surfaces
 
 
 def test_explorer_mechanical_child_keeps_native_no_write_session_boundary() -> None:

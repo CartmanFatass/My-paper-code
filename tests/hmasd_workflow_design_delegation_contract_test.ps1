@@ -18,6 +18,7 @@ $refreshScript = Read-RepoFile '.codex/refresh-model-catalog-v2-workaround.ps1'
 $workflowMap = Read-RepoFile 'docs/project/WORKFLOW_MAP.md'
 $router = Read-RepoFile 'AGENTS.md'
 $sessionContract = Read-RepoFile 'docs/project/SESSION_WORKSPACE_CONTRACT.md'
+$routeTable = Read-RepoFile 'docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md'
 $collaborationSkill = Read-RepoFile '.agents/skills/hmasd-collaborative-workflow-design/SKILL.md'
 $defectQueue = Read-RepoFile 'docs/session-workspaces/workflow_design_manager/WORKFLOW_DEFECT_QUEUE.md'
 $reverseValidation = Read-RepoFile 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
@@ -35,6 +36,13 @@ function Get-SessionField([string]$Name) {
     $pattern = '(?m)^' + [regex]::Escape($Name) + '=(.+)$'
     $match = [regex]::Match($sessionContract, $pattern)
     if (-not $match.Success) { throw "Session keyed contract field missing: $Name" }
+    $match.Groups[1].Value.Trim()
+}
+
+function Get-KeyedRouteField([string]$Text, [string]$Name) {
+    $pattern = '(?m)^' + [regex]::Escape($Name) + '=(.+)$'
+    $match = [regex]::Match($Text, $pattern)
+    if (-not $match.Success) { throw "Route-table keyed field missing: $Name" }
     $match.Groups[1].Value.Trim()
 }
 
@@ -182,7 +190,7 @@ foreach ($required in @(
     'one writable l1 assignment',
     'one root-managed worktree',
     'distinct concurrent wdm/cpm l1 assignments',
-    'integration/convergence uses a distinct worktree',
+    'root_managed_worktree_union_convergence=separate_worktree_for_multi_candidate_union_only',
     'independent candidate/release lifecycle means a new l1')) {
     if (-not $normalizedRouter.Contains($required.ToLowerInvariant())) { throw "Router execution policy missing: $required" }
 }
@@ -248,18 +256,81 @@ foreach ($required in @(
     'disjoint frozen scopes')) {
     if (-not $normalizedManager.Contains($required.ToLowerInvariant())) { throw "WDM execution policy missing: $required" }
 }
-if (-not $skill.Contains('workflow_hash_validation=forbidden')) {
+if (-not $skill.Contains('Never use a hash, digest, byte count or fingerprint')) {
     throw 'Workflow audit Skill missing hash prohibition'
 }
 foreach ($required in @(
     'workflow_slice_result=wdm_accepts_exact_slice_then_returns_candidate_ready_packet',
     'workflow_candidate_integration=Root_records_and_integrates_candidate_set_after_all_children_finish',
-    'workflow_union_convergence=fresh_wdm_on_exact_integrated_union_arranges_advisory_review_and_owns_union_acceptance',
+    'workflow_union_convergence=conditional_on_workflow_multi_candidate_convergence_trigger',
+    'workflow_change_risk_tiers=high|bounded_contract|low_causal_repair',
+    'workflow_route_table_policy=clear_route_loads_defining_source_direct_consumers_focused_tests|missing_ambiguous_conflicting_or_authority_crossing_route_requires_Auditor',
+    'workflow_singleton_package=one_writable_WDM_L1_exact_final_frozen_bytes_reviewed_together',
+    'workflow_singleton_acceptance=one_advisory_Reviewer_then_same_WDM_package_acceptance_before_Root_integration',
+    'workflow_multi_candidate_convergence_trigger=two_or_more_independently_reviewed_WDM_candidates|actual_union_differs_from_every_reviewed_package',
+    'workflow_causal_check_timing=when_all_consumed_bytes_are_frozen_before_package_acceptance',
+    'workflow_progress_event_emission=each_relevant_event_at_most_once|adjacent_observations_may_share_one_report',
     'workflow_reviewer_authority=advice_only_no_acceptance')) {
     $name, $expected = $required.Split('=', 2)
     if ((Get-SessionField $name) -cne $expected) {
         throw "Scoped WDM/convergence contract missing: $required"
     }
+}
+
+foreach ($required in @(
+    'control_plane_document_routes=docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md',
+    'workflow_change_risk_tiers=high|bounded_contract|low_causal_repair',
+    'workflow_route_table_policy=clear_route_loads_defining_source_direct_consumers_focused_tests|missing_ambiguous_conflicting_or_authority_crossing_route_requires_Auditor',
+    'workflow_singleton_package=one_writable_WDM_L1_exact_final_frozen_bytes_reviewed_together',
+    'workflow_singleton_acceptance=one_advisory_Reviewer_then_same_WDM_package_acceptance_before_Root_integration',
+    'workflow_multi_candidate_convergence_trigger=two_or_more_independently_reviewed_WDM_candidates|actual_union_differs_from_every_reviewed_package',
+    'workflow_causal_check_timing=when_all_consumed_bytes_are_frozen_before_package_acceptance',
+    'workflow_auditor_skip_evidence=concrete_WDM_rationale|focused_causal_evidence_on_all_frozen_consumed_bytes',
+    'workflow_progress_event_emission=each_relevant_event_at_most_once|adjacent_observations_may_share_one_report')) {
+    $name, $expected = $required.Split('=', 2)
+    if ((Get-SessionField $name) -cne $expected) {
+        throw "Canonical WDM efficiency contract missing: $required"
+    }
+}
+if ((Get-SessionField 'workflow_auditor_policy') -cne
+    'high_requires_Auditor|bounded_contract_clear_route_may_skip_with_WDM_rationale|low_causal_repair_may_skip_with_WDM_rationale|missing_ambiguous_conflicting_or_authority_crossing_route_requires_Auditor') {
+    throw 'Canonical Auditor risk/route policy is stale'
+}
+
+if ((Get-KeyedRouteField $routeTable 'control_plane_document_routes') -cne
+    'docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md') {
+    throw 'Route table self-pointer is stale'
+}
+if ((Get-KeyedRouteField $routeTable 'control_plane_document_routes_not') -cne
+    'task_state|history|hash|receipt|queue|admission|acceptance') {
+    throw 'Route table stores forbidden state-bearing data'
+}
+$routeRows = @($routeTable -split "`r?`n" | Where-Object { $_.Trim().StartsWith('|') })
+if ($routeRows.Count -ne 8) { throw "Route table must have header, separator and six rows: $($routeRows.Count)" }
+$headerCells = @($routeRows[0].Trim('|').Split('|') | ForEach-Object { $_.Trim() })
+if (($headerCells -join '|') -cne 'Trigger|Defining source|Direct consumers|Focused tests|Auditor escalation') {
+    throw 'Route table columns drifted'
+}
+$triggers = @()
+foreach ($row in $routeRows[2..7]) {
+    $cells = @($row.Trim('|').Split('|') | ForEach-Object { $_.Trim() })
+    if ($cells.Count -ne 5 -or ($cells | Where-Object { [string]::IsNullOrWhiteSpace($_) }).Count -gt 0) {
+        throw "Route table row is empty or malformed: $row"
+    }
+    $triggers += $cells[0]
+    foreach ($cell in $cells[1..3]) {
+        foreach ($match in [regex]::Matches($cell, '`([^`]+)`')) {
+            $value = $match.Groups[1].Value
+            if ($value -match '^https?://') { continue }
+            if (-not (Test-Path -LiteralPath (Join-Path $repo $value) -PathType Leaf)) {
+                throw "Route table path is missing: $value"
+            }
+        }
+    }
+}
+if (@($triggers | Select-Object -Unique).Count -ne 6) { throw 'Route table triggers must be unique' }
+if ($routeTable -match '(?m)^(?:assignment|history|hash|receipt|queue|admission|acceptance)(?:_|[a-z])*\s*=') {
+    throw 'Route table contains a state-bearing keyed assignment'
 }
 
 foreach ($required in @(
@@ -278,7 +349,6 @@ foreach ($required in @(
     'root_union_pass=mechanical_evidence_only',
     'root_conflict_return=owning_cm_or_exact_shared_cm',
     'cm_acceptance=final_for_its_scope_only',
-    'wdm_union_convergence=kept_unchanged',
     'shared_scope_key=shared:<component>',
     'shared_all_scope=forbidden',
     'tracked_writer_worktree=one_writable_l1_worktree_shared_by_disjoint_l2_writers',
@@ -297,8 +367,11 @@ if ($normalizedLessons.Contains('direction_flow_status=completed') -or
     $normalizedLessons.Contains('direction_flow_status=complete')) {
     throw 'Direction-scoped EM-to-external-review flow must remain PENDING'
 }
-foreach ($required in @('simple_operation_active_engineering_budget_minutes=20','simple_operation_failed_probe_budget=2')) {
-    if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing simple-operation budget: $required" }
+foreach ($required in @(
+    'Mechanism budgets constrain only irreversible/high-cost actions',
+    'focused contract evidence and qualitative maintainability',
+    'one-line runtime checklist')) {
+    if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing bounded-efficiency rule: $required" }
 }
 
 foreach ($required in @(
@@ -326,6 +399,7 @@ foreach ($required in @(
 }
 
 $normalizedWorkflowMap = ($workflowMap -replace '\s+', ' ').ToLowerInvariant()
+$normalizedAuditSkill = ($skill -replace '\s+', ' ').ToLowerInvariant()
 foreach ($required in @(
     'parent task model -> hmasd-writing-agent-assignments Skill -> self-contained',
     'assignment -> child judgment/result',
@@ -334,17 +408,10 @@ foreach ($required in @(
 }
 
 foreach ($required in @(
-    'workflow_mechanical_invariant_scope=irreversible_and_high_cost_actions_only',
-    'workflow_retryable_failure_mechanism=forbidden_use_one_line_runtime_checklist',
-    'workflow_rule_single_source=one_defining_file_others_point',
-    'workflow_single_mechanism_terminal_state_budget=3',
-    'workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch',
-    'workflow_legacy_mechanism_policy=no_expansion_preserve_contract_when_touched',
-    'workflow_incident_to_permanent_rule_threshold=2_independent_recurrences',
-    'workflow_hash_validation=forbidden',
-    'the log is evidence', 'exact assignment-owned path set',
-    'observation, action, judgment, recovery and completion capabilities',
-    'Prefer positive capability text')) {
+    'Mechanism budgets constrain only irreversible/high-cost actions',
+    'If a failure means only “try again,” use the smallest direct',
+    'One incident does not create a permanent rule',
+    'Never use a hash, digest, byte count or fingerprint')) {
     if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 
@@ -405,11 +472,17 @@ foreach ($forbidden in @('OneDrive root', 'legacy scan', 'legacy prune', 'legacy
     }
 }
 
-if (-not $normalizedWorkflowMap.Contains('dispatch read-only auditor/scout concurrently with already-freezable implementation slices') -or
-    -not $normalizedWorkflowMap.Contains('run disjoint implementer file families concurrently') -or
-    -not $normalizedWorkflowMap.Contains('serialize only actual information dependencies or same-file writers') -or
-    -not $normalizedWorkflowMap.Contains('workflow-file changes are performed by assigned workflow implementer leaves')) {
-    throw 'Workflow Map execution policy missing parallel-first stages or registered implementer route'
+if (-not $normalizedWorkflowMap.Contains('independent frozen slices are parallel-first')) {
+    throw 'Workflow Map stable parallel-first orientation is missing'
+}
+foreach ($required in @(
+    'dispatch read-only auditor/scout concurrently with already-freezable implementation slices',
+    'run exact disjoint implementers parallel-first',
+    'serialize only actual information dependencies or same-file writers',
+    'every mutation is carried out by a registered workflow implementer l2 on its exact assigned paths; wdm never writes')) {
+    if (-not $normalizedAuditSkill.Contains($required)) {
+        throw "Workflow audit Skill execution policy missing: $required"
+    }
 }
 
 foreach ($required in @(
@@ -462,11 +535,11 @@ foreach ($required in @(
     if (-not $defectQueue.Contains($required)) { throw "Workflow incident log entry missing: $required" }
 }
 
-$normalizedMaintainabilityContract = (($manager + "`n" + $skill) -replace '\s+', ' ')
+$normalizedMaintainabilityContract = (($manager + "`n" + $skill) -replace '\s+', ' ').ToLowerInvariant()
 foreach ($required in @(
-    'interface quality', 'coherent responsibility', 'dependency direction',
-    'state ownership', 'decoupling', 'complexity isolation', 'change locality',
-    'focused contract evidence')) {
+    'mechanism budgets constrain only irreversible/high-cost actions',
+    'focused contract evidence and qualitative maintainability',
+    'one-line runtime checklist')) {
     if (-not $normalizedMaintainabilityContract.Contains($required)) {
         throw "Qualitative maintainability contract missing: $required"
     }

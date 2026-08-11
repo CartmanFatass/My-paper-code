@@ -4,6 +4,8 @@
 document_kind=stable_workflow_orientation
 owner_role=workflow_design_manager
 scope=workflow_control_plane_abstraction
+control_plane_document_routes=docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md
+control_plane_document_routes_not=task_state|history|hash|receipt|queue|admission|acceptance
 root_macro_portfolio_owner=Root
 em_scope=direction:<id>
 cm_scope=direction:<id>|shared:<component>
@@ -16,15 +18,17 @@ scope_reject=empty|extra_colon|separators|whitespace|..
 
 This map is the WDM's compact orientation for workflow-control-plane design.
 It describes stable ownership, interfaces, dependency direction and context
-loading. It is not an authority source, task state, chronological log,
-exhaustive registry or procedure copy.
+loading, while the route table supplies trigger-to-document lookup. It is not
+an authority source, task state, chronological log, exhaustive registry or
+procedure copy; the route table is likewise never task state, history, a hash,
+receipt, queue, admission or acceptance data.
 
 ## Owner roles and stable outputs
 
 | Owner | Stable responsibility | Interface handed onward |
 |---|---|---|
 | Root | user communication, task routing, cross-owner relay, lifecycle, Root-managed worktree helper/receipt control and accepted physical writes, including separately authorized final Git integration; advisory macro/portfolio science (cross-direction comparison, ranking, pause/continue, dependencies and complete-map acceptance); no direction research execution, code technical acceptance or automatic formal/project-canonical science | owner-routed assignments/results, lifecycle receipts, accepted proposals and accepted-path integration evidence |
-| Workflow Design Manager (WDM) | user-confirmed workflow design, control-plane modification through assigned leaves, exact-slice acceptance and later integrated-union semantic acceptance | confirmed plan, self-contained child assignment, candidate-ready slice packets, convergence change packet and successor brief |
+| Workflow Design Manager (WDM) | user-confirmed workflow design, registered-leaf control-plane modification, singleton frozen-package acceptance, and conditional true multi-candidate union acceptance | confirmed plan, self-contained child assignment, package/conditional-convergence packets and successor brief |
 | Workflow Auditor | read-only local reconnaissance for an assigned workflow surface | conclusion about bounded facts/conflicts, followed by optional dependency evidence |
 | Workflow Implementer | one frozen non-overlapping workflow change slice | conclusion about the owned outcome and checked consequence, followed by an optional `WORKFLOW_CHANGE_PACKET` factual tail |
 | Workflow Reviewer | independent review of one coherent integrated batch | conclusion and advisory disposition for WDM, followed by optional findings evidence; no source edits or acceptance |
@@ -57,17 +61,11 @@ not move back into the router or this map.
 
 ## Validation and progress pointers
 
-`docs/project/SESSION_WORKSPACE_CONTRACT.md` is the defining source for the
-three validation layers, the exact five WDM progress observations, failure
-classification, Windows basetemp and one-reviewer policy. This map only
-orients the edge: writers cover `slice_local`, WDM owns one
-`integration_cross_slice` run after writes freeze, and Root owns the pending
-`runtime_fresh_smoke_after_root_integration_reload`. The Audit Skill carries
-the normal path; the Roles carry capability and authority. Root's useful-work
-L1-start guidance and the `max_threads=20` agent ceiling do not create a quota,
-pool, scheduler, admission gate or runtime authorization. Progress observations
-return through the current Root task/report boundary rather than a persistent
-store, callback, queue or ledger.
+`docs/project/SESSION_WORKSPACE_CONTRACT.md` is the defining source for
+validation, progress, worktree, lifecycle and review mechanics. The route-table
+row for Session/worktree/lifecycle is the lazy lookup boundary, and the Audit
+Skill is the normal risk/delegation path; this map records no procedure or
+progress state.
 
 ## Scope-keyed L1 multiplicity
 
@@ -89,38 +87,17 @@ families are not valid owner scopes; Root is the sole macro/portfolio owner.
 
 ## Parallel WDM candidate and convergence edge
 
-Root dispatches each WDM with caller action `fork_turns=1` for background
-context only. Each WDM dispatches disjoint registered Implementers with
-explicit `fork_turns=none`. Root alone controls provisioning, lifecycle
-records, integration, release/retention, Git, user contact and cross-owner
-relay, and completion order does not establish priority. One writable L1
-assignment has one Root-managed worktree; the Session Workspace Contract
-defines the shared-L1 conditions, forbids L2 worktree lifecycle control, and
-requires a new L1 for an independent candidate or release lifecycle.
-Concurrent WDM/CPM L1s and later integration/convergence use separate
-worktrees. Each WDM accepts its exact slice and returns a candidate-ready packet;
-Root records and integrates the candidate set. A fresh convergence WDM then
-works on the exact integrated union, arranges integrated advisory review and
-owns union semantic acceptance. Reviewer output is advisory and never accepts.
-The converged package uses exactly one integrated Reviewer after test evidence
-is frozen; that Reviewer is read-only/advisory and receives no second pass.
-This explicit WDM workflow convergence remains unchanged and is distinct from
-domain ownership: no standing/fresh domain-convergence lane or extra union Reviewer is
-created for direction/shared code slices.
-This map remains an orientation pointer; the Session Workspace Contract is
-the single mechanics source and no completed integration or convergence is
-implied here.
+The Session Workspace Contract defines the mechanics. A singleton package is
+one writable WDM L1's exact final frozen bytes, reviewed once by one advisory
+Reviewer before that same WDM accepts it for Root integration. A true union
+exists only when Root combines at least two independently reviewed candidates
+or the integrated bytes differ from every reviewed package; a fresh convergence
+WDM then reviews and accepts that exact union. This map is only the stable
+relationship pointer and does not imply integration or convergence.
 
-Any writer that may touch a tracked path, including a WDM workflow writer, uses
-a Root-provisioned managed worktree. Read-only, ignored-only and temporary-only
-assignments are exempt; mixed tracked and ignored writes remain tracked-writer
-assignments. Root alone invokes the helper, owns the lifecycle receipt, applies
-accepted paths and releases or retains the worktree. At most one nonterminal
-receipt is active per assignment; a local failure remains nonterminal for Root
-retry or parking while unrelated work continues. Legacy worktrees stay isolated
-and untouched. Children never invoke the helper or run raw child `git worktree`
-operations. The Session Workspace Contract is the defining workspace source;
-this paragraph is orientation only.
+Independent frozen slices are parallel-first with dependency-only serialization
+for same-path or unfrozen-contract conflicts; detailed mechanics live in the
+Audit Skill and Session Workspace Contract.
 
 ## Persistent owner/orchestrator edge
 
@@ -213,51 +190,32 @@ Session Contract.
 Research and CPM operational dependency details remain in their owner contracts;
 this map keeps only the owner-lane edge.
 
-```text
-confirmed plan -> disjoint frozen WDM slices -> candidate-ready packets -> Root records/integrates candidate set -> fresh convergence WDM on exact integrated union -> integrated advisory review -> WDM union acceptance -> Root accepted-path Git integration
-```
-
-High-risk workflow work uses the registered Auditor, Implementer and integrated
-Reviewer with parallel-first direct orchestration and dependency order; a
-low-risk one-file wording or test-only slice may skip a new Auditor only when
-WDM records a concrete rationale. Ordinary workflow work remains
-parallel-first with direct orchestration and dependency order;
-dispatch read-only Auditor/Scout concurrently with already-freezable
-implementation slices, run disjoint Implementer file families concurrently,
-and serialize only actual information dependencies or same-file writers. The
-integrated Reviewer follows the complete integrated union; parallel reviewers
-remain limited to genuinely independent questions.
-
-The stable assignment dependency is
-`parent task model -> hmasd-writing-agent-assignments Skill -> self-contained
-assignment -> child judgment/result`. This is context and evidence direction,
+The Session Contract, route table and Audit Skill are the defining pointers for
+workflow risk, causal evidence, delegation, worktree, validation and review.
+For a clear bounded route, WDM records the Session field
+`workflow_auditor_skip_evidence`; missing, ambiguous, conflicting or
+authority-crossing routes remain Auditor-required. The stable assignment edge
+is `parent task model -> hmasd-writing-agent-assignments Skill -> self-contained
+assignment -> child judgment/result`; this is context and evidence direction,
 not a state machine, queue or admission gate.
 
 ## Delegation orientation
 
-The Audit Skill carries the risk-tiered Auditor choice; registered Implementer
-and integrated Reviewer work use parallel-first dispatch and dependency order.
-Workflow-file changes are performed by assigned Workflow Implementer leaves;
-each WDM accepts its exact slice, while a fresh convergence WDM reviews and
-semantically accepts the integrated union; Root performs any separately
-authorized accepted-path Git mechanics. Pure design or
-authority decisions without file mutation remain WDM-local. The Roles and
-Audit Skill own detailed routing mechanics; serialize only actual information
-dependencies or same-file writers, and keep parallel reviewers limited to
-genuinely independent questions.
+The route-table row for risk/delegation/review points to the Audit Skill.
+Roles and Audit Skill own detailed routing mechanics; this map keeps only the
+stable owner/dependency edge and the singleton-versus-true-union relationship
+above. Pure design or authority decisions without file mutation remain WDM-local.
 
 ## Context loading
 
 `AGENTS.md` owns the lazy trigger table and
-`docs/project/L1_STARTUP_CONTEXT.md` is the concise pointer index for WDM, CPM
-and Explorer default core inputs and action triggers. Each L1 starts with the
-exact assignment, registered Profile and Role, then expands only to the Skill
-or owner surface named by the active interface or status dependency. The index
-and this map are orientation aids, not reasons to load every document. Root
-uses compact direction packets and lazy pointers for macro/portfolio work; EM
-loads one named direction, and CM loads only direct direction/shared
-interfaces. Neither owner preloads a portfolio or unrelated project/runtime
-corpus.
+`docs/project/L1_STARTUP_CONTEXT.md` is the concise pointer index for owner
+inputs and action triggers. The Session Contract, Profiles, Roles and active
+route define exact loading boundaries; this map is an orientation aid, not a
+reason to preload unrelated documents.
+
+The route-table row for L1 startup/context is the lazy load boundary; it does
+not replace the defining source or create state.
 
 ## Role-based successor continuity
 

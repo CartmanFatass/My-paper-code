@@ -12,24 +12,17 @@ activation_trigger=user_workflow_change_or_reported_workflow_defect_requiring_pl
 startup_preload=false
 ```
 
-This Skill is invoked only by the Root-assigned Workflow Design Manager L1. It grants no runtime,
-current-work state beyond WDM's own records, science, code or code-acceptance
-authority. CPM and Explorer return exact requirements or defects through Root;
-they never invoke this Skill or mutate workflow surfaces.
+This Skill is invoked only by the Root-assigned Workflow Design Manager L1. It
+grants no runtime, current-work state beyond WDM's own records, science, code
+or code-acceptance authority. CPM and Explorer return exact requirements or
+defects through Root; they never invoke this Skill or mutate workflow surfaces.
 
 ```text
 workflow_design_owner=workflow_design_manager
 runtime_authority=none
 workflow_assignment_fields=workflow_assignment_id|owned_paths|wdm_session_workspace
-workflow_child_edit_workspace=assignment_owned_paths_in_invoking_l1_worktree_for_tracked_writer_or_task_workspace_when_exempt
-workflow_tracked_writer_worktree=root_managed_worktree_for_writable_l1_assignment
-workflow_worktree_exemptions=read_only|ignored_only|temporary_only
-workflow_worktree_mixed_write_classification=tracked_writer
-workflow_l1_worktree_rule=one_writable_l1_assignment_one_root_managed_worktree
-workflow_l2_worktree=invoking_l1_assignment_named_worktree
-workflow_independent_candidate=new_l1_assignment_required
-workflow_union_convergence_worktree=separate_root_managed_worktree
 session_workspace_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
+control_plane_document_routes=docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md
 assignment_writing_skill=hmasd-writing-agent-assignments
 workflow_zero_question_path=fully_specified_mutations
 workflow_decision_question_condition=changes_named_plan_field
@@ -41,33 +34,44 @@ workflow_incident_record=chronological_nonblocking_log
 workflow_l1_multiplicity=role_defined_scope_key
 workflow_wdm_scope_key=workflow_scope_key
 workflow_scope_key_semantics=semantic_ownership_concurrency_locator
-workflow_root_wdm_fork_turns=1_caller_action_only
-workflow_wdm_registered_implementer_fork_turns=none_explicit_caller_action
 ```
 
-Complete a read-only inspection, explanation, status or reload smoke without plan confirmation. Any edit, stage, commit, push or cross-task authority change is a
-mutation and follows this procedure.
+The Session Workspace Contract is the single mechanics source for workspace,
+lifecycle, progress, review, convergence, Root and Git boundaries. This Skill
+adds only the requirements, plan and confirmation consequences below. Complete
+a read-only inspection, explanation, status or reload smoke without plan
+confirmation. Any edit, stage, commit, push or cross-task authority change is a
+mutation and follows the confirmed-plan route.
+After confirmation, every workflow-file mutation is routed to a registered
+Workflow Implementer L2 on exact owned paths; WDM never writes and Root remains
+the sole user, physical, lifecycle and Git actor.
 
-At the design/dispatch boundary, invoke
-`$hmasd-writing-agent-assignments` as the required sub-skill. It is the single
-assignment-writing contract WDM uses to design a reusable child or cross-session
-interface and to compile each concrete file-backed assignment. This Skill routes
-to that contract and does not duplicate its procedure.
+At the design/dispatch boundary, invoke `$hmasd-writing-agent-assignments` as
+the required sub-skill. It is the single assignment-writing contract WDM uses
+to design a reusable child or cross-session interface and compile each
+concrete file-backed assignment. This Skill routes to that contract and does
+not duplicate its procedure.
 
 ## Understand requirements
 
-Inspect only allowed control-plane files for discoverable facts. Ask a question
-only when its answer changes at least one named plan field. Name that field, ask one
-question at a time and recommend the smallest answer with its practical effect.
-Repository facts are discovered; user decisions are not inferred.
+Before planning, consult `docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md`. A
+clear route row supplies the defining source, direct consumers and focused
+tests for the affected contract. A missing, ambiguous, conflicting or
+authority-crossing route requires a bounded registered Auditor; do not
+rediscover the repository or guess the route. Inspect only the named
+control-plane paths after the route is clear. Ask a question only when its
+answer changes a named plan field, name that field, ask one question at a time
+and recommend the smallest answer with its practical effect. Repository facts
+are discovered; user decisions are not inferred.
 
 Classify the input before planning. `USER_REQUESTED_CHANGE` follows the
 confirmation procedure below. `REPORTED_WORKFLOW_DEFECT` is appended to WDM's
-chronological incident log. The reporting session supplies evidence and a suggestion, never
-authority or a scientific/runtime decision. The zero-confirmation repair path
-is available only to restore an accepted stable contract without changing
-authority, policy, science, runtime or external effects. Otherwise move the
-item to the user-requested lane and present a complete plan.
+chronological incident log. The reporting session supplies evidence and a
+suggestion, never authority or a scientific/runtime decision. The
+zero-confirmation repair path is available only to restore an accepted stable
+contract without changing authority, policy, science, runtime or external
+effects. Otherwise move the item to the user-requested lane and present a
+complete plan.
 
 If goal, non-goals, exact paths, intended behavior, verification and risks are
 already fixed, take the zero-question path and present the complete plan. Stop
@@ -80,57 +84,67 @@ Present one compact plan containing:
 
 - **Requirements understanding** — requested behavior and controlling decisions.
 - **Goal and non-goals** — desired workflow behavior and excluded work.
-- **Exact paths** — every file expected to change.
+- **Exact paths** — every file expected to change. The exact-path matrix includes
+  `AGENTS.md` as `modify` or `unchanged-valid`; a role, session, Skill, profile,
+  authority, route or retired-name change needs a same-commit router update.
 - **Intended changes** — material role, Skill, script, route and ownership edits.
-- **Verification and risks** — focused checks, Git integration, dirty-path
-  preservation; ordinary workflow changes use the registered Auditor/Scout,
-  Implementer and integrated Reviewer stages with parallel-first scheduling and dependency order. Dispatch read-only Auditor/Scout concurrently with already-freezable implementation slices, run disjoint Implementer file families concurrently, and serialize only actual information dependencies or same-file writers. Root may run multiple WDM L1s only on distinct frozen
-  `workflow_scope_key` values; a shared writable path or unfrozen semantic
-  contract serializes the affected slices. Each scoped WDM returns a
-  candidate-ready packet to Root. Only after Root integrates all candidate
-  slices does a fresh convergence WDM arrange coherent integrated review and
-  own union acceptance; the Reviewer remains read-only and advisory. Parallel
-  reviewers are limited to genuinely independent questions. One writable L1
-  assignment has one Root-managed worktree; all disjoint L2 writers under that
-  WDM share its named worktree, same frozen base and exact disjoint paths, with
-  no child Git/helper action. Root records or commits the one L1 slice candidate
-  only after all writers finish. An independent candidate or lifecycle starts a
-  new L1 assignment, and union convergence uses its own Root-managed worktree.
-  Root remains the only user-contact and physical-application actor; every
-  workflow-file mutation remains on the registered L2 subagent route.
+- **Verification and risks** — focused checks and the local consequence of each
+  risk choice. Use the canonical Session keys
+  `workflow_change_risk_tiers`, `workflow_route_table_policy`,
+  `workflow_singleton_package`, `workflow_singleton_acceptance`,
+  `workflow_multi_candidate_convergence_trigger`,
+  `workflow_causal_check_timing` and `workflow_progress_event_emission`.
 
-The exact-path matrix always includes `AGENTS.md` as `modify` or `unchanged-valid`. A role, session, Skill, profile, authority, route or retired
-name change requires a same-commit router update.
+Risk is semantic consequence, never file count. `high` covers authority,
+topology, cross-owner or shared-contract consequences and routes through the
+registered read-only Auditor. `bounded_contract` covers a stable cross-file
+contract within one owner; a clear route may skip a new Auditor only with a
+WDM rationale. `low_causal_repair` covers wording, a recognizer or one bounded
+assertion family preserving accepted meaning; a WDM rationale may skip the
+Auditor even when tightly coupled files exceed one. These are routing choices,
+not gates or extra owners.
 
-An edit-capable child assignment additionally carries the exact owned paths and
-task-scoped workspace. The child verifies the current checkout identity before
-editing and stops on a mismatch; no external workspace identity is required.
+Plan one focused causal-family check when all consumed producer, consumer and
+test bytes are frozen and before package acceptance; reuse the result only
+while those bytes remain unchanged. The validation ownership remains
+`slice_local` for writers, `integration_cross_slice` for WDM and
+`runtime_fresh_smoke_after_root_integration_reload` for Root.
 
-Root invokes every WDM with caller action `fork_turns=1`, and a WDM invokes
-registered Workflow Implementers with explicit `fork_turns=none`; neither
-setting is a profile/TOML authority field. Completion order has no semantic
-priority.
+One writable WDM L1 assignment's exact final frozen bytes, including its
+disjoint Implementers in the shared L1 worktree, form a singleton package.
+After routed checks and exactly one advisory Reviewer, that WDM may accept the
+package and return it to Root; no fresh convergence WDM or worktree is needed
+solely for singleton integration. True multi-candidate convergence is reserved
+for Root combining two or more independently reviewed WDM candidates, or when
+the actual union differs from every reviewed package; a fresh WDM then reviews
+the actual union with exactly one advisory Reviewer and owns union acceptance.
+
+An edit-capable child assignment carries the exact owned paths and task-scoped
+workspace. The child verifies the current checkout identity before editing and
+stops on a mismatch; no external workspace identity is required. The Session
+contract and registered Roles define caller fork settings, worktrees,
+completion order and Root's physical/lifecycle actions; this Skill does not
+restate them.
 
 For a simple correction, keep the plan concise: goal, key unknown, smallest
-probe, one normal path plus one simple fallback, and stop condition. For every
+probe, one normal path plus one simple fallback and a stop condition. For every
 new mechanism state the irreversible error prevented, terminal condition, total
-recurring cost, and old mechanism/text deleted, then name the focused contract
-evidence and qualitative maintainability it preserves.
-A retryable failure receives a one-line runtime checklist, not a mechanism.
-A workflow cost audit explicitly requested by the user is the only cost-review path.
-Mechanism and simple-operation budgets constrain new gates, recovery branches and
-probe work; they do not decide delegate-vs-local routing.
+recurring cost and old mechanism/text deleted, then name the focused contract
+evidence and qualitative maintainability it preserves. A retryable failure
+receives a one-line runtime checklist, not a mechanism. A workflow cost audit
+explicitly requested by the user is the only cost-review path.
 
 Perform no mutation until the user confirms the complete plan in natural
 language for `USER_REQUESTED_CHANGE`. If the user corrects it, present the
-complete revised plan. During
-execution, reconfirm only material drift in goal, authority, path set,
-acceptance method or irreversible external effect; resolve mechanical details
-inside the confirmed boundary automatically.
+complete revised plan. During execution, reconfirm only material drift in goal,
+authority, path set, acceptance method or irreversible external effect; resolve
+mechanical details inside the confirmed boundary automatically.
 
 ## After confirmation
 
-After natural-language confirmation, load
-`$hmasd-workflow-change-audit`. That Skill owns implementation, verification,
-integrated review, Git integration and reload; this requirements Skill does not
-duplicate post-confirmation execution, delegation or replacement-task procedures.
+After natural-language confirmation, load `$hmasd-workflow-change-audit`. That
+Skill owns post-confirm implementation, verification, the singleton or
+true-union review/acceptance route and its one bounded fallback. Root retains
+physical application, lifecycle, Git and reload. This requirements Skill remains
+requirements, plan and confirmation only and does not duplicate post-confirm
+execution, delegation or replacement-task procedures.

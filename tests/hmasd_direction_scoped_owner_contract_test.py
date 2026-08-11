@@ -82,8 +82,10 @@ def test_domain_slices_have_final_cm_acceptance_and_mechanical_root_union() -> N
         "formal/project-canonical science remains",
     ):
         assert required in surfaces
-    assert "fresh convergence wdm" in surfaces
     assert "workflow_convergence_owner=wdm_only_explicit_workflow_convergence" in surfaces
+    assert "workflow_union_convergence=conditional_on_workflow_multi_candidate_convergence_trigger" in surfaces
+    assert "workflow_domain_convergence=forbidden_standing_or_fresh" in surfaces
+    assert "workflow_extra_union_reviewer=forbidden" in surfaces
 
 
 def test_direction_reverse_intake_and_multidirection_split_are_root_bound() -> None:

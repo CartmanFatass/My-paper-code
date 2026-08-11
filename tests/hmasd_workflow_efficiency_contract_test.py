@@ -37,6 +37,32 @@ def test_validation_layers_and_writer_scope_are_structural() -> None:
         "owned_paths|smallest_affected_contracts"
     )
     assert _field(contract, "workflow_writer_full_suite") == "forbidden"
+    assert _field(contract, "control_plane_document_routes") == (
+        "docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md"
+    )
+    assert _field(contract, "workflow_change_risk_tiers") == (
+        "high|bounded_contract|low_causal_repair"
+    )
+    assert _field(contract, "workflow_route_table_policy") == (
+        "clear_route_loads_defining_source_direct_consumers_focused_tests|"
+        "missing_ambiguous_conflicting_or_authority_crossing_route_requires_Auditor"
+    )
+    assert _field(contract, "workflow_singleton_package") == (
+        "one_writable_WDM_L1_exact_final_frozen_bytes_reviewed_together"
+    )
+    assert _field(contract, "workflow_singleton_acceptance") == (
+        "one_advisory_Reviewer_then_same_WDM_package_acceptance_before_Root_integration"
+    )
+    assert _field(contract, "workflow_multi_candidate_convergence_trigger") == (
+        "two_or_more_independently_reviewed_WDM_candidates|"
+        "actual_union_differs_from_every_reviewed_package"
+    )
+    assert _field(contract, "workflow_causal_check_timing") == (
+        "when_all_consumed_bytes_are_frozen_before_package_acceptance"
+    )
+    assert _field(contract, "workflow_progress_event_emission") == (
+        "each_relevant_event_at_most_once|adjacent_observations_may_share_one_report"
+    )
 
 
 def test_progress_vocabulary_is_exactly_status_only_and_nonaccepting() -> None:
@@ -72,20 +98,27 @@ def test_auditor_risk_tiers_and_integrated_review_are_keyed() -> None:
     contract = SESSION_CONTRACT.read_text(encoding="utf-8")
     manager = MANAGER_ROLE.read_text(encoding="utf-8")
 
-    assert _fields(contract, "workflow_auditor_policy") == {
-        "high_risk_authority_topology_cross_owner_shared_contract_requires_Auditor",
-        "low_risk_one_file_wording_or_test_only_may_skip_new_Auditor_with_WDM_rationale",
-    }
-    assert (
-        "workflow_auditor_decision="
-        "high_risk_requires_Auditor|low_risk_one_file_wording_or_test_only_may_skip_with_concrete_rationale"
-    ) in manager
-    assert _fields(manager, "workflow_auditor_decision") == {
-        "high_risk_requires_Auditor",
-        "low_risk_one_file_wording_or_test_only_may_skip_with_concrete_rationale",
-    }
-    assert "concrete rationale" in manager
-
+    assert _field(manager, "workflow_change_risk_tiers") == (
+        "high|bounded_contract|low_causal_repair"
+    )
+    assert _field(manager, "workflow_high_risk_requires_auditor") == (
+        "authority|topology|cross_owner|shared_contract"
+    )
+    assert _field(manager, "workflow_auditor_skip") == (
+        "route_resolved_bounded_single_owner_contract|"
+        "low_causal_repair_with_concrete_WDM_rationale"
+    )
+    assert _field(manager, "workflow_auditor_required") == (
+        "missing|ambiguous|conflicting|authority_crossing_route"
+    )
+    assert _field(contract, "workflow_auditor_policy") == (
+        "high_requires_Auditor|bounded_contract_clear_route_may_skip_with_WDM_rationale|"
+        "low_causal_repair_may_skip_with_WDM_rationale|"
+        "missing_ambiguous_conflicting_or_authority_crossing_route_requires_Auditor"
+    )
+    assert _field(contract, "workflow_auditor_skip_evidence") == (
+        "concrete_WDM_rationale|focused_causal_evidence_on_all_frozen_consumed_bytes"
+    )
     assert _field(contract, "workflow_integrated_review") == (
         "exactly_one_advisory_Reviewer_after_TESTS_COMPLETE_and_REVIEW_READY"
     )
@@ -94,8 +127,121 @@ def test_auditor_risk_tiers_and_integrated_review_are_keyed() -> None:
     )
     assert _field(contract, "workflow_reviewer_authority") == "advice_only_no_acceptance"
     assert _field(manager, "workflow_integration_review_authority") == (
-        "one_advisory_Reviewer_read_only_then_WDM_union_acceptance"
+        "one_registered_read_only_advisory_Reviewer_then_WDM_package_or_union_acceptance"
     )
+
+
+def test_control_plane_route_table_is_six_rows_and_path_backed() -> None:
+    route_path = SESSION_CONTRACT.parent / "CONTROL_PLANE_DOCUMENT_ROUTES.md"
+    route_text = route_path.read_text(encoding="utf-8")
+    assert _field(route_text, "control_plane_document_routes") == (
+        "docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md"
+    )
+    assert _field(route_text, "control_plane_document_routes_not") == (
+        "task_state|history|hash|receipt|queue|admission|acceptance"
+    )
+    assert _field(route_text, "workflow_route_table_policy") == (
+        "clear_route_loads_defining_source_direct_consumers_focused_tests|"
+        "missing_ambiguous_conflicting_or_authority_crossing_route_requires_Auditor"
+    )
+
+    table_lines = [
+        line.strip()
+        for line in route_text.splitlines()
+        if line.strip().startswith("|")
+    ]
+    assert len(table_lines) == 8  # header, separator and six compact route rows
+    header = [cell.strip() for cell in table_lines[0].strip("|").split("|")]
+    assert header == [
+        "Trigger",
+        "Defining source",
+        "Direct consumers",
+        "Focused tests",
+        "Auditor escalation",
+    ]
+    rows = [
+        [cell.strip() for cell in line.strip("|").split("|")]
+        for line in table_lines[2:]
+    ]
+    assert len(rows) == 6
+    assert len({row[0] for row in rows}) == 6
+    assert all(len(row) == 5 and all(row) for row in rows)
+
+    authority_escalation = next(
+        row[4].lower() for row in rows if row[0] == "Authority and topology"
+    )
+    assert re.search(
+        r"`high`:\s*auditor required for authority, topology, cross-owner or shared-contract work"
+        r";\s*missing, ambiguous, conflicting or authority-crossing routes also require auditor",
+        authority_escalation,
+    )
+
+    # Every repo-relative backticked source/consumer/test path is live. The
+    # prose and keyed negatives intentionally remain non-path relationship data.
+    for row in rows:
+        for cell in row[1:4]:
+            for value in re.findall(r"`([^`]+)`", cell):
+                assert not value.startswith(("http://", "https://"))
+                assert (SESSION_CONTRACT.parents[2] / value).is_file(), value
+
+    normalized = " ".join(route_text.split()).lower()
+    for forbidden in (
+        "task_state",
+        "task log",
+        "history",
+        "hash",
+        "receipt",
+        "queue",
+        "admission",
+        "acceptance record",
+    ):
+        assert forbidden in normalized
+    assert not re.search(
+        r"(?m)^(?:assignment|history|hash|receipt|queue|admission|acceptance)(?:_|[a-z])*\s*=",
+        route_text,
+    )
+
+
+def test_wdm_current_work_routes_and_map_owner_meaning_are_resolved() -> None:
+    route_path = SESSION_CONTRACT.parent / "CONTROL_PLANE_DOCUMENT_ROUTES.md"
+    route_text = route_path.read_text(encoding="utf-8")
+    table_lines = [
+        line.strip()
+        for line in route_text.splitlines()
+        if line.strip().startswith("|")
+    ]
+    rows = [
+        [cell.strip() for cell in line.strip("|").split("|")]
+        for line in table_lines[2:]
+    ]
+    triggers = {row[0] for row in rows}
+    expected_route = "docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md"
+    expected_active_trigger = "WDM planning and confirmation"
+    expected_boundary_trigger = "Risk, delegation and review"
+
+    for record_path in (
+        REPO / "docs/project/current-work/common/workflow_control_plane.md",
+        REPO / "docs/project/current-work/sessions/workflow_design_manager.md",
+    ):
+        record = record_path.read_text(encoding="utf-8")
+        assert _field(record, "active_wdm_route") == expected_route
+        assert _field(record, "next_boundary") == expected_route
+        assert _field(record, "active_wdm_route_trigger") == expected_active_trigger
+        assert _field(record, "next_boundary_trigger") == expected_boundary_trigger
+        assert _field(record, "active_wdm_route_trigger") in triggers
+        assert _field(record, "next_boundary_trigger") in triggers
+
+    workflow_map = (REPO / "docs/project/WORKFLOW_MAP.md").read_text(encoding="utf-8")
+    wdm_rows = [
+        line.strip()
+        for line in workflow_map.splitlines()
+        if line.strip().startswith("| Workflow Design Manager (WDM) |")
+    ]
+    assert len(wdm_rows) == 1
+    wdm_row = wdm_rows[0].lower()
+    assert "singleton frozen-package acceptance" in wdm_row
+    assert "conditional true multi-candidate union acceptance" in wdm_row
+    assert "package/conditional-convergence packets" in wdm_row
 
 
 def test_start_guidance_basetemp_and_failure_classes_are_bounded() -> None:

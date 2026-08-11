@@ -3,6 +3,8 @@
 ```text
 document_kind=l1_startup_context_pointer_index
 scope=task_scoped_l1_default_inputs_and_action_triggers
+control_plane_document_routes=docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md
+control_plane_document_routes_not=task_state|history|hash|receipt|queue|admission|acceptance
 default_core_inputs=AGENTS.md|exact_Root_assignment|registered_profile|named_Role
 startup_preload=core_inputs_only
 authority_source=AGENTS.md_and_named_Roles
@@ -15,6 +17,12 @@ This is a concise pointer index. It does not define authority, assignment
 meaning, procedure, scientific state, runtime state or continuity state. Each
 L1 starts with the shared `default_core_inputs`, then expands only when an
 action trigger names a Skill or reference.
+
+For workflow-control-plane lookup, use the named row in
+`docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md`. The route table is a stable
+lazy relationship map, not task state, history, a hash, receipt, queue,
+admission or acceptance data; an unclear row is escalated to the bounded
+Auditor rather than resolved by broad discovery.
 
 ## Root macro/portfolio context
 
@@ -47,6 +55,7 @@ default_core=AGENTS.md|exact_Root_assignment|profile|role
 | Confirmed workflow plan execution or verification | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
 | Assignment/interface design | `hmasd-writing-agent-assignments` and named contract |
 | Scope-keyed parallel WDM startup and convergence | `docs/project/SESSION_WORKSPACE_CONTRACT.md` and the exact WDM owner record |
+| WDM control-plane route lookup | `docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md` |
 | Stable workflow edge | `docs/project/WORKFLOW_MAP.md` |
 | Named continuity reload | exact Root-named WDM owner record |
 | Macro/portfolio direction packet or lazy pointer | compact Root packet and the named direction pointer only |

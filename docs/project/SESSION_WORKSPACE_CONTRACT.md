@@ -2,6 +2,8 @@
 
 ```text
 document_kind=session_workspace_contract
+control_plane_document_routes=docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md
+control_plane_document_routes_not=task_state|history|hash|receipt|queue|admission|acceptance
 workflow_child_parent=workflow_design_manager
 durable_workspace_root=docs/session-workspaces/<role_id>/
 temporary_workspace_root=temp/sessions/<role_id>/
@@ -85,7 +87,14 @@ workflow_path=direct_orchestration_normal_path_plus_one_bounded_local_recovery
 workflow_forbidden_control_surfaces=scheduler|queue|ledger|ticket_registry|hash_admission|digest_admission|fingerprint_admission|polling|recovery_state_machine|new_global_gate
 workflow_slice_result=wdm_accepts_exact_slice_then_returns_candidate_ready_packet
 workflow_candidate_integration=Root_records_and_integrates_candidate_set_after_all_children_finish
-workflow_union_convergence=fresh_wdm_on_exact_integrated_union_arranges_advisory_review_and_owns_union_acceptance
+workflow_change_risk_tiers=high|bounded_contract|low_causal_repair
+workflow_route_table_policy=clear_route_loads_defining_source_direct_consumers_focused_tests|missing_ambiguous_conflicting_or_authority_crossing_route_requires_Auditor
+workflow_singleton_package=one_writable_WDM_L1_exact_final_frozen_bytes_reviewed_together
+workflow_singleton_acceptance=one_advisory_Reviewer_then_same_WDM_package_acceptance_before_Root_integration
+workflow_multi_candidate_convergence_trigger=two_or_more_independently_reviewed_WDM_candidates|actual_union_differs_from_every_reviewed_package
+workflow_union_convergence=conditional_on_workflow_multi_candidate_convergence_trigger
+workflow_causal_check_timing=when_all_consumed_bytes_are_frozen_before_package_acceptance
+workflow_progress_event_emission=each_relevant_event_at_most_once|adjacent_observations_may_share_one_report
 workflow_reviewer_authority=advice_only_no_acceptance
 workflow_union_acceptance_not_implied_by=slice_candidate|Root_integration|Reviewer_advice|commit
 workflow_convergence_owner=WDM_only_explicit_workflow_convergence
@@ -130,7 +139,8 @@ root_final_unfinished_work=explicit_report_required
 root_continuation_forbidden=background_callback|scheduler|watcher|automatic_continuation|busy_polling
 workflow_integrated_review=exactly_one_advisory_Reviewer_after_TESTS_COMPLETE_and_REVIEW_READY
 workflow_integrated_review_followup=one_pass_no_second_review
-workflow_auditor_policy=high_risk_authority_topology_cross_owner_shared_contract_requires_Auditor|low_risk_one_file_wording_or_test_only_may_skip_new_Auditor_with_WDM_rationale
+workflow_auditor_policy=high_requires_Auditor|bounded_contract_clear_route_may_skip_with_WDM_rationale|low_causal_repair_may_skip_with_WDM_rationale|missing_ambiguous_conflicting_or_authority_crossing_route_requires_Auditor
+workflow_auditor_skip_evidence=concrete_WDM_rationale|focused_causal_evidence_on_all_frozen_consumed_bytes
 workflow_auditor_policy_not=gate|second_acceptance_owner
 workflow_root_l1_start_guidance=useful_owned_work_and_useful_action_or_matching_leaf_capacity
 workflow_root_l1_start_guidance_not=quota|reservation|scheduler|admission_gate|pool|runtime_authorization
@@ -313,13 +323,33 @@ released by the managed lifecycle. The normal path has one bounded local
 recovery; no scheduler, queue, ledger, ticket registry, admission fingerprint,
 polling loop, recovery state machine or new global gate is introduced.
 
-For a parallel WDM change, each WDM accepts its exact frozen slice and returns
-a candidate-ready packet. Root records and integrates the candidate set. Only
-after that integration does a fresh convergence WDM receive the exact
-integrated union, arrange integrated advisory review and own union semantic
-acceptance. Reviewer output is advisory and never accepts the union. A slice
-candidate, Root integration, Reviewer advice or a commit does not by itself
-claim union acceptance.
+For a WDM change, each writer freezes its exact paths and the WDM returns a
+candidate-ready packet. If the final bytes come from one writable WDM L1
+assignment, the singleton package is reviewed together by exactly one
+read-only advisory Reviewer; that same WDM may then semantically accept the
+package before Root records and integrates it. A fresh convergence WDM is
+required only when Root combines two or more independently reviewed WDM
+candidates, or when the actual integrated union differs from every reviewed
+package. That convergence WDM receives the exact integrated union, arranges
+one integrated advisory review and owns union semantic acceptance. Reviewer
+output is advisory and never accepts. A slice candidate, Root integration,
+Reviewer advice or a commit does not by itself claim union acceptance.
+
+Focused causal-family checks run once all bytes they consume are frozen and
+before package acceptance; their evidence remains valid only while those bytes
+stay unchanged. The five WDM observations retain their existing meanings and
+are emitted at most once when relevant; adjacent observations may share one
+meaning-first Root report without losing event names, owners, evidence or next
+action, and without becoming state or acceptance data.
+
+## Frozen package and convergence
+
+The route table is the lazy relationship index for this contract. It names the
+defining source, direct consumers, focused checks and Auditor escalation for
+each control-plane trigger. A clear route lets WDM load only its row; a missing,
+ambiguous, conflicting or authority-crossing route requires a bounded Auditor.
+The table is a stable pointer map, never task state, history, a hash, receipt,
+queue, admission or acceptance data.
 
 ## Durable and temporary files
 

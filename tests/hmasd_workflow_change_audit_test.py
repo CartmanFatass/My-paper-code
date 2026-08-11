@@ -70,7 +70,7 @@ def test_maintainability_contract_replaces_numeric_admission_gates() -> None:
     )
     harness = CHECKER_PATH.read_text(encoding="utf-8")
     workflow_text = "\n".join((manager, collaboration, audit, harness))
-    normalized_workflow_text = " ".join(workflow_text.split())
+    normalized_workflow_text = " ".join(workflow_text.split()).lower()
 
     retired = (
         "_".join(("single", "mechanism", "line", "budget")),
@@ -87,21 +87,14 @@ def test_maintainability_contract_replaces_numeric_admission_gates() -> None:
     for retired in retired:
         assert retired not in workflow_text
 
-    for dimension in (
-        "interface quality",
-        "coherent responsibility",
-        "dependency direction",
-        "state ownership",
-        "decoupling",
-        "complexity isolation",
-        "change locality",
-        "focused contract evidence",
-    ):
-        assert dimension in normalized_workflow_text
-
-    assert "single_mechanism_terminal_state_budget=3" in workflow_text
-    assert "simple_operation_active_engineering_budget_minutes=20" in workflow_text
-    assert "simple_operation_failed_probe_budget=2" in workflow_text
+    assert "mechanism budgets constrain only irreversible/high-cost actions" in (
+        normalized_workflow_text
+    )
+    assert "focused contract evidence and qualitative maintainability" in (
+        normalized_workflow_text
+    )
+    assert "retryable failure" in normalized_workflow_text
+    assert "one-line runtime checklist" in normalized_workflow_text
 
 
 def test_harness_has_no_physical_line_gate() -> None:
@@ -141,14 +134,13 @@ def test_workflow_review_is_one_pass_normal_path_advice() -> None:
         "one_pass_no_second_review"
     )
     assert _keyed_field(session, "workflow_reviewer_authority") == "advice_only_no_acceptance"
-    assert "review_default=one_independent_reviewer" in reviewer
-    assert "acceptance_authority=none" in reviewer
-    assert "simple_operation_new_gate_state_identity_or_recovery=forbidden" in skill
-    assert "simple_operation_control=one_line_runtime_checklist_only" in skill
-    assert "theoretical_safety_hardening=reject_by_default" in skill
-    assert "simple_operation_active_engineering_budget_minutes=20" in skill
-    assert "simple_operation_failed_probe_budget=2" in skill
-    assert "Pro transport/recovery" not in skill
+    assert "review_default=exactly_one_registered_reviewer" in reviewer
+    assert "review_count=exactly_one_registered_read_only_advisory_Reviewer" in reviewer
+    assert "review_acceptance=advisory_only_no_acceptance" in reviewer
+    normalized_skill = normalized_skill.lower()
+    assert "mechanism budgets constrain only irreversible/high-cost actions" in normalized_skill
+    assert "one-line runtime checklist" in normalized_skill
+    assert "never use a hash, digest, byte count or fingerprint" in normalized_skill
 
 
 def test_workflow_audit_carries_plain_language_through_assignment_progress_and_result() -> None:
@@ -180,9 +172,9 @@ def test_workflow_audit_carries_plain_language_through_assignment_progress_and_r
 
     assert "workflow_progress_event_names=DISPATCHED|WRITES_COMPLETE|TESTS_COMPLETE|REVIEW_READY|TERMINAL" in session
     assert "TERMINAL" in audit
-    assert "TERMINAL does not mean" in audit or "TERMINAL` is not acceptance" in audit
-    assert "terminal conclusion returned to" in audit
-    assert "Root completes" in audit
+    assert "`TERMINAL` only says" in audit
+    assert "terminal conclusion" in audit
+    assert "Root then" in audit
     assert "one_pass_no_second_review" in session
 
 
@@ -208,7 +200,9 @@ def test_workflow_audit_requires_meaning_then_task_relevant_factual_evidence() -
     assert "commands" in surfaces
     assert "evidence" in surfaces
     assert "smallest task-relevant factual tail" in surfaces
-    assert "append the candidate-ready" in audit.lower()
+    normalized_audit = " ".join(audit.split()).lower()
+    assert "append only" in normalized_audit
+    assert "relevant candidate/acceptance packet" in normalized_audit
 
 
 def test_execution_policy_is_parallel_slice_first_with_root_convergence() -> None:
@@ -230,10 +224,10 @@ def test_execution_policy_is_parallel_slice_first_with_root_convergence() -> Non
     assert "workflow_subagent_parallelism=parallel_first_with_dependency_order" in router
     assert "native default child" in normalized
     assert "exact bounded temporary task" in normalized
-    assert "pure wdm design or authority decisions without file mutation remain wdm-local" in normalized
-    assert "mechanism and simple-operation budgets constrain" in audit.lower()
-    assert "never decide delegate-vs-local routing" in audit.lower()
-    assert "task size, complexity, local feasibility, context cost, path count and benefit estimates never alter it" in " ".join(audit.split()).lower()
+    assert "pure design or authority decisions without file mutation remain wdm-local" in normalized
+    assert "mechanism budgets constrain only irreversible/high-cost actions" in audit.lower()
+    assert "normal path is direct orchestration with one bounded local recovery" in audit.lower()
+    assert "parallel-first" in workflow_map.lower()
     assert _keyed_field(session, "workflow_l1_parallelism") == (
         "disjoint_frozen_workflow_scopes_only"
     )
@@ -244,7 +238,20 @@ def test_execution_policy_is_parallel_slice_first_with_root_convergence() -> Non
         "Root_records_and_integrates_candidate_set_after_all_children_finish"
     )
     assert _keyed_field(session, "workflow_union_convergence") == (
-        "fresh_wdm_on_exact_integrated_union_arranges_advisory_review_and_owns_union_acceptance"
+        "conditional_on_workflow_multi_candidate_convergence_trigger"
+    )
+    assert _keyed_field(session, "workflow_singleton_package") == (
+        "one_writable_WDM_L1_exact_final_frozen_bytes_reviewed_together"
+    )
+    assert _keyed_field(session, "workflow_singleton_acceptance") == (
+        "one_advisory_Reviewer_then_same_WDM_package_acceptance_before_Root_integration"
+    )
+    assert _keyed_field(session, "workflow_multi_candidate_convergence_trigger") == (
+        "two_or_more_independently_reviewed_WDM_candidates|"
+        "actual_union_differs_from_every_reviewed_package"
+    )
+    assert _keyed_field(session, "workflow_causal_check_timing") == (
+        "when_all_consumed_bytes_are_frozen_before_package_acceptance"
     )
     assert _keyed_field(session, "workflow_reviewer_authority") == "advice_only_no_acceptance"
     assert "ordinary workflow changes use the registered auditor/scout -> implementer -> reviewer" not in normalized
@@ -264,7 +271,7 @@ def test_execution_policy_is_parallel_slice_first_with_root_convergence() -> Non
         assert stale not in normalized
 
 
-def test_direction_topology_keeps_wdm_convergence_and_forbids_cm_convergence() -> None:
+def test_direction_topology_keeps_domain_convergence_separate_from_wdm_packages() -> None:
     lessons = (
         REPO / "docs/H_read/2026-08-11_subagent_worktree_workflow_lessons.md"
     ).read_text(encoding="utf-8")
@@ -296,12 +303,11 @@ def test_direction_topology_keeps_wdm_convergence_and_forbids_cm_convergence() -
     ):
         assert required in lessons, required
 
-    assert _keyed_field(lessons, "wdm_union_convergence") == "kept_unchanged"
     assert _keyed_field(lessons, "convergence_cm") == "forbidden"
     assert _keyed_field(lessons, "union_reviewer") == "forbidden"
     assert _keyed_field(lessons, "direction_flow_status") == "PENDING"
     assert _keyed_field(session, "workflow_union_convergence") == (
-        "fresh_wdm_on_exact_integrated_union_arranges_advisory_review_and_owns_union_acceptance"
+        "conditional_on_workflow_multi_candidate_convergence_trigger"
     )
     assert "direction_flow_status=COMPLETED" not in lessons
 

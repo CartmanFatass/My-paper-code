@@ -29,7 +29,7 @@ def test_read_only_and_fully_specified_requests_take_short_paths() -> None:
     skill = " ".join(SKILL_PATH.read_text(encoding="utf-8").split())
     assert "without plan confirmation" in skill
     assert "zero-question path" in skill
-    assert "changes at least one named plan field" in skill
+    assert "workflow_decision_question_condition=changes_named_plan_field" in skill
     assert "one question at a time" in skill
     assert "recommend the smallest answer" in skill
 
@@ -64,7 +64,7 @@ def test_nontrivial_execution_reuses_one_plan_without_a_new_gate() -> None:
         assert owner_surface in normalized_router
     assert "| L2, depth 2 | registered leaf | exact assignment, its profile, named Role and immediate references |" in router
     assert "After natural-language confirmation, load" in skill
-    assert "this requirements Skill does not duplicate post-confirmation execution" in skill
+    assert "does not duplicate post-confirm execution" in skill
 
 
 def test_mutation_requires_one_visible_confirmed_plan() -> None:
@@ -113,7 +113,7 @@ def test_assignment_writing_skill_is_required_at_design_dispatch_boundary() -> N
         "exact changed paths plus focused verification as completion evidence",
     ):
         assert capability in role
-    assert "a child adds no design, routing, Git or acceptance authority" in role
+    assert "children add no design, routing, Git or acceptance authority" in role
     assert "hmasd-writing-agent-assignments" in role
 
 
@@ -131,17 +131,17 @@ def test_wdm_owns_workflow_semantics_without_a_singleton_scope() -> None:
     ):
         assert token in role
     assert "WDM owns workflow semantic design, modification and acceptance" in role
-    assert "a child adds no design, routing, git or acceptance authority" in normalized_role
+    assert "children add no design, routing, git or acceptance authority" in normalized_role
     assert "root owns user interaction, task-tree lifecycle, physical application" in normalized_role
     assert "This Skill is invoked only by the Root-assigned Workflow Design Manager L1" in skill
     assert "without plan confirmation" in normalized_skill
     assert "workflow_git_authority=exclusive_for_workflow_control_plane_surfaces" not in role
     assert "workflow_hash_validation=forbidden" not in role
-    assert "workflow_hash_validation=forbidden" in (
+    assert "Never use a hash, digest, byte count or fingerprint" in (
         REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md"
     ).read_text(encoding="utf-8")
     assert "workflow_mechanism_budget_unit=one_new_or_expanded_gate_or_recovery_branch" not in role
-    assert "Git revision identifiers are source locators" in (
+    assert "Git revisions are\nsource locators only" in (
         REPO / ".agents/skills/hmasd-workflow-change-audit/SKILL.md"
     ).read_text(encoding="utf-8")
     assert "workflow_router_consistency_check=required_for_every_workflow_change" in role
@@ -175,7 +175,7 @@ def test_tracked_writers_use_root_managed_worktrees_without_ticket_identity() ->
     normalized_role = " ".join(role.split()).lower()
     normalized_skill = " ".join(skill.split())
     normalized_audit = " ".join(audit.split())
-    assert "tracked writer" in normalized_router
+    assert "tracked_writer_workspace=root_managed_worktree_required" in normalized_router
     assert "root-managed worktree" in normalized_router
     for exemption in ("read-only", "ignored-only", "temporary-only"):
         assert exemption in normalized_router
@@ -187,7 +187,7 @@ def test_tracked_writers_use_root_managed_worktrees_without_ticket_identity() ->
     assert "receipt" in normalized_router
     assert "root alone" in normalized_router
     assert "root-provisioned managed worktree" in normalized_role
-    assert "children never invoke" in normalized_role
+    assert "l2 never has its own worktree lifecycle or invokes helper/git lifecycle" in normalized_role
     assert "one writable l1 assignment" in normalized_router
     assert "one root-managed worktree" in normalized_router
     assert "parallel implementers" in normalized_role
@@ -197,8 +197,8 @@ def test_tracked_writers_use_root_managed_worktrees_without_ticket_identity() ->
     assert "root commits/records only after all children complete" in normalized_role
     assert "independent candidate/release lifecycle means a new l1" in normalized_router
     assert "distinct concurrent wdm/cpm l1 assignments" in normalized_router
-    assert "integration/convergence uses a distinct worktree" in normalized_router
-    assert "disjoint l2 writers share one l1 worktree" in normalized_role
+    assert "root_managed_worktree_union_convergence=separate_worktree_for_multi_candidate_union_only" in normalized_router
+    assert "disjoint l2 writers share that l1 worktree" in normalized_role
     assert "l2 never has its own worktree lifecycle" in normalized_role
 
 
@@ -240,21 +240,20 @@ def test_default_execution_policy_is_parallel_first_with_direct_exception() -> N
     assert 'fork_turns="1"' in normalized_role
     assert "never gains durable, git, routing, science, runtime or acceptance authority" in normalized_role
     assert "it never writes canonical state or contacts another owner directly" in normalized_role
-    assert "workflow implementer" in normalized_role
-    for text in (normalized_collaboration, normalized_audit, normalized_map):
-        assert "parallel-first" in text
-    assert "dispatch read-only auditor/scout concurrently with already-freezable implementation slices" in normalized_collaboration
-    assert "run disjoint implementer file families concurrently" in normalized_collaboration
-    assert "serialize only actual information dependencies or same-file writers" in normalized_collaboration
+    assert "registered auditor, implementer and reviewer leaves" in normalized_role
+    assert "parallel-first" in normalized_map
+    assert "normal path is direct orchestration with one bounded local recovery" in normalized_audit
+    assert "dispatch read-only auditor/scout concurrently with already-freezable implementation slices" in normalized_audit
+    assert "run exact disjoint implementers parallel-first" in normalized_audit
+    assert "serialize only actual information dependencies or same-file writers" in normalized_audit
     assert "same writable path" in normalized_role
     assert "shared unfrozen semantic contract" in normalized_role
-    assert "workflow reviewer" in normalized_role
+    assert "reviewer" in normalized_role
     assert "advisory" in normalized_role
-    assert "cannot accept" in normalized_role
+    assert "acceptance" in normalized_role
     assert "pure design or authority decisions without file mutation remain wdm-local" in normalized_map
-    assert "mechanism and simple-operation budgets constrain" in normalized_audit
-    assert "never decide delegate-vs-local routing" in normalized_audit
-    assert "task size, complexity, local feasibility, context cost, path count and benefit estimates never alter it" in normalized_audit
+    assert "mechanism budgets constrain only irreversible/high-cost actions" in normalized_audit
+    assert "never use a hash, digest, byte count or fingerprint" in normalized_audit
     assert "ordinary workflow changes use the registered auditor/scout -> implementer -> reviewer" not in "\n".join((router, role, collaboration, audit, workflow_map)).lower()
 
     for stale in (
@@ -275,7 +274,7 @@ def test_default_execution_policy_is_parallel_first_with_direct_exception() -> N
         assert stale not in "\n".join((router, role, collaboration, audit, workflow_map)).lower()
 
 
-def test_scoped_slice_evidence_and_fresh_union_acceptance_are_distinct() -> None:
+def test_scoped_singleton_package_and_conditional_union_acceptance_are_distinct() -> None:
     role = " ".join(ROLE_PATH.read_text(encoding="utf-8").split()).lower()
     router = " ".join(ROUTER_PATH.read_text(encoding="utf-8").split()).lower()
     audit = " ".join(
@@ -283,23 +282,26 @@ def test_scoped_slice_evidence_and_fresh_union_acceptance_are_distinct() -> None
         .read_text(encoding="utf-8")
         .split()
     ).lower()
-    surfaces = " ".join((role, router, audit))
-
+    session = " ".join(
+        (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md")
+        .read_text(encoding="utf-8")
+        .split()
+    ).lower()
+    surfaces = " ".join((role, router, audit, session))
     for required in (
-        "accepts only its slice",
-        "candidate-ready evidence",
-        "root records/integrates candidates",
-        "fresh convergence",
-        "integrated union",
-        "union acceptance",
-        "workflow reviewer",
-        "advisory",
+        "accepts its exact slice",
+        "candidate-ready packet",
+        "root_records_and_integrates_candidate_set_after_all_children_finish",
+        "one writable wdm l1 assignment's exact final frozen bytes",
+        "one advisory reviewer",
+        "same wdm may accept",
+        "multi-candidate convergence",
+        "advice_only_no_acceptance",
         "acceptance_authority=none",
     ):
         assert required in surfaces, required
-    # The current slice may be accepted before a later convergence pass; this
-    # test checks the ownership boundary, not execution of either pass.
-    assert "current slice requires reviewer" not in surfaces
+    assert "conditional_on_workflow_multi_candidate_convergence_trigger" in session
+    assert "fresh convergence wdm and separate worktree are reserved" in surfaces
     assert "current slice requires convergence" not in surfaces
 
 
@@ -325,7 +327,6 @@ def test_direction_scoped_owner_topology_is_keyed_and_pending() -> None:
         "root_union_pass=mechanical_evidence_only",
         "root_conflict_return=owning_cm_or_exact_shared_cm",
         "cm_acceptance=final_for_its_scope_only",
-        "wdm_union_convergence=kept_unchanged",
         "shared_scope_key=shared:<component>",
         "shared_all_scope=forbidden",
         "tracked_writer_worktree=one_writable_l1_worktree_shared_by_disjoint_l2_writers",
@@ -341,6 +342,11 @@ def test_direction_scoped_owner_topology_is_keyed_and_pending() -> None:
 
     assert "direction_flow_status=COMPLETED" not in lessons
     assert "direction_flow_status=COMPLETE" not in lessons
+
+    session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(
+        encoding="utf-8"
+    )
+    assert "workflow_union_convergence=conditional_on_workflow_multi_candidate_convergence_trigger" in session
 
     for boundary in (
         "root_user_interaction_authority=exclusive",

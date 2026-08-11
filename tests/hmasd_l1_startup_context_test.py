@@ -86,6 +86,10 @@ def test_wdm_cpm_and_explorer_start_compact_and_action_triggered() -> None:
         assert "startup" in text, name
         assert "action" in text, name
     assert index.count("default_core=agents.md|exact_root_assignment|profile|role") == 3
+    assert "control_plane_document_routes=docs/project/control_plane_document_routes.md" in index
+    assert "control_plane_document_routes_not=task_state|history|hash|receipt|queue|admission|acceptance" in index
+    assert "route table is a stable lazy relationship map" in index
+    assert "unclear row is escalated to the bounded auditor" in index
 
 
 def test_explorer_keeps_scope_conditioned_compact_continuity_and_lazy_context() -> None:

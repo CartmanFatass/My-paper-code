@@ -22,14 +22,10 @@ is not a ticket, queue, ledger, registry, admission token or continuity/session
 identity. Same writable paths or shared semantic contracts that remain
 unfrozen are dependencies and serialize the affected slices.
 
-For a writable L1 assignment, the default worktree unit is exactly one
-Root-managed worktree. All disjoint L2 writers under that L1 use the invoking
-assignment's named worktree, same frozen base and exact disjoint paths, with no
-child Git authority or helper/lifecycle action. Their outputs form one L1
-slice candidate, which Root commits or records only after all writers finish.
-An independent candidate or release lifecycle requires a new L1 assignment;
-L2 has no worktree lifecycle. Distinct concurrent L1 assignments and later
-union convergence each use their own Root-managed worktree.
+Workspace, worktree, lifecycle, convergence and Git mechanics are defined once
+by `docs/project/SESSION_WORKSPACE_CONTRACT.md`. This Skill only makes the
+assignment's exact paths and validation consequence understandable; it does
+not restate or create a worktree or lifecycle procedure.
 
 ## When to use it
 
@@ -71,18 +67,35 @@ project-canonical science remains at the user/External Pro boundary.
 
 ### Risk, reviewer and manager-capacity guidance
 
-Classify the assignment package before dispatch. A high-risk authority,
-topology, cross-owner or shared-contract package requires the registered
-read-only Auditor. A low-risk one-file wording or test-only package may skip a
-new Auditor only when the WDM records a concrete rationale for that choice.
-The exception is a routing decision, not an admission state, and it does not
-change the child's exact paths or authority boundary.
+Classify the assignment package by semantic consequence before dispatch, never
+by file count. `high` covers authority, topology, cross-owner or shared-contract
+impact and requires the registered read-only Auditor. `bounded_contract` covers
+a stable cross-file contract within one owner; a clear route may skip a new
+Auditor when WDM records its rationale. `low_causal_repair` covers wording, a
+recognizer or one bounded assertion family that preserves accepted meaning;
+WDM may skip the Auditor with rationale even when tightly coupled files exceed
+one. This is a routing choice, not an admission state, gate or second owner.
+
+Use the canonical Session keys `workflow_change_risk_tiers` and
+`workflow_route_table_policy` when naming this consequence. Planning first
+consults `docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md`: a clear row supplies
+the defining source, direct consumers and focused tests; a missing, ambiguous,
+conflicting or authority-crossing route uses the bounded registered Auditor
+instead of repository rediscovery or guessing.
 
 Each package requires exactly one integrated advisory Reviewer, dispatched only
 after the paths and direct evidence are frozen. The Reviewer is read-only and
 advisory; its review cannot accept the package or replace WDM/Root ownership.
-Skipping a new Auditor for a low-risk package never means skipping this one
-integrated Reviewer.
+For one writable WDM L1 assignment, its exact final frozen bytes (including
+disjoint Implementers) are one singleton package reviewed together; after the
+checks and this one Reviewer, WDM may semantically accept it before returning
+to Root. A fresh convergence WDM is needed only when Root combines two or more
+independently reviewed candidates or the actual union differs from every
+reviewed package. The fresh WDM uses one Reviewer and owns union acceptance.
+Use the canonical Session keys `workflow_singleton_package`,
+`workflow_singleton_acceptance` and
+`workflow_multi_candidate_convergence_trigger` when carrying these meanings.
+Skipping the Auditor never means skipping this Reviewer.
 
 Manager capacity is an actionability check: an L1 dispatch requires useful
 owned work and a useful action or matching leaf capacity. This is guidance for
@@ -91,10 +104,10 @@ does not create a queue or an admission mechanism.
 
 Keep the shared display naming intact: use `WM_<purpose>` for Workflow Manager
 control-plane work, `EM_<direction>` for the actual Independent Research
-Explorer Manager, and `CM_<purpose_or_direction>` for Code Manager work. One
-writable L1 assignment still has one Root-managed worktree shared by its
-exact-disjoint L2 writers on the same frozen base; child Git, routing and
-acceptance authority remain forbidden.
+Explorer Manager, and `CM_<purpose_or_direction>` for Code Manager work. The
+Session contract and registered Roles define the shared worktree, child Git,
+routing and acceptance boundaries; this Skill only ensures the assignment
+states the semantic action and exact paths.
 
 ## The normal path: compile a task model
 
@@ -175,6 +188,13 @@ child's action, while direct and later evidence explain the meaning of those
 paths. These are semantic brief contents, not a second schema or admission
 gate, and they do not grant validation or acceptance authority.
 
+For a WDM package, name one focused causal-family check after all consumed
+producer, consumer and test bytes are frozen and before package acceptance.
+State that its result is reusable only while those bytes remain unchanged. Keep
+the canonical ownership split: `slice_local` for the writer,
+`integration_cross_slice` for WDM and
+`runtime_fresh_smoke_after_root_integration_reload` for Root.
+
 ### Small reverse-intake patch brief
 
 For an Explorer Direction Action Map reverse intake, the self-contained brief
@@ -237,46 +257,31 @@ tool recognition from proven action capability.
 
 ### Progress-event communication
 
-If a parent reports progress, use exactly these five event names:
-`DISPATCHED`, `WRITES_COMPLETE`, `TESTS_COMPLETE`, `REVIEW_READY`, and
-`TERMINAL`. WDM publishes these as status-only observations. Carry their owner
-and meaning from the keyed contract fields
-`workflow_progress_event_owner` and `workflow_progress_event_meanings` in
-`docs/project/SESSION_WORKSPACE_CONTRACT.md`; that defining contract and its
-reporting procedure remain authoritative, so this Skill does not redefine the
-event meanings. These are WDM-owned status observations with an owner and
-meaning. The `TERMINAL` rule says only that the owner returned its
-terminal conclusion to Root; it never means WDM or Root accepted it.
+If a parent reports progress, use exactly the five Session-defined names:
+`DISPATCHED`, `WRITES_COMPLETE`, `TESTS_COMPLETE`, `REVIEW_READY` and
+`TERMINAL`. The owner and meanings come from
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`, which is the single reporting
+source. Each name remains a status-only, non-accepting observation. Emit each
+named observation at most once; adjacent relevant observations may share one
+outcome-first report with evidence and the next actor, so five separate
+messages are not required.
+The canonical pointer is
+`workflow_progress_event_emission=each_relevant_event_at_most_once|adjacent_observations_may_share_one_report`.
 
 These observations are never acceptance, a scheduler, queue, ledger,
 background callback, retry state or admission. They are not a second state
 machine and do not create continuity. `fork_turns=none` remains
-background-context isolation, not zero context: the child still needs the complete
+background-context isolation, not zero context: the child still needs the
 self-contained brief and may not infer meaning from an event name.
 
-Each WDM progress report first says in ordinary language what concrete work has
-started, finished or is waiting, why that observation matters and who acts
-next; it names the affected files or evidence and the owner of the next
-action, then appends the exact event name (`DISPATCHED`, `WRITES_COMPLETE`,
-`TESTS_COMPLETE`, `REVIEW_READY` or `TERMINAL`) and any paths, statuses or
-commands. The event name remains a status-only observation with its contract
-meaning; it never replaces the explanation or grants acceptance. State the
-actual event meaning once rather than repeating this communication guidance as
-boilerplate; a report without a named heading or token beyond its required
-event field is valid.
+Each report still begins with ordinary outcome-first prose, names the affected
+files or evidence and next actor, and then appends only the factual tail needed
+for that observation. The event name never replaces the explanation or grants
+acceptance; no named heading or fixed record shape is required.
 
-The progress report must also carry both layers: after the explanation and
-event meaning, append only the factual tail relevant to that observation, such
-as the affected scope, paths or artifacts, action/status, commands or observed
-evidence, unresolved blocker and next owner, or residual uncertainty when
-applicable. A narrative-only progress report and a fields-only progress report
-are both insufficient.
-
-For WDM assignments, Root's `fork_turns=1` is a caller-action background
-setting for the L1, while a WDM's registered Workflow Implementer dispatch uses
-explicit `fork_turns=none`; neither setting creates authority or continuity.
-Disjoint-slice completion order has no semantic priority, and a scoped packet
-is candidate-ready only until Root integration and fresh convergence acceptance.
+The Session contract and registered Roles define fork settings, worktree
+mechanics, completion order and convergence; this Skill does not duplicate
+those procedures.
 
 - File-only communication describes where bytes are read or written. It does
   not imply that the child understands the purpose, conflict or completion

@@ -8,6 +8,10 @@ record_kind=workflow_surface
 owner_role=workflow_design_manager
 status=WDM_SLICE_ACCEPTED_PENDING_ROOT_CANDIDATE_RECORD_AND_INTEGRATION
 authority=workflow_design_manager_exclusive
+control_plane_document_routes=docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md
+active_wdm_route=docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md
+active_wdm_route_trigger=WDM planning and confirmation
+active_wdm_convergence=docs/project/SESSION_WORKSPACE_CONTRACT.md#frozen-package-and-convergence
 workflow_runtime_authority=none
 session_owner_id=workflow_design_manager
 workflow_scope_key=core_parallel_control
@@ -15,15 +19,17 @@ scope_key_model=role_defined_scope_key_unique_within_root_tree
 worktree_allocation=one_writable_l1_assignment_one_root_managed_worktree
 l2_worktree_lifecycle=forbidden_new_l1_for_independent_candidate_or_release
 slice_status=exact_frozen_slice_wdm_accepted
-candidate_flow=pending_Root_candidate_record_and_integration_after_all_children_finish_then_fresh_convergence_wdm
-union_acceptance_status=pending_integrated_union_and_fresh_convergence_wdm
+candidate_flow=docs/project/SESSION_WORKSPACE_CONTRACT.md#frozen-package-and-convergence
+union_acceptance_status=docs/project/SESSION_WORKSPACE_CONTRACT.md#frozen-package-and-convergence
 continuity=role_based_successor_tasks
 rotation_boundary=integrated_batch_completion
-next_boundary=Root_integration_then_fresh_convergence_wdm_union_acceptance
+next_boundary=docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md
+next_boundary_trigger=Risk, delegation and review
 ```
 
-This record names the stable control-plane owner, this scope-keyed candidate
-phase and the next reload boundary only. It does not register active WDM
-instances and contains no scientific conclusion, runtime state, code result or
-review response. Root candidate record/integration, commit, integrated Reviewer
-advice and fresh convergence acceptance remain pending and unclaimed.
+This pointer-only record names the stable control-plane owner, the active route
+and the next convergence boundary. It does not register active WDM instances
+or copy procedure, scientific conclusions, runtime state, code results or
+review responses. Root records/integrates accepted bytes; singleton package
+acceptance or multi-candidate convergence remains governed by the pointed
+contract and is not claimed here.

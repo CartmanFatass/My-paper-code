@@ -72,8 +72,25 @@ workflow_design_manager_agent_tree_level=1
 workflow_design_manager_workflow_design_authority=exclusive
 workflow_design_manager_workflow_modification_authority=exclusive_via_assigned_L2
 workflow_design_manager_workflow_acceptance_authority=exclusive
+workflow_file_mutation_owner=registered_workflow_implementer_L2_only
+workflow_file_mutation_scope=exact_disjoint_paths_only
+workflow_l2_git_helper_lifecycle_acceptance=none
 workflow_design_manager_scope_key_field=workflow_scope_key
 workflow_design_manager_root_fork_turns=1_caller_action_only
+workflow_change_risk_tiers=high|bounded_contract|low_causal_repair
+workflow_high_risk_requires_auditor=authority|topology|cross_owner|shared_contract
+workflow_auditor_skip=route_resolved_bounded_single_owner_contract|low_causal_repair_with_concrete_WDM_rationale
+workflow_auditor_required=missing|ambiguous|conflicting|authority_crossing_route
+workflow_mechanics_source=docs/project/SESSION_WORKSPACE_CONTRACT.md
+control_plane_document_routes=docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md
+workflow_route_table_policy=clear_route_loads_defining_source_direct_consumers_focused_tests|missing_ambiguous_conflicting_or_authority_crossing_route_requires_Auditor
+workflow_singleton_package=one_writable_WDM_L1_exact_final_frozen_bytes_reviewed_together
+workflow_singleton_review=one_registered_read_only_advisory_Reviewer_after_tests_and_REVIEW_READY
+workflow_singleton_acceptance=one_advisory_Reviewer_then_same_WDM_package_acceptance_before_Root_integration
+workflow_multi_candidate_convergence_trigger=two_or_more_independently_reviewed_WDM_candidates|actual_union_differs_from_every_reviewed_package
+workflow_causal_check_timing=when_all_consumed_bytes_are_frozen_before_package_acceptance
+workflow_progress_event_emission=each_relevant_event_at_most_once|adjacent_observations_may_share_one_report
+workflow_convergence_worktree=separate_root_managed_worktree_for_multi_candidate_union_only
 
 code_project_manager_parent=root
 code_project_manager_role_kind=registered_task_scoped_level1_orchestrator
@@ -136,8 +153,9 @@ The current Root may run disjoint owner lanes in parallel, subject to actual
 capacity and same-path dependencies. Completion order does not establish
 semantic priority. Root uses bounded `wait_agent` while safe required work
 remains and answers progress questions in commentary without yielding the
-active turn. Root final-response conditions and forbidden continuation surfaces
-are keyed in the Session Workspace Contract.
+active turn. Lifecycle, progress and review mechanics are defined by
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`; this router keeps only the
+authority and local consequence.
 
 Root invokes every WDM L1 with caller action `fork_turns=1`; this supplies
 background context only and is not a TOML/profile enforcement field or an
@@ -146,12 +164,14 @@ represented by distinct `workflow_scope_key` values. The same writable
 path, or a shared semantic contract that is still unfrozen, is an actual
 dependency and serializes the affected slices.
 
-Each scoped WDM accepts only its slice (the exact frozen slice) and returns
-candidate-ready evidence to Root. Root records/integrates candidates. Only after that integration does Root dispatch a fresh
-convergence WDM over the exact integrated union; that WDM arranges coherent integrated
-review and owns union semantic acceptance. A Workflow Reviewer is
-read-only/advisory and cannot accept; a slice packet does not
-claim integrated review or union acceptance.
+Each scoped WDM owns its exact frozen slice. One writable WDM L1 plus all of
+its disjoint L2 writes form one singleton package: the final frozen bytes are
+reviewed together in that shared worktree after tests and `REVIEW_READY` by
+exactly one registered read-only advisory Reviewer, and that WDM may accept
+before Root integration. Root records/integrates accepted packages. A fresh
+convergence WDM and separate convergence worktree are required only when Root
+combines two or more independently reviewed WDM candidates, or when the actual
+union differs from every reviewed package. Reviewer advice never accepts.
 
 This explicit WDM workflow convergence is not a standing or fresh domain
 convergence lane and does not create an extra union Reviewer. Root owns the advisory
@@ -203,8 +223,8 @@ assignment receives one Root-provisioned managed worktree/receipt. Disjoint L2 w
 same frozen base and exact disjoint write paths; they have no Git authority or
 action, and children never invoke helper or Git lifecycle actions. Their outputs
 form one L1 slice candidate, which Root commits/records only after all children complete. L2 never has its own worktree lifecycle. An independent candidate/release lifecycle means a new L1 assignment. Distinct concurrent WDM/CPM
-L1 assignments use distinct Root-managed worktrees, and later union
-integration/convergence uses a distinct worktree (Root-managed).
+L1 assignments use distinct Root-managed worktrees. A distinct convergence
+worktree is used only for the multi-candidate/changed-union case above.
 As a narrow temporary-task exception, an L1 caller may invoke the native
 default child as an L2 only when no listed specialist leaf can perform the
 bounded task. The caller action must use exactly
@@ -235,7 +255,7 @@ root_managed_worktree_default_unit=one_writable_l1_assignment
 root_managed_worktree_l2_scope=invoking_l1_assignment_named_worktree|same_frozen_base|exact_disjoint_write_paths|no_child_git_or_helper|one_l1_slice_candidate
 root_managed_worktree_independent_candidate=new_l1_assignment_required
 root_managed_worktree_distinct_l1_assignments=true
-root_managed_worktree_union_convergence=separate_worktree
+root_managed_worktree_union_convergence=separate_worktree_for_multi_candidate_union_only
 tracked_writer_includes=workflow_writer|code_writer|runtime_writer|any_writer_touching_tracked_path
 tracked_writer_mixed_write_classification=tracked_writer
 tracked_writer_exemptions=read_only|ignored_only|temporary_only
@@ -250,27 +270,16 @@ raw_child_git_worktree=forbidden
 raw_external_worktree_creation=forbidden
 ```
 
-The Root freezes top-level path families before dispatch. One writable L1
-assignment, including a WDM workflow writer, receives one Root-managed
-worktree/receipt provisioned and tracked by the Root-controlled helper. All disjoint L2
-writers under that WDM use the invoking L1 assignment's named worktree, the
-same frozen base and exact disjoint write paths; they have no Git authority or
-action and children never invoke helper or Git lifecycle actions. Their outputs
-form one L1 slice candidate, which Root commits or records only after all
-children complete. An independent candidate or release lifecycle requires a
-new L1 assignment; L2 has no worktree lifecycle. Different concurrent L1
-assignments use distinct worktrees, and union integration/convergence uses a
-distinct worktree (Root-managed). Read-only, ignored-only and temporary-only assignments are
-exempt; a mixed tracked and ignored assignment is still a tracked writer. Root alone controls provisioning, lifecycle, integration, Git. Root alone
-provisions, records, integrates and releases or retains the managed worktree and
-its lifecycle receipt. A receipt-local failure is diagnosed,
-retried or parked by Root without making unrelated work terminal. At most one
-nonterminal receipt is active for an assignment. Existing legacy worktrees
-remain isolated and untouched by this lifecycle. Children never invoke the
-helper or run raw child `git worktree` lifecycle operations. Git remains
-Root-only: after owner acceptance Root applies the exact accepted path set and
-performs any separately authorized integration; in a no-Git copy Root emits a
-local verification receipt.
+Root freezes path families before dispatch. One writable L1 assignment gets
+one Root-managed worktree/receipt; disjoint L2 writers share that worktree,
+same frozen base and exact disjoint paths, and form one candidate/package.
+Root alone provisions, records, integrates, releases or retains it and owns
+Git; L2 never invokes helper/lifecycle or claims acceptance. Read-only,
+ignored-only and temporary-only assignments are exempt, while mixed tracked
+and ignored work is tracked-writer work. Receipt-local failure stays
+nonterminal for Root retry or parking; legacy worktrees remain untouched.
+The full lifecycle and progress procedure lives in
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`.
 
 Hook posture is disabled and non-authoritative: `.codex/hooks.json` remains an
 empty hook map under the direct user-disabled configuration. Routing, identity,
@@ -300,6 +309,11 @@ integration owner is routable.
 | confirmed plan implementation or verification | `.agents/skills/hmasd-workflow-change-audit/SKILL.md` |
 | stable owner/interface/dependency edge | `docs/project/WORKFLOW_MAP.md` |
 | canonical status/continuity reload | the exact owner record named by Root |
+
+Control-plane defining-source, direct-consumer and focused-test routes are
+looked up lazily in `docs/project/CONTROL_PLANE_DOCUMENT_ROUTES.md`; a missing,
+ambiguous, conflicting or authority-crossing route uses the registered
+Auditor rather than guess.
 
 Remaining lower-level text that still describes the retired Desktop persistent
 route is non-authoritative until it is updated in a resumed migration phase.
