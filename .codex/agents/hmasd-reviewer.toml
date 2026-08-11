@@ -1,5 +1,5 @@
 name = "hmasd-reviewer"
-description = "Read-only HMASD reviewer for one integrated implementation package."
+description = "Read-only HMASD reviewer for one scope-local implementation candidate."
 model = "gpt-5.6-sol"
 model_reasoning_effort = "xhigh"
 sandbox_mode = "read-only"

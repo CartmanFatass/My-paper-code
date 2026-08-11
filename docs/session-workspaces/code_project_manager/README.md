@@ -14,9 +14,26 @@ does not duplicate scientific state, runtime evidence or another session's
 context. CPM routes workflow defects to WDM and retains code, runtime and
 operational ownership.
 
-CPM sends External Pro questions directly with Agentify in the persistent
-session and archives the returned raw response. No separate transport contract,
-wrapper, monitor or transport child exists.
+CPM scope is exactly `direction:<id>|shared:<component>`, where each atom
+matches `[a-z0-9][a-z0-9._-]{0,63}` and rejects empty values, path separators,
+extra colons, whitespace and `..`. A scope CPM's technical acceptance is final
+for its exact slice. Root may mechanically integrate accepted candidates in a
+separate integration worktree and run union Tests/Static; a Root union PASS is
+mechanical evidence only, not technical-semantic acceptance. Root does not
+resolve or rewrite semantic conflicts; they return to the owning scope CPM,
+with a temporary named `shared:<component>` CPM for a shared dependency.
+
+CPM sends External Pro questions through the registered
+`hmasd-cpm-agentify-transport` child using the file-only
+`AGENTIFY_REVIEW_BATCH_ASSIGNMENT` contract (`batch_path|results_path`).
+Requester-partitioned temporary files live under
+`temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/`.
+Before reading a terminal result, CPM applies
+`.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
+to the expected and returned result paths. External Pro remains outside the
+agent tree; Root owns user communication, lifecycle, relay and physical Git,
+while CPM retains review meaning and technical acceptance and the transport
+child has no acceptance authority.
 
 ## Root-managed tracked-write worktrees
 
@@ -32,16 +49,17 @@ explicit prior reference or `none`, and mixed output must receive an explicit
 ignored-evidence disposition.
 
 The worktree is a physical resource only: it is not ticket or agent identity,
-authority, or runtime admission. Root alone creates candidate worktrees,
-integrates accepted required paths, and releases or retains them. Its lifecycle
+authority, or runtime authorization. Root alone creates candidate worktrees,
+mechanically integrates accepted required paths, and releases or retains them. Its lifecycle
 has one nonterminal state, `active`; L2 children cannot create, manage, release,
 or commit in a worktree, and raw child worktree commands remain forbidden.
-Release is allowed only after accepted-required integration, or when the
+Release is allowed only after accepted-required mechanical integration, or when the
 worktree is clean and disposable, has no unique unprotected commit, and has an
 explicit ignored-evidence disposition. A mismatch, dirty state, nonignored
 untracked file or in-use worktree stays local and fails closed; legacy
-worktrees are untouched. Worktree use consumes zero runtime units and does not
-change CPM's independent three-unit pool or its admission judgment.
+worktrees are untouched. Worktree use adds no runtime accounting and does not
+authorize costly runtime; Root observes live resource facts and the owning CPM
+makes scope-local runtime judgment.
 
 Authority and path ownership come from
 `docs/project/SESSION_WORKSPACE_CONTRACT.md`.

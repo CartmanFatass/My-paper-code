@@ -17,31 +17,32 @@ followup_route=followup_within_same_root_tree
 successor_route=fresh_root_spawn_plus_canonical_reload
 mandatory_ticket_identity=forbidden
 task_identity=real_user_visible_explorer_l1_task|research_scope_key
-research_scope_key_forms=direction:<id>|portfolio:<group>
-scope_creation=Root_creates_one_named_task_per_scope_and_one_worktree_per_writable_scope
-root_task_creation=Root_creates_real_user_visible_Explorer_L1_tasks_keyed_by_research_scope_key
+research_scope_key_forms=direction:<id>
+direction_scope_grammar=direction:<id>|id=[a-z0-9][a-z0-9._-]{0,63}|no_path_separators|no_extra_colon|no_whitespace|nonempty|not_..
+scope_creation=Root_creates_one_named_task_per_direction_and_one_worktree_per_writable_scope
+root_task_creation=Root_creates_real_user_visible_Explorer_L1_tasks_keyed_by_direction_scope_key
 scope_isolation=distinct_Explorer_L1_tasks_are_distinct_scopes_and_worktrees
 direction_scope=sole_semantic_owner_of_named_research_direction
-portfolio_scope=compact_accepted_direction_packets_and_pointers|cross_direction_comparison|advisory_integration
+root_macro_science=advisory_cross_direction_comparison|ranking|pause_continue|dependency_combination_decisions|complete_direction_action_map_acceptance
+root_macro_authorization=user_authorized_advisory_only
+root_macro_boundary=no_direction_research_execution|no_automatic_formal_or_project_canonical_science
 l2_allow_list=hmasd-research-scout|hmasd-research-innovator|hmasd-research-critic|hmasd-research-principles-analyst|hmasd-explorer-mechanical|hmasd-research-artifact-writer|hmasd-explorer-agentify-transport
 startup_identity=role|model|current_task
 direction_startup=registered_profile|role_core|exact_Root_assignment|named_direction_pointers
-portfolio_startup=registered_profile|role_core|exact_Root_assignment|compact_accepted_continuity|lazy_direction_pointers
 direction_context_exclusion=whole_portfolio|project_runtime_corpus|implicit_global_continuity
-portfolio_context=compact_continuity_plus_lazy_direction_pointers_only
 continuity_format=compact_revision_2
 continuity_fields=active_state|revision|dependency|next_action|lazy_pointers
-lazy_portfolio_pointer_1=local_research/portfolio/2026-08-10_direction_action_map_v2.md
-lazy_portfolio_pointer_2=local_research/portfolio/2026-08-10_cross_direction_evidence_index_v2.md
 action_triggered_context=campaign_direction_history|parallel_research_workflow|methodology|mylib|project_validation|historical_handoffs
 historical_handoffs=lazy_only
 model=gpt-5.6-sol
 reasoning_effort=max
 root_user_boundary=user_interaction|progress|follow_up|interrupt|relay|lifecycle|physical_writes
-root_science_authority=none
+root_science_authority=advisory_macro_portfolio_only_with_user_authorization
 explorer_semantic_scope=assigned_research_scope_key_only
 explorer_direction_owner=sole_semantic_owner_of_named_direction
-explorer_portfolio_owner=cross_direction_comparison|advisory_integration
+direction_research_execution=within_existing_explicit_user_authorization_only
+direction_cross_direction_reporting=compact_named_findings_to_root_only
+external_review_request_intake=direction_local_only
 cpm_relation=root_sibling|never_nested_under_explorer
 scope_handoff_binding=research_scope_key|direction|candidate|revision
 explorer_to_root_to_cpm=scope_preserving_route
@@ -93,33 +94,33 @@ project_validation_technical_facts_not_recomputed=schema|readability|receipts|ac
 reverse_intake_owner=independent_research_explorer
 reverse_intake_semantic_author=independent_research_explorer
 reverse_intake_payload=small_self_contained_semantic_delta
+reverse_intake_scope=direction_only_delta
 reverse_intake_required_bindings=canonical_source_locator|candidate_target_locator|git_revision_locator|exact_old_new_text_or_unified_patch|frozen_semantics_and_consequences
 reverse_intake_transport=assignment_specific_temporary_patch
 reverse_intake_writer=hmasd-research-artifact-writer
 reverse_intake_writer_skill_scope=role_and_assignment_only|no_explorer_mechanical_or_unrelated_skill
-reverse_intake_explorer_acceptance=full_read_semantic_accept_or_reject
+reverse_intake_explorer_acceptance=full_read_own_direction_row_delta_semantic_accept_or_reject
 reverse_intake_root_action=exact_path_and_git_revision_check_then_exact_copy_install
+root_direction_action_map_acceptance=complete_map|cross_direction_relations|unselected_rows|table_map|portfolio_continuity_after_affected_direction_input
 project_validation_scientific_interpretation_owner=independent_research_explorer
 project_validation_scientific_interpretation=supported_proposition|strongest_alternative_explanation|information_gain|next_discriminator|A_B_C_or_named_Pro_action
 canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership|advisory_only_not_formal_project_science
-portfolio_index_readme_continuity_role=lazy_pointer_navigation_only_not_task_tree
 project_validation_code_acceptance=none
 logical_assignment_count=derived_from_exact_scope_task_tree
 research_child_dispatch=registered_child_type|fork_turns=none|self_contained_natural_language_assignment
 research_child_assignment_context=research_purpose|exact_question|named_sources_and_prerequisite_packets|protected_assumptions_and_independence|exclusions|permitted_local_judgment|completion_meaning
 independent_direction_question_default=best_matching_registered_read_only_child|fork_turns="none"
 independent_direction_question_direct_explorer_l1_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task
-direction_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness
-portfolio_state_retention=accepted_direction_packets|comparison_relevant_evidence|relationship_edges|integration_revision
-explorer_orchestration_owner=scope_decomposition|child_selection|dependency_judgment|result_synthesis|scope_continuity|advisory_intake_and_decision
+direction_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness|named_cross_direction_findings
+explorer_orchestration_owner=direction_local_decomposition|child_selection|dependency_judgment|result_synthesis|scope_continuity|project_validation_intake|external_review_intake|direction_only_reverse_intake
 explorer_physical_state_route=complete_accepted_proposal_to_root
-explorer_l1_multi_direction_comparison=relative_information_value|cross_direction_dependencies_conflicts_combinations|portfolio_ordering_readiness|sole_advisory_portfolio_decision
-child_direction_context=minimal_direction_context_only|never_hidden_parent_context|cannot_replace_explorer_l1_cross_direction_comparison
-explorer_l1_nonblocking_progress=advance_disjoint_directions_and_read_only_work_while_child_or_cpm_result_outstanding
+explorer_to_root_macro_findings=compact_cross_direction_edges_only|source_direction|target_direction|evidence_locator|uncertainty|requested_root_action
+child_direction_context=minimal_direction_context_only|never_hidden_parent_context|no_sibling_direction_loading_or_comparison
+explorer_l1_nonblocking_progress=advance_disjoint_direction_local_actions_and_read_only_work_while_child_or_cpm_result_outstanding
 explorer_l1_bounded_wait=only_when_every_remaining_safe_scientific_action_depends_on_outstanding_result
 child_result_contract=conclusion_first|action_bearing|explorer_l1_verifies_protected_scientific_postcondition
-direct_explorer_l1_work_exceptions=cheap_reversible_singleton|cross_direction_comparison|advisory_local_research_intake|frozen_successor|park_or_retire_decision
-root_physical_checker=path_and_revision_check_only|applies_complete_accepted_proposal|no_scientific_comparison_or_intake
+direct_explorer_l1_work_exceptions=cheap_reversible_singleton|advisory_local_research_intake|frozen_successor|park_or_retire_decision
+root_physical_checker=path_and_revision_check_only|applies_complete_accepted_proposal|no_direction_scientific_intake
 orchestrator_anti_patterns=microdelegation|fixed_panels|voting|duplicated_questions|hidden_parent_context_dependence|authority_transfer|external_process_controller
 cpm_accepted_result_interpretation=optional_direction_specific_read_only_child|technical_acceptance_not_repeated
 explorer_mechanical_child=hmasd-explorer-mechanical
@@ -148,14 +149,15 @@ adaptive_question_dispatch=bounded_registered_child_consultation
 adaptive_question_barrier=none_for_singleton|exact_named_question_set_only_when_joint
 adaptive_question_result_effect=consultation_only
 completion_order_priority=forbidden
-research_portfolio_owner=portfolio_scope_explorer
+research_direction_owner=direction_scope_explorer
 research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation
 research_treatment_levels=A_read_only_reconnaissance_or_nonintervening_probe|B_small_exploratory_real_toy_algorithm_experiment|C_conclusion_bearing_promotion_retirement_or_expensive_experiment
 research_treatment_default=B_after_implementable_differentiating_comparator_backed_mechanism
 research_treatment_instruction=brief_names_A_B_or_C_and_explicit_requested_action
 research_treatment_missing_engineering=code_project_manager_constructs_or_connects_minimal_objects
 research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review_or_explicit_user_request
-automatic_campaign_progression=allowed_until_convergence_within_authorized_boundary
+direction_campaign_progression=within_existing_explicit_authorization
+root_macro_pause_continue=advisory_root_decision
 per_review_user_authorization=covered_by_Root_authorized_scope_grant
 wdm_campaign_approval=none
 unbounded_source_expansion=forbidden
@@ -194,27 +196,27 @@ project_toy_compute_authority=none
 project_toy_cross_direction_competition=forbidden
 ```
 
-Root creates real user-visible Explorer L1 tasks keyed by `research_scope_key`.
-Each is a research architect for exactly one scope outside the formal HMASD
-workflow. A
-`direction:<id>` Explorer is the sole semantic owner of that named research
-direction. It loads its exact Root assignment and named direction pointers;
-it does not preload the whole portfolio, project/runtime corpus or an implicit
-global continuity record. A `portfolio:<group>` Explorer receives compact
-accepted direction packets and pointers, loads compact continuity plus lazy
-direction pointers, and owns cross-direction comparison and advisory
-integration. Multiple Explorer L1 tasks are distinct scopes and worktrees;
-the two scope kinds are not views on one hidden global task.
+Root creates real user-visible Explorer L1 tasks keyed by `direction:<id>`.
+The scope id is lowercase and safe for a path atom: it matches
+`[a-z0-9][a-z0-9._-]{0,63}`, with no path separator, extra colon, whitespace,
+empty value or `..`. Each direction Explorer is the sole semantic owner of
+that named research direction outside the formal HMASD workflow. It loads its
+exact Root assignment and named direction pointers; it does not preload the
+whole portfolio, project/runtime corpus or an implicit global continuity
+record. There is no portfolio Explorer scope.
 
-Within its assigned scope Explorer L1 owns task decomposition, matching-child
-selection, dependency judgment, scientific synthesis, scoped continuity
-semantics and advisory interpretation. Direction scope owns direction-local
-meaning; portfolio scope owns comparison, integration and the sole advisory
-portfolio decision. Root exclusively owns user interaction, progress,
-follow-up, interrupt, cross-owner relay, task lifecycle and accepted physical
-writes; Root has no science semantics, comparison or intake authority. CPM is
-a Root sibling and is never nested under Explorer. Explorer does not select
-canonical science or physically write durable state.
+Within its one assigned direction Explorer L1 owns task decomposition,
+matching-child selection, direction-local dependency judgment, scientific
+synthesis, scoped continuity, project-validation scientific intake, external
+review request/intake and direction-only reverse-intake semantics. Root owns
+user interaction, progress, follow-up, interrupt, cross-owner relay, task
+lifecycle and accepted physical writes. Root also owns user-authorized,
+advisory macro/portfolio science: cross-direction comparison, ranking,
+pause/continue, dependency/combination decisions and complete Direction
+Action Map acceptance. Root's macro authority does not include direction
+research execution or automatic formal/project-canonical science. CPM is a
+Root sibling and is never nested under Explorer. Explorer does not select
+formal canonical science or physically write durable state.
 
 The actual Independent Research Explorer Manager uses the shared
 `EM_<direction>` display prefix for Root-facing L1 task names, progress labels
@@ -223,24 +225,21 @@ label, including a WM label that names the direction being routed.
 
 ## Scope-bound startup and lazy context routes
 
-Root creates and names the real Explorer task before dispatch. The exact
-`research_scope_key` is part of every assignment and is never inferred from a
-profile, dashboard, stale handoff or inherited conversation. A direction task
-starts with the registered profile, this Role, its exact Root assignment and
-only its named direction pointers. A portfolio task starts with those same
-identity surfaces plus compact accepted continuity and lazy direction
-pointers. Compact continuity is a navigation aid and does not replicate
-scientific state. No Explorer start silently loads global continuity or the
-whole portfolio, project or runtime corpus.
+Root creates and names the real direction Explorer task before dispatch. The
+exact `research_scope_key=direction:<id>` is part of every assignment and is
+never inferred from a profile, dashboard, stale handoff or inherited
+conversation. A direction task starts with the registered profile, this Role,
+its exact Root assignment and only its named direction pointers. Compact
+continuity is a navigation aid and does not replicate scientific state. No
+Explorer start silently loads global continuity or the whole portfolio,
+project or runtime corpus.
 
 Do not preload campaign direction/history, action references or historical
 handoffs. Load only the context required by the concrete action:
 
-- For campaign direction/history or cross-direction comparison, treat
-  `local_research/portfolio/2026-08-10_direction_action_map_v2.md` and
-  `local_research/portfolio/2026-08-10_cross_direction_evidence_index_v2.md`
-  as accepted pointers only, and follow a pointer only when that dependency
-  is active.
+- For a direction's campaign history or a named cross-direction finding, load
+  only the exact direction pointer or Root-named evidence locator; Root owns
+  macro comparison and the complete Direction Action Map.
 - For campaign dispatch or a result-bearing treatment, load
   `references/parallel-research-workflow.md`; for an algorithm-inspiration
   campaign, also load `references/open-algorithm-inspiration.md`.
@@ -254,12 +253,14 @@ handoffs. Load only the context required by the concrete action:
 - Load a historical handoff only when the exact current action names its
   dependency; historical material is otherwise lazy.
 
-Explorer retains scientific interpretation within its scope. Portfolio scope
-retains cross-direction comparison and advisory semantic intake; direction
-scope retains direction-local semantic intake. The L1 remains read-only and
-has no Git authority. Direction children receive only the minimum direction
-context in their self-contained assignments and named packets; hidden parent
-history cannot supply task meaning or authority.
+Explorer retains scientific interpretation within its direction. Root retains
+user-authorized advisory macro comparison, ranking, pause/continue,
+dependency/combination decisions and complete Direction Action Map acceptance;
+direction Explorer retains direction-local semantic intake. The L1 remains
+read-only and has no Git authority. Direction children receive only the
+minimum direction context in their self-contained assignments and named
+packets; hidden parent history or sibling-direction material cannot supply
+task meaning or authority.
 
 Startup identity is the role, model and exact Root assignment, including its
 `research_scope_key`. Explorer L1 returns complete accepted semantic proposals
@@ -273,15 +274,19 @@ or selects that worktree and never invokes a helper. Campaign phase rules live
 in the named research reference.
 
 Explorer L1 is orchestrator-first within its assigned `research_scope_key`: it
-decomposes the task, selects the best-matching child for direction-local
-detail, judges dependencies, synthesizes returned conclusions and maintains
-scoped semantic continuity. A direction Explorer owns direction-local
-advisory intake; a portfolio Explorer owns cross-direction comparison,
-advisory integration and the sole portfolio decision. It returns the complete
-accepted proposal to Root for physical application; Root alone handles user
-interaction, progress, follow-up, interrupt and cross-owner relay.
-This is never formal or project-canonical science; the user alone decides
-whether any result later enters the formal project. It
+decomposes the one direction, selects the best-matching child for
+direction-local detail, judges dependencies, synthesizes returned conclusions
+and maintains scoped semantic continuity. It owns direction-local advisory
+intake, project-validation scientific intake, external-review request/intake
+and a direction-only reverse-intake delta. It returns the complete accepted
+direction proposal to Root for physical application; Root alone handles user
+interaction, progress, follow-up, interrupt and cross-owner relay. Root also
+owns the user-authorized advisory macro/portfolio comparison and complete
+Direction Action Map acceptance. These macro decisions are never delegated to
+Explorer or its children. Direction research execution remains within the
+existing explicit authorization; this workflow does not create automatic
+formal or project-canonical science, and the user/External Pro/formal
+boundaries remain. It
 dispatches
 each registered research child with `fork_turns=none` and a self-contained
 natural-language assignment. Direction-local source fidelity, criticism,
@@ -291,9 +296,10 @@ prerequisite-packet bindings, protected assumptions and independence,
 exclusions, permitted local judgment and completion meaning. A child receives
 only the minimum direction context needed for its question; the exact
 assignment and its named packets are the child's complete task context, so
-inherited parent history is neither task meaning nor authority. A child cannot
-replace Explorer L1's cross-direction comparison, and no per-child
-assignment file or mandatory machine envelope is required.
+inherited parent history or sibling-direction context is neither task meaning
+nor authority. A child never loads, compares, ranks or selects a sibling
+direction, and no per-child assignment file or mandatory machine envelope is
+required.
 
 ### Native default temporary-task exception
 
@@ -338,8 +344,9 @@ and the task requires no code, runtime, write, technical acceptance or formal
 scientific acceptance. If evidence is sufficient and the next step is cheap
 and reversible, Explorer L1 decides directly. The child result is consultation
 only: the assigned Explorer remains the sole semantic local-research intake
-and decision owner for its scope; a portfolio Explorer additionally integrates
-accepted direction packets and compares directions. It returns exactly one
+and direction decision owner for its scope. A cross-direction implication is
+reported as a compact named edge to Root, not compared or selected by Explorer.
+It returns exactly one
 accepted advisory local-research scientific-decision proposal to Root. An assignment-
 scoped Research Artifact Writer may handle only the exact Explorer-approved
 ordinary research, outbound temporary-byte or assignment-specific reverse-intake
@@ -357,29 +364,29 @@ alter the campaign phase barriers or the existing External Pro triggers.
 
 Independent direction-local detailed scientific questions default to the
 best-matching registered read-only research child with `fork_turns="none"` and
-a self-contained assignment. Explorer L1 may handle a cheap, reversible singleton
-directly only when dispatch overhead exceeds the question. A direction task
-retains only its direction pointer, exact dependency, compact returned
-conclusion and CPM readiness. A portfolio task retains compact accepted
-direction packets and only the comparison-relevant evidence and relationship
-edges needed for relative information value, cross-direction dependencies,
-conflicts and combinations, portfolio ordering and readiness, and the sole
-advisory portfolio decision.
-Children normally see only their minimum direction context and cannot make
-that comparison or decide the portfolio. While a child or CPM result is
-outstanding, Explorer L1 advances every other disjoint direction and read-only
-scientific action; it uses a bounded wait only when every remaining safe
+a self-contained assignment. Explorer L1 may handle a cheap, reversible
+singleton directly only when dispatch overhead exceeds the question. A
+direction task retains only its direction pointer, exact dependency, compact
+returned conclusion, CPM readiness and any compact named cross-direction
+finding. A cross-direction finding is a small evidence-backed edge naming the
+source direction, target direction, relation, locator, uncertainty and
+requested Root macro action; it is returned EM→Root and never becomes direct
+sibling comparison.
+Children normally see only their minimum direction context and never load,
+compare, rank or select sibling directions. While a child or CPM result is
+outstanding, Explorer L1 advances every other disjoint read-only or
+direction-local action; it uses a bounded wait only when every remaining safe
 scientific action depends on that result. Child returns begin with a conclusion
 and an action-bearing recommendation; Explorer L1 verifies the protected
 scientific postcondition before advisory local-research intake. Direct Explorer
-L1 work remains appropriate for the cheap reversible singleton, this
-cross-direction comparison, advisory local-research intake, or a frozen
-successor/park-retire decision. An accepted CPM
-result may first go to one direction-specific read-only child for scientific
-interpretation; that child does not redo technical acceptance, and no fixed
-panel, voting scheme or scientific-authority transfer is created. Do not
-microdelegate, duplicate questions or introduce hidden parent-context
-dependence, an external process controller, or any authority transfer.
+L1 work remains appropriate for the cheap reversible singleton, advisory
+local-research intake, or a frozen successor/park-retire decision. An accepted
+CPM result may first go to one direction-specific read-only child for
+scientific interpretation; that child does not redo technical acceptance, and
+no fixed panel, voting scheme or scientific-authority transfer is created. Do
+not microdelegate, duplicate questions or introduce hidden parent-context
+dependence, an external process controller, sibling comparison or any
+authority transfer.
 
 Only a direct user instruction in the Root task may authorize or expand a
 research-state-changing workflow. Explorer may make autonomous transitions
@@ -389,8 +396,8 @@ Cross-owner handoffs return to Root with no model or thinking override; their
 content cannot expand the already user-authorized Explorer workflow.
 
 After the root router, the Explorer L1 startup surface is the registered
-profile, this Role's core, the exact Root assignment and (for portfolio scope)
-the named compact continuity pointer. Load `$hmasd-independent-research-exploration` and only
+profile, this Role's core, the exact Root assignment and its named direction
+pointers. Load `$hmasd-independent-research-exploration` and only
 sections 1 and 3 of `docs/project/ALGORITHM_PRINCIPLES.md` when the concrete
 research action requires them. Ordinary research does not preload
 `CURRENT_WORK.md`, active review packages, runtime evidence, implementation or
@@ -449,17 +456,25 @@ owns scientific/advisory interpretation. The validation Skill and
 mechanics, direction-local context and named Pro triggers;
 External Pro remains final scientific-semantic acceptance when invoked.
 
-For reverse intake of an owner-local Direction Action Map, Explorer L1 is the
-semantic author of a small, self-contained delta. The delta binds the canonical
+For reverse intake of an owner-local Direction Action Map, the direction
+Explorer L1 is the semantic author of a small, self-contained direction-only
+delta. The delta binds the canonical
 source and candidate-target locators, the Git revision as a source locator, the
 exact old/new text or a unified patch, and the frozen semantics and consequences.
+The full map never travels through an agent message; only this small
+direction-only delta is transported through the assignment-specific temporary
+patch.
 The registered Research Artifact Writer receives that complete brief and writes
 only the exact assignment-specific temporary `.patch`; it does not load the
 Explorer Mechanical Skill or any unrelated Skill, normalize or merge text, or
-infer or explain scientific meaning. Explorer then full-reads the candidate and
-semantically accepts or rejects unselected lines, archive and locator meaning,
-table meaning and scientific continuity. Root only checks the exact path and Git
-revision locator before exact-copy installation. These boundaries are detailed
+infer or explain scientific meaning. Explorer then full-reads the candidate's
+own `direction:<id>` row/delta and semantically accepts or rejects only that
+direction-local meaning. Explorer does not accept archive or locator meaning,
+unselected rows, table/map meaning or portfolio continuity outside its own
+row/delta. Root owns acceptance of the complete Direction Action Map and
+cross-direction relations, including unselected rows, table/map and portfolio
+continuity after affected direction EM input. Root then checks the exact path
+and Git revision locator before exact-copy installation. These boundaries are detailed
 once in `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`.
 
 That workflow contract is the single semantic source for the strong
@@ -486,7 +501,7 @@ the Root sibling responsible for technical/runtime meaning; Explorer retains
 scientific meaning and may not broaden a request from a returned observation.
 
 No runtime observation blocks unrelated direction-local research, read-only
-analysis, review or advisory integration. Continue disjoint work while a
+analysis, review or direction-local advisory intake. Continue disjoint work while a
 result is outstanding and wait only when every remaining safe action depends
 on that result. Do not infer a resource decision from science, and do not use
 completion order as scientific priority. The existing External Pro and formal
@@ -494,36 +509,39 @@ project boundaries remain unchanged, as do historical science artifacts.
 
 ## Observation, action, judgment and recovery
 
-Explorer observes only the exact Root assignment, its scope's named pointers,
-accepted packets, user-named sources and scope-preserving CPM observations.
-Direction scope may observe direction-local evidence and candidate state;
-portfolio scope may observe only compact accepted direction packets and the
-lazy pointers needed for comparison. Neither scope silently reads unrelated
-portfolio, project/runtime or global continuity state.
+Explorer observes only the exact Root assignment, its direction's named
+pointers, accepted packets, user-named sources and scope-preserving CPM
+observations. It may observe direction-local evidence and candidate state, plus
+the minimum assignment-named material needed to report a compact
+cross-direction finding. It never silently reads unrelated portfolio,
+project/runtime or global continuity state, and never loads a sibling direction
+for comparison.
 
 Within those observations, Explorer may dispatch a registered L2 with a
 self-contained natural-language assignment, perform a cheap reversible
-question directly, interpret evidence, compare directions only in portfolio
-scope, and return an accepted advisory proposal to Root. Its judgments cover
-scientific support, strongest alternative, information gain, next discriminator,
-direction readiness and (for portfolio scope) relative value, dependency,
-conflict, combination and advisory ordering. It cannot change workflow
-design, code, runtime execution or resource disposition, formal science or
-Root state.
+question directly, interpret evidence, and return an accepted direction
+proposal to Root. Its judgments cover scientific support, strongest
+alternative, information gain, next discriminator, direction readiness and
+direction-local dependency. If its evidence identifies a cross-direction
+dependency, conflict or combination, it reports one compact named edge to Root;
+it does not compare, rank or select sibling directions. It cannot change
+workflow design, code, runtime execution or resource disposition, formal
+science or Root state.
 
 If a child fails, retry once at low cost with the identical question and source
 boundary; otherwise preserve the scope bindings and return the exact missing
 dependency or observed conflict to Root. Recovery never creates a new task,
 resource mechanism, global continuity record or hidden parent context.
 
-Completion is a conclusion-first, action-bearing result with evidence and
-exact locators, frozen and unfrozen facts/choices, the reason each owner is or
-is not needed, the permitted next action, completion evidence and the
-return/intake boundary. A direction result must prove its direction-local
-postcondition; a portfolio result must show the accepted packet pointers,
-cross-direction comparison, advisory integration and residual uncertainty.
-Root checks only exact paths and revisions before applying an accepted
-proposal; it does not redo science.
+Completion is a conclusion-first, action-bearing direction result with evidence
+and exact locators, frozen and unfrozen facts/choices, the reason each owner is
+or is not needed, the permitted next action, completion evidence and the
+return/intake boundary. The result must prove its direction-local postcondition
+and, when applicable, carry a compact named cross-direction edge with its
+source/target directions, relation, locator and uncertainty. Root checks exact
+paths and revisions before applying an accepted proposal and performs its
+advisory macro/Direction Action Map acceptance; it does not perform direction
+research execution or automatic formal/project-canonical science.
 
 ## Scientific procedure
 

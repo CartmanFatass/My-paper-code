@@ -16,6 +16,10 @@ ROUTER = ROOT / "AGENTS.md"
 HOOKS = ROOT / ".codex" / "hooks.json"
 CODEX_CONFIG = ROOT / ".codex" / "config.toml"
 STARTUP_CONTEXT = ROOT / "docs" / "project" / "L1_STARTUP_CONTEXT.md"
+EXPLORER_POINTER = (
+    ROOT / "docs" / "project" / "current-work" / "common"
+    / "independent_research_explorer_pointer.md"
+)
 
 
 L1_SURFACES = {
@@ -85,37 +89,37 @@ def test_wdm_cpm_and_explorer_start_compact_and_action_triggered() -> None:
 
 
 def test_explorer_keeps_scope_conditioned_compact_continuity_and_lazy_context() -> None:
-    explorer = _normalized(L1_SURFACES["explorer"])
-    assert "task_identity=real_user_visible_explorer_l1_task|research_scope_key" in explorer
-    assert "direction_startup=registered_profile|role_core|exact_root_assignment|named_direction_pointers" in explorer
-    assert "portfolio_startup=registered_profile|role_core|exact_root_assignment|compact_accepted_continuity|lazy_direction_pointers" in explorer
-    assert "direction_context_exclusion=whole_portfolio|project_runtime_corpus|implicit_global_continuity" in explorer
-    assert "portfolio_context=compact_continuity_plus_lazy_direction_pointers_only" in explorer
-    assert "continuity_format=compact_revision_2" in explorer
-    assert "lazy_portfolio_pointer_1=" in explorer
-    assert "lazy_portfolio_pointer_2=" in explorer
-    assert "historical_handoffs=lazy_only" in explorer
-    assert "continuity_entry=assignment_named_scope_compact_continuity_pointer" in explorer
-    assert "do not preload campaign direction/history, action references or historical handoffs" in explorer
+    index = _normalized((STARTUP_CONTEXT,))
+    pointer = _normalized((EXPLORER_POINTER,))
+    assert "scope=direction:<id>" in index
+    assert "startup_context=one_named_direction_and_named_direction_pointers_only" in index
+    assert "portfolio_l1=forbidden" in index
+    assert "root_compact_direction_packets|lazy_direction_pointers" in pointer
+    assert "continuity_format=compact_revision_2" in pointer
+    assert "lazy_portfolio_pointer_1=" in pointer
+    assert "lazy_portfolio_pointer_2=" in pointer
+    assert "historical_handoffs=lazy_only" in pointer
+    assert "portfolio pointer semantics" in pointer
+    assert "there is no portfolio l1" in pointer
 
 
 def test_explorer_startup_is_scope_keyed_and_does_not_preload_unowned_context() -> None:
-    explorer = _normalized(L1_SURFACES["explorer"])
+    explorer = _normalized((STARTUP_CONTEXT, EXPLORER_POINTER))
     for required in (
-        "research_scope_key",
         "direction:<id>",
-        "portfolio:<group>",
-        "direction scope",
-        "portfolio scope",
+        "scope=direction:<id>",
+        "macro/portfolio",
         "exact assignment",
         "direction pointer",
-        "compact accepted direction",
         "compact continuity",
-        "lazy direction pointer",
+        "lazy_direction_pointers",
         "cross-direction comparison",
-        "advisory portfolio",
+        "root_science_authority=macro_portfolio_advisory",
+        "portfolio_l1=forbidden",
     ):
         assert required in explorer, required
+    assert "scope_kinds=direction:<id>" in explorer
+    assert "scope_kinds=direction:<id>|portfolio:<group>" not in explorer
 
     for stale in (
         "runtime_concurrency=three_unit_cpm_capacity_pool",

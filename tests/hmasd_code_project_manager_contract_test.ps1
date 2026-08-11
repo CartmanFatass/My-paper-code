@@ -134,8 +134,10 @@ foreach ($required in @(
     'bounded safe read-only reconnaissance',
     'not a packet validator, dispatcher, queue engine or state machine',
     'direction-local binding',
+    'resolve exactly one `direction:<id>`',
+    'Do not preload the portfolio, unrequested sibling directions or project/runtime material',
+    'explicit exclusion of sibling-direction',
     'smallest set of canonical decision/source context',
-    'do not preload or merge unrequested siblings',
     'preserve the original handoff/artifact',
     'ask exactly one concrete semantic clarification')) {
     if (-not $explorerValidationSkillNormalized.Contains($required)) {
@@ -172,22 +174,29 @@ foreach ($required in @(
     'work organization rather than',
     'ranking or scientific comparison',
     'does not substitute External Pro for experiment, instance binding, pause or abandon',
-    'Explorer gives one clear instruction naming implementation, instance binding',
+    '`research_scope_key=direction:<id>`',
+    'one requested action and its direct consumer',
+    'the exact owner and the permitted action now, including concrete inputs',
+    'the evidence that will demonstrate completion',
+    'return destination',
     'without separate code or experiment permission fields',
     'does not reject a handoff because of formatting or a missing object',
-    'Root owns user communication, cross-owner relay, lifecycle and accepted physical writes; Root alone writes continuity after an accepted proposal and revision check and has no scientific comparison or intake authority',
-    'External Pro remains outside the agent tree and is reached only from Explorer through this transport child',
-    'The provider conversation and transport result are evidence for Explorer''s review intake, not a new owner or scientific acceptance',
+    'The direction EM alone performs direction-local advisory scientific interpretation',
+    'Root owns macro/portfolio comparison and the complete map/relation decision',
+    'Root alone physically writes continuity after the accepted proposal and revision check',
+    'External Pro remains outside the agent tree and is reached only from EM through this transport child',
+    'The provider conversation and transport result are evidence for EM''s review intake, not a new owner or scientific acceptance',
     'External Pro uses the supplied repository/path locator and accepted revision to inspect the scoped result',
-    'Explorer never substitutes its own acceptance',
+    'EM never substitutes its own acceptance',
     'The review starts only after that acceptance and evidence',
-    'CPM does not initiate the review',
+    'CM does not initiate the review',
     'Missing formatting or a prior mechanical BLOCKED receipt is not candidate evidence',
     'selected direction identity',
     'Direction-local context binding',
-    'CPM''s reverse result, returned through Root, begins with its conclusion',
+    'CM''s reverse result, returned through Root, begins with its conclusion',
     'mirrors that same',
-    'primary direction or explicitly named direction set',
+    'mirrors that same `research_scope_key=direction:<id>`, direction, candidate',
+    'It never imports another direction or implies portfolio-wide meaning',
     'Codex-native message fallback carries the same binding',
     'preserves the original handoff/artifact',
     'returns exactly one concrete semantic clarification to Root for routing to the sender',
@@ -223,9 +232,9 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'Status-only text is insufficient',
-    '## Explorer scientific dispositions and action map',
-    'Direction | current scientific question',
-    'CPM Technical Treatment View at')) {
+    '## Direction EM scientific dispositions and Root-owned action map',
+    'research_scope_key=direction:<id> | Direction | current scientific question',
+    'whether CM is needed now and why')) {
     if (-not $explorerValidationContractNormalized.Contains($required)) {
         throw "Canonical Explorer-to-CPM source missing: $required"
     }
@@ -279,8 +288,11 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'Explorer L1 semantically authors and approves the handoff; its assigned Writer physically writes the exact outbound temporary file and may remove it only after Root confirms CPM intake',
-    'CPM returns its technical result to Root; Root writes and routes the exact reverse temporary copy to Explorer and may remove that copy only after Root confirms Explorer intake',
+    '`temp/handoffs/explorer_to_code_manager/`: direction EM semantically authors',
+    'assigned Writer physically writes the exact outbound temporary file',
+    'Root confirms CM intake',
+    'Root writes and routes the exact reverse temporary copy to the same EM direction',
+    'Root confirms EM intake',
     'missing schema, `document_kind`, validator receipt, hash, byte count',
     'begins with its natural-language conclusion and then appends the necessary exact evidence',
     'Live files never enter Git',
@@ -426,13 +438,37 @@ $codeRequired = @(
     '`analyze_entry`',
     'dispatches the registered `hmasd-verifier` on the clean',
     'readiness wrapper owns its mechanical lifecycle and the verifier returns typed evidence',
-    'No persistent manager, monitor or',
+    'There is no standing or fresh code union manager',
+    'An explicitly multi-direction request is not a CM assignment',
+    'Root splits it into distinct `direction:<id>` CM assignments before dispatch',
+    'CPM never accepts a direction set',
+    'binds to exactly one direction',
+    'Cross-direction relations return through Root rather than entering a CM result',
+    'A direction CM may read a frozen shared dependency but never edit it',
+    'Any shared-component edit requires a separate temporary exact',
     'Workflow Design Manager',
     'workflow_change_request_route=workflow_design_manager',
     'does not edit, accept, stage, commit or push'
 )
 foreach ($required in $codeRequired) {
     if (-not $codePmNormalized.Contains($required)) { throw "Code Project Manager contract missing: $required" }
+}
+foreach ($required in @(
+    'authority=one_exact_read_only_scope_local_candidate_review',
+    'review_scope=one_scope_local_coherent_candidate_after_same_cpm_combines_l2_outputs',
+    'review_scope_boundary=no_cross_direction_union_review',
+    'review_acceptance=advisory_only',
+    'scope-local candidate',
+    'never performs a cross-direction or union review',
+    'the owning CPM alone makes technical acceptance')) {
+    if (-not $reviewerRoleNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
+        throw "Reviewer scope-local/advisory contract missing: $required"
+    }
+}
+foreach ($retired in @('one_exact_read_only_integrated_package_review', 'review_scope=coherent_integrated_batch_not_each_implementer', 'whole_integrated_diff_visibility=allowed')) {
+    if ($reviewerRole.Contains($retired)) {
+        throw "Reviewer retains retired union/integrated scope: $retired"
+    }
 }
 
 # CPM is the orchestrator; registered children realize bounded mechanics.
@@ -449,10 +485,10 @@ foreach ($required in @(
     '`hmasd-implementer` for protected algorithm, numerical or training semantics',
     'registered code scout',
     '`hmasd-cpm-mechanical`',
-    'one integrated Reviewer follows coherent integration',
-    'Verifier is used only when the existing execution-readiness trigger fires',
+    'one scope-local advisory Reviewer follows the same CPM''s coherent candidate',
+    'Verifier is used only when the existing scope-local execution-readiness trigger fires',
     'cheap reversible singleton',
-    'owner-exclusive architecture, integration, acceptance or Git decision',
+    'owner-exclusive architecture, scope-local integration, acceptance or Git decision',
     'no microdelegation threshold or rigid assignment schema',
     'Disjoint file families and independent scoped assignments run parallel-first',
     'While any child or experiment is outstanding',
@@ -461,7 +497,7 @@ foreach ($required in @(
     'never accept, stage, commit, push, change science, authorize costly runtime or update canonical CPM state',
     'action-bearing conclusion and concrete postcondition',
     'passively relaying a status or completion receipt',
-    'one integrated review rather than one review per implementer',
+    'one scope-local advisory review rather than one review per implementer or any union review',
     'No scheduler, queue or registry is introduced',
     'no time-triggered wake-up loop')) {
     if (-not $codePmNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
@@ -490,12 +526,29 @@ foreach ($required in @(
 foreach ($required in @(
     'multiple_scoped_instances_per_root_tree=true',
     'cpm_instance_identity=code_scope_key',
+    'code_scope_key_grammar=direction:<id>|shared:<component>',
+    'scope_grammar=direction:<id>|shared:<component>',
+    'scope_atom_pattern=[a-z0-9][a-z0-9._-]{0,63}',
+    'scope_atom_rejections=empty|path_separator|extra_colon|whitespace|..',
+    'scope_ownership=direction_or_named_shared_component_only',
     'root_scope_dispatch=fork_turns=1|self_contained_assignment',
     'scoped_cpm_l2_fanout=registered_l2_within_depth_2',
-    'scope_technical_acceptance=code_project_manager',
-    'convergence_cpm=fresh_root_dispatch_after_scope_integration',
-    'convergence_assignment=self_contained_union',
-    'convergence_acceptance=overall_technical_and_runtime',
+    'scope_technical_acceptance=code_project_manager_final_for_exact_slice',
+    'integration_group_ownership=forbidden',
+    'code_union_manager=none',
+    'root_union_integration=mechanical_separate_root_managed_worktree',
+    'root_union_tests_static=mechanical_evidence_only',
+    'root_union_pass=mechanical_evidence_only',
+    'root_union_technical_acceptance=none',
+    'root_conflict_resolution=forbidden',
+    'semantic_conflict_route=owning_direction_cpm(s)',
+    'shared_scope_rule=temporary_named_shared_component_only',
+    'frozen_shared_dependency_access=direction_cm_read_only',
+    'frozen_shared_dependency_edit=temporary_named_shared_component_cpm_only',
+    'shared:all=forbidden',
+    'union_reviewer=forbidden',
+    'reviewer_scope=scope_local_only_advisory',
+    'execution_readiness_scope=exact_scope_only',
     'root_lifecycle_git_relay=exclusive',
     'tracked_writer_worktree=one_root_managed_worktree_per_writable_l1_assignment',
     'parallel_l2_writers_same_base_disjoint_paths=share_l1_worktree',
@@ -518,7 +571,7 @@ foreach ($required in @(
     'max_threads_runtime_authorization=none',
     'parallelism_runtime_authorization=none')) {
     if (-not $codePmNormalized.Contains($required) -and -not $agileNormalized.Contains($required)) {
-        throw "Multi-CPM/no-runtime-pool anchor missing: $required"
+        throw "Scope-local/no-runtime-pool anchor missing: $required"
     }
 }
 foreach ($required in @(
@@ -530,6 +583,11 @@ foreach ($required in @(
     }
 }
 foreach ($retired in @(
+    'convergence_cpm=fresh_root_dispatch_after_scope_integration',
+    'convergence_assignment=self_contained_union',
+    'convergence_acceptance=overall_technical_and_runtime',
+    'Convergence CPM',
+    'integration:<group>',
     'runtime_capacity_pool_units=3',
     'three-unit runtime pool',
     'fixed three-unit arithmetic',
@@ -797,7 +855,9 @@ foreach ($required in @('default_fork_turns=3',
 }
 foreach ($required in @('default_fork_turns=none',
         'review_passes_per_reviewer=1',
-        'review_scope=coherent_integrated_batch_not_each_implementer',
+        'review_scope=one_scope_local_coherent_candidate_after_same_cpm_combines_l2_outputs',
+        'review_scope_boundary=no_cross_direction_union_review',
+        'review_acceptance=advisory_only',
         'parallel_review_condition=genuinely_independent_questions_only',
         'automatic_re_review=forbidden')) {
     if (-not $reviewerRoleNormalized.Contains($required)) {
@@ -816,11 +876,11 @@ foreach ($required in @('default_fork_turns=1',
     }
 }
 foreach ($surface in @($codePmNormalized, $agileNormalized)) {
-    foreach ($required in @('coherent group of implementer changes',
-            'one independent reviewer by default',
-            'genuinely independent review questions',
-            'Never review once per implementer', 'existing readiness trigger')) {
-        if (-not $surface.Contains($required)) {
+    foreach ($required in @('coherent scope-local candidate',
+            'one independent advisory reviewer by default',
+            'genuinely independent',
+            'Never review once per implementer', 'readiness trigger')) {
+        if (-not $surface.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
             throw "Code review batching contract missing: $required"
         }
     }
@@ -877,7 +937,7 @@ foreach ($required in @(
     'Ordinary local internals',
     'temporary experiments',
     'discovered discrepancy',
-    'integrated reviewer checks map consistency only when',
+    'scope-local advisory reviewer checks map consistency only when',
     'no additional reviewer or approval gate')) {
     if (-not $codePmNormalized.Contains($required)) {
         throw "Code Project Manager map-maintenance contract missing: $required"
@@ -902,7 +962,7 @@ if (-not $workflowNormalized.Contains('workflow_design_authority=exclusive_for_a
     -not $workflowNormalized.Contains('cross_task_transport=return_to_root')) {
     throw 'Workflow Design Manager centralized ownership boundary is missing'
 }
-if (-not $agileNormalized.Contains('Code Project Manager alone accepts code, coordinates one `code_scope_key`, directs engineering repair, and makes scope-local technical and runtime judgments') -or
+if (-not $agileNormalized.Contains('Code Project Manager alone accepts code, coordinates one exact `direction:<id>|shared:<component>` scope, directs engineering repair, and makes scope-local technical and runtime judgments') -or
     -not $agileNormalized.Contains('Root owns agent lifecycle, cross-owner relay, physical canonical writes, managed-worktree lifecycle and Git mechanics')) {
     throw 'Agile Skill does not preserve CPM ownership'
 }
@@ -936,9 +996,26 @@ foreach ($required in @(
     'workflow_surface_owner=false',
     'no workflow-design authority',
     'routes workflow defects to WDM',
-    'retains code, runtime and operational ownership')) {
+    'retains code, runtime and operational ownership',
+    'CPM scope is exactly `direction:<id>|shared:<component>`',
+    'A scope CPM''s technical acceptance is final',
+    'Root union PASS is mechanical evidence only',
+    'hmasd-cpm-agentify-transport',
+    'AGENTIFY_REVIEW_BATCH_ASSIGNMENT',
+    'Requester-partitioned temporary files live under',
+    'temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/',
+    'hmasd_agentify_result_path_guard.py',
+    'External Pro remains outside the agent tree',
+    'Root owns user communication, lifecycle, relay and physical Git')) {
     if (-not ($cpmWorkspace -replace '\s+', ' ').ToLowerInvariant().Contains($required.ToLowerInvariant())) {
         throw "Code PM workspace orientation missing: $required"
+    }
+}
+foreach ($retired in @(
+    'CPM sends External Pro questions directly with Agentify in the persistent session',
+    'No separate transport contract, wrapper, monitor or transport child exists')) {
+    if ($cpmWorkspace.Contains($retired)) {
+        throw "Code PM workspace retains retired direct External Pro route: $retired"
     }
 }
 foreach ($required in @(
@@ -1071,7 +1148,7 @@ foreach ($recordId in $cpmRecordIds) {
             'scientific_state_replication', 'project_state_replication',
             'authority_effect') -Label $recordId
         if ($record.record_kind -cne 'owner_continuity_pointer' -or
-            $record.owner_role -cne 'independent_research_explorer' -or
+            $record.owner_role -cne 'root' -or
             $record.project_state_replication -cne 'forbidden' -or
             $record.scientific_state_replication -cne 'forbidden' -or
             $record.authority_effect -cne 'none') {

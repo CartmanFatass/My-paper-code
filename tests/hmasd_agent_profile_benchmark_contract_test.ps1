@@ -347,9 +347,21 @@ foreach ($required in @(
 foreach ($required in @(
     'actionable_finding_requires=normal_path_defect|material_effect|proportionate_repair',
     'protected scientific semantics',
-    'coherent implementer batch')) {
+    'coherent scope-local candidate',
+    'review_scope=one_scope_local_coherent_candidate_after_same_cpm_combines_l2_outputs',
+    'review_scope_boundary=no_cross_direction_union_review',
+    'review_acceptance=advisory_only',
+    'owning CPM alone makes technical acceptance')) {
     if (-not $reviewerRoleNormalized.Contains($required)) {
         throw "Reviewer Role protected-boundary contract missing: $required"
+    }
+}
+foreach ($retired in @(
+    'authority=one_exact_read_only_integrated_package_review',
+    'review_scope=coherent_integrated_batch_not_each_implementer',
+    'whole_integrated_diff_visibility=allowed')) {
+    if ($reviewerRole.Contains($retired)) {
+        throw "Reviewer retains retired integrated/union scope: $retired"
     }
 }
 foreach ($required in @(

@@ -4,6 +4,14 @@
 document_kind=stable_workflow_orientation
 owner_role=workflow_design_manager
 scope=workflow_control_plane_abstraction
+root_macro_portfolio_owner=Root
+em_scope=direction:<id>
+cm_scope=direction:<id>|shared:<component>
+cm_slice_acceptance=final_for_slice
+root_union_action=mechanical_integrate_and_run_Tests_Static
+semantic_conflict_route=owning_CM_or_temporary_named_shared_CM
+scope_atom=[a-z0-9][a-z0-9._-]{0,63}
+scope_reject=empty|extra_colon|separators|whitespace|..
 ```
 
 This map is the WDM's compact orientation for workflow-control-plane design.
@@ -15,13 +23,13 @@ exhaustive registry or procedure copy.
 
 | Owner | Stable responsibility | Interface handed onward |
 |---|---|---|
-| Root | user communication, task routing, cross-owner relay, lifecycle, Root-managed worktree helper/receipt control and accepted physical writes, including separately authorized final Git integration; no scientific comparison/intake or domain acceptance | owner-routed assignments/results, lifecycle receipts, accepted proposals and accepted-path integration evidence |
+| Root | user communication, task routing, cross-owner relay, lifecycle, Root-managed worktree helper/receipt control and accepted physical writes, including separately authorized final Git integration; advisory macro/portfolio science (cross-direction comparison, ranking, pause/continue, dependencies and complete-map acceptance); no direction research execution, code technical acceptance or automatic formal/project-canonical science | owner-routed assignments/results, lifecycle receipts, accepted proposals and accepted-path integration evidence |
 | Workflow Design Manager (WDM) | user-confirmed workflow design, control-plane modification through assigned leaves, exact-slice acceptance and later integrated-union semantic acceptance | confirmed plan, self-contained child assignment, candidate-ready slice packets, convergence change packet and successor brief |
 | Workflow Auditor | read-only local reconnaissance for an assigned workflow surface | conclusion about bounded facts/conflicts, followed by optional dependency evidence |
 | Workflow Implementer | one frozen non-overlapping workflow change slice | conclusion about the owned outcome and checked consequence, followed by an optional `WORKFLOW_CHANGE_PACKET` factual tail |
 | Workflow Reviewer | independent review of one coherent integrated batch | conclusion and advisory disposition for WDM, followed by optional findings evidence; no source edits or acceptance |
-| Code Project Manager (CPM) | active engineering/runtime orchestrator for code, runtime, technical acceptance and project-operation records | decomposed implementation assignments, code/runtime/review artifacts and CPM-owned mechanical receipts |
-| Independent Research Explorer L1 | read-only scientific/research orchestrator for direction, methodology and research workspace; owns decomposition, selection, dependency/concurrency, science synthesis/continuity semantics, cross-direction comparison, advisory portfolio/local-research semantic intake and sole advisory decision authoring | semantically authored complete advisory decisions/handoffs and accepted proposals returned through Root |
+| Code Project Manager (CPM) | active engineering/runtime orchestrator for code, runtime, technical acceptance and project-operation records, scoped only to `direction:<id>` or `shared:<component>` | decomposed implementation assignments, code/runtime/review artifacts and CPM-owned mechanical receipts |
+| Independent Research Explorer L1 | read-only research orchestrator for exactly one `direction:<id>`; owns direction research execution and direction-local synthesis/continuity semantics, but no portfolio L1 or cross-direction decision authoring | direction-scoped research evidence and accepted proposals returned through Root |
 | CPM Agentify Transport child (`hmasd-cpm-agentify-transport`) | requester-assigned batch transport mechanics under CPM | raw transport result for CPM |
 | Explorer Agentify Transport child (`hmasd-explorer-agentify-transport`) | requester-assigned batch transport mechanics under Explorer | raw transport result for Explorer |
 | External Pro | bounded independent scientific judgment | exact review result within the submitted question boundary |
@@ -73,6 +81,12 @@ valid only for disjoint frozen workflow scopes. A shared writable path or a
 still-unfrozen semantic contract is a dependency and is serialized. The
 Session Workspace Contract is the defining source for these mechanics.
 
+The direction owner key is exactly `direction:<id>` for EM. CM accepts only
+`direction:<id>` or `shared:<component>`. The `<id>` and `<component>` atom
+must match `[a-z0-9][a-z0-9._-]{0,63}`; empty values, extra colons, separators,
+whitespace and `..` are rejected. Portfolio, integration and all-shared scope
+families are not valid owner scopes; Root is the sole macro/portfolio owner.
+
 ## Parallel WDM candidate and convergence edge
 
 Root dispatches each WDM with caller action `fork_turns=1` for background
@@ -90,6 +104,9 @@ works on the exact integrated union, arranges integrated advisory review and
 owns union semantic acceptance. Reviewer output is advisory and never accepts.
 The converged package uses exactly one integrated Reviewer after test evidence
 is frozen; that Reviewer is read-only/advisory and receives no second pass.
+This explicit WDM workflow convergence remains unchanged and is distinct from
+domain ownership: no standing/fresh domain-convergence lane or extra union Reviewer is
+created for direction/shared code slices.
 This map remains an orientation pointer; the Session Workspace Contract is
 the single mechanics source and no completed integration or convergence is
 implied here.
@@ -108,15 +125,15 @@ this paragraph is orientation only.
 ## Persistent owner/orchestrator edge
 
 Explorer and CPM are active owners/orchestrators, not passive relays or
-schedulers. They decompose work and delegate bounded detail, synthesize
-results, retain owner decisions, and continue unrelated safe work while
-children run. Independent Research Explorer L1 alone owns cross-direction
-advisory portfolio comparison; CPM retains architecture, scope-local
-runtime judgment, integration and technical acceptance. Explorer outputs remain advisory
-portfolio/local-research comparisons, intakes and decisions. Explorer L1 is
-read-only and semantically authors the exact advisory decision/handoff; Root
-owns user communication, cross-owner relay, lifecycle and accepted physical
-writes, but has no scientific comparison/intake authority. Formal/project
+schedulers. Explorer is scoped to one `direction:<id>` and executes and
+synthesizes that direction only. CPM is scoped to `direction:<id>` or
+`shared:<component>` and retains architecture, scope-local runtime judgment,
+integration and technical acceptance for its slice. Root owns macro/portfolio
+comparison, ranking, pause/continue, dependencies and complete-map acceptance;
+Root mechanically integrates accepted direction/shared slices and runs union
+Tests/Static. A semantic conflict returns to its owning CM(s), or to a
+temporary named shared CM. There is no standalone portfolio or integration
+owner, no standing/fresh domain-convergence lane and no extra union Reviewer. Formal/project
 canonical science remains with the user/External Pro contract. Exact
 assignment, child-lane, waiting and recovery mechanics remain in the owner
 Roles and Skills; this paragraph is orientation only.
@@ -137,14 +154,18 @@ parent transport and does not absorb their live review traffic. File/native wire
 locators are defined by `docs/project/SESSION_WORKSPACE_CONTRACT.md`.
 
 The Root-routed Explorer -> Root -> CPM direction-local context binding is defined once by
-`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Explorer and CPM use
-one primary selected direction's smallest canonical context, add only the
-smallest set of material relationship edges, and mirror the binding in the
-conclusion-first reverse result or Codex-native fallback returned through Root. An explicitly
-multi-direction user question may name several directions without authorizing
-portfolio preload. That direction-local handoff boundary is distinct from
-Independent Research Explorer L1's internal cross-direction advisory portfolio
-comparison; Root performs no scientific comparison or intake.
+`docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. EM and CPM use one
+primary selected direction's smallest canonical context, add only the smallest
+set of material relationship edges, and mirror the binding in the
+conclusion-first reverse result or Codex-native fallback returned through Root.
+For an explicitly multi-direction user question, Root splits the request into
+separate exact `direction:<id>` assignments before owner work; no one CM
+handles a multi-direction request or result. Each CM result binds one
+`direction:<id>` or one named `shared:<component>`, and cross-direction
+relations return to Root. This direction-local handoff boundary is distinct
+from Root's macro/portfolio advisory surface; Root performs the cross-direction
+comparison, ranking, pause/continue, dependency and complete-map decisions.
+The EM direction lane performs no portfolio comparison or intake.
 Portfolio/index/README/continuity surfaces remain
 pointer-only; a missing binding gets one semantic clarification while
 unrelated work continues rather than a new workflow state.
@@ -154,13 +175,15 @@ Explorer-local Direction Action Map. This map remains an owner-local continuity
 view, not a machine schema, queue, scheduler, runtime-admission or acceptance
 source; this orientation document does not duplicate it.
 
-The stable reverse-intake direction is a small Explorer-authored semantic delta
-to an assignment-specific temporary patch. The Research Artifact Writer is an
-exact-payload mechanical writer; Root retains canonical bytes and owns the
-path/revision check and exact-copy installation; Explorer full-reads and owns
-semantic acceptance of the candidate. The full map is not transported through
-messages or split/encoded payloads. Detailed patch, clarification and event
-classification rules remain only in
+The stable reverse-intake direction is a small EM-authored semantic delta to an
+assignment-specific temporary patch. EM authors and accepts only its own exact
+`direction:<id>` row/delta; Root alone accepts the complete Direction Action
+Map, cross-direction relations, unselected rows, table/map consistency and
+portfolio continuity after the affected EM input. The Research Artifact Writer
+is an exact-payload mechanical writer; Root retains canonical bytes and owns
+the path/revision check and exact-copy installation after EM row/delta
+acceptance. The full map is not transported through messages or split/encoded
+payloads. Detailed patch, clarification and event classification rules remain only in
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`; WDM owns the interface
 shape and does not own artifact integrity, map meaning or Explorer acceptance.
 
@@ -230,7 +253,11 @@ genuinely independent questions.
 and Explorer default core inputs and action triggers. Each L1 starts with the
 exact assignment, registered Profile and Role, then expands only to the Skill
 or owner surface named by the active interface or status dependency. The index
-and this map are orientation aids, not reasons to load every document.
+and this map are orientation aids, not reasons to load every document. Root
+uses compact direction packets and lazy pointers for macro/portfolio work; EM
+loads one named direction, and CM loads only direct direction/shared
+interfaces. Neither owner preloads a portfolio or unrelated project/runtime
+corpus.
 
 ## Role-based successor continuity
 

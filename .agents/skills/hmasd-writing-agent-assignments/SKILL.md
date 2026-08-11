@@ -57,6 +57,18 @@ only a separate authorized EM science result that actually exists can supply
 different research or science evidence. The label change itself performs no
 research and changes no science state.
 
+For direction-scoped owner assignments, keep the scope explicit and narrow:
+EM may receive only `direction:<id>`, while CM may receive only
+`direction:<id>` or `shared:<component>`. Every `<id>` or `<component>` is a
+safe atom matching `[a-z0-9][a-z0-9._-]{0,63}`; reject empty values, extra
+colons, separators, whitespace and `..`. Do not create a portfolio scope,
+integration scope, standing/fresh domain-convergence lane or all-shared scope.
+Root owns macro/portfolio comparison, ranking, pause/continue, dependencies
+and complete-map acceptance; direction/shared CM acceptance is final for its
+slice, Root mechanically integrates and runs union Tests/Static, and semantic
+conflicts return to the owning CM(s) or a temporary named shared CM. Formal or
+project-canonical science remains at the user/External Pro boundary.
+
 ### Risk, reviewer and manager-capacity guidance
 
 Classify the assignment package before dispatch. A high-risk authority,

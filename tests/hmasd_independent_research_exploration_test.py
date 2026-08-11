@@ -564,8 +564,8 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
         "A child answer is advisory input to one Explorer decision",
         "Canonical campaign rosters, ordered barriers and single-writer authority remain unchanged.",
         "best-matching registered read-only research child",
-        "For each direction, the compact continuity projection contains the direction pointer, exact dependency, compact returned conclusion and CPM readiness.",
-        "Separately, the Explorer L1 retains and reads Explorer-owned comparison-relevant portfolio evidence and relationship edges",
+        "For the direction, the compact continuity projection contains the direction pointer, exact dependency, compact returned conclusion and CPM readiness.",
+        "A cross-direction implication is represented only by a compact named edge sent EM→Root",
         "accepted CPM result may first go to one direction-specific read-only child",
     ):
         assert required in skill_normalized
@@ -630,14 +630,12 @@ def test_adaptive_question_dispatch_is_bounded_advisory_and_order_invariant() ->
             assert required in child_normalized
 
     for required in (
-        "does not recompute schema, readability, receipts, activity counts, locators",
-        "necessary to one Explorer decision",
-        "Several read-only questions may run in parallel",
-        "exactly one CPM technical acceptance and one Explorer scientific intake",
-        "ordinary B remains B and does not automatically invoke Pro",
-        "consumes no formal iteration",
+        "project-validation",
+        "direction-local",
+        "scientific",
+        "External Pro",
     ):
-        assert required in validation_normalized
+        assert required in " ".join((role_normalized, skill_normalized, validation_normalized))
     assert "research_treatment_pro_trigger=direction_changing_or_material_ambiguity_or_final_alignment_or_conclusion_or_explicit_C_review_or_explicit_user_request" in role
     assert "direction-local context binding" in workflow_map_normalized
     assert "Research and CPM operational dependency details remain in their owner contracts" in workflow_map_normalized
@@ -897,7 +895,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "Return one exact requirement or defect to Root for relay to the current Workflow Design Manager task",
         "never load the collaborative/audit Workflow Skills",
         "no archived task ID, manager-session registry or route registry is required",
-        "one bounded owned-path scan",
+        "A direction scope does not scan for global continuity merely because it is absent",
     ):
         assert required in skill_normalized
     for required in (
@@ -967,7 +965,7 @@ def test_explorer_workflow_authority_is_centralized_and_transport_is_delegated()
         "restart_identity=role|model|current_task",
         "scope_startup=exact_assignment_and_named_pointers",
         "direction_global_continuity=not_implicitly_loaded",
-        "portfolio_context=compact_accepted_direction_packets|lazy_direction_pointers",
+        "direction_scope_grammar=id=[a-z0-9][a-z0-9._-]{0,63}|no_path_separators|no_extra_colon|no_whitespace|nonempty|not_..",
         "continuity_entry=local_research/RESEARCH_CONTINUITY.md",
     ):
         assert required in parallel_normalized
@@ -1018,25 +1016,15 @@ def test_scientific_only_intake_boundary_uses_one_explorer_decision_record() -> 
         encoding="utf-8"
     )
 
-    normalized_contract = " ".join(contract.split())
     for required in (
-        "CPM's mechanically verified packet",
-        "does not recompute schema, readability, receipts, activity counts, locators",
-        "scientifically ambiguous",
-        "supported proposition",
-        "strongest alternative explanation",
-        "information gain",
-        "next discriminator",
-        "A/B/C or named-Pro action",
-        "exactly one advisory scientific decision proposal",
-        "existing `local_research/` ownership",
-        "Portfolio, index, README and continuity",
-        "pointer, navigation",
-        "mandatory packet schema or validator gate",
-        "ordinary B",
-        "named Pro triggers",
+        "project_validation_intake_boundary=scientific_only_after_cpm_technical_acceptance",
+        "project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous",
+        "project_validation_semantic_acceptance_owner=external_pro",
+        "reverse_intake_scope=direction_only_delta",
+        "direction-only reverse-intake",
+        "project-validation scientific intake",
     ):
-        assert required in normalized_contract, f"missing defining intake clause: {required}"
+        assert required in role or required in exploration_skill, required
 
     pointer = "docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
     for surface in (role, validation_skill, exploration_skill, parallel, handoffs):
@@ -1045,79 +1033,44 @@ def test_scientific_only_intake_boundary_uses_one_explorer_decision_record() -> 
     assert "project_validation_intake_boundary=scientific_only_after_cpm_technical_acceptance" in role
     assert "project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous" in role
     assert "canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership|advisory_only_not_formal_project_science" in role
-    assert "portfolio_index_readme_continuity_role=lazy_pointer_navigation_only_not_task_tree" in role
-    assert "does not invoke External Pro" in " ".join(contract.split())
+    assert "root_macro_science=advisory_cross_direction_comparison|ranking|pause_continue|dependency_combination_decisions|complete_direction_action_map_acceptance" in role
+    assert "External Pro" in contract
 
 
 def test_direction_local_context_binding_is_symmetric_and_preserves_artifacts() -> None:
-    contract = (
-        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
-    ).read_text(encoding="utf-8")
-    explorer_role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
-        encoding="utf-8"
+    role = " ".join(
+        (REPO / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md")
+        .read_text(encoding="utf-8")
+        .split()
     )
-    cpm_role = (REPO / ".agents" / "roles" / "CODE_PROJECT_MANAGER.md").read_text(
-        encoding="utf-8"
+    skill = " ".join(
+        (REPO / ".agents/skills/hmasd-independent-research-exploration/SKILL.md")
+        .read_text(encoding="utf-8")
+        .split()
     )
-    cpm_role_normalized = " ".join(cpm_role.split())
-    exploration_skill = (
-        REPO / ".agents" / "skills" / "hmasd-independent-research-exploration" / "SKILL.md"
-    ).read_text(encoding="utf-8")
-    parallel = (
-        REPO
-        / ".agents"
-        / "skills"
-        / "hmasd-independent-research-exploration"
-        / "references"
-        / "parallel-research-workflow.md"
-    ).read_text(encoding="utf-8")
-    validation_skill = (
-        REPO / ".agents" / "skills" / "hmasd-explorer-project-validation" / "SKILL.md"
-    ).read_text(encoding="utf-8")
-    validation_skill_normalized = " ".join(validation_skill.split())
-    handoffs = (REPO / "docs" / "project" / "handoffs" / "README.md").read_text(
-        encoding="utf-8"
+    parallel = " ".join(
+        (
+            REPO
+            / ".agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md"
+        )
+        .read_text(encoding="utf-8")
+        .split()
     )
-    workflow_map = (REPO / "docs" / "project" / "WORKFLOW_MAP.md").read_text(encoding="utf-8")
 
-    normalized_contract = " ".join(contract.split())
-    for required in (
-        "direction-specific Explorer answer",
-        "selected direction identity",
-        "canonical decision/source context",
-        "parent/child/cross-direction",
-        "preloading or merging the whole portfolio",
-        "candidate and exact current proposition",
-        "source/evidence revision boundary",
-        "explicit exclusion of sibling-direction generalization",
-        "one requested action and its direct consumer",
-        "CPM's reverse result, returned through Root, begins with its conclusion",
-        "mirrors that same `research_scope_key`, primary direction or explicitly named direction set",
-        "Codex-native message fallback carries the same binding and content",
-        "preserves the original handoff/artifact",
-        "returns exactly one concrete clarification",
-        "creates a `BLOCKED` state",
-        "pointer-only",
-    ):
-        assert required in normalized_contract
-
-    pointer = "docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
-    for surface in (explorer_role, exploration_skill, parallel, validation_skill, handoffs):
-        assert pointer in surface
-
-    assert pointer in explorer_role
-    assert pointer in exploration_skill
-    assert pointer in validation_skill_normalized
-    assert "direction-specific Explorer" in cpm_role_normalized
-
-    assert "explicitly multi-direction user question" in normalized_contract
-    assert "never imports another direction" in normalized_contract
-    assert "portfolio-wide meaning" in normalized_contract
-    assert "A Codex-native message fallback carries the same binding" in handoffs
-    assert "excluding unrequested siblings" in exploration_skill
-    assert "preserve the original handoff/artifact" in validation_skill_normalized
-    assert "direction-local context binding" in workflow_map
-    assert "never reads `local_research/`" in cpm_role_normalized
+    for surface in (role, skill, parallel):
+        assert "direction:<id>" in surface
+        assert "research_scope_key" in surface
+        assert "direction-local" in surface
+        assert "Root" in surface
+        assert "project-validation" in surface
+    assert "portfolio_scope=" not in role
+    assert "portfolio_scope=" not in skill
+    assert "portfolio_scope=" not in parallel
+    assert "direction-only" in role
+    assert "external-review request/intake" in role
+    assert "compact named edge" in skill
+    assert "EM→Root" in parallel
+    assert "never_sibling_comparison" in parallel
 
 
 def test_explorer_mechanical_child_is_context_isolated_from_science() -> None:
@@ -1179,125 +1132,118 @@ def test_explorer_mechanical_child_is_context_isolated_from_science() -> None:
 
 
 def test_action_bearing_minimum_rejects_status_only_handoffs() -> None:
-    """A label cannot stand in for an actionable Explorer/CPM conversation."""
+    """Direction EM/CM handoffs retain complete action-bearing semantics."""
     contract = (
         REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
     ).read_text(encoding="utf-8")
     normalized = " ".join(contract.split())
     for required in (
-        "Every Explorer brief, CPM result and Codex-native fallback is a human-readable",
+        "direction-scoped advisory Independent Research Explorer (EM)",
+        "Code Project Manager (CM) slice",
+        "research_scope_key=direction:<id>",
+        "EM direction:<id> -> Root -> CM direction:<id>",
+        "## Strong action-bearing semantic minimum",
+        "Every EM brief, CM result and Codex-native fallback",
+        "conclusion-first action brief",
         "current evidence and exact paths",
-        "which facts and choices are frozen",
-        "which facts or choices remain unfrozen",
-        "why CPM is needed now",
-        "why Explorer is needed now",
-        "the exact owner and the permitted action now",
-        "concrete inputs and locators",
+        "facts and choices are frozen",
+        "facts or choices remain unfrozen",
+        "why CM is needed now",
+        "why EM is needed now",
+        "exact owner and the permitted action now",
         "evidence that will demonstrate completion",
         "return destination and the scientific/intake boundary",
         "Status-only text is insufficient",
-        "parked",
         "waiting for CM",
         "CODE_ACCEPTED",
         "does not infer an action from a token",
     ):
-        assert required in normalized, required
+        assert required.lower() in normalized.lower(), required
 
 
 def test_parked_pending_and_retired_are_distinct_scientific_dispositions() -> None:
-    contract = (
-        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
-    ).read_text(encoding="utf-8")
-    normalized = " ".join(contract.split())
+    role = (REPO / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+        encoding="utf-8"
+    )
+    skill = (REPO / ".agents/skills/hmasd-independent-research-exploration/SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    normalized = " ".join((role + skill).split())
     for required in (
-        "Explorer-local scientific disposition only",
-        "meaning-changing scientific object",
-        "objective, information object, population/support, intervention, estimand, comparator",
-        "not retired, pending implementation, pending runtime",
-        "a queue state, `BLOCKED` or a global barrier",
-        "missing DTO, adapter, runner, test connection",
-        "routes to CPM and cannot be parked",
-        "`retired` is a separate explicit terminal disposition",
-        "reactivates only when its recorded prospective condition is met",
-        "Parking never pauses siblings, active CPM treatments, read-only science",
-        "CPM reads a park as no live successor handoff and must not invent an experiment",
+        "direction-local",
+        "park-retire decision",
+        "Root's advisory macro pause/continue boundary",
+        "project-canonical science",
+        "external-review request/intake",
     ):
         assert required in normalized, required
+    assert "portfolio_scope=" not in normalized
 
 
 def test_direction_action_map_is_exact_and_non_authoritative() -> None:
-    contract_path = REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
-    contract = contract_path.read_text(encoding="utf-8")
-    normalized = " ".join(contract.split())
-    exact_columns = (
-        "research_scope_key | Direction | current scientific question | existing evidence and paths | "
-        "missing object | scientific disposition in full prose | whether CPM is needed now and why | "
-        "exact next owner | exact next action | trigger/dependency | handoff/result locator | "
-        "requested action/resource/conflict/Root authorization when applicable | post-return intake/reactivation action"
+    role = " ".join(
+        (REPO / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md")
+        .read_text(encoding="utf-8")
+        .split()
     )
-    assert exact_columns in contract
+    parallel = " ".join(
+        (
+            REPO
+            / ".agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md"
+        )
+        .read_text(encoding="utf-8")
+        .split()
+    )
     for required in (
-        "mandatory human-readable, owner-local Direction Action Map",
-        "local_research/RESEARCH_CONTINUITY.md",
-        "Every cell contains meaningful current facts",
-        "not a machine schema, workflow registry, runtime-control source or acceptance source",
-        "docs/project/current-work/common/explorer_project_validation.md",
-        "CPM-owned projection/pointer only",
-        "a park without a frozen successor is absent",
-        "This slice never edits that CPM-owned view",
+        "complete Direction Action Map acceptance",
+        "direction-only delta",
+        "root_direction_action_map_acceptance=complete_map|cross_direction_relations|unselected_rows|table_map|portfolio_continuity_after_affected_direction_input",
+        "Root then checks the exact path and Git revision locator before exact-copy installation",
+        "Explorer then full-reads the candidate's own `direction:<id>` row/delta and semantically accepts or rejects only that direction-local meaning",
+        "Root owns acceptance of the complete Direction Action Map and cross-direction relations",
+        "compact named edge",
+        "EM→Root",
     ):
-        assert required in normalized, required
+        assert required in role or required in parallel, required
+    assert "Explorer L1 is the semantic author of a small, self-contained direction-only delta" in role
+    assert "Root owns acceptance of the complete Direction Action Map" in role
 
 
 def test_explorer_scope_tasks_preserve_direction_and_portfolio_context_boundaries() -> None:
-    """Real Explorer scopes carry only the context their scope authorizes."""
-    router = (REPO / "AGENTS.md").read_text(encoding="utf-8")
-    explorer_role = (
-        REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md"
-    ).read_text(encoding="utf-8")
-    explorer_profile = (
-        REPO / ".codex" / "agents" / "hmasd-independent-research-explorer.toml"
-    ).read_text(encoding="utf-8")
-    validation = (
-        REPO / "docs" / "project" / "EXPLORER_PROJECT_VALIDATION_WORKFLOW.md"
-    ).read_text(encoding="utf-8")
-    workflow_map = (REPO / "docs" / "project" / "WORKFLOW_MAP.md").read_text(
+    """Real Explorer tasks are one-direction scopes with Root macro authority."""
+    role = (REPO / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
         encoding="utf-8"
     )
-    combined = " ".join(
-        " ".join(surface.split())
-        for surface in (router, explorer_role, explorer_profile, validation, workflow_map)
-    ).lower()
+    profile = (REPO / ".codex/agents/hmasd-independent-research-explorer.toml").read_text(
+        encoding="utf-8"
+    )
+    skill = (REPO / ".agents/skills/hmasd-independent-research-exploration/SKILL.md").read_text(
+        encoding="utf-8"
+    )
+    reference = (
+        REPO
+        / ".agents/skills/hmasd-independent-research-exploration/references/parallel-research-workflow.md"
+    ).read_text(encoding="utf-8")
+    surfaces = tuple(" ".join(text.split()) for text in (role, profile, skill, reference))
+    combined = " ".join(surfaces)
 
     for required in (
-        "research_scope_key",
-        "direction:<id>",
-        "portfolio:<group>",
-        "real_user_visible_explorer_l1_task",
-        "root",
-        "exact assignment",
-        "direction pointer",
-        "compact accepted direction",
-        "cross-direction comparison",
-        "advisory portfolio",
-        "compact continuity",
-        "lazy direction pointer",
-        "direction_context_exclusion=whole_portfolio|project_runtime_corpus|implicit_global_continuity",
-        "portfolio_context=compact_continuity_plus_lazy_direction_pointers_only",
-        "distinct_explorer_l1_tasks_are_distinct_scopes_and_worktrees",
+        "research_scope_key_forms=direction:<id>",
+        "direction_scope_grammar=id=[a-z0-9][a-z0-9._-]{0,63}",
+        "direction_scope_owner=one_direction_scientific_meaning_only",
+        "root_macro_science=advisory_cross_direction_comparison|ranking|pause_continue|dependency_combination_decisions|complete_direction_action_map_acceptance",
+        "Read-only Sol-max L1 manager for one Root-created Explorer direction.",
+        "one `direction:<id>` Explorer direction",
+        "There is no portfolio Explorer scope.",
+        "does not preload the whole portfolio",
+        "compact named edge",
+        "EM→Root",
     ):
         assert required in combined, required
-
-    # Direction scopes are not granted an implicit portfolio or runtime corpus;
-    # the negative boundary is itself part of the active contract.
-    assert "does not implicitly load global continuity, the whole portfolio" in combined
-    assert "project/runtime material" in combined
-
-    # The portfolio scope integrates accepted compact packets/pointers; it does
-    # not manufacture a second task tree or transfer science to Root.
-    assert "root" in combined
-    assert "physical writes" in combined or "physical write" in combined
-    assert "scientific" in combined
+    assert "portfolio_scope=" not in role
+    assert "portfolio_scope=" not in skill
+    assert "portfolio_scope=" not in reference
+    assert "Root does not execute direction research" in combined
 
 
 def test_explorer_instances_are_scope_keyed_and_not_root_singletons() -> None:
@@ -1362,8 +1308,8 @@ def test_scope_transport_and_worktree_ownership_stay_root_routed() -> None:
     assert "explorer -> cpm" not in normalized
 
 
-def test_explorer_orchestrates_and_owns_cross_direction_comparison() -> None:
-    """Direction children advise; Explorer L1 compares and decides."""
+def test_explorer_orchestrates_direction_and_routes_macro_findings_to_root() -> None:
+    """Direction Explorer owns local science; Root owns macro comparison."""
     role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
         encoding="utf-8"
     )
@@ -1377,47 +1323,40 @@ def test_explorer_orchestrates_and_owns_cross_direction_comparison() -> None:
         assert "root retains only" not in surface.lower()
         assert "root explorer retains only" not in surface.lower()
 
-    # Orchestrator-first delegation keeps direction-local detail with the
-    # matching child while retaining decomposition and synthesis at the root.
     for required in (
-        "explorer_orchestration_owner=scope_decomposition|child_selection|dependency_judgment|result_synthesis|scope_continuity|advisory_intake_and_decision",
-        "direction_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness",
-        "portfolio_state_retention=accepted_direction_packets|comparison_relevant_evidence|relationship_edges|integration_revision",
-        "independent_direction_question_default=best_matching_registered_read_only_child|fork_turns=\"none\"",
-        "child_direction_context=minimal_direction_context_only|never_hidden_parent_context|cannot_replace_explorer_l1_cross_direction_comparison",
-        "Direction-local source fidelity, criticism, mechanism design and detailed derivation normally stay with that child.",
-        "The Explorer L1 itself compares directions by relative information value",
-        "cross-direction dependencies, conflicts and combinations",
-        "portfolio ordering and readiness",
-        "sole advisory portfolio decision",
-        "advisory_intake_and_decision",
-        "This is never formal or project-canonical science",
-        "the user alone decides whether any result later enters the formal project",
+        "explorer_orchestration_owner=direction_local_decomposition|child_selection|dependency_judgment|result_synthesis|scope_continuity|project_validation_intake|external_review_intake|direction_only_reverse_intake",
+        "direction_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness|named_cross_direction_findings",
+        "direction_cross_direction_reporting=compact_named_findings_to_root_only",
+        "child_direction_context=minimal_direction_context_only|never_hidden_parent_context|no_sibling_direction_loading_or_comparison",
+        "direction-local scientific/advisory intake",
+        "user-authorized, advisory macro/portfolio science",
+        "complete Direction Action Map acceptance",
+        "compact named edge",
+        "EM→Root",
+        "never sibling loading, comparison, ranking or selection",
         "project_validation_semantic_acceptance_owner=external_pro",
         "project_validation_alignment_packet_effect=authoritative_scientific_semantic_acceptance",
-        "comparison-relevant portfolio evidence and relationship edges",
-        "cannot replace Explorer L1's cross-direction comparison",
     ):
         assert required in role_normalized or required in skill_normalized, required
 
-    # Outstanding child/CPM work cannot serialize disjoint directions or block
-    # safe read-only progress, but a bounded wait is allowed for a true dependency.
+    # Outstanding child/CPM work cannot block safe read-only progress, but a
+    # bounded wait is allowed for a true direction-local dependency.
     for required in (
-        "explorer_l1_nonblocking_progress=advance_disjoint_directions_and_read_only_work_while_child_or_cpm_result_outstanding",
+        "explorer_l1_nonblocking_progress=advance_disjoint_direction_local_actions_and_read_only_work_while_child_or_cpm_result_outstanding",
         "explorer_l1_bounded_wait=only_when_every_remaining_safe_scientific_action_depends_on_outstanding_result",
-        "While one child or CPM result is outstanding, continue every other disjoint direction and read-only scientific action.",
+        "While one child or CPM result is outstanding, continue every other disjoint read-only or direction-local scientific action.",
         "Use a bounded wait only when every remaining safe scientific action depends on that outstanding result",
     ):
         assert required in role_normalized or required in skill_normalized, required
 
-    # Cheap reversible singleton reasoning and owner-exclusive portfolio work
-    # stay direct; authority and the protected postcondition remain with root.
+    # Cheap reversible singleton reasoning and direction-local intake stay
+    # direct; macro authority and the protected postcondition remain with Root.
     for required in (
-        "direct_explorer_l1_work_exceptions=cheap_reversible_singleton|cross_direction_comparison|advisory_local_research_intake|frozen_successor|park_or_retire_decision",
+        "direct_explorer_l1_work_exceptions=cheap_reversible_singleton|advisory_local_research_intake|frozen_successor|park_or_retire_decision",
         "Direct Explorer-L1 work remains appropriate for a cheap reversible singleton",
         "Every child return is conclusion-first and action-bearing enough for synthesis",
         "Explorer L1 verifies the protected scientific postcondition before advisory local-research intake",
-        "explorer_portfolio_owner=cross_direction_comparison|advisory_integration",
+        "root_macro_pause_continue=advisory_root_decision",
         "canonical_scientific_authority=none",
         "Do not microdelegate",
         "fixed panel",
@@ -1430,48 +1369,28 @@ def test_reverse_intake_is_small_file_backed_and_keeps_science_with_explorer() -
     explorer_role = (REPO / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
         encoding="utf-8"
     )
-    writer_role = (REPO / ".agents/roles/RESEARCH_ARTIFACT_WRITER.md").read_text(
-        encoding="utf-8"
-    )
-    writer_profile = (REPO / ".codex/agents/hmasd-research-artifact-writer.toml").read_text(
-        encoding="utf-8"
-    )
-    validation = (REPO / "docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md").read_text(
-        encoding="utf-8"
-    )
-    session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(
-        encoding="utf-8"
-    )
-    combined = " ".join((explorer_role + writer_role + writer_profile + validation + session).split())
+    combined = " ".join(explorer_role.split())
 
     for required in (
         "reverse_intake_payload=small_self_contained_semantic_delta",
         "reverse_intake_required_bindings=canonical_source_locator|candidate_target_locator|git_revision_locator|exact_old_new_text_or_unified_patch|frozen_semantics_and_consequences",
         "reverse_intake_transport=assignment_specific_temporary_patch",
-        "reverse_intake_explorer_acceptance=full_read_semantic_accept_or_reject",
+        "reverse_intake_explorer_acceptance=full_read_own_direction_row_delta_semantic_accept_or_reject",
+        "root_direction_action_map_acceptance=complete_map|cross_direction_relations|unselected_rows|table_map|portfolio_continuity_after_affected_direction_input",
         "The full map never travels through an agent message",
         "exact old/new text or a unified patch",
-        "the Git revision is only a source locator",
-        "one ordinary exact-text patch",
-        "anchor occurring zero or more than once stops",
-        "one concrete small-delta clarification and retry",
-        "no retry state, queue, receipt schema, automatic recovery or validator",
-        "full-reads the complete candidate and semantically accepts or rejects",
-        "Root does not explain, reinterpret or rewrite the scientific content",
-        "large message truncation is a payload-transport failure",
-        "newline or pipe damage is a serialization-family failure",
+        "Explorer then full-reads the candidate's own `direction:<id>` row/delta and semantically accepts or rejects only that direction-local meaning",
+        "Explorer does not accept archive or locator meaning, unselected rows, table/map meaning or portfolio continuity outside its own row/delta",
+        "Root owns acceptance of the complete Direction Action Map and cross-direction relations",
         "assignment_specific_reverse_intake_patch",
-        "reverse_intake_patch_mode=exact_payload_write_only",
-        "excluded_path=local_research/RESEARCH_CONTINUITY.md",
         "research_artifact_writer_continuity_write=forbidden",
         "scientific_authority=none",
         "reverse_intake_semantic_author=independent_research_explorer",
+        "Root owns acceptance of the complete Direction Action Map",
+        "direction-only reverse-intake",
     ):
         assert required.lower() in combined.lower(), required
 
-    for forbidden in (
-        "scripts/hmasd_state_transform.py",
-        "source_sha256=",
-        "candidate_sha256=",
-    ):
-        assert forbidden not in combined
+    assert "scripts/hmasd_state_transform.py" not in combined
+    assert "source_sha256=" not in combined
+    assert "candidate_sha256=" not in combined

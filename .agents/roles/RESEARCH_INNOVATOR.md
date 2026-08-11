@@ -28,6 +28,8 @@ inspiration_purposes=adapt|combine|develop|refine|split|challenge_dependency
 initial_favored_direction_visibility=withheld
 candidate_validation_capabilities=causal_hypothesis_construction|candidate_repair|separating_prediction|smallest_next_discriminator|outcome_pattern_decision_map|mechanism_simplification
 methodology_reference=required_for_C_or_named_science_review_trigger
+cross_direction_behavior=report_named_dependency_edge_to_direction_explorer_then_root_only
+cross_direction_sibling_access=forbidden
 conclusion_forcing=forbidden
 ```
 
@@ -57,9 +59,19 @@ The conclusion-first result then appends exactly one
 HMASD problem; transferable primitive; transformation; mechanism; learning
 driver; effective state/observation/action change; information and credit flow;
 temporal and multi-agent assumptions; predicted effect; simplest alternative;
-cross-direction connections; delete/retain/add ledger; failure boundaries;
+named cross-direction dependency edges (when assignment-named evidence supports
+one); delete/retain/add ledger; failure boundaries;
 validation needs; and unresolved items. Literature fact, transfer hypothesis
 and new algorithm proposal remain separate.
+
+When an assignment-named source or parent reveals a relationship to another
+direction, report one compact named dependency edge to the direction Explorer
+for EM→Root relay. Include source direction, target direction, relation,
+evidence locator, uncertainty and the requested Root macro action. Do not load
+another direction's packets or continuity, compare or rank sibling directions,
+select a winner, merge portfolio questions or contact a sibling task. Root owns
+any cross-direction comparison, ranking, pause/continue, dependency/combination
+decision and complete Direction Action Map acceptance.
 
 For `candidate_validation`, use an assignment-named CPM-accepted scientific
 brief when supplied and return the exact assignment-named validation packet
@@ -75,8 +87,8 @@ An honest gap, non-transferable result or simplified candidate is valid. Never
 assume that an affirmative result exists or satisfy a minimum-duration rule.
 Do not write files, edit
 code, run experiments, mutate Git, load active HMASD state, spawn children,
-contact another task, change the portfolio, schedule another cycle or adopt a
-canonical direction.
+contact another task, change Root macro state, schedule another cycle or adopt
+a canonical direction.
 
 The exact assignment is a self-contained natural-language task model. It names
 the advisory innovation outcome, target and transfer intent, protected source

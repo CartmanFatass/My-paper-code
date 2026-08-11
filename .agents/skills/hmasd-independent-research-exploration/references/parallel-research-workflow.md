@@ -2,16 +2,18 @@
 
 ```text
 research_scope_key=Root-created-user-visible-Explorer-L1-task
-scope_kinds=direction:<id>|portfolio:<group>
+scope_kinds=direction:<id>
+direction_scope_grammar=id=[a-z0-9][a-z0-9._-]{0,63}|no_path_separators|no_extra_colon|no_whitespace|nonempty|not_..
 direction_scope_owner=one_direction_scientific_meaning_only
-portfolio_scope_owner=cross_direction_comparison_and_advisory_integration
+root_macro_science=advisory_cross_direction_comparison|ranking|pause_continue|dependency_combination_decisions|complete_direction_action_map_acceptance
+root_macro_authorization=user_authorized_advisory_only
+root_macro_boundary=no_direction_research_execution|no_automatic_formal_or_project_canonical_science
 scope_startup=exact_assignment_and_named_pointers
 direction_global_continuity=not_implicitly_loaded
-portfolio_context=compact_accepted_direction_packets|lazy_direction_pointers
 scope_worktree=one-Root-managed-worktree-per-writable-L1
 l2_worktree_rule=all-exact-disjoint-writers-share-the-scope-worktree
-root_owner=user-interaction|progress|follow-up|interrupt|relay|lifecycle|physical-writes
-root_science_authority=none
+root_owner=user-interaction|progress|follow-up|interrupt|relay|lifecycle|physical-writes|macro-advisory-science
+root_science_authority=advisory_macro_portfolio_only_with_user_authorization
 cpm_relation=same-level-Root-sibling
 relay_bindings=research_scope_key|direction|candidate|revision
 external_pro_boundary=unchanged
@@ -31,7 +33,7 @@ semantic_writer=independent_research_explorer
 ordinary_artifact_writer=research_artifact_writer
 continuity_physical_writer=root_after_accepted_explorer_proposal
 automatic_formal_workflow_promotion=forbidden
-automatic_campaign_progression=allowed_until_convergence
+direction_campaign_progression=within_existing_explicit_authorization|root_macro_pause_continue
 unbounded_source_expansion=forbidden
 first_innovation_roster_independence_shielding=required
 adaptive_first_round_peer_reading=forbidden
@@ -40,7 +42,7 @@ research_child_default_fork_turns=none
 research_child_dispatch_contract=registered_agent_type|fork_turns="none"|self_contained_natural_language_assignment
 independent_direction_question_default=best_matching_registered_read_only_child|fork_turns="none"
 independent_direction_question_direct_explorer_l1_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task
-explorer_l1_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness
+explorer_l1_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness|named_cross_direction_findings
 cpm_accepted_result_interpretation=optional_direction_specific_read_only_child|technical_acceptance_not_repeated
 parent_conversation_history=background_only_not_task_authority
 restart_identity=role|model|current_task
@@ -59,25 +61,34 @@ reverse_intake_full_map_transport=forbidden
 reverse_intake_retry=one_concrete_delta_clarification_only
 shared_explorer_transport_profile=absent
 explorer_mechanical_scientific_effect=none
+direction_cross_direction_transport=compact_named_edge|EM_to_Root_only|never_sibling_comparison
 ```
 
 ## Scope-local startup and Root relay
 
 Root creates and displays each Explorer L1 task under its exact
-`research_scope_key`. A `direction:<id>` task loads only the exact Root
+`research_scope_key=direction:<id>`. The id is lowercase and path-safe,
+matching `[a-z0-9][a-z0-9._-]{0,63}` with no path separator, extra colon,
+whitespace, empty value or `..`. A direction task loads only the exact Root
 assignment and named direction pointers and owns that direction's scientific
 meaning. It does not implicitly load global continuity, the whole portfolio,
-or project/runtime material. A `portfolio:<group>` task is a separate L1 that
-receives compact accepted direction packets and pointers, owns cross-direction
-comparison and advisory integration, and may follow compact continuity or lazy
-direction pointers. Each L1 has a separate scope and worktree.
+or project/runtime material. There is no portfolio Explorer task or scope.
+Root owns user-authorized advisory macro/portfolio science: cross-direction
+comparison, ranking, pause/continue, dependency/combination decisions and
+complete Direction Action Map acceptance. Root does not execute direction
+research or automatically create formal/project-canonical science. Each L1 has
+a separate direction scope and worktree.
 
-Explorer returns one self-contained packet to Root. Root relays it to the
-relevant same-level CPM task and routes the reverse result back to the same
-scope. Both directions preserve `research_scope_key`, direction, candidate and
-revision. CPM is never nested under Explorer. Root owns user interaction,
-progress, follow-up, interruption, relay, lifecycle and physical writes; Root
-does not interpret scientific meaning.
+Explorer returns one self-contained direction packet to Root. When direction
+evidence names a cross-direction dependency, conflict or combination, the
+packet carries one compact named edge with source/target direction ids,
+relation, exact locator, uncertainty and requested Root macro action. Root
+relays it to the relevant same-level CPM task and routes the reverse result back
+to the same scope. Both directions preserve `research_scope_key`, direction,
+candidate and revision. CPM is never nested under Explorer. Root owns user
+interaction, progress, follow-up, interruption, relay, lifecycle, physical
+writes and macro acceptance; Explorer retains direction-local scientific
+meaning and never performs sibling comparison.
 
 When a scope needs writing, Root provisions exactly one managed worktree for
 that writable Explorer L1. Every exact disjoint L2 writer for that L1 uses the
@@ -99,9 +110,8 @@ Direction-specific answers and Explorer-to-CPM handoffs use the single
 direction-local context binding defined in
 `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. Resolve one primary
 selected direction and its smallest set of canonical decision/source context;
-load the smallest set of parent/child/cross-direction edges only when
-material. An explicitly multi-direction question may name several directions,
-but never preload or merge unrequested siblings or the whole portfolio. The
+load only an assignment-named cross-direction edge when materially required.
+Do not preload or merge sibling direction packets or the whole portfolio. The
 binding is semantic writing guidance covering the exact proposition, stage,
 source/evidence revision boundary, uncertainty, relationships, explicit
 sibling-direction exclusion unless explicitly named, requested action, direct
@@ -168,22 +178,21 @@ candidate validation.
 Mechanical literal-fact organization is outside every scientific roster and
 phase or adaptive barrier. Its child is not a peer, its output is not evidence
 for voting or priority, and completion order cannot affect scientific ordering
-or portfolio meaning. A singleton mechanical task has no campaign or research
+or direction meaning. A singleton mechanical task has no campaign or research
 state effect; Explorer alone performs semantic sufficiency intake and any
 scientific interpretation.
 
 ## Scope-local continuity
 
-Explorer L1 semantically proposes any needed continuity update at
-`local_research/RESEARCH_CONTINUITY.md`; Root alone physically writes it after
-the accepted proposal and revision check. A `direction:<id>` task does not
-implicitly load this global continuity entry: it loads only the exact Root
-assignment and named direction pointers. A `portfolio:<group>` task may load
-compact continuity and lazy direction pointers when its accepted comparison
-packet names that dependency. Continuity is navigation only; the real Explorer
-task tree remains authoritative.
+Explorer L1 semantically proposes any needed direction-local continuity update
+at `local_research/RESEARCH_CONTINUITY.md`; Root alone physically writes it
+after the accepted proposal and revision check. A `direction:<id>` task does
+not implicitly load this global continuity entry: it loads only the exact Root
+assignment and named direction pointers. Continuity is navigation only; the
+real Explorer task tree remains authoritative. Root owns any macro continuity
+or Direction Action Map acceptance.
 
-An accepted proposal records only the active scope's scientific and handoff
+An accepted proposal records only the active direction's scientific and handoff
 locators, dependency, next action and intake meaning. These are readable
 continuity cues, not a second workflow contract. Root remains the physical
 writer, and continuity does not alter scientific ordering, source authority,
@@ -255,24 +264,27 @@ no second procedure or validator.
    hidden equivalence, passive randomness, capacity or exposure confounds and
    partner co-adaptation. Formal proof and routine counterexample construction
    are not required in inspiration mode.
-9. **Portfolio update.** Preserve every useful candidate, parent and child.
-   Record source-result dependencies, mechanism and transfer edges, principle
-   analyses, corrections, validation maturity, parked reasons and reactivation
-    conditions. Choosing one direction never makes it the unique direction.
+9. **Direction update.** Preserve every useful local candidate, parent and
+   child. Record source-result dependencies, mechanism and transfer edges,
+   principle analyses, corrections, validation maturity, parked reasons and
+   reactivation conditions. A cross-direction implication is a compact named
+   edge returned EM→Root; Explorer never chooses among sibling directions.
 10. **Next-cycle opportunity map.** Record every material in-boundary
     `new_mechanism|transfer|combination|important_correction|subdirection_split|cross_direction_inspiration`
     opportunity. Each binds exact sources or parents, novelty delta, expected
-    portfolio effect, required role and completion condition. A transfer binds
+    direction-local effect, required role and completion condition. A transfer binds
     source and target contexts plus changed assumptions; a combination has at
     least two parents and a new interaction; a split has a distinct assumption,
     learning driver or prediction. Independent opportunities may run in
     parallel from an exact roster.
-11. **Convergence or continuation.** Continue while a material opportunity
-    remains inside the authorized boundary. Converge only after corpus coverage,
-    principles reviews, required adversarial reviews, corrections and all six
-    opportunity categories are closed. Resource exhaustion is partial, not
-    convergence. Return the multi-direction portfolio and exact residual gaps;
-    never force an affirmative result or automatically promote it.
+11. **Convergence or continuation.** Continue only inside the existing explicit
+    user authorization and Root's advisory macro pause/continue boundary while
+    a material direction-local opportunity remains. Converge only after corpus
+    coverage, principles reviews, required adversarial reviews, corrections and
+    all six opportunity categories are closed. Resource exhaustion is partial,
+    not convergence. Return the direction packet, named cross-direction edges
+    and exact residual gaps; never force an affirmative result or automatically
+    promote it.
 
 ## Scientific-only project-validation intake
 

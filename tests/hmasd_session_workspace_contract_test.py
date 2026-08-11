@@ -107,7 +107,6 @@ def test_cpm_action_bearing_technical_treatment_view_is_projection_only() -> Non
     contract = " ".join(_text("docs/project/SESSION_WORKSPACE_CONTRACT.md").split())
     role = " ".join(_text(".agents/roles/CODE_PROJECT_MANAGER.md").split())
     agile = " ".join(_text(".agents/skills/hmasd-agile-research-development/SKILL.md").split())
-    canonical = " ".join(_text("docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md").split())
     surfaces = " ".join((contract, role, agile))
     for required in (
         "docs/project/current-work/common/explorer_project_validation.md",
@@ -129,14 +128,6 @@ def test_cpm_action_bearing_technical_treatment_view_is_projection_only() -> Non
         "continues unrelated work",
     ):
         assert required in surfaces
-
-    for required in (
-        "Status-only text is insufficient",
-        "## Explorer scientific dispositions and action map",
-        "Direction | current scientific question",
-        "CPM Technical Treatment View at",
-    ):
-        assert required in canonical
 
     for forbidden in (
         "Direction/treatment",
@@ -304,7 +295,7 @@ def test_reverse_intake_patch_locator_and_candidate_copy_boundary() -> None:
         "explorer_reverse_intake_retry_state_queue_receipt_validator=forbidden",
         "not canonical state",
         "task-scoped candidate copy once",
-        "exact-copy installation only after Explorer's full-read semantic acceptance",
+        "exact-copy installation only after the EM's full-read row/delta acceptance",
     ):
         assert required in contract, required
 

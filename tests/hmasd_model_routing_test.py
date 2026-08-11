@@ -15,6 +15,8 @@ CONFIG = REPOSITORY_ROOT / ".codex" / "config.toml"
 ROUTER = REPOSITORY_ROOT / "AGENTS.md"
 VERIFIER_PROFILE = REPOSITORY_ROOT / ".codex" / "agents" / "hmasd-verifier.toml"
 VERIFIER_ROLE = REPOSITORY_ROOT / ".agents" / "roles" / "VERIFIER.md"
+REVIEWER_PROFILE = REPOSITORY_ROOT / ".codex" / "agents" / "hmasd-reviewer.toml"
+REVIEWER_ROLE = REPOSITORY_ROOT / ".agents" / "roles" / "REVIEWER.md"
 MECHANICAL_PROFILE = REPOSITORY_ROOT / ".codex" / "agents" / "hmasd-cpm-mechanical.toml"
 MECHANICAL_ROLE = REPOSITORY_ROOT / ".agents" / "roles" / "CPM_MECHANICAL_OPERATOR.md"
 EXPLORER_MECHANICAL_PROFILE = (
@@ -153,6 +155,36 @@ def test_verifier_registration_and_model_routing() -> None:
     assert VERIFIER_ROLE.is_file()
     role_text = VERIFIER_ROLE.read_text(encoding="utf-8")
     assert "role=verifier" in role_text
+
+
+def test_reviewer_is_scope_local_and_advisory() -> None:
+    with REVIEWER_PROFILE.open("rb") as stream:
+        profile = tomllib.load(stream)
+
+    assert profile["name"] == "hmasd-reviewer"
+    assert profile["model"] == "gpt-5.6-sol"
+    assert profile["model_reasoning_effort"] == "xhigh"
+    assert profile["sandbox_mode"] == "read-only"
+    assert profile["approval_policy"] == "never"
+    instructions = " ".join(str(profile["developer_instructions"]).split())
+    assert ".agents/roles/REVIEWER.md" in instructions
+
+    role_text = " ".join(REVIEWER_ROLE.read_text(encoding="utf-8").split())
+    for required in (
+        "authority=one_exact_read_only_scope_local_candidate_review",
+        "review_scope=one_scope_local_coherent_candidate_after_same_cpm_combines_l2_outputs",
+        "review_scope_boundary=no_cross_direction_union_review",
+        "review_acceptance=advisory_only",
+        "never performs a cross-direction or union review",
+        "owning CPM alone makes technical acceptance",
+    ):
+        assert required in role_text
+    for retired in (
+        "authority=one_exact_read_only_integrated_package_review",
+        "review_scope=coherent_integrated_batch_not_each_implementer",
+        "whole_integrated_diff_visibility=allowed",
+    ):
+        assert retired not in role_text
 
 
 def test_cpm_mechanical_registration_and_model_routing() -> None:

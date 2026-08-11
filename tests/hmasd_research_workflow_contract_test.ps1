@@ -160,22 +160,33 @@ $handoff = if (Test-Path -LiteralPath $handoffPath -PathType Leaf) {
 }
 
 $directionBindingTerms = @(
-    'direction-specific Explorer answer',
-    'selected direction identity',
+    'direction-specific EM answer',
+    'direction identity',
     'smallest set of canonical',
-    'parent/child/cross-direction',
-    'preloading or merging the whole portfolio',
+    'parent/child relationships',
+    'does not preload the portfolio',
     'candidate and exact current proposition',
     'source/evidence revision boundary',
     'explicit exclusion of sibling-direction generalization',
     'one requested action and its direct consumer',
     'completion evidence',
-    'CPM''s reverse result, returned through Root, begins with its conclusion',
-    'mirrors that same `research_scope_key`, primary direction or explicitly named direction set',
+    'CM''s reverse result, returned through Root, begins with its conclusion',
+    'mirrors that same `research_scope_key=direction:<id>`, direction, candidate',
     'Codex-native message fallback carries the same binding',
     'preserves the original handoff/artifact',
     'returns exactly one concrete semantic clarification',
-    'duplicate decision records')
+    'duplicate decision records',
+    'EM direction:<id> -> Root -> CM direction:<id>',
+    'CM direction:<id> -> Root -> EM direction:<id>',
+    'CM shared:<component>',
+    'exact proposition and revision',
+    'union Tests/Static checks are mechanical evidence only',
+    'Root splits those paths into separate CM assignments',
+    'each exact CM assignment covers one `direction:<id>` or one named `shared:<component>` only',
+    'never a direction set, multi-direction result or `shared:all`',
+    'cross-direction relations return to Root',
+    'exact scientific/dependency predecessors are closed',
+    'named paths and concrete resources do not conflict')
 
 if (-not (Test-Path -LiteralPath $explorerValidationSkillPath -PathType Leaf) -or
     -not (Test-Path -LiteralPath $explorerValidationContractPath -PathType Leaf) -or
@@ -198,15 +209,16 @@ foreach ($required in @(
     'reverse_intake_required_bindings=canonical_source_locator|candidate_target_locator|git_revision_locator|exact_old_new_text_or_unified_patch|frozen_semantics_and_consequences',
     'reverse_intake_transport=assignment_specific_temporary_patch',
     'reverse_intake_writer_skill_scope=role_and_assignment_only|no_explorer_mechanical_or_unrelated_skill',
-    'reverse_intake_explorer_acceptance=full_read_semantic_accept_or_reject',
     'reverse_intake_root_action=exact_path_and_git_revision_check_then_exact_copy_install',
     'state-proposals/<proposal>.patch',
-    'The full map never travels through an agent message',
+    'The full map and cross-direction relations never travel through an agent message',
     'one ordinary exact-text patch',
     'anchor occurring zero or more than once stops',
     'one concrete small-delta clarification and retry',
     'no retry state, queue, receipt schema, automatic recovery or validator',
-    'full-reads the complete candidate and semantically accepts or rejects',
+    'full-reads the candidate''s own row/delta and semantically accepts or rejects only its direction semantics',
+    'Root owns the complete map candidate and cross-direction relation acceptance',
+    'historical science bytes remain untouched',
     'Root does not explain, reinterpret or rewrite the scientific content',
     'large message truncation is a payload-transport failure',
     'newline or pipe damage is a serialization-family failure')) {
@@ -274,8 +286,7 @@ foreach ($required in @(
     'semantic writing aids, not required field names',
     'bounded safe read-only reconnaissance',
     'not a packet validator, dispatcher, queue engine or state machine',
-    'Known concerns are context for judgment, not mandatory headings or an expected verdict',
-    'CPM may process independent direction-local candidates concurrently')) {
+    'Known concerns are context for judgment, not mandatory headings or an expected verdict')) {
     if (-not $explorerValidationSkillNormalized.Contains($required)) {
         throw "Explorer semantic handoff Skill missing: $required"
     }
@@ -307,12 +318,12 @@ foreach ($entry in @(
     @($explorerValidationContract, 'current_work_mutation=forbidden'),
     @($explorerValidationContractNormalized, 'order is work organization rather than ranking or scientific comparison'),
     @($explorerValidationContractNormalized, 'Missing formatting or a prior mechanical BLOCKED receipt is not candidate evidence'),
-    @($explorerValidationContractNormalized, 'Explorer gives one clear instruction naming implementation, instance binding'),
+    @($explorerValidationContractNormalized, 'EM gives one clear instruction naming implementation, instance binding'),
     @($explorerValidationContractNormalized, 'without separate code or experiment permission fields'),
     @($explorerValidationContractNormalized, 'does not reject a handoff because of formatting or a missing object'),
     @($explorerValidationContractNormalized, 'or creates a `BLOCKED` state'),
     @($explorerValidationContractNormalized, 'External Pro uses the supplied repository/path locator and accepted revision'),
-    @($explorerValidationContractNormalized, 'Explorer never substitutes its own acceptance'),
+    @($explorerValidationContractNormalized, 'EM never substitutes its own acceptance'),
     @($explorerValidationContractNormalized, 'Ordinary B iteration may continue as advisory research without automatic Pro review'),
     @($proRole, 'cannot consume a formal iteration, update the CDC portfolio'),
     @($explorerValidationSkillNormalized, 'does not update the CDC portfolio'),
@@ -336,9 +347,9 @@ foreach ($required in @(
     'information gain',
     'next discriminator',
     'A/B/C or named-Pro action',
-    'exactly one advisory scientific decision proposal',
+    'exactly one direction-scoped advisory scientific decision proposal',
     'existing `local_research/` ownership',
-    'Portfolio, index, README and continuity',
+    'project/global indices, README and continuity',
     'pointer, navigation',
     'mandatory packet schema or validator gate',
     'ordinary B',
@@ -363,8 +374,7 @@ foreach ($required in @(
     'project_validation_packet_dependency=cpm_technical_acceptance_and_mechanically_verified_packet',
     'project_validation_technical_recompute=forbidden_unless_scientifically_ambiguous',
     'project_validation_technical_facts_not_recomputed=schema|readability|receipts|activity_counts|locators|retry|technical_consistency',
-    'canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership',
-    'portfolio_index_readme_continuity_role=lazy_pointer_navigation_only_not_task_tree')) {
+    'canonical_scientific_decision_record=one_per_candidate_under_existing_local_research_ownership')) {
     if (-not $independentResearchRole.Contains($required)) {
         throw "Explorer role scientific-only key missing: $required"
     }
@@ -380,7 +390,6 @@ foreach ($entry in @(
     @($independentResearchRole, 'agentify_transport_terminal_status=COMPLETE|ERROR'),
     @($independentResearchRole, 'agentify_transport_wait_visibility=silent_until_terminal_native_final'),
     @($independentResearchRole, 'direction_state_retention=direction_pointer|dependency|compact_returned_conclusion|cpm_readiness'),
-    @($independentResearchRole, 'portfolio_state_retention=accepted_direction_packets|comparison_relevant_evidence|relationship_edges|integration_revision'),
     @($independentResearchRole, 'independent_pro_review_result_path_guard=.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py'),
     @($independentResearchRole, 'independent_pro_review_result_guard_timing=after_terminal_before_read'),
     @($independentResearchRole, 'independent_pro_review_result_guard_failure=reject_actual_error_no_fallback'),
@@ -452,19 +461,19 @@ $scopeContractNormalized = ($scopeContractSurfaces -join ' ') -replace '\s+', ' 
 $scopeContractLower = $scopeContractNormalized.ToLowerInvariant()
 foreach ($required in @(
     'task_identity=real_user_visible_explorer_l1_task|research_scope_key',
-    'research_scope_key_forms=direction:<id>|portfolio:<group>',
-    'scope_creation=root_creates_one_named_task_per_scope_and_one_worktree_per_writable_scope',
-    'scope_isolation=distinct_explorer_l1_tasks_are_distinct_scopes_and_worktrees',
-    'direction_scope_owner=one_direction_scientific_meaning_only',
-    'portfolio_scope_owner=cross_direction_comparison_and_advisory_integration',
+    'research_scope_key=direction:<id>',
+    'Root creates a real user-visible EM task keyed by',
+    'For a writable scope, Root provisions exactly one managed worktree',
+    'EM owns one direction''s decomposition',
+    'Root owns advisory macro/portfolio science',
     'scope_startup=exact_assignment_and_named_pointers',
     'direction_context_exclusion=whole_portfolio|project_runtime_corpus|implicit_global_continuity',
-    'portfolio_context=compact_accepted_direction_packets|lazy_direction_pointers',
+    'does not implicitly load global continuity, the portfolio, another direction or project/runtime material',
     'root_owner=user-interaction|progress|follow-up|interrupt|relay|lifecycle|physical-writes',
     'cpm_relation=same-level-root-sibling',
     'relay_bindings=research_scope_key|direction|candidate|revision',
-    'explorer_to_root_to_cpm=scope_preserving_route',
-    'cpm_to_root_to_explorer=scope_preserving_reverse_route',
+    'EM direction:<id> -> Root -> CM direction:<id>',
+    'CM direction:<id> -> Root -> EM direction:<id>',
     'scope_worktree=one-root-managed-worktree-per-writable-l1',
     'l2_worktree_rule=all-exact-disjoint-writers-share-the-scope-worktree',
     'l2_workspace_lifecycle=none',
@@ -472,7 +481,7 @@ foreach ($required in @(
     'cpm is never nested under explorer',
     'Root owns user interaction',
     'cross-direction comparison',
-    'advisory integration')) {
+    'complete Direction Action Map and cross-direction relation acceptance')) {
     if (-not $scopeContractLower.Contains($required.ToLowerInvariant())) {
         throw "Explorer scope/task-tree contract missing: $required"
     }
@@ -498,10 +507,29 @@ foreach ($stale in @(
         throw "Retired fixed-pool/runtime admission vocabulary remains: $stale"
     }
 }
+foreach ($stale in @(
+    'capacity-admitted',
+    'capacity/admission',
+    'pool/admission',
+    'within available capacity',
+    'available capacity')) {
+    if ($publicHandoffContractNormalized.Contains($stale)) {
+        throw "Handoff retains capacity/pool admission vocabulary: $stale"
+    }
+}
 foreach ($required in @(
     'runtime_request=ordinary-prose-requested-action|required-resource|known-conflict|Root-confirmed-user-authorization',
     'serialization=exact-dependency-or-known-resource-or-mutable-path-conflict-only')) {
     if (-not $scopeContractLower.Contains($required.ToLowerInvariant())) {
+        throw "Explicit runtime-request contract missing: $required"
+    }
+}
+foreach ($required in @(
+    'fresh observed process/CPU/memory',
+    'no same mutable path or concrete resource conflict',
+    'does not create a runtime pool, reservation, ledger or scheduler',
+    'CM retains technical and runtime judgment')) {
+    if (-not $publicHandoffContractNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
         throw "Explicit runtime-request contract missing: $required"
     }
 }
@@ -589,8 +617,6 @@ foreach ($required in @(
     'root_top_level_owned_path_freeze=exclusive',
     'root_canonical_state_physical_write_authority=accepted_proposals_only',
     'root_final_git_integration_authority=accepted_paths_only',
-    'root_semantic_owner_authority=none',
-    'root_domain_acceptance_authority=none',
     'docs/project/CURRENT_WORK.md',
     'docs/project/WORKFLOW_MAP.md',
     'workflow_design_manager_parent=root',
@@ -781,7 +807,6 @@ foreach ($required in @(
     'adaptive_question_result_effect=consultation_only',
     'completion_order_priority=forbidden',
     'research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation',
-    'automatic_campaign_progression=allowed_until_convergence_within_authorized_boundary',
     'per_review_user_authorization=covered_by_Root_authorized_scope_grant',
     'wdm_campaign_approval=none',
     'unbounded_source_expansion=forbidden',
@@ -801,8 +826,7 @@ foreach ($required in @(
     'independent_pro_constructive_adversarial_barrier=required',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'Only that new version may support a',
-    'direction_scope=sole_semantic_owner_of_named_research_direction',
-    'portfolio_scope=compact_accepted_direction_packets_and_pointers|cross_direction_comparison|advisory_integration')) {
+    'direction_scope=sole_semantic_owner_of_named_research_direction')) {
     if (-not $independentResearchRoleNormalized.Contains($required)) {
         throw "Independent Research Explorer role missing: $required"
     }
@@ -832,7 +856,6 @@ foreach ($required in @(
     'no code, runtime, write, technical acceptance or formal scientific acceptance',
     'If evidence is sufficient and the next step is cheap and reversible, Explorer L1 decides directly.',
     'The child result is consultation only',
-    'the assigned Explorer remains the sole semantic local-research intake and decision owner for its scope; a portfolio Explorer additionally integrates',
     'First-round children see neither peer answers nor a favored answer',
     'completion order is not evidence priority',
     'disagreement is not voting',
@@ -853,9 +876,7 @@ foreach ($required in @(
     'not a fourth research mode or an automatic pipeline',
     'A child answer is advisory input to one Explorer decision',
     'Canonical campaign rosters, ordered barriers and single-writer authority remain unchanged.',
-    'best-matching registered read-only research child',
-    'For each direction, the compact continuity projection contains the direction pointer, exact dependency, compact returned conclusion and CPM readiness.',
-    'The Explorer L1 itself compares directions by relative information value, cross-direction dependencies, conflicts and combinations, portfolio ordering and readiness, and makes the sole Explorer-owned advisory portfolio decision.')) {
+    'best-matching registered read-only research child')) {
     if (-not $adaptiveSkillNormalized.Contains($required)) {
         throw "Independent research adaptive Skill contract missing: $required"
     }
@@ -919,11 +940,11 @@ foreach ($required in @(
 }
 foreach ($required in @(
     'does not recompute schema, readability, receipts, activity counts, locators',
-    'necessary to one Explorer decision',
+    'necessary to one EM direction decision',
     'Several read-only questions may run in parallel',
     'one result-bearing experiment active per direction by default',
     'Independent ordinary A/B treatments from different directions may overlap',
-    'exactly one CPM technical acceptance and one Explorer scientific intake',
+    'exactly one CM technical acceptance and one EM direction-scoped scientific intake',
     'ordinary B remains B and does not automatically invoke Pro',
     'consumes no formal iteration')) {
     if (-not $explorerValidationContractNormalized.Contains($required)) {
@@ -1122,8 +1143,8 @@ foreach ($required in @(
     'never design one backwards to make the candidate win',
     'current stage as `conjecture`, `derivation`, `algorithm implementation` or `experiment`',
     'real calls, transition, update and evaluation counts, observed result, strongest alternative explanation and next step',
-    'A missing DTO, adapter, runner hook, observation or lifecycle object is an engineering implementation task for CPM',
-    'Only a choice that changes the scientific question returns to Explorer',
+    'A missing DTO, adapter, runner hook, observation or lifecycle object is an engineering implementation task for CM',
+    'Only a choice that changes the direction''s scientific question returns to EM through Root',
     'Ordinary B iteration is nonformal and does not automatically initiate a Pro review',
     'direction-changing decision, material result ambiguity, final science alignment',
     'formal/conclusion-bearing C result')) {
@@ -1178,17 +1199,14 @@ foreach ($required in @(
     'persistent_explorer_progress=forbidden',
     'canonical_campaign_phase_barriers=required',
     'adaptive_singleton_global_barrier=none',
-    'An exact joint roster has a local merge barrier only when every named answer is a necessary input to one Explorer decision.',
     'completion_order_priority=forbidden',
     'semantic_writer=independent_research_explorer',
-    'automatic_campaign_progression=allowed_until_convergence',
     'first_innovation_roster_independence_shielding=required',
     'later_cycle_collaboration_brief=required',
     'research_child_default_fork_turns=none',
     'research_child_dispatch_contract=registered_agent_type|fork_turns="none"|self_contained_natural_language_assignment',
     'independent_direction_question_default=best_matching_registered_read_only_child|fork_turns="none"',
     'independent_direction_question_direct_explorer_l1_exception=cheap_reversible_singleton_when_dispatch_overhead_exceeds_task',
-    'cpm_accepted_result_interpretation=optional_direction_specific_read_only_child|technical_acceptance_not_repeated',
     'parent_conversation_history=background_only_not_task_authority',
     'SOURCE_RESULT_PACKET',
     'SOURCE_ABSORPTION_BRIEF',
@@ -1697,16 +1715,15 @@ foreach ($required in @(
 # the compact ownership boundary here; detailed behavior remains in owner
 # Roles and Skills.
 foreach ($required in @(
-    'Explorer and CPM are active owners/orchestrators, not passive relays',
     'decompose work and delegate bounded detail',
     'synthesize results, retain owner decisions',
     'continue unrelated safe work while children run',
-    'Explorer L1 owns decomposition, selection, dependency/concurrency, science synthesis and continuity semantics, cross-direction comparison',
-    'CPM retains architecture, scope-local runtime judgment, integration and technical acceptance',
-    'Explorer outputs remain advisory portfolio/local-research comparisons, intakes and decisions',
-    'Formal/project canonical science remains with the user/External Pro contract',
+    'EM owns one direction''s decomposition',
+    'CM owns project coordination, code, runtime and technical acceptance',
+    'EM remains advisory and owns only one direction''s scientific meaning',
+    'formal or project-canonical science',
     'Exact assignment, child-lane, waiting and recovery mechanics remain in the owner Roles and Skills',
-    'children provide bounded answers only and never replace Explorer L1''s cross-direction comparison',
+    'children provide bounded answers only and never replace EM''s direction-local',
     'without authorizing portfolio preload')) {
     if (-not $workflowOrchestrationSurfaces.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
         throw "Workflow orchestrator orientation missing: $required"

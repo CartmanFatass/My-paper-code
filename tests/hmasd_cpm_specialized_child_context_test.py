@@ -179,8 +179,8 @@ class SpecializedChildContextTest(unittest.TestCase):
         self.assertIn("semantic task authority", mechanical)
         self.assertIn("deterministic I/O anchors only", mechanical)
 
-    def test_multi_cpm_scope_and_no_runtime_pool_contract(self) -> None:
-        """Pin the active multi-CPM boundary without exercising runtime code."""
+    def test_scope_local_cpm_and_no_runtime_pool_contract(self) -> None:
+        """Pin scope ownership and mechanical union boundaries without runtime code."""
         agents = compact(read("AGENTS.md"))
         cpm = compact(read(".agents/roles/CODE_PROJECT_MANAGER.md"))
         agile = compact(read(".agents/skills/hmasd-agile-research-development/SKILL.md"))
@@ -189,12 +189,29 @@ class SpecializedChildContextTest(unittest.TestCase):
         for term in (
             "multiple_scoped_instances_per_root_tree=true",
             "cpm_instance_identity=code_scope_key",
+            "code_scope_key_grammar=direction:<id>|shared:<component>",
+            "scope_grammar=direction:<id>|shared:<component>",
+            "scope_atom_pattern=[a-z0-9][a-z0-9._-]{0,63}",
+            "scope_atom_rejections=empty|path_separator|extra_colon|whitespace|..",
+            "scope_ownership=direction_or_named_shared_component_only",
             "root_scope_dispatch=fork_turns=1|self_contained_assignment",
             "scoped_cpm_l2_fanout=registered_l2_within_depth_2",
-            "scope_technical_acceptance=code_project_manager",
-            "convergence_cpm=fresh_root_dispatch_after_scope_integration",
-            "convergence_assignment=self_contained_union",
-            "convergence_acceptance=overall_technical_and_runtime",
+            "scope_technical_acceptance=code_project_manager_final_for_exact_slice",
+            "integration_group_ownership=forbidden",
+            "code_union_manager=none",
+            "root_union_integration=mechanical_separate_root_managed_worktree",
+            "root_union_tests_static=mechanical_evidence_only",
+            "root_union_pass=mechanical_evidence_only",
+            "root_union_technical_acceptance=none",
+            "root_conflict_resolution=forbidden",
+            "semantic_conflict_route=owning_direction_cpm(s)",
+            "shared_scope_rule=temporary_named_shared_component_only",
+            "frozen_shared_dependency_access=direction_cm_read_only",
+            "frozen_shared_dependency_edit=temporary_named_shared_component_cpm_only",
+            "shared:all=forbidden",
+            "union_reviewer=forbidden",
+            "reviewer_scope=scope_local_only_advisory",
+            "execution_readiness_scope=exact_scope_only",
             "root_lifecycle_git_relay=exclusive",
             "tracked_writer_worktree=one_root_managed_worktree_per_writable_l1_assignment",
             "parallel_l2_writers_same_base_disjoint_paths=share_l1_worktree",
@@ -219,7 +236,22 @@ class SpecializedChildContextTest(unittest.TestCase):
         ):
             self.assertIn(term, active)
 
+        self.assertIn("Root must not resolve or rewrite conflicts", cpm)
+        self.assertIn("Root splits it into distinct `direction:<id>` CM assignments before dispatch", cpm)
+        self.assertIn("CPM never accepts a direction set", cpm)
+        self.assertIn("Cross-direction relations return through Root rather than entering a CM result", cpm)
+        self.assertIn("A direction CM may read a frozen shared dependency but never edit it", cpm)
+        self.assertIn("Any shared-component edit requires a separate temporary exact", agile)
+        self.assertIn("No extra union Reviewer", agile)
+        self.assertIn("review_scope=one_scope_local_coherent_candidate_after_same_cpm_combines_l2_outputs", compact(read(".agents/roles/REVIEWER.md")))
+        self.assertIn("review_acceptance=advisory_only", compact(read(".agents/roles/REVIEWER.md")))
+        self.assertNotIn("Convergence CPM", cpm + agile)
+        self.assertNotIn("integration:<group>", cpm + agile)
+
         for retired in (
+            "convergence_cpm=fresh_root_dispatch_after_scope_integration",
+            "convergence_assignment=self_contained_union",
+            "convergence_acceptance=overall_technical_and_runtime",
             "runtime_capacity_pool_units=3",
             "three-unit runtime pool",
             "runtime_admission_observation=stateless_per_admission",

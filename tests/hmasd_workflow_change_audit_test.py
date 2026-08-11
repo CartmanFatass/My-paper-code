@@ -204,6 +204,48 @@ def test_execution_policy_is_parallel_slice_first_with_root_convergence() -> Non
         assert stale not in normalized
 
 
+def test_direction_topology_keeps_wdm_convergence_and_forbids_cm_convergence() -> None:
+    lessons = (
+        REPO / "docs/H_read/2026-08-11_subagent_worktree_workflow_lessons.md"
+    ).read_text(encoding="utf-8")
+    session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(
+        encoding="utf-8"
+    )
+
+    for required in (
+        "direction_owner_topology=root_advisory_macro_portfolio_science",
+        "em_scope_key=direction:<id>",
+        "explorer_scope_key=direction:<id>",
+        "cm_scope_key=direction:<id>|shared:<component>",
+        "code_scope_key=direction:<id>|shared:<component>",
+        "portfolio_em=forbidden",
+        "integration_scope_key=forbidden",
+        "convergence_cm=forbidden",
+        "union_reviewer=forbidden",
+        "forbidden_scope_keys=portfolio:<group>|integration:<group>|convergence:<group>|shared:all",
+        "root_candidate_integration=mechanical_candidate_integration_only",
+        "root_union_validation=mechanical_tests_static_only",
+        "root_union_pass=mechanical_evidence_only",
+        "root_conflict_return=owning_cm_or_exact_shared_cm",
+        "cm_acceptance=final_for_its_scope_only",
+        "shared_scope_key=shared:<component>",
+        "shared_all_scope=forbidden",
+        "direction_flow_status=PENDING",
+        "research_execution=false",
+        "science_state_changed=false",
+    ):
+        assert required in lessons, required
+
+    assert _keyed_field(lessons, "wdm_union_convergence") == "kept_unchanged"
+    assert _keyed_field(lessons, "convergence_cm") == "forbidden"
+    assert _keyed_field(lessons, "union_reviewer") == "forbidden"
+    assert _keyed_field(lessons, "direction_flow_status") == "PENDING"
+    assert _keyed_field(session, "workflow_union_convergence") == (
+        "fresh_wdm_on_exact_integrated_union_arranges_advisory_review_and_owns_union_acceptance"
+    )
+    assert "direction_flow_status=COMPLETED" not in lessons
+
+
 def test_cpm_mechanical_child_is_file_bound_and_non_scientific() -> None:
     router = (REPO / "AGENTS.md").read_text(encoding="utf-8")
     session = (REPO / "docs/project/SESSION_WORKSPACE_CONTRACT.md").read_text(

@@ -10,8 +10,10 @@ description: Use when implementing, debugging, refactoring, or validating explor
 Read the root router, the role contract, and exact Root/CPM assignment brief. This procedure grants no
 science, formal compute, transport, or acceptance authority. External Pro owns
 scientific decisions. Code Project Manager alone accepts code, coordinates one
-`code_scope_key`, directs engineering repair, and makes scope-local technical and
-runtime judgments. Root owns agent lifecycle, cross-owner relay, physical
+exact `direction:<id>|shared:<component>` scope, directs engineering repair,
+and makes scope-local technical and runtime judgments. Each scope atom matches
+`[a-z0-9][a-z0-9._-]{0,63}`; empty values, path separators, extra colons,
+whitespace and `..` are invalid. Root owns agent lifecycle, cross-owner relay, physical
 canonical writes, managed-worktree lifecycle and Git mechanics. Costly runtime
 requires an explicit user task routed through Root. A bounded child requires an
 exact assignment and never scopes, accepts, or commits its work.
@@ -75,14 +77,16 @@ implementer: routine frozen engineering goes to
 `hmasd-implementer-terra`, while protected algorithm, numerical or training
 semantics go to `hmasd-implementer`. Use the registered code scout for interface
 mapping, `hmasd-cpm-mechanical` for deterministic fact organization, the
-Experiment Operator for an authorized experiment, one integrated Reviewer
-after coherent integration, and the Verifier only when the existing
-execution-readiness trigger fires.
+Experiment Operator for an authorized experiment, one scope-local advisory
+Reviewer after the same CPM combines its L2 outputs into one coherent
+scope-local candidate, and the Verifier only when the existing scope-local
+execution-readiness trigger fires. The Reviewer never performs a
+cross-direction or union review.
 
 The single simple fallback is direct execution of a cheap reversible singleton
 when delegation would add more coordination than the bounded work. CPM also
-acts directly for owner-exclusive architecture, integration, acceptance or Git
-decisions. There is no microdelegation threshold, rigid assignment schema,
+acts directly for owner-exclusive architecture, scope-local integration,
+acceptance or Git decisions. There is no microdelegation threshold, rigid assignment schema,
 passive relay path or completion-token acceptance; assignments remain
 natural-language contracts and CPM checks action-bearing conclusions and
 concrete postconditions.
@@ -95,12 +99,21 @@ exclusion and existing `fork_turns` contracts remain required; children never
 accept, stage, commit, push, change science, authorize costly runtime or update
 canonical CPM state. Root may dispatch multiple CPM L1 instances with caller
 action `fork_turns=1` and self-contained assignments; each scoped CPM may fan
-out registered L2 leaves within depth 2 and performs technical acceptance for
-its slice. After Root integrates accepted slices, Root dispatches a fresh
-Convergence CPM with a self-contained union assignment for overall technical
-and runtime acceptance. This path adds no scheduler, queue, registry, quota,
+out registered L2 leaves within depth 2 and performs final technical acceptance
+for its exact slice. Root may mechanically integrate accepted candidates in a
+separate Root-managed integration worktree and run union Tests/Static, but that
+Root union PASS is mechanical evidence only and creates no technical-semantic
+acceptance. Root
+must not resolve or rewrite physical or test-exposed semantic conflicts; they
+return to the owning direction CPM(s), or to a temporary named
+`shared:<component>` CPM for a shared dependency. No extra union Reviewer is
+created and no integration-group scope exists. This path adds no scheduler, queue, registry, quota,
 reservation, retry mechanism or runtime ledger, uses no time-triggered wake-up
 loop, and changes no science or runtime state.
+
+A direction CM may read a frozen shared dependency but never edit it. Any
+shared-component edit requires a separate temporary exact
+`shared:<component>` CM; `shared:all` is never valid.
 
 The upstream `using-superpowers` rule yields to user and `AGENTS.md`; the markers
 above explicitly disable it. Never invoke or chain generic Superpowers Skills.
@@ -346,12 +359,20 @@ slice.
   Root integrates accepted slices in a separate worktree. If an independent
   candidate or lifecycle is needed, Root creates a new writable L1 assignment;
   no L2 receives an independent worktree.
-- Root may dispatch multiple CPM L1 instances by unique `code_scope_key` with
-  caller action `fork_turns=1` and a self-contained assignment. Each scoped CPM
-  may fan out registered L2 leaves within depth 2 and technically accepts its
-  slice. After Root integrates accepted slices, Root dispatches a fresh
-  Convergence CPM with a self-contained union assignment for overall
-  technical/runtime acceptance.
+- Root may dispatch multiple CPM L1 instances by unique
+  `direction:<id>|shared:<component>` scope with caller action `fork_turns=1`
+  and a self-contained assignment. Each scope CPM may fan out registered L2
+  leaves within depth 2 and technically accepts its exact slice. Root may
+  mechanically integrate accepted candidates in a separate Root-managed
+  worktree and run union Tests/Static, but that Root union PASS is mechanical
+  evidence only and creates no technical-semantic acceptance. Root must not resolve or rewrite
+  conflicts; physical or test-exposed semantic conflicts return to the owning
+  direction CPM(s), or to a temporary named `shared:<component>` CPM for a
+  shared dependency. No extra union Reviewer or integration-group scope is
+  created.
+- A direction CM may read a frozen shared dependency but never edit it. Any
+  shared-component edit requires a separate temporary exact
+  `shared:<component>` CM; `shared:all` is never valid.
 - Root mechanically observes live processes, CPU, memory and concrete resource
   conflicts. CPM uses those observations for scope-local technical/runtime
   judgment. Path, worktree and code parallelism never authorize costly runtime;
@@ -381,11 +402,12 @@ slice.
 - Do not compute per-file hashes for handoff. Exact paths and the resulting Git
   revision, when Root separately creates one, are sufficient code identity.
 - Subtasks close on evidence plus one fresh Code Project Manager check. After
-  Code Project Manager integrates a coherent group of implementer changes, one
-  independent reviewer by default examines the complete integrated diff. Parallel
-  reviewers are allowed only for genuinely independent review questions, and
-  each may read the whole diff. Never review once per implementer and do not
-  create an automatic re-review loop. The required Pro code-science audit occurs
+  the same CPM combines its L2 outputs into one coherent scope-local candidate,
+  one independent advisory reviewer by default examines the complete candidate
+  for that exact scope. Parallel reviewers are allowed only for genuinely
+  independent questions within that scope. Never review once per implementer,
+  perform a cross-direction or union review, or create an automatic re-review
+  loop. The required Pro code-science audit occurs
   once after Code Project Manager implementation acceptance; it is a contract
   diff and owns scientific alignment, not code acceptance or implementation
   design. Verifier dispatch remains conditional on the existing readiness

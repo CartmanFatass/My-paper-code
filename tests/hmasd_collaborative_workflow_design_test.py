@@ -301,3 +301,49 @@ def test_scoped_slice_evidence_and_fresh_union_acceptance_are_distinct() -> None
     # test checks the ownership boundary, not execution of either pass.
     assert "current slice requires reviewer" not in surfaces
     assert "current slice requires convergence" not in surfaces
+
+
+def test_direction_scoped_owner_topology_is_keyed_and_pending() -> None:
+    lessons = (
+        REPO / "docs/H_read/2026-08-11_subagent_worktree_workflow_lessons.md"
+    ).read_text(encoding="utf-8")
+    router = ROUTER_PATH.read_text(encoding="utf-8")
+
+    for required in (
+        "direction_owner_topology=root_advisory_macro_portfolio_science",
+        "em_scope_key=direction:<id>",
+        "explorer_scope_key=direction:<id>",
+        "cm_scope_key=direction:<id>|shared:<component>",
+        "code_scope_key=direction:<id>|shared:<component>",
+        "portfolio_em=forbidden",
+        "integration_scope_key=forbidden",
+        "convergence_cm=forbidden",
+        "union_reviewer=forbidden",
+        "forbidden_scope_keys=portfolio:<group>|integration:<group>|convergence:<group>|shared:all",
+        "root_candidate_integration=mechanical_candidate_integration_only",
+        "root_union_validation=mechanical_tests_static_only",
+        "root_union_pass=mechanical_evidence_only",
+        "root_conflict_return=owning_cm_or_exact_shared_cm",
+        "cm_acceptance=final_for_its_scope_only",
+        "wdm_union_convergence=kept_unchanged",
+        "shared_scope_key=shared:<component>",
+        "shared_all_scope=forbidden",
+        "tracked_writer_worktree=one_writable_l1_worktree_shared_by_disjoint_l2_writers",
+        "tracked_writer_exemptions=read-only|ignored-only|temporary-only",
+        "root_user_external_formal_boundaries=preserved",
+        "direction_flow=EM->CM->Experiment->publish/reverse->external-review",
+        "direction_flow_status=PENDING",
+        "research_execution=false",
+        "science_state_changed=false",
+        "historical_scientific_conclusions=preserved_not_rewritten",
+    ):
+        assert required in lessons, required
+
+    assert "direction_flow_status=COMPLETED" not in lessons
+    assert "direction_flow_status=COMPLETE" not in lessons
+
+    for boundary in (
+        "root_user_interaction_authority=exclusive",
+        "root_cross_owner_relay_authority=exclusive",
+    ):
+        assert boundary in router, boundary

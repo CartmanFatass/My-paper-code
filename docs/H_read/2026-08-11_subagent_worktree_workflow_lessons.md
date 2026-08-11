@@ -151,3 +151,50 @@ Root 负责 receipt 的 provision、record、integrate、release 或 retain，�
 - **Root 后续闸门**：Root 完成 integration 与 canonical reload 后，仍需用合法的 `direction:smoke-a` 做 EM→mechanical re-smoke；本记录不替代该 pending 验证。
 - **等待纪律**：继续保持事件驱动的 10–15 分钟 mailbox wait，消息到达可提前返回；不得 busy polling，且等待不是新的调度或 acceptance 权限。
 - `research_execution=false`；`science_state_changed=false`；本节仅记录 topology、assignment boundary 与验证后续，不改变 science state。
+
+## Direction-scoped owner topology (2026-08-11 confirmed follow-on; PENDING)
+
+This section records the confirmed control-plane topology for direction-scoped
+owners. It is an additive workflow lesson, not a rewrite of the historical
+scientific conclusions above. Root remains the advisory macro/portfolio science
+surface; it does not become the scientific owner or accept a direction slice.
+The stable keyed contract is:
+
+```text
+direction_owner_topology=root_advisory_macro_portfolio_science
+em_scope_key=direction:<id>
+explorer_scope_key=direction:<id>
+cm_scope_key=direction:<id>|shared:<component>
+code_scope_key=direction:<id>|shared:<component>
+portfolio_em=forbidden
+integration_scope_key=forbidden
+convergence_cm=forbidden
+union_reviewer=forbidden
+forbidden_scope_keys=portfolio:<group>|integration:<group>|convergence:<group>|shared:all
+root_candidate_integration=mechanical_candidate_integration_only
+root_union_validation=mechanical_tests_static_only
+root_union_pass=mechanical_evidence_only
+root_conflict_return=owning_cm_or_exact_shared_cm
+cm_acceptance=final_for_its_scope_only
+wdm_union_convergence=kept_unchanged
+shared_dependency_edit=temporary_exact_shared:<component>
+shared_scope_key=shared:<component>
+shared_all_scope=forbidden
+tracked_writer_worktree=one_writable_l1_worktree_shared_by_disjoint_l2_writers
+tracked_writer_exemptions=read-only|ignored-only|temporary-only
+root_user_external_formal_boundaries=preserved
+direction_flow=EM->CM->Experiment->publish/reverse->external-review
+direction_flow_status=PENDING
+research_execution=false
+science_state_changed=false
+historical_scientific_conclusions=preserved_not_rewritten
+```
+
+The Root mechanical pass may combine candidate evidence and run union Tests or
+Static checks. A conflict or semantic failure is returned to the owning CM(s),
+or to the exact `shared:<component>` CM; Root's union PASS is mechanical
+evidence only. A direction or shared CM may make final acceptance only for its
+own scope. The upcoming EM → CM → Experiment → publish/reverse → external-review
+flow remains **PENDING** here: this lesson records its intended control-plane
+route and does not claim execution, publication, reverse intake, or external
+review completion.

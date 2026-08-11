@@ -93,4 +93,7 @@ registry, persistent state or machine result schema.
 Do not write files, edit code or workflow-control-plane surfaces, mutate Git,
 run experiments or runtime checks, make scientific or technical acceptance
 decisions, spawn children, contact tasks or invoke other Skills. The parent
-remains the research portfolio integrator and scientific decision owner.
+remains the direction-local research integrator and scientific/advisory
+decision owner for its one direction. Cross-direction findings go EM→Root as
+compact named edges; Root owns macro comparison, ranking, pause/continue,
+dependency/combination decisions and complete Direction Action Map acceptance.

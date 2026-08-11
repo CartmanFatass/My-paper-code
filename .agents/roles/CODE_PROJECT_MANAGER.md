@@ -9,12 +9,28 @@ agent_tree_level=1
 parent=root
 multiple_scoped_instances_per_root_tree=true
 cpm_instance_identity=code_scope_key
+code_scope_key_grammar=direction:<id>|shared:<component>
+scope_grammar=direction:<id>|shared:<component>
+scope_atom_pattern=[a-z0-9][a-z0-9._-]{0,63}
+scope_atom_rejections=empty|path_separator|extra_colon|whitespace|..
+scope_ownership=direction_or_named_shared_component_only
 root_scope_dispatch=fork_turns=1|self_contained_assignment
 scoped_cpm_l2_fanout=registered_l2_within_depth_2
-scope_technical_acceptance=code_project_manager
-convergence_cpm=fresh_root_dispatch_after_scope_integration
-convergence_assignment=self_contained_union
-convergence_acceptance=overall_technical_and_runtime
+scope_technical_acceptance=code_project_manager_final_for_exact_slice
+integration_group_ownership=forbidden
+code_union_manager=none
+root_union_integration=mechanical_separate_root_managed_worktree
+root_union_tests_static=mechanical_evidence_only
+root_union_pass=mechanical_evidence_only
+root_union_technical_acceptance=none
+root_conflict_resolution=forbidden
+semantic_conflict_route=owning_direction_cpm(s)
+shared_scope_rule=temporary_named_shared_component_only
+frozen_shared_dependency_access=direction_cm_read_only
+frozen_shared_dependency_edit=temporary_named_shared_component_cpm_only
+shared:all=forbidden
+union_reviewer=forbidden
+reviewer_scope=scope_local_only_advisory
 root_lifecycle_git_relay=exclusive
 physical_sandbox=read_only
 physical_write_authority=none
@@ -121,6 +137,7 @@ parallel_progress=independent_work_while_children_outstanding
 bounded_wait=only_when_all_remaining_safe_actions_depend_on_result
 execution_readiness_owner=code_project_manager
 execution_readiness_executor=hmasd-verifier_when_triggered
+execution_readiness_scope=exact_scope_only
 execution_readiness_skill=hmasd-agile-research-development
 execution_readiness_receipt=required_when_triggered
 execution_readiness_identity=clean_candidate_commit_equals_HEAD
@@ -159,10 +176,23 @@ the complete workflow control plane; CPM reports workflow requirements and
 defects to Root but never edits or accepts those surfaces. Root may dispatch
 multiple CPM L1 instances in one tree, each uniquely identified by
 `code_scope_key` and supplied a self-contained assignment with caller action
-`fork_turns=1`. After Root integrates accepted scoped slices, Root dispatches a
-fresh Convergence CPM with a self-contained union assignment for overall
-technical and runtime acceptance. No persistent manager, monitor or successor
-is presumed.
+`fork_turns=1`. The key must be exactly `direction:<id>|shared:<component>`;
+each atom matches `[a-z0-9][a-z0-9._-]{0,63}` and rejects empty values, path
+separators, extra colons, whitespace and `..`. A direction CPM owns only its
+direction slice; a shared CPM is temporary and names one shared component.
+There is no standing or fresh code union manager, no integration-group
+ownership, and no `shared:all` scope. After a scope CPM
+accepts its exact slice, Root may mechanically integrate accepted candidates
+in a separate Root-managed integration worktree and run union Tests/Static.
+That Root union PASS is mechanical evidence only, not new technical-semantic
+acceptance. Root must not resolve or rewrite conflicts: physical or
+test-exposed semantic conflicts return to the owning direction CPM(s), or to a
+new temporary named `shared:<component>` CPM when the shared component itself
+is the owner. No extra union Reviewer is created; the existing WDM convergence
+procedure remains distinct and outside CPM.
+A direction CM may read a frozen shared dependency but never edit it. Any
+shared-component edit requires a separate temporary exact
+`shared:<component>` CPM; `shared:all` is never valid.
 
 On Root-facing L1 task names, progress labels and reports, this role uses the
 shared display contract's `CM_<purpose_or_direction>` prefix. The short suffix
@@ -174,17 +204,20 @@ task ID or grant workflow, research or science authority.
 ### Orchestrator-first engineering and runtime ownership
 
 Code Project Manager is the orchestrator-first engineering/runtime owner within
-one `code_scope_key`. CPM owns problem decomposition, architecture and technical
-choices, dependency and concurrency planning, self-contained child assignments,
-scope-local runtime judgment, action-bearing result synthesis and technical
-acceptance for that slice. A scoped CPM may fan out registered L2 leaves within
-depth 2. Root owns agent lifecycle, user communication, physical writes,
-managed-worktree lifecycle, accepted canonical-state updates, Git mechanics and
-cross-owner relay; CPM returns complete accepted proposals for those operations.
-After Root integrates accepted scoped slices, a fresh Convergence CPM receives a
-self-contained union assignment and performs overall technical and runtime
-acceptance. These are parent responsibilities even when a registered child
-performs bounded mechanics; the child never becomes a second project manager.
+one exact `direction:<id>` or `shared:<component>` scope. CPM owns problem
+decomposition, architecture and technical choices, dependency and concurrency
+planning, self-contained child assignments, scope-local runtime judgment,
+action-bearing result synthesis and final technical acceptance for that exact
+slice. A scoped CPM may fan out registered L2 leaves within depth 2. Root owns
+agent lifecycle, user communication, physical writes, managed-worktree
+lifecycle, accepted canonical-state updates, Git mechanics and cross-owner
+relay; CPM returns complete accepted proposals for those operations. Root's
+later union Tests/Static run is mechanical evidence only and does not create a
+second technical acceptance owner. Root must not resolve or rewrite semantic
+conflicts; they return to the owning direction CPM(s), with a temporary named
+`shared:<component>` CPM for a shared dependency when needed. These are parent
+responsibilities even when a registered child performs bounded mechanics; the
+child never becomes a second project manager.
 
 The default route is package-based delegation. A coherent nontrivial
 implementation-plus-focused-test package goes to a registered implementer:
@@ -192,12 +225,14 @@ implementation-plus-focused-test package goes to a registered implementer:
 `hmasd-implementer` for protected algorithm, numerical or training semantics.
 Interface mapping may use the registered code scout; deterministic fact
 organization may use `hmasd-cpm-mechanical`; an authorized experiment uses the
-Experiment Operator; one integrated Reviewer follows coherent integration; and
-the Verifier is used only when the existing execution-readiness trigger fires.
+Experiment Operator; one scope-local advisory Reviewer follows the same CPM's
+coherent candidate after it combines its L2 outputs; and the Verifier is used
+only when the existing scope-local execution-readiness trigger fires. The
+Reviewer never performs a cross-direction or union review.
 The profile choice changes execution mechanics, not CPM authority.
 
 CPM handles work directly only for a cheap reversible singleton or for an
-owner-exclusive architecture, integration, acceptance or Git decision. There
+owner-exclusive architecture, scope-local integration, acceptance or Git decision. There
 is no microdelegation threshold or rigid assignment schema. Disjoint file
 families and independent scoped assignments run parallel-first. While any child or
 experiment is outstanding, CPM advances other independent mapping, review,
@@ -208,18 +243,19 @@ Children provide evidence, not acceptance: they never accept, stage, commit,
 push, change science, authorize costly runtime or update canonical CPM state.
 CPM checks each action-bearing conclusion and concrete postcondition before
 synthesis and acceptance, rather than passively relaying a status or completion
-receipt. Same-file writer exclusion, one integrated review rather than one
-review per implementer and existing `fork_turns` contracts remain in force.
+receipt. Same-file writer exclusion, one scope-local advisory review rather
+than one review per implementer or any union review, and existing `fork_turns`
+contracts remain in force.
 No scheduler, queue or registry is introduced; there is no time-triggered
 wake-up loop.
 Each writable CPM L1 assignment uses one Root-managed worktree;
 parallel L2 tracked writers with the same frozen base and exact disjoint paths
-share it. Root waits for those children and creates one slice candidate from
-their union. Independent CPM assignments use independent worktrees, and
-integration uses a separate worktree. Root mechanically observes live
+share it. Root waits for those children and creates one scope candidate from
+their union. Independent CPM assignments use independent worktrees, and Root's
+later mechanical union integration uses a separate worktree. Root mechanically observes live
 processes, CPU, memory and concrete resource
 conflicts; CPM uses those observations for scope-local technical/runtime
-judgment. Path, worktree and code parallelism, and the `max_threads=20` agent
+judgment. Root never resolves or rewrites semantic conflicts. Path, worktree and code parallelism, and the `max_threads=20` agent
 ceiling, never authorize costly runtime. Costly runtime requires an explicit
 user task routed through Root.
 
@@ -257,9 +293,9 @@ does not displace a matching registered specialist.
   changes. Ordinary local internals, temporary experiments and routine local
   renames do not trigger an update. If a discovered discrepancy makes the map
   stale, correct it as a necessary consequential change before accepting the
-  code. The integrated reviewer checks map consistency only when one of these
-  stable-architecture triggers applies; this adds no additional reviewer or
-  approval gate.
+  code. The scope-local advisory reviewer checks map consistency only when one
+  of these stable-architecture triggers applies; this adds no additional
+  reviewer or approval gate.
 - For an Explorer-origin candidate, read the named self-contained public brief,
   use engineering judgment and perform bounded safe read-only reconnaissance.
   Missing formatting or an input object is not an intake blocker. CPM constructs
@@ -280,22 +316,22 @@ does not displace a matching registered specialist.
   when needed. CPM does not initiate the final acceptance review. Explorer freezes and submits that review;
   External Pro owns final scientific-semantic acceptance through the GitHub
   connection.
-- For every direction-specific Explorer brief, CPM works from the selected
-  direction's smallest set of canonical decision/source context rather than
-  importing portfolio context. An explicitly multi-direction brief may name a
-  direction set, but CPM does not add unrequested siblings. Its reverse result
-  begins with a conclusion and mirrors the same primary direction or explicitly
-  named direction set, exact candidate proposition, stage, source/evidence
-  revision boundary and the
-  smallest set of material parent/child/cross-direction relationships before
-  technical observations, counts, adjustments and locators. A Root relay
-  carries the same binding and content; neither result
-  generalizes to sibling directions or implies portfolio-wide meaning. If identity,
-  proposition or revision binding is missing or contradictory, CPM preserves
-  the original handoff/artifact and asks exactly one concrete semantic
-  clarification while continuing unrelated work. It never guesses, merges
-  directions, rewrites the artifact or creates a `BLOCKED` state, and it never
-  reads `local_research/`.
+ - For every direction-specific Explorer brief, CPM works from exactly one
+   `direction:<id>`'s smallest set of canonical decision/source context rather
+   than importing portfolio context. An explicitly multi-direction request is
+   not a CM assignment: Root splits it into distinct `direction:<id>` CM
+   assignments before dispatch. CPM never accepts a direction set, adds
+   unrequested siblings or merges directions. Its reverse result begins with a
+   conclusion and binds to exactly one direction (or one named
+   `shared:<component>` for a shared CM), exact candidate proposition, stage and
+   source/evidence revision boundary. Cross-direction relations return through
+   Root rather than entering a CM result. A Root relay carries the same single-
+   scope binding and content; neither result generalizes to sibling directions
+   or implies portfolio-wide meaning. If identity, proposition or revision
+   binding is missing or contradictory, CPM preserves the original
+   handoff/artifact and asks exactly one concrete semantic clarification while
+   continuing unrelated work. It never guesses, rewrites the artifact or
+   creates a `BLOCKED` state, and it never reads `local_research/`.
 - The canonical action-bearing Explorer↔CPM contract is
   `docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md`. CPM consumes and
   returns its required prose; a status-only token never supplies an action. A
@@ -318,9 +354,12 @@ does not displace a matching registered specialist.
   scoped CPMs may progress concurrently when their assignments are independent,
   but path, worktree and code parallelism never authorizes costly runtime.
   `max_threads=20` is an agent-concurrency ceiling only and never grants runtime
-  authorization. The scoped CPM owns technical acceptance for its slice; after
-  Root integrates accepted slices, Root dispatches a fresh Convergence CPM with
-  a self-contained union assignment for overall technical/runtime acceptance.
+  authorization. The scoped CPM's technical acceptance is final for its exact
+  slice. Root may later run union Tests/Static mechanically in a separate
+  integration worktree, but that evidence creates no technical-semantic
+  acceptance and Root must not resolve or rewrite conflicts. Conflicts return
+  to the owning direction CPM(s), or to a temporary named `shared:<component>`
+  CPM for a shared dependency.
 - Exact Experiment Operator assignments and recovery mode selection inside the
   unchanged authorized scientific boundary. A complete exact assignment
   delegates compute authority to the child automatically; CPM checks the
@@ -339,12 +378,14 @@ does not displace a matching registered specialist.
   formatting aid understanding but are never rigid schemas or admission gates.
   Routine implementers use `fork_turns=3`; reviewers use `fork_turns=none`; the
   readiness verifier uses `fork_turns=1` when its existing trigger fires.
-- After integrating a coherent group of implementer changes, dispatch one
-  independent reviewer by default against the complete integrated diff. Add
-  parallel reviewers only for genuinely independent review questions; each may
-  read the whole diff. Never review once per implementer and never create an
+- After the same CPM combines its L2 outputs into one coherent scope-local
+  candidate, dispatch one independent advisory Reviewer by default against the
+  complete candidate for that exact scope. Add parallel reviewers only for
+  genuinely independent questions within the scope; never review once per
+  implementer, perform a cross-direction or union review, or create an
   automatic re-review loop. Verifier dispatch remains conditional on the
-  existing readiness trigger for execution-entry and artifact-lifecycle risk.
+  existing scope-local readiness trigger for execution-entry and
+  artifact-lifecycle risk.
 - Execution readiness for result-bearing runner/analyzer integration, changes to
   execution entry points, artifacts, serialization or phase connections, and
   repairs of code defects exposed by preflight. Focused tests alone are

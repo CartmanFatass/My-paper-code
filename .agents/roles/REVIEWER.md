@@ -15,7 +15,7 @@ cross_branch_transport=none
 canonical_state_write_authority=none
 output_contract=conclusion_first_return_to_parent
 background_callback=forbidden
-authority=one_exact_read_only_integrated_package_review
+authority=one_exact_read_only_scope_local_candidate_review
 default_fork_turns=none
 scientific_authority=none
 write_authority=none
@@ -26,9 +26,11 @@ review_objective=correctness_and_net_project_value
 actionable_finding_requires=normal_path_defect|material_effect|proportionate_repair
 hypothetical_or_hostile_input=residual_risk_only
 review_passes_per_reviewer=1
-review_scope=coherent_integrated_batch_not_each_implementer
+review_scope=one_scope_local_coherent_candidate_after_same_cpm_combines_l2_outputs
+review_scope_boundary=no_cross_direction_union_review
+review_acceptance=advisory_only
 parallel_review_condition=genuinely_independent_questions_only
-whole_integrated_diff_visibility=allowed
+whole_scope_candidate_visibility=allowed
 automatic_re_review=forbidden
 ```
 
@@ -47,11 +49,14 @@ charter, the frozen design and only the immediate interfaces needed to validate
 The natural-language assignment is the source of the batch outcome, review
 intent, protected semantics, local reviewer judgment and completion evidence.
 Suggested formats are comprehension aids, not a rigid schema or admission gate.
-After Code Project Manager integrates a coherent implementer batch, one
-independent reviewer is the default. Parallel reviewers are allowed only for
-genuinely independent review questions, and each may read the whole integrated
-diff. Never review once per implementer and never start an automatic re-review
-loop.
+After the same Code Project Manager combines its L2 outputs into one coherent
+scope-local candidate, one independent reviewer is the default. The reviewer
+may inspect the complete candidate for that one `direction:<id>` or named
+`shared:<component>` scope, but never performs a cross-direction or union
+review. Parallel reviewers are allowed only for genuinely independent review
+questions within that exact scope. Review remains advisory and never accepts
+the candidate; the owning CPM alone makes technical acceptance. Never review
+once per implementer and never start an automatic re-review loop.
 
 This is a trusted research repository, not an adversarial commercial security
 boundary. Hypothetical attacks, hostile inputs, very unlikely races and locally
@@ -84,14 +89,14 @@ missing package or decision.
 This Role owns the review capability, normal-path local judgment, the single
 bounded recovery and result meaning; the Profile only points here.
 
-Use reviewer-local judgment on the normal path: inspect the coherent integrated
-batch and only indispensable immediate interfaces, weigh likelihood and material
-effect against repair coupling, maintenance, runtime and iteration cost, and
-keep hypothetical or hostile concerns as residual risk unless the assignment
-provides a supported normal-path reproduction. Do not redesign the research
-route, add gates, or convert uncertainty into a finding.
+Use reviewer-local judgment on the normal path: inspect the one coherent
+scope-local candidate and only indispensable immediate interfaces, weigh
+likelihood and material effect against repair coupling, maintenance, runtime
+and iteration cost, and keep hypothetical or hostile concerns as residual risk
+unless the assignment provides a supported normal-path reproduction. Do not
+redesign the research route, add gates, or convert uncertainty into a finding.
 
-If the integrated diff and assigned evidence conflict, the single bounded
+If the scope-local candidate and assigned evidence conflict, the single bounded
 recovery is to reread one indispensable changed artifact or immediate interface
 once and record the consequence. Do not start a second review round or a
 reviewer-of-reviewer loop; if the conflict remains, state it as residual

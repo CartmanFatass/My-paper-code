@@ -24,8 +24,12 @@ file while unrelated work continues.
 
 After a local failure, CPM makes only a semantic choice: direct repair, a fresh
 authorized attempt, parking the affected workstream, or another legal action.
-Scientific ambiguity pauses one claim and path collision pauses one integration;
-neither stops the session while a legal action remains visible in owner records.
+Scientific ambiguity pauses one claim. A physical or test-exposed semantic
+conflict returns to the owning `direction:<id>` CPM(s); a named shared
+dependency may use only a temporary `shared:<component>` CPM. Root's union
+tests/static evidence is mechanical and cannot resolve or rewrite the conflict.
+Neither stops unrelated scope-local work while a legal action remains visible
+in owner records.
 
 `SESSION_BLOCKED` is an evidence conclusion requiring a global-integrity witness
 blocking every CPM action, or receipts showing every workstream has no legal action.

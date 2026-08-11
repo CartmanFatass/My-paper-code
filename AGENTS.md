@@ -58,7 +58,12 @@ root_agent_tree_and_lifecycle_authority=exclusive
 root_top_level_owned_path_freeze=exclusive
 root_canonical_state_physical_write_authority=accepted_proposals_only
 root_final_git_integration_authority=accepted_paths_only
-root_semantic_owner_authority=none
+root_semantic_owner_authority=macro_portfolio_advisory
+root_macro_portfolio_owner=Root
+root_advisory_portfolio_science_authority=cross_direction_compare|rank|pause_continue|dependencies|complete_map_acceptance
+root_direction_research_execution_authority=none
+root_code_technical_acceptance_authority=none
+root_formal_project_canonical_science_authority=user_external_pro
 root_domain_acceptance_authority=none
 
 workflow_design_manager_parent=root
@@ -76,12 +81,19 @@ code_project_manager_agent_tree_level=1
 code_project_manager_code_authority=exclusive
 code_project_manager_technical_acceptance_authority=exclusive
 code_project_manager_runtime_authority=exclusive
+code_project_manager_scope_key_field=code_scope_key
+code_project_manager_scope_key_forms=direction:<id>|shared:<component>
 
 independent_research_explorer_parent=root
 independent_research_explorer_role_kind=registered_task_scoped_level1_orchestrator
 independent_research_explorer_agent_tree_level=1
 independent_research_canonical_scientific_authority=none
 independent_research_user_grant_authority=direct_user_in_explorer_task_only
+independent_research_explorer_scope_key_field=research_scope_key
+independent_research_explorer_scope_key_forms=direction:<id>
+
+scope_key_safe_atom=[a-z0-9][a-z0-9._-]{0,63}
+scope_key_reject=empty|extra_colon|separators|whitespace|..
 
 level1_physical_write_authority=none
 level1_canonical_state_write_authority=none
@@ -108,8 +120,9 @@ is not canonical state until Root accepts and writes it.
 
 ```text
 workflow_change_request_route=Root->WDM
-code_runtime_request_route=Root->CPM
-research_request_route=Root->Explorer
+code_runtime_request_route=Root->CPM(direction:<id>|shared:<component>)
+research_request_route=Root->Explorer(direction:<id>)
+portfolio_advisory_route=Root-local-macro-portfolio
 cross_owner_route=owner->Root->owner
 cross_task_transport=return_to_root
 cross_task_transport_legacy=forbidden
@@ -139,6 +152,19 @@ convergence WDM over the exact integrated union; that WDM arranges coherent inte
 review and owns union semantic acceptance. A Workflow Reviewer is
 read-only/advisory and cannot accept; a slice packet does not
 claim integrated review or union acceptance.
+
+This explicit WDM workflow convergence is not a standing or fresh domain
+convergence lane and does not create an extra union Reviewer. Root owns the advisory
+macro/portfolio science surface: cross-direction comparison, ranking,
+pause/continue and dependency decisions, plus complete-map acceptance. An
+Explorer Manager (EM) is dispatched only for one `direction:<id>` and performs
+that direction's research execution. A Code Manager (CM) is dispatched only
+for `direction:<id>` or `shared:<component>`; its slice acceptance is final
+for that slice. Root mechanically integrates accepted direction/shared slices
+and runs union Tests/Static. A semantic conflict returns to the owning CM(s),
+or to a temporary named shared CM. Root does not become technical acceptance
+owner. Formal/project-canonical science remains at the user/External Pro
+boundary.
 
 Root-dispatched L1 user-facing task names, progress labels and report labels
 follow the defining `L1 user-facing display names` section of
@@ -258,6 +284,14 @@ The concise L1 startup index is
 inputs and action-triggered Skills without replacing the router, Role charters,
 profiles or scientific/current-work records. The index is pointer-only and is
 not a preload of every owner surface.
+
+Root starts macro/portfolio decisions from compact direction packets and lazy
+direction pointers. Each EM receives one named `direction:<id>` only. Each CM
+receives only its named `direction:<id>` or `shared:<component>` direct
+interfaces; portfolio preload and the all-shared scope are forbidden. Invalid domain
+scope families are represented only as
+`portfolio_scope|integration_scope|shared_all`; no standalone portfolio or
+integration owner is routable.
 
 | Trigger | Owner surface |
 |---|---|

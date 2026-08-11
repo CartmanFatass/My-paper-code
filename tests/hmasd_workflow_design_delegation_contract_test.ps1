@@ -23,11 +23,13 @@ $defectQueue = Read-RepoFile 'docs/session-workspaces/workflow_design_manager/WO
 $reverseValidation = Read-RepoFile 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
 $reverseExplorerRole = Read-RepoFile '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md'
 $reverseWriterRole = Read-RepoFile '.agents/roles/RESEARCH_ARTIFACT_WRITER.md'
+$lessons = Read-RepoFile 'docs/H_read/2026-08-11_subagent_worktree_workflow_lessons.md'
 $normalizedManager = ($manager -replace '\s+', ' ').ToLowerInvariant()
 $normalizedRouter = ($router -replace '\s+', ' ').ToLowerInvariant()
 $normalizedSessionContract = ($sessionContract -replace '\s+', ' ').ToLowerInvariant()
 $normalizedCollaborationSkill = ($collaborationSkill -replace '\s+', ' ').ToLowerInvariant()
 $normalizedReverseContract = (($reverseValidation + $reverseExplorerRole + $reverseWriterRole + $workflowMap + $defectQueue) -replace '\s+', ' ').ToLowerInvariant()
+$normalizedLessons = ($lessons -replace '\s+', ' ').ToLowerInvariant()
 
 function Get-SessionField([string]$Name) {
     $pattern = '(?m)^' + [regex]::Escape($Name) + '=(.+)$'
@@ -134,12 +136,34 @@ foreach ($required in @(
     'reverse_intake_payload=small_self_contained_semantic_delta',
     'reverse_intake_transport=assignment_specific_temporary_patch',
     'reverse_intake_writer=hmasd-research-artifact-writer',
-    'reverse_intake_explorer_acceptance=full_read_semantic_accept_or_reject',
+    'reverse_intake_explorer_acceptance=full_read_own_direction_row_delta_semantic_accept_or_reject',
     'reverse_intake_root_action=exact_path_and_git_revision_check_then_exact_copy_install',
     'WDM owns this owner/transport/order/path interface',
     'does not own artifact integrity, map meaning or Explorer acceptance')) {
     if (-not $normalizedReverseContract.Contains($required.ToLowerInvariant())) {
         throw "Workflow reverse-intake boundary missing: $required"
+    }
+}
+$explorerAcceptanceMatch = [regex]::Match(
+    $normalizedReverseContract,
+    '(?i)(?:^|\s)reverse_intake_explorer_acceptance=([^\s]+)')
+if (-not $explorerAcceptanceMatch.Success) {
+    throw 'Workflow reverse-intake boundary lacks keyed EM acceptance'
+}
+$explorerAcceptance = $explorerAcceptanceMatch.Groups[1].Value
+if ($explorerAcceptance -notmatch 'direction' -or
+    $explorerAcceptance -notmatch '(row|delta)' -or
+    $explorerAcceptance -notmatch '(only|own|scope)') {
+    throw "EM acceptance must be limited to its direction row/delta: $explorerAcceptance"
+}
+foreach ($requiredPattern in @(
+    '(?i)complete[ _-]?map',
+    '(?i)cross[ _-]?direction',
+    '(?i)unselected',
+    '(?i)table',
+    '(?i)continuity')) {
+    if ($normalizedReverseContract -notmatch $requiredPattern) {
+        throw "Root reverse-intake meaning contract missing: $requiredPattern"
     }
 }
 if (-not $defectQueue.Contains(
@@ -166,6 +190,42 @@ foreach ($required in @(
     if ((Get-SessionField $name) -cne $expected) {
         throw "Scoped WDM/convergence contract missing: $required"
     }
+}
+
+foreach ($required in @(
+    'direction_owner_topology=root_advisory_macro_portfolio_science',
+    'em_scope_key=direction:<id>',
+    'explorer_scope_key=direction:<id>',
+    'cm_scope_key=direction:<id>|shared:<component>',
+    'code_scope_key=direction:<id>|shared:<component>',
+    'portfolio_em=forbidden',
+    'integration_scope_key=forbidden',
+    'convergence_cm=forbidden',
+    'union_reviewer=forbidden',
+    'forbidden_scope_keys=portfolio:<group>|integration:<group>|convergence:<group>|shared:all',
+    'root_candidate_integration=mechanical_candidate_integration_only',
+    'root_union_validation=mechanical_tests_static_only',
+    'root_union_pass=mechanical_evidence_only',
+    'root_conflict_return=owning_cm_or_exact_shared_cm',
+    'cm_acceptance=final_for_its_scope_only',
+    'wdm_union_convergence=kept_unchanged',
+    'shared_scope_key=shared:<component>',
+    'shared_all_scope=forbidden',
+    'tracked_writer_worktree=one_writable_l1_worktree_shared_by_disjoint_l2_writers',
+    'tracked_writer_exemptions=read-only|ignored-only|temporary-only',
+    'root_user_external_formal_boundaries=preserved',
+    'direction_flow=EM->CM->Experiment->publish/reverse->external-review',
+    'direction_flow_status=pending',
+    'research_execution=false',
+    'science_state_changed=false',
+    'historical_scientific_conclusions=preserved_not_rewritten')) {
+    if (-not $normalizedLessons.Contains($required.ToLowerInvariant())) {
+        throw "Direction-scoped topology lesson missing: $required"
+    }
+}
+if ($normalizedLessons.Contains('direction_flow_status=completed') -or
+    $normalizedLessons.Contains('direction_flow_status=complete')) {
+    throw 'Direction-scoped EM-to-external-review flow must remain PENDING'
 }
 foreach ($required in @('simple_operation_active_engineering_budget_minutes=20','simple_operation_failed_probe_budget=2')) {
     if (-not $skill.Contains($required)) { throw "Workflow audit Skill missing simple-operation budget: $required" }

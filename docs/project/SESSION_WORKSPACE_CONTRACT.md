@@ -20,10 +20,21 @@ l1_internal_task_id_rule=immutable_internal_id_may_differ_from_user_facing_label
 l1_wm_display_semantics=workflow_control_plane_only|research_routing_target_allowed|research_execution_not_implied
 l1_em_display_semantics=independent_research_execution_for_named_direction
 l1_cm_display_semantics=code_project_execution_for_named_purpose_or_direction
+l1_em_scope_key_forms=direction:<id>
+l1_cm_scope_key_forms=direction:<id>|shared:<component>
+l1_scope_key_safe_atom=[a-z0-9][a-z0-9._-]{0,63}
+l1_scope_key_reject=empty|extra_colon|separators|whitespace|..
 l1_user_facing_clarity_fields=research_execution|science_state_changed
 l1_wm_research_routing_defaults=research_execution=false|science_state_changed=false
 l1_wm_status_exception=separate_authorized_em_science_result_must_exist_for_any_true_research_or_science_claim
 l1_display_name_change_effect=research_execution=false|science_state_changed=false
+root_macro_portfolio_owner=Root
+root_macro_portfolio_science_authority=cross_direction_compare|rank|pause_continue|dependencies|complete_map_acceptance
+root_direction_research_execution_owner=independent_research_explorer(direction:<id>)
+root_code_technical_acceptance_owner=code_project_manager(direction:<id>|shared:<component>)
+direction_research_execution_owner=EM(direction:<id>)
+direction_code_technical_acceptance_owner=CM(direction:<id>|shared:<component>)
+root_formal_project_canonical_science_boundary=user_external_pro
 workflow_role_label=workflow_design_manager
 owner_l1_multiplicity=role_defined_scope_keyed_within_root_tree
 owner_scope_key_uniqueness=one_l1_per(role,role_defined_scope_key)_within_root_tree
@@ -77,12 +88,24 @@ workflow_candidate_integration=Root_records_and_integrates_candidate_set_after_a
 workflow_union_convergence=fresh_wdm_on_exact_integrated_union_arranges_advisory_review_and_owns_union_acceptance
 workflow_reviewer_authority=advice_only_no_acceptance
 workflow_union_acceptance_not_implied_by=slice_candidate|Root_integration|Reviewer_advice|commit
+workflow_convergence_owner=WDM_only_explicit_workflow_convergence
+workflow_domain_convergence=forbidden_standing_or_fresh
+workflow_extra_union_reviewer=forbidden
+direction_shared_slice_acceptance=owning_CM_final_for_slice
+direction_shared_root_integration=Root_mechanical_only
+direction_shared_union_checks=Root_union_Tests_and_Static
+direction_shared_conflict_route=owning_CM_or_temporary_named_shared_CM
+direction_shared_forbidden_scopes=portfolio_scope|integration_scope|shared_all
 workflow_validation_layers=slice_local|integration_cross_slice|runtime_fresh_smoke_after_root_integration_reload
 workflow_validation_ownership=slice_local:writer|integration_cross_slice:WDM|runtime_fresh_smoke_after_root_integration_reload:Root
 workflow_writer_validation_scope=owned_paths|smallest_affected_contracts
 workflow_writer_full_suite=forbidden
 workflow_wdm_integration_suite=exactly_one_after_WRITES_COMPLETE_and_writes_freeze
 workflow_root_runtime_smoke=Root_only_after_integration_and_canonical_reload
+root_direction_context=compact_direction_packets|lazy_direction_pointers
+em_direction_context=one_named_direction_only
+cm_direction_context=direct_direction_or_shared_interfaces_only
+portfolio_context_preload=forbidden
 workflow_validation_failure_classes=environment_setup|product_assertion
 workflow_environment_setup_recovery=same_layer_rerun_without_retry_state
 workflow_product_failure_recovery=repair_causal_contract_or_implementation
@@ -210,6 +233,14 @@ retains managed worktrees, and physically writes canonical state only after the
 owning L1 accepts a proposal. A scope key is not a live session, thread,
 continuity or admission identity. The helper is a Root-controlled lifecycle
 tool, not a child identity, ticket, Git authority or admission substitute.
+Root owns the advisory macro/portfolio science surface, including
+cross-direction comparison, ranking, pause/continue and dependencies, and
+complete-map acceptance. EM receives only one `direction:<id>` and owns that
+direction's research execution; CM receives only `direction:<id>` or
+`shared:<component>` and owns final acceptance for its slice. Root mechanically
+integrates accepted slices and runs union Tests/Static. Semantic conflicts
+return to the owning CM(s), or a temporary named shared CM. Formal/project-
+canonical science remains at the user/External Pro boundary.
 
 ## Assignment and write boundaries
 
@@ -268,12 +299,16 @@ does not write another role's workspace. Root controls relay and lifecycle for
 temporary bytes. No hash, byte count or digest is required for a handoff.
 
 The Explorer reverse-intake patch is an assignment-specific temporary proposal,
-not canonical state. Its brief carries one small semantic delta and the exact
-locators and old/new text needed to apply it; the full Direction Action Map is
-never moved through an agent message or split/encoded payload. The Writer uses
-only the exact destination and local UTF-8/LF checks. Root retains the canonical
+not canonical state. The EM authors and semantically accepts only one small
+`direction:<id>` row/delta for its own exact direction assignment. Its brief
+carries that delta and the exact locators and old/new text needed to apply it;
+the full Direction Action Map is never moved through an agent message or
+split/encoded payload. The Writer uses only the exact destination and local
+UTF-8/LF checks. Root alone accepts the complete Direction Action Map, its
+cross-direction relations, unselected rows, table/map consistency and
+portfolio continuity after the affected EM input. Root retains the canonical
 source, patches a task-scoped candidate copy once, and performs exact-copy
-installation only after Explorer's full-read semantic acceptance and Root's
+installation only after the EM's full-read row/delta acceptance and Root's
 path/revision check. An anchor failure preserves the original and permits one
 concrete clarification only; this contract defines no retry state, queue,
 receipt schema, automatic recovery or validator.
@@ -329,6 +364,11 @@ the exchange.
 under `docs/project/current-work/sessions/<role_id>.md` and common records under
 `docs/project/current-work/common/<record-id>.md`; active state is not duplicated in the
 index.
+
+The existing Explorer compatibility pointer is reused for Root's macro/portfolio
+surface; there is no portfolio L1. Direction pointers name one `direction:<id>`
+EM scope, and current-work/index surfaces remain pointer-only without copying
+scientific state or history bytes.
 
 All registered owner tasks may read the index and the records relevant to their
 assignment. A task may edit only its own role record and common records whose
