@@ -315,9 +315,11 @@ The user clarified that `$hmasd-writing-agent-assignments` must not treat
 natural-language sufficiency as a replacement for mechanical reporting. Every
 actionable Root-to-L1, L1-to-L2, progress or terminal message needs two layers:
 
-1. **TL;DR and ELI18 meaning first.** Explain what is requested or what
-   happened, why it matters, the concrete relationship involved, and who acts
-   next. Define non-obvious local terms before relying on them.
+1. **Complete natural-language meaning first.** Explain what is requested or
+   what happened, why it matters, the concrete relationship involved, and who
+   acts next. Define non-obvious local terms before relying on them. Do not
+   require `TL;DR`, `ELI18` or another fixed heading, and do not repeat this
+   writing rule in every progress message; apply it directly to the task.
 2. **A compact mechanical facts tail second.** Pin the explanation to the
    smallest task-relevant facts that another agent or script can check.
 
