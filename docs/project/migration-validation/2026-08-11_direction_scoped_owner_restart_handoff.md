@@ -102,6 +102,13 @@ Recovery refs:
 - `refs/hmasd/root-managed-recovery/cm_shared_project_operations_index_f1`
 - `refs/hmasd/root-managed-recovery/wm_direction_union_contract_repair_f1`
 
+The later format-free communication-contract candidate was integrated as
+`5818fa18`. Its checkout was removed and its uniquely protected candidate is
+retained for audit:
+
+- receipt: `temp/sessions/workflow_design_manager/managed-worktrees/wm_plain_language_contract_f1.json`;
+- recovery ref: `refs/hmasd/root-managed-recovery/wm_plain_language_contract_f1`.
+
 Two disposable external pytest roots remain because the command runner blocked
 the attempted recursive deletion even after exact-path validation:
 
@@ -309,7 +316,7 @@ This requirement is recorded only; it is not implemented by the current
 direction-flow smoke, but it should be completed before the next broad,
 multi-candidate control-plane redesign.
 
-## Future requirement: plain language plus mechanical facts
+## Implemented requirement: complete meaning plus mechanical facts
 
 The user clarified that `$hmasd-writing-agent-assignments` must not treat
 natural-language sufficiency as a replacement for mechanical reporting. Every
@@ -347,10 +354,13 @@ owns the decision. The semantic owner checks the explanation; deterministic
 tests or direct observations check the mechanical facts. Neither layer replaces
 the other.
 
-The current `WM_plain_language_contract` task may preserve this two-layer rule
-within its existing nine-file scope, but this handoff records it explicitly so
+`WM_plain_language_contract` implemented this two-layer rule in commit
+`5818fa18`. The accepted contract is format-free: it requires neither
+`TL;DR`/`ELI18` labels nor another fixed heading, sentence count or repeated
+template. It requires agents to apply the complete-meaning rule directly and
+then append only the useful mechanical facts. This handoff retains the rule so
 future assignment and route-table work cannot regress to natural-language-only
-reporting.
+or fields-only reporting.
 
 ## Workflow-efficiency follow-up (not a restart blocker)
 
