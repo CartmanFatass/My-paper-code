@@ -1,0 +1,1291 @@
+"""Self-contained VSP06-B2 authenticated partner-recall learning candidate.
+
+No function in this module runs at import time.  The four-action toy and both
+matched arms are local to this file and do not alter ``ha_ctse_process``.
+Canonical catalog generation, selector invocation, and a registered full are
+separate lifecycle stages; tests use only explicitly noncanonical rows.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import random
+import stat
+import traceback
+from typing import Any, Iterable, Iterator, Mapping, Sequence
+
+
+TREATMENT_ID = (
+    "VSP06-B2-AUTHENTICATED-PARTNER-RECALL-CREDIT-EFFICIENCY-"
+    "SOURCE-BOUND-EXACT-FEASIBILITY"
+)
+ENVIRONMENT_ID = "AuthenticatedPartnerRecallRelay-v0"
+RESOURCE_CLASS = "B_TOY_LIGHT"
+CANDIDATE_ARM = "MSSR_P_FIXED_VALIDITY_CARRIER"
+GENERIC_ARM = "GENERIC_PROVENANCE_CONDITIONED_CARRIER"
+ARMS = (CANDIDATE_ARM, GENERIC_ARM)
+BRANCHES = ("KEEP", "RESET", "CURRENT")
+ACTIONS = (0, 1, 2, 3)
+CHECKPOINTS = (0, 512, 1024, 1536, 2048, 2560, 3072, 4096)
+OBSERVATION_DIM = 32
+CONTEXT_DIM = 64
+CARRIER_DIM = 32
+EPISODES_PER_BATCH = 128
+PPO_EPOCHS = 4
+
+SEEDS = {
+    "calibration": {"environment": 8100501, "initialization": 8100502, "minibatch": 8100503, "evaluation": 8100504},
+    "primary_1": {"environment": 8100611, "initialization": 8100612, "minibatch": 8100613, "evaluation": 8100614},
+    "primary_2": {"environment": 8100621, "initialization": 8100622, "minibatch": 8100623, "evaluation": 8100624},
+    "primary_3": {"environment": 8100631, "initialization": 8100632, "minibatch": 8100633, "evaluation": 8100634},
+    "primary_4": {"environment": 8100641, "initialization": 8100642, "minibatch": 8100643, "evaluation": 8100644},
+}
+
+PPO = {
+    "episodes_per_arm_seed": 4096,
+    "episodes_per_batch": EPISODES_PER_BATCH,
+    "epochs_per_batch": PPO_EPOCHS,
+    "recurrent_truncation": False,
+    "recurrent_detachment": False,
+    "optimizer": "Adam",
+    "lr": 0.0003,
+    "epsilon": 0.00001,
+    "weight_decay": 0,
+    "max_gradient_norm": 0.5,
+    "gamma": 1,
+    "gae_lambda": 1,
+    "clip": 0.2,
+    "entropy_coefficient": 0.01,
+    "value_coefficient": 0.5,
+    "advantage_normalization": "per_complete_batch",
+}
+
+CAPS = {
+    "model_fits": 10,
+    "trainer_invocations": 10,
+    "environment_episodes": 44300,
+    "environment_transitions": 520000,
+    "production_policy_forwards": 540000,
+    "learner_updates": 1100,
+    "optimizer_steps": 1100,
+    "evaluator_calls": 75,
+    "evaluation_episodes": 10500,
+    "sweeps": 0,
+    "retries": 0,
+    "rescues": 0,
+    "extra_roots": 0,
+}
+
+EXPECTED_FULL_ACTIVITY = {
+    "model_fits": 10,
+    "trainer_invocations": 10,
+    "environment_episodes": 44288,
+    "environment_transitions": 440320,
+    "production_policy_forwards": 473280,
+    "learner_updates": 1056,
+    "optimizer_steps": 1056,
+    "evaluator_calls": 74,
+    "evaluation_episodes": 10496,
+    "environment_rng_draws": 0,
+    "action_rng_draws": 47584,
+}
+
+THRESHOLDS = {
+    "navigation_band": 0.08,
+    "candidate_final_keep_floor": 0.55,
+    "selected_p_mediation": 0.20,
+    "cross_swap_follow_rate": 0.80,
+    "candidate_decoy_accuracy_change": 0.02,
+    "candidate_decoy_kernel_tv_change": 0.02,
+    "current_arm_aulc_gap": 0.05,
+    "reset_stale_target_rate": 0.15,
+}
+
+INVALID = "B2_INVALID_CONTRACT_ACTIVITY_CAP_OR_PROVENANCE"
+NAVIGATION_FAIL = "B2_NAVIGATION_OR_CANDIDATE_FINAL_KEEP_GATE_FAILS"
+MEDIATION_FAIL = "B2_SELECTED_P_MEDIATION_GATE_FAILS"
+CROSS_SWAP_FAIL = "B2_SELECTED_P_CROSS_SWAP_GATE_FAILS"
+DECOY_FAIL = "B2_DECOY_INVARIANCE_GATE_FAILS"
+CURRENT_RESET_FAIL = "B2_CURRENT_OR_RESET_CONTROL_GATE_FAILS"
+NO_EFFICIENCY = "B2_AUTHENTICATED_PARTNER_RECALL_CREDIT_EFFICIENCY_NOT_SUPPORTED"
+SUPPORTED = "B2_AUTHENTICATED_PARTNER_RECALL_CREDIT_EFFICIENCY_SUPPORTED"
+
+
+class B2ContractError(RuntimeError):
+    """Fail-closed B2 candidate contract error."""
+
+
+def _torch() -> Any:
+    try:
+        import torch
+    except ImportError as exc:
+        raise B2ContractError("PyTorch is required only for learner/full execution") from exc
+    return torch
+
+
+def _json_bytes(value: Any) -> bytes:
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
+
+
+def _digest(value: Any) -> str:
+    return hashlib.sha256(_json_bytes(value)).hexdigest()
+
+
+@dataclass(frozen=True)
+class EpisodeSpec:
+    consumer: str
+    seed_row: str
+    panel: str
+    branch: str
+    retention_length: int
+    y: int
+    reset_y: int
+    target_identity: int
+    target_version: int
+    event_type: str
+    decoy_sequence: tuple[tuple[int, int, int, bool], ...]
+    current_bytes: str
+    roster: str
+    legal_mask: str
+    clock: str
+    rng_binding: str
+    quartet_base: str
+    nonce: int
+
+    @classmethod
+    def from_manifest_row(cls, row: Mapping[str, Any]) -> "EpisodeSpec":
+        if not isinstance(row, Mapping):
+            raise B2ContractError("manifest tuple is not an object")
+        try:
+            result = cls(
+                consumer=str(row["consumer"]), seed_row=str(row["seed_row"]),
+                panel=str(row["panel"]), branch=str(row["branch"]),
+                retention_length=int(row["retention_length"]), y=int(row["y"]),
+                reset_y=int(row["reset_y"]), target_identity=int(row["target_identity"]),
+                target_version=int(row["target_version"]), event_type=str(row["event_type"]),
+                decoy_sequence=tuple(tuple(item) for item in row["decoy_sequence"]),
+                current_bytes=str(row["current_bytes"]), roster=str(row["roster"]),
+                legal_mask=str(row["legal_mask"]), clock=str(row["clock"]),
+                rng_binding=str(row["rng_binding"]), quartet_base=str(row["quartet_base"]),
+                nonce=int(row["nonce"]),
+            )
+        except (KeyError, TypeError, ValueError) as exc:
+            raise B2ContractError("manifest tuple cannot be decoded") from exc
+        result.validate()
+        return result
+
+    def validate(self) -> None:
+        if self.branch not in BRANCHES or self.retention_length not in {4, 6, 8}:
+            raise B2ContractError("episode branch/length is outside the frozen toy")
+        if self.y not in ACTIONS or self.reset_y not in ACTIONS:
+            raise B2ContractError("episode payload is outside the four-action alphabet")
+        if self.target_identity not in ACTIONS or self.target_version not in ACTIONS:
+            raise B2ContractError("episode identity/version is outside the frozen domain")
+        if self.roster != "P0,P1,P2,P3,focal" or self.legal_mask != "1111":
+            raise B2ContractError("episode roster/action mask changed")
+        if len(self.decoy_sequence) != 4 or any(
+            len(item) != 4 or item[0] not in ACTIONS or item[1] not in ACTIONS
+            or item[2] not in ACTIONS or not isinstance(item[3], bool)
+            for item in self.decoy_sequence
+        ):
+            raise B2ContractError("ordered decoy provenance/content changed")
+
+
+@dataclass(frozen=True)
+class Step:
+    observation: tuple[float, ...]
+    write: int
+    reset: int
+    phase: str
+
+
+@dataclass(frozen=True)
+class ToyEpisode:
+    steps: tuple[Step, ...]
+    terminal_target: int
+    historical_target: int
+    selected_identity: int
+    selected_version: int
+    branch: str
+
+
+class AuthenticatedPartnerRecallRelay:
+    """Four-action, one-focal/four-scripted-partner deterministic toy builder."""
+
+    phases = ("SELECT", "ACQUIRE", "RETAIN", "REJOIN", "ACT")
+    event_types = ("target_absent_payload", "unauth_target_decoy", "renewal_marker", "dummy_roster")
+
+    @staticmethod
+    def _observation(
+        *, phase: str, event_type: str, source: int, version: int,
+        authenticated: bool, selected: bool, payload: int | None,
+        clock: int, branch: str,
+    ) -> tuple[float, ...]:
+        vector = [0.0] * OBSERVATION_DIM
+        vector[AuthenticatedPartnerRecallRelay.phases.index(phase)] = 1.0
+        if event_type in AuthenticatedPartnerRecallRelay.event_types:
+            vector[5 + AuthenticatedPartnerRecallRelay.event_types.index(event_type)] = 1.0
+        if source in ACTIONS:
+            vector[9 + source] = 1.0
+        vector[13] = float(version) / 3.0
+        vector[14] = float(authenticated)
+        vector[15] = float(selected)
+        if payload in ACTIONS:
+            vector[16 + int(payload)] = 1.0
+        vector[20] = float(clock) / 8.0
+        vector[21 + BRANCHES.index(branch)] = 1.0
+        vector[24:28] = [1.0, 1.0, 1.0, 1.0]
+        vector[28] = 1.0
+        vector[29] = float(source == 4)
+        vector[30] = float(phase == "ACT")
+        vector[31] = 1.0
+        return tuple(vector)
+
+    def build(self, spec: EpisodeSpec) -> ToyEpisode:
+        spec.validate()
+        identity, version = spec.target_identity, spec.target_version
+        steps = [Step(self._observation(
+            phase="SELECT", event_type="dummy_roster", source=identity,
+            version=version, authenticated=True, selected=True, payload=None,
+            clock=0, branch=spec.branch,
+        ), write=0, reset=1, phase="SELECT")]
+        steps.append(Step(self._observation(
+            phase="ACQUIRE", event_type="target_absent_payload", source=identity,
+            version=version, authenticated=True, selected=True, payload=spec.y,
+            clock=0, branch=spec.branch,
+        ), write=1, reset=0, phase="ACQUIRE"))
+        for clock in range(spec.retention_length):
+            decoy = spec.decoy_sequence[clock % 4]
+            event_type = self.event_types[clock % 4]
+            source = decoy[0]
+            authenticated = decoy[3]
+            selected = source == identity and authenticated and decoy[1] == version
+            # Frozen decoys never authenticate as the selected identity/version.
+            if selected:
+                authenticated = False
+            steps.append(Step(self._observation(
+                phase="RETAIN", event_type=event_type, source=source,
+                version=decoy[1], authenticated=authenticated, selected=False,
+                payload=decoy[2] if event_type in {"target_absent_payload", "unauth_target_decoy"} else None,
+                clock=clock + 1, branch=spec.branch,
+            ), write=0, reset=0, phase="RETAIN"))
+        terminal_target = spec.y
+        rejoin_payload: int | None = None
+        reset = 0
+        write = 0
+        if spec.branch == "RESET":
+            version = (version + 1) % 4
+            terminal_target = spec.reset_y
+            rejoin_payload = spec.reset_y
+            reset, write = 1, 1
+        elif spec.branch == "CURRENT":
+            rejoin_payload = spec.y
+            write = 1
+        steps.append(Step(self._observation(
+            phase="REJOIN", event_type="target_absent_payload", source=identity,
+            version=version, authenticated=True, selected=True,
+            payload=rejoin_payload, clock=spec.retention_length,
+            branch=spec.branch,
+        ), write=write, reset=reset, phase="REJOIN"))
+        steps.append(Step(self._observation(
+            phase="ACT", event_type="dummy_roster", source=identity,
+            version=version, authenticated=True, selected=True, payload=None,
+            clock=spec.retention_length, branch=spec.branch,
+        ), write=0, reset=0, phase="ACT"))
+        return ToyEpisode(
+            steps=tuple(steps), terminal_target=terminal_target,
+            historical_target=spec.y, selected_identity=identity,
+            selected_version=version, branch=spec.branch,
+        )
+
+
+def build_policy(arm: str, initialization_seed: int) -> Any:
+    """Build either arm with byte-identical shapes and initialization law."""
+
+    torch = _torch()
+    if arm not in ARMS:
+        raise B2ContractError("unknown B2 arm")
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(int(initialization_seed))
+
+        class MatchedPolicy(torch.nn.Module):
+            def __init__(self, arm_name: str) -> None:
+                super().__init__()
+                self.arm_name = arm_name
+                self.encoder = torch.nn.Sequential(
+                    torch.nn.Linear(OBSERVATION_DIM, CONTEXT_DIM), torch.nn.Tanh()
+                )
+                self.context_gru = torch.nn.GRUCell(CONTEXT_DIM, CONTEXT_DIM)
+                self.carrier_gru = torch.nn.GRUCell(CONTEXT_DIM, CARRIER_DIM)
+                # Shape-matched three-way keep/reset/write route.  The
+                # candidate uses authenticated parameter-free controls; the
+                # generic arm must infer all three choices from visible input.
+                self.routing_gate = torch.nn.Linear(CONTEXT_DIM + CARRIER_DIM, 3)
+                self.action_head = torch.nn.Linear(CONTEXT_DIM + CARRIER_DIM, 4)
+                self.value_head = torch.nn.Linear(CONTEXT_DIM + CARRIER_DIM, 1)
+
+            def initial_state(self, batch: int, *, device: Any = None) -> tuple[Any, Any]:
+                parameter = next(self.parameters())
+                target_device = parameter.device if device is None else device
+                return (
+                    torch.zeros(batch, CONTEXT_DIM, device=target_device),
+                    torch.zeros(batch, CARRIER_DIM, device=target_device),
+                )
+
+            def step(self, observation: Any, state: tuple[Any, Any], write: Any, reset: Any) -> tuple[Any, Any, tuple[Any, Any], Any]:
+                context, carrier = state
+                encoded = self.encoder(observation)
+                next_context = self.context_gru(encoded, context)
+                learned_route = torch.softmax(
+                    self.routing_gate(torch.cat((next_context, carrier), dim=-1)),
+                    dim=-1,
+                )
+                if self.arm_name == CANDIDATE_ARM:
+                    reset_carrier = carrier * (1.0 - reset)
+                    proposed = self.carrier_gru(encoded, reset_carrier)
+                    next_carrier = write * proposed + (1.0 - write) * reset_carrier
+                else:
+                    # No external write/reset oracle enters the generic state
+                    # transition.  It learns keep, reset-to-zero, or write from
+                    # the same visible provenance-bearing observation.
+                    proposed = self.carrier_gru(encoded, carrier)
+                    next_carrier = (
+                        learned_route[:, 0:1] * carrier
+                        + learned_route[:, 1:2] * torch.zeros_like(carrier)
+                        + learned_route[:, 2:3] * proposed
+                    )
+                combined = torch.cat((next_context, next_carrier), dim=-1)
+                return self.action_head(combined), self.value_head(combined).squeeze(-1), (next_context, next_carrier), learned_route
+
+            def episode(self, observations: Any, writes: Any, resets: Any) -> tuple[Any, Any, Any]:
+                state = self.initial_state(observations.shape[0], device=observations.device)
+                gate_trace = []
+                logits = values = None
+                for step_index in range(observations.shape[1]):
+                    logits, values, state, learned = self.step(
+                        observations[:, step_index], state,
+                        writes[:, step_index], resets[:, step_index],
+                    )
+                    gate_trace.append(learned)
+                assert logits is not None and values is not None
+                return logits, values, torch.stack(gate_trace, dim=1)
+
+        return MatchedPolicy(arm)
+
+
+def trainable_contract(model: Any) -> dict[str, Any]:
+    torch = _torch()
+    if not isinstance(model, torch.nn.Module):
+        raise B2ContractError("policy is not a torch module")
+    shapes = {name: list(parameter.shape) for name, parameter in model.named_parameters()}
+    return {
+        "parameter_shapes": shapes,
+        "trainable_scalar_count": sum(int(parameter.numel()) for parameter in model.parameters() if parameter.requires_grad),
+        "recurrent_state_elements": CONTEXT_DIM + CARRIER_DIM,
+        "context_recurrence": CONTEXT_DIM,
+        "carrier_recurrence": CARRIER_DIM,
+        "action_head_actions": 4,
+        "value_head_outputs": 1,
+    }
+
+
+def paired_models(seed_row: str) -> tuple[Any, Any]:
+    if seed_row not in SEEDS:
+        raise B2ContractError("unknown frozen seed row")
+    seed = SEEDS[seed_row]["initialization"]
+    candidate = build_policy(CANDIDATE_ARM, seed)
+    generic = build_policy(GENERIC_ARM, seed)
+    left = trainable_contract(candidate)
+    right = trainable_contract(generic)
+    if left != right:
+        raise B2ContractError("arm shapes/counts/recurrent-state contract mismatch")
+    torch = _torch()
+    if any(not torch.equal(a, b) for a, b in zip(candidate.state_dict().values(), generic.state_dict().values())):
+        raise B2ContractError("paired arm initialization bytes differ")
+    return candidate, generic
+
+
+def tensor_batch(specs: Sequence[EpisodeSpec]) -> tuple[Any, Any, Any, Any, list[ToyEpisode]]:
+    torch = _torch()
+    episodes = [AuthenticatedPartnerRecallRelay().build(spec) for spec in specs]
+    lengths = {len(episode.steps) for episode in episodes}
+    if len(lengths) != 1:
+        raise B2ContractError("one PPO batch must have a common complete trajectory length")
+    observations = torch.tensor([[step.observation for step in episode.steps] for episode in episodes], dtype=torch.float32)
+    writes = torch.tensor([[step.write for step in episode.steps] for episode in episodes], dtype=torch.float32).unsqueeze(-1)
+    resets = torch.tensor([[step.reset for step in episode.steps] for episode in episodes], dtype=torch.float32).unsqueeze(-1)
+    targets = torch.tensor([episode.terminal_target for episode in episodes], dtype=torch.long)
+    return observations, writes, resets, targets, episodes
+
+
+def ppo_complete_batch(model: Any, optimizer: Any, specs: Sequence[EpisodeSpec], action_seed: int) -> dict[str, float]:
+    """Four PPO epochs, recomputing each complete recurrent trajectory."""
+
+    torch = _torch()
+    if len(specs) != EPISODES_PER_BATCH:
+        raise B2ContractError("PPO accepts only one complete 128-episode batch")
+    observations, writes, resets, targets, _episodes = tensor_batch(specs)
+    generator = torch.Generator(device="cpu")
+    generator.manual_seed(int(action_seed))
+    with torch.no_grad():
+        old_logits, old_values, _ = model.episode(observations, writes, resets)
+        probabilities = torch.softmax(old_logits, dim=-1)
+        actions = torch.multinomial(probabilities, 1, generator=generator).squeeze(-1)
+        rewards = torch.where(actions == targets, 1.0, -1.0)
+        old_log_prob = torch.log_softmax(old_logits, dim=-1).gather(1, actions[:, None]).squeeze(1)
+        advantages = rewards - old_values
+        advantages = (advantages - advantages.mean()) / advantages.std(unbiased=False).clamp_min(1e-8)
+        returns = rewards
+    last = {}
+    for _epoch in range(PPO_EPOCHS):
+        logits, values, _ = model.episode(observations, writes, resets)
+        distribution = torch.distributions.Categorical(logits=logits)
+        log_prob = distribution.log_prob(actions)
+        ratio = torch.exp(log_prob - old_log_prob)
+        unclipped = ratio * advantages
+        clipped = torch.clamp(ratio, 1.0 - PPO["clip"], 1.0 + PPO["clip"]) * advantages
+        policy_loss = -torch.minimum(unclipped, clipped).mean()
+        value_loss = (values - returns).pow(2).mean()
+        entropy = distribution.entropy().mean()
+        loss = policy_loss + PPO["value_coefficient"] * value_loss - PPO["entropy_coefficient"] * entropy
+        optimizer.zero_grad(set_to_none=True)
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(model.parameters(), PPO["max_gradient_norm"])
+        optimizer.step()
+        last = {"loss": float(loss.detach()), "policy_loss": float(policy_loss.detach()), "value_loss": float(value_loss.detach()), "entropy": float(entropy.detach())}
+    return last
+
+
+def terminal_reward(action: int, target: int) -> int:
+    if action not in ACTIONS or target not in ACTIONS:
+        raise B2ContractError("terminal action/target outside legal mask")
+    return 1 if action == target else -1
+
+
+def normalized_keep_aulc(checkpoint_accuracy: Sequence[float]) -> float:
+    if len(checkpoint_accuracy) != len(CHECKPOINTS) or any(not 0.0 <= value <= 1.0 for value in checkpoint_accuracy):
+        raise B2ContractError("KEEP curve does not match fixed checkpoints")
+    normalized = [(value - 0.25) / 0.75 for value in checkpoint_accuracy]
+    area = sum(
+        (CHECKPOINTS[i + 1] - CHECKPOINTS[i]) * (normalized[i] + normalized[i + 1]) / 2.0
+        for i in range(len(CHECKPOINTS) - 1)
+    )
+    return area / 4096.0
+
+
+def classify_result(evidence: Mapping[str, Any]) -> str:
+    required_bool = {
+        "contract_valid", "activity_nonzero", "caps_valid", "paired_exposure",
+        "matched_shapes_counts_state", "terminal_ppo_only", "no_side_channel",
+    }
+    required_number = {
+        "candidate_minus_generic_keep_aulc", "candidate_final_keep",
+        "selected_p_mediation", "cross_swap_follow_rate",
+        "candidate_decoy_accuracy_change", "candidate_decoy_kernel_tv_change",
+        "current_arm_aulc_gap", "reset_stale_target_rate",
+    }
+    if (
+        not isinstance(evidence, Mapping) or not required_bool.issubset(evidence)
+        or not required_number.issubset(evidence)
+        or any(not isinstance(evidence[name], bool) or not evidence[name] for name in required_bool)
+        or any(isinstance(evidence[name], bool) or not isinstance(evidence[name], (int, float)) or not math.isfinite(float(evidence[name])) for name in required_number)
+    ):
+        return INVALID
+    if evidence["candidate_final_keep"] < THRESHOLDS["candidate_final_keep_floor"]:
+        return NAVIGATION_FAIL
+    if evidence["selected_p_mediation"] < THRESHOLDS["selected_p_mediation"]:
+        return MEDIATION_FAIL
+    if evidence["cross_swap_follow_rate"] < THRESHOLDS["cross_swap_follow_rate"]:
+        return CROSS_SWAP_FAIL
+    if abs(evidence["candidate_decoy_accuracy_change"]) > THRESHOLDS["candidate_decoy_accuracy_change"] or abs(evidence["candidate_decoy_kernel_tv_change"]) > THRESHOLDS["candidate_decoy_kernel_tv_change"]:
+        return DECOY_FAIL
+    if abs(evidence["current_arm_aulc_gap"]) > THRESHOLDS["current_arm_aulc_gap"] or evidence["reset_stale_target_rate"] > THRESHOLDS["reset_stale_target_rate"]:
+        return CURRENT_RESET_FAIL
+    if evidence["candidate_minus_generic_keep_aulc"] < THRESHOLDS["navigation_band"]:
+        return NO_EFFICIENCY
+    return SUPPORTED
+
+
+def validate_manifest(manifest: Mapping[str, Any], expected_digest: str) -> tuple[EpisodeSpec, ...]:
+    from experiments.candidates.vsp_06_mssr import vsp06_b2_source_bound_exact_feasibility as selector
+
+    if _digest(manifest) != expected_digest:
+        raise B2ContractError("manifest content digest mismatch")
+    if manifest.get("treatment") != TREATMENT_ID or manifest.get("selector_identity") != selector.SELECTOR_ID:
+        raise B2ContractError("manifest identity mismatch")
+    selected = manifest.get("selected_rows")
+    if not isinstance(selected, list) or manifest.get("selected_count") != len(selected):
+        raise B2ContractError("manifest selected rows/count mismatch")
+    specs = tuple(EpisodeSpec.from_manifest_row(item["tuple"]) for item in selected)
+    order = _digest([item["tuple_sha256"] for item in selected])
+    if manifest.get("common_two_arm_order_digest") != order:
+        raise B2ContractError("common two-arm manifest order mismatch")
+    return specs
+
+
+def _decoy_patterns() -> tuple[list[list[Any]], ...]:
+    base = [[0, 0, 1, False], [1, 1, 2, True], [2, 2, 3, False], [3, 3, 0, True]]
+    return tuple(base[index:] + base[:index] for index in range(4))
+
+
+def _raw_row(
+    *, consumer: str, seed_row: str, panel: str, branch: str,
+    retention_length: int, y: int, logical_index: int, nonce: int,
+) -> dict[str, Any]:
+    feature = logical_index % 4
+    identity = feature
+    version = (logical_index // 4) % 4
+    event_index = (logical_index // 16) % 4
+    decoy_index = (logical_index // 64) % 4
+    event_types = ("target_absent_payload", "unauth_target_decoy", "renewal_marker", "dummy_roster")
+    quartet = f"{seed_row}_q{logical_index // 4:04d}" if consumer == "final_keep" else f"{consumer}_{seed_row}_{panel}_{branch}_{retention_length}_{logical_index:06d}"
+    binding = _digest([consumer, seed_row, panel, branch, retention_length, y, logical_index])
+    return {
+        "consumer": consumer, "seed_row": seed_row, "panel": panel,
+        "branch": branch, "retention_length": retention_length, "y": y,
+        # A distinct balanced source axis: unlike the plausible-wrong version
+        # alias, this Latin combination is pairwise balanced against identity,
+        # version, event, and ordered-decoy provenance.
+        "reset_y": (identity + version + event_index + decoy_index) % 4,
+        "target_identity": identity, "target_version": version,
+        "event_type": event_types[event_index], "decoy_sequence": _decoy_patterns()[decoy_index],
+        "current_bytes": _digest(["current", quartet]),
+        "roster": "P0,P1,P2,P3,focal", "legal_mask": "1111",
+        "clock": f"L={retention_length}", "rng_binding": binding,
+        "quartet_base": quartet, "nonce": nonce,
+    }
+
+
+def canonical_catalog_rows() -> Iterator[dict[str, Any]]:
+    """Enumerate the frozen catalog; callers must never use it to tune CP-SAT."""
+
+    from experiments.candidates.vsp_06_mssr import vsp06_b2_source_bound_exact_feasibility as selector
+
+    def emit_pool(consumer: str, seed: str, panel: str, branch: str, length: int, y: int, target: int, split: str) -> Iterator[dict[str, Any]]:
+        # The fixed source pool is deliberately overcomplete.  Bucket filtering
+        # is part of catalog eligibility, never a selector retry or objective.
+        multiplier = 4 if split == "train" else 32
+        if branch == "RESET":
+            multiplier *= 4
+        for logical in range(target * multiplier):
+            row = _raw_row(consumer=consumer, seed_row=seed, panel=panel, branch=branch, retention_length=length, y=y, logical_index=logical, nonce=logical)
+            if selector.split_for_bucket(selector.bucket_for_tuple(selector.canonical_tuple_bytes(row))) == split:
+                yield row
+
+    for seed in ("primary_1", "primary_2", "primary_3", "primary_4"):
+        for branch, per_length_y in (("KEEP", 384), ("RESET", 64), ("CURRENT", 64)):
+            for length in (4, 8):
+                for y in ACTIONS:
+                    yield from emit_pool("primary_fit", seed, "fit", branch, length, y, per_length_y, "train")
+    for consumer, panel, per_y in (("calibration_fit", "fit", 128), ("calibration_check", "check", 32)):
+        for y in ACTIONS:
+            yield from emit_pool(consumer, "calibration", panel, "CURRENT", 4, y, per_y, "calibration")
+    for seed in ("primary_1", "primary_2", "primary_3", "primary_4"):
+        for panel in map(str, CHECKPOINTS):
+            for branch, per_y in (("KEEP", 16), ("RESET", 8), ("CURRENT", 8)):
+                for y in ACTIONS:
+                    yield from emit_pool("checkpoint", seed, panel, branch, 6, y, per_y, "evaluation")
+        yield from canonical_final_keep_rows(seed)
+
+
+def canonical_final_keep_rows(seed: str) -> Iterator[dict[str, Any]]:
+    """Generate one seed's balanced source-level final-KEEP support."""
+
+    from experiments.candidates.vsp_06_mssr import vsp06_b2_source_bound_exact_feasibility as selector
+
+    if seed not in {"primary_1", "primary_2", "primary_3", "primary_4"}:
+        raise B2ContractError("final-KEEP support requires a primary seed")
+    # Exactly 64 complete Y quartets are admitted.  Each row's nonce is the
+    # first fixed-domain nonce mapping it to evaluation; no outcome exists.
+    for quartet_index in range(64):
+        identity = quartet_index % 4
+        version = (quartet_index // 4) % 4
+        event_index = (quartet_index // 16) % 4
+        decoy_index = (identity + version + event_index) % 4
+        for y in ACTIONS:
+            logical = quartet_index
+            for nonce in range(256):
+                row = _raw_row(consumer="final_keep", seed_row=seed, panel="4096_keep_extra", branch="KEEP", retention_length=6, y=y, logical_index=logical, nonce=nonce)
+                row["quartet_base"] = f"{seed}_q{quartet_index:04d}"
+                row["target_identity"] = identity
+                row["target_version"] = version
+                row["event_type"] = AuthenticatedPartnerRecallRelay.event_types[event_index]
+                row["decoy_sequence"] = _decoy_patterns()[decoy_index]
+                row["current_bytes"] = _digest(["current", row["quartet_base"]])
+                row["rng_binding"] = _digest(["quartet", row["quartet_base"]])
+                row["reset_y"] = 0
+                if selector.split_for_bucket(selector.bucket_for_tuple(selector.canonical_tuple_bytes(row))) == "evaluation":
+                    yield row
+                    break
+            else:
+                raise B2ContractError("fixed final-KEEP catalog domain lacks an evaluation row")
+
+
+def readiness_contract() -> dict[str, Any]:
+    """Zero-activity source/config readiness facts; this is not acceptance."""
+
+    return {
+        "treatment": TREATMENT_ID,
+        "environment": ENVIRONMENT_ID,
+        "resource_class": RESOURCE_CLASS,
+        "arms": list(ARMS),
+        "seeds": SEEDS,
+        "ppo": PPO,
+        "checkpoints": list(CHECKPOINTS),
+        "thresholds": THRESHOLDS,
+        "caps": CAPS,
+        "activity_counts": {name: 0 for name in (
+            "environment_episodes", "environment_transitions", "production_policy_forwards",
+            "learner_updates", "optimizer_steps", "evaluator_calls", "evaluation_episodes",
+            "model_fits", "trainer_invocations")},
+        "canonical_selector_executed": False,
+        "registered_full_executed": False,
+        "result_claim": None,
+    }
+
+
+class ManifestGate:
+    """Reload and reverify the immutable manifest before every consumer."""
+
+    def __init__(
+        self, path: Path, content_digest: str, *, session_root: Path,
+        selector_receipt_path: Path, verifier_report_path: Path,
+    ) -> None:
+        from experiments.candidates.vsp_06_mssr import vsp06_b2_source_bound_exact_feasibility as selector
+
+        self.session_root = session_root.resolve()
+        self.path = path.resolve()
+        self.content_digest = content_digest
+        self.selector_receipt_path = selector_receipt_path.resolve()
+        self.verifier_report_path = verifier_report_path.resolve()
+        selector_root = self.session_root / "selector"
+        exact_paths = {
+            "manifest": self.session_root / "frozen_manifest.json",
+            "receipt": selector_root / "selector_success_receipt.json",
+            "report": selector_root / "independent_verifier_report.json",
+            "bindings": selector_root / "frozen_bindings.json",
+            "witness": selector_root / "membership_witness.json",
+            "catalog": self.session_root / "canonical_catalog.json",
+        }
+        if (
+            self.path != exact_paths["manifest"].resolve()
+            or self.selector_receipt_path != exact_paths["receipt"].resolve()
+            or self.verifier_report_path != exact_paths["report"].resolve()
+        ):
+            raise B2ContractError("full admission artifacts are outside the exact canonical session locator")
+        if not self.path.exists() or self.path.stat().st_mode & stat.S_IWUSR:
+            raise B2ContractError("verified manifest is absent or writable")
+        self.file_digest = hashlib.sha256(self.path.read_bytes()).hexdigest()
+        self.order_digest = ""
+        self.consumer_receipts: list[dict[str, str]] = []
+        self.reload("preclaim")
+        receipt = _load_mapping(self.selector_receipt_path)
+        report = _load_mapping(self.verifier_report_path)
+        bindings = _load_mapping(exact_paths["bindings"])
+        witness = _load_mapping(exact_paths["witness"])
+        manifest = _load_mapping(self.path)
+        catalog_path = Path(str(receipt.get("catalog_path", ""))).resolve()
+        ledger_path = Path(str(receipt.get("ledger_path", ""))).resolve()
+        if catalog_path != exact_paths["catalog"].resolve():
+            raise B2ContractError("selector receipt catalog locator mismatch")
+        expected = bindings.get("expected")
+        if (
+            receipt.get("branch") != selector.VALID
+            or receipt.get("replica_count") != 2
+            or receipt.get("replica_2_role") != "prospective_determinism_gate_not_retry"
+            or Path(str(receipt.get("manifest_path", ""))).resolve() != self.path
+            or Path(str(receipt.get("verifier_report_path", ""))).resolve() != self.verifier_report_path
+            or Path(str(receipt.get("bindings_path", ""))).resolve() != exact_paths["bindings"].resolve()
+            or Path(str(receipt.get("witness_path", ""))).resolve() != exact_paths["witness"].resolve()
+            or receipt.get("manifest_file_sha256") != self.file_digest
+            or receipt.get("manifest_content_sha256") != self.content_digest
+            or receipt.get("verifier_report_sha256") != _file_digest(self.verifier_report_path)
+            or receipt.get("bindings_sha256") != _file_digest(exact_paths["bindings"])
+            or receipt.get("witness_sha256") != _file_digest(exact_paths["witness"])
+            or receipt.get("catalog_sha256") != _file_digest(catalog_path)
+            or receipt.get("ledger_sha256") != _file_digest(ledger_path)
+        ):
+            raise B2ContractError("selector success receipt binding mismatch")
+        if not isinstance(expected, Mapping) or bindings.get("synthetic_only") is not False:
+            raise B2ContractError("synthetic or incomplete binding cannot admit a full")
+        if (
+            report.get("verdict") != "VERIFIED"
+            or report.get("synthetic_only") is not False
+            or report.get("manifest_sha256") != self.content_digest
+            or report.get("catalog_sha256") != expected.get("catalog_sha256")
+            or report.get("ledger_sha256") != expected.get("ledger_sha256")
+            or report.get("selector_source_sha256") != expected.get("selector_source_sha256")
+            or report.get("solver_artifact_set_sha256") != expected.get("solver_artifact_set_sha256")
+            or report.get("sat_parameters_sha256") != expected.get("sat_parameters_sha256")
+            or report.get("python_executable_sha256") != expected.get("python_executable_sha256")
+            or report.get("verifier_source_sha256") != expected.get("verifier_source_sha256")
+            or report.get("membership_witness_sha256") != _file_digest(exact_paths["witness"])
+            or report.get("membership_vector_sha256") != witness.get("membership_vector_sha256")
+            or report.get("common_two_arm_order_digest") != self.order_digest
+            or report.get("global_rank_claim") is not False
+        ):
+            raise B2ContractError("independent VERIFIED report binding mismatch")
+        if manifest.get("bindings") != expected or manifest.get("rank_claim") is not False:
+            raise B2ContractError("manifest source/build binding or rank nonclaim mismatch")
+        selected = manifest.get("selected_rows")
+        if not isinstance(selected, list):
+            raise B2ContractError("manifest selected rows are absent")
+        for item in selected:
+            if not isinstance(item, Mapping) or set(item) != {"tuple", "tuple_sha256", "bucket", "split"}:
+                raise B2ContractError("manifest selected-row envelope mismatch")
+            tuple_bytes = selector.canonical_tuple_bytes(item["tuple"])
+            tuple_sha = hashlib.sha256(tuple_bytes).hexdigest()
+            bucket = selector.bucket_for_tuple(tuple_bytes)
+            if (
+                item["tuple_sha256"] != tuple_sha
+                or item["bucket"] != bucket
+                or item["split"] != selector.split_for_bucket(bucket)
+            ):
+                raise B2ContractError("manifest tuple hash/bucket/split mismatch")
+
+    def reload(self, consumer: str) -> tuple[EpisodeSpec, ...]:
+        payload = self.path.read_bytes()
+        if hashlib.sha256(payload).hexdigest() != self.file_digest:
+            raise B2ContractError("manifest file bytes changed after fixation")
+        manifest = json.loads(payload.decode("utf-8"))
+        specs = validate_manifest(manifest, self.content_digest)
+        order = str(manifest["common_two_arm_order_digest"])
+        if self.order_digest and order != self.order_digest:
+            raise B2ContractError("manifest common two-arm order changed")
+        self.order_digest = order
+        self.consumer_receipts.append({
+            "consumer": consumer,
+            "manifest_file_sha256": self.file_digest,
+            "manifest_content_sha256": self.content_digest,
+            "common_two_arm_order_digest": order,
+        })
+        return specs
+
+
+def _spec_digest(spec: EpisodeSpec) -> str:
+    return _digest({
+        **spec.__dict__,
+        "decoy_sequence": [list(item) for item in spec.decoy_sequence],
+    })
+
+
+def _file_digest(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _load_mapping(path: Path) -> Mapping[str, Any]:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise B2ContractError(f"required full-admission artifact is unreadable: {path}") from exc
+    if not isinstance(value, Mapping):
+        raise B2ContractError(f"required full-admission artifact is not an object: {path}")
+    return value
+
+
+def _activity_template() -> dict[str, int]:
+    return {
+        "model_fits": 0, "trainer_invocations": 0,
+        "environment_episodes": 0, "environment_transitions": 0,
+        "production_policy_forwards": 0, "learner_updates": 0,
+        "optimizer_steps": 0, "evaluator_calls": 0,
+        "evaluation_episodes": 0, "environment_rng_draws": 0,
+        "action_rng_draws": 0,
+    }
+
+
+def _training_batches(specs: Sequence[EpisodeSpec], seed: int) -> list[list[EpisodeSpec]]:
+    by_length: dict[int, list[EpisodeSpec]] = {}
+    for spec in specs:
+        by_length.setdefault(spec.retention_length, []).append(spec)
+    rng = random.Random(int(seed))
+    chunks: dict[int, list[list[EpisodeSpec]]] = {}
+    for length, rows in sorted(by_length.items()):
+        rng.shuffle(rows)
+        if len(rows) % EPISODES_PER_BATCH:
+            raise B2ContractError("fit rows do not form complete trajectory batches")
+        chunks[length] = [rows[index:index + EPISODES_PER_BATCH] for index in range(0, len(rows), EPISODES_PER_BATCH)]
+    batches: list[list[EpisodeSpec]] = []
+    while any(chunks.values()):
+        for length in sorted(chunks):
+            if chunks[length]:
+                batches.append(chunks[length].pop(0))
+    return batches
+
+
+def _new_optimizer(model: Any) -> Any:
+    torch = _torch()
+    return torch.optim.Adam(
+        model.parameters(), lr=PPO["lr"], eps=PPO["epsilon"],
+        weight_decay=PPO["weight_decay"],
+    )
+
+
+def _fit(
+    *, model: Any, specs: Sequence[EpisodeSpec], seed_row: str, arm: str,
+    gate: ManifestGate, activity: dict[str, int], stop_after_batches: int | None = None,
+) -> tuple[list[dict[str, float]], list[list[EpisodeSpec]]]:
+    gate.reload(f"fit/{seed_row}/{arm}")
+    batches = _training_batches(specs, SEEDS[seed_row]["minibatch"])
+    if stop_after_batches is not None:
+        batches = batches[:stop_after_batches]
+    activity["model_fits"] += 1
+    activity["trainer_invocations"] += 1
+    optimizer = _new_optimizer(model)
+    losses = []
+    for batch_index, batch in enumerate(batches):
+        losses.append(ppo_complete_batch(
+            model, optimizer, batch,
+            SEEDS[seed_row]["environment"] + batch_index,
+        ))
+        transitions = sum(len(AuthenticatedPartnerRecallRelay().build(spec).steps) for spec in batch)
+        activity["environment_episodes"] += len(batch)
+        activity["environment_transitions"] += transitions
+        activity["production_policy_forwards"] += transitions
+        activity["action_rng_draws"] += len(batch)
+        activity["learner_updates"] += PPO_EPOCHS
+        activity["optimizer_steps"] += PPO_EPOCHS
+    return losses, batches
+
+
+def _continue_fit(
+    *, model: Any, optimizer: Any, batches: Sequence[Sequence[EpisodeSpec]],
+    seed_row: str, start_index: int, activity: dict[str, int],
+) -> list[dict[str, float]]:
+    losses = []
+    for offset, batch in enumerate(batches):
+        index = start_index + offset
+        losses.append(ppo_complete_batch(
+            model, optimizer, batch, SEEDS[seed_row]["environment"] + index
+        ))
+        transitions = sum(len(AuthenticatedPartnerRecallRelay().build(spec).steps) for spec in batch)
+        activity["environment_episodes"] += len(batch)
+        activity["environment_transitions"] += transitions
+        activity["production_policy_forwards"] += transitions
+        activity["action_rng_draws"] += len(batch)
+        activity["learner_updates"] += PPO_EPOCHS
+        activity["optimizer_steps"] += PPO_EPOCHS
+    return losses
+
+
+def _write_checkpoint(path: Path, model: Any, metadata: Mapping[str, Any]) -> str:
+    torch = _torch()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        stream = path.open("xb")
+    except FileExistsError as exc:
+        raise B2ContractError("checkpoint destination already exists") from exc
+    with stream:
+        torch.save({"state_dict": model.state_dict(), "metadata": dict(metadata)}, stream)
+        stream.flush()
+        os.fsync(stream.fileno())
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _reload_checkpoint(path: Path, expected_digest: str, model: Any) -> None:
+    torch = _torch()
+    if hashlib.sha256(path.read_bytes()).hexdigest() != expected_digest:
+        raise B2ContractError("checkpoint digest changed")
+    payload = torch.load(path, map_location="cpu", weights_only=False)
+    model.load_state_dict(payload["state_dict"])
+
+
+def _policy_panel(
+    model: Any, specs: Sequence[EpisodeSpec], action_seed: int,
+    *, observations: Any | None = None, writes: Any | None = None,
+    resets: Any | None = None, targets: Any | None = None,
+) -> dict[str, Any]:
+    torch = _torch()
+    base_observations, base_writes, base_resets, base_targets, episodes = tensor_batch(specs)
+    observations = base_observations if observations is None else observations
+    writes = base_writes if writes is None else writes
+    resets = base_resets if resets is None else resets
+    targets = base_targets if targets is None else targets
+    generator = torch.Generator(device="cpu")
+    generator.manual_seed(int(action_seed))
+    with torch.no_grad():
+        logits, values, gates = model.episode(observations, writes, resets)
+        probabilities = torch.softmax(logits, dim=-1)
+        actions = torch.multinomial(probabilities, 1, generator=generator).squeeze(-1)
+    correct = actions == targets
+    by_branch = {}
+    for branch in BRANCHES:
+        mask = torch.tensor([spec.branch == branch for spec in specs], dtype=torch.bool)
+        if bool(mask.any()):
+            by_branch[branch] = float(correct[mask].float().mean())
+    return {
+        "accuracy": float(correct.float().mean()),
+        "by_branch": by_branch,
+        "actions": actions,
+        "probabilities": probabilities,
+        "values": values,
+        "gates": gates,
+        "targets": targets,
+        "historical_targets": torch.tensor([episode.historical_target for episode in episodes], dtype=torch.long),
+        "transition_count": sum(len(episode.steps) for episode in episodes),
+    }
+
+
+def _evaluate(
+    *, model: Any, specs: Sequence[EpisodeSpec], seed_row: str, arm: str,
+    panel: str, gate: ManifestGate, activity: dict[str, int], count_episode: bool = True,
+) -> dict[str, Any]:
+    gate.reload(f"evaluation/{seed_row}/{arm}/{panel}")
+    result = _policy_panel(model, specs, SEEDS[seed_row]["evaluation"] + int(hashlib.sha256(panel.encode()).hexdigest()[:8], 16))
+    if count_episode:
+        activity["evaluator_calls"] += 1
+        activity["evaluation_episodes"] += len(specs)
+        activity["environment_episodes"] += len(specs)
+        activity["environment_transitions"] += result["transition_count"]
+        activity["action_rng_draws"] += len(specs)
+    activity["production_policy_forwards"] += result["transition_count"]
+    return result
+
+
+def _cross_swap_indices(
+    specs: Sequence[EpisodeSpec], *, expected_quartets: int,
+) -> tuple[int, ...]:
+    groups: dict[str, list[int]] = {}
+    for index, spec in enumerate(specs):
+        if spec.branch != "KEEP":
+            raise B2ContractError("cross-swap input contains a non-KEEP row")
+        groups.setdefault(spec.quartet_base, []).append(index)
+    if len(groups) != expected_quartets or len(specs) != expected_quartets * 4:
+        raise B2ContractError("cross-swap quartet cardinality mismatch")
+    source_for_destination = [-1] * len(specs)
+    structural_fields = tuple(
+        field for field in EpisodeSpec.__dataclass_fields__ if field not in {"y", "nonce"}
+    )
+    for base, indices in groups.items():
+        by_y = {specs[index].y: index for index in indices}
+        if len(indices) != 4 or set(by_y) != set(ACTIONS):
+            raise B2ContractError(f"cross-swap quartet is incomplete: {base}")
+        reference = tuple(getattr(specs[indices[0]], field) for field in structural_fields)
+        if any(tuple(getattr(specs[index], field) for field in structural_fields) != reference for index in indices[1:]):
+            raise B2ContractError(f"cross-swap quartet pairing mismatch: {base}")
+        for y, destination in by_y.items():
+            source = by_y[(y + 1) % 4]
+            if source == destination or specs[source].y == specs[destination].y:
+                raise B2ContractError("cross-swap permutation has a fixed point")
+            source_for_destination[destination] = source
+    if -1 in source_for_destination or len(set(source_for_destination)) != len(specs):
+        raise B2ContractError("cross-swap is not a complete permutation")
+    return tuple(source_for_destination)
+
+
+def _control_partitions(
+    final_panel: Sequence[EpisodeSpec], *, expected_current: int,
+    expected_reset: int, expected_changed_reset: int, expected_joint: int,
+) -> tuple[tuple[EpisodeSpec, ...], tuple[EpisodeSpec, ...]]:
+    current = tuple(spec for spec in final_panel if spec.branch == "CURRENT")
+    reset = tuple(spec for spec in final_panel if spec.branch == "RESET")
+    changed_reset = tuple(spec for spec in reset if spec.reset_y != spec.y)
+    if (
+        len(current) != expected_current or len(reset) != expected_reset
+        or len(changed_reset) != expected_changed_reset or not changed_reset
+    ):
+        raise B2ContractError("CURRENT/RESET control cardinality mismatch")
+    if any(spec.consumer != "checkpoint" or spec.panel != "4096" for spec in current + reset):
+        raise B2ContractError("CURRENT/RESET controls are not paired to the final checkpoint panel")
+    if {y: sum(spec.y == y for spec in current) for y in ACTIONS} != {
+        y: expected_current // 4 for y in ACTIONS
+    }:
+        raise B2ContractError("CURRENT control Y pairing mismatch")
+    if any(
+        sum(spec.y == y and spec.reset_y == reset_y for spec in reset) != expected_joint
+        for y in ACTIONS for reset_y in ACTIONS
+    ):
+        raise B2ContractError("RESET control Y/reset_y pairing mismatch")
+    return current, changed_reset
+
+
+def _controls(
+    *, model: Any, final_keep: Sequence[EpisodeSpec], final_panel: Sequence[EpisodeSpec],
+    seed_row: str, gate: ManifestGate, activity: dict[str, int], baseline: Mapping[str, Any],
+) -> dict[str, float]:
+    torch = _torch()
+    observations, writes, resets, targets, _episodes = tensor_batch(final_keep)
+    zero_writes = torch.zeros_like(writes)
+    gate.reload(f"controls/{seed_row}/{CANDIDATE_ARM}/selected_p_zero")
+    selected_zero = _policy_panel(
+        model, final_keep, SEEDS[seed_row]["evaluation"] + 101,
+        observations=observations, writes=zero_writes, resets=resets, targets=targets,
+    )
+    current_specs, reset_specs = _control_partitions(
+        final_panel, expected_current=32, expected_reset=32,
+        expected_changed_reset=24, expected_joint=2,
+    )
+    gate.reload(f"controls/{seed_row}/{CANDIDATE_ARM}/current_only_rebuild")
+    current_observations, current_writes, current_resets, current_targets, _current_episodes = tensor_batch(current_specs)
+    rebuild_writes = torch.zeros_like(current_writes)
+    rebuild_writes[:, -2] = 1.0
+    current_rebuild = _policy_panel(
+        model, current_specs, SEEDS[seed_row]["evaluation"] + 102,
+        observations=current_observations, writes=rebuild_writes,
+        resets=current_resets, targets=current_targets,
+    )
+    gate.reload(f"controls/{seed_row}/{CANDIDATE_ARM}/cross_swap")
+    cross_indices = list(_cross_swap_indices(final_keep, expected_quartets=64))
+    cross_observations = observations[cross_indices].clone()
+    cross_writes = writes[cross_indices].clone()
+    cross_resets = resets[cross_indices].clone()
+    cross_targets = targets[cross_indices].clone()
+    cross = _policy_panel(
+        model, final_keep, SEEDS[seed_row]["evaluation"] + 103,
+        observations=cross_observations, writes=cross_writes, resets=cross_resets,
+        targets=cross_targets,
+    )
+    gate.reload(f"controls/{seed_row}/{CANDIDATE_ARM}/decoy_replay")
+    decoy_observations = observations.clone()
+    if decoy_observations.shape[1] > 4:
+        decoy_observations[:, 2:-2, 16:20] = decoy_observations[:, 2:-2, 16:20].roll(1, dims=-1)
+    decoy = _policy_panel(
+        model, final_keep, SEEDS[seed_row]["evaluation"] + 104,
+        observations=decoy_observations, writes=writes, resets=resets, targets=targets,
+    )
+    for result, cardinality in (
+        (selected_zero, len(final_keep)), (current_rebuild, len(current_specs)),
+        (cross, len(final_keep)), (decoy, len(final_keep)),
+    ):
+        activity["production_policy_forwards"] += result["transition_count"]
+        activity["action_rng_draws"] += cardinality
+    baseline_probabilities = baseline["probabilities"]
+    tv = 0.5 * torch.abs(baseline_probabilities - decoy["probabilities"]).sum(dim=-1).mean()
+    gate.reload(f"controls/{seed_row}/{CANDIDATE_ARM}/reset_stale_target")
+    reset_panel = _policy_panel(
+        model, reset_specs, SEEDS[seed_row]["evaluation"] + 105
+    )
+    activity["production_policy_forwards"] += reset_panel["transition_count"]
+    activity["action_rng_draws"] += len(reset_specs)
+    stale = (reset_panel["actions"] == reset_panel["historical_targets"]).float().mean()
+    return {
+        "selected_p_mediation": float(baseline["accuracy"] - selected_zero["accuracy"]),
+        "current_only_rebuild_accuracy": float(current_rebuild["accuracy"]),
+        "cross_swap_follow_rate": float(cross["accuracy"]),
+        "decoy_accuracy_change": float(decoy["accuracy"] - baseline["accuracy"]),
+        "decoy_kernel_tv_change": float(tv),
+        "reset_stale_target_rate": float(stale),
+    }
+
+
+def _public_panel(panel: Mapping[str, Any]) -> dict[str, Any]:
+    return {"accuracy": panel["accuracy"], "by_branch": dict(panel["by_branch"])}
+
+
+def _caps_valid(activity: Mapping[str, int]) -> bool:
+    return all(activity.get(name, 0) <= cap for name, cap in CAPS.items() if name in activity)
+
+
+def run_registered_full(
+    *, manifest_path: Path, manifest_content_digest: str,
+    session_root: Path, selector_receipt_path: Path,
+    verifier_report_path: Path, run_root: Path, result_path: Path,
+) -> dict[str, Any]:
+    """Execute the unique manifest-gated full; never called by readiness/tests."""
+
+    from experiments.candidates.vsp_06_mssr import vsp06_b2_source_bound_exact_feasibility as selector
+
+    if result_path.exists():
+        raise B2ContractError("write-once public result already exists")
+    gate = ManifestGate(
+        manifest_path, manifest_content_digest, session_root=session_root,
+        selector_receipt_path=selector_receipt_path,
+        verifier_report_path=verifier_report_path,
+    )
+    specs = gate.reload("preclaim_complete_manifest")
+    run_root.mkdir(parents=True, exist_ok=True)
+    claim_path = run_root / "registered_full_claim.json"
+    claim = {
+        "treatment": TREATMENT_ID, "full_ordinal": 1,
+        "manifest_file_sha256": gate.file_digest,
+        "manifest_content_sha256": gate.content_digest,
+        "common_two_arm_order_digest": gate.order_digest,
+        "no_retry": True, "activity_at_claim": _activity_template(),
+    }
+    selector.write_exclusive(claim_path, _json_bytes(claim) + b"\n")
+    activity = _activity_template()
+    checkpoint_receipts: list[dict[str, Any]] = []
+    try:
+        by_consumer: dict[str, list[EpisodeSpec]] = {}
+        for spec in specs:
+            by_consumer.setdefault(spec.consumer, []).append(spec)
+        expected = {"primary_fit": 16384, "calibration_fit": 512, "calibration_check": 128, "checkpoint": 4096, "final_keep": 1024}
+        if {name: len(rows) for name, rows in by_consumer.items()} != expected:
+            raise B2ContractError("manifest consumer counts changed")
+
+        calibration_models = dict(zip(ARMS, paired_models("calibration")))
+        calibration = {}
+        for arm in ARMS:
+            losses, batches = _fit(
+                model=calibration_models[arm], specs=by_consumer["calibration_fit"],
+                seed_row="calibration", arm=arm, gate=gate, activity=activity,
+            )
+            if len(batches) != 4:
+                raise B2ContractError("calibration fit must contain four complete batches")
+            panel = _evaluate(
+                model=calibration_models[arm], specs=by_consumer["calibration_check"],
+                seed_row="calibration", arm=arm, panel="calibration_check",
+                gate=gate, activity=activity,
+            )
+            calibration[arm] = {"losses": losses, "check": _public_panel(panel)}
+        if abs(calibration[CANDIDATE_ARM]["check"]["accuracy"] - calibration[GENERIC_ARM]["check"]["accuracy"]) > THRESHOLDS["current_arm_aulc_gap"]:
+            raise B2ContractError("calibration CURRENT matched-arm gate failed")
+
+        seed_results: dict[str, Any] = {}
+        candidate_aulcs = []
+        generic_aulcs = []
+        final_keep_values = []
+        control_rows = []
+        current_gaps = []
+        for seed_row in ("primary_1", "primary_2", "primary_3", "primary_4"):
+            models = dict(zip(ARMS, paired_models(seed_row)))
+            optimizers = {arm: _new_optimizer(models[arm]) for arm in ARMS}
+            fit_specs = [spec for spec in by_consumer["primary_fit"] if spec.seed_row == seed_row]
+            batches = _training_batches(fit_specs, SEEDS[seed_row]["minibatch"])
+            if len(batches) != 32:
+                raise B2ContractError("primary fit must contain 32 complete batches")
+            for arm in ARMS:
+                gate.reload(f"fit/{seed_row}/{arm}")
+                activity["model_fits"] += 1
+                activity["trainer_invocations"] += 1
+            panels_by_arm = {arm: [] for arm in ARMS}
+            losses_by_arm = {arm: [] for arm in ARMS}
+            checkpoint_specs_all = [spec for spec in by_consumer["checkpoint"] if spec.seed_row == seed_row]
+            for checkpoint_index, checkpoint in enumerate(CHECKPOINTS):
+                if checkpoint_index:
+                    start = (checkpoint_index - 1) * 4
+                    interval = batches[start:start + 4]
+                    for arm in ARMS:
+                        losses_by_arm[arm].extend(_continue_fit(
+                            model=models[arm], optimizer=optimizers[arm], batches=interval,
+                            seed_row=seed_row, start_index=start, activity=activity,
+                        ))
+                panel_specs = [spec for spec in checkpoint_specs_all if spec.panel == str(checkpoint)]
+                if len(panel_specs) != 128:
+                    raise B2ContractError("fixed checkpoint panel count changed")
+                for arm in ARMS:
+                    gate.reload(f"checkpoint/{seed_row}/{arm}/{checkpoint}")
+                    checkpoint_path = run_root / "checkpoints" / seed_row / arm / f"episodes_{checkpoint}.pt"
+                    checkpoint_digest = _write_checkpoint(checkpoint_path, models[arm], {
+                        "seed_row": seed_row, "arm": arm, "episodes": checkpoint,
+                        "manifest_content_sha256": gate.content_digest,
+                        "common_two_arm_order_digest": gate.order_digest,
+                        "trainable_contract": trainable_contract(models[arm]),
+                    })
+                    _reload_checkpoint(checkpoint_path, checkpoint_digest, models[arm])
+                    checkpoint_receipts.append({
+                        "path": str(checkpoint_path), "sha256": checkpoint_digest,
+                        "seed_row": seed_row, "arm": arm, "episodes": checkpoint,
+                    })
+                    panel = _evaluate(
+                        model=models[arm], specs=panel_specs, seed_row=seed_row,
+                        arm=arm, panel=str(checkpoint), gate=gate, activity=activity,
+                    )
+                    panels_by_arm[arm].append(_public_panel(panel))
+            final_specs = [spec for spec in by_consumer["final_keep"] if spec.seed_row == seed_row]
+            final_panels = {}
+            raw_final = {}
+            for arm in ARMS:
+                raw_final[arm] = _evaluate(
+                    model=models[arm], specs=final_specs, seed_row=seed_row,
+                    arm=arm, panel="4096_keep_extra", gate=gate, activity=activity,
+                )
+                final_panels[arm] = _public_panel(raw_final[arm])
+            controls = _controls(
+                model=models[CANDIDATE_ARM], final_keep=final_specs,
+                final_panel=[spec for spec in checkpoint_specs_all if spec.panel == "4096"],
+                seed_row=seed_row, gate=gate, activity=activity,
+                baseline=raw_final[CANDIDATE_ARM],
+            )
+            candidate_curve = [panel["by_branch"]["KEEP"] for panel in panels_by_arm[CANDIDATE_ARM]]
+            generic_curve = [panel["by_branch"]["KEEP"] for panel in panels_by_arm[GENERIC_ARM]]
+            candidate_current = [panel["by_branch"]["CURRENT"] for panel in panels_by_arm[CANDIDATE_ARM]]
+            generic_current = [panel["by_branch"]["CURRENT"] for panel in panels_by_arm[GENERIC_ARM]]
+            candidate_aulc = normalized_keep_aulc(candidate_curve)
+            generic_aulc = normalized_keep_aulc(generic_curve)
+            candidate_aulcs.append(candidate_aulc)
+            generic_aulcs.append(generic_aulc)
+            final_keep_values.append(final_panels[CANDIDATE_ARM]["accuracy"])
+            control_rows.append(controls)
+            current_gaps.append(abs(normalized_keep_aulc(candidate_current) - normalized_keep_aulc(generic_current)))
+            seed_results[seed_row] = {
+                "panels": panels_by_arm, "final_keep": final_panels,
+                "controls": controls, "keep_aulc": {
+                    CANDIDATE_ARM: candidate_aulc, GENERIC_ARM: generic_aulc,
+                    "candidate_minus_generic": candidate_aulc - generic_aulc,
+                }, "losses": losses_by_arm,
+            }
+
+        if activity != EXPECTED_FULL_ACTIVITY:
+            raise B2ContractError("exact full activity accounting changed")
+        if not _caps_valid(activity):
+            raise B2ContractError("full activity/cap accounting failed")
+        evidence = {
+            "contract_valid": True, "activity_nonzero": all(activity[name] > 0 for name in (
+                "environment_episodes", "production_policy_forwards", "learner_updates",
+                "trainer_invocations", "optimizer_steps", "evaluator_calls")),
+            "caps_valid": True, "paired_exposure": True,
+            "matched_shapes_counts_state": True, "terminal_ppo_only": True,
+            "no_side_channel": True,
+            "candidate_minus_generic_keep_aulc": sum(c - g for c, g in zip(candidate_aulcs, generic_aulcs)) / 4.0,
+            "candidate_final_keep": sum(final_keep_values) / 4.0,
+            "selected_p_mediation": sum(row["selected_p_mediation"] for row in control_rows) / 4.0,
+            "cross_swap_follow_rate": sum(row["cross_swap_follow_rate"] for row in control_rows) / 4.0,
+            "candidate_decoy_accuracy_change": sum(row["decoy_accuracy_change"] for row in control_rows) / 4.0,
+            "candidate_decoy_kernel_tv_change": sum(row["decoy_kernel_tv_change"] for row in control_rows) / 4.0,
+            "current_arm_aulc_gap": max(current_gaps),
+            "reset_stale_target_rate": sum(row["reset_stale_target_rate"] for row in control_rows) / 4.0,
+        }
+        branch = classify_result(evidence)
+        result = {
+            "treatment": TREATMENT_ID, "environment": ENVIRONMENT_ID,
+            "branch": branch, "evidence": evidence, "calibration": calibration,
+            "paired_seed_results": seed_results, "activity_counts": activity,
+            "caps": CAPS, "checkpoints": checkpoint_receipts,
+            "manifest": {
+                "path": str(gate.path), "file_sha256": gate.file_digest,
+                "content_sha256": gate.content_digest,
+                "common_two_arm_order_digest": gate.order_digest,
+                "consumer_reload_receipts": gate.consumer_receipts,
+            },
+            "lifecycle": {
+                "claim_path": str(claim_path), "full_ordinal": 1,
+                "retry_count": 0, "rescue_count": 0, "result_write_once": True,
+            },
+            "limitations": "One manifest-conditioned four-seed toy full; no global-rank, deployment, promotion, retirement, sibling-direction, or generality claim.",
+        }
+        result_path.parent.mkdir(parents=True, exist_ok=True)
+        selector.write_exclusive(result_path, _json_bytes(result) + b"\n")
+        if json.loads(result_path.read_text(encoding="utf-8")) != result:
+            raise B2ContractError("public result reload mismatch")
+        result_path.chmod(0o444)
+        return result
+    except Exception as exc:
+        failure = {
+            "branch": "B2_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY",
+            "error_type": type(exc).__name__, "error": str(exc),
+            "traceback": traceback.format_exc(), "activity_counts": activity,
+            "retry_authorized": False, "rescue_authorized": False,
+        }
+        failure_path = run_root / "registered_full_failure.json"
+        if not failure_path.exists():
+            selector.write_exclusive(failure_path, _json_bytes(failure) + b"\n")
+        raise
+
+
+__all__ = [
+    "EpisodeSpec", "Step", "ToyEpisode", "AuthenticatedPartnerRecallRelay",
+    "build_policy", "paired_models", "trainable_contract", "tensor_batch",
+    "ppo_complete_batch", "terminal_reward", "normalized_keep_aulc",
+    "classify_result", "validate_manifest", "canonical_catalog_rows",
+    "canonical_final_keep_rows",
+    "readiness_contract", "B2ContractError", "TREATMENT_ID", "ENVIRONMENT_ID",
+    "ManifestGate", "run_registered_full",
+    "CANDIDATE_ARM", "GENERIC_ARM", "SEEDS", "PPO", "CAPS", "THRESHOLDS",
+    "EXPECTED_FULL_ACTIVITY",
+]
