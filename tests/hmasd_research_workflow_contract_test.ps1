@@ -1453,15 +1453,18 @@ if (-not (Test-Path -LiteralPath (Join-Path $repo $header['legacy_snapshot']) -P
 }
 foreach ($id in @($header['session_record_ids'].Split('|') | Where-Object { $_ })) {
     $record = Read-FencedRecord "docs/project/current-work/sessions/$id.md" "CURRENT_WORK session $id"
-    $ownerIdentity = if ($record.ContainsKey('owner_role')) {
-        $record['owner_role']
-    } elseif ($record.ContainsKey('session_owner_role')) {
-        $record['session_owner_role']
+    if ($id -eq 'code_project_manager') {
+        if ($record['document_kind'] -ne 'current_work_projection' -or
+            $record['owner_role'] -ne 'code_project_manager') {
+            throw "CURRENT_WORK Code PM projection identity mismatch: $id"
+        }
+    } elseif ($id -eq 'workflow_design_manager') {
+        if ($record['document_kind'] -ne 'current_work_session' -or
+            $record['session_owner_role'] -ne 'workflow_design_manager') {
+            throw "CURRENT_WORK WDM session identity mismatch: $id"
+        }
     } else {
-        $null
-    }
-    if ($record['document_kind'] -ne 'current_work_session' -or $ownerIdentity -ne $id) {
-        throw "CURRENT_WORK owner identity mismatch: $id"
+        throw "CURRENT_WORK session roster contains unsupported record: $id"
     }
 }
 $common = @{}
@@ -1672,7 +1675,7 @@ foreach ($required in @(
     if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Skill missing: $required" }
 }
 foreach ($required in @(
-    'Ordinary workflow changes use the registered Auditor/Scout, Implementer and integrated Reviewer stages with parallel-first scheduling and dependency order',
+    'Ordinary workflow changes use the registered Auditor/Scout, Implementer and integrated Reviewer work with parallel-first scheduling and dependency order',
     'Dispatch read-only Auditor/Scout concurrently with already-freezable implementation slices',
     'serialize only actual information dependencies or same-file writers',
     'The integrated Reviewer follows the complete integrated batch',
@@ -1715,16 +1718,18 @@ foreach ($required in @(
 # the compact ownership boundary here; detailed behavior remains in owner
 # Roles and Skills.
 foreach ($required in @(
-    'decompose work and delegate bounded detail',
-    'synthesize results, retain owner decisions',
-    'continue unrelated safe work while children run',
-    'EM owns one direction''s decomposition',
-    'CM owns project coordination, code, runtime and technical acceptance',
-    'EM remains advisory and owns only one direction''s scientific meaning',
-    'formal or project-canonical science',
+    'The task-scoped Explorer L1 is orchestrator-first for exactly one direction',
+    'decomposes the task, chooses the matching child for direction-local detail',
+    'judges dependency and concurrency',
+    'synthesizes conclusions, prepares a local continuity proposal',
+    'owns direction-local scientific/advisory intake, project-validation intake',
+    'direction-only reverse-intake',
+    'cm_scope=direction:<id>|shared:<component>',
+    'cm_slice_acceptance=final_for_slice',
+    'Root also owns user-authorized, advisory macro/portfolio science: cross-direction comparison, ranking, pause/continue, dependency/combination decisions and complete Direction Action Map acceptance',
+    'Root does not execute direction research or automatically create formal/project-canonical science',
     'Exact assignment, child-lane, waiting and recovery mechanics remain in the owner Roles and Skills',
-    'children provide bounded answers only and never replace EM''s direction-local',
-    'without authorizing portfolio preload')) {
+    'There is no portfolio Explorer scope')) {
     if (-not $workflowOrchestrationSurfaces.ToLowerInvariant().Contains($required.ToLowerInvariant())) {
         throw "Workflow orchestrator orientation missing: $required"
     }

@@ -15,7 +15,7 @@ $cpmTransportRole = Get-Content -Raw -LiteralPath $cpmTransportRolePath
 $cpmWorkspacePath = Join-Path $repo 'docs/session-workspaces/code_project_manager/README.md'
 $cpmFailureContainmentPath = Join-Path $repo 'docs/session-workspaces/code_project_manager/FAILURE_CONTAINMENT.md'
 $currentWorkIndexPath = Join-Path $repo 'docs/project/CURRENT_WORK.md'
-$currentWorkSessionPath = Join-Path $repo 'docs/project/current-work/sessions/code_project_manager.md'
+$currentWorkProjectionPath = Join-Path $repo 'docs/project/current-work/sessions/code_project_manager.md'
 $writingAssignmentsSkillPath = Join-Path $repo '.agents/skills/hmasd-writing-agent-assignments/SKILL.md'
 $writingAssignmentsSkill = Get-Content -Raw -LiteralPath $writingAssignmentsSkillPath
 $writingAssignmentsSkillNormalized = $writingAssignmentsSkill -replace '\s+', ' '
@@ -28,7 +28,7 @@ $obsoleteWdmPlanPath = Join-Path $repo 'docs/session-workspaces/workflow_design_
 $cpmWorkspace = Get-Content -Raw -LiteralPath $cpmWorkspacePath
 $cpmFailureContainment = Get-Content -Raw -LiteralPath $cpmFailureContainmentPath
 $currentWorkIndex = Get-Content -Raw -LiteralPath $currentWorkIndexPath
-$currentWorkSession = Get-Content -Raw -LiteralPath $currentWorkSessionPath
+$currentWorkProjection = Get-Content -Raw -LiteralPath $currentWorkProjectionPath
 $verifierRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/VERIFIER.md')
 $verifierProfile = Get-Content -Raw -LiteralPath (Join-Path $repo '.codex/agents/hmasd-verifier.toml')
 $reviewerRole = Get-Content -Raw -LiteralPath (Join-Path $repo '.agents/roles/REVIEWER.md')
@@ -1064,24 +1064,32 @@ if ($currentWorkIndexMap.document_kind -cne 'current_work_index' -or
     throw 'CURRENT_WORK index identity/schema is invalid'
 }
 
-$currentWorkSessionMap = ConvertTo-HmasdRecordMap -Text $currentWorkSession -Label 'Code PM current-work session'
-Assert-ExactHmasdKeyInventory -Actual $currentWorkSessionMap -ExpectedKeys @(
+$currentWorkProjectionMap = ConvertTo-HmasdRecordMap -Text $currentWorkProjection -Label 'Code PM current-work projection'
+Assert-ExactHmasdKeyInventory -Actual $currentWorkProjectionMap -ExpectedKeys @(
     'document_kind', 'schema_version', 'state_revision',
     'compatibility_path_semantics', 'owner_role', 'physical_writer',
     'state_update_route', 'continuity', 'reload_boundary', 'next_boundary',
-    'cross_owner_route', 'workstream_ids', 'external_pointer_ids') -Label 'Code PM current-work session'
-if ($currentWorkSessionMap.document_kind -cne 'current_work_session' -or
-    $currentWorkSessionMap.schema_version -cne '2' -or
-    $currentWorkSessionMap.state_revision -cne '1' -or
-    $currentWorkSessionMap.compatibility_path_semantics -cne 'owner_state_not_live_session' -or
-    $currentWorkSessionMap.owner_role -cne 'code_project_manager' -or
-    $currentWorkSessionMap.physical_writer -cne 'root' -or
-    $currentWorkSessionMap.state_update_route -cne 'code_project_manager_accepted_proposal_to_root' -or
-    $currentWorkSessionMap.continuity -cne 'file_backed_owner_state' -or
-    $currentWorkSessionMap.reload_boundary -cne 'each_level1_spawn' -or
-    $currentWorkSessionMap.next_boundary -cne 'new_root_session_reload_router_and_relevant_owner_state' -or
-    $currentWorkSessionMap.cross_owner_route -cne 'return_to_root') {
-    throw 'Code PM current-work session identity/schema is invalid'
+    'cross_owner_route', 'macro_portfolio_science_owner', 'cm_scope_grammar',
+    'cm_scope_semantics', 'projection_pointer_ids', 'root_union_check',
+    'technical_semantic_conflict_route') -Label 'Code PM current-work projection'
+if ($currentWorkProjectionMap.document_kind -cne 'current_work_projection' -or
+    $currentWorkProjectionMap.schema_version -cne '2' -or
+    $currentWorkProjectionMap.state_revision -cne '1' -or
+    $currentWorkProjectionMap.compatibility_path_semantics -cne 'project_operations_pointer_only' -or
+    $currentWorkProjectionMap.owner_role -cne 'code_project_manager' -or
+    $currentWorkProjectionMap.physical_writer -cne 'root' -or
+    $currentWorkProjectionMap.state_update_route -cne 'code_project_manager_accepted_proposal_to_root' -or
+    $currentWorkProjectionMap.continuity -cne 'file_backed_owner_state' -or
+    $currentWorkProjectionMap.reload_boundary -cne 'each_level1_spawn' -or
+    $currentWorkProjectionMap.next_boundary -cne 'new_root_reload_router_and_relevant_owner_state' -or
+    $currentWorkProjectionMap.cross_owner_route -cne 'return_to_root' -or
+    $currentWorkProjectionMap.macro_portfolio_science_owner -cne 'root' -or
+    $currentWorkProjectionMap.cm_scope_grammar -cne 'direction:<id>|shared:<component>' -or
+    $currentWorkProjectionMap.cm_scope_semantics -cne 'direction_bound_or_temporary_named_shared_component' -or
+    $currentWorkProjectionMap.projection_pointer_ids -cne 'formal_toy_research|uav_validation|explorer_project_validation|independent_research_explorer_pointer' -or
+    $currentWorkProjectionMap.root_union_check -cne 'mechanical_Tests_and_Static_across_accepted_path_sets' -or
+    $currentWorkProjectionMap.technical_semantic_conflict_route -cne 'root_to_owning_scoped_code_project_manager') {
+    throw 'Code PM current-work projection identity/schema is invalid'
 }
 
 $stateBearingKeys = @(
@@ -1093,7 +1101,7 @@ $stateBearingKeys = @(
     'latest_artifact_pointer', 'project_state_replication')
 foreach ($container in @(
     @{ Label = 'CURRENT_WORK index'; Record = $currentWorkIndexMap },
-    @{ Label = 'Code PM current-work session'; Record = $currentWorkSessionMap })) {
+    @{ Label = 'Code PM current-work projection'; Record = $currentWorkProjectionMap })) {
     foreach ($key in $stateBearingKeys) {
         if ($container.Record.ContainsKey($key)) {
             throw "$($container.Label) duplicates state-bearing key: $key"
@@ -1101,27 +1109,26 @@ foreach ($container in @(
     }
 }
 
-$sessionWorkstreamIds = @($currentWorkSessionMap.workstream_ids -split '\|')
-$sessionPointerIds = @($currentWorkSessionMap.external_pointer_ids -split '\|')
-$cpmRecordIds = @($sessionWorkstreamIds + $sessionPointerIds)
+$projectionPointerIds = @($currentWorkProjectionMap.projection_pointer_ids -split '\|')
+$projectionRecordIds = $projectionPointerIds
 $publicSessionIds = @($currentWorkIndexMap.session_record_ids -split '\|')
 $indexedRecordIds = @($currentWorkIndexMap.common_record_ids -split '\|')
-if (($cpmRecordIds | Sort-Object -Unique).Count -ne $cpmRecordIds.Count -or
+if (($projectionRecordIds | Sort-Object -Unique).Count -ne $projectionRecordIds.Count -or
     ($publicSessionIds | Sort-Object -Unique).Count -ne $publicSessionIds.Count -or
     ($indexedRecordIds | Sort-Object -Unique).Count -ne $indexedRecordIds.Count -or
     $publicSessionIds -cnotcontains 'code_project_manager' -or
     $publicSessionIds -cnotcontains 'workflow_design_manager' -or
     $indexedRecordIds -cnotcontains 'workflow_control_plane') {
-    throw 'Current-work session/index inventories contain duplicates or omit Code PM'
+    throw 'Current-work projection/index inventories contain duplicates or omit Code PM'
 }
-foreach ($recordId in $cpmRecordIds) {
+foreach ($recordId in $projectionRecordIds) {
     if ($indexedRecordIds -cnotcontains $recordId) {
-        throw "Code PM session record is absent from the public index: $recordId"
+        throw "Code PM projection record is absent from the public index: $recordId"
     }
 }
 
 $commonDirectory = Join-Path $repo 'docs/project/current-work/common'
-foreach ($recordId in $cpmRecordIds) {
+foreach ($recordId in $projectionRecordIds) {
     $recordPath = Join-Path $commonDirectory "$recordId.md"
     $record = ConvertTo-HmasdRecordMap -Text (Get-Content -Raw -LiteralPath $recordPath) -Label $recordId
     Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
@@ -1133,29 +1140,60 @@ foreach ($recordId in $cpmRecordIds) {
     if (-not $currentWorkIndex.Contains("current-work/common/$recordId.md")) {
         throw "CURRENT_WORK index omits the link for: $recordId"
     }
-    if ($sessionWorkstreamIds -ccontains $recordId) {
-        Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
-            'workstream_id', 'status', 'active_assignment_id', 'next_boundary',
-            'environment', 'grant_or_authority_reference', 'current_evidence_pointer') -Label $recordId
-        if ($record.record_kind -cne 'workstream' -or $record.workstream_id -cne $recordId -or
-            $record.owner_role -cne 'code_project_manager') {
-            throw "Current-work workstream identity mismatch: $recordId"
+    switch -CaseSensitive ($record.record_kind) {
+        'workstream' {
+            if ($recordId -notin @('formal_toy_research', 'uav_validation')) {
+                throw "Unexpected workstream in Code PM projection: $recordId"
+            }
+            Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
+                'workstream_id', 'status', 'active_assignment_id', 'next_boundary',
+                'environment', 'grant_or_authority_reference', 'current_evidence_pointer') -Label $recordId
+            if ($record.workstream_id -cne $recordId -or
+                $record.owner_role -cne 'code_project_manager') {
+                throw "Current-work workstream identity mismatch: $recordId"
+            }
         }
-    } elseif ($sessionPointerIds -ccontains $recordId) {
-        Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
-            'pointer_id', 'semantic_owner', 'physical_writer', 'continuity_entry',
-            'continuity_revision_source', 'reload_boundary',
-            'scientific_state_replication', 'project_state_replication',
-            'authority_effect') -Label $recordId
-        if ($record.record_kind -cne 'owner_continuity_pointer' -or
-            $record.owner_role -cne 'root' -or
-            $record.project_state_replication -cne 'forbidden' -or
-            $record.scientific_state_replication -cne 'forbidden' -or
-            $record.authority_effect -cne 'none') {
-            throw "Current-work external pointer identity mismatch: $recordId"
+        'project_operations_projection' {
+            if ($recordId -cne 'explorer_project_validation') {
+                throw "Unexpected project-operations projection in Code PM projection: $recordId"
+            }
+            Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
+                'workstream_id', 'status', 'active_assignment_id', 'next_boundary',
+                'environment', 'grant_or_authority_reference', 'current_evidence_pointer',
+                'macro_portfolio_science_owner', 'cm_scope_grammar', 'cm_scope_semantics',
+                'direction_handoff_route', 'root_union_check',
+                'technical_semantic_conflict_route') -Label $recordId
+            if ($record.workstream_id -cne $recordId -or
+                $record.owner_role -cne 'code_project_manager' -or
+                $record.macro_portfolio_science_owner -cne 'root' -or
+                $record.cm_scope_grammar -cne 'direction:<id>|shared:<component>' -or
+                $record.cm_scope_semantics -cne 'direction_bound_or_temporary_named_shared_component' -or
+                $record.direction_handoff_route -cne 'explorer_to_root_to_matching_direction_code_project_manager|code_project_manager_to_root_to_matching_explorer' -or
+                $record.root_union_check -cne 'mechanical_Tests_and_Static_across_accepted_path_sets' -or
+                $record.technical_semantic_conflict_route -cne 'root_to_owning_scoped_code_project_manager') {
+                throw "Current-work project-operations projection identity mismatch: $recordId"
+            }
         }
-    } else {
-        throw "Common record is not owned by the Code PM session roster: $recordId"
+        'owner_continuity_pointer' {
+            if ($recordId -cne 'independent_research_explorer_pointer') {
+                throw "Unexpected owner-continuity pointer in Code PM projection: $recordId"
+            }
+            Assert-HmasdRequiredKeys -Actual $record -RequiredKeys @(
+                'pointer_id', 'semantic_owner', 'physical_writer', 'continuity_entry',
+                'continuity_revision_source', 'reload_boundary',
+                'scientific_state_replication', 'project_state_replication',
+                'authority_effect') -Label $recordId
+            if ($record.pointer_id -cne 'independent_research_explorer' -or
+                $record.owner_role -cne 'root' -or
+                $record.project_state_replication -cne 'forbidden' -or
+                $record.scientific_state_replication -cne 'forbidden' -or
+                $record.authority_effect -cne 'none') {
+                throw "Current-work owner-continuity pointer identity mismatch: $recordId"
+            }
+        }
+        default {
+            throw "Unsupported common record kind in Code PM projection: $recordId ($($record.record_kind))"
+        }
     }
 }
 
