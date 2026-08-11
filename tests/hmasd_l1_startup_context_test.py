@@ -5,6 +5,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
+    import tomli as tomllib
+
 
 ROOT = Path(__file__).resolve().parents[1]
 ROUTER = ROOT / "AGENTS.md"
@@ -27,6 +32,22 @@ L1_SURFACES = {
         ROOT / ".codex" / "agents" / "hmasd-independent-research-explorer.toml",
     ),
 }
+L1_REGISTRATION = {
+    "wdm": ("HMASDWorkflowDesignManager", "hmasd-workflow-design-manager"),
+    "cpm": ("HMASDCodeProjectManager", "hmasd-code-project-manager"),
+    "explorer": ("HMASDIndependentResearchExplorer", "hmasd-independent-research-explorer"),
+}
+STANDARD_L1_PROFILE_KEYS = {
+    "name",
+    "description",
+    "model",
+    "model_reasoning_effort",
+    "sandbox_mode",
+    "approval_policy",
+    "nickname_candidates",
+    "developer_instructions",
+}
+REJECTED_L1_PROFILE_KEYS = {"role", "role_pointer", "registered_child_pointers"}
 
 
 def _normalized(paths: tuple[Path, ...]) -> str:
@@ -106,6 +127,30 @@ def test_explorer_startup_is_scope_keyed_and_does_not_preload_unowned_context() 
         "hash admission",
     ):
         assert stale not in explorer, stale
+
+
+def test_l1_registration_pointers_are_static_and_runtime_unproven() -> None:
+    """Static checks only; they do not prove runtime registration/live spawn or repair completion."""
+    with CODEX_CONFIG.open("rb") as stream:
+        config = tomllib.load(stream)
+    agents = config["agents"]
+    for owner, (table_name, profile_name) in L1_REGISTRATION.items():
+        role_path, profile_path = L1_SURFACES[owner]
+        assert role_path.is_file()
+        assert profile_path.is_file()
+        assert agents[table_name]["config_file"] == f"./agents/{profile_name}.toml"
+        with profile_path.open("rb") as stream:
+            profile = tomllib.load(stream)
+        assert profile["name"] == profile_name
+        assert set(profile) <= STANDARD_L1_PROFILE_KEYS
+        assert not set(profile).intersection(REJECTED_L1_PROFILE_KEYS)
+        instructions = " ".join(str(profile["developer_instructions"]).split()).lower()
+        role = " ".join(role_path.read_text(encoding="utf-8").split()).lower()
+        assert ".agents/roles/" in instructions
+        assert "agent_tree_level=1" in instructions or "agent_tree_level=1" in role
+        assert "parent=root" in instructions or "parent=root" in role
+        if owner in {"wdm", "explorer"}:
+            assert "root" in instructions and "fork_turns=1" in instructions
 
 
 def test_hooks_are_empty_disabled_and_non_authoritative() -> None:

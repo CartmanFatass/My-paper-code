@@ -129,3 +129,13 @@ Root 负责 receipt 的 provision、record、integrate、release 或 retain，�
 - **交付边界**：queued mailbox delivery 只有在 active Root wait 或之后的 user turn 才能被处理；它不会触发 callback、scheduler、watcher、automatic continuation 或 busy polling，也不会复活已结束的 Root turn。
 - **未完成工作与慢审查**：慢审查的安全 interrupt 不能代替 Root final precondition；若仍有未完成动作，必须明确报告 unfinished/blocked。只有新的用户 authority/decision 确实阻塞，或用户明确替换/取消工作时，Root 才可在报告未完成工作的同时 final。
 - `research_execution=false`；`science_state_changed=false`；本切片未改变 science state。
+
+## L1 注册失败事故与静态覆盖（2026-08-11）
+
+- **新鲜 smoke 事实**：canonical Root 以 `fork_turns=1` 成功并发运行两个精确的 `hmasd-code-project-manager` L1；两个精确的 `hmasd-workflow-design-manager` L1 和两个精确的 `hmasd-independent-research-explorer` L1 尝试均失败为 `unknown agent_type`。更早的一次 fresh WDM 报告 `agent type is currently not available`。没有 default、没有 L2，观测到的最大深度为 1；没有 Hook、写入、Git/helper、runtime 或 research 失败。
+- **局部原因**：本地 CLI `0.147.0` 的 strict doctor 证据显示，unknown key 会使被拒 profile 被忽略：WDM 的 `role`，Explorer 的 `role_pointer`，以及后续发现的 `registered_child_pointers` 很可能同属不支持字段。PascalCase config table、精确 `config_file` 路径和 lower-hyphen `name` 的形状与成功 CPM 一致，因此没有 alias/name 修复依据。
+- **最小修复**：只移除被 strict doctor 证实不支持的顶层字段，保留标准 `name`/`model`/`model_reasoning_effort`/`sandbox_mode`/`approval_policy`/`developer_instructions`、精确 config 注册路径、Root 的 `fork_turns=1` 调用契约和 Role 定义的 child allow-list；不得借机改 CPM。
+- **证据边界**：四个 focused static test 只检查 keyed config/profile/schema/Role 结构，并明确不证明 runtime registration 或 live spawn，也不宣称 repair complete。官方 OpenAI docs 搜索没有确立当前 custom-agent schema；在此问题上本地 CLI、config 和 profile 证据是控制依据，但 runtime proof 仍待完成。
+- **Root 后续闸门**：Root 集成后必须 canonical reload，并用 `fork_turns=1` 对精确的 `hmasd-workflow-design-manager` 与 `hmasd-independent-research-explorer` 重新 fresh-smoke，同时确认 CPM 路由仍保持成功；本切片不替代该验证。
+- **等待纪律**：正常 writer/reviewer 返回应采用事件驱动的长 mailbox wait（建议 10–15 分钟，消息到达可提前返回）；只有稳定错误或明确 timeout 才做 status audit/safe interrupt。禁止 busy polling 和重复同义的状态查询；等待不是新的调度或 acceptance 权限。
+- `research_execution=false`；`science_state_changed=false`；本事故记录和静态覆盖未改变 science state。

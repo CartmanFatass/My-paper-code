@@ -436,4 +436,65 @@ foreach ($selected in @(
     }
 }
 
+# Static regression coverage only: these checks do not prove runtime
+# registration/live spawn and do not claim that the profile repair is complete.
+$standardL1Keys = @(
+    'name', 'description', 'model', 'model_reasoning_effort',
+    'sandbox_mode', 'approval_policy', 'nickname_candidates',
+    'developer_instructions')
+$rejectedL1Keys = @('role', 'role_pointer', 'registered_child_pointers')
+$l1Routes = @(
+    @{ Section = 'HMASDCodeProjectManager'; Name = 'hmasd-code-project-manager'; Model = 'gpt-5.6-sol'; Effort = 'high'; Role = '.agents/roles/CODE_PROJECT_MANAGER.md'; Children = @('hmasd-code-scout', 'hmasd-implementer', 'hmasd-implementer-terra', 'hmasd-reviewer', 'hmasd-verifier', 'hmasd-experiment-operator', 'hmasd-cpm-mechanical', 'hmasd-cpm-agentify-transport') },
+    @{ Section = 'HMASDWorkflowDesignManager'; Name = 'hmasd-workflow-design-manager'; Model = 'gpt-5.6-sol'; Effort = 'high'; Role = '.agents/roles/WORKFLOW_DESIGN_MANAGER.md'; Children = @('hmasd-workflow-auditor', 'hmasd-workflow-implementer', 'hmasd-workflow-reviewer') },
+    @{ Section = 'HMASDIndependentResearchExplorer'; Name = 'hmasd-independent-research-explorer'; Model = 'gpt-5.6-sol'; Effort = 'max'; Role = '.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md'; Children = @('hmasd-research-scout', 'hmasd-research-innovator', 'hmasd-research-critic', 'hmasd-research-principles-analyst', 'hmasd-explorer-mechanical', 'hmasd-research-artifact-writer', 'hmasd-explorer-agentify-transport') })
+foreach ($route in $l1Routes) {
+    $sectionMatch = [regex]::Match(
+        $config,
+        '(?ms)^\[agents\."' + [regex]::Escape($route.Section) + '"\](?<body>.*?)(?=^\[|\z)')
+    if (-not $sectionMatch.Success) { throw "Missing L1 config section: $($route.Section)" }
+    $sectionBody = $sectionMatch.Groups['body'].Value
+    $configEntry = 'config_file = "./agents/' + $route.Name + '.toml"'
+    if (-not $sectionBody.Contains($configEntry)) { throw "Wrong L1 config path: $($route.Name)" }
+
+    $profilePath = Join-Path $repo ('.codex/agents/' + $route.Name + '.toml')
+    $rolePath = Join-Path $repo $route.Role
+    if (-not (Test-Path -LiteralPath $profilePath) -or -not (Test-Path -LiteralPath $rolePath)) {
+        throw "Missing L1 profile or Role: $($route.Name)"
+    }
+    $profile = Get-Content -Raw -LiteralPath $profilePath
+    # Restrict key extraction to the TOML header; developer instructions are
+    # multiline prose and can legitimately contain tokens such as fork_turns=1.
+    $profileHeader = ($profile -split 'developer_instructions\s*=\s*"""', 2)[0]
+    $profileKeys = @([regex]::Matches($profileHeader, '(?m)^([A-Za-z_][A-Za-z0-9_]*)\s*=') | ForEach-Object { $_.Groups[1].Value })
+    foreach ($key in $profileKeys) {
+        if ($standardL1Keys -notcontains $key) { throw "Unsupported L1 profile key $key in $($route.Name)" }
+    }
+    foreach ($key in $rejectedL1Keys) {
+        if ([regex]::IsMatch($profileHeader, '(?m)^' + [regex]::Escape($key) + '\s*=')) {
+            throw "Rejected L1 profile key remains: $key in $($route.Name)"
+        }
+    }
+    foreach ($required in @(
+        ('name = "' + $route.Name + '"'),
+        ('model = "' + $route.Model + '"'),
+        ('model_reasoning_effort = "' + $route.Effort + '"'),
+        'sandbox_mode = "read-only"',
+        'approval_policy = "never"',
+        'developer_instructions = """',
+        $route.Role)) {
+        if (-not $profile.Contains($required)) { throw "L1 profile contract missing: $($route.Name): $required" }
+    }
+    $instructions = ($profile -replace '\s+', ' ').ToLowerInvariant()
+    $roleText = ((Get-Content -Raw -LiteralPath $rolePath) -replace '\s+', ' ').ToLowerInvariant()
+    foreach ($child in $route.Children) {
+        if (-not $instructions.Contains($child) -and -not $roleText.Contains($child)) {
+            throw "L1 child allow-list missing: $($route.Name): $child"
+        }
+    }
+    if ($route.Name -in @('hmasd-workflow-design-manager', 'hmasd-independent-research-explorer') -and
+        (-not $instructions.Contains('root') -or -not $instructions.Contains('fork_turns=1'))) {
+        throw "L1 Root caller fork_turns=1 contract missing: $($route.Name)"
+    }
+}
+
 Write-Output 'HMASD_AGENT_PROFILE_BENCHMARK_RESULT_OK'

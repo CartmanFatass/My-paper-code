@@ -81,6 +81,22 @@ ACTIVE_AGENTIFY_TRANSPORTS = {
     "hmasd-cpm-agentify-transport",
     "hmasd-explorer-agentify-transport",
 }
+L1_CONFIG_TABLES = {
+    "hmasd-workflow-design-manager": "HMASDWorkflowDesignManager",
+    "hmasd-code-project-manager": "HMASDCodeProjectManager",
+    "hmasd-independent-research-explorer": "HMASDIndependentResearchExplorer",
+}
+STANDARD_L1_PROFILE_KEYS = {
+    "name",
+    "description",
+    "model",
+    "model_reasoning_effort",
+    "sandbox_mode",
+    "approval_policy",
+    "nickname_candidates",
+    "developer_instructions",
+}
+REJECTED_L1_PROFILE_KEYS = {"role", "role_pointer", "registered_child_pointers"}
 
 
 def _load(path: Path) -> dict:
@@ -151,6 +167,38 @@ def test_three_root_registered_l1_managers_have_frozen_routing() -> None:
     assert set(callable_leaves) == set(LEAF_ROLES)
     assert ACTIVE_AGENTIFY_TRANSPORTS <= set(callable_leaves)
     assert "hmasd-agentify-transport" not in callable_leaves
+
+
+def test_l1_registry_schema_and_caller_contract_are_static_only() -> None:
+    """Static checks only; they do not prove runtime registration/live spawn or repair completion."""
+    config = _load(CONFIG)
+    agents = config["agents"]
+    router = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+
+    for name, table_name in L1_CONFIG_TABLES.items():
+        spec = MANAGERS[name]
+        table = agents.get(table_name)
+        assert isinstance(table, dict), table_name
+        assert table["config_file"] == f"./agents/{name}.toml"
+        profile = _load(spec["profile"])
+        assert profile["name"] == name
+        assert set(profile) <= STANDARD_L1_PROFILE_KEYS
+        assert not set(profile).intersection(REJECTED_L1_PROFILE_KEYS)
+        assert profile["model"] == spec["model"]
+        assert profile["model_reasoning_effort"] == spec["effort"]
+        assert profile["sandbox_mode"] == "read-only"
+        assert profile["approval_policy"] == "never"
+        instructions = _flat(str(profile["developer_instructions"]))
+        role = _flat(spec["role"].read_text(encoding="utf-8"))
+        assert ".agents/roles/" in instructions
+        for child in spec["allow"]:
+            assert child in instructions or child in role, (name, child)
+
+    for name in ("hmasd-workflow-design-manager", "hmasd-independent-research-explorer"):
+        instructions = _flat(str(_load(MANAGERS[name]["profile"])["developer_instructions"]))
+        assert "root" in instructions and "fork_turns=1" in instructions, name
+    assert "workflow_design_manager_root_fork_turns=1_caller_action_only" in router
+    assert "Root invokes every WDM L1 with caller action `fork_turns=1`" in router
 
 
 def test_l1_scope_keys_allow_disjoint_manager_instances_without_a_global_singleton() -> None:
