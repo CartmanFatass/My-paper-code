@@ -104,6 +104,8 @@ candidate_trajectory_count_ceiling=16
 scalable_algorithm_target=O(N*k_neighbor)_or_O(N*logN)
 cross_task_transport=return_to_root
 cross_task_target=root_task_context
+l1_user_facing_display_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
+l1_user_facing_display_prefix=CM_<purpose_or_direction>
 cross_task_model_and_thinking_overrides=omit
 research_stage=EXPLORATION|FORMALIZATION
 default_research_stage=EXPLORATION
@@ -161,6 +163,11 @@ multiple CPM L1 instances in one tree, each uniquely identified by
 fresh Convergence CPM with a self-contained union assignment for overall
 technical and runtime acceptance. No persistent manager, monitor or successor
 is presumed.
+
+On Root-facing L1 task names, progress labels and reports, this role uses the
+shared display contract's `CM_<purpose_or_direction>` prefix. The short suffix
+names the code purpose or direction and does not change the immutable internal
+task ID or grant workflow, research or science authority.
 
 ## Owns
 

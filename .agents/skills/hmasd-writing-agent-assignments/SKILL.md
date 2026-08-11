@@ -40,6 +40,23 @@ capability. It applies to code, research, review, browser, transport and other
 non-code work. The trigger is the communication problem, not a particular
 file format or child model.
 
+### Root-facing L1 display labels
+
+When writing a Root-dispatched L1 assignment or its progress/report wording,
+apply the defining `l1_user_facing_display_contract` in
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`, under its `L1 user-facing
+display names` heading: use `WM_<purpose>` for Workflow
+Manager control-plane work, `EM_<direction>` for the actual Independent
+Research Explorer Manager, and `CM_<purpose_or_direction>` for Code Manager
+work. Keep suffixes short and informative, and do not rename immutable
+internal task IDs or registered profile/types. A WM suffix may name a
+research-routing target but must remain visibly workflow work; research
+execution belongs under EM. For WM research-routing changes, preserve the
+clarity fields `research_execution=false` and `science_state_changed=false`;
+only a separate authorized EM science result that actually exists can supply
+different research or science evidence. The label change itself performs no
+research and changes no science state.
+
 ## The normal path: compile a task model
 
 Before choosing paths or a wire shape, understand the task in ordinary prose.

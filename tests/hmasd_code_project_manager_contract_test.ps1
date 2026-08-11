@@ -165,8 +165,12 @@ foreach ($required in @(
     }
 }
 foreach ($required in @(
-    'These are semantic completeness cues, not a schema or admission check',
-    'order is work organization rather than queue state',
+    'These are semantic completeness cues',
+    'semantic guidance rather than',
+    'mandatory packet schema or validator gate',
+    'ordered group of public brief paths',
+    'work organization rather than',
+    'ranking or scientific comparison',
     'does not substitute External Pro for experiment, instance binding, pause or abandon',
     'Explorer gives one clear instruction naming implementation, instance binding',
     'without separate code or experiment permission fields',
@@ -182,7 +186,8 @@ foreach ($required in @(
     'selected direction identity',
     'Direction-local context binding',
     'CPM''s reverse result, returned through Root, begins with its conclusion',
-    'mirrors that same primary direction or explicitly named direction set',
+    'mirrors that same',
+    'primary direction or explicitly named direction set',
     'Codex-native message fallback carries the same binding',
     'preserves the original handoff/artifact',
     'returns exactly one concrete semantic clarification to Root for routing to the sender',
@@ -973,7 +978,8 @@ foreach ($forbidden in @(
 $currentWorkIndexMap = ConvertTo-HmasdRecordMap -Text $currentWorkIndex -Label 'CURRENT_WORK index'
 Assert-ExactHmasdKeyInventory -Actual $currentWorkIndexMap -ExpectedKeys @(
     'document_kind', 'schema_version', 'index_owner', 'state_updated',
-    'session_record_ids', 'common_record_ids', 'legacy_snapshot') -Label 'CURRENT_WORK index'
+    'session_record_ids', 'common_record_ids', 'legacy_snapshot',
+    'workflow_control_plane_contract', 'workflow_control_plane_transition') -Label 'CURRENT_WORK index'
 if ($currentWorkIndexMap.document_kind -cne 'current_work_index' -or
     $currentWorkIndexMap.schema_version -cne '3' -or
     $currentWorkIndexMap.index_owner -cne 'workflow_design_manager' -or

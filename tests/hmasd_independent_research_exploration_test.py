@@ -1300,6 +1300,15 @@ def test_explorer_scope_tasks_preserve_direction_and_portfolio_context_boundarie
     assert "scientific" in combined
 
 
+def test_explorer_instances_are_scope_keyed_and_not_root_singletons() -> None:
+    """Explorer L1 multiplicity follows distinct research scope keys."""
+    role = (REPO / ".agents" / "roles" / "INDEPENDENT_RESEARCH_EXPLORER.md").read_text(
+        encoding="utf-8"
+    )
+    assert "multiple_scoped_instances_per_root_tree=true" in role
+    assert "one_instance_per_owner_per_root_tree=true" not in role
+
+
 def test_scope_transport_and_worktree_ownership_stay_root_routed() -> None:
     """Scope bindings survive relay while lifecycle and Git stay with Root."""
     surfaces = (

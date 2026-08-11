@@ -12,6 +12,18 @@ child_assignment_format=self_contained_natural_language_not_schema_admission
 child_forked_context=background_only
 workflow_assignment_identity=workflow_assignment_id|owned_paths|wdm_session_workspace
 workflow_assignment_identity_semantics=scope_anchor_only_not_task_meaning_or_completion
+l1_user_facing_display_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
+l1_user_facing_display_scope=Root_dispatched_L1_task_name|progress_label|report_label
+l1_user_facing_manager_prefixes=workflow_manager:WM_<purpose>|independent_research_explorer_manager:EM_<direction>|code_project_manager:CM_<purpose_or_direction>
+l1_user_facing_suffix_rule=short_semantically_informative_purpose_or_direction
+l1_internal_task_id_rule=immutable_internal_id_may_differ_from_user_facing_label
+l1_wm_display_semantics=workflow_control_plane_only|research_routing_target_allowed|research_execution_not_implied
+l1_em_display_semantics=independent_research_execution_for_named_direction
+l1_cm_display_semantics=code_project_execution_for_named_purpose_or_direction
+l1_user_facing_clarity_fields=research_execution|science_state_changed
+l1_wm_research_routing_defaults=research_execution=false|science_state_changed=false
+l1_wm_status_exception=separate_authorized_em_science_result_must_exist_for_any_true_research_or_science_claim
+l1_display_name_change_effect=research_execution=false|science_state_changed=false
 workflow_role_label=workflow_design_manager
 owner_l1_multiplicity=role_defined_scope_keyed_within_root_tree
 owner_scope_key_uniqueness=one_l1_per(role,role_defined_scope_key)_within_root_tree
@@ -93,6 +105,24 @@ explorer_reverse_intake_root_install=exact_path_and_git_revision_check_then_exac
 explorer_reverse_intake_retry=one_concrete_delta_clarification_only
 explorer_reverse_intake_retry_state_queue_receipt_validator=forbidden
 ```
+
+## L1 user-facing display names
+
+Root-dispatched L1 task names, progress labels and report labels use the
+prefix for the actual manager lane: `WM_<purpose>` for Workflow Manager,
+`EM_<direction>` for the Independent Research Explorer Manager, and
+`CM_<purpose_or_direction>` for Code Manager. The suffix is short and
+semantically informative. These are user-facing labels; immutable internal task
+IDs may differ.
+
+The prefix is part of the meaning, not a rename of a profile or agent type.
+`WM_` identifies workflow/control-plane work even when its short purpose names
+a research-routing target; research execution belongs under `EM_`. A WM task
+that changes research routing reports the clarity fields
+`research_execution=false` and `science_state_changed=false`. A separate,
+authorized EM science result may provide contrary research or science evidence
+only when that result actually exists; the WM routing change and this naming
+contract perform no research and change no science state.
 
 ## Ownership model
 

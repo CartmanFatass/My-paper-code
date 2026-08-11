@@ -551,7 +551,6 @@ foreach ($required in @(
     'explorer_mechanical_task=literal_fact_organization_only',
     'explorer_mechanical_write_authority=none',
     'explorer_mechanical_scientific_authority=none',
-    'explorer_mechanical_barrier=none',
     'research_state_effect=none')) {
     $surfaces = @(
         $independentResearchRole,
@@ -761,7 +760,7 @@ foreach ($required in @(
     'model=gpt-5.6-sol',
     'reasoning_effort=max',
     'canonical_scientific_authority=none',
-    'research_state_change_authority=direct_user_in_explorer_task_only',
+    'research_state_change_authority=user_authorization_received_through_Root_within_assigned_scope',
     'wdm_cpm_scientific_command_effect=none',
     'external_pro_packet_effect=advisory_input_under_user_authorized_workflow',
     'write_scope=none_at_L1',
@@ -775,7 +774,7 @@ foreach ($required in @(
     'local_research_write_tool=delegated_L2_or_root_proposal',
     'local_research_shell_mutation=forbidden',
     'project_validation_read_authority=project_wide_read_only_as_needed',
-    'logical_assignment_count=derived_from_exact_work_roster',
+    'logical_assignment_count=derived_from_exact_scope_task_tree',
     'canonical_phase_barrier=required_for_algorithm_inspiration_campaign_only',
     'adaptive_question_dispatch=bounded_registered_child_consultation',
     'adaptive_question_barrier=none_for_singleton|exact_named_question_set_only_when_joint',
@@ -783,7 +782,7 @@ foreach ($required in @(
     'completion_order_priority=forbidden',
     'research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation',
     'automatic_campaign_progression=allowed_until_convergence_within_authorized_boundary',
-    'per_review_user_authorization=not_required_inside_active_grant',
+    'per_review_user_authorization=covered_by_Root_authorized_scope_grant',
     'wdm_campaign_approval=none',
     'unbounded_source_expansion=forbidden',
     'methodology_reference=research-methodology.md_required_for_C_or_named_science_review_trigger',
@@ -802,7 +801,8 @@ foreach ($required in @(
     'independent_pro_constructive_adversarial_barrier=required',
     'INDEPENDENT_RESEARCH_DIRECTION_PACKET',
     'Only that new version may support a',
-    'research architect and portfolio integrator for advisory research outside the formal HMASD workflow')) {
+    'direction_scope=sole_semantic_owner_of_named_research_direction',
+    'portfolio_scope=compact_accepted_direction_packets_and_pointers|cross_direction_comparison|advisory_integration')) {
     if (-not $independentResearchRoleNormalized.Contains($required)) {
         throw "Independent Research Explorer role missing: $required"
     }
@@ -832,7 +832,7 @@ foreach ($required in @(
     'no code, runtime, write, technical acceptance or formal scientific acceptance',
     'If evidence is sufficient and the next step is cheap and reversible, Explorer L1 decides directly.',
     'The child result is consultation only',
-    'Explorer L1 remains the portfolio integrator and sole semantic local-research intake and decision owner',
+    'the assigned Explorer remains the sole semantic local-research intake and decision owner for its scope; a portfolio Explorer additionally integrates',
     'First-round children see neither peer answers nor a favored answer',
     'completion order is not evidence priority',
     'disagreement is not voting',
@@ -1039,7 +1039,7 @@ foreach ($required in @(
     'source and prerequisite-packet bindings',
     'allowed local judgment',
     'completion meaning',
-    'not a mandatory schema, file, validator or admission gate')) {
+    'not a mandatory schema, file or validator gate')) {
     if (-not $independentResearchProcedureNormalized.Contains($required)) {
         throw "Independent research Skill missing: $required"
     }
@@ -1178,7 +1178,7 @@ foreach ($required in @(
     'persistent_explorer_progress=forbidden',
     'canonical_campaign_phase_barriers=required',
     'adaptive_singleton_global_barrier=none',
-    'adaptive_joint_local_merge_barrier=only_when_every_named_answer_is_necessary',
+    'An exact joint roster has a local merge barrier only when every named answer is a necessary input to one Explorer decision.',
     'completion_order_priority=forbidden',
     'semantic_writer=independent_research_explorer',
     'automatic_campaign_progression=allowed_until_convergence',
@@ -1202,7 +1202,7 @@ foreach ($required in @(
     'self-contained natural-language',
     'source and prerequisite-packet bindings',
     'completion meaning',
-    'not a mandatory schema, assignment file, validator or admission gate')) {
+    'not a mandatory schema, assignment file or validator gate')) {
     if (-not $parallelResearchNormalized.Contains($required)) {
         throw "Parallel research workflow missing: $required"
     }
@@ -1485,7 +1485,7 @@ foreach ($required in @(
     'role=code_project_manager',
     'role_kind=registered_task_scoped_level1_orchestrator',
     'code_authority=exclusive',
-    'runtime_authority=exclusive',
+    'runtime_authority=scope_local_technical_runtime_judgment',
     'formal_external_review_request_and_intake_authority=exclusive',
     'experiment_dispatch_and_result_routing=exclusive',
     'mechanical_result_acceptance=exclusive',
@@ -1579,7 +1579,7 @@ foreach ($roleText in @($implementerRole, $reviewerRole)) {
 foreach ($required in @(
     'role=code_project_manager',
     'formal_external_review_request_and_intake_authority=exclusive',
-    'runtime_authority=exclusive',
+    'runtime_authority=scope_local_technical_runtime_judgment',
     'parent=root',
     'agent_tree_level=1',
     'scientific_authority=none',
@@ -1643,7 +1643,7 @@ foreach ($required in @(
     'simple_operation_paths=one_normal_plus_one_simple_fallback',
     'simple_operation_success=user_visible_requested_result',
     'passive_external_generation_wait_excluded_from_engineering_budget=true',
-    'reviews it once by default',
+    'one integrated Reviewer by default',
     'parallel reviewers only for genuinely',
     'Their advice cannot create a second pass.',
     'the log is evidence',
@@ -1702,7 +1702,7 @@ foreach ($required in @(
     'synthesize results, retain owner decisions',
     'continue unrelated safe work while children run',
     'Explorer L1 owns decomposition, selection, dependency/concurrency, science synthesis and continuity semantics, cross-direction comparison',
-    'CPM retains architecture, runtime, integration and technical acceptance',
+    'CPM retains architecture, scope-local runtime judgment, integration and technical acceptance',
     'Explorer outputs remain advisory portfolio/local-research comparisons, intakes and decisions',
     'Formal/project canonical science remains with the user/External Pro contract',
     'Exact assignment, child-lane, waiting and recovery mechanics remain in the owner Roles and Skills',
@@ -1827,7 +1827,7 @@ foreach ($required in @(
     'Root owns physical application, lifecycle and Git mechanics',
     'this Skill does not promise a current commit, push or external workspace cleanup',
     'No Hook Stop route is part of this workflow')) {
-    if (-not $workflowAuditNormalized.Contains($required)) { throw "Workflow audit Root-first contract missing: $required" }
+    if (-not $workflowAuditNormalized.ToLowerInvariant().Contains($required.ToLowerInvariant())) { throw "Workflow audit Root-first contract missing: $required" }
 }
 foreach ($required in @(
     'workflow_decision_question_condition=changes_named_plan_field',

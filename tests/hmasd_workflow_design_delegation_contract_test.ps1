@@ -130,11 +130,14 @@ foreach ($required in @(
     'reverse_intake_explorer_acceptance=full_read_semantic_accept_or_reject',
     'reverse_intake_root_action=exact_path_and_git_revision_check_then_exact_copy_install',
     'WDM owns this owner/transport/order/path interface',
-    'does not own artifact integrity, map meaning or Explorer acceptance',
-    'defect queue is evidence history only')) {
+    'does not own artifact integrity, map meaning or Explorer acceptance')) {
     if (-not $normalizedReverseContract.Contains($required.ToLowerInvariant())) {
         throw "Workflow reverse-intake boundary missing: $required"
     }
+}
+if (-not $defectQueue.Contains(
+        'reverse_intake_queue_role=evidence_log_only_not_dispatcher_or_scheduler')) {
+    throw 'Workflow defect queue role missing: reverse_intake_queue_role=evidence_log_only_not_dispatcher_or_scheduler'
 }
 
 foreach ($required in @(

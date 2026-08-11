@@ -150,12 +150,33 @@ def test_cpm_action_bearing_technical_treatment_view_is_projection_only() -> Non
     ):
         assert forbidden not in surfaces
 
-    assert "runtime_capacity_pool_units=3" in role
-    assert "three-unit" in agile
-    assert "independent_admitted_treatment_execution=parallel_first_within_capacity" in role
-    assert "runtime_admission_judgment=admit|up-class|pending_runtime_capacity" in role
-    assert "event-driven continuation" in agile
-    assert "no clock-driven scheduler or polling" in agile
+    for required in (
+        "runtime_unit_accounting=none",
+        "runtime_pool=none",
+        "runtime_class_quota=none",
+        "runtime_reservation=none",
+        "runtime_admission_ledger=none",
+        "runtime_observation_owner=root_mechanical",
+        "runtime_observation_facts=live_processes|cpu|memory|concrete_resource_conflicts",
+        "runtime_judgment_owner=code_project_manager_scope_local",
+        "high_cost_runtime_authorization=explicit_user_task_via_root",
+        "max_threads=20",
+        "max_threads_semantics=agent_concurrency_ceiling_only",
+        "max_threads_runtime_authorization=none",
+        "parallelism_runtime_authorization=none",
+    ):
+        assert required in role
+    for required in (
+        "actual live processes, CPU, memory and concrete resource conflicts",
+        "runtime_unit_accounting=none",
+        "runtime_pool=none",
+        "runtime_reservation=none",
+        "runtime_admission_ledger=none",
+        "High-cost runtime requires an explicit user task routed through Root",
+        "`max_threads=20` is an agent-concurrency ceiling only",
+        "No runtime or costly execution is authorized by this Skill alone",
+    ):
+        assert required in agile
 
 
 def test_durable_and_temporary_workspaces_remain_separate() -> None:

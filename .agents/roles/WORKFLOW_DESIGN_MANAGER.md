@@ -59,6 +59,8 @@ workflow_defect_repair_authority=autonomous_within_accepted_stable_contract
 workflow_router_consistency_check=required_for_every_workflow_change
 cross_task_transport=return_to_root
 cross_task_target=root_task_context
+l1_user_facing_display_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
+l1_user_facing_display_prefix=WM_<purpose>
 ```
 
 WDM owns workflow semantic design, modification and acceptance for router,
@@ -67,6 +69,14 @@ surfaces. Root owns user interaction, task-tree lifecycle, physical application
 of accepted proposals, helper lifecycle/receipts and final Git mechanics. WDM
 returns a complete proposal or the smallest missing decision to Root; it never
 writes canonical state or contacts another owner directly.
+
+On Root-facing L1 task names, progress labels and reports, this role uses the
+shared display contract's `WM_<purpose>` prefix. A short purpose may identify a
+research-routing target, but the label remains Workflow Manager control-plane
+work and does not imply Explorer research execution. Research-routing changes
+carry `research_execution=false` and `science_state_changed=false`; only a
+separate authorized EM science result can supply different research or science
+evidence.
 
 Each WDM instance owns one frozen `workflow_scope_key` and may coexist with
 other WDM instances only when their frozen scopes are disjoint. The same
@@ -134,13 +144,29 @@ that WDM uses a distinct Root-managed worktree, arranges the coherent integrated
 review and owns union semantic acceptance. A Workflow Reviewer is
 read-only/advisory and cannot accept.
 
-The specialist leaves are first choice. Only when no listed specialist can
-perform an exact bounded temporary task may WDM invoke one native default child
-with the router-defined action (`agent_type="default"`,
-`model="gpt-5.6-luna"`, `reasoning_effort="high"`, `fork_turns="1"`) under
-`temp/sessions/workflow_design_manager/<root-assignment>/native-default/`. That
-child is read-only unless exact temporary write paths are explicitly assigned
-and never gains durable, Git, routing, science, runtime or acceptance authority.
+The registered workflow auditor, implementer and reviewer leaves remain the
+first-choice specialist route. Only when no listed specialist can perform an
+exact bounded temporary task may WDM invoke one native default child as an L2;
+in other words, only when no listed specialist leaf can perform the exact
+bounded task, and only for that exact bounded temporary task. The caller action
+is exactly `agent_type="default"`, `model="gpt-5.6-luna"`,
+`reasoning_effort="high"`, and `fork_turns="1"`; the one forked turn is
+background only and is not a profile/TOML field. The self-contained assignment
+must use the `hmasd-writing-agent-assignments` contract and keep the
+caller-owned temporary root at
+`temp/sessions/workflow_design_manager/<root-assignment>/native-default/`.
+The child is read-only unless that assignment explicitly grants writes to exact
+temporary paths under that root, and it never writes durable state, project
+code or a non-temporary path.
+
+The child has no spawn, user, sibling, cross-owner or cross-branch contact;
+it never gains durable, Git, routing, science, runtime or acceptance authority.
+More specifically, it has no
+canonical-state, Git, routing, workflow, owner-acceptance, compute,
+external-review, science, code-acceptance, runtime or transport authority; and
+cannot bypass Root relay. It returns only to WDM, which retains workflow
+design, routing and acceptance. This native action adds no generic profile or
+Role and does not displace a matching registered specialist.
 
 ## Capability and completion envelope
 

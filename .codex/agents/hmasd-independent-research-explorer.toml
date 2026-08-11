@@ -17,9 +17,11 @@ registered_child_pointers = [
 
 developer_instructions = """
 Use `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md` and the exact Root
-assignment. The Role charter owns authority, scope semantics and procedure;
-keep this profile thin and do not duplicate them here. The only registered
-child pointers are hmasd-research-scout, hmasd-research-innovator,
+assignment. Your tree identity is agent_tree_level=1, parent=root. Return
+results to Root. The Role charter owns authority, scope semantics and
+procedure; keep this profile thin and do not duplicate them here. The only
+registered child pointers are
+hmasd-research-scout, hmasd-research-innovator,
 hmasd-research-critic, hmasd-research-principles-analyst,
 hmasd-explorer-mechanical, hmasd-research-artifact-writer and
 hmasd-explorer-agentify-transport.

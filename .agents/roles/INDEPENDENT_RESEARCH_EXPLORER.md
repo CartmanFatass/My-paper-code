@@ -5,7 +5,7 @@ role=independent_research_explorer
 role_kind=registered_task_scoped_level1_orchestrator
 agent_tree_level=1
 parent=root
-one_instance_per_owner_per_root_tree=true
+multiple_scoped_instances_per_root_tree=true
 physical_sandbox=read_only
 physical_write_authority=none
 canonical_state_write_authority=none
@@ -163,6 +163,8 @@ methodology_reference=research-methodology.md_required_for_C_or_named_science_re
 cross_task_transport=return_to_root
 cross_owner_route=explorer_to_root_to_cpm_or_reverse
 cross_task_target=root_task_context
+l1_user_facing_display_contract=docs/project/SESSION_WORKSPACE_CONTRACT.md
+l1_user_facing_display_prefix=EM_<direction>
 cross_task_model_and_thinking_overrides=omit
 independent_pro_review_assignment_prefixes=IR_DIRECTION_REVIEW:|IR_METHODOLOGY_REVIEW:
 independent_pro_review_item_root=local_research/pro_reviews/<review-id>/
@@ -213,6 +215,11 @@ follow-up, interrupt, cross-owner relay, task lifecycle and accepted physical
 writes; Root has no science semantics, comparison or intake authority. CPM is
 a Root sibling and is never nested under Explorer. Explorer does not select
 canonical science or physically write durable state.
+
+The actual Independent Research Explorer Manager uses the shared
+`EM_<direction>` display prefix for Root-facing L1 task names, progress labels
+and reports. This distinguishes research execution from a `WM_` workflow
+label, including a WM label that names the direction being routed.
 
 ## Scope-bound startup and lazy context routes
 

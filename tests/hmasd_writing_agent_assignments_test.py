@@ -5,6 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / ".agents/skills/hmasd-writing-agent-assignments/SKILL.md"
+SESSION_CONTRACT = ROOT / "docs/project/SESSION_WORKSPACE_CONTRACT.md"
 REFERENCES = SKILL.parent / "references"
 AGILE = ROOT / ".agents/skills/hmasd-agile-research-development/SKILL.md"
 CODE_GUIDE = (
@@ -53,6 +54,24 @@ def test_skill_trigger_and_task_model_recipe_are_explicit() -> None:
     ):
         assert cue in text
     assert "parent is a context compiler" in text
+
+
+def test_skill_points_l1_display_labels_to_the_shared_contract() -> None:
+    skill = _normalized(SKILL)
+    contract = _normalized(SESSION_CONTRACT)
+    assert "l1_user_facing_display_contract" in skill
+    assert "docs/project/session_workspace_contract.md" in skill
+    assert "l1 user-facing display names" in skill
+    for cue in (
+        "wm_<purpose>",
+        "em_<direction>",
+        "cm_<purpose_or_direction>",
+        "immutable internal task ids",
+        "research_execution=false",
+        "science_state_changed=false",
+    ):
+        assert cue in skill
+        assert cue in contract
 
 
 def test_skill_preserves_semantics_without_a_schema_or_second_gate() -> None:

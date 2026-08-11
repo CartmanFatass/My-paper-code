@@ -95,8 +95,8 @@ Explorer and CPM are active owners/orchestrators, not passive relays or
 schedulers. They decompose work and delegate bounded detail, synthesize
 results, retain owner decisions, and continue unrelated safe work while
 children run. Independent Research Explorer L1 alone owns cross-direction
-advisory portfolio comparison; CPM retains architecture, runtime admission,
-integration and technical acceptance. Explorer outputs remain advisory
+advisory portfolio comparison; CPM retains architecture, scope-local
+runtime judgment, integration and technical acceptance. Explorer outputs remain advisory
 portfolio/local-research comparisons, intakes and decisions. Explorer L1 is
 read-only and semantically authors the exact advisory decision/handoff; Root
 owns user communication, cross-owner relay, lifecycle and accepted physical
@@ -152,19 +152,19 @@ For result-bearing experiments, Explorer L1 owns the scientific active roster,
 direction-local predecessor context, advisory per-result local-research
 semantic intake and sole advisory decision authoring; Explorer L1 remains
 read-only and returns complete accepted proposals to Root;
-CPM owns runtime-capacity admission, live process/resource
-  observations, isolated execution and per-artifact technical acceptance. A
-  handoff may describe prospective runtime class/units in prose, but its A/B/C
-  scientific evidence level is independent and CPM never infers runtime class or
-  barrier closure from science or `local_research/`. The detailed stateless
-  observation, pool, barrier, resource and event-driven continuation rules
-  remain only in `parallel-research-workflow.md`; this map keeps the owner-lane
-  edge and does not create a shared scheduler, merged acceptance or
-  cross-direction barrier. Read-only Explorer science lanes remain independent
-  of CPM pool/admission by default; only an exact question depending on an
-  unreturned CPM result creates a direction-local science barrier. An exclusive
-  formal/heavy run reserves only experiment admission; all non-experiment work
-  that does not contend for the observed bottleneck continues.
+CPM owns isolated execution and per-artifact technical acceptance, making
+scope-local technical/runtime judgments from Root's live process, CPU, memory
+and concrete resource-conflict observations. The current runtime contract and
+authorization boundary are defined by `.agents/roles/CODE_PROJECT_MANAGER.md`
+and `.agents/skills/hmasd-agile-research-development/SKILL.md`; this map does
+not duplicate their no-unit-accounting, no-pool, no-reservation or
+no-admission-ledger mechanics, or their high-cost runtime authorization rule.
+`max_threads=20` denotes agent-tree concurrency only and never runtime
+authorization. Read-only Explorer science lanes remain independent of CPM
+execution by default; only an exact question depending on an unreturned CPM
+result creates a direction-local science barrier. Runtime observation,
+authorization and continuation details remain in those canonical owner
+contracts.
 
 The Explorer mechanical edge is a native assignment to a literal-fact
 organization child; it never replaces Explorer L1 comparison, semantic intake

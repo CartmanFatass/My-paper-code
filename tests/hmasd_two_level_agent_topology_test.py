@@ -16,6 +16,7 @@ except ModuleNotFoundError:  # pragma: no cover - Python 3.10 fallback
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / ".codex" / "config.toml"
+SESSION_CONTRACT = ROOT / "docs/project/SESSION_WORKSPACE_CONTRACT.md"
 
 MANAGERS = {
     "hmasd-workflow-design-manager": {
@@ -91,6 +92,15 @@ def _flat(text: str) -> str:
     return " ".join(text.split()).lower()
 
 
+def _contract_fields() -> dict[str, str]:
+    fields: dict[str, str] = {}
+    for line in SESSION_CONTRACT.read_text(encoding="utf-8").splitlines():
+        name, separator, value = line.partition("=")
+        if separator and re.fullmatch(r"[a-z0-9_]+", name):
+            fields[name] = value
+    return fields
+
+
 def test_config_declares_depth_two_and_twenty_thread_capacity() -> None:
     config = _load(CONFIG)
     agents = config["agents"]
@@ -161,6 +171,62 @@ def test_l1_scope_keys_allow_disjoint_manager_instances_without_a_global_singlet
     ):
         assert required in router, required
     assert "workflow_scope_key" in wdm_role
+
+
+def test_root_l1_user_facing_display_contract_keeps_manager_lanes_distinct() -> None:
+    fields = _contract_fields()
+    assert fields["l1_user_facing_display_contract"] == (
+        "docs/project/SESSION_WORKSPACE_CONTRACT.md"
+    )
+    assert fields["l1_user_facing_display_scope"] == (
+        "Root_dispatched_L1_task_name|progress_label|report_label"
+    )
+    assert fields["l1_user_facing_manager_prefixes"] == (
+        "workflow_manager:WM_<purpose>|"
+        "independent_research_explorer_manager:EM_<direction>|"
+        "code_project_manager:CM_<purpose_or_direction>"
+    )
+    assert fields["l1_user_facing_suffix_rule"] == (
+        "short_semantically_informative_purpose_or_direction"
+    )
+    assert fields["l1_wm_display_semantics"] == (
+        "workflow_control_plane_only|research_routing_target_allowed|"
+        "research_execution_not_implied"
+    )
+    assert fields["l1_em_display_semantics"] == (
+        "independent_research_execution_for_named_direction"
+    )
+    assert fields["l1_cm_display_semantics"] == (
+        "code_project_execution_for_named_purpose_or_direction"
+    )
+    assert fields["l1_internal_task_id_rule"] == (
+        "immutable_internal_id_may_differ_from_user_facing_label"
+    )
+    assert fields["l1_user_facing_clarity_fields"] == (
+        "research_execution|science_state_changed"
+    )
+    assert fields["l1_wm_research_routing_defaults"] == (
+        "research_execution=false|science_state_changed=false"
+    )
+    assert fields["l1_display_name_change_effect"] == (
+        "research_execution=false|science_state_changed=false"
+    )
+    assert "separate_authorized_em_science_result" in fields["l1_wm_status_exception"]
+
+    role_prefixes = {
+        "workflow_design_manager": "WM_<purpose>",
+        "independent_research_explorer": "EM_<direction>",
+        "code_project_manager": "CM_<purpose_or_direction>",
+    }
+    role_paths = {
+        "workflow_design_manager": ROOT / ".agents/roles/WORKFLOW_DESIGN_MANAGER.md",
+        "independent_research_explorer": ROOT / ".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md",
+        "code_project_manager": ROOT / ".agents/roles/CODE_PROJECT_MANAGER.md",
+    }
+    for role, prefix in role_prefixes.items():
+        role_text = role_paths[role].read_text(encoding="utf-8")
+        assert f"l1_user_facing_display_contract={fields['l1_user_facing_display_contract']}" in role_text
+        assert f"l1_user_facing_display_prefix={prefix}" in role_text
 
 
 def test_root_wdm_background_context_is_distinct_from_implementer_fork_context() -> None:

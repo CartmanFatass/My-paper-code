@@ -138,6 +138,15 @@ review and owns union semantic acceptance. A Workflow Reviewer is
 read-only/advisory and cannot accept; a slice packet does not
 claim integrated review or union acceptance.
 
+Root-dispatched L1 user-facing task names, progress labels and report labels
+follow the defining `L1 user-facing display names` section of
+`docs/project/SESSION_WORKSPACE_CONTRACT.md`: `WM_<purpose>` identifies
+Workflow Manager control-plane work, `EM_<direction>` identifies the actual
+Independent Research Explorer Manager, and `CM_<purpose_or_direction>`
+identifies Code Manager work. Immutable internal task IDs may differ. A WM
+label may name a research-routing target only when it remains visibly
+workflow/control-plane work; research execution is an EM concern.
+
 ## Registered L2 leaves
 
 Every L2 profile declares `role_kind=registered_task_scoped_level2_leaf`,
