@@ -1,4 +1,4 @@
 # Round 02 ledger
 
-- status: loop_02 completed end-to-end with accepted code/full result, same-conversation Pro convergence, and corrected scientific intake; branch valid nonseparating; direction retained parked with no successor and no CPM.
-- dependencies: preserve transport-integrity defect note; no byte-exact send claim.
+- status: valid VSP02-B5R1 experiment pending Agentify repair and same-conversation Pro convergence.
+- dependencies: implementation/result chain remains subject to transport repair and scientific convergence intake.
