@@ -3,7 +3,7 @@
 Owner: `direction:voronoi_quadrature_field_policy` Explorer Manager
 Candidate: `VQFP-VN-FAMILY-CUT-01`
 Treatment: `VQFP-B1-PERIODIC-LOCAL-MEASURE-v1`
-Exact prospective revision: `VQFP-B1-MATH-CLOSURE-20260812-04`
+Exact Pro-closed prospective revision: `VQFP-B1-MATH-CLOSURE-20260812-04`
 Superseded Pro-reviewed revisions:
 `VQFP-B1-MATH-CLOSURE-20260812-02`,
 `VQFP-B1-MATH-CLOSURE-20260812-03`
@@ -22,12 +22,12 @@ finite-budget inductive bias under the frozen roster and geometry shifts, not
 an impossibility result for learned attention.
 
 This document freezes a prospective B1 object. No VQFP parameter update,
-question-relevant treatment run, checkpoint, or treatment result exists. Before
-production, this exact revision must receive `CLOSED` from its dedicated same-
-direction ChatGPT External Pro conversation and that ruling must be intaken by
-this owner. Any accepted science-bearing correction creates a new complete
-revision and must
-return to the same Pro conversation. CM separately owns implementation
+question-relevant treatment run, checkpoint, or treatment result exists. The
+dedicated same-direction ChatGPT External Pro returned literal `CLOSED` on this
+exact revision, with zero science-bearing defects, and this owner has intaken
+that complete ruling. The mathematical/causal closure boundary is therefore
+complete. Any later science-bearing correction creates a new complete revision
+and must return to the same Pro conversation. CM separately owns implementation
 conformance and technical acceptance; Root owns production sequencing.
 
 The additional Gemini conversation is an independent innovator only. It may
@@ -54,6 +54,13 @@ revision `-01` produced no provider turn. No optimizer update or other question-
 relevant activity has begun. The DGP, arms, architecture, parameter count,
 seeds, samples, transition/state ceiling, direct margins, family-delete margin,
 and narrow claim ceiling otherwise remain unchanged.
+
+The same Pro conversation then naturally completed exact revision `-04` with
+`CLOSURE_AUTHORITY_DECISION=CLOSED`, `RESULT_BLIND=true`, and
+`SCIENCE_BEARING_DEFECT_COUNT=0`. It confirmed that the sole upper-bound-use
+correction is sufficient and that every previously passed component remains
+complete. This owner accepts that ruling without changing the scientific
+object.
 
 ## Question and causal object
 
@@ -1019,14 +1026,18 @@ acceptance, and a separately authorized controlled protocol.
 
 The direction-local scientific object is exactly revision
 `VQFP-B1-MATH-CLOSURE-20260812-04` in this file. The dedicated ChatGPT External
-Pro conversation already exists and must receive only the prepared exact
-same-conversation `-04` rereview after a new Root release. The unsent `-02`
-Gemini batch is superseded and non-transport-ready. Its exact independent `-04`
-replacement is frozen blind to every Pro answer at
+Pro conversation returned literal `CLOSED` on this exact revision, and the
+same-direction owner intake is complete at
+`docs/research/candidates/voronoi_quadrature_field_policy/VQFP_V4_EXTERNAL_PRO_CLOSED_INTAKE.md`.
+The mathematical/causal review boundary is complete; this does not grant
+technical acceptance or choose production timing. The unsent `-02` Gemini batch
+is superseded and non-transport-ready. Its exact independent `-04` replacement
+is frozen blind to every Pro answer at
 `temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_gemini_3_1_pro_extended_innovator_20260812_04/batch.json` and remains
-`PREPARED_NOT_SENT`. Production remains forbidden until Pro returns `CLOSED`
-on `-04`, this owner intakes that exact ruling, and CM accepts source
-conformance plus the zero-compute complexity bound.
+`PREPARED_NOT_SENT`. Root may now relay the exact card and owner handoff to CM
+for construction and technical acceptance. Production remains subject to
+Root's sequencing and CM acceptance of source conformance plus the zero-compute
+complexity bound.
 
 CM's eventual result packet must state whether question-relevant activity began,
 whether a complete valid result exists, the `P/R/K/M/T` endpoints and bounds,

@@ -2,6 +2,7 @@
 
 Owner: `direction:voronoi_quadrature_field_policy` Explorer Manager
 Exact science revision: `VQFP-B1-MATH-CLOSURE-20260812-04`
+Mathematical/causal closure: `CLOSED`, owner intake complete
 Superseded Pro-reviewed revisions: `VQFP-B1-MATH-CLOSURE-20260812-02`,
 `VQFP-B1-MATH-CLOSURE-20260812-03`
 Superseded unsent revision: `VQFP-B1-MATH-CLOSURE-20260812-01`
@@ -21,15 +22,16 @@ No scientific activity or treatment evidence exists. The dedicated clean VQFP
 ChatGPT External Pro conversation reviewed `-02` and returned five defects;
 `-03` closed all five but returned one residual upper-bound-use contradiction.
 This owner accepts all six and freezes the corrected complete `-04` composite.
-This packet authorizes neither implementation acceptance nor production. Only
-`CLOSED` on `-04` in that same Pro conversation, followed by same-direction EM
-intake, can permit
-Root to relay construction/production work to CM. The Gemini `-02` batch was
-never sent and is now non-transport-ready. The independent Gemini-v4 packet is
-frozen blind to every Pro answer, remains `PREPARED_NOT_SENT`, and is additive;
-it never consumes the Pro obligation.
+The same conversation then returned literal `CLOSED` on exact `-04`, with zero
+science-bearing defects, and this owner accepts the complete result-blind
+ruling. Mathematical/causal closure is complete without further science change.
+Root may relay this exact packet to CM for construction and technical
+acceptance; it does not itself accept implementation or choose production
+timing. The Gemini `-02` batch was never sent and is non-transport-ready. The
+independent Gemini-v4 packet is frozen blind to every Pro answer, remains
+`PREPARED_NOT_SENT`, and is additive; it never consumes or reopens Pro closure.
 
-Exact closure evidence and prepared continuation:
+Exact closure evidence and independent innovation status:
 
 ```text
 v2 raw archive:
@@ -38,8 +40,11 @@ temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_
 v3 raw archive:
 temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_chatgpt_pro_math_closure_20260812_03/results.json
 
-v4 PREPARED_NOT_SENT same-conversation batch:
-temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_chatgpt_pro_math_closure_20260812_04/batch.json
+v4 CLOSED raw archive:
+temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_chatgpt_pro_math_closure_20260812_04/results.json
+
+v4 same-direction owner intake:
+docs/research/candidates/voronoi_quadrature_field_policy/VQFP_V4_EXTERNAL_PRO_CLOSED_INTAKE.md
 
 independent Gemini-v4 PREPARED_NOT_SENT new-conversation batch:
 temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_gemini_3_1_pro_extended_innovator_20260812_04/batch.json
@@ -114,9 +119,9 @@ The accepted Pro-v2 corrections additionally freeze:
    confidence level, multiplicity family, threshold, branch order, sample,
    seed, panel, or compute count.
 
-## Exact object for CM after Pro closure
+## Exact Root-to-CM construction packet
 
-CM receives one prospective two-arm experiment:
+Root may now relay to CM one prospective two-arm experiment:
 
 - one noise-free 1-D periodic field-service host with `H=32`;
 - one shared policy trained at `N={6,10}` and evaluated unchanged at held-out
