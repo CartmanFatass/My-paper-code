@@ -88,6 +88,61 @@ opportunity cost, reversibility and reusable evidence. Park low-value ideas
 with a falsifiable revisit trigger; prefer a discriminator that can eliminate
 a family over many weakly informative runs.
 
+Idea discovery is construct-first, not codebase-first. Root first evaluates the
+scientific problem, proposed mechanism, estimand, matched comparator, predicted
+discriminator, strongest alternative and claim ceiling without requiring an
+existing implementation or a pre-existing single native host. Repository and
+host inspection follows as feasibility, reuse, cost and risk evidence only.
+`ABSENT_IN_CODEBASE`, `NO_NATIVE_HOST` and `NO_EXISTING_ADAPTER` are never by
+themselves portfolio rejection reasons. They close only a retrospective claim
+that the current system already contains the object. For a valuable mechanism,
+Root must also consider a separately named prospective construction candidate
+whose evidence is explicitly limited to the constructed system.
+
+Before filtering an absence-bearing idea, Root records whether the missing item
+is (a) an engineering object CM may build, (b) a scientific choice EM must
+define, (c) a provenance property that cannot be created retroactively, or (d)
+an implementation-cost fact. A prospectively constructible candidate receives
+an EM mechanism/comparator specification and, when answer-changing, an early CM
+feasibility question. Filter or park only for low scientific value, unresolved
+identifiability even after prospective construction, lack of a matched
+comparator, redundancy, or poor decision information relative to total cost.
+Code reuse and scientific priority remain separate portfolio scores.
+
+A Project Scout may report only factual `present|partial|absent|uncertain`
+repository observations. Root must not translate that return directly into
+`filter`, `park`, direction creation/closure, or scientific acceptance. If an
+implementation-cost claim materially drives a priority park, obtain a bounded
+CM feasibility/cost return for the EM-defined prospective treatment; do not
+infer high cost from repository absence. Prohibiting transfer or stitching of
+old evidence never prohibits constructing a fresh host with its own frozen
+identity, controls, evidence and claim ceiling.
+
+Portfolio dispositions are object-level, never an unqualified `FILTERED` or
+`FAILED`. Every screen and log names an object level (`direction`, `hypothesis`,
+`treatment`, or `run`), the evidence class, the exact closed proposition, any
+surviving prospective successor, and a revisit trigger. Use these meanings:
+
+- `RUN_TECHNICAL_TERMINAL_NO_SCIENCE`: one execution ended without admissible
+  scientific evidence; it says nothing by itself about its treatment or direction.
+- `TREATMENT_TERMINAL`: one frozen intervention/comparator is consumed,
+  invalidated or supported only within its claim ceiling.
+- `RETROSPECTIVE_FORMULATION_CLOSED`: an existence/provenance claim about the
+  predecessor is false or untestable; prospective construction remains a
+  separate question.
+- `PROSPECTIVE_SUCCESSOR_UNEVALUATED` or `QUEUED_FOR_CM_FEASIBILITY`: a valid
+  construct-first idea has not yet been built or run and is not a failure.
+- `PARKED_BY_PRIORITY_WITH_TRIGGER`: Root defers a direction for value/cost and
+  records the exact fact that would reactivate it.
+- `DIRECTION_RETIRED`: direction-level retirement is allowed only after the
+  same-direction EM has examined the strongest nonredundant construct-first
+  successors and evidence supports exhaustion or convergence. Absence of code,
+  one failed host gate, one invalid run or one terminal treatment is insufficient.
+
+Legacy `FILTERED_BEFORE_DIRECTION_CREATION` records are historical screening
+facts only. They must not be reported as scientific failure or direction-level
+retirement without a new object-level audit under this taxonomy.
+
 Use CM at two useful boundaries. Before a treatment freeze, Root may ask the
 same direction's CM for bounded code-observable feasibility, dependency,
 runtime and implementation-cost evidence; CM does not invent the scientific

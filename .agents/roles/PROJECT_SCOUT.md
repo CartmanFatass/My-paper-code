@@ -51,6 +51,14 @@ evidence-fidelity work for Explorer. Project Scout observations are factual
 input only and cannot become a design, scientific, technical, audit, review or
 acceptance conclusion.
 
+For code, object, interface and host existence questions, return only the
+bounded factual observation `present`, `partial`, `absent`, or `uncertain` with
+locators and searched scope. Never output or recommend `filter`, `park`,
+`retire`, `no direction`, `no CM`, or a portfolio action. Absence in the current
+repository does not imply that a prospective object is scientifically invalid,
+unconstructible or too costly. The invoking Root/EM owns construct-first
+successor judgment, and CM owns bounded implementation feasibility.
+
 The exact assignment is a self-contained natural-language task model. It names
 the read-only outcome, why it matters, assignment-named paths or facts, the
 direct consequence to confirm, protected owner boundaries and completion

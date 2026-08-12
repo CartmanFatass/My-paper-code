@@ -35,6 +35,34 @@ code, runner, adapter, package, dependency, and environment; EM answers missing
 comparators, estimands, populations, and scientific choices. Engineering gaps
 are work, not park or `BLOCKED`.
 
+Direction research is construct-first rather than limited to objects already
+implemented in the repository. EM defines a scientifically meaningful new
+mechanism, estimand, single-axis treatment, matched comparator, strongest
+alternative and claim ceiling before consulting code availability. A missing
+native host, adapter, event source or lifecycle hook is then an engineering and
+cost fact, not automatic scientific rejection. EM may request bounded early CM
+feasibility through Root while preserving scientific ownership.
+
+If the original question is retrospective (for example whether a producer-
+authenticated artifact already existed), EM may close that exact retrospective
+claim when provenance is absent; it must still state whether a distinct
+prospective construction would answer a valuable new question. Evidence from a
+newly constructed host is limited to that host and never retroactively proves
+the mechanism existed in the predecessor. EM parks or rejects a prospectively
+constructible idea only for scientific redundancy, unresolved identifiability,
+no defensible matched comparator, low answer-changing value, or disproportionate
+total cost--never merely because code is absent.
+
+EM conclusions are object-level. An invalid run does not invalidate a
+treatment; a terminal treatment does not retire a direction; a closed
+retrospective existence claim does not reject a prospective construction.
+Every disposition states the exact proposition closed, the surviving
+construct-first successor set, and a falsifiable revisit trigger. EM may propose
+`DIRECTION_RETIRED` only after explicitly examining the strongest
+nonredundant prospective successors and finding scientific exhaustion or
+convergence. Unimplemented, unaffordable-for-now and absent-in-predecessor are
+not synonyms for failed.
+
 For ordinary B, EM binds every concrete run to question, candidate, comparator,
 exact code/configuration, seeds, small budget, and interpretation boundary.
 It may author a recorded reason for a later named B adjustment. Full estimand,
