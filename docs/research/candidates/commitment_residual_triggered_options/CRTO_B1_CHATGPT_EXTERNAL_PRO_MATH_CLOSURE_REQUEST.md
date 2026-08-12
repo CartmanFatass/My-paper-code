@@ -5,14 +5,14 @@ provider=chatgpt
 purpose=authoritative_preproduction_mathematical_and_causal_closure
 direction=commitment_residual_triggered_options
 candidate=CRTO-B1
-revision=CRTO-B1-SCIENCE-20260812-01
-conversation=dedicated_same_direction_conversation_to_be_created_or_reused
+revision=CRTO-B1-SCIENCE-20260812-02
+conversation=dedicated_clean_new_direction_conversation_to_be_created
 send_status=PREPARED_NOT_SENT
 ```
 
 You are the rigorous external mathematical and causal reviewer for one proposed
 MARL algorithm direction. Review only the exact complete frozen revision
-`CRTO-B1-SCIENCE-20260812-01` in the GitHub repository, branch `aggressive`, at:
+`CRTO-B1-SCIENCE-20260812-02` in the GitHub repository, branch `aggressive`, at:
 
 `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_SCIENCE_CARD.md`
 
@@ -32,6 +32,11 @@ boundary within exact predecision strata. Q-only,
 rate-matched-hazard, forced-renewal, counterfactual action audit, calibration,
 support, and shortcut conditions bound interpretation. The proposed ceiling is
 an explicit finite-data/OOD inductive-bias claim, never added information.
+The full v2 composite also freezes the predictor/Cholesky optimizer contract,
+adapter and claim-bearing representability-probe fit, an independent four-regime
+hazard-development panel, complete-rollout cuts with an exact environment-step
+ledger, and the deterministic uniform derangement algorithm over the combined
+scored/donor boundary pool. No v1 provider turn or scientific activity occurred.
 
 Please determine whether the exact card is mathematically and causally closed
 enough to enter production. In particular scrutinize:
@@ -39,14 +44,17 @@ enough to enter production. In particular scrutinize:
 1. the semi-Markov timing, `4<->16` active-option law, cost accounting, and
    KEEP/terminate/replacement action semantics;
 2. whether the predictor fit/calibration split and arbitrary-horizon composition
-   avoid future leakage or test-fitted calibration;
+   avoid future leakage or test-fitted calibration, including its fixed
+   architecture, optimizer/update law, and Cholesky lower bound;
 3. whether CRTO and `FULL-HISTORY-AUX-TERM` are genuinely information-,
    capacity-, work-, and action-matched;
 4. whether the single-boundary intact-packet derangement and its donor/support/
-   first-stage rules identify residual alignment without post-treatment
-   conditioning or invalid interference inference;
+   first-stage rules, exact pooled-cell ordering, and fixed-point-free
+   permutation identify residual alignment without post-treatment conditioning
+   or invalid interference inference;
 5. whether the primary estimands, seed-level inference, margins, non-harm gates,
-   activity requirements, and mechanism audit permit the stated branches;
+   activity requirements, representability probe, rate-matched hazard fit,
+   four-regime cuts, step ledger, and mechanism audit permit the stated branches;
 6. the strongest remaining alternative explanation, exact claim ceiling, and
    whether the registered family-deletion condition overstates what B1 can
    eliminate; and

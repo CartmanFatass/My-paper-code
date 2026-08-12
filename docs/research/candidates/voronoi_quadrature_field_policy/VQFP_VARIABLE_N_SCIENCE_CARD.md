@@ -3,7 +3,8 @@
 Owner: `direction:voronoi_quadrature_field_policy` Explorer Manager
 Candidate: `VQFP-VN-FAMILY-CUT-01`
 Treatment: `VQFP-B1-PERIODIC-LOCAL-MEASURE-v1`
-Exact prospective revision: `VQFP-B1-MATH-CLOSURE-20260812-01`
+Exact prospective revision: `VQFP-B1-MATH-CLOSURE-20260812-02`
+Superseded unsent revision: `VQFP-B1-MATH-CLOSURE-20260812-01`
 Hard complexity contract: `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
 
 ## Decision first
@@ -29,6 +30,17 @@ The additional Gemini conversation is an independent innovator only. It may
 suggest counterexamples, mechanisms, scenario families, controls, or bridges,
 but it cannot supply mathematical closure, result convergence, technical
 acceptance, or portfolio selection.
+
+Revision `-02` is a prospective pre-Pro clarification of the complete object.
+Revision `-01` produced no provider turn and is superseded without scientific
+activity. The revision fixes three previously open choices: the named
+`EXPLICIT-PORT-BYPASS` diagnostic reuses the registered conflict one-step bank
+rather than creating a fifth control panel; the finite-budget actor and critic
+architecture is exact rather than left to implementation choice; and the
+action-TV gate plus two paired associations have fixed statistical units and
+aggregation rules. The DGP, arms, counts, direct endpoints, margins, resource
+ceiling, family-delete rule, second-surface trigger, and claim ceiling are
+otherwise unchanged.
 
 ## Question and causal object
 
@@ -183,10 +195,11 @@ retained. `J_episode` is the only primary performance scale.
 At tick `t`, before actions, sender `j` exposes the same tuple to both arms:
 
 - current exact cell-average demand `s_j(t)`;
-- previous effort, with a zero start token at `t=0`;
+- previous effort as one four-way token in `{START,0,1/2,1}`, with `START`
+  used only at `t=0`;
 - signed periodic displacement and the two adjacent cyclic gaps;
 - relative slot `PREV`, `SELF`, or `NEXT`; and
-- the current roster size `N` as a receiver context.
+- the fixed scalar `N/16` as a receiver context.
 
 The explicit scalar `v_j` is supplied through the registered aggregation-weight
 port in both arms. Geometry remains visible, so the learned comparator can
@@ -197,23 +210,106 @@ the volume port is intact or cut.
 
 Actions are sampled after all observations and messages are formed. Reward is
 then computed from the simultaneous joint action. The next exogenous field is
-advanced afterward. Centralized training may use the complete current physical
-state in one identical permutation-invariant critic for both arms; critic state
-is never routed to the actor.
+advanced afterward. Centralized training uses exactly the identical
+permutation-invariant critic frozen below for both arms; critic state is never
+routed to the actor.
 
 ## Shared policy and the one algorithmic difference
 
 Both arms use one parameter-shared sender/edge encoder, a 64-unit GRU, the same
 64-unit actor trunk, the same three-logit categorical head, and the same
-centralized critic. The edge encoder emits a value vector `h_ij` and one scalar
-residual gate logit `ell_ij`. Its first value coordinate is an immutable raw
-pass-through of `s_j`; the remaining coordinates are learned. The residual gate
-logit is not appended to either actor input or included inside `h_ij`. Both arms
-append the same local represented length, roster size, and receiver-local state.
-Tensor widths, forward calls, recurrent state, critic, message bytes, and
-nominal parameter count are identical. VQFP carries the same residual-gate
-output layer as a zero-gradient unused capacity match; the learned comparator
-alone may use that intended extra freedom.
+centralized critic. These widths and structures are science-bearing because the
+claim compares finite-budget inductive biases. CM may choose only numerically
+equivalent tensor layouts, batching, stable elementary forms, serialization,
+and ordinary implementation details that leave the following function,
+parameter count, initialization and work unchanged.
+
+For edge `(i,j)`, define the exact 11-vector
+
+```text
+e_ij = concat(
+    s_j,
+    one_hot(previous_effort_j in {START,0,1/2,1}),
+    wrap(x_j-x_i) in [-1/2,1/2),
+    g_(j-1), g_j,
+    one_hot(relative_slot in {PREV,SELF,NEXT})).
+```
+
+The common edge encoder is
+
+```text
+q_ij = tanh(Linear(11,64)(e_ij))
+w_ij = tanh(Linear(64,31)(q_ij))
+h_ij = concat(s_j,w_ij)                         # exactly 32 values
+ell_ij = Linear(64,1)(q_ij).
+```
+
+The first coordinate of `h_ij` is therefore an immutable raw pass-through. The
+residual gate `ell_ij` is not included in `h_ij`, appended to an actor input, or
+available by any route except the learned comparator's weighting equation.
+Both arms execute the gate head. VQFP carries it as a zero-gradient unused
+capacity/work match; the comparator may train and use it.
+
+After the arm-specific aggregation below, the exact recurrent actor input is
+
+```text
+x_i^actor = concat(
+    weighted_message_32,
+    V_i,
+    N/16,
+    s_i,
+    one_hot(previous_effort_i in {START,0,1/2,1}))  # exactly 39 values.
+```
+
+One 64-unit reset-after GRU with separate input and recurrent bias vectors
+consumes `x_i^actor`. For prior state `u`, its update is exactly
+
+```text
+r = sigmoid(W_ir*x + b_ir + W_hr*u + b_hr)
+z = sigmoid(W_iz*x + b_iz + W_hz*u + b_hz)
+n = tanh(W_in*x + b_in + r*(W_hn*u + b_hn))
+u_next = (1-z)*n + z*u.
+```
+
+All products marked `*` in the last two terms are elementwise after the stated
+matrix-vector maps. This is the PyTorch-style reset-after candidate equation,
+not the alternative `W_hn*(r*u)` convention. The hidden state is exactly zero
+at episode start and is reset only at episode end. The current `u_next` passes
+through `tanh(Linear(64,64))` and then `Linear(64,3)` to the categorical effort logits.
+There is no layer normalization, batch normalization, dropout, attention layer,
+second message-passing layer, skip route, or separate `N`-specific parameter.
+
+The exact centralized critic is identical across arms and is never routed to
+the actor. Each agent record is
+
+```text
+c_i = concat(sin(2*pi*x_i), cos(2*pi*x_i), v_i, s_i,
+             one_hot(previous_effort_i in {START,0,1/2,1}))  # 8 values.
+```
+
+It applies `tanh(Linear(8,64))`, then `tanh(Linear(64,64))`, and physical-
+measure pools `p=sum_i v_i*cembed_i`. The global critic input is
+
+```text
+concat(p, N/16, t/31,
+       sin(2*pi*theta_1(t)), cos(2*pi*theta_1(t)),
+       sin(2*pi*theta_2(t)), cos(2*pi*theta_2(t)),
+       128*omega_1, 256*omega_2)                 # exactly 72 values,
+```
+
+where `theta_m(t)=(phi_m+omega_m*t) mod 1`. This input passes through
+`tanh(Linear(72,64))`, `tanh(Linear(64,64))`, and `Linear(64,1)`. The critic may
+use these centralized exogenous-state facts only during training.
+
+Every non-gate linear weight uses Xavier-uniform initialization with gain one
+and zero bias. Each of `W_ir`, `W_iz`, and `W_in` is initialized independently
+by Xavier-uniform gain one. Each of the three 64-by-64 recurrent matrices
+`W_hr`, `W_hz`, and `W_hn` is initialized independently by an orthogonal draw
+with gain one. All six GRU bias vectors are zero. The residual-gate weight and
+bias are exactly zero. Paired arms receive identical initial values for every common parameter.
+Including the executed gate head and centralized critic, each arm has exactly
+40,996 nominal parameters. The VQFP gate parameters remain zero-gradient but
+are retained in that count.
 
 For receiver `i`, let `S_i={i-1,i,i+1}` and `V_i=sum_(j in S_i)v_j`.
 
@@ -226,7 +322,7 @@ alpha^V_ij = v_j/V_i
 z^V_i = concat(
     V_i*sum_(j in S_i) alpha^V_ij*h_ij,
     V_i,
-    N).
+    N/16).
 ```
 
 The raw pass-through coordinate of `z^V_i` is therefore exactly the local
@@ -243,7 +339,7 @@ alpha^L_ij = softmax_(j in S_i)(log(v_j) + ell_ij)
 z^L_i = concat(
     V_i*sum_(j in S_i) alpha^L_ij*h_ij,
     V_i,
-    N).
+    N/16).
 ```
 
 The residual-gate output layer is initialized to exact zero in both arms.
@@ -288,7 +384,9 @@ Evaluation proceeds in this order on the same frozen bank:
    action uniforms; and
 3. the following structural controls are applied without model selection.
 
-Structural controls are:
+The first four named items below are independently sampled structural-control
+panels. The fifth is a derived diagnostic on an already registered bank and is
+not another panel:
 
 - `WHOLE-TUPLE-PERMUTE`: permute each complete `(volume,message,relative
   metadata)` record; a set aggregation must be invariant;
@@ -299,7 +397,11 @@ Structural controls are:
   original outputs; and
 - `EXPLICIT-PORT-BYPASS`: report how much the learned comparator reconstructs
   the intact weighting from unchanged geometry when its explicit volume port is
-  cut. This is a diagnostic, not a validity failure.
+  cut. It reuses, without any new state, episode, environment transition, or
+  provider-selected subset, the learned-comparator intact/cut one-step records
+  already produced for every tick and receiver of the held-out
+  `MEASURE-CONFLICT` bank. It is a diagnostic, not a fifth structural-control
+  panel and not a validity gate.
 
 For deterministic control outputs, ordinary conformance means
 
@@ -366,7 +468,15 @@ Every final checkpoint receives:
 - 128 intact `CLUSTER` episodes at each held-out `N` with observation-only
   Gaussian noise `epsilon_i,t ~ Normal(0,0.15^2)`, clipped to `[0,1]`, while
   reward continues to use the true field; and
-- 128 one-step states at each held-out `N` for each structural null/control.
+- 128 one-step states at each held-out `N` for each of the four independently
+  sampled structural controls: `WHOLE-TUPLE-PERMUTE`, `EQUAL-VOLUME`,
+  `CONSTANT-FIELD`, and `IDENTITY-RESTORE`.
+
+`EXPLICIT-PORT-BYPASS` consumes no additional state. It is computed from the
+learned-comparator outputs already recorded during intact/cut one-step replay of
+the 128-by-32-tick `MEASURE-CONFLICT` episodes. Consequently the registered
+4,098,048 transition/state ceiling and the four-control term in its accounting
+remain exact.
 
 The noisy panel is a fixed falsification boundary, not a primary robustness
 endpoint. It tests the precise counterexample that a large physical cell can
@@ -442,13 +552,67 @@ M_s = min_(n in {4,14})
         - [mu^MC_VQFP,cut,s(n)-mu^MC_LEARNED,cut,s(n)] }.
 ```
 
-Form separate one-sided 97.5% paired-`t` lower bounds. Binding is supported as
-a contributor only if the lower bound for `K` exceeds `0.02` normalized field
-density, the lower bound for `M` exceeds `0.02` normalized return, and the mean
-one-step total-variation distance between intact and cut VQFP action
-distributions exceeds `0.05`. Also report the paired association between the
-increase in raw mass error and the action/return change; it is descriptive and
-cannot rescue a failed gate.
+For exact action and association units, index the 128 registered conflict
+episodes by `e`. At every tick and receiver, replay intact and cut VQFP inputs
+from the same intact-trajectory pre-input GRU hidden state; neither replay
+updates that stored state. Define
+
+```text
+dE_s,n,e = mean_(t,i) [
+    |Qhat_VQFP,cut,s,n,e,t,i-Q_s,n,e,t,i|/V_s,n,e,i
+  - |Qhat_VQFP,intact,s,n,e,t,i-Q_s,n,e,t,i|/V_s,n,e,i]
+
+dTV_s,n,e = mean_(t,i) [
+    0.5*sum_(a in {0,1/2,1})
+        |pi_VQFP,intact(a)-pi_VQFP,cut(a)|]
+
+dJ_s,n,e = J_VQFP,intact,s,n,e-J_VQFP,cut,s,n,e.
+```
+
+The `mean_(t,i)` is equal weight over all `32*N` receiver-ticks in that episode.
+The action probabilities are the categorical probabilities before sampling;
+common action uniforms do not enter `dTV`. The return difference uses the
+paired closed-loop intact and cut episode with the same exogenous field and
+action-uniform tape. Define
+
+```text
+T_s(n) = mean_(e=1..128) dTV_s,n,e
+T_s    = min_(n in {4,14}) T_s(n).
+```
+
+Across the 12 independent paired training seeds, form separate one-sided
+Student-`t` `98.333333%` lower confidence bounds for `mean(K_s)`, `mean(M_s)`,
+and `mean(T_s)`. Their three-way Bonferroni family has one-sided alpha at most
+`0.05`. Binding is supported as a contributor only if the respective lower
+bounds strictly exceed `0.02` normalized field density, `0.02` normalized
+return, and `0.05` total-variation distance.
+
+The `EXPLICIT-PORT-BYPASS` diagnostic is exactly
+
+```text
+B_s(n) = E_VQFP,cut,s(n)-E_LEARNED,cut,s(n).
+```
+
+It uses the same conflict one-step bank already counted above. Positive `B`
+means the learned comparator stayed closer than cut VQFP to true mass by using
+unchanged geometry or other matched information. Report every `B_s(n)` and its
+equal-weight mean across the 24 `(seed,n)` cells; it is not a gate.
+
+Two paired associations are fixed before data. Within every `(seed,n)` cell,
+compute Spearman rank correlation across its 128 episode pairs between
+`dE_s,n,e` and `dTV_s,n,e`, and separately between `dE_s,n,e` and `dJ_s,n,e`.
+Use average ranks for ties. Report all 24 correlations for each association.
+For each association, the sole aggregate summary is
+
+```text
+tanh(mean_(s,n) atanh(clip(rho_s,n,-1+1e-12,1-1e-12))).
+```
+
+If either variable is constant in any cell, that cell's correlation is
+`UNDEFINED` and the aggregate summary is unavailable; do not substitute
+Pearson correlation, pool receiver-ticks, drop the cell, or select a subgroup.
+Both associations are descriptive and cannot rescue a failed `K`, `M`, or `T`
+gate.
 
 A direct value result that passes `P` or `R` but fails any binding requirement
 is a package-level result with no quadrature-mechanism attribution.
@@ -495,7 +659,7 @@ Binding attribution additionally requires all of the following:
 4. all whole-tuple, equal-volume, constant-raw-field, and identity-restoration
    controls satisfy their stated meanings.
 
-The registered `K`, `M`, and action-TV gates must also pass for positive binding
+The registered `K`, `M`, and `T` gates must also pass for positive binding
 attribution. Missing binding support does not invalidate an otherwise available
 direct package result.
 
@@ -533,12 +697,14 @@ total environment transitions/states: at most 4,098,048.
 ```
 
 The complete formal iteration must use at most one local CPU process, 2 GiB of
-RAM, eight cumulative wall-clock hours, 250,000 trainable parameters per arm,
+RAM, eight cumulative wall-clock hours, exactly 40,996 nominal parameters per
+arm under the frozen architecture (and therefore below the 250,000 ceiling),
 and the counts above. CM must record a zero-compute complexity/resource bound
 before launch. Implementation optimization that preserves this object is CM
-work. Reducing counts, changing the graph, adding a dense path, or exceeding
-the formal cap requires a new scientific revision or no launch; resource
-failure produces no treatment conclusion.
+work. Reducing counts, changing the graph, adding a dense path, changing the
+frozen function/parameter count/initialization, or exceeding the formal cap
+requires a new scientific revision or no launch; resource failure produces no
+treatment conclusion.
 
 ## Strongest alternative and complete interpretation branches
 
@@ -655,7 +821,7 @@ acceptance, and a separately authorized controlled protocol.
 ## Exact owner handoff
 
 The direction-local scientific object is exactly revision
-`VQFP-B1-MATH-CLOSURE-20260812-01` in this file. Root may establish two separate
+`VQFP-B1-MATH-CLOSURE-20260812-02` in this file. Root may establish two separate
 same-direction external conversations from the prepared requesters, with no
 answer sharing: ChatGPT External Pro for authoritative mathematical closure and
 Gemini for additive divergent innovation. Production remains forbidden until
@@ -663,7 +829,7 @@ Pro returns `CLOSED`, this owner intakes that exact ruling, and CM accepts sourc
 conformance plus the zero-compute complexity bound.
 
 CM's eventual result packet must state whether question-relevant activity began,
-whether a complete valid result exists, the `P/R/K/M` endpoints and bounds, all
+whether a complete valid result exists, the `P/R/K/M/T` endpoints and bounds, all
 support/control facts, noisy-panel behavior, anomalies, resource facts, and what
 remains unknown. Root returns that packet to this owner for interpretation, then
 the same Pro conversation receives the bounded result-convergence question.

@@ -9,7 +9,7 @@ External Pro conversation: do not show Gemini any Pro answer, and do not treat
 Gemini as mathematical closure, convergence, acceptance or portfolio authority.
 
 No VQFP run or result exists. Work only from the prospective revision
-`VQFP-B1-MATH-CLOSURE-20260812-01`, available in repository
+`VQFP-B1-MATH-CLOSURE-20260812-02`, available in repository
 `CartmanFatass/My-paper-code`, branch `aggressive`, at:
 
 ```text
@@ -27,6 +27,13 @@ it starts at the exact VQFP law and can learn away from it. An evaluation-only
 volume-to-sender reassociation cut, analytic local-mass diagnostic, structural
 nulls and a noisy isolated-cell falsification panel separate direct package
 value from bounded mechanism evidence.
+
+The exact revision fixes a matched 40,996-parameter actor/critic architecture.
+It treats `EXPLICIT-PORT-BYPASS` as a derived diagnostic on the existing
+conflict replay rather than a fifth sampled control, and freezes action-TV plus
+two episode-level paired associations before data. These choices are part of
+the candidate state; suggestions may challenge them prospectively but must not
+silently rewrite the frozen B1.
 
 The intended ceiling is deliberately narrow: a finite noise-free periodic
 field-service result and, only if qualified, a new 2-D clipped-Voronoi plume

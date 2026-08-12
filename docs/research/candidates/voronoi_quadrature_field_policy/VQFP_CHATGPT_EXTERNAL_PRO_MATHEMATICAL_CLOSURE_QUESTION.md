@@ -17,7 +17,7 @@ portfolio selection.
 ## Exact revision under review
 
 ```text
-VQFP-B1-MATH-CLOSURE-20260812-01
+VQFP-B1-MATH-CLOSURE-20260812-02
 ```
 
 The complete indivisible science object is in repository
@@ -30,6 +30,13 @@ docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_SCIENCE
 Review that exact file as one composite. Do not infer evidence from the presence
 of source code or other candidate files. Do not import thresholds, results or
 authority from another direction.
+
+Revision `-02` prospectively supersedes the unsent `-01`; neither revision has
+produced a provider turn or scientific activity. The current revision fixes the
+network/critic function and initialization, identifies `EXPLICIT-PORT-BYPASS`
+as a derived reuse of the existing conflict one-step bank rather than a fifth
+sampled control, and fixes the action-TV and paired-association units before
+this first Pro review. Judge only the complete `-02` object.
 
 ## Scientific object in brief
 
@@ -51,9 +58,12 @@ softmax(log(v_j)+ell_ij).
 The residual-gate output is isolated from message content and actor summaries
 and starts at zero, so the learned comparator contains the complete VQFP actor
 class and begins at the exact VQFP law before it can retain, cancel or alter
-that law. The intended positive
-claim is consequently a finite-budget physical-measure inductive bias, never
-representational impossibility.
+that law. The exact actor is an 11-to-64 edge encoder with a 32-value message,
+a 39-to-64 reset-after GRU and a 64-unit trunk. The GRU equations, six biases,
+the exact physical-measure-pooled critic and
+initialization are frozen; both arms have 40,996 nominal parameters. The
+intended positive claim is consequently a finite-budget physical-measure
+inductive bias, never representational impossibility.
 
 The frozen-checkpoint `VOLUME-REASSOC` cut cyclically shifts only the explicit
 volume operands within each receiver triplet while holding messages, geometry,
@@ -63,11 +73,13 @@ equal-volume, constant-raw-field and identity-restoration controls accompany
 proximal mass error, action sensitivity and closed-loop return.
 
 Primary value uses the worst held-out `N`/start cell across both mean normalized
-return and lower-tail CVaR. Two Bonferroni one-sided 97.5% paired-`t` bounds are
-compared with a `0.03` material margin. Mechanism attribution additionally
-requires registered quadrature-error, architecture-by-cut return attenuation
-and action-sensitivity margins. Twelve paired training seeds, the final fixed
-checkpoint, all evaluation counts, support requirements, a noisy isolated-cell
+return and lower-tail CVaR. The two direct endpoints use Bonferroni one-sided
+97.5% paired-`t` lower bounds against a `0.03` material margin; the frozen family-
+delete branch uses the corresponding upper-bound pair. Mechanism attribution
+uses three one-sided 98.333333% paired-`t` lower bounds for quadrature error,
+architecture-by-cut return attenuation and one-step action TV. Two episode-level
+Spearman associations are descriptive only. Twelve paired training seeds, the
+final fixed checkpoint, all evaluation counts, support requirements, a noisy isolated-cell
 falsification panel, activity boundary and complete interpretation branches are
 frozen in the card. Endpoint-specific oracle headroom determines whether `P`
 or `R` is available, and a separate result-blind pair of upper bounds defines
@@ -88,10 +100,12 @@ Audit at least these points against the exact card.
    consistent?
 2. **Algorithm/comparator equivalence.** Does the comparator genuinely contain
    the exact VQFP actor class at zero residual gate while remaining a strong
-   freely learned gate? Does the isolated, unused treatment gate head or any
-   matched parameter
-   introduce any hidden asymmetry that invalidates the intended inductive-bias
-   claim?
+   freely learned gate? Are the exact 11-to-64-to-31 edge value path, isolated
+   gate, 39-to-64 reset-after GRU equations, actor trunk, centralized critic,
+   initialization, unused
+   treatment gate and 40,996-parameter count coherent and genuinely matched?
+   Does any remaining matched implementation freedom introduce a hidden
+   asymmetry that invalidates the intended inductive-bias claim?
 3. **Information and leakage.** Are volume, geometry, `N`, graph, recurrence,
    centralized critic and forbidden labels sufficiently specified to prevent a
    covertly weaker comparator, held-out selection or alternate claim?
@@ -101,12 +115,16 @@ Audit at least these points against the exact card.
 5. **Reassociation intervention.** Does the exact port cut preserve the stated
    marginals and work? Are the one-step replay, closed-loop rollout, structural
    nulls and explicit admission that the cut is off-manifold sufficient for the
-   bounded contributor claim? Identify any bypass that makes `K` or `M`
-   uninterpretable.
+   bounded contributor claim? Is `EXPLICIT-PORT-BYPASS` coherently derived from
+   existing conflict replay rather than a fifth sampled panel, so the four-
+   control count and 4,098,048 ceiling are consistent? Identify any bypass that
+   makes `K`, `M`, or `T` uninterpretable.
 6. **Estimands and inference.** Are seed-level worst-cell `P/R`, empirical
-   CVaR, Bonferroni bounds, material margins, `K/M`, action sensitivity and
-   descriptive `Gamma` defined without post-result choice or contradictory
-   denominators?
+   CVaR, direct and delete Bonferroni bounds, material margins, `K/M/T`, the
+   receiver-tick-to-episode-to-seed action-TV aggregation, two within-cell
+   Spearman associations, tie/undefined rules, Fisher-`z` summary, bypass
+   diagnostic and descriptive `Gamma` defined without post-result choice,
+   pseudo-replication or contradictory denominators?
 7. **Support and branches.** Do activity, completeness, volume/conflict/action
    nondegeneracy, numerical controls, noisy falsification and every positive,
    negative, mixed and unavailable branch have a determinate interpretation?
@@ -156,7 +174,7 @@ CLOSURE_AUTHORITY_DECISION=REVISION_REQUIRED
 Also include:
 
 ```text
-EXACT_REVISION=VQFP-B1-MATH-CLOSURE-20260812-01
+EXACT_REVISION=VQFP-B1-MATH-CLOSURE-20260812-02
 RESULT_BLIND=true
 ```
 

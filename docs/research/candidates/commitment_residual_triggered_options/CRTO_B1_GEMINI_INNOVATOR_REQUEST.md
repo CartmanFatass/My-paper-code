@@ -7,13 +7,14 @@ thinking=Extended
 purpose=independent_divergent_scientific_innovation
 direction=commitment_residual_triggered_options
 candidate=CRTO-B1
-revision=CRTO-B1-SCIENCE-20260812-01
+revision=CRTO-B1-SCIENCE-20260812-02
 conversation=dedicated_gemini_direction_conversation_to_be_created
 send_status=PREPARED_NOT_SENT
 ```
 
 Act as an independent scientific innovator, not a convergence reviewer. Use the
-exact frozen direction state in the GitHub repository, branch `aggressive`, at:
+exact frozen direction state `CRTO-B1-SCIENCE-20260812-02` in the GitHub
+repository, branch `aggressive`, at:
 
 `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_SCIENCE_CARD.md`
 

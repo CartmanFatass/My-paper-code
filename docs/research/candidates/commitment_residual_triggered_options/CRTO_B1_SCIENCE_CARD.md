@@ -3,7 +3,7 @@
 ```text
 direction=commitment_residual_triggered_options
 candidate=CRTO-B1
-revision=CRTO-B1-SCIENCE-20260812-01
+revision=CRTO-B1-SCIENCE-20260812-02
 owner=EM_commitment_residual_triggered_options
 scientific_activity_started=false
 production_authorized=false
@@ -26,11 +26,13 @@ ordinary replan-versus-continue value margin, or merely a different replanning
 rate explains any benefit. A frozen-boundary residual reassignment cut and
 same-checkpoint Q-only and rate controls separate those explanations.
 
-The science-bearing object is exactly this file at revision
-`CRTO-B1-SCIENCE-20260812-01`. Any change to the DGP, provider-visible
+The science-bearing object is exactly this full composite file at revision
+`CRTO-B1-SCIENCE-20260812-02`. It prospectively supersedes unsent revision
+`CRTO-B1-SCIENCE-20260812-01`; no provider turn, implementation, or scientific
+activity occurred under v1. Any change to the DGP, provider-visible
 mathematics, arms, data split, activity law, estimands, margins, inference,
 or interpretation branches creates a new complete revision. Production is
-withheld until the existing direction-specific ChatGPT External Pro
+withheld until a clean dedicated direction-specific ChatGPT External Pro
 conversation returns literal `CLOSED`, this EM intakes that ruling, CM accepts
 technical conformance, and Root releases execution.
 
@@ -210,11 +212,38 @@ A shared recurrent four-step transition cell `F_psi` is unrolled once for age
 only the commitment-origin deployable history, current option, `K/16`, and
 normalized requested forecast age, and emits an eight-dimensional Gaussian
 mean `mu_a` and lower-triangular Cholesky factor `L_a` with positive diagonal.
-It is fitted by mean Gaussian negative log likelihood on the fit set, including
-the age-4 target at both training `K` values and the age-8 target at `K=8`.
-The exact same fitted predictor is copied into both learned arms and frozen
-before any policy training. Policy, value, and termination gradients never
-enter it.
+
+The predictor has one deployable observation encoder GRU of hidden width `64`
+and one four-step transition `GRUCell` of hidden width `64`. Both use standard
+sigmoid reset/update gates and a `tanh` candidate. The observation encoder
+processes the same normalized deployable primitive observation vector defined
+above from episode start through the commitment origin. The transition cell
+receives at every unroll the concatenation of the frozen origin option one-hot,
+`K/16`, and that unroll's forecast age `4*l/16` for `l in {1,2,3,4}`; its
+initial hidden state is the observation-encoder hidden state. A
+`64 -> 64 -> 44` readout with `tanh` hidden activation emits eight
+unconstrained means and 36 lower-triangular
+parameters. Off-diagonal entries are unconstrained. Diagonal entries are
+`softplus(d)+1e-3`, so every solve and Gaussian likelihood uses
+`Sigma=L L^T` with a literal Cholesky diagonal lower bound `1e-3` and no
+additional adaptive jitter.
+
+Using a PCG64 initialization stream seeded by `400000+algorithm_seed`, all
+predictor affine input weights use Xavier-uniform initialization with `tanh`
+gain, recurrent hidden-to-hidden matrices use orthogonal initialization, and
+every bias is zero. It is fitted by mean Gaussian negative log likelihood
+on the 128 predictor-fit episodes, including the age-4 target at both training
+`K` values and the age-8 target at `K=8`. Training uses Adam with learning rate
+`1e-3`, betas `(0.9,0.999)`, epsilon `1e-8`, weight decay `1e-5`, batches of
+256 forecast examples. Examples are first ordered by
+`(episode index,commitment time,target age,environment slot)`, then taken
+cyclically from one PCG64 permutation seeded by `500000+algorithm_seed`,
+wrapping without reshuffle, with global gradient-norm
+clipping at `1.0`, and exactly 400 optimizer updates. The final
+update is used; there is no early stop, validation selection, or arm-specific
+fit. The exact same fitted predictor is copied into both learned arms and
+frozen before any policy training. Policy, value, and termination gradients
+never enter it.
 
 At a commitment start or `K` switch, forecasts are issued before the target
 telemetry. At a later legal review, using only telemetry already observed,
@@ -265,6 +294,16 @@ The adapter output and a learned 32-dimensional option embedding have an inner
 product plus one shared scalar intercept to define `b_i(o)`; this head is
 structurally identical in both learned arms.
 
+In both learned arms, the adapter is exactly
+`Linear(52,64) -> tanh -> Linear(64,32) -> tanh`. Both affine layers and the
+32-dimensional option-embedding table use Xavier-uniform initialization with
+`tanh` gain; affine biases and the shared scalar intercept are zero. One PCG64
+stream seeded by `800000+algorithm_seed` initializes the learned components.
+Paired arms receive byte-identical initial tensors for every corresponding
+learned component and differ only in whether the adapter input is the explicit residual
+packet or raw forecast packet. No normalization, dropout, skip connection, or
+other raw/residual bypass is present.
+
 ### `FULL-HISTORY-AUX-TERM`
 
 This is the strongest matched baseline. It has the identical raw history,
@@ -304,13 +343,81 @@ These do not train new policies.
 - `RATE-MATCHED-HAZARD-CRTO`: on development trajectories only, fit a logistic
   gate from current option, `K`, age, legal mask, visible cue, and cost to the
   CRTO termination decision, and adjust its intercept within each supported
-  `(K,age,cost)` cell to match CRTO's development termination rate. Freeze it
-  before evaluation and apply it at every discretionary review of a complete
-  evaluation rollout. When it terminates, use CRTO's unchanged replacement
-  scores. It receives no residual, hidden event identity, or test outcome.
+  `(regime,K,age,cost)` cell to match CRTO's development termination rate. Its
+  exact fit and support law are frozen below. Freeze it before evaluation and
+  apply it at every discretionary review of a complete evaluation rollout.
+  When it terminates, use CRTO's unchanged replacement scores. It receives no
+  residual, hidden event identity, or test outcome.
 - `FORCED-RENEWAL-ONLY`: use the CRTO checkpoint but forbid discretionary
   termination throughout a complete evaluation rollout; forced renewal remains
   unchanged. This is an exposure anchor, not the matched learned comparator.
+
+`Q-ONLY-CRTO`, `RATE-MATCHED-HAZARD-CRTO`, and
+`FORCED-RENEWAL-ONLY` each run as a complete rollout on all four regimes:
+diagnostic fixed `K=8`, held-out fixed `K=16`, `4 -> 16`, and `16 -> 4`.
+Each uses exactly the same 64 paired evaluation tapes per seed/regime as the
+main CRTO/FULL comparison. The three cuts do not create checkpoints or policy
+updates.
+
+For each training seed, the rate-control fit uses a separate, untouched-by-
+training development panel of 64 locked-CRTO episodes in each of those four
+regimes, with eight episodes in every event-by-cost cell and tapes disjoint from
+predictor data, policy training, scored evaluation, and donor-only panels. At
+every legal discretionary review, its binary label is CRTO's locked
+terminate-versus-KEEP decision. Its feature vector is an intercept, current
+option one-hot, `K/16`, `age/16`, `age/K`, complete legal-mask bits, visible cue
+one-hot, cost divided by `4`, regime one-hot, and switch direction/phase; it has
+no residual, telemetry value, hidden event label, future value, or outcome.
+Continuous features are centered and scaled using only this development panel.
+
+The base logistic coefficients minimize mean binary cross-entropy plus
+`1e-3/2` times the squared non-intercept coefficient norm. Deterministic L-BFGS
+uses zero initialization, memory `20`, at most 500 iterations, and stops only
+when the infinity norm of the penalized gradient is at most `1e-8`; reaching
+the iteration cap without that condition makes the rate control unavailable.
+For every `(regime,K,age,cost)` cell with at least 32 reviews, hold base slopes
+fixed and solve a cell intercept offset by bisection so the mean fitted
+probability equals the empirical CRTO termination rate within `1e-10`. If that
+rate is exactly zero or one, the cell uses the corresponding constant
+probability exactly. For a rate strictly between zero and one, bisection starts
+with offset bracket `[-40,40]`, takes at most 200 iterations, and fails the
+control if the bracket does not contain the root or the tolerance is not met.
+Cells with fewer than 32 reviews are unsupported and contribute no rate-control
+estimand; matching is never relaxed. Their required complete rollout uses the
+unshifted base-logistic probability and is descriptive only. Evaluation draws
+its terminate decision from the applicable frozen probability using one
+preassigned uniform variate per legal review. Rate-control RNG is isolated from
+physical, option-selection, and other-arm tapes.
+
+The residual reassignment uses the following deterministic uniform-derangement
+algorithm separately within each training seed. First, scan every scored CRTO
+episode and donor-only episode and create one record for its first eligible
+boundary; an episode without such a boundary creates no record but remains in
+the registered boundary-availability denominator.
+`phase=floor((boundary_time-event_or_pseudo_onset)/4)`. Canonically sort records
+by `(regime order K8,K16,4to16,16to4; panel order scored,donor; episode index;
+target-agent environment slot)` and partition them by the exact frozen match
+key `(current option,current K,age,legal-mask bits,event class,phase,visible
+cue,cost)`. The environment slot is never an actor input.
+
+Process cells in lexicographic key order, with `g` equal to the cell's zero-based
+index in that full ordered list before support filtering. Mark a cell with fewer
+than eight records unsupported before creating any random assignment; never
+merge, relax, or borrow from it. For supported cell ordinal `g` with `n`
+records, initialize
+PCG64 with integer seed `7000003 + 1009*algorithm_seed + g`. Draw a uniform
+Fisher-Yates permutation of `0..n-1`; reject the whole permutation if any
+`pi[j]=j`, and use the first fixed-point-free draw. Stop after 10,000 rejected
+draws and return a technical incomplete result if none exists. Conditioning a
+uniform permutation on no fixed points gives a uniform derangement. The map is
+a bijection, so every record donates once and receives once, always from a
+different episode; only scored recipients enter `Delta_align`. Assignment is
+persisted before any deranged branch return is computed. The ordered handling
+is therefore: boundary eligibility, canonical partition, unsupported-cell
+marking, scored-recipient support fraction, fixed permutation, branch replay,
+then balance/AUC diagnostics. If fewer than 80% of eligible scored recipients
+remain after unsupported cells are removed, the alignment mechanism is
+unavailable and no later diagnostic may restore it.
 
 For the derangement audit, the boundary is the first CRTO-legal discretionary
 review in `[event_onset+4,event_onset+20]`, outside the switch exclusion window;
@@ -366,21 +473,37 @@ event-by-cost cell. No evaluator, predictor, calibrator, checkpoint, threshold,
 or donor stratum is tuned on these episodes. Team episode is the interference
 unit; training seed is the outer algorithm-replication unit.
 
-For each seed and each of the three target regimes, 256 additional donor-only
-episodes use the frozen CRTO checkpoint and independent tapes, balanced over
-the same event/cost/onset cells. Their returns never enter an algorithm or
-mechanism estimand. Their eligible predecision residual tensors join the scored
-boundaries in the fixed derangement permutation; assignment is frozen before
-any branch return is computed, and each whole permutation batch is one
-interference cluster. This donor panel may improve exact-stratum support but
-does not permit matching relaxation or test-driven tuning.
+For each seed and each of all four regimes, including diagnostic `K=8`, 256
+additional donor-only episodes use the frozen CRTO checkpoint and independent
+tapes, balanced over the same event/cost/onset cells. Their returns never enter
+an algorithm or mechanism estimand. Their eligible predecision residual tensors
+join the scored boundaries in the fixed derangement permutation defined above.
+This donor panel may improve exact-stratum support but does not permit matching
+relaxation or test-driven tuning.
 
-The complete B1 ceiling is one CPU, no GPU, 2 GiB resident memory, 120 minutes
-wall time, and 12,000,000 primitive team steps including predictor data,
-training, evaluation, and audit branches. The implementation must count and
-report each category. Crossing a resource ceiling returns an incomplete
-engineering result to CM; it is not a negative scientific observation and does
-not authorize changing this revision.
+The exact environment-step ledger is frozen as follows; no category may borrow
+from another:
+
+| Category | Exact formula | Maximum primitive team steps |
+|---|---:|---:|
+| arm-independent predictor data | `8 seeds * 256 episodes * 256` | 524,288 |
+| learned-arm training | `8 * 2 arms * 1,024 * 256` | 4,194,304 |
+| hazard-development rollouts | `8 * 4 regimes * 64 * 256` | 524,288 |
+| main CRTO/FULL evaluation | `8 * 2 arms * 4 * 64 * 256` | 1,048,576 |
+| three complete-rollout cuts | `8 * 3 cuts * 4 * 64 * 256` | 1,572,864 |
+| donor-only panel | `8 * 4 * 256 * 256` | 2,097,152 |
+| one-packet deranged replays | `8 * 4 * 64 * 256` | 524,288 |
+| audit action enumeration | `8 * 4 * 64 * at most 7 actions * 16` | 229,376 |
+| **registered maximum** | | **10,715,136** |
+
+The implementation records actual completed steps in every row; illegal audit
+actions consume zero steps and cannot be replaced by extra episodes. Predictor
+optimization, capacity-probe optimization, logistic fitting, and statistics
+consume no environment steps and are reported separately. The complete B1
+ceiling is one CPU, no GPU, 2 GiB resident memory, 120 minutes wall time, and
+the registered 10,715,136-step maximum. Crossing any category or resource
+ceiling returns an incomplete engineering result to CM; it is not a negative
+scientific observation and does not authorize changing this revision.
 
 Scientific activity begins at the first optimizer update of either learned arm
 using a trajectory generated under this revision. Before that instant, an
@@ -393,12 +516,27 @@ A conclusion-bearing B1 requires all eight paired training seeds and all frozen
 evaluation cells, finite returns, identical scenario counts, exact action/cost
 parity, and no test leakage. In addition:
 
-- before learned-policy activity, a separate capacity audit fits a duplicate
-  `52 -> 64 -> 32 -> 24` probe on predictor-fit/calibration raw packets to
-  reconstruct `[r,p,a]`; on the untouched development split its normalized MSE
-  must be at most `0.01` and coordinate-sign accuracy at least `0.95`. Failure
-  means the proposed FULL adapter is not an adequate representational baseline
-  and returns the design to this EM before any policy optimizer update;
+- before learned-policy activity, a separate capacity audit fits
+  `Linear(52,64) -> tanh -> Linear(64,32) -> tanh -> Linear(32,24)` on raw
+  `[Y,mu,vech(L)]` packets from the predictor-fit plus calibration episodes to
+  reconstruct the first 24 explicit coordinates `[r,p,a]`. Its first two layers
+  exactly duplicate the learned FULL adapter architecture. All weights use
+  Xavier-uniform initialization with `tanh` gain and all biases are zero. Fit
+  one seed-specific probe; a PCG64 stream seeded by
+  `610000+algorithm_seed` supplies its initialization. Training uses Adam with
+  learning rate `1e-3`, betas `(0.9,0.999)`, epsilon `1e-8`, no weight decay,
+  and batch size 256. Probe examples are
+  canonically ordered as the predictor examples; one PCG64 example permutation
+  seeded by `600000+algorithm_seed` is repeated cyclically without
+  reshuffle, global gradient clipping at `1.0`, and exactly 1,000 updates;
+  use the final update without selection. On the untouched 64-episode scripted
+  development split, normalized MSE is the mean over coordinates of
+  `MSE_d/(Var_fit(target_d)+1e-8)`, and coordinate-sign accuracy is computed
+  only where `abs(target_d)>=0.05`. Normalized MSE must be at most `0.01` and
+  sign accuracy at least `0.95` for every seed. Probe parameters never enter a
+  policy. Failure means the proposed FULL adapter is not an adequate
+  representational baseline and returns the design to this EM before any
+  learned-policy optimizer update;
 
 - every target regime has at least 512 legal discretionary CRTO reviews pooled
   across seeds, and both `KEEP` and a changed option each occur in at least 10%
@@ -407,6 +545,10 @@ parity, and no test leakage. In addition:
   audit boundary;
 - every reported derangement cell has at least eight members; at least 80% of
   otherwise eligible audit boundaries remain supported;
+- L-BFGS converges and every `(regime,K,age,cost)` cell encountered at a legal
+  review in each of the three scored target regimes has at least 32 matching
+  hazard-development reviews; otherwise its complete hazard rollout is
+  descriptive and `Delta_rate` is unavailable for mechanism attribution;
 - the aligned-versus-deranged decision-disagreement fraction has a seed-level
   95% lower confidence bound above `0.05`;
 - a cross-validated classifier using residual packet norms, predictor
@@ -421,8 +563,9 @@ parity, and no test leakage. In addition:
   of at least `0.02` normalized utility, so the toy contains recoverable
   termination headroom.
 
-Failure of action support, the derangement first stage, donor support, or
-calibration withholds the residual-mechanism conclusion. A technically valid
+Failure of action support, the derangement first stage, donor support,
+rate-control convergence/support, or calibration withholds the
+residual-mechanism conclusion. A technically valid
 whole-algorithm CRTO-versus-FULL total effect may still be reported at the
 package ceiling, but it cannot be called a calibrated-residual mechanism.
 Failure of recovery headroom says this toy cannot test the family; it is not
@@ -565,7 +708,7 @@ a prospective bridge, not UAV evidence.
 ## Root-to-CM construction packet
 
 If and only if Root later relays this packet after Pro `CLOSED` and EM intake,
-CM should construct exactly `CRTO-B1-SCIENCE-20260812-01`, bind source/config,
+CM should construct exactly `CRTO-B1-SCIENCE-20260812-02`, bind source/config,
 verify identical learned-arm resources and causal timestamps, and return either
 a concise preactivity technical nonconformance or a real command with the
 registered resource ceiling. CM and Operator own code, tests when authorized,
