@@ -3,8 +3,8 @@
 ```text
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B1
-revision=SCDMP-B1-SCIENCE-20260812-03
-supersedes_revision=SCDMP-B1-SCIENCE-20260812-02_PREPARED_NOT_SENT
+revision=SCDMP-B1-SCIENCE-20260812-04
+supersedes_revision=SCDMP-B1-SCIENCE-20260812-03_REVISION_REQUIRED
 owner=EM_semigroup_consistent_duration_model_policy
 handoff_status=PREPARED_NOT_SENT
 production_authorized=false
@@ -26,7 +26,7 @@ duration/regularization shortcut.
 This file is prepared but does not release construction or production. Root
 may relay it to CM only after a dedicated same-direction ChatGPT External Pro
 returns literal `CLOSED` for exact revision
-`SCDMP-B1-SCIENCE-20260812-03` and the same-direction EM intakes that ruling.
+`SCDMP-B1-SCIENCE-20260812-04` and the same-direction EM intakes that ruling.
 CM then owns source, runner, environment, tests only if the user separately
 authorizes them, execution, exact resource accounting, and technical
 acceptance. Any proposed science-bearing change returns to this EM and creates
@@ -88,6 +88,35 @@ Xavier and QR transforms are exact; non-audit resets consume
 traversal are immutable. No v2 mechanism, threshold, estimand, branch, claim,
 resource, or activity rule changed.
 
+V3 received a same-direction ChatGPT External Pro `REVISION_REQUIRED` ruling
+before construction or scientific activity. V4 accepts all six reported
+science-bearing defects without changing the DGP, arms, losses, any already-
+registered numeric threshold, training/evaluation tapes, activity boundary,
+architecture, RNG, or resource ledger:
+
+1. Conclusion-bearing oracle headroom, NOCOMP defect, composition reduction,
+   true-prediction competence, and true-prediction reduction now use exactly
+   the 64 REAL word-state instances and `64*81` action panels per seed; SHAM
+   and pooled values are controls only.
+2. The four REAL initial-word-row and four target-regime subgroup estimands
+   have exact equal weighting, and convoy deletion requires every one-sided
+   95% upper bound below `0.010`; absence of a lower-bound significance result
+   is not evidence of no subgroup value.
+3. Convoy deletion additionally requires REAL true-prediction competence and a
+   one-sided 95% lower bound for `Delta_pred_REAL` above `0.05`, alongside the
+   unchanged REAL composition first-stage margin.
+4. The negative scientific claim is limited to the exact registered convoy
+   treatment. Ground-payload and UAV investment remains a Root portfolio
+   decision with no transferred negative evidence.
+5. The adverse branch has exactly twelve REAL regime estimands, simultaneous
+   Bonferroni one-sided upper bounds, reward/failure harm margins `-0.005` and
+   `-0.05`, and precedence over every positive branch.
+6. The constrained oracle enumerates the same slotwise lexicographic joint
+   actions as the actor and retains the first exact float64 maximum.
+
+V4 must return to the exact existing SCDMP ChatGPT Pro conversation. The v3
+ruling is not closure and does not permit construction.
+
 ## Resource and return
 
 The ceiling is one CPU, no GPU, 2 GiB resident memory, 90 minutes, at most
@@ -100,7 +129,9 @@ materialization and coverage conformance. No command, test, implementation, or
 compute is authorized by this prepared handoff.
 
 After an authorized run, CM returns the exact per-seed/per-regime REAL and SHAM
-effects, model/policy diagnostics, support/activity/headroom denominators,
-resource facts, anomalies, and a plain statement of whether question-relevant
-output exists through Root to this same EM. CM does not interpret scientific
-support, change a threshold, or choose the next direction.
+effects; all REAL-specific oracle, defect, true-prediction, actor and subgroup
+quantities; pooled/SHAM controls; the exact adverse-bound family; model/policy
+diagnostics; support/activity denominators; resource facts; anomalies; and a
+plain statement of whether question-relevant output exists through Root to this
+same EM. CM does not interpret scientific support, change a threshold, or
+choose the next direction.

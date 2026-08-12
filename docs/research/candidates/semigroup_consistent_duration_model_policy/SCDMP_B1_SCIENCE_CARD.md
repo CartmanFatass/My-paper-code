@@ -3,15 +3,15 @@
 ```text
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B1
-revision=SCDMP-B1-SCIENCE-20260812-03
-supersedes_revision=SCDMP-B1-SCIENCE-20260812-02_PREPARED_NOT_SENT
+revision=SCDMP-B1-SCIENCE-20260812-04
+supersedes_revision=SCDMP-B1-SCIENCE-20260812-03
 owner=EM_semigroup_consistent_duration_model_policy
 source_inspiration=SCDMP-VK-FAMILY-CUT-01
 source_is_evidence=false
 artifact_status=PREPARED_NOT_SENT
 scientific_activity_started=false
 production_authorized=false
-chatgpt_external_pro_math_closure=required
+chatgpt_external_pro_math_closure=required_on_v4
 ```
 
 ## Direction decision and bounded question
@@ -43,15 +43,17 @@ the still-strong alternative that any gain is generic regularization, duration
 encoding, or training-path noise rather than useful physical composition.
 
 The science-bearing object is this complete file at exact revision
-`SCDMP-B1-SCIENCE-20260812-03`. It prospectively supersedes v2, which was
-`PREPARED_NOT_SENT`: no provider turn, construction, optimizer update, or
-scientific activity occurred under v2 (or v1). V3 changes no mechanism,
-estimand, margin, inference rule, interpretation branch, claim ceiling,
-resource ledger, or activity boundary. It only makes every non-audit reset and
-model-initialization raw-bit mapping, draw order, numeric transform, and NumPy
-API/version exact. A change to its DGP, observation, word law, arms, losses,
-activity rule, training/evaluation split, estimands, margins, inference,
-interpretation, or resources creates a new complete revision.
+`SCDMP-B1-SCIENCE-20260812-04`. V1 and v2 were `PREPARED_NOT_SENT`, and v3 was
+never constructed or made scientifically active. V4 retains the exact v3 DGP,
+arms, losses, raw-bit contract, thresholds, resource ledger, and activity
+boundary. It makes conclusion-bearing headroom and model first stages REAL-
+specific; replaces subgroup non-significance with prespecified upper-bound
+evidence; requires a true-prediction first stage for the convoy-negative route;
+limits that negative claim to the exact convoy treatment; makes the adverse
+branch executable; and freezes oracle tie-breaking. A change to its DGP,
+observation, word law, arms, losses, activity rule, training/evaluation split,
+estimands, margins, inference, interpretation, or resources creates a new
+complete revision.
 Production requires a literal `CLOSED` ruling on this exact revision from the
 dedicated same-direction ChatGPT External Pro conversation, this EM's intake of
 that ruling, CM technical acceptance, and Root scheduling.
@@ -509,26 +511,39 @@ hold:
    action differs on at least 10% of twins.
    SHAM reversal twins must agree to numerical tolerance `1e-10`. This proves
    that order matters physically rather than merely by label.
-4. The NOCOMP actor has recoverable held-out headroom: on at least 20% of the
-   128 word-state instances its selected action is at least `0.02` per primitive step below the
-   exact constrained one-word oracle under the same `R+H` score, and its mean
-   regret is at least `0.01`.
-   The oracle receives exactly the same state, word, held-action constraint,
-   and 81-action set; it rolls the known DGP only for audit and is never an
-   actor input or training target.
-5. The NOCOMP post-training composite held-out defect defined below is at least
-   `0.05` standardized units, and SCDMP and NOCOMP select different joint
-   actions on at least 10% of the 64 REAL word-state instances. These are representation and
-   actor first stages, not outcome claims.
+4. The NOCOMP actor has recoverable held-out REAL headroom. For seed `s`, use
+   exactly its 64 REAL word-state instances and define `h_s` as the fraction on
+   which NOCOMP's selected action is at least `0.02` normalized reward per
+   primitive step below the exact constrained one-word oracle under the same
+   `R+H` score, and `r_s` as its mean per-step regret over all 64 instances.
+   The gate is `mean_s(h_s)>=0.20` and `mean_s(r_s)>=0.01`. Corresponding SHAM
+   and pooled-128 values are controls or descriptive diagnostics only. The
+   oracle receives exactly the same state, word, held-action constraint, and
+   81-action set; it rolls the known DGP only for audit and is never an actor
+   input or training target. It enumerates joint actions in the same slotwise
+   lexicographic order `LEFT < COAST < RIGHT` as the learned actor and retains
+   the first exact float64 score maximum, with no tolerance-based tie. The REAL
+   reversal gate compares these uniquely selected oracle actions.
+5. The arithmetic mean across seeds of NOCOMP's REAL-only post-training
+   composite held-out defect `D_comp_NOCOMP_REAL` defined below is at least
+   `0.05` standardized units. For each seed let `a_s` be the fraction of its 64
+   REAL word-state instances on which SCDMP and NOCOMP select different joint
+   actions; the actor gate is `mean_s(a_s)>=0.10`. These are representation and
+   actor first stages, not outcome claims. Pooled defect is descriptive and
+   cannot satisfy this gate.
 6. Neither arm has nonfinite outputs; no more than 1% of audit predictions hit
    an `F` output bound. On the untouched train-support probe, each arm's
    composite standardized endpoint/node-reward/edge-reward RMSE is at most
-   `0.35`. On target audit queries, NOCOMP's composite RMSE is at most `0.75`;
-   a composition-specific claim additionally requires SCDMP's to be at most
-   `0.50`. For each predicted physical coordinate, SCDMP audit variance is
-   between `0.25` and `4.0` times the corresponding true-terminal variance,
-   and at least 20% of the 64 REAL word-state instances have a predicted best-minus-worst
-   candidate score range of `0.02*k` or more. Lower composition defect with
+   `0.35`. On the 64 REAL target word-state instances and their 81-action
+   panels, the across-seed mean `E_pred_NOCOMP_REAL` is at most `0.75`; a
+   composition-specific or convoy-negative claim additionally requires the
+   across-seed mean `E_pred_SCDMP_REAL` to be at most `0.50`. Pooled and SHAM
+   target RMSE remain reported controls and cannot establish competence. For
+   each predicted physical coordinate, SCDMP audit variance is
+   between `0.25` and `4.0` times the corresponding true-terminal variance.
+   For each seed let `b_s` be the fraction of its 64 REAL word-state instances
+   whose predicted best-minus-worst candidate score range is at least `0.02*k`;
+   require `mean_s(b_s)>=0.20`. Lower composition defect with
    collapsed physical outputs, inaccurate endpoints, or an actor-insensitive
    score is not a valid mechanism first stage.
 
@@ -566,17 +581,21 @@ The original and reverse rollouts jointly define each REAL/SHAM reversal twin;
 neither is reconstructed from the other. The panel is opened only after both
 final checkpoints, and its outcomes never select a checkpoint, threshold, or
 revision. The provisional CM analytic probe values are not evidence and are
-not inputs to any v3 threshold.
+not inputs to any v4 threshold.
 
 Audit denominators are immutable: 64 physical states and 64 reversal twins per
 seed; 128 word-state instances after counting target and reverse separately;
 and `128*81` word-state-action rollouts. Coordinate-support conditions use the
-64 physical states, reversal/order conditions use 64 twins, and oracle regret,
-actor disagreement, prediction error, output bounds/variance, and candidate
-score sensitivity use the 128 word-state instances and their 81-action panels.
+64 physical states and reversal/order conditions use 64 twins. The
+conclusion-bearing oracle headroom, composition defect, true prediction error,
+and actor disagreement use exactly the 64 REAL word-state instances and their
+`64*81` action panels. The corresponding 64 SHAM instances and pooled 128
+instances are controls or descriptive diagnostics. Output-bound/variance and
+candidate-score-sensitivity checks retain their stated denominators.
 
-Failure of activity, support, REAL order effect, SHAM identity, or oracle
-headroom makes the B1 result nonidentifying for this family. It is not evidence
+Failure of activity, support, REAL order effect, SHAM identity, or REAL-specific
+oracle headroom makes the B1 result nonidentifying for its positive-mechanism
+and convoy-negative routes, regardless of pooled headroom. It is not evidence
 that composition is useless elsewhere.
 
 ## Evaluation, estimands, and inference
@@ -592,40 +611,73 @@ The regime indices used in the scored PCG64 seed are respectively
 class and word-offset law already specified, giving four replicates of every
 dynamics-class/initial-word-offset cell.
 
-For each seed, average paired episode differences within each dynamics class
-and regime before across-seed inference. Episodes are not independent training
-replicates. Define higher-is-better target effects
+For each seed `s`, average paired episode differences within each dynamics
+class and regime before across-seed inference. Episodes are not independent
+training replicates. Let `d_J_s(r)` and `d_fail_s(r)` be the REAL-class means
+for each of all six scored regimes; higher values favor SCDMP. Define
 
 ```text
-Delta_J(r) = E[J_SCDMP-J_NOCOMP | REAL, target regime r]
-Delta_task = mean_r Delta_J(r)
+Delta_J(r) = mean_s d_J_s(r)
+Delta_task = mean over the four target r of Delta_J(r)
 
-Gap_m = mean(J_m | REAL, k in {4,8})
-        -mean(J_m | REAL, four target regimes)
-Delta_rob = Gap_NOCOMP-Gap_SCDMP
+Gap_m_s = mean(J_m | REAL, k in {4,8}, seed s)
+          -mean(J_m | REAL, four target regimes, seed s)
+Delta_rob = mean_s(Gap_NOCOMP_s-Gap_SCDMP_s)
 
-Delta_fail(r) = E[failure_NOCOMP-failure_SCDMP | REAL,r]
+Delta_fail(r) = mean_s d_fail_s(r)
 
-D_comp_m = mean(
-  RMS_standardized_F_cocycle_defect,
-  RMS_standardized_node_reward_cocycle_defect,
-  RMS_standardized_edge_reward_cocycle_defect)
-Delta_comp = D_comp_NOCOMP-D_comp_SCDMP
+D_comp_m_REAL_s = mean(
+  RMS_REAL_standardized_F_cocycle_defect,
+  RMS_REAL_standardized_node_reward_cocycle_defect,
+  RMS_REAL_standardized_edge_reward_cocycle_defect)
+D_comp_m_REAL = mean_s D_comp_m_REAL_s
+Delta_comp_REAL = mean_s(D_comp_NOCOMP_REAL_s-D_comp_SCDMP_REAL_s)
 
-E_pred_m = mean standardized true endpoint/node-reward/edge-reward RMSE
-Delta_pred = E_pred_NOCOMP-E_pred_SCDMP
+E_pred_m_REAL_s = mean REAL standardized true
+                      endpoint/node-reward/edge-reward RMSE
+E_pred_m_REAL = mean_s E_pred_m_REAL_s
+Delta_pred_REAL = mean_s(E_pred_NOCOMP_REAL_s-E_pred_SCDMP_REAL_s)
 
-Delta_spec = mean_r Delta_J_REAL(r)-mean_r Delta_J_SHAM(r).
+Delta_spec = mean_s[(mean over target r of d_J_s_REAL(r))
+                    -(mean over target r of d_J_s_SHAM(r))].
 ```
 
-`D_comp` and `E_pred` use only the common audit panel and both legal target
-decompositions (`2+4`/`4+2` for six and `4+8`/`8+4` for twelve). Also report
-direct-versus-recursive prediction disagreement, oracle regret, action
-disagreement, word-reversal effects, per-word results, collision probability,
-minimum-gap CVaR at 10%, position/velocity error, clipping, energy proxy,
-action changes, messages, and latency. Occupancy, chosen actions, and model
-confidence are descendants and are never conditioned away in the primary
-effect.
+For each seed and arm, each `D_comp_m_REAL_s` component uses all 64 REAL
+word-state instances, all 81 joint actions, and both legal target
+decompositions (`2+4`/`4+2` for six and `4+8`/`8+4` for twelve). Within a
+component, standardized squared residuals are averaged equally over the two
+decompositions, word-state instances, joint actions, and physical coordinates
+or four node/edge outputs, then square-rooted; the three component RMS values
+are averaged equally. `E_pred_m_REAL_s` applies the same equal weighting to the
+direct whole-word prediction against the true endpoint and true cumulative
+node/edge rewards, without a decomposition index. Every paired interval for
+`Delta_comp_REAL` or `Delta_pred_REAL` uses the eight seed-level arm
+differences printed above. Corresponding SHAM-only and pooled-128 metrics are
+reported under the same reduction but are descriptive controls; they cannot
+satisfy a conclusion-bearing REAL first stage.
+
+The four prespecified REAL word subgroups are the four registered initial word
+rows `j=0,...,3`. For seed `s`, define
+
+```text
+d_word_s(j) = (1/4) * sum over the four target regimes r of
+              mean[J_SCDMP-J_NOCOMP | REAL, seed s, r,
+                   initial word row j].
+Delta_J_word(j) = mean_s d_word_s(j).
+```
+
+Each inner mean has exactly four scored episodes. The four prespecified target
+duration/regime subgroups are the already defined `Delta_J(r)` for fixed six,
+fixed twelve, `6->12`, and `12->6`; each seed-level mean has exactly 16 REAL
+episodes. These eight subgroup estimands and no post hoc subdivision are
+covered by the convoy-negative conclusion.
+
+Also report direct-versus-recursive prediction disagreement, oracle regret,
+action disagreement, word-reversal effects, per-word results, collision
+probability, minimum-gap CVaR at 10%, position/velocity error, clipping, energy
+proxy, action changes, messages, and latency. Occupancy, chosen actions, and
+model confidence are descendants and are never conditioned away in the
+primary effect.
 
 The two Bonferroni-separated direct-value routes are:
 
@@ -641,16 +693,45 @@ lower bounds for every target `Delta_J(r)` above `-0.005` and corresponding
 paired seed-sign randomization p-values and all eight seed effects accompany
 the intervals but do not replace the frozen margins.
 
-A composition-specific mechanism attribution additionally requires 95%
-seed-level lower bounds above `0.10` for `Delta_comp`, above `0.05` for
-`Delta_pred`, above `0.010` for `Delta_rob`, and above `0.005` for
-`Delta_spec`, plus every activity/support/headroom/first-stage condition. These
-are not extra opportunities for a generic performance claim. Since there is no
-separately trained adjacency-shuffled-loss arm, even this branch attributes the
-bounded composition-loss package and its order-selective signature; it does not
-prove unique mediation by the mathematically correct cocycle.
+A composition-specific mechanism attribution additionally requires one-sided
+95% seed-level lower bounds above `0.10` for `Delta_comp_REAL`, above `0.05`
+for `Delta_pred_REAL`, above `0.010` for `Delta_rob`, and above `0.005` for
+`Delta_spec`, plus every activity/support/REAL-headroom/REAL-defect/
+true-prediction-competence/actor-first-stage condition. These replace the
+pooled composition and prediction quantities in every conclusion-bearing
+gate; no numeric threshold is relaxed. They are not extra opportunities for a
+generic performance claim. Since there is no separately trained
+adjacency-shuffled-loss arm, even this branch attributes the bounded
+composition-loss package and its order-selective signature; it does not prove
+unique mediation by the mathematically correct cocycle.
+
+The adverse-effect family contains exactly 12 REAL seed-level estimands: the
+six `Delta_J(r)` values and six `Delta_fail(r)` values for the printed scored
+regime order. For each estimand use a one-sided Bonferroni simultaneous upper
+bound with per-estimand confidence `1-0.05/12`, eight paired seed values, and
+`df=7`. Material reward harm is established when any reward upper bound is
+strictly below `-0.005` normalized reward per primitive step. Material failure
+harm is established when any failure upper bound is strictly below `-0.05`.
+These margins reuse the registered reward non-harm and failure-robustness
+magnitudes; they do not create a weaker route.
 
 ## Frozen interpretation branches
+
+Outcome precedence is exact. Failure of question-relevant activity, technical
+or resource conformance, no-leakage, complete output, state support, physical
+REAL order, SHAM identity, or finite/output-validity conditions invokes branch
+7 and precludes every other claim. For a result passing those core conditions,
+evaluate branch 6 first; it overrides every positive, regularity, or
+sufficiency label. If no adverse bound fires and a direct-value route passes,
+use branch 1 when all mechanism gates pass and branch 2 otherwise. If neither
+direct-value route passes, absent REAL oracle headroom or a sub-floor REAL
+NOCOMP defect invokes branch 4 before any convoy-negative reading. Otherwise
+apply branch 3 and its stronger deletion rule when eligible. Branch 5 is an
+attribution modifier: it can narrow a valid direct package result to branch 2,
+but can never create a positive or negative result. Any remaining missing gate
+invokes branch 7. This precedence prevents a favorable average from hiding a
+registered harmful regime and prevents SHAM-only headroom from licensing a
+REAL negative claim.
 
 1. **Direct variable-`k` value with composition signature.** At least one
    direct-value route passes, all validity and non-harm conditions hold, and
@@ -660,44 +741,69 @@ prove unique mediation by the mathematically correct cocycle.
    but composition, prediction, REAL-versus-SHAM, or actor first stage fails.
    Report only the bounded learned-package result. Do not claim the semigroup
    mechanism; any successor aimed at that attribution is a new revision.
-3. **Model regularity without decision value.** SCDMP reduces composition and
-   prediction error, but neither direct-value route passes. The loss shapes the
-   model without demonstrated task value. Apply the family-deletion rule below
-   if its stronger conditions hold; otherwise make no positive claim.
-4. **Free model sufficient.** NOCOMP is at the oracle ceiling or has defect
-   below the registered first-stage floor. The toy cannot distinguish whether
-   explicit consistency helps when a free model has room to improve. Do not
-   tune or reinterpret the null.
+3. **Model regularity without decision value.** SCDMP reduces REAL composition
+   and true-prediction error, but neither direct-value route passes. The loss
+   shapes the model without demonstrated task value. Apply the convoy-treatment
+   deletion rule below if its stronger conditions hold; otherwise make no
+   positive claim.
+4. **Free model sufficient.** NOCOMP lacks the registered REAL oracle headroom
+   or its REAL composition defect is below the registered `0.05` first-stage
+   floor. Pooled or SHAM headroom cannot override this branch. The toy cannot
+   distinguish whether explicit consistency would help in an order-active
+   setting where the free model has room to improve. Do not tune or reinterpret
+   the null.
 5. **Shortcut/generic regularization.** Any apparent gain is equally large on
-   SHAM labels, survives without physical order activity, accompanies collapsed
-   endpoints, or lacks action disagreement. Delete the order-selective causal
-   story; at most retain the package effect if its primary route remains valid.
-6. **Adverse effect.** A simultaneous bound establishes material target or
-   seen-duration harm. Reject this exact treatment on the convoy surface and
-   report the affected regimes without averaging them away.
+   SHAM labels, lacks an order-selective signature despite verified physical
+   order activity, accompanies collapsed endpoints, or lacks action
+   disagreement. Delete the order-selective causal story; at most retain the
+   package effect if its primary route remains valid.
+6. **Adverse effect.** At least one of the exact 12 simultaneous upper bounds
+   crosses its frozen negative margin. Reject this exact treatment on the
+   convoy surface, name every triggering reward/failure regime and its bound,
+   and do not issue a positive or second-surface activation claim even if an
+   average direct-value route would otherwise pass.
 7. **Nonidentifying.** Activity, support, headroom, resource, leakage, complete
    output, or deterministic-cocycle conditions fail. No positive, negative,
-   null, equivalence, or family-deletion conclusion is available.
+   null, equivalence, or convoy-treatment deletion conclusion is available.
 
-### Prospective family-deletion condition
+### Prospective convoy-treatment deletion condition
 
-Delete further SCDMP-family investment on the convoy, ground-payload, and UAV
-path defined here if and only if all activity, technical validity, leakage,
-state support, physical order, SHAM identity, oracle headroom, output-variance,
-and actor-first-stage conditions hold; the 95% lower bound for `Delta_comp`
-exceeds `0.10`; yet for every target regime the one-sided 95% upper bound for
-`Delta_J(r)` is below `0.010` and the upper bound for `Delta_fail(r)` is below
-`0.03`, the upper bound for `Delta_spec` is below `0.005`, and no prespecified
-REAL word or duration subgroup has a 95% lower bound above `0.010`.
+Delete further investment in this exact SCDMP B1 treatment on the registered
+convoy DGP, duration split, architecture, and budget if and only if all
+activity, technical validity, leakage, state support, physical order, SHAM
+identity, REAL oracle headroom, output-variance, and REAL actor-first-stage
+conditions hold; `mean_s D_comp_NOCOMP_REAL_s>=0.05`; the REAL
+true-prediction competence ceilings hold; the one-sided 95% lower bound for
+`Delta_comp_REAL` exceeds `0.10`; and the one-sided 95% lower bound for
+`Delta_pred_REAL` exceeds `0.05`; yet all of the following no-use conditions
+hold:
 
-That outcome says a successfully imposed composition bias has no minimum useful
-decision value despite a physically active order effect and a competent-but-
-imperfect free comparator. It deletes this explicit consistency family on this
-forecast-visible action-hold path, not every possible temporal model. If
-`Delta_comp` itself lacks a first stage, only this loss realization is rejected;
-if oracle headroom or support is absent, the result is nonidentifying rather
-than family-negative. Wide intervals are indeterminate and do not authorize a
-threshold change or automatic rerun.
+1. for every one of the four target regimes, the one-sided 95% upper bound for
+   `Delta_J(r)` is below `0.010` and the corresponding upper bound for
+   `Delta_fail(r)` is below `0.03`;
+2. the one-sided 95% upper bound for `Delta_spec` is below `0.005`; and
+3. for every one of the four prespecified REAL initial-word-row estimands
+   `Delta_J_word(j)`, the one-sided 95% upper bound is below `0.010`.
+
+The four target-regime bounds are the prespecified duration/regime subgroup
+bounds; together with the four word-row bounds they cover exactly the eight
+subgroups defined above. Because the negative assertion is the intersection
+that every covered effect is below its margin, requiring all one-sided 95%
+upper-bound tests is an intersection-union rule and adds no multiplicity
+opportunity. Absence of a lower-bound significance result is never evidence of
+absence.
+
+That outcome says a successfully imposed REAL composition and true-prediction
+first stage has no registered minimum useful decision value on this exact
+forecast-visible convoy treatment despite a competent-but-imperfect free
+comparator. It does not scientifically delete the separately specified ground-
+payload or UAV surfaces and does not transfer any negative threshold or
+evidence to them. Root may separately decline to invest in those surfaces as a
+portfolio decision, but that is not a B1 causal conclusion. If either REAL
+composition or true-prediction first stage is absent, only this loss realization
+lacks its required mechanism evidence; if REAL oracle headroom or support is
+absent, the result is nonidentifying rather than convoy-negative. Wide intervals
+are indeterminate and do not authorize a threshold change or automatic rerun.
 
 ## Claim ceiling
 
@@ -714,12 +820,21 @@ weather robustness, asynchronous agents, early termination value, variable
 `N`, general decentralized MARL scaling, ground-robot value, UAV value, safety,
 or real-flight validity.
 
+A convoy-negative result can claim only that this exact SCDMP B1 treatment did
+not provide the registered minimum useful decision value on this deterministic
+convoy at the frozen budget despite REAL headroom and verified REAL composition
+and true-prediction first stages. It cannot delete the ground-payload or UAV
+surface, other stochastic or partially observed duration models, or every
+semigroup-consistent algorithm.
+
 ## Second surface and UAV bridge
 
-A qualifying B1 activates, but does not validate, a separate fixed-four-robot
-payload-towing surface. Four ground robots pull a shared sled around a closed
-course. The external supervisory/communication period is `k`; each boundary
-reveals a finite friction/slope forecast word, relative pose/velocity, tether
+A qualifying B1 means branch 1 only. It activates, but does not validate, a
+separate fixed-four-robot payload-towing surface. Branches 2--7 do not activate
+this path; any later investment after them is a new Root portfolio decision
+without transferred B1 evidence. Four ground robots pull a shared sled around
+a closed course. The external supervisory/communication period is `k`; each
+boundary reveals a finite friction/slope forecast word, relative pose/velocity, tether
 tension, payload yaw, battery, and the complete low-level controller integrator
 state. The high-level shared policy selects held tension/heading-rate setpoints.
 The strongest comparator remains an identical free duration model; train
@@ -756,7 +871,7 @@ evidence.
 ## Root-to-CM construction boundary
 
 If Root later relays this object after exact-revision Pro `CLOSED` and EM
-intake, CM may construct only `SCDMP-B1-SCIENCE-20260812-03`, bind its source
+intake, CM may construct only `SCDMP-B1-SCIENCE-20260812-04`, bind its source
 and configuration, and assess exact technical conformance. CM and Operator own
 code, environment, tests only when separately authorized, execution, resource
 facts, and retained-result correctness. They do not change word support,

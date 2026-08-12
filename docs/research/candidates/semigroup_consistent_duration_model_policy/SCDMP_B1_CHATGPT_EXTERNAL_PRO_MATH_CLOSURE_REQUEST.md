@@ -1,89 +1,89 @@
-# SCDMP B1 ChatGPT External Pro mathematical-closure request
+# SCDMP B1 v4 same-conversation ChatGPT External Pro closure rereview
 
 ```text
 provider=chatgpt
-purpose=authoritative_preproduction_mathematical_and_causal_closure
+purpose=authoritative_preproduction_mathematical_and_causal_closure_rereview
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B1
-revision=SCDMP-B1-SCIENCE-20260812-03
-supersedes_revision=SCDMP-B1-SCIENCE-20260812-02_PREPARED_NOT_SENT
-conversation=dedicated_clean_new_direction_conversation_to_be_created
+revision=SCDMP-B1-SCIENCE-20260812-04
+supersedes_revision=SCDMP-B1-SCIENCE-20260812-03_REVISION_REQUIRED
+conversation=continue_exact_existing_direction_conversation
 send_status=PREPARED_NOT_SENT
 ```
 
-You are the rigorous external mathematical and causal reviewer for one proposed
-MARL variable-duration direction. Review only the exact complete frozen
-revision `SCDMP-B1-SCIENCE-20260812-03` in the GitHub repository, branch
-`aggressive`, at:
+Continue the existing dedicated ChatGPT External Pro conversation for exactly
+this SCDMP direction. The same scientific owner accepted all six blocking
+defects in your v3 `REVISION_REQUIRED` ruling and froze one complete
+prospective successor. No construction, optimizer update, question-relevant
+activity, treatment result, or production authorization exists.
+
+Review the complete indivisible revision
+`SCDMP-B1-SCIENCE-20260812-04` in the GitHub repository, branch `aggressive`,
+at:
 
 `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_B1_SCIENCE_CARD.md`
 
 Do not review implementation, code correctness, tests, files, hashes, receipts,
-or runtime mechanics. No result exists; this is prospective mathematical and
-causal closure before production.
+runtime mechanics, technical acceptance, production sequencing, or portfolio
+selection. Return only the exact-revision mathematical and causal disposition.
 
-The candidate uses a deterministic, fully observed, fixed-four-agent convoy.
-One shared model-predictive policy is fitted only at durations `k={2,4,8}` and
-is evaluated at untouched fixed `k={6,12}` and episode-internal `6<->12`.
-At each true boundary the action is held for the whole duration and the complete
-weather/friction context word is visible. REAL `A/B` dynamics are noncommuting;
-SHAM labels have identical physics. SCDMP adds physical-state transition
-composition and undiscounted node/edge reward-cocycle losses only at supported
-`2+2->4` and `4+4->8` witnesses. `SCDMP-NOCOMP` has identical raw information,
-numeric `k`, word forecast, endpoint data, architecture, parameters, optimizer
-steps, batches, exact cycle max-sum actor, and deployment compute; it constructs
-the same composition graph at zero weight and receives no extra endpoint
-gradient. The strongest alternative is that this unrestricted model learns the
-same rule from the same endpoints, so the ceiling is finite-budget/OOD
-inductive bias.
+## Exact v3-to-v4 corrections
 
-V1 was prepared but never sent, constructed, or made scientifically active.
-V2 changes no mechanism, threshold, estimand, inference rule, branch, or claim
-ceiling. It makes complete-boundary training rows and their exact permutation
-law explicit; freezes PCG64 parameter traversal and reset-after GRU/QR sign
-conventions; gives every deterministic audit state an exact class/word/slot/
-severity/warm-up map; scores both the target word and its reverse on separately
-cloned 81-action panels; and corrects the complete microstep ledger to
-1,606,656. A provisional local analytic probe was used only to expose missing
-definitions; none of its values is evidence or an input to a threshold.
+V4 preserves every v3 element you passed: the deterministic complete-state
+word dynamics, monoid action and undiscounted reward cocycle, supported
+`2+2->4` and `4+4->8` training queries, held-out `6/12` exclusion, fully
+matched SCDMP/NOCOMP arms, node/edge actor, bank and permutation law, raw-bit
+contract, parameter count, activity boundary, thresholds, and 1,606,656-step
+ledger. It changes only the following conclusion-bearing definitions.
 
-V2 also remained unsent, unconstructed, and inactive. V3 retains that complete
-object and adds only an exact NumPy `1.26.3` raw-bit contract: every stochastic
-stream calls `PCG64(seed).random_raw()` directly; 53-bit uniform and Box-Muller
-maps, the non-audit `q,e1..e4,v1..v4` reset order, corpus/scored consumption
-order, Xavier traversal, and recurrent QR construction are all literal. This
-repair changes no scientific threshold, estimand, branch, claim, resource, or
-activity rule.
+1. Each seed computes conclusion-bearing oracle headroom, NOCOMP composition
+   defect, composition reduction, true-prediction competence, true-prediction
+   reduction, and actor disagreement on exactly its 64 REAL word-state
+   instances and `64*81` action panels. The gate averages eight seed-level
+   REAL fractions/means. SHAM-only and pooled-128 quantities remain controls or
+   descriptive diagnostics and cannot satisfy a REAL gate.
+2. `D_comp_REAL` and `E_pred_REAL` now have literal nested equal-weight
+   reductions over instances, actions, legal decompositions where applicable,
+   and physical/node/edge outputs. Convoy deletion requires
+   `mean_s D_comp_NOCOMP_REAL_s>=0.05`, REAL prediction competence, a one-sided
+   95% lower bound for `Delta_comp_REAL` above `0.10`, and a one-sided 95%
+   lower bound for `Delta_pred_REAL` above `0.05`.
+3. Four initial-word-row effects average their four within-regime replicates
+   and then the four target regimes equally. Together with the four target-
+   regime effects, these are the only eight covered subgroups. Every one-sided
+   95% upper bound must be below `0.010` for the convoy-negative intersection-
+   union conclusion; lack of a lower-bound significance result never counts as
+   evidence of absence.
+4. The negative claim is limited to this exact convoy DGP, duration split,
+   architecture, and budget. It transfers no negative evidence or threshold to
+   ground-payload or UAV surfaces; any decision not to invest there belongs to
+   local portfolio authority.
+5. The adverse family is exactly six REAL reward and six REAL failure effects
+   over the printed scored regimes. It uses one-sided Bonferroni simultaneous
+   upper bounds with per-estimand confidence `1-0.05/12`, `df=7`, and material
+   margins `-0.005` reward and `-0.05` failure. It has precedence over every
+   positive/regularity/sufficiency branch after core result validity.
+6. The constrained oracle enumerates the same slotwise lexicographic action
+   order `LEFT < COAST < RIGHT` as the learned actor and retains the first
+   exact float64 maximum with no tolerance. The REAL reversal gate compares
+   those unique oracle actions.
 
-Please determine whether the exact card is mathematically and causally closed
-enough to enter production. In particular scrutinize:
+No numeric positive, negative, headroom, competence, or non-harm threshold was
+weakened. No sample, seed, episode, action panel, model parameter, optimizer
+update, or resource count changed.
 
-1. whether the visible nonautonomous word process, complete physical state,
-   fixed action, lack of virtual-boundary reset, and undiscounted reward make
-   the stated monoid-action/cocycle equations correct;
-2. whether the train word families and composition queries strictly exclude
-   duration or query leakage from `6/12` and the two switch regimes;
-3. whether SCDMP and NOCOMP differ only in the intended composition gradient,
-   including loss normalization, gradient paths, optimizer state, data, work,
-   capacity, actor, and deployable information;
-4. whether the node/edge factorization and exact cycle max-sum actor consume the
-   predicted terminal physical state, frozen terminal potential, and cumulative
-   reward in a way that can identify decision value rather than mere low
-   training loss, collapse, or generic regularization;
-5. whether REAL reversal twins, SHAM identity, support, actor first stage, true
-   endpoint/reward error, and constrained-oracle headroom adequately exclude
-   the strongest shortcuts;
-6. whether complete-boundary bank rows, the exact Fisher-Yates/cursor/update
-   law, parameter traversal, GRU gate/QR convention, deterministic audit map,
-   twin cloning, and corrected ledger remove implementation-dependent science;
-7. whether the raw-bit/API/version contract uniquely fixes q rotation, reset
-   values, model initialization, and every stream-consumption order without
-   introducing an asymmetric arm input or held-out-duration leakage;
-8. whether the seed-level estimands, multiplicity, margins, non-harm gates,
-   branch logic, fixed resource ledger, and prospective family-deletion rule
-   justify the stated claim ceiling; and
-9. the strongest remaining alternative and the single highest-information
-   correction or discriminator if closure is not possible as written.
+## Required full-composite audit
+
+Determine whether:
+
+1. the REAL-only gates now exclude a SHAM-only headroom/defect counterexample;
+2. the subgroup upper-bound rule supports the exact bounded no-use conclusion;
+3. a true-prediction first stage is now mandatory for convoy deletion;
+4. the negative claim and later-surface boundary no longer overreach;
+5. the adverse branch is fully executable with correct sidedness,
+   multiplicity, margins, and precedence;
+6. oracle action identity is deterministic under ties; and
+7. every unchanged v3 component remains jointly closed in the full v4 card.
 
 Your first nonblank line must be exactly one of:
 
@@ -92,9 +92,9 @@ CLOSED
 REVISION_REQUIRED
 ```
 
-If `CLOSED`, state the strongest alternative and maximum defensible claim. If
-`REVISION_REQUIRED`, list every exact mathematical or causal defect blocking
-closure, the smallest science-bearing correction for each, and the claim
+If `CLOSED`, state the strongest remaining alternative and maximum defensible
+positive, package-only, convoy-negative, adverse, and nonidentifying claims. If
+`REVISION_REQUIRED`, enumerate every remaining mathematical or causal defect,
+give the smallest exact prospective correction for each, and state the claim
 boundary until a corrected complete revision returns to this same conversation.
-Do not authorize code, tests, runtime, portfolio selection, ground/UAV claims,
-or production; those remain with the local owners.
+Do not authorize code, tests, runtime, ground/UAV claims, or production.

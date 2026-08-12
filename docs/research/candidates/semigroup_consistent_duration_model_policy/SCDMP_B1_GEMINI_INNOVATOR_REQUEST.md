@@ -7,14 +7,14 @@ thinking=Extended
 purpose=independent_divergent_scientific_innovation
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B1
-revision=SCDMP-B1-SCIENCE-20260812-03
-supersedes_revision=SCDMP-B1-SCIENCE-20260812-02_PREPARED_NOT_SENT
+revision=SCDMP-B1-SCIENCE-20260812-04
+supersedes_revision=SCDMP-B1-SCIENCE-20260812-03
 conversation=dedicated_clean_new_gemini_direction_conversation_to_be_created
 send_status=PREPARED_NOT_SENT
 ```
 
 Act as an independent scientific innovator, not a convergence reviewer. Use
-the exact frozen direction state `SCDMP-B1-SCIENCE-20260812-03` in the GitHub
+the exact frozen direction state `SCDMP-B1-SCIENCE-20260812-04` in the GitHub
 repository, branch `aggressive`, at:
 
 `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_B1_SCIENCE_CARD.md`
@@ -46,6 +46,15 @@ V2 also remained unsent and inactive. V3 adds only an exact NumPy `1.26.3`
 including uniform/normal transforms and draw/traversal order. It changes no
 mechanism, threshold, estimand, branch, claim, resource, or activity rule and
 contains no result.
+
+V4 keeps the algorithm, comparator, thresholds, data, architecture, and budget
+unchanged. It makes conclusion-bearing headroom, composition defect, and true
+prediction error REAL-conditioned; replaces subgroup non-significance with
+prespecified upper-bound evidence; requires both composition and true-
+prediction first stages before a convoy-negative conclusion; limits that
+negative conclusion to the exact convoy treatment; defines a simultaneous
+adverse-effect branch; and makes oracle ties deterministic. SHAM and pooled
+quantities remain controls. This is prospective definition, not a result.
 
 Generate divergent, scientifically useful insight:
 
