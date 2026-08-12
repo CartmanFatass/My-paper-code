@@ -3,11 +3,11 @@
 ```text
 direction=commitment_residual_triggered_options
 candidate=CRTO-B1
-revision=CRTO-B1-SCIENCE-20260812-03
+revision=CRTO-B1-SCIENCE-20260812-04
 owner=EM_commitment_residual_triggered_options
 scientific_activity_started=false
 production_authorized=false
-mathematical_closure=CLOSED_by_same_direction_chatgpt_external_pro_and_EM_intake
+mathematical_closure=required_from_same_direction_chatgpt_external_pro_on_v4
 ```
 
 ## Decision and question
@@ -32,19 +32,24 @@ equivalence, residual-semantic uniqueness, or full mediation of the
 CRTO-versus-FULL package effect.
 
 The science-bearing object is exactly this full composite file at revision
-`CRTO-B1-SCIENCE-20260812-03`. It prospectively supersedes inactive revisions
-`CRTO-B1-SCIENCE-20260812-01` and `CRTO-B1-SCIENCE-20260812-02`. The dedicated
-ChatGPT External Pro conversation returned `REVISION_REQUIRED` on v2; no
-implementation, learned-policy optimizer update, or question-relevant scientific
-activity occurred under either earlier revision. Any change to the DGP, provider-visible
-mathematics, arms, data split, activity law, estimands, margins, inference,
-or interpretation branches creates a new complete revision. Production is
-The same dedicated direction-specific ChatGPT External Pro conversation returned
-literal `CLOSED` on this complete v3, and this EM accepted that ruling without a
-science-bearing change. Mathematical/causal closure is complete for this exact
-prospective object. Production remains withheld until CM accepts technical
-conformance and Root releases execution; Pro closure does not provide either
-authority.
+`CRTO-B1-SCIENCE-20260812-04`. It prospectively supersedes inactive revisions
+`CRTO-B1-SCIENCE-20260812-01`, `CRTO-B1-SCIENCE-20260812-02`, and
+`CRTO-B1-SCIENCE-20260812-03`. The dedicated ChatGPT External Pro conversation
+returned `REVISION_REQUIRED` on v2 and `CLOSED` on v3. A subsequent preactivity
+CM feasibility question exposed that v3's phrase `switch direction/phase` did
+not define the penalized hazard's feature coordinates. Because direction and
+phase coding changes the residual-free hazard hypothesis class, actions, and
+`Delta_rate` interpretation, v4 prospectively freezes that science-bearing law
+before any learned-policy optimizer update or question-relevant output. No v3
+implementation guess is part of v4. Any change to the DGP, provider-visible
+mathematics, arms, data split, activity law, estimands, margins, inference, or
+interpretation branches creates a new complete revision.
+
+Production is withheld. The complete v4 must return to the same dedicated
+direction-specific ChatGPT External Pro conversation for literal `CLOSED`,
+followed by this EM's intake, before CM may construct or run v4. CM technical
+conformance and Root execution release remain separately required; Pro closure
+provides neither.
 
 ## Cooperative service-relay DGP
 
@@ -439,9 +444,62 @@ predictor data, policy training, scored evaluation, and donor-only panels. At
 every legal discretionary review, its binary label is CRTO's locked
 terminate-versus-KEEP decision. Its feature vector is an intercept, current
 option one-hot, `K/16`, `age/16`, `age/K`, complete legal-mask bits, visible cue
-one-hot, cost divided by `4`, regime one-hot, and switch direction/phase; it has
-no residual, telemetry value, hidden event label, future value, or outcome.
-Continuous features are centered and scaled using only this development panel.
+one-hot, cost divided by `4`, and the exact regime/direction/phase coordinates
+below; it has no residual, telemetry value, hidden event label, future value, or
+outcome.
+
+The regime/direction/phase block is exactly 14 binary coordinates in this order:
+
+```text
+regime = one_hot(current complete-rollout regime;
+                 [K8_FIXED,K16_FIXED,SWITCH_4_TO_16,SWITCH_16_TO_4])
+
+direction = one_hot(switch direction;
+                    [NO_SWITCH,FOUR_TO_SIXTEEN,SIXTEEN_TO_FOUR])
+
+phase = one_hot(boundary-relative switch phase;
+                [FIXED,PRE_9PLUS,PRE_1_TO_8,AT_SWITCH,
+                 POST_1_TO_8,POST_9PLUS,FAR_POST])
+```
+
+`regime` is the complete episode regime, not current `K`. For both fixed regimes,
+`direction=NO_SWITCH` and `phase=FIXED` at every legal discretionary review. For
+either switch regime let `delta=t-128`, where `t` is the integer primitive-time
+index of the predecision legal review and the externally changed `K` becomes
+observable at `t=128`. Assign exactly one phase coordinate by:
+
+```text
+PRE_9PLUS = 1  iff delta <= -9
+PRE_1_TO_8 = 1 iff -8 <= delta <= -1
+AT_SWITCH = 1  iff delta == 0
+POST_1_TO_8= 1 iff 1 <= delta <= 8
+POST_9PLUS = 1 iff 9 <= delta <= 64
+FAR_POST   = 1 iff delta >= 65.
+```
+
+Every episode is 256 steps, so the displayed bins cover all switch-regime
+reviews. The switch instant contributes a hazard-fit row only if the v4 action
+law makes that boundary a legal discretionary review with a binary
+terminate-versus-KEEP label. An immediately forced renewal, a no-review instant,
+or any boundary without legal `KEEP` is excluded from the hazard fit and from
+hazard cell-support counts; it is still resolved by the ordinary v4 switch law.
+At `t=128` the residual contribution is zero by construction, so an included
+discretionary row's label is the locked q-only CRTO decision.
+
+All 14 coordinates are literal uncentered `0/1` indicators. They are never
+reference-dropped, centered, standardized, collapsed, or replaced by ordinal
+scalars. Only `K/16`, `age/16`, `age/K`, and `cost/4` are continuous; center and
+unit-scale those four using the complete four-regime hazard-development panel,
+with a zero development standard deviation replaced by scale one. Current-option,
+legal-mask, cue, regime, direction, and phase indicators remain literal `0/1`.
+The base logistic is additive in exactly the printed coordinates: there are no
+products, splines, polynomials, learned embeddings, direction-by-phase terms,
+regime-by-phase terms, or other interaction features. The single intercept is
+unpenalized; every coefficient on a continuous or binary feature is a
+non-intercept coefficient subject to the same `1e-3/2` L2 penalty below. The
+collinear full one-hot blocks intentionally remain as printed; the strictly
+convex L2-penalized slope objective with an unpenalized intercept determines the
+minimum-norm fitted slopes under the registered deterministic optimizer.
 
 The base logistic coefficients minimize mean binary cross-entropy plus
 `1e-3/2` times the squared non-intercept coefficient norm. Deterministic L-BFGS
@@ -941,9 +999,9 @@ a prospective bridge, not UAV evidence.
 
 ## Root-to-CM construction packet
 
-If and only if Root later relays this packet after this completed Pro `CLOSED`
-and EM intake,
-CM should construct exactly `CRTO-B1-SCIENCE-20260812-03`, bind source/config,
+If and only if Root later relays this packet after a new same-conversation Pro
+`CLOSED` on v4 and EM intake,
+CM should construct exactly `CRTO-B1-SCIENCE-20260812-04`, bind source/config,
 verify identical learned-arm resources and causal timestamps, and return either
 a concise preactivity technical nonconformance or a real command with the
 registered resource ceiling. CM and Operator own code, tests when authorized,

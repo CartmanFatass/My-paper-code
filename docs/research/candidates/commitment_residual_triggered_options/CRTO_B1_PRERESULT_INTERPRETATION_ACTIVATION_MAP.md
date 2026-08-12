@@ -1,28 +1,30 @@
-# CRTO B1 v3 pre-result interpretation and activation map
+# CRTO B1 v4 pre-result interpretation and activation map
 
 ```text
 direction=commitment_residual_triggered_options
 owner=EM_commitment_residual_triggered_options
-treatment=CRTO-B1-SCIENCE-20260812-03
-mathematical_closure=CLOSED_and_EM_intaked
+treatment=CRTO-B1-SCIENCE-20260812-04
+mathematical_closure=PENDING_same_conversation_Pro_CLOSED_and_EM_intake
 map_mode=prospective_result_blind
 scientific_activity_observed_by_EM=false
 treatment_changed_by_this_map=false
 production_authorized=false
-gemini_v3_status=PREPARED_NOT_SENT
+gemini_v4_status=PREPARED_NOT_SENT
 ```
 
 ## Purpose and protected boundary
 
-This map prospectively routes only results from the exact Pro-closed v3 science
-card. It was frozen without reading CM construction, runtime, or result output
+This map prospectively routes only results from exact prospective v4 after it
+receives same-conversation Pro `CLOSED` and EM intake. V4 differs from closed v3
+only by the exact hazard regime/direction/phase encoding necessitated by a
+preactivity ambiguity. The map was synchronized without reading CM runtime or result output
 and changes no DGP, arm, split, activity law, estimand, margin, inference rule,
 interpretation branch, resource envelope, or claim ceiling. The science card is
 controlling if this concise map and the full treatment could be read
 differently.
 
 CM owns construction, execution, resource facts, and technical acceptance. A CM
-return is scientific input only after Root relays whether exact-v3
+return is scientific input only after Root relays whether exact-v4
 question-relevant output exists and supplies the observed per-seed/per-regime
 effects, validity/activity counts, calibration, donor and first-stage
 diagnostics, mechanism cuts, audit quantities, rate balance, anomalies, and
@@ -30,7 +32,7 @@ missing quantities. This EM alone assigns the direction-local branch below.
 
 ## Complete-package validity
 
-A total-effect conclusion exists only when CM technically accepts an exact-v3
+A total-effect conclusion exists only when CM technically accepts an exact-v4
 instantiation and reports question-relevant output with all eight paired learned
 seeds, every frozen evaluation cell, finite returns, identical paired scenario
 counts, action/cost parity, and no evaluation leakage or post-activity science
@@ -128,7 +130,7 @@ Use this branch, with the narrow affected scope, when:
 
 Do not reinterpret any such condition as treatment failure. A timing successor
 with within-option monitoring would be a separately frozen treatment. A
-science-bearing repair after activity is never retrofitted into v3.
+science-bearing repair after activity is never retrofitted into v4.
 
 ### 6. Shortcut signature
 
@@ -153,24 +155,24 @@ composite explanation.
 If a later positive result makes residual-semantic specificity decision-changing,
 the highest-information successor is a prospectively defined matched raw-packet
 derangement of FULL with the corresponding difference-in-differences. It is not
-part of v3 and must not be added to its completed run.
+part of v4 and must not be added to its completed run.
 
 ## Exact same-Pro result-convergence trigger
 
 Trigger one result-convergence request only after all of the following occur:
 
-1. CM technically accepts an exact-v3 execution and returns question-relevant
+1. CM technically accepts an exact-v4 execution and returns question-relevant
    scientific output through Root; a no-data engineering return does not trigger
    Pro convergence.
 2. This same-direction EM intakes the complete observed packet, assigns one of
    the branches above, freezes the exact supported claim, strongest alternative,
-   missing quantities, anomalies, and next discriminator without altering v3.
+   missing quantities, anomalies, and next discriminator without altering v4.
 3. Root publishes that owner-prepared result interpretation and its minimal
    repository-visible evidence locators on branch `aggressive` and explicitly
    releases an idle Agentify slot.
 
 The outbound question then continues only the existing dedicated CRTO Pro
-conversation `6a7cc6cb-c210-83e8-8d51-0bb7c64ced53`. It includes the exact v3
+conversation `6a7cc6cb-c210-83e8-8d51-0bb7c64ced53`. It includes the exact v4
 identity, the CM-accepted observed per-seed/per-regime packet, all passed/failed/
 unavailable gates, the EM's frozen branch and ceiling, and the strongest
 alternative. It asks Pro to challenge whether the evidence supports that exact
@@ -202,16 +204,17 @@ deployable telemetry, external variable `K`, recoverable post-commitment
 consequences, explicit replanning cost, and the strong raw-history comparator.
 Neither service-relay nor warehouse evidence establishes UAV or real-UAV value.
 
-The independent Gemini v3 requester remains blind and `PREPARED_NOT_SENT` while
+The independent Gemini v4 requester remains blind and `PREPARED_NOT_SENT` while
 the shared transport is occupied. Gemini may later contribute divergent
 mechanisms and bridge ideas after a separate Root release, but it cannot satisfy
 Pro convergence or any activation condition.
 
 ## Exact Root relay
 
-> CRTO exact-v3 pre-result map is frozen result-blind and does not alter the
-> Pro-closed treatment. Total-effect validity requires CM technical acceptance,
-> exact v3, eight paired seeds/all cells, finite paired output, action/cost parity,
+> CRTO exact-v4 pre-result map is frozen result-blind. V4 prospectively
+> supersedes closed v3 only for the exact hazard feature encoding and is not
+> production-eligible until same-Pro `CLOSED` plus EM intake. Total-effect validity
+> requires CM technical acceptance, exact v4, eight paired seeds/all cells, finite paired output, action/cost parity,
 > no leakage, and computable registered inference. Mechanism validity is a
 > stricter separable layer; a failed mechanism support gate may leave a valid
 > package effect but cannot become mechanism-negative evidence. Positive package
@@ -223,4 +226,4 @@ Pro convergence or any activation condition.
 > and idle release—to existing Pro conversation
 > `6a7cc6cb-c210-83e8-8d51-0bb7c64ced53` for one result-convergence turn. No-data
 > engineering output does not trigger Pro. UAV definition requires a later
-> qualifying warehouse replication. Gemini v3 remains blind and unsent.
+> qualifying warehouse replication. Gemini v4 remains blind and unsent.

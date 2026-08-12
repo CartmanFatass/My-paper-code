@@ -7,13 +7,13 @@ thinking=Extended
 purpose=independent_divergent_scientific_innovation
 direction=commitment_residual_triggered_options
 candidate=CRTO-B1
-revision=CRTO-B1-SCIENCE-20260812-03
+revision=CRTO-B1-SCIENCE-20260812-04
 conversation=dedicated_gemini_direction_conversation_to_be_created
-send_status=PREPARED_NOT_SENT
+send_status=PREPARED_NOT_SENT_SUPERSEDES_UNCOMMITTED_V3
 ```
 
 Act as an independent scientific innovator, not a convergence reviewer. Use the
-exact frozen direction state `CRTO-B1-SCIENCE-20260812-03` in the GitHub
+exact frozen direction state `CRTO-B1-SCIENCE-20260812-04` in the GitHub
 repository, branch `aggressive`, at:
 
 `docs/research/candidates/commitment_residual_triggered_options/CRTO_B1_SCIENCE_CARD.md`
@@ -36,6 +36,11 @@ claim is a useful finite-data/OOD representation/optimization inductive bias.
 The predictor uses only explicitly deployable telemetry, has a clock separate
 from retained option age after `K` switches, and censors a forecast when its
 anchored commitment ends before the target horizon.
+
+The residual-free hazard uses literal categorical regime, switch-direction, and
+boundary-relative phase one-hots with an additive L2-penalized logistic law. That
+control is a mechanism diagnostic, not an actor input or a claim that ordinal
+time alone explains termination.
 
 Generate divergent, scientifically useful insight:
 

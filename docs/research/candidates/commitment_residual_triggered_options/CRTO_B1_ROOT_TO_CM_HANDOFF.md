@@ -3,9 +3,9 @@
 ```text
 direction=commitment_residual_triggered_options
 candidate=CRTO-B1
-revision=CRTO-B1-SCIENCE-20260812-03
+revision=CRTO-B1-SCIENCE-20260812-04
 owner=EM_commitment_residual_triggered_options
-handoff_status=mathematically_closed_prepared_not_released
+handoff_status=prospective_v4_prepared_not_released_pending_pro_closure
 production_authorized=false
 ```
 
@@ -19,12 +19,13 @@ and action-matched
 `FULL-HISTORY-AUX-TERM` learner, plus frozen-checkpoint
 `DERANGED-RESIDUAL-CRTO`, Q-only, rate-matched-hazard, and forced-renewal cuts.
 
-Do not begin construction or production from this prepared file alone. The exact
-v3 revision has received same-direction ChatGPT External Pro `CLOSED` and EM
-intake; that completes only mathematical/causal closure. Root must still
-explicitly release this handoff. On release, CM owns source, tests if authorized,
-environment, exact resource accounting, execution, and technical acceptance. No
-science-bearing repair is delegated to CM.
+Do not begin construction or production from this prepared file alone. V4
+prospectively supersedes Pro-closed v3 because v3 left the penalized hazard's
+switch-direction/phase feature coordinates underdetermined. V4 has not yet
+received same-conversation Pro closure. Root may release it only after literal
+`CLOSED` on the complete v4 and this EM's intake. On later release, CM owns
+source, tests if authorized, environment, exact resource accounting, execution,
+and technical acceptance. No science-bearing repair is delegated to CM.
 
 The bounded implementation target is one CPU, no GPU, at most 2 GiB resident
 memory, at most 120 minutes, and the exact category ledger with registered
@@ -35,7 +36,41 @@ provide the card's per-seed/per-regime effects, activity counts, calibration,
 donor/first-stage diagnostics, causal audit, resource facts, and anomalies to
 Root for relay to this same EM.
 
-## Exact v2-to-v3 CM delta
+## Exact v3-to-v4 CM delta
+
+Revision `CRTO-B1-SCIENCE-20260812-04` prospectively supersedes inactive v3
+before any learned-policy optimizer update or question-relevant output. V3's
+generic `switch direction/phase` phrase and the landed scalar guess
+`0=fixed,-1=pre-switch,+1=post-switch` are non-operative. The exact hazard
+feature law is now:
+
+- a four-coordinate full regime one-hot in order
+  `[K8_FIXED,K16_FIXED,SWITCH_4_TO_16,SWITCH_16_TO_4]`;
+- a three-coordinate full direction one-hot in order
+  `[NO_SWITCH,FOUR_TO_SIXTEEN,SIXTEEN_TO_FOUR]`;
+- a seven-coordinate full phase one-hot in order
+  `[FIXED,PRE_9PLUS,PRE_1_TO_8,AT_SWITCH,POST_1_TO_8,POST_9PLUS,FAR_POST]`;
+- fixed regimes always use `NO_SWITCH/FIXED`; switch bins use `delta=t-128` and
+  exact boundaries `<=-9`, `[-8,-1]`, `0`, `[1,8]`, `[9,64]`, `>=65`;
+- at the switch instant, only a legal discretionary review with `KEEP` and a
+  binary q-only label enters hazard fitting; forced renewal, no-review, or no-
+  KEEP boundaries are excluded from the fit/support denominator;
+- all 14 indicators remain literal unscaled `0/1`; only `K/16`, `age/16`,
+  `age/K`, and `cost/4` are centered/unit-scaled on the complete development
+  panel, with zero standard deviation mapped to scale one; and
+- the logistic is additive only, with no interactions, splines, polynomial
+  terms, embeddings, reference dropping, or scalar direction/phase substitute.
+  The intercept is unpenalized; every printed slope, including all full-one-hot
+  slopes, receives the registered L2 penalty.
+
+This changes only the formerly ambiguous residual-free hazard realization and
+its `Delta_rate` control. It does not change the DGP, learned CRTO/FULL arms,
+predictor, derangement, Q-only/forced-renewal cuts, primary estimands, margins,
+resource ledger, claim ceiling, or scientific activity boundary. CM must remove
+or replace any preactivity scalar guess before v4 conformance; it must not patch
+or run v3.
+
+## Retained exact v2-to-v3 CM delta
 
 Revision `CRTO-B1-SCIENCE-20260812-03` prospectively supersedes inactive v2
 after its dedicated ChatGPT External Pro returned `REVISION_REQUIRED`. No
@@ -79,8 +114,9 @@ freedom:
 The environment-step ledger remains exactly 10,715,136. The added diagnostics
 consume no environment steps and remain within the same one-CPU, no-GPU, 2-GiB,
 120-minute ceiling. The same Pro conversation returned literal `CLOSED` on
-complete v3 and this EM intaked it; Root now retains the independent choice of
-whether and when to release the handoff to CM.
+complete v3, but that ruling does not close the science-bearing v4 feature-law
+revision. Root must withhold v4 CM/production release until new Pro `CLOSED` plus
+EM intake.
 
 ## Retained exact v1-to-v2 CM delta
 

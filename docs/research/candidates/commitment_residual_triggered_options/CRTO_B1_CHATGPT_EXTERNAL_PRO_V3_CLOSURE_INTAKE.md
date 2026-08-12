@@ -10,6 +10,7 @@ mathematical_closure=complete_for_exact_v3
 scientific_activity_started=false
 production_authorized=false
 gemini_v3_status=PREPARED_NOT_SENT
+later_production_supersession=CRTO-B1-SCIENCE-20260812-04
 ```
 
 ## Conclusion first
@@ -21,6 +22,12 @@ direction's DGP, algorithm comparison, estimands, interventions, inference,
 validity gates, interpretation, and claim ceiling. It does not validate an
 implementation, establish runtime feasibility, authorize CM work or production,
 select the portfolio, or provide warehouse/UAV evidence.
+
+Historical clarification: a later preactivity CM question found that v3 did not
+define the penalized hazard's switch-direction/phase feature coordinates. V3's
+`CLOSED` remains the correct disposition for exact v3, but prospective production
+now uses complete v4 and requires a new same-conversation Pro ruling. No v3 result
+or activity exists.
 
 The complete response and strict exact-continuation receipt are archived at
 `temp/sessions/agentify_transport_operator/independent_research_explorer/crto_b1_chatgpt_pro_math_closure_v3/results.json`.
