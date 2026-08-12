@@ -3,7 +3,8 @@
 Owner: `direction:voronoi_quadrature_field_policy` Explorer Manager
 Candidate: `VQFP-VN-FAMILY-CUT-01`
 Treatment: `VQFP-B1-PERIODIC-LOCAL-MEASURE-v1`
-Exact prospective revision: `VQFP-B1-MATH-CLOSURE-20260812-02`
+Exact prospective revision: `VQFP-B1-MATH-CLOSURE-20260812-03`
+Superseded Pro-reviewed revision: `VQFP-B1-MATH-CLOSURE-20260812-02`
 Superseded unsent revision: `VQFP-B1-MATH-CLOSURE-20260812-01`
 Hard complexity contract: `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
 
@@ -19,9 +20,10 @@ finite-budget inductive bias under the frozen roster and geometry shifts, not
 an impossibility result for learned attention.
 
 This document freezes a prospective B1 object. No VQFP parameter update,
-question-relevant run, checkpoint, or result exists. Before production, this
-exact revision must receive `CLOSED` from its dedicated same-direction ChatGPT
-External Pro conversation and that ruling must be intaken by this owner. Any
+question-relevant treatment run, checkpoint, or treatment result exists. Before
+production, this exact revision must receive `CLOSED` from its dedicated same-
+direction ChatGPT External Pro conversation and that ruling must be intaken by
+this owner. Any
 accepted science-bearing correction creates a new complete revision and must
 return to the same Pro conversation. CM separately owns implementation
 conformance and technical acceptance; Root owns production sequencing.
@@ -31,16 +33,20 @@ suggest counterexamples, mechanisms, scenario families, controls, or bridges,
 but it cannot supply mathematical closure, result convergence, technical
 acceptance, or portfolio selection.
 
-Revision `-02` is a prospective pre-Pro clarification of the complete object.
-Revision `-01` produced no provider turn and is superseded without scientific
-activity. The revision fixes three previously open choices: the named
-`EXPLICIT-PORT-BYPASS` diagnostic reuses the registered conflict one-step bank
-rather than creating a fifth control panel; the finite-budget actor and critic
-architecture is exact rather than left to implementation choice; and the
-action-TV gate plus two paired associations have fixed statistical units and
-aggregation rules. The DGP, arms, counts, direct endpoints, margins, resource
-ceiling, family-delete rule, second-surface trigger, and claim ceiling are
-otherwise unchanged.
+The dedicated VQFP ChatGPT External Pro returned `REVISION_REQUIRED` with five
+science-bearing defects for prospective revision `-02`. This owner accepts all
+five because each affects the finite-budget learned object, mechanism
+attribution, endpoint availability, reproducibility, or branch precedence.
+Revision `-03` prospectively freezes the complete recurrent learning law;
+requires both VQFP self-attenuation and architecture-by-cut attenuation in
+`M`; fixes oracle-headroom and binding-support units; supplies the exact state
+law and output vector for all four sampled structural controls; and fixes
+`Gamma`, noisy reversal, material reverse, endpoint tradeoff, and successor
+precedence. Revision `-02` is superseded and must never be resent; revision
+`-01` produced no provider turn. No optimizer update or other
+question-relevant activity has begun. The DGP, arms, architecture, parameter
+count, seeds, samples, transition/state ceiling, direct margins, family-delete
+margin, and narrow claim ceiling otherwise remain unchanged.
 
 ## Question and causal object
 
@@ -180,8 +186,9 @@ credit.
 For reporting only, an exact immediate oracle maximizes `r_t` over the three
 efforts on the cyclic width-three factor graph. The ring dynamic program has
 constant action width and `O(N*3^3)` time. It is never an actor, training target,
-search proposal, observation, or deployment fallback. Since the all-zero action
-is legal and demand is strictly positive, `r_t^star>0`. Episode performance is
+search proposal, observation, or deployment fallback. The legal all-`1/2`
+joint action gives `u_j=1` everywhere and reward at least
+`0.15*(1-exp(-1))-0.02>0`; hence `r_t^star>0`. Episode performance is
 
 ```text
 J_episode = sum_(t=0..31) r_t / sum_(t=0..31) r_t^star.
@@ -414,6 +421,36 @@ not another panel:
   `MEASURE-CONFLICT` bank. It is a diagnostic, not a fifth structural-control
   panel and not a validity gate.
 
+The exact sampled-control state law is prospective and common to both arms.
+For each training seed, held-out `N`, and one of the four sampled control names,
+generate exactly 128 independent tick-0 pre-action states once under a control-
+specific counter namespace, then evaluate that identical bank in both arms.
+Each arm evaluation is one registered one-step team state in the resource
+account. The actor GRU state is zero and every previous-effort token is `START`.
+
+`WHOLE-TUPLE-PERMUTE` and `IDENTITY-RESTORE` use independently sampled
+`MEASURE-CONFLICT` layouts and fields. `EQUAL-VOLUME` uses `EQUAL` layouts with
+the ordinary heterogeneous field. `CONSTANT-FIELD` uses `CLUSTER` layouts with
+`d(x)=0.55`. For even state indices use the forward cyclic triplet shift and
+for odd state indices use its inverse.
+
+`WHOLE-TUPLE-PERMUTE` moves each complete sender record as a unit, including
+its explicit volume operand, edge/message values, signed displacement,
+adjacent gaps, relative-slot metadata, and residual logit. Metadata is not
+recomputed for the destination array position. `EQUAL-VOLUME` and
+`CONSTANT-FIELD` apply the registered volume-only `VOLUME-REASSOC` shift.
+`IDENTITY-RESTORE` applies that shift and then its exact inverse before
+evaluation.
+
+Using the same stored actor hidden state, compare these registered outputs:
+
+```text
+WHOLE-TUPLE-PERMUTE: (weighted_message_32, actor_logits_3)
+EQUAL-VOLUME:        (weighted_message_32, actor_logits_3)
+CONSTANT-FIELD:      raw_mass_coordinate only
+IDENTITY-RESTORE:    (weighted_message_32, actor_logits_3).
+```
+
 For deterministic control outputs, ordinary conformance means
 
 ```text
@@ -421,38 +458,79 @@ abs(x-y) <= 1e-8 + 1e-6*max(abs(x),abs(y)).
 ```
 
 This is a stable numerical tolerance, not bit identity or an experimental
-effect threshold.
+effect threshold. Every scalar in the registered output vector is compared
+elementwise. A failure in any registered state, seed, arm, or held-out `N`
+makes binding attribution unavailable while leaving an otherwise valid direct
+package endpoint usable. These are exactly the registered 24,576 one-step team
+states; `EXPLICIT-PORT-BYPASS` remains derived and adds no state.
 
 ## Training and evaluation freeze
 
 ### Learning law
 
-Training is synchronous on-policy actor-critic. The joint policy factorizes
-conditionally across active agents. For one team transition its joint log
-probability is the sum of all active-agent categorical log probabilities. The
-actor loss uses that joint log probability times one shared team GAE advantage;
-team transitions, not agent rows, are averaged. There is no importance reuse,
-clipping, per-agent ratio, entropy bonus, auxiliary reward, imitation target,
-oracle target, or held-out validation loss.
+Training is synchronous on-policy actor-critic over complete 32-tick episodes.
+Each update batch contains exactly eight complete episodes and therefore
+exactly 256 team transitions: two episodes in each of
+`(N,regime)={(6,IID),(6,CLUSTER),(10,IID),(10,CLUSTER)}` under the fixed
+balanced counter-keyed schedule.
 
-The common values are:
+Let `V_t` be the centralized critic output at the pre-action state of tick `t`.
+Set `V_32=0` and `A_32=0` at the terminal episode boundary. With `gamma=0.99`,
+`lambda=0.95`, and the raw scalar team reward, compute backward for
+`t=31,...,0`:
 
 ```text
-gamma=0.99
-GAE lambda=0.95
-Adam learning rate=3e-4
-gradient norm cap=1.0
-256 team transitions per update
-one optimizer pass per batch
-375 updates = 96,000 team transitions per arm/seed
+delta_t = r_t + gamma*stop_gradient(V_(t+1))
+          - stop_gradient(V_t)
+A_t = delta_t + gamma*lambda*A_(t+1)
+Y_t = stop_gradient(A_t + V_t).
 ```
 
-The critic squared-error coefficient is `0.5`. Every batch contains equal
-numbers of `N=6` and `N=10` episodes and equal numbers of `IID` and `CLUSTER`
-episodes, using a fixed balanced counter-keyed schedule. The final update-375
-checkpoint is the only evaluated checkpoint. There is no early stopping,
-checkpoint selection, hyperparameter sweep, warm start, or retraining after an
-evaluation.
+No reward, return, observation, value-target, or advantage normalization,
+centering, clipping, or standardization is applied. The joint policy
+factorizes conditionally across active agents, with
+
+```text
+logp_joint,t = sum_(i=1..N) log pi_i(a_i,t | history_i,t).
+```
+
+The exact full-batch loss is
+
+```text
+L = mean_over_256_team_transitions [
+      -stop_gradient(A_t)*logp_joint,t
+      + 0.5*(V_t-Y_t)^2
+    ].
+```
+
+The actor computation graph is retained through all 32 GRU steps of each
+episode. There is no within-episode hidden-state detachment, truncated BPTT,
+cross-episode state carry, value clipping, entropy term, auxiliary term,
+imitation or oracle target, importance reuse, per-agent ratio, or held-out
+validation loss. Team transitions, not agent rows, are averaged.
+
+For each arm, one separate Adam optimizer contains all of that arm's actor and
+critic parameters, including the nominal VQFP gate parameters whose
+mathematical loss gradient is exactly zero. No optimizer state is shared across
+arms. Each optimizer uses:
+
+```text
+learning_rate=3e-4
+beta1=0.9
+beta2=0.999
+epsilon=1e-8
+weight_decay=0
+amsgrad=false
+no learning-rate schedule
+```
+
+Exactly one full-batch backward pass and one optimizer step occur per update.
+Before that step, clip the global L2 norm of all non-`None` parameter gradients
+jointly to `1.0`. There is no minibatch subdivision or additional optimizer
+step. Exactly 375 updates produce 96,000 team transitions per arm/seed. The
+final update-375 checkpoint is the only evaluated checkpoint. There is no
+early stopping, checkpoint selection, hyperparameter sweep, warm start, or
+retraining after evaluation.
 
 Use these 12 paired training seeds:
 
@@ -489,12 +567,18 @@ the 128-by-32-tick `MEASURE-CONFLICT` episodes. Consequently the registered
 4,098,048 transition/state ceiling and the four-control term in its accounting
 remain exact.
 
+In the noisy `CLUSTER` panel, the `epsilon_i,t` draws are independent across
+agents, ticks, episodes, training seeds, and held-out `N` values. The
+corresponding draw is paired identically across arms. After addition to the
+exact cell average, each observation is clipped to `[0,1]`; reward continues
+to use the true field.
+
 The noisy panel is a fixed falsification boundary, not a primary robustness
-endpoint. It tests the precise counterexample that a large physical cell can
-give a noisy isolated sensor excessive influence. It cannot expand the claim
-above the registered noise-free cell-average observation; a clear reversal
-narrows any successor to a reliability-tempered measure with a new Pro-closed
-science object.
+endpoint. It tests the counterexample that a large physical cell can give a
+noisy isolated sensor excessive influence. It cannot expand the claim above
+the registered noise-free cell-average observation. Its exact material-
+reversal rule and successor precedence are frozen below; it does not identify
+largest-cell noise as the causal mediator.
 
 Evaluation draws use counter namespaces derived from `(training_seed,
 panel,N,regime,episode,tick)` and are identical across arms and cuts. Held-out
@@ -536,11 +620,17 @@ The descriptive held-out-specific interaction is
 ```text
 Gamma_s = mean_(n in {4,14},z)[VQFP-LEARNED]
           - mean_(n in {6,10},z)[VQFP-LEARNED].
+
+Gamma = (1/12)*sum_s Gamma_s.
 ```
 
-Positive direct value without positive `Gamma` supports one shared policy that
-works better at the tested held-out sizes, but not a benefit caused specifically
-by crossing the training-size boundary.
+`Gamma` is the sole descriptive aggregate. Positive `Gamma` means `Gamma>0`,
+negative `Gamma` means `Gamma<0`, and `Gamma=0` is neutral. Report every
+`Gamma_s` and `Gamma`; attach no confidence interval or gate. Positive direct
+value without positive `Gamma` supports one shared policy that works better at
+the tested held-out sizes, but not a benefit caused specifically by crossing
+the training-size boundary. Positive `Gamma` remains descriptive and does not
+identify that crossing as a causal benefit.
 
 For receiver `i`, define the true local physical mass
 
@@ -558,10 +648,19 @@ ticks and receivers of `|Qhat_A,c,i-Q_i|/V_i`. Let
 ```text
 K_s = min_(n in {4,14}) [E_VQFP,cut,s(n)-E_VQFP,intact,s(n)]
 
-M_s = min_(n in {4,14})
-      { [mu^MC_VQFP,intact,s(n)-mu^MC_LEARNED,intact,s(n)]
-        - [mu^MC_VQFP,cut,s(n)-mu^MC_LEARNED,cut,s(n)] }.
+D^V_s(n) = mu^MC_VQFP,intact,s(n)-mu^MC_VQFP,cut,s(n)
+
+D^I_s(n) =
+    [mu^MC_VQFP,intact,s(n)-mu^MC_LEARNED,intact,s(n)]
+  - [mu^MC_VQFP,cut,s(n)-mu^MC_LEARNED,cut,s(n)]
+
+M_s = min_(n in {4,14}) min{D^V_s(n),D^I_s(n)}.
 ```
+
+Thus `M` requires both material VQFP self-attenuation under reassociation and
+material architecture-by-cut attenuation at both held-out roster sizes in the
+registered worst-size sense. Comparator improvement under the cut cannot by
+itself establish VQFP return contribution.
 
 For exact action and association units, index the 128 registered conflict
 episodes by `e`. At every tick and receiver, replay intact and cut VQFP inputs
@@ -596,7 +695,8 @@ Student-`t` `98.333333%` lower confidence bounds for `mean(K_s)`, `mean(M_s)`,
 and `mean(T_s)`. Their three-way Bonferroni family has one-sided alpha at most
 `0.05`. Binding is supported as a contributor only if the respective lower
 bounds strictly exceed `0.02` normalized field density, `0.02` normalized
-return, and `0.05` total-variation distance.
+return, and `0.05` total-variation distance. The `M` bound therefore covers
+joint VQFP self-attenuation and architecture-by-cut attenuation.
 
 The `EXPLICIT-PORT-BYPASS` diagnostic is exactly
 
@@ -625,6 +725,27 @@ Pearson correlation, pool receiver-ticks, drop the cell, or select a subgroup.
 Both associations are descriptive and cannot rescue a failed `K`, `M`, or `T`
 gate.
 
+For the noisy falsification, let `mu^noise_A,s(n)` be the mean of the 128 intact
+noisy-panel `J_episode` values and define
+
+```text
+D^noise_s = min_(n in {4,14})
+              [mu^noise_VQFP,s(n)-mu^noise_LEARNED,s(n)].
+```
+
+Across the 12 training seeds form one one-sided Student-`t` 95% upper
+confidence bound `U_noise` for `mean(D^noise_s)`. A registered noisy-panel
+material reversal occurs if and only if
+
+```text
+U_noise < -0.03.
+```
+
+This uses the existing normalized-return material margin and no additional
+data. It supports only material degradation under this exact clipped iid noise
+panel; it does not identify largest-cell noise as the causal mediator. Failure
+to meet the rule is not evidence of general noisy-sensor robustness.
+
 A direct value result that passes `P` or `R` but fails any binding requirement
 is a package-level result with no quadrature-mechanism attribution.
 
@@ -637,6 +758,16 @@ enumeration before that point are engineering work and do not start activity.
 After activity begins, no observation, action, DGP, algorithm, comparator,
 count, seed, margin, inference, or branch in this revision may be changed.
 
+For endpoint headroom define, separately in each held-out `(n,z)` cell,
+
+```text
+bar_mu_LEARNED(n,z)
+  = (1/12)*sum_s mu_LEARNED,s(n,z)
+
+bar_CVaR10_LEARNED(n,z)
+  = (1/12)*sum_s CVaR10_LEARNED,s(n,z).
+```
+
 The direct `P` endpoint is available only when all of the following hold:
 
 1. all 12 paired final checkpoints and every registered primary episode exist;
@@ -646,29 +777,51 @@ The direct `P` endpoint is available only when all of the following hold:
    the ordinary numerical tolerance before training;
 4. the exact volume identities `v_i>0` and `sum_i v_i=1` hold within the same
    tolerance, with no clipped or duplicated neighbor;
-5. in every held-out primary cell, the learned comparator's mean normalized
-   return is at most `0.94`, leaving at least twice the `0.03` material margin
-   below the exact immediate-oracle ceiling; and
+5. `bar_mu_LEARNED(n,z)<=0.94` in every held-out primary cell, leaving at least
+   twice the `0.03` material margin below the exact immediate-oracle ceiling;
+   and
 6. no held-out observation influenced training, normalization, checkpoint,
    threshold, correction, or rerun choice.
 
-The direct `R` endpoint replaces item 5 by the same requirement on the learned
-comparator's empirical `CVaR10`. An endpoint without its registered headroom is
-unavailable because that surface cannot express twice the target improvement;
-the other endpoint remains usable. Oracle headroom is never itself positive
-treatment evidence.
+The direct `R` endpoint replaces item 5 by
+`bar_CVaR10_LEARNED(n,z)<=0.94` in every held-out cell. An endpoint without its
+registered headroom is unavailable because that surface cannot express twice
+the target improvement; the other endpoint remains usable. Oracle headroom is
+never itself positive treatment evidence.
 
 Binding attribution additionally requires all of the following:
 
-1. median per-episode coefficient of variation of `v_i` is at least `0.25` in
-   every held-out `CLUSTER` and `MEASURE-CONFLICT` cell;
-2. in each held-out `MEASURE-CONFLICT` cell, the mean receiver-level absolute
-   difference between volume-weighted and unweighted raw field averages is at
-   least `0.08`;
-3. VQFP uses at least two of the three effort actions with frequency at least
-   `0.05` in every held-out `MEASURE-CONFLICT` cell; and
+1. for panel `p` equal to `CLUSTER` or `MEASURE-CONFLICT`, define
+
+   ```text
+   CV_v(s,n,p,e)
+     = sqrt((1/n)*sum_i (v_i-1/n)^2)/(1/n).
+   ```
+
+   In every `(s,n,p)` cell, the median across its 128 episodes, using the
+   arithmetic mean of the 64th and 65th ordered values, is at least `0.25`;
+2. in every held-out `MEASURE-CONFLICT (s,n)` cell, define
+
+   ```text
+   D_assoc(s,n)
+     = mean_(e=1..128,t=0..31,i=1..n)
+         |Q_i/V_i - (1/3)*sum_(j in S_i) s_j|,
+   ```
+
+   with equal weight over all `128*32*n` receiver-ticks, and require
+   `D_assoc(s,n)>=0.08`;
+3. for intact VQFP closed-loop `MEASURE-CONFLICT` rollouts define
+
+   ```text
+   f_s,n(a) = [1/(128*32*n)]
+              * sum_(e,t,i) 1{a_VQFP,intact,s,n,e,t,i=a}.
+   ```
+
+   In every `(s,n)` cell, require at least two actions in `{0,1/2,1}` to have
+   `f_s,n(a)>=0.05`. Cut actions, comparator actions, logits, and action
+   probabilities do not enter this support frequency; and
 4. all whole-tuple, equal-volume, constant-raw-field, and identity-restoration
-   controls satisfy their stated meanings.
+   controls satisfy their exact registered state/output laws.
 
 The registered `K`, `M`, and `T` gates must also pass for positive binding
 attribution. Missing binding support does not invalidate an otherwise available
@@ -728,48 +881,68 @@ quadrature operand. The exact-rule initialization, comparator expressibility,
 reassociation interaction, proximal raw-mass error, and structural controls
 bound but do not eliminate those explanations.
 
-Interpret every complete valid outcome as follows:
+Let `L_P,L_R` be the registered 97.5% lower bounds and `U_P,U_R` the
+registered 97.5% upper bounds. For each available endpoint `X in {P,R}` define
 
-- **Direct value plus binding:** `P` or `R` clears `0.03`, and all `K`, `M`,
-  action-sensitivity, support, and null-control requirements pass. Conclude that
-  on this finite noise-free periodic field-service panel, one shared VQFP policy
-  improved the registered held-out-size value endpoint over the stronger free
-  gate and that correct explicit volume-message binding contributed. Activate
-  the 2-D second surface.
-- **Direct value without binding:** `P` or `R` clears `0.03`, but a binding gate
-  fails. Conclude a package-level held-out advantage only. Do not attribute it
-  to quadrature and do not transfer the mechanism to UAV work; the next
-  discriminator must isolate the surviving non-quadrature difference.
-- **Binding without direct value:** the cut behaves as predicted but neither
-  `P` nor `R` clears `0.03`. Correct association affects computation but has not
-  earned algorithm investment on this host. Do not rescue it with mechanism
-  diagnostics alone.
-- **Comparator match or reverse:** neither direct value endpoint qualifies, or
-  the learned comparator is materially better. The hard physical-measure
-  constraint has no registered value advantage; a reverse result supports the
-  possibility that free reliability/content weighting is preferable.
-- **Family delete:** if all direct-value validity requirements and both
-  endpoint-specific oracle-headroom requirements hold, and the Bonferroni
-  one-sided 97.5% upper confidence bounds for both `mean(P_s)` and `mean(R_s)`
-  are strictly below `0.03`, delete the hard-Voronoi-base family on the
-  service-field -> 2-D plume -> UAV path. It has excluded the registered
-  practically material worst-held-out-cell advantage against a comparator that
-  contains its exact rule. Do not delete the mathematical quadrature identity
-  or infer failure on a different sensing model.
-- **Statistically indeterminate:** if a valid endpoint's interval crosses its
-  `0.03` decision margin and the family-delete rule does not hold, report no
-  family conclusion. Do not weaken margins or automatically add seeds or a
-  rerun.
-- **Only training-size advantage:** a benefit at `N in {6,10}` without the
-  held-out worst-cell result is not variable-`N` value.
-- **Cluster-only effect:** report irregular-sampling support only; do not claim a
-  general roster-size effect.
-- **Noisy isolated-cell reversal:** narrow the observation claim to exact or
-  sufficiently high-SNR cell averages. Any reliability-tempered successor is a
-  new treatment requiring its own Pro closure.
-- **Invalid or incomplete support:** withhold only the affected conclusion. Do
-  not reinterpret missing data as treatment evidence and do not select a
-  favorable subset.
+```text
+POSITIVE_X         iff L_X >  0.03
+MATERIAL_REVERSE_X iff U_X < -0.03.
+```
+
+A negative point estimate without `MATERIAL_REVERSE_X` is descriptive only.
+Classify the direct outcome in this order:
+
+1. **Direct-endpoint tradeoff.** If one endpoint is `POSITIVE` and the other
+   available endpoint is `MATERIAL_REVERSE`, report the qualified benefit and
+   material harm separately. Do not state an unqualified package advantage and
+   do not activate the untempered 2-D surface.
+2. **Direct value plus corrected binding.** If at least one endpoint is
+   `POSITIVE`, no available endpoint is `MATERIAL_REVERSE`, and all `K`, `M`,
+   `T`, support, and structural-null requirements pass, conclude that on this
+   finite noise-free host VQFP improved the named held-out endpoint; the
+   material VQFP self-attenuation, architecture-by-cut attenuation, mass-error,
+   action-sensitivity, support, and structural-null results support correct
+   explicit local volume-message binding as a functional contributor. Activate
+   the untempered 2-D surface only if there is also no noisy-panel material
+   reversal.
+3. **Direct value without binding.** If at least one endpoint is `POSITIVE`, no
+   available endpoint is `MATERIAL_REVERSE`, but a corrected binding requirement
+   fails or is unavailable, conclude a package-level held-out advantage only.
+   Do not attribute it to quadrature or transfer the mechanism to UAV work.
+4. **Material comparator advantage.** If no direct endpoint is `POSITIVE` and
+   at least one available endpoint is `MATERIAL_REVERSE`, describe the
+   comparator as materially better only for that named endpoint.
+5. **Family delete.** If no endpoint is `POSITIVE` or `MATERIAL_REVERSE`, all
+   direct-value validity requirements and both endpoint-specific oracle-
+   headroom requirements hold, and `U_P<0.03` and `U_R<0.03`, delete the hard-
+   Voronoi-base family on the service-field -> 2-D plume -> UAV path. This
+   excludes the registered practically material worst-held-out-cell advantage
+   against a comparator containing the exact rule; it does not delete the
+   quadrature identity or infer failure for another sensing/task class.
+6. **Statistically indeterminate.** If neither a positive nor material-reverse
+   rule applies and the family-delete rule does not hold, report no family
+   conclusion. Do not weaken margins, add seeds, or rerun automatically.
+
+Apply these nonexclusive interpretation modifiers after the direct class:
+
+- **Binding without direct value:** if corrected binding gates pass but neither
+  endpoint is `POSITIVE`, report that correct association affects computation
+  but has not earned algorithm investment. It cannot replace or rescue the
+  material-reverse, family-delete, or indeterminate direct class.
+- **Noisy-panel material reversal:** `U_noise < -0.03` does not invalidate an
+  otherwise valid noise-free B1 endpoint, but overrides any untempered 2-D
+  activation. State only that the noise-free result does not extend to the
+  registered clipped iid noisy-cell-average panel and that any noisy successor
+  must test a separately Pro-closed reliability-tempered measure. Do not claim
+  largest-cell noise as the mediator.
+- **Only training-size or cluster-only pattern:** a benefit only at
+  `N in {6,10}` is not variable-`N` value. A result confined to held-out
+  `CLUSTER` reports irregular-sampling support only, not a general roster-size
+  effect.
+- **Invalid or incomplete:** withhold only the affected endpoint or mechanism
+  conclusion. Missing data, unavailable associations, resource failure, or
+  failed controls cannot be coded as positive, null, reverse, or favorable
+  subset evidence.
 
 No B1 outcome proves natural mediation because `VOLUME-REASSOC` is an
 off-manifold computational edge intervention. No result proves asymptotic
@@ -785,8 +958,11 @@ The maximum positive statement is:
 > preregistered worst held-out `N={4,14}` mean-return or lower-tail endpoint on
 > the finite noise-free periodic field-service host over a matched free gate
 > initialized at the exact volume rule; controlled frozen-checkpoint edge cuts
-> support correct local volume-message binding as a contributor if and only if
-> the registered mechanism gates also pass.
+> produced both material VQFP self-attenuation and material architecture-by-cut
+> attenuation, together with the registered mass-error, action-sensitivity,
+> support, and structural-null results, supporting correct explicit local
+> volume-message binding as a functional contributor if and only if every
+> corrected mechanism gate passes.
 
 That statement is conditional on the observed start regimes, fields, seeds,
 budget, local three-cell receptive field, exact cell-average sensor, and
@@ -795,7 +971,9 @@ inference above. The comparator remains capable of learning the same operator.
 ## Second surface and UAV bridge
 
 The second surface is a bounded 2-D plume-uncertainty service simulator. It is
-activated only by the `Direct value plus binding` branch. Replace periodic cell
+activated only by the `Direct value plus corrected binding` branch, with no
+available material-reverse endpoint and no registered noisy-panel material
+reversal. Replace periodic cell
 lengths by clipped Voronoi areas in a fixed surveillance polygon. Recompute the
 tessellation after motion or roster changes in `O(N log N)`. Use a Delaunay or
 geometric neighbor graph pruned to maximum degree eight, and define the reward
@@ -832,15 +1010,19 @@ acceptance, and a separately authorized controlled protocol.
 ## Exact owner handoff
 
 The direction-local scientific object is exactly revision
-`VQFP-B1-MATH-CLOSURE-20260812-02` in this file. Root may establish two separate
-same-direction external conversations from the prepared requesters, with no
-answer sharing: ChatGPT External Pro for authoritative mathematical closure and
-Gemini for additive divergent innovation. Production remains forbidden until
-Pro returns `CLOSED`, this owner intakes that exact ruling, and CM accepts source
-conformance plus the zero-compute complexity bound.
+`VQFP-B1-MATH-CLOSURE-20260812-03` in this file. The dedicated ChatGPT External
+Pro conversation already exists and must receive only the prepared exact
+same-conversation `-03` rereview after a new Root release. The unsent `-02`
+Gemini batch remains unsubmitted and must not be released against this
+superseded state; any Gemini requester must be independently refrozen from
+`-03` without importing the Pro answer. Production remains forbidden until Pro
+returns `CLOSED` on `-03`, this owner intakes that exact ruling, and CM accepts
+source conformance plus the zero-compute complexity bound.
 
 CM's eventual result packet must state whether question-relevant activity began,
-whether a complete valid result exists, the `P/R/K/M/T` endpoints and bounds, all
-support/control facts, noisy-panel behavior, anomalies, resource facts, and what
-remains unknown. Root returns that packet to this owner for interpretation, then
-the same Pro conversation receives the bounded result-convergence question.
+whether a complete valid result exists, the `P/R/K/M/T` endpoints and bounds,
+`Gamma_s/Gamma`, every `D^V_s(n)/D^I_s(n)`, all support/control facts,
+`D^noise_s/U_noise`, endpoint tradeoff/reverse labels, anomalies, resource
+facts, and what remains unknown. Root returns that packet to this owner for
+interpretation, then the same Pro conversation receives the bounded result-
+convergence question.
