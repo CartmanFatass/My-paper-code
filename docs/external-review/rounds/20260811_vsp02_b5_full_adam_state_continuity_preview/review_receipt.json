@@ -8,7 +8,7 @@
   "repository": "CartmanFatass/My-paper-code",
   "remote": "https://github.com/CartmanFatass/My-paper-code.git",
   "branch": "aggressive",
-  "publication_commit": "PENDING_ROOT_PUBLICATION",
+  "publication_commit": "700a76f975682d7d11a07c38664d63caf5e51e3b",
   "remote_source_path": "docs/research/candidates/vsp_02/VSP02_B5_FULL_ADAM_STATE_CONTINUITY_PREVIEW_PACKET.md",
   "remote_source_commit": "d679db89fb85306311aab658e94d9c6493aeb370",
   "remote_source_url": "https://github.com/CartmanFatass/My-paper-code/blob/d679db89fb85306311aab658e94d9c6493aeb370/docs/research/candidates/vsp_02/VSP02_B5_FULL_ADAM_STATE_CONTINUITY_PREVIEW_PACKET.md",
@@ -49,5 +49,5 @@
   "recovery_resend": false,
   "recovery_fingerprint_identical": true,
   "auth_evidence": "none recorded",
-  "archive_publication_commit": "PENDING_ROOT_PUBLICATION"
+  "archive_publication_commit": "700a76f975682d7d11a07c38664d63caf5e51e3b"
 }
