@@ -83,11 +83,17 @@ older snapshots below are retained only as provenance.
    same-checkpoint whole-team residual derangement and Q-only controls test the
    claimed mechanism. Because the residual is determined by the matched history,
    the maximum claim is finite-data/OOD inductive bias, never added information.
-   Exact revision `CRTO-B1-SCIENCE-20260812-03` received literal
-   same-conversation External Pro `CLOSED`, and same-direction owner intake is
-   complete. CM is constructing and auditing the exact 10,715,136-step package;
-   production remains withheld until fresh technical/resource acceptance. The
-   mutually blind Gemini-v3 innovator remains prepared and non-gating.
+   Revision `CRTO-B1-SCIENCE-20260812-03` received literal same-conversation
+   External Pro `CLOSED`, but CM then exposed one science-bearing ambiguity in
+   the penalized hazard feature map. The owner prospectively froze complete v4
+   with an exact 14-indicator regime/direction/phase encoding and returned that
+   full composite to the same Pro conversation. CM has synchronized v4 and
+   landed the previously missing trajectory/evaluation bridge, global all-seed
+   preactivity probes, exact hazard design, and same-history audit scoring;
+   integrated technical/resource acceptance and the v4 Pro ruling are both
+   still pending. Production remains withheld. The mutually blind Gemini-v4
+   innovator is prepared and non-gating; the v3 attempt committed no provider
+   turn and supplied no scientific evidence.
 2. **Voronoi-Quadrature Field Policy (VQFP)** — direct variable-`N` candidate.
    One shared sparse spatial policy trains at `N={6,10}` and is evaluated without
    adaptation at held-out `N={4,14}`. It binds each field message to the physical
@@ -97,13 +103,13 @@ older snapshots below are retained only as provenance.
    `2x2` algorithm-by-reassociation cut plus analytic quadrature/action checks
    tests whether correct binding contributes. The claim ceiling is finite-budget
    held-out-`N` robustness or performance, not unique expressivity or natural
-   mediation. External Pro required five exact v2 corrections. The owner froze
-   complete revision `VQFP-B1-MATH-CLOSURE-20260812-03`, including the recurrent
-   learning law, two-sided attenuation estimand, exact support/headroom units,
-   four structural controls, and ordered noisy/reverse decision branches. CM
-   found no remaining prospective science ambiguity; the same-conversation v3
-   Pro review is running. Its Gemini packet must be independently refrozen from
-   v3 after the Pro terminal and remains non-gating.
+   mediation. External Pro required five v2 corrections and one final v3
+   binding clarification. Complete revision
+   `VQFP-B1-MATH-CLOSURE-20260812-04` then received literal same-conversation Pro
+   `CLOSED` with zero science-bearing defects, and same-direction owner intake
+   is complete. CM is constructing the isolated 40,996-parameter-per-arm,
+   4,098,048-transition package and retains technical/resource acceptance. Its
+   independently frozen Gemini-v4 packet remains unsent and non-gating.
 3. **Semigroup-Consistent Duration Model Policy (SCDMP)** — direct variable-`k`
    candidate and independent hedge. One shared policy trains at `k={2,4,8}` and
    tests held-out `k={6,12}` plus within-episode switches. It asks whether explicit
@@ -111,12 +117,14 @@ older snapshots below are retained only as provenance.
    extrapolation over an information-, model-, parameter-, data-, and work-matched
    `SCDMP-NOCOMP` arm. A deterministic noncommuting REAL context-word cocycle and
    physically equivalent SHAM surface separate actual composition semantics from
-   generic regularization. CM's pre-Pro audit found prospective definition defects
-   in the v1 audit ledger, twin-rollout accounting, deterministic tape mapping,
-   bank granularity, and initialization convention; the same-direction EM is
-   freezing v2 before any Pro request or production. The strongest alternative is
-   that explicit `k`, raw history, and ordinary endpoint supervision already learn
-   every useful duration response.
+   generic regularization. The owner repaired the audit ledger, reversal twins,
+   complete-boundary banks, deterministic tapes, and exact raw-bit/reset/init
+   law in `SCDMP-B1-SCIENCE-20260812-03`; bounded CM reconciliation now finds it
+   meaning-complete and technically feasible for Pro review. Its clean dedicated
+   Pro request is released to run only when Agentify is idle; construction and
+   production remain withheld until literal `CLOSED` plus owner intake. The
+   strongest alternative is that explicit `k`, raw history, and ordinary endpoint
+   supervision already learn every useful duration response.
 
 ## Superseded pre-terminal promising snapshot
 
@@ -328,16 +336,16 @@ oracle shows utility headroom, and a neutral identity-breaking control exists.
 
 ## Immediate Root cycle
 
-1. Complete CRTO-v3 integrated CM construction/conformance. If technically and
-   resource accepted, release its exact single production command into the first
-   compatible compute window. Its Pro math closure and EM intake are already done.
-2. Observe the active VQFP-v3 same-conversation Pro review to terminal. `CLOSED`
-   plus EM intake releases CM construction; `REVISION_REQUIRED` returns only to
-   that owner. Refreeze its Gemini innovator independently from the terminal
-   revision and keep it non-gating.
-3. Complete SCDMP-v2 scientific correction and bounded pre-Pro CM reconciliation,
-   then open its dedicated Pro closure. Do not transfer the provisional CM probe
-   into evidence or weaken the matched `NOCOMP` comparator.
+1. Complete CRTO-v4 same-conversation Pro closure and integrated CM
+   construction/conformance. Only literal `CLOSED`, owner intake, and fresh
+   technical/resource acceptance can release its exact single production command.
+2. Complete VQFP-v4 isolated CM construction/conformance under its accepted Pro
+   closure. Compare its accepted runtime projection with CRTO before assigning
+   the first compatible production window; do not choose by artifact age.
+3. Observe the clean SCDMP-v3 Pro closure after the shared Agentify slot becomes
+   idle. `CLOSED` plus owner intake releases CM construction;
+   `REVISION_REQUIRED` returns only to that owner. Do not transfer the provisional
+   CM probe into evidence or weaken the matched `NOCOMP` comparator.
 4. B2, ONLGR, and the current B3 host/panel line receive no further campaign
    compute or convergence work. Their facts constrain only their own treatments.
 5. Run each eligible direction's mutually blind Gemini innovator when Agentify is
@@ -396,17 +404,19 @@ Do not mark this goal complete until all are true:
 | One shared algorithm supports variable `N` or variable `k` | VNFC-B1 supplies only bounded toy-level variable-`N` package evidence and loses to a stronger structured greedy reference. CRTO, VQFP, and SCDMP are shared-parameter prospective candidates on held-out axes; the current B3 host/panel line ended before activity. | Partial; no qualifying winner |
 | Improvement over a matched baseline | No current leading candidate has valid result data. B2 did not separate from reset/raw; ONLGR produced no panel result. | Not yet established |
 | Valid technical result and same-direction EM interpretation | B2 has a technically accepted result and EM intake, but its package is non-separated and its mechanism non-identifying. ONLGR is scientifically unavailable. CRTO/VQFP/SCDMP are preproduction. | Partial |
-| Dedicated ChatGPT External Pro challenge | B2 result convergence is complete. CRTO-v3 is `CLOSED` with same-direction intake; VQFP-v3 is in the same-conversation closure review; SCDMP has not yet reached its v2 Pro boundary. | In progress |
-| Additional independent Gemini innovator | EBCR completed an additive Gemini review. VNFC's Gemini attempts produced no provider turn/evidence and are not retried. CRTO-v3 has a prepared blind Gemini request; VQFP and SCDMP require independent current-revision packets. | Partial |
+| Dedicated ChatGPT External Pro challenge | B2 result convergence is complete. VQFP-v4 is `CLOSED` with same-direction intake. CRTO-v4 is in same-conversation rereview after an owner-frozen hazard-feature correction. SCDMP-v3 is meaning-complete and released for its first clean Pro review when Agentify is idle. | In progress |
+| Additional independent Gemini innovator | EBCR completed an additive Gemini review. VNFC's Gemini attempts produced no provider turn/evidence and are not retried. CRTO-v3 also produced no provider turn; mutually blind current-revision CRTO-v4, VQFP-v4, and SCDMP-v3 packets are prepared but unsent and non-gating. | Partial |
 | Strongest alternative and claim ceiling | Explicit for all three leaders: information-matched full-history termination for CRTO; exactly representational learned spatial gate for VQFP; ordinary explicit-`k` endpoint learning for SCDMP. Each claim ceiling is finite-panel/finite-budget and excludes general UAV or arbitrary-axis claims. | Established prospectively |
 | Second surface and UAV simulator steps | CRTO maps to warehouse handoff then UAV track/relay/replan; VQFP to 2-D plume-front tracking then UAV spatial sensing/relay; SCDMP to payload towing then UAV action-hold scheduling. None is activated without a qualifying first result. | Defined, not activated |
 | Portfolio and milestone records | Current leaders are CRTO, VQFP, and SCDMP. B3's current host/panel line, B2, and ONLGR joined the existing set of no-current-investment treatments with exact reasons and revisit conditions. | Current cut recorded |
 
-The goal remains active. The shortest completion path is now: complete CRTO-v3
-CM acceptance, obtain a valid matched-baseline result,
-same-EM interpretation, same-conversation Pro result challenge, and then activate
-the already recorded second-surface/UAV step. No archived prompt, mathematical
-closure, implementation, or toy activity alone satisfies completion.
+The goal remains active. The shortest completion path is now whichever of
+CRTO-v4 and VQFP-v4 first combines authoritative Pro closure, full CM technical
+acceptance, and the better bounded decision-information-to-runtime ratio. That
+candidate must then produce a valid matched-baseline result, survive same-EM
+interpretation and same-conversation Pro result challenge, and activate its
+recorded second-surface/UAV step. No archived prompt, mathematical closure,
+implementation, or toy activity alone satisfies completion.
 
 ## Superseded pre-terminal completion ledger
 

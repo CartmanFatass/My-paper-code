@@ -867,34 +867,38 @@ same-conversation Pro convergence, and the recorded second-surface/UAV action.
 
 ### Leading directions receiving investment
 
-1. **CRTO-v3 / commitment-conditioned innovation-to-replan.** This is the
-   shortest current completion route. Exact `CRTO-B1-SCIENCE-20260812-03` has
-   literal same-conversation Pro `CLOSED` and owner intake. CM is constructing the
-   10,715,136-step package and retains technical/resource acceptance. The central
+1. **CRTO-v4 / commitment-conditioned innovation-to-replan.** Exact v3 had
+   literal same-conversation Pro `CLOSED`, but CM found one science-bearing
+   ambiguity in the residual-free hazard feature class. The owner froze exact
+   v4 with a categorical regime/direction/phase encoding and returned the full
+   composite to the same Pro conversation. CM has synchronized the 10,715,136-
+   step implementation and landed the missing bridge, but v4 Pro closure and
+   integrated technical/resource acceptance are still pending. The central
    uncertainty is whether the calibrated residual-plus-net-advantage interface
    improves held-out `k=16` and `4<->16` schedules over the information-matched
    full-history termination policy. The claim ceiling is finite-data/OOD
    inductive-bias value, never added information, semantic uniqueness, or full
    mediation. A qualifying result activates the warehouse second surface and
    then the UAV track/relay/replan simulator step.
-2. **VQFP-v3 / physical-measure aggregation.** The complete v3 revision is in
-   same-conversation Pro review; bounded CM reconciliation found no unresolved
-   prospective science ambiguity. It asks whether exact Voronoi measure-message
+2. **VQFP-v4 / physical-measure aggregation.** The complete v4 revision has
+   literal same-conversation Pro `CLOSED` with zero defects and same-direction
+   owner intake. CM is constructing its isolated 4,098,048-transition package.
+   It asks whether exact Voronoi measure-message
    binding improves held-out `N={4,14}` value beyond an equally informed learned
    gate that can represent the rule. The architecture-by-cut interaction,
    quadrature/action diagnostics, and structural null controls prevent generic
-   corruption or expressivity from carrying the mechanism claim. `CLOSED` plus
-   owner intake releases construction; a qualifying result activates 2-D
-   plume-front tracking and then UAV spatial sensing/relay.
-3. **SCDMP-v2 / semigroup-consistent duration modelling.** This independent
+   corruption or expressivity from carrying the mechanism claim. Fresh CM
+   technical/resource acceptance is now the release boundary; a qualifying
+   result activates 2-D plume-front tracking and then UAV spatial sensing/relay.
+3. **SCDMP-v3 / semigroup-consistent duration modelling.** This independent
    variable-`k` hedge asks whether explicit state-transition and accumulated-
    reward composition improves held-out duration control over an otherwise
-   identical `SCDMP-NOCOMP` model. CM's pre-Pro v1 audit found repairable
-   science-definition omissions rather than an algorithm result: audit warm-up
-   and reversal-twin work, deterministic tape mapping, bank-row identity, and
-   initialization reproducibility. The owner is freezing v2 before its first Pro
-   request. A qualifying first toy would activate cooperative payload towing and
-   then UAV externally scheduled action-hold control.
+   identical `SCDMP-NOCOMP` model. Exact v3 repairs the audit/twin ledger,
+   complete-boundary banks, deterministic tapes, and raw-bit/reset/init contract.
+   CM's bounded reconciliation finds it meaning-complete and feasible for Pro
+   review; its clean Pro request is released to wait for shared Agentify idleness.
+   A qualifying first toy would activate cooperative payload towing and then UAV
+   externally scheduled action-hold control.
 
 ### Work receiving no further investment now
 
@@ -921,16 +925,17 @@ no-current-investment choices without imposing a direction-count cap.
 
 ### Decision triggers and sequencing
 
-- CRTO-v3 receives the first compatible production window only after integrated
-  CM source/resource acceptance. Its blind Gemini-v3 innovation is additive and
-  may run independently; it cannot delay or authorize production.
-- VQFP-v3 `CLOSED` plus owner intake routes immediately to CM. A
-  `REVISION_REQUIRED` ruling creates a new owner-frozen composite and no automatic
-  resend. Its current Gemini must be refrozen independently from the final
-  revision.
-- SCDMP-v2 first returns through bounded CM reconciliation, then receives a new
-  clean Pro conversation. Its provisional CM feasibility probe is design evidence
-  only and never a registered outcome.
+- CRTO-v4 can receive production only after the pending same-conversation Pro
+  ruling is `CLOSED`, the owner intakes it, and CM grants integrated source and
+  resource acceptance. Its blind Gemini-v4 innovation is additive and cannot
+  delay or authorize production.
+- VQFP-v4 is Pro-closed and in CM construction. It competes with CRTO for the
+  first production window on bounded decision information, runtime, and execution
+  risk, not chronology. Its Gemini-v4 packet remains independently blind and
+  non-gating.
+- SCDMP-v3 receives a clean Pro conversation after Agentify becomes idle. Its
+  provisional CM feasibility probe is design evidence only and never a registered
+  outcome; construction starts only after `CLOSED` plus owner intake.
 - The first technically accepted production result returns CM -> Root -> same EM.
   Every complete coherent result then reuses its own Pro conversation for result
   convergence. A positive result must state the strongest surviving alternative,
