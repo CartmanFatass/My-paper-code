@@ -59,12 +59,21 @@ evaluation cell, or bootstrap draw is not independent.
 
 | Scope | Ancestor roots | Phase A | Phase B per arm | Training transitions | Evaluation transitions | Total | Optimizer steps | Bootstrap | Wall cap |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| nonformal preflight | 1 | 10 | 10 | 11,520 | 6,912 | 18,432 | 60 | 250 | 1,200 s |
-| formal | 3 | 100 | 100 | 345,600 | 165,888 | 511,488 | 1,800 | 10,000 | 28,800 s |
+| nonformal preflight | 1 | 10 | 10 | 11,136 | 6,912 | 18,048 | 60 | 250 | 1,200 s |
+| formal | 3 | 100 | 100 | 344,448 | 165,888 | 510,336 | 1,800 | 10,000 | 28,800 s |
 
 The nonformal hard ceilings are 22,272 total real transitions, 80 optimizer
 steps, 250 bootstrap resamples and 1,200 seconds. The formal ceilings are
 626,688, 2,400, 10,000 and 28,800 seconds respectively.
+
+Training real transitions count realized environment batches, not per-arm
+exposure. Per independent root the exact count is
+`(A + 2*B - 1) * 8 * 48`: Phase-B update 0 is one batch materialized once and
+reused by both arms, so exactly one batch is subtracted from the two-arm
+exposure count. Optimizer accounting remains per arm and therefore unchanged.
+`test_training_real_transition_formula_subtracts_one_shared_phase_b_batch_per_root`
+executes this formula for both configurations, explicitly contrasts the old
+double-count, and checks that both-arm optimizer-step accounting is retained.
 
 ## Estimand, branches, and claims
 

@@ -1144,7 +1144,12 @@ def static_configuration_certificate(*, formal: bool) -> dict[str, object]:
     phase_B_updates = FORMAL_PHASE_B_UPDATES if formal else NONFORMAL_PHASE_B_UPDATES
     episodes = 48 if formal else 6
     bootstrap = 10_000 if formal else 250
-    training = replicates * (phase_A_updates + len(ARMS) * phase_B_updates) * NUM_ENVS * HORIZON
+    # Phase-B update 0 is one realized batch shared by RESET and CARRY.  Every
+    # later Phase-B update collects one batch per arm.
+    training_batches_per_root = (
+        phase_A_updates + len(ARMS) * phase_B_updates - 1
+    )
+    training = replicates * training_batches_per_root * NUM_ENVS * HORIZON
     evaluation = replicates * len(ARMS) * 3 * 4 * episodes * HORIZON
     return {
         "schema_version": SCHEMA_VERSION,

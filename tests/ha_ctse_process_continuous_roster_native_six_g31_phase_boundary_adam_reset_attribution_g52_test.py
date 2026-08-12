@@ -360,20 +360,20 @@ def test_exact_costs_search_ceiling_and_claim_limits() -> None:
     nonformal = g52.static_configuration_certificate(formal=False)
     formal = g52.static_configuration_certificate(formal=True)
     assert (nonformal["training_real_transitions"], nonformal["evaluation_real_transitions"]) == (
-        11_520,
+        11_136,
         6_912,
     )
     assert (nonformal["total_real_transitions"], nonformal["optimizer_steps"], nonformal["bootstrap_resamples"]) == (
-        18_432,
+        18_048,
         60,
         250,
     )
     assert (formal["training_real_transitions"], formal["evaluation_real_transitions"]) == (
-        345_600,
+        344_448,
         165_888,
     )
     assert (formal["total_real_transitions"], formal["optimizer_steps"], formal["bootstrap_resamples"]) == (
-        511_488,
+        510_336,
         1_800,
         10_000,
     )
@@ -398,3 +398,17 @@ def test_exact_costs_search_ceiling_and_claim_limits() -> None:
         assert row["replanning"] is False
     assert "component" in g52.CLAIM_CEILINGS[g52.RESET_ADVANTAGE_RESULT]
     assert "broader transport" in g52.CLAIM_CEILINGS[g52.PERSISTENT_SUFFICIENT_RESULT]
+
+
+def test_training_real_transition_formula_subtracts_one_shared_phase_b_batch_per_root() -> None:
+    batch_transitions = g52.NUM_ENVS * g52.HORIZON
+    for formal, roots, phase_a, phase_b in (
+        (False, 1, 10, 10),
+        (True, 3, 100, 100),
+    ):
+        certificate = g52.static_configuration_certificate(formal=formal)
+        shared_batch_count = roots * (phase_a + 2 * phase_b - 1)
+        old_double_count = roots * (phase_a + 2 * phase_b) * batch_transitions
+        assert certificate["training_real_transitions"] == shared_batch_count * batch_transitions
+        assert old_double_count - certificate["training_real_transitions"] == roots * batch_transitions
+        assert certificate["optimizer_steps"] == roots * (phase_a + 2 * phase_b) * g52.PPO_PASSES

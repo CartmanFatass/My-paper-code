@@ -32,17 +32,17 @@ def test_runner_exact_configuration_sources_seeds_backend_and_threads() -> None:
     formal = runner._configuration(formal=True, cpu_budget=2, process_workers=2)
     assert nonformal["phase_A_updates"] == 10
     assert nonformal["phase_B_updates_per_arm"] == 10
-    assert nonformal["training_real_transitions"] == 11_520
+    assert nonformal["training_real_transitions"] == 11_136
     assert nonformal["evaluation_real_transitions"] == 6_912
-    assert nonformal["total_real_transitions"] == 18_432
+    assert nonformal["total_real_transitions"] == 18_048
     assert nonformal["optimizer_steps"] == 60
     assert nonformal["bootstrap_resamples"] == 250
     assert nonformal["wall_clock_cap_seconds"] == 1_200
     assert formal["phase_A_updates"] == 100
     assert formal["phase_B_updates_per_arm"] == 100
-    assert formal["training_real_transitions"] == 345_600
+    assert formal["training_real_transitions"] == 344_448
     assert formal["evaluation_real_transitions"] == 165_888
-    assert formal["total_real_transitions"] == 511_488
+    assert formal["total_real_transitions"] == 510_336
     assert formal["optimizer_steps"] == 1_800
     assert formal["bootstrap_resamples"] == 10_000
     assert formal["wall_clock_cap_seconds"] == 28_800
