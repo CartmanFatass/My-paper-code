@@ -1,0 +1,117 @@
+{
+  "ledger_id": "vsp06_b2r2_constraint_target_ledger_v1",
+  "direction": "CAND-VSP-06-MSSR",
+  "candidate": "CAND-VSP-06-MSSR@adversarial-revision-v9",
+  "treatment": "VSP06-B2R2-AUTHENTICATED-PARTNER-RECALL-CREDIT-EFFICIENCY-SOURCE-BOUND-SYMMETRY-GUARANTEED-EXACT-FEASIBILITY",
+  "selector": "VSP06-B2R2-SB-SG-EF-CP-SAT-V1",
+  "verifier": "VSP06-B2R2-INDEPENDENT-EXACT-MANIFEST-VERIFIER-V1",
+  "scientific_parent": "898af9e848ce45f3510560a96ae454651a9f0736",
+  "immediate_predecessor_implementation": "7d37be4ff33b2ba4984074383a719390e2cce6b0",
+  "stage": 1,
+  "status_ceiling": "SYNTHETIC_STRUCTURAL_VALID_ONLY",
+  "formal": false,
+  "K_search": 0,
+  "hypothetical_transitions": 0,
+  "oa": {
+    "identity": "OA(16,5,4,2)",
+    "gf4_encoding": "two-bit",
+    "addition": "xor",
+    "alpha_multiply": [0, 2, 3, 1],
+    "row_recipe": ["a", "b", "a_xor_b", "a_xor_alpha_b", "a_xor_alpha_plus_one_b"],
+    "column_binding": ["identity", "version", "event", "decoy", "reset_y"],
+    "row_order": "a_then_b"
+  },
+  "source_population": {
+    "enumeration_order": ["pool", "seed", "panel", "branch", "Y", "replicate", "OA row"],
+    "nonce_block_size": 4096,
+    "nonce_block_rule": "one disjoint fixed block per cell; emit first unchanged-split match; missing match terminal",
+    "forbidden_repairs": ["bucket_override", "salt_resample", "domain_extension", "cell_conditional_repair"],
+    "primary_replicates": {"KEEP": 72, "RESET": 48, "CURRENT": 12},
+    "calibration_replicates": {"fit": 32, "check": 8},
+    "checkpoint_replicates": {"KEEP": 4, "RESET": 8, "CURRENT": 2},
+    "algebraic_components": {
+      "primary": {"expression": "2*4*1*(72+48+12)*4*16", "rows": 67584},
+      "calibration": {"expression": "1*1*(32+8)*4*16", "rows": 2560},
+      "checkpoint": {"expression": "1*4*8*(4+8+2)*4*16", "rows": 28672},
+      "final_keep": {"expression": "1*4*1*1*4*4*16", "rows": 1024}
+    },
+    "catalog_cardinality": 99840,
+    "selected_manifest_target": 22144,
+    "final_keep_quartets_per_seed": 64,
+    "final_keep_semantics": "fresh-domain fixed-block first-admissible-nonce"
+  },
+  "serialization": {
+    "encoding": "UTF-8",
+    "unicode_normalization": "NFC",
+    "shape": "compact fixed-schema positional JSON array",
+    "duplicate_tuple_rejection": true,
+    "split_salt_ascii": "8100799/",
+    "split_salt_byte_count": 8,
+    "decision_domain_separator_hex": "00",
+    "decision_domain_separator_byte_count": 1,
+    "cp_sat_random_seed": 8100699,
+    "decision_order": ["unsigned_digest_bytes", "tuple_bytes_tie_break"]
+  },
+  "thresholds_in_precedence_order": {
+    "candidate_minus_generic_keep_aulc": 0.08,
+    "candidate_final_keep": 0.55,
+    "selected_p_mediation": 0.20,
+    "selected_p_cross_swap_follow": 0.80,
+    "absolute_decoy_accuracy_change": 0.02,
+    "decoy_kernel_tv_change": 0.02,
+    "maximum_per_seed_current_arm_aulc_gap": 0.05,
+    "mean_reset_stale_target_rate": 0.15
+  },
+  "branch_precedence": [
+    "B2R2_INVALID_CONTRACT_ACTIVITY_CAP_OR_PROVENANCE",
+    "B2R2_NAVIGATION_OR_CANDIDATE_FINAL_KEEP_GATE_FAILS",
+    "B2R2_SELECTED_P_MEDIATION_GATE_FAILS",
+    "B2R2_SELECTED_P_CROSS_SWAP_GATE_FAILS",
+    "B2R2_DECOY_INVARIANCE_GATE_FAILS",
+    "B2R2_CURRENT_OR_RESET_CONTROL_GATE_FAILS",
+    "B2R2_AUTHENTICATED_PARTNER_RECALL_CREDIT_EFFICIENCY_NOT_SUPPORTED",
+    "B2R2_AUTHENTICATED_PARTNER_RECALL_CREDIT_EFFICIENCY_SUPPORTED"
+  ],
+  "lifecycle_labels": {
+    "preclaim_technical_failure": "B2R2_SELECTOR_INVALID_NO_RUN",
+    "post_activity_failure": "B2R2_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY",
+    "successful_seal": "B2R2_SELECTOR_VERIFIED_MANIFEST_FIXED",
+    "prospective_seals": 1,
+    "second_structural_failure": "closes_candidate_permanently"
+  },
+  "caps": {
+    "fits": 10,
+    "trainer_invocations": 10,
+    "episodes": 44300,
+    "transitions": 520000,
+    "production_policy_forwards": 540000,
+    "learner_updates": 1100,
+    "optimizer_steps": 1100,
+    "evaluator_calls": 75,
+    "evaluation_episodes": 10500,
+    "sweeps": 0,
+    "retries": 0,
+    "rescues": 0,
+    "extra_roots": 0
+  },
+  "prospective_environment": {
+    "python": "3.11",
+    "ortools": "9.12.4544",
+    "torch": "2.7.0",
+    "torch_device": "cpu",
+    "torch_deterministic_algorithms": true,
+    "torch_intra_op_threads": 1,
+    "torch_inter_op_threads": 1
+  },
+  "stage1_forbidden_outputs": [
+    "canonical_catalog", "cp_sat_process", "cp_sat_model", "canonical_selector",
+    "canonical_verifier", "witness", "manifest", "model_load", "environment",
+    "policy", "learner", "trainer", "optimizer", "evaluator", "rng_activity",
+    "registered_full", "result", "readiness_output"
+  ],
+  "stage1_nonclaims": [
+    "canonical_feasibility_or_infeasibility", "canonical_rank_or_determinism", "manifest",
+    "learner_or_return", "credit_efficiency", "arm_or_access", "necessity_or_mechanism",
+    "general_mssr_or_marl", "deployment", "formal", "promotion_or_retirement"
+  ]
+}
