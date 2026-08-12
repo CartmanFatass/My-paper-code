@@ -153,6 +153,55 @@ def _artifact_digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _canonical_json_bytes(value: object) -> bytes:
+    """Canonicalize JSON values without key or scalar string coercion.
+
+    Tuples intentionally normalize to JSON arrays, matching the Torch-to-JSON
+    readiness boundary. Unsupported objects, non-string mapping keys, and
+    nonfinite floating-point values fail closed.
+    """
+
+    def normalize(row: object) -> object:
+        if row is None or isinstance(row, (bool, str, int)):
+            return row
+        if isinstance(row, float):
+            if not math.isfinite(row):
+                raise ValueError("G52 canonical JSON contains nonfinite float")
+            return row
+        if isinstance(row, Mapping):
+            if any(not isinstance(key, str) for key in row):
+                raise TypeError("G52 canonical JSON mapping key is not a string")
+            return {key: normalize(item) for key, item in row.items()}
+        if isinstance(row, (list, tuple)):
+            return [normalize(item) for item in row]
+        raise TypeError(f"G52 canonical JSON unsupported value: {type(row).__name__}")
+
+    return json.dumps(
+        normalize(value),
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    ).encode("utf-8")
+
+
+def _readiness_certificates_match(training_value: object, state_value: object) -> bool:
+    if not source.validate_boundary_activation_certificate(training_value):
+        return False
+    if not source.validate_boundary_activation_certificate(state_value):
+        return False
+    try:
+        training_bytes = _canonical_json_bytes(training_value)
+        state_bytes = _canonical_json_bytes(state_value)
+    except (TypeError, ValueError, OverflowError):
+        return False
+    return bool(
+        training_bytes == state_bytes
+        and hashlib.sha256(training_bytes).digest()
+        == hashlib.sha256(state_bytes).digest()
+    )
+
+
 def _activate_single_thread_worker() -> None:
     for name in _THREAD_ENV_NAMES:
         os.environ[name] = "1"
@@ -2148,12 +2197,12 @@ def readiness_validate(*, run_root: Path) -> dict[str, object]:
         and training.get("scientific_iteration_cost") == 0
         and training.get("scientific_branch_selected") is False
         and training.get("bootstrap_resamples") == 0
-        and source.validate_boundary_activation_certificate(
-            training.get("activation_certificate")
+        and _readiness_certificates_match(
+            training.get("activation_certificate"),
+            state.get("activation_certificate"),
         )
         and state.get("kind") == "G52_EXECUTION_READINESS_PROOF_ONLY_V1"
         and state.get("source_commit") == training["smoke"]["source_commit"]
-        and state.get("activation_certificate") == training.get("activation_certificate")
         and training.get("serialization", {}).get("sha256")
         == _artifact_digest(root / READINESS_STATE)
     )

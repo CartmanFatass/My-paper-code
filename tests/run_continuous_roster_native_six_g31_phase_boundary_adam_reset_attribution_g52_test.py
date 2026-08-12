@@ -625,6 +625,65 @@ def test_readiness_interface_and_artifact_boundary_without_running_readiness(tmp
     ]
 
 
+def test_readiness_certificate_json_tuple_equivalence_and_fail_closed_tamper() -> None:
+    ancestor, ancestor_optimizer = source.make_fresh_phase_A_ancestor(
+        member_capacity=8, initialization_seed=10_521_555
+    )
+    source.make_synthetic_boundary_state_for_readiness(
+        ancestor, ancestor_optimizer, step=20
+    )
+    models, optimizers, boundary = source.project_phase_B_arms(
+        ancestor,
+        ancestor_optimizer,
+        completed_phase_A_updates=10,
+        expected_step=20,
+    )
+    state_certificate = _activation_certificate(models, optimizers, boundary)
+    training_certificate = json.loads(json.dumps(state_certificate, allow_nan=False))
+
+    assert isinstance(
+        state_certificate["post_step_optimizer_state"][source.RESET_ARM][
+            "hyperparameters"
+        ]["betas"],
+        tuple,
+    )
+    assert isinstance(
+        training_certificate["post_step_optimizer_state"][source.RESET_ARM][
+            "hyperparameters"
+        ]["betas"],
+        list,
+    )
+    assert source.validate_boundary_activation_certificate(state_certificate)
+    assert source.validate_boundary_activation_certificate(training_certificate)
+    assert runner._canonical_json_bytes(state_certificate) == runner._canonical_json_bytes(
+        training_certificate
+    )
+    assert runner._readiness_certificates_match(
+        training_certificate, state_certificate
+    )
+
+    tampered = copy.deepcopy(state_certificate)
+    tampered["active"] = False
+    assert not runner._readiness_certificates_match(training_certificate, tampered)
+
+    structurally_invalid = copy.deepcopy(state_certificate)
+    structurally_invalid["parameter_names"] = structurally_invalid[
+        "parameter_names"
+    ][:-1]
+    structurally_invalid["certificate_digest"] = training_certificate[
+        "certificate_digest"
+    ]
+    assert not source.validate_boundary_activation_certificate(structurally_invalid)
+    assert not runner._readiness_certificates_match(
+        training_certificate, structurally_invalid
+    )
+
+    with pytest.raises(ValueError, match="nonfinite"):
+        runner._canonical_json_bytes({"value": float("nan")})
+    with pytest.raises(TypeError, match="mapping key"):
+        runner._canonical_json_bytes({1: "lossy-key"})
+
+
 def test_first_batch_then_later_collection_and_proof_science_accounting_are_explicit() -> None:
     training_source = inspect.getsource(runner._train_replicate)
     assert "first_batch = _collect_phase_B" in training_source
