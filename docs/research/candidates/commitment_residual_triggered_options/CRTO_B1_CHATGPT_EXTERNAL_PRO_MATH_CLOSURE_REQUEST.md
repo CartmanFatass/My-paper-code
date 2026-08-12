@@ -7,7 +7,7 @@ direction=commitment_residual_triggered_options
 candidate=CRTO-B1
 revision=CRTO-B1-SCIENCE-20260812-04
 conversation=same_dedicated_direction_conversation_as_v2_v3
-send_status=PREPARED_NOT_SENT
+send_status=SENT_COMPLETE_CLOSED
 ```
 
 Continue as the rigorous external mathematical and causal reviewer for this one

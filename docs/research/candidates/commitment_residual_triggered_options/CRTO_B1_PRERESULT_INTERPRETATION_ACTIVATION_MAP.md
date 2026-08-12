@@ -4,7 +4,7 @@
 direction=commitment_residual_triggered_options
 owner=EM_commitment_residual_triggered_options
 treatment=CRTO-B1-SCIENCE-20260812-04
-mathematical_closure=PENDING_same_conversation_Pro_CLOSED_and_EM_intake
+mathematical_closure=CLOSED_and_EM_intaked_on_exact_v4
 map_mode=prospective_result_blind
 scientific_activity_observed_by_EM=false
 treatment_changed_by_this_map=false
@@ -14,8 +14,8 @@ gemini_v4_status=PREPARED_NOT_SENT
 
 ## Purpose and protected boundary
 
-This map prospectively routes only results from exact prospective v4 after it
-receives same-conversation Pro `CLOSED` and EM intake. V4 differs from closed v3
+This map prospectively routes only results from exact v4, which has received
+same-conversation Pro `CLOSED` and EM intake. V4 differs from closed v3
 only by the exact hazard regime/direction/phase encoding necessitated by a
 preactivity ambiguity. The map was synchronized without reading CM runtime or result output
 and changes no DGP, arm, split, activity law, estimand, margin, inference rule,
@@ -212,8 +212,8 @@ Pro convergence or any activation condition.
 ## Exact Root relay
 
 > CRTO exact-v4 pre-result map is frozen result-blind. V4 prospectively
-> supersedes closed v3 only for the exact hazard feature encoding and is not
-> production-eligible until same-Pro `CLOSED` plus EM intake. Total-effect validity
+> supersedes closed v3 only for the exact hazard feature encoding and has now
+> received same-Pro `CLOSED` plus EM intake. Total-effect validity
 > requires CM technical acceptance, exact v4, eight paired seeds/all cells, finite paired output, action/cost parity,
 > no leakage, and computable registered inference. Mechanism validity is a
 > stricter separable layer; a failed mechanism support gate may leave a valid

@@ -5,7 +5,7 @@ direction=commitment_residual_triggered_options
 candidate=CRTO-B1
 revision=CRTO-B1-SCIENCE-20260812-04
 owner=EM_commitment_residual_triggered_options
-handoff_status=prospective_v4_prepared_not_released_pending_pro_closure
+handoff_status=mathematically_closed_v4_prepared_not_released
 production_authorized=false
 ```
 
@@ -21,11 +21,12 @@ and action-matched
 
 Do not begin construction or production from this prepared file alone. V4
 prospectively supersedes Pro-closed v3 because v3 left the penalized hazard's
-switch-direction/phase feature coordinates underdetermined. V4 has not yet
-received same-conversation Pro closure. Root may release it only after literal
-`CLOSED` on the complete v4 and this EM's intake. On later release, CM owns
-source, tests if authorized, environment, exact resource accounting, execution,
-and technical acceptance. No science-bearing repair is delegated to CM.
+switch-direction/phase feature coordinates underdetermined. Complete v4 has now
+received same-conversation Pro `CLOSED` and EM intake, completing only the
+mathematical/causal boundary. Root must still explicitly release this handoff.
+On release, CM owns source, tests if authorized, environment, exact resource
+accounting, execution, and technical acceptance. No science-bearing repair is
+delegated to CM.
 
 The bounded implementation target is one CPU, no GPU, at most 2 GiB resident
 memory, at most 120 minutes, and the exact category ledger with registered
@@ -114,9 +115,8 @@ freedom:
 The environment-step ledger remains exactly 10,715,136. The added diagnostics
 consume no environment steps and remain within the same one-CPU, no-GPU, 2-GiB,
 120-minute ceiling. The same Pro conversation returned literal `CLOSED` on
-complete v3, but that ruling does not close the science-bearing v4 feature-law
-revision. Root must withhold v4 CM/production release until new Pro `CLOSED` plus
-EM intake.
+complete v4 and this EM accepted it. Root may now decide whether to relay this
+exact v4 packet to CM; production remains separately withheld.
 
 ## Retained exact v1-to-v2 CM delta
 
