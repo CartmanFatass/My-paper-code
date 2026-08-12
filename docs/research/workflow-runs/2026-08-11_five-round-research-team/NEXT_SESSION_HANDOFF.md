@@ -319,10 +319,14 @@ resume the scientific workflow.
   provider root after the page reached that conversation; they consumed no
   provider turn or scientific request. The shared Agentify repair now stores the
   observed post-navigation URL, preserves strict conversation equality, and has
-  been loaded and verified without sending. One fresh exact v3 attempt is now
-  authorized on the same conversation. No B3 artifact/process exists and
-  production is forbidden until Pro `CLOSED`, EM intake, and renewed CM
-  acceptance. Its
+  been loaded and verified without sending. The subsequent exact v3 attempt
+  submitted once at 07:55:56 PT and retained provider user-message identity, but
+  observation lost its local browser session. Persisted strict state is
+  `SUBMITTED_UNVERIFIED`, with send/action/click counts all one; the child's
+  `UNSENT` summary is superseded. Never resend or create a new operation. Reopen
+  only the saved conversation and recover this exact operation observation-only.
+  No B3 artifact/process exists and production is forbidden until Pro `CLOSED`,
+  EM intake, and renewed CM acceptance. Its
   eventual command remains
   `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m experiments.candidates.variable_n_fleet_churn_b3 --execute-stage1 --output-root artifacts/variable_n_fleet_churn/vnfc_b3_registered --result docs/research/candidates/variable_n_fleet_churn/VNFC_B3_STAGE1_RESULT.json`.
 - ONLGR is the active non-credit variable-`k` candidate. External Pro and its

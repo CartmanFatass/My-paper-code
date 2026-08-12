@@ -94,13 +94,16 @@ experimental gate.
    mass/geometry histories with joint retention, exact activity denominators,
    and a history/handoff-aware `HANDOFF-RDA` baseline. The completed local v2
    Principles packet was advisory input to this owner-frozen v3 composite; no
-   local Critic is a closure prerequisite. Two strict continuation attempts
+   local Critic is a closure prerequisite. Two early strict continuation attempts
    stopped before submission because Agentify kept the disposable tab's
    provider-root registry URL after the page reached the exact VNFC conversation.
-   They consumed no provider turn and produced no scientific ruling. The shared
-   Agentify component now has an unchanged-identity registry reconciliation
-   repair awaiting one idle reload and no-send verification. V3 must then receive
-   `CLOSED` or `REVISION_REQUIRED` in the existing VNFC ChatGPT Pro conversation.
+   The shared registry-reconciliation repair was loaded and verified. The next
+   exact attempt submitted v3 once at 07:55:56 PT and retained the exact provider
+   user-message identity, but the local browser session disappeared during
+   observation. Its initial `UNSENT` summary was factually wrong: the persisted
+   operation is `SUBMITTED_UNVERIFIED` with send/action/click counts all one.
+   Never resend it; reopen only the exact existing conversation and recover that
+   operation observation-only until Pro returns `CLOSED` or `REVISION_REQUIRED`.
    Prior CM acceptance is non-operative, result/artifact paths remain absent,
    and production is forbidden meanwhile.
 2. **VNFC-B2 Typed Lifecycle Capsule Retention** — direct variable-`N` successor

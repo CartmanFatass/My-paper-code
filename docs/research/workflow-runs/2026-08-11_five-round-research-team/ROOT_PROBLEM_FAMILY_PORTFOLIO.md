@@ -543,11 +543,14 @@ controls; do not transfer their evidence or thresholds into a new direction.
    mass/geometry histories with joint retention, exact activity denominators,
    and primary `HANDOFF-RDA`. The completed v2 Principles pass is advisory input
    already reconciled into v3; its redundant local Critic was stopped after
-   authority moved to ChatGPT External Pro. Two strict continuation attempts
+   authority moved to ChatGPT External Pro. Two early continuation attempts
    ended before submission because Agentify retained the provider-root URL in
-   the disposable-tab registry. That shared transport defect is now repaired,
-   loaded, and verified without send; one fresh exact v3 attempt is authorized.
-   Pro `CLOSED` in the existing VNFC conversation is still required before
+   the disposable-tab registry. After that defect was repaired and loaded, the
+   exact v3 request submitted once at 07:55:56 PT. Observation then lost the
+   local browser session; persisted state retains the exact provider user turn
+   and classifies the operation `SUBMITTED_UNVERIFIED`. The child's initial
+   `UNSENT` summary is superseded. Never resend; recover this exact operation in
+   the same conversation observation-only. Pro `CLOSED` is still required before
    renewed CM work.
    Only its conjunctive learned-value,
    intervention-mediation, ceiling-headroom, N15 latency, and N120 scaling gates
