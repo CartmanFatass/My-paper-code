@@ -71,6 +71,47 @@ experimental gate.
 
 ## Current promising set
 
+This section is the authoritative post-result portfolio as of 2026-08-12. The
+older pre-terminal snapshot below is retained only as provenance.
+
+1. **VNFC-B3 sparse learned reward-source allocation** — direct variable-`N`
+   candidate. One shared policy trains at `N={6,9,12}` and is evaluated without
+   adaptation at `N=15`. Every executable arm uses the same reward-input-blind
+   sparse residual-demand allocator, with `E<=3N`, immutable keys, exactly `E`
+   heap pops, `O(N log N)` time, and `O(N)` live memory. The strongest alternative
+   is that a history/handoff-aware frozen priority already captures all useful
+   structure, so learned bids add no value. External Pro confirmed the sparse
+   proof and that v5 resolved all twelve prior defects, but required four further
+   definition corrections. The owner froze exact revision
+   `SP-RDA-MATH-CLOSURE-20260812-06`; its same-conversation Pro request is in
+   strict pre-send review. No B3 production is authorized until literal Pro
+   `CLOSED`, same-direction intake, and renewed CM technical acceptance.
+2. **Commitment-Residual Triggered Options (CRTO)** — direct variable-`k`
+   candidate. One shared option policy trains at `k={4,8}` and is evaluated at
+   held-out `k=16`, `4->16`, and `16->4`. The treatment converts a frozen,
+   causally issued forecast innovation plus net replan advantage into a legal
+   keep/terminate decision. Its strongest baseline, `FULL-HISTORY-AUX-TERM`,
+   receives the same history, predictor, actions, capacity, work, and cost; the
+   same-checkpoint whole-team residual derangement and Q-only controls test the
+   claimed mechanism. Because the residual is determined by the matched history,
+   the maximum claim is finite-data/OOD inductive bias, never added information.
+   Revision `CRTO-B1-SCIENCE-20260812-01` is meaning-complete and published;
+   dedicated Pro and independent Gemini requesters are prepared but unsent.
+3. **Voronoi-Quadrature Field Policy (VQFP)** — direct variable-`N` candidate.
+   One shared sparse spatial policy trains at `N={6,10}` and is evaluated without
+   adaptation at held-out `N={4,14}`. It binds each field message to the physical
+   measure of its periodic Voronoi cell so roster density does not redefine
+   spatial mass. The strongest learned gate receives identical geometry, volumes,
+   information, capacity, and work and can exactly represent the fixed rule; a
+   `2x2` algorithm-by-reassociation cut plus analytic quadrature/action checks
+   tests whether correct binding contributes. The claim ceiling is finite-budget
+   held-out-`N` robustness or performance, not unique expressivity or natural
+   mediation. Revision `VQFP-B1-MATH-CLOSURE-20260812-01` is meaning-complete and
+   published; dedicated Pro and independent Gemini requesters are prepared but
+   unsent.
+
+## Superseded pre-terminal promising snapshot
+
 1. **Variable-N Fleet Churn** — direct algorithm direction. Test a shared policy
    under roster-size variation and in-episode join/exit/failure, including held-out
    `N`, with matched communication, capacity, samples, and physical time. B1 now
@@ -203,6 +244,31 @@ value warrants it; this list is not a fixed slot count.
 
 ## Current no-further-investment set
 
+1. **VNFC-B2 Typed Lifecycle Capsule Retention.** The complete coherent recovered
+   panel and same-conversation External Pro convergence agree: the trained
+   packages are `NOT_SEPARATED`, while the underlying lifecycle-carrier mechanism
+   is `NON_IDENTIFYING`. Conditions 1--3 are false, condition 4 and the full
+   conjunction are unavailable, and only oracle headroom is present. All learned
+   arms are far below the fresh-fact oracle and essentially never use the probe
+   path, so upstream fact-access/task-policy learning failure is the strongest
+   explanation. No more seeds, compute, retrospective SCR definition, or frozen
+   kinematic successor is authorized. Revisit only through a new prospective
+   access-competent treatment with uniquely defined `C2/C3` stale-command
+   observables and the complete typed/raw control.
+2. **ONLGR current campaign.** Pro closed its mathematical definition, learning
+   activity occurred, and final checkpoints exist, but the first run lost all
+   panel output during JSON serialization and its sole authorized checkpoint-only
+   recovery failed before any panel output. Therefore no positive, negative,
+   null, reverse, equivalence, safety, or resource result exists. The one-recovery
+   allowance is exhausted. Revisit only as a separately frozen from-scratch
+   campaign after a new portfolio decision, fresh CM acceptance, and applicable
+   same-conversation Pro closure; current checkpoints are provenance only.
+
+All earlier no-further-investment decisions below remain in force unless their
+stated reconsideration condition is met.
+
+## Earlier no-further-investment set
+
 1. **G53 current continuous-roster host** — repeated engineering work yielded no
    retained scientific observable. Revisit only if a broader entropy/exposure
    discriminator shows an entropy-specific effect needing this host.
@@ -245,6 +311,27 @@ oracle shows utility headroom, and a neutral identity-breaking control exists.
 
 ## Immediate Root cycle
 
+1. Observe the already active B3-v6 strict request to terminal. If Pro returns
+   `CLOSED`, route the exact owner packet immediately to CM. If it returns
+   `REVISION_REQUIRED`, let the EM freeze the next composite but give the next
+   Pro slot to CRTO before another B3 follow-up.
+2. Use the next idle Agentify slot for CRTO's dedicated exact-revision Pro
+   closure. A `CLOSED` result plus EM intake releases CM construction; a
+   `REVISION_REQUIRED` result returns only to the CRTO owner. Schedule the
+   independent Gemini innovator separately and keep it non-gating and blind.
+3. Complete VQFP's dedicated Pro closure next, then route a closed object to CM.
+   Its independent Gemini innovator remains additive and cannot close or accept
+   the treatment.
+4. B2 and ONLGR receive no further current-campaign compute or provider work.
+   Their results constrain only their own treatments and supply no evidence to
+   B3, CRTO, or VQFP.
+5. The first Pro-closed, CM-accepted candidate with the best bounded
+   decision-information-to-runtime ratio receives production. A valid negative
+   deletes its specified family; a nonidentifying execution returns to its
+   semantic owner without weakening thresholds or the completion contract.
+
+## Superseded pre-terminal Root cycle
+
 Root repeats this event-driven cycle without waiting for a nominal round to end:
 
 1. VNFC-B1's same-conversation ChatGPT External Pro result challenge is complete
@@ -285,6 +372,25 @@ Do not mark this goal complete until all are true:
 - the problem-family portfolio and milestone log reflect the resulting decision.
 
 ## Live completion-evidence ledger
+
+| Requirement | Current authoritative evidence | State |
+|---|---|---|
+| One shared algorithm supports variable `N` or variable `k` | VNFC-B1 supplies only bounded toy-level variable-`N` package evidence and loses to a stronger structured greedy reference. B3, CRTO, and VQFP are shared-parameter prospective candidates on held-out axes. | Partial; no qualifying winner |
+| Improvement over a matched baseline | No current leading candidate has valid result data. B2 did not separate from reset/raw; ONLGR produced no panel result. | Not yet established |
+| Valid technical result and same-direction EM interpretation | B2 has a technically accepted result and EM intake, but its package is non-separated and its mechanism non-identifying. ONLGR is scientifically unavailable. B3/CRTO/VQFP are preproduction. | Partial |
+| Dedicated ChatGPT External Pro challenge | B2 result convergence is complete. B3 v6 is active in its existing conversation. CRTO and VQFP exact-revision requests are prepared for dedicated conversations. | In progress |
+| Additional independent Gemini innovator | EBCR completed an additive Gemini review. VNFC's Gemini attempts produced no provider turn/evidence and are not retried. CRTO and VQFP have independent prepared Gemini questions, still unsent and non-gating. | Partial |
+| Strongest alternative and claim ceiling | Explicit for all three leaders: fixed history/handoff priority for B3; information-matched full-history termination for CRTO; exactly representational learned spatial gate for VQFP. Each claim ceiling is finite-panel/finite-budget and excludes general UAV or arbitrary-axis claims. | Established prospectively |
+| Second surface and UAV simulator steps | B3 maps to kinematic post-churn service; CRTO to warehouse handoff then UAV track/relay/replan; VQFP to 2-D plume-front tracking then UAV spatial sensing/relay. None is activated without a qualifying first result. | Defined, not activated |
+| Portfolio and milestone records | Current leaders are B3, CRTO, and VQFP. B2 and ONLGR joined the existing set of retired or paused treatments with exact scientific reasons and revisit conditions. | Current cut recorded |
+
+The goal remains active. The shortest completion path is now: obtain one exact
+Pro-closed treatment, CM-accepted implementation, valid matched-baseline result,
+same-EM interpretation, same-conversation Pro result challenge, and then activate
+the already recorded second-surface/UAV step. No archived prompt, mathematical
+closure, implementation, or toy activity alone satisfies completion.
+
+## Superseded pre-terminal completion ledger
 
 This ledger is an audit aid, not a substitute for the requirements above. A
 plausible mechanism, completed implementation, or positive internal diagnostic

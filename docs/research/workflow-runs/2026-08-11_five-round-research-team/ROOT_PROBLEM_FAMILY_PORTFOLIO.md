@@ -763,3 +763,90 @@ and its inactive disposable tab was closed under the user-approved rule. Its
 same-direction intake accepted a science-bearing preactivity correction now in
 CM and independent mathematical review. Gemini remains unsent and blind.
 VNFC-B2's separate Gemini request also remains unsent and blind.
+
+## 2026-08-12 post-result portfolio cut
+
+This section supersedes the recovery-era allocation above while preserving it as
+provenance.
+
+### Bounded objective
+
+Obtain the first scientifically closed, technically valid shared algorithm that
+improves held-out variable-`N` or variable-`k` performance or robustness against
+its strongest resource-matched baseline. Keep three nonredundant mechanism
+families, and require each first experiment to either promote the family, delete
+it, or identify a concrete missing support condition without weakening the
+completion contract.
+
+### Leading directions receiving investment
+
+1. **VNFC-B3 / SALA-SP-RDA.** This is the nearest direct variable-`N` route.
+   It tests whether learned, correctly associated bids add value beyond
+   history/handoff-aware and comparative-advantage priorities through one common
+   reward-input-blind sparse allocator at held-out `N=15`. The fixed-three-task
+   proof remains `E<=3N`, `O(N log N)` time, and `O(N)` live memory. Pro confirmed
+   that v5 resolved all twelve earlier defects and that the proof is sound, then
+   requested four exact definition changes. Revision
+   `SP-RDA-MATH-CLOSURE-20260812-06` incorporates them and is in strict Pro
+   pre-send review. A positive Stage-1 result must beat the registered fixed
+   priorities and pass mediation, headroom, latency, operation, and memory gates;
+   otherwise no Stage 2 or UAV bridge is released.
+2. **CRTO / commitment-conditioned innovation-to-replan.** This direct
+   variable-`k` route asks whether an explicit, calibrated residual-plus-net-
+   advantage interface improves finite-data/OOD decisions over an
+   information-matched recurrent option critic. It trains at `k={4,8}` and tests
+   held-out `k=16` plus both switch directions. Whole-team residual derangement,
+   Q-only, rate-matched hazard, and fixed-renewal controls separate alignment,
+   generic replanning, and duration shortcuts. Because the comparator has the
+   same information and predictor, the ceiling is an inductive-bias claim.
+   `CRTO-B1-SCIENCE-20260812-01` is meaning-complete, published, and awaiting its
+   dedicated Pro closure; Gemini remains a separate prepared innovator.
+3. **VQFP / physical-measure aggregation.** This direct variable-`N` route asks
+   whether binding sender messages to Voronoi cell measure improves robustness
+   when roster size and spatial density change. It trains at `N={6,10}` and tests
+   held-out `N={4,14}`. The strongest free gate receives identical information
+   and can exactly represent the fixed volume law, so the comparison isolates
+   finite-budget inductive bias rather than expressivity. A `2x2` algorithm-by-
+   reassociation panel, analytic quadrature/action first stages, full-tuple
+   invariance, constant-field, and equal-volume nulls prevent an off-manifold
+   corruption result from masquerading as mechanism evidence.
+   `VQFP-B1-MATH-CLOSURE-20260812-01` is meaning-complete, published, and awaiting
+   dedicated Pro closure; Gemini remains a separate prepared innovator.
+
+### Work receiving no further investment now
+
+1. **VNFC-B2 typed lifecycle package.** The complete result and authoritative
+   same-conversation Pro convergence classify the trained packages as not
+   separated and the carrier mechanism as non-identifying. The learned policies
+   are far below oracle and do not use the reacquisition path. No extra seeds,
+   compute, retrospective SCR repair, or kinematic successor is authorized.
+2. **ONLGR current campaign.** No panel result survived either the original
+   serialization terminal or the sole authorized checkpoint-only recovery. This
+   is not evidence against the treatment, but the one-attempt campaign boundary
+   is exhausted. Revisit only through a new from-scratch prospective campaign.
+3. **EBCR-B1 and EGRCR-B1.** EBCR loses to fixed cadence and does not identify
+   event timing; EGRCR adds no utility over ordinary GAE and its wrong-binding cut
+   is anti-supervision. Their existing treatment families receive no further
+   algorithm investment under their recorded revisit conditions.
+
+The earlier decisions for G53, standalone G52, VSP06-B2R3, FSBS-B1, ACVC learned
+binding, RECCT's non-expressive endpoint, and ROSTER-SMF remain in force.
+
+### Decision triggers and sequencing
+
+- B3-v6 `CLOSED` plus EM intake routes immediately to CM. A further
+  `REVISION_REQUIRED` freezes the next composite but does not consume the next
+  Pro slot; CRTO receives it first.
+- CRTO `CLOSED` plus EM intake routes to CM. A valid result deletes the family if
+  the matched-baseline and both residual-specific upper bounds fall below their
+  frozen margins under valid calibration, action support, recoverable headroom,
+  and derangement first stage.
+- VQFP `CLOSED` plus EM intake routes to CM. A valid result deletes the family if
+  both performance and robustness one-sided Bonferroni upper bounds are below
+  `0.03` with oracle headroom and direct-value validity intact.
+- Pro and Gemini transports are serialized only by Agentify capacity. Gemini is
+  additive, blind, and non-gating. CM construction may proceed concurrently with
+  another direction's provider review, but heavy production commands are
+  sequenced around observed host resource conflicts.
+- B2 and ONLGR provide no evidence, thresholds, or rescue authority to any of the
+  three leaders. Only prospective design discipline transfers.
