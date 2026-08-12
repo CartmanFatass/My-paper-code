@@ -787,8 +787,9 @@ completion contract.
    proof remains `E<=3N`, `O(N log N)` time, and `O(N)` live memory. Pro confirmed
    that v5 resolved all twelve earlier defects and that the proof is sound, then
    requested four exact definition changes. Revision
-   `SP-RDA-MATH-CLOSURE-20260812-06` incorporates them and is in strict Pro
-   pre-send review. A positive Stage-1 result must beat the registered fixed
+   `SP-RDA-MATH-CLOSURE-20260812-06` incorporates them and has now received
+   literal same-conversation Pro `CLOSED` plus owner intake; fresh CM v6
+   construction/conformance review is active. A positive Stage-1 result must beat the registered fixed
    priorities and pass mediation, headroom, latency, operation, and memory gates;
    otherwise no Stage 2 or UAV bridge is released.
 2. **CRTO / commitment-conditioned innovation-to-replan.** This direct
@@ -799,8 +800,9 @@ completion contract.
    Q-only, rate-matched hazard, and fixed-renewal controls separate alignment,
    generic replanning, and duration shortcuts. Because the comparator has the
    same information and predictor, the ceiling is an inductive-bias claim.
-   `CRTO-B1-SCIENCE-20260812-01` is meaning-complete, published, and awaiting its
-   dedicated Pro closure; Gemini remains a separate prepared innovator.
+   `CRTO-B1-SCIENCE-20260812-02` closes the exact predictor, probe, hazard-fit,
+   rollout-cut, derangement, and step-ledger choices. Its clean dedicated Pro
+   transport is active; Gemini-v2 remains a separate prepared innovator.
 3. **VQFP / physical-measure aggregation.** This direct variable-`N` route asks
    whether binding sender messages to Voronoi cell measure improves robustness
    when roster size and spatial density change. It trains at `N={6,10}` and tests
@@ -810,8 +812,9 @@ completion contract.
    reassociation panel, analytic quadrature/action first stages, full-tuple
    invariance, constant-field, and equal-volume nulls prevent an off-manifold
    corruption result from masquerading as mechanism evidence.
-   `VQFP-B1-MATH-CLOSURE-20260812-01` is meaning-complete, published, and awaiting
-   dedicated Pro closure; Gemini remains a separate prepared innovator.
+   `VQFP-B1-MATH-CLOSURE-20260812-02` also freezes the four-control bank, exact
+   40,996-parameter recurrent function, action-TV unit, and association summaries;
+   it is published and awaiting dedicated Pro closure, with Gemini separately prepared.
 
 ### Work receiving no further investment now
 
@@ -834,9 +837,8 @@ binding, RECCT's non-expressive endpoint, and ROSTER-SMF remain in force.
 
 ### Decision triggers and sequencing
 
-- B3-v6 `CLOSED` plus EM intake routes immediately to CM. A further
-  `REVISION_REQUIRED` freezes the next composite but does not consume the next
-  Pro slot; CRTO receives it first.
+- B3-v6 is `CLOSED` and in fresh CM conformance. Technical acceptance releases
+  only Stage-1 scheduling; Stage 2 still requires every registered Stage-1 gate.
 - CRTO `CLOSED` plus EM intake routes to CM. A valid result deletes the family if
   the matched-baseline and both residual-specific upper bounds fall below their
   frozen margins under valid calibration, action support, recoverable headroom,
