@@ -1263,6 +1263,41 @@ def _load_readiness_train(run_root: Path) -> tuple[dict[str, Any], str]:
     return value, _digest(path)
 
 
+_READINESS_LOG_DIRECTORY = ".hmasd-readiness-logs"
+_READINESS_TRAIN_ADMISSION_LOGS = {
+    f"{phase}.{stream}"
+    for phase in ("interface_smoke", "bounded_exercise")
+    for stream in ("stdout", "stderr")
+}
+
+
+def _readiness_train_root(run_root: Path) -> Path:
+    """Admit only a fresh root or the wrapper-owned pre-phase log lifecycle."""
+
+    root = Path(run_root).resolve()
+    if not root.exists():
+        root.mkdir(parents=True)
+        return root
+    if not root.is_dir() or root.is_symlink():
+        raise ValueError("G53 readiness root is not a real directory")
+    entries = list(root.iterdir())
+    if any(entry.name == "readiness_train.json" for entry in entries):
+        raise ValueError("G53 readiness-train replay is forbidden")
+    if {entry.name for entry in entries} != {_READINESS_LOG_DIRECTORY}:
+        raise ValueError("G53 readiness root contains a foreign preexisting entry")
+    log_root = entries[0]
+    if not log_root.is_dir() or log_root.is_symlink():
+        raise ValueError("G53 wrapper readiness log root is not a real directory")
+    for entry in log_root.iterdir():
+        if (
+            entry.name not in _READINESS_TRAIN_ADMISSION_LOGS
+            or not entry.is_file()
+            or entry.is_symlink()
+        ):
+            raise ValueError("G53 wrapper readiness log lifecycle is invalid")
+    return root
+
+
 def _readiness_record(
     phase: str, *, source_commit: str, train_digest: str, predicate: bool,
     **extra: object,
@@ -1282,7 +1317,7 @@ def _readiness_record(
 def readiness_train(*, run_root: Path, source_commit: str) -> dict[str, object]:
     if not _valid_commit(source_commit):
         raise ValueError("G53 readiness-train requires a valid source commit")
-    root = _fresh_root(run_root); root.mkdir(parents=True)
+    root = _readiness_train_root(run_root)
     static = source.reconstruct_static_certificate()
     record = {
         "schema_version": SCHEMA_VERSION, "algorithm_id": ALGORITHM_ID,

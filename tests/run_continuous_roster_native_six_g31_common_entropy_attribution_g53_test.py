@@ -95,6 +95,56 @@ def test_readiness_rejects_invalid_commit_and_digest_changes(tmp_path: Path) -> 
         runner.readiness_validate(run_root=root)
 
 
+def test_readiness_train_admits_wrapper_log_root_and_rejects_foreign_or_replay(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "wrapper"
+    logs = root / ".hmasd-readiness-logs"
+    logs.mkdir(parents=True)
+    expected_logs = {
+        "interface_smoke.stdout": "smoke output",
+        "interface_smoke.stderr": "",
+        "bounded_exercise.stdout": "",
+        "bounded_exercise.stderr": "",
+    }
+    for name, content in expected_logs.items():
+        (logs / name).write_text(content, encoding="utf-8")
+    runner.readiness_train(run_root=root, source_commit="e" * 40)
+    assert {entry.name for entry in root.iterdir()} == {
+        ".hmasd-readiness-logs", "readiness_train.json"
+    }
+    assert {
+        entry.name: entry.read_text(encoding="utf-8") for entry in logs.iterdir()
+    } == expected_logs
+    with pytest.raises(ValueError, match="replay"):
+        runner.readiness_train(run_root=root, source_commit="e" * 40)
+
+    foreign = tmp_path / "foreign"; foreign.mkdir()
+    (foreign / ".hmasd-readiness-logs").mkdir()
+    (foreign / "unexpected.txt").write_text("foreign", encoding="utf-8")
+    with pytest.raises(ValueError, match="foreign"):
+        runner.readiness_train(run_root=foreign, source_commit="e" * 40)
+
+    bad_log = tmp_path / "bad-log"; bad_log.mkdir()
+    (bad_log / ".hmasd-readiness-logs").write_text("not a directory", encoding="utf-8")
+    with pytest.raises(ValueError, match="not a real directory"):
+        runner.readiness_train(run_root=bad_log, source_commit="e" * 40)
+
+    bad_content = tmp_path / "bad-content"
+    bad_content_logs = bad_content / ".hmasd-readiness-logs"
+    bad_content_logs.mkdir(parents=True)
+    (bad_content_logs / "artifact_validation.stdout").write_text("future", encoding="utf-8")
+    with pytest.raises(ValueError, match="lifecycle"):
+        runner.readiness_train(run_root=bad_content, source_commit="e" * 40)
+
+
+def test_scientific_fresh_root_still_rejects_wrapper_log_directory(tmp_path: Path) -> None:
+    root = tmp_path / "scientific"
+    (root / ".hmasd-readiness-logs").mkdir(parents=True)
+    with pytest.raises(ValueError, match="fresh"):
+        runner._fresh_root(root)
+
+
 def test_branch_precedence_and_claim_ceiling() -> None:
     complete = {
         "operational_valid": True, "source_valid": True, "pairing_valid": True,
