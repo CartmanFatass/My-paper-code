@@ -22,5 +22,11 @@
     "conversation_id": null,
     "visible_model": null,
     "last_raw_response_path": null
+  },
+  "CAND-VAP-EOCIV-LITE": {
+    "conversation_url": null,
+    "conversation_id": null,
+    "visible_model": null,
+    "last_raw_response_path": null
   }
 }
