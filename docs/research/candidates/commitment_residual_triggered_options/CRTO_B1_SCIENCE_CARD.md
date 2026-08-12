@@ -7,7 +7,7 @@ revision=CRTO-B1-SCIENCE-20260812-03
 owner=EM_commitment_residual_triggered_options
 scientific_activity_started=false
 production_authorized=false
-mathematical_closure=required_from_same_direction_chatgpt_external_pro
+mathematical_closure=CLOSED_by_same_direction_chatgpt_external_pro_and_EM_intake
 ```
 
 ## Decision and question
@@ -39,9 +39,12 @@ implementation, learned-policy optimizer update, or question-relevant scientific
 activity occurred under either earlier revision. Any change to the DGP, provider-visible
 mathematics, arms, data split, activity law, estimands, margins, inference,
 or interpretation branches creates a new complete revision. Production is
-withheld until the same dedicated direction-specific ChatGPT External Pro
-conversation returns literal `CLOSED` on this complete v3, this EM intakes that
-ruling, CM accepts technical conformance, and Root releases execution.
+The same dedicated direction-specific ChatGPT External Pro conversation returned
+literal `CLOSED` on this complete v3, and this EM accepted that ruling without a
+science-bearing change. Mathematical/causal closure is complete for this exact
+prospective object. Production remains withheld until CM accepts technical
+conformance and Root releases execution; Pro closure does not provide either
+authority.
 
 ## Cooperative service-relay DGP
 
@@ -938,7 +941,8 @@ a prospective bridge, not UAV evidence.
 
 ## Root-to-CM construction packet
 
-If and only if Root later relays this packet after Pro `CLOSED` and EM intake,
+If and only if Root later relays this packet after this completed Pro `CLOSED`
+and EM intake,
 CM should construct exactly `CRTO-B1-SCIENCE-20260812-03`, bind source/config,
 verify identical learned-arm resources and causal timestamps, and return either
 a concise preactivity technical nonconformance or a real command with the

@@ -5,7 +5,7 @@ direction=commitment_residual_triggered_options
 candidate=CRTO-B1
 revision=CRTO-B1-SCIENCE-20260812-03
 owner=EM_commitment_residual_triggered_options
-handoff_status=prepared_not_released
+handoff_status=mathematically_closed_prepared_not_released
 production_authorized=false
 ```
 
@@ -19,11 +19,12 @@ and action-matched
 `FULL-HISTORY-AUX-TERM` learner, plus frozen-checkpoint
 `DERANGED-RESIDUAL-CRTO`, Q-only, rate-matched-hazard, and forced-renewal cuts.
 
-Do not begin construction or production from this prepared file alone. Root may
-release it only after the exact revision receives same-direction ChatGPT
-External Pro `CLOSED` and EM intake. On release, CM owns source, tests if
-authorized, environment, exact resource accounting, execution, and technical
-acceptance. No science-bearing repair is delegated to CM.
+Do not begin construction or production from this prepared file alone. The exact
+v3 revision has received same-direction ChatGPT External Pro `CLOSED` and EM
+intake; that completes only mathematical/causal closure. Root must still
+explicitly release this handoff. On release, CM owns source, tests if authorized,
+environment, exact resource accounting, execution, and technical acceptance. No
+science-bearing repair is delegated to CM.
 
 The bounded implementation target is one CPU, no GPU, at most 2 GiB resident
 memory, at most 120 minutes, and the exact category ledger with registered
@@ -77,8 +78,9 @@ freedom:
 
 The environment-step ledger remains exactly 10,715,136. The added diagnostics
 consume no environment steps and remain within the same one-CPU, no-GPU, 2-GiB,
-120-minute ceiling. Root may not release this handoff until the same Pro
-conversation returns literal `CLOSED` on complete v3 and this EM intakes it.
+120-minute ceiling. The same Pro conversation returned literal `CLOSED` on
+complete v3 and this EM intaked it; Root now retains the independent choice of
+whether and when to release the handoff to CM.
 
 ## Retained exact v1-to-v2 CM delta
 
