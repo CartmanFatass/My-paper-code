@@ -118,3 +118,20 @@ temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_
 It is additive and may be released separately by Root, but cannot revise this
 object, supply closure, accept CM work, interpret future results, or authorize
 production.
+
+## Subsequent non-science reporting clarification
+
+Before activity, CM identified that the card's reporting-only list named an
+undefined scalar `overlap`. This owner found that no overlap quantity enters a
+registered scientific object and ruled the label non-claim-bearing and
+removable rather than selecting among inequivalent new diagnostics. The exact
+formulas and reporting consequence are recorded in:
+
+```text
+docs/research/candidates/voronoi_quadrature_field_policy/VQFP_V4_NONCLAIM_REPORTING_CLARIFICATION.md
+```
+
+The controlling Pro-closed v4 treatment, comparator, reward, estimands,
+support, validity, thresholds, branches, counts, resource ceiling, result
+interpretation, and claim ceiling are unchanged. No v5 or Pro rereview is
+created.

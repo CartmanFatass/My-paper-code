@@ -4,6 +4,8 @@ Owner: `direction:voronoi_quadrature_field_policy` Explorer Manager
 Candidate: `VQFP-VN-FAMILY-CUT-01`
 Treatment: `VQFP-B1-PERIODIC-LOCAL-MEASURE-v1`
 Exact Pro-closed prospective revision: `VQFP-B1-MATH-CLOSURE-20260812-04`
+Preactivity non-science reporting clarification:
+`VQFP-V4-NONCLAIM-REPORTING-20260812-01`
 Superseded Pro-reviewed revisions:
 `VQFP-B1-MATH-CLOSURE-20260812-02`,
 `VQFP-B1-MATH-CLOSURE-20260812-03`
@@ -208,8 +210,36 @@ joint action gives `u_j=1` everywhere and reward at least
 J_episode = sum_(t=0..31) r_t / sum_(t=0..31) r_t^star.
 ```
 
-Raw return, service mass, cost, overlap, and each action frequency are also
-retained. `J_episode` is the only primary performance scale.
+For each episode retain these reporting-only raw summaries:
+
+```text
+raw_return
+  = sum_(t=0..31) r_t,
+
+service_mass
+  = sum_(t=0..31) sum_j v_j*s_j(t)*(1-exp(-u_j)),
+
+cost
+  = sum_(t=0..31) 0.08*sum_i v_i*a_i^2,
+
+action_frequency(a)
+  = [1/(32*N)]*sum_(t=0..31) sum_i 1{a_i=a},
+    separately for a in {0,1/2,1}.
+```
+
+These identities imply `raw_return=service_mass-cost` when evaluated from the
+same stored per-tick terms. This is a reporting identity, not a new tolerance,
+validity gate, or endpoint. No scalar named `overlap` is registered or
+required. The earlier bare word admitted inequivalent meanings, including
+redundant intensity and demand-weighted saturation loss, but it entered no
+estimand, availability/support rule, validity fact, threshold, branch,
+interpretation, claim, or expected EM result packet. CM must therefore omit it
+from the required raw-result schema. If an implementation already computes an
+overlap-like value, it is unregistered implementation telemetry: it cannot
+affect completeness, technical acceptance of the scientific result, endpoint
+availability, model/checkpoint selection, analysis, rerun choice, or any claim.
+Its absence is never missing scientific data. `J_episode` remains the only
+primary performance scale.
 
 ### Observations, timing, and leakage boundary
 

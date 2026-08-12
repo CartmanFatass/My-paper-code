@@ -3,6 +3,8 @@
 Owner: `direction:voronoi_quadrature_field_policy` Explorer Manager
 Exact science revision: `VQFP-B1-MATH-CLOSURE-20260812-04`
 Mathematical/causal closure: `CLOSED`, owner intake complete
+Preactivity non-science reporting clarification:
+`VQFP-V4-NONCLAIM-REPORTING-20260812-01`
 Superseded Pro-reviewed revisions: `VQFP-B1-MATH-CLOSURE-20260812-02`,
 `VQFP-B1-MATH-CLOSURE-20260812-03`
 Superseded unsent revision: `VQFP-B1-MATH-CLOSURE-20260812-01`
@@ -118,6 +120,18 @@ The accepted Pro-v2 corrections additionally freeze:
    This resolves the v3 internal contradiction without changing any statistic,
    confidence level, multiplicity family, threshold, branch order, sample,
    seed, panel, or compute count.
+10. **Non-claim raw-reporting cleanup.** The undefined bare field `overlap` is
+    removed from the required result schema. It never entered an estimand,
+    support or validity rule, threshold, branch, interpretation, claim, or EM
+    result packet, and choosing among inequivalent overlap formulas would add a
+    new unregistered diagnostic. CM retains episode `raw_return`,
+    `service_mass`, `cost`, and three action frequencies under the exact
+    formulas in the card; it need not compute or report `overlap`. Its absence
+    cannot make any endpoint unavailable or block complete scientific-result
+    reporting. This clarification changes no treatment, comparator, DGP,
+    reward, learned object, metric, count, threshold, branch, resource ceiling,
+    or claim, so exact Pro-closed revision `-04` remains controlling and no v5
+    or Pro rereview is created.
 
 ## Exact Root-to-CM construction packet
 
@@ -184,7 +198,10 @@ The concise technical-result packet must include:
 6. every `Gamma_s`, aggregate `Gamma`, every `D^noise_s`, `U_noise`, and the
    resulting positive/material-reverse/tradeoff/noisy-precedence labels;
 7. resource use and material anomalies; and
-8. what remains unknown.
+8. what remains unknown; and
+9. the location of the retained episode-level `raw_return`, `service_mass`,
+   `cost`, and three `action_frequency(a)` summaries defined in the card. No
+   `overlap` field or derived overlap summary is required.
 
 Root returns that owner-prepared packet to this same EM for scientific intake.
 Every complete valid result, regardless of sign, then returns to the same VQFP
