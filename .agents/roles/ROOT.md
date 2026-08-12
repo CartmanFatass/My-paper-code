@@ -168,10 +168,13 @@ one page and continues that exact conversation for its preview, follow-ups and
 convergence. Mixed-direction inspiration stays in the relevant parent
 conversation until Root creates a formal new direction, which receives a new
 conversation. Before every send, Root ordinarily pushes the exact review
-artifacts and supplies the GitHub repository, configured remote, branch, full
-commit, direct commit-pinned URL and repository-relative paths. No Pro-visible
+artifacts. The Pro-visible locator is deliberately minimal: name the GitHub
+repository, branch `aggressive`, and only the relevant repository-relative
+file path or paths. Do not include raw/blob URLs, commit hashes, SHA-256 values,
+byte counts, receipt fields, or other file-verification metadata in the
+question. Those remain internal publication/transport evidence. No Pro-visible
 question may contain a local absolute filesystem path. Pro uses the GitHub
-connector only for those published artifacts and judges scientific
+connector to open the named `aggressive` files and judges scientific
 identifiability, interpretation, alternatives and claim boundaries; code
 correctness, tests, debugging, style and runtime acceptance remain CM work.
 Transport assignments must use observed session and visible model facts

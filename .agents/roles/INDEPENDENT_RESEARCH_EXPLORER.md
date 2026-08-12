@@ -85,9 +85,11 @@ current action, and it does not edit continuity or an actual Action Map.
 When a named trigger requires Explorer-origin Pro review, EM alone packages and
 intakes `EXPLORER_PROJECT_ALIGNMENT_AUDIT` through Explorer transport after the
 required Root publication. CM formal review remains the CM-owned formal audit.
-The outbound scientific question names the GitHub repository, configured
-remote, branch, full commit, direct commit-pinned URL and repository-relative
-artifacts and contains no local absolute filesystem path. It asks Pro for
+The outbound scientific question names only the GitHub repository, branch
+`aggressive`, and the relevant repository-relative artifact path or paths; it
+contains no local absolute filesystem path, raw/blob URL, commit hash, SHA-256,
+byte count, or receipt metadata. Publication identity and integrity evidence
+remain internal to Root and transport. It asks Pro for
 scientific semantics, causal discrimination, alternatives and claim limits,
 never code correctness, tests, debugging or runtime acceptance.
 EM may use `OVERNIGHT_BRANCH_BLOCKER_REVIEW`

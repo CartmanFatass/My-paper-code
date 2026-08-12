@@ -56,10 +56,13 @@ The local `question_path` is an internal transport locator and is never copied
 into the Pro-visible payload. Before opening a page, fail closed if the exact
 question text contains a local absolute path such as a drive-letter path,
 `file://` URI, requester temp path or workspace absolute path. Outbound
-evidence locators must instead name the GitHub repository, configured remote,
-branch, full commit, direct commit-pinned URLs and repository-relative paths
-supplied after Root publication. The question asks for scientific judgment
-only; never turn Pro into a code, test, debugging, style, dependency or runtime
+evidence locators must instead be minimal: GitHub repository, branch
+`aggressive`, and the relevant repository-relative path or paths supplied after
+Root publication. A Pro-visible locator block must not contain GitHub raw/blob
+URLs, full commit hashes, SHA-256 values, byte counts, receipt fields, or other
+artifact-verification metadata. Keep those only in the local batch, strict send
+receipt and archive. The question asks for scientific judgment only; never turn
+Pro into a file-integrity, code, test, debugging, style, dependency or runtime
 reviewer.
 
 ## Understand the live page

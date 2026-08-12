@@ -57,6 +57,13 @@ original fingerprint and never resends or changes a field to evade conflict.
 Continue, Retry, Stop and Answer now remain forbidden; full response/archive
 and structured-result rules remain those in the Skill.
 
+The question file is the only Pro-visible payload. Its repository locator must
+be limited to the repository name, branch `aggressive`, and relevant
+repository-relative paths. Raw/blob URLs, commit hashes, checksums, byte counts
+and receipt fields are internal transport evidence and must never be appended
+to or summarized inside the outbound question. The leaf does not turn those
+fields into a file-verification request.
+
 Do not contact the user or another task, invoke another Skill, spawn a
 child, read or write canonical state, use Git, or make a scientific decision.
 Return the transport evidence and any direct mechanical error to the invoker only.
