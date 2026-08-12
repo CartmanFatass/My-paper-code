@@ -2,8 +2,8 @@
 
 Owner: `direction:variable-n-fleet-churn` Explorer Manager  
 Treatment: `VNFC-B3-SCALABLE-REWARD-SOURCE-CUT-v1`  
-Current prospective revision: `SP-RDA-MATH-CLOSURE-20260812-07`  
-Status: `V7_FROZEN_AWAITING_SAME_CONVERSATION_PRO_REREVIEW_AFTER_CRTO`  
+Final attempted prospective revision: `SP-RDA-MATH-CLOSURE-20260812-08`  
+Current host/panel disposition: preactivity infeasible; line ended; no v9  
 
 Latest child terminal archive (preserved but superseded on send-boundary facts):
 `temp/sessions/agentify_transport_operator/independent_research_explorer/variable_n_fleet_churn_b3_math_closure_v3/results.json`  
@@ -25,6 +25,12 @@ V6 authoritative closure intake:
 
 V6 preactivity infeasibility and v7 owner revision:
 `docs/research/candidates/variable_n_fleet_churn/VNFC_B3_V6_PREACTIVITY_BANK_INFEASIBILITY_AND_V7_REVISION.md`  
+
+V7 KEEP infeasibility and final v8 owner revision:
+`docs/research/candidates/variable_n_fleet_churn/VNFC_B3_V7_PREACTIVITY_KEEP_INFEASIBILITY_AND_FINAL_V8.md`  
+
+V8 final preactivity intake:
+`docs/research/candidates/variable_n_fleet_churn/VNFC_B3_V8_PREPRO_BANK_INFEASIBILITY_FINAL_INTAKE.md`  
 
 ## Owner decision
 
@@ -438,13 +444,13 @@ the four matrices, a single history shared across variants, numerical `0.02`
 slack, and every later treatment definition. The certificate routine becomes 25
 calls and the maximum call ledger 128,000.
 
-Because the target panel and claim boundary change, v7 requires a new full-
-composite ruling in the existing VNFC Pro conversation. It remains unsent until
-CRTO Pro is terminal and Root separately confirms Agentify idle and releases it.
-No CM conformance, construction, or production may proceed against v7 before
-literal Pro `CLOSED` plus owner intake.
+Because the target panel and claim boundary changed, v7 would have required a
+new full-composite ruling in the existing VNFC Pro conversation. Its later
+preactivity proof failed, so it remained unsent and is now permanently
+superseded. No CM conformance, construction, or production may proceed against
+v7.
 
-## Frozen v7 External Pro requester
+## Preserved superseded v7 External Pro requester
 
 The exact requester is:
 
@@ -453,7 +459,51 @@ The exact requester is:
 Its sole provider-visible question embeds the complete v7 card exactly and has
 internal digest
 `1e0a387d636e538b11e3357219d69c69fbd46bdaa66cb79c462e106f2ca551cf`.
-It remains unsent. Per Root scheduling, CRTO owns the next Pro slot; preparation
-does not authorize transport. After CRTO terminal, Root must separately confirm
-Agentify idle and release exactly one same-conversation v7 operation. V3 through
-v6 are never-resend.
+It remains unsent and must never be sent. It is retained only as the exact frozen
+historical packet. V3 through v6 are never-resend.
+
+## V7 preactivity KEEP infeasibility and final v8 proof gate
+
+CM's next zero-metric proof showed v7 robust admissibility repaired but downstream
+KEEP semantics still empty: every one of 96 allowed first-bank raw bases had four
+admissible histories, yet zero qualified; raw zero's selected KEEP gaps were all
+above `0.01`. No model update or treatment result exists. V7 therefore must never
+be sent; its requester above is preserved as superseded UNSENT evidence.
+
+V8 is the final panel-law attempt. It constructs KEEP by near-best worst-variant
+kept return and SWITCH by minimum retained coverage, then minimizes pre-service
+regret within each semantic class and uses exact prefix feasibility rather than a
+numerical rank objective. It preserves all physical matrices and semantic gap
+thresholds. The maximum certificate ledger is 860,160 calls.
+
+Before any v8 Pro request exists, CM must execute only the exact full-bank
+certificate-feasibility packet in the current card. Every training bank must
+retain 32/96 and every conclusion bank 24/64 within 90 minutes/2 GiB. Any failure
+ends this host/panel line with no v9; a pass returns to this owner to prepare the
+same-conversation v8 full-composite requester. No model, arm, Stage 1, Stage 2,
+production, or v8 External Pro action is currently authorized.
+
+## V8 final preactivity infeasibility and host/panel disposition
+
+The one authorized v8 certificate-only proof reached its frozen terminal on the
+first required bank. For `(1601, training schedule 0, 6->9)`, `0/96` raw bases
+qualified versus 32 required. All 96 completed the KEEP-first and SWITCH-first
+semantic selection, within-class `Delta` slack, and exact-prefix tie procedure;
+all 96 then first failed the unchanged KEEP `R-K<=0.01` predicate. The proof used
+4,490 certified calls, 45--50 per raw against the applicable 72-call cap, 14.59
+seconds wall time, and 70.75 MB peak RSS. Resource feasibility therefore cannot
+repair absent scientific support.
+
+The remaining 63 registered bank rows were correctly marked
+`not_evaluated_after_first_terminal_bank` under the prospectively frozen stop;
+they are not observations about those banks. No learner, comparator, model
+update, treatment metric, evaluation record, or scientific activity exists.
+This is non-instantiability of the exact v8 host/panel certificate law, not an
+algorithm result and not evidence against learned bids or SP-RDA.
+
+The frozen no-rescue rule now governs. This B3 host/panel line is ended: no v8
+Pro requester or send, no v9, no matrix/tolerance/history/raw-cap change, no
+Stage 1 or Stage 2, and no production or CM repair. The learned-bid/SP-RDA family
+may be reconsidered only as a genuinely new treatment on a genuinely new host
+whose lifecycle process naturally yields feasible shared KEEP and SWITCH
+histories without learner, comparator, reward, or result-conditioned selection.

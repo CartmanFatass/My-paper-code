@@ -3,16 +3,37 @@
 Owner: `direction:variable-n-fleet-churn` Explorer Manager  
 Treatment identity: `VNFC-B3-SCALABLE-REWARD-SOURCE-CUT-v1`  
 Candidate family: `SALA-RDA` (Shared Set/Lease Actor with Residual-Demand Auction)  
-Current prospective revision: `SP-RDA-MATH-CLOSURE-20260812-07`  
+Final attempted prospective revision: `SP-RDA-MATH-CLOSURE-20260812-08`  
+Current host/panel disposition: preactivity infeasible; line ended; no v9  
 Superseded revisions: `SP-RDA-COMPLEXITY-CORRECTION-20260812-01`,
 `SP-RDA-MATH-CLOSURE-20260812-02`, and
 `SP-RDA-MATH-CLOSURE-20260812-03`,
 `SP-RDA-MATH-CLOSURE-20260812-04`, and
 `SP-RDA-MATH-CLOSURE-20260812-05`, and
-`SP-RDA-MATH-CLOSURE-20260812-06`  
+`SP-RDA-MATH-CLOSURE-20260812-06`, and
+`SP-RDA-MATH-CLOSURE-20260812-07`  
 Hard complexity contract: `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`  
 
 ## Decision first
+
+The final v8 pre-Pro certificate proof could not fill the first required training
+bank. At `(seed 1601, training schedule 6->9)`, zero of raw indices `0,...,95`
+qualified versus 32 required; every raw base first failed the unchanged
+`KEEP_OPTIMAL` condition `R^v(p_KEEP)-K^v(p_KEEP)<=0.01`. The KEEP-first and
+SWITCH-first semantic optimizations, within-class regret slack, and exact prefix
+tie rules all succeeded. Thus the remaining obstruction is the intended physical
+KEEP meaning on this constructed host, not another open definition or numerical
+tie implementation.
+
+No network, policy arm, treatment metric, optimizer step, evaluation result, or
+scientific activity exists. Resource feasibility does not rescue absent panel
+support. Under the prospectively frozen no-rescue rule, this B3 host/panel line is
+ended: do not prepare or send v8 to Pro, freeze v9, alter a matrix/tolerance/
+history law/raw cap, run Stage 1 or Stage 2, or release production. The learned-
+bid/SP-RDA mechanism family remains untested and may be reconsidered only in a
+genuinely new host whose lifecycle process naturally supplies feasible history
+regimes independently of learned/control outcomes. Such work is a new treatment,
+not a repair or continuation of this card.
 
 This is a new prospective treatment, not a repair, extension run, or positive
 evidence transfer from `VNFC-B1`. B1 established that exact reward-aware joint
@@ -27,22 +48,21 @@ The successor is frozen as one prospective full Stage-1 plus conditional-Stage-2
 composite under the revision above. The existing same-direction ChatGPT Pro
 conversation returned `CLOSED` on v6. It confirmed that the complete mathematical,
 causal, operational, bounded-work, and claim definitions were single-valued and
-that the fixed-three-task SP-RDA derivation is `O(N log N)`/`O(N)`. A subsequent
-preactivity deterministic CM proof probe found the first required training bank
-non-instantiable before any metric, model update, or treatment output: for every
-raw index `0,...,95` at seed 1601 and schedule `6->9`, no one shared history could
-lie within `0.02` of all four variant-specific pre-service optima. V7 is therefore
-a prospective science-bearing panel-law correction, not a run repair or negative
-treatment result. It replaces only that contradictory benchmark with the best
-attainable shared minimax-regret benchmark while preserving the four matrices,
-one history across variants, the numerical `0.02` tolerance, all later treatment
-definitions, and the primary return contrast.
+that the fixed-three-task SP-RDA derivation is `O(N log N)`/`O(N)`. Preactivity CM
+proofs then found both v6 and v7 unable to fill their first required training
+bank. V6's four separate near-optimality constraints admitted no shared history.
+V7 repaired that empty set, but every admissible robust-compromise history failed
+the downstream `KEEP` physical-return gap on all 96 allowed raw bases. Neither
+probe produced a metric, model update, or treatment output. V8 was the final
+prospective panel-law attempt: define the KEEP and SWITCH semantic construction
+classes first, then choose the most pre-service-robust history within each class.
+It preserves the four matrices, one history across variants, the numerical
+`0.01` KEEP and `0.10` SWITCH gaps, the numerical `0.02` within-class regret
+slack, all later treatment definitions, and the primary return contrast.
 It is not CM- or production-released. The prior CM acceptance and every earlier
-mathematical revision are non-operative. Only a new Pro `CLOSED` verdict on this
-exact full v7 plus
-same-direction owner intake permits Root to relay it; CM must then explicitly
-accept its changed generator, action, comparator, panel, analysis, activity, and
-count contracts before any Stage-1 production command.
+mathematical revision are non-operative. Its mandatory certificate-only CM probe
+failed at the first bank, so v8 never became eligible for Pro review or CM relay.
+No v8 request may be prepared or sent and no Stage-1 production command exists.
 The earlier unimplemented dense-rescoring allocator draft is superseded: it used
 `N` rounds that rescored all remaining agent-task pairs and therefore had a
 forbidden `O(N^2 R)` deployment path. No construction, process, or result used
@@ -199,26 +219,43 @@ raw blocks before the fixed-mass post-event rescaling.
 ### Paired churn necessity
 
 For one post-event roster, capability matrix, demand, and membership event,
-construct two distinct pre-event assignments using an offline solver. Because one
-history is deliberately shared across all four mass/geometry variants, define its
-quality relative to the best attainable shared compromise, not four mutually
-incompatible variant-wise optima. For variant `v`, first compute its individual
-pre-service optimum `S_star^v`. For one shared history `p`, define worst variant
-regret
+construct two distinct pre-event assignments using an offline solver. One history
+is deliberately shared across all four mass/geometry variants. V8 first defines
+the physical semantic objective for each history and then chooses the most robust
+pre-service compromise within that objective's near-optimal class. For variant
+`v`, compute its individual pre-service optimum `S_star^v`; for any one shared
+history `p`, define worst-variant pre-service regret
 
 `Delta(p)=max_(v in V)(S_star^v-S_pre^v(p))`
 
-and the best attainable shared regret
+For KEEP construction, let `t_K(p)` be the minimum across variants of the best
+post-event return attainable when every survivor is constrained to its role in
+`p`. Define
 
-`Delta_star=min_p Delta(p)`.
+`t_K_star=max_p t_K(p)`
 
-Both selected histories must satisfy
+and
 
-`Delta(p)<=Delta_star+0.02`,
+`Delta_K_star=min_(p:t_K(p)>=t_K_star-0.01) Delta(p)`.
 
-equivalently `S_pre^v(p)>=S_star^v-Delta_star-0.02` for every variant. The four
-capability matrices, one shared history across variants, and numerical `0.02`
-slack are unchanged. The selected histories differ only in survivor task history:
+Select `p_KEEP` from the class satisfying both
+`t_K(p)>=t_K_star-0.01` and `Delta(p)<=Delta_K_star+0.02` by the exact
+lexicographic history rule below.
+
+For SWITCH construction, among histories locally feasible for survivors and
+different from `p_KEEP` on at least one survivor, define
+
+`q_W(p)=max_v Q^v(p)`,
+
+`q_W_star=min_p q_W(p)`, and
+
+`Delta_S_star=min_(p:q_W(p)<=q_W_star+1e-9) Delta(p)`.
+
+Select `p_SWITCH` from the class satisfying both
+`q_W(p)<=q_W_star+1e-9` and `Delta(p)<=Delta_S_star+0.02` by the same exact
+lexicographic rule. Thus the numerical `0.02` remains a within-semantic-class
+pre-service-regret slack; it is not tuned to the v6 or v7 probe. The selected
+histories differ only in survivor task history:
 
 - `KEEP_OPTIMAL`: the best post-event allocation constrained to keep every
   survivor on its previous role is within `0.01` of the unrestricted post-event
@@ -666,30 +703,43 @@ encode tasks as `0,1,2,DUMMY=3`. Define the unique mixed-radix history rank
 
 `rank(p)=sum_j code(p[h_j])*4^(|P|-1-j)`.
 
-Every optimization below is a fixed-small offline MIP with certified absolute
-objective gap at most `1e-9`. The routine executes at most these 25 logical solver
-calls in exactly this order:
+Every scalar optimization below is a fixed-small offline MIP with certified
+absolute objective gap at most `1e-9`. Mixed-radix rank is never used as a raw
+floating-point MIP objective. Each history tie-break instead fixes task codes in
+ascending opaque-handle order: at one handle, test codes
+`0,1,2,DUMMY=3` in that order under the already frozen optimality/regret
+constraints, permanently fix the first certified-feasible code, and continue to
+the next handle. At most four certified feasibility solves are counted per handle.
+This exact prefix construction returns the same lexicographically minimum history
+as minimizing `rank(p)` but avoids a large-integer objective and any dependence on
+an absolute dual-gap tolerance for rank.
+
+The routine executes these stages in exactly this order:
 
 1. Calls 1--4 compute `S_star^v=max_p S_pre^v(p)` in fixed variant order
    `FIXED-SEPARABLE`, `FIXED-COUPLED`, `REAL-SEPARABLE`, `REAL-COUPLED`.
-2. Call 5 minimizes `Delta(p)=max_v(S_star^v-S_pre^v(p))` over one shared history
-   and records the certified optimum `Delta_star`. This call has no post-event
-   assignment or treatment arm.
-3. Call 6 jointly chooses one shared history `p` and one all-survivors-kept
-   post-event assignment per variant, subject to
-   `Delta(p)<=Delta_star+0.02`, and maximizes their minimum physical return `t_K`.
-   Call 7 repeats those constraints with `t_K>=t_K_star-1e-9` and minimizes
-   `rank(p)`; its unique history is `p_KEEP`.
-4. Call 8 chooses one shared history `p` that satisfies the same shared-regret
-   bound and differs from `p_KEEP` on at least one survivor, minimizing
-   `q_W=max_v Q^v(p)`. Call 9 repeats with `q_W<=q_W_star+1e-9` and minimizes
-   `rank(p)`; its unique history is `p_SWITCH`.
-5. Calls 10--25, in the same fixed variant order, compute exactly
+2. Call 5 jointly chooses one shared history and one all-survivors-kept post-event
+   assignment per variant, with every survivor's old role either `DUMMY` or a
+   positive post-event capability, and maximizes their minimum physical return
+   `t_K`; record `t_K_star`.
+3. Call 6 minimizes `Delta(p)` subject to the same feasibility law and
+   `t_K(p)>=t_K_star-0.01`; record `Delta_K_star`. Apply the exact prefix
+   feasibility construction under
+   `t_K(p)>=t_K_star-0.01` and
+   `Delta(p)<=Delta_K_star+0.02`; its unique history is `p_KEEP`.
+4. Call 7 chooses one locally feasible shared history different from `p_KEEP` on
+   at least one survivor and minimizes `q_W=max_v Q^v(p)`; record `q_W_star`.
+   Call 8 minimizes `Delta(p)` under
+   `q_W(p)<=q_W_star+1e-9`; record `Delta_S_star`. Apply the exact prefix
+   feasibility construction under that q-bound and
+   `Delta(p)<=Delta_S_star+0.02`; its unique history is `p_SWITCH`.
+5. Calls 9--24, in the same fixed variant order, compute exactly
    `R^v(p_KEEP)`, `K^v(p_KEEP)`, `R^v(p_SWITCH)`, and `K^v(p_SWITCH)`.
 
 The shared history pair qualifies only if, for every variant,
 
-- both histories satisfy `Delta(p)<=Delta_star+0.02`;
+- `p_KEEP` satisfies its registered `t_K` and `Delta_K_star` bounds;
+- `p_SWITCH` satisfies its registered `q_W` and `Delta_S_star` bounds;
 - every survivor's old role is `DUMMY` or has positive post-event capability;
 - `R^v(p_KEEP)-K^v(p_KEEP)<=0.01`; and
 - `R^v(p_SWITCH)-K^v(p_SWITCH)>=0.10`.
@@ -718,8 +768,12 @@ training successes or 24 conclusion successes makes that seed-schedule bank
 incomplete: do not train a learned arm and return panel infeasibility before
 scientific activity.
 
-Across both disjoint splits the complete ceiling is 5,120 shared raw bases, 20,480
-derived variant records, and 128,000 certificate-solver calls. The training bank
+For pre-event roster size `|P|`, the routine uses at most `24+8|P|` certified
+solver calls: 24 scalar/return calls plus two tie-breaks of at most `4|P|` calls
+each. Since the registered schedules have `|P|<=18`, this is at most 168 calls per
+raw base. Across both disjoint splits the complete ceiling is therefore 5,120
+shared raw bases, 20,480 derived variant records, and 860,160 certificate-solver
+calls. The training bank
 contains 1,024 retained shared bases, 8,192 physical cell-worlds, and 32,768
 stochastic trials. Every actual call and outcome is recorded inside the 90-minute
 Stage-1 envelope. Certificate objectives and ceiling values define the frozen
@@ -727,7 +781,7 @@ training distribution but are never supplied as observations, labels, rewards,
 actions, or auxiliary losses.
 
 For a retained conclusion success, the eight unrestricted values
-`R^v(p_KEEP)` and `R^v(p_SWITCH)` from calls 10--25 are the retained `RC-MIP`
+`R^v(p_KEEP)` and `R^v(p_SWITCH)` from calls 9--24 are the retained `RC-MIP`
 ceiling outputs and are reused exactly; the 6,144 retained conclusion ceilings are
 a tagged subset of the certificate-call ledger, never additional or recomputed
 solver calls.
@@ -1043,7 +1097,7 @@ lifecycle state.
 ### Serial Stage-2 inference
 
 All Stage-2 algorithms, function classes, optimizer laws, seeds, random
-namespaces, panels, estimands, margins, and tests in this v7 composite are frozen
+namespaces, panels, estimands, margins, and tests in this v8 composite are frozen
 before Stage-1 activity. Their potential outputs are mathematically defined even
 when Stage 2 is not executed. Let `A1` be the complete seven-condition Stage-1
 release event and let `A2_pressure` and `A2_lease` be the complete corresponding
@@ -1180,14 +1234,21 @@ response is itself required for activity.
     the joint log probability by latent count, or replication of one team return
     changes the treatment. A positive result cannot rescue that credit-path defect.
 15. Exceeding 96 training or 64 conclusion shared raw bases per seed-schedule, or
-    25 logical certificate-solver calls per raw base, using variant-specific
+    `24+8|P|` (at most 168) certified solver calls per raw base, using a numerical
+    rank objective instead of exact prefix feasibility, using variant-specific
     histories or retention, relaxing a certificate, or topping up a bank from
     Stage-1 arm/intervention outcomes changes the target law. Missing joint-
     certified bases make the split incomplete; they may not be repaired after
     viewing results.
-16. Equivalence is claimed only by the registered 90% interval rule. All other
+16. V8 is the last panel-law attempt on this constructed host. If the frozen
+    certificate-only feasibility probe cannot retain 32 training and 24
+    conclusion successes in every registered seed-schedule bank, do not change a
+    matrix, tolerance, history sharing, semantic objective, raw cap, or threshold
+    and do not freeze v9. End this B3 panel law and retain the learned-bid/SP-RDA
+    family only for a new host with naturally feasible lifecycle histories.
+17. Equivalence is claimed only by the registered 90% interval rule. All other
     imprecise effects remain unresolved.
-17. If the analytic complexity guards pass but a registered practical latency or
+18. If the analytic complexity guards pass but a registered practical latency or
     memory-scaling gate fails, the statistical effect remains reportable but Stage
     2 and the kinematic/UAV bridge are not released. Faster hardware, batching, an
     exact fallback, or an unregistered pruning rule cannot rescue it.
@@ -1207,12 +1268,13 @@ bid-association cut, exact ceiling, equal-mass geometry pairs, fixed-mass
 above-range panel, and paired keep/switch construction bound those explanations
 without eliminating host specificity.
 
-V7 adds a sharper alternative: value may be specific to histories selected as the
-best shared minimax-regret compromise across four deliberately crossed capability
-variants, rather than histories generated by an operational pre-churn allocation
-policy. The experiment may identify learned value conditional on that target law;
-it cannot claim that the history law itself is operationally optimal in any one
-variant or representative of deployed fleet history.
+V8 adds a sharper alternative: value may be specific to histories selected by two
+class-conditional lexicographic constructions—near-best worst-variant kept return
+for KEEP and minimum survivor retained coverage for SWITCH—followed by pre-service
+regret minimization, rather than histories generated by an operational pre-churn
+allocation policy. The experiment may identify learned value conditional on that
+target law; it cannot claim that either history class is pre-service optimal in
+any variant or representative of deployed fleet history.
 
 ## Claim ceiling and bridge
 
@@ -1234,17 +1296,17 @@ The maximum Stage-1 positive claim is:
 > registered control/intervention at the required contested-world rates, and the
 > complete decision procedures passed the registered operation, machine-word
 > memory, total-RSS, and latency gates. The underlying raw bases and history pairs
-> were jointly certified under the shared minimax-regret pre-service benchmark
-> across both mass regimes and both geometries before learning, but the primary
-> superiority claim itself is restricted to coupled geometry and this robust-
-> compromise-conditioned history distribution.
+> were jointly certified under the class-conditional robust-compromise history
+> law across both mass regimes and both geometries before learning, but the
+> primary superiority claim itself is restricted to coupled geometry and this
+> constructed history distribution.
 
 Equivalently, the maximum causal interpretation is finite-budget value of nonzero,
 correctly agent-associated learned bid vectors through the exact common SP-RDA,
 relative to the named fixed priority rules and interventions, on the registered
 coupled `N=15` aggregate panel, with a separately supported fixed-mass and churn-
 necessity result only against `HANDOFF-RDA`. The Stage-1 release does not establish
-that the selected shared histories are individually near-optimal or representative
+that the selected shared histories are individually pre-service near-optimal or representative
 of an operational pre-event allocator. It does not establish
 fixed-mass superiority over `ZERO-RDA`, `FROZEN-RDA`, or `G-PERMUTE` separately.
 It does not establish superiority in `SEPARABLE` geometry. A separable-versus-
@@ -1308,22 +1370,66 @@ UAV graph is also a stop. Changing to an unrelated planner, reward-shaped edge
 score, stable-slot identity embedding, per-size model, dense pairwise path, or
 exact fallback silently replaces the scientific object.
 
-## Root-to-CM Stage-1 packet
+## Consumed Root-to-CM v8 pre-Pro certificate-feasibility packet
 
-This conditional packet becomes available to Root only after the existing
-same-direction ChatGPT Pro conversation returns `CLOSED` on this exact revision
-and the scientific owner records its intake. Until then no CM conformance or
-production release is authorized. The conditional exact handoff is:
+This exact packet was consumed once in a deterministic, zero-metric,
+certificate-only proof. It was not Stage-1 construction or production and did
+not initialize, train, evaluate, time, or execute any treatment/comparator arm:
+
+> Implement only the frozen v8 raw generator and certificate routine from this
+> card, revision `SP-RDA-MATH-CLOSURE-20260812-08`. Preserve every capability
+> matrix, seed, schedule, counter key, raw cap, task order, history-sharing rule,
+> `0.01` KEEP gap, `0.10` SWITCH gap, `0.01` near-best kept-return class,
+> `0.02` within-class regret slack, and `1e-9` scalar objective tolerance.
+> Implement mixed-radix selection only through the exact prefix-feasibility law;
+> never use the raw rank as a floating-point MIP objective. Scan every registered
+> training and conclusion seed-schedule bank in its frozen raw-index order, stop
+> at the bank's cap, and record retained-success count plus the first failure
+> predicate for every miss. Pass only if every training bank retains at least 32
+> successes within 96 raw bases and every conclusion bank retains at least 24
+> successes within 64. Use at most `24+8|P|<=168` certified calls per raw base,
+> 5,120 raw bases, 20,480 derived variants, and 860,160 calls total. Run no model,
+> policy arm, physical evaluation panel, return contrast, timing audit, Stage 1,
+> Stage 2, B1/B2 change, or Git action. Return the exact bank counts, actual call
+> count, proof anomalies, wall time, and peak RSS to Root for same-owner intake.
+> The proof itself must fit the frozen Stage-1 ceiling of 90 minutes and 2 GiB; a
+> projection or observation beyond either bound makes this panel law resource-
+> nonviable and is not permission to widen the envelope.
+
+If any bank is incomplete, this final v8 panel law ends without a treatment
+result; no v9, tolerance change, matrix change, semantic-objective change,
+variant-specific history, extra raw index, or top-up is allowed. If every bank is
+complete, do not launch: return the proof only so this owner can freeze the full
+same-conversation v8 Pro requester. The feasibility proof cannot substitute for
+Pro mathematical closure or later CM technical acceptance.
+
+The first required bank was incomplete: `(1601, training schedule 0, 6->9)`
+retained `0/96` raw candidates against 32 required, with all 96 first failing the
+unchanged KEEP `R-K<=0.01` predicate after the KEEP-first/SWITCH-first, regret-
+slack, and exact-prefix steps succeeded. The universal all-bank condition was
+therefore false. Per this packet's frozen stop, the remaining 63 bank rows are
+`not_evaluated_after_first_terminal_bank`; they are neither successes nor
+additional failures. The packet is exhausted and may not be rerun or widened.
+
+## Historical conditional Root-to-CM Stage-1 packet (never activated)
+
+This conditional packet would have become available to Root only after a full
+v8 bank pass followed by `CLOSED` in the existing same-direction ChatGPT Pro
+conversation and owner intake. The bank prerequisite failed, so no v8 Pro
+request exists and this packet can never activate for the current host/panel.
+It is retained below only as the frozen, counterfactual handoff; no CM
+conformance, construction, production, or training action is authorized:
 
 > Construct `VNFC-B3-SCALABLE-REWARD-SOURCE-CUT-v1` from
 > `docs/research/candidates/variable_n_fleet_churn/VNFC_SCALABLE_REWARD_SOURCE_CUT_SCIENCE_CARD.md`.
-> Use prospective revision `SP-RDA-MATH-CLOSURE-20260812-07`.
+> Use prospective revision `SP-RDA-MATH-CLOSURE-20260812-08`.
 > `SP-RDA-COMPLEXITY-CORRECTION-20260812-01`,
 > `SP-RDA-MATH-CLOSURE-20260812-02`,
 > `SP-RDA-MATH-CLOSURE-20260812-03`,
 > `SP-RDA-MATH-CLOSURE-20260812-04`,
 > `SP-RDA-MATH-CLOSURE-20260812-05`,
-> `SP-RDA-MATH-CLOSURE-20260812-06`, and the prior CM production acceptance are
+> `SP-RDA-MATH-CLOSURE-20260812-06`,
+> `SP-RDA-MATH-CLOSURE-20260812-07`, and the prior CM production acceptance are
 > superseded; preserve the allocator complexity proof but do not launch or accept
 > production against either old composite. Implement the
 > isolated paired generator, three-tick handoff host, strong task-to-agent
@@ -1336,18 +1442,20 @@ production release is authorized. The conditional exact handoff is:
 > unassigned agents to `DUMMY`. Implement the offline `RC-MIP` ceiling separately;
 > it may never supply an edge, key, label, action, fallback, or training signal.
 > Before learned training, derive all four mass/geometry variants and execute the
-> exact 25-call shared-history certificate routine for shared raw bases in ascending
-> counter-keyed order. Compute four variant-specific `S_star` values, then the
-> minimum attainable shared worst-variant regret `Delta_star`; require both shared
-> histories to satisfy `Delta(p)<=Delta_star+0.02`. Do not substitute the
-> infeasible v6 requirement that one shared history lie within `0.02` of every
-> separate variant optimum. In each seed and training schedule, scan at most 96 and
+> exact v8 class-conditional robust-history routine for shared raw bases in
+> ascending counter-keyed order. For KEEP, maximize worst-variant all-kept return,
+> retain its `0.01` near-best class, minimize worst pre-service regret inside that
+> class, allow `0.02` regret slack, then exact-prefix tie-break. For SWITCH,
+> minimize worst-variant survivor retained coverage, minimize pre-service regret
+> inside its exact-optimum class, allow `0.02` regret slack, then exact-prefix tie-
+> break. Never use a numerical mixed-radix objective or the infeasible v6/v7
+> global robust-history laws. In each seed and training schedule, scan at most 96 and
 > retain the first 32 joint successes; use retained base `u` at update `u` with four
 > stochastic action replicas per cell. In each seed and conclusion schedule, scan
 > at most 64 and retain the first 24 joint successes. Never restart, relax, use
 > variant-specific histories/retention, select with a Stage-1 arm/intervention, or
 > top up. An incomplete seed-schedule returns preactivity bank infeasibility. Across
-> both splits record at most 5,120 raw bases, 20,480 variant records, and 128,000
+> both splits record at most 5,120 raw bases, 20,480 variant records, and 860,160
 > certificate-solver calls. Tag the 6,144 retained conclusion ceiling outputs
 > inside that ledger; do not recompute or double-count them. Never expose any
 > certificate scalar, label, solver metadata, optimizing post-event assignment,
