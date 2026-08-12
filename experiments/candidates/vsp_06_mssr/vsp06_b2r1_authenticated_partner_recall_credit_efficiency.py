@@ -11,6 +11,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import hashlib
+import importlib.metadata
+import io
 import json
 import math
 import os
@@ -133,14 +135,30 @@ def validate_stage2_authorization(value: Mapping[str, Any]) -> None:
     required = set(from_ids) | {
         "final_commit", "source_build_read_allowlist", "source_config_digest_map",
         "source_config_digest_map_sha256", "zero_start_activity",
+        "full_environment_receipt_path", "full_environment_receipt_sha256",
     }
     if not isinstance(value, Mapping) or set(value) != required or any(value.get(k) != v for k, v in from_ids.items()):
         raise B2ContractError("missing or invalid Stage-2 authorization binding")
     commit = value.get("final_commit")
     if not isinstance(commit, str) or len(commit) != 40 or any(c not in "0123456789abcdef" for c in commit):
         raise B2ContractError("invalid Stage-2 final commit binding")
-    if not isinstance(value.get("source_build_read_allowlist"), list) or not value["source_build_read_allowlist"] or value.get("zero_start_activity") != ACTIVITY_COUNTERS:
+    activity = value.get("zero_start_activity")
+    if (
+        not isinstance(value.get("source_build_read_allowlist"), list)
+        or not value["source_build_read_allowlist"]
+        or not isinstance(activity, Mapping) or set(activity) != set(ACTIVITY_COUNTERS)
+        or any(not isinstance(item, int) or isinstance(item, bool) or item != 0 for item in activity.values())
+    ):
         raise B2ContractError("invalid Stage-2 allowlist or zero-start binding")
+    environment_path = value.get("full_environment_receipt_path")
+    environment_digest = value.get("full_environment_receipt_sha256")
+    if (
+        not isinstance(environment_path, str) or not Path(environment_path).is_absolute()
+        or ".." in Path(environment_path).parts or any(char in environment_path for char in "*?[")
+        or not isinstance(environment_digest, str) or len(environment_digest) != 64
+        or any(char not in "0123456789abcdef" for char in environment_digest)
+    ):
+        raise B2ContractError("invalid external full-environment receipt anchor")
     digest_map = value.get("source_config_digest_map")
     digest_map_digest = value.get("source_config_digest_map_sha256")
     if (
@@ -189,16 +207,81 @@ class B2ContractError(RuntimeError):
 
 
 _STAGE2_RUNTIME_AUTHORIZED = False
+_BOUND_FULL_ENVIRONMENT: tuple[Mapping[str, Any], Mapping[str, Any]] | None = None
 
 
 def _torch() -> Any:
-    if not _STAGE2_RUNTIME_AUTHORIZED:
+    if not _STAGE2_RUNTIME_AUTHORIZED or _BOUND_FULL_ENVIRONMENT is None:
         raise B2ContractError("Torch/model/RNG activity requires validated Stage-2 full authorization")
     try:
         import torch
     except ImportError as exc:
         raise B2ContractError("PyTorch is required only for learner/full execution") from exc
+    authorization, receipt = _BOUND_FULL_ENVIRONMENT
+    _validate_live_torch(torch, authorization, receipt)
     return torch
+
+
+def _validate_live_torch(
+    torch: Any, authorization: Mapping[str, Any], receipt: Mapping[str, Any],
+) -> None:
+    from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
+
+    try:
+        distribution = importlib.metadata.distribution("torch")
+    except importlib.metadata.PackageNotFoundError as exc:
+        raise B2ContractError("torch==2.7.0 distribution is absent") from exc
+    artifacts = []
+    inventory = sorted(str(item) for item in (distribution.files or ()))
+    for item in sorted(distribution.files or (), key=lambda entry: str(entry)):
+        if Path(str(item)).suffix.lower() not in {".pyd", ".so", ".dll"}:
+            continue
+        artifact = selector.authorize_read_path(
+            authorization, Path(distribution.locate_file(item)).resolve()
+        )
+        artifacts.append([str(artifact), selector.sha256_authorized_file(authorization, artifact)])
+    actual = {
+        "torch_distribution_version": distribution.version,
+        "torch_build_version": str(torch.__version__),
+        "torch_cpu_only": getattr(torch.version, "cuda", None) is None,
+        "torch_cuda_version": getattr(torch.version, "cuda", None),
+        "torch_cuda_available": bool(torch.cuda.is_available()),
+        "torch_deterministic_algorithms": bool(torch.are_deterministic_algorithms_enabled()),
+        "torch_deterministic_warn_only": bool(torch.is_deterministic_algorithms_warn_only_enabled()),
+        "torch_num_threads": int(torch.get_num_threads()),
+        "torch_num_interop_threads": int(torch.get_num_interop_threads()),
+        "torch_native_artifacts": artifacts,
+        "torch_native_artifact_set_sha256": selector.sha256_bytes(selector._canonical_json_bytes(artifacts)),
+        "torch_distribution_inventory_sha256": selector.sha256_bytes(
+            selector._canonical_json_bytes(inventory)
+        ),
+        "torch_build_config_sha256": selector.sha256_bytes(
+            str(torch.__config__.show()).encode("utf-8")
+        ),
+        "thread_environment": {name: os.environ.get(name) for name in selector.THREAD_ENVIRONMENT},
+    }
+    if (
+        distribution.version != selector.REQUIRED_TORCH
+        or str(torch.__version__).split("+", 1)[0] != selector.REQUIRED_TORCH
+        or not artifacts
+        or any(receipt.get(name) != value for name, value in actual.items())
+    ):
+        raise B2ContractError("live CPU-only Torch build/determinism/thread binding differs from external receipt")
+
+
+def bind_full_environment(
+    authorization: Mapping[str, Any], receipt: Mapping[str, Any],
+) -> None:
+    """Bind the exact CPU-only Torch environment before catalog/manifest observation."""
+
+    global _BOUND_FULL_ENVIRONMENT
+    validate_stage2_authorization(authorization)
+    try:
+        import torch
+    except ImportError as exc:
+        raise B2ContractError("PyTorch is required for full-environment readiness") from exc
+    _validate_live_torch(torch, authorization, receipt)
+    _BOUND_FULL_ENVIRONMENT = (authorization, dict(receipt))
 
 
 def _json_bytes(value: Any) -> bytes:
@@ -487,9 +570,24 @@ def paired_models(seed_row: str) -> tuple[Any, Any]:
     return candidate, generic
 
 
-def tensor_batch(specs: Sequence[EpisodeSpec]) -> tuple[Any, Any, Any, Any, list[ToyEpisode]]:
+def tensor_batch(
+    specs: Sequence[EpisodeSpec], *, activity: dict[str, int] | None = None,
+    lifecycle_activity: dict[str, int] | None = None,
+    count_environment: bool = False,
+) -> tuple[Any, Any, Any, Any, list[ToyEpisode]]:
     torch = _torch()
-    episodes = [AuthenticatedPartnerRecallRelay().build(spec) for spec in specs]
+    episodes = []
+    for spec in specs:
+        episode = AuthenticatedPartnerRecallRelay().build(spec)
+        episodes.append(episode)
+        if count_environment:
+            if activity is None or lifecycle_activity is None:
+                raise B2ContractError("environment accounting target is absent")
+            _increment_activity(activity, lifecycle_activity, "environment_episodes")
+            _increment_activity(
+                activity, lifecycle_activity, "environment_transitions",
+                len(episode.steps),
+            )
     lengths = {len(episode.steps) for episode in episodes}
     if len(lengths) != 1:
         raise B2ContractError("one PPO batch must have a common complete trajectory length")
@@ -500,19 +598,33 @@ def tensor_batch(specs: Sequence[EpisodeSpec]) -> tuple[Any, Any, Any, Any, list
     return observations, writes, resets, targets, episodes
 
 
-def ppo_complete_batch(model: Any, optimizer: Any, specs: Sequence[EpisodeSpec], action_seed: int) -> dict[str, float]:
+def ppo_complete_batch(
+    model: Any, optimizer: Any, specs: Sequence[EpisodeSpec], action_seed: int,
+    *, activity: dict[str, int], lifecycle_activity: dict[str, int],
+) -> dict[str, float]:
     """Four PPO epochs, recomputing each complete recurrent trajectory."""
 
     torch = _torch()
     if len(specs) != EPISODES_PER_BATCH:
         raise B2ContractError("PPO accepts only one complete 128-episode batch")
-    observations, writes, resets, targets, _episodes = tensor_batch(specs)
+    observations, writes, resets, targets, episodes = tensor_batch(
+        specs, activity=activity, lifecycle_activity=lifecycle_activity,
+        count_environment=True,
+    )
+    transition_count = sum(len(episode.steps) for episode in episodes)
     generator = torch.Generator(device="cpu")
     generator.manual_seed(int(action_seed))
     with torch.no_grad():
         old_logits, old_values, _ = model.episode(observations, writes, resets)
+        _increment_activity(
+            activity, lifecycle_activity, "production_policy_forwards",
+            transition_count,
+        )
         probabilities = torch.softmax(old_logits, dim=-1)
         actions = torch.multinomial(probabilities, 1, generator=generator).squeeze(-1)
+        _increment_activity(
+            activity, lifecycle_activity, "action_rng_draws", len(specs)
+        )
         rewards = torch.where(actions == targets, 1.0, -1.0)
         old_log_prob = torch.log_softmax(old_logits, dim=-1).gather(1, actions[:, None]).squeeze(1)
         advantages = rewards - old_values
@@ -533,7 +645,9 @@ def ppo_complete_batch(model: Any, optimizer: Any, specs: Sequence[EpisodeSpec],
         optimizer.zero_grad(set_to_none=True)
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), PPO["max_gradient_norm"])
-        optimizer.step()
+        _optimizer_step_with_accounting(
+            optimizer, activity, lifecycle_activity
+        )
         last = {"loss": float(loss.detach()), "policy_loss": float(policy_loss.detach()), "value_loss": float(value_loss.detach()), "entropy": float(entropy.detach())}
     return last
 
@@ -650,10 +764,14 @@ def _raw_row(
     }
 
 
-def canonical_universe_spec(stage2_authorization: Mapping[str, Any]) -> dict[str, Any]:
+def canonical_universe_spec(
+    stage2_authorization: Mapping[str, Any], *, claim_continuation: object,
+) -> dict[str, Any]:
     """Return the compact declarative recipe, never the emitted catalog rows."""
 
     validate_stage2_authorization(stage2_authorization)
+    from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
+    selector.validate_claim_continuation(stage2_authorization, claim_continuation)
     primary = ["primary_1", "primary_2", "primary_3", "primary_4"]
     return {
         "universe_id": UNIVERSE_SPEC_ID,
@@ -710,11 +828,16 @@ def canonical_universe_spec(stage2_authorization: Mapping[str, Any]) -> dict[str
     }
 
 
-def canonical_catalog_rows(stage2_authorization: Mapping[str, Any]) -> Iterator[dict[str, Any]]:
+def canonical_catalog_rows(
+    stage2_authorization: Mapping[str, Any], *, catalog_capability: object,
+) -> Iterator[dict[str, Any]]:
     validate_stage2_authorization(stage2_authorization)
     """Enumerate the frozen catalog; callers must never use it to tune CP-SAT."""
 
     from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
+    selector.validate_catalog_generation_capability(
+        stage2_authorization, catalog_capability
+    )
 
     def emit_pool(consumer: str, seed: str, panel: str, branch: str, length: int, y: int, target: int, split: str) -> Iterator[dict[str, Any]]:
         # The fixed source pool is deliberately overcomplete.  Bucket filtering
@@ -740,14 +863,22 @@ def canonical_catalog_rows(stage2_authorization: Mapping[str, Any]) -> Iterator[
             for branch, per_y in (("KEEP", 16), ("RESET", 8), ("CURRENT", 8)):
                 for y in ACTIONS:
                     yield from emit_pool("checkpoint", seed, panel, branch, 6, y, per_y, "evaluation")
-        yield from canonical_final_keep_rows(seed, stage2_authorization)
+        yield from canonical_final_keep_rows(
+            seed, stage2_authorization, catalog_capability=catalog_capability
+        )
 
 
-def canonical_final_keep_rows(seed: str, stage2_authorization: Mapping[str, Any]) -> Iterator[dict[str, Any]]:
+def canonical_final_keep_rows(
+    seed: str, stage2_authorization: Mapping[str, Any], *,
+    catalog_capability: object,
+) -> Iterator[dict[str, Any]]:
     validate_stage2_authorization(stage2_authorization)
     """Generate one seed's balanced source-level final-KEEP support."""
 
     from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
+    selector.validate_catalog_generation_capability(
+        stage2_authorization, catalog_capability
+    )
 
     if seed not in {"primary_1", "primary_2", "primary_3", "primary_4"}:
         raise B2ContractError("final-KEEP support requires a primary seed")
@@ -849,6 +980,9 @@ class ManifestGate:
         self.reload("preclaim")
         receipt = selector.authorized_json(stage2_authorization, self.selector_receipt_path)
         selector.validate_selector_receipt_schema(receipt)
+        self.selector_activity_counts = selector.validate_activity_counts(
+            receipt.get("activity_counts")
+        )
         report = selector.authorized_json(stage2_authorization, self.verifier_report_path)
         bindings = selector.authorized_json(stage2_authorization, canonical["bindings"])
         witness = selector.authorized_json(stage2_authorization, canonical["witness"])
@@ -896,6 +1030,8 @@ class ManifestGate:
             or report.get("solver_artifact_set_sha256") != expected.get("solver_artifact_set_sha256")
             or report.get("sat_parameters_sha256") != expected.get("sat_parameters_sha256")
             or report.get("python_executable_sha256") != expected.get("python_executable_sha256")
+            or report.get("full_environment_receipt_sha256")
+            != expected.get("full_environment_receipt_sha256")
             or report.get("verifier_source_sha256") != expected.get("verifier_source_sha256")
             or report.get("membership_witness_sha256") != selector.sha256_authorized_file(stage2_authorization, canonical["witness"])
             or report.get("membership_vector_sha256") != witness.get("membership_vector_sha256")
@@ -918,13 +1054,22 @@ class ManifestGate:
         sealed_objects = receipt.get("sealed_objects")
         if (
             not isinstance(sealed_schema, Mapping)
-            or sealed_schema != selector._sealed_path_schema(canonical)
+            or not isinstance(sealed_schema.get("stage2_authorization"), str)
+            or sealed_schema != selector._sealed_path_schema(
+                canonical,
+                authorization_path=Path(sealed_schema["stage2_authorization"]),
+                authorization=stage2_authorization,
+            )
             or receipt.get("sealed_path_schema") != sealed_schema
             or receipt.get("sealed_path_schema_sha256") != _digest(sealed_schema)
             or not isinstance(sealed_objects, Mapping)
-            or set(sealed_objects) != set(sealed_schema) - {"receipt"}
+            or set(sealed_objects) != set(selector.SELECTOR_SEALED_OBJECT_NAMES)
             or receipt.get("receipt_path") != sealed_schema.get("receipt")
             or receipt.get("receipt_self_digest_is_external") is not True
+            or receipt.get("full_environment_receipt_path")
+            != stage2_authorization["full_environment_receipt_path"]
+            or receipt.get("full_environment_receipt_sha256")
+            != stage2_authorization["full_environment_receipt_sha256"]
         ):
             raise B2ContractError("complete sealed-object path schema mismatch")
         for name, item in sealed_objects.items():
@@ -1002,6 +1147,40 @@ def _activity_template() -> dict[str, int]:
     }
 
 
+_SCIENTIFIC_TO_LIFECYCLE = {
+    "model_fits": "model_fits", "trainer_invocations": "trainer_calls",
+    "environment_episodes": "environment_episodes",
+    "environment_transitions": "environment_transitions",
+    "production_policy_forwards": "policy_forwards",
+    "learner_updates": "learner_updates", "optimizer_steps": "optimizer_steps",
+    "evaluator_calls": "evaluator_calls", "evaluation_episodes": "evaluation_episodes",
+    "environment_rng_draws": "environment_rng_calls",
+    "action_rng_draws": "action_rng_calls",
+}
+
+
+def _increment_activity(
+    scientific: dict[str, int], lifecycle: dict[str, int],
+    name: str, amount: int = 1,
+) -> None:
+    if not isinstance(amount, int) or isinstance(amount, bool) or amount < 0:
+        raise B2ContractError("activity increment is invalid")
+    scientific[name] += amount
+    lifecycle_name = _SCIENTIFIC_TO_LIFECYCLE.get(name)
+    if lifecycle_name is not None:
+        lifecycle[lifecycle_name] += amount
+
+
+def _optimizer_step_with_accounting(
+    optimizer: Any, scientific: dict[str, int], lifecycle: dict[str, int],
+) -> None:
+    """Count only optimizer/learner steps that actually returned successfully."""
+
+    optimizer.step()
+    _increment_activity(scientific, lifecycle, "learner_updates")
+    _increment_activity(scientific, lifecycle, "optimizer_steps")
+
+
 def _training_batches(specs: Sequence[EpisodeSpec], seed: int) -> list[list[EpisodeSpec]]:
     by_length: dict[int, list[EpisodeSpec]] = {}
     for spec in specs:
@@ -1031,52 +1210,47 @@ def _new_optimizer(model: Any) -> Any:
 
 def _fit(
     *, model: Any, specs: Sequence[EpisodeSpec], seed_row: str, arm: str,
-    gate: ManifestGate, activity: dict[str, int], stop_after_batches: int | None = None,
+    gate: ManifestGate, activity: dict[str, int], lifecycle_activity: dict[str, int],
+    stop_after_batches: int | None = None,
 ) -> tuple[list[dict[str, float]], list[list[EpisodeSpec]]]:
     gate.reload(f"fit/{seed_row}/{arm}")
     batches = _training_batches(specs, SEEDS[seed_row]["minibatch"])
     if stop_after_batches is not None:
         batches = batches[:stop_after_batches]
-    activity["model_fits"] += 1
-    activity["trainer_invocations"] += 1
+    _increment_activity(activity, lifecycle_activity, "model_fits")
+    _increment_activity(activity, lifecycle_activity, "trainer_invocations")
     optimizer = _new_optimizer(model)
     losses = []
     for batch_index, batch in enumerate(batches):
         losses.append(ppo_complete_batch(
             model, optimizer, batch,
             SEEDS[seed_row]["environment"] + batch_index,
+            activity=activity, lifecycle_activity=lifecycle_activity,
         ))
-        transitions = sum(len(AuthenticatedPartnerRecallRelay().build(spec).steps) for spec in batch)
-        activity["environment_episodes"] += len(batch)
-        activity["environment_transitions"] += transitions
-        activity["production_policy_forwards"] += transitions
-        activity["action_rng_draws"] += len(batch)
-        activity["learner_updates"] += PPO_EPOCHS
-        activity["optimizer_steps"] += PPO_EPOCHS
     return losses, batches
 
 
 def _continue_fit(
     *, model: Any, optimizer: Any, batches: Sequence[Sequence[EpisodeSpec]],
     seed_row: str, start_index: int, activity: dict[str, int],
+    lifecycle_activity: dict[str, int],
 ) -> list[dict[str, float]]:
     losses = []
     for offset, batch in enumerate(batches):
         index = start_index + offset
         losses.append(ppo_complete_batch(
-            model, optimizer, batch, SEEDS[seed_row]["environment"] + index
+            model, optimizer, batch, SEEDS[seed_row]["environment"] + index,
+            activity=activity, lifecycle_activity=lifecycle_activity,
         ))
-        transitions = sum(len(AuthenticatedPartnerRecallRelay().build(spec).steps) for spec in batch)
-        activity["environment_episodes"] += len(batch)
-        activity["environment_transitions"] += transitions
-        activity["production_policy_forwards"] += transitions
-        activity["action_rng_draws"] += len(batch)
-        activity["learner_updates"] += PPO_EPOCHS
-        activity["optimizer_steps"] += PPO_EPOCHS
     return losses
 
 
-def _write_checkpoint(path: Path, model: Any, metadata: Mapping[str, Any]) -> str:
+def _write_checkpoint(
+    path: Path, model: Any, metadata: Mapping[str, Any],
+    stage2_authorization: Mapping[str, Any],
+) -> str:
+    from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
+
     torch = _torch()
     path.parent.mkdir(parents=True, exist_ok=True)
     try:
@@ -1087,25 +1261,37 @@ def _write_checkpoint(path: Path, model: Any, metadata: Mapping[str, Any]) -> st
         torch.save({"state_dict": model.state_dict(), "metadata": dict(metadata)}, stream)
         stream.flush()
         os.fsync(stream.fileno())
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return hashlib.sha256(
+        selector.authorized_read_bytes(stage2_authorization, path)
+    ).hexdigest()
 
 
-def _reload_checkpoint(path: Path, expected_digest: str, model: Any) -> None:
+def _reload_checkpoint(
+    path: Path, expected_digest: str, model: Any,
+    stage2_authorization: Mapping[str, Any],
+) -> None:
+    from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
+
     torch = _torch()
-    if hashlib.sha256(path.read_bytes()).hexdigest() != expected_digest:
+    payload = selector.authorized_read_bytes(stage2_authorization, path)
+    if hashlib.sha256(payload).hexdigest() != expected_digest:
         raise B2ContractError("checkpoint digest changed")
-    payload = torch.load(path, map_location="cpu", weights_only=False)
-    model.load_state_dict(payload["state_dict"])
+    checkpoint = torch.load(io.BytesIO(payload), map_location="cpu", weights_only=False)
+    model.load_state_dict(checkpoint["state_dict"])
 
 
 def _policy_panel(
     model: Any, specs: Sequence[EpisodeSpec], action_seed: int,
     *, observations: Any | None = None, writes: Any | None = None,
-
     resets: Any | None = None, targets: Any | None = None,
+    activity: dict[str, int], lifecycle_activity: dict[str, int],
+    count_environment: bool = False,
 ) -> dict[str, Any]:
     torch = _torch()
-    base_observations, base_writes, base_resets, base_targets, episodes = tensor_batch(specs)
+    base_observations, base_writes, base_resets, base_targets, episodes = tensor_batch(
+        specs, activity=activity, lifecycle_activity=lifecycle_activity,
+        count_environment=count_environment,
+    )
     observations = base_observations if observations is None else observations
     writes = base_writes if writes is None else writes
     resets = base_resets if resets is None else resets
@@ -1114,8 +1300,16 @@ def _policy_panel(
     generator.manual_seed(int(action_seed))
     with torch.no_grad():
         logits, values, gates = model.episode(observations, writes, resets)
+        transition_count = sum(len(episode.steps) for episode in episodes)
+        _increment_activity(
+            activity, lifecycle_activity, "production_policy_forwards",
+            transition_count,
+        )
         probabilities = torch.softmax(logits, dim=-1)
         actions = torch.multinomial(probabilities, 1, generator=generator).squeeze(-1)
+        _increment_activity(
+            activity, lifecycle_activity, "action_rng_draws", len(specs)
+        )
     correct = actions == targets
     by_branch = {}
     for branch in BRANCHES:
@@ -1131,27 +1325,30 @@ def _policy_panel(
         "gates": gates,
         "targets": targets,
         "historical_targets": torch.tensor([episode.historical_target for episode in episodes], dtype=torch.long),
-        "transition_count": sum(len(episode.steps) for episode in episodes),
+        "transition_count": transition_count,
         "action_seed": int(action_seed),
     }
 
 
 def _evaluate(
     *, model: Any, specs: Sequence[EpisodeSpec], seed_row: str, arm: str,
-    panel: str, gate: ManifestGate, activity: dict[str, int], count_episode: bool = True,
+    panel: str, gate: ManifestGate, activity: dict[str, int],
+    lifecycle_activity: dict[str, int], count_episode: bool = True,
     action_seed: int | None = None,
 ) -> dict[str, Any]:
     gate.reload(f"evaluation/{seed_row}/{arm}/{panel}")
     if action_seed is None:
         action_seed = SEEDS[seed_row]["evaluation"] + int(hashlib.sha256(panel.encode()).hexdigest()[:8], 16)
-    result = _policy_panel(model, specs, action_seed)
     if count_episode:
-        activity["evaluator_calls"] += 1
-        activity["evaluation_episodes"] += len(specs)
-        activity["environment_episodes"] += len(specs)
-        activity["environment_transitions"] += result["transition_count"]
-        activity["action_rng_draws"] += len(specs)
-    activity["production_policy_forwards"] += result["transition_count"]
+        _increment_activity(activity, lifecycle_activity, "evaluator_calls")
+        _increment_activity(
+            activity, lifecycle_activity, "evaluation_episodes", len(specs)
+        )
+    result = _policy_panel(
+        model, specs, action_seed, activity=activity,
+        lifecycle_activity=lifecycle_activity,
+        count_environment=count_episode,
+    )
     return result
 
 
@@ -1255,7 +1452,8 @@ def _control_partitions(
 
 def _controls(
     *, model: Any, final_keep: Sequence[EpisodeSpec], final_panel: Sequence[EpisodeSpec],
-    seed_row: str, gate: ManifestGate, activity: dict[str, int], baseline: Mapping[str, Any],
+    seed_row: str, gate: ManifestGate, activity: dict[str, int],
+    lifecycle_activity: dict[str, int], baseline: Mapping[str, Any],
 ) -> dict[str, float]:
     torch = _torch()
     observations, writes, resets, targets, _episodes = tensor_batch(final_keep)
@@ -1267,6 +1465,7 @@ def _controls(
     selected_zero = _policy_panel(
         model, final_keep, paired_seeds["selected_p_zero"],
         observations=observations, writes=zero_writes, resets=resets, targets=targets,
+        activity=activity, lifecycle_activity=lifecycle_activity,
     )
     current_specs, reset_specs = _control_partitions(
         final_panel, expected_current=32, expected_reset=32,
@@ -1280,6 +1479,7 @@ def _controls(
         model, current_specs, SEEDS[seed_row]["evaluation"] + 102,
         observations=current_observations, writes=rebuild_writes,
         resets=current_resets, targets=current_targets,
+        activity=activity, lifecycle_activity=lifecycle_activity,
     )
     gate.reload(f"controls/{seed_row}/{CANDIDATE_ARM}/cross_swap")
     cross_indices = list(_cross_swap_indices(final_keep, expected_quartets=64))
@@ -1296,6 +1496,7 @@ def _controls(
         model, final_keep, paired_seeds["cross_swap"],
         observations=cross_observations, writes=cross_writes, resets=cross_resets,
         targets=cross_targets,
+        activity=activity, lifecycle_activity=lifecycle_activity,
     )
     gate.reload(f"controls/{seed_row}/{CANDIDATE_ARM}/decoy_replay")
     decoy_observations = observations.clone()
@@ -1304,21 +1505,15 @@ def _controls(
     decoy = _policy_panel(
         model, final_keep, paired_seeds["decoy_accuracy_delta"],
         observations=decoy_observations, writes=writes, resets=resets, targets=targets,
+        activity=activity, lifecycle_activity=lifecycle_activity,
     )
-    for result, cardinality in (
-        (selected_zero, len(final_keep)), (current_rebuild, len(current_specs)),
-        (cross, len(final_keep)), (decoy, len(final_keep)),
-    ):
-        activity["production_policy_forwards"] += result["transition_count"]
-        activity["action_rng_draws"] += cardinality
     baseline_probabilities = baseline["probabilities"]
     tv = 0.5 * torch.abs(baseline_probabilities - decoy["probabilities"]).sum(dim=-1).mean()
     gate.reload(f"controls/{seed_row}/{CANDIDATE_ARM}/reset_stale_target")
     reset_panel = _policy_panel(
-        model, reset_specs, SEEDS[seed_row]["evaluation"] + 105
+        model, reset_specs, SEEDS[seed_row]["evaluation"] + 105,
+        activity=activity, lifecycle_activity=lifecycle_activity,
     )
-    activity["production_policy_forwards"] += reset_panel["transition_count"]
-    activity["action_rng_draws"] += len(reset_specs)
     stale = (reset_panel["actions"] == reset_panel["historical_targets"]).float().mean()
     return {
         "selected_p_mediation": float(baseline["accuracy"] - selected_zero["accuracy"]),
@@ -1352,48 +1547,59 @@ def run_registered_full(
     verifier_report_path: Path, run_root: Path, result_path: Path,
     stage2_authorization: Mapping[str, Any],
     selector_receipt_sha256: str,
+    selector_activity_counts: Mapping[str, Any],
 ) -> dict[str, Any]:
     """Execute the unique manifest-gated full; never called by readiness/tests."""
 
     global _STAGE2_RUNTIME_AUTHORIZED
     validate_stage2_authorization(stage2_authorization)
     from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
+    selector_start_activity = selector.validate_activity_counts(selector_activity_counts)
+    lifecycle_activity = dict(selector_start_activity)
+    _environment_path, environment_receipt = selector.load_full_environment_receipt(
+        stage2_authorization
+    )
+    selector.validate_selector_environment_receipt(
+        stage2_authorization, environment_receipt
+    )
+    bind_full_environment(stage2_authorization, environment_receipt)
     expected_run_root = selector.STAGE2_SESSION_ROOT / "registered_full"
     expected_result = selector.PROJECT_ROOT / "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_AUTHENTICATED_PARTNER_RECALL_CREDIT_EFFICIENCY_RESULT.json"
     if run_root != expected_run_root or result_path != expected_result:
         raise B2ContractError("registered full used an alternate root or result destination")
     if run_root.exists():
         raise B2ContractError("registered full root already exists; overwrite/retry is forbidden")
-    manifest_path = selector.authorize_read_path(stage2_authorization, manifest_path)
-    selector_receipt_path = selector.authorize_read_path(stage2_authorization, selector_receipt_path)
-    verifier_report_path = selector.authorize_read_path(stage2_authorization, verifier_report_path)
-
     if result_path.exists():
         raise B2ContractError("write-once public result already exists")
-    gate = ManifestGate(
-        manifest_path, manifest_content_digest, session_root=session_root,
-        selector_receipt_path=selector_receipt_path,
-        verifier_report_path=verifier_report_path,
-        stage2_authorization=stage2_authorization,
-        selector_receipt_sha256=selector_receipt_sha256,
-    )
-    specs = gate.reload("preclaim_complete_manifest")
     os.mkdir(run_root)
     claim_path = run_root / "registered_full_claim.json"
-    claim = {
-        "treatment": TREATMENT_ID, "full_ordinal": 1,
-        "manifest_file_sha256": gate.file_digest,
-        "manifest_content_sha256": gate.content_digest,
-        "common_two_arm_order_digest": gate.order_digest,
-        "no_retry": True,
-        "sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0,
-        "activity_at_claim": _activity_template(),
-    }
+    claim = selector.exact_claim(stage2_authorization, phase="registered_full")
     selector.write_exclusive(claim_path, _json_bytes(claim) + b"\n")
+    reloaded_claim = selector.authorized_json(stage2_authorization, claim_path)
+    selector.validate_exact_claim(
+        reloaded_claim, stage2_authorization, phase="registered_full"
+    )
     activity = _activity_template()
     checkpoint_receipts: list[dict[str, Any]] = []
     _STAGE2_RUNTIME_AUTHORIZED = True
     try:
+        selector.persist_activity_snapshot(
+            stage2_authorization, selector.stage2_paths(), "full_claim",
+            lifecycle_activity,
+        )
+        manifest_path = selector.authorize_read_path(stage2_authorization, manifest_path)
+        selector_receipt_path = selector.authorize_read_path(stage2_authorization, selector_receipt_path)
+        verifier_report_path = selector.authorize_read_path(stage2_authorization, verifier_report_path)
+        gate = ManifestGate(
+            manifest_path, manifest_content_digest, session_root=session_root,
+            selector_receipt_path=selector_receipt_path,
+            verifier_report_path=verifier_report_path,
+            stage2_authorization=stage2_authorization,
+            selector_receipt_sha256=selector_receipt_sha256,
+        )
+        if gate.selector_activity_counts != lifecycle_activity:
+            raise B2ContractError("full lifecycle was not seeded from durable selector activity")
+        specs = gate.reload("postclaim_complete_manifest")
         by_consumer: dict[str, list[EpisodeSpec]] = {}
         for spec in specs:
             by_consumer.setdefault(spec.consumer, []).append(spec)
@@ -1407,6 +1613,7 @@ def run_registered_full(
             losses, batches = _fit(
                 model=calibration_models[arm], specs=by_consumer["calibration_fit"],
                 seed_row="calibration", arm=arm, gate=gate, activity=activity,
+                lifecycle_activity=lifecycle_activity,
             )
             if len(batches) != 4:
                 raise B2ContractError("calibration fit must contain four complete batches")
@@ -1414,10 +1621,15 @@ def run_registered_full(
                 model=calibration_models[arm], specs=by_consumer["calibration_check"],
                 seed_row="calibration", arm=arm, panel="calibration_check",
                 gate=gate, activity=activity,
+                lifecycle_activity=lifecycle_activity,
             )
             calibration[arm] = {"losses": losses, "check": _public_panel(panel)}
         if abs(calibration[CANDIDATE_ARM]["check"]["accuracy"] - calibration[GENERIC_ARM]["check"]["accuracy"]) > THRESHOLDS["current_arm_aulc_gap"]:
             raise B2ContractError("calibration CURRENT matched-arm gate failed")
+        selector.persist_activity_snapshot(
+            stage2_authorization, selector.stage2_paths(), "full_calibration",
+            lifecycle_activity,
+        )
 
         seed_results: dict[str, Any] = {}
         candidate_aulcs = []
@@ -1434,8 +1646,8 @@ def run_registered_full(
                 raise B2ContractError("primary fit must contain 32 complete batches")
             for arm in ARMS:
                 gate.reload(f"fit/{seed_row}/{arm}")
-                activity["model_fits"] += 1
-                activity["trainer_invocations"] += 1
+                _increment_activity(activity, lifecycle_activity, "model_fits")
+                _increment_activity(activity, lifecycle_activity, "trainer_invocations")
             panels_by_arm = {arm: [] for arm in ARMS}
             losses_by_arm = {arm: [] for arm in ARMS}
             checkpoint_specs_all = [spec for spec in by_consumer["checkpoint"] if spec.seed_row == seed_row]
@@ -1447,6 +1659,7 @@ def run_registered_full(
                         losses_by_arm[arm].extend(_continue_fit(
                             model=models[arm], optimizer=optimizers[arm], batches=interval,
                             seed_row=seed_row, start_index=start, activity=activity,
+                            lifecycle_activity=lifecycle_activity,
                         ))
                 panel_specs = [spec for spec in checkpoint_specs_all if spec.panel == str(checkpoint)]
                 if len(panel_specs) != 128:
@@ -1459,8 +1672,11 @@ def run_registered_full(
                         "manifest_content_sha256": gate.content_digest,
                         "common_two_arm_order_digest": gate.order_digest,
                         "trainable_contract": trainable_contract(models[arm]),
-                    })
-                    _reload_checkpoint(checkpoint_path, checkpoint_digest, models[arm])
+                    }, stage2_authorization)
+                    _reload_checkpoint(
+                        checkpoint_path, checkpoint_digest, models[arm],
+                        stage2_authorization,
+                    )
                     checkpoint_receipts.append({
                         "path": str(checkpoint_path), "sha256": checkpoint_digest,
                         "seed_row": seed_row, "arm": arm, "episodes": checkpoint,
@@ -1468,6 +1684,7 @@ def run_registered_full(
                     panel = _evaluate(
                         model=models[arm], specs=panel_specs, seed_row=seed_row,
                         arm=arm, panel=str(checkpoint), gate=gate, activity=activity,
+                        lifecycle_activity=lifecycle_activity,
                     )
                     panels_by_arm[arm].append(_public_panel(panel))
             final_specs = [spec for spec in by_consumer["final_keep"] if spec.seed_row == seed_row]
@@ -1478,6 +1695,7 @@ def run_registered_full(
                 raw_final[arm] = _evaluate(
                     model=models[arm], specs=final_specs, seed_row=seed_row,
                     arm=arm, panel="4096_keep_extra", gate=gate, activity=activity,
+                    lifecycle_activity=lifecycle_activity,
                     action_seed=control_seeds["baseline"],
                 )
                 final_panels[arm] = _public_panel(raw_final[arm])
@@ -1485,6 +1703,7 @@ def run_registered_full(
                 model=models[CANDIDATE_ARM], final_keep=final_specs,
                 final_panel=[spec for spec in checkpoint_specs_all if spec.panel == "4096"],
                 seed_row=seed_row, gate=gate, activity=activity,
+                lifecycle_activity=lifecycle_activity,
                 baseline=raw_final[CANDIDATE_ARM],
             )
             candidate_curve = [panel["by_branch"]["KEEP"] for panel in panels_by_arm[CANDIDATE_ARM]]
@@ -1505,16 +1724,22 @@ def run_registered_full(
                     "candidate_minus_generic": candidate_aulc - generic_aulc,
                 }, "losses": losses_by_arm,
             }
+            selector.persist_activity_snapshot(
+                stage2_authorization, selector.stage2_paths(),
+                f"full_{seed_row}", lifecycle_activity,
+            )
 
-        if activity != EXPECTED_FULL_ACTIVITY:
-            raise B2ContractError("exact full activity accounting changed")
-        if not _caps_valid(activity):
-            raise B2ContractError("full activity/cap accounting failed")
+        exact_activity = activity == EXPECTED_FULL_ACTIVITY
+        expected_lifecycle = dict(selector_start_activity)
+        for scientific_name, lifecycle_name in _SCIENTIFIC_TO_LIFECYCLE.items():
+            expected_lifecycle[lifecycle_name] += activity[scientific_name]
+        lifecycle_valid = lifecycle_activity == expected_lifecycle
+        caps_valid = _caps_valid(activity)
         evidence = {
-            "contract_valid": True, "activity_nonzero": all(activity[name] > 0 for name in (
+            "contract_valid": exact_activity and lifecycle_valid, "activity_nonzero": all(activity[name] > 0 for name in (
                 "environment_episodes", "production_policy_forwards", "learner_updates",
                 "trainer_invocations", "optimizer_steps", "evaluator_calls")),
-            "caps_valid": True, "paired_exposure": True,
+            "caps_valid": caps_valid, "paired_exposure": True,
             "matched_shapes_counts_state": True, "terminal_ppo_only": True,
             "no_side_channel": True,
             "candidate_minus_generic_keep_aulc": sum(c - g for c, g in zip(candidate_aulcs, generic_aulcs)) / 4.0,
@@ -1530,7 +1755,9 @@ def run_registered_full(
         result = {
             "treatment": TREATMENT_ID, "environment": ENVIRONMENT_ID,
             "branch": branch, "evidence": evidence, "calibration": calibration,
-            "paired_seed_results": seed_results, "activity_counts": activity,
+            "paired_seed_results": seed_results,
+            "activity_counts": dict(lifecycle_activity),
+            "scientific_activity_counts": activity,
             "caps": CAPS, "checkpoints": checkpoint_receipts,
             "manifest": {
                 "path": str(gate.path), "file_sha256": gate.file_digest,
@@ -1547,8 +1774,12 @@ def run_registered_full(
 
         }
         result_path.parent.mkdir(parents=True, exist_ok=True)
+        selector.persist_activity_snapshot(
+            stage2_authorization, selector.stage2_paths(), "full_complete",
+            lifecycle_activity,
+        )
         selector.write_exclusive(result_path, _json_bytes(result) + b"\n")
-        if json.loads(result_path.read_text(encoding="utf-8")) != result:
+        if selector.authorized_json(stage2_authorization, result_path) != result:
             raise B2ContractError("public result reload mismatch")
         result_path.chmod(0o444)
         _STAGE2_RUNTIME_AUTHORIZED = False
@@ -1558,14 +1789,22 @@ def run_registered_full(
         failure = {
             "branch": "B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY",
             "error_type": type(exc).__name__, "error": str(exc),
-            "traceback": traceback.format_exc(), "activity_counts": activity,
+            "traceback": traceback.format_exc(),
+            "activity_counts": dict(lifecycle_activity),
+            "scientific_activity_counts": activity,
             "retry_authorized": False, "rescue_authorized": False,
             "sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0,
         }
         failure_path = run_root / "registered_full_failure.json"
-        if not failure_path.exists():
-            selector.write_exclusive(failure_path, _json_bytes(failure) + b"\n")
-        raise
+        try:
+            if not failure_path.exists():
+                selector.write_exclusive(failure_path, _json_bytes(failure) + b"\n")
+            persisted = selector.authorized_json(stage2_authorization, failure_path)
+            if persisted == failure:
+                return dict(persisted)
+        except Exception:
+            pass
+        return failure
 
 
 __all__ = [

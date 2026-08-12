@@ -1,8 +1,10 @@
 from __future__ import annotations
+import argparse
 import ast
 import copy
 import hashlib
 import importlib.util
+import io
 import inspect
 import json
 import math
@@ -36,12 +38,37 @@ def authorization(paths: list[str] | None = None) -> dict[str, object]:
     digest_map_sha256=hashlib.sha256(json.dumps(
         digest_map,sort_keys=True,separators=(",",":"),ensure_ascii=False,allow_nan=False
     ).encode("utf-8")).hexdigest()
+    environment_path=SOURCE_PATHS[0]
     return {"direction":"CAND-VSP-06-MSSR","candidate":"CAND-VSP-06-MSSR@adversarial-revision-v8",
             "treatment_id":selector.TREATMENT_ID,"selector_id":selector.SELECTOR_ID,"verifier_id":selector.VERIFIER_ID,
             "scientific_parent":"898af9e848ce45f3510560a96ae454651a9f0736","final_commit":"a"*40,
             "source_build_read_allowlist":paths or [str(SOURCE_PATHS[0])],"formal":False,"synthetic_only":False,
             "source_config_digest_map":digest_map,"source_config_digest_map_sha256":digest_map_sha256,
-            "zero_start_activity":dict(toy.ACTIVITY_COUNTERS)}
+            "zero_start_activity":dict(toy.ACTIVITY_COUNTERS),
+            "full_environment_receipt_path":str(environment_path),
+            "full_environment_receipt_sha256":hashlib.sha256(environment_path.read_bytes()).hexdigest()}
+
+def full_environment_receipt(artifact: Path) -> dict[str, object]:
+    native=[[str(artifact.resolve()),hashlib.sha256(artifact.read_bytes()).hexdigest()]]
+    digest=hashlib.sha256(json.dumps(native,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()).hexdigest()
+    return {
+        "schema_version":1,"python_implementation":"CPython","python_version":"3.11.0",
+        "python_executable":str(artifact.resolve()),"python_executable_sha256":native[0][1],
+        "ortools_version":"9.12.4544","ortools_source_tag":"v9.12",
+        "solver_artifacts":native,"solver_artifact_set_sha256":digest,
+        "sat_parameters_sha256":"0"*64,"sat_parameters_hex":"00",
+        "sat_parameter_assignments":dict(selector.PARAMETER_ASSIGNMENTS),
+        "sat_parameter_assignments_sha256":"1"*64,"os":"Windows","os_release":"test",
+        "architecture":"AMD64","torch_distribution_version":"2.7.0",
+        "torch_build_version":"2.7.0+cpu","torch_cpu_only":True,"torch_cuda_version":None,
+        "torch_cuda_available":False,"torch_deterministic_algorithms":True,
+        "torch_deterministic_warn_only":False,"torch_num_threads":1,
+        "torch_num_interop_threads":1,"torch_native_artifacts":native,
+        "torch_native_artifact_set_sha256":digest,
+        "torch_distribution_inventory_sha256":"2"*64,
+        "torch_build_config_sha256":"3"*64,
+        "thread_environment":dict(selector.THREAD_ENVIRONMENT),
+    }
 
 def load_runner():
     spec=importlib.util.spec_from_file_location("b2r1_runner",RUNNER); assert spec and spec.loader
@@ -254,10 +281,22 @@ def test_runner_secure_read_and_receipt_anchor_precede_receipt_fields(
     assert runner._authorized_load(auth,receipt)=={"manifest_content_sha256":"attacker-controlled"}
     assert calls==[receipt]
     monkeypatch.setattr(runner,"_authorization",lambda _path:auth)
-    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:{"receipt":receipt})
+    claim=tmp_path/"claim.json"; claim.write_text("{}",encoding="utf-8")
+    failure=tmp_path/"failure.json"
+    paths={"receipt":receipt,"claim":claim,"stage2_failure":failure}
+    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:paths)
+    monkeypatch.setattr(runner.selector,"verify_authorized_source_config",lambda *_args:None)
+    monkeypatch.setattr(runner.selector,"load_full_environment_receipt",lambda *_args:(receipt,{}))
+    monkeypatch.setattr(runner.selector,"safe_existing_path",lambda path:path)
+    monkeypatch.setattr(runner.selector,"_require_exhaustive_allowlist",lambda *_args:None)
+    monkeypatch.setattr(runner.selector,"validate_selector_environment_receipt",lambda *_args:None)
+    monkeypatch.setattr(runner.experiment,"bind_full_environment",lambda *_args:None)
+    monkeypatch.setattr(runner.selector,"authorized_json",lambda *_args:selector.exact_claim(auth,phase="stage2_selector_continuation"))
+    monkeypatch.setattr(runner.selector,"validate_exact_claim",lambda *_args,**_kwargs:None)
+    monkeypatch.setattr(runner,"_latest_stage2_activity",lambda *_args:dict(toy.ACTIVITY_COUNTERS))
+    monkeypatch.setattr(runner,"_terminal_failure",lambda *_args,**_kwargs:{"branch":"terminal"})
     monkeypatch.setattr(runner,"_authorized_load",lambda *_args:pytest.fail("receipt fields read before digest anchor"))
-    with pytest.raises(runner.RunnerInvalid,match="anchor mismatch"):
-        runner.run_full(Path("unused.json"),"0"*64)
+    assert runner.run_full(Path("unused.json"),"0"*64)=={"branch":"terminal"}
 
 
 def test_run_full_requires_external_receipt_digest_cli() -> None:
@@ -315,8 +354,11 @@ def test_independent_declarative_universe_is_not_a_catalog_row_copy() -> None:
         verifier.verify_synthetic(**wrong)
 
 
-def test_canonical_universe_recipe_every_field_family_is_exact_without_rows() -> None:
-    spec=toy.canonical_universe_spec(authorization())
+def test_canonical_universe_recipe_every_field_family_is_exact_without_rows(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(selector,"validate_claim_continuation",lambda *_args:None)
+    spec=toy.canonical_universe_spec(authorization(),claim_continuation=object())
     verifier.validate_declarative_universe_spec(spec)
     assert "rows" not in spec
     mutations=[]
@@ -330,6 +372,17 @@ def test_canonical_universe_recipe_every_field_family_is_exact_without_rows() ->
     for key in spec["final_keep"]:
         value=copy.deepcopy(spec); value["final_keep"][key]=None; mutations.append(value)
     for mutated in mutations:
+        with pytest.raises(verifier.VerificationError,match="frozen recipe"):
+            verifier.validate_declarative_universe_spec(mutated)
+    for path,value in (
+        (("schema_version",),True),
+        (("final_keep","nonce_start"),False),
+        (("final_keep","reset_y"),False),
+    ):
+        mutated=copy.deepcopy(spec)
+        target=mutated
+        for key in path[:-1]: target=target[key]
+        target[path[-1]]=value
         with pytest.raises(verifier.VerificationError,match="frozen recipe"):
             verifier.validate_declarative_universe_spec(mutated)
 
@@ -347,6 +400,382 @@ def test_fixed_root_exact_once_and_no_alternate_destination_cli(tmp_path: Path) 
     source=inspect.getsource(runner.main)
     for alternate in ("--catalog","--universe","--work-root","--manifest","--result"):
         assert alternate not in source
+
+
+@pytest.mark.parametrize("failure",(
+    "source_map","allowlist","python","ortools","solver_artifact","torch_receipt",
+    "live_torch",
+))
+def test_write_free_readiness_failures_precede_claim_catalog_and_leave_zero_activity(
+    failure: str, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner=load_runner(); auth=authorization(); events=[]
+    monkeypatch.setattr(runner,"_authorization",lambda _path:auth)
+    def step(name: str):
+        events.append(name)
+        if failure==name:
+            raise runner.RunnerInvalid("synthetic readiness rejection: "+name)
+    monkeypatch.setattr(runner.selector,"verify_authorized_source_config",lambda *_args:step("source_map"))
+    def receipt_step(*_args):
+        step("torch_receipt")
+        return SOURCE_PATHS[0],full_environment_receipt(SOURCE_PATHS[0])
+    monkeypatch.setattr(runner.selector,"load_full_environment_receipt",receipt_step)
+    monkeypatch.setattr(runner.selector,"_require_exhaustive_allowlist",lambda *_args:step("allowlist"))
+    def environment_step(*_args):
+        if failure in {"python","ortools","solver_artifact"}: step(failure)
+        else: events.append("environment")
+    monkeypatch.setattr(runner.selector,"validate_selector_environment_receipt",environment_step)
+    monkeypatch.setattr(runner.experiment,"bind_full_environment",lambda *_args:
+        step("live_torch") if failure=="live_torch" else events.append("torch"))
+    monkeypatch.setattr(runner.selector,"output_paths_must_be_absent",lambda *_args:events.append("destinations"))
+    with pytest.raises(runner.RunnerInvalid,match="synthetic readiness rejection"):
+        runner.stage2_readiness(Path("synthetic-authorization.json"))
+    assert "claim" not in events and "catalog" not in events
+    assert len(auth["zero_start_activity"])==18 and all(value==0 for value in auth["zero_start_activity"].values())
+    assert all(not path.exists() for path in runner.RESERVED_PATHS)
+
+
+def test_external_environment_receipt_anchor_and_exact_schema(tmp_path: Path) -> None:
+    artifact=tmp_path/"native.dll"; artifact.write_bytes(b"native")
+    receipt_path=tmp_path/"full-environment.json"
+    receipt_path.write_text(json.dumps(full_environment_receipt(artifact),sort_keys=True,separators=(",",":")),encoding="utf-8")
+    auth=authorization([str(receipt_path.resolve()),str(artifact.resolve())])
+    auth["full_environment_receipt_path"]=str(receipt_path.resolve())
+    auth["full_environment_receipt_sha256"]=hashlib.sha256(receipt_path.read_bytes()).hexdigest()
+    path,loaded=selector.load_full_environment_receipt(auth)
+    assert path==receipt_path.resolve() and loaded["torch_distribution_version"]=="2.7.0"
+    receipt_path.write_text(receipt_path.read_text(encoding="utf-8")+" ",encoding="utf-8")
+    with pytest.raises(selector.SelectorInvalid,match="digest mismatch"):
+        selector.load_full_environment_receipt(auth)
+
+
+def test_exact_claim_schema_capability_and_truthful_terminal_receipt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root=tmp_path/"stage2"; claim=root/"claim.json"; failure=tmp_path/"failure.json"
+    auth=authorization([str(claim.resolve()),str(failure.resolve())])
+    exact=selector.exact_claim(auth,phase="stage2_selector_continuation")
+    monkeypatch.setattr(selector,"stage2_paths",lambda:{"session_root":root,"claim":claim})
+    readiness=selector._issue_stage2_readiness_capability(auth,tmp_path/"authorization.json")
+    capability=selector.claim_stage2_namespace(auth,readiness_capability=readiness)
+    assert capability.selector_consumed is False
+    second_readiness=selector._issue_stage2_readiness_capability(auth,tmp_path/"authorization.json")
+    with pytest.raises(selector.SelectorInvalid,match="preconstructed"):
+        selector.claim_stage2_namespace(auth,readiness_capability=second_readiness)
+    for mutation in (None,"phase","ordinal","zero_start_activity"):
+        bad=copy.deepcopy(exact)
+        if mutation is None: bad.pop("phase")
+        elif mutation=="phase": bad["phase"]="wrong"
+        elif mutation=="ordinal": bad["ordinal"]=True
+        else: bad["zero_start_activity"]["replicas"]=1
+        with pytest.raises(selector.SelectorInvalid,match="claim"):
+            selector.validate_exact_claim(bad,auth,phase="stage2_selector_continuation")
+    runner=load_runner(); activity=dict(toy.ACTIVITY_COUNTERS)
+    activity["canonical_generator_calls"]=1; activity["canonical_rows_observed"]=7
+    terminal=runner._terminal_failure(auth,RuntimeError("injected post-claim failure"),activity,failure_path=failure)
+    assert terminal["branch"]=="B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY"
+    assert terminal["activity_counts"]["canonical_rows_observed"]==7
+    assert selector.INVALID not in json.dumps(terminal)
+    selector._ACTIVE_CLAIM_CONTINUATION=None
+    selector._ACTIVE_READINESS_CAPABILITY=None
+
+
+@pytest.mark.parametrize("phase",("catalog","replica","verifier"))
+def test_injected_postclaim_failures_have_one_terminal_branch_and_truthful_counters(
+    phase: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner=load_runner(); root=tmp_path/phase
+    paths={
+        "session_root":root,"claim":root/"claim.json",
+        "universe_spec":root/"universe.json","catalog":root/"catalog.json",
+        "stage2_failure":root/"failure.json",
+    }
+    auth=authorization([str(paths["claim"].resolve()),str(paths["stage2_failure"].resolve())])
+    monkeypatch.setattr(runner,"_preclaim_readiness",lambda _path:(auth,{},object()))
+    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:paths)
+    def claim(_authorization: object,_readiness: object,on_claim_created: object):
+        root.mkdir()
+        exact=selector.exact_claim(auth,phase="stage2_selector_continuation")
+        selector.write_exclusive(paths["claim"],json.dumps(exact,sort_keys=True,separators=(",",":")).encode()+b"\n")
+        on_claim_created()
+        return object(),dict(toy.ACTIVITY_COUNTERS)
+    monkeypatch.setattr(runner,"_claim_fixed_stage2_namespace",claim)
+    monkeypatch.setattr(runner.experiment,"canonical_universe_spec",lambda _authorization,**_kwargs:{"synthetic_only":True})
+    monkeypatch.setattr(runner.selector,"begin_catalog_generation",lambda *_args:object())
+    def rows(_authorization: object,**_kwargs: object):
+        yield row()
+        if phase=="catalog": raise RuntimeError("injected catalog failure")
+    monkeypatch.setattr(runner.experiment,"canonical_catalog_rows",rows)
+    monkeypatch.setattr(runner.selector,"parse_catalog",lambda _catalog:None)
+    monkeypatch.setattr(runner.selector,"persist_activity_snapshot",lambda *_args:None)
+    def sequence(**kwargs: object):
+        activity=kwargs["activity_counts"]
+        if phase in {"replica","verifier"}:
+            activity["canonical_ortools_processes"]=2 if phase=="verifier" else 1
+            activity["replicas"]=2 if phase=="verifier" else 1
+        if phase=="verifier": activity["canonical_verifier_admissions"]=1
+        raise RuntimeError("injected "+phase+" failure")
+    monkeypatch.setattr(runner.selector,"run_two_replica_sequence",sequence)
+    result=runner.orchestrate_stage2(Path("synthetic-authorization.json"))
+    assert result["branch"]=="B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY"
+    assert selector.INVALID not in json.dumps(result)
+    assert result["activity_counts"]["canonical_generator_calls"]==1
+    if phase=="catalog": assert result["activity_counts"]["canonical_rows_observed"]==1
+    if phase in {"replica","verifier"}: assert result["activity_counts"]["replicas"]>=1
+    if phase=="verifier": assert result["activity_counts"]["canonical_verifier_admissions"]==1
+
+
+def test_complete_secure_read_set_covers_environment_claim_checkpoints_result_and_failures() -> None:
+    paths=selector.stage2_paths()
+    schema=selector._sealed_path_schema(
+        paths,authorization_path=SOURCE_PATHS[0],authorization=authorization()
+    )
+    assert {"stage2_authorization","full_environment_receipt","claim","full_claim",
+            "result","stage2_failure","full_failure"}.issubset(schema)
+    assert len([name for name in schema if name.startswith("checkpoint_")])==64
+    assert {"activity_full_claim","activity_full_calibration","activity_full_primary_1",
+            "activity_full_primary_2","activity_full_primary_3","activity_full_primary_4",
+            "activity_full_complete"}.issubset(schema)
+    assert "authorized_read_bytes" in inspect.getsource(toy._reload_checkpoint)
+    assert "authorized_json" in inspect.getsource(toy.run_registered_full)
+    assert "authorized_read_bytes" in inspect.getsource(selector.load_full_environment_receipt)
+
+
+@pytest.mark.parametrize("mode",("mutated","unreadable"))
+def test_postclaim_mutated_or_unreadable_claim_cannot_escape_terminal_branch(
+    mode: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner=load_runner(); root=tmp_path/mode
+    paths={"session_root":root,"claim":root/"claim.json",
+           "stage2_failure":root/"failure.json"}
+    auth=authorization([str(paths["claim"].resolve()),str(paths["stage2_failure"].resolve())])
+    monkeypatch.setattr(runner,"_preclaim_readiness",lambda _path:(auth,{},object()))
+    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:paths)
+    def claim(_authorization: object,_readiness: object,on_claim_created: object):
+        root.mkdir(); exact=selector.exact_claim(auth,phase="stage2_selector_continuation")
+        selector.write_exclusive(paths["claim"],json.dumps(exact,sort_keys=True,separators=(",",":")).encode()+b"\n")
+        on_claim_created()
+        return object(),dict(toy.ACTIVITY_COUNTERS)
+    monkeypatch.setattr(runner,"_claim_fixed_stage2_namespace",claim)
+    monkeypatch.setattr(runner.selector,"persist_activity_snapshot",lambda *_args:None)
+    original_authorized=selector.authorized_json
+    if mode=="unreadable":
+        monkeypatch.setattr(runner.selector,"authorized_json",lambda auth_value,path:
+            (_ for _ in ()).throw(selector.SelectorInvalid("unreadable claim"))
+            if path==paths["claim"] else original_authorized(auth_value,path))
+    def fail_universe(_authorization: object,**_kwargs: object):
+        if mode=="mutated":
+            paths["claim"].chmod(0o666); paths["claim"].write_text("{mutated",encoding="utf-8")
+            original_authorized(auth,paths["claim"])
+        runner.selector.authorized_json(auth,paths["claim"])
+        raise AssertionError("unreachable")
+    monkeypatch.setattr(runner.experiment,"canonical_universe_spec",fail_universe)
+    result=runner.orchestrate_stage2(Path("synthetic-authorization.json"))
+    assert result["branch"]=="B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY"
+    assert set(result["activity_counts"])==set(toy.ACTIVITY_COUNTERS)
+    assert selector.INVALID not in json.dumps(result)
+
+
+def test_claim_created_then_immediate_secure_reread_failure_is_terminal(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner=load_runner(); root=tmp_path/"claim-reread"
+    paths={"session_root":root,"claim":root/"claim.json",
+           "stage2_failure":root/"failure.json"}
+    auth=authorization([str(paths["claim"].resolve()),str(paths["stage2_failure"].resolve())])
+    capability=selector._issue_stage2_readiness_capability(auth,tmp_path/"authorization.json")
+    monkeypatch.setattr(runner,"_preclaim_readiness",lambda _path:(auth,{},capability))
+    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:paths)
+    original_authorized=selector.authorized_json
+    monkeypatch.setattr(runner.selector,"authorized_json",lambda auth_value,path:
+        (_ for _ in ()).throw(selector.SelectorInvalid("injected immediate claim reread failure"))
+        if path==paths["claim"] else original_authorized(auth_value,path))
+    result=runner.orchestrate_stage2(tmp_path/"authorization.json")
+    assert result["branch"]=="B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY"
+    assert root.is_dir() and paths["claim"].is_file()
+    assert set(result["activity_counts"])==set(toy.ACTIVITY_COUNTERS)
+    assert selector.INVALID not in json.dumps(result)
+
+
+@pytest.mark.parametrize("durable_nonzero",(False,True))
+def test_later_stage2_seal_with_prior_exact_claim_is_process_independent_terminal(
+    durable_nonzero: bool, tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner=load_runner(); root=tmp_path/("nonzero" if durable_nonzero else "zero")
+    phases=("claim","catalog","replica_1","replica_2","witness","verifier","manifest")
+    paths={"session_root":root,"claim":root/"claim.json",
+           "stage2_failure":root/"failure.json"}
+    paths.update({f"activity_{phase}":root/f"activity_{phase}.json" for phase in phases})
+    allowlist=[str(path.resolve()) for name,path in paths.items() if name!="session_root"]
+    auth=authorization(allowlist)
+    root.mkdir()
+    selector.write_exclusive(paths["claim"],json.dumps(
+        selector.exact_claim(auth,phase="stage2_selector_continuation"),
+        sort_keys=True,separators=(",",":")).encode()+b"\n")
+    zero=dict(toy.ACTIVITY_COUNTERS)
+    selector.write_exclusive(paths["activity_claim"],json.dumps(
+        {"phase":"claim","activity_counts":zero},sort_keys=True,
+        separators=(",",":")).encode()+b"\n")
+    if durable_nonzero:
+        nonzero=dict(zero); nonzero["canonical_generator_calls"]=1
+        selector.write_exclusive(paths["activity_catalog"],json.dumps(
+            {"phase":"catalog","activity_counts":nonzero},sort_keys=True,
+            separators=(",",":")).encode()+b"\n")
+    monkeypatch.setattr(runner,"_authorization",lambda _path:auth)
+    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:paths)
+    monkeypatch.setattr(runner,"_preclaim_readiness",lambda _path:
+        pytest.fail("existing lifecycle must terminalize before readiness/replay"))
+    result=runner.orchestrate_stage2(tmp_path/"authorization.json")
+    assert result["branch"]=="B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY"
+    assert result["activity_counts"]["canonical_generator_calls"]==int(durable_nonzero)
+    assert result["retry_authorized"] is result["rescue_authorized"] is False
+    assert paths["stage2_failure"].is_file()
+
+
+def test_preconstructed_malformed_zero_activity_root_is_technical_no_start(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner=load_runner(); root=tmp_path/"malformed"; root.mkdir()
+    phases=("claim","catalog","replica_1","replica_2","witness","verifier","manifest")
+    paths={"session_root":root,"claim":root/"claim.json",
+           "stage2_failure":root/"failure.json"}
+    paths.update({f"activity_{phase}":root/f"activity_{phase}.json" for phase in phases})
+    paths["claim"].write_text("{malformed",encoding="utf-8")
+    allowlist=[str(path.resolve()) for name,path in paths.items() if name!="session_root"]
+    auth=authorization(allowlist)
+    monkeypatch.setattr(runner,"_authorization",lambda _path:auth)
+    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:paths)
+    monkeypatch.setattr(runner,"_preclaim_readiness",lambda _path:
+        pytest.fail("malformed root must be classified before readiness"))
+    with pytest.raises(runner.RunnerInvalid,match="technical no-start"):
+        runner.orchestrate_stage2(tmp_path/"authorization.json")
+    assert not paths["stage2_failure"].exists()
+
+
+def test_run_full_missing_claim_is_technical_no_start_without_created_root(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner=load_runner(); root=tmp_path/"absent-stage2"
+    paths={"session_root":root,"claim":root/"claim.json","stage2_failure":root/"failure.json"}
+    monkeypatch.setattr(runner,"_authorization",lambda _path:
+        pytest.fail("missing-claim no-start must precede authorization reads"))
+    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:paths)
+    with pytest.raises(runner.RunnerInvalid,match="technical no-start"):
+        runner.run_full(Path("synthetic-authorization.json"),"0"*64)
+    assert not root.exists() and not paths["stage2_failure"].exists()
+
+
+def test_direct_claim_catalog_and_solve_apis_require_opaque_capabilities(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root=tmp_path/"direct"; claim=root/"claim.json"
+    auth=authorization([str(claim.resolve())])
+    monkeypatch.setattr(selector,"stage2_paths",lambda:{"session_root":root,"claim":claim})
+    with pytest.raises(selector.SelectorInvalid,match="readiness"):
+        selector.claim_stage2_namespace(auth,readiness_capability=object())
+    assert not root.exists()
+    with pytest.raises(selector.SelectorInvalid,match="claim continuation"):
+        toy.canonical_universe_spec(auth,claim_continuation=object())
+    with pytest.raises(selector.SelectorInvalid,match="scoped claim"):
+        next(toy.canonical_catalog_rows(auth,catalog_capability=object()))
+    with pytest.raises(selector.SelectorInvalid,match="scoped claim"):
+        next(toy.canonical_final_keep_rows("primary_1",auth,catalog_capability=object()))
+    forged_catalog_capability=selector._CatalogGenerationCapability(
+        selector.sha256_bytes(selector._canonical_json_bytes(auth)),"0"*64
+    )
+    with pytest.raises(selector.SelectorInvalid,match="scoped claim"):
+        next(toy.canonical_catalog_rows(
+            auth,catalog_capability=forged_catalog_capability
+        ))
+    root.mkdir(); selector.write_exclusive(claim,json.dumps(
+        selector.exact_claim(auth,phase="stage2_selector_continuation"),
+        sort_keys=True,separators=(",",":")).encode()+b"\n")
+    with pytest.raises(selector.SelectorInvalid,match="start token"):
+        selector.solve_replica(
+            tmp_path/"never-catalog.json",tmp_path/"never-ledger.json",
+            tmp_path/"never-bindings.json",auth,claim_path=claim,
+            start_capability=object(),
+        )
+
+
+def test_replica_cli_has_no_optional_start_token_bypass(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    auth_path=tmp_path/"authorization.json"; claim=tmp_path/"claim.json"
+    output=tmp_path/"replica.json"
+    auth=authorization([str(auth_path.resolve()),str(claim.resolve()),str(output.resolve())])
+    auth_path.write_text(json.dumps(auth),encoding="utf-8")
+    selector.write_exclusive(claim,json.dumps(
+        selector.exact_claim(auth,phase="stage2_selector_continuation"),
+        sort_keys=True,separators=(",",":")).encode()+b"\n")
+    monkeypatch.setattr(selector,"stage2_paths",lambda:{"claim":claim,"replica_1":output,"replica_2":tmp_path/"replica2.json"})
+    monkeypatch.setattr(selector,"_self_memory_cap",lambda:None)
+    class EmptyInput: buffer=io.BytesIO(b"")
+    monkeypatch.setattr(selector.sys,"stdin",EmptyInput())
+    monkeypatch.setattr(selector,"solve_replica",lambda *_args,**_kwargs:pytest.fail("solve reached without token"))
+    args=argparse.Namespace(stage2_authorization=str(auth_path),output=str(output.resolve()),
+        catalog="never",ledger="never",bindings="never")
+    with pytest.raises(selector.SelectorInvalid,match="mandatory start-token"):
+        selector._replica_cli(args)
+    assert "await_start_token" not in inspect.getsource(selector._replica_cli)
+    assert "--await-start-token" not in inspect.getsource(selector.main)
+
+
+def test_failed_replica_popen_does_not_preincrement_activity(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    events=[]
+    monkeypatch.setattr(selector.subprocess,"Popen",lambda *_args,**_kwargs:
+        (_ for _ in ()).throw(OSError("injected Popen failure")))
+    with pytest.raises(OSError,match="Popen failure"):
+        selector._run_cold_replica(
+            selector_path=tmp_path/"selector.py",catalog_path=tmp_path/"catalog.json",
+            ledger_path=tmp_path/"ledger.json",bindings_path=tmp_path/"bindings.json",
+            output_path=tmp_path/"output.json",authorization_path=tmp_path/"authorization.json",
+            authorization=authorization(),on_process_started=lambda:events.append("started"),
+        )
+    assert events==[]
+
+
+def test_mid_ppo_failure_preserves_actual_partial_optimizer_progress() -> None:
+    scientific=toy._activity_template(); lifecycle=dict(toy.ACTIVITY_COUNTERS)
+    class FailingOptimizer:
+        calls=0
+        def step(self):
+            self.calls+=1
+            if self.calls==2: raise RuntimeError("injected mid-PPO failure")
+    optimizer=FailingOptimizer()
+    toy._optimizer_step_with_accounting(optimizer,scientific,lifecycle)
+    with pytest.raises(RuntimeError,match="mid-PPO"):
+        toy._optimizer_step_with_accounting(optimizer,scientific,lifecycle)
+    assert scientific["optimizer_steps"]==scientific["learner_updates"]==1
+    assert lifecycle["optimizer_steps"]==lifecycle["learner_updates"]==1
+    assert set(lifecycle)==set(toy.ACTIVITY_COUNTERS)
+
+
+@pytest.mark.parametrize("mode",("mutation","alias","reparse"))
+def test_first_checkpoint_digest_uses_secure_reader_and_rejects_unsafe_paths(
+    mode: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class FakeTorch:
+        @staticmethod
+        def save(_payload: object,stream: object): stream.write(b"checkpoint")
+    class FakeModel:
+        @staticmethod
+        def state_dict(): return {"x":1}
+    monkeypatch.setattr(toy,"_torch",lambda:FakeTorch())
+    if mode=="alias":
+        (tmp_path/"sub").mkdir(); path=tmp_path/"sub"/".."/"alias.pt"
+    elif mode=="reparse":
+        (tmp_path/"junction").mkdir(); path=tmp_path/"junction"/"checkpoint.pt"
+        monkeypatch.setattr(selector,"_is_reparse",lambda candidate:candidate.name=="junction")
+    else: path=tmp_path/"mutation.pt"
+    auth=authorization([str(path)])
+    if mode=="mutation":
+        monkeypatch.setattr(selector,"authorized_read_bytes",lambda *_args:
+            (_ for _ in ()).throw(selector.SelectorInvalid("changed during secure read")))
+    with pytest.raises(selector.SelectorInvalid):
+        toy._write_checkpoint(path,FakeModel(),{},auth)
 
 def episode_spec(branch: str) -> toy.EpisodeSpec:
     value=row(2,0,"q",branch); value.update({"consumer":"synthetic_only","seed_row":"synthetic",
@@ -450,6 +879,11 @@ def test_malformed_nonfinite_out_of_domain_evidence_is_invalid(name: str,value: 
     ({"candidate_minus_generic_keep_aulc":.07},toy.NO_EFFICIENCY)])
 def test_exact_gate_precedence(update: dict[str,object],branch: str) -> None:
     evidence=passing(); evidence.update(update); assert toy.classify_result(evidence) == branch
+
+@pytest.mark.parametrize("field",("contract_valid","activity_nonzero","caps_valid","paired_exposure"))
+def test_completed_contract_activity_cap_or_provenance_violation_is_first_invalid_branch(field: str) -> None:
+    evidence=passing(); evidence[field]=False
+    assert toy.classify_result(evidence)=="B2R1_INVALID_CONTRACT_ACTIVITY_CAP_OR_PROVENANCE"
 
 def test_aulc_and_toy_arithmetic_without_training() -> None:
     assert toy.normalized_keep_aulc([.25]*8) == pytest.approx(0)

@@ -39,6 +39,7 @@ SALT = "8100799/"
 DECISION_PREFIX = b"VSP06-B2R1-SB-EF-CP-SAT-V1/decision-order/v1\0"
 REQUIRED_ORTOOLS = "9.12.4544"
 REQUIRED_PYTHON = (3, 11)
+REQUIRED_TORCH = "2.7.0"
 WALL_SECONDS = 1800
 MEMORY_BYTES = 4096 * 1024 * 1024
 INVALID = "B2R1_SELECTOR_INVALID_NO_RUN"
@@ -118,12 +119,31 @@ SELECTOR_RECEIPT_KEYS = frozenset({
     "witness_sha256", "manifest_path", "manifest_file_sha256",
     "manifest_content_sha256", "verifier_report_path", "verifier_report_sha256",
     "replica_resource_telemetry",
+    "activity_counts", "full_environment_receipt_path",
+    "full_environment_receipt_sha256",
 })
+FULL_ENVIRONMENT_RECEIPT_KEYS = frozenset({
+    "schema_version", "python_implementation", "python_version",
+    "python_executable", "python_executable_sha256", "ortools_version",
+    "ortools_source_tag", "solver_artifacts", "solver_artifact_set_sha256",
+    "sat_parameters_sha256", "sat_parameters_hex", "sat_parameter_assignments",
+    "sat_parameter_assignments_sha256", "os", "os_release", "architecture",
+    "torch_distribution_version", "torch_build_version", "torch_cpu_only",
+    "torch_cuda_version", "torch_cuda_available",
+    "torch_deterministic_algorithms", "torch_deterministic_warn_only",
+    "torch_num_threads", "torch_num_interop_threads", "torch_native_artifacts",
+    "torch_native_artifact_set_sha256", "torch_distribution_inventory_sha256",
+    "torch_build_config_sha256", "thread_environment",
+})
+THREAD_ENVIRONMENT = {
+    "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1", "NUMEXPR_NUM_THREADS": "1",
+}
 
 
 def stage2_paths() -> dict[str, Path]:
     selector_root = STAGE2_SESSION_ROOT / "selector"
-    return {
+    result = {
         "session_root": STAGE2_SESSION_ROOT,
         "claim": STAGE2_SESSION_ROOT / "stage2_namespace_claim.json",
         "catalog": STAGE2_SESSION_ROOT / "canonical_catalog.json",
@@ -144,7 +164,27 @@ def stage2_paths() -> dict[str, Path]:
         "verifier_report": selector_root / "independent_verifier_report.json",
         "receipt": selector_root / "selector_success_receipt.json",
         "manifest": STAGE2_SESSION_ROOT / "frozen_manifest.json",
+        "stage2_failure": STAGE2_SESSION_ROOT / "stage2_terminal_failure.json",
+        "registered_full": STAGE2_SESSION_ROOT / "registered_full",
+        "full_claim": STAGE2_SESSION_ROOT / "registered_full/registered_full_claim.json",
+        "full_failure": STAGE2_SESSION_ROOT / "registered_full/registered_full_failure.json",
+        "result": PROJECT_ROOT / "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_AUTHENTICATED_PARTNER_RECALL_CREDIT_EFFICIENCY_RESULT.json",
+        "operator_receipt": PROJECT_ROOT / "temp/sessions/code_project_manager/vsp06_b2r1_operator_receipt.json",
     }
+    for phase in (
+        "claim", "catalog", "replica_1", "replica_2", "verifier", "witness",
+        "manifest", "full_claim", "full_calibration", "full_primary_1",
+        "full_primary_2", "full_primary_3", "full_primary_4", "full_complete",
+    ):
+        result[f"activity_{phase}"] = STAGE2_SESSION_ROOT / "activity" / f"{phase}.json"
+    for seed in ("primary_1", "primary_2", "primary_3", "primary_4"):
+        for arm in ("MSSR_P_FIXED_VALIDITY_CARRIER", "GENERIC_PROVENANCE_CONDITIONED_CARRIER"):
+            for checkpoint in (0, 512, 1024, 1536, 2048, 2560, 3072, 4096):
+                result[f"checkpoint_{seed}_{arm}_{checkpoint}"] = (
+                    result["registered_full"] / "checkpoints" / seed / arm
+                    / f"episodes_{checkpoint}.pt"
+                )
+    return result
 
 
 def validate_stage2_authorization(value: Mapping[str, Any]) -> Mapping[str, Any]:
@@ -153,6 +193,7 @@ def validate_stage2_authorization(value: Mapping[str, Any]) -> Mapping[str, Any]
         "scientific_parent", "final_commit", "source_build_read_allowlist",
         "source_config_digest_map", "source_config_digest_map_sha256",
         "formal", "synthetic_only", "zero_start_activity",
+        "full_environment_receipt_path", "full_environment_receipt_sha256",
     }
     if not isinstance(value, Mapping) or set(value) != required:
         raise SelectorInvalid("missing or malformed Stage-2 authorization")
@@ -166,6 +207,16 @@ def validate_stage2_authorization(value: Mapping[str, Any]) -> Mapping[str, Any]
     commit = value["final_commit"]
     if not isinstance(commit, str) or len(commit) != 40 or any(c not in "0123456789abcdef" for c in commit):
         raise SelectorInvalid("Stage-2 final commit must be one exact lowercase 40-hex binding")
+    environment_path = value["full_environment_receipt_path"]
+    environment_digest = value["full_environment_receipt_sha256"]
+    if (
+        not isinstance(environment_path, str) or not environment_path
+        or not Path(environment_path).is_absolute() or ".." in Path(environment_path).parts
+        or any(char in environment_path for char in "*?[")
+        or not isinstance(environment_digest, str) or len(environment_digest) != 64
+        or any(char not in "0123456789abcdef" for char in environment_digest)
+    ):
+        raise SelectorInvalid("Stage-2 full-environment receipt anchor is invalid")
     allowlist = value["source_build_read_allowlist"]
     if not isinstance(allowlist, list) or not allowlist or any(
         not isinstance(item, str) or not item or not Path(item).is_absolute()
@@ -192,6 +243,218 @@ def validate_stage2_authorization(value: Mapping[str, Any]) -> Mapping[str, Any]
     ):
         raise SelectorInvalid("Stage-2 audited source/config digest map is invalid")
     return value
+
+
+def validate_activity_counts(value: Mapping[str, Any]) -> dict[str, int]:
+    if (
+        not isinstance(value, Mapping) or set(value) != set(ACTIVITY_NAMES)
+        or any(not isinstance(item, int) or isinstance(item, bool) or item < 0 for item in value.values())
+    ):
+        raise SelectorInvalid("Stage-2 activity counter schema is invalid")
+    return dict(value)
+
+
+def exact_claim(
+    authorization: Mapping[str, Any], *, phase: str,
+) -> dict[str, Any]:
+    validate_stage2_authorization(authorization)
+    if phase not in {"stage2_selector_continuation", "registered_full"}:
+        raise SelectorInvalid("Stage-2 claim phase is invalid")
+    return {
+        "treatment": TREATMENT_ID,
+        "final_commit": authorization["final_commit"],
+        "stage2_authorization_sha256": sha256_bytes(_canonical_json_bytes(authorization)),
+        "ordinal": 1,
+        "phase": phase,
+        "zero_start_activity": dict(authorization["zero_start_activity"]),
+        "sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0,
+    }
+
+
+def validate_exact_claim(
+    value: Mapping[str, Any], authorization: Mapping[str, Any], *, phase: str,
+) -> dict[str, Any]:
+    expected = exact_claim(authorization, phase=phase)
+    if not isinstance(value, Mapping) or not _exact_json_equal(dict(value), expected):
+        raise SelectorInvalid("missing, partial, preconstructed, mutated, or mismatched Stage-2 claim")
+    validate_activity_counts(value["zero_start_activity"])
+    return dict(value)
+
+
+class _Stage2ReadinessCapability:
+    __slots__ = ("authorization_sha256", "authorization_path", "consumed")
+
+    def __init__(self, authorization_sha256: str, authorization_path: str) -> None:
+        self.authorization_sha256 = authorization_sha256
+        self.authorization_path = authorization_path
+        self.consumed = False
+
+
+class _Stage2ClaimContinuation:
+    __slots__ = (
+        "claim_sha256", "authorization_sha256", "catalog_issued",
+        "selector_consumed",
+    )
+
+    def __init__(self, claim_sha256: str, authorization_sha256: str) -> None:
+        self.claim_sha256 = claim_sha256
+        self.authorization_sha256 = authorization_sha256
+        self.catalog_issued = False
+        self.selector_consumed = False
+
+
+class _CatalogGenerationCapability:
+    __slots__ = ("authorization_sha256", "claim_sha256")
+
+    def __init__(self, authorization_sha256: str, claim_sha256: str) -> None:
+        self.authorization_sha256 = authorization_sha256
+        self.claim_sha256 = claim_sha256
+
+
+class _ReplicaStartCapability:
+    __slots__ = ("authorization_sha256", "claim_sha256", "consumed")
+
+    def __init__(self, authorization_sha256: str, claim_sha256: str) -> None:
+        self.authorization_sha256 = authorization_sha256
+        self.claim_sha256 = claim_sha256
+        self.consumed = False
+
+
+_ACTIVE_READINESS_CAPABILITY: _Stage2ReadinessCapability | None = None
+_ACTIVE_CLAIM_CONTINUATION: _Stage2ClaimContinuation | None = None
+_ACTIVE_CATALOG_GENERATION_CAPABILITY: _CatalogGenerationCapability | None = None
+_ACTIVE_REPLICA_START_CAPABILITY: _ReplicaStartCapability | None = None
+
+
+def _issue_stage2_readiness_capability(
+    authorization: Mapping[str, Any], authorization_path: Path,
+) -> _Stage2ReadinessCapability:
+    """Issue only after the runner completes every write-free readiness check."""
+
+    global _ACTIVE_READINESS_CAPABILITY
+    if _ACTIVE_READINESS_CAPABILITY is not None:
+        raise SelectorInvalid("Stage-2 readiness capability was already issued")
+    capability = _Stage2ReadinessCapability(
+        sha256_bytes(_canonical_json_bytes(authorization)),
+        str(authorization_path.resolve()),
+    )
+    _ACTIVE_READINESS_CAPABILITY = capability
+    return capability
+
+
+def _discard_stage2_readiness_capability(
+    capability: _Stage2ReadinessCapability,
+) -> None:
+    global _ACTIVE_READINESS_CAPABILITY
+    if capability is _ACTIVE_READINESS_CAPABILITY:
+        capability.consumed = True
+        _ACTIVE_READINESS_CAPABILITY = None
+
+
+def _issue_stage2_claim_continuation(
+    authorization: Mapping[str, Any], claim_path: Path,
+) -> _Stage2ClaimContinuation:
+    """Issue the in-process exact-once capability only after a secure claim read."""
+
+    global _ACTIVE_CLAIM_CONTINUATION
+    if _ACTIVE_CLAIM_CONTINUATION is not None:
+        raise SelectorInvalid("Stage-2 claim continuation was already issued")
+    claim = authorized_json(authorization, claim_path)
+    validate_exact_claim(claim, authorization, phase="stage2_selector_continuation")
+    capability = _Stage2ClaimContinuation(
+        sha256_authorized_file(authorization, claim_path),
+        sha256_bytes(_canonical_json_bytes(authorization)),
+    )
+    _ACTIVE_CLAIM_CONTINUATION = capability
+    return capability
+
+
+def claim_stage2_namespace(
+    authorization: Mapping[str, Any], *,
+    readiness_capability: _Stage2ReadinessCapability,
+    on_claim_created: Any | None = None,
+) -> _Stage2ClaimContinuation:
+    """Exclusively create the fixed namespace and issue its one continuation."""
+
+    global _ACTIVE_READINESS_CAPABILITY
+    validate_stage2_authorization(authorization)
+    authorization_digest = sha256_bytes(_canonical_json_bytes(authorization))
+    if (
+        not isinstance(readiness_capability, _Stage2ReadinessCapability)
+        or readiness_capability is not _ACTIVE_READINESS_CAPABILITY
+        or readiness_capability.consumed
+        or readiness_capability.authorization_sha256 != authorization_digest
+    ):
+        raise SelectorInvalid("direct claim API lacks complete write-free readiness")
+    readiness_capability.consumed = True
+    _ACTIVE_READINESS_CAPABILITY = None
+    paths = stage2_paths()
+    root = paths["session_root"]
+    if root.exists():
+        raise SelectorInvalid("preconstructed or replayed Stage-2 namespace is forbidden")
+    try:
+        os.mkdir(root)
+    except FileExistsError as exc:
+        raise SelectorInvalid("fixed Stage-2 namespace claim was not exclusive") from exc
+    claim = exact_claim(authorization, phase="stage2_selector_continuation")
+    write_exclusive(paths["claim"], _canonical_json_bytes(claim) + b"\n")
+    if on_claim_created is not None:
+        on_claim_created()
+    return _issue_stage2_claim_continuation(authorization, paths["claim"])
+
+
+def validate_claim_continuation(
+    authorization: Mapping[str, Any], continuation: _Stage2ClaimContinuation,
+) -> None:
+    if (
+        not isinstance(continuation, _Stage2ClaimContinuation)
+        or continuation is not _ACTIVE_CLAIM_CONTINUATION
+        or continuation.selector_consumed
+        or continuation.authorization_sha256
+        != sha256_bytes(_canonical_json_bytes(authorization))
+    ):
+        raise SelectorInvalid("direct canonical API lacks the exact claim continuation")
+
+
+def begin_catalog_generation(
+    authorization: Mapping[str, Any], continuation: _Stage2ClaimContinuation,
+) -> _CatalogGenerationCapability:
+    global _ACTIVE_CATALOG_GENERATION_CAPABILITY
+    validate_claim_continuation(authorization, continuation)
+    if continuation.catalog_issued or _ACTIVE_CATALOG_GENERATION_CAPABILITY is not None:
+        raise SelectorInvalid("canonical catalog capability was already issued")
+    continuation.catalog_issued = True
+    capability = _CatalogGenerationCapability(
+        continuation.authorization_sha256, continuation.claim_sha256
+    )
+    _ACTIVE_CATALOG_GENERATION_CAPABILITY = capability
+    return capability
+
+
+def validate_catalog_generation_capability(
+    authorization: Mapping[str, Any], capability: _CatalogGenerationCapability,
+) -> None:
+    if (
+        not isinstance(capability, _CatalogGenerationCapability)
+        or capability is not _ACTIVE_CATALOG_GENERATION_CAPABILITY
+        or capability.authorization_sha256
+        != sha256_bytes(_canonical_json_bytes(authorization))
+    ):
+        raise SelectorInvalid("direct catalog API lacks the scoped claim capability")
+
+
+def _issue_replica_start_capability(
+    authorization: Mapping[str, Any], claim_path: Path,
+) -> _ReplicaStartCapability:
+    global _ACTIVE_REPLICA_START_CAPABILITY
+    claim = authorized_json(authorization, claim_path)
+    validate_exact_claim(claim, authorization, phase="stage2_selector_continuation")
+    capability = _ReplicaStartCapability(
+        sha256_bytes(_canonical_json_bytes(authorization)),
+        sha256_authorized_file(authorization, claim_path),
+    )
+    _ACTIVE_REPLICA_START_CAPABILITY = capability
+    return capability
 
 
 def _is_reparse(path: Path) -> bool:
@@ -273,6 +536,64 @@ def sha256_authorized_file(authorization: Mapping[str, Any], path: Path) -> str:
     return sha256_bytes(authorized_read_bytes(authorization, path))
 
 
+def load_full_environment_receipt(
+    authorization: Mapping[str, Any],
+) -> tuple[Path, dict[str, Any]]:
+    """Securely load the one externally digested full-environment receipt."""
+
+    validate_stage2_authorization(authorization)
+    path = Path(str(authorization["full_environment_receipt_path"]))
+    payload = authorized_read_bytes(authorization, path)
+    if sha256_bytes(payload) != authorization["full_environment_receipt_sha256"]:
+        raise SelectorInvalid("external full-environment receipt digest mismatch")
+    try:
+        value = json.loads(payload.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise SelectorInvalid("external full-environment receipt is invalid JSON") from exc
+    if not isinstance(value, Mapping) or set(value) != FULL_ENVIRONMENT_RECEIPT_KEYS:
+        raise SelectorInvalid("external full-environment receipt schema is not exact")
+    if value.get("schema_version") != 1 or isinstance(value.get("schema_version"), bool):
+        raise SelectorInvalid("external full-environment receipt schema version is invalid")
+    if (
+        value.get("torch_distribution_version") != REQUIRED_TORCH
+        or value.get("torch_cpu_only") is not True
+        or value.get("torch_cuda_version") is not None
+        or value.get("torch_cuda_available") is not False
+        or value.get("torch_deterministic_algorithms") is not True
+        or value.get("torch_deterministic_warn_only") is not False
+        or value.get("torch_num_threads") != 1
+        or isinstance(value.get("torch_num_threads"), bool)
+        or value.get("torch_num_interop_threads") != 1
+        or isinstance(value.get("torch_num_interop_threads"), bool)
+        or value.get("thread_environment") != THREAD_ENVIRONMENT
+    ):
+        raise SelectorInvalid("external full-environment Torch/determinism/thread binding is invalid")
+    for artifacts, digest_name in (
+        (value.get("solver_artifacts"), "solver_artifact_set_sha256"),
+        (value.get("torch_native_artifacts"), "torch_native_artifact_set_sha256"),
+    ):
+        if (
+            not isinstance(artifacts, list) or not artifacts
+            or any(
+                not isinstance(row, list) or len(row) != 2
+                or not isinstance(row[0], str) or not Path(row[0]).is_absolute()
+                or not isinstance(row[1], str) or len(row[1]) != 64
+                or any(char not in "0123456789abcdef" for char in row[1])
+                for row in artifacts
+            )
+            or value.get(digest_name) != sha256_bytes(_canonical_json_bytes(artifacts))
+        ):
+            raise SelectorInvalid("external full-environment native-artifact binding is invalid")
+    for name in ("torch_distribution_inventory_sha256", "torch_build_config_sha256"):
+        digest = value.get(name)
+        if (
+            not isinstance(digest, str) or len(digest) != 64
+            or any(char not in "0123456789abcdef" for char in digest)
+        ):
+            raise SelectorInvalid("external full-environment Torch build digest is invalid")
+    return authorize_read_path(authorization, path), dict(value)
+
+
 def source_config_digest_map(
     authorization: Mapping[str, Any], project_root: Path,
 ) -> dict[str, str]:
@@ -320,6 +641,20 @@ def _canonical_json_bytes(value: Any) -> bytes:
         ensure_ascii=False,
         allow_nan=False,
     ).encode("utf-8")
+
+
+def _exact_json_equal(left: Any, right: Any) -> bool:
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, Mapping):
+        return set(left) == set(right) and all(
+            _exact_json_equal(left[key], right[key]) for key in left
+        )
+    if isinstance(left, list):
+        return len(left) == len(right) and all(
+            _exact_json_equal(a, b) for a, b in zip(left, right, strict=True)
+        )
+    return left == right
 
 
 def sha256_bytes(payload: bytes) -> str:
@@ -794,6 +1129,17 @@ def selector_environment(stage2_authorization: Mapping[str, Any]) -> dict[str, A
     }
 
 
+def validate_selector_environment_receipt(
+    stage2_authorization: Mapping[str, Any], receipt: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Validate live CPython/OR-Tools/parameters against the external receipt."""
+
+    live = selector_environment(stage2_authorization)
+    if any(receipt.get(name) != value for name, value in live.items()):
+        raise SelectorInvalid("live CPython/OR-Tools environment differs from external receipt")
+    return live
+
+
 def source_bindings(stage2_authorization: Mapping[str, Any]) -> dict[str, Any]:
     digest_map = verify_authorized_source_config(stage2_authorization, PROJECT_ROOT)
     return {
@@ -832,8 +1178,29 @@ def _manifest_body(
     }
 
 
-def solve_replica(catalog_path: Path, ledger_path: Path, bindings_path: Path, stage2_authorization: Mapping[str, Any]) -> dict[str, Any]:
+def solve_replica(
+    catalog_path: Path, ledger_path: Path, bindings_path: Path,
+    stage2_authorization: Mapping[str, Any], *, claim_path: Path,
+    start_capability: _ReplicaStartCapability,
+) -> dict[str, Any]:
+    global _ACTIVE_REPLICA_START_CAPABILITY
     validate_stage2_authorization(stage2_authorization)
+    claim = authorized_json(stage2_authorization, claim_path)
+    validate_exact_claim(
+        claim, stage2_authorization, phase="stage2_selector_continuation"
+    )
+    if (
+        not isinstance(start_capability, _ReplicaStartCapability)
+        or start_capability is not _ACTIVE_REPLICA_START_CAPABILITY
+        or start_capability.consumed
+        or start_capability.authorization_sha256
+        != sha256_bytes(_canonical_json_bytes(stage2_authorization))
+        or start_capability.claim_sha256
+        != sha256_authorized_file(stage2_authorization, claim_path)
+    ):
+        raise SelectorInvalid("replica solve lacks validated claim and mandatory start token")
+    start_capability.consumed = True
+    _ACTIVE_REPLICA_START_CAPABILITY = None
     catalog_path = authorize_read_path(stage2_authorization, catalog_path)
     ledger_path = authorize_read_path(stage2_authorization, ledger_path)
     bindings_path = authorize_read_path(stage2_authorization, bindings_path)
@@ -844,10 +1211,21 @@ def solve_replica(catalog_path: Path, ledger_path: Path, bindings_path: Path, st
     equations = parse_ledger(raw_ledger)
     validate_catalog_structural_support(rows)
     compiled = compile_equations(rows, equations)
-    environment = selector_environment(stage2_authorization)
     declared_expected = expected_bindings.get("expected")
-    if not isinstance(declared_expected, Mapping) or not isinstance(declared_expected.get("universe_spec_sha256"), str):
+    if (
+        not isinstance(declared_expected, Mapping)
+        or not isinstance(declared_expected.get("universe_spec_sha256"), str)
+        or not isinstance(declared_expected.get("sealed_path_schema"), Mapping)
+        or not isinstance(declared_expected["sealed_path_schema"].get("stage2_authorization"), str)
+    ):
         raise SelectorInvalid("independent universe binding absent")
+    environment_path, full_environment = load_full_environment_receipt(stage2_authorization)
+    validate_selector_environment_receipt(stage2_authorization, full_environment)
+    sealed_schema = _sealed_path_schema(
+        stage2_paths(),
+        authorization_path=Path(declared_expected["sealed_path_schema"]["stage2_authorization"]),
+        authorization=stage2_authorization,
+    )
     actual = {
         **source_bindings(stage2_authorization),
         "catalog_sha256": sha256_authorized_file(stage2_authorization, catalog_path),
@@ -855,11 +1233,13 @@ def solve_replica(catalog_path: Path, ledger_path: Path, bindings_path: Path, st
         "final_commit": stage2_authorization["final_commit"],
         "stage2_authorization_sha256": sha256_bytes(_canonical_json_bytes(stage2_authorization)),
         "universe_spec_sha256": declared_expected["universe_spec_sha256"],
-        "sealed_path_schema": _sealed_path_schema(stage2_paths()),
+        "sealed_path_schema": sealed_schema,
         "sealed_path_schema_sha256": sha256_bytes(
-            _canonical_json_bytes(_sealed_path_schema(stage2_paths()))
+            _canonical_json_bytes(sealed_schema)
         ),
-        **environment,
+        "full_environment_receipt_path": str(environment_path),
+        "full_environment_receipt_sha256": stage2_authorization["full_environment_receipt_sha256"],
+        **full_environment,
     }
     expected = declared_expected
     if not isinstance(expected, Mapping) or dict(expected) != actual:
@@ -1034,18 +1414,19 @@ def _run_cold_replica(
     *, selector_path: Path, catalog_path: Path, ledger_path: Path,
     bindings_path: Path, output_path: Path, authorization_path: Path,
     authorization: Mapping[str, Any],
+    on_process_started: Any,
 ) -> Mapping[str, Any]:
     command = [
         sys.executable, "-I", "-B", str(selector_path), "replica",
         "--catalog", str(catalog_path), "--ledger", str(ledger_path),
         "--bindings", str(bindings_path), "--output", str(output_path),
         "--stage2-authorization", str(authorization_path),
-        "--await-start-token",
     ]
     started = time.monotonic()
     process = subprocess.Popen(
         command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
+    on_process_started()
     cap = None
     try:
         cap = _apply_resource_cap(process)
@@ -1090,13 +1471,26 @@ def _run_cold_replica(
     return result
 
 
-def _sealed_path_schema(paths: Mapping[str, Path]) -> dict[str, str]:
+def _sealed_path_schema(
+    paths: Mapping[str, Path], *, authorization_path: Path | None = None,
+    authorization: Mapping[str, Any] | None = None,
+) -> dict[str, str]:
     names = (
         "claim", "catalog", "universe_spec", "ledger", "bindings", "replica_1",
         "replica_2", "witness", "proposed_manifest", "verifier_report", "receipt",
-        "manifest",
+        "manifest", "stage2_failure", "full_claim", "full_failure", "result",
+        "operator_receipt",
+        "activity_claim", "activity_catalog", "activity_replica_1",
+        "activity_replica_2", "activity_verifier", "activity_witness",
+        "activity_manifest", "activity_full_claim", "activity_full_calibration",
+        "activity_full_primary_1", "activity_full_primary_2",
+        "activity_full_primary_3", "activity_full_primary_4",
+        "activity_full_complete",
     )
     result = {name: str(paths[name].resolve()) for name in names}
+    for name in sorted(paths):
+        if name.startswith("checkpoint_"):
+            result[name] = str(paths[name].resolve())
     for replica in (1, 2):
         base = paths[f"replica_{replica}"]
         result[f"replica_{replica}_stdout"] = str(
@@ -1108,7 +1502,48 @@ def _sealed_path_schema(paths: Mapping[str, Path]) -> dict[str, str]:
         result[f"replica_{replica}_resource"] = str(
             base.with_name(base.stem + ".resource.json").resolve()
         )
+    if authorization_path is not None:
+        result["stage2_authorization"] = str(authorization_path.resolve())
+    if authorization is not None:
+        result["full_environment_receipt"] = str(
+            Path(str(authorization["full_environment_receipt_path"])).resolve()
+        )
     return result
+
+
+SELECTOR_SEALED_OBJECT_NAMES = frozenset({
+    "stage2_authorization", "full_environment_receipt", "claim", "catalog",
+    "universe_spec", "ledger", "bindings", "replica_1", "replica_2",
+    "replica_1_stdout", "replica_1_stderr", "replica_1_resource",
+    "replica_2_stdout", "replica_2_stderr", "replica_2_resource", "witness",
+    "proposed_manifest", "verifier_report", "manifest", "activity_claim",
+    "activity_catalog", "activity_replica_1", "activity_replica_2",
+    "activity_verifier", "activity_witness", "activity_manifest",
+})
+
+
+def output_paths_must_be_absent(paths: Mapping[str, Path]) -> None:
+    if (
+        paths["session_root"].exists() or paths["result"].exists()
+        or paths["operator_receipt"].exists()
+    ):
+        raise SelectorInvalid("Stage-2/full destination already exists")
+
+
+def persist_activity_snapshot(
+    authorization: Mapping[str, Any], paths: Mapping[str, Path], phase: str,
+    activity: Mapping[str, Any],
+) -> dict[str, Any]:
+    key = f"activity_{phase}"
+    if key not in paths:
+        raise SelectorInvalid("unknown Stage-2 activity phase")
+    counts = validate_activity_counts(activity)
+    envelope = {"phase": phase, "activity_counts": counts}
+    _write_json_exclusive(paths[key], envelope)
+    loaded = authorized_json(authorization, paths[key])
+    if loaded != envelope:
+        raise SelectorInvalid("durable Stage-2 activity snapshot reload mismatch")
+    return envelope
 
 
 def _require_exhaustive_allowlist(
@@ -1121,8 +1556,11 @@ def _require_exhaustive_allowlist(
     }
     required.add(str(authorization_path.resolve()))
     required.add(str(Path(str(environment["python_executable"])).resolve()))
-    required.update(str(path) for path in _sealed_path_schema(paths).values())
+    required.update(str(path) for path in _sealed_path_schema(
+        paths, authorization_path=authorization_path, authorization=authorization,
+    ).values())
     required.update(str(Path(row[0]).resolve()) for row in environment["solver_artifacts"])
+    required.update(str(Path(row[0]).resolve()) for row in environment["torch_native_artifacts"])
     actual = set(authorization["source_build_read_allowlist"])
     if actual != required:
         missing = sorted(required - actual)
@@ -1132,9 +1570,14 @@ def _require_exhaustive_allowlist(
         )
 
 
-def run_two_replica_sequence(*, stage2_authorization_path: Path) -> dict[str, Any]:
+def run_two_replica_sequence(
+    *, stage2_authorization_path: Path,
+    claim_continuation: _Stage2ClaimContinuation,
+    activity_counts: dict[str, int],
+) -> dict[str, Any]:
     """Fixed-root continuation: two cold replicas, verifier, and one seal."""
 
+    global _ACTIVE_CLAIM_CONTINUATION, _ACTIVE_CATALOG_GENERATION_CAPABILITY
     paths = stage2_paths()
     stage2_authorization_path = safe_existing_path(stage2_authorization_path)
     bootstrap_authorization = _load_json(stage2_authorization_path)
@@ -1145,9 +1588,36 @@ def run_two_replica_sequence(*, stage2_authorization_path: Path) -> dict[str, An
     if authorization != bootstrap_authorization:
         raise SelectorInvalid("Stage-2 authorization changed during secure load")
     verify_authorized_source_config(authorization)
+    if (
+        not isinstance(claim_continuation, _Stage2ClaimContinuation)
+        or claim_continuation is not _ACTIVE_CLAIM_CONTINUATION
+        or claim_continuation.selector_consumed
+        or not claim_continuation.catalog_issued
+        or claim_continuation.authorization_sha256
+        != sha256_bytes(_canonical_json_bytes(authorization))
+    ):
+        raise SelectorInvalid("direct API lacks the exact fixed-root claim continuation")
+    claim_continuation.selector_consumed = True
+    _ACTIVE_CLAIM_CONTINUATION = None
+    if (
+        _ACTIVE_CATALOG_GENERATION_CAPABILITY is None
+        or _ACTIVE_CATALOG_GENERATION_CAPABILITY.authorization_sha256
+        != claim_continuation.authorization_sha256
+        or _ACTIVE_CATALOG_GENERATION_CAPABILITY.claim_sha256
+        != claim_continuation.claim_sha256
+    ):
+        raise SelectorInvalid("fixed-root continuation lost its issued catalog capability")
+    _ACTIVE_CATALOG_GENERATION_CAPABILITY = None
     if not paths["session_root"].is_dir() or not paths["claim"].is_file():
         raise SelectorInvalid("fixed Stage-2 namespace was not exclusively claimed")
-    for name in ("claim", "catalog", "universe_spec", "ledger", "verifier", "selector"):
+    claim = authorized_json(authorization, paths["claim"])
+    validate_exact_claim(
+        claim, authorization, phase="stage2_selector_continuation",
+    )
+    if sha256_authorized_file(authorization, paths["claim"]) != claim_continuation.claim_sha256:
+        raise SelectorInvalid("Stage-2 claim changed after continuation issuance")
+    validate_activity_counts(activity_counts)
+    for name in ("verifier", "selector"):
         authorize_read_path(authorization, paths[name])
     for name in (
         "bindings", "replica_1", "replica_2", "witness", "proposed_manifest",
@@ -1156,9 +1626,16 @@ def run_two_replica_sequence(*, stage2_authorization_path: Path) -> dict[str, An
         if paths[name].exists():
             raise SelectorInvalid("pre-existing fixed-root output invalidates exact-once Stage 2")
     paths["selector_root"].mkdir()
-    environment = selector_environment(authorization)
+    environment_path, full_environment = load_full_environment_receipt(authorization)
+    validate_selector_environment_receipt(authorization, full_environment)
     _require_exhaustive_allowlist(
-        authorization, stage2_authorization_path, paths, environment
+        authorization, stage2_authorization_path, paths, full_environment
+    )
+    for name in ("catalog", "universe_spec", "ledger"):
+        authorize_read_path(authorization, paths[name])
+    sealed_schema = _sealed_path_schema(
+        paths, authorization_path=stage2_authorization_path,
+        authorization=authorization,
     )
     expected = {
         **source_bindings(authorization),
@@ -1169,11 +1646,13 @@ def run_two_replica_sequence(*, stage2_authorization_path: Path) -> dict[str, An
         ),
         "final_commit": authorization["final_commit"],
         "stage2_authorization_sha256": sha256_bytes(_canonical_json_bytes(authorization)),
-        "sealed_path_schema": _sealed_path_schema(paths),
+        "sealed_path_schema": sealed_schema,
         "sealed_path_schema_sha256": sha256_bytes(
-            _canonical_json_bytes(_sealed_path_schema(paths))
+            _canonical_json_bytes(sealed_schema)
         ),
-        **environment,
+        "full_environment_receipt_path": str(environment_path),
+        "full_environment_receipt_sha256": authorization["full_environment_receipt_sha256"],
+        **full_environment,
     }
     bindings = {
         "selector_path": str(paths["selector"].resolve()),
@@ -1184,6 +1663,12 @@ def run_two_replica_sequence(*, stage2_authorization_path: Path) -> dict[str, An
     _write_json_exclusive(paths["bindings"], bindings)
     replicas = []
     for replica_index in (1, 2):
+        def process_started(index: int = replica_index) -> None:
+            activity_counts["canonical_ortools_processes"] += 1
+            activity_counts["replicas"] += 1
+            persist_activity_snapshot(
+                authorization, paths, f"replica_{index}", activity_counts,
+            )
         output = paths[f"replica_{replica_index}"]
         replicas.append(
             _run_cold_replica(
@@ -1192,6 +1677,7 @@ def run_two_replica_sequence(*, stage2_authorization_path: Path) -> dict[str, An
                 output_path=output,
                 authorization_path=stage2_authorization_path,
                 authorization=authorization,
+                on_process_started=process_started,
             )
         )
     agreed = compare_replicas(replicas[0], replicas[1])
@@ -1201,6 +1687,8 @@ def run_two_replica_sequence(*, stage2_authorization_path: Path) -> dict[str, An
         "membership_vector_sha256": agreed["membership_vector_sha256"],
     }
     _write_json_exclusive(paths["witness"], witness)
+    activity_counts["witnesses"] += 1
+    persist_activity_snapshot(authorization, paths, "witness", activity_counts)
     _write_json_exclusive(paths["proposed_manifest"], agreed["manifest"])
     verifier_command = [
         sys.executable, "-I", "-B", str(paths["verifier"]),
@@ -1211,10 +1699,23 @@ def run_two_replica_sequence(*, stage2_authorization_path: Path) -> dict[str, An
         "--replica", str(paths["replica_1"]), "--replica", str(paths["replica_2"]),
         "--stage2-authorization", str(stage2_authorization_path),
     ]
-    completed = subprocess.run(
-        verifier_command, capture_output=True, timeout=WALL_SECONDS, check=False
-    )
-    if completed.returncode != 0 or completed.stdout or completed.stderr:
+    try:
+        verifier_process = subprocess.Popen(
+            verifier_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
+    except OSError as exc:
+        raise SelectorInvalid("independent verifier failed to start") from exc
+    activity_counts["canonical_verifier_admissions"] += 1
+    persist_activity_snapshot(authorization, paths, "verifier", activity_counts)
+    try:
+        verifier_stdout, verifier_stderr = verifier_process.communicate(
+            timeout=WALL_SECONDS
+        )
+    except subprocess.TimeoutExpired as exc:
+        verifier_process.kill()
+        verifier_process.communicate()
+        raise SelectorInvalid("independent verifier exceeded 1800 wall seconds") from exc
+    if verifier_process.returncode != 0 or verifier_stdout or verifier_stderr:
         raise SelectorInvalid("independent verifier failed closed")
     report = authorized_json(authorization, paths["verifier_report"])
     if report.get("verdict") != "VERIFIED" or report.get("manifest_sha256") != agreed["manifest_sha256"]:
@@ -1228,13 +1729,15 @@ def run_two_replica_sequence(*, stage2_authorization_path: Path) -> dict[str, An
         paths["manifest"].chmod(0o444)
     except OSError as exc:
         raise SelectorInvalid("published manifest could not be made read-only") from exc
+    activity_counts["manifests"] += 1
+    persist_activity_snapshot(authorization, paths, "manifest", activity_counts)
     sealed_objects = {
         name: {
             "path": locator,
             "sha256": sha256_authorized_file(authorization, Path(locator)),
         }
-        for name, locator in _sealed_path_schema(paths).items()
-        if name != "receipt"
+        for name, locator in sealed_schema.items()
+        if name in SELECTOR_SEALED_OBJECT_NAMES
     }
     success = {
         "branch": VALID,
@@ -1272,6 +1775,9 @@ def run_two_replica_sequence(*, stage2_authorization_path: Path) -> dict[str, An
         "replica_resource_telemetry": [
             replicas[0]["resource_telemetry"], replicas[1]["resource_telemetry"]
         ],
+        "activity_counts": dict(activity_counts),
+        "full_environment_receipt_path": str(environment_path),
+        "full_environment_receipt_sha256": authorization["full_environment_receipt_sha256"],
     }
     validate_selector_receipt_schema(success)
     _write_json_exclusive(paths["receipt"], success)
@@ -1302,12 +1808,17 @@ def _replica_cli(args: argparse.Namespace) -> int:
         or str(output_path) not in authorization["source_build_read_allowlist"]
     ):
         raise SelectorInvalid("cold replica output is not an exact fixed-root locator")
-    if args.await_start_token:
-        _self_memory_cap()
-        if sys.stdin.buffer.readline() != b"START\n":
-            raise SelectorInvalid("cold replica start-token gate failed")
+    claim_path = stage2_paths()["claim"]
+    authorize_read_path(authorization, claim_path)
+    _self_memory_cap()
+    if sys.stdin.buffer.readline() != b"START\n":
+        raise SelectorInvalid("cold replica mandatory start-token gate failed")
+    start_capability = _issue_replica_start_capability(
+        authorization, claim_path
+    )
     result = solve_replica(
-        Path(args.catalog), Path(args.ledger), Path(args.bindings), authorization
+        Path(args.catalog), Path(args.ledger), Path(args.bindings), authorization,
+        claim_path=claim_path, start_capability=start_capability,
     )
     _write_json_exclusive(output_path, result)
     return 0
@@ -1322,7 +1833,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     replica.add_argument("--stage2-authorization", required=True)
     replica.add_argument("--bindings", required=True)
     replica.add_argument("--output", required=True)
-    replica.add_argument("--await-start-token", action="store_true")
     args = parser.parse_args(argv)
     try:
         return _replica_cli(args)

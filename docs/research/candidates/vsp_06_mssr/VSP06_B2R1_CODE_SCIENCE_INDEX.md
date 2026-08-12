@@ -31,6 +31,19 @@ commit, Explorer-audited exact seven-path source/config digest map and its
 canonical digest, exhaustive exact read allowlist, identities, `formal=false`,
 `synthetic_only=false`, and all-zero start activity before canonical activity.
 
+The dormant runner also exposes a write-free `stage2-readiness` entry. It
+securely rehashes the exact seven-path operational-byte map and validates the
+authorization, exhaustive allowlist, absent destinations, all 18 zero-start
+counters, CPython 3.11 executable, `ortools==9.12.4544`, native solver
+inventory, serialized SatParameters, and one externally SHA-256-anchored full
+environment receipt before any namespace or catalog row can exist.
+`stage2-seal` repeats the same readiness sequence immediately before its one
+exclusive namespace claim. Successful readiness issues one opaque in-process
+capability that the claim must consume; the claim's secure reread then issues
+one identity-checked continuation, and only that continuation can issue the
+single active catalog-generation capability. Directly constructed capability
+objects, authorization-shaped values, and replayed continuations fail closed.
+
 The seal binds the exact seven-path final-commit source/config digest map,
 authorization digest, executable locator/digest, native solver artifacts and
 parameters, catalog, ledger, universe specification, both complete replicas,
@@ -41,6 +54,33 @@ and authorization digest with the manifest/receipt-sealed values. It also
 requires the selector receipt's externally supplied lowercase SHA-256 anchor,
 verifies that anchor before reading any receipt field, and rejects any receipt
 whose exact key schema changes. The receipt is therefore not self-authorizing.
+The full-environment receipt additionally freezes CPU-only PyTorch `2.7.0`,
+its exact distribution/build and native-artifact inventory, no CUDA,
+deterministic-algorithm mode without warn-only fallback, one intra-op and one
+inter-op thread, and the four exact thread-environment bindings. The live CPU
+Torch binding is validated during write-free preclaim readiness, before
+namespace claim or catalog observation, and `_torch` revalidates the same
+frozen binding without making a later choice before returning Torch to a
+learner.
+
+Both the selector and full claims use one exact schema: treatment, final
+commit, authorization digest, ordinal `1`, phase, all 18 zero-start counters,
+and zero sweeps/retries/rescues/extra roots. A missing, partial, preconstructed,
+mutated, or mismatched claim cannot reach catalog reads or selector output;
+each replica additionally requires a securely validated claim and its mandatory
+parent-issued start token before catalog reads. Append-only phase snapshots
+durably record the exact unified 18-key lifecycle map from selector claim,
+actual generator rows, successfully started solver/verifier processes,
+replicas, witness and manifest fixation through full claim, calibration, each
+primary seed, and completion. The separate 14-key scientific cap submap is
+retained. After any exact claim or durable nonzero activity, including a later
+process invocation, failures return only
+`B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY` from local durable accounting,
+without resume/replay or dependence on an unreadable claim after the local
+claim boundary; a malformed preconstructed zero-activity root remains a
+technical no-start. A completed invalid
+contract/activity/cap/provenance result uses first-precedence
+`B2R1_INVALID_CONTRACT_ACTIVITY_CAP_OR_PROVENANCE`.
 
 ## Frozen identities and selector structure
 
@@ -80,7 +120,11 @@ whose exact key schema changes. The receipt is therefore not self-authorizing.
 | Explorer-audited commit-to-bytes binding | exact authorization schema and secure live seven-path rehash in runner, selector, verifier, and full gate | malformed map/digest and live-map drift negatives; runner ordering proves rehash precedes namespace claim and generation |
 | Externally anchored selector receipt | runner and manifest gate | required CLI/API digest, mismatch-before-field-read negative, and exact receipt-key missing/extra negatives |
 | Exact independent canonical universe recipe | pure stdlib validator before reconstruction | every top-level, four-pool field, and final-KEEP field family is mutated and rejected without materializing canonical rows |
-| Fixed-root exact-once lifecycle and explicit zero caps | wiring-only runner and exact activity schema | temporary synthetic claim collision, no alternate CLI destinations, missing zero-cap key rejection |
+| Fixed-root exact-once lifecycle and explicit zero caps | wiring-only runner and exact activity schema | temporary synthetic claim collision, missing-claim technical no-start, no alternate CLI destinations, missing zero-cap key rejection |
+| Write-free preclaim readiness and exact external full environment | runner, selector, and guarded Torch binding | injected source-map/allowlist/CPython/OR-Tools/native/Torch failures precede claim/catalog and preserve all 18 zeros; external receipt mutation fails its digest anchor |
+| Direct API closure from readiness through replicas | identity-checked readiness, claim-continuation, catalog, and start capabilities | direct claim/catalog/final-KEEP/solve and replica-CLI bypass negatives, including a correctly shaped forged catalog capability |
+| Unified truthful lifecycle and terminal precedence | exact 18-key selector/full snapshots plus retained 14-key scientific cap map | failed `Popen`, injected mid-PPO partial progress, mutated/unreadable postclaim claim, later-process zero/nonzero durable lifecycle, malformed-root no-start, and completed-invalid first-branch negatives |
+| Complete deterministic secure read schema | sealed authorization/environment/claim/activity/selector/full/checkpoint/result/failure locators | exact 64-checkpoint schema plus concrete first-checkpoint mutation/alias/reparse negatives |
 | Canonical/full operations impossible without explicit commit-bound authorization and all Stage-1 activity zero | three guarded modules and wiring-only runner | invalid/missing authorization, lazy-import, zero-counter, and reserved-absence checks |
 
 ## Frozen ledger
