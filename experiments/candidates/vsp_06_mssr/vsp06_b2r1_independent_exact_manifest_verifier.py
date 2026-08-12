@@ -52,6 +52,19 @@ PARAMETER_ASSIGNMENTS = {
     "max_time_in_seconds": 1800.0,
     "max_deterministic_time": 1000.0,
 }
+FULL_ENVIRONMENT_RECEIPT_KEYS = {
+    "schema_version", "python_implementation", "python_version",
+    "python_executable", "python_executable_sha256", "ortools_version",
+    "ortools_source_tag", "solver_artifacts", "solver_artifact_set_sha256",
+    "sat_parameters_sha256", "sat_parameters_hex", "sat_parameter_assignments",
+    "sat_parameter_assignments_sha256", "os", "os_release", "architecture",
+    "torch_distribution_version", "torch_build_version", "torch_cpu_only",
+    "torch_cuda_version", "torch_cuda_available",
+    "torch_deterministic_algorithms", "torch_deterministic_warn_only",
+    "torch_num_threads", "torch_num_interop_threads", "torch_native_artifacts",
+    "torch_native_artifact_set_sha256", "torch_distribution_inventory_sha256",
+    "torch_build_config_sha256", "thread_environment",
+}
 
 # Frozen v9.12 SatParameters wire schema for the only fields assigned by the
 # selector.  Keeping this table in the independent verifier ties the claimed
@@ -115,7 +128,7 @@ class VerificationError(RuntimeError):
 
 
 def _validate_stage2_authorization(value: Mapping[str, Any]) -> None:
-    required = {"direction", "candidate", "treatment_id", "selector_id", "verifier_id", "scientific_parent", "final_commit", "source_build_read_allowlist", "source_config_digest_map", "source_config_digest_map_sha256", "formal", "synthetic_only", "zero_start_activity"}
+    required = {"direction", "candidate", "treatment_id", "selector_id", "verifier_id", "scientific_parent", "final_commit", "source_build_read_allowlist", "source_config_digest_map", "source_config_digest_map_sha256", "formal", "synthetic_only", "zero_start_activity", "full_environment_receipt_path", "full_environment_receipt_sha256"}
     fixed = {"direction": DIRECTION_ID, "candidate": CANDIDATE_ID, "treatment_id": TREATMENT_ID, "selector_id": SELECTOR_ID, "verifier_id": VERIFIER_ID, "scientific_parent": SCIENTIFIC_PARENT, "formal": False, "synthetic_only": False}
     if not isinstance(value, Mapping) or set(value) != required or any(value.get(k) != v for k, v in fixed.items()):
         raise VerificationError("missing or invalid Stage-2 authorization binding")
@@ -124,6 +137,15 @@ def _validate_stage2_authorization(value: Mapping[str, Any]) -> None:
     activity = value.get("zero_start_activity")
     if not isinstance(commit, str) or len(commit) != 40 or any(c not in "0123456789abcdef" for c in commit):
         raise VerificationError("invalid Stage-2 final commit binding")
+    environment_path = value.get("full_environment_receipt_path")
+    environment_digest = value.get("full_environment_receipt_sha256")
+    if (
+        not isinstance(environment_path, str) or not Path(environment_path).is_absolute()
+        or ".." in Path(environment_path).parts or any(char in environment_path for char in "*?[")
+        or not isinstance(environment_digest, str) or len(environment_digest) != 64
+        or any(char not in "0123456789abcdef" for char in environment_digest)
+    ):
+        raise VerificationError("invalid external full-environment receipt anchor")
     if not isinstance(allowlist, list) or not allowlist or any(
         not isinstance(item, str) or not Path(item).is_absolute() or ".." in Path(item).parts
         or any(char in item for char in "*?[") for item in allowlist
@@ -439,7 +461,20 @@ def _expected_universe_spec() -> dict[str, Any]:
 def validate_declarative_universe_spec(spec: Mapping[str, Any]) -> None:
     """Pure exact recipe validation; performs no canonical row reconstruction."""
 
-    if not isinstance(spec, Mapping) or dict(spec) != _expected_universe_spec():
+    def exact_json_equal(left: Any, right: Any) -> bool:
+        if type(left) is not type(right):
+            return False
+        if isinstance(left, Mapping):
+            return set(left) == set(right) and all(
+                exact_json_equal(left[key], right[key]) for key in left
+            )
+        if isinstance(left, list):
+            return len(left) == len(right) and all(
+                exact_json_equal(a, b) for a, b in zip(left, right, strict=True)
+            )
+        return left == right
+
+    if not isinstance(spec, Mapping) or not exact_json_equal(dict(spec), _expected_universe_spec()):
         raise VerificationError("declarative universe specification differs from frozen recipe")
 
 
@@ -845,7 +880,9 @@ def _check_live_binding(
         raise VerificationError("serialized SatParameters digest mismatch")
 
 
-def _expected_sealed_path_schema() -> dict[str, str]:
+def _expected_sealed_path_schema(
+    authorization_path: Path, authorization: Mapping[str, Any],
+) -> dict[str, str]:
     root = PROJECT_ROOT / "temp/sessions/code_project_manager/vsp06_b2r1_source_bound_exact_feasibility_credit_efficiency"
     selector_root = root / "selector"
     result = {
@@ -861,7 +898,26 @@ def _expected_sealed_path_schema() -> dict[str, str]:
         "verifier_report": str((selector_root / "independent_verifier_report.json").resolve()),
         "receipt": str((selector_root / "selector_success_receipt.json").resolve()),
         "manifest": str((root / "frozen_manifest.json").resolve()),
+        "stage2_failure": str((root / "stage2_terminal_failure.json").resolve()),
+        "full_claim": str((root / "registered_full/registered_full_claim.json").resolve()),
+        "full_failure": str((root / "registered_full/registered_full_failure.json").resolve()),
+        "result": str((PROJECT_ROOT / "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_AUTHENTICATED_PARTNER_RECALL_CREDIT_EFFICIENCY_RESULT.json").resolve()),
+        "operator_receipt": str((PROJECT_ROOT / "temp/sessions/code_project_manager/vsp06_b2r1_operator_receipt.json").resolve()),
+        "stage2_authorization": str(authorization_path.resolve()),
+        "full_environment_receipt": str(Path(str(authorization["full_environment_receipt_path"])).resolve()),
     }
+    for phase in (
+        "claim", "catalog", "replica_1", "replica_2", "verifier", "witness",
+        "manifest", "full_claim", "full_calibration", "full_primary_1",
+        "full_primary_2", "full_primary_3", "full_primary_4", "full_complete",
+    ):
+        result[f"activity_{phase}"] = str((root / "activity" / f"{phase}.json").resolve())
+    for seed in ("primary_1", "primary_2", "primary_3", "primary_4"):
+        for arm in ("MSSR_P_FIXED_VALIDITY_CARRIER", "GENERIC_PROVENANCE_CONDITIONED_CARRIER"):
+            for checkpoint in (0, 512, 1024, 1536, 2048, 2560, 3072, 4096):
+                result[f"checkpoint_{seed}_{arm}_{checkpoint}"] = str(
+                    (root / "registered_full/checkpoints" / seed / arm / f"episodes_{checkpoint}.pt").resolve()
+                )
     for replica in (1, 2):
         base = selector_root / f"cold_replica_{replica}.json"
         result[f"replica_{replica}_stdout"] = str(base.with_name(base.stem + ".stdout.log").resolve())
@@ -892,7 +948,7 @@ def verify(
     replica_paths = tuple(authorize_read_path(authorization, path) for path in replica_paths)
     if len(replica_paths) != 2:
         raise VerificationError("exactly two replica reports are required")
-    sealed = _expected_sealed_path_schema()
+    sealed = _expected_sealed_path_schema(stage2_authorization_path, authorization)
     exact_inputs = {
         "catalog": catalog_path, "universe_spec": universe_path,
         "ledger": ledger_path, "witness": witness_path,
@@ -933,7 +989,8 @@ def verify(
         "sat_parameter_assignments_sha256", "os", "os_release",
         "architecture", "final_commit", "stage2_authorization_sha256",
         "universe_spec_sha256", "sealed_path_schema", "sealed_path_schema_sha256",
-    }
+        "full_environment_receipt_path", "full_environment_receipt_sha256",
+    } | FULL_ENVIRONMENT_RECEIPT_KEYS
     if set(expected) != required_binding_keys:
         raise VerificationError("source/build/parameter binding key set changed")
     if expected["final_commit"] != authorization["final_commit"] or expected["stage2_authorization_sha256"] != _digest(_json_bytes(authorization)):
@@ -961,6 +1018,36 @@ def verify(
     ):
         raise VerificationError("seven-path final-commit source/config binding mismatch")
 
+    environment_path = authorize_read_path(
+        authorization, Path(str(expected["full_environment_receipt_path"]))
+    )
+    environment_payload = _authorized_bytes(authorization, environment_path)
+    if (
+        str(environment_path) != authorization["full_environment_receipt_path"]
+        or expected["full_environment_receipt_sha256"]
+        != authorization["full_environment_receipt_sha256"]
+        or _digest(environment_payload) != authorization["full_environment_receipt_sha256"]
+    ):
+        raise VerificationError("external full-environment receipt binding mismatch")
+    try:
+        environment_receipt = json.loads(environment_payload.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise VerificationError("external full-environment receipt is invalid") from exc
+    if (
+        not isinstance(environment_receipt, Mapping)
+        or set(environment_receipt) != FULL_ENVIRONMENT_RECEIPT_KEYS
+        or any(expected.get(key) != value for key, value in environment_receipt.items())
+    ):
+        raise VerificationError("manifest does not contain the exact external full environment")
+    for row in environment_receipt["torch_native_artifacts"]:
+        artifact = authorize_read_path(authorization, Path(row[0]))
+        if row[1] != _authorized_digest(authorization, artifact):
+            raise VerificationError("Torch native artifact digest mismatch")
+    if environment_receipt["torch_native_artifact_set_sha256"] != _digest(
+        _json_bytes(environment_receipt["torch_native_artifacts"])
+    ):
+        raise VerificationError("Torch native artifact inventory digest mismatch")
+
     if (
         verifier_path != Path(__file__).resolve()
         or selector_path != (PROJECT_ROOT / SOURCE_CONFIG_RELATIVE_PATHS[0]).resolve()
@@ -972,7 +1059,9 @@ def verify(
         or expected["sealed_path_schema_sha256"] != _digest(
             _json_bytes(expected["sealed_path_schema"])
         )
-        or expected["sealed_path_schema"] != _expected_sealed_path_schema()
+        or expected["sealed_path_schema"] != _expected_sealed_path_schema(
+            stage2_authorization_path, authorization
+        )
     ):
         raise VerificationError("source/input binding mismatch")
     if not synthetic_only:
@@ -1039,6 +1128,7 @@ def verify(
         "solver_artifact_set_sha256": expected["solver_artifact_set_sha256"],
         "sat_parameters_sha256": expected["sat_parameters_sha256"],
         "python_executable_sha256": expected["python_executable_sha256"],
+        "full_environment_receipt_sha256": expected["full_environment_receipt_sha256"],
         "membership_witness_sha256": _authorized_digest(authorization, witness_path),
         "replica_sha256": [
             _authorized_digest(authorization, path) for path in replica_paths
@@ -1233,7 +1323,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         if authorization != bootstrap_authorization:
             raise VerificationError("Stage-2 authorization changed before report write")
         report_path = Path(args.report)
-        expected_report = _expected_sealed_path_schema()["verifier_report"]
+        expected_report = _expected_sealed_path_schema(
+            authorization_path, authorization
+        )["verifier_report"]
         if (
             str(report_path) != str(report_path.resolve())
             or str(report_path) != expected_report
