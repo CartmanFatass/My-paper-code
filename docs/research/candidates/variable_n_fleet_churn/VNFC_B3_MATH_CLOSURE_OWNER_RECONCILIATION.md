@@ -2,8 +2,8 @@
 
 Owner: `direction:variable-n-fleet-churn` Explorer Manager  
 Treatment: `VNFC-B3-SCALABLE-REWARD-SOURCE-CUT-v1`  
-Closed prospective revision: `SP-RDA-MATH-CLOSURE-20260812-06`  
-Status: `V6_PRO_CLOSED_READY_FOR_ROOT_TO_CM_RELAY`  
+Current prospective revision: `SP-RDA-MATH-CLOSURE-20260812-07`  
+Status: `V7_FROZEN_AWAITING_SAME_CONVERSATION_PRO_REREVIEW_AFTER_CRTO`  
 
 Latest child terminal archive (preserved but superseded on send-boundary facts):
 `temp/sessions/agentify_transport_operator/independent_research_explorer/variable_n_fleet_churn_b3_math_closure_v3/results.json`  
@@ -22,6 +22,9 @@ V5 authoritative scientific intake:
 
 V6 authoritative closure intake:
 `docs/research/candidates/variable_n_fleet_churn/VNFC_B3_V6_EXTERNAL_PRO_CLOSURE_INTAKE.md`  
+
+V6 preactivity infeasibility and v7 owner revision:
+`docs/research/candidates/variable_n_fleet_churn/VNFC_B3_V6_PREACTIVITY_BANK_INFEASIBILITY_AND_V7_REVISION.md`  
 
 ## Owner decision
 
@@ -416,3 +419,41 @@ earlier revisions and prior CM acceptance remain superseded. This closure does n
 authorize a production command: Root retains scheduling, CM must freshly accept
 the implementation contract, and Stage 2 consumes no compute unless every frozen
 Stage-1 release condition passes.
+
+## V6 preactivity bank infeasibility and v7 prospective supersession
+
+Before any v6 scientific activity, CM's deterministic zero-metric probe proved
+the first required `(1601, training, 6->9)` bank empty: all 96 allowed raw bases
+failed because no single history could satisfy every variant-specific
+`S_pre^v>=S_star^v-0.02` bound. An exhaustive `4^6` history check on raw zero
+confirmed no shared feasible history and best common margin `-0.04905`. No model
+update, treatment metric, or result exists.
+
+This makes v6 non-instantiable and supersedes its Pro-closed specification for
+production; it is not negative evidence about SP-RDA or learned bids. V7 changes
+only the shared-history benchmark to
+`Delta(p)<=Delta_star+0.02`, where
+`Delta(p)=max_v(S_star^v-S_pre^v(p))` and `Delta_star=min_p Delta(p)`. It preserves
+the four matrices, a single history shared across variants, numerical `0.02`
+slack, and every later treatment definition. The certificate routine becomes 25
+calls and the maximum call ledger 128,000.
+
+Because the target panel and claim boundary change, v7 requires a new full-
+composite ruling in the existing VNFC Pro conversation. It remains unsent until
+CRTO Pro is terminal and Root separately confirms Agentify idle and releases it.
+No CM conformance, construction, or production may proceed against v7 before
+literal Pro `CLOSED` plus owner intake.
+
+## Frozen v7 External Pro requester
+
+The exact requester is:
+
+`temp/sessions/agentify_transport_operator/independent_research_explorer/variable_n_fleet_churn_b3_math_closure_v7/batch.json`
+
+Its sole provider-visible question embeds the complete v7 card exactly and has
+internal digest
+`1e0a387d636e538b11e3357219d69c69fbd46bdaa66cb79c462e106f2ca551cf`.
+It remains unsent. Per Root scheduling, CRTO owns the next Pro slot; preparation
+does not authorize transport. After CRTO terminal, Root must separately confirm
+Agentify idle and release exactly one same-conversation v7 operation. V3 through
+v6 are never-resend.

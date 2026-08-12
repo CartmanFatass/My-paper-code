@@ -3,12 +3,13 @@
 Owner: `direction:variable-n-fleet-churn` Explorer Manager  
 Treatment identity: `VNFC-B3-SCALABLE-REWARD-SOURCE-CUT-v1`  
 Candidate family: `SALA-RDA` (Shared Set/Lease Actor with Residual-Demand Auction)  
-Current prospective revision: `SP-RDA-MATH-CLOSURE-20260812-06`  
+Current prospective revision: `SP-RDA-MATH-CLOSURE-20260812-07`  
 Superseded revisions: `SP-RDA-COMPLEXITY-CORRECTION-20260812-01`,
 `SP-RDA-MATH-CLOSURE-20260812-02`, and
 `SP-RDA-MATH-CLOSURE-20260812-03`,
 `SP-RDA-MATH-CLOSURE-20260812-04`, and
-`SP-RDA-MATH-CLOSURE-20260812-05`  
+`SP-RDA-MATH-CLOSURE-20260812-05`, and
+`SP-RDA-MATH-CLOSURE-20260812-06`  
 Hard complexity contract: `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`  
 
 ## Decision first
@@ -24,18 +25,21 @@ for this treatment.
 
 The successor is frozen as one prospective full Stage-1 plus conditional-Stage-2
 composite under the revision above. The existing same-direction ChatGPT Pro
-conversation returned `REVISION_REQUIRED` on v5. It confirmed that v5 resolved
-all twelve defects across the v3 and v4 rulings, and again confirmed the fixed-
-three-task SP-RDA `O(N log N)`/`O(N)` derivation. Four defects remained: adaptive
-support could pass without a thresholded executed lease difference; `J`/`Trec`
-did not identify service-only noninferiority; the memory audit mixed machine words
-with abstract elements; and the maximum Stage-1 wording exceeded its registered
-subgroup evidence. V6 applies Pro's four smallest complete replacements
-prospectively while preserving the core question, Stage-1 gate, sparse allocator,
-panel, and primary return contrast.
+conversation returned `CLOSED` on v6. It confirmed that the complete mathematical,
+causal, operational, bounded-work, and claim definitions were single-valued and
+that the fixed-three-task SP-RDA derivation is `O(N log N)`/`O(N)`. A subsequent
+preactivity deterministic CM proof probe found the first required training bank
+non-instantiable before any metric, model update, or treatment output: for every
+raw index `0,...,95` at seed 1601 and schedule `6->9`, no one shared history could
+lie within `0.02` of all four variant-specific pre-service optima. V7 is therefore
+a prospective science-bearing panel-law correction, not a run repair or negative
+treatment result. It replaces only that contradictory benchmark with the best
+attainable shared minimax-regret benchmark while preserving the four matrices,
+one history across variants, the numerical `0.02` tolerance, all later treatment
+definitions, and the primary return contrast.
 It is not CM- or production-released. The prior CM acceptance and every earlier
-mathematical revision are non-operative. Only a Pro `CLOSED` verdict on this exact
-full v6 plus
+mathematical revision are non-operative. Only a new Pro `CLOSED` verdict on this
+exact full v7 plus
 same-direction owner intake permits Root to relay it; CM must then explicitly
 accept its changed generator, action, comparator, panel, analysis, activity, and
 count contracts before any Stage-1 production command.
@@ -195,9 +199,26 @@ raw blocks before the fixed-mass post-event rescaling.
 ### Paired churn necessity
 
 For one post-event roster, capability matrix, demand, and membership event,
-construct two distinct pre-event assignments using an offline solver. Both must
-be within `0.02` of the best pre-event service-only return available to that
-pre-event roster. They differ only in survivor task history:
+construct two distinct pre-event assignments using an offline solver. Because one
+history is deliberately shared across all four mass/geometry variants, define its
+quality relative to the best attainable shared compromise, not four mutually
+incompatible variant-wise optima. For variant `v`, first compute its individual
+pre-service optimum `S_star^v`. For one shared history `p`, define worst variant
+regret
+
+`Delta(p)=max_(v in V)(S_star^v-S_pre^v(p))`
+
+and the best attainable shared regret
+
+`Delta_star=min_p Delta(p)`.
+
+Both selected histories must satisfy
+
+`Delta(p)<=Delta_star+0.02`,
+
+equivalently `S_pre^v(p)>=S_star^v-Delta_star-0.02` for every variant. The four
+capability matrices, one shared history across variants, and numerical `0.02`
+slack are unchanged. The selected histories differ only in survivor task history:
 
 - `KEEP_OPTIMAL`: the best post-event allocation constrained to keep every
   survivor on its previous role is within `0.01` of the unrestricted post-event
@@ -646,26 +667,29 @@ encode tasks as `0,1,2,DUMMY=3`. Define the unique mixed-radix history rank
 `rank(p)=sum_j code(p[h_j])*4^(|P|-1-j)`.
 
 Every optimization below is a fixed-small offline MIP with certified absolute
-objective gap at most `1e-9`. The routine executes at most these 24 logical solver
+objective gap at most `1e-9`. The routine executes at most these 25 logical solver
 calls in exactly this order:
 
 1. Calls 1--4 compute `S_star^v=max_p S_pre^v(p)` in fixed variant order
    `FIXED-SEPARABLE`, `FIXED-COUPLED`, `REAL-SEPARABLE`, `REAL-COUPLED`.
-2. Call 5 jointly chooses one shared history `p` and one all-survivors-kept
+2. Call 5 minimizes `Delta(p)=max_v(S_star^v-S_pre^v(p))` over one shared history
+   and records the certified optimum `Delta_star`. This call has no post-event
+   assignment or treatment arm.
+3. Call 6 jointly chooses one shared history `p` and one all-survivors-kept
    post-event assignment per variant, subject to
-   `S_pre^v(p)>=S_star^v-0.02` for every `v`, and maximizes their minimum physical
-   return `t_K`. Call 6 repeats those constraints with
-   `t_K>=t_K_star-1e-9` and minimizes `rank(p)`; its unique history is `p_KEEP`.
-3. Call 7 chooses one shared history `p` that satisfies every pre-event bound and
-   differs from `p_KEEP` on at least one survivor, minimizing
-   `q_W=max_v Q^v(p)`. Call 8 repeats with `q_W<=q_W_star+1e-9` and minimizes
+   `Delta(p)<=Delta_star+0.02`, and maximizes their minimum physical return `t_K`.
+   Call 7 repeats those constraints with `t_K>=t_K_star-1e-9` and minimizes
+   `rank(p)`; its unique history is `p_KEEP`.
+4. Call 8 chooses one shared history `p` that satisfies the same shared-regret
+   bound and differs from `p_KEEP` on at least one survivor, minimizing
+   `q_W=max_v Q^v(p)`. Call 9 repeats with `q_W<=q_W_star+1e-9` and minimizes
    `rank(p)`; its unique history is `p_SWITCH`.
-4. Calls 9--24, in the same fixed variant order, compute exactly
+5. Calls 10--25, in the same fixed variant order, compute exactly
    `R^v(p_KEEP)`, `K^v(p_KEEP)`, `R^v(p_SWITCH)`, and `K^v(p_SWITCH)`.
 
 The shared history pair qualifies only if, for every variant,
 
-- both histories satisfy the pre-event `0.02` service-only bound;
+- both histories satisfy `Delta(p)<=Delta_star+0.02`;
 - every survivor's old role is `DUMMY` or has positive post-event capability;
 - `R^v(p_KEEP)-K^v(p_KEEP)<=0.01`; and
 - `R^v(p_SWITCH)-K^v(p_SWITCH)>=0.10`.
@@ -695,7 +719,7 @@ incomplete: do not train a learned arm and return panel infeasibility before
 scientific activity.
 
 Across both disjoint splits the complete ceiling is 5,120 shared raw bases, 20,480
-derived variant records, and 122,880 certificate-solver calls. The training bank
+derived variant records, and 128,000 certificate-solver calls. The training bank
 contains 1,024 retained shared bases, 8,192 physical cell-worlds, and 32,768
 stochastic trials. Every actual call and outcome is recorded inside the 90-minute
 Stage-1 envelope. Certificate objectives and ceiling values define the frozen
@@ -703,7 +727,7 @@ training distribution but are never supplied as observations, labels, rewards,
 actions, or auxiliary losses.
 
 For a retained conclusion success, the eight unrestricted values
-`R^v(p_KEEP)` and `R^v(p_SWITCH)` from calls 9--24 are the retained `RC-MIP`
+`R^v(p_KEEP)` and `R^v(p_SWITCH)` from calls 10--25 are the retained `RC-MIP`
 ceiling outputs and are reused exactly; the 6,144 retained conclusion ceilings are
 a tagged subset of the certificate-call ledger, never additional or recomputed
 solver calls.
@@ -1019,7 +1043,7 @@ lifecycle state.
 ### Serial Stage-2 inference
 
 All Stage-2 algorithms, function classes, optimizer laws, seeds, random
-namespaces, panels, estimands, margins, and tests in this v6 composite are frozen
+namespaces, panels, estimands, margins, and tests in this v7 composite are frozen
 before Stage-1 activity. Their potential outputs are mathematically defined even
 when Stage 2 is not executed. Let `A1` be the complete seven-condition Stage-1
 release event and let `A2_pressure` and `A2_lease` be the complete corresponding
@@ -1156,7 +1180,7 @@ response is itself required for activity.
     the joint log probability by latent count, or replication of one team return
     changes the treatment. A positive result cannot rescue that credit-path defect.
 15. Exceeding 96 training or 64 conclusion shared raw bases per seed-schedule, or
-    24 logical certificate-solver calls per raw base, using variant-specific
+    25 logical certificate-solver calls per raw base, using variant-specific
     histories or retention, relaxing a certificate, or topping up a bank from
     Stage-1 arm/intervention outcomes changes the target law. Missing joint-
     certified bases make the split incomplete; they may not be repaired after
@@ -1183,6 +1207,13 @@ bid-association cut, exact ceiling, equal-mass geometry pairs, fixed-mass
 above-range panel, and paired keep/switch construction bound those explanations
 without eliminating host specificity.
 
+V7 adds a sharper alternative: value may be specific to histories selected as the
+best shared minimax-regret compromise across four deliberately crossed capability
+variants, rather than histories generated by an operational pre-churn allocation
+policy. The experiment may identify learned value conditional on that target law;
+it cannot claim that the history law itself is operationally optimal in any one
+variant or representative of deployed fleet history.
+
 ## Claim ceiling and bridge
 
 The maximum Stage-1 positive claim is:
@@ -1203,15 +1234,18 @@ The maximum Stage-1 positive claim is:
 > registered control/intervention at the required contested-world rates, and the
 > complete decision procedures passed the registered operation, machine-word
 > memory, total-RSS, and latency gates. The underlying raw bases and history pairs
-> were jointly certified across both mass regimes and both geometries before
-> learning, but the primary superiority claim itself is restricted to coupled
-> geometry.
+> were jointly certified under the shared minimax-regret pre-service benchmark
+> across both mass regimes and both geometries before learning, but the primary
+> superiority claim itself is restricted to coupled geometry and this robust-
+> compromise-conditioned history distribution.
 
 Equivalently, the maximum causal interpretation is finite-budget value of nonzero,
 correctly agent-associated learned bid vectors through the exact common SP-RDA,
 relative to the named fixed priority rules and interventions, on the registered
 coupled `N=15` aggregate panel, with a separately supported fixed-mass and churn-
 necessity result only against `HANDOFF-RDA`. The Stage-1 release does not establish
+that the selected shared histories are individually near-optimal or representative
+of an operational pre-event allocator. It does not establish
 fixed-mass superiority over `ZERO-RDA`, `FROZEN-RDA`, or `G-PERMUTE` separately.
 It does not establish superiority in `SEPARABLE` geometry. A separable-versus-
 coupled statement is authorized only through the separately registered
@@ -1283,12 +1317,13 @@ production release is authorized. The conditional exact handoff is:
 
 > Construct `VNFC-B3-SCALABLE-REWARD-SOURCE-CUT-v1` from
 > `docs/research/candidates/variable_n_fleet_churn/VNFC_SCALABLE_REWARD_SOURCE_CUT_SCIENCE_CARD.md`.
-> Use prospective revision `SP-RDA-MATH-CLOSURE-20260812-06`.
+> Use prospective revision `SP-RDA-MATH-CLOSURE-20260812-07`.
 > `SP-RDA-COMPLEXITY-CORRECTION-20260812-01`,
 > `SP-RDA-MATH-CLOSURE-20260812-02`,
 > `SP-RDA-MATH-CLOSURE-20260812-03`,
 > `SP-RDA-MATH-CLOSURE-20260812-04`,
-> `SP-RDA-MATH-CLOSURE-20260812-05`, and the prior CM production acceptance are
+> `SP-RDA-MATH-CLOSURE-20260812-05`,
+> `SP-RDA-MATH-CLOSURE-20260812-06`, and the prior CM production acceptance are
 > superseded; preserve the allocator complexity proof but do not launch or accept
 > production against either old composite. Implement the
 > isolated paired generator, three-tick handoff host, strong task-to-agent
@@ -1301,14 +1336,18 @@ production release is authorized. The conditional exact handoff is:
 > unassigned agents to `DUMMY`. Implement the offline `RC-MIP` ceiling separately;
 > it may never supply an edge, key, label, action, fallback, or training signal.
 > Before learned training, derive all four mass/geometry variants and execute the
-> exact 24-call shared-history certificate routine for shared raw bases in ascending
-> counter-keyed order. In each seed and training schedule, scan at most 96 and
+> exact 25-call shared-history certificate routine for shared raw bases in ascending
+> counter-keyed order. Compute four variant-specific `S_star` values, then the
+> minimum attainable shared worst-variant regret `Delta_star`; require both shared
+> histories to satisfy `Delta(p)<=Delta_star+0.02`. Do not substitute the
+> infeasible v6 requirement that one shared history lie within `0.02` of every
+> separate variant optimum. In each seed and training schedule, scan at most 96 and
 > retain the first 32 joint successes; use retained base `u` at update `u` with four
 > stochastic action replicas per cell. In each seed and conclusion schedule, scan
 > at most 64 and retain the first 24 joint successes. Never restart, relax, use
 > variant-specific histories/retention, select with a Stage-1 arm/intervention, or
 > top up. An incomplete seed-schedule returns preactivity bank infeasibility. Across
-> both splits record at most 5,120 raw bases, 20,480 variant records, and 122,880
+> both splits record at most 5,120 raw bases, 20,480 variant records, and 128,000
 > certificate-solver calls. Tag the 6,144 retained conclusion ceiling outputs
 > inside that ledger; do not recompute or double-count them. Never expose any
 > certificate scalar, label, solver metadata, optimizing post-event assignment,
