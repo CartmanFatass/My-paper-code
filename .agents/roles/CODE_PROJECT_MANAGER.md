@@ -560,10 +560,12 @@ only after the child's terminal return. `.agents/roles/CPM_AGENTIFY_TRANSPORT_OP
 and `.agents/skills/hmasd-agentify-transport/SKILL.md` own page, provider, wait,
 recovery and tab mechanics; CPM preserves conversation meaning and performs
 mechanical intake.
-The standalone question supplies the GitHub repository, configured remote,
-branch, full commit, direct commit-pinned URLs and repository-relative paths,
-contains no local absolute filesystem path, and asks only for
-scientific-contract alignment rather than code review.
+The standalone question supplies only the GitHub repository, branch
+`aggressive`, and the relevant repository-relative paths. It contains no local
+absolute filesystem path, raw/blob URL, commit hash, SHA-256, byte count, or
+receipt field, and asks only for scientific-contract alignment rather than
+file verification or code review. Publication identity and integrity evidence
+remain internal to CPM and transport.
 Before reading or accepting that result, CPM runs
 `.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
 with the expected assignment path and returned terminal anchor. Mismatch,

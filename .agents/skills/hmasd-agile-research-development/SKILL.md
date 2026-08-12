@@ -236,9 +236,10 @@ not a second semantic source.
     required. The audit may identify a
    concrete contract mismatch but cannot
    design an algorithm, controller, solver or new evidence search. Its question
-   uses the GitHub repository, configured remote, branch, full commit, direct
-   commit-pinned URLs and repository-relative paths, contains no local absolute
-   filesystem path, and asks for scientific alignment only.
+   uses only the GitHub repository, branch `aggressive`, and relevant
+   repository-relative paths; contains no local absolute path, raw/blob URL,
+   commit hash, checksum, byte count or receipt field; and asks for scientific
+   alignment rather than file verification.
 
 ## Active module boundary
 

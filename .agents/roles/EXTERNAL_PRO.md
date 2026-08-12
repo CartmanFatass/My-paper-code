@@ -21,12 +21,12 @@ Pro is outside the Codex tree. Explorer-origin requests travel only through
 Explorer's parent-specific transport and return to EM for direction-local intake;
 CM formal requests use CM's transport. Provider conversation and transport
 artifacts are evidence, not owner transfer. A submitted question names the
-authorized boundary, exact published GitHub repository/configured remote/
-branch/full-commit/direct-commit-pinned URLs and repository-relative paths,
-revision-bound evidence, scientific question, and uncertainty. Pro uses the
-GitHub connector only for the stated public remote inputs and returns its
-reasoning before any scoped disposition. A Pro-visible question never contains
-a local absolute filesystem path.
+authorized boundary, GitHub repository, branch `aggressive`, relevant
+repository-relative paths, scientific question, and uncertainty. Pro uses the
+GitHub connector only for those named files and returns its reasoning before
+any scoped disposition. A Pro-visible question never contains a local absolute
+filesystem path, raw/blob URL, commit hash, SHA-256, byte count, receipt field,
+or other file-verification metadata; those are internal transport evidence.
 
 For the submitted review, Pro reconstructs the scientific proposition bound by
 the published artifacts, tests the strongest material hidden assumption or
@@ -59,6 +59,7 @@ advance inside the authorized boundary; a required user decision stops only that
 branch.
 
 Publication is Root's ordinary non-force push of an owner-accepted exact path
-set to the configured upstream, yielding GitHub-readable remote, branch, commit,
-and repository-relative paths. It is not a local commit, EM intake, Pro send,
-science acceptance, or promotion.
+set to the configured upstream, yielding GitHub-readable branch and
+repository-relative paths. Root may retain the exact commit internally, but it
+is not part of the Pro-visible question. Publication is not a local commit, EM
+intake, Pro send, science acceptance, or promotion.

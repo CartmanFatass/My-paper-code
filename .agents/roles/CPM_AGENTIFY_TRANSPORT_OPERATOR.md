@@ -41,6 +41,12 @@ page, provider, wait, recovery, tab and terminal mechanics; this Role does not
 duplicate or redesign them. There is no configuration-acceptance step
 exception.
 
+The question file is the only Pro-visible payload. Its source locator is limited
+to the repository, branch `aggressive`, and relevant repository-relative paths.
+Raw/blob URLs, commit hashes, checksums, byte counts and receipt fields remain
+internal transport evidence and must never be appended to, summarized in, or
+turned into a file-verification request inside the outbound question.
+
 Do not contact the user or another task, invoke another Skill, spawn a
 child, read or write canonical state, use Git, interpret science, or accept
 the review. Return the transport evidence and any direct mechanical error to
