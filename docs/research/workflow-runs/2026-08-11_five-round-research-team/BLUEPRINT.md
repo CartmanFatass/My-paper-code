@@ -39,7 +39,10 @@ flowchart LR
   unrelated directions.
 - Pro is used for answer-changing preview, code-science alignment, convergence
   or an exhausted blocker. One direction keeps one exact conversation; a
-  formal new fusion direction gets a new conversation.
+  formal new fusion direction gets a new conversation. Its visible question is
+  natural-language science plus the GitHub repository, branch `aggressive`,
+  and relevant repository-relative paths only. URLs, commits, hashes, byte
+  counts and receipts remain internal transport evidence.
 - A zero-runtime source/host audit is a factual reuse/provenance observation,
   not an idea or direction gate. It may close only the exact retrospective
   existence/provenance formulation. Root/EM must separately consider the
@@ -52,6 +55,10 @@ flowchart LR
 - Shared compute is parallelized only when budgets do not conflict; otherwise
   ready experiments are deliberately staggered while research and review lanes
   continue.
+- Project Scout is a narrow factual lookup. On an explicit Spark quota,
+  rate-limit, traffic, capacity or model-unavailable terminal, the same exact
+  question moves once to native Luna-medium with `fork_turns=1`; Spark is not
+  retried and no scientific judgment is added.
 
 ## Completion receipt for each loop
 
