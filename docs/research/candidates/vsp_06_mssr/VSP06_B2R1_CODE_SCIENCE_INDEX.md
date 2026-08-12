@@ -41,8 +41,13 @@ environment receipt before any namespace or catalog row can exist.
 exclusive namespace claim. Successful readiness issues one opaque in-process
 capability that the claim must consume; the claim's secure reread then issues
 one identity-checked continuation, and only that continuation can issue the
-single active catalog-generation capability. Directly constructed capability
-objects, authorization-shaped values, and replayed continuations fail closed.
+single active catalog-generation capability. That capability is consumed by
+one catalog-iteration attempt, including an attempt that fails before its first
+yield. Before replica admission, a secure reload proves exactly one generator
+call and equality among observed-row count, persisted catalog cardinality, and
+the generated catalog. Directly constructed capability objects,
+authorization-shaped values, second iterations, and replayed continuations
+fail closed.
 
 The seal binds the exact seven-path final-commit source/config digest map,
 authorization digest, executable locator/digest, native solver artifacts and
@@ -63,6 +68,13 @@ namespace claim or catalog observation, and `_torch` revalidates the same
 frozen binding without making a later choice before returning Torch to a
 learner.
 
+All authorization booleans and receipt/activity/thread integers are
+type-exact: JSON numbers such as `0`, `0.0`, or `1.0` cannot substitute for
+booleans or integers. Authoritative JSON loads reject duplicate object keys.
+New activity, terminal-failure, and public-result objects are securely
+reloaded and checked against their canonical raw bytes, digest, and type-exact
+value before they are returned or consumed.
+
 Both the selector and full claims use one exact schema: treatment, final
 commit, authorization digest, ordinal `1`, phase, all 18 zero-start counters,
 and zero sweeps/retries/rescues/extra roots. A missing, partial, preconstructed,
@@ -73,14 +85,21 @@ durably record the exact unified 18-key lifecycle map from selector claim,
 actual generator rows, successfully started solver/verifier processes,
 replicas, witness and manifest fixation through full claim, calibration, each
 primary seed, and completion. The separate 14-key scientific cap submap is
-retained. After any exact claim or durable nonzero activity, including a later
-process invocation, failures return only
+retained. Recovery reads the selector phases and every `full_*` phase in one
+monotone sequence. A valid zero-count claim snapshot itself proves that the
+claim boundary was crossed; a malformed or missing claim alongside any
+fixed-root durable state is terminal rather than retryable. After any claim
+boundary or durable activity, including a later process invocation, failures return only
 `B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY` from local durable accounting,
 without resume/replay or dependence on an unreadable claim after the local
-claim boundary; a malformed preconstructed zero-activity root remains a
-technical no-start. A completed invalid
+claim boundary. Existing Stage-2 or registered-full failure receipts block the
+full, are securely reloaded, and are returned without rewriting. A completed invalid
 contract/activity/cap/provenance result uses first-precedence
 `B2R1_INVALID_CONTRACT_ACTIVITY_CAP_OR_PROVENANCE`.
+
+Every write destination uses `lstat`/`lexists` semantics and validates its
+fixed parent path, so dangling links, junctions, and reparse entries cannot be
+mistaken for absent destinations.
 
 ## Frozen identities and selector structure
 
@@ -123,8 +142,12 @@ contract/activity/cap/provenance result uses first-precedence
 | Fixed-root exact-once lifecycle and explicit zero caps | wiring-only runner and exact activity schema | temporary synthetic claim collision, missing-claim technical no-start, no alternate CLI destinations, missing zero-cap key rejection |
 | Write-free preclaim readiness and exact external full environment | runner, selector, and guarded Torch binding | injected source-map/allowlist/CPython/OR-Tools/native/Torch failures precede claim/catalog and preserve all 18 zeros; external receipt mutation fails its digest anchor |
 | Direct API closure from readiness through replicas | identity-checked readiness, claim-continuation, catalog, and start capabilities | direct claim/catalog/final-KEEP/solve and replica-CLI bypass negatives, including a correctly shaped forged catalog capability |
-| Unified truthful lifecycle and terminal precedence | exact 18-key selector/full snapshots plus retained 14-key scientific cap map | failed `Popen`, injected mid-PPO partial progress, mutated/unreadable postclaim claim, later-process zero/nonzero durable lifecycle, malformed-root no-start, and completed-invalid first-branch negatives |
+| Type-exact authorization and authoritative JSON | all three authorization validators, environment/selector receipts, strict loaders, verified JSON persistence | `formal=0/0.0`, `synthetic_only=0`, float receipt/thread fields, duplicate keys, and result type-substitution negatives |
+| One-shot catalog activity proof | consumed catalog capability, pre-invocation attempt accounting, secure pre-replica snapshot | second iteration, pre-yield failure, and forged observed-row/cardinality activity negatives |
+| Unified truthful lifecycle and terminal precedence | exact 18-key selector/full snapshots plus retained 14-key scientific cap map | failed `Popen`, injected mid-PPO partial progress, mutated/unreadable postclaim claim, later-process zero/nonzero durable lifecycle, and completed-invalid first-branch negatives |
+| Process-independent terminal recovery | monotone selector plus all `full_*` snapshots and secure terminal-receipt reload | zero-count malformed-claim boundary, cross-process full-phase recovery, and Stage-2/registered-full failure blocking with a selector receipt |
 | Complete deterministic secure read schema | sealed authorization/environment/claim/activity/selector/full/checkpoint/result/failure locators | exact 64-checkpoint schema plus concrete first-checkpoint mutation/alias/reparse negatives |
+| Safe fixed destinations | `lstat`/`lexists` absence and exact-parent validation | dangling destination and parent reparse negatives |
 | Canonical/full operations impossible without explicit commit-bound authorization and all Stage-1 activity zero | three guarded modules and wiring-only runner | invalid/missing authorization, lazy-import, zero-counter, and reserved-absence checks |
 
 ## Frozen ledger

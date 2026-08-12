@@ -202,7 +202,10 @@ def validate_stage2_authorization(value: Mapping[str, Any]) -> Mapping[str, Any]
         "selector_id": SELECTOR_ID, "verifier_id": VERIFIER_ID,
         "scientific_parent": SCIENTIFIC_PARENT, "formal": False, "synthetic_only": False,
     }
-    if any(value[key] != expected for key, expected in fixed.items()):
+    if any(
+        type(value[key]) is not type(expected) or value[key] != expected
+        for key, expected in fixed.items()
+    ):
         raise SelectorInvalid("Stage-2 authorization binding mismatch")
     commit = value["final_commit"]
     if not isinstance(commit, str) or len(commit) != 40 or any(c not in "0123456789abcdef" for c in commit):
@@ -225,7 +228,9 @@ def validate_stage2_authorization(value: Mapping[str, Any]) -> Mapping[str, Any]
     ) or len(set(allowlist)) != len(allowlist):
         raise SelectorInvalid("Stage-2 source/build/read allowlist is absent")
     activity = value["zero_start_activity"]
-    if not isinstance(activity, Mapping) or set(activity) != set(ACTIVITY_NAMES) or any(v != 0 or isinstance(v, bool) for v in activity.values()):
+    if not isinstance(activity, Mapping) or set(activity) != set(ACTIVITY_NAMES) or any(
+        type(v) is not int or v != 0 for v in activity.values()
+    ):
         raise SelectorInvalid("Stage-2 zero-start activity binding failed")
     digest_map = value["source_config_digest_map"]
     digest_map_digest = value["source_config_digest_map_sha256"]
@@ -304,11 +309,13 @@ class _Stage2ClaimContinuation:
 
 
 class _CatalogGenerationCapability:
-    __slots__ = ("authorization_sha256", "claim_sha256")
+    __slots__ = ("authorization_sha256", "claim_sha256", "consumed", "in_progress")
 
     def __init__(self, authorization_sha256: str, claim_sha256: str) -> None:
         self.authorization_sha256 = authorization_sha256
         self.claim_sha256 = claim_sha256
+        self.consumed = False
+        self.in_progress = False
 
 
 class _ReplicaStartCapability:
@@ -390,8 +397,10 @@ def claim_stage2_namespace(
     _ACTIVE_READINESS_CAPABILITY = None
     paths = stage2_paths()
     root = paths["session_root"]
-    if root.exists():
-        raise SelectorInvalid("preconstructed or replayed Stage-2 namespace is forbidden")
+    try:
+        validate_absent_destination(root)
+    except SelectorInvalid as exc:
+        raise SelectorInvalid("preconstructed or replayed Stage-2 namespace is forbidden") from exc
     try:
         os.mkdir(root)
     except FileExistsError as exc:
@@ -437,10 +446,40 @@ def validate_catalog_generation_capability(
     if (
         not isinstance(capability, _CatalogGenerationCapability)
         or capability is not _ACTIVE_CATALOG_GENERATION_CAPABILITY
+        or capability.consumed
         or capability.authorization_sha256
         != sha256_bytes(_canonical_json_bytes(authorization))
     ):
         raise SelectorInvalid("direct catalog API lacks the scoped claim capability")
+
+
+def consume_catalog_generation_capability(
+    authorization: Mapping[str, Any], capability: _CatalogGenerationCapability,
+) -> None:
+    """Consume the one catalog capability before the generator can yield."""
+
+    validate_catalog_generation_capability(authorization, capability)
+    capability.consumed = True
+    capability.in_progress = True
+
+
+def validate_catalog_generation_in_progress(
+    authorization: Mapping[str, Any], capability: _CatalogGenerationCapability,
+) -> None:
+    if (
+        not isinstance(capability, _CatalogGenerationCapability)
+        or capability is not _ACTIVE_CATALOG_GENERATION_CAPABILITY
+        or not capability.consumed
+        or not capability.in_progress
+        or capability.authorization_sha256
+        != sha256_bytes(_canonical_json_bytes(authorization))
+    ):
+        raise SelectorInvalid("final-KEEP generation lacks the active scoped claim catalog iteration")
+
+
+def finish_catalog_generation(capability: _CatalogGenerationCapability) -> None:
+    if capability is _ACTIVE_CATALOG_GENERATION_CAPABILITY:
+        capability.in_progress = False
 
 
 def _issue_replica_start_capability(
@@ -462,6 +501,46 @@ def _is_reparse(path: Path) -> bool:
     return bool(attributes & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0))
 
 
+def path_lexists(path: Path) -> bool:
+    """Existence check that also observes dangling links and reparse entries."""
+
+    return os.path.lexists(os.fspath(path))
+
+
+def _validate_path_components(path: Path, *, require_directory: bool) -> Path:
+    absolute = Path(os.path.abspath(path))
+    component = Path(absolute.anchor)
+    for part in absolute.parts[1:]:
+        component = component / part
+        if not path_lexists(component):
+            if require_directory:
+                raise SelectorInvalid(f"fixed destination parent is absent: {path}")
+            continue
+        if component.is_symlink() or _is_reparse(component):
+            raise SelectorInvalid("link/junction/reparse destination locator is forbidden")
+    if require_directory:
+        resolved = path.resolve(strict=True)
+        if resolved != absolute or not resolved.is_dir():
+            raise SelectorInvalid("fixed destination parent is not an exact directory")
+    return absolute
+
+
+def _validate_existing_directory(path: Path) -> Path:
+    return _validate_path_components(path, require_directory=True)
+
+
+def validate_absent_destination(path: Path) -> None:
+    """Validate one fixed write destination without following a dangling alias."""
+
+    if path != Path(os.path.abspath(path)) or ".." in path.parts:
+        raise SelectorInvalid("write destination is not the exact fixed locator")
+    _validate_existing_directory(path.parent)
+    if path_lexists(path):
+        if path.is_symlink() or _is_reparse(path):
+            raise SelectorInvalid("dangling/link/junction/reparse destination is forbidden")
+        raise SelectorInvalid(f"write-once destination already exists: {path}")
+
+
 def safe_existing_path(path: Path) -> Path:
     text = str(path)
     if not text or any(char in text for char in "*?[") or ".." in path.parts:
@@ -470,7 +549,7 @@ def safe_existing_path(path: Path) -> Path:
     component = Path(absolute.anchor)
     for part in absolute.parts[1:]:
         component = component / part
-        if component.exists() and (component.is_symlink() or _is_reparse(component)):
+        if path_lexists(component) and (component.is_symlink() or _is_reparse(component)):
             raise SelectorInvalid("link/junction/reparse read locator is forbidden")
     resolved = path.resolve(strict=True)
     if resolved != absolute or not resolved.is_file():
@@ -524,7 +603,9 @@ def authorized_read_bytes(authorization: Mapping[str, Any], path: Path) -> bytes
 
 def authorized_json(authorization: Mapping[str, Any], path: Path) -> Mapping[str, Any]:
     try:
-        value = json.loads(authorized_read_bytes(authorization, path).decode("utf-8"))
+        value = _strict_json_loads(
+            authorized_read_bytes(authorization, path).decode("utf-8")
+        )
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise SelectorInvalid(f"authorized JSON is invalid: {path}") from exc
     if not isinstance(value, Mapping):
@@ -547,12 +628,12 @@ def load_full_environment_receipt(
     if sha256_bytes(payload) != authorization["full_environment_receipt_sha256"]:
         raise SelectorInvalid("external full-environment receipt digest mismatch")
     try:
-        value = json.loads(payload.decode("utf-8"))
+        value = _strict_json_loads(payload.decode("utf-8"))
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise SelectorInvalid("external full-environment receipt is invalid JSON") from exc
     if not isinstance(value, Mapping) or set(value) != FULL_ENVIRONMENT_RECEIPT_KEYS:
         raise SelectorInvalid("external full-environment receipt schema is not exact")
-    if value.get("schema_version") != 1 or isinstance(value.get("schema_version"), bool):
+    if type(value.get("schema_version")) is not int or value.get("schema_version") != 1:
         raise SelectorInvalid("external full-environment receipt schema version is invalid")
     if (
         value.get("torch_distribution_version") != REQUIRED_TORCH
@@ -561,10 +642,10 @@ def load_full_environment_receipt(
         or value.get("torch_cuda_available") is not False
         or value.get("torch_deterministic_algorithms") is not True
         or value.get("torch_deterministic_warn_only") is not False
+        or type(value.get("torch_num_threads")) is not int
         or value.get("torch_num_threads") != 1
-        or isinstance(value.get("torch_num_threads"), bool)
+        or type(value.get("torch_num_interop_threads")) is not int
         or value.get("torch_num_interop_threads") != 1
-        or isinstance(value.get("torch_num_interop_threads"), bool)
         or value.get("thread_environment") != THREAD_ENVIRONMENT
     ):
         raise SelectorInvalid("external full-environment Torch/determinism/thread binding is invalid")
@@ -628,9 +709,32 @@ class SelectorInvalid(RuntimeError):
     """Fail-closed selector/config/lifecycle error."""
 
 
+def _reject_duplicate_object_pairs(
+    pairs: list[tuple[str, Any]],
+) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise SelectorInvalid(f"duplicate JSON object key is forbidden: {key}")
+        result[key] = value
+    return result
+
+
+def _strict_json_loads(payload: str) -> Any:
+    return json.loads(payload, object_pairs_hook=_reject_duplicate_object_pairs)
+
+
 def validate_selector_receipt_schema(value: Mapping[str, Any]) -> None:
     if not isinstance(value, Mapping) or set(value) != SELECTOR_RECEIPT_KEYS:
         raise SelectorInvalid("selector receipt key schema is not exact")
+    if type(value.get("replica_count")) is not int or value.get("replica_count") != 2:
+        raise SelectorInvalid("selector receipt replica count is not an exact integer")
+    if not _exact_json_equal(
+        value.get("activity_accounting"),
+        {"sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0},
+    ):
+        raise SelectorInvalid("selector receipt activity accounting is not type-exact")
+    validate_activity_counts(value.get("activity_counts"))
 
 
 def _canonical_json_bytes(value: Any) -> bytes:
@@ -1048,7 +1152,7 @@ def validate_catalog_structural_support(rows: Sequence[CatalogRow]) -> dict[str,
 
 def _load_json(path: Path) -> Mapping[str, Any]:
     with path.open("r", encoding="utf-8", newline="") as stream:
-        value = json.load(stream)
+        value = _strict_json_loads(stream.read())
     if not isinstance(value, Mapping):
         raise SelectorInvalid(f"JSON root must be an object: {path}")
     return value
@@ -1135,7 +1239,10 @@ def validate_selector_environment_receipt(
     """Validate live CPython/OR-Tools/parameters against the external receipt."""
 
     live = selector_environment(stage2_authorization)
-    if any(receipt.get(name) != value for name, value in live.items()):
+    if any(
+        not _exact_json_equal(receipt.get(name), value)
+        for name, value in live.items()
+    ):
         raise SelectorInvalid("live CPython/OR-Tools environment differs from external receipt")
     return live
 
@@ -1291,13 +1398,19 @@ def compare_replicas(left: Mapping[str, Any], right: Mapping[str, Any]) -> dict[
     if left.get("terminal_status") not in {"FEASIBLE", "OPTIMAL"} or any(left.get(key) != right.get(key) for key in keys):
         raise SelectorInvalid("two mandatory cold replicas disagree")
     vector = left.get("membership_vector")
-    if not isinstance(vector, list) or not vector or any(value not in (0, 1) for value in vector):
+    if not isinstance(vector, list) or not vector or any(
+        type(value) is not int or value not in (0, 1) for value in vector
+    ):
         raise SelectorInvalid("replica witness is incomplete or nonbinary")
     return dict(left)
 
 
 def write_exclusive(path: Path, payload: bytes) -> None:
+    if path_lexists(path):
+        raise SelectorInvalid(f"write-once destination already exists: {path}")
+    _validate_path_components(path.parent, require_directory=False)
     path.parent.mkdir(parents=True, exist_ok=True)
+    _validate_existing_directory(path.parent)
     try:
         descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o444)
     except FileExistsError as exc:
@@ -1317,6 +1430,25 @@ def write_exclusive(path: Path, payload: bytes) -> None:
 
 def _write_json_exclusive(path: Path, value: Mapping[str, Any]) -> None:
     write_exclusive(path, _canonical_json_bytes(value) + b"\n")
+
+
+def write_json_exclusive_verified(
+    authorization: Mapping[str, Any], path: Path, value: Mapping[str, Any],
+) -> Mapping[str, Any]:
+    """Write canonical JSON once and prove its exact bytes through the secure reader."""
+
+    payload = _canonical_json_bytes(value) + b"\n"
+    write_exclusive(path, payload)
+    reloaded = authorized_read_bytes(authorization, path)
+    if reloaded != payload or sha256_bytes(reloaded) != sha256_bytes(payload):
+        raise SelectorInvalid("durable JSON raw-byte reload mismatch")
+    try:
+        parsed = _strict_json_loads(reloaded.decode("utf-8"))
+    except (UnicodeError, json.JSONDecodeError) as exc:
+        raise SelectorInvalid("durable JSON reload is invalid") from exc
+    if not isinstance(parsed, Mapping) or not _exact_json_equal(dict(parsed), dict(value)):
+        raise SelectorInvalid("durable JSON type-exact reload mismatch")
+    return parsed
 
 
 def _apply_resource_cap(process: subprocess.Popen[bytes]) -> Any:
@@ -1523,11 +1655,8 @@ SELECTOR_SEALED_OBJECT_NAMES = frozenset({
 
 
 def output_paths_must_be_absent(paths: Mapping[str, Path]) -> None:
-    if (
-        paths["session_root"].exists() or paths["result"].exists()
-        or paths["operator_receipt"].exists()
-    ):
-        raise SelectorInvalid("Stage-2/full destination already exists")
+    for name in ("session_root", "result", "operator_receipt"):
+        validate_absent_destination(paths[name])
 
 
 def persist_activity_snapshot(
@@ -1539,11 +1668,37 @@ def persist_activity_snapshot(
         raise SelectorInvalid("unknown Stage-2 activity phase")
     counts = validate_activity_counts(activity)
     envelope = {"phase": phase, "activity_counts": counts}
-    _write_json_exclusive(paths[key], envelope)
-    loaded = authorized_json(authorization, paths[key])
-    if loaded != envelope:
-        raise SelectorInvalid("durable Stage-2 activity snapshot reload mismatch")
-    return envelope
+    loaded = write_json_exclusive_verified(authorization, paths[key], envelope)
+    return dict(loaded)
+
+
+def validate_pre_replica_catalog_snapshot(
+    authorization: Mapping[str, Any], paths: Mapping[str, Path],
+    expected_catalog: Mapping[str, Any], expected_activity: Mapping[str, Any],
+) -> tuple[tuple[CatalogRow, ...], dict[str, int]]:
+    """Securely prove one complete catalog attempt before any replica starts."""
+
+    catalog = authorized_json(authorization, paths["catalog"])
+    snapshot = authorized_json(authorization, paths["activity_catalog"])
+    if not _exact_json_equal(dict(catalog), dict(expected_catalog)):
+        raise SelectorInvalid("durable catalog differs from the generated catalog")
+    if (
+        not isinstance(snapshot, Mapping)
+        or set(snapshot) != {"phase", "activity_counts"}
+        or snapshot.get("phase") != "catalog"
+    ):
+        raise SelectorInvalid("durable catalog activity snapshot is malformed")
+    counts = validate_activity_counts(snapshot["activity_counts"])
+    expected_counts = validate_activity_counts(expected_activity)
+    rows = parse_catalog(catalog)
+    if (
+        not _exact_json_equal(counts, expected_counts)
+        or counts["canonical_generator_calls"] != 1
+        or counts["canonical_rows_observed"] != len(rows)
+        or len(rows) != len(expected_catalog.get("rows", ()))
+    ):
+        raise SelectorInvalid("catalog call/observed-row/cardinality proof failed")
+    return rows, counts
 
 
 def _require_exhaustive_allowlist(
@@ -1585,7 +1740,7 @@ def run_two_replica_sequence(
     authorize_read_path(bootstrap_authorization, stage2_authorization_path)
     authorization = authorized_json(bootstrap_authorization, stage2_authorization_path)
     validate_stage2_authorization(authorization)
-    if authorization != bootstrap_authorization:
+    if not _exact_json_equal(dict(authorization), dict(bootstrap_authorization)):
         raise SelectorInvalid("Stage-2 authorization changed during secure load")
     verify_authorized_source_config(authorization)
     if (
@@ -1601,6 +1756,8 @@ def run_two_replica_sequence(
     _ACTIVE_CLAIM_CONTINUATION = None
     if (
         _ACTIVE_CATALOG_GENERATION_CAPABILITY is None
+        or not _ACTIVE_CATALOG_GENERATION_CAPABILITY.consumed
+        or _ACTIVE_CATALOG_GENERATION_CAPABILITY.in_progress
         or _ACTIVE_CATALOG_GENERATION_CAPABILITY.authorization_sha256
         != claim_continuation.authorization_sha256
         or _ACTIVE_CATALOG_GENERATION_CAPABILITY.claim_sha256
@@ -1608,7 +1765,8 @@ def run_two_replica_sequence(
     ):
         raise SelectorInvalid("fixed-root continuation lost its issued catalog capability")
     _ACTIVE_CATALOG_GENERATION_CAPABILITY = None
-    if not paths["session_root"].is_dir() or not paths["claim"].is_file():
+    _validate_existing_directory(paths["session_root"])
+    if not paths["claim"].is_file():
         raise SelectorInvalid("fixed Stage-2 namespace was not exclusively claimed")
     claim = authorized_json(authorization, paths["claim"])
     validate_exact_claim(
@@ -1623,8 +1781,9 @@ def run_two_replica_sequence(
         "bindings", "replica_1", "replica_2", "witness", "proposed_manifest",
         "verifier_report", "receipt", "manifest",
     ):
-        if paths[name].exists():
+        if path_lexists(paths[name]):
             raise SelectorInvalid("pre-existing fixed-root output invalidates exact-once Stage 2")
+    validate_absent_destination(paths["selector_root"])
     paths["selector_root"].mkdir()
     environment_path, full_environment = load_full_environment_receipt(authorization)
     validate_selector_environment_receipt(authorization, full_environment)

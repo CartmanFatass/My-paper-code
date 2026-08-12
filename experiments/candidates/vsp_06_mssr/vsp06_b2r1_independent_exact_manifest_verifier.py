@@ -130,7 +130,10 @@ class VerificationError(RuntimeError):
 def _validate_stage2_authorization(value: Mapping[str, Any]) -> None:
     required = {"direction", "candidate", "treatment_id", "selector_id", "verifier_id", "scientific_parent", "final_commit", "source_build_read_allowlist", "source_config_digest_map", "source_config_digest_map_sha256", "formal", "synthetic_only", "zero_start_activity", "full_environment_receipt_path", "full_environment_receipt_sha256"}
     fixed = {"direction": DIRECTION_ID, "candidate": CANDIDATE_ID, "treatment_id": TREATMENT_ID, "selector_id": SELECTOR_ID, "verifier_id": VERIFIER_ID, "scientific_parent": SCIENTIFIC_PARENT, "formal": False, "synthetic_only": False}
-    if not isinstance(value, Mapping) or set(value) != required or any(value.get(k) != v for k, v in fixed.items()):
+    if not isinstance(value, Mapping) or set(value) != required or any(
+        type(value.get(k)) is not type(v) or value.get(k) != v
+        for k, v in fixed.items()
+    ):
         raise VerificationError("missing or invalid Stage-2 authorization binding")
     commit = value.get("final_commit")
     allowlist = value.get("source_build_read_allowlist")
@@ -149,7 +152,9 @@ def _validate_stage2_authorization(value: Mapping[str, Any]) -> None:
     if not isinstance(allowlist, list) or not allowlist or any(
         not isinstance(item, str) or not Path(item).is_absolute() or ".." in Path(item).parts
         or any(char in item for char in "*?[") for item in allowlist
-    ) or len(set(allowlist)) != len(allowlist) or not isinstance(activity, Mapping) or set(activity) != set(ACTIVITY_NAMES) or any(v != 0 or isinstance(v, bool) for v in activity.values()):
+    ) or len(set(allowlist)) != len(allowlist) or not isinstance(activity, Mapping) or set(activity) != set(ACTIVITY_NAMES) or any(
+        type(v) is not int or v != 0 for v in activity.values()
+    ):
         raise VerificationError("invalid Stage-2 allowlist or zero-start binding")
     digest_map = value.get("source_config_digest_map")
     digest_map_digest = value.get("source_config_digest_map_sha256")
@@ -181,7 +186,7 @@ def safe_existing_path(path: Path) -> Path:
     component = Path(absolute.anchor)
     for part in absolute.parts[1:]:
         component = component / part
-        if component.exists() and (component.is_symlink() or _is_reparse(component)):
+        if os.path.lexists(component) and (component.is_symlink() or _is_reparse(component)):
             raise VerificationError("link/junction/reparse read locator is forbidden")
     resolved = path.resolve(strict=True)
     if resolved != absolute or not resolved.is_file():
@@ -238,7 +243,7 @@ def _authorized_load(
     authorization: Mapping[str, Any], path: Path,
 ) -> Mapping[str, Any]:
     try:
-        value = json.loads(_authorized_bytes(authorization, path).decode("utf-8"))
+        value = _strict_json_loads(_authorized_bytes(authorization, path).decode("utf-8"))
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise VerificationError(f"authorized JSON is invalid: {path}") from exc
     if not isinstance(value, Mapping):
@@ -251,6 +256,35 @@ def _json_bytes(value: Any) -> bytes:
         value, sort_keys=True, separators=(",", ":"), ensure_ascii=False,
         allow_nan=False,
     ).encode("utf-8")
+
+
+def _reject_duplicate_object_pairs(
+    pairs: list[tuple[str, Any]],
+) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise VerificationError(f"duplicate JSON object key is forbidden: {key}")
+        result[key] = value
+    return result
+
+
+def _strict_json_loads(payload: str) -> Any:
+    return json.loads(payload, object_pairs_hook=_reject_duplicate_object_pairs)
+
+
+def _exact_json_equal(left: Any, right: Any) -> bool:
+    if type(left) is not type(right):
+        return False
+    if isinstance(left, Mapping):
+        return set(left) == set(right) and all(
+            _exact_json_equal(left[key], right[key]) for key in left
+        )
+    if isinstance(left, list):
+        return len(left) == len(right) and all(
+            _exact_json_equal(a, b) for a, b in zip(left, right, strict=True)
+        )
+    return left == right
 
 
 def _digest(payload: bytes) -> str:
@@ -299,7 +333,7 @@ def _expected_sat_parameter_bytes() -> bytes:
 
 def _load(path: Path) -> Mapping[str, Any]:
     with path.open("r", encoding="utf-8", newline="") as stream:
-        value = json.load(stream)
+        value = _strict_json_loads(stream.read())
     if not isinstance(value, Mapping):
         raise VerificationError(f"JSON root must be an object: {path}")
     return value
@@ -937,7 +971,7 @@ def verify(
     authorize_read_path(bootstrap_authorization, stage2_authorization_path)
     authorization = _authorized_load(bootstrap_authorization, stage2_authorization_path)
     _validate_stage2_authorization(authorization)
-    if authorization != bootstrap_authorization:
+    if not _exact_json_equal(dict(authorization), dict(bootstrap_authorization)):
         raise VerificationError("Stage-2 authorization changed during secure load")
     catalog_path = authorize_read_path(authorization, catalog_path)
     universe_path = authorize_read_path(authorization, universe_path)
@@ -1030,13 +1064,19 @@ def verify(
     ):
         raise VerificationError("external full-environment receipt binding mismatch")
     try:
-        environment_receipt = json.loads(environment_payload.decode("utf-8"))
+        environment_receipt = _strict_json_loads(environment_payload.decode("utf-8"))
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise VerificationError("external full-environment receipt is invalid") from exc
     if (
         not isinstance(environment_receipt, Mapping)
         or set(environment_receipt) != FULL_ENVIRONMENT_RECEIPT_KEYS
-        or any(expected.get(key) != value for key, value in environment_receipt.items())
+        or not _exact_json_equal(
+            {key: expected.get(key) for key in environment_receipt},
+            dict(environment_receipt),
+        )
+        or type(environment_receipt.get("schema_version")) is not int
+        or type(environment_receipt.get("torch_num_threads")) is not int
+        or type(environment_receipt.get("torch_num_interop_threads")) is not int
     ):
         raise VerificationError("manifest does not contain the exact external full environment")
     for row in environment_receipt["torch_native_artifacts"]:

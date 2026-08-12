@@ -137,7 +137,10 @@ def validate_stage2_authorization(value: Mapping[str, Any]) -> None:
         "source_config_digest_map_sha256", "zero_start_activity",
         "full_environment_receipt_path", "full_environment_receipt_sha256",
     }
-    if not isinstance(value, Mapping) or set(value) != required or any(value.get(k) != v for k, v in from_ids.items()):
+    if not isinstance(value, Mapping) or set(value) != required or any(
+        type(value.get(k)) is not type(v) or value.get(k) != v
+        for k, v in from_ids.items()
+    ):
         raise B2ContractError("missing or invalid Stage-2 authorization binding")
     commit = value.get("final_commit")
     if not isinstance(commit, str) or len(commit) != 40 or any(c not in "0123456789abcdef" for c in commit):
@@ -831,13 +834,22 @@ def canonical_universe_spec(
 def canonical_catalog_rows(
     stage2_authorization: Mapping[str, Any], *, catalog_capability: object,
 ) -> Iterator[dict[str, Any]]:
-    validate_stage2_authorization(stage2_authorization)
     """Enumerate the frozen catalog; callers must never use it to tune CP-SAT."""
 
+    validate_stage2_authorization(stage2_authorization)
     from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
-    selector.validate_catalog_generation_capability(
+    selector.consume_catalog_generation_capability(
         stage2_authorization, catalog_capability
     )
+    return _canonical_catalog_rows_iter(
+        stage2_authorization, catalog_capability=catalog_capability
+    )
+
+
+def _canonical_catalog_rows_iter(
+    stage2_authorization: Mapping[str, Any], *, catalog_capability: object,
+) -> Iterator[dict[str, Any]]:
+    from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
 
     def emit_pool(consumer: str, seed: str, panel: str, branch: str, length: int, y: int, target: int, split: str) -> Iterator[dict[str, Any]]:
         # The fixed source pool is deliberately overcomplete.  Bucket filtering
@@ -866,6 +878,7 @@ def canonical_catalog_rows(
         yield from canonical_final_keep_rows(
             seed, stage2_authorization, catalog_capability=catalog_capability
         )
+    selector.finish_catalog_generation(catalog_capability)
 
 
 def canonical_final_keep_rows(
@@ -876,7 +889,7 @@ def canonical_final_keep_rows(
     """Generate one seed's balanced source-level final-KEEP support."""
 
     from experiments.candidates.vsp_06_mssr import vsp06_b2r1_source_bound_exact_feasibility as selector
-    selector.validate_catalog_generation_capability(
+    selector.validate_catalog_generation_in_progress(
         stage2_authorization, catalog_capability
     )
 
@@ -996,9 +1009,13 @@ class ManifestGate:
             receipt.get("branch") != selector.VALID
             or receipt.get("final_commit") != stage2_authorization["final_commit"]
             or receipt.get("stage2_authorization_sha256") != authorization_digest
+            or type(receipt.get("replica_count")) is not int
             or receipt.get("replica_count") != 2
             or receipt.get("replica_2_role") != "prospective_determinism_gate_not_retry"
-            or receipt.get("activity_accounting") != {"sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0}
+            or not selector._exact_json_equal(
+                receipt.get("activity_accounting"),
+                {"sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0},
+            )
             or receipt.get("manifest_path") != str(self.path)
             or receipt.get("verifier_report_path") != str(self.verifier_report_path)
             or receipt.get("bindings_path") != str(canonical["bindings"].resolve())
@@ -1113,7 +1130,7 @@ class ManifestGate:
         payload = selector.authorized_read_bytes(self.authorization, self.path)
         if hashlib.sha256(payload).hexdigest() != self.file_digest:
             raise B2ContractError("manifest file bytes changed after fixation")
-        manifest = json.loads(payload.decode("utf-8"))
+        manifest = selector._strict_json_loads(payload.decode("utf-8"))
         specs = validate_manifest(manifest, self.content_digest)
         order = str(manifest["common_two_arm_order_digest"])
         if self.order_digest and order != self.order_digest:
@@ -1567,10 +1584,11 @@ def run_registered_full(
     expected_result = selector.PROJECT_ROOT / "docs/research/candidates/vsp_06_mssr/VSP06_B2R1_AUTHENTICATED_PARTNER_RECALL_CREDIT_EFFICIENCY_RESULT.json"
     if run_root != expected_run_root or result_path != expected_result:
         raise B2ContractError("registered full used an alternate root or result destination")
-    if run_root.exists():
-        raise B2ContractError("registered full root already exists; overwrite/retry is forbidden")
-    if result_path.exists():
-        raise B2ContractError("write-once public result already exists")
+    try:
+        selector.validate_absent_destination(run_root)
+        selector.validate_absent_destination(result_path)
+    except selector.SelectorInvalid as exc:
+        raise B2ContractError("registered full destination is not safely absent") from exc
     os.mkdir(run_root)
     claim_path = run_root / "registered_full_claim.json"
     claim = selector.exact_claim(stage2_authorization, phase="registered_full")
@@ -1778,12 +1796,12 @@ def run_registered_full(
             stage2_authorization, selector.stage2_paths(), "full_complete",
             lifecycle_activity,
         )
-        selector.write_exclusive(result_path, _json_bytes(result) + b"\n")
-        if selector.authorized_json(stage2_authorization, result_path) != result:
-            raise B2ContractError("public result reload mismatch")
+        persisted_result = selector.write_json_exclusive_verified(
+            stage2_authorization, result_path, result
+        )
         result_path.chmod(0o444)
         _STAGE2_RUNTIME_AUTHORIZED = False
-        return result
+        return dict(persisted_result)
     except Exception as exc:
         _STAGE2_RUNTIME_AUTHORIZED = False
         failure = {
@@ -1796,15 +1814,14 @@ def run_registered_full(
             "sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0,
         }
         failure_path = run_root / "registered_full_failure.json"
-        try:
-            if not failure_path.exists():
-                selector.write_exclusive(failure_path, _json_bytes(failure) + b"\n")
-            persisted = selector.authorized_json(stage2_authorization, failure_path)
-            if persisted == failure:
-                return dict(persisted)
-        except Exception:
-            pass
-        return failure
+        if not selector.path_lexists(failure_path):
+            selector.write_json_exclusive_verified(
+                stage2_authorization, failure_path, failure
+            )
+        persisted = selector.authorized_json(stage2_authorization, failure_path)
+        if not selector._exact_json_equal(dict(persisted), failure):
+            raise B2ContractError("registered-full terminal receipt reload mismatch")
+        return dict(persisted)
 
 
 __all__ = [

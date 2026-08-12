@@ -70,6 +70,13 @@ def full_environment_receipt(artifact: Path) -> dict[str, object]:
         "thread_environment":dict(selector.THREAD_ENVIRONMENT),
     }
 
+def selector_receipt() -> dict[str, object]:
+    value={key:None for key in selector.SELECTOR_RECEIPT_KEYS}
+    value["replica_count"]=2
+    value["activity_accounting"]={"sweeps":0,"retries":0,"rescues":0,"extra_roots":0}
+    value["activity_counts"]=dict(toy.ACTIVITY_COUNTERS)
+    return value
+
 def load_runner():
     spec=importlib.util.spec_from_file_location("b2r1_runner",RUNNER); assert spec and spec.loader
     module=importlib.util.module_from_spec(spec); spec.loader.exec_module(module); return module
@@ -234,6 +241,51 @@ def test_authorization_contract_and_guards_precede_canonical_work(tmp_path: Path
     assert "stage2_authorization" in inspect.signature(toy.run_registered_full).parameters
 
 
+@pytest.mark.parametrize(("field","value"),(
+    ("formal",0),("formal",0.0),("synthetic_only",0),
+))
+def test_authorization_boolean_bindings_are_type_exact(
+    field: str, value: object,
+) -> None:
+    bad={**authorization(),field:value}
+    with pytest.raises(selector.SelectorInvalid):
+        selector.validate_stage2_authorization(bad)
+    with pytest.raises(verifier.VerificationError):
+        verifier._validate_stage2_authorization(bad)
+    with pytest.raises(toy.B2ContractError):
+        toy.validate_stage2_authorization(bad)
+
+
+def test_authoritative_json_loaders_reject_duplicate_keys(tmp_path: Path) -> None:
+    duplicate=tmp_path/"duplicate.json"
+    duplicate.write_text('{"formal":false,"formal":false}',encoding="utf-8")
+    runner=load_runner()
+    for loader,error in (
+        (selector._load_json,selector.SelectorInvalid),
+        (verifier._load,verifier.VerificationError),
+        (runner._load,selector.SelectorInvalid),
+    ):
+        with pytest.raises(error,match="duplicate JSON"):
+            loader(duplicate)
+
+
+@pytest.mark.parametrize("field",(
+    "schema_version","torch_num_threads","torch_num_interop_threads",
+))
+def test_environment_receipt_integer_fields_reject_float_substitution(
+    field: str, tmp_path: Path,
+) -> None:
+    artifact=tmp_path/"native.dll"; artifact.write_bytes(b"native")
+    receipt=full_environment_receipt(artifact); receipt[field]=1.0
+    receipt_path=tmp_path/"full-environment.json"
+    receipt_path.write_text(json.dumps(receipt,sort_keys=True,separators=(",",":")),encoding="utf-8")
+    auth=authorization([str(receipt_path.resolve()),str(artifact.resolve())])
+    auth["full_environment_receipt_path"]=str(receipt_path.resolve())
+    auth["full_environment_receipt_sha256"]=hashlib.sha256(receipt_path.read_bytes()).hexdigest()
+    with pytest.raises(selector.SelectorInvalid,match="schema version|thread binding"):
+        selector.load_full_environment_receipt(auth)
+
+
 def test_explorer_audited_map_digest_and_live_source_drift_fail_closed() -> None:
     all_sources=[str((ROOT/relative).resolve()) for relative in selector.SOURCE_CONFIG_RELATIVE_PATHS]
     good=authorization(all_sources)
@@ -307,7 +359,7 @@ def test_run_full_requires_external_receipt_digest_cli() -> None:
 
 
 def test_selector_receipt_schema_is_exact() -> None:
-    exact={key:None for key in selector.SELECTOR_RECEIPT_KEYS}
+    exact=selector_receipt()
     selector.validate_selector_receipt_schema(exact)
     missing=dict(exact); missing.pop("manifest_content_sha256")
     with pytest.raises(selector.SelectorInvalid,match="key schema"):
@@ -315,6 +367,9 @@ def test_selector_receipt_schema_is_exact() -> None:
     extra={**exact,"unsealed_extra":None}
     with pytest.raises(selector.SelectorInvalid,match="key schema"):
         selector.validate_selector_receipt_schema(extra)
+    float_count={**exact,"replica_count":2.0}
+    with pytest.raises(selector.SelectorInvalid,match="exact integer"):
+        selector.validate_selector_receipt_schema(float_count)
 
 def test_exact_allowlist_glob_predecessor_link_and_valid_read_guards(tmp_path: Path,monkeypatch: pytest.MonkeyPatch) -> None:
     good=(tmp_path/"good.json"); good.write_text("{}",encoding="utf-8")
@@ -508,6 +563,7 @@ def test_injected_postclaim_failures_have_one_terminal_branch_and_truthful_count
     monkeypatch.setattr(runner.experiment,"canonical_catalog_rows",rows)
     monkeypatch.setattr(runner.selector,"parse_catalog",lambda _catalog:None)
     monkeypatch.setattr(runner.selector,"persist_activity_snapshot",lambda *_args:None)
+    monkeypatch.setattr(runner.selector,"validate_pre_replica_catalog_snapshot",lambda *_args:None)
     def sequence(**kwargs: object):
         activity=kwargs["activity_counts"]
         if phase in {"replica","verifier"}:
@@ -632,24 +688,31 @@ def test_later_stage2_seal_with_prior_exact_claim_is_process_independent_termina
     assert paths["stage2_failure"].is_file()
 
 
-def test_preconstructed_malformed_zero_activity_root_is_technical_no_start(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+@pytest.mark.parametrize("claim_mode",("malformed","missing"))
+def test_malformed_or_missing_claim_with_zero_snapshot_is_terminal_no_retry(
+    claim_mode: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     runner=load_runner(); root=tmp_path/"malformed"; root.mkdir()
     phases=("claim","catalog","replica_1","replica_2","witness","verifier","manifest")
     paths={"session_root":root,"claim":root/"claim.json",
            "stage2_failure":root/"failure.json"}
     paths.update({f"activity_{phase}":root/f"activity_{phase}.json" for phase in phases})
-    paths["claim"].write_text("{malformed",encoding="utf-8")
+    if claim_mode=="malformed":
+        paths["claim"].write_text("{malformed",encoding="utf-8")
+    zero=dict(toy.ACTIVITY_COUNTERS)
+    paths["activity_claim"].write_text(json.dumps(
+        {"phase":"claim","activity_counts":zero},sort_keys=True,separators=(",",":"),
+    ),encoding="utf-8")
     allowlist=[str(path.resolve()) for name,path in paths.items() if name!="session_root"]
     auth=authorization(allowlist)
     monkeypatch.setattr(runner,"_authorization",lambda _path:auth)
     monkeypatch.setattr(runner.selector,"stage2_paths",lambda:paths)
     monkeypatch.setattr(runner,"_preclaim_readiness",lambda _path:
         pytest.fail("malformed root must be classified before readiness"))
-    with pytest.raises(runner.RunnerInvalid,match="technical no-start"):
-        runner.orchestrate_stage2(tmp_path/"authorization.json")
-    assert not paths["stage2_failure"].exists()
+    result=runner.orchestrate_stage2(tmp_path/"authorization.json")
+    assert result["branch"]=="B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY"
+    assert result["activity_counts"]==zero
+    assert result["retry_authorized"] is result["rescue_authorized"] is False
 
 
 def test_run_full_missing_claim_is_technical_no_start_without_created_root(
@@ -663,6 +726,83 @@ def test_run_full_missing_claim_is_technical_no_start_without_created_root(
     with pytest.raises(runner.RunnerInvalid,match="technical no-start"):
         runner.run_full(Path("synthetic-authorization.json"),"0"*64)
     assert not root.exists() and not paths["stage2_failure"].exists()
+
+
+def test_cross_process_recovery_reads_all_full_phases_monotonically(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner=load_runner(); root=tmp_path/"full-recovery"; root.mkdir()
+    phases=("claim","catalog","replica_1","replica_2","witness","verifier",
+            "manifest","full_claim","full_calibration","full_primary_1",
+            "full_primary_2","full_primary_3","full_primary_4","full_complete")
+    paths={f"activity_{phase}":root/f"{phase}.json" for phase in phases}
+    allowlist=[str(path.resolve()) for path in paths.values()]
+    auth=authorization(allowlist)
+    counts=dict(toy.ACTIVITY_COUNTERS)
+    for index,phase in enumerate(phases):
+        if phase.startswith("full_primary_"):
+            counts["model_fits"]=index
+        selector.write_exclusive(paths[f"activity_{phase}"],selector._canonical_json_bytes(
+            {"phase":phase,"activity_counts":counts}
+        )+b"\n")
+    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:paths)
+    recovered=runner._latest_stage2_activity(auth)
+    assert recovered["model_fits"]==phases.index("full_primary_4")
+
+
+@pytest.mark.parametrize("failure_name",("stage2_failure","full_failure"))
+def test_existing_terminal_failure_blocks_full_even_with_selector_receipt(
+    failure_name: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner=load_runner(); root=tmp_path/"terminal"; root.mkdir()
+    failure_path=root/f"{failure_name}.json"; receipt_path=root/"selector-receipt.json"
+    claim_path=root/"claim.json"
+    paths={"session_root":root,"claim":claim_path,
+           "stage2_failure":root/"stage2-failure.json",
+           "full_failure":root/"full-failure.json","receipt":receipt_path}
+    paths[failure_name]=failure_path
+    auth=authorization([str(failure_path.resolve()),str(receipt_path.resolve())])
+    failure={"branch":"B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY",
+             "error_type":"RuntimeError","error":"terminal",
+             "activity_counts":dict(toy.ACTIVITY_COUNTERS),
+             "retry_authorized":False,"rescue_authorized":False,
+             "sweeps":0,"retries":0,"rescues":0,"extra_roots":0}
+    selector.write_exclusive(failure_path,selector._canonical_json_bytes(failure)+b"\n")
+    selector.write_exclusive(receipt_path,selector._canonical_json_bytes(selector_receipt())+b"\n")
+    monkeypatch.setattr(runner,"_authorization",lambda _path:auth)
+    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:paths)
+    monkeypatch.setattr(runner.experiment,"run_registered_full",lambda **_kwargs:
+        pytest.fail("terminal receipt must block the full"))
+    returned=runner.run_full(tmp_path/"authorization.json",hashlib.sha256(receipt_path.read_bytes()).hexdigest())
+    assert returned==failure
+    assert failure_path.read_bytes()==selector._canonical_json_bytes(failure)+b"\n"
+
+
+def test_verified_json_reload_rejects_result_type_substitution(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    result_path=tmp_path/"result.json"
+    auth=authorization([str(result_path.resolve())])
+    monkeypatch.setattr(selector,"authorized_read_bytes",lambda *_args:b'{"count":1.0}\n')
+    with pytest.raises(selector.SelectorInvalid,match="raw-byte reload mismatch"):
+        selector.write_json_exclusive_verified(auth,result_path,{"count":1})
+
+
+def test_absent_destination_rejects_dangling_and_reparse_locators(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    dangling=tmp_path/"dangling-result.json"
+    real_lexists=selector.path_lexists
+    monkeypatch.setattr(selector,"path_lexists",lambda path:
+        True if Path(path)==dangling else real_lexists(Path(path)))
+    monkeypatch.setattr(selector,"_is_reparse",lambda path:Path(path)==dangling)
+    with pytest.raises(selector.SelectorInvalid,match="dangling/link/junction/reparse"):
+        selector.validate_absent_destination(dangling)
+    monkeypatch.undo()
+    junction=tmp_path/"junction"; junction.mkdir(); destination=junction/"result.json"
+    monkeypatch.setattr(selector,"_is_reparse",lambda path:Path(path)==junction)
+    with pytest.raises(selector.SelectorInvalid,match="link/junction/reparse"):
+        selector.validate_absent_destination(destination)
 
 
 def test_direct_claim_catalog_and_solve_apis_require_opaque_capabilities(
@@ -696,6 +836,69 @@ def test_direct_claim_catalog_and_solve_apis_require_opaque_capabilities(
             tmp_path/"never-bindings.json",auth,claim_path=claim,
             start_capability=object(),
         )
+
+
+def test_catalog_capability_is_consumed_by_one_iteration_attempt(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    auth=authorization()
+    capability=selector._CatalogGenerationCapability(
+        selector.sha256_bytes(selector._canonical_json_bytes(auth)),"0"*64
+    )
+    selector._ACTIVE_CATALOG_GENERATION_CAPABILITY=capability
+    monkeypatch.setattr(toy,"_canonical_catalog_rows_iter",lambda *_args,**_kwargs:iter(()))
+    try:
+        assert list(toy.canonical_catalog_rows(auth,catalog_capability=capability))==[]
+        with pytest.raises(selector.SelectorInvalid,match="scoped claim"):
+            toy.canonical_catalog_rows(auth,catalog_capability=capability)
+    finally:
+        selector._ACTIVE_CATALOG_GENERATION_CAPABILITY=None
+
+
+def test_catalog_attempt_is_counted_before_pre_yield_failure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    runner=load_runner(); root=tmp_path/"pre-yield"
+    paths={"session_root":root,"claim":root/"claim.json",
+           "universe_spec":root/"universe.json","catalog":root/"catalog.json",
+           "stage2_failure":root/"failure.json"}
+    auth=authorization([str(paths["claim"].resolve()),str(paths["stage2_failure"].resolve())])
+    monkeypatch.setattr(runner,"_preclaim_readiness",lambda _path:(auth,{},object()))
+    monkeypatch.setattr(runner.selector,"stage2_paths",lambda:paths)
+    def claim(_authorization: object,_readiness: object,on_claim_created: object):
+        root.mkdir(); paths["claim"].write_text("{}",encoding="utf-8")
+        on_claim_created(); return object(),dict(toy.ACTIVITY_COUNTERS)
+    monkeypatch.setattr(runner,"_claim_fixed_stage2_namespace",claim)
+    monkeypatch.setattr(runner.selector,"persist_activity_snapshot",lambda *_args:None)
+    monkeypatch.setattr(runner.experiment,"canonical_universe_spec",lambda *_args,**_kwargs:{})
+    monkeypatch.setattr(runner.selector,"begin_catalog_generation",lambda *_args:object())
+    def fail_before_generator_return(*_args: object,**_kwargs: object):
+        raise RuntimeError("injected pre-yield failure")
+    monkeypatch.setattr(runner.experiment,"canonical_catalog_rows",fail_before_generator_return)
+    result=runner.orchestrate_stage2(tmp_path/"authorization.json")
+    assert result["branch"]=="B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY"
+    assert result["activity_counts"]["canonical_generator_calls"]==1
+    assert result["activity_counts"]["canonical_rows_observed"]==0
+
+
+def test_pre_replica_catalog_snapshot_rejects_forged_activity(
+    tmp_path: Path,
+) -> None:
+    catalog_path=tmp_path/"catalog.json"; activity_path=tmp_path/"activity.json"
+    paths={"catalog":catalog_path,"activity_catalog":activity_path}
+    auth=authorization([str(catalog_path.resolve()),str(activity_path.resolve())])
+    catalog={"catalog_id":selector.CATALOG_ID,"salt":selector.SALT,"rows":[row()]}
+    forged=dict(toy.ACTIVITY_COUNTERS)
+    forged["canonical_generator_calls"]=1
+    forged["canonical_rows_observed"]=2
+    selector.write_exclusive(catalog_path,json.dumps(
+        catalog,sort_keys=False,separators=(",",":"),ensure_ascii=False
+    ).encode()+b"\n")
+    selector.write_exclusive(activity_path,selector._canonical_json_bytes(
+        {"phase":"catalog","activity_counts":forged}
+    )+b"\n")
+    with pytest.raises(selector.SelectorInvalid,match="cardinality proof"):
+        selector.validate_pre_replica_catalog_snapshot(auth,paths,catalog,forged)
 
 
 def test_replica_cli_has_no_optional_start_token_bypass(
@@ -830,7 +1033,7 @@ def test_future_implementations_are_complete_not_stubs() -> None:
     assert "Popen" in inspect.getsource(selector._run_cold_replica)
     assert "for replica_index in (1, 2)" in inspect.getsource(selector.run_two_replica_sequence)
     assert "optimizer" in inspect.getsource(toy.run_registered_full)
-    assert "yield" in inspect.getsource(toy.canonical_catalog_rows)
+    assert "yield" in inspect.getsource(toy._canonical_catalog_rows_iter)
     assert toy.CAPS == {"model_fits":10,"trainer_invocations":10,"environment_episodes":44300,
         "environment_transitions":520000,"production_policy_forwards":540000,"learner_updates":1100,
         "optimizer_steps":1100,"evaluator_calls":75,"evaluation_episodes":10500,
