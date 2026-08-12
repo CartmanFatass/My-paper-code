@@ -265,17 +265,18 @@ One 64-unit reset-after GRU with separate input and recurrent bias vectors
 consumes `x_i^actor`. For prior state `u`, its update is exactly
 
 ```text
-r = sigmoid(W_ir*x + b_ir + W_hr*u + b_hr)
-z = sigmoid(W_iz*x + b_iz + W_hz*u + b_hz)
-n = tanh(W_in*x + b_in + r*(W_hn*u + b_hn))
-u_next = (1-z)*n + z*u.
+r = sigmoid(W_ir @ x + b_ir + W_hr @ u + b_hr)
+z = sigmoid(W_iz @ x + b_iz + W_hz @ u + b_hz)
+n = tanh(W_in @ x + b_in + r .* (W_hn @ u + b_hn))
+u_next = (1-z) .* n + z .* u.
 ```
 
-All products marked `*` in the last two terms are elementwise after the stated
-matrix-vector maps. This is the PyTorch-style reset-after candidate equation,
-not the alternative `W_hn*(r*u)` convention. The hidden state is exactly zero
+Here `@` is matrix-vector multiplication and `.*` is elementwise
+multiplication. This is the PyTorch-style reset-after candidate equation,
+not the alternative `W_hn @ (r .* u)` convention. The hidden state is exactly zero
 at episode start and is reset only at episode end. The current `u_next` passes
-through `tanh(Linear(64,64))` and then `Linear(64,3)` to the categorical effort logits.
+through `tanh(Linear(64,64))` and then `Linear(64,3)` to the categorical effort
+logits.
 There is no layer normalization, batch normalization, dropout, attention layer,
 second message-passing layer, skip route, or separate `N`-specific parameter.
 
@@ -306,10 +307,20 @@ and zero bias. Each of `W_ir`, `W_iz`, and `W_in` is initialized independently
 by Xavier-uniform gain one. Each of the three 64-by-64 recurrent matrices
 `W_hr`, `W_hz`, and `W_hn` is initialized independently by an orthogonal draw
 with gain one. All six GRU bias vectors are zero. The residual-gate weight and
-bias are exactly zero. Paired arms receive identical initial values for every common parameter.
+bias are exactly zero. Paired arms receive identical initial values for every
+common parameter.
 Including the executed gate head and centralized critic, each arm has exactly
 40,996 nominal parameters. The VQFP gate parameters remain zero-gradient but
 are retained in that count.
+
+```text
+edge/value/gate: (11*64+64) + (64*31+31) + (64*1+1) = 2,848
+GRU:             3*64*39 + 3*64*64 + 6*64           = 20,160
+actor trunk/head:(64*64+64) + (64*3+3)               = 4,355
+critic embed:    (8*64+64) + (64*64+64)              = 4,736
+critic global:   (72*64+64) + (64*64+64) + (64+1)   = 8,897
+total:                                                     40,996.
+```
 
 For receiver `i`, let `S_i={i-1,i,i+1}` and `V_i=sum_(j in S_i)v_j`.
 
