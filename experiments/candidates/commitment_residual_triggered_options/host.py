@@ -317,7 +317,7 @@ class DeployableObservation:
     broadcast: DeployableTelemetry
 
     def vector(self) -> np.ndarray:
-        """Return the normalized 44-coordinate deployed primitive input."""
+        """Return the normalized 42-coordinate deployed primitive input."""
 
         location = np.eye(3, dtype=np.float32)[int(self.location)]
         option = (
@@ -341,7 +341,7 @@ class DeployableObservation:
             np.asarray(self.broadcast.location_count, dtype=np.float32),
             np.asarray((self.broadcast.time_fraction,), dtype=np.float32),
         ))
-        if vector.shape != (44,) or not np.all(np.isfinite(vector)):
+        if vector.shape != (42,) or not np.all(np.isfinite(vector)):
             raise RuntimeError("deployable observation construction violated its fixed width")
         return vector
 

@@ -49,7 +49,7 @@ from .training import ProbeExample, RecurrentEpisode
 
 
 PANEL_SEED_NAMESPACE = 2_026_081_203
-OBSERVATION_DIM = 44
+OBSERVATION_DIM = 42
 CENTRALIZED_STATE_DIM = 54
 
 
