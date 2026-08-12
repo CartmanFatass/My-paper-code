@@ -852,3 +852,90 @@ binding, RECCT's non-expressive endpoint, and ROSTER-SMF remain in force.
   sequenced around observed host resource conflicts.
 - B2 and ONLGR provide no evidence, thresholds, or rescue authority to any of the
   three leaders. Only prospective design discipline transfers.
+
+## 2026-08-12 late portfolio correction
+
+This section supersedes the earlier same-day leading-set and sequencing text.
+It does not rewrite the underlying direction evidence.
+
+### Bounded objective
+
+Obtain the first Pro-closed, technically valid shared algorithm that improves
+held-out variable-`N` or variable-`k` performance or robustness against its
+strongest resource-matched baseline, then complete same-direction result intake,
+same-conversation Pro convergence, and the recorded second-surface/UAV action.
+
+### Leading directions receiving investment
+
+1. **CRTO-v3 / commitment-conditioned innovation-to-replan.** This is the
+   shortest current completion route. Exact `CRTO-B1-SCIENCE-20260812-03` has
+   literal same-conversation Pro `CLOSED` and owner intake. CM is constructing the
+   10,715,136-step package and retains technical/resource acceptance. The central
+   uncertainty is whether the calibrated residual-plus-net-advantage interface
+   improves held-out `k=16` and `4<->16` schedules over the information-matched
+   full-history termination policy. The claim ceiling is finite-data/OOD
+   inductive-bias value, never added information, semantic uniqueness, or full
+   mediation. A qualifying result activates the warehouse second surface and
+   then the UAV track/relay/replan simulator step.
+2. **VQFP-v3 / physical-measure aggregation.** The complete v3 revision is in
+   same-conversation Pro review; bounded CM reconciliation found no unresolved
+   prospective science ambiguity. It asks whether exact Voronoi measure-message
+   binding improves held-out `N={4,14}` value beyond an equally informed learned
+   gate that can represent the rule. The architecture-by-cut interaction,
+   quadrature/action diagnostics, and structural null controls prevent generic
+   corruption or expressivity from carrying the mechanism claim. `CLOSED` plus
+   owner intake releases construction; a qualifying result activates 2-D
+   plume-front tracking and then UAV spatial sensing/relay.
+3. **SCDMP-v2 / semigroup-consistent duration modelling.** This independent
+   variable-`k` hedge asks whether explicit state-transition and accumulated-
+   reward composition improves held-out duration control over an otherwise
+   identical `SCDMP-NOCOMP` model. CM's pre-Pro v1 audit found repairable
+   science-definition omissions rather than an algorithm result: audit warm-up
+   and reversal-twin work, deterministic tape mapping, bank-row identity, and
+   initialization reproducibility. The owner is freezing v2 before its first Pro
+   request. A qualifying first toy would activate cooperative payload towing and
+   then UAV externally scheduled action-hold control.
+
+### Work receiving no further investment now
+
+1. **VNFC-B3 current host/panel line.** The final v8 bounded preactivity proof
+   found `0/96` eligible rows in the first required bank. All selection/slack/
+   exact-prefix machinery succeeded, but every row failed the unchanged KEEP
+   semantic filter. No model, metric, or algorithm result exists. The frozen
+   no-v9 rule ends this host/panel line; reconsider the allocator family only as
+   a genuinely new treatment on a naturally feasible lifecycle host.
+2. **VNFC-B2 current treatment.** Complete finite-panel data and Pro convergence
+   found the packages not separated and the mechanism non-identifying. Revisit
+   only with a new access-competent treatment and uniquely defined stale-command
+   observables.
+3. **ONLGR current campaign.** The run and sole recovery retained no panel result.
+   Revisit only through a separately frozen from-scratch campaign.
+4. **EBCR-B1 and EGRCR-B1.** Fixed cadence dominates the EBCR timing claim;
+   EGRCR adds no utility over ordinary GAE and its cut is anti-supervision. Their
+   recorded, narrower revisit conditions remain in force.
+
+The earlier no-investment decisions for G53, standalone G52, VSP06-B2R3,
+FSBS-B1, ACVC learned binding, RECCT's non-expressive endpoint, and ROSTER-SMF
+also remain in force. This supplies more than the required three concrete
+no-current-investment choices without imposing a direction-count cap.
+
+### Decision triggers and sequencing
+
+- CRTO-v3 receives the first compatible production window only after integrated
+  CM source/resource acceptance. Its blind Gemini-v3 innovation is additive and
+  may run independently; it cannot delay or authorize production.
+- VQFP-v3 `CLOSED` plus owner intake routes immediately to CM. A
+  `REVISION_REQUIRED` ruling creates a new owner-frozen composite and no automatic
+  resend. Its current Gemini must be refrozen independently from the final
+  revision.
+- SCDMP-v2 first returns through bounded CM reconciliation, then receives a new
+  clean Pro conversation. Its provisional CM feasibility probe is design evidence
+  only and never a registered outcome.
+- The first technically accepted production result returns CM -> Root -> same EM.
+  Every complete coherent result then reuses its own Pro conversation for result
+  convergence. A positive result must state the strongest surviving alternative,
+  maximum claim, second-surface action, and UAV simulator action before this
+  project goal can close.
+- Provider capacity serializes Pro and Gemini page use only. It does not limit
+  scientific directions or CM construction. Heavy production is sequenced by
+  actual host resource conflict.

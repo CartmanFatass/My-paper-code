@@ -72,22 +72,9 @@ experimental gate.
 ## Current promising set
 
 This section is the authoritative post-result portfolio as of 2026-08-12. The
-older pre-terminal snapshot below is retained only as provenance.
+older snapshots below are retained only as provenance.
 
-1. **VNFC-B3 sparse learned reward-source allocation** — direct variable-`N`
-   candidate. One shared policy trains at `N={6,9,12}` and is evaluated without
-   adaptation at `N=15`. Every executable arm uses the same reward-input-blind
-   sparse residual-demand allocator, with `E<=3N`, immutable keys, exactly `E`
-   heap pops, `O(N log N)` time, and `O(N)` live memory. The strongest alternative
-   is that a history/handoff-aware frozen priority already captures all useful
-   structure, so learned bids add no value. External Pro confirmed the sparse
-   proof and that v5 resolved all twelve prior defects, but required four further
-   definition corrections. The owner froze exact revision
-   `SP-RDA-MATH-CLOSURE-20260812-06`; the same-conversation Pro has now returned
-   literal `CLOSED`, and same-direction owner intake is complete. CM is performing
-   a fresh full-v6 construction/conformance review. No B3 production is authorized
-   until that renewed technical acceptance and Root scheduling.
-2. **Commitment-Residual Triggered Options (CRTO)** — direct variable-`k`
+1. **Commitment-Residual Triggered Options (CRTO)** — direct variable-`k`
    candidate. One shared option policy trains at `k={4,8}` and is evaluated at
    held-out `k=16`, `4->16`, and `16->4`. The treatment converts a frozen,
    causally issued forecast innovation plus net replan advantage into a legal
@@ -96,11 +83,12 @@ older pre-terminal snapshot below is retained only as provenance.
    same-checkpoint whole-team residual derangement and Q-only controls test the
    claimed mechanism. Because the residual is determined by the matched history,
    the maximum claim is finite-data/OOD inductive bias, never added information.
-   Revision `CRTO-B1-SCIENCE-20260812-02` prospectively closes the predictor,
-   capacity-probe, rate-hazard, complete-rollout, derangement, and exact step-ledger
-   choices found by the pre-Pro feasibility audit. Its dedicated clean Pro transport
-   is active; the mutually blind Gemini-v2 innovator remains prepared but unsent.
-3. **Voronoi-Quadrature Field Policy (VQFP)** — direct variable-`N` candidate.
+   Exact revision `CRTO-B1-SCIENCE-20260812-03` received literal
+   same-conversation External Pro `CLOSED`, and same-direction owner intake is
+   complete. CM is constructing and auditing the exact 10,715,136-step package;
+   production remains withheld until fresh technical/resource acceptance. The
+   mutually blind Gemini-v3 innovator remains prepared and non-gating.
+2. **Voronoi-Quadrature Field Policy (VQFP)** — direct variable-`N` candidate.
    One shared sparse spatial policy trains at `N={6,10}` and is evaluated without
    adaptation at held-out `N={4,14}`. It binds each field message to the physical
    measure of its periodic Voronoi cell so roster density does not redefine
@@ -109,10 +97,26 @@ older pre-terminal snapshot below is retained only as provenance.
    `2x2` algorithm-by-reassociation cut plus analytic quadrature/action checks
    tests whether correct binding contributes. The claim ceiling is finite-budget
    held-out-`N` robustness or performance, not unique expressivity or natural
-   mediation. Revision `VQFP-B1-MATH-CLOSURE-20260812-02` resolves the control-bank
-   count, exact 40,996-parameter recurrent function, action-TV unit, and association
-   aggregation rules. Its dedicated Pro and independent Gemini requesters are
-   prepared but unsent; CM confirms no known science ambiguity remains.
+   mediation. External Pro required five exact v2 corrections. The owner froze
+   complete revision `VQFP-B1-MATH-CLOSURE-20260812-03`, including the recurrent
+   learning law, two-sided attenuation estimand, exact support/headroom units,
+   four structural controls, and ordered noisy/reverse decision branches. CM
+   found no remaining prospective science ambiguity; the same-conversation v3
+   Pro review is running. Its Gemini packet must be independently refrozen from
+   v3 after the Pro terminal and remains non-gating.
+3. **Semigroup-Consistent Duration Model Policy (SCDMP)** — direct variable-`k`
+   candidate and independent hedge. One shared policy trains at `k={2,4,8}` and
+   tests held-out `k={6,12}` plus within-episode switches. It asks whether explicit
+   transition/reward composition consistency improves finite-budget duration
+   extrapolation over an information-, model-, parameter-, data-, and work-matched
+   `SCDMP-NOCOMP` arm. A deterministic noncommuting REAL context-word cocycle and
+   physically equivalent SHAM surface separate actual composition semantics from
+   generic regularization. CM's pre-Pro audit found prospective definition defects
+   in the v1 audit ledger, twin-rollout accounting, deterministic tape mapping,
+   bank granularity, and initialization convention; the same-direction EM is
+   freezing v2 before any Pro request or production. The strongest alternative is
+   that explicit `k`, raw history, and ordinary endpoint supervision already learn
+   every useful duration response.
 
 ## Superseded pre-terminal promising snapshot
 
@@ -267,6 +271,15 @@ value warrants it; this list is not a fixed slot count.
    allowance is exhausted. Revisit only as a separately frozen from-scratch
    campaign after a new portfolio decision, fresh CM acceptance, and applicable
    same-conversation Pro closure; current checkpoints are provenance only.
+3. **VNFC-B3 current sparse-allocation host/panel line.** Pro closed several
+   successive definitions, but bounded preactivity certificate proofs showed the
+   registered shared-history/KEEP panel support was empty. The final v8 proof
+   reached every selection, slack, and exact-prefix stage yet produced `0/96`
+   eligible rows in the first required bank because all rows failed the unchanged
+   `R-K<=0.01` semantic filter. This is not an algorithm result. Per the frozen
+   no-v9 rule, there is no further Pro request, repair, Stage 1/2, or production on
+   this host/panel line. Reconsider the learned sparse allocator family only as a
+   genuinely new treatment on a naturally feasible lifecycle host.
 
 All earlier no-further-investment decisions below remain in force unless their
 stated reconsideration condition is met.
@@ -315,20 +328,22 @@ oracle shows utility headroom, and a neutral identity-breaking control exists.
 
 ## Immediate Root cycle
 
-1. Complete CM's fresh v6 construction/conformance audit for Pro-closed B3. If
-   technically accepted, B3 is the closest bounded production discriminator and
-   receives the first compatible compute window; Stage 2 remains unauthorized.
-2. Observe the active clean CRTO-v2 Pro transport to terminal. A `CLOSED` result
-   plus EM intake releases CM construction; a `REVISION_REQUIRED` result returns
-   only to the CRTO owner. Schedule the independent Gemini innovator separately
-   and keep it non-gating and blind.
-3. Complete VQFP's dedicated Pro closure next, then route a closed object to CM.
-   Its independent Gemini innovator remains additive and cannot close or accept
-   the treatment.
-4. B2 and ONLGR receive no further current-campaign compute or provider work.
-   Their results constrain only their own treatments and supply no evidence to
-   B3, CRTO, or VQFP.
-5. The first Pro-closed, CM-accepted candidate with the best bounded
+1. Complete CRTO-v3 integrated CM construction/conformance. If technically and
+   resource accepted, release its exact single production command into the first
+   compatible compute window. Its Pro math closure and EM intake are already done.
+2. Observe the active VQFP-v3 same-conversation Pro review to terminal. `CLOSED`
+   plus EM intake releases CM construction; `REVISION_REQUIRED` returns only to
+   that owner. Refreeze its Gemini innovator independently from the terminal
+   revision and keep it non-gating.
+3. Complete SCDMP-v2 scientific correction and bounded pre-Pro CM reconciliation,
+   then open its dedicated Pro closure. Do not transfer the provisional CM probe
+   into evidence or weaken the matched `NOCOMP` comparator.
+4. B2, ONLGR, and the current B3 host/panel line receive no further campaign
+   compute or convergence work. Their facts constrain only their own treatments.
+5. Run each eligible direction's mutually blind Gemini innovator when Agentify is
+   idle; its output may improve mechanisms, controls, scenario coverage, and the
+   UAV bridge but cannot close mathematics or gate production.
+6. The first Pro-closed, CM-accepted candidate with the best bounded
    decision-information-to-runtime ratio receives production. A valid negative
    deletes its specified family; a nonidentifying execution returns to its
    semantic owner without weakening thresholds or the completion contract.
@@ -378,16 +393,16 @@ Do not mark this goal complete until all are true:
 
 | Requirement | Current authoritative evidence | State |
 |---|---|---|
-| One shared algorithm supports variable `N` or variable `k` | VNFC-B1 supplies only bounded toy-level variable-`N` package evidence and loses to a stronger structured greedy reference. B3, CRTO, and VQFP are shared-parameter prospective candidates on held-out axes. | Partial; no qualifying winner |
+| One shared algorithm supports variable `N` or variable `k` | VNFC-B1 supplies only bounded toy-level variable-`N` package evidence and loses to a stronger structured greedy reference. CRTO, VQFP, and SCDMP are shared-parameter prospective candidates on held-out axes; the current B3 host/panel line ended before activity. | Partial; no qualifying winner |
 | Improvement over a matched baseline | No current leading candidate has valid result data. B2 did not separate from reset/raw; ONLGR produced no panel result. | Not yet established |
-| Valid technical result and same-direction EM interpretation | B2 has a technically accepted result and EM intake, but its package is non-separated and its mechanism non-identifying. ONLGR is scientifically unavailable. B3/CRTO/VQFP are preproduction. | Partial |
-| Dedicated ChatGPT External Pro challenge | B2 result convergence is complete. B3 v6 is `CLOSED` with same-direction intake. CRTO-v2 transport is active in a new dedicated conversation; VQFP-v2 is prepared next. | In progress |
-| Additional independent Gemini innovator | EBCR completed an additive Gemini review. VNFC's Gemini attempts produced no provider turn/evidence and are not retried. CRTO and VQFP have independent prepared Gemini questions, still unsent and non-gating. | Partial |
-| Strongest alternative and claim ceiling | Explicit for all three leaders: fixed history/handoff priority for B3; information-matched full-history termination for CRTO; exactly representational learned spatial gate for VQFP. Each claim ceiling is finite-panel/finite-budget and excludes general UAV or arbitrary-axis claims. | Established prospectively |
-| Second surface and UAV simulator steps | B3 maps to kinematic post-churn service; CRTO to warehouse handoff then UAV track/relay/replan; VQFP to 2-D plume-front tracking then UAV spatial sensing/relay. None is activated without a qualifying first result. | Defined, not activated |
-| Portfolio and milestone records | Current leaders are B3, CRTO, and VQFP. B2 and ONLGR joined the existing set of retired or paused treatments with exact scientific reasons and revisit conditions. | Current cut recorded |
+| Valid technical result and same-direction EM interpretation | B2 has a technically accepted result and EM intake, but its package is non-separated and its mechanism non-identifying. ONLGR is scientifically unavailable. CRTO/VQFP/SCDMP are preproduction. | Partial |
+| Dedicated ChatGPT External Pro challenge | B2 result convergence is complete. CRTO-v3 is `CLOSED` with same-direction intake; VQFP-v3 is in the same-conversation closure review; SCDMP has not yet reached its v2 Pro boundary. | In progress |
+| Additional independent Gemini innovator | EBCR completed an additive Gemini review. VNFC's Gemini attempts produced no provider turn/evidence and are not retried. CRTO-v3 has a prepared blind Gemini request; VQFP and SCDMP require independent current-revision packets. | Partial |
+| Strongest alternative and claim ceiling | Explicit for all three leaders: information-matched full-history termination for CRTO; exactly representational learned spatial gate for VQFP; ordinary explicit-`k` endpoint learning for SCDMP. Each claim ceiling is finite-panel/finite-budget and excludes general UAV or arbitrary-axis claims. | Established prospectively |
+| Second surface and UAV simulator steps | CRTO maps to warehouse handoff then UAV track/relay/replan; VQFP to 2-D plume-front tracking then UAV spatial sensing/relay; SCDMP to payload towing then UAV action-hold scheduling. None is activated without a qualifying first result. | Defined, not activated |
+| Portfolio and milestone records | Current leaders are CRTO, VQFP, and SCDMP. B3's current host/panel line, B2, and ONLGR joined the existing set of no-current-investment treatments with exact reasons and revisit conditions. | Current cut recorded |
 
-The goal remains active. The shortest completion path is now: complete B3-v6
+The goal remains active. The shortest completion path is now: complete CRTO-v3
 CM acceptance, obtain a valid matched-baseline result,
 same-EM interpretation, same-conversation Pro result challenge, and then activate
 the already recorded second-surface/UAV step. No archived prompt, mathematical
