@@ -46,3 +46,13 @@ exactly one narrow factual question. Split independent owners, routes, files,
 or evidence families into multiple separate Scout calls and run independent
 calls in parallel. Scout output is factual evidence only, never design,
 implementation, scientific judgment, technical judgment, review, or acceptance.
+
+If a Project Scout call returns an explicit model quota, rate-limit, traffic,
+capacity, or model-unavailable failure, do not retry Spark. The invoking Root,
+Code Manager, or Explorer Manager immediately reissues the same one narrow
+read-only factual question as a native child with exactly
+`agent_type=default`, `model=gpt-5.6-luna`, `reasoning_effort=medium`, and
+`fork_turns=1`. This is a transport-capacity fallback only: preserve the exact
+scope and factual-output boundary, do not add scientific/technical judgment,
+and do not use it for Research Scout, Code Scout, Critic, Innovator, Reviewer,
+Verifier, or other professional roles.

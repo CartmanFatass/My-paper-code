@@ -213,6 +213,12 @@ Return: conclusion first, then changed paths or evidence and any residual issue.
 ```
 
 Use the shared Project Scout route in `AGENTS.md` for generic repository facts.
+When that registered Spark Scout returns an explicit quota, rate-limit,
+traffic, capacity or model-unavailable failure, do not retry it. Reissue the
+same exact read-only factual assignment once through native
+`default`/`gpt-5.6-luna`/`medium`/`fork_turns=1`, preserving its no-judgment,
+no-write and one-question boundary. This exception does not replace any other
+registered specialist.
 
 ## Writes and Git
 
