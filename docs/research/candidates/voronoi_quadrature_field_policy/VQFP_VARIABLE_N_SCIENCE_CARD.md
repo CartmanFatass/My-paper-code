@@ -3,8 +3,10 @@
 Owner: `direction:voronoi_quadrature_field_policy` Explorer Manager
 Candidate: `VQFP-VN-FAMILY-CUT-01`
 Treatment: `VQFP-B1-PERIODIC-LOCAL-MEASURE-v1`
-Exact prospective revision: `VQFP-B1-MATH-CLOSURE-20260812-03`
-Superseded Pro-reviewed revision: `VQFP-B1-MATH-CLOSURE-20260812-02`
+Exact prospective revision: `VQFP-B1-MATH-CLOSURE-20260812-04`
+Superseded Pro-reviewed revisions:
+`VQFP-B1-MATH-CLOSURE-20260812-02`,
+`VQFP-B1-MATH-CLOSURE-20260812-03`
 Superseded unsent revision: `VQFP-B1-MATH-CLOSURE-20260812-01`
 Hard complexity contract: `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
 
@@ -23,8 +25,8 @@ This document freezes a prospective B1 object. No VQFP parameter update,
 question-relevant treatment run, checkpoint, or treatment result exists. Before
 production, this exact revision must receive `CLOSED` from its dedicated same-
 direction ChatGPT External Pro conversation and that ruling must be intaken by
-this owner. Any
-accepted science-bearing correction creates a new complete revision and must
+this owner. Any accepted science-bearing correction creates a new complete
+revision and must
 return to the same Pro conversation. CM separately owns implementation
 conformance and technical acceptance; Root owns production sequencing.
 
@@ -34,19 +36,24 @@ but it cannot supply mathematical closure, result convergence, technical
 acceptance, or portfolio selection.
 
 The dedicated VQFP ChatGPT External Pro returned `REVISION_REQUIRED` with five
-science-bearing defects for prospective revision `-02`. This owner accepts all
-five because each affects the finite-budget learned object, mechanism
-attribution, endpoint availability, reproducibility, or branch precedence.
-Revision `-03` prospectively freezes the complete recurrent learning law;
+science-bearing defects for prospective revision `-02`; revision `-03`
+substantively closed all five, but the same Pro conversation returned
+`REVISION_REQUIRED` with one residual internal contradiction. This owner accepts
+all six rulings. Revision `-03` froze the complete recurrent learning law;
 requires both VQFP self-attenuation and architecture-by-cut attenuation in
 `M`; fixes oracle-headroom and binding-support units; supplies the exact state
 law and output vector for all four sampled structural controls; and fixes
 `Gamma`, noisy reversal, material reverse, endpoint tradeoff, and successor
-precedence. Revision `-02` is superseded and must never be resent; revision
-`-01` produced no provider turn. No optimizer update or other
-question-relevant activity has begun. The DGP, arms, architecture, parameter
-count, seeds, samples, transition/state ceiling, direct margins, family-delete
-margin, and narrow claim ceiling otherwise remain unchanged.
+precedence. Revision `-04` makes the sole remaining prospective correction: the
+registered `U_P/U_R` upper-bound pair is explicitly used by both
+`MATERIAL_REVERSE` classifications and family deletion, eliminating the
+contradictory word `only`. It changes no statistic, confidence level,
+multiplicity family, threshold, branch ordering, sample, seed, panel, or compute
+count. Revisions `-02` and `-03` are superseded and must never be resent;
+revision `-01` produced no provider turn. No optimizer update or other question-
+relevant activity has begun. The DGP, arms, architecture, parameter count,
+seeds, samples, transition/state ceiling, direct margins, family-delete margin,
+and narrow claim ceiling otherwise remain unchanged.
 
 ## Question and causal object
 
@@ -612,8 +619,9 @@ intact `N`-by-regime cell means, all held-out cell differences, and both bounds
 regardless of sign.
 
 Also form one-sided Student-`t` 97.5% upper confidence bounds for `mean(P_s)`
-and `mean(R_s)`. This second Bonferroni pair is used only by the frozen family-
-delete branch; it cannot convert a nonqualifying result into a positive one.
+and `mean(R_s)`. This second Bonferroni pair is used only by the registered
+`MATERIAL_REVERSE` classifications and the frozen family-delete branch below.
+It cannot convert a nonqualifying result into a positive one.
 
 The descriptive held-out-specific interaction is
 
@@ -1010,14 +1018,15 @@ acceptance, and a separately authorized controlled protocol.
 ## Exact owner handoff
 
 The direction-local scientific object is exactly revision
-`VQFP-B1-MATH-CLOSURE-20260812-03` in this file. The dedicated ChatGPT External
+`VQFP-B1-MATH-CLOSURE-20260812-04` in this file. The dedicated ChatGPT External
 Pro conversation already exists and must receive only the prepared exact
-same-conversation `-03` rereview after a new Root release. The unsent `-02`
-Gemini batch remains unsubmitted and must not be released against this
-superseded state; any Gemini requester must be independently refrozen from
-`-03` without importing the Pro answer. Production remains forbidden until Pro
-returns `CLOSED` on `-03`, this owner intakes that exact ruling, and CM accepts
-source conformance plus the zero-compute complexity bound.
+same-conversation `-04` rereview after a new Root release. The unsent `-02`
+Gemini batch is superseded and non-transport-ready. Its exact independent `-04`
+replacement is frozen blind to every Pro answer at
+`temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_gemini_3_1_pro_extended_innovator_20260812_04/batch.json` and remains
+`PREPARED_NOT_SENT`. Production remains forbidden until Pro returns `CLOSED`
+on `-04`, this owner intakes that exact ruling, and CM accepts source
+conformance plus the zero-compute complexity bound.
 
 CM's eventual result packet must state whether question-relevant activity began,
 whether a complete valid result exists, the `P/R/K/M/T` endpoints and bounds,

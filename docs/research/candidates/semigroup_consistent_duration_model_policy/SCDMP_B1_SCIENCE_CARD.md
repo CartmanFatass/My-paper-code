@@ -3,7 +3,8 @@
 ```text
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B1
-revision=SCDMP-B1-SCIENCE-20260812-01
+revision=SCDMP-B1-SCIENCE-20260812-03
+supersedes_revision=SCDMP-B1-SCIENCE-20260812-02_PREPARED_NOT_SENT
 owner=EM_semigroup_consistent_duration_model_policy
 source_inspiration=SCDMP-VK-FAMILY-CUT-01
 source_is_evidence=false
@@ -42,9 +43,15 @@ the still-strong alternative that any gain is generic regularization, duration
 encoding, or training-path noise rather than useful physical composition.
 
 The science-bearing object is this complete file at exact revision
-`SCDMP-B1-SCIENCE-20260812-01`. A change to its DGP, observation, word law,
-arms, losses, activity rule, training/evaluation split, estimands, margins,
-inference, interpretation, or resources creates a new complete revision.
+`SCDMP-B1-SCIENCE-20260812-03`. It prospectively supersedes v2, which was
+`PREPARED_NOT_SENT`: no provider turn, construction, optimizer update, or
+scientific activity occurred under v2 (or v1). V3 changes no mechanism,
+estimand, margin, inference rule, interpretation branch, claim ceiling,
+resource ledger, or activity boundary. It only makes every non-audit reset and
+model-initialization raw-bit mapping, draw order, numeric transform, and NumPy
+API/version exact. A change to its DGP, observation, word law, arms, losses,
+activity rule, training/evaluation split, estimands, margins, inference,
+interpretation, or resources creates a new complete revision.
 Production requires a literal `CLOSED` ruling on this exact revision from the
 dedicated same-direction ChatGPT External Pro conversation, this EM's intake of
 that ruling, CM technical acceptance, and Root scheduling.
@@ -146,19 +153,66 @@ steps, minimum gap, clipping steps, position-error RMS, worst-agent position
 error, velocity-error RMS, action changes, energy proxy `mean(u_i^2)`, boundary
 latency, and boundary-message count.
 
-At reset, `e_i` are independent `Uniform[-0.20,0.20]` draws followed by
-subtracting their four-agent mean, and `v_i` are independent
-`Uniform[0.10,0.30]` draws. The cyclic `q` rotation, initial states, word
-orders, and all evaluation cells are fixed by an exogenous PCG64 tape before
-either arm acts. Paired arms use the same tape. Actions never alter later word
-choices.
+### Exact raw-bit and non-audit reset law
 
-Science-bearing random streams are disjoint: corpus generation uses
-`PCG64(730000+algorithm_seed)`, audit-state generation uses
-`PCG64(740000+algorithm_seed)`, and scored regime `r` uses
-`PCG64(750000+1000*algorithm_seed+r)` for the regime order printed below.
-Within a stream, draws are consumed in episode, primitive-time, then slot
-order. No arm-specific environment stream exists.
+Every science-bearing pseudo-random stream uses NumPy `1.26.3` and exactly the
+bit-generator API `numpy.random.PCG64(seed).random_raw()`. One call returns one
+unsigned 64-bit integer. The implementation must not wrap the bit generator in
+`Generator` and must not call `default_rng`, `random`, `uniform`, `integers`,
+or `standard_normal`. Define, with integer shift before the float64 cast,
+
+```text
+U0(x)   = float64(x >> 11) * 2^-53
+Umid(x) = (float64(x >> 11) + 0.5) * 2^-53.
+```
+
+`U0` is the sole uniform transform for environment resets and Xavier draws.
+For the initialization-only standard-normal transform, two consecutive raw
+words `(x,y)` produce, in this order,
+
+```text
+radius = numpy.sqrt(-2.0*numpy.log(Umid(x)))
+angle  = 2.0*pi64*Umid(y)
+Z0     = radius*numpy.cos(angle)
+Z1     = radius*numpy.sin(angle),
+pi64   = float.fromhex('0x1.921fb54442d18p+1').
+```
+
+All functions in this transform are the float64 ufuncs of NumPy `1.26.3`.
+No spare normal is cached across a recurrent-gate matrix.
+
+At every non-audit episode reset, consume exactly nine raw words in this order:
+
+```text
+raw_q,
+raw_e1,raw_e2,raw_e3,raw_e4,
+raw_v1,raw_v2,raw_v3,raw_v4.
+```
+
+Set `q_rotation=raw_q mod 4` and left-rotate
+`q_base=(+1,-1,+1,-1)` by that slot count. In slot order `i=1,...,4`, compute
+
+```text
+e_i_raw = -0.20 + 0.40*U0(raw_ei)
+v_i     = +0.10 + 0.20*U0(raw_vi)
+mean_e  = (((e_1_raw+e_2_raw)+e_3_raw)+e_4_raw)/4.0
+e_i     = e_i_raw-mean_e.
+```
+
+These operations and the deterministic host dynamics/reward are IEEE float64;
+only the normalized neural input is cast once to float32. No reset variable is
+interleaved, vectorized through another RNG API, or redrawn. Primitive dynamics
+have no random draw.
+
+Science-bearing streams are disjoint. Corpus generation instantiates
+`PCG64(730000+algorithm_seed)` once, then consumes resets in duration order
+`k=2,4,8` and episode-index order `0,...,63` within each duration. Scored regime
+`r` instantiates `PCG64(750000+1000*algorithm_seed+r)` and consumes episode
+resets `0,...,31`; regime indices follow the printed evaluation order below.
+Words, classes, actions, and switches use the deterministic schedules in this
+card and consume no raw word. Paired arms reuse the resulting episode object
+and never advance a separate stream. The audit panel has no random draw and
+uses its exact arithmetic map below. Actions never alter later word choices.
 
 ### Train-support and held-out words
 
@@ -235,12 +289,41 @@ G_edge(y_i,y_(i+1),u_i,u_(i+1),w)   -> directed-edge cumulative reward.
 - a directed-edge head `Linear(113,64) -> tanh -> Linear(64,1)` on ordered
   node encodings, ordered action embeddings, word embedding, and `k/12`.
 
-The stated input widths include `k/12`. All affine input weights use
-Xavier-uniform initialization with tanh gain, GRU recurrent matrices use
-orthogonal initialization, and all biases are zero. Initialization stream
-`PCG64(710000+algorithm_seed)` is paired byte-for-byte across arms. There is
-no per-`k` head, duration lookup table, clipping of `k`, dropout, arm flag,
-privileged state, or raw target-word cache.
+The stated input widths include `k/12`. Every model tensor is IEEE float32.
+Initialization uses one NumPy 1.26.3 `PCG64(710000+algorithm_seed)` object and
+calls only its `random_raw()` method under the exact `U0` and Box-Muller
+transforms defined above. It follows this immutable traversal: node-encoder
+linear 1, node-encoder linear 2,
+action-embedding linear, word-GRU gates, `F` linear 1/2/3, `G_node` linear
+1/2, then `G_edge` linear 1/2. Within a linear weight, row-major order consumes
+one raw word per element, maps it with `U0`, then applies
+`weight=-bound+2*bound*U0(raw)` with
+`bound=(5/3)*numpy.sqrt(6.0/(fan_in+fan_out))`, all in NumPy float64, and casts
+each completed array once to float32. Every
+non-GRU bias is zero and consumes no draw.
+
+The word encoder is the reset-after GRU with gate order `r,z,n`:
+
+```text
+r = sigmoid(W_ir*x + b_ir + W_hr*h + b_hr)
+z = sigmoid(W_iz*x + b_iz + W_hz*h + b_hz)
+n = tanh(W_in*x + b_in + r*(W_hn*h + b_hn))
+h_next = (1-z)*n + z*h.
+```
+
+Its three `32 x 5` input-gate slices are initialized, in `r,z,n` order, by the
+same raw-word Xavier rule. For each recurrent gate in `r,z,n` order, fill one
+row-major `32 x 32` float64 matrix `M` using consecutive Box-Muller pairs
+`Z0,Z1` in that order; because 1,024 is even, no normal remains. Compute
+`Q,R=numpy.linalg.qr(M,mode='reduced')` under NumPy `1.26.3`. Set `s_j=+1`
+when `R[j,j]>=0` and `s_j=-1` otherwise and define
+`Q_plus=Q*numpy.asarray(s)[None,:]`. This removes QR column-sign ambiguity,
+including the `R[j,j]=0` convention. `Q_plus` is cast once to float32 and
+assigned to the corresponding recurrent slice. Both GRU bias vectors are zero.
+Paired arms use byte-identical tensors from this one traversal. No library-
+default parameter reset may run afterward. There is no per-`k` head, duration
+lookup table, clipping of `k`, dropout, arm flag, privileged state, or raw
+target-word cache.
 
 With one copy of every shared module above, each arm has exactly 26,148
 trainable scalar parameters: 1,184 in the node encoder, 32 in the action
@@ -272,8 +355,8 @@ temperature, early termination, or duration-specific branch. Both arms execute
 the identical search.
 
 Deployment has fixed-degree computation
-`O(k*C + N*A^3*C)` per boundary and `O(N*A*C)` memory for `A=3`, model width
-constant `C`, and word length `k`; the `A^3` factor is the exact-cycle
+`O(k*C + N*A^3*C)` per boundary and `O(N*A^2+N*C)` memory for `A=3`, model
+width constant `C`, and word length `k`; the `A^3` factor is the exact-cycle
 conditioning cost and is a fixed 27 here. There is no dense `N^2` attention. B1's
 claim nevertheless remains fixed at `N=4`.
 
@@ -314,13 +397,22 @@ the remaining 16 give two per cell and form an untouched train-support probe.
 The split is fixed before generation. No transition crosses reset or a true
 action boundary.
 
-At every legal boundary, endpoint examples use prefixes of length `2`, `4`,
-and `8` only when the same joint action is physically held that long.
-Composition examples are exactly `(2,2)->4` and `(4,4)->8`; each suffix uses
-the actual advanced physical state and suffix word. All state-coordinate and
-reward scales are the fit-set standard deviations with a floor of `1e-3`,
-frozen before optimization. Scaling is pooled across all fit-set training
-durations and words: one scalar for each of the two physical coordinates, one
+One training-bank row is one complete four-agent true-boundary witness, never a
+node or edge row. It contains the boundary's full joint physical state, full
+joint held action, complete word, terminal joint physical state, four node
+cumulative rewards, and four ordered-cycle edge cumulative rewards. Endpoint
+bank `E_tau` contains exactly the fit-set boundaries from episodes whose
+external duration is `tau`, for `tau in {2,4,8}`; its targets use the complete
+held interval. Composition bank `C_22` contains the same complete rows as
+`E_4`, split after two primitive steps, and `C_44` contains the same complete
+rows as `E_8`, split after four. The intermediate state and suffix word are
+stored in each composition row. No row crosses a true boundary, episode reset,
+padding, or duration switch.
+
+All state-coordinate and reward scales are the fit-set standard deviations
+with a floor of `1e-3`, frozen before optimization. Scaling is pooled across
+all fit-set training durations and words: one scalar for each of the two
+physical coordinates, one
 for node cumulative reward, and one for edge cumulative reward. There is no
 duration-, class-, word-, or arm-specific scaler.
 
@@ -359,25 +451,45 @@ contributes no gradient. It does not repeat endpoint data.
 
 Both arms use Adam `(lr=1e-3, betas=(0.9,0.999), eps=1e-8,
 weight_decay=1e-5)`, global gradient-norm clipping at `1.0`, and exactly 1,000
-updates. Each update has 192 endpoint examples, exactly 64 from each duration,
-and 128 composition examples, exactly 64 from each pair type. Each group of 64
-contains eight examples from every REAL/SHAM-by-four-word-offset stratum. Within
-each stratum, examples are ordered by
-`(episode,boundary,duration_or_pair,node_or_edge)` and one PCG64 stream seeded
-by `720000+algorithm_seed` creates the stratum permutations in lexicographic
-stratum order. Each permutation is consumed cyclically and wraps without
-reshuffle. Paired arms use identical batches. The final update is the only
-checkpoint; there is no early stop, validation selection, hyperparameter
-search, or arm-specific repair.
+updates. Within each of `E_2,E_4,E_8,C_22,C_44`, rows are partitioned into the
+eight strata `(REAL,word_row_0..3)` then `(SHAM,word_row_0..3)`. A stratum's
+canonical order is `(episode_index,boundary_index)` ascending.
+
+One `PCG64(720000+algorithm_seed)` stream constructs exactly one permutation
+per bank-stratum in bank order `E_2,E_4,E_8,C_22,C_44` and then the printed
+stratum order. A permutation is the following exact Fisher-Yates operation.
+For `j=m-1,...,1`, call this batch stream's `random_raw()` until
+`raw < 2^64-(2^64 mod (j+1))`, set `h=raw mod (j+1)`, and swap positions
+`j,h`. Each bank-stratum has its own cursor through that one permutation; it
+wraps to position zero without reshuffling.
+
+At every update, batch assembly visits banks in the printed order, then strata
+in the printed order, and takes the next eight complete rows from each cursor.
+Thus an update has 64 complete rows from each endpoint bank (192 endpoint rows)
+and 64 from each composition bank (128 composition rows). Loss first averages
+nodes or edges within a complete row, then rows within a stratum, the eight
+strata within a bank, and finally the three endpoint banks or two composition
+banks equally. No `node_or_edge` item exists in a permutation key. Paired arms
+use the same locked rows; each update evaluates and steps SCDMP first and
+NOCOMP second with separate Adam states. There is no stochastic layer, so this
+fixed arm order changes no model RNG. The final update is the only checkpoint;
+there is no early stop, validation selection, hyperparameter search, or
+arm-specific repair.
 
 ## Activity, support, and oracle headroom
 
-Question-relevant scientific activity begins when the first complete optimizer
-update starts whose endpoint batch contains all three training durations and
-whose composition batch contains both pair types, both REAL and SHAM tokens,
-at least two distinct joint actions, and every scalar skill. Before that exact
-event, construction, data generation, serialization, or launcher work is not
-scientific activity. Report the actual denominators.
+Before optimization, materialize update zero using the exact bank/cursor law
+and verify that its endpoint rows contain all three training durations and its
+composition rows contain both pair types, both REAL and SHAM, all four word
+rows, at least two distinct joint actions, and every scalar skill. At the paired
+initial checkpoint, report `D_comp_init` on these exact composition rows; it is
+a reproducibility diagnostic defined as `sqrt(L_comp)` before either optimizer
+has stepped, not a decision gate, and may not change any threshold.
+Question-relevant scientific activity begins when the SCDMP forward
+pass for optimizer update zero is invoked on that locked, conforming batch.
+Before that exact call, construction, corpus/bank creation, initialization,
+batch materialization, and diagnostic evaluation are not scientific activity.
+Report the complete-row denominators and whether every condition held.
 
 A result identifies the question only if all of these prospective conditions
 hold:
@@ -390,14 +502,15 @@ hold:
    each direct training duration; and at least 90% of target audit states have
    each normalized physical coordinate inside the fit-set coordinatewise
    minimum/maximum. A failed condition is reported, never relaxed.
-3. On the common untouched audit panel, REAL reversal twins have median across
+3. On the common untouched audit panel, the 32 REAL reversal twins per seed
+   have median across
    states of `max_u |S_true(w,u)/k-S_true(reverse(w),u)/k| >= 0.01`, where
    `S_true=R_true+H(y_true_terminal)`, and the constrained one-word oracle
    action differs on at least 10% of twins.
    SHAM reversal twins must agree to numerical tolerance `1e-10`. This proves
    that order matters physically rather than merely by label.
-4. The NOCOMP actor has recoverable held-out headroom: on at least 20% of audit
-   states its selected action is at least `0.02` per primitive step below the
+4. The NOCOMP actor has recoverable held-out headroom: on at least 20% of the
+   128 word-state instances its selected action is at least `0.02` per primitive step below the
    exact constrained one-word oracle under the same `R+H` score, and its mean
    regret is at least `0.01`.
    The oracle receives exactly the same state, word, held-action constraint,
@@ -405,7 +518,7 @@ hold:
    actor input or training target.
 5. The NOCOMP post-training composite held-out defect defined below is at least
    `0.05` standardized units, and SCDMP and NOCOMP select different joint
-   actions on at least 10% of REAL audit states. These are representation and
+   actions on at least 10% of the 64 REAL word-state instances. These are representation and
    actor first stages, not outcome claims.
 6. Neither arm has nonfinite outputs; no more than 1% of audit predictions hit
    an `F` output bound. On the untouched train-support probe, each arm's
@@ -414,24 +527,53 @@ hold:
    a composition-specific claim additionally requires SCDMP's to be at most
    `0.50`. For each predicted physical coordinate, SCDMP audit variance is
    between `0.25` and `4.0` times the corresponding true-terminal variance,
-   and at least 20% of REAL audit states have a predicted best-minus-worst
+   and at least 20% of the 64 REAL word-state instances have a predicted best-minus-worst
    candidate score range of `0.02*k` or more. Lower composition defect with
    collapsed physical outputs, inaccurate endpoints, or an actor-insensitive
    score is not a valid mechanism first stage.
 
-The audit panel is common and evaluation-independent: for every seed it has 32
-`k=6` and 32 `k=12` boundary states from a scripted held-action generator,
-balanced over REAL/SHAM, word, `q` rotation, and initial severity. All 81 joint
-actions are rolled exactly. It is opened only after both final checkpoints.
-Audit outcomes never select a checkpoint or threshold.
+The audit panel is common and evaluation-independent. For every seed it has 32
+`k=6` and 32 `k=12` boundary states. Let duration block `d=0` mean `k=6` and
+`d=1` mean `k=12`; let local index `a=0,...,31` and global audit index
+`g=32*d+a`. Define class `c=floor(a/16)` (`0=REAL,1=SHAM`), target word row
+`w=floor((a mod 16)/4)`, cyclic slot offset `r=a mod 4`, and severity
+`s=(w+r) mod 2` (`0=MILD,1=SEVERE`). This crosses every class with every word
+row and every slot offset once; severity is two/two within each class-word cell
+and is also balanced within every class-offset marginal.
 
-Each audit state begins from its own audit-stream reset and is advanced for
-exactly 48 primitive steps at training-supported `k=4`. Its word offsets follow
-the printed episode/boundary rule and its held actions cycle through base-three
-joint-action indices beginning at `(audit_index+31*algorithm_seed) mod 81`.
-The state at step 48 is paired with one target word; audit index modulo four
-selects that word, and index modulo eight selects REAL/SHAM by the same rule.
-Indices `0,...,31` receive `k=6` and `32,...,63` receive `k=12`.
+The base reset states are
+
+```text
+MILD:   e=(-0.06,+0.02,+0.06,-0.02), v=(0.17,0.23,0.19,0.21)
+SEVERE: e=(-0.18,+0.06,+0.18,-0.06), v=(0.10,0.30,0.14,0.26)
+q_base=(+1,-1,+1,-1).
+```
+
+Apply the same left cyclic rotation by `r` slots to `e`, `v`, and `q_base`.
+Offsets zero/two and one/three intentionally repeat the two physical alternating
+`q` patterns; the rotated physical initial states remain separately registered.
+There are no audit reset draws and no post hoc severity labels.
+
+Each audit reset is advanced for exactly 48 primitive steps at
+training-supported `k=4`, giving 12 held-action boundaries. At warm-up boundary
+`b=0,...,11`, use class `c`, the `k=4` word-table row `(w+b) mod 4`, and
+base-three joint-action index `(g+31*algorithm_seed+b) mod 81`, with the same
+slot/digit convention as the corpus. The resulting step-48 physical state is
+the shared target state. Pair it with target-table word row `w` and with the
+literal token-order reverse of that word. For each of the two words, roll all
+81 joint actions from separately cloned copies of the identical target state.
+The original and reverse rollouts jointly define each REAL/SHAM reversal twin;
+neither is reconstructed from the other. The panel is opened only after both
+final checkpoints, and its outcomes never select a checkpoint, threshold, or
+revision. The provisional CM analytic probe values are not evidence and are
+not inputs to any v3 threshold.
+
+Audit denominators are immutable: 64 physical states and 64 reversal twins per
+seed; 128 word-state instances after counting target and reverse separately;
+and `128*81` word-state-action rollouts. Coordinate-support conditions use the
+64 physical states, reversal/order conditions use 64 twins, and oracle regret,
+actor disagreement, prediction error, output bounds/variance, and candidate
+score sensitivity use the 128 word-state instances and their 81-action panels.
 
 Failure of activity, support, REAL order effect, SHAM identity, or oracle
 headroom makes the B1 result nonidentifying for this family. It is not evidence
@@ -614,7 +756,7 @@ evidence.
 ## Root-to-CM construction boundary
 
 If Root later relays this object after exact-revision Pro `CLOSED` and EM
-intake, CM may construct only `SCDMP-B1-SCIENCE-20260812-01`, bind its source
+intake, CM may construct only `SCDMP-B1-SCIENCE-20260812-03`, bind its source
 and configuration, and assess exact technical conformance. CM and Operator own
 code, environment, tests only when separately authorized, execution, resource
 facts, and retained-result correctness. They do not change word support,
@@ -629,8 +771,10 @@ not permit architectural additions. The environment-microstep ledger is:
 ```text
 common training corpus: 8*192*64                       =   98,304
 scored evaluation:     8*2*6*32*240                   =  737,280
-common audit rollouts: 8*81*(32*6 + 32*12)            =  373,248
-registered maximum                                            1,208,832
+common audit warm-up:  8*64*48                         =   24,576
+audit target words:    8*81*(32*6 + 32*12)            =  373,248
+audit reverse twins:   8*81*(32*6 + 32*12)            =  373,248
+registered maximum                                            1,606,656
 ```
 
 The ledger categories are not interchangeable and do not include neural

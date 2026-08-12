@@ -1,6 +1,7 @@
 # VQFP independent External Gemini innovation question
 
 Requester state: `PREPARED_NOT_SENT`
+Question identity: `VQFP-B1-GEMINI-INNOVATION-20260812-04`
 
 Open one new dedicated Gemini 3.1 Pro conversation with Extended thinking for
 exactly `direction:voronoi_quadrature_field_policy`. This is the additional
@@ -8,8 +9,8 @@ divergent innovator route. It is independent of the direction's ChatGPT
 External Pro conversation: do not show Gemini any Pro answer, and do not treat
 Gemini as mathematical closure, convergence, acceptance or portfolio authority.
 
-No VQFP run or result exists. Work only from the prospective revision
-`VQFP-B1-MATH-CLOSURE-20260812-02`, available in repository
+No VQFP treatment run or result exists. Work only from the prospective revision
+`VQFP-B1-MATH-CLOSURE-20260812-04`, available in repository
 `CartmanFatass/My-paper-code`, branch `aggressive`, at:
 
 ```text
@@ -28,10 +29,11 @@ volume-to-sender reassociation cut, analytic local-mass diagnostic, structural
 nulls and a noisy isolated-cell falsification panel separate direct package
 value from bounded mechanism evidence.
 
-The exact revision fixes a matched 40,996-parameter actor/critic architecture.
-It treats `EXPLICIT-PORT-BYPASS` as a derived diagnostic on the existing
-conflict replay rather than a fifth sampled control, and freezes action-TV plus
-two episode-level paired associations before data. These choices are part of
+The exact revision fixes a matched 40,996-parameter actor/critic architecture,
+complete recurrent learning law, direct and mechanism estimands, support and
+structural-control units, outcome precedence, and the 4,098,048 transition/state
+ceiling. It treats `EXPLICIT-PORT-BYPASS` as a derived diagnostic on the existing
+conflict replay rather than a fifth sampled control. These choices are part of
 the candidate state; suggestions may challenge them prospectively but must not
 silently rewrite the frozen B1.
 

@@ -7,13 +7,14 @@ thinking=Extended
 purpose=independent_divergent_scientific_innovation
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B1
-revision=SCDMP-B1-SCIENCE-20260812-01
+revision=SCDMP-B1-SCIENCE-20260812-03
+supersedes_revision=SCDMP-B1-SCIENCE-20260812-02_PREPARED_NOT_SENT
 conversation=dedicated_clean_new_gemini_direction_conversation_to_be_created
 send_status=PREPARED_NOT_SENT
 ```
 
 Act as an independent scientific innovator, not a convergence reviewer. Use
-the exact frozen direction state `SCDMP-B1-SCIENCE-20260812-01` in the GitHub
+the exact frozen direction state `SCDMP-B1-SCIENCE-20260812-03` in the GitHub
 repository, branch `aggressive`, at:
 
 `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_B1_SCIENCE_CARD.md`
@@ -32,6 +33,19 @@ labels have identical physics. A fully matched free duration model has the same
 information, endpoints, capacity, optimizer, actor, and deployment work. No
 result exists, and the maximum possible claim is a finite-budget/OOD inductive
 bias on this surface.
+
+This v2 prospectively supersedes an unsent and inactive v1. It freezes exact
+complete-boundary training rows and initialization, deterministically maps
+each audit state, evaluates both a target word and its reverse from cloned
+states, and accounts for both panels plus warm-up. These are definition
+repairs, not results; no local probe value was used as evidence or to tune a
+threshold.
+
+V2 also remained unsent and inactive. V3 adds only an exact NumPy `1.26.3`
+`PCG64.random_raw()` contract for environment resets and model initialization,
+including uniform/normal transforms and draw/traversal order. It changes no
+mechanism, threshold, estimand, branch, claim, resource, or activity rule and
+contains no result.
 
 Generate divergent, scientifically useful insight:
 

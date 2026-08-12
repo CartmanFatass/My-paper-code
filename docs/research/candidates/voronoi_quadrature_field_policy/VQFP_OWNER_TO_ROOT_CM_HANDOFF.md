@@ -1,8 +1,9 @@
 # VQFP B1 owner-to-Root/CM handoff
 
 Owner: `direction:voronoi_quadrature_field_policy` Explorer Manager
-Exact science revision: `VQFP-B1-MATH-CLOSURE-20260812-03`
-Superseded Pro-reviewed revision: `VQFP-B1-MATH-CLOSURE-20260812-02`
+Exact science revision: `VQFP-B1-MATH-CLOSURE-20260812-04`
+Superseded Pro-reviewed revisions: `VQFP-B1-MATH-CLOSURE-20260812-02`,
+`VQFP-B1-MATH-CLOSURE-20260812-03`
 Superseded unsent revision: `VQFP-B1-MATH-CLOSURE-20260812-01`
 Science source:
 `docs/research/candidates/voronoi_quadrature_field_policy/VQFP_VARIABLE_N_SCIENCE_CARD.md`
@@ -17,14 +18,16 @@ identifiable only as a finite-budget inductive-bias comparison. The learned
 comparator starts at and can represent the exact VQFP rule.
 
 No scientific activity or treatment evidence exists. The dedicated clean VQFP
-ChatGPT External Pro conversation reviewed `-02` and returned
-`REVISION_REQUIRED` with five science-bearing defects. This owner accepts them
-all and freezes the corrected complete `-03` composite. This packet authorizes
-neither implementation acceptance nor production. Only `CLOSED` on `-03` in
-that same Pro conversation, followed by same-direction EM intake, can permit
+ChatGPT External Pro conversation reviewed `-02` and returned five defects;
+`-03` closed all five but returned one residual upper-bound-use contradiction.
+This owner accepts all six and freezes the corrected complete `-04` composite.
+This packet authorizes neither implementation acceptance nor production. Only
+`CLOSED` on `-04` in that same Pro conversation, followed by same-direction EM
+intake, can permit
 Root to relay construction/production work to CM. The Gemini `-02` batch was
-not sent and must not be released against the superseded object; Gemini remains
-additive and never consumes the Pro obligation.
+never sent and is now non-transport-ready. The independent Gemini-v4 packet is
+frozen blind to every Pro answer, remains `PREPARED_NOT_SENT`, and is additive;
+it never consumes the Pro obligation.
 
 Exact closure evidence and prepared continuation:
 
@@ -32,14 +35,20 @@ Exact closure evidence and prepared continuation:
 v2 raw archive:
 temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_chatgpt_pro_math_closure_20260812_02/results.json
 
-v3 PREPARED_NOT_SENT same-conversation batch:
-temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_chatgpt_pro_math_closure_20260812_03/batch.json
+v3 raw archive:
+temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_chatgpt_pro_math_closure_20260812_03/results.json
+
+v4 PREPARED_NOT_SENT same-conversation batch:
+temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_chatgpt_pro_math_closure_20260812_04/batch.json
+
+independent Gemini-v4 PREPARED_NOT_SENT new-conversation batch:
+temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_gemini_3_1_pro_extended_innovator_20260812_04/batch.json
 ```
 
 ## Exact cumulative Root-to-CM scientific delta
 
 The first three rulings resolved CM's pre-Pro questions in `-02` and remain
-unchanged in `-03`:
+unchanged in `-04`:
 
 1. `EXPLICIT-PORT-BYPASS` is not a fifth sampled control panel. It reuses the
    learned-comparator intact/cut receiver-tick outputs already recorded on the
@@ -99,6 +108,11 @@ The accepted Pro-v2 corrections additionally freeze:
    exact noisy reversal; direct positive and material-reverse endpoints use
    explicit lower/upper-bound rules; endpoint tradeoff or noisy reversal blocks
    the untempered 2-D activation.
+9. **Upper-bound use correction.** The registered `U_P/U_R` 97.5% upper-bound
+   pair is used only by `MATERIAL_REVERSE` classifications and family deletion.
+   This resolves the v3 internal contradiction without changing any statistic,
+   confidence level, multiplicity family, threshold, branch order, sample,
+   seed, panel, or compute count.
 
 ## Exact object for CM after Pro closure
 

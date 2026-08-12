@@ -3,7 +3,8 @@
 ```text
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B1
-revision=SCDMP-B1-SCIENCE-20260812-01
+revision=SCDMP-B1-SCIENCE-20260812-03
+supersedes_revision=SCDMP-B1-SCIENCE-20260812-02_PREPARED_NOT_SENT
 owner=EM_semigroup_consistent_duration_model_policy
 handoff_status=PREPARED_NOT_SENT
 production_authorized=false
@@ -25,7 +26,7 @@ duration/regularization shortcut.
 This file is prepared but does not release construction or production. Root
 may relay it to CM only after a dedicated same-direction ChatGPT External Pro
 returns literal `CLOSED` for exact revision
-`SCDMP-B1-SCIENCE-20260812-01` and the same-direction EM intakes that ruling.
+`SCDMP-B1-SCIENCE-20260812-03` and the same-direction EM intakes that ruling.
 CM then owns source, runner, environment, tests only if the user separately
 authorizes them, execution, exact resource accounting, and technical
 acceptance. Any proposed science-bearing change returns to this EM and creates
@@ -56,15 +57,47 @@ a new complete revision requiring another ruling in the same Pro conversation.
    accuracy/variance, and constrained oracle headroom are conclusion-bearing
    observables, not optional diagnostics.
 
+## Exact prospective revision delta
+
+V1 was prepared but never sent, constructed, or made active. V2 retains its
+mechanism, thresholds, estimands, branches, and claim ceiling and repairs only
+these revision-level definitions:
+
+1. Every audit state now receives two separately cloned 81-action panels: its
+   registered target word and the literal reverse word. The 48-step state
+   warm-up and both panels are separately charged.
+2. The 64 audit states per seed have exact duration/class/word/slot-offset/
+   severity indices, deterministic reset vectors, warm-up words, and held
+   actions. The provisional analytic probe values are neither evidence nor
+   threshold inputs.
+3. A bank row is one complete four-node/four-edge boundary witness. The five
+   banks, eight strata, canonical ordering, rejection-sampled Fisher-Yates
+   permutation, cursor law, update-zero coverage, loss averaging, arm order,
+   and exact activity call are frozen.
+4. Model initialization now freezes parameter traversal, float64 PCG64 draws,
+   float32 assignment, reset-after GRU equations/gate order, separate recurrent
+   gate QR draws, and a nonnegative-`R`-diagonal QR sign convention.
+5. Deployment memory is `O(N*A^2+N*C)`. The exact nominal parameter count stays
+   26,148, and the corrected environment ledger is 1,606,656 microsteps.
+
+V2 was likewise never sent, constructed, or made active. V3 retains the entire
+v2 science object and adds one narrow reproducibility repair: NumPy `1.26.3`
+`PCG64(seed).random_raw()` is the only RNG interface; `U0`/`Umid`, Box-Muller,
+Xavier and QR transforms are exact; non-audit resets consume
+`q,e1,e2,e3,e4,v1,v2,v3,v4`; corpus/scored stream order and model parameter
+traversal are immutable. No v2 mechanism, threshold, estimand, branch, claim,
+resource, or activity rule changed.
+
 ## Resource and return
 
 The ceiling is one CPU, no GPU, 2 GiB resident memory, 90 minutes, at most
 75,000 trainable parameters per arm, 1,000 optimizer updates per arm/seed, and
-the immutable 1,208,832 environment-microstep ledger printed in the science
+the immutable 1,606,656 environment-microstep ledger printed in the science
 card. Exact architecture conformance is 26,148 trainable parameters; the larger
-number is an abort ceiling, not implementation freedom. The first qualifying
-complete optimizer update is the scientific-activity boundary. No command,
-test, implementation, or compute is authorized by this prepared handoff.
+number is an abort ceiling, not implementation freedom. Scientific activity
+begins at the SCDMP forward call for update zero after exact common-batch
+materialization and coverage conformance. No command, test, implementation, or
+compute is authorized by this prepared handoff.
 
 After an authorized run, CM returns the exact per-seed/per-regime REAL and SHAM
 effects, model/policy diagnostics, support/activity/headroom denominators,
