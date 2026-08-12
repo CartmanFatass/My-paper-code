@@ -80,6 +80,11 @@ description = "Silent Explorer Agentify transport leaf callable by Root or Indep
 config_file = "./agents/hmasd-explorer-agentify-transport.toml"
 nickname_candidates = ["Explorer Agentify Transport", "Research Review Transport"]
 
+[agents."HMASDExternalGeminiTransport"]
+description = "Silent Luna-high External Gemini transport leaf callable by Root or Independent Research Explorer."
+config_file = "./agents/hmasd-external-gemini-transport.toml"
+nickname_candidates = ["External Gemini Transport", "Gemini Scientific Transport"]
+
 [agents."HMASDExperimentOperator"]
 description = "Silent mechanical operator callable by Root or Code Project Manager for one authorized HMASD train-evaluate-analyze run."
 config_file = "./agents/hmasd-experiment-operator.toml"

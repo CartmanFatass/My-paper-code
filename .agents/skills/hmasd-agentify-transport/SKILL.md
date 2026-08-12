@@ -109,24 +109,19 @@ computed question-file SHA and do not claim receipt-level SHA evidence. These
 rules apply identically in Root and Explorer requester partitions and do not
 add identity, authentication, or state-machine work.
 
-Conversation memory and browser-tab ownership are different. Closing a tab does
-not delete its ChatGPT conversation, and a concrete saved conversation URL can
-reopen that memory. Follow the context brief's clean, exact-URL continuation,
-independence and concurrency relationships; do not make those semantic choices
-from the question or page. Across batches, the requester decides any later
-reuse; the child only returns the observed conversation URL/ID. Create only the
-non-default tabs actually useful for the requester-authorized relationships and
-live tool capacity, and remember only the IDs created during this native task.
-An owned idle tab may be reused when the requested relationship and observed
-conversation identity remain correct. Completion order may differ from question
-order; write result rows in the original `question_paths` order.
+Conversation memory and a local browser tab are different resources. Closing a
+tab does not delete the remote conversation; its concrete saved URL reopens the
+same memory later. Use a disposable non-default tab for each provider
+conversation. For a later continuation, open the saved exact URL in a new tab
+rather than keeping the old tab open. Follow the context brief's conversation
+relationships and write result rows in the original `question_paths` order.
 
-After a tab's last intended response is fully saved and no generation is active,
-the normal cleanup path closes that tab only if this task created it. Never close
-the default tab, a pre-existing/unowned tab, or a tab with an active answer. If
-an owned-tab close fails, inspect its postcondition once and make one safe retry;
-if it remains open, report residual resource uncertainty while preserving any
-complete saved answer and the otherwise complete batch status.
+After a complete answer or terminal error is durably saved and the page has no
+active generation, close the current provider tab immediately. This includes
+preflight and send errors that are confirmed not to have an active answer. Never
+close a tab while an answer is active. If tab close fails, report that concrete
+cleanup error to the invoker; do not keep an idle tab to preserve a session or
+create a separate tab-ownership, lease, quota, or background-cleanup system.
 
 ## Complete the batch
 
@@ -192,8 +187,9 @@ partial results path.
 
 Then return exactly once through the native child final response. Begin with a
 natural-language conclusion stating whether each question was actually
-answered, the direct consequence checked and any residual uncertainty or
-observable conflict; append the exact packet anchors below:
+answered, whether its provider tab was closed, the direct consequence checked,
+and any residual uncertainty or observable conflict; append the exact packet
+anchors below:
 
 ```text
 AGENTIFY_REVIEW_BATCH_RESULT
