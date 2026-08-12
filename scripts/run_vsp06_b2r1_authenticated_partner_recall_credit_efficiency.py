@@ -29,9 +29,17 @@ def _bytes(value: Any) -> bytes:
         value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False
     ).encode("utf-8")
 
+def _catalog_bytes(value: Mapping[str, Any]) -> bytes:
+    """Preserve the frozen declared tuple-field order in persisted catalog rows."""
+
+    return json.dumps(
+        value, sort_keys=False, separators=(",", ":"), ensure_ascii=False,
+        allow_nan=False,
+    ).encode("utf-8")
+
 def _load(path: Path) -> Mapping[str, Any]:
     with path.open("r", encoding="utf-8", newline="") as stream:
-        value = json.load(stream)
+        value = selector._strict_json_loads(stream.read())
     if not isinstance(value, Mapping):
         raise RunnerInvalid("JSON root is not an object")
     return value
@@ -43,7 +51,7 @@ def _authorization(path: Path) -> Mapping[str, Any]:
     selector.authorize_read_path(bootstrap, path)
     value = selector.authorized_json(bootstrap, path)
     selector.validate_stage2_authorization(value)
-    if value != bootstrap:
+    if not selector._exact_json_equal(dict(value), dict(bootstrap)):
         raise RunnerInvalid("Stage-2 authorization changed during secure load")
     return value
 
@@ -54,7 +62,7 @@ def stage1_status() -> Mapping[str, Any]:
     return {
         "synthetic_only": True, "domain": SYNTHETIC_DOMAIN, "success_token": SYNTHETIC_SUCCESS,
         "canonical_authorized": False, "full_authorized": False,
-        "reserved_paths_absent": all(not path.exists() for path in RESERVED_PATHS),
+        "reserved_paths_absent": all(not selector.path_lexists(path) for path in RESERVED_PATHS),
         "activity": dict(experiment.ACTIVITY_COUNTERS),
         "K_search": 0, "hypothetical_transitions": 0,
     }
@@ -73,7 +81,9 @@ def _preclaim_readiness(
     )
     selector.validate_selector_environment_receipt(authorization, environment)
     experiment.bind_full_environment(authorization, environment)
-    if authorization["zero_start_activity"] != experiment.ACTIVITY_COUNTERS:
+    if not selector._exact_json_equal(
+        authorization["zero_start_activity"], experiment.ACTIVITY_COUNTERS
+    ):
         raise RunnerInvalid("zero-start activity binding failed")
     if any(authorization["zero_start_activity"].values()):
         raise RunnerInvalid("readiness requires all 18 activity counters zero")
@@ -110,26 +120,72 @@ def _claim_fixed_stage2_namespace(
     return continuation, activity
 
 
-def _latest_stage2_activity(
+def _stage2_activity_state(
     authorization: Mapping[str, Any],
-) -> dict[str, int]:
+) -> tuple[dict[str, int], BaseException | None]:
     paths = selector.stage2_paths()
     activity = dict(authorization["zero_start_activity"])
+    missing_seen = False
     for phase in (
         "claim", "catalog", "replica_1", "replica_2", "witness", "verifier",
-        "manifest",
+        "manifest", "full_claim", "full_calibration", "full_primary_1",
+        "full_primary_2", "full_primary_3", "full_primary_4", "full_complete",
     ):
-        path = paths[f"activity_{phase}"]
-        if not path.exists():
-            break
+        path = paths.get(f"activity_{phase}")
+        if path is None or not selector.path_lexists(path):
+            missing_seen = True
+            continue
+        if missing_seen:
+            return activity, RunnerInvalid("durable activity lifecycle has a phase gap")
         try:
             snapshot = selector.authorized_json(authorization, path)
             if set(snapshot) != {"phase", "activity_counts"} or snapshot["phase"] != phase:
-                break
-            activity = selector.validate_activity_counts(snapshot["activity_counts"])
-        except Exception:
-            break
+                raise RunnerInvalid("durable activity lifecycle phase is malformed")
+            next_activity = selector.validate_activity_counts(snapshot["activity_counts"])
+        except Exception as exc:
+            return activity, exc
+        if any(next_activity[name] < activity[name] for name in activity):
+            return activity, RunnerInvalid("durable activity lifecycle is not monotone")
+        activity = next_activity
+    return activity, None
+
+
+def _latest_stage2_activity(
+    authorization: Mapping[str, Any],
+) -> dict[str, int]:
+    activity, error = _stage2_activity_state(authorization)
+    if error is not None:
+        raise error
     return activity
+
+
+def _has_durable_activity(paths: Mapping[str, Path]) -> bool:
+    return any(
+        name.startswith("activity_") and selector.path_lexists(path)
+        for name, path in paths.items()
+    )
+
+
+def _load_terminal_receipt(
+    authorization: Mapping[str, Any], path: Path,
+) -> Mapping[str, Any]:
+    persisted = selector.authorized_json(authorization, path)
+    required = {
+        "branch", "error_type", "error", "activity_counts",
+        "retry_authorized", "rescue_authorized", "sweeps", "retries",
+        "rescues", "extra_roots",
+    }
+    if (
+        not required.issubset(persisted)
+        or persisted.get("branch") != "B2R1_REGISTERED_FULL_TERMINAL_FAILURE_NO_RETRY"
+        or persisted.get("retry_authorized") is not False
+        or persisted.get("rescue_authorized") is not False
+        or any(type(persisted.get(name)) is not int or persisted.get(name) != 0
+               for name in ("sweeps", "retries", "rescues", "extra_roots"))
+    ):
+        raise RunnerInvalid("existing terminal failure receipt is malformed")
+    selector.validate_activity_counts(persisted["activity_counts"])
+    return persisted
 
 
 def _terminal_failure(
@@ -143,15 +199,14 @@ def _terminal_failure(
         "retry_authorized": False, "rescue_authorized": False,
         "sweeps": 0, "retries": 0, "rescues": 0, "extra_roots": 0,
     }
-    try:
-        if not failure_path.exists():
-            selector.write_exclusive(failure_path, _bytes(failure) + b"\n")
-        persisted = selector.authorized_json(authorization, failure_path)
-        if persisted == failure:
-            return persisted
-    except Exception:
-        pass
-    return failure
+    if selector.path_lexists(failure_path):
+        return _load_terminal_receipt(authorization, failure_path)
+    persisted = selector.write_json_exclusive_verified(
+        authorization, failure_path, failure
+    )
+    if not selector._exact_json_equal(dict(persisted), failure):
+        raise RunnerInvalid("terminal failure receipt type-exact reload mismatch")
+    return persisted
 
 
 def _existing_stage2_lifecycle(
@@ -160,11 +215,17 @@ def _existing_stage2_lifecycle(
     """Terminalize an earlier durable claim/activity; never resume or replay it."""
 
     paths = selector.stage2_paths()
-    if not paths["session_root"].exists():
+    if not selector.path_lexists(paths["session_root"]):
         return None
-    activity = _latest_stage2_activity(authorization)
+    for failure_name in ("full_failure", "stage2_failure"):
+        failure_path = paths.get(failure_name)
+        if failure_path is not None and selector.path_lexists(failure_path):
+            return _load_terminal_receipt(authorization, failure_path)
+    durable_activity = _has_durable_activity(paths)
+    activity, activity_error = _stage2_activity_state(authorization)
     exact_claim_exists = False
-    if paths["claim"].is_file():
+    claim_present = selector.path_lexists(paths["claim"])
+    if claim_present:
         try:
             claim = selector.authorized_json(authorization, paths["claim"])
             selector.validate_exact_claim(
@@ -173,10 +234,12 @@ def _existing_stage2_lifecycle(
             exact_claim_exists = True
         except Exception:
             exact_claim_exists = False
-    if exact_claim_exists or any(activity.values()):
+    if exact_claim_exists or claim_present or durable_activity:
         return _terminal_failure(
             authorization,
-            RunnerInvalid("existing Stage-2 claim/activity forbids retry or resume"),
+            activity_error or RunnerInvalid(
+                "existing Stage-2 claim/activity forbids retry or resume"
+            ),
             activity,
             failure_path=paths["stage2_failure"],
         )
@@ -188,8 +251,9 @@ def _existing_stage2_lifecycle(
 def simulate_fixed_root_claim(root: Path) -> Mapping[str, Any]:
     """Synthetic-only exact-once namespace proof for temporary test roots."""
 
-    if root.resolve() == selector.STAGE2_SESSION_ROOT.resolve() or root.exists():
+    if root.resolve() == selector.STAGE2_SESSION_ROOT.resolve() or selector.path_lexists(root):
         raise RunnerInvalid("synthetic fixed-root simulation requires one absent temporary root")
+    selector.validate_absent_destination(root)
     os.mkdir(root)
     marker = root / "synthetic_namespace_claim.json"
     selector.write_exclusive(marker, _bytes({
@@ -203,7 +267,7 @@ def orchestrate_stage2(stage2_authorization_path: Path) -> Mapping[str, Any]:
     """The only canonical Stage-2 entry: fixed root, exact once, no alternatives."""
 
     paths = selector.stage2_paths()
-    if paths["session_root"].exists():
+    if selector.path_lexists(paths["session_root"]):
         initial_authorization = _authorization(stage2_authorization_path)
         existing = _existing_stage2_lifecycle(initial_authorization)
         if existing is not None:
@@ -232,20 +296,21 @@ def orchestrate_stage2(stage2_authorization_path: Path) -> Mapping[str, Any]:
             authorization, continuation
         )
         rows = []
-        generator_counted = False
-        for value in experiment.canonical_catalog_rows(
+        activity["canonical_generator_calls"] += 1
+        catalog_rows = experiment.canonical_catalog_rows(
             authorization, catalog_capability=catalog_capability
-        ):
-            if not generator_counted:
-                activity["canonical_generator_calls"] += 1
-                generator_counted = True
+        )
+        for value in catalog_rows:
             rows.append(value)
             activity["canonical_rows_observed"] += 1
         catalog = {"catalog_id": selector.CATALOG_ID, "salt": selector.SALT, "rows": rows}
         selector.parse_catalog(catalog)
-        selector.write_exclusive(paths["catalog"], _bytes(catalog) + b"\n")
+        selector.write_exclusive(paths["catalog"], _catalog_bytes(catalog) + b"\n")
         selector.persist_activity_snapshot(
             authorization, paths, "catalog", activity
+        )
+        selector.validate_pre_replica_catalog_snapshot(
+            authorization, paths, catalog, activity
         )
         return selector.run_two_replica_sequence(
             stage2_authorization_path=stage2_authorization_path,
@@ -263,9 +328,22 @@ def run_full(
     stage2_authorization_path: Path, selector_receipt_sha256: str,
 ) -> Mapping[str, Any]:
     paths = selector.stage2_paths()
-    if not paths["claim"].is_file():
+    session_root = paths.get("session_root")
+    if (
+        (session_root is None or not selector.path_lexists(session_root))
+        and not selector.path_lexists(paths["claim"])
+    ):
         raise RunnerInvalid("registered full has no Stage-2 claim; technical no-start")
     authorization = _authorization(stage2_authorization_path)
+    for failure_name in ("full_failure", "stage2_failure"):
+        failure_path = paths.get(failure_name)
+        if failure_path is not None and selector.path_lexists(failure_path):
+            return _load_terminal_receipt(authorization, failure_path)
+    if not selector.path_lexists(paths["claim"]):
+        existing = _existing_stage2_lifecycle(authorization)
+        if existing is not None:
+            return existing
+        raise RunnerInvalid("registered full has no Stage-2 claim; technical no-start")
     try:
         selector.verify_authorized_source_config(authorization)
         _environment_path, environment = selector.load_full_environment_receipt(
@@ -293,6 +371,7 @@ def run_full(
         if actual_receipt_sha256 != selector_receipt_sha256:
             raise RunnerInvalid("selector receipt digest anchor mismatch")
         receipt = _authorized_load(authorization, paths["receipt"])
+        selector.validate_selector_receipt_schema(receipt)
         return experiment.run_registered_full(
             manifest_path=paths["manifest"],
             manifest_content_digest=str(receipt["manifest_content_sha256"]),
@@ -304,8 +383,9 @@ def run_full(
             selector_activity_counts=receipt["activity_counts"],
         )
     except Exception as exc:
+        activity, _activity_error = _stage2_activity_state(authorization)
         return _terminal_failure(
-            authorization, exc, _latest_stage2_activity(authorization),
+            authorization, exc, activity,
             failure_path=paths["stage2_failure"],
         )
 
