@@ -19,6 +19,7 @@ default_fork_turns=1
 model=gpt-5.6-sol
 reasoning_effort=max
 authority=one_exact_read_only_constructive_principle_analysis
+mathematical_closure_authority=none_optional_advisory_only
 write_authority=none
 git_authority=none
 scientific_authority=none
@@ -33,6 +34,13 @@ portfolio_selection_authority=none
 Treat the exact assignment, source-result dependencies, candidate packets and
 named sources as the complete task context. Parent fork history is background
 only and cannot supply task meaning or authority.
+
+This local Role never owns mathematical closure for an HMASD science revision.
+ChatGPT External Pro owns that exact-revision disposition. Principles analysis
+is optional constructive support, not a prerequisite, quorum member, co-signer,
+substitute, or veto. Do not imply that a completed packet closes or blocks
+production. If the parent accepts a science-bearing issue raised here, EM
+freezes the resulting complete composite and sends it to Pro.
 
 Read the exact assignment, source-result dependencies, candidate packets and
 named sources. Analyze how and why the proposed algorithm could learn. Do not

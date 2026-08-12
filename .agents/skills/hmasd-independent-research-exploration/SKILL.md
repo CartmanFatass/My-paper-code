@@ -61,8 +61,32 @@ EM for intake.
 For ordinary B, bind each run to its question, candidate, comparator, exact
 code/configuration, seeds, small budget, and interpretation boundary. Record a
 reason before later named B adjustments. Reserve full estimand, null,
-population, stop, and decision freezes for conclusion-bearing C. B proceeds
-without automatic Pro review.
+population, stop, and decision freezes for conclusion-bearing C. An ordinary B
+that Root has not selected as an active promising algorithm direction proceeds
+without automatic external review. Once Root selects the direction, EM prepares
+two independent direction conversations by default: a dedicated ChatGPT
+External Pro for rigorous causal/mathematical review and convergence, plus an
+additional Gemini 3.1 Pro with Extended thinking for broad world/domain-informed
+divergent innovation. Gemini never fulfills or replaces the Pro obligation and
+never owns convergence, acceptance, or portfolio choice.
+
+Before any new or prospectively revised science-bearing treatment enters
+production, freeze the complete revision and use the existing direction
+ChatGPT External Pro conversation for its final mathematical/causal closure.
+Require exactly `CLOSED` or `REVISION_REQUIRED` with exact defects and claim
+ceiling. A science-bearing correction creates a new complete composite that
+returns to the same Pro conversation. Pro `CLOSED` plus EM intake completes
+only the mathematical-review boundary; EM retains science authorship and
+interpretation, CM retains technical acceptance, and Root retains production
+sequencing and portfolio authority.
+
+Treat local Principles Analyst and Research Critic calls as optional advisory
+work, never a prerequisite, quorum, substitute, or veto for mathematical
+closure. Do not build a mandatory local review chain. If an optional local
+packet persuades EM to change a Pro-closed scientific object, freeze the new
+composite and ask Pro again. Do not retrofit an active treatment; for a
+treatment already active under an earlier rule, preserve its execution and add
+the bounded mathematical/causal closure to its same-conversation result review.
 
 If an owner needs to update the direction's post-integration navigation, propose
 a short resume card with current goal, evidence, next owner/action, missing-kind,
@@ -76,13 +100,18 @@ small delta path—EM author, Writer temporary copy, Root candidate, EM directio
 semantics acceptance, Root full-map acceptance/install—not a full-map transport
 or a mandatory result return.
 
-Use Explorer transport only for Explorer-origin reviews. The review is
-`EXPLORER_PROJECT_ALIGNMENT_AUDIT`, distinct from CM's formal audit; it requires the named trigger and Root
-publication. The Pro-visible packet uses only the GitHub repository, branch
-`aggressive`, and relevant repository-relative paths. It never includes local
-absolute filesystem paths, raw/blob URLs, commit hashes, checksums, byte counts
-or receipt fields, and asks only for scientific judgment rather than file
-verification, code review, tests, debugging or technical acceptance.
+Use Explorer transport only for Explorer-origin reviews. ChatGPT External Pro
+uses the dedicated Pro review skill and `provider=chatgpt`; External Gemini uses
+the separate `hmasd-external-gemini` skill and `provider=gemini`. Their questions,
+conversations, archives, and intakes remain independent even if shared Agentify
+capacity serializes the sends. A formal project-alignment review is
+`EXPLORER_PROJECT_ALIGNMENT_AUDIT`, distinct from CM's formal audit; it requires
+the named trigger and Root publication. A reviewer-visible packet uses only a
+self-contained prompt or the GitHub repository, branch `aggressive`, and relevant
+repository-relative paths. It never includes local absolute filesystem paths,
+raw/blob URLs, commit hashes, checksums, byte counts or receipt fields, and asks
+only for scientific judgment rather than file verification, code review, tests,
+debugging or technical acceptance.
 `OVERNIGHT_BRANCH_BLOCKER_REVIEW` is available only after the
 overnight branch exhausts applicable recovery and legal owner relay. Root
 prepares and pushes the Git-bound blocker evidence; Pro's raw response is

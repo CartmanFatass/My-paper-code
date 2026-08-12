@@ -1,6 +1,6 @@
 interface:
   display_name: "HMASD Independent Pro Review"
-  short_description: "Explorer-owned independent-research Pro review"
-  default_prompt: "Use $hmasd-independent-research-pro-review only from the Root-scoped task-scoped Explorer L1 for one frozen direction or methodology review; the Skill is non-spawnable, uses only hmasd-explorer-agentify-transport, keeps formal HMASD operations untouched, and archives before local FIFO reconciliation."
+  short_description: "External Pro scientific review and math closure"
+  default_prompt: "Use $hmasd-independent-research-pro-review from the direction Explorer to send one frozen scientific review or authoritative mathematical-closure question through the registered Pro transport and archive it before EM intake."
 policy:
   allow_implicit_invocation: false
