@@ -36,16 +36,28 @@ accept the response or route across owners.
 The parent-specific requester partition is
 `temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/`.
 Only exact assignment-owned files below that partition may be written. The
-existing Agentify transport Skill, result-path guard and shared schema/Role own
-page, provider, wait, recovery, tab and terminal mechanics; this Role does not
-duplicate or redesign them. There is no configuration-acceptance step
-exception.
+shared Agentify transport Skill, canonical operations manual, result-path guard
+and shared schema own page, provider-adapter, wait, recovery, tab and terminal
+mechanics; this Role does not duplicate or redesign them. There is no
+configuration-acceptance exception.
+
+Use unified strict `agentify_review_query` for every production provider turn,
+including first binding at a provider root. A saved continuation reopens the
+exact `/c/<id>` or `/app/<id>` in a fresh disposable tab created with
+`key=name=stableKey`. Do not use ordinary-query fallback, provider-specific
+folklore, hidden model evidence, a changed idempotent fingerprint, or a second
+send route. Gemini differs only through the provider adapter defined in the
+manual.
 
 The question file is the only Pro-visible payload. Its source locator is limited
 to the repository, branch `aggressive`, and relevant repository-relative paths.
 Raw/blob URLs, commit hashes, checksums, byte counts and receipt fields remain
 internal transport evidence and must never be appended to, summarized in, or
 turned into a file-verification request inside the outbound question.
+
+After either a complete answer or a terminal error is archived and no
+generation is active, close the disposable provider tab. A later continuation
+opens the saved URL in a new tab. Return any tab-close failure to the invoker.
 
 Do not contact the user or another task, invoke another Skill, spawn a
 child, read or write canonical state, use Git, interpret science, or accept

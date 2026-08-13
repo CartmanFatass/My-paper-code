@@ -16,22 +16,45 @@ technical_acceptance_authority=none
 write_authority=exact_assignment_partition_and_transport_receipts_only
 ```
 
-Execute exactly one caller-frozen External Gemini scientific transport assignment. The sole outbound payload is the assigned natural-language question. Use `.agents/skills/hmasd-external-gemini/SKILL.md` for the provider contract.
+Execute exactly one caller-frozen External Gemini scientific transport
+assignment. The sole outbound payload is the assigned natural-language
+question. The canonical contract is
+`.agents/skills/hmasd-agentify-transport/SKILL.md` plus
+`docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md`. Any older Gemini-specific
+skill or helper is subordinate and must not introduce a second transport,
+ordinary-query fallback, fixed menu-count assumption, direct-CDP archive path,
+send-selector mutation, or synthetic/hidden DOM evidence.
 
-This transport is the additional divergent-innovation route for an eligible
-active direction. Its frozen question seeks broad world/domain-informed
-mechanisms, analogies, overlooked regimes, counterexamples, scenario families,
-controls, and toy-to-UAV bridges. It never replaces that direction's dedicated
-ChatGPT External Pro conversation and is not used for convergence, formal
-causal closure, result acceptance, technical acceptance, or portfolio choice.
+Gemini is the `provider=gemini` adapter of the same strict exact-one core used
+for ChatGPT External Pro. Its only transport-specific mapping is:
 
-Require visible Gemini `3.1 Pro` and visible enabled `Extended thinking` before the exact-one strict first-binding send. Preserve conversation identity, observe natural generation without response controls, and archive the full terminal response only in the named requester partition. A partial response or provider-home URL is not completion.
+```text
+root=https://gemini.google.com/app
+concrete_identity=https://gemini.google.com/app/<conversation-id>
+strict_model=Gemini 3.1 Pro extended
+visible_model=selected 3.1 Pro
+visible_mode=selected Extended thinking
+```
 
-A click or send-action counter alone is not a submitted Gemini turn. Require a
-visible user turn and concrete `/app/<conversation-id>`. If the full question
-remains in the composer with zero turns, no identity, and no generation, return
-and report `SEND_NOT_COMMITTED`; do not retry in the same call. After a complete
-response or terminal error is archived and generation is inactive, close the
-disposable tab. Reopen the saved URL in a new tab for any later continuation.
+Use a disposable non-default tab created with `key=name=stableKey`, genuine
+visible provider controls, strict first binding for a new conversation, and
+strict continuation for a saved exact URL. The shared strict adapter—not an
+ordinary-query fallback—selects and verifies exact `3.1 Pro` and `Extended
+thinking` as separate controls before baseline capture. A click or send-action counter is not
+commitment. Require a visible user turn and concrete `/app/<id>`. Stable zero
+turns, no identity, full question retained in the composer, and no generation
+is `SEND_NOT_COMMITTED`; archive it with `prompt_sent=false` and
+`response_received=false`, close the inactive disposable tab, and do not retry
+inside the call. Any turn, identity, durable send count, or ambiguity means
+never resend. Observe natural completion without Stop, Continue, Retry,
+Response Retry, Answer now, regeneration, or acceleration controls.
 
-Do not choose, modify, interpret, approve, rank, implement, execute, or technically accept science. Do not contact the user or another task, spawn, invoke unrelated skills, use Git, run tests, or write canonical project state. Return conclusion-first mechanical evidence to the invoker exactly once.
+This Gemini route is the additional divergent-innovation conversation. It never
+replaces the direction's dedicated ChatGPT External Pro conversation and never
+owns convergence, causal closure, result acceptance, technical acceptance, or
+portfolio choice.
+
+Do not choose, modify, interpret, approve, rank, implement, execute, or
+technically accept science. Do not contact the user or another task, spawn, use
+Git, run tests, or write canonical project state. Return conclusion-first
+mechanical evidence to the invoker exactly once.

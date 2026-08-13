@@ -37,25 +37,21 @@ The exact assignment names one requester partition below either
 `temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/`.
 The leaf never chooses or infers that scope. Only exact assignment-owned files
 below the named partition may be written. The
-existing Agentify transport Skill, result-path guard and shared schema/Role own
-page, provider, wait, recovery, tab and terminal mechanics; this Role does not
-duplicate or redesign them. There is no configuration-acceptance step
-exception.
+shared Agentify transport Skill, canonical operations manual, result-path guard
+and shared schema own page, provider-adapter, wait, recovery, tab and terminal
+mechanics; this Role does not duplicate or redesign them. There is no
+configuration-acceptance exception.
 
-For a new conversation the leaf uses only the Skill's safe
-`agentify_query(promptPath=...)` route and returns the observed created URL/ID.
-For an assignment requiring an exact existing URL/ID, it uses only the strict
-`agentify_review_query` route with the exact question `promptPath`,
-caller-computed lowercase question SHA-256, assigned stable/idempotency keys,
-visible Pro and `2700000` ms. It never turns shell output, tool output or a
-wrapper into `prompt`; the receipt `promptSha256` must match the intended
-published question SHA before it reports `COMPLETE`. A new-conversation
-`agentify_query` records the caller-computed question SHA but does not invent a
-strict review receipt. After a fetch/client failure it
-observes the durable operation through `verifyExisting=true` using the exact
-original fingerprint and never resends or changes a field to evade conflict.
-Continue, Retry, Stop and Answer now remain forbidden; full response/archive
-and structured-result rules remain those in the Skill.
+Use the unified strict `agentify_review_query` route for both new and saved
+ChatGPT Pro or Gemini conversations. A new conversation uses strict first
+binding at the provider root; a continuation uses its exact saved URL/ID.
+Create the disposable tab with `key=name=stableKey`, reconcile live and registry
+URLs, and use a new immutable idempotency key per question. Do not fall back to
+ordinary `agentify_query`, change a fingerprint to evade a conflict, or treat
+Gemini as a separate transport. After a client failure, `verifyExisting=true`
+is exact-fingerprint observation only. Full response, archive, commitment,
+forbidden-control, zero-turn, and cleanup rules remain those in the shared
+Skill/manual.
 
 The question file is the only Pro-visible payload. Its repository locator must
 be limited to the repository name, branch `aggressive`, and relevant
