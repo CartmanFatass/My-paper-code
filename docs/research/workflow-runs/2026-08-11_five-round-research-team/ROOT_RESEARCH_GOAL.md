@@ -949,3 +949,188 @@ direction: it survives only if an exact information- and capacity-matched
 DeepSets comparator can contain the leave-one-out map, a causal self-mass cut is
 not merely out-of-distribution corruption, and the resulting discriminator is
 nonredundant with SGSP and ordinary mean-field control.
+
+## 2026-08-13 overnight cross-direction portfolio decision
+
+This portfolio section supersedes only prior cross-direction ordering and
+allocation statements. It does not rewrite any direction-local evidence,
+closure, result, activity boundary, EM/CM authority, or already-authorized
+execution. The full local portfolio packet is
+`OVERNIGHT_CROSS_DIRECTION_PORTFOLIO_PACKET_2026-08-13.md`; because the
+repository ignores new Markdown files by default, this tracked section is the
+canonical summary.
+
+The bounded objective was expanded to screen at least eight coherent parent
+families across static/dynamic variable `N` and exogenous/adaptive variable `k`,
+select three to five genuine investments, make at least six no-current-
+investment decisions, and freeze three family-dividing discriminators while
+dispatching only one immediate action. The completed screen covered twelve
+parent families. Labels that are algebraic reparameterizations, ordinary
+infrastructure, generic capacity, or minor treatment variants were not counted
+as extra families.
+
+### Current conclusion and investment set
+
+The nonredundant investment set is:
+
+1. **SGSP revision 05** — semantic topology-conditioned aggregation for static
+   variable `N`. Exact r05 is same-conversation Pro `CLOSED`, EM-intaken and
+   preactivity. Its strongest alternative remains target-table alignment or
+   cell-specific preconditioning because the finite toy is deliberately built
+   from the supplied `W`. The claim ceiling is the balanced two-role dense toy
+   at train `N={8,12}` and held-out `N={6,16}`; no arbitrary topology/`N`,
+   churn, learned-coordinate, second-surface or UAV claim follows.
+2. **RCLE revision 04** — correctly paired persistent latent exploration for
+   static variable `N`. Exact r04 is same-conversation Pro `CLOSED`, EM-intaken
+   and preactivity. Its strongest alternative is coherent optimizer geometry:
+   task-gradient alignment, variance, clipping and Adam-state trajectories.
+   The claim ceiling is the exact accepted-roster hidden-lock toy trained at
+   `N={4,8}` and frozen at `N=12`; no arbitrary `N`, churn, variable `k`,
+   continuous-control or UAV claim follows.
+3. **RISP revision 04** — a selected-action signed-score coordinate prior for
+   renewal-to-renewal adaptation under exogenous variable `k`. It trains one
+   slow parameterization at `k={4,8}` and freezes it at `k=12`, `4->12` and
+   `12->4`. RISP and SIGN-RNN have exactly translatable transition classes and
+   matched information, state, work and optimizer exposure. Its strongest
+   alternatives are generic recurrence, coordinate/optimizer path, critic
+   calibration and renewal-frequency geometry. The claim ceiling is a finite
+   two-copy renewal toy and a finite-budget coordinate prior only; no exclusive
+   expressivity, cooperative credit, learned termination, arbitrary `k` or UAV
+   claim follows.
+
+SGSP, RCLE and RISP are mechanism-distinct but not equally mature. SGSP and RCLE
+are Pro-closed. RISP's last owner-written request artifacts recorded separate
+Pro and Gemini questions as prepared and not yet contacted. If a provider turn
+was committed after those artifacts, continue only that saved identity and
+never resend it because this portfolio decision crossed the transport.
+
+MGTAP does not replace any leader. Revision 04 is complete but structurally
+nonidentified: all four matched optimization-validity selections remained about
+eight to nine times beyond the frozen stationarity limit. Its same-conversation
+Pro result review supports at most one terminal optimization-closure successor,
+not an automatic rerun. The branch-ineligible secondary pattern lowers the
+expected value of spending the next owner/closure cycle on it.
+
+### Parent-family coverage
+
+The twelve screened parents were: semantic topology aggregation; persistent
+latent exploration; metric/allocation coordinate priors; higher-order empirical
+distribution shape; fixed-total-budget decision-value communication/allocation;
+lifecycle-semantic memory/task handoff; active post-churn population-flow
+identification; structured renewal-indexed recurrence; phase/time
+reparameterization and phase-tagged memory; semigroup duration composition;
+learned termination/event renewal; and duration assignment by phase
+equivariance, tail risk or complementarity.
+
+The screen preserves two honest coverage gaps. Current leaders do not test
+episode-internal join/exit/failure, and RISP explicitly does not learn
+termination. No existing dynamic-`N` treatment combines a naturally feasible
+host, shortcut-resistant attribution and favorable opportunity cost. Learned
+termination remains a scientifically distinct family and a future divider, not
+evidence against RISP.
+
+LOEM is deleted as an independent family: with explicit `N`, own feature and
+inclusive mean, `m_-i=(N*m-phi_i)/(N-1)` is exactly recoverable. It remains only
+a preprocessing ablation unless a pre-bottleneck noncommuting operation produces
+a deterministic noncontainment and legal-action witness.
+
+### No-current-investment decisions
+
+1. **MGTAP r04 and automatic reruns:** revisit only if a leader stalls and the
+   EM freezes the single Pro-recommended `256/224 -> 512` terminal stationarity
+   successor; failure of any cell ends this question with no third extension.
+2. **Independent LOEM:** revisit only after a pre-bottleneck noncommuting
+   operation gives the same comparator-visible input but different
+   treatment-visible state and different optimal legal actions.
+3. **VQFP current host:** revisit only on a separately frozen,
+   allocation-constrained, unsaturated host with oracle headroom and action
+   sensitivity restored.
+4. **SCDMP exact-v5 and B2:** revisit only if direct variable-`k` work fails and
+   semigroup specificity becomes decision-critical, using a new stability-first
+   three-arm object with prospective update-zero calibration.
+5. **Homogeneous-host CCIC:** revisit only under heterogeneous covariance that
+   scalar ESS cannot absorb and after a new resource projection.
+6. **CRTO r04:** do not rerun or weaken the failed preactivity probe. Revisit
+   only through a separately frozen probe-only optimization-versus-
+   representation discriminator before a new treatment.
+7. **EBCR current adaptive-renewal package:** revisit only after an allowed-
+   information oracle proves content-aware renewal headroom and a readiness-
+   matched control isolates association-specific value.
+8. **ONLGR current campaign:** neither the activity-bearing run nor its one
+   recovery retained panel output, so there is no positive, negative or null
+   result. Revisit only through a new from-scratch campaign after preactivity
+   evaluator/serialization conformance, fresh CM acceptance, unchanged-science
+   EM confirmation or same-Pro reclosure for a revision, and a new portfolio
+   and compute decision.
+9. **VNFC-B2 typed lifecycle retention:** revisit only with an access-competent
+   treatment, explicit stale-command observables, and a complete
+   typed/raw/reset comparison.
+10. **VNFC-B3 host/panel and the reward-aware allocator:** the current bank had
+    `0/96` eligible histories, while the earlier enumerator was explained by
+    direct reward access and a stronger zero-bid greedy shortcut. Revisit only
+    on a naturally feasible, reward-blind, scalable lifecycle host with true
+    join/drop, above-training `N`, feasible KEEP/SWITCH histories and a strong
+    fixed comparator; there is no v9 threshold repair.
+
+These are scientific priority decisions. Missing code, a native host or runner
+was not used as a rejection reason.
+
+### Three family-dividing discriminators
+
+1. **Immediate — RISP structure × recipient-feedback closure.** Continue only
+   the existing RISP r04 direction-stage envelope. The same-direction EM must
+   reconcile the activity/two-lock concern, obtain a literal same-conversation
+   Pro ruling on the exact complete revision, and intake it. The paired CM may
+   produce only the bounded deterministic certificate for containment, packet
+   equality, yoke integrity, legal-action reachability, seen-schedule comparator
+   competence and resource class. If the Pro turn is already committed, do not
+   resend; continue the saved conversation. This action authorizes no stochastic
+   production or heavy compute. Its possible outcomes distinguish the RISP
+   score-coordinate prior, generic sign recurrence and generic feedback value
+   under exact class/information/work matching.
+2. **Conditional backup A — CMSP statistic collision.** Open only if SGSP/RCLE
+   fail to provide a qualified static-`N` result or a real surface presents the
+   same mean/variance but different decision-relevant distribution tails. Use a
+   finite characteristic-measure sketch against an exact-containing invariant-
+   set comparator, a held-out `N`, moment-collision worlds and a marginal-
+   preserving shape-coordinate yoke. It divides topology, higher-order shape,
+   generic set capacity and mean/count sufficiency.
+3. **Conditional backup B — APFI active post-churn identification.** Open only
+   when a naturally feasible dynamic-roster host produces the same current
+   roster/state with different future source/sink laws and a safe,
+   decision-relevant probe. Compare an anchored flow belief with an exact-
+   containing event RNN, a physically identical sham probe and a current-
+   snapshot-preserving history swap. It divides passive invariant robustness,
+   lifecycle memory, generic active event recurrence and source/sink score
+   priors. It is a new family object, not a VNFC-v8 repair.
+
+### External-provider workflow and exact operational action
+
+Every active promising direction uses one dedicated ChatGPT External Pro
+conversation and one distinct External Gemini innovator conversation. Different
+directions use different conversation identities. Pro and Gemini requests,
+answers and archives remain mutually blind unless the same-direction EM later
+freezes an explicit synthesis question.
+
+ChatGPT External Pro is the rigorous innovator and final convergence route for
+causal/mathematical scrutiny, comparator adequacy, claim ceilings, exact-
+revision closure and same-conversation result convergence. External Gemini is
+an additive divergent route for mechanisms, counterexamples, regimes, controls
+and toy-to-UAV bridges; it never supplies closure or result acceptance. Neither
+provider owns EM interpretation, CM technical acceptance, portfolio selection,
+compute allocation, Git or user contact. Provider transport, tabs and session
+management remain inside operational Root and the direction envelopes.
+
+Operational Root should preserve SGSP r05 and RCLE r04 as invested Pro-closed
+preactivity directions and retain their provider identities. It should issue
+exactly one portfolio action now: continue RISP r04 so its EM reconciles the
+activity/two-lock boundary; submits the exact revision once to the dedicated Pro
+conversation if no provider turn has been committed, otherwise continues that
+same conversation without resend; keeps the Gemini innovation turn separate;
+and obtains the paired CM deterministic answerability/resource certificate.
+Production or heavy compute requires a later ordinary operational decision after
+Pro closure and EM intake.
+
+Do not open CMSP or APFI now. Retain them as the two conditional backups. Give
+MGTAP no successor-definition cycle unless a leader stalls and the terminal
+option is reassessed against the remaining frontier.
