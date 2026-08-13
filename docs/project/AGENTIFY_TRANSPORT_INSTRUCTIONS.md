@@ -5,7 +5,7 @@ document_kind=canonical_transport_operations_manual
 scope=ChatGPT_External_Pro|External_Gemini
 transport_core=Agentify_strict_review_query
 provider_mapping=chatgpt|gemini
-version_basis=@agentify/desktop_0.2.4+36ebd89_2026-08-13
+version_basis=@agentify/desktop_0.2.4+302bd1d_2026-08-13
 ```
 
 This is the canonical operating manual for every HMASD Agentify transport
@@ -45,15 +45,22 @@ Most recent failures were operator/contract failures, not provider failures:
    NBSP while preserving UTF-16 length. Raw DOM equality therefore rejected an
    intact prompt, and a separate raw rendered-turn hash could reject the same
    reversible representation during content rebind.
+8. A persisted failed-attempt draft survived in the composer. The old typing
+   primitive relied on click, Select All, and Backspace without observing that
+   the composer became empty; when focus/selection did not cover the editable
+   root, the next frozen prompt was appended and the serializer exposed an
+   approximately doubled DOM/text structure.
 
 The confirmed Agentify defects are repaired in source commit `a9471f7`; source
 commit `e12caf8` adds the provenance-preserving v1-to-v2 ledger migration needed
 to load older valid COMPLETE receipts without weakening new-operation
-enforcement. Source commit `36ebd89` adds the single collision-resistant review
-plain-text identity model used at the composer, rendered-turn, diagnostic,
-recovery, and content-rebind boundaries. Section 15 retains the defects as
-regression contracts. An older running desktop still has the pre-fix behavior,
-so the repaired tree must be loaded before relying on those guarantees.
+enforcement. Current source commit `302bd1d` includes the single
+collision-resistant review plain-text identity model used at the composer,
+rendered-turn, diagnostic, recovery, and content-rebind boundaries, plus the
+strict composer-replacement and atomic click-time verification contract.
+Section 15 retains the defects as regression contracts. An older running
+desktop still has the pre-fix behavior, so the repaired tree must be loaded
+before relying on those guarantees.
 
 ## 2. The operating model
 
@@ -361,6 +368,39 @@ browser text model is not permission to change those frozen bytes
 (`review-text-identity.mjs:3-183`; `chatgpt-controller.mjs:764-900,1755-1930,
 2065-2299`; `review-transport.mjs:387-526,612,679-685`).
 
+Before the one strict insertion, Agentify uses the provider-neutral
+`agentify_review_composer_replace_v1` contract:
+
+1. Resolve the visible primary composer and classify it as `contenteditable`,
+   `textarea`, or plain-text `input`.
+2. Clear it exactly once. Contenteditable uses `replaceChildren()` plus a
+   bubbling/composed input event; textarea/input uses the native prototype
+   value setter plus the same input event so provider draft state receives the
+   mutation.
+3. Independently serialize and prove empty in two snapshots separated by a
+   bounded delay. This detects immediate and queued draft rehydration. A
+   nonempty/unreadable snapshot fails before any prompt insertion.
+4. Re-resolve the same primary composer, prove it remains empty, and establish
+   a verified collapsed caret (contenteditable range or native selection range).
+   Focus or selection uncertainty fails before insertion.
+5. Insert the frozen prompt in one `insertText` operation, never by appending a
+   second recovery copy, then require the section 7.6 identity receipt.
+6. Immediately before Send, one synchronous page-evaluation task reserializes
+   and revalidates the same exact text model and, only on success, clicks the
+   unique Send control. No awaited callback or ledger write separates this
+   final identity test from the click. The click-time receipt is required by
+   `onSendAction` and the ledger.
+
+An empty snapshot alone is not the final send guarantee: persisted application
+state may rehydrate later. The atomic click-time check closes that interval. A
+clear, empty, caret, final identity, or Send-control failure reports safe
+structural metadata, `noClickProven=true`, `promptInsertCount=0` when insertion
+never occurred, and leaves `sendActionCount=0`. It must never be repaired by
+typing again in that operation (`review-composer-replacement.mjs`;
+`chatgpt-controller.mjs:#clearReviewComposerOnce,#verifyReviewComposerEmpty,
+#prepareReviewComposerInsertion,#replacePrompt,#clickReviewSendOnce`; 
+`review-transport.mjs:onComposerVerified,onSendAction`).
+
 ### 7.7 Send boundary and commitment
 
 These are not provider commitment:
@@ -543,6 +583,9 @@ If an HMASD archive is missing or stale:
 | `review_model_mismatch` | Strict live evidence does not match frozen model | Inspect genuine selected composer/model controls; fix preflight only. Never change the frozen model or use plan text. |
 | `expected_model_unavailable` | Ordinary generic selector could not find one matching option | This is not proof the Gemini model is unavailable. Production used the wrong route or unsupported composite selector. Use strict + genuine visible preflight; otherwise fail closed. |
 | `send_not_triggered` | Ordinary query did not establish its generic send signal | Reconcile turns, identity, composer, generation, and ledger. If zero-turn facts all hold, archive noncommit; otherwise ambiguous. Never call another send route. |
+| Composer serialized length/DOM structure is approximately doubled | A persisted draft was appended because keyboard Select All/Backspace did not replace the editable root | Strict gate correctly prevents Send. Archive the pre-send failure; never type again in that operation. Use a fresh authorized operation only after the repaired replace/empty/caret/click-time contract is loaded. |
+| `review_composer_clear_failed` or `review_composer_caret_unavailable` | Composer clearing, draft-state synchronization, empty proof, focus, or collapsed selection could not be proven | Pre-insert and pre-send terminal. Do not append, send, or retry inside the operation. |
+| `review_composer_identity_mismatch_at_send` | Composer changed after initial identity receipt but before the Send boundary | Atomic check performed zero clicks. Archive pre-send; do not reuse the closed operation. |
 | `blocked=true`, login/CAPTCHA | Agentify detected a human/access gate | Do not send. Wait only within assignment timeout; archive pre-send terminal if unresolved. |
 | `looks403=true` with usable conversation/composer | Possible false positive from bare `403` text | Treat as evidence conflict, not permission to send. Archive conflict; source fix required. |
 | Actual access-denied/403 shell | Provider page is blocked | Pre-send terminal if no operation; verify existing only if ledger says already submitted. Restarting Agentify is not a repair. |
@@ -638,7 +681,9 @@ Before every strict call, record yes/no for each item:
 - [ ] New binding has zero turns; continuation has the expected conversation.
 - [ ] Genuine visible selected model/mode evidence is present.
 - [ ] Account-plan text and synthetic DOM were not used as evidence.
-- [ ] Composer is usable and contains no old prompt.
+- [ ] Composer is usable; strict replacement will independently clear, prove
+      empty twice, verify caret state, insert once, and atomically recheck at
+      Send even if a persisted old draft is present.
 - [ ] No active query/generation or forbidden response control exists.
 - [ ] Stable key, new operation key, exact URL/ID, model, SHA, timeout, and
       first-binding flag are frozen.
@@ -647,6 +692,8 @@ Before every strict call, record yes/no for each item:
 ## 13. Terminal checklist
 
 - [ ] Commitment classified from visible turn + concrete identity, not click.
+- [ ] The durable Send receipt includes valid replacement and atomic click-time
+      identity evidence.
 - [ ] No second send route was used.
 - [ ] Any recovery was exact-fingerprint observation only.
 - [ ] Completion has two stable snapshots and no forbidden controls.
@@ -701,6 +748,7 @@ Current source behavior is:
 | F | a fresh strict request fails `review_tab_busy` on a prior active turn; only observer recovery uses a persisted `userMessageId`; completion requires `sendActionCount===1` |
 | G | strict and ordinary send-capable entry points share one global inflight governor; exact existing observers do not reserve a second slot |
 | H | composer, rendered turn, diagnostics/recovery, and content rebind use one collision-resistant plain-text receipt; only narrowly reversible Blink space rebalance is accepted |
+| I | strict composer replacement clears once, proves empty and caret state before one insertion, then atomically revalidates identity with the unique Send click; persisted drafts cannot be appended or race the send boundary |
 
 The “observed source defect” and “reproduction” bullets below describe the
 pre-fix implementation retained for audit provenance. The invariant and fix
@@ -883,6 +931,47 @@ nonetheless directly reproducible.
   parity. `tests/review-transport.test.mjs:103-128,528-550` proves the same
   receipt is durable and bound to the raw prompt SHA.
 
+### I. Persisted drafts are replaced and verified before strict Send
+
+- **File/symbol:** `review-composer-replacement.mjs`,
+  `locateReviewComposer`, `clearReviewComposerElement`,
+  `inspectReviewComposerEmptyElement`, and `positionReviewComposerCaret`;
+  `chatgpt-controller.mjs`, `#clearReviewComposerOnce`,
+  `#verifyReviewComposerEmpty`, `#prepareReviewComposerInsertion`,
+  `#replacePrompt`, and `#clickReviewSendOnce`; `review-transport.mjs`,
+  `onComposerVerified` and `onSendAction`. These symbol locators are the stable
+  source references for commit `302bd1d`; line numbers are intentionally omitted
+  because surrounding controller and transport code can move independently.
+- **Invariant:** strict review clears the resolved primary composer once,
+  dispatches provider-observable input state, proves stable emptiness and a
+  collapsed caret before inserting the frozen prompt once, then performs its
+  final collision-resistant identity check and unique Send click in one
+  synchronous page task. The ledger accepts Send only with both replacement and
+  click-time identity receipts.
+- **Observed source defect:** `#typePrompt` clicked near the lower composer,
+  issued OS-dependent Select All and Backspace, and immediately called
+  `insertText(prompt)`. It neither proved which editable root owned the
+  selection nor verified empty state. The first repaired canary left the
+  7,024-character draft unsent; the next canary serialized 14,048 characters,
+  299 elements and 220 text nodes versus the earlier 151 elements and 110 text
+  nodes, with zero Send/action/user-turn facts. This is exact mechanical
+  evidence of append-after-failed-replacement, not prompt corruption or a
+  provider turn.
+- **Implemented fix:** contenteditable uses direct child replacement plus input
+  event; textarea/input uses native value setter plus input event. Two empty
+  snapshots catch queued rehydration, caret verification catches focus and
+  selection failures, insertion occurs once, and the final text check plus
+  click is atomic. Every failure before click carries safe non-content metadata
+  and `noClickProven=true`; no branch types a second copy.
+- **Regression:** `tests/review-composer-replacement.test.mjs` covers
+  contenteditable clearing/input dispatch, textarea native setter, delayed DOM
+  and textarea rehydration, and failed selection. Focused controller fixtures
+  cover the 7,024-shape persisted-draft replacement contract, zero insertion on
+  rehydration/caret failure, mutation after the initial receipt with zero click,
+  and legal click-time NBSP rebalance with exactly one click.
+  `tests/review-transport.test.mjs` requires durable replacement and click-time
+  receipts before accepting `sendActionCount=1`.
+
 ## 16. Source evidence index
 
 - Package and supported providers: `C:/Projects/agentify-desktop/package.json:2-5`,
@@ -898,6 +987,8 @@ nonetheless directly reproducible.
 - Review plain-text identity, narrowly reversible Blink space mapping, and safe
   hash receipt:
   `C:/Projects/agentify-desktop/review-text-identity.mjs:3-183`.
+- Composer replacement, draft-state synchronization, empty/caret proof:
+  `C:/Projects/agentify-desktop/review-composer-replacement.mjs`.
 - Live challenge, model, Gemini adapter DOM, send, and completion mechanics:
   `C:/Projects/agentify-desktop/chatgpt-controller.mjs:9-83,299-520,593-1086,1106-1930,2065-2299`.
 - Ledger schema and atomic persistence:
