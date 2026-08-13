@@ -3,7 +3,8 @@
 ```text
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B2-RELATION-SPECIFICITY
-revision=SCDMP-B2-SCIENCE-20260813-01
+revision=SCDMP-B2-SCIENCE-20260813-02
+supersedes_revision=SCDMP-B2-SCIENCE-20260813-01_PRO_REVISION_REQUIRED
 owner=EM_semigroup_consistent_duration_model_policy
 status=FROZEN_OWNER_MAP_PRE_PRO
 scientific_activity_started=false
@@ -35,9 +36,13 @@ controls. No B1 observation, result or threshold may fill a missing B2 field.
 5. If all model-level gates `C_FREE,C_SHUF,W_SHUF,P_FREE,P_SHUF,ORDER` pass but
    an action-regret, disagreement or non-harm condition does not, select
    **RELATION-SPECIFIC REPRESENTATION ONLY**.
-6. If CORRECT clears a model gate against FREE but not the active SHUFFLE or
-   REAL-minus-SHAM gate, select **GENERIC OPTIMIZATION/REGULARIZATION** and do
-   not attribute the correct algebra.
+6. Compute branch-specific Bonferroni one-sided 97.5% lower bounds for
+   `C_FREE` and `P_FREE`. If either adjusted bound clears its margin but the
+   ordinary-95% conjunction `C_SHUF AND P_SHUF AND ORDER` does not, select
+   **FREE-CONTROL EFFECT WITHOUT RELATION-SPECIFIC IDENTIFICATION**. Report the
+   passing endpoint(s), but attribute neither correct relation direction nor
+   generic regularization; FREE information/path asymmetry and finite optimizer
+   geometry also remain live.
 7. If the manipulation check remains active and the one-sided 95% upper bounds
    for all seven CORRECT-favoring effects are below their registered useful
    margins, select **EXACT-TREATMENT DELETION** for this host, architecture and

@@ -3,7 +3,8 @@
 ```text
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B2-RELATION-SPECIFICITY
-revision=SCDMP-B2-SCIENCE-20260813-01
+revision=SCDMP-B2-SCIENCE-20260813-02
+supersedes_revision=SCDMP-B2-SCIENCE-20260813-01_PRO_REVISION_REQUIRED
 owner=EM_semigroup_consistent_duration_model_policy
 predecessor=SCDMP-B1-SCIENCE-20260812-05
 predecessor_result_is_evidence_for_b2=false
@@ -39,6 +40,16 @@ before another task-value experiment. B2 itself cannot establish task-return or
 failure-robustness value. It never reuses a B1 result, effect, threshold, seed,
 tape, checkpoint or empirical calibration. B1 only motivates the question and
 supplies a controlled host/architecture definition.
+
+Revision 01 was frozen and published but never constructed or made
+scientifically active. Its same-conversation ChatGPT External Pro ruling was
+`REVISION_REQUIRED`. Revision 02 preserves every DGP, arm, information path,
+objective, gradient law, seed, tape, competence/activity/support/headroom gate,
+primary contrast and margin, adverse/non-harm family, deletion upper bound,
+activity boundary, ledger, strongest alternative and claim ceiling. It changes
+only branch 4: its two-endpoint OR now uses branch-specific Bonferroni 97.5%
+lower bounds, and a failed matched-specificity conjunction is no longer
+mislabelled as evidence for generic regularization.
 
 ## Exact inherited surface and explicit exclusions
 
@@ -510,15 +521,27 @@ the first matching branch below:
    P_SHUF,ORDER` pass, but an action-regret, disagreement or non-harm condition
    does not pass and no adverse branch fires. Report model-level specificity
    only; do not progress an algorithm or surface automatically.
-4. **Generic optimization/regularization.** CORRECT clears a model gate against
-   FREE but not the complete matched-control specificity set. Precisely define
-   `FREE_EFFECT = pass(C_FREE) OR pass(P_FREE)` and
-   `MATCHED_SPEC = pass(C_SHUF) AND pass(P_SHUF) AND pass(ORDER)`, where `pass`
-   means the registered one-sided lower bound strictly exceeds its margin.
-   This branch fires exactly when `FREE_EFFECT` is true and `MATCHED_SPEC` is
-   false. (`W_SHUF` already passed the common intervention-fidelity
-   prerequisite.) The correct-algebra story is unsupported; at most a generic
-   auxiliary-training effect remains.
+4. **FREE-control effect without relation-specific identification.** Define
+   `pass_FREE_adj(C_FREE)` as its one-sided **97.5%** lower bound strictly above
+   `0.040`, and `pass_FREE_adj(P_FREE)` as its one-sided **97.5%** lower bound
+   strictly above `0.020`. Then
+
+   ```text
+   FREE_EFFECT = pass_FREE_adj(C_FREE) OR pass_FREE_adj(P_FREE)
+   MATCHED_SPEC = pass(C_SHUF) AND pass(P_SHUF) AND pass(ORDER),
+   ```
+
+   where each `pass` inside `MATCHED_SPEC` retains its registered one-sided 95%
+   lower bound and margin because that set is a conjunction. This branch fires
+   exactly when `FREE_EFFECT` is true and `MATCHED_SPEC` is false; `W_SHUF` has
+   already passed the common intervention-fidelity prerequisite. Report exactly
+   which adjusted FREE contrast or contrasts pass. The result establishes only
+   the named bounded model effect relative to FREE on those endpoints. It does
+   not identify correct-relation specificity or generic regularization:
+   correct-relation learning with imprecise matched-control bounds, generic
+   auxiliary optimization, FREE's information/path asymmetry and finite
+   optimizer geometry remain unresolved. No algorithm, treatment-deletion or
+   later-surface conclusion follows from this branch.
 5. **Exact-treatment deletion.** All core, support, headroom and competence
    conditions pass; the gradient and SHUFFLE fidelity checks pass, including
    the lower bound for `W_SHUF`; and the one-sided 95% **upper** bounds for all

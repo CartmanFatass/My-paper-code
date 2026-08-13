@@ -3,7 +3,8 @@
 ```text
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B2-RELATION-SPECIFICITY
-revision=SCDMP-B2-SCIENCE-20260813-01
+revision=SCDMP-B2-SCIENCE-20260813-02
+supersedes_revision=SCDMP-B2-SCIENCE-20260813-01_PRO_REVISION_REQUIRED
 owner=EM_semigroup_consistent_duration_model_policy
 handoff_status=PREPARED_NOT_SENT
 scientific_activity_started=false
@@ -22,6 +23,14 @@ It is a competence-first, three-arm relation-specificity discriminator on the
 existing deterministic fixed-`N=4` variable-`k` convoy host. It does not rerun,
 repair or reinterpret SCDMP B1 and imports no B1 result, threshold, seed, tape,
 checkpoint or empirical calibration.
+
+Revision 01 received same-conversation Pro `REVISION_REQUIRED` before any
+construction or activity. Revision 02 accepts both exact branch-4 defects. Its
+two-endpoint positive OR uses one-sided 97.5% Bonferroni lower bounds, and the
+branch now reports a FREE-control endpoint effect without attributing generic
+regularization or correct-relation specificity. No treatment, comparator,
+data, gate, base margin, other inference family, branch, resource or claim
+changed. Revision 02 still requires literal Pro `CLOSED` and owner intake.
 
 The arms are `FREE-DIRECT`, `SCDMP-CORRECT` and
 `SCDMP-ORDER-SHUFFLE`. FREE is a deliberately strong composition-free learner
@@ -107,8 +116,10 @@ is feasibility only, never a scientific gate.
 
 This handoff authorizes no construction, source edit, import, test, benchmark,
 compute or production. Root must publish the exact composite and separately
-release the existing-conversation ChatGPT External Pro mathematical-closure
-request. Only literal `CLOSED` plus same-direction EM intake can make a later
-CM construction decision eligible. Any Pro correction or CM science ambiguity
-returns to this owner as a new complete prospective revision. CM alone owns
-later implementation conformance and technical acceptance.
+make it repository-visible to the existing-conversation ChatGPT External Pro;
+the current stage envelope already authorizes this ordinary same-direction
+revision rereview after publication. Only literal `CLOSED` plus same-direction
+EM intake can make a later CM construction decision eligible. Any Pro
+correction or CM science ambiguity returns to this owner as a new complete
+prospective revision. CM alone owns later implementation conformance and
+technical acceptance.

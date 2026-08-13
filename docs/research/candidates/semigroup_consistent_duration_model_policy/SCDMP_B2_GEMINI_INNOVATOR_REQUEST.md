@@ -7,14 +7,15 @@ thinking=Extended
 purpose=independent_divergent_scientific_innovation
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B2-RELATION-SPECIFICITY
-revision=SCDMP-B2-SCIENCE-20260813-01
+revision=SCDMP-B2-SCIENCE-20260813-02
+supersedes_revision=SCDMP-B2-SCIENCE-20260813-01
 conversation=dedicated_clean_new_gemini_direction_conversation_to_be_created
 send_status=PREPARED_NOT_SENT
 scientific_activity_started=false
 ```
 
 Act as an independent divergent scientific innovator. Review the exact frozen
-prospective state `SCDMP-B2-SCIENCE-20260813-01` in the GitHub repository,
+prospective state `SCDMP-B2-SCIENCE-20260813-02` in the GitHub repository,
 branch `aggressive`, at:
 
 `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_B2_RELATION_SPECIFICITY_SCIENCE_CARD.md`
