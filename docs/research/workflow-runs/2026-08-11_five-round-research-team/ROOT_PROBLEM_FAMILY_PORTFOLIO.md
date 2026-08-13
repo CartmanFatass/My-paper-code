@@ -1128,3 +1128,32 @@ Each has a single nested strong comparator capable of deleting its own family.
   activates a bridge. The invariant remains `registered structure -> valid
   intermediate -> changed legal action -> held-out task value -> exclusion of
   the named simpler alternative`.
+
+### Prospective discriminator-viability principle
+
+Before Root allocates an expensive compute lease, the paired direction owners
+audit whether the frozen experiment can answer its question, never whether the
+treatment is likely to win. Each direction defines its own values and thresholds;
+only these six questions transfer across directions:
+
+1. Can the endpoint express a two-sided answer against the strongest comparator,
+   or is the host deterministically saturated?
+2. Does every required intervention/control/held-out cell have reachable common
+   support under the frozen generator?
+3. Can the registered mechanism intervention reach a legal action rather than
+   only changing an internal statistic?
+4. Is the named strong alternative capable, correctly nested where claimed, and
+   matched on information, support, data and optimization?
+5. Can useful communication, inference, solver and physical work be matched in
+   every claim cell without output-disconnected padding?
+6. Will the complete question-relevant evidence survive activity, evaluation,
+   inference and atomic result installation rather than existing only in a final
+   serialization attempt?
+
+EM owns the scientific definitions and branches; CM owns static constructability,
+interfaces, accounting and any separately authorized treatment-blind light probe.
+Trained headroom, actual mechanism use, value, precision and production completion
+remain production facts. The audit never permits a weaker comparator, predicted
+superiority, easy-to-win toy, adaptive threshold selection or evidence transfer.
+It is neither Pro closure, technical acceptance, production authorization nor a
+portfolio admission gate.
