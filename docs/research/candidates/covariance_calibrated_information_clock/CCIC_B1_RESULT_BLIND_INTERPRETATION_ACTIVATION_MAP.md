@@ -1,15 +1,15 @@
-# CCIC B1 revision-06 result-blind interpretation and activation map
+# CCIC B1 revision-07 result-blind interpretation and activation map
 
 ```text
 direction=covariance_calibrated_information_clock
-treatment_revision=CCIC-B1-SCIENCE-20260813-06
-supersedes_map_for=CCIC-B1-SCIENCE-20260812-05
-predecessor_disposition=PREACTIVITY_WORK_INFEASIBLE
+treatment_revision=CCIC-B1-SCIENCE-20260813-07
+supersedes_map_for=CCIC-B1-SCIENCE-20260813-06
+predecessor_disposition=PREACTIVITY_SINGLE_CALL_WORK_DEFINITION_INCONSISTENT
 owner=EM_covariance_calibrated_information_clock
 artifact_role=result-blind derivative reading map
 map_changes_treatment=false
 scientific_activity_started=false
-mathematical_closure=revision_06_PREPARED_NOT_SENT
+mathematical_closure=revision_07_PREPARED_NOT_SENT
 chatgpt_external_pro=PREPARED_NOT_SENT
 external_gemini=PREPARED_NOT_SENT
 cm_release=withheld
@@ -20,16 +20,20 @@ production_authorization=none
 
 This map adds no arm, equation, threshold, sample, seed, endpoint, inference
 rule, resource, claim, or authorization. Its sole scientific source of truth is
-the complete frozen `CCIC-B1-SCIENCE-20260813-06` science card. If the two ever
+the complete frozen `CCIC-B1-SCIENCE-20260813-07` science card. If the two ever
 conflict, the science card controls and activity stops pending same-direction
 owner correction.
 
 Revisions 03 and 04 received natural same-direction Pro `REVISION_REQUIRED`.
 Revision 05 received Pro `CLOSED` but ended before activity because its frozen
 CCIC-versus-RI work ratio failed deterministically in every cell. Revision 06
-changes only that comparator into output-relevant, work-matched
-`RI-STRONG-v2`; no result informed it. No prior ruling, construction fact, or
-prospective repair is evidence for CCIC efficacy.
+received Pro `CLOSED` but ended before activity because its one-call exposure,
+two-context learned outputs, and one-evaluation work formula could not all be
+true. Revision 07 causally separates observed evidence from metadata-only
+prospective information inside one actual fusion invocation for both
+`RI-STRONG-v3` and `INFO-FLEX-v2`, while preserving the 83-scalar RI capacity
+and literal work table. No result informed either repair. No prior ruling,
+construction fact, or prospective repair is evidence for CCIC efficacy.
 
 ## 1. Protected causal distinction and scope
 
@@ -57,7 +61,7 @@ These are logical conditions, not a cross-role status system.
 
 ### 2.1 Mathematical-closure and authority condition
 
-Exact revision 06 is a new science-bearing composite and is not mathematically
+Exact revision 07 is a new science-bearing composite and is not mathematically
 closed. It requires literal `CLOSED` in the saved same-direction Pro
 conversation followed by this EM's intake before any CM relay or activity.
 Root retains portfolio/production sequencing and CM retains implementation and
@@ -88,10 +92,11 @@ result-bearing endpoint is consumed, the certificate must establish:
    stability stop; passing never upgrades the computed reference to an exact
    oracle;
 8. exact 24-by-32 label/snapshot grid per train cell, residual law, losses,
-   `RI-STRONG-v2` per-row `6 -> 9 -> 2` SiLU MLP and one output-relevant
-   residual transform,
-   invertible RI/INFO targets, INFO-FLEX's evidence-update-only scope, module
-   order, float64 reductions, Glorot initialization, and minibatch mapping;
+   one-call `RI-STRONG-v3` evidence/metadata factorization, one-call
+   `INFO-FLEX-v2` posterior/information factorization, both output-relevant
+   residuals and direct skips, exact 83/79 parameter counts, invertible
+   RI/INFO targets, module order, float64 reductions, Glorot initialization,
+   and minibatch mapping;
 9. disjoint Philox training/evaluation/inference phases, `Y0`, stream IDs,
    counter ranges, and nested evaluation transforms with no `N/k/rho/arm` in
    the evaluation address;
@@ -100,9 +105,12 @@ result-bearing endpoint is consumed, the certificate must establish:
 11. both coarse and fine reference gaps at initial belief, `N=5,k=3`, satisfy
     `L_norm_REFERENCE(DUP)-L_norm_REFERENCE(IND)>=0.01`;
 12. the deterministic exact-copy pathwise proof, full nine-class successor
-    permutation for `J-SHUFFLE`, fresh-table/cellwise work grammar, literal
-    `W_CCIC=14N+392M+8`, `W_RI_v2=14N+357M+7`, peak formulas, complete 27-cell
-    table, and actual `passed=true` for every `<=1.10` ratio; and
+    permutation for `J-SHUFFLE`, exact one fusion invocation returning observed
+    update and metadata-only prospective information, no second functional
+    learned evaluation, no actual/future `z` path into prospective information,
+    fresh-table/cellwise work grammar, literal `W_CCIC=14N+392M+8`,
+    `W_RI_v3=14N+357M+7`, peak formulas, complete 27-cell table, and actual
+    `passed=true` for every `<=1.10` ratio; and
 13. fresh outputs plus no more than 90 minutes, 4 GiB, 8 CPU threads, 240,000
     learned updates, and 60 million primitive ticks. The exact rollout maximum
     is 53,084,160 evaluation ticks plus at most 294,912 snapshot draws.
@@ -167,11 +175,15 @@ clock mechanism.
 
 ### 2.7 Work and diagnostic conditions
 
-CCIC and RI-STRONG-v2 differ by one parameter, intentionally advantaging
-RI-v2 83 to 82, and share samples, updates, search, support, and opportunities.
-RI-v2 applies its `6 -> 9 -> 2` SiLU MLP per unique row, then one channelwise
-`h=r+tanh(r)` transform before pooling; ignored-output padding is forbidden.
-Their work replay is every potential evaluation
+CCIC and RI-STRONG-v3 differ by one parameter, intentionally advantaging
+RI-v3 83 to 82, and share samples, updates, search, support, and opportunities.
+RI-v3 uses one actual fusion invocation: its evidence branch sees actual `z`,
+its prospective-information branch sees only aligned public metadata, and the
+metadata hidden features are evaluated once and reused. Both row outputs pass
+through output-relevant `r+tanh(r)` transforms before pooling. A second learned
+row/head evaluation, actual-`z` access by prospective information,
+ignored-output padding, or nonstreaming peak is forbidden. Their work replay is
+every potential evaluation
 opportunity over all seeds, 27 cells, 256 episodes, and all reachable decision
 ticks, each weighted one even after a hypothetical commit. Every call uses the
 card's fresh valid empty-ledger `SENSE` table, literal regime lineage, ascending
@@ -180,14 +192,15 @@ expands scalar arithmetic, integer/Boolean comparisons and selections,
 temporary loads/stores, elementary nonlinearities, and matrix/reduction work;
 it separately reports excluded immutable storage, address/index work, and
 final outputs. Before activity, it must recompute the literal formulas
-`W_CCIC=14N+392M+8`, `W_RI_v2=14N+357M+7`, `P_CCIC=22+6M`, and
-`P_RI_v2=24+6M`, reproduce the complete frozen table, and require every one of
+`W_CCIC=14N+392M+8`, `W_RI_v3=14N+357M+7`, `P_CCIC=22+6M`, and
+`P_RI_v3=24+6M`, reproduce the complete frozen table, and require every one of
 the 27 cells to have `passed=true`. Merely encoding 27 cells fails. The replay
 reports paired tuple counts and cellwise medians and peak temporary state for
 all cells; every value must equal the prospective formula. Every tuple
 operation ratio and every claim-relevant cell peak-state ratio must be at most
-`1.10`; zero denominators, ignored-output work, mismatches, or valid-input
-failures fail. A global median is inadmissible. Online total work is endogenous,
+`1.10`; zero denominators, hidden second evaluation, feature-path leakage,
+ignored-output work, mismatches, or valid-input failures fail. A global median
+is inadmissible. Online total work is endogenous,
 loss-charged, and reported.
 
 For each held-out axis, both `J-SHUFFLE` and `J-CLAMP` must have a simultaneous
@@ -205,7 +218,7 @@ point interval; a zero bootstrap SE is conservative infinity. The sole
 exception is the prospectively proved deterministic exact-copy family, whose
 four contrasts are structural `[0,0]` when every required paired check passes.
 
-The six primary `CCIC-comparator` contrasts cover `{RI-STRONG-v2,INFO-FLEX,
+The six primary `CCIC-comparator` contrasts cover `{RI-STRONG-v3,INFO-FLEX-v2,
 ORIGIN-COUNT}` on held-out `N` and held-out `k`. A population advantage of at
 least `0.02` requires the simultaneous upper bound below `-0.02` against all
 three comparators on that axis. The `(8,5)` three-contrast family is secondary
@@ -245,11 +258,11 @@ limits.
 2. **One axis.** The full rule passes on only held-out `N` or only held-out `k`:
    claim only that axis.
 3. **Covariance family, not analytic evidence-update specificity.** Calibration/mechanism pass
-   and CCIC beats RI/count, but the INFO-FLEX interval is equivalent or favors
-   INFO-FLEX: retain bounded covariance-aware timing and delete specificity of
+   and CCIC beats RI/count, but the INFO-FLEX-v2 interval is equivalent or favors
+   INFO-FLEX-v2: retain bounded covariance-aware timing and delete specificity of
    the analytic Gaussian evidence-update/posterior map conditional on the
-   shared exact HMM transition. Any other INFO-FLEX relation is unresolved.
-   INFO-FLEX never identifies the physical-time HMM transition.
+   shared exact HMM transition. Any other INFO-FLEX-v2 relation is unresolved.
+   INFO-FLEX-v2 never identifies the physical-time HMM transition.
 4. **Scalar reduction.** CCIC-minus-ESS is equivalent or ESS is reverse
    superior: delete low-rank fusion on this homogeneous surface. Merely failing
    to beat ESS is unresolved.
@@ -272,7 +285,7 @@ limits.
     no primary interpretation; raw differences remain exposure-confounded.
 11. **Core falsification.** Literal-copy multiplicity changes `q/J/action/loss`
     beyond frozen tolerances, or equal-valued independent origins collapse:
-    reject revision-06 information-value invariance.
+    reject revision-07 information-value invariance.
 12. **Activity/incomplete evidence.** Activity gate fails or any required seed,
     arm, cell, tape, endpoint, or diagnostic is missing/invalid: no efficacy
     interpretation regardless of return.
@@ -288,10 +301,10 @@ limits.
 ## 4. Strongest alternatives and deletion boundary
 
 The strongest simple alternative is trustworthy lineage plus unique-origin
-count. The strongest flexible replication-safe alternative is RI-STRONG-v2. The
+count. The strongest flexible replication-safe alternative is RI-STRONG-v3. The
 strongest alternative to the analytic Gaussian evidence-update/posterior map,
 conditional on the shared exact HMM transition, is the intentionally advantaged
-INFO-FLEX head. INFO-FLEX is not an alternative to the transition itself.
+INFO-FLEX-v2 head. INFO-FLEX-v2 is not an alternative to the transition itself.
 ESS-SCALAR is exact for the homogeneous Stage-1 equicorrelation family and is
 the decisive low-rank reduction test.
 
@@ -301,7 +314,7 @@ calibration falsification where named). Delete an axis claim when that axis
 fails. Delete task value when only posterior metrics improve. Delete exact-copy
 claims without trustworthy lineage. Delete correlation-specific attribution
 when the specificity family is equivalent. Always delete general
-communication-value language. INFO-FLEX cannot delete or support the exact HMM
+communication-value language. INFO-FLEX-v2 cannot delete or support the exact HMM
 transition because both arms share it. Every undefined or merely nonsignificant
 relation remains unresolved.
 
@@ -321,7 +334,7 @@ It does not support exact finite-bit likelihood, uniform numerical Bayes
 optimality, semantic duplicate detection, arbitrary covariance/correlation or
 bias robustness, arbitrary roster/churn/duration generalization, general MARL,
 mean-field or information-bottleneck claims, real-UAV benefit, or specificity
-of the analytic Gaussian evidence-update/posterior map unless INFO-FLEX also
+of the analytic Gaussian evidence-update/posterior map unless INFO-FLEX-v2 also
 satisfies the primary advantage rule. It never identifies the HMM transition.
 
 ## 6. Second-surface and UAV trigger
@@ -332,7 +345,7 @@ clock-diagnostic, packet, and claim-relevant work gates; the primary
 CCIC-minus-ORIGIN-COUNT simultaneous upper bound is below `-0.02`; and the
 CCIC-minus-ESS-SCALAR simultaneous upper bound in its frozen two-contrast
 family is also below `-0.02`. These two literal bounds define "count and scalar
-do not fully explain" for activation. RI-STRONG-v2 equivalence, reverse
+do not fully explain" for activation. RI-STRONG-v3 equivalence, reverse
 superiority, or an unresolved RI relation does not by itself block activation:
 the heterogeneous surface then directly discriminates explicit structured
 covariance from generic replication-safe set learning. Exposure,
@@ -358,11 +371,13 @@ rejection; `P17` does not establish variable skill period `k`. The corpus has
 no direct variable-`k` theorem and no replication-collision evidence.
 
 No literature issue requires another science-bearing change beyond revision
-06. Empirically, everything remains unknown: the computed reference may fail
+07. Empirically, everything remains unknown: the computed reference may fail
 its discriminator; scalar/count/set alternatives may suffice; the estimator or
 actor may fail; or 32 seeds may leave the SESOI unresolved. Trusted lineage,
 ideal-real observations, deterministic matched receipt, homogeneous covariance,
 fixed membership, and common-plan support are explicit scope assumptions, not
 hidden claims. Exact v5 closure remains historical but v5 ended preactivity on
-its infeasible work gate. Exact v6 mathematical/causal closure remains pending;
-every efficacy, feasibility, technical, and portfolio question is prospective.
+its infeasible work gate. Exact v6 closure also remains historical but v6 ended
+preactivity on its single-call/work-definition inconsistency. Exact v7
+mathematical/causal closure remains pending; every efficacy, feasibility,
+technical, and portfolio question is prospective.

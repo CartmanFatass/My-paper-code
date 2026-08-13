@@ -2,8 +2,8 @@
 
 ```text
 direction=covariance_calibrated_information_clock
-revision=CCIC-B1-SCIENCE-20260813-06
-supersedes_revision=CCIC-B1-SCIENCE-20260812-05
+revision=CCIC-B1-SCIENCE-20260813-07
+supersedes_revision=CCIC-B1-SCIENCE-20260813-06
 provider=gemini_3_1_pro_extended
 request_kind=independent_divergent_scientific_innovation
 transport_state=PREPARED_NOT_SENT
@@ -30,32 +30,34 @@ provider's material, or any other direction.
 
 ## Exact request
 
-Explore frozen `CCIC-B1-SCIENCE-20260813-06` as a divergent scientific
+Explore frozen `CCIC-B1-SCIENCE-20260813-07` as a divergent scientific
 innovator. The core hypothesis is that a lineage-aware covariance-calibrated
 information clock can ignore literal retransmissions but benefit from genuinely
 new correlated or independent evidence while one decentralized shared policy
 spans held-out roster size `N` and skill period `k`.
 
-The first surface now includes `RI-STRONG-v2`, a replication-safe nonlinear set
-comparator with 83 trained scalars versus CCIC's 82. Per unique row it applies
-one shared `6 -> 9 -> 2` SiLU MLP to
-`(z_i,o_i,s_i,log M,t/30,k/5)`, then one output-relevant channelwise
-`h_i=r_i+tanh(r_i)` transform, and mean-pools. This replaces a
-preactivity-infeasible comparator; dummy work padding and gate relaxation are
-forbidden. Its prospective work ratio versus CCIC is at most `1.10` in every
-frozen cell. Do not silently change this first discriminator.
+The first surface includes `RI-STRONG-v3`, an 83-scalar replication-safe set
+comparator versus CCIC's 82. One fusion invocation has a flexible actual-value
+evidence branch and a causally separated metadata-only prospective-information
+branch. Shared public metadata features are evaluated once; each output has an
+output-relevant residual; future/actual represented values cannot enter the
+prospective channel. `INFO-FLEX-v2` analogously separates observed posterior
+and prospective information inside one invocation. A hidden second learned
+evaluation, value leakage, dummy work, and work-gate relaxation are forbidden.
+The frozen RI operation and peak ratios versus CCIC are at most `1.10` in every
+cell. Do not silently change this first discriminator.
 
 Generate bounded prospective mechanisms and falsifiers that could change work
-after B1. In particular:
+after the frozen first surface, not post hoc explanations of nonexistent data:
 
-1. Find cross-domain analogies for provenance-quotiented evidence and effective
-   information clocks.
-2. Identify counterexamples involving shared bias, provenance collision,
-   non-Gaussian dependence, useful transport redundancy, or changing-state
-   misuse of static precision.
-3. Challenge whether RI-v2 is the strongest useful-compute set alternative and
-   propose a cheaper single-axis discriminator for any serious residual
-   representation explanation.
+1. Find the most dangerous counterexample where a metadata-only prospective
+   information branch still gains an illegitimate timing/count/regime shortcut.
+2. Challenge whether the one-invocation causal factorization is the strongest
+   useful-work generic set alternative and identify any missing functional
+   capability without adding future/value leakage.
+3. Seek covariance families where rank one, scalar ESS, origin count, and a
+   generic replication-safe set encoder make distinct predictions; give a
+   minimal representation explanation.
 4. Propose tractable structured covariance or conditional-novelty successors
    whose need is decided by one cheap discriminator.
 5. Stress the variable-`k` bridge and identify the smallest alternative
