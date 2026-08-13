@@ -1,5 +1,24 @@
 # Root Research Goal
 
+## Current two-session authority note
+
+This note supersedes only the role attribution in all older and current sections
+below; it does not rewrite their scientific evidence, portfolio conclusions,
+revisit conditions, or direction-stage authorities. Until the user changes it,
+Codex sidebar session `019ffc20-5001-7453-a08a-dac783cf4d80` is the exclusive
+owner of cross-direction discovery, comparison/synthesis, problem-family graph
+maintenance, and portfolio invest/pause/retire/revisit decisions, and it authors
+the portfolio sections of shared canonical research state. In those contexts,
+every unqualified `Root` below means that dedicated portfolio session.
+
+The operational Root owns direction-stage EM/CM orchestration, shared-compute
+leases and tools, user communication, provenance-bound cross-session relay,
+owner-prepared direction publication, and final Git integration. In those
+contexts, every unqualified `Root` below means the operational Root. A sentence
+that combines both scopes is read as this split, not as shared authority. Both
+sessions re-read `AGENTS.md`, `.agents/roles/ROOT.md`, and
+`CROSS_DIRECTION_PORTFOLIO_HANDOFF_SOL_ULTRA.md` after compaction or restart.
+
 ## Project outcome
 
 Root must discover and experimentally validate at least one shared MARL

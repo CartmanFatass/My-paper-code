@@ -1,39 +1,64 @@
-# Cross-direction portfolio handoff for a Sol-ultra Root task
+# Dedicated cross-direction portfolio-session contract
 
 ```text
 handoff_scope=cross_direction_discovery|cross_direction_comparison|portfolio
-target_surface=new_Codex_sidebar_task
+target_surface=reuse_active_Codex_sidebar_session
 target_session_id=019ffc20-5001-7453-a08a-dac783cf4d80
 target_model=gpt-5.6-sol
 reasoning_effort=ultra
-source_task_retains=single_direction_management|direction_integration|shared_tooling
+operational_root_retains=single_direction_stage_pairs|shared_compute|user_contact|shared_tooling|final_git
+portfolio_owner_status=active_until_user_changes_target_session_id
 ```
 
 ## Start contract
 
-This file is the complete start packet for a new top-level Codex sidebar task.
-The new task must first read `C:/Projects/HMASD/AGENTS.md`, then
-`C:/Projects/HMASD/.agents/roles/ROOT.md`, and follow the current versions of
-both. It operates from `C:/Projects/HMASD` on branch `aggressive`.
+This file is the durable contract for the dedicated top-level Codex sidebar
+portfolio session `019ffc20-5001-7453-a08a-dac783cf4d80`. It must first read
+`C:/Projects/HMASD/AGENTS.md`, then `C:/Projects/HMASD/.agents/roles/ROOT.md`,
+then this document, and follow their current versions. After every compaction or
+restart, both this session and the operational Root repeat that read sequence.
+The exact session id remains the active portfolio owner until the user changes
+it. It operates from `C:/Projects/HMASD` on branch `aggressive`.
 
-The new task owns only:
+The active dedicated portfolio session owns only:
 
 - discovery of scientifically coherent variable-`N` or variable-`k` mechanism
   families;
 - cross-direction comparison, provenance-bound synthesis, conflict and
   redundancy analysis;
-- portfolio investment, pause, revisit-condition and next-discriminator
-  recommendations and decisions;
-- portfolio sections of shared canonical research state and its own necessary
-  Git integration.
+- redundancy, competition and fusion assessment;
+- portfolio investment, pause, retire, revisit-condition and next-discriminator
+  decisions;
+- portfolio sections of shared canonical research state.
 
-It does not own single-direction EM/CM management, provider transport,
-Agentify, tabs, runtime, CPU/PID/RSS, Operator work, tests, implementation,
-production, result installation, owner logs, or ordinary direction publication.
-Those remain in the source task and its existing L1 pairs. Do not contact or
-recreate those L1s merely to obtain status. Consume their owner-written science
-cards, intakes and technical packets from the shared workspace when they reach a
-decision boundary.
+It does not own user contact, final Git integration/publication, single-direction
+EM/CM management, provider transport, Agentify, tabs, runtime, CPU/PID/RSS,
+Operator work, tests, implementation, production, result installation,
+single-direction science cards, EM/CM acceptance, owner logs or ordinary
+direction publication. Those remain with the operational Root and its existing
+L1 pairs. Do not contact or recreate those L1s merely to obtain status. Consume
+only owner-written science cards, intakes and technical packets that operational
+Root relays at a decision boundary.
+
+## Cross-session interface
+
+Direction-local L1 milestones first reach the operational Root. When, and only
+when, a new or changed cross-direction investment, pause, fusion or priority
+decision is required, operational Root relays a compact provenance-bound packet
+containing: bounded objective; conclusion; key observation; strongest
+alternative; claim ceiling; possible portfolio effect; next discriminator; and
+exact decision requested. The packet contains no runtime/status stream, hashes,
+receipts, tab state, CPU/PID/RSS, provider mechanics or ordinary direction
+handoff.
+
+Return only: bounded objective, conclusion, leading and no-investment decisions,
+strongest alternatives, claim ceilings, next discriminator, revisit conditions,
+and exact operational action. The operational Root executes that action in its
+own stage/compute/Git authority without asking this session to manage the
+mechanics. It may continue already-authorized direction-local work and runs
+without waiting for a portfolio response. Emergency user instruction or an
+unavailable portfolio session must be surfaced to the user, not treated as a
+transfer of portfolio authority back to operational Root.
 
 ## Project outcome
 
@@ -162,7 +187,7 @@ nonredundant failure mode is found.
   or delete a family.
 - Repository absence is CM construction work, never the scientific screen.
 
-## First task for the new Sol-ultra Root
+## Current portfolio objective for the active dedicated session
 
 Reconstruct the current portfolio from the authoritative shared record and exact
 latest direction artifacts. Decide:
@@ -183,8 +208,8 @@ no-current-investment decisions with revisit conditions, next discriminator,
 and exact downstream action. Do not emit status streams or manage direction
 mechanics.
 
-## Workspace handoff point
+## Workspace continuity point
 
-At creation time the authoritative branch head is `ad2936cd` on `aggressive`.
-Treat current files, not this hash, as authority because the source task may
-continue direction-local integration after this handoff.
+The original handoff recorded branch head `ad2936cd` on `aggressive`. Treat
+current files, not this hash, as authority because operational Root may continue
+direction-local integration while this fixed portfolio session remains active.
