@@ -786,3 +786,27 @@ positive branch after same-EM interpretation and same-conversation Pro result
 convergence. If both qualify, run the MGTAP warehouse surface first; reverse the
 order only when the intended UAV mission is intrinsically surveillance/relay and
 the independent physical-kernel audit already passes.
+
+## 2026-08-13 SCDMP-B2 portfolio decision
+
+Exact `SCDMP-B2-SCIENCE-20260813-02` crossed its activity boundary but stopped
+under its frozen auxiliary-gradient activity law before a complete eight-seed
+paired panel existed. The same-direction owner therefore assigns the registered
+nonidentifying branch. This is evidence only that this exact per-update
+norm-matched treatment did not sustain its own first stage; it neither supports
+nor rejects correct semigroup composition, and it cannot select or delete the
+SCDMP family.
+
+Root closes the B2 stage and allocates no further SCDMP compute now. There is no
+threshold change, repair, automatic rerun, second surface, payload/UAV step, or
+result-convergence request. The unresolved strongest alternative remains finite
+optimization geometry: gradient alignment, curvature, clipping and Adam
+dynamics, together with FREE's extra-label and nonnested paths.
+
+Reconsider the family only if the leading direct variable-`N` work fails and
+semigroup specificity again becomes decision-critical. The smallest permissible
+successor would be a newly frozen stability-first three-arm treatment that
+calibrates auxiliary scale only at update zero, holds it fixed, and records later
+gradient decay as a competence outcome rather than a termination condition. It
+must not use this run's observed gradient to choose its strength, and would need
+fresh Pro closure and a new compute lease.
