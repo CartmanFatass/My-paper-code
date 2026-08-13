@@ -670,3 +670,72 @@ but the central outcome is still absent. VQFP and SCDMP-v5 did not identify valu
 the SCDMP competence cut, CCIC-v6, SGSP and MGTAP remain preactivity. Therefore no shared algorithm has yet proven a
 matched-baseline robustness or task-performance improvement on held-out `N` or
 `k`, and no second surface or UAV simulator is activated. The goal remains active.
+
+## 2026-08-13 post-corpus portfolio sequencing update
+
+This section supersedes only the investment order and current-revision references
+in the preceding update. The completion test and evidence-transfer boundaries are
+unchanged.
+
+### Leading investment
+
+1. **MGTAP revision 03 — first direct candidate.** Its metric-ground coupling and
+   `FREE-EDGE-FEASIBLE` comparator have the clearest prospective chain from a
+   matched representable policy class, through a legal coupling change, to
+   held-out-`N` value. The same-direction EM owns exact-revision Pro closure and
+   the CM owns later construction. The first heavy lease is eligible only after
+   Pro `CLOSED`, EM intake, and CM acceptance. A qualified positive routes to the
+   recorded warehouse/UAV transport surface; valid FREE superiority or
+   equivalence pauses the metric-specific family.
+2. **SGSP revision 03 — second direct candidate, conditional on causal
+   reconciliation.** Its held-out-`N` graphon aggregation remains scientifically
+   distinct from MGTAP allocation. Before compute, the same-direction EM must
+   resolve whether the residual-scale difference (`0.25` versus `2`) leaves
+   generic shrinkage, conditioning, or optimization geometry as an unexcluded
+   explanation. A science-bearing equal-width wrong-anchor or alternative-center
+   correction requires a new complete same-conversation Pro ruling. No MGTAP
+   evidence or thresholds transfer to SGSP.
+3. **SCDMP-B2 revision 02 — retained enabling discriminator.** The matched
+   `FREE-DIRECT / SCDMP-CORRECT / SCDMP-ORDER-SHUFFLE` cut is retained because it
+   can select or delete the composition-consistency family cheaply. It cannot
+   itself satisfy the project task-value outcome, so it receives compute only
+   when it does not delay a compute-ready direct candidate. Any positive outcome
+   can authorize only a separately frozen direct-value experiment.
+
+### Paused investment
+
+- **CCIC revision 08 on the current homogeneous host** is paused. The frozen
+  equicorrelation family is exactly reducible by the scalar-ESS alternative, and
+  the projected one-CPU work is incompatible with the original 90-minute class;
+  an unmeasured eight-worker path does not cure the weak bridge probability.
+  Reconsider only on a heterogeneous covariance host not exactly summarized by
+  scalar ESS, or after a prospective resource/host revision whose decision value
+  justifies fresh Pro closure.
+- **VQFP-v4, SCDMP-v5, CRTO-v4, VNFC-B2, ONLGR, and the VNFC-B3 host/panel line**
+  remain paused for their already recorded nonidentification, unavailable-result,
+  support, or feasibility reasons. None activates a second surface or UAV step.
+
+### Shared tooling boundary
+
+Agentify stabilization is a shared engineering enabler, not a research direction
+or a substitute for external scientific review. One Terra-high owner is testing
+the complete strict MCP webpage lifecycle with isolated non-scientific ChatGPT
+Pro and Gemini canaries, repairing only observed provider-neutral defects, and
+producing an empirically validated operating manual. Direction EMs continue their
+scientific work independently and own their already-authorized provider use; Root
+does not operate their tabs, waits, archives, or retries.
+
+### Next decision triggers
+
+- Give the first direct heavy-compute lease to MGTAP only after exact-revision
+  Pro closure, EM intake, and CM static/resource acceptance.
+- If MGTAP is deleted or nonidentified, advance causally reconciled SGSP rather
+  than adding seeds or weakening MGTAP gates.
+- Run SCDMP-B2 opportunistically as a family-eliminating mechanism cut; do not
+  mistake its result for held-out task value.
+- A valid direct result must still pass same-EM interpretation and
+  same-conversation Pro result convergence before activating its recorded second
+  surface and UAV simulator step.
+
+No qualifying matched-baseline improvement currently exists. The Root goal
+therefore remains active.
