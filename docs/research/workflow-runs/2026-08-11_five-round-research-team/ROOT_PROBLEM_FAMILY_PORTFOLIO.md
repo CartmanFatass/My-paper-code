@@ -966,14 +966,16 @@ second-surface/UAV action.
 2. **SCDMP-v5: semigroup-consistent duration modelling.** Direct variable-`k`
    candidate; exact v5 resolves the post-v4 population-scaler ambiguity without
    changing the mechanism or gates. Root published the complete v5 owner packet;
-   its same-conversation Pro closure is the current boundary. Its strongest
+   its same-conversation Pro review returned literal `CLOSED`, the EM accepted it
+   without science change, and exact-v5 CM construction is now in progress. Its strongest
    alternative is ordinary explicit-`k`, history, and endpoint supervision.
 3. **CCIC-v3: covariance-calibrated information clock.** Direct both-axis
    candidate whose smallest discriminator crosses literal duplicates,
    correlated distinct origins, and independent origins at held-out `N` and
    `k`. The strongest alternatives are scalar ESS, origin counting, and a
    matched nonlinear invariant encoder. External packets and its result-blind
-   map are prepared before any CM release. This direction tests whether
+   map are published; its one Pro request is in transport with no terminal
+   disposition, so no CM release exists. This direction tests whether
    invariance preserves useful independent information rather than merely
    normalizing count.
 

@@ -420,9 +420,11 @@ package, partial checkpoint, or interrupted run satisfies that objective.
    `ddof=0` over the complete ordered target-atom set with the exact reduction,
    floor, sharing, and cast law, without changing the treatment thresholds,
    estimands, ledger, or claim ceiling. Root published the seven v5 owner
-   artifacts to `origin/aggressive`; the exact same-conversation Pro batch is
-   released but remains a science-only closure step. Construction and production
-   require literal v5 `CLOSED` plus same-direction EM intake. The strongest
+   artifacts to `origin/aggressive`. The exact same-conversation Pro review then
+   returned literal `CLOSED`; the same-direction EM accepted it without a
+   science-bearing change, and Root published that closure intake. CM is now
+   constructing and statically reconciling only exact v5 while VQFP remains the
+   sole heavy run; production is not yet authorized. The strongest
    alternative is still that explicit `k`, raw history, and endpoint supervision
    already learn all useful duration response. A qualifying result activates the
    payload-towing second surface and UAV action-hold scheduling.
@@ -433,8 +435,9 @@ package, partial checkpoint, or interrupted run satisfies that objective.
    It uses one decentralized shared actor and locally reconstructed rank-one
    GLS/Woodbury sufficient statistics. The strongest alternatives are the exact
    homogeneous scalar-ESS reduction, lineage-aware origin counting, and a
-   capacity/work-matched nonlinear invariant encoder. Its Pro and independent
-   Gemini packets and result-blind map are being prepared; CM, tests, compute,
+   capacity/work-matched nonlinear invariant encoder. Root published its Pro and
+   independent Gemini packets plus result-blind map. The single Pro request is
+   currently in transport with no terminal disposition yet; CM, tests, compute,
    and production remain withheld until Pro closure and owner intake. Its first
    result can support only a finite-toy causal timing benefit under every frozen
    equivalence, work, mechanism, and multiplicity gate.
@@ -465,9 +468,9 @@ package, partial checkpoint, or interrupted run satisfies that objective.
 - VQFP attempt 4 is the only live heavy production. Do not start another heavy
   run while it is active. A complete terminal goes CM -> Root -> same EM; only a
   technically accepted result triggers same-conversation Pro convergence.
-- SCDMP-v5 and CCIC-v3 may advance through serialized provider review without
-  consuming the production CPU. Gemini remains independent, additive, and
-  non-gating.
+- SCDMP-v5 may advance through CM construction and CCIC-v3 through its serialized
+  Pro review without consuming the production CPU. Neither may start heavy work
+  while VQFP is live. Gemini remains independent, additive, and non-gating.
 - A no-data or externally interrupted execution returns to CM without weakening
   science. A true preactivity support failure returns to the same EM and does not
   become an algorithm- or family-negative result unless the frozen map says so.
@@ -490,14 +493,14 @@ Do not mark this goal complete until all are true:
 
 | Requirement | Current authoritative evidence | State |
 |---|---|---|
-| One shared algorithm supports variable `N` or variable `k` | VNFC-B1 supplies only bounded toy-level variable-`N` package evidence and loses to a stronger structured greedy reference. CRTO, VQFP, and SCDMP are shared-parameter prospective candidates on held-out axes; the current B3 host/panel line ended before activity. | Partial; no qualifying winner |
+| One shared algorithm supports variable `N` or variable `k` | VNFC-B1 supplies only bounded toy-level variable-`N` package evidence and loses to a stronger structured greedy reference. VQFP, SCDMP, and CCIC are shared-parameter prospective candidates on held-out axes; the current B3 host/panel line ended before activity. | Partial; no qualifying winner |
 | Improvement over a matched baseline | No current leading candidate has valid result data. B2 did not separate from reset/raw; ONLGR produced no panel result. | Not yet established |
-| Valid technical result and same-direction EM interpretation | B2 has a technically accepted result and EM intake, but its package is non-separated and its mechanism non-identifying. ONLGR is scientifically unavailable. CRTO/VQFP/SCDMP are preproduction. | Partial |
-| Dedicated ChatGPT External Pro challenge | B2 result convergence is complete. VQFP-v4 is `CLOSED` with same-direction intake. CRTO-v4 is in same-conversation rereview after an owner-frozen hazard-feature correction. SCDMP-v3 is meaning-complete and released for its first clean Pro review when Agentify is idle. | In progress |
-| Additional independent Gemini innovator | EBCR completed an additive Gemini review. VNFC's Gemini attempts produced no provider turn/evidence and are not retried. CRTO-v3 also produced no provider turn; mutually blind current-revision CRTO-v4, VQFP-v4, and SCDMP-v3 packets are prepared but unsent and non-gating. | Partial |
-| Strongest alternative and claim ceiling | Explicit for all three leaders: information-matched full-history termination for CRTO; exactly representational learned spatial gate for VQFP; ordinary explicit-`k` endpoint learning for SCDMP. Each claim ceiling is finite-panel/finite-budget and excludes general UAV or arbitrary-axis claims. | Established prospectively |
-| Second surface and UAV simulator steps | CRTO maps to warehouse handoff then UAV track/relay/replan; VQFP to 2-D plume-front tracking then UAV spatial sensing/relay; SCDMP to payload towing then UAV action-hold scheduling. None is activated without a qualifying first result. | Defined, not activated |
-| Portfolio and milestone records | Current leaders are CRTO, VQFP, and SCDMP. B3's current host/panel line, B2, and ONLGR joined the existing set of no-current-investment treatments with exact reasons and revisit conditions. | Current cut recorded |
+| Valid technical result and same-direction EM interpretation | B2 has a technically accepted result and EM intake, but its package is non-separated and its mechanism non-identifying. ONLGR is scientifically unavailable. CRTO-v4 ended at its frozen preactivity support gate. VQFP is running; SCDMP is in CM construction; CCIC is pre-CM. | Partial |
+| Dedicated ChatGPT External Pro challenge | B2 result convergence is complete. VQFP-v4 and SCDMP-v5 are each literal `CLOSED` with same-direction intake. CRTO-v4 was also closed mathematically but ended at its registered support gate before learned activity. CCIC-v3 has one serialized Pro request in transport with no terminal disposition yet. | In progress |
+| Additional independent Gemini innovator | EBCR completed an additive Gemini review. VNFC, CRTO, and VQFP current Gemini attempts produced no provider turn/evidence and are not retried automatically. SCDMP-v5 and CCIC-v3 retain mutually blind current-revision Gemini packets; they are additive and non-gating. | Partial |
+| Strongest alternative and claim ceiling | Explicit for all three leaders: an equally informed learned spatial gate for VQFP; ordinary explicit-`k` endpoint learning for SCDMP; scalar ESS/origin counting/nonlinear invariant encoding for CCIC. Each claim ceiling is finite-panel/finite-budget and excludes general UAV or arbitrary-axis claims. | Established prospectively |
+| Second surface and UAV simulator steps | VQFP maps to 2-D plume-front tracking then UAV spatial sensing/relay; SCDMP to payload towing then UAV action-hold scheduling; CCIC to clone-versus-novelty roster switching then UAV evidence relay/commitment. None is activated without a qualifying first result. | Defined, not activated |
+| Portfolio and milestone records | Current leaders are VQFP, SCDMP, and CCIC. CRTO-v4, the current B3 host/panel line, B2, and ONLGR have exact no-current-investment reasons and revisit conditions. | Current cut recorded |
 
 The goal remains active. The shortest completion path is now whichever of
 CRTO-v4 and VQFP-v4 first combines authoritative Pro closure, full CM technical
