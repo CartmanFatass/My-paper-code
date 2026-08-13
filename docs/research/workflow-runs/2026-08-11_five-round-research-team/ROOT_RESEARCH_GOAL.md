@@ -899,9 +899,11 @@ The current investment order is:
    Its equal-width opposite center, wider edge comparator, sender reassociation,
    anchor swap, and held-out-size-minimum support gates directly test whether the
    correct semantic center supplies action-sensitive value rather than generic
-   shrinkage or conditioning. Construction remains conditional on literal
-   same-conversation Pro `CLOSED` plus same-direction EM intake; no registered
-   stochastic object or heavy compute is yet authorized.
+   shrinkage or conditioning. The same-conversation Pro returned literal
+   `CLOSED` and the same-direction EM accepted revision 05 without a
+   science-bearing change. CM may now perform the already authorized isolated
+   source/static-conformance stage; no registered stochastic object, focused
+   test workflow, or heavy compute is yet authorized.
 2. **RCLE revision 04** remains the medium-low-cost direct variable-`N` backup.
    Its common, shuffled and private-entropy controls ask whether correctly paired
    persistent latent exploration improves held-out-roster strategy discovery.
