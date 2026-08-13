@@ -102,4 +102,3 @@ This intake authorizes no rerun, new seed, calibration change, successor card,
 construction, test, stochastic materialization, optimizer, compute, second
 surface, production, provider send, Git action, or portfolio decision. Root
 must decide whether to authorize the one terminal successor-definition cycle.
-
