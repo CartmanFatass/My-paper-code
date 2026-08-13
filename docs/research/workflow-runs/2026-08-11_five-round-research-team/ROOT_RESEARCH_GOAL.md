@@ -469,6 +469,15 @@ package, partial checkpoint, or interrupted run satisfies that objective.
 
 ### Current decision triggers
 
+Root does not select by completion time. A candidate must close its own causal
+chain: registered structure, valid intermediate, changed legal action, held-out
+task value, and exclusion of its named simpler alternative. Root-facing state is
+limited to four scientific milestones per direction: valid endpoint, mechanism
+activation, strongest-alternative disposition, and bridge eligibility. CPU,
+process, tab, transport phase, retry and artifact-frontier observations remain
+inside the initiating L1 scope unless they create a concrete cross-scope conflict
+or require genuinely new authority.
+
 - VQFP attempt 4 is the only live heavy production. Do not start another heavy
   run while it is active. A complete terminal goes CM -> Root -> same EM; only a
   technically accepted result triggers same-conversation Pro convergence.

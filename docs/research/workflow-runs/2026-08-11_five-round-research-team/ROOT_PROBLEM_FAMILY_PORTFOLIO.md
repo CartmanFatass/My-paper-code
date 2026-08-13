@@ -1015,6 +1015,16 @@ deletes the graphon-specific family rather than promoting it.
 
 ### Sequencing and decision triggers
 
+Across all three leaders, Root uses one causal-chain invariant rather than
+finish order: `registered structure -> valid intermediate -> changed legal
+action -> held-out task value -> exclusion of the named simpler alternative`.
+Each treatment changes an inductive ruler, not its legal action set or deployable
+information. An internal statistic, prediction or calibration gain without the
+registered action-sensitivity and task-value links cannot activate a mechanism
+or bridge. Root tracks only four scientific milestones per direction: valid
+endpoint, mechanism activation, strongest-alternative disposition, and bridge
+eligibility; scope-local runtime/resource details remain with the initiating CM.
+
 - VQFP attempt 4 exclusively owns heavy compute until terminal.
 - SCDMP and CCIC provider work may proceed serially and independently of that
   CPU allocation. Gemini is additive and never gates Pro, CM, or Root decisions.
@@ -1027,3 +1037,8 @@ deletes the graphon-specific family rather than promoting it.
 - These three leaders and four stopped treatments satisfy the portfolio decision
   target without imposing a concurrency cap; additional directions require a
   discriminator that changes this graph rather than another inventory item.
+- A complete package-only positive remains a bounded algorithm result but does
+  not activate its named mechanism or bridge. A statistically unresolved result
+  does not justify weaker margins, extra seeds or automatic rerun. No-data stays
+  entirely in CM. Only a mechanism-attributed positive receives same-EM/Pro
+  convergence followed by priority for its already mapped second surface.
