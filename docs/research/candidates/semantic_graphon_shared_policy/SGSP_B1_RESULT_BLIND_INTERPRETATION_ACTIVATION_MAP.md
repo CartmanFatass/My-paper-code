@@ -1,0 +1,163 @@
+# SGSP B1 result-blind interpretation and activation map
+
+```text
+direction=semantic_graphon_shared_policy
+treatment_revision=SGSP-B1-SCIENCE-20260813-01
+owner=EM_semantic_graphon_shared_policy
+artifact_role=result-blind derivative reading map
+map_changes_treatment=false
+scientific_activity_started=false
+mathematical_closure=PREPARED_NOT_SENT_NEW_CONVERSATION_REQUIRED
+cm_release=withheld
+production_authorization=none
+```
+
+## Controlling rule
+
+This map adds no arm, equation, sample, threshold, resource, claim, or
+authority. The complete science card controls if text ever conflicts. The
+local corpus and all other directions are inspiration only; no prior result or
+margin enters a branch.
+
+## Reading order
+
+### 1. Closure and authority
+
+No science-bearing work may begin until a new dedicated same-direction ChatGPT
+External Pro conversation returns literal `CLOSED` for exact revision
+`SGSP-B1-SCIENCE-20260813-01`, this EM accepts that ruling, and Root separately
+releases CM. The blind Gemini question may suggest a successor but cannot
+close, accept, authorize, rank, or interpret B1.
+
+### 2. Activity boundary
+
+Provider preparation/review, source inspection, symbolic block arithmetic,
+hand-written collision/nesting fixtures, schema-only tests, static leakage
+review, and prospective resource/work formulas are preactivity. The earliest
+optimizer update using a generated world, learned checkpoint evaluation on a
+generated stochastic world, or result-bearing endpoint/reassociation/TV
+calculation starts activity. No result-responsive revision is legal after that
+point.
+
+### 3. Complete atomic evidence
+
+All 16 registered seed packets must contain every arm, roster, regime,
+intact/cut panel, identity replay, dense-reference audit, support audit,
+parameter/work/communication ledger, and checkpoint fact. There is no seed
+replacement, partial efficacy mean, or pooled-agent/world inference. Missing
+question-relevant output returns to CM and supports no scientific branch.
+
+### 4. Hard structural validity
+
+Every seed/cell must have:
+
+- finite logits/probabilities and both legal actions at probability `>=0.02`;
+- identity-permuted logits within `1e-10`, identical inverse-permuted actions,
+  and identical return;
+- implicit/dense summary error `<=1e-10` and runtime kernel mismatch exactly
+  zero;
+- no opaque identity, row order, latent, target, reward, future, evaluation,
+  or held-out statistic in deployed inputs;
+- one checkpoint across every `N` for each arm;
+- exact 1,318-versus-1,318 primary parameter equality and identical
+  output-relevant operation, communication, storage, sample, update, and actor
+  opportunities; and
+- the exact collision and edge-superfamily certificates.
+
+A failure invalidates the learned packet; it is technical nonconformance, not
+negative treatment evidence. Dummy padding cannot repair a useful-work failure.
+
+### 5. Endpoint availability
+
+Every held-out cell must leave both a `0.025` material positive and reverse
+range around the `EDGE-PE` mean: `0.025 <= mean(EDGE) <= 0.975`. Otherwise the
+cell is saturated on a required side. Do not call a saturated contrast
+equivalent or use it for graphon-family deletion.
+
+### 6. Registered statistical objects
+
+Use equal-seed paired contrasts and the four-cell 95% Bonferroni simultaneous
+Student-`t` intervals exactly as specified. The mutually exclusive primary
+labels are:
+
+```text
+SGSP_MATERIALLY_BETTER
+EDGE_MATERIALLY_BETTER
+PRACTICALLY_EQUIVALENT
+REGIME_OR_SIZE_INTERACTION
+UNRESOLVED
+```
+
+`SGSP_BEATS_ANON` is a separate diagnostic label. It cannot override the
+primary edge comparison.
+
+### 7. Semantic causal activity
+
+The sender-role reassociation must alter a legal decision, not only a hidden
+summary. All three simultaneous lower bounds must pass:
+
+```text
+SGSP intact-minus-reassociated return > 0.075
+SGSP intact/reassociated action TV > 0.10
+attenuation of SGSP-versus-EDGE advantage > 0.015
+```
+
+Failure of return or TV is action-insensitive/nonidentifying. Failure of
+attenuation permits at most a generic policy-class/regularization reading, not
+semantic-graphon attribution.
+
+## Result branches
+
+### A. Fixed graphon anchor merits a second surface
+
+Require all hard validity, two-sided availability, complete evidence,
+`SGSP_MATERIALLY_BETTER`, `SGSP_BEATS_ANON`, and all semantic causal bounds.
+The maximum claim is the exact finite two-block/held-out-size statement in the
+card. Activate only the registered 2-D two-zone surveillance/relay surface,
+which must repeat the strong comparator, identity permutation,
+coordinate-reassociation, work match, and finite-versus-kernel-mismatch audit.
+
+### B. Structured information matters, fixed graphon does not
+
+If `SGSP_BEATS_ANON` but the primary label is
+`PRACTICALLY_EQUIVALENT` or `EDGE_MATERIALLY_BETTER` under full two-sided
+availability, delete the fixed-graphon-specific family. At most retain a
+generic edge/set candidate as a new direction-scoped question. Do not transfer
+SGSP margins or causal evidence into it.
+
+### C. Neither structured arm beats anonymous mean
+
+If the edge comparator is materially better than SGSP but neither structured
+arm has a material anonymous advantage, delete SGSP and make no topology-value
+claim. The stronger architecture may simply be unnecessary on this toy.
+
+### D. Mechanism failure
+
+If endpoint superiority occurs without semantic return/TV activity, it is not
+a graphon result. If action activity exists without advantage attenuation, it
+is a bounded regularization/policy-class result. Neither activates the UAV
+bridge. Revisit only with a new prospective action-sensitive semantic task.
+
+### E. Size or regime interaction
+
+Do not average opposite cell effects. A valid
+`REGIME_OR_SIZE_INTERACTION` may motivate exactly one new discriminator on the
+identified cell boundary if that answer would change allocation. It is not a
+positive direct-variable-`N` result.
+
+### F. Unresolved, saturated, or incomplete
+
+Do not weaken a threshold, add seeds, replace a seed, select checkpoints, or
+automatically rerun. Revisit only for a prospectively specified cell with
+restored common support/two-sided headroom or a distinct causal cut. A no-data
+or incomplete packet is returned to CM without scientific interpretation.
+
+## Ceiling and UAV activation boundary
+
+B1 cannot support graphon learning, arbitrary graph size/topology, churn,
+continuous geometry, graph mismatch robustness, mean-field rates, equilibrium,
+or UAV benefit. A B1 positive merely activates the second surface. A later UAV
+simulator requires observable stable mission role/sector coordinates, validated
+soft coupling, shared deployment across fleet size, useful-work-matched edge
+comparison, and action/mission endpoints. Dropout and in-episode membership
+change remain separate claims.
