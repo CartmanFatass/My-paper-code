@@ -1011,6 +1011,11 @@ Pro result review supports at most one terminal optimization-closure successor,
 not an automatic rerun. The branch-ineligible secondary pattern lowers the
 expected value of spending the next owner/closure cycle on it.
 
+MGTAP's current maximum claim is only bounded structural nonidentification on
+the balanced centralized two-role/four-task/two-epoch finite toy. It supports no
+claim about arbitrary `N`, composition or task shift, decentralized execution,
+general optimal transport, warehouse/UAV value, or physical deployment.
+
 ### Parent-family coverage
 
 The twelve screened parents were: semantic topology aggregation; persistent
@@ -1108,11 +1113,21 @@ was not used as a rejection reason.
 
 ### External-provider workflow and exact operational action
 
-Every active promising direction uses one dedicated ChatGPT External Pro
-conversation and one distinct External Gemini innovator conversation. Different
-directions use different conversation identities. Pro and Gemini requests,
-answers and archives remain mutually blind unless the same-direction EM later
-freezes an explicit synthesis question.
+The workflow default is to establish one dedicated ChatGPT External Pro
+conversation and one distinct External Gemini innovator conversation for every
+active promising direction. Different directions use different conversation
+identities. Pro and Gemini requests, answers and archives remain mutually blind
+unless the same-direction EM later freezes an explicit synthesis question.
+
+Current exceptions remain literal. SGSP has an existing Pro identity, but both
+recorded Gemini attempts ended before send with zero provider turns, no
+conversation URL/ID and no automatic recovery remaining. This packet does not
+authorize a resend; any new attempt, provider model or mode requires a new
+operational-Root decision. RCLE has an existing Pro identity and an
+`AUTHORIZED_NOT_SENT` Gemini request, not a Gemini conversation identity.
+RISP's last owner-written artifacts record separate Pro/Gemini requests prepared
+but not contacted; if either has since committed, continue only its saved
+identity and never resend.
 
 ChatGPT External Pro is the rigorous innovator and final convergence route for
 causal/mathematical scrutiny, comparator adequacy, claim ceilings, exact-
