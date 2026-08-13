@@ -1013,6 +1013,21 @@ The decisive toy must compare graphon compression against a resource-matched
 edge-aware permutation-equivariant policy; beating only anonymous mean pooling
 deletes the graphon-specific family rather than promoting it.
 
+The local corpus also supports one conditional variable-`k` fallback:
+**Semantic Event-Renewal Shared Macro-Policy (SER-SMP)**. Here `k` is the first
+hitting time of a deployment-observable task-complete or infeasible event, after
+which one shared role-conditioned policy renews the public team mode. This is
+prospective synthesis from Dec-POMDP macro-action termination, event-driven
+replanning, and persistent public coordination modes; no source establishes the
+combined learned mechanism or held-out-`k` value. Do not open it while SCDMP or
+CCIC remains eligible. Reconsider only if both fail to qualify and a target task
+has a reliable terminal event, material conditional duration variance after
+macro initiation, and measurable stale-assignment cost. The eliminator must
+match an open-loop recurrent policy on observations, event bits, duration
+support, parameters, samples, physical time, communication, renewals and
+inference work. Equivalence, advantage when duration is known at initiation, or
+advantage that survives event permutation deletes SER-SMP specificity.
+
 ### Sequencing and decision triggers
 
 Across all three leaders, Root uses one causal-chain invariant rather than
