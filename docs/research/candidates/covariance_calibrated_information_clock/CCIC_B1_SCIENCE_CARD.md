@@ -7,10 +7,10 @@ supersedes_revision=CCIC-B1-SCIENCE-20260812-04_PRO_REVISION_REQUIRED
 owner=EM_covariance_calibrated_information_clock
 object=result-blind prospective B1 discriminator
 scientific_activity_started=false
-mathematical_closure=revision_05_PREPARED_NOT_SENT
+mathematical_closure=revision_05_CLOSED_EM_INTAKE_COMPLETE
 cm_release=withheld
 production_authorization=none
-chatgpt_external_pro=PREPARED_NOT_SENT
+chatgpt_external_pro=CLOSED_NATURAL_COMPLETION
 external_gemini=PREPARED_NOT_SENT
 ```
 
@@ -1176,11 +1176,12 @@ The complete frozen revision is this file plus:
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_RESULT_BLIND_INTERPRETATION_ACTIVATION_MAP.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V3_REVISION_REQUIRED_INTAKE.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V4_REVISION_REQUIRED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V5_CLOSED_INTAKE.md`
 
-The Pro and Gemini requesters are mutually blind and `PREPARED_NOT_SENT`.
-Before production, this exact complete revision requires a same-direction
-ChatGPT External Pro `CLOSED` disposition and this EM's intake. Root retains
-portfolio and sequencing authority; CM retains implementation and runtime
-authority. Revisions 03 and 04 received `REVISION_REQUIRED`; revision 05 has
-not been sent. No revision-05 closure, CM release, construction, or scientific
-activity has occurred.
+The Pro and Gemini requesters were mutually blind. Revisions 03 and 04 received
+`REVISION_REQUIRED`; exact revision 05 received a natural same-conversation
+ChatGPT External Pro `CLOSED` disposition and this EM has accepted it. Root may
+now relay the owner-prepared CM packet; Root retains portfolio and sequencing
+authority, and CM retains implementation and runtime authority. Gemini remains
+`PREPARED_NOT_SENT`. No CM dispatch, construction, test, compute, production,
+or scientific activity has occurred.

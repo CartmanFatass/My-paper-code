@@ -5,9 +5,9 @@ direction=covariance_calibrated_information_clock
 revision=CCIC-B1-SCIENCE-20260812-05
 supersedes_revision=CCIC-B1-SCIENCE-20260812-04_PRO_REVISION_REQUIRED
 author=EM_covariance_calibrated_information_clock
-handoff_state=OWNER_PREPARED_CM_RELEASE_WITHHELD
+handoff_state=OWNER_PREPARED_MATHEMATICALLY_CLOSED_ROOT_MAY_RELAY
 scientific_activity_started=false
-mathematical_closure=revision_05_PREPARED_NOT_SENT
+mathematical_closure=revision_05_CLOSED_EM_INTAKE_COMPLETE
 construction_authorized=false
 tests_authorized=false
 compute_authorized=false
@@ -16,11 +16,11 @@ production_authorized=false
 
 ## Conclusion
 
-This is a constructible scientific handoff, not a dispatch. Root may retain it
-for technical scoping, but CM construction and every question-relevant action
-remain withheld until the exact science revision receives ChatGPT External Pro
-`CLOSED`, the same-direction EM intakes that ruling, and Root separately
-sequences a CM assignment.
+This is a mathematically closed, constructible scientific handoff, not a
+dispatch. Exact revision 05 received ChatGPT External Pro `CLOSED` and the
+same-direction EM accepted the ruling without changing the card. Root may now
+relay this packet to CM, but CM construction and every question-relevant action
+still require Root's separate sequencing assignment.
 
 The scientific source of truth is
 `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_SCIENCE_CARD.md`.
@@ -163,10 +163,10 @@ surface. A no-data run is an engineering fact, not evidence against CCIC.
 ## Current owner disposition
 
 Revisions 03 and 04 each received a natural ChatGPT Pro `REVISION_REQUIRED`
-response, and the same-direction EM accepted the prospective science-bearing
-definition defects before activity. Revision 05 is the complete result-blind
-successor, but it is not mathematically closed. Its same-conversation Pro
-rereview and independently blind Gemini request are `PREPARED_NOT_SENT`.
-Therefore the only current action is Root's optional publication and, under a
-later explicit release, transport of the exact revision-05 Pro request. There
-is no present CM or production action.
+response, and the same-direction EM accepted their prospective science-bearing
+definition defects before activity. Exact revision 05 then received natural
+same-conversation Pro `CLOSED`; the EM accepted closure and made no subsequent
+science change. Root may relay this exact owner packet to CM for technical
+assessment/construction sequencing. No CM dispatch, construction, test,
+compute, production, or scientific activity has yet occurred, and the
+independently blind Gemini request remains `PREPARED_NOT_SENT`.

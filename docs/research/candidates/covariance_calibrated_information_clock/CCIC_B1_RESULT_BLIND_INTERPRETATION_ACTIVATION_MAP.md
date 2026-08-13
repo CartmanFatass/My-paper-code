@@ -8,8 +8,8 @@ owner=EM_covariance_calibrated_information_clock
 artifact_role=result-blind derivative reading map
 map_changes_treatment=false
 scientific_activity_started=false
-mathematical_closure=revision_05_PREPARED_NOT_SENT
-chatgpt_external_pro=PREPARED_NOT_SENT
+mathematical_closure=revision_05_CLOSED_EM_INTAKE_COMPLETE
+chatgpt_external_pro=CLOSED_NATURAL_COMPLETION
 external_gemini=PREPARED_NOT_SENT
 cm_release=withheld
 production_authorization=none
@@ -55,12 +55,13 @@ These are logical conditions, not a cross-role status system.
 
 ### 2.1 Mathematical-closure and authority condition
 
-Before production, exact revision 05 must receive literal `CLOSED` in the saved
-same-direction Pro conversation, followed by this EM's intake. No answer,
-incomplete transport, or `REVISION_REQUIRED` leaves CM and production withheld
-but says nothing about efficacy. The independently blind Gemini route is
-divergent hypothesis input only and cannot close, converge, accept, authorize,
-or rank this direction.
+Exact revision 05 received literal `CLOSED` in the saved same-direction Pro
+conversation and this EM accepted the ruling without changing the treatment.
+That completes mathematical/causal closure only. Root still owns any CM relay
+and production sequence; CM still owns implementation and technical
+acceptance. The independently blind Gemini route remains unsent divergent
+hypothesis input only and cannot close, converge, accept, authorize, or rank
+this direction.
 
 ### 2.2 Preactivity certificate
 
@@ -348,5 +349,5 @@ its discriminator; scalar/count/set alternatives may suffice; the estimator or
 actor may fail; or 32 seeds may leave the SESOI unresolved. Trusted lineage,
 ideal-real observations, deterministic matched receipt, homogeneous covariance,
 fixed membership, and common-plan support are explicit scope assumptions, not
-hidden claims. Mathematical closure remains unresolved until the exact v5
-same-conversation rereview returns `CLOSED` and this EM intakes it.
+hidden claims. Exact v5 mathematical/causal closure is complete; every
+efficacy, feasibility, technical, and portfolio question remains prospective.
