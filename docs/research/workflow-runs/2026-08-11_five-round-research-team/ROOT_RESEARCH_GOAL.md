@@ -481,15 +481,45 @@ or require genuinely new authority.
 - VQFP attempt 4 is the only live heavy production. Do not start another heavy
   run while it is active. A complete terminal goes CM -> Root -> same EM; only a
   technically accepted result triggers same-conversation Pro convergence.
-- SCDMP-v5 may advance through CM construction and CCIC-v3 through its serialized
-  Pro review without consuming the production CPU. Neither may start heavy work
-  while VQFP is live. Gemini remains independent, additive, and non-gating.
+- SCDMP-v5 is statically accepted and CCIC-v5 may complete static CM construction
+  without consuming the production CPU. Neither may start heavy work while VQFP
+  is live. Gemini remains independent, additive, and non-gating.
 - A no-data or externally interrupted execution returns to CM without weakening
   science. A true preactivity support failure returns to the same EM and does not
   become an algorithm- or family-negative result unless the frozen map says so.
 - Whichever leading candidate first supplies valid improvement over its strongest
   matched baseline must still survive EM interpretation and Pro result challenge
   and must record the selected second-surface and UAV-simulator validation step.
+
+### Precommitted bridge routing
+
+Root does not improvise a bridge from a favorable average. Exact eligibility is
+the direction card's full positive branch plus the causal-chain invariant above;
+the result then returns to the same EM and same Pro conversation before a new
+surface is frozen. The next surface and its strongest alternative are fixed now:
+
+- **VQFP:** corrected physical-area binding, action sensitivity, held-out-`N`
+  value, nonharm, support, and noisy-cell controls must all pass. The next surface
+  is bounded 2-D plume uncertainty service; its matched alternative is an equally
+  informed learned permutation-equivariant/free spatial gate. Only a qualifying
+  second-surface result may open the UAV spatial-sensing/relay simulator.
+- **SCDMP:** the complete REAL-only positive branch, support/competence,
+  composition attribution, action sensitivity, nonharm, adverse-family, and
+  resource gates must pass. The next surface is cooperative payload towing under
+  externally varied held-command periods; its matched alternative is the exact
+  information/work-matched `SCDMP-NOCOMP` free duration model. Only a qualifying
+  result may open UAV action-hold scheduling.
+- **CCIC:** the same held-out axis must pass exact-copy, calibration, activity,
+  clock, exposure, work, origin-count, scalar-ESS, and shuffle/clamp gates. The
+  next surface is heterogeneous relay/viewpoint switching; its matched alternative
+  is a capacity-, exposure-, packet-, sample-, and work-matched replication-safe
+  nonlinear set encoder. Only structured information that changes sensing/relay/
+  commit decisions and improves loss may open the UAV evidence-relay simulator.
+
+Package-only value remains bounded evidence and does not activate these bridges.
+No-data remains with CM; an unresolved interval does not justify weaker margins,
+extra seeds, or an automatic rerun. Each successor requires its own frozen card
+and Pro closure; no B1 threshold or result transfers across surfaces or directions.
 
 ## Completion test
 

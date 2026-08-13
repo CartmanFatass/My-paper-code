@@ -1058,3 +1058,11 @@ eligibility; scope-local runtime/resource details remain with the initiating CM.
   does not justify weaker margins, extra seeds or automatic rerun. No-data stays
   entirely in CM. Only a mechanism-attributed positive receives same-EM/Pro
   convergence followed by priority for its already mapped second surface.
+
+The mapped bridge alternatives are also precommitted: VQFP's 2-D plume surface
+must beat an equally informed learned spatial gate; SCDMP's payload-towing
+surface must beat the information/work-matched `SCDMP-NOCOMP`; and CCIC's
+relay/viewpoint surface must beat a replication-safe nonlinear set encoder.
+Only an action-changing, held-out-axis value result that survives the full
+direction card, same-EM interpretation, and same-Pro convergence may cause Root
+to freeze the corresponding UAV simulator successor.
