@@ -2,20 +2,20 @@
 
 ```text
 direction=semantic_graphon_shared_policy
-treatment_revision=SGSP-B1-SCIENCE-20260813-04
-supersedes_map_for=SGSP-B1-SCIENCE-20260813-03_PRO_CLOSED
+treatment_revision=SGSP-B1-SCIENCE-20260813-05
+supersedes_map_for=SGSP-B1-SCIENCE-20260813-04_PRO_REVISION_REQUIRED
 owner=EM_semantic_graphon_shared_policy
 artifact_role=result-blind derivative reading map
 map_changes_treatment=false
 scientific_activity_started=false
-mathematical_closure=revision_04_PREPARED_NOT_SENT_SAME_CONVERSATION
-cm_release=withheld_for_revision_04_closure
+mathematical_closure=revision_05_PREPARED_NOT_SENT_SAME_CONVERSATION
+cm_release=withheld_for_revision_05_closure
 production_authorization=none
 ```
 
 ## Controlling rule
 
-This derivative map adds no object beyond revision 04. The complete science
+This derivative map adds no object beyond revision 05. The complete science
 card controls if text ever conflicts. The
 local corpus and all other directions are inspiration only; no prior result or
 margin enters a branch.
@@ -35,8 +35,14 @@ alternative unresolved while the map still promotes a graphon family. Revision
 cut. A final same-direction static audit also froze deterministic canonical base
 order, one separately addressed forced-nonidentity audit permutation, injective
 training episode indices across all 480 updates, and the exact two-sided
-availability predicate for an identifying interaction. It requires
-same-conversation `CLOSED` plus EM intake before CM release.
+availability predicate for an identifying interaction. The revision-04 Pro
+rereview accepted those changes but found that the cut flags averaged within
+each size before the registered mechanism estimand took a within-seed size
+minimum, and that the two attenuation gates had no support flags. Revision 05
+aligns all four mechanism-support flags with the within-seed-minimum estimands;
+it changes no arm, endpoint, threshold, seed, world, checkpoint, or compute
+amount. It requires same-conversation `CLOSED` plus EM intake before CM release.
+The paired CM's final read-only revision-05 audit returned `NONE`.
 Gemini produced no turn or evidence and cannot close, accept, authorize, rank,
 or interpret B1.
 
@@ -75,7 +81,8 @@ Every seed/cell must have:
   and identical return;
 - arm-specific implicit/dense `D`, `M`, and normalized `Z` maximum error
   `<=1e-10`, with physical target kept separate, and runtime kernel mismatch
-  exactly zero;
+  exactly zero against the panel-declared center (`W` for intact SGSP/EDGE and
+  `W_ALT` for intact ALT or the intended SGSP center-swap panel);
 - no opaque identity, row order, latent, target, reward, future, evaluation,
   or held-out statistic in deployed inputs;
 - deterministic canonical `(role,slot)` base order, deterministic equality-only
@@ -100,12 +107,21 @@ the minimum and maximum sampled return attainable under
 `pi(SERVE_POS) in [0.02,0.98]`. `GE` and `GA` each require their own two-sided
 all-cell flag: the upper envelope minus the relevant comparator mean and that
 mean minus the lower envelope must each be strictly greater than `0.025`.
-`ANON_POSITIVE_AVAILABLE` requires the anonymous positive side.
-`CUT_RETURN_DROP_AVAILABLE` requires SGSP intact mean minus the lower envelope
-above `0.075`; `CUT_ACTION_TV_AVAILABLE` requires the registered epsilon-
-support TV supremum above `0.10`, each at both held-out sizes. Oracle return
-`1` is descriptive only. A missing side makes only the affected conclusion
-unavailable; it cannot be called equivalent, deleted, or mechanism-negative.
+`ANON_POSITIVE_AVAILABLE` requires the anonymous positive side. For each seed,
+let `R_CAP_s` be the minimum over `N={6,16}` of SGSP intact return minus the
+lower envelope, and let `TV_CAP_s` be the minimum over the same sizes of the
+registered epsilon-support TV supremum. `CUT_RETURN_DROP_AVAILABLE` holds iff
+the equal-seed mean of `R_CAP_s` is strictly above `0.075`;
+`CUT_ACTION_TV_AVAILABLE` holds iff the equal-seed mean of `TV_CAP_s` is
+strictly above `0.10`.
+
+For `B in {EDGE,ALT}`, define `d_s^{GB}(N)` as the intact SGSP-minus-B return
+and `I_CAP_s^{GB}(N)=d_s^{GB}(N)+U_s(N)-L_s(N)` in held-out `OPPOSED`.
+`GE_ATTENUATION_AVAILABLE` and `GA_ATTENUATION_AVAILABLE` respectively require
+the equal-seed mean of the within-seed size minimum of this cap to be strictly
+above `0.015`. Oracle return `1` is descriptive only. A missing side or cap
+makes only the affected conclusion unavailable; it cannot be called
+equivalent, deleted, observed nonattenuation, or mechanism-negative.
 
 ### 6. Registered statistical objects
 
@@ -148,10 +164,13 @@ attenuation of SGSP-versus-ALT advantage under sender reassociation > 0.015
 ```
 
 Each is a three-bound one-sided Bonferroni family after taking held-out-size
-minimum within seed. Promotion requires both families conjunctively. Failure of
-return or TV is action- or center-insensitive. Failure of attenuation permits
-at most a narrower optimization/policy-class reading, not complete
-correct-center semantic-graphon attribution.
+minimum within seed. Promotion requires both families conjunctively. The sender
+family additionally requires both common cut flags and
+`GE_ATTENUATION_AVAILABLE`; the center family additionally requires both common
+cut flags and `GA_ATTENUATION_AVAILABLE`. Only an answerable failed return/TV
+gate is action- or center-insensitive, and only an answerable failed attenuation
+gate permits the narrower optimization/policy-class reading. An unavailable
+gate is saturation, not observed mechanism failure.
 
 ## Result branches
 
@@ -162,7 +181,8 @@ both mechanism families, and (7) catch-all `BOUNDED_NONIDENTIFICATION`.
 ### A. Fixed graphon anchor merits a second surface
 
 Require all hard validity, complete evidence, both matched two-sided flags,
-`ANON_POSITIVE_AVAILABLE`, both cut-answerability flags,
+`ANON_POSITIVE_AVAILABLE`, both cut-answerability flags, both attenuation-
+answerability flags,
 `GE_SGSP_MATERIALLY_BETTER`,
 `GA_SGSP_MATERIALLY_BETTER`, `SGSP_BEATS_ANON`, and all six mechanism bounds.
 The maximum claim is the exact finite two-block/held-out-size statement in the
@@ -198,9 +218,10 @@ center evidence. Anonymous superiority alone is not a matched topology claim.
 
 The exact predicate is `GE_TWO_SIDED_AVAILABLE` and
 `GA_TWO_SIDED_AVAILABLE` and `CUT_RETURN_DROP_AVAILABLE` and
-`CUT_ACTION_TV_AVAILABLE` and `GE_SGSP_MATERIALLY_BETTER` and
-`GA_SGSP_MATERIALLY_BETTER`, with at least one mechanism family's three-bound
-conjunction failing. `ANON_POSITIVE_AVAILABLE` is intentionally irrelevant to
+`CUT_ACTION_TV_AVAILABLE` and `GE_ATTENUATION_AVAILABLE` and
+`GA_ATTENUATION_AVAILABLE` and `GE_SGSP_MATERIALLY_BETTER` and
+`GA_SGSP_MATERIALLY_BETTER`, with at least one answerable mechanism family's
+three-bound conjunction failing. `ANON_POSITIVE_AVAILABLE` is intentionally irrelevant to
 this matched-comparator mechanism-failure reading and remains required for
 promotion/anonymous statements. The maximum reading is an optimization or
 policy-class separation. Internal-summary-only, action-insensitive, center-
@@ -218,8 +239,9 @@ variable-`N` result.
 ### G. Invalid, saturated, incomplete, or bounded nonidentification
 
 Technical invalidity or incomplete/no-data evidence returns to CM without a
-treatment conclusion. Saturation or insufficient action range yields no
-equivalence, deletion, or mechanism-negative reading for the affected family.
+treatment conclusion. Saturation or insufficient return, action, or attenuation
+range yields no equivalence, deletion, observed nonattenuation, or mechanism-
+negative reading for the affected family.
 Every otherwise-unlisted complete valid configuration, including SGSP
 superiority without anonymous/mechanism qualification and either family-
 specific unresolved label, is `BOUNDED_NONIDENTIFICATION`. Do not weaken a

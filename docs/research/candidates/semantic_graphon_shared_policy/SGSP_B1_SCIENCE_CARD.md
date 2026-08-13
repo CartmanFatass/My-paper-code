@@ -2,16 +2,16 @@
 
 ```text
 direction=semantic_graphon_shared_policy
-revision=SGSP-B1-SCIENCE-20260813-04
-supersedes_revision=SGSP-B1-SCIENCE-20260813-03_PRO_CLOSED
+revision=SGSP-B1-SCIENCE-20260813-05
+supersedes_revision=SGSP-B1-SCIENCE-20260813-04_PRO_REVISION_REQUIRED
 owner=EM_semantic_graphon_shared_policy
 object=result-blind prospective direct-variable-N discriminator
 scientific_activity_started=false
-mathematical_closure=revision_04_PREPARED_NOT_SENT_SAME_CONVERSATION
-cm_release=withheld_for_revision_04_closure
+mathematical_closure=revision_05_PREPARED_NOT_SENT_SAME_CONVERSATION
+cm_release=withheld_for_revision_05_closure
 construction_authorization=none
 compute_authorization=none
-chatgpt_external_pro=revision_03_CLOSED_revision_04_PREPARED_NOT_SENT
+chatgpt_external_pro=revision_03_CLOSED_revision_04_REVISION_REQUIRED_revision_05_PREPARED_NOT_SENT
 external_gemini=RECOVERY_EXHAUSTED_NO_PROVIDER_TURN
 ```
 
@@ -48,6 +48,23 @@ the training set. It is not admitted merely by beating an anonymous mean. Its
 primary comparator is an information-, parameter-, optimization-, action-,
 communication-, and useful-work-matched permutation-equivariant edge policy
 whose edge-kernel class strictly contains the treatment's class.
+
+The exact same-conversation revision-04 Pro rereview returned
+`REVISION_REQUIRED` with two linked answerability defects and otherwise
+accepted the equal-width control, cuts, inference, resource matching, and claim
+ceiling. The cut-support flags averaged each roster size before the mechanism
+estimand took a within-seed roster minimum, so anti-aligned seed headroom could
+make a mechanism structurally impossible while the flag passed. The two
+advantage-attenuation gates also lacked corresponding support caps. Revision 05
+accepts both defects prospectively. It replaces the cut flags by equal-seed
+means of within-seed minimum support caps and adds separate `GE` and `GA`
+attenuation-availability flags with the same aggregation order. Promotion and
+mechanism-failure interpretation require every corresponding flag; unavailable
+gates route to saturation/nonidentification, never observed mechanism failure.
+No arm, stochastic object, checkpoint, endpoint, threshold, seed, world, or
+compute amount changes. The paired CM's final bounded read-only audit of the
+complete revision-05 card, map, handoff, and requester returned `NONE`: no
+remaining science-changing ambiguity was identified.
 
 The physical toy is deliberately dense, but the deployed graphon and comparator
 summaries use two block sufficient statistics and never materialize an `N x N`
@@ -529,9 +546,12 @@ The preactivity deterministic fixture and every evaluated seed must have
 `E_finite <= 1e-10` in float64. The scalar physical target
 `m_i^{dense}` remains a separate simulator object and is never substituted for
 `M_i^{A,dense}`. B1 has
-`E_graph=||W_runtime-W_frozen||_max=0` by construction. Finite computation
-error and graph mismatch are reported separately; neither is interpreted using
-a P22 rate.
+`E_graph=||W_runtime-W_declared(panel)||_max=0` by construction, where
+`W_declared=W` for intact `SGSP-W` and `EDGE-PE`, `W_declared=W_ALT` for intact
+`ALT-CENTER`, and `W_declared=W_ALT` for the registered SGSP center-swap panel.
+The last case is the intended intervention, not runtime graph mismatch. Finite
+computation error and unintended graph mismatch are reported separately;
+neither is interpreted using a P22 rate.
 
 ### 4.2 Identity-permutation replay
 
@@ -825,14 +845,23 @@ the other.
 \bar U(N,g)-\bar\mu_{ANON}(N,g)>\delta_R
 \]
 
-in all four cells. `CUT_RETURN_DROP_AVAILABLE` holds only if
+in all four cells. For the two return-drop cuts, define the per-seed support
+cap aligned with the registered within-seed held-out-size minimum:
 
 \[
-\bar\mu_{SGSP}(N,OPPOSED)-\bar L(N,OPPOSED)>0.075
+R\_CAP_s=\min_{N\in\{6,16\}}
+\left[\bar R^{SGSP,intact}_s(N,OPPOSED)-L_s(N,OPPOSED)\right].
 \]
 
-for both held-out sizes; it is required for both registered return-drop cuts.
-For legal-action TV, define the per-seed support supremum
+`CUT_RETURN_DROP_AVAILABLE` holds iff
+
+\[
+\frac1{16}\sum_s R\_CAP_s>0.075.
+\]
+
+It is the common return-support flag for both sender reassociation and center
+swap because both preserve the same sampled-return support. For legal-action
+TV, define the per-seed support supremum
 
 \[
 V^{max}_s(N)=\frac1{EN}\sum_{e,i}
@@ -840,17 +869,60 @@ V^{max}_s(N)=\frac1{EN}\sum_{e,i}
        0.98-\pi^{SGSP,intact}_{e,i}(1)\}.
 \]
 
-`CUT_ACTION_TV_AVAILABLE` holds only if the equal-seed mean of `V^max_s(N)`
-exceeds `0.10` at both held-out sizes; it is required for both registered TV
-cuts. These are support/headroom certificates,
-not efficacy evidence and not substitutes for the observed mechanism bounds.
+Let
+
+\[
+TV\_CAP_s=\min_{N\in\{6,16\}}V^{max}_s(N).
+\]
+
+`CUT_ACTION_TV_AVAILABLE` holds iff
+
+\[
+\frac1{16}\sum_s TV\_CAP_s>0.10.
+\]
+
+It is the common legal-action-range flag for both registered TV cuts.
+
+For `B in {EDGE,ALT}`, define the intact held-out-`OPPOSED` contrast and its
+positive attenuation support cap:
+
+\[
+d^{GB}_s(N)=\bar R^{SGSP,intact}_s(N,OPPOSED)
+-\bar R^{B,intact}_s(N,OPPOSED),
+\]
+
+\[
+I\_CAP^{GB}_s(N)=d^{GB}_s(N)+U_s(N,OPPOSED)-L_s(N,OPPOSED).
+\]
+
+This is an upper support bound because both reassociated returns remain in the
+same tape-conditioned interval `[L_s,U_s]`. Define
+
+\[
+GE\_ATTENUATION\_AVAILABLE\iff
+\frac1{16}\sum_s\min_{N\in\{6,16\}}I\_CAP^{GE}_s(N)>0.015,
+\]
+
+and
+
+\[
+GA\_ATTENUATION\_AVAILABLE\iff
+\frac1{16}\sum_s\min_{N\in\{6,16\}}I\_CAP^{GA}_s(N)>0.015.
+\]
+
+The first flag applies only to the sender-association `GE` attenuation gate and
+the second only to the correct-center `GA` attenuation gate. All four cut and
+attenuation flags use arithmetic means of the 16 registered seed-level minima;
+they are support/headroom certificates, not efficacy evidence, confidence
+bounds, or substitutes for the observed mechanism bounds.
 
 Oracle return `1` is reported descriptively but is not the admissible
 policy-family envelope. The exact anonymous collision pair remains a
 deterministic support certificate, not a substitute for this tape-conditioned
-headroom audit. If a required side is unavailable, the corresponding saturated
-cell or cut is reported without converting absence of a material difference
-into equivalence, family deletion, or mechanism failure.
+headroom audit. If a required side or mechanism cap is unavailable, the
+corresponding saturated cell or gate is reported without converting absence of
+a material difference into equivalence, family deletion, observed
+nonattenuation, or mechanism failure.
 
 ## 8. Mechanism gates
 
@@ -896,8 +968,12 @@ direction.
 Each three-gate object is an intersection-union test at family error `0.05`.
 Promotion requires both families conjunctively; there is no branch that can
 pass by choosing either family, so no additional across-family positive
-opportunity is created. The registered answerability flags in Section 7.1 must
-also hold. A failed or unavailable family cannot be rescued by the other.
+opportunity is created. The sender-association family is answerable only when
+`CUT_RETURN_DROP_AVAILABLE`, `CUT_ACTION_TV_AVAILABLE`, and
+`GE_ATTENUATION_AVAILABLE` all hold. The correct-center family is answerable
+only when the two common cut flags and `GA_ATTENUATION_AVAILABLE` all hold. A
+failed or unavailable family cannot be rescued by the other, and an unavailable
+gate cannot be called an observed mechanism failure.
 
 In addition, every seed must pass:
 
@@ -1023,8 +1099,9 @@ reported descriptively but cannot override the first branch.
    treatment evidence.
 2. **Promote the fixed semantic-graphon family.** Require valid complete
    evidence; `GE_TWO_SIDED_AVAILABLE`, `GA_TWO_SIDED_AVAILABLE`,
-   `ANON_POSITIVE_AVAILABLE`, `CUT_RETURN_DROP_AVAILABLE`, and
-   `CUT_ACTION_TV_AVAILABLE`; `GE_SGSP_MATERIALLY_BETTER`;
+   `ANON_POSITIVE_AVAILABLE`, `CUT_RETURN_DROP_AVAILABLE`,
+   `CUT_ACTION_TV_AVAILABLE`, `GE_ATTENUATION_AVAILABLE`, and
+   `GA_ATTENUATION_AVAILABLE`; `GE_SGSP_MATERIALLY_BETTER`;
    `GA_SGSP_MATERIALLY_BETTER`; `SGSP_BEATS_ANON`; and all six bounds in the
    two mechanism families. The maximum reading is a finite-budget benefit of
    the correct two-block center over both the wider matched edge family and the
@@ -1053,9 +1130,11 @@ reported descriptively but cannot override the first branch.
 6. **Action-insensitive, center-insensitive, or nonattenuating advantage.** The
    exact predicate is `GE_TWO_SIDED_AVAILABLE` and
    `GA_TWO_SIDED_AVAILABLE` and `CUT_RETURN_DROP_AVAILABLE` and
-   `CUT_ACTION_TV_AVAILABLE` and `GE_SGSP_MATERIALLY_BETTER` and
-   `GA_SGSP_MATERIALLY_BETTER`, with at least one of the two mechanism families
-   failing its three-bound conjunction. `ANON_POSITIVE_AVAILABLE` is not
+   `CUT_ACTION_TV_AVAILABLE` and `GE_ATTENUATION_AVAILABLE` and
+   `GA_ATTENUATION_AVAILABLE` and `GE_SGSP_MATERIALLY_BETTER` and
+   `GA_SGSP_MATERIALLY_BETTER`, with at least one of the two answerable
+   mechanism families failing its three-bound conjunction.
+   `ANON_POSITIVE_AVAILABLE` is not
    required because this is only a matched-comparator mechanism-failure
    reading, not an anonymous-compression or promotion statement. The maximum
    reading is an optimization or policy-class separation without complete
@@ -1070,9 +1149,10 @@ reported descriptively but cannot override the first branch.
    the named family and cell boundary. An interaction label without its
    corresponding two-sided flag routes to branch 8. Opposite effects are never
    averaged into a positive result.
-8. **Failed endpoint or cut availability.** Saturation or insufficient legal
-   action range is reported for the affected family without equivalence,
-   deletion, or mechanism-failure interpretation. Other independently
+8. **Failed endpoint, cut, or attenuation availability.** Saturation or
+   insufficient return/action/attenuation range is reported for the affected
+   family without equivalence, deletion, observed nonattenuation, or mechanism-
+   failure interpretation. Other independently
    identifying adverse families may still receive their earlier branch.
    Revisit only with a prospective cell that restores the missing material
    range.

@@ -2,12 +2,12 @@
 
 ```text
 direction=semantic_graphon_shared_policy
-revision=SGSP-B1-SCIENCE-20260813-04
-supersedes_revision=SGSP-B1-SCIENCE-20260813-03_PRO_CLOSED
+revision=SGSP-B1-SCIENCE-20260813-05
+supersedes_revision=SGSP-B1-SCIENCE-20260813-04_PRO_REVISION_REQUIRED
 author=EM_semantic_graphon_shared_policy
-handoff_state=REVISION_04_OWNER_PREPARED_CM_RELEASE_WITHHELD
+handoff_state=REVISION_05_OWNER_PREPARED_CM_RELEASE_WITHHELD
 scientific_activity_started=false
-mathematical_closure=revision_04_PREPARED_NOT_SENT_SAME_CONVERSATION
+mathematical_closure=revision_05_PREPARED_NOT_SENT_SAME_CONVERSATION
 same_direction_cm_science_ambiguity_audit=NONE
 construction_authorized=false
 tests_authorized=false
@@ -30,8 +30,13 @@ equal-width opposite-association control plus an anchor-only action cut. This is
 science-bearing. The paired static audit additionally froze canonical base
 order, one addressed nonidentity audit permutation, injective training episode
 indices, a deterministic nominal handle, and identifying-interaction
-answerability. CM release is withheld until same-conversation Pro `CLOSED`
-plus EM intake. CM must not bind revision 04, test, generate a registered
+answerability. The revision-04 same-conversation Pro rereview accepted those
+objects but returned `REVISION_REQUIRED` because cut support was aggregated in
+a different order than the within-seed-minimum mechanism estimand and the two
+attenuation gates lacked support flags. Revision 05 replaces the two cut flags
+with mean-of-seed-minimum caps and adds separate `GE`/`GA` attenuation caps;
+nothing else changes. CM release is withheld until same-conversation Pro
+`CLOSED` plus EM intake. CM must not bind revision 05, test, generate a registered
 stochastic object, train, evaluate, or launch.
 
 ## Exact object if Root later releases construction
@@ -58,7 +63,7 @@ dense simulator reference. `G-PERMUTE` is neither the primary learned
 comparator nor the identity-permutation replay.
 
 An incomplete, unexecuted predecessor scaffold already exists in the workspace.
-It is not revision-04 conformance evidence, is not released for execution, and
+It is not revision-05 conformance evidence, is not released for execution, and
 must fail closed until a later Root construction release names a Pro-closed
 successor. No stochastic object may be generated merely because source exists.
 
@@ -125,10 +130,16 @@ successor. No stochastic object may be generated merely because source exists.
     global-gradient clipping order, and update-480 checkpoint are literal.
 15. Dense equality covers arm-specific weighted mass `D`, message numerator
     `M`, and normalized actor input `Z`; the physical scalar target is separate.
+    Kernel conformance uses the panel-declared center: `W` for intact SGSP/EDGE
+    and `W_ALT` for intact ALT and the intended SGSP center-swap panel.
 16. Endpoint availability uses the exact action-tape-conditioned lower/upper
     sampled-return envelope, never unconstrained oracle `[0,1]` headroom. `GE`
-    and `GA` have separate two-sided flags; anonymous and cut gates have their
-    own positive/downward/action-range certificates.
+    and `GA` have separate two-sided flags; anonymous has its own positive flag.
+    `CUT_RETURN_DROP_AVAILABLE` and `CUT_ACTION_TV_AVAILABLE` are arithmetic
+    means across seeds of per-seed held-out-size-minimum caps. Separate
+    `GE_ATTENUATION_AVAILABLE` and `GA_ATTENUATION_AVAILABLE` use the same
+    aggregation order and the exact positive attenuation cap
+    `d_s^{GB}(N)+U_s(N)-L_s(N)`.
 17. `GE` and `GA` each use their own paired four-cell interval family.
     `SGSP_BEATS_ANON`, `EDGE_BEATS_ANON`, and `ALT_BEATS_ANON` are separate
     registered labels. Every unlisted valid configuration maps to
@@ -136,8 +147,10 @@ successor. No stochastic object may be generated merely because source exists.
     interaction authorizes a successor only when its corresponding two-sided
     availability flag also holds; otherwise it routes to failed availability.
     The mechanism-failure branch requires both matched two-sided flags, both
-    cut-answerability flags, and both SGSP-material labels; anonymous-positive
-    availability is deliberately not part of that narrower predicate.
+    cut-answerability flags, both attenuation-answerability flags, and both
+    SGSP-material labels; anonymous-positive availability is deliberately not
+    part of that narrower predicate. An unavailable mechanism gate routes to
+    saturation/nonidentification and cannot be described as observed failure.
 18. Promotion requires both the three-bound sender-association family and the
     three-bound correct-center family. The 16 seeds, 256 worlds per evaluation
     cell, counter namespaces, atomic lifecycle, interval families, `delta_R`,
