@@ -1,0 +1,82 @@
+{
+  "file": "P19_EvenDar_Qlearning_Rates_JMLR2003.pdf",
+  "citation_key": "EvenDarMansour2003",
+  "title": "Learning Rates for Q-learning",
+  "authors": [
+    "Eyal Even-Dar",
+    "Yishay Mansour"
+  ],
+  "year": 2003,
+  "venue": "Journal of Machine Learning Research 5, 1-25",
+  "version": "JMLR article, published December 2003",
+  "doi": null,
+  "arxiv": null,
+  "source_urls": [
+    "https://jmlr.org/papers/v5/evendar03a.html"
+  ],
+  "primary_topics": [
+    "Q-learning",
+    "finite-time convergence",
+    "learning-rate schedules",
+    "sample complexity"
+  ],
+  "method_families": [
+    "tabular Q-learning",
+    "stochastic approximation",
+    "synchronous and asynchronous analysis"
+  ],
+  "problem_classes": [
+    "discounted finite MDP",
+    "parallel sampling",
+    "covering-time exploration"
+  ],
+  "evidence_types": [
+    "formal upper bounds",
+    "formal lower bound",
+    "simulation experiments"
+  ],
+  "hmasd_axes": [
+    "optimization",
+    "foundations"
+  ],
+  "paper_id": "P19",
+  "source_pdf": "docs/new-libs/papers/P19_EvenDar_Qlearning_Rates_JMLR2003.pdf",
+  "pdf_pages": 25,
+  "text_extractable_pages": 25,
+  "warning_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P19/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P19/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P19/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P19/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P19/chunks"
+  },
+  "chunk_count": 9,
+  "content_fingerprint": "sha256:f3fb31d08087d896a3ab8a8ed8cc354aabcd04124c7ab9fdf6e88c3095f8da84"
+}

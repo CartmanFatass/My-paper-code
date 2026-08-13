@@ -112,6 +112,13 @@ ref/OPT-main/
 !docs/research/literature/n_k_many_agent_deep_dive/**/*.md
 docs/research/literature/n_k_many_agent_deep_dive/code/
 
+# Keep the LLM-oriented navigation and page-traceable derivative corpus
+# trackable. Source PDFs under docs/new-libs/papers remain ignored by *.pdf.
+!docs/new-libs/*.md
+!docs/new-libs/corpus/*.md
+!docs/new-libs/corpus/qa/*.md
+!docs/new-libs/corpus/papers/*/overview.md
+
 # 生成的模型和结果
 models/
 results/

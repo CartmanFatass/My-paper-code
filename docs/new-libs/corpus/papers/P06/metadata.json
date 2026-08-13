@@ -1,0 +1,85 @@
+{
+  "paper_id": "P06",
+  "citation_key": "sidahmed2025rotational",
+  "title": "Addressing Rotational Learning Dynamics in Multi-Agent Reinforcement Learning",
+  "authors": [
+    "Baraah A. M. Sidahmed",
+    "Tatjana Chavdarova"
+  ],
+  "year": 2025,
+  "venue": "arXiv preprint",
+  "version": "arXiv:2410.07976v2 (2025)",
+  "source_pdf": "docs/new-libs/papers/P06_Sidahmed_Rotational_MARL_arXiv2025.pdf",
+  "pdf_pages": 30,
+  "text_extractable_pages": 30,
+  "warning_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    29
+  ],
+  "doi": null,
+  "arxiv": "2410.07976",
+  "source_urls": [
+    "https://arxiv.org/abs/2410.07976"
+  ],
+  "primary_topics": [
+    "variational inequalities",
+    "rotational dynamics",
+    "MARL optimization",
+    "reproducibility"
+  ],
+  "method_families": [
+    "extragradient",
+    "nested lookahead",
+    "actor-critic",
+    "CTDE"
+  ],
+  "problem_classes": [
+    "zero-sum matrix games",
+    "centralized-critic MARL",
+    "Multi-Agent Particle Environment"
+  ],
+  "evidence_types": [
+    "conceptual reframing",
+    "empirical evaluation",
+    "preprint"
+  ],
+  "hmasd_axes": [
+    "optimization",
+    "foundations"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P06/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P06/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P06/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P06/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P06/chunks"
+  },
+  "chunk_count": 8,
+  "content_fingerprint": "sha256:60b1d6301ea1a793784f3de58a91a34a774f8bcf548dd5d313cfb76909b57499"
+}

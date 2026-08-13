@@ -1,0 +1,72 @@
+{
+  "paper_id": "P15",
+  "citation_key": "wang2020imac",
+  "title": "Learning Efficient Multi-agent Communication: An Information Bottleneck Approach",
+  "authors": [
+    "Rundong Wang",
+    "Xu He",
+    "Runsheng Yu",
+    "Wei Qiu",
+    "Bo An",
+    "Zinovi Rabinovich"
+  ],
+  "year": 2020,
+  "venue": "Proceedings of the 37th International Conference on Machine Learning (PMLR 119)",
+  "version": "ICML 2020 paper",
+  "source_pdf": "docs/new-libs/papers/P15_Wang_IMAC_ICML2020.pdf",
+  "pdf_pages": 11,
+  "text_extractable_pages": 11,
+  "warning_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "doi": null,
+  "arxiv": "1911.06992",
+  "source_urls": [
+    "https://proceedings.mlr.press/v119/wang20i.html",
+    "https://arxiv.org/abs/1911.06992"
+  ],
+  "primary_topics": [
+    "multi-agent communication",
+    "information bottleneck",
+    "bandwidth",
+    "scheduling"
+  ],
+  "method_families": [
+    "variational information bottleneck",
+    "attention scheduling",
+    "MADDPG",
+    "QMIX"
+  ],
+  "problem_classes": [
+    "cooperative navigation",
+    "predator-prey",
+    "StarCraft II"
+  ],
+  "evidence_types": [
+    "proposition",
+    "empirical evaluation"
+  ],
+  "hmasd_axes": [
+    "communication",
+    "credit",
+    "variable_N"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P15/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P15/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P15/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P15/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P15/chunks"
+  },
+  "chunk_count": 5,
+  "content_fingerprint": "sha256:5f7aed6a2ce09f2f32a378fa138e907b4847092718cd41168f4bfe0e0ca741dc"
+}

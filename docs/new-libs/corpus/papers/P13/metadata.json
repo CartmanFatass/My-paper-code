@@ -1,0 +1,70 @@
+{
+  "file": "P13_Cen_Entropy_NPG_PotentialGames_2022.pdf",
+  "citation_key": "CenChenChi2022",
+  "title": "Independent Natural Policy Gradient Methods for Potential Games: Finite-Time Global Convergence with Entropy Regularization",
+  "authors": [
+    "Shicong Cen",
+    "Fan Chen",
+    "Yuejie Chi"
+  ],
+  "year": 2022,
+  "venue": "arXiv preprint",
+  "version": "arXiv:2204.05466v2, revised August 31, 2022",
+  "doi": null,
+  "arxiv": "2204.05466",
+  "source_urls": [
+    "https://arxiv.org/abs/2204.05466"
+  ],
+  "primary_topics": [
+    "static potential games",
+    "entropy regularization",
+    "natural policy gradient",
+    "quantal response equilibrium"
+  ],
+  "method_families": [
+    "independent natural policy gradient",
+    "multiplicative weights",
+    "entropy smoothing"
+  ],
+  "problem_classes": [
+    "finite static potential games",
+    "identical-interest games",
+    "QRE and approximate Nash equilibrium"
+  ],
+  "evidence_types": [
+    "formal finite-time analysis",
+    "synthetic numerical experiments",
+    "unreviewed preprint"
+  ],
+  "hmasd_axes": [
+    "optimization",
+    "foundations"
+  ],
+  "paper_id": "P13",
+  "source_pdf": "docs/new-libs/papers/P13_Cen_Entropy_NPG_PotentialGames_2022.pdf",
+  "pdf_pages": 18,
+  "text_extractable_pages": 18,
+  "warning_pages": [
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    14,
+    15,
+    16,
+    17,
+    18
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P13/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P13/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P13/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P13/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P13/chunks"
+  },
+  "chunk_count": 7,
+  "content_fingerprint": "sha256:65da6322dbaa0aacf07bd7c4195da89349f1a044f351599392e897d5a9163bfd"
+}

@@ -1,0 +1,87 @@
+{
+  "paper_id": "P22",
+  "pdf_pages": 26,
+  "sections": [
+    {
+      "section_id": "S001",
+      "heading": "Introduction",
+      "level": 1,
+      "pdf_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "section_id": "S002",
+      "heading": "Heterogeneous Network Particle System",
+      "level": 1,
+      "pdf_pages": [
+        3,
+        5
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Limiting Graph and Graphon",
+      "level": 1,
+      "pdf_pages": [
+        6,
+        7
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "Main Results",
+      "level": 1,
+      "pdf_pages": [
+        8,
+        9
+      ]
+    },
+    {
+      "section_id": "S005",
+      "heading": "Numerical Experiments",
+      "level": 1,
+      "pdf_pages": [
+        10,
+        14
+      ]
+    },
+    {
+      "section_id": "S006",
+      "heading": "Proofs",
+      "level": 1,
+      "pdf_pages": [
+        15,
+        17
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "Conclusion",
+      "level": 1,
+      "pdf_pages": [
+        18,
+        18
+      ]
+    },
+    {
+      "section_id": "S008",
+      "heading": "References",
+      "level": 1,
+      "pdf_pages": [
+        19,
+        20
+      ]
+    },
+    {
+      "section_id": "S009",
+      "heading": "Appendices",
+      "level": 1,
+      "pdf_pages": [
+        21,
+        26
+      ]
+    }
+  ]
+}

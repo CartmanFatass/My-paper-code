@@ -1,0 +1,60 @@
+{
+  "file": "P01_Shoham_MAL_Question_AI2007_AuthorPreprint.pdf",
+  "citation_key": "ShohamPowersGrenager2007",
+  "title": "If Multi-Agent Learning Is the Answer, What Is the Question?",
+  "authors": [
+    "Yoav Shoham",
+    "Rob Powers",
+    "Trond Grenager"
+  ],
+  "year": 2007,
+  "venue": "Artificial Intelligence 171(7), 365-377",
+  "version": "February 2006 author preprint of the 2007 journal article",
+  "doi": "10.1016/j.artint.2006.02.006",
+  "arxiv": null,
+  "source_urls": [
+    "https://robotics.stanford.edu/~shoham/www%20papers/LearningInMAS.pdf"
+  ],
+  "primary_topics": [
+    "multi-agent learning agendas",
+    "evaluation criteria",
+    "stochastic games",
+    "no-regret learning"
+  ],
+  "method_families": [
+    "conceptual taxonomy",
+    "model-based learning",
+    "model-free learning",
+    "regret minimization"
+  ],
+  "problem_classes": [
+    "repeated games",
+    "stochastic games",
+    "cooperative and non-cooperative learning"
+  ],
+  "evidence_types": [
+    "conceptual position paper",
+    "selective literature synthesis",
+    "worked game examples"
+  ],
+  "hmasd_axes": [
+    "foundations"
+  ],
+  "paper_id": "P01",
+  "source_pdf": "docs/new-libs/papers/P01_Shoham_MAL_Question_AI2007_AuthorPreprint.pdf",
+  "pdf_pages": 21,
+  "text_extractable_pages": 21,
+  "warning_pages": [
+    5,
+    6
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P01/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P01/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P01/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P01/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P01/chunks"
+  },
+  "chunk_count": 8,
+  "content_fingerprint": "sha256:16be0b23520370ddf35def353a78586f58faf92d76c7649f86a1a09e33f5176b"
+}

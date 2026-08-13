@@ -1,0 +1,87 @@
+{
+  "paper_id": "P19",
+  "pdf_pages": 25,
+  "sections": [
+    {
+      "title": "Abstract and Introduction",
+      "pdf_pages": [
+        1
+      ],
+      "start_pdf_page": 1,
+      "end_pdf_page": 1
+    },
+    {
+      "title": "2 Model",
+      "pdf_pages": [
+        2,
+        3
+      ],
+      "start_pdf_page": 2,
+      "end_pdf_page": 3
+    },
+    {
+      "title": "3 Q-learning and 4 Main Results",
+      "pdf_pages": [
+        4,
+        5
+      ],
+      "start_pdf_page": 4,
+      "end_pdf_page": 5
+    },
+    {
+      "title": "5 Experiments",
+      "pdf_pages": [
+        6,
+        7
+      ],
+      "start_pdf_page": 6,
+      "end_pdf_page": 7
+    },
+    {
+      "title": "6-7 Stochastic Approximation Background",
+      "pdf_pages": [
+        8,
+        9,
+        10
+      ],
+      "start_pdf_page": 8,
+      "end_pdf_page": 10
+    },
+    {
+      "title": "8 Synchronous Q-learning Proofs",
+      "pdf_pages": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "start_pdf_page": 11,
+      "end_pdf_page": 16
+    },
+    {
+      "title": "9 Asynchronous Q-learning Proofs",
+      "pdf_pages": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "start_pdf_page": 17,
+      "end_pdf_page": 23
+    },
+    {
+      "title": "10 Lower Bound and References",
+      "pdf_pages": [
+        24,
+        25
+      ],
+      "start_pdf_page": 24,
+      "end_pdf_page": 25
+    }
+  ]
+}

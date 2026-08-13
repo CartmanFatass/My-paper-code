@@ -1,0 +1,78 @@
+{
+  "paper_id": "P24",
+  "pdf_pages": 23,
+  "sections": [
+    {
+      "section_id": "S001",
+      "heading": "Introduction",
+      "level": 1,
+      "pdf_pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "section_id": "S002",
+      "heading": "Non-Stationary Continuous MFGs",
+      "level": 1,
+      "pdf_pages": [
+        3,
+        3
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Solving Continuous MFGs",
+      "level": 1,
+      "pdf_pages": [
+        4,
+        5
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "Convergence of DEDA-FP",
+      "level": 1,
+      "pdf_pages": [
+        6,
+        6
+      ]
+    },
+    {
+      "section_id": "S005",
+      "heading": "Experiments",
+      "level": 1,
+      "pdf_pages": [
+        7,
+        9
+      ]
+    },
+    {
+      "section_id": "S006",
+      "heading": "Conclusion and Limitations",
+      "level": 1,
+      "pdf_pages": [
+        10,
+        10
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "References",
+      "level": 1,
+      "pdf_pages": [
+        11,
+        13
+      ]
+    },
+    {
+      "section_id": "S008",
+      "heading": "Appendices",
+      "level": 1,
+      "pdf_pages": [
+        14,
+        23
+      ]
+    }
+  ]
+}

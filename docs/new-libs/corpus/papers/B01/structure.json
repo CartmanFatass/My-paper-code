@@ -1,0 +1,159 @@
+{
+  "paper_id": "B01",
+  "pdf_pages": 395,
+  "sections": [
+    {
+      "section_id": "S001",
+      "heading": "Front matter, notation, and preface",
+      "level": 1,
+      "pdf_pages": [
+        1,
+        29
+      ]
+    },
+    {
+      "section_id": "S002",
+      "heading": "Chapter 1: Introduction",
+      "level": 1,
+      "pdf_pages": [
+        30,
+        45
+      ]
+    },
+    {
+      "section_id": "S003",
+      "heading": "Part I: Foundations of Multi-Agent Reinforcement Learning",
+      "level": 1,
+      "pdf_pages": [
+        46,
+        47
+      ]
+    },
+    {
+      "section_id": "S004",
+      "heading": "Chapter 2: Reinforcement Learning",
+      "level": 1,
+      "pdf_pages": [
+        48,
+        71
+      ]
+    },
+    {
+      "section_id": "S005",
+      "heading": "Chapter 3: Games: Models of Multi-Agent Interaction",
+      "level": 1,
+      "pdf_pages": [
+        72,
+        89
+      ]
+    },
+    {
+      "section_id": "S006",
+      "heading": "Chapter 4: Solution Concepts for Games",
+      "level": 1,
+      "pdf_pages": [
+        90,
+        117
+      ]
+    },
+    {
+      "section_id": "S007",
+      "heading": "Chapter 5: MARL in Games: First Steps and Challenges",
+      "level": 1,
+      "pdf_pages": [
+        118,
+        143
+      ]
+    },
+    {
+      "section_id": "S008",
+      "heading": "Chapter 6: Foundational MARL Algorithms",
+      "level": 1,
+      "pdf_pages": [
+        144,
+        187
+      ]
+    },
+    {
+      "section_id": "S009",
+      "heading": "Part II: Multi-Agent Deep Reinforcement Learning",
+      "level": 1,
+      "pdf_pages": [
+        188,
+        189
+      ]
+    },
+    {
+      "section_id": "S010",
+      "heading": "Chapter 7: Deep Learning",
+      "level": 1,
+      "pdf_pages": [
+        190,
+        211
+      ]
+    },
+    {
+      "section_id": "S011",
+      "heading": "Chapter 8: Deep Reinforcement Learning",
+      "level": 1,
+      "pdf_pages": [
+        212,
+        247
+      ]
+    },
+    {
+      "section_id": "S012",
+      "heading": "Chapter 9: Multi-Agent Deep Reinforcement Learning",
+      "level": 1,
+      "pdf_pages": [
+        248,
+        333
+      ]
+    },
+    {
+      "section_id": "S013",
+      "heading": "Chapter 10: MARL in Practice",
+      "level": 1,
+      "pdf_pages": [
+        334,
+        347
+      ]
+    },
+    {
+      "section_id": "S014",
+      "heading": "Chapter 11: Multi-Agent Environments",
+      "level": 1,
+      "pdf_pages": [
+        348,
+        365
+      ]
+    },
+    {
+      "section_id": "S015",
+      "heading": "Appendix A: Surveys on MARL",
+      "level": 1,
+      "pdf_pages": [
+        366,
+        369
+      ]
+    },
+    {
+      "section_id": "S016",
+      "heading": "References",
+      "level": 1,
+      "pdf_pages": [
+        370,
+        391
+      ]
+    },
+    {
+      "section_id": "S017",
+      "heading": "Index",
+      "level": 1,
+      "pdf_pages": [
+        392,
+        395
+      ]
+    }
+  ]
+}

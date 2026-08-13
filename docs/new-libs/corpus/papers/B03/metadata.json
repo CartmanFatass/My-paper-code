@@ -1,0 +1,85 @@
+{
+  "file": "B03_DecPOMDP_Springer2016_AuthorPreprint.pdf",
+  "citation_key": "OliehoekAmato2016",
+  "title": "A Concise Introduction to Decentralized POMDPs",
+  "authors": [
+    "Frans A. Oliehoek",
+    "Christopher Amato"
+  ],
+  "year": 2016,
+  "venue": "Springer",
+  "version": "2015 author preprint of the 2016 book",
+  "doi": "10.1007/978-3-319-28929-8",
+  "arxiv": null,
+  "source_urls": [
+    "https://www.fransoliehoek.net/pub-html/htmlfiles/b2hd-OliehoekAmato16book.html"
+  ],
+  "primary_topics": [
+    "Dec-POMDP",
+    "decentralized planning",
+    "partial observability",
+    "finite-state controllers",
+    "factored planning",
+    "communication"
+  ],
+  "method_families": [
+    "dynamic programming",
+    "heuristic search",
+    "finite-state controller optimization",
+    "factored planning",
+    "macro-actions",
+    "reinforcement learning"
+  ],
+  "problem_classes": [
+    "finite-horizon Dec-POMDP",
+    "infinite-horizon Dec-POMDP",
+    "partially observable cooperative control",
+    "communication-aware planning"
+  ],
+  "evidence_types": [
+    "textbook synthesis",
+    "complexity results",
+    "planning algorithms",
+    "worked domains"
+  ],
+  "hmasd_axes": [
+    "foundations",
+    "planning",
+    "communication"
+  ],
+  "paper_id": "B03",
+  "source_pdf": "docs/new-libs/papers/B03_DecPOMDP_Springer2016_AuthorPreprint.pdf",
+  "pdf_pages": 141,
+  "text_extractable_pages": 134,
+  "warning_pages": [
+    2,
+    6,
+    17,
+    20,
+    21,
+    42,
+    43,
+    48,
+    49,
+    61,
+    70,
+    83,
+    85,
+    86,
+    95,
+    98,
+    104,
+    114,
+    115,
+    121
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/B03/overview.md",
+    "structure": "docs/new-libs/corpus/papers/B03/structure.json",
+    "claims": "docs/new-libs/corpus/papers/B03/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/B03/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/B03/chunks"
+  },
+  "chunk_count": 28,
+  "content_fingerprint": "sha256:b1054697430065c2962a37921d3816eaff18ec4b6ea0f577469eaf0becf8bcce"
+}

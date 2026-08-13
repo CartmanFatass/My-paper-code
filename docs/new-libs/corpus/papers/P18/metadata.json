@@ -1,0 +1,66 @@
+{
+  "file": "P18_Baheri_OT_MARL_2024.pdf",
+  "citation_key": "BaheriKochenderfer2024",
+  "title": "The Synergy Between Optimal Transport Theory and Multi-Agent Reinforcement Learning",
+  "authors": [
+    "Ali Baheri",
+    "Mykel J. Kochenderfer"
+  ],
+  "year": 2024,
+  "venue": "arXiv preprint",
+  "version": "arXiv:2401.10949v2, January 24, 2024",
+  "doi": null,
+  "arxiv": "2401.10949",
+  "source_urls": [
+    "https://arxiv.org/abs/2401.10949"
+  ],
+  "primary_topics": [
+    "optimal transport",
+    "Wasserstein distance",
+    "policy alignment",
+    "resource allocation",
+    "MARL scalability"
+  ],
+  "method_families": [
+    "optimal transport",
+    "Wasserstein objectives",
+    "conceptual decomposition"
+  ],
+  "problem_classes": [
+    "cooperative policy alignment",
+    "distributed resources",
+    "non-stationarity",
+    "large-scale MARL"
+  ],
+  "evidence_types": [
+    "conceptual position paper",
+    "proposed objectives",
+    "unreviewed preprint"
+  ],
+  "hmasd_axes": [
+    "optimization",
+    "variable_N",
+    "foundations"
+  ],
+  "paper_id": "P18",
+  "source_pdf": "docs/new-libs/papers/P18_Baheri_OT_MARL_2024.pdf",
+  "pdf_pages": 6,
+  "text_extractable_pages": 6,
+  "warning_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P18/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P18/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P18/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P18/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P18/chunks"
+  },
+  "chunk_count": 4,
+  "content_fingerprint": "sha256:e83ee5de5876bfba4ae520c8ff685f96a9793728f97a7ae4cbb003e26c56a2f3"
+}

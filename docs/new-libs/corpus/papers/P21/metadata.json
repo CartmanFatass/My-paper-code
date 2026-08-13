@@ -1,0 +1,91 @@
+{
+  "file": "P21_Huang_LargePopulation_StochasticGames_CIS2006.pdf",
+  "citation_key": "HuangMalhameCaines2006",
+  "title": "Large Population Stochastic Dynamic Games: Closed-Loop McKean-Vlasov Systems and the Nash Certainty Equivalence Principle",
+  "authors": [
+    "Minyi Huang",
+    "Roland P. Malhame",
+    "Peter E. Caines"
+  ],
+  "year": 2006,
+  "venue": "Communications in Information and Systems 6(3), 221-252",
+  "version": "Publisher open-access journal article",
+  "doi": "10.4310/CIS.2006.v6.n3.a5",
+  "arxiv": null,
+  "source_urls": [
+    "https://archive.intlpress.com/site/pub/files/_fulltext/journals/cis/2006/0006/0003/CIS-2006-0006-0003-a005.pdf"
+  ],
+  "primary_topics": [
+    "large-population stochastic games",
+    "mean-field games",
+    "McKean-Vlasov systems",
+    "Nash certainty equivalence"
+  ],
+  "method_families": [
+    "HJB control",
+    "McKean-Vlasov fixed point",
+    "decentralized feedback",
+    "asymptotic epsilon-Nash analysis"
+  ],
+  "problem_classes": [
+    "weakly coupled stochastic differential games",
+    "multi-class mean-field games",
+    "large finite populations"
+  ],
+  "evidence_types": [
+    "formal existence analysis",
+    "asymptotic approximation bounds",
+    "epsilon-Nash guarantee"
+  ],
+  "hmasd_axes": [
+    "variable_N",
+    "planning",
+    "foundations"
+  ],
+  "paper_id": "P21",
+  "source_pdf": "docs/new-libs/papers/P21_Huang_LargePopulation_StochasticGames_CIS2006.pdf",
+  "pdf_pages": 31,
+  "text_extractable_pages": 31,
+  "warning_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P21/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P21/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P21/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P21/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P21/chunks"
+  },
+  "chunk_count": 9,
+  "content_fingerprint": "sha256:e1deb76424f854503c822e145de2e738e414527d175adbb2bbb10f4d29fae189"
+}

@@ -1,0 +1,67 @@
+{
+  "paper_id": "P17",
+  "pdf_pages": 12,
+  "sections": [
+    {
+      "title": "Abstract and Introduction",
+      "pdf_pages": [
+        1
+      ],
+      "start_pdf_page": 1,
+      "end_pdf_page": 1
+    },
+    {
+      "title": "2 Background",
+      "pdf_pages": [
+        2
+      ],
+      "start_pdf_page": 2,
+      "end_pdf_page": 2
+    },
+    {
+      "title": "3 Analysis",
+      "pdf_pages": [
+        3
+      ],
+      "start_pdf_page": 3,
+      "end_pdf_page": 3
+    },
+    {
+      "title": "4 Methodology",
+      "pdf_pages": [
+        4,
+        5
+      ],
+      "start_pdf_page": 4,
+      "end_pdf_page": 5
+    },
+    {
+      "title": "5 Experimental Results",
+      "pdf_pages": [
+        6,
+        7,
+        8
+      ],
+      "start_pdf_page": 6,
+      "end_pdf_page": 8
+    },
+    {
+      "title": "6-7 Related Work and Conclusion",
+      "pdf_pages": [
+        9
+      ],
+      "start_pdf_page": 9,
+      "end_pdf_page": 9
+    },
+    {
+      "title": "Appendix and references",
+      "pdf_pages": [
+        10,
+        11,
+        12
+      ],
+      "start_pdf_page": 10,
+      "end_pdf_page": 12
+    }
+  ]
+}

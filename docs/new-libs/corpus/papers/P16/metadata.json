@@ -1,0 +1,82 @@
+{
+  "paper_id": "P16",
+  "citation_key": "kuba2022hatrpo",
+  "title": "Trust Region Policy Optimisation in Multi-Agent Reinforcement Learning",
+  "authors": [
+    "Jakub Grudzien Kuba",
+    "Ruiqing Chen",
+    "Muning Wen",
+    "Ying Wen",
+    "Fanglei Sun",
+    "Jun Wang",
+    "Yaodong Yang"
+  ],
+  "year": 2022,
+  "venue": "International Conference on Learning Representations",
+  "version": "ICLR 2022 conference paper",
+  "source_pdf": "docs/new-libs/papers/P16_Kuba_HATRPO_ICLR2022.pdf",
+  "pdf_pages": 27,
+  "text_extractable_pages": 27,
+  "warning_pages": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    22,
+    23,
+    24,
+    26
+  ],
+  "doi": null,
+  "arxiv": "2109.11251",
+  "source_urls": [
+    "https://openreview.net/forum?id=EcGGFkNTxdJ",
+    "https://arxiv.org/abs/2109.11251"
+  ],
+  "primary_topics": [
+    "trust region MARL",
+    "sequential policy updates",
+    "monotonic improvement",
+    "heterogeneous agents"
+  ],
+  "method_families": [
+    "TRPO",
+    "PPO",
+    "policy gradient",
+    "CTDE"
+  ],
+  "problem_classes": [
+    "fully cooperative Markov games",
+    "Multi-Agent MuJoCo",
+    "SMAC"
+  ],
+  "evidence_types": [
+    "formal guarantees",
+    "empirical evaluation"
+  ],
+  "hmasd_axes": [
+    "optimization",
+    "credit",
+    "variable_N"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P16/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P16/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P16/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P16/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P16/chunks"
+  },
+  "chunk_count": 7,
+  "content_fingerprint": "sha256:a3586341fc5dff98c9a5e2ab1fab5f06b45094935c065e38ec7fd25d2019aa42"
+}

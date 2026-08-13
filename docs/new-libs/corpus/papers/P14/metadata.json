@@ -1,0 +1,91 @@
+{
+  "paper_id": "P14",
+  "citation_key": "gu2021mfcq",
+  "title": "Mean-Field Controls with Q-learning for Cooperative MARL: Convergence and Complexity Analysis",
+  "authors": [
+    "Haotian Gu",
+    "Xin Guo",
+    "Xiaoli Wei",
+    "Renyuan Xu"
+  ],
+  "year": 2021,
+  "venue": "SIAM Journal on Mathematics of Data Science",
+  "version": "Journal paper; arXiv:2002.04131",
+  "source_pdf": "docs/new-libs/papers/P14_Gu_MFC_Qlearning_Cooperative_MARL_2021.pdf",
+  "pdf_pages": 36,
+  "text_extractable_pages": 36,
+  "warning_pages": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36
+  ],
+  "doi": "10.1137/20M1360700",
+  "arxiv": "2002.04131",
+  "source_urls": [
+    "https://arxiv.org/abs/2002.04131",
+    "https://doi.org/10.1137/20M1360700"
+  ],
+  "primary_topics": [
+    "mean-field control",
+    "cooperative MARL",
+    "Q-learning",
+    "finite-N approximation"
+  ],
+  "method_families": [
+    "kernel Q-learning",
+    "dynamic programming",
+    "mean-field approximation"
+  ],
+  "problem_classes": [
+    "interchangeable cooperative MARL",
+    "network traffic congestion"
+  ],
+  "evidence_types": [
+    "formal guarantees",
+    "empirical evaluation"
+  ],
+  "hmasd_axes": [
+    "variable_N",
+    "planning",
+    "foundations"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P14/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P14/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P14/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P14/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P14/chunks"
+  },
+  "chunk_count": 7,
+  "content_fingerprint": "sha256:d898694a5753ca63962ee7f0da77eb2168aa7cd246f1ce2edcc2fdf5a517f5b0"
+}

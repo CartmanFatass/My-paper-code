@@ -1,0 +1,40 @@
+{
+  "paper_id": "P18",
+  "pdf_pages": 6,
+  "sections": [
+    {
+      "title": "Abstract, Introduction, and OT Background",
+      "pdf_pages": [
+        1
+      ],
+      "start_pdf_page": 1,
+      "end_pdf_page": 1
+    },
+    {
+      "title": "OT-MARL Integration Proposals",
+      "pdf_pages": [
+        2,
+        3
+      ],
+      "start_pdf_page": 2,
+      "end_pdf_page": 3
+    },
+    {
+      "title": "Challenges and Conclusions",
+      "pdf_pages": [
+        4
+      ],
+      "start_pdf_page": 4,
+      "end_pdf_page": 4
+    },
+    {
+      "title": "References",
+      "pdf_pages": [
+        5,
+        6
+      ],
+      "start_pdf_page": 5,
+      "end_pdf_page": 6
+    }
+  ]
+}

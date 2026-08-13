@@ -1,0 +1,68 @@
+{
+  "paper_id": "P07",
+  "citation_key": "jeong2026stochasticity",
+  "title": "Breaking the Stochasticity Barrier: An Adaptive Variance-Reduced Method for Variational Inequalities",
+  "authors": [
+    "Yungi Jeong",
+    "Takumi Otsuka"
+  ],
+  "year": 2026,
+  "venue": "arXiv preprint",
+  "version": "arXiv:2601.23034v1; preprint dated 2026-02-02",
+  "source_pdf": "docs/new-libs/papers/P07_Jeong_Stochasticity_Barrier_VI_2026.pdf",
+  "pdf_pages": 13,
+  "text_extractable_pages": 13,
+  "warning_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12,
+    13
+  ],
+  "doi": null,
+  "arxiv": "2601.23034",
+  "source_urls": [
+    "https://arxiv.org/abs/2601.23034"
+  ],
+  "primary_topics": [
+    "stochastic variational inequalities",
+    "variance reduction",
+    "adaptive stepsizes",
+    "non-monotone optimization"
+  ],
+  "method_families": [
+    "STORM",
+    "Armijo verification",
+    "descent-ascent"
+  ],
+  "problem_classes": [
+    "stochastic nonconvex-nonconcave optimization",
+    "rotational games",
+    "robust regression"
+  ],
+  "evidence_types": [
+    "formal guarantee",
+    "empirical evaluation",
+    "unreviewed preprint"
+  ],
+  "hmasd_axes": [
+    "optimization",
+    "foundations"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P07/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P07/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P07/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P07/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P07/chunks"
+  },
+  "chunk_count": 4,
+  "content_fingerprint": "sha256:e8fa7ccd6d07156f5ed04c0ae6a34205557825648e286691f9788c4dc35c4948"
+}

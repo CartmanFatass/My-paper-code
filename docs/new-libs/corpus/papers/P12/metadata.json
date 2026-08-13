@@ -1,0 +1,77 @@
+{
+  "paper_id": "P12",
+  "citation_key": "hu2023graphonmfc",
+  "title": "Graphon Mean-Field Control for Cooperative Multi-Agent Reinforcement Learning",
+  "authors": [
+    "Yuanquan Hu",
+    "Xiaoli Wei",
+    "Junji Yan",
+    "Hengxi Zhang"
+  ],
+  "year": 2023,
+  "venue": "Journal of the Franklin Institute",
+  "version": "arXiv:2209.04808 (2022); journal version 2023",
+  "source_pdf": "docs/new-libs/papers/P12_Hu_Graphon_MFC_MARL_2022.pdf",
+  "pdf_pages": 25,
+  "text_extractable_pages": 25,
+  "warning_pages": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    22
+  ],
+  "doi": "10.1016/j.jfranklin.2023.09.002",
+  "arxiv": "2209.04808",
+  "source_urls": [
+    "https://arxiv.org/abs/2209.04808",
+    "https://doi.org/10.1016/j.jfranklin.2023.09.002"
+  ],
+  "primary_topics": [
+    "graphon mean-field control",
+    "cooperative MARL",
+    "heterogeneous interactions",
+    "finite-N approximation"
+  ],
+  "method_families": [
+    "graphon control",
+    "block approximation",
+    "PPO"
+  ],
+  "problem_classes": [
+    "dense graph cooperative MARL",
+    "nonuniform interaction networks"
+  ],
+  "evidence_types": [
+    "formal guarantees",
+    "empirical evaluation"
+  ],
+  "hmasd_axes": [
+    "variable_N",
+    "planning",
+    "foundations"
+  ],
+  "corpus_paths": {
+    "overview": "docs/new-libs/corpus/papers/P12/overview.md",
+    "structure": "docs/new-libs/corpus/papers/P12/structure.json",
+    "claims": "docs/new-libs/corpus/papers/P12/claims.jsonl",
+    "chunks_index": "docs/new-libs/corpus/papers/P12/chunks.jsonl",
+    "chunks_dir": "docs/new-libs/corpus/papers/P12/chunks"
+  },
+  "chunk_count": 6,
+  "content_fingerprint": "sha256:6825d253825d7f8b5b5c9582ab1aa10dec8663829fb292647b58aa5f26ebd501"
+}
