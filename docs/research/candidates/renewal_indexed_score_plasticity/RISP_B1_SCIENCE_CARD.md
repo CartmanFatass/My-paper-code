@@ -3,14 +3,14 @@
 ```text
 direction_id=renewal_indexed_score_plasticity
 candidate=RISP-B1
-revision=RISP-B1-SCIENCE-20260813-04
-supersedes=RISP-B1-SCIENCE-20260813-03_CM_CLARIFICATION_REQUIRED
+revision=RISP-B1-SCIENCE-20260813-05
+supersedes=RISP-B1-SCIENCE-20260813-04_PRO_REVISION_REQUIRED
 owner=/root/em_renewal_indexed_score_plasticity
 paired_cm=/root/cm_renewal_indexed_score_plasticity
-artifact_status=FROZEN_FOR_CM_FEASIBILITY_AND_EXTERNAL_REVIEW
+artifact_status=FROZEN_FOR_ROOT_PUBLICATION_AND_SAME_CONVERSATION_PRO_REREVIEW
 scientific_activity_started=false
 production_authorized=false
-external_mathematical_closure=not_yet_requested
+external_mathematical_closure=r05_pending_same_conversation_rereview_r04_revision_required
 ```
 
 ## Decision question and claim boundary
@@ -39,29 +39,40 @@ recurrence.
 The conclusion-bearing design is the `architecture x feedback` crossing
 
 ```text
-RISP-INTACT       RISP-TWIN-YOKED
-SIGN-RNN-INTACT   SIGN-RNN-TWIN-YOKED.
+RISP-INTACT       RISP-MARGINAL-TWIN
+SIGN-RNN-INTACT   SIGN-RNN-MARGINAL-TWIN.
 ```
 
-Yoking is evaluation-only and uses a prospectively keyed, exact pre-interval
-environment twin. It substitutes only the advantage sign. It does not retrain
-the policy, select an opposite sign, reveal an unchosen action, or use an
-observed treatment outcome to choose a donor.
+Yoking is evaluation-only. At every boundary it draws an independent replicate
+sign from the recipient outcome law conditional on the controller's complete
+pre-outcome information set and selected action, after analytically
+marginalizing the recipient-only hidden target. It substitutes only that sign.
+The marginal-twin generator never reads the recipient hidden target, current or
+past recipient outcomes, recipient next state, an unchosen action, or observed
+performance. It does not retrain the policy or select an opposite sign.
 
-The strongest alternatives are generic reward-conditioned recurrence, the
-fixed coordinate prior and its optimization path, critic calibration, and
+The strongest alternatives are a learned score-oriented recurrence inside the
+function-equivalent SIGN-RNN, the fixed coordinate prior and its optimization
+path, temporal-correlation sensitivity, critic calibration, and
 different numbers of renewal opportunities per physical time. The toy removes
 differential critic fitting and matches work/update opportunity within every
 schedule, but it cannot remove the genuine fact that smaller `k` permits more
 legal actions. All task effects are therefore measured per primitive time and
 renewal counts are reported separately.
 
-The maximum claim is finite and toy-local. RISP-B1 cannot establish an unbiased
-full-return policy-gradient update, necessity of natural scores, arbitrary or
-unknown `k`, continual learning, learned termination, mid-hold adaptation,
-skill rebinding, variable `N`, cooperative credit, safety, UAV value, or real
-deployment value. No observation, threshold, or acceptance from another
-direction is used here.
+The maximum positive claim is: on this exact two-independent-agent renewal toy,
+under the registered finite training budget, the explicit selected-score
+coordinate prior improves mean physical-time value over the function-equivalent
+SIGN-RNN parameterization on the registered held-out/post-feedback target-window
+mixture, and that architecture difference depends on coupling updates to the
+realized outcome rather than to an outcome-history-independent conditional
+replicate. Even this claim is a finite coordinate/optimization-prior result. It
+does not establish benefit in each switch direction unless the separate
+bidirectional label passes. RISP-B1 cannot establish an unbiased full-return
+policy-gradient update, necessity of natural scores, arbitrary or unknown `k`,
+continual learning, learned termination, mid-hold adaptation, skill rebinding,
+variable `N`, cooperative credit, safety, UAV value, or real deployment value.
+No observation, threshold, or acceptance from another direction is used here.
 
 ## Fixed two-agent renewal toy
 
@@ -124,22 +135,40 @@ o_n = [tau_n/T, k_n/12].
 
 The policy never receives `c_n`, `Y_n`, primitive reward samples, the
 discounted reward magnitude, critic belief, baseline, TD residual magnitude,
-recipient next hidden target, twin outcome, or future `k`. A shared feedback
-engine observes the selected action and realized rewards, constructs the packet
-defined below, and exposes only its controller-visible view. This restriction
-is identical in both architecture arms and both feedback cells.
+recipient next hidden target, replicate outcome, or future `k`. In intact cells
+the feedback engine uses the realized recipient reward; in marginal-twin cells
+it uses only the independent replicate sign construction below. It exposes only
+the controller-visible packet view. This restriction is identical in both
+architecture arms.
 
-The per-agent task endpoint is physical-time mean reward. The episode endpoint
-averages both agents:
+The full-episode per-agent task endpoint is physical-time mean reward. The
+episode endpoint averages both agents:
 
 ```text
 J = (1/(2*T)) * sum_i sum_(t=0)^(T-1) r_(i,t).
 ```
 
-Also report the first 48 post-switch ticks (`t=96,...,143`), physical-time
-regret against the exact-state-oracle descriptive controller, action entropy,
-renewal count, and recovery curves indexed separately by physical ticks and by
-completed renewals. None replaces `J` as the primary endpoint.
+For conclusion-bearing target inference, fixed `k=12` uses this full-episode
+endpoint. Each switch schedule uses only ticks after the first completed hold
+under the new duration has updated the fast state and a later action can read
+it:
+
+```text
+Q(12)      = mean reward over t=0,...,191
+Q(4->12)   = mean reward over t=108,...,191
+Q(12->4)   = mean reward over t=100,...,191.
+```
+
+Each mean includes both agents and divides by exactly twice the displayed
+number of primitive ticks. The windows deliberately exclude the first new-k
+hold, because its action was selected before any new-k outcome existed. Full
+episode switch `J`, the first 48 post-switch ticks, physical-time regret against
+the exact-state-oracle descriptive controller, action entropy, renewal count,
+and recovery curves indexed separately by physical ticks and by completed
+renewals are report-only diagnostics. A pooled `Q` result is a claim about the
+registered three-window mixture; it is not a claim of benefit in each switch
+direction. A separate bidirectional label is allowed only under the literal
+schedule bounds defined below.
 
 ## Exact policy and low-rank fast-state port
 
@@ -226,21 +255,21 @@ b_(n+1) = uniform over A \ {a_n}       if supplied sign is -1.
 ```
 
 The zero-sign branch leaves `b` unchanged, although it cannot occur under the
-finite exact DGP. In a twin-yoked cell this same filter is deliberately driven
-by the supplied twin sign, never the hidden recipient outcome. It is then a
-counterfactual controller belief rather than an oracle belief about the
-recipient environment. This prevents a later baseline or packet from leaking a
-previous recipient sign back into the yoked controller. No parameter is fitted,
-and no training, held-out, switch, or outcome-selected datum calibrates the
-filter.
+finite exact DGP. In a marginal-twin cell this same filter is deliberately
+driven by the supplied replicate sign, never the hidden recipient outcome. It
+is then a counterfactual controller belief rather than an oracle belief about
+the recipient environment. A separate non-policy-visible marginal law `rho`
+defined below generates replicate signs without reading the recipient hidden
+state or outcome lineage. No parameter is fitted, and no training, held-out,
+switch, or outcome-selected datum calibrates either recursion.
 
 For any candidate action,
 
 ```text
-m_n(a) = E[r_t | b_n,a] = b_n(a)-0.5.
+m_n(a) = b_n(a)-0.5.
 ```
 
-The frozen action-independent critic baseline is the current-policy expectation
+The frozen action-independent controller baseline functional is
 
 ```text
 B_n = C(d_n) * sum_a pi_n(a) m_n(a).
@@ -351,66 +380,102 @@ normalizer, or switch reset would define a different treatment.
 On freely acting trajectories, both architectures use byte-identical packet
 construction and exactly the same deployable information, but their numerical
 packets can differ after their actions and histories diverge. Literal numerical
-packet equality is required in the exact one-boundary forks used for the twin
-cut and conformance diagnostics: the pre-update state, action, policy, duration,
-score, Fisher, eligibility, critic belief, and baseline are cloned before the
-two outcome draws. Claiming literal equality across already divergent on-policy
-trajectories is explicitly forbidden.
+packet equality is required in the exact one-boundary forks used for the
+marginal-twin cut and conformance diagnostics: the controller filtration,
+pre-update state, action, policy, duration, score, Fisher, eligibility, critic
+belief, `rho`, and baseline are cloned before the recipient and replicate
+draws. Claiming literal equality across already divergent on-policy trajectories
+is explicitly forbidden.
 
-## Prospective exact-twin sign yoke
+## Prospective information-set marginal-twin sign yoke
+
+Let `H_n` be the controller's complete pre-outcome filtration: initial schedule,
+visible observations through `tau_n`, all previously selected actions, all
+previously supplied signs, the resulting controller belief and fast state, the
+current policy, selected `a_n`, duration, score, Fisher, eligibility, and
+baseline. It excludes every recipient hidden target, recipient outcome/reward,
+recipient residual, and recipient next state.
+
+The yoke engine maintains `rho_n`, the exact distribution of the recipient
+hidden target conditional on `H_n` when actual recipient outcomes are never
+revealed. Initially `rho_0=(1/3,1/3,1/3)`. For selected `a_n`, define
+
+```text
+pbar_n = P(Y_n^R=+1 | H_n,a_n) = 0.25 + 0.50*rho_n(a_n)
+rho_(n+1)(a_n)      = pbar_n
+rho_(n+1)(c!=a_n)   = (1-pbar_n)/2.
+```
+
+The update marginalizes the registered recipient transition over its unobserved
+actual outcome. It uses the action history but neither the actual outcome nor
+the supplied replicate sign. Because earlier supplied signs are generated from
+this law independently of the recipient lineage, induction makes `rho_n` the
+correct information-set conditional recipient law.
 
 The feedback intervention is applied only after final checkpoints are frozen.
-For every recipient interval in a yoked cell:
+For every recipient interval in a marginal-twin cell:
 
-1. At `tau_n`, clone the complete pre-interval simulator state, including
-   hidden `c_n`, visible time, recipient analytic belief, policy distribution,
-   chosen action, duration, and stored eligibility.
-2. Before either interval outcome is inspected, bind a separate twin RNG key
-   determined only by algorithm seed, schedule, episode, agent, and renewal
-   index.
-3. Force the twin to execute the same selected action for the same duration.
-   Draw an independent `Y_twin` from the same conditional law and set its held
-   primitive rewards to that outcome. Do not simulate or expose unchosen
-   actions.
-4. Use the recipient's same `B_n` to form
-   `delta_twin=R_twin-B_n` and apply the exact zero/deadband sign rule.
-5. Substitute only `s_twin` (and deterministic fields derived from it,
-   `s_twin*e_n` and `s_twin*||e_n||`) into the recipient fast transition. The
-   recipient environment continues with its actual outcome and hidden target.
-   Its reward, residual, belief update, and next target remain inaccessible to
-   the yoked controller; its controller belief is updated from `s_twin` only.
+1. Freeze `H_n`, including the chosen action, duration, policy, eligibility and
+   baseline, before the recipient outcome or replicate uniform is inspected.
+2. Bind a separate prospective RNG key determined only by algorithm seed,
+   schedule, episode, agent and renewal index.
+3. Draw one independent uniform and set `Y_n^T=+1` iff it is below `pbar_n`;
+   otherwise set `Y_n^T=-1`. Set `R_n^T=C(d_n)Y_n^T`, form
+   `delta_n^T=R_n^T-B_n`, and apply the exact sign rule. No hidden target or
+   unchosen action is simulated or read.
+4. Substitute only `s_n^T` and its deterministic packet products into the
+   recipient fast transition. Drive the controller belief only from `s_n^T`.
+   Independently advance `rho` by the marginalized formula above.
+5. Let the recipient environment continue from its actual `Y_n^R` and target
+   transition for task scoring only. Neither value enters `rho`, `b`, `x`, a
+   later supplied sign, or any policy-visible field.
 
-Conditional on the complete pre-interval state and chosen action, the twin sign
-has exactly the recipient sign's marginal law and is independent of the
-recipient outcome draw and recipient next target. This is context matching by
-construction, not nearest-neighbor donor selection. The intervention never
-chooses a discordant or opposite sign. Because horizons and schedules contain
-only complete holds, there is no missing twin renewal. A missing or nonfinite
-twin record invalidates the paired replicate and is never imputed.
+Thus, prospectively and for every history,
 
-For each target schedule, feedback integrity requires all of the following on
-the registered evaluation panel:
+```text
+Law(s_n^T | H_n,a_n) = Law(s_n^R | H_n,a_n)
+s_n^T independent of (Y_0:n^R,c_0:n+1^R) conditional on H_n,a_n.
+```
 
-- at least `0.10` empirical probability for each nonzero twin sign within each
-  `(k, selected-action-matches-hidden-target)` stratum;
-- recipient/twin nonzero-sign discordance in `[0.20,0.80]` in each such stratum;
-- zero-sign rate below `0.05` in every cell;
-- identical counts and timing of recipient and twin packets; and
-- no policy-visible recipient reward, residual magnitude, belief, posterior,
-  hidden target, or next-target field.
+This is controller-context matching by exact marginalization, not hidden-state
+matching, donor selection, opposite-sign selection or nearest-neighbor yoking.
+It severs the recipient outcome lineage from the supplied sign sequence while
+preserving the sign law available at the controller information set. Because
+horizons contain complete holds, there is no missing replicate renewal. A
+missing or nonfinite record invalidates the paired replicate and is never
+imputed.
 
-Failure makes the feedback interaction nonidentifying. It is not repaired by
-permuting donors, selecting opposite signs, widening strata, or conditioning on
-observed performance.
+For each architecture and target schedule separately, pooling its eight seeds
+and 64 episodes only after the complete panel exists, feedback integrity
+requires all of the following:
 
-The immediate causal timing diagnostic forks each frozen controller at its
-first completed nonterminal interval wholly under fixed held-out `k=12`, and at
-the first completed nonterminal interval after each switch. The intact and
-twin-sign copies share the exact pre-update state and packet, then act freely
-for the next legal hold. Report their next-action total variation and next-hold
-physical return. Full-episode factorial `J` remains the value endpoint; the
-fork only proves that any feedback effect occurs after a legal completed
-renewal rather than during the current hold.
+- the logged `pbar_n` is in `[0.25,0.75]` on every replicate row and both
+  empirical nonzero sign probabilities are at least `0.10` within each
+  `(k, selected-action)` stratum;
+- recipient/replicate sign discordance is in `[0.20,0.80]` within each
+  `(k, selected-action-matches-recipient-hidden-target)` audit stratum;
+- zero-sign rate is exactly zero up to a fail-closed nonfinite anomaly;
+- recipient and replicate packet counts and timing are identical; and
+- deterministic dependency sentinels confirm that changing recipient hidden
+  targets and outcomes while holding `H`, actions and replicate uniforms fixed
+  changes no `rho`, supplied sign, controller belief, fast state or later
+  policy-visible packet field.
+
+Failure makes the architecture-by-feedback interaction nonidentifying. It is
+not repaired by permuting donors, selecting opposite signs, widening strata, or
+conditioning on observed performance.
+
+The immediate causal timing diagnostic forks each architecture from its
+registered marginal-twin trajectory at the first completed nonterminal interval
+wholly under fixed held-out `k=12`, and at the first completed nonterminal
+interval after each switch. The copies share the exact recipient environment,
+pre-update controller state, packet and `rho`; one uses the realized recipient
+sign at that boundary and one uses the prospectively drawn marginal replicate
+sign, then they act freely for the next legal hold. The prehistory remains the
+same outcome-history-free marginal-twin history in both copies. Report
+next-action total variation and next-hold physical return. The registered `Q`
+windows remain the value endpoint; the fork only establishes that the first
+possible current-sign effect is after a legal completed renewal.
 
 ## Training, schedules, randomization, and fixed counts
 
@@ -479,7 +544,7 @@ therefore cross seen and held-out support. There is no switch exposure during
 training.
 
 For every algorithm seed, schedule, architecture, and feedback cell, evaluation
-uses exactly 64 complete episodes. The intact and twin-yoked cells clone the
+uses exactly 64 complete episodes. The intact and marginal-twin cells clone the
 same final checkpoint. Episode environment streams are paired across all four
 factorial cells; the yoke uses a disjoint prospective twin namespace. Initial
 target, interval outcome, and negative-target choice draws use NumPy `PCG64`
@@ -538,7 +603,7 @@ interval of each episode. No one-based reinterpretation is permitted.
 
 All architectures, feedback cells, and descriptive controllers reuse these
 base streams. Their on-policy actions may map a shared uniform to different
-outcomes, but cannot change consumption count or order. The exact twin at
+outcomes, but cannot change consumption count or order. The marginal twin at
 renewal `n` uses one separately instantiated stream and one raw word:
 
 ```text
@@ -549,11 +614,37 @@ TWIN_KEY = 30_000_000_000
            + 1_000*agent + n.
 ```
 
-It applies the same action-match threshold to the cloned hidden target and
-recipient action. Architecture, feedback, action, reward, and performance never
-enter a key. Changing a key, draw count, consumption order, conversion, or
-conditional mapping after any question-relevant output creates a new science
-revision.
+It sets `Y_n^T=+1` exactly when `U53(raw_twin)<pbar_n`; it never reads or clones
+the recipient hidden target. Architecture, feedback, action, reward, and
+performance never enter a key. Changing a key, draw count, consumption order,
+conversion, or conditional mapping after scientific activity begins creates a
+new science revision and is forbidden for the active confirmatory lock.
+
+The immediate timing diagnostic is run for all eight seeds, both architectures,
+all 64 marginal-twin episodes and the three target schedules. At the registered
+fork boundary both branches reuse one action uniform and two environment raw
+words from disjoint streams:
+
+```text
+FORK_ENV_KEY = 70_000_000_000
+               + 1_000_000*algorithm_seed
+               + 100_000*schedule_id
+               + 100*episode + agent
+
+FORK_ACTION_KEY = 80_000_000_000
+                  + 1_000_000*algorithm_seed
+                  + 100_000*schedule_id
+                  + 100*episode + agent.
+```
+
+`FORK_ACTION_KEY` consumes one word per agent; both branches map that same
+uniform through their branch-specific policies. `FORK_ENV_KEY` consumes
+`raw_Y,raw_alt` once per agent in that order and both branches reuse
+the pair under their possibly different selected actions. No target-init word
+is consumed because the recipient pre-fork environment is cloned. The
+diagnostic adds exactly `3,072` paired forks and `114,688` agent-ticks of
+one-hold continuation (`1,024 pairs per schedule * 2 branches * 2 agents *
+(12+12+4)`). It cannot enter any efficacy estimand or branch margin.
 
 Descriptive `UNIFORM` and `STATE-ORACLE` controllers are evaluated on the same
 64 episode tapes. `UNIFORM` samples all three actions equally. `STATE-ORACLE`
@@ -562,7 +653,7 @@ support floor, assigns the remaining mass to that target action. It is a
 privileged-information headroom control, not a primary comparator and cannot
 establish algorithm value by itself.
 
-The registered maximum, excluding the cheap exact twins, is
+The registered base maximum, excluding marginal-replicate draws, is
 
 ```text
 training:   8 seeds * 2 architectures * 4096 episodes * 2 agents * 192 ticks
@@ -574,42 +665,154 @@ controls:   8 * 2 controllers * 5 * 64 * 2 * 192
 total     = 31,064,064 agent-ticks.
 ```
 
-Exact twins add at most one outcome-only simulation for each nonterminal yoked
-packet and never call another policy. The requested technical class is one CPU
-process, no GPU, at most 1 GiB RSS and 60 minutes wall time. A CM finding that
-these limits are not conservative returns a resource-concept clarification;
-it does not authorize fewer seeds, episodes, schedules, cells, or updates.
+The same ledger contains exactly `4,718,592` training action decisions,
+`4,587,520` nonterminal training updates, `622,592` factorial evaluation
+decisions, `602,112` factorial nonterminal updates, and `311,296` descriptive
+control decisions. Including the fixed immediate-fork continuation gives
+`31,178,752` agent-ticks before outcome-only marginal-replicate arithmetic.
+
+The two marginal-twin architecture cells add exactly `301,056` outcome-only
+draws (`8 seeds * 2 architectures * 64 episodes * 2 agents *
+(47+23+15+31+31)`) and never call another policy. The requested technical class is one CPU
+process, no GPU, at most 1 GiB RSS and a 60-minute launch estimate. The memory
+bound is deterministic; wall time is a later CM engineering measurement and
+acceptance fact, not a mathematical certificate. A CM finding that these limits
+are not conservative returns a resource-concept clarification; it does not
+authorize fewer seeds, episodes, schedules, cells, or updates.
+
+## Two-lock answerability and deterministic capability certificate
+
+Lock 1 is deterministic and precedes every random word. It may check only
+structural answerability and implementation conformance. It may not initialize
+a learned checkpoint, draw or fit a stochastic object, inspect an efficacy or
+held-out contrast, select a seed/checkpoint/hyperparameter, or estimate learned
+competence. Lock 2 is the complete frozen training/evaluation experiment above.
+It begins only after Lock 1 passes and uses the already registered disjoint
+model, training, evaluation, action and marginal-twin namespaces without any
+development data.
+
+Lock 1 uses schema `RISP-B1-LOCK1-20260813-05`, IEEE binary64 reference
+arithmetic and IEEE binary32 candidate tensors. Stable softmax subtracts the
+maximum safe logit before exponentiation. Euclidean projection is identity for
+norm at most three and otherwise multiplies by `3/||x||_2`. Candidate/reference
+absolute error must be at most `1e-6` for state, logits and probabilities.
+This tolerance is frozen; nonfinite values fail the certificate.
+
+The ordered zero-based packet coordinates are exactly
+
+```text
+0:1 x; 2:4 action one-hot; 5 sign; 6:7 e; 8:9 sign*e;
+10 sign*||e||; 11 k/12; 12 tau/T.
+```
+
+`M_RISP[0,8]=1`, `M_RISP[1,9]=1`, and all other entries are zero.
+`M_SIGN_RNN[:,10]=(1,1)/sqrt(2)` and all other entries are zero. The
+hand-authored containment bank uses `W_R=0`, `b=0`, and
+`W_G=M_RISP-M_SIGN_RNN`:
+
+| row | `x` | action | `s` | `e` | `k/12,t/T` | expected preprojection = postprojection |
+|---|---|---|---:|---|---|---|
+| C1 | `(0,0)` | LEFT | `+1` | `(0.6,-0.8)` | `(1/3,1/4)` | `(0.06,-0.08)` |
+| C2 | `(2.99,0)` | HOLD | `+1` | `(1,0)` | `(1,1/2)` | pre `(3.09,0)`, post `(3,0)` |
+| C3 | `(0.2,-0.1)` | RIGHT | `-1` | `(-0.3,0.4)` | `(2/3,3/4)` | `(0.23,-0.14)` |
+
+For every row, the complete 13-vector is constructed literally from the named
+components. Both arms must produce the displayed state and identical logits
+and probabilities under any shared policy port. The finite bank checks the
+implementation; the algebraic translation proves equality for the full class.
+
+The deterministic action-reachability fixture sets the shared base logits to
+zero and the shared port so that `V^T h=(1,0)`, the first column of `U` is
+`(1,0,-1)`, and its second column is zero. This is realized by a constant
+encoder with second-layer bias `(atanh(1/2),0,0,0)` and a first V column
+`(2,0,0,0)`. From `x=(0,0)`, use the C2 packet components without its old state;
+both translated transitions produce `x'=(0.1,0)` and unbounded fast logits
+`(0.1,0,-0.1)`. The no-update clone remains uniform. After the registered safe
+logit and support-floor maps, every action probability is at least `1/60` and
+the updated-versus-no-update TV is greater than `0.03`. This fixture proves only
+structural prospective reachability; it is not a learned TV or competence gate.
+
+The no-leakage sentinel starts `rho=(1/3,1/3,1/3)`, selects LEFT, and fixes the
+replicate uniform at `0.4`, hence `pbar=5/12` and supplied sign `+1`. It compares
+two recipient worlds with actual first outcomes `+1` and `-1`. Both must produce
+the same controller belief, fast state and `rho'=(5/12,7/24,7/24)`. With the
+same next action HOLD and next replicate uniform `0.4`, both use
+`pbar=19/48` and supplied sign `-1`, again producing identical later
+controller-visible fields despite different recipient hidden-state lineages.
+Actual recipient rewards and targets may differ and must be absent from the
+dependency trace.
+
+Lock 1 also checks the literal schedule/index domains, terminal-update rule,
+every key formula, unsigned 64-bit range, fixed per-row draw budgets, namespace
+collision inequalities, and the published decision/update/draw totals. Its
+resource manifest fixes binary32 learned tensors, at most 48 renewal states per
+episode graph, vectorized 16-episode batches split by duration, serial seed
+lifecycle, discarded graphs after each Adam update, streamed seed/schedule
+summaries, no per-tick graph, and no per-row durable JSON. A static live-memory
+bound below 1 GiB is required; 60-minute wall remains a later engineering fact.
+
+Scientific activity begins irreversibly when Lock 2 consumes or materializes
+its first random word from the seed-zero model stream or any registered
+confirmatory environment/action/marginal-twin stream, whichever occurs first. The first
+training initialization therefore starts activity. After that boundary there
+is no treatment, host, objective, seed, key, checkpoint, threshold, window,
+branch, or certificate change. A Lock-1 conformance failure permits only
+unchanged-science engineering repair before any Lock-2 word; exhaustion of the
+fixed certificate does not authorize a stochastic development menu.
 
 ## Activity, parity, and validity conditions
 
-Question-relevant activity begins only when a frozen evaluation cell completes
-a nonterminal hold, constructs a finite packet, applies exactly one registered
-fast update, and a later legal policy decision actually reads the resulting
-state. Training loss, parameter change, a completed terminal hold, a packet
-without a later action, or any mid-hold diagnostic is not question-relevant
-activity.
+The activity boundary is the Lock-2 first-random-word rule above. For reporting
+whether the mechanism was actually exercised, a separate outcome flag requires
+a frozen evaluation cell to complete a nonterminal hold, construct a finite
+packet, apply one registered fast update, and have a later legal decision read
+the resulting state. Failure of that outcome flag makes the result
+nonidentifying but never rewinds activity or licenses a new run.
 
 Every conclusion additionally requires:
 
-1. exact decision/update counts in the table, complete `T=192` episodes, common
+1. Lock 1 passed before the activity boundary; the complete Lock-2 panel exists;
+   and every architecture/feedback/target-schedule cell contains at least one
+   nonterminal fast update that a later legal decision reads;
+2. exact decision/update counts in the table, complete `T=192` episodes, common
    action support, and no mid-hold policy rows;
-2. identical 117-scalar architecture counts, optimizer exposure, BPTT/detach
+3. identical 117-scalar architecture counts, optimizer exposure, BPTT/detach
    law, packet schema, and transition matvec count;
-3. the algebraic mask-translation conformance identity;
-4. `||e_n||_2>0.05` for at least 95% of nonzero-sign target packets;
-5. projection active on fewer than 10% of target updates;
-6. next-policy total variation at least `0.005` after at least 25% of nonzero
-   target updates in both intact architectures;
-7. every feedback-integrity condition above;
-8. final checkpoints and all slow/recurrent parameters frozen before any
-   target or yoked episode; and
-9. a finite complete result for all eight algorithm seeds.
+4. the algebraic mask-translation conformance identity;
+5. separately in every architecture-by-feedback cell, pooling its eight seeds
+   and three target schedules only after completion, `||e_n||_2>0.05` for at
+   least 95% of its nonzero-sign target packets; seed-by-schedule fractions are
+   reported and never select the panel;
+6. separately in every architecture-by-feedback cell, projection is active on
+   fewer than 10% of its target updates, with seed-by-schedule fractions
+   reported but not used for selection;
+7. for every nonterminal, nonzero-sign target update in an intact cell, define
+   the no-update clone by retaining `x_n` while holding the same next
+   observation `o_(n+1)`, and compute
+   `TV_update=0.5*sum_a |pi(a|o_(n+1),x_(n+1))-pi(a|o_(n+1),x_n)|`;
+   pooling all such rows over all eight seeds, 64 episodes and three target
+   schedules separately within each architecture, at least 25% must have
+   `TV_update>=0.005`; seed-by-schedule proportions are also reported but do
+   not select or stop the panel;
+8. every feedback-integrity condition above;
+9. final checkpoints and all slow/recurrent parameters frozen before any
+   target or marginal-twin episode; and
+10. a finite complete result for all eight algorithm seeds.
 
-To rule out a deliberately untrained generic comparator, SIGN-RNN-INTACT must
-capture at least 20% of the `STATE-ORACLE minus UNIFORM` mean-reward gap at both
-seen schedules. The gap itself must be at least `0.10`, and neither primary arm
-may capture more than 95% of it. Failure makes OOD architecture attribution
-nonidentifying; it is not a reason to add updates or tune on target schedules.
+To rule out a deliberately untrained comparator, define at each seen schedule
+from the eight seed-level full-episode means
+
+```text
+Gap(r) = mean_s[J_ORACLE,s(r)-J_UNIFORM,s(r)]
+Capture_A(r) = mean_s[J_AI,s(r)-J_UNIFORM,s(r)] / Gap(r).
+```
+
+The learned SIGN-RNN competence condition is `Gap(r)>=0.10`,
+`Capture_G(r)>=0.20`, and both intact `Capture_R(r)` and `Capture_G(r)` are at
+most `0.95`, separately at fixed `k=4` and fixed `k=8`. This is a prospective
+complete-panel Lock-2 observation, never Lock-1 evidence or a reason to stop,
+select, add updates, or tune on target schedules. Failure makes OOD architecture
+attribution nonidentifying.
 For the narrower statement that the score anchor specifically improves OOD
 transfer rather than all finite-budget learning, the two-sided 90% seed-level
 interval for `RISP-INTACT minus SIGN-RNN-INTACT` must also lie within
@@ -619,23 +822,27 @@ interval for `RISP-INTACT minus SIGN-RNN-INTACT` must also lie within
 
 Episodes are averaged within algorithm seed, schedule, architecture, and
 feedback cell. The eight algorithm seeds, not episodes or agents, are the
-independent uncertainty units. Let `J_AF,s(r)` be that seed-level mean, with
-`A in {R,G}` and `F in {I,Y}`. For every schedule define
+independent uncertainty units. Let `Q_AF,s(r)` be the registered seed-level
+target-window mean above, with `A in {R,G}` and `F in {I,M}` for intact and
+marginal-twin feedback. For every target schedule define
 
 ```text
-D_I(r)   = mean_s [J_RI,s(r)-J_GI,s(r)]
-D_Y(r)   = mean_s [J_RY,s(r)-J_GY,s(r)]
-Psi(r)   = mean_s [(J_RI,s-J_GI,s)-(J_RY,s-J_GY,s)]
-C_R(r)   = mean_s [J_RI,s(r)-J_RY,s(r)].
+D_I(r)   = mean_s [Q_RI,s(r)-Q_GI,s(r)]
+D_M(r)   = mean_s [Q_RM,s(r)-Q_GM,s(r)]
+Psi(r)   = mean_s [(Q_RI,s-Q_GI,s)-(Q_RM,s-Q_GM,s)]
+C_R(r)   = mean_s [Q_RI,s(r)-Q_RM,s(r)]
+C_G(r)   = mean_s [Q_GI,s(r)-Q_GM,s(r)].
 ```
 
-The primary target quantities average seed-level effects over exactly the three
-target schedules `{12,4->12,12->4}` before computing a `df=7` paired t
-interval. Exact `2^8` sign-flip p-values and all seed effects are reported but
-do not replace intervals or margins.
+For every pooled target quantity, first average its three within-seed effects
+over exactly `{12,4->12,12->4}`, then compute a `df=7` paired t interval across
+the eight seed averages. Exact `2^8` sign-flip p-values and all seed effects are
+reported but do not replace intervals or margins. The full-episode `J` values
+for switch schedules are descriptive and never substituted for `Q`.
 
-A **feedback-dependent RISP finite-toy advantage** requires all validity and
-adequacy conditions plus:
+A **realized-sign-coupled explicit-anchor finite-toy advantage** requires every
+validity condition and the literal SIGN-RNN seen-schedule competence condition
+plus:
 
 - the one-sided 95% lower bound for pooled target `D_I` exceeds `+0.020` mean
   reward per primitive tick;
@@ -643,46 +850,63 @@ adequacy conditions plus:
 - the one-sided 95% lower bound for pooled target `C_R` exceeds `+0.015`;
 - for each of the three target schedules, its simultaneous one-sided
   `1-0.05/3` lower bound for `D_I(r)` exceeds `-0.010`; and
-- the two-sided 90% interval for pooled target `D_Y` lies wholly inside
+- the two-sided 90% interval for pooled target `D_M` lies wholly inside
   `[-0.010,+0.010]`.
 
-The final condition prevents a coordinate advantage that survives severing
-recipient feedback from being called signed-score plasticity. The immediate
-fork must also show that the first changed policy/output occurs only after the
-completed update; it has no separate numeric success margin.
+The final condition prevents a coordinate advantage that survives replacement
+of realized signs by outcome-history-independent conditional replicates from
+being attributed to realized-sign coupling. The immediate fork must also show
+that the first changed policy/output occurs only after the completed update; it
+has no separate numeric success margin.
 
 Interpret outcomes in this order:
 
-1. **Invalid or nonidentifying.** Any activity, packet, support, parity,
-   containment, critic, yoke, count, freeze, output, headroom, or finite-value
-   condition fails. No positive, negative, equivalence, or null claim follows.
-2. **Material harm.** If valid, a one-sided 95% upper bound for pooled target
-   `D_I` is below `-0.020`, or any simultaneous target-schedule upper bound is
-   below `-0.030`, reject this exact RISP treatment on this toy. This overrides
-   a favorable interaction elsewhere.
-3. **Feedback-dependent finite-toy advantage.** All positive conditions pass.
-   Retain the composite score-anchored coordinate prior as a direct variable-`k`
-   candidate on this finite surface. If the seen equivalence condition also
-   passes, the result supports the narrower finite-budget OOD-inductive-bias
-   reading; otherwise it supports only an overall finite-budget package effect.
-4. **Package value without feedback integrity.** Pooled target `D_I` passes but
-   `Psi`, `C_R`, or yoked equivalence does not. Report an architecture/training
-   package effect only; do not attribute it to recipient signed-score feedback.
-5. **Generic sign memory sufficient.** The two-sided 90% intervals for pooled
-   `D_I` and `Psi` both lie within `[-0.010,+0.010]`, both intact arms clear
-   adequacy, and intervals are otherwise conclusive. On this treatment and
-   budget, the explicit score anchor adds no registered minimum value beyond
-   generic sign-state recurrence. This does not prove global equivalence.
-6. **Feedback useful generically.** Both architectures improve intact over
-   yoked by at least the registered `+0.015` lower-bound magnitude while `Psi`
-   is equivalent to zero. Recipient feedback matters, but RISP specificity is
-   unsupported.
-7. **Statistically unresolved.** Valid data fit none of the above. Do not add
+1. **Invalid or nonidentifying.** Lock 1 did not pass before activity, or any
+   activity, packet, support, parity, containment, critic, yoke, count, freeze,
+   learned competence, output, headroom, or finite-value condition fails. No
+   positive, negative, equivalence, or null claim follows. A complete Lock-2
+   panel is still retained; these learned conditions never stop or select it.
+2. **Material harm.** Apply one Bonferroni family to four one-sided upper-bound
+   tests: pooled target `D_I` and each of the three schedule-specific `D_I(r)`
+   use alpha `0.05/4`, hence one-sided 98.75% upper bounds. If the pooled upper
+   bound is below `-0.020`, or any schedule upper bound is below `-0.030`, reject
+   this exact RISP treatment on this toy. This familywise-0.05 disposition
+   overrides a favorable interaction elsewhere.
+3. **Realized-sign-coupled explicit-anchor advantage.** All positive conditions
+   pass. Retain the composite score-anchored coordinate prior on the registered
+   finite target-window mixture. If the seen equivalence condition also passes,
+   the result supports the narrower OOD finite-budget prior reading; otherwise
+   it supports only an overall finite-budget package effect. It does not prove
+   natural-score necessity or exclusive expressivity.
+4. **Intact package value without the registered coupling interaction.** The
+   pooled `D_I` lower bound exceeds `+0.020`, but one or more of `Psi`, `C_R`, or
+   marginal-twin `D_M` equivalence fails. Report only an intact-regime
+   architecture/training package effect.
+5. **No registered minimum benefit of the explicit score anchor.** The
+   two-sided 90% intervals for pooled `D_I` and `Psi` both lie wholly inside
+   `[-0.010,+0.010]` and the literal SIGN-RNN competence condition passes. This
+   says only that the fixed explicit anchor adds no registered minimum benefit
+   over the function-equivalent SIGN-RNN parameterization at this budget;
+   SIGN-RNN may itself learn score-oriented transitions.
+6. **Statistically unresolved.** Valid data fit none of the above. Do not add
    seeds, weaken margins, select a favorable schedule, or automatically rerun.
 
-An effect visible per renewal but absent from physical-time `J`, or an effect
-confined to one switch direction, is reported as update-frequency geometry or
-directional hysteresis and cannot satisfy the pooled variable-`k` claim.
+After the primary disposition, compute two compatible secondary labels. They do
+not change branch precedence:
+
+- `BOTH_ARCHITECTURES_FAVOR_REALIZED_SIGN_REGIME` applies iff the one-sided 95%
+  lower bounds for pooled `C_R` and pooled `C_G` both exceed `+0.015` and the
+  two-sided 90% interval for pooled `Psi` lies wholly inside
+  `[-0.010,+0.010]`. It means only that both registered architectures outperform
+  their marginal-twin cells; it is not a no-feedback or generic-feedback claim.
+- `BIDIRECTIONAL_POSTFEEDBACK_POSITIVE` applies iff the one-sided
+  `1-0.05/2=97.5%` simultaneous lower bounds for `D_I(4->12)` and
+  `D_I(12->4)` both exceed zero. Without this label, the primary pooled result
+  makes no claim of benefit in each direction.
+
+An effect visible per renewal but absent from physical-time `Q` is reported as
+renewal-geometry sensitivity. Directional concentration is reported from the
+schedule intervals and cannot be relabeled as bidirectional benefit.
 
 ## Prospective action-hold bridge
 
