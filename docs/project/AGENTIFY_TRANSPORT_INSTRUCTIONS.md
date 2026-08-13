@@ -5,7 +5,7 @@ document_kind=canonical_transport_operations_manual
 scope=ChatGPT_External_Pro|External_Gemini
 transport_core=Agentify_strict_review_query
 provider_mapping=chatgpt|gemini
-version_basis=@agentify/desktop_0.2.4+d94ee4b_2026-08-13
+version_basis=@agentify/desktop_0.2.4+9679872_2026-08-13
 ```
 
 This is the canonical operating manual for every HMASD Agentify transport
@@ -64,11 +64,12 @@ Most recent failures were operator/contract failures, not provider failures:
 The confirmed Agentify defects are repaired in source commit `a9471f7`; source
 commit `e12caf8` adds the provenance-preserving v1-to-v2 ledger migration needed
 to load older valid COMPLETE receipts without weakening new-operation
-enforcement. Current source commit `d94ee4b` includes the collision-resistant
+enforcement. Current source commit `9679872` includes the collision-resistant
 review plain-text identity model, the verified-selection
 `agentify_review_composer_replace_v2` contract, atomic click-time verification,
-and defect-J durable post-click observed-turn evidence. Section 15 retains the
-defects as regression contracts. A running desktop must load `d94ee4b` before
+defect-J durable post-click observed-turn evidence, and defect-K exact
+PRE/CODE rendered-turn extraction. Section 15 retains the defects as regression
+contracts. A running desktop must load `9679872` before
 operators rely on those guarantees.
 
 ## 2. The operating model
@@ -635,7 +636,7 @@ If an HMASD archive is missing or stale:
 | `review_composer_clear_failed` or `review_composer_caret_unavailable` | Full selection, native delete, draft-state synchronization, empty proof, focus, or collapsed insertion caret could not be proven | Pre-insert and pre-send terminal. Do not append, send, or retry inside the operation. |
 | `review_user_message_not_observed_after_click` / `click_no_turn` | The unique click occurred, but no new visible turn appeared before the observation deadline | No turn anchor may be fabricated. This is still post-click ambiguity and never permits resend inside the operation. |
 | `review_user_message_identity_unreadable` / `turn_unreadable` | Exactly one new visible turn ID exists, but its structural content serializer failed | Require durable `observedUserMessageId` and safe structure diagnostics; never infer content or resend. |
-| Rendered turn reports `PRE` / `CODE` structural unreadability | The old serializer rejected an exact raw-text wrapper or selected a nested code fragment instead of its outer content node | The historical operation is permanently ambiguous. Use no page action and never resend it. A future operation requires the outermost-candidate plus exact PRE/CODE text rule to be loaded; semantic Markdown reconstruction is forbidden. |
+| Rendered turn reports `PRE` / `CODE` structural unreadability | The old serializer rejected an exact raw-text wrapper or selected a nested code fragment instead of its outer content node | The historical operation is permanently ambiguous. Use no page action and never resend it. The active `9679872` runtime applies outermost-candidate plus exact PRE/CODE text extraction to future operations; semantic Markdown reconstruction remains forbidden. |
 | `review_user_message_content_mismatch` / `turn_content_mismatch` | Exactly one readable new turn exists, but narrow exact comparison failed | Preserve observed length/hash/mismatch metadata when available; never trim, broaden normalization, or resend. |
 | `review_composer_identity_mismatch_at_send` | Composer changed after initial identity receipt but before the Send boundary | Atomic check performed zero clicks. Archive pre-send; do not reuse the closed operation. |
 | `blocked=true`, login/CAPTCHA | Agentify detected a human/access gate | Do not send. Wait only within assignment timeout; archive pre-send terminal if unresolved. |
@@ -786,7 +787,7 @@ L1-owned scheduling, and ledger-only recovery.
 ## 15. Resolved Agentify defect packets and regression contract
 
 These packets preserve the original diagnosis and the regression invariant.
-They are implemented through Agentify commit `d94ee4b` in
+They are implemented through Agentify commit `9679872` in
 `chatgpt-controller.mjs`, `review-composer-replacement.mjs`,
 `review-transport.mjs`, `state.mjs`, `tab-manager.mjs`, `main.mjs`, and
 `http-api.mjs`, with offline fixture coverage in the corresponding tests.
@@ -1112,13 +1113,13 @@ nonetheless directly reproducible.
   text was the complete raw prompt or only its fenced-code fragment. The
   operation remains `SUBMITTED_UNVERIFIED`, its observed turn remains durable,
   and it must never be resent or promoted from the new rule after the fact.
-- **Implemented source candidate:** select outermost candidates by actual DOM
+- **Implemented fix:** select outermost candidates by actual DOM
   containment. Accept PRE only when it has exactly one CODE element child, then
   serialize the CODE subtree with the same exact text-node/inline allowlist and
   no normalization beyond the downstream named plain-text model. A fragment
   fails full-prompt comparison; malformed PRE, controls, unsupported nodes and
-  distinct candidates fail closed. This post-`d94ee4b` candidate is not an
-  active runtime guarantee until Root commits it and restarts Agentify.
+  distinct candidates fail closed. Agentify commit `9679872` implements this
+  rule, and the active desktop health commit has been verified as `9679872`.
 - **Regression:** `tests/chatgpt-controller.test.mjs` proves the exact synthetic
   heading, blank line, nested two-space list, fenced block and U+2014 payload
   survives `PRE > CODE` serialization; U+2014 mutation fails by code point; an
