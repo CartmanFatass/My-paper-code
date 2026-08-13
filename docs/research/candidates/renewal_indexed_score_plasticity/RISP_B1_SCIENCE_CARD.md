@@ -3,14 +3,14 @@
 ```text
 direction_id=renewal_indexed_score_plasticity
 candidate=RISP-B1
-revision=RISP-B1-SCIENCE-20260813-05
-supersedes=RISP-B1-SCIENCE-20260813-04_PRO_REVISION_REQUIRED
+revision=RISP-B1-SCIENCE-20260813-06
+supersedes=RISP-B1-SCIENCE-20260813-05_PRO_REVISION_REQUIRED
 owner=/root/em_renewal_indexed_score_plasticity
 paired_cm=/root/cm_renewal_indexed_score_plasticity
 artifact_status=FROZEN_FOR_ROOT_PUBLICATION_AND_SAME_CONVERSATION_PRO_REREVIEW
 scientific_activity_started=false
 production_authorized=false
-external_mathematical_closure=r05_pending_same_conversation_rereview_r04_revision_required
+external_mathematical_closure=r06_pending_same_conversation_rereview_r05_revision_required
 ```
 
 ## Decision question and claim boundary
@@ -43,9 +43,9 @@ RISP-INTACT       RISP-MARGINAL-TWIN
 SIGN-RNN-INTACT   SIGN-RNN-MARGINAL-TWIN.
 ```
 
-Yoking is evaluation-only. At every boundary it draws an independent replicate
-sign from the recipient outcome law conditional on the controller's complete
-pre-outcome information set and selected action, after analytically
+Yoking is evaluation-only. At every eligible completed nonterminal boundary it
+draws an independent replicate sign from the recipient outcome law conditional
+on the controller's complete pre-outcome information set and selected action, after analytically
 marginalizing the recipient-only hidden target. It substitutes only that sign.
 The marginal-twin generator never reads the recipient hidden target, current or
 past recipient outcomes, recipient next state, an unchosen action, or observed
@@ -81,7 +81,8 @@ the B1 reward decomposes by agent, so B1 makes no coordination or multi-agent
 credit claim. It tests whether a single reusable local controller can adapt
 across duration schedules while two independent copies execute concurrently.
 
-An episode has `T=192` primitive ticks. Each agent has a hidden target
+An episode has `T=192` primitive ticks. The canonical action/category order is
+always `(LEFT,HOLD,RIGHT)`. Each agent has a hidden target
 `c_n in {LEFT, HOLD, RIGHT}` at renewal `n`; it is not in the policy
 observation. At the episode start, `c_0` is uniform. At boundary `tau_n`, agent
 `i` samples one action `a_n` from the common three-action library and holds it
@@ -193,17 +194,44 @@ l_fast = U diag(x_i,n) V^T h_n,
 U in R^(3x2), V in R^(4x2).
 ```
 
-The unbounded logits `l_base+l_fast` pass through
+At each decision the binary32 encoder output, base-head output, stored fast
+state, `U`, and `V` are interpreted as their exact dyadic rational values. The
+canonical conversion of a finite IEEE binary32 bit pattern with sign `s`,
+biased exponent `E`, and fraction integer `F` is
 
 ```text
-l_safe = 6*tanh((l_base+l_fast)/6)
-soft = softmax(l_safe)
-pi(a|o,x) = 0.95*soft(a) + 0.05/3.
+Rat32(s,E,F) = (-1)^s * F * 2^-149                    if E=0
+Rat32(s,E,F) = (-1)^s * (2^23+F) * 2^(E-150)         if 1<=E<=254.
 ```
 
-All three actions therefore have common positive support in every cell. Action
-labels and physical meanings never change with `k`. The fast perturbation is a
+Both signed zeros map to zero; `E=255` is nonfinite and invalidates the row.
+Form the raw affine logits `r=l_base+l_fast` by exact rational multiplication
+and addition of these operands, reduce every numerator/positive denominator by
+their greatest common divisor, and perform no additional raw-logit rounding.
+The common action head is the exact rational map
+
+```text
+z_a = 6*r_a/(6+|r_a|)
+w_a = 16+(z_a+6)^2
+pi(a|o,x) = w_a / sum_b w_b.
+```
+
+This map is continuously differentiable in every raw logit, including at zero,
+and is strictly monotone in its own raw-logit coordinate before normalization.
+For finite `r`, `-6<z_a<6` and `16<w_a<160`, hence every action has exact common
+support `pi(a)>1/21` in every cell. Because every operand is rational, each
+`pi(a)` is a positive rational mass. The exact categorical sampler below draws
+this declared behavior law without a finite-grid approximation. Action labels
+and physical meanings never change with `k`. The fast perturbation remains a
 rank-at-most-two adapter of the common final policy map.
+
+This head and rationalization rule are byte-identical code paths in both
+architectures, both feedback cells, every no-update clone, and every fork. The
+resulting exact `pi` is the single probability law used for action sampling,
+`log pi(a)`, entropy, the fast-state score and Fisher, controller baselines,
+policy-TV comparisons, and descriptive policy reports. Implementations may use
+binary64 evaluation of logarithms and derivatives, but may not substitute a
+softmax, a rounded CDF law, or a different probability vector on any path.
 
 The encoder has 60 trainable scalars, the base head 15, and `(U,V)` 14, for 89
 policy scalars. The transition below has 28 learned scalars. Each primary arm
@@ -223,15 +251,21 @@ The behavior-policy score is evaluated in the pre-update fast-state
 coordinates:
 
 ```text
-g_n(a) = grad_x log pi(a | o_n,x_n)
+d_a = partial r_a/partial x = U[a,:] elementwise (V^T h_n)
+partial z_a/partial r_a = 36/(6+|r_a|)^2       # equals 1 at r_a=0
+partial w_a/partial r_a = 2*(z_a+6)*partial z_a/partial r_a
+g_n(a) = (w'_a/w_a)*d_a - sum_j pi_n(j)*(w'_j/w_j)*d_j
+       = grad_x log pi(a | o_n,x_n)
 g_n    = g_n(a_n)
 F_n    = sum_(a in A) pi_n(a) g_n(a) g_n(a)^T
 v_n    = solve(F_n + 0.05 I, g_n)
 e_n    = v_n / max(1, ||v_n||_2/1.0).
 ```
 
-The mixture distribution, smooth logit bound, common action set, and
-regularizer make this an analytic finite-support quantity. `e_n` is stored
+The rational behavior distribution, smooth bounded transform, common action
+set, and regularizer make this an analytic finite-support quantity. The score
+is literally the derivative of the same rational law used by the exact action
+sampler; it is not a nominal-softmax or finite-grid surrogate. `e_n` is stored
 through the hold, consumed exactly once, and then discarded. There is no
 cross-renewal eligibility trace. A nonfinite score, Fisher solve, eligibility,
 return, baseline, or sign invalidates that evaluation replicate; it is never
@@ -310,8 +344,11 @@ the old-`k_n` packet, updates the fast state once, discards `e_n`, and only then
 allows the next legal policy query. If an external schedule changes `k`, it is
 latched at this boundary: the completed record remains owned by old `k_n`, and
 the next observation contains new `k_(n+1)`. The current hold is never shortened
-or rebound. A hold completing exactly at terminal produces a diagnostic record
-but no fast update because no later action can consume it. An unfinished
+or rebound. A hold completing exactly at terminal contributes its recipient
+reward and detached residual to the outer training objective or evaluation
+diagnostic, then discards its pending eligibility. It produces no supplied-sign
+packet, fast update, controller-belief update, `rho` advance, or replicate event
+because no later action can consume them. An unfinished
 terminal hold produces neither a completed packet nor an update. All registered
 schedules divide `T`, so the latter case is an anomaly rather than an expected
 row.
@@ -340,7 +377,7 @@ M_SIGN_RNN: u in the column occupied by s_n*||e_n||_2; zero elsewhere.
 ```
 
 Each arm has an unconstrained learned `W in R^(2x13)` and `b in R^2`, and uses
-the identical affine work, fixed per-boundary step `eta=0.10`, and Euclidean
+the identical affine work, fixed exact-rational per-boundary step `eta=1/10`, and Euclidean
 projection:
 
 ```text
@@ -401,7 +438,7 @@ hidden target conditional on `H_n` when actual recipient outcomes are never
 revealed. Initially `rho_0=(1/3,1/3,1/3)`. For selected `a_n`, define
 
 ```text
-pbar_n = P(Y_n^R=+1 | H_n,a_n) = 0.25 + 0.50*rho_n(a_n)
+pbar_n = P(Y_n^R=+1 | H_n,a_n) = 1/4 + (1/2)*rho_n(a_n)
 rho_(n+1)(a_n)      = pbar_n
 rho_(n+1)(c!=a_n)   = (1-pbar_n)/2.
 ```
@@ -413,14 +450,16 @@ this law independently of the recipient lineage, induction makes `rho_n` the
 correct information-set conditional recipient law.
 
 The feedback intervention is applied only after final checkpoints are frozen.
-For every recipient interval in a marginal-twin cell:
+It exists only for a completed nonterminal interval whose fast update can be
+read by a later legal decision. For every such recipient interval in a
+marginal-twin cell:
 
 1. Freeze `H_n`, including the chosen action, duration, policy, eligibility and
-   baseline, before the recipient outcome or replicate uniform is inspected.
+   baseline, before the recipient outcome or replicate event tape is inspected.
 2. Bind a separate prospective RNG key determined only by algorithm seed,
    schedule, episode, agent and renewal index.
-3. Draw one independent uniform and set `Y_n^T=+1` iff it is below `pbar_n`;
-   otherwise set `Y_n^T=-1`. Set `R_n^T=C(d_n)Y_n^T`, form
+3. Apply the frozen `ExactCat((pbar_n,1-pbar_n),TWIN_KEY)` primitive in
+   `(+1,-1)` order. Set `R_n^T=C(d_n)Y_n^T`, form
    `delta_n^T=R_n^T-B_n`, and apply the exact sign rule. No hidden target or
    unchosen action is simulated or read.
 4. Substitute only `s_n^T` and its deterministic packet products into the
@@ -440,9 +479,13 @@ s_n^T independent of (Y_0:n^R,c_0:n+1^R) conditional on H_n,a_n.
 This is controller-context matching by exact marginalization, not hidden-state
 matching, donor selection, opposite-sign selection or nearest-neighbor yoking.
 It severs the recipient outcome lineage from the supplied sign sequence while
-preserving the sign law available at the controller information set. Because
-horizons contain complete holds, there is no missing replicate renewal. A
-missing or nonfinite record invalidates the paired replicate and is never
+preserving the sign law available at the controller information set. A hold
+completing exactly at `T` creates only the registered recipient terminal
+diagnostic record. It creates no replicate sign or packet, performs no fast
+update, does not advance `rho`, and is excluded from replicate integrity and
+missingness. Thus every eligible nonterminal recipient packet has exactly one
+replicate packet and there is no eligible missing renewal. A missing or
+nonfinite eligible record invalidates the paired replicate and is never
 imputed.
 
 For each architecture and target schedule separately, pooling its eight seeds
@@ -455,9 +498,11 @@ requires all of the following:
 - recipient/replicate sign discordance is in `[0.20,0.80]` within each
   `(k, selected-action-matches-recipient-hidden-target)` audit stratum;
 - zero-sign rate is exactly zero up to a fail-closed nonfinite anomaly;
-- recipient and replicate packet counts and timing are identical; and
+- eligible nonterminal recipient and replicate packet counts and timing are
+  identical; terminal recipient diagnostic records are excluded by definition;
+  and
 - deterministic dependency sentinels confirm that changing recipient hidden
-  targets and outcomes while holding `H`, actions and replicate uniforms fixed
+  targets and outcomes while holding `H`, actions and replicate event tapes fixed
   changes no `rho`, supplied sign, controller belief, fast state or later
   policy-visible packet field.
 
@@ -485,8 +530,16 @@ differ. Every trainable weight uses Xavier uniform from the seed's model stream,
 every bias is zero, and both arms use identical traversal. No arm receives a
 larger initialization search.
 
-The model stream is `PCG64(60_000_000_000+algorithm_seed)` with the `U53(x)`
-conversion defined below. In this order, fill row-major float64 arrays for the
+The model stream is `PCG64(60_000_000_000+algorithm_seed)` with the
+initialization-only conversion
+
+```text
+U53(x) = float64(x >> 11) * 2^-53.
+```
+
+This finite grid defines the initialization law only; it is never used for an
+environment, action, twin, or fork categorical choice. In this order, fill
+row-major float64 arrays for the
 `8 x 2` encoder weight, `4 x 8` encoder weight, `3 x 4` base-head weight,
 `3 x 2` matrix `U`, `4 x 2` matrix `V`, and `2 x 13` transition weight `W`.
 For a matrix with `(fan_out,fan_in)`, each scalar is
@@ -506,7 +559,7 @@ eight constant-`k=8` episodes in a fixed alternating order. Thus each
 architecture/seed sees exactly 4,096 training episodes, 2,048 at each `k`, and
 no switch or `k=12` episode. There is no validation-selected checkpoint or
 early stop; evaluation uses update 256. RISP and SIGN-RNN share episode tapes,
-minibatch order, action-uniform random numbers, optimizer-update count, and
+minibatch order, keyed action event tapes, optimizer-update count, and
 hyperparameters, while actions cause their on-policy histories to diverge.
 
 Adam uses learning rate `3e-4`, betas `(0.9,0.999)`, epsilon `1e-8`, and
@@ -545,55 +598,80 @@ training.
 
 For every algorithm seed, schedule, architecture, and feedback cell, evaluation
 uses exactly 64 complete episodes. The intact and marginal-twin cells clone the
-same final checkpoint. Episode environment streams are paired across all four
-factorial cells; the yoke uses a disjoint prospective twin namespace. Initial
-target, interval outcome, and negative-target choice draws use NumPy `PCG64`
-and the unsigned conversion
+same final checkpoint. Environment and action event tapes are paired across all
+four factorial cells; the yoke uses a disjoint prospective twin namespace.
+
+All environment, action, twin, and fork choices use the following exact
+rational categorical primitive, `ExactCat`. Given positive rational masses
+`q_0,...,q_(m-1)`, clear denominators with their least common multiple, divide
+all resulting positive integer masses by their joint greatest common divisor,
+and call the result `m_0,...,m_(m-1)` with `M=sum_j m_j`. Set
 
 ```text
-U53(x) = float64(x >> 11) * 2^-53.
+k_words = max(1, ceil(bit_length(M-1)/64))
+S       = 2^(64*k_words)
+L       = floor(S/M)*M.
 ```
 
-One stream is instantiated for every episode-agent. The collision-free integer
-keys are
+Instantiate one NumPy `PCG64(event_key)` stream. For attempt `v=0,1,...`, read
+the next `k_words` unsigned raw 64-bit words in stream order and form the
+little-endian integer
 
 ```text
-TRAIN_KEY = 10_000_000_000
-            + 1_000_000*algorithm_seed
-            + 1_000*optimizer_update
-            + 10*episode_in_batch + agent
-
-EVAL_KEY  = 20_000_000_000
-            + 1_000_000*algorithm_seed
-            + 100_000*schedule_id
-            + 100*episode + agent.
-
-TRAIN_ACTION_KEY = 40_000_000_000
-                   + 1_000_000*algorithm_seed
-                   + 1_000*optimizer_update
-                   + 10*episode_in_batch + agent
-
-EVAL_ACTION_KEY  = 50_000_000_000
-                   + 1_000_000*algorithm_seed
-                   + 100_000*schedule_id
-                   + 100*episode + agent.
+X_v = sum_(j=0)^(k_words-1) raw_(v,j)*2^(64*j).
 ```
 
-At episode start consume one raw word and set
-`c_0=floor(3*U53(raw_init))` in action order. At every true renewal consume exactly
-two more words, `raw_Y` then `raw_alt`, whether or not the second is used. Set
-`Y=+1` when `U53(raw_Y)` is below `0.75` for `a=c` or below `0.25` otherwise. If
-`Y=-1`, sort the two actions other than `a` in policy action order and select
-index `floor(2*U53(raw_alt))`; if `Y=+1`, discard `raw_alt`. There are no other
-environment draws.
+If `X_v>=L`, discard that whole block and read the next block. Otherwise set
+`J=X_v mod M` and return the first category whose cumulative integer mass is
+strictly greater than `J`. There is no retry cap or fallback. The accepted `J`
+is exactly uniform on `{0,...,M-1}`, so `ExactCat` returns the declared rational
+law exactly. Acceptance probability is greater than one half, but raw-word use
+is intentionally variable. Every stochastic event owns a separate keyed
+stream, so a rejection cannot shift or suppress any later event. The number of
+attempts and raw words is retained as a Lock-2 audit output and never selects,
+stops, or invalidates an otherwise complete panel.
 
-The separate action stream consumes exactly one raw word at each true boundary.
-Sample the first action in fixed order `LEFT,HOLD,RIGHT` whose float64 policy
-CDF is strictly greater than `U53(raw_action)`; because `U53<1` and all probabilities
-are positive, this always selects one action. Paired architecture/feedback
-cells and descriptive stochastic controllers reuse the same action uniforms;
-their probabilities may map a uniform to different actions but cannot change
-draw count or order.
+Define the zero-based row IDs
+
+```text
+train_row = (((algorithm_seed*256 + optimizer_update)*16
+              + episode_in_batch)*2 + agent)       # 0,...,65_535
+eval_row  = (((algorithm_seed*5 + schedule_id)*64
+              + episode)*2 + agent)                # 0,...,5_119.
+```
+
+The collision-free event keys are
+
+```text
+TRAIN_INIT_KEY = 10_000_000_000 + 1_000*train_row
+TRAIN_Y_KEY(n) = 10_000_000_000 + 1_000*train_row + 100+n
+TRAIN_ALT_KEY(n)=10_000_000_000 + 1_000*train_row + 200+n
+
+EVAL_INIT_KEY  = 20_000_000_000 + 1_000*eval_row
+EVAL_Y_KEY(n)  = 20_000_000_000 + 1_000*eval_row + 100+n
+EVAL_ALT_KEY(n)= 20_000_000_000 + 1_000*eval_row + 200+n
+
+TRAIN_ACTION_KEY(n)=40_000_000_000 + 1_000*train_row + n
+EVAL_ACTION_KEY(n) =50_000_000_000 + 1_000*eval_row + n.
+```
+
+At episode start, `ExactCat((1,1,1),*_INIT_KEY)` sets `c_0` in fixed action
+order, hence the initial target is literally uniform. At every true renewal,
+including the terminal interval, `ExactCat((3,1),*_Y_KEY(n))` generates
+`(+1,-1)` when `a=c`, and `ExactCat((1,3),*_Y_KEY(n))` does so otherwise. If
+`Y=-1`, sort the two actions other than `a` in action order and use the result
+of `ExactCat((1,1),*_ALT_KEY(n))`. The ALT event is instantiated at every true
+renewal; its result is discarded when `Y=+1`. Thus categorical-event counts are
+fixed as well as separately addressed.
+
+At each true boundary, clear the exact rational behavior probabilities
+`pi(LEFT),pi(HOLD),pi(RIGHT)` to integer masses and call
+`ExactCat(...,*_ACTION_KEY(n))`. The sampled law is therefore exactly the
+behavior law whose fast-state score is stored in the pending packet. Paired
+architecture/feedback cells and descriptive stochastic controllers reuse the
+same keyed raw-word tapes for corresponding events; different rational masses
+may consume different numbers of words within that event but cannot affect any
+other event.
 
 Every integer index appearing in a key is zero-based over its declared count:
 `optimizer_update=0,...,255`, `episode_in_batch=0,...,15`,
@@ -602,9 +680,10 @@ the five-row schedule table. The renewal index starts at `n=0` for the first
 interval of each episode. No one-based reinterpretation is permitted.
 
 All architectures, feedback cells, and descriptive controllers reuse these
-base streams. Their on-policy actions may map a shared uniform to different
-outcomes, but cannot change consumption count or order. The marginal twin at
-renewal `n` uses one separately instantiated stream and one raw word:
+base event tapes. Their on-policy actions may map a shared tape to different
+outcomes or consume a different retry count, but event identities and every
+other tape remain fixed. At each eligible nonterminal renewal `n`, the marginal
+twin uses one separately instantiated exact-categorical event stream:
 
 ```text
 TWIN_KEY = 30_000_000_000
@@ -614,44 +693,46 @@ TWIN_KEY = 30_000_000_000
            + 1_000*agent + n.
 ```
 
-It sets `Y_n^T=+1` exactly when `U53(raw_twin)<pbar_n`; it never reads or clones
-the recipient hidden target. Architecture, feedback, action, reward, and
-performance never enter a key. Changing a key, draw count, consumption order,
-conversion, or conditional mapping after scientific activity begins creates a
-new science revision and is forbidden for the active confirmatory lock.
+It calls `ExactCat((pbar_n,1-pbar_n),TWIN_KEY)` in `(+1,-1)` order. Starting
+from exact uniform `rho_0`, the registered rational recursion keeps every
+`pbar_n` rational, so the sampled twin sign has literally the recipient sign's
+conditional marginal. It never reads or clones the recipient hidden target.
+No TWIN stream exists for a terminal interval. Architecture, feedback, action,
+reward, and performance never enter a key. Changing a key, rational-mass
+construction, retry/addressing rule, stream word order, or conditional mapping
+after scientific activity begins creates a new science revision and is
+forbidden for the active confirmatory lock.
 
 The immediate timing diagnostic is run for all eight seeds, both architectures,
 all 64 marginal-twin episodes and the three target schedules. At the registered
-fork boundary both branches reuse one action uniform and two environment raw
-words from disjoint streams:
+fork boundary both branches replay the same action, outcome, and alternative
+event tapes from disjoint namespaces:
 
 ```text
-FORK_ENV_KEY = 70_000_000_000
-               + 1_000_000*algorithm_seed
-               + 100_000*schedule_id
-               + 100*episode + agent
-
-FORK_ACTION_KEY = 80_000_000_000
-                  + 1_000_000*algorithm_seed
-                  + 100_000*schedule_id
-                  + 100*episode + agent.
+fork_row = (((algorithm_seed*5 + schedule_id)*64 + episode)*2 + agent)
+FORK_Y_KEY      = 70_000_000_000 + 1_000*fork_row
+FORK_ALT_KEY    = 70_000_000_000 + 1_000*fork_row + 1
+FORK_ACTION_KEY = 80_000_000_000 + 1_000*fork_row.
 ```
 
-`FORK_ACTION_KEY` consumes one word per agent; both branches map that same
-uniform through their branch-specific policies. `FORK_ENV_KEY` consumes
-`raw_Y,raw_alt` once per agent in that order and both branches reuse
-the pair under their possibly different selected actions. No target-init word
-is consumed because the recipient pre-fork environment is cloned. The
-diagnostic adds exactly `3,072` paired forks and `114,688` agent-ticks of
+Both branches independently replay the same keyed raw-word tape from its
+beginning through `ExactCat` under their branch-specific rational action masses,
+then replay the corresponding same Y and ALT tapes under their possibly
+different selected actions, discarding an ALT result on any positive branch.
+Different branch retry counts remain
+inside the event. No target-init event exists because the recipient pre-fork
+environment is cloned. The diagnostic adds exactly `3,072` paired forks and
+`114,688` agent-ticks of
 one-hold continuation (`1,024 pairs per schedule * 2 branches * 2 agents *
 (12+12+4)`). It cannot enter any efficacy estimand or branch margin.
 
 Descriptive `UNIFORM` and `STATE-ORACLE` controllers are evaluated on the same
 64 episode tapes. `UNIFORM` samples all three actions equally. `STATE-ORACLE`
-observes the experimenter-only current target `c_n` and, with the same `0.05`
-support floor, assigns the remaining mass to that target action. It is a
-privileged-information headroom control, not a primary comparator and cannot
-establish algorithm value by itself.
+observes the experimenter-only current target `c_n` and uses exact rational
+masses `29/30` on that action and `1/60` on each other action. Both controllers
+use `ExactCat` and the same keyed action event tapes as the factorial cells.
+STATE-ORACLE is a privileged-information headroom control, not a primary
+comparator and cannot establish algorithm value by itself.
 
 The registered base maximum, excluding marginal-replicate draws, is
 
@@ -671,14 +752,37 @@ decisions, `602,112` factorial nonterminal updates, and `311,296` descriptive
 control decisions. Including the fixed immediate-fork continuation gives
 `31,178,752` agent-ticks before outcome-only marginal-replicate arithmetic.
 
-The two marginal-twin architecture cells add exactly `301,056` outcome-only
-draws (`8 seeds * 2 architectures * 64 episodes * 2 agents *
-(47+23+15+31+31)`) and never call another policy. The requested technical class is one CPU
-process, no GPU, at most 1 GiB RSS and a 60-minute launch estimate. The memory
-bound is deterministic; wall time is a later CM engineering measurement and
-acceptance fact, not a mathematical certificate. A CM finding that these limits
-are not conservative returns a resource-concept clarification; it does not
-authorize fewer seeds, episodes, schedules, cells, or updates.
+The two marginal-twin architecture cells add exactly `301,056` nonterminal
+outcome-only categorical events (`8 seeds * 2 architectures * 64 episodes * 2
+agents * (47+23+15+31+31)`) and never call another policy. Terminal recipient
+diagnostics add none. Decision, update, categorical-event, and keyed-stream
+counts are fixed; total raw 64-bit words are not fixed because exact rejection
+is variable. Per-event attempt and word counts are streamed as descriptive
+audit fields and cannot change useful learned work, optimizer/update exposure,
+or any interpretation branch. The requested technical class is one CPU process,
+no GPU, at most 1 GiB RSS and a 60-minute launch estimate. Streaming
+arbitrary-precision integers of one event at a time leaves the memory bound
+deterministic; wall time is a later CM engineering measurement and acceptance
+fact, not a mathematical certificate. A CM finding that these limits are not
+conservative returns a resource-concept clarification; it does not authorize
+fewer seeds, episodes, schedules, cells, or updates.
+
+The exact categorical ledger is
+
+| scope | INIT calls | ACTION calls | Y calls | ALT calls | TWIN calls | total calls |
+|---|---:|---:|---:|---:|---:|---:|
+| training, both architectures | 131,072 | 4,718,592 | 4,718,592 | 4,718,592 | 0 | 14,286,848 |
+| factorial evaluation | 20,480 | 622,592 | 622,592 | 622,592 | 301,056 | 2,189,312 |
+| descriptive controls | 10,240 | 311,296 | 311,296 | 311,296 | 0 | 944,128 |
+| immediate forks | 0 | 12,288 | 12,288 | 12,288 | 0 | 36,864 |
+| **total** | **161,792** | **5,664,768** | **5,664,768** | **5,664,768** | **301,056** | **17,457,152** |
+
+Because paired arms/cells/controllers replay common event tapes, these calls use
+exactly `7,775,232` distinct event keys: `7,143,424` training keys, `472,064`
+evaluation/control keys, `150,528` twin keys, and `9,216` fork keys. The eight
+paired model-initialization streams separately consume exactly 800 U53 raw
+words. Neither these fixed call/key counts nor variable rejection work changes
+the published action, update, episode, or agent-tick totals.
 
 ## Two-lock answerability and deterministic capability certificate
 
@@ -691,12 +795,28 @@ It begins only after Lock 1 passes and uses the already registered disjoint
 model, training, evaluation, action and marginal-twin namespaces without any
 development data.
 
-Lock 1 uses schema `RISP-B1-LOCK1-20260813-05`, IEEE binary64 reference
-arithmetic and IEEE binary32 candidate tensors. Stable softmax subtracts the
-maximum safe logit before exponentiation. Euclidean projection is identity for
-norm at most three and otherwise multiplies by `3/||x||_2`. Candidate/reference
-absolute error must be at most `1e-6` for state, logits and probabilities.
-This tolerance is frozen; nonfinite values fail the certificate.
+Lock 1 uses schema `RISP-B1-LOCK1-20260813-06`, exact reduced rational reference
+arithmetic for `Rat32`, raw logits, `z`, `w`, policy masses, and `ExactCat`
+integer intervals, plus IEEE binary64 reference arithmetic and IEEE binary32
+candidate tensors for learned-state calculations. Euclidean projection is
+identity for norm at most three and otherwise multiplies by `3/||x||_2`.
+Canonical rational numerators, positive denominators, cleared integer masses,
+`M`, `k_words`, and `L` must agree exactly. Candidate/reference absolute error
+must be at most `1e-6` for state, logits, probabilities, score, Fisher, and
+eligibility. These rules are frozen; nonfinite values fail the certificate.
+
+The sampler fixture is hand-authored and consumes no generator word. For
+integer masses `(1,1,1)`, `M=3`, `k_words=1`, and `L=2^64-1`: literal
+`X=2^64-1` must reject, the next literal `X=0` must accept with `J=0`, and
+category zero must be returned. For masses `(5,7)`, `M=12`, `k_words=1`, and
+`L=2^64-4`: literal `X=L` must reject, the next literal `X=5` must accept with
+`J=5`, and the second category must be returned under the strict cumulative
+interval convention. For masses `(2^64,1)`, `M=2^64+1` and `k_words=2`:
+little-endian words `(1,1)` must assemble to `X=2^64+1`, accept, reduce to
+`J=0`, and return the first category. These constants test reduction,
+multiword assembly, the strict rejection boundary, retries, modulo, and
+category ownership; they are deterministic implementation fixtures, not a
+stochastic sampler calibration.
 
 The ordered zero-based packet coordinates are exactly
 
@@ -722,39 +842,47 @@ and probabilities under any shared policy port. The finite bank checks the
 implementation; the algebraic translation proves equality for the full class.
 
 The deterministic action-reachability fixture sets the shared base logits to
-zero and the shared port so that `V^T h=(1,0)`, the first column of `U` is
-`(1,0,-1)`, and its second column is zero. This is realized by a constant
-encoder with second-layer bias `(atanh(1/2),0,0,0)` and a first V column
-`(2,0,0,0)`. From `x=(0,0)`, use the C2 packet components without its old state;
-both translated transitions produce `x'=(0.1,0)` and unbounded fast logits
-`(0.1,0,-0.1)`. The no-update clone remains uniform. After the registered safe
-logit and support-floor maps, every action probability is at least `1/60` and
-the updated-versus-no-update TV is greater than `0.03`. This fixture proves only
+zero. A constant encoder has binary32 second-layer bias
+`(2^-20,0,0,0)`; binary32 `tanh(2^-20)` rounds exactly to `2^-20`. Set the first
+V column to `(2^20,0,0,0)`, its second column to zero, the first U column to
+`(4,0,-4)`, and its second column to zero, so `V^T h=(1,0)`. From `x=(0,0)`,
+use the C2 packet components without its old state, set shared transition bias
+to `(1/4,0)`, and use exact `eta=1/10`. Both translated transitions produce
+`x'=(1/8,0)` and raw logits `(1/2,0,-1/2)`. Their exact safe values are
+`(6/13,0,-6/13)` and their reduced policy integer masses are
+`(2440,2197,1972)` in action order. The no-update clone has masses `(1,1,1)`.
+Every action remains strictly above the global `1/21` support bound and the
+updated-versus-no-update TV is exactly `237/6609>0.03`. This fixture proves only
 structural prospective reachability; it is not a learned TV or competence gate.
 
-The no-leakage sentinel starts `rho=(1/3,1/3,1/3)`, selects LEFT, and fixes the
-replicate uniform at `0.4`, hence `pbar=5/12` and supplied sign `+1`. It compares
+The no-leakage sentinel starts `rho=(1/3,1/3,1/3)`, selects LEFT, and supplies
+literal accepted `ExactCat` residue `J=4` under masses `(5,7)`, hence
+`pbar=5/12` and supplied sign `+1`. It compares
 two recipient worlds with actual first outcomes `+1` and `-1`. Both must produce
 the same controller belief, fast state and `rho'=(5/12,7/24,7/24)`. With the
-same next action HOLD and next replicate uniform `0.4`, both use
-`pbar=19/48` and supplied sign `-1`, again producing identical later
+same next action HOLD and literal accepted residue `J=19` under masses `(19,29)`,
+both use `pbar=19/48` and supplied sign `-1`, again producing identical later
 controller-visible fields despite different recipient hidden-state lineages.
 Actual recipient rewards and targets may differ and must be absent from the
 dependency trace.
 
 Lock 1 also checks the literal schedule/index domains, terminal-update rule,
-every key formula, unsigned 64-bit range, fixed per-row draw budgets, namespace
-collision inequalities, and the published decision/update/draw totals. Its
-resource manifest fixes binary32 learned tensors, at most 48 renewal states per
-episode graph, vectorized 16-episode batches split by duration, serial seed
-lifecycle, discarded graphs after each Adam update, streamed seed/schedule
-summaries, no per-tick graph, and no per-row durable JSON. A static live-memory
-bound below 1 GiB is required; 60-minute wall remains a later engineering fact.
+every key formula, unsigned 64-bit range, fixed categorical-event counts,
+event-local variable-retry law, namespace collision inequalities, and the
+published decision/update/event totals. It explicitly does not predict a fixed
+Lock-2 raw-word total. Its resource manifest fixes binary32 learned tensors,
+streamed exact-rational numerator/denominator and sampler counters, at most 48
+renewal states per episode graph, vectorized 16-episode batches split by
+duration, serial seed lifecycle, discarded graphs after each Adam update,
+streamed seed/schedule summaries, no per-tick graph, and no per-row durable
+JSON. A static live-memory bound below 1 GiB is required; 60-minute wall remains
+a later engineering fact.
 
 Scientific activity begins irreversibly when Lock 2 consumes or materializes
-its first random word from the seed-zero model stream or any registered
-confirmatory environment/action/marginal-twin stream, whichever occurs first. The first
-training initialization therefore starts activity. After that boundary there
+its first random word or generator object from any registered model,
+environment, action, marginal-twin, or fork stream, whichever occurs first.
+Seed execution order cannot escape this rule; normally the seed-zero model
+initialization is first. After that boundary there
 is no treatment, host, objective, seed, key, checkpoint, threshold, window,
 branch, or certificate change. A Lock-1 conformance failure permits only
 unchanged-science engineering repair before any Lock-2 word; exhaustion of the
@@ -777,7 +905,9 @@ Every conclusion additionally requires:
 2. exact decision/update counts in the table, complete `T=192` episodes, common
    action support, and no mid-hold policy rows;
 3. identical 117-scalar architecture counts, optimizer exposure, BPTT/detach
-   law, packet schema, and transition matvec count;
+   law, packet schema, transition matvec count, rational-head implementation,
+   and categorical-event count; realized rejection/word work is reported
+   separately and cannot select the panel;
 4. the algebraic mask-translation conformance identity;
 5. separately in every architecture-by-feedback cell, pooling its eight seeds
    and three target schedules only after completion, `||e_n||_2>0.05` for at
