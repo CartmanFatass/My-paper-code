@@ -837,3 +837,42 @@ separately frozen two-dimensional/UAV surface. Parity with COMMON, SHUFFLED or
 INDEPENDENT narrows or deletes the exact package. MGTAP remains the first direct
 compute investment and causally closed SGSP remains second; RCLE is the backup,
 not a reason to delay either leader.
+
+## Prospective two-lock answerability contract
+
+MGTAP-r04, SCDMP-B2-r02 and VQFP-v4 demonstrate a general design risk without
+transferring any of their evidence or thresholds: a single frozen run can consume
+its scientific activity merely discovering that the host, optimizer, comparator
+or intervention cannot support the registered question. Future new stages should
+separate a finite development/capability lock from a fresh confirmatory lock.
+
+Before materialization, the EM classifies each observable as an identification
+prerequisite, learned competence/mechanism outcome, efficacy estimand, or
+technical/safety validity fact. A quantity cannot change categories after its
+value is observed.
+
+The development lock may use deterministic fixtures and, when scientifically
+necessary, one prospectively finite training-only/calibration menu. It may test
+host headroom, legal support, comparator containment, intervention-to-action
+reachability, leakage absence, optimization closure, address injectivity and
+resource feasibility. The menu, objective, stability rule, attempt cap and
+simple/lexicographic tie-break are frozen before use. It cannot inspect held-out
+axes, efficacy contrasts, confirmatory mechanism cuts or confirmatory addresses.
+Exhausting the finite menu ends the development stage; there is no automatic
+grid extension.
+
+After one immutable capability certificate passes, the confirmatory lock starts
+from fresh disjoint initialization, training and evaluation addresses. No seed
+replacement, checkpoint selection, grid expansion, host change or threshold
+change follows. A treatment-dependent learned signal that can weaken because of
+the mechanism is normally retained on a complete panel as a competence outcome,
+not used as a postactivity stop merely to protect interpretation. Safety,
+nonfinite execution and resource validity may still fail closed as technical
+facts.
+
+Interpretation order is technical completeness, fresh-panel identification
+availability, efficacy, then mechanism attribution. A fresh confirmatory support
+failure remains bounded structural nonidentification; it is never null,
+equivalence or family deletion. Any science-bearing adoption of this contract by
+an already frozen SGSP, RCLE or RISP object belongs to its same-direction EM and
+normal Pro-closure route; this Root methodology note changes no active treatment.
