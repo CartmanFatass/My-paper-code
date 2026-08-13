@@ -6,7 +6,7 @@ candidate=RCLE-B1
 revision=RCLE-B1-SCIENCE-20260813-04
 owner=EM_roster_consistent_latent_exploration
 scientific_activity_started=false
-mathematical_closure=V3_REVISION_REQUIRED_V4_SAME_CONVERSATION_REREVIEW_PENDING
+mathematical_closure=CHATGPT_EXTERNAL_PRO_CLOSED_EXACT_V4_EM_INTAKE_COMPLETE
 external_gemini=AUTHORIZED_NOT_SENT
 construction_authorization=none
 compute_authorization=none
@@ -14,8 +14,8 @@ compute_authorization=none
 
 ## Conclusion first
 
-RCLE-B1 is a meaning-complete, result-blind, direct variable-`N` candidate under
-same-conversation authoritative mathematical/causal rereview. It asks whether a correctly paired
+RCLE-B1 is a meaning-complete, result-blind, mathematically and causally closed
+direct variable-`N` candidate. It asks whether a correctly paired
 actor-facing information signal organizes an episode-persistent common latent
 into several task-valid, roster-adaptive exploration strategies, improving a
 fixed four-probe hidden-lock objective after one shared policy is trained at
@@ -815,11 +815,12 @@ provides no evidence about any such surface.
 ## 12. Current owner handoff
 
 ChatGPT External Pro required three exact prospective repairs to revision 03;
-revision `RCLE-B1-SCIENCE-20260813-04` incorporates all three without using any
-RCLE stochastic object. The same-direction CM may inspect revision 04 for
-remaining science-definition ambiguity and static constructability only. It
-must not construct or materialize any stochastic object. After that audit,
-revision 04 returns to the direction's existing dedicated Pro conversation for
-literal `CLOSED` or another exact `REVISION_REQUIRED`. The separately authorized
-Gemini innovator conversation remains unsent and mutually blind. No
-construction, test, or compute is authorized.
+revision `RCLE-B1-SCIENCE-20260813-04` incorporated all three without using any
+RCLE stochastic object. The same-direction CM then accepted v4 static
+constructability with no remaining science-definition ambiguity. The same
+dedicated Pro conversation returned literal `CLOSED` for exact v4 with
+`SCIENCE_BEARING_DEFECT_COUNT=0`, and this EM accepted that disposition without
+changing the composite. The separately authorized Gemini innovator conversation
+remains unsent and mutually blind. Mathematical closure does not authorize
+construction, tests, stochastic materialization, or compute; those remain
+withheld pending Root's next-stage portfolio decision.
