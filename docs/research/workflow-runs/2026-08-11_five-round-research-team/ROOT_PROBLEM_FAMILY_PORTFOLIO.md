@@ -971,14 +971,14 @@ second-surface/UAV action.
    its one-shot run waits for the VQFP CPU slot. Its
    strongest alternative is ordinary explicit-`k`, history, and endpoint
    supervision.
-3. **CCIC-v4: covariance-calibrated information clock.** Direct both-axis
-   candidate. V3 received `REVISION_REQUIRED`; its seven accepted definition
-   repairs are frozen in complete result-blind v4. Its smallest discriminator
+3. **CCIC-v5: covariance-calibrated information clock.** Direct both-axis
+   candidate. V3 and v4 received `REVISION_REQUIRED`; their accepted definition
+   repairs are frozen in complete result-blind v5. Its smallest discriminator
    crosses literal duplicates,
    correlated distinct origins, and independent origins at held-out `N` and
    `k`. The strongest alternatives are scalar ESS, origin counting, and a
    matched nonlinear invariant encoder. External packets and its result-blind
-   map are published; its v4 same-conversation Pro request is released with no terminal
+   map are published; its v5 same-conversation Pro request is released with no terminal
    disposition, so no CM release exists. This direction tests whether
    invariance preserves useful independent information rather than merely
    normalizing count.
