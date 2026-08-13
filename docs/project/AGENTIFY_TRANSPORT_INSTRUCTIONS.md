@@ -55,6 +55,11 @@ Most recent failures were operator/contract failures, not provider failures:
    content serializer was unreadable. The transport catch then overwrote the
    true count of one with an unset ledger field's zero, obscuring commitment
    evidence and collapsing `turn_unreadable` into a generic content mismatch.
+10. The rendered-user serializer selected the deepest matching content node and
+    rejected the exact `PRE > CODE > text` wrapper used for a Markdown-bearing
+    user turn. A nested code-block candidate could therefore shadow its outer
+    content node, while an exact raw-text PRE/CODE wrapper failed before any
+    code point was compared.
 
 The confirmed Agentify defects are repaired in source commit `a9471f7`; source
 commit `e12caf8` adds the provenance-preserving v1-to-v2 ledger migration needed
@@ -372,6 +377,22 @@ browser text model is not permission to change those frozen bytes
 (`review-text-identity.mjs:3-183`; `chatgpt-controller.mjs:764-900,1755-1930,
 2065-2299`; `review-transport.mjs:387-526,612,679-685`).
 
+Rendered user-turn discovery prefers the outermost non-control content candidate;
+a nested selector hit cannot replace an ancestor that contains the complete
+message. One additional wrapper is readable: an exact `PRE` with exactly one
+`CODE` element child. Agentify serializes that CODE subtree by preserving its
+text code points and line breaks exactly. It performs no trimming, `innerText`
+fallback, Markdown parsing, heading/list reconstruction, fence insertion, or
+semantic equivalence. If the PRE/CODE node is merely one rendered fenced-code
+fragment, its extracted text cannot equal the complete frozen prompt and the
+normal collision-resistant comparison fails closed. Malformed PRE structure,
+controls, multiple CODE children, unsupported nodes, and multiple distinct
+outer content candidates remain unreadable or ambiguous. The raw frozen source
+SHA and the atomic click-time receipt remain mandatory independently
+(`chatgpt-controller.mjs:serializeReviewComposer,serializeReviewUserMessage,
+#reviewSnapshot,#waitForReviewUserMessage,#resolveReviewUserAnchor,
+inspectReviewSubmissionIdentity,recoverReviewSubmission`).
+
 Before the one strict insertion, Agentify uses the provider-neutral
 `agentify_review_composer_replace_v2` contract:
 
@@ -614,6 +635,7 @@ If an HMASD archive is missing or stale:
 | `review_composer_clear_failed` or `review_composer_caret_unavailable` | Full selection, native delete, draft-state synchronization, empty proof, focus, or collapsed insertion caret could not be proven | Pre-insert and pre-send terminal. Do not append, send, or retry inside the operation. |
 | `review_user_message_not_observed_after_click` / `click_no_turn` | The unique click occurred, but no new visible turn appeared before the observation deadline | No turn anchor may be fabricated. This is still post-click ambiguity and never permits resend inside the operation. |
 | `review_user_message_identity_unreadable` / `turn_unreadable` | Exactly one new visible turn ID exists, but its structural content serializer failed | Require durable `observedUserMessageId` and safe structure diagnostics; never infer content or resend. |
+| Rendered turn reports `PRE` / `CODE` structural unreadability | The old serializer rejected an exact raw-text wrapper or selected a nested code fragment instead of its outer content node | The historical operation is permanently ambiguous. Use no page action and never resend it. A future operation requires the outermost-candidate plus exact PRE/CODE text rule to be loaded; semantic Markdown reconstruction is forbidden. |
 | `review_user_message_content_mismatch` / `turn_content_mismatch` | Exactly one readable new turn exists, but narrow exact comparison failed | Preserve observed length/hash/mismatch metadata when available; never trim, broaden normalization, or resend. |
 | `review_composer_identity_mismatch_at_send` | Composer changed after initial identity receipt but before the Send boundary | Atomic check performed zero clicks. Archive pre-send; do not reuse the closed operation. |
 | `blocked=true`, login/CAPTCHA | Agentify detected a human/access gate | Do not send. Wait only within assignment timeout; archive pre-send terminal if unresolved. |
@@ -785,6 +807,7 @@ Current source behavior is:
 | H | composer, rendered turn, diagnostics/recovery, and content rebind use one collision-resistant plain-text receipt; only narrowly reversible Blink space rebalance is accepted |
 | I | strict composer replacement clears once, proves empty and caret state before one insertion, then atomically revalidates identity with the unique Send click; persisted drafts cannot be appended or race the send boundary |
 | J | the first exactly-one visible post-click user-turn ID is durably persisted before content acceptance; no-turn, unreadable-turn, and readable-mismatch terminals remain distinct and never permit resend |
+| K | rendered user identity chooses outermost non-control content and accepts only an exact transparent PRE/CODE raw-text wrapper; nested code fragments, malformed structure, controls, and semantic Markdown reconstruction cannot satisfy exact prompt identity |
 
 The “observed source defect” and “reproduction” bullets below describe the
 pre-fix implementation retained for audit provenance. The invariant and fix
@@ -1063,6 +1086,48 @@ nonetheless directly reproducible.
   selection for contenteditable and textarea, one-key clearing, asynchronous
   draft rehydration, and selection failure.
 
+### K. Exact PRE/CODE rendered wrappers preserve plain-text identity
+
+- **File/symbol:** `chatgpt-controller.mjs`, `serializeReviewComposer`,
+  `serializeReviewUserMessage`, `#reviewSnapshot`,
+  `#waitForReviewUserMessage`, `#resolveReviewUserAnchor`,
+  `inspectReviewSubmissionIdentity`, and `recoverReviewSubmission`. Symbol
+  locators are normative; line numbers are intentionally omitted.
+- **Invariant:** a rendered user turn may bind the frozen prompt only by an
+  exact code-point serialization followed by the existing
+  `agentify_review_plain_text_v1` receipt. Content discovery uses outermost
+  non-control candidates. An exact `PRE > CODE` wrapper is transparent text,
+  not permission to infer Markdown syntax or accept semantic equivalence.
+- **Observed source defect:** synthetic first-binding operation
+  `AGENTIFY-D94EE4B-SYNTHETIC-CHATGPT-PRO-ea06ff38-1ed3-4640-a1e5-f90731e3e19f`
+  atomically verified and clicked the 121-character frozen prompt once, then
+  durably observed user turn `61e57ab3-6544-4438-ae9a-e2471faf75b7` and a
+  concrete `/c/` identity. The safe fingerprint was one candidate with root
+  `PRE`, histogram `{PRE:1,CODE:1}`, two elements, one text node and depth two.
+  `serializeReviewComposer` rejected PRE before reading that text. Separately,
+  `serializeReviewUserMessage` retained only selector matches having no matching
+  descendants, so an inner code block could shadow a complete outer candidate.
+- **Historical classification:** the serializer stopped before returning text,
+  length, or hash. Local evidence therefore cannot prove whether the PRE/CODE
+  text was the complete raw prompt or only its fenced-code fragment. The
+  operation remains `SUBMITTED_UNVERIFIED`, its observed turn remains durable,
+  and it must never be resent or promoted from the new rule after the fact.
+- **Implemented source candidate:** select outermost candidates by actual DOM
+  containment. Accept PRE only when it has exactly one CODE element child, then
+  serialize the CODE subtree with the same exact text-node/inline allowlist and
+  no normalization beyond the downstream named plain-text model. A fragment
+  fails full-prompt comparison; malformed PRE, controls, unsupported nodes and
+  distinct candidates fail closed. This post-`d94ee4b` candidate is not an
+  active runtime guarantee until Root commits it and restarts Agentify.
+- **Regression:** `tests/chatgpt-controller.test.mjs` proves the exact synthetic
+  heading, blank line, nested two-space list, fenced block and U+2014 payload
+  survives `PRE > CODE` serialization; U+2014 mutation fails by code point; an
+  outer candidate cannot be shadowed by its nested PRE; and malformed PRE
+  diagnostics reveal no content. The complete controller strict suite plus
+  review-transport/state suites retain mismatch, unreadable, observed-anchor,
+  submission-diagnostic, recovery, content-rebind, raw-SHA and exact-one
+  invariants.
+
 ## 16. Source evidence index
 
 - Package and supported providers: `C:/Projects/agentify-desktop/package.json:2-5`,
@@ -1082,6 +1147,9 @@ nonetheless directly reproducible.
   `C:/Projects/agentify-desktop/review-composer-replacement.mjs`.
 - Live challenge, model, Gemini adapter DOM, send, and completion mechanics:
   `C:/Projects/agentify-desktop/chatgpt-controller.mjs:9-83,299-520,593-1086,1106-1930,2065-2299`.
+- Rendered user-turn outermost candidate selection and exact PRE/CODE text
+  extraction: `C:/Projects/agentify-desktop/chatgpt-controller.mjs:
+  serializeReviewComposer,serializeReviewUserMessage,#reviewSnapshot`.
 - Ledger schema and atomic persistence:
   `C:/Projects/agentify-desktop/state.mjs:6-15,34-155,257-272`.
 - Default tab/status construction:
