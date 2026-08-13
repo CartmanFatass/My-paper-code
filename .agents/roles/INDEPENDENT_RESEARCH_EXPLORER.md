@@ -112,6 +112,13 @@ before this authority rule, preserve the frozen treatment and combine its
 bounded mathematical/causal interpretation closure with the required
 same-conversation result-convergence request.
 
+EM owns transport-child coordination and filters its reports. Routine tab,
+model-selection, typing, sending, waiting, `inflight`, receipt-field and
+unchanged-state facts remain inside the EM scope. EM returns to Root only when
+the transport is terminal and scientifically intaken, when a new provider turn
+or conversation needs explicit Root authority, or when a literal review ruling
+creates an exact CM relay or successor-revision boundary.
+
 Root performs a normal non-force publication only when a downstream consumer
 needs repository-visible owner-prepared artifacts or at final integration.
 Publication is not scientific intake, approval, or a prerequisite for local

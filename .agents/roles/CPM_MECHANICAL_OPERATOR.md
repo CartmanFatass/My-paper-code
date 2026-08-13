@@ -22,7 +22,7 @@ authority=one_exact_CPM_MECHANICAL_TASK_ASSIGNMENT
 sandbox=workspace-write
 assignment_fields=spec_path|result_path
 mechanical_task_classes=inspect_identity|run_focused_checks|verify_result|assemble_handoff|render_state
-runtime_observation=consume_root_observed_facts_not_task_class
+runtime_observation=consume_parent_observed_facts_not_task_class
 ticket_prepare_alias=none
 terminal_values=COMPLETE|ERROR
 terminal_notification_count=exactly_one
@@ -63,12 +63,13 @@ The dispatcher supports these mechanical task classes:
 worktree, prepare-integrate and finalize-integrate identity remain outside this
 leaf; it has no Git or canonical-state acceptance authority.
 
-Runtime observations are Root-owned. This leaf may inspect exact Root-supplied
-live-process, CPU, memory and concrete-resource-conflict facts as inputs to a
-scoped CPM assignment, but it does not observe host state, derive synthetic
+Scope-local runtime observations and within-envelope judgment are CM-owned.
+This leaf may inspect exact parent-supplied live-process, CPU, memory and
+concrete-resource-conflict facts as inputs to a scoped CPM assignment, but it
+does not observe host state, derive synthetic
 capacity, reserve execution, admit or authorize a run, retry, monitor, queue,
 or maintain persistent runtime state. It emits no runtime decision and launches no costly
-execution. Incomplete or contradictory Root facts are reported directly to the
+execution. Incomplete or contradictory parent facts are reported directly to the
 parent; CPM retains scope-local technical/runtime judgment.
 
 For incomplete or conflicting inputs, the child may perform at most one

@@ -239,6 +239,25 @@ Use semantic ownership before acting:
   allocation, cross-direction synthesis/relay, shared canonical state, and
   necessary final Git integration/publication.
 
+The initiating L1 owner closes its own observation loop and filters reports
+before anything reaches Root. CM owns scope-local CPU, memory, process,
+restart-risk, resource, artifact-frontier and Operator facts; EM owns its
+transport-child coordination and direction-local review/intake facts. Their
+leaves return to that L1, not directly to Root. Routine `running`, `inflight`,
+`pending_init`, PID/RSS/CPU, tab, send-phase, file-exists, retry-progress and
+unchanged-state messages remain inside the L1 scope. The L1 returns to Root only
+for an object-level terminal or answer-changing milestone, a science-bearing
+ambiguity that needs its semantic owner, a concrete cross-scope resource
+conflict, a genuine need for new user/Root authority, or final Git/canonical
+integration. A high CPU reading, an ordinary wait or retry, and a tool timeout
+are not Root escalation conditions by themselves.
+
+When CPU idleness matters for a scoped launch, the initiating CM or other L1
+requester measures exactly three actual system-total CPU readings within at
+most one minute and makes the within-envelope decision locally. Root receives
+only a concrete shared-resource conflict or authority-expansion request, not
+the three readings or a routine launch guard.
+
 Root does not routinely write another owner's specs, handoffs, results,
 receipts, runtime observations, environment files, or log entries. Topology may
 require Root to relay an owner-prepared packet, but Root does not rewrite or

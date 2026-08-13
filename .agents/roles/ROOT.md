@@ -43,6 +43,16 @@ execution, use a matching registered specialist or the native-child routing
 below. A simple task never requires a manager, reviewer, worktree, receipt,
 progress protocol, state migration, or workflow-design lane.
 
+Root uses milestone-only returns. The initiating L1 owns scope-local
+observation, child coordination, within-authority judgment, and report
+filtering. Root does not poll or adjudicate routine CPU/RSS/PID, restart guard,
+artifact-frontier, `running`/`inflight`/`pending_init`, tab, send-phase,
+retry-progress, or unchanged-state facts. L1 returns only an object-level
+terminal or answer-changing milestone, a science-bearing ambiguity, a concrete
+cross-scope resource conflict, a genuine need for new authority, or final
+Git/canonical integration. Direct Root research-support specialists likewise
+return one completed bounded packet rather than progress messages.
+
 Use `hmasd-independent-research-explorer` only for one real scientific
 `direction:<id>`. It owns direction-local scientific judgment. Use
 `hmasd-code-project-manager` only for one `direction:<id>` or

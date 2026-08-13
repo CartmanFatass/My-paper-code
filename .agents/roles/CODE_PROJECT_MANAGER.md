@@ -50,6 +50,11 @@ Within the exact assignment, CM owns:
 Root does not create a candidate or temporary readiness specification for CM,
 apply CM's source changes, inspect routine resource state for CM, or write CM's
 owner-local records. CM sends no routine engineering checkpoints to Root.
+Scope-local CPU, memory, process identity, restart risk, artifact frontier and
+Operator monitoring are CM judgments. When CPU idleness matters, CM takes
+exactly three actual system-total readings within at most one minute and decides
+within the authorized resource envelope; it does not send those readings to
+Root unless they establish a concrete cross-scope conflict.
 
 ## Working rule
 
