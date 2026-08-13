@@ -37,6 +37,14 @@ suggest counterexamples, mechanisms, scenario families, controls, or bridges,
 but it cannot supply mathematical closure, result convergence, technical
 acceptance, or portfolio selection.
 
+The independently frozen Gemini-v4 transport later ended
+`SEND_NOT_COMMITTED`: it produced no provider turn, conversation ID, response,
+or scientific evidence, and its disposable tab was closed with no generation
+active. That zero-evidence terminal is intaken at
+`docs/research/candidates/voronoi_quadrature_field_policy/VQFP_V4_EXTERNAL_GEMINI_SEND_NOT_COMMITTED_INTAKE.md`.
+It changes nothing in this Pro-closed object, does not affect CM technical
+acceptance, and creates no retry authority.
+
 The dedicated VQFP ChatGPT External Pro returned `REVISION_REQUIRED` with five
 science-bearing defects for prospective revision `-02`; revision `-03`
 substantively closed all five, but the same Pro conversation returned
@@ -1062,12 +1070,11 @@ same-direction owner intake is complete at
 The mathematical/causal review boundary is complete; this does not grant
 technical acceptance or choose production timing. The unsent `-02` Gemini batch
 is superseded and non-transport-ready. Its exact independent `-04` replacement
-is frozen blind to every Pro answer at
-`temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_gemini_3_1_pro_extended_innovator_20260812_04/batch.json` and remains
-`PREPARED_NOT_SENT`. Root may now relay the exact card and owner handoff to CM
-for construction and technical acceptance. Production remains subject to
-Root's sequencing and CM acceptance of source conformance plus the zero-compute
-complexity bound.
+remained blind to every Pro answer but ended `SEND_NOT_COMMITTED`, with no
+provider turn or scientific response. Root may relay the exact card and owner
+handoff to CM for construction and technical acceptance. Production remains
+subject to Root's sequencing and CM acceptance of source conformance plus the
+zero-compute complexity bound.
 
 CM's eventual result packet must state whether question-relevant activity began,
 whether a complete valid result exists, the `P/R/K/M/T` endpoints and bounds,

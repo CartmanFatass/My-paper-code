@@ -30,8 +30,9 @@ ruling. Mathematical/causal closure is complete without further science change.
 Root may relay this exact packet to CM for construction and technical
 acceptance; it does not itself accept implementation or choose production
 timing. The Gemini `-02` batch was never sent and is non-transport-ready. The
-independent Gemini-v4 packet is frozen blind to every Pro answer, remains
-`PREPARED_NOT_SENT`, and is additive; it never consumes or reopens Pro closure.
+independent Gemini-v4 attempt remained blind to every Pro answer but ended
+`SEND_NOT_COMMITTED`, with no provider turn or scientific evidence. It does not
+consume or reopen Pro closure, affect CM acceptance, or authorize a retry.
 
 Exact closure evidence and independent innovation status:
 
@@ -48,8 +49,11 @@ temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_
 v4 same-direction owner intake:
 docs/research/candidates/voronoi_quadrature_field_policy/VQFP_V4_EXTERNAL_PRO_CLOSED_INTAKE.md
 
-independent Gemini-v4 PREPARED_NOT_SENT new-conversation batch:
-temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_gemini_3_1_pro_extended_innovator_20260812_04/batch.json
+independent Gemini-v4 SEND_NOT_COMMITTED archive:
+temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_gemini_3_1_pro_extended_innovator_20260812_04/results.json
+
+independent Gemini-v4 zero-evidence intake:
+docs/research/candidates/voronoi_quadrature_field_policy/VQFP_V4_EXTERNAL_GEMINI_SEND_NOT_COMMITTED_INTAKE.md
 ```
 
 ## Exact cumulative Root-to-CM scientific delta

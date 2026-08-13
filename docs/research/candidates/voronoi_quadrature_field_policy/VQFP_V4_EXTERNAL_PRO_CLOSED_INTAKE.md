@@ -109,15 +109,17 @@ plume-service discriminator activates only after a complete B1 result satisfies
 the card's positive-with-corrected-binding, no-material-reverse, and
 no-noisy-reversal conditions; this closure ruling does not authorize it.
 
-The independently frozen Gemini-v4 innovator remains `PREPARED_NOT_SENT` at:
+The independently frozen Gemini-v4 innovator was later released but ended
+`SEND_NOT_COMMITTED`, with no provider turn, conversation ID, response, or
+scientific evidence. Its archive is:
 
 ```text
-temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_gemini_3_1_pro_extended_innovator_20260812_04/batch.json
+temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_gemini_3_1_pro_extended_innovator_20260812_04/results.json
 ```
 
-It is additive and may be released separately by Root, but cannot revise this
-object, supply closure, accept CM work, interpret future results, or authorize
-production.
+This zero-evidence transport fact cannot revise this object, supply or reopen
+closure, affect CM acceptance, interpret future results, delay production, or
+authorize a retry.
 
 ## Subsequent non-science reporting clarification
 
