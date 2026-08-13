@@ -5,7 +5,7 @@ document_kind=canonical_transport_operations_manual
 scope=ChatGPT_External_Pro|External_Gemini
 transport_core=Agentify_strict_review_query
 provider_mapping=chatgpt|gemini
-version_basis=@agentify/desktop_0.2.4+a9471f7_2026-08-13
+version_basis=@agentify/desktop_0.2.4+e12caf8_2026-08-13
 ```
 
 This is the canonical operating manual for every HMASD Agentify transport
@@ -42,10 +42,12 @@ Most recent failures were operator/contract failures, not provider failures:
 6. Registry/status text, account-plan text, helper-injected DOM, or an old
    archive was treated as live selected-model or send evidence.
 
-The confirmed Agentify defects are repaired in source commit `a9471f7` and
-retained in section 15 as regression contracts. An older running desktop still
-has the pre-fix behavior, so the repaired tree must be loaded before relying on
-those guarantees.
+The confirmed Agentify defects are repaired in source commit `a9471f7`; source
+commit `e12caf8` adds the provenance-preserving v1-to-v2 ledger migration needed
+to load older valid COMPLETE receipts without weakening new-operation
+enforcement. Section 15 retains the defects as regression contracts. An older
+running desktop still has the pre-fix behavior, so the repaired tree must be
+loaded before relying on those guarantees.
 
 ## 2. The operating model
 
@@ -67,6 +69,13 @@ two URLs can differ (`http-api.mjs:740-759`, `main.mjs:639-652`).
 **Verified:** strict state is atomically stored in
 `%USERPROFILE%/.agentify-desktop/review-transport.json`; bindings are keyed by
 `stableKey` and operations by `idempotencyKey` (`state.mjs:34-40,257-272`).
+
+**Verified compatibility boundary:** schema-v1 COMPLETE operations that predate
+the durable `sendActionCount` field are migrated to schema v2 only when every
+other completion invariant proves an exact natural completion. The migration
+records each inferred field and operation in `migrationHistory`. Invalid legacy
+rows are not migrated, and schema-v2/new COMPLETE rows still require an
+explicit `sendActionCount===1`.
 
 ### Default and disposable tabs
 
