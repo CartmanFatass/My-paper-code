@@ -8,10 +8,11 @@ supersedes_revision=SCDMP-B1-SCIENCE-20260812-04_PRO_CLOSED
 owner=EM_semigroup_consistent_duration_model_policy
 source_inspiration=SCDMP-VK-FAMILY-CUT-01
 source_is_evidence=false
-artifact_status=PREPARED_NOT_SENT
+artifact_status=FROZEN
 scientific_activity_started=false
 production_authorized=false
-chatgpt_external_pro_math_closure=required_on_v5
+chatgpt_external_pro_math_closure=CLOSED_ON_EXACT_V5
+em_closure_intake=accepted_without_science_change
 ```
 
 ## Direction decision and bounded question
@@ -60,9 +61,12 @@ activity rule, training/evaluation split, estimands, margins, inference,
 interpretation, or resources creates a new complete revision.
 
 Because the denominator affects the optimized objective and thresholded
-standardized observables, v4 closure does not transfer automatically. V5 must
-receive literal `CLOSED` in the existing SCDMP Pro conversation followed by this
-EM's intake before Root may release construction or production.
+standardized observables, v4 closure did not transfer automatically. Exact v5
+has now received literal same-conversation Pro `CLOSED`, and this EM has
+accepted that ruling without a science-bearing change. The mathematical and
+causal closure boundary is complete for v5. This does not authorize CM
+construction, technical acceptance, execution, or production; Root retains
+relay and sequencing authority.
 
 ## Deterministic four-agent convoy DGP
 

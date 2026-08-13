@@ -157,3 +157,10 @@ every downstream use. V4 remains historically closed as written but is no
 longer the prospective construction object. V5 requires a new literal
 same-conversation Pro `CLOSED` plus same-direction intake before construction
 or production can resume.
+
+## Subsequent v5 closure
+
+Exact `SCDMP-B1-SCIENCE-20260812-05` later received literal same-conversation
+Pro `CLOSED` and same-direction owner intake without another science-bearing
+change. The v5 intake and v5 Root-to-CM packet now control prospective routing;
+this file remains the historical v4 closure record.

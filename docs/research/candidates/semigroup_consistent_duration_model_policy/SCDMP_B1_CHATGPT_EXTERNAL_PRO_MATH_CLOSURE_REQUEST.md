@@ -7,8 +7,8 @@ direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B1
 revision=SCDMP-B1-SCIENCE-20260812-05
 supersedes_revision=SCDMP-B1-SCIENCE-20260812-04_PRO_CLOSED
-conversation=continue_exact_existing_direction_conversation
-send_status=PREPARED_NOT_SENT
+conversation=https://chatgpt.com/c/6a7ce86f-c34c-83e8-94b2-d06c2a833561
+send_status=SENT_COMPLETE_CLOSED
 ```
 
 Continue the existing dedicated ChatGPT External Pro conversation for exactly

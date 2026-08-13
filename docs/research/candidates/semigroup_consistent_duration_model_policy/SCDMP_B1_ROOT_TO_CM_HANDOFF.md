@@ -9,6 +9,8 @@ owner=EM_semigroup_consistent_duration_model_policy
 handoff_status=PREPARED_NOT_SENT
 production_authorized=false
 tests_authorized=false
+chatgpt_external_pro_math_closure=CLOSED_ON_EXACT_V5
+em_closure_intake=accepted_without_science_change
 ```
 
 ## Exact owner packet
@@ -32,14 +34,15 @@ population and order, exact NumPy `1.26.3` API, floor, one-time float32 cast,
 sharing and all affected downstream uses. The ambiguity was returned without
 CM choosing the science; no result or runtime value informed the correction.
 
-This prepared packet does not release construction or production. Root may
-relay it to CM only after the existing dedicated SCDMP ChatGPT Pro conversation
-returns literal `CLOSED` for exact revision `SCDMP-B1-SCIENCE-20260812-05` and
-this same-direction EM intakes that ruling. CM owns source, runner, environment,
-tests only if the user separately authorizes them, execution, exact resource
-accounting, and technical acceptance. Any proposed science-bearing change
-returns to this EM and creates a new complete revision requiring another ruling
-in the same Pro conversation.
+Exact v5 has received literal `CLOSED` in the existing dedicated SCDMP ChatGPT
+Pro conversation, and this same-direction EM has accepted that ruling without
+a science-bearing change. The mathematical/causal prerequisite is satisfied.
+This prepared packet still does not itself release construction or production;
+Root may now decide whether to relay it to CM. CM owns source, runner,
+environment, tests only if the user separately authorizes them, execution,
+exact resource accounting, and technical acceptance. Any proposed science-
+bearing change returns to this EM and creates a new complete revision requiring
+another ruling in the same Pro conversation.
 
 ## Non-negotiable conformance points
 
@@ -149,9 +152,10 @@ The denominator choice is science-bearing because it fixes objective weights
 and thresholded standardized values. It changes no named statistic or loss
 term, loss weight, numeric threshold, estimand, sample/seed count, branch,
 activity boundary, parameter count, environment ledger, strongest alternative,
-claim ceiling, second-surface trigger, or UAV boundary. Exact v5, not v4, must
-now receive same-conversation Pro `CLOSED` plus owner intake before any CM
-construction release.
+claim ceiling, second-surface trigger, or UAV boundary. Exact v5, not v4, has
+now received same-conversation Pro `CLOSED` plus owner intake. This completes
+only the mathematical/causal prerequisite; Root still owns any CM construction
+release.
 
 ## Resource and return
 

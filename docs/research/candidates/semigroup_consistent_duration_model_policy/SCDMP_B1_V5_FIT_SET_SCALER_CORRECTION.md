@@ -10,6 +10,8 @@ result_inspected=false
 science_bearing_change=true
 construction_authorized=false
 production_authorized=false
+chatgpt_external_pro_math_closure=CLOSED_ON_EXACT_V5
+em_closure_intake=accepted_without_science_change
 ```
 
 ## Adjudication
@@ -93,6 +95,11 @@ numerical meaning to pre-existing standardized objects; no gate is weakened.
 V4 remains historically Pro-closed as written but is prospectively superseded.
 Only literal `CLOSED` on complete v5 in the existing direction Pro conversation,
 followed by this EM's intake, can reopen the CM construction route.
+
+That exact same-conversation `CLOSED` ruling and same-direction intake are now
+complete. The correction remains unchanged. This satisfies only the
+mathematical/causal prerequisite; Root retains CM relay and production
+sequencing, while CM retains technical acceptance.
 
 ## Exact Root-to-CM correction
 

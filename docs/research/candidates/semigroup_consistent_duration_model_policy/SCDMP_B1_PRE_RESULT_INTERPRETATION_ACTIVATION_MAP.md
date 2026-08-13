@@ -5,8 +5,10 @@ owner=EM_semigroup_consistent_duration_model_policy
 direction=semigroup_consistent_duration_model_policy
 controlling_revision=SCDMP-B1-SCIENCE-20260812-05
 result_inspected=false
-map_status=FROZEN_PENDING_EXACT_V5_PRO_CLOSURE
+map_status=FROZEN_RESULT_BLIND_AND_OPERATIVE_FOR_EXACT_V5
 scientific_activity_started=false
+chatgpt_external_pro_math_closure=CLOSED_ON_EXACT_V5
+em_closure_intake=accepted_without_science_change
 ```
 
 ## Decision first
@@ -18,9 +20,10 @@ Exact v5 uses per-seed arm-shared finite-population fit scalers (`ddof=0`) at
 every standardized-residual location; a result produced under any other scaler
 law does not conform to v5 and returns to CM without scientific interpretation.
 
-This result-blind map becomes operative only after literal same-conversation
-ChatGPT Pro `CLOSED` on exact v5 and this owner's intake. It does not authorize
-construction or production.
+Literal same-conversation ChatGPT Pro `CLOSED` on exact v5 and this owner's
+intake are now complete, so this result-blind map is operative for any future
+technically accepted exact-v5 result. It does not authorize construction or
+production.
 
 ## Technical and scientific prerequisites
 
