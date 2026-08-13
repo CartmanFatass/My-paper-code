@@ -1155,3 +1155,250 @@ Pro closure and EM intake.
 Do not open CMSP or APFI now. Retain them as the two conditional backups. Give
 MGTAP no successor-definition cycle unless a leader stalls and the terminal
 option is reassessed against the remaining frontier.
+
+## 2026-08-13 continuity-deduplicated campaign final portfolio cut
+
+This portfolio section supersedes only earlier cross-direction ordering,
+screening novelty, and allocation statements. It does not rewrite any
+direction-local evidence, Pro ruling, EM/CM acceptance, activity boundary,
+runtime result, or existing provider identity. The campaign artifacts are in
+`C:/Projects/HMASD/temp/portfolio-root-bridge_019ffc20_019ff50e/`.
+
+### Campaign evidence and corrected novelty result
+
+The local campaign screened all 190 mature MyLib records and all 27 curated
+HMASD records without invoking a downloader, publisher workflow, web search,
+or new InstSci acquisition. It retained 42 provenance-bound evidence packets:
+eight static-variable-`N`, eight dynamic-variable-`N`, eight exogenous-`k`,
+eight adaptive-`k`, and ten cross-axis or methodology packets. The
+continuity-deduplicated atlas contains 32 coherent parent or subfamily rows,
+eight portfolio-level proposal cards, and eight family-dividing
+discriminators. Seven residual candidates received independent innovation,
+learning-principles, and adversarial-critic review: CMSP, APFI, DCPR, LISR,
+ALACB, ACTRC, and BIR-C. The 21 exact native-child task identities and their
+terminal conclusions are indexed in
+`C:/Projects/HMASD/temp/portfolio-root-bridge_019ffc20_019ff50e/CAMPAIGN_REVIEW_PROVENANCE.md`;
+these are advisory returns, not a quorum or substitute for Pro closure.
+
+The earlier VAP/VSP packet records already used 26 of the 42 selected sources.
+The older `BACKUP_NOT_DISPATCHED` variable-subagent-count campaign adds 19
+manifest overlaps and five near-miss overlaps; the union of any prior
+VAP/VSP/VSC campaign surface is 30/42. Twelve rows have no such prior campaign
+surface, but comparison against the current 26-direction continuity and this
+canonical portfolio still yields no independent parent operator.
+
+The honest campaign-new parent count is therefore **zero**: static `N` zero,
+dynamic `N` zero, exogenous `k` zero, adaptive `k` zero, and cross-axis methods
+zero. The initial search target of at least eight genuinely new parents is not
+met and must not be manufactured from renamed architectures, first-seen source
+records, old unexecuted retrievals, or minor method factors. This is a bounded
+continuity result, not a claim that the global literature contains no novelty.
+Source results retain their original conditions and transfer no HMASD efficacy.
+
+### Current investment set
+
+The best nonredundant investment set remains exactly three directions:
+
+1. **SGSP revision 05** remains the primary direct static-variable-`N` route.
+   Exact r05 is same-conversation Pro `CLOSED` and EM-intaken. Its protected
+   question is semantic topology-conditioned aggregation versus the wider
+   edge-aware containing alternative, opposite center, and anonymous control,
+   with sender reassociation and anchor swap. Its maximum claim remains the
+   registered balanced two-role dense toy trained at `N={8,12}` and frozen at
+   held-out `N={6,16}`; no arbitrary topology, roster, churn, UAV, safety, or
+   deployment claim follows.
+2. **RCLE revision 04** remains the mechanism-distinct persistent-latent
+   static-variable-`N` route. Exact r04 is same-conversation Pro `CLOSED` and
+   EM-intaken. Correct latent pairing must beat centered-shuffled-MI and
+   private-entropy controls while surviving the optimizer-geometry
+   alternative. Its maximum claim remains the accepted-roster hidden-lock toy
+   trained at `N={4,8}` and frozen at `N=12`; no arbitrary roster, churn,
+   continuous-control, UAV, or deployment claim follows.
+3. **RISP revision 06** remains the direct exogenous-variable-`k` definition
+   and closure route. Pro required two r05 stochastic-law corrections; the EM
+   accepted them and froze exact r06, while the paired CM found no remaining
+   static-bindability ambiguity. R06 still needs a literal disposition in the
+   existing same-conversation Pro session and same-direction EM intake. No
+   stochastic result exists. Even a qualified later result is bounded to the
+   registered finite two-agent renewal toy, finite budget, train `k={4,8}` and
+   frozen `k=12`, `4->12`, and `12->4` panels. It cannot establish added
+   information, exclusive expressivity, generic recurrent superiority,
+   learned termination, arbitrary `k`, UAV value, safety, or deployment.
+
+SGSP changes semantic relational aggregation, RCLE changes persistent
+exploration coverage, and RISP changes a renewal-indexed coordinate prior.
+They are not fused merely because all target robustness under a variable axis.
+
+### Conditional backups and competition
+
+- **CMSP** remains the first conditional static-`N` backup, not a new parent.
+  It opens only if a direct static leader fails to provide a qualified result
+  or a natural surface has equal `N`, mean, and variance but different
+  decision-relevant shape. Its discriminator must compare a registered finite
+  characteristic coordinate with `M2`, an exact-containing invariant-set
+  model, and an outcome-independent alternative spectral anchor under a
+  marginal-preserving shape yoke.
+- **APFI** remains the strongest conditional dynamic-`N` backup by decision
+  information, not readiness. It opens only when a natural fresh-principal
+  host gives the same complete pre-probe information but different persistent
+  future source/sink laws, opposite optimal downstream actions, and a safe
+  real-versus-physically-identical-sham probe. Snapshot, exact-containing
+  event-RNN, history-swap, response-swap, and downstream-action-clamp controls
+  are mandatory.
+- **BIR-C** is only a tertiary conditional screen. `MARL-0379` was already
+  selected as VSC `SRC-VSC-05`, but that campaign dispatched no packet or
+  candidate. Reactivation requires a physically meaningful sparse `q=3`
+  relational object, an exact lower-order collision, an independently
+  reassociated coalition sham, an exact-containing invariant hypergraph
+  critic, and one frozen permutation-invariant triad parameterization across
+  training and held-out `N`. External reward/data, actor architecture,
+  initialization, update rule, information, capacity, and useful work remain
+  matched; critic-derived advantage is the intended mediator. Retention
+  requires a registered `critic error -> actor update -> legal action -> task
+  value` path. It receives no new-parent credit and no current action.
+
+SGSP, CMSP, and BIR-C divide semantic pairwise topology, unary empirical-shape
+coordinates, and irreducible higher-order association respectively. APFI must
+beat lifecycle memory, EC4G-style probe gating, and a full event-history RNN.
+RISP must remain separated from LISR late-evidence termination, SCDMP semigroup
+composition, and PETD phase/tail/complementarity duration assignment. ALACB,
+ACTRC, and DCPR are cross-cutting method factors rather than variable-axis
+parent families. RCLE remains separate from all of them because it changes
+persistent exploration coverage.
+
+### No current investment and exact revisit conditions
+
+1. **MGTAP automatic rerun:** revision 04 remains structurally
+   nonidentified. Revisit only if a leader stalls and the EM freezes the one
+   terminal Pro-advised stationarity successor; there is no automatic or third
+   extension.
+2. **Independent LOEM:** the other-only mean is algebraically recoverable from
+   inclusive mean, own feature, and explicit `N`. Revisit only after a
+   pre-bottleneck noncommuting operation creates a legal-action noncontainment.
+3. **VQFP current host:** revisit only on a separately frozen unsaturated,
+   allocation-constrained host with oracle headroom and action sensitivity.
+4. **SCDMP current objects:** revisit only if direct variable-`k` work fails
+   and semigroup specificity becomes decision-critical, using a fresh
+   stability-first object with prospective calibration.
+5. **Homogeneous-host CCIC:** revisit only under heterogeneous covariance that
+   scalar ESS cannot absorb and after a new resource projection.
+6. **CRTO r04:** do not rerun or weaken the failed preactivity probe. Revisit
+   only through a separately frozen probe-only
+   optimization-versus-representation discriminator.
+7. **EBCR:** revisit only after an allowed-information oracle proves
+   content-aware renewal headroom and a readiness-matched control excludes
+   request packing and renewal suppression.
+8. **ONLGR:** revisit only through a new from-scratch campaign after
+   evaluator/serialization conformance, fresh CM acceptance, unchanged-science
+   EM confirmation or same-Pro reclosure, and a new portfolio decision.
+9. **VNFC-B2:** revisit only with an access-competent treatment, explicit
+   stale-command observables, and the complete typed/raw/reset comparison.
+10. **VNFC-B3 and reward-aware allocation:** revisit only on a natural,
+    reward-blind, scalable lifecycle host with true join/drop, above-training
+    `N`, feasible KEEP/SWITCH histories, and a strong fixed comparator.
+11. **ROSTER-SMF:** revisit only if an independent no-full-scan subset oracle
+    or host access law yields a strict symmetric resource separation rather
+    than ordinary all-`N` census reducibility.
+12. **BIR-C as a standalone direction:** no current investment. Revisit only
+    after the physical sparse-triad, lower-order collision, binding sham,
+    containing-comparator, shared-parameter held-out-`N`, critic-to-actor/action
+    mediation, and finite-work conditions above close.
+13. **DCPR as a standalone direction:** no current investment. Revisit only in
+    authenticated mixed-autonomy or unknown-partner settings. Freeze complete
+    focal-agent legal-action support separately from a dataset-consistent
+    partner-policy ambiguity set whose members agree on logged tuples but
+    conflict at a declared mixed/off-support role-observation; retain a logged
+    anchor-role action conflict. A homogeneous known shared-checkpoint team or
+    a setting without that ambiguity does not instantiate the object.
+14. **LISR as a standalone direction:** it is an existing learned-termination
+    refinement. Revisit only if identical-initiation histories acquire later
+    evidence that reverses signed continuation value and the question is worth
+    testing against an exact-containing recurrent termination policy.
+15. **ALACB as a standalone direction:** it is absorbed by
+    mask-conditioned partial-action replacement/CFCQL. Retain only as an
+    axis-native ablation unless a correct/global/deranged/containing-mask panel
+    produces an action-changing residual.
+16. **ACTRC as a standalone direction:** it is ordinary axis-conditioned
+    distributional CVaR unless a frozen structured tail prior beats a competent
+    full conditional-CVaR critic and an axis-tail derangement changes action
+    and tail value.
+
+These are scientific value and identifiability decisions. Missing code,
+runner, adapter, host binding, or repository availability is not a rejection
+reason.
+
+### Immediate prerequisite and family-dividing discriminator order
+
+The sole immediate action is a prerequisite, not discriminator evidence:
+continue the existing RISP-r06 same-conversation mathematical-closure request
+and EM intake. Pro closure assesses the exact science definition; it neither
+runs nor answers the structure-by-feedback comparison.
+
+1. **Later, separately authorized: RISP structure x recipient feedback.** Only
+   after r06 Pro `CLOSED`, EM intake, and a new production decision may the
+   complete frozen Lock-2 panel divide the registered score coordinate,
+   exactly translatable SIGN-RNN, and generic feedback value under equal
+   information, state, work, and update exposure. Comparator incompetence or
+   an incomplete panel is nonidentification, not family evidence.
+2. **Conditional: CMSP moment collision.** Equal `N`/mean/variance worlds,
+   `M2`, exact-containing invariant set, alternative anchor, and shape yoke
+   decide characteristic-coordinate bias versus generic shape or optimizer
+   geometry.
+3. **Conditional: APFI real/sham flow.** The architecture-by-information
+   interaction and response-to-action clamps decide structured active flow
+   inference versus lifecycle memory, generic recurrence, or probe side
+   effects.
+4. **Conditional: BIR q-order association.** Order-3, order-2, independent
+   coalition sham, and exact-containing invariant critic decide higher-order
+   necessity and any finite-budget structured bias.
+5. **No current action: DCPR mixed/off-support partner binding.** Twin partner
+   policies agree on authenticated logs but conflict at the declared ambiguous
+   partner role-observation. BC-first, global minimax, shuffled anchor binding,
+   and containing robust-set learning decide whether a partner-local residual
+   exists; absent mixed/off-support ambiguity means the object is absent.
+6. **No current action: LISR late evidence.** Start-only oracle, timing-only,
+   and full recurrent termination decide whether post-initiation information
+   matters beyond generic stopping.
+7. **No current action: ALACB localization.** Correct, global, deranged, and
+   exact-containing masks decide localization value and standalone absorption.
+8. **No current action: ACTRC conditional tail.** Mean, pooled tail,
+   full conditional-CVaR, and axis-tail derangement decide risk-method value
+   and standalone absorption.
+
+None of items 1 through 8 is currently authorized to run. The only immediate
+action is the RISP-r06 closure prerequisite above. Items 2 through 4 are
+conditional backups, and items 5 through 8 authorize nothing. This preserves
+the one-new-action rule while retaining more than six family-deleting
+discriminators.
+
+### Provider identities and exact operational action
+
+No new active direction is selected, so this cut creates no new ChatGPT
+External Pro or Gemini identity. Preserve the accurate direction-local SGSP,
+RCLE, and RISP provider states; do not infer a Gemini conversation from an
+unsent or noncommitted attempt. If a provider turn already exists, continue
+only its saved remote identity and never resend it.
+
+If CMSP, APFI, or BIR-C is later promoted, its dedicated Pro purpose is exact-
+card causal/mathematical closure followed by same-conversation result
+convergence. Its separate Gemini purpose is respectively a non-tail
+shape/UAV surface, a safe diagnostic churn/UAV surface, or a sparse
+authenticated triadic/UAV bridge. Gemini remains divergent and non-gating.
+Provider transport, tabs, archives, identities, and result intake remain with
+operational Root and the same-direction EM; this portfolio session performs
+none of those actions.
+
+The exact operational action is: preserve SGSP r05 and RCLE r04; continue only
+the existing RISP r06 same-conversation mathematical-closure request and
+same-direction EM intake. If the r06 request was committed, continue the saved
+conversation without resend. Do not open CMSP, APFI, BIR-C, DCPR, LISR,
+ALACB, or ACTRC; do not create a provider identity; and do not authorize
+construction, production, or heavy compute from this cut. Return a new compact
+portfolio milestone only if the r06 ruling or a later complete owner-intaken
+result changes investment value, claim ceiling, competition, or the next
+family-dividing discriminator.
+
+No direction has yet produced the project-level winning algorithm. The
+destination remains one shared parameterization that improves task performance
+or robustness against a matched baseline under held-out variable `N` or `k`,
+followed by same-direction result convergence and a second-surface/UAV action.
