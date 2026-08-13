@@ -8,10 +8,10 @@ supersedes_revision=SCDMP-B1-SCIENCE-20260812-03
 owner=EM_semigroup_consistent_duration_model_policy
 source_inspiration=SCDMP-VK-FAMILY-CUT-01
 source_is_evidence=false
-artifact_status=PREPARED_NOT_SENT
+artifact_status=PRO_CLOSED_EM_INTAKE_COMPLETE
 scientific_activity_started=false
 production_authorized=false
-chatgpt_external_pro_math_closure=required_on_v4
+chatgpt_external_pro_math_closure=CLOSED_ON_EXACT_V4
 ```
 
 ## Direction decision and bounded question
@@ -54,9 +54,10 @@ branch executable; and freezes oracle tie-breaking. A change to its DGP,
 observation, word law, arms, losses, activity rule, training/evaluation split,
 estimands, margins, inference, interpretation, or resources creates a new
 complete revision.
-Production requires a literal `CLOSED` ruling on this exact revision from the
-dedicated same-direction ChatGPT External Pro conversation, this EM's intake of
-that ruling, CM technical acceptance, and Root scheduling.
+The dedicated same-direction ChatGPT External Pro returned literal `CLOSED` on
+this exact revision and this EM accepted the ruling without a science-bearing
+change. The mathematical/causal closure boundary is complete. Production still
+requires CM technical acceptance and Root scheduling.
 
 ## Deterministic four-agent convoy DGP
 

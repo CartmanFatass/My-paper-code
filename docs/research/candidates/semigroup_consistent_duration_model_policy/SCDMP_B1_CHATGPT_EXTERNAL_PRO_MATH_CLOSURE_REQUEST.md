@@ -8,8 +8,15 @@ candidate=SCDMP-B1
 revision=SCDMP-B1-SCIENCE-20260812-04
 supersedes_revision=SCDMP-B1-SCIENCE-20260812-03_REVISION_REQUIRED
 conversation=continue_exact_existing_direction_conversation
-send_status=PREPARED_NOT_SENT
+send_status=COMPLETE_CLOSED_EM_INTAKE_COMPLETE
 ```
+
+This exact requester was sent once in the saved direction conversation. The
+natural response began with literal `CLOSED`; the complete raw response and
+strict receipt are archived in the v4 transport partition, and the same-
+direction intake is recorded in
+`SCDMP_B1_V4_EXTERNAL_PRO_CLOSED_INTAKE.md`. This historical request grants no
+construction, execution, production, portfolio, ground-robot, or UAV authority.
 
 Continue the existing dedicated ChatGPT External Pro conversation for exactly
 this SCDMP direction. The same scientific owner accepted all six blocking

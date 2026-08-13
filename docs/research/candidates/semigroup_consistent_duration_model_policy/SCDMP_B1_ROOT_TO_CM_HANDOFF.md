@@ -6,7 +6,7 @@ candidate=SCDMP-B1
 revision=SCDMP-B1-SCIENCE-20260812-04
 supersedes_revision=SCDMP-B1-SCIENCE-20260812-03_REVISION_REQUIRED
 owner=EM_semigroup_consistent_duration_model_policy
-handoff_status=PREPARED_NOT_SENT
+handoff_status=PRO_CLOSED_EM_INTAKE_COMPLETE
 production_authorized=false
 tests_authorized=false
 ```
@@ -23,14 +23,16 @@ undiscounted node/edge reward cocycle over observable, noncommuting context
 words. REAL reversed words activate order; label-identical SHAM words bound a
 duration/regularization shortcut.
 
-This file is prepared but does not release construction or production. Root
-may relay it to CM only after a dedicated same-direction ChatGPT External Pro
-returns literal `CLOSED` for exact revision
-`SCDMP-B1-SCIENCE-20260812-04` and the same-direction EM intakes that ruling.
-CM then owns source, runner, environment, tests only if the user separately
-authorizes them, execution, exact resource accounting, and technical
-acceptance. Any proposed science-bearing change returns to this EM and creates
-a new complete revision requiring another ruling in the same Pro conversation.
+The dedicated same-direction ChatGPT External Pro returned literal `CLOSED` for
+exact revision `SCDMP-B1-SCIENCE-20260812-04`, and this EM accepted the ruling
+without a science-bearing change. The mathematical/causal closure boundary is
+complete. Root may now relay this unchanged packet to CM for construction and
+technical acceptance when portfolio and host scheduling permit; this file does
+not itself release construction or production. CM owns source, runner,
+environment, tests only if the user separately authorizes them, execution,
+exact resource accounting, and technical acceptance. Any proposed science-
+bearing change returns to this EM and creates a new complete revision requiring
+another ruling in the same Pro conversation.
 
 ## Non-negotiable conformance points
 
