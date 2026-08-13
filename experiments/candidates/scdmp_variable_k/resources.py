@@ -3,6 +3,7 @@ from __future__ import annotations
 import ctypes
 import os
 import time
+from ctypes import wintypes
 from dataclasses import dataclass, field
 
 from .config import REGISTERED_RESOURCES
@@ -27,12 +28,21 @@ def _resident_bytes() -> int:
             ]
         counters = Counters()
         counters.cb = ctypes.sizeof(Counters)
-        process = ctypes.windll.kernel32.GetCurrentProcess()
-        ok = ctypes.windll.psapi.GetProcessMemoryInfo(
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        psapi = ctypes.WinDLL("psapi", use_last_error=True)
+        kernel32.GetCurrentProcess.argtypes = ()
+        kernel32.GetCurrentProcess.restype = wintypes.HANDLE
+        psapi.GetProcessMemoryInfo.argtypes = (
+            wintypes.HANDLE, ctypes.POINTER(Counters), wintypes.DWORD,
+        )
+        psapi.GetProcessMemoryInfo.restype = wintypes.BOOL
+        process = kernel32.GetCurrentProcess()
+        ok = psapi.GetProcessMemoryInfo(
             process, ctypes.byref(counters), counters.cb,
         )
         if not ok:
-            raise OSError("GetProcessMemoryInfo failed")
+            error = ctypes.get_last_error()
+            raise ctypes.WinError(error)
         return int(counters.PeakWorkingSetSize)
     import resource
     value = int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
