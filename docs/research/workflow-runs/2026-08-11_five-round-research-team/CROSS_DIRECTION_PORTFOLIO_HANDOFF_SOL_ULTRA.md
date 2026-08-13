@@ -3,6 +3,7 @@
 ```text
 handoff_scope=cross_direction_discovery|cross_direction_comparison|portfolio
 target_surface=new_Codex_sidebar_task
+target_session_id=019ffc20-5001-7453-a08a-dac783cf4d80
 target_model=gpt-5.6-sol
 reasoning_effort=ultra
 source_task_retains=single_direction_management|direction_integration|shared_tooling
