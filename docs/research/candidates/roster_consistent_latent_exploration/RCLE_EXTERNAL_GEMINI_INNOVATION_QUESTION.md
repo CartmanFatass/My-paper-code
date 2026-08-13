@@ -1,7 +1,7 @@
 # RCLE independent External Gemini innovation question
 
-Requester state: `PREPARED_NOT_SENT_ROOT_AUTHORITY_REQUIRED`
-Question identity: `RCLE-B1-GEMINI-INNOVATION-20260813-03`
+Requester state: `AUTHORIZED_NOT_SENT`
+Question identity: `RCLE-B1-GEMINI-INNOVATION-20260813-04`
 
 Open one new dedicated Gemini 3.1 Pro conversation with Extended thinking for
 exactly `direction:roster_consistent_latent_exploration`. This is the independent
@@ -11,7 +11,7 @@ Gemini as mathematical closure, convergence, result acceptance, technical
 acceptance, or portfolio authority.
 
 No RCLE construction, run, checkpoint, or result exists. Work only from the
-prospective revision `RCLE-B1-SCIENCE-20260813-03`, available in repository
+prospective revision `RCLE-B1-SCIENCE-20260813-04`, available in repository
 `CartmanFatass/My-paper-code`, branch `aggressive`, at:
 
 ```text
@@ -33,6 +33,12 @@ private-latent entropy package. It restricts the posterior to a unique task-vali
 relative rotation, freezes the accepted-roster law, supplies scripted oracle
 headroom, anchors latent semantics at `N=4`, tests the same mapping at `N=8,12`,
 and includes common-latent and temporal-persistence cuts.
+
+Common-latent semantic endpoints and the anchored mechanism gates are RCLE-only
+where appropriate; the private-latent arm has no artificial common-`Z`
+endpoint. Scientific activity begins with the first registered stochastic
+object, and the frozen result map uses explicit contrast predicates with
+invalid/incomplete and zero-validity precedence.
 
 The intended ceiling is narrow: finite-budget hidden-lock discovery on one
 accepted-roster mean-field toy. There is no claim of arbitrary `N`, churn,

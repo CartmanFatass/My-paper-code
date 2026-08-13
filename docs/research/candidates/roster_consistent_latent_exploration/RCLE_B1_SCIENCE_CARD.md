@@ -3,19 +3,19 @@
 ```text
 direction=roster_consistent_latent_exploration
 candidate=RCLE-B1
-revision=RCLE-B1-SCIENCE-20260813-03
+revision=RCLE-B1-SCIENCE-20260813-04
 owner=EM_roster_consistent_latent_exploration
 scientific_activity_started=false
-mathematical_closure=NEW_CHATGPT_EXTERNAL_PRO_CONVERSATION_NOT_AUTHORIZED
-external_gemini=NEW_CONVERSATION_NOT_AUTHORIZED
+mathematical_closure=V3_REVISION_REQUIRED_V4_SAME_CONVERSATION_REREVIEW_PENDING
+external_gemini=AUTHORIZED_NOT_SENT
 construction_authorization=none
 compute_authorization=none
 ```
 
 ## Conclusion first
 
-RCLE-B1 is a meaning-complete, result-blind, direct variable-`N` candidate worth
-authoritative mathematical/causal closure. It asks whether a correctly paired
+RCLE-B1 is a meaning-complete, result-blind, direct variable-`N` candidate under
+same-conversation authoritative mathematical/causal rereview. It asks whether a correctly paired
 actor-facing information signal organizes an episode-persistent common latent
 into several task-valid, roster-adaptive exploration strategies, improving a
 fixed four-probe hidden-lock objective after one shared policy is trained at
@@ -549,18 +549,22 @@ four fresh private-latent arrays. There are no updates, recurrent campaign
 memory, selected latents, greedy decoding, or evaluation-based checkpoint or
 hyperparameter choice.
 
-For every seed, arm, and roster report:
+For every seed and arm report campaign task value `C`, per-probe return,
+validity and mean winning agreement `F_K*`, distinct valid rotations per four
+probes, hidden-lock discovery, action sensitivity to permitted actor inputs,
+route and relative-rotation histograms, invalid/tie counts, host rejection
+draws, the retained `Xi` marginal, and exact episodes, agent decisions,
+optimizer updates, parameters, work, and anomalies.
 
-- campaign task value `C` and per-probe return;
-- per-latent valid rate and mean winning agreement `F_K*`;
-- distinct valid rotations per four probes and hidden-lock discovery;
-- the normalized variational bound for `I(Z;Y_sem)` and posterior accuracy;
-- the complete `P(K*=k,V=1|Z=z)` matrix;
-- action sensitivity to `X_i`, `mu_N`, and latent;
-- actual route/relative-rotation histograms and invalid/tie counts;
-- host rejection draws and the retained `Xi` marginal; and
-- exact episodes, agent decisions, optimizer updates, parameters, work, and
-  anomalies.
+The common-latent semantic diagnostics are defined separately for `RCLE`,
+`COMMON-Z`, and `SHUFFLED-MI` only and always carry an explicit arm index. They
+are per-common-`Z` valid rate, the normalized variational lower bound for
+`I(Z;Y_sem)`, common-latent posterior accuracy, and the complete
+`P(K*=k,V=1|Z=z)` matrix. `INDEPENDENT-ENTROPY` has no scalar episode-common
+`Z`, hence has no common-`Z` semantic map, common-`Z` MI endpoint,
+per-common-latent valid rate, or common-`Z` posterior-accuracy endpoint. For
+that arm additionally report private-latent route entropy; its dummy-label
+posterior is reported only as a nonsemantic work-matching diagnostic.
 
 For each seed, the `N=4` campaigns are split before looking at outcomes. Within
 each hidden-lock stratum, campaign indices `0..255` form the anchor half and
@@ -569,10 +573,10 @@ campaigns, 256 per hidden lock, and every common latent appears once in every
 campaign. The split is fixed by counter index and does not consume extra
 episodes.
 
-Use only the anchor half to choose
+For RCLE, use only the anchor half to choose
 
 \[
-m_{s,z}=\arg\max_k\widehat P_{s,\mathrm{anchor}}
+m^{\rm RCLE}_{s,z}=\arg\max_k\widehat P^{\rm RCLE}_{s,\mathrm{anchor}}
 (K^\star=k,V=1\mid Z=z,N=4)
 \]
 
@@ -585,20 +589,27 @@ For every seed, latent, and roster size, define the anchored valid-semantic
 fidelity
 
 \[
-U_{s,z,N}=\widehat P_s(V=1,K^\star=m_{s,z}\mid Z=z,N).
+U^{\rm RCLE}_{s,z,N}=\widehat P^{\rm RCLE}_s
+(V=1,K^\star=m^{\rm RCLE}_{s,z}\mid Z=z,N).
 \]
 
-At `N=4`, `U` is estimated only on the scoring half; at `N=8,12`, it uses all
-2,048 campaigns. Also report
+At `N=4`, `U^{RCLE}` is estimated only on the scoring half; at `N=8,12`, it
+uses all 2,048 campaigns. Also report
 
 \[
-S_{s,N}=\frac14\sum_zU_{s,z,N}.
+S^{\rm RCLE}_{s,N}=\frac14\sum_zU^{\rm RCLE}_{s,z,N}.
 \]
 
 These quantities report whether every latent remains valid and realizes its
 same `N=4`-anchored relative rotation. The anchor/scoring split prevents the
 anchor selection data from also proving `N=4` fidelity, and a provider or
 analyst may not relabel each roster independently.
+
+The anchor, fidelity quantities, per-seed tie/bijection gate, 12 simultaneous
+fidelity bounds, and posterior-restriction gate used for mechanism attribution
+are RCLE-only. A control-arm semantic map may be reported descriptively using
+the same fixed split only when every symbol bears its explicit arm subscript;
+it never enters the RCLE mechanism gate.
 
 Two frozen-checkpoint mechanism cuts use the same evaluation campaigns:
 
@@ -611,11 +622,24 @@ They are evaluation-only functional interventions. Their task-value losses
 diagnose dependence on cross-agent coupling and temporal persistence; they do
 not prove natural mediation.
 
-Seeds, not campaigns, are the independent units. For a paired contrast, let
-`d_s` be the seed's mean campaign-value difference at `N=12`. Under the stated
-independent Normal seed-effect model, use a one-sided Student-`t` bound with 11
-degrees of freedom. The direct algorithm-positive branch requires all three
-Bonferroni one-sided `98.333333%` lower bounds for
+Seeds, not campaigns, are the independent units. For each
+`j in {COMMON,SHUFFLED,INDEP}`, let
+
+\[
+\Delta_{j,s}=C_{{\rm RCLE},s,N=12}-C_{j,s,N=12}.
+\]
+
+Under the stated independent Normal seed-effect model, use one-sided
+Student-`t` bounds with 11 degrees of freedom. Define `POS_j` iff the
+Bonferroni one-sided `98.333333%` lower bound for `Delta_j` exceeds `0.10`,
+`NO_MAT_j` iff its one-sided 95% upper bound is below `0.05`, and `UNRES_j`
+otherwise. Define
+
+```text
+PRIMARY_POSITIVE = POS_COMMON and POS_SHUFFLED and POS_INDEP
+```
+
+Thus the three primary contrasts are exactly
 
 ```text
 RCLE-COMMON-Z
@@ -623,35 +647,62 @@ RCLE-SHUFFLED-MI
 RCLE-INDEPENDENT-ENTROPY
 ```
 
-to exceed the prospective material margin `0.10` in campaign task value.
-Mechanism attribution additionally requires:
+and no unregistered cross-control ordering is inferred.
 
-- every `N=4` anchor row to have a unique empirical maximizer and the resulting
-  map to be a bijection in every seed;
+Define `CODEBOOK_SUPPORTED` iff:
+
+- every RCLE `N=4` anchor row has a unique empirical maximizer and the resulting
+  map is a bijection in every seed; and
 - for all 12 registered `(z,N)` cells, `z in {0,1,2,3}` and
   `N in {4,8,12}`, the one-sided Student-`t` lower bound across the 12 seed
-  values `U_{s,z,N}` to exceed `0.70`; these 12 bounds use a Bonferroni
+  values `U^{RCLE}_{s,z,N}` exceeds `0.70`; these 12 bounds use a Bonferroni
   familywise one-sided level of 95%, hence each marginal bound is
-  `99.583333%` with 11 degrees of freedom;
-- the one-sided 95% lower bound for intact-minus-`PRIVATE-LATENT-CUT` task value
-  to exceed `0.10`;
-- the corresponding lower bound for intact-minus-`TEMPORAL-LATENT-CUT` to
-  exceed `0.05`;
-- finite posterior diagnostics with no direct/invalid shortcut; and
-- exact row-permutation outcome invariance and common support/headroom.
+  `99.583333%` with 11 degrees of freedom.
+
+Define `POSTERIOR_RESTRICTION_OK` iff every RCLE posterior probability and
+derived score is finite, `q` receives `K*` only when `V=1`, `q(.|bot)=1/4` is
+fixed, and invalid episodes supply neither a posterior symbol nor a posterior
+update. No posterior-accuracy threshold is implied beyond the registered
+fidelity gates.
+
+Define `CUTS_OK` iff the one-sided 95% lower bound for RCLE intact minus
+`PRIVATE-LATENT-CUT` task value at `N=12` exceeds `0.10` and the corresponding
+RCLE intact minus `TEMPORAL-LATENT-CUT` lower bound exceeds `0.05`.
+
+Define `SUPPORT_HEADROOM_INVARIANCE_OK` iff every common host-gate requirement
+in Section 6 passes, including scripted headroom/collapse values, both actions,
+all locks and rotations, exact host row-permutation invariance, the declared
+information boundary, and nonempty accepted-roster panels.
+
+Define `COMPLETENESS_OK` iff every arm has all 12 registered seeds, 2,000
+complete training blocks, all ordinary campaigns and RCLE cuts, finite required
+outputs, one exact source revision/hyperparameter set, and no evaluation
+adaptation or leakage.
+
+Finally,
+
+```text
+MECHANISM_SUPPORTED =
+  PRIMARY_POSITIVE and CODEBOOK_SUPPORTED and CUTS_OK and
+  POSTERIOR_RESTRICTION_OK and SUPPORT_HEADROOM_INVARIANCE_OK and
+  COMPLETENESS_OK
+```
 
 These model-based bounds are prospective finite-seed inference, not
-distribution-free guarantees. A no-material-effect conclusion for one contrast
-requires its one-sided 95% upper bound to be below `0.05`; failure of both the
-positive and no-material bounds is unresolved, not equivalence or failure.
+distribution-free guarantees. `UNRES_j` is not equivalence, failure, parity,
+or evidence of no effect.
 
 ## 8. Activity, completeness, and resource ceiling
 
-Question-relevant scientific activity begins only after the complete common
-host/oracle/information gate is durably retained and the first full paired
-four-arm optimizer block has updated all actors at both training roster sizes.
-A source file, import, unit check, generated roster, partial gate, process
-launch, posterior-only update, or incomplete arm block is preactivity.
+Question-relevant scientific activity begins at the earliest materialization
+or inspection of any registered stochastic roster proposal, accepted roster,
+latent, action, training, posterior-training, calibration, validation,
+ordinary-evaluation, or functional-cut object, or at the first actor or
+posterior optimizer update, whichever occurs first. Purely deterministic source
+parsing, algebraic checks on explicitly hand-specified nonrandom fixtures, and
+static shape or information-boundary checks remain preactivity. Discarding a
+stochastic object does not restore preactivity. A partial or failed stochastic
+gate is scientific activity even when it supports no scientific result.
 
 A conclusion requires all 12 paired seeds, 2,000 complete training blocks per
 arm, all frozen evaluation campaigns and cuts, finite outputs, the same source
@@ -669,47 +720,57 @@ current stage.
 
 ## 9. Frozen interpretation branches
 
-1. **Held-out value plus registered mechanism.** All three primary comparisons,
-   semantic alignment, common/persistent cuts, validity, completeness, and
-   shortcut controls pass. Retain RCLE as a bounded variable-`N` candidate and
-   conclude only that the paired task-valid outcome score organized an already
-   supplied common latent into roster-adaptive strategies that improved this
-   toy's fixed-budget hidden-lock value. Return the complete result to this EM
-   and the same ChatGPT External Pro conversation for convergence before any
-   second surface.
-2. **Package value without semantic-MI attribution.** RCLE beats the controls
-   but the anchored map, posterior restriction, or coupling/persistence cuts do
-   not pass. Report only the bounded package effect; do not name normalized MI
-   or persistent correlation as the identified cause.
-3. **Common randomness is sufficient.** `COMMON-Z` is not materially below RCLE
-   and beats the private package while the no-material upper bound closes.
-   Delete actor-facing MI from the useful primitive; retain at most the simpler
-   common-latent hypothesis for a separately chosen successor.
-4. **Random-score explanation.** `SHUFFLED-MI` is not materially below RCLE.
-   Correct latent/outcome pairing is not identified; coherent versus random
-   optimizer geometry remains the strongest explanation. Do not retain the
-   semantic-MI claim.
-5. **Independent exploration matches.** `INDEPENDENT-ENTROPY` is not materially
-   below RCLE. The full correlated-exploration package has no demonstrated task
-   advantage on this assay.
-6. **Modes without value.** RCLE produces a stable four-rotation codebook but
-   does not improve hidden-lock campaign value. Report organized diversity
-   without demonstrated task value and do not advance the exact package.
-7. **Training-size success, held-out failure.** The anchored map or value is
-   present at `N=4,8` but absent at `N=12`. Cardinality-normalized inputs did not
-   yield the protected held-out-size benefit; no variable-`N` claim is allowed.
-8. **Oracle headroom but no valid learned behavior.** All learned arms remain
-   invalid while the scripted codebook passes. The finite-budget optimization
-   question is nonidentified; this is not evidence against representability or
-   the general latent family.
-9. **Invalid/incomplete.** Any forbidden information path, failed oracle gate,
-   missing arm/seed, evaluation adaptation, nonfinite field, changed `Xi`
-   rejection law, or resource terminal with incomplete output supports no
-   scientific comparison.
-10. **Bounded no-effect.** Only the exact package/control pair whose registered
-    no-material upper bound closes may be described as lacking a material effect
-    on this finite assay. It never deletes persistent-latent exploration in all
-    environments.
+Define `INVALID_OR_INCOMPLETE` iff `COMPLETENESS_OK` is false or there is any
+forbidden information path, failed common host gate, changed `Xi` or rejection
+law, evaluation adaptation/leakage, source or hyperparameter mismatch, or
+resource terminal with incomplete output.
+Define `ORACLE_HEADROOM_WITH_ZERO_LEARNED_VALIDITY` iff the scripted oracle
+passes and `V=0` on every ordinary-evaluation probe for every learned arm,
+seed, and roster size.
+
+Apply this literal precedence:
+
+0. `INVALID_OR_INCOMPLETE` overrides every numerical, parity, no-material, and
+   failure interpretation and supports no scientific comparison.
+1. `ORACLE_HEADROOM_WITH_ZERO_LEARNED_VALIDITY` overrides every parity and
+   no-material interpretation. The finite-budget optimization question is
+   nonidentified; this is not evidence against representability or the general
+   latent family.
+2. If `MECHANISM_SUPPORTED`, retain RCLE as a bounded variable-`N` candidate
+   and conclude only that the paired task-valid outcome score organized an
+   already supplied common latent into roster-adaptive strategies that improved
+   this toy's fixed-budget hidden-lock value. Return the result to this EM and
+   the same ChatGPT External Pro conversation before any second surface.
+3. If `PRIMARY_POSITIVE` but not `MECHANISM_SUPPORTED`, report only a bounded
+   package effect. Semantic information, correct pairing as operative cause,
+   cross-agent coupling, and temporal persistence are not identified.
+4. Otherwise report `POS_j`, `NO_MAT_j`, or `UNRES_j` separately for every
+   registered RCLE/control contrast. Never infer an unregistered cross-control
+   ranking.
+
+The following branch language is exhaustive within item 4:
+
+- `NO_MAT_COMMON` permits only: "The detached-score common-latent arm was
+  within the registered 0.05 no-material band of RCLE on this assay." Delete
+  actor-facing MI from no primitive and do not rank `COMMON-Z` against
+  `INDEPENDENT-ENTROPY` without a separately frozen direct contrast.
+- `NO_MAT_SHUFFLED` permits only that correctly paired scoring showed no
+  material advantage over the centered random-label score on this assay;
+  coherent versus random optimizer geometry remains unresolved.
+- `NO_MAT_INDEP` permits only that RCLE demonstrated no material campaign-value
+  advantage over the registered persistent-private-entropy package.
+- "Organized modes without demonstrated incremental package value" is allowed
+  only when `CODEBOOK_SUPPORTED` and all three `NO_MAT_j` predicates hold.
+  Otherwise value is unresolved for every contrast not classified `POS_j` or
+  `NO_MAT_j`.
+- If all RCLE `N=4,8` fidelity lower-bound gates pass but any `N=12` fidelity
+  lower-bound gate does not pass, report only: "The registered held-out
+  fidelity criterion was not established at N=12." A lower-bound nonpass is
+  not affirmative held-out failure and does not show that cardinality
+  normalization failed.
+- A bounded no-material statement is allowed only for the exact contrast whose
+  `NO_MAT_j` predicate holds. It never deletes persistent-latent exploration
+  beyond this finite assay.
 
 ## 10. Claim ceiling
 
@@ -753,12 +814,12 @@ provides no evidence about any such surface.
 
 ## 12. Current owner handoff
 
-The same-direction CM may now inspect exact revision
-`RCLE-B1-SCIENCE-20260813-03` for constructability, hidden ambiguity, and static
-cost only. It must not construct a stochastic treatment or run a probe under
-the current envelope. Any science-bearing ambiguity returns directly to this
-EM. A technically feasible card returns to Root as a decision milestone because
-RCLE needs two new, separate provider conversations: one ChatGPT External Pro
-conversation for authoritative mathematical closure and one mutually blind
-Gemini innovator conversation. Their prepared requesters are independent files;
-neither has send authority.
+ChatGPT External Pro required three exact prospective repairs to revision 03;
+revision `RCLE-B1-SCIENCE-20260813-04` incorporates all three without using any
+RCLE stochastic object. The same-direction CM may inspect revision 04 for
+remaining science-definition ambiguity and static constructability only. It
+must not construct or materialize any stochastic object. After that audit,
+revision 04 returns to the direction's existing dedicated Pro conversation for
+literal `CLOSED` or another exact `REVISION_REQUIRED`. The separately authorized
+Gemini innovator conversation remains unsent and mutually blind. No
+construction, test, or compute is authorized.

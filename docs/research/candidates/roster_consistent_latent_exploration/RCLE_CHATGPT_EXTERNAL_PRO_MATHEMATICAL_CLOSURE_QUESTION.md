@@ -1,6 +1,6 @@
 # RCLE B1 authoritative mathematical-closure question
 
-Requester state: `PREPARED_NOT_SENT_ROOT_AUTHORITY_REQUIRED`
+Requester state: `AUTHORIZED_NOT_SENT`
 
 Open one new dedicated ChatGPT External Pro conversation for exactly
 `direction:roster_consistent_latent_exploration`. This is a result-blind
