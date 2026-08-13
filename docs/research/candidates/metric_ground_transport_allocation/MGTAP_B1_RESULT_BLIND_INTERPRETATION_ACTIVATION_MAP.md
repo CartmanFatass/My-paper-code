@@ -2,12 +2,12 @@
 
 ```text
 direction=metric_ground_transport_allocation
-treatment_revision=MGTAP-B1-SCIENCE-20260813-03
+treatment_revision=MGTAP-B1-SCIENCE-20260813-04
 owner=EM_metric_ground_transport_allocation
 artifact_role=result-blind derivative reading map
 map_changes_treatment=false
 scientific_activity_started=false
-mathematical_closure=REVISION_03_PREPARED_SAME_CONVERSATION_RULING_REQUIRED
+mathematical_closure=REVISION_04_PREPARED_SAME_CONVERSATION_RULING_REQUIRED
 cm_release=withheld
 production_authorization=none
 ```
@@ -25,7 +25,7 @@ authority. No result or threshold from another direction enters a branch.
 No registered stochastic object, implementation release, test, learned
 evaluation, or compute may begin until the existing dedicated same-direction
 ChatGPT External Pro conversation returns literal `CLOSED` for exact revision
-03, this EM accepts that ruling, the same-direction CM returns static technical
+04, this EM accepts that ruling, the same-direction CM returns static technical
 acceptance, and Root separately sequences the next action. Gemini is independent
 innovation only and cannot close or authorize the object.
 
@@ -107,6 +107,13 @@ For a positive margin `m`, use only `SUPPORTED_POSITIVE(m)` iff `L>m`,
 `L>+epsilon`, or `EQUIVALENCE_UNRESOLVED(epsilon)` otherwise. Failure to pass
 is not itself an affirmative result.
 
+Define `ROBUSTNESS_SUPPORTED` iff `Delta_R=SUPPORTED_POSITIVE(+0.02)` and both
+held-out `Delta(n)` plus `T` are `SUPPORTED_POSITIVE(-0.01)`. Define
+`ROBUSTNESS_AFFIRMATIVELY_REJECTED` iff any one of those four quantities is
+`AFFIRMATIVELY_BELOW_MATERIAL` at its registered margin, and
+`ROBUSTNESS_UNRESOLVED` otherwise. Define `HELDOUT_VALUE_CLEARS` iff primary
+`METRIC_MATERIALLY_BETTER` or `ROBUSTNESS_SUPPORTED`.
+
 ### 7. Metric causal activity
 
 The correct metric must affect a legal coupling, not only parameters or scores.
@@ -133,9 +140,7 @@ result.
 ### B. Retain and activate one second surface
 
 Require complete evidence and all hard validity/answerability facts. Then
-require either primary `METRIC_MATERIALLY_BETTER`, or
-`Delta_R=SUPPORTED_POSITIVE(+0.02)` with both held-out `Delta(n)` and `T`
-`SUPPORTED_POSITIVE(-0.01)`. Also require both
+require `HELDOUT_VALUE_CLEARS`. Also require both
 `Theta_B=SUPPORTED_POSITIVE(+0.02)`, both
 `Theta_J=EQUIVALENT(0.02)`, both
 `Gamma_B=SUPPORTED_POSITIVE(+0.10)`, and both
@@ -145,10 +150,10 @@ no UAV result follows.
 
 ### C. Equal-class FREE comparator removes metric need
 
-If the primary relation is `FREE_MATERIALLY_BETTER` or
-`PRACTICALLY_EQUIVALENT`, delete the metric-specific parameterization on this
-support. A generic feasible allocator may remain useful. Beating only the
-public-load diagnostic changes nothing.
+Delete iff the primary relation is `FREE_MATERIALLY_BETTER`, or it is
+`PRACTICALLY_EQUIVALENT` and robustness is
+`ROBUSTNESS_AFFIRMATIVELY_REJECTED`. A generic feasible allocator may remain
+useful. Beating only the public-load diagnostic changes nothing.
 
 ### D. Generic optimization effect, not metric grounding
 
@@ -172,6 +177,11 @@ training-only or load interactions, and held-out value without an affirmatively
 established causal branch. It supports no deletion, generic attribution,
 equivalence conclusion, or activation. No seed replacement, threshold change,
 checkpoint selection, or automatic rerun is allowed.
+
+Thus `PRACTICALLY_EQUIVALENT + ROBUSTNESS_SUPPORTED` routes to retention when
+all metric gates pass, generic effect on affirmative causal failure, and this
+catch-all on unresolved causal evidence; `PRACTICALLY_EQUIVALENT +
+ROBUSTNESS_UNRESOLVED` also routes here.
 
 ## Ceiling and physical activation boundary
 

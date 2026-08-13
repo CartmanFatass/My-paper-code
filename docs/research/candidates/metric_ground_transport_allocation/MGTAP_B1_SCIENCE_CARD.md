@@ -2,16 +2,16 @@
 
 ```text
 direction=metric_ground_transport_allocation
-revision=MGTAP-B1-SCIENCE-20260813-03
+revision=MGTAP-B1-SCIENCE-20260813-04
 owner=EM_metric_ground_transport_allocation
 object=result-blind direct-variable-N finite-budget discriminator
 scientific_activity_started=false
-mathematical_closure=REVISION_03_PREPARED_SAME_CONVERSATION_RULING_REQUIRED
-cm_static_audit=revision_03_return_pending
+mathematical_closure=REVISION_04_PREPARED_SAME_CONVERSATION_RULING_REQUIRED
+cm_static_audit=revision_04_return_pending
 cm_release=withheld
 construction_authorization=none
 compute_authorization=none
-chatgpt_external_pro=revision_02_REVISION_REQUIRED_conversation_saved
+chatgpt_external_pro=revision_03_REVISION_REQUIRED_conversation_saved
 external_gemini=revision_02_PREPARED_NOT_SENT_ROOT_WITHHELD
 ```
 
@@ -19,7 +19,7 @@ external_gemini=revision_02_PREPARED_NOT_SENT_ROOT_WITHHELD
 
 MGTAP is a meaning-complete and answer-changing direct variable-`N` candidate.
 Its unchanged treatment was statically accepted under revision 02; the exact
-owner-accepted revision-03 inference/activity composite awaits mandatory
+owner-accepted revision-04 decision composite awaits mandatory
 same-conversation ChatGPT External Pro mathematical closure and then exact CM
 return. B1 asks whether a
 useful finite-budget optimization and inductive bias for a capacity-feasible
@@ -952,6 +952,28 @@ A failed support or equivalence gate is not automatically affirmative evidence
 of absence, spillover, or generic conditioning. Noninferiority uses the same
 positive-status vocabulary with its registered margin `m=-0.01`.
 
+Define the three-way robustness alternative:
+
+```text
+ROBUSTNESS_SUPPORTED iff
+  Delta_R is SUPPORTED_POSITIVE(+0.02) and
+  Delta(6) is SUPPORTED_POSITIVE(-0.01) and
+  Delta(12) is SUPPORTED_POSITIVE(-0.01) and
+  T is SUPPORTED_POSITIVE(-0.01).
+
+ROBUSTNESS_AFFIRMATIVELY_REJECTED iff at least one of
+  Delta_R is AFFIRMATIVELY_BELOW_MATERIAL(+0.02),
+  Delta(6) is AFFIRMATIVELY_BELOW_MATERIAL(-0.01),
+  Delta(12) is AFFIRMATIVELY_BELOW_MATERIAL(-0.01), or
+  T is AFFIRMATIVELY_BELOW_MATERIAL(-0.01).
+
+ROBUSTNESS_UNRESOLVED otherwise.
+```
+
+These three states are mutually exclusive and exhaustive. Define
+`HELDOUT_VALUE_CLEARS` iff the primary relation is
+`METRIC_MATERIALLY_BETTER` or `ROBUSTNESS_SUPPORTED`.
+
 ## 8. Result-blind decision map
 
 Apply the following branches in numbered order. They are mutually exclusive by
@@ -974,15 +996,11 @@ claim and does not delete the family.
 All structural validity, headroom, tuning, complete-evidence, identity, and
 FREE cut-equality conditions must hold. In addition require:
 
-1. Either `METRIC_MATERIALLY_BETTER`, or the `Delta_R` lower bound exceeds
-   `+0.02` while both held-out `Delta(n)` lower bounds exceed `-0.01` and the
-   training-reference `T` lower bound exceeds `-0.01`.
+1. `HELDOUT_VALUE_CLEARS`.
 2. Both direct `Theta_B(n)` lower bounds exceed `+0.02`.
 3. Both direct `Theta_J(n)` intervals lie wholly inside `[-0.02,+0.02]`.
 4. Both `Gamma_B(n)` lower bounds exceed `+0.10`.
 5. Both `Gamma_J(n)` intervals lie wholly inside `[-0.02,+0.02]`.
-6. The value is present at both held-out sizes, including extrapolative `N=12`,
-   and is not confined to `N={4,8}`.
 
 The maximum conclusion is: on this balanced two-role, four-task, two-epoch
 centralized toy, a correctly bound ground-neighborhood score coordinate system
@@ -992,21 +1010,20 @@ an equal-class free-edge coordinate system.
 ### 8.3 Branch 3 — `DELETE_METRIC_EQUAL_CLASS`
 
 After branch 2 fails, delete the metric-specific contribution on this support
-iff the primary relation is either `FREE_MATERIALLY_BETTER` or
-`PRACTICALLY_EQUIVALENT`. This is affirmative equal-class evidence and requires
-complete structural validity from branch 1. Reaching only the public-load
-diagnostic is never a deletion predicate.
+iff the primary relation is `FREE_MATERIALLY_BETTER`, or it is
+`PRACTICALLY_EQUIVALENT` and robustness is
+`ROBUSTNESS_AFFIRMATIVELY_REJECTED`. This is affirmative equal-class evidence
+against both registered value routes and requires complete structural validity
+from branch 1. Reaching only the public-load diagnostic is never a deletion
+predicate.
 
 An allocation actor may remain useful, but B1 supplies no reason to retain the
 metric-specific parameterization.
 
 ### 8.4 Branch 4 — `GENERIC_FINITE_BUDGET_EFFECT`
 
-After branches 2–3 fail, define `HELDOUT_VALUE_CLEARS` literally as either
-`METRIC_MATERIALLY_BETTER`, or `Delta_R` is `SUPPORTED_POSITIVE(+0.02)` while
-both `Delta(n)` and `T` are `SUPPORTED_POSITIVE(-0.01)`. Take this branch iff
-`HELDOUT_VALUE_CLEARS` and at least one affirmative nonmetric causal predicate
-holds at either held-out size:
+After branches 2–3 fail, take this branch iff `HELDOUT_VALUE_CLEARS` and at
+least one affirmative nonmetric causal predicate holds at either held-out size:
 
 - `Theta_B` is `AFFIRMATIVELY_BELOW_MATERIAL(+0.02)`;
 - `Theta_J` is `AFFIRMATIVELY_OUTSIDE_EQUIVALENCE(0.02)`;
@@ -1035,6 +1052,11 @@ affirmatively established causal attribution branch. It supports no family
 deletion, generic attribution, equivalence claim, or second-surface activation.
 No threshold weakening, seed replacement, post-hoc checkpoint, or automatic
 rerun is allowed.
+
+In particular, `PRACTICALLY_EQUIVALENT + ROBUSTNESS_SUPPORTED` routes to
+retention when all metric-specific gates pass, to generic effect when an
+affirmative nonmetric causal predicate holds, and otherwise to this catch-all.
+`PRACTICALLY_EQUIVALENT + ROBUSTNESS_UNRESOLVED` also routes here.
 
 ## 9. Second surface and UAV bridge
 
@@ -1103,8 +1125,8 @@ to a result.
   cross-direction relay, Git, canonical integration, and user contact.
 
 The dedicated ChatGPT External Pro conversation returned `REVISION_REQUIRED`
-for revision 02 and is saved for mandatory same-conversation review of this
-complete revision 03. The independent revision-02 External Gemini request
+for revisions 02 and 03 and is saved for mandatory same-conversation review of
+this complete revision 04. The independent revision-02 External Gemini request
 remains mutually blind, `PREPARED_NOT_SENT`, and Root-withheld; it must not be
-released as a revision-03 request. No revision-03 ruling, construction release,
+released as a revision-04 request. No revision-04 ruling, construction release,
 or compute authority exists.
