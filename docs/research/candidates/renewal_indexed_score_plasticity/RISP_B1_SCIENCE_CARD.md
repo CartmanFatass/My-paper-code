@@ -3,14 +3,14 @@
 ```text
 direction_id=renewal_indexed_score_plasticity
 candidate=RISP-B1
-revision=RISP-B1-SCIENCE-20260813-06
-supersedes=RISP-B1-SCIENCE-20260813-05_PRO_REVISION_REQUIRED
+revision=RISP-B1-SCIENCE-20260813-07
+supersedes=RISP-B1-SCIENCE-20260813-06_PRO_REVISION_REQUIRED
 owner=/root/em_renewal_indexed_score_plasticity
 paired_cm=/root/cm_renewal_indexed_score_plasticity
 artifact_status=FROZEN_FOR_ROOT_PUBLICATION_AND_SAME_CONVERSATION_PRO_REREVIEW
 scientific_activity_started=false
 production_authorized=false
-external_mathematical_closure=r06_pending_same_conversation_rereview_r05_revision_required
+external_mathematical_closure=r07_pending_same_conversation_rereview_r06_revision_required
 ```
 
 ## Decision question and claim boundary
@@ -502,7 +502,7 @@ requires all of the following:
   identical; terminal recipient diagnostic records are excluded by definition;
   and
 - deterministic dependency sentinels confirm that changing recipient hidden
-  targets and outcomes while holding `H`, actions and replicate event tapes fixed
+  targets and outcomes while holding `H`, actions and replicate product coordinates fixed
   changes no `rho`, supplied sign, controller belief, fast state or later
   policy-visible packet field.
 
@@ -524,20 +524,23 @@ possible current-sign effect is after a legal completed renewal.
 
 ## Training, schedules, randomization, and fixed counts
 
-There are eight independent algorithm seeds `0,...,7`. For each seed, RISP and
-SIGN-RNN use paired initial draws for all learned tensors; only the fixed masks
-differ. Every trainable weight uses Xavier uniform from the seed's model stream,
+There are eight algorithm-seed inference strata `0,...,7`, whose distinct
+science-level stochastic families are independent under the declared product
+measure. For each seed, RISP and
+SIGN-RNN reuse the identical `I[s,q]` coordinates for all learned tensors; only the fixed masks
+differ. Every trainable weight uses Xavier uniform from the seed's science-level
+initialization family,
 every bias is zero, and both arms use identical traversal. No arm receives a
 larger initialization search.
 
-The model stream is `PCG64(60_000_000_000+algorithm_seed)` with the
-initialization-only conversion
+For `q=0,...,99`, use the initialization-only conversion
 
 ```text
-U53(x) = float64(x >> 11) * 2^-53.
+U53(I[s,q]) = float64(I[s,q] >> 11) * 2^-53.
 ```
 
-This finite grid defines the initialization law only; it is never used for an
+This finite grid defines the initialization law only; `PCG64(60B+s)` is merely
+its deterministic materialization address and not its probability proof. U53 is never used for an
 environment, action, twin, or fork categorical choice. In this order, fill
 row-major float64 arrays for the
 `8 x 2` encoder weight, `4 x 8` encoder weight, `3 x 4` base-head weight,
@@ -545,7 +548,7 @@ row-major float64 arrays for the
 For a matrix with `(fan_out,fan_in)`, each scalar is
 
 ```text
-sqrt(6/(fan_in+fan_out)) * (2*U53(raw)-1).
+sqrt(6/(fan_in+fan_out)) * (2*U53(I[s,q])-1).
 ```
 
 Cast each completed array once to float32. All corresponding biases, including
@@ -559,7 +562,7 @@ eight constant-`k=8` episodes in a fixed alternating order. Thus each
 architecture/seed sees exactly 4,096 training episodes, 2,048 at each `k`, and
 no switch or `k=12` episode. There is no validation-selected checkpoint or
 early stop; evaluation uses update 256. RISP and SIGN-RNN share episode tapes,
-minibatch order, keyed action event tapes, optimizer-update count, and
+minibatch order, typed action product coordinates, optimizer-update count, and
 hyperparameters, while actions cause their on-policy histories to diverge.
 
 Adam uses learning rate `3e-4`, betas `(0.9,0.999)`, epsilon `1e-8`, and
@@ -598,11 +601,72 @@ training.
 
 For every algorithm seed, schedule, architecture, and feedback cell, evaluation
 uses exactly 64 complete episodes. The intact and marginal-twin cells clone the
-same final checkpoint. Environment and action event tapes are paired across all
+same final checkpoint. Environment and action product coordinates are paired across all
 four factorial cells; the yoke uses a disjoint prospective twin namespace.
 
+The science-level stochastic object is the pair of mutually independent
+indexed product families
+
+```text
+R[e,q] iid~ Uniform({0,...,2^64-1}), q=0,1,...
+I[s,q] iid~ Uniform({0,...,2^64-1}), s=0,...,7, q=0,...,99.
+```
+
+Here `e` is one complete typed categorical-event identity. Its first field is
+exactly one of
+
+```text
+train_init, train_action, train_Y, train_alt,
+eval_init,  eval_action,  eval_Y,  eval_alt,
+twin, fork_action, fork_Y, fork_alt.
+```
+
+The remaining zero-based fields, in order, are
+
+```text
+train_* : (algorithm_seed, optimizer_update, episode_in_batch, agent[, renewal])
+eval_*  : (algorithm_seed, schedule_id, episode, agent[, renewal])
+twin    : (algorithm_seed, schedule_id, episode, agent, renewal)
+fork_*  : (algorithm_seed, schedule_id, episode, agent).
+```
+
+INIT omits `renewal`; ACTION, Y, and ALT include it. Twin exists only at an
+eligible nonterminal renewal. Fork events are one continuation event per listed
+episode/agent. Equality of the complete typed tuple means deliberate tape reuse;
+any unequal tuple means a distinct independent product tape, even if two
+numeric fields or implementation seeds coincide. Within one event identity,
+`q=0,1,...` indexes an infinite iid word tape. Every distinct `(e,q)` coordinate
+is mutually independent. Deliberately paired architectures, feedback cells,
+controllers, or fork branches reuse the identical sequential `R[e,q]` tape for
+the same event identity. Different event identities use independent tapes;
+in particular every TWIN identity is independent of every recipient INIT, Y,
+ALT, ACTION, and fork identity. The environment DGP, policy sampling, and
+marginal-twin independence claims are probability statements over these product
+families. `I[s,q]` supplies exactly the 100 row-major model-initialization words
+registered for seed stratum `s`; the two architecture arms at the same `s`
+reuse identical `I[s,q]`, while different `s` families are independent and all
+`I` coordinates are independent of all `R` coordinates.
+
+The literal formulas below define an injective unsigned-64-bit `key(e)` mapping
+from every typed tuple. `PCG64(key(e))` is only the reproducible implementation materialization of
+the registered `R[e,q]` tape and the prospective common-tape coupling. Likewise,
+`PCG64(60_000_000_000+s)` only materializes `I[s,q]`. Neither is
+the mathematical proof of uniformity or independence, and Lock 1 may check
+only key/address mapping and deterministic arithmetic. No empirical PCG64 test,
+finite seed enumeration, or Lock-1 fixture can certify the product-space premise.
+
+The deliberate coupling graph is exact. RISP and SIGN-RNN, intact and
+marginal-twin cells, and both descriptive controllers reuse the same base
+`train_*` or `eval_*` coordinates whenever their complete non-architecture
+tuple is equal. Their different policies may map the same coordinates to
+different categories. The two branches of an immediate fork reuse the same
+typed `fork_*` tapes. Every other unequal event tuple is independent. Model
+initialization reuses `I[s,q]` only across the two architecture arms at the same
+seed stratum; there is no architecture-specific initialization coordinate.
+
 All environment, action, twin, and fork choices use the following exact
-rational categorical primitive, `ExactCat`. Given positive rational masses
+rational categorical primitive, `ExactCat`, mathematically applied to the
+registered `R` variables. Given positive rational masses
 `q_0,...,q_(m-1)`, clear denominators with their least common multiple, divide
 all resulting positive integer masses by their joint greatest common divisor,
 and call the result `m_0,...,m_(m-1)` with `M=sum_j m_j`. Set
@@ -613,23 +677,27 @@ S       = 2^(64*k_words)
 L       = floor(S/M)*M.
 ```
 
-Instantiate one NumPy `PCG64(event_key)` stream. For attempt `v=0,1,...`, read
-the next `k_words` unsigned raw 64-bit words in stream order and form the
-little-endian integer
+For an invocation whose rational masses produce its own `k_words=k`, attempt
+`v=0,1,...` forms the little-endian integer
 
 ```text
-X_v = sum_(j=0)^(k_words-1) raw_(v,j)*2^(64*j).
+X_v = sum_(j=0)^(k-1) R[e,v*k+j]*2^(64*j).
 ```
 
-If `X_v>=L`, discard that whole block and read the next block. Otherwise set
+If `X_v>=L`, discard that whole block and use attempt `v+1`. Otherwise set
 `J=X_v mod M` and return the first category whose cumulative integer mass is
-strictly greater than `J`. There is no retry cap or fallback. The accepted `J`
-is exactly uniform on `{0,...,M-1}`, so `ExactCat` returns the declared rational
-law exactly. Acceptance probability is greater than one half, but raw-word use
-is intentionally variable. Every stochastic event owns a separate keyed
-stream, so a rejection cannot shift or suppress any later event. The number of
-attempts and raw words is retained as a Lock-2 audit output and never selects,
-stops, or invalidates an otherwise complete panel.
+strictly greater than `J`. There is no retry cap or fallback. Under the indexed
+product law, each `X_v` is iid uniform on `{0,...,S-1}`. Because `L` is a
+multiple of `M`, every accepted residue has exactly `L/M` preimages, so the
+accepted `J` is exactly uniform on `{0,...,M-1}`. `ExactCat` therefore returns
+the declared rational law exactly, terminates almost surely, and has expected
+attempts below two because `L/S>1/2`. Raw-word use is intentionally variable.
+Event identity isolates retries from every later event. Attempts and words are
+retained as Lock-2 audit outputs and never select, stop, or invalidate an
+otherwise complete panel. When paired invocations use different masses and
+therefore different `k` or rejection counts, they still start from the same
+sequential `R[e,q]` tape and merely partition it differently; no later event is
+shifted because its event identity is different.
 
 Define the zero-based row IDs
 
@@ -640,7 +708,7 @@ eval_row  = (((algorithm_seed*5 + schedule_id)*64
               + episode)*2 + agent)                # 0,...,5_119.
 ```
 
-The collision-free event keys are
+For each typed tuple, the collision-free `key(e)` map is
 
 ```text
 TRAIN_INIT_KEY = 10_000_000_000 + 1_000*train_row
@@ -669,7 +737,7 @@ At each true boundary, clear the exact rational behavior probabilities
 `ExactCat(...,*_ACTION_KEY(n))`. The sampled law is therefore exactly the
 behavior law whose fast-state score is stored in the pending packet. Paired
 architecture/feedback cells and descriptive stochastic controllers reuse the
-same keyed raw-word tapes for corresponding events; different rational masses
+same sequential `R[e,q]` tapes for corresponding events; different rational masses
 may consume different numbers of words within that event but cannot affect any
 other event.
 
@@ -680,10 +748,10 @@ the five-row schedule table. The renewal index starts at `n=0` for the first
 interval of each episode. No one-based reinterpretation is permitted.
 
 All architectures, feedback cells, and descriptive controllers reuse these
-base event tapes. Their on-policy actions may map a shared tape to different
+base product coordinates. Their on-policy actions may map a shared tape to different
 outcomes or consume a different retry count, but event identities and every
 other tape remain fixed. At each eligible nonterminal renewal `n`, the marginal
-twin uses one separately instantiated exact-categorical event stream:
+twin uses one distinct exact-categorical event tuple:
 
 ```text
 TWIN_KEY = 30_000_000_000
@@ -693,20 +761,24 @@ TWIN_KEY = 30_000_000_000
            + 1_000*agent + n.
 ```
 
-It calls `ExactCat((pbar_n,1-pbar_n),TWIN_KEY)` in `(+1,-1)` order. Starting
+It calls `ExactCat((pbar_n,1-pbar_n),e=twin(...))` in `(+1,-1)` order, with
+`TWIN_KEY=key(e)`. Starting
 from exact uniform `rho_0`, the registered rational recursion keeps every
 `pbar_n` rational, so the sampled twin sign has literally the recipient sign's
 conditional marginal. It never reads or clones the recipient hidden target.
-No TWIN stream exists for a terminal interval. Architecture, feedback, action,
+No TWIN event exists for a terminal interval. Every twin tuple is distinct from
+and independent of every recipient INIT, Y, ALT, ACTION, and fork tuple; jointly
+with the `rho` recursion, this gives the stated outcome-history independence.
+Architecture, feedback, action,
 reward, and performance never enter a key. Changing a key, rational-mass
-construction, retry/addressing rule, stream word order, or conditional mapping
+construction, retry/addressing rule, product-coordinate word order, or conditional mapping
 after scientific activity begins creates a new science revision and is
 forbidden for the active confirmatory lock.
 
 The immediate timing diagnostic is run for all eight seeds, both architectures,
 all 64 marginal-twin episodes and the three target schedules. At the registered
-fork boundary both branches replay the same action, outcome, and alternative
-event tapes from disjoint namespaces:
+fork boundary both branches reuse the same action, outcome, and alternative
+product coordinates from distinct fork event kinds:
 
 ```text
 fork_row = (((algorithm_seed*5 + schedule_id)*64 + episode)*2 + agent)
@@ -715,7 +787,7 @@ FORK_ALT_KEY    = 70_000_000_000 + 1_000*fork_row + 1
 FORK_ACTION_KEY = 80_000_000_000 + 1_000*fork_row.
 ```
 
-Both branches independently replay the same keyed raw-word tape from its
+Both branches replay the same sequential `R[e,q]` tape from their
 beginning through `ExactCat` under their branch-specific rational action masses,
 then replay the corresponding same Y and ALT tapes under their possibly
 different selected actions, discarding an ALT result on any positive branch.
@@ -727,10 +799,10 @@ one-hold continuation (`1,024 pairs per schedule * 2 branches * 2 agents *
 (12+12+4)`). It cannot enter any efficacy estimand or branch margin.
 
 Descriptive `UNIFORM` and `STATE-ORACLE` controllers are evaluated on the same
-64 episode tapes. `UNIFORM` samples all three actions equally. `STATE-ORACLE`
+64 episode product families. `UNIFORM` samples all three actions equally. `STATE-ORACLE`
 observes the experimenter-only current target `c_n` and uses exact rational
 masses `29/30` on that action and `1/60` on each other action. Both controllers
-use `ExactCat` and the same keyed action event tapes as the factorial cells.
+use `ExactCat` and the same typed action coordinates as the factorial cells.
 STATE-ORACLE is a privileged-information headroom control, not a primary
 comparator and cannot establish algorithm value by itself.
 
@@ -755,7 +827,7 @@ control decisions. Including the fixed immediate-fork continuation gives
 The two marginal-twin architecture cells add exactly `301,056` nonterminal
 outcome-only categorical events (`8 seeds * 2 architectures * 64 episodes * 2
 agents * (47+23+15+31+31)`) and never call another policy. Terminal recipient
-diagnostics add none. Decision, update, categorical-event, and keyed-stream
+diagnostics add none. Decision, update, categorical-event, and typed-coordinate
 counts are fixed; total raw 64-bit words are not fixed because exact rejection
 is variable. Per-event attempt and word counts are streamed as descriptive
 audit fields and cannot change useful learned work, optimizer/update exposure,
@@ -777,10 +849,10 @@ The exact categorical ledger is
 | immediate forks | 0 | 12,288 | 12,288 | 12,288 | 0 | 36,864 |
 | **total** | **161,792** | **5,664,768** | **5,664,768** | **5,664,768** | **301,056** | **17,457,152** |
 
-Because paired arms/cells/controllers replay common event tapes, these calls use
+Because paired arms/cells/controllers reuse common event tuples, these calls use
 exactly `7,775,232` distinct event keys: `7,143,424` training keys, `472,064`
 evaluation/control keys, `150,528` twin keys, and `9,216` fork keys. The eight
-paired model-initialization streams separately consume exactly 800 U53 raw
+paired model-initialization families separately contain exactly 800 U53 raw
 words. Neither these fixed call/key counts nor variable rejection work changes
 the published action, update, episode, or agent-tick totals.
 
@@ -795,7 +867,7 @@ It begins only after Lock 1 passes and uses the already registered disjoint
 model, training, evaluation, action and marginal-twin namespaces without any
 development data.
 
-Lock 1 uses schema `RISP-B1-LOCK1-20260813-06`, exact reduced rational reference
+Lock 1 uses schema `RISP-B1-LOCK1-20260813-07`, exact reduced rational reference
 arithmetic for `Rat32`, raw logits, `z`, `w`, policy masses, and `ExactCat`
 integer intervals, plus IEEE binary64 reference arithmetic and IEEE binary32
 candidate tensors for learned-state calculations. Euclidean projection is
@@ -867,10 +939,16 @@ Actual recipient rewards and targets may differ and must be absent from the
 dependency trace.
 
 Lock 1 also checks the literal schedule/index domains, terminal-update rule,
-every key formula, unsigned 64-bit range, fixed categorical-event counts,
-event-local variable-retry law, namespace collision inequalities, and the
-published decision/update/event totals. It explicitly does not predict a fixed
-Lock-2 raw-word total. Its resource manifest fixes binary32 learned tensors,
+every typed-tuple domain, the injective tuple-to-key map and exact numeric key
+formula, unsigned 64-bit range, fixed categorical-event counts, deliberate
+reuse graph, event-local variable-retry law, namespace separation, and the
+published decision/update/event totals. It also checks the 100-entry `I[s,q]`
+row-major ordering, seed address `60B+s`, and reuse only across paired
+architecture initialization, without materializing a word. It explicitly does not predict a fixed
+Lock-2 raw-word total. Lock 1 must not materialize a generator, test uniformity,
+estimate independence, enumerate a finite tape menu, or represent any PRNG test
+as stochastic closure; uniformity and independence belong to the declared
+science-level product measure. Its resource manifest fixes binary32 learned tensors,
 streamed exact-rational numerator/denominator and sampler counters, at most 48
 renewal states per episode graph, vectorized 16-episode batches split by
 duration, serial seed lifecycle, discarded graphs after each Adam update,
@@ -951,8 +1029,15 @@ interval for `RISP-INTACT minus SIGN-RNN-INTACT` must also lie within
 ## Estimands and frozen interpretation
 
 Episodes are averaged within algorithm seed, schedule, architecture, and
-feedback cell. The eight algorithm seeds, not episodes or agents, are the
-independent uncertainty units. Let `Q_AF,s(r)` be the registered seed-level
+feedback cell. The eight algorithm seeds, not episodes, agents, categorical
+events, retry blocks, or product coordinates, are the independent uncertainty
+units for every registered interval and test. The product coordinates define
+the DGP and conditional-yoke law; they do not create extra inferential
+replicates. Algorithm-seed labels and `PCG64(key(e))` addresses are
+reproducibility/coupling labels rather than the mathematical proof that the
+eight observed seed summaries are independent; the science model declares
+distinct seed-indexed event families independent except for the literal paired
+reuse graph above. Let `Q_AF,s(r)` be the registered seed-level
 target-window mean above, with `A in {R,G}` and `F in {I,M}` for intact and
 marginal-twin feedback. For every target schedule define
 
