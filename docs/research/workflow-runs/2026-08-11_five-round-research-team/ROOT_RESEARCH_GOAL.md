@@ -440,9 +440,9 @@ package, partial checkpoint, or interrupted run satisfies that objective.
    homogeneous scalar-ESS reduction, lineage-aware origin counting, and a
    capacity/work-matched nonlinear invariant encoder. Root published its Pro and
    independent Gemini packets plus result-blind map. The single v5
-   same-conversation Pro request is released with no terminal disposition yet;
-   CM, tests, compute,
-   and production remain withheld until Pro closure and owner intake. Its first
+   same-conversation Pro request returned literal `CLOSED`, and the EM accepted
+   it without a science change. Exact-v5 static CM construction is now active;
+   tests, compute, and production remain withheld while VQFP owns the CPU. Its first
    result can support only a finite-toy causal timing benefit under every frozen
    equivalence, work, mechanism, and multiplicity gate.
 
@@ -508,8 +508,8 @@ Do not mark this goal complete until all are true:
 |---|---|---|
 | One shared algorithm supports variable `N` or variable `k` | VNFC-B1 supplies only bounded toy-level variable-`N` package evidence and loses to a stronger structured greedy reference. VQFP, SCDMP, and CCIC are shared-parameter prospective candidates on held-out axes; the current B3 host/panel line ended before activity. | Partial; no qualifying winner |
 | Improvement over a matched baseline | No current leading candidate has valid result data. B2 did not separate from reset/raw; ONLGR produced no panel result. | Not yet established |
-| Valid technical result and same-direction EM interpretation | B2 has a technically accepted result and EM intake, but its package is non-separated and its mechanism non-identifying. ONLGR is scientifically unavailable. CRTO-v4 ended at its frozen preactivity support gate. VQFP is running; SCDMP-v5 is statically accepted and waiting for CPU; CCIC-v4 is pre-CM. | Partial |
-| Dedicated ChatGPT External Pro challenge | B2 result convergence is complete. VQFP-v4 and SCDMP-v5 are each literal `CLOSED` with same-direction intake. CRTO-v4 was also closed mathematically but ended at its registered support gate before learned activity. CCIC-v3 and v4 returned `REVISION_REQUIRED`; complete v5 is in same-conversation Pro review. | In progress |
+| Valid technical result and same-direction EM interpretation | B2 has a technically accepted result and EM intake, but its package is non-separated and its mechanism non-identifying. ONLGR is scientifically unavailable. CRTO-v4 ended at its frozen preactivity support gate. VQFP is running; SCDMP-v5 is statically accepted and waiting for CPU; CCIC-v5 is in static CM construction. | Partial |
+| Dedicated ChatGPT External Pro challenge | B2 result convergence is complete. VQFP-v4, SCDMP-v5, and CCIC-v5 are each literal `CLOSED` with same-direction intake. CRTO-v4 was also closed mathematically but ended at its registered support gate before learned activity. | Established pre-result for all leaders |
 | Additional independent Gemini innovator | EBCR completed an additive Gemini review. VNFC, CRTO, and VQFP current Gemini attempts produced no provider turn/evidence and are not retried automatically. SCDMP-v5 and CCIC-v5 retain mutually blind current-revision Gemini packets; they are additive and non-gating. | Partial |
 | Strongest alternative and claim ceiling | Explicit for all three leaders: an equally informed learned spatial gate for VQFP; ordinary explicit-`k` endpoint learning for SCDMP; scalar ESS/origin counting/nonlinear invariant encoding for CCIC. Each claim ceiling is finite-panel/finite-budget and excludes general UAV or arbitrary-axis claims. | Established prospectively |
 | Second surface and UAV simulator steps | VQFP maps to 2-D plume-front tracking then UAV spatial sensing/relay; SCDMP to payload towing then UAV action-hold scheduling; CCIC to clone-versus-novelty roster switching then UAV evidence relay/commitment. None is activated without a qualifying first result. | Defined, not activated |

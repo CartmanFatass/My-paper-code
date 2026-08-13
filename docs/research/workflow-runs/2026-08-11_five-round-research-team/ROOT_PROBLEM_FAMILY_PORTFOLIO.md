@@ -978,8 +978,9 @@ second-surface/UAV action.
    correlated distinct origins, and independent origins at held-out `N` and
    `k`. The strongest alternatives are scalar ESS, origin counting, and a
    matched nonlinear invariant encoder. External packets and its result-blind
-   map are published; its v5 same-conversation Pro request is released with no terminal
-   disposition, so no CM release exists. This direction tests whether
+   map are published; its v5 same-conversation Pro request returned literal
+   `CLOSED`, the EM accepted it without science change, and exact-v5 static CM
+   construction is active while VQFP owns heavy CPU. This direction tests whether
    invariance preserves useful independent information rather than merely
    normalizing count.
 
