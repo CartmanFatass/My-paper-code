@@ -7,10 +7,10 @@ revision=RISP-B1-SCIENCE-20260813-07
 supersedes=RISP-B1-SCIENCE-20260813-06_PRO_REVISION_REQUIRED
 owner=/root/em_renewal_indexed_score_plasticity
 paired_cm=/root/cm_renewal_indexed_score_plasticity
-artifact_status=FROZEN_FOR_ROOT_PUBLICATION_AND_SAME_CONVERSATION_PRO_REREVIEW
+artifact_status=FROZEN_SAME_CONVERSATION_PRO_CLOSED_EM_INTAKE_COMPLETE
 scientific_activity_started=false
 production_authorized=false
-external_mathematical_closure=r07_pending_same_conversation_rereview_r06_revision_required
+external_mathematical_closure=r07_closed_same_conversation_em_intake_accepted
 ```
 
 ## Decision question and claim boundary
