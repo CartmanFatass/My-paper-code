@@ -5,7 +5,7 @@ document_kind=canonical_transport_operations_manual
 scope=ChatGPT_External_Pro|External_Gemini
 transport_core=Agentify_strict_review_query
 provider_mapping=chatgpt|gemini
-version_basis=@agentify/desktop_0.2.4+f0f48ef_2026-08-13
+version_basis=@agentify/desktop_0.2.4+b6d9bbf_2026-08-13
 ```
 
 This is the canonical operating manual for every HMASD Agentify transport
@@ -69,13 +69,14 @@ Most recent failures were operator/contract failures, not provider failures:
 The confirmed Agentify defects are repaired in source commit `a9471f7`; source
 commit `e12caf8` adds the provenance-preserving v1-to-v2 ledger migration needed
 to load older valid COMPLETE receipts without weakening new-operation
-enforcement. Current source and active runtime commit `f0f48ef` includes the
+enforcement. Current source and active runtime commit `b6d9bbf` includes the
 collision-resistant review plain-text identity model, the verified-selection
 `agentify_review_composer_replace_v2` contract, atomic click-time verification,
 defect-J durable post-click observed-turn evidence, defect-K exact PRE/CODE
 rendered-turn extraction, and defect-L causal-submission/display-fidelity
-separation. Section 15 retains the defects as regression contracts. A running
-desktop must load `f0f48ef` before operators rely on those guarantees.
+separation, plus defect-M semantic Gemini picker evidence. Section 15 retains
+the defects as regression contracts. A running desktop must load `b6d9bbf`
+before operators rely on the complete A-M guarantee.
 
 ## 2. The operating model
 
@@ -302,10 +303,18 @@ review; ordinary query is not a fallback. The shared provider adapter now maps
 Gemini's composite expectation to two independent actions: exact model selection
 and Extended-thinking selection. Strict review invokes that same adapter before
 baseline capture. Its canonical receipt is accepted only after two distinct,
-visible, selected, composer/menu-scoped controls were observed; generic `Pro`,
-hidden menu remnants, unscoped role-menu nodes, and plan text fail closed. That
-run-local preflight receipt remains the model identity evidence while the menu
-closes for composer typing and Send.
+visible, selected, menu-scoped items were observed. On the verified 2026-08-13
+Gemini UI, the visible menu item's semantic `.label` child is authoritative:
+`3.1 Pro` and either `Extended thinking` or the localized `扩展思考`. The parent
+menu item's full text also contains localized descriptions and badges and must
+not be compared as the model label. `data-active=true` and class `active` are
+keyboard/focus state, not selection. Selection requires class `selected`,
+`aria-checked=true`, `aria-selected=true`, or a visible descendant selected
+marker. The closed header trigger may abbreviate the same state as `Gemini Pro`
+or `Pro 扩展`; it is useful only to open the menu and is not exact two-part
+evidence. Generic `Pro`, hidden menu remnants, unscoped role-menu nodes, and
+plan text fail closed. That run-local preflight receipt remains the model
+identity evidence after the menu closes for composer typing and Send.
 
 ### 7.5 Strict invocation
 
@@ -679,7 +688,7 @@ If an HMASD archive is missing or stale:
 | `key_url_mismatch` | The keyed registry tab is not at the strict binding URL | Same reconciliation; do not change the strict URL to a stale registry value. |
 | Registry/live URL mismatch | Registry is stale relative to DOM | One Agentify `navigate` to the intended exact URL while idle; verify equality before strict call. |
 | `review_model_mismatch` | Strict live evidence does not match frozen model | Inspect genuine selected composer/model controls; fix preflight only. Never change the frozen model or use plan text. |
-| `expected_model_unavailable` | Ordinary generic selector could not find one matching option | This is not proof the Gemini model is unavailable. Production used the wrong route or unsupported composite selector. Use strict + genuine visible preflight; otherwise fail closed. |
+| `expected_model_unavailable` | The adapter could not find an exact visible semantic option; on `f0f48ef`, it incorrectly compared the parent menu item's model label plus localized description to `3.1 Pro` | This is not proof the account lacks the model. Inspect only the genuine open picker: semantic `.label`, selected state, and separate thinking item. Never use the header abbreviation, full item text, menu count, account text, ordinary query, or another send. A zero-turn/root-URL/empty-composer failure is `SEND_NOT_COMMITTED`; one later fresh-tab recovery needs owner authority and active runtime `b6d9bbf` or later. |
 | `send_not_triggered` | Ordinary query did not establish its generic send signal | Reconcile turns, identity, composer, generation, and ledger. If zero-turn facts all hold, archive noncommit; otherwise ambiguous. Never call another send route. |
 | Composer serialized length/DOM structure is approximately doubled | A persisted draft was appended because keyboard Select All/Backspace did not replace the editable root | Strict gate correctly prevents Send. Archive the pre-send failure; never type again in that operation. Use a fresh authorized operation only after the repaired verified-selection/delete/empty/caret/click-time contract is loaded. |
 | `review_composer_clear_failed` or `review_composer_caret_unavailable` | Full selection, native delete, draft-state synchronization, empty proof, focus, or collapsed insertion caret could not be proven | Pre-insert and pre-send terminal. Do not append, send, or retry inside the operation. |
@@ -824,6 +833,7 @@ The sample below reads only transport metadata, not scientific response content.
 | `C:/Projects/HMASD/temp/sessions/agentify_transport_operator/independent_research_explorer/crto_b1_gemini_innovator_v3/results.json:2-15` | Ordinary composite-model/send path ended `send_not_triggered` | Genuine two-part Gemini preflight followed by strict first binding; zero-turn means archive noncommit, not another send |
 | `C:/Projects/HMASD/temp/sessions/agentify_transport_operator/independent_research_explorer/crto_b1_gemini_innovator_v4/results.json:2-23` | Generic `Gemini Pro`/availability text was mixed with required selected model/mode | Require visible selected 3.1 Pro and Extended thinking separately |
 | `C:/Projects/HMASD/temp/sessions/agentify_transport_operator/independent_research_explorer/sgsp_b1_gemini_innovator_20260813_01/results.json:3-20` and recovery `C:/Projects/HMASD/temp/sessions/agentify_transport_operator/independent_research_explorer/sgsp_b1_gemini_innovator_20260813_01_fresh_tab_recovery_01/results.json:5-9` | Helper expected a fixed menu shape/count, then ordinary model selection failed | Adapter recognizes exact options by semantic labels/selected state; absence is pre-send terminal, not a fallback send |
+| `C:/Projects/HMASD/temp/sessions/agentify_transport_operator/root/agentify_post_9679872_causal_identity_synthetic_canary/gemini_3_1_pro_extended_new_first_binding/results.json` | `f0f48ef` compared the whole `3.1 Pro` menu-item text, including its localized description, against the exact model label; the strict gate failed safely before Send | Read the one visible semantic `.label`, reject focus-only `active` state, and prove `3.1 Pro` plus separately selected `Extended thinking`/`扩展思考`; retain the historical operation as zero-commit and use only one owner-authorized fresh recovery after the fixed instance is loaded |
 | `C:/Projects/HMASD/temp/sessions/agentify_transport_operator/independent_research_explorer/vqfp_b1_chatgpt_pro_result_convergence_20260813_01/results.json:3-24` | `looks403` was accepted as sufficient blocked proof without archived page-context discrimination | Treat `looks403` plus usable composer as a conflict; do not send; apply source fix in section 15 |
 | `C:/Projects/HMASD/temp/sessions/agentify_transport_operator/independent_research_explorer/scdmp_b1_chatgpt_pro_result_convergence_20260813_01/results.json:3,8-30` | Clean reference, not an anti-pattern: strict continuation captured Pro, matching SHA, one send/action, and natural completion | Reuse this receipt-bearing pattern |
 | `C:/Projects/HMASD/temp/sessions/agentify_transport_operator/independent_research_explorer/ccic_b1_chatgpt_pro_math_closure_20260813_06/results.json:3,15-33` | Clean reference: same strict core and terminal facts | Reuse this pattern for either provider through the adapter |
@@ -838,7 +848,8 @@ L1-owned scheduling, and ledger-only recovery.
 ## 15. Resolved Agentify defect packets and regression contract
 
 These packets preserve the original diagnosis and the regression invariant.
-Packets A-L are implemented through Agentify commit `f0f48ef` in
+Packets A-L are implemented through Agentify commit `f0f48ef`, and packet M is
+implemented in current source/runtime commit `b6d9bbf`, in
 `chatgpt-controller.mjs`, `review-composer-replacement.mjs`,
 `review-transport.mjs`, `state.mjs`, `tab-manager.mjs`, `main.mjs`, and
 `http-api.mjs`, with offline fixture coverage in the corresponding tests.
@@ -861,6 +872,7 @@ Current source behavior is:
 | J | the first exactly-one visible post-click user-turn ID is durably persisted before display inspection; no-turn, unreadable-turn, and readable-mismatch evidence remain distinct and never permit resend |
 | K | rendered display serialization chooses outermost non-control content and reads only an exact transparent PRE/CODE wrapper; nested fragments, malformed structure and controls remain fail-closed |
 | L | exact click-bound source identity, provider turn acceptance, and lossy rendered display are separate; a persisted causal receipt may bind one turn without pretending rendered Markdown reproduces source bytes |
+| M | Gemini picker selection and verification use the unique visible semantic item label, never parent description text or focus-only `active`; exact selected `3.1 Pro` and selected `Extended thinking` remain separate evidence |
 
 The “observed source defect” and “reproduction” bullets below describe the
 pre-fix implementation retained for audit provenance. The invariant and fix
@@ -1175,7 +1187,7 @@ nonetheless directly reproducible.
   no normalization beyond the downstream named plain-text model. A fragment
   fails full-prompt comparison; malformed PRE, controls, unsupported nodes and
   distinct candidates fail closed. Agentify commit `9679872` implements this
-  rule, and active runtime commit `f0f48ef` retains it.
+  rule, and active runtime commit `b6d9bbf` retains it.
   Defect L establishes that even a readable wrapper may be a lossy Markdown
   display and must not be treated as raw-source identity.
 - **Regression:** `tests/chatgpt-controller.test.mjs` proves the exact synthetic
@@ -1197,7 +1209,7 @@ nonetheless directly reproducible.
   `recoverReviewSubmission`; `review-transport.mjs`, `onSendAction`,
   `onUserTurnObserved`, `onSubmitted`, and `observePersistedReview`;
   `state.mjs`, causal-receipt/submission/display validation. Symbol locators are
-  normative for active source/runtime commit `f0f48ef`.
+  normative for active source/runtime commit `b6d9bbf`.
 - **Invariant:** exact frozen-source identity, exact browser text at the unique
   click boundary, provider acceptance of exactly one baseline-new turn in a
   concrete conversation, and rendered display fidelity are four distinct facts.
@@ -1243,6 +1255,56 @@ nonetheless directly reproducible.
   exact-one, composer mutation, no-turn, ambiguity, content-rebind, observer and
   never-resend regressions remain green.
 
+### M. Gemini picker evidence uses semantic labels, not description or focus state
+
+- **File/symbol:** `chatgpt-controller.mjs`,
+  `geminiMenuItemSemanticLabel`, `geminiMenuItemSelected`,
+  `geminiThinkingLabelMatches`, `canonicalizeGeminiModelEvidence`,
+  `#readExpectedModelState`, `#ensureGeminiExpectedModel`, and
+  `#reviewSnapshot`. Symbol locators are normative for active source/runtime
+  commit `b6d9bbf`; line numbers are intentionally omitted.
+- **Invariant:** Gemini model proof consists of two distinct, visible, selected
+  menu items whose unique visible semantic labels are exactly `3.1 Pro` and
+  `Extended thinking`/the localized label meaning “Extended thinking”. Parent
+  abbreviations, focus/roving-tabindex state, hidden nodes, and account text are
+  not model identity.
+- **Live observation:** one disposable diagnostic tab was created at exactly
+  `https://gemini.google.com/app` and closed without prompt input or Send. The
+  genuine visible root was `GEM-MENU[role=menu][data-test-id=gem-mode-menu]`.
+  Its `GEM-MENU-ITEM[role=menuitem]` model node had parent text
+  `3.1 Pro` plus a localized description, while its visible `.label` was exactly
+  `3.1 Pro` and its selected state was class/descendant-marker based. The
+  thinking node likewise had a localized description while its `.label` was
+  the exact localized “Extended thinking” label. Before thinking selection, the
+  carried `data-active=true` although the 3.1 Pro item was selected; therefore
+  `data-active` and class `active` are proven focus signals. After selection the
+  closed trigger abbreviated the state as localized `Pro + extended`, not the exact model and
+  mode labels. The tab remained at the root with zero user/assistant turns, an
+  empty composer, and no Stop/Continue/Retry/Answer-now control.
+- **Observed source defect:** `f0f48ef` used each menu item's complete
+  `textContent` in both selection and evidence. Exact
+  `geminiModelLabelMatches` therefore compared `3.1 Pro <localized
+  description>` to `3.1 Pro` and could never choose or verify that live option.
+  It also treated `data-active`/class `active` as selected and treated a trigger
+  as selected evidence. Operation
+  `AGENTIFY-CAUSAL-DISPLAY-V1-GEMINI-b9d214ee-76f5-4cb2-bb5f-064e9042d8b3`
+  consequently failed `expected_model_unavailable` before Send with
+  `sendActionCount=0`, `sendCount=0`, no turn, no concrete `/app/<id>`, and no
+  generation. It is an explicit zero-commit historical operation, not evidence
+  of account/model unavailability.
+- **Implemented fix:** all Gemini adapter surfaces read the unique
+  visible `.label` (or an unambiguous accessible label when no semantic label
+  exists), require real selected state, and match the thinking label exactly.
+  Full parent text is diagnostic only. Trigger records cannot satisfy canonical
+  evidence. Selection, strict preflight, snapshots, and the ordinary entry
+  point share the same adapter; production still has no ordinary fallback.
+  Ambiguous/missing semantic labels fail closed with safe available-label data.
+- **Regression:** `tests/chatgpt-controller.test.mjs` reproduces the live
+  localized parent/label shape, proves `active`/`data-active` cannot select an
+  option, rejects ambiguous labels and description-bearing full text, accepts
+  the visible localized thinking label, and retains the strict composite
+  selection path with exactly one Send boundary.
+
 ## 16. Source evidence index
 
 - Package and supported providers: `C:/Projects/agentify-desktop/package.json:2-5`,
@@ -1265,6 +1327,11 @@ nonetheless directly reproducible.
   `C:/Projects/agentify-desktop/review-composer-replacement.mjs`.
 - Live challenge, model, Gemini adapter DOM, send, and completion mechanics:
   `C:/Projects/agentify-desktop/chatgpt-controller.mjs:9-83,299-520,593-1086,1106-1930,2065-2299`.
+- Gemini semantic picker label and real selected-state evidence:
+  `C:/Projects/agentify-desktop/chatgpt-controller.mjs:
+  geminiMenuItemSemanticLabel,geminiMenuItemSelected,
+  geminiThinkingLabelMatches,canonicalizeGeminiModelEvidence,
+  #readExpectedModelState,#ensureGeminiExpectedModel,#reviewSnapshot`.
 - Rendered user-turn outermost candidate selection and exact PRE/CODE text
   extraction: `C:/Projects/agentify-desktop/chatgpt-controller.mjs:
   serializeReviewComposer,serializeReviewUserMessage,#reviewSnapshot`.
