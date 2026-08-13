@@ -5,7 +5,7 @@ document_kind=canonical_transport_operations_manual
 scope=ChatGPT_External_Pro|External_Gemini
 transport_core=Agentify_strict_review_query
 provider_mapping=chatgpt|gemini
-version_basis=@agentify/desktop_0.2.4+9679872_2026-08-13
+version_basis=@agentify/desktop_0.2.4+f0f48ef_2026-08-13
 ```
 
 This is the canonical operating manual for every HMASD Agentify transport
@@ -60,17 +60,22 @@ Most recent failures were operator/contract failures, not provider failures:
     user turn. A nested code-block candidate could therefore shadow its outer
     content node, while an exact raw-text PRE/CODE wrapper failed before any
     code point was compared.
+11. Even after PRE/CODE became readable, a real Markdown-rendered turn was 124
+    characters while its frozen source was 132. The ten source fence characters
+    were removed by Markdown rendering and two structural block newlines were
+    added, for a net loss of eight. Rendered HTML is therefore a lossy display,
+    not a provider-neutral raw submission payload or source-identity oracle.
 
 The confirmed Agentify defects are repaired in source commit `a9471f7`; source
 commit `e12caf8` adds the provenance-preserving v1-to-v2 ledger migration needed
 to load older valid COMPLETE receipts without weakening new-operation
-enforcement. Current source commit `9679872` includes the collision-resistant
-review plain-text identity model, the verified-selection
+enforcement. Current source and active runtime commit `f0f48ef` includes the
+collision-resistant review plain-text identity model, the verified-selection
 `agentify_review_composer_replace_v2` contract, atomic click-time verification,
-defect-J durable post-click observed-turn evidence, and defect-K exact
-PRE/CODE rendered-turn extraction. Section 15 retains the defects as regression
-contracts. A running desktop must load `9679872` before
-operators rely on those guarantees.
+defect-J durable post-click observed-turn evidence, defect-K exact PRE/CODE
+rendered-turn extraction, and defect-L causal-submission/display-fidelity
+separation. Section 15 retains the defects as regression contracts. A running
+desktop must load `f0f48ef` before operators rely on those guarantees.
 
 ## 2. The operating model
 
@@ -368,15 +373,38 @@ with its absence, one astral code point with another, or any other differing
 code point. Pure-whitespace prompts cannot use the recovery. These distinctions
 fail closed even when UTF-16 lengths happen to match.
 
-The pre-send composer, post-send rendered user turn, submission diagnostic and
-recovery, and content-rebind observer all return and validate the same safe
-identity receipt. An accepted receipt requires both recovered-text exactness and
+The pre-send composer and atomic click-time check validate this same safe text
+receipt. An accepted receipt requires both recovered-text exactness and
 canonical SHA equality; a second raw/canonical equality test must not contradict
 it. Separately, `sourceSha256`/`promptSha256` remains the SHA-256 of the exact
-frozen UTF-8 source bytes and continues to bind the request fingerprint. The
-browser text model is not permission to change those frozen bytes
-(`review-text-identity.mjs:3-183`; `chatgpt-controller.mjs:764-900,1755-1930,
-2065-2299`; `review-transport.mjs:387-526,612,679-685`).
+frozen UTF-8 source bytes and binds the request fingerprint. The browser text
+model is not permission to change those frozen bytes
+(`review-text-identity.mjs:REVIEW_PLAIN_TEXT_MODEL,compareReviewPlainText,
+reviewPlainTextIdentity`; `chatgpt-controller.mjs:#replacePrompt,
+#clickReviewSendOnce`; `review-transport.mjs:onComposerVerified,onSendAction`).
+
+Do not apply that source-text claim to rendered provider HTML. Markdown
+rendering is intentionally many-to-one: headings, list markers and indentation,
+fence delimiters/info strings, and other source syntax may disappear or become
+structural nodes. Agentify therefore keeps three non-interchangeable evidence
+layers:
+
+1. **Frozen source and Send-boundary text.** Raw source SHA binds the file;
+   canonical prompt SHA plus the atomic composer receipt proves the exact
+   browser text at the unique click boundary under the narrow text model.
+2. **Accepted provider turn.** The persisted baseline, exactly one new visible
+   user-turn ID outside it, and a concrete conversation URL/ID prove the unique
+   click caused one accepted turn in that conversation.
+3. **Rendered display fidelity.** Structural serialization is recorded as
+   `exact`, `lossy_mismatch`, or `unreadable`. It is diagnostic display evidence,
+   never raw-source identity and never a reconstruction license.
+
+The provider-neutral core exposes no authoritative raw request-body anchor:
+the Chrome CDP backend does not capture Network request bodies, the Electron
+backend does not intercept web requests, and the shared DOM snapshot contains
+turn IDs plus rendered nodes only. Provider-private network JSON, React state,
+edit mode, semantic Markdown equivalence, trimming, contains tests, and
+length/hash bypasses are forbidden substitutes.
 
 Rendered user-turn discovery prefers the outermost non-control content candidate;
 a nested selector hit cannot replace an ancestor that contains the complete
@@ -385,11 +413,11 @@ message. One additional wrapper is readable: an exact `PRE` with exactly one
 text code points and line breaks exactly. It performs no trimming, `innerText`
 fallback, Markdown parsing, heading/list reconstruction, fence insertion, or
 semantic equivalence. If the PRE/CODE node is merely one rendered fenced-code
-fragment, its extracted text cannot equal the complete frozen prompt and the
-normal collision-resistant comparison fails closed. Malformed PRE structure,
-controls, multiple CODE children, unsupported nodes, and multiple distinct
-outer content candidates remain unreadable or ambiguous. The raw frozen source
-SHA and the atomic click-time receipt remain mandatory independently
+fragment, its extracted text is only lossy display evidence. Malformed PRE
+structure, controls, multiple CODE children, unsupported nodes, and multiple
+distinct outer content candidates remain unreadable or ambiguous. The raw frozen
+source SHA, atomic click-time receipt, persisted causal receipt, unique new turn,
+and concrete identity remain mandatory independently
 (`chatgpt-controller.mjs:serializeReviewComposer,serializeReviewUserMessage,
 #reviewSnapshot,#waitForReviewUserMessage,#resolveReviewUserAnchor,
 inspectReviewSubmissionIdentity,recoverReviewSubmission`).
@@ -440,14 +468,26 @@ These are not provider commitment:
 - the composer becoming empty;
 - an MCP timeout or client disconnect.
 
-Provider commitment requires exactly one new visible user turn bound to the
-intended conversation identity, with readable rendered text accepted by the
-exact `agentify_review_plain_text_v1` receipt in section 7.6. ChatGPT additionally
-requires a concrete `/c/<id>` for first binding; Gemini requires a concrete
-`/app/<id>`. The strict core records `sendCount=1` only after it validates the
-turn-content receipt and identity. A post-click unreadable/mismatched turn is
-`SUBMITTED_UNVERIFIED`, never a resend license (`review-transport.mjs:
-onSubmitted`; `chatgpt-controller.mjs:#waitForReviewUserMessage,reviewQuery`).
+Provider commitment requires the conjunction of:
+
+- a durable `agentify_review_causal_submission_v1` receipt bound to the operation
+  ID, raw source SHA, canonical prompt SHA, exact persisted baseline digest,
+  `clickCount=1`, and `sendActionCount=1`;
+- exactly one new visible user-turn ID outside that baseline; and
+- the exact intended conversation identity. ChatGPT additionally requires a
+  concrete `/c/<id>` for first binding; Gemini requires a concrete `/app/<id>`.
+
+This proves the exact click-bound composer text causally produced one provider
+turn. It does not claim that rendered HTML reproduces source Markdown or that
+Agentify captured the provider's private HTTP request bytes. The strict core may
+record `sendCount=1` and `userMessageId` with rendered fidelity `exact`,
+`lossy_mismatch`, or `unreadable` only when every causal predicate above is
+persisted and validated. Without that causal receipt, an unreadable/mismatched
+turn remains `SUBMITTED_UNVERIFIED` and permanently non-resendable
+(`review-text-identity.mjs:REVIEW_CAUSAL_SUBMISSION_MODEL,
+validateReviewCausalSubmissionReceipt`; `review-transport.mjs:onSendAction,
+onUserTurnObserved,onSubmitted`; `chatgpt-controller.mjs:
+#waitForReviewUserMessage,reviewQuery`).
 
 The first exactly-one new visible user-turn ID is durable commitment evidence
 even when its content is unreadable or mismatched. Before any such failure,
@@ -459,12 +499,21 @@ terminal classes are distinct:
 - `turn_unreadable`: exactly one new turn exists, but its structural serializer
   cannot produce text;
 - `turn_content_mismatch`: exactly one readable new turn exists, but the narrow
-  plain-text identity receipt does not match.
+  plain-text identity receipt does not match and no valid causal receipt is
+  available;
+- `turn_causal_exact_rendered_unreadable`: the exact causal receipt is valid but
+  rendered display structure is unreadable; and
+- `turn_causal_exact_rendered_mismatch`: the exact causal receipt is valid but
+  rendered display is a lossy/non-source representation.
 
-Only `turn_exact` may promote the durable anchor to `userMessageId` and
-`sendCount=1`. Every observed-turn class cuts off resend. An unreadable turn has
-no trustworthy rendered length, hash, or mismatch class unless those safe fields
-were actually returned; never infer them from composer evidence.
+`turn_exact` and the two `turn_causal_exact_rendered_*` classes may promote the
+durable anchor only under the complete causal receipt. Every observed-turn class
+cuts off resend. An unreadable turn has no trustworthy rendered length, hash, or
+mismatch class unless those safe fields were actually returned; never infer them
+from composer evidence. A lossy-display operation may continue observing by its
+persisted user-turn ID. If that ID disappears after reload, content-based rebind
+is unavailable because lossy display cannot collision-resistently identify the
+raw source; fail closed instead of reconstructing Markdown.
 
 For Gemini, stable reconciliation of all four facts—zero provider turns, no
 `/app/<id>`, the complete question still in the composer, and no generation—is
@@ -472,7 +521,7 @@ the explicit terminal `SEND_NOT_COMMITTED`, with `prompt_sent=false` and
 `response_received=false`. Do not retry inside the transport call.
 
 If a turn, concrete identity, `sendCount=1`, or ambiguous commitment exists,
-never send again. A `sendActionCount=1` without a readable provider turn is
+never send again. `sendActionCount=1` without one new provider-turn anchor is
 ambiguous even if the operator believes the click did nothing.
 
 ### 7.8 Natural completion
@@ -636,8 +685,10 @@ If an HMASD archive is missing or stale:
 | `review_composer_clear_failed` or `review_composer_caret_unavailable` | Full selection, native delete, draft-state synchronization, empty proof, focus, or collapsed insertion caret could not be proven | Pre-insert and pre-send terminal. Do not append, send, or retry inside the operation. |
 | `review_user_message_not_observed_after_click` / `click_no_turn` | The unique click occurred, but no new visible turn appeared before the observation deadline | No turn anchor may be fabricated. This is still post-click ambiguity and never permits resend inside the operation. |
 | `review_user_message_identity_unreadable` / `turn_unreadable` | Exactly one new visible turn ID exists, but its structural content serializer failed | Require durable `observedUserMessageId` and safe structure diagnostics; never infer content or resend. |
-| Rendered turn reports `PRE` / `CODE` structural unreadability | The old serializer rejected an exact raw-text wrapper or selected a nested code fragment instead of its outer content node | The historical operation is permanently ambiguous. Use no page action and never resend it. The active `9679872` runtime applies outermost-candidate plus exact PRE/CODE text extraction to future operations; semantic Markdown reconstruction remains forbidden. |
-| `review_user_message_content_mismatch` / `turn_content_mismatch` | Exactly one readable new turn exists, but narrow exact comparison failed | Preserve observed length/hash/mismatch metadata when available; never trim, broaden normalization, or resend. |
+| Rendered turn reports `PRE` / `CODE` structural unreadability | The old serializer rejected a transparent raw-text wrapper or selected a nested code fragment instead of its outer content node | The historical operation is permanently ambiguous. Use no page action and never resend it. `9679872` applies outermost-candidate plus exact PRE/CODE extraction; this improves display diagnostics but does not make rendered Markdown a raw-source oracle. |
+| Rendered length differs from the frozen Markdown length | Provider rendering removed or structurally represented source syntax; for the 132/124 canary, ten fence characters disappeared and two block newlines were added | Never reconstruct delimiters, trim, or use semantic equivalence. If the committed runtime has a valid persisted causal receipt plus one new turn/concrete identity, store `lossy_mismatch` as display fidelity and continue by the durable turn ID. Otherwise remain `SUBMITTED_UNVERIFIED`; never resend. |
+| `review_user_message_content_mismatch` / `turn_content_mismatch` | Exactly one readable new turn exists, but narrow exact comparison failed and no valid causal receipt can promote it | Preserve observed length/hash/mismatch metadata when available; never trim, broaden normalization, or resend. |
+| `review_content_rebind_unavailable_for_lossy_rendering` | The durable user-turn ID disappeared and lossy display cannot collision-resistently identify the source turn | Stop observation and fail closed. Do not use Markdown reconstruction or content similarity to rebind. |
 | `review_composer_identity_mismatch_at_send` | Composer changed after initial identity receipt but before the Send boundary | Atomic check performed zero clicks. Archive pre-send; do not reuse the closed operation. |
 | `blocked=true`, login/CAPTCHA | Agentify detected a human/access gate | Do not send. Wait only within assignment timeout; archive pre-send terminal if unresolved. |
 | `looks403=true` with usable conversation/composer | Possible false positive from bare `403` text | Treat as evidence conflict, not permission to send. Archive conflict; source fix required. |
@@ -787,7 +838,7 @@ L1-owned scheduling, and ledger-only recovery.
 ## 15. Resolved Agentify defect packets and regression contract
 
 These packets preserve the original diagnosis and the regression invariant.
-They are implemented through Agentify commit `9679872` in
+Packets A-L are implemented through Agentify commit `f0f48ef` in
 `chatgpt-controller.mjs`, `review-composer-replacement.mjs`,
 `review-transport.mjs`, `state.mjs`, `tab-manager.mjs`, `main.mjs`, and
 `http-api.mjs`, with offline fixture coverage in the corresponding tests.
@@ -798,17 +849,18 @@ Current source behavior is:
 
 | Packet | Enforced behavior |
 |---|---|
-| A | exact composer serialization before the only Send; exact one rendered user turn afterward; unreadable/mismatch is ambiguous |
+| A | exact composer serialization before the only Send; source identity is never inferred from rendered HTML |
 | B | Gemini evidence is visible, scoped, selected, and derived from two distinct controls; plan/hidden/synthetic evidence is excluded |
 | C | the shared adapter independently selects exact `3.1 Pro` and `Extended thinking`, returns canonical `Gemini 3.1 Pro extended`, and is used by strict and ordinary entry points |
 | D | scoped status reconciles only a valid same-origin live URL into the selected tab's registry row |
 | E | bare `403` is not an access error; structured access wording is not blocking when the genuine composer remains usable |
 | F | a fresh strict request fails `review_tab_busy` on a prior active turn; only observer recovery uses a persisted `userMessageId`; completion requires `sendActionCount===1` |
 | G | strict and ordinary send-capable entry points share one global inflight governor; exact existing observers do not reserve a second slot |
-| H | composer, rendered turn, diagnostics/recovery, and content rebind use one collision-resistant plain-text receipt; only narrowly reversible Blink space rebalance is accepted |
+| H | composer and click-bound text use one collision-resistant plain-text receipt; only narrowly reversible Blink space rebalance is accepted |
 | I | strict composer replacement clears once, proves empty and caret state before one insertion, then atomically revalidates identity with the unique Send click; persisted drafts cannot be appended or race the send boundary |
-| J | the first exactly-one visible post-click user-turn ID is durably persisted before content acceptance; no-turn, unreadable-turn, and readable-mismatch terminals remain distinct and never permit resend |
-| K | rendered user identity chooses outermost non-control content and accepts only an exact transparent PRE/CODE raw-text wrapper; nested code fragments, malformed structure, controls, and semantic Markdown reconstruction cannot satisfy exact prompt identity |
+| J | the first exactly-one visible post-click user-turn ID is durably persisted before display inspection; no-turn, unreadable-turn, and readable-mismatch evidence remain distinct and never permit resend |
+| K | rendered display serialization chooses outermost non-control content and reads only an exact transparent PRE/CODE wrapper; nested fragments, malformed structure and controls remain fail-closed |
+| L | exact click-bound source identity, provider turn acceptance, and lossy rendered display are separate; a persisted causal receipt may bind one turn without pretending rendered Markdown reproduces source bytes |
 
 The “observed source defect” and “reproduction” bullets below describe the
 pre-fix implementation retained for audit provenance. The invariant and fix
@@ -821,7 +873,8 @@ bullets are the current acceptance contract.
   2065-2139; `review-transport.mjs`, `onComposerVerified`, lines 499-528.
 - **Invariant:** strict review must prove the active composer serializes exactly
   to the frozen prompt under the named review text model before its sole Send
-  action, and the rendered turn must carry the same accepted identity receipt.
+  action. Provider acceptance is subsequently bound by the causal receipt and
+  unique turn identity; rendered display is not reused as source identity.
 - **Pre-fix defect:** `reviewQuery` called
   `#typePrompt(prompt, { human: false })`; `verifyExact` defaults false. It then
   clicks Send. The post-send new-user-message path identifies a new turn but
@@ -957,7 +1010,7 @@ nonetheless directly reproducible.
   receipt exists, `verifyExisting=true` succeeds while an unrelated ordinary
   request occupies the single slot.
 
-### H. Browser text identity is unified across send and recovery paths
+### H. Browser source-text identity is unified across composer and exact-display paths
 
 - **File/symbol:** `review-text-identity.mjs`,
   `REVIEW_PLAIN_TEXT_MODEL`, `canonicalizeReviewPlainText`,
@@ -967,10 +1020,12 @@ nonetheless directly reproducible.
   `inspectReviewSubmissionIdentity`, and `recoverReviewSubmission`, lines
   764-900,1755-1930,2195-2299; `review-transport.mjs`, operation prompt identity,
   `onSubmitted`, and `onComposerVerified`, lines 380-526.
-- **Invariant:** every browser-visible copy of the frozen prompt is checked by
-  `agentify_review_plain_text_v1`; acceptance requires recovered canonical text
-  to equal the canonical source exactly and its SHA-256 to match. The raw frozen
-  source SHA remains separately bound to the request and operation.
+- **Invariant:** every surface claimed to preserve frozen source text is checked
+  by `agentify_review_plain_text_v1`; acceptance requires recovered canonical
+  text to equal the canonical source exactly and its SHA-256 to match. Rendered
+  HTML that does not preserve Markdown source is explicitly display evidence,
+  not such a surface. The raw frozen source SHA remains separately bound to the
+  request and operation.
 - **Observed source defect:** Blink represented leading/repeated ASCII spaces in
   the 7,024-character strict prompt with NBSP. The former raw serializer
   equality failed before Send even though the structural prompt was intact.
@@ -981,9 +1036,10 @@ nonetheless directly reproducible.
   expected-ASCII-space/observed-NBSP mismatches at leading, trailing, or
   repeated ASCII-space runs when the source has no NBSP and has non-whitespace
   content. Require exact recovered text and equal canonical SHA. Use the same
-  safe receipt for composer verification, rendered-turn commitment,
-  submission diagnosis/recovery, and content rebind; remove contradictory raw
-  rendered-turn equality/hash gates.
+  safe receipt for composer verification and exact-display diagnostics/rebind;
+  remove contradictory raw equality/hash gates. Defect L later separates lossy
+  display from the causal submission receipt rather than broadening this text
+  model.
 - **Regression:** `tests/chatgpt-controller.test.mjs:118-199` covers line
   endings, narrowly reversible space rebalance, blank lines, code/list shape,
   source NBSP, ordinary single-space NBSP, NFC/NFD, astral and zero-width
@@ -1045,7 +1101,9 @@ nonetheless directly reproducible.
   visible user-turn identity is persisted before any rendered-content error.
   `turn_unreadable` and `turn_content_mismatch` retain that anchor and are
   permanently non-resendable. `click_no_turn` records no fabricated anchor.
-  Only `turn_exact` may become `userMessageId`/`sendCount=1`.
+  In `d94ee4b`/`9679872`, only `turn_exact` became
+  `userMessageId`/`sendCount=1`; defect L replaces that rendered-source
+  assumption with a persisted causal receipt without weakening non-resend.
 - **Observed source defect:** operation
   `SCDMP-B2-R02-MATH-CLOSURE-ce3f4a3c-551d-4b93-8040-149fa7790203`
   had one successful click-time exact receipt, then entered the branch guarded
@@ -1087,18 +1145,16 @@ nonetheless directly reproducible.
   selection for contenteditable and textarea, one-key clearing, asynchronous
   draft rehydration, and selection failure.
 
-### K. Exact PRE/CODE rendered wrappers preserve plain-text identity
+### K. PRE/CODE rendered wrappers are structurally readable display evidence
 
 - **File/symbol:** `chatgpt-controller.mjs`, `serializeReviewComposer`,
   `serializeReviewUserMessage`, `#reviewSnapshot`,
   `#waitForReviewUserMessage`, `#resolveReviewUserAnchor`,
   `inspectReviewSubmissionIdentity`, and `recoverReviewSubmission`. Symbol
   locators are normative; line numbers are intentionally omitted.
-- **Invariant:** a rendered user turn may bind the frozen prompt only by an
-  exact code-point serialization followed by the existing
-  `agentify_review_plain_text_v1` receipt. Content discovery uses outermost
-  non-control candidates. An exact `PRE > CODE` wrapper is transparent text,
-  not permission to infer Markdown syntax or accept semantic equivalence.
+- **Invariant:** content discovery uses outermost non-control candidates. An
+  exact `PRE > CODE` wrapper is transparent rendered text, not permission to
+  infer Markdown syntax, reconstruct source, or accept semantic equivalence.
 - **Observed source defect:** synthetic first-binding operation
   `AGENTIFY-D94EE4B-SYNTHETIC-CHATGPT-PRO-ea06ff38-1ed3-4640-a1e5-f90731e3e19f`
   atomically verified and clicked the 121-character frozen prompt once, then
@@ -1119,7 +1175,9 @@ nonetheless directly reproducible.
   no normalization beyond the downstream named plain-text model. A fragment
   fails full-prompt comparison; malformed PRE, controls, unsupported nodes and
   distinct candidates fail closed. Agentify commit `9679872` implements this
-  rule, and the active desktop health commit has been verified as `9679872`.
+  rule, and active runtime commit `f0f48ef` retains it.
+  Defect L establishes that even a readable wrapper may be a lossy Markdown
+  display and must not be treated as raw-source identity.
 - **Regression:** `tests/chatgpt-controller.test.mjs` proves the exact synthetic
   heading, blank line, nested two-space list, fenced block and U+2014 payload
   survives `PRE > CODE` serialization; U+2014 mutation fails by code point; an
@@ -1128,6 +1186,62 @@ nonetheless directly reproducible.
   review-transport/state suites retain mismatch, unreadable, observed-anchor,
   submission-diagnostic, recovery, content-rebind, raw-SHA and exact-one
   invariants.
+
+### L. Causal submission identity is separate from rendered display fidelity
+
+- **File/symbol:** `review-text-identity.mjs`,
+  `REVIEW_CAUSAL_SUBMISSION_MODEL`, `reviewBaselineMessageIdsSha256`, and
+  `validateReviewCausalSubmissionReceipt`; `chatgpt-controller.mjs`,
+  `#clickReviewSendOnce`, `#waitForReviewUserMessage`, `reviewQuery`,
+  `observeReviewResponse`, `#resolveReviewUserAnchor`, and
+  `recoverReviewSubmission`; `review-transport.mjs`, `onSendAction`,
+  `onUserTurnObserved`, `onSubmitted`, and `observePersistedReview`;
+  `state.mjs`, causal-receipt/submission/display validation. Symbol locators are
+  normative for active source/runtime commit `f0f48ef`.
+- **Invariant:** exact frozen-source identity, exact browser text at the unique
+  click boundary, provider acceptance of exactly one baseline-new turn in a
+  concrete conversation, and rendered display fidelity are four distinct facts.
+  The first three may form `agentify_review_causal_submission_v1`; the fourth is
+  diagnostic only. No semantic Markdown equivalence, delimiter reconstruction,
+  trimming, contains/length/hash bypass, or provider-specific payload guess may
+  bridge them.
+- **Observed source defect:** operation
+  `AGENTIFY-RENDERED-PRECODE-V1-CHATGPT-1c83cef6-ae16-49e4-9fa9-a6bdc9423f92`
+  atomically verified and clicked the 132-character frozen prompt once, durably
+  observed exactly one user turn
+  `38001de2-55b1-4d41-bf39-1cf40a9eb423`, and recorded
+  `/c/WEB:27879e24-aefb-4093-a414-e61164c47982`. Agentify's own
+  `provisionalChatgptConversationId` classifies that `WEB:` value as provisional,
+  not a canonical concrete first-binding identity. The rendered serializer was
+  readable but returned length 124. The
+  frozen source contains ten fence-token characters; Markdown display removes
+  them while structural PRE block serialization contributes two newlines, which
+  mechanically explains the net loss of eight. This is display transformation,
+  not evidence that the click-bound prompt was corrupted.
+- **Raw-anchor audit:** the current provider-neutral page architecture has no
+  authoritative raw request-body anchor. `chrome-cdp-backend.mjs` enables Page,
+  Runtime and DOM but does not capture Network request bodies;
+  `electron-browser-backend.mjs` exposes executeJavaScript/input primitives but
+  no webRequest interception; `#reviewSnapshot` reads turn IDs and rendered DOM.
+  A provider-private endpoint, React-state probe, or network-payload parser would
+  be provider-specific and unstable, so none is introduced.
+- **Implemented fix:** after the atomic click, `onSendAction`
+  persists a receipt bound to operation ID, exact source/canonical hashes,
+  baseline-ID digest, `clickCount=1`, and `sendActionCount=1`, and returns that
+  persisted receipt to the controller. Exactly one new visible turn plus the
+  concrete URL/ID may then promote the durable anchor while rendered display is
+  separately stored as `exact`, `lossy_mismatch`, or `unreadable`. A lossy turn
+  can be observed only by its persisted ID; if that ID disappears, content rebind
+  fails closed. Historical operations without this receipt are never promoted or
+  resent retroactively.
+- **Regression:** `tests/chatgpt-controller.test.mjs` reproduces the exact
+  132-to-124 structural canary, requires one persisted causal receipt, one click,
+  one visible turn and a concrete identity, and retains failure without that
+  receipt. `tests/review-transport.test.mjs` proves the causal receipt and lossy
+  display remain separate in a COMPLETE ledger. `tests/state.test.mjs` proves
+  deterministic round-trip and rejects conflated source identity. Existing
+  exact-one, composer mutation, no-turn, ambiguity, content-rebind, observer and
+  never-resend regressions remain green.
 
 ## 16. Source evidence index
 
@@ -1142,8 +1256,11 @@ nonetheless directly reproducible.
 - Strict request identity/fingerprint/state machine:
   `C:/Projects/agentify-desktop/review-transport.mjs:37-200,234-368,395-632`.
 - Review plain-text identity, narrowly reversible Blink space mapping, and safe
-  hash receipt:
-  `C:/Projects/agentify-desktop/review-text-identity.mjs:3-183`.
+  hash/causal receipts:
+  `C:/Projects/agentify-desktop/review-text-identity.mjs:
+  REVIEW_PLAIN_TEXT_MODEL,REVIEW_CAUSAL_SUBMISSION_MODEL,
+  compareReviewPlainText,reviewBaselineMessageIdsSha256,
+  validateReviewCausalSubmissionReceipt`.
 - Composer replacement, draft-state synchronization, empty/caret proof:
   `C:/Projects/agentify-desktop/review-composer-replacement.mjs`.
 - Live challenge, model, Gemini adapter DOM, send, and completion mechanics:
@@ -1151,6 +1268,14 @@ nonetheless directly reproducible.
 - Rendered user-turn outermost candidate selection and exact PRE/CODE text
   extraction: `C:/Projects/agentify-desktop/chatgpt-controller.mjs:
   serializeReviewComposer,serializeReviewUserMessage,#reviewSnapshot`.
+- Provider-neutral backend capabilities and absence of a raw request-body
+  anchor: `C:/Projects/agentify-desktop/chrome-cdp-backend.mjs:
+  ChromeCdpPageAdapter.initialize,evaluate`; `C:/Projects/agentify-desktop/
+  electron-browser-backend.mjs:ElectronPageAdapter.evaluate,insertText`.
+- Causal submission persistence and display-fidelity separation:
+  `C:/Projects/agentify-desktop/review-transport.mjs:onSendAction,
+  onUserTurnObserved,onSubmitted,observePersistedReview`;
+  `C:/Projects/agentify-desktop/state.mjs:validateReviewTransportState`.
 - Ledger schema and atomic persistence:
   `C:/Projects/agentify-desktop/state.mjs:6-15,34-155,257-272`.
 - Default tab/status construction:
