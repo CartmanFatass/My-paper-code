@@ -5,9 +5,9 @@ direction=semantic_graphon_shared_policy
 revision=SGSP-B1-SCIENCE-20260813-02
 supersedes_revision=SGSP-B1-SCIENCE-20260813-01
 author=EM_semantic_graphon_shared_policy
-handoff_state=OWNER_PREPARED_CM_RELEASE_WITHHELD
+handoff_state=OWNER_CLOSED_COMPOSITE_DIRECT_TO_CM_ROOT_SEQUENCE_REQUIRED
 scientific_activity_started=false
-mathematical_closure=revision_02_PREPARED_NOT_SENT_SAME_CONVERSATION
+mathematical_closure=CLOSED_revision_02_EM_INTAKE_COMPLETE
 construction_authorized=false
 tests_authorized=false
 compute_authorized=false
@@ -20,13 +20,14 @@ The exact prospective scientific source of truth is
 `docs/research/candidates/semantic_graphon_shared_policy/SGSP_B1_SCIENCE_CARD.md`.
 It defines a decision-changing direct-variable-`N` discriminator and accepts
 all seven prospective defects from the result-blind revision-01 Pro ruling.
-This file is a handoff prepared for a future Root release, not a dispatch. CM may inspect it
-for feasibility or ambiguity but must not construct, test, train, evaluate, or
-launch until the exact composite receives dedicated ChatGPT External Pro
-`CLOSED`, this EM records an intake, and Root separately sequences the work and
-compute lease.
+The dedicated same-direction Pro returned literal `CLOSED` for exact revision
+02 and this EM accepted it. This file now carries the owner-closed composite
+directly to the named same-direction CM, but it is not a construction dispatch.
+CM may inspect it for technical planning or ambiguity and must not construct,
+test, train, evaluate, or launch until Root separately sequences the work and
+any compute lease.
 
-## Exact object after a future release
+## Exact object if Root later releases construction
 
 CM would construct an isolated finite-toy candidate package with:
 

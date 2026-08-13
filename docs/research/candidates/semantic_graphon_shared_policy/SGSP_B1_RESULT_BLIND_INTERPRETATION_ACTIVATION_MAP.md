@@ -8,8 +8,8 @@ owner=EM_semantic_graphon_shared_policy
 artifact_role=result-blind derivative reading map
 map_changes_treatment=false
 scientific_activity_started=false
-mathematical_closure=revision_02_PREPARED_NOT_SENT_SAME_CONVERSATION
-cm_release=withheld
+mathematical_closure=CLOSED_revision_02_EM_INTAKE_COMPLETE
+cm_release=owner_closed_composite_handoff_only_root_sequence_required
 production_authorization=none
 ```
 
@@ -25,11 +25,12 @@ margin enters a branch.
 ### 1. Closure and authority
 
 Revision 01 received result-blind same-direction Pro `REVISION_REQUIRED` with
-seven defects, all prospectively accepted in revision 02. No science-bearing
-work may begin until the existing dedicated conversation returns literal
-`CLOSED` for exact revision `SGSP-B1-SCIENCE-20260813-02`, this EM accepts the
-ruling, and Root separately releases CM. The blind Gemini question may suggest
-a successor but cannot close, accept, authorize, rank, or interpret B1.
+seven defects, all prospectively accepted in revision 02. The existing
+dedicated conversation returned literal `CLOSED` for exact revision
+`SGSP-B1-SCIENCE-20260813-02`, and this EM accepted the ruling. Construction,
+tests, compute, and production still require separate Root sequencing. Gemini
+produced no turn or evidence and cannot close, accept, authorize, rank, or
+interpret B1.
 
 ### 2. Activity boundary
 
