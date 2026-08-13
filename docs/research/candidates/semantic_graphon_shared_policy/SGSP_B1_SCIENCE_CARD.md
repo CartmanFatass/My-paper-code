@@ -2,16 +2,16 @@
 
 ```text
 direction=semantic_graphon_shared_policy
-revision=SGSP-B1-SCIENCE-20260813-02
-supersedes_revision=SGSP-B1-SCIENCE-20260813-01
+revision=SGSP-B1-SCIENCE-20260813-03
+supersedes_revision=SGSP-B1-SCIENCE-20260813-02_PRO_CLOSED
 owner=EM_semantic_graphon_shared_policy
 object=result-blind prospective direct-variable-N discriminator
 scientific_activity_started=false
-mathematical_closure=CLOSED_revision_02_EM_INTAKE_COMPLETE
-cm_release=owner_closed_composite_handoff_only_root_sequence_required
+mathematical_closure=revision_03_PREPARED_NOT_SENT_SAME_CONVERSATION
+cm_release=withheld_for_revision_03_closure
 construction_authorization=none
 compute_authorization=none
-chatgpt_external_pro=revision_02_CLOSED
+chatgpt_external_pro=revision_02_CLOSED_revision_03_PREPARED_NOT_SENT
 external_gemini=RECOVERY_EXHAUSTED_NO_PROVIDER_TURN
 ```
 
@@ -19,11 +19,15 @@ external_gemini=RECOVERY_EXHAUSTED_NO_PROVIDER_TURN
 
 SGSP remains a meaning-complete and decision-changing candidate after accepting
 all seven exact prospective defects in the result-blind revision-01 ChatGPT Pro
-ruling. Revision 02 freezes the common initializer, complete Adam/batch update,
+ruling. Revision 02 received Pro `CLOSED` after freezing the common initializer, complete Adam/batch update,
 full dense-reference actor-input audit, tape-conditioned endpoint envelope,
 `EDGE-PE`-versus-anonymous estimand, exhaustive branch precedence, and earliest
-stochastic-materialization activity boundary. No data or implementation fact
-informed these repairs. B1 asks whether a
+stochastic-materialization activity boundary. Before any stochastic
+materialization, CM then identified one literal conflict between an `N`-bearing
+counter address and handoff wording that called worlds nested. Revision 03
+chooses the address-consistent rule: roster sizes use disjoint stochastic
+namespaces and no cross-`N` member prefix; pairing is within each exact `N` only.
+No data or implementation fact informed either revision. B1 asks whether a
 correct observable two-block semantic graphon is a useful finite-budget
 inductive bias for one shared policy deployed unchanged at roster sizes outside
 the training set. It is not admitted merely by beating an anonymous mean. Its
@@ -165,10 +169,24 @@ Within `SAME`, draw `c` uniformly from `{-1,+1}` and set
 x_i=0.6c_{b_i}+\epsilon_i,\qquad \epsilon_i\sim N(0,1).
 \]
 
-The potential Gaussian tape is counter-addressed by
-`(phase,seed,N,regime,episode,role,within_role_slot)` and never by arm, opaque
-handle, or row order. Slots are semantic generator addresses, not policy
-inputs. Continuous noise makes an exact zero field probability zero; if a
+All stochastic world objects are explicitly `N`-separated. The latent
+orientation uses address
+`(phase,seed,N,regime,episode,orientation)`. The Gaussian member tape uses
+`(phase,seed,N,regime,episode,role,within_role_slot,gaussian)`. The action tape
+uses the same address with terminal field `action`, and the row permutation
+uses `(phase,seed,N,regime,episode,identity_permutation)`. These addresses never
+contain arm, cut, opaque handle, or row order. Slots are semantic generator
+addresses, not policy inputs.
+
+Different values of `N` therefore occupy disjoint counter namespaces: a world
+at `N=6` is not a prefix of a world at `N=16`, and training worlds at `N=8`
+are not prefixes of those at `N=12`. The same orientation, member messages,
+action uniforms, and identity permutation are reused across arms and every
+defined intact/reassociation or canonical/permuted replay within one exact
+`(phase,seed,N,regime,episode)` cell. There is no pathwise cross-`N` contrast.
+The within-seed minimum over held-out sizes is the minimum of two independently
+generated cell summaries conditional on the same seed-specific trained
+checkpoints. Continuous noise makes an exact zero field probability zero; if a
 binary64 evaluation equals zero, the fixed target is `+1`.
 
 ### 2.4 Legal action and reward

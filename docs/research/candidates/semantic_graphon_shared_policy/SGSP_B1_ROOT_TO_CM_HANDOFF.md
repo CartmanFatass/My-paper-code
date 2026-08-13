@@ -2,12 +2,12 @@
 
 ```text
 direction=semantic_graphon_shared_policy
-revision=SGSP-B1-SCIENCE-20260813-02
-supersedes_revision=SGSP-B1-SCIENCE-20260813-01
+revision=SGSP-B1-SCIENCE-20260813-03
+supersedes_revision=SGSP-B1-SCIENCE-20260813-02_PRO_CLOSED
 author=EM_semantic_graphon_shared_policy
-handoff_state=OWNER_CLOSED_COMPOSITE_DIRECT_TO_CM_ROOT_SEQUENCE_REQUIRED
+handoff_state=REVISION_03_OWNER_PREPARED_CM_RELEASE_WITHHELD
 scientific_activity_started=false
-mathematical_closure=CLOSED_revision_02_EM_INTAKE_COMPLETE
+mathematical_closure=revision_03_PREPARED_NOT_SENT_SAME_CONVERSATION
 construction_authorized=false
 tests_authorized=false
 compute_authorized=false
@@ -20,12 +20,13 @@ The exact prospective scientific source of truth is
 `docs/research/candidates/semantic_graphon_shared_policy/SGSP_B1_SCIENCE_CARD.md`.
 It defines a decision-changing direct-variable-`N` discriminator and accepts
 all seven prospective defects from the result-blind revision-01 Pro ruling.
-The dedicated same-direction Pro returned literal `CLOSED` for exact revision
-02 and this EM accepted it. This file now carries the owner-closed composite
-directly to the named same-direction CM, but it is not a construction dispatch.
-CM may inspect it for technical planning or ambiguity and must not construct,
-test, train, evaluate, or launch until Root separately sequences the work and
-any compute lease.
+The dedicated same-direction Pro returned literal `CLOSED` for revision 02.
+Before any stochastic materialization, CM identified a conflict between its
+literal `N`-bearing address and this handoff's word “nested.” Revision 03 makes
+the address controlling: different roster sizes use disjoint stochastic tapes
+and have no common prefix. This clarification is science-bearing, so CM release
+is again withheld until same-conversation Pro `CLOSED` plus EM intake. CM must
+not construct, test, train, evaluate, or launch.
 
 ## Exact object if Root later releases construction
 
@@ -61,8 +62,14 @@ comparator nor the identity-permutation replay.
 4. The physical target uses the dense finite sum. Learned arms use exactly
    equivalent two-block sums and may never instantiate a learned/deployed
    `N x N` object.
-5. The DGP is the exact `SAME/OPPOSED` Gaussian mixture; worlds are nested and
-   paired by the counter map, never arm or row order.
+5. The DGP is the exact `SAME/OPPOSED` Gaussian mixture. Orientation, Gaussian
+   member, action, and permutation addresses literally include `N`, so distinct
+   roster sizes use disjoint tapes and no cross-`N` member prefixes. Within one
+   exact `N` cell, worlds/tapes are paired across arms, cuts, and row-order
+   replays and never addressed by arm, cut, opaque identity, or row order. The
+   within-seed `min_N` combines independent held-out cell summaries conditional
+   on the shared trained seed/checkpoints; it is not a pathwise cross-`N`
+   contrast.
 6. All agents have only `{SERVE_NEG,SERVE_POS}` and the same epsilon-soft policy
    support. The reward is mean correctness against the dense finite target.
 7. Each arm/seed has one parameterization across all `N`; no size-specific

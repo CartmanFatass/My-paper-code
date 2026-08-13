@@ -2,14 +2,14 @@
 
 ```text
 direction=semantic_graphon_shared_policy
-treatment_revision=SGSP-B1-SCIENCE-20260813-02
-supersedes_map_for=SGSP-B1-SCIENCE-20260813-01
+treatment_revision=SGSP-B1-SCIENCE-20260813-03
+supersedes_map_for=SGSP-B1-SCIENCE-20260813-02_PRO_CLOSED
 owner=EM_semantic_graphon_shared_policy
 artifact_role=result-blind derivative reading map
 map_changes_treatment=false
 scientific_activity_started=false
-mathematical_closure=CLOSED_revision_02_EM_INTAKE_COMPLETE
-cm_release=owner_closed_composite_handoff_only_root_sequence_required
+mathematical_closure=revision_03_PREPARED_NOT_SENT_SAME_CONVERSATION
+cm_release=withheld_for_revision_03_closure
 production_authorization=none
 ```
 
@@ -26,11 +26,12 @@ margin enters a branch.
 
 Revision 01 received result-blind same-direction Pro `REVISION_REQUIRED` with
 seven defects, all prospectively accepted in revision 02. The existing
-dedicated conversation returned literal `CLOSED` for exact revision
-`SGSP-B1-SCIENCE-20260813-02`, and this EM accepted the ruling. Construction,
-tests, compute, and production still require separate Root sequencing. Gemini
-produced no turn or evidence and cannot close, accept, authorize, rank, or
-interpret B1.
+dedicated conversation returned literal `CLOSED` for revision 02. Before any
+stochastic materialization, revision 03 prospectively resolves one later CM
+ambiguity: different `N` cells have disjoint stochastic tapes, not shared
+prefixes. Exact revision 03 therefore requires same-conversation `CLOSED` plus
+EM intake before CM release. Gemini produced no turn or evidence and cannot
+close, accept, authorize, rank, or interpret B1.
 
 ### 2. Activity boundary
 
@@ -51,6 +52,10 @@ intact/cut panel, identity replay, dense-reference audit, support audit,
 parameter/work/communication ledger, and checkpoint fact. There is no seed
 replacement, partial efficacy mean, or pooled-agent/world inference. Missing
 question-relevant output returns to CM and supports no scientific branch.
+Worlds and action/permutation tapes are paired across arms and interventions
+within an exact `N` cell. Distinct `N` cells are counter-separated and share no
+pathwise population prefix; `min_N` is a seed-level minimum of independently
+generated cell summaries conditional on the same trained checkpoint.
 
 ### 4. Hard structural validity
 
