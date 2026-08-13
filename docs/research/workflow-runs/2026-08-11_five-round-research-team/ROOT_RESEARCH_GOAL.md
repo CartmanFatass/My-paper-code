@@ -739,3 +739,50 @@ does not operate their tabs, waits, archives, or retries.
 
 No qualifying matched-baseline improvement currently exists. The Root goal
 therefore remains active.
+
+## 2026-08-13 second-surface and UAV discriminator decision
+
+This section refines the prospective bridge without activating either surface.
+It is a Root cross-direction sequencing decision, not transferred evidence and
+not authority to change either revision-04 treatment.
+
+- **No direct toy-to-UAV jump.** A fully qualifying B1 result may activate only
+  its separately frozen minimal second surface. That surface needs its own DGP,
+  margins, seeds, result-blind map, same-conversation Pro closure, CM acceptance,
+  and technically accepted result before a UAV-simulator successor is frozen.
+- **MGTAP first when both toys qualify.** Its next surface is one fixed-map,
+  four-zone warehouse dispatch problem with two public capability classes, one
+  additive service quantum per robot and wave, explicit idle/unmet mass, and a
+  physical shortest-path time or energy ground. Retain the equal-class FREE
+  comparator, a wrong-ground binding intervention that leaves real routes,
+  rewards, demand and legal actions unchanged, inert zones, permutation replay,
+  and held-out fleet size. Only task-endpoint and legal-action sensitivity may
+  activate a later static four-sector UAV delivery allocator; internal transport
+  scores are insufficient. This route has the best expected decision information
+  per cost because it adds the fewest new physical assumptions.
+- **SGSP second, conditional on a physical-kernel audit.** Its next surface is a
+  fixed-waypoint, two-zone surveillance/relay problem with stable public
+  `SCOUT`/`RELAY` roles and sector coordinates. A policy- and reward-independent
+  sensing/link calibration must first show a stable dense block kernel; sparse,
+  delayed, thresholded or rapidly changing influence makes this bridge
+  inapplicable rather than algorithm-negative. Retain EDGE, equal-width
+  ALT-CENTER and anonymous controls, sender reassociation, anchor swap, identity
+  replay, held-out fleet size, and both mission-endpoint and legal-action gates.
+  Only a qualifying second surface may activate a fixed-waypoint wildfire/search
+  UAV simulator.
+- **Infrastructure may be shared; experiments may not.** MGTAP and SGSP may reuse
+  a fixed map, vehicle dynamics, low-level controller and logging primitives.
+  Their missions, training data, RNG namespaces, parameters, checkpoints,
+  comparisons, thresholds, inference, provider conversations and result archives
+  remain direction-isolated. No joint treatment or evidence fusion is planned.
+- **Bridge ceilings remain narrow.** MGTAP cannot claim dynamic routing,
+  collision, wind, complementarity, decentralized control or churn. SGSP cannot
+  claim a learned graphon, sparse/dynamic topology, delayed communication,
+  continuous motion, role reassignment or churn. Failure of additivity or kernel
+  stability rejects the proposed bridge surface, not the original B1 mechanism.
+
+The trigger is conditional: fund only the direction whose B1 enters its complete
+positive branch after same-EM interpretation and same-conversation Pro result
+convergence. If both qualify, run the MGTAP warehouse surface first; reverse the
+order only when the intended UAV mission is intrinsically surveillance/relay and
+the independent physical-kernel audit already passes.
