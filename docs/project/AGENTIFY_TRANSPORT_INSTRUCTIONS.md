@@ -5,7 +5,7 @@ document_kind=canonical_transport_operations_manual
 scope=ChatGPT_External_Pro|External_Gemini
 transport_core=Agentify_strict_review_query
 provider_mapping=chatgpt|gemini
-version_basis=@agentify/desktop_0.2.4+302bd1d_2026-08-13
+version_basis=@agentify/desktop_0.2.4+d94ee4b_2026-08-13
 ```
 
 This is the canonical operating manual for every HMASD Agentify transport
@@ -50,17 +50,21 @@ Most recent failures were operator/contract failures, not provider failures:
    the composer became empty; when focus/selection did not cover the editable
    root, the next frozen prompt was appended and the serializer exposed an
    approximately doubled DOM/text structure.
+9. After one exact click-time Send, the controller observed exactly one new
+   visible user-turn ID but threw before persisting it because the rendered
+   content serializer was unreadable. The transport catch then overwrote the
+   true count of one with an unset ledger field's zero, obscuring commitment
+   evidence and collapsing `turn_unreadable` into a generic content mismatch.
 
 The confirmed Agentify defects are repaired in source commit `a9471f7`; source
 commit `e12caf8` adds the provenance-preserving v1-to-v2 ledger migration needed
 to load older valid COMPLETE receipts without weakening new-operation
-enforcement. Current source commit `302bd1d` includes the single
-collision-resistant review plain-text identity model used at the composer,
-rendered-turn, diagnostic, recovery, and content-rebind boundaries, plus the
-strict composer-replacement and atomic click-time verification contract.
-Section 15 retains the defects as regression contracts. An older running
-desktop still has the pre-fix behavior, so the repaired tree must be loaded
-before relying on those guarantees.
+enforcement. Current source commit `d94ee4b` includes the collision-resistant
+review plain-text identity model, the verified-selection
+`agentify_review_composer_replace_v2` contract, atomic click-time verification,
+and defect-J durable post-click observed-turn evidence. Section 15 retains the
+defects as regression contracts. A running desktop must load `d94ee4b` before
+operators rely on those guarantees.
 
 ## 2. The operating model
 
@@ -369,14 +373,16 @@ browser text model is not permission to change those frozen bytes
 2065-2299`; `review-transport.mjs:387-526,612,679-685`).
 
 Before the one strict insertion, Agentify uses the provider-neutral
-`agentify_review_composer_replace_v1` contract:
+`agentify_review_composer_replace_v2` contract:
 
 1. Resolve the visible primary composer and classify it as `contenteditable`,
    `textarea`, or plain-text `input`.
-2. Clear it exactly once. Contenteditable uses `replaceChildren()` plus a
-   bubbling/composed input event; textarea/input uses the native prototype
-   value setter plus the same input event so provider draft state receives the
-   mutation.
+2. If nonempty, focus the composer and construct a selection proven to cover
+   its complete editable value/root. Dispatch exactly one real Backspace key so
+   the browser and provider editor framework receive the native keyboard,
+   `beforeinput`, and `input` transaction. Never directly mutate
+   contenteditable children or a form-control value. An already-empty composer
+   sends no delete key.
 3. Independently serialize and prove empty in two snapshots separated by a
    bounded delay. This detects immediate and queued draft rehydration. A
    nonempty/unreadable snapshot fails before any prompt insertion.
@@ -393,7 +399,7 @@ Before the one strict insertion, Agentify uses the provider-neutral
 
 An empty snapshot alone is not the final send guarantee: persisted application
 state may rehydrate later. The atomic click-time check closes that interval. A
-clear, empty, caret, final identity, or Send-control failure reports safe
+selection, delete, empty, caret, final identity, or Send-control failure reports safe
 structural metadata, `noClickProven=true`, `promptInsertCount=0` when insertion
 never occurred, and leaves `sendActionCount=0`. It must never be repaired by
 typing again in that operation (`review-composer-replacement.mjs`;
@@ -420,6 +426,23 @@ requires a concrete `/c/<id>` for first binding; Gemini requires a concrete
 turn-content receipt and identity. A post-click unreadable/mismatched turn is
 `SUBMITTED_UNVERIFIED`, never a resend license (`review-transport.mjs:
 onSubmitted`; `chatgpt-controller.mjs:#waitForReviewUserMessage,reviewQuery`).
+
+The first exactly-one new visible user-turn ID is durable commitment evidence
+even when its content is unreadable or mismatched. Before any such failure,
+Agentify persists `observedUserMessageId`, observation time, exact observed
+conversation URL/ID, and a non-content `observedTurnEvidence` receipt. The
+terminal classes are distinct:
+
+- `click_no_turn`: the observation window ended without a new visible user turn;
+- `turn_unreadable`: exactly one new turn exists, but its structural serializer
+  cannot produce text;
+- `turn_content_mismatch`: exactly one readable new turn exists, but the narrow
+  plain-text identity receipt does not match.
+
+Only `turn_exact` may promote the durable anchor to `userMessageId` and
+`sendCount=1`. Every observed-turn class cuts off resend. An unreadable turn has
+no trustworthy rendered length, hash, or mismatch class unless those safe fields
+were actually returned; never infer them from composer evidence.
 
 For Gemini, stable reconciliation of all four facts—zero provider turns, no
 `/app/<id>`, the complete question still in the composer, and no generation—is
@@ -510,6 +533,10 @@ C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
   fresh bounded observation window (`review-transport.mjs:501-510`).
 - No provider user-message ID: `verifyExisting` is unavailable. Inspect the
   ledger and stable live page without page action. Do not send in the same call.
+- `observedUserMessageId` present but no validated `userMessageId`: a visible
+  turn is durably anchored but its content was unreadable or mismatched.
+  `verifyExisting` remains unavailable because that turn is not a validated copy
+  of the frozen prompt. Preserve `SUBMITTED_UNVERIFIED` and never resend.
 - Conflicting fingerprint for the same idempotency key:
   `review_idempotency_conflict`; correct the caller's metadata, never the
   existing operation.
@@ -583,15 +610,18 @@ If an HMASD archive is missing or stale:
 | `review_model_mismatch` | Strict live evidence does not match frozen model | Inspect genuine selected composer/model controls; fix preflight only. Never change the frozen model or use plan text. |
 | `expected_model_unavailable` | Ordinary generic selector could not find one matching option | This is not proof the Gemini model is unavailable. Production used the wrong route or unsupported composite selector. Use strict + genuine visible preflight; otherwise fail closed. |
 | `send_not_triggered` | Ordinary query did not establish its generic send signal | Reconcile turns, identity, composer, generation, and ledger. If zero-turn facts all hold, archive noncommit; otherwise ambiguous. Never call another send route. |
-| Composer serialized length/DOM structure is approximately doubled | A persisted draft was appended because keyboard Select All/Backspace did not replace the editable root | Strict gate correctly prevents Send. Archive the pre-send failure; never type again in that operation. Use a fresh authorized operation only after the repaired replace/empty/caret/click-time contract is loaded. |
-| `review_composer_clear_failed` or `review_composer_caret_unavailable` | Composer clearing, draft-state synchronization, empty proof, focus, or collapsed selection could not be proven | Pre-insert and pre-send terminal. Do not append, send, or retry inside the operation. |
+| Composer serialized length/DOM structure is approximately doubled | A persisted draft was appended because keyboard Select All/Backspace did not replace the editable root | Strict gate correctly prevents Send. Archive the pre-send failure; never type again in that operation. Use a fresh authorized operation only after the repaired verified-selection/delete/empty/caret/click-time contract is loaded. |
+| `review_composer_clear_failed` or `review_composer_caret_unavailable` | Full selection, native delete, draft-state synchronization, empty proof, focus, or collapsed insertion caret could not be proven | Pre-insert and pre-send terminal. Do not append, send, or retry inside the operation. |
+| `review_user_message_not_observed_after_click` / `click_no_turn` | The unique click occurred, but no new visible turn appeared before the observation deadline | No turn anchor may be fabricated. This is still post-click ambiguity and never permits resend inside the operation. |
+| `review_user_message_identity_unreadable` / `turn_unreadable` | Exactly one new visible turn ID exists, but its structural content serializer failed | Require durable `observedUserMessageId` and safe structure diagnostics; never infer content or resend. |
+| `review_user_message_content_mismatch` / `turn_content_mismatch` | Exactly one readable new turn exists, but narrow exact comparison failed | Preserve observed length/hash/mismatch metadata when available; never trim, broaden normalization, or resend. |
 | `review_composer_identity_mismatch_at_send` | Composer changed after initial identity receipt but before the Send boundary | Atomic check performed zero clicks. Archive pre-send; do not reuse the closed operation. |
 | `blocked=true`, login/CAPTCHA | Agentify detected a human/access gate | Do not send. Wait only within assignment timeout; archive pre-send terminal if unresolved. |
 | `looks403=true` with usable conversation/composer | Possible false positive from bare `403` text | Treat as evidence conflict, not permission to send. Archive conflict; source fix required. |
 | Actual access-denied/403 shell | Provider page is blocked | Pre-send terminal if no operation; verify existing only if ledger says already submitted. Restarting Agentify is not a repair. |
 | `review_idempotency_conflict` | Same operation key, different fingerprint | Restore original exact fields or choose a genuinely new authorized operation. Never mutate existing identity. |
 | `review_observation_unavailable` | No persisted provider user-message anchor | No `verifyExisting` possible. Inspect ledger/live page without input and fail closed. |
-| `SUBMITTED_UNVERIFIED` | Send action or provider turn may exist but completion is absent | Never resend. Use exact `verifyExisting` only when user-message ID exists. |
+| `SUBMITTED_UNVERIFIED` | Send action or provider turn may exist but completion is absent | Never resend. Use exact `verifyExisting` only when validated `userMessageId` exists; `observedUserMessageId` alone is commitment evidence, not an observation capability. |
 | `IN_PROGRESS` | Same answer is still active | Continue observation only. Do not query again or close the tab. |
 | Timeout | Deadline/client ended; send state unknown from timeout alone | Ledger first, then exact observe-only recovery. |
 | Stale results archive | Local result disagrees with valid ledger | Preserve it; perform ledger-only recovery. Do not revisit provider to make the archive agree. |
@@ -681,9 +711,9 @@ Before every strict call, record yes/no for each item:
 - [ ] New binding has zero turns; continuation has the expected conversation.
 - [ ] Genuine visible selected model/mode evidence is present.
 - [ ] Account-plan text and synthetic DOM were not used as evidence.
-- [ ] Composer is usable; strict replacement will independently clear, prove
-      empty twice, verify caret state, insert once, and atomically recheck at
-      Send even if a persisted old draft is present.
+- [ ] Composer is usable; strict replacement will verify full selection, send
+      at most one native delete, prove empty twice, verify insertion caret,
+      insert once, and atomically recheck at Send even if an old draft exists.
 - [ ] No active query/generation or forbidden response control exists.
 - [ ] Stable key, new operation key, exact URL/ID, model, SHA, timeout, and
       first-binding flag are frozen.
@@ -692,6 +722,10 @@ Before every strict call, record yes/no for each item:
 ## 13. Terminal checklist
 
 - [ ] Commitment classified from visible turn + concrete identity, not click.
+- [ ] Any exactly-one visible new turn was durably recorded as
+      `observedUserMessageId` before content acceptance or failure.
+- [ ] `click_no_turn`, `turn_unreadable`, and `turn_content_mismatch` were not
+      collapsed or treated as resend permission.
 - [ ] The durable Send receipt includes valid replacement and atomic click-time
       identity evidence.
 - [ ] No second send route was used.
@@ -730,11 +764,12 @@ L1-owned scheduling, and ledger-only recovery.
 ## 15. Resolved Agentify defect packets and regression contract
 
 These packets preserve the original diagnosis and the regression invariant.
-They were implemented in the Agentify working tree on 2026-08-13 in
-`chatgpt-controller.mjs`, `review-transport.mjs`, `state.mjs`, `tab-manager.mjs`,
-`main.mjs`, and `http-api.mjs`, with offline fixture coverage in the corresponding
-tests. Transport operators must not patch Agentify during a provider assignment
-and must not assume the fixes exist in an older running build.
+They are implemented through Agentify commit `d94ee4b` in
+`chatgpt-controller.mjs`, `review-composer-replacement.mjs`,
+`review-transport.mjs`, `state.mjs`, `tab-manager.mjs`, `main.mjs`, and
+`http-api.mjs`, with offline fixture coverage in the corresponding tests.
+Transport operators must not patch Agentify during a provider assignment and
+must not assume the fixes exist in an older running build.
 
 Current source behavior is:
 
@@ -749,6 +784,7 @@ Current source behavior is:
 | G | strict and ordinary send-capable entry points share one global inflight governor; exact existing observers do not reserve a second slot |
 | H | composer, rendered turn, diagnostics/recovery, and content rebind use one collision-resistant plain-text receipt; only narrowly reversible Blink space rebalance is accepted |
 | I | strict composer replacement clears once, proves empty and caret state before one insertion, then atomically revalidates identity with the unique Send click; persisted drafts cannot be appended or race the send boundary |
+| J | the first exactly-one visible post-click user-turn ID is durably persisted before content acceptance; no-turn, unreadable-turn, and readable-mismatch terminals remain distinct and never permit resend |
 
 The “observed source defect” and “reproduction” bullets below describe the
 pre-fix implementation retained for audit provenance. The invariant and fix
@@ -934,13 +970,13 @@ nonetheless directly reproducible.
 ### I. Persisted drafts are replaced and verified before strict Send
 
 - **File/symbol:** `review-composer-replacement.mjs`,
-  `locateReviewComposer`, `clearReviewComposerElement`,
+  `locateReviewComposer`, `prepareReviewComposerClearSelection`,
   `inspectReviewComposerEmptyElement`, and `positionReviewComposerCaret`;
   `chatgpt-controller.mjs`, `#clearReviewComposerOnce`,
   `#verifyReviewComposerEmpty`, `#prepareReviewComposerInsertion`,
   `#replacePrompt`, and `#clickReviewSendOnce`; `review-transport.mjs`,
   `onComposerVerified` and `onSendAction`. These symbol locators are the stable
-  source references for commit `302bd1d`; line numbers are intentionally omitted
+  source references for commit `d94ee4b`; line numbers are intentionally omitted
   because surrounding controller and transport code can move independently.
 - **Invariant:** strict review clears the resolved primary composer once,
   dispatches provider-observable input state, proves stable emptiness and a
@@ -957,20 +993,75 @@ nonetheless directly reproducible.
   nodes, with zero Send/action/user-turn facts. This is exact mechanical
   evidence of append-after-failed-replacement, not prompt corruption or a
   provider turn.
-- **Implemented fix:** contenteditable uses direct child replacement plus input
-  event; textarea/input uses native value setter plus input event. Two empty
-  snapshots catch queued rehydration, caret verification catches focus and
-  selection failures, insertion occurs once, and the final text check plus
-  click is atomic. Every failure before click carries safe non-content metadata
-  and `noClickProven=true`; no branch types a second copy.
-- **Regression:** `tests/review-composer-replacement.test.mjs` covers
-  contenteditable clearing/input dispatch, textarea native setter, delayed DOM
-  and textarea rehydration, and failed selection. Focused controller fixtures
+- **Implemented fix:** the current v2 primitive verifies a selection covering
+  the entire contenteditable root or form-control value, dispatches one real
+  Backspace, then proves empty twice. Caret verification catches focus and
+  insertion-selection failures, insertion occurs once, and the final text check
+  plus click is atomic. Every failure before click carries safe non-content
+  metadata and `noClickProven=true`; no branch types a second copy. Section J
+  records why direct DOM/value mutation from the first repair was retired.
+- **Regression:** `tests/review-composer-replacement.test.mjs` covers verified
+  full selection for contenteditable/textarea, delayed DOM and textarea
+  rehydration, and failed selection. Focused controller fixtures
   cover the 7,024-shape persisted-draft replacement contract, zero insertion on
   rehydration/caret failure, mutation after the initial receipt with zero click,
   and legal click-time NBSP rebalance with exactly one click.
   `tests/review-transport.test.mjs` requires durable replacement and click-time
   receipts before accepting `sendActionCount=1`.
+
+### J. Post-click visible-turn evidence is durable before content validation
+
+- **File/symbol:** `chatgpt-controller.mjs`, `#waitForReviewUserMessage` and
+  `reviewQuery`; `review-transport.mjs`, `onUserTurnObserved`, `onSubmitted`,
+  and terminal error persistence; `state.mjs`, observed-turn validation;
+  `review-composer-replacement.mjs`, `prepareReviewComposerClearSelection`.
+  These symbol locators are the stable source references for commit `d94ee4b`;
+  line numbers are intentionally omitted.
+- **Invariant:** after the atomic unique Send click, the first exactly-one new
+  visible user-turn identity is persisted before any rendered-content error.
+  `turn_unreadable` and `turn_content_mismatch` retain that anchor and are
+  permanently non-resendable. `click_no_turn` records no fabricated anchor.
+  Only `turn_exact` may become `userMessageId`/`sendCount=1`.
+- **Observed source defect:** operation
+  `SCDMP-B2-R02-MATH-CLOSURE-ce3f4a3c-551d-4b93-8040-149fa7790203`
+  had one successful click-time exact receipt, then entered the branch guarded
+  by `newUserMessages.length === 1`. Its safe error showed
+  `readableCandidateCount=0`, so the rendered turn was structurally unreadable,
+  not a proven readable text mismatch. The controller kept its ID only in a
+  local variable and threw before `onSubmitted`; the transport catch then
+  replaced the error's count of one with absent `op.newUserMessageCount || 0`.
+  The resulting ledger/archive therefore incorrectly suggested that no turn
+  was observed and lacked the safe serializer structure.
+- **Historical classification:** the continuation snapshot had already passed
+  exact URL/ID assertion for
+  `https://chatgpt.com/c/6a7ce86f-c34c-83e8-94b2-d06c2a833561`.
+  Local evidence cannot recover the discarded user-turn ID, rendered length,
+  hash, unsupported tag, or actual submitted bytes after the tab was closed.
+  It therefore cannot decide whether provider content was old, empty,
+  duplicated, attachment-backed, or semantically exact. The historical
+  operation remains `SUBMITTED_UNVERIFIED` and must never be resent; its
+  archive's `prompt_sent=false` is not authoritative against the source-proven
+  exactly-one visible-turn observation.
+- **Implemented fix:** `onUserTurnObserved` atomically persists the observed ID,
+  timestamp, URL/ID, class, and sanitized non-content evidence before the
+  controller can throw. The error catch preserves the actual observed count
+  instead of overwriting it. The composer replacement model advances to
+  `agentify_review_composer_replace_v2`: it uses a verified full selection and
+  one real Backspace before empty proof and single insertion, avoiding direct
+  DOM/value mutation that could diverge from provider editor state. Atomic
+  click-time identity remains unchanged. Because the historical rendered
+  structure was discarded, the user-message serializer is not broadened;
+  unsupported or ambiguous normalizations still fail closed with richer safe
+  fingerprints.
+- **Regression:** focused controller fixtures prove durable callback ordering
+  for readable mismatch and unreadable structure, distinct no-turn error, and
+  no `onSubmitted` promotion. Transport fixtures prove observed anchors survive
+  terminal failure, safe length/hash or structure metadata is retained only
+  when available, repeated operation use cannot resend, and no-turn fabricates
+  no ID. State fixtures enforce deterministic observed evidence and reject
+  incomplete or conflicting anchors. Replacement fixtures cover verified full
+  selection for contenteditable and textarea, one-key clearing, asynchronous
+  draft rehydration, and selection failure.
 
 ## 16. Source evidence index
 
