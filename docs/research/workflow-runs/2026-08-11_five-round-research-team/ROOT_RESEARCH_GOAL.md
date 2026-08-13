@@ -386,6 +386,95 @@ Root repeats this event-driven cycle without waiting for a nominal round to end:
    pause only when a stronger discriminator dominates it or the prospective
    experiment cannot separate its strongest alternative.
 
+## Current authoritative correction after preactivity results
+
+This section supersedes the earlier same-day `Current promising set`, immediate
+cycle, and live-ledger status text while preserving those sections as provenance.
+It does not weaken the project outcome or completion test.
+
+### Current bounded objective
+
+Obtain one valid, matched-baseline result from a shared policy on a held-out
+variable-`N` or variable-`k` axis, then complete same-direction EM intake,
+same-conversation External Pro result convergence, and record the concrete second
+surface and UAV-simulator action. No preactivity gate, closure packet, source
+package, partial checkpoint, or interrupted run satisfies that objective.
+
+### Leading directions receiving investment
+
+1. **VQFP-v4 / physical-measure aggregation (direct variable `N`).** Exact
+   `VQFP-B1-MATH-CLOSURE-20260812-04` has literal same-conversation Pro `CLOSED`
+   with zero defects and EM intake. Its strongest alternative remains the
+   equally informed, capacity/work-matched learned gate that can represent the
+   fixed Voronoi-volume rule. Attempt 3 began learned activity but Windows
+   terminated it during a planned service-pack restart before any evaluated
+   result; this is neither positive nor negative evidence. After three
+   system-total CPU measurements within 30 seconds, a no-restart/no-process
+   guard, and non-destructive archival of attempt 3, CM launched the one
+   authorized unchanged-v4 attempt 4 in a fresh root. A complete valid result
+   returns to the same EM and then the same Pro conversation; a qualifying result
+   activates 2-D plume-front tracking and the UAV spatial-sensing/relay simulator.
+2. **SCDMP-v5 / semigroup-consistent duration modelling (direct variable `k`).**
+   Pro closed v4, after which CM exposed one science-bearing fit-scaler ambiguity.
+   The owner froze exact successor `SCDMP-B1-SCIENCE-20260812-05`: population
+   `ddof=0` over the complete ordered target-atom set with the exact reduction,
+   floor, sharing, and cast law, without changing the treatment thresholds,
+   estimands, ledger, or claim ceiling. Root published the seven v5 owner
+   artifacts to `origin/aggressive`; the exact same-conversation Pro batch is
+   released but remains a science-only closure step. Construction and production
+   require literal v5 `CLOSED` plus same-direction EM intake. The strongest
+   alternative is still that explicit `k`, raw history, and endpoint supervision
+   already learn all useful duration response. A qualifying result activates the
+   payload-towing second surface and UAV action-hold scheduling.
+3. **CCIC-v3 / covariance-calibrated information clock (direct `N` and `k`
+   candidate).** Exact result-blind `CCIC-B1-SCIENCE-20260812-03` separates
+   persistent literal duplicates, distinct correlated origins, and independent
+   origins while crossing training `N={2,5}, k={1,3}` with held-out `N=8, k=5`.
+   It uses one decentralized shared actor and locally reconstructed rank-one
+   GLS/Woodbury sufficient statistics. The strongest alternatives are the exact
+   homogeneous scalar-ESS reduction, lineage-aware origin counting, and a
+   capacity/work-matched nonlinear invariant encoder. Its Pro and independent
+   Gemini packets and result-blind map are being prepared; CM, tests, compute,
+   and production remain withheld until Pro closure and owner intake. Its first
+   result can support only a finite-toy causal timing benefit under every frozen
+   equivalence, work, mechanism, and multiplicity gate.
+
+### Current no-further-investment decisions
+
+1. **CRTO exact-v4.** Pro closed the mathematical object, but the first exact
+   seed's registered preactivity probe failed both support criteria: normalized
+   MSE `0.4738729000 > 0.01` and sign accuracy `0.8565487266 < 0.95`.
+   Scientific activity and question-relevant output are both false. Do not rerun
+   v4, weaken the thresholds, train its learned arms, or request Pro result
+   convergence. Reconsider only as a separately frozen probe-only
+   optimization-versus-representation discriminator; it cannot rescue v4.
+2. **VNFC-B2 current treatment.** Its complete panel and Pro convergence found
+   the packages not separated and the lifecycle mechanism non-identifying.
+   Revisit only with a new access-competent treatment and uniquely defined stale
+   command observables.
+3. **ONLGR current campaign.** Neither the original run nor its one authorized
+   recovery retained panel output. Revisit only through a newly frozen
+   from-scratch campaign.
+4. **VNFC-B3 current host/panel line.** Its final bounded preactivity proof found
+   `0/96` eligible rows in the first required bank under the unchanged semantic
+   filter. The frozen no-v9 rule ends that host/panel line; reconsider the family
+   only on a genuinely new, naturally feasible lifecycle host.
+
+### Current decision triggers
+
+- VQFP attempt 4 is the only live heavy production. Do not start another heavy
+  run while it is active. A complete terminal goes CM -> Root -> same EM; only a
+  technically accepted result triggers same-conversation Pro convergence.
+- SCDMP-v5 and CCIC-v3 may advance through serialized provider review without
+  consuming the production CPU. Gemini remains independent, additive, and
+  non-gating.
+- A no-data or externally interrupted execution returns to CM without weakening
+  science. A true preactivity support failure returns to the same EM and does not
+  become an algorithm- or family-negative result unless the frozen map says so.
+- Whichever leading candidate first supplies valid improvement over its strongest
+  matched baseline must still survive EM interpretation and Pro result challenge
+  and must record the selected second-surface and UAV-simulator validation step.
+
 ## Completion test
 
 Do not mark this goal complete until all are true:

@@ -944,3 +944,66 @@ no-current-investment choices without imposing a direction-count cap.
 - Provider capacity serializes Pro and Gemini page use only. It does not limit
   scientific directions or CM construction. Heavy production is sequenced by
   actual host resource conflict.
+
+## 2026-08-12 post-preactivity portfolio correction
+
+This section supersedes the preceding late same-day allocation while preserving
+it as provenance. The bounded objective remains one valid matched-baseline
+improvement from a shared policy on held-out variable `N` or `k`, followed by
+same-EM interpretation, same-conversation Pro result convergence, and an explicit
+second-surface/UAV action.
+
+### Three leading, nonredundant directions
+
+1. **VQFP-v4: physical-measure aggregation.** Direct variable-`N` candidate;
+   Pro `CLOSED` and EM intake complete. The decisive alternative is the equally
+   informed learned spatial gate. Attempt 3 was externally interrupted after
+   activity by a planned Windows restart and produced no evaluated result.
+   Attempt 4 is the sole live heavy run in a fresh root after the user-specified
+   three-sample CPU check, restart guard, process guard, and archival of attempt
+   3. Positive, null, negative, and engineering-terminal branches remain those
+   frozen in the v4 result-blind map.
+2. **SCDMP-v5: semigroup-consistent duration modelling.** Direct variable-`k`
+   candidate; exact v5 resolves the post-v4 population-scaler ambiguity without
+   changing the mechanism or gates. Root published the complete v5 owner packet;
+   its same-conversation Pro closure is the current boundary. Its strongest
+   alternative is ordinary explicit-`k`, history, and endpoint supervision.
+3. **CCIC-v3: covariance-calibrated information clock.** Direct both-axis
+   candidate whose smallest discriminator crosses literal duplicates,
+   correlated distinct origins, and independent origins at held-out `N` and
+   `k`. The strongest alternatives are scalar ESS, origin counting, and a
+   matched nonlinear invariant encoder. External packets and its result-blind
+   map are prepared before any CM release. This direction tests whether
+   invariance preserves useful independent information rather than merely
+   normalizing count.
+
+### No-current-investment directions and revisit conditions
+
+1. **CRTO exact-v4:** the registered first-seed preactivity support object failed
+   both frozen criteria (`NMSE=0.4738729000`, `sign_accuracy=0.8565487266`). No
+   learned activity or result exists. Exact v4 is terminal; revisit only through
+   a separately frozen probe-only optimization-versus-representation
+   discriminator, never a v4 retry or threshold change.
+2. **VNFC-B2 current treatment:** package non-separation and a non-identifying
+   lifecycle mechanism; revisit only with prospective access competence and
+   uniquely defined stale-command observables.
+3. **ONLGR current campaign:** no panel output survived the run or its sole
+   recovery; revisit only from scratch under a new frozen campaign.
+4. **VNFC-B3 current host/panel:** first required bank remained `0/96` under the
+   unchanged semantic filter; no v9 on this line. Revisit only on a genuinely new
+   naturally feasible lifecycle host.
+
+### Sequencing and decision triggers
+
+- VQFP attempt 4 exclusively owns heavy compute until terminal.
+- SCDMP and CCIC provider work may proceed serially and independently of that
+  CPU allocation. Gemini is additive and never gates Pro, CM, or Root decisions.
+- A complete VQFP result returns to its EM and then its existing Pro conversation.
+  A no-data terminal stays engineering-only. A valid negative deletes only its
+  frozen family; a qualifying positive selects the recorded second surface and
+  UAV simulator.
+- SCDMP construction begins only after exact-v5 Pro `CLOSED` and EM intake.
+  CCIC construction begins only after exact-v3 Pro `CLOSED` and EM intake.
+- These three leaders and four stopped treatments satisfy the portfolio decision
+  target without imposing a concurrency cap; additional directions require a
+  discriminator that changes this graph rather than another inventory item.
