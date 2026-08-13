@@ -398,7 +398,7 @@ structural metadata, `noClickProven=true`, `promptInsertCount=0` when insertion
 never occurred, and leaves `sendActionCount=0`. It must never be repaired by
 typing again in that operation (`review-composer-replacement.mjs`;
 `chatgpt-controller.mjs:#clearReviewComposerOnce,#verifyReviewComposerEmpty,
-#prepareReviewComposerInsertion,#replacePrompt,#clickReviewSendOnce`; 
+#prepareReviewComposerInsertion,#replacePrompt,#clickReviewSendOnce`;
 `review-transport.mjs:onComposerVerified,onSendAction`).
 
 ### 7.7 Send boundary and commitment
