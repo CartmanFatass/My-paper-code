@@ -1067,8 +1067,9 @@ class ServiceRelayHost:
             energy = float(energies_before[agent])
             if option in (Option.TRANSIT_L, Option.TRANSIT_R) and energy >= 0.25:
                 target = Location.L if option is Option.TRANSIT_L else Location.R
-                self.state.locations[agent] += np.int8(1 if target > location else -1)
-                energy_spent[agent] += 0.25
+                if location is not target:
+                    self.state.locations[agent] += np.int8(1 if target > location else -1)
+                    energy_spent[agent] += 0.25
             elif option is Option.RETURN:
                 if location is Location.BASE:
                     self.state.energies[agent] = min(ENERGY_CAPACITY, energy + 2.0)

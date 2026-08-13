@@ -468,13 +468,28 @@ def exercise(*, output_root: Path, result_path: Path, config: RunConfig = PRODUC
         _atomic_json(result_path, result)
         return result
     except BaseException as error:
+        resource_anomalies: list[dict[str, str]] = []
+        try:
+            # Refresh the OS lifetime peak and wall clock even when a phase
+            # exits before its ordinary ledger boundary.  _check updates the
+            # retained peak before raising a resource-cap error.
+            ledger.facts()
+        except BaseException as resource_error:
+            resource_record = {
+                "kind": type(resource_error).__name__, "message": str(resource_error),
+            }
+            original_record = {"kind": type(error).__name__, "message": str(error)}
+            if resource_record != original_record:
+                resource_anomalies.append(resource_record)
         incomplete = {
             "artifact_kind": ARTIFACT_KIND, "treatment": TREATMENT, "revision": REVISION,
             "manifest": manifest, "scientific_activity": activity.facts(),
             "resource_ledger": ledger.snapshot(), "per_seed": per_seed,
             "preactivity": preactivity,
             "question_relevant_output_exists": False,
-            "anomalies": [{"kind": type(error).__name__, "message": str(error)}],
+            "anomalies": [
+                {"kind": type(error).__name__, "message": str(error)}, *resource_anomalies,
+            ],
             "complete": False,
         }
         _atomic_json(output_root / "incomplete_result.json", incomplete)

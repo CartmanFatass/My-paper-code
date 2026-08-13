@@ -231,20 +231,55 @@ def prepare_seed(*, seed: int, config: object, ledger: object, writer: object) -
         name="scripted_predictor_data",
     )
     _phase_steps(scripted, name="scripted_predictor_data", expected=PREDICTOR_DATA_EPISODES * HORIZON)
+    # The complete scripted panel has already consumed its registered
+    # environment population at this boundary.  Account it independently of
+    # the downstream scientific support gate so a failing probe cannot erase
+    # completed work or bypass the post-collection resource check.
+    ledger.add(
+        "predictor_data", int(scripted["steps"]), completed_rows=PREDICTOR_DATA_EPISODES,
+    )
     predictor = FrozenPredictor(int(scripted["observation_dim"]), seed)
     predictor_report = fit_frozen_predictor(predictor, scripted["predictor_fit"])  # type: ignore[arg-type]
+    ledger.facts()
     calibration = fit_calibration_table(predictor, scripted["calibration"])  # type: ignore[arg-type]
     probe_splits = materialize_probe(predictor, calibration, scripted_panel)
+    ledger.facts()
     _probe, probe_report = fit_decodability_probe(
         seed, probe_splits.predictor_fit, probe_splits.calibration, probe_splits.development,
     )
+    probe_inputs = {
+        "predictor_fit_examples": len(probe_splits.predictor_fit),
+        "calibration_examples": len(probe_splits.calibration),
+        "combined_fit_examples": (
+            len(probe_splits.predictor_fit) + len(probe_splits.calibration)
+        ),
+        "development_examples": len(probe_splits.development),
+    }
+    probe_gate = {
+        "normalized_mse_maximum": 0.01,
+        "sign_accuracy_minimum": 0.95,
+    }
+    # Persist the exact observed gate inputs and outputs before applying the
+    # pass/fail branch.  This packet contains no learned-policy activity and is
+    # intentionally durable even when the registered support gate fails.
+    writer.write_json("preactivity.json", {
+        "revision": FROZEN_REVISION,
+        "seed": seed,
+        "predictor": asdict(predictor_report),
+        "probe": asdict(probe_report),
+        "probe_inputs": probe_inputs,
+        "probe_gate": probe_gate,
+        "learned_activity_started": False,
+    })
+    ledger.facts()
     if not probe_report.passed:
         raise HostInterfaceError("registered preactivity decodability probe failed")
     predictor_path = writer.artifact_path("checkpoints/predictor.pt")
     save_predictor_checkpoint(predictor, calibration, predictor_report, predictor_path)
-    ledger.add("predictor_data", int(scripted["steps"]), completed_rows=PREDICTOR_DATA_EPISODES)
     writer.write_json("preactivity.json", {
+        "revision": FROZEN_REVISION, "seed": seed,
         "predictor": asdict(predictor_report), "probe": asdict(probe_report),
+        "probe_inputs": probe_inputs, "probe_gate": probe_gate,
         "predictor_checkpoint": str(predictor_path), "learned_activity_started": False,
     })
 

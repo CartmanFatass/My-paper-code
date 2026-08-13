@@ -70,8 +70,12 @@ def _rss_bytes() -> int:
                          ("PrivateUsage", ctypes.c_size_t)]
         counters = ProcessMemoryCountersEx()
         counters.cb = ctypes.sizeof(counters)
-        if not ctypes.windll.psapi.GetProcessMemoryInfo(ctypes.windll.kernel32.GetCurrentProcess(),
-                                                        ctypes.byref(counters), counters.cb):
+        get_current_process = ctypes.windll.kernel32.GetCurrentProcess
+        get_current_process.restype = wintypes.HANDLE
+        get_process_memory_info = ctypes.windll.psapi.GetProcessMemoryInfo
+        get_process_memory_info.argtypes = (wintypes.HANDLE, ctypes.POINTER(ProcessMemoryCountersEx), wintypes.DWORD)
+        get_process_memory_info.restype = wintypes.BOOL
+        if not get_process_memory_info(get_current_process(), ctypes.byref(counters), counters.cb):
             raise OSError("GetProcessMemoryInfo failed")
         return int(counters.PeakWorkingSetSize)
     import resource
@@ -240,7 +244,8 @@ def _retained_analysis(seed_runs: list[SeedRun], preflight: dict[str, bool]) -> 
                               "raw_return": [float(trace.raw_return) for trace in panels.ordinary_traces[(n, regime)]],
                               "service_mass": [float(trace.service_mass) for trace in panels.ordinary_traces[(n, regime)]],
                               "cost": [float(trace.cost) for trace in panels.ordinary_traces[(n, regime)]],
-                              "action_frequency": [trace.action_frequency.cpu().tolist() for trace in panels.ordinary_traces[(n, regime)]})
+                              "action_frequency": [trace.action_frequency.cpu().tolist() for trace in panels.ordinary_traces[(n, regime)]]
+                              })
     for n in (4, 6, 10, 14):
         for regime in ("IID", "CLUSTER"):
             for arm, index in (("vqfp", 0), ("learned", 1)):
@@ -321,6 +326,13 @@ def _run_production(output_root: Path, result_path: Path, snapshot: dict[str, An
     if result_path.exists():
         raise FileExistsError("--result must be a new path; overwrite or resume is forbidden")
     guard = ResourceGuard(config)
+    def terminal_refresh() -> None:
+        """Best-effort terminal peak sample for a failure receipt; never masks its cause."""
+        try:
+            snapshot.update(guard.snapshot(validate=True))
+        except Exception:
+            snapshot.update(guard.snapshot(validate=False))
+    snapshot["_terminal_refresh"] = terminal_refresh
     command = f"C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m experiments.candidates.voronoi_quadrature_field_policy --execute --output-root {output_root} --result {result_path}"
     snapshot.update({"revision": VQFP_REVISION, "activity_begun": False,
                      "counts": dict(guard.counts), "maximum_rss_bytes": guard.maximum_rss})
@@ -390,6 +402,12 @@ def run_production(output_root: Path, result_path: Path) -> Path:
     try:
         return _run_production(output_root, result_path, snapshot)
     except Exception as error:
+        refresh = snapshot.pop("_terminal_refresh", None)
+        if refresh is not None:
+            try:
+                refresh()
+            except Exception:
+                pass
         if snapshot["cm_owned_root"]:
             root = output_root.resolve()
             try:
