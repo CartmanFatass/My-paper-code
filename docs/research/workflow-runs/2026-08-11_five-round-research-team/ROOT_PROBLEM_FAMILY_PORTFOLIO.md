@@ -967,8 +967,9 @@ second-surface/UAV action.
    candidate; exact v5 resolves the post-v4 population-scaler ambiguity without
    changing the mechanism or gates. Root published the complete v5 owner packet;
    its same-conversation Pro review returned literal `CLOSED`, the EM accepted it
-   without science change, and exact-v5 CM construction is now in progress. Its strongest
-   alternative is ordinary explicit-`k`, history, and endpoint supervision.
+   without science change, and exact-v5 CM construction is now in progress. Its
+   strongest alternative is ordinary explicit-`k`, history, and endpoint
+   supervision.
 3. **CCIC-v3: covariance-calibrated information clock.** Direct both-axis
    candidate whose smallest discriminator crosses literal duplicates,
    correlated distinct origins, and independent origins at held-out `N` and
@@ -994,6 +995,20 @@ second-surface/UAV action.
 4. **VNFC-B3 current host/panel:** first required bank remained `0/96` under the
    unchanged semantic filter; no v9 on this line. Revisit only on a genuinely new
    naturally feasible lifecycle host.
+
+### Corpus-derived contingent family, not an active direction
+
+The new local MARL corpus supports one non-inventory fallback: a semantic
+graphon shared policy conditioned on stable role/geometry coordinates and a
+graphon-weighted population summary. P12 supplies only bounded dense-graphon
+finite-`N` inspiration; the single conditional network, held-out-`N` benefit,
+coordinate identifiability and UAV transfer remain prospective. Do not open a
+direction while VQFP is unresolved because both spend evidence on variable-`N`
+aggregation. Reconsider only if VQFP fails or remains nonidentifying and a target
+surface supplies stable observable coordinates plus dense soft interactions.
+The decisive toy must compare graphon compression against a resource-matched
+edge-aware permutation-equivariant policy; beating only anonymous mean pooling
+deletes the graphon-specific family rather than promoting it.
 
 ### Sequencing and decision triggers
 
