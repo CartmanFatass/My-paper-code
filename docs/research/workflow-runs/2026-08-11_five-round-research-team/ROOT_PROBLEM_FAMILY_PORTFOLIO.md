@@ -1066,3 +1066,65 @@ relay/viewpoint surface must beat a replication-safe nonlinear set encoder.
 Only an action-changing, held-out-axis value result that survives the full
 direction card, same-EM interpretation, and same-Pro convergence may cause Root
 to freeze the corresponding UAV simulator successor.
+
+## 2026-08-13 stage-paired portfolio cut
+
+This is the current authoritative portfolio cut. Earlier live-run descriptions
+remain historical provenance. Root retains cross-direction discovery, comparison,
+investment/pause decisions, resource allocation, user communication and Git.
+Stage-paired same-direction EM/CM owners now close ordinary scientific and
+technical loops directly. Root does not act as their runtime, provider or artifact
+relay, and hook-level communication isolation remains deferred.
+
+### Directions receiving investment
+
+1. **SCDMP-v5 — direct variable `k`, result interpretation.** A complete
+   technically accepted exact-v5 result exists. Its paired EM/CM own the frozen
+   interpretation and same-Pro result convergence. The decision trigger is the
+   full positive or deletion/nonidentification branch relative to matched
+   `SCDMP-NOCOMP`; no rerun or threshold change is eligible.
+2. **CCIC-v6 — direct variable `N` and `k`, prospective repair.** V5 ended before
+   activity because its work-matching predicate was infeasible. V6 replaces that
+   comparison with a prospectively work-matched object and is published for its
+   existing Pro conversation. The paired EM/CM own closure and conformance. The
+   family remains valuable only if structured covariance beats the matched
+   nonlinear replication-safe alternative and changes sensing/relay/commit action.
+3. **SGSP — direct variable `N`, definition.** The decisive discriminator is an
+   observable-coordinate graphon summary against an edge-aware equivariant policy
+   that receives the same information and work. Beating anonymous mean alone
+   deletes graphon specificity. Provider and compute authority are absent.
+4. **MGTAP — direct variable `N`, definition.** The decisive discriminator is a
+   metric-ground capacity-feasible agent-task coupling against nested
+   `FREE-EDGE-FEASIBLE`. A metric-binding cut and held-out roster sizes determine
+   whether the gain is metric structure rather than generic feasible allocation.
+   Provider and compute authority are absent.
+
+SGSP and MGTAP are deliberately not fused: one tests topology-conditioned
+population aggregation, the other tests metric-constrained bipartite allocation.
+Each has a single nested strong comparator capable of deleting its own family.
+
+### Directions receiving no current investment
+
+- **VQFP-v4:** complete but host-saturated/statistically indeterminate; no direct
+  value or binding attribution, no 2-D/UAV activation, and result convergence is
+  externally unavailable after two zero-send blocked-page attempts. Revisit only
+  with a new allocation-constrained host restoring headroom/action sensitivity or
+  a later explicit decision if the original Pro session recovers.
+- **CRTO-v4, VNFC-B2, ONLGR and VNFC-B3's current host/panel line:** prior
+  support, nonseparation, unavailable-output and panel-infeasibility conclusions
+  and revisit conditions remain unchanged.
+- **SER-SMP:** remains contingent rather than active while SCDMP or CCIC can still
+  resolve the variable-`k` question.
+
+### Next evidence triggers
+
+- SCDMP returns only its decision-level interpreted/Pro-converged result.
+- CCIC returns only closure of a meaning-complete work-matched revision or an
+  exact reason the family cannot be identified.
+- SGSP and MGTAP return only meaning-complete direction decisions, feasibility
+  blockers that change portfolio value, or requests for new provider/compute
+  authority.
+- No internal statistic, provider closure, source package or completed run alone
+  activates a bridge. The invariant remains `registered structure -> valid
+  intermediate -> changed legal action -> held-out task value -> exclusion of
+  the named simpler alternative`.

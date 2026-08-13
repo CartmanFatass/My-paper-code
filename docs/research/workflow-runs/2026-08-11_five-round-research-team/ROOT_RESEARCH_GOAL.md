@@ -591,3 +591,74 @@ tab-registry mismatch is resolved without consuming another VNFC attempt.
 Only a qualifying result selects the concrete second surface and UAV-simulator
 step. If none qualifies, the goal remains active and Root selects the next
 family-eliminating discriminator rather than weakening the completion contract.
+
+## 2026-08-13 direction-stage authoritative update
+
+This section supersedes older live-status and sequencing text while retaining it
+as provenance. The completion test above is unchanged. Root now operates under
+the stage-paired L1 contract: same-direction EM and CM exchange science cards,
+ambiguities and accepted result packets directly; Root receives only scientific
+decision milestones, owns cross-direction portfolio choices and shared compute,
+and does not process provider tabs, CPU/RSS/PIDs, Operator state, ordinary retries
+or owner-log transcription. Hook-level isolation remains explicitly deferred.
+
+### Current bounded objective and investment
+
+The objective remains one valid matched-baseline improvement by one shared policy
+on held-out variable `N` or `k`, followed by same-EM interpretation,
+same-conversation Pro result convergence, and a recorded second-surface/UAV action.
+
+1. **SCDMP-v5 (direct variable `k`, result-interpretation stage).** Exact
+   `SCDMP-B1-SCIENCE-20260812-05` is Pro-closed and has produced a complete,
+   technically accepted eight-seed result under the exact registered ledger.
+   The paired SCDMP EM and CM now own frozen interpretation and result convergence
+   directly. No rerun or treatment change is eligible. Root awaits only the
+   direction's decision-level scientific milestone.
+2. **CCIC-v6 (direct variable `N` and `k`, revised preactivity stage).** Static
+   construction proved v5's CCIC-to-`RI-STRONG` work-ratio predicate infeasible in
+   all 27 cells before activity. The EM rejected inert work padding and froze the
+   prospective work-matched `CCIC-B1-SCIENCE-20260813-06`; Root published it.
+   Its paired EM/CM own same-conversation Pro closure and later static acceptance.
+   No activity or production is eligible before that closure.
+3. **SGSP (direct variable `N`, definition stage).** VQFP's saturated host
+   activated this provenance-bound graphon fallback but transfers no VQFP evidence.
+   Its decisive question is whether an observable-coordinate graphon-weighted
+   shared policy beats a capacity/information/work-matched edge-aware
+   permutation-equivariant policy at held-out `N` and under identity permutation.
+   Its paired EM/CM own science definition and feasibility; no provider or compute
+   authority exists yet.
+4. **MGTAP (direct variable `N`, definition stage).** A 27-work corpus family
+   screen retained one nonredundant action-level candidate: a shared metric-ground
+   agent-task transport coupling with extensive supply/demand and slack. Its nested
+   `FREE-EDGE-FEASIBLE` comparator matches feasibility, information, capacity,
+   decoder and work. A two-epoch four-task toy can retain or delete the entire
+   metric-specific family. Its paired EM/CM own science definition and feasibility;
+   no provider or compute authority exists yet.
+
+SGSP and MGTAP remain separate because their family-eliminating uncertainties are
+orthogonal: topology-conditioned population aggregation versus metric-constrained
+capacity allocation. Agreement against weak controls would not justify fusion.
+
+### Current paused directions
+
+- **VQFP-v4:** its complete technically accepted result is the frozen
+  statistically-indeterminate branch. Comparator saturation made both direct
+  endpoints unavailable and the message-binding/support chain did not close. It
+  supports neither continued algorithm investment nor family deletion, and does
+  not activate 2-D or UAV work. The original Pro conversation remained blocked
+  in both authorized zero-send result-convergence attempts. Reconsider only on a
+  newly frozen allocation-constrained host that restores oracle headroom and
+  action sensitivity, or through a later explicit decision if that same Pro
+  conversation becomes available.
+- **CRTO-v4, VNFC-B2, ONLGR and the VNFC-B3 host/panel line** retain their prior
+  no-investment reasons and exact revisit conditions; none supplies the required
+  project result.
+
+### Current completion evidence
+
+The portfolio, alternatives, claim ceilings and prospective bridges are explicit,
+but the central outcome is still absent. VQFP did not identify value; SCDMP has a
+valid result whose scientific branch and Pro convergence are pending; CCIC-v6,
+SGSP and MGTAP remain preactivity. Therefore no shared algorithm has yet proven a
+matched-baseline robustness or task-performance improvement on held-out `N` or
+`k`, and no second surface or UAV simulator is activated. The goal remains active.
