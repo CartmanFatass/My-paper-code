@@ -7,14 +7,14 @@ thinking=Extended
 purpose=independent_divergent_scientific_innovation
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B1
-revision=SCDMP-B1-SCIENCE-20260812-04
-supersedes_revision=SCDMP-B1-SCIENCE-20260812-03
+revision=SCDMP-B1-SCIENCE-20260812-05
+supersedes_revision=SCDMP-B1-SCIENCE-20260812-04_PRO_CLOSED
 conversation=dedicated_clean_new_gemini_direction_conversation_to_be_created
 send_status=PREPARED_NOT_SENT
 ```
 
 Act as an independent scientific innovator, not a convergence reviewer. Use
-the exact frozen direction state `SCDMP-B1-SCIENCE-20260812-04` in the GitHub
+the exact frozen direction state `SCDMP-B1-SCIENCE-20260812-05` in the GitHub
 repository, branch `aggressive`, at:
 
 `docs/research/candidates/semigroup_consistent_duration_model_policy/SCDMP_B1_SCIENCE_CARD.md`
@@ -55,6 +55,15 @@ prediction first stages before a convoy-negative conclusion; limits that
 negative conclusion to the exact convoy treatment; defines a simultaneous
 adverse-effect branch; and makes oracle ties deterministic. SHAM and pooled
 quantities remain controls. This is prospective definition, not a result.
+
+V4 later received literal ChatGPT Pro `CLOSED`, but before question-relevant
+activity the owner found that its fit-set standard-deviation convention omitted
+the denominator/API. V5 preserves every mechanism, gate, estimand, sample,
+branch, ledger and claim while freezing per-seed arm-shared population scales:
+exact `E_2/E_4/E_8` target atoms, `n=10,752` per output type, NumPy `1.26.3`
+float64 `std(...,ddof=0)`, the existing `1e-3` floor, one float32 cast and every
+standardized-residual use. This is a prospective reproducibility correction,
+not a result, and no ChatGPT answer is disclosed or imported here.
 
 Generate divergent, scientifically useful insight:
 

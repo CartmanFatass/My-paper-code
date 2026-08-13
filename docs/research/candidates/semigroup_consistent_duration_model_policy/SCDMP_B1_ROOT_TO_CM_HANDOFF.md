@@ -3,10 +3,10 @@
 ```text
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B1
-revision=SCDMP-B1-SCIENCE-20260812-04
-supersedes_revision=SCDMP-B1-SCIENCE-20260812-03_REVISION_REQUIRED
+revision=SCDMP-B1-SCIENCE-20260812-05
+supersedes_revision=SCDMP-B1-SCIENCE-20260812-04_PRO_CLOSED
 owner=EM_semigroup_consistent_duration_model_policy
-handoff_status=PRO_CLOSED_EM_INTAKE_COMPLETE
+handoff_status=PREPARED_NOT_SENT
 production_authorized=false
 tests_authorized=false
 ```
@@ -23,16 +23,23 @@ undiscounted node/edge reward cocycle over observable, noncommuting context
 words. REAL reversed words activate order; label-identical SHAM words bound a
 duration/regularization shortcut.
 
-The dedicated same-direction ChatGPT External Pro returned literal `CLOSED` for
-exact revision `SCDMP-B1-SCIENCE-20260812-04`, and this EM accepted the ruling
-without a science-bearing change. The mathematical/causal closure boundary is
-complete. Root may now relay this unchanged packet to CM for construction and
-technical acceptance when portfolio and host scheduling permit; this file does
-not itself release construction or production. CM owns source, runner,
-environment, tests only if the user separately authorizes them, execution,
-exact resource accounting, and technical acceptance. Any proposed science-
-bearing change returns to this EM and creates a new complete revision requiring
-another ruling in the same Pro conversation.
+Exact v4 received literal same-conversation Pro `CLOSED` and owner intake, but
+construction then exposed an omitted fit-set standard-deviation denominator.
+Because the scaler enters the optimized loss and thresholded standardized
+observables, this EM prospectively supersedes v4 with complete v5 before any
+question-relevant activity. V5 freezes `ddof=0`, the complete target-atom
+population and order, exact NumPy `1.26.3` API, floor, one-time float32 cast,
+sharing and all affected downstream uses. The ambiguity was returned without
+CM choosing the science; no result or runtime value informed the correction.
+
+This prepared packet does not release construction or production. Root may
+relay it to CM only after the existing dedicated SCDMP ChatGPT Pro conversation
+returns literal `CLOSED` for exact revision `SCDMP-B1-SCIENCE-20260812-05` and
+this same-direction EM intakes that ruling. CM owns source, runner, environment,
+tests only if the user separately authorizes them, execution, exact resource
+accounting, and technical acceptance. Any proposed science-bearing change
+returns to this EM and creates a new complete revision requiring another ruling
+in the same Pro conversation.
 
 ## Non-negotiable conformance points
 
@@ -116,8 +123,35 @@ architecture, RNG, or resource ledger:
 6. The constrained oracle enumerates the same slotwise lexicographic joint
    actions as the actor and retains the first exact float64 maximum.
 
-V4 must return to the exact existing SCDMP ChatGPT Pro conversation. The v3
-ruling is not closure and does not permit construction.
+V3's ruling was not closure and did not permit construction. V4 then returned
+to the exact existing SCDMP ChatGPT Pro conversation and received literal
+`CLOSED`, but its complete card
+left the fit-set standard-deviation denominator/API ambiguous. V5 retains the
+entire v4 object and adds only this prospective reproducibility correction:
+
+1. Each seed has exactly four arm-shared scalers computed from the terminal
+   `e`, terminal `v`, node cumulative reward, and directed-edge cumulative
+   reward targets in `E_2,E_4,E_8` only.
+2. Each flattened population contains exactly `10,752` float64 atoms, ordered
+   by duration `2,4,8`, episode `0..47`, boundary ascending, slot `1..4`.
+   Composition-bank duplicate views, inputs, support/audit/evaluation values,
+   predictions, other seeds, and arm outputs are excluded.
+3. The only allowed reduction is
+   `numpy.std(x64,axis=None,dtype=numpy.float64,ddof=0)` under NumPy `1.26.3`,
+   followed by the float64 `1e-3` floor and one cast to `numpy.float32`.
+4. The resulting four float32 constants divide every standardized endpoint,
+   cocycle and true-prediction residual in training, update-zero diagnostics,
+   support probes and REAL/SHAM/pooled audit metrics. They do not normalize
+   task returns, failures, oracle/action/support/variance quantities, direct
+   treatment estimands, confidence bounds, or resources.
+
+The denominator choice is science-bearing because it fixes objective weights
+and thresholded standardized values. It changes no named statistic or loss
+term, loss weight, numeric threshold, estimand, sample/seed count, branch,
+activity boundary, parameter count, environment ledger, strongest alternative,
+claim ceiling, second-surface trigger, or UAV boundary. Exact v5, not v4, must
+now receive same-conversation Pro `CLOSED` plus owner intake before any CM
+construction release.
 
 ## Resource and return
 

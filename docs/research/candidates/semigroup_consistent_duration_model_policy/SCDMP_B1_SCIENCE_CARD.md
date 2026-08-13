@@ -3,15 +3,15 @@
 ```text
 direction=semigroup_consistent_duration_model_policy
 candidate=SCDMP-B1
-revision=SCDMP-B1-SCIENCE-20260812-04
-supersedes_revision=SCDMP-B1-SCIENCE-20260812-03
+revision=SCDMP-B1-SCIENCE-20260812-05
+supersedes_revision=SCDMP-B1-SCIENCE-20260812-04_PRO_CLOSED
 owner=EM_semigroup_consistent_duration_model_policy
 source_inspiration=SCDMP-VK-FAMILY-CUT-01
 source_is_evidence=false
-artifact_status=PRO_CLOSED_EM_INTAKE_COMPLETE
+artifact_status=PREPARED_NOT_SENT
 scientific_activity_started=false
 production_authorized=false
-chatgpt_external_pro_math_closure=CLOSED_ON_EXACT_V4
+chatgpt_external_pro_math_closure=required_on_v5
 ```
 
 ## Direction decision and bounded question
@@ -43,21 +43,26 @@ the still-strong alternative that any gain is generic regularization, duration
 encoding, or training-path noise rather than useful physical composition.
 
 The science-bearing object is this complete file at exact revision
-`SCDMP-B1-SCIENCE-20260812-04`. V1 and v2 were `PREPARED_NOT_SENT`, and v3 was
-never constructed or made scientifically active. V4 retains the exact v3 DGP,
-arms, losses, raw-bit contract, thresholds, resource ledger, and activity
-boundary. It makes conclusion-bearing headroom and model first stages REAL-
-specific; replaces subgroup non-significance with prespecified upper-bound
-evidence; requires a true-prediction first stage for the convoy-negative route;
-limits that negative claim to the exact convoy treatment; makes the adverse
-branch executable; and freezes oracle tie-breaking. A change to its DGP,
-observation, word law, arms, losses, activity rule, training/evaluation split,
-estimands, margins, inference, interpretation, or resources creates a new
-complete revision.
-The dedicated same-direction ChatGPT External Pro returned literal `CLOSED` on
-this exact revision and this EM accepted the ruling without a science-bearing
-change. The mathematical/causal closure boundary is complete. Production still
-requires CM technical acceptance and Root scheduling.
+`SCDMP-B1-SCIENCE-20260812-05`. V1 and v2 were `PREPARED_NOT_SENT`; v3 received
+`REVISION_REQUIRED`; and v4 received literal same-conversation Pro `CLOSED`
+plus same-direction EM intake before question-relevant activity. During v4
+construction, CM correctly returned one unresolved science-bearing
+reproducibility ambiguity: the fit-set standard deviations did not state their
+denominator or exact reduction API. V5 prospectively supersedes v4, chooses the
+population standard deviation of the complete registered fit-set target
+population (`ddof=0`), and freezes its enumeration, NumPy API, floor, one-time
+float32 cast, sharing and every downstream standardized use. It changes no DGP,
+arm, information, architecture, sample, loss term or weight, numeric gate,
+estimand, branch, activity boundary, RNG stream, resource ledger, claim ceiling,
+second-surface rule, or UAV boundary. No result or runtime value informed this
+choice. A change to its DGP, observation, word law, arms, losses, scaling law,
+activity rule, training/evaluation split, estimands, margins, inference,
+interpretation, or resources creates a new complete revision.
+
+Because the denominator affects the optimized objective and thresholded
+standardized observables, v4 closure does not transfer automatically. V5 must
+receive literal `CLOSED` in the existing SCDMP Pro conversation followed by this
+EM's intake before Root may release construction or production.
 
 ## Deterministic four-agent convoy DGP
 
@@ -412,12 +417,53 @@ rows as `E_8`, split after four. The intermediate state and suffix word are
 stored in each composition row. No row crosses a true boundary, episode reset,
 padding, or duration switch.
 
-All state-coordinate and reward scales are the fit-set standard deviations
-with a floor of `1e-3`, frozen before optimization. Scaling is pooled across
-all fit-set training durations and words: one scalar for each of the two
-physical coordinates, one
-for node cumulative reward, and one for edge cumulative reward. There is no
-duration-, class-, word-, or arm-specific scaler.
+For each algorithm seed separately, freeze exactly four fit-set scales before
+optimization: `s_e`, `s_v`, `s_node`, and `s_edge`. Paired arms share the same
+four values. Each scale uses only target atoms from the complete fit-set
+endpoint banks `E_2,E_4,E_8`, never input states, composition-bank duplicate
+views, support-probe rows, audit rows, scored evaluation, model predictions, or
+either arm's outputs. Enumerate target atoms into four C-contiguous one-
+dimensional arrays in duration order `2,4,8`, then episode index `0,...,47`,
+true-boundary index ascending, and slot `1,...,4`. For `e` and `v`, append the
+true terminal coordinate for that slot; for node reward, append that slot's
+true complete-word cumulative node reward; for edge reward, append the true
+complete-word cumulative reward of directed edge `i -> i+1` in slot order.
+
+There are `48*(32+16+8)=2,688` complete endpoint rows and therefore exactly
+`n=2,688*4=10,752` float64 atoms in each of the four arrays. Raw pooling is
+intentional: do not average bank variances, reweight durations, duplicate
+`E_4/E_8` through `C_22/C_44`, pool seeds, or apply Bessel correction. On NumPy
+`1.26.3`, for each array `x` execute the mathematical equivalent of exactly:
+
+```text
+x64     = numpy.asarray(x, dtype=numpy.float64, order='C')
+sigma64 = numpy.std(x64, axis=None, dtype=numpy.float64, ddof=0)
+scale64 = numpy.maximum(sigma64, numpy.float64(1e-3))
+scale32 = numpy.float32(scale64)
+```
+
+Thus the variance denominator is exactly `n`, not `n-1`; `numpy.nanstd`,
+`torch.std`, an online estimator, a bankwise reduction, or another `correction`
+is not equivalent. Every source atom is finite by construction, so no NaN-
+skipping rule exists. The four `scale32` values are copied once as shared scalar
+float32 model constants before update-zero materialization, never updated, and
+used only as divisors: no fit-set mean is subtracted from an error or neural
+input. The existing explicit neural inputs `[e/1.5,v/0.6,q]` remain unchanged.
+
+These four scalers govern every occurrence of a standardized physical endpoint,
+node-reward, or edge-reward residual: `bar(delta_F)`, `bar(delta_Gn)`, and
+`bar(delta_Ge)` in `L_endpoint` and `L_comp`; update-zero `D_comp_init`; the
+untouched train-support composite RMSE; every REAL, SHAM, or pooled
+`D_comp_m_*`/`Delta_comp_REAL`; and every REAL, SHAM, or pooled
+`E_pred_m_*`/`Delta_pred_REAL`. A reporting-only residual explicitly printed in
+standardized units uses the same corresponding scale; a raw-coordinate or raw-
+reward report stays raw. No task-return, failure, oracle-action, oracle-regret,
+state-support, output-variance-ratio, reversal, action-disagreement,
+candidate-score, `Delta_J`, `Delta_task`, `Delta_fail`, `Delta_rob`,
+`Delta_spec`, confidence-bound, or resource quantity uses these fit-set
+scalers unless its definition above explicitly contains a standardized model
+residual. There is no duration-, class-, word-, arm-, or evaluation-specific
+scaler.
 
 Let `bar(delta_F)` be coordinate-standardized physical endpoint error and
 `bar(delta_Gn),bar(delta_Ge)` the corresponding standardized node and edge
@@ -582,7 +628,7 @@ The original and reverse rollouts jointly define each REAL/SHAM reversal twin;
 neither is reconstructed from the other. The panel is opened only after both
 final checkpoints, and its outcomes never select a checkpoint, threshold, or
 revision. The provisional CM analytic probe values are not evidence and are
-not inputs to any v4 threshold.
+not inputs to any v5 threshold.
 
 Audit denominators are immutable: 64 physical states and 64 reversal twins per
 seed; 128 word-state instances after counting target and reverse separately;
@@ -872,7 +918,7 @@ evidence.
 ## Root-to-CM construction boundary
 
 If Root later relays this object after exact-revision Pro `CLOSED` and EM
-intake, CM may construct only `SCDMP-B1-SCIENCE-20260812-04`, bind its source
+intake, CM may construct only `SCDMP-B1-SCIENCE-20260812-05`, bind its source
 and configuration, and assess exact technical conformance. CM and Operator own
 code, environment, tests only when separately authorized, execution, resource
 facts, and retained-result correctness. They do not change word support,

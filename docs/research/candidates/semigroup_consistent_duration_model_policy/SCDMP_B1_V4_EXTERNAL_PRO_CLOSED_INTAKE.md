@@ -144,3 +144,16 @@ and one same-conversation Pro result challenge. Only branch 1 can activate the
 separately specified payload-towing second surface; only a later qualifying
 second-surface result can activate the UAV simulator card.
 
+## Subsequent prospective supersession
+
+During construction and before question-relevant activity, CM returned one
+science-bearing ambiguity that v4 and its ruling did not resolve: the fit-set
+standard deviations used in optimized losses and thresholded standardized
+observables did not freeze their denominator or exact API. No code, runtime
+value, checkpoint, metric or result was used by this owner. Complete successor
+`SCDMP-B1-SCIENCE-20260812-05` now freezes the full target-atom population,
+ordering, `ddof=0` NumPy `1.26.3` reduction, floor, float32 cast, sharing and
+every downstream use. V4 remains historically closed as written but is no
+longer the prospective construction object. V5 requires a new literal
+same-conversation Pro `CLOSED` plus same-direction intake before construction
+or production can resume.
