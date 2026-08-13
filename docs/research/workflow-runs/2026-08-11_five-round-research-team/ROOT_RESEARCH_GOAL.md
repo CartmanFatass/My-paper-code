@@ -876,3 +876,55 @@ failure remains bounded structural nonidentification; it is never null,
 equivalence or family deletion. Any science-bearing adoption of this contract by
 an already frozen SGSP, RCLE or RISP object belongs to its same-direction EM and
 normal Pro-closure route; this Root methodology note changes no active treatment.
+
+## 2026-08-13 post-MGTAP-r04 portfolio update
+
+This section supersedes the older statements that placed MGTAP first while
+retaining those statements as provenance. The project objective and the
+two-lock contract remain unchanged.
+
+Exact MGTAP revision 04 produced a complete technically accepted result, but the
+registered optimization-validity prerequisite failed for all four matched
+arm/binding selections. The same-direction EM therefore assigns bounded
+structural nonidentification. No efficacy, equivalence, generic-conditioning,
+metric-family deletion, warehouse, or UAV conclusion is available. Root gives
+MGTAP no immediate successor or compute: its pending same-conversation result
+review may clarify whether one prospective optimization-closure revision is
+scientifically coherent, but any such proposal must still beat the opportunity
+cost of the direct candidates below and can never become an automatic rerun.
+
+The current investment order is:
+
+1. **SGSP revision 05** is the first prospective direct variable-`N` candidate.
+   Its equal-width opposite center, wider edge comparator, sender reassociation,
+   anchor swap, and held-out-size-minimum support gates directly test whether the
+   correct semantic center supplies action-sensitive value rather than generic
+   shrinkage or conditioning. Construction remains conditional on literal
+   same-conversation Pro `CLOSED` plus same-direction EM intake; no registered
+   stochastic object or heavy compute is yet authorized.
+2. **RCLE revision 04** remains the medium-low-cost direct variable-`N` backup.
+   Its common, shuffled and private-entropy controls ask whether correctly paired
+   persistent latent exploration improves held-out-roster strategy discovery.
+   It does not delay SGSP and remains preconstruction until Pro closure and EM
+   intake.
+3. **RISP** remains the live variable-`k` definition/feasibility route. Its
+   admissible scientific claim is a finite-budget advantage of one exact
+   score-aligned low-rank recurrent transition over a comparator that
+   algebraically contains it and receives identical deployable feedback. It may
+   not claim plasticity instead of recurrence, added information, or arbitrary
+   `k`. Its same-direction pair must apply the two-lock contract before any
+   confirmatory activity.
+
+SCDMP-B2, exact SCDMP-v5, CCIC on the homogeneous host, VQFP-v4, CRTO-v4,
+VNFC-B2, ONLGR, and the VNFC-B3 host/panel line receive no further current
+investment for their recorded nonidentification, support, redundancy, or
+feasibility reasons. MGTAP joins this no-immediate-compute set unless its result
+convergence review identifies a prospective discriminator whose expected
+decision value exceeds the leading direct work.
+
+Root is separately screening a homogeneous leave-one-out empirical-measure
+policy as a possible low-cost variable-`N` fallback. It is not yet an invested
+direction: it survives only if an exact information- and capacity-matched
+DeepSets comparator can contain the leave-one-out map, a causal self-mass cut is
+not merely out-of-distribution corruption, and the resulting discriminator is
+nonredundant with SGSP and ordinary mean-field control.
