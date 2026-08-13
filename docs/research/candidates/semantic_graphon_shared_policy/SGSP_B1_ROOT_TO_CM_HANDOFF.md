@@ -5,12 +5,12 @@ direction=semantic_graphon_shared_policy
 revision=SGSP-B1-SCIENCE-20260813-05
 supersedes_revision=SGSP-B1-SCIENCE-20260813-04_PRO_REVISION_REQUIRED
 author=EM_semantic_graphon_shared_policy
-handoff_state=REVISION_05_OWNER_PREPARED_CM_RELEASE_WITHHELD
+handoff_state=REVISION_05_PRO_CLOSED_OWNER_ACCEPTED_SENT_TO_CM
 scientific_activity_started=false
-mathematical_closure=revision_05_PREPARED_NOT_SENT_SAME_CONVERSATION
+mathematical_closure=revision_05_CHATGPT_EXTERNAL_PRO_CLOSED_OWNER_ACCEPTED
 same_direction_cm_science_ambiguity_audit=NONE
-construction_authorized=false
-tests_authorized=false
+construction_authorized=root_standing_conditional_source_implementation_only
+tests_authorized=false_pending_explicit_user_approval
 compute_authorized=false
 production_authorized=false
 ```
@@ -35,9 +35,13 @@ objects but returned `REVISION_REQUIRED` because cut support was aggregated in
 a different order than the within-seed-minimum mechanism estimand and the two
 attenuation gates lacked support flags. Revision 05 replaces the two cut flags
 with mean-of-seed-minimum caps and adds separate `GE`/`GA` attenuation caps;
-nothing else changes. CM release is withheld until same-conversation Pro
-`CLOSED` plus EM intake. CM must not bind revision 05, test, generate a registered
-stochastic object, train, evaluate, or launch.
+nothing else changes. The same-conversation Pro returned literal `CLOSED` for
+revision 05 with zero science-bearing defects, and the owner accepts the exact
+ruling. Under Root's standing conditional construction envelope, CM may bind
+revision 05 for source implementation and static conformance planning only. CM
+must not run focused tests without explicit user approval, generate or inspect
+a registered stochastic object, train, evaluate, or launch production before a
+later Root compute lease.
 
 ## Exact object if Root later releases construction
 
@@ -204,7 +208,9 @@ scientific activity.
 
 ## Explicitly absent authority
 
-This handoff conveys no provider send, new-conversation, source-write, test,
-compute, construction, production, or result interpretation authority. It does
-not import another direction's result or threshold. A future Root release must
-name this exact revision or its later Pro-closed successor.
+This handoff conveys no provider send, new-conversation, focused-test,
+stochastic-materialization, compute, production, or result-interpretation
+authority. It does not import another direction's result or threshold. Root's
+standing conditional envelope authorizes only source implementation and static
+conformance planning for this exact Pro-closed revision; a later Root lease must
+name the compute/resource envelope before any registered draw or execution.

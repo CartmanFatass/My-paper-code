@@ -8,8 +8,8 @@ owner=EM_semantic_graphon_shared_policy
 artifact_role=result-blind derivative reading map
 map_changes_treatment=false
 scientific_activity_started=false
-mathematical_closure=revision_05_PREPARED_NOT_SENT_SAME_CONVERSATION
-cm_release=withheld_for_revision_05_closure
+mathematical_closure=revision_05_CHATGPT_EXTERNAL_PRO_CLOSED_OWNER_ACCEPTED
+cm_release=revision_05_CLOSED_COMPOSITE_SENT_FOR_CONFORMANCE_PLANNING
 production_authorization=none
 ```
 
