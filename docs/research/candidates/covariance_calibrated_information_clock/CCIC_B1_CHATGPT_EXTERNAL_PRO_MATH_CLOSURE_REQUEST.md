@@ -1,13 +1,14 @@
-IR_DIRECTION_REVIEW: covariance_calibrated_information_clock / CCIC-B1-SCIENCE-20260812-05
+IR_DIRECTION_REVIEW: covariance_calibrated_information_clock / CCIC-B1-SCIENCE-20260813-06
 
 PRO_MATHEMATICAL_CLOSURE_REREVIEW
 
-# CCIC B1 revision-05 same-conversation closure request
+# CCIC B1 revision-06 same-conversation closure request
 
 ```text
 direction=covariance_calibrated_information_clock
-revision=CCIC-B1-SCIENCE-20260812-05
-supersedes_revision=CCIC-B1-SCIENCE-20260812-04_PRO_REVISION_REQUIRED
+revision=CCIC-B1-SCIENCE-20260813-06
+supersedes_revision=CCIC-B1-SCIENCE-20260812-05
+predecessor_disposition=PREACTIVITY_WORK_INFEASIBLE
 provider=chatgpt_external_pro
 request_kind=preproduction_mathematical_and_causal_closure_rereview
 conversation=continue_exact_existing_direction_conversation
@@ -18,12 +19,13 @@ response_received=false
 scientific_activity_started=false
 ```
 
-Continue the exact dedicated CCIC ChatGPT External Pro conversation in which
-you returned `REVISION_REQUIRED` on revisions 03 and 04. No result,
-implementation, test, runtime value, or other provider answer informed this
-successor. The same scientific owner accepted the seven revision-04 defect
-families prospectively and froze the complete indivisible successor
-`CCIC-B1-SCIENCE-20260812-05`.
+Continue the exact dedicated CCIC ChatGPT External Pro conversation. Revision
+05 received your literal `CLOSED` disposition. Before any scientific activity,
+same-direction CM construction then established that revision 05's frozen
+CCIC-versus-RI work ratio was deterministically above `1.10` in every one of
+the 27 cells. No learned update, stochastic evaluation, endpoint, or efficacy
+result occurred. The scientific owner ended exact v5 and froze complete
+prospective successor `CCIC-B1-SCIENCE-20260813-06`.
 
 Use `https://github.com/CartmanFatass/My-paper-code`, branch `aggressive`, and
 review:
@@ -31,73 +33,75 @@ review:
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_SCIENCE_CARD.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_ROOT_TO_CM_HANDOFF.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_RESULT_BLIND_INTERPRETATION_ACTIVATION_MAP.md`
-- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V3_REVISION_REQUIRED_INTAKE.md`
-- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V4_REVISION_REQUIRED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V5_CLOSED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_V5_PREACTIVITY_WORK_INFEASIBILITY_INTAKE.md`
 - `docs/new-libs/README.md`
 - `docs/new-libs/LIBRARY_INDEX.md`
 
-The science card is authoritative. The interpretation/activation map is a
-result-blind derivative reading aid and cannot amend it. The library files are
-provenance-labeled theory background and claim boundaries only, never evidence
-for CCIC outcomes.
+The science card is authoritative. The interpretation map is derivative and
+cannot amend it. The local library is theory background and an assumption
+audit, never evidence for CCIC outcomes.
 
-## Exact accepted revision-04-to-05 corrections
+## Exact revision-05-to-06 correction
 
-1. The covariance loading is now reader-unambiguous in both notation and plain
-   text: Latin `u_i := softplus(b_i)`, no separate `nu_i`, no square-root or
-   other transform, and that same vector enters `Sigma_hat=D+uu^T`, all
-   Woodbury sums, likelihoods, gradients, `q`, and `J`.
-2. Exact-copy task identity is removed from stochastic zero-variance inference.
-   A preactivity pathwise proof plus all-seed/all-episode trajectory, loss, and
-   shadow-state checks establish four deterministic `[0,0]` contrasts without
-   bootstrap; any failed proof/check fails the gate with no fallback. Ordinary
-   zero-variance stochastic contrasts remain unresolved.
-3. Work matching now freezes the fresh valid empty-ledger `SENSE` replay table,
-   literal lineage and row order, counted endpoints and exclusions, expanded
-   scalar/integer/Boolean/nonlinearity operation grammar, peak temporary-state
-   convention, paired tuple outputs, and separate admissibility in every
-   `(N,k,rho)` cell used by a claim. A global median is forbidden.
-4. Full regime uniformity now uses `d_CORR-d_DUP` and `d_IND-d_CORR` for every
-   comparator and axis in one 12-contrast family. Only simultaneous equivalence
-   of all six contrasts on a supported axis licenses uniformity or deletion of
-   correlation-specific attribution.
-5. INFO-FLEX is now described only as a challenge to the analytic Gaussian
-   evidence-update/posterior map conditional on the shared exact physical-time
-   HMM transition. No INFO-FLEX relation can identify, support, or delete that
-   transition.
-6. `J-SHUFFLE` now writes the complete ordered nine-class list and the literal
-   successor assignment `C_j <- C_((j+1) mod 9)`; the opposite cyclic direction
-   is forbidden.
-7. The card and derivative map now share one second-surface rule. After the
-   other named gates and same-axis upper bounds below `-0.02` against both
-   ORIGIN-COUNT and ESS-SCALAR, RI equivalence,
-   reverse superiority, or unresolved RI makes the heterogeneous surface a
-   direct structured-covariance-versus-generic-set discriminator rather than a
-   blocker. Exposure, binary-dedup-only, count/scalar sufficiency, or clock
-   noncausality does block activation.
+Revision 05's static grammar gives CCIC-versus-RI operation ratios
+`1.138--1.169` under `DUP` and `1.271--1.355` under `CORR/IND`. The owner
+rejected two apparent repairs:
+
+- output-disconnected padding, because it equalizes resource burn but cannot
+  exclude the alternative that CCIC received more useful functional compute;
+- relaxing the `1.10` gate, because it would leave the held-out effect
+  compute-confounded and weaken the claimed mechanism.
+
+Revision 06 changes only `RI-STRONG` to `RI-STRONG-v2`. It retains lineage
+quotienting, inputs, targets, update/sample/optimizer/search budgets, and
+invertible decodes. For every unique row it applies one shared 83-scalar
+`6 -> 9 -> 2` SiLU MLP to `(z_i,o_i,s_i,log M,t/30,k/5)`, then the single
+channelwise transform `h_i=r_i+tanh(r_i)`, and mean-pools `h_i` across unique
+rows. RI-v2 is intentionally advantaged by one trained scalar versus CCIC's
+82. Its nonlinear row path affects the trained prediction in both training
+and execution; inert padding is forbidden.
+
+Under the unchanged grammar, with `M=1` in `DUP` and `M=N` otherwise:
+
+```text
+W_CCIC = 14N+392M+8
+W_RI_v2 = 14N+357M+7
+P_CCIC = 22+6M
+P_RI_v2 = 24+6M.
+```
+
+The operation ratios are `1.075630--1.094793` and the maximum peak ratio is
+`1.071429`; hence every one of the 27 cells is prospectively within `1.10`.
+The certificate must recompute the literal formulas/table and require
+`passed=true` before activity; cell encoding alone is insufficient.
+
+All other v5 science remains frozen: DGP, CCIC, ESS, INFO-FLEX, ORIGIN-COUNT,
+actor, analytic/numerical-reference boundary, shared decentralized execution,
+axes, tapes, seeds, calibration/activity/exact-copy/diagnostic gates, inference
+families, thresholds, interpretation branches, strongest alternatives, claim
+ceiling, conditional-on-receipt boundary, literature boundary, and prospective
+second surface.
 
 ## Required full-composite audit
 
-Audit whether those corrections actually resolve every revision-04 defect
-without creating a new inconsistency. In particular, check:
+Decide whether the useful-compute RI-v2 repair is mathematically and causally
+closed without creating a new comparator handicap, representational shortcut,
+work-accounting loophole, training/execution mismatch, or interpretation
+inconsistency. In particular audit:
 
-- ideal Gaussian likelihood versus packet/accounting language;
-- all algebra, HMM timing, singular support, Woodbury, ESS, RI and INFO maps;
-- the computed-reference versus analytic-Bayes authority boundary;
-- every state, snapshot, random-address, optimizer, target, reduction, exact
-  shuffled-clock assignment, and work input/grammar/cellwise gate for collision
-  or leakage;
-- genuine decentralized execution and one shared actor across held-out `N/k`;
-- calibration at `N=8`, per-seed/pooled gate aggregation, max-T construction,
-  stochastic zero-variance handling, deterministic exact-copy identity,
-  12-contrast regime specificity, and SESOI/equivalence/reverse-superiority
-  semantics;
-- all interpretation branches, strongest alternatives, deletions, maximum
-  claim, conditional-on-receipt boundary, and second-surface trigger.
+- whether RI-v2 remains a genuinely strong replication-safe set comparator;
+- whether its per-row MLP plus one residual transform is output-relevant useful
+  computation rather than disguised padding;
+- parameter, input, update, exposure, and work comparability with CCIC;
+- the literal operation/peak formulas and all-cell preactivity pass condition;
+- every primary/reduction/specificity branch and the finite maximum claim; and
+- preservation of the exact-copy versus independent-repeat, matched-receipt,
+  physical-time, decentralized-execution, and held-out `N/k` boundaries.
 
-Do not review code, tests, artifact integrity, transport/runtime mechanics,
-technical acceptance, observed results, production sequencing, or portfolio
-priority. Do not authorize any of those actions.
+Do not review code, tests, artifact integrity, runtime mechanics, observed
+results, production sequencing, or portfolio priority, and do not authorize
+any of those actions.
 
 ## Required disposition and response form
 
@@ -114,12 +118,12 @@ Then use these headings exactly once and in this order:
 8. `CLOSURE_AUTHORITY_DECISION`
 9. `AUTHORITY_BOUNDARY`
 
-In section 7, enumerate every remaining blocking defect and the smallest exact
+In section 7, enumerate every blocking defect and the smallest exact
 prospective correction, or write `NONE`. In section 8, include exactly one
-literal assignment line formed from the section heading followed immediately
-by `=CLOSED` or `=REVISION_REQUIRED`.
+literal assignment line formed from the heading followed immediately by
+`=CLOSED` or `=REVISION_REQUIRED`.
 
-Closure, if granted, applies only to revision 05's mathematical, causal, and
+Closure, if granted, applies only to revision 06's mathematical, causal, and
 inferential definition. The EM retains scientific authorship and result
 interpretation; CM retains implementation and technical authority; Root
 retains portfolio and production sequencing. Your answer cannot authorize

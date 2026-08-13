@@ -2,12 +2,13 @@
 
 ```text
 direction=covariance_calibrated_information_clock
-revision=CCIC-B1-SCIENCE-20260812-05
-supersedes_revision=CCIC-B1-SCIENCE-20260812-04_PRO_REVISION_REQUIRED
+revision=CCIC-B1-SCIENCE-20260813-06
+supersedes_revision=CCIC-B1-SCIENCE-20260812-05
+predecessor_disposition=PREACTIVITY_WORK_INFEASIBLE
 author=EM_covariance_calibrated_information_clock
-handoff_state=OWNER_PREPARED_MATHEMATICALLY_CLOSED_ROOT_MAY_RELAY
+handoff_state=OWNER_PREPARED_CM_RELEASE_WITHHELD
 scientific_activity_started=false
-mathematical_closure=revision_05_CLOSED_EM_INTAKE_COMPLETE
+mathematical_closure=revision_06_PREPARED_NOT_SENT
 construction_authorized=false
 tests_authorized=false
 compute_authorized=false
@@ -16,11 +17,13 @@ production_authorized=false
 
 ## Conclusion
 
-This is a mathematically closed, constructible scientific handoff, not a
-dispatch. Exact revision 05 received ChatGPT External Pro `CLOSED` and the
-same-direction EM accepted the ruling without changing the card. Root may now
-relay this packet to CM, but CM construction and every question-relevant action
-still require Root's separate sequencing assignment.
+This is a complete prospective scientific handoff, not a dispatch. Exact
+revision 05 received Pro `CLOSED` but ended before activity because the frozen
+CCIC-versus-RI work gate was infeasible in all 27 cells. Revision 06 replaces
+only that comparator with useful-compute-matched `RI-STRONG-v2`. Because this is
+a science-bearing correction, CM release and every question-relevant action
+remain withheld until revision 06 receives same-conversation Pro `CLOSED`, this
+EM intakes it, and Root separately sequences CM.
 
 The scientific source of truth is
 `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_SCIENCE_CARD.md`.
@@ -43,7 +46,7 @@ One analytic cooperative HMM toy and one shared-policy experiment with:
   centralized `NUMERICAL-REFERENCE` used as teacher/reference;
 - one frozen `5 -> 32 -> 32 -> 4` actor shared across agents, arms, `N`, and
   `k`;
-- `CCIC-R1`, `ESS-SCALAR`, `RI-STRONG`, `INFO-FLEX`, and `ORIGIN-COUNT` arms,
+- `CCIC-R1`, `ESS-SCALAR`, `RI-STRONG-v2`, `INFO-FLEX`, and `ORIGIN-COUNT` arms,
   plus the declared diagnostics;
 - 32 paired seed blocks, 256 evaluation episodes per `N x k x rho` cell,
   counter-addressed streams, fixed updates, no tuning, and no adaptive stop;
@@ -92,8 +95,14 @@ One analytic cooperative HMM toy and one shared-policy experiment with:
    independent replicates.
 13. Any missing required seed prevents an efficacy conclusion and is not
    replaced after activity.
-14. `RI-STRONG` uses the invertible `asinh(Delta ell/8)` target and exact
-   `8*sinh` inverse; posterior or increment clipping is forbidden.
+14. `RI-STRONG-v2` applies one shared 83-scalar `6 -> 9 -> 2` SiLU MLP to
+   `(z_i,o_i,s_i,log M,t/30,k/5)` per unique row, then exactly one
+   output-relevant channelwise `h_i=r_i+tanh(r_i)` transform and
+   ascending-order mean pooling. It uses the invertible
+   `asinh(Delta ell/8)` target and exact `8*sinh` inverse. RI-v2 is
+   intentionally advantaged by one scalar over CCIC's 82. Posterior/increment
+   clipping, ignored-output padding, dummy arithmetic, or work-ledger-only
+   increments are forbidden.
 15. Learned covariance calibration must pass the exact all-roster panel,
    including `N=8`; hard gates, 29-of-32 plus pooled gates, work replay, and
    interval families use only their declared aggregation rules.
@@ -108,8 +117,11 @@ One analytic cooperative HMM toy and one shared-policy experiment with:
    `[0,0]`, not a stochastic bootstrap family. The general zero-variance rule
    remains unresolved only for noncertified stochastic contrasts.
 20. Work replay uses the exact fresh empty-ledger tables, expanded operation
-   grammar, paired tuple counts, and separate 27-cell gates. A global median
-   cannot establish work matching.
+   grammar, paired tuple counts, and separate 27-cell gates. Before activity,
+   it must reproduce `W_CCIC=14N+392M+8`, `W_RI_v2=14N+357M+7`, the two peak
+   formulas, the complete prospective table, and literal `passed=true` in all
+   cells. Merely encoding cells or using a global median cannot establish work
+   matching.
 21. Covariance specificity uses both adjacent regime differences for every
    comparator and axis in one 12-contrast family; equality to a regime average
    is not uniformity.
@@ -128,8 +140,10 @@ certificate showing:
   support, per-decision call opportunities, and stream pairing; realized
   histories/call totals are endogenous and reported rather than asserted equal;
 - static absence of every forbidden covariance input;
-- the deterministic exact-copy pathwise-identity proof and the literal
-  nine-class successor permutation for `J-SHUFFLE`;
+- the deterministic exact-copy pathwise-identity proof, literal nine-class
+  successor permutation for `J-SHUFFLE`, and exact RI-v2 architecture;
+- all work formulas and table values, including every one of the 27 operation
+  and peak ratios `<=1.10` and an aggregate `passed=true` before activity;
 - coarse/fine numerical-reference stability; exact state/snapshot construction,
   phase namespaces, losses, initialization, reductions, and minibatches;
 - at least 24 numerical-reference-information-sensitive states in the frozen
@@ -162,11 +176,10 @@ surface. A no-data run is an engineering fact, not evidence against CCIC.
 
 ## Current owner disposition
 
-Revisions 03 and 04 each received a natural ChatGPT Pro `REVISION_REQUIRED`
-response, and the same-direction EM accepted their prospective science-bearing
-definition defects before activity. Exact revision 05 then received natural
-same-conversation Pro `CLOSED`; the EM accepted closure and made no subsequent
-science change. Root may relay this exact owner packet to CM for technical
-assessment/construction sequencing. No CM dispatch, construction, test,
-compute, production, or scientific activity has yet occurred, and the
-independently blind Gemini request remains `PREPARED_NOT_SENT`.
+Revisions 03 and 04 received natural Pro `REVISION_REQUIRED`. Revision 05
+received natural Pro `CLOSED` but ended before activity on the deterministically
+infeasible work gate. The EM rejected inert padding and gate relaxation and
+froze complete result-blind revision 06 with the stronger RI-v2 comparator.
+Revision 06 Pro and independently blind Gemini requests are
+`PREPARED_NOT_SENT`; there is no present CM, provider, test, compute,
+production, or scientific-activity action.

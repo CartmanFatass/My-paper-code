@@ -2,15 +2,16 @@
 
 ```text
 direction=covariance_calibrated_information_clock
-revision=CCIC-B1-SCIENCE-20260812-05
-supersedes_revision=CCIC-B1-SCIENCE-20260812-04_PRO_REVISION_REQUIRED
+revision=CCIC-B1-SCIENCE-20260813-06
+supersedes_revision=CCIC-B1-SCIENCE-20260812-05
+predecessor_disposition=PREACTIVITY_WORK_INFEASIBLE
 owner=EM_covariance_calibrated_information_clock
 object=result-blind prospective B1 discriminator
 scientific_activity_started=false
-mathematical_closure=revision_05_CLOSED_EM_INTAKE_COMPLETE
+mathematical_closure=revision_06_PREPARED_NOT_SENT
 cm_release=withheld
 production_authorization=none
-chatgpt_external_pro=CLOSED_NATURAL_COMPLETION
+chatgpt_external_pro=PREPARED_NOT_SENT
 external_gemini=PREPARED_NOT_SENT
 ```
 
@@ -35,8 +36,12 @@ global covariance matrix or centralized inference result.
 
 The strongest alternative is simpler lineage-aware unique-origin counting, or
 a sufficiently expressive replication-safe set encoder, rather than learned
-covariance. If a frozen equivalence or reverse-superiority rule favors either,
-the corresponding extra covariance or analytic-clock machinery is deleted.
+covariance. Revision 05 ended before activity because its nominal RI comparator
+was deterministically outside the frozen work ratio in every cell. Revision 06
+uses `RI-STRONG-v2`, which spends the matched budget on output-relevant
+nonlinear computation rather than dummy padding. If a frozen equivalence or
+reverse-superiority rule favors an alternative, the corresponding extra
+covariance or analytic-clock machinery is deleted.
 Nothing in this card authorizes CM,
 construction, tests, training, evaluation, provider contact, or production.
 
@@ -51,7 +56,7 @@ construction, tests, training, evaluation, provider contact, or production.
   GLS increments `(q_hat, J_hat)`, propagate belief in physical time, and feed
   those quantities to the one shared frozen actor.
 - **Comparators.** A capacity/exposure/work-matched nonlinear replication-safe
-  set encoder (`RI-STRONG`), an information-matched flexible calibration head
+  set encoder (`RI-STRONG-v2`), an information-matched flexible calibration head
   (`INFO-FLEX`), a scalar equicorrelation effective-sample-size arm
   (`ESS-SCALAR`), and a lineage-deduplicated independence/count arm
   (`ORIGIN-COUNT`), with numerical-reference, received-count, mean-pooling, and shuffled-clock
@@ -450,18 +455,28 @@ must remain positive definite; invalid or nonfinite outputs fail closed.
    trainable scalars. This is the simplest
    covariance-aware alternative and is exact for the homogeneous Stage-1
    family.
-2. **`RI-STRONG`.** Quotient lineage, map each unique `(z,o,s)` through a
-   `4 -> 7 -> 4` SiLU encoder on `(z,o,s,log M)`, mean-pool, append `t/30` and
-   `k/5`, and use a `6 -> 2` linear head. The first raw output `g_delta`
-   represents the invertible target `asinh(Delta ell/8)` and is decoded as
-   `Delta ell_hat=8*sinh(g_delta)` with no clipping. The second gives
-   `J_hat=1e-4+softplus(raw_J)`. It has exactly 81 trainable scalars versus
-   CCIC's 82 and can represent interactions between value and unique-origin
-   count. It receives the same packets and has the
-   same update count, batch size, optimizer, initialization family, and
-   hyperparameter-search budget. This is the primary
-   information/capacity/exposure/work-matched nonlinear baseline; a mean-only
-   ablation is never the strongest comparator.
+2. **`RI-STRONG-v2`.** Quotient lineage and map every unique row
+   `(z_i,o_i,s_i,log M,t/30,k/5)` through the same `6 -> 9 -> 2` SiLU MLP. If
+   its two-channel result is `r_i`, apply the single output-relevant
+   channelwise residual transform
+   
+   ```text
+   h_i = r_i + tanh(r_i),
+   ```
+   
+   in float64, then mean-pool `g=mean_i h_i` in ascending
+   unique-key order. Decode `Delta ell_hat=8*sinh(g_1)` and
+   `J_hat=1e-4+softplus(g_2)` with no clipping. The residual path is part of the
+   learned predictive function in both training and execution; output-
+   disconnected padding, dummy arithmetic, and work-ledger-only increments are
+   forbidden. It has exactly 83 trainable scalars versus CCIC's 82, so the
+   comparator is intentionally advantaged by one scalar. It can
+   represent value/count/time interactions, and applies all trained scalars to
+   every unique row before nonlinear pooling. It receives the same packets and
+   has the same update count, batch size, optimizer, initialization family, and
+   hyperparameter-search budget. This is the primary information/capacity/
+   exposure/work-matched nonlinear baseline; a mean-only ablation or inertly
+   padded v5 comparator is never the strongest comparator.
 3. **`INFO-FLEX`.** Reuse the frozen CCIC covariance estimator and give its
    `(ell_minus,q_hat,J_hat,k)` to a `4 -> 11 -> 2` SiLU head with 79 additional
    scalars. Its first raw output `g_ell` is decoded as posterior log odds
@@ -480,7 +495,7 @@ must remain positive definite; invalid or nonfinite outputs fail closed.
 Every learned fusion arm uses exactly 1,500 Adam updates, batch size 64,
 learning rate `3e-3`, betas `(0.9,0.999)`, epsilon `1e-8`, no weight decay, and
 the same 9,216 labeled snapshots, 768 per training cell. There is one frozen
-configuration and no adaptive hyperparameter search. `RI-STRONG` minimizes the
+configuration and no adaptive hyperparameter search. `RI-STRONG-v2` minimizes the
 equal-weight mean of squared errors for `asinh(Delta ell/8)` and
 `log(1+J_hat)/log(5.5)` against the corresponding exact GLS targets.
 `INFO-FLEX` represents posterior log odds with the same invertible transform,
@@ -504,15 +519,15 @@ per-snapshot unique-origin residual loss
 r^T\widehat\Sigma^{-1}r+M\log(2\pi)\}.
 \]
 
-`RI-STRONG` and `INFO-FLEX` use the targets
-above. Training order is `CCIC`, `ESS-SCALAR`, `RI-STRONG`, `INFO-FLEX`, then
+`RI-STRONG-v2` and `INFO-FLEX` use the targets
+above. Training order is `CCIC`, `ESS-SCALAR`, `RI-STRONG-v2`, `INFO-FLEX`, then
 the actor; the completed CCIC estimator is frozen before the INFO-FLEX head is
 trained. Each batch loss is the arithmetic mean in ascending batch-slot order.
 All parameters, forward/backward values, reductions, and Adam state are
 float64. They use numerical-reference or exact analytic targets only in
 training; no target or reference value is available at execution.
 
-At execution, RI-STRONG sets the post-batch belief to
+At execution, RI-STRONG-v2 sets the post-batch belief to
 `ell_minus+Delta ell_hat`; its prospective actor information is its second
 output on the public zero-valued next-batch template. INFO-FLEX uses its decoded
 posterior output for the observed batch. For prospective actor information it
@@ -634,7 +649,7 @@ and arm order never changes a draw. Training and evaluation cannot collide
 because their phase words differ.
 
 Within `TRAIN_OPT`, `stream=29` initializes parameters and `stream=23` selects
-minibatches. Module IDs are `0=CCIC`, `1=ESS-SCALAR`, `2=RI-STRONG`,
+minibatches. Module IDs are `0=CCIC`, `1=ESS-SCALAR`, `2=RI-STRONG-v2`,
 `3=INFO-FLEX`, and `4=actor`. Initialization uses
 `item=module_id,address=parameter_index` in row-major layer order. Every linear
 weight uses Glorot uniform
@@ -666,9 +681,10 @@ wide interval into equivalence or evidence of no effect.
 Within a cell and tape, all arms have identical potential tapes, packet schema,
 transition/receipt rules, legal support, public-uniform rule, per-decision call
 opportunity, horizon, and reward accounting. Realized histories and call counts
-may differ endogenously after actions or commit. `CCIC-R1` and `RI-STRONG`
+may differ endogenously after actions or commit. `CCIC-R1` and `RI-STRONG-v2`
 differ by one trainable scalar (82 versus
-81), receive exactly the same 1,500 updates and samples, and have no search
+83, intentionally advantaging RI-v2), receive exactly the same 1,500 updates
+and samples, and have no search
 variants. Their measured per-decision scalar-operation count and peak temporary
 state must be reported per call and cumulatively per episode. A common offline
 potential-state replay calls both fusions on the exact multiset
@@ -709,14 +725,42 @@ parameters, and final outputs. No hardware timing or fused-kernel convention
 can replace this grammar.
 
 Every tuple has weight one; no cell, episode, action, or observed outcome
-reweights the multiset. Report paired operation and peak-temporary counts for
-every tuple and their medians separately in each of the 27 `(N,k,rho)` cells.
-For every cell that enters a claimed held-out axis, both the per-tuple
-operation-count ratio and the cellwise peak-temporary ratio must satisfy
-`max(CCIC,RI)/min(CCIC,RI) <= 1.10`; a zero denominator or a valid-input
-failure fails the gate. The all-cell table is always reported. A single global
-median is forbidden. Online total calls and operations are endogenous timing
-outcomes, charged by the loss and reported rather than forced equal.
+reweights the multiset. Let `M=1` in `DUP` and `M=N` otherwise. The literal
+symbolic counts under the grammar are
+
+```text
+C(N,M) = 14N+M-5
+W_CCIC(N,M) = C(N,M)+391M+13 = 14N+392M+8
+W_RI_v2(N,M) = C(N,M)+356M+12 = 14N+357M+7
+P_CCIC(M) = 22+6M
+P_RI_v2(M) = 24+6M.
+```
+
+For RI-v2 the `356M+12` term is exactly: `6 -> 9` linear work `225M`,
+width-nine SiLU work `45M`, `9 -> 2` linear work `74M`, one two-channel
+residual transform `8M`, two-channel mean pooling `4M+2`, and decodes `10`.
+No part may be replaced by an ignored output or a counter-only padding record.
+The complete preactivity table is:
+
+| `N` | regime | `M` | CCIC ops | RI-v2 ops | operation ratio | peak ratio |
+|---:|---|---:|---:|---:|---:|---:|
+| 2 | `DUP` | 1 | 428 | 392 | 1.091837 | 1.071429 |
+| 5 | `DUP` | 1 | 470 | 434 | 1.082949 | 1.071429 |
+| 8 | `DUP` | 1 | 512 | 476 | 1.075630 | 1.071429 |
+| 2 | `CORR/IND` | 2 | 820 | 749 | 1.094793 | 1.058824 |
+| 5 | `CORR/IND` | 5 | 2038 | 1862 | 1.094522 | 1.038462 |
+| 8 | `CORR/IND` | 8 | 3256 | 2975 | 1.094454 | 1.028571 |
+
+Before any learned update or stochastic evaluation, the certificate must
+recompute the formulas and all 27 `(N,k,rho)` rows, require every operation and
+peak ratio `<=1.10`, require `passed=true`, and stop otherwise. Showing that 27
+cells were merely encoded is not a pass. During the offline replay, report
+paired operation and peak-temporary counts for every tuple and their medians
+separately in every cell; they must equal the prospective table. A zero
+denominator, mismatch, ignored-output padding, or valid-input failure fails the
+gate. A single global median is forbidden. Online total calls and operations
+are endogenous timing outcomes, charged by the loss and reported rather than
+forced equal.
 
 The exposure audit must also show that duplicate multiplicity, received `N`,
 future values, reward, held-out-cell moments, and actor outputs cannot enter the
@@ -775,7 +819,7 @@ family, not a claim for arbitrary covariance.
 ### 7.3 Primary held-out contrasts
 
 For each comparator in
-`{RI-STRONG, INFO-FLEX, ORIGIN-COUNT}`, define paired seed-level
+`{RI-STRONG-v2, INFO-FLEX, ORIGIN-COUNT}`, define paired seed-level
 differences `d = mean(L_norm_CCIC - L_norm_comparator)` on:
 
 1. held-out `N`: equal average over `N=8`, `k in {1,3}`, and all three regimes;
@@ -935,7 +979,7 @@ evaluation tape until a machine-readable certificate shows:
   and 60 million primitive environment ticks.
 
 The resource ledger is literal: eight arms receive full rollouts
-`{CCIC,ESS,RI-STRONG,INFO-FLEX,ORIGIN-COUNT,NUMERICAL-REFERENCE,J-SHUFFLE,J-CLAMP}`, for a
+`{CCIC,ESS,RI-STRONG-v2,INFO-FLEX,ORIGIN-COUNT,NUMERICAL-REFERENCE,J-SHUFFLE,J-CLAMP}`, for a
 worst-case `32*27*256*30*8 = 53,084,160` evaluation ticks. The shared snapshot
 bank adds at most `32*9,216 = 294,912` one-tick draws; 288 shadow evaluations
 per seed and offline work replay remain below the 60-million ceiling. Learned
@@ -990,7 +1034,7 @@ nonfinite actor probabilities count as failures, never as removed denominators.
    held-out `k`. Claim only that axis; do not say the algorithm spans both.
 3. **Covariance-aware but not analytic-evidence-update-specific.** CCIC passes every mechanism
    and calibration gate and its primary advantage rule passes against
-   `RI-STRONG` and `ORIGIN-COUNT` on an axis, but its interval versus
+   `RI-STRONG-v2` and `ORIGIN-COUNT` on an axis, but its interval versus
    `INFO-FLEX` lies inside `[-0.005,+0.005]` or has lower bound above `+0.02`.
    Support the bounded covariance-aware timing family on that axis, not the
    analytic Gaussian evidence-update/posterior mapping conditional on the
@@ -1006,7 +1050,7 @@ nonfinite actor probabilities count as failures, never as removed denominators.
    CCIC-minus-RI interval is equivalent or its lower bound exceeds `+0.02`, and
    work matching passes. Structured covariance advantage is unsupported;
    prefer the replication-safe set learner unless a heterogeneous second
-   surface is answer-changing. Otherwise `RI-STRONG` merely not being beaten is
+   surface is answer-changing. Otherwise `RI-STRONG-v2` merely not being beaten is
    unresolved.
 6. **Counting reduction supported.** The primary simultaneous CCIC-minus-count
    interval is equivalent or its lower bound exceeds `+0.02`. Retain provenance
@@ -1054,7 +1098,7 @@ nonfinite actor probabilities count as failures, never as removed denominators.
 ### Strongest alternative
 
 Trusted lineage plus unique-origin count may contain all useful structure in
-this toy; alternatively, `RI-STRONG` may learn the relevant conditional
+this toy; alternatively, `RI-STRONG-v2` may learn the relevant conditional
 precision without an explicit covariance model. Both are scientifically
 stronger explanations than a mean-pooling-only comparison. `INFO-FLEX` is the
 strongest explanation for any apparent benefit attributed specifically to the
@@ -1072,7 +1116,7 @@ exact HMM transition; it cannot explain or test the transition itself.
   on the shared exact HMM transition, only if the frozen INFO-FLEX equivalence
   or reverse-superiority rule passes. INFO-FLEX never licenses a conclusion
   about the physical-time HMM transition.
-- Delete structured-fusion specificity only if the frozen RI-STRONG
+- Delete structured-fusion specificity only if the frozen RI-STRONG-v2
   equivalence or reverse-superiority rule passes with work matching.
 - Delete exact-copy claims if lineage is unavailable or the collision audit
   fails.
@@ -1113,7 +1157,7 @@ clock-diagnostic, packet, and claim-relevant work gates; the primary
 CCIC-minus-`ORIGIN-COUNT` simultaneous upper bound is below `-0.02`; and the
 CCIC-minus-`ESS-SCALAR` simultaneous upper bound in its frozen two-contrast
 family is also below `-0.02`. These two literal bounds are the definition of
-"count and scalar do not fully explain" for activation. `RI-STRONG`
+"count and scalar do not fully explain" for activation. `RI-STRONG-v2`
 equivalence, reverse superiority, or an unresolved RI relation does not by
 itself block activation: under those conditions the heterogeneous surface is
 answer-changing precisely as a direct discriminator between explicit
@@ -1177,11 +1221,14 @@ The complete frozen revision is this file plus:
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V3_REVISION_REQUIRED_INTAKE.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V4_REVISION_REQUIRED_INTAKE.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V5_CLOSED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_V5_PREACTIVITY_WORK_INFEASIBILITY_INTAKE.md`
 
-The Pro and Gemini requesters were mutually blind. Revisions 03 and 04 received
-`REVISION_REQUIRED`; exact revision 05 received a natural same-conversation
-ChatGPT External Pro `CLOSED` disposition and this EM has accepted it. Root may
-now relay the owner-prepared CM packet; Root retains portfolio and sequencing
-authority, and CM retains implementation and runtime authority. Gemini remains
-`PREPARED_NOT_SENT`. No CM dispatch, construction, test, compute, production,
-or scientific activity has occurred.
+Revisions 03 and 04 received `REVISION_REQUIRED`; exact revision 05 received
+natural same-conversation Pro `CLOSED` but then ended before activity when CM
+showed its work gate was deterministically infeasible in all 27 cells. That is
+not outcome evidence. Revision 06 is the complete prospective successor and
+both mutually blind provider requesters are `PREPARED_NOT_SENT`. It requires
+same-conversation Pro `CLOSED` plus this EM's intake before any CM relay. Root
+retains portfolio/sequencing authority and CM retains implementation/runtime
+authority. No revision-06 provider turn, CM release, construction, test,
+compute, production, or scientific activity has occurred.
