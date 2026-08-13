@@ -1081,10 +1081,12 @@ was not used as a rejection reason.
    the existing RISP r04 direction-stage envelope. The same-direction EM must
    reconcile the activity/two-lock concern, obtain a literal same-conversation
    Pro ruling on the exact complete revision, and intake it. The paired CM may
-   produce only the bounded deterministic certificate for containment, packet
-   equality, yoke integrity, legal-action reachability, seen-schedule comparator
-   competence and resource class. If the Pro turn is already committed, do not
-   resend; continue the saved conversation. This action authorizes no stochastic
+   produce only the bounded static certificate for algebraic containment,
+   packet/yoke construction law, deterministic legal-action reachability and
+   resource class. Learned seen-schedule comparator competence remains a
+   prospective outcome, not a deterministic certificate. If the Pro turn is
+   already committed, do not resend; continue the saved conversation. This
+   action authorizes no stochastic
    production or heavy compute. Its possible outcomes distinguish the RISP
    score-coordinate prior, generic sign recurrence and generic feedback value
    under exact class/information/work matching.
@@ -1122,12 +1124,16 @@ compute allocation, Git or user contact. Provider transport, tabs and session
 management remain inside operational Root and the direction envelopes.
 
 Operational Root should preserve SGSP r05 and RCLE r04 as invested Pro-closed
-preactivity directions and retain their provider identities. It should issue
+preactivity directions, retain their existing Pro identities, and retain the
+accurate separate Gemini states rather than inventing identities. SGSP's
+recorded Gemini attempts produced no provider turn or conversation identity;
+that absence is not scientific evidence. It should issue
 exactly one portfolio action now: continue RISP r04 so its EM reconciles the
 activity/two-lock boundary; submits the exact revision once to the dedicated Pro
 conversation if no provider turn has been committed, otherwise continues that
 same conversation without resend; keeps the Gemini innovation turn separate;
-and obtains the paired CM deterministic answerability/resource certificate.
+and obtains the paired CM bounded static containment/yoke/reachability/resource
+certificate.
 Production or heavy compute requires a later ordinary operational decision after
 Pro closure and EM intake.
 
