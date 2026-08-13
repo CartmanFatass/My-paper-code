@@ -5,7 +5,7 @@ document_kind=canonical_transport_operations_manual
 scope=ChatGPT_External_Pro|External_Gemini
 transport_core=Agentify_strict_review_query
 provider_mapping=chatgpt|gemini
-version_basis=@agentify/desktop_0.2.4+e12caf8_2026-08-13
+version_basis=@agentify/desktop_0.2.4+36ebd89_2026-08-13
 ```
 
 This is the canonical operating manual for every HMASD Agentify transport
@@ -41,13 +41,19 @@ Most recent failures were operator/contract failures, not provider failures:
    turn. None is commitment by itself.
 6. Registry/status text, account-plan text, helper-injected DOM, or an old
    archive was treated as live selected-model or send evidence.
+7. Blink rewrote collapsible ASCII spaces in a `contenteditable` composer to
+   NBSP while preserving UTF-16 length. Raw DOM equality therefore rejected an
+   intact prompt, and a separate raw rendered-turn hash could reject the same
+   reversible representation during content rebind.
 
 The confirmed Agentify defects are repaired in source commit `a9471f7`; source
 commit `e12caf8` adds the provenance-preserving v1-to-v2 ledger migration needed
 to load older valid COMPLETE receipts without weakening new-operation
-enforcement. Section 15 retains the defects as regression contracts. An older
-running desktop still has the pre-fix behavior, so the repaired tree must be
-loaded before relying on those guarantees.
+enforcement. Source commit `36ebd89` adds the single collision-resistant review
+plain-text identity model used at the composer, rendered-turn, diagnostic,
+recovery, and content-rebind boundaries. Section 15 retains the defects as
+regression contracts. An older running desktop still has the pre-fix behavior,
+so the repaired tree must be loaded before relying on those guarantees.
 
 ## 2. The operating model
 
@@ -317,7 +323,45 @@ The immutable fingerprint comprises stable key, provider, model, URL, ID,
 idempotency key, prompt SHA, timeout, and first-binding flag
 (`review-transport.mjs:187-200`). Never change one field to evade an error.
 
-### 7.6 Send boundary and commitment
+### 7.6 Composer and rendered-turn text identity
+
+Strict text comparison uses the named model
+`agentify_review_plain_text_v1`. It first canonicalizes only line endings:
+CRLF and a lone CR become LF. It performs no trimming, paragraph folding,
+Unicode normalization, generic whitespace normalization, or hash-only bypass.
+
+Blink may preserve a run's visible ASCII spacing in a `contenteditable` DOM by
+rebalancing one or more collapsible U+0020 spaces to U+00A0 NBSP. Agentify may
+reverse only that deterministic, length-preserving representation, and only
+when every condition below holds:
+
+- the frozen source contains no NBSP and contains at least one non-whitespace
+  code point;
+- each mismatch is expected U+0020 ASCII space versus observed U+00A0 NBSP;
+- each mismatch belongs to an ASCII-space run at line start, at line end, or
+  containing at least two consecutive ASCII spaces;
+- replacing only those observed NBSP code points with the expected ASCII
+  spaces recovers the complete canonical expected text exactly; and
+- the SHA-256 of that recovered canonical observed text equals the canonical
+  prompt SHA-256.
+
+This exception never equates NFC with NFD, an ordinary interior single ASCII
+space with NBSP, a source-native NBSP with ASCII space, a zero-width code point
+with its absence, one astral code point with another, or any other differing
+code point. Pure-whitespace prompts cannot use the recovery. These distinctions
+fail closed even when UTF-16 lengths happen to match.
+
+The pre-send composer, post-send rendered user turn, submission diagnostic and
+recovery, and content-rebind observer all return and validate the same safe
+identity receipt. An accepted receipt requires both recovered-text exactness and
+canonical SHA equality; a second raw/canonical equality test must not contradict
+it. Separately, `sourceSha256`/`promptSha256` remains the SHA-256 of the exact
+frozen UTF-8 source bytes and continues to bind the request fingerprint. The
+browser text model is not permission to change those frozen bytes
+(`review-text-identity.mjs:3-183`; `chatgpt-controller.mjs:764-900,1755-1930,
+2065-2299`; `review-transport.mjs:387-526,612,679-685`).
+
+### 7.7 Send boundary and commitment
 
 These are not provider commitment:
 
@@ -329,13 +373,13 @@ These are not provider commitment:
 - an MCP timeout or client disconnect.
 
 Provider commitment requires exactly one new visible user turn bound to the
-intended conversation identity, with readable rendered text exactly equal to
-the frozen prompt. ChatGPT additionally requires a concrete `/c/<id>` for first
-binding; Gemini requires a concrete `/app/<id>`. The strict core records
-`sendCount=1` only after it validates the exact turn content and identity. A
-post-click unreadable/mismatched turn is `SUBMITTED_UNVERIFIED`, never a resend
-license (`review-transport.mjs:onSubmitted`; `chatgpt-controller.mjs:
-#waitForReviewUserMessage,reviewQuery`).
+intended conversation identity, with readable rendered text accepted by the
+exact `agentify_review_plain_text_v1` receipt in section 7.6. ChatGPT additionally
+requires a concrete `/c/<id>` for first binding; Gemini requires a concrete
+`/app/<id>`. The strict core records `sendCount=1` only after it validates the
+turn-content receipt and identity. A post-click unreadable/mismatched turn is
+`SUBMITTED_UNVERIFIED`, never a resend license (`review-transport.mjs:
+onSubmitted`; `chatgpt-controller.mjs:#waitForReviewUserMessage,reviewQuery`).
 
 For Gemini, stable reconciliation of all four facts—zero provider turns, no
 `/app/<id>`, the complete question still in the composer, and no generation—is
@@ -346,7 +390,7 @@ If a turn, concrete identity, `sendCount=1`, or ambiguous commitment exists,
 never send again. A `sendActionCount=1` without a readable provider turn is
 ambiguous even if the operator believes the click did nothing.
 
-### 7.7 Natural completion
+### 7.8 Natural completion
 
 Observe only. Never activate Stop, Continue, Retry, Response Retry, Answer now,
 regenerate, or acceleration controls. `IN_PROGRESS` means keep observing the
@@ -364,7 +408,7 @@ Strict completion requires:
 - ledger `status=COMPLETE`, `sendCount=1`, and
   `terminalState=NATURAL_COMPLETION_VERIFIED`.
 
-### 7.8 Archive and close
+### 7.9 Archive and close
 
 Write one canonical top-level JSON object:
 
@@ -656,6 +700,7 @@ Current source behavior is:
 | E | bare `403` is not an access error; structured access wording is not blocking when the genuine composer remains usable |
 | F | a fresh strict request fails `review_tab_busy` on a prior active turn; only observer recovery uses a persisted `userMessageId`; completion requires `sendActionCount===1` |
 | G | strict and ordinary send-capable entry points share one global inflight governor; exact existing observers do not reserve a second slot |
+| H | composer, rendered turn, diagnostics/recovery, and content rebind use one collision-resistant plain-text receipt; only narrowly reversible Blink space rebalance is accepted |
 
 The “observed source defect” and “reproduction” bullets below describe the
 pre-fix implementation retained for audit provenance. The invariant and fix
@@ -663,18 +708,23 @@ bullets are the current acceptance contract.
 
 ### A. Strict prompt DOM identity is enforced before Send
 
-- **File/symbol:** `chatgpt-controller.mjs`, `reviewQuery`, around lines
-  1732-1747; `#typePrompt` and `inspectReviewComposerIdentity`, lines 593-687.
+- **File/symbol:** `chatgpt-controller.mjs`, `#typePrompt`,
+  `inspectReviewComposerIdentity`, and `reviewQuery`, lines 750-900 and
+  2065-2139; `review-transport.mjs`, `onComposerVerified`, lines 499-528.
 - **Invariant:** strict review must prove the active composer serializes exactly
-  to the frozen prompt before its sole Send action.
+  to the frozen prompt under the named review text model before its sole Send
+  action, and the rendered turn must carry the same accepted identity receipt.
 - **Pre-fix defect:** `reviewQuery` called
   `#typePrompt(prompt, { human: false })`; `verifyExact` defaults false. It then
   clicks Send. The post-send new-user-message path identifies a new turn but
   does not require that turn text to equal the prompt.
-- **Minimal fix:** call `#typePrompt(prompt, { human:false, verifyExact:true })`;
-  after the new user turn appears, require readable rendered text equal to the
-  prompt (or exact UTF-8 SHA) before `onSubmitted`. On unreadable/mismatch,
-  persist ambiguous submission and never resend.
+- **Implemented fix:** call
+  `#typePrompt(prompt, { human:false, verifyExact:true })`; persist the verified
+  composer receipt before Send; after one new user turn appears, require the
+  same collision-resistant text identity plus exact conversation identity
+  before `onSubmitted`. On unreadable/mismatch, persist ambiguous submission
+  and never resend. Section H specifies the only browser representation that
+  this exact comparison may reverse.
 - **Reproduction:** submit strict review with a composer implementation whose
   `insertText` normalizes or truncates content; pre-fix code could click without
   composer-exact proof despite README's claim at
@@ -799,6 +849,40 @@ nonetheless directly reproducible.
   receipt exists, `verifyExisting=true` succeeds while an unrelated ordinary
   request occupies the single slot.
 
+### H. Browser text identity is unified across send and recovery paths
+
+- **File/symbol:** `review-text-identity.mjs`,
+  `REVIEW_PLAIN_TEXT_MODEL`, `canonicalizeReviewPlainText`,
+  `compareReviewPlainTextIdentity`, and `safeReviewPlainTextComparison`, lines
+  3-183; `chatgpt-controller.mjs`, `inspectReviewComposerIdentity`,
+  `#waitForReviewUserMessage`, `#resolveReviewUserAnchor`,
+  `inspectReviewSubmissionIdentity`, and `recoverReviewSubmission`, lines
+  764-900,1755-1930,2195-2299; `review-transport.mjs`, operation prompt identity,
+  `onSubmitted`, and `onComposerVerified`, lines 380-526.
+- **Invariant:** every browser-visible copy of the frozen prompt is checked by
+  `agentify_review_plain_text_v1`; acceptance requires recovered canonical text
+  to equal the canonical source exactly and its SHA-256 to match. The raw frozen
+  source SHA remains separately bound to the request and operation.
+- **Observed source defect:** Blink represented leading/repeated ASCII spaces in
+  the 7,024-character strict prompt with NBSP. The former raw serializer
+  equality failed before Send even though the structural prompt was intact.
+  After an initial repair, content rebind first accepted the safe receipt and
+  then applied a second line-ending-only hash to raw rendered text, rejecting
+  the very same legal Blink representation.
+- **Implemented fix:** canonicalize only CRLF/lone CR to LF; reverse only
+  expected-ASCII-space/observed-NBSP mismatches at leading, trailing, or
+  repeated ASCII-space runs when the source has no NBSP and has non-whitespace
+  content. Require exact recovered text and equal canonical SHA. Use the same
+  safe receipt for composer verification, rendered-turn commitment,
+  submission diagnosis/recovery, and content rebind; remove contradictory raw
+  rendered-turn equality/hash gates.
+- **Regression:** `tests/chatgpt-controller.test.mjs:118-199` covers line
+  endings, narrowly reversible space rebalance, blank lines, code/list shape,
+  source NBSP, ordinary single-space NBSP, NFC/NFD, astral and zero-width
+  distinctions, a synthetic 7,024-character prompt, and content-rebind receipt
+  parity. `tests/review-transport.test.mjs:103-128,528-550` proves the same
+  receipt is durable and bound to the raw prompt SHA.
+
 ## 16. Source evidence index
 
 - Package and supported providers: `C:/Projects/agentify-desktop/package.json:2-5`,
@@ -811,8 +895,11 @@ nonetheless directly reproducible.
   `C:/Projects/agentify-desktop/tab-manager.mjs:56-150,153-210`.
 - Strict request identity/fingerprint/state machine:
   `C:/Projects/agentify-desktop/review-transport.mjs:37-200,234-368,395-632`.
+- Review plain-text identity, narrowly reversible Blink space mapping, and safe
+  hash receipt:
+  `C:/Projects/agentify-desktop/review-text-identity.mjs:3-183`.
 - Live challenge, model, Gemini adapter DOM, send, and completion mechanics:
-  `C:/Projects/agentify-desktop/chatgpt-controller.mjs:9-83,299-520,593-1086,1106-1768,1919-2063`.
+  `C:/Projects/agentify-desktop/chatgpt-controller.mjs:9-83,299-520,593-1086,1106-1930,2065-2299`.
 - Ledger schema and atomic persistence:
   `C:/Projects/agentify-desktop/state.mjs:6-15,34-155,257-272`.
 - Default tab/status construction:
