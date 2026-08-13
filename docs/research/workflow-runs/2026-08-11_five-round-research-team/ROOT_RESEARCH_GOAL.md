@@ -810,3 +810,30 @@ calibrates auxiliary scale only at update zero, holds it fixed, and records late
 gradient decay as a competence outcome rather than a termination condition. It
 must not use this run's observed gradient to choose its strength, and would need
 fresh Pro closure and a new compute lease.
+
+## 2026-08-13 RCLE backup investment decision
+
+Root retains `RCLE-B1-SCIENCE-20260813-03` as a nonredundant, medium-low-cost
+direct variable-`N` backup. Its accepted-roster hidden-lock assay tests whether
+correctly paired episode-persistent trajectory information improves valid
+strategy coverage for one frozen shared policy trained at `N={4,8}` and sampled
+unchanged at held-out `N=12`. `COMMON-Z`, centered `SHUFFLED-MI`, private
+`INDEPENDENT-ENTROPY`, and latent cuts bound common-randomness and label-pairing
+alternatives; optimizer geometry and noise remain the strongest residual
+explanation.
+
+The claim ceiling is the finite accepted-roster toy only: no normalization
+necessity, arbitrary `N`, churn, variable `k`, continuous control, or UAV value.
+Root authorizes one new dedicated ChatGPT External-Pro conversation for exact-v3
+mathematical/causal closure and one mutually blind new Gemini innovator
+conversation. Routine transport belongs to the registered Luna-medium leaves;
+the Terra Agentify owner remains a tool designer and live validator. Gemini may
+wait for the repaired transport's production-ready declaration without changing
+this scientific authorization. No RCLE construction or compute is authorized
+before literal Pro `CLOSED` and owner intake.
+
+Portfolio trigger: a qualified RCLE value-and-mechanism result may earn a later
+separately frozen two-dimensional/UAV surface. Parity with COMMON, SHUFFLED or
+INDEPENDENT narrows or deletes the exact package. MGTAP remains the first direct
+compute investment and causally closed SGSP remains second; RCLE is the backup,
+not a reason to delay either leader.
