@@ -967,15 +967,18 @@ second-surface/UAV action.
    candidate; exact v5 resolves the post-v4 population-scaler ambiguity without
    changing the mechanism or gates. Root published the complete v5 owner packet;
    its same-conversation Pro review returned literal `CLOSED`, the EM accepted it
-   without science change, and exact-v5 CM construction is now in progress. Its
+   without science change, and exact-v5 source is now statically CM-accepted;
+   its one-shot run waits for the VQFP CPU slot. Its
    strongest alternative is ordinary explicit-`k`, history, and endpoint
    supervision.
-3. **CCIC-v3: covariance-calibrated information clock.** Direct both-axis
-   candidate whose smallest discriminator crosses literal duplicates,
+3. **CCIC-v4: covariance-calibrated information clock.** Direct both-axis
+   candidate. V3 received `REVISION_REQUIRED`; its seven accepted definition
+   repairs are frozen in complete result-blind v4. Its smallest discriminator
+   crosses literal duplicates,
    correlated distinct origins, and independent origins at held-out `N` and
    `k`. The strongest alternatives are scalar ESS, origin counting, and a
    matched nonlinear invariant encoder. External packets and its result-blind
-   map are published; its one Pro request is in transport with no terminal
+   map are published; its v4 same-conversation Pro request is released with no terminal
    disposition, so no CM release exists. This direction tests whether
    invariance preserves useful independent information rather than merely
    normalizing count.
