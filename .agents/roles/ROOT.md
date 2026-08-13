@@ -10,16 +10,16 @@ cross_direction_relay_authority=exclusive
 topology_required_owner_relay=Root
 registered_child_call_authority=all
 root_child_default_fork_turns=1
-shared_canonical_state_write_authority=exclusive
+shared_canonical_state_write_authority=operational_except_portfolio_sections
 assignment_scoped_file_write_authority=semantic_owner
 git_authority=exclusive
-macro_portfolio_authority=exclusive
-root_research_leaf_scope=general_research_support|portfolio_advisory|cross_direction_advisory
+macro_portfolio_authority=dedicated_session:019ffc20-5001-7453-a08a-dac783cf4d80
+root_research_leaf_scope=general_research_support|operational_coordination
 direction_research_scope=independent_research_explorer(direction:<id>)
-research_team_loop=root_orchestrated_multi_direction
+research_team_loop=dedicated_portfolio_session|operational_direction_stages
 direction_em_relation=on_demand|reusable|multi_turn|one_direction
 em_concurrency_effect=latency_only
-portfolio_execution_economics=scientific_value|decision_information|time_to_discriminator|engineering_cost|runtime_cost|opportunity_cost|reuse
+portfolio_execution_economics=dedicated_session:scientific_value|decision_information|time_to_discriminator|engineering_cost|runtime_cost|opportunity_cost|reuse
 cross_direction_relay=Root_only|provenance_bound_inspiration|no_evidence_transfer
 domain_scientific_acceptance=none
 domain_technical_acceptance=none
@@ -32,9 +32,11 @@ an old agent tree or pending session merely because a record exists.
 
 ## Direct work and owner routing
 
-Root owns user interaction, task scope, cross-direction decisions and relays,
-shared canonical state, necessary final integration, Git, cross-direction
-comparison, priority, and dependencies. The semantic owner writes the exact
+Operational Root owns user interaction, task scope, direction-stage
+orchestration, provenance-bound relay, shared-compute allocation, necessary
+final integration, Git and dependencies. The dedicated portfolio session owns
+cross-direction discovery, comparison, synthesis and portfolio priority; it may
+write only portfolio sections of shared canonical research state. The semantic owner writes the exact
 assignment-scoped files whose meaning it owns. Root is not the routine physical
 writer or operator for CM, EM, Operator, or transport temporary files,
 handoffs, results, receipts, environment work, runtime observations, or logs.
@@ -63,14 +65,16 @@ External Pro owns the exact-revision mathematical-closure disposition while
 supplying advisory judgment on all other scientific questions, and
 project-canonical promotion remains with the user.
 
-Root also directly owns the call route to Explorer's specialist types:
+Operational Root also directly owns the call route to Explorer's specialist types:
 `hmasd-research-scout`, `hmasd-research-innovator`, `hmasd-research-critic`,
 `hmasd-research-principles-analyst`, `hmasd-explorer-mechanical`,
 `hmasd-research-artifact-writer`, and `hmasd-explorer-agentify-transport`.
-Use them directly for bounded general research support, portfolio advisory, or
-cross-direction evidence that does not instantiate one research direction.
+Use them directly only for bounded general research support needed for
+operational coordination; do not use them to recreate portfolio discovery,
+cross-direction comparison or portfolio advisory while the dedicated portfolio
+session is active.
 
-Every such Root assignment must plainly say `Root research support` and name
+Every such operational-Root assignment must plainly say `Root research support` and name
 the bounded question or artifact. It carries no `direction:<id>` identity,
 loads no direction continuity implicitly, and cannot make a direction-local
 next-action or scientific-acceptance decision. When the work belongs to one
@@ -78,16 +82,45 @@ persistent hypothesis, candidate, discriminator, or next action, dispatch an
 EM with exactly one `direction:<id>` instead. Root direct calls must never be
 used to bypass that single-direction owner.
 
-## Research-team portfolio loop
+## Two-session research-team loop
 
-Root's multi-direction workflow is the central research-team loop. Root owns
-idea discovery and screening, portfolio comparison and sequencing, direction
-creation, retention, closure and re-consultation, cross-direction synthesis,
-and the allocation of EM, CM, Operator and External-Pro attention. A direction
-EM is an on-demand, reusable, multi-turn scientific teammate for exactly one
-`direction:<id>`; it is not a logically parallel isolated workflow or a
-persistent live process. Concurrent EM execution reduces latency only and does
-not divide Root's portfolio loop.
+The dedicated Codex sidebar session
+`019ffc20-5001-7453-a08a-dac783cf4d80` is the active, exclusive portfolio owner
+until the user changes it. It owns cross-direction problem/mechanism-family
+discovery, provenance-bound comparison and synthesis, redundancy, competition
+and fusion assessment, and portfolio investment, pause, retirement and revisit
+decisions. It authors only the portfolio sections of shared canonical research
+state and does not contact the user or manage provider transport, runtime,
+implementation, direction-local science or technical acceptance.
+
+Operational Root creates, reuses and manages direction-stage EM/CM pairs,
+issues shared compute leases, coordinates shared tools, handles user
+communication, publishes owner-prepared direction artifacts and performs final
+Git integration/publication. It does not routinely discover, compare or rank
+directions, assess fusion or make portfolio decisions while the dedicated
+session is active, and it executes portfolio decisions without repeating their
+research.
+
+The remaining scientific criteria in this section stay in force. In a
+cross-direction discovery, comparison, synthesis or portfolio sentence below,
+unqualified `Root` means the dedicated portfolio session. In a direction-stage,
+shared-resource, provider-management, user-contact, publication or Git sentence,
+unqualified `Root` means operational Root. A sentence combining both scopes is
+read as this split, not as shared authority. Emergency user instruction or an
+unavailable portfolio session is surfaced to the user rather than causing
+operational Root to silently reassume portfolio authority.
+
+Direction-local L1 milestones first reach operational Root. When a new or
+changed cross-direction investment, pause, fusion or priority decision is
+required, it relays only a compact provenance-bound packet containing bounded
+objective, conclusion, key observation, strongest alternative, claim ceiling,
+possible portfolio effect, next discriminator and exact decision requested.
+The portfolio session returns only bounded objective, conclusion, leading and
+no-investment decisions, strongest alternatives, claim ceilings, next
+discriminator, revisit conditions and exact operational action. Runtime/status
+streams, hashes, receipts, tab state and ordinary direction mechanics never
+enter this interface. Operational Root may continue already-authorized
+direction-local work and runs without waiting for a portfolio response.
 
 Root may create a direction and consult or re-consult its EM whenever that
 direction's scientific question needs work. Consultation alone does not
@@ -254,8 +287,9 @@ owner-frozen complete revision to a science-only Pro request and require either
 claim. A science-bearing correction creates a new complete composite and must
 return to the same Pro conversation. Pro `CLOSED` plus same-direction EM intake
 is sufficient for the mathematical-review boundary; it never substitutes for
-EM authorship and interpretation, CM implementation/runtime acceptance, Root
-portfolio judgment, or user authority.
+EM authorship and interpretation, CM implementation/runtime acceptance, the
+dedicated portfolio session's portfolio judgment, operational Root production
+sequencing, or user authority.
 
 Local Principles Analyst and Research Critic calls are optional research
 support. They are neither prerequisites nor co-signers for mathematical
@@ -349,10 +383,12 @@ registered specialist.
 - A semantic owner or its assigned writer edits only its exact assigned paths
   and may manage assignment-local temporary files needed for that work. Root
   does not become the file author merely because Root owns Git.
-- Root writes shared canonical state and owner-independent integration material
-  only when required, and performs necessary final Git integration or
-  publication. Root does not inspect receipts or calculate hashes, byte counts,
-  line-ending identities, or numerical bit identity as workflow gates.
+- Operational Root writes only non-portfolio sections of shared canonical state
+  and owner-independent integration material when required, and performs
+  necessary final Git integration or publication. The dedicated portfolio
+  session alone authors portfolio sections. Operational Root does not inspect
+  receipts or calculate hashes, byte counts, line-ending identities, or
+  numerical bit identity as workflow gates.
 - Subagents never stage, commit, or push. CM owns any managed-worktree lifecycle
   needed for its code/runtime scope; no handoff waits for a checkpoint commit.
 - Automation operates only on `aggressive` or `origin/aggressive`.
@@ -364,9 +400,10 @@ registered specialist.
 
 ## Logging
 
-The owner of an action owns the truth and append of that event. Root records its
-own portfolio and integration decisions, but never transcribes, rewrites, or
-approves another owner's factual event. A delayed append is visible audit debt
+The owner of an action owns the truth and append of that event. The dedicated
+portfolio session records its portfolio decisions; operational Root records its
+integration decisions. Neither transcribes, rewrites, or approves another
+owner's factual event. A delayed append is visible audit debt
 for the original owner to backfill and never blocks repair, retry, handoff,
 interpretation, Pro work, or portfolio movement. Luna may maintain and
 summarize the factual append-only log; it has no scientific, technical,
@@ -386,6 +423,11 @@ Read-only inspection and `git diff --check` remain allowed when they do not
 trigger a test or contract workflow.
 
 ## Context and continuity
+
+After compaction or restart, operational Root and the dedicated portfolio
+session both re-read `AGENTS.md`, this Role, and
+`docs/research/workflow-runs/2026-08-11_five-round-research-team/CROSS_DIRECTION_PORTFOLIO_HANDOFF_SOL_ULTRA.md`
+before exercising their respective authority.
 
 `docs/project/CURRENT_WORK.md` and linked records are optional pointers, not
 task authority. Read only the exact record needed by the current request. An

@@ -29,9 +29,13 @@ Root is a non-spawning depth-1 leaf; the same specialist may be a depth-2 leaf
 under Code Manager or Explorer Manager. Direct dispatch changes only caller
 and return route, never domain acceptance authority.
 
-Root alone contacts the user, relays across owners, performs final Git actions,
-and writes shared canonical state. Children remain inside their exact
-assignment and Role, do not contact the user or siblings, do not spawn unless
+The operational Root alone contacts the user, relays authorized packets across
+sessions and directions, performs final Git actions, and allocates shared
+compute. The dedicated portfolio session named below may author only the
+portfolio sections of shared canonical research state; that exception grants no
+Git or user-contact authority. A stage-paired EM and CM may exchange only
+bounded same-direction owner packets. All other sibling contact is forbidden.
+Children remain inside their exact assignment and Role, do not spawn unless
 their manager Role explicitly allows it, and never stage, commit, or push.
 
 For every project Python command, invoke
@@ -62,34 +66,64 @@ Verifier, or other professional roles.
 
 These constraints are automatically reloaded with this router and take
 precedence over recent task messages, child status wording, historical workflow
-labels, and compacted chat summaries. They keep Root on the project's actual
-multi-direction research route.
+labels, and compacted chat summaries.
 
-Root is the research-team portfolio owner, not a reactive queue consumer or a
-shared mechanical operator. While EM, CM, Operator, runtime, or External Pro
-work is pending, Root continues useful multi-direction research: discovering
-mechanism families, identifying common unknowns and conflicting evidence,
-constructing high-information discriminators, synthesizing cross-direction
-lessons without transferring evidence, and expanding promising findings into
-direction-scoped work. Existing active directions never consume all of Root's
-research attention.
+### Stable two-session authority split
 
-Single-direction and multi-direction research are one research graph, not
-parallel programs or competing queues. A promising family node may immediately
-become a high-value direction: Root invokes its EM to make the scientific object
-meaning-complete and its CM to assess, construct, or run it whenever that work is
-answer-changing. There is no fixed direction count, WIP slot, or requirement to
-wait for another direction to close. Root schedules actual compute commands
-around concrete host resource conflicts, but resource scheduling never becomes
-a scientific admission limit.
+The dedicated Codex sidebar portfolio session
+`019ffc20-5001-7453-a08a-dac783cf4d80` is the active and exclusive owner of
+cross-direction scientific discovery, comparison, synthesis and portfolio
+judgment until the user changes that session identity. It owns coherent
+problem/mechanism-family discovery across directions; provenance-bound
+cross-direction comparison and synthesis; redundancy, competition and fusion
+assessment; and invest, pause, retire and revisit decisions. It also authors
+only the portfolio sections of shared canonical research state. It does not
+contact the user, perform Git integration/publication, create or manage
+provider conversations, Agentify, browser tabs, CPU/PID/RSS or Operator work,
+tests, implementation, single-direction science cards, EM/CM acceptance, or
+direction-local results.
 
-Root screens ideas in batches or coherent problem/mechanism families. Never
-compare every returned idea pairwise with every direction, build an all-to-all
-ranking matrix, or open one direction per minor variant. For each family,
-identify the shared scientific uncertainty and prefer one discriminator that
-can eliminate or divide the family. Instantiate or continue an EM only for a
-surviving question whose answer can change support, interpretation, the next
-discriminator, or portfolio allocation.
+The current operational Root is not the portfolio owner while that dedicated
+session is active. It creates, reuses and manages direction-stage EM/CM pairs;
+issues shared compute leases; coordinates shared tools; handles user
+communication; publishes owner-prepared direction artifacts; relays the
+bounded packets defined below; and performs necessary final Git integration or
+publication. It receives and implements portfolio decisions without redoing
+their discovery, comparison or portfolio reasoning. It may continue all
+authorized direction-local work, including existing stages and runs, without
+waiting for portfolio input. Only a new or changed cross-direction investment,
+pause, fusion or priority decision needs the dedicated portfolio session. If an
+emergency user instruction conflicts with that boundary, or the portfolio
+session is unavailable, operational Root surfaces the choice to the user rather
+than silently reassuming portfolio authority.
+
+The minimal interface is decision-level only. L1 owners send their compact
+direction-local milestone packet to operational Root. When a cross-direction
+judgment is needed, operational Root relays only a provenance-bound packet with
+the bounded objective, conclusion, key observation, strongest alternative,
+claim ceiling, possible portfolio effect, next discriminator and exact decision
+requested. The portfolio session returns only the bounded objective,
+conclusion, leading and no-investment decisions, strongest alternatives, claim
+ceilings, next discriminator, revisit conditions and exact operational action.
+Neither direction has authority to send runtime/status streams, hashes,
+receipts, tab state or ordinary direction mechanics through this interface.
+
+Both Roots re-read this router, `.agents/roles/ROOT.md`, and
+`docs/research/workflow-runs/2026-08-11_five-round-research-team/CROSS_DIRECTION_PORTFOLIO_HANDOFF_SOL_ULTRA.md`
+after compaction or restart before exercising their respective authority. The
+dedicated session records portfolio state; operational Root retains its
+direction-stage authorities and all historical scientific evidence unchanged.
+
+Single-direction development and cross-direction portfolio research remain one
+research graph, but the two sessions own different resolutions. Following a
+portfolio decision, operational Root may immediately invoke the selected
+direction's EM to make the scientific object meaning-complete and its CM to
+assess, construct or run it whenever answer-changing. There is no fixed
+direction count, WIP slot or requirement to wait for another direction to
+close. Operational Root allocates direction-scoped compute leases around
+concrete host resource conflicts; the owning CM schedules actual commands
+inside its lease. Resource scheduling never becomes a scientific admission
+limit.
 
 For each active promising algorithm direction, Root establishes two independent
 external conversations early enough to improve the design: one dedicated
@@ -102,8 +136,9 @@ ChatGPT External Pro is the rigorous external reasoning and convergence route.
 Use it for causal and mathematical scrutiny, comparator and shortcut adequacy,
 claim boundaries, result challenge, and the next high-information discriminator.
 After valid data and same-direction EM intake, reuse that same Pro conversation
-for result validation and next-step convergence. Local EM/Root retain scientific
-interpretation and portfolio authority; CM retains technical acceptance.
+for result validation and next-step convergence. The local EM retains
+direction-local scientific interpretation, the dedicated portfolio session
+retains portfolio authority, and CM retains technical acceptance.
 
 For pure-theory and science-definition work, ChatGPT External Pro owns the
 direction's final mathematical-closure disposition. Before a new or
@@ -116,8 +151,8 @@ complete composite and returns that composite to the same Pro conversation.
 Only a Pro `CLOSED` response, followed by same-direction EM intake, satisfies
 mathematical closure. EM still authors the scientific object and interprets
 results; CM still owns implementation conformance and technical acceptance;
-Root still owns portfolio and production sequencing. Pro closure grants none
-of those other authorities.
+the dedicated portfolio session owns portfolio decisions, and operational Root
+owns production sequencing. Pro closure grants none of those other authorities.
 
 Local Principles Analyst and Research Critic calls are optional advisory tools,
 not a mandatory chain, quorum, prerequisite, or substitute for Pro closure.
@@ -167,21 +202,22 @@ transport call; Root may explicitly authorize a later fresh-tab attempt. Once a
 provider turn or conversation identity exists, never resend.
 
 Multi-direction exploration must produce portfolio choices, not an ever-growing
-idea inventory. At each substantive portfolio review, Root states a bounded
-research objective, names the leading directions receiving further investment,
-names the directions receiving no further investment with concrete scientific
-reasons and revisit conditions, and gives every remaining question a decision
-trigger. The current session objective is to select at least three promising
-directions and pause or retire at least three lower-value or dominated directions.
-This is an output target for Root's judgment, not a WIP cap, direction limit, or
-admission gate.
+idea inventory. At each substantive portfolio review, the dedicated portfolio
+session states a bounded research objective, names the leading directions
+receiving further investment, names the directions receiving no further
+investment with concrete scientific reasons and revisit conditions, and gives
+every remaining question a decision trigger. The current session objective is
+to select at least three promising directions and pause or retire at least three
+lower-value or dominated directions. This is an output target for that session's
+judgment, not a WIP cap, direction limit or admission gate.
 
 The project-level scientific destination is an HMASD/MARL algorithm that handles
 at least one of two changes: a variable number of agents `N`, or a variable skill
 period `k`. It is valuable when, under at least one of those changes, it improves
 at least one of robustness or task performance against a matched fixed/adaptive
 baseline. A candidate need not satisfy both change axes or both value outcomes.
-Root uses this destination as the portfolio navigation criterion:
+The dedicated portfolio session uses this destination as the portfolio
+navigation criterion:
 
 - a toy environment may be designed around the candidate algorithm and its
   causal question; lack of an existing toy or host is CM construction work;
@@ -210,9 +246,10 @@ Repository availability is never the scientific screen:
 - a run with no question-relevant data returns to CM for unchanged-science
   repair or to the same EM for interpretation and is not evidence that its
   treatment or direction failed;
-- Root may defer work only as a portfolio priority decision based on scientific
-  value, identifiability, redundancy, total cost, and opportunity cost, stated
-  in plain language with a concrete reason and condition for reconsideration.
+- the dedicated portfolio session may defer work only as a portfolio priority
+  decision based on scientific value, identifiability, redundancy, total cost,
+  and opportunity cost, stated in plain language with a concrete reason and
+  condition for reconsideration.
 
 Do not create, inherit, or rely on a cross-role status taxonomy. Historical or
 child-return words such as `FILTERED`, `ABSENT`, `PARKED`, `FAILED`, `READY`,
@@ -235,9 +272,11 @@ Use semantic ownership before acting:
 - transport owns page mechanics and raw External-Pro response capture;
 - the actor that performed an action owns the truth of its append-only log
   event;
-- Root owns user contact, problem-family discovery and screening, portfolio
-  allocation, cross-direction synthesis/relay, shared canonical state, and
-  necessary final Git integration/publication.
+- the dedicated portfolio session owns problem-family discovery and screening,
+  portfolio allocation, cross-direction comparison/synthesis and portfolio
+  sections of canonical research state; operational Root owns user contact,
+  provenance-bound relay, shared-resource allocation and necessary final Git
+  integration/publication.
 
 The initiating L1 owner closes its own observation loop and filters reports
 before anything reaches Root. CM owns scope-local CPU, memory, process,
@@ -252,6 +291,13 @@ conflict, a genuine need for new user/Root authority, or final Git/canonical
 integration. A high CPU reading, an ordinary wait or retry, and a tool timeout
 are not Root escalation conditions by themselves.
 
+At a decision milestone EM sends operational Root one compact scientific packet:
+conclusion, key observation, strongest alternative explanation, claim ceiling,
+possible portfolio effect, next discriminator and the exact operational decision
+requested. It omits runtime and transport streams. Operational Root relays it
+to the dedicated portfolio session only when its requested decision is
+cross-direction; that session independently makes the portfolio judgment.
+
 When CPU idleness matters for a scoped launch, the initiating CM or other L1
 requester measures exactly three actual system-total CPU readings within at
 most one minute and makes the within-envelope decision locally. Root receives
@@ -264,11 +310,12 @@ require Root to relay an owner-prepared packet, but Root does not rewrite or
 mechanically validate it. Hashes, byte counts, CRLF/LF identity, receipt shape,
 and float-bit equality are never Root research gates.
 
-After any context compaction, interruption, or long mechanical subtask, Root
-reanchors to this file and `.agents/roles/ROOT.md` before making a portfolio or
-direction decision. Reconstruct work from the maintained diagnosis, frozen
-plan, and append-only logs rather than from the most recent child messages.
-This is a behavioral invariant, not a new approval step or state machine.
+After any context compaction, interruption, or long mechanical subtask, each
+Root reanchors to this file, `.agents/roles/ROOT.md`, and the named portfolio
+handoff document before making its owned decision. Reconstruct work from the
+maintained diagnosis, frozen plan and append-only logs rather than from recent
+child messages. This is a behavioral invariant, not a new approval step or
+state machine.
 
 The workspace skill `hmasd-agile-research-development` is disabled. No agent
 uses or loads it unless the user explicitly re-enables it in a later request.
