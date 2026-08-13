@@ -1078,11 +1078,14 @@ relay, and hook-level communication isolation remains deferred.
 
 ### Directions receiving investment
 
-1. **SCDMP-v5 — direct variable `k`, result interpretation.** A complete
-   technically accepted exact-v5 result exists. Its paired EM/CM own the frozen
-   interpretation and same-Pro result convergence. The decision trigger is the
-   full positive or deletion/nonidentification branch relative to matched
-   `SCDMP-NOCOMP`; no rerun or threshold change is eligible.
+1. **SCDMP competence cut — variable-`k` enabling definition.** Exact v5 and its
+   same-Pro result convergence ended at branch 7 nonidentification, without value,
+   non-harm, prediction competence or mechanism first stages and without an
+   adverse/family-deletion branch. The retained family-eliminating discriminator
+   matches `NOCOMP`, correct SCDMP and an incorrect/order-shuffled composition
+   regularizer on graph, loss magnitude, gradient exposure, data, updates,
+   capacity, action search and useful work. Provider and compute authority are
+   absent until its paired EM/CM establish a meaning-complete, viable object.
 2. **CCIC-v6 — direct variable `N` and `k`, prospective repair.** V5 ended before
    activity because its work-matching predicate was infeasible. V6 replaces that
    comparison with a prospectively work-matched object and is published for its
@@ -1110,6 +1113,9 @@ Each has a single nested strong comparator capable of deleting its own family.
   externally unavailable after two zero-send blocked-page attempts. Revisit only
   with a new allocation-constrained host restoring headroom/action sensitivity or
   a later explicit decision if the original Pro session recovers.
+- **SCDMP exact-v5:** complete and Pro-converged but nonidentifying. It receives no
+  rerun, payload/UAV activation or claim; only the separately frozen
+  competence-first cut can reconsider the family.
 - **CRTO-v4, VNFC-B2, ONLGR and VNFC-B3's current host/panel line:** prior
   support, nonseparation, unavailable-output and panel-infeasibility conclusions
   and revisit conditions remain unchanged.
@@ -1118,7 +1124,8 @@ Each has a single nested strong comparator capable of deleting its own family.
 
 ### Next evidence triggers
 
-- SCDMP returns only its decision-level interpreted/Pro-converged result.
+- The SCDMP competence cut returns only a meaning-complete direction decision,
+  a viability blocker, or a request for new provider/compute authority.
 - CCIC returns only closure of a meaning-complete work-matched revision or an
   exact reason the family cannot be identified.
 - SGSP and MGTAP return only meaning-complete direction decisions, feasibility

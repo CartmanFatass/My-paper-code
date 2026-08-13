@@ -608,12 +608,17 @@ The objective remains one valid matched-baseline improvement by one shared polic
 on held-out variable `N` or `k`, followed by same-EM interpretation,
 same-conversation Pro result convergence, and a recorded second-surface/UAV action.
 
-1. **SCDMP-v5 (direct variable `k`, result-interpretation stage).** Exact
-   `SCDMP-B1-SCIENCE-20260812-05` is Pro-closed and has produced a complete,
-   technically accepted eight-seed result under the exact registered ledger.
-   The paired SCDMP EM and CM now own frozen interpretation and result convergence
-   directly. No rerun or treatment change is eligible. Root awaits only the
-   direction's decision-level scientific milestone.
+1. **SCDMP competence cut (variable-`k` enabling definition stage).** Exact v5
+   converged with the same Pro conversation to branch 7 `NONIDENTIFYING`: neither
+   direct-value route, simultaneous non-harm, prediction competence nor any
+   registered mechanism first stage passed, while no adverse or family-deletion
+   branch fired. Exact v5 receives no more work and activates no payload/UAV
+   surface. One answer-changing successor definition is retained: matched
+   `NOCOMP`, correct SCDMP, and deliberately incorrect/order-shuffled composition
+   regularization with identical graph, loss-weight magnitude, gradient exposure,
+   data, updates, capacity, action search and useful work. Its paired EM/CM own
+   meaning-complete definition and feasibility; no provider, construction or
+   compute authority exists yet.
 2. **CCIC-v6 (direct variable `N` and `k`, revised preactivity stage).** Static
    construction proved v5's CCIC-to-`RI-STRONG` work-ratio predicate infeasible in
    all 27 cells before activity. The EM rejected inert work padding and froze the
@@ -650,6 +655,10 @@ capacity allocation. Agreement against weak controls would not justify fusion.
   newly frozen allocation-constrained host that restores oracle headroom and
   action sensitivity, or through a later explicit decision if that same Pro
   conversation becomes available.
+- **SCDMP exact-v5:** the complete result and same-Pro convergence establish only
+  branch 7 nonidentification. It supports no benefit, non-harm, null, equivalence,
+  adverse, deletion, payload/UAV or arbitrary-`k` claim. Reconsider the family
+  only through the separately defined competence-first three-arm cut above.
 - **CRTO-v4, VNFC-B2, ONLGR and the VNFC-B3 host/panel line** retain their prior
   no-investment reasons and exact revisit conditions; none supplies the required
   project result.
@@ -657,8 +666,7 @@ capacity allocation. Agreement against weak controls would not justify fusion.
 ### Current completion evidence
 
 The portfolio, alternatives, claim ceilings and prospective bridges are explicit,
-but the central outcome is still absent. VQFP did not identify value; SCDMP has a
-valid result whose scientific branch and Pro convergence are pending; CCIC-v6,
-SGSP and MGTAP remain preactivity. Therefore no shared algorithm has yet proven a
+but the central outcome is still absent. VQFP and SCDMP-v5 did not identify value;
+the SCDMP competence cut, CCIC-v6, SGSP and MGTAP remain preactivity. Therefore no shared algorithm has yet proven a
 matched-baseline robustness or task-performance improvement on held-out `N` or
 `k`, and no second surface or UAV simulator is activated. The goal remains active.
