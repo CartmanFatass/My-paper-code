@@ -1,13 +1,14 @@
-# CCIC B1 result-blind interpretation and activation map
+# CCIC B1 revision-04 result-blind interpretation and activation map
 
 ```text
 direction=covariance_calibrated_information_clock
-treatment_revision=CCIC-B1-SCIENCE-20260812-03
+treatment_revision=CCIC-B1-SCIENCE-20260812-04
+supersedes_map_for=CCIC-B1-SCIENCE-20260812-03_PRO_REVISION_REQUIRED
 owner=EM_covariance_calibrated_information_clock
 artifact_role=result-blind derivative reading map
-treatment_changed=false
+map_changes_treatment=false
 scientific_activity_started=false
-mathematical_closure=not_requested
+mathematical_closure=revision_04_PREPARED_NOT_SENT
 chatgpt_external_pro=PREPARED_NOT_SENT
 external_gemini=PREPARED_NOT_SENT
 cm_release=withheld
@@ -18,405 +19,301 @@ production_authorization=none
 
 This map adds no arm, equation, threshold, sample, seed, endpoint, inference
 rule, resource, claim, or authorization. Its sole scientific source of truth is
-the complete frozen revision `CCIC-B1-SCIENCE-20260812-03`, headed by
-`CCIC_B1_SCIENCE_CARD.md`. If this derivative map and that card ever conflict,
-the card controls and the discrepancy returns to this direction owner before
-any activity.
+the complete frozen `CCIC-B1-SCIENCE-20260812-04` science card. If the two ever
+conflict, the science card controls and activity stops pending same-direction
+owner correction.
 
-The first discriminator can support a finite claim only after all applicable
-identity, preactivity, activity, completeness, mechanism, matching,
-equivalence, and inferential conditions below are satisfied. A missing gate is
-not a negative efficacy result. No provider state, construction state, or
-runtime artifact is itself evidence for CCIC.
+Revision 03 received a natural same-direction Pro `REVISION_REQUIRED` ruling.
+The owner accepted the definition defects and froze revision 04 before any
+scientific activity. Revision 04 is not closed, sent, implemented, or active.
+Neither the v3 ruling nor this prospective repair is evidence for CCIC efficacy.
 
-## 1. Protected object and question
+## 1. Protected causal distinction and scope
 
-The protected causal question is whether one frozen decentralized shared actor
-can use a lineage-aware covariance-calibrated information clock to assign zero
-new information to a successfully received literal retransmission, assign
-more information to genuinely new correlated or independent origins, and
-improve sense/relay/commit timing on held-out roster size `N` and/or held-out
-skill period `k`.
+The unit of evidence is a physical sensing origin keyed by
+`(origin_id,capture_tick)`. A later successful relay of an assimilated key has
+`(Delta q,Delta J)=(0,0)`. A distinct conditional draw whose represented value
+happens to be equal remains new evidence. Lineage is execution-visible and
+trusted; without it the exact-copy claim is unavailable.
 
-The literal-copy claim is conditional on matched successful receipt, latency,
-available sufficient-origin set, topology, one-round consensus, 128-bit packet
-size, and bandwidth contention. It is an information-value claim after receipt,
-not a general communication-value claim. A distinct physical draw whose value
-happens to equal another draw remains distinct evidence. The analytic HMM/GLS
-Bayes object is a teacher and ceiling, never the deployed treatment path.
+Copy invariance is conditional on matched successful receipt, latency,
+available origins, topology, consensus round, packet accounting, and
+contention. B1 does not test transport value. The packet scalar is one ideal
+noiseless mathematical real plus 64 metadata bits; there is no finite-word,
+quantization, bit-rate, or binary64 likelihood claim.
 
-The complete frozen object remains:
+The deployed object is one decentralized shared actor and local fixed-rank
+fusion across training `N={2,5}`, held-out `N=8`, training `k={1,3}`, held-out
+`k=5`, and `DUP/CORR/IND`. The analytic Bellman/GLS object is theory only. The
+computed centralized `NUMERICAL-REFERENCE` is teacher/reference only. Neither
+is deployed.
 
-- training `N={2,5}`, held-out `N=8`;
-- training `k={1,3}`, held-out `k=5`;
-- public regimes `DUP` (`rho=1`, one physical origin), `CORR` (`rho=0.5`,
-  distinct origins), and `IND` (`rho=0`, distinct origins);
-- 32 paired training-seed blocks and 256 evaluation episodes per
-  `(N,k,rho)` cell and arm;
-- full rollout arms `CCIC`, `ESS-SCALAR`, `RI-STRONG`, `INFO-FLEX`,
-  `ORIGIN-COUNT`, `ORACLE`, `J-SHUFFLE`, and `J-CLAMP`, with
-  `RECEIVED-COUNT` and `MEAN-RI` shadow-only;
-- one actor and one parameterization per seed, frozen across all agents,
-  roster sizes, skill periods, and regimes.
+## 2. Activation reading order
 
-## 2. Reading order for activation and interpretation
+These are logical conditions, not a cross-role status system.
 
-These are logical conditions, not a cross-role status taxonomy.
+### 2.1 Mathematical-closure and authority condition
 
-### 2.1 Exact-revision and authority condition
-
-Before any production release, the exact complete revision requires a natural
-same-direction ChatGPT External Pro disposition of literal `CLOSED`, followed
-by this EM's scientific intake. `REVISION_REQUIRED`, an incomplete response,
-or no response leaves mathematical closure absent and production withheld. It
-does not count as evidence against the treatment. Gemini supplies divergent
-hypotheses only and cannot close mathematics, accept results, authorize
-production, or select the portfolio.
-
-The two provider batches are independently prepared and mutually blind. Their
-prepared state grants no send authority and starts no scientific activity.
+Before production, exact revision 04 must receive literal `CLOSED` in the saved
+same-direction Pro conversation, followed by this EM's intake. No answer,
+incomplete transport, or `REVISION_REQUIRED` leaves CM and production withheld
+but says nothing about efficacy. The independently blind Gemini route is
+divergent hypothesis input only and cannot close, converge, accept, authorize,
+or rank this direction.
 
 ### 2.2 Preactivity certificate
 
-Before consuming any generated training label, reward, stochastic tape, or
-result-bearing endpoint, a machine-readable certificate must show all of the
-following exactly:
+Before any generated training label/residual, stochastic tape evaluation, or
+result-bearing endpoint is consumed, the certificate must establish:
 
-1. DGP constants, `N/k/rho` axes, loss, seed formula, stream keys, counts, and
-   stopping rule equal revision 03.
-2. The analytic information values and the full-column-rank, on-support
-   replication identity
-   `A^T(A Sigma A^T)^+A=Sigma^-1` hold under the stated positive-definite
-   unique-origin covariance and support conditions.
-3. The collision fixtures give their exact oracle values:
-   `COLLIDE-DUP: (q,J)=(0.5625,0.5625)`,
-   `COLLIDE-IND: (q,J)=(2.8125,2.8125)`, and at `N=5`
-   `J_DUP=0.5625 < J_CORR=0.9375 < J_IND=2.8125`.
-4. The temporal relay of already assimilated key `(7,5)` gives
-   `(Delta q,Delta J)=(0,0)`, while an equal represented value under fresh key
-   `(7,10)` and `o=0` receives a new independent likelihood factor.
-5. Packet schemas, legal common-plan joint supports, actor/fusion calls, and
-   communication bits match across arms.
-6. Static feature tracing proves that the CCIC covariance network cannot
-   receive duplicate multiplicity, received `N`, unique-origin count,
-   represented evidence, `t`, `k`, reward, action, future values, held-out
-   moments, evaluation statistics, or actor outputs. Only its declared `(o,s)`
-   row inputs may enter; unique-set dimension affects only declared sums.
-7. The coarse numerical teacher on `[-16,16]`, spacing `0.01`, with 64-node
-   Gauss-Hermite quadrature passes the frozen refinement against `[-24,24]`,
-   spacing `0.005`, with 128 nodes: every coarse action value changes by at
-   most `1e-4` and no non-tie optimal action changes.
-8. The exact dynamic program has at least 24 eligible information-sensitive
-   base states among the 96 frozen `(t,k,ell)` states formed by
-   `t in {5,10,15,20}`, `k in {1,3,5}`, and the eight signed values generated
-   from `abs(ell) in {0.25,0.75,1.25,1.75}`. All three `J_next` values are
-   evaluated for exactly 288 actor evaluations.
-9. At the initial belief and `N=5,k=3`, exact quadrature gives
-   `L_norm_ORACLE(DUP)-L_norm_ORACLE(IND) >= 0.01`. This is feasibility, not
-   empirical support for a learned arm.
-10. Output roots are fresh and the projection is no more than 90 wall minutes,
-    4 GiB peak RSS, 8 CPU threads, 240,000 learned optimizer updates, and
-    60 million primitive ticks. The literal rollout ceiling is 53,084,160
-    evaluation ticks plus at most 294,912 snapshot draws.
+1. exact DGP, axes, loss, stop rule, 32 seed blocks, 256 episodes per cell,
+   eight rollout arms, shadow-only diagnostics, and resource ledger;
+2. ideal-real packet semantics plus matched one-real-symbol/64-metadata-bit
+   accounting, without any finite-word Gaussian likelihood;
+3. exact analytic `q/J`, `LLR=2q`, physical-time HMM transition, collision
+   values, and the full-column-rank on-support pseudoinverse identity;
+4. temporal duplicate `(7,5)` contributes zero after assimilation while equal
+   fresh key `(7,10)` contributes one new likelihood factor;
+5. identical packet schema, common-plan support, communication, actor/fusion
+   opportunities, and absence of privileged deployed covariance/posterior;
+6. static exclusion of evidence value, received/unique count, multiplicity,
+   `t`, `k`, reward, action, future values, actor output, and held-out moments
+   from the CCIC covariance network;
+7. the fine/coarse `NUMERICAL-REFERENCE` constructions, total tie priority, and
+   stability stop; passing never upgrades the computed reference to an exact
+   oracle;
+8. exact 24-by-32 label/snapshot grid per train cell, residual law, losses,
+   invertible RI/INFO targets, module order, float64 reductions, Glorot
+   initialization, and minibatch mapping;
+9. disjoint Philox training/evaluation/inference phases, `Y0`, stream IDs,
+   counter ranges, and nested evaluation transforms with no `N/k/rho/arm` in
+   the evaluation address;
+10. at least 24 eligible information-sensitive states in the frozen 96-state
+    activity set and exactly 288 actor evaluations per seed;
+11. both coarse and fine reference gaps at initial belief, `N=5,k=3`, satisfy
+    `L_norm_REFERENCE(DUP)-L_norm_REFERENCE(IND)>=0.01`; and
+12. fresh outputs plus no more than 90 minutes, 4 GiB, 8 CPU threads, 240,000
+    learned updates, and 60 million primitive ticks. The exact rollout maximum
+    is 53,084,160 evaluation ticks plus at most 294,912 snapshot draws.
 
-Failure of the numerical-refinement or deterministic oracle-separation check
-means no training or stochastic evaluation starts. Failure to construct an
-otherwise exact certificate is an unresolved preactivity feasibility or
-conformance fact, not an efficacy result. An unchanged-science engineering
-defect belongs to CM after release; a needed science-bearing change returns to
-this EM and would require a newly frozen revision.
+A failed reference stability/gap check prevents stochastic work. Any failed
+certificate is a preactivity feasibility or conformance fact, not a learned
+treatment result. Unchanged-science repair is CM work after release; a
+science-bearing change returns to this EM and requires a complete successor.
 
 ### 2.3 Scientific-activity boundary
 
-Question-relevant activity begins at the earliest of:
+Activity begins at the earliest first optimizer update using a generated
+label/residual/reference target, first actor/fusion evaluation on a frozen
+stochastic tape, or first result-bearing endpoint computation. Schema tests,
+symbolic identities, hand-written collision constants, resource projections,
+provider preparation, and pure mathematical review remain preactivity.
 
-1. the first optimizer update using a generated label, residual, or
-   oracle-teacher target from this DGP;
-2. the first actor/fusion evaluation on a frozen stochastic training or
-   evaluation tape; or
-3. the first computation of a result-bearing endpoint from such data.
+Once activity begins, required seed blocks are never replaced and treatment
+rules are never changed in response to values.
 
-Schema checks, hand-written collision constants, symbolic identities, resource
-projection, provider preparation, and mathematical review before those events
-remain preactivity. Once activity begins, a missing or invalid seed block is
-reported and is not replaced; no treatment or question-relevant rule may be
-changed in response to observed values.
+### 2.4 Complete-evidence condition
 
-### 2.4 Evidence-completeness condition
+Efficacy interpretation requires all 32 seed blocks; every declared rollout
+arm, cell, tape, endpoint, diagnostic, work replay, and inference family; and no
+seed substitution. Episodes and ticks are not replicates. Missing or invalid
+question-relevant output means no efficacy conclusion. A no-data execution is
+a technical fact returned to CM, not treatment evidence.
 
-Efficacy interpretation requires all 32 predeclared seed blocks, all required
-full-rollout arms and cells, the paired tape law, the declared endpoints, and
-the frozen inferential families. Episodes and ticks are not inferential
-replicates. A missing arm, cell, seed, required diagnostic, or
-question-relevant endpoint yields no efficacy conclusion. Output that contains
-no question-relevant data is a technical execution fact and returns to CM for
-unchanged-science diagnosis; it is neither positive nor negative direction
-evidence.
+### 2.5 Hard structural conditions
 
-### 2.5 Reward-independent activity condition
+Every arm and all 32 seeds must pass collision, exact lineage, support, packet,
+forbidden-input, finite-value, and exact-copy-state checks. No majority or
+pooled return can override a hard failure. Exact-copy outcome equivalence also
+requires all four simultaneous paired-loss intervals inside
+`[-0.005,+0.005]` and paired shadow-state `q`, `J`, and actor probabilities
+within absolute `1e-10`.
 
-After training and before reading task return, each seed evaluates the 96
-frozen base shadow states at all three `J_next` values, for exactly 288 actor
-evaluations. Among states where the oracle endpoint plans differ:
+### 2.6 Learned calibration and activity conditions
 
-- at least 80% must satisfy
-  `P(SENSE|J_IND) >= P(SENSE|J_CORR) >= P(SENSE|J_DUP)` within `1e-8`;
-- at least 25% must satisfy
-  `P(SENSE|J_IND)-P(SENSE|J_DUP) >= 0.10`; and
-- the estimator must satisfy `J_DUP < J_CORR < J_IND`.
+For every seed and `(N,rho)` in `{2,5,8} x {DUP,CORR,IND}`, the fixed 768-batch
+shadow panel defines maximum covariance diagonal error, maximum off-diagonal
+error, relative `J` error, and normalized `q` RMSE. A seed passes only if all
+four are at most `0.10` in all nine cells and
+`J_DUP<J_CORR<J_IND` at every roster. Overall calibration requires at least
+29 of 32 seed passes and the equal-seed mean of each named cell-error quantity
+at most `0.10`. No roster/class averaging can hide a failure.
 
-If this condition fails, the proposed information clock was not materially
-active and task returns cannot answer its causal question.
+The reward-independent activity set `E` is frozen pretraining at the analytic
+`N=5` information values `{0.5625,0.9375,2.8125}` and has `|E|>=24`. For each
+seed and over the pooled denominator `32*|E|`, at least 80%
+must satisfy monotone `P(SENSE|IND)>=P(SENSE|CORR)>=P(SENSE|DUP)` within `1e-8`,
+and at least 25% must have the IND-minus-DUP probability gap at least `0.10`.
+Both pooled conditions and at least 29 seed-level passes are required. Missing
+or nonfinite probabilities fail rather than leave the denominator.
 
-### 2.6 Required mechanism, replication, and matching conditions
+Failure of calibration or activity makes task return nonidentifying for the
+clock mechanism.
 
-Every efficacy claim additionally requires:
+### 2.7 Work and diagnostic conditions
 
-1. both `COLLIDE-DUP` and `COLLIDE-IND` lineage audits pass;
-2. learned `J` is invariant to literal-copy multiplicity and orders
-   `DUP < CORR < IND` at `N=5`;
-3. the reward-independent activity condition passes;
-4. both `J-SHUFFLE` and `J-CLAMP` degrade relative to CCIC on any surface for
-   which clock causality is claimed;
-5. paired packet schema, inference opportunities, legal support, capacity,
-   search, potential tapes, and work conditions pass; and
-6. the analytic oracle separates the information regimes in expected loss.
+CCIC and RI-STRONG differ by one parameter and share samples, updates, search,
+support, and opportunities. Their work replay is every potential evaluation
+opportunity over all seeds, 27 cells, 256 episodes, and all reachable decision
+ticks, each weighted one even after a hypothetical commit. Either median
+per-call scalar-operation count exceeding the other's by more than 10%, or a
+valid-input failure, makes primary superiority exposure-confounded. Online
+total work is endogenous, loss-charged, and reported.
 
-The exact-copy equivalence family compares CCIC at `N=5` and `N=8` against
-`N=2` under `DUP`, separately at `k=1` and `k=3`. All four two-sided 95%
-simultaneous intervals for paired `L_norm` differences must lie inside
-`[-0.005,+0.005]`; paired post-receipt `q`, `J`, and actor probabilities must
-agree to absolute `1e-10`. This remains conditional on matched receipt.
+For each held-out axis, both `J-SHUFFLE` and `J-CLAMP` must have a simultaneous
+diagnostic-minus-CCIC lower loss-difference bound above `+0.01`. Otherwise no
+clock-causality claim is available on that axis.
 
-CCIC and `RI-STRONG` must report per-call and cumulative operations and peak
-temporary state. Their median offline-replay per-call work must be within 10%
-of one another. Exceeding that boundary makes primary superiority
-exposure-confounded even though endogenous online total work remains a charged,
-reported timing outcome.
+### 2.8 Frozen inference and relation rules
 
-### 2.7 Frozen inferential conditions
+All stochastic inference uses 32 paired seed blocks and the exact 100,000-draw
+common-index studentized max-T bootstrap from seed `8675309`. Every family uses
+sample SD denominator 31, centered resamples, recomputed bootstrap SE, absolute
+family maximum, nearest-rank draw 95,000, and simultaneous two-sided bounds.
+An original zero-variance contrast is unresolved and receives no point
+interval; a zero bootstrap SE is conservative infinity.
 
-For each of `RI-STRONG`, `INFO-FLEX`, and `ORIGIN-COUNT`, paired seed-level
-`CCIC-comparator` normalized-loss differences are evaluated on:
+The six primary `CCIC-comparator` contrasts cover `{RI-STRONG,INFO-FLEX,
+ORIGIN-COUNT}` on held-out `N` and held-out `k`. A population advantage of at
+least `0.02` requires the simultaneous upper bound below `-0.02` against all
+three comparators on that axis. The `(8,5)` three-contrast family is secondary
+and cannot rescue an axis.
 
-- held-out `N`: equal average over `N=8`, `k in {1,3}`, and all regimes;
-- held-out `k`: equal average over `k=5`, `N in {2,5}`, and all regimes.
+The six covariance-specificity contrasts use, for each comparator and axis,
+`s=d_IND-(d_DUP+d_CORR)/2` in their own two-sided max-T family. Uniformity is
+established only when all three comparator-specific intervals on a supported
+axis lie inside `[-0.005,+0.005]`; otherwise it is unresolved. This family
+cannot create primary support.
 
-These are six primary contrasts. One contrast supports CCIC only if its mean is
-at most `-0.02` and its one-sided simultaneous 95% upper confidence bound is
-below zero. Use the frozen studentized paired max-`T` procedure with 100,000
-common nonparametric resamples of 32 seed blocks and inference seed `8675309`.
-A zero-variance contrast uses its exact point interval and is omitted from the
-studentized maximum. The `(8,5)` joint corner is multiplicity-controlled
-secondary evidence and cannot rescue either primary axis. An axis claim
-requires the rule against all three named primary comparators on that axis.
+For any declared reduction relation:
 
-The two `CCIC-ESS-SCALAR` axis contrasts form their own simultaneous two-sided
-max-`T` family with equivalence margin `[-0.005,+0.005]`. Equivalence or ESS
-superiority deletes learned low-rank fusion on this homogeneous surface; ESS is
-a reduction test, not a baseline CCIC must beat to retain the broader clock
-when non-covariance alternatives are beaten.
+- equivalence requires the entire simultaneous interval inside
+  `[-0.005,+0.005]`;
+- comparator reverse superiority requires its CCIC-minus-comparator lower bound
+  above `+0.02`;
+- no material CCIC advantage of at least `0.02` requires the lower bound above
+  `-0.02` and is not general equivalence or no effect; and
+- every other interval is unresolved.
 
-For each of `J-SHUFFLE` and `J-CLAMP`, diagnostic-minus-CCIC differences on the
-two held-out axes form one four-contrast one-sided max-`T` family. A diagnostic
-supports clock causality only when mean degradation is at least `0.01` and the
-simultaneous lower 95% bound is above zero. Either diagnostic failing on an
-otherwise positive axis deletes clock causality for that axis.
-
-The exact-copy four-contrast equivalence family uses the same simultaneous
-max-`T` construction and the separate exact state tolerance above. No trained
-cell result substitutes for a held-out-axis contrast.
+CCIC-minus-ESS uses its own two-contrast family. Exact-copy equivalence uses its
+own four-contrast family. Diagnostics use one four-contrast family and the
+`+0.01` rule above. Non-rejection never becomes sufficiency or deletion.
 
 ## 3. Exhaustive result-blind interpretation branches
 
-Record every compatible branch whose antecedent holds. A positive branch never
-overrides a failed required gate, and the defensible statement is the
-intersection of all applicable limitations.
+Record every compatible branch. A positive branch never overrides a failed
+required gate; the defensible statement is the intersection of all applicable
+limits.
 
-1. **Both-axis specific support.** Every mechanism, work, replication, and
-   equivalence condition passes, and all three primary comparator contrasts
-   pass on both held-out axes. Claim only covariance-calibrated timing in this
-   toy across the tested `N` and `k` values.
-2. **One-axis support.** The full rule passes only for held-out `N` or only for
-   held-out `k`. Claim only that axis.
-3. **Covariance aware but not analytically specific.** CCIC and `INFO-FLEX`
-   beat covariance-blind arms, but CCIC does not beat `INFO-FLEX`. Support
-   covariance-aware timing, not the analytic calibration mapping.
-4. **Scalar suffices.** `ESS-SCALAR` is equivalent to or better than CCIC on
-   the relevant gates and task loss. Delete learned low-rank fusion for the
-   homogeneous surface and retain the scalar clock for any next discriminator.
-5. **Flexible replication-safe set encoder suffices.** `RI-STRONG` matches or
-   beats CCIC under work matching. Structured covariance advantage is
-   unsupported; prefer the replication-safe set learner unless the
-   heterogeneous second surface is answer-changing.
-6. **Counting suffices.** `ORIGIN-COUNT` matches CCIC, or only the exact-copy
-   endpoint passes while intermediate correlation ordering fails. Retain
-   provenance quotienting and delete covariance calibration.
-7. **Oracle succeeds, estimator fails.** Oracle information changes optimal
-   timing and beats baselines, but learned CCIC fails calibration or activity.
-   The learned estimator fails; the analytic information-clock principle
-   remains unresolved.
-8. **Oracle fails.** The exact oracle does not separate expected task loss
-   across regimes. Stage 1 lacks the required information-timing tradeoff and
-   gives no learned-clock investment reason on this surface. Under the frozen
-   preactivity rule, stochastic work never starts.
-9. **Clock not causal.** `J-SHUFFLE` or `J-CLAMP` matches CCIC, or return
-   changes without calibrated `J`. Make no covariance-information causal
-   claim.
-10. **Exposure explanation.** Any gain disappears under the frozen packet,
-    support, capacity, inference, or work conditions. Attribute it to unmatched
-    exposure/work, not covariance.
-11. **Core falsification.** Literal duplicate multiplicity changes CCIC `q`,
-    `J`, action probabilities, or paired loss beyond the frozen equivalence
-    boundary, or independent equal-valued origins are collapsed. Reject this
-    revision's information-value invariance.
-12. **Activity failure or incomplete evidence.** The reward-independent gate
-    fails, or a required seed, arm, cell, tape, endpoint, or diagnostic is
-    absent or invalid. Draw no efficacy conclusion regardless of observed
-    return; route repair by semantic ownership without replacing postactivity
-    seed blocks or changing the treatment.
-13. **Held-out threshold not met.** A wide simultaneous interval makes that
-    axis unresolved. An interval that precisely excludes the `0.02` SESOI
-    supports no material effect at that threshold. Improvement only on
-    training cells is interpolation, never variable-`N` or variable-`k`
-    robustness.
-14. **Uniform advantage including `IND`.** If CCIC gains equally when evidence
-    is independent, investigate representation, optimization, or posterior
-    temperature instead of covariance specificity.
+1. **Both axes.** Every gate passes and primary advantage passes against all
+   three comparators on both axes: claim only tested-toy covariance-calibrated
+   timing over the named `N/k` values.
+2. **One axis.** The full rule passes on only held-out `N` or only held-out `k`:
+   claim only that axis.
+3. **Covariance family, not analytic specificity.** Calibration/mechanism pass
+   and CCIC beats RI/count, but the INFO-FLEX interval is equivalent or favors
+   INFO-FLEX: retain bounded covariance-aware timing and delete analytic-map
+   specificity. Any other INFO-FLEX relation is unresolved.
+4. **Scalar reduction.** CCIC-minus-ESS is equivalent or ESS is reverse
+   superior: delete low-rank fusion on this homogeneous surface. Merely failing
+   to beat ESS is unresolved.
+5. **Set-encoder reduction.** CCIC-minus-RI is equivalent or RI is reverse
+   superior and work passes: delete structured-fusion specificity. Mere
+   non-rejection is unresolved.
+6. **Count reduction.** CCIC-minus-count is equivalent or count is reverse
+   superior: retain lineage quotienting and delete covariance calibration on
+   that surface. Endpoint deduplication with failed `CORR` calibration supports
+   only binary deduplication, not count sufficiency.
+7. **Reference separates, estimator fails.** Both computed references satisfy
+   the prospective gap and show information-sensitive plans, but learned
+   calibration/activity fails: learned estimator fails; analytic clock remains
+   unresolved.
+8. **Reference fails.** Either computed reference fails stability/gap: no
+   stochastic work and no claim about the exact Bellman object's separation.
+9. **Clock not causal.** Shuffle or clamp fails its `+0.01` lower-bound rule, or
+   task return changes without calibrated `J`: no clock-causality claim.
+10. **Exposure alternative.** Packet/capacity/opportunity/work matching fails:
+    no primary interpretation; raw differences remain exposure-confounded.
+11. **Core falsification.** Literal-copy multiplicity changes `q/J/action/loss`
+    beyond frozen tolerances, or equal-valued independent origins collapse:
+    reject revision-04 information-value invariance.
+12. **Activity/incomplete evidence.** Activity gate fails or any required seed,
+    arm, cell, tape, endpoint, or diagnostic is missing/invalid: no efficacy
+    interpretation regardless of return.
+13. **Held-out threshold unresolved or excluded.** An interval overlapping
+    `-0.02` is unresolved; a lower bound above `-0.02` excludes a material CCIC
+    advantage at that threshold only. Training-cell gains are interpolation.
+14. **Uniform IND gain.** All three specificity intervals on a supported axis
+    are equivalent to zero: retain the primary task relation but delete
+    correlation-specific performance attribution and investigate
+    representation, optimization, or posterior temperature. Otherwise
+    uniformity is unresolved.
 
-## 4. Incomplete and non-evidentiary branches
+## 4. Strongest alternatives and deletion boundary
 
-- `PREPARED_NOT_SENT`, a provider transport failure, missing closure, CM
-  release withheld, or construction not begun says nothing about efficacy.
-- A Pro `REVISION_REQUIRED` disposition identifies a mathematical or causal
-  defect in revision 03. This EM must either accept and freeze a complete
-  successor or preserve revision 03 with the resulting claim boundary. No
-  activity or production proceeds on an unclosed successor.
-- Failure of a preactivity certificate item prevents scientific activity and
-  yields no learned-treatment result.
-- Failure of oracle refinement means the numeric teacher is not an accepted
-  approximation; failure of the deterministic oracle gap means the surface is
-  non-discriminating. Neither is empirical evidence that learned CCIC loses.
-- Activity followed by no question-relevant output, missing cells, or invalid
-  execution is incomplete evidence. An unchanged-science repair belongs to CM;
-  a science-bearing repair requires a new EM revision and cannot be selected
-  from observed outcomes.
-- Fewer than all 32 valid seed blocks yields no efficacy conclusion. Thirty-two
-  seeds are resource bounded and do not guarantee 80% power for a `0.02`
-  effect; a wide interval remains unresolved and is never converted into a
-  null finding.
-- Passing posterior score or calibration metrics without paired task-loss
-  support cannot establish task value.
-- Passing exact-copy invariance alone establishes at most binary lineage
-  quotienting. It cannot establish intermediate covariance calibration,
-  variable-axis robustness, transport redundancy, or task benefit.
+The strongest simple alternative is trustworthy lineage plus unique-origin
+count. The strongest flexible replication-safe alternative is RI-STRONG. The
+strongest alternative to the analytic map is the intentionally advantaged
+INFO-FLEX head. ESS-SCALAR is exact for the homogeneous Stage-1 equicorrelation
+family and is the decisive low-rank reduction test.
 
-## 5. Strongest alternatives and deletion map
+Delete low rank, covariance calibration, analytic specificity, or structured
+fusion only under its exact equivalence/reverse-superiority rule (or explicit
+calibration falsification where named). Delete an axis claim when that axis
+fails. Delete task value when only posterior metrics improve. Delete exact-copy
+claims without trustworthy lineage. Delete correlation-specific attribution
+when the specificity family is equivalent. Always delete general
+communication-value language. Every undefined or merely nonsignificant
+relation remains unresolved.
 
-The strongest simple alternative is that trustworthy lineage plus unique-origin
-count contains all useful structure in the homogeneous toy. The strongest
-flexible replication-safe alternative is `RI-STRONG`. The strongest explanation
-for an apparent benefit attributed specifically to the analytic HMM/GLS clock
-mapping is the intentionally advantaged `INFO-FLEX` arm.
+## 5. Finite maximum claim
 
-- Delete learned low-rank covariance if `ESS-SCALAR` matches it.
-- Delete covariance calibration if `ORIGIN-COUNT` matches it or `CORR` is not
-  correctly ordered.
-- Delete analytic-calibration specificity if `INFO-FLEX` matches it.
-- Delete structured-fusion specificity if `RI-STRONG` matches it.
-- Delete exact-copy claims if lineage is unavailable or the collision audit
-  fails.
-- Delete the `k` claim if only `N` passes, and vice versa.
-- Delete task-value claims if only posterior metrics improve.
-- Delete general communication-redundancy language in every branch; B1 is
-  conditional on matched receipt and transport.
+Even the strongest positive outcome supports only:
 
-## 6. Finite maximum claim
+> In the frozen cooperative ideal-Gaussian HMM toy, under trustworthy evidence
+> lineage, matched successful receipt and abstract packet accounting, and the tested
+> metadata-conditioned covariance family, one frozen decentralized shared
+> policy using a learned covariance-calibrated information clock caused lower
+> paired error-delay-sensing loss than the named matched alternatives on the
+> specific held-out `N` and/or `k` surfaces whose full rules passed, while
+> remaining equivalent under literal packet replication.
 
-Even the strongest positive outcome can support only:
+It does not support exact finite-bit likelihood, uniform numerical Bayes
+optimality, semantic duplicate detection, arbitrary covariance/correlation or
+bias robustness, arbitrary roster/churn/duration generalization, general MARL,
+mean-field or information-bottleneck claims, real-UAV benefit, or analytic-map
+specificity unless INFO-FLEX also satisfies the primary advantage rule.
 
-> In the frozen cooperative Gaussian HMM toy, under trustworthy evidence
-> lineage, matched successful receipt and communication, and the tested
-> conditional covariance family, one frozen decentralized shared policy using
-> a learned covariance-calibrated information clock caused lower paired
-> error-delay-sensing loss than the named matched alternatives on the specific
-> held-out `N` and/or `k` surfaces that passed, while remaining equivalent under
-> literal packet replication.
-
-It cannot establish universal Bayes optimality of the learned estimator,
-semantic duplicate detection, arbitrary covariance/correlation/bias
-robustness, arbitrary roster size, membership churn, arbitrary duration
-generalization, real-UAV benefit, general MARL coordination, a generic
-mean-field result, an information-bottleneck result, or analytic-calibration
-superiority unless `INFO-FLEX` is also beaten.
-
-## 7. Second-surface and UAV trigger
+## 6. Second-surface and UAV trigger
 
 No second-surface work is authorized. It becomes answer-changing only if B1
-shows that covariance-aware timing matters and the scalar and unique-count
-alternatives do not fully explain the effect. A result explained by
-`ESS-SCALAR`, `ORIGIN-COUNT`, work/exposure, or binary duplicate rejection does
-not activate this bridge.
+supports covariance-aware timing and neither ESS-SCALAR nor ORIGIN-COUNT fully
+explains it. A result explained by scalar ESS, count, generic RI, exposure, or
+binary deduplication does not activate the bridge.
 
-The sole proposed next surface is the frozen prospective heterogeneous
-relay-viewpoint switch: rank-two weather/illumination factors, sparse
-pose-overlap residuals, exact capture-lineage relay copies, a roster switch
-`3 -> 7` or `7 -> 3` at physical tick 15, externally imposed
-`k in {2,5,8}` with one held out, and receipt/reliability/topology manipulated
-separately from information value. Agents retain a shared local-statistic
-fusion and shared sense/relay/commit actor. The decisive contrast is clone-heavy
-entry versus genuinely new-viewpoint entry at the same roster size, followed by
-the within-episode switch.
+The sole proposed next surface remains the heterogeneous relay-viewpoint
+switch: rank-two weather/illumination factors, sparse pose-overlap residuals,
+exact capture-lineage relays, roster switch `3->7` or `7->3` at tick 15,
+externally imposed `k={2,5,8}` with one held out, and transport manipulated
+separately from information value. The decisive contrast is clone-heavy versus
+genuinely new-viewpoint entry at the same roster followed by an in-episode
+switch. This is a prospective landing-zone/target-confirmation analogy only;
+B1 cannot establish UAV transfer or performance.
 
-The UAV correspondence remains prospective only: origin ID maps to a camera
-capture, pose/time to overlap metadata, shared factors to weather,
-illumination, or preprocessing, relay storms to exact copies, new viewpoints to
-partially independent evidence, roster change to launch/recovery/link dropout,
-and `k` to externally imposed scan/loiter/tracking duration. The intended
-benefit is delayed confidence under relay/co-located evidence and earlier
-commitment under genuinely novel viewpoints. B1 cannot establish any UAV
-transfer or performance claim.
+## 7. Literature provenance and remaining uncertainty
 
-## 8. Literature provenance and assumption audit
+The local `docs/new-libs` corpus is inspiration and an assumption/claim audit,
+never outcome evidence. `B01`, `P08`, `P14`, and `P12` do not prove one frozen
+CCIC actor across held-out `N`; `B03` only motivates declared decentralized
+information; `P15` does not establish conditional novelty or duplicate
+rejection; `P17` does not establish variable skill period `k`. The corpus has
+no direct variable-`k` theorem and no replication-collision evidence.
 
-The local `docs/new-libs` corpus is provenance-labeled inspiration and an
-assumption/claim-boundary audit only. It supplies no outcome evidence for CCIC,
-no prior probability of success, and no permission to reinterpret a future
-result.
-
-- `B01` motivates identical parameter sharing for strongly homogeneous agents,
-  not held-out roster transfer or within-episode churn.
-- `P08` motivates mean-action summaries but does not establish one frozen
-  learned policy across unseen `N`.
-- `P14` supplies an assumption-bound `O(N^-1/2)` cooperative mean-field
-  approximation for interchangeable agents, not CCIC, duplicate rejection, or
-  learned held-out-`N` generalization.
-- `P12` motivates heterogeneous dense graphon interactions with label-indexed
-  policies; it does not provide this frozen decentralized shared-policy result.
-- `B03` motivates the decentralized information-structure boundary: execution
-  information must arrive through local history and declared communication.
-- `P15` studies marginal message entropy/information bottlenecks and uses
-  covariance, but does not estimate conditional novelty, lineage quotienting,
-  or exact-copy invariance.
-- `P17` uses an episode-persistent latent and does not constitute externally
-  variable skill period `k`.
-
-The corpus contains no direct variable-`k` theorem and no evidence for the
-replication-collision claim. This audit exposes no literature-driven need to
-change revision 03. Any later source that does expose a science-bearing defect
-must stop this route and return to the EM; it may not silently amend this map or
-the frozen card.
-
-## 9. Remaining uncertainty without a treatment ambiguity
-
-The empirical answers remain wholly unknown: the scalar/count/set alternatives
-may suffice; the learned estimator may fail while the oracle succeeds; the
-oracle surface may fail its deterministic discriminator; and 32 seeds may
-produce intervals too wide to resolve the SESOI. Trusted lineage,
-deterministic matched receipt, homogeneous equicorrelation, and the common-plan
-joint support are explicit scope assumptions rather than hidden ambiguities.
-
-No owner-detected literature or definition issue currently requires a
-science-bearing change to `CCIC-B1-SCIENCE-20260812-03`. Independent
-mathematical/causal closure remains genuinely unresolved until the exact Pro
-review is sent, naturally completed, and scientifically ingested by this EM.
+No literature issue requires another science-bearing change beyond revision
+04. Empirically, everything remains unknown: the computed reference may fail
+its discriminator; scalar/count/set alternatives may suffice; the estimator or
+actor may fail; or 32 seeds may leave the SESOI unresolved. Trusted lineage,
+ideal-real observations, deterministic matched receipt, homogeneous covariance,
+fixed membership, and common-plan support are explicit scope assumptions, not
+hidden claims. Mathematical closure remains unresolved until the exact v4
+same-conversation rereview returns `CLOSED` and this EM intakes it.

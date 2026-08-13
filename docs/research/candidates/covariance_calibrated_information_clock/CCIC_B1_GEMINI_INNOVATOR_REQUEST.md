@@ -2,13 +2,15 @@
 
 ```text
 direction=covariance_calibrated_information_clock
-revision=CCIC-B1-SCIENCE-20260812-03
+revision=CCIC-B1-SCIENCE-20260812-04
+supersedes_revision=CCIC-B1-SCIENCE-20260812-03
 provider=gemini_3_1_pro_extended
 request_kind=independent_divergent_scientific_innovation
 transport_state=PREPARED_NOT_SENT
 conversation_url=none
 prompt_sent=false
 response_received=false
+scientific_activity_started=false
 independent_of_chatgpt_pro=true
 ```
 
@@ -18,6 +20,7 @@ Use the GitHub repository on branch `aggressive` and only these
 repository-relative files:
 
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_SCIENCE_CARD.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_RESULT_BLIND_INTERPRETATION_ACTIVATION_MAP.md`
 - `docs/new-libs/README.md`
 - `docs/new-libs/LIBRARY_INDEX.md`
 
@@ -28,7 +31,7 @@ question and contains none of that provider's answer.
 
 ## Exact request
 
-Explore the frozen `CCIC-B1-SCIENCE-20260812-03` direction as a divergent
+Explore the frozen `CCIC-B1-SCIENCE-20260812-04` direction as a divergent
 scientific innovator. The core hypothesis is that a lineage-aware
 covariance-calibrated information clock can ignore literal retransmissions but
 benefit from genuinely new correlated or independent evidence while one
@@ -58,12 +61,14 @@ could change the direction after the frozen first discriminator. In particular:
 6. Return a delete/retain/add ledger and at most three high-information next
    discriminators, each with mutually exclusive outcome interpretations.
 
-Preserve these boundaries: a copied packet and an independently sampled equal
-value are different; clone invariance is conditional on matched successful
-receipt and transport; the analytic HMM/GLS object is only teacher/ceiling; the
-deployed agents must compute locally from matched communication; theory is not
-experiment evidence; and no proposal may claim real-UAV or arbitrary-`N/k`
-validation without direct tests.
+Preserve these boundaries: the scalar packet field is an ideal mathematical
+real with no finite-bit or quantization claim; a copied packet and an
+independently sampled equal value are different; clone invariance is
+conditional on matched successful receipt and transport; the analytic HMM/GLS
+object is theory-only and the separately named numerical reference is only a
+teacher/reference; deployed agents must compute locally from matched
+communication; theory is not experiment evidence; and no proposal may claim
+real-UAV or arbitrary-`N/k` validation without direct tests.
 
 Your response is divergent hypothesis input only. Do not issue mathematical
 closure, causal convergence, code/runtime acceptance, production authorization,
