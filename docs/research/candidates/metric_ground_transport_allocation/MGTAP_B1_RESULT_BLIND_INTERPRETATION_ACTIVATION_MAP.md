@@ -7,8 +7,8 @@ owner=EM_metric_ground_transport_allocation
 artifact_role=result-blind derivative reading map
 map_changes_treatment=false
 scientific_activity_started=false
-mathematical_closure=REVISION_04_PREPARED_SAME_CONVERSATION_RULING_REQUIRED
-cm_release=withheld
+mathematical_closure=CLOSED_EXACT_REVISION_04_OWNER_INTAKE_COMPLETE
+cm_release=construction_planning_only
 production_authorization=none
 ```
 
@@ -22,12 +22,13 @@ authority. No result or threshold from another direction enters a branch.
 
 ### 1. Closure and authority
 
-No registered stochastic object, implementation release, test, learned
-evaluation, or compute may begin until the existing dedicated same-direction
-ChatGPT External Pro conversation returns literal `CLOSED` for exact revision
-04, this EM accepts that ruling, the same-direction CM returns static technical
-acceptance, and Root separately sequences the next action. Gemini is independent
-innovation only and cannot close or authorize the object.
+The existing dedicated same-direction ChatGPT External Pro conversation
+returned literal `CLOSED` for exact revision 04, this EM accepted that ruling,
+and the same-direction CM accepted static constructibility. No registered
+stochastic object, source construction, test, learned evaluation, or compute
+may begin until Root separately authorizes the next action and supplies any
+required direction-scoped resource lease. Gemini is independent innovation only
+and cannot close or authorize the object.
 
 ### 2. Activity boundary
 

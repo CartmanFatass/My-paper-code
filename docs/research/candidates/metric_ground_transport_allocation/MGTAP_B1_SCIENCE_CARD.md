@@ -6,22 +6,22 @@ revision=MGTAP-B1-SCIENCE-20260813-04
 owner=EM_metric_ground_transport_allocation
 object=result-blind direct-variable-N finite-budget discriminator
 scientific_activity_started=false
-mathematical_closure=REVISION_04_PREPARED_SAME_CONVERSATION_RULING_REQUIRED
-cm_static_audit=revision_04_return_pending
-cm_release=withheld
+mathematical_closure=CLOSED_EXACT_REVISION_04_OWNER_INTAKE_COMPLETE
+cm_static_audit=revision_04_ACCEPTED
+cm_release=construction_planning_only
 construction_authorization=none
 compute_authorization=none
-chatgpt_external_pro=revision_03_REVISION_REQUIRED_conversation_saved
+chatgpt_external_pro=revision_04_CLOSED_same_conversation
 external_gemini=revision_02_PREPARED_NOT_SENT_ROOT_WITHHELD
 ```
 
 ## Conclusion first
 
 MGTAP is a meaning-complete and answer-changing direct variable-`N` candidate.
-Its unchanged treatment was statically accepted under revision 02; the exact
-owner-accepted revision-04 decision composite awaits mandatory
-same-conversation ChatGPT External Pro mathematical closure and then exact CM
-return. B1 asks whether a
+Exact revision 04 has literal same-conversation ChatGPT External Pro
+mathematical closure, owner intake, and same-direction CM static constructibility
+acceptance. It is released only for CM construction planning and Root's next
+authorization decision. B1 asks whether a
 useful finite-budget optimization and inductive bias for a capacity-feasible
 agent-to-task coupling policy trained once at `N={4,8}` and deployed unchanged
 at held-out `N={6,12}`.
@@ -1125,8 +1125,11 @@ to a result.
   cross-direction relay, Git, canonical integration, and user contact.
 
 The dedicated ChatGPT External Pro conversation returned `REVISION_REQUIRED`
-for revisions 02 and 03 and is saved for mandatory same-conversation review of
-this complete revision 04. The independent revision-02 External Gemini request
+for revisions 02 and 03, then literal `CLOSED` with no required correction for
+this exact complete revision 04. This EM accepts that ruling without changing
+the scientific object. The independent revision-02 External Gemini request
 remains mutually blind, `PREPARED_NOT_SENT`, and Root-withheld; it must not be
-released as a revision-04 request. No revision-04 ruling, construction release,
-or compute authority exists.
+released as a revision-04 request. The closed composite is released to the
+named CM for construction planning only. No source construction, test,
+stochastic-object materialization, optimizer, production, or compute authority
+follows.

@@ -7,9 +7,9 @@ owner=EM_metric_ground_transport_allocation
 named_counterpart=/root/cm_metric_ground_transport_allocation
 handoff_role=owner-authored same-direction science handoff
 scientific_activity_started=false
-mathematical_closure=REVISION_04_PREPARED_SAME_CONVERSATION_RULING_REQUIRED
-cm_static_audit=revision_04_return_pending
-construction_release=withheld
+mathematical_closure=CLOSED_EXACT_REVISION_04_OWNER_INTAKE_COMPLETE
+cm_static_audit=revision_04_ACCEPTED
+construction_release=planning_only
 tests_authorized=false
 compute_authorized=false
 ```
@@ -25,7 +25,9 @@ docs/research/candidates/metric_ground_transport_allocation/MGTAP_B1_SCIENCE_CAR
 The science card controls. This handoff does not change an arm, equation,
 sample, margin, interpretation, claim, or authority.
 
-MGTAP B1 is a constructible candidate in principle, not a released build. It
+MGTAP B1 is Pro-closed and statically constructible, but not a released build.
+This handoff releases only CM construction planning and an exact resource
+proposal for Root. It
 uses one-unit integral agent assignments, explicit idle and unmet slack, and a
 fixed-length autoregressive decoder. It therefore needs neither a global-Gibbs
 partition function nor a per-decision LP/MILP. The offline expanded-slot
@@ -77,10 +79,10 @@ fresh package implementing:
 No repository availability condition can change the science. A missing package,
 runner, adapter, dependency, or fixture is CM engineering work after release.
 
-## Required preactivity static return
+## Construction-planning requirements
 
-Before any future generated training episode, the named CM returns directly to
-this EM a static technical packet covering:
+The named CM's revision-04 static audit accepted the complete object. Its
+construction plan and exact resource proposal must preserve:
 
 - literal matrix construction and invertibility, feature rank, and exact
   treatment/comparator score transforms;
@@ -113,9 +115,12 @@ packets. EM then applies only the frozen result-blind map.
 
 ## Present authority
 
-This handoff currently authorizes revision-04 read-only static audit only. The
-dedicated ChatGPT Pro conversation returned `REVISION_REQUIRED` on revisions
-02 and 03 and is saved for exact same-conversation revision-04 closure; the revision-02
-Gemini batch remains mutually blind, `PREPARED_NOT_SENT`, Root-withheld, and is
-not releasable as a revision-04 request. There is no Pro closure, construction
-release, test authority, compute lease, production authority, or Git instruction.
+The dedicated ChatGPT Pro conversation returned `REVISION_REQUIRED` on
+revisions 02 and 03, then literal `CLOSED` with no required correction on exact
+revision 04. This EM accepts the closed ruling, and the named CM's bounded
+revision-04 static audit found no science-definition or constructibility gap.
+The revision-02 Gemini batch remains mutually blind, `PREPARED_NOT_SENT`,
+Root-withheld, and is not releasable as a revision-04 request. This handoff now
+authorizes construction planning and an exact resource proposal only. There is
+no source construction, test, stochastic-object materialization, optimizer,
+compute, production, or Git authority.
