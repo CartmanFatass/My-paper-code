@@ -2,21 +2,28 @@
 
 ```text
 direction=semantic_graphon_shared_policy
-revision=SGSP-B1-SCIENCE-20260813-01
+revision=SGSP-B1-SCIENCE-20260813-02
+supersedes_revision=SGSP-B1-SCIENCE-20260813-01
 owner=EM_semantic_graphon_shared_policy
 object=result-blind prospective direct-variable-N discriminator
 scientific_activity_started=false
-mathematical_closure=PREPARED_NOT_SENT_NEW_CONVERSATION_REQUIRED
+mathematical_closure=revision_02_PREPARED_NOT_SENT_SAME_CONVERSATION
 cm_release=withheld
 construction_authorization=none
 compute_authorization=none
-chatgpt_external_pro=PREPARED_NOT_SENT
-external_gemini=PREPARED_NOT_SENT
+chatgpt_external_pro=revision_01_REVISION_REQUIRED_revision_02_PREPARED_NOT_SENT
+external_gemini=RECOVERY_EXHAUSTED_NO_PROVIDER_TURN
 ```
 
 ## Conclusion first
 
-SGSP is a meaning-complete and decision-changing candidate. B1 asks whether a
+SGSP remains a meaning-complete and decision-changing candidate after accepting
+all seven exact prospective defects in the result-blind revision-01 ChatGPT Pro
+ruling. Revision 02 freezes the common initializer, complete Adam/batch update,
+full dense-reference actor-input audit, tape-conditioned endpoint envelope,
+`EDGE-PE`-versus-anonymous estimand, exhaustive branch precedence, and earliest
+stochastic-materialization activity boundary. No data or implementation fact
+informed these repairs. B1 asks whether a
 correct observable two-block semantic graphon is a useful finite-budget
 inductive bias for one shared policy deployed unchanged at roster sizes outside
 the training set. It is not admitted merely by beating an anonymous mean. Its
@@ -229,16 +236,36 @@ sign. The actor input is
 [normalized_population_summary(33), weighted_mass(1), receiver_role_onehot(2)]
 ```
 
-and the shared actor is `36 -> 32 -> 2` with `tanh` hidden activation. Parameters
-are initialized once per paired seed: common modules use identical initial
-tensors across arms, and the four edge residual parameters start at zero.
+and the shared actor is `36 -> 32 -> 2` with `tanh` hidden activation.
 
-Training uses float64, Adam with learning rate `4e-4`, no weight decay, global
-gradient norm clipping at `2`, and exactly `480` updates. Every update contains
-`64` independently generated worlds, exactly `16` from each
-`N_train x regime` cell. There is no validation selection, early stopping,
-hyperparameter search, checkpoint choice, or post-hoc seed replacement; update
-480 is the only evaluable checkpoint.
+For each registered seed `s` and each common weight matrix `L` in
+`{encoder_A, actor_hidden_weight, actor_head_weight}`, initialize
+
+\[
+\theta[L,r,c]=
+\sqrt{\frac{6}{fan\_in(L)+fan\_out(L)}}
+\left(2U(s,\text{initialization},L,r,c)-1\right),
+\]
+
+where every `U` is uniform on `[0,1)` under a counter namespace disjoint from
+all world, action, permutation, and evaluation tapes. Set encoder bias, actor
+hidden bias, actor head bias, and every role-pair `gamma` exactly to binary64
+zero. Copy all common tensors bitwise into `SGSP-W`, `EDGE-PE`, and
+`ANON-MEAN` before update 1. No framework or library initializer is legal.
+
+Training uses float64 and exactly `480` updates. Every update contains `64`
+independently generated worlds, exactly `16` from each `N_train x regime`
+cell. Compute the arithmetic mean of the displayed per-world loss over all 64
+worlds, so each of the four cells has weight exactly `1/4`. Accumulate that mean
+in float64 in lexicographic order `(N, regime, within-cell episode index)`,
+differentiate once, and clip the single concatenated gradient vector over all
+trainable parameters to Euclidean norm `2` before updating optimizer moments.
+Apply Adam with learning rate `4e-4`, `beta1=0.9`, `beta2=0.999`,
+`epsilon=1e-8`, bias correction enabled, `amsgrad=false`, and
+`weight_decay=0`. There is no validation selection, early stopping,
+hyperparameter search, checkpoint choice, or post-hoc seed replacement. The
+only evaluable checkpoint is the parameter state immediately after optimizer
+update 480.
 
 The common team-reward policy-gradient loss uses the exact one-step
 counterfactual baseline. For sampled joint action `a`,
@@ -352,16 +379,36 @@ of that role. This is `O(2N)` arithmetic and `O(N)` input storage. A dense
 the implicit result; it is forbidden from the learned forward path, backward
 path, evaluator, allocator, or exported checkpoint.
 
-The finite-reference error is
+For arm `A in {SGSP-W,EDGE-PE}`, define the complete arm-specific dense
+reference
 
 \[
-E_{finite}=\max_{i,d}|M^{implicit}_{i,d}-M^{dense}_{i,d}|.
+D_i^{A,dense}=\frac1N\sum_j\omega^A_{b_i b_j},\qquad
+M_i^{A,dense}=\frac1N\sum_j\omega^A_{b_i b_j}q_j,
 \]
 
-The preactivity fixture and every evaluated seed must have
-`E_finite <= 1e-10` in float64. B1 has `E_graph=||W_runtime-W_frozen||_max=0`
-by construction. These two quantities are reported separately; neither is
-interpreted using a P22 rate.
+\[
+Z_i^{A,dense}=M_i^{A,dense}/(D_i^{A,dense}+10^{-12}).
+\]
+
+Let `D_i^{A,implicit}`, `M_i^{A,implicit}`, and `Z_i^{A,implicit}` be the
+corresponding block-sufficient-statistic outputs, and define
+
+\[
+E_{finite}=\max_{A,i}\max\left(
+|D_i^{A,implicit}-D_i^{A,dense}|,
+\|M_i^{A,implicit}-M_i^{A,dense}\|_\infty,
+\|Z_i^{A,implicit}-Z_i^{A,dense}\|_\infty
+\right).
+\]
+
+The preactivity deterministic fixture and every evaluated seed must have
+`E_finite <= 1e-10` in float64. The scalar physical target
+`m_i^{dense}` remains a separate simulator object and is never substituted for
+`M_i^{A,dense}`. B1 has
+`E_graph=||W_runtime-W_frozen||_max=0` by construction. Finite computation
+error and graph mismatch are reported separately; neither is interpreted using
+a P22 rate.
 
 ### 4.2 Identity-permutation replay
 
@@ -485,7 +532,8 @@ For each cell, define paired seed contrasts
 
 \[
 d^{GE}_s=\mu^{SGSP}_s-\mu^{EDGE}_s,\qquad
-d^{GM}_s=\mu^{SGSP}_s-\mu^{ANON}_s.
+d^{GM}_s=\mu^{SGSP}_s-\mu^{ANON}_s,\qquad
+d^{EM}_s=\mu^{EDGE}_s-\mu^{ANON}_s.
 \]
 
 For each contrast family, form ordinary equal-seed Student-`t` confidence
@@ -515,18 +563,49 @@ Relation labels are:
 - `UNRESOLVED`: every other configuration.
 
 `SGSP_BEATS_ANON` analogously requires all four `GM` lower endpoints above
-`+0.025`. Relation labels do not override hard validity or causal gates.
+`+0.025`. `EDGE_BEATS_ANON` requires all four `EM` lower endpoints above
+`+0.025` under the same four-cell two-sided 95% Bonferroni Student-`t` law.
+Failure to obtain either anonymous label is nonidentification, not evidence of
+equivalence to `ANON-MEAN`. Relation labels do not override hard validity or
+causal gates.
 
 ### 7.1 Two-sided endpoint availability
 
-For every held-out cell, report the equal-seed mean `EDGE-PE` return and oracle
-return `1`. The material positive side is available only when the comparator
-mean is at most `0.975`; the material reverse side is available only when it is
-at least `0.025`. Both must hold in every held-out cell for the primary
-all-cell relation to be treated as two-sided and identifying. Training support
-also contains the exact anonymous collision pair and the zero-initialized
-common policy has both legal actions with positive probability; these are
-preactivity reachability checks, not substitutes for post-training headroom.
+Encode `SERVE_POS` as action `1` and select it iff the registered
+`u_{s,e,i} < pi(SERVE_POS)`, where `u` is the paired uniform `[0,1)` action
+tape. For each seed and held-out cell with `E=256` worlds, define the exact
+arm-independent sampled-return support envelope
+
+\[
+U_s(N,g)=\frac1{EN}\sum_{e,i}\left[
+y_{e,i}\mathbf1\{u_{s,e,i}<0.98\}
++(1-y_{e,i})\mathbf1\{u_{s,e,i}\ge0.02\}\right],
+\]
+
+\[
+L_s(N,g)=\frac1{EN}\sum_{e,i}\left[
+y_{e,i}\mathbf1\{u_{s,e,i}<0.02\}
++(1-y_{e,i})\mathbf1\{u_{s,e,i}\ge0.98\}\right].
+\]
+
+Let `bar_U`, `bar_L`, and `bar_mu_EDGE` be equal-seed means over all 16
+registered seeds. The material SGSP-positive side is available only if
+
+\[
+\bar U(N,g)-\bar\mu_{EDGE}(N,g)>\delta_R,
+\]
+
+and the material EDGE-positive reverse side is available only if
+
+\[
+\bar\mu_{EDGE}(N,g)-\bar L(N,g)>\delta_R.
+\]
+
+Both strict inequalities must hold in every held-out cell for the primary
+all-cell relation to be two-sided and identifying. Oracle return `1` is
+reported descriptively but is not the admissible policy-family envelope. The
+exact anonymous collision pair remains a deterministic support certificate,
+not a substitute for this tape-conditioned headroom audit.
 
 If either side is unavailable, the corresponding saturated cell is reported
 without converting absence of a material difference into equivalence or family
@@ -599,18 +678,20 @@ linear.
 
 ## 10. Scientific-activity boundary and preactivity certificate
 
-Scientific activity begins at the earliest of:
+Scientific activity begins at the earliest materialization, generation,
+inspection, summarization, or use of any registered stochastic object. This
+includes a common initialization draw, latent orientation, Gaussian
+training/evaluation world, action uniform, identity permutation, or
+seed-addressed stochastic policy output.
 
-1. the first optimizer update using any generated training world or reward;
-2. the first learned checkpoint evaluation on any generated stochastic world;
-3. the first result-bearing endpoint, reassociation, or action-TV computation.
-
-Provider review, source inspection, schema construction, hand-written
-collision arithmetic, symbolic nesting, static leakage review, exact operation
-formulas, resource projections, and deterministic shape tests without a
-generated stochastic world remain preactivity. Once activity begins, no arm,
-coordinate, kernel, width, schedule, seed, threshold, endpoint, counter map, or
-branch may change in response to values.
+Provider review, source inspection, hand-written collision worlds, symbolic
+nesting calculations, static schemas/leakage review, exact operation formulas,
+resource projections, and deterministic arithmetic fixtures or valid tuples
+containing no registered stochastic draw remain preactivity. Every arm,
+coordinate, kernel, optimizer law, initializer, seed, threshold, endpoint,
+support/headroom rule, counter map, and result branch must be frozen before the
+first registered stochastic object is materialized. Once activity begins, none
+may change in response to values.
 
 Before activity, a CM-owned certificate must establish:
 
@@ -637,40 +718,55 @@ complete Pro closure cycle.
 
 ## 11. Result-blind interpretation, deletion, and revisit rules
 
-Apply these rules only after all 16 atomic seed packets and hard conditions are
-valid.
+Read every result in this literal precedence order:
 
-1. **Promote the fixed semantic-graphon family.** Require two-sided endpoint
-   availability, `SGSP_MATERIALLY_BETTER`, `SGSP_BEATS_ANON`, and all three
-   semantic mechanism bounds. The maximum reading is a finite-budget benefit
-   of a correct two-block graphon anchor over a wider matched edge family on
-   this toy's held-out roster sizes.
-2. **Graphon-specific family deletion.** If SGSP beats anonymous mean but
-   `EDGE_MATERIALLY_BETTER` or `PRACTICALLY_EQUIVALENT` holds with two-sided
-   availability, delete the fixed-graphon-specific family. The result says
-   structured edge information matters at most; it does not favor the graphon
-   anchor. A generic edge/set family may be reconsidered by Root without
-   inheriting SGSP evidence.
-3. **Comparator preference without anonymous separation.** If `EDGE-PE` is
-   materially better and neither structured arm beats `ANON-MEAN`, delete SGSP
-   and do not claim topology value.
-4. **Action-insensitive graphon.** If summaries change under reassociation but
-   return or TV does not, the graphon port is not causally active. Do not
-   promote on endpoint differences; revisit only with a prospective task in
-   which semantic reassociation can change a legal useful action.
-5. **Advantage without attenuation.** If primary superiority holds but the
-   attenuation bound fails, report a policy-class/regularization advantage
-   without semantic-graphon attribution. Do not activate a UAV graphon claim.
-6. **Interaction.** `REGIME_OR_SIZE_INTERACTION` selects a prospective
-   discriminator targeted to the named regime/size only if the pattern and
-   support are valid; it is not averaged into a positive result.
-7. **Unresolved.** `UNRESOLVED`, saturation, missing common support, or missing
-   seed evidence yields no efficacy conclusion. Do not weaken thresholds,
-   replace seeds, or automatically add compute. Revisit only if a prospective
-   design supplies two-sided headroom or a distinct decision-changing cell.
-8. **Technical invalidity/no data.** Permutation, leakage, dense-deployment,
-   lifecycle, or artifact failures return to CM for unchanged-science repair if
-   possible. They are not negative SGSP evidence.
+1. hard structural validity and complete atomic evidence;
+2. two-sided endpoint availability;
+3. the mutually exclusive primary `GE` relation;
+4. the registered `SGSP_BEATS_ANON` and `EDGE_BEATS_ANON` labels;
+5. the semantic return, TV, and attenuation gates; and
+6. the catch-all `BOUNDED_NONIDENTIFICATION` rule.
+
+The resulting branches are:
+
+1. **Promote the fixed semantic-graphon family.** Require valid complete
+   evidence, two-sided endpoint availability, `SGSP_MATERIALLY_BETTER`,
+   `SGSP_BEATS_ANON`, and all three semantic mechanism bounds. The maximum
+   reading is a finite-budget benefit of a correct two-block graphon anchor
+   over the frozen wider matched edge family on this toy's held-out sizes.
+2. **Graphon-specific family deletion after an anonymous diagnostic.** If
+   `SGSP_BEATS_ANON` but `EDGE_MATERIALLY_BETTER` or
+   `PRACTICALLY_EQUIVALENT` holds with two-sided availability, delete the
+   fixed-graphon-specific family. Beating `ANON-MEAN` alone supports only the
+   registered anonymous-compression collision/non-sufficiency diagnostic; it
+   is not a resource-matched causal topology claim. A generic edge/set family
+   may be reconsidered without inheriting an SGSP margin or causal result.
+3. **Bounded generic-edge evidence.** If `EDGE_MATERIALLY_BETTER` and
+   `EDGE_BEATS_ANON` holds while `SGSP_BEATS_ANON` does not, delete `SGSP-W`
+   and record only bounded evidence for this frozen generic role-pair edge
+   family. Do not promote a graphon anchor or general topology family.
+4. **Action-insensitive or nonattenuating advantage.** If reassociation changes
+   an internal summary but the return or TV gate fails, no semantic graphon
+   mechanism is identified. If SGSP superiority holds but only attenuation
+   fails, the maximum reading is a policy-class/regularization advantage
+   without semantic-graphon attribution. Neither case activates the UAV bridge.
+5. **Interaction.** `REGIME_OR_SIZE_INTERACTION` may select one prospective
+   discriminator targeted to the named regime/size when support is valid. It
+   is never averaged into a positive result.
+6. **Technical invalidity or incomplete evidence.** Permutation, leakage,
+   dense-deployment, lifecycle, or artifact failures return to CM for
+   unchanged-science repair when possible. Missing question-relevant data and
+   invalid packets are not negative treatment evidence.
+7. **Failed endpoint availability.** Saturation is reported without equivalence,
+   family deletion, or efficacy interpretation. Revisit only with a prospective
+   cell that restores a two-sided material range.
+8. **Catch-all bounded nonidentification.** Every otherwise-unlisted complete,
+   structurally valid configuration—including `SGSP_MATERIALLY_BETTER` with
+   failed anonymous or mechanism requirements, `PRACTICALLY_EQUIVALENT`
+   without the registered anonymous condition, and primary `UNRESOLVED`—is
+   `BOUNDED_NONIDENTIFICATION`. It authorizes no efficacy promotion, no
+   topology-value statement, no threshold change, no seed addition, and no
+   automatic rerun.
 
 ## 12. Second surface and UAV bridge
 
@@ -709,14 +805,18 @@ At maximum, B1 can say:
 
 > In the frozen balanced two-role dense contextual toy, with the correct
 > observable semantic block coordinate and one policy shared across training
-> `N={8,12}` and held-out `N={6,16}`, a bounded graphon-anchored edge summary
-> produced a material, action-sensitive finite-budget return advantage over a
-> strictly wider information/capacity/work-matched permutation-equivariant
-> edge kernel.
+> `N={8,12}` and held-out `N={6,16}`, a positive role-pair kernel tightly
+> constrained around the correct observable two-block graphon produced a
+> material, action-sensitive finite-budget return advantage over the frozen
+> wider information/capacity/useful-work-matched permutation-equivariant edge
+> kernel.
 
-It cannot say the treatment is uniquely expressive, asymptotically optimal,
-an approximate Nash equilibrium, robust to arbitrary roster size, robust to
-in-episode churn, robust to graph mismatch, able to learn semantic coordinates
-or graphons, superior on sparse/heterogeneous graphs, valid for arbitrary role
-count, or beneficial in UAV simulation/deployment. P12/P22 rates, previous
-direction outcomes, and the proposed bridge never upgrade this ceiling.
+It cannot say the treatment is uniquely expressive or prove that graphon
+correctness, rather than generic shrinkage or optimization conditioning, caused
+the advantage; there is no equal-width wrong-anchor/alternative-center control.
+It also cannot claim asymptotic optimality, an approximate Nash equilibrium,
+arbitrary roster size, in-episode churn, graph-mismatch robustness, learned
+semantic coordinates or graphons, sparse/heterogeneous graph superiority,
+arbitrary role count, or UAV simulation/deployment benefit. P12/P22 rates,
+previous direction outcomes, and the proposed bridge never upgrade this
+ceiling.

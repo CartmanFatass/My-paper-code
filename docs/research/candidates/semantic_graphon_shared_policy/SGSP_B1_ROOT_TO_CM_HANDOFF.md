@@ -2,11 +2,12 @@
 
 ```text
 direction=semantic_graphon_shared_policy
-revision=SGSP-B1-SCIENCE-20260813-01
+revision=SGSP-B1-SCIENCE-20260813-02
+supersedes_revision=SGSP-B1-SCIENCE-20260813-01
 author=EM_semantic_graphon_shared_policy
 handoff_state=OWNER_PREPARED_CM_RELEASE_WITHHELD
 scientific_activity_started=false
-mathematical_closure=PREPARED_NOT_SENT_NEW_CONVERSATION_REQUIRED
+mathematical_closure=revision_02_PREPARED_NOT_SENT_SAME_CONVERSATION
 construction_authorized=false
 tests_authorized=false
 compute_authorized=false
@@ -17,8 +18,9 @@ production_authorized=false
 
 The exact prospective scientific source of truth is
 `docs/research/candidates/semantic_graphon_shared_policy/SGSP_B1_SCIENCE_CARD.md`.
-It defines a decision-changing direct-variable-`N` discriminator. This file is
-a handoff prepared for a future Root release, not a dispatch. CM may inspect it
+It defines a decision-changing direct-variable-`N` discriminator and accepts
+all seven prospective defects from the result-blind revision-01 Pro ruling.
+This file is a handoff prepared for a future Root release, not a dispatch. CM may inspect it
 for feasibility or ambiguity but must not construct, test, train, evaluate, or
 launch until the exact composite receives dedicated ChatGPT External Pro
 `CLOSED`, this EM records an intake, and Root separately sequences the work and
@@ -82,12 +84,26 @@ comparator nor the identity-permutation replay.
 13. The opaque handle, row position, latent orientation, target, reward,
     evaluation moments, future values, and held-out size never enter deployed
     policy inputs.
-14. The 16 seeds, 256 worlds per evaluation cell, counter namespaces, atomic
+14. Common matrices use the registered counter-addressed Glorot-uniform law;
+    all biases and role-pair residuals start at binary64 zero. Adam moments,
+    epsilon, bias correction, batch/cell weighting, accumulation order,
+    global-gradient clipping order, and update-480 checkpoint are literal.
+15. Dense equality covers arm-specific weighted mass `D`, message numerator
+    `M`, and normalized actor input `Z`; the physical scalar target is separate.
+16. Endpoint availability uses the exact action-tape-conditioned lower/upper
+    sampled-return envelope, never unconstrained oracle `[0,1]` headroom.
+17. Both `SGSP_BEATS_ANON` and `EDGE_BEATS_ANON` use registered paired
+    four-cell intervals. Every unlisted valid configuration maps to
+    `BOUNDED_NONIDENTIFICATION` under the literal branch precedence.
+18. The 16 seeds, 256 worlds per evaluation cell, counter namespaces, atomic
     lifecycle, interval family, `delta_R`, causal thresholds, headroom law, and
     result branches are science-bearing and immutable after activity.
-15. A missing seed is not replaced. Worlds and agents are not inferential
+19. Activity begins on the earliest materialization or inspection of any
+    registered stochastic initializer, world, action tape, permutation, or
+    stochastic policy output—not only at the first optimizer update.
+20. A missing seed is not replaced. Worlds and agents are not inferential
     replicates.
-16. Finite block-reference error and graph mismatch are separate observables;
+21. Finite block-reference error and graph mismatch are separate observables;
     P12/P22 theorems supply no learned-policy rate or guarantee.
 
 ## Required preactivity return after a future release

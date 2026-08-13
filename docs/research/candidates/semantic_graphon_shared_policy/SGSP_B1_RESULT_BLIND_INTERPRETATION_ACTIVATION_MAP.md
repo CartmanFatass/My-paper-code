@@ -2,12 +2,13 @@
 
 ```text
 direction=semantic_graphon_shared_policy
-treatment_revision=SGSP-B1-SCIENCE-20260813-01
+treatment_revision=SGSP-B1-SCIENCE-20260813-02
+supersedes_map_for=SGSP-B1-SCIENCE-20260813-01
 owner=EM_semantic_graphon_shared_policy
 artifact_role=result-blind derivative reading map
 map_changes_treatment=false
 scientific_activity_started=false
-mathematical_closure=PREPARED_NOT_SENT_NEW_CONVERSATION_REQUIRED
+mathematical_closure=revision_02_PREPARED_NOT_SENT_SAME_CONVERSATION
 cm_release=withheld
 production_authorization=none
 ```
@@ -23,21 +24,24 @@ margin enters a branch.
 
 ### 1. Closure and authority
 
-No science-bearing work may begin until a new dedicated same-direction ChatGPT
-External Pro conversation returns literal `CLOSED` for exact revision
-`SGSP-B1-SCIENCE-20260813-01`, this EM accepts that ruling, and Root separately
-releases CM. The blind Gemini question may suggest a successor but cannot
-close, accept, authorize, rank, or interpret B1.
+Revision 01 received result-blind same-direction Pro `REVISION_REQUIRED` with
+seven defects, all prospectively accepted in revision 02. No science-bearing
+work may begin until the existing dedicated conversation returns literal
+`CLOSED` for exact revision `SGSP-B1-SCIENCE-20260813-02`, this EM accepts the
+ruling, and Root separately releases CM. The blind Gemini question may suggest
+a successor but cannot close, accept, authorize, rank, or interpret B1.
 
 ### 2. Activity boundary
 
-Provider preparation/review, source inspection, symbolic block arithmetic,
-hand-written collision/nesting fixtures, schema-only tests, static leakage
-review, and prospective resource/work formulas are preactivity. The earliest
-optimizer update using a generated world, learned checkpoint evaluation on a
-generated stochastic world, or result-bearing endpoint/reassociation/TV
-calculation starts activity. No result-responsive revision is legal after that
-point.
+Activity begins at the earliest materialization, generation, inspection,
+summarization, or use of any registered stochastic object, including a common
+initializer draw, latent orientation, Gaussian world, action uniform, identity
+permutation, or seed-addressed stochastic policy output. Provider review,
+source inspection, symbolic block arithmetic, hand-written collision/nesting
+fixtures, static schemas/leakage review, and deterministic arithmetic fixtures
+with no registered draw remain preactivity. The complete initializer,
+optimizer, support/headroom, branch, and causal object must be frozen before
+that boundary; no result-responsive revision is legal afterward.
 
 ### 3. Complete atomic evidence
 
@@ -54,8 +58,9 @@ Every seed/cell must have:
 - finite logits/probabilities and both legal actions at probability `>=0.02`;
 - identity-permuted logits within `1e-10`, identical inverse-permuted actions,
   and identical return;
-- implicit/dense summary error `<=1e-10` and runtime kernel mismatch exactly
-  zero;
+- arm-specific implicit/dense `D`, `M`, and normalized `Z` maximum error
+  `<=1e-10`, with physical target kept separate, and runtime kernel mismatch
+  exactly zero;
 - no opaque identity, row order, latent, target, reward, future, evaluation,
   or held-out statistic in deployed inputs;
 - one checkpoint across every `N` for each arm;
@@ -69,10 +74,13 @@ negative treatment evidence. Dummy padding cannot repair a useful-work failure.
 
 ### 5. Endpoint availability
 
-Every held-out cell must leave both a `0.025` material positive and reverse
-range around the `EDGE-PE` mean: `0.025 <= mean(EDGE) <= 0.975`. Otherwise the
-cell is saturated on a required side. Do not call a saturated contrast
-equivalent or use it for graphon-family deletion.
+For each held-out cell, use the exact registered action-uniform tape to compute
+the minimum and maximum sampled return attainable under
+`pi(SERVE_POS) in [0.02,0.98]`. The equal-seed upper envelope minus mean
+`EDGE-PE` return and mean `EDGE-PE` minus the lower envelope must each be
+strictly greater than `0.025`. Oracle return `1` is descriptive only. Otherwise
+the cell is saturated on a required side; do not call it equivalent or use it
+for graphon-family deletion.
 
 ### 6. Registered statistical objects
 
@@ -88,8 +96,10 @@ REGIME_OR_SIZE_INTERACTION
 UNRESOLVED
 ```
 
-`SGSP_BEATS_ANON` is a separate diagnostic label. It cannot override the
-primary edge comparison.
+`SGSP_BEATS_ANON` and `EDGE_BEATS_ANON` are separate four-cell labels using the
+same paired two-sided 95% Bonferroni Student-`t` law and `0.025` margin. Neither
+can override the primary edge comparison, and failure of a label is
+nonidentification rather than anonymous equivalence.
 
 ### 7. Semantic causal activity
 
@@ -108,6 +118,11 @@ semantic-graphon attribution.
 
 ## Result branches
 
+Read in literal precedence: (1) hard validity/complete evidence, (2) endpoint
+availability, (3) mutually exclusive primary `GE` relation, (4) both anonymous
+labels, (5) semantic return/TV/attenuation gates, and (6) the catch-all
+`BOUNDED_NONIDENTIFICATION` rule.
+
 ### A. Fixed graphon anchor merits a second surface
 
 Require all hard validity, two-sided availability, complete evidence,
@@ -117,19 +132,22 @@ card. Activate only the registered 2-D two-zone surveillance/relay surface,
 which must repeat the strong comparator, identity permutation,
 coordinate-reassociation, work match, and finite-versus-kernel-mismatch audit.
 
-### B. Structured information matters, fixed graphon does not
+### B. Anonymous diagnostic, fixed graphon does not win
 
 If `SGSP_BEATS_ANON` but the primary label is
 `PRACTICALLY_EQUIVALENT` or `EDGE_MATERIALLY_BETTER` under full two-sided
 availability, delete the fixed-graphon-specific family. At most retain a
-generic edge/set candidate as a new direction-scoped question. Do not transfer
-SGSP margins or causal evidence into it.
+generic edge/set candidate as a new direction-scoped question. Beating the
+smaller anonymous control alone supports only the registered compression
+collision/non-sufficiency diagnostic, not a resource-matched topology claim.
+Do not transfer SGSP margins or causal evidence into another family.
 
-### C. Neither structured arm beats anonymous mean
+### C. Bounded generic-edge evidence
 
-If the edge comparator is materially better than SGSP but neither structured
-arm has a material anonymous advantage, delete SGSP and make no topology-value
-claim. The stronger architecture may simply be unnecessary on this toy.
+If `EDGE_MATERIALLY_BETTER` and `EDGE_BEATS_ANON` holds while
+`SGSP_BEATS_ANON` does not, delete SGSP and record only bounded evidence for the
+frozen generic role-pair edge family. Do not promote a graphon anchor or a
+general topology mechanism.
 
 ### D. Mechanism failure
 
@@ -145,12 +163,16 @@ Do not average opposite cell effects. A valid
 identified cell boundary if that answer would change allocation. It is not a
 positive direct-variable-`N` result.
 
-### F. Unresolved, saturated, or incomplete
+### F. Invalid, saturated, incomplete, or bounded nonidentification
 
-Do not weaken a threshold, add seeds, replace a seed, select checkpoints, or
-automatically rerun. Revisit only for a prospectively specified cell with
-restored common support/two-sided headroom or a distinct causal cut. A no-data
-or incomplete packet is returned to CM without scientific interpretation.
+Technical invalidity or incomplete/no-data evidence returns to CM without a
+treatment conclusion. Saturation yields no equivalence or deletion. Every
+otherwise-unlisted complete valid configuration—including SGSP superiority
+without anonymous/mechanism qualification, practical equivalence without the
+registered anonymous condition, and primary `UNRESOLVED`—is
+`BOUNDED_NONIDENTIFICATION`. Do not weaken a threshold, add or replace seeds,
+select checkpoints, or automatically rerun. Revisit only for a prospective
+cell with restored support/headroom or a distinct action-sensitive cut.
 
 ## Ceiling and UAV activation boundary
 
