@@ -2,13 +2,13 @@
 
 ```text
 direction=metric_ground_transport_allocation
-revision=MGTAP-B1-SCIENCE-20260813-02
+revision=MGTAP-B1-SCIENCE-20260813-03
 owner=EM_metric_ground_transport_allocation
 named_counterpart=/root/cm_metric_ground_transport_allocation
 handoff_role=owner-authored same-direction science handoff
 scientific_activity_started=false
-mathematical_closure=PREPARED_NOT_SENT_NEW_CONVERSATION_REQUIRED
-cm_static_audit=accepted_exact_revision_02_no_remaining_definition_ambiguity
+mathematical_closure=REVISION_03_PREPARED_SAME_CONVERSATION_RULING_REQUIRED
+cm_static_audit=revision_03_return_pending
 construction_release=withheld
 tests_authorized=false
 compute_authorized=false
@@ -113,8 +113,9 @@ packets. EM then applies only the frozen result-blind map.
 
 ## Present authority
 
-This handoff currently authorizes read-only static audit only. The dedicated
-ChatGPT Pro and Gemini requesters are mutually blind and
-`PREPARED_NOT_SENT`. There is no conversation URL, provider turn, Pro closure,
-construction release, test authority, compute lease, production authority, or
-Git instruction.
+This handoff currently authorizes revision-03 read-only static audit only. The
+dedicated ChatGPT Pro conversation returned `REVISION_REQUIRED` on revision 02
+and is saved for exact same-conversation revision-03 closure; the revision-02
+Gemini batch remains mutually blind, `PREPARED_NOT_SENT`, Root-withheld, and is
+not releasable as a revision-03 request. There is no Pro closure, construction
+release, test authority, compute lease, production authority, or Git instruction.

@@ -2,24 +2,26 @@
 
 ```text
 direction=metric_ground_transport_allocation
-revision=MGTAP-B1-SCIENCE-20260813-02
+revision=MGTAP-B1-SCIENCE-20260813-03
 owner=EM_metric_ground_transport_allocation
 object=result-blind direct-variable-N finite-budget discriminator
 scientific_activity_started=false
-mathematical_closure=PREPARED_NOT_SENT_NEW_CONVERSATION_REQUIRED
-cm_static_audit=accepted_exact_revision_02_no_remaining_definition_ambiguity
+mathematical_closure=REVISION_03_PREPARED_SAME_CONVERSATION_RULING_REQUIRED
+cm_static_audit=revision_03_return_pending
 cm_release=withheld
 construction_authorization=none
 compute_authorization=none
-chatgpt_external_pro=PREPARED_NOT_SENT
-external_gemini=PREPARED_NOT_SENT
+chatgpt_external_pro=revision_02_REVISION_REQUIRED_conversation_saved
+external_gemini=revision_02_PREPARED_NOT_SENT_ROOT_WITHHELD
 ```
 
 ## Conclusion first
 
-MGTAP is a meaning-complete, statically constructible, and answer-changing
-direct variable-`N` candidate subject to mandatory ChatGPT External Pro
-mathematical closure. B1 asks whether a correct observable ground metric is a
+MGTAP is a meaning-complete and answer-changing direct variable-`N` candidate.
+Its unchanged treatment was statically accepted under revision 02; the exact
+owner-accepted revision-03 inference/activity composite awaits mandatory
+same-conversation ChatGPT External Pro mathematical closure and then exact CM
+return. B1 asks whether a
 useful finite-budget optimization and inductive bias for a capacity-feasible
 agent-to-task coupling policy trained once at `N={4,8}` and deployed unchanged
 at held-out `N={6,12}`.
@@ -859,7 +861,7 @@ coordinates, paired `FREE` intact/cut checkpoints and outputs must be exactly
 equal under the same seed/tape. A difference is technical leakage and
 invalidates specificity inference.
 
-### 7.3 Inferential unit and simultaneous intervals
+### 7.3 Inferential unit, stochastic independence, and simultaneous intervals
 
 The 16 paired training-seed blocks are the only replicates. Agents, decoder
 steps, episodes, and evaluation tapes are not independent replicates. Form
@@ -874,8 +876,20 @@ Gamma_B(6), Gamma_B(12),
 Gamma_J(6), Gamma_J(12).
 ```
 
-Use simultaneous two-sided family coverage 95% by Bonferroni: every interval
-uses quantile `t_(15,1-0.05/(2*12))`. An exact point interval is permitted only
+Every distinct stochastic address is an independent draw from its declared
+law, except that the same addressed object is deliberately reused for registered
+common-random-number pairing across arms, bindings, configurations, and
+permutation replay. Priority permutations are uniform over `N!`; action
+uniforms are independent `Uniform[0,1)` variates; registered nonidentity row and
+task-presentation permutations are uniform over their respective nonidentity
+supports. The sixteen final seed blocks are mutually independent draws from the
+registered training-randomness law.
+
+Use nominal simultaneous two-sided family coverage 95% by Bonferroni: every
+interval uses quantile `t_(15,1-0.05/(2*12))`. The coverage interpretation
+assumes independent seed blocks and the usual approximate Student-`t`
+seed-contrast model; it is not distribution-free exact coverage. An exact
+point interval is permitted only
 for a separately proved deterministic identity such as paired FREE intact/cut
 equality. Zero sample variance in any learned registered contrast is not such a
 proof and invalidates the family, as do nonfinite input or an undefined interval.
@@ -917,9 +931,45 @@ For the two held-out performance intervals:
 
 No pooling across opposite size effects is allowed.
 
+### 7.5 Literal interval-status vocabulary
+
+For any positive material criterion with margin `m`, classify its simultaneous
+interval `[L,U]` as:
+
+- `SUPPORTED_POSITIVE(m)` iff `L>m`;
+- `AFFIRMATIVELY_BELOW_MATERIAL(m)` iff `U<=m`;
+- `POSITIVE_UNRESOLVED(m)` otherwise.
+
+For either two-sided equivalence criterion `[-epsilon,+epsilon]`, classify an
+interval `[L,U]` as:
+
+- `EQUIVALENT(epsilon)` iff `L>=-epsilon` and `U<=+epsilon`;
+- `AFFIRMATIVELY_OUTSIDE_EQUIVALENCE(epsilon)` iff `U< -epsilon` or
+  `L>+epsilon`;
+- `EQUIVALENCE_UNRESOLVED(epsilon)` otherwise.
+
+A failed support or equivalence gate is not automatically affirmative evidence
+of absence, spillover, or generic conditioning. Noninferiority uses the same
+positive-status vocabulary with its registered margin `m=-0.01`.
+
 ## 8. Result-blind decision map
 
-### 8.1 Retain the metric-specific finite-budget mechanism
+Apply the following branches in numbered order. They are mutually exclusive by
+first-match precedence and exhaustive because branch 6 is a catch-all.
+
+### 8.1 Branch 1 — `BOUNDED_NONIDENTIFICATION_STRUCTURAL`
+
+Take this branch on any invalid common feasibility or score-class transform;
+missing `1/12` headroom; boundary-selected optimization still changing beyond
+the frozen slope limit; missing/incomplete/nonfinite atomic evidence or interval;
+zero variance in a learned registered contrast; identity/task-presentation
+failure; FREE intact/cut leakage; hidden/forbidden input; or failed equality of
+useful parameters, information, samples, tuning, optimizer, communication,
+decoder, output records, or actual useful work. Extra treatment resources route
+only here. This branch supports no positive, negative, generic, or equivalence
+claim and does not delete the family.
+
+### 8.2 Branch 2 — `RETAIN_METRIC_FINITE_BUDGET`
 
 All structural validity, headroom, tuning, complete-evidence, identity, and
 FREE cut-equality conditions must hold. In addition require:
@@ -939,45 +989,52 @@ centralized toy, a correctly bound ground-neighborhood score coordinate system
 improves finite-training-budget held-out-roster performance or robustness over
 an equal-class free-edge coordinate system.
 
-### 8.2 Delete metric specificity on this support
+### 8.3 Branch 3 — `DELETE_METRIC_EQUAL_CLASS`
 
-Delete the metric-specific contribution when complete valid evidence shows any
-of the following:
-
-- `FREE_MATERIALLY_BETTER` or `PRACTICALLY_EQUIVALENT` at both held-out sizes;
-- the free comparator reaches the common oracle ceiling while the metric arm
-  only matches it;
-- correct binding does not directly improve `BINDING` value, or the cut changes
-  `INERT` value beyond its equivalence margin;
-- `Gamma_B` does not show a legal action response, even if a hidden score or
-  matrix changed;
-- the apparent value exists only at training sizes, only with extra treatment
-  resources, or only against `PUBLIC-LOAD-SOFTMAX`.
+After branch 2 fails, delete the metric-specific contribution on this support
+iff the primary relation is either `FREE_MATERIALLY_BETTER` or
+`PRACTICALLY_EQUIVALENT`. This is affirmative equal-class evidence and requires
+complete structural validity from branch 1. Reaching only the public-load
+diagnostic is never a deletion predicate.
 
 An allocation actor may remain useful, but B1 supplies no reason to retain the
 metric-specific parameterization.
 
-### 8.3 Generic finite-budget effect without metric attribution
+### 8.4 Branch 4 — `GENERIC_FINITE_BUDGET_EFFECT`
 
-If held-out value clears but binding specificity, action response, or inert
-isolation does not, the strongest explanation is generic conditioning,
-regularization, task-token memorization, or optimization noise. Do not call it
-metric grounding and do not activate a second surface.
+After branches 2–3 fail, define `HELDOUT_VALUE_CLEARS` literally as either
+`METRIC_MATERIALLY_BETTER`, or `Delta_R` is `SUPPORTED_POSITIVE(+0.02)` while
+both `Delta(n)` and `T` are `SUPPORTED_POSITIVE(-0.01)`. Take this branch iff
+`HELDOUT_VALUE_CLEARS` and at least one affirmative nonmetric causal predicate
+holds at either held-out size:
 
-### 8.4 Nonidentification
+- `Theta_B` is `AFFIRMATIVELY_BELOW_MATERIAL(+0.02)`;
+- `Theta_J` is `AFFIRMATIVELY_OUTSIDE_EQUIVALENCE(0.02)`;
+- `Gamma_B` is `AFFIRMATIVELY_BELOW_MATERIAL(+0.10)`; or
+- `Gamma_J` is `AFFIRMATIVELY_OUTSIDE_EQUIVALENCE(0.02)`.
 
-Missing oracle headroom, invalid common feasibility, failed score-class
-transform, underoptimized boundary-selected comparator, identity/task-order
-leakage, FREE cut leakage, missing atomic evidence, nonfinite inference, or
-incomplete held-out support is nonidentification. It is not treatment failure
-or support. No threshold weakening, seed replacement, post-hoc checkpoint, or
-automatic rerun is allowed.
+This is affirmative evidence that value lacks the registered metric-specific
+path. Attribute at most generic conditioning, regularization, task-token
+memorization, or optimization; do not activate a second surface. An unresolved
+specificity interval does not enter this branch.
 
-### 8.5 Size/load interaction
+### 8.5 Branch 5 — `SIZE_INTERACTION`
 
-A valid size or load interaction is reported cellwise. It may motivate one new
-prospective discriminator if that outcome would change investment, but it is
-not a direct-variable-`N` positive and cannot be averaged away.
+After branches 2–4 fail, take this branch iff the primary relation is
+`SIZE_INTERACTION`. Report both sizes without pooling. It is not positive direct
+variable-`N` evidence and may motivate only a new prospective boundary
+discriminator.
+
+### 8.6 Branch 6 — `BOUNDED_NONIDENTIFICATION`
+
+Every otherwise-valid configuration not matched above takes this catch-all,
+including primary `UNRESOLVED`; any `POSITIVE_UNRESOLVED` or
+`EQUIVALENCE_UNRESOLVED` binding/inert/action interval; a pattern suggestive
+only of training-size or load interaction; or held-out value without an
+affirmatively established causal attribution branch. It supports no family
+deletion, generic attribution, equivalence claim, or second-surface activation.
+No threshold weakening, seed replacement, post-hoc checkpoint, or automatic
+rerun is allowed.
 
 ## 9. Second surface and UAV bridge
 
@@ -1018,13 +1075,18 @@ no warehouse or UAV efficacy claim.
 
 ## 10. Activity, closure, ownership, and return
 
-Question-relevant scientific activity begins at the first reward-bearing SGD
-update of any calibration fit after the exact complete revision is frozen,
-ChatGPT External Pro returns literal `CLOSED`, this EM accepts that ruling, CM
-statically accepts the constructible object, and Root separately sequences
-construction/compute. Source inspection, owner artifact preparation, provider
-question preparation, symbolic matrices, hand-written fixtures, schemas, and
-offline deterministic oracle/headroom certificates are preactivity.
+Question-relevant scientific activity begins at the earliest materialization
+or inspection of any registered stochastic training, calibration, validation,
+or evaluation object—including an episode order, priority permutation, row or
+task-presentation permutation, action variate, stochastic policy output,
+coupling, reward, loss, or gradient—or at the first optimizer update, whichever
+occurs first. That boundary may occur only after the exact complete revision is
+frozen, ChatGPT External Pro returns literal `CLOSED`, this EM accepts that
+ruling, CM statically accepts the constructible object, and Root separately
+sequences construction/compute. Source inspection, owner artifact preparation,
+provider question preparation, symbolic matrices, hand-written deterministic
+fixtures, schemas, and offline deterministic oracle/headroom certificates are
+preactivity.
 
 After activity begins, no arm, binding, demand, score map, decoder, margin,
 seed, tuning rule, endpoint, interval, branch, or claim may change in response
@@ -1040,6 +1102,9 @@ to a result.
 - Root owns new provider conversations, compute leases, portfolio choice,
   cross-direction relay, Git, canonical integration, and user contact.
 
-The dedicated ChatGPT External Pro request and independent External Gemini
-innovation request are mutually blind and `PREPARED_NOT_SENT`. No conversation
-URL, provider turn, response, construction release, or compute authority exists.
+The dedicated ChatGPT External Pro conversation returned `REVISION_REQUIRED`
+for revision 02 and is saved for mandatory same-conversation review of this
+complete revision 03. The independent revision-02 External Gemini request
+remains mutually blind, `PREPARED_NOT_SENT`, and Root-withheld; it must not be
+released as a revision-03 request. No revision-03 ruling, construction release,
+or compute authority exists.
