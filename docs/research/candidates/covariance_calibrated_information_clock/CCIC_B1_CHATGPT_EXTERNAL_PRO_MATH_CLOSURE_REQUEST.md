@@ -1,36 +1,26 @@
-IR_DIRECTION_REVIEW: covariance_calibrated_information_clock / CCIC-B1-SCIENCE-20260813-07
-
-PRO_MATHEMATICAL_CLOSURE_REREVIEW
-
-# CCIC B1 revision-07 same-conversation closure request
+# CCIC B1 revision-08 same-conversation closure request
 
 ```text
 direction=covariance_calibrated_information_clock
-revision=CCIC-B1-SCIENCE-20260813-07
-supersedes_revision=CCIC-B1-SCIENCE-20260813-06
-predecessor_disposition=PREACTIVITY_SINGLE_CALL_WORK_DEFINITION_INCONSISTENT
+revision=CCIC-B1-SCIENCE-20260813-08
+supersedes_revision=CCIC-B1-SCIENCE-20260813-07
 provider=chatgpt_external_pro
-request_kind=preproduction_mathematical_and_causal_closure_rereview
-conversation=continue_exact_existing_direction_conversation
-conversation_url=https://chatgpt.com/c/6a7d4948-b948-83e8-8c06-2702d5c6b1ef
+conversation_relationship=CONTINUE_EXACT_CONVERSATION
+requested_disposition=CLOSED_or_REVISION_REQUIRED
 transport_state=PREPARED_NOT_SENT
-prompt_sent=false
-response_received=false
 scientific_activity_started=false
+cm_release=withheld
 ```
 
-Continue the exact dedicated CCIC ChatGPT External Pro conversation. Revision
-06 received your literal `CLOSED` disposition. Before any activity,
-same-direction static construction then exposed a conflict: the card required
-one fusion call per decision, required RI/INFO observed-batch outputs and a
-separate zero-valued next-template prospective-information output, but counted
-only one functional learned evaluation in the work object. Because RI-v2's
-`J` could depend on actual `z`, observed and zero-template `J` could differ.
-Calling the model twice violated work/exposure; reusing observed `J` violated
-the no-future/no-value prospective channel; batching two evaluations under one
-API name did not repair either fact. No learned update, stochastic evaluation,
-endpoint, or efficacy result occurred. The EM ended exact v6 and froze
-complete prospective successor `CCIC-B1-SCIENCE-20260813-07`.
+Continue the exact dedicated CCIC conversation. You returned
+`REVISION_REQUIRED` for revision 07. You accepted its single-invocation causal
+separation on the full fresh-SENSE path, but found that it froze useful work,
+peak, and capacity only for `BOTH`. The initial decision is necessarily
+`PROSPECTIVE_ONLY`, while terminal support also permits `OBSERVED_ONLY` and
+`NEITHER`; their distinct learned subgraphs left an upstream compute/capacity
+alternative. No learned update, stochastic evaluation, endpoint, or efficacy
+result occurred. The owner ended exact v7 and froze complete prospective
+successor `CCIC-B1-SCIENCE-20260813-08`.
 
 Use `https://github.com/CartmanFatass/My-paper-code`, branch `aggressive`, and
 review:
@@ -38,98 +28,122 @@ review:
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_SCIENCE_CARD.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_ROOT_TO_CM_HANDOFF.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_RESULT_BLIND_INTERPRETATION_ACTIVATION_MAP.md`
-- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V6_CLOSED_INTAKE.md`
-- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_V6_POSTCLOSURE_SINGLE_CALL_WORK_AMBIGUITY_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V7_REVISION_REQUIRED_INTAKE.md`
 - `docs/new-libs/README.md`
 - `docs/new-libs/LIBRARY_INDEX.md`
 
-The literature files are provenance-labeled background and assumption audit,
-never experiment evidence. Lack of access to them is nonblocking because they
-cannot amend the complete card or establish a CCIC outcome.
+The library is provenance-labeled background and assumption audit, never
+experiment evidence. Lack of access is nonblocking because it cannot amend the
+complete card or establish an outcome.
 
-Revision 07 changes only the functional factorization used to return observed
-update/posterior and metadata-only prospective information inside exactly one
-actual fusion invocation. Every DGP, CCIC treatment equation, shared actor,
-variable `N/k` axis, tape, seed, endpoint, inference family, threshold,
-activity boundary, interpretation branch, strongest-alternative class, claim
+Revision 08 changes only the flexible set comparator and the prospective work/
+capacity boundary needed to answer your v7 defect. Every DGP, CCIC covariance
+equation, HMM, actor, variable `N/k` axis, regime, tape, seed, endpoint,
+inference family, threshold, activity boundary, interpretation branch, claim
 ceiling, second-surface trigger, and resource cap otherwise remains frozen.
 
-`RI-STRONG-v3` still has 83 trained scalars versus CCIC's 82. For each aligned
-fresh-SENSE row it computes once:
+One identical deterministic sequential `PREVALIDATE` procedure now performs
+validity, finite, lineage quotienting, ledger filtering, ordering, cardinality,
+and public-metadata alignment. Online it runs once per arm-local agent/decision
+on that rollout's packet table and ledger; arm-local `V_mode` and peak enter
+reported endogenous online totals. In action-independent matched replay only,
+it runs once on the shared canonical tuple and its immutable views feed both
+fusions; that common replay `V_mode` is reported once and excluded from the
+differential boundary. Fusion begins with exactly two Boolean loads plus two
+conditional selects (`D=4`); alignment inside fusion is zero. The four modes are:
+
+- `BOTH`: fresh observed view plus legal next-SENSE metadata template;
+- `PROSPECTIVE_ONLY`: no fresh observed view plus legal template;
+- `OBSERVED_ONLY`: fresh observed view and no legal template;
+- `NEITHER`: neither view.
+
+Initial/null/RELAY/assimilated-copy and terminal fixtures must map to their
+declared mode or fail closed. In `BOTH`, views have equal `M`, row order, and
+public `(o,s,log M,t/30,k/5)` but no represented-value equality requirement.
+
+`RI-STRONG-v4` has exactly 83 trained scalars versus CCIC's 82. For each enabled
+canonical row it computes the metadata trunk once:
 
 ```text
-x_i=(z_i,o_i,s_i,log M,t/30,k/5)
 m_i=(o_i,s_i,log M,t/30,k/5)
-e_i=SiLU(W_e x_i+b_e), W_e:6->5
-c_i=SiLU(W_c m_i+b_c), W_c:5->5
-r_ell_i=w_ell^T[e_i;c_i]+b_ell+gamma_z*z_i
-r_J_i=w_J^T c_i+b_J
-h_ell_i=r_ell_i+tanh(r_ell_i)
+a_i=SiLU(W_a m_i+b_a),             5->3, 18 parameters
+c_i=SiLU(W_c a_i+b_c),             3->16, 64 parameters
+alpha_i=mean(c_i[1..8])
+beta_i=mean(c_i[9..16])
+r_J_i=(alpha_i+beta_i)/2
+r_ell_i=(alpha_i+gamma_z)*z_i+beta_i, gamma_z one parameter
 h_J_i=r_J_i+tanh(r_J_i)
-Delta ell_hat=8*sinh(mean_i h_ell_i)
-J_next_hat=1e-4+softplus(mean_i h_J_i).
+h_ell_i=r_ell_i+tanh(r_ell_i).
 ```
 
-The parameter count is `35+30+11+1+6=83`. The observed evidence branch can
-use actual `z`; the prospective branch structurally sees only public
-next-SENSE metadata. Shared metadata features are evaluated once. Lineage is
-quotiented first. With no new evidence the observed increment is exactly zero
-and only the metadata branch runs; when `SENSE` is illegal prospective
-information is zero. Misaligned row metadata/cardinality/order fails closed.
-
-Under the unchanged grammar the full fresh-SENSE RI path is:
+Enabled outputs use ascending row means followed by
+`J_next_hat=1e-4+softplus(mean h_J)` and
+`Delta ell_hat=8*sinh(mean h_ell)`. Only the observed expression can see actual
+`z`. `BOTH` reuses one metadata evaluation; each one-channel mode evaluates
+only its useful path; `NEITHER` evaluates no learned row. Every one of the 82
+metadata parameters has a directed graph path through fixed `alpha,beta` and
+`r_J` to prospective information. Observed modes additionally activate
+`gamma_z`. Thus mode-active capacities are:
 
 ```text
-6->5 linear 125M; SiLU 25M;
-5->5 metadata linear 105M; SiLU 25M;
-width-10 evidence head 41M; gamma_z skip 2M;
-width-5 information head 21M; two residuals 8M;
-mean pool 4M+2; decodes 10.
+                     BOTH  PROSPECTIVE_ONLY  OBSERVED_ONLY  NEITHER
+CCIC                  82    82                82             0
+RI-v4                 83    82                83             0
 ```
 
-Thus the numeric work object remains:
+Active capacity means a structural directed path to an enabled returned learned
+scalar, independent of realized numeric weights, activations, or inputs.
+RI-v4 remains replication-safe after common lineage quotienting and is a
+nonlinear metadata-conditioned affine evidence alternative for the frozen
+Gaussian linear-in-`z` law.
+
+Under the frozen scalar grammar, excluding common `V_mode` but including
+`D=4`, the exact useful-operation formulas are:
 
 ```text
-C=14N+M-5
-W_CCIC=14N+392M+8
-W_RI_v3=14N+357M+7
-P_CCIC=22+6M
-P_RI_v3=24+6M.
+                     BOTH       PROSPECTIVE_ONLY  OBSERVED_ONLY  NEITHER
+CCIC                  391M+17    379M+12           387M+11       4
+RI-v4                 417M+16    408M+11           409M+9        4
 ```
 
-The maximum operation ratio remains `1.094793` and maximum peak ratio
-`30/28=1.071429`. The certificate must instrument the same streaming
-single-invocation execution path, expand and pass all 27 cells, match every
-replay tuple, and reject a hidden second learned evaluation, actual/future-`z`
-prospective path, dummy/ignored work, nonstreaming peak, or mismatch.
+RI-v4 decomposes as `63M` (`5->3` linear), `15M` (width-three SiLU),
+`208M` (`3->16` linear), `80M` (width-16 SiLU), `34M` (two fixed width-eight
+means), `2M` (`r_J`), `3M` (`r_ell`), `4M` per enabled scalar residual,
+`2M+1` per enabled row pool, and decodes `J=6`, `ell=4`. CCIC's `361M` row
+network plus its fixed five/three/four-sum GLS ledgers gives the displayed
+formulas.
 
-`INFO-FLEX-v2` retains exactly 79 additional scalars but makes its separation
-explicit inside one invocation: a `4->8->1` observed-posterior branch has 49
-parameters; a `2->7->1` metadata-only prospective-information branch has 29;
-one `gamma_J*J_template` skip gives 79. The prospective branch cannot see
-`q_hat`, observed posterior, or represented value. Both branches train on the
-unchanged posterior/information targets and execute once. INFO remains an
-intentionally advantaged specificity diagnostic, not the primary work-matched
-arm.
+The cache-free peak schedule is literal. CCIC materializes hidden `[16]`, two
+head accumulators, one product scratch, and five/three/four persistent GLS sums,
+giving peaks `24/22/23`. RI-v4 must retain `a[3]` while materializing `c[16]`;
+one product scratch plus two/one/one output sums gives `22/21/21`. `NEITHER`
+uses one selector scratch in both. No hidden row crosses a row boundary. The
+maximum operation ratio over `M in {1,2,5,8}` is `1.075887`; maximum peak ratio
+is `23/21=1.095238`; maximum positive capacity ratio is `83/82=1.012195`.
+Every ratio is below `1.10` without dummy work, ignored output, or artificial
+cache retention.
 
-Decide whether revision 07 is now meaning-complete or has any remaining
-mathematical, causal, exposure/work, training/execution, comparator, inference,
-or interpretation inconsistency. In particular audit:
+Before activity, action-independent replay must expand all four modes across
+all 27 cells, materialize all 108 operation/peak/capacity rows, exercise the
+initial/relay/copy/terminal edge fixtures, and return literal aggregate
+`passed=true`. It rejects a hidden second evaluation, prospective `z` path,
+mode mismatch, nonstreaming scratch, dummy/ignored work, invalid input, global
+median, or endogenous-online-work substitution. `NEITHER` requires exact zero
+learned capacity for both arms rather than a numeric `0/0` ratio.
 
-- whether the aligned-row one-invocation factorization is fully defined on
-  fresh SENSE, initial/RELAY/copy, terminal, and mismatch paths;
-- whether RI-v3 remains a strong functional replication-safe set alternative;
-- whether prospective information is genuinely value/future-blind without
-  handicapping the evidence-update branch;
-- parameter counts, literal operation/peak formulas, and all-cell fail-closed
-  work conditions;
-- INFO-FLEX-v2's exact 79-scalar factorization and specificity scope;
-- the primary/reduction/specificity branches and finite maximum claim; and
-- exact-copy versus independent repeat, matched receipt, physical time,
-  genuine decentralized/shared-policy execution, paired inference, second
-  surface, and UAV nonclaim boundaries.
+`INFO-FLEX-v2`, copy-versus-independent provenance, matched successful receipt,
+physical-time HMM, decentralized shared-policy execution, paired seed-block
+inference, every result-blind branch, finite claim ceiling, and second-surface/
+UAV nonclaim remain unchanged.
 
-## Required disposition and response form
+Decide whether revision 08 is now meaning-complete or has any remaining
+mathematical, causal, mode-boundary, work/peak/capacity, training/execution,
+comparator, inference, or interpretation inconsistency. In particular audit
+the online arm-local versus shared matched-replay prevalidation lifecycles; all four mode inputs; RI-v4 parameter and
+active-path identities; conditional-linear functional capability; exact work
+and natural-liveness formulas; all-cell gate; and whether any result branch
+could still mistake compute, exposure, provenance counting, scalar ESS, or a
+generic flexible set effect for structured covariance timing.
 
 Your first nonblank line must be exactly `CLOSED` or `REVISION_REQUIRED`.
 Then use these headings exactly once and in this order:
@@ -149,7 +163,7 @@ prospective correction, or write `NONE`. In section 8, include exactly one
 literal assignment line formed from the heading followed immediately by
 `=CLOSED` or `=REVISION_REQUIRED`.
 
-Closure, if granted, applies only to revision 07's mathematical, causal, and
+Closure, if granted, applies only to revision 08's mathematical, causal, and
 inferential definition. The EM retains scientific authorship and result
 interpretation; CM retains implementation and technical authority; Root
 retains portfolio and production sequencing. Your answer cannot authorize

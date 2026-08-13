@@ -4,12 +4,14 @@
 direction=covariance_calibrated_information_clock
 treatment_revision=CCIC-B1-SCIENCE-20260813-07
 artifact_role=administrative_authority_delta_only
+current_status=SUPERSEDED_AFTER_PRO_MODE_SPECIFIC_WORK_CAPACITY_REVISION_REQUIRED
+superseded_by=CCIC-B1-SCIENCE-20260813-08
 scientific_meaning_changed=false
 scientific_activity_started=false
-mathematical_closure=PREPARED_NOT_SENT
-chatgpt_external_pro=PREPARED_NOT_SENT
+mathematical_closure=REVISION_REQUIRED_by_same_direction_chatgpt_external_pro_and_EM_intake
+chatgpt_external_pro=REVISION_REQUIRED
 external_gemini=PREPARED_NOT_SENT
-cm_release=WITHHELD_PENDING_V7_PRO_CLOSED_AND_EM_INTAKE
+cm_release=WITHHELD_V7_ENDED_PREACTIVITY
 tests_authorized=false
 scientific_compute_authorized=false
 production_authorized=false
@@ -17,15 +19,14 @@ second_surface_authorized=false
 uav_claim_authorized=false
 ```
 
-Exact revision 06 ended before activity after its post-closure single-call and
-work-definition inconsistency was found during static acceptance. Complete
-result-blind revision 07 is frozen prospectively and changes only the causal
-factorization of `RI-STRONG-v3` and `INFO-FLEX-v2` inside one actual fusion
-invocation. No result informed it.
+Exact revision 07 received natural same-conversation ChatGPT External Pro
+`REVISION_REQUIRED`. The EM accepted the prospective defect: only `BOTH` had a
+frozen useful-work/peak/capacity object, while the necessarily prospective-only
+initial decision and terminal modes executed different subgraphs. No learned
+update, stochastic evaluation, or endpoint informed that ruling.
 
-Current CM implementation/static acceptance is frozen. Revision 07 must be
-published and receive literal `CLOSED` in the existing dedicated CCIC Pro
-conversation followed by same-direction EM intake before CM release. Gemini
-is independently prepared but unsent. No tests, training, stochastic
-evaluation, result-bearing endpoint, compute, production, second surface, or
-UAV work is authorized.
+Revision 07 ended before activity and is superseded by complete prospective
+revision 08. The exact intake is
+`CCIC_B1_CHATGPT_EXTERNAL_PRO_V7_REVISION_REQUIRED_INTAKE.md`. Gemini remained
+unsent. No tests, training, stochastic evaluation, result-bearing endpoint,
+compute, production, second surface, or UAV work was authorized.

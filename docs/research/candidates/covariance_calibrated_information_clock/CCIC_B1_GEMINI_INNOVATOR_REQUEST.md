@@ -2,8 +2,8 @@
 
 ```text
 direction=covariance_calibrated_information_clock
-revision=CCIC-B1-SCIENCE-20260813-07
-supersedes_revision=CCIC-B1-SCIENCE-20260813-06
+revision=CCIC-B1-SCIENCE-20260813-08
+supersedes_revision=CCIC-B1-SCIENCE-20260813-07
 provider=gemini_3_1_pro_extended
 request_kind=independent_divergent_scientific_innovation
 transport_state=PREPARED_NOT_SENT
@@ -30,22 +30,26 @@ provider's material, or any other direction.
 
 ## Exact request
 
-Explore frozen `CCIC-B1-SCIENCE-20260813-07` as a divergent scientific
+Explore frozen `CCIC-B1-SCIENCE-20260813-08` as a divergent scientific
 innovator. The core hypothesis is that a lineage-aware covariance-calibrated
 information clock can ignore literal retransmissions but benefit from genuinely
 new correlated or independent evidence while one decentralized shared policy
 spans held-out roster size `N` and skill period `k`.
 
-The first surface includes `RI-STRONG-v3`, an 83-scalar replication-safe set
-comparator versus CCIC's 82. One fusion invocation has a flexible actual-value
-evidence branch and a causally separated metadata-only prospective-information
-branch. Shared public metadata features are evaluated once; each output has an
-output-relevant residual; future/actual represented values cannot enter the
-prospective channel. `INFO-FLEX-v2` analogously separates observed posterior
-and prospective information inside one invocation. A hidden second learned
-evaluation, value leakage, dummy work, and work-gate relaxation are forbidden.
-The frozen RI operation and peak ratios versus CCIC are at most `1.10` in every
-cell. Do not silently change this first discriminator.
+The first surface includes `RI-STRONG-v4`, an 83-scalar replication-safe set
+comparator versus CCIC's 82. One identical deterministic prevalidation
+procedure runs on each arm-local online history and on shared canonical matched-
+replay tuples, producing the same four-mode schema. A single `5 -> 3 -> 16` metadata trunk feeds value-blind
+prospective information and, when enabled, a metadata-conditioned affine
+actual-value evidence expression. Shared features are evaluated once; each
+enabled output has an output-relevant residual; future/actual represented
+values cannot enter the prospective channel. `INFO-FLEX-v2` analogously
+separates observed posterior and prospective information inside one invocation.
+A hidden second learned evaluation, value leakage, dummy work, artificial
+cache peak, and work-gate relaxation are forbidden. Frozen modewise operation,
+natural peak, and active-capacity ratios versus CCIC are at most `1.10` in every
+cell, including the necessarily prospective-only initial decision. Do not
+silently change this first discriminator.
 
 Generate bounded prospective mechanisms and falsifiers that could change work
 after the frozen first surface, not post hoc explanations of nonexistent data:
