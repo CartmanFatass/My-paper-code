@@ -2,8 +2,8 @@
 
 ```text
 direction=covariance_calibrated_information_clock
-revision=CCIC-B1-SCIENCE-20260812-04
-supersedes_revision=CCIC-B1-SCIENCE-20260812-03
+revision=CCIC-B1-SCIENCE-20260812-05
+supersedes_revision=CCIC-B1-SCIENCE-20260812-04
 provider=gemini_3_1_pro_extended
 request_kind=independent_divergent_scientific_innovation
 transport_state=PREPARED_NOT_SENT
@@ -31,7 +31,7 @@ question and contains none of that provider's answer.
 
 ## Exact request
 
-Explore the frozen `CCIC-B1-SCIENCE-20260812-04` direction as a divergent
+Explore the frozen `CCIC-B1-SCIENCE-20260812-05` direction as a divergent
 scientific innovator. The core hypothesis is that a lineage-aware
 covariance-calibrated information clock can ignore literal retransmissions but
 benefit from genuinely new correlated or independent evidence while one

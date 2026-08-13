@@ -2,12 +2,12 @@
 
 ```text
 direction=covariance_calibrated_information_clock
-revision=CCIC-B1-SCIENCE-20260812-04
-supersedes_revision=CCIC-B1-SCIENCE-20260812-03_PRO_REVISION_REQUIRED
+revision=CCIC-B1-SCIENCE-20260812-05
+supersedes_revision=CCIC-B1-SCIENCE-20260812-04_PRO_REVISION_REQUIRED
 owner=EM_covariance_calibrated_information_clock
 object=result-blind prospective B1 discriminator
 scientific_activity_started=false
-mathematical_closure=revision_04_PREPARED_NOT_SENT
+mathematical_closure=revision_05_PREPARED_NOT_SENT
 cm_release=withheld
 production_authorization=none
 chatgpt_external_pro=PREPARED_NOT_SENT
@@ -57,7 +57,7 @@ construction, tests, training, evaluation, provider contact, or production.
   (`ORIGIN-COUNT`), with numerical-reference, received-count, mean-pooling, and shuffled-clock
   diagnostics.
 - **Observable.** Paired normalized error-delay-sensing loss, numerical-reference excess loss,
-  posterior log score/Brier score, `J` ordering, exact-copy equivalence, action
+  posterior log score/Brier score, `J` ordering, exact-copy identity, action
   sensitivity to information, and inference/communication exposure across the
   frozen `2 x 2` train and `3 x 3` evaluate grid.
 - **Strongest alternative and ceiling.** A positive result may still be a
@@ -391,6 +391,12 @@ the unique-origin set
 \widehat\Sigma=D+uu^T.
 \]
 
+The second row equation is the literal definition of the Latin-letter
+covariance loading: in plain text, `u_i := softplus(b_i)`. There is no
+separately named `nu_i`, no square-root interpretation, and no further
+transform between this assignment and the vector `u` used in every covariance,
+Woodbury, loss, gradient, `q`, and `J` expression.
+
 The network cannot see represented evidence values, received roster count,
 unique-origin count, duplicate multiplicity, `t`, `k`, reward, action, future
 data, or evaluation statistics. It is trained only from labeled training-cell
@@ -460,11 +466,13 @@ must remain positive definite; invalid or nonfinite outputs fail closed.
    `(ell_minus,q_hat,J_hat,k)` to a `4 -> 11 -> 2` SiLU head with 79 additional
    scalars. Its first raw output `g_ell` is decoded as posterior log odds
    `8*sinh(g_ell)` and its second is converted to positive information by
-   `1e-4+softplus`. It replaces the
-   analytic HMM/LLR calibration with a flexible learned mapping. Because it has
+   `1e-4+softplus`. It replaces only the analytic Gaussian
+   evidence-update/posterior mapping, conditional on the shared exact
+   physical-time HMM transition. It does not replace or test that transition.
+   Because it has
    extra capacity, it is an intentionally advantaged diagnostic. CCIC can make
-   an analytic-calibration claim only if its frozen primary advantage interval
-   rule also passes against this arm.
+   an analytic Gaussian evidence-update/posterior specificity claim only if its
+   frozen primary advantage interval rule also passes against this arm.
 4. **`ORIGIN-COUNT`.** Quotient lineage, assume unique origins are conditionally
    independent with unit variance, and use `q=mu*sum(z)` and `J=mu^2*M`. This is
    the strongest simple provenance-count/dedup explanation.
@@ -522,9 +530,12 @@ a future realized value.
   inflation.
 - `MEAN-RI`: mean-pools represented values without unique-origin count,
   exposing the replication collision.
-- `J-SHUFFLE`: at fixed `(seed,k,t,episode)` orders the nine `(N,rho)` metadata
-  classes lexicographically and rotates their CCIC `J_next` values by one
-  class. This breaks the information/context assignment while preserving the
+- `J-SHUFFLE`: define the literal ordered list
+  `C=((2,DUP),(2,CORR),(2,IND),(5,DUP),(5,CORR),(5,IND),` followed by
+  `(8,DUP),(8,CORR),(8,IND))`. At fixed `(seed,k,t,episode)`, class `C_j`
+  receives the CCIC `J_next` belonging to `C_((j+1) mod 9)`, for
+  `j=0,...,8`. This successor cyclic assignment breaks the
+  information/context assignment while preserving the
   balanced evaluation-wide marginal `J` distribution. Shuffling within a cell
   is forbidden because Stage-1 `J_next` is deterministic from metadata and such
   a shuffle would be a no-op.
@@ -668,13 +679,43 @@ potential-state replay calls both fusions on the exact multiset
  t in {0,k,2k,...,30-k}}
 ```
 
-using the potential packet table at that tuple even if an arm would already
-have committed. Every tuple has weight one; no cell, episode, action, or
-observed outcome reweights the multiset. Report the median scalar-operation
-count over all calls and maximum temporary scalar count. A primary superiority
-claim is unavailable if either CCIC or RI-STRONG exceeds the other's median by
-more than 10%, or if either fails under the same valid input; that comparison
-is exposure-confounded. Online total calls and operations are endogenous timing
+using the fresh unassimilated `SENSE` table at that tuple even if an arm would
+already have committed. The replay ledger is empty, every declared row is
+valid, rows are in ascending `(origin_id,capture_tick)` order, and the table
+contains the tuple's potential `z`, public overlap/quality metadata, and
+literal lineage: `DUP` has `N` rows for one common key while `CORR/IND` have
+`N` distinct keys. The replay begins at the first validity/key scan and ends
+after the arm returns its evidence increment and prospective `J`; the shared
+HMM transition, actor, communication, and environment are outside this fusion
+work count because they are identical across these two arms.
+
+The frozen work grammar expands every computation rather than treating a
+library call as free. One work unit is each scalar float64 or integer add,
+subtract, multiply, divide, comparison, Boolean combination, conditional
+select, load/store into a live temporary, or elementary call in
+`{exp,log,sqrt,sinh,cosh,tanh,atanh,asinh}`. The symbolic count uses
+`sigmoid(x)=1/(1+exp(-x))`, `softplus(x)=log(1+exp(x))`, and
+`SiLU(x)=x*sigmoid(x)`, expanded into those elementary operations even if the
+implementation uses an algebraically equivalent stable kernel. Matrix/vector
+operations and reductions are expanded elementwise in ascending index order.
+Validity checks and each 32-bit field equality cost one unit, a pair-key
+conjunction costs one, every compared ledger entry is counted, and each
+quotient insertion costs one; immutable input
+and parameter storage, loop-index increments, counter-address generation, and
+final two-scalar output storage are reported separately and excluded. Peak
+temporary state is the maximum simultaneous live scalar float64, integer, and
+Boolean slots between those endpoints, excluding immutable inputs, model
+parameters, and final outputs. No hardware timing or fused-kernel convention
+can replace this grammar.
+
+Every tuple has weight one; no cell, episode, action, or observed outcome
+reweights the multiset. Report paired operation and peak-temporary counts for
+every tuple and their medians separately in each of the 27 `(N,k,rho)` cells.
+For every cell that enters a claimed held-out axis, both the per-tuple
+operation-count ratio and the cellwise peak-temporary ratio must satisfy
+`max(CCIC,RI)/min(CCIC,RI) <= 1.10`; a zero denominator or a valid-input
+failure fails the gate. The all-cell table is always reported. A single global
+median is forbidden. Online total calls and operations are endogenous timing
 outcomes, charged by the loss and reported rather than forced equal.
 
 The exposure audit must also show that duplicate multiplicity, received `N`,
@@ -751,10 +792,12 @@ max-`T` is the maximum absolute statistic over that family's contrasts. The
 critical value is sorted draw number 95,000 in ascending one-indexed order;
 the simultaneous two-sided interval is `dbar +/- critical*SE`.
 
-If an original contrast has zero observed seed variance, that contrast is
-`INFERENCE_UNRESOLVED` and cannot support superiority, equivalence, reverse
-superiority, deletion, or a no-material conclusion. It is not assigned a point
-interval and is omitted from the other contrasts' maximum. If a bootstrap
+Except for the separately certified deterministic exact-copy family in
+Section 7.4, if an original stochastic contrast has zero observed seed
+variance, that contrast is `INFERENCE_UNRESOLVED` and cannot support
+superiority, equivalence, reverse superiority, deletion, or a no-material
+conclusion. It is not assigned a point interval and is omitted from the other
+contrasts' maximum. If a bootstrap
 standard error is zero for a nonzero-variance original contrast, that draw's
 absolute statistic is `+infinity`, conservatively making the family unresolved
 if it enters the 95th percentile.
@@ -770,17 +813,20 @@ family with the same convention and remains secondary; it cannot rescue either
 primary axis.
 
 For the result-blind covariance-specificity branch, retain the three regime
-components of each primary contrast. For each comparator and axis define
+components of each primary contrast. For each comparator and axis define two
+independent regime-difference contrasts
 
 ```text
-s = d_IND - (d_DUP+d_CORR)/2.
+s_1 = d_CORR-d_DUP,
+s_2 = d_IND-d_CORR.
 ```
 
-The six `s` contrasts form their own simultaneous two-sided max-`T` family.
-“Uniform advantage including IND” is available only when, on a supported axis,
-all three comparator-specific `s` intervals lie wholly inside
-`[-0.005,+0.005]`. Otherwise uniformity is unresolved; non-rejection is not
-uniformity. This family diagnoses attribution and cannot create primary support.
+The twelve contrasts (two regime differences times three comparators times two
+axes) form one simultaneous two-sided max-`T` family. "Uniform advantage across
+`DUP/CORR/IND`" is available only when, on a supported axis, all six relevant
+intervals lie wholly inside `[-0.005,+0.005]`. Otherwise full uniformity is
+unresolved; non-rejection and equality to a regime average are not uniformity.
+This family diagnoses attribution and cannot create primary support.
 
 `ESS-SCALAR` is a prespecified co-treatment/reduction test, not an arm that the
 rank-one parameterization must outperform in the homogeneous family where the
@@ -800,16 +846,25 @@ construction. A diagnostic supports clock causality only when its simultaneous
 lower 95% bound is strictly above `+0.01`. Failure by either diagnostic
 on an otherwise positive axis removes the clock-causality claim for that axis.
 
-### 7.4 Exact-copy equivalence family
+### 7.4 Deterministic exact-copy identity family
 
 For CCIC, compare `N=5` and `N=8` against `N=2` under `DUP`, separately for the
-two training `k` values. Successful support requires the two-sided 95%
-simultaneous intervals for paired `L_norm` differences to lie inside
-`[-0.005,+0.005]`, using the same max-`T` construction over four equivalence
-contrasts. In addition, `q`, `J`, and actor probabilities on the paired
-post-receipt shadow states must agree within absolute `1e-10`. This is an
-information-value equivalence claim under matched receipt, not a transport
-claim.
+two training `k` values. This is a deterministic structural family, not a
+stochastic-equivalence family. Before activity, a pathwise-identity certificate
+must prove that lineage quotienting maps all three rosters to the same single
+origin-zero table; the nested latent, origin-zero, and public-action tapes are
+the same; and every subsequent transition, ledger update, fusion call, actor
+input, action, and loss reduction has the same operation order. During the
+paired evaluation, all 32 seeds and 256 episodes must then have identical
+action trajectories and `L_norm`, and paired post-receipt `q`, `J`, posterior,
+and actor probabilities must agree within absolute `1e-10`.
+
+If both the prospective proof and every paired check pass, each of the four
+declared loss contrasts is the algebraic point `[0,0]` and the exact-copy gate
+passes without bootstrap. This is the sole carve-out from the stochastic
+zero-variance rule. If the proof or any paired check fails, the gate fails;
+there is no stochastic-bootstrap fallback and no efficacy claim. This is an
+information-value identity under matched receipt, not a transport claim.
 
 ### 7.5 Mechanism gates
 
@@ -822,7 +877,8 @@ All of the following are required before any efficacy claim:
 3. the actor has reward-independent information sensitivity as defined below;
 4. `J-SHUFFLE` and `J-CLAMP` each have a simultaneous lower degradation bound
    strictly above `+0.01` on the relevant held-out surface;
-5. paired packet, inference, capacity, search, and work conditions pass;
+5. paired packet, inference, capacity, search, the deterministic exact-copy
+   certificate, and every claim-relevant cellwise work condition pass;
 6. the numerical reference itself separates the information regimes in expected loss. This
    is a deterministic preactivity feasibility check: at the initial belief,
    `N=5,k=3`, both the coarse and fine frozen DP constructions must give
@@ -837,8 +893,9 @@ All of the following are required before any efficacy claim:
 Structural collision, support, packet, and forbidden-input checks must pass for
 every arm and all 32 seeds; a missing/nonfinite value is a failure. Learned
 calibration and actor-activity gates use their explicit 29-of-32 plus pooled
-rules. Work uses the literal replay multiset. Inferential claims use only the
-simultaneous seed-level intervals. No majority, pooled average, or task return
+rules. Work uses the literal replay multiset and cellwise gate. Stochastic
+inferential claims use only the simultaneous seed-level intervals; exact-copy
+identity uses only its deterministic certificate. No majority, pooled average, or task return
 may override a failed hard structural gate.
 
 ## 8. Preactivity certificate and activity criterion
@@ -854,6 +911,8 @@ evaluation tape until a machine-readable certificate shows:
   accounting are used without a finite-word Gaussian likelihood claim;
 - the analytic `J` values above and the singular replication-map identity hold
   under the stated support conditions;
+- the covariance network's Latin loading is literally
+  `u_i := softplus(b_i)` with no alternate symbol or transform;
 - the two collision tables produce their exact analytic GLS values;
 - all packet schemas, legal joint supports, actor calls, and packet accounting units
   match across arms;
@@ -862,6 +921,9 @@ evaluation tape until a machine-readable certificate shows:
 - the coarse/fine numerical-reference stability check passes, and the frozen
   state/snapshot grids, losses, targets, counter namespaces, initialization,
   reductions, update order, and minibatch mapping equal this revision;
+- the exact-copy pathwise-identity proof, complete `J-SHUFFLE` successor
+  permutation, fresh empty-ledger work inputs, expanded operation grammar, and
+  per-cell work admissibility equal this revision;
 - the fine numerical reference has at least 24 eligible information-sensitive base states among
   the 96 base `(t,k,ell)` states formed by `t in {5,10,15,20}`,
   `k in {1,3,5}`, and the eight signed values generated from
@@ -920,19 +982,21 @@ nonfinite actor probabilities count as failures, never as removed denominators.
 
 ## 9. Result-blind interpretation map
 
-1. **Both-axis specific support.** All mechanism/work/equivalence gates pass;
+1. **Both-axis specific support.** All mechanism/work/exact-copy gates pass;
    CCIC meets the primary advantage interval rule against all three comparators
    on both held-out axes. Support is limited to covariance-calibrated timing in
    this toy across the tested `N` and `k` values.
 2. **One-axis support.** The full rule passes only for held-out `N` or only for
    held-out `k`. Claim only that axis; do not say the algorithm spans both.
-3. **Covariance-aware but not analytic-specific.** CCIC passes every mechanism
+3. **Covariance-aware but not analytic-evidence-update-specific.** CCIC passes every mechanism
    and calibration gate and its primary advantage rule passes against
    `RI-STRONG` and `ORIGIN-COUNT` on an axis, but its interval versus
    `INFO-FLEX` lies inside `[-0.005,+0.005]` or has lower bound above `+0.02`.
    Support the bounded covariance-aware timing family on that axis, not the
-   analytic calibration mapping. If the INFO-FLEX relation is neither
-   equivalence nor reverse superiority, analytic specificity is unresolved.
+   analytic Gaussian evidence-update/posterior mapping conditional on the
+   shared exact HMM transition. If the INFO-FLEX relation is neither
+   equivalence nor reverse superiority, that evidence-update specificity is
+   unresolved. B1 never identifies the HMM transition against INFO-FLEX.
 4. **Scalar reduction supported.** The simultaneous CCIC-minus-ESS interval is
    wholly inside `[-0.005,+0.005]`, or its lower bound is above `+0.02`, on the
    relevant axis. Delete learned low-rank fusion for the homogeneous surface
@@ -979,8 +1043,8 @@ nonfinite actor probabilities count as failures, never as removed denominators.
     advantage at the frozen threshold," not equivalence or general no effect.
     Trained-cell improvement alone is interpolation and never supports
     variable-`N` or variable-`k` robustness.
-14. **Uniform advantage including `IND`.** On a supported axis, all three
-    specificity intervals lie inside `[-0.005,+0.005]`. Retain the primary
+14. **Uniform advantage across `DUP/CORR/IND`.** On a supported axis, all six
+    pairwise specificity intervals lie inside `[-0.005,+0.005]`. Retain the primary
     task relation but delete correlation-specific performance attribution and
     investigate representation, optimization, or posterior temperature. If
     the specificity family is not equivalent, uniformity is unresolved.
@@ -994,7 +1058,8 @@ this toy; alternatively, `RI-STRONG` may learn the relevant conditional
 precision without an explicit covariance model. Both are scientifically
 stronger explanations than a mean-pooling-only comparison. `INFO-FLEX` is the
 strongest explanation for any apparent benefit attributed specifically to the
-analytic clock mapping.
+analytic Gaussian evidence-update/posterior mapping conditional on the shared
+exact HMM transition; it cannot explain or test the transition itself.
 
 ### Deletion map
 
@@ -1003,8 +1068,10 @@ analytic clock mapping.
 - Delete covariance calibration only if the frozen ORIGIN-COUNT equivalence or
   reverse-superiority rule passes, or quantitative intermediate-correlation
   calibration/order is falsified.
-- Delete analytic-calibration specificity only if the frozen INFO-FLEX
-  equivalence or reverse-superiority rule passes.
+- Delete analytic Gaussian evidence-update/posterior specificity, conditional
+  on the shared exact HMM transition, only if the frozen INFO-FLEX equivalence
+  or reverse-superiority rule passes. INFO-FLEX never licenses a conclusion
+  about the physical-time HMM transition.
 - Delete structured-fusion specificity only if the frozen RI-STRONG
   equivalence or reverse-superiority rule passes with work matching.
 - Delete exact-copy claims if lineage is unavailable or the collision audit
@@ -1028,21 +1095,31 @@ Even the strongest positive outcome supports only this statement:
 > conditional covariance family, one frozen decentralized shared policy using
 > a learned covariance-calibrated information clock caused lower paired
 > error-delay-sensing loss than the named matched alternatives on the specific
-> held-out `N` and/or `k` surfaces that passed, while remaining equivalent under
+> held-out `N` and/or `k` surfaces that passed, while remaining identical under
 > literal packet replication.
 
 It does not support universal Bayes optimality of the learned estimator,
 semantic duplicate detection, arbitrary correlation or bias robustness,
 arbitrary roster/churn or duration generalization, real-UAV benefit, generic
-mean-field or information-bottleneck claims, or superiority of analytic
-calibration unless the primary advantage interval also passes against
-`INFO-FLEX`.
+mean-field or information-bottleneck claims, or superiority of the analytic
+Gaussian evidence-update/posterior map unless the primary advantage interval
+also passes against `INFO-FLEX`. It never identifies the HMM transition.
 
 ## 11. Prospective second surface and UAV bridge
 
-No second-surface work is authorized. It becomes answer-changing only if B1
-shows that covariance-aware timing matters and the scalar/count alternatives
-do not fully explain it.
+No second-surface work is authorized. It becomes answer-changing only if, on
+the same held-out axis, B1 passes exact-copy, calibration, activity,
+clock-diagnostic, packet, and claim-relevant work gates; the primary
+CCIC-minus-`ORIGIN-COUNT` simultaneous upper bound is below `-0.02`; and the
+CCIC-minus-`ESS-SCALAR` simultaneous upper bound in its frozen two-contrast
+family is also below `-0.02`. These two literal bounds are the definition of
+"count and scalar do not fully explain" for activation. `RI-STRONG`
+equivalence, reverse superiority, or an unresolved RI relation does not by
+itself block activation: under those conditions the heterogeneous surface is
+answer-changing precisely as a direct discriminator between explicit
+structured covariance and a generic replication-safe set encoder. Exposure,
+binary-dedup-only, count-sufficient, scalar-sufficient, or clock-noncausal
+branches do not activate it.
 
 The proposed second surface is a heterogeneous **relay-viewpoint switch**. A
 binary landing-zone or target-confirmation state is observed by UAV-like agents
@@ -1098,10 +1175,12 @@ The complete frozen revision is this file plus:
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_GEMINI_INNOVATOR_REQUEST.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_RESULT_BLIND_INTERPRETATION_ACTIVATION_MAP.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V3_REVISION_REQUIRED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V4_REVISION_REQUIRED_INTAKE.md`
 
 The Pro and Gemini requesters are mutually blind and `PREPARED_NOT_SENT`.
 Before production, this exact complete revision requires a same-direction
 ChatGPT External Pro `CLOSED` disposition and this EM's intake. Root retains
 portfolio and sequencing authority; CM retains implementation and runtime
-authority. Revision 03 received `REVISION_REQUIRED`; revision 04 has not been
-sent. No revision-04 closure, release, construction, or activity has occurred.
+authority. Revisions 03 and 04 received `REVISION_REQUIRED`; revision 05 has
+not been sent. No revision-05 closure, CM release, construction, or scientific
+activity has occurred.

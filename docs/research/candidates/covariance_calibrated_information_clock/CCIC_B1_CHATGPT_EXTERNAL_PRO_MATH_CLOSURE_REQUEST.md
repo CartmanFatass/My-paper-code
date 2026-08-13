@@ -1,13 +1,13 @@
-IR_DIRECTION_REVIEW: covariance_calibrated_information_clock / CCIC-B1-SCIENCE-20260812-04
+IR_DIRECTION_REVIEW: covariance_calibrated_information_clock / CCIC-B1-SCIENCE-20260812-05
 
 PRO_MATHEMATICAL_CLOSURE_REREVIEW
 
-# CCIC B1 revision-04 same-conversation closure request
+# CCIC B1 revision-05 same-conversation closure request
 
 ```text
 direction=covariance_calibrated_information_clock
-revision=CCIC-B1-SCIENCE-20260812-04
-supersedes_revision=CCIC-B1-SCIENCE-20260812-03_PRO_REVISION_REQUIRED
+revision=CCIC-B1-SCIENCE-20260812-05
+supersedes_revision=CCIC-B1-SCIENCE-20260812-04_PRO_REVISION_REQUIRED
 provider=chatgpt_external_pro
 request_kind=preproduction_mathematical_and_causal_closure_rereview
 conversation=continue_exact_existing_direction_conversation
@@ -19,10 +19,11 @@ scientific_activity_started=false
 ```
 
 Continue the exact dedicated CCIC ChatGPT External Pro conversation in which
-you returned `REVISION_REQUIRED` on revision 03. No result, implementation,
-test, runtime value, or other provider answer informed the successor. The same
-scientific owner accepted all seven definition-defect families and froze the
-complete indivisible successor `CCIC-B1-SCIENCE-20260812-04`.
+you returned `REVISION_REQUIRED` on revisions 03 and 04. No result,
+implementation, test, runtime value, or other provider answer informed this
+successor. The same scientific owner accepted the seven revision-04 defect
+families prospectively and froze the complete indivisible successor
+`CCIC-B1-SCIENCE-20260812-05`.
 
 Use `https://github.com/CartmanFatass/My-paper-code`, branch `aggressive`, and
 review:
@@ -31,6 +32,7 @@ review:
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_ROOT_TO_CM_HANDOFF.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_RESULT_BLIND_INTERPRETATION_ACTIVATION_MAP.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V3_REVISION_REQUIRED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V4_REVISION_REQUIRED_INTAKE.md`
 - `docs/new-libs/README.md`
 - `docs/new-libs/LIBRARY_INDEX.md`
 
@@ -39,60 +41,57 @@ result-blind derivative reading aid and cannot amend it. The library files are
 provenance-labeled theory background and claim boundaries only, never evidence
 for CCIC outcomes.
 
-## Exact accepted revision-03-to-04 corrections
+## Exact accepted revision-04-to-05 corrections
 
-1. The packet now has one ideal noiseless mathematical real plus exactly 64
-   metadata bits. It makes no binary64, quantization, finite-word, or bit-rate
-   claim. Row outputs `(a_i,b_i)`, `d_i`, vector `u`, `D`, and
-   `Sigma_hat=D+uu^T` are explicit. ESS-SCALAR now has exact `q`, `J`, and
-   covariance equations.
-2. The exact Bellman integral remains theory only. The computed teacher/arm is
-   named `NUMERICAL-REFERENCE`, with fixed fine and coarse grids, quadrature,
-   interpolation, clipping, float64 arrays, full action-tie priority, a
-   stability stop, and no claim of uniform oracle error. Its 768 label states
-   per cell are an exact 24-by-32 grid; no behavior rollout generates them.
-3. `Philox4x32-10` has explicit keys, phase/stream/item/address words, disjoint
-   training/evaluation/inference namespaces, `Y0` mapping, cell/row/episode/tick
-   ranges, and nested `N/k/rho` transforms. State/snapshot generation, module
-   order, losses, targets, float64 reductions, Glorot initialization, and
-   minibatch-with-replacement mapping are frozen.
-4. RI-STRONG now trains on invertible `asinh(Delta ell/8)` and decodes with
-   exact `8*sinh`, with no posterior/increment clipping. INFO-FLEX uses the same
-   invertible posterior representation. The 81-versus-82 parameter boundary is
-   unchanged. The work replay is the exact equal-weight multiset of every
-   potential evaluation opportunity, independent of realized actions.
-5. A fixed 768-batch shadow panel for every `(N,rho)` at
-   `N in {2,5,8}` defines maximum covariance diagonal/off-diagonal error,
-   relative `J` error, normalized `q` RMSE, strict ordering at every roster,
-   per-seed pass, 29-of-32 aggregation, and equal-seed pooled thresholds.
-6. Hard structural gates, learned calibration, activity denominators, work
-   weights, and inferential intervals now have separate literal aggregation
-   rules. All inferential families use a fully specified two-sided paired
-   studentized max-T bootstrap. An original zero-variance stochastic contrast
-   is unresolved rather than assigned a point interval; zero bootstrap
-   standard error is conservative infinity.
-7. Primary support now requires the simultaneous upper confidence bound below
-   `-0.02`, not merely a favorable mean. Equivalence is the full interval
-   inside `[-0.005,+0.005]`; comparator reverse superiority requires a lower
-   bound above `+0.02`; diagnostics require a lower degradation bound above
-   `+0.01`. Every other apparent match is unresolved. The INFO-FLEX branch has
-   an explicit antecedent; a six-contrast specificity-equivalence family
-   defines “uniform advantage including IND”; and no-material/deletion language
-   is limited to the exact interval relation that establishes it.
+1. The covariance loading is now reader-unambiguous in both notation and plain
+   text: Latin `u_i := softplus(b_i)`, no separate `nu_i`, no square-root or
+   other transform, and that same vector enters `Sigma_hat=D+uu^T`, all
+   Woodbury sums, likelihoods, gradients, `q`, and `J`.
+2. Exact-copy task identity is removed from stochastic zero-variance inference.
+   A preactivity pathwise proof plus all-seed/all-episode trajectory, loss, and
+   shadow-state checks establish four deterministic `[0,0]` contrasts without
+   bootstrap; any failed proof/check fails the gate with no fallback. Ordinary
+   zero-variance stochastic contrasts remain unresolved.
+3. Work matching now freezes the fresh valid empty-ledger `SENSE` replay table,
+   literal lineage and row order, counted endpoints and exclusions, expanded
+   scalar/integer/Boolean/nonlinearity operation grammar, peak temporary-state
+   convention, paired tuple outputs, and separate admissibility in every
+   `(N,k,rho)` cell used by a claim. A global median is forbidden.
+4. Full regime uniformity now uses `d_CORR-d_DUP` and `d_IND-d_CORR` for every
+   comparator and axis in one 12-contrast family. Only simultaneous equivalence
+   of all six contrasts on a supported axis licenses uniformity or deletion of
+   correlation-specific attribution.
+5. INFO-FLEX is now described only as a challenge to the analytic Gaussian
+   evidence-update/posterior map conditional on the shared exact physical-time
+   HMM transition. No INFO-FLEX relation can identify, support, or delete that
+   transition.
+6. `J-SHUFFLE` now writes the complete ordered nine-class list and the literal
+   successor assignment `C_j <- C_((j+1) mod 9)`; the opposite cyclic direction
+   is forbidden.
+7. The card and derivative map now share one second-surface rule. After the
+   other named gates and same-axis upper bounds below `-0.02` against both
+   ORIGIN-COUNT and ESS-SCALAR, RI equivalence,
+   reverse superiority, or unresolved RI makes the heterogeneous surface a
+   direct structured-covariance-versus-generic-set discriminator rather than a
+   blocker. Exposure, binary-dedup-only, count/scalar sufficiency, or clock
+   noncausality does block activation.
 
 ## Required full-composite audit
 
-Audit whether those corrections actually resolve every revision-03 defect
+Audit whether those corrections actually resolve every revision-04 defect
 without creating a new inconsistency. In particular, check:
 
 - ideal Gaussian likelihood versus packet/accounting language;
 - all algebra, HMM timing, singular support, Woodbury, ESS, RI and INFO maps;
 - the computed-reference versus analytic-Bayes authority boundary;
-- every state, snapshot, random-address, optimizer, target, reduction, and work
-  population definition for collision or leakage;
+- every state, snapshot, random-address, optimizer, target, reduction, exact
+  shuffled-clock assignment, and work input/grammar/cellwise gate for collision
+  or leakage;
 - genuine decentralized execution and one shared actor across held-out `N/k`;
 - calibration at `N=8`, per-seed/pooled gate aggregation, max-T construction,
-  zero-variance handling, SESOI/equivalence/reverse-superiority semantics;
+  stochastic zero-variance handling, deterministic exact-copy identity,
+  12-contrast regime specificity, and SESOI/equivalence/reverse-superiority
+  semantics;
 - all interpretation branches, strongest alternatives, deletions, maximum
   claim, conditional-on-receipt boundary, and second-surface trigger.
 
@@ -120,7 +119,7 @@ prospective correction, or write `NONE`. In section 8, include exactly one
 literal assignment line formed from the section heading followed immediately
 by `=CLOSED` or `=REVISION_REQUIRED`.
 
-Closure, if granted, applies only to revision 04's mathematical, causal, and
+Closure, if granted, applies only to revision 05's mathematical, causal, and
 inferential definition. The EM retains scientific authorship and result
 interpretation; CM retains implementation and technical authority; Root
 retains portfolio and production sequencing. Your answer cannot authorize
