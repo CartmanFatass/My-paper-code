@@ -2,21 +2,21 @@
 
 ```text
 direction=semantic_graphon_shared_policy
-treatment_revision=SGSP-B1-SCIENCE-20260813-03
-supersedes_map_for=SGSP-B1-SCIENCE-20260813-02_PRO_CLOSED
+treatment_revision=SGSP-B1-SCIENCE-20260813-04
+supersedes_map_for=SGSP-B1-SCIENCE-20260813-03_PRO_CLOSED
 owner=EM_semantic_graphon_shared_policy
 artifact_role=result-blind derivative reading map
 map_changes_treatment=false
 scientific_activity_started=false
-mathematical_closure=revision_03_PREPARED_NOT_SENT_SAME_CONVERSATION
-cm_release=withheld_for_revision_03_closure
+mathematical_closure=revision_04_PREPARED_NOT_SENT_SAME_CONVERSATION
+cm_release=withheld_for_revision_04_closure
 production_authorization=none
 ```
 
 ## Controlling rule
 
-This map adds no arm, equation, sample, threshold, resource, claim, or
-authority. The complete science card controls if text ever conflicts. The
+This derivative map adds no object beyond revision 04. The complete science
+card controls if text ever conflicts. The
 local corpus and all other directions are inspiration only; no prior result or
 margin enters a branch.
 
@@ -26,19 +26,27 @@ margin enters a branch.
 
 Revision 01 received result-blind same-direction Pro `REVISION_REQUIRED` with
 seven defects, all prospectively accepted in revision 02. The existing
-dedicated conversation returned literal `CLOSED` for revision 02. Before any
-stochastic materialization, revision 03 prospectively resolves one later CM
-ambiguity: different `N` cells have disjoint stochastic tapes, not shared
-prefixes. Exact revision 03 therefore requires same-conversation `CLOSED` plus
-EM intake before CM release. Gemini produced no turn or evidence and cannot
-close, accept, authorize, rank, or interpret B1.
+dedicated conversation returned literal `CLOSED` for revision 02 and then for
+revision 03 after its `N`-separated stochastic law was made explicit. Before
+any stochastic materialization or revision-04 construction, Root identified
+that the `0.25`-versus-`2` residual scales leave a generic shrinkage/Jacobian
+alternative unresolved while the map still promotes a graphon family. Revision
+04 adds the frozen equal-width opposite-center control and anchor-only action
+cut. A final same-direction static audit also froze deterministic canonical base
+order, one separately addressed forced-nonidentity audit permutation, injective
+training episode indices across all 480 updates, and the exact two-sided
+availability predicate for an identifying interaction. It requires
+same-conversation `CLOSED` plus EM intake before CM release.
+Gemini produced no turn or evidence and cannot close, accept, authorize, rank,
+or interpret B1.
 
 ### 2. Activity boundary
 
 Activity begins at the earliest materialization, generation, inspection,
 summarization, or use of any registered stochastic object, including a common
-initializer draw, latent orientation, Gaussian world, action uniform, identity
-permutation, or seed-addressed stochastic policy output. Provider review,
+initializer draw, latent orientation, Gaussian world, action uniform,
+identity-replay audit permutation, or seed-addressed stochastic policy output.
+Provider review,
 source inspection, symbolic block arithmetic, hand-written collision/nesting
 fixtures, static schemas/leakage review, and deterministic arithmetic fixtures
 with no registered draw remain preactivity. The complete initializer,
@@ -47,8 +55,9 @@ that boundary; no result-responsive revision is legal afterward.
 
 ### 3. Complete atomic evidence
 
-All 16 registered seed packets must contain every arm, roster, regime,
-intact/cut panel, identity replay, dense-reference audit, support audit,
+All 16 registered seed packets must contain all four arms, every roster and
+regime, every defined intact/reassociation/SGSP-center-swap panel, identity
+replay for each applicable panel, dense-reference audit, support audit,
 parameter/work/communication ledger, and checkpoint fact. There is no seed
 replacement, partial efficacy mean, or pooled-agent/world inference. Missing
 question-relevant output returns to CM and supports no scientific branch.
@@ -69,11 +78,17 @@ Every seed/cell must have:
   exactly zero;
 - no opaque identity, row order, latent, target, reward, future, evaluation,
   or held-out statistic in deployed inputs;
+- deterministic canonical `(role,slot)` base order, deterministic equality-only
+  nominal handles, injective training episodes, and exactly one addressed
+  forced-nonidentity audit permutation reused across applicable panels;
 - one checkpoint across every `N` for each arm;
-- exact 1,318-versus-1,318 primary parameter equality and identical
+- exact 1,318 equality among all three edge-aware arms and identical intact
   output-relevant operation, communication, storage, sample, update, and actor
-  opportunities; and
-- the exact collision and edge-superfamily certificates.
+  opportunities;
+- identical SGSP/ALT log-edge Jacobian formula and initial raw-Jacobian
+  multiset, without falsely claiming indexwise raw-Jacobian equality; and
+- the exact collision, narrow-center nonoverlap, and edge-superfamily
+  certificates.
 
 A failure invalidates the learned packet; it is technical nonconformance, not
 negative treatment evidence. Dummy padding cannot repair a useful-work failure.
@@ -82,35 +97,41 @@ negative treatment evidence. Dummy padding cannot repair a useful-work failure.
 
 For each held-out cell, use the exact registered action-uniform tape to compute
 the minimum and maximum sampled return attainable under
-`pi(SERVE_POS) in [0.02,0.98]`. The equal-seed upper envelope minus mean
-`EDGE-PE` return and mean `EDGE-PE` minus the lower envelope must each be
-strictly greater than `0.025`. Oracle return `1` is descriptive only. Otherwise
-the cell is saturated on a required side; do not call it equivalent or use it
-for graphon-family deletion.
+`pi(SERVE_POS) in [0.02,0.98]`. `GE` and `GA` each require their own two-sided
+all-cell flag: the upper envelope minus the relevant comparator mean and that
+mean minus the lower envelope must each be strictly greater than `0.025`.
+`ANON_POSITIVE_AVAILABLE` requires the anonymous positive side.
+`CUT_RETURN_DROP_AVAILABLE` requires SGSP intact mean minus the lower envelope
+above `0.075`; `CUT_ACTION_TV_AVAILABLE` requires the registered epsilon-
+support TV supremum above `0.10`, each at both held-out sizes. Oracle return
+`1` is descriptive only. A missing side makes only the affected conclusion
+unavailable; it cannot be called equivalent, deleted, or mechanism-negative.
 
 ### 6. Registered statistical objects
 
 Use equal-seed paired contrasts and the four-cell 95% Bonferroni simultaneous
-Student-`t` intervals exactly as specified. The mutually exclusive primary
+Student-`t` intervals exactly as specified. The mutually exclusive capacity
 labels are:
 
 ```text
-SGSP_MATERIALLY_BETTER
-EDGE_MATERIALLY_BETTER
-PRACTICALLY_EQUIVALENT
-REGIME_OR_SIZE_INTERACTION
-UNRESOLVED
+GE_SGSP_MATERIALLY_BETTER
+GE_EDGE_MATERIALLY_BETTER
+GE_PRACTICALLY_EQUIVALENT
+GE_REGIME_OR_SIZE_INTERACTION
+GE_UNRESOLVED
 ```
 
-`SGSP_BEATS_ANON` and `EDGE_BEATS_ANON` are separate four-cell labels using the
-same paired two-sided 95% Bonferroni Student-`t` law and `0.025` margin. Neither
-can override the primary edge comparison, and failure of a label is
-nonidentification rather than anonymous equivalence.
+The `GA` equal-width-center family has the parallel SGSP-better, ALT-better,
+equivalent, interaction, and unresolved labels. `SGSP_BEATS_ANON`,
+`EDGE_BEATS_ANON`, and `ALT_BEATS_ANON` are separate four-cell labels using the
+same paired two-sided 95% Bonferroni Student-`t` law and `0.025` margin. None
+can override a matched comparison, and failure of a label is nonidentification
+rather than anonymous equivalence.
 
 ### 7. Semantic causal activity
 
 The sender-role reassociation must alter a legal decision, not only a hidden
-summary. All three simultaneous lower bounds must pass:
+summary. Its three simultaneous lower bounds must pass:
 
 ```text
 SGSP intact-minus-reassociated return > 0.075
@@ -118,74 +139,105 @@ SGSP intact/reassociated action TV > 0.10
 attenuation of SGSP-versus-EDGE advantage > 0.015
 ```
 
-Failure of return or TV is action-insensitive/nonidentifying. Failure of
-attenuation permits at most a generic policy-class/regularization reading, not
-semantic-graphon attribution.
+The equal-width correct-center family independently requires:
+
+```text
+SGSP intact-minus-anchor-swap return > 0.075
+SGSP intact/anchor-swap action TV > 0.10
+attenuation of SGSP-versus-ALT advantage under sender reassociation > 0.015
+```
+
+Each is a three-bound one-sided Bonferroni family after taking held-out-size
+minimum within seed. Promotion requires both families conjunctively. Failure of
+return or TV is action- or center-insensitive. Failure of attenuation permits
+at most a narrower optimization/policy-class reading, not complete
+correct-center semantic-graphon attribution.
 
 ## Result branches
 
-Read in literal precedence: (1) hard validity/complete evidence, (2) endpoint
-availability, (3) mutually exclusive primary `GE` relation, (4) both anonymous
-labels, (5) semantic return/TV/attenuation gates, and (6) the catch-all
-`BOUNDED_NONIDENTIFICATION` rule.
+Read in literal precedence: (1) hard validity/complete evidence, (2)
+family-specific answerability, (3) `GE`, (4) `GA`, (5) anonymous labels, (6)
+both mechanism families, and (7) catch-all `BOUNDED_NONIDENTIFICATION`.
 
 ### A. Fixed graphon anchor merits a second surface
 
-Require all hard validity, two-sided availability, complete evidence,
-`SGSP_MATERIALLY_BETTER`, `SGSP_BEATS_ANON`, and all semantic causal bounds.
+Require all hard validity, complete evidence, both matched two-sided flags,
+`ANON_POSITIVE_AVAILABLE`, both cut-answerability flags,
+`GE_SGSP_MATERIALLY_BETTER`,
+`GA_SGSP_MATERIALLY_BETTER`, `SGSP_BEATS_ANON`, and all six mechanism bounds.
 The maximum claim is the exact finite two-block/held-out-size statement in the
 card. Activate only the registered 2-D two-zone surveillance/relay surface,
-which must repeat the strong comparator, identity permutation,
-coordinate-reassociation, work match, and finite-versus-kernel-mismatch audit.
+which must repeat the strong edge comparator, equal-width alternative center,
+identity permutation, coordinate reassociation, anchor-only action cut, work
+match, and finite-versus-kernel-mismatch audit.
 
-### B. Anonymous diagnostic, fixed graphon does not win
+### B. Equal-width center falsification
 
-If `SGSP_BEATS_ANON` but the primary label is
-`PRACTICALLY_EQUIVALENT` or `EDGE_MATERIALLY_BETTER` under full two-sided
-availability, delete the fixed-graphon-specific family. At most retain a
-generic edge/set candidate as a new direction-scoped question. Beating the
-smaller anonymous control alone supports only the registered compression
-collision/non-sufficiency diagnostic, not a resource-matched topology claim.
-Do not transfer SGSP margins or causal evidence into another family.
+If `GA_TWO_SIDED_AVAILABLE` and either `GA_ALT_MATERIALLY_BETTER` or
+`GA_PRACTICALLY_EQUIVALENT` holds, delete the correct-center-specific family.
+A simultaneous SGSP advantage over EDGE then supports at most generic narrow
+regularization/conditioning. Revisit only with a prospectively justified new
+surface or multi-center discriminator, without transferring a margin.
 
 ### C. Bounded generic-edge evidence
 
-If `EDGE_MATERIALLY_BETTER` and `EDGE_BEATS_ANON` holds while
-`SGSP_BEATS_ANON` does not, delete SGSP and record only bounded evidence for the
-frozen generic role-pair edge family. Do not promote a graphon anchor or a
-general topology mechanism.
+If `GE_TWO_SIDED_AVAILABLE`, `ANON_POSITIVE_AVAILABLE`,
+`GE_EDGE_MATERIALLY_BETTER`, and `EDGE_BEATS_ANON` hold while
+`SGSP_BEATS_ANON` does not, delete SGSP and record
+only bounded evidence for the frozen generic role-pair edge family. Do not
+promote a graphon anchor or a general topology mechanism.
 
-### D. Mechanism failure
+### D. Capacity-comparator deletion or equivalence
 
-If endpoint superiority occurs without semantic return/TV activity, it is not
-a graphon result. If action activity exists without advantage attenuation, it
-is a bounded regularization/policy-class result. Neither activates the UAV
-bridge. Revisit only with a new prospective action-sensitive semantic task.
+If `GE_TWO_SIDED_AVAILABLE` and either `GE_EDGE_MATERIALLY_BETTER` or
+`GE_PRACTICALLY_EQUIVALENT` holds, do not promote the fixed graphon family. A
+simultaneous SGSP advantage over ALT is only bounded correct-versus-this-wrong
+center evidence. Anonymous superiority alone is not a matched topology claim.
 
-### E. Size or regime interaction
+### E. Mechanism failure
 
-Do not average opposite cell effects. A valid
-`REGIME_OR_SIZE_INTERACTION` may motivate exactly one new discriminator on the
-identified cell boundary if that answer would change allocation. It is not a
-positive direct-variable-`N` result.
+The exact predicate is `GE_TWO_SIDED_AVAILABLE` and
+`GA_TWO_SIDED_AVAILABLE` and `CUT_RETURN_DROP_AVAILABLE` and
+`CUT_ACTION_TV_AVAILABLE` and `GE_SGSP_MATERIALLY_BETTER` and
+`GA_SGSP_MATERIALLY_BETTER`, with at least one mechanism family's three-bound
+conjunction failing. `ANON_POSITIVE_AVAILABLE` is intentionally irrelevant to
+this matched-comparator mechanism-failure reading and remains required for
+promotion/anonymous statements. The maximum reading is an optimization or
+policy-class separation. Internal-summary-only, action-insensitive, center-
+insensitive, or nonattenuating results do not activate the second surface.
 
-### F. Invalid, saturated, incomplete, or bounded nonidentification
+### F. Size or regime interaction
+
+Do not average opposite cell effects. An identifying interaction means exactly
+the relevant interaction label conjoined with its own `GE_TWO_SIDED_AVAILABLE`
+or `GA_TWO_SIDED_AVAILABLE` flag. Only that conjunction may motivate at most
+one new discriminator on the named family/cell boundary. An interaction label
+without the flag routes to failed availability. It is not a positive direct-
+variable-`N` result.
+
+### G. Invalid, saturated, incomplete, or bounded nonidentification
 
 Technical invalidity or incomplete/no-data evidence returns to CM without a
-treatment conclusion. Saturation yields no equivalence or deletion. Every
-otherwise-unlisted complete valid configuration—including SGSP superiority
-without anonymous/mechanism qualification, practical equivalence without the
-registered anonymous condition, and primary `UNRESOLVED`—is
-`BOUNDED_NONIDENTIFICATION`. Do not weaken a threshold, add or replace seeds,
-select checkpoints, or automatically rerun. Revisit only for a prospective
-cell with restored support/headroom or a distinct action-sensitive cut.
+treatment conclusion. Saturation or insufficient action range yields no
+equivalence, deletion, or mechanism-negative reading for the affected family.
+Every otherwise-unlisted complete valid configuration, including SGSP
+superiority without anonymous/mechanism qualification and either family-
+specific unresolved label, is `BOUNDED_NONIDENTIFICATION`. Do not weaken a
+threshold, add or replace seeds, select checkpoints, or automatically rerun.
+Revisit only for a prospective cell with restored support/headroom or a
+distinct action-sensitive cut.
 
 ## Ceiling and UAV activation boundary
 
-B1 cannot support graphon learning, arbitrary graph size/topology, churn,
-continuous geometry, graph mismatch robustness, mean-field rates, equilibrium,
-or UAV benefit. A B1 positive merely activates the second surface. A later UAV
-simulator requires observable stable mission role/sector coordinates, validated
-soft coupling, shared deployment across fleet size, useful-work-matched edge
-comparison, and action/mission endpoints. Dropout and in-episode membership
-change remain separate claims.
+B1 can at most identify the correct center relative to this one equal-width
+opposite-association center and the wider edge family on the frozen toy. It can
+exclude a generic global width/log-Jacobian-scale explanation relative to ALT,
+but not all centers, table-specific target alignment, or coordinate-specific
+preconditioning. It cannot support graphon learning, arbitrary graph
+size/topology, churn, continuous geometry, graph-mismatch robustness,
+mean-field rates, equilibrium, or UAV benefit. A B1 positive merely activates
+the second surface. A later UAV simulator requires observable stable mission
+role/sector coordinates, validated soft coupling, shared deployment across
+fleet size, useful-work-matched edge and alternative-center comparisons, and
+action/mission endpoints. Dropout and in-episode membership change remain
+separate claims.
