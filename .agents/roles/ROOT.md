@@ -235,6 +235,27 @@ Root may defer work only through the portfolio-priority decision described
 above. Do not invent a shared status taxonomy or treat historical status labels
 as current scientific judgments.
 
+### Child incidents and Root goal audit
+
+A child report is evidence, not a thread/goal state transition. Treat any
+`BLOCKED` wording, repeated child failure, `loginLike`/status field, or
+Computer Use/Chrome inability to capture a URL as a claim requiring semantic
+translation, never as authority to stop unrelated work or call
+`update_goal(status=blocked)`. The latter inability is `UNOBSERVED`, not login
+or logout evidence. For Agentify, Root first reconciles the exact native tab
+through `agentify_tabs` and exact-tab `agentify_read_page`/DOM; only then may
+it assess a directly observed provider gate. User observation is evidence to
+reconcile, not a reflexive substitute for the native record.
+
+Operational Root alone may declare the task goal blocked. It may do so only
+after its own consecutive goal turns have independently verified the same
+external blocking condition, no meaningful action remains inside current
+authority, and the thread-level blocked audit is satisfied. A child-local
+authority boundary, including a Workflow Recovery Manager return, never
+satisfies that audit, transfers Root authority, or pauses a separate
+scientific/technical stage. Translate it into the observed object, unknown,
+and smallest semantic owner/action instead.
+
 Use CM at two useful boundaries. While EM defines a treatment, Root may ask the
 same direction's CM for bounded code-observable feasibility, dependency,
 runtime and implementation-cost evidence; CM does not invent the scientific

@@ -117,6 +117,24 @@ provider generation or submitted-unverified operation may exist. A status,
 registry, model, URL, or archive conflict is a reason to reconcile or fail
 closed, never permission to send.
 
+### Incident observation and authority boundary
+
+A transport incident is a mechanical report, never a goal or thread conclusion.
+Inspect the native Agentify surface first: use `agentify_tabs` to identify the
+exact tab, then exact-tab `agentify_read_page`/DOM evidence. Scoped status and
+`loginLike` are diagnostic hints only. A Computer Use/Chrome safety refusal to
+capture the URL is `UNOBSERVED`, not login/logout evidence; user observation is
+evidence to reconcile, not automatic replacement for the native record.
+
+For any non-complete terminal, archive the exact-one mechanical state without
+another send, then return `INCIDENT_REPORTED`, never generic `BLOCKED` or a
+claim that the thread, goal, production, unrelated work, or user is blocked.
+The report must include observed facts, observation method, actions taken,
+actions not taken, remaining unknown, causal hypotheses, and the smallest
+next authority/action. `ERROR`, `BLOCKED`, or similar values retained inside a
+strict ledger or results archive remain mechanical terminal facts; they do not
+become the leaf's routing or goal status.
+
 ## Result guard and return
 
 Before returning `COMPLETE`, run:
@@ -129,13 +147,21 @@ C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
   --returned-results-path <assigned-results-path>
 ```
 
-On guard failure return `ERROR` with an empty `results_path`; do not move, copy,
-rewrite, or read another result file. Return exactly once to the invoker,
+On guard failure return `INCIDENT_REPORTED` with an empty `results_path`; do
+not move, copy, rewrite, or read another result file. Return exactly once to the invoker,
 conclusion first, then:
 
 ```text
 AGENTIFY_REVIEW_BATCH_RESULT
-status=COMPLETE|ERROR
+status=COMPLETE|INCIDENT_REPORTED
 results_path=<exact assigned path or empty>
+transport_terminal=<COMPLETE|ERROR|SEND_NOT_COMMITTED|SUBMITTED_UNVERIFIED|other exact mechanical terminal>
 error=<empty or actual mechanical error>
+observed_facts=<direct facts only>
+observation_method=<native exact-tab method, ledger/archive, or UNOBSERVED>
+actions_taken=<exact actions>
+actions_not_taken=<no resend/other safety-preserving omissions>
+remaining_unknown=<none or exact unknown>
+causal_hypotheses=<evidence-backed alternatives>
+next_authority_or_action=<smallest owner/action, or none>
 ```

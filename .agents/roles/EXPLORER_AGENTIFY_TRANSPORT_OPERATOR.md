@@ -63,3 +63,8 @@ fields into a file-verification request.
 Do not contact the user or another task, invoke another Skill, spawn a
 child, read or write canonical state, use Git, or make a scientific decision.
 Return the transport evidence and any direct mechanical error to the invoker only.
+A non-complete return uses the shared `INCIDENT_REPORTED` contract, never
+generic `BLOCKED`: facts and their observation method, taken/not-taken
+actions, unknowns, causal hypotheses, and the smallest next authority/action.
+It cannot declare a goal/thread blocked, pause work outside its batch, or
+request user action absent directly observed interface evidence.

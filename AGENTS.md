@@ -259,6 +259,29 @@ unknown, and the correct semantic owner. A child request is evidence or a
 proposed next action, never an instruction that automatically enters Root's
 queue.
 
+### Child incident reporting and Root goal-blocking boundary
+
+No non-Root agent may return or act on a generic `BLOCKED` terminal status as a
+thread, goal, routing, production-pause, or authority conclusion. A child that
+cannot proceed within its assignment returns `INCIDENT_REPORTED` or
+`AUTHORITY_BOUNDARY` with: observed facts, observation method, actions taken,
+actions not taken, remaining unknown, causal hypotheses, and the smallest next
+authority or action. That report concerns only the child's exact assignment;
+it never stops unrelated direction work, requests the user unless a directly
+observed interface proves that boundary, or expands the reporter's authority.
+
+Only operational Root may decide whether the task goal is blocked or call
+`update_goal(status=blocked)`. A child status, repeated child wording, a
+derived status field, or an unverified login/access inference is never enough.
+Root's blocked audit counts only its own consecutive goal turns with the same
+independently verified external condition and no meaningful authorized
+in-scope work remaining. Agentify status or `loginLike` is a diagnostic hint,
+not authentication proof. For an Agentify incident, inspect the exact native
+tab first with `agentify_tabs` and exact-tab `agentify_read_page`/DOM evidence;
+a Computer Use or Chrome safety refusal to determine the URL is `UNOBSERVED`,
+not logout evidence. A user observation is evidence to reconcile with that
+record, not an automatic override.
+
 Use semantic ownership before acting:
 
 - EM owns the scientific question, meaning-complete science card, comparator,

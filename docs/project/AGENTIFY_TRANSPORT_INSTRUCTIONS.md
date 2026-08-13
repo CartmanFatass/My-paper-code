@@ -106,6 +106,28 @@ records each inferred field and operation in `migrationHistory`. Invalid legacy
 rows are not migrated, and schema-v2/new COMPLETE rows still require an
 explicit `sendActionCount===1`.
 
+### 2.1 Incident observation and reporting hierarchy
+
+An Agentify incident is mechanical evidence, not a declaration that the user,
+thread, task goal, or unrelated production work is blocked. Inspect the native
+Agentify surface in this order: (1) `agentify_tabs` to identify the exact tab
+and URL candidate, then (2) exact-tab `agentify_read_page`/DOM/read-page
+evidence. Scoped status and `loginLike` are diagnostic hints only; they cannot
+prove logout or access loss. A Computer Use/Chrome safety refusal because it
+cannot determine a URL is `UNOBSERVED`, not authentication evidence. A user's
+direct observation is evidence to reconcile with the native record, not an
+automatic replacement for it.
+
+A transport/operator leaf archives the mechanical terminal according to the
+exact-one rules and returns `INCIDENT_REPORTED` with observed facts, observation
+method, actions taken, actions not taken, remaining unknown, causal hypotheses,
+and the smallest next authority/action. It never returns generic `BLOCKED`,
+calls `update_goal`, claims a production pause beyond its assignment, or
+requests user action unless the directly observed interface proves it. A
+persisted ledger `BLOCKED` value remains an internal mechanical fact and does
+not transfer goal or Root authority. Only operational Root may make the
+separate thread-level blocked decision after its independently verified audit.
+
 ### Default and disposable tabs
 
 The default tab is a protected ChatGPT tab created with key/name `default`; the
@@ -673,7 +695,8 @@ If an HMASD archive is missing or stale:
    invariants in `state.mjs:117-151`, create the assignment's unused exact
    results path from `responseText` and the receipt fields.
 5. If the ledger shows `SUBMITTED` or `BLOCKED`, restore only send-boundary
-   facts; do not invent a response or completion.
+   facts; do not invent a response or completion. Report the latter only as an
+   internal ledger fact under `INCIDENT_REPORTED`, never as a goal conclusion.
 6. Never overwrite an existing archive. Preserve it and have the owning L1
    dispatch a ledger-only recovery with a new assignment-specific results path.
 7. Run the result-path guard. Record that no page, input, send, or response
@@ -699,7 +722,7 @@ If an HMASD archive is missing or stale:
 | `review_user_message_content_mismatch` / `turn_content_mismatch` | Exactly one readable new turn exists, but narrow exact comparison failed and no valid causal receipt can promote it | Preserve observed length/hash/mismatch metadata when available; never trim, broaden normalization, or resend. |
 | `review_content_rebind_unavailable_for_lossy_rendering` | The durable user-turn ID disappeared and lossy display cannot collision-resistently identify the source turn | Stop observation and fail closed. Do not use Markdown reconstruction or content similarity to rebind. |
 | `review_composer_identity_mismatch_at_send` | Composer changed after initial identity receipt but before the Send boundary | Atomic check performed zero clicks. Archive pre-send; do not reuse the closed operation. |
-| `blocked=true`, login/CAPTCHA | Agentify detected a human/access gate | Do not send. Wait only within assignment timeout; archive pre-send terminal if unresolved. |
+| `blocked=true`, login/CAPTCHA | A diagnostic/status hint; a human/access gate is established only by exact native tab/page DOM evidence | Reconcile via `agentify_tabs` then exact-tab `agentify_read_page`/DOM. If the gate is directly observed, do not send; archive the pre-send terminal and return `INCIDENT_REPORTED`. A status-only result or URL-observation refusal is `UNOBSERVED`, not logout proof. |
 | `looks403=true` with usable conversation/composer | Possible false positive from bare `403` text | Treat as evidence conflict, not permission to send. Archive conflict; source fix required. |
 | Actual access-denied/403 shell | Provider page is blocked | Pre-send terminal if no operation; verify existing only if ledger says already submitted. Restarting Agentify is not a repair. |
 | `review_idempotency_conflict` | Same operation key, different fingerprint | Restore original exact fields or choose a genuinely new authorized operation. Never mutate existing identity. |

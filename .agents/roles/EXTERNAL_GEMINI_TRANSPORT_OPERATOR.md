@@ -57,4 +57,8 @@ portfolio choice.
 Do not choose, modify, interpret, approve, rank, implement, execute, or
 technically accept science. Do not contact the user or another task, spawn, use
 Git, run tests, or write canonical project state. Return conclusion-first
-mechanical evidence to the invoker exactly once.
+mechanical evidence to the invoker exactly once. A non-complete return uses the
+shared `INCIDENT_REPORTED` contract, never generic `BLOCKED`: directly observed
+facts and method, actions taken/not taken, remaining unknown, causal
+hypotheses, and the smallest next authority/action. It cannot declare a
+goal/thread blocked, pause unrelated work, or request user action absent

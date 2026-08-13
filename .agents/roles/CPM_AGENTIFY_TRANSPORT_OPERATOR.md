@@ -62,4 +62,9 @@ opens the saved URL in a new tab. Return any tab-close failure to the invoker.
 Do not contact the user or another task, invoke another Skill, spawn a
 child, read or write canonical state, use Git, interpret science, or accept
 the review. Return the transport evidence and any direct mechanical error to
-invoker only.
+invoker only. A non-complete return uses the shared
+`INCIDENT_REPORTED` contract, never generic `BLOCKED`: facts and their
+observation method, taken/not-taken actions, unknowns, causal hypotheses, and
+the smallest next authority/action. It cannot declare a goal/thread blocked,
+pause work outside its batch, or request user action absent directly observed
+interface evidence.
