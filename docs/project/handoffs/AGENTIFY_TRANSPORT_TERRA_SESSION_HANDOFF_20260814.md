@@ -280,4 +280,3 @@ Return:
 6. cleanup state and any honest residual risk.
 
 Do not stage, commit or push. Operational Root owns final integration.
-
