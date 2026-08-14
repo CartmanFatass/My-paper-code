@@ -308,6 +308,17 @@ Provider transport failure cannot pause a scientific direction. A resource
 slice may pause only its lease; CM owns semantics-preserving same-coordinate,
 blinded, atomic resume until complete question-relevant data exist.
 
+For a protocol/workflow designer recovery whose assignment explicitly grants
+source change, diagnostics, runtime control, and bounded live validation, an
+old Skill, current primitive, or one exhausted observation surface is internal
+design evidence, not an authority boundary. The owner designs the next
+constrained observation/input primitive, uses the authorized validation budget,
+and closes that loop locally. A recovery/transport report remains evidence only;
+it cannot turn that internal limit into a Root binary choice. A genuine external
+boundary exists only for a directly required user-exclusive credential or
+physical action, an irreversible external risk, or an external side effect the
+assignment explicitly did not authorize.
+
 Use semantic ownership before acting:
 
 - EM owns the scientific question, meaning-complete science card, comparator,

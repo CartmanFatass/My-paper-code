@@ -156,6 +156,17 @@ without that commitment still cannot pause the scientific direction; the
 invoking L1/CM retains same-coordinate, semantics-preserving atomic completion
 while a resource slice pauses only its lease.
 
+If the invoking L1's protocol/workflow-design recovery explicitly authorizes
+source repair, diagnostics, runtime control, and bounded live validation, an
+old transport primitive, stale Skill, or one exhausted observation surface is
+internal design evidence. The L1 must construct and use the next constrained
+observation/input primitive within its authorized validation budget; the leaf's
+incident report cannot convert it into a user/Root/portfolio boundary. This
+does not authorize a second provider turn after the exact no-resend predicate.
+Only a directly required user-exclusive credential or physical action, an
+irreversible external risk, or an unapproved external side effect is a genuine
+external boundary.
+
 ## Result guard and return
 
 Before returning `COMPLETE`, run:

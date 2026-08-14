@@ -76,6 +76,14 @@ or retry merely because the previous attempt failed. A timeout is not terminal:
 inspect the actual operation and process state, then choose an observation,
 repair, wait, or stop action based on that evidence.
 
+For a protocol/workflow-design recovery whose assignment explicitly authorizes
+source repair, diagnostics, runtime control, and bounded live validation, a
+stale Skill, failed current primitive, or one exhausted observation surface is
+an instruction to design the next constrained observation/input primitive, not
+an authority boundary. Use the authorized test/validation budget and close that
+loop internally; do not externalize a deficit in the current primitive as a
+user, Root, portfolio, or provider decision.
+
 Within the assignment, the manager may:
 
 - create and hold one detached worktree under `worktree_parent` at `baseline`;
@@ -103,14 +111,18 @@ has completed. Continue until the assignment success criteria are met or a real
 boundary is reached. Routine steps, repeated observations, ordinary test
 failures, process state, and unchanged-science/local repairs remain local.
 
-Return early only for a missing explicit external action, a required expansion
-of repository/path/runtime authority, a real cross-worktree or shared-resource
-conflict, an irreversible risk, or an exhausted discriminating observation
-surface. Such a return names the exact attempted actions, observed evidence,
-remaining unknown, and the smallest decision or authorization needed; it never
-asks the invoker for a generic next step.
+Return `AUTHORITY_BOUNDARY` only for a directly required user-exclusive
+credential or physical action, an irreversible external risk, or an external
+side effect not explicitly authorized by the assignment. A repository/path/
+runtime expansion or cross-worktree/resource conflict remains local whenever
+the assignment grants a safe constrained alternative. Exhaustion of a current
+primitive, old Skill, or one observation surface is never an authority
+boundary. Such a return names the exact attempted actions, observed evidence,
+remaining unknown, and the smallest genuine external authorization needed; it
+never asks the invoker for a generic next step.
 
-An authority boundary is an incident report, not a goal state. The manager
+An `AUTHORITY_BOUNDARY` is the narrowly defined external incident report above,
+not a goal state. The manager
 never uses `BLOCKED`, calls `update_goal`, claims production is paused beyond
 its assignment, or lets its report elevate recovery authority into Root
 authority. Its boundary report records the directly observed facts and method,

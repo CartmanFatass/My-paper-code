@@ -20,6 +20,11 @@ description = "Read-only Sol-high L1 Code Project Manager for one Root-scoped im
 config_file = "./agents/hmasd-code-project-manager.toml"
 nickname_candidates = ["Code Project Manager", "Technical Manager", "Implementation Coordinator"]
 
+[agents."HMASDWorkflowRecoveryManager"]
+description = "Terra-high L1 owner for one bounded workflow failure recovery with isolated worktree repair and focused validation."
+config_file = "./agents/hmasd-workflow-recovery-manager.toml"
+nickname_candidates = ["Workflow Recovery Manager", "Failure Recovery Lead", "Autonomous Workflow Repair"]
+
 [agents."HMASDIndependentResearchExplorer"]
 description = "Read-only Sol-max L1 Independent Research Explorer for one Root-scoped research assignment."
 config_file = "./agents/hmasd-independent-research-explorer.toml"

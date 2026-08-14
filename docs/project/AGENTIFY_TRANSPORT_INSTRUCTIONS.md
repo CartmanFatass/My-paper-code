@@ -151,6 +151,18 @@ remains absolute. A transport failure cannot pause the direction. Resource
 slices pause their lease only; CM owns semantics-preserving same-coordinate
 blinded atomic resume until complete question-relevant data exist.
 
+For an L1 protocol/workflow-design recovery explicitly authorized to modify
+source, diagnose, control runtime, and run bounded live validation, a stale
+transport primitive, old Skill, or one exhausted observation surface is not a
+provider, user, Root, or portfolio boundary. The L1 designs the next constrained
+observation/input primitive and uses its authorized validation budget before
+returning. Transport reports are evidence only. This does not permit another
+provider turn after the exact no-resend predicate; it instead separates a
+non-resend mechanical fact from the workflow designer's remaining local
+diagnostic work. Only a directly required user-exclusive credential or physical
+action, irreversible external risk, or unapproved external side effect is a
+genuine external boundary.
+
 ### Default and disposable tabs
 
 The default tab is a protected ChatGPT tab created with key/name `default`; the
