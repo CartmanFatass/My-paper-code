@@ -1,0 +1,40 @@
+{
+  "activity_marker": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_ACTIVITY_20260813_07.json",
+  "complete_panel_retained": false,
+  "completed_frontier": {
+    "architecture": "RISP",
+    "completed_renewal": 13,
+    "feedback": "MARGINAL_TWIN",
+    "phase": "evaluation",
+    "point": "evaluation_renewal_complete",
+    "schedule_id": 0,
+    "seed": 4
+  },
+  "elapsed_seconds": 3600.0469999999987,
+  "exception_type": "ResourceLimitExceeded",
+  "partial_atomic_checkpoints": [
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_0_RISP.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_0_SIGN_RNN.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_1_RISP.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_1_SIGN_RNN.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_2_RISP.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_2_SIGN_RNN.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_3_RISP.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_3_SIGN_RNN.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_4_RISP.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_4_SIGN_RNN.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_5_RISP.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_5_SIGN_RNN.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_6_RISP.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_6_SIGN_RNN.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_7_RISP.npz",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK2_CHECKPOINTS_20260813_07\\seed_7_SIGN_RNN.npz"
+  ],
+  "peak_rss_bytes": 370855936,
+  "reason": "wall lease exceeded at evaluation_renewal_complete: 3600.047000s >= 3600.000000s",
+  "reason_kind": "RESOURCE_LIMIT",
+  "result_written": false,
+  "schema": "RISP-B1-LOCK2-INCOMPLETE-20260813-07",
+  "science_revision": "RISP-B1-SCIENCE-20260813-07",
+  "scientific_activity_started": true
+}

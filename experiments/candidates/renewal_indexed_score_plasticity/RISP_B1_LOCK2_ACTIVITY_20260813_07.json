@@ -1,0 +1,10 @@
+{
+  "boundary": "immediately before first PCG64 initialization-family object for seed zero",
+  "created_unix_seconds": 1786679398.3633175,
+  "lock1_path": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B1_LOCK1_20260813_07.json",
+  "lock1_sha256": "57732d4cb980a5317793995da4d648d23c7de853ee002d4fb361242df5b8d587",
+  "one_attempt_only": true,
+  "schema": "RISP-B1-LOCK2-ACTIVITY-MARKER-20260813-07",
+  "science_revision": "RISP-B1-SCIENCE-20260813-07",
+  "scientific_activity_started": true
+}
