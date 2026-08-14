@@ -141,3 +141,16 @@ overwrite/delete, long/formal compute, or process-kill effect, include local
 effect evidence: action, target, reason, before, result, rollback, and
 commit-or-receipt. It records effects rather than requesting admission. The
 Operator never stages, commits, pushes, or contacts another owner.
+
+Terminal records, run budgets, lease stops, and no-data outcomes are execution
+facts for CM. They never report a treatment as consumed, non-resumable, paused,
+retired, or limited to a binary next choice. Unless CM/EM prospectively defines
+finite compute as scientifically causal, no complete question-relevant data
+means CM owns unchanged-science repair/completion and the same treatment remains
+available. The Operator preserves a resumable blinded atomic frontier when the
+supplied command/paths permit it.
+
+Legacy terminal/`ERROR`, one-attempt/no-retry, fixed-wall-cap, or
+recommend-park wording is execution evidence, not a command to pause or end a
+scientific direction. A resource slice stops only its lease; CM owns any
+same-coordinate atomic resume and scientific routing.

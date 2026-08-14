@@ -128,6 +128,29 @@ persisted ledger `BLOCKED` value remains an internal mechanical fact and does
 not transfer goal or Root authority. Only operational Root may make the
 separate thread-level blocked decision after its independently verified audit.
 
+An exact-one terminal, non-resend result, exhausted fresh-tab allowance,
+resource limit, or absent response is transport evidence only. It does not
+command CM, Root, EM, or the portfolio session to consume, pause, retire, or
+declare a scientific direction non-resumable, nor does it impose a binary next
+choice. Root translates the return into observed fact, exact object, remaining
+unknown, scientific implication, and smallest semantic owner/action. Without
+complete question-relevant data, unchanged-science repair/completion belongs to
+CM. A finite compute budget can be scientifically causal only when the
+same-direction EM establishes that prospectively. Preserve ledger status facts
+and exact-one/no-resend invariants; where frozen transport semantics permit,
+retain a resumable blinded atomic frontier rather than treating a lease/resource
+pause as a scientific termination.
+
+Pending user adjudication, legacy one-attempt/no-retry, CM-recommend-park,
+fixed wall-cap, terminal/`ERROR`, archive/commit/push-before-intake, and stale
+Pro/Gemini retry schemas are suspended as scientific or portfolio routing
+commands. They remain mechanical transport facts and do not pause, retire, or
+stop a scientific direction. This does not authorize a resend: after a visible
+provider turn or concrete conversation identity, the exact no-resend rule
+remains absolute. A transport failure cannot pause the direction. Resource
+slices pause their lease only; CM owns semantics-preserving same-coordinate
+blinded atomic resume until complete question-relevant data exist.
+
 ### Default and disposable tabs
 
 The default tab is a protected ChatGPT tab created with key/name `default`; the

@@ -135,6 +135,27 @@ next authority/action. `ERROR`, `BLOCKED`, or similar values retained inside a
 strict ledger or results archive remain mechanical terminal facts; they do not
 become the leaf's routing or goal status.
 
+The transport return is evidence only, never a command to CM, Root, EM, or the
+portfolio session. An exact-one terminal, exhausted fresh-tab allowance,
+non-resend boundary, absent response, or resource limit must not be phrased as
+the scientific treatment being consumed, non-resumable, paused, retired, or
+limited to a binary next choice. Without complete question-relevant data, the
+invoking L1 routes unchanged-science repair/completion to CM. Only a
+same-direction EM's prospective definition of finite compute as causal can
+give that budget scientific force. Preserve the strict ledger's internal status
+facts and exact-one/no-resend protections while retaining a resumable blinded
+atomic frontier whenever the frozen transport semantics allow it.
+
+Pending user adjudication, one-attempt/no-retry, CM-recommend-park, fixed
+wall-cap, terminal/`ERROR`, archive/commit/push-before-intake, and stale
+Pro/Gemini retry schemas are not transport authority to pause, retire, or
+scientifically route a direction. They remain mechanical facts. Do not infer
+permission for a resend: the exact no-resend boundary remains absolute after a
+visible/provider turn or concrete conversation identity. A transport failure
+without that commitment still cannot pause the scientific direction; the
+invoking L1/CM retains same-coordinate, semantics-preserving atomic completion
+while a resource slice pauses only its lease.
+
 ## Result guard and return
 
 Before returning `COMPLETE`, run:

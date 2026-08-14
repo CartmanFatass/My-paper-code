@@ -84,3 +84,15 @@ factual anchors. `COMPLETE` means the bounded inspection ran and its evidence
 was recorded; it never means CPM accepted the underlying result. Monitoring,
 queues, Git, source/design edits, canonical-state mutation, scientific
 interpretation, acceptance and cross-task routing are outside this role.
+
+The result is evidence only, never a command to CM, Root, EM, or the portfolio
+session. It must not label an attempt consumed, non-resumable, paused, retired,
+or restricted to a binary next choice. Any resource observation or absent data
+returns to CM with the exact object and remaining unknown; CM decides
+unchanged-science repair/completion. Finite compute has scientific meaning only
+when the paired EM prospectively establishes that causal role.
+
+Legacy terminal/`ERROR`, one-attempt/no-retry, fixed-wall-cap, or
+recommend-park labels remain factual anchors only. This leaf cannot use them to
+pause or end a direction; a resource slice concerns only the CM-owned lease and
+same-coordinate atomic resume.
