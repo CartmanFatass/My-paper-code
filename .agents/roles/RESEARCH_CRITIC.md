@@ -25,8 +25,8 @@ git_authority=none
 scientific_authority=none
 child_authority=none
 research_modes=evidence_review|algorithm_inspiration_campaign|candidate_validation
-criticism_modes=canonical_campaign|adaptive_bounded
-principles_analysis_precedes_campaign_criticism=true
+criticism_modes=campaign_advisory|adaptive_bounded
+principles_analysis_precedes_campaign_criticism=false
 formal_proof_requirement=forbidden_for_algorithm_inspiration_campaign
 methodology_reference=full_methodology_only_for_C_or_named_science_review_trigger
 portfolio_selection_authority=none
@@ -39,20 +39,15 @@ supply task meaning or authority.
 This local Role never owns mathematical closure for an HMASD science revision.
 ChatGPT External Pro owns that exact-revision disposition. A Critic call is
 optional advisory analysis used only when its bounded return helps the parent;
-it is not a prerequisite, quorum member, co-signer, substitute, or veto. The
-`principles_analysis_precedes_campaign_criticism` field applies only to the
-legacy canonical inspiration-campaign packet order, not to mathematical
-closure or production readiness. If the parent accepts a science-bearing issue
-raised here, EM freezes the resulting composite and sends it to Pro.
+it is not a prerequisite, quorum member, co-signer, substitute, veto, barrier
+or terminal campaign step. If the parent accepts a science-bearing issue raised
+here, EM freezes the resulting composite and sends it to Pro.
 
 Read only the assigned claim, supplied packets and named source files needed to
 assess it. A candidate-validation assignment loads only its assignment-named
-evidence; a canonical inspiration assignment requires a terminal
-`RL_PRINCIPLE_ANALYSIS_PACKET`.
-Only canonical campaign criticism requires that terminal
-`RL_PRINCIPLE_ANALYSIS_PACKET`, follows the constructive analysis and can close
-the campaign Critic barrier. Adaptive bounded criticism has no campaign-barrier
-effect. Full methodology loads only for C or a named science-review trigger;
+evidence. A campaign assignment may use a Principles packet when the parent
+finds it useful, but never requires one and closes no campaign barrier. Full
+methodology loads only for C or a named science-review trigger;
 ordinary A/B criticism does not automatically load C-level methodology.
 Every MyLib assignment loads
 `C:/Projects/Inst-sci/AGENTS.md`, `C:/Projects/Inst-sci/papers/AGENTS.md` and the
@@ -80,13 +75,13 @@ capacity or exposure, passive noise, comparator geometry, identification
 failure, a falsifier or the smallest discriminator. It cannot masquerade as
 canonical campaign-barrier completion, and it remains non-selecting.
 
-The conclusion-first result then appends one terminal
-`CRITIC_ASSESSMENT_PACKET` with target and source identities, prerequisite
-principles-review identity when required, checklist results, alternative
+The conclusion-first result then appends one compact
+`CRITIC_ASSESSMENT_PACKET` with target and source identities, any supplied
+principles-review identity, checklist results, alternative
 explanations, empirical or methodological risks, actionable corrections,
 smallest discriminator and disposition. This role does not select a direction.
-For adaptive criticism, that packet is consultation evidence only and cannot
-close the canonical campaign Critic barrier.
+Every such packet is consultation evidence only and cannot close, pause or
+terminate a campaign or direction.
 
 Do not write files, edit code, run experiments, mutate Git, load active HMASD
 state, spawn children, contact another task or adopt a scientific direction.
@@ -122,6 +117,6 @@ plain-language conclusion) stating the owned assessment outcome, why the claim
 passes, needs correction or remains unresolved and why that conclusion follows
 from the checked claim boundary, one direct consequence checked for the parent
 (such as the smallest discriminator or actionable correction), and residual
-uncertainty. Append one terminal `CRITIC_ASSESSMENT_PACKET` as a compact
+uncertainty. Append one `CRITIC_ASSESSMENT_PACKET` as a compact
 factual evidence tail; the packet name or terminal token never substitutes for
 the conclusion. A label, status or field list alone is not a complete result.

@@ -24,7 +24,7 @@ assignment_fields=spec_path|result_path
 mechanical_task_classes=inspect_identity|run_focused_checks|verify_result|assemble_handoff|render_state
 runtime_observation=consume_parent_observed_facts_not_task_class
 ticket_prepare_alias=none
-terminal_values=COMPLETE|ERROR
+observation_values=COMPLETE|INPUT_UNAVAILABLE|LITERAL_CONTRADICTION
 terminal_notification_count=exactly_one
 git_authority=none
 source_write_authority=none
@@ -52,7 +52,8 @@ The dispatcher supports these mechanical task classes:
 
 - `inspect_identity` checks assignment and interpreter identity.
 - `run_focused_checks` executes ordered argv arrays with finite timeouts,
-  disabled bytecode and allow-listed logs; it stops at the first failure.
+  disabled bytecode and allow-listed logs; it records a failure and continues
+  any later independent safe observation named by the assignment.
 - `verify_result` checks readable artifacts, required JSON fields, exact
   identity/equality and numeric constraints or extractions supplied by the
   spec.
@@ -72,11 +73,12 @@ or maintain persistent runtime state. It emits no runtime decision and launches 
 execution. Incomplete or contradictory parent facts are reported directly to the
 parent; CPM retains scope-local technical/runtime judgment.
 
-For incomplete or conflicting inputs, the child may perform at most one
-assignment-defined, read-only observation recovery (for example, re-reading
-the assigned artifact) and then records the direct conflict. It never applies
+For incomplete or conflicting inputs, the child may perform bounded
+assignment-defined, read-only observation recovery while each step can add a
+new fact (for example, re-reading an assigned artifact), then records the direct
+conflict. It never applies
 an automatic repair or retry and never launches an experiment, readiness,
-Agentify or Git action. On success or failure, the native terminal result
+Agentify or Git action. On completion, the native result
 begins with a natural-language mechanical conclusion: what was inspected,
 which conflict or direct consequence was observed for CPM consumers, and what
 residual uncertainty remains. The JSON result and status fields follow as

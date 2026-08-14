@@ -57,9 +57,11 @@ worktree-ticket identity. Preserve disjoint edits made by other workers.
 Before result-bearing implementation, verify the assignment declares an
 evidence action inside `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Do not
 implement nested rollout/replanning, horizon-growing search or another action
-above its `O(H*K_search)` and `16*H` ceilings. Report
-`NON_EXECUTABLE_EVIDENCE_DESIGN` to Code Project Manager instead; native optimization is not a
-repair. For scalable dynamic-agent code, flag a new dense pairwise deployment
+above its `O(H*K_search)` and `16*H` ceilings. Report the concrete fact that the
+requested evidence design exceeds its registered asymptotic ceiling to Code
+Project Manager; native optimization is not a repair. This is an
+assignment-local design fact, not a status or scientific stop. For scalable
+dynamic-agent code, flag a new dense pairwise deployment
 path unless it is explicitly the fixed-small-N exact reference.
 
 Run only assigned proof-sized checks. Do not mutate Git, launch formal compute,

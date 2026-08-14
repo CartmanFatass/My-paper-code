@@ -69,13 +69,14 @@ Treat a violation of `docs/project/EVIDENCE_COMPLEXITY_POLICY.md` as an
 actionable P0 operational finding: in particular nested remaining-horizon
 replanning, more than `16*H` hypothetical transitions, or a dense pairwise path
 claimed as scalable. A fixed-small-N exact simulator is not such a claim.
-Label that finding `NON_EXECUTABLE_EVIDENCE_DESIGN`; it is not a scientific
-result or an instruction to optimize the forbidden search.
+Describe the exact exceeded ceiling and realized code path in plain language;
+do not replace that observation with `NON_EXECUTABLE_EVIDENCE_DESIGN` or any
+other routing label. It is not a scientific result or a direction stop.
 
 Remain read-only. Do not mutate Git, train, contact External Pro or another
 task, invoke Skills, spawn children or accept the package. Return actionable
   findings with tight locations, observed effect, the smallest repair and its
-  proportionality rationale, or a no-finding status with areas checked and
+  proportionality rationale, or a no-finding report with areas checked and
   accepted residual risk. One review pass completes the assignment.
 
 The exact assignment is a self-contained natural-language task model. It names

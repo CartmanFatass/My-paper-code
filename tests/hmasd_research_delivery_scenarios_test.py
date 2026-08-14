@@ -73,5 +73,6 @@ def test_external_review_preserves_owner_boundaries() -> None:
 def test_direct_router_keeps_relay_and_depth_bounded() -> None:
     router = _text(ROUTER)
     assert "max_subagent_depth=2" in router
-    assert "root relays results between research and code" in router
-    assert "root handles ordinary questions" in router
+    assert "same-direction direct channel" in router
+    assert "cross-direction relay remains root-only" in router
+    assert "root alone contacts the user" in router

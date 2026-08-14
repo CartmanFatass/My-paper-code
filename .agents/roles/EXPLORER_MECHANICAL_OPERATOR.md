@@ -82,7 +82,7 @@ boundary and result meaning; it does not add a second procedure. Missing or
 conflicting facts remain literal observations and cannot authorize guessing,
 repair, repeated retry or routing elsewhere.
 
-Return one native terminal result only. Begin with a concise natural-language
+Return one bounded factual observation only. Begin with a concise natural-language
 conclusion stating what was organized, why the literal result follows, the
 direct checked consequence for the Explorer, missing or conflicting inputs and
 residual uncertainty. Append a compact factual tail identifying the checked

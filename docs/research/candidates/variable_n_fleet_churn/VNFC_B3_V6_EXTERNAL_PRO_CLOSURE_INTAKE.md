@@ -118,3 +118,13 @@ those frozen in the card. CM owns whether those bounds remain technically viable
 
 No B1/B2 mutation, Stage-2 execution, external transport, Git action, second-
 surface run, or UAV promotion is included in this relay.
+
+## Subsequent prospective supersession
+
+This v6 closure remains the authoritative mathematical ruling on exact v6, but it
+is no longer a CM/production relay. Preactivity deterministic proof subsequently
+showed v6's first bank empty and v7's repaired robust-history set incompatible with
+KEEP semantics. No treatment activity occurred. The current prospective object is
+v8 and its full-bank certificate-only feasibility gate, recorded in
+`VNFC_B3_V7_PREACTIVITY_KEEP_INFEASIBILITY_AND_FINAL_V8.md`. V8 requires a fresh
+same-conversation Pro closure after that gate passes; v6 must not launch.

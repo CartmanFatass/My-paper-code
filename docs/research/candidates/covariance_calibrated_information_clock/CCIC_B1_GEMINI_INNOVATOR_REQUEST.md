@@ -51,6 +51,12 @@ natural peak, and active-capacity ratios versus CCIC are at most `1.10` in every
 cell, including the necessarily prospective-only initial decision. Do not
 silently change this first discriminator.
 
+The prospective resource law permits parallelism only across indivisible,
+atomically retained seed blocks: at most eight single-numerical-thread worker
+processes, no arm or replay-tuple splitting, no scheduling field in an RNG
+address or estimator, and fixed within-seed order. This is an execution-
+isolation constraint, not evidence or permission to change the discriminator.
+
 Generate bounded prospective mechanisms and falsifiers that could change work
 after the frozen first surface, not post hoc explanations of nonexistent data:
 

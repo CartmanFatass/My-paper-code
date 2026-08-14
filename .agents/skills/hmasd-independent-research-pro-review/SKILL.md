@@ -86,10 +86,11 @@ For the exact closure question and response headings, read
    model, send, wait, recovery and tab-cleanup mechanics. It may use
    operational judgment to realize the frozen brief but cannot infer
    same-direction grouping, scientific relationship, independence or future
-   reuse. The child is silent while live and returns exactly once through its
-   native final response with one `AGENTIFY_REVIEW_BATCH_RESULT` carrying
-   `status|results_path|error` and terminal status `COMPLETE|ERROR`. Read the
-   named result only after that terminal final return. Before reading it,
+   reuse. The child is silent while live and returns exactly once through the
+   canonical `AGENTIFY_REVIEW_BATCH_RESULT` with
+   `status=COMPLETE|INCIDENT_REPORTED`, the exact assigned `results_path` only on
+   complete validation, and the mechanical `transport_terminal`. Read the named
+   result only after a `COMPLETE` final return. Before reading it,
    invoke `.agents/skills/hmasd-agentify-transport/scripts/hmasd_agentify_result_path_guard.py`
    with the repository, the assignment's expected `results_path` and the
    returned terminal anchor. Reject any mismatch, redirect, root-level generic
@@ -102,8 +103,12 @@ For the exact closure question and response headings, read
    scientifically.
    Explorer names an exact archived URL in a later brief when it chooses
    continuation; if no continuation is stated, the child must not guess from
-   titles. An item `ERROR` affects only that review. Retrying transport reuses
-   the same batch file and requires no Explorer file change.
+   titles. An `INCIDENT_REPORTED` return affects only that transport assignment,
+   supplies no scientific evidence and cannot pause the direction. A later send
+   is an EM-owned prospective decision: it is allowed only when the prior record
+   proves no provider turn, no conversation identity and no active generation,
+   and it uses a new idempotency key. Never infer resend permission from
+   `ERROR`, a terminal label, a reused batch path or an attempt count.
 
 When a Pro protocol includes a follow-up, freeze it as a second standalone
 natural-language question only after its prerequisite review is reconciled.
@@ -129,33 +134,31 @@ not rename, continue, or borrow the local/raw archival mechanics of
 `IR_DIRECTION_REVIEW` or `IR_METHODOLOGY_REVIEW`; those two remain independent
 branches with their existing local source and archival rules.
 
-EM selects the project-alignment question and retains its scientific intake. It
-may use this branch only after a named project-alignment trigger, or after an
-`OVERNIGHT_BRANCH_BLOCKER_REVIEW` trigger has been confirmed. Ordinary B never
-creates this trigger. The overnight trigger is available only after applicable
-in-scope recovery and legal owner relay are exhausted on the same overnight
-project branch.
+EM selects the project-alignment question and retains its scientific intake. A
+named scientific trigger or optional `OVERNIGHT_BRANCH_BLOCKER_REVIEW` may
+justify this branch. Ordinary B does not create a mandatory review gate, and
+engineering recovery need not be declared exhausted before EM asks one exact
+scientific question.
 
-Before dispatch, Root must have completed `publication`: an owner-accepted exact
-path set has been ordinarily, non-force pushed to the configured upstream. The
-review brief supplies GitHub-readable remote,
-branch, exact pushed **aggressive** revision, and repository-relative paths.
-A local-only archive, unpushed revision, or filesystem-only locator is not a
-project-alignment input. External Pro uses its connector to inspect precisely
-that remote revision and paths.
+When the provider must inspect repository-visible artifacts, Root publishes the
+owner-accepted exact path set by an ordinary non-force push and the review brief
+supplies the GitHub-readable remote, branch, exact pushed **aggressive**
+revision, and repository-relative paths. A self-contained science-only question
+that does not require repository inspection may proceed without publication.
+Publication never gates local EM intake or direction continuation.
 
 The Explorer uses only its parent-specific registered Pro transport to send the
-frozen alignment question. Root manages the complete raw-response archive. Once
-the owner accepts its exact archive path, Root performs the local commit and
-ordinary non-force push of that archive before Root returns it to the original
-same-direction EM. The external side effect and its archive are evidence, never
-a permission, token, queue, ledger, gate, state machine, or transfer of owner
-authority.
+frozen alignment question. Return the complete raw response immediately to the
+same-direction EM for scientific intake after canonical transport validation.
+Root may later commit and publish the owner-accepted archive as non-gating audit
+work. The external side effect and its archive are evidence, never a permission,
+token, queue, ledger, gate, state machine, or transfer of owner authority.
 
 Neither Pro nor Root authors EM science, intakes CM's technical result, accepts
-CM code, or performs Operator mechanics. Within an already authorized overnight
-boundary, a legal owner may continue, revise, or stop; `user decision required`
-pauses only this review branch. The result returns to EM for its own
+CM code, or performs Operator mechanics. Pro supplies a disposition or advisory
+answer and never commands continue, revise, pause or stop. A user decision
+pauses only the exact external action requiring that authority. The result
+returns to EM for its own
 direction-local scientific reconciliation and does not make a project,
 technical, or formal acceptance claim.
 
@@ -173,15 +176,16 @@ for mathematical/causal closure of that exact revision; every other scientific,
 technical, runtime, portfolio, and production boundary remains with its named
 local owner.
 
-For a direction review, archive the complete response before producing the
-`INDEPENDENT_RESEARCH_DIRECTION_PACKET`. A constructive review must complete
-before the Explorer applies, rejects or parks its corrections in a new
-advisory version; only that version may receive a separate adversarial review.
+For a direction review, preserve the complete response in the canonical
+transport result before producing the `INDEPENDENT_RESEARCH_DIRECTION_PACKET`.
+A constructive review must complete before the Explorer applies or rejects its
+corrections in a new advisory version; only that version may receive a separate
+adversarial review. Later repository archival is non-gating audit work.
 For a methodology audit, return the exact format-complete methodology packet
 to the Explorer's local FIFO without adding sources, claims or project
 instructions. Neither mode promotes a direction into formal project state. For
-the project-alignment branch, Root-owned archival and publication occur as
-described above; EM alone reconciles the returned scientific answer.
+the project-alignment branch, EM reconciles the returned scientific answer
+without waiting for later Root-owned archival or publication.
 
 The Explorer alone selects the next Pro review and continues the authorized
 campaign. Research children remain available for optional source, innovation,

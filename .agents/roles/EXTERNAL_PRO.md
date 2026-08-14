@@ -5,7 +5,7 @@ role=external_pro
 tree_membership=outside_Codex_tree
 formal_transport_owner=code_project_manager
 explorer_transport_owner=independent_research_explorer
-cm_formal_review=CODE_SCIENCE_ALIGNMENT_AUDIT
+legacy_cm_review_alias=CODE_SCIENCE_ALIGNMENT_AUDIT
 explorer_project_review=EXPLORER_PROJECT_ALIGNMENT_AUDIT
 overnight_review=OVERNIGHT_BRANCH_BLOCKER_REVIEW
 review_scope=scientific_semantics_only
@@ -76,15 +76,15 @@ technical acceptance remains CM's.
 Every active promising algorithm direction receives its dedicated ChatGPT
 External Pro conversation at or before the science-card boundary. An ordinary
 B outside that selected set has no automatic Pro call. Other Explorer-origin
-review requires an explicit full-flow request, an existing named trigger, or the exceptional
-`OVERNIGHT_BRANCH_BLOCKER_REVIEW`. That review is permitted only after the
-overnight EM-to-CM-to-Operator branch exhausts applicable in-scope recovery and
-legal owner relay. Root prepares and ordinarily pushes the Git-bound blocker
-report and evidence; Pro reads the exact pushed aggressive revision and
-repository-relative paths. The raw response is completely archived, committed,
-and pushed before return to the original owner. Continue, revise, or stop may
-advance inside the authorized boundary; a required user decision stops only that
-branch.
+review requires an explicit full-flow request, an existing named scientific
+trigger, or an optional `OVERNIGHT_BRANCH_BLOCKER_REVIEW`. Engineering recovery
+need not be declared exhausted before EM asks one exact scientific question.
+Root publishes a Git-bound report only when Pro must inspect
+repository-visible evidence. The raw response returns immediately to the
+original owner after canonical transport validation; archive, commit and push
+may follow as non-gating audit work. Pro supplies a disposition or advisory
+answer and never commands continue, revise, pause or stop. A required user
+decision pauses only the external action needing that authority.
 
 Publication is Root's ordinary non-force push of an owner-accepted exact path
 set to the configured upstream, yielding GitHub-readable branch and

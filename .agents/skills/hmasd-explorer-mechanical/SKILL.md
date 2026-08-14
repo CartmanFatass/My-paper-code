@@ -41,8 +41,10 @@ decision. The Role and this Skill are mandatory immediate references, but they
 are contract inputs distinct from assignment-file reconstruction.
 
 If required assignment meaning is missing from the native payload or the
-invoker-supplied file-backed assignment, fail closed to the invoker
-instead of using `rg` or discovery. Once assignment meaning and inputs are
+invoker-supplied file-backed assignment, return `INPUT_UNAVAILABLE` with the
+exact missing input and unobserved fields instead of using `rg` or discovery.
+This is a local observation, never task or direction failure. Once assignment
+meaning and inputs are
 present, use the lowest-cost read-only observation first: `rg` only for
 explicitly named Markdown or JSON fields and evidence locators, PowerShell
 JSON reading for structured values, `Compare-Object` for literal
@@ -59,12 +61,21 @@ validity, completeness, public accessibility or technical sufficiency. Do not
 revalidate schema, readability, readiness, receipts, activity counts, retry
 history, technical consistency or raw runtime evidence.
 
-If the first observation exposes one missing or disputed named fact, reread
-one exact named input once. Keep the original observation and report the
-absence or contradiction if the second read does not resolve it. Do not add
-sources, infer values, retry repeatedly, repair records or choose a scientific
-action.
+If an observation exposes a missing or disputed named fact, perform bounded
+read-only recovery only while each reread can add a new literal fact. Keep the
+original observation and report the absence or contradiction when the named
+inputs cannot resolve it. Do not add sources, infer values, retry repeatedly,
+repair records or choose a scientific action.
 
-The child returns one conclusion-first native result. The invoker interprets
-the organized facts and owns every next action; those decisions must not be
+The child returns one conclusion-first native result followed by a factual tail:
+
+```text
+observation_state=COMPLETE|INPUT_UNAVAILABLE|LITERAL_CONTRADICTION
+named_input=<exact input>
+literal_observation=<direct fact or none>
+unobserved_fields=<exact fields or none>
+```
+
+The invoker interprets the organized facts and owns every next action; failure,
+blocked, ready, retry, pause, retire and next-action decisions must not be
 smuggled into the mechanical result.

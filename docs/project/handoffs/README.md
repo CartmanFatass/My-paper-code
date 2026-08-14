@@ -3,13 +3,18 @@
 This directory describes the ignored temporary relay surface used by the
 Explorer-origin project-validation chain. The goal is a readable, bounded
 delivery from one direction EM to one CM and the technical evidence back to the
-same EM through Root.
+same EM through their bounded same-direction direct channel.
 
 - `temp/handoffs/explorer_to_code_manager/` holds an EM-approved treatment
   brief. An assigned Writer may write or remove only that approved temporary
-  file; Root relays it to the named CM.
+  file; EM sends its locator to the named same-direction CM.
 - `temp/handoffs/code_manager_to_explorer/` holds CM's technical result. Root
-  relays it to the same-direction EM after CM technical acceptance.
+  does not relay it: CM sends its locator directly to the paired EM after
+  technical acceptance.
+
+Both owners must match `direction_id` and counterpart canonical task names.
+Cross-direction content, user requests, portfolio decisions, resource
+allocation, or authority expansion returns to Root.
 
 Each item explains the goal and why it matters, the direction/candidate/question
 and comparator, the responsible owner and permitted action, completion evidence,

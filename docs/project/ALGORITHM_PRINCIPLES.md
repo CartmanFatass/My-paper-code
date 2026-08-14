@@ -150,9 +150,11 @@ Reports identify the current stages `conjecture | derivation | algorithm
 implementation | experiment` and state the real calls, transition/update/
 evaluation counts, result, strongest alternative explanation and next step.
 Binding, closure, PASS counts or certificate production cannot stand in for
-those stages. New conclusion-bearing designs use the triggered design and
-code-science audits in `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md` before
-formal compute.
+those stages. For a new conclusion-bearing design, the same-direction EM
+freezes the scientific object, obtains the exact Pro closure required by
+`AGENTS.md`, and the CM establishes implementation conformance before formal
+compute. `docs/project/SCIENTIFIC_ASSERTION_AUDIT.md` preserves legacy audit
+names only; it is not an additional workflow gate.
 
 Maintain several live conjectures when evidence permits. Each states its scope,
 mechanism-to-behavior-to-capability edge, strongest simpler explanation, and

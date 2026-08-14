@@ -19,6 +19,7 @@ Root Role or unrelated owner procedure.
 |---|---|---|
 | Root | current CLI task | `.agents/roles/ROOT.md` |
 | Code Manager | `.codex/agents/hmasd-code-project-manager.toml` | `.agents/roles/CODE_PROJECT_MANAGER.md` |
+| Workflow Recovery Manager | `.codex/agents/hmasd-workflow-recovery-manager.toml` | `.agents/roles/WORKFLOW_RECOVERY_MANAGER.md` |
 | Explorer Manager | `.codex/agents/hmasd-independent-research-explorer.toml` | `.agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md` |
 | Project Scout | `.codex/agents/hmasd-project-scout.toml` | `.agents/roles/PROJECT_SCOUT.md` |
 | External Gemini Transport | `.codex/agents/hmasd-external-gemini-transport.toml` | `.agents/roles/EXTERNAL_GEMINI_TRANSPORT_OPERATOR.md` |
@@ -33,10 +34,21 @@ The operational Root alone contacts the user, relays authorized packets across
 sessions and directions, performs final Git actions, and allocates shared
 compute. The dedicated portfolio session named below may author only the
 portfolio sections of shared canonical research state; that exception grants no
-Git or user-contact authority. A stage-paired EM and CM may exchange only
-bounded same-direction owner packets. All other sibling contact is forbidden.
-Children remain inside their exact assignment and Role, do not spawn unless
-their manager Role explicitly allows it, and never stage, commit, or push.
+Git or user-contact authority. A
+stage-paired EM and CM may contact only their named same-direction counterpart
+through the bounded direct channel defined below. All other sibling contact is
+forbidden. Children remain inside their exact assignment and Role, do not spawn
+unless their manager Role explicitly allows it, and never stage, commit, or
+push.
+
+The Workflow Recovery Manager is a task-scoped L1 recovery owner, not a
+production transport or domain authority. Root or a Code Manager transfers one
+`recovery:<incident-id>` when repeated failure, no new evidence, a constrained
+observation surface, or cross-file/runtime diagnosis prevents ordinary workers
+from completing their assignment. Its Role authorizes isolated worktree repair,
+task-scoped runtime control, focused validation, and only assignment-explicit
+external actions. It returns only recovery completion or a concrete authority
+boundary; routine failure streams do not wake its invoker.
 
 For every project Python command, invoke
 `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` directly. Do not use bare
@@ -107,6 +119,13 @@ conclusion, leading and no-investment decisions, strongest alternatives, claim
 ceilings, next discriminator, revisit conditions and exact operational action.
 Neither direction has authority to send runtime/status streams, hashes,
 receipts, tab state or ordinary direction mechanics through this interface.
+When a runtime/resource/engineering fact is decision-relevant, the packet still
+states its plain causal meaning, exact scientific unknown and every live
+semantics-preserving alternative; it never substitutes a terminal label or
+binary child recommendation. In a file-backed cross-session bridge,
+operational Root authors a distinct `ROOT_TO_PORTFOLIO` entry and the dedicated
+session authors a distinct `PORTFOLIO_TO_ROOT` entry. A later canonical-state
+append does not substitute for either provenance record.
 
 Both Roots re-read this router, `.agents/roles/ROOT.md`, and
 `docs/research/workflow-runs/2026-08-11_five-round-research-team/CROSS_DIRECTION_PORTFOLIO_HANDOFF_SOL_ULTRA.md`
@@ -198,18 +217,22 @@ If stable reconciliation instead shows zero provider turns, no conversation ID,
 the complete question still in the composer, and no active generation, return
 `SEND_NOT_COMMITTED` with `prompt_sent=false` and `response_received=false`,
 archive and report that error, then close the tab. Do not retry inside the same
-transport call; Root may explicitly authorize a later fresh-tab attempt. Once a
-provider turn or conversation identity exists, never resend.
+transport call. Within an active direction-stage envelope, the owning EM may
+authorize a later fresh-tab attempt for the identical request only when the
+prior record proves zero provider turns, no conversation identity and no active
+generation. No fixed attempt count has scientific or portfolio meaning. Any
+ambiguous commitment or existing provider turn/identity remains permanently
+observe-only and must never be resent. Only a genuinely new conversation,
+external-authority expansion or user decision returns to Root.
 
 Multi-direction exploration must produce portfolio choices, not an ever-growing
 idea inventory. At each substantive portfolio review, the dedicated portfolio
-session states a bounded research objective, names the leading directions
-receiving further investment, names the directions receiving no further
-investment with concrete scientific reasons and revisit conditions, and gives
-every remaining question a decision trigger. The current session objective is
-to select at least three promising directions and pause or retire at least three
-lower-value or dominated directions. This is an output target for that session's
-judgment, not a WIP cap, direction limit or admission gate.
+session states a bounded research objective, names every direction receiving
+further investment, and names any direction receiving no current investment
+with a concrete scientific-value, identifiability, redundancy, total-cost or
+opportunity-cost reason and a revisit condition. There is no required number of
+leading, paused or retired directions and no direction-count output target,
+WIP cap, direction limit or admission gate.
 
 The project-level scientific destination is an HMASD/MARL algorithm that handles
 at least one of two changes: a variable number of agents `N`, or a variable skill
@@ -296,17 +319,19 @@ termination. Resource or engineering limits may pause a scoped compute lease,
 but cannot scientifically terminate an invested direction. Where semantics can
 be preserved, CM retains a resumable, blinded, atomic frontier for later work.
 
-Pending user adjudication, legacy process fences are suspended as scientific or
-portfolio routing commands: one-attempt/no-retry labels, CM
+Under the user-approved P0 control-plane amendment, legacy process fences have
+no scientific or portfolio routing authority: one-attempt/no-retry labels, CM
 recommend-park language, fixed wall-time caps presented as science limits,
 terminal/`ERROR` routing, mandatory archive/commit/push before scientific
-intake, and stale Pro/Gemini retry schemas. They remain mechanical facts or
-local safety constraints, never evidence that an invested direction should
-pause, retire, or stop. This suspension does not weaken exact provider
-no-resend after a visible/provider turn or concrete conversation identity.
-Provider transport failure cannot pause a scientific direction. A resource
-slice may pause only its lease; CM owns semantics-preserving same-coordinate,
-blinded, atomic resume until complete question-relevant data exist.
+intake, fixed review/readiness chains, and stale Pro/Gemini retry schemas. They
+remain mechanical facts or local safety constraints, never evidence that an
+invested direction should pause, retire, or stop. This does not weaken exact
+provider no-resend after a visible/provider turn or concrete conversation
+identity, the science-card activity boundary, complete-panel claim conditions,
+or the ban on silent seed/threshold/treatment changes. Provider transport
+failure cannot pause a scientific direction. A resource slice may pause only
+its lease; CM owns semantics-preserving same-coordinate, blinded, atomic
+continuation until complete question-relevant data exist.
 
 For a protocol/workflow designer recovery whose assignment explicitly grants
 source change, diagnostics, runtime control, and bounded live validation, an
@@ -338,6 +363,47 @@ Use semantic ownership before acting:
   provenance-bound relay, shared-resource allocation and necessary final Git
   integration/publication.
 
+## Direction-stage L1 delegation
+
+For each invested direction stage, Root creates or reuses a paired
+`EM_<direction>` and `CM_<direction>`. Both assignments contain the identical
+`direction_id`, the same ordinary-language direction-stage authority envelope,
+and the counterpart's canonical task name. Root delegates through the next
+decision-level scientific milestone, reuses the same L1 pair with
+`followup_task` while that envelope remains valid, and ends or re-authorizes the
+pair at the milestone or when the direction is paused. This is stage-scoped
+context reuse, not a direction-lifetime process.
+
+The authority envelope states the direction and stage objective; why the
+portfolio is investing; which treatments, comparisons and discriminators EM
+may refine; protected variable axes, core hypotheses, claim boundary and
+cross-direction isolation; already-authorized Pro/Gemini conversations and
+uses; engineering and light-probe bounds; run classes that require a compute
+lease; and the exact events that must return to Root. It is an ordinary-language
+delegation boundary, not a state machine, ticket, status taxonomy or approval
+ledger.
+
+The same-direction direct channel transfers owner-authored work without
+transferring authority. EM may send CM only a meaning-complete science card, a
+science-bearing clarification, a Pro-closed revision, or an EM-authorized next
+treatment inside the envelope. CM may send EM only a scientific-definition
+ambiguity, a technically accepted result packet, or a request to change a
+condition that could affect already observed data. Each message must match both
+owners' `direction_id` and named counterpart. Wrong-direction messages,
+cross-direction material or evidence, portfolio rankings, user requests,
+shared-resource allocation, and scientific or technical authority transfer are
+rejected and returned to Root. Cross-direction relay remains Root-only and
+provenance-bound.
+
+Root issues a direction-scoped heavy-compute lease that names resource limits,
+concurrency, validity period and stage boundary. Within that lease CM owns the
+production guard, Operator dispatch, environment repair, and retries that do
+not change scientific conditions; CM proceeds autonomously for all such
+attempts. CM
+returns only to expand the lease, resolve a real cross-scope resource conflict,
+obtain new user authority, or request a science-bearing change. Light probes
+remain inside the envelope when explicitly bounded there.
+
 The initiating L1 owner closes its own observation loop and filters reports
 before anything reaches Root. CM owns scope-local CPU, memory, process,
 restart-risk, resource, artifact-frontier and Operator facts; EM owns its
@@ -345,11 +411,17 @@ transport-child coordination and direction-local review/intake facts. Their
 leaves return to that L1, not directly to Root. Routine `running`, `inflight`,
 `pending_init`, PID/RSS/CPU, tab, send-phase, file-exists, retry-progress and
 unchanged-state messages remain inside the L1 scope. The L1 returns to Root only
-for an object-level terminal or answer-changing milestone, a science-bearing
-ambiguity that needs its semantic owner, a concrete cross-scope resource
-conflict, a genuine need for new user/Root authority, or final Git/canonical
-integration. A high CPU reading, an ordinary wait or retry, and a tool timeout
-are not Root escalation conditions by themselves.
+when the core mechanism is supported, contradicted or non-identified; the claim
+ceiling or strongest alternative changes materially; another direction creates
+competition, absorption, fusion or a joint hypothesis; no valuable successor
+remains; the envelope or resource need is exceeded; a new provider conversation,
+external authority or user decision is required; or final Git/canonical
+integration is needed. Code completion, focused checks, environment repair,
+preactivity/no-data engineering failures, unchanged-science retries, Operator
+launch/wait/terminal/install facts, provider page/wait facts, the first explicit
+noncommit recovery, ordinary Pro revisions, owner logs and local handoffs stay
+inside the L1 pair. A high CPU reading, an ordinary wait or retry, and a tool
+timeout are not Root escalation conditions by themselves.
 
 At a decision milestone EM sends operational Root one compact scientific packet:
 conclusion, key observation, strongest alternative explanation, claim ceiling,
@@ -369,6 +441,13 @@ receipts, runtime observations, environment files, or log entries. Topology may
 require Root to relay an owner-prepared packet, but Root does not rewrite or
 mechanically validate it. Hashes, byte counts, CRLF/LF identity, receipt shape,
 and float-bit equality are never Root research gates.
+
+The VQFP treatment already beyond its activity boundary when this contract was
+adopted is grandfathered: do not retrofit its running control flow. After it
+naturally terminates, any later VQFP stage uses the direction-stage pair,
+envelope and compute-lease contract. SCDMP, CCIC and other new stages use this
+contract from their next authorization. Existing logs and scientific evidence
+remain unchanged; owner-local logging is direct and never wakes Root by itself.
 
 After any context compaction, interruption, or long mechanical subtask, each
 Root reanchors to this file, `.agents/roles/ROOT.md`, and the named portfolio

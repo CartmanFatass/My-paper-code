@@ -62,3 +62,4 @@ shared `INCIDENT_REPORTED` contract, never generic `BLOCKED`: directly observed
 facts and method, actions taken/not taken, remaining unknown, causal
 hypotheses, and the smallest next authority/action. It cannot declare a
 goal/thread blocked, pause unrelated work, or request user action absent
+directly observed interface evidence.

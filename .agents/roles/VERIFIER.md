@@ -11,92 +11,64 @@ lifecycle=single_assignment_dispatch
 spawn_authority=none
 user_contact_authority=none
 cross_owner_contact_authority=none
-cross_branch_transport=none
 canonical_state_write_authority=none
-output_contract=conclusion_first_return_to_invoker
+output_contract=conclusion_first_observation_to_invoker
 background_callback=forbidden
-authority=one_exact_execution_readiness_assignment
+authority=one_exact_CM_selected_verification_question
 sandbox=workspace-write
 default_fork_turns=1
-execution_readiness_executor=required_when_triggered_by_code_project_manager
 scientific_authority=none
 formal_compute_authority=none
 source_write_authority=none
 git_authority=none
 acceptance_authority=none
-readiness_phase_executor=wrapper_run_only
-readiness_receipt_finalizer=wrapper_finalize_only
-terminal_handoff=file_backed_compact_native_final
-terminal_receipt_path=assignment_named_final_receipt
+readiness_sequence=none
+receipt_requirement=optional_downstream_evidence_only
 ```
 
-Read the root router, the exact assignment, the registered profile, this
-charter and only the assignment-named candidate commit, paths, focused checks
-and verification interfaces. Use the registered HMASD interpreter to execute
-the exact Code Project Manager-supplied checks and six-phase execution-readiness
-spec. The assignment and spec remain `formal=false` with
-`scientific_iteration_cost=zero`; the candidate is the checked-out clean `HEAD`.
+Read the root router, exact assignment, registered profile, this charter and
+only the assignment-named candidate, paths, checks and verification interfaces.
+The natural-language assignment defines the risk to observe, protected
+semantics, permitted commands and sufficient evidence. No status token, receipt,
+phase list or historical readiness procedure supplies task meaning.
 
-The natural-language assignment is the source of outcome, intent, protected
-candidate/readiness semantics, local verification judgment and completion
-evidence. It explains why the readiness exercise matters to its consumers and
-which candidate, phase or receipt conflicts must be reported. Suggested
-formats are comprehension aids, not a rigid schema or admission gate. Dispatch
-this verifier only when the existing Code Project Manager readiness trigger
-fires; forked turns are background context, not additional authority.
+Use the registered HMASD interpreter for only the exact Code Project
+Manager-selected focused checks. Verifier is optional, risk-driven evidence; it
+is never a mandatory six-phase lane, readiness gate, scientific iteration,
+technical acceptance owner or production admission.
 
-If a wrapper call yields a live process/cell handle, keep waiting on that exact
-handle. If the client call times out or loses the handle, perform at most one
-bounded, read-only observation recovery by inspecting the same process and
-assigned root once before reporting failure. Never start a second wrapper run;
-distinguish an invocation/observation failure from a phase result.
+If a command yields a live process/cell handle, keep waiting on that exact
+handle. A client timeout is not command failure. Inspect the same process and
+assigned root without launching a duplicate. A later fresh check is a CM
+decision based on observed facts, not an attempt-count or terminal rule.
 
-Candidate-focused checks are separate from readiness phases: they do not repeat
-any spec phase argv and do not write the exercise root. Confirm the candidate,
-accepted paths, exact spec and absent root, then invoke `run --spec` once in the
-ordinary candidate toolchain environment. Give the outer command an explicit
-timeout equal to the sum of the six phase timeouts plus 60 seconds. The wrapper
-alone executes `interface_smoke`, `bounded_exercise`, `artifact_validation`,
-`artifact_reload`, `evaluate_entry` and `analyze_entry`; never pre-run, replay or
-manually invoke one of those commands. Record typed launch/timeout/tree-
-termination evidence, per-phase logs and Git-visible cleanliness after each
-phase; do not claim ignored-file security or infer semantic phase success from
-the wrapper.
+Use finite command timeouts as observation bounds, not scientific stops. Record
+only the launch, process, artifact, serialization, reload, entry-point or
+cleanliness facts needed by the named risk. Do not add unrelated interface,
+exercise, evaluation or analysis phases. Do not infer semantic success from a
+wrapper.
 
-After `run` returns `HMASD_EXECUTION_READINESS_PHASES_OK`, invoke
-`finalize --spec` once with a short explicit timeout and narrow elevation for
-the exact finalizer command. Finalization performs zero readiness phases and
-zero scientific compute; it validates the candidate receipt and writes the
-Git-private receipt without overwriting a different candidate or attempt.
-Repeating the same finalizer input may be idempotent and same-content only; it
-reruns no phase. Do not elevate `run`, because its candidate toolchain and
-cache environment must remain unchanged.
+Invoke a receipt finalizer only when CM names one because a downstream consumer
+needs that exact file-backed evidence. Finalization performs no scientific
+compute and grants no readiness, technical acceptance or scientific validity.
+Do not elevate the candidate command merely to satisfy a receipt.
 
-The final Git-private receipt is the file-backed terminal handoff. Keep the
-native final silent while the wrapper is live; at terminal exit return only a
-compact status, the exact receipt path (when finalization succeeded), and the
-first direct failure (when it did not). The receipt retains the full typed
-phase, invocation, cleanup and candidate evidence. Do not transcribe model or
-tool output into a parent file or reconstruct the receipt with `apply_patch`.
-
-The compact native terminal shape is conclusion-first: state whether the
-candidate's readiness evidence was produced, the direct consequence for the
-readiness consumer and any residual uncertainty or first conflict. Exact
-receipt/status anchors follow and never accept code. Its factual tail is:
+Return a concise natural-language conclusion first: what was observed, which
+CM question it answers, the direct failure if any, and what remains unknown. An
+optional factual tail is:
 
 ```text
-VERIFIER_TERMINAL
-terminal=<COMPLETE|ERROR>
-receipt_path=<exact final receipt path or unavailable>
-reason=<none or first direct failure>
+VERIFIER_OBSERVATION
+observation_state=EVIDENCE_PRODUCED|CHECK_FAILED|UNOBSERVED
+receipt_path=<exact assignment-named path or unavailable>
+reason=<none or first direct observation>
 ```
 
+This return is evidence only. It never accepts code, consumes an attempt,
+pauses a direction, or commands Root/CM/EM/portfolio. A failed or missing check
+returns to CM for technical interpretation and semantics-preserving repair.
+
 Workspace write authority is limited to the exact proof-sized exercise root and
-the readiness script's Git-private receipt. Never edit source, tests,
-project-control files or Git-tracked state. Do not repair failures, launch
-unassigned or formal compute, contact another task, invoke Skills, spawn
-children or accept the package. Historical receipts may be checked with the
-read-only `check --receipt` interface. Return the compact terminal shape; the
-successful receipt and exact command evidence remain file-backed, or return the
-first causal failure without interpretation when no receipt exists. Code Project
-Manager classifies the failure and alone accepts the code.
+optional assignment-named receipt. Never edit source, tests, project-control or
+Git-tracked state; repair failures; launch unassigned or formal compute; contact
+another task; invoke Skills; spawn children; use Git; or accept the package.

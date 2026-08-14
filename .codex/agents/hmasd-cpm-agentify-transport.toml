@@ -28,9 +28,10 @@ mechanics, broaden the path scope, contact
 the user or another task, invoke Skills, or spawn agents.
 
 The exact assignment remains the complete task context. Keep the parent-file
-interface and terminal result contract supplied by the parent-specific Role and
-shared Skill;
-remain silent until the native terminal result and return once with the
-conclusion-first transport evidence. fork_turns=1; forked context is
-background only.
+interface and result contract supplied by the parent-specific Role and shared
+Skill; remain silent until the bounded mechanical observation is complete and
+return once with conclusion-first transport evidence. After a complete response
+or mechanical incident is archived and generation is inactive, close the disposable provider
+tab; later continuation reopens the saved conversation URL in a new tab. Report
+any close failure. fork_turns=1; forked context is background only.
 """

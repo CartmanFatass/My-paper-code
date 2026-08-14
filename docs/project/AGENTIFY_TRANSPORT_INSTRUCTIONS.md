@@ -128,8 +128,8 @@ persisted ledger `BLOCKED` value remains an internal mechanical fact and does
 not transfer goal or Root authority. Only operational Root may make the
 separate thread-level blocked decision after its independently verified audit.
 
-An exact-one terminal, non-resend result, exhausted fresh-tab allowance,
-resource limit, or absent response is transport evidence only. It does not
+An exact-one terminal, non-resend result, resource limit, or absent response is
+transport evidence only. It does not
 command CM, Root, EM, or the portfolio session to consume, pause, retire, or
 declare a scientific direction non-resumable, nor does it impose a binary next
 choice. Root translates the return into observed fact, exact object, remaining
@@ -141,15 +141,16 @@ and exact-one/no-resend invariants; where frozen transport semantics permit,
 retain a resumable blinded atomic frontier rather than treating a lease/resource
 pause as a scientific termination.
 
-Pending user adjudication, legacy one-attempt/no-retry, CM-recommend-park,
-fixed wall-cap, terminal/`ERROR`, archive/commit/push-before-intake, and stale
-Pro/Gemini retry schemas are suspended as scientific or portfolio routing
-commands. They remain mechanical transport facts and do not pause, retire, or
-stop a scientific direction. This does not authorize a resend: after a visible
-provider turn or concrete conversation identity, the exact no-resend rule
-remains absolute. A transport failure cannot pause the direction. Resource
-slices pause their lease only; CM owns semantics-preserving same-coordinate
-blinded atomic resume until complete question-relevant data exist.
+Under the user-approved P0 control-plane amendment, legacy
+one-attempt/no-retry, CM-recommend-park, fixed wall-cap, terminal/`ERROR`,
+archive/commit/push-before-intake, and stale Pro/Gemini retry schemas have no
+scientific or portfolio routing authority. They remain mechanical transport
+facts and do not pause, retire, or stop a scientific direction. This does not
+authorize a resend: after a visible/provider turn or
+concrete conversation identity, the exact no-resend rule remains absolute. A
+transport failure cannot pause the direction. Resource slices pause their lease
+only; CM owns semantics-preserving same-coordinate blinded atomic resume until
+complete question-relevant data exist.
 
 For an L1 protocol/workflow-design recovery explicitly authorized to modify
 source, diagnose, control runtime, and run bounded live validation, a stale
@@ -207,13 +208,61 @@ tab.key == tab.name == strict.stableKey
 Each submitted question/turn has a new immutable `idempotencyKey`. A continuation
 keeps the conversation `stableKey` but changes the `idempotencyKey`. Never reuse
 a `stableKey` for a new conversation, and never reuse an `idempotencyKey` for a
-different prompt, model, URL, timeout, provider, or first-binding flag.
+different prompt, model, URL, timeout, provider, first-binding, or bootstrap flag.
+
+The stable binding identifies only `stableKey + provider + concrete conversation
+URL/ID`; the model is immutable evidence on each operation and receipt. Ordinary
+continuations must use the binding's recorded current model. The sole exception
+is the explicit Gemini bootstrap continuation below; it is a one-time authorized
+model transition, committed only with that second operation's provider turn.
+
+### 4.1 Gemini bootstrap-first option (owner opt-in only)
+
+This is not a normal first-conversation route. A direction owner may explicitly
+opt in when Gemini must first bind a new conversation under its genuinely
+selected default model before the desired composite mode can be selected. The
+owner must acknowledge that the saved conversation contains a prior
+non-scientific bootstrap exchange; it therefore cannot be silently substituted
+for a clean scientific first turn.
+
+1. Send exactly one short neutral bootstrap at the Gemini root using the genuine
+   visibly selected current/default model. It is a separate operation and must
+   set `firstBinding=true`, `geminiBootstrap=true`, and
+   `bootstrapNonScientific=true`; archive its natural completion and concrete
+   `/app/<id>` identity. It is never the scientific request.
+2. Reopen that exact saved identity in a fresh keyed tab. Switch and visibly
+   verify `Gemini 3.1 Pro` plus `Extended thinking`, then send the actual frozen
+   request once with a new idempotency key and
+   `geminiBootstrapContinuation=true`.
+
+The second call is not a retry. It is permitted only after the recorded committed
+bootstrap, only once, and only if its requested model differs from the bootstrap
+model. Any identity/turn evidence still means observe-only and never resend.
+
+Gemini composer insertion uses the browser's real CDP `Input.insertText` event
+path after focusing the visible editable composer. DOM text mutation is not an
+input receipt and must not be used. Send is the one unique visible semantic
+`Send`/localized `发送` control after the exact composer check.
 
 **Verified:** an existing keyed tab may be adopted only if its key is the same,
 `default`, or empty; otherwise Agentify raises `tab_key_mismatch`. Adoption also
 requires the registry URL to equal the requested URL exactly
 (`tab-manager.mjs:130-150`). Strict review later calls `ensureTab` with
 `exactUrl=true` (`review-transport.mjs:376-385`).
+
+### Provider browser surface
+
+For both ChatGPT Pro and Gemini strict transport, the Agentify control-center
+may be an Electron process, but it must not host a provider tab. Startup must
+start Google Chrome through CDP by default, using its isolated Agentify profile.
+An explicit existing-CDP configuration may instead attach to a running Chrome
+surface. In either case the endpoint must identify itself as
+`Chrome/<version>`; Electron and non-Google-Chrome CDP surfaces are pre-send
+mechanical failures, never a reason to send by another route. The runtime
+preflight requires `kind=chrome-cdp` plus the Chrome product provenance;
+`attachedToExisting` and `launchedByAgentify` distinguish the two valid
+Chrome modes. Agentify may close only its own disposable CDP targets and must
+never close ordinary Chrome or its existing tabs.
 
 ### Create versus adopt
 
@@ -237,7 +286,8 @@ and several Enter variants before declaring `send_not_triggered`
 stability (`chatgpt-controller.mjs:1919-2013`).
 
 `agentify_review_query` is the production path. It records durable send intent,
-binds a stable key to provider/model/conversation, permits one strict send
+binds a stable key to provider/conversation, records model identity per
+operation, permits one strict send
 action, records the provider user-message identity, and requires two identical
 assistant snapshots at least three seconds apart with no active response
 controls (`review-transport.mjs:308-368,395-468,527-578`). It supports first
@@ -645,7 +695,11 @@ Write one canonical top-level JSON object:
 Rows remain in `question_paths` order. A complete strict row copies the complete
 receipt and requires `question_sha256 == promptSha256 ==
 receipt.promptSha256`. `response` comes only from `receipt.responseText`. An
-error row preserves any completed earlier rows.
+error row preserves any completed earlier rows. These legacy `status` values
+are archive-local compatibility fields describing page mechanics only. They
+must not be returned as a cross-role status or used to route, pause, retry,
+retire or accept scientific work. The invoking Skill maps every non-complete
+archive outcome to its factual `INCIDENT_REPORTED` contract.
 
 After durable archive and confirmed inactive generation, close only the
 disposable tab. Report close failure. Run the result-path guard using the
@@ -686,13 +740,14 @@ does not include `existingTabId`, but page identity still must match.
 
 ### Zero-turn recovery
 
-After explicit `SEND_NOT_COMMITTED`, the owning L1 may authorize exactly one
-fresh-tab attempt of the identical request only when its direction-stage
-envelope already grants that recovery. It uses a new disposable tab and a new
-idempotency key, while preserving question bytes, provider, model, intended
-conversation relationship, and stable key. A second noncommit, any provider
-turn/identity, or any ambiguity returns to the L1/Root boundary defined by the
-direction envelope.
+After explicit `SEND_NOT_COMMITTED`, the owning EM may prospectively authorize a
+fresh-tab attempt of the identical request only when the prior record still
+proves zero provider turns, no conversation identity and no active generation.
+It uses a new disposable tab and a new idempotency key while preserving question
+bytes, provider, model, intended conversation relationship and stable key. No
+fixed attempt count has scientific or portfolio meaning. Any provider
+turn/identity or ambiguity is permanently observe-only; a genuinely new
+conversation or external-authority expansion returns to Root.
 
 ### Timeouts and client failures
 

@@ -28,7 +28,8 @@ child_authority=none
 
 Root or Independent Research Explorer may invoke this leaf. The exact assignment supplies
 the standalone research question, batch and result paths, provider requirements
-and terminal meaning. This leaf transports one Explorer-owned file-backed batch
+and mechanical return destination. A caller cannot assign scientific meaning to
+a transport terminal. This leaf transports one Explorer-owned file-backed batch
 and returns one conclusion-first result to its invoker; it does not choose the
 scientific direction, interpret the provider response or accept the review.
 

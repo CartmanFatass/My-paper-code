@@ -48,6 +48,11 @@ row. Exact modewise useful work, peak state, and active capacity are matched
 without represented-value leakage, dummy work, or a second evaluation. If a
 frozen equivalence or reverse-superiority rule favors an alternative, the
 corresponding extra covariance or analytic-clock machinery is deleted.
+Prospective static resource reconciliation found the former 90-minute ceiling
+incredible even under ideal eight-way seed parallelism. The complete unsent
+revision therefore also freezes a 180-minute, complete-seed-process envelope
+whose scheduling cannot enter any random address, within-seed reduction,
+estimator, work-replay tuple, or retained evidence block.
 Nothing in this card authorizes CM,
 construction, tests, training, evaluation, provider contact, or production.
 
@@ -1155,9 +1160,12 @@ evaluation tape until a machine-readable certificate shows:
   `abs(ell) in {0.25,0.75,1.25,1.75}`. Each base state is evaluated at all three
   frozen `N=5` values `J_next in {0.5625,0.9375,2.8125}`, for exactly 288
   actor evaluations;
-- all output roots are fresh and the projected bound is no more than 90 wall
-  minutes, 4 GiB peak RSS, 8 CPU threads, 240,000 learned optimizer updates,
-  and 60 million primitive environment ticks.
+- all output roots are fresh and the projected bounds are no more than 180
+  wall minutes, 20 aggregate process-tree CPU-hours, 16 GiB aggregate
+  process-tree peak RSS, 8 simultaneous numerical CPU execution slots, and 2
+  GiB of temporary-plus-retained regular-file bytes under the fresh output
+  root, while retaining exactly 240,000 learned optimizer updates and fewer
+  than 60 million primitive environment ticks.
 
 The resource ledger is literal: eight arms receive full rollouts
 `{CCIC,ESS,RI-STRONG-v4,INFO-FLEX-v2,ORIGIN-COUNT,NUMERICAL-REFERENCE,J-SHUFFLE,J-CLAMP}`, for a
@@ -1166,6 +1174,53 @@ bank adds at most `32*9,216 = 294,912` one-tick draws; 288 shadow evaluations
 per seed and offline work replay remain below the 60-million ceiling. Learned
 updates are exactly `32*(one actor + four learned fusion modules)*1,500 =
 240,000`. `RECEIVED-COUNT` and `MEAN-RI` have shadow-only evaluations.
+
+Parallel execution is permitted only at the complete seed-block boundary.
+There is one worker process for each block `b`; at most eight such processes
+are live concurrently, and each owns that block's models, optimizer state,
+snapshot bank, all arms/cells/episodes, calibration/activity/collision objects,
+and offline work replay from start through complete retention. Each worker has
+exactly one numerical thread, with `OMP_NUM_THREADS`, `OPENBLAS_NUM_THREADS`,
+`MKL_NUM_THREADS`, and `NUMEXPR_NUM_THREADS` all equal to `1`; nested numerical
+pools are forbidden. Across the full process tree there are at most eight
+simultaneous numerical CPU execution slots, and the coordinator performs no
+numerical work while any seed worker is active. The coordinator may perform
+only scheduling, resource monitoring, interprocess activity-gate control, and
+atomic retention during that interval.
+
+Worker identity, PID, launch order, completion order, and concurrency count
+never enter an RNG address, array/reduction order, model input, endpoint, or
+estimator. Every worker preserves the frozen within-seed module, update,
+minibatch-slot, row, cell, arm, episode, and reduction orders. Paired arms and
+tapes remain inside that worker; every matched-replay tuple keeps its one shared
+`PREVALIDATE` object and both fusions in the same worker. Arms and individual
+replay tuples may not be split across workers. The deterministic numerical
+reference may be exposed as one read-only memory-mapped object or as bitwise-
+identical immutable worker copies; neither representation may alter values or
+iteration order.
+
+After the certificate passes, all workers wait at an interprocess barrier. The
+coordinator durably records and releases the first-update boundary before any
+worker may execute update zero. If that boundary is recorded but execution
+terminates before an update, the run is conservatively treated as having begun
+scientific activity. Each complete block is then durably retained atomically
+under its fixed `(b,seed)` address. The coordinator admits inference only when
+blocks `0,...,31` all exist, validates them, and consumes them in increasing
+`b` order. It may not accumulate all 32 full seed objects in memory. A partial
+or missing block, worker failure, address/order mismatch, or seed substitution
+yields no estimator.
+
+Resource accounting spans the coordinator and all descendants from immediately
+after fresh-root creation through durable terminal finalization. Aggregate
+CPU-hours are the sum of user-plus-kernel CPU seconds of the coordinator and
+every live or exited child divided by 3,600. Aggregate peak RSS is the maximum
+over time of the sum of resident bytes of the coordinator and all live
+descendants. Disk use is the sum of logical lengths of all regular files below
+the fresh output root, including staging and retained artifacts. Exceeding any
+wall, CPU-hour, RSS, CPU-slot, or disk bound fails closed and cannot yield
+efficacy inference. Scheduler, process, serialization, and monitoring overhead
+never counts as matched fusion work and cannot be used as padding; the literal
+modewise tuple work laws remain unchanged.
 
 These checks are feasibility/contract checks, not evidence that CCIC works.
 

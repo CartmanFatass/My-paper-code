@@ -1,4 +1,4 @@
 interface:
   display_name: "HMASD Independent Research"
-  short_description: "Evidence review, open algorithm inspiration, or candidate validation"
-  default_prompt: "Use $hmasd-independent-research-exploration in exactly one mode. For a broad direction, lock the relevant source corpus, absorb every assigned result with Sol-high Scouts, then run source-bound Sol-max innovation, constructive RL-principles analysis, later adversarial review, and opportunity-driven multi-direction iteration until recorded convergence. Keep all output advisory under local_research outside pro_reviews."
+  short_description: "Direction-scoped scientific exploration and intake"
+  default_prompt: "Use $hmasd-independent-research-exploration for one exact HMASD direction: define or refine the scientific question, use optional bounded research children only when informative, send meaning-complete work to the paired CM, interpret technically accepted evidence, and return only a real decision milestone. Treat engineering and transport incidents as evidence, never direction stops."

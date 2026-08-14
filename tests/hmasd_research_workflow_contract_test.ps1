@@ -10,20 +10,21 @@ $router = Read-RepoFile 'AGENTS.md'
 $validation = Read-RepoFile 'docs/project/EXPLORER_PROJECT_VALIDATION_WORKFLOW.md'
 $combined = (($em + $cm + $pro + $research + $agile + $router + $validation) -replace '\s+', ' ')
 foreach ($required in @(
-    'EM owns a direction''s scientific question, candidate and comparator choice',
+    'EM owns one direction''s scientific question, treatment and comparator',
     'CM owns code, runner, adapter, package, dependency',
     'technical-result return and scientific intake',
     'Direction Action Map semantic-delta installation',
     'Root accepts the full map and installs it',
     'EXPLORER_PROJECT_ALIGNMENT_AUDIT',
     'CODE_SCIENCE_ALIGNMENT_AUDIT',
-    'ordinary B has no automatic Pro call',
+    'An ordinary B never calls Pro merely because it is B',
     'conclusion-bearing C',
     'pre-full recovery',
     'ordinary non-force',
     'raw response is completely archived, committed, and pushed',
     'max_subagent_depth=2',
-    'Root relays results between research and code')) {
+    'same-direction direct channel',
+    'Cross-direction relay remains Root-only')) {
     if (-not $combined.Contains($required)) { throw "Research delivery relationship missing: $required" }
 }
 foreach ($required in @(

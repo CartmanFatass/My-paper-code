@@ -1,6 +1,6 @@
 interface:
   display_name: "HMASD External Gemini"
-  short_description: "Strict divergent Gemini 3.1 Pro innovator transport"
-  default_prompt: "Use $hmasd-external-gemini to transport one frozen divergent HMASD innovation question through Gemini 3.1 Pro with Extended thinking, verify an actual provider turn, archive the response or terminal error, and close the inactive tab; never replace ChatGPT External Pro or request convergence or acceptance."
+  short_description: "Thin Gemini adapter over canonical HMASD transport"
+  default_prompt: "Use $hmasd-external-gemini only as the Gemini 3.1 Pro Extended-thinking provider adapter for one frozen divergent innovation request; apply the canonical Agentify transport and incident schema, never define another retry/status workflow, and never replace ChatGPT External Pro or request convergence or acceptance."
 policy:
   allow_implicit_invocation: false

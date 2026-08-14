@@ -26,7 +26,10 @@ one. Revision 07 repaired that conflict, but Pro found that its initial
 prospective-only and terminal modes lacked frozen useful-work and active-
 capacity matching. Revision 08 freezes one common prevalidator, four exact
 invocation modes, and one causally factored `RI-STRONG-v4` invocation; it
-preserves `INFO-FLEX-v2`. Because this is a science-bearing correction, CM
+preserves `INFO-FLEX-v2`. A result-blind static resource reconciliation also
+replaced the infeasible 90-minute projection with the exact complete-seed
+process law in the card; this changes no treatment, comparator, data, estimator,
+threshold, or claim. Because the mode repair is a science-bearing correction, CM
 release and every question-relevant action remain withheld until revision 08 receives
 same-conversation Pro `CLOSED`, this EM intakes it, and Root separately
 sequences CM.
@@ -177,10 +180,26 @@ certificate showing:
   phase namespaces, losses, initialization, reductions, and minibatches;
 - at least 24 numerical-reference-information-sensitive states in the frozen
   96-state set;
-- fresh result roots and projected compliance with 90 minutes, 4 GiB, 8 CPU
-  threads, exactly 240,000 optimizer updates, and 60 million primitive ticks;
-  eight full-rollout arms account for at most 53,084,160 evaluation ticks,
-  while the remaining named diagnostics are shadow-only as specified.
+- fresh result roots and projected compliance with 180 wall minutes, 20
+  aggregate process-tree CPU-hours, 16 GiB aggregate process-tree peak RSS,
+  at most 8 simultaneous numerical CPU execution slots, and 2 GiB of
+  temporary-plus-retained disk, with exactly 240,000 optimizer updates and
+  fewer than 60 million primitive ticks; eight full-rollout arms account for at
+  most 53,084,160 evaluation ticks, while the remaining named diagnostics are
+  shadow-only as specified;
+- complete-seed parallelism only: one single-numerical-thread worker process per
+  fixed seed block, at most eight concurrent, no arm or replay-tuple splitting,
+  no worker/schedule field in any RNG address, and all frozen within-seed orders
+  preserved. Each replay tuple's shared `PREVALIDATE` plus both fusions stays in
+  one worker. The coordinator does no concurrent numerical work, monitors the
+  full process tree, and uses a durable interprocess first-update barrier;
+- atomic retention under fixed `(b,seed)`, inference only after all blocks
+  `0,...,31` exist and are loaded in `b` order, no seed substitution, no partial
+  block in an estimator, and no accumulation of all 32 full seed objects in
+  coordinator memory. Aggregate CPU-hours sum user-plus-kernel time for the
+  coordinator and all children; peak RSS is the maximum simultaneous process-
+  tree sum; disk is the total logical regular-file length under the fresh root.
+  Any resource or lifecycle violation fails closed.
 
 Schema/unit/structural checks before labels, rewards, or stochastic tapes are
 preactivity. Scientific activity starts at the earliest first learned update,

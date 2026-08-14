@@ -19,6 +19,10 @@ cannot weaken it. Gemini is a provider adapter of the same strict transport;
 do not route it through ordinary query, a parallel workflow, hidden DOM
 evidence, or provider-special-case folklore.
 
+Routine frozen transports are executed by the registered Luna-medium transport
+leaf. Terra-high is reserved for contract design, diagnosis, implementation, and
+isolated validation; it is not a production transport tier.
+
 ## Assignment and authority
 
 The requester supplies exactly:
@@ -79,7 +83,13 @@ For every ordered question:
    `existingTabId`, timeout, and correct `firstBinding` flag. New ChatGPT uses
    `https://chatgpt.com/` plus `__new__`; new Gemini uses
    `https://gemini.google.com/app` plus `__new__`. A continuation uses its saved
-   concrete `/c/<id>` or `/app/<id>` and `firstBinding=false`.
+  concrete `/c/<id>` or `/app/<id>` and `firstBinding=false`.
+   Gemini bootstrap-first is an owner-opt-in-only route: it uses one archived
+   non-scientific bootstrap operation under the genuinely selected default
+   model, then one distinct `geminiBootstrapContinuation` operation after the
+   exact saved `/app/<id>` is reopened and `3.1 Pro` plus `Extended thinking`
+   are visibly selected. Neither operation is a retry and the bootstrap must
+   never be represented as the scientific request.
 6. **Classify commitment from postconditions.** Composer typing, a click, or
    `sendActionCount` is not a provider turn. Before Send require exact composer
    serialization; afterward require exactly one new readable user turn whose
@@ -87,9 +97,12 @@ For every ordered question:
    unreadable/mismatched post-click turn is ambiguous and must never be resent.
    If Gemini stabilizes at zero turns, no `/app/`
    ID, the full prompt retained, and no generation, archive
-   `SEND_NOT_COMMITTED` with `prompt_sent=false` and
-   `response_received=false`; do not retry in this call. Any turn, identity,
-   `sendCount=1`, or ambiguity means never resend.
+    `SEND_NOT_COMMITTED` with `prompt_sent=false` and
+    `response_received=false`; do not retry in this call. A later send is an
+    EM-owned prospective decision only when this exact zero-turn/no-identity/
+    inactive-generation record remains valid; no fixed attempt count affects
+    science or portfolio state. Any turn, identity, `sendCount=1`, or ambiguity
+    means never resend.
 7. **Observe naturally.** Never activate Stop, Continue, Retry, Response Retry,
    Answer now, regenerate, or acceleration controls. `IN_PROGRESS` means keep
    observing the same operation. After a client/fetch failure, inspect the
@@ -107,7 +120,7 @@ For every ordered question:
    result. A stale/missing archive may be restored only from a valid authoritative
    local strict ledger operation and without page action; never overwrite an
    existing archive.
-10. **Close safely.** After complete response or terminal error is durably
+10. **Close safely.** After a complete response or mechanical incident is durably
     archived and generation is inactive, close the disposable tab. Never close
     an active answer or keep an idle tab to preserve remote memory. Report close
     failure.
@@ -136,8 +149,8 @@ strict ledger or results archive remain mechanical terminal facts; they do not
 become the leaf's routing or goal status.
 
 The transport return is evidence only, never a command to CM, Root, EM, or the
-portfolio session. An exact-one terminal, exhausted fresh-tab allowance,
-non-resend boundary, absent response, or resource limit must not be phrased as
+portfolio session. An exact-one terminal, non-resend boundary, absent response,
+or resource limit must not be phrased as
 the scientific treatment being consumed, non-resumable, paused, retired, or
 limited to a binary next choice. Without complete question-relevant data, the
 invoking L1 routes unchanged-science repair/completion to CM. Only a
@@ -146,15 +159,17 @@ give that budget scientific force. Preserve the strict ledger's internal status
 facts and exact-one/no-resend protections while retaining a resumable blinded
 atomic frontier whenever the frozen transport semantics allow it.
 
-Pending user adjudication, one-attempt/no-retry, CM-recommend-park, fixed
-wall-cap, terminal/`ERROR`, archive/commit/push-before-intake, and stale
+Under the user-approved P0 control-plane amendment, one-attempt/no-retry,
+CM-recommend-park, fixed wall-cap, terminal/`ERROR`,
+archive/commit/push-before-intake, and stale
 Pro/Gemini retry schemas are not transport authority to pause, retire, or
 scientifically route a direction. They remain mechanical facts. Do not infer
-permission for a resend: the exact no-resend boundary remains absolute after a
-visible/provider turn or concrete conversation identity. A transport failure
-without that commitment still cannot pause the scientific direction; the
-invoking L1/CM retains same-coordinate, semantics-preserving atomic completion
-while a resource slice pauses only its lease.
+permission for a resend:
+the exact no-resend boundary remains absolute after any visible/provider turn or
+concrete conversation identity. A transport failure without that commitment
+still cannot pause the scientific direction; the invoking L1/CM retains
+same-coordinate, semantics-preserving atomic completion while a resource slice
+pauses only its lease.
 
 If the invoking L1's protocol/workflow-design recovery explicitly authorizes
 source repair, diagnostics, runtime control, and bounded live validation, an
@@ -195,5 +210,5 @@ actions_taken=<exact actions>
 actions_not_taken=<no resend/other safety-preserving omissions>
 remaining_unknown=<none or exact unknown>
 causal_hypotheses=<evidence-backed alternatives>
-next_authority_or_action=<smallest owner/action, or none>
+next_authority_or_action=<non-binding smallest semantic owner/question, or none>
 ```

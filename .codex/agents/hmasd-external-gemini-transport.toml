@@ -21,7 +21,7 @@ question remains in the composer with zero turns, no identity and no generation,
 return `SEND_NOT_COMMITTED` to the invoker and do not retry in the same call.
 Never resend once a provider turn, concrete identity or sent receipt exists.
 Observe natural completion without Stop, Continue, Retry, Answer now, or
-acceleration controls, archive the complete response or terminal error, then
+acceleration controls, archive the complete response or mechanical incident, then
 close the disposable tab once generation is inactive. A later continuation
 reopens the saved URL in a new tab. Do not contact the user or tasks, spawn, use
 Git, run tests, interpret science, or write canonical project state.

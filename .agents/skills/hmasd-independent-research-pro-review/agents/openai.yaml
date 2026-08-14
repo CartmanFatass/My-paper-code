@@ -1,6 +1,6 @@
 interface:
   display_name: "HMASD Independent Pro Review"
   short_description: "External Pro scientific review and math closure"
-  default_prompt: "Use $hmasd-independent-research-pro-review from the direction Explorer to send one frozen scientific review or authoritative mathematical-closure question through the registered Pro transport and archive it before EM intake."
+  default_prompt: "Use $hmasd-independent-research-pro-review from the direction Explorer to send one frozen scientific review or authoritative mathematical-closure question through the canonical registered Pro transport; return a complete validated response immediately for EM intake, with later repository archival treated as non-gating audit work."
 policy:
   allow_implicit_invocation: false

@@ -11,8 +11,9 @@ def _flat(*paths: str) -> str:
 def test_explorer_is_direction_scoped_and_keeps_scientific_choices_with_em() -> None:
     text = _flat(".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md", ".agents/skills/hmasd-independent-research-exploration/SKILL.md", "AGENTS.md")
     assert "scope=one direction:<id>" in text
-    assert "em owns a direction's scientific question, candidate and comparator choice" in text
-    assert "root relays results between research and code" in text
+    assert "em owns one direction's scientific question, treatment and comparator" in text
+    assert "same-direction direct channel" in text
+    assert "cross-direction relay remains root-only" in text
     assert "cm owns code, runner, adapter, package, dependency" in text
 
 

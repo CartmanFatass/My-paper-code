@@ -29,6 +29,7 @@ review:
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_ROOT_TO_CM_HANDOFF.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_RESULT_BLIND_INTERPRETATION_ACTIVATION_MAP.md`
 - `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_CHATGPT_EXTERNAL_PRO_V7_REVISION_REQUIRED_INTAKE.md`
+- `docs/research/candidates/covariance_calibrated_information_clock/CCIC_B1_V8_RESOURCE_RECONCILIATION_INTAKE.md`
 - `docs/new-libs/README.md`
 - `docs/new-libs/LIBRARY_INDEX.md`
 
@@ -36,11 +37,14 @@ The library is provenance-labeled background and assumption audit, never
 experiment evidence. Lack of access is nonblocking because it cannot amend the
 complete card or establish an outcome.
 
-Revision 08 changes only the flexible set comparator and the prospective work/
-capacity boundary needed to answer your v7 defect. Every DGP, CCIC covariance
-equation, HMM, actor, variable `N/k` axis, regime, tape, seed, endpoint,
-inference family, threshold, activity boundary, interpretation branch, claim
-ceiling, second-surface trigger, and resource cap otherwise remains frozen.
+Revision 08 changes the flexible set comparator and prospective work/capacity
+boundary needed to answer your v7 defect. Before this unsent revision reached
+you, static resource reconciliation found that its inherited 90-minute wall
+projection was not credible. The owner therefore also froze the exact complete-
+seed process law below. No result informed either repair. Every DGP, CCIC
+covariance equation, HMM, actor, variable `N/k` axis, regime, tape, seed,
+endpoint, inference family, threshold, activity boundary, interpretation
+branch, claim ceiling, and second-surface trigger otherwise remains frozen.
 
 One identical deterministic sequential `PREVALIDATE` procedure now performs
 validity, finite, lineage quotienting, ledger filtering, ordering, cardinality,
@@ -136,12 +140,31 @@ physical-time HMM, decentralized shared-policy execution, paired seed-block
 inference, every result-blind branch, finite claim ceiling, and second-surface/
 UAV nonclaim remain unchanged.
 
+The resource envelope is now at most 180 wall minutes, 20 aggregate process-
+tree CPU-hours, 16 GiB aggregate process-tree peak RSS, eight simultaneous
+numerical CPU execution slots, and 2 GiB temporary-plus-retained disk. There is
+one single-numerical-thread worker process per complete seed block and at most
+eight run concurrently. A worker owns its seed's models, state, snapshot bank,
+all arms/cells/episodes, diagnostics, and offline replay through atomic
+retention; arms and replay tuples cannot be split. PID, worker identity, launch/
+completion order, and concurrency never enter RNG addresses or estimators, and
+all frozen within-seed orders remain literal. Each matched-replay tuple's shared
+`PREVALIDATE` plus both fusions stays inside one worker. The coordinator performs
+no numerical work while workers are active, monitors the entire process tree,
+durably controls the first-update barrier, and admits inference only after fixed
+blocks `0,...,31` are complete and loaded in `b` order. Partial, missing,
+failed, reordered, or substituted blocks yield no estimator. Process and I/O
+overhead cannot count as matched work or padding. These are prospective
+feasibility/causal-isolation rules, not evidence or compute authorization.
+
 Decide whether revision 08 is now meaning-complete or has any remaining
 mathematical, causal, mode-boundary, work/peak/capacity, training/execution,
 comparator, inference, or interpretation inconsistency. In particular audit
 the online arm-local versus shared matched-replay prevalidation lifecycles; all four mode inputs; RI-v4 parameter and
 active-path identities; conditional-linear functional capability; exact work
-and natural-liveness formulas; all-cell gate; and whether any result branch
+and natural-liveness formulas; all-cell gate; whether complete-seed process
+parallelism is invariant to scheduling while preserving pairing, atomicity,
+fixed-order inference, and work accounting; and whether any result branch
 could still mistake compute, exposure, provenance counting, scalar ESS, or a
 generic flexible set effect for structured covariance timing.
 

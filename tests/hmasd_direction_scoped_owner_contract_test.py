@@ -35,12 +35,13 @@ def test_scope_atoms_reject_unsafe_values() -> None:
     assert not any(valid(value) for value in unsafe)
 
 
-def test_cm_acceptance_and_root_relay_remain_explicit() -> None:
+def test_cm_acceptance_and_bounded_same_direction_channel_remain_explicit() -> None:
     surfaces = " ".join((_flat(ROUTER), _flat(CODE), _flat(EXPLORER), _flat(VALIDATION)))
-    assert "code project manager owns technical/runtime acceptance" in surfaces
-    assert "root relays results between research and code" in surfaces
-    assert "em->root->cm->operator->root->same-direction em" in surfaces
-    assert "formal project-canonical scientific acceptance" in surfaces
+    assert "technical_authority=exclusive_within_assignment" in surfaces
+    assert "bounded same-direction direct channel" in surfaces
+    assert "cross-direction relay remains root-only" in surfaces
+    assert "em<->same-direction_cm" in surfaces
+    assert "technical acceptance is not scientific acceptance" in surfaces
 
 
 def test_direction_pointer_stays_lazy_and_pointer_only() -> None:

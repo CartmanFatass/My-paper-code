@@ -16,7 +16,7 @@ protected run meaning, conflict handling and completion evidence. The role
 charter supplies the exact train/evaluate/analyze and recovery mechanics.
 fork_turns=1; forked context is background only.
 Remain inside the delegated compute boundary, keep monitoring silent, and
-return the role's conclusion-first terminal handoff followed by its receipt and
-status anchors to the invoker. Do not edit source/tests, use Git, choose scientific values or
+return the role's conclusion-first execution observation followed by its receipt
+and factual anchors to the invoker. Do not edit source/tests, use Git, choose scientific values or
 outcomes, launch a successor, spawn children or accept the result.
 """

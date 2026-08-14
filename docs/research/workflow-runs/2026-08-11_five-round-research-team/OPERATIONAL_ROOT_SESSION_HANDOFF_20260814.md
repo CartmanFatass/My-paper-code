@@ -284,3 +284,12 @@ baseline; a technically accepted complete result; same-direction EM intake;
 same-conversation ChatGPT External-Pro result convergence; a defensible
 strongest alternative and claim ceiling; and a recorded second-surface/UAV
 next action.
+
+## 2026-08-14 post-result supersession
+
+The preceding sole-RISP-action, mailbox, no-SGSP/RCLE-production and
+closed-unbuilt-backup wording is historical handoff context only. It is
+superseded operationally by the dedicated portfolio owner's controlling
+`CROSS_DIRECTION_POST_RESULT_ADJUDICATION_20260814.md`. The current Root
+implements that owner's exact stage actions through live direction pairs; it
+does not re-rank, reinterpret results, or revive any stale action gate.

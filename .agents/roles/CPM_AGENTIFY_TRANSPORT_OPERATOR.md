@@ -29,9 +29,14 @@ child_authority=none
 
 Root or Code Project Manager may invoke this leaf. The exact assignment supplies the
 standalone review question, batch and result paths, provider requirements and
-terminal meaning. This leaf transports one CPM-owned file-backed batch and
+mechanical return destination. A caller cannot assign scientific meaning to a
+transport terminal. This leaf transports one CPM-owned file-backed batch and
 returns one conclusion-first result to its invoker; it does not choose the review,
 accept the response or route across owners.
+
+This routine operator is Luna-medium. Terra-high may design, fix, and validate
+the shared transport contract but must not be selected as a production transport
+executor; the invoking L1 retains scheduling and intake.
 
 The parent-specific requester partition is
 `temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/`.
@@ -55,7 +60,7 @@ Raw/blob URLs, commit hashes, checksums, byte counts and receipt fields remain
 internal transport evidence and must never be appended to, summarized in, or
 turned into a file-verification request inside the outbound question.
 
-After either a complete answer or a terminal error is archived and no
+After either a complete answer or a mechanical incident is archived and no
 generation is active, close the disposable provider tab. A later continuation
 opens the saved URL in a new tab. Return any tab-close failure to the invoker.
 

@@ -34,7 +34,9 @@ path had frozen useful-work and active-capacity matching; the necessarily
 prospective-only initial decision and terminal paths remained confounded.
 Revision 08 freezes four modes, one identical deterministic online/replay
 prevalidation procedure, and one `RI-STRONG-v4` invocation with exact modewise
-work, peak, and active capacity.
+work, peak, and active capacity. Its complete unsent composite also freezes a
+science-neutral complete-seed process schedule after static reconciliation
+showed the former 90-minute resource projection was not credible.
 No result informed any repair. No prior ruling, construction fact, or
 prospective repair is evidence for CCIC efficacy.
 
@@ -114,9 +116,18 @@ result-bearing endpoint is consumed, the certificate must establish:
     operation and cache-free peak formulas, mode-active capacities, all 108
     mode-cell rows, and actual aggregate `passed=true` for every positive
     `<=1.10` ratio plus exact `0/0` learned capacity in `NEITHER`; and
-13. fresh outputs plus no more than 90 minutes, 4 GiB, 8 CPU threads, 240,000
-    learned updates, and 60 million primitive ticks. The exact rollout maximum
-    is 53,084,160 evaluation ticks plus at most 294,912 snapshot draws.
+13. fresh outputs plus no more than 180 wall minutes, 20 aggregate process-tree
+    CPU-hours, 16 GiB aggregate process-tree peak RSS, 8 simultaneous numerical
+    CPU execution slots, and 2 GiB temporary-plus-retained disk, while retaining
+    exactly 240,000 learned updates and fewer than 60 million primitive ticks.
+    The exact rollout maximum is 53,084,160 evaluation ticks plus at most
+    294,912 snapshot draws. Parallelism is restricted to at most eight complete-
+    seed worker processes with one numerical thread each: no arm or tuple
+    splitting, no schedule-dependent RNG address, and no altered within-seed
+    order. Full-process-tree accounting, the durable interprocess first-update
+    barrier, atomic fixed-block retention, complete `0,...,31` block admission
+    in block order, and fail-closed partial/missing/substituted blocks are all
+    required.
 
 A failed reference stability/gap check prevents stochastic work. Any failed
 certificate is a preactivity feasibility or conformance fact, not a learned

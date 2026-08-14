@@ -8,7 +8,7 @@ model_catalog_json = "C:\\Projects\\HMASD\\runtime\\model-catalog-v2-workaround.
 multi_agent_v2 = true
 
 [agents]
-max_threads = 20
+max_threads = 40
 max_depth = 2
 interrupt_message = true
 
@@ -89,6 +89,21 @@ nickname_candidates = ["Explorer Agentify Transport", "Research Review Transport
 description = "Silent Luna-high External Gemini transport leaf callable by Root or Independent Research Explorer."
 config_file = "./agents/hmasd-external-gemini-transport.toml"
 nickname_candidates = ["External Gemini Transport", "Gemini Scientific Transport"]
+
+[agents."HMASDLunaMedium"]
+description = "Luna-medium bounded worker for one simple design, configuration, or mechanical task."
+config_file = "./agents/hmasd-luna-medium.toml"
+nickname_candidates = ["Luna Medium", "Routine Luna", "Bounded Task Worker"]
+
+[agents."HMASDLunaXHigh"]
+description = "Luna-xhigh bounded verifier for one ambiguous or anomalous simple task."
+config_file = "./agents/hmasd-luna-xhigh.toml"
+nickname_candidates = ["Luna XHigh", "Luna Boundary Verifier", "Luna Anomaly Verifier"]
+
+[agents."HMASDLunaMax"]
+description = "Luna-max bounded minimality reviewer for one simple design or configuration task."
+config_file = "./agents/hmasd-luna-max.toml"
+nickname_candidates = ["Luna Max", "Luna Minimality Reviewer", "Luna Edge-Case Analyst"]
 
 [agents."HMASDExperimentOperator"]
 description = "Silent mechanical operator callable by Root or Code Project Manager for one authorized HMASD train-evaluate-analyze run."

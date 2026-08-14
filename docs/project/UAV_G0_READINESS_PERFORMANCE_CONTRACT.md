@@ -47,11 +47,11 @@ disposition.
 
 The Code Project Manager's current Oracle `EVENT`/`NO_EVENT` reproduction and
 repair continues independently. This contract neither cancels, preempts,
-accepts nor changes that work. The readiness candidate is the one clean pushed
-commit checked out as `HEAD`; no source/execution bridge or execution-support
-commit is admitted. An unchanged clean candidate may use only the bounded
-operational retry budget defined below. Every attempt requires a new exact spec
-and a fresh absent root.
+accepts nor changes that work. CM binds each focused observation to the exact
+source and scientific configuration it inspected. A pushed commit, fresh root,
+attempt identity or retry budget is not required for local evidence or
+unchanged-science repair; Root publication remains later integration work when
+a downstream consumer actually needs it.
 
 Code Project Manager retains the exact thirteen-path implementation boundary:
 
@@ -117,24 +117,25 @@ write with identical content.
 - A phase timeout is `READINESS_PHASE_TIMEOUT`: technical readiness evidence,
   zero scientific iterations, no scientific disposition and no receipt.
 - A nonzero command exit, missing artifact, validator rejection, reload
-  mismatch or identity mismatch is `READINESS_TECHNICAL_FAILURE`: the first
-  causal phase is reported and later phases plus finalization do not run.
-- A phase that cannot satisfy its cap without changing the frozen boundary
-  returns `READINESS_PERFORMANCE_BLOCKED`.
-- Finalizer failure is `READINESS_FINALIZATION_FAILURE`; it reruns no phase and
-  produces no successful receipt.
+  mismatch or identity mismatch is reported as the exact observed technical
+  fact. Later independent safe observations may continue when they can add
+  evidence; no status token or phase order controls scientific work.
+- A check that cannot satisfy its operational observation bound returns the
+  measured fact and remaining unknown to CM. It is not `BLOCKED` and cannot
+  pause the scientific direction.
+- Finalizer failure means only that its optional receipt was not produced. It
+  grants or removes no readiness, technical acceptance or scientific validity.
 
-Only a transient environment, launcher, path or operating-system failure may
-use the remaining operational retry budget automatically. A code defect,
-validator rejection or reproducible artifact mismatch returns to Code Project
-Manager and requires a new clean pushed candidate before another attempt. No
-outcome authorizes a higher timeout, evidence weakening or scientific
-abandonment. Changing a timeout, the frozen boundary or the evidence contract
-requires a new explicit workflow contract.
+Environment, launcher, path, operating-system, code, validator and artifact
+failures return as evidence to Code Project Manager. CM chooses
+semantics-preserving repair and fresh verification without a fixed retry budget,
+pushed-candidate prerequisite or attempt identity. A higher operational timeout
+or another resource slice is a CM/Root scheduling decision; changing the frozen
+scientific boundary or weakening evidence remains science-bearing and returns
+to EM.
 
-The runtime workflow may resume only after Code Project Manager returns a
-pushed `CODE_ACCEPTED` candidate with its exact changed path subset, focused
-verification and matching full six-phase execution-readiness receipt. Code
-Project Manager then applies the existing same-source preflight and formal
-admission rules. This contract authorizes no preflight, nonformal scientific
-execution or formal execution.
+The runtime workflow continues when Code Project Manager has enough focused
+technical evidence for the exact changed risk. No pushed candidate, status
+token, fixed six-phase receipt or formal admission state is required. Git and
+optional receipts document accepted work for downstream consumers; they never
+admit or terminate scientific execution.

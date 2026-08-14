@@ -4,25 +4,41 @@ This directory owns the operational contract and historical setup evidence for
 the persistent Gemini reviewer. New multi-review evidence lives in the
 round-centric directories under `docs/external-review/rounds/`.
 
+## Current default
+
+For new active-direction work, the canonical route is
+`docs/external-review/EXTERNAL_GEMINI_AGENTIFY_OPERATIONS.md`: one clean,
+direction-scoped Agentify conversation using visible Gemini `3.1 Pro` with
+`Extended thinking`. It is the default additional innovator beside that
+direction's separate ChatGPT External Pro, never a replacement for it.
+
+The project uses Gemini for broad world/domain-informed divergence: mechanisms,
+analogies, overlooked regimes, counterexamples, scenario families, controls,
+and toy-to-UAV bridge ideas. It does not ask Gemini for convergence, final
+causal closure, result acceptance, technical acceptance, portfolio ranking, or
+`PROCEED/PAUSE/RETIRE` disposition. Local EM/Root and ChatGPT External Pro own
+those serious reasoning uses under their existing authority; CM owns technical
+acceptance.
+
+The persistent Antigravity CLI material below is retained as historical setup
+evidence. Do not use it as the default for a new direction or reuse one Gemini
+conversation across directions.
+
 ## Role
 
-- **Gemini 3.1 Pro (High):** independent divergent architecture reviewer. It
-  may propose, replace or reject hypotheses and has equal standing with the
-  independent GPT-5.6 Pro open reviewer. Its local CLI additionally reads
-  allowlisted original papers.
-- **GPT-5.6 Pro open reviewer:** an independent blind divergent review from a
-  separate conversation.
-- **GPT-5.6 Pro convergent reviewer:** evidence and validity adjudication after
-  both divergent raw responses and the Codex synthesis exist.
-- **Codex:** evidence and engineering controller. It checks provenance,
-  operationalizes the convergent Pro disposition, and writes the repository;
-  it does not independently rank the hypothesis portfolio.
+- **Gemini 3.1 Pro + Extended thinking:** independent divergent innovator. It
+  supplies broad mechanisms and world/domain connections for local filtering;
+  it does not issue a binding disposition.
+- **ChatGPT External Pro:** separate rigorous causal/mathematical reviewer and
+  convergence challenger for the same direction.
+- **Local EM/Root:** scientific interpretation and portfolio choice.
+- **Code Project Manager:** implementation and technical acceptance.
 
-No reviewer receives a fixed evidentiary weight from model identity. Reviewer
-suggestions are evidence and criticism, not authorization to edit, launch an
-experiment or replace the registered contract.
+Provider suggestions are advisory and never authorize edits, compute, treatment
+changes, or replacement of the registered contract. Gemini breadth is not
+treated as sufficient evidence for convergence or acceptance.
 
-## Persistent conversation
+## Historical persistent conversation
 
 Use one Antigravity CLI conversation rooted at `C:\project\HMASD`. The CLI's
 own cache maps this working directory to the conversation ID; the ID is local

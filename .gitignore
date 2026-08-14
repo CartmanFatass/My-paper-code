@@ -68,6 +68,10 @@ data/
 !docs/superpowers/specs/*.md
 # CDC records are durable algorithm-research state.
 !docs/research/cdc/**/*.md
+# Maintained diagnosis and repair memory for the active research-team session.
+!docs/research/workflow-runs/2026-08-11_five-round-research-team/SESSION_WORKFLOW_DIAGNOSIS.md
+!docs/research/workflow-runs/2026-08-11_five-round-research-team/MINIMAL_CONTROL_PLANE_REPAIR_PLAN.md
+!docs/research/workflow-runs/2026-08-11_five-round-research-team/ROOT_PROBLEM_FAMILY_PORTFOLIO.md
 # PM-accepted active research designs are durable algorithm source.
 !docs/research/designs/*.md
 # Active candidate evidence mirrors candidate code under experiments/candidates.

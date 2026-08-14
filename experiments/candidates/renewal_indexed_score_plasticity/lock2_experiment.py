@@ -52,6 +52,7 @@ GAMMA = Fraction(99, 100)
 DISCOUNT_EXACT = {k: sum((GAMMA**j for j in range(k)), Fraction(0)) for k in (4, 8, 12)}
 DISCOUNT = {k: float(value) for k, value in DISCOUNT_EXACT.items()}
 EXPECTED_LEDGER = {"INIT": 161_792, "ACTION": 5_664_768, "Y": 5_664_768, "ALT": 5_664_768, "TWIN": 301_056}
+EXPECTED_BASE_CALLS = {"INIT": 161_792, "ACTION": 5_652_480, "Y": 5_652_480, "ALT": 5_652_480, "TWIN": 301_056}
 EXPECTED_FORK_CALLS = {"FORK_ACTION": 12_288, "FORK_Y": 12_288, "FORK_ALT": 12_288}
 
 
@@ -903,7 +904,18 @@ def analyse(seed_results: list[dict[str, Any]], accumulators: dict[tuple[str, st
     validity_conditions["feedback_integrity"] = yoke_ok
 
     call_counts = sampler.calls
-    ledger_ok = all(call_counts[name] == expected for name, expected in EXPECTED_LEDGER.items()) and all(call_counts[name] == expected for name, expected in EXPECTED_FORK_CALLS.items())
+    aggregate_calls = {
+        "INIT": call_counts["INIT"],
+        "ACTION": call_counts["ACTION"] + call_counts["FORK_ACTION"],
+        "Y": call_counts["Y"] + call_counts["FORK_Y"],
+        "ALT": call_counts["ALT"] + call_counts["FORK_ALT"],
+        "TWIN": call_counts["TWIN"],
+    }
+    ledger_ok = (
+        all(call_counts[name] == expected for name, expected in EXPECTED_BASE_CALLS.items())
+        and all(call_counts[name] == expected for name, expected in EXPECTED_FORK_CALLS.items())
+        and aggregate_calls == EXPECTED_LEDGER
+    )
     evaluation_decisions = sum(item.decisions for items in accumulators.values() for item in items)
     evaluation_updates = sum(item.updates for items in accumulators.values() for item in items)
     control_decisions = sum(seed_result["controls"][controller][str(schedule)]["decisions"] for seed_result in seed_results for controller in ("UNIFORM", "STATE_ORACLE") for schedule in range(5))

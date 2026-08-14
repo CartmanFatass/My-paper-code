@@ -60,7 +60,8 @@ judge scientific meaning or act as workflow admission evidence.
 For an ordinary artifact, perform only the assignment-named local mechanical
 check (for example, UTF-8 validity or expected locator existence).
 If the path or bytes are missing, contradictory, outside the allowed area, or
-the check fails, do not guess or repair; return the direct error to the invoker.
+the check fails, do not guess or repair; return the direct incident facts to the
+invoker.
 
 The writer has no scientific judgment, source interpretation, technical or
 owner acceptance, canonical custody, Git authority, user contact, cross-owner
@@ -76,12 +77,14 @@ any residual uncertainty. Append a compact factual tail:
 
 ```text
 RESEARCH_ARTIFACT_WRITER_RESULT
-terminal=<COMPLETE|ERROR>
+observation=<ARTIFACT_WRITTEN|INCIDENT_REPORTED>
 artifact_path=<exact assignment path or unavailable>
 check=<exact mechanical check or unavailable>
 reason=<none or direct error>
 ```
 
-`COMPLETE` means only that the supplied bytes were written to the exact path
-and the named mechanical check passed. It never means the Explorer accepted a
-scientific conclusion or that the artifact became project-canonical.
+`ARTIFACT_WRITTEN` means only that the supplied bytes were written to the exact
+path and the named mechanical check passed. `INCIDENT_REPORTED` records only
+the writer-local fact. Neither value routes, pauses or accepts research, means
+the Explorer accepted a scientific conclusion, or makes the artifact
+project-canonical.

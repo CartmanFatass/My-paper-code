@@ -1,21 +1,21 @@
 # HMASD evidence and scaling complexity policy
 
 ```text
-policy_kind=user_authorized_hard_workflow_boundary
+policy_kind=scientific_scaling_boundary_with_nonbinding_resource_forecasts
 purpose=test_external_pro_ideas_without_unbounded_search
 search_complexity_ceiling=O(H*K_search)
 candidate_trajectory_count_ceiling=16
 future_simulated_transitions_per_controller_episode<=16*H
 candidate_count_independent_of_episode_horizon=true
 nested_rollout_replanning=forbidden
-nonformal_wall_clock_cap_minutes=20
-formal_iteration_wall_clock_cap_hours=8
+nonformal_wall_clock_review_minutes=20
+formal_iteration_wall_clock_review_hours=8
 scalable_algorithm_target=O(N*k_neighbor)_or_O(N*logN)
 neighbor_count_ceiling=16
 dense_pairwise_deployment_claim=forbidden
 fixed_small_exact_simulator_O(N^2)=allowed_as_reference_only
-override_authority=user_only_for_one_named_boundary
-violation_iteration_cost=0
+resource_slice_authority=operational_root
+resource_forecast_scientific_stop_authority=none
 ```
 
 `H` is the registered episode horizon. `K_search` is a fixed, explicitly
@@ -67,22 +67,24 @@ scientific assumption and must receive its own design audit and error/result
 check. The exact `O(N^2)` simulator remains the reference oracle, not the
 claimed scalable algorithm.
 
-## Prelaunch gate
+## Prelaunch planning and resource slicing
 
 Before a Pro-proposed evidence action is frozen or implemented, Project Manager
 records a zero-compute upper bound for candidate count, hypothetical
-transitions and asymptotic complexity. When constants are unknown, PM may run
-one microbenchmark lasting at most 20 minutes. The complete nonformal exercise
-must finish within 20 minutes on the registered local CPU. The cumulative wall
-clock for one formal train/evaluate/analyze iteration, including resumes, must
-be projected to and capped at eight hours on that machine.
+transitions and asymptotic complexity. When constants are unknown, PM may run a
+bounded microbenchmark. Twenty minutes for a nonformal exercise and eight
+cumulative hours for a formal train/evaluate/analyze iteration are review
+thresholds for optimization, resource planning and portfolio cost comparison;
+they are not hard experiment stops, scientific iteration limits or treatment
+identities.
 
-A violation is `NON_EXECUTABLE_EVIDENCE_DESIGN`, not a scientific result or a
-failed iteration. PM stops the offending realization at the smallest
-reproducer and first chooses the cheapest bounded implementation that preserves
-the frozen scientific predicate. It does not ask External Pro to design a
-solver or evidence search. Pro re-enters only if no bounded realization can
-preserve that predicate, and then decides the scientific necessity or
-retirement rather than the implementation. Neither an active grant nor
-formal-compute authority overrides this policy; only the user may grant one
-named exception with a replacement bound.
+An asymptotic evidence-search violation remains outside the registered scalable
+project design and returns to CM for the cheapest bounded realization that
+preserves the frozen scientific predicate. A wall-clock or resource forecast
+miss instead pauses only the current resource slice. CM optimizes and continues
+the same blinded scientific coordinates, using later Root-issued slices when
+needed, until complete question-relevant data exist. If no bounded realization
+can preserve the predicate, CM reports the concrete cost/feasibility fact to EM;
+EM and the portfolio owner independently judge scientific value and allocation.
+No CM, child, status label, forecast or External Pro response can retire the
+direction automatically.

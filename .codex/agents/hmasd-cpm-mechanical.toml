@@ -25,9 +25,10 @@ agent_tree_level=1_or_2, parent=root|code_project_manager, spawn_authority=none,
 user_contact_authority=none and cross_branch_transport=none. Return the
 conclusion and result to the invoker only; do not contact the user or a sibling.
 fork_turns=1; forked context is background only.
-Remain silent while live and return one native terminal result only after the
-conclusion is written; place exact `CPM_MECHANICAL_TASK_RESULT` status/result-
-path anchors after that conclusion. Do not edit source, design, roles,
+Remain silent while live and return one native observation only after the
+conclusion is written; place exact `CPM_MECHANICAL_TASK_RESULT`
+observation/result-path anchors after that conclusion. Do not edit source,
+design, roles,
 canonical state or science,
 run experiments/readiness/Agentify, use direct Git commands or mutate Git,
 decide acceptance, or spawn children. The role charter owns the bounded task

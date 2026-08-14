@@ -1,5 +1,25 @@
 # Root Research Goal
 
+## Active portfolio decision index — 2026-08-14
+
+The operative allocation cut is the final section, **2026-08-14 ONLGR-B2 and
+SCDMP-B3 post-result portfolio adjudication**. Its complete owner decision is
+`ONLGR_B2_SCDMP_B3_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md`, read with
+`RCLE_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md` as its base
+cut. It supersedes the allocation and operational-action wording of every
+earlier section described as `current`,
+`live`, `final`, `exactly three`, `one-new-action`, `from scratch`, or
+`attempt exhausted`. Those earlier sections remain evidence and historical
+provenance; their scientific observations, frozen treatment identities and
+claim ceilings are not erased. The 2026-08-13 P0 section immediately preceding
+the new cut remains controlling for process and resource fences.
+
+No historical child, CM, Operator, transport or recovery label is a scientific
+stop. A direction receives investment or no current investment only through an
+explicit portfolio judgment based on scientific value, identifiability,
+redundancy, total cost and opportunity cost, with a concrete reconsideration
+condition. There is no required direction count or action-count quota.
+
 ## Current two-session authority note
 
 This note supersedes only the role attribution in all older and current sections
@@ -44,7 +64,8 @@ not complete the goal.
 ## Root's continuous job
 
 Root is not a dispatcher waiting for EM, CM, Operator, External Pro, or External
-Gemini. While any child is running or blocked, Root continues all of the following:
+Gemini. While any child is running or has reported a local incident, Root
+continues all of the following:
 
 1. Maintain the cross-direction problem-family graph: causal unknown, strongest
    alternative, smallest action-changing discriminator, and toy-to-UAV bridge.
@@ -55,10 +76,10 @@ Gemini. While any child is running or blocked, Root continues all of the followi
 4. Consume every valid result across the portfolio: update which mechanism edges
    survive, which alternatives dominate, and which next experiment has the highest
    decision information per cost.
-5. Make explicit portfolio decisions. Maintain at least three promising directions
-   with concrete next discriminators and at least three paused or retired directions
-   with scientific reasons and revisit conditions. This is a decision target, not
-   a concurrency or WIP limit.
+5. Make explicit portfolio decisions. Name every direction receiving further
+   investment and every direction receiving no current investment, each with a
+   concrete scientific reason, next discriminator or revisit condition. No
+   direction count, action count, concurrency target or WIP quota applies.
 6. Give every active promising algorithm direction two independent external
    perspectives by default: one dedicated ChatGPT External Pro and one additional
    Gemini innovator. Use Gemini's broad world/domain knowledge for divergent
@@ -290,23 +311,22 @@ value warrants it; this list is not a fixed slot count.
    kinematic successor is authorized. Revisit only through a new prospective
    access-competent treatment with uniquely defined `C2/C3` stale-command
    observables and the complete typed/raw control.
-2. **ONLGR current campaign.** Pro closed its mathematical definition, learning
+2. **ONLGR historical disposition — superseded by the 2026-08-14 cut.** Pro closed its mathematical definition, learning
    activity occurred, and final checkpoints exist, but the first run lost all
    panel output during JSON serialization and its sole authorized checkpoint-only
    recovery failed before any panel output. Therefore no positive, negative,
-   null, reverse, equivalence, safety, or resource result exists. The one-recovery
-   allowance is exhausted. Revisit only as a separately frozen from-scratch
-   campaign after a new portfolio decision, fresh CM acceptance, and applicable
-   same-conversation Pro closure; current checkpoints are provenance only.
+   null, reverse, equivalence, safety, or resource result exists. The old
+   one-recovery/from-scratch action is non-operative. The final 2026-08-14 cut
+   invests the preserved-checkpoint core without retraining.
 3. **VNFC-B3 current sparse-allocation host/panel line.** Pro closed several
    successive definitions, but bounded preactivity certificate proofs showed the
    registered shared-history/KEEP panel support was empty. The final v8 proof
    reached every selection, slack, and exact-prefix stage yet produced `0/96`
    eligible rows in the first required bank because all rows failed the unchanged
-   `R-K<=0.01` semantic filter. This is not an algorithm result. Per the frozen
-   no-v9 rule, there is no further Pro request, repair, Stage 1/2, or production on
-   this host/panel line. Reconsider the learned sparse allocator family only as a
-   genuinely new treatment on a naturally feasible lifecycle host.
+   `R-K<=0.01` semantic filter. This is not an algorithm result. Repeating this
+   exact deterministic host/panel cannot create eligible support. Reconsider the
+   learned sparse allocator family only as a genuinely new treatment on a
+   naturally feasible lifecycle host.
 
 All earlier no-further-investment decisions below remain in force unless their
 stated reconsideration condition is met.
@@ -478,13 +498,14 @@ package, partial checkpoint, or interrupted run satisfies that objective.
    the packages not separated and the lifecycle mechanism non-identifying.
    Revisit only with a new access-competent treatment and uniquely defined stale
    command observables.
-3. **ONLGR current campaign.** Neither the original run nor its one authorized
-   recovery retained panel output. Revisit only through a newly frozen
-   from-scratch campaign.
+3. **ONLGR historical disposition — superseded by the 2026-08-14 cut.** Neither
+   the original run nor its recovery retained panel output, so no treatment
+   result exists. The final cut invests the exact preserved-checkpoint core.
 4. **VNFC-B3 current host/panel line.** Its final bounded preactivity proof found
    `0/96` eligible rows in the first required bank under the unchanged semantic
-   filter. The frozen no-v9 rule ends that host/panel line; reconsider the family
-   only on a genuinely new, naturally feasible lifecycle host.
+   filter. Repeating the exact deterministic bank cannot add eligible histories;
+   reconsider the family only on a genuinely new, naturally feasible lifecycle
+   host.
 
 ### Current decision triggers
 
@@ -1061,12 +1082,10 @@ a deterministic noncontainment and legal-action witness.
 7. **EBCR current adaptive-renewal package:** revisit only after an allowed-
    information oracle proves content-aware renewal headroom and a readiness-
    matched control isolates association-specific value.
-8. **ONLGR current campaign:** neither the activity-bearing run nor its one
+8. **ONLGR historical disposition — superseded by the 2026-08-14 cut:** neither the activity-bearing run nor its one
    recovery retained panel output, so there is no positive, negative or null
-   result. Revisit only through a new from-scratch campaign after preactivity
-   evaluator/serialization conformance, fresh CM acceptance, unchanged-science
-   EM confirmation or same-Pro reclosure for a revision, and a new portfolio
-   and compute decision.
+   result. The old from-scratch action is non-operative; the final cut invests
+   the frozen preserved-checkpoint core without retraining.
 9. **VNFC-B2 typed lifecycle retention:** revisit only with an access-competent
    treatment, explicit stale-command observables, and a complete
    typed/raw/reset comparison.
@@ -1195,9 +1214,10 @@ records, old unexecuted retrievals, or minor method factors. This is a bounded
 continuity result, not a claim that the global literature contains no novelty.
 Source results retain their original conditions and transfer no HMASD efficacy.
 
-### Current investment set
+### Historical investment set — superseded by the 2026-08-14 cut
 
-The best nonredundant investment set remains exactly three directions:
+This historical cut listed three directions. The count and allocation are
+non-operative; the final 2026-08-14 cut lists the current investments.
 
 1. **SGSP revision 05** remains the primary direct static-variable-`N` route.
    Exact r05 is same-conversation Pro `CLOSED` and EM-intaken. Its protected
@@ -1288,9 +1308,9 @@ persistent exploration coverage.
 7. **EBCR:** revisit only after an allowed-information oracle proves
    content-aware renewal headroom and a readiness-matched control excludes
    request packing and renewal suppression.
-8. **ONLGR:** revisit only through a new from-scratch campaign after
-   evaluator/serialization conformance, fresh CM acceptance, unchanged-science
-   EM confirmation or same-Pro reclosure, and a new portfolio decision.
+8. **ONLGR historical disposition — superseded by the 2026-08-14 cut:** the old
+   from-scratch condition is non-operative; complete the frozen
+   preserved-checkpoint core under the final cut.
 9. **VNFC-B2:** revisit only with an access-competent treatment, explicit
    stale-command observables, and the complete typed/raw/reset comparison.
 10. **VNFC-B3 and reward-aware allocation:** revisit only on a natural,
@@ -1365,11 +1385,9 @@ runs nor answers the structure-by-feedback comparison.
    full conditional-CVaR, and axis-tail derangement decide risk-method value
    and standalone absorption.
 
-None of items 1 through 8 is currently authorized to run. The only immediate
-action is the RISP-r06 closure prerequisite above. Items 2 through 4 are
-conditional backups, and items 5 through 8 authorize nothing. This preserves
-the one-new-action rule while retaining more than six family-deleting
-discriminators.
+This historical action paragraph is non-operative. Its RISP-r06-only and
+one-new-action constraints are superseded by the final 2026-08-14 four-direction
+cut; the discriminator descriptions remain provenance.
 
 ### Provider identities and exact operational action
 
@@ -1629,3 +1647,298 @@ RISP therefore remains a direct exogenous-variable-`k` investment beside SGSP
 and RCLE. Operational Root may execute this completion action immediately; no
 second portfolio decision is needed unless complete EM-intaken data, scientific
 claim ceiling, cross-direction competition or actual opportunity cost changes.
+
+### Cross-direction application of the P0 correction
+
+The amendment is not RISP-specific. Earlier passages in this file or related
+portfolio records that use a process attempt count, fixed recovery quota,
+wall-time class, missing serialized output, unsent provider turn, archive/Git
+state or child terminal label as a reason to stop scientific work are
+superseded. A direction may still receive no current investment for an
+independently stated scientific-value, identifiability, redundancy, total-cost
+or opportunity-cost reason with a concrete revisit condition; the mechanical
+incident itself supplies no such reason.
+
+Applied immediately:
+
+- ONLGR's sole-run/sole-recovery no-panel history does not support its prior
+  no-current-investment disposition. It is scientifically unresolved. If
+  selected, CM completes the unchanged campaign through blinded same-coordinate
+  continuation; any continued deferral needs an independent portfolio reason.
+- SCDMP-B2's incomplete panel cannot select, delete, pause or retire the family,
+  and its earlier one-recovery/eight-hour ceiling has no scientific force.
+- VQFP's zero-send provider incidents do not count against the direction. Its
+  separate complete-result headroom/statistical-identification limitations may
+  still justify deferral under their own stated revisit condition.
+- G53, standalone G52 and EOCIV host deferrals remain valid only to the extent
+  that a stronger prospective discriminator scientifically dominates the exact
+  host question; their engineering incidents add no negative evidence.
+
+## 2026-08-14 P0 re-adjudication: RISP, ONLGR, and SCDMP-B2
+
+### Bounded objective
+
+Rejudge the mechanically contaminated variable-`k` frontier after removing
+fixed wall-time, attempt-count, missing-output and child-status authority.
+Compare the remaining scientific value of exact RISP-r07, the preserved ONLGR
+checkpoints, and exact SCDMP-B2-r02 without transferring evidence between them.
+
+### Current investments
+
+There are four current investments because four nonredundant, answerable paths
+presently justify work; the number four is an outcome, not a quota.
+
+1. **SGSP-r05** remains the leading direct variable-`N` topology-conditioned
+   aggregation direction, under its existing finite-host claim ceiling.
+2. **RCLE-r04** remains the distinct direct variable-`N` persistent-latent
+   exploration direction. Its same-conversation Pro closure and EM intake are
+   complete; its controls and finite hidden-lock-toy ceiling remain unchanged.
+3. **RISP-r07** remains the first direct exogenous-variable-`k` completion.
+   The 60-minute expiry supplied no algorithm evidence, so CM is to complete
+   the entire frozen Lock-2 panel on the same blinded stochastic coordinates
+   across as many resource slices as operational Root schedules. Its strongest
+   alternative remains a generic containing recurrent transition plus
+   finite-budget optimizer geometry. No partial panel supports a claim.
+4. **ONLGR revision 04 checkpoint-only core** now receives investment. All 24
+   sole final learned checkpoints exist, while no treatment result of any sign
+   exists. The prior evaluator/serialization incidents therefore do not lower
+   the scientific posterior. CM is to repair the evaluation facade and complete
+   the already frozen, blinded, same-coordinate core without retraining,
+   resampling, replacing a seed, inspecting/selecting partial outcomes, or
+   changing an arm, schedule, tape, threshold, action law or analyzer. The
+   complete core retains the native three-arm panel, IID future-`k`, safety,
+   fixed-rate, held-out fixed-rate, KEEP-grid, zero-trajectory identity/Jacobian,
+   operational-partition and post-startup marked-support evidence. Its registered
+   marginal scientific work is 3,112,960 team ticks plus analytic probes; that
+   quantity is planning evidence, never a stop rule.
+
+ONLGR is not learned termination and does not choose `k`. It tests whether an
+eligible-physical-exposure event-link is a useful finite-budget inductive bias
+for the same legal `KEEP / REFRESH-SAME / REBIND` actions and information seen
+by RAW. A qualifying core can support only a bounded exposure-link/package
+claim on this host. It cannot establish lease causality, rebinding causality,
+event-head versus mark-head causality, RAW incapacity, arbitrary `k`, a UAV
+effect, or performance within the already exceeded historical resource gate.
+The strongest alternative is exposure-dependent initialization/gradient
+geometry plus cost or churn suppression by a task-content-blind cadence rule.
+
+RISP and ONLGR compete on externally varying `k` but are not duplicates: RISP
+structures renewal-to-renewal recurrent state and recipient feedback; ONLGR is
+feed-forward at action emission and structures probability over accumulated
+eligible physical exposure. Complete evidence from one does not answer the
+other. Do not fuse them before each has a complete EM-intaken result.
+
+### SCDMP-B2 disposition in plain language
+
+Exact `SCDMP-B2-SCIENCE-20260813-02` receives no current investment, for a
+scientific reason rather than a process reason. At seed 101, the deliberately
+wrong-order control reached update 35 with auxiliary learning signal
+`A=0.733868707334697`, below one percent of its frozen base-signal reference.
+The prospectively registered treatment required that signal to remain above
+that floor so the three arms would continue receiving an active, comparable
+relation intervention. Once it failed, the exact r02 interpretation map made
+the relation-specific positive, representation-only, FREE-control and
+exact-treatment-deletion branches unreachable. Computing the remaining cells
+cannot turn r02 into the intended family-dividing comparison; it could add only
+adverse-treatment or descriptive diagnostics, which currently have lower
+decision value than the direct RISP and ONLGR results.
+
+This decision does **not** delete, retire or scientifically contradict the
+SCDMP family. Wall time, recovery count, provider incidents and the missing
+complete panel contribute no negative evidence. The family remains a
+conditional, mechanism-distinct backup because no other direction tests the
+order of a noncommuting transition/reward composition law. Reconsider it when
+RISP is complete but nonqualifying/nonidentifying, ONLGR cannot supply a direct
+bounded result, or a leading variable-`k` algorithm specifically needs a
+compositional dynamics/reward model. The question-preserving route is a newly
+frozen stability-first three-arm successor: calibrate each auxiliary scale once
+at update zero, hold it fixed, treat later gradient decay as an outcome, use
+fresh blinded coordinates, retain all competence/action/non-harm panels, and
+obtain same-conversation Pro closure. A positive mechanism result would still
+need a separate direct-value and UAV-bridge experiment.
+
+### Exact downstream action for operational Root
+
+1. Continue exact RISP-r07 completion through its existing direction pair and
+   existing Pro conversation; return only the complete EM-intaken decision
+   milestone.
+2. Create or reuse the ONLGR direction-stage pair for unchanged-science repair
+   and complete the frozen revision-04 checkpoint-only core. CM may optimize
+   and slice execution while preserving the exact blinded coordinates; a
+   resource slice can delay scheduling but cannot terminate the investment.
+   Reuse the existing ONLGR Pro conversation only after complete technical
+   acceptance and EM intake.
+3. Create or reuse an active direction-stage EM/CM pair for **each** of
+   SGSP-r05 and RCLE-r04, with the exact frozen object, an ordinary-language
+   authority envelope, and a named next decision-level scientific milestone.
+   For SGSP, finish source/static conformance and, if technically accepted,
+   proceed to its full frozen B1 discriminator under an operational Root lease.
+   For RCLE, construct and statically conform the exact Pro-closed r04 object
+   and, if technically accepted, proceed to its frozen B1 discriminator under
+   an operational Root lease. The current-investment decision already resolves
+   the former "construct or retain as an unbuilt backup" choice toward
+   construction; neither direction returns merely for a routine continue or
+   compute-lease vote.
+   These current investments must not remain as paper-only authorizations while
+   actionable scientific or construction work exists. A concrete host conflict
+   may sequence heavy commands, but it cannot suppress EM definition/review,
+   CM construction/optimization, provider work already inside the envelope, or
+   the direction's next milestone. No fixed ordering, WIP slot, or action-count
+   gate is created by this cut.
+4. Do not resume literal SCDMP-B2-r02 merely to fill its remaining cells. Return
+   to portfolio only if the stated revisit condition makes the stability-first
+   successor competitive or if adverse-treatment information itself would
+   change an operational choice.
+
+Each complete EM-intaken result, each changed claim ceiling, or each newly
+measured prospective total/opportunity cost among these invested directions
+that materially changes competition, bridge eligibility or the investment
+comparison returns to this portfolio. Routine construction, technical acceptance and
+compute-lease sequencing do not return for another portfolio vote. Runtime
+streams and child labels are not portfolio inputs.
+
+## 2026-08-14 post-result joint portfolio adjudication
+
+> **Later-result pointer:** the RCLE investment and four-investment count in
+> this base section are superseded by the final “RCLE-B2 post-result portfolio
+> delta” at the end of this file. Other base decisions remain in force.
+
+### Completed exact objects and claim ceilings
+
+- **RISP-r07:** complete but nonidentifying because registered comparator-
+  competence and target-policy-change qualifications failed. It supports no
+  RISP value, harm, equivalence, variable-`k` robustness or bridge claim.
+- **SGSP-r05:** complete and practically equivalent to the wider matched EDGE
+  arm at update 480 in every held-out cell. It retains only bounded correct-
+  center-versus-one-wrong-center evidence, not final-performance superiority.
+- **ONLGR-r04 checkpoint core:** complete; W/IID contrasts versus RAW pass, but
+  the registered support predicate fails, TIMING-ONLY matches, and fixed rate
+  is the strongest sufficiency alternative. No eligible-exposure/content/
+  lease/rebind/within-cap/UAV claim follows.
+- **RCLE-r04:** completed after the initial three-result plan was drafted. All
+  three value contrasts are unresolved, every seed collapses to one or two
+  rotations, and the functional cuts fail. It supports no material advantage,
+  semantic mechanism, equivalence, variable-`N` generalization or bridge claim.
+- **Literal SCDMP-B2-r02:** is closed and superseded as an incomplete,
+  low-value exact object whose prospectively required relation intervention was
+  not sustained. Filling its remaining cells is not invested. This does not
+  delete the SCDMP family.
+
+None of these exact objects is rerun or modified.
+
+### Current investments
+
+1. **SGSP single 240-update successor.** Fresh independent coordinates, the
+   complete r05 four-arm and causal-qualification structure, exactly one
+   evaluable update-240 checkpoint, and no budget/checkpoint search. A positive
+   supports only exact finite-budget correct-centered sample efficiency and
+   merely reopens a second-surface question.
+2. **RCLE validity-matched semantic-specificity successor.** Compare RCLE with
+   `B_VALID=V` on fresh blinded coordinates while preserving the complete r04
+   host/training/evaluation law. `B_VALID` matches maximum positive auxiliary
+   scale, not realized score distribution or optimizer geometry. The full
+   material-value/bijection/fidelity/cuts conjunction makes retention of the
+   narrowed family eligible; every other complete result makes no-further-
+   investment in the exact formulation eligible. No tuning follows an
+   unresolved assay. A positive is exact-package evidence, not optimizer-
+   independent semantic causality.
+3. **ONLGR-B2 state-blind event-rate flexibility.** Compare task-content-blind
+   `RATE-FLEX` with `RATE-CONST`, fix `rho=0.5`, match all non-rate conditions,
+   and use only the registered IID mean/paired-lower-bound gate. A positive
+   makes retention of only a timing-dependent rate family eligible; a
+   nonpositive result makes global-fixed-rate absorption eligible.
+4. **SCDMP stability-first successor.** Preserve `FREE-DIRECT / CORRECT /
+   ORDER-SHUFFLE`, calibrate auxiliary scale once at update zero, hold it fixed,
+   treat later gradient decay as an outcome, and run the complete fresh atomic
+   panel. The maximum positive remains fixed-`N=4`, finite-budget,
+   order-specific model inductive bias and still requires direct task-value
+   evidence.
+
+This set is not a quota. Each new science-bearing object requires EM freeze,
+same-conversation Pro closure, CM acceptance and a Root lease before complete
+execution, but none returns for a routine construction or continuation vote.
+Every complete EM/Pro-converged successor result returns to the dedicated
+portfolio owner before any retain, end, absorption, second-surface or direct-
+value action. The branch language above is eligibility, not execution.
+
+### No current RISP investment
+
+Do not build `BEST-REACHABLE-X`, new RISP coordinates, a latent twin, another
+RISP production object, a second surface or UAV work. The proposed comparison
+only locates an upstream failure; it cannot test structured recurrent value,
+held-out variable-`k` performance or bridge eligibility and remains several
+scientific stages from a project-value result.
+
+Reconsider only when a value-bearing prospective RISP treatment is selected or
+deleted by the four diagnostic outcomes; both ONLGR rate and SCDMP routes fail
+to supply a usable variable-`k` path while recurrence remains a named gap; an
+invested algorithm/bridge specifically needs recipient-feedback recurrence and
+the diagnostic changes its design; or new evidence makes the diagnostic delete
+an entire policy-port/transition branch.
+
+### Cross-direction prohibitions and exact Root action
+
+Do not create SGSP×RCLE, RISP×ONLGR, a cross-`N×k` parent object, any second
+surface or UAV production. A direction-local `activate`, `retain`, `absorb` or
+`delete` label has no automatic portfolio force.
+
+Operational Root closes exact RISP-r07; reuses the SGSP, RCLE and ONLGR pairs
+for their named sole successors; creates or reuses the SCDMP pair for the
+stability-first successor; carries each through definition/closure,
+construction, technical acceptance, lease and complete owner intake; and
+imposes no WIP, order, direction-count or action-count cap. Shared-resource
+scheduling may sequence heavy commands only. Each complete EM milestone,
+science-bearing object change, genuine cross-scope resource conflict or
+materially changed prospective total/opportunity cost returns at decision
+level.
+
+The full reasons, branch boundaries, revisit conditions and operational packet
+are in `CROSS_DIRECTION_POST_RESULT_ADJUDICATION_20260814.md`.
+
+## 2026-08-14 RCLE-B2 post-result portfolio delta
+
+This is the latest portfolio-owned cut. It supersedes only the RCLE investment
+and RCLE operational action in the preceding joint adjudication. The current
+investments are **SGSP-240**, **ONLGR-B2-rate** and **SCDMP-stability-first**;
+three is not a quota and RCLE completion creates no automatic replacement.
+
+Exact `RCLE-B2-SCIENCE-20260814-02` is complete, technically accepted,
+same-direction EM-intaken and same-Pro-converged under
+`UNRESOLVED_VALIDITY`. The primary RCLE-versus-validity-only value contrast is
+unresolved and every seed lacks the required unique four-rotation bijection,
+although anchored fidelity and both common/persistent functional cuts pass.
+The protected rule ends the exact four-strategy semantic-diversification
+formulation without rescue. This is a scientific result, not a wall-time,
+resource, provider, attempt, code or status stop.
+
+RCLE therefore receives no current investment and has no within-formulation
+successor, second surface, fusion or UAV action. The result does not delete
+common/persistent-latent exploration generally. A bounded EM definition stage
+becomes eligible when a named held-out-variable-`N` task failure plausibly needs
+shared persistent commitment and a coarse/learned-cardinality hypothesis has
+outcomes that could change an algorithm or bridge. Construction or activity
+additionally requires the resulting EM-defined prospective object, frozen
+outcome map and fresh coordinates. Exact-package value may retain optimizer
+geometry as an explicit alternative; semantic or commitment causality requires
+score/optimizer-matched or containing control. Read-only portfolio discovery
+may seek the Level-1 target without creating an active direction stage.
+
+Operational Root records exact B2 as complete and immutable, ends its current
+stage and releases the RCLE pair from this envelope. SGSP, ONLGR-B2 and SCDMP
+continue unchanged. No replacement, WIP, order, fusion, bridge or resource-
+based stop is introduced. The controlling owner record is
+`RCLE_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md`.
+
+## 2026-08-14 ONLGR-B2 and SCDMP-B3 post-result portfolio adjudication
+
+This is the latest portfolio-owner cut and supersedes the immediately preceding RCLE-B2 post-result section only where allocation and operational action changed; all prior observations and claim ceilings remain evidence.
+
+Exact `ONLGR-B2` is complete, technically accepted, EM-intaken and same-Pro-converged. The compound positive gate failed, so the exact state-blind formulation is absorbed into the learned global-rate family with no current rerun or retune. Revisit requires fresh evidence of material rate heterogeneity and a strict two-level heterogeneity comparison; no hazard, lease/REBIND, arbitrary-k, UAV or general claim follows.
+
+Exact `SCDMP-B3` is complete and immutable. Branch 2 is nonidentifying: `W_SHUF` one-sided 95% upper bound `0.02422161` is below the registered `0.040` margin. Action sensitivity passed, but C-vs-S action disagreement and full non-harm each failed as separate qualifications. There is no current hard-wired probe and no family deletion. Revisit is only a target-bound two-level test whose outcome could change a variable-k algorithm or bridge.
+
+Current empirical investment is **SGSP-240** only. Current definition investment is **RISP value-bearing outcome-coupled recurrence only**; there is no quota or automatic backfill. Any RISP definition must specify one shared parameterization across a held-out or externally switched `k`, completed recipient outcome before the next renewal with no leakage, competent containing and outcome-history-independent matched controls, a physical-time value/robustness endpoint, explicit qualifications and claim/UAV map, and a four-outcome action map. EM defines; CM may assess static feasibility only. Pro closure and mutually blind Gemini innovation are allowed, but no diagnostic, coordinates, source, construction, tests, probes or compute occur until a new portfolio judgment.
+
+CCIC-r08 does not reopen: the current homogeneous host leaves a scalar-ESS reduction and only a weak bridge. Runtime or resource facts are not a science stop; reconsider only on a heterogeneous host with a target-bound discriminator.
+
+Operational Root records ONLGR-B2 and SCDMP-B3 complete and immutable, closes their stages, releases their pairs, absorbs ONLGR into global-rate handling, and continues SGSP-240 plus the bounded RISP definition envelope. No fusion, second surface, UAV, cross-`N×k` object, WIP/order/action-count rule or automatic successor is created.
