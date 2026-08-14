@@ -1402,3 +1402,189 @@ No direction has yet produced the project-level winning algorithm. The
 destination remains one shared parameterization that improves task performance
 or robustness against a matched baseline under held-out variable `N` or `k`,
 followed by same-direction result convergence and a second-surface/UAV action.
+
+## 2026-08-13 RISP revision-07 mathematical-closure portfolio action
+
+This section supersedes only the current RISP revision and immediate action in
+the preceding campaign cut. All SGSP, RCLE, backup, no-current-investment,
+claim-boundary, provider-identity, and historical-evidence decisions remain
+unchanged.
+
+Exact `RISP-B1-SCIENCE-20260813-07` received literal same-conversation ChatGPT
+External Pro `CLOSED`, and the same-direction EM accepted that disposition with
+zero science-bearing defects. The ruling closed the prospective mathematical
+and causal definition over the indexed product tapes, initialization families,
+exact categorical law, information-set marginal twin, RISP/SIGN-RNN
+containment, terminal/count semantics, seed-first inference, and two-lock
+boundary. The paired CM's static answerability/bindability conclusion remains
+intact. No registered generator, stochastic object, training, evaluation,
+learned competence observation, or effect result exists.
+
+The three-direction investment set remains, in order, **SGSP-r05, RCLE-r04,
+and RISP-r07**. RISP's definition risk is removed, but absence of result
+evidence means its rank does not rise. Its strongest alternative remains
+generic temporal-correlation or latent-persistence sensitivity together with
+coordinate, regularization, critic-calibration, and optimizer-path effects,
+rather than recipient-specific outcome coupling. Even a qualifying B1 result
+is limited to the frozen finite two-agent renewal toy, finite budget, and
+registered three-window mixture; it supports no exclusive expressivity,
+natural-score necessity, arbitrary `k`, UAV, safety, or deployment claim.
+
+The exact portfolio action is to authorize the existing RISP direction pair to
+bind and construct exact revision 07 and execute its complete deterministic
+Lock 1 certificate only. Lock 1 is a finite preactivity structural and
+implementation-conformance gate, not scientific result evidence. This action
+explicitly excludes every registered random-word or generator materialization,
+stochastic initialization, training, evaluation, production Lock 2, and
+heavy-compute lease. It opens no new direction or provider identity.
+
+An unchanged-science preactivity conformance failure remains CM repair work
+inside the direction envelope. Any science-bearing correction returns to the
+same EM and, if it produces a new frozen composite, to the same Pro
+conversation. A Lock 1 pass does not authorize Lock 2: operational Root must
+return a separate compact decision request before the complete frozen
+architecture-by-recipient-feedback panel begins. Return earlier only if Lock 1
+materially changes answerability, resource class, claim ceiling, competition,
+or portfolio value.
+
+The complete Lock 2 panel remains RISP's family-dividing scientific
+discriminator but is not authorized here. Only after a complete positive B1
+result would an independently evolving latent-process twin become eligible to
+separate recipient-specific coupling from generic serial-structure use. CMSP,
+APFI, BIR-C, DCPR, LISR, ALACB, ACTRC, and every other paused family retain
+their prior no-current-investment or conditional-backup disposition.
+
+## 2026-08-13 RISP revision-07 Lock-1 portfolio action
+
+This section supersedes only the immediate RISP action in the preceding
+mathematical-closure cut. SGSP, RCLE, all conditional backups, all paused
+families, provider identities, historical evidence, and claim boundaries remain
+otherwise unchanged.
+
+The complete deterministic `RISP-B1-LOCK1-20260813-07` received same-direction
+CM technical acceptance and EM intake. It establishes exact-r07 structural
+answerability, implementation conformance, and a shape/liveness-derived static
+peak bound of `288.534 MiB` without creating any registered generator,
+stochastic object, or random word. It supplies no learned competence,
+mechanism, benefit, harm, equivalence, or null evidence. Scientific activity
+therefore remains unstarted.
+
+The portfolio selects action 1: authorize candidate-local construction,
+technical acceptance, and execution of the complete exact-r07 Lock 2 panel.
+RISP is the only current direct exogenous-variable-`k` leader, and the requested
+one-CPU, no-GPU, below-1-GiB, 60-minute class has high decision information per
+unit cost. The experiment can retain, bound, or reject the explicit
+score-coordinate prior and its registered recipient-feedback interaction. The
+investment order remains **SGSP-r05, RCLE-r04, RISP-r07**; neither variable-`N`
+leader is paused or displaced.
+
+The strongest alternatives remain generic temporal-correlation or latent-
+persistence sensitivity and coordinate, regularization, critic-calibration,
+finite-data, or optimizer-path effects rather than recipient-specific outcome
+coupling. The maximum possible claim remains the frozen finite two-agent toy,
+finite budget, and registered held-out/post-feedback three-window mixture. No
+outcome can establish exclusive expressivity, natural-score necessity,
+arbitrary or unknown `k`, variable `N`, UAV value, safety, or deployment value.
+
+Portfolio resource intent is one bounded direction-scoped lease in the
+requested one-CPU, no-GPU, below-1-GiB, 60-minute class, sufficient for the
+complete frozen panel after candidate-local construction and technical
+acceptance. Operational Root owns the concrete lease and scheduling; the
+existing CM owns construction, technical acceptance, production, and
+unchanged-science repair. Construction remains preactivity until the first
+registered random word or generator object is consumed.
+
+The complete Lock 2 architecture-by-recipient-feedback panel is the sole
+current family-dividing discriminator. It must preserve the exact Pro-closed
+r07 treatment, algebraically containing comparator, marginal twin, schedules,
+counts, thresholds, seed-first inference, and interpretation. No stochastic
+development menu, tuning, seed replacement, partial-panel selection,
+latent-process twin, second surface, new direction, or new provider identity is
+authorized.
+
+The exact operational action is to authorize the existing RISP direction pair
+through construction and technical acceptance of exact-r07 Lock 2, then issue
+the bounded direction-scoped lease and execute the complete frozen panel. After
+a complete technically accepted result, the same-direction EM performs result
+intake and reuses the existing ChatGPT External Pro conversation for result
+convergence. Operational Root returns a compact portfolio milestone only if
+that owner-intaken result or convergence changes the mechanism conclusion,
+claim ceiling, competition, successor, or portfolio action.
+
+An unchanged-science preactivity construction failure remains CM repair work.
+A science-bearing correction requires EM reconciliation and, if a new complete
+composite is frozen, same-conversation Pro reclosure before activity. Only a
+complete positive B1 branch may later make an independently evolving latent-
+process twin eligible for a separate portfolio decision. CMSP, APFI, BIR-C,
+DCPR, LISR, ALACB, ACTRC, and every other paused family retain their existing
+no-current-investment or conditional-backup disposition.
+
+## 2026-08-13 RISP revision-07 incomplete-panel portfolio action
+
+This section supersedes only the RISP Lock-2 execution authorization in the
+preceding cut. SGSP, RCLE, conditional backups, paused families, provider
+identities, historical evidence, and all unrelated claim boundaries remain
+unchanged.
+
+Exact r07 crossed its scientific-activity boundary and froze all sixteen
+registered checkpoints, but the 60-minute wall guard ended during factorial
+evaluation before a complete panel, validity family, inference family, or
+scientific branch existed. The same-direction CM technically accepted the
+incomplete lifecycle packet, and the EM assigned
+`NONIDENTIFIED_NO_COMPLETE_PANEL` without inspecting a partial scientific
+metric. This is neither evidence for nor evidence against RISP. Exact r07 is
+permanently retained as incomplete and cannot be resumed, rerun, completed from
+partial data, or sent for result convergence.
+
+The portfolio selects action 2 narrowly: retain RISP as the third investment
+only through definition and same-conversation mathematical closure of one clean
+completion-capable successor. This decision authorizes no construction,
+stochastic activity, or expanded compute. The current order is
+**SGSP-r05, RCLE-r04, RISP-successor-definition**. RISP remains the only direct
+exogenous-variable-`k` leader and is not absorbed by either variable-`N`
+direction; failure of the 60-minute execution-resource concept does not test
+its algorithm, comparator, feedback interaction, competence, or effect.
+
+The accepted r07 packet establishes only that deterministic answerability held,
+the below-1-GiB memory class remained feasible, and the registered 60-minute
+wall class was insufficient for this implementation and complete workload. All
+scientific alternatives remain untested: temporal correlation or latent
+persistence, coordinate and regularization effects, critic calibration,
+finite-data behavior, optimizer path, and renewal-frequency geometry. The
+present claim ceiling is only that execution fact. No learned competence,
+efficacy, robustness, mechanism, harm, equivalence, null, exclusive
+expressivity, arbitrary-`k`, UAV, safety, or deployment claim exists.
+
+The successor must remain inside the same RISP direction and preserve the exact
+algorithm, algebraically containing comparator, DGP, endpoints, margins, and
+complete-panel interpretation. It must prospectively freeze fresh untouched
+stochastic families, an activity-safe atomic completion lifecycle, and a
+conservative resource envelope sufficient for the entire factorial panel. Only
+technical lifecycle and resource facts from r07 may inform that envelope; no
+checkpoint, random family, partial panel, or unreported performance value may
+be reused, inspected, selected, or transferred.
+
+Because this is a new postactivity science-bearing composite, the same EM must
+freeze it and obtain literal mathematical closure in the existing RISP
+ChatGPT External Pro conversation, followed by EM intake, before any new
+construction or stochastic activity. Preserve the existing provider identity.
+No Gemini action, second surface, latent-process twin, new direction, r07
+resume, r07 retry, partial-result interpretation, or heavy compute is
+authorized.
+
+The sole next scientific discriminator remains the complete frozen
+architecture-by-recipient-feedback panel. Operational Root should reauthorize
+the existing RISP pair only through successor definition, static completion and
+resource feasibility, same-conversation Pro closure, and EM intake. It then
+returns one compact packet containing the closed revision, claim ceiling,
+strongest alternatives, CM-accepted total resource class, and exact expanded-
+lease request. Construction and execution require that later portfolio
+decision.
+
+Pause RISP if the successor cannot preserve the protected comparison, cannot
+obtain same-conversation Pro closure, or cannot present a CM-accepted
+completion-capable resource projection. Even after those gates pass, compare
+its projected total cost and completion probability against SGSP, RCLE, and
+the conditional-backup frontier before funding an expanded lease. CMSP, APFI,
+BIR-C, DCPR, LISR, ALACB, ACTRC, and every other paused family retain their
+existing no-current-investment or conditional-backup disposition.
