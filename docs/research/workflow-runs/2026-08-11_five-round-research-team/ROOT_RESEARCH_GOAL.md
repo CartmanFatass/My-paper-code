@@ -1588,3 +1588,44 @@ its projected total cost and completion probability against SGSP, RCLE, and
 the conditional-backup frontier before funding an expanded lease. CMSP, APFI,
 BIR-C, DCPR, LISR, ALACB, ACTRC, and every other paused family retain their
 existing no-current-investment or conditional-backup disposition.
+
+## 2026-08-13 user-approved P0 correction: complete exact RISP r07
+
+This section supersedes the r07 no-resume, successor-only and no-heavy-compute
+actions in the incomplete-panel cut above. It changes no RISP algorithm,
+comparator, DGP, endpoint, margin, random coordinate, seed, threshold, claim
+ceiling or complete-panel interpretation.
+
+The 60-minute value was an engineering launch estimate. Its expiry produced no
+complete question-relevant data and therefore has no scientific or portfolio
+stopping force. Exact r07 remains the same unanswered invested campaign; it is
+not consumed, retired or permanently nonidentified by the ended process or
+lease slice.
+
+Portfolio authorizes the existing RISP direction pair to complete exact r07.
+CM owns unchanged-science performance optimization, a result-blind
+same-coordinate resumable/atomic frontier, implementation repair, technical
+acceptance and continued execution. Operational Root issues and schedules
+sufficient one-CPU/no-GPU/below-1-GiB resource slices from CM's evidence-based
+completion projection. A slice boundary pauses only its lease. No fixed wall
+time or attempt count is a scientific limit.
+
+Continuation must preserve the frozen r07 stochastic coordinates and forbid
+seed replacement, threshold/margin changes, partial-panel inspection or
+selection, a new random family, and any treatment/comparator change. Replaying
+only an uncommitted unit or restoring a blinded committed frontier is the same
+campaign, not another scientific attempt. The complete panel remains required
+before EM interpretation.
+
+No r08 scientific successor or additional mathematical-closure ruling is
+required solely to repair lifecycle and performance. R08 lifecycle ideas may be
+used only as CM implementation input to the extent they are the minimum needed
+to preserve r07 semantics; fixed four-hour slices, per-shard hashes, commit
+leaves and write-through ledgers are not new scientific gates. After a complete
+technically accepted r07 result, the same EM performs intake and reuses the
+existing RISP ChatGPT External Pro conversation for result convergence.
+
+RISP therefore remains a direct exogenous-variable-`k` investment beside SGSP
+and RCLE. Operational Root may execute this completion action immediately; no
+second portfolio decision is needed unless complete EM-intaken data, scientific
+claim ceiling, cross-direction competition or actual opportunity cost changes.
