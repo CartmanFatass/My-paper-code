@@ -458,3 +458,198 @@ def test_enable_rejects_duplicate_or_malformed_inline_hook_block(
     result = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
     assert result.returncode != 0
     assert "HOOK_MARKER_BLOCK_INVALID" in (result.stdout + result.stderr)
+
+
+def test_native_smoke_contract_requires_inline_active_toml_and_audit_evidence(repo_root: Path):
+    script = (repo_root / "scripts/codex-semantic-mvp-test.ps1").read_text()
+    assert "NativeSmoke" in script
+    assert "dangerously-bypass-hook-trust" in script
+    assert "audit.jsonl" in script
+    assert "NATIVE_HOOK_EVENT_REQUIRED" in script
+    assert "# BEGIN HMASD CODEX SEMANTIC HOOKS" in script
+    assert "hooks\\.' + $event" in script
+    assert "ArgumentList.Add" in script
+
+
+def _native_active_stage(repo_root: Path, tmp_path: Path) -> Path:
+    stage = _stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_text(
+        config.read_text().replace("enabled = false", "enabled = true", 1)
+        + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'
+        + ''.join(
+            f'[[hooks.{event}]]\n[[hooks.{event}.hooks]]\ntype = "command"\n'
+            'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            for event in ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse")
+        )
+        + '# END HMASD CODEX SEMANTIC HOOKS\n'
+    )
+    return stage
+
+
+def _run_native_config_failure(repo_root: Path, stage: Path) -> subprocess.CompletedProcess[str]:
+    fake = stage / "fake-codex.cmd"
+    fake.write_text('@echo off\r\necho {"type":"thread.started","thread_id":"unused"}\r\nexit /b 0\r\n')
+    return subprocess.run(
+        [
+            "pwsh", "-NoProfile", "-NonInteractive", "-File",
+            str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
+            "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
+        ],
+        text=True, capture_output=True, encoding="utf-8", check=False,
+    )
+
+
+def test_native_smoke_rejects_notcommand_handler(repo_root: Path, tmp_path: Path):
+    stage = _native_active_stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace('type = "command"', 'notcommand = "command"', 1))
+    result = _run_native_config_failure(repo_root, stage)
+    assert result.returncode != 0
+    assert "NATIVE_SMOKE_REQUIRES_INLINE_TOML" in (result.stdout + result.stderr)
+
+
+def test_native_smoke_rejects_duplicate_mismatched_event_handler(repo_root: Path, tmp_path: Path):
+    stage = _native_active_stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace(
+        '[[hooks.SessionStart.hooks]]',
+        '[[hooks.SessionStart.extra]]\ntype = "command"\ncommand = "wrong"\n[[hooks.SessionStart.hooks]]',
+        1,
+    ))
+    result = _run_native_config_failure(repo_root, stage)
+    assert result.returncode != 0
+    assert "NATIVE_SMOKE_REQUIRES_INLINE_TOML" in (result.stdout + result.stderr)
+
+
+def test_native_smoke_rejects_relative_path_hidden_in_other_section(repo_root: Path, tmp_path: Path):
+    stage = _native_active_stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    text = config.read_text().replace('"runtime/codex-semantic-mvp"', '"C:/absolute/semantic-state"', 1)
+    config.write_text(text + '\n[mcp_servers.other]\nargs = ["runtime/codex-semantic-mvp"]\n')
+    result = _run_native_config_failure(repo_root, stage)
+    assert result.returncode != 0
+    assert "NATIVE_SMOKE_REQUIRES_INLINE_TOML" in (result.stdout + result.stderr)
+
+
+def test_native_smoke_rejects_wrong_orchestrator_server_args(repo_root: Path, tmp_path: Path):
+    stage = _native_active_stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace(
+        '"tools.codex_semantic_mvp.mcp_server"', '"wrong.server"', 1
+    ))
+    result = _run_native_config_failure(repo_root, stage)
+    assert result.returncode != 0
+    assert "NATIVE_SMOKE_REQUIRES_INLINE_TOML" in (result.stdout + result.stderr)
+
+
+def test_native_smoke_accepts_fake_native_audit_event_without_mutating_config_or_state(
+    repo_root: Path, tmp_path: Path
+):
+    stage = _stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace("enabled = false", "enabled = true", 1))
+    config.write_text(
+        config.read_text()
+        + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'
+        + ''.join(
+            f'[[hooks.{event}]]\n[[hooks.{event}.hooks]]\ntype = "command"\n'
+            'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            for event in ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse")
+        )
+        + '# END HMASD CODEX SEMANTIC HOOKS\n'
+    )
+    config_before = config.read_bytes()
+    audit = stage / "runtime" / "codex-semantic-mvp" / "audit.jsonl"
+    audit.parent.mkdir(parents=True)
+    activation = stage / "runtime" / "codex-semantic-mvp" / "activation-state.json"
+    activation.write_bytes(b'{"mode":"active","protected":true}\n')
+    activation_before = activation.read_bytes()
+    fake = tmp_path / "fake-codex.cmd"
+    fake.write_text(
+        f'@echo off\r\n'
+        f'if not "%1"=="exec" exit /b 11\r\n'
+        f'if not "%2"=="--json" exit /b 12\r\n'
+        f'if not "%3"=="--dangerously-bypass-hook-trust" exit /b 13\r\n'
+        f'if not "%4"=="--skip-git-repo-check" exit /b 14\r\n'
+        f'if not "%5"=="--cd" exit /b 15\r\n'
+        f'if not "%7"=="--model" exit /b 16\r\n'
+        f'if not "%8"=="gpt-5.6-luna" exit /b 17\r\n'
+        f'echo {{"type":"thread.started","thread_id":"native-smoke-session"}}\r\n'
+        f'echo {{"event":"SESSION_STARTED","session_id":"native-smoke-session","mode":"active"}}>>"{audit}"\r\n'
+        f'exit /b 0\r\n'
+    )
+    result = subprocess.run(
+        [
+            "pwsh", "-NoProfile", "-NonInteractive", "-File",
+            str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
+            "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
+        ],
+        text=True, capture_output=True, encoding="utf-8", check=False,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert config.read_bytes() == config_before
+    assert activation.read_bytes() == activation_before
+
+
+def test_native_smoke_rejects_stdout_without_new_audit_event(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace("enabled = false", "enabled = true", 1))
+    config.write_text(
+        config.read_text()
+        + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'
+        + ''.join(
+            f'[[hooks.{event}]]\n[[hooks.{event}.hooks]]\ntype = "command"\n'
+            'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            for event in ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse")
+        )
+        + '# END HMASD CODEX SEMANTIC HOOKS\n'
+    )
+    fake = tmp_path / "fake-codex-no-audit.cmd"
+    fake.write_text('@echo off\r\necho {"type":"thread.started","thread_id":"native-smoke-session"}\r\necho NATIVE_SEMANTIC_SMOKE_OK\r\nexit /b 0\r\n')
+    result = subprocess.run(
+        [
+            "pwsh", "-NoProfile", "-NonInteractive", "-File",
+            str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
+            "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
+        ],
+        text=True, capture_output=True, encoding="utf-8", check=False,
+    )
+    assert result.returncode != 0
+    assert "NATIVE_HOOK_EVENT_REQUIRED" in (result.stdout + result.stderr)
+
+
+def test_native_smoke_rejects_audit_event_for_wrong_cli_session(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace("enabled = false", "enabled = true", 1))
+    config.write_text(
+        config.read_text()
+        + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'
+        + ''.join(
+            f'[[hooks.{event}]]\n[[hooks.{event}.hooks]]\ntype = "command"\n'
+            'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            for event in ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse")
+        )
+        + '# END HMASD CODEX SEMANTIC HOOKS\n'
+    )
+    audit = stage / "runtime" / "codex-semantic-mvp" / "audit.jsonl"
+    audit.parent.mkdir(parents=True)
+    fake = tmp_path / "fake-codex-wrong-session.cmd"
+    fake.write_text(
+        f'@echo off\r\n'
+        f'echo {{"type":"thread.started","thread_id":"native-smoke-session"}}\r\n'
+        f'echo {{"event":"SESSION_STARTED","session_id":"different-session","mode":"active"}}>>"{audit}"\r\n'
+        f'exit /b 0\r\n'
+    )
+    result = subprocess.run(
+        [
+            "pwsh", "-NoProfile", "-NonInteractive", "-File",
+            str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
+            "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
+        ],
+        text=True, capture_output=True, encoding="utf-8", check=False,
+    )
+    assert result.returncode != 0
+    assert "NATIVE_HOOK_EVENT_REQUIRED" in (result.stdout + result.stderr)

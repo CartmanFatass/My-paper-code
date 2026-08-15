@@ -85,3 +85,26 @@ A deterministic failure injected into the actual Stop hook path returned neutral
 ## Adoption boundary
 
 This run supports **SHADOW adoption only**. It explicitly rules out `ADOPT_ACTIVE_MVP`: genuine native Codex hook delivery, child lifecycle, and MCP-host lifecycle evidence is still missing. The full repository unit collection is also not clean. This is not a rejection of the local implementation; ACTIVE remains disabled and recoverable.
+
+## Native smoke operation
+
+The bounded native smoke path is explicit and does not enable or disable hooks.
+It protects `.codex/config.toml` and `activation-state.json` byte-for-byte; the
+native hook is expected to append diagnostic `audit.jsonl`/SQLite evidence.
+Run it only after the live config contains the reviewed inline TOML hook block
+with all five lifecycle handlers and `--mode active`, plus the enabled managed
+MCP section:
+
+```powershell
+pwsh -NoProfile -NonInteractive -File scripts/codex-semantic-mvp-test.ps1 `
+  -RepoRoot . -NativeSmoke -NativeTimeoutSec 120
+```
+
+The command snapshots the `runtime/codex-semantic-mvp/audit.jsonl` byte cursor
+and line count, invokes a safe ordinary `codex exec` with
+`--dangerously-bypass-hook-trust`, then requires a newly appended recognized
+native hook event. A successful CLI exit or stdout response alone is rejected
+with `NATIVE_HOOK_EVENT_REQUIRED`; missing or incomplete inline TOML is rejected
+before execution. Test doubles can be supplied with `-CodexCommand` for local
+contract tests without contacting a model. The focused activation/smoke suite
+currently passes 36 tests under the SB3 Python interpreter.
