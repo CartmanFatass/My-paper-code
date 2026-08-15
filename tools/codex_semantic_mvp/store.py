@@ -24,6 +24,10 @@ TASK_LIFECYCLES = frozenset(
 OBLIGATION_STATES = frozenset({"OPEN", "RESOLVED", "CANCELLED"})
 WORKFLOW_STATES = frozenset({"ACTIVE", "QUIESCENT", "CLOSED", "CANCELLED"})
 DISALLOWED_SEMANTIC_STATES = frozenset({"SUCCESS", "FAILURE", "BLOCKED", "RETIRED"})
+RETURNED_TASK_LIFECYCLES = frozenset(
+    {"RETURNED_TYPED", "RETURNED_UNTYPED", "INTAKEN", "CANCELLED"}
+)
+QUIESCENT_TASK_LIFECYCLES = frozenset({"INTAKEN", "CANCELLED"})
 CLOSURE_KINDS = frozenset(
     {"COMPLETED", "USER_CANCELLED", "SCOPE_TRANSFERRED", "DEFERRED_BY_USER", "GOAL_BLOCKED_AFTER_AUDIT"}
 )
@@ -315,11 +319,16 @@ class SemanticStore:
                  typed_json, schema_valid, digest, _now()),
             )
             self._set_task_lifecycle(workflow_id, task_id, lifecycle)
-            self._insert_obligation(
+            obligation_id = self._insert_obligation(
                 self.connection, workflow_id, ObligationKind.ROOT_INTAKE_REQUIRED,
                 "/root", report_id, "A child report requires explicit Root intake.", report_id
             )
             self._touch_workflow(workflow_id)
+            self._append_event(
+                workflow_id, "OBLIGATION_OPENED", obligation_id,
+                {"kind": ObligationKind.ROOT_INTAKE_REQUIRED.value},
+                f"OBLIGATION_OPENED:{obligation_id}",
+            )
             self._append_event(
                 workflow_id, event_kind, report_id,
                 {"report_id": report_id, "schema_valid": bool(schema_valid)},
@@ -388,12 +397,17 @@ class SemanticStore:
                 (intake_id, workflow_id, report_id, kind_value, _json(dict(translation)),
                  _json(dict(next_action)) if next_action is not None else None, note, _now()),
             )
+            resolution = {"intake_id": intake_id}
             self.connection.execute(
                 "UPDATE obligations SET state = 'RESOLVED', resolution_json = ?, resolved_at = ? WHERE obligation_id = ?",
-                (_json({"intake_id": intake_id}), _now(), obligation[0]),
+                (_json(resolution), _now(), obligation[0]),
             )
             self._set_task_lifecycle(workflow_id, report[0], "INTAKEN")
             self._touch_workflow(workflow_id)
+            self._append_event(
+                workflow_id, "OBLIGATION_RESOLVED", obligation[0],
+                {"resolution": resolution}, f"OBLIGATION_RESOLVED:{obligation[0]}",
+            )
             self._append_event(
                 workflow_id, "ROOT_INTAKE_RECORDED", report_id,
                 {"intake_id": intake_id, "intake_kind": kind_value},
@@ -478,6 +492,22 @@ class SemanticStore:
                 task["task_id"] for task in tasks if task["lifecycle"] not in {"INTAKEN", "CANCELLED"}
             ]
             return result
+
+    def all_required_tasks_returned(self, workflow_id: str) -> bool:
+        """Return whether every required task has reached a returned lifecycle."""
+        state = self.workflow_state(workflow_id)
+        return all(
+            not task["required"] or task["lifecycle"] in RETURNED_TASK_LIFECYCLES
+            for task in state["tasks"]
+        )
+
+    def is_workflow_quiescent(self, workflow_id: str) -> bool:
+        """Return the typed-state quiescence predicate without mutating the workflow."""
+        state = self.workflow_state(workflow_id)
+        return (
+            not state["open_obligations"]
+            and all(task["lifecycle"] in QUIESCENT_TASK_LIFECYCLES for task in state["tasks"])
+        )
 
     def create_closure_receipt(
         self, workflow_id: str, closure_kind: str, summary: str

@@ -82,14 +82,8 @@ def _event_matches(store: SemanticStore, event: Mapping[str, Any], condition: st
         return row is not None and row[0] in task_ids
     if condition == "OPEN_OBLIGATION_CHANGED":
         return kind.startswith("OBLIGATION_")
-    if condition == "WORKFLOW_QUIESCENT":
-        return store.workflow_state(str(event["workflow_id"]))["state"] == "QUIESCENT"
-    if condition == "ALL_REQUIRED_RETURNED":
-        state = store.workflow_state(str(event["workflow_id"]))
-        return all(
-            not task["required"] or task["lifecycle"] in {"RETURNED_TYPED", "RETURNED_UNTYPED", "INTAKEN", "CANCELLED"}
-            for task in state["tasks"]
-        )
+    if condition in {"WORKFLOW_QUIESCENT", "ALL_REQUIRED_RETURNED"}:
+        return False
     raise ValueError(f"unknown await condition: {condition}")
 
 
@@ -110,6 +104,14 @@ def _event_summary(store: SemanticStore, event: Mapping[str, Any]) -> dict[str, 
 _AWAIT_CONDITIONS = frozenset(
     {"ANY_REPORT", "ALL_REQUIRED_RETURNED", "OPEN_OBLIGATION_CHANGED", "WORKFLOW_QUIESCENT"}
 )
+
+
+def _state_condition_met(store: SemanticStore, workflow_id: str, condition: str) -> bool:
+    if condition == "ALL_REQUIRED_RETURNED":
+        return store.all_required_tasks_returned(workflow_id)
+    if condition == "WORKFLOW_QUIESCENT":
+        return store.is_workflow_quiescent(workflow_id)
+    return False
 
 
 def _validate_await_inputs(
@@ -153,6 +155,8 @@ async def await_events(
             cursor = max(cursor, int(event["seq"]))
             if _event_matches(store, event, condition, task_ids):
                 return {"status": "EVENT", "cursor": cursor, "events": [_event_summary(store, event)]}
+        if _state_condition_met(store, workflow_id, condition):
+            return {"status": "EVENT", "cursor": cursor, "events": []}
         remaining = deadline - asyncio.get_running_loop().time()
         if remaining <= 0:
             state = store.workflow_state(workflow_id)
