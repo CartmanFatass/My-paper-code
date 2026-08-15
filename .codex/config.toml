@@ -2,6 +2,8 @@
 
 [features]
 multi_agent_v2 = true
+# Inline lifecycle hooks are the live semantic activation surface.
+hooks = true
 
 [agents]
 max_threads = 40

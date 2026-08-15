@@ -322,3 +322,139 @@ def test_successful_disable_restores_hooks_config_and_expected_state(
     assert state["current_config_sha256"] == hashlib.sha256(config_before).hexdigest()
     backup = stage / "runtime" / "codex-semantic-mvp" / state["baseline_backup"]
     assert backup.read_bytes() == hooks_before
+
+
+def test_active_activation_installs_inline_toml_handlers_and_enables_mcp(
+    repo_root: Path, tmp_path: Path
+):
+    stage = _stage(repo_root, tmp_path)
+    result = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert result.returncode == 0, result.stderr
+
+    config = (stage / ".codex" / "config.toml").read_text()
+    assert "hooks = true" in config
+    hook_block = config.split("# BEGIN HMASD CODEX SEMANTIC HOOKS", 1)[1].split(
+        "# END HMASD CODEX SEMANTIC HOOKS", 1
+    )[0]
+    for event in ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse"):
+        assert f"[[hooks.{event}]]" in hook_block
+        assert f"[[hooks.{event}.hooks]]" in hook_block
+    assert 'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"' in hook_block
+    assert '"runtime/codex-semantic-mvp"' in config
+    assert config.count("enabled = true") == 1
+    assert config.count("enabled = false") == 0
+
+
+def test_activation_leaves_legacy_hooks_json_byte_exact(
+    repo_root: Path, tmp_path: Path
+):
+    stage = _stage(repo_root, tmp_path)
+    hooks_before = (stage / ".codex" / "hooks.json").read_bytes()
+    result = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert result.returncode == 0, result.stderr
+    assert (stage / ".codex" / "hooks.json").read_bytes() == hooks_before
+
+
+def test_disable_restores_uniform_lf_config_byte_exact(
+    repo_root: Path, tmp_path: Path
+):
+    stage = _stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_bytes(config.read_bytes().replace(b"\r\n", b"\n"))
+    config_before = config.read_bytes()
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    disabled = _run_operator(repo_root, stage, "codex-semantic-mvp-disable.ps1")
+    assert disabled.returncode == 0, disabled.stderr
+    assert config.read_bytes() == config_before
+
+
+def test_enable_rejects_existing_dotted_inline_hook_definition(
+    repo_root: Path, tmp_path: Path
+):
+    stage = _stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text() + "\n[[hooks.SessionStart]]\n")
+    result = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert result.returncode != 0
+    assert "HOOKS_TABLE_CONFLICT" in (result.stdout + result.stderr)
+
+
+@pytest.mark.parametrize(
+    "assignment",
+    [
+        "hooks.SessionStart = []",
+        "hooks = { SessionStart = [] }",
+    ],
+)
+def test_enable_rejects_existing_inline_hook_assignments(
+    repo_root: Path, tmp_path: Path, assignment: str
+):
+    stage = _stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text() + f"\n{assignment}\n")
+    result = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert result.returncode != 0
+    assert "HOOKS_TABLE_CONFLICT" in (result.stdout + result.stderr)
+
+
+def test_active_replaces_managed_shadow_block_without_changing_unrelated_config(
+    repo_root: Path, tmp_path: Path
+):
+    stage = _stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text() + "\n# unrelated activation sentinel\n")
+    shadow = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Shadow")
+    assert shadow.returncode == 0, shadow.stderr
+    shadow_text = config.read_text()
+    active = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert active.returncode == 0, active.stderr
+    active_text = config.read_text()
+
+    begin = "# BEGIN HMASD CODEX SEMANTIC HOOKS"
+    end = "# END HMASD CODEX SEMANTIC HOOKS"
+    shadow_begin = shadow_text.index(begin)
+    shadow_end = shadow_text.index(end) + len(end)
+    active_begin = active_text.index(begin)
+    active_end = active_text.index(end) + len(end)
+    assert shadow_text[:shadow_begin].replace("enabled = false", "enabled = <mcp>") == active_text[:active_begin].replace("enabled = true", "enabled = <mcp>")
+    assert shadow_text[shadow_end:] == active_text[active_end:]
+    assert "--mode shadow" in shadow_text[shadow_begin:shadow_end]
+    assert "--mode active" in active_text[active_begin:active_end]
+    assert "--mode shadow" not in active_text[active_begin:active_end]
+    state = json.loads((stage / "runtime/codex-semantic-mvp/activation-state.json").read_text())
+    assert state["mode"] == "active"
+
+
+def test_disable_removes_inline_toml_handlers_and_disables_mcp(
+    repo_root: Path, tmp_path: Path
+):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    disabled = _run_operator(repo_root, stage, "codex-semantic-mvp-disable.ps1")
+    assert disabled.returncode == 0, disabled.stderr
+
+    config = (stage / ".codex" / "config.toml").read_text()
+    assert "# BEGIN HMASD CODEX SEMANTIC HOOKS" not in config
+    assert "# END HMASD CODEX SEMANTIC HOOKS" not in config
+    assert config.count("enabled = false") == 1
+    assert config.count("enabled = true") == 0
+
+
+@pytest.mark.parametrize(
+    "suffix",
+    [
+        "\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n# END HMASD CODEX SEMANTIC HOOKS\n",
+        "\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n",
+    ],
+)
+def test_enable_rejects_duplicate_or_malformed_inline_hook_block(
+    repo_root: Path, tmp_path: Path, suffix: str
+):
+    stage = _stage(repo_root, tmp_path)
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text() + suffix)
+    result = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert result.returncode != 0
+    assert "HOOK_MARKER_BLOCK_INVALID" in (result.stdout + result.stderr)

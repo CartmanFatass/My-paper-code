@@ -41,7 +41,44 @@ function Invoke-InjectedFailure([string]$Point) {
     if ($InjectFailureAt -eq $Point) { throw "INJECTED_FAILURE:$Point" }
 }
 
-function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled) {
+function New-SemanticHookToml([string]$Mode) {
+    $command = 'C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode ' + $Mode.ToLowerInvariant()
+    $lines = @(
+        '# BEGIN HMASD CODEX SEMANTIC HOOKS',
+        '[hooks]'
+    )
+    foreach ($event in @('SessionStart', 'SubagentStart', 'SubagentStop', 'Stop', 'PreToolUse')) {
+        $lines += "[[hooks.$event]]"
+        $lines += "[[hooks.$event.hooks]]"
+        $lines += 'type = "command"'
+        $lines += 'command = "' + $command + '"'
+        $lines += 'timeout = 5'
+        $lines += ''
+    }
+    $lines += '# END HMASD CODEX SEMANTIC HOOKS'
+    return ($lines -join "`n")
+}
+
+function Test-RootHookAssignment([string]$Text, [string]$Pattern) {
+    $tableName = ""
+    foreach ($line in ($Text -split "`r?`n")) {
+        if ($line -match '^[ \t]*\[\[([^\]]+)\]\]') {
+            $tableName = $Matches[1]
+            continue
+        }
+        if ($line -match '^[ \t]*\[([^\]]+)\]') {
+            $tableName = $Matches[1]
+            continue
+        }
+        if ($line -match $Pattern) {
+            if ($tableName -eq "features" -and $line -match '^[ \t]*hooks[ \t]*=[ \t]*true[ \t]*(?:#.*)?$') { continue }
+            return $true
+        }
+    }
+    return $false
+}
+
+function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled, [string]$Mode) {
     $beginMatches = [regex]::Matches($Text, '(?m)^# BEGIN HMASD CODEX SEMANTIC MVP[ \t]*(?:\r?$)')
     $endMatches = [regex]::Matches($Text, '(?m)^# END HMASD CODEX SEMANTIC MVP[ \t]*(?:\r?$)')
     if ($beginMatches.Count -ne 1 -or $endMatches.Count -ne 1 -or $endMatches[0].Index -le $beginMatches[0].Index) {
@@ -75,6 +112,34 @@ function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled) {
     $updatedSection = $section.Substring(0, $enabledMatch.Index) + $newLine + $section.Substring($enabledMatch.Index + $enabledMatch.Length)
     $updatedBlock = $block.Substring(0, $sectionMatch.Index) + $updatedSection + $block.Substring($sectionEnd)
     $updatedText = $Text.Substring(0, $blockStart) + $updatedBlock + $Text.Substring($blockStart + $blockLength)
+    $hookBeginMatches = [regex]::Matches($updatedText, '(?m)^# BEGIN HMASD CODEX SEMANTIC HOOKS[ \t]*(?:\r?$)')
+    $hookEndMatches = [regex]::Matches($updatedText, '(?m)^# END HMASD CODEX SEMANTIC HOOKS[ \t]*(?:\r?$)')
+    if ($hookBeginMatches.Count -gt 1 -or $hookEndMatches.Count -gt 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
+    if ($hookBeginMatches.Count -ne $hookEndMatches.Count) { throw "HOOK_MARKER_BLOCK_INVALID" }
+    $singleHookTable = '(?m)^\[hooks(?:\.[^\]\r\n]+)?\][ \t]*(?:\r?$)'
+    $arrayHookTable = '(?m)^\[\[hooks(?:\.[^\]\r\n]+)?\]\][ \t]*(?:\r?$)'
+    $newline = if ($updatedText.Contains("`r`n")) { "`r`n" } else { "`n" }
+    $assignmentPattern = '(?m)^[ \t]*hooks(?:\.[A-Za-z0-9_-]+)*[ \t]*='
+    if ($hookBeginMatches.Count -eq 1) {
+        $hookStart = $hookBeginMatches[0].Index
+        $hookEnd = $hookEndMatches[0].Index + $hookEndMatches[0].Length
+        $managedBlock = $updatedText.Substring($hookStart, $hookEnd - $hookStart)
+        if ([regex]::Matches($managedBlock, '(?m)^\[hooks\][ \t]*(?:\r?$)').Count -ne 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
+        foreach ($event in @('SessionStart', 'SubagentStart', 'SubagentStop', 'Stop', 'PreToolUse')) {
+            if ([regex]::Matches($managedBlock, "(?m)^\[\[hooks\.$event\]\][ \t]*(?:\r?$)").Count -ne 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
+            if ([regex]::Matches($managedBlock, "(?m)^\[\[hooks\.$event\.hooks\]\][ \t]*(?:\r?$)").Count -ne 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
+        }
+        if ([regex]::Matches($managedBlock, '(?m)^command[ \t]*=[ \t]*"C:\\\\Users\\\\wu\\\\\.conda\\\\envs\\\\SB3\\\\python\.exe -m tools\.codex_semantic_mvp\.hook_entry --mode (?:active|shadow)"[ \t]*(?:\r?$)').Count -ne 5) { throw "HOOK_MARKER_BLOCK_INVALID" }
+        $outsideText = $updatedText.Substring(0, $hookStart) + $updatedText.Substring($hookEnd)
+        if ($outsideText -match $singleHookTable -or $outsideText -match $arrayHookTable -or (Test-RootHookAssignment $outsideText $assignmentPattern)) { throw "HOOKS_TABLE_CONFLICT" }
+        $hookBlock = (New-SemanticHookToml $Mode) -replace "`n", $newline
+        $updatedText = $updatedText.Substring(0, $hookStart) + $hookBlock + $updatedText.Substring($hookEnd)
+    }
+    else {
+        if ($updatedText -match $singleHookTable -or $updatedText -match $arrayHookTable -or (Test-RootHookAssignment $updatedText $assignmentPattern)) { throw "HOOKS_TABLE_CONFLICT" }
+        $hookBlock = (New-SemanticHookToml $Mode) -replace "`n", $newline
+        $updatedText = $updatedText + $newline + $hookBlock + $newline
+    }
     return [pscustomobject]@{ Text = $updatedText; Enabled = $enabledMatches[0].Groups[1].Value; Block = $block }
 }
 
@@ -143,7 +208,7 @@ try {
     $state = if ($stateValidation) { $stateValidation.Object } else { $null }
     $configText = [Text.UTF8Encoding]::new($false).GetString($configBytes)
     $desired = if ($Mode -eq "Active") { "true" } else { "false" }
-    $configMutation = Get-StrictConfigMutation $configText $desired
+    $configMutation = Get-StrictConfigMutation $configText $desired $Mode
     $updatedConfigBytes = [Text.UTF8Encoding]::new($false).GetBytes($configMutation.Text)
     $backupName = "hooks-$currentHash.bak"
     $backupPath = Join-Path $backupDir $backupName
@@ -153,10 +218,6 @@ try {
         if ((Get-BytesHash ([IO.File]::ReadAllBytes($backupPath))) -ne $currentHash) { throw "BACKUP_HASH_MISMATCH $backupName" }
     }
 
-    $templateName = if ($Mode -eq "Active") { "hooks.semantic-mvp.active.json" } else { "hooks.semantic-mvp.shadow.json" }
-    $templateBytes = [IO.File]::ReadAllBytes((Join-Path $codex $templateName))
-    try { $null = $templateBytes | ConvertFrom-Json } catch { throw "HOOK_TEMPLATE_INVALID" }
-    $templateHash = Get-BytesHash $templateBytes
     if (-not $state) {
         $state = [pscustomobject]@{
             schema_version = 1
@@ -164,7 +225,7 @@ try {
             baseline_backup = "backups/$backupName"
         }
     }
-    $state | Add-Member -NotePropertyName current_hooks_sha256 -NotePropertyValue $templateHash -Force
+    $state | Add-Member -NotePropertyName current_hooks_sha256 -NotePropertyValue $currentHash -Force
     $state | Add-Member -NotePropertyName current_config_sha256 -NotePropertyValue (Get-BytesHash $updatedConfigBytes) -Force
     $state | Add-Member -NotePropertyName mode -NotePropertyValue $Mode.ToLowerInvariant() -Force
     $state | Add-Member -NotePropertyName last_backup -NotePropertyValue "backups/$backupName" -Force
@@ -177,7 +238,6 @@ try {
     try {
         if (-not $backupExisted) { $backupWritten = $true; Write-BytesAtomic $backupPath $hooksBytes }
         Invoke-InjectedFailure "backup"
-        $hooksWritten = $true; Write-BytesAtomic $hooksPath $templateBytes
         Invoke-InjectedFailure "hooks"
         $configWritten = $true; Write-BytesAtomic $configPath $updatedConfigBytes
         Invoke-InjectedFailure "config"

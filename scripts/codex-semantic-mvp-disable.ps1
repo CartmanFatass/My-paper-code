@@ -53,7 +53,26 @@ function Get-StrictConfigMutation([string]$Text) {
     $newLine = $indent + "enabled = false" + $ending
     $updatedSection = $section.Substring(0, $enabledMatch.Index) + $newLine + $section.Substring($enabledMatch.Index + $enabledMatch.Length)
     $updatedBlock = $block.Substring(0, $sectionMatch.Index) + $updatedSection + $block.Substring($sectionEnd)
-    return $Text.Substring(0, $blockStart) + $updatedBlock + $Text.Substring($blockStart + $blockLength)
+    $updatedText = $Text.Substring(0, $blockStart) + $updatedBlock + $Text.Substring($blockStart + $blockLength)
+    $hookBeginMatches = [regex]::Matches($updatedText, '(?m)^# BEGIN HMASD CODEX SEMANTIC HOOKS[ \t]*(?:\r?$)')
+    $hookEndMatches = [regex]::Matches($updatedText, '(?m)^# END HMASD CODEX SEMANTIC HOOKS[ \t]*(?:\r?$)')
+    if ($hookBeginMatches.Count -gt 1 -or $hookEndMatches.Count -gt 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
+    if ($hookBeginMatches.Count -ne $hookEndMatches.Count) { throw "HOOK_MARKER_BLOCK_INVALID" }
+    if ($hookBeginMatches.Count -eq 1) {
+        $hookStart = $hookBeginMatches[0].Index
+        $hookEnd = $hookEndMatches[0].Index + $hookEndMatches[0].Length
+        $prefix = $updatedText.Substring(0, $hookStart)
+        if ($prefix.EndsWith("`r`n")) { $prefix = $prefix.Substring(0, $prefix.Length - 2) }
+        elseif ($prefix.EndsWith("`n")) { $prefix = $prefix.Substring(0, $prefix.Length - 1) }
+        $suffix = $updatedText.Substring($hookEnd)
+        if ($suffix.StartsWith("`r`n")) { $suffix = $suffix.Substring(2) }
+        elseif ($suffix.StartsWith("`n")) { $suffix = $suffix.Substring(1) }
+        $updatedText = $prefix + $suffix
+    }
+    elseif ($updatedText -match '(?m)^\[hooks(?:\.[^\]\r\n]+)?\][ \t]*(?:\r?$)' -or $updatedText -match '(?m)^\[\[hooks(?:\.[^\]\r\n]+)?\]\][ \t]*(?:\r?$)') {
+        throw "HOOKS_TABLE_OUTSIDE_MANAGED_BLOCK"
+    }
+    return $updatedText
 }
 function Read-ActivationState([string]$Path, [string]$Runtime, [string]$CurrentHooksHash, [string]$CurrentConfigHash) {
     if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { throw "ACTIVATION_STATE_INVALID_MISSING" }
@@ -110,7 +129,6 @@ try {
     $newStateBytes = [Text.UTF8Encoding]::new($false).GetBytes(($state | ConvertTo-Json -Depth 4))
     $hooksWritten = $false; $configWritten = $false; $stateWritten = $false
     try {
-        $hooksWritten = $true; Write-BytesAtomic $hooksPath $backupBytes
         Invoke-InjectedFailure "hooks"
         $configWritten = $true; Write-BytesAtomic $configPath $updatedConfigBytes
         Invoke-InjectedFailure "config"
