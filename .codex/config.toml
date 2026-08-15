@@ -134,3 +134,18 @@ nickname_candidates = ["Research Principles Analyst", "RL Principles Analyst", "
 command = "node"
 args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
 tool_timeout_sec = 2700
+
+# BEGIN HMASD CODEX SEMANTIC MVP
+[mcp_servers.hmasd_orchestrator]
+command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe"
+args = [
+  "-m",
+  "tools.codex_semantic_mvp.mcp_server",
+  "--state-dir",
+  "runtime/codex-semantic-mvp"
+]
+startup_timeout_sec = 15
+tool_timeout_sec = 1800
+enabled = false
+required = false
+# END HMASD CODEX SEMANTIC MVP
