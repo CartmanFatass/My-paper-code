@@ -163,6 +163,8 @@ temp_collection_log/
 # User-controlled independent research is local-only and never enters Git.
 /local_research/
 
+/runtime/codex-semantic-mvp/
+
 # Live cross-task semantic handoffs are ignored under temp/handoffs; only their stable contract is tracked.
 /temp/*
 !/temp/README.md
