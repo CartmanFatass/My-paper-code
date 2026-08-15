@@ -26,7 +26,8 @@ try {
                     Copy-Item -LiteralPath (Join-Path $root ".codex\$name") -Destination (Join-Path $stage ".codex\$name")
                 }
                 $before = [IO.File]::ReadAllBytes((Join-Path $stage ".codex\hooks.json"))
-                & (Join-Path $scriptDir "codex-semantic-mvp-enable.ps1") -RepoRoot $stage -Mode $activationMode
+                $baselineHash = (Get-FileHash -LiteralPath (Join-Path $stage ".codex\hooks.json") -Algorithm SHA256).Hash.ToLowerInvariant()
+                & (Join-Path $scriptDir "codex-semantic-mvp-enable.ps1") -RepoRoot $stage -Mode $activationMode -ExpectedHooksHash $baselineHash
                 if ($LASTEXITCODE -ne 0) { throw "dry-run $activationMode enable failed" }
                 & (Join-Path $scriptDir "codex-semantic-mvp-disable.ps1") -RepoRoot $stage
                 if ($LASTEXITCODE -ne 0) { throw "dry-run $activationMode disable failed" }

@@ -130,10 +130,16 @@ try {
     $currentHash = Get-BytesHash $hooksBytes
     $configBytes = [IO.File]::ReadAllBytes($configPath)
     $configHash = Get-BytesHash $configBytes
+    if ($ExpectedHooksHash -and $ExpectedHooksHash -notmatch '^[0-9a-fA-F]{64}$') {
+        throw "INITIAL_BASELINE_HASH_INVALID"
+    }
     if ($ExpectedHooksHash -and $currentHash -ne $ExpectedHooksHash.ToLowerInvariant()) {
         throw "LIVE_HOOK_HASH_MISMATCH expected=$ExpectedHooksHash actual=$currentHash"
     }
     $stateValidation = Read-ActivationState $statePath $runtime $currentHash $configHash
+    if (-not $stateValidation -and -not $ExpectedHooksHash) {
+        throw "INITIAL_BASELINE_REQUIRED: supply -ExpectedHooksHash from a reviewed doctor baseline"
+    }
     $state = if ($stateValidation) { $stateValidation.Object } else { $null }
     $configText = [Text.UTF8Encoding]::new($false).GetString($configBytes)
     $desired = if ($Mode -eq "Active") { "true" } else { "false" }

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+from importlib.metadata import version as distribution_version
 import json
 import os
 import re
@@ -11,7 +12,6 @@ from pathlib import Path
 from typing import Any
 
 
-MCP_VERSION = "2.0.0"
 BEGIN_MARKER = "# BEGIN HMASD CODEX SEMANTIC MVP"
 END_MARKER = "# END HMASD CODEX SEMANTIC MVP"
 PYTHON_EXECUTABLE = r"C:\Users\wu\.conda\envs\SB3\python.exe"
@@ -24,6 +24,15 @@ def _file_baseline(path: Path, display_path: str) -> dict[str, Any]:
         "size": len(data),
         "path": display_path,
     }
+
+
+def installed_mcp_version(version_reader: Any = distribution_version) -> str | None:
+    """Return the installed ``mcp`` distribution version, without guessing."""
+    try:
+        value = version_reader("mcp")
+    except Exception:
+        return None
+    return str(value) if value else None
 
 
 def _marker_block(config_text: str) -> str | None:
@@ -85,7 +94,7 @@ def _runtime_writable(runtime_dir: Path) -> bool:
         return False
 
 
-def collect_baseline(repo_root: Path) -> dict[str, Any]:
+def collect_baseline(repo_root: Path, mcp_version_reader: Any = distribution_version) -> dict[str, Any]:
     """Return legacy file entries plus machine-readable activation fields."""
     root = Path(repo_root).resolve()
     config_path = root / ".codex" / "config.toml"
@@ -99,7 +108,7 @@ def collect_baseline(repo_root: Path) -> dict[str, Any]:
         "hooks_json": hooks,
         "live_hooks_hash": hooks["sha256"],
         "config_hash": config["sha256"],
-        "mcp_version": MCP_VERSION,
+        "mcp_version": installed_mcp_version(mcp_version_reader),
         "server_config_present": present,
         "server_enabled": enabled,
         "runtime_writable": _runtime_writable(root / "runtime" / "codex-semantic-mvp"),

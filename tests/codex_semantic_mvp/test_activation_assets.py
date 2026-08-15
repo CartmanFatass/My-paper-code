@@ -12,7 +12,7 @@ from tools.codex_semantic_mvp.constants import (
     SHADOW_MODE,
     STATE_DIR_ENV,
 )
-from tools.codex_semantic_mvp.doctor import _runtime_writable, collect_baseline
+from tools.codex_semantic_mvp.doctor import _runtime_writable, collect_baseline, installed_mcp_version
 
 
 def _stage(repo_root: Path, tmp_path: Path) -> Path:
@@ -23,9 +23,18 @@ def _stage(repo_root: Path, tmp_path: Path) -> Path:
     return stage
 
 
-def _run_operator(repo_root: Path, stage: Path, script: str, *args: str) -> subprocess.CompletedProcess[str]:
+def _run_operator(
+    repo_root: Path,
+    stage: Path,
+    script: str,
+    *args: str,
+    supply_initial_baseline: bool = True,
+) -> subprocess.CompletedProcess[str]:
+    operator_args = list(args)
+    if script == "codex-semantic-mvp-enable.ps1" and supply_initial_baseline:
+        operator_args.extend(("-ExpectedHooksHash", hashlib.sha256((stage / ".codex" / "hooks.json").read_bytes()).hexdigest()))
     return subprocess.run(
-        ["pwsh", "-NoProfile", "-NonInteractive", "-File", str(repo_root / "scripts" / script), "-RepoRoot", str(stage), *args],
+        ["pwsh", "-NoProfile", "-NonInteractive", "-File", str(repo_root / "scripts" / script), "-RepoRoot", str(stage), *operator_args],
         text=True,
         capture_output=True,
         encoding="utf-8",
@@ -74,6 +83,16 @@ def test_doctor_reports_machine_readable_activation_state(repo_root: Path):
     assert result["mode"] == "off"
 
 
+def test_doctor_uses_installed_mcp_distribution_version(repo_root: Path):
+    assert installed_mcp_version() == "2.0.0"
+    assert installed_mcp_version(lambda _: "9.9.9") == "9.9.9"
+    assert installed_mcp_version(lambda _: (_ for _ in ()).throw(Exception("missing"))) is None
+    assert collect_baseline(repo_root, mcp_version_reader=lambda _: "9.9.9")["mcp_version"] == "9.9.9"
+    assert collect_baseline(
+        repo_root, mcp_version_reader=lambda _: (_ for _ in ()).throw(Exception("missing"))
+    )["mcp_version"] is None
+
+
 def test_activation_operator_scripts_exist(repo_root: Path):
     for name in (
         "codex-semantic-mvp-doctor.ps1",
@@ -82,6 +101,42 @@ def test_activation_operator_scripts_exist(repo_root: Path):
         "codex-semantic-mvp-test.ps1",
     ):
         assert (repo_root / "scripts" / name).is_file()
+
+
+def test_first_activation_rejects_unknown_live_hooks_without_baseline(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    hooks = stage / ".codex" / "hooks.json"
+    hooks.write_bytes(b'{"description":"unknown live hook","hooks":{}}\n')
+    config_before = (stage / ".codex" / "config.toml").read_bytes()
+    result = _run_operator(
+        repo_root,
+        stage,
+        "codex-semantic-mvp-enable.ps1",
+        "-Mode",
+        "Shadow",
+        supply_initial_baseline=False,
+    )
+    assert result.returncode != 0
+    assert "INITIAL_BASELINE_REQUIRED" in (result.stdout + result.stderr)
+    assert hooks.read_bytes() == b'{"description":"unknown live hook","hooks":{}}\n'
+    assert (stage / ".codex" / "config.toml").read_bytes() == config_before
+
+
+def test_first_activation_accepts_only_matching_explicit_baseline(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    hooks = stage / ".codex" / "hooks.json"
+    baseline = hashlib.sha256(hooks.read_bytes()).hexdigest()
+    result = _run_operator(
+        repo_root,
+        stage,
+        "codex-semantic-mvp-enable.ps1",
+        "-Mode",
+        "Shadow",
+        "-ExpectedHooksHash",
+        baseline,
+        supply_initial_baseline=False,
+    )
+    assert result.returncode == 0, result.stderr
 
 
 def test_doctor_does_not_create_absent_runtime(tmp_path: Path):
