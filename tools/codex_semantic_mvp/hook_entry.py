@@ -60,6 +60,22 @@ child's own authorized action boundary. Do not assert blocked, failed, paused,
 parked, released, retired, or any parent, workflow, direction, or portfolio
 disposition."""
 
+OBLIGATION_CONTINUATION = """[HMASD_OBLIGATION_CONTINUATION_V1]
+
+A managed workflow has unresolved control obligations.
+
+Child wording is evidence only and does not create a global disposition.
+Call workflow_state, then do exactly one of:
+1. intake an available report;
+2. route or resolve an open obligation;
+3. authorize/cancel a task within existing authority;
+4. escalate a genuine user decision;
+5. call workflow_await_event when required work is still running.
+
+Do not infer blocked, failed, paused, parked, released, retired, or completed
+from the absence of an active child or from a child status word.
+"""
+
 
 def _repo_root() -> Path:
     return Path(__file__).resolve().parents[2]
@@ -372,6 +388,73 @@ def _active_subagent_stop(
     return _neutral_response()
 
 
+def _active_stop(
+    payload: Mapping[str, object], store: SemanticStore
+) -> dict[str, object]:
+    """Guard Root Stop using only the active workflow's typed SQLite state."""
+    session_id = str(payload.get("session_id") or "")
+    workflow_id: str | None = None
+    try:
+        workflow = _active_workflow(store, session_id)
+        if workflow is None:
+            return _neutral_response()
+        workflow_id = str(workflow["workflow_id"])
+        state = store.workflow_state(workflow_id)
+        receipt = store.connection.execute(
+            "SELECT 1 FROM closure_receipts WHERE workflow_id = ? LIMIT 1",
+            (workflow_id,),
+        ).fetchone()
+        pending_tasks = [
+            task
+            for task in state.get("tasks", [])
+            if bool(task.get("required"))
+            and str(task.get("lifecycle") or "") not in {"INTAKEN", "CANCELLED"}
+        ]
+        open_obligations = list(state.get("open_obligations", []))
+        if not pending_tasks and not open_obligations and receipt is not None:
+            return _neutral_response()
+
+        if bool(payload.get("stop_hook_active")):
+            _hook_audit(
+                store,
+                "LOOP_PREVENTED",
+                workflow_id,
+                None,
+                {"state_version": state.get("state_version")},
+            )
+            return _neutral_response()
+
+        state_version = str(state.get("state_version") or "")
+        guard_key = f"STOP:{session_id}:{payload.get('turn_id') or ''}:{state_version}"
+        if not store.acquire_guard_once(guard_key, "Stop"):
+            _hook_audit(
+                store,
+                "LOOP_PREVENTED",
+                workflow_id,
+                None,
+                {"state_version": state.get("state_version")},
+            )
+            return _neutral_response()
+
+        _hook_audit(
+            store,
+            "STOP_GUARD_CONTINUATION",
+            workflow_id,
+            None,
+            {"state_version": state.get("state_version")},
+        )
+        return {"decision": "block", "reason": OBLIGATION_CONTINUATION}
+    except Exception as exc:
+        _hook_audit(
+            store,
+            "STOP_GUARD_FAIL_OPEN",
+            workflow_id,
+            None,
+            {"exception_class": type(exc).__name__},
+        )
+        return _neutral_response()
+
+
 def handle_hook(
     payload: Mapping[str, object], mode: str, store: SemanticStore | None
 ) -> dict[str, object] | None:
@@ -410,6 +493,18 @@ def handle_hook(
                 return _active_subagent_stop(payload, store)
             except Exception as exc:
                 _hook_audit(store, "HOOK_FAIL_OPEN", diagnostic.get("session_id") or None, None, {"exception_class": type(exc).__name__})
+                return _neutral_response()
+        if mode == "active" and event == "Stop":
+            try:
+                return _active_stop(payload, store)
+            except Exception as exc:
+                _hook_audit(
+                    store,
+                    "STOP_GUARD_FAIL_OPEN",
+                    diagnostic.get("session_id") or None,
+                    None,
+                    {"exception_class": type(exc).__name__},
+                )
                 return _neutral_response()
     return _neutral_response()
 

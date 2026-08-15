@@ -186,3 +186,118 @@ def test_active_template_uses_active_mode(repo_root: Path) -> None:
     )
     for groups in template["hooks"].values():
         assert groups[0]["hooks"][0]["command"].endswith("--mode active")
+
+
+def test_stop_blocks_once_for_running_required_task(store: SemanticStore) -> None:
+    workflow_id, task_id = managed(store)
+    store.record_agent_started(workflow_id, task_id, "agent-1", "default")
+
+    result = handle_hook(payload("Stop"), "active", store)
+
+    assert result and result["decision"] == "block"
+    assert "HMASD_OBLIGATION_CONTINUATION_V1" in result["reason"]
+    assert store.events_after(workflow_id)[-1]["kind"] == "STOP_GUARD_CONTINUATION"
+
+
+@pytest.mark.parametrize("lifecycle", ["RETURNED_TYPED", "RETURNED_UNTYPED"])
+def test_stop_blocks_once_for_report_awaiting_intake(
+    store: SemanticStore, lifecycle: str
+) -> None:
+    workflow_id, task_id = managed(store)
+    if lifecycle == "RETURNED_TYPED":
+        message = valid_message(workflow_id, task_id)
+        handle_hook(payload("SubagentStop", last_assistant_message=message), "active", store)
+    else:
+        handle_hook(
+            payload("SubagentStop", task_id=task_id, last_assistant_message="untyped"),
+            "active",
+            store,
+        )
+        handle_hook(
+            payload(
+                "SubagentStop",
+                task_id=task_id,
+                stop_hook_active=True,
+                last_assistant_message="untyped",
+            ),
+            "active",
+            store,
+        )
+
+    result = handle_hook(payload("Stop"), "active", store)
+
+    assert result and result["decision"] == "block"
+    assert store.events_after(workflow_id)[-1]["kind"] == "STOP_GUARD_CONTINUATION"
+
+
+def test_stop_blocks_for_explicit_portfolio_review_obligation(store: SemanticStore) -> None:
+    workflow_id, _ = managed(store)
+    store.open_obligation(
+        workflow_id,
+        "PORTFOLIO_REVIEW_REQUIRED",
+        "/portfolio",
+        "direction-1",
+        "review required",
+        "test",
+    )
+
+    result = handle_hook(payload("Stop"), "active", store)
+
+    assert result and result["decision"] == "block"
+
+
+def test_stop_allows_after_closure_receipt(store: SemanticStore) -> None:
+    workflow_id = store.open_workflow(
+        session_id="session-active",
+        opened_turn_id="turn-open",
+        scope="test",
+        objective="test objective",
+    )
+    store.create_closure_receipt(workflow_id, "COMPLETED", "all work complete")
+
+    result = handle_hook(payload("Stop"), "active", store)
+
+    assert result == {"continue": True}
+
+
+def test_stop_second_pass_allows_and_records_loop_prevented(store: SemanticStore) -> None:
+    workflow_id, _ = managed(store)
+    first = handle_hook(payload("Stop"), "active", store)
+    second = handle_hook(payload("Stop", stop_hook_active=True), "active", store)
+
+    assert first and first["decision"] == "block"
+    assert second == {"continue": True}
+    assert store.events_after(workflow_id)[-1]["kind"] == "LOOP_PREVENTED"
+
+
+def test_stop_state_version_allows_one_new_continuation(store: SemanticStore) -> None:
+    workflow_id, task_id = managed(store)
+    first = handle_hook(payload("Stop"), "active", store)
+    store.record_agent_started(workflow_id, task_id, "agent-1", "default")
+    second = handle_hook(payload("Stop"), "active", store)
+
+    assert first and first["decision"] == "block"
+    assert second and second["decision"] == "block"
+    assert [event["kind"] for event in store.events_after(workflow_id)].count(
+        "STOP_GUARD_CONTINUATION"
+    ) == 2
+
+
+def test_stop_store_exception_fails_open_with_exception_class_and_no_secret(
+    store: SemanticStore, tmp_path: Path
+) -> None:
+    managed(store)
+    class SecretSQLiteError(RuntimeError):
+        pass
+
+    def explode(_workflow_id: str) -> dict[str, object]:
+        raise SecretSQLiteError("password=super-secret")
+
+    store.workflow_state = explode  # type: ignore[method-assign]
+    result = handle_hook(payload("Stop"), "active", store)
+
+    assert result == {"continue": True}
+    audit = (tmp_path / "audit.jsonl").read_text(encoding="utf-8")
+    assert "STOP_GUARD_FAIL_OPEN" in audit
+    assert "SecretSQLiteError" in audit
+    assert "super-secret" not in audit

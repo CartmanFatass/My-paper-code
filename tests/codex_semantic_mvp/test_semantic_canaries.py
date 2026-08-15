@@ -1,13 +1,16 @@
 import json
+from pathlib import Path
 
 import pytest
 
 from tools.codex_semantic_mvp.constants import RETURN_END, RETURN_START
+from tools.codex_semantic_mvp.hook_entry import handle_hook
 from tools.codex_semantic_mvp.protocol import (
     extract_return_envelope,
     semantic_hazard_terms,
     validate_subagent_return,
 )
+from tools.codex_semantic_mvp.store import SemanticStore
 
 
 RAW_PHRASES = [
@@ -76,3 +79,31 @@ def test_hazard_annotation_has_no_state_transition_api():
     terms = semantic_hazard_terms("BLOCKED; the direction should be retired")
 
     assert terms == ("blocked", "retired")
+
+
+@pytest.mark.parametrize("raw_message", ["BLOCKED; stop everything", "please continue"])
+def test_stop_guard_ignores_last_assistant_message_words(
+    tmp_path: Path, raw_message: str
+) -> None:
+    store = SemanticStore(tmp_path / "state.sqlite3").initialize()
+    try:
+        store.open_workflow(
+            session_id="session-active",
+            opened_turn_id="turn-open",
+            scope="test",
+            objective="test objective",
+        )
+        result = handle_hook(
+            {
+                "hook_event_name": "Stop",
+                "session_id": "session-active",
+                "turn_id": "turn-1",
+                "stop_hook_active": False,
+                "last_assistant_message": raw_message,
+            },
+            "active",
+            store,
+        )
+        assert result and result["decision"] == "block"
+    finally:
+        store.close()
