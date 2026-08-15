@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import math
 import os
 import sqlite3
 import sys
@@ -13,6 +14,7 @@ from typing import Any, Mapping
 from mcp.server import MCPServer
 
 from .db import DEFAULT_STATE_PATH
+from .constants import MAX_WAIT_SECONDS, WAIT_POLL_SECONDS
 from .models import ObligationKind
 from .store import CLOSURE_KINDS, SemanticStore
 
@@ -103,6 +105,64 @@ def _event_summary(store: SemanticStore, event: Mapping[str, Any]) -> dict[str, 
         if row is not None:
             result["task_id"] = row[0]
     return result
+
+
+_AWAIT_CONDITIONS = frozenset(
+    {"ANY_REPORT", "ALL_REQUIRED_RETURNED", "OPEN_OBLIGATION_CHANGED", "WORKFLOW_QUIESCENT"}
+)
+
+
+def _validate_await_inputs(
+    store: SemanticStore,
+    workflow_id: str,
+    after_seq: int,
+    condition: str,
+    task_ids: list[str] | None,
+    timeout_s: float,
+) -> list[str]:
+    if condition not in _AWAIT_CONDITIONS:
+        raise ValueError(f"unknown await condition: {condition}")
+    if isinstance(timeout_s, bool) or not isinstance(timeout_s, (int, float)):
+        raise ValueError("timeout_s must be a finite number between 1 and 1500 seconds")
+    if not math.isfinite(float(timeout_s)) or not 1 <= float(timeout_s) <= MAX_WAIT_SECONDS:
+        raise ValueError(f"timeout_s must be between 1 and {MAX_WAIT_SECONDS} seconds")
+    if isinstance(after_seq, bool) or not isinstance(after_seq, int) or after_seq < 0:
+        raise ValueError("after_seq must be a non-negative integer")
+    selected = list(task_ids or [])
+    store.validate_task_ids(workflow_id, selected)
+    return selected
+
+
+async def await_events(
+    store: SemanticStore,
+    workflow_id: str,
+    after_seq: int = 0,
+    condition: str = "ANY_REPORT",
+    task_ids: list[str] | None = None,
+    timeout_s: float = 900,
+) -> dict[str, Any]:
+    """Wait in the runtime for one matching event, advancing a durable cursor."""
+    task_ids = _validate_await_inputs(
+        store, workflow_id, after_seq, condition, task_ids, timeout_s
+    )
+    deadline = asyncio.get_running_loop().time() + float(timeout_s)
+    cursor = after_seq
+    while True:
+        events = store.await_events(workflow_id, cursor)
+        for event in events:
+            cursor = max(cursor, int(event["seq"]))
+            if _event_matches(store, event, condition, task_ids):
+                return {"status": "EVENT", "cursor": cursor, "events": [_event_summary(store, event)]}
+        remaining = deadline - asyncio.get_running_loop().time()
+        if remaining <= 0:
+            state = store.workflow_state(workflow_id)
+            return {
+                "status": "TIMEOUT_NO_DISPOSITION",
+                "cursor": cursor,
+                "open_tasks": state["open_task_ids"],
+                "open_obligations": [item["obligation_id"] for item in state["open_obligations"]],
+            }
+        await asyncio.sleep(min(WAIT_POLL_SECONDS, remaining))
 
 
 def _register_tools(server: MCPServer) -> MCPServer:
@@ -205,30 +265,9 @@ def _register_tools(server: MCPServer) -> MCPServer:
         task_ids: list[str] | None = None,
         timeout_s: float = 900,
     ) -> dict[str, Any]:
-        if condition not in {"ANY_REPORT", "ALL_REQUIRED_RETURNED", "OPEN_OBLIGATION_CHANGED", "WORKFLOW_QUIESCENT"}:
-            raise ValueError(f"unknown await condition: {condition}")
-        if not 1 <= timeout_s <= 1500:
-            raise ValueError("timeout_s must be between 1 and 1500 seconds")
-        store = _get_store()
-        task_ids = task_ids or []
-        deadline = asyncio.get_running_loop().time() + timeout_s
-        cursor = after_seq
-        while True:
-            events = store.events_after(workflow_id, cursor)
-            for event in events:
-                cursor = max(cursor, int(event["seq"]))
-                if _event_matches(store, event, condition, task_ids):
-                    return {"status": "EVENT", "cursor": cursor, "events": [_event_summary(store, event)]}
-            remaining = deadline - asyncio.get_running_loop().time()
-            if remaining <= 0:
-                state = store.workflow_state(workflow_id)
-                return {
-                    "status": "TIMEOUT_NO_DISPOSITION",
-                    "cursor": cursor,
-                    "open_tasks": state["open_task_ids"],
-                    "open_obligations": [item["obligation_id"] for item in state["open_obligations"]],
-                }
-            await asyncio.sleep(min(0.5, remaining))
+        return await await_events(
+            _get_store(), workflow_id, after_seq, condition, task_ids, timeout_s
+        )
 
     @server.tool(description="Close a workflow after validating task and obligation obligations.")
     def workflow_close(workflow_id: str, closure_kind: str, summary: str = "") -> dict[str, Any]:

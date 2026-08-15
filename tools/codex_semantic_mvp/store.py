@@ -434,6 +434,28 @@ class SemanticStore:
             result.append(item)
         return result
 
+    def await_events(self, workflow_id: str, after_seq: int = 0) -> list[dict[str, Any]]:
+        """Return the durable event stream after a caller-owned cursor.
+
+        The wait loop deliberately re-reads this cursor from SQLite before each
+        sleep.  Keeping this small primitive on the store gives the MCP layer a
+        single, explicit read path and avoids coupling event polling to report
+        payloads or model-visible state.
+        """
+        self.workflow_state(workflow_id)
+        return self.events_after(workflow_id, after_seq)
+
+    def validate_task_ids(self, workflow_id: str, task_ids: list[str] | tuple[str, ...]) -> None:
+        """Reject task filters that name tasks outside the selected workflow."""
+        state = self.workflow_state(workflow_id)
+        known = {str(task["task_id"]) for task in state["tasks"]}
+        requested = {str(task_id) for task_id in task_ids}
+        unknown = sorted(requested - known)
+        if unknown:
+            raise ValueError(
+                f"task_ids must belong to workflow {workflow_id}: {', '.join(unknown)}"
+            )
+
     def workflow_state(self, workflow_id: str) -> dict[str, Any]:
         with self._lock:
             workflow = self.connection.execute(
