@@ -13,6 +13,28 @@ $python = "C:\Users\wu\.conda\envs\SB3\python.exe"
 $root = if ([IO.Path]::IsPathRooted($RepoRoot)) { [IO.Path]::GetFullPath($RepoRoot) } else { [IO.Path]::GetFullPath((Join-Path (Get-Location) $RepoRoot)) }
 if (-not (Test-Path -LiteralPath $root -PathType Container)) { throw "Repository root does not exist: $root" }
 
+function Resolve-CodexCommand {
+    param([string]$Command)
+    $candidate = $null
+    if ([IO.Path]::IsPathRooted($Command) -or $Command.Contains([IO.Path]::DirectorySeparatorChar) -or $Command.Contains([IO.Path]::AltDirectorySeparatorChar)) {
+        $candidate = Get-Item -LiteralPath $Command -ErrorAction SilentlyContinue
+    } else {
+        $candidate = Get-Command -Name $Command -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($candidate) { $candidate = Get-Item -LiteralPath ($candidate.Source ?? $candidate.Path) -ErrorAction SilentlyContinue }
+    }
+    if (-not $candidate) { throw "NATIVE_SMOKE_CODEX_COMMAND_INVALID: cannot resolve '$Command' to an executable .exe/.cmd" }
+    $extension = [IO.Path]::GetExtension($candidate.FullName).ToLowerInvariant()
+    if ($extension -eq ".ps1") {
+        $sibling = Join-Path $candidate.DirectoryName ($candidate.BaseName + ".cmd")
+        if (Test-Path -LiteralPath $sibling -PathType Leaf) { return [IO.Path]::GetFullPath($sibling) }
+        throw "NATIVE_SMOKE_CODEX_COMMAND_INVALID: PowerShell shim '$($candidate.FullName)' has no executable sibling '$sibling'"
+    }
+    if ($extension -notin @(".exe", ".cmd")) {
+        throw "NATIVE_SMOKE_CODEX_COMMAND_INVALID: '$($candidate.FullName)' is not a directly executable .exe/.cmd"
+    }
+    return [IO.Path]::GetFullPath($candidate.FullName)
+}
+
 function Invoke-NativeSmoke {
     param(
         [string]$Root,
@@ -20,6 +42,7 @@ function Invoke-NativeSmoke {
         [int]$TimeoutSec
     )
 
+    $resolvedCommand = Resolve-CodexCommand -Command $Command
     $configPath = Join-Path $Root ".codex\config.toml"
     $config = [IO.File]::ReadAllText($configPath)
     $begin = "# BEGIN HMASD CODEX SEMANTIC HOOKS"
@@ -91,7 +114,7 @@ function Invoke-NativeSmoke {
     $process = $null
     try {
         $startInfo = [Diagnostics.ProcessStartInfo]::new()
-        $startInfo.FileName = $Command
+        $startInfo.FileName = $resolvedCommand
         $startInfo.WorkingDirectory = $Root
         $startInfo.UseShellExecute = $false
         $startInfo.RedirectStandardOutput = $true

@@ -1,5 +1,7 @@
 import json
 import hashlib
+import os
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -20,6 +22,23 @@ def _stage(repo_root: Path, tmp_path: Path) -> Path:
     (stage / ".codex").mkdir(parents=True)
     for name in ("hooks.json", "config.toml", "hooks.semantic-mvp.shadow.json", "hooks.semantic-mvp.active.json"):
         shutil.copy2(repo_root / ".codex" / name, stage / ".codex" / name)
+    # The shared feature worktree may be ACTIVE; test stages always start from
+    # an isolated OFF baseline without changing the live workspace.
+    config = stage / ".codex" / "config.toml"
+    text = config.read_text()
+    text = re.sub(
+        r"\n?# BEGIN HMASD CODEX SEMANTIC HOOKS.*?# END HMASD CODEX SEMANTIC HOOKS\n?",
+        "\n",
+        text,
+        flags=re.DOTALL,
+    )
+    text = re.sub(
+        r"(?s)(# BEGIN HMASD CODEX SEMANTIC MVP.*?# END HMASD CODEX SEMANTIC MVP)",
+        lambda match: match.group(1).replace("enabled = true", "enabled = false", 1),
+        text,
+        count=1,
+    )
+    config.write_text(text)
     return stage
 
 
@@ -69,7 +88,7 @@ def test_activation_templates_and_config_contract(repo_root: Path):
     assert config.count("# END HMASD CODEX SEMANTIC MVP") == 1
     assert '"C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe"' in config
     assert "tool_timeout_sec = 1800" in config
-    assert "enabled = false" in config
+    assert ("enabled = true" if "# BEGIN HMASD CODEX SEMANTIC HOOKS" in config else "enabled = false") in config
 
 
 def test_doctor_reports_machine_readable_activation_state(repo_root: Path):
@@ -78,9 +97,137 @@ def test_doctor_reports_machine_readable_activation_state(repo_root: Path):
     assert result["config_hash"] == result["config_toml"]["sha256"]
     assert result["mcp_version"] == "2.0.0"
     assert result["server_config_present"] is True
-    assert result["server_enabled"] is False
+    expected_enabled = 'enabled = true' in (repo_root / ".codex" / "config.toml").read_text()
+    assert result["server_enabled"] is expected_enabled
     assert result["runtime_writable"] is True
-    assert result["mode"] == "off"
+    assert result["mode"] in ({"active", "off"} if expected_enabled else {"off"})
+
+
+def test_doctor_mode_uses_effective_inline_toml_not_legacy_hooks_json(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    legacy = stage / ".codex" / "hooks.json"
+    legacy.write_bytes((repo_root / ".codex" / "hooks.semantic-mvp.shadow.json").read_bytes())
+    result = collect_baseline(stage)
+    assert result["mode"] == "active"
+
+
+def test_doctor_reports_shadow_from_inline_toml(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Shadow")
+    assert enabled.returncode == 0, enabled.stderr
+    result = collect_baseline(stage)
+    assert result["mode"] == "shadow"
+
+
+def test_doctor_never_reports_active_for_malformed_inline_toml(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text() + "\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n")
+    assert collect_baseline(stage)["mode"] != "active"
+
+
+def test_doctor_reports_unknown_for_invalid_full_toml_even_when_semantics_match(
+    repo_root: Path, tmp_path: Path
+):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace("enabled = true", "enabled = true\nbroken = [", 1))
+    assert collect_baseline(stage)["mode"] == "unknown"
+
+
+def test_doctor_requires_features_hooks_true_for_active_mode(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace("hooks = true", "hooks = false", 1))
+    assert collect_baseline(stage)["mode"] == "unknown"
+
+
+def test_doctor_rejects_indented_duplicate_features_hooks_assignment(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace("hooks = true", "hooks = true\n  hooks = false", 1))
+    assert collect_baseline(stage)["mode"] == "unknown"
+
+
+def test_doctor_requires_exact_semantic_mcp_args_for_active_mode(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace('"tools.codex_semantic_mvp.mcp_server"', '"wrong.server"', 1))
+    assert collect_baseline(stage)["mode"] == "unknown"
+
+
+def test_doctor_rejects_indented_duplicate_inline_hook_type(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace('type = "command"', 'type = "command"\n  type = "wrong"', 1))
+    assert collect_baseline(stage)["mode"] == "unknown"
+
+
+def test_doctor_rejects_indented_duplicate_inline_hook_command(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace(
+        'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"',
+        'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n  command = "wrong"',
+        1,
+    ))
+    assert collect_baseline(stage)["mode"] == "unknown"
+
+
+def test_doctor_rejects_duplicate_mcp_enabled_assignment_for_active_mode(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace("enabled = true", "enabled = true\nenabled = false", 1))
+    assert collect_baseline(stage)["mode"] == "unknown"
+
+
+def test_doctor_rejects_duplicate_mcp_args_assignment_for_active_mode(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace("# END HMASD CODEX SEMANTIC MVP", "  args = []\n# END HMASD CODEX SEMANTIC MVP", 1))
+    assert collect_baseline(stage)["mode"] == "unknown"
+
+
+def test_doctor_rejects_duplicate_mcp_timeout_assignment_for_active_mode(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace("tool_timeout_sec = 1800", "tool_timeout_sec = 1800\n  tool_timeout_sec = 1800", 1))
+    assert collect_baseline(stage)["mode"] == "unknown"
+
+
+def test_doctor_rejects_indented_duplicate_mcp_command_for_active_mode(repo_root: Path, tmp_path: Path):
+    stage = _stage(repo_root, tmp_path)
+    enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
+    assert enabled.returncode == 0, enabled.stderr
+    config = stage / ".codex" / "config.toml"
+    config.write_text(config.read_text().replace(
+        "# END HMASD CODEX SEMANTIC MVP",
+        '  command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe"\n# END HMASD CODEX SEMANTIC MVP',
+        1,
+    ))
+    assert collect_baseline(stage)["mode"] == "unknown"
 
 
 def test_doctor_uses_installed_mcp_distribution_version(repo_root: Path):
@@ -541,6 +688,45 @@ def test_native_smoke_rejects_wrong_orchestrator_server_args(repo_root: Path, tm
     result = _run_native_config_failure(repo_root, stage)
     assert result.returncode != 0
     assert "NATIVE_SMOKE_REQUIRES_INLINE_TOML" in (result.stdout + result.stderr)
+
+
+def test_native_smoke_resolves_powershell_codex_shim_to_cmd_sibling(repo_root: Path, tmp_path: Path):
+    stage = _native_active_stage(repo_root, tmp_path)
+    shim_dir = tmp_path / "codex shim"
+    shim_dir.mkdir()
+    audit = stage / "runtime" / "codex-semantic-mvp" / "audit.jsonl"
+    audit.parent.mkdir(parents=True)
+    (shim_dir / "codex.ps1").write_text("# PowerShell shim")
+    (shim_dir / "codex.cmd").write_text(
+        f'@echo off\r\necho {{"type":"thread.started","thread_id":"shim-session"}}\r\n'
+        f'echo {{"event":"SESSION_STARTED","session_id":"shim-session","mode":"active"}}>>"{audit}"\r\n'
+        f'exit /b 0\r\n'
+    )
+    env = os.environ.copy()
+    env["PATH"] = str(shim_dir) + os.pathsep + env.get("PATH", "")
+    result = subprocess.run(
+        ["pwsh", "-NoProfile", "-NonInteractive", "-File",
+         str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
+         "-RepoRoot", str(stage), "-NativeSmoke"],
+        text=True, capture_output=True, encoding="utf-8", check=False, env=env,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_native_smoke_rejects_unlaunchable_codex_shim(repo_root: Path, tmp_path: Path):
+    shim_dir = tmp_path / "only shim"
+    shim_dir.mkdir()
+    (shim_dir / "codex.ps1").write_text("# PowerShell shim")
+    env = os.environ.copy()
+    env["PATH"] = str(shim_dir)
+    result = subprocess.run(
+        ["pwsh", "-NoProfile", "-NonInteractive", "-File",
+         str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
+         "-RepoRoot", str(repo_root), "-NativeSmoke"],
+        text=True, capture_output=True, encoding="utf-8", check=False, env=env,
+    )
+    assert result.returncode != 0
+    assert "NATIVE_SMOKE_CODEX_COMMAND_INVALID" in (result.stdout + result.stderr)
 
 
 def test_native_smoke_accepts_fake_native_audit_event_without_mutating_config_or_state(
