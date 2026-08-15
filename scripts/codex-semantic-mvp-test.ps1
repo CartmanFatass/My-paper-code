@@ -74,9 +74,13 @@ function Invoke-NativeSmoke {
         $nestedExpected = "[[hooks.$event.hooks]]"
         $typeLines = @([regex]::Matches($eventSection, '(?m)^type[ \t]*=[ \t]*"[^"]*"[ \t]*\r?$'))
         $commandLines = @([regex]::Matches($eventSection, '(?m)^command[ \t]*=[ \t]*"[^"]*"[ \t]*\r?$'))
+        $commandWindowsLines = @([regex]::Matches($eventSection, '(?m)^commandWindows[ \t]*=[ \t]*"[^"]*"[ \t]*\r?$'))
+        $expectedCommand = 'command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"'
+        $expectedCommandWindows = 'commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"'
         if ($nestedHeaders.Count -ne 1 -or $nestedHeaders[0] -ne $nestedExpected -or
             $typeLines.Count -ne 1 -or $typeLines[0].Value.Trim() -ne 'type = "command"' -or
-            $commandLines.Count -ne 1 -or $commandLines[0].Value.Trim() -ne 'command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"') {
+            $commandLines.Count -ne 1 -or $commandLines[0].Value.Trim() -ne $expectedCommand -or
+            $commandWindowsLines.Count -ne 1 -or $commandWindowsLines[0].Value.Trim() -ne $expectedCommandWindows) {
             throw "NATIVE_SMOKE_REQUIRES_INLINE_TOML: missing hooks.$event handler"
         }
     }

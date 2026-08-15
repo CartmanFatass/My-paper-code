@@ -52,11 +52,41 @@ function New-SemanticHookToml([string]$Mode) {
         $lines += "[[hooks.$event.hooks]]"
         $lines += 'type = "command"'
         $lines += 'command = "' + $command + '"'
+        $lines += 'commandWindows = "' + $command + '"'
         $lines += 'timeout = 5'
         $lines += ''
     }
     $lines += '# END HMASD CODEX SEMANTIC HOOKS'
     return ($lines -join "`n")
+}
+
+function Ensure-SemanticFeatureFlags([string]$Text) {
+    $featuresMatches = [regex]::Matches($Text, '(?ms)^\[features\][ \t]*(?:\r?$).*?(?=^\[|\Z)')
+    if ($featuresMatches.Count -ne 1) { throw "FEATURES_SECTION_INVALID" }
+    $featuresMatch = $featuresMatches[0]
+    $section = $featuresMatch.Value
+    $newline = if ($Text.Contains("`r`n")) { "`r`n" } else { "`n" }
+    $missing = @()
+    foreach ($name in @('hooks')) {
+        $assignments = [regex]::Matches($section, "(?m)^[ \t]*$name[ \t]*=[ \t]*(?:true|false)[ \t]*(?:\r?$)")
+        if ($assignments.Count -gt 1) { throw "FEATURES_ASSIGNMENT_INVALID:$name" }
+        if ($assignments.Count -eq 0) { $missing += $name }
+    }
+    if ($missing.Count -gt 0) {
+        $heading = [regex]::Match($section, '(?m)^\[features\][ \t]*(?:\r?$)')
+        $insert = (($missing | ForEach-Object { "$_ = true" }) -join $newline) + $newline
+        $offset = $heading.Index + $heading.Length
+        $section = $section.Substring(0, $offset) + $insert + $section.Substring($offset)
+    }
+    foreach ($name in @('hooks')) {
+        $assignment = [regex]::Match($section, "(?m)^[ \t]*$name[ \t]*=[ \t]*(?:true|false)[ \t]*(?:\r?$)")
+        $oldLine = $assignment.Value
+        $ending = if ($oldLine.EndsWith("`r")) { "`r" } else { "" }
+        $indent = ([regex]::Match($oldLine, '^[ \t]*')).Value
+        $newLine = $indent + $name + " = true" + $ending
+        $section = $section.Substring(0, $assignment.Index) + $newLine + $section.Substring($assignment.Index + $assignment.Length)
+    }
+    return $Text.Substring(0, $featuresMatch.Index) + $section + $Text.Substring($featuresMatch.Index + $featuresMatch.Length)
 }
 
 function Test-RootHookAssignment([string]$Text, [string]$Pattern) {
@@ -130,6 +160,20 @@ function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled, [strin
             if ([regex]::Matches($managedBlock, "(?m)^\[\[hooks\.$event\.hooks\]\][ \t]*(?:\r?$)").Count -ne 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
         }
         if ([regex]::Matches($managedBlock, '(?m)^command[ \t]*=[ \t]*"C:\\\\Users\\\\wu\\\\\.conda\\\\envs\\\\SB3\\\\python\.exe -m tools\.codex_semantic_mvp\.hook_entry --mode (?:active|shadow)"[ \t]*(?:\r?$)').Count -ne 5) { throw "HOOK_MARKER_BLOCK_INVALID" }
+        $commandMatches = [regex]::Matches($managedBlock, '(?m)^[ \t]*command[ \t]*=[ \t]*"([^"]*)"[ \t]*(?:\r?$)')
+        $commandWindowsMatches = [regex]::Matches($managedBlock, '(?m)^[ \t]*commandWindows[ \t]*=[ \t]*"([^"]*)"[ \t]*(?:\r?$)')
+        $commandWindowsLines = [regex]::Matches($managedBlock, '(?m)^[ \t]*commandWindows[ \t]*=')
+        if ($commandMatches.Count -ne 5 -or $commandWindowsMatches.Count -ne $commandWindowsLines.Count -or ($commandWindowsMatches.Count -ne 0 -and $commandWindowsMatches.Count -ne 5)) { throw "HOOK_MARKER_BLOCK_INVALID" }
+        if ($commandWindowsMatches.Count -eq 5) {
+            for ($index = 0; $index -lt $commandMatches.Count; $index++) {
+                $commandValue = $commandMatches[$index].Groups[1].Value
+                $commandWindowsValue = $commandWindowsMatches[$index].Groups[1].Value
+                if ($commandValue -ne $commandWindowsValue -or
+                    $commandValue -notmatch '^C:\\\\Users\\\\wu\\\\\.conda\\\\envs\\\\SB3\\\\python\.exe -m tools\.codex_semantic_mvp\.hook_entry --mode (?:active|shadow)$') {
+                    throw "HOOK_MARKER_BLOCK_INVALID"
+                }
+            }
+        }
         $outsideText = $updatedText.Substring(0, $hookStart) + $updatedText.Substring($hookEnd)
         if ($outsideText -match $singleHookTable -or $outsideText -match $arrayHookTable -or (Test-RootHookAssignment $outsideText $assignmentPattern)) { throw "HOOKS_TABLE_CONFLICT" }
         $hookBlock = (New-SemanticHookToml $Mode) -replace "`n", $newline
@@ -140,6 +184,7 @@ function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled, [strin
         $hookBlock = (New-SemanticHookToml $Mode) -replace "`n", $newline
         $updatedText = $updatedText + $newline + $hookBlock + $newline
     }
+    $updatedText = Ensure-SemanticFeatureFlags $updatedText
     return [pscustomobject]@{ Text = $updatedText; Enabled = $enabledMatches[0].Groups[1].Value; Block = $block }
 }
 

@@ -22,6 +22,9 @@ END_MARKER = "# END HMASD CODEX SEMANTIC MVP"
 HOOK_BEGIN_MARKER = "# BEGIN HMASD CODEX SEMANTIC HOOKS"
 HOOK_END_MARKER = "# END HMASD CODEX SEMANTIC HOOKS"
 PYTHON_EXECUTABLE = r"C:\Users\wu\.conda\envs\SB3\python.exe"
+USER_TRUST_STATUS = "unknown"
+USER_TRUST_SCOPE = "repository_only"
+USER_TRUST_MESSAGE = "Repository-only doctor cannot establish user-level Codex trust."
 
 
 def _file_baseline(path: Path, display_path: str) -> dict[str, Any]:
@@ -118,7 +121,10 @@ def _inline_hook_mode(config_text: str) -> str:
         if not re.search(r'(?m)^[ \t]*type[ \t]*=[ \t]*"command"[ \t]*(?:\r?$)', section):
             return "unknown"
         commands = re.findall(r'(?m)^[ \t]*command[ \t]*=[ \t]*"([^"]*)"[ \t]*(?:\r?$)', section)
-        if len(commands) != 1:
+        command_windows = re.findall(
+            r'(?m)^[ \t]*commandWindows[ \t]*=[ \t]*"([^"]*)"[ \t]*(?:\r?$)', section
+        )
+        if len(commands) != 1 or len(command_windows) != 1 or command_windows != commands:
             return "unknown"
         escaped_python = PYTHON_EXECUTABLE.replace("\\", "\\\\")
         match = re.fullmatch(
@@ -155,8 +161,14 @@ def _features_hooks_enabled(config_text: str) -> bool:
     match = re.search(r"(?ms)^\[features\][ \t]*\r?\n(.*?)(?=^\[|\Z)", config_text)
     if match is None:
         return False
-    values = re.findall(r"(?m)^[ \t]*hooks[ \t]*=[ \t]*(true|false)[ \t]*(?:\r?$)", match.group(1))
-    return len(values) == 1 and values[0] == "true"
+    section = match.group(1)
+    for name in ("hooks",):
+        values = re.findall(
+            rf"(?m)^[ \t]*{name}[ \t]*=[ \t]*(true|false)[ \t]*(?:\r?$)", section
+        )
+        if len(values) != 1 or values[0] != "true":
+            return False
+    return True
 
 
 def _runtime_writable(runtime_dir: Path) -> bool:
@@ -196,6 +208,11 @@ def collect_baseline(repo_root: Path, mcp_version_reader: Any = distribution_ver
         "server_enabled": enabled,
         "runtime_writable": _runtime_writable(root / "runtime" / "codex-semantic-mvp"),
         "mode": _mode(config_text, present, enabled, hooks_enabled, config_valid),
+        "user_trust": {
+            "status": USER_TRUST_STATUS,
+            "scope": USER_TRUST_SCOPE,
+            "message": USER_TRUST_MESSAGE,
+        },
     }
 
 
