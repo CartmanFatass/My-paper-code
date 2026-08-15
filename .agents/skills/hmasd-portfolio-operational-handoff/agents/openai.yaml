@@ -1,0 +1,4 @@
+interface:
+  display_name: "HMASD Portfolio Operational Handoff"
+  short_description: "Keep direction, Root, and portfolio progress reconciled"
+  default_prompt: "Use $hmasd-portfolio-operational-handoff to reconcile a completed direction milestone."

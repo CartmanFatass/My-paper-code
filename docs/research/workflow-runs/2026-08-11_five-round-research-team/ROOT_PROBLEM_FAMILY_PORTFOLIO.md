@@ -1,15 +1,20 @@
 # Root Problem-Family Research Portfolio
 
-## Active portfolio cut — 2026-08-14
+## Active portfolio cut — 2026-08-15
 
-The operative allocation map is the final section, **2026-08-14 ONLGR-B2 and
-SCDMP-B3 post-result operative problem-family cut**. Its full owner decision is
-`ONLGR_B2_SCDMP_B3_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md`, with
-`RCLE_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md` as the base cut. Every earlier heading containing `current`,
-`now`, `live`, `terminal`, `from scratch`, a fixed attempt count, or a required
-direction count is historical where it conflicts with that final cut. Preserve
-the underlying observations and claim boundaries, but do not use the old action
-wording as a routing command.
+The operative allocation map is the final section, **2026-08-15 VNFC-B4
+post-definition portfolio adjudication**. Its full owner decision is
+`VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`. It supersedes
+the prior RISP-B3/ONLGR target-host, revisit-definition, SGSP/RISP and 2026-08-14 overnight allocation cuts for current allocation
+only; every earlier observation, frozen object, claim ceiling and revisit
+condition remains historical evidence.
+
+Current empirical investment: `RISP-B3-TRG-R03-FULL-PANEL`.
+Current definition-only investments:
+`VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION|SGSP-TARGET-BOUND-TWO-ZONE-DEFINITION|RCLE-COARSE-PERSISTENT-COMMITMENT-DEFINITION|SCDMP-TARGET-BOUND-ORDER-TO-VALUE-DEFINITION`.
+The exact `VNFC-B4-SCIENCE-20260815-05` object is complete, immutable and has
+no current empirical investment; the new VNFC definition is distinct and
+target-exclusive rather than a rerun or repair of B4.
 
 ## Purpose
 
@@ -1428,3 +1433,315 @@ The only current empirical investment is **SGSP-240**. The only current definiti
 CCIC-r08 remains closed to reopening because the homogeneous host is reducible to scalar ESS with only a weak bridge. Runtime and resource conditions are not scientific stopping evidence; a heterogeneous host and target-bound question would be required for reconsideration.
 
 Exact Root action: record both results complete and immutable, close their stages and release their pairs, absorb ONLGR into global-rate handling, and continue SGSP-240 plus the bounded RISP definition envelope. Create no fusion, second surface, UAV, cross-`N×k` object, WIP/order/action-count gate or automatic successor.
+
+## 2026-08-14 overnight post-result portfolio campaign adjudication
+
+This is the latest current cross-direction cut and is controlled by
+`OVERNIGHT_POST_RESULT_PORTFOLIO_CAMPAIGN_ADJUDICATION_20260814.md`. It
+supersedes earlier allocation and routing wording only where this section
+changes it; source evidence, frozen objects, claim ceilings and historical
+revisit conditions remain intact.
+
+### Current investments and exact return gates
+
+- **SGSP-240:** continue the single precommitted 240-update, fresh-seed,
+  one-checkpoint four-arm discriminator unchanged. No budget/checkpoint search.
+- **RISP-B2-R02:** promote definition-only work to the full frozen empirical
+  discriminator. Pro `CLOSED`, EM intake and CM static feasibility are complete.
+  The question is physical-time held-out/switched-`k` value. The maximum
+  positive claim is the finite two-agent/256-update package prior versus the
+  function-equivalent containing recurrence plus realized-lineage dependence;
+  it is not a semantics, expressivity, convergence, arbitrary-`k`/`N`, UAV,
+  safety or deployment claim. Card-derived `~62,128,128` agent-ticks is cost,
+  never a scientific stop. Mutually blind Gemini is advisory/non-gating. Do not
+  open BEST-X, a sign-reversed center, a second surface or UAV.
+- **VNFC-B4:** activate a new definition-only investment, explicitly not v8
+  repair or v9. The EM object must freeze natural treatment-blind prehistory,
+  exogenous join/drop, shared parameters, strictly above-training `N`,
+  physical-time task value, L-RDA versus DIRECT-SET containing learned control
+  and FIXED-RDA strong comparator, association and reachable/global ceilings,
+  natural base allocation without artificial KEEP/SWITCH bank, full outcome map
+  and claim ceiling. No evidence, seed, threshold, panel or Pro closure moves
+  from the old line. Root takes it through meaning-complete definition,
+  existing-Pro closure, independent Gemini, EM intake and CM static feasibility;
+  only then returns for empirical allocation/cost. No construction, tests,
+  probes or compute now. This return gate is scientific because host, function,
+  comparator and total cost remain answer-changing—not because engineering is
+  unavailable—and VNFC-B4 is active work, not a reserve label.
+
+### No-current allocation and protected exclusions
+
+RCLE, ONLGR-B2, SCDMP-B3, ROCF, the old VNFC line, RISP BEST-X and all 26
+continuity rows receive no current investment. RCLE has no within-formulation
+discriminator after unresolved validity; ONLGR-B2 is absorbed into global rate
+until independent material rate heterogeneity supports a two-level test;
+SCDMP-B3 remains a nonidentifying family result with only a target-bound
+relation-order/value revisit; ROCF is unsupported fusion; the old VNFC line
+lacks a truthful natural host/panel; and BEST-X is only a failure-locus
+diagnostic. None is stopped for wall time, attempt count, provider state,
+resource availability, code availability or a WIP rule. Revisit conditions are
+the precise conditions in the controlling artifact. No fusion, cross-`N×k`
+parent, second surface, UAV, backfill, WIP/order gate or direction-count limit
+is allowed.
+
+The RISP branch-to-allocation map is explicit: harm closes the exact object;
+support retains only the bounded prior and may later motivate a sign-reversed
+center; generic recurrence/global persistence is absorbed; and no-minimum,
+valid-unresolved or no-validity outcomes produce no-current investment in this
+exact object. Direction-local `activate`, `retain`, `absorb` and `delete`
+labels have no automatic portfolio force.
+
+### Root handoff and supersession
+
+Operational Root continues SGSP-240, implements this cut's new RISP-B2-R02
+empirical authorization through its direction-stage pair, creates/reuses the
+VNFC-B4 definition pair through static feasibility,
+and returns only the resulting decision-level milestone or a material object/
+cost change. Heavy-command scheduling can change order but cannot suspend or
+scientifically rank these investments. This section supersedes old sole-action,
+8-hour-cap, mailbox-live and historical VNFC entry points; those records remain
+auditable evidence only.
+
+## 2026-08-15 SGSP-r06 and RISP-B2 post-result portfolio adjudication
+
+This is the controlling portfolio-owner cut, recorded in
+`SGSP_R06_RISP_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260815.md`. It
+supersedes the prior overnight allocation for current allocation only; the
+prior record and all direction-local evidence remain historical and auditable.
+
+### Current problem-family map
+
+| Scientific object | Current portfolio decision | Bounded reason and revisit |
+| --- | --- | --- |
+| SGSP-r06 and the fixed-center family | Complete; no current investment. | At matched 240 updates, all four SGSP-minus-EDGE intervals lie within the registered practical band. The correct narrow center beats one wrong narrow center, but does not beat flexible EDGE. Reopen only through a target-bound, UAV-linked variable-`N` object whose outcomes can choose or delete the fixed prior. |
+| RISP-r02 exact object | Complete; no current investment. | `DIRECT-CONTAIN` fails the registered competence, policy-TV and mean-`DeltaV` gates, so the package is exact nonidentification for value or lineage attribution. No standalone checkpoint diagnostic is authorized. |
+| `CONTAIN-LEARNED-E` vs `CONTAIN-G-TRANSPLANT` | No current definition or feasibility investment. | The transplant tests frozen-policy `G` exploitability, not optimization reachability or variable-`k` value. Revisit only when a named target-bound value successor makes that exploitability result choose or delete a recurrence component. |
+| `VNFC-B4-NATURAL-CHURN-SCALABLE-JOINT-ALLOCATION` | Sole current definition-only investment; continue unchanged. | It directly targets matched task value/robustness under variable `N`. Return after complete definition, Pro closure, EM intake, CM static feasibility and prospective total cost. |
+
+There is currently no empirical investment. This is not a vacancy, WIP,
+direction-count or order gate. Do not automatically backfill, fuse directions,
+open a cross-`N×k` parent, add a second surface, or perform UAV work. No
+provider, wall-time, attempt, resource, code or host fact is a scientific stop.
+The overnight allocation is superseded, not deleted.
+
+## 2026-08-15 revisit family definition-only portfolio adjudication
+
+This is the controlling portfolio-owner map, recorded in
+`REVISIT_DEFINITION_ONLY_PORTFOLIO_ADJUDICATION_20260815.md`. A revisit
+condition may gate construction or empirical activity, but cannot require an
+EM/CM output before a new bounded definition-only object is permitted. The
+three layers are discovery; definition-only work (meaning-complete card,
+independent Pro/Gemini, EM intake, CM static feasibility and prospective cost);
+and empirical authorization. Earlier exact objects stay complete, immutable
+and non-rerunnable.
+
+### Current allocation
+
+| Portfolio layer | Current entries |
+| --- | --- |
+| Empirical investment | None. |
+| Definition-only investment | `VNFC-B4-NATURAL-CHURN-SCALABLE-JOINT-ALLOCATION`; `SGSP-TARGET-BOUND-TWO-ZONE-DEFINITION`; `RISP-TARGET-BOUND-COMBINED-SUCCESSOR-DEFINITION`; `RCLE-COARSE-PERSISTENT-COMMITMENT-DEFINITION`; `ONLGR-TARGET-BOUND-HETEROGENEITY-SCREEN-DEFINITION`; `SCDMP-TARGET-BOUND-ORDER-TO-VALUE-DEFINITION`. |
+
+These six lines return independently when complete. There is no WIP, quota,
+direction-count, order, first-result or automatic-backfill gate.
+
+Each package must freeze a concrete physical task, protected variable `N` or
+external-`k` axis, one shared algorithm/parameterization across that axis,
+direct physical-time performance or robustness endpoints, the strongest
+matched containing comparator, an exhaustive outcome-to-action map, maximum
+claim and prospective construction/training/evaluation/wall/memory/
+implementation cost. Structural or auxiliary success alone is insufficient.
+
+### Problem-family targets
+
+| Family | Definition-only target and comparator boundary |
+| --- | --- |
+| SGSP | Two-zone surveillance/relay with stable public reward-independent kernel and held-out-`N` cold-start failure; strictly containing information/parameter/communication/work/optimizer-matched EDGE must retain or delete the fixed prior. |
+| RISP | Named tracking/relay with external `k`, embedding `G` exploitability; compare function-equivalent recurrence, no-lineage and fixed/global alternatives. Standalone checkpoint transplant remains unauthorized. |
+| RCLE | Roster-change hidden-plan commitment fragmentation and coarse/learned-cardinality common persistent latent; use a more flexible containing controller and matched validity/score/optimizer controls; do not inherit old codebook, thresholds, seeds or checkpoints. |
+| ONLGR | Independently observable timing/tenure heterogeneity screen for two UAV tracking/relay strata versus the best pooled global rate plus a strictly more flexible timing-rate head as structural containing comparator; does not restore ONLGR-B2. |
+| SCDMP | Opposite physical order of identical event multisets and its effect on transition/reward, held action and external-`k` value; use `FREE-DIRECT` containing comparator and correct/reversed paths. |
+| VNFC-B4 | Continue unchanged as the existing natural-churn variable-`N` definition-only object. |
+
+Operational Root is requested to create or reuse one same-direction EM/CM pair
+per line, route independent same-direction Pro/Gemini work, and return exact
+definition, feasibility and prospective-cost milestones. This portfolio
+section does not own operational truth; the Root-owned application row in the
+stable reconciliation records the applied pair state. No source, construction, tests, probes, coordinates,
+training, evaluation, compute, lease, fusion, cross-`N×k` parent, second
+surface or UAV production is authorized by this portfolio section.
+
+## 2026-08-15 ONLGR-TBH target-host executable-card portfolio adjudication
+
+This is the current problem-family delta, controlled by
+`ONLGR_TBH_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`. The exact
+abstract screen `ONLGR-TBH-SCREEN-DEF-20260815-03` is complete with Pro
+`CLOSED`, EM intake and CM static bindability in principle. It is not an
+empirical result and does not alter the immutable ONLGR-B2 evidence.
+
+The live map has **zero empirical investments** and six definition-only lines:
+VNFC-B4, SGSP target-bound two-zone, RISP target-bound combined successor,
+RCLE coarse persistent commitment, SCDMP target-bound order-to-value, and
+`ONLGR-TBH-TARGET-HOST-EXECUTABLE-CARD-DEFINITION`. ONLGR's prior abstract
+screen is replaced by this target-host card stage; the other five lines are
+unchanged. This is not a quota, WIP limit or scheduling order.
+
+### ONLGR target-host card boundary
+
+The card binds tracker/relay/ground-station physical semantics, natural
+pre-action SHORT transient-handoff and LONG sustained-corridor strata, valid
+end-to-end service observability, and a nontrivial finite rate family. It
+compares TWO-STRATUM to calibration-best pooled GLOBAL-BEST and to the strict
+finite FLEX-CONTAIN family under matched planner, event, action, cost, safety,
+blackout and lockout laws. It retains reciprocal held-out package swaps,
+the registered positive qualification `q_SHORT > q_LONG`, plus a separate
+valid and supported `q_SHORT < q_LONG` refutation branch, paired counts/tapes
+and atomic lifecycle. Claim-bearing endpoints are physical-mission
+valid-service mean and
+lower-CVaR 10%; a structural metric alone is insufficient. A positive local
+two-rate result does not require FLEX success: timing-family compatibility
+requires the selected FLEX policy itself to be functionally distinct from the
+selected two-rate lookup on registered opportunity rows and to stay within
+0.01 on both endpoints. FLEX family-level nontriviality alone is insufficient.
+FLEX loss greater than 0.01 still preserves the local two-rate result while
+flexible estimation, search and generalization remain unresolved. If
+TWO-STRATUM fails but a functionally distinct FLEX policy passes both GLOBAL
+gates, open a new prospective continuous-timing definition rather than call it
+a two-rate positive; if neither passes, there is no timing evidence.
+
+The card stage is invested because host naturality, observability, comparator
+nontriviality and total cost remain answer-changing. No observed heterogeneity
+is required before defining it. The disclosed planning range is 5--17
+engineer-weeks and hundreds to `10^4+` CPU-hours, depending on host and
+calibration fidelity. This is a scientific identifiability/total-cost
+judgment, not an engineering or resource stop. The eventual maximum claim is
+only a package-specific held-out two-rate improvement against pooled global
+rate; no B2 rescue, lease/rebind/hazard, general timing algorithm,
+arbitrary-`k`/`N`, transfer or UAV claim follows.
+
+Operationally, Root may reuse the ONLGR pair for card definition, closure
+through the existing same-direction ChatGPT External-Pro conversation, and an
+independent/mutually blind Gemini consultation that is advisory and
+non-gating, followed by EM intake and CM static feasibility/cost acceptance.
+No build, source change, probe, coordinate binding, training, evaluation,
+compute or lease is authorized at this stage. The normal completed packet
+returns for a separate empirical invest/no-invest decision only after Pro
+`CLOSED`, EM-intaken, CM statically feasible/bindable and the full prospective-
+cost packet. Return earlier as well if the selected host cannot express the
+frozen question, the scientific comparator or claim changes, or the cost class
+materially exceeds the stated range. Old exact ONLGR objects remain immutable
+and are not rerun; no fusion, second surface, UAV production, backfill, WIP or
+order gate is introduced.
+
+## 2026-08-15 RISP-B3 and ONLGR target-host card empirical adjudication
+
+This is the active problem-family delta, recorded in
+`RISP_B3_ONLGR_HOST_CARD_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`.
+It supersedes the immediately preceding definition-only allocation only for
+RISP and ONLGR. The two complete packets are independent; no evidence,
+threshold, seed, cost or allocation transfers between them. Earlier exact
+objects remain complete, immutable and non-rerunnable.
+
+### Live allocation
+
+- **Empirical investment:** `RISP-B3-TRG-SCIENCE-20260815-03`, exact complete
+  R03 panel only.
+- **Definition-only investments:** VNFC-B4, SGSP target-bound two-zone, RCLE
+  coarse persistent commitment and SCDMP target-bound order-to-value. RISP-B3
+  and the ONLGR target-host card are complete definition objects.
+- **ONLGR target-host card:** no current empirical investment. HEADLAND-90's
+  11--15 engineer-week and 15.8--315.4 CPU-hour prospective cost is material
+  against a maximum claim limited to package-specific held-out
+  `TWO-STRATUM` versus `GLOBAL-BEST` value, separately supported by
+  reciprocal `C_S<-L`/`C_L<-S` class-rate confirmation controls.
+  A positive result cannot establish general timing, arbitrary `k`/`N`, aircraft
+  transfer or deployment. This is a scientific opportunity-cost and claim-scope
+  decision, not an engineering, provider, host or resource stop.
+
+### RISP-B3 full-chain action
+
+Root may reuse the RISP EM/CM pair and proceed with the frozen
+`TRI-SECTOR-DELAYED-ACK-TRACK-RELAY` R03 exact 512-update panel across all
+registered held-out/switched-`k` cells. The protected comparison is the
+function-equivalent anchor/containing recurrence with recipient-lineage
+control, physical-time value endpoint and frozen qualifications. Authorization
+covers construction, static conformance, lease, complete-panel execution over
+resumable lease slices, EM intake and same-direction Pro convergence. It does
+not create a repeat portfolio gate, wall-time stop, attempt cap, WIP or order
+gate. No standalone transplant, rerun, sign-reversed center, second surface,
+UAV production or cross-direction fusion is authorized. Prospective cost is
+24--40 engineering hours and 16--24 one-CPU hours; this estimate cannot be
+used to truncate question-relevant activity.
+
+The claim ceiling is exact finite two-agent package evidence only: no
+arbitrary-`k`/`N`, convergence, UAV transfer, safety, deployment or semantic
+isolation claim. Initialization/decay, conditioning and finite optimization
+geometry remain live alternatives to a semantic interpretation unless the
+registered controls and qualifications separate them.
+
+### ONLGR revisit conditions
+
+ONLGR may return to portfolio investment if **any one** of the following
+scientific-value conditions occurs:
+
+1. independent target evidence establishes material pre-action package-rate
+   heterogeneity or pooled-rate failure;
+2. an invested variable-`k` component explicitly requires this screen;
+3. a new Pro-closed object separates tenure from geometry or makes a distinct
+   FLEX claim-bearing; or
+4. a reusable same-semantics host reduces incremental engineering burden by at
+   least half without a science change.
+
+These are revisit conditions only; they do not restore ONLGR-B2 or authorize
+card changes. Any later investment uses the complete HEADLAND-90 panel and its
+registered gates. Engineering availability alone cannot trigger it.
+
+## 2026-08-15 VNFC-B4 post-definition portfolio adjudication
+
+This is the current problem-family delta, controlled by
+`VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`. It supersedes
+earlier VNFC-B4 and current-allocation entries only for live allocation; the
+exact B4 object and all prior evidence remain immutable and non-rerunnable.
+
+### Live allocation
+
+- **Empirical investment:** `RISP-B3-TRG-R03-FULL-PANEL`. The VNFC decision
+  does not alter or order the orthogonal variable-`k` panel; no empirical
+  vacancy is automatically backfilled.
+- **Definition-only investments:**
+  `VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION`,
+  `SGSP-TARGET-BOUND-TWO-ZONE-DEFINITION`,
+  `RCLE-COARSE-PERSISTENT-COMMITMENT-DEFINITION`, and
+  `SCDMP-TARGET-BOUND-ORDER-TO-VALUE-DEFINITION`.
+- `VNFC-B4-SCIENCE-20260815-05` is complete and has no current empirical
+  investment. It is a high-value direct variable-`N` object, but its finite
+  `N=7`/one-event ceiling and containing `DIRECT-SET` leave a live
+  inductive-bias/trainability alternative. Its aggregate estimate of 18--34
+  experienced engineer-weeks and roughly `10^3--10^5` CPU-hours is material.
+  This is a scientific value, identifiability and total-cost opportunity-cost
+  judgment, not a code/provider/wall/resource/WIP stop.
+
+### Target-exclusive post-churn definition
+
+The new VNFC line is distinct from B4 and is definition-only. EM must bind a
+real target where at most one UAV executes per zone, shared `N<=5 -> N=7`,
+`L-RDA`, a strict containing `DIRECT`, a strong deployable fixed comparator,
+`PERMUTE`, and one physical recovery utility. The authorized endpoint is
+meaning-complete card, independent Pro/Gemini work, EM intake, CM static
+feasibility and full prospective cost only. No empirical activity, source,
+construction, tests, probes, coordinates, training, evaluation, lease,
+fusion, second surface or UAV production is authorized. If exclusivity is not
+scientifically defensible, EM returns the concrete reason and the remaining
+unknown.
+
+### B4 revisit conditions
+
+Any one of the following may reopen an empirical allocation decision for the
+immutable B4 object: material/order-of-magnitude unchanged-panel cost reduction
+with direction-owned decomposition; target evidence making global
+standby/relief grammar material; failure to make the exclusive object
+meaning-complete while broad variable-`N` remains critical; or absence of a
+viable cheaper direct variable-`N` definition while B4 remains the
+highest-information option. These are revisit conditions, not automatic
+construction authority. No WIP, order, backfill, fusion, second-surface or UAV
+action is created.

@@ -188,6 +188,12 @@ exists. Resource slices pause only the lease. CM owns same-coordinate,
 semantics-preserving blinded atomic continuation and unchanged-science
 completion until complete question-relevant data exist.
 
+For every operator, provider, or recovery limitation, identify the exact
+affected object and prohibited action, then explicitly name the unchanged
+direction work and semantic owner that continue. A no-resend or observation
+limit on one provider operation never becomes a CM direction stop, a ban on a
+distinct EM-authorized future turn, or a portfolio recommendation.
+
 After relevant output exists, CM must not silently change seeds, thresholds,
 treatment, comparator, observable, or any condition that may alter scientific
 interpretation. Invalid or ambiguous output, or a proposed science-bearing

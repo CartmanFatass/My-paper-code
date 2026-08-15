@@ -1,0 +1,1100 @@
+{
+  "topics": {
+    "Bellman-Eluder dimension": [
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "MARL foundations": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "MARL optimization": [
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      }
+    ],
+    "Markov games": [
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      }
+    ],
+    "Markov potential games": [
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      }
+    ],
+    "P-MBED": [
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      }
+    ],
+    "Q-learning": [
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      }
+    ],
+    "adaptive stepsizes": [
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      }
+    ],
+    "bandwidth": [
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      }
+    ],
+    "bias bounds": [
+      {
+        "paper_id": "P22",
+        "overview": "docs/new-libs/corpus/papers/P22/overview.md"
+      }
+    ],
+    "centralized training decentralized execution": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "coarse correlated equilibrium": [
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      }
+    ],
+    "common noise": [
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      }
+    ],
+    "continuous mean-field games": [
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ],
+    "cooperative MARL": [
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      },
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      }
+    ],
+    "credit assignment": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "dense graphs": [
+      {
+        "paper_id": "P22",
+        "overview": "docs/new-libs/corpus/papers/P22/overview.md"
+      }
+    ],
+    "density modeling": [
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ],
+    "fictitious play": [
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ],
+    "finite-N approximation": [
+      {
+        "paper_id": "P10",
+        "overview": "docs/new-libs/corpus/papers/P10/overview.md"
+      },
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      },
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      }
+    ],
+    "function approximation": [
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      }
+    ],
+    "general function approximation": [
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "graphon mean-field approximation": [
+      {
+        "paper_id": "P22",
+        "overview": "docs/new-libs/corpus/papers/P22/overview.md"
+      }
+    ],
+    "graphon mean-field control": [
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      }
+    ],
+    "heterogeneous agents": [
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      }
+    ],
+    "heterogeneous interactions": [
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      }
+    ],
+    "independent learning": [
+      {
+        "paper_id": "P10",
+        "overview": "docs/new-libs/corpus/papers/P10/overview.md"
+      }
+    ],
+    "independent linear function approximation": [
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      }
+    ],
+    "independent policy gradient": [
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      }
+    ],
+    "information bottleneck": [
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      }
+    ],
+    "interacting particle systems": [
+      {
+        "paper_id": "P22",
+        "overview": "docs/new-libs/corpus/papers/P22/overview.md"
+      }
+    ],
+    "large populations": [
+      {
+        "paper_id": "P08",
+        "overview": "docs/new-libs/corpus/papers/P08/overview.md"
+      }
+    ],
+    "mean-field MARL": [
+      {
+        "paper_id": "P08",
+        "overview": "docs/new-libs/corpus/papers/P08/overview.md"
+      }
+    ],
+    "mean-field MDP": [
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      }
+    ],
+    "mean-field Q-learning": [
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      }
+    ],
+    "mean-field control": [
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      },
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      }
+    ],
+    "mean-field games": [
+      {
+        "paper_id": "P10",
+        "overview": "docs/new-libs/corpus/papers/P10/overview.md"
+      },
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      }
+    ],
+    "model-based RL": [
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      }
+    ],
+    "monotonic improvement": [
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      }
+    ],
+    "multi-agent communication": [
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      }
+    ],
+    "neighbor-action aggregation": [
+      {
+        "paper_id": "P08",
+        "overview": "docs/new-libs/corpus/papers/P08/overview.md"
+      }
+    ],
+    "non-monotone optimization": [
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      }
+    ],
+    "non-stationary dynamics": [
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ],
+    "policy mirror ascent": [
+      {
+        "paper_id": "P10",
+        "overview": "docs/new-libs/corpus/papers/P10/overview.md"
+      }
+    ],
+    "reproducibility": [
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      }
+    ],
+    "rotational dynamics": [
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      }
+    ],
+    "sample complexity": [
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      },
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      },
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      },
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "scheduling": [
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      }
+    ],
+    "sequential policy updates": [
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      }
+    ],
+    "solution concepts": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "stochastic games": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "stochastic variational inequalities": [
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      }
+    ],
+    "trust region MARL": [
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      }
+    ],
+    "two-player zero-sum Markov games": [
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "variance reduction": [
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      }
+    ],
+    "variational inequalities": [
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      }
+    ]
+  },
+  "method_families": {
+    "AVLPR": [
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      }
+    ],
+    "Armijo verification": [
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      }
+    ],
+    "CTDE": [
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      },
+      {
+        "paper_id": "P08",
+        "overview": "docs/new-libs/corpus/papers/P08/overview.md"
+      },
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      }
+    ],
+    "EXP3": [
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      }
+    ],
+    "GOLF": [
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "L2 operator norm": [
+      {
+        "paper_id": "P22",
+        "overview": "docs/new-libs/corpus/papers/P22/overview.md"
+      }
+    ],
+    "MADDPG": [
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      }
+    ],
+    "PPO": [
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      },
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      }
+    ],
+    "Q-learning": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "QMIX": [
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      }
+    ],
+    "STORM": [
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      }
+    ],
+    "TRPO": [
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      }
+    ],
+    "action-dependent bonuses": [
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      }
+    ],
+    "actor-critic": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      },
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      }
+    ],
+    "attention scheduling": [
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      }
+    ],
+    "block approximation": [
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      }
+    ],
+    "bridge policy": [
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      }
+    ],
+    "conditional TD learning": [
+      {
+        "paper_id": "P10",
+        "overview": "docs/new-libs/corpus/papers/P10/overview.md"
+      }
+    ],
+    "conditional normalizing flow": [
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ],
+    "confidence sets": [
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "deep RL": [
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ],
+    "deep actor-critic": [
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      }
+    ],
+    "descent-ascent": [
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      }
+    ],
+    "dynamic programming": [
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      },
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      }
+    ],
+    "exploiter": [
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "extragradient": [
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      }
+    ],
+    "fictitious play": [
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ],
+    "graphon control": [
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      }
+    ],
+    "graphon limit": [
+      {
+        "paper_id": "P22",
+        "overview": "docs/new-libs/corpus/papers/P22/overview.md"
+      }
+    ],
+    "kernel Q-learning": [
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      }
+    ],
+    "linear function approximation": [
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      }
+    ],
+    "magnitude-reduced estimation": [
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      }
+    ],
+    "mean-field ODE": [
+      {
+        "paper_id": "P22",
+        "overview": "docs/new-libs/corpus/papers/P22/overview.md"
+      }
+    ],
+    "mean-field Q-learning": [
+      {
+        "paper_id": "P08",
+        "overview": "docs/new-libs/corpus/papers/P08/overview.md"
+      }
+    ],
+    "mean-field actor-critic": [
+      {
+        "paper_id": "P08",
+        "overview": "docs/new-libs/corpus/papers/P08/overview.md"
+      }
+    ],
+    "mean-field approximation": [
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      }
+    ],
+    "model elimination": [
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      }
+    ],
+    "nested lookahead": [
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      }
+    ],
+    "optimism": [
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "optimistic gradient": [
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      }
+    ],
+    "policy gradient": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      },
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      },
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      }
+    ],
+    "policy mirror ascent": [
+      {
+        "paper_id": "P10",
+        "overview": "docs/new-libs/corpus/papers/P10/overview.md"
+      }
+    ],
+    "population-based training": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "projected gradient": [
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      }
+    ],
+    "self-play": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "simplex discretization": [
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      }
+    ],
+    "single-trajectory learning": [
+      {
+        "paper_id": "P10",
+        "overview": "docs/new-libs/corpus/papers/P10/overview.md"
+      }
+    ],
+    "strategic exploration": [
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      }
+    ],
+    "supervised policy averaging": [
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ],
+    "tabular Q-learning": [
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      }
+    ],
+    "value decomposition": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "variational information bottleneck": [
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      }
+    ]
+  },
+  "hmasd_axes": {
+    "communication": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      },
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      }
+    ],
+    "credit": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      },
+      {
+        "paper_id": "P08",
+        "overview": "docs/new-libs/corpus/papers/P08/overview.md"
+      },
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      },
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      }
+    ],
+    "foundations": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      },
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      },
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      },
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      },
+      {
+        "paper_id": "P08",
+        "overview": "docs/new-libs/corpus/papers/P08/overview.md"
+      },
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      },
+      {
+        "paper_id": "P10",
+        "overview": "docs/new-libs/corpus/papers/P10/overview.md"
+      },
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      },
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      },
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      },
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      },
+      {
+        "paper_id": "P22",
+        "overview": "docs/new-libs/corpus/papers/P22/overview.md"
+      },
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      },
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "optimization": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      },
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      },
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      },
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      },
+      {
+        "paper_id": "P10",
+        "overview": "docs/new-libs/corpus/papers/P10/overview.md"
+      },
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      },
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      },
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "planning": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      },
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      },
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      },
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      },
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      },
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      },
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "variable_N": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      },
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      },
+      {
+        "paper_id": "P08",
+        "overview": "docs/new-libs/corpus/papers/P08/overview.md"
+      },
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      },
+      {
+        "paper_id": "P10",
+        "overview": "docs/new-libs/corpus/papers/P10/overview.md"
+      },
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      },
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      },
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      },
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      },
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      },
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      },
+      {
+        "paper_id": "P22",
+        "overview": "docs/new-libs/corpus/papers/P22/overview.md"
+      },
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ]
+  },
+  "evidence_types": {
+    "algorithm exposition": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "computational experiments": [
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      }
+    ],
+    "conceptual reframing": [
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      }
+    ],
+    "convergence argument": [
+      {
+        "paper_id": "P08",
+        "overview": "docs/new-libs/corpus/papers/P08/overview.md"
+      }
+    ],
+    "empirical evaluation": [
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      },
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      },
+      {
+        "paper_id": "P08",
+        "overview": "docs/new-libs/corpus/papers/P08/overview.md"
+      },
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      },
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      },
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      },
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      },
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ],
+    "error-propagation theorem": [
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ],
+    "evaluation guidance": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "formal guarantee": [
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      }
+    ],
+    "formal guarantees": [
+      {
+        "paper_id": "P03",
+        "overview": "docs/new-libs/corpus/papers/P03/overview.md"
+      },
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      },
+      {
+        "paper_id": "P10",
+        "overview": "docs/new-libs/corpus/papers/P10/overview.md"
+      },
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      },
+      {
+        "paper_id": "P12",
+        "overview": "docs/new-libs/corpus/papers/P12/overview.md"
+      },
+      {
+        "paper_id": "P14",
+        "overview": "docs/new-libs/corpus/papers/P14/overview.md"
+      },
+      {
+        "paper_id": "P16",
+        "overview": "docs/new-libs/corpus/papers/P16/overview.md"
+      },
+      {
+        "paper_id": "P20",
+        "overview": "docs/new-libs/corpus/papers/P20/overview.md"
+      },
+      {
+        "paper_id": "P22",
+        "overview": "docs/new-libs/corpus/papers/P22/overview.md"
+      },
+      {
+        "paper_id": "P25",
+        "overview": "docs/new-libs/corpus/papers/P25/overview.md"
+      }
+    ],
+    "heuristic experiment": [
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      }
+    ],
+    "lower bound": [
+      {
+        "paper_id": "P11",
+        "overview": "docs/new-libs/corpus/papers/P11/overview.md"
+      }
+    ],
+    "numerical examples": [
+      {
+        "paper_id": "P09",
+        "overview": "docs/new-libs/corpus/papers/P09/overview.md"
+      }
+    ],
+    "numerical experiments": [
+      {
+        "paper_id": "P22",
+        "overview": "docs/new-libs/corpus/papers/P22/overview.md"
+      }
+    ],
+    "preprint": [
+      {
+        "paper_id": "P06",
+        "overview": "docs/new-libs/corpus/papers/P06/overview.md"
+      }
+    ],
+    "proposition": [
+      {
+        "paper_id": "P15",
+        "overview": "docs/new-libs/corpus/papers/P15/overview.md"
+      }
+    ],
+    "recent preprint": [
+      {
+        "paper_id": "P24",
+        "overview": "docs/new-libs/corpus/papers/P24/overview.md"
+      }
+    ],
+    "textbook synthesis": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ],
+    "unreviewed preprint": [
+      {
+        "paper_id": "P07",
+        "overview": "docs/new-libs/corpus/papers/P07/overview.md"
+      }
+    ],
+    "worked derivations": [
+      {
+        "paper_id": "B01",
+        "overview": "docs/new-libs/corpus/papers/B01/overview.md"
+      }
+    ]
+  }
+}

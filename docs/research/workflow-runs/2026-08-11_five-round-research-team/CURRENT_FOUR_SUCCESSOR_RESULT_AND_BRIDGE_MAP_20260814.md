@@ -6,8 +6,136 @@ allocation_decision=not made here
 cross_direction_evidence_transfer=forbidden
 automatic_action_routing=false
 rcle_b2_branch_consumed=UNRESOLVED_VALIDITY
-current_status_pointer=ONLGR_B2_SCDMP_B3_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md
+current_status_pointer=VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md
+superseded_allocation_base=SGSP_R06_RISP_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260815.md|HISTORICAL_NONOPERATIVE
 ```
+
+## 2026-08-15 VNFC-B4 post-definition status delta
+
+The controlling current cut is
+`VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`. Exact
+`VNFC-B4-SCIENCE-20260815-05` is complete and immutable but receives no current
+empirical investment. Its direct held-out-`N=7` family division remains useful,
+but the maximum positive result is a one-event, finite-package
+trainability/inductive-bias claim; the containing `DIRECT-SET`, compound gates,
+and medium-confidence `18–34` engineer-week / `10^3–10^5` CPU-hour aggregate
+cost make a complete unresolved purchase plausible. This is a portfolio
+information/value/cost judgment, not an engineering or resource stop.
+
+The current distinct VNFC definition line is
+`VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION`, requiring a real
+exclusive-service target, one shared `N<=5` to held-out `N=7` parameterization,
+matched `L-RDA`/containing `DIRECT-SET`/strong fixed/`PERMUTE` comparisons, and
+one physical recovery utility. It authorizes definition, independent
+Pro/Gemini, EM intake, CM static feasibility and prospective cost only. It is
+not a partial B4 panel and opens no empirical bridge. RISP-B3 remains the
+current empirical investment; SGSP, RCLE and SCDMP definitions continue.
+
+## Historical base — 2026-08-15 RISP-B3 empirical cut and ONLGR host-card disposition
+
+The historical base cut is `RISP_B3_ONLGR_HOST_CARD_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`.
+`RISP-B3-TRG-SCIENCE-20260815-03` is the sole current empirical investment. Its
+complete finite `TRI-SECTOR-DELAYED-ACK-TRACK-RELAY` panel binds external-`k`
+held-out/switched value, equal-function-class anchor/containing recurrence,
+`G` exploitability, recipient-lineage control, and named outcome-independent
+controls. Initialization, centered decay, conditioning and finite-optimization
+geometry remain live alternatives, not matched or isolated causes. The exact panel is
+the only authorized RISP bridge; a complete positive result is required before
+any downstream bridge, second surface or UAV question is considered. Its
+prospective cost is 24–40 engineering hours and 16–24 one-CPU hours. The
+maximum claim is exact two-agent, 512-update, finite-package evidence only; no
+arbitrary-`k`/`N`, convergence, UAV, safety, deployment or semantic-isolation
+claim follows.
+
+RISP's frozen result branches are exhaustive and ordered after validity gates:
+`INVALID_IMPLEMENTATION_OR_PANEL`; `CONTAINING_CHECKPOINT_G_CEILING_OR_HEADROOM_NONIDENTIFYING`;
+`NAMED_TARGET_REGISTERED_G_RECURRENCE_MINIMUM_DELETED`;
+`CONTAINING_CHECKPOINT_G_EXPLOITABILITY_NOT_ESTABLISHED`;
+`G_EXPLOITABLE_BUT_MATCHED_VALUE_NONIDENTIFYING`;
+`NAMED_TARGET_G_CENTERED_TREATMENT_HARM`;
+`TARGET_EXTERNAL_K_REALIZED_ACK_G_PRIOR_SUPPORTED`;
+`TARGET_DIRECT_RECURRENCE_VALUE_WITHOUT_G_PRIOR_SPECIFICITY`;
+`NO_REALIZED_ACK_LINEAGE_COMPATIBLE`;
+`BEST_OF_NAMED_OUTCOME_INDEPENDENT_CONTROLS_COMPATIBLE`;
+`NO_REGISTERED_MINIMUM_G_PRIOR_VALUE`; and `VALID_UNRESOLVED`.
+They are evaluated in this displayed order after the invalid-panel check.
+The panel can support, delete, or leave unresolved only the exact registered
+branches and claims; it cannot delete outcome-coupled recurrence generally.
+`BEST-REACHABLE-X` is historical/nonoperative and unauthorized, not an
+interpretation of current R03.
+
+`ONLGR-TBH-HOST-CARD-20260815-03` is complete, immutable and receives no
+current empirical investment. Its host-local main claim-bearing contrast is
+held-out TWO-STRATUM versus calibration-best pooled GLOBAL; the reciprocal
+`C_S<-L`/`C_L<-S` swaps are separate held-out confirmation controls, with tenure bundled to
+geometry and host details. The disclosed cost is 11–15 engineer-weeks,
+15.8–315.4 CPU-hours, 16 GiB RAM and ≤4 GiB storage; this information-per-cost
+decision is scientific opportunity-cost judgment, not an engineering or
+resource stop. Revisit if **any one** of the following becomes true:
+
+1. Independent target evidence shows material pre-action package-rate
+   heterogeneity or pooled-rate failure that is decision-relevant.
+2. An invested variable-`k` component explicitly requires this ONLGR screen.
+3. A new Pro-closed object separates tenure from geometry or makes a distinct
+   adaptive `FLEX` family claim-bearing.
+4. A reusable host with the same semantics reduces incremental engineering
+   burden by at least half without changing the scientific object.
+
+No condition authorizes activity by itself. No evidence, thresholds, seeds,
+acceptance or claims transfer; no
+quota, backfill, ordering, fusion, second surface or UAV action is created.
+
+## Historical 2026-08-15 definition cut
+
+This paragraph is a historical definition-cut snapshot; it is superseded for
+allocation by `RISP_B3_ONLGR_HOST_CARD_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`.
+The five prior exact experiment objects were consumed complete and immutable.
+At that superseded cut there was **no empirical investment**; the then-current
+definition-only investments were VNFC-B4 plus SGSP two-zone, RISP combined
+successor, RCLE coarse commitment, ONLGR target-host executable-card definition
+and SCDMP order-to-value. No automatic
+backfill, fusion, second surface, UAV action, quota, WIP cap, or order gate is
+created. All older prospective/current rows below remain historical evidence
+only; no evidence, threshold, seed, acceptance, or claim transfers across
+directions, and none authorizes an old exact rerun.
+
+The ONLGR-B2 result remains complete, immutable and absorbed into global-rate
+handling. At that historical cut, its successor was the completed definition
+object `ONLGR-TBH-SCREEN-DEF-20260815-03`, whose then-authorized work was only a
+target-host executable-card definition. That historical card requirement made
+the SHORT/LONG
+pre-action strata natural and outcome-independent, compare calibration-best
+pooled rate against nontrivial TWO-STRATUM and finite FLEX-CONTAIN timing rates,
+and test the sign explicitly: the registered positive branch requires
+`q_SHORT>q_LONG` plus all gates; a separately valid/supported `q_SHORT<q_LONG`
+result refutes that registered direction but may preserve package heterogeneity
+without a general claim or automatic action. Reciprocal held-out confirmation
+and simultaneous mean valid-service/lower-CVaR endpoints remain required. A
+later package-specific two-rate result would not imply B2 rescue, eligible exposure, lease/rebind,
+hazard, general `k`/`N`, transfer or general UAV value. No empirical lease or
+activity follows here; the 5–17 engineer-week and hundreds-to-`10^4+` CPU-hour
+figures are planning/opportunity-cost facts, not a science stop. The local
+TWO-STRATUM-versus-GLOBAL result is adjudicated independently of FLEX success:
+only a selected FLEX policy functionally distinct from the selected two-rate
+policy on the registered rows and within .01 on both endpoints preserves future
+timing-family compatibility; if FLEX loses by more than .01, the local two-rate
+result remains while FLEX estimation/search/generalization stays unresolved.
+If TWO-STRATUM fails but FLEX passes both GLOBAL gates, open a new prospective
+continuous-timing definition; if neither passes, retain no timing evidence.
+
+## Historical overnight current-cut supersession
+
+The former allocation and bridge pointer was
+`OVERNIGHT_POST_RESULT_PORTFOLIO_CAMPAIGN_ADJUDICATION_20260814.md`.
+The prior prospective/current wording in this map is retained as a
+provenance base and is `HISTORICAL_NONOPERATIVE` for allocation. The
+four-successor cut is historical and nonoperative; the 2026-08-15 pointer
+above controls current allocation.
+
+SGSP semantic-center sample efficiency, VNFC combinatorial scalable
+allocation, and RISP outcome-coupled variable-`k` recurrence are distinct
+families. ROCF fusion is rejected; no cross-`N`-by-`k` parent, second surface
+or UAV work is activated. No 26-direction row auto reopens.
 
 ## Scope and source identity
 
@@ -164,19 +292,26 @@ These are smallest scientific bridges, not operational instructions. No
 SGSP×RCLE/persistent-latent fusion, cross-`N`×`k` parent, second surface, or UAV
 production is currently authorized.
 
-## Provenance and non-automatic boundary
+## HISTORICAL_NONOPERATIVE — superseded provenance and non-automatic boundary
 
-This artifact preserves the prospective branch maps for four objects. The
-controlling allocation source is
+This artifact preserves the prospective branch maps for four objects. At that
+superseded cut, the controlling allocation source was
 `ONLGR_B2_SCDMP_B3_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md`, read with
 `RCLE_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md` as base evidence,
 `CROSS_DIRECTION_PORTFOLIO_HANDOFF_SOL_ULTRA.md`, and
-`POST_RESULT_PARALLEL_RESEARCH_SYNTHESIS_20260814.md`. The live cut has one
-empirical investment, SGSP-240, and one definition-only investment, RISP
-value-bearing outcome-coupled recurrence. RCLE, ONLGR-B2 and SCDMP-B3 have no
-current empirical investment, and no completion creates automatic backfill.
-This branch map makes no new allocation decision.
-The next portfolio review requires a complete direction milestone, a
+`POST_RESULT_PARALLEL_RESEARCH_SYNTHESIS_20260814.md`. That then-live cut had
+one empirical investment, SGSP-240, and one definition-only investment, RISP
+value-bearing outcome-coupled recurrence. RCLE, ONLGR-B2 and SCDMP-B3 had no
+empirical investment, and no completion created automatic backfill. This
+historical branch map makes no new allocation decision or current routing rule.
+At that cut, the next portfolio review required a complete direction milestone, a
 science-bearing object/claim change, an unrecoverable cross-scope resource
 condition, or materially changed prospective total/opportunity cost. Until
 then, all actions above remain eligible branches only.
+
+The allocation paragraph immediately above was superseded successively by
+`SGSP_R06_RISP_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260815.md`, the
+definition-only and ONLGR host-card cuts, and finally
+`RISP_B3_ONLGR_HOST_CARD_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`, then
+the current `VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`.
+It is historical/nonoperative. No 26-direction row auto reopens.

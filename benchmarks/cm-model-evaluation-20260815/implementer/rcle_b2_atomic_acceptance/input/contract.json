@@ -1,0 +1,7 @@
+{
+  "direction": "roster_consistent_latent_exploration",
+  "revision": "RCLE-B2-SCIENCE-20260814-02",
+  "frozen_seeds": [2371, 2473, 2591, 2683, 2791, 2903, 3011, 3121, 3251, 3371, 3491, 3613],
+  "arms_per_seed": 2,
+  "updates_per_arm_seed": 2000
+}

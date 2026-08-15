@@ -132,6 +132,12 @@ observe-only. Only a genuinely new conversation, external-authority expansion
 or scope expansion returns to Root. In-envelope transport incidents and
 science-neutral recovery do not wake Root or pause the direction.
 
+When reporting a transport or provider restriction, state its exact operation
+identity, the prohibited action, the scientific-stage work that remains live,
+and whether Root must decide a distinct later turn. Never write or imply that
+operation-level no-resend pauses the direction, cancels CM work, or changes
+portfolio allocation.
+
 Root performs a normal non-force publication only when a downstream consumer
 needs repository-visible owner-prepared artifacts or at final integration.
 Publication is not scientific intake, approval, or a prerequisite for local

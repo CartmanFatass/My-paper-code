@@ -1,0 +1,509 @@
+{
+  "agent": "A",
+  "paper_count": 11,
+  "papers": [
+    {
+      "paper_id": "B02",
+      "title": "Multiagent Systems: Algorithmic, Game-Theoretic, and Logical Foundations",
+      "overview": "docs/new-libs/corpus/papers/B02/overview.md",
+      "topics": [
+        "multiagent systems foundations",
+        "normal-form and extensive-form games",
+        "stochastic and potential games",
+        "multi-agent learning",
+        "communication",
+        "mechanism design",
+        "epistemic logic"
+      ],
+      "methods": [
+        "distributed constraint solving",
+        "game-theoretic solution concepts",
+        "equilibrium computation",
+        "reinforcement and no-regret learning",
+        "mechanism design",
+        "epistemic logic"
+      ],
+      "problem_classes": [
+        "distributed CSP and optimization",
+        "finite games",
+        "stochastic games",
+        "auctions and allocation",
+        "knowledge and belief reasoning"
+      ],
+      "evidence_types": [
+        "textbook synthesis",
+        "formal theorems",
+        "algorithms",
+        "worked examples"
+      ],
+      "hmasd_axes": [
+        "foundations",
+        "optimization",
+        "planning",
+        "communication"
+      ],
+      "formal_claim_ids": [
+        "B02-CL002",
+        "B02-CL003",
+        "B02-CL004"
+      ],
+      "empirical_claim_ids": [],
+      "conceptual_or_connection_claim_ids": [
+        "B02-CL008"
+      ],
+      "boundary_claim_ids": [
+        "B02-CL007"
+      ]
+    },
+    {
+      "paper_id": "B03",
+      "title": "A Concise Introduction to Decentralized POMDPs",
+      "overview": "docs/new-libs/corpus/papers/B03/overview.md",
+      "topics": [
+        "Dec-POMDP",
+        "decentralized planning",
+        "partial observability",
+        "finite-state controllers",
+        "factored planning",
+        "communication"
+      ],
+      "methods": [
+        "dynamic programming",
+        "heuristic search",
+        "finite-state controller optimization",
+        "factored planning",
+        "macro-actions",
+        "reinforcement learning"
+      ],
+      "problem_classes": [
+        "finite-horizon Dec-POMDP",
+        "infinite-horizon Dec-POMDP",
+        "partially observable cooperative control",
+        "communication-aware planning"
+      ],
+      "evidence_types": [
+        "textbook synthesis",
+        "complexity results",
+        "planning algorithms",
+        "worked domains"
+      ],
+      "hmasd_axes": [
+        "foundations",
+        "planning",
+        "communication"
+      ],
+      "formal_claim_ids": [
+        "B03-CL001",
+        "B03-CL002",
+        "B03-CL003"
+      ],
+      "empirical_claim_ids": [],
+      "conceptual_or_connection_claim_ids": [
+        "B03-CL008"
+      ],
+      "boundary_claim_ids": [
+        "B03-CL007"
+      ]
+    },
+    {
+      "paper_id": "P01",
+      "title": "If Multi-Agent Learning Is the Answer, What Is the Question?",
+      "overview": "docs/new-libs/corpus/papers/P01/overview.md",
+      "topics": [
+        "multi-agent learning agendas",
+        "evaluation criteria",
+        "stochastic games",
+        "no-regret learning"
+      ],
+      "methods": [
+        "conceptual taxonomy",
+        "model-based learning",
+        "model-free learning",
+        "regret minimization"
+      ],
+      "problem_classes": [
+        "repeated games",
+        "stochastic games",
+        "cooperative and non-cooperative learning"
+      ],
+      "evidence_types": [
+        "conceptual position paper",
+        "selective literature synthesis",
+        "worked game examples"
+      ],
+      "hmasd_axes": [
+        "foundations"
+      ],
+      "formal_claim_ids": [],
+      "empirical_claim_ids": [],
+      "conceptual_or_connection_claim_ids": [
+        "P01-CL002",
+        "P01-CL003",
+        "P01-CL006"
+      ],
+      "boundary_claim_ids": [
+        "P01-CL005"
+      ]
+    },
+    {
+      "paper_id": "P02",
+      "title": "Independent Natural Policy Gradient Always Converges in Markov Potential Games",
+      "overview": "docs/new-libs/corpus/papers/P02/overview.md",
+      "topics": [
+        "Markov potential games",
+        "independent natural policy gradient",
+        "last-iterate convergence",
+        "congestion games"
+      ],
+      "methods": [
+        "natural policy gradient",
+        "multiplicative weights",
+        "potential-function analysis"
+      ],
+      "problem_classes": [
+        "discounted Markov potential games",
+        "routing and stochastic congestion games"
+      ],
+      "evidence_types": [
+        "formal convergence analysis",
+        "tabular experiments"
+      ],
+      "hmasd_axes": [
+        "optimization",
+        "foundations"
+      ],
+      "formal_claim_ids": [
+        "P02-CL001",
+        "P02-CL002",
+        "P02-CL003",
+        "P02-CL004"
+      ],
+      "empirical_claim_ids": [
+        "P02-CL005"
+      ],
+      "conceptual_or_connection_claim_ids": [
+        "P02-CL007"
+      ],
+      "boundary_claim_ids": [
+        "P02-CL006"
+      ]
+    },
+    {
+      "paper_id": "P04",
+      "title": "Poincare Recurrence, Cycles and Spurious Equilibria in Gradient-Descent-Ascent for Non-Convex Non-Concave Zero-Sum Games",
+      "overview": "docs/new-libs/corpus/papers/P04/overview.md",
+      "topics": [
+        "gradient-descent-ascent",
+        "hidden bilinear games",
+        "Poincare recurrence",
+        "spurious equilibria"
+      ],
+      "methods": [
+        "continuous-time dynamical systems",
+        "gradient-descent-ascent",
+        "conservation-law analysis"
+      ],
+      "problem_classes": [
+        "non-convex non-concave zero-sum games",
+        "hidden bilinear games"
+      ],
+      "evidence_types": [
+        "formal dynamical-systems analysis",
+        "constructed counterexamples",
+        "trajectory illustration"
+      ],
+      "hmasd_axes": [
+        "optimization",
+        "foundations"
+      ],
+      "formal_claim_ids": [
+        "P04-CL001",
+        "P04-CL002",
+        "P04-CL003",
+        "P04-CL004",
+        "P04-CL005"
+      ],
+      "empirical_claim_ids": [],
+      "conceptual_or_connection_claim_ids": [
+        "P04-CL007"
+      ],
+      "boundary_claim_ids": [
+        "P04-CL006"
+      ]
+    },
+    {
+      "paper_id": "P05",
+      "title": "Dual Extrapolation and Its Applications to Solving Variational Inequalities and Related Problems",
+      "overview": "docs/new-libs/corpus/papers/P05/overview.md",
+      "topics": [
+        "variational inequalities",
+        "monotone operators",
+        "dual extrapolation",
+        "saddle points"
+      ],
+      "methods": [
+        "dual extrapolation",
+        "Bregman proximal geometry",
+        "extragradient",
+        "averaging"
+      ],
+      "problem_classes": [
+        "monotone variational inequalities",
+        "nonsmooth convex optimization",
+        "convex-concave saddle points",
+        "bilinear matrix games"
+      ],
+      "evidence_types": [
+        "formal convergence analysis",
+        "oracle-complexity bounds",
+        "algorithm derivation"
+      ],
+      "hmasd_axes": [
+        "optimization",
+        "foundations"
+      ],
+      "formal_claim_ids": [
+        "P05-CL001",
+        "P05-CL002",
+        "P05-CL003",
+        "P05-CL004",
+        "P05-CL005"
+      ],
+      "empirical_claim_ids": [],
+      "conceptual_or_connection_claim_ids": [
+        "P05-CL007"
+      ],
+      "boundary_claim_ids": [
+        "P05-CL006"
+      ]
+    },
+    {
+      "paper_id": "P13",
+      "title": "Independent Natural Policy Gradient Methods for Potential Games: Finite-Time Global Convergence with Entropy Regularization",
+      "overview": "docs/new-libs/corpus/papers/P13/overview.md",
+      "topics": [
+        "static potential games",
+        "entropy regularization",
+        "natural policy gradient",
+        "quantal response equilibrium"
+      ],
+      "methods": [
+        "independent natural policy gradient",
+        "multiplicative weights",
+        "entropy smoothing"
+      ],
+      "problem_classes": [
+        "finite static potential games",
+        "identical-interest games",
+        "QRE and approximate Nash equilibrium"
+      ],
+      "evidence_types": [
+        "formal finite-time analysis",
+        "synthetic numerical experiments",
+        "unreviewed preprint"
+      ],
+      "hmasd_axes": [
+        "optimization",
+        "foundations"
+      ],
+      "formal_claim_ids": [
+        "P13-CL003",
+        "P13-CL004",
+        "P13-CL005"
+      ],
+      "empirical_claim_ids": [
+        "P13-CL006"
+      ],
+      "conceptual_or_connection_claim_ids": [],
+      "boundary_claim_ids": [
+        "P13-CL007"
+      ]
+    },
+    {
+      "paper_id": "P17",
+      "title": "MAVEN: Multi-Agent Variational Exploration",
+      "overview": "docs/new-libs/corpus/papers/P17/overview.md",
+      "topics": [
+        "multi-agent exploration",
+        "CTDE",
+        "value decomposition",
+        "mutual information",
+        "latent-variable control"
+      ],
+      "methods": [
+        "QMIX",
+        "hierarchical latent policy",
+        "variational mutual information",
+        "Q-learning"
+      ],
+      "problem_classes": [
+        "cooperative Dec-POMDP",
+        "nonmonotonic value functions",
+        "SMAC micromanagement"
+      ],
+      "evidence_types": [
+        "formal counterexample family",
+        "algorithm proposal",
+        "benchmark experiments",
+        "ablations"
+      ],
+      "hmasd_axes": [
+        "planning",
+        "credit",
+        "optimization"
+      ],
+      "formal_claim_ids": [
+        "P17-CL001",
+        "P17-CL002",
+        "P17-CL004"
+      ],
+      "empirical_claim_ids": [
+        "P17-CL005",
+        "P17-CL006"
+      ],
+      "conceptual_or_connection_claim_ids": [
+        "P17-CL008"
+      ],
+      "boundary_claim_ids": [
+        "P17-CL007"
+      ]
+    },
+    {
+      "paper_id": "P18",
+      "title": "The Synergy Between Optimal Transport Theory and Multi-Agent Reinforcement Learning",
+      "overview": "docs/new-libs/corpus/papers/P18/overview.md",
+      "topics": [
+        "optimal transport",
+        "Wasserstein distance",
+        "policy alignment",
+        "resource allocation",
+        "MARL scalability"
+      ],
+      "methods": [
+        "optimal transport",
+        "Wasserstein objectives",
+        "conceptual decomposition"
+      ],
+      "problem_classes": [
+        "cooperative policy alignment",
+        "distributed resources",
+        "non-stationarity",
+        "large-scale MARL"
+      ],
+      "evidence_types": [
+        "conceptual position paper",
+        "proposed objectives",
+        "unreviewed preprint"
+      ],
+      "hmasd_axes": [
+        "optimization",
+        "variable_N",
+        "foundations"
+      ],
+      "formal_claim_ids": [
+        "P18-CL001"
+      ],
+      "empirical_claim_ids": [],
+      "conceptual_or_connection_claim_ids": [
+        "P18-CL002",
+        "P18-CL003",
+        "P18-CL004",
+        "P18-CL007"
+      ],
+      "boundary_claim_ids": [
+        "P18-CL006"
+      ]
+    },
+    {
+      "paper_id": "P19",
+      "title": "Learning Rates for Q-learning",
+      "overview": "docs/new-libs/corpus/papers/P19/overview.md",
+      "topics": [
+        "Q-learning",
+        "finite-time convergence",
+        "learning-rate schedules",
+        "sample complexity"
+      ],
+      "methods": [
+        "tabular Q-learning",
+        "stochastic approximation",
+        "synchronous and asynchronous analysis"
+      ],
+      "problem_classes": [
+        "discounted finite MDP",
+        "parallel sampling",
+        "covering-time exploration"
+      ],
+      "evidence_types": [
+        "formal upper bounds",
+        "formal lower bound",
+        "simulation experiments"
+      ],
+      "hmasd_axes": [
+        "optimization",
+        "foundations"
+      ],
+      "formal_claim_ids": [
+        "P19-CL002",
+        "P19-CL003",
+        "P19-CL004"
+      ],
+      "empirical_claim_ids": [
+        "P19-CL005"
+      ],
+      "conceptual_or_connection_claim_ids": [
+        "P19-CL007"
+      ],
+      "boundary_claim_ids": [
+        "P19-CL006"
+      ]
+    },
+    {
+      "paper_id": "P21",
+      "title": "Large Population Stochastic Dynamic Games: Closed-Loop McKean-Vlasov Systems and the Nash Certainty Equivalence Principle",
+      "overview": "docs/new-libs/corpus/papers/P21/overview.md",
+      "topics": [
+        "large-population stochastic games",
+        "mean-field games",
+        "McKean-Vlasov systems",
+        "Nash certainty equivalence"
+      ],
+      "methods": [
+        "HJB control",
+        "McKean-Vlasov fixed point",
+        "decentralized feedback",
+        "asymptotic epsilon-Nash analysis"
+      ],
+      "problem_classes": [
+        "weakly coupled stochastic differential games",
+        "multi-class mean-field games",
+        "large finite populations"
+      ],
+      "evidence_types": [
+        "formal existence analysis",
+        "asymptotic approximation bounds",
+        "epsilon-Nash guarantee"
+      ],
+      "hmasd_axes": [
+        "variable_N",
+        "planning",
+        "foundations"
+      ],
+      "formal_claim_ids": [
+        "P21-CL001",
+        "P21-CL002",
+        "P21-CL003",
+        "P21-CL004",
+        "P21-CL005",
+        "P21-CL006"
+      ],
+      "empirical_claim_ids": [],
+      "conceptual_or_connection_claim_ids": [
+        "P21-CL008"
+      ],
+      "boundary_claim_ids": [
+        "P21-CL007"
+      ]
+    }
+  ]
+}

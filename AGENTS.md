@@ -50,6 +50,55 @@ task-scoped runtime control, focused validation, and only assignment-explicit
 external actions. It returns only recovery completion or a concrete authority
 boundary; routine failure streams do not wake its invoker.
 
+### Mandatory non-core workflow-anomaly route
+
+Use the workspace skill `hmasd-workflow-anomaly-routing` whenever an EM or CM
+encounters a non-core provider transport, Agentify/UI observability,
+protocol/controller, cross-file workflow-state, runtime-orchestration, or
+repeated unchanged-science recovery anomaly. The detecting EM or CM reports
+`WORKFLOW_ANOMALY_REPORT` directly to Root, never only to its sibling. Root
+must register one task-scoped Terra-high Workflow Recovery Manager before any
+fresh direction retry, unless the report is plainly an ordinary CM
+source/runner repair. This route preserves the frozen science and exact
+provider no-resend boundary; it never turns a workflow anomaly into a
+scientific stop, portfolio decision, consumed attempt, or user request.
+One root cause and every directly induced workflow consequence remain with the
+same recovery owner through follow-up reuse; do not create parallel or serial
+replacement recovery tasks merely because a new production-tab, timing, or
+other downstream manifestation is observed. A new recovery owner requires
+direct evidence of a distinct root cause and disjoint repair scope.
+Every Workflow Recovery Manager assignment follows the common contract in
+`hmasd-workflow-anomaly-routing`: locate the governing instructions/skill/role
+and task context; reproduce safely from direct evidence; inspect the relevant
+source, runtime, configuration and tool boundary; freeze a minimal repair and
+test plan; repair and run focused validation within authority; then return one
+consolidated evidence-bound conclusion. A page/status inspection alone is not
+a recovery. Agentify adds its provider/MCP-specific context requirements but
+does not replace this general sequence.
+For an Agentify/provider anomaly, the Root recovery dispatch must require the
+manager to read the complete transport skill and canonical manual, exact
+request/incident archives, and relevant current MCP controller/source/runtime
+before diagnosis. It must name the task as MCP-controlled browser work and use
+only the approved native Agentify registry/DOM primitives; generic browser
+assumptions, hidden DOM, ordinary-query fallback and alternate send routes are
+forbidden.
+
+### Mandatory portfolio–operational handoff route
+
+Use the workspace skill `hmasd-portfolio-operational-handoff` for every
+direction-stage milestone, direction request to Root, or received portfolio
+decision. The stable Root-owned anchor is
+`docs/research/workflow-runs/2026-08-11_five-round-research-team/PORTFOLIO_OPERATIONAL_RECONCILIATION_20260814.md`;
+do not create a competing progress file. EM and CM send each completion,
+acceptance, material ambiguity, authority/lease need, or cross-scope conflict
+directly to Root using the skill's compact packet, even if the same-direction
+counterpart has already received it. Root remains event-waiting while an owner
+is active, reports the completed conclusion to the main session, and updates
+the anchor in that same turn before any necessary decision-level portfolio
+relay. A completed object must never remain described as `pending`, awaiting,
+or under review. Portfolio receives only the bounded decision packet; runtime,
+partial-result and transport streams remain excluded.
+
 For every project Python command, invoke
 `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` directly. Do not use bare
 `python`, `py`, or `conda run` unless the assignment explicitly requires a
@@ -283,6 +332,36 @@ proposed next action, never an instruction that automatically enters Root's
 queue.
 
 ### Child incident reporting and Root goal-blocking boundary
+
+### Semantic alignment fence — mandatory four-layer translation
+
+Every child return and every Root handoff separates four non-interchangeable
+claims: **observed fact** (what exact object was seen), **local action fence**
+(the only operation that may not be repeated or altered), **scientific-stage
+continuation** (what remains authorized for the direction), and **Root decision
+class** (none, a bounded recovery, a lease/resource decision, a science-bearing
+change, or a portfolio decision). A missing observation, `PREPARED` ledger row,
+provider ambiguity, no-resend rule, runtime limit, child `AUTHORITY_BOUNDARY`,
+or unavailable tool is evidence only about its named object; it does not imply
+that any broader layer is paused, forbidden, complete, or scientifically
+invalid.
+
+Exact provider **no-resend** means only that the same operation/turn identity
+may not be submitted again. It never forbids direction continuation,
+unchanged-science repair, CM construction, or an EM-authored distinct future
+turn when the direction envelope and provider facts make that appropriate. If
+an existing turn's commitment is ambiguous, state precisely which operation is
+fenced, what remains unknown, which non-sending recovery/observation continues,
+and what new Root authority—if any—a distinct future turn would require. Do
+not convert the fence into a direction-wide “cannot retry” rule.
+
+Only an explicit user instruction, a Root compute-lease boundary, an
+EM-established scientific activity boundary, or a dedicated portfolio decision
+may mark a direction/stage as paused. Root writes that scope and reason in the
+stable anchor; children may never infer it from their own limitation. Every
+report carrying a prohibition or boundary therefore includes `applies_to`,
+`does_not_imply`, `continuation_owner`, and `root_decision_class` in addition
+to its ordinary evidence fields.
 
 No non-Root agent may return or act on a generic `BLOCKED` terminal status as a
 thread, goal, routing, production-pause, or authority conclusion. A child that

@@ -1,0 +1,7 @@
+{
+  "direction": "semigroup_consistent_duration_model_policy",
+  "revision": "SCDMP-B3-SCIENCE-20260814-01",
+  "production_authorized": true,
+  "max_workers": 1,
+  "authorized_seeds": [101, 211, 307, 401, 503, 601, 701, 809]
+}

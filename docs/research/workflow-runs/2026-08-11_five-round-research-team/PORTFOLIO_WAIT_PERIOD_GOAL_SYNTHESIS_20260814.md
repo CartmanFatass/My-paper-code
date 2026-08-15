@@ -4,7 +4,7 @@
 document_kind=portfolio_owner_goal_synthesis
 owner=Dedicated Portfolio Session 019ffc20-5001-7453-a08a-dac783cf4d80
 campaign_scale=eight_hours_equivalent_parallel_work
-allocation_change=false
+allocation_change=SGSP_240|RISP_B2_R02_EMPIRICAL|VNFC_B4_DEFINITION
 operational_routing_clarification=true
 scientific_activity_started=false
 provider_or_runtime_action=false
@@ -12,7 +12,7 @@ direct_root_packet=PORTFOLIO_WAIT_PERIOD_OWNER_DELTA_20260814
 direct_root_ack=PORTFOLIO_WAIT_PERIOD_OWNER_DELTA_ACK_20260814
 review_disposition=source_fidelity_PASS|minimality_PASS|fresh_root_PASS
 point_in_time_cut=true
-superseded_by=RCLE_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md
+superseded_by=OVERNIGHT_POST_RESULT_PORTFOLIO_CAMPAIGN_ADJUDICATION_20260814.md
 ```
 
 > **Later-result pointer:** this completed campaign records the cut before the
@@ -20,15 +20,33 @@ superseded_by=RCLE_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md
 > `RCLE_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md`; the historical four-
 > investment statements below have no current routing force.
 
+## Overnight goal supersession
+
+The former wait-period cut is `HISTORICAL_NONOPERATIVE` for allocation. The
+operative source is
+`OVERNIGHT_POST_RESULT_PORTFOLIO_CAMPAIGN_ADJUDICATION_20260814.md`.
+SGSP-240 continues empirically; RISP-B2-R02 is promoted to the full frozen
+empirical panel; and VNFC-B4 is a new natural-churn scalable joint-allocation
+definition investment. RCLE-B2, ONLGR-B2 and SCDMP-B3 remain no-current, and
+no 26-direction row auto reopens.
+
+SGSP semantic-center sample efficiency, VNFC combinatorial feasible
+allocation, and RISP outcome-coupled variable-`k` recurrence are distinct;
+ROCF fusion, cross-`N`-by-`k` work, second surfaces and UAV production remain
+unauthorized. Unknown wall/RSS, provider status, missing code/host and
+resource order cannot stop science; VNFC's definition-only return is for
+scientific function/host/comparator/claim/cost closure, not engineering
+absence.
+
 ## Owner disposition
 
-The research campaign is complete at the portfolio resolution. The four current
-investments remain **SGSP-240**, **RCLE-validity-only**, **ONLGR-B2-rate**, and
-**SCDMP-stability-first**. **RISP BEST-REACHABLE-X** remains a no-current-
-investment diagnostic because it cannot presently test structured recurrent
-value or held-out variable-`k` performance. No fusion, second surface, UAV
-production, fixed WIP, direction-count, action-count, or ordering gate is
-authorized.
+The research campaign is complete at the portfolio resolution. The paragraph
+below is the superseded point-in-time statement and is retained for audit;
+the live cut is SGSP-240 and RISP-B2-R02 as empirical investments plus VNFC-B4
+as definition-only. RCLE-B2, ONLGR-B2 and SCDMP-B3 are no-current. RISP
+BEST-REACHABLE-X remains closed as a separate diagnostic. No fusion, second
+surface, UAV production, fixed WIP, direction-count, action-count, or ordering
+gate is authorized.
 
 The material delta is control-plane and portfolio-routing clarity, not a new
 scientific allocation. The current higher-precedence router, Root role and

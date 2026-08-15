@@ -4,7 +4,7 @@ Owner: `direction:opportunity_normalized_lease_gated_rebinding` Explorer Manager
 Treatment: `ONLGR-B1-MARKED-LEASE-CENSORED-RATE-v1`  
 Exact scientific object: `ONLGR-PRO-MATH-CLOSURE-CANDIDATE-20260812-04`  
 Components: `ONLGR-PRO-PREACTIVITY-CORRECTION-20260812-01 + ONLGR-PRO-PREACTIVITY-MATH-DELTA-20260812-02 + ONLGR-PRO-AUTHORITY-POSTSTARTUP-MARKED-SUPPORT-DELTA-20260812-04`  
-Mathematical closure: `PENDING_SAME_CONVERSATION_PRO_CLOSED`; local `ONLGR-PRO-PREACTIVITY-MATH-CLOSURE-20260812-03` is historical advisory only  
+Mathematical closure: `CLOSED` by `ONLGR-PRO-MATH-CLOSURE-AUTHORITY-REREVIEW-20260812-02`; local `ONLGR-PRO-PREACTIVITY-MATH-CLOSURE-20260812-03` is historical advisory only
 Map revision: `ONLGR-B1-RESULT-BLIND-INTAKE-ACTIVATION-MAP-20260812-02`  
 Status: `FROZEN_BEFORE_RESULT`
 
@@ -47,6 +47,13 @@ in:
 - `ONLGR_B1_EXTERNAL_PRO_PRE_RESULT_SCIENTIFIC_INTAKE.md`;
 - `ONLGR_PRO_PREACTIVITY_MATH_CLOSURE_DELTA.md`; and
 - `ONLGR_PRO_PREACTIVITY_MATHEMATICAL_CLOSURE.md`.
+
+The same-conversation ChatGPT Pro authority subsequently returned literal
+`CLOSED` with zero science-bearing defects for the exact composite. The
+same-direction owner accepted it in
+`ONLGR_CHATGPT_EXTERNAL_PRO_FINAL_MATHEMATICAL_CLOSURE_INTAKE.md`. This changes
+only closure metadata; no result or runtime was inspected and no treatment or
+interpretation gate changed.
 
 Root reports that CM accepted the synchronized source before this map was
 written. That fact is an identity anchor only. This EM did not inspect source,
@@ -381,7 +388,11 @@ direction=opportunity_normalized_lease_gated_rebinding
 treatment=ONLGR-B1-MARKED-LEASE-CENSORED-RATE-v1
 exact_scientific_object=ONLGR-PRO-MATH-CLOSURE-CANDIDATE-20260812-04
 science_components=ONLGR-PRO-PREACTIVITY-CORRECTION-20260812-01+ONLGR-PRO-PREACTIVITY-MATH-DELTA-20260812-02+ONLGR-PRO-AUTHORITY-POSTSTARTUP-MARKED-SUPPORT-DELTA-20260812-04
-math_closure=PENDING_SAME_CONVERSATION_PRO_CLOSED
+math_closure=CLOSED
+closure_authority_review=ONLGR-PRO-MATH-CLOSURE-AUTHORITY-REREVIEW-20260812-02
+closure_authority_decision=CLOSED
+closure_science_bearing_defect_count=0
+closure_em_intake=ACCEPTED
 local_closure=historical_advisory only
 map_revision=ONLGR-B1-RESULT-BLIND-INTAKE-ACTIVATION-MAP-20260812-02
 result_inspected=false

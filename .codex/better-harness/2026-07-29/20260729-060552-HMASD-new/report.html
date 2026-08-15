@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="better-harness codex-html">
+  <title>Harness Insights · HMASD-new</title>
+  <style>
+    :root { color-scheme: dark; --bg:#111315; --panel:#1a1d20; --panel-2:#21252a; --line:#31363d; --text:#f5f7fa; --muted:#9aa3ad; --blue:#6cb8ff; --blue-2:#1b6ca8; --orange:#ff9a5a; --green:#53d69b; --red:#ff6b6b; }
+    * { box-sizing:border-box; }
+    html { background:var(--bg); scroll-behavior:smooth; }
+    body { margin:0; min-width:320px; font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--text); background:radial-gradient(circle at 12% -10%,#22364a 0,transparent 34rem),var(--bg); line-height:1.55; }
+    .sr-only { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.22; background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px); background-size:28px 28px; }
+    main { position:relative; width:min(1180px,calc(100% - 40px)); margin:0 auto; padding:52px 0 88px; }
+    h1,h2,h3,p { margin-top:0; }
+    .eyebrow,.label { color:var(--blue); font-size:12px; font-weight:700; letter-spacing:.11em; text-transform:uppercase; }
+    .hero { display:grid; grid-template-columns:minmax(0,1fr) 190px; gap:36px; align-items:end; min-height:270px; padding:42px; border:1px solid var(--line); border-radius:28px; background:linear-gradient(135deg,rgba(36,43,51,.96),rgba(21,24,27,.94)); box-shadow:0 28px 70px rgba(0,0,0,.28); }
+    .hero h1 { margin:12px 0 10px; font-size:clamp(42px,7vw,82px); line-height:.96; letter-spacing:-.055em; }
+    .hero p { max-width:760px; margin-bottom:22px; color:#c9d0d8; font-size:18px; }
+    .hero-tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .score-orbit { width:174px; aspect-ratio:1; display:grid; place-content:center; text-align:center; border:14px solid #343a41; border-top-color:var(--blue); border-right-color:var(--blue-2); border-radius:50%; background:#1a2026; box-shadow:inset 0 0 0 1px var(--line); }
+    .score-orbit strong { font-size:44px; line-height:1; }
+    .score-orbit span { width:110px; margin-top:7px; color:var(--muted); font-size:12px; }
+    .pill { display:inline-flex; align-items:center; min-height:26px; padding:3px 10px; border-radius:999px; color:#d4dae0; background:#30353b; font-size:12px; font-weight:700; }
+    .pill.accent { color:#c9e8ff; background:#164e75; }.pill.good { color:#c9f9e5; background:#165c43; }.pill.warning { color:#ffe1c8; background:#754322; }.pill.danger { color:#ffd4d4; background:#762e31; }.pill.muted,.pill.neutral { color:#c8cdd3; background:#34383d; }
+    .metrics { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:18px 0 54px; }
+    .metric { min-height:126px; padding:22px 24px; border:1px solid var(--line); border-radius:20px; background:rgba(30,34,38,.9); }
+    .metric span,.metric small { display:block; color:var(--muted); }.metric strong { display:block; margin:5px 0 2px; font-size:34px; line-height:1.1; }.metric small { font-size:12px; }
+    .section { margin-top:64px; scroll-margin-top:24px; }.section-heading { display:flex; justify-content:space-between; gap:30px; align-items:end; margin-bottom:20px; }.section-heading h2 { margin:5px 0 0; font-size:30px; letter-spacing:-.025em; }.section-heading > p { max-width:420px; margin:0; color:var(--muted); text-align:right; font-size:14px; }
+    .dimension-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }.dimension-card { min-height:230px; padding:19px; border:1px solid var(--line); border-radius:19px; background:linear-gradient(180deg,var(--panel-2),var(--panel)); }.dimension-top { display:flex; min-height:52px; justify-content:space-between; gap:8px; align-items:flex-start; font-weight:700; }.score-line { display:flex; align-items:baseline; gap:4px; margin-top:14px; }.score-line strong { font-size:34px; }.score-line span { color:var(--muted); font-size:12px; }.track { height:8px; margin:8px 0 16px; overflow:hidden; border-radius:999px; background:#30353a; }.track i { display:block; height:100%; border-radius:inherit; background:linear-gradient(90deg,var(--blue-2),var(--blue)); }.dimension-card p { margin:0; color:var(--muted); font-size:13px; }
+    .activity-layout { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(230px,.7fr); gap:14px; }.activity-panel,.subpanel,.finding,.custom-grid article,.evidence-grid,.evidence-note { border:1px solid var(--line); border-radius:19px; background:var(--panel); }.activity-panel { padding:22px; overflow:hidden; }.heatmap { display:grid; grid-template-rows:repeat(7,13px); grid-auto-flow:column; grid-auto-columns:13px; gap:4px; min-height:115px; overflow-x:auto; padding-bottom:8px; }.heat-cell { border-radius:3px; background:#2b3035; }.heat-cell.l1{background:#174d70}.heat-cell.l2{background:#206f9e}.heat-cell.l3{background:#319bd1}.heat-cell.l4{background:#70c9ff}.heat-legend { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }.stacked-metrics { display:grid; gap:14px; }.stacked-metrics .metric { min-height:0; }
+    .two-column { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }.subpanel { padding:22px; }.subpanel h3 { font-size:15px; }.usage-list { display:grid; gap:12px; }.usage-row { display:grid; grid-template-columns:minmax(100px,.75fr) 1fr 52px; gap:12px; align-items:center; font-size:12px; }.usage-row > span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }.usage-row i { height:7px; overflow:hidden; border-radius:999px; background:#30353a; }.usage-row b { display:block; height:100%; background:linear-gradient(90deg,var(--blue-2),var(--blue)); }.usage-row strong { text-align:right; }
+    .finding-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }.finding-card { min-width:0; min-height:220px; display:flex; flex-direction:column; padding:18px; border:1px solid var(--line); border-radius:19px; background:linear-gradient(180deg,#1c2329,var(--panel)); }.finding-card-main { display:grid; gap:10px; }.finding-meta { display:flex; flex-wrap:wrap; gap:7px; }.finding-card h3 { min-height:2.8em; margin:0; display:-webkit-box; overflow:hidden; font-size:17px; line-height:1.4; -webkit-box-orient:vertical; -webkit-line-clamp:2; }.finding-preview { margin:0; color:#c7ced6; display:-webkit-box; overflow:hidden; font-size:13px; line-height:1.55; -webkit-box-orient:vertical; -webkit-line-clamp:2; }.finding-actions,.dialog-actions { display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; margin-top:auto; padding-top:16px; }.action-button { min-height:38px; padding:8px 13px; border:1px solid transparent; border-radius:10px; color:var(--text); background:#30363d; font:inherit; font-size:13px; font-weight:700; cursor:pointer; }.action-button:hover { filter:brightness(1.12); }.action-button:focus-visible { outline:2px solid var(--blue); outline-offset:2px; }.action-button.secondary { color:#cceaff; border-color:#286d9b; background:#164e75; }.action-button.ghost { color:#d4dae0; border-color:var(--line); background:transparent; }.finding-dialog,.manual-copy-dialog { width:min(880px,calc(100vw - 32px)); max-height:calc(100vh - 32px); overflow:auto; padding:24px; border:1px solid var(--line); border-radius:20px; color:var(--text); background:var(--panel); box-shadow:0 30px 90px rgba(0,0,0,.55); }.finding-dialog::backdrop,.manual-copy-dialog::backdrop { background:rgba(4,8,12,.72); }.dialog-heading { display:flex; justify-content:space-between; gap:18px; align-items:flex-start; }.dialog-heading h3 { margin:6px 0 0; font-size:24px; }.dialog-section { margin-top:18px; }.dialog-section p { margin:7px 0 0; color:#d1d7de; }.dialog-section ol,.dialog-section ul { margin:8px 0 0; padding-left:22px; color:#d1d7de; }.manual-copy-dialog textarea { width:100%; min-height:260px; margin-top:14px; padding:14px; resize:vertical; border:1px solid var(--line); border-radius:12px; color:var(--text); background:#11161b; font:13px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace; }.no-js .finding-actions,.no-js .manual-copy-dialog { display:none!important; }.no-js .finding-dialog:not([open]) { display:block; position:static; width:auto; max-height:none; margin-top:16px; box-shadow:none; }
+    .suggestion-block { margin-top:28px; padding-top:24px; border-top:1px solid var(--line); }.suggestion-heading { display:flex; justify-content:space-between; gap:20px; align-items:end; margin-bottom:14px; }.suggestion-heading h3 { margin:4px 0 0; font-size:20px; }.suggestion-heading p { margin:0; color:var(--muted); font-size:12px; }.suggestion-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; }.suggestion { padding:18px; border:1px solid var(--line); border-radius:17px; background:linear-gradient(180deg,#1b252d,var(--panel)); }.suggestion-top { display:flex; justify-content:space-between; gap:8px; }.suggestion h3 { margin:13px 0 7px; font-size:16px; }.suggestion > p { color:#c7ced6; font-size:13px; }.suggestion dl { display:grid; gap:9px; margin:14px 0 0; }.suggestion dl div { display:grid; gap:2px; }.suggestion dt { color:var(--muted); font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }.suggestion dd { margin:0; color:#d7dde4; font-size:12px; }
+    .custom-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; }.custom-grid article { display:flex; gap:14px; align-items:center; padding:18px; }.custom-grid h3 { margin:0; font-size:15px; }.custom-grid p { margin:3px 0 0; color:var(--muted); font-size:12px; }.custom-mark { display:grid; flex:0 0 38px; aspect-ratio:1; place-content:center; border-radius:12px; color:#d9efff; background:#164e75; font-weight:800; }
+    .evidence-grid { display:grid; grid-template-columns:repeat(3,1fr); overflow:hidden; }.evidence-grid div { padding:20px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); }.evidence-grid span,.evidence-grid strong { display:block; }.evidence-grid span { color:var(--muted); font-size:12px; }.evidence-grid strong { margin-top:4px; }.evidence-note { margin-top:14px; padding:20px; }.method-note,.empty { color:var(--muted); }.method-note { max-width:800px; margin:18px 0 0; font-size:13px; }
+    footer { margin-top:64px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+    @media (max-width:1000px) { .finding-list{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    @media (max-width:900px) { .metrics,.dimension-grid{grid-template-columns:repeat(2,1fr)}.activity-layout,.two-column{grid-template-columns:1fr}.evidence-grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:680px) { .finding-list{grid-template-columns:1fr}.finding-card{min-height:0} }
+    @media (max-width:620px) { main{width:min(100% - 24px,1180px);padding-top:18px}.hero{grid-template-columns:1fr;min-height:0;padding:25px;border-radius:22px}.hero h1{font-size:44px}.hero p{font-size:15px}.score-orbit{width:126px}.score-orbit strong{font-size:34px}.metrics{grid-template-columns:1fr;margin-bottom:42px}.metric{min-height:0}.section{margin-top:46px}.section-heading,.suggestion-heading{display:block}.section-heading > p,.suggestion-heading > p{text-align:left;margin-top:8px}.dimension-grid{grid-template-columns:1fr}.dimension-card{min-height:0}.evidence-grid{grid-template-columns:1fr}.usage-row{grid-template-columns:minmax(92px,.7fr) 1fr 44px}.finding-dialog{padding:18px}.dialog-heading{display:grid} }
+    @media print { :root{color-scheme:light;--bg:#fff;--panel:#fff;--panel-2:#f6f8fa;--line:#d8dee4;--text:#111;--muted:#59636e}body{background:#fff}body::before{display:none}.hero{box-shadow:none}.section{break-inside:avoid}.finding-list{display:block}.finding-card{margin-bottom:16px;break-inside:avoid}.finding-actions,.dialog-actions,.manual-copy-dialog{display:none!important}.finding-dialog:not([open]){display:block!important;position:static;width:auto;max-height:none;margin-top:16px;box-shadow:none} }
+  </style>
+</head>
+<body>
+<div id="copy-status" class="sr-only" role="status" aria-live="polite"></div>
+<main id="harness-report" data-report-mode="codex-html">
+<header class="hero" data-section="overview">
+    <div class="hero-copy">
+      <span class="eyebrow">Harness Insights · Codex HTML</span>
+      <h1>HMASD-new</h1>
+      <p>HMASD has strong authority boundaries and focused test assets, but the active CPU route, setup guidance, final-change validation, formal approval, and learning evidence are not yet connected into one observable delivery loop.</p>
+      <div class="hero-tags"><span class="pill accent">agent-work-loop-v4</span><span class="pill muted">Evidence-bound</span></div>
+    </div>
+    <div class="score-orbit"><strong>5</strong><span>reviewed dimensions</span></div>
+  </header>
+  <div class="metrics">
+    <div class="metric">
+    <span>Loop Effectiveness</span>
+    <strong>50 / 100</strong>
+    <small>Changes after later task outcomes</small>
+  </div>
+    <div class="metric">
+    <span>Asset Health / Repair Progress</span>
+    <strong>0 / 100</strong>
+    <small>0 verified · 0 partial · 6 pending</small>
+  </div>
+    <div class="metric">
+    <span>Sessions analyzed</span>
+    <strong>0 / 0</strong>
+    
+  </div>
+    <div class="metric">
+    <span>Findings</span>
+    <strong>6</strong>
+    <small>1 High · 4 Medium</small>
+  </div>
+  </div>
+  <section class="section" data-section="fluency" aria-labelledby="section-fluency">
+    <div class="section-heading">
+      <div><span class="eyebrow">01 · Readiness</span><h2 id="section-fluency">Five-dimension fluency</h2></div>
+      <p>Scores and states come from the reviewed source.</p>
+    </div>
+    <div class="dimension-grid">
+    <article class="dimension-card" data-dimension-id="task-understanding">
+        <div class="dimension-top"><span>Task Understanding</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>67</strong><span>/ 100</span></div>
+        <div class="track" aria-label="Task Understanding 67 of 100"><i style="width:67%"></i></div>
+        <p>Role and authority routing is explicit, while top-level navigation does not expose the active CPU implementation and focused check chain.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="controlled-execution">
+        <div class="dimension-top"><span>Controlled Execution</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>48</strong><span>/ 100</span></div>
+        <div class="track" aria-label="Controlled Execution 48 of 100"><i style="width:48%"></i></div>
+        <p>The CPU runtime and isolation policy are declared, but current setup guidance is ambiguous and execution was not exercised in this review.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="change-validation">
+        <div class="dimension-top"><span>Change Validation</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>54</strong><span>/ 100</span></div>
+        <div class="track" aria-label="Change Validation 54 of 100"><i style="width:54%"></i></div>
+        <p>Focused behavioral tests exist, but affected-change routing and reviewed final-state relevance are unresolved.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="reliable-delivery">
+        <div class="dimension-top"><span>Reliable Delivery</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>40</strong><span>/ 100</span></div>
+        <div class="track" aria-label="Reliable Delivery 40 of 100"><i style="width:40%"></i></div>
+        <p>No bounded delivery decision was observed, and the formal execution boundary can be satisfied with a repository-known token.</p>
+      </article>
+<article class="dimension-card" data-dimension-id="learning-capture">
+        <div class="dimension-top"><span>Learning Capture</span><span class="pill muted">Reviewed</span></div>
+        <div class="score-line"><strong>42</strong><span>/ 100</span></div>
+        <div class="track" aria-label="Learning Capture 42 of 100"><i style="width:42%"></i></div>
+        <p>The bounded review cannot distinguish a repeated workflow from an adequate clean window, and no later comparable outcome exists.</p>
+      </article>
+  </div>
+  </section>
+  
+  <section class="section" data-section="findings" aria-labelledby="section-findings">
+    <div class="section-heading">
+      <div><span class="eyebrow">03 · Action</span><h2 id="section-findings">Findings and recommendations</h2></div>
+      <p>6 findings · 0 suggestions</p>
+    </div>
+    <div class="finding-list"><article class="finding-card" data-finding-id="formal-approval-source-known">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill danger">High</span>
+          <span class="pill neutral">Reliable Delivery</span>
+        </div>
+        <h3>Formal execution accepts a repository-known approval token</h3>
+        <p class="finding-preview">Project policy reserves formal compute to the user, but the G17 runner accepts a constant stored in repository source. Possessing the checkout can therefore satisfy the executable check without a distinct live approval decision; this review did not execute a formal run.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="formal-approval-source-known" aria-label="Copy AI Fix: Formal execution accepts a repository-known approval token">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-1" aria-label="View details: Formal execution accepts a repository-known approval token">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-1" data-finding-dialog-id="formal-approval-source-known" aria-labelledby="finding-dialog-1-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-1-title">Formal execution accepts a repository-known approval token</h3></div>
+          <span class="pill danger">High</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>Project policy reserves formal compute to the user, but the G17 runner accepts a constant stored in repository source. Possessing the checkout can therefore satisfy the executable check without a distinct live approval decision; this review did not execute a formal run.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Make the formal launch boundary require a distinct user decision and prove rejection occurs before any formal side effect.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Extend `tests/ha_ctse_process_continuous_service_roster_proxy_g17_test.py` with missing, repository-known, and explicitly authorized cases</li><li>Confirm missing or source-known approval fails before formal side effects</li><li>Confirm the authorized path records the decision without storing a reusable secret</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="formal-approval-source-known" aria-label="Copy AI Fix: Formal execution accepts a repository-known approval token">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-1">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="cpu-cuda-setup-conflict">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill warning">Medium</span>
+          <span class="pill neutral">Controlled Execution</span>
+        </div>
+        <h3>CPU work is routed through CUDA-labelled setup instructions</h3>
+        <p class="finding-preview">The project router names the CPU runtime and the inspected G17 runner hard-selects CPU and deterministic execution, while the README directs installation through a dependency lock it labels for CUDA. The applicable setup route for current CPU work is therefore ambiguous.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="cpu-cuda-setup-conflict" aria-label="Copy AI Fix: CPU work is routed through CUDA-labelled setup instructions">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-2" aria-label="View details: CPU work is routed through CUDA-labelled setup instructions">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-2" data-finding-dialog-id="cpu-cuda-setup-conflict" aria-labelledby="finding-dialog-2-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-2-title">CPU work is routed through CUDA-labelled setup instructions</h3></div>
+          <span class="pill warning">Medium</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>The project router names the CPU runtime and the inspected G17 runner hard-selects CPU and deterministic execution, while the README directs installation through a dependency lock it labels for CUDA. The applicable setup route for current CPU work is therefore ambiguous.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Give CPU tasks one unambiguous setup path while preserving any separately supported CUDA path.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Confirm the documented project interpreter can open the G17 runner help path</li><li>Confirm every referenced dependency file exists and its CPU or CUDA purpose is explicit</li><li>Confirm the README no longer presents the CUDA-labelled route as the default for CPU work</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="cpu-cuda-setup-conflict" aria-label="Copy AI Fix: CPU work is routed through CUDA-labelled setup instructions">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-2">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="g17-formal-route-navigation">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill warning">Medium</span>
+          <span class="pill neutral">Task Understanding</span>
+        </div>
+        <h3>Top-level navigation points away from the active CPU runner</h3>
+        <p class="finding-preview">The README routes agents toward `main.py` and the older `hmasd/` layout, while the inspected active chain is the `ha_ctse_process` policy, G17 runner, and focused test. The root router provides authority boundaries but does not close this implementation-to-check navigation gap; an unopened development Skill may provide partial additional routing.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="g17-formal-route-navigation" aria-label="Copy AI Fix: Top-level navigation points away from the active CPU runner">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-3" aria-label="View details: Top-level navigation points away from the active CPU runner">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-3" data-finding-dialog-id="g17-formal-route-navigation" aria-labelledby="finding-dialog-3-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-3-title">Top-level navigation points away from the active CPU runner</h3></div>
+          <span class="pill warning">Medium</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>The README routes agents toward `main.py` and the older `hmasd/` layout, while the inspected active chain is the `ha_ctse_process` policy, G17 runner, and focused test. The root router provides authority boundaries but does not close this implementation-to-check navigation gap; an unopened development Skill may provide partial additional routing.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Let an agent reach the active CPU implementation and its verifier from the top-level project route.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Resolve every new relative link from the repository root</li><li>Confirm the route names when to open the policy, runner, and focused test</li><li>Confirm legacy `main.py` guidance is labelled by its actual scope rather than presented as the current default</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="g17-formal-route-navigation" aria-label="Copy AI Fix: Top-level navigation points away from the active CPU runner">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-3">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="g17-affected-check-route">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill warning">Medium</span>
+          <span class="pill neutral">Change Validation</span>
+        </div>
+        <h3>G17 changes have no documented focused-check route</h3>
+        <p class="finding-preview">A behavior-rich focused test covers masking, replay, return calculation, branch precedence, formal rejection, and artifact tampering, but no opened instruction maps changes in the G17 policy or runner to that check. Session evidence also recorded check activity without reviewed final-change relevance, so the current harness cannot demonstrate affected-check selection.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="g17-affected-check-route" aria-label="Copy AI Fix: G17 changes have no documented focused-check route">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-4" aria-label="View details: G17 changes have no documented focused-check route">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-4" data-finding-dialog-id="g17-affected-check-route" aria-labelledby="finding-dialog-4-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-4-title">G17 changes have no documented focused-check route</h3></div>
+          <span class="pill warning">Medium</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>A behavior-rich focused test covers masking, replay, return calculation, branch precedence, formal rejection, and artifact tampering, but no opened instruction maps changes in the G17 policy or runner to that check. Session evidence also recorded check activity without reviewed final-change relevance, so the current harness cannot demonstrate affected-check selection.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Connect G17 edits to the smallest behavior-relevant verifier and retain its result.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Run the focused test through the documented project interpreter</li><li>Confirm the route identifies the policy and runner as triggers</li><li>Confirm failure output names the focused test and preserves the existing proof-sized boundary</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="g17-affected-check-route" aria-label="Copy AI Fix: G17 changes have no documented focused-check route">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-4">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="final-change-check-relevance">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill warning">Medium</span>
+          <span class="pill neutral">Change Validation</span>
+        </div>
+        <h3>Recorded checks do not establish validation of the final change</h3>
+        <p class="finding-preview">Across 14 Codex sessions, 113 Task Episodes contained checks, yet the facts packet recorded zero reviewed checks linked to final changes. All three emitted checked Episodes ended with relevance unresolved. This may reflect missing evidence capture rather than skipped verification, but it prevents the project from making revision-bound validation or acceptance claims.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="final-change-check-relevance" aria-label="Copy AI Fix: Recorded checks do not establish validation of the final change">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-5" aria-label="View details: Recorded checks do not establish validation of the final change">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-5" data-finding-dialog-id="final-change-check-relevance" aria-labelledby="finding-dialog-5-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-5-title">Recorded checks do not establish validation of the final change</h3></div>
+          <span class="pill warning">Medium</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>Across 14 Codex sessions, 113 Task Episodes contained checks, yet the facts packet recorded zero reviewed checks linked to final changes. All three emitted checked Episodes ended with relevance unresolved. This may reflect missing evidence capture rather than skipped verification, but it prevents the project from making revision-bound validation or acceptance claims.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Make completion evidence distinguish check activity from reviewed validation of the final change.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Exercise the existing readiness route with one changed-task fixture</li><li>Confirm an older or unrelated passing check cannot close the task</li><li>Confirm the final receipt binds the last material change to the reviewed check and decision</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="final-change-check-relevance" aria-label="Copy AI Fix: Recorded checks do not establish validation of the final change">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-5">Close</button>
+        </div>
+      </dialog>
+    </article>
+<article class="finding-card" data-finding-id="workflow-recurrence-evidence-gap">
+      <div class="finding-card-main">
+        <div class="finding-meta">
+          <span class="pill neutral">Low</span>
+          <span class="pill neutral">Learning Capture</span>
+        </div>
+        <h3>The session portfolio cannot decide whether workflows repeat</h3>
+        <p class="finding-preview">The 30-day Codex scan selected all 14 eligible sessions, but the emitted facts omitted the request-root portfolio and candidate links, budgeted out 194 candidate Episodes and 143 checks, and reported portfolio divergence. The review can neither establish a repeated procedure nor declare an adequate clean no-candidate window.</p>
+      </div>
+      <div class="finding-actions">
+        <button type="button" class="action-button secondary" data-copy-finding="workflow-recurrence-evidence-gap" aria-label="Copy AI Fix: The session portfolio cannot decide whether workflows repeat">Copy AI Fix</button>
+        <button type="button" class="action-button ghost" data-view-finding-dialog="finding-dialog-6" aria-label="View details: The session portfolio cannot decide whether workflows repeat">View details</button>
+      </div>
+      <dialog class="finding-dialog" id="finding-dialog-6" data-finding-dialog-id="workflow-recurrence-evidence-gap" aria-labelledby="finding-dialog-6-title">
+        <div class="dialog-heading">
+          <div><span class="label">Finding details</span><h3 id="finding-dialog-6-title">The session portfolio cannot decide whether workflows repeat</h3></div>
+          <span class="pill neutral">Low</span>
+        </div>
+        <div class="dialog-section"><span class="label">Cause</span><p>The 30-day Codex scan selected all 14 eligible sessions, but the emitted facts omitted the request-root portfolio and candidate links, budgeted out 194 candidate Episodes and 143 checks, and reported portfolio divergence. The review can neither establish a repeated procedure nor declare an adequate clean no-candidate window.</p></div>
+        <div class="dialog-section"><span class="label">Expected Output</span><ol><li>Provide enough privacy-safe request-root evidence to decide recurrence without exposing raw sessions.</li></ol></div>
+        <div class="dialog-section"><span class="label">Acceptance Checks</span><ul><li>Regenerate a normal Codex facts envelope for this workspace</li><li>Confirm the envelope reports request-root coverage and links retained clusters to bounded candidate evidence</li><li>Confirm the reviewer can return either a supported repeated candidate or an explicit adequate clean-window decision</li></ul></div>
+        <div class="dialog-actions">
+          <button type="button" class="action-button secondary" data-copy-finding="workflow-recurrence-evidence-gap" aria-label="Copy AI Fix: The session portfolio cannot decide whether workflows repeat">Copy AI Fix</button>
+          <button type="button" class="action-button ghost" data-close-finding-dialog="finding-dialog-6">Close</button>
+        </div>
+      </dialog>
+    </article></div>
+  </section>
+  <section class="section" data-section="customize" aria-labelledby="section-customize">
+    <div class="section-heading">
+      <div><span class="eyebrow">04 · Capability</span><h2 id="section-customize">Agent Customize</h2></div>
+      <p>Inspected project and authorized host surfaces.</p>
+    </div>
+    <div class="custom-grid"><article><span class="custom-mark">R</span><div><h3>Rules</h3><p>Project · 1</p></div></article><article><span class="custom-mark">S</span><div><h3>Skills</h3><p>Project · 6</p></div></article><article><span class="custom-mark">H</span><div><h3>Hooks</h3><p>Project · 3</p></div></article></div>
+  </section>
+  <section class="section" data-section="methodology" aria-labelledby="section-methodology">
+    <div class="section-heading">
+      <div><span class="eyebrow">05 · Boundary</span><h2 id="section-methodology">Evidence and methodology</h2></div>
+      <p>Reader-safe evidence only.</p>
+    </div>
+    <div class="evidence-grid"><div><span>Evidence mode</span><strong>—</strong></div><div><span>Task episodes</span><strong>0</strong></div><div><span>Edited episodes</span><strong>0</strong></div><div><span>Sampling</span><strong>0 / 0</strong></div><div><span>Confidence</span><strong>—</strong></div><div><span>Learning state</span><strong>—</strong></div></div>
+    
+    <p class="method-note">Activity totals describe volume, not quality or savings. Fluency conclusions come from the reviewed task sample and remain bounded by the retained evidence.</p>
+  </section>
+<footer>Generated from one reviewed Harness source · self-contained Codex HTML</footer>
+</main>
+<dialog id="manual-copy-dialog" class="manual-copy-dialog" aria-labelledby="manual-copy-title" aria-describedby="manual-copy-description">
+  <div class="dialog-heading">
+    <div>
+      <span class="label">Manual fallback</span>
+      <h3 id="manual-copy-title">Copy the AI Fix prompt</h3>
+    </div>
+  </div>
+  <p id="manual-copy-description">Automatic copy was blocked. The exact prompt is selected below.</p>
+  <textarea id="manual-copy-text" readonly aria-label="AI Fix prompt"></textarea>
+  <div class="dialog-actions">
+    <button type="button" class="action-button ghost" data-close-finding-dialog="manual-copy-dialog">Close</button>
+  </div>
+</dialog>
+<script id="harness-report-data" type="application/json">{"mode":"html","language":"en","dataPath":"C:\\Users\\fires\\OneDrive\\文档\\HMASD-new\\.codex\\better-harness\\2026-07-29\\20260729-060552-HMASD-new\\findings.json","target":{"name":"HMASD-new","path":"C:\\Users\\fires\\OneDrive\\文档\\HMASD-new"},"summary":{"projectName":"HMASD-new","locale":"en","modelId":"agent-work-loop-v4","reportContractVersion":25,"overview":"HMASD has strong authority boundaries and focused test assets, but the active CPU route, setup guidance, final-change validation, formal approval, and learning evidence are not yet connected into one observable delivery loop.","dimensions":[{"id":"task-understanding","label":"Task Understanding","score":67,"summary":"Role and authority routing is explicit, while top-level navigation does not expose the active CPU implementation and focused check chain.","findingRefs":["cpu-cuda-setup-conflict","g17-formal-route-navigation","g17-affected-check-route"]},{"id":"controlled-execution","label":"Controlled Execution","score":48,"summary":"The CPU runtime and isolation policy are declared, but current setup guidance is ambiguous and execution was not exercised in this review.","findingRefs":["formal-approval-source-known","cpu-cuda-setup-conflict"]},{"id":"change-validation","label":"Change Validation","score":54,"summary":"Focused behavioral tests exist, but affected-change routing and reviewed final-state relevance are unresolved.","findingRefs":["g17-affected-check-route","final-change-check-relevance"]},{"id":"reliable-delivery","label":"Reliable Delivery","score":40,"summary":"No bounded delivery decision was observed, and the formal execution boundary can be satisfied with a repository-known token.","findingRefs":["formal-approval-source-known","final-change-check-relevance"]},{"id":"learning-capture","label":"Learning Capture","score":42,"summary":"The bounded review cannot distinguish a repeated workflow from an adequate clean window, and no later comparable outcome exists.","findingRefs":["workflow-recurrence-evidence-gap"]}],"aiAgentPractice":{"inspectedSurfaces":["Rules","Skills","Hooks"],"coverageRows":[{"surface":"Rules","scopes":["Project"],"count":1,"paths":["AGENTS.md"]},{"surface":"Skills","scopes":["Project"],"count":6,"paths":[".agents/skills/hmasd-agile-research-development/SKILL.md",".agents/skills/hmasd-collaborative-workflow-design/SKILL.md",".agents/skills/hmasd-cross-task-routing/SKILL.md",".agents/skills/hmasd-pm-round-metrics/SKILL.md",".agents/skills/hmasd-review-round/SKILL.md",".agents/skills/hmasd-workflow-change-audit/SKILL.md"]},{"surface":"Hooks","scopes":["Project"],"count":3,"paths":[".codex/hooks.json"]}]},"assignmentSummaries":[]},"findings":[{"id":"formal-approval-source-known","title":"Formal execution accepts a repository-known approval token","severity":"High","reason":"Project policy reserves formal compute to the user, but the G17 runner accepts a constant stored in repository source. Possessing the checkout can therefore satisfy the executable check without a distinct live approval decision; this review did not execute a formal run.","dimensionRefs":["reliable-delivery","controlled-execution"],"aiFixPrompt":"/better-harness fix this issue\n\nChange `scripts/run_continuous_service_roster_proxy_g17.py` so formal execution requires a user-issued approval decision that is not recoverable from repository source. Preserve nonformal execution and the existing user-only authority policy.\n\n## Validation\n\n- Extend `tests/ha_ctse_process_continuous_service_roster_proxy_g17_test.py` with missing, repository-known, and explicitly authorized cases\n- Confirm missing or source-known approval fails before formal side effects\n- Confirm the authorized path records the decision without storing a reusable secret","expectedArtifact":"Guardrail","expectedOutput":["Make the formal launch boundary require a distinct user decision and prove rejection occurs before any formal side effect."]},{"id":"cpu-cuda-setup-conflict","title":"CPU work is routed through CUDA-labelled setup instructions","severity":"Medium","reason":"The project router names the CPU runtime and the inspected G17 runner hard-selects CPU and deterministic execution, while the README directs installation through a dependency lock it labels for CUDA. The applicable setup route for current CPU work is therefore ambiguous.","dimensionRefs":["controlled-execution","task-understanding"],"aiFixPrompt":"/better-harness fix this issue\n\nReconcile the README setup section with the CPU runtime declared by `AGENTS.md` and the G17 runner. Inspect the referenced dependency file before changing the route, preserve any separately supported CUDA workflow, and state which setup applies to current CPU research.\n\n## Validation\n\n- Confirm the documented project interpreter can open the G17 runner help path\n- Confirm every referenced dependency file exists and its CPU or CUDA purpose is explicit\n- Confirm the README no longer presents the CUDA-labelled route as the default for CPU work","expectedArtifact":"Document","expectedOutput":["Give CPU tasks one unambiguous setup path while preserving any separately supported CUDA path."]},{"id":"g17-formal-route-navigation","title":"Top-level navigation points away from the active CPU runner","severity":"Medium","reason":"The README routes agents toward `main.py` and the older `hmasd/` layout, while the inspected active chain is the `ha_ctse_process` policy, G17 runner, and focused test. The root router provides authority boundaries but does not close this implementation-to-check navigation gap; an unopened development Skill may provide partial additional routing.","dimensionRefs":["task-understanding"],"aiFixPrompt":"/better-harness fix this issue\n\nExtend the existing top-level navigation owner so current CPU algorithm work routes from the task boundary to `ha_ctse_process/continuous_roster_policy.py`, `scripts/run_continuous_service_roster_proxy_g17.py`, and its focused test. Keep role procedures in their existing scoped owners.\n\n## Validation\n\n- Resolve every new relative link from the repository root\n- Confirm the route names when to open the policy, runner, and focused test\n- Confirm legacy `main.py` guidance is labelled by its actual scope rather than presented as the current default","expectedArtifact":"Document","expectedOutput":["Let an agent reach the active CPU implementation and its verifier from the top-level project route."]},{"id":"g17-affected-check-route","title":"G17 changes have no documented focused-check route","severity":"Medium","reason":"A behavior-rich focused test covers masking, replay, return calculation, branch precedence, formal rejection, and artifact tampering, but no opened instruction maps changes in the G17 policy or runner to that check. Session evidence also recorded check activity without reviewed final-change relevance, so the current harness cannot demonstrate affected-check selection.","dimensionRefs":["change-validation","task-understanding"],"aiFixPrompt":"/better-harness fix this issue\n\nAdd one affected-check mapping to the existing project route: changes to the G17 policy or runner must invoke `tests/ha_ctse_process_continuous_service_roster_proxy_g17_test.py` with the declared project interpreter, followed by any broader check justified by the change.\n\n## Validation\n\n- Run the focused test through the documented project interpreter\n- Confirm the route identifies the policy and runner as triggers\n- Confirm failure output names the focused test and preserves the existing proof-sized boundary","expectedArtifact":"Rule","expectedOutput":["Connect G17 edits to the smallest behavior-relevant verifier and retain its result."]},{"id":"final-change-check-relevance","title":"Recorded checks do not establish validation of the final change","severity":"Medium","reason":"Across 14 Codex sessions, 113 Task Episodes contained checks, yet the facts packet recorded zero reviewed checks linked to final changes. All three emitted checked Episodes ended with relevance unresolved. This may reflect missing evidence capture rather than skipped verification, but it prevents the project from making revision-bound validation or acceptance claims.","dimensionRefs":["change-validation","reliable-delivery"],"aiFixPrompt":"/better-harness fix this issue\n\nExtend the existing Stop/readiness evidence route so a changed task records the final revision, affected behavior, exact project-owned check, result, and reviewer decision before completion. Keep provider-private session identifiers out of durable output.\n\n## Validation\n\n- Exercise the existing readiness route with one changed-task fixture\n- Confirm an older or unrelated passing check cannot close the task\n- Confirm the final receipt binds the last material change to the reviewed check and decision","expectedArtifact":"Hook","expectedOutput":["Make completion evidence distinguish check activity from reviewed validation of the final change."]},{"id":"workflow-recurrence-evidence-gap","title":"The session portfolio cannot decide whether workflows repeat","severity":"Low","reason":"The 30-day Codex scan selected all 14 eligible sessions, but the emitted facts omitted the request-root portfolio and candidate links, budgeted out 194 candidate Episodes and 143 checks, and reported portfolio divergence. The review can neither establish a repeated procedure nor declare an adequate clean no-candidate window.","dimensionRefs":["learning-capture"],"aiFixPrompt":"/better-harness fix this issue\n\nRepair the Better Harness Session Evidence owner so a normal review emits a bounded request-root portfolio with candidate links sufficient for independent recurrence decisions. Do not widen into raw prompts, private identifiers, or full transcripts.\n\n## Validation\n\n- Regenerate a normal Codex facts envelope for this workspace\n- Confirm the envelope reports request-root coverage and links retained clusters to bounded candidate evidence\n- Confirm the reviewer can return either a supported repeated candidate or an explicit adequate clean-window decision","expectedArtifact":"Report","expectedOutput":["Provide enough privacy-safe request-root evidence to decide recurrence without exposing raw sessions."]}]}</script>
+<script id="harness-report-interactions">(function installHtmlReportInteractions({
+  document,
+  navigator,
+  labels,
+  schedule = (callback, delay) => globalThis.setTimeout(callback, delay),
+}) {
+  document.documentElement.classList.remove("no-js");
+
+  const reportDataElement = document.getElementById("harness-report-data");
+  const reportData = reportDataElement
+    ? JSON.parse(reportDataElement.textContent || "{}")
+    : {};
+  const findings = new Map(
+    (Array.isArray(reportData.findings) ? reportData.findings : [])
+      .map((finding) => [String(finding?.id ?? ""), finding]),
+  );
+  const status = document.getElementById("copy-status");
+  const manualDialog = document.getElementById("manual-copy-dialog");
+  const manualText = document.getElementById("manual-copy-text");
+  const dialogTriggers = new Map();
+
+  function report(message, state) {
+    if (!status) return;
+    status.textContent = message;
+    status.dataset.state = state;
+  }
+
+  function legacyCopy(prompt) {
+    const textarea = document.createElement("textarea");
+    textarea.value = prompt;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.append(textarea);
+    try {
+      textarea.select();
+      return document.execCommand("copy") === true;
+    } catch {
+      return false;
+    } finally {
+      textarea.remove();
+    }
+  }
+
+  function copied(trigger) {
+    report(labels.copySuccess, "success");
+    if (trigger) {
+      const originalLabel = trigger.textContent;
+      trigger.textContent = labels.copied;
+      schedule(() => {
+        trigger.textContent = originalLabel || labels.copy;
+      }, 1800);
+    }
+    return true;
+  }
+
+  async function copyFinding(findingId, trigger) {
+    const prompt = findings.get(String(findingId))?.aiFixPrompt;
+    if (typeof prompt !== "string" || prompt.length === 0) {
+      report(labels.missingPrompt, "error");
+      return false;
+    }
+
+    try {
+      if (!navigator?.clipboard?.writeText) throw new Error("Clipboard API unavailable");
+      await navigator.clipboard.writeText(prompt);
+      return copied(trigger);
+    } catch {
+      if (legacyCopy(prompt)) return copied(trigger);
+    }
+
+    if (manualDialog && typeof manualDialog.showModal === "function") {
+      dialogTriggers.set(manualDialog.id, trigger);
+      if (!manualDialog.open) manualDialog.showModal();
+    }
+    if (manualText) {
+      manualText.value = prompt;
+      manualText.focus();
+      manualText.select();
+    }
+    report(labels.manualCopy, "error");
+    return false;
+  }
+
+  function openDialog(dialogId, trigger) {
+    const dialog = document.getElementById(dialogId);
+    if (!dialog || typeof dialog.showModal !== "function") return false;
+    dialogTriggers.set(dialogId, trigger);
+    dialog.showModal();
+    return true;
+  }
+
+  function closeDialog(dialogId) {
+    const dialog = document.getElementById(dialogId);
+    if (!dialog || !dialog.open || typeof dialog.close !== "function") return false;
+    dialog.close();
+    return true;
+  }
+
+  for (const trigger of document.querySelectorAll("[data-copy-finding]")) {
+    trigger.addEventListener("click", () => copyFinding(trigger.dataset.copyFinding, trigger));
+  }
+  for (const trigger of document.querySelectorAll("[data-view-finding-dialog]")) {
+    trigger.addEventListener("click", () => openDialog(trigger.dataset.viewFindingDialog, trigger));
+  }
+  for (const trigger of document.querySelectorAll("[data-close-finding-dialog]")) {
+    trigger.addEventListener("click", () => closeDialog(trigger.dataset.closeFindingDialog));
+  }
+  const interactiveDialogs = [
+    ...document.querySelectorAll("dialog[data-finding-dialog-id]"),
+    manualDialog,
+  ].filter(Boolean);
+  for (const dialog of interactiveDialogs) {
+    dialog.addEventListener("close", () => {
+      const trigger = dialogTriggers.get(dialog.id);
+      dialogTriggers.delete(dialog.id);
+      trigger?.focus();
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target !== dialog) return;
+      const rect = dialog.getBoundingClientRect();
+      const outside = event.clientX < rect.left
+        || event.clientX > rect.right
+        || event.clientY < rect.top
+        || event.clientY > rect.bottom;
+      if (outside) closeDialog(dialog.id);
+    });
+  }
+
+  return { copyFinding, openDialog, closeDialog };
+})({document,navigator,labels:{"copy":"Copy AI Fix","copied":"Copied","copySuccess":"Copied. Paste into the Codex input.","manualCopy":"Automatic copy was blocked. Copy the selected prompt manually.","missingPrompt":"No AI Fix prompt is available for this finding."}});</script>
+</body>
+</html>

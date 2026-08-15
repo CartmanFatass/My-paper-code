@@ -222,6 +222,14 @@ satisfies that audit, transfers Root authority, or pauses a separate
 scientific/technical stage. Translate it into the observed object, unknown,
 and smallest semantic owner/action instead.
 
+Before Root acts on any child restriction, record four layers: exact observed
+object; exact action fenced; direction work that remains authorized; and the
+Root decision class. No-resend applies only to the exact provider-operation
+identity, never automatically to a new distinct EM-authored closure turn,
+unchanged-science CM work, or portfolio investment. Root may write a broader
+pause only from explicit user, lease, EM scientific-boundary, or portfolio
+authority.
+
 For every CM, Operator, recovery, or transport return, Root also states the
 observed fact, exact object, remaining unknown, scientific implication, and
 smallest semantic owner/action before any routing or portfolio relay. The

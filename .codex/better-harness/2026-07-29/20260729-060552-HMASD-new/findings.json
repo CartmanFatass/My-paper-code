@@ -1,0 +1,196 @@
+{
+  "summary": {
+    "projectName": "HMASD-new",
+    "locale": "en",
+    "modelId": "agent-work-loop-v4",
+    "reportContractVersion": 25,
+    "overview": "HMASD has strong authority boundaries and focused test assets, but the active CPU route, setup guidance, final-change validation, formal approval, and learning evidence are not yet connected into one observable delivery loop.",
+    "dimensions": [
+      {
+        "id": "task-understanding",
+        "label": "Task Understanding",
+        "score": 67,
+        "summary": "Role and authority routing is explicit, while top-level navigation does not expose the active CPU implementation and focused check chain.",
+        "findingRefs": [
+          "cpu-cuda-setup-conflict",
+          "g17-formal-route-navigation",
+          "g17-affected-check-route"
+        ]
+      },
+      {
+        "id": "controlled-execution",
+        "label": "Controlled Execution",
+        "score": 48,
+        "summary": "The CPU runtime and isolation policy are declared, but current setup guidance is ambiguous and execution was not exercised in this review.",
+        "findingRefs": [
+          "formal-approval-source-known",
+          "cpu-cuda-setup-conflict"
+        ]
+      },
+      {
+        "id": "change-validation",
+        "label": "Change Validation",
+        "score": 54,
+        "summary": "Focused behavioral tests exist, but affected-change routing and reviewed final-state relevance are unresolved.",
+        "findingRefs": [
+          "g17-affected-check-route",
+          "final-change-check-relevance"
+        ]
+      },
+      {
+        "id": "reliable-delivery",
+        "label": "Reliable Delivery",
+        "score": 40,
+        "summary": "No bounded delivery decision was observed, and the formal execution boundary can be satisfied with a repository-known token.",
+        "findingRefs": [
+          "formal-approval-source-known",
+          "final-change-check-relevance"
+        ]
+      },
+      {
+        "id": "learning-capture",
+        "label": "Learning Capture",
+        "score": 42,
+        "summary": "The bounded review cannot distinguish a repeated workflow from an adequate clean window, and no later comparable outcome exists.",
+        "findingRefs": [
+          "workflow-recurrence-evidence-gap"
+        ]
+      }
+    ],
+    "aiAgentPractice": {
+      "inspectedSurfaces": [
+        "Rules",
+        "Skills",
+        "Hooks"
+      ],
+      "coverageRows": [
+        {
+          "surface": "Rules",
+          "scopes": [
+            "Project"
+          ],
+          "count": 1,
+          "paths": [
+            "AGENTS.md"
+          ]
+        },
+        {
+          "surface": "Skills",
+          "scopes": [
+            "Project"
+          ],
+          "count": 6,
+          "paths": [
+            ".agents/skills/hmasd-agile-research-development/SKILL.md",
+            ".agents/skills/hmasd-collaborative-workflow-design/SKILL.md",
+            ".agents/skills/hmasd-cross-task-routing/SKILL.md",
+            ".agents/skills/hmasd-pm-round-metrics/SKILL.md",
+            ".agents/skills/hmasd-review-round/SKILL.md",
+            ".agents/skills/hmasd-workflow-change-audit/SKILL.md"
+          ]
+        },
+        {
+          "surface": "Hooks",
+          "scopes": [
+            "Project"
+          ],
+          "count": 3,
+          "paths": [
+            ".codex/hooks.json"
+          ]
+        }
+      ]
+    },
+    "assignmentSummaries": []
+  },
+  "findings": [
+    {
+      "id": "formal-approval-source-known",
+      "title": "Formal execution accepts a repository-known approval token",
+      "severity": "High",
+      "reason": "Project policy reserves formal compute to the user, but the G17 runner accepts a constant stored in repository source. Possessing the checkout can therefore satisfy the executable check without a distinct live approval decision; this review did not execute a formal run.",
+      "dimensionRefs": [
+        "reliable-delivery",
+        "controlled-execution"
+      ],
+      "aiFixPrompt": "/better-harness fix this issue\n\nChange `scripts/run_continuous_service_roster_proxy_g17.py` so formal execution requires a user-issued approval decision that is not recoverable from repository source. Preserve nonformal execution and the existing user-only authority policy.\n\n## Validation\n\n- Extend `tests/ha_ctse_process_continuous_service_roster_proxy_g17_test.py` with missing, repository-known, and explicitly authorized cases\n- Confirm missing or source-known approval fails before formal side effects\n- Confirm the authorized path records the decision without storing a reusable secret",
+      "expectedArtifact": "Guardrail",
+      "expectedOutput": [
+        "Make the formal launch boundary require a distinct user decision and prove rejection occurs before any formal side effect."
+      ]
+    },
+    {
+      "id": "cpu-cuda-setup-conflict",
+      "title": "CPU work is routed through CUDA-labelled setup instructions",
+      "severity": "Medium",
+      "reason": "The project router names the CPU runtime and the inspected G17 runner hard-selects CPU and deterministic execution, while the README directs installation through a dependency lock it labels for CUDA. The applicable setup route for current CPU work is therefore ambiguous.",
+      "dimensionRefs": [
+        "controlled-execution",
+        "task-understanding"
+      ],
+      "aiFixPrompt": "/better-harness fix this issue\n\nReconcile the README setup section with the CPU runtime declared by `AGENTS.md` and the G17 runner. Inspect the referenced dependency file before changing the route, preserve any separately supported CUDA workflow, and state which setup applies to current CPU research.\n\n## Validation\n\n- Confirm the documented project interpreter can open the G17 runner help path\n- Confirm every referenced dependency file exists and its CPU or CUDA purpose is explicit\n- Confirm the README no longer presents the CUDA-labelled route as the default for CPU work",
+      "expectedArtifact": "Document",
+      "expectedOutput": [
+        "Give CPU tasks one unambiguous setup path while preserving any separately supported CUDA path."
+      ]
+    },
+    {
+      "id": "g17-formal-route-navigation",
+      "title": "Top-level navigation points away from the active CPU runner",
+      "severity": "Medium",
+      "reason": "The README routes agents toward `main.py` and the older `hmasd/` layout, while the inspected active chain is the `ha_ctse_process` policy, G17 runner, and focused test. The root router provides authority boundaries but does not close this implementation-to-check navigation gap; an unopened development Skill may provide partial additional routing.",
+      "dimensionRefs": [
+        "task-understanding"
+      ],
+      "aiFixPrompt": "/better-harness fix this issue\n\nExtend the existing top-level navigation owner so current CPU algorithm work routes from the task boundary to `ha_ctse_process/continuous_roster_policy.py`, `scripts/run_continuous_service_roster_proxy_g17.py`, and its focused test. Keep role procedures in their existing scoped owners.\n\n## Validation\n\n- Resolve every new relative link from the repository root\n- Confirm the route names when to open the policy, runner, and focused test\n- Confirm legacy `main.py` guidance is labelled by its actual scope rather than presented as the current default",
+      "expectedArtifact": "Document",
+      "expectedOutput": [
+        "Let an agent reach the active CPU implementation and its verifier from the top-level project route."
+      ]
+    },
+    {
+      "id": "g17-affected-check-route",
+      "title": "G17 changes have no documented focused-check route",
+      "severity": "Medium",
+      "reason": "A behavior-rich focused test covers masking, replay, return calculation, branch precedence, formal rejection, and artifact tampering, but no opened instruction maps changes in the G17 policy or runner to that check. Session evidence also recorded check activity without reviewed final-change relevance, so the current harness cannot demonstrate affected-check selection.",
+      "dimensionRefs": [
+        "change-validation",
+        "task-understanding"
+      ],
+      "aiFixPrompt": "/better-harness fix this issue\n\nAdd one affected-check mapping to the existing project route: changes to the G17 policy or runner must invoke `tests/ha_ctse_process_continuous_service_roster_proxy_g17_test.py` with the declared project interpreter, followed by any broader check justified by the change.\n\n## Validation\n\n- Run the focused test through the documented project interpreter\n- Confirm the route identifies the policy and runner as triggers\n- Confirm failure output names the focused test and preserves the existing proof-sized boundary",
+      "expectedArtifact": "Rule",
+      "expectedOutput": [
+        "Connect G17 edits to the smallest behavior-relevant verifier and retain its result."
+      ]
+    },
+    {
+      "id": "final-change-check-relevance",
+      "title": "Recorded checks do not establish validation of the final change",
+      "severity": "Medium",
+      "reason": "Across 14 Codex sessions, 113 Task Episodes contained checks, yet the facts packet recorded zero reviewed checks linked to final changes. All three emitted checked Episodes ended with relevance unresolved. This may reflect missing evidence capture rather than skipped verification, but it prevents the project from making revision-bound validation or acceptance claims.",
+      "dimensionRefs": [
+        "change-validation",
+        "reliable-delivery"
+      ],
+      "aiFixPrompt": "/better-harness fix this issue\n\nExtend the existing Stop/readiness evidence route so a changed task records the final revision, affected behavior, exact project-owned check, result, and reviewer decision before completion. Keep provider-private session identifiers out of durable output.\n\n## Validation\n\n- Exercise the existing readiness route with one changed-task fixture\n- Confirm an older or unrelated passing check cannot close the task\n- Confirm the final receipt binds the last material change to the reviewed check and decision",
+      "expectedArtifact": "Hook",
+      "expectedOutput": [
+        "Make completion evidence distinguish check activity from reviewed validation of the final change."
+      ]
+    },
+    {
+      "id": "workflow-recurrence-evidence-gap",
+      "title": "The session portfolio cannot decide whether workflows repeat",
+      "severity": "Low",
+      "reason": "The 30-day Codex scan selected all 14 eligible sessions, but the emitted facts omitted the request-root portfolio and candidate links, budgeted out 194 candidate Episodes and 143 checks, and reported portfolio divergence. The review can neither establish a repeated procedure nor declare an adequate clean no-candidate window.",
+      "dimensionRefs": [
+        "learning-capture"
+      ],
+      "aiFixPrompt": "/better-harness fix this issue\n\nRepair the Better Harness Session Evidence owner so a normal review emits a bounded request-root portfolio with candidate links sufficient for independent recurrence decisions. Do not widen into raw prompts, private identifiers, or full transcripts.\n\n## Validation\n\n- Regenerate a normal Codex facts envelope for this workspace\n- Confirm the envelope reports request-root coverage and links retained clusters to bounded candidate evidence\n- Confirm the reviewer can return either a supported repeated candidate or an explicit adequate clean-window decision",
+      "expectedArtifact": "Report",
+      "expectedOutput": [
+        "Provide enough privacy-safe request-root evidence to decide recurrence without exposing raw sessions."
+      ]
+    }
+  ]
+}

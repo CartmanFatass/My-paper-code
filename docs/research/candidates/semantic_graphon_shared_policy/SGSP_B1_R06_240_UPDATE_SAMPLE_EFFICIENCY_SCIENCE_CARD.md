@@ -7,8 +7,8 @@ base_revision=SGSP-B1-SCIENCE-20260813-05
 owner=EM_semantic_graphon_shared_policy
 object=prospective_single_checkpoint_240_update_variable_N_discriminator
 scientific_activity_started=false
-mathematical_closure=pending_same_conversation_ChatGPT_External_Pro
-construction_authorization=none_before_Pro_CLOSED_and_EM_intake
+mathematical_closure=revision_06_fresh_same_conversation_ChatGPT_External_Pro_CLOSED_owner_accepted
+construction_authorization=root_current_stage_source_build_and_static_conformance_after_CLOSED_EM_intake
 compute_authorization=none_before_Root_lease
 prior_result_reuse=forbidden
 second_surface_authorization=none
@@ -249,4 +249,3 @@ activity, the complete base-plus-delta composite requires literal
 same-conversation ChatGPT External Pro `CLOSED` and EM intake. CM then owns
 technical conformance. Registered materialization and execution additionally
 require a direction-scoped Root compute lease.
-

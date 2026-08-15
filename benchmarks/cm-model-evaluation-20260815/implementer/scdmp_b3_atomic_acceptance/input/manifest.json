@@ -1,0 +1,8 @@
+{
+  "direction": "semigroup_consistent_duration_model_policy",
+  "revision": "SCDMP-B3-SCIENCE-20260814-01",
+  "fresh_result_root": true,
+  "valid_calibration_cells": 24,
+  "trace_rows": 24000,
+  "partial_result_selection_or_exposure": false
+}

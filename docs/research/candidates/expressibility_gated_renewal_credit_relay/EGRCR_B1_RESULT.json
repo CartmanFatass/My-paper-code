@@ -1,0 +1,4989 @@
+{
+  "accounting": {
+    "arm_specific_tuning": false,
+    "cap_respected": true,
+    "collection_block_cap": 512,
+    "cpu_workers": 1,
+    "physical_tick_cap": 1000000,
+    "post_result_enlargement": false,
+    "restarts": 0,
+    "seed_replacement": false,
+    "sweeps": 0,
+    "threshold_repair": false,
+    "two_agent_physical_ticks": 306910
+  },
+  "aggregate": {
+    "native_selectivity_effects_ci95": {
+      "INTACT-BINDING-CUT": {
+        "lower": 0.023330396996041426,
+        "mean": 0.03166788252863214,
+        "n": 12,
+        "sd": 0.013122258897207936,
+        "upper": 0.04000536806122285
+      },
+      "INTACT-GAE": {
+        "lower": 0.0029604225927838696,
+        "mean": 0.004711183652847913,
+        "n": 12,
+        "sd": 0.002755499821559735,
+        "upper": 0.006461944712911956
+      }
+    },
+    "utility_effects_ci95": {
+      "D_IC_N": {
+        "lower": 0.07666365592605734,
+        "mean": 0.1444444444444451,
+        "n": 12,
+        "sd": 0.10667929218208884,
+        "upper": 0.21222523296283285
+      },
+      "D_IC_Y": {
+        "lower": -0.001876539312643225,
+        "mean": 0.0015624999999999667,
+        "n": 12,
+        "sd": 0.0054126587736527485,
+        "upper": 0.005001539312643159
+      },
+      "D_IG_N": {
+        "lower": 0.0,
+        "mean": 0.0,
+        "n": 12,
+        "sd": 0.0,
+        "upper": 0.0
+      },
+      "D_IG_Y": {
+        "lower": 0.0,
+        "mean": 0.0,
+        "n": 12,
+        "sd": 0.0,
+        "upper": 0.0
+      },
+      "Psi_C": {
+        "lower": 0.07575022489224166,
+        "mean": 0.1428819444444451,
+        "n": 12,
+        "sd": 0.10565773106715554,
+        "upper": 0.21001366399664856
+      },
+      "Psi_G": {
+        "lower": 0.0,
+        "mean": 0.0,
+        "n": 12,
+        "sd": 0.0,
+        "upper": 0.0
+      }
+    }
+  },
+  "anomalies": [],
+  "artifact_kind": "egrcr_b1_result",
+  "association_criteria": {
+    "all_passed": false,
+    "fixed_token_and_renewal_counts_equal": true,
+    "mapping_work_clock_optimizer_controls": true,
+    "native_minus_yoked_interactions": false,
+    "native_selectivity_intact_above_both": true,
+    "native_utility_intact_above_both": false,
+    "probability_reaches_actual_requests": true,
+    "yoked_absence": true
+  },
+  "binding_question_exposed": true,
+  "calibration_all_gates_passed": true,
+  "complete_interpretation_surface": true,
+  "question_relevant_activity_began": true,
+  "roots": [
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 5860,
+          "advantage_rms_before_normalization": 1.7707948925118826,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6254893318455892,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.027431654643413458,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.055890195556360836,
+          "realized_bernoulli_kl": 0.07158701550241699,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.005050064746427359,
+          "updates": 1,
+          "value_calls": 5860,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 5860,
+          "advantage_rms_before_normalization": 1.7782238351854405,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6255536752742326,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.027339817174498317,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.055500547122058555,
+          "realized_bernoulli_kl": 0.0715313559077924,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.005425638372645849,
+          "updates": 1,
+          "value_calls": 5860,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 5860,
+          "advantage_rms_before_normalization": 1.7738968009528726,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6259057874394013,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.027505548358508224,
+          "parameter_displacement": 0.4013346571319422,
+          "raw_gradient_norm": 0.05559775783878388,
+          "realized_bernoulli_kl": 0.07116117015725935,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.006822843198203196,
+          "updates": 1,
+          "value_calls": 5860,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 5860,
+      "collection_blocks": 293,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.2166666666666676,
+        "D_IC_Y": -0.008333333333333415,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.225000000000001,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.078125,
+              "suffix_joint": 10,
+              "suffix_solo": 118
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 158,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 81,
+              "positive": 77
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 75,
+              "SOLO": 83
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7135407106764409,
+              "positive": 0.6962193440552722
+            },
+            "dummy_actor_checksum": 3447.19265570874,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.19579166666666678,
+            "packet_success": 1180,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.014073610379699564,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.515625,
+              "suffix_joint": 66,
+              "suffix_solo": 62
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 158,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 81,
+              "positive": 77
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 75,
+              "SOLO": 83
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7135407106764409,
+              "positive": 0.6962193440552722
+            },
+            "dummy_actor_checksum": 3447.19265570874,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.31245833333333367,
+            "packet_success": 1348,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.014073610379699564,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.890625,
+              "suffix_joint": 114,
+              "suffix_solo": 14
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 156,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 78,
+              "positive": 78
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 76,
+              "SOLO": 80
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6954188841946282,
+              "positive": 0.7140182940347838
+            },
+            "dummy_actor_checksum": 3446.3985148767547,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.41245833333333437,
+            "packet_success": 1492,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.0151120204951265,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.484375,
+              "suffix_joint": 62,
+              "suffix_solo": 66
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 156,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 78,
+              "positive": 78
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 76,
+              "SOLO": 80
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6954188841946282,
+              "positive": 0.7140182940347838
+            },
+            "dummy_actor_checksum": 3446.3985148767547,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.30412500000000026,
+            "packet_success": 1336,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.0151120204951265,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.890625,
+              "suffix_joint": 114,
+              "suffix_solo": 14
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 155,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 77,
+              "positive": 78
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 76,
+              "SOLO": 79
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6923538361147743,
+              "positive": 0.7156876371037676
+            },
+            "dummy_actor_checksum": 3442.965502455662,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.41245833333333437,
+            "packet_success": 1492,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.01895871330355703,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.484375,
+              "suffix_joint": 62,
+              "suffix_solo": 66
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 155,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 77,
+              "positive": 78
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 76,
+              "SOLO": 79
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6923538361147743,
+              "positive": 0.7156876371037676
+            },
+            "dummy_actor_checksum": 3442.965502455662,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.30412500000000026,
+            "packet_success": 1336,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.01895871330355703,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 17,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    },
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 4980,
+          "advantage_rms_before_normalization": 1.7787220888141468,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6240946025838375,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.037947337635951726,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.08804544394618231,
+          "realized_bernoulli_kl": 0.07310294772530566,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.008283137629457243,
+          "updates": 1,
+          "value_calls": 4980,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 4980,
+          "advantage_rms_before_normalization": 1.7874217974810753,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6232236442385958,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.037545438579370476,
+          "parameter_displacement": 0.4013346571319422,
+          "raw_gradient_norm": 0.08798521113335923,
+          "realized_bernoulli_kl": 0.0740661280888921,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.004043693751620921,
+          "updates": 1,
+          "value_calls": 4980,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 4980,
+          "advantage_rms_before_normalization": 1.7823553305959146,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6233688565645777,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.037718985195961716,
+          "parameter_displacement": 0.4013346571319422,
+          "raw_gradient_norm": 0.0881076207502617,
+          "realized_bernoulli_kl": 0.07391814299698835,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.005687794209003438,
+          "updates": 1,
+          "value_calls": 4980,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 4980,
+      "collection_blocks": 249,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.2166666666666676,
+        "D_IC_Y": -0.002083333333333437,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.21875000000000103,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.0859375,
+              "suffix_joint": 11,
+              "suffix_solo": 117
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 161,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 81,
+              "positive": 80
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 78,
+              "SOLO": 83
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7229549877096533,
+              "positive": 0.7028188281831863
+            },
+            "dummy_actor_checksum": 3477.0026978542683,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.19943750000000013,
+            "packet_success": 1186,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.01636062961525442,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.4921875,
+              "suffix_joint": 63,
+              "suffix_solo": 65
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 161,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 81,
+              "positive": 80
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 78,
+              "SOLO": 83
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7229549877096533,
+              "positive": 0.7028188281831863
+            },
+            "dummy_actor_checksum": 3477.0026978542683,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.30777083333333366,
+            "packet_success": 1342,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.01636062961525442,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.8984375,
+              "suffix_joint": 115,
+              "suffix_solo": 13
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 162,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 78,
+              "positive": 84
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 81,
+              "SOLO": 81
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7091079511890415,
+              "positive": 0.7189734149749893
+            },
+            "dummy_actor_checksum": 3482.6479519862864,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.4161041666666677,
+            "packet_success": 1498,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.008015689326082764,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.4921875,
+              "suffix_joint": 63,
+              "suffix_solo": 65
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 162,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 78,
+              "positive": 84
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 81,
+              "SOLO": 81
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7091079511890415,
+              "positive": 0.7189734149749893
+            },
+            "dummy_actor_checksum": 3482.6479519862864,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3056875000000002,
+            "packet_success": 1338,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.008015689326082764,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.8984375,
+              "suffix_joint": 115,
+              "suffix_solo": 13
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 163,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 78,
+              "positive": 85
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 82,
+              "SOLO": 81
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7067548045728282,
+              "positive": 0.7206161547846923
+            },
+            "dummy_actor_checksum": 3480.910027052102,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.4161041666666677,
+            "packet_success": 1498,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.011262347047139576,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.4921875,
+              "suffix_joint": 63,
+              "suffix_solo": 65
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 163,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 78,
+              "positive": 85
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 82,
+              "SOLO": 81
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7067548045728282,
+              "positive": 0.7206161547846923
+            },
+            "dummy_actor_checksum": 3480.910027052102,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3056875000000002,
+            "packet_success": 1338,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.011262347047139576,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 31,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    },
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 5060,
+          "advantage_rms_before_normalization": 1.760755613026292,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6387743903347852,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.018534663836153514,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.09744407037083744,
+          "realized_bernoulli_kl": 0.057284527331257405,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.005960683963269676,
+          "updates": 1,
+          "value_calls": 5060,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 5060,
+          "advantage_rms_before_normalization": 1.7694050517412119,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6395389698497499,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.01839072755418079,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.09495031595833539,
+          "realized_bernoulli_kl": 0.05642864620419434,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.00542026866079491,
+          "updates": 1,
+          "value_calls": 5060,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 5060,
+          "advantage_rms_before_normalization": 1.7643678830324314,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6407527284276633,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.018713786076689536,
+          "parameter_displacement": 0.4013346571319422,
+          "raw_gradient_norm": 0.09459526546328048,
+          "realized_bernoulli_kl": 0.055149448708392265,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.007789363577349573,
+          "updates": 1,
+          "value_calls": 5060,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 5060,
+      "collection_blocks": 253,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.21666666666666762,
+        "D_IC_Y": 0.005208333333333259,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.21145833333333436,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.1171875,
+              "suffix_joint": 15,
+              "suffix_solo": 113
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 179,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 91,
+              "positive": 88
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 91,
+              "SOLO": 88
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7210080018600671,
+              "positive": 0.6906104567390956
+            },
+            "dummy_actor_checksum": 3434.5109287613923,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.20568750000000013,
+            "packet_success": 1194,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.02469800541078937,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.4921875,
+              "suffix_joint": 63,
+              "suffix_solo": 65
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 179,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 91,
+              "positive": 88
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 91,
+              "SOLO": 88
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7210080018600671,
+              "positive": 0.6906104567390956
+            },
+            "dummy_actor_checksum": 3434.5109287613923,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.30568750000000033,
+            "packet_success": 1338,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.02469800541078937,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.9296875,
+              "suffix_joint": 119,
+              "suffix_solo": 9
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 181,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 90,
+              "positive": 91
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 94,
+              "SOLO": 87
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.692526865330114,
+              "positive": 0.7202205762085545
+            },
+            "dummy_actor_checksum": 3437.259586260206,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.42235416666666775,
+            "packet_success": 1506,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.02250114008873294,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.5078125,
+              "suffix_joint": 65,
+              "suffix_solo": 63
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 181,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 90,
+              "positive": 91
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 94,
+              "SOLO": 87
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.692526865330114,
+              "positive": 0.7202205762085545
+            },
+            "dummy_actor_checksum": 3437.259586260206,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3108958333333336,
+            "packet_success": 1346,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.02250114008873294,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.9296875,
+              "suffix_joint": 119,
+              "suffix_solo": 9
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 182,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 90,
+              "positive": 92
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 95,
+              "SOLO": 87
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6838378746336352,
+              "positive": 0.7232584820231118
+            },
+            "dummy_actor_checksum": 3423.5011845821914,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.42235416666666775,
+            "packet_success": 1506,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.032029243503949645,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.5078125,
+              "suffix_joint": 65,
+              "suffix_solo": 63
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 182,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 90,
+              "positive": 92
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 95,
+              "SOLO": 87
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6838378746336352,
+              "positive": 0.7232584820231118
+            },
+            "dummy_actor_checksum": 3423.5011845821914,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3108958333333336,
+            "packet_success": 1346,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.032029243503949645,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 47,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    },
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 5260,
+          "advantage_rms_before_normalization": 1.7493534602425818,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6285198976596713,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.04448843239993068,
+          "parameter_displacement": 0.4013346571319422,
+          "raw_gradient_norm": 0.07435047169883348,
+          "realized_bernoulli_kl": 0.06854841291983804,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.024907739559158242,
+          "updates": 1,
+          "value_calls": 5260,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 5260,
+          "advantage_rms_before_normalization": 1.7577287765975302,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6249340252377071,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.042636540543699614,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.07200389050708936,
+          "realized_bernoulli_kl": 0.07235563364168623,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.013417697681254647,
+          "updates": 1,
+          "value_calls": 5260,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 5260,
+          "advantage_rms_before_normalization": 1.7528511219478045,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.624548939158753,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.04258891032370384,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.07180260859553883,
+          "realized_bernoulli_kl": 0.07276385265412416,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.011680507514378512,
+          "updates": 1,
+          "value_calls": 5260,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 5260,
+      "collection_blocks": 263,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.0,
+        "D_IC_Y": 0.0,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.0,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.078125,
+              "suffix_joint": 10,
+              "suffix_solo": 118
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 200,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 103,
+              "positive": 97
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 99,
+              "SOLO": 101
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7292642932326449,
+              "positive": 0.6757550185751858
+            },
+            "dummy_actor_checksum": 3432.823149792771,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.1989166666666668,
+            "packet_success": 1186,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.0434762856591856,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.515625,
+              "suffix_joint": 66,
+              "suffix_solo": 62
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 200,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 103,
+              "positive": 97
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 99,
+              "SOLO": 101
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7292642932326449,
+              "positive": 0.6757550185751858
+            },
+            "dummy_actor_checksum": 3432.823149792771,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.31141666666666706,
+            "packet_success": 1346,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.0434762856591856,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.078125,
+              "suffix_joint": 10,
+              "suffix_solo": 118
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 200,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 102,
+              "positive": 98
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 100,
+              "SOLO": 100
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7246107485565717,
+              "positive": 0.6950712306797612
+            },
+            "dummy_actor_checksum": 3468.83883869595,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.1989166666666668,
+            "packet_success": 1186,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.02400085827490861,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.515625,
+              "suffix_joint": 66,
+              "suffix_solo": 62
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 200,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 102,
+              "positive": 98
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 100,
+              "SOLO": 100
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7246107485565717,
+              "positive": 0.6950712306797612
+            },
+            "dummy_actor_checksum": 3468.83883869595,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.31141666666666706,
+            "packet_success": 1346,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.02400085827490861,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.078125,
+              "suffix_joint": 10,
+              "suffix_solo": 118
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 200,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 102,
+              "positive": 98
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 100,
+              "SOLO": 100
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7234997503945344,
+              "positive": 0.6977211321347616
+            },
+            "dummy_actor_checksum": 3472.617436614791,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.1989166666666668,
+            "packet_success": 1186,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.02094512733606535,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.515625,
+              "suffix_joint": 66,
+              "suffix_solo": 62
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 200,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 102,
+              "positive": 98
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 100,
+              "SOLO": 100
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7234997503945344,
+              "positive": 0.6977211321347616
+            },
+            "dummy_actor_checksum": 3472.617436614791,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.31141666666666706,
+            "packet_success": 1346,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.02094512733606535,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 61,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    },
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 4540,
+          "advantage_rms_before_normalization": 1.7634690145970464,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6219304619600821,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.05336613105791361,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.13381739266885137,
+          "realized_bernoulli_kl": 0.07576579759251348,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.013300708513946078,
+          "updates": 1,
+          "value_calls": 4540,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 4540,
+          "advantage_rms_before_normalization": 1.7730916923867344,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6208568204872608,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.05254373992217517,
+          "parameter_displacement": 0.4013346571319422,
+          "raw_gradient_norm": 0.1347260759256122,
+          "realized_bernoulli_kl": 0.07690144093516389,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 1.1542648557939726e-05,
+          "updates": 1,
+          "value_calls": 4540,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 4540,
+          "advantage_rms_before_normalization": 1.7674883729562532,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6208814214270298,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.05272275482932745,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.1349772339153321,
+          "realized_bernoulli_kl": 0.07687310857346055,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.0020242343396962344,
+          "updates": 1,
+          "value_calls": 4540,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 4540,
+      "collection_blocks": 227,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.21666666666666773,
+        "D_IC_Y": -0.0031250000000000444,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.21979166666666777,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.125,
+              "suffix_joint": 16,
+              "suffix_solo": 112
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 189,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 96,
+              "positive": 93
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 90,
+              "SOLO": 99
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7282903712188824,
+              "positive": 0.705280138856907
+            },
+            "dummy_actor_checksum": 3500.5138835670505,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.20933333333333343,
+            "packet_success": 1200,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.01869581379410512,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.53125,
+              "suffix_joint": 68,
+              "suffix_solo": 60
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 189,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 96,
+              "positive": 93
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 90,
+              "SOLO": 99
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7282903712188824,
+              "positive": 0.705280138856907
+            },
+            "dummy_actor_checksum": 3500.5138835670505,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3155833333333337,
+            "packet_success": 1352,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.01869581379410512,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.9375,
+              "suffix_joint": 120,
+              "suffix_solo": 8
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 191,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 96,
+              "positive": 95
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 92,
+              "SOLO": 99
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7188231835354948,
+              "positive": 0.7188432744308441
+            },
+            "dummy_actor_checksum": 3510.5523291406507,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.42600000000000116,
+            "packet_success": 1512,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 1.6323852471189504e-05,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.515625,
+              "suffix_joint": 66,
+              "suffix_solo": 62
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 191,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 96,
+              "positive": 95
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 92,
+              "SOLO": 99
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7188231835354948,
+              "positive": 0.7188432744308441
+            },
+            "dummy_actor_checksum": 3510.5523291406507,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.31245833333333367,
+            "packet_success": 1348,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 1.6323852471189504e-05,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.9375,
+              "suffix_joint": 120,
+              "suffix_solo": 8
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 192,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 96,
+              "positive": 96
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 93,
+              "SOLO": 99
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7170237258954384,
+              "positive": 0.7205465671789932
+            },
+            "dummy_actor_checksum": 3510.316664890186,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.42600000000000116,
+            "packet_success": 1512,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.002862308542888381,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.515625,
+              "suffix_joint": 66,
+              "suffix_solo": 62
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 192,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 96,
+              "positive": 96
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 93,
+              "SOLO": 99
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7170237258954384,
+              "positive": 0.7205465671789932
+            },
+            "dummy_actor_checksum": 3510.316664890186,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.31245833333333367,
+            "packet_success": 1348,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.002862308542888381,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 79,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    },
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 5200,
+          "advantage_rms_before_normalization": 1.740365469945925,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6402848674511278,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.03241005242681528,
+          "parameter_displacement": 0.40133465713194205,
+          "raw_gradient_norm": 0.09615294798638223,
+          "realized_bernoulli_kl": 0.055926144175249985,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.02422941661398297,
+          "updates": 1,
+          "value_calls": 5200,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 5200,
+          "advantage_rms_before_normalization": 1.7488807307936352,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6346258975129643,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.030054710687948433,
+          "parameter_displacement": 0.4013346571319421,
+          "raw_gradient_norm": 0.09358994982503491,
+          "realized_bernoulli_kl": 0.06190458265283465,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.012972181945181398,
+          "updates": 1,
+          "value_calls": 5200,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 5200,
+          "advantage_rms_before_normalization": 1.7439216830252202,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6337898603168428,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.029863087368122567,
+          "parameter_displacement": 0.4013346571319421,
+          "raw_gradient_norm": 0.09325117821260814,
+          "realized_bernoulli_kl": 0.0627849451353278,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.010849562660995292,
+          "updates": 1,
+          "value_calls": 5200,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 5200,
+      "collection_blocks": 260,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.0,
+        "D_IC_Y": 0.0,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.0,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.0625,
+              "suffix_joint": 8,
+              "suffix_solo": 120
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 183,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 95,
+              "positive": 88
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 91,
+              "SOLO": 92
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7299728696241241,
+              "positive": 0.6570241287634098
+            },
+            "dummy_actor_checksum": 3381.812525240398,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.19266666666666682,
+            "packet_success": 1176,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.05927085194933057,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.515625,
+              "suffix_joint": 66,
+              "suffix_solo": 62
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 183,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 95,
+              "positive": 88
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 91,
+              "SOLO": 92
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7299728696241241,
+              "positive": 0.6570241287634098
+            },
+            "dummy_actor_checksum": 3381.812525240398,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.31245833333333367,
+            "packet_success": 1348,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.05927085194933057,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.0625,
+              "suffix_joint": 8,
+              "suffix_solo": 120
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 185,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 95,
+              "positive": 90
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 93,
+              "SOLO": 92
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7273402511906093,
+              "positive": 0.6863934798218218
+            },
+            "dummy_actor_checksum": 3447.2519212884704,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.19266666666666682,
+            "packet_success": 1176,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.033269251737139904,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.515625,
+              "suffix_joint": 66,
+              "suffix_solo": 62
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 185,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 95,
+              "positive": 90
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 93,
+              "SOLO": 92
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7273402511906093,
+              "positive": 0.6863934798218218
+            },
+            "dummy_actor_checksum": 3447.2519212884704,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.31245833333333367,
+            "packet_success": 1348,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.033269251737139904,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.0625,
+              "suffix_joint": 8,
+              "suffix_solo": 120
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 185,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 95,
+              "positive": 90
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 93,
+              "SOLO": 92
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7258986026863408,
+              "positive": 0.6914479449838487
+            },
+            "dummy_actor_checksum": 3456.0915413837142,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.19266666666666682,
+            "packet_success": 1176,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.0279911593832749,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.515625,
+              "suffix_joint": 66,
+              "suffix_solo": 62
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 185,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 95,
+              "positive": 90
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 93,
+              "SOLO": 92
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7258986026863408,
+              "positive": 0.6914479449838487
+            },
+            "dummy_actor_checksum": 3456.0915413837142,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.31245833333333367,
+            "packet_success": 1348,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.0279911593832749,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 97,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    },
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 5420,
+          "advantage_rms_before_normalization": 1.7450251748464494,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6217819507762461,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.046535523521246715,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.09855737115255896,
+          "realized_bernoulli_kl": 0.0757633480937123,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.0021630667308619777,
+          "updates": 1,
+          "value_calls": 5420,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 5420,
+          "advantage_rms_before_normalization": 1.7531738894644546,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6223930936890009,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.04658573154605806,
+          "parameter_displacement": 0.4013346571319422,
+          "raw_gradient_norm": 0.09744131986810056,
+          "realized_bernoulli_kl": 0.07511686022864994,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.008987785718910738,
+          "updates": 1,
+          "value_calls": 5420,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 5420,
+          "advantage_rms_before_normalization": 1.7484280877548626,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6226525105059587,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.04682809966406465,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.09738264841748752,
+          "realized_bernoulli_kl": 0.07484133958150495,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.010673693519236936,
+          "updates": 1,
+          "value_calls": 5420,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 5420,
+      "collection_blocks": 271,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.2166666666666676,
+        "D_IC_Y": 0.002083333333333326,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.21458333333333426,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.0859375,
+              "suffix_joint": 11,
+              "suffix_solo": 117
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 180,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 84,
+              "positive": 96
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 94,
+              "SOLO": 86
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7207270794816169,
+              "positive": 0.7164052742461499
+            },
+            "dummy_actor_checksum": 3511.676772947908,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.19943750000000013,
+            "packet_success": 1186,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.003511466753816861,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.5078125,
+              "suffix_joint": 65,
+              "suffix_solo": 63
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 180,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 84,
+              "positive": 96
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 94,
+              "SOLO": 86
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7207270794816169,
+              "positive": 0.7164052742461499
+            },
+            "dummy_actor_checksum": 3511.676772947908,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3108958333333337,
+            "packet_success": 1346,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.003511466753816861,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.8984375,
+              "suffix_joint": 115,
+              "suffix_solo": 13
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 178,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 80,
+              "positive": 98
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 96,
+              "SOLO": 82
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7084529215660158,
+              "positive": 0.7263484257998973
+            },
+            "dummy_actor_checksum": 3505.957893521591,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.4161041666666677,
+            "packet_success": 1498,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.0145400971900288,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.5078125,
+              "suffix_joint": 65,
+              "suffix_solo": 63
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 178,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 80,
+              "positive": 98
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 96,
+              "SOLO": 82
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7084529215660158,
+              "positive": 0.7263484257998973
+            },
+            "dummy_actor_checksum": 3505.957893521591,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.31297916666666703,
+            "packet_success": 1350,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.0145400971900288,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.8984375,
+              "suffix_joint": 115,
+              "suffix_solo": 13
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 178,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 79,
+              "positive": 99
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 97,
+              "SOLO": 81
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7062885548564776,
+              "positive": 0.7275089135083662
+            },
+            "dummy_actor_checksum": 3503.4947826543903,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.4161041666666677,
+            "packet_success": 1498,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.01724154140465961,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.5078125,
+              "suffix_joint": 65,
+              "suffix_solo": 63
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 178,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 79,
+              "positive": 99
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 97,
+              "SOLO": 81
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7062885548564776,
+              "positive": 0.7275089135083662
+            },
+            "dummy_actor_checksum": 3503.4947826543903,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.31297916666666703,
+            "packet_success": 1350,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.01724154140465961,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 109,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    },
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 5540,
+          "advantage_rms_before_normalization": 1.748054159913447,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6231389720809769,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.037232650821725076,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.06914257486622095,
+          "realized_bernoulli_kl": 0.074047726802278,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.002130098037049796,
+          "updates": 1,
+          "value_calls": 5540,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 5540,
+          "advantage_rms_before_normalization": 1.7560130173581174,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6237585959873813,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.03736695724623991,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.06942352739235888,
+          "realized_bernoulli_kl": 0.07337720133393745,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.00860773955821478,
+          "updates": 1,
+          "value_calls": 5540,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 5540,
+          "advantage_rms_before_normalization": 1.7513776757688064,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6241309523706736,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.03761636592341094,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.06963544768507827,
+          "realized_bernoulli_kl": 0.07298195320584525,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.010428609644454277,
+          "updates": 1,
+          "value_calls": 5540,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 5540,
+      "collection_blocks": 277,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.21666666666666762,
+        "D_IC_Y": 0.005208333333333315,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.2114583333333343,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.09375,
+              "suffix_joint": 12,
+              "suffix_solo": 116
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 182,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 87,
+              "positive": 95
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 92,
+              "SOLO": 90
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7111299334800398,
+              "positive": 0.7057109008470202
+            },
+            "dummy_actor_checksum": 3459.7263031307407,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.20100000000000012,
+            "packet_success": 1188,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.004402964014328603,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.453125,
+              "suffix_joint": 58,
+              "suffix_solo": 70
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 182,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 87,
+              "positive": 95
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 92,
+              "SOLO": 90
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7111299334800398,
+              "positive": 0.7057109008470202
+            },
+            "dummy_actor_checksum": 3459.7263031307407,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.2978750000000003,
+            "packet_success": 1328,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.004402964014328603,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.90625,
+              "suffix_joint": 116,
+              "suffix_solo": 12
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 180,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 85,
+              "positive": 95
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 92,
+              "SOLO": 88
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6959323477722686,
+              "positive": 0.7177160520408409
+            },
+            "dummy_actor_checksum": 3451.8951278098807,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.41766666666666774,
+            "packet_success": 1500,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.017699259718214955,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.46875,
+              "suffix_joint": 60,
+              "suffix_solo": 68
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 180,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 85,
+              "positive": 95
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 92,
+              "SOLO": 88
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6959323477722686,
+              "positive": 0.7177160520408409
+            },
+            "dummy_actor_checksum": 3451.8951278098807,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3030833333333336,
+            "packet_success": 1336,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.017699259718214955,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.90625,
+              "suffix_joint": 116,
+              "suffix_solo": 12
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 179,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 84,
+              "positive": 95
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 92,
+              "SOLO": 87
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6928805287373754,
+              "positive": 0.7192037637213732
+            },
+            "dummy_actor_checksum": 3448.057955185422,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.41766666666666774,
+            "packet_success": 1500,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.02138762842449815,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.46875,
+              "suffix_joint": 60,
+              "suffix_solo": 68
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 179,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 84,
+              "positive": 95
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 92,
+              "SOLO": 87
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6928805287373754,
+              "positive": 0.7192037637213732
+            },
+            "dummy_actor_checksum": 3448.057955185422,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3030833333333336,
+            "packet_success": 1336,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.02138762842449815,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 127,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    },
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 4620,
+          "advantage_rms_before_normalization": 1.7569264172269516,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6249720733059179,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.03912740082168267,
+          "parameter_displacement": 0.40133465713194205,
+          "raw_gradient_norm": 0.09023297163354331,
+          "realized_bernoulli_kl": 0.07250399155763848,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.004655477712219208,
+          "updates": 1,
+          "value_calls": 4620,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 4620,
+          "advantage_rms_before_normalization": 1.7664179389778027,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6273272791139819,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.040076219395481456,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.08961534182551259,
+          "realized_bernoulli_kl": 0.0699654532098186,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.01753158599745081,
+          "updates": 1,
+          "value_calls": 4620,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 4620,
+          "advantage_rms_before_normalization": 1.76089092977204,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6280007861607417,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.0405269015378681,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.08969367445127166,
+          "realized_bernoulli_kl": 0.06924145151785623,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.01971505359004116,
+          "updates": 1,
+          "value_calls": 4620,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 4620,
+      "collection_blocks": 231,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.0,
+        "D_IC_Y": 0.0,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.0,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.890625,
+              "suffix_joint": 114,
+              "suffix_solo": 14
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 175,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 90,
+              "positive": 85
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 87,
+              "SOLO": 88
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7125865113717479,
+              "positive": 0.723586857469703
+            },
+            "dummy_actor_checksum": 3507.8670999211663,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.4145416666666677,
+            "packet_success": 1496,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.008937781204588657,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.46875,
+              "suffix_joint": 60,
+              "suffix_solo": 68
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 175,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 90,
+              "positive": 85
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 87,
+              "SOLO": 88
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7125865113717479,
+              "positive": 0.723586857469703
+            },
+            "dummy_actor_checksum": 3507.8670999211663,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3030833333333336,
+            "packet_success": 1336,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.008937781204588657,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.890625,
+              "suffix_joint": 114,
+              "suffix_solo": 14
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 171,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 86,
+              "positive": 85
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 85,
+              "SOLO": 86
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6918437996014868,
+              "positive": 0.7325281532119668
+            },
+            "dummy_actor_checksum": 3478.926532180605,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.4145416666666677,
+            "packet_success": 1496,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.03305603730851503,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.46875,
+              "suffix_joint": 60,
+              "suffix_solo": 68
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 171,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 86,
+              "positive": 85
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 85,
+              "SOLO": 86
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6918437996014868,
+              "positive": 0.7325281532119668
+            },
+            "dummy_actor_checksum": 3478.926532180605,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3030833333333336,
+            "packet_success": 1336,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.03305603730851503,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.890625,
+              "suffix_joint": 114,
+              "suffix_solo": 14
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 170,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 85,
+              "positive": 85
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 85,
+              "SOLO": 85
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6878306737092658,
+              "positive": 0.7333510213214832
+            },
+            "dummy_actor_checksum": 3471.1005623229426,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.4145416666666677,
+            "packet_success": 1496,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.036985282434926714,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.46875,
+              "suffix_joint": 60,
+              "suffix_solo": 68
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 170,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 85,
+              "positive": 85
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 85,
+              "SOLO": 85
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6878306737092658,
+              "positive": 0.7333510213214832
+            },
+            "dummy_actor_checksum": 3471.1005623229426,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3030833333333336,
+            "packet_success": 1336,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.036985282434926714,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 149,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    },
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 4520,
+          "advantage_rms_before_normalization": 1.7825197728952777,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6510684297294241,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.02030267481283251,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.07424732639082961,
+          "realized_bernoulli_kl": 0.04407465555846681,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.015443986947481322,
+          "updates": 1,
+          "value_calls": 4520,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 4520,
+          "advantage_rms_before_normalization": 1.7920821703790617,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6456168628556043,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.018325359256432548,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.07109102555663085,
+          "realized_bernoulli_kl": 0.04973747918848771,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.0027033629922230645,
+          "updates": 1,
+          "value_calls": 4520,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 4520,
+          "advantage_rms_before_normalization": 1.7865138457690746,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6453466050294794,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.018320111616956482,
+          "parameter_displacement": 0.4013346571319421,
+          "raw_gradient_norm": 0.07070549104871998,
+          "realized_bernoulli_kl": 0.05002493608224794,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -5.1234612185922775e-05,
+          "updates": 1,
+          "value_calls": 4520,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 4520,
+      "collection_blocks": 226,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.0,
+        "D_IC_Y": 0.0,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.0,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.1015625,
+              "suffix_joint": 13,
+              "suffix_solo": 115
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 168,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 88,
+              "positive": 80
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 83,
+              "SOLO": 85
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7167680382502525,
+              "positive": 0.6424713212923796
+            },
+            "dummy_actor_checksum": 3298.18689907391,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.20256250000000015,
+            "packet_success": 1190,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.0603660825282718,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.4921875,
+              "suffix_joint": 63,
+              "suffix_solo": 65
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 168,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 88,
+              "positive": 80
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 83,
+              "SOLO": 85
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7167680382502525,
+              "positive": 0.6424713212923796
+            },
+            "dummy_actor_checksum": 3298.18689907391,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.30568750000000033,
+            "packet_success": 1338,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.0603660825282718,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.1015625,
+              "suffix_joint": 13,
+              "suffix_solo": 115
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 175,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 88,
+              "positive": 87
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 90,
+              "SOLO": 85
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7042174115162105,
+              "positive": 0.6902791153475378
+            },
+            "dummy_actor_checksum": 3383.3331238624105,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.20256250000000015,
+            "packet_success": 1190,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.0113248656370466,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.4921875,
+              "suffix_joint": 63,
+              "suffix_solo": 65
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 175,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 88,
+              "positive": 87
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 90,
+              "SOLO": 85
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7042174115162105,
+              "positive": 0.6902791153475378
+            },
+            "dummy_actor_checksum": 3383.3331238624105,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.30568750000000033,
+            "packet_success": 1338,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.0113248656370466,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.1015625,
+              "suffix_joint": 13,
+              "suffix_solo": 115
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 177,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 88,
+              "positive": 89
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 92,
+              "SOLO": 85
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6980245560390039,
+              "positive": 0.6977597807732239
+            },
+            "dummy_actor_checksum": 3386.443974529234,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.20256250000000015,
+            "packet_success": 1190,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.00021512990344618732,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.4921875,
+              "suffix_joint": 63,
+              "suffix_solo": 65
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 177,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 88,
+              "positive": 89
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 92,
+              "SOLO": 85
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6980245560390039,
+              "positive": 0.6977597807732239
+            },
+            "dummy_actor_checksum": 3386.443974529234,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.30568750000000033,
+            "packet_success": 1338,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.00021512990344618732,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 167,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    },
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 4980,
+          "advantage_rms_before_normalization": 1.74769643854628,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6222170336882848,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.03570344078474893,
+          "parameter_displacement": 0.4013346571319422,
+          "raw_gradient_norm": 0.1053317748466725,
+          "realized_bernoulli_kl": 0.07488427252010639,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.002648495793065097,
+          "updates": 1,
+          "value_calls": 4980,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 4980,
+          "advantage_rms_before_normalization": 1.7565498154571275,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6223677787069706,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.0358680803923222,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.10656826508951378,
+          "realized_bernoulli_kl": 0.07478424071412339,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.009106046431385862,
+          "updates": 1,
+          "value_calls": 4980,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 4980,
+          "advantage_rms_before_normalization": 1.7513940437764601,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6228010044049668,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.03617825081977722,
+          "parameter_displacement": 0.4013346571319422,
+          "raw_gradient_norm": 0.10694467800225917,
+          "realized_bernoulli_kl": 0.07433897949501352,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.011322436045395295,
+          "updates": 1,
+          "value_calls": 4980,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 4980,
+      "collection_blocks": 249,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.2166666666666676,
+        "D_IC_Y": 0.007291666666666641,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.20937500000000095,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.0859375,
+              "suffix_joint": 11,
+              "suffix_solo": 117
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 196,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 102,
+              "positive": 94
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 99,
+              "SOLO": 97
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7131571982388676,
+              "positive": 0.7061404315240322
+            },
+            "dummy_actor_checksum": 3458.928552581323,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.19839583333333347,
+            "packet_success": 1184,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.005701122955803717,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.4765625,
+              "suffix_joint": 61,
+              "suffix_solo": 67
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 196,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 102,
+              "positive": 94
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 99,
+              "SOLO": 97
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7131571982388676,
+              "positive": 0.7061404315240322
+            },
+            "dummy_actor_checksum": 3458.928552581323,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.3015208333333336,
+            "packet_success": 1332,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.005701122955803717,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.8984375,
+              "suffix_joint": 115,
+              "suffix_solo": 13
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 196,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 100,
+              "positive": 96
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 101,
+              "SOLO": 95
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.695758010895871,
+              "positive": 0.7197341852031589
+            },
+            "dummy_actor_checksum": 3449.629092550277,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.41506250000000106,
+            "packet_success": 1496,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.019480641624671335,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.4921875,
+              "suffix_joint": 63,
+              "suffix_solo": 65
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 196,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 100,
+              "positive": 96
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 101,
+              "SOLO": 95
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.695758010895871,
+              "positive": 0.7197341852031589
+            },
+            "dummy_actor_checksum": 3449.629092550277,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.30881250000000027,
+            "packet_success": 1344,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.019480641624671335,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.8984375,
+              "suffix_joint": 115,
+              "suffix_solo": 13
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 195,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 99,
+              "positive": 96
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 101,
+              "SOLO": 94
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6917838087803507,
+              "positive": 0.7214866194042278
+            },
+            "dummy_actor_checksum": 3444.199405895609,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.41506250000000106,
+            "packet_success": 1496,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.024133533631900073,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.4921875,
+              "suffix_joint": 63,
+              "suffix_solo": 65
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 195,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 99,
+              "positive": 96
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 101,
+              "SOLO": 94
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.6917838087803507,
+              "positive": 0.7214866194042278
+            },
+            "dummy_actor_checksum": 3444.199405895609,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.30881250000000027,
+            "packet_success": 1344,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.024133533631900073,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 191,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    },
+    {
+      "action_schedule": {
+        "no_requests": 64,
+        "requests": 64,
+        "stored_probability": 0.5
+      },
+      "arms": {
+        "BINDING-CUT": {
+          "actor_calls": 4880,
+          "advantage_rms_before_normalization": 1.7605167816848286,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6173109214675158,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.04775695018017115,
+          "parameter_displacement": 0.4013346571319422,
+          "raw_gradient_norm": 0.09601197368020166,
+          "realized_bernoulli_kl": 0.0804168408252486,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": -0.004841951853355433,
+          "updates": 1,
+          "value_calls": 4880,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "GAE": {
+          "actor_calls": 4880,
+          "advantage_rms_before_normalization": 1.7694856590643784,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.617296873228958,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.047637145364083575,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.0961149928236496,
+          "realized_bernoulli_kl": 0.08045547337107974,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.00773747853143301,
+          "updates": 1,
+          "value_calls": 4880,
+          "waiter_ordinary_gae_untouched": true
+        },
+        "INTACT": {
+          "actor_calls": 4880,
+          "advantage_rms_before_normalization": 1.764262656761721,
+          "batch_passes": 1,
+          "changed_noneligible_records": 0,
+          "clipping": 0,
+          "debit_or_reverse_relay": false,
+          "entropy": 0.6174877159483516,
+          "four_fork_label_calculations": 512,
+          "gradient_evaluations": 1,
+          "normalized_gradient_norm": 0.047874832436594565,
+          "parameter_displacement": 0.40133465713194216,
+          "raw_gradient_norm": 0.09625306414653044,
+          "realized_bernoulli_kl": 0.08025614021118667,
+          "relay_bookkeeping_records": 128,
+          "score_credit_covariance": 0.009415269571959184,
+          "updates": 1,
+          "value_calls": 4880,
+          "waiter_ordinary_gae_untouched": true
+        }
+      },
+      "batch_rows": 4880,
+      "collection_blocks": 244,
+      "cue_schedule": {
+        "accuracy": 0.90625,
+        "correct": 116,
+        "flipped": 12
+      },
+      "cut": {
+        "action_conditioned_advantage_multiset_preserved": true,
+        "bijection": true,
+        "centered_target_multiset_preserved": true,
+        "complete": true,
+        "fixed_point_free": true,
+        "opposite_type": true,
+        "signed_label_multiset_preserved": true,
+        "update_cut_independent_of_evaluation_yoke": true
+      },
+      "effects": {
+        "D_IC_N": 0.21666666666666762,
+        "D_IC_Y": 0.012499999999999956,
+        "D_IG_N": 0.0,
+        "D_IG_Y": 0.0,
+        "Psi_C": 0.20416666666666766,
+        "Psi_G": 0.0
+      },
+      "eligible_edges": 128,
+      "evaluation": {
+        "BINDING-CUT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.1015625,
+              "suffix_joint": 13,
+              "suffix_solo": 115
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 182,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 92,
+              "positive": 90
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 87,
+              "SOLO": 95
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7153180800805097,
+              "positive": 0.7058172135185078
+            },
+            "dummy_actor_checksum": 3471.9475585810765,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.20256250000000015,
+            "packet_success": 1190,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.007719454081626442,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.4765625,
+              "suffix_joint": 61,
+              "suffix_solo": 67
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 182,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 92,
+              "positive": 90
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 87,
+              "SOLO": 95
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7153180800805097,
+              "positive": 0.7058172135185078
+            },
+            "dummy_actor_checksum": 3471.9475585810765,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.300479166666667,
+            "packet_success": 1330,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": -0.007719454081626442,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "GAE": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.9140625,
+              "suffix_joint": 117,
+              "suffix_solo": 11
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 182,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 89,
+              "positive": 93
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 90,
+              "SOLO": 92
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7024795267056388,
+              "positive": 0.7176372456189174
+            },
+            "dummy_actor_checksum": 3469.4472488170304,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.41922916666666776,
+            "packet_success": 1502,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.012315646617038878,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.5078125,
+              "suffix_joint": 65,
+              "suffix_solo": 63
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 182,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 89,
+              "positive": 93
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 90,
+              "SOLO": 92
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7024795267056388,
+              "positive": 0.7176372456189174
+            },
+            "dummy_actor_checksum": 3469.4472488170304,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.312979166666667,
+            "packet_success": 1350,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.012315646617038878,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        },
+        "INTACT": {
+          "NATIVE": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.9140625,
+              "suffix_joint": 117,
+              "suffix_solo": 11
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 181,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 88,
+              "positive": 93
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 90,
+              "SOLO": 91
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7004481868309617,
+              "positive": 0.718868990197398
+            },
+            "dummy_actor_checksum": 3467.484288840228,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.41922916666666776,
+            "packet_success": 1502,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.014966902735229493,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          },
+          "YOKED": {
+            "actor_calls": 5120,
+            "actual_request_allocation": {
+              "joint_fraction": 0.5078125,
+              "suffix_joint": 65,
+              "suffix_solo": 63
+            },
+            "closure_count": 128,
+            "common_uniform_actual_requests": 181,
+            "common_uniform_actual_requests_by_cue": {
+              "negative": 88,
+              "positive": 93
+            },
+            "common_uniform_actual_requests_by_source_type": {
+              "JOINT": 90,
+              "SOLO": 91
+            },
+            "cue_stratified_request_probability": {
+              "negative": 0.7004481868309617,
+              "positive": 0.718868990197398
+            },
+            "dummy_actor_checksum": 3467.484288840228,
+            "execution_downtime": 384,
+            "fixed_token_count": 128,
+            "heldout_cue_schedule": {
+              "JOINT": {
+                "correct": 116,
+                "flipped": 12
+              },
+              "SOLO": {
+                "correct": 116,
+                "flipped": 12
+              }
+            },
+            "normalized_bounded_utility": 0.312979166666667,
+            "packet_success": 1350,
+            "period_histogram": {
+              "lag_1": 128,
+              "lag_2": 128
+            },
+            "renewal_count": 512,
+            "request_selectivity_probability": 0.014966902735229493,
+            "value_calls": 5120,
+            "yoke_complete_suffix_multiset": true,
+            "yoke_fixed_point_free": true
+          }
+        }
+      },
+      "optimizer_and_work": {
+        "actor_displacement_match": true,
+        "common_ancestor": true,
+        "critic_learning": false,
+        "fresh_stateless_normalized_sgd": true,
+        "work_match": true,
+        "zero_frozen_baseline": true
+      },
+      "root": 211,
+      "support_counts": {
+        "JOINT|lag=1|older=0|action=0": 8,
+        "JOINT|lag=1|older=0|action=1": 8,
+        "JOINT|lag=1|older=1|action=0": 8,
+        "JOINT|lag=1|older=1|action=1": 8,
+        "JOINT|lag=2|older=0|action=0": 8,
+        "JOINT|lag=2|older=0|action=1": 8,
+        "JOINT|lag=2|older=1|action=0": 8,
+        "JOINT|lag=2|older=1|action=1": 8,
+        "SOLO|lag=1|older=0|action=0": 8,
+        "SOLO|lag=1|older=0|action=1": 8,
+        "SOLO|lag=1|older=1|action=0": 8,
+        "SOLO|lag=1|older=1|action=1": 8,
+        "SOLO|lag=2|older=0|action=0": 8,
+        "SOLO|lag=2|older=0|action=1": 8,
+        "SOLO|lag=2|older=1|action=0": 8,
+        "SOLO|lag=2|older=1|action=1": 8
+      },
+      "supported": true
+    }
+  ],
+  "runtime_seconds": 3.8881634999997914,
+  "semantics": {
+    "credit_destination": "later joiner stored request record only",
+    "debit_or_reverse_relay": false,
+    "replacement_not_addition": true,
+    "source_action": "later joiner request",
+    "waiter_credit": "ordinary GAE unchanged in every arm"
+  },
+  "stage": "confirmation_complete",
+  "treatment": "EGRCR-B1-ORDERED-JOINER-WAITER-CREDIT-v1"
+}

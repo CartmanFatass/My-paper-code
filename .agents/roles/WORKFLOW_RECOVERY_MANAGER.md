@@ -132,6 +132,14 @@ are diagnostic only. For Agentify evidence, exact native `agentify_tabs` plus
 exact-tab `agentify_read_page`/DOM precede status/login-like hints; a Computer
 Use or Chrome URL-observation refusal is `UNOBSERVED`, never logout evidence.
 
+Every recovery return also separates: the exact affected object, the local
+action fence, the direction work that remains authorized, and the Root decision
+class. In particular, no-resend applies to one committed or ambiguous
+operation identity; it does not pause the invested direction or prohibit a
+later distinct EM-authorized turn. State the minimum authority required for
+that distinct future action rather than promoting the local uncertainty into a
+workflow-wide ban.
+
 ## Acceptance and handoff
 
 Accept recovery only when the original failure is reproducible or equivalently

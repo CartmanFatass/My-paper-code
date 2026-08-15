@@ -7,10 +7,15 @@ Decision record: `RCLE_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md` base c
 ```text
 document_kind=portfolio_owner_post_result_adjudication
 scientific_activity_started=false
-current_empirical_investments=SGSP-240
-current_definition_investments=RISP-VALUE-BEARING-OUTCOME-COUPLED-RECURRENCE
+allocation_status=SUPERSEDED_BY_OVERNIGHT_POST_RESULT_PORTFOLIO_CAMPAIGN_ADJUDICATION_20260814.md
+historical_empirical_investments_at_cut=SGSP-240
+historical_definition_investments_at_cut=RISP-VALUE-BEARING-OUTCOME-COUPLED-RECURRENCE
 automatic_backfill=false
 ```
+
+This record is historical base evidence for the current overnight cut. Its
+direction results, claim ceilings and revisit conditions remain valid, but its
+former allocation and action wording has no current routing force.
 
 ## Portfolio conclusion
 

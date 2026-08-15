@@ -19,6 +19,17 @@ below and continue the exact authorized work. Do not restart scientific design,
 redo cross-direction portfolio reasoning, or treat an old terminal/attempt label
 as a routing decision.
 
+## Semantic handoff rule
+
+For each carried incident or owner packet, preserve four separate statements:
+the directly observed fact, the exact local action fence, the still-authorized
+direction continuation and its owner, and the Root decision class. A
+`no-resend`, `PREPARED`, `unobservable`, process stop, or recovery completion is
+local mechanical evidence unless an authorized owner explicitly says otherwise.
+It never by itself pauses scientific investment or bars a distinct future
+operation. A successor Root must therefore resume the recorded continuation
+route, not infer a broad workflow stop from a child-local safety constraint.
+
 ## Mandatory re-anchor
 
 Before acting, read in this order:
@@ -293,3 +304,119 @@ superseded operationally by the dedicated portfolio owner's controlling
 `CROSS_DIRECTION_POST_RESULT_ADJUDICATION_20260814.md`. The current Root
 implements that owner's exact stage actions through live direction pairs; it
 does not re-rank, reinterpret results, or revive any stale action gate.
+
+## 2026-08-14 user-requested pause / restart boundary
+
+The user requested an immediate pause for a later restart.  This section is
+the current operational continuation point; it supersedes all earlier live-pair
+and sole-action wording in this handoff.  The stable detailed anchor remains
+`PORTFOLIO_OPERATIONAL_RECONCILIATION_20260814.md` and the current portfolio
+allocation remains `SGSP-240|RISP-B2-R02` empirically plus definition-only
+`VNFC-B4-NATURAL-CHURN-SCALABLE-JOINT-ALLOCATION`.
+
+### Safe paused state
+
+- No RISP-B2-R02 lease was issued and no empirical process was launched.  CM
+  has technically accepted the frozen panel/runner/analyzer and returned a
+  complete lease request.  On restart, inspect the named preactivity
+  certificate and issue only the exact requested one-CPU/no-GPU/<1-GiB,
+  13,800-second-slice lease if the output roots remain absent; do not alter the
+  panel, command, paths, or science card.
+- SGSP-240 remains a portfolio investment but its historical Pro request is
+  permanently no-resend.  The completed recovery found two distinct canonical
+  candidate user turns, so it did not—and must not—accept a causal closure.
+  Resume only through the same-direction scientific owner and current frozen
+  object; no provider replay follows from this handoff.
+- The VNFC-B4 EM and CM owners were deliberately interrupted before empirical
+  activity, construction, testing, coordinates, compute, or a lease.  Gemini
+  already completed and is durably archived, but is not finally EM-intaken.
+  The interrupted Pro-closure child has an unknown commitment state at pause:
+  the restart owner must inspect its exact operation ledger and provider state
+  observe-only before doing anything.  A visible user turn or concrete
+  conversation identity makes it permanently no-resend; a retry is allowed
+  only after a proved zero-commit record and under the same EM envelope.
+- RCLE, ONLGR and SCDMP remain completed/released and receive no restart work.
+- The Root-to-portfolio overnight application acknowledgement remains
+  `direct_delivery=UNCONFIRMED`.  Do not resend it until target-side evidence
+  proves the immutable `ack_id` absent.
+
+### Restart sequence
+
+1. Re-read `AGENTS.md`, `.agents/roles/ROOT.md`, the portfolio handoff, this
+   section, and the stable reconciliation anchor.
+2. Recreate/reuse only the RISP and VNFC pairs named above.  First reconcile
+   VNFC's interrupted Pro operation observe-only; then resume its definition
+   chain.  Do not create a new provider identity casually.
+3. Issue the exact RISP lease only after rechecking the preactivity/output-root
+   conditions, then let CM run the already frozen atomic panel.
+4. Do not open RCLE, ONLGR, SCDMP, fusion, a second surface, UAV work, or any
+   portfolio replacement.  Send the portfolio session only complete
+   decision-level milestones or a material science/cost change.
+
+### Exact RISP restart payload
+
+The CM's unissued request is for
+`RISP-B2-SCIENCE-20260814-02`, with fresh result root
+`experiments/candidates/renewal_indexed_score_plasticity/RISP_B2_R02_RESULTS_20260814_02`,
+frontier `experiments/candidates/renewal_indexed_score_plasticity/RISP_B2_R02_RESUME_20260814_02`,
+and preactivity certificate
+`experiments/candidates/renewal_indexed_score_plasticity/RISP_B2_R02_PREACTIVITY_CERTIFICATE_20260814_02.json`
+(reported SHA-256 `b395b53820e6e3aca93268fdc828e4186f899ed50e471acabc5049584356258d`).
+The exact command and full 16-seed/two-architecture/four-feedback/five-schedule
+panel are in the CM's `DIRECTION_TO_ROOT_REQUEST`; re-request that compact
+packet if its source paths or certificate condition cannot be confirmed.  The
+proposed Root-owned lease path is
+`docs/research/workflow-runs/2026-08-11_five-round-research-team/RISP_B2_R02_COMPUTE_LEASE_20260814_02.md`.
+
+### Automation note
+
+The hourly heartbeat was intentionally changed to bounded snapshot checks, not
+long waits.  During this pause, an app-level attempt to inspect/deactivate
+`hmasd-operational-heartbeat` stalled and was cancelled without changing its
+configuration.  On restart, first use the Codex automation control plane to
+confirm or disable it before allowing a heartbeat to advance any paused work.
+
+## 2026-08-14 restart handoff — second safe-boundary snapshot
+
+This section supersedes the earlier pause snapshot where it differs.
+
+- **RISP-B2-R02:** Root issued the exact lease in
+  `RISP_B2_R02_COMPUTE_LEASE_20260814_02.md` and CM began one result-blind
+  atomic slice.  The user then requested restart.  CM completed the safe pause
+  at the retained frontier: exactly two atomic units committed, the active
+  unit did not commit, the final result root/file is absent, no matching
+  production process remains, and no partial scientific values were inspected
+  or exposed.  The runner had no external graceful-pause channel, so CM
+  stopped the exact production process and discarded only uncommitted in-memory
+  work.  On restart, use the identical leased command against the existing
+  frontier; it deterministically resumes from the first absent unit.  Do not
+  change the scientific object or inspect the partial frontier.
+- **VNFC-B4:** the same-root-cause Terra recovery is now paused/completed.  It
+  confirms that operation `430c276d-0617-4e2e-9940-903213c7deca` remains
+  `PREPARED` with zero recorded click/send/user IDs, but lacks the durable
+  post-failure fact required to prove zero commitment.  No matching tab or
+  result archive is currently observable.  Never resend or reuse either the
+  original or this second operation.  Restart with native Agentify
+  `tabs`/exact-tab observation and ledger-only observation; do not call strict
+  review, reopen the conversation, or make a new operation until a later owner
+  establishes zero turn/no identity.
+- **VNFC CM:** completed its bounded no-action return; it has not accepted a
+  science card, constructed code, run tests/probes, or used a lease.
+- **SGSP:** unchanged: the historical provider operation remains permanently
+  no-resend and has no valid causal closure.
+- **Portfolio:** no new portfolio packet or allocation change was received.
+  The old direct acknowledgement remains unconfirmed and must not be resent.
+- **Heartbeat:** `hmasd-operational-heartbeat` was successfully set to
+  `PAUSED` in the Codex app for this restart.  Do not reactivate it until the
+  next Root has reconciled the RISP frontier pause receipt and the VNFC
+  ambiguous PREPARED operation.
+
+## 2026-08-14 resume note
+
+The user explicitly resumed work after the second pause snapshot.  The
+heartbeat is active again.  RISP CM has been re-authorized to continue the
+unchanged, lease-bound command from its retained frontier; no new lease,
+science change, or partial-value inspection is authorized.  VNFC recovery has
+been reactivated only to resolve the existing `PREPARED` operation by
+ledger/native observation; it may not resend, create a new operation, or
+reopen the saved conversation without a concrete new authority request.

@@ -18,6 +18,23 @@ returns to unchanged-science CM repair (or EM interpretation), not a scientific
 failure.  This follows the maintained diagnosis (especially lines 118–184,
 246–257) and the router's P0 amendment.
 
+## Overnight current-cut control statement
+
+The current allocation pointer is
+`OVERNIGHT_POST_RESULT_PORTFOLIO_CAMPAIGN_ADJUDICATION_20260814.md`; older
+prospective/current wording in this audit is `HISTORICAL_NONOPERATIVE` for
+routing. SGSP-240 and RISP-B2-R02 are empirical investments, while VNFC-B4
+is definition-only; RCLE-B2, ONLGR-B2 and SCDMP-B3 remain no-current. No
+26-direction row auto reopens, and no WIP/order/fusion/second-surface/UAV
+action is implied.
+
+Unknown wall time/RSS, provider or Gemini status, missing code/host, and
+resource sequencing cannot stop science or create allocation commands. VNFC
+returns after definition because its function class, natural-churn host,
+comparators, claim ceiling and prospective cost are scientifically material;
+it is not a code-missing or host-missing stop. Scheduling may change heavy
+command order only.
+
 The historical map's old **CPM-needed-now** cells are therefore all
 nonoperative.  They are retained as provenance and revisit conditions only;
 none authorizes a current CPM admission or allocation.  Confirmed active

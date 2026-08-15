@@ -119,7 +119,12 @@ For every ordered question:
    earlier rows. Copy response and receipt only from the structured strict
    result. A stale/missing archive may be restored only from a valid authoritative
    local strict ledger operation and without page action; never overwrite an
-   existing archive.
+   existing archive. For a one-row `COMPLETE` operation, use
+   `scripts/restore_complete_agentify_ledger.py` with the original strict state,
+   frozen batch, idempotency key, and a new unused result path. It reconstructs
+   the canonical row/receipt only after strict ledger invariants, response SHA,
+   two stable snapshots, controls, and frozen question SHA all pass; it records
+   tab-close state as unknown rather than inventing it.
 10. **Close safely.** After a complete response or mechanical incident is durably
     archived and generation is inactive, close the disposable tab. Never close
     an active answer or keep an idle tab to preserve remote memory. Report close

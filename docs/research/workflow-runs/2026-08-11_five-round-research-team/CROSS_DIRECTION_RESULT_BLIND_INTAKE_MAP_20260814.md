@@ -8,8 +8,9 @@ pre_result_investments_at_map_freeze=SGSP-r05|RCLE-r04|RISP-r07|ONLGR-r04-checkp
 current_investment_count_is_not_a_quota=true
 automatic_result_to_action_routing=false
 cross_direction_evidence_transfer=false
-post_result_status_pointer=ONLGR_B2_SCDMP_B3_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md
-current_consumed_result_metadata=ONLGR-B2-SCIENCE-20260814-02|SCDMP-B3-SCIENCE-20260814-01
+post_result_status_pointer=VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md
+current_consumed_result_metadata=ONLGR-B2-SCIENCE-20260814-02|SCDMP-B3-SCIENCE-20260814-01|SGSP-B1-SCIENCE-20260814-06|RISP-B2-SCIENCE-20260814-02|CONTAIN-LEARNED-E_vs_CONTAIN-G-TRANSPLANT-NO-CURRENT|RISP-B3-TRG-SCIENCE-20260815-03|ONLGR-TBH-HOST-CARD-20260815-03|VNFC-B4-SCIENCE-20260815-05
+current_portfolio_decision_metadata=RISP-B3-TRG-R03-FULL-PANEL=EMPIRICAL_INVEST|ONLGR-TBH-HOST-CARD-20260815-03=NO_CURRENT_INVESTMENT|VNFC-B4-SCIENCE-20260815-05=NO_CURRENT_EMPIRICAL|VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION=DEFINITION_INVEST
 prospective_branch_map_unchanged=true
 operative_allocation=false
 ```
@@ -248,16 +249,118 @@ Any later amendment to this map is prospective, identifies evidence already
 known at amendment time and cannot reinterpret an observed outcome by changing
 its thresholds or branch precedence.
 
-## Post-result status pointer — 2026-08-14
+## HISTORICAL_NONOPERATIVE — superseded post-result status pointer — 2026-08-15
 
-This document remains the immutable prospective intake/branch map. It is not
-the current allocation surface. Complete RISP-r07, SGSP-r05, ONLGR-r04 and
+This document remains the immutable prospective intake/branch map. This
+historical pointer is not a current allocation surface and has no routing
+force. Complete RISP-r07, SGSP-r05, ONLGR-r04 and
 RCLE-r04 milestones have now been consumed without altering any threshold,
 branch precedence or prospective interpretation rule. The independent
 portfolio decisions, current investments, no-current decisions, revisit
 conditions and exact operational actions are recorded in
-`ONLGR_B2_SCDMP_B3_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md`. The later
+`SGSP_R06_RISP_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260815.md`. The later
 complete ONLGR-B2 and SCDMP-B3 results have been consumed without changing
 this prospective map, its thresholds, or its first-match branch precedence.
 The RCLE-B2 record remains preserved as historical evidence and is superseded
 as the base allocation cut by that newer adjudication.
+
+## HISTORICAL_NONOPERATIVE — superseded post-result allocation pointer — 2026-08-15
+
+The prospective thresholds, branch precedence, activity boundaries and
+result-blind intake rules above remain unchanged and non-operative as a
+portfolio allocation command. The complete RISP-B2-R02 definition/feasibility
+milestone was consumed only as an input to that superseded allocation decision;
+it does not alter any RISP result branch or threshold. Historical VNFC B3/v8
+records are consumed only as rationale for a new definition-only VNFC-B4
+object; no evidence, seed, threshold, acceptance or claim is transferred.
+The superseded allocation pointer and exact actions were recorded in
+`SGSP_R06_RISP_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260815.md` and the
+portfolio reconciliation delta. SGSP r06 and RISP r02 are consumed complete;
+the standalone `CONTAIN-LEARNED-E` versus `CONTAIN-G-TRANSPLANT` diagnostic is
+consumed as no-current. This map remains non-operative for routing.
+
+## HISTORICAL_NONOPERATIVE — superseded definition-only authorization pointer — 2026-08-15
+
+The superseded portfolio allocation pointer was
+`ONLGR_TBH_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`. This pointer
+adds no threshold, branch-precedence, evidence, seed, acceptance or result-map
+change. It records a prospective three-layer boundary: portfolio discovery is
+open; the six named definition lines may proceed through meaning-complete EM
+definition, independent same-direction Pro plus a separate mutually blind
+Gemini innovation consultation for every line, EM intake, CM static
+feasibility/observability/comparator review
+and prospective total-cost review; empirical authorization remained separate
+and was then zero.
+
+The six definition-only lines are VNFC-B4, SGSP target-bound two-zone, RISP
+target-bound combined successor, RCLE coarse persistent commitment, ONLGR
+target-host executable-card definition, and SCDMP target-bound order-to-value.
+Their exact scopes, comparators and return conditions are in the controlling
+record. Each returns independently; no WIP, quota, ordering or backfill gate
+exists. Old exact objects remain immutable and no source, construction, tests,
+probes, coordinates, training, evaluation, compute, lease, fusion,
+cross-`N×k` parent, second surface or UAV action is authorized by this pointer.
+This metadata is prospective routing context only and cannot reinterpret any
+completed intake branch.
+
+## HISTORICAL_NONOPERATIVE — superseded ONLGR target-host definition intake pointer — 2026-08-15
+
+The complete `ONLGR-TBH-SCREEN-DEF-20260815-03` definition milestone was
+consumed as a definition-only portfolio decision. This historical pointer has
+no current routing force. Its target-host executable
+card must freeze the physical SHORT/LONG strata and clocks, strict finite
+nontrivial FLEX-CONTAIN, sample/power/inference and atomic lifecycle, together
+with the exact cost model, before any later empirical decision. The reason for
+not authorizing activity now is identifiability and high or unbounded total
+cost relative to the narrow package-specific claim; it is not an engineering
+or observed-heterogeneity stop. The old result-blind thresholds, branch
+precedence, evidence and activity boundaries remain unchanged. No empirical,
+build, probe, coordinate, training, evaluation, compute, lease, fusion,
+second-surface or UAV-production action follows from this pointer. Any later
+positive or opposite-sign branch remains bounded by the existing claim
+ceiling and must return separately for empirical portfolio adjudication.
+
+## Superseded empirical base pointer — 2026-08-15
+
+The historical empirical base is
+`RISP_B3_ONLGR_HOST_CARD_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`; the
+current portfolio decision pointer is
+`VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`.
+That historical base consumes the complete RISP-B3 and ONLGR host-card
+definition packets only; neither the base nor the current VNFC pointer amends
+this map's thresholds, first-match branch precedence,
+evidence requirements, or result-blind interpretation. RISP-B3's exact frozen
+R03 panel is authorized as a complete empirical chain without a repeat
+portfolio gate. ONLGR's HEADLAND-90 host card is complete but receives no
+current empirical investment because its disclosed total cost is high relative
+to its narrow package-specific claim; its four explicit any-one revisit
+conditions are recorded in the controlling adjudication and reconciliation.
+Operational Root owns pair/stage/lease application and has already applied the
+RISP action; the VNFC decision does not alter it. No evidence, seeds, thresholds,
+acceptance, claims or allocation are transferred between RISP and ONLGR. No
+quota, backfill, WIP/order gate, fusion, cross-`N×k` parent, second surface or
+UAV-production action follows from this pointer.
+
+## Portfolio-owner VNFC-B4 post-definition intake pointer — 2026-08-15
+
+The complete definition milestone `VNFC-B4-SCIENCE-20260815-05` is consumed
+here as portfolio metadata only. It is Pro CLOSED, EM-intaken and CM-statically
+bindable, but no empirical evidence, result branch, threshold, seed, acceptance
+or claim is transferred into this prospective map. The controlling adjudication
+is `VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`.
+
+| Metadata | Value |
+| --- | --- |
+| Consumed exact object | `VNFC-B4-SCIENCE-20260815-05` |
+| Exact B4 decision | `NO_CURRENT_EMPIRICAL` |
+| VNFC target-exclusive definition line | `DEFINITION_INVEST` |
+
+The result-blind thresholds, branch precedence, evidence requirements and
+activity boundaries remain unchanged. The exact B4 object is a narrow,
+compound natural-churn variable-`N` question with unresolved alternatives and
+prospective cost of 18–34 experienced engineer-weeks and approximately
+10^3–10^5 CPU-hours. These are portfolio cost facts, not a hard stop or an
+engineering interpretation. No empirical activity, source/build, tests,
+probes, coordinates, training, evaluation, lease, compute, WIP/order,
+backfill, fusion, second surface or UAV-production action follows from this
+pointer.
