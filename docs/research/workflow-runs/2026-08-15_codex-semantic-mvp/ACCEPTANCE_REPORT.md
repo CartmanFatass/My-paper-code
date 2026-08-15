@@ -2,7 +2,7 @@
 
 **Decision:** `ADOPT_SHADOW`  
 **Run:** 2026-08-16, isolated worktree `C:\project\CPTest\temp\mvp`  
-**Recommendation rationale:** local ACTIVE semantics and the 120-second runtime wait passed at real MCP/store/hook entrypoints, but B–I are not live native Codex child/MCP-host lifecycle tests; the unmanaged Codex CLI task could not start; and the normal MCP startup/configuration gate failed. Keep the overlay in SHADOW until genuine lifecycle evidence and a supported Codex MCP startup surface are available.
+**Recommendation rationale:** local ACTIVE semantics and the 120-second runtime wait passed at real MCP/store/hook entrypoints, and the repaired configuration now loads for an ordinary SHADOW CLI task. However, B–I are not live native Codex child/MCP-host lifecycle tests, and the SHADOW CLI run did not yield verifiable native hook delivery or a verifiable child receiver. Keep the overlay in SHADOW; do not adopt ACTIVE without those lifecycle observations.
 
 ## Exact versions and hashes
 
@@ -15,25 +15,25 @@
 | SHADOW hooks SHA-256 | `98373a4c6bb4bfcc858b1cdf8f3265a26db0d10347e1c188ac0dc223dab940c9` |
 | ACTIVE hooks SHA-256 | `8dda51737888193a8dfcb1b4e09e85b0d84a60f084191fa98fde7c7d646e3237` |
 | Final hooks SHA-256 | `43a1bc54499176fd7e746747cec14a5260a1511d62e56b1c7f5d9b625fcf6d15` |
-| Original/final config SHA-256 | `6223bc0c304b62424dfd5656b23334ee573f24910591e6e4d31c7bbab0eba4dd` |
-| ACTIVE config SHA-256 | `8b3141954e2efd61fd1023debc7c7e6e1d0b57d5c35e20bcec9dd2e94cc36cf1` |
+| Pre-repair config SHA-256 | `6223bc0c304b62424dfd5656b23334ee573f24910591e6e4d31c7bbab0eba4dd` |
+| Revised baseline/final config SHA-256 | `7e48dd600f2e7cf582c12ec3e870e48b18da4f79178f4f94396a9da8f2b53f47` |
+| Pre-repair ACTIVE config SHA-256 | `8b3141954e2efd61fd1023debc7c7e6e1d0b57d5c35e20bcec9dd2e94cc36cf1` |
 
 ## Test gate
 
-- Semantic MVP unit suite: **99 passed** (`python -m pytest tests/codex_semantic_mvp -q`).
+- Semantic MVP unit suite: **106 passed** (`C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m pytest tests/codex_semantic_mvp -q`).
 - Full repository pytest collection: **not clean**; three scenario-7 modules fail collection with `ModuleNotFoundError: No module named 'tests._scenario7_fixtures'` (`scenario7_channel_cache_test.py`, `scenario7_events_certificates_test.py`, `scenario7_reward_safety_test.py`). These failures are outside the MVP package and were not changed.
-- Codex startup check: `codex --version` returned `codex-cli 0.147.0` after rollback.
-- MCP startup/configuration gate: `codex mcp list --json` failed with `Error: failed to load configuration` / `系统找不到指定的路径。 (os error 3)`.
-- The likely pre-existing cause is the missing absolute `model_catalog_json` reference `C:\Projects\HMASD\runtime\model-catalog-v2-workaround.json`. Task 9 only appended the semantic-MVP config block; this evidence does not attribute the failure to Task 9.
-- `codex --version` succeeding is only a binary/version check, not normal MCP startup evidence.
-- Agentify: not invoked; configuration unchanged after rollback.
+- Codex binary check: `codex --version` returned `codex-cli 0.147.0` after rollback.
+- MCP configuration listing: after removing the obsolete absolute `model_catalog_json` reference, `codex mcp list --json` succeeded and listed `agentify-desktop` enabled plus `hmasd_orchestrator` disabled with its intended relative `runtime/codex-semantic-mvp` state argument.
+- The listing proves config loading/listing only; it is not a usable runtime-handshake proof for either MCP server. No `model_catalog_json` workaround remains.
+- Agentify: not invoked; the listing does not assert Agentify runtime state.
 
 ## Thresholds
 
 | Threshold | Result | Basis |
 |---|---:|---|
-| `unit_test_failures` (MVP suite) | 0 | 99 passed |
-| `shadow_behavior_changes` | 0 at hook-entrypoint level | neutral hook responses; live CLI task unavailable |
+| `unit_test_failures` (MVP suite) | 0 | 106 passed |
+| `shadow_behavior_changes` | no task-output deviation observed; hook delivery unverified | ordinary CLI returned requested text; runtime audit had no new native hook records |
 | `lost_reports` | 0 | B: two reports observed and intaken; H: one report observed |
 | `duplicate_reports_after_dedupe` | 0 observed | fresh stores; one report per child |
 | `automatic_continuation_loops` | 0 at entrypoint level | D/E/F guard counts bounded to one; native model behavior unobservable |
@@ -42,13 +42,13 @@
 | `portfolio_review_to_automatic_disposition` | 0 at entrypoint level | G close rejected; no disposition tokens; native session behavior unobservable |
 | `rollback_hash_mismatches` | 0 | SHADOW and final ACTIVE disable both exact |
 
-The full repository collection issue means the overall repository `unit_test_failures` threshold cannot be claimed as zero; the zero above is explicitly scoped to the MVP suite. The MCP startup/configuration gate also remains unfulfilled.
+The full repository collection issue means the overall repository `unit_test_failures` threshold cannot be claimed as zero; the zero above is explicitly scoped to the MVP suite.
 
 ## Canary results
 
 ### A — SHADOW
 
-The real hook entrypoint recorded `SESSION_STARTED`, `SUBAGENT_STARTED`, `PRE_TOOL_USE_OBSERVED` (including a `wait_agent` observation), `SUBAGENT_STOPPED`, and `STOP_OBSERVED`. Every response was `{"continue":true}` and no model-visible context was added. The bounded CLI command failed immediately with `Error: 系统找不到指定的路径。 (os error 3)`; this is an execution-surface limitation, not a canary pass. SHADOW was disabled and exact rollback verified.
+With the repaired configuration, an unmanaged read-only `codex exec` task exited 0 and returned `SHADOW_CANARY_A_ORDINARY_OK`; no task-output deviation was observed. The CLI emitted its hook-trust-bypass notice, but `runtime/codex-semantic-mvp/audit.jsonl` received no new native hook record or hook response, so actual SHADOW hook delivery and native noninterference remain unverified. A bounded child request first failed in ephemeral mode because no thread was available. A non-ephemeral retry returned the model text `NATIVE_CHILD_RESULT NATIVE_CHILD_OK`, but its only collaboration event was a `wait` with an empty receiver list; it is not evidence that a child was spawned or returned. SHADOW was disabled and exact rollback verified.
 
 ### B — valid two-child managed workflow
 
@@ -80,8 +80,8 @@ A deterministic failure injected into the actual Stop hook path returned neutral
 
 ## Final rollback state
 
-`codex-semantic-mvp-disable.ps1` printed `ROLLBACK_VERIFIED=true`; `.codex/hooks.json` exactly matches the original hash, `.codex/config.toml` exactly matches the original hash, `activation-state.json` reports `mode=off`, and the MCP block has `enabled = false`. Agentify was not invoked and configuration was unchanged.
+`codex-semantic-mvp-disable.ps1` printed `ROLLBACK_VERIFIED=true`; `.codex/hooks.json` exactly matches the original hash, `.codex/config.toml` exactly matches the revised initial-baseline hash, `activation-state.json` reports `mode=off`, and the MCP block has `enabled = false`. `codex mcp list --json` succeeds, `model_catalog_json` remains absent, and Agentify was not invoked.
 
 ## Adoption boundary
 
-This run supports **SHADOW adoption only**. It explicitly rules out `ADOPT_ACTIVE_MVP`: genuine native Codex child/MCP-host lifecycle evidence is missing, and the `codex mcp list --json` startup/configuration gate failed. The full repository unit collection is also not clean. This is not a rejection of the local implementation; ACTIVE remains disabled and recoverable.
+This run supports **SHADOW adoption only**. It explicitly rules out `ADOPT_ACTIVE_MVP`: genuine native Codex hook delivery, child lifecycle, and MCP-host lifecycle evidence is still missing. The full repository unit collection is also not clean. This is not a rejection of the local implementation; ACTIVE remains disabled and recoverable.

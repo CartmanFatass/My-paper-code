@@ -1,9 +1,5 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
-# Luna is account-visible but currently omitted from the Sol/v2 child-agent
-# surface. This generated local catalog changes only the routing-version field.
-model_catalog_json = "C:\\Projects\\HMASD\\runtime\\model-catalog-v2-workaround.json"
-
 [features]
 multi_agent_v2 = true
 
