@@ -57,8 +57,32 @@ def _run_operator(
         text=True,
         capture_output=True,
         encoding="utf-8",
+        errors="replace",
         check=False,
     )
+
+
+def test_operator_capture_preserves_failure_output_with_invalid_stderr_bytes(
+    repo_root: Path, tmp_path: Path
+):
+    stage = _stage(repo_root, tmp_path)
+    fake_repo = tmp_path / "fake-repo"
+    scripts = fake_repo / "scripts"
+    scripts.mkdir(parents=True)
+    (scripts / "codex-semantic-mvp-enable.ps1").write_text(
+        "[Console]::Out.WriteLine('EXPECTED_STDOUT')\n"
+        "[Console]::OpenStandardError().Write([byte[]](0xFF), 0, 1)\n"
+        "[Console]::Error.WriteLine('EXPECTED_FAILURE_MARKER')\n"
+        "exit 7\n"
+    )
+
+    result = _run_operator(fake_repo, stage, "codex-semantic-mvp-enable.ps1")
+
+    assert result.returncode == 7
+    assert result.stdout == "EXPECTED_STDOUT\n"
+    assert isinstance(result.stderr, str)
+    assert "EXPECTED_FAILURE_MARKER" in result.stderr
+    assert "\ufffd" in result.stderr
 
 
 def test_mode_constants_are_exact():
@@ -644,6 +668,7 @@ def _run_native_config_failure(repo_root: Path, stage: Path) -> subprocess.Compl
             "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
         ],
         text=True, capture_output=True, encoding="utf-8", check=False,
+        errors="replace",
     )
 
 
@@ -708,7 +733,7 @@ def test_native_smoke_resolves_powershell_codex_shim_to_cmd_sibling(repo_root: P
         ["pwsh", "-NoProfile", "-NonInteractive", "-File",
          str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
          "-RepoRoot", str(stage), "-NativeSmoke"],
-        text=True, capture_output=True, encoding="utf-8", check=False, env=env,
+        text=True, capture_output=True, encoding="utf-8", errors="replace", check=False, env=env,
     )
     assert result.returncode == 0, result.stdout + result.stderr
 
@@ -723,7 +748,7 @@ def test_native_smoke_rejects_unlaunchable_codex_shim(repo_root: Path, tmp_path:
         ["pwsh", "-NoProfile", "-NonInteractive", "-File",
          str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
          "-RepoRoot", str(repo_root), "-NativeSmoke"],
-        text=True, capture_output=True, encoding="utf-8", check=False, env=env,
+        text=True, capture_output=True, encoding="utf-8", errors="replace", check=False, env=env,
     )
     assert result.returncode != 0
     assert "NATIVE_SMOKE_CODEX_COMMAND_INVALID" in (result.stdout + result.stderr)
@@ -771,7 +796,7 @@ def test_native_smoke_accepts_fake_native_audit_event_without_mutating_config_or
             str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
             "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
         ],
-        text=True, capture_output=True, encoding="utf-8", check=False,
+        text=True, capture_output=True, encoding="utf-8", errors="replace", check=False,
     )
     assert result.returncode == 0, result.stdout + result.stderr
     assert config.read_bytes() == config_before
@@ -800,7 +825,7 @@ def test_native_smoke_rejects_stdout_without_new_audit_event(repo_root: Path, tm
             str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
             "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
         ],
-        text=True, capture_output=True, encoding="utf-8", check=False,
+        text=True, capture_output=True, encoding="utf-8", errors="replace", check=False,
     )
     assert result.returncode != 0
     assert "NATIVE_HOOK_EVENT_REQUIRED" in (result.stdout + result.stderr)
@@ -835,7 +860,7 @@ def test_native_smoke_rejects_audit_event_for_wrong_cli_session(repo_root: Path,
             str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
             "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
         ],
-        text=True, capture_output=True, encoding="utf-8", check=False,
+        text=True, capture_output=True, encoding="utf-8", errors="replace", check=False,
     )
     assert result.returncode != 0
     assert "NATIVE_HOOK_EVENT_REQUIRED" in (result.stdout + result.stderr)

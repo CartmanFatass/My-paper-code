@@ -1,15 +1,15 @@
 # HMASD Codex Semantic MVP Acceptance Report
 
-**Decision:** `ADOPT_SHADOW`  
+**Decision:** `DO_NOT_MERGE_OUT_OF_BOX`
 **Run:** 2026-08-16, isolated worktree `C:\project\CPTest\temp\mvp`  
-**Recommendation rationale:** local ACTIVE semantics and the 120-second runtime wait passed at real MCP/store/hook entrypoints, and the repaired configuration now loads for an ordinary SHADOW CLI task. However, B–I are not live native Codex child/MCP-host lifecycle tests, and the SHADOW CLI run did not yield verifiable native hook delivery or a verifiable child receiver. Keep the overlay in SHADOW; do not adopt ACTIVE without those lifecycle observations.
+**Recommendation rationale:** project entrypoint tests pass, and the feature worktree's ACTIVE configuration contains inline TOML hooks plus an enabled managed MCP. The doctor reports `mode=active` and `server_enabled=true`, and `codex mcp list --json` succeeds. Strict NativeSmoke on `codex-cli 0.147.0` returned a real `thread_id`, but the audit remained 5 lines/2039 bytes and the test correctly failed `NATIVE_HOOK_EVENT_REQUIRED`. Live native hook delivery is **NOT verified**; do not merge or push this as `out-of-box` until an upstream CLI release fixes or re-proves it.
 
 ## Exact versions and hashes
 
 | Item | Value |
 |---|---|
 | Python executable | `C:\Users\wu\.conda\envs\SB3\python.exe` |
-| Codex | `codex-cli 0.147.0` |
+| Codex | `codex-cli 0.147.0` (npm latest is also `0.147.0`) |
 | MCP | `2.0.0` |
 | Original hooks SHA-256 | `43a1bc54499176fd7e746747cec14a5260a1511d62e56b1c7f5d9b625fcf6d15` |
 | SHADOW hooks SHA-256 | `98373a4c6bb4bfcc858b1cdf8f3265a26db0d10347e1c188ac0dc223dab940c9` |
@@ -21,10 +21,10 @@
 
 ## Test gate
 
-- Semantic MVP unit suite: **106 passed** (`C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m pytest tests/codex_semantic_mvp -q`).
+- Project entrypoint tests pass; prior evidence records the latest full unit result as **139** and the focused activation/smoke result as **56**.
 - Full repository pytest collection: **not clean**; three scenario-7 modules fail collection with `ModuleNotFoundError: No module named 'tests._scenario7_fixtures'` (`scenario7_channel_cache_test.py`, `scenario7_events_certificates_test.py`, `scenario7_reward_safety_test.py`). These failures are outside the MVP package and were not changed.
-- Codex binary check: `codex --version` returned `codex-cli 0.147.0` after rollback.
-- MCP configuration listing: after removing the obsolete absolute `model_catalog_json` reference, `codex mcp list --json` succeeded and listed `agentify-desktop` enabled plus `hmasd_orchestrator` disabled with its intended relative `runtime/codex-semantic-mvp` state argument.
+- Codex binary check: `codex --version` returned `codex-cli 0.147.0`; `npm view @openai/codex version` returned `0.147.0`.
+- MCP configuration listing: with the feature worktree ACTIVE, `codex mcp list --json` succeeds and lists `hmasd_orchestrator` enabled with its intended relative `runtime/codex-semantic-mvp` state argument.
 - The listing proves config loading/listing only; it is not a usable runtime-handshake proof for either MCP server. No `model_catalog_json` workaround remains.
 - Agentify: not invoked; the listing does not assert Agentify runtime state.
 
@@ -32,7 +32,7 @@
 
 | Threshold | Result | Basis |
 |---|---:|---|
-| `unit_test_failures` (MVP suite) | 0 | 106 passed |
+| `unit_test_failures` (project entrypoints) | 0 | latest full unit result 139; focused result 56 |
 | `shadow_behavior_changes` | no task-output deviation observed; hook delivery unverified | ordinary CLI returned requested text; runtime audit had no new native hook records |
 | `lost_reports` | 0 | B: two reports observed and intaken; H: one report observed |
 | `duplicate_reports_after_dedupe` | 0 observed | fresh stores; one report per child |
@@ -78,13 +78,21 @@ The final entrypoint-level run waited `120.5s` against `timeout_s=300`, then ret
 
 A deterministic failure injected into the actual Stop hook path returned neutral and recorded `STOP_GUARD_FAIL_OPEN`; the workflow's semantic rows were not changed, and the event-count increase was the expected fail-open audit event. A separate subprocess pointed to a file as its state directory and returned neutral (`exit 0`, `{"continue":true}`) but failed before SQLite initialization, so no audit could be persisted. Canary I is therefore PARTIAL, not a full pass.
 
-## Final rollback state
+## Historical rollback check
 
-`codex-semantic-mvp-disable.ps1` printed `ROLLBACK_VERIFIED=true`; `.codex/hooks.json` exactly matches the original hash, `.codex/config.toml` exactly matches the revised initial-baseline hash, `activation-state.json` reports `mode=off`, and the MCP block has `enabled = false`. `codex mcp list --json` succeeds, `model_catalog_json` remains absent, and Agentify was not invoked.
+The earlier rollback check printed `ROLLBACK_VERIFIED=true`; `.codex/hooks.json`
+matched the original hash and the disable path restored `mode=off` with MCP
+disabled. That historical check does not describe the current feature
+worktree, which is ACTIVE. `model_catalog_json` remains absent and Agentify was
+not invoked.
 
 ## Adoption boundary
 
-This run supports **SHADOW adoption only**. It explicitly rules out `ADOPT_ACTIVE_MVP`: genuine native Codex hook delivery, child lifecycle, and MCP-host lifecycle evidence is still missing. The full repository unit collection is also not clean. This is not a rejection of the local implementation; ACTIVE remains disabled and recoverable.
+The local project entrypoints are passing, but genuine native Codex hook
+delivery remains unverified. Do not merge or push as `out-of-box`; wait for an
+upstream CLI release to fix or re-prove the native hook path, then rerun the
+strict smoke below. Related upstream tracking: [#26383](https://github.com/openai/codex/issues/26383)
+and [#33097](https://github.com/openai/codex/issues/33097).
 
 ## Native smoke operation
 
@@ -106,5 +114,8 @@ and line count, invokes a safe ordinary `codex exec` with
 native hook event. A successful CLI exit or stdout response alone is rejected
 with `NATIVE_HOOK_EVENT_REQUIRED`; missing or incomplete inline TOML is rejected
 before execution. Test doubles can be supplied with `-CodexCommand` for local
-contract tests without contacting a model. The focused activation/smoke suite
-currently passes 36 tests under the SB3 Python interpreter.
+contract tests without contacting a model. The focused activation/smoke
+evidence is **56** under the SB3 Python interpreter. A pass requires
+`NATIVE_SMOKE_VERIFIED=true`, one real `thread_id`, and at least one newly
+appended recognized `mode=active` audit event for that session; unchanged audit
+bytes/lines must fail with `NATIVE_HOOK_EVENT_REQUIRED`.
