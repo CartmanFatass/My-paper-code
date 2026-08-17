@@ -32,7 +32,15 @@ from .store import OPEN_TASK_LIFECYCLES, SemanticStore
 
 
 SUPPORTED_EVENTS = frozenset(
-    {"SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse"}
+    {
+        "SessionStart",
+        "SubagentStart",
+        "SubagentStop",
+        "Stop",
+        "PreToolUse",
+        "PreCompact",
+        "PostCompact",
+    }
 )
 EVENT_KINDS = {
     "SessionStart": "SESSION_STARTED",
@@ -40,6 +48,8 @@ EVENT_KINDS = {
     "SubagentStop": "SUBAGENT_STOPPED",
     "Stop": "STOP_OBSERVED",
     "PreToolUse": "PRE_TOOL_USE_OBSERVED",
+    "PreCompact": "COMPACTION_STARTED",
+    "PostCompact": "COMPACTION_COMPLETED",
 }
 MAX_PREVIEW_BYTES = 2048
 

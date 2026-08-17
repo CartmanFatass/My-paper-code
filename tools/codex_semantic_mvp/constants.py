@@ -28,6 +28,7 @@ DEFAULT_PYTHON_EXECUTABLE = r"C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.ex
 
 CORE_HOOK_EVENTS = ("SessionStart", "SubagentStart", "SubagentStop", "Stop")
 DIAGNOSTIC_HOOK_EVENTS = ("PreToolUse",)
+COMPACTION_HOOK_EVENTS = ("PreCompact", "PostCompact")
 ACTIVE_HOOK_EVENTS = CORE_HOOK_EVENTS
 SHADOW_HOOK_EVENTS = CORE_HOOK_EVENTS + DIAGNOSTIC_HOOK_EVENTS
 HOOK_ENTRY_MODULE = "tools.codex_semantic_mvp.hook_entry"
