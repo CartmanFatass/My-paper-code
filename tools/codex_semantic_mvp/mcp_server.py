@@ -351,6 +351,97 @@ def _register_tools(server: MCPServer) -> MCPServer:
             "workflow": _jsonable(workflow) if workflow is not None else None,
         }
 
+    @server.tool(description="Open one role-compatible plan epoch for an actor.")
+    def plan_epoch_open(
+        actor_context_id: str,
+        epoch_kind: str,
+        objective: str,
+        authority_refs: list[str],
+        frozen_invariants: list[str],
+        exit_boundary: str,
+    ) -> dict[str, Any]:
+        from .epochs import plan_epoch_open as _open
+
+        return _open(
+            _get_store(),
+            actor_context_id=actor_context_id,
+            epoch_kind=epoch_kind,
+            objective=objective,
+            authority_refs=authority_refs,
+            frozen_invariants=frozen_invariants,
+            exit_boundary=exit_boundary,
+        )
+
+    @server.tool(description="Return the actor's current open plan epoch.")
+    def plan_epoch_current(actor_context_id: str) -> dict[str, Any]:
+        from .epochs import plan_epoch_current as _current
+
+        epoch = _current(_get_store(), actor_context_id)
+        return {"epoch": epoch}
+
+    @server.tool(description="Revise an open plan epoch with an expected revision.")
+    def plan_epoch_revise(
+        actor_context_id: str,
+        epoch_id: str,
+        expected_revision: int,
+        objective: str,
+        authority_refs: list[str],
+        frozen_invariants: list[str],
+        exit_boundary: str,
+        reason: str,
+    ) -> dict[str, Any]:
+        from .epochs import plan_epoch_current as _current
+        from .epochs import revise_epoch
+
+        current = _current(_get_store(), actor_context_id)
+        if current is None or current["epoch_id"] != epoch_id:
+            raise ValueError("epoch does not belong to this actor")
+        return revise_epoch(
+            _get_store(),
+            epoch_id=epoch_id,
+            expected_revision=expected_revision,
+            objective=objective,
+            authority_refs=authority_refs,
+            frozen_invariants=frozen_invariants,
+            exit_boundary=exit_boundary,
+            reason=reason,
+        )
+
+    @server.tool(description="Close the actor's open plan epoch.")
+    def plan_epoch_close(actor_context_id: str, epoch_id: str, reason: str = "") -> dict[str, Any]:
+        from .epochs import plan_epoch_close as _close
+        from .epochs import plan_epoch_current as _current
+
+        current = _current(_get_store(), actor_context_id)
+        if current is None or current["epoch_id"] != epoch_id:
+            raise ValueError("epoch does not belong to this actor")
+        return _close(_get_store(), epoch_id=epoch_id, reason=reason)
+
+    @server.tool(description="Write an owner-authored semantic reanchor snapshot.")
+    def semantic_commit_write(
+        actor_context_id: str,
+        epoch_id: str,
+        commit_kind: str,
+        payload: dict[str, Any],
+        source_refs: list[str],
+    ) -> dict[str, Any]:
+        from .semantic_commits import semantic_commit_write as _write
+
+        return _write(
+            _get_store(),
+            actor_context_id=actor_context_id,
+            epoch_id=epoch_id,
+            commit_kind=commit_kind,
+            payload=payload,
+            source_refs=source_refs,
+        )
+
+    @server.tool(description="Return the actor's latest compatible semantic commit.")
+    def semantic_commit_current(actor_context_id: str) -> dict[str, Any]:
+        from .semantic_commits import semantic_commit_current as _current
+
+        return {"commit": _current(_get_store(), actor_context_id)}
+
     return server
 
 
