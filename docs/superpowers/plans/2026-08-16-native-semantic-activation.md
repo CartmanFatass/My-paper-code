@@ -6,11 +6,11 @@
 
 **Architecture:** `.codex/config.toml` is the sole live Codex configuration source.  The activation scripts install/remove one delimited TOML hook block and toggle the existing semantic MCP block atomically; legacy JSON templates may remain as inactive artifacts but never determine live hook delivery.  Tests validate both activation transforms and a real `codex exec` audit event before the live workspace is activated.
 
-**Tech Stack:** PowerShell activation operators, Codex CLI 0.147.0, Python 3.11 SB3 environment, MCP 2.0, pytest.
+**Tech Stack:** PowerShell activation operators, Codex CLI 0.147.0, repository Python `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`, MCP 2.0, pytest.
 
 ## Global Constraints
 
-- Invoke every project Python command with `C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe`.
+- Invoke every project Python command with `C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe`.
 - Runtime/state paths must remain repository-relative (`runtime/codex-semantic-mvp`).
 - Use the current native child mechanism with `model=gpt-5.6-luna`, `reasoning_effort=high`, and `fork_turns=1` for smoke testing.
 - No refresh-model-catalog script or `model_catalog_json` workaround is permitted.

@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pytest
 
+from tests.codex_semantic_mvp.conftest import powershell_executable
 from tools.codex_semantic_mvp.constants import (
     ACTIVE_MODE,
     OFF_MODE,
@@ -53,7 +54,7 @@ def _run_operator(
     if script == "codex-semantic-mvp-enable.ps1" and supply_initial_baseline:
         operator_args.extend(("-ExpectedHooksHash", hashlib.sha256((stage / ".codex" / "hooks.json").read_bytes()).hexdigest()))
     return subprocess.run(
-        ["pwsh", "-NoProfile", "-NonInteractive", "-File", str(repo_root / "scripts" / script), "-RepoRoot", str(stage), *operator_args],
+        [powershell_executable(), "-NoProfile", "-NonInteractive", "-File", str(repo_root / "scripts" / script), "-RepoRoot", str(stage), *operator_args],
         text=True,
         capture_output=True,
         encoding="utf-8",
@@ -110,7 +111,7 @@ def test_activation_templates_and_config_contract(repo_root: Path):
     config = (repo_root / ".codex/config.toml").read_text()
     assert config.count("# BEGIN HMASD CODEX SEMANTIC MVP") == 1
     assert config.count("# END HMASD CODEX SEMANTIC MVP") == 1
-    assert '"C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe"' in config
+    assert '"C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe"' in config
     assert "tool_timeout_sec = 1800" in config
     assert ("enabled = true" if "# BEGIN HMASD CODEX SEMANTIC HOOKS" in config else "enabled = false") in config
 
@@ -212,8 +213,8 @@ def test_doctor_rejects_indented_duplicate_inline_hook_command(repo_root: Path, 
     assert enabled.returncode == 0, enabled.stderr
     config = stage / ".codex" / "config.toml"
     config.write_text(config.read_text().replace(
-        'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"',
-        'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n  command = "wrong"',
+        'command = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"',
+        'command = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n  command = "wrong"',
         1,
     ))
     assert collect_baseline(stage)["mode"] == "unknown"
@@ -227,7 +228,7 @@ def test_doctor_rejects_missing_or_mismatched_windows_hook_command(
     assert enabled.returncode == 0, enabled.stderr
     config = stage / ".codex" / "config.toml"
     expected = (
-        'commandWindows = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe '
+        'commandWindows = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe '
         '-m tools.codex_semantic_mvp.hook_entry --mode active"'
     )
     config.write_text(config.read_text().replace(expected, 'commandWindows = "wrong"', 1))
@@ -268,7 +269,7 @@ def test_doctor_rejects_indented_duplicate_mcp_command_for_active_mode(repo_root
     config = stage / ".codex" / "config.toml"
     config.write_text(config.read_text().replace(
         "# END HMASD CODEX SEMANTIC MVP",
-        '  command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe"\n# END HMASD CODEX SEMANTIC MVP',
+        '  command = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe"\n# END HMASD CODEX SEMANTIC MVP',
         1,
     ))
     assert collect_baseline(stage)["mode"] == "unknown"
@@ -530,8 +531,8 @@ def test_active_activation_installs_inline_toml_handlers_and_enables_mcp(
     for event in ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse"):
         assert f"[[hooks.{event}]]" in hook_block
         assert f"[[hooks.{event}.hooks]]" in hook_block
-    assert 'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"' in hook_block
-    assert hook_block.count('commandWindows = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"') == 5
+    assert 'command = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"' in hook_block
+    assert hook_block.count('commandWindows = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"') == 5
     assert '"runtime/codex-semantic-mvp"' in config
     assert config.count("enabled = true") == 1
     assert config.count("enabled = false") == 0
@@ -661,7 +662,7 @@ def test_native_smoke_contract_requires_inline_active_toml_and_audit_evidence(re
     assert "# BEGIN HMASD CODEX SEMANTIC HOOKS" in script
     assert "hooks\\.' + $event" in script
     assert "commandWindows" in script
-    assert "ArgumentList.Add" in script
+    assert "startInfo.Arguments" in script
 
 
 def _native_active_stage(repo_root: Path, tmp_path: Path) -> Path:
@@ -672,8 +673,8 @@ def _native_active_stage(repo_root: Path, tmp_path: Path) -> Path:
         + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'
         + ''.join(
             f'[[hooks.{event}]]\n[[hooks.{event}.hooks]]\ntype = "command"\n'
-            'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
-            'commandWindows = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            'command = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            'commandWindows = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
             for event in ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse")
         )
         + '# END HMASD CODEX SEMANTIC HOOKS\n'
@@ -686,7 +687,7 @@ def _run_native_config_failure(repo_root: Path, stage: Path) -> subprocess.Compl
     fake.write_text('@echo off\r\necho {"type":"thread.started","thread_id":"unused"}\r\nexit /b 0\r\n')
     return subprocess.run(
         [
-            "pwsh", "-NoProfile", "-NonInteractive", "-File",
+            powershell_executable(), "-NoProfile", "-NonInteractive", "-File",
             str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
             "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
         ],
@@ -708,7 +709,7 @@ def test_native_smoke_rejects_missing_windows_hook_command(repo_root: Path, tmp_
     stage = _native_active_stage(repo_root, tmp_path)
     config = stage / ".codex" / "config.toml"
     expected = (
-        'commandWindows = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe '
+        'commandWindows = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe '
         '-m tools.codex_semantic_mvp.hook_entry --mode active"\n'
     )
     config.write_text(config.read_text().replace(expected, "", 1))
@@ -721,7 +722,7 @@ def test_native_smoke_rejects_duplicate_windows_hook_command(repo_root: Path, tm
     stage = _native_active_stage(repo_root, tmp_path)
     config = stage / ".codex" / "config.toml"
     expected = (
-        'commandWindows = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe '
+        'commandWindows = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe '
         '-m tools.codex_semantic_mvp.hook_entry --mode active"\n'
     )
     config.write_text(config.read_text().replace(expected, expected + expected, 1))
@@ -734,7 +735,7 @@ def test_native_smoke_rejects_mismatched_windows_hook_command(repo_root: Path, t
     stage = _native_active_stage(repo_root, tmp_path)
     config = stage / ".codex" / "config.toml"
     expected = (
-        'commandWindows = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe '
+        'commandWindows = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe '
         '-m tools.codex_semantic_mvp.hook_entry --mode active"\n'
     )
     config.write_text(config.read_text().replace(expected, 'commandWindows = "wrong"\n', 1))
@@ -792,7 +793,7 @@ def test_native_smoke_resolves_powershell_codex_shim_to_cmd_sibling(repo_root: P
     env = os.environ.copy()
     env["PATH"] = str(shim_dir) + os.pathsep + env.get("PATH", "")
     result = subprocess.run(
-        ["pwsh", "-NoProfile", "-NonInteractive", "-File",
+        [powershell_executable(), "-NoProfile", "-NonInteractive", "-File",
          str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
          "-RepoRoot", str(stage), "-NativeSmoke"],
         text=True, capture_output=True, encoding="utf-8", errors="replace", check=False, env=env,
@@ -807,7 +808,7 @@ def test_native_smoke_rejects_unlaunchable_codex_shim(repo_root: Path, tmp_path:
     env = os.environ.copy()
     env["PATH"] = str(shim_dir)
     result = subprocess.run(
-        ["pwsh", "-NoProfile", "-NonInteractive", "-File",
+        [powershell_executable(), "-NoProfile", "-NonInteractive", "-File",
          str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
          "-RepoRoot", str(repo_root), "-NativeSmoke"],
         text=True, capture_output=True, encoding="utf-8", errors="replace", check=False, env=env,
@@ -827,8 +828,8 @@ def test_native_smoke_accepts_fake_native_audit_event_without_mutating_config_or
         + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'
         + ''.join(
             f'[[hooks.{event}]]\n[[hooks.{event}.hooks]]\ntype = "command"\n'
-            'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
-            'commandWindows = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            'command = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            'commandWindows = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
             for event in ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse")
         )
         + '# END HMASD CODEX SEMANTIC HOOKS\n'
@@ -855,7 +856,7 @@ def test_native_smoke_accepts_fake_native_audit_event_without_mutating_config_or
     )
     result = subprocess.run(
         [
-            "pwsh", "-NoProfile", "-NonInteractive", "-File",
+            powershell_executable(), "-NoProfile", "-NonInteractive", "-File",
             str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
             "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
         ],
@@ -875,8 +876,8 @@ def test_native_smoke_rejects_stdout_without_new_audit_event(repo_root: Path, tm
         + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'
         + ''.join(
             f'[[hooks.{event}]]\n[[hooks.{event}.hooks]]\ntype = "command"\n'
-            'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
-            'commandWindows = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            'command = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            'commandWindows = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
             for event in ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse")
         )
         + '# END HMASD CODEX SEMANTIC HOOKS\n'
@@ -885,7 +886,7 @@ def test_native_smoke_rejects_stdout_without_new_audit_event(repo_root: Path, tm
     fake.write_text('@echo off\r\necho {"type":"thread.started","thread_id":"native-smoke-session"}\r\necho NATIVE_SEMANTIC_SMOKE_OK\r\nexit /b 0\r\n')
     result = subprocess.run(
         [
-            "pwsh", "-NoProfile", "-NonInteractive", "-File",
+            powershell_executable(), "-NoProfile", "-NonInteractive", "-File",
             str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
             "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
         ],
@@ -904,8 +905,8 @@ def test_native_smoke_rejects_audit_event_for_wrong_cli_session(repo_root: Path,
         + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'
         + ''.join(
             f'[[hooks.{event}]]\n[[hooks.{event}.hooks]]\ntype = "command"\n'
-            'command = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
-            'commandWindows = "C:\\\\Users\\\\wu\\\\.conda\\\\envs\\\\SB3\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            'command = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
+            'commandWindows = "C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"\n'
             for event in ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse")
         )
         + '# END HMASD CODEX SEMANTIC HOOKS\n'
@@ -921,7 +922,7 @@ def test_native_smoke_rejects_audit_event_for_wrong_cli_session(repo_root: Path,
     )
     result = subprocess.run(
         [
-            "pwsh", "-NoProfile", "-NonInteractive", "-File",
+            powershell_executable(), "-NoProfile", "-NonInteractive", "-File",
             str(repo_root / "scripts/codex-semantic-mvp-test.ps1"),
             "-RepoRoot", str(stage), "-NativeSmoke", "-CodexCommand", str(fake),
         ],

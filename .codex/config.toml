@@ -135,7 +135,7 @@ tool_timeout_sec = 2700
 
 # BEGIN HMASD CODEX SEMANTIC MVP
 [mcp_servers.hmasd_orchestrator]
-command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe"
+command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe"
 args = [
   "-m",
   "tools.codex_semantic_mvp.mcp_server",
@@ -153,36 +153,36 @@ required = false
 [[hooks.SessionStart]]
 [[hooks.SessionStart.hooks]]
 type = "command"
-command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
-commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
 timeout = 5
 
 [[hooks.SubagentStart]]
 [[hooks.SubagentStart.hooks]]
 type = "command"
-command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
-commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
 timeout = 5
 
 [[hooks.SubagentStop]]
 [[hooks.SubagentStop.hooks]]
 type = "command"
-command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
-commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
 timeout = 5
 
 [[hooks.Stop]]
 [[hooks.Stop.hooks]]
 type = "command"
-command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
-commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
 timeout = 5
 
 [[hooks.PreToolUse]]
 [[hooks.PreToolUse.hooks]]
 type = "command"
-command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
-commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
 timeout = 5
 
 # END HMASD CODEX SEMANTIC HOOKS

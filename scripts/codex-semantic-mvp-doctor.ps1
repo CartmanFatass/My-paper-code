@@ -4,7 +4,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$python = "C:\Users\wu\.conda\envs\SB3\python.exe"
+$python = "C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe"
 $root = if ([IO.Path]::IsPathRooted($RepoRoot)) { [IO.Path]::GetFullPath($RepoRoot) } else { [IO.Path]::GetFullPath((Join-Path (Get-Location) $RepoRoot)) }
 if (-not (Test-Path -LiteralPath $root -PathType Container)) {
     throw "Repository root does not exist: $root"

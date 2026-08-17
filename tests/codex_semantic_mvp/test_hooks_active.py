@@ -60,9 +60,45 @@ def managed(store: SemanticStore) -> tuple[str, str]:
 
 
 def test_unmanaged_start_is_noop(store: SemanticStore) -> None:
-    result = handle_hook(payload("SubagentStart", session_id="other"), "active", store)
+    result = handle_hook(payload("SubagentStart", session_id=""), "active", store)
     assert result in (None, {"continue": True})
     assert result is None or "additionalContext" not in result
+
+
+def test_session_start_opens_always_on_workflow(store: SemanticStore) -> None:
+    result = handle_hook(payload("SessionStart"), "active", store)
+    assert result == {"continue": True}
+    workflow = store.connection.execute(
+        "SELECT * FROM workflows WHERE session_id = ? AND state = 'ACTIVE'",
+        ("session-active",),
+    ).fetchone()
+    assert workflow is not None
+    assert workflow["scope"] == "session"
+    assert workflow["objective"] == "always-on managed semantic session"
+
+
+def test_subagent_start_auto_opens_and_adds_contract(store: SemanticStore) -> None:
+    result = handle_hook(payload("SubagentStart"), "active", store)
+    assert result and result["continue"] is True
+    assert "HMASD_SUBAGENT_RETURN_V1" in result["additionalContext"]
+    second = handle_hook(payload("SubagentStart"), "active", store)
+    assert second and "HMASD_SUBAGENT_RETURN_V1" in second["additionalContext"]
+    count = store.connection.execute(
+        "SELECT COUNT(*) FROM workflows WHERE session_id = ? AND state = 'ACTIVE'",
+        ("session-active",),
+    ).fetchone()[0]
+    assert count == 1
+
+
+def test_stop_autocompletes_empty_always_on_workflow(store: SemanticStore) -> None:
+    handle_hook(payload("SessionStart"), "active", store)
+    result = handle_hook(payload("Stop"), "active", store)
+    assert result == {"continue": True}
+    row = store.connection.execute(
+        "SELECT state FROM workflows WHERE session_id = ?",
+        ("session-active",),
+    ).fetchone()
+    assert row["state"] == "CLOSED"
 
 
 def test_managed_start_adds_generic_contract(store: SemanticStore) -> None:

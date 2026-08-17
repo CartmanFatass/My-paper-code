@@ -119,7 +119,7 @@ def test_shadow_template_registers_all_events_with_bounded_command(repo_root: Pa
         command = template["hooks"][event][0]["hooks"][0]
         assert command["type"] == "command"
         assert command["command"] == (
-            r"C:\Users\wu\.conda\envs\SB3\python.exe "
+            r"C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe "
             r"-m tools.codex_semantic_mvp.hook_entry --mode shadow"
         )
         assert command["timeout"] == 5

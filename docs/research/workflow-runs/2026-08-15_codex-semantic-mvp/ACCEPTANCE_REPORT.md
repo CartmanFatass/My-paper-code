@@ -39,10 +39,17 @@ as that hook's `trusted_hash` in the user-level `hooks.state` through
 repository configuration; the repository itself has no absolute runtime
 directory.
 
+After a hook-command change, trust the five repository hooks from the
+repository root:
+
+```powershell
+& C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe -m tools.codex_semantic_mvp.trust_hooks --repo-root .
+```
+
 Use the doctor command after activation for configuration and runtime health:
 
 ```powershell
-& C:\Users\wu\.conda\envs\SB3\python.exe -m tools.codex_semantic_mvp.doctor --repo-root .
+& C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe -m tools.codex_semantic_mvp.doctor --repo-root .
 ```
 
 `doctor` validates the repository-owned configuration shape. Actual delivery

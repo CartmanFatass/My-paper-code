@@ -9,7 +9,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$python = "C:\Users\wu\.conda\envs\SB3\python.exe"
+$python = "C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe"
 $root = if ([IO.Path]::IsPathRooted($RepoRoot)) { [IO.Path]::GetFullPath($RepoRoot) } else { [IO.Path]::GetFullPath((Join-Path (Get-Location) $RepoRoot)) }
 if (-not (Test-Path -LiteralPath $root -PathType Container)) { throw "Repository root does not exist: $root" }
 
@@ -20,7 +20,11 @@ function Resolve-CodexCommand {
         $candidate = Get-Item -LiteralPath $Command -ErrorAction SilentlyContinue
     } else {
         $candidate = Get-Command -Name $Command -ErrorAction SilentlyContinue | Select-Object -First 1
-        if ($candidate) { $candidate = Get-Item -LiteralPath ($candidate.Source ?? $candidate.Path) -ErrorAction SilentlyContinue }
+        if ($candidate) {
+            $candidatePath = $candidate.Source
+            if (-not $candidatePath) { $candidatePath = $candidate.Path }
+            $candidate = Get-Item -LiteralPath $candidatePath -ErrorAction SilentlyContinue
+        }
     }
     if (-not $candidate) { throw "NATIVE_SMOKE_CODEX_COMMAND_INVALID: cannot resolve '$Command' to an executable .exe/.cmd" }
     $extension = [IO.Path]::GetExtension($candidate.FullName).ToLowerInvariant()
@@ -75,8 +79,8 @@ function Invoke-NativeSmoke {
         $typeLines = @([regex]::Matches($eventSection, '(?m)^type[ \t]*=[ \t]*"[^"]*"[ \t]*\r?$'))
         $commandLines = @([regex]::Matches($eventSection, '(?m)^command[ \t]*=[ \t]*"[^"]*"[ \t]*\r?$'))
         $commandWindowsLines = @([regex]::Matches($eventSection, '(?m)^commandWindows[ \t]*=[ \t]*"[^"]*"[ \t]*\r?$'))
-        $expectedCommand = 'command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"'
-        $expectedCommandWindows = 'commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"'
+        $expectedCommand = 'command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"'
+        $expectedCommandWindows = 'commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"'
         if ($nestedHeaders.Count -ne 1 -or $nestedHeaders[0] -ne $nestedExpected -or
             $typeLines.Count -ne 1 -or $typeLines[0].Value.Trim() -ne 'type = "command"' -or
             $commandLines.Count -ne 1 -or $commandLines[0].Value.Trim() -ne $expectedCommand -or
@@ -96,12 +100,12 @@ function Invoke-NativeSmoke {
     $expectedArgs = @('"-m"', '"tools.codex_semantic_mvp.mcp_server"', '"--state-dir"', '"runtime/codex-semantic-mvp"')
     if (-not $mcpSectionMatch.Success -or
         ([regex]::Matches($mcpSection, '(?m)^command[ \t]*=')).Count -ne 1 -or
-        $mcpSection -notmatch '(?m)^command[ \t]*=[ \t]*"C:\\\\Users\\\\wu\\\\\.conda\\\\envs\\\\SB3\\\\python\.exe"[ \t]*\r?$' -or
+        $mcpSection -notmatch '(?m)^command[ \t]*=[ \t]*"C:\\\\Users\\\\fires\\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python\.exe"[ \t]*\r?$' -or
         $argLines.Count -ne $expectedArgs.Count -or
         (@(0..($expectedArgs.Count - 1) | Where-Object { $argLines[$_] -ne $expectedArgs[$_] }).Count -ne 0) -or
         ([regex]::Matches($mcpSection, '(?m)^enabled[ \t]*=[ \t]*(?:true|false)')).Count -ne 1 -or
         $mcpSection -notmatch '(?m)^enabled[ \t]*=[ \t]*true[ \t]*\r?$') {
-        throw "NATIVE_SMOKE_REQUIRES_INLINE_TOML: hmasd_orchestrator section must use the vetted SB3 command, relative state, and enabled=true"
+        throw "NATIVE_SMOKE_REQUIRES_INLINE_TOML: hmasd_orchestrator section must use the vetted repository Python command, relative state, and enabled=true"
     }
 
     $auditPath = Join-Path $Root "runtime\codex-semantic-mvp\audit.jsonl"
@@ -117,23 +121,26 @@ function Invoke-NativeSmoke {
     $prompt = "Read-only smoke check. Do not edit files, run commands, or change configuration. Reply with exactly NATIVE_SEMANTIC_SMOKE_OK."
     $process = $null
     try {
-        $startInfo = [Diagnostics.ProcessStartInfo]::new()
+        $startInfo = New-Object Diagnostics.ProcessStartInfo
         $startInfo.FileName = $resolvedCommand
         $startInfo.WorkingDirectory = $Root
         $startInfo.UseShellExecute = $false
         $startInfo.RedirectStandardOutput = $true
         $startInfo.RedirectStandardError = $true
-        foreach ($argument in @(
+        $quotedArgs = foreach ($argument in @(
             "exec", "--json", "--dangerously-bypass-hook-trust", "--skip-git-repo-check",
             "--cd", $Root, "--model", "gpt-5.6-luna", $prompt
-        )) { [void]$startInfo.ArgumentList.Add($argument) }
-        $process = [Diagnostics.Process]::new()
+        )) {
+            if ($argument -match '[\s"]') { '"' + ($argument -replace '"', '\"') + '"' } else { $argument }
+        }
+        $startInfo.Arguments = [string]::Join(" ", $quotedArgs)
+        $process = New-Object Diagnostics.Process
         $process.StartInfo = $startInfo
         [void]$process.Start()
         $stdoutTask = $process.StandardOutput.ReadToEndAsync()
         $stderrTask = $process.StandardError.ReadToEndAsync()
         if (-not $process.WaitForExit($TimeoutSec * 1000)) {
-            try { $process.Kill($true) } catch { $process.Kill() }
+            try { $process.Kill() } catch { }
             throw "NATIVE_SMOKE_TIMEOUT: codex exec exceeded ${TimeoutSec}s"
         }
         $stdout = $stdoutTask.Result
@@ -145,7 +152,7 @@ function Invoke-NativeSmoke {
         }
     }
     finally {
-        if ($process -and -not $process.HasExited) { try { $process.Kill($true) } catch {} }
+        if ($process -and -not $process.HasExited) { try { $process.Kill() } catch {} }
         foreach ($path in @($stdoutPath, $stderrPath)) { if (Test-Path -LiteralPath $path) { Remove-Item -LiteralPath $path -Force } }
     }
 

@@ -15,3 +15,6 @@ MAX_TYPED_JSON_BYTES = 32_768
 MAX_WAIT_SECONDS = 1500
 WAIT_POLL_SECONDS = 0.5
 
+ALWAYS_ON_SCOPE = "session"
+ALWAYS_ON_OBJECTIVE = "always-on managed semantic session"
+

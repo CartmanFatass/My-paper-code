@@ -22,7 +22,7 @@ from typing import Any
 
 # Keep imports explicit so this module remains usable with the repository's
 # package layout and does not introduce an SDK/App Server dependency.
-from .constants import SHADOW_MODE, STATE_DIR_ENV
+from .constants import ALWAYS_ON_OBJECTIVE, ALWAYS_ON_SCOPE, SHADOW_MODE, STATE_DIR_ENV
 from .db import DEFAULT_STATE_PATH
 from .protocol import ProtocolError, extract_return_envelope, validate_subagent_return
 from .store import SemanticStore
@@ -152,6 +152,36 @@ def _active_workflow(store: SemanticStore, session_id: str) -> dict[str, object]
     return dict(row) if row is not None else None
 
 
+def _ensure_active_workflow(
+    payload: Mapping[str, object], store: SemanticStore
+) -> dict[str, object] | None:
+    """Open the session workflow on first ACTIVE hook if none exists."""
+    session_id = str(payload.get("session_id") or "")
+    existing = _active_workflow(store, session_id)
+    if existing is not None:
+        return existing
+    if not session_id:
+        return None
+    turn_id = str(payload.get("turn_id") or "session-start")
+    try:
+        store.open_workflow(
+            session_id=session_id,
+            opened_turn_id=turn_id,
+            scope=ALWAYS_ON_SCOPE,
+            objective=ALWAYS_ON_OBJECTIVE,
+        )
+    except Exception as exc:
+        _hook_audit(
+            store,
+            "HOOK_FAIL_OPEN",
+            session_id,
+            None,
+            {"exception_class": type(exc).__name__, "phase": "always_on_open"},
+        )
+        return _active_workflow(store, session_id)
+    return _active_workflow(store, session_id)
+
+
 def _task(store: SemanticStore, workflow_id: str, task_id: str) -> dict[str, object] | None:
     if not workflow_id or not task_id:
         return None
@@ -251,10 +281,17 @@ def _record_untyped_binding_mismatch(
     return _binding_mismatch(store, workflow_id, task_id, reason)
 
 
+def _active_session_start(
+    payload: Mapping[str, object], store: SemanticStore
+) -> dict[str, object]:
+    _ensure_active_workflow(payload, store)
+    return _neutral_response()
+
+
 def _active_subagent_start(
     payload: Mapping[str, object], store: SemanticStore
 ) -> dict[str, object] | None:
-    workflow = _active_workflow(store, str(payload.get("session_id") or ""))
+    workflow = _ensure_active_workflow(payload, store)
     if workflow is None:
         return None
     return {"continue": True, "additionalContext": GENERIC_SUBAGENT_CONTEXT}
@@ -411,7 +448,13 @@ def _active_stop(
             and str(task.get("lifecycle") or "") not in {"INTAKEN", "CANCELLED"}
         ]
         open_obligations = list(state.get("open_obligations", []))
-        if not pending_tasks and not open_obligations and receipt is not None:
+        if not pending_tasks and not open_obligations:
+            if receipt is None:
+                store.create_closure_receipt(
+                    workflow_id,
+                    "COMPLETED",
+                    "session stop with no open obligations",
+                )
             return _neutral_response()
 
         if bool(payload.get("stop_hook_active")):
@@ -482,6 +525,12 @@ def handle_hook(
             _append_audit(store.path.parent, kind, diagnostic)
         except Exception:
             pass
+        if mode == "active" and event == "SessionStart":
+            try:
+                return _active_session_start(payload, store)
+            except Exception as exc:
+                _hook_audit(store, "HOOK_FAIL_OPEN", diagnostic.get("session_id") or None, None, {"exception_class": type(exc).__name__})
+                return _neutral_response()
         if mode == "active" and event == "SubagentStart":
             try:
                 return _active_subagent_start(payload, store)

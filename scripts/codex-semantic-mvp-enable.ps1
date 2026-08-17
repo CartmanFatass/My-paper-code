@@ -11,7 +11,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $root = if ([IO.Path]::IsPathRooted($RepoRoot)) { [IO.Path]::GetFullPath($RepoRoot) } else { [IO.Path]::GetFullPath((Join-Path (Get-Location) $RepoRoot)) }
-$python = "C:\Users\wu\.conda\envs\SB3\python.exe"
+$python = "C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe"
 
 function Get-BytesHash([byte[]]$Bytes) {
     $sha = [Security.Cryptography.SHA256]::Create()
@@ -42,7 +42,7 @@ function Invoke-InjectedFailure([string]$Point) {
 }
 
 function New-SemanticHookToml([string]$Mode) {
-    $command = 'C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode ' + $Mode.ToLowerInvariant()
+    $command = 'C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode ' + $Mode.ToLowerInvariant()
     $lines = @(
         '# BEGIN HMASD CODEX SEMANTIC HOOKS',
         '[hooks]'
@@ -130,7 +130,7 @@ function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled, [strin
     $section = $block.Substring($sectionMatch.Index, $sectionEnd - $sectionMatch.Index)
     $enabledMatches = [regex]::Matches($section, '(?m)^[ \t]*enabled[ \t]*=[ \t]*(true|false)[ \t]*(?:\r?$)')
     if ($enabledMatches.Count -ne 1) { throw "MCP_ENABLED_FIELD_INVALID" }
-    if ($section -notmatch [regex]::Escape('command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe"')) {
+    if ($section -notmatch [regex]::Escape('command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe"')) {
         throw "MCP_PYTHON_PATH_INVALID"
     }
     if ($section -notmatch '(?m)^tool_timeout_sec[ \t]*=[ \t]*1800[ \t]*(?:\r?$)') { throw "MCP_TIMEOUT_INVALID" }
@@ -159,7 +159,7 @@ function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled, [strin
             if ([regex]::Matches($managedBlock, "(?m)^\[\[hooks\.$event\]\][ \t]*(?:\r?$)").Count -ne 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
             if ([regex]::Matches($managedBlock, "(?m)^\[\[hooks\.$event\.hooks\]\][ \t]*(?:\r?$)").Count -ne 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
         }
-        if ([regex]::Matches($managedBlock, '(?m)^command[ \t]*=[ \t]*"C:\\\\Users\\\\wu\\\\\.conda\\\\envs\\\\SB3\\\\python\.exe -m tools\.codex_semantic_mvp\.hook_entry --mode (?:active|shadow)"[ \t]*(?:\r?$)').Count -ne 5) { throw "HOOK_MARKER_BLOCK_INVALID" }
+        if ([regex]::Matches($managedBlock, '(?m)^command[ \t]*=[ \t]*"C:\\\\Users\\\\fires\\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python\.exe -m tools\.codex_semantic_mvp\.hook_entry --mode (?:active|shadow)"[ \t]*(?:\r?$)').Count -ne 5) { throw "HOOK_MARKER_BLOCK_INVALID" }
         $commandMatches = [regex]::Matches($managedBlock, '(?m)^[ \t]*command[ \t]*=[ \t]*"([^"]*)"[ \t]*(?:\r?$)')
         $commandWindowsMatches = [regex]::Matches($managedBlock, '(?m)^[ \t]*commandWindows[ \t]*=[ \t]*"([^"]*)"[ \t]*(?:\r?$)')
         $commandWindowsLines = [regex]::Matches($managedBlock, '(?m)^[ \t]*commandWindows[ \t]*=')
@@ -169,7 +169,7 @@ function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled, [strin
                 $commandValue = $commandMatches[$index].Groups[1].Value
                 $commandWindowsValue = $commandWindowsMatches[$index].Groups[1].Value
                 if ($commandValue -ne $commandWindowsValue -or
-                    $commandValue -notmatch '^C:\\\\Users\\\\wu\\\\\.conda\\\\envs\\\\SB3\\\\python\.exe -m tools\.codex_semantic_mvp\.hook_entry --mode (?:active|shadow)$') {
+                    $commandValue -notmatch '^C:\\\\Users\\\\fires\\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python\.exe -m tools\.codex_semantic_mvp\.hook_entry --mode (?:active|shadow)$') {
                     throw "HOOK_MARKER_BLOCK_INVALID"
                 }
             }

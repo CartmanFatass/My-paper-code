@@ -87,12 +87,14 @@ def test_stop_guard_ignores_last_assistant_message_words(
 ) -> None:
     store = SemanticStore(tmp_path / "state.sqlite3").initialize()
     try:
-        store.open_workflow(
+        workflow_id = store.open_workflow(
             session_id="session-active",
             opened_turn_id="turn-open",
             scope="test",
             objective="test objective",
         )
+        store.register_task(workflow_id, "task-1", "default", "child task")
+        store.record_agent_started(workflow_id, "task-1", "agent-1", "default")
         result = handle_hook(
             {
                 "hook_event_name": "Stop",
