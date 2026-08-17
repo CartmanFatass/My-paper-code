@@ -26,9 +26,11 @@ from datetime import datetime, timezone
 
 from .constants import ALWAYS_ON_OBJECTIVE, ALWAYS_ON_SCOPE, SHADOW_MODE, STATE_DIR_ENV
 from .db import DEFAULT_STATE_PATH
+from .hook_identity import normalize_hook_identity
 from .models import ObligationKind
 from .protocol import ProtocolError, extract_return_envelope, validate_subagent_return
 from .store import OPEN_TASK_LIFECYCLES, SemanticStore
+from .topology_probe import append_probe_record
 
 
 SUPPORTED_EVENTS = frozenset(
@@ -718,6 +720,15 @@ def handle_hook(
             _append_audit(store.path.parent, kind, diagnostic)
         except Exception:
             pass
+        if mode == SHADOW_MODE and event in {"PreCompact", "PostCompact"}:
+            try:
+                append_probe_record(
+                    store.path.parent / "topology-probe.jsonl",
+                    normalize_hook_identity(payload),
+                    payload,
+                )
+            except Exception:
+                pass
         if mode == "active" and event == "SessionStart":
             try:
                 return _active_session_start(payload, store)

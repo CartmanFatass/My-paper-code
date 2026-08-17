@@ -48,7 +48,7 @@ function Invoke-InjectedFailure([string]$Point) {
 
 function Get-SemanticHookEvents([string]$Mode) {
     $events = @('SessionStart', 'SubagentStart', 'SubagentStop', 'Stop')
-    if ($Mode -eq 'Shadow') { $events += 'PreToolUse' }
+    if ($Mode -eq 'Shadow') { $events += @('PreToolUse', 'PreCompact', 'PostCompact') }
     return $events
 }
 
@@ -176,9 +176,13 @@ function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled, [strin
             if ([regex]::Matches($managedBlock, "(?m)^\[\[hooks\.$event\]\][ \t]*(?:\r?$)").Count -ne 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
             if ([regex]::Matches($managedBlock, "(?m)^\[\[hooks\.$event\.hooks\]\][ \t]*(?:\r?$)").Count -ne 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
         }
-        $preToolUseCount = [regex]::Matches($managedBlock, '(?m)^\[\[hooks\.PreToolUse\]\][ \t]*(?:\r?$)').Count
-        if ($preToolUseCount -gt 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
-        $expectedHookCount = 4 + $preToolUseCount
+        $optionalHookCount = 0
+        foreach ($optionalEvent in @('PreToolUse', 'PreCompact', 'PostCompact')) {
+            $optionalCount = [regex]::Matches($managedBlock, "(?m)^\[\[hooks\.$optionalEvent\]\][ \t]*(?:\r?$)").Count
+            if ($optionalCount -gt 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
+            $optionalHookCount += $optionalCount
+        }
+        $expectedHookCount = 4 + $optionalHookCount
         $commandMatches = [regex]::Matches($managedBlock, '(?m)^[ \t]*command[ \t]*=[ \t]*"([^"]*)"[ \t]*(?:\r?$)')
         $commandWindowsMatches = [regex]::Matches($managedBlock, '(?m)^[ \t]*commandWindows[ \t]*=[ \t]*"([^"]*)"[ \t]*(?:\r?$)')
         $commandWindowsLines = [regex]::Matches($managedBlock, '(?m)^[ \t]*commandWindows[ \t]*=')

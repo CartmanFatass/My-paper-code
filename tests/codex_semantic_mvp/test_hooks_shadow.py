@@ -14,7 +14,15 @@ from tools.codex_semantic_mvp.store import SemanticStore
 from tools.codex_semantic_mvp.hook_entry import handle_hook
 
 
-SUPPORTED_EVENTS = ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse")
+SUPPORTED_EVENTS = (
+    "SessionStart",
+    "SubagentStart",
+    "SubagentStop",
+    "Stop",
+    "PreToolUse",
+    "PreCompact",
+    "PostCompact",
+)
 
 
 @pytest.fixture
