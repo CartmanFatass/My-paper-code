@@ -97,6 +97,42 @@ does not point into C++. Production code does not import isolated candidates.
 Runners connect boundaries; they do not own environment physics or scientific
 interpretation.
 
+## Agent context control plane
+
+Repository-local Codex overlay for actor-scoped workflows. It is a delivery,
+obligation, epoch, and reanchor ledger. runtime SQLite is noncanonical.
+
+| Surface | Role |
+| --- | --- |
+| [`tools/codex_semantic_mvp/`](../../tools/codex_semantic_mvp/) | Hook/MCP overlay, actor registry, owner-local epochs, semantic commits, checkpoints, packet refs |
+| [`tools/codex_context_lifecycle/`](../../tools/codex_context_lifecycle/) | Context-source registry, promotion, rollover, working-set, and retention extension |
+| [`runtime/codex-semantic-mvp/`](../../runtime/codex-semantic-mvp/) | Gitignored control-plane runtime. Not canonical project memory. |
+| [`tests/codex_semantic_mvp/`](../../tests/codex_semantic_mvp/) | Overlay contract tests |
+| [`tests/codex_context_lifecycle/`](../../tests/codex_context_lifecycle/) | Context-lifecycle contract tests |
+| [`docs/project/CONTEXT_SOURCE_REGISTRY.toml`](CONTEXT_SOURCE_REGISTRY.toml) | Role-scoped source index |
+| [`docs/project/DECISIONS_INDEX.md`](DECISIONS_INDEX.md) | Shared ADR index |
+
+PROJECT_MAP is the stable codemap. CURRENT_WORK is the current-work index.
+
+## Repository context lifecycle
+
+Progressive context layers, loaded only when the current actor and assignment
+require them:
+
+```text
+AGENTS/roles
+Skills
+PROJECT_MAP
+CURRENT_WORK
+owner artifacts
+ADR index
+epochs/checkpoints
+typed packets
+history
+```
+
+Automatic memory and compaction summaries are retrieval hints only.
+
 ## Maintenance Protocol
 
 The Code Project Manager owns this map's accuracy. Update it in the same code

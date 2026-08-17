@@ -13,6 +13,13 @@ from .models import normalize_obligation_kind
 from .semantic_commits import semantic_commit_current
 from .store import SemanticStore
 
+try:
+    from tools.codex_context_lifecycle.precedence import PRECEDENCE_HEADER
+    from tools.codex_context_lifecycle.working_set import build_working_set
+except ImportError:  # pragma: no cover - overlay-only environments
+    PRECEDENCE_HEADER = ""
+    build_working_set = None
+
 
 CAPSULE_SCHEMA_VERSION = 1
 FORBIDDEN_INFERENCES = (
@@ -81,6 +88,7 @@ def build_capsule(store: SemanticStore, actor_context_id: str) -> dict[str, obje
     workflow = _workflow(store, actor_context_id)
     epoch = plan_epoch_current(store, actor_context_id)
     commit = semantic_commit_current(store, actor_context_id)
+    working = build_working_set(store, actor_context_id) if build_working_set else None
     obligations = _obligations(store, workflow["workflow_id"] if workflow else None)
     report_ids = [
         str(item.get("subject") or "")
@@ -89,6 +97,15 @@ def build_capsule(store: SemanticStore, actor_context_id: str) -> dict[str, obje
         and item.get("subject")
     ]
     packets = _packet_rows(store, actor_context_id)
+    if working is not None:
+        allowed_packets = set(working.active_packet_ids)
+        packets = [item for item in packets if item.get("packet_id") in allowed_packets]
+        report_ids = list(working.unintaken_report_ids)
+        obligations = [
+            item
+            for item in obligations
+            if item.get("obligation_id") in set(working.open_obligation_ids)
+        ]
     payload = commit.get("payload") if commit else {}
     body = _project_body(actor.actor_kind, payload or {}, workflow, packets, obligations)
     capsule: dict[str, object] = {
@@ -98,17 +115,19 @@ def build_capsule(store: SemanticStore, actor_context_id: str) -> dict[str, obje
         "actor_kind": actor.actor_kind.value,
         "scope_key": actor.scope_key,
         "direction_id": actor.direction_id,
-        "checkpoint_id": None,
+        "checkpoint_id": working.checkpoint_id if working else None,
         "state_version": workflow.get("state_version") if workflow else 0,
         "epoch_id": epoch.get("epoch_id") if epoch else None,
         "epoch_revision": epoch.get("revision") if epoch else None,
-        "canonical_refs": _canonical_refs(actor.actor_kind, commit, epoch),
+        "canonical_refs": list((working.canonical_refs if working else _canonical_refs(actor.actor_kind, commit, epoch))),
         "open_obligation_ids": [item.get("obligation_id") for item in obligations],
         "unintaken_report_ids": report_ids,
         "forbidden_inferences": list(FORBIDDEN_INFERENCES),
         "current_objective": (epoch or {}).get("objective") or (workflow or {}).get("objective") or "",
         "frozen_invariants": list((epoch or {}).get("frozen_invariants") or []),
         "next_safe_action": "Call context_checkpoint_current and context_reanchor_ack before mutating actor state.",
+        "memory_authority": "none",
+        "compaction_summary_authority": "none",
         "body": body,
     }
     return capsule
@@ -205,6 +224,8 @@ def _trim(capsule: dict[str, object]) -> dict[str, object]:
         "current_objective",
         "frozen_invariants",
         "next_safe_action",
+        "memory_authority",
+        "compaction_summary_authority",
     }
     rendered = json.dumps(capsule, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     if len(rendered.encode("utf-8")) <= MAX_CAPSULE_BYTES:
@@ -229,6 +250,9 @@ def render_capsule(capsule: Mapping[str, object]) -> str:
         f"epoch={trimmed.get('epoch_id')} rev={trimmed.get('epoch_revision')}",
         f"state_version={trimmed.get('state_version')}",
         f"objective={trimmed.get('current_objective')}",
+        PRECEDENCE_HEADER or "CONTEXT PRECEDENCE",
+        "AUTOMATIC_MEMORY_AUTHORITY=NONE",
+        "COMPACTION_SUMMARY_AUTHORITY=NONE",
         "AUTHORITY REFERENCES",
     ]
     for ref in trimmed.get("canonical_refs") or []:

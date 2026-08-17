@@ -33,6 +33,8 @@ def _row(row: object) -> dict[str, Any]:
     item = dict(row)
     item["authority_refs"] = json.loads(item.pop("authority_refs_json"))
     item["frozen_invariants"] = json.loads(item.pop("frozen_invariants_json"))
+    item["navigation_refs"] = json.loads(item.pop("navigation_refs_json") or "[]")
+    item["procedure_refs"] = json.loads(item.pop("procedure_refs_json") or "[]")
     return item
 
 
@@ -45,19 +47,36 @@ def plan_epoch_open(
     authority_refs: list[str],
     frozen_invariants: list[str],
     exit_boundary: str,
+    navigation_refs: list[str] | tuple[str, ...] = (),
+    procedure_refs: list[str] | tuple[str, ...] = (),
+    registry: object | None = None,
 ) -> dict[str, Any]:
     kind = epoch_kind if isinstance(epoch_kind, EpochKind) else EpochKind(str(epoch_kind))
     with store._lock, store.connection:
         actor_kind = _actor_kind(store, actor_context_id)
         _require_compatible(actor_kind, kind)
+        if registry is not None:
+            from tools.codex_context_lifecycle.source_registry import sources_for_actor
+
+            requested = list(navigation_refs) + list(procedure_refs)
+            visible = {
+                source.id
+                for source in sources_for_actor(
+                    registry, actor_kind, requested_source_ids=requested
+                )
+            }
+            unknown = [item for item in requested if item not in visible]
+            if unknown:
+                raise ValueError(f"source not visible to actor: {unknown}")
         now = _now()
         epoch_id = _new_id("epoch")
         store.connection.execute(
             """INSERT INTO plan_epochs (
                 epoch_id, actor_context_id, epoch_kind, revision, objective,
                 authority_refs_json, frozen_invariants_json, exit_boundary,
+                navigation_refs_json, procedure_refs_json,
                 state, created_at, updated_at
-            ) VALUES (?, ?, ?, 1, ?, ?, ?, ?, 'OPEN', ?, ?)""",
+            ) VALUES (?, ?, ?, 1, ?, ?, ?, ?, ?, ?, 'OPEN', ?, ?)""",
             (
                 epoch_id,
                 actor_context_id,
@@ -66,6 +85,8 @@ def plan_epoch_open(
                 _json(list(authority_refs)),
                 _json(list(frozen_invariants)),
                 exit_boundary,
+                _json(list(navigation_refs)),
+                _json(list(procedure_refs)),
                 now,
                 now,
             ),
@@ -97,6 +118,8 @@ def revise_epoch(
     frozen_invariants: list[str],
     exit_boundary: str,
     reason: str,
+    navigation_refs: list[str] | tuple[str, ...] | None = None,
+    procedure_refs: list[str] | tuple[str, ...] | None = None,
 ) -> dict[str, object]:
     with store._lock, store.connection:
         row = store.connection.execute(
@@ -109,15 +132,21 @@ def revise_epoch(
         if int(row["revision"]) != int(expected_revision):
             raise EpochRevisionConflict("epoch revision conflict")
         now = _now()
+        current = _row(row)
+        nav = list(navigation_refs) if navigation_refs is not None else list(current["navigation_refs"])
+        proc = list(procedure_refs) if procedure_refs is not None else list(current["procedure_refs"])
         store.connection.execute(
             """UPDATE plan_epochs SET revision = revision + 1, objective = ?,
             authority_refs_json = ?, frozen_invariants_json = ?, exit_boundary = ?,
+            navigation_refs_json = ?, procedure_refs_json = ?,
             updated_at = ? WHERE epoch_id = ?""",
             (
                 objective,
                 _json(list(authority_refs)),
                 _json(list(frozen_invariants)),
                 exit_boundary,
+                _json(nav),
+                _json(proc),
                 now,
                 epoch_id,
             ),

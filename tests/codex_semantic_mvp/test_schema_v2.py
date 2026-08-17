@@ -75,8 +75,8 @@ def _insert_v1_session(
 
 def test_schema_version_is_two_on_fresh_initialize(tmp_path: Path) -> None:
     store = SemanticStore(tmp_path / "state.sqlite3").initialize()
-    assert SCHEMA_VERSION == 2
-    assert store.connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 2
+    assert SCHEMA_VERSION >= 2
+    assert store.connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == SCHEMA_VERSION
     store.close()
 
 

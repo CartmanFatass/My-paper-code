@@ -1,5 +1,12 @@
 # Codex Semantic MVP Acceptance Report
 
+## Repository-owned context lifecycle (2026-08-17)
+
+See [REPOSITORY_CONTEXT_LIFECYCLE_ACCEPTANCE.md](REPOSITORY_CONTEXT_LIFECYCLE_ACCEPTANCE.md).
+The actor-scoped overlay remains the accepted control-plane baseline. The new
+package adds source precedence, promotion, rollover, working-set exclusion, and
+audit-only retention on schema v3. It does not replace this report.
+
 ## Actor-scoped compaction (2026-08-17)
 
 Implemented the actor-scoped control-plane overlay through schema v2, owner-local

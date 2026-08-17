@@ -31,3 +31,8 @@ and sessions do not share a write surface.
 - Scientific direction ledger: `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
 - Runtime facts when assigned: `docs/project/AGENT_CONTEXT.md`
 - Stable code map (Code Project Manager-owned): `docs/project/PROJECT_MAP.md`
+- Repository context precedence: `docs/project/CONTEXT_PRECEDENCE.md`
+- Context source registry: `docs/project/CONTEXT_SOURCE_REGISTRY.toml`
+- Stable decisions index: `docs/project/DECISIONS_INDEX.md`
+- Promotion policy: `docs/project/CONTEXT_PROMOTION_POLICY.md`
+- Retention policy: `docs/project/CONTEXT_RETENTION_POLICY.md`

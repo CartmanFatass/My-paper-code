@@ -100,6 +100,8 @@ def test_schema_columns_indexes_and_versioned_reopen_migration(tmp_path):
         "intakes", "events", "hook_guards", "closure_receipts",
         "actor_contexts", "plan_epochs", "semantic_commits",
         "context_checkpoints", "reanchor_acks", "packet_refs",
+        "promotion_proposals", "epoch_rollovers",
+        "context_retention_marks", "context_gc_runs",
     }
     expected_columns = {
         "schema_meta": {"version", "applied_at"},
@@ -144,7 +146,7 @@ def test_schema_columns_indexes_and_versioned_reopen_migration(tmp_path):
     assert reopened.connection.execute(
         "SELECT 1 FROM sqlite_master WHERE type = 'index' AND name = 'one_active_workflow_per_session'"
     ).fetchone() is None
-    assert reopened.connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 2
+    assert reopened.connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 3
 
 
 def test_typed_report_requires_protocol_validation_and_identity(store):

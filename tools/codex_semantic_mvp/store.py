@@ -87,6 +87,26 @@ class SemanticStore:
         with self._lock:
             self.connection.close()
 
+    def create_promotion_proposal(self, **kwargs):
+        from tools.codex_context_lifecycle.promotion import create_promotion_proposal
+
+        return create_promotion_proposal(self, **kwargs)
+
+    def resolve_promotion_proposal(self, **kwargs):
+        from tools.codex_context_lifecycle.promotion import resolve_promotion_proposal
+
+        return resolve_promotion_proposal(self, **kwargs)
+
+    def mark_promotion_applied(self, **kwargs):
+        from tools.codex_context_lifecycle.promotion import mark_promotion_applied
+
+        return mark_promotion_applied(self, **kwargs)
+
+    def promotion_proposals_for_epoch(self, epoch_id: str):
+        from tools.codex_context_lifecycle.promotion import promotion_proposals_for_epoch
+
+        return promotion_proposals_for_epoch(self, epoch_id)
+
     def _ensure_session_root_actor(self, session_id: str, now: str) -> str:
         """Attach or create the unclassified session-root actor for a workflow."""
         existing = self.connection.execute(

@@ -186,7 +186,7 @@ def _register_tools(server: MCPServer) -> MCPServer:
         return {
             "status": "OK",
             "server": SERVER_NAME,
-            "schema_version": 2,
+            "schema_version": 3,
             "fail_open": fail_open,
             "ledger_role": "control_plane_delivery_and_obligation_ledger",
         }
@@ -297,8 +297,14 @@ def _register_tools(server: MCPServer) -> MCPServer:
 
     @server.tool(description="Resolve one open control-plane obligation.")
     def obligation_resolve(
-        workflow_id: str, obligation_id: str, resolution: dict[str, Any] | None = None
+        workflow_id: str,
+        obligation_id: str,
+        resolution: dict[str, Any] | None = None,
+        source_kind: str = "USER_AUTHORITY",
     ) -> dict[str, Any]:
+        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
+
+        assert_authoritative_source(source_kind, "resolve_obligation")
         resolved = _get_store().resolve_obligation(workflow_id, obligation_id, resolution)
         return {"workflow_id": workflow_id, "obligation_id": resolved, "state": "RESOLVED"}
 
@@ -315,7 +321,15 @@ def _register_tools(server: MCPServer) -> MCPServer:
         )
 
     @server.tool(description="Close a workflow after validating task and obligation obligations.")
-    def workflow_close(workflow_id: str, closure_kind: str, summary: str = "") -> dict[str, Any]:
+    def workflow_close(
+        workflow_id: str,
+        closure_kind: str,
+        summary: str = "",
+        source_kind: str = "USER_AUTHORITY",
+    ) -> dict[str, Any]:
+        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
+
+        assert_authoritative_source(source_kind, "close_workflow")
         if closure_kind not in CLOSURE_KINDS:
             raise ValueError(f"unknown closure kind: {closure_kind}")
         receipt_id = _get_store().create_closure_receipt(workflow_id, closure_kind, summary)
@@ -359,9 +373,14 @@ def _register_tools(server: MCPServer) -> MCPServer:
         authority_refs: list[str],
         frozen_invariants: list[str],
         exit_boundary: str,
+        navigation_refs: list[str] | None = None,
+        procedure_refs: list[str] | None = None,
+        source_kind: str = "USER_AUTHORITY",
     ) -> dict[str, Any]:
+        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
         from .epochs import plan_epoch_open as _open
 
+        assert_authoritative_source(source_kind, "open_epoch")
         return _open(
             _get_store(),
             actor_context_id=actor_context_id,
@@ -370,6 +389,8 @@ def _register_tools(server: MCPServer) -> MCPServer:
             authority_refs=authority_refs,
             frozen_invariants=frozen_invariants,
             exit_boundary=exit_boundary,
+            navigation_refs=navigation_refs or (),
+            procedure_refs=procedure_refs or (),
         )
 
     @server.tool(description="Return the actor's current open plan epoch.")
@@ -389,10 +410,15 @@ def _register_tools(server: MCPServer) -> MCPServer:
         frozen_invariants: list[str],
         exit_boundary: str,
         reason: str,
+        navigation_refs: list[str] | None = None,
+        procedure_refs: list[str] | None = None,
+        source_kind: str = "USER_AUTHORITY",
     ) -> dict[str, Any]:
+        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
         from .epochs import plan_epoch_current as _current
         from .epochs import revise_epoch
 
+        assert_authoritative_source(source_kind, "revise_epoch")
         current = _current(_get_store(), actor_context_id)
         if current is None or current["epoch_id"] != epoch_id:
             raise ValueError("epoch does not belong to this actor")
@@ -405,6 +431,8 @@ def _register_tools(server: MCPServer) -> MCPServer:
             frozen_invariants=frozen_invariants,
             exit_boundary=exit_boundary,
             reason=reason,
+            navigation_refs=navigation_refs,
+            procedure_refs=procedure_refs,
         )
 
     @server.tool(description="Close the actor's open plan epoch.")
@@ -506,6 +534,134 @@ def _register_tools(server: MCPServer) -> MCPServer:
         if actor_context_id:
             require_actor_reanchored(_get_store(), actor_context_id)
         return packet_acknowledge(_get_store(), packet_id)
+
+    @server.tool(description="Propose an owner-reviewed context promotion. Never edits files.")
+    def context_promotion_propose(
+        actor_context_id: str,
+        epoch_id: str,
+        promotion_kind: str,
+        summary: str,
+        rationale: str,
+        source_refs: list[str],
+        owner_actor_context_id: str,
+        target_ref: str = "",
+        source_kind: str = "USER_AUTHORITY",
+    ) -> dict[str, Any]:
+        from tools.codex_context_lifecycle.promotion import create_promotion_proposal
+
+        return create_promotion_proposal(
+            _get_store(),
+            actor_context_id=actor_context_id,
+            epoch_id=epoch_id,
+            promotion_kind=promotion_kind,
+            summary=summary,
+            rationale=rationale,
+            source_refs=source_refs,
+            owner_actor_context_id=owner_actor_context_id,
+            target_ref=target_ref or None,
+            source_kind=source_kind,
+        )
+
+    @server.tool(description="Resolve a promotion proposal with an explicit owner disposition.")
+    def context_promotion_resolve(
+        promotion_id: str,
+        next_state: str,
+        disposition: dict[str, Any] | None = None,
+        source_kind: str = "USER_AUTHORITY",
+    ) -> dict[str, Any]:
+        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
+        from tools.codex_context_lifecycle.promotion import resolve_promotion_proposal
+
+        assert_authoritative_source(source_kind, "create_promotion_proposal")
+        return resolve_promotion_proposal(
+            _get_store(),
+            promotion_id=promotion_id,
+            next_state=next_state,
+            disposition=disposition,
+        )
+
+    @server.tool(description="Record that an authorized writer applied a promotion to a file.")
+    def context_promotion_mark_applied(
+        promotion_id: str,
+        canonical_ref: str,
+        repo_root: str = "",
+        source_kind: str = "USER_AUTHORITY",
+    ) -> dict[str, Any]:
+        from pathlib import Path
+
+        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
+        from tools.codex_context_lifecycle.promotion import mark_promotion_applied
+
+        assert_authoritative_source(source_kind, "promote_canonical")
+        return mark_promotion_applied(
+            _get_store(),
+            promotion_id=promotion_id,
+            canonical_ref=canonical_ref,
+            repo_root=Path(repo_root) if repo_root else None,
+        )
+
+    @server.tool(description="List promotion proposals for one epoch.")
+    def context_promotion_list(epoch_id: str) -> dict[str, Any]:
+        from tools.codex_context_lifecycle.promotion import promotion_proposals_for_epoch
+
+        return {"promotions": promotion_proposals_for_epoch(_get_store(), epoch_id)}
+
+    @server.tool(description="Prepare an owner-local epoch rollover without changing epoch state.")
+    def plan_epoch_rollover_prepare(
+        actor_context_id: str,
+        from_epoch_id: str,
+        from_epoch_revision: int,
+        next_epoch_kind: str,
+        next_objective: str,
+        carry_obligation_ids: list[str] | None = None,
+        carry_packet_ids: list[str] | None = None,
+        carry_frontier: dict[str, Any] | None = None,
+        promotion_ids: list[str] | None = None,
+        forgotten_refs: list[str] | None = None,
+        source_kind: str = "USER_AUTHORITY",
+    ) -> dict[str, Any]:
+        from tools.codex_context_lifecycle.rollover import prepare_rollover
+
+        return prepare_rollover(
+            _get_store(),
+            actor_context_id=actor_context_id,
+            from_epoch_id=from_epoch_id,
+            from_epoch_revision=from_epoch_revision,
+            next_epoch_kind=next_epoch_kind,
+            next_objective=next_objective,
+            carry_obligation_ids=carry_obligation_ids or (),
+            carry_packet_ids=carry_packet_ids or (),
+            carry_frontier=carry_frontier or {},
+            promotion_ids=promotion_ids or (),
+            forgotten_refs=forgotten_refs or (),
+            source_kind=source_kind,
+        )
+
+    @server.tool(description="Confirm owner review of a prepared epoch rollover.")
+    def plan_epoch_rollover_confirm(rollover_id: str, source_kind: str = "USER_AUTHORITY") -> dict[str, Any]:
+        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
+        from tools.codex_context_lifecycle.rollover import confirm_rollover
+
+        assert_authoritative_source(source_kind, "apply_rollover")
+        return confirm_rollover(_get_store(), rollover_id)
+
+    @server.tool(description="Apply a confirmed owner-local epoch rollover.")
+    def plan_epoch_rollover_apply(rollover_id: str, source_kind: str = "USER_AUTHORITY") -> dict[str, Any]:
+        from tools.codex_context_lifecycle.rollover import apply_rollover
+
+        return apply_rollover(_get_store(), rollover_id=rollover_id, source_kind=source_kind)
+
+    @server.tool(description="Return the current prepared or confirmed rollover for an actor.")
+    def plan_epoch_rollover_current(actor_context_id: str) -> dict[str, Any]:
+        from tools.codex_context_lifecycle.rollover import current_rollover
+
+        return {"rollover": current_rollover(_get_store(), actor_context_id)}
+
+    @server.tool(description="Return the actor's active working-set references.")
+    def working_set_refs(actor_context_id: str) -> dict[str, Any]:
+        from tools.codex_context_lifecycle.working_set import working_set_refs as _refs
+
+        return _refs(_get_store(), actor_context_id)
 
     return server
 

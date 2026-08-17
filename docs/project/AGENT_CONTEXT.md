@@ -5,6 +5,15 @@ Supporting reference for HMASD execution-environment facts. The root
 charter. Read this file only when an assignment needs runtime facts. Do not use
 it as a role constitution or preload it into unrelated children.
 
+Context hierarchy pointers, loaded only when the current actor needs them:
+
+- Stable map: `docs/project/PROJECT_MAP.md`
+- Source registry: `docs/project/CONTEXT_SOURCE_REGISTRY.toml`
+- Precedence: `docs/project/CONTEXT_PRECEDENCE.md`
+- Promotion: `docs/project/CONTEXT_PROMOTION_POLICY.md`
+- Retention: `docs/project/CONTEXT_RETENTION_POLICY.md`
+- Decisions: `docs/project/DECISIONS_INDEX.md`
+
 ## Execution environment
 
 - Run Python directly with

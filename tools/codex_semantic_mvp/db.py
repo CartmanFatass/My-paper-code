@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 DEFAULT_STATE_PATH = Path("runtime/codex-semantic-mvp/state.sqlite3")
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 
 SCHEMA_STATEMENTS = (
     """
@@ -263,10 +263,86 @@ V2_COLUMNS = {
     "events": (("actor_context_id", "TEXT"),),
 }
 
+SCHEMA_V3_TABLES = (
+    """
+    CREATE TABLE IF NOT EXISTS promotion_proposals (
+        promotion_id TEXT PRIMARY KEY,
+        actor_context_id TEXT NOT NULL,
+        epoch_id TEXT NOT NULL,
+        promotion_kind TEXT NOT NULL,
+        target_ref TEXT,
+        summary TEXT NOT NULL,
+        rationale TEXT NOT NULL,
+        source_refs_json TEXT NOT NULL,
+        owner_actor_context_id TEXT NOT NULL,
+        state TEXT NOT NULL,
+        disposition_json TEXT,
+        canonical_ref TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS epoch_rollovers (
+        rollover_id TEXT PRIMARY KEY,
+        actor_context_id TEXT NOT NULL,
+        from_epoch_id TEXT NOT NULL,
+        from_epoch_revision INTEGER NOT NULL,
+        next_epoch_kind TEXT NOT NULL,
+        next_objective TEXT NOT NULL,
+        carry_obligation_ids_json TEXT NOT NULL,
+        carry_packet_ids_json TEXT NOT NULL,
+        carry_frontier_json TEXT NOT NULL,
+        promotion_ids_json TEXT NOT NULL,
+        forgotten_refs_json TEXT NOT NULL,
+        state TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        applied_at TEXT
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS context_retention_marks (
+        retention_mark_id TEXT PRIMARY KEY,
+        actor_context_id TEXT NOT NULL,
+        object_kind TEXT NOT NULL,
+        object_id TEXT NOT NULL,
+        retention_class TEXT NOT NULL,
+        active_in_working_set INTEGER NOT NULL,
+        reason TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        archived_at TEXT,
+        UNIQUE(actor_context_id, object_kind, object_id)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS context_gc_runs (
+        gc_run_id TEXT PRIMARY KEY,
+        actor_context_id TEXT,
+        mode TEXT NOT NULL,
+        plan_json TEXT NOT NULL,
+        applied INTEGER NOT NULL,
+        created_at TEXT NOT NULL
+    )
+    """,
+)
+
+V3_COLUMNS = {
+    "plan_epochs": (
+        ("navigation_refs_json", "TEXT"),
+        ("procedure_refs_json", "TEXT"),
+    ),
+}
+
 
 def _apply_schema_v1(connection: sqlite3.Connection) -> None:
     """Create or repair the version-1 schema, without dropping user data."""
+    has_actor_index = connection.execute(
+        """SELECT 1 FROM sqlite_master
+        WHERE type = 'index' AND name = 'one_active_workflow_per_actor'"""
+    ).fetchone()
     for statement in SCHEMA_STATEMENTS[1:]:
+        if has_actor_index and "one_active_workflow_per_session" in statement:
+            continue
         connection.execute(statement)
 
 
@@ -337,6 +413,23 @@ def migrate_v1_to_v2(connection: sqlite3.Connection) -> None:
     )
 
 
+def migrate_v2_to_v3(connection: sqlite3.Connection) -> None:
+    """Add promotion, rollover, and retention objects without deleting rows."""
+    for statement in SCHEMA_V3_TABLES:
+        connection.execute(statement)
+    for table, columns in V3_COLUMNS.items():
+        existing = _column_names(connection, table)
+        for name, decl in columns:
+            if name not in existing:
+                connection.execute(f"ALTER TABLE {table} ADD COLUMN {name} {decl}")
+    connection.execute(
+        "UPDATE plan_epochs SET navigation_refs_json = '[]' WHERE navigation_refs_json IS NULL"
+    )
+    connection.execute(
+        "UPDATE plan_epochs SET procedure_refs_json = '[]' WHERE procedure_refs_json IS NULL"
+    )
+
+
 def initialize_database(connection: sqlite3.Connection) -> None:
     """Apply the idempotent, versioned MVP schema in one transaction."""
     from datetime import datetime, timezone
@@ -356,6 +449,8 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _apply_schema_v1(connection)
         if current < 2:
             migrate_v1_to_v2(connection)
+        if current < 3:
+            migrate_v2_to_v3(connection)
         if current < SCHEMA_VERSION:
             connection.execute(
                 "INSERT INTO schema_meta(version, applied_at) VALUES (?, ?)",

@@ -157,9 +157,13 @@ test*.py
 # Semantic overlay tests are durable control-plane evidence.
 !tests/codex_semantic_mvp/
 !tests/codex_semantic_mvp/**/*.py
+!tests/codex_context_lifecycle/
+!tests/codex_context_lifecycle/**/*.py
 # Semantic overlay acceptance and topology reports are durable control-plane evidence.
 !docs/research/workflow-runs/2026-08-15_codex-semantic-mvp/
 !docs/research/workflow-runs/2026-08-15_codex-semantic-mvp/**/*.md
+!docs/project/decisions/
+!docs/project/decisions/**/*.md
 *.doc
 *.docx
 debug/
