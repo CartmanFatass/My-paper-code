@@ -4,6 +4,8 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Any
 
+from .actor_models import ActorContext, ActorKind, ActorState
+
 
 class ReturnKind(str, Enum):
     COMPLETED_ASSIGNMENT = "COMPLETED_ASSIGNMENT"
