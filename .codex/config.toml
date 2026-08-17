@@ -1,11 +1,9 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
-# Luna is account-visible but currently omitted from the Sol/v2 child-agent
-# surface. This generated local catalog changes only the routing-version field.
-model_catalog_json = "C:\\Projects\\HMASD\\runtime\\model-catalog-v2-workaround.json"
-
 [features]
 multi_agent_v2 = true
+# Inline lifecycle hooks are the live semantic activation surface.
+hooks = true
 
 [agents]
 max_threads = 40
@@ -134,3 +132,57 @@ nickname_candidates = ["Research Principles Analyst", "RL Principles Analyst", "
 command = "node"
 args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
 tool_timeout_sec = 2700
+
+# BEGIN HMASD CODEX SEMANTIC MVP
+[mcp_servers.hmasd_orchestrator]
+command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe"
+args = [
+  "-m",
+  "tools.codex_semantic_mvp.mcp_server",
+  "--state-dir",
+  "runtime/codex-semantic-mvp"
+]
+startup_timeout_sec = 15
+tool_timeout_sec = 1800
+enabled = true
+required = false
+# END HMASD CODEX SEMANTIC MVP
+
+# BEGIN HMASD CODEX SEMANTIC HOOKS
+[hooks]
+[[hooks.SessionStart]]
+[[hooks.SessionStart.hooks]]
+type = "command"
+command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+timeout = 5
+
+[[hooks.SubagentStart]]
+[[hooks.SubagentStart.hooks]]
+type = "command"
+command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+timeout = 5
+
+[[hooks.SubagentStop]]
+[[hooks.SubagentStop.hooks]]
+type = "command"
+command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+timeout = 5
+
+[[hooks.Stop]]
+[[hooks.Stop.hooks]]
+type = "command"
+command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+timeout = 5
+
+[[hooks.PreToolUse]]
+[[hooks.PreToolUse.hooks]]
+type = "command"
+command = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+commandWindows = "C:\\Users\\wu\\.conda\\envs\\SB3\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
+timeout = 5
+
+# END HMASD CODEX SEMANTIC HOOKS
