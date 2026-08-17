@@ -49,6 +49,7 @@ function Invoke-InjectedFailure([string]$Point) {
 function Get-SemanticHookEvents([string]$Mode) {
     $events = @('SessionStart', 'SubagentStart', 'SubagentStop', 'Stop')
     if ($Mode -eq 'Shadow') { $events += @('PreToolUse', 'PreCompact', 'PostCompact') }
+    if ($Mode -eq 'Active') { $events += @('PreCompact', 'PostCompact') }
     return $events
 }
 

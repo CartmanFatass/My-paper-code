@@ -130,7 +130,9 @@ def test_doctor_reports_machine_readable_activation_state(repo_root: Path):
     expected_enabled = 'enabled = true' in (repo_root / ".codex" / "config.toml").read_text()
     assert result["server_enabled"] is expected_enabled
     assert result["runtime_writable"] is True
-    assert result["mode"] in ({"active", "off"} if expected_enabled else {"off"})
+    # A live ACTIVE block that predates compaction hooks is not the current
+    # exact event set, so doctor must not call it active until reactivation.
+    assert result["mode"] in ({"active", "off", "unknown"} if expected_enabled else {"off", "unknown"})
     assert result["user_trust"] == {
         "status": "unknown",
         "scope": "repository_only",

@@ -693,6 +693,152 @@ def _active_stop(
         return _neutral_response()
 
 
+def _automatic_checkpoint_actor(store: SemanticStore, payload: Mapping[str, object]):
+    from .actor_models import ActorKind
+    from .actor_registry import resolve_actor_context
+
+    identity = normalize_hook_identity(payload)
+    actor = resolve_actor_context(
+        store,
+        session_id=identity.session_id,
+        agent_id=identity.agent_id,
+        canonical_path=identity.canonical_path,
+    )
+    if actor is None:
+        return None
+    if actor.actor_kind in {ActorKind.EM, ActorKind.CM, ActorKind.LEAF}:
+        return None
+    return actor
+
+
+def _shadow_precompact(
+    payload: Mapping[str, object], store: SemanticStore
+) -> dict[str, object]:
+    identity = normalize_hook_identity(payload)
+    from .actor_registry import resolve_actor_context
+
+    actor = resolve_actor_context(
+        store,
+        session_id=identity.session_id,
+        agent_id=identity.agent_id,
+        canonical_path=identity.canonical_path,
+    )
+    if actor is None:
+        _hook_audit(store, "COMPACTION_ACTOR_UNRESOLVED", None, identity.session_id, {
+            "event": "PreCompact",
+            "session_id": identity.session_id,
+        })
+    return _neutral_response()
+
+
+def _shadow_postcompact(
+    payload: Mapping[str, object], store: SemanticStore
+) -> dict[str, object]:
+    return _neutral_response()
+
+
+def _active_precompact(
+    payload: Mapping[str, object], store: SemanticStore
+) -> dict[str, object]:
+    actor = _automatic_checkpoint_actor(store, payload)
+    if actor is None:
+        _hook_audit(
+            store,
+            "COMPACTION_ACTOR_UNRESOLVED",
+            None,
+            str(payload.get("session_id") or ""),
+            {"event": "PreCompact"},
+        )
+        return _neutral_response()
+    from .checkpoints import materialize_checkpoint
+
+    checkpoint = materialize_checkpoint(store, actor.actor_context_id)
+    _hook_audit(
+        store,
+        "COMPACTION_STARTED",
+        None,
+        actor.actor_context_id,
+        {
+            "checkpoint_id": checkpoint.get("checkpoint_id"),
+            "state_version": checkpoint.get("state_version"),
+            "epoch_id": checkpoint.get("epoch_id"),
+        },
+    )
+    return _neutral_response()
+
+
+def _active_postcompact(
+    payload: Mapping[str, object], store: SemanticStore
+) -> dict[str, object]:
+    actor = _automatic_checkpoint_actor(store, payload)
+    checkpoint = None
+    if actor is not None:
+        from .checkpoints import current_checkpoint
+
+        checkpoint = current_checkpoint(store, actor.actor_context_id)
+    _hook_audit(
+        store,
+        "COMPACTION_COMPLETED",
+        None,
+        actor.actor_context_id if actor is not None else str(payload.get("session_id") or ""),
+        {
+            "source": normalize_hook_identity(payload).source,
+            "checkpoint_id": None if checkpoint is None else checkpoint.get("checkpoint_id"),
+        },
+    )
+    return _neutral_response()
+
+
+def _active_session_start(
+    payload: Mapping[str, object], store: SemanticStore
+) -> dict[str, object]:
+    source = normalize_hook_identity(payload).source
+    if source == "clear":
+        return {
+            "continue": True,
+            "additionalContext": (
+                "No previous HMASD actor checkpoint has been restored after clear.\n"
+                "Use actor_context_current or an explicit workflow restore action."
+            ),
+        }
+    if source in {"compact", "resume"}:
+        actor = _automatic_checkpoint_actor(store, payload)
+        if actor is None:
+            _hook_audit(
+                store,
+                "COMPACTION_ACTOR_UNRESOLVED",
+                None,
+                str(payload.get("session_id") or ""),
+                {"event": "SessionStart", "source": source},
+            )
+            return _neutral_response()
+        from .capsules import render_capsule
+        from .checkpoints import current_checkpoint, ensure_reanchor_obligation, materialize_checkpoint
+
+        checkpoint = current_checkpoint(store, actor.actor_context_id) or materialize_checkpoint(
+            store, actor.actor_context_id
+        )
+        ensure_reanchor_obligation(
+            store,
+            actor_context_id=actor.actor_context_id,
+            checkpoint_id=str(checkpoint.get("checkpoint_id") or ""),
+        )
+        capsule = checkpoint.get("capsule") or {}
+        return {
+            "continue": True,
+            "additionalContext": render_capsule(capsule) if capsule else "",
+            "additionalContextLimit": 2500,
+        }
+    workflow = _ensure_active_workflow(payload, store)
+    if workflow is None:
+        return _neutral_response()
+    try:
+        state = store.workflow_state(str(workflow["workflow_id"]))
+    except Exception:
+        state = None
+    return {"continue": True, "additionalContext": _workflow_current_context(workflow, state)}
+
+
 def handle_hook(
     payload: Mapping[str, object], mode: str, store: SemanticStore | None
 ) -> dict[str, object] | None:
@@ -729,6 +875,24 @@ def handle_hook(
                 )
             except Exception:
                 pass
+            try:
+                if event == "PreCompact":
+                    return _shadow_precompact(payload, store)
+                return _shadow_postcompact(payload, store)
+            except Exception:
+                return _neutral_response()
+        if mode == "active" and event == "PreCompact":
+            try:
+                return _active_precompact(payload, store)
+            except Exception as exc:
+                _hook_audit(store, "HOOK_FAIL_OPEN", diagnostic.get("session_id") or None, None, {"exception_class": type(exc).__name__})
+                return _neutral_response()
+        if mode == "active" and event == "PostCompact":
+            try:
+                return _active_postcompact(payload, store)
+            except Exception as exc:
+                _hook_audit(store, "HOOK_FAIL_OPEN", diagnostic.get("session_id") or None, None, {"exception_class": type(exc).__name__})
+                return _neutral_response()
         if mode == "active" and event == "SessionStart":
             try:
                 return _active_session_start(payload, store)

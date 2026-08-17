@@ -11,6 +11,7 @@ import re
 from pathlib import Path
 from typing import Any
 
+from .db import SCHEMA_VERSION
 from .constants import (
     ACTIVE_HOOK_EVENTS,
     DEFAULT_PYTHON_EXECUTABLE,
@@ -261,6 +262,21 @@ def collect_baseline(repo_root: Path, mcp_version_reader: Any = distribution_ver
         "python_executable": python_toml.replace("\\\\", "\\") if python_toml else None,
         "fail_open": fail_open,
         "ledger_role": "control_plane_delivery_and_obligation_ledger",
+        "schema_version": SCHEMA_VERSION,
+        "actor_schema_ready": SCHEMA_VERSION >= 2,
+        "compaction_hooks_ready": set(ACTIVE_HOOK_EVENTS) >= {"PreCompact", "PostCompact"},
+        "topology_capabilities_present": (
+            root / "docs" / "research" / "workflow-runs" / "2026-08-15_codex-semantic-mvp" / "TOPOLOGY_PROBE_REPORT.md"
+        ).is_file(),
+        "automatic_rehydration_by_actor": {
+            "PORTFOLIO": True,
+            "OPERATIONAL_ROOT": True,
+            "EM": False,
+            "CM": False,
+            "LEAF": False,
+        },
+        "runtime_is_canonical_memory": False,
+        "active_hook_events": list(ACTIVE_HOOK_EVENTS),
         "user_trust": {
             "status": USER_TRUST_STATUS,
             "scope": USER_TRUST_SCOPE,
