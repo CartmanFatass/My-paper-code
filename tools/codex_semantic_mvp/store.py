@@ -385,6 +385,7 @@ class SemanticStore:
         subject: str,
         reason: str,
         source_ref: str,
+        touch: bool = True,
     ) -> str:
         """Open an obligation unless the same source_ref is already open."""
         kind_value = kind.value if isinstance(kind, Enum) else str(kind)
@@ -396,7 +397,9 @@ class SemanticStore:
             ).fetchone()
             if existing is not None:
                 return existing[0]
-        return self.open_obligation(workflow_id, kind, owner, subject, reason, source_ref)
+        return self.open_obligation(
+            workflow_id, kind, owner, subject, reason, source_ref, touch=touch
+        )
 
     def register_task(
         self,
@@ -541,12 +544,14 @@ class SemanticStore:
         reason: str,
         source_ref: str,
         obligation_id: str | None = None,
+        touch: bool = True,
     ) -> str:
         with self._lock, self.connection:
             result = self._insert_obligation(
                 self.connection, workflow_id, kind, owner, subject, reason, source_ref, obligation_id
             )
-            self._touch_workflow(workflow_id)
+            if touch:
+                self._touch_workflow(workflow_id)
             kind_value = kind.value if isinstance(kind, Enum) else str(kind)
             self._append_event(
                 workflow_id, "OBLIGATION_OPENED", result, {"kind": kind_value},

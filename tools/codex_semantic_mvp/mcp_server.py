@@ -186,7 +186,7 @@ def _register_tools(server: MCPServer) -> MCPServer:
         return {
             "status": "OK",
             "server": SERVER_NAME,
-            "schema_version": 1,
+            "schema_version": 2,
             "fail_open": fail_open,
             "ledger_role": "control_plane_delivery_and_obligation_ledger",
         }
@@ -441,6 +441,71 @@ def _register_tools(server: MCPServer) -> MCPServer:
         from .semantic_commits import semantic_commit_current as _current
 
         return {"commit": _current(_get_store(), actor_context_id)}
+
+    @server.tool(description="Materialize a deterministic actor context checkpoint.")
+    def context_checkpoint_materialize(actor_context_id: str) -> dict[str, Any]:
+        from .checkpoints import materialize_checkpoint
+
+        return materialize_checkpoint(_get_store(), actor_context_id)
+
+    @server.tool(description="Return the actor's latest context checkpoint.")
+    def context_checkpoint_current(actor_context_id: str) -> dict[str, Any]:
+        from .checkpoints import current_checkpoint
+
+        return {"checkpoint": current_checkpoint(_get_store(), actor_context_id)}
+
+    @server.tool(description="Acknowledge a compact/resume actor checkpoint.")
+    def context_reanchor_ack(
+        actor_context_id: str,
+        checkpoint_id: str,
+        state_version: int,
+        actor_turn_id: str,
+        epoch_id: str = "",
+        epoch_revision: int | None = None,
+    ) -> dict[str, Any]:
+        from .checkpoints import context_reanchor_ack as _ack
+
+        return _ack(
+            _get_store(),
+            actor_context_id=actor_context_id,
+            checkpoint_id=checkpoint_id,
+            state_version=state_version,
+            epoch_id=epoch_id or None,
+            epoch_revision=epoch_revision,
+            actor_turn_id=actor_turn_id,
+        )
+
+    @server.tool(description="Register a typed cross-owner packet reference.")
+    def packet_register(
+        packet_kind: str,
+        source_actor_context_id: str,
+        target_actor_context_id: str,
+        payload_ref: str,
+        marker: str = "",
+        direction_id: str = "",
+    ) -> dict[str, Any]:
+        from .checkpoints import require_actor_reanchored
+        from .packet_refs import packet_register as _register
+
+        require_actor_reanchored(_get_store(), source_actor_context_id)
+        return _register(
+            _get_store(),
+            packet_kind=packet_kind,
+            source_actor_context_id=source_actor_context_id,
+            target_actor_context_id=target_actor_context_id,
+            payload_ref=payload_ref,
+            marker=marker or None,
+            direction_id=direction_id or None,
+        )
+
+    @server.tool(description="Acknowledge delivery of a typed packet reference.")
+    def packet_ack(packet_id: str, actor_context_id: str = "") -> dict[str, Any]:
+        from .checkpoints import require_actor_reanchored
+        from .packet_refs import packet_acknowledge
+
+        if actor_context_id:
+            require_actor_reanchored(_get_store(), actor_context_id)
+        return packet_acknowledge(_get_store(), packet_id)
 
     return server
 
