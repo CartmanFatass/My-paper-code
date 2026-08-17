@@ -81,6 +81,29 @@ class SemanticStore:
         with self._lock:
             self.connection.close()
 
+    def _ensure_session_root_actor(self, session_id: str, now: str) -> str:
+        """Attach or create the unclassified session-root actor for a workflow."""
+        existing = self.connection.execute(
+            """SELECT actor_context_id FROM actor_contexts
+            WHERE session_id = ? AND actor_kind = 'SESSION_ROOT_UNCLASSIFIED'
+            ORDER BY created_at, actor_context_id LIMIT 1""",
+            (session_id,),
+        ).fetchone()
+        if existing is not None:
+            return str(existing[0])
+        actor_context_id = _new_id("actor")
+        self.connection.execute(
+            """INSERT INTO actor_contexts (
+                actor_context_id, session_id, agent_id, canonical_path, actor_kind,
+                scope_key, direction_id, parent_actor_context_id,
+                counterpart_actor_context_id, identity_source, state,
+                created_at, updated_at
+            ) VALUES (?, ?, NULL, NULL, 'SESSION_ROOT_UNCLASSIFIED', ?, NULL, NULL, NULL,
+                      'OPEN_WORKFLOW', 'ACTIVE', ?, ?)""",
+            (actor_context_id, session_id, f"session:{session_id}", now, now),
+        )
+        return actor_context_id
+
     def _touch_workflow(self, workflow_id: str, state: str | None = None) -> None:
         if state is not None and state not in WORKFLOW_STATES:
             raise ValueError(f"unknown workflow state: {state}")
@@ -116,12 +139,13 @@ class SemanticStore:
             raise TypeError("session_id, opened_turn_id, scope, and objective are required")
         now = _now()
         with self._lock, self.connection:
+            actor_context_id = self._ensure_session_root_actor(session_id, now)
             self.connection.execute(
                 """INSERT INTO workflows
                 (workflow_id, session_id, opened_turn_id, scope, objective, state,
-                 state_version, created_at, updated_at)
-                VALUES (?, ?, ?, ?, ?, 'ACTIVE', 1, ?, ?)""",
-                (workflow_id, session_id, opened_turn_id, scope, objective, now, now),
+                 state_version, actor_context_id, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, 'ACTIVE', 1, ?, ?, ?)""",
+                (workflow_id, session_id, opened_turn_id, scope, objective, actor_context_id, now, now),
             )
             self._append_event(
                 workflow_id,

@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 DEFAULT_STATE_PATH = Path("runtime/codex-semantic-mvp/state.sqlite3")
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 SCHEMA_STATEMENTS = (
     """
@@ -148,10 +148,193 @@ def connect(path: str | Path = DEFAULT_STATE_PATH) -> sqlite3.Connection:
     return connection
 
 
+SCHEMA_V2_TABLES = (
+    """
+    CREATE TABLE IF NOT EXISTS actor_contexts (
+        actor_context_id TEXT PRIMARY KEY,
+        session_id TEXT NOT NULL,
+        agent_id TEXT,
+        canonical_path TEXT,
+        actor_kind TEXT NOT NULL,
+        scope_key TEXT NOT NULL,
+        direction_id TEXT,
+        parent_actor_context_id TEXT,
+        counterpart_actor_context_id TEXT,
+        identity_source TEXT NOT NULL,
+        state TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE UNIQUE INDEX IF NOT EXISTS unique_actor_agent
+    ON actor_contexts(session_id, agent_id)
+    WHERE agent_id IS NOT NULL AND agent_id <> ''
+    """,
+    """
+    CREATE UNIQUE INDEX IF NOT EXISTS unique_actor_path
+    ON actor_contexts(session_id, canonical_path)
+    WHERE canonical_path IS NOT NULL AND canonical_path <> ''
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS plan_epochs (
+        epoch_id TEXT PRIMARY KEY,
+        actor_context_id TEXT NOT NULL,
+        epoch_kind TEXT NOT NULL,
+        revision INTEGER NOT NULL,
+        objective TEXT NOT NULL,
+        authority_refs_json TEXT NOT NULL,
+        frozen_invariants_json TEXT NOT NULL,
+        exit_boundary TEXT NOT NULL,
+        state TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE UNIQUE INDEX IF NOT EXISTS one_open_epoch_per_actor
+    ON plan_epochs(actor_context_id)
+    WHERE state = 'OPEN'
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS semantic_commits (
+        semantic_commit_id TEXT PRIMARY KEY,
+        actor_context_id TEXT NOT NULL,
+        epoch_id TEXT NOT NULL,
+        commit_kind TEXT NOT NULL,
+        payload_json TEXT NOT NULL,
+        source_refs_json TEXT NOT NULL,
+        created_at TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS context_checkpoints (
+        checkpoint_id TEXT PRIMARY KEY,
+        actor_context_id TEXT NOT NULL,
+        epoch_id TEXT,
+        epoch_revision INTEGER,
+        state_version INTEGER NOT NULL,
+        semantic_commit_id TEXT,
+        capsule_kind TEXT NOT NULL,
+        capsule_json TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        UNIQUE(actor_context_id, epoch_id, epoch_revision, state_version, semantic_commit_id)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS reanchor_acks (
+        ack_id TEXT PRIMARY KEY,
+        actor_context_id TEXT NOT NULL,
+        checkpoint_id TEXT NOT NULL,
+        state_version INTEGER NOT NULL,
+        epoch_id TEXT,
+        epoch_revision INTEGER,
+        actor_turn_id TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        UNIQUE(actor_context_id, checkpoint_id, actor_turn_id)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS packet_refs (
+        packet_id TEXT PRIMARY KEY,
+        packet_kind TEXT NOT NULL,
+        source_actor_context_id TEXT NOT NULL,
+        target_actor_context_id TEXT NOT NULL,
+        direction_id TEXT,
+        marker TEXT NOT NULL UNIQUE,
+        payload_ref TEXT NOT NULL,
+        delivery_state TEXT NOT NULL,
+        intake_state TEXT NOT NULL,
+        decision_ref TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+    )
+    """,
+)
+
+V2_COLUMNS = {
+    "workflows": (("actor_context_id", "TEXT"),),
+    "tasks": (("child_actor_context_id", "TEXT"), ("invoker_actor_context_id", "TEXT")),
+    "reports": (("reporter_actor_context_id", "TEXT"),),
+    "obligations": (
+        ("owner_actor_context_id", "TEXT"),
+        ("source_actor_context_id", "TEXT"),
+    ),
+    "events": (("actor_context_id", "TEXT"),),
+}
+
+
 def _apply_schema_v1(connection: sqlite3.Connection) -> None:
     """Create or repair the version-1 schema, without dropping user data."""
     for statement in SCHEMA_STATEMENTS[1:]:
         connection.execute(statement)
+
+
+def _column_names(connection: sqlite3.Connection, table: str) -> set[str]:
+    return {
+        str(row[1])
+        for row in connection.execute(f"PRAGMA table_info({table})")
+    }
+
+
+def migrate_v1_to_v2(connection: sqlite3.Connection) -> None:
+    """Add actor-scoped objects without rewriting historical payload bytes."""
+    from datetime import datetime, timezone
+    import uuid
+
+    for statement in SCHEMA_V2_TABLES:
+        connection.execute(statement)
+    for table, columns in V2_COLUMNS.items():
+        existing = _column_names(connection, table)
+        for name, decl in columns:
+            if name not in existing:
+                connection.execute(f"ALTER TABLE {table} ADD COLUMN {name} {decl}")
+
+    now = datetime.now(timezone.utc).isoformat()
+    sessions = connection.execute(
+        "SELECT DISTINCT session_id FROM workflows ORDER BY session_id"
+    ).fetchall()
+    for (session_id,) in sessions:
+        if not session_id:
+            continue
+        existing_actor = connection.execute(
+            """SELECT actor_context_id FROM actor_contexts
+            WHERE session_id = ? AND actor_kind = 'SESSION_ROOT_UNCLASSIFIED'""",
+            (session_id,),
+        ).fetchone()
+        if existing_actor is None:
+            actor_id = f"actor_{uuid.uuid4().hex}"
+            connection.execute(
+                """INSERT INTO actor_contexts (
+                    actor_context_id, session_id, agent_id, canonical_path, actor_kind,
+                    scope_key, direction_id, parent_actor_context_id,
+                    counterpart_actor_context_id, identity_source, state,
+                    created_at, updated_at
+                ) VALUES (?, ?, NULL, NULL, 'SESSION_ROOT_UNCLASSIFIED', ?, NULL, NULL, NULL,
+                          'MIGRATION_V1', 'ACTIVE', ?, ?)""",
+                (actor_id, session_id, f"session:{session_id}", now, now),
+            )
+        else:
+            actor_id = existing_actor[0]
+        connection.execute(
+            """UPDATE workflows SET actor_context_id = ?
+            WHERE session_id = ? AND (actor_context_id IS NULL OR actor_context_id = '')""",
+            (actor_id, session_id),
+        )
+        connection.execute(
+            """UPDATE obligations SET owner_actor_context_id = (
+                SELECT actor_context_id FROM workflows
+                WHERE workflows.workflow_id = obligations.workflow_id
+            )
+            WHERE owner_actor_context_id IS NULL OR owner_actor_context_id = ''""",
+        )
+
+    connection.execute("DROP INDEX IF EXISTS one_active_workflow_per_session")
+    connection.execute(
+        """CREATE UNIQUE INDEX IF NOT EXISTS one_active_workflow_per_actor
+        ON workflows(actor_context_id)
+        WHERE state = 'ACTIVE'"""
+    )
 
 
 def initialize_database(connection: sqlite3.Connection) -> None:
@@ -171,6 +354,8 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         # migration only creates missing objects and never drops or rewrites
         # existing rows, so reopening an interrupted/partial database is safe.
         _apply_schema_v1(connection)
+        if current < 2:
+            migrate_v1_to_v2(connection)
         if current < SCHEMA_VERSION:
             connection.execute(
                 "INSERT INTO schema_meta(version, applied_at) VALUES (?, ?)",

@@ -64,6 +64,12 @@ def test_initialize_creates_tables_and_is_idempotent(tmp_path):
         "events",
         "hook_guards",
         "closure_receipts",
+        "actor_contexts",
+        "plan_epochs",
+        "semantic_commits",
+        "context_checkpoints",
+        "reanchor_acks",
+        "packet_refs",
     }
 
 
@@ -92,24 +98,29 @@ def test_schema_columns_indexes_and_versioned_reopen_migration(tmp_path):
     assert tables >= {
         "schema_meta", "workflows", "tasks", "reports", "obligations",
         "intakes", "events", "hook_guards", "closure_receipts",
+        "actor_contexts", "plan_epochs", "semantic_commits",
+        "context_checkpoints", "reanchor_acks", "packet_refs",
     }
     expected_columns = {
         "schema_meta": {"version", "applied_at"},
         "workflows": {
             "workflow_id", "session_id", "opened_turn_id", "scope", "objective",
-            "state", "state_version", "created_at", "updated_at",
+            "state", "state_version", "actor_context_id", "created_at", "updated_at",
         },
         "tasks": {
             "workflow_id", "task_id", "expected_agent_type", "objective", "required",
             "agent_id", "lifecycle", "created_at", "returned_at",
+            "child_actor_context_id", "invoker_actor_context_id",
         },
         "reports": {
             "report_id", "workflow_id", "task_id", "agent_id", "agent_type",
             "raw_message", "typed_json", "schema_valid", "raw_sha256", "created_at",
+            "reporter_actor_context_id",
         },
         "obligations": {
             "obligation_id", "workflow_id", "kind", "owner", "subject", "reason",
             "source_ref", "state", "resolution_json", "created_at", "resolved_at",
+            "owner_actor_context_id", "source_actor_context_id",
         },
         "intakes": {
             "intake_id", "workflow_id", "report_id", "intake_kind", "translation_json",
@@ -117,7 +128,7 @@ def test_schema_columns_indexes_and_versioned_reopen_migration(tmp_path):
         },
         "events": {
             "seq", "event_id", "workflow_id", "kind", "subject_id", "payload_json",
-            "dedupe_key", "created_at",
+            "dedupe_key", "created_at", "actor_context_id",
         },
         "hook_guards": {"guard_key", "event_name", "count", "created_at", "updated_at"},
         "closure_receipts": {"receipt_id", "workflow_id", "closure_kind", "summary", "created_at"},
@@ -128,9 +139,12 @@ def test_schema_columns_indexes_and_versioned_reopen_migration(tmp_path):
         }
         assert actual == columns
     assert reopened.connection.execute(
-        "SELECT 1 FROM sqlite_master WHERE type = 'index' AND name = 'one_active_workflow_per_session'"
+        "SELECT 1 FROM sqlite_master WHERE type = 'index' AND name = 'one_active_workflow_per_actor'"
     ).fetchone()
-    assert reopened.connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 1
+    assert reopened.connection.execute(
+        "SELECT 1 FROM sqlite_master WHERE type = 'index' AND name = 'one_active_workflow_per_session'"
+    ).fetchone() is None
+    assert reopened.connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 2
 
 
 def test_typed_report_requires_protocol_validation_and_identity(store):
