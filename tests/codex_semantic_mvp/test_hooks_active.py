@@ -383,7 +383,7 @@ def test_unregistered_child_can_return_injected_envelope(store: SemanticStore) -
     assert result == {"continue": True}
     state = store.workflow_state(workflow_id)
     assert state["tasks"][0]["lifecycle"] == "RETURNED_TYPED"
-    assert state["open_obligations"][0]["kind"] == "ROOT_INTAKE_REQUIRED"
+    assert state["open_obligations"][0]["kind"] == "REPORT_INTAKE_REQUIRED"
 
 
 def test_unregistered_child_without_envelope_records_untyped_intake(
@@ -401,7 +401,7 @@ def test_unregistered_child_without_envelope_records_untyped_intake(
     workflow_id = store.current_workflow("session-active")["workflow_id"]
     state = store.workflow_state(workflow_id)
     assert state["tasks"][0]["lifecycle"] == "RETURNED_UNTYPED"
-    assert state["open_obligations"][0]["kind"] == "ROOT_INTAKE_REQUIRED"
+    assert state["open_obligations"][0]["kind"] == "REPORT_INTAKE_REQUIRED"
 
 
 def test_optional_running_task_prevents_empty_close_but_allows_stop(

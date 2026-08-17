@@ -204,7 +204,7 @@ def test_valid_report_and_root_intake_obligation_commit_together(store):
     assert report_id
     assert state["tasks"][0]["lifecycle"] == "RETURNED_TYPED"
     assert [item["kind"] for item in state["open_obligations"]] == [
-        "ROOT_INTAKE_REQUIRED"
+        "REPORT_INTAKE_REQUIRED"
     ]
     assert state["open_obligations"][0]["subject"] == report_id
 

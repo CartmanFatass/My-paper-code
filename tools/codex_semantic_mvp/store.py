@@ -19,7 +19,13 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from .db import DEFAULT_STATE_PATH, connect, initialize_database
-from .models import IntakeKind, ObligationKind, RootIntakePacket, SubagentReturnPacket
+from .models import (
+    IntakeKind,
+    ObligationKind,
+    RootIntakePacket,
+    SubagentReturnPacket,
+    normalize_obligation_kind,
+)
 from .protocol import ProtocolError, validate_subagent_return
 
 
@@ -151,10 +157,73 @@ class SemanticStore:
                 workflow_id,
                 "WORKFLOW_OPENED",
                 workflow_id,
-                {"session_id": session_id, "scope": scope},
+                {"session_id": session_id, "scope": scope, "actor_context_id": actor_context_id},
                 f"WORKFLOW_OPENED:{workflow_id}",
             )
         return workflow_id
+
+    def open_actor_workflow(
+        self,
+        actor_context_id: str,
+        opened_turn_id: str,
+        scope: str,
+        objective: str,
+        workflow_id: str | None = None,
+    ) -> str:
+        """Open one ACTIVE workflow owned by an explicit actor context."""
+        if not actor_context_id:
+            raise ValueError("actor_context_id is required")
+        workflow_id = workflow_id or _new_id("wf")
+        now = _now()
+        with self._lock, self.connection:
+            actor = self.connection.execute(
+                "SELECT session_id FROM actor_contexts WHERE actor_context_id = ?",
+                (actor_context_id,),
+            ).fetchone()
+            if actor is None:
+                raise KeyError(f"unknown actor: {actor_context_id}")
+            session_id = str(actor["session_id"])
+            self.connection.execute(
+                """INSERT INTO workflows
+                (workflow_id, session_id, opened_turn_id, scope, objective, state,
+                 state_version, actor_context_id, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, 'ACTIVE', 1, ?, ?, ?)""",
+                (
+                    workflow_id,
+                    session_id,
+                    opened_turn_id,
+                    scope,
+                    objective,
+                    actor_context_id,
+                    now,
+                    now,
+                ),
+            )
+            self._append_event(
+                workflow_id,
+                "WORKFLOW_OPENED",
+                workflow_id,
+                {"session_id": session_id, "scope": scope, "actor_context_id": actor_context_id},
+                f"WORKFLOW_OPENED:{workflow_id}",
+            )
+        return workflow_id
+
+    def current_actor_workflow(self, actor_context_id: str) -> dict[str, Any] | None:
+        if not actor_context_id:
+            return None
+        with self._lock:
+            active = self.connection.execute(
+                "SELECT * FROM workflows WHERE actor_context_id = ? AND state = 'ACTIVE'",
+                (actor_context_id,),
+            ).fetchone()
+            if active is not None:
+                return dict(active)
+            latest = self.connection.execute(
+                """SELECT * FROM workflows WHERE actor_context_id = ?
+                ORDER BY updated_at DESC, created_at DESC, workflow_id DESC LIMIT 1""",
+                (actor_context_id,),
+            ).fetchone()
+            return dict(latest) if latest is not None else None
 
     def current_workflow(self, session_id: str) -> dict[str, Any] | None:
         """Return the ACTIVE workflow, else the most recently updated session row."""
@@ -428,16 +497,38 @@ class SemanticStore:
         reason: str,
         source_ref: str,
         obligation_id: str | None = None,
+        owner_actor_context_id: str | None = None,
+        source_actor_context_id: str | None = None,
     ) -> str:
-        kind_value = kind.value if isinstance(kind, Enum) else str(kind)
-        if kind_value not in {member.value for member in ObligationKind}:
+        kind_value = normalize_obligation_kind(kind)
+        allowed = {normalize_obligation_kind(member) for member in ObligationKind}
+        if kind_value not in allowed:
             raise ValueError(f"unknown obligation kind: {kind_value}")
+        if owner_actor_context_id is None:
+            workflow = connection.execute(
+                "SELECT actor_context_id FROM workflows WHERE workflow_id = ?",
+                (workflow_id,),
+            ).fetchone()
+            if workflow is not None and workflow["actor_context_id"]:
+                owner_actor_context_id = str(workflow["actor_context_id"])
         obligation_id = obligation_id or _new_id("obl")
         connection.execute(
             """INSERT INTO obligations
-            (obligation_id, workflow_id, kind, owner, subject, reason, source_ref, state, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, 'OPEN', ?)""",
-            (obligation_id, workflow_id, kind_value, owner, subject, reason, source_ref, _now()),
+            (obligation_id, workflow_id, kind, owner, subject, reason, source_ref, state,
+             owner_actor_context_id, source_actor_context_id, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, 'OPEN', ?, ?, ?)""",
+            (
+                obligation_id,
+                workflow_id,
+                kind_value,
+                owner,
+                subject,
+                reason,
+                source_ref,
+                owner_actor_context_id,
+                source_actor_context_id,
+                _now(),
+            ),
         )
         return obligation_id
 
@@ -527,14 +618,44 @@ class SemanticStore:
                  typed_json, schema_valid, digest, _now()),
             )
             self._set_task_lifecycle(workflow_id, task_id, lifecycle)
+            workflow_row = self.connection.execute(
+                "SELECT actor_context_id FROM workflows WHERE workflow_id = ?",
+                (workflow_id,),
+            ).fetchone()
+            owner_actor = (
+                str(workflow_row["actor_context_id"])
+                if workflow_row is not None and workflow_row["actor_context_id"]
+                else None
+            )
+            task_row = self.connection.execute(
+                "SELECT child_actor_context_id FROM tasks WHERE workflow_id = ? AND task_id = ?",
+                (workflow_id, task_id),
+            ).fetchone()
+            source_actor = (
+                str(task_row["child_actor_context_id"])
+                if task_row is not None and task_row["child_actor_context_id"]
+                else None
+            )
+            self.connection.execute(
+                """UPDATE reports SET reporter_actor_context_id = ?
+                WHERE report_id = ?""",
+                (source_actor, report_id),
+            )
             obligation_id = self._insert_obligation(
-                self.connection, workflow_id, ObligationKind.ROOT_INTAKE_REQUIRED,
-                "/root", report_id, "A child report requires explicit Root intake.", report_id
+                self.connection,
+                workflow_id,
+                ObligationKind.REPORT_INTAKE_REQUIRED,
+                owner_actor or "/root",
+                report_id,
+                "A child report requires explicit owner intake.",
+                report_id,
+                owner_actor_context_id=owner_actor,
+                source_actor_context_id=source_actor,
             )
             self._touch_workflow(workflow_id)
             self._append_event(
                 workflow_id, "OBLIGATION_OPENED", obligation_id,
-                {"kind": ObligationKind.ROOT_INTAKE_REQUIRED.value},
+                {"kind": ObligationKind.REPORT_INTAKE_REQUIRED.value},
                 f"OBLIGATION_OPENED:{obligation_id}",
             )
             self._append_event(
@@ -592,8 +713,13 @@ class SemanticStore:
                 raise KeyError(f"unknown report: {report_id}")
             obligation = self.connection.execute(
                 """SELECT obligation_id FROM obligations
-                WHERE workflow_id = ? AND kind = ? AND subject = ? AND state = 'OPEN'""",
-                (workflow_id, ObligationKind.ROOT_INTAKE_REQUIRED.value, report_id),
+                WHERE workflow_id = ? AND kind IN (?, ?) AND subject = ? AND state = 'OPEN'""",
+                (
+                    workflow_id,
+                    ObligationKind.REPORT_INTAKE_REQUIRED.value,
+                    ObligationKind.ROOT_INTAKE_REQUIRED.value,
+                    report_id,
+                ),
             ).fetchone()
             if obligation is None:
                 raise ValueError(f"report obligation is not open: {report_id}")
@@ -692,6 +818,8 @@ class SemanticStore:
                 "SELECT * FROM obligations WHERE workflow_id = ? AND state = 'OPEN' ORDER BY created_at, obligation_id",
                 (workflow_id,),
             ).fetchall()]
+            for item in obligations:
+                item["kind"] = normalize_obligation_kind(str(item.get("kind") or ""))
             result = dict(workflow)
             result["tasks"] = tasks
             result["open_obligations"] = obligations

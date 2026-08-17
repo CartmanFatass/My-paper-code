@@ -61,6 +61,9 @@ def test_runtime_health_and_workflow_open(tmp_path):
             assert current["workflow_id"] == opened["workflow_id"]
             assert current["state"] == "ACTIVE"
             assert current["state_version"] >= 1
+            actor = await call(client, "actor_context_current", {"session_id": "session-1"})
+            assert actor["actor_context"]["actor_kind"] == "OPERATIONAL_ROOT"
+            assert actor["workflow"]["workflow_id"] == opened["workflow_id"]
     run(scenario)
 
 

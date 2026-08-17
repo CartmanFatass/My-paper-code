@@ -93,7 +93,7 @@ def _workflow_current_context(workflow: Mapping[str, object], state: Mapping[str
         report_ids = ",".join(
             str(item.get("subject") or "")
             for item in state.get("open_obligations", [])
-            if str(item.get("kind") or "") == "ROOT_INTAKE_REQUIRED" and item.get("subject")
+            if str(item.get("kind") or "") == "REPORT_INTAKE_REQUIRED" and item.get("subject")
         )
     return "\n".join(
         [

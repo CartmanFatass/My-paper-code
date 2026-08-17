@@ -213,7 +213,7 @@ def _register_tools(server: MCPServer) -> MCPServer:
             "unconsumed_report_ids": [
                 item["subject"]
                 for item in obligations
-                if item.get("kind") == "ROOT_INTAKE_REQUIRED" and item.get("subject")
+                if item.get("kind") == "REPORT_INTAKE_REQUIRED" and item.get("subject")
             ],
         }
 
@@ -320,6 +320,36 @@ def _register_tools(server: MCPServer) -> MCPServer:
             raise ValueError(f"unknown closure kind: {closure_kind}")
         receipt_id = _get_store().create_closure_receipt(workflow_id, closure_kind, summary)
         return {"workflow_id": workflow_id, "receipt_id": receipt_id, "closure_kind": closure_kind}
+
+    @server.tool(description="Return the actor context and its current workflow.")
+    def actor_context_current(
+        session_id: str,
+        agent_id: str = "",
+        canonical_path: str = "",
+    ) -> dict[str, Any]:
+        from .actor_registry import resolve_actor_context
+
+        store = _get_store()
+        actor = resolve_actor_context(
+            store,
+            session_id=session_id,
+            agent_id=agent_id,
+            canonical_path=canonical_path,
+        )
+        if actor is None:
+            return {"actor_context": None, "workflow": None}
+        workflow = store.current_actor_workflow(actor.actor_context_id)
+        return {
+            "actor_context": {
+                "actor_context_id": actor.actor_context_id,
+                "actor_kind": actor.actor_kind.value,
+                "session_id": actor.session_id,
+                "scope_key": actor.scope_key,
+                "direction_id": actor.direction_id,
+                "state": actor.state.value,
+            },
+            "workflow": _jsonable(workflow) if workflow is not None else None,
+        }
 
     return server
 
