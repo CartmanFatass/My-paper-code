@@ -46,7 +46,7 @@ function Get-StrictConfigMutation([string]$Text) {
     $section = $block.Substring($sectionMatch.Index, $sectionEnd - $sectionMatch.Index)
     $enabledMatches = [regex]::Matches($section, '(?m)^[ \t]*enabled[ \t]*=[ \t]*(true|false)[ \t]*(?:\r?$)')
     if ($enabledMatches.Count -ne 1) { throw "MCP_ENABLED_FIELD_INVALID" }
-    if ($section -notmatch [regex]::Escape('command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe"')) { throw "MCP_PYTHON_PATH_INVALID" }
+    if (([regex]::Matches($section, '(?m)^[ \t]*command[ \t]*=')).Count -ne 1) { throw "MCP_COMMAND_INVALID" }
     if ($section -notmatch '(?m)^tool_timeout_sec[ \t]*=[ \t]*1800[ \t]*(?:\r?$)') { throw "MCP_TIMEOUT_INVALID" }
     $enabledMatch = $enabledMatches[0]; $ending = if ($enabledMatch.Value.EndsWith("`r")) { "`r" } else { "" }
     $indent = ([regex]::Match($enabledMatch.Value, '^[ \t]*')).Value

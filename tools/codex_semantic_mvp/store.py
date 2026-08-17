@@ -1,4 +1,9 @@
-"""Transactional SQLite event and obligation store for the semantic MVP."""
+"""Transactional SQLite event and obligation store for the semantic MVP.
+
+Persisted rows are a control-plane delivery and obligation ledger. They are
+not scientific truth, not canonical project memory, and not a source that
+compaction may rehydrate as research conclusions or ``research_frontier``.
+"""
 
 from __future__ import annotations
 
@@ -28,9 +33,15 @@ RETURNED_TASK_LIFECYCLES = frozenset(
     {"RETURNED_TYPED", "RETURNED_UNTYPED", "INTAKEN", "CANCELLED"}
 )
 QUIESCENT_TASK_LIFECYCLES = frozenset({"INTAKEN", "CANCELLED"})
-CLOSURE_KINDS = frozenset(
+OPEN_TASK_LIFECYCLES = frozenset(
+    {"DECLARED", "RUNNING", "RETURNED_TYPED", "RETURNED_UNTYPED"}
+)
+ROOT_EXPLICIT_CLOSURE_KINDS = frozenset(
     {"COMPLETED", "USER_CANCELLED", "SCOPE_TRANSFERRED", "DEFERRED_BY_USER", "GOAL_BLOCKED_AFTER_AUDIT"}
 )
+MECHANICAL_CLOSURE_KINDS = frozenset({"EMPTY_SESSION_ENDED"})
+CLOSURE_KINDS = ROOT_EXPLICIT_CLOSURE_KINDS | MECHANICAL_CLOSURE_KINDS
+CLOSED_WORKFLOW_STATES = frozenset({"CLOSED", "CANCELLED"})
 
 
 def _now() -> str:
@@ -120,6 +131,179 @@ class SemanticStore:
                 f"WORKFLOW_OPENED:{workflow_id}",
             )
         return workflow_id
+
+    def current_workflow(self, session_id: str) -> dict[str, Any] | None:
+        """Return the ACTIVE workflow, else the most recently updated session row."""
+        if not session_id:
+            return None
+        with self._lock:
+            active = self.connection.execute(
+                "SELECT * FROM workflows WHERE session_id = ? AND state = 'ACTIVE'",
+                (session_id,),
+            ).fetchone()
+            if active is not None:
+                return dict(active)
+            latest = self.connection.execute(
+                """SELECT * FROM workflows WHERE session_id = ?
+                ORDER BY updated_at DESC, created_at DESC, workflow_id DESC LIMIT 1""",
+                (session_id,),
+            ).fetchone()
+            return dict(latest) if latest is not None else None
+
+    def find_session_task(
+        self,
+        session_id: str,
+        task_id: str | None = None,
+        agent_id: str | None = None,
+    ) -> tuple[dict[str, Any], dict[str, Any]] | None:
+        """Find a task in any workflow of this session, including closed ones."""
+        if not session_id or (not task_id and not agent_id):
+            return None
+        with self._lock:
+            if task_id:
+                row = self.connection.execute(
+                    """SELECT workflows.*, tasks.task_id AS matched_task_id
+                    FROM tasks JOIN workflows ON workflows.workflow_id = tasks.workflow_id
+                    WHERE workflows.session_id = ? AND tasks.task_id = ?
+                    ORDER BY workflows.updated_at DESC LIMIT 1""",
+                    (session_id, task_id),
+                ).fetchone()
+                if row is not None:
+                    workflow = dict(row)
+                    task = self.connection.execute(
+                        "SELECT * FROM tasks WHERE workflow_id = ? AND task_id = ?",
+                        (workflow["workflow_id"], task_id),
+                    ).fetchone()
+                    if task is not None:
+                        return dict(row), dict(task)
+            if agent_id:
+                row = self.connection.execute(
+                    """SELECT * FROM tasks JOIN workflows
+                    ON workflows.workflow_id = tasks.workflow_id
+                    WHERE workflows.session_id = ? AND tasks.agent_id = ?
+                    ORDER BY workflows.updated_at DESC, tasks.created_at DESC LIMIT 1""",
+                    (session_id, agent_id),
+                ).fetchone()
+                if row is not None:
+                    task = self.connection.execute(
+                        "SELECT * FROM tasks WHERE workflow_id = ? AND task_id = ?",
+                        (row["workflow_id"], row["task_id"]),
+                    ).fetchone()
+                    workflow = self.connection.execute(
+                        "SELECT * FROM workflows WHERE workflow_id = ?",
+                        (row["workflow_id"],),
+                    ).fetchone()
+                    if task is not None and workflow is not None:
+                        return dict(workflow), dict(task)
+        return None
+
+    def workflow_for_session_return(
+        self,
+        session_id: str,
+        task_id: str | None = None,
+        agent_id: str | None = None,
+    ) -> dict[str, Any] | None:
+        """Resolve the workflow that should receive a child return.
+
+        A late SubagentStop after mechanical close must stay on that closed
+        workflow and must not bind to a newer ACTIVE successor.
+        """
+        matched = self.find_session_task(session_id, task_id=task_id, agent_id=agent_id)
+        if matched is not None:
+            return matched[0]
+        with self._lock:
+            active = self.connection.execute(
+                "SELECT * FROM workflows WHERE session_id = ? AND state = 'ACTIVE'",
+                (session_id,),
+            ).fetchone()
+            closed = self.connection.execute(
+                """SELECT * FROM workflows WHERE session_id = ? AND state IN ('CLOSED', 'CANCELLED')
+                ORDER BY updated_at DESC, created_at DESC, workflow_id DESC LIMIT 1""",
+                (session_id,),
+            ).fetchone()
+        if closed is not None:
+            if active is None:
+                return dict(closed)
+            started_on_active = False
+            if agent_id:
+                started_on_active = self.connection.execute(
+                    "SELECT 1 FROM tasks WHERE workflow_id = ? AND agent_id = ?",
+                    (active["workflow_id"], agent_id),
+                ).fetchone() is not None
+            if not started_on_active:
+                return dict(closed)
+            return dict(active)
+        return dict(active) if active is not None else None
+
+    def ensure_delivery_task(
+        self,
+        workflow_id: str,
+        agent_id: str,
+        agent_type: str,
+    ) -> dict[str, Any]:
+        """Return the bound or unique declared task, else create a delivery-only task."""
+        if not agent_id:
+            raise ValueError("agent_id is required to create a delivery task")
+        expected_type = agent_type or "unspecified"
+        with self._lock:
+            bound = self.connection.execute(
+                "SELECT * FROM tasks WHERE workflow_id = ? AND agent_id = ?",
+                (workflow_id, agent_id),
+            ).fetchone()
+            if bound is not None:
+                return dict(bound)
+            unbound = self.connection.execute(
+                """SELECT * FROM tasks
+                WHERE workflow_id = ? AND expected_agent_type = ?
+                  AND (agent_id IS NULL OR agent_id = '')
+                  AND lifecycle IN ('DECLARED', 'RUNNING')
+                ORDER BY created_at, task_id""",
+                (workflow_id, expected_type),
+            ).fetchall()
+            if len(unbound) == 1:
+                return dict(unbound[0])
+            task_id = f"delivery_{hashlib.sha256(agent_id.encode('utf-8')).hexdigest()[:16]}"
+            existing = self.connection.execute(
+                "SELECT * FROM tasks WHERE workflow_id = ? AND task_id = ?",
+                (workflow_id, task_id),
+            ).fetchone()
+            if existing is not None:
+                return dict(existing)
+        self.register_task(
+            workflow_id,
+            task_id,
+            expected_type,
+            f"delivery-only return for {agent_id}",
+            required=False,
+        )
+        row = self.connection.execute(
+            "SELECT * FROM tasks WHERE workflow_id = ? AND task_id = ?",
+            (workflow_id, task_id),
+        ).fetchone()
+        if row is None:
+            raise KeyError(f"failed to create delivery task: {workflow_id}/{task_id}")
+        return dict(row)
+
+    def ensure_open_obligation(
+        self,
+        workflow_id: str,
+        kind: str | ObligationKind,
+        owner: str,
+        subject: str,
+        reason: str,
+        source_ref: str,
+    ) -> str:
+        """Open an obligation unless the same source_ref is already open."""
+        kind_value = kind.value if isinstance(kind, Enum) else str(kind)
+        with self._lock:
+            existing = self.connection.execute(
+                """SELECT obligation_id FROM obligations
+                WHERE workflow_id = ? AND kind = ? AND source_ref = ? AND state = 'OPEN'""",
+                (workflow_id, kind_value, source_ref),
+            ).fetchone()
+            if existing is not None:
+                return existing[0]
+        return self.open_obligation(workflow_id, kind, owner, subject, reason, source_ref)
 
     def register_task(
         self,
@@ -518,15 +702,21 @@ class SemanticStore:
             state = self.workflow_state(workflow_id)
             if state["open_obligations"]:
                 raise ValueError("workflow has open obligations")
-            if any(task["required"] and task["lifecycle"] not in {"INTAKEN", "CANCELLED"}
-                   for task in state["tasks"]):
-                raise ValueError("workflow has required tasks that are not complete")
+            open_tasks = [
+                task for task in state["tasks"]
+                if task["lifecycle"] in OPEN_TASK_LIFECYCLES
+            ]
+            if open_tasks:
+                raise ValueError("workflow has tasks that are not complete")
+            if closure_kind == "EMPTY_SESSION_ENDED" and state["tasks"]:
+                raise ValueError("empty-session close requires no managed tasks")
             receipt_id = _new_id("receipt")
             self.connection.execute(
                 "INSERT INTO closure_receipts(receipt_id, workflow_id, closure_kind, summary, created_at) VALUES (?, ?, ?, ?, ?)",
                 (receipt_id, workflow_id, closure_kind, summary, _now()),
             )
-            self._touch_workflow(workflow_id, "CLOSED" if closure_kind == "COMPLETED" else "CANCELLED")
+            next_state = "CLOSED" if closure_kind in {"COMPLETED", "EMPTY_SESSION_ENDED"} else "CANCELLED"
+            self._touch_workflow(workflow_id, next_state)
             self._append_event(
                 workflow_id, "WORKFLOW_CLOSED", receipt_id,
                 {"closure_kind": closure_kind}, f"WORKFLOW_CLOSED:{workflow_id}"

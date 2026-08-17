@@ -4,17 +4,29 @@
 
 The live configuration is [`.codex/config.toml`](../../../../.codex/config.toml),
 not `.codex/hooks.json`. It contains one managed MCP block and one managed TOML
-hook block. The hook block declares all five lifecycle handlers:
+hook block. ACTIVE installs four lifecycle handlers:
 
 - `SessionStart`
 - `SubagentStart`
 - `SubagentStop`
 - `Stop`
-- `PreToolUse`
+
+`PreToolUse` is diagnostic-only and remains in SHADOW. It is not part of the
+ACTIVE default because it starts a Python/SQLite process on every tool call
+without enforcing control-plane semantics.
 
 On Windows each handler specifies the same `command` and `commandWindows`
 value. This is required for Desktop's Windows command selection. The semantic
 state directory remains relative to the repository: `runtime/codex-semantic-mvp`.
+
+SQLite is a control-plane delivery and obligation ledger. It is not scientific
+truth, not canonical project memory, and not a source that compaction may
+rehydrate as research conclusions or `research_frontier`. After compression,
+Root may recover only `workflow_id`, `state_version`, open obligation IDs, and
+unconsumed report IDs via `workflow_current` or SessionStart context.
+
+An empty session Stop writes mechanical `EMPTY_SESSION_ENDED`. `COMPLETED` is
+created only by an explicit Root `workflow_close`.
 
 ## Activation and trust
 
@@ -23,6 +35,8 @@ already present in the repository:
 
 ```powershell
 .\scripts\codex-semantic-mvp-enable.ps1 -RepoRoot . -Mode Active
+# optional on another machine:
+.\scripts\codex-semantic-mvp-enable.ps1 -RepoRoot . -Mode Active -PythonExecutable <python.exe>
 ```
 
 The script validates and atomically updates only its delimited TOML blocks;
@@ -32,14 +46,16 @@ duplicate, or conflicting hook definitions.
 
 Codex intentionally does not execute an unmanaged command hook until that
 exact hook definition is trusted. After a fresh checkout or a hook-command
-change, approve the five repository hooks in Codex Desktop's Hooks UI. An
+change, approve the four ACTIVE repository hooks in Codex Desktop's Hooks UI. An
 automation may instead query `hooks/list` and write each returned `currentHash`
 as that hook's `trusted_hash` in the user-level `hooks.state` through
-`config/batchWrite`. The trust records are machine/user state, not portable
-repository configuration; the repository itself has no absolute runtime
-directory.
+`config/batchWrite`. The helper requires the exact ACTIVE or SHADOW event set,
+exact `sourcePath`, exact reviewed command, and exact `<config>:<event>:0:0`
+keys, then read-back verifies `trusted`. The trust records are machine/user
+state, not portable repository configuration; the repository itself has no
+absolute runtime directory.
 
-After a hook-command change, trust the five repository hooks from the
+After a hook-command change, trust the ACTIVE repository hooks from the
 repository root:
 
 ```powershell
@@ -65,7 +81,7 @@ the repository audit log then contained both a `SUBAGENT_STARTED` and a
 end-to-end proof that active subagent semantic protections are delivered by
 Desktop rather than merely rendered in configuration or stdout.
 
-The activation regression suite additionally checks all five emitted handler
+The activation regression suite additionally checks the ACTIVE four-handler
 tables, Windows command parity, mode transitions, conflict rejection,
 byte-exact legacy preservation, and atomic failure compensation.
 

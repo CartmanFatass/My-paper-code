@@ -44,17 +44,6 @@
           }
         ]
       }
-    ],
-    "PreToolUse": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active",
-            "timeout": 5
-          }
-        ]
-      }
     ]
   }
 }

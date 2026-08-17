@@ -174,7 +174,48 @@ def _register_tools(server: MCPServer) -> MCPServer:
     def runtime_health() -> dict[str, Any]:
         store = _get_store()
         store.initialize()
-        return {"status": "OK", "server": SERVER_NAME, "schema_version": 1}
+        health_path = store.path.parent / "health.json"
+        fail_open = None
+        if health_path.is_file():
+            try:
+                loaded = json.loads(health_path.read_text(encoding="utf-8"))
+                if isinstance(loaded, dict):
+                    fail_open = loaded
+            except (OSError, UnicodeError, json.JSONDecodeError):
+                fail_open = {"status": "unreadable"}
+        return {
+            "status": "OK",
+            "server": SERVER_NAME,
+            "schema_version": 1,
+            "fail_open": fail_open,
+            "ledger_role": "control_plane_delivery_and_obligation_ledger",
+        }
+
+    @server.tool(description="Return the current session workflow id and thin obligation summary.")
+    def workflow_current(session_id: str) -> dict[str, Any]:
+        store = _get_store()
+        workflow = store.current_workflow(session_id)
+        if workflow is None:
+            return {
+                "workflow_id": None,
+                "state": None,
+                "state_version": None,
+                "open_obligation_ids": [],
+                "unconsumed_report_ids": [],
+            }
+        state = store.workflow_state(str(workflow["workflow_id"]))
+        obligations = list(state.get("open_obligations", []))
+        return {
+            "workflow_id": workflow["workflow_id"],
+            "state": workflow["state"],
+            "state_version": state.get("state_version"),
+            "open_obligation_ids": [item["obligation_id"] for item in obligations],
+            "unconsumed_report_ids": [
+                item["subject"]
+                for item in obligations
+                if item.get("kind") == "ROOT_INTAKE_REQUIRED" and item.get("subject")
+            ],
+        }
 
     @server.tool(description="Open one active managed workflow for a session.")
     def workflow_open(session_id: str, opened_turn_id: str, scope: str, objective: str) -> dict[str, Any]:

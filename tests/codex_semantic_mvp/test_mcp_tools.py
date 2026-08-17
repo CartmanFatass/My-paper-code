@@ -49,6 +49,7 @@ def test_runtime_health_and_workflow_open(tmp_path):
         async with connected_server(tmp_path) as client:
             health = await call(client, "runtime_health")
             assert health["status"] == "OK"
+            assert health["ledger_role"] == "control_plane_delivery_and_obligation_ledger"
             opened = await call(client, "workflow_open", {
                 "session_id": "session-1",
                 "opened_turn_id": "turn-1",
@@ -56,6 +57,10 @@ def test_runtime_health_and_workflow_open(tmp_path):
                 "objective": "exercise basic tools",
             })
             assert opened["workflow_id"].startswith("wf_")
+            current = await call(client, "workflow_current", {"session_id": "session-1"})
+            assert current["workflow_id"] == opened["workflow_id"]
+            assert current["state"] == "ACTIVE"
+            assert current["state_version"] >= 1
     run(scenario)
 
 

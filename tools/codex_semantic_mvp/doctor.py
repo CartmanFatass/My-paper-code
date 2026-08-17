@@ -11,6 +11,13 @@ import re
 from pathlib import Path
 from typing import Any
 
+from .constants import (
+    ACTIVE_HOOK_EVENTS,
+    DEFAULT_PYTHON_EXECUTABLE,
+    HOOK_ENTRY_MODULE,
+    SHADOW_HOOK_EVENTS,
+)
+
 try:
     import tomllib
 except ModuleNotFoundError:  # pragma: no cover - Python 3.10 compatibility
@@ -21,7 +28,7 @@ BEGIN_MARKER = "# BEGIN HMASD CODEX SEMANTIC MVP"
 END_MARKER = "# END HMASD CODEX SEMANTIC MVP"
 HOOK_BEGIN_MARKER = "# BEGIN HMASD CODEX SEMANTIC HOOKS"
 HOOK_END_MARKER = "# END HMASD CODEX SEMANTIC HOOKS"
-PYTHON_EXECUTABLE = r"C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe"
+PYTHON_EXECUTABLE = DEFAULT_PYTHON_EXECUTABLE
 USER_TRUST_STATUS = "unknown"
 USER_TRUST_SCOPE = "repository_only"
 USER_TRUST_MESSAGE = "Repository-only doctor cannot establish user-level Codex trust."
@@ -53,13 +60,13 @@ def _marker_block(config_text: str) -> str | None:
     return config_text[begins[0].start() : ends[0].end()]
 
 
-def _server_config(config_text: str) -> tuple[bool, bool, str | None]:
+def _server_config(config_text: str) -> tuple[bool, bool, str | None, str | None]:
     block = _marker_block(config_text)
     if block is None:
-        return False, False, None
+        return False, False, None, None
     sections = list(re.finditer(r"(?m)^\[mcp_servers\.hmasd_orchestrator\][ \t]*(?:\r?$)", block))
     if len(sections) != 1:
-        return False, False, block
+        return False, False, block, None
     headings = list(re.finditer(r"(?m)^\[[^\r\n\]]+\][ \t]*(?:\r?$)", block))
     section_end = len(block)
     for heading in headings:
@@ -68,7 +75,7 @@ def _server_config(config_text: str) -> tuple[bool, bool, str | None]:
             break
     section = block[sections[0].start() : section_end]
     enabled_matches = list(re.finditer(r"(?m)^[ \t]*enabled[ \t]*=[ \t]*(true|false)[ \t]*(?:\r?$)", section))
-    escaped_python = PYTHON_EXECUTABLE.replace("\\", "\\\\")
+    command_matches = list(re.finditer(r'(?m)^[ \t]*command[ \t]*=[ \t]*"([^"]+)"[ \t]*(?:\r?$)', section))
     args_match = re.search(r"(?ms)^args[ \t]*=[ \t]*\[\s*(.*?)^\s*\][ \t]*(?:\r?$)", section)
     args = []
     if args_match:
@@ -79,20 +86,24 @@ def _server_config(config_text: str) -> tuple[bool, bool, str | None]:
         '"--state-dir"',
         '"runtime/codex-semantic-mvp"',
     ]
+    python_toml = command_matches[0].group(1) if len(command_matches) == 1 else ""
+    python_path = Path(python_toml.replace("\\\\", "\\")) if python_toml else None
     required = (
         len(enabled_matches) == 1
-        and len(re.findall(r"(?m)^[ \t]*command[ \t]*=", section)) == 1
-        and re.search(rf'(?m)^[ \t]*command[ \t]*=[ \t]*"{re.escape(escaped_python)}"[ \t]*(?:\r?$)', section) is not None
+        and len(command_matches) == 1
+        and bool(python_toml)
+        and python_path is not None
+        and python_path.is_file()
         and len(re.findall(r"(?m)^[ \t]*tool_timeout_sec[ \t]*=", section)) == 1
         and re.search(r"(?m)^[ \t]*tool_timeout_sec[ \t]*=[ \t]*1800[ \t]*(?:\r?$)", section) is not None
         and len(re.findall(r"(?m)^[ \t]*args[ \t]*=", section)) == 1
         and args == expected_args
     )
     enabled = bool(enabled_matches and enabled_matches[0].group(1).lower() == "true")
-    return required, enabled, block
+    return required, enabled, block, python_toml or None
 
 
-def _inline_hook_mode(config_text: str) -> str:
+def _inline_hook_mode(config_text: str, expected_python_toml: str | None = None) -> str:
     """Return the mode encoded by a complete managed inline hook block."""
     begins = list(re.finditer(r"(?m)^# BEGIN HMASD CODEX SEMANTIC HOOKS[ \t]*(?:\r?$)", config_text))
     ends = list(re.finditer(r"(?m)^# END HMASD CODEX SEMANTIC HOOKS[ \t]*(?:\r?$)", config_text))
@@ -101,8 +112,24 @@ def _inline_hook_mode(config_text: str) -> str:
     if len(begins) != 1 or len(ends) != 1 or ends[0].start() <= begins[0].start():
         return "unknown"
     block = config_text[begins[0].end() : ends[0].start()]
+    present_events = [
+        match.group(1)
+        for match in re.finditer(r"(?m)^\[\[hooks\.([A-Za-z]+)\]\][ \t]*(?:\r?$)", block)
+    ]
+    unique_events = tuple(dict.fromkeys(present_events))
+    if unique_events == ACTIVE_HOOK_EVENTS:
+        expected_events = ACTIVE_HOOK_EVENTS
+        expected_mode = "active"
+    elif unique_events == SHADOW_HOOK_EVENTS:
+        expected_events = SHADOW_HOOK_EVENTS
+        expected_mode = "shadow"
+    else:
+        return "unknown"
+    if len(present_events) != len(expected_events):
+        return "unknown"
     modes: list[str] = []
-    for event in ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse"):
+    pythons: list[str] = []
+    for event in expected_events:
         header = re.compile(rf"(?m)^\[\[hooks\.{event}\]\][ \t]*(?:\r?$)")
         if len(header.findall(block)) != 1:
             return "unknown"
@@ -126,15 +153,21 @@ def _inline_hook_mode(config_text: str) -> str:
         )
         if len(commands) != 1 or len(command_windows) != 1 or command_windows != commands:
             return "unknown"
-        escaped_python = PYTHON_EXECUTABLE.replace("\\", "\\\\")
         match = re.fullmatch(
-            rf'{re.escape(escaped_python)} -m tools\.codex_semantic_mvp\.hook_entry --mode (active|shadow)',
+            rf'(?P<python>.+) -m {re.escape(HOOK_ENTRY_MODULE)} --mode (active|shadow)',
             commands[0],
         )
         if match is None:
             return "unknown"
-        modes.append(match.group(1))
-    return modes[0] if len(set(modes)) == 1 else "unknown"
+        pythons.append(match.group("python"))
+        modes.append(match.group(2))
+    if len(set(modes)) != 1 or modes[0] != expected_mode:
+        return "unknown"
+    if len(set(pythons)) != 1:
+        return "unknown"
+    if expected_python_toml and pythons[0] != expected_python_toml:
+        return "unknown"
+    return modes[0]
 
 
 def _mode(
@@ -143,10 +176,11 @@ def _mode(
     server_enabled: bool,
     hooks_enabled: bool,
     config_valid: bool = True,
+    expected_python_toml: str | None = None,
 ) -> str:
     if not config_valid or not server_valid or not hooks_enabled:
         return "unknown"
-    hook_mode = _inline_hook_mode(config_text)
+    hook_mode = _inline_hook_mode(config_text, expected_python_toml=expected_python_toml)
     if hook_mode == "absent":
         return "off" if not server_enabled else "unknown"
     if hook_mode in {"active", "shadow"}:
@@ -196,8 +230,17 @@ def collect_baseline(repo_root: Path, mcp_version_reader: Any = distribution_ver
         config_valid = False
     else:
         config_valid = True
-    present, enabled, _ = _server_config(config_text)
+    present, enabled, _, python_toml = _server_config(config_text)
     hooks_enabled = _features_hooks_enabled(config_text)
+    health_path = root / "runtime" / "codex-semantic-mvp" / "health.json"
+    fail_open = None
+    if health_path.is_file():
+        try:
+            loaded = json.loads(health_path.read_text(encoding="utf-8"))
+            if isinstance(loaded, dict):
+                fail_open = loaded
+        except (OSError, UnicodeError, json.JSONDecodeError):
+            fail_open = {"status": "unreadable"}
     return {
         "config_toml": config,
         "hooks_json": hooks,
@@ -207,7 +250,17 @@ def collect_baseline(repo_root: Path, mcp_version_reader: Any = distribution_ver
         "server_config_present": present,
         "server_enabled": enabled,
         "runtime_writable": _runtime_writable(root / "runtime" / "codex-semantic-mvp"),
-        "mode": _mode(config_text, present, enabled, hooks_enabled, config_valid),
+        "mode": _mode(
+            config_text,
+            present,
+            enabled,
+            hooks_enabled,
+            config_valid,
+            expected_python_toml=python_toml,
+        ),
+        "python_executable": python_toml.replace("\\\\", "\\") if python_toml else None,
+        "fail_open": fail_open,
+        "ledger_role": "control_plane_delivery_and_obligation_ledger",
         "user_trust": {
             "status": USER_TRUST_STATUS,
             "scope": USER_TRUST_SCOPE,

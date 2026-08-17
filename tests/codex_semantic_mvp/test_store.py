@@ -301,3 +301,23 @@ def test_semantic_dispositions_are_not_accepted_as_task_lifecycle(store, bad_sta
     store.register_task("wf-1", "task-1", "worker", "inspect", True)
     with pytest.raises(ValueError):
         store._set_task_lifecycle("wf-1", "task-1", bad_state)
+
+
+def test_empty_session_close_rejects_any_open_task(store):
+    store.open_workflow("wf-1", "session-1", "turn-1", "scope", "objective")
+    store.register_task("wf-1", "task-1", "worker", "inspect", False)
+    with pytest.raises(ValueError, match="not complete"):
+        store.create_closure_receipt("wf-1", "EMPTY_SESSION_ENDED", "should fail")
+    store.record_agent_started("wf-1", "task-1", "agent-1", "worker")
+    with pytest.raises(ValueError, match="not complete"):
+        store.create_closure_receipt("wf-1", "COMPLETED", "should fail")
+
+
+def test_current_workflow_prefers_active_then_latest(store):
+    first = store.open_workflow("wf-1", "session-1", "turn-1", "scope", "objective")
+    assert store.current_workflow("session-1")["workflow_id"] == first
+    store.create_closure_receipt(first, "EMPTY_SESSION_ENDED", "empty")
+    second = store.open_workflow("wf-2", "session-1", "turn-2", "scope", "next")
+    current = store.current_workflow("session-1")
+    assert current["workflow_id"] == second
+    assert current["state"] == "ACTIVE"

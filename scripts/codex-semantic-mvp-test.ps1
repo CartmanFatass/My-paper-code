@@ -68,7 +68,12 @@ function Invoke-NativeSmoke {
     }
     $hookBlock = $config.Substring($hookBeginAt + $begin.Length, $hookEndAt - $hookBeginAt - $begin.Length)
     $mcpBlock = $config.Substring($mcpBeginAt + $mcpBegin.Length, $mcpEndAt - $mcpBeginAt - $mcpBegin.Length)
-    foreach ($event in @("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreToolUse")) {
+    $mcpCommand = [regex]::Match($mcpBlock, '(?m)^command[ \t]*=[ \t]*"([^"]+)"[ \t]*\r?$').Groups[1].Value
+    if (-not $mcpCommand) { throw "NATIVE_SMOKE_REQUIRES_INLINE_TOML: missing orchestrator command" }
+    if (([regex]::Matches($hookBlock, '(?m)^\[\[hooks\.PreToolUse\]\][ \t]*\r?$')).Count -ne 0) {
+        throw "NATIVE_SMOKE_REQUIRES_INLINE_TOML: ACTIVE must not install PreToolUse"
+    }
+    foreach ($event in @("SessionStart", "SubagentStart", "SubagentStop", "Stop")) {
         $eventHeader = '(?m)^\[\[hooks\.' + $event + '\]\][ \t]*\r?$'
         if (([regex]::Matches($hookBlock, $eventHeader)).Count -ne 1) {
             throw "NATIVE_SMOKE_REQUIRES_INLINE_TOML: missing hooks.$event handler"
@@ -79,8 +84,8 @@ function Invoke-NativeSmoke {
         $typeLines = @([regex]::Matches($eventSection, '(?m)^type[ \t]*=[ \t]*"[^"]*"[ \t]*\r?$'))
         $commandLines = @([regex]::Matches($eventSection, '(?m)^command[ \t]*=[ \t]*"[^"]*"[ \t]*\r?$'))
         $commandWindowsLines = @([regex]::Matches($eventSection, '(?m)^commandWindows[ \t]*=[ \t]*"[^"]*"[ \t]*\r?$'))
-        $expectedCommand = 'command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"'
-        $expectedCommandWindows = 'commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"'
+        $expectedCommand = 'command = "' + $mcpCommand + ' -m tools.codex_semantic_mvp.hook_entry --mode active"'
+        $expectedCommandWindows = 'commandWindows = "' + $mcpCommand + ' -m tools.codex_semantic_mvp.hook_entry --mode active"'
         if ($nestedHeaders.Count -ne 1 -or $nestedHeaders[0] -ne $nestedExpected -or
             $typeLines.Count -ne 1 -or $typeLines[0].Value.Trim() -ne 'type = "command"' -or
             $commandLines.Count -ne 1 -or $commandLines[0].Value.Trim() -ne $expectedCommand -or
@@ -100,7 +105,7 @@ function Invoke-NativeSmoke {
     $expectedArgs = @('"-m"', '"tools.codex_semantic_mvp.mcp_server"', '"--state-dir"', '"runtime/codex-semantic-mvp"')
     if (-not $mcpSectionMatch.Success -or
         ([regex]::Matches($mcpSection, '(?m)^command[ \t]*=')).Count -ne 1 -or
-        $mcpSection -notmatch '(?m)^command[ \t]*=[ \t]*"C:\\\\Users\\\\fires\\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python\.exe"[ \t]*\r?$' -or
+        $mcpSection -notmatch '(?m)^command[ \t]*=[ \t]*"[^"]+"[ \t]*\r?$' -or
         $argLines.Count -ne $expectedArgs.Count -or
         (@(0..($expectedArgs.Count - 1) | Where-Object { $argLines[$_] -ne $expectedArgs[$_] }).Count -ne 0) -or
         ([regex]::Matches($mcpSection, '(?m)^enabled[ \t]*=[ \t]*(?:true|false)')).Count -ne 1 -or

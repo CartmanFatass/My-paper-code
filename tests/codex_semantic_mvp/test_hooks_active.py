@@ -67,7 +67,7 @@ def test_unmanaged_start_is_noop(store: SemanticStore) -> None:
 
 def test_session_start_opens_always_on_workflow(store: SemanticStore) -> None:
     result = handle_hook(payload("SessionStart"), "active", store)
-    assert result == {"continue": True}
+    assert result and result["continue"] is True
     workflow = store.connection.execute(
         "SELECT * FROM workflows WHERE session_id = ? AND state = 'ACTIVE'",
         ("session-active",),
@@ -75,12 +75,23 @@ def test_session_start_opens_always_on_workflow(store: SemanticStore) -> None:
     assert workflow is not None
     assert workflow["scope"] == "session"
     assert workflow["objective"] == "always-on managed semantic session"
+    context = str(result.get("additionalContext") or "")
+    assert "HMASD_WORKFLOW_CURRENT_V1" in context
+    assert f"workflow_id={workflow['workflow_id']}" in context
 
 
 def test_subagent_start_auto_opens_and_adds_contract(store: SemanticStore) -> None:
     result = handle_hook(payload("SubagentStart"), "active", store)
     assert result and result["continue"] is True
-    assert "HMASD_SUBAGENT_RETURN_V1" in result["additionalContext"]
+    context = result["additionalContext"]
+    assert "HMASD_SUBAGENT_RETURN_V1" in context
+    workflow = store.connection.execute(
+        "SELECT * FROM workflows WHERE session_id = ? AND state = 'ACTIVE'",
+        ("session-active",),
+    ).fetchone()
+    assert workflow is not None
+    assert f"workflow_id={workflow['workflow_id']}" in context
+    assert "task_id=delivery_" in context
     second = handle_hook(payload("SubagentStart"), "active", store)
     assert second and "HMASD_SUBAGENT_RETURN_V1" in second["additionalContext"]
     count = store.connection.execute(
@@ -88,6 +99,11 @@ def test_subagent_start_auto_opens_and_adds_contract(store: SemanticStore) -> No
         ("session-active",),
     ).fetchone()[0]
     assert count == 1
+    tasks = store.connection.execute(
+        "SELECT COUNT(*) FROM tasks WHERE workflow_id = ?",
+        (workflow["workflow_id"],),
+    ).fetchone()[0]
+    assert tasks == 1
 
 
 def test_stop_autocompletes_empty_always_on_workflow(store: SemanticStore) -> None:
@@ -99,10 +115,15 @@ def test_stop_autocompletes_empty_always_on_workflow(store: SemanticStore) -> No
         ("session-active",),
     ).fetchone()
     assert row["state"] == "CLOSED"
+    receipt = store.connection.execute(
+        "SELECT closure_kind FROM closure_receipts",
+    ).fetchone()
+    assert receipt["closure_kind"] == "EMPTY_SESSION_ENDED"
+    assert receipt["closure_kind"] != "COMPLETED"
 
 
 def test_managed_start_adds_generic_contract(store: SemanticStore) -> None:
-    managed(store)
+    workflow_id, task_id = managed(store)
     result = handle_hook(payload("SubagentStart"), "active", store)
     assert result and result["continue"] is True
     context = result["additionalContext"]
@@ -110,6 +131,8 @@ def test_managed_start_adds_generic_contract(store: SemanticStore) -> None:
     assert "This parent session is using the HMASD managed semantic protocol." in context
     assert "end with exactly one HMASD_SUBAGENT_RETURN_V1 envelope" in context
     assert "LOCAL_AUTHORITY_BOUNDARY" in context
+    assert f"workflow_id={workflow_id}" in context
+    assert f"task_id={task_id}" in context
 
 
 def test_valid_report_is_allowed_and_creates_obligation(store: SemanticStore) -> None:
@@ -193,7 +216,11 @@ def test_binding_mismatch_is_audited_and_not_recorded(store: SemanticStore) -> N
     )
     assert result == {"continue": True}
     assert store.workflow_state(workflow_id)["tasks"][0]["lifecycle"] == "DECLARED"
-    assert store.events_after(workflow_id)[-1]["kind"] == "HOOK_BINDING_MISMATCH"
+    kinds = [event["kind"] for event in store.events_after(workflow_id)]
+    assert "HOOK_BINDING_MISMATCH" in kinds
+    assert store.workflow_state(workflow_id)["open_obligations"][0]["kind"] == (
+        "UNBOUND_SUBAGENT_INTAKE_REQUIRED"
+    )
 
 
 def test_already_bound_agent_is_preserved_as_untyped(store: SemanticStore) -> None:
@@ -213,7 +240,8 @@ def test_already_bound_agent_is_preserved_as_untyped(store: SemanticStore) -> No
     task = store.workflow_state(workflow_id)["tasks"][0]
     assert task["agent_id"] == "agent-original"
     assert task["lifecycle"] == "RETURNED_UNTYPED"
-    assert store.events_after(workflow_id)[-1]["kind"] == "HOOK_BINDING_MISMATCH"
+    kinds = [event["kind"] for event in store.events_after(workflow_id)]
+    assert "HOOK_BINDING_MISMATCH" in kinds
 
 
 def test_active_template_uses_active_mode(repo_root: Path) -> None:
@@ -337,3 +365,125 @@ def test_stop_store_exception_fails_open_with_exception_class_and_no_secret(
     assert "STOP_GUARD_FAIL_OPEN" in audit
     assert "SecretSQLiteError" in audit
     assert "super-secret" not in audit
+    health = json.loads((tmp_path / "health.json").read_text(encoding="utf-8"))
+    assert health["last_fail_open_kind"] == "STOP_GUARD_FAIL_OPEN"
+    assert health["last_fail_open_exception"] == "SecretSQLiteError"
+
+
+def test_unregistered_child_can_return_injected_envelope(store: SemanticStore) -> None:
+    start = handle_hook(payload("SubagentStart"), "active", store)
+    assert start and "task_id=" in start["additionalContext"]
+    workflow_id = store.current_workflow("session-active")["workflow_id"]
+    task_id = store.workflow_state(workflow_id)["tasks"][0]["task_id"]
+    result = handle_hook(
+        payload("SubagentStop", last_assistant_message=valid_message(workflow_id, task_id)),
+        "active",
+        store,
+    )
+    assert result == {"continue": True}
+    state = store.workflow_state(workflow_id)
+    assert state["tasks"][0]["lifecycle"] == "RETURNED_TYPED"
+    assert state["open_obligations"][0]["kind"] == "ROOT_INTAKE_REQUIRED"
+
+
+def test_unregistered_child_without_envelope_records_untyped_intake(
+    store: SemanticStore,
+) -> None:
+    handle_hook(payload("SubagentStart"), "active", store)
+    first = handle_hook(payload("SubagentStop", last_assistant_message="no envelope"), "active", store)
+    second = handle_hook(
+        payload("SubagentStop", stop_hook_active=True, last_assistant_message="no envelope"),
+        "active",
+        store,
+    )
+    assert first and first["decision"] == "block"
+    assert second == {"continue": True}
+    workflow_id = store.current_workflow("session-active")["workflow_id"]
+    state = store.workflow_state(workflow_id)
+    assert state["tasks"][0]["lifecycle"] == "RETURNED_UNTYPED"
+    assert state["open_obligations"][0]["kind"] == "ROOT_INTAKE_REQUIRED"
+
+
+def test_optional_running_task_prevents_empty_close_but_allows_stop(
+    store: SemanticStore,
+) -> None:
+    workflow_id = store.open_workflow(
+        session_id="session-active",
+        opened_turn_id="turn-open",
+        scope="test",
+        objective="test objective",
+    )
+    store.register_task(workflow_id, "optional-1", "default", "optional", required=False)
+    store.record_agent_started(workflow_id, "optional-1", "agent-1", "default")
+    result = handle_hook(payload("Stop"), "active", store)
+    assert result == {"continue": True}
+    state = store.workflow_state(workflow_id)
+    assert state["state"] == "ACTIVE"
+    assert store.connection.execute(
+        "SELECT COUNT(*) FROM closure_receipts WHERE workflow_id = ?",
+        (workflow_id,),
+    ).fetchone()[0] == 0
+
+
+def test_binding_mismatch_then_stop_is_not_completed(store: SemanticStore) -> None:
+    workflow_id, task_id = managed(store)
+    handle_hook(
+        payload(
+            "SubagentStop",
+            agent_type="wrong-agent",
+            task_id=task_id,
+            last_assistant_message=valid_message(workflow_id, task_id),
+        ),
+        "active",
+        store,
+    )
+    result = handle_hook(payload("Stop"), "active", store)
+    assert result and result["decision"] == "block"
+    receipt = store.connection.execute(
+        "SELECT closure_kind FROM closure_receipts WHERE workflow_id = ?",
+        (workflow_id,),
+    ).fetchone()
+    assert receipt is None
+
+
+def test_delayed_subagent_stop_stays_on_closed_workflow(store: SemanticStore) -> None:
+    handle_hook(payload("SessionStart"), "active", store)
+    first = store.current_workflow("session-active")
+    assert first is not None
+    handle_hook(payload("Stop"), "active", store)
+    handle_hook(payload("SessionStart"), "active", store)
+    successor = store.current_workflow("session-active")
+    assert successor is not None
+    assert successor["workflow_id"] != first["workflow_id"]
+    handle_hook(
+        payload("SubagentStop", last_assistant_message="late unbound child"),
+        "active",
+        store,
+    )
+    closed_state = store.workflow_state(first["workflow_id"])
+    assert any(
+        item["kind"] == "UNBOUND_SUBAGENT_INTAKE_REQUIRED"
+        for item in closed_state["open_obligations"]
+    )
+    successor_state = store.workflow_state(successor["workflow_id"])
+    assert successor_state["open_obligations"] == []
+    assert successor_state["tasks"] == []
+
+
+def test_empty_close_is_not_completed_kind(store: SemanticStore) -> None:
+    workflow_id = store.open_workflow(
+        session_id="session-empty",
+        opened_turn_id="turn-open",
+        scope="session",
+        objective="empty",
+    )
+    receipt_id = store.create_closure_receipt(
+        workflow_id, "EMPTY_SESSION_ENDED", "no managed activity"
+    )
+    assert receipt_id
+    row = store.connection.execute(
+        "SELECT closure_kind FROM closure_receipts WHERE workflow_id = ?",
+        (workflow_id,),
+    ).fetchone()
+    assert row["closure_kind"] == "EMPTY_SESSION_ENDED"
+    assert store.workflow_state(workflow_id)["state"] == "CLOSED"

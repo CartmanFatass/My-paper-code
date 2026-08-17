@@ -6,12 +6,17 @@ param(
     [string]$ExpectedHooksHash = "",
     [ValidateSet("none", "backup", "hooks", "config", "state")]
     [string]$InjectFailureAt = "none",
+    [string]$PythonExecutable = "C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe",
     [switch]$DryRun
 )
 
 $ErrorActionPreference = "Stop"
 $root = if ([IO.Path]::IsPathRooted($RepoRoot)) { [IO.Path]::GetFullPath($RepoRoot) } else { [IO.Path]::GetFullPath((Join-Path (Get-Location) $RepoRoot)) }
-$python = "C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe"
+if (-not (Test-Path -LiteralPath $PythonExecutable -PathType Leaf)) {
+    throw "PYTHON_EXECUTABLE_MISSING: $PythonExecutable"
+}
+$python = [IO.Path]::GetFullPath($PythonExecutable)
+$tomlPython = $python.Replace('\', '\\')
 
 function Get-BytesHash([byte[]]$Bytes) {
     $sha = [Security.Cryptography.SHA256]::Create()
@@ -41,13 +46,19 @@ function Invoke-InjectedFailure([string]$Point) {
     if ($InjectFailureAt -eq $Point) { throw "INJECTED_FAILURE:$Point" }
 }
 
-function New-SemanticHookToml([string]$Mode) {
-    $command = 'C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode ' + $Mode.ToLowerInvariant()
+function Get-SemanticHookEvents([string]$Mode) {
+    $events = @('SessionStart', 'SubagentStart', 'SubagentStop', 'Stop')
+    if ($Mode -eq 'Shadow') { $events += 'PreToolUse' }
+    return $events
+}
+
+function New-SemanticHookToml([string]$Mode, [string]$TomlPython) {
+    $command = $TomlPython + ' -m tools.codex_semantic_mvp.hook_entry --mode ' + $Mode.ToLowerInvariant()
     $lines = @(
         '# BEGIN HMASD CODEX SEMANTIC HOOKS',
         '[hooks]'
     )
-    foreach ($event in @('SessionStart', 'SubagentStart', 'SubagentStop', 'Stop', 'PreToolUse')) {
+    foreach ($event in (Get-SemanticHookEvents $Mode)) {
         $lines += "[[hooks.$event]]"
         $lines += "[[hooks.$event.hooks]]"
         $lines += 'type = "command"'
@@ -108,7 +119,7 @@ function Test-RootHookAssignment([string]$Text, [string]$Pattern) {
     return $false
 }
 
-function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled, [string]$Mode) {
+function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled, [string]$Mode, [string]$TomlPython) {
     $beginMatches = [regex]::Matches($Text, '(?m)^# BEGIN HMASD CODEX SEMANTIC MVP[ \t]*(?:\r?$)')
     $endMatches = [regex]::Matches($Text, '(?m)^# END HMASD CODEX SEMANTIC MVP[ \t]*(?:\r?$)')
     if ($beginMatches.Count -ne 1 -or $endMatches.Count -ne 1 -or $endMatches[0].Index -le $beginMatches[0].Index) {
@@ -130,10 +141,16 @@ function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled, [strin
     $section = $block.Substring($sectionMatch.Index, $sectionEnd - $sectionMatch.Index)
     $enabledMatches = [regex]::Matches($section, '(?m)^[ \t]*enabled[ \t]*=[ \t]*(true|false)[ \t]*(?:\r?$)')
     if ($enabledMatches.Count -ne 1) { throw "MCP_ENABLED_FIELD_INVALID" }
-    if ($section -notmatch [regex]::Escape('command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe"')) {
-        throw "MCP_PYTHON_PATH_INVALID"
-    }
+    $commandMatches = [regex]::Matches($section, '(?m)^[ \t]*command[ \t]*=[ \t]*"[^"]*"[ \t]*(?:\r?$)')
+    if ($commandMatches.Count -ne 1) { throw "MCP_COMMAND_INVALID" }
+    $commandMatch = $commandMatches[0]
+    $commandEnding = if ($commandMatch.Value.EndsWith("`r")) { "`r" } else { "" }
+    $commandIndent = ([regex]::Match($commandMatch.Value, '^[ \t]*')).Value
+    $newCommandLine = $commandIndent + 'command = "' + $TomlPython + '"' + $commandEnding
+    $section = $section.Substring(0, $commandMatch.Index) + $newCommandLine + $section.Substring($commandMatch.Index + $commandMatch.Length)
     if ($section -notmatch '(?m)^tool_timeout_sec[ \t]*=[ \t]*1800[ \t]*(?:\r?$)') { throw "MCP_TIMEOUT_INVALID" }
+    $enabledMatches = [regex]::Matches($section, '(?m)^[ \t]*enabled[ \t]*=[ \t]*(true|false)[ \t]*(?:\r?$)')
+    if ($enabledMatches.Count -ne 1) { throw "MCP_ENABLED_FIELD_INVALID" }
     $enabledMatch = $enabledMatches[0]
     $oldLine = $enabledMatch.Value
     $ending = if ($oldLine.EndsWith("`r")) { "`r" } else { "" }
@@ -155,33 +172,35 @@ function Get-StrictConfigMutation([string]$Text, [string]$DesiredEnabled, [strin
         $hookEnd = $hookEndMatches[0].Index + $hookEndMatches[0].Length
         $managedBlock = $updatedText.Substring($hookStart, $hookEnd - $hookStart)
         if ([regex]::Matches($managedBlock, '(?m)^\[hooks\][ \t]*(?:\r?$)').Count -ne 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
-        foreach ($event in @('SessionStart', 'SubagentStart', 'SubagentStop', 'Stop', 'PreToolUse')) {
+        foreach ($event in @('SessionStart', 'SubagentStart', 'SubagentStop', 'Stop')) {
             if ([regex]::Matches($managedBlock, "(?m)^\[\[hooks\.$event\]\][ \t]*(?:\r?$)").Count -ne 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
             if ([regex]::Matches($managedBlock, "(?m)^\[\[hooks\.$event\.hooks\]\][ \t]*(?:\r?$)").Count -ne 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
         }
-        if ([regex]::Matches($managedBlock, '(?m)^command[ \t]*=[ \t]*"C:\\\\Users\\\\fires\\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python\.exe -m tools\.codex_semantic_mvp\.hook_entry --mode (?:active|shadow)"[ \t]*(?:\r?$)').Count -ne 5) { throw "HOOK_MARKER_BLOCK_INVALID" }
+        $preToolUseCount = [regex]::Matches($managedBlock, '(?m)^\[\[hooks\.PreToolUse\]\][ \t]*(?:\r?$)').Count
+        if ($preToolUseCount -gt 1) { throw "HOOK_MARKER_BLOCK_INVALID" }
+        $expectedHookCount = 4 + $preToolUseCount
         $commandMatches = [regex]::Matches($managedBlock, '(?m)^[ \t]*command[ \t]*=[ \t]*"([^"]*)"[ \t]*(?:\r?$)')
         $commandWindowsMatches = [regex]::Matches($managedBlock, '(?m)^[ \t]*commandWindows[ \t]*=[ \t]*"([^"]*)"[ \t]*(?:\r?$)')
         $commandWindowsLines = [regex]::Matches($managedBlock, '(?m)^[ \t]*commandWindows[ \t]*=')
-        if ($commandMatches.Count -ne 5 -or $commandWindowsMatches.Count -ne $commandWindowsLines.Count -or ($commandWindowsMatches.Count -ne 0 -and $commandWindowsMatches.Count -ne 5)) { throw "HOOK_MARKER_BLOCK_INVALID" }
-        if ($commandWindowsMatches.Count -eq 5) {
+        if ($commandMatches.Count -ne $expectedHookCount -or $commandWindowsMatches.Count -ne $commandWindowsLines.Count -or ($commandWindowsMatches.Count -ne 0 -and $commandWindowsMatches.Count -ne $expectedHookCount)) { throw "HOOK_MARKER_BLOCK_INVALID" }
+        if ($commandWindowsMatches.Count -eq $expectedHookCount) {
             for ($index = 0; $index -lt $commandMatches.Count; $index++) {
                 $commandValue = $commandMatches[$index].Groups[1].Value
                 $commandWindowsValue = $commandWindowsMatches[$index].Groups[1].Value
                 if ($commandValue -ne $commandWindowsValue -or
-                    $commandValue -notmatch '^C:\\\\Users\\\\fires\\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python\.exe -m tools\.codex_semantic_mvp\.hook_entry --mode (?:active|shadow)$') {
+                    $commandValue -notmatch ' -m tools\.codex_semantic_mvp\.hook_entry --mode (?:active|shadow)$') {
                     throw "HOOK_MARKER_BLOCK_INVALID"
                 }
             }
         }
         $outsideText = $updatedText.Substring(0, $hookStart) + $updatedText.Substring($hookEnd)
         if ($outsideText -match $singleHookTable -or $outsideText -match $arrayHookTable -or (Test-RootHookAssignment $outsideText $assignmentPattern)) { throw "HOOKS_TABLE_CONFLICT" }
-        $hookBlock = (New-SemanticHookToml $Mode) -replace "`n", $newline
+        $hookBlock = (New-SemanticHookToml $Mode $TomlPython) -replace "`n", $newline
         $updatedText = $updatedText.Substring(0, $hookStart) + $hookBlock + $updatedText.Substring($hookEnd)
     }
     else {
         if ($updatedText -match $singleHookTable -or $updatedText -match $arrayHookTable -or (Test-RootHookAssignment $updatedText $assignmentPattern)) { throw "HOOKS_TABLE_CONFLICT" }
-        $hookBlock = (New-SemanticHookToml $Mode) -replace "`n", $newline
+        $hookBlock = (New-SemanticHookToml $Mode $TomlPython) -replace "`n", $newline
         $updatedText = $updatedText + $newline + $hookBlock + $newline
     }
     $updatedText = Ensure-SemanticFeatureFlags $updatedText
@@ -253,7 +272,7 @@ try {
     $state = if ($stateValidation) { $stateValidation.Object } else { $null }
     $configText = [Text.UTF8Encoding]::new($false).GetString($configBytes)
     $desired = if ($Mode -eq "Active") { "true" } else { "false" }
-    $configMutation = Get-StrictConfigMutation $configText $desired $Mode
+    $configMutation = Get-StrictConfigMutation $configText $desired $Mode $tomlPython
     $updatedConfigBytes = [Text.UTF8Encoding]::new($false).GetBytes($configMutation.Text)
     $backupName = "hooks-$currentHash.bak"
     $backupPath = Join-Path $backupDir $backupName
@@ -274,6 +293,7 @@ try {
     $state | Add-Member -NotePropertyName current_config_sha256 -NotePropertyValue (Get-BytesHash $updatedConfigBytes) -Force
     $state | Add-Member -NotePropertyName mode -NotePropertyValue $Mode.ToLowerInvariant() -Force
     $state | Add-Member -NotePropertyName last_backup -NotePropertyValue "backups/$backupName" -Force
+    $state | Add-Member -NotePropertyName python_executable -NotePropertyValue $python -Force
     $newStateBytes = [Text.UTF8Encoding]::new($false).GetBytes(($state | ConvertTo-Json -Depth 4))
     try { $null = ([Text.UTF8Encoding]::new($false).GetString($newStateBytes) | ConvertFrom-Json) } catch { throw "ACTIVATION_STATE_BUILD_INVALID" }
 

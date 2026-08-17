@@ -178,11 +178,4 @@ command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.co
 commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
 timeout = 5
 
-[[hooks.PreToolUse]]
-[[hooks.PreToolUse.hooks]]
-type = "command"
-command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
-commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode active"
-timeout = 5
-
 # END HMASD CODEX SEMANTIC HOOKS

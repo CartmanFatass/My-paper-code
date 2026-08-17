@@ -1,4 +1,8 @@
-"""SQLite connection and migration helpers for the semantic MVP."""
+"""SQLite connection and migration helpers for the semantic MVP.
+
+This database is a delivery and obligation ledger for the control plane.
+It is not scientific truth and must not be treated as canonical project memory.
+"""
 
 from __future__ import annotations
 

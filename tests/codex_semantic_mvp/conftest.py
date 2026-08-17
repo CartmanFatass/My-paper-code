@@ -1,3 +1,4 @@
+import os
 import shutil
 from pathlib import Path
 
@@ -17,3 +18,12 @@ def powershell_executable() -> str:
         if resolved:
             return resolved
     raise FileNotFoundError("neither pwsh nor powershell is on PATH")
+
+
+def windows_powershell_51() -> str:
+    """Return Windows PowerShell 5.1, not pwsh, for an explicit host lane."""
+    system_root = Path(os.environ.get("SystemRoot", r"C:\Windows"))
+    candidate = system_root / "System32" / "WindowsPowerShell" / "v1.0" / "powershell.exe"
+    if candidate.is_file():
+        return str(candidate)
+    raise FileNotFoundError("Windows PowerShell 5.1 was not found")
