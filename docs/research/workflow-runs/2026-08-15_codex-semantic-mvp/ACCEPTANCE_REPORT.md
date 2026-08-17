@@ -1,5 +1,34 @@
 # Codex Semantic MVP Acceptance Report
 
+## Actor-scoped compaction (2026-08-17)
+
+Implemented the actor-scoped control-plane overlay through schema v2, owner-local
+workflows, role-specific epochs, semantic commits, capsules, checkpoints,
+reanchor ACK, packet references, and actor-local Stop. Synthetic suite:
+
+```text
+211 passed in 98.97s
+C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest tests/codex_semantic_mvp -q
+```
+
+ACTIVE templates now include `PreCompact` and `PostCompact` in addition to the
+four lifecycle handlers. ACTIVE still has no all-tools `PreToolUse`. A live
+workspace that was activated before this event set is intentionally `unknown`
+until it is re-enabled.
+
+Automatic compaction rehydration is enabled only for Portfolio and Operational
+Root session-root identity. EM, CM, and leaf automatic rehydration remain
+disabled because the live topology probe canaries were not executed. Those
+owners restore through explicit MCP `context_checkpoint_current` /
+`context_reanchor_ack` or the next identified follow-up.
+
+`narrow_pretool_matcher_verified` is false. No ACTIVE PreToolUse matcher was
+installed.
+
+Live eight-canary Codex execution, PowerShell 5.1 rollback drill, and native
+hook smoke against a reactivated live config are still outstanding. They do
+not change the synthetic contract.
+
 ## Accepted live surface
 
 The live configuration is [`.codex/config.toml`](../../../../.codex/config.toml),
