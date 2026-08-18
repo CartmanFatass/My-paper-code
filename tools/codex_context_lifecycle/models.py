@@ -150,6 +150,8 @@ class PromotionProposal:
     disposition: dict[str, object] | None = None
     canonical_ref: str | None = None
     source_kind: ContextSourceKind | None = None
+    writer_actor_context_id: str | None = None
+    carried_to_epoch_id: str | None = None
 
 
 @dataclass(frozen=True)

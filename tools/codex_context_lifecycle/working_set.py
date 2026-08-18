@@ -6,13 +6,22 @@ import json
 from typing import Any
 
 from tools.codex_semantic_mvp.actor_models import ActorKind, ActorState, actor_context_from_row
-from tools.codex_semantic_mvp.checkpoints import current_checkpoint
 from tools.codex_semantic_mvp.epochs import plan_epoch_current
 from tools.codex_semantic_mvp.models import normalize_obligation_kind
-from tools.codex_semantic_mvp.semantic_commits import semantic_commit_current
+from tools.codex_semantic_mvp.semantic_commits import current_open_epoch_commit
 from tools.codex_semantic_mvp.store import SemanticStore
 
 from .models import WorkingSet
+
+REQUIRED_ROLE_REFS = {
+    ActorKind.OPERATIONAL_ROOT: (".agents/roles/ROOT.md",),
+    ActorKind.PORTFOLIO: (
+        ".agents/roles/ROOT.md",
+        "docs/research/workflow-runs/2026-08-11_five-round-research-team/CROSS_DIRECTION_PORTFOLIO_HANDOFF_SOL_ULTRA.md",
+    ),
+    ActorKind.EM: (".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md",),
+    ActorKind.CM: (".agents/roles/CODE_PROJECT_MANAGER.md",),
+}
 
 ACTIVE_PACKET_DELIVERY = frozenset(
     {"PREPARED", "SUBMISSION_UNCERTAIN", "DELIVERED_VISIBLE_TARGET", "ACKNOWLEDGED"}
@@ -85,6 +94,19 @@ def _excluded(store: SemanticStore, actor_context_id: str, included: set[str]) -
     return tuple(excluded)
 
 
+def _audit_only_ids(store: SemanticStore, actor_context_id: str) -> set[str]:
+    rows = store.connection.execute(
+        """SELECT object_id FROM context_retention_marks
+        WHERE actor_context_id = ? AND active_in_working_set = 0""",
+        (actor_context_id,),
+    ).fetchall()
+    return {str(row[0]) for row in rows}
+
+
+def _filter_refs(refs: list[str] | tuple[str, ...], hidden: set[str]) -> tuple[str, ...]:
+    return tuple(item for item in refs if item and item not in hidden)
+
+
 def build_working_set(store: SemanticStore, actor_context_id: str) -> WorkingSet:
     row = store.connection.execute(
         "SELECT * FROM actor_contexts WHERE actor_context_id = ?",
@@ -93,8 +115,29 @@ def build_working_set(store: SemanticStore, actor_context_id: str) -> WorkingSet
     if row is None:
         raise KeyError(f"unknown actor: {actor_context_id}")
     actor = actor_context_from_row(row)
+    hidden = _audit_only_ids(store, actor_context_id)
+    if actor.state is not ActorState.ACTIVE:
+        included: set[str] = set()
+        return WorkingSet(
+            actor_context_id=actor.actor_context_id,
+            actor_kind=actor.actor_kind.value,
+            epoch_id=None,
+            semantic_commit_id=None,
+            checkpoint_id=None,
+            open_obligation_ids=(),
+            unintaken_report_ids=(),
+            active_packet_ids=(),
+            navigation_refs=(),
+            procedure_refs=(),
+            canonical_refs=(),
+            promotion_ids=(),
+            rollover_id=None,
+            excluded_object_ids=_excluded(store, actor_context_id, included) + tuple(sorted(hidden)),
+        )
+    from tools.codex_semantic_mvp.checkpoints import current_checkpoint
+
     epoch = plan_epoch_current(store, actor_context_id)
-    commit = semantic_commit_current(store, actor_context_id)
+    commit = current_open_epoch_commit(store, actor_context_id)
     checkpoint = current_checkpoint(store, actor_context_id)
     obligations = _open_obligations(store, actor_context_id)
     packets = _active_packets(store, actor_context_id)
@@ -104,9 +147,9 @@ def build_working_set(store: SemanticStore, actor_context_id: str) -> WorkingSet
         if normalize_obligation_kind(str(item.get("kind") or "")) == "REPORT_INTAKE_REQUIRED"
         and item.get("subject")
     ]
-    navigation_refs = tuple((epoch or {}).get("navigation_refs") or ())
-    procedure_refs = tuple((epoch or {}).get("procedure_refs") or ())
-    canonical = ["AGENTS.md"]
+    navigation_refs = _filter_refs((epoch or {}).get("navigation_refs") or (), hidden)
+    procedure_refs = _filter_refs((epoch or {}).get("procedure_refs") or (), hidden)
+    canonical = ["AGENTS.md", *REQUIRED_ROLE_REFS.get(actor.actor_kind, ())]
     if epoch:
         canonical.extend(str(item) for item in epoch.get("authority_refs") or [] if item)
     if commit:
@@ -115,31 +158,49 @@ def build_working_set(store: SemanticStore, actor_context_id: str) -> WorkingSet
             if str(key).endswith("_ref") and isinstance(value, str) and value:
                 canonical.append(value)
         canonical.extend(str(item) for item in commit.get("source_refs") or [] if item)
-    canonical = tuple(dict.fromkeys(canonical))
+    canonical = _filter_refs(tuple(dict.fromkeys(canonical)), hidden)
     epoch_id = (epoch or {}).get("epoch_id")
-    promotions = tuple(_open_promotions(store, epoch_id))
+    if epoch_id in hidden:
+        epoch = None
+        epoch_id = None
+    commit_id = (commit or {}).get("semantic_commit_id")
+    if commit_id in hidden:
+        commit = None
+        commit_id = None
+    checkpoint_id = (checkpoint or {}).get("checkpoint_id")
+    if checkpoint_id in hidden:
+        checkpoint = None
+        checkpoint_id = None
+    promotions = tuple(
+        item for item in _open_promotions(store, epoch_id) if item not in hidden
+    )
+    rollover_id = _prepared_rollover(store, actor_context_id)
+    if rollover_id in hidden:
+        rollover_id = None
     included = {item for item in (
         epoch_id,
-        (commit or {}).get("semantic_commit_id"),
-        (checkpoint or {}).get("checkpoint_id"),
-        *_open_promotions(store, epoch_id),
-        _prepared_rollover(store, actor_context_id),
+        commit_id,
+        checkpoint_id,
+        *promotions,
+        rollover_id,
     ) if item}
     return WorkingSet(
         actor_context_id=actor.actor_context_id,
         actor_kind=actor.actor_kind.value,
         epoch_id=epoch_id,
-        semantic_commit_id=(commit or {}).get("semantic_commit_id"),
-        checkpoint_id=(checkpoint or {}).get("checkpoint_id"),
+        semantic_commit_id=commit_id,
+        checkpoint_id=checkpoint_id,
         open_obligation_ids=tuple(item.get("obligation_id") for item in obligations),
         unintaken_report_ids=tuple(report_ids),
-        active_packet_ids=tuple(item.get("packet_id") for item in packets),
+        active_packet_ids=tuple(
+            item.get("packet_id") for item in packets if item.get("packet_id") not in hidden
+        ),
         navigation_refs=navigation_refs,
         procedure_refs=procedure_refs,
         canonical_refs=canonical,
         promotion_ids=promotions,
-        rollover_id=_prepared_rollover(store, actor_context_id),
-        excluded_object_ids=_excluded(store, actor_context_id, included),
+        rollover_id=rollover_id,
+        excluded_object_ids=_excluded(store, actor_context_id, included) + tuple(sorted(hidden - included)),
     )
 
 

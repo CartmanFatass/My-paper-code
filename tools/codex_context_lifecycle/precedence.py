@@ -54,6 +54,7 @@ MUTATION_OPERATIONS = frozenset(
     {
         "open_epoch",
         "revise_epoch",
+        "close_epoch",
         "resolve_obligation",
         "create_promotion_proposal",
         "apply_rollover",

@@ -44,6 +44,7 @@ def test_rollover_carries_em_frontier_and_forgets_ephemeral(store: SemanticStore
         promotion_id=rejected,
         next_state=PromotionState.OWNER_REJECTED,
         disposition={"owner": "em"},
+        requester_actor_context_id=em.actor_context_id,
     )
     prepared = prepare_rollover(
         store,
@@ -60,8 +61,14 @@ def test_rollover_carries_em_frontier_and_forgets_ephemeral(store: SemanticStore
         },
         forgotten_refs=["scratch-note"],
     )
-    confirm_rollover(store, prepared["rollover_id"])
-    applied = apply_rollover(store, rollover_id=prepared["rollover_id"])
+    confirm_rollover(
+        store, prepared["rollover_id"], requester_actor_context_id=em.actor_context_id
+    )
+    applied = apply_rollover(
+        store,
+        rollover_id=prepared["rollover_id"],
+        requester_actor_context_id=em.actor_context_id,
+    )
     current = plan_epoch_current(store, em.actor_context_id)
     assert current["epoch_id"] != epoch["epoch_id"]
     assert current["objective"] == "Define the next authorized single-axis discriminator."
@@ -111,6 +118,12 @@ def test_rollover_rejects_cross_role_fields_and_lost_obligations(store: Semantic
         next_objective="next",
         carry_frontier={"claim_ceiling": "toy"},
     )
-    confirm_rollover(store, prepared["rollover_id"])
+    confirm_rollover(
+        store, prepared["rollover_id"], requester_actor_context_id=em.actor_context_id
+    )
     with pytest.raises(RolloverError, match="open obligations"):
-        apply_rollover(store, rollover_id=prepared["rollover_id"])
+        apply_rollover(
+            store,
+            rollover_id=prepared["rollover_id"],
+            requester_actor_context_id=em.actor_context_id,
+        )

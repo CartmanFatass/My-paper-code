@@ -26,7 +26,7 @@ PROTECTED_KINDS = frozenset(
 )
 
 
-def mark_refs_audit_only(
+def mark_refs_audit_only_unlocked(
     store: SemanticStore,
     *,
     actor_context_id: str,
@@ -34,23 +34,35 @@ def mark_refs_audit_only(
     reason: str,
 ) -> None:
     now = _now()
+    for ref in refs:
+        store.connection.execute(
+            """INSERT OR REPLACE INTO context_retention_marks (
+                retention_mark_id, actor_context_id, object_kind, object_id,
+                retention_class, active_in_working_set, reason, created_at, archived_at
+            ) VALUES (?, ?, 'forgotten_ref', ?, ?, 0, ?, ?, ?)""",
+            (
+                _new_id("ret"),
+                actor_context_id,
+                ref,
+                RetentionClass.AUDIT_ONLY.value,
+                reason,
+                now,
+                now,
+            ),
+        )
+
+
+def mark_refs_audit_only(
+    store: SemanticStore,
+    *,
+    actor_context_id: str,
+    refs: list[str] | tuple[str, ...],
+    reason: str,
+) -> None:
     with store._lock, store.connection:
-        for ref in refs:
-            store.connection.execute(
-                """INSERT OR REPLACE INTO context_retention_marks (
-                    retention_mark_id, actor_context_id, object_kind, object_id,
-                    retention_class, active_in_working_set, reason, created_at, archived_at
-                ) VALUES (?, ?, 'forgotten_ref', ?, ?, 0, ?, ?, ?)""",
-                (
-                    _new_id("ret"),
-                    actor_context_id,
-                    ref,
-                    RetentionClass.AUDIT_ONLY.value,
-                    reason,
-                    now,
-                    now,
-                ),
-            )
+        mark_refs_audit_only_unlocked(
+            store, actor_context_id=actor_context_id, refs=refs, reason=reason
+        )
 
 
 def _eligible_historical(store: SemanticStore, actor_context_id: str) -> list[dict[str, str]]:

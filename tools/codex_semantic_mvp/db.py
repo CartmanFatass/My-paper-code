@@ -324,13 +324,28 @@ SCHEMA_V3_TABLES = (
         created_at TEXT NOT NULL
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS user_authority_grants (
+        grant_id TEXT PRIMARY KEY,
+        actor_context_id TEXT NOT NULL,
+        operation TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        consumed_at TEXT
+    )
+    """,
 )
 
 V3_COLUMNS = {
     "plan_epochs": (
         ("navigation_refs_json", "TEXT"),
         ("procedure_refs_json", "TEXT"),
+        ("carry_frontier_json", "TEXT"),
     ),
+    "promotion_proposals": (
+        ("writer_actor_context_id", "TEXT"),
+        ("carried_to_epoch_id", "TEXT"),
+    ),
+    "epoch_rollovers": (("to_epoch_id", "TEXT"),),
 }
 
 
@@ -428,6 +443,9 @@ def migrate_v2_to_v3(connection: sqlite3.Connection) -> None:
     connection.execute(
         "UPDATE plan_epochs SET procedure_refs_json = '[]' WHERE procedure_refs_json IS NULL"
     )
+    connection.execute(
+        "UPDATE plan_epochs SET carry_frontier_json = '{}' WHERE carry_frontier_json IS NULL"
+    )
 
 
 def initialize_database(connection: sqlite3.Connection) -> None:
@@ -449,8 +467,9 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _apply_schema_v1(connection)
         if current < 2:
             migrate_v1_to_v2(connection)
-        if current < 3:
-            migrate_v2_to_v3(connection)
+        # v3 object/column adds are idempotent and must run on already-v3
+        # ledgers when later additive columns are introduced.
+        migrate_v2_to_v3(connection)
         if current < SCHEMA_VERSION:
             connection.execute(
                 "INSERT INTO schema_meta(version, applied_at) VALUES (?, ?)",

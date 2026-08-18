@@ -20,7 +20,7 @@ from tools.codex_semantic_mvp.store import SemanticStore
 
 
 def test_end_to_end_em_lifecycle(store: SemanticStore, repo_root: Path) -> None:
-    _root, em, _cm = make_pair(store)
+    _root, em, _cm = make_pair(store, direction_id="variable_n_fleet_churn")
     registry = load_registry(repo_root / "docs/project/CONTEXT_SOURCE_REGISTRY.toml")
     epoch = plan_epoch_open(
         store,
@@ -68,6 +68,7 @@ def test_end_to_end_em_lifecycle(store: SemanticStore, repo_root: Path) -> None:
         promotion_id=adr["promotion_id"],
         next_state=PromotionState.OWNER_REJECTED,
         disposition={"owner": "em"},
+        requester_actor_context_id=em.actor_context_id,
     )
     science = create_promotion_proposal(
         store,
@@ -85,12 +86,15 @@ def test_end_to_end_em_lifecycle(store: SemanticStore, repo_root: Path) -> None:
         promotion_id=science["promotion_id"],
         next_state=PromotionState.OWNER_ACCEPTED,
         disposition={"owner": "em"},
+        requester_actor_context_id=em.actor_context_id,
     )
     applied = mark_promotion_applied(
         store,
         promotion_id=science["promotion_id"],
         canonical_ref="docs/research/candidates/variable_n_fleet_churn/VNFC_TARGET_EXCLUSIVE_POST_CHURN_RECOVERY_SCIENCE_CARD.md",
         repo_root=repo_root,
+        requester_actor_context_id=em.actor_context_id,
+        writer_actor_context_id=em.actor_context_id,
     )
     prepared = prepare_rollover(
         store,
@@ -107,8 +111,14 @@ def test_end_to_end_em_lifecycle(store: SemanticStore, repo_root: Path) -> None:
         },
         forgotten_refs=["scratch"],
     )
-    confirm_rollover(store, prepared["rollover_id"])
-    apply_rollover(store, rollover_id=prepared["rollover_id"])
+    confirm_rollover(
+        store, prepared["rollover_id"], requester_actor_context_id=em.actor_context_id
+    )
+    apply_rollover(
+        store,
+        rollover_id=prepared["rollover_id"],
+        requester_actor_context_id=em.actor_context_id,
+    )
     apply_gc_marks(store, actor_context_id=em.actor_context_id)
     working = build_working_set(store, em.actor_context_id)
     capsule = build_capsule(store, em.actor_context_id)

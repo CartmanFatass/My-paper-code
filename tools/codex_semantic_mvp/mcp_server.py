@@ -13,6 +13,13 @@ from typing import Any, Mapping
 
 from mcp.server import MCPServer
 
+from tools.codex_context_lifecycle.authority import (
+    assert_mutation_source,
+    bind_requester,
+    default_repo_root,
+    resolve_mcp_requester,
+)
+
 from .db import DEFAULT_STATE_PATH
 from .constants import MAX_WAIT_SECONDS, WAIT_POLL_SECONDS
 from .models import ObligationKind
@@ -41,6 +48,31 @@ def _get_store() -> SemanticStore:
     if _active_store is None:
         raise RuntimeError("MCP semantic store is not initialized")
     return _active_store
+
+
+def _require_mutation(
+    claimed_requester: str | None,
+    source_kind: str | None,
+    operation: str,
+    user_authority_id: str | None = None,
+) -> tuple[SemanticStore, str]:
+    store = _get_store()
+    requester = resolve_mcp_requester(store, claimed_requester)
+    assert_mutation_source(
+        store,
+        source_kind,
+        operation,
+        requester_actor_context_id=requester,
+        user_authority_id=user_authority_id,
+    )
+    return store, requester
+
+
+def _load_registry():
+    from tools.codex_context_lifecycle.source_registry import load_registry
+
+    path = default_repo_root() / "docs/project/CONTEXT_SOURCE_REGISTRY.toml"
+    return load_registry(path) if path.is_file() else None
 
 
 def _jsonable(value: Any) -> Any:
@@ -300,12 +332,24 @@ def _register_tools(server: MCPServer) -> MCPServer:
         workflow_id: str,
         obligation_id: str,
         resolution: dict[str, Any] | None = None,
-        source_kind: str = "USER_AUTHORITY",
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
     ) -> dict[str, Any]:
-        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
-
-        assert_authoritative_source(source_kind, "resolve_obligation")
-        resolved = _get_store().resolve_obligation(workflow_id, obligation_id, resolution)
+        store, requester = _require_mutation(
+            requester_actor_context_id, source_kind, "resolve_obligation", user_authority_id
+        )
+        row = store.connection.execute(
+            """SELECT obligation_id, owner_actor_context_id, owner FROM obligations
+            WHERE obligation_id = ? AND workflow_id = ?""",
+            (obligation_id, workflow_id),
+        ).fetchone()
+        if row is None:
+            raise KeyError(f"unknown obligation: {obligation_id}")
+        owner = str(row["owner_actor_context_id"] or row["owner"] or "")
+        if owner != requester:
+            raise PermissionError("requester is not the obligation owner")
+        resolved = store.resolve_obligation(workflow_id, obligation_id, resolution)
         return {"workflow_id": workflow_id, "obligation_id": resolved, "state": "RESOLVED"}
 
     @server.tool(description="Wait for an event matching a bounded workflow condition.")
@@ -325,14 +369,25 @@ def _register_tools(server: MCPServer) -> MCPServer:
         workflow_id: str,
         closure_kind: str,
         summary: str = "",
-        source_kind: str = "USER_AUTHORITY",
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
     ) -> dict[str, Any]:
-        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
-
-        assert_authoritative_source(source_kind, "close_workflow")
+        store, requester = _require_mutation(
+            requester_actor_context_id, source_kind, "close_workflow", user_authority_id
+        )
+        workflow = store.connection.execute(
+            "SELECT actor_context_id FROM workflows WHERE workflow_id = ?",
+            (workflow_id,),
+        ).fetchone()
+        if workflow is None:
+            raise KeyError(f"unknown workflow: {workflow_id}")
+        owner = str(workflow["actor_context_id"] or "")
+        if owner and owner != requester:
+            raise PermissionError("requester does not own this workflow")
         if closure_kind not in CLOSURE_KINDS:
             raise ValueError(f"unknown closure kind: {closure_kind}")
-        receipt_id = _get_store().create_closure_receipt(workflow_id, closure_kind, summary)
+        receipt_id = store.create_closure_receipt(workflow_id, closure_kind, summary)
         return {"workflow_id": workflow_id, "receipt_id": receipt_id, "closure_kind": closure_kind}
 
     @server.tool(description="Return the actor context and its current workflow.")
@@ -375,14 +430,19 @@ def _register_tools(server: MCPServer) -> MCPServer:
         exit_boundary: str,
         navigation_refs: list[str] | None = None,
         procedure_refs: list[str] | None = None,
-        source_kind: str = "USER_AUTHORITY",
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
     ) -> dict[str, Any]:
-        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
         from .epochs import plan_epoch_open as _open
 
-        assert_authoritative_source(source_kind, "open_epoch")
+        store, requester = _require_mutation(
+            requester_actor_context_id, source_kind, "open_epoch", user_authority_id
+        )
+        if requester != actor_context_id:
+            raise PermissionError("requester does not own the epoch")
         return _open(
-            _get_store(),
+            store,
             actor_context_id=actor_context_id,
             epoch_kind=epoch_kind,
             objective=objective,
@@ -391,6 +451,7 @@ def _register_tools(server: MCPServer) -> MCPServer:
             exit_boundary=exit_boundary,
             navigation_refs=navigation_refs or (),
             procedure_refs=procedure_refs or (),
+            registry=_load_registry(),
         )
 
     @server.tool(description="Return the actor's current open plan epoch.")
@@ -412,18 +473,23 @@ def _register_tools(server: MCPServer) -> MCPServer:
         reason: str,
         navigation_refs: list[str] | None = None,
         procedure_refs: list[str] | None = None,
-        source_kind: str = "USER_AUTHORITY",
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
     ) -> dict[str, Any]:
-        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
         from .epochs import plan_epoch_current as _current
         from .epochs import revise_epoch
 
-        assert_authoritative_source(source_kind, "revise_epoch")
-        current = _current(_get_store(), actor_context_id)
+        store, requester = _require_mutation(
+            requester_actor_context_id, source_kind, "revise_epoch", user_authority_id
+        )
+        if requester != actor_context_id:
+            raise PermissionError("requester does not own the epoch")
+        current = _current(store, actor_context_id)
         if current is None or current["epoch_id"] != epoch_id:
             raise ValueError("epoch does not belong to this actor")
         return revise_epoch(
-            _get_store(),
+            store,
             epoch_id=epoch_id,
             expected_revision=expected_revision,
             objective=objective,
@@ -433,17 +499,30 @@ def _register_tools(server: MCPServer) -> MCPServer:
             reason=reason,
             navigation_refs=navigation_refs,
             procedure_refs=procedure_refs,
+            registry=_load_registry(),
         )
 
     @server.tool(description="Close the actor's open plan epoch.")
-    def plan_epoch_close(actor_context_id: str, epoch_id: str, reason: str = "") -> dict[str, Any]:
+    def plan_epoch_close(
+        actor_context_id: str,
+        epoch_id: str,
+        reason: str = "",
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
         from .epochs import plan_epoch_close as _close
         from .epochs import plan_epoch_current as _current
 
-        current = _current(_get_store(), actor_context_id)
+        store, requester = _require_mutation(
+            requester_actor_context_id, source_kind, "close_epoch", user_authority_id
+        )
+        if requester != actor_context_id:
+            raise PermissionError("requester does not own the epoch")
+        current = _current(store, actor_context_id)
         if current is None or current["epoch_id"] != epoch_id:
             raise ValueError("epoch does not belong to this actor")
-        return _close(_get_store(), epoch_id=epoch_id, reason=reason)
+        return _close(store, epoch_id=epoch_id, reason=reason)
 
     @server.tool(description="Write an owner-authored semantic reanchor snapshot.")
     def semantic_commit_write(
@@ -545,12 +624,17 @@ def _register_tools(server: MCPServer) -> MCPServer:
         source_refs: list[str],
         owner_actor_context_id: str,
         target_ref: str = "",
-        source_kind: str = "USER_AUTHORITY",
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
     ) -> dict[str, Any]:
         from tools.codex_context_lifecycle.promotion import create_promotion_proposal
 
+        store, requester = _require_mutation(
+            requester_actor_context_id, source_kind, "create_promotion_proposal", user_authority_id
+        )
         return create_promotion_proposal(
-            _get_store(),
+            store,
             actor_context_id=actor_context_id,
             epoch_id=epoch_id,
             promotion_kind=promotion_kind,
@@ -560,6 +644,8 @@ def _register_tools(server: MCPServer) -> MCPServer:
             owner_actor_context_id=owner_actor_context_id,
             target_ref=target_ref or None,
             source_kind=source_kind,
+            requester_actor_context_id=requester,
+            repo_root=default_repo_root(),
         )
 
     @server.tool(description="Resolve a promotion proposal with an explicit owner disposition.")
@@ -567,37 +653,44 @@ def _register_tools(server: MCPServer) -> MCPServer:
         promotion_id: str,
         next_state: str,
         disposition: dict[str, Any] | None = None,
-        source_kind: str = "USER_AUTHORITY",
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
     ) -> dict[str, Any]:
-        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
         from tools.codex_context_lifecycle.promotion import resolve_promotion_proposal
 
-        assert_authoritative_source(source_kind, "create_promotion_proposal")
+        store, requester = _require_mutation(
+            requester_actor_context_id, source_kind, "create_owner_decision", user_authority_id
+        )
         return resolve_promotion_proposal(
-            _get_store(),
+            store,
             promotion_id=promotion_id,
             next_state=next_state,
             disposition=disposition,
+            requester_actor_context_id=requester,
+            source_kind=source_kind or "ROLE_CONTRACT",
         )
 
     @server.tool(description="Record that an authorized writer applied a promotion to a file.")
     def context_promotion_mark_applied(
         promotion_id: str,
         canonical_ref: str,
-        repo_root: str = "",
-        source_kind: str = "USER_AUTHORITY",
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
     ) -> dict[str, Any]:
-        from pathlib import Path
-
-        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
         from tools.codex_context_lifecycle.promotion import mark_promotion_applied
 
-        assert_authoritative_source(source_kind, "promote_canonical")
+        store, requester = _require_mutation(
+            requester_actor_context_id, source_kind, "promote_canonical", user_authority_id
+        )
         return mark_promotion_applied(
-            _get_store(),
+            store,
             promotion_id=promotion_id,
             canonical_ref=canonical_ref,
-            repo_root=Path(repo_root) if repo_root else None,
+            repo_root=default_repo_root(),
+            requester_actor_context_id=requester,
+            writer_actor_context_id=requester,
         )
 
     @server.tool(description="List promotion proposals for one epoch.")
@@ -618,12 +711,17 @@ def _register_tools(server: MCPServer) -> MCPServer:
         carry_frontier: dict[str, Any] | None = None,
         promotion_ids: list[str] | None = None,
         forgotten_refs: list[str] | None = None,
-        source_kind: str = "USER_AUTHORITY",
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
     ) -> dict[str, Any]:
         from tools.codex_context_lifecycle.rollover import prepare_rollover
 
+        store, requester = _require_mutation(
+            requester_actor_context_id, source_kind, "apply_rollover", user_authority_id
+        )
         return prepare_rollover(
-            _get_store(),
+            store,
             actor_context_id=actor_context_id,
             from_epoch_id=from_epoch_id,
             from_epoch_revision=from_epoch_revision,
@@ -634,22 +732,47 @@ def _register_tools(server: MCPServer) -> MCPServer:
             carry_frontier=carry_frontier or {},
             promotion_ids=promotion_ids or (),
             forgotten_refs=forgotten_refs or (),
-            source_kind=source_kind,
+            source_kind=source_kind or "PLAN_EPOCH",
+            requester_actor_context_id=requester,
         )
 
     @server.tool(description="Confirm owner review of a prepared epoch rollover.")
-    def plan_epoch_rollover_confirm(rollover_id: str, source_kind: str = "USER_AUTHORITY") -> dict[str, Any]:
-        from tools.codex_context_lifecycle.precedence import assert_authoritative_source
+    def plan_epoch_rollover_confirm(
+        rollover_id: str,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
         from tools.codex_context_lifecycle.rollover import confirm_rollover
 
-        assert_authoritative_source(source_kind, "apply_rollover")
-        return confirm_rollover(_get_store(), rollover_id)
+        store, requester = _require_mutation(
+            requester_actor_context_id, source_kind, "create_owner_decision", user_authority_id
+        )
+        return confirm_rollover(
+            store,
+            rollover_id,
+            requester_actor_context_id=requester,
+            source_kind=source_kind or "ROLE_CONTRACT",
+        )
 
     @server.tool(description="Apply a confirmed owner-local epoch rollover.")
-    def plan_epoch_rollover_apply(rollover_id: str, source_kind: str = "USER_AUTHORITY") -> dict[str, Any]:
+    def plan_epoch_rollover_apply(
+        rollover_id: str,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
         from tools.codex_context_lifecycle.rollover import apply_rollover
 
-        return apply_rollover(_get_store(), rollover_id=rollover_id, source_kind=source_kind)
+        store, requester = _require_mutation(
+            requester_actor_context_id, source_kind, "apply_rollover", user_authority_id
+        )
+        return apply_rollover(
+            store,
+            rollover_id=rollover_id,
+            source_kind=source_kind or "PLAN_EPOCH",
+            requester_actor_context_id=requester,
+        )
 
     @server.tool(description="Return the current prepared or confirmed rollover for an actor.")
     def plan_epoch_rollover_current(actor_context_id: str) -> dict[str, Any]:
@@ -678,6 +801,7 @@ def build_server(state_dir: str | Path | None = None) -> MCPServer:
             _active_store.close()
         except Exception:
             pass
+    bind_requester(None)
     _active_store = SemanticStore(_state_path(state_dir)).initialize()
     return _register_tools(MCPServer(SERVER_NAME, version="1.0"))
 

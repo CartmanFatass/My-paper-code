@@ -57,7 +57,7 @@ def test_five_epoch_actor_capsule_stays_current(store: SemanticStore) -> None:
     assert working.epoch_id == last["epoch_id"]
     assert capsule["epoch_id"] == last["epoch_id"]
     assert last["epoch_id"] not in working.excluded_object_ids
-    assert any(item.startswith("epoch_") or item.startswith("epoch-") or True for item in working.excluded_object_ids)
+    assert any(item != last["epoch_id"] for item in working.excluded_object_ids)
     closed = store.connection.execute(
         "SELECT COUNT(*) FROM plan_epochs WHERE actor_context_id = ? AND state = 'CLOSED'",
         (em.actor_context_id,),
@@ -92,3 +92,7 @@ def test_released_em_does_not_auto_rehydrate(store: SemanticStore) -> None:
     assert history == "RELEASED"
     working = build_working_set(store, em.actor_context_id)
     assert working.actor_context_id == em.actor_context_id
+    assert working.epoch_id is None
+    assert working.semantic_commit_id is None
+    assert working.checkpoint_id is None
+    assert working.canonical_refs == ()

@@ -15,10 +15,16 @@ from .store import SemanticStore
 
 try:
     from tools.codex_context_lifecycle.precedence import PRECEDENCE_HEADER
-    from tools.codex_context_lifecycle.working_set import build_working_set
 except ImportError:  # pragma: no cover - overlay-only environments
     PRECEDENCE_HEADER = ""
-    build_working_set = None
+
+
+def _build_working_set(store: SemanticStore, actor_context_id: str):
+    try:
+        from tools.codex_context_lifecycle.working_set import build_working_set
+    except ImportError:  # pragma: no cover - overlay-only environments
+        return None
+    return build_working_set(store, actor_context_id)
 
 
 CAPSULE_SCHEMA_VERSION = 1
@@ -61,6 +67,7 @@ def _canonical_refs(actor_kind: ActorKind, commit: Mapping[str, Any] | None, epo
     if actor_kind == ActorKind.OPERATIONAL_ROOT:
         refs.append(".agents/roles/ROOT.md")
     elif actor_kind == ActorKind.PORTFOLIO:
+        refs.append(".agents/roles/ROOT.md")
         refs.append("docs/research/workflow-runs/2026-08-11_five-round-research-team/CROSS_DIRECTION_PORTFOLIO_HANDOFF_SOL_ULTRA.md")
     elif actor_kind == ActorKind.EM:
         refs.append(".agents/roles/INDEPENDENT_RESEARCH_EXPLORER.md")
@@ -88,7 +95,10 @@ def build_capsule(store: SemanticStore, actor_context_id: str) -> dict[str, obje
     workflow = _workflow(store, actor_context_id)
     epoch = plan_epoch_current(store, actor_context_id)
     commit = semantic_commit_current(store, actor_context_id)
-    working = build_working_set(store, actor_context_id) if build_working_set else None
+    working = _build_working_set(store, actor_context_id)
+    if working is not None and working.epoch_id is None:
+        epoch = None
+        commit = None
     obligations = _obligations(store, workflow["workflow_id"] if workflow else None)
     report_ids = [
         str(item.get("subject") or "")
@@ -107,6 +117,11 @@ def build_capsule(store: SemanticStore, actor_context_id: str) -> dict[str, obje
             if item.get("obligation_id") in set(working.open_obligation_ids)
         ]
     payload = commit.get("payload") if commit else {}
+    if epoch and epoch.get("carry_frontier"):
+        merged = dict(payload or {})
+        for key, value in dict(epoch.get("carry_frontier") or {}).items():
+            merged.setdefault(key, value)
+        payload = merged
     body = _project_body(actor.actor_kind, payload or {}, workflow, packets, obligations)
     capsule: dict[str, object] = {
         "schema_version": CAPSULE_SCHEMA_VERSION,
@@ -117,9 +132,13 @@ def build_capsule(store: SemanticStore, actor_context_id: str) -> dict[str, obje
         "direction_id": actor.direction_id,
         "checkpoint_id": working.checkpoint_id if working else None,
         "state_version": workflow.get("state_version") if workflow else 0,
-        "epoch_id": epoch.get("epoch_id") if epoch else None,
-        "epoch_revision": epoch.get("revision") if epoch else None,
+        "epoch_id": (working.epoch_id if working else (epoch.get("epoch_id") if epoch else None)),
+        "epoch_revision": epoch.get("revision") if epoch and (working is None or working.epoch_id) else None,
         "canonical_refs": list((working.canonical_refs if working else _canonical_refs(actor.actor_kind, commit, epoch))),
+        "navigation_refs": list(working.navigation_refs if working else ((epoch or {}).get("navigation_refs") or ())),
+        "procedure_refs": list(working.procedure_refs if working else ((epoch or {}).get("procedure_refs") or ())),
+        "promotion_ids": list(working.promotion_ids if working else ()),
+        "rollover_id": working.rollover_id if working else None,
         "open_obligation_ids": [item.get("obligation_id") for item in obligations],
         "unintaken_report_ids": report_ids,
         "forbidden_inferences": list(FORBIDDEN_INFERENCES),
@@ -218,6 +237,10 @@ def _trim(capsule: dict[str, object]) -> dict[str, object]:
         "epoch_id",
         "epoch_revision",
         "canonical_refs",
+        "navigation_refs",
+        "procedure_refs",
+        "promotion_ids",
+        "rollover_id",
         "open_obligation_ids",
         "unintaken_report_ids",
         "forbidden_inferences",
@@ -257,6 +280,14 @@ def render_capsule(capsule: Mapping[str, object]) -> str:
     ]
     for ref in trimmed.get("canonical_refs") or []:
         lines.append(f"- {ref}")
+    if trimmed.get("navigation_refs"):
+        lines.append("navigation_refs=" + ",".join(str(item) for item in trimmed["navigation_refs"]))
+    if trimmed.get("procedure_refs"):
+        lines.append("procedure_refs=" + ",".join(str(item) for item in trimmed["procedure_refs"]))
+    if trimmed.get("promotion_ids"):
+        lines.append("promotion_ids=" + ",".join(str(item) for item in trimmed["promotion_ids"]))
+    if trimmed.get("rollover_id"):
+        lines.append(f"rollover_id={trimmed['rollover_id']}")
     lines.append(f"open_obligation_ids={','.join(str(item) for item in (trimmed.get('open_obligation_ids') or []))}")
     lines.append(f"unintaken_report_ids={','.join(str(item) for item in (trimmed.get('unintaken_report_ids') or []))}")
     lines.append("FORBIDDEN INFERENCES")

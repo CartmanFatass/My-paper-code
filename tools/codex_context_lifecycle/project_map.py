@@ -39,6 +39,16 @@ def validate_project_map(path: Path) -> tuple[str, ...]:
     for phrase in REQUIRED_PHRASES:
         if phrase.lower() not in lowered:
             errors.append(f"missing phrase: {phrase}")
-    if (Path(path).parent / "CODEMAP.md").exists():
-        errors.append("competing CODEMAP.md exists")
+    map_path = Path(path).resolve()
+    project_dir = map_path.parent
+    docs_dir = project_dir.parent
+    repo_root = docs_dir.parent
+    for candidate in (
+        repo_root / "CODEMAP.md",
+        docs_dir / "CODEMAP.md",
+        project_dir / "CODEMAP.md",
+    ):
+        if candidate.exists():
+            errors.append("competing CODEMAP.md exists")
+            break
     return tuple(errors)

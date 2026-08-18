@@ -76,13 +76,32 @@ def materialize_checkpoint(store: SemanticStore, actor_context_id: str) -> dict[
         return item
 
 
+def compatible_identity(store: SemanticStore, actor_context_id: str) -> tuple[str | None, int | None, int, str | None]:
+    workflow = store.current_actor_workflow(actor_context_id)
+    epoch = plan_epoch_current(store, actor_context_id)
+    commit = semantic_commit_current(store, actor_context_id)
+    state_version = int((workflow or {}).get("state_version") or 0)
+    epoch_id = str(epoch["epoch_id"]) if epoch else None
+    epoch_revision = int(epoch["revision"]) if epoch else None
+    semantic_commit_id = str(commit["semantic_commit_id"]) if commit else None
+    return epoch_id, epoch_revision, state_version, semantic_commit_id
+
+
 def current_checkpoint(store: SemanticStore, actor_context_id: str) -> dict[str, object] | None:
+    """Return the checkpoint matching the current open epoch and workflow state."""
+    epoch_id, epoch_revision, state_version, semantic_commit_id = compatible_identity(
+        store, actor_context_id
+    )
     with store._lock:
         row = store.connection.execute(
             """SELECT * FROM context_checkpoints
             WHERE actor_context_id = ?
+              AND IFNULL(epoch_id, '') = IFNULL(?, '')
+              AND IFNULL(epoch_revision, -1) = IFNULL(?, -1)
+              AND state_version = ?
+              AND IFNULL(semantic_commit_id, '') = IFNULL(?, '')
             ORDER BY created_at DESC, checkpoint_id DESC LIMIT 1""",
-            (actor_context_id,),
+            (actor_context_id, epoch_id, epoch_revision, state_version, semantic_commit_id),
         ).fetchone()
         if row is None:
             return None

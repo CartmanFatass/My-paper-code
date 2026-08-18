@@ -694,7 +694,8 @@ def _active_stop(
 
 
 def _automatic_checkpoint_actor(store: SemanticStore, payload: Mapping[str, object]):
-    from .actor_models import ActorKind
+    from tools.codex_context_lifecycle.working_set import actor_may_auto_rehydrate
+
     from .actor_registry import resolve_actor_context
 
     identity = normalize_hook_identity(payload)
@@ -706,7 +707,7 @@ def _automatic_checkpoint_actor(store: SemanticStore, payload: Mapping[str, obje
     )
     if actor is None:
         return None
-    if actor.actor_kind in {ActorKind.EM, ActorKind.CM, ActorKind.LEAF}:
+    if not actor_may_auto_rehydrate(store, actor.actor_context_id):
         return None
     return actor
 

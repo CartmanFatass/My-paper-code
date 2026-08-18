@@ -124,6 +124,7 @@ def test_v2_fixture_migrates_without_losing_rows(tmp_path: Path) -> None:
         "epoch_rollovers",
         "context_retention_marks",
         "context_gc_runs",
+        "user_authority_grants",
     } <= tables
     epoch = store.connection.execute(
         "SELECT navigation_refs_json, procedure_refs_json FROM plan_epochs LIMIT 1"

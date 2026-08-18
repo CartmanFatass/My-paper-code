@@ -29,7 +29,7 @@ def _em_epoch(store: SemanticStore, em) -> dict:
 
 
 def test_valid_promotion_lifecycle(store: SemanticStore, repo_root: Path) -> None:
-    _root, em, _cm = make_pair(store)
+    _root, em, _cm = make_pair(store, direction_id="variable_n_fleet_churn")
     epoch = _em_epoch(store, em)
     proposed = create_promotion_proposal(
         store,
@@ -53,12 +53,15 @@ def test_valid_promotion_lifecycle(store: SemanticStore, repo_root: Path) -> Non
         promotion_id=proposed["promotion_id"],
         next_state=PromotionState.OWNER_ACCEPTED,
         disposition={"owner": "em", "note": "accepted"},
+        requester_actor_context_id=em.actor_context_id,
     )
     applied = mark_promotion_applied(
         store,
         promotion_id=accepted["promotion_id"],
         canonical_ref="docs/research/candidates/variable_n_fleet_churn/VNFC_TARGET_EXCLUSIVE_POST_CHURN_RECOVERY_SCIENCE_CARD.md",
         repo_root=repo_root,
+        requester_actor_context_id=em.actor_context_id,
+        writer_actor_context_id=em.actor_context_id,
     )
     assert applied["state"] is PromotionState.APPLIED
 
@@ -81,6 +84,7 @@ def test_reject_and_invalid_transitions(store: SemanticStore) -> None:
         promotion_id=proposed["promotion_id"],
         next_state=PromotionState.OWNER_REJECTED,
         disposition={"owner": "em"},
+        requester_actor_context_id=em.actor_context_id,
     )
     assert rejected["state"] is PromotionState.OWNER_REJECTED
     with pytest.raises(PromotionError):
@@ -94,6 +98,7 @@ def test_reject_and_invalid_transitions(store: SemanticStore) -> None:
             store,
             promotion_id=proposed["promotion_id"],
             next_state=PromotionState.PROPOSED,
+            requester_actor_context_id=em.actor_context_id,
         )
 
 
@@ -115,6 +120,7 @@ def test_cannot_skip_to_applied(store: SemanticStore) -> None:
             store,
             promotion_id=proposed["promotion_id"],
             next_state=PromotionState.APPLIED,
+            requester_actor_context_id=em.actor_context_id,
         )
     listed = promotion_proposals_for_epoch(store, epoch["epoch_id"])
     assert len(listed) == 1
