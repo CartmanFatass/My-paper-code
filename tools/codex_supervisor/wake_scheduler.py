@@ -184,12 +184,18 @@ class WakeScheduler:
         )
 
     def observe_completion(self, wake_batch_id: str, status: str) -> dict[str, object]:
-        return self.batches.set_state(
+        updated = self.batches.set_state(
             wake_batch_id,
             state=WakeBatchState.COMPLETED.value,
             completion_status=status,
             completed_at=_now(),
+            expected_state=WakeBatchState.ACTIVE.value,
         )
+        if updated["state"] == WakeBatchState.INCIDENT.value:
+            raise WakeSchedulerError("incident is terminal; operator recovery required")
+        if updated["state"] != WakeBatchState.COMPLETED.value:
+            raise WakeSchedulerError("only ACTIVE wake batches may complete")
+        return updated
 
     async def schedule_binding(
         self,

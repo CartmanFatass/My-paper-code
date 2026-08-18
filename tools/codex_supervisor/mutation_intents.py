@@ -10,6 +10,8 @@ from typing import Any
 from .store import ObserverStore
 
 OPEN_STATES = frozenset({"SUBMITTING", "SUBMISSION_UNCERTAIN"})
+UNRESOLVED_INCIDENT = "INCIDENT"
+OPERATOR_RESOLVED = "OPERATOR_RESOLVED"
 
 
 class MutationIntentError(RuntimeError):
@@ -33,6 +35,15 @@ class MutationIntentStore:
         ).fetchone()
         return dict(row) if row is not None else None
 
+    def get_unresolved_incident(self, method: str, client_key: str) -> dict[str, Any] | None:
+        row = self.store.connection.execute(
+            """SELECT * FROM mutation_intents
+            WHERE method = ? AND client_key = ? AND state = ?
+            ORDER BY created_at DESC""",
+            (method, client_key, UNRESOLVED_INCIDENT),
+        ).fetchone()
+        return dict(row) if row is not None else None
+
     def begin(
         self,
         method: str,
@@ -45,6 +56,11 @@ class MutationIntentStore:
         if existing is not None:
             raise MutationIntentError(
                 f"{method} already has an unresolved intent; reconcile, do not resend"
+            )
+        incident = self.get_unresolved_incident(method, client_key)
+        if incident is not None:
+            raise MutationIntentError(
+                f"{method} has an unresolved INCIDENT; operator resolution required"
             )
         intent_id = f"mut_{uuid.uuid4().hex}"
         now = _now()
@@ -99,4 +115,19 @@ class MutationIntentStore:
         return self.set_state(intent_id, "APPLIED")
 
     def mark_incident(self, intent_id: str, reason: str) -> dict[str, Any]:
-        return self.set_state(intent_id, "INCIDENT", request_json=json.dumps({"reason": reason}))
+        return self.set_state(intent_id, UNRESOLVED_INCIDENT, request_json=json.dumps({"reason": reason}))
+
+    def resolve_incident(self, intent_id: str, *, operator: str) -> dict[str, Any]:
+        if not operator:
+            raise MutationIntentError("operator identity is required to resolve an incident")
+        row = self.store.connection.execute(
+            "SELECT * FROM mutation_intents WHERE intent_id = ?",
+            (intent_id,),
+        ).fetchone()
+        if row is None or str(row["state"]) != UNRESOLVED_INCIDENT:
+            raise MutationIntentError("only INCIDENT intents may be operator-resolved")
+        return self.set_state(
+            intent_id,
+            OPERATOR_RESOLVED,
+            request_json=json.dumps({"reason": "operator_resolved", "operator": operator}),
+        )

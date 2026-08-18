@@ -221,10 +221,26 @@ class ManagedTurns:
         return row
 
     def record_completion(self, turn_intent_id: str, status: str) -> dict[str, Any]:
-        self._set_state(
-            turn_intent_id,
-            submission_state=SubmissionState.COMPLETED.value,
-            completion_status=status,
-            completed_at=_now(),
-        )
+        now = _now()
+        with self.bindings.store._lock, self.bindings.store.connection:
+            cursor = self.bindings.store.connection.execute(
+                """UPDATE managed_turn_intents
+                SET submission_state = ?, completion_status = ?, completed_at = ?
+                WHERE turn_intent_id = ? AND submission_state IN (?, ?)""",
+                (
+                    SubmissionState.COMPLETED.value,
+                    status,
+                    now,
+                    turn_intent_id,
+                    SubmissionState.SUBMITTED.value,
+                    SubmissionState.OBSERVED.value,
+                ),
+            )
+            if cursor.rowcount != 1:
+                row = self._row(turn_intent_id)
+                if row["submission_state"] == SubmissionState.INCIDENT.value:
+                    raise ManagedTurnError("incident is terminal; operator recovery required")
+                raise ManagedTurnError(
+                    "only SUBMITTED or OBSERVED turns may complete"
+                )
         return self._row(turn_intent_id)

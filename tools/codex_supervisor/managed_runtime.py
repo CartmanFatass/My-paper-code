@@ -85,6 +85,8 @@ class ManagedRuntime:
         ).fetchone()
         if intent is None or str(intent["app_server_turn_id"] or "") != str(observed["turn_id"]):
             raise ManagedRuntimeError("completed item does not match the verification turn")
+        if str(intent["submission_state"]) == "INCIDENT":
+            raise ManagedRuntimeError("verification turn is in INCIDENT; operator recovery required")
         if intent["submission_state"] != "COMPLETED":
             self.turns.record_completion(str(intent["turn_intent_id"]), "completed")
         try:
@@ -104,13 +106,20 @@ class ManagedRuntime:
         return {"binding_id": activated.binding_id, "state": activated.binding_state.value, "command": applied}
 
     def _latest_completed_seq(self, thread_id: str, turn_id: str) -> int | None:
-        row = self.bindings.store.connection.execute(
+        rows = self.bindings.store.connection.execute(
             """SELECT raw_message_seq FROM raw_messages
             WHERE direction = 'stdout' AND thread_id = ? AND turn_id = ?
+              AND method = 'item/completed'
             ORDER BY raw_message_seq DESC""",
             (thread_id, turn_id),
-        ).fetchone()
-        return None if row is None else int(row[0])
+        ).fetchall()
+        for row in rows:
+            try:
+                load_completed_final_item(self.bindings.store, int(row[0]))
+            except ObserverEvidenceError:
+                continue
+            return int(row[0])
+        return None
 
     async def verify_and_activate(
         self,

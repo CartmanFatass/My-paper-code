@@ -43,12 +43,14 @@ def plant_verification_receipt(store: BindingStore, binding_id: str, snapshot, t
         expected_epoch_id=snapshot.epoch_id,
         expected_epoch_revision=snapshot.epoch_revision,
     )
-    turns.record_completion(intent_id, "completed")
     store.store.connection.execute(
-        "UPDATE managed_turn_intents SET app_server_turn_id = ? WHERE turn_intent_id = ?",
+        """UPDATE managed_turn_intents
+        SET app_server_turn_id = ?, submission_state = 'SUBMITTED'
+        WHERE turn_intent_id = ?""",
         (turn_id, intent_id),
     )
     store.store.connection.commit()
+    turns.record_completion(intent_id, "completed")
     seq = record_completed_agent_item(
         store.store,
         thread_id=thread_id,

@@ -56,12 +56,7 @@ class CommandGateway:
             (binding.binding_id, turn_id, raw_message_seq),
         ).fetchone()
         if existing is not None:
-            receipt = self.bindings.store.get_command_receipt(str(existing["command_id"]))
-            return {
-                "validation_state": CommandValidationState.DUPLICATE.value,
-                "command_id": existing["command_id"],
-                "receipt": receipt,
-            }
+            return self._reconcile_existing_command(existing)
         command_id = f"cmd_{uuid.uuid4().hex}"
         with self.bindings.store._lock, self.bindings.store.connection:
             self.bindings.store.connection.execute(
@@ -218,16 +213,57 @@ class CommandGateway:
 
     def _turn_order_key(self, turn_id: str, thread_id: str | None) -> tuple[str, object] | None:
         command_turn = self.bindings.store.connection.execute(
-            "SELECT last_event_seq, started_at FROM turn_snapshots WHERE turn_id = ? AND thread_id = ?",
+            "SELECT last_event_seq FROM turn_snapshots WHERE turn_id = ? AND thread_id = ?",
             (turn_id, thread_id),
         ).fetchone()
-        if command_turn is None:
-            return None
-        if command_turn["last_event_seq"] is not None:
+        if command_turn is not None and command_turn["last_event_seq"] is not None:
             return ("seq", int(command_turn["last_event_seq"]))
-        if command_turn["started_at"]:
-            return ("time", str(command_turn["started_at"]))
+        raw = self.bindings.store.connection.execute(
+            """SELECT MIN(raw_message_seq) FROM raw_messages
+            WHERE turn_id = ? AND thread_id = ? AND direction = 'stdout'""",
+            (turn_id, thread_id),
+        ).fetchone()
+        if raw is not None and raw[0] is not None:
+            return ("raw", int(raw[0]))
         return None
+
+    def _reconcile_existing_command(self, existing: Any) -> dict[str, Any]:
+        command_id = str(existing["command_id"])
+        state = str(existing["validation_state"])
+        receipt = self.bindings.store.get_command_receipt(command_id)
+        if state in {
+            CommandValidationState.RECEIVED.value,
+            CommandValidationState.VALIDATED.value,
+        }:
+            if receipt is None:
+                raise CommandGatewayError(
+                    "command effect requires operator reconciliation; receipt is missing"
+                )
+            payload = json.loads(str(existing["payload_json"] or "{}"))
+            expected = payload.get("expected") if isinstance(payload.get("expected"), dict) else {}
+            receipt_result = json.loads(str(receipt["result_json"] or "{}"))
+            for key in ("checkpoint_id", "state_version", "epoch_id", "epoch_revision"):
+                if expected.get(key) is None or key not in receipt_result:
+                    continue
+                if receipt_result.get(key) != expected.get(key):
+                    raise CommandGatewayError("receipt tuple does not match command")
+            self._update_command(
+                command_id,
+                validation_state=CommandValidationState.APPLIED.value,
+                applied_at=_now(),
+                validated_at=_now(),
+            )
+            return {
+                "validation_state": CommandValidationState.APPLIED.value,
+                "command_id": command_id,
+                "receipt": receipt,
+                "reconciled": True,
+            }
+        return {
+            "validation_state": CommandValidationState.DUPLICATE.value,
+            "command_id": command_id,
+            "receipt": receipt,
+        }
 
     def _mailbox_ack(self, binding: Any, command_id: str, turn_id: str, inner: dict[str, Any]) -> dict[str, Any]:
         mailbox = self._require_mailbox()

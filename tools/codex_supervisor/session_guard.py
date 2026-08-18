@@ -33,19 +33,28 @@ def _ensure_run(store: ObserverStore) -> str:
 def persist_server_request(store: ObserverStore, payload: Mapping[str, Any]) -> str:
     run_id = _ensure_run(store)
     ids = extract_protocol_ids(payload)
-    store.record_raw_message(
-        run_id=run_id,
-        direction="stdout",
-        transport_seq=int(
-            store.connection.execute(
-                "SELECT COALESCE(MAX(transport_seq), 0) + 1 FROM raw_messages WHERE run_id = ? AND direction = 'stdout'",
-                (run_id,),
-            ).fetchone()[0]
-        ),
-        rpc_shape=RpcShape.REQUEST,
-        ids=ids if ids.method else ProtocolIds(str(payload.get("id") or ""), str(payload.get("method") or ""), None, None, None),
-        payload=payload,
-    )
+    request_id = str(ids.request_id or payload.get("id") or "")
+    already = None
+    if request_id:
+        already = store.connection.execute(
+            """SELECT 1 FROM raw_messages
+            WHERE run_id = ? AND request_id = ?""",
+            (run_id, request_id),
+        ).fetchone()
+    if already is None:
+        store.record_raw_message(
+            run_id=run_id,
+            direction="stdout",
+            transport_seq=int(
+                store.connection.execute(
+                    "SELECT COALESCE(MAX(transport_seq), 0) + 1 FROM raw_messages WHERE run_id = ? AND direction = 'stdout'",
+                    (run_id,),
+                ).fetchone()[0]
+            ),
+            rpc_shape=RpcShape.REQUEST,
+            ids=ids if ids.method else ProtocolIds(request_id, str(payload.get("method") or ""), None, None, None),
+            payload=payload,
+        )
     return store.record_server_request(
         run_id=run_id,
         server_request_id=str(ids.request_id or payload.get("id") or ""),

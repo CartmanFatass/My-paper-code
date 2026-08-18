@@ -222,12 +222,14 @@ class BindingStore:
             if cursor.rowcount != 1:
                 raise BindingError("binding is no longer PREPARED")
             if mutation_intent_id is not None:
-                self.store.connection.execute(
+                applied = self.store.connection.execute(
                     """UPDATE mutation_intents
                     SET state = ?, updated_at = ?
-                    WHERE intent_id = ?""",
-                    ("APPLIED", now, mutation_intent_id),
+                    WHERE intent_id = ? AND state = ?""",
+                    ("APPLIED", now, mutation_intent_id, "SUBMITTING"),
                 )
+                if applied.rowcount != 1:
+                    raise BindingError("mutation intent is not SUBMITTING")
         self._record_event(binding_id, "THREAD_ATTACHED", {"thread_id": thread_id})
         attached = self.get(binding_id)
         assert attached is not None

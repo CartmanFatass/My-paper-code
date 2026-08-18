@@ -79,10 +79,12 @@ class SemanticScanner:
                 "SELECT packet_id, delivery_state, intake_state FROM packet_refs"
             ).fetchall()
         }
+        in_flight = {"SUBMITTING", "SUBMITTED", "SUBMISSION_UNCERTAIN", "ACTIVE"}
+        prepared_invalid: dict[str, dict[str, str]] = {}
+        in_flight_ids: list[str] = []
+        unbatched_ids: list[tuple[str, str]] = []
         for message in self.mailbox.list_messages():
             if message.source_system != MailboxSourceSystem.SEMANTIC_LEDGER.value:
-                continue
-            if message.delivery_state.value not in {"ENQUEUED", "ELIGIBLE", "BATCHED"}:
                 continue
             key = message.source_event_key
             resolved = False
@@ -102,27 +104,25 @@ class SemanticScanner:
                     resolved = key != current_key
             if not resolved:
                 continue
+            reason = "SOURCE_SUPERSEDED" if key.startswith("semantic:packet:") else "SOURCE_RESOLVED"
             batch_state = self.mailbox.batch_state_for_message(message.message_id)
-            if batch_state in {"SUBMITTING", "SUBMITTED", "SUBMISSION_UNCERTAIN", "ACTIVE"}:
-                self.mailbox.note_source_resolved_after_submission(message.message_id)
+            if batch_state in in_flight:
+                in_flight_ids.append(message.message_id)
                 continue
-            self.mailbox.cancel_source_resolved(
-                message.message_id,
-                "SOURCE_SUPERSEDED" if key.startswith("semantic:packet:") else "SOURCE_RESOLVED",
-            )
             if batch_state == "PREPARED":
-                row = self.mailbox.store.connection.execute(
-                    """SELECT b.wake_batch_id FROM wake_batch_messages w
-                    JOIN wake_batches b ON b.wake_batch_id = w.wake_batch_id
-                    WHERE w.message_id = ? AND b.state = 'PREPARED'""",
-                    (message.message_id,),
-                ).fetchone()
-                if row is not None:
-                    self.mailbox.store.connection.execute(
-                        "UPDATE wake_batches SET state = 'CANCELLED' WHERE wake_batch_id = ? AND state = 'PREPARED'",
-                        (str(row[0]),),
-                    )
-                    self.mailbox.store.connection.commit()
+                batch_id = self.mailbox.batch_id_for_message(message.message_id)
+                if batch_id is not None:
+                    prepared_invalid.setdefault(batch_id, {})[message.message_id] = reason
+                    continue
+            if message.delivery_state.value in {"ENQUEUED", "ELIGIBLE", "BATCHED"}:
+                unbatched_ids.append((message.message_id, reason))
+        for batch_id, invalid in prepared_invalid.items():
+            reason = next(iter(invalid.values()))
+            self.mailbox.cancel_prepared_batch_source_resolved(batch_id, set(invalid), reason)
+        for message_id in in_flight_ids:
+            self.mailbox.note_source_resolved_after_submission(message_id)
+        for message_id, reason in unbatched_ids:
+            self.mailbox.cancel_source_resolved(message_id, reason)
 
     def scan(self) -> list[str]:
         self._reconcile_existing()

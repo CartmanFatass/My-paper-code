@@ -22,6 +22,7 @@ from .models import (
 )
 from .normalizer import apply_normalized_event, normalize_message, thread_snapshot_fields
 from .protocol import classify_rpc_message, encode_jsonl, extract_protocol_ids
+from .session_guard import ManagedAppServerSession
 from .store import ObserverStore
 from .transport import AppServerTransport, TransportClosed, TransportMessage
 
@@ -225,8 +226,9 @@ class ObserverService:
 
     async def _watch_server_requests(self) -> None:
         assert self.client is not None
-        payload = await self.client.server_requests.get()
-        raise UnexpectedServerRequest(payload)
+        session = ManagedAppServerSession.for_client(self.client, self.store)
+        await session._incident.wait()
+        raise UnexpectedServerRequest(session.incident_payload or {})
 
     async def serve(self, duration_seconds: float | None = None) -> ObserverRunResult:
         await self.start()
@@ -258,14 +260,22 @@ class ObserverService:
     async def _terminate_unexpected(self, exc: UnexpectedServerRequest) -> ObserverRunResult:
         assert self.run_id is not None
         ids = extract_protocol_ids(exc.payload)
-        self.store.record_server_request(
-            run_id=self.run_id,
-            server_request_id=str(ids.request_id or ""),
-            method=str(ids.method or ""),
-            payload=exc.payload,
-            thread_id=ids.thread_id,
-            turn_id=ids.turn_id,
-        )
+        request_id = str(ids.request_id or "")
+        already = None
+        if request_id:
+            already = self.store.connection.execute(
+                "SELECT 1 FROM server_requests WHERE server_request_id = ?",
+                (request_id,),
+            ).fetchone()
+        if already is None:
+            self.store.record_server_request(
+                run_id=self.run_id,
+                server_request_id=request_id,
+                method=str(ids.method or ""),
+                payload=exc.payload,
+                thread_id=ids.thread_id,
+                turn_id=ids.turn_id,
+            )
         return await self.stop(EndKind.UNEXPECTED_SERVER_REQUEST.value)
 
     async def stop(self, end_kind: str) -> ObserverRunResult:

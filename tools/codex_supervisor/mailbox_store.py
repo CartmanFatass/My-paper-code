@@ -243,6 +243,65 @@ class MailboxStore:
         ).fetchone()
         return None if row is None else str(row[0])
 
+    def batch_id_for_message(self, message_id: str) -> str | None:
+        row = self.store.connection.execute(
+            """SELECT b.wake_batch_id FROM wake_batch_messages w
+            JOIN wake_batches b ON b.wake_batch_id = w.wake_batch_id
+            WHERE w.message_id = ?
+            ORDER BY b.prepared_at DESC""",
+            (message_id,),
+        ).fetchone()
+        return None if row is None else str(row[0])
+
+    def cancel_prepared_batch_source_resolved(
+        self,
+        wake_batch_id: str,
+        invalid_message_ids: set[str],
+        reason: str = "SOURCE_RESOLVED",
+    ) -> bool:
+        now = _now()
+        with self.store._lock, self.store.connection:
+            cursor = self.store.connection.execute(
+                """UPDATE wake_batches
+                SET state = 'CANCELLED'
+                WHERE wake_batch_id = ? AND state = 'PREPARED'""",
+                (wake_batch_id,),
+            )
+            if cursor.rowcount != 1:
+                return False
+            rows = self.store.connection.execute(
+                """SELECT m.message_id, m.delivery_state
+                FROM mailbox_messages m
+                JOIN wake_batch_messages b ON b.message_id = m.message_id
+                WHERE b.wake_batch_id = ?""",
+                (wake_batch_id,),
+            ).fetchall()
+            for row in rows:
+                message_id = str(row["message_id"])
+                state = str(row["delivery_state"])
+                if message_id in invalid_message_ids:
+                    if state not in {
+                        DeliveryState.DELIVERED_TO_TURN.value,
+                        DeliveryState.SUBMISSION_UNCERTAIN.value,
+                        DeliveryState.DEAD_LETTER.value,
+                        DeliveryState.CANCELLED_SOURCE_RESOLVED.value,
+                    }:
+                        self.store.connection.execute(
+                            """UPDATE mailbox_messages
+                            SET delivery_state = ?, dead_letter_reason = ?, batched_at = NULL
+                            WHERE message_id = ?""",
+                            (DeliveryState.CANCELLED_SOURCE_RESOLVED.value, reason, message_id),
+                        )
+                elif state == DeliveryState.BATCHED.value:
+                    self.store.connection.execute(
+                        """UPDATE mailbox_messages
+                        SET delivery_state = ?, batched_at = NULL,
+                            eligible_at = COALESCE(eligible_at, ?)
+                        WHERE message_id = ?""",
+                        (DeliveryState.ELIGIBLE.value, now, message_id),
+                    )
+        return True
+
     def cancel_source_resolved(self, message_id: str, reason: str = "SOURCE_RESOLVED") -> MailboxMessage:
         current = self.get(message_id)
         if current is None:
