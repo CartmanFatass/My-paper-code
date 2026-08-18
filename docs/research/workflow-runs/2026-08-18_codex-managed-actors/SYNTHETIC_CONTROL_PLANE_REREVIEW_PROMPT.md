@@ -20,14 +20,14 @@ prompt reviews the corrective commit that claims to close those defects.
 ## Assignment
 
 Review the HMASD Codex App Server supervisor on branch `aggressive` at
-commit `REVIEWED_COMMIT_PLACEHOLDER`.
+commit `19a80529fa9b0ff7327d704cef92fe2fd065ae2e`.
 
 Repository: the HMASD git remote the operator pointed you at.
 Branch: `aggressive`.
 Review range:
 
 ```text
-0520df87ee2dd1dd70c1bdade34889980c4c7a44..REVIEWED_COMMIT_PLACEHOLDER
+0520df87ee2dd1dd70c1bdade34889980c4c7a44..19a80529fa9b0ff7327d704cef92fe2fd065ae2e
 ```
 
 Parent of this corrective slice:
@@ -295,8 +295,8 @@ CI. GitHub status checks are not required for this review.
 
 ```text
 review_kind=synthetic_control_plane_rereview
-reviewed_commit=REVIEWED_COMMIT_PLACEHOLDER
-reviewed_range=0520df87ee2dd1dd70c1bdade34889980c4c7a44..REVIEWED_COMMIT_PLACEHOLDER
+reviewed_commit=19a80529fa9b0ff7327d704cef92fe2fd065ae2e
+reviewed_range=0520df87ee2dd1dd70c1bdade34889980c4c7a44..19a80529fa9b0ff7327d704cef92fe2fd065ae2e
 live_acceptance=absent
 synthetic_disposition=CLOSED|REVISION_REQUIRED
 ```

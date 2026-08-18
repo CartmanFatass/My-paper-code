@@ -151,12 +151,15 @@ pytest --basetemp must stay inside the repo
 ## Superseded review pointer
 
 ```text
-superseded_by=0520df87ee2dd1dd70c1bdade34889980c4c7a44
-reviewed_range=12236b26583c7e389fe4cc5026e0437760d34b3e..0520df87ee2dd1dd70c1bdade34889980c4c7a44
+superseded_by=19a80529fa9b0ff7327d704cef92fe2fd065ae2e
+prior_rereview=0520df87ee2dd1dd70c1bdade34889980c4c7a44
+reviewed_range=0520df87ee2dd1dd70c1bdade34889980c4c7a44..19a80529fa9b0ff7327d704cef92fe2fd065ae2e
 historical_head_in_this_file=c1e2d2e260e1b4765a2f35e4f64309f7bd0e1fe9
+tests/codex_supervisor=167 passed
 ```
 
 Do not rewrite the historical sections above. The 2026-08-18 synthetic
-rereview of `0520df87` returned `REVISION_REQUIRED`. Use
-`SYNTHETIC_CONTROL_PLANE_REREVIEW_PROMPT.md` for the next review of the
-corrective commit, not the pre-fix prompt pinned to `c1e2d2e2`.
+rereview of `0520df87` returned `REVISION_REQUIRED`. The corrective
+commit is `19a80529`. Use
+`SYNTHETIC_CONTROL_PLANE_REREVIEW_PROMPT.md` for the next review, not
+the pre-fix prompt pinned to `c1e2d2e2`.
