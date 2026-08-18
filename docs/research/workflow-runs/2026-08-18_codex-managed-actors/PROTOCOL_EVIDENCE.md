@@ -117,7 +117,6 @@ thread/start                         official-doc + local-schema
 thread/start.cwd                     official-doc + local-schema
 thread/start.ephemeral               official-doc + local-schema
 thread/start.approvalPolicy          official-doc observation
-thread/start.sandbox                 implementation inference
 thread/resume                        official-doc + local-schema
 thread/read                          official-doc + local-schema
 thread/read.includeTurns             official-doc + local-schema
@@ -126,11 +125,15 @@ turn/start                           official-doc + local-schema
 turn/start.input                     official-doc + local-schema
 turn/start.clientUserMessageId       local-schema observation
 turn/start.approvalPolicy            official-doc observation
-turn/start.sandboxPolicy             implementation inference
 ```
 
 `thread/name/set` is **not** in the 0.147.0 `ClientRequest.json` methods
 recorded above. The supervisor does not send it.
+
+`thread/start.sandbox` and `turn/start.sandboxPolicy` remain
+implementation inferences, not local-schema observations. The supervisor
+does **not** send them until a local-schema definition or live capability
+evidence exists.
 
 If `thread/loaded/list` fails or times out, readiness is `UNKNOWN`. A
 failed loaded-list query is never treated as "already loaded".

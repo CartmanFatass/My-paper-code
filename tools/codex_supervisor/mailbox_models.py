@@ -110,3 +110,4 @@ class MailboxMessage:
     intake_state: IntakeState
     created_at: str
     dead_letter_reason: str | None = None
+    source_resolved_after_submission: bool = False

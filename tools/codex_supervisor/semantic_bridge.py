@@ -9,6 +9,7 @@ from typing import Any
 
 from tools.codex_semantic_mvp.actor_models import ActorKind, ActorState, actor_context_from_row
 from tools.codex_semantic_mvp.checkpoints import context_reanchor_ack, current_checkpoint
+from tools.codex_semantic_mvp.epochs import plan_epoch_current
 from tools.codex_semantic_mvp.store import SemanticStore
 
 from .managed_models import ManagedActorKind
@@ -64,6 +65,7 @@ class SemanticBridge:
     def snapshot(self, actor_context_id: str) -> ManagedActorSnapshot:
         actor = self.require_eligible(actor_context_id)
         workflow = self.semantic.current_actor_workflow(actor_context_id)
+        epoch = plan_epoch_current(self.semantic, actor_context_id)
         checkpoint = current_checkpoint(self.semantic, actor_context_id)
         capsule: dict[str, Any] = {}
         if checkpoint is not None and isinstance(checkpoint.get("capsule"), dict):
@@ -84,8 +86,8 @@ class SemanticBridge:
             state=actor.state.value,
             workflow_id=None if workflow is None else str(workflow["workflow_id"]),
             state_version=int((workflow or {}).get("state_version") or 0),
-            epoch_id=None if checkpoint is None else checkpoint.get("epoch_id"),
-            epoch_revision=None if checkpoint is None else checkpoint.get("epoch_revision"),
+            epoch_id=None if epoch is None else epoch.get("epoch_id"),
+            epoch_revision=None if epoch is None else epoch.get("revision"),
             checkpoint_id=None if checkpoint is None else str(checkpoint.get("checkpoint_id") or "") or None,
             capsule_text=json.dumps(capsule, ensure_ascii=False, separators=(",", ":")) if capsule else "",
             canonical_refs=tuple(str(item) for item in refs),

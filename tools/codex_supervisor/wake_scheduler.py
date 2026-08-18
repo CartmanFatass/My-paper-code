@@ -105,21 +105,20 @@ class WakeScheduler:
         batch = self.batches.get(wake_batch_id)
         if batch is None:
             raise WakeSchedulerError("unknown wake batch")
-        if batch["state"] not in {WakeBatchState.PREPARED.value, WakeBatchState.SUBMITTING.value}:
-            raise WakeSchedulerError("wake batch is not PREPARED")
+        if batch["state"] != WakeBatchState.PREPARED.value:
+            raise WakeSchedulerError("wake batch is not PREPARED; reconcile, do not resend")
         if self.client is None:
             raise WakeSchedulerError("client required to submit a wake")
-        generation = lease_generation if lease_generation is not None else batch.get("lease_generation")
-        if generation is not None:
-            self._assert_submit_fence(str(batch["binding_id"]), int(generation))
-            self.leases.renew(str(batch["binding_id"]), self.instance_id, generation=int(generation))
-        if batch["state"] == WakeBatchState.PREPARED.value:
-            batch = self.begin_submission(wake_batch_id)
+        if lease_generation is None:
+            raise WakeSchedulerError("automatic submit requires lease generation")
+        generation = int(lease_generation)
+        self._assert_submit_fence(str(batch["binding_id"]), generation)
+        self.leases.renew(str(batch["binding_id"]), self.instance_id, generation=generation)
+        batch = self.begin_submission(wake_batch_id)
         params = {
             "threadId": batch["thread_id"],
             "input": [{"type": "text", "text": input_text}],
             "approvalPolicy": "never",
-            "sandboxPolicy": {"type": "readOnly"},
             "clientUserMessageId": batch["client_user_message_id"],
         }
 
@@ -137,8 +136,7 @@ class WakeScheduler:
 
         guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
         try:
-            if generation is not None:
-                self._assert_submit_fence(str(batch["binding_id"]), int(generation))
+            self._assert_submit_fence(str(batch["binding_id"]), generation)
             response = await guard.request("turn/start", params)
         except RetryRequired as exc:
             self._mark_uncertain(wake_batch_id, {"reason": "overload"})
@@ -158,7 +156,10 @@ class WakeScheduler:
             app_server_turn_id=turn_id,
             submitted_at=now,
             observed_at=now,
+            expected_state=WakeBatchState.SUBMITTING.value,
         )
+        if updated["state"] == WakeBatchState.INCIDENT.value:
+            raise WakeSchedulerError("wake turn/start incident; do not retry")
         for message in self.batches.messages_for(wake_batch_id):
             self.mailbox.mark_delivered(message.message_id)
         self.recovery._record_attempt(
@@ -194,13 +195,12 @@ class WakeScheduler:
         self,
         binding_id: str,
         *,
-        lease_generation: int | None = None,
+        lease_generation: int,
     ) -> dict[str, object] | None:
         binding = self.bindings.get(binding_id)
         if binding is None or binding.binding_state is not BindingState.ACTIVE or not binding.thread_id:
             return None
-        if lease_generation is not None:
-            self._assert_submit_fence(binding_id, lease_generation)
+        self._assert_submit_fence(binding_id, lease_generation)
         if self.batches.open_batch_for_binding(binding_id) is not None:
             return None
         messages = self._eligible_messages(binding_id)
@@ -212,16 +212,14 @@ class WakeScheduler:
         if readiness is ThreadWakeReadiness.UNKNOWN:
             return {"binding_id": binding_id, "readiness": readiness.value}
         if readiness is ThreadWakeReadiness.IDLE_NOT_LOADED:
-            if lease_generation is not None:
-                self._assert_submit_fence(binding_id, lease_generation)
+            self._assert_submit_fence(binding_id, lease_generation)
             readiness = await self.recovery.resume_once(binding_id)
             if readiness is not ThreadWakeReadiness.IDLE_LOADED:
                 return {"binding_id": binding_id, "readiness": readiness.value, "resumed": False}
         if readiness is not ThreadWakeReadiness.IDLE_LOADED:
             return {"binding_id": binding_id, "readiness": readiness.value}
-        if lease_generation is not None:
-            self._assert_submit_fence(binding_id, lease_generation)
-            self.leases.renew(binding_id, self.instance_id, generation=lease_generation)
+        self._assert_submit_fence(binding_id, lease_generation)
+        self.leases.renew(binding_id, self.instance_id, generation=lease_generation)
         snapshot = self.bridge.snapshot(binding.actor_context_id)
         batch = self.batches.prepare(
             binding_id=binding_id,

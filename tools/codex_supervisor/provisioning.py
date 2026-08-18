@@ -85,7 +85,6 @@ class ManagedProvisioner:
             "cwd": binding.thread_cwd,
             "ephemeral": False,
             "approvalPolicy": "never",
-            "sandbox": "read-only",
         }
         client_key = f"thread/start:{binding_id}"
         try:
@@ -117,8 +116,11 @@ class ManagedProvisioner:
             self.mutations.mark_uncertain(str(intent["intent_id"]), "missing_id")
             self.bindings._record_event(binding_id, "THREAD_START_UNCERTAIN", {"reason": "missing_id"})
             raise ProvisioningError("thread/start returned no thread id")
-        self.mutations.mark_submitted(str(intent["intent_id"]))
-        self.bindings.attach_thread(binding_id, thread_id)
+        self.bindings.attach_thread(
+            binding_id,
+            thread_id,
+            mutation_intent_id=str(intent["intent_id"]),
+        )
         if self.client is not None:
             read = await self.client.read_thread(thread_id)
             read_thread = read.get("thread") if isinstance(read.get("thread"), dict) else {}
@@ -171,6 +173,9 @@ class ManagedProvisioner:
                 self.mutations.mark_uncertain(str(intent["intent_id"]), type(exc).__name__)
             self.bindings._record_event(binding_id, "THREAD_RESUME_UNCERTAIN", {"reason": type(exc).__name__})
             raise ProvisioningError("thread/resume uncertain; do not retry automatically") from exc
-        self.mutations.mark_submitted(str(intent["intent_id"]))
-        self.bindings.attach_thread(binding_id, thread_id)
+        self.bindings.attach_thread(
+            binding_id,
+            thread_id,
+            mutation_intent_id=str(intent["intent_id"]),
+        )
         return binding_id

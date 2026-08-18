@@ -153,6 +153,8 @@ class WakeRecovery:
             )
             self._record_attempt(wake_batch_id, WakeAttemptOutcome.CANCELLED)
             return updated
+        if state is WakeBatchState.ACTIVE:
+            return await self._reconcile_active(wake_batch_id, batch)
         if state in {
             WakeBatchState.SUBMITTING,
             WakeBatchState.SUBMITTED,
@@ -184,6 +186,81 @@ class WakeRecovery:
                     assert row is not None
                     return row
         return batch
+
+    def _mechanical_status(self, status: object) -> str | None:
+        if isinstance(status, dict):
+            status = status.get("type") or status.get("status")
+        if status is None:
+            return None
+        text = str(status)
+        if text in {"completed", "interrupted", "failed"}:
+            return text
+        if text in {"inProgress", "active"}:
+            return "active"
+        return None
+
+    async def _lookup_turn_status(self, batch: dict[str, object]) -> str | None:
+        turn_id = str(batch.get("app_server_turn_id") or "")
+        if turn_id:
+            snap = self.bindings.store.connection.execute(
+                "SELECT status FROM turn_snapshots WHERE turn_id = ?",
+                (turn_id,),
+            ).fetchone()
+            if snap is not None:
+                mechanical = self._mechanical_status(snap["status"])
+                if mechanical is not None:
+                    return mechanical
+        if self.client is None:
+            return None
+        try:
+            read = await self.client.read_thread(str(batch["thread_id"]), include_turns=True)
+        except (AppServerRpcError, TransportClosed, asyncio.TimeoutError):
+            return None
+        thread = read.get("thread") if isinstance(read.get("thread"), dict) else {}
+        turns = thread.get("turns") if isinstance(thread.get("turns"), list) else []
+        wanted_id = str(batch.get("app_server_turn_id") or "")
+        wanted_client = batch.get("client_user_message_id")
+        for turn in turns:
+            if not isinstance(turn, dict):
+                continue
+            if wanted_id and str(turn.get("id") or "") == wanted_id:
+                return self._mechanical_status(turn.get("status"))
+            if wanted_client and turn.get("clientUserMessageId") == wanted_client:
+                return self._mechanical_status(turn.get("status"))
+        return "missing"
+
+    async def _reconcile_active(self, wake_batch_id: str, batch: dict[str, object]) -> dict[str, object]:
+        from datetime import datetime, timezone
+
+        status = await self._lookup_turn_status(batch)
+        if status == "active":
+            return batch
+        if status in {"completed", "interrupted", "failed"}:
+            for message in self.batches.messages_for(wake_batch_id):
+                if message.delivery_state.value != "DELIVERED_TO_TURN":
+                    try:
+                        self.mailbox.mark_delivered(message.message_id)
+                    except Exception:
+                        pass
+            updated = self.batches.set_state(
+                wake_batch_id,
+                state=WakeBatchState.COMPLETED.value,
+                completion_status=status,
+                completed_at=datetime.now(timezone.utc).isoformat(),
+            )
+            self._record_attempt(wake_batch_id, WakeAttemptOutcome.RECONCILED)
+            return updated
+        updated = self.batches.set_state(
+            wake_batch_id,
+            state=WakeBatchState.INCIDENT.value,
+            incident_json='{"reason":"active_turn_missing"}',
+        )
+        self._record_attempt(
+            wake_batch_id,
+            WakeAttemptOutcome.INCIDENT,
+            error={"reason": "active_turn_missing"},
+        )
+        return updated
 
     async def recover(self) -> dict[str, object]:
         recovered_batches = []

@@ -90,37 +90,50 @@ class ManagedTurns:
             raise ManagedTurnError(f"unknown turn intent: {turn_intent_id}")
         return dict(row)
 
-    def _set_state(self, turn_intent_id: str, **fields: Any) -> None:
+    def _set_state(self, turn_intent_id: str, **fields: Any) -> bool:
+        expected = fields.pop("expected_state", None)
         assignments = ", ".join(f"{key} = ?" for key in fields)
         values = list(fields.values()) + [turn_intent_id]
+        sql = f"UPDATE managed_turn_intents SET {assignments} WHERE turn_intent_id = ?"
+        if expected is not None:
+            sql += " AND submission_state = ?"
+            values.append(expected)
         with self.bindings.store._lock, self.bindings.store.connection:
-            self.bindings.store.connection.execute(
-                f"UPDATE managed_turn_intents SET {assignments} WHERE turn_intent_id = ?",
-                values,
+            cursor = self.bindings.store.connection.execute(sql, values)
+            return cursor.rowcount == 1
+
+    def _claim_prepared(self, turn_intent_id: str) -> bool:
+        with self.bindings.store._lock, self.bindings.store.connection:
+            cursor = self.bindings.store.connection.execute(
+                """UPDATE managed_turn_intents
+                SET submission_state = ?
+                WHERE turn_intent_id = ? AND submission_state = ?""",
+                (
+                    SubmissionState.SUBMITTING.value,
+                    turn_intent_id,
+                    SubmissionState.PREPARED.value,
+                ),
             )
+            return cursor.rowcount == 1
 
     async def submit(self, turn_intent_id: str, input_text: str) -> dict[str, Any]:
         import asyncio
 
         row = self._row(turn_intent_id)
-        if row["submission_state"] not in {
-            SubmissionState.PREPARED.value,
-            SubmissionState.SUBMITTING.value,
-        }:
-            raise ManagedTurnError("intent is not PREPARED")
-        if row["submission_state"] == SubmissionState.PREPARED.value:
-            self.mutations.begin(
-                "turn/start",
-                str(row["client_user_message_id"]),
-                binding_id=str(row["binding_id"]),
-                request={"turn_intent_id": turn_intent_id},
-            )
-            self._set_state(turn_intent_id, submission_state=SubmissionState.SUBMITTING.value)
+        if row["submission_state"] != SubmissionState.PREPARED.value:
+            raise ManagedTurnError("intent is not PREPARED; reconcile, do not resend")
+        self.mutations.begin(
+            "turn/start",
+            str(row["client_user_message_id"]),
+            binding_id=str(row["binding_id"]),
+            request={"turn_intent_id": turn_intent_id},
+        )
+        if not self._claim_prepared(turn_intent_id):
+            raise ManagedTurnError("intent is not PREPARED; reconcile, do not resend")
         params = {
             "threadId": row["app_server_thread_id"],
             "input": [{"type": "text", "text": input_text}],
             "approvalPolicy": "never",
-            "sandboxPolicy": {"type": "readOnly"},
             "clientUserMessageId": row["client_user_message_id"],
         }
 
@@ -161,13 +174,19 @@ class ManagedTurns:
         if isinstance(result.get("turn"), dict):
             turn_id = result["turn"].get("id")
         now = _now()
-        self._set_state(
+        applied = self._set_state(
             turn_intent_id,
             submission_state=SubmissionState.SUBMITTED.value,
             app_server_turn_id=turn_id,
             submitted_at=now,
             observed_at=now,
+            expected_state=SubmissionState.SUBMITTING.value,
         )
+        if not applied:
+            row = self._row(turn_intent_id)
+            if row["submission_state"] == SubmissionState.INCIDENT.value:
+                raise ManagedTurnError("turn/start incident; do not retry")
+            return row
         if turn_id:
             with self.bindings.store._lock, self.bindings.store.connection:
                 self.bindings.store.connection.execute(

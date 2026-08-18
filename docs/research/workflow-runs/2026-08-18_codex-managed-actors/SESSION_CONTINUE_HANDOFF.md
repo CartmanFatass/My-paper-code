@@ -147,3 +147,16 @@ no mutating retry
 no commit of unrelated dirty workspace
 pytest --basetemp must stay inside the repo
 ```
+
+## Superseded review pointer
+
+```text
+superseded_by=0520df87ee2dd1dd70c1bdade34889980c4c7a44
+reviewed_range=12236b26583c7e389fe4cc5026e0437760d34b3e..0520df87ee2dd1dd70c1bdade34889980c4c7a44
+historical_head_in_this_file=c1e2d2e260e1b4765a2f35e4f64309f7bd0e1fe9
+```
+
+Do not rewrite the historical sections above. The 2026-08-18 synthetic
+rereview of `0520df87` returned `REVISION_REQUIRED`. Use
+`SYNTHETIC_CONTROL_PLANE_REREVIEW_PROMPT.md` for the next review of the
+corrective commit, not the pre-fix prompt pinned to `c1e2d2e2`.

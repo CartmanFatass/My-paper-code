@@ -42,6 +42,12 @@ def test_ack_intake_and_cross_binding_reject(tmp_path: Path) -> None:
     )
     mailbox.mark_delivered(message.message_id)
     batches.set_state(str(batch["wake_batch_id"]), state="COMPLETED", app_server_turn_id="turn_ack")
+    seeded["supervisor"].connection.execute(
+        """INSERT OR REPLACE INTO turn_snapshots (
+            turn_id, thread_id, status, last_event_seq, updated_at
+        ) VALUES ('turn_ack', 'thr_port', 'completed', 1, '2026-08-18T00:00:00+00:00')"""
+    )
+    seeded["supervisor"].connection.commit()
     gateway = CommandGateway(seeded["bindings"], seeded["bridge"], mailbox)
     applied = ingest_recorded_command(
         gateway,

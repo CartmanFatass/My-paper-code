@@ -69,6 +69,29 @@ def _row_to_binding(row: Any) -> ManagedActorBinding:
         verified_checkpoint_id=None
         if _row_value(row, "verified_checkpoint_id") is None
         else str(row["verified_checkpoint_id"]),
+        verified_state_version=None
+        if _row_value(row, "verified_state_version") is None
+        else int(row["verified_state_version"]),
+        verified_epoch_id=None
+        if _row_value(row, "verified_epoch_id") is None
+        else str(row["verified_epoch_id"]),
+        verified_epoch_revision=None
+        if _row_value(row, "verified_epoch_revision") is None
+        else int(row["verified_epoch_revision"]),
+    )
+
+
+def currentness_tuple(
+    checkpoint_id: object,
+    state_version: object,
+    epoch_id: object,
+    epoch_revision: object,
+) -> tuple[str, int, str, int | None]:
+    return (
+        str(checkpoint_id or ""),
+        int(state_version or 0),
+        "" if epoch_id is None else str(epoch_id),
+        None if epoch_revision is None or epoch_revision == "" else int(epoch_revision),
     )
 
 
@@ -163,7 +186,13 @@ class BindingStore:
         self._record_event(binding_id, "BINDING_PREPARED", {"actor_kind": actor_snapshot.actor_kind})
         return binding_id
 
-    def attach_thread(self, binding_id: str, thread_id: str) -> ManagedActorBinding:
+    def attach_thread(
+        self,
+        binding_id: str,
+        thread_id: str,
+        *,
+        mutation_intent_id: str | None = None,
+    ) -> ManagedActorBinding:
         binding = self.get(binding_id)
         if binding is None:
             raise BindingError(f"unknown binding: {binding_id}")
@@ -178,12 +207,27 @@ class BindingStore:
                 raise BindingError("actor kind no longer matches binding")
         now = _now()
         with self.store._lock, self.store.connection:
-            self.store.connection.execute(
+            cursor = self.store.connection.execute(
                 """UPDATE managed_actor_bindings
                 SET thread_id = ?, binding_state = ?, thread_created_at = ?
-                WHERE binding_id = ?""",
-                (thread_id, BindingState.THREAD_CREATED.value, now, binding_id),
+                WHERE binding_id = ? AND binding_state = ?""",
+                (
+                    thread_id,
+                    BindingState.THREAD_CREATED.value,
+                    now,
+                    binding_id,
+                    BindingState.PREPARED.value,
+                ),
             )
+            if cursor.rowcount != 1:
+                raise BindingError("binding is no longer PREPARED")
+            if mutation_intent_id is not None:
+                self.store.connection.execute(
+                    """UPDATE mutation_intents
+                    SET state = ?, updated_at = ?
+                    WHERE intent_id = ?""",
+                    ("APPLIED", now, mutation_intent_id),
+                )
         self._record_event(binding_id, "THREAD_ATTACHED", {"thread_id": thread_id})
         attached = self.get(binding_id)
         assert attached is not None
@@ -222,7 +266,32 @@ class BindingStore:
         assert updated is not None
         return updated
 
-    def _require_verification_receipt(self, binding: ManagedActorBinding) -> dict[str, str]:
+    def _ack_tuple_still_current(self, snapshot: ManagedActorSnapshot, ack: tuple[str, int, str, int | None]) -> bool:
+        ack_checkpoint, ack_state_version, ack_epoch, ack_revision = ack
+        current = currentness_tuple(
+            snapshot.checkpoint_id,
+            snapshot.state_version,
+            snapshot.epoch_id,
+            snapshot.epoch_revision,
+        )
+        if current[2] != ack_epoch or current[3] != ack_revision:
+            return False
+        # CONTEXT_REANCHOR_ACK itself increments workflow state_version by one.
+        if current[1] not in {ack_state_version, ack_state_version + 1}:
+            return False
+        if current[0] and current[0] != ack_checkpoint:
+            return False
+        newer = self.bridge.semantic.connection.execute(
+            """SELECT checkpoint_id FROM context_checkpoints
+            WHERE actor_context_id = ? AND checkpoint_id != ?
+              AND created_at >= (
+                  SELECT created_at FROM context_checkpoints WHERE checkpoint_id = ?
+              )""",
+            (snapshot.actor_context_id, ack_checkpoint, ack_checkpoint),
+        ).fetchone() if ack_checkpoint else None
+        return newer is None
+
+    def _require_verification_receipt(self, binding: ManagedActorBinding) -> dict[str, object]:
         if self.bridge is None:
             raise BindingError("activation requires a semantic bridge and verification receipt")
         snapshot = self.bridge.snapshot(binding.actor_context_id)
@@ -253,9 +322,29 @@ class BindingStore:
             raise BindingError("missing verification receipt")
         payload = json.loads(str(command["payload_json"] or "{}"))
         expected = payload.get("expected") if isinstance(payload.get("expected"), dict) else {}
-        intent_checkpoint = "" if intent["checkpoint_id"] is None else str(intent["checkpoint_id"])
-        if str(expected.get("checkpoint_id") or "") != intent_checkpoint:
-            raise BindingError("ACK does not match verification checkpoint")
+        receipt_result = json.loads(str(receipt["result_json"] or "{}"))
+        intent_tuple = currentness_tuple(
+            intent["checkpoint_id"],
+            intent["expected_state_version"],
+            intent["expected_epoch_id"],
+            intent["expected_epoch_revision"],
+        )
+        command_tuple = currentness_tuple(
+            command["expected_checkpoint_id"] if command["expected_checkpoint_id"] is not None else expected.get("checkpoint_id"),
+            command["expected_state_version"] if command["expected_state_version"] is not None else expected.get("state_version"),
+            command["expected_epoch_id"] if command["expected_epoch_id"] is not None else expected.get("epoch_id"),
+            command["expected_epoch_revision"] if command["expected_epoch_revision"] is not None else expected.get("epoch_revision"),
+        )
+        receipt_tuple = currentness_tuple(
+            receipt_result.get("checkpoint_id") or expected.get("checkpoint_id"),
+            receipt_result.get("state_version") if receipt_result.get("state_version") is not None else expected.get("state_version"),
+            receipt_result.get("epoch_id") if "epoch_id" in receipt_result else expected.get("epoch_id"),
+            receipt_result.get("epoch_revision") if "epoch_revision" in receipt_result else expected.get("epoch_revision"),
+        )
+        if not (intent_tuple == command_tuple == receipt_tuple):
+            raise BindingError("verification currentness tuple does not match")
+        if not self._ack_tuple_still_current(snapshot, receipt_tuple):
+            raise BindingError("verification ACK is stale for the current semantic tuple")
         turn = self.store.connection.execute(
             "SELECT * FROM turn_snapshots WHERE turn_id = ? AND status = 'completed'",
             (turn_id,),
@@ -277,7 +366,10 @@ class BindingStore:
             "verification_turn_id": turn_id,
             "verification_command_id": str(command["command_id"]),
             "verification_receipt_id": str(receipt["receipt_id"]),
-            "verified_checkpoint_id": str(snapshot.checkpoint_id or ""),
+            "verified_checkpoint_id": receipt_tuple[0],
+            "verified_state_version": receipt_tuple[1],
+            "verified_epoch_id": receipt_tuple[2],
+            "verified_epoch_revision": receipt_tuple[3],
         }
 
     def activate(self, binding_id: str) -> ManagedActorBinding:
@@ -291,15 +383,29 @@ class BindingStore:
         if not binding.thread_id:
             raise BindingError("binding has no thread")
         evidence = self._require_verification_receipt(binding)
+        snapshot = self.bridge.snapshot(binding.actor_context_id) if self.bridge is not None else None
+        if snapshot is None or not self._ack_tuple_still_current(
+            snapshot,
+            (
+                str(evidence["verified_checkpoint_id"] or ""),
+                int(evidence["verified_state_version"] or 0),
+                str(evidence["verified_epoch_id"] or ""),
+                None
+                if evidence["verified_epoch_revision"] is None
+                else int(evidence["verified_epoch_revision"]),
+            ),
+        ):
+            raise BindingError("semantic tuple changed during activation")
         now = _now()
         with self.store._lock, self.store.connection:
-            self.store.connection.execute(
+            cursor = self.store.connection.execute(
                 """UPDATE managed_actor_bindings
                 SET binding_state = ?, activated_at = ?, last_verified_at = ?,
                     verification_turn_intent_id = ?, verification_turn_id = ?,
                     verification_command_id = ?, verification_receipt_id = ?,
-                    verified_checkpoint_id = ?
-                WHERE binding_id = ?""",
+                    verified_checkpoint_id = ?, verified_state_version = ?,
+                    verified_epoch_id = ?, verified_epoch_revision = ?
+                WHERE binding_id = ? AND binding_state = ?""",
                 (
                     BindingState.ACTIVE.value,
                     now,
@@ -309,9 +415,15 @@ class BindingStore:
                     evidence["verification_command_id"],
                     evidence["verification_receipt_id"],
                     evidence["verified_checkpoint_id"],
+                    evidence["verified_state_version"],
+                    evidence["verified_epoch_id"] or None,
+                    evidence["verified_epoch_revision"],
                     binding_id,
+                    BindingState.VERIFICATION_REQUIRED.value,
                 ),
             )
+            if cursor.rowcount != 1:
+                raise BindingError("binding state changed during activation")
         self._record_event(binding_id, "BINDING_ACTIVATED", evidence)
         updated = self.get(binding_id)
         assert updated is not None

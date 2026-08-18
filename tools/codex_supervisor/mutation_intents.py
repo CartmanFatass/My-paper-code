@@ -95,5 +95,8 @@ class MutationIntentStore:
     def mark_submitted(self, intent_id: str) -> dict[str, Any]:
         return self.set_state(intent_id, "SUBMITTED")
 
+    def mark_applied(self, intent_id: str) -> dict[str, Any]:
+        return self.set_state(intent_id, "APPLIED")
+
     def mark_incident(self, intent_id: str, reason: str) -> dict[str, Any]:
         return self.set_state(intent_id, "INCIDENT", request_json=json.dumps({"reason": reason}))

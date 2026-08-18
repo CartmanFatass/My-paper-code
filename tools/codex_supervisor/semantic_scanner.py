@@ -85,23 +85,44 @@ class SemanticScanner:
             if message.delivery_state.value not in {"ENQUEUED", "ELIGIBLE", "BATCHED"}:
                 continue
             key = message.source_event_key
+            resolved = False
             if key.startswith("semantic:obligation:"):
                 obligation_id = key.split(":")[2] if len(key.split(":")) >= 3 else ""
-                if obligation_id not in open_obligation_ids:
-                    self.mailbox.cancel_source_resolved(message.message_id, "SOURCE_RESOLVED")
-                continue
-            if key.startswith("semantic:packet:"):
+                resolved = obligation_id not in open_obligation_ids
+            elif key.startswith("semantic:packet:"):
                 parts = key.split(":")
                 packet_id = parts[2] if len(parts) >= 3 else ""
                 packet = packet_rows.get(packet_id)
                 if packet is None or str(packet["intake_state"]) == "APPLIED":
-                    self.mailbox.cancel_source_resolved(message.message_id, "SOURCE_RESOLVED")
-                    continue
-                current_key = (
-                    f"semantic:packet:{packet_id}:{packet['delivery_state']}:{packet['intake_state']}"
-                )
-                if key != current_key:
-                    self.mailbox.cancel_source_resolved(message.message_id, "SOURCE_SUPERSEDED")
+                    resolved = True
+                else:
+                    current_key = (
+                        f"semantic:packet:{packet_id}:{packet['delivery_state']}:{packet['intake_state']}"
+                    )
+                    resolved = key != current_key
+            if not resolved:
+                continue
+            batch_state = self.mailbox.batch_state_for_message(message.message_id)
+            if batch_state in {"SUBMITTING", "SUBMITTED", "SUBMISSION_UNCERTAIN", "ACTIVE"}:
+                self.mailbox.note_source_resolved_after_submission(message.message_id)
+                continue
+            self.mailbox.cancel_source_resolved(
+                message.message_id,
+                "SOURCE_SUPERSEDED" if key.startswith("semantic:packet:") else "SOURCE_RESOLVED",
+            )
+            if batch_state == "PREPARED":
+                row = self.mailbox.store.connection.execute(
+                    """SELECT b.wake_batch_id FROM wake_batch_messages w
+                    JOIN wake_batches b ON b.wake_batch_id = w.wake_batch_id
+                    WHERE w.message_id = ? AND b.state = 'PREPARED'""",
+                    (message.message_id,),
+                ).fetchone()
+                if row is not None:
+                    self.mailbox.store.connection.execute(
+                        "UPDATE wake_batches SET state = 'CANCELLED' WHERE wake_batch_id = ? AND state = 'PREPARED'",
+                        (str(row[0]),),
+                    )
+                    self.mailbox.store.connection.commit()
 
     def scan(self) -> list[str]:
         self._reconcile_existing()

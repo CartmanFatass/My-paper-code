@@ -207,6 +207,15 @@ def serve(mode: str) -> None:
                 )
                 _emit({"id": request_id, "result": {"turn": {"id": turn_id, "status": "inProgress"}}})
                 _emit({"method": "turn/started", "params": {"threadId": thread_id, "turn": {"id": turn_id}}})
+                if mode == "server_request_after_turn_start":
+                    _emit(
+                        {
+                            "id": "server-1",
+                            "method": "item/commandExecution/requestApproval",
+                            "params": {"threadId": thread_id, "turnId": turn_id},
+                        }
+                    )
+                    continue
                 if mode == "canary_failed":
                     _emit({"method": "turn/completed", "params": {"threadId": thread_id, "turn": {"id": turn_id, "status": "failed"}}})
                 elif mode == "canary_wrong_text":

@@ -124,3 +124,6 @@ class ManagedActorBinding:
     verification_command_id: str | None = None
     verification_receipt_id: str | None = None
     verified_checkpoint_id: str | None = None
+    verified_state_version: int | None = None
+    verified_epoch_id: str | None = None
+    verified_epoch_revision: int | None = None

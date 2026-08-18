@@ -195,12 +195,15 @@ class WakeBatchStore:
         return row
 
     def set_state(self, wake_batch_id: str, **fields: object) -> dict[str, object]:
+        expected = fields.pop("expected_state", None)
         assignments = ", ".join(f"{key} = ?" for key in fields)
+        values = list(fields.values()) + [wake_batch_id]
+        sql = f"UPDATE wake_batches SET {assignments} WHERE wake_batch_id = ?"
+        if expected is not None:
+            sql += " AND state = ?"
+            values.append(expected)
         with self.store._lock, self.store.connection:
-            self.store.connection.execute(
-                f"UPDATE wake_batches SET {assignments} WHERE wake_batch_id = ?",
-                list(fields.values()) + [wake_batch_id],
-            )
+            self.store.connection.execute(sql, values)
         row = self.get(wake_batch_id)
         assert row is not None
         return row

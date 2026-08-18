@@ -6,7 +6,7 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 4
+SCHEMA_VERSION = 5
 
 SCHEMA_STATEMENTS = (
     """
@@ -175,7 +175,10 @@ SCHEMA_STATEMENTS = (
         verification_turn_id TEXT,
         verification_command_id TEXT,
         verification_receipt_id TEXT,
-        verified_checkpoint_id TEXT
+        verified_checkpoint_id TEXT,
+        verified_state_version INTEGER,
+        verified_epoch_id TEXT,
+        verified_epoch_revision INTEGER
     )
     """,
     """
@@ -279,7 +282,8 @@ SCHEMA_STATEMENTS = (
         acknowledged_at TEXT,
         intaken_at TEXT,
         applied_at TEXT,
-        dead_letter_reason TEXT
+        dead_letter_reason TEXT,
+        source_resolved_after_submission INTEGER NOT NULL DEFAULT 0
     )
     """,
     """
@@ -443,6 +447,10 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _add_column_if_missing(connection, "managed_actor_bindings", "verification_command_id", "TEXT")
         _add_column_if_missing(connection, "managed_actor_bindings", "verification_receipt_id", "TEXT")
         _add_column_if_missing(connection, "managed_actor_bindings", "verified_checkpoint_id", "TEXT")
+        _add_column_if_missing(connection, "managed_actor_bindings", "verified_state_version", "INTEGER")
+        _add_column_if_missing(connection, "managed_actor_bindings", "verified_epoch_id", "TEXT")
+        _add_column_if_missing(connection, "managed_actor_bindings", "verified_epoch_revision", "INTEGER")
+        _add_column_if_missing(connection, "mailbox_messages", "source_resolved_after_submission", "INTEGER NOT NULL DEFAULT 0")
         _add_column_if_missing(connection, "wake_batches", "lease_generation", "INTEGER")
         _add_column_if_missing(connection, "wake_batches", "lease_holder", "TEXT")
         _add_column_if_missing(connection, "thread_snapshots", "preview_present", "INTEGER")

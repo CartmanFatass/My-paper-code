@@ -42,30 +42,33 @@ def load_completed_final_item(store: ObserverStore, raw_message_seq: int) -> dic
     if str(raw["direction"]) != "stdout":
         raise ObserverEvidenceError("final item is not an observed stdout message")
     payload = _payload(raw)
+    if str(raw["method"] or "") != "item/completed":
+        raise ObserverEvidenceError("raw message method is not item/completed")
     thread_id = None if raw["thread_id"] is None else str(raw["thread_id"])
     turn_id = None if raw["turn_id"] is None else str(raw["turn_id"])
     item_id = None if raw["item_id"] is None else str(raw["item_id"])
     if not thread_id or not turn_id:
         raise ObserverEvidenceError("raw message is missing thread or turn id")
-    item = None
-    if item_id:
-        item = store.connection.execute(
-            "SELECT * FROM item_snapshots WHERE item_id = ?",
-            (item_id,),
-        ).fetchone()
-    if item is None:
-        item = store.connection.execute(
-            """SELECT * FROM item_snapshots
-            WHERE thread_id = ? AND turn_id = ? AND item_type = 'agentMessage'
-            ORDER BY updated_at DESC""",
-            (thread_id, turn_id),
-        ).fetchone()
+    if not item_id:
+        raise ObserverEvidenceError("raw message is missing item id")
+    params = payload.get("params") if isinstance(payload.get("params"), dict) else {}
+    item_obj = params.get("item") if isinstance(params.get("item"), dict) else {}
+    if str(item_obj.get("id") or "") != item_id:
+        raise ObserverEvidenceError("payload item id does not match raw item id")
+    if str(item_obj.get("type") or "") != "agentMessage":
+        raise ObserverEvidenceError("payload item is not an agentMessage")
+    item = store.connection.execute(
+        "SELECT * FROM item_snapshots WHERE item_id = ?",
+        (item_id,),
+    ).fetchone()
     turn = store.connection.execute(
         "SELECT * FROM turn_snapshots WHERE turn_id = ?",
         (turn_id,),
     ).fetchone()
     if item is None or turn is None:
         raise ObserverEvidenceError("observer has no matching turn/item snapshots")
+    if str(item["item_id"]) != item_id:
+        raise ObserverEvidenceError("item snapshot id does not match raw item id")
     if str(item["thread_id"] or "") != thread_id or str(item["turn_id"] or "") != turn_id:
         raise ObserverEvidenceError("item snapshot thread/turn mismatch")
     if str(turn["thread_id"] or "") != thread_id:
@@ -79,7 +82,7 @@ def load_completed_final_item(store: ObserverStore, raw_message_seq: int) -> dic
         "raw_message_seq": int(raw_message_seq),
         "thread_id": thread_id,
         "turn_id": turn_id,
-        "item_id": None if item_id is None else str(item["item_id"]),
+        "item_id": str(item["item_id"]),
         "item_type": str(item["item_type"]),
         "lifecycle": str(item["lifecycle"]),
         "text": text,

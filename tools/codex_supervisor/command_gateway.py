@@ -98,7 +98,17 @@ class CommandGateway:
                 "payload": {},
             }
         action = ManagedActionKind(str(parsed["action_kind"]))
-        self._update_command(command_id, command_kind=action.value, payload_json=json.dumps(parsed), validation_state=CommandValidationState.VALIDATED.value)
+        expected = parsed.get("expected") if isinstance(parsed.get("expected"), dict) else {}
+        self._update_command(
+            command_id,
+            command_kind=action.value,
+            payload_json=json.dumps(parsed),
+            validation_state=CommandValidationState.VALIDATED.value,
+            expected_checkpoint_id=expected.get("checkpoint_id"),
+            expected_state_version=expected.get("state_version"),
+            expected_epoch_id=expected.get("epoch_id"),
+            expected_epoch_revision=expected.get("epoch_revision"),
+        )
         try:
             result = self._apply_action(action, parsed, binding, command_id, turn_id)
         except (SemanticBridgeError, ValueError, CommandGatewayError) as exc:
@@ -128,9 +138,20 @@ class CommandGateway:
     ) -> dict[str, Any]:
         if action is ManagedActionKind.NO_CONTROL_ACTION:
             return {"effect": "none"}
+        if action is not ManagedActionKind.NO_CONTROL_ACTION:
+            try:
+                actor = self.bridge.require_eligible(binding.actor_context_id)
+            except SemanticBridgeError as exc:
+                try:
+                    self.bindings.suspend(binding.binding_id)
+                except Exception:
+                    pass
+                raise CommandGatewayError(str(exc)) from exc
+            if actor.actor_kind.value != binding.actor_kind.value:
+                raise CommandGatewayError("actor kind no longer matches binding")
         if action is ManagedActionKind.CONTEXT_REANCHOR_ACK:
             expected = parsed.get("expected") if isinstance(parsed.get("expected"), dict) else {}
-            return self.bridge.acknowledge_reanchor(
+            result = self.bridge.acknowledge_reanchor(
                 actor_context_id=binding.actor_context_id,
                 checkpoint_id=str(expected.get("checkpoint_id") or ""),
                 expected_state_version=int(expected.get("state_version") or 0),
@@ -139,6 +160,11 @@ class CommandGateway:
                 app_server_turn_id=turn_id,
                 supervisor_command_id=command_id,
             )
+            result["checkpoint_id"] = str(expected.get("checkpoint_id") or result.get("checkpoint_id") or "")
+            result["state_version"] = int(expected.get("state_version") or 0)
+            result["epoch_id"] = expected.get("epoch_id")
+            result["epoch_revision"] = expected.get("epoch_revision")
+            return result
         inner = parsed.get("payload") if isinstance(parsed.get("payload"), dict) else {}
         if action is ManagedActionKind.MAILBOX_ACK:
             return self._mailbox_ack(binding, command_id, turn_id, inner)
@@ -180,19 +206,28 @@ class CommandGateway:
             (message_id, binding.binding_id),
         ).fetchone()
         if row is None or not row["app_server_turn_id"]:
-            return
+            raise CommandGatewayError("command/wake ordering cannot be proven")
         if str(row["app_server_turn_id"]) == turn_id:
             return
+        wake_key = self._turn_order_key(str(row["app_server_turn_id"]), binding.thread_id)
+        command_key = self._turn_order_key(turn_id, binding.thread_id)
+        if wake_key is None or command_key is None or wake_key[0] != command_key[0]:
+            raise CommandGatewayError("command/wake ordering cannot be proven")
+        if command_key[1] < wake_key[1]:
+            raise CommandGatewayError("command turn predates the wake turn")
+
+    def _turn_order_key(self, turn_id: str, thread_id: str | None) -> tuple[str, object] | None:
         command_turn = self.bindings.store.connection.execute(
-            "SELECT started_at FROM turn_snapshots WHERE turn_id = ? AND thread_id = ?",
-            (turn_id, binding.thread_id),
+            "SELECT last_event_seq, started_at FROM turn_snapshots WHERE turn_id = ? AND thread_id = ?",
+            (turn_id, thread_id),
         ).fetchone()
         if command_turn is None:
-            raise CommandGatewayError("command turn does not belong to this binding")
-        wake_started = row["wake_started"]
-        command_started = command_turn["started_at"]
-        if wake_started and command_started and str(command_started) < str(wake_started):
-            raise CommandGatewayError("command turn predates the wake turn")
+            return None
+        if command_turn["last_event_seq"] is not None:
+            return ("seq", int(command_turn["last_event_seq"]))
+        if command_turn["started_at"]:
+            return ("time", str(command_turn["started_at"]))
+        return None
 
     def _mailbox_ack(self, binding: Any, command_id: str, turn_id: str, inner: dict[str, Any]) -> dict[str, Any]:
         mailbox = self._require_mailbox()

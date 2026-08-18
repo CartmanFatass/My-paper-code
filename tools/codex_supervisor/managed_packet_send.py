@@ -7,11 +7,11 @@ from typing import Any
 
 from tools.codex_semantic_mvp.packet_refs import packet_register
 
-from .binding_store import BindingStore
+from .binding_store import BindingError, BindingStore
 from .mailbox_acl import MailboxAclError, evaluate_automatic_delivery
 from .mailbox_models import MailboxMessageKind, MailboxSourceSystem
 from .managed_models import BindingState, ManagedActorKind
-from .semantic_bridge import SemanticBridge
+from .semantic_bridge import SemanticBridge, SemanticBridgeError
 
 TARGET_ALIASES = {
     "PORTFOLIO": ManagedActorKind.PORTFOLIO,
@@ -54,6 +54,20 @@ class ManagedPacketSender:
         self.bridge = bridge
         self.repo_root = Path(repo_root)
 
+    def _require_live_actor(self, binding: Any) -> None:
+        try:
+            actor = self.bridge.require_eligible(binding.actor_context_id)
+        except SemanticBridgeError as exc:
+            try:
+                self.bindings.suspend(binding.binding_id)
+            except BindingError:
+                pass
+            raise ManagedPacketSendError(str(exc)) from exc
+        if actor.actor_kind.value != binding.actor_kind.value:
+            raise ManagedPacketSendError("actor kind no longer matches binding")
+        if actor.scope_key != binding.semantic_scope_key:
+            raise ManagedPacketSendError("actor scope no longer matches binding")
+
     def _existing_packet_ids(self) -> set[str]:
         rows = self.bridge.semantic.connection.execute("SELECT packet_id FROM packet_refs").fetchall()
         return {str(row[0]) for row in rows}
@@ -80,6 +94,7 @@ class ManagedPacketSender:
         source = self.bindings.get(source_binding_id)
         if source is None or source.binding_state is not BindingState.ACTIVE:
             raise ManagedPacketSendError("source binding is not ACTIVE")
+        self._require_live_actor(source)
         alias = TARGET_ALIASES.get(target_alias)
         if alias is None:
             raise ManagedPacketSendError(f"unknown target alias: {target_alias}")
@@ -90,6 +105,7 @@ class ManagedPacketSender:
                 break
         if target is None:
             raise ManagedPacketSendError("target alias has no ACTIVE binding")
+        self._require_live_actor(target)
         try:
             evaluate_automatic_delivery(
                 source_system=MailboxSourceSystem.MANAGED_ACTOR.value,

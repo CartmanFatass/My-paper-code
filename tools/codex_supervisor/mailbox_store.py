@@ -72,6 +72,9 @@ def _row_to_message(row: Any) -> MailboxMessage:
         intake_state=IntakeState(str(row["intake_state"])),
         created_at=str(row["created_at"]),
         dead_letter_reason=None if row["dead_letter_reason"] is None else str(row["dead_letter_reason"]),
+        source_resolved_after_submission=bool(row["source_resolved_after_submission"])
+        if "source_resolved_after_submission" in row.keys() and row["source_resolved_after_submission"] is not None
+        else False,
     )
 
 
@@ -214,6 +217,31 @@ class MailboxStore:
             DeliveryState.DEAD_LETTER,
             dead_letter_reason=reason,
         )
+
+    def note_source_resolved_after_submission(self, message_id: str) -> MailboxMessage:
+        current = self.get(message_id)
+        if current is None:
+            raise MailboxStoreError(f"unknown mailbox message: {message_id}")
+        with self.store._lock, self.store.connection:
+            self.store.connection.execute(
+                """UPDATE mailbox_messages
+                SET source_resolved_after_submission = 1
+                WHERE message_id = ?""",
+                (message_id,),
+            )
+        updated = self.get(message_id)
+        assert updated is not None
+        return updated
+
+    def batch_state_for_message(self, message_id: str) -> str | None:
+        row = self.store.connection.execute(
+            """SELECT b.state FROM wake_batch_messages w
+            JOIN wake_batches b ON b.wake_batch_id = w.wake_batch_id
+            WHERE w.message_id = ?
+            ORDER BY b.prepared_at DESC""",
+            (message_id,),
+        ).fetchone()
+        return None if row is None else str(row[0])
 
     def cancel_source_resolved(self, message_id: str, reason: str = "SOURCE_RESOLVED") -> MailboxMessage:
         current = self.get(message_id)
