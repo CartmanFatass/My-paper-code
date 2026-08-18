@@ -8,11 +8,11 @@ authorize live App Server work.
 ```text
 document_kind=synthetic_control_plane_rereview_prompt
 supersedes=SYNTHETIC_CONTROL_PLANE_REVIEW_PROMPT.md
-prior_reviewed_commit=19a80529fa9b0ff7327d704cef92fe2fd065ae2e
-prior_reviewed_range=0520df87ee2dd1dd70c1bdade34889980c4c7a44..19a80529fa9b0ff7327d704cef92fe2fd065ae2e
+prior_reviewed_commit=883eb028c3cbdadf99159869ea722e8a4a6a5f6d
+prior_reviewed_range=19a80529fa9b0ff7327d704cef92fe2fd065ae2e..883eb028c3cbdadf99159869ea722e8a4a6a5f6d
 ```
 
-The prior rereview of `19a80529` returned `REVISION_REQUIRED`. This
+The prior rereview of `883eb028` returned `REVISION_REQUIRED`. This
 prompt reviews the corrective commit that claims to close those defects.
 
 ---
@@ -20,23 +20,23 @@ prompt reviews the corrective commit that claims to close those defects.
 ## Assignment
 
 Review the HMASD Codex App Server supervisor on branch `aggressive` at
-commit `883eb028c3cbdadf99159869ea722e8a4a6a5f6d`.
+commit `f7a5304560e52b2b78faadb6d6de4049a5b9a5f9`.
 
 Repository: the HMASD git remote the operator pointed you at.
 Branch: `aggressive`.
 Review range:
 
 ```text
-19a80529fa9b0ff7327d704cef92fe2fd065ae2e..883eb028c3cbdadf99159869ea722e8a4a6a5f6d
+883eb028c3cbdadf99159869ea722e8a4a6a5f6d..f7a5304560e52b2b78faadb6d6de4049a5b9a5f9
 ```
 
 Parent of this corrective slice:
 
 ```text
-19a80529  fix: close remaining synthetic supervisor rereview defects
+883eb028  fix: make incident terminal and recover prepared siblings
 ```
 
-`2d7008f3` only pinned the previous rereview prompt; treat it as
+`d13760d8` only pinned the previous rereview prompt; treat it as
 documentation, not a science-bearing change.
 
 This is operational control-plane infrastructure, not a research
@@ -44,30 +44,35 @@ direction and not Portfolio work.
 
 ## Prior rereview that this commit must close
 
-`19a80529` closed the previous High set (activation currentness,
-SUBMITTING non-resend, attach+APPLIED same tx, session-lifetime
-watcher subject, ACTIVE wake recovery). It remained
-`REVISION_REQUIRED` for two High defects and several Medium leftovers:
+`883eb028` closed the previous High set (managed completion guard,
+mutation-aware attach rollback, unresolved-incident begin fence,
+PREPARED sibling recovery, source-resolution flag, one queue consumer
+design, timestamp-only reject, VALIDATED+receipt reconcile, exact
+item/completed lookup). It remained `REVISION_REQUIRED` for three High
+defects and three Medium leftovers:
 
-1. server-request `INCIDENT` was not a terminal state: completion,
-   activation, attach, and `MutationIntentStore.begin()` could overwrite
-   or re-open it
-2. a PREPARED multi-message wake batch cancelled the whole batch when
-   one source resolved, leaving valid siblings permanently `BATCHED`
+1. `INCIDENT` was only enforced at some call sites, not at every
+   state-holding API: `BindingStore.activate()`, no-intent
+   `attach_thread()`, `MutationIntentStore.set_state()` /
+   `mark_submitted()`, `WakeRecovery` unconditional writes, and
+   `mark_related_incidents()` omitting `OBSERVED`
+2. automatic `thread/resume` after a successful response could be
+   submitted again on the next scheduler iteration because
+   `SUBMITTED` was not an open/unresolved state
+3. `ManagedAppServerSession` was not established before the first
+   `reconcile_threads()` or CLI `snapshot`, so the process-lifetime
+   server-request fail-safe did not cover those paths
 
 Also required from that review:
 
-- record `source_resolved_after_submission` for `SUBMISSION_UNCERTAIN`
-  and `ACTIVE` messages, not only `SUBMITTING` / `BATCHED`
-- one server-request consumer for the whole App Server client, including
-  `ObserverService.serve()` / canary
-- mailbox ACK/intake ordering must use event/raw sequence only; reject
-  timestamp-only evidence
-- duplicate ingest must reconcile `VALIDATED` + existing receipt to
-  `APPLIED`; do not leave a crash window that permanently blocks
-  activation
-- `verify_and_activate()` must not pick a non-`item/completed
-  agentMessage` raw row
+- missing command receipt must become a durable `INCIDENT`, not only a
+  runtime error; reanchor reconcile must compare the full normalized
+  currentness tuple
+- mailbox ACK/intake ordering must use the turn's **first** transport
+  sequence, not `last_event_seq`
+- final wake `turn/start` fence must re-check semantic actor
+  eligibility and matching kind/scope; on failure suspend, cancel the
+  unsubmitted batch, and return messages to `ELIGIBLE`
 
 ## Read these first
 
@@ -136,55 +141,62 @@ CONTEXT_REANCHOR_ACK itself increments workflow state_version by one;
 Inspect whether the code actually establishes these invariants:
 
 ```text
-INCIDENT is terminal without operator recovery
-  record_completion allows only SUBMITTED / OBSERVED → COMPLETED
-  complete_activation refuses INCIDENT
-  attach_thread applies mutation only WHERE state='SUBMITTING'
-    and rolls back the binding attach if rowcount != 1
-  observe_completion allows only ACTIVE → COMPLETED
-  MutationIntentStore.begin() refuses an unresolved INCIDENT
-    for the same method+client_key
-  operator resolve_incident is the only path that reopens the client key
+INCIDENT is terminal at every state-holding API
+  BindingStore.activate() requires verification submission_state == COMPLETED
+    and refuses INCIDENT
+  public attach_thread requires mutation_intent_id
+  attach_thread_for_tests still refuses an unresolved thread/start INCIDENT
+  MutationIntentStore transitions are CAS:
+    mark_submitted: SUBMITTING → SUBMITTED
+    mark_submitted_unreconciled: SUBMITTING → SUBMITTED_UNRECONCILED
+    mark_uncertain: SUBMITTING → SUBMISSION_UNCERTAIN
+    mark_applied: SUBMITTING → APPLIED
+    mark_applied_reconciled: SUBMITTED_UNRECONCILED → APPLIED
+    any INCIDENT write with rowcount=0 raises terminal error
+  mark_related_incidents includes OBSERVED managed turns
+    and SUBMITTED / SUBMITTED_UNRECONCILED mutation intents
+  WakeRecovery writes use expected_state; INCIDENT is kept
+  CommandGateway refuses a non-empty effect when the turn intent
+    or wake batch is INCIDENT
 
-PREPARED multi-message source resolution
-  one invalid source cancels the PREPARED batch in one SQLite tx
-  invalid messages → CANCELLED_SOURCE_RESOLVED
-  still-valid siblings → ELIGIBLE, batched_at cleared
-  cancelled batch contains no BATCHED messages
+automatic thread/resume is not resent after a successful response
+  SUBMITTING → SUBMITTED_UNRECONCILED → APPLIED only after IDLE_LOADED
+  SUBMITTED_UNRECONCILED is an open state and blocks begin()
+  the next scheduler iteration only reconciles the old intent
+  UNKNOWN / IDLE_NOT_LOADED after a successful response do not start
+    another thread/resume
 
-source_resolved_after_submission
-  SUBMITTING / SUBMITTED / SUBMISSION_UNCERTAIN / ACTIVE
-  retain the delivery attempt
-  flag is recorded even when the message is already
-    SUBMISSION_UNCERTAIN or DELIVERED_TO_TURN
+process-lifetime server-request watcher
+  ObserverService.start() creates the unique ManagedAppServerSession
+    immediately after the client reader starts
+  reconcile_threads, snapshot, serve, canary, and managed runtime
+    reuse that session
+  run_snapshot / serve convert a server request during the first
+    thread/list into UNEXPECTED_SERVER_REQUEST and call stop()
 
-one server-request consumer
-  ObserverService._watch_server_requests does not
-    client.server_requests.get()
-  it waits on ManagedAppServerSession incident
-  persist_server_request does not steal stdout transport_seq
-    from ObserverService inbound recording
+missing command receipt is durable
+  RECEIVED/VALIDATED + no receipt → CommandValidationState.INCIDENT
+    plus rejection_reason; do not re-execute
+  reanchor reconcile compares the full normalized currentness tuple;
+    a present-and-different receipt field does not get skipped
 
-mailbox ordering
-  last_event_seq or raw_message_seq only
-  timestamp-only evidence is rejected
+mailbox ordering uses first transport evidence
+  MIN(normalized raw_message_seq) or MIN(stdout raw_message_seq)
+  last_event_seq is not used
+  a command turn that started before the wake turn is rejected
+    even if it completed later
 
-command crash reconciliation
-  existing RECEIVED/VALIDATED + matching receipt
-    → re-check tuple → APPLIED
-  RECEIVED/VALIDATED + missing receipt
-    → explicit incident, do not re-execute the semantic effect
-
-verify_and_activate convenience lookup
-  only exact item/completed agentMessage evidence
-  never the latest raw row (usually turn/completed)
+wake submit fence re-checks semantic eligibility
+  require_eligible(actor) and kind/scope still match binding
+  failure suspends the binding, cancels PREPARED/SUBMITTING batch,
+    and returns BATCHED messages to ELIGIBLE
 ```
 
 ## Questions the review must answer
 
 Answer each with evidence (file + function / table / test name). Separate
-**observed fact** from **inference**. Re-answer the original 1–20, then
-the corrective-slice questions.
+**observed fact** from **inference**. Re-answer the original 1–31, then
+the new slice questions.
 
 1. Can a model impersonate another actor by putting `actor_context_id`,
    `binding_id`, `thread_id`, `source_kind`, or `user_authority` in a
@@ -195,21 +207,23 @@ the corrective-slice questions.
 5. Can Stage 3 start a turn without an explicit operator intent?
 6. Can Stage 4 start more than one `turn/start` for one wake batch?
 7. Can an active turn be steered automatically (`turn/steer`)?
-8. Can an uncertain mutating submission be resent? Treat persisted
-   `SUBMITTING` **and** unresolved `INCIDENT` as part of this answer.
+8. Can an uncertain mutating submission be resent? Include persisted
+   `SUBMITTING`, unresolved `INCIDENT`, and a successful but not-yet-
+   loaded automatic `thread/resume`.
 9. Can mailbox prose, lexical names such as `FAILED.md`, or raw child
    text become a routing key, ACL input, or semantic state transition?
 10. Can EM/CM/Leaf receive automatic wake delivery in this stage?
 11. Can a packet send bypass the Root↔Portfolio ACL or self-declare the
     source actor? Also: can a released semantic actor still send?
 12. Can a revoked or non-ACTIVE binding receive a wake? Include direct
-    `submit_batch` without a lease generation.
+    `submit_batch` without a lease generation, and a semantic actor
+    released after batch prepare but before `turn/start`.
 13. Can a PREPARED wake batch after restart be resent, or are messages
     correctly returned to ELIGIBLE? Include the **source-resolution
     multi-message** path, not only ordinary restart.
 14. Are DELIVERED messages preserved across restart? Also: is an
     `ACTIVE` batch reconciled so it cannot permanently block the next
-    wake?
+    wake? Include concurrent watcher `INCIDENT` vs recovery writes.
 15. Does `-32001` retry leak onto `thread/start`, `thread/resume`,
     `turn/start`, or `thread/loaded/list`?
 16. Are forbidden event kinds (`BLOCKED`, `FAILED`, `SUCCESS`, `RETIRED`,
@@ -225,7 +239,7 @@ the corrective-slice questions.
 20. What is the strongest remaining synthetic defect, and what is only
     untestable until a live canary?
 
-Corrective-slice checks from the previous rereview, still in force:
+Prior corrective-slice checks, still in force:
 
 21. Can activation succeed when checkpoint, state_version, or epoch
     changed after the ACK, and is `verified_checkpoint_id` exactly the
@@ -234,29 +248,47 @@ Corrective-slice checks from the previous rereview, still in force:
     persisted `SUBMITTING` row?
 23. If `thread/start` or `thread/resume` returns an id and the process
     exits before attach, can a later call create or resume a second
-    thread?
+    thread? Include no-intent `attach_thread()`.
 24. If a server request arrives after a successful `turn/start` response
     and before `turn/completed`, is the session terminated and the
     turn/batch marked `INCIDENT`? **Also: can that INCIDENT later become
-    COMPLETED / APPLIED / ACTIVE?**
+    COMPLETED / APPLIED / ACTIVE via activate, attach, mark_submitted,
+    or recovery?**
 25. After restart, is a completed `ACTIVE` batch closed, a still-running
     one left `ACTIVE`, and a missing turn made an incident?
 26. Is there one session-level watcher for the whole client, including
-    `ObserverService`, or can ObserverService still `get()` the queue?
-
-New checks for this slice:
-
+    the first `reconcile_threads()` and CLI `snapshot`?
 27. After a server-request `INCIDENT`, can `complete_activation`,
-    `record_completion`, `attach_thread`, or `observe_completion`
-    overwrite it?
+    `record_completion`, `attach_thread`, `BindingStore.activate()`,
+    `observe_completion`, or `WakeRecovery` overwrite it?
 28. After a thread/resume `INCIDENT`, can `begin()` create another
     mutation intent for the same client key without operator resolution?
+    Can `mark_submitted()` overwrite that INCIDENT?
 29. If a PREPARED batch has two messages and one source resolves, is the
     valid sibling returned to `ELIGIBLE` and selectable again?
 30. If a command receipt exists and the command row is still
-    `VALIDATED`, does a later ingest reconcile it to `APPLIED` instead
-    of returning `DUPLICATE` and leaving activation blocked?
-31. Is timestamp-only turn ordering rejected for mailbox ACK/intake?
+    `VALIDATED`, does a later ingest reconcile it to `APPLIED`? If the
+    receipt is missing, is the command a durable `INCIDENT`?
+31. Is timestamp-only turn ordering rejected? Does ordering use the
+    turn's first sequence rather than `last_event_seq`?
+
+New checks for this slice:
+
+32. Does `BindingStore.activate()` itself refuse an `INCIDENT`
+    verification intent, not only `ManagedRuntime.complete_activation()`?
+33. Can `attach_thread` without `mutation_intent_id` bypass an unresolved
+    `thread/start` INCIDENT?
+34. After a successful `thread/resume` response that is not yet
+    `IDLE_LOADED`, does a later scheduler iteration send another
+    `thread/resume`?
+35. Does `ObserverService.start()` establish the session watcher before
+    the first `thread/list`? Does snapshot terminate on a server request
+    during that list?
+36. If a command turn started before the wake turn but completed after
+    it, is mailbox ACK/intake rejected?
+37. If the semantic actor is released after batch prepare and before
+    `turn/start`, is the wake aborted, the binding suspended, and
+    messages returned to `ELIGIBLE`?
 
 ## Required synthetic tests
 
@@ -265,27 +297,38 @@ assert that a row was stored. Prior required names remain in force;
 this slice adds:
 
 ```text
-test_server_request_incident_cannot_be_completed_or_activated
-test_thread_start_incident_cannot_be_overwritten_by_attach
-test_thread_resume_incident_requires_operator_resolution
-test_wake_incident_cannot_be_overwritten_by_completion
+test_binding_store_activate_rejects_incident_verification
+test_attach_without_mutation_intent_cannot_bypass_incident
+test_resume_response_then_incident_cannot_become_submitted
+test_observed_turn_is_marked_incident_by_server_request
+test_recovery_cannot_overwrite_incident_with_active
+test_recovery_cannot_overwrite_incident_with_completed
+test_command_from_incident_turn_has_no_control_effect
 
-test_prepared_batch_source_resolution_returns_valid_siblings_to_eligible
-test_cancelled_batch_contains_no_batched_messages
+test_successful_resume_not_loaded_is_not_resubmitted
+test_successful_resume_unknown_is_reconciled_not_restarted
+test_resume_intent_becomes_applied_only_after_loaded_observation
 
-test_observer_and_managed_runtime_share_one_server_request_consumer
-test_mailbox_command_rejects_timestamp_only_ordering
-test_reanchor_receipt_crash_before_command_applied_is_reconciled
+test_server_request_during_initial_reconcile_terminates
+test_server_request_during_snapshot_terminates
+test_serve_establishes_session_watcher_before_thread_list
+
+test_validated_command_without_receipt_becomes_durable_incident
+test_reconciled_reanchor_receipt_requires_exact_normalized_tuple
+
+test_mailbox_command_started_before_wake_but_completed_after_is_rejected
+
+test_semantic_actor_released_after_batch_prepare_prevents_wake_submit
 ```
 
-Prior required names from `19a80529` must still exist and still prove
-their claims.
+Prior required names from `883eb028` and `19a80529` must still exist and
+still prove their claims.
 
 Local operator evidence, not a substitute for your reading:
 
 ```text
-tests/codex_supervisor  177 passed
---basetemp=C:/Projects/HMASD/.tmp_review_final3
+tests/codex_supervisor  194 passed
+--basetemp=C:/Projects/HMASD/.tmp_review_0818d
 ```
 
 Treat that count as **UNOBSERVED** unless you independently run or see
@@ -295,8 +338,8 @@ CI. GitHub status checks are not required for this review.
 
 ```text
 review_kind=synthetic_control_plane_rereview
-reviewed_commit=883eb028c3cbdadf99159869ea722e8a4a6a5f6d
-reviewed_range=19a80529fa9b0ff7327d704cef92fe2fd065ae2e..883eb028c3cbdadf99159869ea722e8a4a6a5f6d
+reviewed_commit=f7a5304560e52b2b78faadb6d6de4049a5b9a5f9
+reviewed_range=883eb028c3cbdadf99159869ea722e8a4a6a5f6d..f7a5304560e52b2b78faadb6d6de4049a5b9a5f9
 live_acceptance=absent
 synthetic_disposition=CLOSED|REVISION_REQUIRED
 ```
@@ -311,7 +354,7 @@ Then:
   status for this review.
 - **Confirmed closures** — which prior High/Medium items are now
   actually closed in code, not only renamed.
-- **Answers** — numbered 1–31 with evidence.
+- **Answers** — numbered 1–37 with evidence.
 - **Not reviewed** — live transport, quota, and any file outside the
   listed surface.
 - **Does not decide** — Phase 1 / Stage 3 / Stage 4 acceptance, Portfolio

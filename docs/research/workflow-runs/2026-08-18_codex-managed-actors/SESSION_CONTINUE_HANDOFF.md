@@ -174,3 +174,14 @@ tests/codex_supervisor=177 passed
 The later rereview of `19a80529` also returned `REVISION_REQUIRED`. The
 corrective commit is `883eb028`. Use the current
 `SYNTHETIC_CONTROL_PLANE_REREVIEW_PROMPT.md` for that slice.
+
+```text
+superseded_by=f7a5304560e52b2b78faadb6d6de4049a5b9a5f9
+prior_rereview=883eb028c3cbdadf99159869ea722e8a4a6a5f6d
+reviewed_range=883eb028c3cbdadf99159869ea722e8a4a6a5f6d..f7a5304560e52b2b78faadb6d6de4049a5b9a5f9
+tests/codex_supervisor=194 passed
+```
+
+The later rereview of `883eb028` also returned `REVISION_REQUIRED`. The
+corrective commit is `f7a53045`. Use the current
+`SYNTHETIC_CONTROL_PLANE_REREVIEW_PROMPT.md` for that slice.
