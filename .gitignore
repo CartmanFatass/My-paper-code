@@ -159,9 +159,13 @@ test*.py
 !tests/codex_semantic_mvp/**/*.py
 !tests/codex_context_lifecycle/
 !tests/codex_context_lifecycle/**/*.py
+!tests/codex_supervisor/
+!tests/codex_supervisor/**/*.py
 # Semantic overlay acceptance and topology reports are durable control-plane evidence.
 !docs/research/workflow-runs/2026-08-15_codex-semantic-mvp/
 !docs/research/workflow-runs/2026-08-15_codex-semantic-mvp/**/*.md
+!docs/research/workflow-runs/2026-08-18_codex-app-server-observer/
+!docs/research/workflow-runs/2026-08-18_codex-app-server-observer/**/*.md
 !docs/project/decisions/
 !docs/project/decisions/**/*.md
 *.doc
