@@ -20,7 +20,13 @@ def test_rejects_identity_keys_and_stage4_actions() -> None:
 {"schema_version":"1.0","packet_kind":"MANAGED_ACTOR_COMMAND","action_kind":"NO_CONTROL_ACTION","binding_id":"x"}
 </HMASD_MANAGED_ACTOR_COMMAND_V1>"""
         )
-    with pytest.raises(CommandProtocolError, match="Stage 3"):
+    parsed = extract_managed_command(
+        """<HMASD_MANAGED_ACTOR_COMMAND_V1>
+{"schema_version":"1.0","packet_kind":"MANAGED_ACTOR_COMMAND","action_kind":"MAILBOX_ACK","payload":{"message_ids":["msg_1"]}}
+</HMASD_MANAGED_ACTOR_COMMAND_V1>"""
+    )
+    assert parsed["action_kind"] == "MAILBOX_ACK"
+    with pytest.raises(CommandProtocolError, match="message_ids"):
         extract_managed_command(
             """<HMASD_MANAGED_ACTOR_COMMAND_V1>
 {"schema_version":"1.0","packet_kind":"MANAGED_ACTOR_COMMAND","action_kind":"MAILBOX_ACK","payload":{}}

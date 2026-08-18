@@ -91,6 +91,16 @@ STAGE3_ACTIONS = frozenset(
     }
 )
 
+STAGE4_ACTIONS = frozenset(
+    {
+        ManagedActionKind.NO_CONTROL_ACTION,
+        ManagedActionKind.CONTEXT_REANCHOR_ACK,
+        ManagedActionKind.MAILBOX_ACK,
+        ManagedActionKind.MAILBOX_INTAKE,
+        ManagedActionKind.MANAGED_PACKET_SEND,
+    }
+)
+
 
 @dataclass(frozen=True)
 class ManagedActorBinding:

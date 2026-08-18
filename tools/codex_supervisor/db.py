@@ -6,7 +6,7 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 
 SCHEMA_STATEMENTS = (
     """
@@ -250,6 +250,97 @@ SCHEMA_STATEMENTS = (
         created_at TEXT NOT NULL
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS mailbox_messages (
+        message_id TEXT PRIMARY KEY,
+        source_system TEXT NOT NULL,
+        source_event_key TEXT NOT NULL UNIQUE,
+        sender_actor_context_id TEXT,
+        target_actor_context_id TEXT NOT NULL,
+        message_kind TEXT NOT NULL,
+        subject_ref TEXT NOT NULL,
+        payload_ref TEXT NOT NULL,
+        direction_id TEXT,
+        epoch_id TEXT,
+        priority INTEGER NOT NULL,
+        delivery_state TEXT NOT NULL,
+        intake_state TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        eligible_at TEXT,
+        batched_at TEXT,
+        delivered_at TEXT,
+        acknowledged_at TEXT,
+        intaken_at TEXT,
+        applied_at TEXT,
+        dead_letter_reason TEXT
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS semantic_scan_cursors (
+        scanner_id TEXT PRIMARY KEY,
+        last_scan_at TEXT,
+        last_obligation_observed_at TEXT,
+        last_packet_observed_at TEXT,
+        last_report_observed_at TEXT,
+        updated_at TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS wake_batches (
+        wake_batch_id TEXT PRIMARY KEY,
+        binding_id TEXT NOT NULL,
+        thread_id TEXT NOT NULL,
+        state TEXT NOT NULL,
+        client_user_message_id TEXT NOT NULL UNIQUE,
+        app_server_request_id TEXT,
+        app_server_turn_id TEXT,
+        prepared_at TEXT NOT NULL,
+        submitted_at TEXT,
+        observed_at TEXT,
+        completed_at TEXT,
+        completion_status TEXT,
+        incident_json TEXT
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS wake_batch_messages (
+        wake_batch_id TEXT NOT NULL,
+        message_id TEXT NOT NULL,
+        ordinal INTEGER NOT NULL,
+        PRIMARY KEY(wake_batch_id, message_id)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS wake_attempts (
+        wake_attempt_id TEXT PRIMARY KEY,
+        wake_batch_id TEXT NOT NULL,
+        attempt_number INTEGER NOT NULL,
+        request_id TEXT,
+        outcome TEXT NOT NULL,
+        error_json TEXT,
+        created_at TEXT NOT NULL,
+        UNIQUE(wake_batch_id, attempt_number)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS scheduler_leases (
+        lease_key TEXT PRIMARY KEY,
+        holder_instance_id TEXT NOT NULL,
+        acquired_at TEXT NOT NULL,
+        expires_at TEXT NOT NULL,
+        generation INTEGER NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS mailbox_command_receipts (
+        receipt_id TEXT PRIMARY KEY,
+        command_id TEXT NOT NULL,
+        message_id TEXT NOT NULL,
+        action TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        UNIQUE(command_id, message_id, action)
+    )
+    """,
 )
 
 REQUIRED_TABLES = (
@@ -269,6 +360,13 @@ REQUIRED_TABLES = (
     "managed_context_injections",
     "managed_actor_commands",
     "managed_command_receipts",
+    "mailbox_messages",
+    "semantic_scan_cursors",
+    "wake_batches",
+    "wake_batch_messages",
+    "wake_attempts",
+    "scheduler_leases",
+    "mailbox_command_receipts",
 )
 
 

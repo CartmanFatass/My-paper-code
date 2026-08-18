@@ -6,7 +6,7 @@ import json
 import re
 from typing import Any, Mapping
 
-from .managed_models import FORBIDDEN_COMMAND_KEYS, ManagedActionKind, STAGE3_ACTIONS
+from .managed_models import FORBIDDEN_COMMAND_KEYS, ManagedActionKind, STAGE4_ACTIONS
 
 ENVELOPE_OPEN = "<HMASD_MANAGED_ACTOR_COMMAND_V1>"
 ENVELOPE_CLOSE = "</HMASD_MANAGED_ACTOR_COMMAND_V1>"
@@ -50,8 +50,8 @@ def extract_managed_command(text: str) -> dict[str, Any] | None:
         kind = ManagedActionKind(str(action))
     except ValueError as exc:
         raise CommandProtocolError(f"unknown action_kind: {action}") from exc
-    if kind not in STAGE3_ACTIONS:
-        raise CommandProtocolError(f"action not allowed in Stage 3: {kind.value}")
+    if kind not in STAGE4_ACTIONS:
+        raise CommandProtocolError(f"action not allowed: {kind.value}")
     if payload.get("schema_version") != "1.0":
         raise CommandProtocolError("unsupported schema_version")
     if payload.get("packet_kind") != "MANAGED_ACTOR_COMMAND":
@@ -64,6 +64,26 @@ def extract_managed_command(text: str) -> dict[str, Any] | None:
         missing = [key for key in required if key not in expected]
         if missing:
             raise CommandProtocolError(f"CONTEXT_REANCHOR_ACK missing {missing}")
+    if kind is ManagedActionKind.MAILBOX_ACK:
+        inner = payload.get("payload")
+        if not isinstance(inner, Mapping) or not isinstance(inner.get("message_ids"), list) or not inner["message_ids"]:
+            raise CommandProtocolError("MAILBOX_ACK requires payload.message_ids")
+    if kind is ManagedActionKind.MAILBOX_INTAKE:
+        inner = payload.get("payload")
+        items = inner.get("items") if isinstance(inner, Mapping) else None
+        if not isinstance(items, list) or not items:
+            raise CommandProtocolError("MAILBOX_INTAKE requires payload.items")
+        for item in items:
+            if not isinstance(item, Mapping) or "message_id" not in item or "intake_kind" not in item:
+                raise CommandProtocolError("MAILBOX_INTAKE items require message_id and intake_kind")
+    if kind is ManagedActionKind.MANAGED_PACKET_SEND:
+        inner = payload.get("payload")
+        if not isinstance(inner, Mapping):
+            raise CommandProtocolError("MANAGED_PACKET_SEND requires payload")
+        required = ("packet_kind", "target_alias", "payload_ref", "marker")
+        missing = [key for key in required if not inner.get(key)]
+        if missing:
+            raise CommandProtocolError(f"MANAGED_PACKET_SEND missing {missing}")
     return payload
 
 

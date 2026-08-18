@@ -215,3 +215,20 @@ class AppServerClient:
         response = await self.request("thread/read", params)
         result = response.get("result")
         return dict(result) if isinstance(result, Mapping) else {}
+
+    async def list_loaded_threads(self) -> list[str]:
+        loaded: list[str] = []
+        cursor: object = None
+        while True:
+            params: dict[str, object] = {}
+            if cursor:
+                params["cursor"] = cursor
+            response = await self.request("thread/loaded/list", params)
+            result = response.get("result") if isinstance(response.get("result"), Mapping) else {}
+            data = result.get("data") if isinstance(result, Mapping) else None
+            if isinstance(data, list):
+                loaded.extend(str(item) for item in data)
+            next_cursor = result.get("nextCursor") if isinstance(result, Mapping) else None
+            if not next_cursor:
+                return loaded
+            cursor = next_cursor

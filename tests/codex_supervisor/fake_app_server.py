@@ -20,6 +20,8 @@ def _write_schema(out_dir: Path) -> None:
                     "thread/start",
                     "thread/list",
                     "thread/read",
+                    "thread/loaded/list",
+                    "thread/resume",
                     "turn/start",
                     "turn/completed",
                     "item/started",
@@ -140,6 +142,14 @@ def serve(mode: str) -> None:
                 thread["turns"] = list(globals().setdefault("_FAKE_TURNS", []))
             _emit({"id": request_id, "result": {"thread": thread}})
             continue
+        if method == "thread/loaded/list":
+            configured = os.environ.get("FAKE_LOADED_THREADS")
+            if configured is not None:
+                data = [item for item in configured.split(",") if item]
+            else:
+                data = list(globals().setdefault("_FAKE_LOADED", ["thr_canary"]))
+            _emit({"id": request_id, "result": {"data": data}})
+            continue
         if method == "thread/name/set":
             _emit({"id": request_id, "result": {}})
             continue
@@ -152,6 +162,7 @@ def serve(mode: str) -> None:
                 if mode == "canary_not_ephemeral":
                     ephemeral = False
                 thread_id = "thr_canary"
+                globals().setdefault("_FAKE_LOADED", []).append(thread_id)
                 _emit(
                     {
                         "id": request_id,
@@ -162,7 +173,10 @@ def serve(mode: str) -> None:
                 continue
             if method == "thread/resume":
                 thread_id = params.get("threadId")
-                _emit({"id": request_id, "result": {"thread": {"id": thread_id, "ephemeral": False}}})
+                loaded = globals().setdefault("_FAKE_LOADED", [])
+                if thread_id and thread_id not in loaded:
+                    loaded.append(thread_id)
+                _emit({"id": request_id, "result": {"thread": {"id": thread_id, "ephemeral": False, "status": {"type": "idle"}}}})
                 continue
             if method == "turn/start":
                 turn_id = "turn_canary"

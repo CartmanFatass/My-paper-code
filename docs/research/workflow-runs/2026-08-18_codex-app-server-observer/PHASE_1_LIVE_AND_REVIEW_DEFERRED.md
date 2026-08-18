@@ -48,8 +48,13 @@ live ephemeral canary
 Phase 1 live acceptance
 Task 16 independent review gate that depends on that live evidence
 Stage 3 live Root/Portfolio identity canaries
+Stage 3 live acceptance
 Stage 4 live mailbox canaries
+Stage 4 live acceptance
 ```
+
+The complete resume packet is
+`docs/research/workflow-runs/2026-08-18_codex-managed-actors/QUOTA_BLOCKED_HANDOFF.md`.
 
 ## What is accepted now
 

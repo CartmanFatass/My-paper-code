@@ -4,10 +4,16 @@ from __future__ import annotations
 
 from .binding_store import BindingError, BindingStore
 from .command_gateway import CommandGateway, CommandGatewayError
+from .mailbox_store import MailboxStore
 from .managed_context import build_bootstrap_text, record_context_injection
 from .managed_models import BindingState, HistoryTrust, ManagedIntentKind
 from .managed_turns import ManagedTurns
+from .scheduler_leases import SchedulerLeases
 from .semantic_bridge import ManagedActorSnapshot, SemanticBridge, SemanticBridgeError
+from .semantic_scanner import SemanticScanner
+from .wake_batches import WakeBatchStore
+from .wake_recovery import WakeRecovery
+from .wake_scheduler import WakeScheduler
 
 
 class ManagedRuntimeError(RuntimeError):
@@ -87,3 +93,20 @@ class ManagedRuntime:
                     pass
             raise ManagedRuntimeError(str(exc)) from exc
         return {"binding_id": activated.binding_id, "state": activated.binding_state.value, "command": applied}
+
+    def scheduler(self, mailbox: MailboxStore, *, instance_id: str = "scheduler") -> WakeScheduler:
+        batches = WakeBatchStore(self.bindings.store, mailbox)
+        return WakeScheduler(
+            self.bindings,
+            mailbox,
+            batches,
+            SchedulerLeases(self.bindings.store),
+            WakeRecovery(self.bindings, mailbox, batches, self.turns.client),
+            SemanticScanner(mailbox, self.bridge),
+            self.bridge,
+            self.turns.client,
+            instance_id=instance_id,
+        )
+
+    async def scheduler_once(self, mailbox: MailboxStore, *, instance_id: str = "scheduler") -> dict[str, object]:
+        return await self.scheduler(mailbox, instance_id=instance_id).once()

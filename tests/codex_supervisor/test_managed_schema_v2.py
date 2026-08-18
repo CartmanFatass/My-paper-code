@@ -94,7 +94,7 @@ def test_v1_migrates_additively(tmp_path: Path) -> None:
     _seed_v1(path)
     connection = connect(path)
     initialize_database(connection)
-    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 2
+    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == SCHEMA_VERSION
     tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
     assert set(REQUIRED_TABLES) <= tables
     assert connection.execute("SELECT run_id FROM observer_runs").fetchone()[0] == "run1"
@@ -103,7 +103,7 @@ def test_v1_migrates_additively(tmp_path: Path) -> None:
     assert connection.execute("SELECT item_id FROM item_snapshots").fetchone()[0] == "itm_old"
     assert connection.execute("SELECT COUNT(*) FROM managed_actor_bindings").fetchone()[0] == 0
     initialize_database(connection)
-    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 2
+    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == SCHEMA_VERSION
     connection.close()
 
 
@@ -121,7 +121,7 @@ def test_newer_schema_fails_closed(tmp_path: Path) -> None:
 def test_fresh_store_is_schema_2(tmp_path: Path) -> None:
     store = ObserverStore(tmp_path)
     version = store.connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0]
-    assert version == SCHEMA_VERSION == 2
+    assert version == SCHEMA_VERSION == 3
     assert ManagedActorKind.OPERATIONAL_ROOT.value == "OPERATIONAL_ROOT"
     assert BindingState.PREPARED.value == "PREPARED"
     store.close()
