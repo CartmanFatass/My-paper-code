@@ -163,3 +163,14 @@ rereview of `0520df87` returned `REVISION_REQUIRED`. The corrective
 commit is `19a80529`. Use
 `SYNTHETIC_CONTROL_PLANE_REREVIEW_PROMPT.md` for the next review, not
 the pre-fix prompt pinned to `c1e2d2e2`.
+
+```text
+superseded_by=883eb028c3cbdadf99159869ea722e8a4a6a5f6d
+prior_rereview=19a80529fa9b0ff7327d704cef92fe2fd065ae2e
+reviewed_range=19a80529fa9b0ff7327d704cef92fe2fd065ae2e..883eb028c3cbdadf99159869ea722e8a4a6a5f6d
+tests/codex_supervisor=177 passed
+```
+
+The later rereview of `19a80529` also returned `REVISION_REQUIRED`. The
+corrective commit is `883eb028`. Use the current
+`SYNTHETIC_CONTROL_PLANE_REREVIEW_PROMPT.md` for that slice.
