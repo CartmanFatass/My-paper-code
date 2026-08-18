@@ -121,6 +121,10 @@ class SemanticBridge:
         )
         payload = dict(result)
         payload["supervisor_command_id"] = supervisor_command_id
+        payload["checkpoint_id"] = checkpoint_id
+        payload["state_version"] = expected_state_version
+        payload["epoch_id"] = expected_epoch_id
+        payload["epoch_revision"] = expected_epoch_revision
         if self.supervisor_store is not None:
             self.supervisor_store.record_command_receipt(
                 command_id=supervisor_command_id,

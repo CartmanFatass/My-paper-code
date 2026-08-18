@@ -77,7 +77,7 @@ def test_verify_activate_and_reject_wrong_thread_or_released_actor(tmp_path: Pat
             gateway.ingest_final_item(raw_message_seq=99)
         port = seeded["bridge"].snapshot(seeded["portfolio"].actor_context_id)
         other = provisioner.prepare(port, repo_root=tmp_path, operator="operator")
-        store.attach_thread(other, "thr_port")
+        store.attach_thread_for_tests(other, "thr_port")
         store.confirm_global_memory_disabled(other, operator="operator")
         store.mark_verification_required(other)
         other_intent = ManagedTurns(store, client).prepare(

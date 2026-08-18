@@ -13,7 +13,7 @@ from .mailbox_models import ThreadWakeReadiness, WakeAttemptOutcome, WakeBatchSt
 from .mailbox_store import MailboxStore
 from .managed_models import BindingState, ManagedActorKind
 from .scheduler_leases import LeaseError, SchedulerLeases
-from .semantic_bridge import SemanticBridge
+from .semantic_bridge import SemanticBridge, SemanticBridgeError
 from .semantic_scanner import SemanticScanner
 from .session_guard import SessionGuard
 from .transport import TransportClosed
@@ -73,11 +73,50 @@ class WakeScheduler:
             sender_kind_for=self._sender_kinds(),
         )
 
-    def _assert_submit_fence(self, binding_id: str, generation: int) -> None:
+    def _abort_unsubmitted_wake(self, binding_id: str, wake_batch_id: str | None) -> None:
+        try:
+            self.bindings.suspend(binding_id)
+        except Exception:
+            pass
+        if not wake_batch_id:
+            return
+        batch = self.batches.get(wake_batch_id)
+        if batch is None or str(batch["state"]) not in {
+            WakeBatchState.PREPARED.value,
+            WakeBatchState.SUBMITTING.value,
+        }:
+            return
+        for message in self.batches.messages_for(wake_batch_id):
+            if message.delivery_state.value == "BATCHED":
+                self.mailbox.return_to_eligible(message.message_id)
+        self.batches.set_state(
+            wake_batch_id,
+            state=WakeBatchState.CANCELLED.value,
+            expected_state=str(batch["state"]),
+        )
+
+    def _assert_submit_fence(
+        self,
+        binding_id: str,
+        generation: int,
+        *,
+        wake_batch_id: str | None = None,
+    ) -> None:
         self.leases.assert_held(binding_id, self.instance_id, generation)
         binding = self.bindings.get(binding_id)
         if binding is None or binding.binding_state is not BindingState.ACTIVE:
             raise WakeSchedulerError("binding is not ACTIVE")
+        try:
+            actor = self.bridge.require_eligible(binding.actor_context_id)
+        except SemanticBridgeError as exc:
+            self._abort_unsubmitted_wake(binding_id, wake_batch_id)
+            raise WakeSchedulerError(str(exc)) from exc
+        if actor.actor_kind.value != binding.actor_kind.value:
+            self._abort_unsubmitted_wake(binding_id, wake_batch_id)
+            raise WakeSchedulerError("actor kind no longer matches binding")
+        if actor.scope_key != binding.semantic_scope_key:
+            self._abort_unsubmitted_wake(binding_id, wake_batch_id)
+            raise WakeSchedulerError("actor scope no longer matches binding")
 
     def begin_submission(self, wake_batch_id: str) -> dict[str, object]:
         batch = self.batches.get(wake_batch_id)
@@ -112,7 +151,7 @@ class WakeScheduler:
         if lease_generation is None:
             raise WakeSchedulerError("automatic submit requires lease generation")
         generation = int(lease_generation)
-        self._assert_submit_fence(str(batch["binding_id"]), generation)
+        self._assert_submit_fence(str(batch["binding_id"]), generation, wake_batch_id=wake_batch_id)
         self.leases.renew(str(batch["binding_id"]), self.instance_id, generation=generation)
         batch = self.begin_submission(wake_batch_id)
         params = {
@@ -136,7 +175,7 @@ class WakeScheduler:
 
         guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
         try:
-            self._assert_submit_fence(str(batch["binding_id"]), generation)
+            self._assert_submit_fence(str(batch["binding_id"]), generation, wake_batch_id=wake_batch_id)
             response = await guard.request("turn/start", params)
         except RetryRequired as exc:
             self._mark_uncertain(wake_batch_id, {"reason": "overload"})
@@ -170,11 +209,14 @@ class WakeScheduler:
         return updated
 
     def _mark_uncertain(self, wake_batch_id: str, error: dict[str, object]) -> None:
-        self.batches.set_state(
+        updated = self.batches.set_state(
             wake_batch_id,
             state=WakeBatchState.SUBMISSION_UNCERTAIN.value,
             incident_json=json.dumps(error),
+            expected_state=WakeBatchState.SUBMITTING.value,
         )
+        if updated["state"] == WakeBatchState.INCIDENT.value:
+            return
         for message in self.batches.messages_for(wake_batch_id):
             self.mailbox.mark_uncertain(message.message_id)
         self.recovery._record_attempt(

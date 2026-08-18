@@ -7,7 +7,7 @@ import uuid
 from datetime import datetime, timezone
 from typing import Any
 
-from .binding_store import BindingStore
+from .binding_store import BindingStore, currentness_tuple
 from .command_protocol import CommandProtocolError, extract_from_completed_item
 from .mailbox_store import MailboxStore
 from .managed_models import BindingState, CommandValidationState, ManagedActionKind
@@ -133,6 +133,7 @@ class CommandGateway:
     ) -> dict[str, Any]:
         if action is ManagedActionKind.NO_CONTROL_ACTION:
             return {"effect": "none"}
+        self._refuse_incident_source(binding, turn_id)
         if action is not ManagedActionKind.NO_CONTROL_ACTION:
             try:
                 actor = self.bridge.require_eligible(binding.actor_context_id)
@@ -211,42 +212,122 @@ class CommandGateway:
         if command_key[1] < wake_key[1]:
             raise CommandGatewayError("command turn predates the wake turn")
 
+    def _refuse_incident_source(self, binding: Any, turn_id: str) -> None:
+        turn = self.bindings.store.connection.execute(
+            """SELECT submission_state FROM managed_turn_intents
+            WHERE binding_id = ? AND app_server_turn_id = ?""",
+            (binding.binding_id, turn_id),
+        ).fetchone()
+        if turn is not None and str(turn[0]) == "INCIDENT":
+            raise CommandGatewayError("command turn is INCIDENT; no control effect")
+        batch = self.bindings.store.connection.execute(
+            """SELECT state FROM wake_batches
+            WHERE binding_id = ? AND app_server_turn_id = ?""",
+            (binding.binding_id, turn_id),
+        ).fetchone()
+        if batch is not None and str(batch[0]) == "INCIDENT":
+            raise CommandGatewayError("wake batch is INCIDENT; no control effect")
+
     def _turn_order_key(self, turn_id: str, thread_id: str | None) -> tuple[str, object] | None:
-        command_turn = self.bindings.store.connection.execute(
-            "SELECT last_event_seq FROM turn_snapshots WHERE turn_id = ? AND thread_id = ?",
+        first_event = self.bindings.store.connection.execute(
+            """SELECT MIN(raw_message_seq) FROM normalized_events
+            WHERE turn_id = ? AND thread_id = ?""",
             (turn_id, thread_id),
         ).fetchone()
-        if command_turn is not None and command_turn["last_event_seq"] is not None:
-            return ("seq", int(command_turn["last_event_seq"]))
-        raw = self.bindings.store.connection.execute(
+        first_raw = self.bindings.store.connection.execute(
             """SELECT MIN(raw_message_seq) FROM raw_messages
             WHERE turn_id = ? AND thread_id = ? AND direction = 'stdout'""",
             (turn_id, thread_id),
         ).fetchone()
-        if raw is not None and raw[0] is not None:
-            return ("raw", int(raw[0]))
-        return None
+        candidates = [
+            int(row[0])
+            for row in (first_event, first_raw)
+            if row is not None and row[0] is not None
+        ]
+        if not candidates:
+            return None
+        return ("seq", min(candidates))
+
+    def _effect_receipt_exists(self, existing: Any) -> bool:
+        command_id = str(existing["command_id"])
+        kind = str(existing["command_kind"] or "")
+        if kind in {
+            ManagedActionKind.MAILBOX_ACK.value,
+            ManagedActionKind.MAILBOX_INTAKE.value,
+        }:
+            if self.mailbox is None:
+                return False
+            row = self.mailbox.store.connection.execute(
+                "SELECT 1 FROM mailbox_command_receipts WHERE command_id = ?",
+                (command_id,),
+            ).fetchone()
+            return row is not None
+        if kind == ManagedActionKind.MANAGED_PACKET_SEND.value:
+            payload = json.loads(str(existing["payload_json"] or "{}"))
+            inner = payload.get("payload") if isinstance(payload.get("payload"), dict) else {}
+            marker = inner.get("marker")
+            if not marker:
+                return False
+            found = self.bridge.semantic.connection.execute(
+                "SELECT 1 FROM packet_refs WHERE marker = ?",
+                (str(marker),),
+            ).fetchone()
+            return found is not None
+        return False
+
+    def _mark_command_incident(self, command_id: str, reason: str) -> None:
+        self._update_command(
+            command_id,
+            validation_state=CommandValidationState.INCIDENT.value,
+            rejection_reason=reason,
+        )
 
     def _reconcile_existing_command(self, existing: Any) -> dict[str, Any]:
         command_id = str(existing["command_id"])
         state = str(existing["validation_state"])
+        if state == CommandValidationState.INCIDENT.value:
+            raise CommandGatewayError(
+                "command is in INCIDENT; operator reconciliation required"
+            )
         receipt = self.bindings.store.get_command_receipt(command_id)
         if state in {
             CommandValidationState.RECEIVED.value,
             CommandValidationState.VALIDATED.value,
         }:
             if receipt is None:
+                if self._effect_receipt_exists(existing):
+                    self._mark_command_incident(
+                        command_id,
+                        "command effect requires operator reconciliation; supervisor receipt is missing",
+                    )
+                    raise CommandGatewayError(
+                        "command effect requires operator reconciliation; supervisor receipt is missing"
+                    )
+                self._mark_command_incident(
+                    command_id,
+                    "command effect requires operator reconciliation; receipt is missing",
+                )
                 raise CommandGatewayError(
                     "command effect requires operator reconciliation; receipt is missing"
                 )
             payload = json.loads(str(existing["payload_json"] or "{}"))
             expected = payload.get("expected") if isinstance(payload.get("expected"), dict) else {}
             receipt_result = json.loads(str(receipt["result_json"] or "{}"))
-            for key in ("checkpoint_id", "state_version", "epoch_id", "epoch_revision"):
-                if expected.get(key) is None or key not in receipt_result:
-                    continue
-                if receipt_result.get(key) != expected.get(key):
-                    raise CommandGatewayError("receipt tuple does not match command")
+            expected_tuple = currentness_tuple(
+                expected.get("checkpoint_id"),
+                expected.get("state_version"),
+                expected.get("epoch_id"),
+                expected.get("epoch_revision"),
+            )
+            receipt_tuple = currentness_tuple(
+                receipt_result["checkpoint_id"] if "checkpoint_id" in receipt_result else expected.get("checkpoint_id"),
+                receipt_result["state_version"] if "state_version" in receipt_result else expected.get("state_version"),
+                receipt_result["epoch_id"] if "epoch_id" in receipt_result else expected.get("epoch_id"),
+                receipt_result["epoch_revision"] if "epoch_revision" in receipt_result else expected.get("epoch_revision"),
+            )
+            if expected_tuple != receipt_tuple:
+                self._mark_command_incident(command_id, "receipt tuple does not match command")
+                raise CommandGatewayError("receipt tuple does not match command")
             self._update_command(
                 command_id,
                 validation_state=CommandValidationState.APPLIED.value,

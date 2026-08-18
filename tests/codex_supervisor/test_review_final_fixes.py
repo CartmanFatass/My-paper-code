@@ -76,7 +76,7 @@ def _ack_text(checkpoint: dict) -> str:
 
 def test_server_request_incident_cannot_be_completed_or_activated(tmp_path: Path) -> None:
     seeded, store, binding_id, snapshot = _prepared_binding(tmp_path)
-    store.attach_thread(binding_id, "thr_root")
+    store.attach_thread_for_tests(binding_id, "thr_root")
     store.mark_verification_required(binding_id)
     store.confirm_global_memory_disabled(binding_id, operator="operator")
     checkpoint = seed_reanchor(seeded["semantic"], seeded["root"].actor_context_id)
@@ -300,7 +300,7 @@ def test_source_resolution_during_active_batch_records_flag(tmp_path: Path) -> N
 def test_observer_and_managed_runtime_share_one_server_request_consumer(tmp_path: Path) -> None:
     async def body() -> None:
         seeded, store, binding_id, snapshot = _prepared_binding(tmp_path)
-        store.attach_thread(binding_id, "thr_root")
+        store.attach_thread_for_tests(binding_id, "thr_root")
         store.mark_verification_required(binding_id)
         turns = ManagedTurns(store, client=None)  # type: ignore[arg-type]
         intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")

@@ -28,10 +28,10 @@ def test_one_thread_one_binding_and_kind_isolation(tmp_path: Path) -> None:
         thread_origin=ThreadOrigin.NEW,
         history_trust=HistoryTrust.FRESH,
     )
-    store.attach_thread(root_id, "thr_shared")
+    store.attach_thread_for_tests(root_id, "thr_shared")
     with pytest.raises(BindingError, match="already bound"):
-        store.attach_thread(port_id, "thr_shared")
-    store.attach_thread(port_id, "thr_portfolio")
+        store.attach_thread_for_tests(port_id, "thr_shared")
+    store.attach_thread_for_tests(port_id, "thr_portfolio")
     assert store.binding_for_thread("thr_shared").actor_kind.value == "OPERATIONAL_ROOT"
     assert store.binding_for_thread("thr_portfolio").actor_kind.value == "PORTFOLIO"
     assert store.binding_for_thread("thr_shared").actor_context_id != store.binding_for_thread("thr_portfolio").actor_context_id

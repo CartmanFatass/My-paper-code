@@ -186,12 +186,38 @@ class BindingStore:
         self._record_event(binding_id, "BINDING_PREPARED", {"actor_kind": actor_snapshot.actor_kind})
         return binding_id
 
+    def _unresolved_start_incident(self, binding_id: str) -> dict[str, object] | None:
+        row = self.store.connection.execute(
+            """SELECT * FROM mutation_intents
+            WHERE binding_id = ? AND method = 'thread/start' AND state = 'INCIDENT'
+            ORDER BY created_at DESC""",
+            (binding_id,),
+        ).fetchone()
+        return dict(row) if row is not None else None
+
+    def attach_thread_for_tests(self, binding_id: str, thread_id: str) -> ManagedActorBinding:
+        """Test fixture helper. Production attach must carry a mutation intent."""
+        if self._unresolved_start_incident(binding_id) is not None:
+            raise BindingError("unresolved INCIDENT; operator recovery required")
+        return self._attach_thread(binding_id, thread_id, mutation_intent_id=None)
+
     def attach_thread(
         self,
         binding_id: str,
         thread_id: str,
         *,
         mutation_intent_id: str | None = None,
+    ) -> ManagedActorBinding:
+        if not mutation_intent_id:
+            raise BindingError("mutation intent is required")
+        return self._attach_thread(binding_id, thread_id, mutation_intent_id=mutation_intent_id)
+
+    def _attach_thread(
+        self,
+        binding_id: str,
+        thread_id: str,
+        *,
+        mutation_intent_id: str | None,
     ) -> ManagedActorBinding:
         binding = self.get(binding_id)
         if binding is None:
@@ -309,6 +335,10 @@ class BindingStore:
         ).fetchone()
         if intent is None or not intent["app_server_turn_id"]:
             raise BindingError("missing verification turn intent")
+        if str(intent["submission_state"]) == "INCIDENT":
+            raise BindingError("verification turn is in INCIDENT; operator recovery required")
+        if str(intent["submission_state"]) != "COMPLETED":
+            raise BindingError("verification turn is not COMPLETED")
         turn_id = str(intent["app_server_turn_id"])
         command = self.store.connection.execute(
             """SELECT * FROM managed_actor_commands

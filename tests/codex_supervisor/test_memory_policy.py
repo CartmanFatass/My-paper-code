@@ -27,7 +27,7 @@ def test_operator_confirmation_required(tmp_path: Path) -> None:
         thread_origin=ThreadOrigin.NEW,
         history_trust=HistoryTrust.FRESH,
     )
-    store.attach_thread(binding_id, "thr_mem")
+    store.attach_thread_for_tests(binding_id, "thr_mem")
     store.mark_verification_required(binding_id)
     provisioner = ManagedProvisioner(store)
     provisioner.confirm_global_memory_disabled(binding_id, operator="operator")
@@ -55,7 +55,7 @@ def test_model_envelope_cannot_set_memory_policy(tmp_path: Path) -> None:
     command = extract_managed_command(text)
     assert command is not None
     assert store.get(binding_id).memory_policy_state is MemoryPolicyState.UNVERIFIED
-    store.attach_thread(binding_id, "thr_x")
+    store.attach_thread_for_tests(binding_id, "thr_x")
     store.mark_verification_required(binding_id)
     with pytest.raises(BindingError, match="memory policy"):
         store.activate(binding_id)

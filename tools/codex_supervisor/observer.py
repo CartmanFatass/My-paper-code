@@ -64,6 +64,7 @@ class ObserverService:
         self._version = ""
         self._end_kind = EndKind.NORMAL.value
         self._stopped = False
+        self.session: ManagedAppServerSession | None = None
 
     async def start(self) -> None:
         self.store.recover_incomplete_runs()
@@ -102,6 +103,7 @@ class ObserverService:
 
         self.transport.send = recorded_send  # type: ignore[method-assign]
         self.client.start_reader()
+        self.session = ManagedAppServerSession.for_client(self.client, self.store)
         self.record_local_event("APP_SERVER_PROCESS_STARTED_OBSERVED", {"pid": self.transport.process_id})
 
     async def _record_and_send(self, original_send: Any, message: dict[str, Any]) -> bytes:
@@ -198,27 +200,46 @@ class ObserverService:
             apply_normalized_event(self.store, event)
         self._apply_thread_objects(message.payload, seq, message.observed_at)
 
+    def _raise_if_incident(self) -> None:
+        if self.session is not None and self.session.terminated:
+            raise UnexpectedServerRequest(self.session.incident_payload or {})
+
     async def initialize(self) -> None:
         assert self.client is not None and self.run_id is not None
         await self.client.initialize()
+        await asyncio.sleep(0)
+        self._raise_if_incident()
         self.store.mark_initialized(self.run_id)
         self.record_local_event("APP_SERVER_INITIALIZED_OBSERVED", {})
 
     async def reconcile_threads(self) -> dict[str, object]:
         assert self.client is not None and self.run_id is not None
+        self._raise_if_incident()
         rec_id = self.store.start_reconciliation(self.run_id)
         self.record_local_event("RECONCILIATION_STARTED_OBSERVED", {})
         try:
             threads = await self.client.list_threads()
+            self._raise_if_incident()
             for thread in threads:
                 thread_id = thread.get("id")
                 if not thread_id:
                     continue
                 await self.client.read_thread(str(thread_id), include_turns=False)
+                self._raise_if_incident()
             self.store.complete_reconciliation(rec_id, thread_count=len(threads), outcome="OK")
             self.record_local_event("RECONCILIATION_COMPLETED_OBSERVED", {"thread_count": len(threads)})
             return {"thread_count": len(threads), "outcome": "OK"}
+        except UnexpectedServerRequest:
+            self.store.complete_reconciliation(
+                rec_id, thread_count=0, outcome="ERROR", error={"type": "UnexpectedServerRequest"}
+            )
+            raise
         except Exception as exc:
+            if self.session is not None and self.session.terminated:
+                self.store.complete_reconciliation(
+                    rec_id, thread_count=0, outcome="ERROR", error={"type": "UnexpectedServerRequest"}
+                )
+                raise UnexpectedServerRequest(self.session.incident_payload or {}) from exc
             self.store.complete_reconciliation(
                 rec_id, thread_count=0, outcome="ERROR", error={"type": type(exc).__name__}
             )
@@ -226,17 +247,20 @@ class ObserverService:
 
     async def _watch_server_requests(self) -> None:
         assert self.client is not None
-        session = ManagedAppServerSession.for_client(self.client, self.store)
+        session = self.session or ManagedAppServerSession.for_client(self.client, self.store)
+        self.session = session
         await session._incident.wait()
         raise UnexpectedServerRequest(session.incident_payload or {})
 
     async def serve(self, duration_seconds: float | None = None) -> ObserverRunResult:
         await self.start()
-        await self.initialize()
-        await self.reconcile_threads()
-        deadline = None if duration_seconds is None else asyncio.get_running_loop().time() + duration_seconds
-        watcher = asyncio.create_task(self._watch_server_requests())
+        watcher: asyncio.Task[None] | None = None
         try:
+            await self.initialize()
+            watcher = asyncio.create_task(self._watch_server_requests())
+            await asyncio.sleep(0)
+            await self.reconcile_threads()
+            deadline = None if duration_seconds is None else asyncio.get_running_loop().time() + duration_seconds
             while True:
                 if deadline is not None and asyncio.get_running_loop().time() >= deadline:
                     return await self.stop(EndKind.NORMAL.value)
@@ -251,11 +275,37 @@ class ObserverService:
                     if exc:
                         raise exc
                 await self.reconcile_threads()
+        except UnexpectedServerRequest as exc:
+            return await self._terminate_unexpected(exc)
         except TransportClosed:
+            if self.session is not None and self.session.terminated:
+                return await self._terminate_unexpected(
+                    UnexpectedServerRequest(self.session.incident_payload or {})
+                )
             return await self.stop(EndKind.TRANSPORT_EOF.value)
+        except Exception:
+            if not self._stopped:
+                await self.stop(EndKind.PROTOCOL_INCIDENT.value)
+            raise
         finally:
-            if not watcher.done():
+            if watcher is not None and not watcher.done():
                 watcher.cancel()
+
+    async def run_snapshot(self) -> dict[str, object] | ObserverRunResult:
+        await self.start()
+        try:
+            await self.initialize()
+            await asyncio.sleep(0)
+            self._raise_if_incident()
+            result = await self.reconcile_threads()
+            await self.stop(EndKind.NORMAL.value)
+            return result
+        except UnexpectedServerRequest as exc:
+            return await self._terminate_unexpected(exc)
+        except Exception:
+            if not self._stopped:
+                await self.stop(EndKind.PROTOCOL_INCIDENT.value)
+            raise
 
     async def _terminate_unexpected(self, exc: UnexpectedServerRequest) -> ObserverRunResult:
         assert self.run_id is not None
@@ -290,6 +340,8 @@ class ObserverService:
             )
         self._stopped = True
         self._end_kind = end_kind
+        if self.session is not None:
+            self.session.close()
         exit_code = None
         if self.transport is not None:
             await self.transport.stop()

@@ -118,6 +118,15 @@ def serve(mode: str) -> None:
                 _emit({"id": request_id, "error": {"code": -32001, "message": "overload"}})
                 continue
             if method == "thread/list":
+                if mode == "server_request_on_thread_list":
+                    _emit(
+                        {
+                            "id": "server-1",
+                            "method": "item/commandExecution/requestApproval",
+                            "params": {},
+                        }
+                    )
+                    continue
                 if mode == "two_pages" and pages_sent == 0:
                     pages_sent += 1
                     _emit(
@@ -191,7 +200,7 @@ def serve(mode: str) -> None:
             if method == "thread/resume":
                 thread_id = params.get("threadId")
                 loaded = globals().setdefault("_FAKE_LOADED", [])
-                if thread_id and thread_id not in loaded:
+                if mode != "resume_no_load" and thread_id and thread_id not in loaded:
                     loaded.append(thread_id)
                 _emit({"id": request_id, "result": {"thread": {"id": thread_id, "ephemeral": False, "status": {"type": "idle"}}}})
                 continue

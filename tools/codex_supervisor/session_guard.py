@@ -78,7 +78,7 @@ def mark_related_incidents(store: ObserverStore, payload: Mapping[str, Any]) -> 
     incident = '{"reason":"server_request"}'
     turn_sql = """UPDATE managed_turn_intents
         SET submission_state = 'INCIDENT', incident_json = ?
-        WHERE submission_state IN ('SUBMITTING', 'SUBMITTED')"""
+        WHERE submission_state IN ('SUBMITTING', 'SUBMITTED', 'OBSERVED')"""
     turn_params: list[object] = [incident]
     batch_sql = """UPDATE wake_batches
         SET state = 'INCIDENT', incident_json = ?
@@ -105,7 +105,7 @@ def mark_related_incidents(store: ObserverStore, payload: Mapping[str, Any]) -> 
         store.connection.execute(
             """UPDATE mutation_intents
             SET state = 'INCIDENT', request_json = ?, updated_at = datetime('now')
-            WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN')""",
+            WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED', 'SUBMITTED_UNRECONCILED')""",
             (incident,),
         )
 
@@ -140,6 +140,11 @@ class ManagedAppServerSession:
     def start(self) -> None:
         if self._task is None or self._task.done():
             self._task = asyncio.create_task(self._watch())
+
+    def close(self) -> None:
+        if self._task is not None and not self._task.done():
+            self._task.cancel()
+        self._by_client.pop(id(self.client), None)
 
     async def _watch(self) -> None:
         try:

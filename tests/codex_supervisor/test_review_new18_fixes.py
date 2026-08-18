@@ -55,7 +55,7 @@ def _verification_ready(tmp_path: Path):
         thread_origin=ThreadOrigin.NEW,
         history_trust=HistoryTrust.FRESH,
     )
-    store.attach_thread(binding_id, "thr_root")
+    store.attach_thread_for_tests(binding_id, "thr_root")
     store.mark_verification_required(binding_id)
     store.confirm_global_memory_disabled(binding_id, operator="operator")
     plant_verification_receipt(store, binding_id, snapshot, "thr_root")
@@ -148,7 +148,7 @@ def test_managed_turn_submit_rejects_persisted_submitting(tmp_path: Path) -> Non
         thread_origin=ThreadOrigin.NEW,
         history_trust=HistoryTrust.FRESH,
     )
-    store.attach_thread(binding_id, "thr_root")
+    store.attach_thread_for_tests(binding_id, "thr_root")
     store.mark_verification_required(binding_id)
     turns = ManagedTurns(store, client=None)  # type: ignore[arg-type]
     intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
@@ -301,7 +301,7 @@ def test_server_request_after_turn_start_response_terminates(tmp_path: Path) -> 
             thread_origin=ThreadOrigin.NEW,
             history_trust=HistoryTrust.FRESH,
         )
-        store.attach_thread(binding_id, "thr_canary")
+        store.attach_thread_for_tests(binding_id, "thr_canary")
         store.mark_verification_required(binding_id)
         turns = ManagedTurns(store, client)
         intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")

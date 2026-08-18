@@ -21,7 +21,7 @@ def test_prepare_attach_verify_activate_suspend_revoke(tmp_path: Path) -> None:
         history_trust=HistoryTrust.FRESH,
     )
     assert store.get(binding_id).binding_state is BindingState.PREPARED
-    store.attach_thread(binding_id, "thr_root")
+    store.attach_thread_for_tests(binding_id, "thr_root")
     store.mark_verification_required(binding_id)
     with pytest.raises(BindingError, match="memory policy"):
         store.activate(binding_id)

@@ -145,7 +145,10 @@ class ManagedTurns:
             )
             open_intent = self.mutations.get_open("turn/start", str(row["client_user_message_id"]))
             if open_intent is not None:
-                self.mutations.mark_incident(str(open_intent["intent_id"]), "server_request")
+                try:
+                    self.mutations.mark_incident(str(open_intent["intent_id"]), "server_request")
+                except Exception:
+                    pass
 
         guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
         try:
@@ -167,7 +170,10 @@ class ManagedTurns:
             )
             open_intent = self.mutations.get_open("turn/start", str(row["client_user_message_id"]))
             if open_intent is not None:
-                self.mutations.mark_uncertain(str(open_intent["intent_id"]), type(exc).__name__)
+                try:
+                    self.mutations.mark_uncertain(str(open_intent["intent_id"]), type(exc).__name__)
+                except Exception:
+                    pass
             raise ManagedTurnError("turn/start uncertain; do not retry") from exc
         turn_id = None
         result = response.get("result") if isinstance(response.get("result"), dict) else {}
@@ -195,7 +201,12 @@ class ManagedTurns:
                 )
         open_intent = self.mutations.get_open("turn/start", str(row["client_user_message_id"]))
         if open_intent is not None:
-            self.mutations.mark_submitted(str(open_intent["intent_id"]))
+            try:
+                self.mutations.mark_submitted(str(open_intent["intent_id"]))
+            except Exception:
+                row = self._row(turn_intent_id)
+                if row["submission_state"] == SubmissionState.INCIDENT.value:
+                    raise ManagedTurnError("turn/start incident; do not retry")
         return self._row(turn_intent_id)
 
     async def reconcile_uncertain(self, turn_intent_id: str) -> dict[str, Any]:

@@ -93,27 +93,39 @@ class ManagedProvisioner:
             raise ProvisioningError("thread/start already has an unresolved intent; reconcile, do not retry") from exc
 
         def _incident(_payload: object) -> None:
-            self.mutations.mark_incident(str(intent["intent_id"]), "server_request")
+            try:
+                self.mutations.mark_incident(str(intent["intent_id"]), "server_request")
+            except MutationIntentError:
+                pass
             self.bindings._record_event(binding_id, "THREAD_START_INCIDENT", {"reason": "server_request"})
 
         guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
         try:
             response = await guard.request("thread/start", params)
         except RetryRequired as exc:
-            self.mutations.mark_uncertain(str(intent["intent_id"]), "overload")
+            try:
+                self.mutations.mark_uncertain(str(intent["intent_id"]), "overload")
+            except MutationIntentError:
+                pass
             self.bindings._record_event(binding_id, "THREAD_START_UNCERTAIN", {"reason": "overload"})
             raise ProvisioningError("thread/start uncertain; do not retry automatically") from exc
         except UnexpectedServerRequest as exc:
             raise ProvisioningError("thread/start incident; do not retry automatically") from exc
         except (AppServerRpcError, TransportClosed, asyncio.TimeoutError) as exc:
-            self.mutations.mark_uncertain(str(intent["intent_id"]), type(exc).__name__)
+            try:
+                self.mutations.mark_uncertain(str(intent["intent_id"]), type(exc).__name__)
+            except MutationIntentError:
+                pass
             self.bindings._record_event(binding_id, "THREAD_START_UNCERTAIN", {"reason": type(exc).__name__})
             raise ProvisioningError("thread/start uncertain; do not retry automatically") from exc
         result = response.get("result") if isinstance(response.get("result"), dict) else {}
         thread = result.get("thread") if isinstance(result.get("thread"), dict) else {}
         thread_id = str(thread.get("id") or "")
         if not thread_id:
-            self.mutations.mark_uncertain(str(intent["intent_id"]), "missing_id")
+            try:
+                self.mutations.mark_uncertain(str(intent["intent_id"]), "missing_id")
+            except MutationIntentError:
+                pass
             self.bindings._record_event(binding_id, "THREAD_START_UNCERTAIN", {"reason": "missing_id"})
             raise ProvisioningError("thread/start returned no thread id")
         self.bindings.attach_thread(
@@ -162,7 +174,10 @@ class ManagedProvisioner:
             raise ProvisioningError("thread/resume already has an unresolved intent; reconcile, do not retry") from exc
 
         def _incident(_payload: object) -> None:
-            self.mutations.mark_incident(str(intent["intent_id"]), "server_request")
+            try:
+                self.mutations.mark_incident(str(intent["intent_id"]), "server_request")
+            except MutationIntentError:
+                pass
             self.bindings._record_event(binding_id, "THREAD_RESUME_INCIDENT", {"reason": "server_request"})
 
         guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
@@ -170,7 +185,10 @@ class ManagedProvisioner:
             await guard.request("thread/resume", {"threadId": thread_id})
         except (RetryRequired, AppServerRpcError, TransportClosed, asyncio.TimeoutError, UnexpectedServerRequest) as exc:
             if not isinstance(exc, UnexpectedServerRequest):
-                self.mutations.mark_uncertain(str(intent["intent_id"]), type(exc).__name__)
+                try:
+                    self.mutations.mark_uncertain(str(intent["intent_id"]), type(exc).__name__)
+                except MutationIntentError:
+                    pass
             self.bindings._record_event(binding_id, "THREAD_RESUME_UNCERTAIN", {"reason": type(exc).__name__})
             raise ProvisioningError("thread/resume uncertain; do not retry automatically") from exc
         self.bindings.attach_thread(

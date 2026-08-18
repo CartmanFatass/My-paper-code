@@ -76,6 +76,15 @@ class WakeRecovery:
             return ThreadWakeReadiness.IDLE_NOT_LOADED
         return ThreadWakeReadiness.UNKNOWN
 
+    async def _reconcile_resume_intent(self, intent_id: str, binding_id: str) -> ThreadWakeReadiness:
+        readiness = await self.classify(binding_id)
+        if readiness is ThreadWakeReadiness.IDLE_LOADED:
+            try:
+                self.mutations.mark_applied_reconciled(intent_id)
+            except MutationIntentError:
+                pass
+        return readiness
+
     async def resume_once(self, binding_id: str) -> ThreadWakeReadiness:
         binding = self.bindings.get(binding_id)
         if binding is None or not binding.thread_id or self.client is None:
@@ -83,28 +92,40 @@ class WakeRecovery:
         client_key = f"thread/resume:{binding.thread_id}"
         existing = self.mutations.get_open("thread/resume", client_key)
         if existing is not None:
-            return ThreadWakeReadiness.UNKNOWN
+            return await self._reconcile_resume_intent(str(existing["intent_id"]), binding_id)
         try:
             intent = self.mutations.begin("thread/resume", client_key, binding_id=binding_id)
         except MutationIntentError:
             return ThreadWakeReadiness.UNKNOWN
 
         def _incident(_payload: object) -> None:
-            self.mutations.mark_incident(str(intent["intent_id"]), "server_request")
+            try:
+                self.mutations.mark_incident(str(intent["intent_id"]), "server_request")
+            except MutationIntentError:
+                pass
 
         guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
         try:
             await guard.request("thread/resume", {"threadId": binding.thread_id})
         except asyncio.TimeoutError:
-            self.mutations.mark_uncertain(str(intent["intent_id"]), "timeout")
+            try:
+                self.mutations.mark_uncertain(str(intent["intent_id"]), "timeout")
+            except MutationIntentError:
+                pass
             return ThreadWakeReadiness.UNKNOWN
         except UnexpectedServerRequest:
             return ThreadWakeReadiness.UNKNOWN
         except (AppServerRpcError, TransportClosed):
-            self.mutations.mark_uncertain(str(intent["intent_id"]), "transport")
+            try:
+                self.mutations.mark_uncertain(str(intent["intent_id"]), "transport")
+            except MutationIntentError:
+                pass
             return ThreadWakeReadiness.UNKNOWN
-        self.mutations.mark_submitted(str(intent["intent_id"]))
-        return await self.classify(binding_id)
+        try:
+            self.mutations.mark_submitted_unreconciled(str(intent["intent_id"]))
+        except MutationIntentError:
+            return ThreadWakeReadiness.UNKNOWN
+        return await self._reconcile_resume_intent(str(intent["intent_id"]), binding_id)
 
     def _record_attempt(
         self,
@@ -172,12 +193,15 @@ class WakeRecovery:
                     turn_id = turn.get("id")
                     from datetime import datetime, timezone
 
-                    self.batches.set_state(
+                    updated = self.batches.set_state(
                         wake_batch_id,
                         state=WakeBatchState.ACTIVE.value,
                         app_server_turn_id=turn_id,
                         observed_at=datetime.now(timezone.utc).isoformat(),
+                        expected_state=state.value,
                     )
+                    if updated["state"] == WakeBatchState.INCIDENT.value:
+                        return updated
                     for message in self.batches.messages_for(wake_batch_id):
                         if message.delivery_state.value != "DELIVERED_TO_TURN":
                             self.mailbox.mark_delivered(message.message_id)
@@ -247,13 +271,17 @@ class WakeRecovery:
                 state=WakeBatchState.COMPLETED.value,
                 completion_status=status,
                 completed_at=datetime.now(timezone.utc).isoformat(),
+                expected_state=WakeBatchState.ACTIVE.value,
             )
+            if updated["state"] == WakeBatchState.INCIDENT.value:
+                return updated
             self._record_attempt(wake_batch_id, WakeAttemptOutcome.RECONCILED)
             return updated
         updated = self.batches.set_state(
             wake_batch_id,
             state=WakeBatchState.INCIDENT.value,
             incident_json='{"reason":"active_turn_missing"}',
+            expected_state=WakeBatchState.ACTIVE.value,
         )
         self._record_attempt(
             wake_batch_id,

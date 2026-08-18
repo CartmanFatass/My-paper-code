@@ -58,7 +58,7 @@ def test_activate_requires_applied_verification_receipt(tmp_path: Path) -> None:
         thread_origin=ThreadOrigin.NEW,
         history_trust=HistoryTrust.FRESH,
     )
-    store.attach_thread(binding_id, "thr_root")
+    store.attach_thread_for_tests(binding_id, "thr_root")
     store.mark_verification_required(binding_id)
     store.confirm_global_memory_disabled(binding_id, operator="operator")
     with pytest.raises(BindingError, match="verification"):
@@ -82,7 +82,7 @@ def test_cli_activate_cannot_bypass_verification(tmp_path: Path, repo_root: Path
         thread_origin=ThreadOrigin.NEW,
         history_trust=HistoryTrust.FRESH,
     )
-    bindings.attach_thread(binding_id, "thr_cli")
+    bindings.attach_thread_for_tests(binding_id, "thr_cli")
     bindings.mark_verification_required(binding_id)
     bindings.confirm_global_memory_disabled(binding_id, operator="operator")
     observer.close()
@@ -118,7 +118,7 @@ def test_command_gateway_rejects_unrecorded_final_item(tmp_path: Path) -> None:
         thread_origin=ThreadOrigin.NEW,
         history_trust=HistoryTrust.FRESH,
     )
-    store.attach_thread(binding_id, "thr_cmd")
+    store.attach_thread_for_tests(binding_id, "thr_cmd")
     store.mark_verification_required(binding_id)
     gateway = CommandGateway(store, seeded["bridge"])
     with pytest.raises(CommandGatewayError, match="unrecorded"):
@@ -140,7 +140,7 @@ def test_command_gateway_rejects_turn_thread_mismatch(tmp_path: Path) -> None:
         thread_origin=ThreadOrigin.NEW,
         history_trust=HistoryTrust.FRESH,
     )
-    store.attach_thread(binding_id, "thr_cmd")
+    store.attach_thread_for_tests(binding_id, "thr_cmd")
     store.mark_verification_required(binding_id)
     gateway = CommandGateway(store, seeded["bridge"])
     seq = record_completed_agent_item(
@@ -436,7 +436,7 @@ def test_resume_timeout_is_not_resubmitted(tmp_path: Path) -> None:
         first = await recovery.resume_once(seeded["portfolio_binding_id"])
         second = await recovery.resume_once(seeded["portfolio_binding_id"])
         assert first.value == "UNKNOWN"
-        assert second.value == "UNKNOWN"
+        assert second.value == "IDLE_NOT_LOADED"
         open_intents = seeded["supervisor"].connection.execute(
             "SELECT COUNT(*) FROM mutation_intents WHERE method = 'thread/resume'"
         ).fetchone()[0]

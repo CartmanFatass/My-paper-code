@@ -70,7 +70,7 @@ def activate_binding(store: BindingStore, snapshot, tmp_path: Path, thread_id: s
         thread_origin=ThreadOrigin.NEW,
         history_trust=HistoryTrust.FRESH,
     )
-    store.attach_thread(binding_id, thread_id)
+    store.attach_thread_for_tests(binding_id, thread_id)
     store.mark_verification_required(binding_id)
     store.confirm_global_memory_disabled(binding_id, operator="operator")
     plant_verification_receipt(store, binding_id, snapshot, thread_id)

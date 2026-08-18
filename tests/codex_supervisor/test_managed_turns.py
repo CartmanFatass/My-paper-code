@@ -35,7 +35,7 @@ def test_submit_once_and_overload_is_uncertain(tmp_path: Path) -> None:
             thread_origin=ThreadOrigin.NEW,
             history_trust=HistoryTrust.FRESH,
         )
-        store.attach_thread(binding_id, "thr_canary")
+        store.attach_thread_for_tests(binding_id, "thr_canary")
         store.mark_verification_required(binding_id)
         config = make_observer_config(tmp_path)
         transport = AppServerTransport(
@@ -85,7 +85,7 @@ def test_manual_turn_requires_active(tmp_path: Path) -> None:
         thread_origin=ThreadOrigin.NEW,
         history_trust=HistoryTrust.FRESH,
     )
-    store.attach_thread(binding_id, "thr_x")
+    store.attach_thread_for_tests(binding_id, "thr_x")
     config = make_observer_config(tmp_path)
     transport = AppServerTransport(
         write_fake_codex(tmp_path),

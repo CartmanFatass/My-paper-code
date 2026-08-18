@@ -134,10 +134,10 @@ def main(argv: list[str] | None = None) -> int:
 
         async def _run() -> int:
             if args.command == "snapshot":
-                await service.start()
-                await service.initialize()
-                result = await service.reconcile_threads()
-                await service.stop("NORMAL")
+                result = await service.run_snapshot()
+                if hasattr(result, "end_kind"):
+                    print(json.dumps({"run_id": result.run_id, "end_kind": result.end_kind}, indent=2))
+                    return 0 if result.end_kind == "NORMAL" else 1
                 print(json.dumps(result, indent=2))
                 return 0
             if args.command == "serve":

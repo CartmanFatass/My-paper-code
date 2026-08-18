@@ -22,7 +22,7 @@ def _ready_binding(tmp_path: Path):
         thread_origin=ThreadOrigin.NEW,
         history_trust=HistoryTrust.FRESH,
     )
-    store.attach_thread(binding_id, "thr_cmd")
+    store.attach_thread_for_tests(binding_id, "thr_cmd")
     store.mark_verification_required(binding_id)
     return seeded, store, CommandGateway(store, seeded["bridge"])
 

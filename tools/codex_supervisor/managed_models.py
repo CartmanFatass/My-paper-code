@@ -59,6 +59,7 @@ class CommandValidationState(str, Enum):
     REJECTED = "REJECTED"
     APPLIED = "APPLIED"
     DUPLICATE = "DUPLICATE"
+    INCIDENT = "INCIDENT"
 
 
 class ManagedActionKind(str, Enum):
