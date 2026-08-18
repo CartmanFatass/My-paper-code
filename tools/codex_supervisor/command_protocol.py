@@ -56,4 +56,20 @@ def extract_managed_command(text: str) -> dict[str, Any] | None:
         raise CommandProtocolError("unsupported schema_version")
     if payload.get("packet_kind") != "MANAGED_ACTOR_COMMAND":
         raise CommandProtocolError("packet_kind must be MANAGED_ACTOR_COMMAND")
+    if kind is ManagedActionKind.CONTEXT_REANCHOR_ACK:
+        expected = payload.get("expected")
+        if not isinstance(expected, Mapping):
+            raise CommandProtocolError("CONTEXT_REANCHOR_ACK requires expected currentness fields")
+        required = ("checkpoint_id", "state_version", "epoch_id", "epoch_revision")
+        missing = [key for key in required if key not in expected]
+        if missing:
+            raise CommandProtocolError(f"CONTEXT_REANCHOR_ACK missing {missing}")
     return payload
+
+
+def extract_from_completed_item(*, item_type: str, lifecycle: str, text: str) -> dict[str, Any] | None:
+    if lifecycle != "COMPLETED":
+        raise CommandProtocolError("command source turn/item is not completed")
+    if item_type != "agentMessage":
+        raise CommandProtocolError("command source must be a completed agentMessage")
+    return extract_managed_command(text)

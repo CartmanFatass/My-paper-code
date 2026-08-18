@@ -130,7 +130,18 @@ def serve(mode: str) -> None:
                     continue
                 _emit({"id": request_id, "result": {"data": [{"id": "thr_b", "preview": "two"}]}})
                 continue
-            _emit({"id": request_id, "result": {"thread": {"id": params.get("threadId"), "ephemeral": False}}})
+            status = os.environ.get("FAKE_THREAD_STATUS", "idle")
+            thread = {
+                "id": params.get("threadId"),
+                "ephemeral": False,
+                "status": {"type": status},
+            }
+            if params.get("includeTurns"):
+                thread["turns"] = list(globals().setdefault("_FAKE_TURNS", []))
+            _emit({"id": request_id, "result": {"thread": thread}})
+            continue
+        if method == "thread/name/set":
+            _emit({"id": request_id, "result": {}})
             continue
         if method in {"thread/start", "turn/start", "thread/resume", "thread/fork", "turn/steer", "turn/interrupt", "thread/compact/start", "review/start"}:
             if mode == "mutation_overload":
@@ -149,9 +160,20 @@ def serve(mode: str) -> None:
                 )
                 _emit({"method": "thread/started", "params": {"thread": {"id": thread_id, "ephemeral": ephemeral}}})
                 continue
+            if method == "thread/resume":
+                thread_id = params.get("threadId")
+                _emit({"id": request_id, "result": {"thread": {"id": thread_id, "ephemeral": False}}})
+                continue
             if method == "turn/start":
                 turn_id = "turn_canary"
                 thread_id = params.get("threadId")
+                globals().setdefault("_FAKE_TURNS", []).append(
+                    {
+                        "id": turn_id,
+                        "clientUserMessageId": params.get("clientUserMessageId"),
+                        "status": "inProgress",
+                    }
+                )
                 _emit({"id": request_id, "result": {"turn": {"id": turn_id, "status": "inProgress"}}})
                 _emit({"method": "turn/started", "params": {"threadId": thread_id, "turn": {"id": turn_id}}})
                 if mode == "canary_failed":

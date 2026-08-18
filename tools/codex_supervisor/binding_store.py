@@ -64,6 +64,13 @@ class BindingStore:
                 (binding_id, event_kind, json.dumps(payload, ensure_ascii=False), _now()),
             )
 
+    def list_bindings(self) -> list[ManagedActorBinding]:
+        with self.store._lock:
+            rows = self.store.connection.execute(
+                "SELECT * FROM managed_actor_bindings ORDER BY created_at, binding_id"
+            ).fetchall()
+            return [_row_to_binding(row) for row in rows]
+
     def get(self, binding_id: str) -> ManagedActorBinding | None:
         with self.store._lock:
             row = self.store.connection.execute(

@@ -31,6 +31,33 @@ def _parser() -> argparse.ArgumentParser:
     timeline = sub.add_parser("timeline")
     timeline.add_argument("--thread-id", required=True)
     timeline.add_argument("--out")
+    managed = sub.add_parser("managed")
+    managed.add_argument("--operator")
+    managed_sub = managed.add_subparsers(dest="managed_command", required=True)
+    managed_sub.add_parser("list")
+    show = managed_sub.add_parser("show")
+    show.add_argument("--binding-id", required=True)
+    create = managed_sub.add_parser("create")
+    create.add_argument("--actor-context-id", required=True)
+    create.add_argument("--semantic-state", required=True)
+    create.add_argument("--confirm-global-memory-disabled", action="store_true")
+    adopt = managed_sub.add_parser("adopt")
+    adopt.add_argument("--actor-context-id", required=True)
+    adopt.add_argument("--semantic-state", required=True)
+    adopt.add_argument("--thread-id", required=True)
+    adopt.add_argument("--allow-existing-history", action="store_true")
+    adopt.add_argument("--confirm-history-nonauthoritative", action="store_true")
+    verify = managed_sub.add_parser("verify")
+    verify.add_argument("--binding-id", required=True)
+    activate = managed_sub.add_parser("activate")
+    activate.add_argument("--binding-id", required=True)
+    turn = managed_sub.add_parser("turn")
+    turn.add_argument("--binding-id", required=True)
+    turn.add_argument("--text", required=True)
+    suspend = managed_sub.add_parser("suspend")
+    suspend.add_argument("--binding-id", required=True)
+    revoke = managed_sub.add_parser("revoke")
+    revoke.add_argument("--binding-id", required=True)
     return parser
 
 
@@ -56,6 +83,8 @@ def main(argv: list[str] | None = None) -> int:
             else:
                 print(rendered, end="")
             return 0
+        if args.command == "managed":
+            return _managed_command(args, repo_root, store)
         binary = resolve_codex_binary(args.codex_bin)
         service = ObserverService(config, binary=binary, store=store)
 
@@ -80,3 +109,45 @@ def main(argv: list[str] | None = None) -> int:
         return asyncio.run(_run())
     finally:
         store.close()
+
+
+def _require_operator(args: argparse.Namespace) -> str:
+    operator = str(getattr(args, "operator", None) or "").strip()
+    if not operator:
+        raise SystemExit("managed mutating commands require --operator")
+    return operator
+
+
+def _managed_command(args: argparse.Namespace, repo_root: Path, store: ObserverStore) -> int:
+    from .binding_store import BindingStore
+
+    bindings = BindingStore(store)
+    if args.managed_command == "list":
+        rows = [
+            {
+                "binding_id": item.binding_id,
+                "actor_kind": item.actor_kind.value,
+                "state": item.binding_state.value,
+                "thread_id": item.thread_id,
+            }
+            for item in bindings.list_bindings()
+        ]
+        print(json.dumps(rows, indent=2))
+        return 0
+    if args.managed_command == "show":
+        item = bindings.get(args.binding_id)
+        if item is None:
+            raise SystemExit("unknown binding")
+        print(json.dumps(item.__dict__, indent=2, default=str))
+        return 0
+    operator = _require_operator(args)
+    if args.managed_command == "suspend":
+        print(json.dumps({"binding_id": bindings.suspend(args.binding_id).binding_id, "operator": operator}))
+        return 0
+    if args.managed_command == "revoke":
+        print(json.dumps({"binding_id": bindings.revoke(args.binding_id).binding_id, "operator": operator}))
+        return 0
+    if args.managed_command == "activate":
+        print(json.dumps({"binding_id": bindings.activate(args.binding_id).binding_id, "operator": operator}))
+        return 0
+    raise SystemExit(f"managed {args.managed_command} requires a live App Server session and is not run from doctor tests")

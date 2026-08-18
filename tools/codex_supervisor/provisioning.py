@@ -116,3 +116,38 @@ class ManagedProvisioner:
             if str(read_thread.get("id") or "") != thread_id:
                 raise ProvisioningError("thread/read did not return the created thread")
         return thread_id
+
+    async def adopt_existing_thread(
+        self,
+        snapshot: ManagedActorSnapshot,
+        *,
+        thread_id: str,
+        repo_root: Path,
+        operator: str,
+        allow_existing_history: bool,
+        confirm_history_nonauthoritative: bool,
+    ) -> str:
+        if not allow_existing_history or not confirm_history_nonauthoritative:
+            raise ProvisioningError("adoption requires explicit history flags")
+        if self.client is None:
+            raise ProvisioningError("client required to adopt a thread")
+        read = await self.client.read_thread(thread_id, include_turns=False)
+        thread = read.get("thread") if isinstance(read.get("thread"), dict) else {}
+        status = thread.get("status")
+        status_type = status.get("type") if isinstance(status, dict) else status
+        if status_type == "active":
+            raise ProvisioningError("cannot adopt an in-progress thread")
+        binding_id = self.prepare(
+            snapshot,
+            repo_root=repo_root,
+            operator=operator,
+            thread_origin=ThreadOrigin.ADOPTED_EXISTING,
+            history_trust=HistoryTrust.LEGACY_UNTRUSTED_HISTORY,
+        )
+        try:
+            await self.client.request("thread/resume", {"threadId": thread_id})
+        except (RetryRequired, AppServerRpcError, TransportClosed) as exc:
+            self.bindings._record_event(binding_id, "THREAD_RESUME_UNCERTAIN", {"reason": type(exc).__name__})
+            raise ProvisioningError("thread/resume uncertain; do not retry automatically") from exc
+        self.bindings.attach_thread(binding_id, thread_id)
+        return binding_id

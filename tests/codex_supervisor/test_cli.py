@@ -29,7 +29,10 @@ def test_doctor_does_not_launch_app_server(tmp_path: Path, repo_root: Path, caps
     payload = json.loads(capsys.readouterr().out)
     assert payload["observer_only"] is True
     assert payload["automatic_turn_start_enabled"] is False
-    assert payload["managed_actor_binding_enabled"] is False
+    assert payload["managed_actor_binding_enabled"] is True
+    assert payload["managed_actor_hosting_enabled"] is True
+    assert payload["automatic_wake_enabled"] is False
+    assert payload["mailbox_enabled"] is False
     assert payload["semantic_ledger_mutation_enabled"] is False
     assert payload["unexpected_server_request_policy"] == "terminate"
     assert payload["codex_version"].startswith("codex-fake")

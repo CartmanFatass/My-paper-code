@@ -30,17 +30,31 @@ def collect_doctor(
         schema_dir = config.runtime_home / "schema"
         schema_present = schema_dir.is_dir() and any(schema_dir.rglob("capture-manifest.json"))
     observer_schema = None
+    active_bindings = 0
     db_path = config.runtime_home / "state.sqlite3"
     if db_path.is_file():
         connection = connect(db_path)
         observer_schema = int(connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] or 0)
+        try:
+            active_bindings = int(
+                connection.execute(
+                    "SELECT COUNT(*) FROM managed_actor_bindings WHERE binding_state = 'ACTIVE'"
+                ).fetchone()[0]
+            )
+        except Exception:
+            active_bindings = 0
         connection.close()
     return {
         "status": "OK" if binary_error is None else "DEGRADED",
         "phase": 1,
         "observer_only": True,
         "automatic_turn_start_enabled": False,
-        "managed_actor_binding_enabled": False,
+        "automatic_wake_enabled": False,
+        "mailbox_enabled": False,
+        "managed_actor_binding_enabled": True,
+        "managed_actor_hosting_enabled": True,
+        "allowed_actor_kinds": ["OPERATIONAL_ROOT", "PORTFOLIO"],
+        "active_binding_count": active_bindings,
         "codex_binary": str(binary) if binary else None,
         "codex_version": version,
         "binary_error": binary_error,
