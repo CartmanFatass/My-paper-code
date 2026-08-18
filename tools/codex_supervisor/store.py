@@ -430,6 +430,42 @@ class ObserverStore:
             ).fetchone()
             return dict(row) if row is not None else None
 
+    def get_command_receipt(self, command_id: str) -> dict[str, Any] | None:
+        with self._lock:
+            row = self.connection.execute(
+                "SELECT * FROM managed_command_receipts WHERE command_id = ?",
+                (command_id,),
+            ).fetchone()
+            return dict(row) if row is not None else None
+
+    def record_command_receipt(
+        self,
+        *,
+        command_id: str,
+        effect_kind: str,
+        result: Mapping[str, Any],
+        semantic_ref: str | None = None,
+    ) -> str:
+        existing = self.get_command_receipt(command_id)
+        if existing is not None:
+            return str(existing["receipt_id"])
+        receipt_id = _new_id("rcpt")
+        with self._lock, self.connection:
+            self.connection.execute(
+                """INSERT INTO managed_command_receipts (
+                    receipt_id, command_id, effect_kind, semantic_ref, result_json, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?)""",
+                (
+                    receipt_id,
+                    command_id,
+                    effect_kind,
+                    semantic_ref,
+                    canonical_json(dict(result)),
+                    _now(),
+                ),
+            )
+        return receipt_id
+
     def events_for_thread(self, thread_id: str) -> list[dict[str, Any]]:
         with self._lock:
             rows = self.connection.execute(

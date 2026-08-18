@@ -1,0 +1,28 @@
+import pytest
+
+from tools.codex_supervisor.command_protocol import CommandProtocolError, extract_managed_command
+
+
+def test_extracts_stage3_command() -> None:
+    text = """agent prose
+<HMASD_MANAGED_ACTOR_COMMAND_V1>
+{"schema_version":"1.0","packet_kind":"MANAGED_ACTOR_COMMAND","action_kind":"CONTEXT_REANCHOR_ACK","expected":{"checkpoint_id":"ctx_1"},"payload":{}}
+</HMASD_MANAGED_ACTOR_COMMAND_V1>
+"""
+    command = extract_managed_command(text)
+    assert command["action_kind"] == "CONTEXT_REANCHOR_ACK"
+
+
+def test_rejects_identity_keys_and_stage4_actions() -> None:
+    with pytest.raises(CommandProtocolError, match="forbidden"):
+        extract_managed_command(
+            """<HMASD_MANAGED_ACTOR_COMMAND_V1>
+{"schema_version":"1.0","packet_kind":"MANAGED_ACTOR_COMMAND","action_kind":"NO_CONTROL_ACTION","binding_id":"x"}
+</HMASD_MANAGED_ACTOR_COMMAND_V1>"""
+        )
+    with pytest.raises(CommandProtocolError, match="Stage 3"):
+        extract_managed_command(
+            """<HMASD_MANAGED_ACTOR_COMMAND_V1>
+{"schema_version":"1.0","packet_kind":"MANAGED_ACTOR_COMMAND","action_kind":"MAILBOX_ACK","payload":{}}
+</HMASD_MANAGED_ACTOR_COMMAND_V1>"""
+        )

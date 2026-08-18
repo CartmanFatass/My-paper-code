@@ -26,7 +26,18 @@ managed_actor_binding_enabled=false
 observer_schema_version=1
 ```
 
-Synthetic observer tests: 73 passed.
+Synthetic observer + Stage 3 tests: 94 passed.
+
+Synthetic Stage 3 implemented without live App Server:
+
+```text
+S3-2 semantic bridge
+S3-3 binding store / identity
+S3-4 memory-off operator confirmation
+S3-5 fresh thread provisioning against fake server
+S3-6 managed context injection
+S3-8 command envelope parser (Stage 3 actions only)
+```
 
 Missing, not invented:
 
