@@ -6,7 +6,7 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 SCHEMA_STATEMENTS = (
     """
@@ -145,6 +145,111 @@ SCHEMA_STATEMENTS = (
         error_json TEXT
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS managed_actor_bindings (
+        binding_id TEXT PRIMARY KEY,
+        actor_context_id TEXT NOT NULL UNIQUE,
+        actor_kind TEXT NOT NULL,
+        semantic_scope_key TEXT NOT NULL,
+        direction_id TEXT,
+        thread_id TEXT UNIQUE,
+        thread_origin TEXT NOT NULL,
+        history_trust TEXT NOT NULL,
+        binding_state TEXT NOT NULL,
+        memory_policy_state TEXT NOT NULL,
+        repo_root TEXT NOT NULL,
+        thread_cwd TEXT NOT NULL,
+        created_by_operator TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        thread_created_at TEXT,
+        verified_at TEXT,
+        activated_at TEXT,
+        suspended_at TEXT,
+        revoked_at TEXT,
+        last_verified_at TEXT,
+        last_thread_status TEXT,
+        last_turn_id TEXT
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS managed_binding_events (
+        binding_event_seq INTEGER PRIMARY KEY AUTOINCREMENT,
+        binding_id TEXT NOT NULL,
+        event_kind TEXT NOT NULL,
+        payload_json TEXT NOT NULL,
+        created_at TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS managed_turn_intents (
+        turn_intent_id TEXT PRIMARY KEY,
+        binding_id TEXT NOT NULL,
+        intent_kind TEXT NOT NULL,
+        client_user_message_id TEXT NOT NULL UNIQUE,
+        checkpoint_id TEXT,
+        expected_state_version INTEGER,
+        expected_epoch_id TEXT,
+        expected_epoch_revision INTEGER,
+        input_ref TEXT NOT NULL,
+        submission_state TEXT NOT NULL,
+        app_server_thread_id TEXT NOT NULL,
+        app_server_turn_id TEXT,
+        app_server_request_id TEXT,
+        prepared_at TEXT NOT NULL,
+        submitted_at TEXT,
+        observed_at TEXT,
+        completed_at TEXT,
+        completion_status TEXT,
+        incident_json TEXT
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS managed_context_injections (
+        injection_id TEXT PRIMARY KEY,
+        turn_intent_id TEXT NOT NULL,
+        binding_id TEXT NOT NULL,
+        checkpoint_id TEXT,
+        state_version INTEGER,
+        epoch_id TEXT,
+        epoch_revision INTEGER,
+        canonical_refs_json TEXT NOT NULL,
+        open_obligation_ids_json TEXT NOT NULL,
+        mailbox_message_ids_json TEXT NOT NULL,
+        input_byte_length INTEGER NOT NULL,
+        created_at TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS managed_actor_commands (
+        command_id TEXT PRIMARY KEY,
+        binding_id TEXT NOT NULL,
+        thread_id TEXT NOT NULL,
+        turn_id TEXT NOT NULL,
+        raw_message_seq INTEGER NOT NULL,
+        command_kind TEXT NOT NULL,
+        expected_checkpoint_id TEXT,
+        expected_state_version INTEGER,
+        expected_epoch_id TEXT,
+        expected_epoch_revision INTEGER,
+        payload_json TEXT NOT NULL,
+        validation_state TEXT NOT NULL,
+        rejection_reason TEXT,
+        created_at TEXT NOT NULL,
+        validated_at TEXT,
+        applied_at TEXT,
+        UNIQUE(binding_id, turn_id, raw_message_seq)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS managed_command_receipts (
+        receipt_id TEXT PRIMARY KEY,
+        command_id TEXT NOT NULL UNIQUE,
+        effect_kind TEXT NOT NULL,
+        semantic_ref TEXT,
+        result_json TEXT NOT NULL,
+        created_at TEXT NOT NULL
+    )
+    """,
 )
 
 REQUIRED_TABLES = (
@@ -158,6 +263,12 @@ REQUIRED_TABLES = (
     "item_snapshots",
     "server_requests",
     "reconciliation_runs",
+    "managed_actor_bindings",
+    "managed_binding_events",
+    "managed_turn_intents",
+    "managed_context_injections",
+    "managed_actor_commands",
+    "managed_command_receipts",
 )
 
 

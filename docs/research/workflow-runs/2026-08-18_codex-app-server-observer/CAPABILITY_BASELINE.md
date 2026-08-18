@@ -5,7 +5,10 @@ phase_0_gate_commit=ad91385d6defbc6fb786ea5e75802b556c5d961e
 phase_0_gate_status=PASSED
 phase_1_safe_boundary=synthetic_observer_foundation_complete
 phase_1_docs_schema_alignment=initialize+initialized+thread/list+thread/read+turn/start+turn/completed
-live_app_server_canary=not started
+live_app_server_canary=deferred_until_quota_restore
+task_15=deferred
+task_16=deferred
+observer_commit=136d2904
 experimentalApi=disabled
 codex_binary=C:\Users\fires\AppData\Roaming\npm\codex.cmd
 codex_version=codex-cli 0.147.0
@@ -51,7 +54,8 @@ only for threads started or resumed through its own App Server connection.
 Phase 1 does not auto-resume existing threads.
 
 Live `codex app-server` child handshake, live snapshot, and live canary
-have **not** been started. That remains Task 15.
+have **not** been started. Tasks 15 and 16 are deferred until Codex quota
+is restored. See `PHASE_1_LIVE_AND_REVIEW_DEFERRED.md`.
 
 ## Official documentation pages used
 

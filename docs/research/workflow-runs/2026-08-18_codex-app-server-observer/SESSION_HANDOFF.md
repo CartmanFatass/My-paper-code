@@ -7,8 +7,11 @@ date=2026-08-18
 branch=aggressive
 head_commit=ad91385d6defbc6fb786ea5e75802b556c5d961e
 phase_0_gate=PASSED
-phase_1_status=synthetic_foundation_uncommitted
-live_app_server_canary=not started
+phase_1_status=synthetic_foundation_pushed
+observer_commit=136d2904
+live_app_server_canary=deferred_until_quota_restore
+task_15=deferred
+task_16=deferred
 openai_docs_mcp=user_level_installed_healthy
 ```
 
@@ -249,11 +252,11 @@ Tests must use `tmp_path` and never write that directory.
 | 12 | Restart / EOF recovery | DONE locally, uncommitted |
 | 13 | CLI / doctor / PS 5.1 operators | DONE locally; PS 5.1 test script passed |
 | 14 | Reliability / negative tests | DONE locally, uncommitted |
-| 15 | Live capability + canary | not started |
-| 16 | Independent review + final gate | not started |
+| 15 | Live capability + canary | deferred until Codex quota is restored |
+| 16 | Independent review + final gate | deferred; do together with Task 15 |
 
-Synthetic foundation (Tasks 1–14) is accepted locally. Resume at **Task 15**
-only when the user explicitly asks for a live App Server snapshot/canary.
+Synthetic foundation (Tasks 1–14) is pushed as `136d2904`. Tasks 15 and 16
+wait for quota. Stage 3/4 live canaries wait with them.
 
 ---
 
@@ -353,11 +356,11 @@ First query after restart:
 
 ## What the next session should do
 
-1. Ask before committing the observer slice.
-2. Do not run Task 15 live snapshot/canary unless the user explicitly asks.
-3. If committing, include only the observer slice plus the Phase 0
-   acceptance note if still untracked. Do not commit science cards or the
-   unrelated dirty tree.
+1. Continue synthetic Stage 3/4 from
+   `docs/research/workflow-runs/2026-08-18_codex-managed-actors/`.
+2. Do not run Task 15, Task 16, or any live App Server canary until the
+   user says Codex quota is restored.
+3. Do not invent `LIVE_CANARY_REPORT.md` or `PHASE_1_ACCEPTANCE.md`.
 
 ---
 

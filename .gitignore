@@ -166,6 +166,8 @@ test*.py
 !docs/research/workflow-runs/2026-08-15_codex-semantic-mvp/**/*.md
 !docs/research/workflow-runs/2026-08-18_codex-app-server-observer/
 !docs/research/workflow-runs/2026-08-18_codex-app-server-observer/**/*.md
+!docs/research/workflow-runs/2026-08-18_codex-managed-actors/
+!docs/research/workflow-runs/2026-08-18_codex-managed-actors/**/*.md
 !docs/project/decisions/
 !docs/project/decisions/**/*.md
 *.doc
