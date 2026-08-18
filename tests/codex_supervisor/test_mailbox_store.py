@@ -24,15 +24,24 @@ def test_enqueue_idempotent_and_transitions(tmp_path: Path) -> None:
         source_event_key="op:attn:1",
         target_actor_context_id=seeded["portfolio"].actor_context_id,
         message_kind=MailboxMessageKind.OPERATOR_ATTENTION_REQUEST,
-        subject_ref="other",
-        payload_ref="other",
+        subject_ref="subj",
+        payload_ref="ref",
     )
     assert first.message_id == second.message_id
+    with pytest.raises(MailboxStoreError, match="conflicts"):
+        mailbox.enqueue(
+            source_system=MailboxSourceSystem.OPERATOR.value,
+            source_event_key="op:attn:1",
+            target_actor_context_id=seeded["portfolio"].actor_context_id,
+            message_kind=MailboxMessageKind.OPERATOR_ATTENTION_REQUEST,
+            subject_ref="other",
+            payload_ref="other",
+        )
     eligible = mailbox.mark_eligible(first.message_id)
     assert eligible.delivery_state is DeliveryState.ELIGIBLE
     batched = mailbox.mark_batched(first.message_id)
     assert batched.delivery_state is DeliveryState.BATCHED
-    with pytest.raises(MailboxStoreError, match="delivered or uncertain"):
+    with pytest.raises(MailboxStoreError, match="delivered"):
         mailbox.acknowledge(first.message_id)
     delivered = mailbox.mark_delivered(first.message_id)
     assert delivered.delivery_state is DeliveryState.DELIVERED_TO_TURN

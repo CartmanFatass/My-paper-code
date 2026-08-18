@@ -143,6 +143,11 @@ def serve(mode: str) -> None:
             _emit({"id": request_id, "result": {"thread": thread}})
             continue
         if method == "thread/loaded/list":
+            if mode == "loaded_list_error":
+                _emit({"id": request_id, "error": {"code": -32000, "message": "loaded list failed"}})
+                continue
+            if mode == "loaded_list_hang":
+                continue
             configured = os.environ.get("FAKE_LOADED_THREADS")
             if configured is not None:
                 data = [item for item in configured.split(",") if item]
@@ -150,10 +155,22 @@ def serve(mode: str) -> None:
                 data = list(globals().setdefault("_FAKE_LOADED", ["thr_canary"]))
             _emit({"id": request_id, "result": {"data": data}})
             continue
-        if method == "thread/name/set":
-            _emit({"id": request_id, "result": {}})
-            continue
         if method in {"thread/start", "turn/start", "thread/resume", "thread/fork", "turn/steer", "turn/interrupt", "thread/compact/start", "review/start"}:
+            if mode == "mutation_hang" or (
+                (mode == "turn_start_hang" and method == "turn/start")
+                or (mode == "resume_hang" and method == "thread/resume")
+                or (mode == "thread_start_hang" and method == "thread/start")
+            ):
+                continue
+            if mode == "server_request_on_turn" and method == "turn/start":
+                _emit(
+                    {
+                        "id": "server-1",
+                        "method": "item/commandExecution/requestApproval",
+                        "params": {"threadId": params.get("threadId")},
+                    }
+                )
+                continue
             if mode == "mutation_overload":
                 _emit({"id": request_id, "error": {"code": -32001, "message": "overload"}})
                 continue

@@ -46,10 +46,15 @@ def collect_doctor(
         connection.close()
     return {
         "status": "OK" if binary_error is None else "DEGRADED",
-        "phase": 1,
+        "synthetic_stage": 4,
+        "live_wake_accepted": False,
+        "canonical_artifact_write_enabled": False,
+        "semantic_authority_mutation_enabled": False,
+        "semantic_delivery_mutation_enabled": True,
+        "automatic_wake_code_present": True,
+        "automatic_wake_live_accepted": False,
         "observer_only": False,
         "automatic_turn_start_enabled": False,
-        "automatic_wake_enabled": True,
         "mailbox_enabled": True,
         "automatic_turn_steer_enabled": False,
         "automatic_approval_enabled": False,
@@ -65,6 +70,5 @@ def collect_doctor(
         "runtime_home_external": True,
         "runtime_home": str(config.runtime_home),
         "observer_schema_version": observer_schema or SCHEMA_VERSION,
-        "semantic_ledger_mutation_enabled": False,
         "unexpected_server_request_policy": config.unexpected_server_request_policy,
     }

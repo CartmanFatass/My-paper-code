@@ -5,6 +5,8 @@ from __future__ import annotations
 import uuid
 from datetime import datetime, timezone
 
+from dataclasses import dataclass
+
 from .mailbox_models import (
     MAX_WAKE_INPUT_BYTES,
     MAX_WAKE_MESSAGES,
@@ -22,6 +24,13 @@ class WakeBatchError(ValueError):
     """Raised when a wake batch cannot be prepared."""
 
 
+@dataclass(frozen=True)
+class WakeEnvelope:
+    text: str
+    included_message_ids: tuple[str, ...]
+    excluded_message_ids: tuple[str, ...]
+
+
 def wake_client_user_message_id(wake_batch_id: str) -> str:
     return f"hmasd-wake:{wake_batch_id}"
 
@@ -35,7 +44,7 @@ def build_wake_text(
     *,
     wake_batch_id: str,
     messages: list[MailboxMessage],
-) -> str:
+) -> WakeEnvelope:
     lines = [
         WAKE_ENVELOPE_HEADER,
         "",
@@ -77,7 +86,11 @@ def build_wake_text(
     encoded = text.encode("utf-8")
     if len(encoded) > MAX_WAKE_INPUT_BYTES:
         text = encoded[:MAX_WAKE_INPUT_BYTES].decode("utf-8", errors="ignore")
-    return text
+    included_ids = tuple(item.message_id for item in included)
+    excluded_ids = tuple(
+        item.message_id for item in messages if item.message_id not in set(included_ids)
+    )
+    return WakeEnvelope(text=text, included_message_ids=included_ids, excluded_message_ids=excluded_ids)
 
 
 class WakeBatchStore:
@@ -88,7 +101,7 @@ class WakeBatchStore:
     def open_batch_for_binding(self, binding_id: str) -> dict[str, object] | None:
         row = self.store.connection.execute(
             """SELECT * FROM wake_batches
-            WHERE binding_id = ? AND state IN ('PREPARED', 'SUBMITTED', 'SUBMISSION_UNCERTAIN', 'ACTIVE')
+            WHERE binding_id = ? AND state IN ('PREPARED', 'SUBMITTING', 'SUBMITTED', 'SUBMISSION_UNCERTAIN', 'ACTIVE')
             ORDER BY prepared_at DESC""",
             (binding_id,),
         ).fetchone()
@@ -120,6 +133,8 @@ class WakeBatchStore:
         thread_id: str,
         snapshot: ManagedActorSnapshot,
         messages: list[MailboxMessage],
+        lease_generation: int | None = None,
+        lease_holder: str | None = None,
     ) -> dict[str, object]:
         existing = self.open_batch_for_binding(binding_id)
         if existing is not None:
@@ -132,12 +147,17 @@ class WakeBatchStore:
         )[:MAX_WAKE_MESSAGES]
         wake_batch_id = f"wake_{uuid.uuid4().hex}"
         client_id = wake_client_user_message_id(wake_batch_id)
+        envelope = build_wake_text(snapshot, wake_batch_id=wake_batch_id, messages=ordered)
+        included = [item for item in ordered if item.message_id in set(envelope.included_message_ids)]
+        if not included:
+            raise WakeBatchError("wake envelope could not include any message")
         now = _now()
         with self.store._lock, self.store.connection:
             self.store.connection.execute(
                 """INSERT INTO wake_batches (
-                    wake_batch_id, binding_id, thread_id, state, client_user_message_id, prepared_at
-                ) VALUES (?, ?, ?, ?, ?, ?)""",
+                    wake_batch_id, binding_id, thread_id, state, client_user_message_id,
+                    prepared_at, lease_generation, lease_holder
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
                     wake_batch_id,
                     binding_id,
@@ -145,30 +165,33 @@ class WakeBatchStore:
                     WakeBatchState.PREPARED.value,
                     client_id,
                     now,
+                    lease_generation,
+                    lease_holder,
                 ),
             )
-            for ordinal, message in enumerate(ordered):
+            for ordinal, message in enumerate(included):
                 self.store.connection.execute(
                     """INSERT INTO wake_batch_messages (wake_batch_id, message_id, ordinal)
                     VALUES (?, ?, ?)""",
                     (wake_batch_id, message.message_id, ordinal),
                 )
-        for message in ordered:
+        for message in included:
             if message.delivery_state.value == "ENQUEUED":
                 self.mailbox.mark_eligible(message.message_id)
             self.mailbox.mark_batched(message.message_id)
-        text = build_wake_text(snapshot, wake_batch_id=wake_batch_id, messages=ordered)
         record_context_injection(
             self.store,
             binding_id=binding_id,
             turn_intent_id=wake_batch_id,
             snapshot=snapshot,
-            input_text=text,
-            mailbox_message_ids=tuple(item.message_id for item in ordered),
+            input_text=envelope.text,
+            mailbox_message_ids=envelope.included_message_ids,
         )
         row = self.get(wake_batch_id)
         assert row is not None
-        row["input_text"] = text
+        row["input_text"] = envelope.text
+        row["included_message_ids"] = envelope.included_message_ids
+        row["excluded_message_ids"] = envelope.excluded_message_ids
         return row
 
     def set_state(self, wake_batch_id: str, **fields: object) -> dict[str, object]:

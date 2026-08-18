@@ -8,8 +8,10 @@ from datetime import datetime, timezone
 from typing import Any
 
 from .binding_store import BindingStore
-from .client import AppServerClient, AppServerRpcError, RetryRequired
+from .client import AppServerClient, AppServerRpcError, RetryRequired, UnexpectedServerRequest
 from .managed_models import BindingState, ManagedIntentKind, SubmissionState
+from .mutation_intents import MutationIntentStore
+from .session_guard import SessionGuard
 from .transport import TransportClosed
 
 STAGE3_HAS_NO_AUTOMATIC_TURN_LOOP = True
@@ -31,6 +33,7 @@ class ManagedTurns:
     def __init__(self, bindings: BindingStore, client: AppServerClient) -> None:
         self.bindings = bindings
         self.client = client
+        self.mutations = MutationIntentStore(bindings.store)
 
     def prepare(
         self,
@@ -97,9 +100,22 @@ class ManagedTurns:
             )
 
     async def submit(self, turn_intent_id: str, input_text: str) -> dict[str, Any]:
+        import asyncio
+
         row = self._row(turn_intent_id)
-        if row["submission_state"] != SubmissionState.PREPARED.value:
+        if row["submission_state"] not in {
+            SubmissionState.PREPARED.value,
+            SubmissionState.SUBMITTING.value,
+        }:
             raise ManagedTurnError("intent is not PREPARED")
+        if row["submission_state"] == SubmissionState.PREPARED.value:
+            self.mutations.begin(
+                "turn/start",
+                str(row["client_user_message_id"]),
+                binding_id=str(row["binding_id"]),
+                request={"turn_intent_id": turn_intent_id},
+            )
+            self._set_state(turn_intent_id, submission_state=SubmissionState.SUBMITTING.value)
         params = {
             "threadId": row["app_server_thread_id"],
             "input": [{"type": "text", "text": input_text}],
@@ -107,8 +123,20 @@ class ManagedTurns:
             "sandboxPolicy": {"type": "readOnly"},
             "clientUserMessageId": row["client_user_message_id"],
         }
+
+        def _incident(_payload: object) -> None:
+            self._set_state(
+                turn_intent_id,
+                submission_state=SubmissionState.INCIDENT.value,
+                incident_json=json.dumps({"reason": "server_request"}),
+            )
+            open_intent = self.mutations.get_open("turn/start", str(row["client_user_message_id"]))
+            if open_intent is not None:
+                self.mutations.mark_incident(str(open_intent["intent_id"]), "server_request")
+
+        guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
         try:
-            response = await self.client.request("turn/start", params)
+            response = await guard.request("turn/start", params)
         except RetryRequired as exc:
             self._set_state(
                 turn_intent_id,
@@ -116,12 +144,17 @@ class ManagedTurns:
                 incident_json=json.dumps({"reason": "overload"}),
             )
             raise ManagedTurnError("turn/start uncertain; do not retry") from exc
-        except (AppServerRpcError, TransportClosed) as exc:
+        except UnexpectedServerRequest as exc:
+            raise ManagedTurnError("turn/start incident; do not retry") from exc
+        except (AppServerRpcError, TransportClosed, asyncio.TimeoutError) as exc:
             self._set_state(
                 turn_intent_id,
                 submission_state=SubmissionState.SUBMISSION_UNCERTAIN.value,
                 incident_json=json.dumps({"reason": type(exc).__name__}),
             )
+            open_intent = self.mutations.get_open("turn/start", str(row["client_user_message_id"]))
+            if open_intent is not None:
+                self.mutations.mark_uncertain(str(open_intent["intent_id"]), type(exc).__name__)
             raise ManagedTurnError("turn/start uncertain; do not retry") from exc
         turn_id = None
         result = response.get("result") if isinstance(response.get("result"), dict) else {}
@@ -141,11 +174,17 @@ class ManagedTurns:
                     "UPDATE managed_actor_bindings SET last_turn_id = ? WHERE binding_id = ?",
                     (turn_id, row["binding_id"]),
                 )
+        open_intent = self.mutations.get_open("turn/start", str(row["client_user_message_id"]))
+        if open_intent is not None:
+            self.mutations.mark_submitted(str(open_intent["intent_id"]))
         return self._row(turn_intent_id)
 
     async def reconcile_uncertain(self, turn_intent_id: str) -> dict[str, Any]:
         row = self._row(turn_intent_id)
-        if row["submission_state"] != SubmissionState.SUBMISSION_UNCERTAIN.value:
+        if row["submission_state"] not in {
+            SubmissionState.SUBMISSION_UNCERTAIN.value,
+            SubmissionState.SUBMITTING.value,
+        }:
             return row
         read = await self.client.read_thread(str(row["app_server_thread_id"]), include_turns=True)
         thread = read.get("thread") if isinstance(read.get("thread"), dict) else {}

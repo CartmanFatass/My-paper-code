@@ -2,7 +2,7 @@ import asyncio
 import json
 from pathlib import Path
 
-from tests.codex_supervisor.helpers import make_observer_config, write_fake_codex
+from tests.codex_supervisor.helpers import ingest_recorded_command, make_observer_config, write_fake_codex
 from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
 from tools.codex_supervisor.client import AppServerClient
 from tools.codex_supervisor.command_gateway import CommandGateway
@@ -64,13 +64,13 @@ def test_root_and_portfolio_independent_wake(tmp_path: Path) -> None:
             "action_kind": "MAILBOX_ACK",
             "payload": {"message_ids": [delivered[0].message_id]},
         }
-        gateway.ingest_final_item(
+        ingest_recorded_command(
+            gateway,
+            seeded["supervisor"],
             thread_id="thr_port",
             turn_id=str(first["scheduled"]["app_server_turn_id"]),
-            raw_message_seq=1,
-            item_type="agentMessage",
-            lifecycle="COMPLETED",
             text="<HMASD_MANAGED_ACTOR_COMMAND_V1>\n" + json.dumps(ack) + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>",
+            item_id="itm_e2e_ack",
         )
         scheduler.observe_completion(str(first["scheduled"]["wake_batch_id"]), "completed")
         second = await scheduler.once()

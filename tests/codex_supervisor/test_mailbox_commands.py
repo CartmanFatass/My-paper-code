@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from tests.codex_supervisor.helpers import ingest_recorded_command
 from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
 from tools.codex_supervisor.command_gateway import CommandGateway, CommandGatewayError
 from tools.codex_supervisor.mailbox_models import MailboxMessageKind, MailboxSourceSystem
@@ -40,38 +41,38 @@ def test_ack_intake_and_cross_binding_reject(tmp_path: Path) -> None:
         messages=[message],
     )
     mailbox.mark_delivered(message.message_id)
-    batches.set_state(str(batch["wake_batch_id"]), state="COMPLETED")
+    batches.set_state(str(batch["wake_batch_id"]), state="COMPLETED", app_server_turn_id="turn_ack")
     gateway = CommandGateway(seeded["bindings"], seeded["bridge"], mailbox)
-    applied = gateway.ingest_final_item(
+    applied = ingest_recorded_command(
+        gateway,
+        seeded["supervisor"],
         thread_id="thr_port",
         turn_id="turn_ack",
-        raw_message_seq=1,
-        item_type="agentMessage",
-        lifecycle="COMPLETED",
         text=_envelope("MAILBOX_ACK", {"message_ids": [message.message_id]}),
+        item_id="itm_ack",
     )
     assert applied["validation_state"] == "APPLIED"
     assert mailbox.get(message.message_id).intake_state.value == "ACKNOWLEDGED"
-    intake = gateway.ingest_final_item(
+    intake = ingest_recorded_command(
+        gateway,
+        seeded["supervisor"],
         thread_id="thr_port",
         turn_id="turn_in",
-        raw_message_seq=2,
-        item_type="agentMessage",
-        lifecycle="COMPLETED",
         text=_envelope(
             "MAILBOX_INTAKE",
             {"items": [{"message_id": message.message_id, "intake_kind": "READ_AND_ROUTED", "result_ref": "ref"}]},
         ),
+        item_id="itm_in",
     )
     assert intake["validation_state"] == "APPLIED"
     with pytest.raises(CommandGatewayError, match="not owned"):
-        gateway.ingest_final_item(
+        ingest_recorded_command(
+            gateway,
+            seeded["supervisor"],
             thread_id="thr_root",
             turn_id="turn_x",
-            raw_message_seq=3,
-            item_type="agentMessage",
-            lifecycle="COMPLETED",
             text=_envelope("MAILBOX_ACK", {"message_ids": [message.message_id]}),
+            item_id="itm_x",
         )
     seeded["bridge"].close()
     seeded["supervisor"].close()

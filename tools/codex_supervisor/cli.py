@@ -108,7 +108,15 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "timeline":
             rendered = render_thread_timeline_markdown(thread_timeline(store, args.thread_id))
             if args.out:
-                Path(args.out).write_text(rendered, encoding="utf-8")
+                export_root = (config.runtime_home / "exports").resolve()
+                export_root.mkdir(parents=True, exist_ok=True)
+                dest = Path(args.out)
+                resolved = dest.resolve() if dest.is_absolute() else (export_root / dest).resolve()
+                try:
+                    resolved.relative_to(export_root)
+                except ValueError as exc:
+                    raise SystemExit("timeline --out must be under <runtime_home>/exports/") from exc
+                resolved.write_text(rendered, encoding="utf-8")
             else:
                 print(rendered, end="")
             return 0
@@ -184,8 +192,7 @@ def _managed_command(args: argparse.Namespace, repo_root: Path, store: ObserverS
         print(json.dumps({"binding_id": bindings.revoke(args.binding_id).binding_id, "operator": operator}))
         return 0
     if args.managed_command == "activate":
-        print(json.dumps({"binding_id": bindings.activate(args.binding_id).binding_id, "operator": operator}))
-        return 0
+        raise SystemExit("managed activate cannot bypass verification; use the verification receipt API")
     raise SystemExit(f"managed {args.managed_command} requires a live App Server session and is not run from doctor tests")
 
 

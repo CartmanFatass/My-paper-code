@@ -12,6 +12,7 @@ from .command_protocol import CommandProtocolError, extract_from_completed_item
 from .mailbox_store import MailboxStore
 from .managed_models import BindingState, CommandValidationState, ManagedActionKind
 from .managed_packet_send import ManagedPacketSendError, ManagedPacketSender
+from .observer_evidence import ObserverEvidenceError, load_completed_final_item
 from .semantic_bridge import SemanticBridge, SemanticBridgeError
 
 
@@ -36,16 +37,13 @@ class CommandGateway:
         self.mailbox = mailbox
         self.packets = packets
 
-    def ingest_final_item(
-        self,
-        *,
-        thread_id: str,
-        turn_id: str,
-        raw_message_seq: int,
-        item_type: str,
-        lifecycle: str,
-        text: str,
-    ) -> dict[str, Any]:
+    def ingest_final_item(self, *, raw_message_seq: int) -> dict[str, Any]:
+        try:
+            observed = load_completed_final_item(self.bindings.store, raw_message_seq)
+        except ObserverEvidenceError as exc:
+            raise CommandGatewayError(str(exc)) from exc
+        thread_id = str(observed["thread_id"])
+        turn_id = str(observed["turn_id"])
         binding = self.bindings.binding_for_thread(thread_id)
         if binding is None or binding.binding_state not in {
             BindingState.ACTIVE,
@@ -84,7 +82,11 @@ class CommandGateway:
                 ),
             )
         try:
-            parsed = extract_from_completed_item(item_type=item_type, lifecycle=lifecycle, text=text)
+            parsed = extract_from_completed_item(
+                item_type=str(observed["item_type"]),
+                lifecycle=str(observed["lifecycle"]),
+                text=str(observed["text"]),
+            )
         except CommandProtocolError as exc:
             self._reject(command_id, str(exc))
             raise CommandGatewayError(str(exc)) from exc
@@ -159,20 +161,45 @@ class CommandGateway:
         if message.target_actor_context_id != binding.actor_context_id:
             raise CommandGatewayError("mailbox message is not owned by this binding")
         delivered = mailbox.store.connection.execute(
-            """SELECT 1 FROM wake_batch_messages w
+            """SELECT b.app_server_turn_id FROM wake_batch_messages w
             JOIN wake_batches b ON b.wake_batch_id = w.wake_batch_id
             WHERE w.message_id = ? AND b.binding_id = ?
-              AND b.state IN ('ACTIVE', 'COMPLETED', 'SUBMISSION_UNCERTAIN')""",
+              AND b.state IN ('ACTIVE', 'COMPLETED')""",
             (message_id, binding.binding_id),
         ).fetchone()
-        if delivered is None and message.delivery_state.value not in {"DELIVERED_TO_TURN", "SUBMISSION_UNCERTAIN"}:
+        if delivered is None or message.delivery_state.value != "DELIVERED_TO_TURN":
             raise CommandGatewayError("mailbox message was not delivered to this binding")
+
+    def _command_turn_follows_wake(self, binding: Any, turn_id: str, message_id: str) -> None:
+        row = self.bindings.store.connection.execute(
+            """SELECT b.app_server_turn_id, t.started_at AS wake_started
+            FROM wake_batch_messages w
+            JOIN wake_batches b ON b.wake_batch_id = w.wake_batch_id
+            LEFT JOIN turn_snapshots t ON t.turn_id = b.app_server_turn_id
+            WHERE w.message_id = ? AND b.binding_id = ?""",
+            (message_id, binding.binding_id),
+        ).fetchone()
+        if row is None or not row["app_server_turn_id"]:
+            return
+        if str(row["app_server_turn_id"]) == turn_id:
+            return
+        command_turn = self.bindings.store.connection.execute(
+            "SELECT started_at FROM turn_snapshots WHERE turn_id = ? AND thread_id = ?",
+            (turn_id, binding.thread_id),
+        ).fetchone()
+        if command_turn is None:
+            raise CommandGatewayError("command turn does not belong to this binding")
+        wake_started = row["wake_started"]
+        command_started = command_turn["started_at"]
+        if wake_started and command_started and str(command_started) < str(wake_started):
+            raise CommandGatewayError("command turn predates the wake turn")
 
     def _mailbox_ack(self, binding: Any, command_id: str, turn_id: str, inner: dict[str, Any]) -> dict[str, Any]:
         mailbox = self._require_mailbox()
         receipts = []
         for message_id in inner.get("message_ids") or []:
             self._message_owned_and_delivered(binding, str(message_id))
+            self._command_turn_follows_wake(binding, turn_id, str(message_id))
             mailbox.acknowledge(str(message_id))
             receipts.append(mailbox.record_command_receipt(command_id=command_id, message_id=str(message_id), action="ACK"))
         return {"effect": "MAILBOX_ACK", "receipts": receipts, "turn_id": turn_id}
@@ -183,6 +210,7 @@ class CommandGateway:
         for item in inner.get("items") or []:
             message_id = str(item.get("message_id") or "")
             self._message_owned_and_delivered(binding, message_id)
+            self._command_turn_follows_wake(binding, turn_id, message_id)
             mailbox.intake(message_id)
             receipts.append(mailbox.record_command_receipt(command_id=command_id, message_id=message_id, action="INTAKE"))
         return {"effect": "MAILBOX_INTAKE", "receipts": receipts, "turn_id": turn_id}

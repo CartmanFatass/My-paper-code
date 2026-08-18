@@ -25,6 +25,7 @@ def test_packet_send_acl_and_idempotent_marker(tmp_path: Path) -> None:
         target_alias="PORTFOLIO",
         payload_ref="typed-packet.md",
         marker="ROOT_TO_PORTFOLIO_REVIEW:canary",
+        direction_id="demo",
     )
     assert first["packet_id"] == again["packet_id"]
     with pytest.raises(ManagedPacketSendError, match="repository-relative"):

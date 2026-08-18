@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pytest
 
+from tests.codex_supervisor.mailbox_fixtures import plant_verification_receipt
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors
 from tools.codex_supervisor.binding_store import BindingError, BindingStore
 from tools.codex_supervisor.managed_models import BindingState, HistoryTrust, MemoryPolicyState, ThreadOrigin
@@ -25,6 +26,7 @@ def test_prepare_attach_verify_activate_suspend_revoke(tmp_path: Path) -> None:
     with pytest.raises(BindingError, match="memory policy"):
         store.activate(binding_id)
     store.confirm_global_memory_disabled(binding_id, operator="operator")
+    plant_verification_receipt(store, binding_id, snapshot, "thr_root")
     active = store.activate(binding_id)
     assert active.binding_state is BindingState.ACTIVE
     assert active.memory_policy_state is MemoryPolicyState.OPERATOR_CONFIRMED_GLOBAL_DISABLED

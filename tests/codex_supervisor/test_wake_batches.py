@@ -42,4 +42,4 @@ def test_wake_envelope_is_neutral_and_ordered(tmp_path: Path) -> None:
     seeded["bridge"].close()
     seeded["supervisor"].close()
     seeded["semantic"].close()
-    assert "wake_batch_id=" in build_wake_text(snapshot, wake_batch_id="wake_x", messages=[early])
+    assert "wake_batch_id=" in build_wake_text(snapshot, wake_batch_id="wake_x", messages=[early]).text

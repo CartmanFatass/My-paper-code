@@ -18,8 +18,8 @@ def test_one_thousand_message_dedupe(tmp_path: Path) -> None:
             source_event_key=f"op:load:{index % 50}",
             target_actor_context_id=seeded["portfolio"].actor_context_id,
             message_kind=MailboxMessageKind.OPERATOR_ATTENTION_REQUEST,
-            subject_ref=f"s{index}",
-            payload_ref="FAILED.md" if index == 0 else f"ref{index}",
+            subject_ref=f"s{index % 50}",
+            payload_ref=f"ref{index % 50}",
         )
         ids.append(message.message_id)
     assert len(set(ids)) == 50

@@ -66,7 +66,45 @@ class SemanticScanner:
                 ),
             )
 
+    def _reconcile_existing(self) -> None:
+        open_obligation_ids = {
+            str(row[0])
+            for row in self.bridge.semantic.connection.execute(
+                "SELECT obligation_id FROM obligations WHERE state = 'OPEN'"
+            ).fetchall()
+        }
+        packet_rows = {
+            str(row["packet_id"]): row
+            for row in self.bridge.semantic.connection.execute(
+                "SELECT packet_id, delivery_state, intake_state FROM packet_refs"
+            ).fetchall()
+        }
+        for message in self.mailbox.list_messages():
+            if message.source_system != MailboxSourceSystem.SEMANTIC_LEDGER.value:
+                continue
+            if message.delivery_state.value not in {"ENQUEUED", "ELIGIBLE", "BATCHED"}:
+                continue
+            key = message.source_event_key
+            if key.startswith("semantic:obligation:"):
+                obligation_id = key.split(":")[2] if len(key.split(":")) >= 3 else ""
+                if obligation_id not in open_obligation_ids:
+                    self.mailbox.cancel_source_resolved(message.message_id, "SOURCE_RESOLVED")
+                continue
+            if key.startswith("semantic:packet:"):
+                parts = key.split(":")
+                packet_id = parts[2] if len(parts) >= 3 else ""
+                packet = packet_rows.get(packet_id)
+                if packet is None or str(packet["intake_state"]) == "APPLIED":
+                    self.mailbox.cancel_source_resolved(message.message_id, "SOURCE_RESOLVED")
+                    continue
+                current_key = (
+                    f"semantic:packet:{packet_id}:{packet['delivery_state']}:{packet['intake_state']}"
+                )
+                if key != current_key:
+                    self.mailbox.cancel_source_resolved(message.message_id, "SOURCE_SUPERSEDED")
+
     def scan(self) -> list[str]:
+        self._reconcile_existing()
         created: list[str] = []
         last_obligation = None
         last_packet = None

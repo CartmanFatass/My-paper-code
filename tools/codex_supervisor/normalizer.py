@@ -57,9 +57,12 @@ def _status_type(thread: Mapping[str, Any]) -> object:
 
 
 def thread_snapshot_fields(thread: Mapping[str, Any]) -> dict[str, Any]:
+    preview = thread.get("preview")
+    preview_text = preview if isinstance(preview, str) else None
     return {
         "status_type": _status_type(thread),
-        "preview": thread.get("preview"),
+        "preview_present": preview_text is not None,
+        "preview_byte_length": 0 if preview_text is None else len(preview_text.encode("utf-8")),
         "ephemeral": thread.get("ephemeral"),
         "path": thread.get("path"),
     }

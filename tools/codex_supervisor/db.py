@@ -6,7 +6,7 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 3
+SCHEMA_VERSION = 4
 
 SCHEMA_STATEMENTS = (
     """
@@ -92,7 +92,9 @@ SCHEMA_STATEMENTS = (
         path TEXT,
         last_event_seq INTEGER,
         first_observed_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL
+        updated_at TEXT NOT NULL,
+        preview_present INTEGER,
+        preview_byte_length INTEGER
     )
     """,
     """
@@ -168,7 +170,12 @@ SCHEMA_STATEMENTS = (
         revoked_at TEXT,
         last_verified_at TEXT,
         last_thread_status TEXT,
-        last_turn_id TEXT
+        last_turn_id TEXT,
+        verification_turn_intent_id TEXT,
+        verification_turn_id TEXT,
+        verification_command_id TEXT,
+        verification_receipt_id TEXT,
+        verified_checkpoint_id TEXT
     )
     """,
     """
@@ -299,7 +306,9 @@ SCHEMA_STATEMENTS = (
         observed_at TEXT,
         completed_at TEXT,
         completion_status TEXT,
-        incident_json TEXT
+        incident_json TEXT,
+        lease_generation INTEGER,
+        lease_holder TEXT
     )
     """,
     """
@@ -341,6 +350,28 @@ SCHEMA_STATEMENTS = (
         UNIQUE(command_id, message_id, action)
     )
     """,
+    """
+    CREATE TABLE IF NOT EXISTS mutation_intents (
+        intent_id TEXT PRIMARY KEY,
+        method TEXT NOT NULL,
+        binding_id TEXT,
+        client_key TEXT NOT NULL,
+        state TEXT NOT NULL,
+        request_json TEXT,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+    )
+    """,
+    """
+    CREATE UNIQUE INDEX IF NOT EXISTS wake_batches_one_open_per_binding
+    ON wake_batches(binding_id)
+    WHERE state IN ('PREPARED', 'SUBMITTING', 'SUBMITTED', 'SUBMISSION_UNCERTAIN', 'ACTIVE')
+    """,
+    """
+    CREATE UNIQUE INDEX IF NOT EXISTS mutation_intents_open_unique
+    ON mutation_intents(method, client_key)
+    WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN')
+    """,
 )
 
 REQUIRED_TABLES = (
@@ -367,6 +398,7 @@ REQUIRED_TABLES = (
     "wake_attempts",
     "scheduler_leases",
     "mailbox_command_receipts",
+    "mutation_intents",
 )
 
 
@@ -381,6 +413,19 @@ def connect(path: str | Path) -> sqlite3.Connection:
     return connection
 
 
+def _table_columns(connection: sqlite3.Connection, table: str) -> set[str]:
+    return {str(row[1]) for row in connection.execute(f"PRAGMA table_info({table})")}
+
+
+def _add_column_if_missing(connection: sqlite3.Connection, table: str, name: str, decl: str) -> None:
+    if table not in {
+        str(row[0]) for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    }:
+        return
+    if name not in _table_columns(connection, table):
+        connection.execute(f"ALTER TABLE {table} ADD COLUMN {name} {decl}")
+
+
 def initialize_database(connection: sqlite3.Connection) -> None:
     applied_at = datetime.now(timezone.utc).isoformat()
     with connection:
@@ -393,6 +438,15 @@ def initialize_database(connection: sqlite3.Connection) -> None:
             )
         for statement in SCHEMA_STATEMENTS:
             connection.execute(statement)
+        _add_column_if_missing(connection, "managed_actor_bindings", "verification_turn_intent_id", "TEXT")
+        _add_column_if_missing(connection, "managed_actor_bindings", "verification_turn_id", "TEXT")
+        _add_column_if_missing(connection, "managed_actor_bindings", "verification_command_id", "TEXT")
+        _add_column_if_missing(connection, "managed_actor_bindings", "verification_receipt_id", "TEXT")
+        _add_column_if_missing(connection, "managed_actor_bindings", "verified_checkpoint_id", "TEXT")
+        _add_column_if_missing(connection, "wake_batches", "lease_generation", "INTEGER")
+        _add_column_if_missing(connection, "wake_batches", "lease_holder", "TEXT")
+        _add_column_if_missing(connection, "thread_snapshots", "preview_present", "INTEGER")
+        _add_column_if_missing(connection, "thread_snapshots", "preview_byte_length", "INTEGER")
         if current < SCHEMA_VERSION:
             connection.execute(
                 "INSERT INTO schema_meta(version, applied_at) VALUES (?, ?)",

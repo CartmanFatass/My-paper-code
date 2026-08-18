@@ -6,13 +6,13 @@ from pathlib import Path
 
 import pytest
 
-from tests.codex_supervisor.helpers import make_observer_config, write_fake_codex
+from tests.codex_supervisor.helpers import make_observer_config, record_completed_agent_item, write_fake_codex
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors, seed_reanchor
 from tools.codex_semantic_mvp.actor_registry import release_actor_context
 from tools.codex_supervisor.binding_store import BindingStore
 from tools.codex_supervisor.client import AppServerClient
 from tools.codex_supervisor.command_gateway import CommandGateway
-from tools.codex_supervisor.managed_models import BindingState, HistoryTrust, ThreadOrigin
+from tools.codex_supervisor.managed_models import BindingState, ManagedIntentKind
 from tools.codex_supervisor.managed_runtime import ManagedRuntime, ManagedRuntimeError
 from tools.codex_supervisor.managed_turns import ManagedTurns
 from tools.codex_supervisor.provisioning import ManagedProvisioner
@@ -60,38 +60,46 @@ def test_verify_activate_and_reject_wrong_thread_or_released_actor(tmp_path: Pat
             "payload": {},
         }
         text = "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n" + json.dumps(ack) + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
-        result = await runtime.verify_and_activate(
-            binding_id,
-            snapshot,
-            final_item_type="agentMessage",
-            final_lifecycle="COMPLETED",
-            final_text=text,
+        submitted = await runtime.submit_verification(binding_id, snapshot)
+        turn_id = str(submitted.get("app_server_turn_id") or "turn_canary")
+        binding = store.get(binding_id)
+        assert binding is not None and binding.thread_id
+        seq = record_completed_agent_item(
+            seeded["supervisor"],
+            thread_id=binding.thread_id,
+            turn_id=turn_id,
+            text=text,
         )
+        result = runtime.complete_activation(binding_id, raw_message_seq=seq)
         assert result["state"] == BindingState.ACTIVE.value
         gateway = CommandGateway(store, seeded["bridge"])
         with pytest.raises(Exception):
-            gateway.ingest_final_item(
-                thread_id="thr_wrong",
-                turn_id="turn_canary",
-                raw_message_seq=99,
-                item_type="agentMessage",
-                lifecycle="COMPLETED",
-                text=text,
-            )
+            gateway.ingest_final_item(raw_message_seq=99)
         port = seeded["bridge"].snapshot(seeded["portfolio"].actor_context_id)
         other = provisioner.prepare(port, repo_root=tmp_path, operator="operator")
         store.attach_thread(other, "thr_port")
         store.confirm_global_memory_disabled(other, operator="operator")
         store.mark_verification_required(other)
+        other_intent = ManagedTurns(store, client).prepare(
+            other,
+            intent_kind=ManagedIntentKind.BOOTSTRAP,
+            input_ref="bootstrap",
+        )
+        store.store.connection.execute(
+            "UPDATE managed_turn_intents SET app_server_turn_id = ?, submission_state = 'COMPLETED' WHERE turn_intent_id = ?",
+            ("turn_port", other_intent),
+        )
+        store.store.connection.commit()
         release_actor_context(seeded["semantic"], seeded["portfolio"].actor_context_id)
+        other_seq = record_completed_agent_item(
+            seeded["supervisor"],
+            thread_id="thr_port",
+            turn_id="turn_port",
+            text="no envelope",
+            item_id="itm_port",
+        )
         with pytest.raises(ManagedRuntimeError):
-            await runtime.verify_and_activate(
-                other,
-                port,
-                final_item_type="agentMessage",
-                final_lifecycle="COMPLETED",
-                final_text="no envelope",
-            )
+            runtime.complete_activation(other, raw_message_seq=other_seq)
         assert store.get(other).binding_state is BindingState.SUSPENDED
         await transport.stop()
         seeded["bridge"].close()

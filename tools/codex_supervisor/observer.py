@@ -161,7 +161,8 @@ class ObserverService:
             self.store.upsert_thread_snapshot(
                 thread_id=str(thread_id),
                 status_type=fields.get("status_type"),
-                preview=fields.get("preview"),
+                preview_present=fields.get("preview_present"),
+                preview_byte_length=fields.get("preview_byte_length"),
                 ephemeral=fields.get("ephemeral"),
                 path=fields.get("path"),
                 last_event_seq=raw_seq,

@@ -240,24 +240,28 @@ class ObserverStore:
             self.connection.execute(
                 """INSERT INTO thread_snapshots (
                     thread_id, status_type, preview, ephemeral, path, last_event_seq,
-                    first_observed_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    first_observed_at, updated_at, preview_present, preview_byte_length
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(thread_id) DO UPDATE SET
                     status_type=excluded.status_type,
-                    preview=COALESCE(excluded.preview, thread_snapshots.preview),
+                    preview=NULL,
                     ephemeral=COALESCE(excluded.ephemeral, thread_snapshots.ephemeral),
                     path=COALESCE(excluded.path, thread_snapshots.path),
                     last_event_seq=excluded.last_event_seq,
-                    updated_at=excluded.updated_at""",
+                    updated_at=excluded.updated_at,
+                    preview_present=COALESCE(excluded.preview_present, thread_snapshots.preview_present),
+                    preview_byte_length=COALESCE(excluded.preview_byte_length, thread_snapshots.preview_byte_length)""",
                 (
                     event.thread_id,
                     event.payload.get("status_type") or event.payload.get("status"),
-                    event.payload.get("preview"),
+                    None,
                     event.payload.get("ephemeral"),
                     event.payload.get("path"),
                     event_seq,
                     first,
                     now,
+                    event.payload.get("preview_present"),
+                    event.payload.get("preview_byte_length"),
                 ),
             )
         if event.turn_id:
@@ -390,8 +394,15 @@ class ObserverStore:
         path: object = None,
         last_event_seq: int | None = None,
         observed_at: str | None = None,
+        preview_present: object = None,
+        preview_byte_length: object = None,
     ) -> None:
         now = observed_at or _now()
+        present = preview_present
+        length = preview_byte_length
+        if present is None and preview is not None:
+            present = True
+            length = len(str(preview).encode("utf-8"))
         with self._lock, self.connection:
             existing = self.connection.execute(
                 "SELECT first_observed_at FROM thread_snapshots WHERE thread_id = ?",
@@ -401,24 +412,28 @@ class ObserverStore:
             self.connection.execute(
                 """INSERT INTO thread_snapshots (
                     thread_id, status_type, preview, ephemeral, path, last_event_seq,
-                    first_observed_at, updated_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    first_observed_at, updated_at, preview_present, preview_byte_length
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ON CONFLICT(thread_id) DO UPDATE SET
                     status_type=COALESCE(excluded.status_type, thread_snapshots.status_type),
-                    preview=COALESCE(excluded.preview, thread_snapshots.preview),
+                    preview=NULL,
                     ephemeral=COALESCE(excluded.ephemeral, thread_snapshots.ephemeral),
                     path=COALESCE(excluded.path, thread_snapshots.path),
                     last_event_seq=COALESCE(excluded.last_event_seq, thread_snapshots.last_event_seq),
-                    updated_at=excluded.updated_at""",
+                    updated_at=excluded.updated_at,
+                    preview_present=COALESCE(excluded.preview_present, thread_snapshots.preview_present),
+                    preview_byte_length=COALESCE(excluded.preview_byte_length, thread_snapshots.preview_byte_length)""",
                 (
                     thread_id,
                     None if status_type is None else str(status_type),
-                    None if preview is None else str(preview),
+                    None,
                     ephemeral,
                     None if path is None else str(path),
                     last_event_seq,
                     first,
                     now,
+                    present,
+                    length,
                 ),
             )
 

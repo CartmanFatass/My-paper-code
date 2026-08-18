@@ -38,11 +38,15 @@ thread/loaded/list   list thread ids currently loaded in memory
 thread/read          returned thread objects include runtime status
 ```
 
-Official text does **not** document:
+Official text also documents approval policy on thread/start and turn/start.
+It does **not** document:
 
 ```text
 thread/memoryMode/set
 clientUserMessageId
+thread/name/set
+sandbox
+sandboxPolicy
 ```
 
 ## Local-schema observations (`codex-cli 0.147.0`)
@@ -101,3 +105,32 @@ status missing or systemError
 `thread/loaded/list` is sent with `{}` when no cursor is needed. It is
 not added to the `-32001` retry allow-list; only `thread/list` and
 `thread/read` retry.
+
+## Wire fields actually sent by this supervisor
+
+Each row names how it is known. Implementation inferences are not local
+schema proofs.
+
+```text
+method/field                         claim kind
+thread/start                         official-doc + local-schema
+thread/start.cwd                     official-doc + local-schema
+thread/start.ephemeral               official-doc + local-schema
+thread/start.approvalPolicy          official-doc observation
+thread/start.sandbox                 implementation inference
+thread/resume                        official-doc + local-schema
+thread/read                          official-doc + local-schema
+thread/read.includeTurns             official-doc + local-schema
+thread/loaded/list                   official-doc + local-schema
+turn/start                           official-doc + local-schema
+turn/start.input                     official-doc + local-schema
+turn/start.clientUserMessageId       local-schema observation
+turn/start.approvalPolicy            official-doc observation
+turn/start.sandboxPolicy             implementation inference
+```
+
+`thread/name/set` is **not** in the 0.147.0 `ClientRequest.json` methods
+recorded above. The supervisor does not send it.
+
+If `thread/loaded/list` fails or times out, readiness is `UNKNOWN`. A
+failed loaded-list query is never treated as "already loaded".

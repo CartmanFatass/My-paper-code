@@ -31,11 +31,16 @@ def test_doctor_does_not_launch_app_server(tmp_path: Path, repo_root: Path, caps
     assert payload["automatic_turn_start_enabled"] is False
     assert payload["managed_actor_binding_enabled"] is True
     assert payload["managed_actor_hosting_enabled"] is True
-    assert payload["automatic_wake_enabled"] is True
+    assert payload["automatic_wake_code_present"] is True
+    assert payload["automatic_wake_live_accepted"] is False
+    assert payload["live_wake_accepted"] is False
+    assert payload["synthetic_stage"] == 4
     assert payload["mailbox_enabled"] is True
     assert payload["automatic_turn_steer_enabled"] is False
     assert payload["automatic_approval_enabled"] is False
-    assert payload["semantic_ledger_mutation_enabled"] is False
+    assert payload["semantic_authority_mutation_enabled"] is False
+    assert payload["semantic_delivery_mutation_enabled"] is True
+    assert payload["canonical_artifact_write_enabled"] is False
     assert payload["unexpected_server_request_policy"] == "terminate"
     assert payload["codex_version"].startswith("codex-fake")
 

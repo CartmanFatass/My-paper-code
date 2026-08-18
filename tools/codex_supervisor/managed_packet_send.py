@@ -77,9 +77,6 @@ class ManagedPacketSender:
     ) -> dict[str, Any]:
         if packet_kind not in ALLOWED_PACKET_KINDS:
             raise ManagedPacketSendError(f"packet kind is not managed-sendable: {packet_kind}")
-        existing = self._packet_by_marker(marker)
-        if existing is not None:
-            return existing
         source = self.bindings.get(source_binding_id)
         if source is None or source.binding_state is not BindingState.ACTIVE:
             raise ManagedPacketSendError("source binding is not ACTIVE")
@@ -110,6 +107,19 @@ class ManagedPacketSender:
             payload_ref,
             existing_packet_ids=self._existing_packet_ids(),
         )
+        existing = self._packet_by_marker(marker)
+        if existing is not None:
+            same = (
+                str(existing["source_actor_context_id"]) == source.actor_context_id
+                and str(existing["target_actor_context_id"]) == target.actor_context_id
+                and str(existing["packet_kind"]) == packet_kind
+                and str(existing["payload_ref"]) == safe_ref
+                and (None if existing["direction_id"] is None else str(existing["direction_id"])) == direction_id
+                and str(existing["marker"]) == marker
+            )
+            if not same:
+                raise ManagedPacketSendError("packet marker conflicts with an existing packet")
+            return existing
         return packet_register(
             self.bridge.semantic,
             packet_kind=packet_kind,

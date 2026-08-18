@@ -17,19 +17,30 @@ from .mailbox_models import (
 from .store import ObserverStore
 
 FORWARD_DELIVERY = {
-    DeliveryState.ENQUEUED: {DeliveryState.ELIGIBLE, DeliveryState.DEAD_LETTER},
-    DeliveryState.ELIGIBLE: {DeliveryState.BATCHED, DeliveryState.DEAD_LETTER, DeliveryState.ENQUEUED},
+    DeliveryState.ENQUEUED: {
+        DeliveryState.ELIGIBLE,
+        DeliveryState.DEAD_LETTER,
+        DeliveryState.CANCELLED_SOURCE_RESOLVED,
+    },
+    DeliveryState.ELIGIBLE: {
+        DeliveryState.BATCHED,
+        DeliveryState.DEAD_LETTER,
+        DeliveryState.ENQUEUED,
+        DeliveryState.CANCELLED_SOURCE_RESOLVED,
+    },
     DeliveryState.BATCHED: {
         DeliveryState.DELIVERED_TO_TURN,
         DeliveryState.SUBMISSION_UNCERTAIN,
         DeliveryState.ELIGIBLE,
         DeliveryState.DEAD_LETTER,
+        DeliveryState.CANCELLED_SOURCE_RESOLVED,
     },
     DeliveryState.SUBMISSION_UNCERTAIN: {
         DeliveryState.DELIVERED_TO_TURN,
         DeliveryState.DEAD_LETTER,
     },
     DeliveryState.DELIVERED_TO_TURN: {DeliveryState.DEAD_LETTER},
+    DeliveryState.CANCELLED_SOURCE_RESOLVED: set(),
     DeliveryState.DEAD_LETTER: set(),
 }
 
@@ -114,6 +125,17 @@ class MailboxStore:
             raise MailboxStoreError(f"forbidden mailbox kind: {kind.value}")
         existing = self.get_by_source_key(source_event_key)
         if existing is not None:
+            same = (
+                existing.source_system == source_system
+                and existing.sender_actor_context_id == sender_actor_context_id
+                and existing.target_actor_context_id == target_actor_context_id
+                and existing.message_kind is kind
+                and existing.subject_ref == subject_ref
+                and existing.payload_ref == payload_ref
+                and existing.direction_id == direction_id
+            )
+            if not same:
+                raise MailboxStoreError("source_event_key conflicts with an existing message")
             return existing
         message_id = f"msg_{uuid.uuid4().hex}"
         now = _now()
@@ -193,15 +215,29 @@ class MailboxStore:
             dead_letter_reason=reason,
         )
 
+    def cancel_source_resolved(self, message_id: str, reason: str = "SOURCE_RESOLVED") -> MailboxMessage:
+        current = self.get(message_id)
+        if current is None:
+            raise MailboxStoreError(f"unknown mailbox message: {message_id}")
+        if current.delivery_state in {
+            DeliveryState.DELIVERED_TO_TURN,
+            DeliveryState.SUBMISSION_UNCERTAIN,
+            DeliveryState.DEAD_LETTER,
+            DeliveryState.CANCELLED_SOURCE_RESOLVED,
+        }:
+            return current
+        return self._set_delivery(
+            message_id,
+            DeliveryState.CANCELLED_SOURCE_RESOLVED,
+            dead_letter_reason=reason,
+        )
+
     def acknowledge(self, message_id: str) -> MailboxMessage:
         current = self.get(message_id)
         if current is None:
             raise MailboxStoreError(f"unknown mailbox message: {message_id}")
-        if current.delivery_state not in {
-            DeliveryState.DELIVERED_TO_TURN,
-            DeliveryState.SUBMISSION_UNCERTAIN,
-        }:
-            raise MailboxStoreError("ACK requires a delivered or uncertain message")
+        if current.delivery_state is not DeliveryState.DELIVERED_TO_TURN:
+            raise MailboxStoreError("ACK requires a delivered message")
         if current.intake_state is IntakeState.NOT_ACKNOWLEDGED:
             with self.store._lock, self.store.connection:
                 self.store.connection.execute(
@@ -258,7 +294,7 @@ class MailboxStore:
                 """SELECT m.message_id
                 FROM wake_batch_messages m
                 JOIN wake_batches b ON b.wake_batch_id = m.wake_batch_id
-                WHERE b.state IN ('PREPARED', 'SUBMITTED', 'SUBMISSION_UNCERTAIN', 'ACTIVE')"""
+                WHERE b.state IN ('PREPARED', 'SUBMITTING', 'SUBMITTED', 'SUBMISSION_UNCERTAIN', 'ACTIVE')"""
             ).fetchall()
             return {str(row[0]) for row in rows}
 

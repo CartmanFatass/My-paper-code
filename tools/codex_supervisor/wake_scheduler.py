@@ -2,20 +2,22 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 from datetime import datetime, timezone
 from typing import Any
 
 from .binding_store import BindingStore
-from .client import AppServerClient, AppServerRpcError, RetryRequired
+from .client import AppServerClient, AppServerRpcError, RetryRequired, UnexpectedServerRequest
 from .mailbox_models import ThreadWakeReadiness, WakeAttemptOutcome, WakeBatchState
 from .mailbox_store import MailboxStore
 from .managed_models import BindingState, ManagedActorKind
 from .scheduler_leases import LeaseError, SchedulerLeases
 from .semantic_bridge import SemanticBridge
 from .semantic_scanner import SemanticScanner
+from .session_guard import SessionGuard
 from .transport import TransportClosed
-from .wake_batches import WakeBatchError, WakeBatchStore
+from .wake_batches import WakeBatchStore
 from .wake_recovery import WakeRecovery
 
 
@@ -50,6 +52,9 @@ class WakeScheduler:
         self.bridge = bridge
         self.client = client
         self.instance_id = instance_id
+        if self.recovery.leases is None:
+            self.recovery.leases = leases
+        self.recovery.instance_id = instance_id
 
     def _sender_kinds(self) -> dict[str, str | None]:
         kinds: dict[str, str | None] = {}
@@ -68,20 +73,48 @@ class WakeScheduler:
             sender_kind_for=self._sender_kinds(),
         )
 
-    async def submit_batch(self, wake_batch_id: str, input_text: str) -> dict[str, object]:
+    def _assert_submit_fence(self, binding_id: str, generation: int) -> None:
+        self.leases.assert_held(binding_id, self.instance_id, generation)
+        binding = self.bindings.get(binding_id)
+        if binding is None or binding.binding_state is not BindingState.ACTIVE:
+            raise WakeSchedulerError("binding is not ACTIVE")
+
+    def begin_submission(self, wake_batch_id: str) -> dict[str, object]:
         batch = self.batches.get(wake_batch_id)
         if batch is None:
             raise WakeSchedulerError("unknown wake batch")
         if batch["state"] != WakeBatchState.PREPARED.value:
             raise WakeSchedulerError("wake batch is not PREPARED")
-        if self.client is None:
-            raise WakeSchedulerError("client required to submit a wake")
         attempts = self.bindings.store.connection.execute(
-            "SELECT COUNT(*) FROM wake_attempts WHERE wake_batch_id = ? AND outcome = ?",
-            (wake_batch_id, WakeAttemptOutcome.SUBMITTED.value),
+            "SELECT COUNT(*) FROM wake_attempts WHERE wake_batch_id = ?",
+            (wake_batch_id,),
         ).fetchone()[0]
         if int(attempts) > 0:
             raise WakeSchedulerError("wake batch already has a submission attempt")
+        updated = self.batches.set_state(wake_batch_id, state=WakeBatchState.SUBMITTING.value)
+        self.recovery._record_attempt(wake_batch_id, WakeAttemptOutcome.SUBMITTING)
+        return updated
+
+    async def submit_batch(
+        self,
+        wake_batch_id: str,
+        input_text: str,
+        *,
+        lease_generation: int | None = None,
+    ) -> dict[str, object]:
+        batch = self.batches.get(wake_batch_id)
+        if batch is None:
+            raise WakeSchedulerError("unknown wake batch")
+        if batch["state"] not in {WakeBatchState.PREPARED.value, WakeBatchState.SUBMITTING.value}:
+            raise WakeSchedulerError("wake batch is not PREPARED")
+        if self.client is None:
+            raise WakeSchedulerError("client required to submit a wake")
+        generation = lease_generation if lease_generation is not None else batch.get("lease_generation")
+        if generation is not None:
+            self._assert_submit_fence(str(batch["binding_id"]), int(generation))
+            self.leases.renew(str(batch["binding_id"]), self.instance_id, generation=int(generation))
+        if batch["state"] == WakeBatchState.PREPARED.value:
+            batch = self.begin_submission(wake_batch_id)
         params = {
             "threadId": batch["thread_id"],
             "input": [{"type": "text", "text": input_text}],
@@ -89,12 +122,30 @@ class WakeScheduler:
             "sandboxPolicy": {"type": "readOnly"},
             "clientUserMessageId": batch["client_user_message_id"],
         }
+
+        def _incident(_payload: object) -> None:
+            self.batches.set_state(
+                wake_batch_id,
+                state=WakeBatchState.INCIDENT.value,
+                incident_json=json.dumps({"reason": "server_request"}),
+            )
+            self.recovery._record_attempt(
+                wake_batch_id,
+                WakeAttemptOutcome.INCIDENT,
+                error={"reason": "server_request"},
+            )
+
+        guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
         try:
-            response = await self.client.request("turn/start", params)
+            if generation is not None:
+                self._assert_submit_fence(str(batch["binding_id"]), int(generation))
+            response = await guard.request("turn/start", params)
         except RetryRequired as exc:
             self._mark_uncertain(wake_batch_id, {"reason": "overload"})
             raise WakeSchedulerError("wake turn/start uncertain; do not retry") from exc
-        except (AppServerRpcError, TransportClosed) as exc:
+        except UnexpectedServerRequest as exc:
+            raise WakeSchedulerError("wake turn/start incident; do not retry") from exc
+        except (AppServerRpcError, TransportClosed, asyncio.TimeoutError) as exc:
             self._mark_uncertain(wake_batch_id, {"reason": type(exc).__name__})
             raise WakeSchedulerError("wake turn/start uncertain; do not retry") from exc
         result = response.get("result") if isinstance(response.get("result"), dict) else {}
@@ -139,10 +190,17 @@ class WakeScheduler:
             completed_at=_now(),
         )
 
-    async def schedule_binding(self, binding_id: str) -> dict[str, object] | None:
+    async def schedule_binding(
+        self,
+        binding_id: str,
+        *,
+        lease_generation: int | None = None,
+    ) -> dict[str, object] | None:
         binding = self.bindings.get(binding_id)
         if binding is None or binding.binding_state is not BindingState.ACTIVE or not binding.thread_id:
             return None
+        if lease_generation is not None:
+            self._assert_submit_fence(binding_id, lease_generation)
         if self.batches.open_batch_for_binding(binding_id) is not None:
             return None
         messages = self._eligible_messages(binding_id)
@@ -154,19 +212,30 @@ class WakeScheduler:
         if readiness is ThreadWakeReadiness.UNKNOWN:
             return {"binding_id": binding_id, "readiness": readiness.value}
         if readiness is ThreadWakeReadiness.IDLE_NOT_LOADED:
+            if lease_generation is not None:
+                self._assert_submit_fence(binding_id, lease_generation)
             readiness = await self.recovery.resume_once(binding_id)
             if readiness is not ThreadWakeReadiness.IDLE_LOADED:
                 return {"binding_id": binding_id, "readiness": readiness.value, "resumed": False}
         if readiness is not ThreadWakeReadiness.IDLE_LOADED:
             return {"binding_id": binding_id, "readiness": readiness.value}
+        if lease_generation is not None:
+            self._assert_submit_fence(binding_id, lease_generation)
+            self.leases.renew(binding_id, self.instance_id, generation=lease_generation)
         snapshot = self.bridge.snapshot(binding.actor_context_id)
         batch = self.batches.prepare(
             binding_id=binding_id,
             thread_id=binding.thread_id,
             snapshot=snapshot,
             messages=messages,
+            lease_generation=lease_generation,
+            lease_holder=self.instance_id,
         )
-        submitted = await self.submit_batch(str(batch["wake_batch_id"]), str(batch["input_text"]))
+        submitted = await self.submit_batch(
+            str(batch["wake_batch_id"]),
+            str(batch["input_text"]),
+            lease_generation=lease_generation,
+        )
         return submitted
 
     async def once(self) -> dict[str, object]:
@@ -179,13 +248,18 @@ class WakeScheduler:
             if binding.actor_kind not in {ManagedActorKind.OPERATIONAL_ROOT, ManagedActorKind.PORTFOLIO}:
                 continue
             try:
-                self.leases.acquire(binding.binding_id, self.instance_id)
+                lease = self.leases.acquire(binding.binding_id, self.instance_id)
             except LeaseError:
                 continue
             try:
-                scheduled = await self.schedule_binding(binding.binding_id)
+                scheduled = await self.schedule_binding(
+                    binding.binding_id,
+                    lease_generation=int(lease["generation"]),
+                )
+            except LeaseError:
+                scheduled = {"binding_id": binding.binding_id, "lease": "lost"}
             finally:
-                self.leases.release(binding.binding_id, self.instance_id)
+                self.leases.release(binding.binding_id, self.instance_id, generation=int(lease["generation"]))
             if scheduled is not None and scheduled.get("queued") is not True:
                 break
         return {"scanned": scanned, "scheduled": scheduled}

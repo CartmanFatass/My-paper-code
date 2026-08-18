@@ -6,8 +6,9 @@ from .binding_store import BindingError, BindingStore
 from .command_gateway import CommandGateway, CommandGatewayError
 from .mailbox_store import MailboxStore
 from .managed_context import build_bootstrap_text, record_context_injection
-from .managed_models import BindingState, HistoryTrust, ManagedIntentKind
+from .managed_models import BindingState, ManagedIntentKind
 from .managed_turns import ManagedTurns
+from .observer_evidence import ObserverEvidenceError, load_completed_final_item
 from .scheduler_leases import SchedulerLeases
 from .semantic_bridge import ManagedActorSnapshot, SemanticBridge, SemanticBridgeError
 from .semantic_scanner import SemanticScanner
@@ -33,15 +34,10 @@ class ManagedRuntime:
         self.gateway = gateway
         self.bridge = bridge
 
-    async def verify_and_activate(
+    async def submit_verification(
         self,
         binding_id: str,
         snapshot: ManagedActorSnapshot,
-        *,
-        final_item_type: str,
-        final_lifecycle: str,
-        final_text: str,
-        raw_message_seq: int = 1,
     ) -> dict[str, object]:
         binding = self.bindings.get(binding_id)
         if binding is None or not binding.thread_id:
@@ -69,24 +65,37 @@ class ManagedRuntime:
             input_text=text,
         )
         submitted = await self.turns.submit(intent_id, text)
-        turn_id = str(submitted.get("app_server_turn_id") or "")
-        self.turns.record_completion(intent_id, "completed")
+        return submitted
+
+    def complete_activation(self, binding_id: str, *, raw_message_seq: int) -> dict[str, object]:
+        binding = self.bindings.get(binding_id)
+        if binding is None or not binding.thread_id:
+            raise ManagedRuntimeError("binding has no thread")
         try:
-            applied = self.gateway.ingest_final_item(
-                thread_id=binding.thread_id,
-                turn_id=turn_id,
-                raw_message_seq=raw_message_seq,
-                item_type=final_item_type,
-                lifecycle=final_lifecycle,
-                text=final_text,
-            )
+            observed = load_completed_final_item(self.bindings.store, raw_message_seq)
+        except ObserverEvidenceError as exc:
+            raise ManagedRuntimeError(str(exc)) from exc
+        if observed["thread_id"] != binding.thread_id:
+            raise ManagedRuntimeError("completed item is not on the bound thread")
+        intent = self.bindings.store.connection.execute(
+            """SELECT * FROM managed_turn_intents
+            WHERE binding_id = ? AND intent_kind IN ('BOOTSTRAP', 'IDENTITY_VERIFICATION')
+            ORDER BY prepared_at DESC""",
+            (binding_id,),
+        ).fetchone()
+        if intent is None or str(intent["app_server_turn_id"] or "") != str(observed["turn_id"]):
+            raise ManagedRuntimeError("completed item does not match the verification turn")
+        if intent["submission_state"] != "COMPLETED":
+            self.turns.record_completion(str(intent["turn_intent_id"]), "completed")
+        try:
+            applied = self.gateway.ingest_final_item(raw_message_seq=raw_message_seq)
         except CommandGatewayError as exc:
             raise ManagedRuntimeError(str(exc)) from exc
         try:
-            self.bridge.snapshot(binding.actor_context_id)
             activated = self.bindings.activate(binding_id)
         except (BindingError, SemanticBridgeError) as exc:
-            if self.bindings.get(binding_id).binding_state is not BindingState.REVOKED:
+            current = self.bindings.get(binding_id)
+            if current is not None and current.binding_state is not BindingState.REVOKED:
                 try:
                     self.bindings.suspend(binding_id)
                 except BindingError:
@@ -94,14 +103,41 @@ class ManagedRuntime:
             raise ManagedRuntimeError(str(exc)) from exc
         return {"binding_id": activated.binding_id, "state": activated.binding_state.value, "command": applied}
 
+    def _latest_completed_seq(self, thread_id: str, turn_id: str) -> int | None:
+        row = self.bindings.store.connection.execute(
+            """SELECT raw_message_seq FROM raw_messages
+            WHERE direction = 'stdout' AND thread_id = ? AND turn_id = ?
+            ORDER BY raw_message_seq DESC""",
+            (thread_id, turn_id),
+        ).fetchone()
+        return None if row is None else int(row[0])
+
+    async def verify_and_activate(
+        self,
+        binding_id: str,
+        snapshot: ManagedActorSnapshot,
+        *,
+        raw_message_seq: int | None = None,
+    ) -> dict[str, object]:
+        submitted = await self.submit_verification(binding_id, snapshot)
+        turn_id = str(submitted.get("app_server_turn_id") or "")
+        binding = self.bindings.get(binding_id)
+        if binding is None or not binding.thread_id:
+            raise ManagedRuntimeError("binding has no thread")
+        seq = raw_message_seq if raw_message_seq is not None else self._latest_completed_seq(binding.thread_id, turn_id)
+        if seq is None:
+            raise ManagedRuntimeError("no recorded completed agentMessage")
+        return self.complete_activation(binding_id, raw_message_seq=seq)
+
     def scheduler(self, mailbox: MailboxStore, *, instance_id: str = "scheduler") -> WakeScheduler:
         batches = WakeBatchStore(self.bindings.store, mailbox)
+        leases = SchedulerLeases(self.bindings.store)
         return WakeScheduler(
             self.bindings,
             mailbox,
             batches,
-            SchedulerLeases(self.bindings.store),
-            WakeRecovery(self.bindings, mailbox, batches, self.turns.client),
+            leases,
+            WakeRecovery(self.bindings, mailbox, batches, self.turns.client, leases, instance_id),
             SemanticScanner(mailbox, self.bridge),
             self.bridge,
             self.turns.client,

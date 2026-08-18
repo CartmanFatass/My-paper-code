@@ -41,7 +41,7 @@ def test_v2_migrates_additively_to_v3(tmp_path: Path) -> None:
             ) VALUES ('bind1','act1','OPERATIONAL_ROOT','scope','NEW','FRESH','PREPARED','UNVERIFIED','r','c','op','t')"""
         )
     initialize_database(connection)
-    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 3
+    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == SCHEMA_VERSION
     tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
     assert set(REQUIRED_TABLES) <= tables
     assert connection.execute("SELECT binding_id FROM managed_actor_bindings").fetchone()[0] == "bind1"
@@ -53,7 +53,7 @@ def test_v2_migrates_additively_to_v3(tmp_path: Path) -> None:
 
 def test_fresh_store_is_schema_3(tmp_path: Path) -> None:
     store = ObserverStore(tmp_path)
-    assert store.connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 3
+    assert store.connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == SCHEMA_VERSION
     assert MailboxMessageKind.ROOT_TO_PORTFOLIO_REVIEW.value == "ROOT_TO_PORTFOLIO_REVIEW"
     assert DeliveryState.ENQUEUED.value == "ENQUEUED"
     store.close()
