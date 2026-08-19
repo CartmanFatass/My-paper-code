@@ -158,9 +158,11 @@ class ObserverStore:
         payload: Mapping[str, Any],
         params: Mapping[str, Any],
         request_class: str,
+        extra_transitions: list[Any] | None = None,
     ) -> dict[str, Any]:
         from .durability.effects import EffectJournal
         from .durability.transaction import DurabilityTransaction
+        from .durability.transitions import TransitionKernel
         from .protocol import extract_protocol_ids
 
         ids = extract_protocol_ids(payload)
@@ -178,6 +180,10 @@ class ObserverStore:
                         (run_id,),
                     ).fetchone()[0]
                 )
+                if extra_transitions:
+                    kernel = TransitionKernel(self.connection)
+                    for request in extra_transitions:
+                        kernel.apply(request)
                 journal = EffectJournal(self.connection)
                 journal.claim_write(
                     effect_id,

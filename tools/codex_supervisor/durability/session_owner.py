@@ -178,7 +178,11 @@ class AppServerSessionOwner:
 
         raise UnexpectedServerRequest(self.incident_payload or {})
 
-    async def submit_effect(self, effect_id: str) -> EffectSubmissionResult:
+    async def submit_effect(
+        self,
+        effect_id: str,
+        extra_transitions: list[Any] | None = None,
+    ) -> EffectSubmissionResult:
         from ..client import UnexpectedServerRequest
 
         if self.terminated:
@@ -189,9 +193,13 @@ class AppServerSessionOwner:
                 f"effect {effect_id} is {record.state}; WRITE_STARTED or later is never automatically submitted again"
             )
         async with self._lock:
-            return await self._submit_locked(record)
+            return await self._submit_locked(record, extra_transitions)
 
-    async def _submit_locked(self, record: EffectRecord) -> EffectSubmissionResult:
+    async def _submit_locked(
+        self,
+        record: EffectRecord,
+        extra_transitions: list[Any] | None = None,
+    ) -> EffectSubmissionResult:
         from ..client import UnexpectedServerRequest
 
         self._open_effect_ids.add(record.effect_id)
@@ -203,6 +211,7 @@ class AppServerSessionOwner:
             payload=dict(prepared.payload),
             params=dict(prepared.params),
             request_class=prepared.request_class.value,
+            extra_transitions=extra_transitions,
         )
         await self.client.send_prepared(prepared)
         send = asyncio.create_task(self.client.await_prepared(prepared))
@@ -267,8 +276,42 @@ class AppServerSessionOwner:
         *,
         timeout: float | None = None,
     ) -> dict[str, object]:
-        """Compatibility request used by SessionGuard until caller cutover."""
-        if method in MUTATING_NO_RETRY_METHODS:
-            raise RuntimeError(MUTATING_OWNER_MESSAGE)
-        result = await self.request_read(method, params, timeout=timeout)
-        return dict(result)
+        """Compatibility request used by SessionGuard until caller cutover.
+
+        Reads use request_read. Mutations use prepare/send/await on this owner
+        so they still share the one watcher; they do not call client.request().
+        New callers must use submit_effect.
+        """
+        if method not in MUTATING_NO_RETRY_METHODS:
+            result = await self.request_read(method, params, timeout=timeout)
+            return dict(result)
+        from ..client import UnexpectedServerRequest
+
+        if self.terminated:
+            raise UnexpectedServerRequest(self.incident_payload or {})
+        prepared = self.client.prepare_request(method, params)
+        send = asyncio.create_task(self._send_and_await(prepared, timeout=timeout))
+        incident = asyncio.create_task(self._incident.wait())
+        done, pending = await asyncio.wait({send, incident}, return_when=asyncio.FIRST_COMPLETED)
+        for task in pending:
+            if task is incident:
+                task.cancel()
+                try:
+                    await task
+                except (asyncio.CancelledError, Exception):
+                    pass
+        if send in done:
+            await asyncio.sleep(0)
+            if self.terminated or self._incident.is_set():
+                raise UnexpectedServerRequest(self.incident_payload or {})
+            return send.result()
+        send.cancel()
+        try:
+            await send
+        except (asyncio.CancelledError, Exception):
+            pass
+        raise UnexpectedServerRequest(self.incident_payload or {})
+
+    async def _send_and_await(self, prepared, *, timeout: float | None) -> dict[str, object]:
+        await self.client.send_prepared(prepared)
+        return await self.client.await_prepared(prepared, timeout=timeout)

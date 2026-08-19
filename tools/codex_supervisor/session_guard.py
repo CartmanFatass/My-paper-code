@@ -72,18 +72,20 @@ async def terminate_transport(client: AppServerClient) -> None:
 
 
 def mark_related_incidents(store: ObserverStore, payload: Mapping[str, Any]) -> None:
+    from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+    from .durability.transaction import DurabilityTransaction
+    from .durability.transitions import TransitionError, TransitionKernel
+
     ids = extract_protocol_ids(payload)
     thread_id = ids.thread_id
     turn_id = ids.turn_id
     incident = '{"reason":"server_request"}'
-    turn_sql = """UPDATE managed_turn_intents
-        SET submission_state = 'INCIDENT', incident_json = ?
+    turn_sql = """SELECT turn_intent_id, submission_state, version FROM managed_turn_intents
         WHERE submission_state IN ('SUBMITTING', 'SUBMITTED', 'SUBMISSION_UNCERTAIN', 'OBSERVED')"""
-    turn_params: list[object] = [incident]
-    batch_sql = """UPDATE wake_batches
-        SET state = 'INCIDENT', incident_json = ?
+    turn_params: list[object] = []
+    batch_sql = """SELECT wake_batch_id, state, version FROM wake_batches
         WHERE state IN ('SUBMITTING', 'SUBMITTED', 'SUBMISSION_UNCERTAIN', 'ACTIVE')"""
-    batch_params: list[object] = [incident]
+    batch_params: list[object] = []
     if thread_id or turn_id:
         clauses = []
         batch_clauses = []
@@ -99,15 +101,47 @@ def mark_related_incidents(store: ObserverStore, payload: Mapping[str, Any]) -> 
             batch_params.append(turn_id)
         turn_sql += " AND (" + " OR ".join(clauses) + ")"
         batch_sql += " AND (" + " OR ".join(batch_clauses) + ")"
-    with store._lock, store.connection:
-        store.connection.execute(turn_sql, turn_params)
-        store.connection.execute(batch_sql, batch_params)
-        store.connection.execute(
-            """UPDATE mutation_intents
-            SET state = 'INCIDENT', request_json = ?, updated_at = datetime('now')
-            WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED', 'SUBMITTED_UNRECONCILED')""",
-            (incident,),
-        )
+    kernel = TransitionKernel(store.connection)
+    with store._lock:
+        with DurabilityTransaction(store.connection):
+            for row in store.connection.execute(turn_sql, turn_params).fetchall():
+                try:
+                    kernel.apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MANAGED_TURN,
+                            aggregate_id=str(row["turn_intent_id"]),
+                            expected_state=str(row["submission_state"]),
+                            expected_version=int(row["version"] or 0),
+                            target_state="INCIDENT",
+                            cause_kind=TransitionCause.SERVER_REQUEST_INCIDENT,
+                            cause_ref="server_request",
+                            field_updates={"incident_json": incident},
+                        )
+                    )
+                except TransitionError:
+                    continue
+            for row in store.connection.execute(batch_sql, batch_params).fetchall():
+                try:
+                    kernel.apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.WAKE_BATCH,
+                            aggregate_id=str(row["wake_batch_id"]),
+                            expected_state=str(row["state"]),
+                            expected_version=int(row["version"] or 0),
+                            target_state="INCIDENT",
+                            cause_kind=TransitionCause.SERVER_REQUEST_INCIDENT,
+                            cause_ref="server_request",
+                            field_updates={"incident_json": incident},
+                        )
+                    )
+                except TransitionError:
+                    continue
+            store.connection.execute(
+                """UPDATE mutation_intents
+                SET state = 'INCIDENT', request_json = ?, updated_at = datetime('now')
+                WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED', 'SUBMITTED_UNRECONCILED')""",
+                (incident,),
+            )
 
 
 class ManagedAppServerSession:
@@ -192,9 +226,9 @@ class SessionGuard:
         except asyncio.CancelledError as exc:
             raise TransportClosed("guarded request cancelled") from exc
 
-    async def submit_effect(self, effect_id: str):
+    async def submit_effect(self, effect_id: str, extra_transitions: list[Any] | None = None):
         try:
-            return await self.owner.submit_effect(effect_id)
+            return await self.owner.submit_effect(effect_id, extra_transitions=extra_transitions)
         except UnexpectedServerRequest as exc:
             if self.on_incident is not None:
                 self.on_incident(exc.payload)

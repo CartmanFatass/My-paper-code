@@ -235,7 +235,7 @@ class BindingStore:
         with self.store._lock, self.store.connection:
             cursor = self.store.connection.execute(
                 """UPDATE managed_actor_bindings
-                SET thread_id = ?, binding_state = ?, thread_created_at = ?
+                SET thread_id = ?, binding_state = ?, thread_created_at = ?, version = version + 1
                 WHERE binding_id = ? AND binding_state = ?""",
                 (
                     thread_id,
@@ -267,7 +267,7 @@ class BindingStore:
             raise BindingError("only THREAD_CREATED bindings may enter verification")
         with self.store._lock, self.store.connection:
             self.store.connection.execute(
-                "UPDATE managed_actor_bindings SET binding_state = ? WHERE binding_id = ?",
+                "UPDATE managed_actor_bindings SET binding_state = ?, version = version + 1 WHERE binding_id = ?",
                 (BindingState.VERIFICATION_REQUIRED.value, binding_id),
             )
         self._record_event(binding_id, "VERIFICATION_REQUIRED", {})
@@ -436,7 +436,8 @@ class BindingStore:
                     verification_turn_intent_id = ?, verification_turn_id = ?,
                     verification_command_id = ?, verification_receipt_id = ?,
                     verified_checkpoint_id = ?, verified_state_version = ?,
-                    verified_epoch_id = ?, verified_epoch_revision = ?
+                    verified_epoch_id = ?, verified_epoch_revision = ?,
+                    version = version + 1
                 WHERE binding_id = ? AND binding_state = ?""",
                 (
                     BindingState.ACTIVE.value,
@@ -468,7 +469,7 @@ class BindingStore:
         now = _now()
         with self.store._lock, self.store.connection:
             self.store.connection.execute(
-                "UPDATE managed_actor_bindings SET binding_state = ?, suspended_at = ? WHERE binding_id = ?",
+                "UPDATE managed_actor_bindings SET binding_state = ?, suspended_at = ?, version = version + 1 WHERE binding_id = ?",
                 (BindingState.SUSPENDED.value, now, binding_id),
             )
         self._record_event(binding_id, "BINDING_SUSPENDED", {})
@@ -485,7 +486,7 @@ class BindingStore:
         now = _now()
         with self.store._lock, self.store.connection:
             self.store.connection.execute(
-                "UPDATE managed_actor_bindings SET binding_state = ?, revoked_at = ? WHERE binding_id = ?",
+                "UPDATE managed_actor_bindings SET binding_state = ?, revoked_at = ?, version = version + 1 WHERE binding_id = ?",
                 (BindingState.REVOKED.value, now, binding_id),
             )
         self._record_event(binding_id, "BINDING_REVOKED", {})

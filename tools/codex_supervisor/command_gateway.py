@@ -398,11 +398,14 @@ class CommandGateway:
         return {"effect": "MANAGED_PACKET_SEND", "packet_id": packet.get("packet_id"), "marker": packet.get("marker")}
 
     def _update_command(self, command_id: str, **fields: Any) -> None:
-        assignments = ", ".join(f"{key} = ?" for key in fields)
+        assignments = [f"{key} = ?" for key in fields]
+        values = list(fields.values())
+        if "validation_state" in fields:
+            assignments.append("version = version + 1")
         with self.bindings.store._lock, self.bindings.store.connection:
             self.bindings.store.connection.execute(
-                f"UPDATE managed_actor_commands SET {assignments} WHERE command_id = ?",
-                list(fields.values()) + [command_id],
+                f"UPDATE managed_actor_commands SET {', '.join(assignments)} WHERE command_id = ?",
+                values + [command_id],
             )
 
     def _reject(self, command_id: str, reason: str) -> None:

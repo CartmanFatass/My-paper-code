@@ -10,14 +10,17 @@ class DurabilityTransaction:
 
     def __init__(self, connection: sqlite3.Connection) -> None:
         self.connection = connection
+        self._owns = False
 
     def __enter__(self) -> DurabilityTransaction:
-        if self.connection.in_transaction:
-            raise RuntimeError("durability transaction already open")
-        self.connection.execute("BEGIN IMMEDIATE")
+        self._owns = not self.connection.in_transaction
+        if self._owns:
+            self.connection.execute("BEGIN IMMEDIATE")
         return self
 
     def __exit__(self, exc_type: type[BaseException] | None, exc: BaseException | None, tb: object) -> None:
+        if not self._owns:
+            return
         if exc_type is None:
             self.connection.commit()
         else:
