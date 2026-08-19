@@ -111,57 +111,44 @@ def mark_related_incidents(store: ObserverStore, payload: Mapping[str, Any]) -> 
 
 
 class ManagedAppServerSession:
-    """One watcher per App Server client, covering the process lifetime."""
+    """Compatibility adapter around AppServerSessionOwner. Do not start a second watcher."""
 
-    _by_client: dict[int, ManagedAppServerSession] = {}
+    def __init__(self, owner: Any) -> None:
+        self.owner = owner
+        self.client = owner.client
+        self.store = owner.store
 
-    def __init__(self, client: AppServerClient, store: ObserverStore) -> None:
-        self.client = client
-        self.store = store
-        self.terminated = False
-        self.incident_payload: dict[str, Any] | None = None
-        self._incident = asyncio.Event()
-        self._task: asyncio.Task[None] | None = None
+    @property
+    def terminated(self) -> bool:
+        return bool(self.owner.terminated)
+
+    @property
+    def incident_payload(self) -> dict[str, Any] | None:
+        return self.owner.incident_payload
+
+    @property
+    def _task(self) -> asyncio.Task[None] | None:
+        return self.owner._task
 
     @classmethod
     def for_client(cls, client: AppServerClient, store: ObserverStore) -> ManagedAppServerSession:
-        existing = cls._by_client.get(id(client))
-        if existing is not None and existing._task is not None and not existing._task.done():
-            return existing
-        session = cls(client, store)
-        session.start()
-        cls._by_client[id(client)] = session
-        return session
+        from .durability.session_owner import AppServerSessionOwner
+
+        return cls(AppServerSessionOwner.for_client(client, store))
 
     @classmethod
     def active_watcher_count(cls) -> int:
-        return sum(1 for item in cls._by_client.values() if item._task is not None and not item._task.done())
+        from .durability.session_owner import AppServerSessionOwner
+
+        return AppServerSessionOwner.active_watcher_count()
 
     def start(self) -> None:
-        if self._task is None or self._task.done():
-            self._task = asyncio.create_task(self._watch())
+        self.owner.start()
 
     def close(self) -> None:
-        if self._task is not None and not self._task.done():
-            self._task.cancel()
-        self._by_client.pop(id(self.client), None)
-
-    async def _watch(self) -> None:
-        try:
-            payload = await self.client.server_requests.get()
-        except Exception:
-            self.terminated = True
-            self._incident.set()
-            return
-        try:
-            persist_server_request(self.store, payload)
-            mark_related_incidents(self.store, payload)
-        except Exception:
-            mark_related_incidents(self.store, payload)
-        self.incident_payload = dict(payload)
-        self.terminated = True
-        self._incident.set()
-        await terminate_transport(self.client)
+        self.owner._by_client.pop(id(self.client), None)
+        if self.owner._task is not None and not self.owner._task.done():
+            self.owner._task.cancel()
 
     async def request(
         self,
@@ -170,34 +157,7 @@ class ManagedAppServerSession:
         *,
         timeout: float | None = None,
     ) -> dict[str, object]:
-        if self.terminated:
-            raise UnexpectedServerRequest(self.incident_payload or {})
-        send = asyncio.create_task(self.client.request(method, params, timeout=timeout))
-        incident = asyncio.create_task(self._incident.wait())
-        done, pending = await asyncio.wait({send, incident}, return_when=asyncio.FIRST_COMPLETED)
-        for task in pending:
-            if task is incident:
-                task.cancel()
-                try:
-                    await task
-                except (asyncio.CancelledError, Exception):
-                    pass
-        if send in done:
-            await asyncio.sleep(0)
-            if self.terminated or self._incident.is_set():
-                raise UnexpectedServerRequest(self.incident_payload or {})
-            try:
-                return send.result()
-            except Exception:
-                if self.terminated or self._incident.is_set():
-                    raise UnexpectedServerRequest(self.incident_payload or {})
-                raise
-        send.cancel()
-        try:
-            await send
-        except (asyncio.CancelledError, Exception):
-            pass
-        raise UnexpectedServerRequest(self.incident_payload or {})
+        return await self.owner.request(method, params, timeout=timeout)
 
 
 class SessionGuard:
@@ -208,10 +168,13 @@ class SessionGuard:
         *,
         on_incident: Callable[[Mapping[str, Any]], None] | None = None,
     ) -> None:
+        from .durability.session_owner import AppServerSessionOwner
+
         self.client = client
         self.store = store
         self.on_incident = on_incident
-        self.session = ManagedAppServerSession.for_client(client, store)
+        self.owner = AppServerSessionOwner.for_client(client, store)
+        self.session = ManagedAppServerSession(self.owner)
 
     async def request(
         self,
@@ -221,10 +184,18 @@ class SessionGuard:
         timeout: float | None = None,
     ) -> dict[str, object]:
         try:
-            return await self.session.request(method, params, timeout=timeout)
+            return await self.owner.request(method, params, timeout=timeout)
         except UnexpectedServerRequest as exc:
             if self.on_incident is not None:
                 self.on_incident(exc.payload)
             raise
         except asyncio.CancelledError as exc:
             raise TransportClosed("guarded request cancelled") from exc
+
+    async def submit_effect(self, effect_id: str):
+        try:
+            return await self.owner.submit_effect(effect_id)
+        except UnexpectedServerRequest as exc:
+            if self.on_incident is not None:
+                self.on_incident(exc.payload)
+            raise
