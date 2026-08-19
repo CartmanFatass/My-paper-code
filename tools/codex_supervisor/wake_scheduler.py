@@ -17,7 +17,7 @@ from .semantic_bridge import SemanticBridge, SemanticBridgeError
 from .semantic_scanner import SemanticScanner
 from .session_guard import SessionGuard
 from .transport import TransportClosed
-from .wake_batches import WakeBatchStore
+from .wake_batches import WakeBatchError, WakeBatchStore
 from .wake_recovery import WakeRecovery
 
 
@@ -118,21 +118,28 @@ class WakeScheduler:
             self._abort_unsubmitted_wake(binding_id, wake_batch_id)
             raise WakeSchedulerError("actor scope no longer matches binding")
 
-    def begin_submission(self, wake_batch_id: str) -> dict[str, object]:
+    def begin_submission(
+        self,
+        wake_batch_id: str,
+        *,
+        lease_holder: object = None,
+        lease_generation: object = None,
+    ) -> dict[str, object]:
         batch = self.batches.get(wake_batch_id)
         if batch is None:
             raise WakeSchedulerError("unknown wake batch")
         if batch["state"] != WakeBatchState.PREPARED.value:
             raise WakeSchedulerError("wake batch is not PREPARED")
-        attempts = self.bindings.store.connection.execute(
-            "SELECT COUNT(*) FROM wake_attempts WHERE wake_batch_id = ?",
-            (wake_batch_id,),
-        ).fetchone()[0]
-        if int(attempts) > 0:
-            raise WakeSchedulerError("wake batch already has a submission attempt")
-        updated = self.batches.set_state(wake_batch_id, state=WakeBatchState.SUBMITTING.value)
-        self.recovery._record_attempt(wake_batch_id, WakeAttemptOutcome.SUBMITTING)
-        return updated
+        holder = lease_holder if lease_holder is not None else batch["lease_holder"]
+        generation = lease_generation if lease_generation is not None else batch["lease_generation"]
+        try:
+            return self.batches.claim_first_submission(
+                wake_batch_id,
+                lease_holder=holder,
+                lease_generation=generation,
+            )
+        except WakeBatchError as exc:
+            raise WakeSchedulerError(str(exc)) from exc
 
     async def submit_batch(
         self,
@@ -153,7 +160,11 @@ class WakeScheduler:
         generation = int(lease_generation)
         self._assert_submit_fence(str(batch["binding_id"]), generation, wake_batch_id=wake_batch_id)
         self.leases.renew(str(batch["binding_id"]), self.instance_id, generation=generation)
-        batch = self.begin_submission(wake_batch_id)
+        batch = self.begin_submission(
+            wake_batch_id,
+            lease_holder=self.instance_id,
+            lease_generation=generation,
+        )
         params = {
             "threadId": batch["thread_id"],
             "input": [{"type": "text", "text": input_text}],

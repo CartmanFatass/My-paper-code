@@ -92,15 +92,23 @@ class ManagedTurns:
 
     def _set_state(self, turn_intent_id: str, **fields: Any) -> bool:
         expected = fields.pop("expected_state", None)
+        expected_states = fields.pop("expected_states", None)
         assignments = ", ".join(f"{key} = ?" for key in fields)
         values = list(fields.values()) + [turn_intent_id]
         sql = f"UPDATE managed_turn_intents SET {assignments} WHERE turn_intent_id = ?"
+        allowed = expected_states
         if expected is not None:
-            sql += " AND submission_state = ?"
-            values.append(expected)
+            allowed = frozenset({expected}) if allowed is None else set(allowed) | {expected}
+        if allowed is not None:
+            sql += " AND submission_state IN (" + ", ".join("?" for _ in allowed) + ")"
+            values.extend(sorted(allowed))
         with self.bindings.store._lock, self.bindings.store.connection:
             cursor = self.bindings.store.connection.execute(sql, values)
             return cursor.rowcount == 1
+
+    def _refuse_incident_mutation(self, client_key: str) -> None:
+        if self.mutations.get_unresolved_incident("turn/start", client_key) is not None:
+            raise ManagedTurnError("incident is terminal; operator recovery required")
 
     def _claim_prepared(self, turn_intent_id: str) -> bool:
         with self.bindings.store._lock, self.bindings.store.connection:
@@ -211,23 +219,45 @@ class ManagedTurns:
 
     async def reconcile_uncertain(self, turn_intent_id: str) -> dict[str, Any]:
         row = self._row(turn_intent_id)
+        if row["submission_state"] == SubmissionState.INCIDENT.value:
+            raise ManagedTurnError("incident is terminal; operator recovery required")
         if row["submission_state"] not in {
             SubmissionState.SUBMISSION_UNCERTAIN.value,
             SubmissionState.SUBMITTING.value,
         }:
             return row
+        client_key = str(row["client_user_message_id"])
+        self._refuse_incident_mutation(client_key)
         read = await self.client.read_thread(str(row["app_server_thread_id"]), include_turns=True)
+        row = self._row(turn_intent_id)
+        if row["submission_state"] == SubmissionState.INCIDENT.value:
+            raise ManagedTurnError("incident is terminal; operator recovery required")
+        self._refuse_incident_mutation(client_key)
+        if row["submission_state"] not in {
+            SubmissionState.SUBMISSION_UNCERTAIN.value,
+            SubmissionState.SUBMITTING.value,
+        }:
+            return row
         thread = read.get("thread") if isinstance(read.get("thread"), dict) else {}
         turns = thread.get("turns") if isinstance(thread.get("turns"), list) else []
         wanted = row["client_user_message_id"]
         for turn in turns:
             if isinstance(turn, dict) and turn.get("clientUserMessageId") == wanted:
-                self._set_state(
+                applied = self._set_state(
                     turn_intent_id,
                     submission_state=SubmissionState.OBSERVED.value,
                     app_server_turn_id=turn.get("id"),
                     observed_at=_now(),
+                    expected_states={
+                        SubmissionState.SUBMISSION_UNCERTAIN.value,
+                        SubmissionState.SUBMITTING.value,
+                    },
                 )
+                if not applied:
+                    row = self._row(turn_intent_id)
+                    if row["submission_state"] == SubmissionState.INCIDENT.value:
+                        raise ManagedTurnError("incident is terminal; operator recovery required")
+                    return row
                 return self._row(turn_intent_id)
         return row
 

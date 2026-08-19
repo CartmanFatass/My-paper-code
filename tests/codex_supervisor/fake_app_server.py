@@ -127,6 +127,16 @@ def serve(mode: str) -> None:
                         }
                     )
                     continue
+                if mode == "server_request_then_thread_list_response":
+                    _emit(
+                        {
+                            "id": "server-1",
+                            "method": "item/commandExecution/requestApproval",
+                            "params": {},
+                        }
+                    )
+                    _emit({"id": request_id, "result": {"data": [{"id": "thr_b", "preview": "two"}]}})
+                    continue
                 if mode == "two_pages" and pages_sent == 0:
                     pages_sent += 1
                     _emit(

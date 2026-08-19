@@ -78,7 +78,7 @@ def mark_related_incidents(store: ObserverStore, payload: Mapping[str, Any]) -> 
     incident = '{"reason":"server_request"}'
     turn_sql = """UPDATE managed_turn_intents
         SET submission_state = 'INCIDENT', incident_json = ?
-        WHERE submission_state IN ('SUBMITTING', 'SUBMITTED', 'OBSERVED')"""
+        WHERE submission_state IN ('SUBMITTING', 'SUBMITTED', 'SUBMISSION_UNCERTAIN', 'OBSERVED')"""
     turn_params: list[object] = [incident]
     batch_sql = """UPDATE wake_batches
         SET state = 'INCIDENT', incident_json = ?
@@ -183,10 +183,13 @@ class ManagedAppServerSession:
                 except (asyncio.CancelledError, Exception):
                     pass
         if send in done:
+            await asyncio.sleep(0)
+            if self.terminated or self._incident.is_set():
+                raise UnexpectedServerRequest(self.incident_payload or {})
             try:
                 return send.result()
             except Exception:
-                if self.terminated:
+                if self.terminated or self._incident.is_set():
                     raise UnexpectedServerRequest(self.incident_payload or {})
                 raise
         send.cancel()

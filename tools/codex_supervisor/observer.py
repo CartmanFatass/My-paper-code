@@ -204,11 +204,52 @@ class ObserverService:
         if self.session is not None and self.session.terminated:
             raise UnexpectedServerRequest(self.session.incident_payload or {})
 
+    async def _drain_incident(self) -> None:
+        await asyncio.sleep(0)
+        self._raise_if_incident()
+
+    async def _session_request(
+        self,
+        method: str,
+        params: dict[str, object] | None = None,
+    ) -> dict[str, object]:
+        assert self.client is not None
+        if self.session is not None:
+            response = await self.session.request(method, params)
+        else:
+            response = await self.client.request(method, params)
+        await self._drain_incident()
+        return response
+
+    async def _list_threads(self) -> list[dict[str, object]]:
+        threads: list[dict[str, object]] = []
+        cursor: object = None
+        while True:
+            params: dict[str, object] = {}
+            if cursor:
+                params["cursor"] = cursor
+            response = await self._session_request("thread/list", params)
+            result = response.get("result") if isinstance(response.get("result"), Mapping) else {}
+            data = result.get("data") if isinstance(result, Mapping) else None
+            if isinstance(data, list):
+                threads.extend(item for item in data if isinstance(item, dict))
+            next_cursor = result.get("nextCursor") if isinstance(result, Mapping) else None
+            if not next_cursor:
+                return threads
+            cursor = next_cursor
+
+    async def _read_thread(self, thread_id: str, include_turns: bool = False) -> dict[str, object]:
+        params: dict[str, object] = {"threadId": thread_id}
+        if include_turns:
+            params["includeTurns"] = True
+        response = await self._session_request("thread/read", params)
+        result = response.get("result")
+        return dict(result) if isinstance(result, Mapping) else {}
+
     async def initialize(self) -> None:
         assert self.client is not None and self.run_id is not None
         await self.client.initialize()
-        await asyncio.sleep(0)
-        self._raise_if_incident()
+        await self._drain_incident()
         self.store.mark_initialized(self.run_id)
         self.record_local_event("APP_SERVER_INITIALIZED_OBSERVED", {})
 
@@ -218,14 +259,12 @@ class ObserverService:
         rec_id = self.store.start_reconciliation(self.run_id)
         self.record_local_event("RECONCILIATION_STARTED_OBSERVED", {})
         try:
-            threads = await self.client.list_threads()
-            self._raise_if_incident()
+            threads = await self._list_threads()
             for thread in threads:
                 thread_id = thread.get("id")
                 if not thread_id:
                     continue
-                await self.client.read_thread(str(thread_id), include_turns=False)
-                self._raise_if_incident()
+                await self._read_thread(str(thread_id), include_turns=False)
             self.store.complete_reconciliation(rec_id, thread_count=len(threads), outcome="OK")
             self.record_local_event("RECONCILIATION_COMPLETED_OBSERVED", {"thread_count": len(threads)})
             return {"thread_count": len(threads), "outcome": "OK"}
@@ -295,9 +334,9 @@ class ObserverService:
         await self.start()
         try:
             await self.initialize()
-            await asyncio.sleep(0)
-            self._raise_if_incident()
+            await self._drain_incident()
             result = await self.reconcile_threads()
+            await self._drain_incident()
             await self.stop(EndKind.NORMAL.value)
             return result
         except UnexpectedServerRequest as exc:
@@ -339,6 +378,9 @@ class ObserverService:
                 thread_count=int(count),
             )
         self._stopped = True
+        await asyncio.sleep(0)
+        if self.session is not None and self.session.terminated and end_kind == EndKind.NORMAL.value:
+            end_kind = EndKind.UNEXPECTED_SERVER_REQUEST.value
         self._end_kind = end_kind
         if self.session is not None:
             self.session.close()

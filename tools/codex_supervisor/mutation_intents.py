@@ -152,6 +152,13 @@ class MutationIntentStore:
     def mark_applied_reconciled(self, intent_id: str) -> dict[str, Any]:
         return self.set_state(intent_id, "APPLIED", expected_state=SUBMITTED_UNRECONCILED)
 
+    def mark_applied_after_loaded_observation(self, intent_id: str) -> dict[str, Any]:
+        return self.set_state(
+            intent_id,
+            "APPLIED",
+            expected_states=frozenset({"SUBMISSION_UNCERTAIN", SUBMITTED_UNRECONCILED}),
+        )
+
     def mark_incident(self, intent_id: str, reason: str) -> dict[str, Any]:
         return self.set_state(
             intent_id,

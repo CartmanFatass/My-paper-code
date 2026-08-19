@@ -213,20 +213,34 @@ class CommandGateway:
             raise CommandGatewayError("command turn predates the wake turn")
 
     def _refuse_incident_source(self, binding: Any, turn_id: str) -> None:
+        keys: list[str] = []
         turn = self.bindings.store.connection.execute(
-            """SELECT submission_state FROM managed_turn_intents
+            """SELECT submission_state, client_user_message_id FROM managed_turn_intents
             WHERE binding_id = ? AND app_server_turn_id = ?""",
             (binding.binding_id, turn_id),
         ).fetchone()
         if turn is not None and str(turn[0]) == "INCIDENT":
             raise CommandGatewayError("command turn is INCIDENT; no control effect")
+        if turn is not None and turn[1]:
+            keys.append(str(turn[1]))
         batch = self.bindings.store.connection.execute(
-            """SELECT state FROM wake_batches
+            """SELECT state, client_user_message_id FROM wake_batches
             WHERE binding_id = ? AND app_server_turn_id = ?""",
             (binding.binding_id, turn_id),
         ).fetchone()
         if batch is not None and str(batch[0]) == "INCIDENT":
             raise CommandGatewayError("wake batch is INCIDENT; no control effect")
+        if batch is not None and batch[1]:
+            keys.append(str(batch[1]))
+        if keys:
+            placeholders = ", ".join("?" for _ in keys)
+            found = self.bindings.store.connection.execute(
+                f"""SELECT 1 FROM mutation_intents
+                WHERE state = 'INCIDENT' AND client_key IN ({placeholders})""",
+                keys,
+            ).fetchone()
+            if found is not None:
+                raise CommandGatewayError("mutation intent is INCIDENT; no control effect")
 
     def _turn_order_key(self, turn_id: str, thread_id: str | None) -> tuple[str, object] | None:
         first_event = self.bindings.store.connection.execute(

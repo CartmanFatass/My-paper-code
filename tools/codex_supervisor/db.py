@@ -6,7 +6,7 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 5
+SCHEMA_VERSION = 6
 
 SCHEMA_STATEMENTS = (
     """
@@ -374,7 +374,7 @@ SCHEMA_STATEMENTS = (
     """
     CREATE UNIQUE INDEX IF NOT EXISTS mutation_intents_open_unique
     ON mutation_intents(method, client_key)
-    WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN')
+    WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED_UNRECONCILED', 'INCIDENT')
     """,
 )
 
@@ -455,6 +455,12 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _add_column_if_missing(connection, "wake_batches", "lease_holder", "TEXT")
         _add_column_if_missing(connection, "thread_snapshots", "preview_present", "INTEGER")
         _add_column_if_missing(connection, "thread_snapshots", "preview_byte_length", "INTEGER")
+        connection.execute("DROP INDEX IF EXISTS mutation_intents_open_unique")
+        connection.execute(
+            """CREATE UNIQUE INDEX IF NOT EXISTS mutation_intents_open_unique
+            ON mutation_intents(method, client_key)
+            WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED_UNRECONCILED', 'INCIDENT')"""
+        )
         if current < SCHEMA_VERSION:
             connection.execute(
                 "INSERT INTO schema_meta(version, applied_at) VALUES (?, ?)",

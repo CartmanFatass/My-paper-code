@@ -80,7 +80,7 @@ class WakeRecovery:
         readiness = await self.classify(binding_id)
         if readiness is ThreadWakeReadiness.IDLE_LOADED:
             try:
-                self.mutations.mark_applied_reconciled(intent_id)
+                self.mutations.mark_applied_after_loaded_observation(intent_id)
             except MutationIntentError:
                 pass
         return readiness

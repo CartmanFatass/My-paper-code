@@ -12,6 +12,7 @@ from .mailbox_models import (
     MAX_WAKE_MESSAGES,
     WAKE_ENVELOPE_HEADER,
     MailboxMessage,
+    WakeAttemptOutcome,
     WakeBatchState,
 )
 from .mailbox_store import MailboxStore
@@ -192,6 +193,71 @@ class WakeBatchStore:
         row["input_text"] = envelope.text
         row["included_message_ids"] = envelope.included_message_ids
         row["excluded_message_ids"] = envelope.excluded_message_ids
+        return row
+
+    def claim_first_submission(
+        self,
+        wake_batch_id: str,
+        *,
+        lease_holder: object = None,
+        lease_generation: object = None,
+    ) -> dict[str, object]:
+        now = _now()
+        with self.store._lock:
+            self.store.connection.execute("BEGIN IMMEDIATE")
+            try:
+                cursor = self.store.connection.execute(
+                    """UPDATE wake_batches
+                    SET state = ?
+                    WHERE wake_batch_id = ?
+                      AND state = ?
+                      AND (
+                        lease_holder IS NULL
+                        OR ? IS NULL
+                        OR lease_holder = ?
+                      )
+                      AND (
+                        lease_generation IS NULL
+                        OR ? IS NULL
+                        OR lease_generation = ?
+                      )""",
+                    (
+                        WakeBatchState.SUBMITTING.value,
+                        wake_batch_id,
+                        WakeBatchState.PREPARED.value,
+                        lease_holder,
+                        lease_holder,
+                        lease_generation,
+                        lease_generation,
+                    ),
+                )
+                if cursor.rowcount != 1:
+                    self.store.connection.rollback()
+                    row = self.get(wake_batch_id)
+                    if row is None:
+                        raise WakeBatchError("unknown wake batch")
+                    raise WakeBatchError("wake batch is not PREPARED for this lease")
+                self.store.connection.execute(
+                    """INSERT INTO wake_attempts (
+                        wake_attempt_id, wake_batch_id, attempt_number, request_id,
+                        outcome, error_json, created_at
+                    ) VALUES (?, ?, 1, NULL, ?, NULL, ?)""",
+                    (
+                        f"watt_{uuid.uuid4().hex}",
+                        wake_batch_id,
+                        WakeAttemptOutcome.SUBMITTING.value,
+                        now,
+                    ),
+                )
+                self.store.connection.commit()
+            except Exception:
+                try:
+                    self.store.connection.rollback()
+                except Exception:
+                    pass
+                raise
+        row = self.get(wake_batch_id)
+        assert row is not None
         return row
 
     def set_state(self, wake_batch_id: str, **fields: object) -> dict[str, object]:
