@@ -8,10 +8,10 @@ from typing import Any
 
 from .binding_store import BindingError, BindingStore
 from .client import AppServerClient, AppServerRpcError, RetryRequired, UnexpectedServerRequest
+from .durability.effects import EffectJournal
+from .durability.session_owner import AppServerSessionOwner
 from .managed_models import HistoryTrust, ThreadOrigin
-from .mutation_intents import MutationIntentError, MutationIntentStore
 from .semantic_bridge import ManagedActorSnapshot
-from .session_guard import SessionGuard
 from .transport import TransportClosed
 
 MEMORY_MODE_METHOD = "thread/memoryMode/set"
@@ -29,7 +29,7 @@ class ManagedProvisioner:
     def __init__(self, bindings: BindingStore, client: AppServerClient | None = None) -> None:
         self.bindings = bindings
         self.client = client
-        self.mutations = MutationIntentStore(bindings.store)
+        self.journal = EffectJournal(bindings.store.connection)
 
     def prepare(
         self,
@@ -87,52 +87,37 @@ class ManagedProvisioner:
             "approvalPolicy": "never",
         }
         client_key = f"thread/start:{binding_id}"
+        existing = self.journal.get_by_key("thread/start", client_key)
+        if existing is not None and existing.state != "PREPARED":
+            raise ProvisioningError("thread/start already has an unresolved effect; reconcile, do not retry")
+        effect = self.journal.prepare_effect(
+            owner_kind="THREAD_PROVISION",
+            owner_id=binding_id,
+            binding_id=binding_id,
+            method="thread/start",
+            client_key=client_key,
+            request=params,
+        )
+        owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
-            intent = self.mutations.begin("thread/start", client_key, binding_id=binding_id, request=params)
-        except MutationIntentError as exc:
-            raise ProvisioningError("thread/start already has an unresolved intent; reconcile, do not retry") from exc
-
-        def _incident(_payload: object) -> None:
-            try:
-                self.mutations.mark_incident(str(intent["intent_id"]), "server_request")
-            except MutationIntentError:
-                pass
-            self.bindings._record_event(binding_id, "THREAD_START_INCIDENT", {"reason": "server_request"})
-
-        guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
-        try:
-            response = await guard.request("thread/start", params)
+            submitted = await owner.submit_effect(effect.effect_id)
         except RetryRequired as exc:
-            try:
-                self.mutations.mark_uncertain(str(intent["intent_id"]), "overload")
-            except MutationIntentError:
-                pass
             self.bindings._record_event(binding_id, "THREAD_START_UNCERTAIN", {"reason": "overload"})
             raise ProvisioningError("thread/start uncertain; do not retry automatically") from exc
         except UnexpectedServerRequest as exc:
+            self.bindings._record_event(binding_id, "THREAD_START_INCIDENT", {"reason": "server_request"})
             raise ProvisioningError("thread/start incident; do not retry automatically") from exc
         except (AppServerRpcError, TransportClosed, asyncio.TimeoutError) as exc:
-            try:
-                self.mutations.mark_uncertain(str(intent["intent_id"]), type(exc).__name__)
-            except MutationIntentError:
-                pass
             self.bindings._record_event(binding_id, "THREAD_START_UNCERTAIN", {"reason": type(exc).__name__})
             raise ProvisioningError("thread/start uncertain; do not retry automatically") from exc
+        response = submitted.response or {}
         result = response.get("result") if isinstance(response.get("result"), dict) else {}
         thread = result.get("thread") if isinstance(result.get("thread"), dict) else {}
-        thread_id = str(thread.get("id") or "")
+        thread_id = str(thread.get("id") or submitted.effect_id and (result.get("thread") or {}).get("id") or "")
         if not thread_id:
-            try:
-                self.mutations.mark_uncertain(str(intent["intent_id"]), "missing_id")
-            except MutationIntentError:
-                pass
             self.bindings._record_event(binding_id, "THREAD_START_UNCERTAIN", {"reason": "missing_id"})
             raise ProvisioningError("thread/start returned no thread id")
-        self.bindings.attach_thread(
-            binding_id,
-            thread_id,
-            mutation_intent_id=str(intent["intent_id"]),
-        )
+        self.bindings.attach_thread(binding_id, thread_id, effect_id=effect.effect_id)
         if self.client is not None:
             read = await self.client.read_thread(thread_id)
             read_thread = read.get("thread") if isinstance(read.get("thread"), dict) else {}
@@ -168,32 +153,23 @@ class ManagedProvisioner:
             history_trust=HistoryTrust.LEGACY_UNTRUSTED_HISTORY,
         )
         client_key = f"thread/resume:{thread_id}"
-        try:
-            intent = self.mutations.begin("thread/resume", client_key, binding_id=binding_id)
-        except MutationIntentError as exc:
-            raise ProvisioningError("thread/resume already has an unresolved intent; reconcile, do not retry") from exc
-
-        def _incident(_payload: object) -> None:
-            try:
-                self.mutations.mark_incident(str(intent["intent_id"]), "server_request")
-            except MutationIntentError:
-                pass
-            self.bindings._record_event(binding_id, "THREAD_RESUME_INCIDENT", {"reason": "server_request"})
-
-        guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
-        try:
-            await guard.request("thread/resume", {"threadId": thread_id})
-        except (RetryRequired, AppServerRpcError, TransportClosed, asyncio.TimeoutError, UnexpectedServerRequest) as exc:
-            if not isinstance(exc, UnexpectedServerRequest):
-                try:
-                    self.mutations.mark_uncertain(str(intent["intent_id"]), type(exc).__name__)
-                except MutationIntentError:
-                    pass
-            self.bindings._record_event(binding_id, "THREAD_RESUME_UNCERTAIN", {"reason": type(exc).__name__})
-            raise ProvisioningError("thread/resume uncertain; do not retry automatically") from exc
-        self.bindings.attach_thread(
-            binding_id,
-            thread_id,
-            mutation_intent_id=str(intent["intent_id"]),
+        existing = self.journal.get_by_key("thread/resume", client_key)
+        if existing is not None and existing.state != "PREPARED":
+            raise ProvisioningError("thread/resume already has an unresolved effect; reconcile, do not retry")
+        effect = self.journal.prepare_effect(
+            owner_kind="THREAD_RESUME",
+            owner_id=binding_id,
+            binding_id=binding_id,
+            method="thread/resume",
+            client_key=client_key,
+            request={"threadId": thread_id},
         )
+        owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
+        try:
+            await owner.submit_effect(effect.effect_id)
+        except (RetryRequired, AppServerRpcError, TransportClosed, asyncio.TimeoutError, UnexpectedServerRequest) as exc:
+            kind = "THREAD_RESUME_INCIDENT" if isinstance(exc, UnexpectedServerRequest) else "THREAD_RESUME_UNCERTAIN"
+            self.bindings._record_event(binding_id, kind, {"reason": type(exc).__name__})
+            raise ProvisioningError("thread/resume uncertain; do not retry automatically") from exc
+        self.bindings.attach_thread(binding_id, thread_id, effect_id=effect.effect_id)
         return binding_id

@@ -45,9 +45,15 @@ def plant_verification_receipt(store: BindingStore, binding_id: str, snapshot, t
     )
     store.store.connection.execute(
         """UPDATE managed_turn_intents
-        SET app_server_turn_id = ?, submission_state = 'SUBMITTED'
+        SET app_server_turn_id = ?, submission_state = 'SUBMITTING', version = version + 1
         WHERE turn_intent_id = ?""",
         (turn_id, intent_id),
+    )
+    store.store.connection.execute(
+        """UPDATE managed_turn_intents
+        SET submission_state = 'SUBMITTED', version = version + 1
+        WHERE turn_intent_id = ?""",
+        (intent_id,),
     )
     store.store.connection.commit()
     turns.record_completion(intent_id, "completed")

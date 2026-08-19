@@ -118,6 +118,15 @@ _FIELD_NAME = frozenset(
         "last_thread_status",
         "lease_holder",
         "lease_generation",
+        "verification_turn_intent_id",
+        "verification_turn_id",
+        "verification_command_id",
+        "verification_receipt_id",
+        "verified_checkpoint_id",
+        "verified_state_version",
+        "verified_epoch_id",
+        "verified_epoch_revision",
+        "last_verified_at",
     }
 )
 
