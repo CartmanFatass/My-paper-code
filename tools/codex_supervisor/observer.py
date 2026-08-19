@@ -429,7 +429,7 @@ class ObserverService:
                     await self._terminate_unexpected(exc)
                     self.record_local_event("CANARY_INCIDENT_OBSERVED", {"reason": "server_request"})
                     return CanaryResult(canary_id, self.run_id, None, None, "incident", incident="server_request")
-            start = await self.client.request(
+            start = await self._session_request(
                 "thread/start",
                 {"cwd": str(scratch.resolve()), "ephemeral": True, "approvalPolicy": "never"},
             )
@@ -446,7 +446,7 @@ class ObserverService:
                 self.record_local_event("CANARY_INCIDENT_OBSERVED", {"reason": "not_ephemeral"})
                 await self.stop(EndKind.PROTOCOL_INCIDENT.value)
                 return CanaryResult(canary_id, self.run_id, thread_id, None, "incident", incident="not_ephemeral")
-            turn = await self.client.request(
+            turn = await self._session_request(
                 "turn/start",
                 {"threadId": thread_id, "input": list(CANARY_INPUT)},
             )

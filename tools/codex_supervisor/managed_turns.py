@@ -167,6 +167,12 @@ class ManagedTurns:
                 submission_state=SubmissionState.SUBMISSION_UNCERTAIN.value,
                 incident_json=json.dumps({"reason": "overload"}),
             )
+            open_intent = self.mutations.get_open("turn/start", str(row["client_user_message_id"]))
+            if open_intent is not None:
+                try:
+                    self.mutations.mark_uncertain(str(open_intent["intent_id"]), "overload")
+                except Exception:
+                    pass
             raise ManagedTurnError("turn/start uncertain; do not retry") from exc
         except UnexpectedServerRequest as exc:
             raise ManagedTurnError("turn/start incident; do not retry") from exc

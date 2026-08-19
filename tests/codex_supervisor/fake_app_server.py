@@ -194,6 +194,26 @@ def serve(mode: str) -> None:
                 _emit({"id": request_id, "error": {"code": -32001, "message": "overload"}})
                 continue
             if method == "thread/start":
+                if mode == "server_request_then_thread_start_response":
+                    _emit(
+                        {
+                            "id": "server-1",
+                            "method": "item/commandExecution/requestApproval",
+                            "params": {},
+                        }
+                    )
+                    ephemeral = bool(params.get("ephemeral"))
+                    thread_id = "thr_canary"
+                    globals().setdefault("_FAKE_LOADED", []).append(thread_id)
+                    _emit(
+                        {
+                            "id": request_id,
+                            "result": {
+                                "thread": {"id": thread_id, "ephemeral": ephemeral, "path": None}
+                            },
+                        }
+                    )
+                    continue
                 ephemeral = bool(params.get("ephemeral"))
                 if mode == "canary_not_ephemeral":
                     ephemeral = False

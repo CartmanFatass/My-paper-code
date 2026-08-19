@@ -211,23 +211,13 @@ class WakeBatchStore:
                     SET state = ?
                     WHERE wake_batch_id = ?
                       AND state = ?
-                      AND (
-                        lease_holder IS NULL
-                        OR ? IS NULL
-                        OR lease_holder = ?
-                      )
-                      AND (
-                        lease_generation IS NULL
-                        OR ? IS NULL
-                        OR lease_generation = ?
-                      )""",
+                      AND lease_holder IS ?
+                      AND lease_generation IS ?""",
                     (
                         WakeBatchState.SUBMITTING.value,
                         wake_batch_id,
                         WakeBatchState.PREPARED.value,
                         lease_holder,
-                        lease_holder,
-                        lease_generation,
                         lease_generation,
                     ),
                 )

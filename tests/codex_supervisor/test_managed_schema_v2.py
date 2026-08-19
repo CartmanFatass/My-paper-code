@@ -125,3 +125,43 @@ def test_fresh_store_is_schema_2(tmp_path: Path) -> None:
     assert ManagedActorKind.OPERATIONAL_ROOT.value == "OPERATIONAL_ROOT"
     assert BindingState.PREPARED.value == "PREPARED"
     store.close()
+
+
+def test_v5_to_v6_rebuilds_mutation_open_unique_predicate(tmp_path: Path) -> None:
+    path = tmp_path / "state.sqlite3"
+    connection = connect(path)
+    with connection:
+        connection.execute(
+            "CREATE TABLE schema_meta (version INTEGER PRIMARY KEY, applied_at TEXT NOT NULL)"
+        )
+        connection.execute("INSERT INTO schema_meta(version, applied_at) VALUES (5, 't')")
+        connection.execute(
+            """CREATE TABLE mutation_intents (
+                intent_id TEXT PRIMARY KEY,
+                method TEXT NOT NULL,
+                binding_id TEXT,
+                client_key TEXT NOT NULL,
+                state TEXT NOT NULL,
+                request_json TEXT,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            )"""
+        )
+        connection.execute(
+            """CREATE UNIQUE INDEX mutation_intents_open_unique
+            ON mutation_intents(method, client_key)
+            WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN')"""
+        )
+    old_sql = connection.execute(
+        "SELECT sql FROM sqlite_master WHERE type='index' AND name='mutation_intents_open_unique'"
+    ).fetchone()[0]
+    assert "SUBMITTED_UNRECONCILED" not in old_sql
+    assert "INCIDENT" not in old_sql
+    initialize_database(connection)
+    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == SCHEMA_VERSION
+    rebuilt = connection.execute(
+        "SELECT sql FROM sqlite_master WHERE type='index' AND name='mutation_intents_open_unique'"
+    ).fetchone()[0]
+    assert "SUBMITTED_UNRECONCILED" in rebuilt
+    assert "INCIDENT" in rebuilt
+    connection.close()

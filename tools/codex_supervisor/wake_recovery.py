@@ -7,7 +7,12 @@ from typing import Any
 
 from .binding_store import BindingStore
 from .client import AppServerClient, AppServerRpcError, UnexpectedServerRequest
-from .mailbox_models import ThreadWakeReadiness, WakeAttemptOutcome, WakeBatchState
+from .mailbox_models import (
+    ThreadWakeReadiness,
+    WakeAttemptOutcome,
+    WakeBatchState,
+    WakeIncidentDisposition,
+)
 from .mailbox_store import MailboxStore
 from .managed_models import BindingState
 from .mutation_intents import MutationIntentError, MutationIntentStore
@@ -15,6 +20,10 @@ from .scheduler_leases import LeaseError, SchedulerLeases
 from .session_guard import SessionGuard
 from .transport import TransportClosed
 from .wake_batches import WakeBatchStore
+
+
+class WakeIncidentError(RuntimeError):
+    """Raised when an operator cannot legally resolve a wake incident."""
 
 
 class WakeRecovery:
@@ -288,6 +297,116 @@ class WakeRecovery:
             WakeAttemptOutcome.INCIDENT,
             error={"reason": "active_turn_missing"},
         )
+        return updated
+
+    def _has_possible_submission(self, wake_batch_id: str, batch: dict[str, object]) -> bool:
+        if batch.get("app_server_turn_id") or batch.get("submitted_at") or batch.get("observed_at"):
+            return True
+        for message in self.batches.messages_for(wake_batch_id):
+            if message.delivery_state.value == "DELIVERED_TO_TURN":
+                return True
+        rows = self.bindings.store.connection.execute(
+            """SELECT outcome FROM wake_attempts WHERE wake_batch_id = ?""",
+            (wake_batch_id,),
+        ).fetchall()
+        return any(str(row[0]) in {"SUBMITTED", "RECONCILED"} for row in rows)
+
+    def resolve_incident(
+        self,
+        wake_batch_id: str,
+        *,
+        operator: str,
+        disposition: str | WakeIncidentDisposition,
+        turn_id: str | None = None,
+        completion_status: str | None = None,
+    ) -> dict[str, object]:
+        import json
+
+        if not str(operator or "").strip():
+            raise WakeIncidentError("operator identity is required to resolve a wake incident")
+        if isinstance(disposition, WakeIncidentDisposition):
+            chosen = disposition
+        else:
+            try:
+                chosen = WakeIncidentDisposition(str(disposition))
+            except ValueError as exc:
+                raise WakeIncidentError("unknown wake incident disposition") from exc
+        batch = self.batches.get(wake_batch_id)
+        if batch is None:
+            raise WakeIncidentError(f"unknown wake batch: {wake_batch_id}")
+        if str(batch["state"]) != WakeBatchState.INCIDENT.value:
+            raise WakeIncidentError("only INCIDENT wake batches may be operator-resolved")
+        receipt = {
+            "reason": "operator_resolved",
+            "operator": str(operator).strip(),
+            "disposition": chosen.value,
+        }
+        if chosen is WakeIncidentDisposition.NO_SUBMISSION_EVIDENCE:
+            if self._has_possible_submission(wake_batch_id, batch):
+                raise WakeIncidentError("cannot requeue incident with possible submission")
+            for message in self.batches.messages_for(wake_batch_id):
+                if message.delivery_state.value != "BATCHED":
+                    continue
+                if message.source_resolved_after_submission:
+                    self.mailbox.cancel_source_resolved(message.message_id)
+                else:
+                    self.mailbox.return_to_eligible(message.message_id)
+            updated = self.batches.set_state(
+                wake_batch_id,
+                state=WakeBatchState.CANCELLED.value,
+                incident_json=json.dumps(receipt),
+                expected_state=WakeBatchState.INCIDENT.value,
+            )
+            self._record_attempt(wake_batch_id, WakeAttemptOutcome.CANCELLED, error=receipt)
+            return updated
+        if chosen is WakeIncidentDisposition.TURN_OBSERVED:
+            observed_turn = turn_id or batch.get("app_server_turn_id")
+            if not observed_turn:
+                raise WakeIncidentError("TURN_OBSERVED requires a turn id")
+            for message in self.batches.messages_for(wake_batch_id):
+                if message.delivery_state.value in {"BATCHED", "SUBMISSION_UNCERTAIN"}:
+                    self.mailbox.mark_delivered(message.message_id)
+            from datetime import datetime, timezone
+
+            now = datetime.now(timezone.utc).isoformat()
+            fields: dict[str, object] = {
+                "app_server_turn_id": observed_turn,
+                "observed_at": now,
+                "incident_json": json.dumps(receipt),
+            }
+            if completion_status in {"completed", "interrupted", "failed"}:
+                fields["state"] = WakeBatchState.COMPLETED.value
+                fields["completion_status"] = completion_status
+                fields["completed_at"] = now
+                outcome = WakeAttemptOutcome.RECONCILED
+            else:
+                fields["state"] = WakeBatchState.ACTIVE.value
+                outcome = WakeAttemptOutcome.RECONCILED
+            updated = self.batches.set_state(
+                wake_batch_id,
+                expected_state=WakeBatchState.INCIDENT.value,
+                **fields,
+            )
+            self._record_attempt(wake_batch_id, outcome, error=receipt)
+            return updated
+        for message in self.batches.messages_for(wake_batch_id):
+            if message.delivery_state.value in {
+                "DEAD_LETTER",
+                "CANCELLED_SOURCE_RESOLVED",
+            }:
+                continue
+            self.mailbox.dead_letter(message.message_id, f"operator_abandon:{operator}")
+            self.mailbox.record_command_receipt(
+                command_id=f"wake-incident:{wake_batch_id}",
+                message_id=message.message_id,
+                action="ABANDON",
+            )
+        updated = self.batches.set_state(
+            wake_batch_id,
+            incident_json=json.dumps(receipt),
+            expected_state=WakeBatchState.INCIDENT.value,
+        )
+        self._record_attempt(wake_batch_id, WakeAttemptOutcome.INCIDENT, error=receipt)
         return updated
 
     async def recover(self) -> dict[str, object]:

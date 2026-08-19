@@ -72,6 +72,12 @@ class WakeAttemptOutcome(str, Enum):
     INCIDENT = "INCIDENT"
 
 
+class WakeIncidentDisposition(str, Enum):
+    NO_SUBMISSION_EVIDENCE = "NO_SUBMISSION_EVIDENCE"
+    TURN_OBSERVED = "TURN_OBSERVED"
+    ABANDON = "ABANDON"
+
+
 FORBIDDEN_MAILBOX_KINDS = frozenset(
     {"BLOCKED", "FAILED", "SUCCESS", "RETIRED", "PAUSED", "PARKED", "RELEASED"}
 )
