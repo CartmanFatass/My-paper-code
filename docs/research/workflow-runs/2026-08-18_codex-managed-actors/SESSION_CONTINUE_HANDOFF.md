@@ -185,3 +185,14 @@ tests/codex_supervisor=194 passed
 The later rereview of `883eb028` also returned `REVISION_REQUIRED`. The
 corrective commit is `f7a53045`. Use the current
 `SYNTHETIC_CONTROL_PLANE_REREVIEW_PROMPT.md` for that slice.
+
+```text
+superseded_by=868cb383ab087e63e6071be26d3d107118481f7c
+prior_rereview=f7a5304560e52b2b78faadb6d6de4049a5b9a5f9
+reviewed_range=f7a5304560e52b2b78faadb6d6de4049a5b9a5f9..868cb383ab087e63e6071be26d3d107118481f7c
+tests/codex_supervisor=201 passed
+```
+
+The later rereview of `f7a53045` also returned `REVISION_REQUIRED`. The
+corrective commit is `868cb383`. Use the current
+`SYNTHETIC_CONTROL_PLANE_REREVIEW_PROMPT.md` for that slice.
