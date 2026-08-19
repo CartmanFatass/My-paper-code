@@ -77,8 +77,10 @@ def test_mutation_overload_is_not_retried(tmp_path: Path) -> None:
         transport, client, delays, sent = _client(tmp_path, "mutation_overload")
         await transport.start()
         await client.initialize()
+        prepared = client.prepare_request("thread/start", {})
+        await client.send_prepared(prepared)
         with pytest.raises(RetryRequired) as exc:
-            await client.request("thread/start", {})
+            await client.await_prepared(prepared)
         assert exc.value.code == -32001
         starts = [item for item in sent if item.get("method") == "thread/start"]
         assert len(starts) == 1
@@ -93,8 +95,10 @@ def test_turn_start_overload_is_not_retried(tmp_path: Path) -> None:
         transport, client, delays, sent = _client(tmp_path, "mutation_overload")
         await transport.start()
         await client.initialize()
+        prepared = client.prepare_request("turn/start", {"threadId": "thr_x", "input": []})
+        await client.send_prepared(prepared)
         with pytest.raises(RetryRequired):
-            await client.request("turn/start", {"threadId": "thr_x", "input": []})
+            await client.await_prepared(prepared)
         assert [item.get("method") for item in sent if item.get("method") == "turn/start"] == ["turn/start"]
         assert delays == []
         await transport.stop()
