@@ -8,11 +8,11 @@ authorize live App Server work.
 ```text
 document_kind=synthetic_control_plane_rereview_prompt
 supersedes=SYNTHETIC_CONTROL_PLANE_REVIEW_PROMPT.md
-prior_reviewed_commit=f7a5304560e52b2b78faadb6d6de4049a5b9a5f9
-prior_reviewed_range=883eb028c3cbdadf99159869ea722e8a4a6a5f6d..f7a5304560e52b2b78faadb6d6de4049a5b9a5f9
+prior_reviewed_commit=868cb383ab087e63e6071be26d3d107118481f7c
+prior_reviewed_range=f7a5304560e52b2b78faadb6d6de4049a5b9a5f9..868cb383ab087e63e6071be26d3d107118481f7c
 ```
 
-The prior rereview of `f7a53045` returned `REVISION_REQUIRED`. This
+The prior rereview of `868cb383` returned `REVISION_REQUIRED`. This
 prompt reviews the corrective commit that claims to close those defects.
 
 ---
@@ -20,23 +20,23 @@ prompt reviews the corrective commit that claims to close those defects.
 ## Assignment
 
 Review the HMASD Codex App Server supervisor on branch `aggressive` at
-commit `868cb383ab087e63e6071be26d3d107118481f7c`.
+commit `3d6b87f20863c7a593e0dbbd8e6a59b307edb265`.
 
 Repository: the HMASD git remote the operator pointed you at.
 Branch: `aggressive`.
 Review range:
 
 ```text
-f7a5304560e52b2b78faadb6d6de4049a5b9a5f9..868cb383ab087e63e6071be26d3d107118481f7c
+868cb383ab087e63e6071be26d3d107118481f7c..3d6b87f20863c7a593e0dbbd8e6a59b307edb265
 ```
 
 Parent of this corrective slice:
 
 ```text
-f7a53045  fix: sink incident terminality and close resume/session leftovers
+868cb383  fix: close uncertain-turn incident escape and atomic wake claim
 ```
 
-`a5cd3fa0` only pinned the previous rereview prompt; treat it as
+`20509602` only pinned the previous rereview prompt; treat it as
 documentation, not a science-bearing change.
 
 This is operational control-plane infrastructure, not a research
@@ -44,32 +44,33 @@ direction and not Portfolio work.
 
 ## Prior rereview that this commit must close
 
-`f7a53045` closed the previous High set (activate refuses incident
-verification, production attach requires a mutation intent, mutation
-CAS, successful-but-unloaded resume stays `SUBMITTED_UNRECONCILED`,
-watcher before first reconcile, missing command receipt is durable,
-first-seq mailbox ordering, final wake semantic fence). It remained
-`REVISION_REQUIRED` for one High defect and three Medium leftovers:
+`868cb383` closed the previous High/Medium set (uncertain-turn incident
+mapping, CAS uncertain reconciliation, mutation-incident command fence,
+atomic wake first-send claim, observer list/read session executor,
+uncertain resume after `IDLE_LOADED`, schema v6 open-intent index). It
+remained `REVISION_REQUIRED` for three Medium leftovers and two Lows:
 
-1. `mark_related_incidents()` omitted managed-turn
-   `SUBMISSION_UNCERTAIN`; `ManagedTurns.reconcile_uncertain()` wrote
-   `OBSERVED` without CAS and without checking a matching mutation
-   `INCIDENT`; `CommandGateway._refuse_incident_source()` did not
-   inspect mutation intents. A timeout turn could therefore survive a
-   server-request incident and later produce a control effect.
-2. `WakeScheduler.begin_submission()` moved `PREPARED → SUBMITTING`
-   without a database-level CAS that also inserted attempt 1 in the
-   same `BEGIN IMMEDIATE` transaction.
-3. Observer `thread/list` / `thread/read` still used the raw client, so
-   a server request plus a normal RPC response could return before the
-   watcher persisted the incident; `stop()` then cancelled the watcher.
-4. A `SUBMISSION_UNCERTAIN` automatic resume that later became
-   `IDLE_LOADED` could not legally become `APPLIED`
-   (`mark_applied_reconciled` only accepted `SUBMITTED_UNRECONCILED`).
-
-Also required from that review (Low): rebuild
-`mutation_intents_open_unique` so it covers `SUBMITTED_UNRECONCILED`
-and `INCIDENT`, not only `SUBMITTING` / `SUBMISSION_UNCERTAIN`.
+1. `WakeBatchStore.claim_first_submission()` used fail-open lease SQL
+   (`lease_holder IS NULL OR ? IS NULL OR lease_holder = ?`). A caller
+   passing `lease_holder=None` / `lease_generation=None` could claim a
+   batch that already stored a non-null lease, write `SUBMITTING` plus
+   attempt 1, and leave the legitimate scheduler unable to claim.
+2. A server-request wake `INCIDENT` had no operator reconciliation.
+   `open_batch_for_binding()` and `WakeRecovery.recover()` ignore
+   `INCIDENT`. Pre-response incidents left messages `BATCHED`, which
+   mailbox selection never reselects, so those messages could lose
+   liveness permanently.
+3. Ephemeral canary still called `self.client.request("thread/start")`
+   and `self.client.request("turn/start")` instead of the session-owned
+   request executor, so a server request plus a normal `thread/start`
+   response could let canary emit `turn/start` before the watcher was
+   visible.
+4. Low: managed-turn `RetryRequired` / overload wrote the turn
+   `SUBMISSION_UNCERTAIN` but left the matching mutation intent
+   `SUBMITTING`.
+5. Low: schema v6 rebuilt `mutation_intents_open_unique`, but there
+   was no explicit v5 fixture upgrade that inspected `sqlite_master.sql`
+   for the new predicate.
 
 ## Read these first
 
@@ -138,53 +139,59 @@ CONTEXT_REANCHOR_ACK itself increments workflow state_version by one;
 Inspect whether the code actually establishes these invariants:
 
 ```text
-SUBMISSION_UNCERTAIN managed turns cannot escape a server-request incident
-  mark_related_incidents includes SUBMISSION_UNCERTAIN turn states
-  reconcile_uncertain CAS:
-    SUBMISSION_UNCERTAIN / SUBMITTING → OBSERVED
-    rowcount 0 rereads; INCIDENT is a terminal error
-  matching turn/start mutation INCIDENT forbids OBSERVED before and
-    after read_thread
-  CommandGateway._refuse_incident_source also refuses when the
-    associated mutation intent is INCIDENT, even if the turn row is
-    already OBSERVED
-
-wake first-send claim is database-atomic
+wake first-send claim is exact lease match, including nulls
   BEGIN IMMEDIATE
-  UPDATE wake_batches SET SUBMITTING
-    WHERE state = PREPARED AND lease matches (NULL lease still claims)
-  rowcount must be 1; insert attempt 1 in the same transaction
-  only the winner may later send turn/start
-  a stale lease_holder / lease_generation leaves the batch PREPARED
+  UPDATE wake_batches PREPARED → SUBMITTING
+    WHERE lease_holder IS ? AND lease_generation IS ?
+  null caller arguments cannot claim a non-null stored lease
+  an unleased batch accepts only a null/null claim
+  stale non-null lease still leaves the batch PREPARED
+  two independent SQLite connections still have exactly one winner
 
-observer snapshot cannot miss a server request that arrives with the
-normal RPC response
-  thread/list and thread/read go through the session request executor
-  session.request treats a completed RPC as an incident if the watcher
-    has already terminated
-  drain / _raise_if_incident after each request and before stop
-  fake mode server_request_then_thread_list_response exists
+wake INCIDENT has an operator-only reconciliation API
+  recover() still does not auto-enumerate INCIDENT
+  no branch automatically resends an unknown mutation
+  NO_SUBMISSION_EVIDENCE:
+    only when there is no turn id / submitted_at / observed_at /
+    DELIVERED_TO_TURN / SUBMITTED|RECONCILED attempt
+    incident batch → CANCELLED
+    still-valid BATCHED messages → ELIGIBLE
+  TURN_OBSERVED:
+    batch → ACTIVE or COMPLETED
+    remaining BATCHED / SUBMISSION_UNCERTAIN messages → DELIVERED_TO_TURN
+  ABANDON:
+    messages DEAD_LETTER with an operator receipt
+    batch remains INCIDENT
+  possible-submission incidents cannot be requeued to ELIGIBLE
 
-SUBMISSION_UNCERTAIN resume can be evidence-reconciled
-  mark_applied_after_loaded_observation:
-    SUBMISSION_UNCERTAIN / SUBMITTED_UNRECONCILED → APPLIED
-  only after classify() returns IDLE_LOADED
-  no blind resend
+ephemeral canary mutations use the session-owned request executor
+  thread/start and turn/start go through ObserverService._session_request
+  a server request plus a normal thread/start response must not emit
+    turn/start
+  fake mode server_request_then_thread_start_response exists
 
-schema v6 rebuilds mutation_intents_open_unique to cover
-  SUBMITTING, SUBMISSION_UNCERTAIN, SUBMITTED_UNRECONCILED, INCIDENT
+managed-turn overload keeps the two ledgers aligned
+  RetryRequired writes turn SUBMISSION_UNCERTAIN and
+    matching mutation intent SUBMITTING → SUBMISSION_UNCERTAIN
+
+schema v5 → v6 actually replaces the open-intent predicate
+  test inspects sqlite_master.sql
+  rebuilt index SQL contains SUBMITTED_UNRECONCILED and INCIDENT
 ```
 
-Prior invariants remain in force: `INCIDENT` is terminal at
-`BindingStore.activate()`, production attach, mutation CAS, wake
-recovery writes, command missing-receipt, first-seq mailbox ordering,
-final wake semantic fence, and `SUBMITTED_UNRECONCILED` resume
-non-resend.
+Prior invariants remain in force: `INCIDENT` is terminal except this
+new operator-only wake path; `SUBMISSION_UNCERTAIN` managed turns stay
+in server-request mapping; uncertain reconciliation stays CAS;
+mutation-incident commands have no effect; observer list/read stay on
+the session executor; uncertain resume can become `APPLIED` after
+`IDLE_LOADED`; activation tuple, production attach intent, receipt
+reconciliation, first-seq mailbox ordering, semantic wake fence, and
+prepared sibling recovery must not regress.
 
 ## Questions the review must answer
 
 Answer each with evidence (file + function / table / test name). Separate
-**observed fact** from **inference**. Re-answer the original 1–37, then
+**observed fact** from **inference**. Re-answer the original 1–44, then
 the new slice questions.
 
 1. Can a model impersonate another actor by putting `actor_context_id`,
@@ -196,26 +203,30 @@ the new slice questions.
 5. Can Stage 3 start a turn without an explicit operator intent?
 6. Can Stage 4 start more than one `turn/start` for one wake batch?
    Include two concurrent `claim_first_submission` callers with
-   independent SQLite connections.
+   independent SQLite connections **and** a null-lease caller against a
+   non-null stored lease.
 7. Can an active turn be steered automatically (`turn/steer`)?
 8. Can an uncertain mutating submission be resent? Include persisted
    `SUBMITTING`, unresolved `INCIDENT`, a successful but not-yet-
-   loaded automatic `thread/resume`, and a `SUBMISSION_UNCERTAIN`
-   managed turn after a later server-request incident.
+   loaded automatic `thread/resume`, a `SUBMISSION_UNCERTAIN`
+   managed turn after a later server-request incident, and the
+   overload `RetryRequired` mutation-intent state.
 9. Can mailbox prose, lexical names such as `FAILED.md`, or raw child
    text become a routing key, ACL input, or semantic state transition?
 10. Can EM/CM/Leaf receive automatic wake delivery in this stage?
 11. Can a packet send bypass the Root↔Portfolio ACL or self-declare the
     source actor? Also: can a released semantic actor still send?
 12. Can a revoked or non-ACTIVE binding receive a wake? Include direct
-    `submit_batch` without a lease generation, and a semantic actor
-    released after batch prepare but before `turn/start`.
+    `submit_batch` without a lease generation, a semantic actor
+    released after batch prepare but before `turn/start`, and a
+    lower-level null-lease claim against a leased batch.
 13. Can a PREPARED wake batch after restart be resent, or are messages
     correctly returned to ELIGIBLE? Include the **source-resolution
     multi-message** path, not only ordinary restart.
 14. Are DELIVERED messages preserved across restart? Also: is an
     `ACTIVE` batch reconciled so it cannot permanently block the next
-    wake? Include concurrent watcher `INCIDENT` vs recovery writes.
+    wake? Include concurrent watcher `INCIDENT` vs recovery writes, and
+    whether a pre-response wake `INCIDENT` strands `BATCHED` messages.
 15. Does `-32001` retry leak onto `thread/start`, `thread/resume`,
     `turn/start`, or `thread/loaded/list`?
 16. Are forbidden event kinds (`BLOCKED`, `FAILED`, `SUCCESS`, `RETIRED`,
@@ -249,11 +260,11 @@ Prior corrective-slice checks, still in force:
 25. After restart, is a completed `ACTIVE` batch closed, a still-running
     one left `ACTIVE`, and a missing turn made an incident?
 26. Is there one session-level watcher for the whole client, including
-    the first `reconcile_threads()` and CLI `snapshot`? Include the
-    server-request-plus-normal-response race.
+    the first `reconcile_threads()`, CLI `snapshot`, **and ephemeral
+    canary mutations**?
 27. After a server-request `INCIDENT`, can `complete_activation`,
     `record_completion`, `attach_thread`, `BindingStore.activate()`,
-    `observe_completion`, `WakeRecovery`, or
+    `observe_completion`, `WakeRecovery.recover()`, or
     `ManagedTurns.reconcile_uncertain()` overwrite it?
 28. After a thread/resume `INCIDENT`, can `begin()` create another
     mutation intent for the same client key without operator resolution?
@@ -280,9 +291,6 @@ Prior corrective-slice checks, still in force:
 37. If the semantic actor is released after batch prepare and before
     `turn/start`, is the wake aborted, the binding suspended, and
     messages returned to `ELIGIBLE`?
-
-New checks for this slice:
-
 38. Does `mark_related_incidents()` mark a `SUBMISSION_UNCERTAIN`
     managed turn `INCIDENT`?
 39. Can `reconcile_uncertain()` overwrite an `INCIDENT` turn, or write
@@ -290,8 +298,8 @@ New checks for this slice:
 40. If the turn row is already `OBSERVED` but the matching mutation
     intent is `INCIDENT`, does a command still have a control effect?
 41. Is `PREPARED → SUBMITTING` a `BEGIN IMMEDIATE` CAS that inserts
-    attempt 1 in the same transaction? Can a stale lease leave the
-    batch `SUBMITTING`?
+    attempt 1 in the same transaction? Can a stale **or null** lease
+    leave a leased batch `SUBMITTING`?
 42. If a snapshot `thread/list` receives a server request **and** a
     normal RPC response, is the server request persisted and the run
     ended as `UNEXPECTED_SERVER_REQUEST`?
@@ -299,13 +307,50 @@ New checks for this slice:
     later observed `IDLE_LOADED`, does the intent become `APPLIED`
     without another `thread/resume`?
 44. Does `mutation_intents_open_unique` cover `SUBMITTED_UNRECONCILED`
-    and `INCIDENT` after schema v6?
+    and `INCIDENT` after schema v6? Include the explicit v5→v6
+    `sqlite_master.sql` predicate test.
+
+New checks for this slice:
+
+45. Can `claim_first_submission(lease_holder=None, lease_generation=None)`
+    claim a batch whose stored lease is non-null? Does an unleased
+    batch reject a non-null caller?
+46. After a pre-response wake `INCIDENT`, do `BATCHED` messages remain
+    recoverable rather than silently dead? Does
+    `WakeRecovery.recover()` still refuse to auto-resend them?
+47. Can an operator resolve an unsubmitted wake incident to `ELIGIBLE`?
+    Can the same operator API requeue an incident that already has turn
+    / submitted / delivered evidence?
+48. Do canary `thread/start` and `turn/start` go through
+    `ManagedAppServerSession.request` / `_session_request`? If a server
+    request arrives with the `thread/start` response, is `turn/start`
+    omitted?
+49. After managed-turn overload (`RetryRequired`), is the matching
+    mutation intent `SUBMISSION_UNCERTAIN` rather than `SUBMITTING`?
+50. Does `test_v5_to_v6_rebuilds_mutation_open_unique_predicate` start
+    from a schema-5 fixture whose old index omits
+    `SUBMITTED_UNRECONCILED` / `INCIDENT`, then prove the rebuilt SQL
+    contains both?
 
 ## Required synthetic tests
 
 These names must exist and must actually prove the claim, not only
 assert that a row was stored. Prior required names remain in force;
 this slice adds:
+
+```text
+test_null_lease_claim_cannot_bypass_nonnull_batch_lease
+test_unleased_batch_accepts_only_null_lease_claim
+test_pre_response_wake_incident_does_not_strand_batched_messages
+test_operator_can_resolve_unsubmitted_wake_incident_to_eligible
+test_operator_cannot_requeue_incident_with_possible_submission
+test_canary_does_not_start_turn_after_thread_start_server_request_and_response
+test_overload_marks_matching_mutation_uncertain
+test_v5_to_v6_rebuilds_mutation_open_unique_predicate
+```
+
+Prior required names from `868cb383`, `f7a53045`, `883eb028`, and
+`19a80529` must still exist and still prove their claims, including:
 
 ```text
 test_uncertain_turn_server_request_marks_turn_incident
@@ -315,12 +360,6 @@ test_concurrent_wake_claim_has_exactly_one_winner
 test_stale_lease_claim_cannot_leave_batch_submitting
 test_snapshot_records_server_request_even_when_rpc_response_also_arrives
 test_uncertain_resume_becomes_applied_after_loaded_observation
-```
-
-Prior required names from `f7a53045`, `883eb028`, and `19a80529` must
-still exist and still prove their claims, including:
-
-```text
 test_binding_store_activate_rejects_incident_verification
 test_attach_without_mutation_intent_cannot_bypass_incident
 test_resume_response_then_incident_cannot_become_submitted
@@ -343,8 +382,8 @@ test_semantic_actor_released_after_batch_prepare_prevents_wake_submit
 Local operator evidence, not a substitute for your reading:
 
 ```text
-tests/codex_supervisor  201 passed
---basetemp=C:/Projects/HMASD/.tmp_review_finalx3c
+tests/codex_supervisor  209 passed
+--basetemp=C:/Projects/HMASD/.tmp_review_finalx4_full
 ```
 
 Treat that count as **UNOBSERVED** unless you independently run or see
@@ -354,8 +393,8 @@ CI. GitHub status checks are not required for this review.
 
 ```text
 review_kind=synthetic_control_plane_rereview
-reviewed_commit=868cb383ab087e63e6071be26d3d107118481f7c
-reviewed_range=f7a5304560e52b2b78faadb6d6de4049a5b9a5f9..868cb383ab087e63e6071be26d3d107118481f7c
+reviewed_commit=3d6b87f20863c7a593e0dbbd8e6a59b307edb265
+reviewed_range=868cb383ab087e63e6071be26d3d107118481f7c..3d6b87f20863c7a593e0dbbd8e6a59b307edb265
 live_acceptance=absent
 synthetic_disposition=CLOSED|REVISION_REQUIRED
 ```
@@ -370,7 +409,7 @@ Then:
   status for this review.
 - **Confirmed closures** — which prior High/Medium items are now
   actually closed in code, not only renamed.
-- **Answers** — numbered 1–44 with evidence.
+- **Answers** — numbered 1–50 with evidence.
 - **Not reviewed** — live transport, quota, and any file outside the
   listed surface.
 - **Does not decide** — Phase 1 / Stage 3 / Stage 4 acceptance, Portfolio
