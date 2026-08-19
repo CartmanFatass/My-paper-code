@@ -564,8 +564,25 @@ def initialize_database(connection: sqlite3.Connection) -> None:
             ON mutation_intents(method, client_key)
             WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED_UNRECONCILED', 'INCIDENT')"""
         )
+        _install_transition_guards(connection)
         if current < SCHEMA_VERSION:
             connection.execute(
                 "INSERT INTO schema_meta(version, applied_at) VALUES (?, ?)",
                 (SCHEMA_VERSION, applied_at),
             )
+
+
+def _install_transition_guards(connection: sqlite3.Connection) -> None:
+    from .durability.graphs import transition_trigger_sql
+    from .durability.transitions import AGGREGATE_LOCATORS
+
+    for kind, locator in AGGREGATE_LOCATORS.items():
+        drop_sql, create_sql = transition_trigger_sql(
+            kind=kind,
+            table=locator.table,
+            id_column=locator.id_column,
+            state_column=locator.state_column,
+            version_column=locator.version_column,
+        )
+        connection.execute(drop_sql)
+        connection.execute(create_sql)

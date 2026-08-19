@@ -105,3 +105,50 @@ def is_legal_edge(kind: AggregateKind, from_state: str, to_state: str) -> bool:
 
 def is_operator_only_edge(kind: AggregateKind, from_state: str, to_state: str) -> bool:
     return (kind, from_state, to_state) in OPERATOR_ONLY_EDGES
+
+
+def transition_trigger_sql(
+    *,
+    kind: AggregateKind,
+    table: str,
+    id_column: str,
+    state_column: str,
+    version_column: str,
+) -> tuple[str, str]:
+    """Generate one BEFORE UPDATE guard from ALLOWED_TRANSITIONS."""
+    edges = ALLOWED_TRANSITIONS[kind]
+    legal_terms: list[str] = []
+    for from_state, targets in edges.items():
+        automatic = sorted(target for target in targets if not is_operator_only_edge(kind, from_state, target))
+        if automatic:
+            allowed = ", ".join(f"'{target}'" for target in automatic)
+            legal_terms.append(f"(OLD.{state_column} = '{from_state}' AND NEW.{state_column} IN ({allowed}))")
+        operator_targets = sorted(target for target in targets if is_operator_only_edge(kind, from_state, target))
+        if operator_targets:
+            allowed = ", ".join(f"'{target}'" for target in operator_targets)
+            legal_terms.append(
+                "("
+                f"OLD.{state_column} = '{from_state}' AND NEW.{state_column} IN ({allowed}) "
+                "AND EXISTS ("
+                "SELECT 1 FROM operator_resolutions "
+                f"WHERE aggregate_kind = '{kind.value}' AND aggregate_id = OLD.{id_column}"
+                ")"
+                ")"
+            )
+    legal_sql = " OR ".join(legal_terms) if legal_terms else "0"
+    trigger_name = f"durability_{table}_{state_column}_guard"
+    drop_sql = f"DROP TRIGGER IF EXISTS {trigger_name}"
+    create_sql = f"""CREATE TRIGGER {trigger_name}
+    BEFORE UPDATE OF {state_column} ON {table}
+    FOR EACH ROW
+    WHEN NEW.{state_column} IS NOT OLD.{state_column}
+    BEGIN
+      SELECT CASE
+        WHEN NOT ({legal_sql}) THEN
+          RAISE(ABORT, 'illegal {kind.value} transition')
+        WHEN NEW.{version_column} != OLD.{version_column} + 1 THEN
+          RAISE(ABORT, '{kind.value} version must increment by 1')
+        ELSE NULL
+      END;
+    END"""
+    return drop_sql, create_sql
