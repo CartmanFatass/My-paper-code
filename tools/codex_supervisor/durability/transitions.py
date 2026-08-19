@@ -77,6 +77,7 @@ AGGREGATE_LOCATORS: dict[AggregateKind, AggregateLocator] = {
 _FIELD_NAME = frozenset(
     {
         "thread_id",
+        "turn_id",
         "app_server_thread_id",
         "app_server_turn_id",
         "app_server_request_id",
