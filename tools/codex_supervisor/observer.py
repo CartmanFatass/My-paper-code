@@ -258,6 +258,8 @@ class ObserverService:
             request=dict(params),
         )
         submitted = await owner.submit_effect(effect.effect_id)
+        if owner.classify_submission(submitted) != "observed":
+            raise RuntimeError("canary mutation was not observed")
         await self._drain_incident()
         return dict(submitted.response or {})
 

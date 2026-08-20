@@ -354,6 +354,16 @@ class MailboxStore:
                     )
                 except TransitionError:
                     return False
+                effect_id = self.store.connection.execute(
+                    "SELECT effect_id FROM wake_batches WHERE wake_batch_id = ?",
+                    (wake_batch_id,),
+                ).fetchone()
+                from .durability.effects import EffectJournal
+
+                EffectJournal(self.store.connection).cancel_prepared_if_present(
+                    None if effect_id is None or effect_id[0] is None else str(effect_id[0]),
+                    cause_ref=reason,
+                )
                 rows = self.store.connection.execute(
                     """SELECT m.message_id, m.delivery_state, m.delivery_version
                     FROM mailbox_messages m

@@ -1,19 +1,19 @@
 # Durability Kernel V1 Synthetic Acceptance
 
-Accepted capabilities after the REVISION_REQUIRED corrective slice:
+Accepted capabilities after the second REVISION_REQUIRED corrective slice:
 
 ```text
 single transition kernel
 single mutating session owner
 effect journal
 at-most-one automatic attempt
-caller-exhaustive EffectSubmissionResult handling
-atomic domain/effect write-start and confirmation
+caller-exhaustive EffectSubmissionResult handling including adoption
+atomic domain/effect write-start, confirmation, and PREPARED cancellation
 CommandGateway via TransitionKernel
 legacy mutation-intent writes disabled
-Observer/App Server read-backed reconciliation and operator resolution
-pre-write binding/actor eligibility fence
-static guard zero-violation package scan
+Observer/App Server read-backed reconciliation without domain-only fallback
+pre-write eligibility fence on managed-turn, wake, and provisioning
+static guard AST/SQL allowlist
 doctor reports actual scanner results
 ```
 

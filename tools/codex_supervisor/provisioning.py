@@ -11,7 +11,7 @@ from .client import AppServerClient, AppServerRpcError, RetryRequired, Unexpecte
 from .durability.effects import EffectJournal
 from .durability.session_owner import AppServerSessionOwner
 from .managed_models import HistoryTrust, ThreadOrigin
-from .semantic_bridge import ManagedActorSnapshot
+from .semantic_bridge import ManagedActorSnapshot, SemanticBridgeError
 from .transport import TransportClosed
 
 MEMORY_MODE_METHOD = "thread/memoryMode/set"
@@ -84,14 +84,30 @@ class ManagedProvisioner:
             return
         self.confirm_global_memory_disabled(binding_id, operator=operator)
 
+    def _assert_provision_fence(self, binding, *, effect_id: str | None = None) -> None:
+        if binding.binding_state.value != "PREPARED":
+            raise ProvisioningError("binding is not PREPARED")
+        bridge = getattr(self.bindings, "bridge", None)
+        if bridge is None:
+            return
+        try:
+            actor = bridge.require_eligible(binding.actor_context_id)
+        except SemanticBridgeError as exc:
+            if effect_id:
+                self.journal.cancel_prepared_if_present(effect_id, cause_ref="actor_ineligible")
+            raise ProvisioningError(str(exc)) from exc
+        if actor.actor_kind.value != binding.actor_kind.value or actor.scope_key != binding.semantic_scope_key:
+            if effect_id:
+                self.journal.cancel_prepared_if_present(effect_id, cause_ref="actor_mismatch")
+            raise ProvisioningError("semantic actor no longer matches binding")
+
     async def create_fresh_thread(self, binding_id: str) -> str:
         if self.client is None:
             raise ProvisioningError("client required to create a thread")
         binding = self.bindings.get(binding_id)
         if binding is None:
             raise BindingError(f"unknown binding: {binding_id}")
-        if binding.binding_state.value != "PREPARED":
-            raise ProvisioningError("binding is not PREPARED")
+        self._assert_provision_fence(binding)
         params: dict[str, Any] = {
             "cwd": binding.thread_cwd,
             "ephemeral": False,
@@ -109,6 +125,7 @@ class ManagedProvisioner:
             client_key=client_key,
             request=params,
         )
+        self._assert_provision_fence(binding, effect_id=effect.effect_id)
         owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
             submitted = await owner.submit_effect(effect.effect_id)
@@ -177,9 +194,13 @@ class ManagedProvisioner:
             client_key=client_key,
             request={"threadId": thread_id},
         )
+        binding = self.bindings.get(binding_id)
+        self._assert_provision_fence(binding, effect_id=effect.effect_id)
         owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
-            await owner.submit_effect(effect.effect_id)
+            submitted = await owner.submit_effect(effect.effect_id)
+            if owner.classify_submission(submitted) != "observed":
+                raise ProvisioningError("thread/resume uncertain; do not retry automatically")
         except (RetryRequired, AppServerRpcError, TransportClosed, asyncio.TimeoutError, UnexpectedServerRequest) as exc:
             kind = "THREAD_RESUME_INCIDENT" if isinstance(exc, UnexpectedServerRequest) else "THREAD_RESUME_UNCERTAIN"
             self.bindings._record_event(binding_id, kind, {"reason": type(exc).__name__})

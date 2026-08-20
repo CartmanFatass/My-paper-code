@@ -215,7 +215,7 @@ class CommandGateway:
     def _refuse_incident_source(self, binding: Any, turn_id: str) -> None:
         keys: list[str] = []
         turn = self.bindings.store.connection.execute(
-            """SELECT submission_state, client_user_message_id FROM managed_turn_intents
+            """SELECT submission_state, client_user_message_id, effect_id FROM managed_turn_intents
             WHERE binding_id = ? AND app_server_turn_id = ?""",
             (binding.binding_id, turn_id),
         ).fetchone()
@@ -223,8 +223,10 @@ class CommandGateway:
             raise CommandGatewayError("command turn is INCIDENT; no control effect")
         if turn is not None and turn[1]:
             keys.append(str(turn[1]))
+        if turn is not None and turn[2]:
+            self._refuse_unreconciled_effect(str(turn[2]))
         batch = self.bindings.store.connection.execute(
-            """SELECT state, client_user_message_id FROM wake_batches
+            """SELECT state, client_user_message_id, effect_id FROM wake_batches
             WHERE binding_id = ? AND app_server_turn_id = ?""",
             (binding.binding_id, turn_id),
         ).fetchone()
@@ -232,6 +234,8 @@ class CommandGateway:
             raise CommandGatewayError("wake batch is INCIDENT; no control effect")
         if batch is not None and batch[1]:
             keys.append(str(batch[1]))
+        if batch is not None and batch[2]:
+            self._refuse_unreconciled_effect(str(batch[2]))
         if keys:
             placeholders = ", ".join("?" for _ in keys)
             found = self.bindings.store.connection.execute(
@@ -241,6 +245,19 @@ class CommandGateway:
             ).fetchone()
             if found is not None:
                 raise CommandGatewayError("mutation intent is INCIDENT; no control effect")
+
+    def _refuse_unreconciled_effect(self, effect_id: str) -> None:
+        row = self.bindings.store.connection.execute(
+            "SELECT state FROM app_server_effects WHERE effect_id = ?",
+            (effect_id,),
+        ).fetchone()
+        if row is None:
+            return
+        state = str(row[0])
+        if state == "INCIDENT":
+            raise CommandGatewayError("linked effect is INCIDENT; no control effect")
+        if state in {"WRITE_STARTED", "SUBMISSION_UNCERTAIN"}:
+            raise CommandGatewayError("linked effect is unreconciled; no control effect")
 
     def _turn_order_key(self, turn_id: str, thread_id: str | None) -> tuple[str, object] | None:
         first_event = self.bindings.store.connection.execute(

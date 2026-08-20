@@ -80,19 +80,16 @@ class WakeScheduler:
         if not wake_batch_id:
             return
         batch = self.batches.get(wake_batch_id)
-        if batch is None or str(batch["state"]) not in {
-            WakeBatchState.PREPARED.value,
-            WakeBatchState.SUBMITTING.value,
-        }:
+        if batch is None:
             return
-        for message in self.batches.messages_for(wake_batch_id):
-            if message.delivery_state.value == "BATCHED":
-                self.mailbox.return_to_eligible(message.message_id)
-        self.batches.set_state(
-            wake_batch_id,
-            state=WakeBatchState.CANCELLED.value,
-            expected_state=str(batch["state"]),
-        )
+        if str(batch["state"]) == WakeBatchState.PREPARED.value:
+            from .durability.effects import cancel_prepared_wake
+
+            cancel_prepared_wake(
+                self.bindings.store.connection,
+                wake_batch_id,
+                cause_ref="actor-ineligible",
+            )
 
     def _assert_submit_fence(
         self,

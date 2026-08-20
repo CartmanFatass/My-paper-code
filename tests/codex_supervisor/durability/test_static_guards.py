@@ -29,3 +29,16 @@ def test_package_scan_runs() -> None:
 
 def test_real_package_has_zero_protected_state_bypasses() -> None:
     assert scan_package() == []
+
+
+def test_scanner_does_not_exempt_transitionkernel_import() -> None:
+    text = '''
+from tools.codex_supervisor.durability.transitions import TransitionKernel
+def bad(connection):
+    connection.execute("UPDATE app_server_effects SET state='EFFECT_CONFIRMED'")
+    connection.execute("UPDATE wake_batches SET state='ACTIVE'")
+    connection.execute("UPDATE managed_turn_intents SET submission_state='SUBMITTED'")
+    connection.execute("UPDATE managed_actor_commands SET validation_state='APPLIED'")
+'''
+    found = scan_source_text(text, name="provisioning.py")
+    assert any("protected state" in item for item in found)

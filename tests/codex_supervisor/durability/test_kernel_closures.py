@@ -681,3 +681,299 @@ def test_doctor_reports_actual_static_guard_results() -> None:
 
 def test_real_package_static_scan_has_zero_violations() -> None:
     assert scan_package() == []
+
+
+class _TimeoutResumeClient:
+    def __init__(self) -> None:
+        self.server_requests = asyncio.Queue()
+
+    def start_reader(self) -> None:
+        return None
+
+    def prepare_request(self, method, params=None):
+        from types import SimpleNamespace
+
+        return SimpleNamespace(
+            request_id="1",
+            method=method,
+            params=dict(params or {}),
+            payload={"id": 1, "method": method, "params": dict(params or {})},
+            request_class=SimpleNamespace(value="MUTATING_NO_RETRY"),
+            future=None,
+        )
+
+    def discard_prepared(self, prepared) -> None:
+        return None
+
+    async def send_prepared(self, prepared) -> None:
+        return None
+
+    async def await_prepared(self, prepared, timeout=None):
+        raise TimeoutError("resume timeout")
+
+    async def request(self, method, params=None, timeout=None):
+        if method == "thread/read":
+            return {"result": {"thread": {"id": params.get("threadId"), "status": {"type": "idle"}, "turns": []}}}
+        raise AssertionError(method)
+
+    async def read_thread(self, thread_id: str, include_turns: bool = False):
+        return {"thread": {"id": thread_id, "status": {"type": "idle"}, "turns": []}}
+
+
+def test_adopt_existing_thread_timeout_does_not_attach(tmp_path: Path) -> None:
+    async def body() -> None:
+        from tools.codex_supervisor.provisioning import ManagedProvisioner, ProvisioningError
+
+        seeded = seed_managed_actors(tmp_path)
+        store = BindingStore(seeded["supervisor"], seeded["bridge"])
+        provisioner = ManagedProvisioner(store, _TimeoutResumeClient())  # type: ignore[arg-type]
+        snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+        with pytest.raises(ProvisioningError, match="uncertain"):
+            await provisioner.adopt_existing_thread(
+                snapshot,
+                thread_id="thr_adopt",
+                repo_root=tmp_path,
+                operator="operator",
+                allow_existing_history=True,
+                confirm_history_nonauthoritative=True,
+            )
+        rows = seeded["supervisor"].connection.execute(
+            "SELECT binding_state FROM managed_actor_bindings"
+        ).fetchall()
+        assert all(str(row[0]) == "PREPARED" for row in rows)
+        effect = seeded["supervisor"].connection.execute(
+            "SELECT state FROM app_server_effects WHERE method = 'thread/resume'"
+        ).fetchone()
+        assert effect is not None
+        assert str(effect[0]) == "SUBMISSION_UNCERTAIN"
+        seeded["bridge"].close()
+        seeded["supervisor"].close()
+        seeded["semantic"].close()
+
+    _run(body())
+
+
+def test_adopt_existing_thread_uncertain_effect_is_not_confirmed(tmp_path: Path) -> None:
+    test_adopt_existing_thread_timeout_does_not_attach(tmp_path)
+
+
+def test_attach_rejects_effect_owned_by_another_binding(tmp_path: Path) -> None:
+    seeded = seed_managed_actors(tmp_path)
+    store = BindingStore(seeded["supervisor"], seeded["bridge"])
+    snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+    first = store.prepare_binding(
+        snapshot,
+        repo_root=str(tmp_path),
+        thread_cwd=str(tmp_path),
+        created_by_operator="operator",
+        thread_origin=ThreadOrigin.NEW,
+        history_trust=HistoryTrust.FRESH,
+    )
+    port = seeded["bridge"].snapshot(seeded["portfolio"].actor_context_id)
+    second = store.prepare_binding(
+        port,
+        repo_root=str(tmp_path),
+        thread_cwd=str(tmp_path),
+        created_by_operator="operator",
+        thread_origin=ThreadOrigin.NEW,
+        history_trust=HistoryTrust.FRESH,
+    )
+    journal = EffectJournal(store.store.connection)
+    effect = journal.prepare_effect(
+        owner_kind="THREAD_RESUME",
+        owner_id=first,
+        binding_id=first,
+        method="thread/resume",
+        client_key="thread/resume:thr_x",
+        request={"threadId": "thr_x"},
+    )
+    journal.claim_write(effect.effect_id, run_id="r", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+    journal.observe_response(effect.effect_id, response={"ok": True}, thread_id="thr_x")
+    from tools.codex_supervisor.binding_store import BindingError
+
+    with pytest.raises(BindingError, match="another binding"):
+        store.attach_thread(second, "thr_x", effect_id=effect.effect_id)
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_prepared_wake_recovery_cancels_linked_effect(tmp_path: Path) -> None:
+    seeded = seed_active_root_portfolio(tmp_path)
+    mailbox = seeded["mailbox"]
+    message = mailbox.enqueue(
+        source_system="OPERATOR",
+        source_event_key="k-prep",
+        target_actor_context_id=seeded["portfolio"].actor_context_id,
+        message_kind="OPERATOR_ATTENTION_REQUEST",
+        subject_ref="s",
+        payload_ref="p",
+    )
+    batches = WakeBatchStore(seeded["supervisor"], mailbox)
+    snapshot = seeded["bridge"].snapshot(seeded["portfolio"].actor_context_id)
+    batch = batches.prepare(
+        binding_id=seeded["portfolio_binding_id"],
+        thread_id="thr_port",
+        snapshot=snapshot,
+        messages=[message],
+        lease_generation=1,
+        lease_holder="sched",
+    )
+    recovery = WakeRecovery(seeded["bindings"], mailbox, batches, None)
+    updated = asyncio.run(recovery.reconcile_batch(str(batch["wake_batch_id"])))
+    assert updated["state"] == "CANCELLED"
+    effect = EffectJournal(seeded["supervisor"].connection).get(str(batch["effect_id"]))
+    assert effect.state == "CANCELLED_BEFORE_WRITE"
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_cancelled_owner_effect_cannot_be_submitted(tmp_path: Path) -> None:
+    connection = connect(tmp_path / "s.sqlite3")
+    initialize_database(connection)
+    connection.execute(
+        """INSERT INTO wake_batches(
+            wake_batch_id,binding_id,thread_id,state,client_user_message_id,prepared_at,version
+        ) VALUES ('wake1','bind1','thr1','PREPARED','k1','t',0)"""
+    )
+    journal = EffectJournal(connection)
+    effect = journal.prepare_effect(
+        owner_kind="WAKE_BATCH",
+        owner_id="wake1",
+        binding_id="bind1",
+        method="turn/start",
+        client_key="k1",
+        request={"threadId": "thr1"},
+    )
+    connection.execute("UPDATE wake_batches SET effect_id = ? WHERE wake_batch_id='wake1'", (effect.effect_id,))
+    connection.commit()
+    from tools.codex_supervisor.durability.effects import cancel_prepared_wake
+
+    cancel_prepared_wake(connection, "wake1", cause_ref="test")
+    store = ObserverStore(tmp_path / "runtime")
+    owner = AppServerSessionOwner(object(), store)  # type: ignore[arg-type]
+    owner.journal = journal
+    owner.store.connection = connection
+    with pytest.raises(Exception, match="CANCELLED_BEFORE_WRITE|cannot submit"):
+        asyncio.run(owner.submit_effect(effect.effect_id))
+    connection.close()
+    store.close()
+
+
+def test_no_submission_resolution_cancels_prepared_effect(tmp_path: Path) -> None:
+    connection = connect(tmp_path / "s.sqlite3")
+    initialize_database(connection)
+    connection.execute(
+        """INSERT INTO wake_batches(
+            wake_batch_id,binding_id,thread_id,state,client_user_message_id,prepared_at,version
+        ) VALUES ('wake1','bind1','thr1','INCIDENT','hmasd-wake:wake1','t',1)"""
+    )
+    connection.execute(
+        """INSERT INTO mailbox_messages(
+            message_id,source_system,source_event_key,target_actor_context_id,
+            message_kind,subject_ref,payload_ref,priority,delivery_state,intake_state,created_at
+        ) VALUES ('msg1','OPERATOR','src1','act1','OPERATOR_ATTENTION_REQUEST','s','p',1,'BATCHED','NOT_ACKNOWLEDGED','t')"""
+    )
+    connection.execute("INSERT INTO wake_batch_messages(wake_batch_id,message_id,ordinal) VALUES ('wake1','msg1',0)")
+    journal = EffectJournal(connection)
+    effect = journal.prepare_effect(
+        owner_kind="WAKE_BATCH",
+        owner_id="wake1",
+        binding_id="bind1",
+        method="turn/start",
+        client_key="hmasd-wake:wake1",
+        request={"threadId": "thr1"},
+    )
+    connection.execute("UPDATE wake_batches SET effect_id = ? WHERE wake_batch_id='wake1'", (effect.effect_id,))
+    connection.commit()
+    OperatorResolutionService(connection).resolve_wake(
+        "wake1",
+        operator="op",
+        disposition=ResolutionDisposition.NO_SUBMISSION_EVIDENCE,
+        evidence_kind="NONE",
+        evidence_ref="none",
+    )
+    assert journal.get(effect.effect_id).state == "CANCELLED_BEFORE_WRITE"
+    connection.close()
+
+
+def test_resume_reconciler_uses_thread_snapshot_status_type(tmp_path: Path) -> None:
+    connection = connect(tmp_path / "s.sqlite3")
+    initialize_database(connection)
+    journal = EffectJournal(connection)
+    effect = journal.prepare_effect(
+        owner_kind="THREAD_RESUME",
+        owner_id="b1",
+        binding_id="b1",
+        method="thread/resume",
+        client_key="thread/resume:thr1",
+        request={"threadId": "thr1"},
+    )
+    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+    journal.mark_uncertain(effect.effect_id, reason="timeout")
+    connection.execute(
+        """INSERT INTO thread_snapshots(thread_id, status_type, first_observed_at, updated_at)
+        VALUES ('thr1', 'idle', 't', 't')"""
+    )
+    connection.commit()
+    confirmed = asyncio.run(EffectReconciler(connection).reconcile(effect.effect_id))
+    assert confirmed.state == EffectState.EFFECT_CONFIRMED.value
+    connection.close()
+
+
+def test_write_started_wake_reconciliation_confirms_effect_before_delivery(tmp_path: Path) -> None:
+    connection = connect(tmp_path / "s.sqlite3")
+    initialize_database(connection)
+    connection.execute(
+        """INSERT INTO wake_batches(
+            wake_batch_id,binding_id,thread_id,state,client_user_message_id,prepared_at,version,effect_id
+        ) VALUES ('wake1','bind1','thr1','SUBMITTING','k1','t',1, NULL)"""
+    )
+    journal = EffectJournal(connection)
+    effect = journal.prepare_effect(
+        owner_kind="WAKE_BATCH",
+        owner_id="wake1",
+        binding_id="bind1",
+        method="turn/start",
+        client_key="k1",
+        request={"threadId": "thr1"},
+    )
+    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+    connection.execute("UPDATE wake_batches SET effect_id = ? WHERE wake_batch_id='wake1'", (effect.effect_id,))
+    connection.execute(
+        """INSERT INTO turn_snapshots(turn_id, thread_id, status, updated_at)
+        VALUES ('turn1', 'thr1', 'active', 't')"""
+    )
+    connection.execute(
+        """INSERT INTO observer_runs(run_id, codex_binary, codex_version, client_name, started_at, runtime_home)
+        VALUES ('run1', 'b', 'v', 'c', 't', '.')"""
+    )
+    connection.execute(
+        """INSERT INTO raw_messages(
+            run_id, direction, transport_seq, rpc_shape, turn_id, canonical_json, observed_at
+        ) VALUES ('run1', 'stdout', 1, 'notification', 'turn1', '{"clientUserMessageId":"k1"}', 't')"""
+    )
+    connection.commit()
+    confirmed = asyncio.run(EffectReconciler(connection).reconcile(effect.effect_id))
+    assert confirmed.state == EffectState.EFFECT_CONFIRMED.value
+    assert connection.execute("SELECT state FROM wake_batches").fetchone()[0] == "ACTIVE"
+    connection.close()
+
+
+def test_released_actor_cannot_create_managed_thread(tmp_path: Path) -> None:
+    from tools.codex_semantic_mvp.actor_registry import release_actor_context
+    from tools.codex_supervisor.provisioning import ManagedProvisioner, ProvisioningError
+
+    seeded = seed_managed_actors(tmp_path)
+    store = BindingStore(seeded["supervisor"], seeded["bridge"])
+    provisioner = ManagedProvisioner(store, object())  # type: ignore[arg-type]
+    snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+    binding_id = provisioner.prepare(snapshot, repo_root=tmp_path, operator="operator")
+    release_actor_context(seeded["semantic"], seeded["root"].actor_context_id)
+    with pytest.raises(ProvisioningError, match="ACTIVE"):
+        asyncio.run(provisioner.create_fresh_thread(binding_id))
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+

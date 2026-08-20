@@ -610,8 +610,8 @@ def _migrate_legacy_mutation_intents(connection: sqlite3.Connection) -> None:
         "APPLIED": "EFFECT_CONFIRMED",
         "OPERATOR_RESOLVED": "OPERATOR_RESOLVED",
         "INCIDENT": "INCIDENT",
-        "SUBMITTED": "RESPONSE_OBSERVED",
-        "SUBMITTED_UNRECONCILED": "RESPONSE_OBSERVED",
+        "SUBMITTED": "SUBMISSION_UNCERTAIN",
+        "SUBMITTED_UNRECONCILED": "SUBMISSION_UNCERTAIN",
     }
     rows = connection.execute(
         """SELECT intent_id, method, binding_id, client_key, state, request_json
@@ -632,7 +632,18 @@ def _migrate_legacy_mutation_intents(connection: sqlite3.Connection) -> None:
             continue
         effect_id = f"eff_legacy_{uuid.uuid4().hex}"
         owner_kind = owner_for.get(method, "EPHEMERAL_CANARY")
-        target_state = state_for.get(str(row["state"]), "SUBMISSION_UNCERTAIN")
+        legacy_state = str(row["state"])
+        target_state = state_for.get(legacy_state, "SUBMISSION_UNCERTAIN")
+        if legacy_state in {"SUBMITTED", "SUBMITTED_UNRECONCILED"}:
+            evidence = connection.execute(
+                """SELECT 1 FROM raw_messages
+                WHERE canonical_json LIKE ? AND direction = 'stdout' LIMIT 1""",
+                (f"%{client_key}%",),
+            ).fetchone()
+            if evidence is None:
+                target_state = "SUBMISSION_UNCERTAIN"
+            else:
+                target_state = "RESPONSE_OBSERVED"
         request_json = str(row["request_json"] or "{}")
         try:
             json.loads(request_json)

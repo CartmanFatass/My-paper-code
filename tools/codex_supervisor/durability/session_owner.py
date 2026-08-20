@@ -210,8 +210,46 @@ class AppServerSessionOwner:
             raise SessionOwnerError(
                 f"effect {effect_id} is {record.state}; WRITE_STARTED or later is never automatically submitted again"
             )
+        self._require_owner_submittable(record)
         async with self._lock:
             return await self._submit_locked(record, extra_transitions, extra_hooks)
+
+    def _require_owner_submittable(self, record) -> None:
+        if record.owner_kind == "MANAGED_TURN":
+            row = self.store.connection.execute(
+                "SELECT submission_state FROM managed_turn_intents WHERE turn_intent_id = ?",
+                (record.owner_id,),
+            ).fetchone()
+            if row is None:
+                return
+            if str(row[0]) != "PREPARED":
+                raise SessionOwnerError("linked managed turn is not PREPARED; cannot submit")
+            return
+        if record.owner_kind == "WAKE_BATCH":
+            row = self.store.connection.execute(
+                "SELECT state FROM wake_batches WHERE wake_batch_id = ?",
+                (record.owner_id,),
+            ).fetchone()
+            if row is None:
+                return
+            if str(row[0]) != "PREPARED":
+                raise SessionOwnerError("linked wake batch is not PREPARED; cannot submit")
+            return
+        if record.owner_kind in {"THREAD_PROVISION", "THREAD_RESUME"} and record.binding_id:
+            row = self.store.connection.execute(
+                "SELECT binding_state FROM managed_actor_bindings WHERE binding_id = ?",
+                (record.binding_id,),
+            ).fetchone()
+            if row is None:
+                return
+            allowed = {"PREPARED"} if record.owner_kind == "THREAD_PROVISION" else {
+                "PREPARED",
+                "THREAD_CREATED",
+                "VERIFICATION_REQUIRED",
+                "ACTIVE",
+            }
+            if str(row[0]) not in allowed:
+                raise SessionOwnerError("linked binding cannot submit this effect")
 
     async def _submit_locked(
         self,

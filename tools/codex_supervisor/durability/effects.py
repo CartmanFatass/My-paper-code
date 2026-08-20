@@ -256,8 +256,24 @@ class EffectJournal:
         if not evidence_ref:
             raise EffectError("confirmation requires evidence_ref")
         current = self.get(effect_id)
+        if current.state == EffectState.EFFECT_CONFIRMED.value:
+            return current
         with self._tx():
             try:
+                if current.state == EffectState.WRITE_STARTED.value:
+                    self.kernel.apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.APP_SERVER_EFFECT,
+                            aggregate_id=effect_id,
+                            expected_state=EffectState.WRITE_STARTED.value,
+                            expected_version=current.version,
+                            target_state=EffectState.SUBMISSION_UNCERTAIN.value,
+                            cause_kind=TransitionCause.RECONCILIATION,
+                            cause_ref=evidence_ref,
+                            evidence_ref=evidence_ref,
+                        )
+                    )
+                    current = self.get(effect_id)
                 self.kernel.apply(
                     TransitionRequest(
                         aggregate_kind=AggregateKind.APP_SERVER_EFFECT,
@@ -322,6 +338,126 @@ class EffectJournal:
             except TransitionError as exc:
                 raise EffectError(str(exc)) from exc
         return self.get(effect_id)
+
+    def cancel_prepared_if_present(self, effect_id: str | None, *, cause_ref: str) -> None:
+        if not effect_id:
+            return
+        try:
+            current = self.get(effect_id)
+        except EffectError:
+            return
+        if current.state != EffectState.PREPARED.value:
+            return
+        self.cancel_before_write(effect_id, cause_ref=cause_ref)
+
+    def has_possible_submission(self, effect_id: str) -> bool:
+        current = self.get(effect_id)
+        return current.state != EffectState.PREPARED.value or current.raw_request_seq is not None
+
+
+def cancel_prepared_wake(
+    connection: sqlite3.Connection,
+    wake_batch_id: str,
+    *,
+    cause_ref: str,
+    message_target: str = "ELIGIBLE",
+) -> dict[str, object]:
+    """Cancel a PREPARED wake, its messages, and its PREPARED effect in one txn."""
+    from .models import AggregateKind, TransitionCause, TransitionRequest
+    from .transaction import DurabilityTransaction
+    from .transitions import TransitionError, TransitionKernel
+
+    journal = EffectJournal(connection)
+    kernel = TransitionKernel(connection)
+    owns = not connection.in_transaction
+    if owns:
+        connection.execute("BEGIN IMMEDIATE")
+    try:
+        batch = connection.execute(
+            "SELECT * FROM wake_batches WHERE wake_batch_id = ?",
+            (wake_batch_id,),
+        ).fetchone()
+        if batch is None:
+            raise EffectError(f"unknown wake batch: {wake_batch_id}")
+        if str(batch["state"]) != "PREPARED":
+            if owns:
+                connection.commit()
+            return dict(batch)
+        kernel.apply(
+            TransitionRequest(
+                aggregate_kind=AggregateKind.WAKE_BATCH,
+                aggregate_id=wake_batch_id,
+                expected_state="PREPARED",
+                expected_version=int(batch["version"] or 0),
+                target_state="CANCELLED",
+                cause_kind=TransitionCause.PRE_WRITE_CANCEL,
+                cause_ref=cause_ref,
+            )
+        )
+        rows = connection.execute(
+            """SELECT m.message_id, m.delivery_state, m.delivery_version
+            FROM mailbox_messages m
+            JOIN wake_batch_messages b ON b.message_id = m.message_id
+            WHERE b.wake_batch_id = ?""",
+            (wake_batch_id,),
+        ).fetchall()
+        for row in rows:
+            state = str(row["delivery_state"])
+            if state not in {"BATCHED", "SUBMISSION_UNCERTAIN"}:
+                continue
+            kernel.apply(
+                TransitionRequest(
+                    aggregate_kind=AggregateKind.MAILBOX_DELIVERY,
+                    aggregate_id=str(row["message_id"]),
+                    expected_state=state,
+                    expected_version=int(row["delivery_version"] or 0),
+                    target_state=message_target,
+                    cause_kind=TransitionCause.PRE_WRITE_CANCEL,
+                    cause_ref=cause_ref,
+                )
+            )
+        journal.cancel_prepared_if_present(
+            None if batch["effect_id"] is None else str(batch["effect_id"]),
+            cause_ref=cause_ref,
+        )
+        if owns:
+            connection.commit()
+    except Exception:
+        if owns:
+            connection.rollback()
+        raise
+    row = connection.execute(
+        "SELECT * FROM wake_batches WHERE wake_batch_id = ?",
+        (wake_batch_id,),
+    ).fetchone()
+    return dict(row)
+
+
+def cancel_prepared_turn(connection: sqlite3.Connection, turn_intent_id: str, effect_id: str, *, cause_ref: str) -> None:
+    from .models import AggregateKind, TransitionCause, TransitionRequest
+    from .transitions import TransitionKernel
+
+    journal = EffectJournal(connection)
+    kernel = TransitionKernel(connection)
+    with journal._tx():
+        row = connection.execute(
+            "SELECT submission_state, version FROM managed_turn_intents WHERE turn_intent_id = ?",
+            (turn_intent_id,),
+        ).fetchone()
+        if row is not None and str(row["submission_state"]) == "PREPARED":
+            kernel.apply(
+                TransitionRequest(
+                    aggregate_kind=AggregateKind.MANAGED_TURN,
+                    aggregate_id=turn_intent_id,
+                    expected_state="PREPARED",
+                    expected_version=int(row["version"] or 0),
+                    target_state="CANCELLED",
+                    cause_kind=TransitionCause.PRE_WRITE_CANCEL,
+                    cause_ref=cause_ref,
+                )
+            )
+        journal.cancel_prepared_if_present(effect_id, cause_ref=cause_ref)
+
 
     def has_possible_submission(self, effect_id: str) -> bool:
         current = self.get(effect_id)

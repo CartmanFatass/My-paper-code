@@ -238,9 +238,14 @@ class BindingStore:
         if other is not None:
             raise BindingError("thread is already bound")
         if self.bridge is not None:
-            snapshot = self.bridge.snapshot(binding.actor_context_id)
-            if snapshot.actor_kind != binding.actor_kind.value:
-                raise BindingError("actor kind no longer matches binding")
+            from .semantic_bridge import SemanticBridgeError
+
+            try:
+                actor = self.bridge.require_eligible(binding.actor_context_id)
+            except SemanticBridgeError as exc:
+                raise BindingError(str(exc)) from exc
+            if actor.actor_kind.value != binding.actor_kind.value or actor.scope_key != binding.semantic_scope_key:
+                raise BindingError("semantic actor no longer matches binding")
         now = _now()
         version = int(self.store.connection.execute(
             "SELECT version FROM managed_actor_bindings WHERE binding_id = ?",
@@ -264,10 +269,21 @@ class BindingStore:
                     if effect_id is not None:
                         from .durability.effects import EffectJournal
 
-                        EffectJournal(self.store.connection).confirm_effect(
-                            effect_id,
-                            evidence_ref=f"thread:{thread_id}",
-                        )
+                        journal = EffectJournal(self.store.connection)
+                        effect = journal.get(effect_id)
+                        if effect.binding_id != binding_id or effect.owner_id != binding_id:
+                            raise BindingError("effect is owned by another binding")
+                        if effect.owner_kind not in {"THREAD_PROVISION", "THREAD_RESUME"}:
+                            raise BindingError("effect owner_kind cannot attach a thread")
+                        requested = str(effect.request.get("threadId") or "")
+                        if effect.owner_kind == "THREAD_RESUME" and requested != thread_id:
+                            raise BindingError("effect threadId does not match attach thread")
+                        if effect.state == "EFFECT_CONFIRMED":
+                            pass
+                        elif effect.state == "RESPONSE_OBSERVED":
+                            journal.confirm_effect(effect_id, evidence_ref=f"thread:{thread_id}")
+                        else:
+                            raise BindingError("effect is not observed; cannot attach")
                     if mutation_intent_id is not None:
                         current = self.store.connection.execute(
                             "SELECT state FROM mutation_intents WHERE intent_id = ?",

@@ -115,23 +115,14 @@ class ManagedTurns:
             raise ManagedTurnError(str(exc)) from exc
 
     def _cancel_prepared(self, turn_intent_id: str, effect_id: str, reason: str) -> None:
-        row = self._row(turn_intent_id)
-        if row["submission_state"] == SubmissionState.PREPARED.value:
-            self._apply(
-                TransitionRequest(
-                    aggregate_kind=AggregateKind.MANAGED_TURN,
-                    aggregate_id=turn_intent_id,
-                    expected_state=SubmissionState.PREPARED.value,
-                    expected_version=int(row["version"] or 0),
-                    target_state=SubmissionState.CANCELLED.value,
-                    cause_kind=TransitionCause.PRE_WRITE_CANCEL,
-                    cause_ref=reason,
-                )
-            )
-        try:
-            self.journal.cancel_before_write(effect_id, cause_ref=reason)
-        except Exception:
-            pass
+        from .durability.effects import cancel_prepared_turn
+
+        cancel_prepared_turn(
+            self.bindings.store.connection,
+            turn_intent_id,
+            effect_id,
+            cause_ref=reason,
+        )
 
     def _assert_submit_fence(self, turn_intent_id: str, effect_id: str) -> None:
         row = self._row(turn_intent_id)

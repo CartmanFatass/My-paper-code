@@ -112,6 +112,7 @@ class EffectReconciler:
 
     def _confirm_with_owner(self, record: EffectRecord, *, evidence_ref: str, turn_id: str | None = None, thread_id: str | None = None) -> EffectRecord:
         if record.state not in {
+            EffectState.WRITE_STARTED.value,
             EffectState.RESPONSE_OBSERVED.value,
             EffectState.SUBMISSION_UNCERTAIN.value,
         }:
@@ -170,8 +171,8 @@ class EffectReconciler:
                             field_updates={"app_server_turn_id": turn_id, "observed_at": _now()} if turn_id else {"observed_at": _now()},
                         )
                     )
-                except TransitionError:
-                    return
+                except TransitionError as exc:
+                    raise ReconciliationError(str(exc)) from exc
             return
         if record.owner_kind != "WAKE_BATCH":
             return
@@ -212,8 +213,8 @@ class EffectReconciler:
                         field_updates={"app_server_turn_id": turn_id, "observed_at": _now()} if turn_id else {"observed_at": _now()},
                     )
                 )
-            except TransitionError:
-                return
+            except TransitionError as exc:
+                raise ReconciliationError(str(exc)) from exc
         messages = self.connection.execute(
             """SELECT m.message_id, m.delivery_state, m.delivery_version
             FROM mailbox_messages m
@@ -237,8 +238,8 @@ class EffectReconciler:
                         cause_ref=evidence_ref,
                     )
                 )
-            except TransitionError:
-                continue
+            except TransitionError as exc:
+                raise ReconciliationError(str(exc)) from exc
 
     async def reconcile_turn_start(self, record: EffectRecord, *, evidence_row_id: str | None = None) -> object:
         observed = await self._observed_turn(record)
@@ -256,13 +257,12 @@ class EffectReconciler:
         if not thread_id:
             return record
         snap = self.connection.execute(
-            "SELECT status FROM thread_snapshots WHERE thread_id = ?",
+            "SELECT status_type FROM thread_snapshots WHERE thread_id = ?",
             (str(thread_id),),
         ).fetchone()
         idle_loaded = False
         if snap is not None:
-            status = snap["status"]
-            status_type = status.get("type") if isinstance(status, dict) else status
+            status_type = snap["status_type"]
             idle_loaded = str(status_type) in {"idle", "IDLE_LOADED"}
         if self.owner is not None:
             read = await self._read("thread/read", {"threadId": str(thread_id)})

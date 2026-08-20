@@ -153,6 +153,8 @@ class OperatorResolutionService:
                     )
                 except TransitionError as exc:
                     raise OperatorResolutionError(str(exc)) from exc
+            if effect is not None and effect.state == "PREPARED":
+                self.journal.cancel_before_write(effect.effect_id, cause_ref=resolution_id)
             if effect is not None and effect.state == "INCIDENT":
                 effect_resolution_id = f"ores_{uuid.uuid4().hex}"
                 self._insert_resolution(

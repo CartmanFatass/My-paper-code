@@ -5,16 +5,16 @@ Copy everything below the line to another model that can read this branch.
 ```text
 document_kind=synthetic_durability_kernel_review_prompt
 branch=codex-supervisor-durability-kernel-v1
-reviewed_commit=7593bd11
 baseline=04eb640f4090993b251b204096cff26b44350b90
-prior_review=REVISION_REQUIRED on f5b5a754
+prior_review=REVISION_REQUIRED on 7593bd11
 ```
 
 Review the HMASD Codex supervisor durability kernel on branch
 `codex-supervisor-durability-kernel-v1`. This is synthetic control-plane
 review, not Phase 1 / Stage 3 / Stage 4 live acceptance.
 
-This slice answers the prior REVISION_REQUIRED review. Read first:
+This slice answers the prior REVISION_REQUIRED rereview of `7593bd11`.
+Read first:
 
 ```text
 AGENTS.md
@@ -25,35 +25,15 @@ docs/research/workflow-runs/2026-08-19_codex-supervisor-durability-kernel/SYNTHE
 tools/codex_supervisor/durability/
 ```
 
-Confirm whether these six closures now hold, then answer the original kernel
-questions:
+Confirm these four remaining boundaries are closed:
 
 ```text
-1. Every submit_effect caller exhausts RESPONSE_OBSERVED / SUBMISSION_UNCERTAIN / INCIDENT and never treats uncertain as success.
-2. Domain and effect transitions for wake first write, turn observation, and completion are one BEGIN IMMEDIATE transaction.
-3. Mutating compatibility paths and new mutation_intents writes are gone. WakeRecovery uses submit_effect only.
-4. CommandGateway writes only through TransitionKernel. scan_package() == [] and doctor reports actual scanner results.
-5. Reconciliation and operator resolution read ObserverStore / App Server facts; they do not accept caller-authored turn/status/readiness.
-6. Managed-turn and wake write claims re-check binding and semantic actor eligibility; a released actor cancels PREPARED effects.
+1. adopt_existing_thread classifies EffectSubmissionResult and does not attach or confirm on uncertain. All provisioning has a final semantic actor fence.
+2. WakeRecovery has no domain-only fallback. WRITE_STARTED with exact turn evidence confirms the effect before delivery. Message delivery failure rolls back the whole txn.
+3. Every PREPARED owner cancellation also sets linked effect CANCELLED_BEFORE_WRITE in the same transaction. Cancelled owners cannot submit_effect.
+4. Resume reconciler uses thread_snapshots.status_type. CommandGateway refuses INCIDENT/unreconciled effects. Static scanner is AST/SQL allowlist and does not exempt TransitionKernel imports. Legacy SUBMITTED without response evidence maps to SUBMISSION_UNCERTAIN.
 ```
 
-Original kernel questions:
-
-```text
-1. Can any business module mutate a protected state outside the kernel?
-2. Can any business module send a mutation outside the session owner?
-3. Can WRITE_STARTED or later ever be automatically submitted again?
-4. Can INCIDENT exit without one operator resolution?
-5. Can an operator resolution partially commit or execute twice?
-6. Can aggregate state and effect state contradict after any failpoint?
-7. Can recovery perform a mutating App Server request?
-8. Can raw prose affect state, routing, ACL, retry, or resolution?
-9. Can a released/non-ACTIVE actor receive a managed effect?
-10. Can live acceptance be inferred from synthetic evidence?
-```
-
-Also review SQLite transaction ownership, version/CAS correctness, async
-cancellation, pending future cleanup, watcher lifetime, effect/raw
-correlation, operator evidence validation, and migration conservatism.
+Then answer kernel questions 1-10 from the original prompt.
 
 Do not require live App Server. Missing live artifacts are not defects.

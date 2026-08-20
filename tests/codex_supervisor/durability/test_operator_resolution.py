@@ -55,6 +55,7 @@ def test_prepared_effect_can_return_messages_to_eligible(tmp_path: Path) -> None
     )
     assert connection.execute("SELECT state FROM wake_batches").fetchone()[0] == "CANCELLED"
     assert connection.execute("SELECT delivery_state FROM mailbox_messages").fetchone()[0] == "ELIGIBLE"
+    assert connection.execute("SELECT state FROM app_server_effects").fetchone()[0] == "CANCELLED_BEFORE_WRITE"
     connection.close()
 
 
