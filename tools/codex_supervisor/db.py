@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import json
 import sqlite3
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 6
+SCHEMA_VERSION = 7
 
 SCHEMA_STATEMENTS = (
     """
@@ -44,6 +46,7 @@ SCHEMA_STATEMENTS = (
         item_id TEXT,
         canonical_json TEXT NOT NULL,
         observed_at TEXT NOT NULL,
+        effect_id TEXT,
         UNIQUE(run_id, direction, transport_seq),
         FOREIGN KEY(run_id) REFERENCES observer_runs(run_id)
     )
@@ -62,6 +65,7 @@ SCHEMA_STATEMENTS = (
         outcome TEXT,
         error_code INTEGER,
         response_json TEXT,
+        effect_id TEXT,
         UNIQUE(run_id, client_request_id),
         FOREIGN KEY(run_id) REFERENCES observer_runs(run_id)
     )
@@ -178,7 +182,8 @@ SCHEMA_STATEMENTS = (
         verified_checkpoint_id TEXT,
         verified_state_version INTEGER,
         verified_epoch_id TEXT,
-        verified_epoch_revision INTEGER
+        verified_epoch_revision INTEGER,
+        version INTEGER NOT NULL DEFAULT 0
     )
     """,
     """
@@ -210,7 +215,9 @@ SCHEMA_STATEMENTS = (
         observed_at TEXT,
         completed_at TEXT,
         completion_status TEXT,
-        incident_json TEXT
+        incident_json TEXT,
+        version INTEGER NOT NULL DEFAULT 0,
+        effect_id TEXT
     )
     """,
     """
@@ -247,6 +254,7 @@ SCHEMA_STATEMENTS = (
         created_at TEXT NOT NULL,
         validated_at TEXT,
         applied_at TEXT,
+        version INTEGER NOT NULL DEFAULT 0,
         UNIQUE(binding_id, turn_id, raw_message_seq)
     )
     """,
@@ -283,7 +291,9 @@ SCHEMA_STATEMENTS = (
         intaken_at TEXT,
         applied_at TEXT,
         dead_letter_reason TEXT,
-        source_resolved_after_submission INTEGER NOT NULL DEFAULT 0
+        source_resolved_after_submission INTEGER NOT NULL DEFAULT 0,
+        delivery_version INTEGER NOT NULL DEFAULT 0,
+        intake_version INTEGER NOT NULL DEFAULT 0
     )
     """,
     """
@@ -312,7 +322,9 @@ SCHEMA_STATEMENTS = (
         completion_status TEXT,
         incident_json TEXT,
         lease_generation INTEGER,
-        lease_holder TEXT
+        lease_holder TEXT,
+        version INTEGER NOT NULL DEFAULT 0,
+        effect_id TEXT
     )
     """,
     """
@@ -363,7 +375,71 @@ SCHEMA_STATEMENTS = (
         state TEXT NOT NULL,
         request_json TEXT,
         created_at TEXT NOT NULL,
-        updated_at TEXT NOT NULL
+        updated_at TEXT NOT NULL,
+        superseded_by_effect_id TEXT
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS app_server_effects (
+        effect_id TEXT PRIMARY KEY,
+        owner_kind TEXT NOT NULL,
+        owner_id TEXT NOT NULL,
+        binding_id TEXT,
+        method TEXT NOT NULL,
+        client_key TEXT NOT NULL,
+        request_json TEXT NOT NULL,
+        state TEXT NOT NULL,
+        version INTEGER NOT NULL DEFAULT 0,
+        run_id TEXT,
+        client_request_id TEXT,
+        request_row_id TEXT,
+        raw_request_seq INTEGER,
+        transport_seq INTEGER,
+        thread_id TEXT,
+        turn_id TEXT,
+        response_json TEXT,
+        incident_json TEXT,
+        legacy_intent_id TEXT,
+        prepared_at TEXT NOT NULL,
+        write_started_at TEXT,
+        response_observed_at TEXT,
+        confirmed_at TEXT,
+        reconciled_at TEXT,
+        resolved_at TEXT,
+        UNIQUE(method, client_key)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS control_transitions (
+        transition_id TEXT PRIMARY KEY,
+        aggregate_kind TEXT NOT NULL,
+        aggregate_id TEXT NOT NULL,
+        state_column TEXT NOT NULL,
+        from_state TEXT NOT NULL,
+        to_state TEXT NOT NULL,
+        from_version INTEGER NOT NULL,
+        to_version INTEGER NOT NULL,
+        cause_kind TEXT NOT NULL,
+        cause_ref TEXT NOT NULL,
+        evidence_ref TEXT,
+        metadata_json TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        UNIQUE(aggregate_kind, aggregate_id, state_column, to_version)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS operator_resolutions (
+        resolution_id TEXT PRIMARY KEY,
+        aggregate_kind TEXT NOT NULL,
+        aggregate_id TEXT NOT NULL,
+        effect_id TEXT,
+        operator TEXT NOT NULL,
+        disposition TEXT NOT NULL,
+        evidence_kind TEXT NOT NULL,
+        evidence_ref TEXT NOT NULL,
+        payload_json TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        UNIQUE(aggregate_kind, aggregate_id)
     )
     """,
     """
@@ -375,6 +451,22 @@ SCHEMA_STATEMENTS = (
     CREATE UNIQUE INDEX IF NOT EXISTS mutation_intents_open_unique
     ON mutation_intents(method, client_key)
     WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED_UNRECONCILED', 'INCIDENT')
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS app_server_effect_owner
+    ON app_server_effects(owner_kind, owner_id)
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS app_server_effect_binding
+    ON app_server_effects(binding_id, state)
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS app_server_effect_request
+    ON app_server_effects(run_id, client_request_id)
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS control_transition_aggregate
+    ON control_transitions(aggregate_kind, aggregate_id, to_version)
     """,
 )
 
@@ -403,6 +495,9 @@ REQUIRED_TABLES = (
     "scheduler_leases",
     "mailbox_command_receipts",
     "mutation_intents",
+    "app_server_effects",
+    "control_transitions",
+    "operator_resolutions",
 )
 
 
@@ -455,14 +550,124 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _add_column_if_missing(connection, "wake_batches", "lease_holder", "TEXT")
         _add_column_if_missing(connection, "thread_snapshots", "preview_present", "INTEGER")
         _add_column_if_missing(connection, "thread_snapshots", "preview_byte_length", "INTEGER")
+        _add_column_if_missing(connection, "managed_actor_bindings", "version", "INTEGER NOT NULL DEFAULT 0")
+        _add_column_if_missing(connection, "managed_turn_intents", "version", "INTEGER NOT NULL DEFAULT 0")
+        _add_column_if_missing(connection, "managed_turn_intents", "effect_id", "TEXT")
+        _add_column_if_missing(connection, "wake_batches", "version", "INTEGER NOT NULL DEFAULT 0")
+        _add_column_if_missing(connection, "wake_batches", "effect_id", "TEXT")
+        _add_column_if_missing(connection, "mailbox_messages", "delivery_version", "INTEGER NOT NULL DEFAULT 0")
+        _add_column_if_missing(connection, "mailbox_messages", "intake_version", "INTEGER NOT NULL DEFAULT 0")
+        _add_column_if_missing(connection, "managed_actor_commands", "version", "INTEGER NOT NULL DEFAULT 0")
+        _add_column_if_missing(connection, "raw_messages", "effect_id", "TEXT")
+        _add_column_if_missing(connection, "rpc_requests", "effect_id", "TEXT")
+        _add_column_if_missing(connection, "mutation_intents", "superseded_by_effect_id", "TEXT")
+        _add_column_if_missing(connection, "app_server_effects", "transport_seq", "INTEGER")
         connection.execute("DROP INDEX IF EXISTS mutation_intents_open_unique")
         connection.execute(
             """CREATE UNIQUE INDEX IF NOT EXISTS mutation_intents_open_unique
             ON mutation_intents(method, client_key)
             WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED_UNRECONCILED', 'INCIDENT')"""
         )
+        _install_transition_guards(connection)
+        _migrate_legacy_mutation_intents(connection)
         if current < SCHEMA_VERSION:
             connection.execute(
                 "INSERT INTO schema_meta(version, applied_at) VALUES (?, ?)",
                 (SCHEMA_VERSION, applied_at),
             )
+
+
+def _install_transition_guards(connection: sqlite3.Connection) -> None:
+    from .durability.graphs import transition_trigger_sql
+    from .durability.transitions import AGGREGATE_LOCATORS
+
+    for kind, locator in AGGREGATE_LOCATORS.items():
+        drop_sql, create_sql = transition_trigger_sql(
+            kind=kind,
+            table=locator.table,
+            id_column=locator.id_column,
+            state_column=locator.state_column,
+            version_column=locator.version_column,
+        )
+        connection.execute(drop_sql)
+        connection.execute(create_sql)
+
+
+def _migrate_legacy_mutation_intents(connection: sqlite3.Connection) -> None:
+    tables = {
+        str(row[0]) for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    }
+    if "mutation_intents" not in tables or "app_server_effects" not in tables:
+        return
+    now = datetime.now(timezone.utc).isoformat()
+    owner_for = {
+        "thread/start": "THREAD_PROVISION",
+        "thread/resume": "THREAD_RESUME",
+        "turn/start": "MANAGED_TURN",
+        "thread/memoryMode/set": "THREAD_MEMORY",
+    }
+    state_for = {
+        "APPLIED": "EFFECT_CONFIRMED",
+        "OPERATOR_RESOLVED": "OPERATOR_RESOLVED",
+        "INCIDENT": "INCIDENT",
+        "SUBMITTED": "SUBMISSION_UNCERTAIN",
+        "SUBMITTED_UNRECONCILED": "SUBMISSION_UNCERTAIN",
+    }
+    rows = connection.execute(
+        """SELECT intent_id, method, binding_id, client_key, state, request_json
+        FROM mutation_intents WHERE superseded_by_effect_id IS NULL"""
+    ).fetchall()
+    for row in rows:
+        method = str(row["method"])
+        client_key = str(row["client_key"])
+        existing = connection.execute(
+            "SELECT effect_id FROM app_server_effects WHERE method = ? AND client_key = ?",
+            (method, client_key),
+        ).fetchone()
+        if existing is not None:
+            connection.execute(
+                "UPDATE mutation_intents SET superseded_by_effect_id = ? WHERE intent_id = ?",
+                (str(existing[0]), str(row["intent_id"])),
+            )
+            continue
+        effect_id = f"eff_legacy_{uuid.uuid4().hex}"
+        owner_kind = owner_for.get(method, "EPHEMERAL_CANARY")
+        legacy_state = str(row["state"])
+        target_state = state_for.get(legacy_state, "SUBMISSION_UNCERTAIN")
+        if legacy_state in {"SUBMITTED", "SUBMITTED_UNRECONCILED"}:
+            evidence = connection.execute(
+                """SELECT 1 FROM raw_messages
+                WHERE canonical_json LIKE ? AND direction = 'stdout' LIMIT 1""",
+                (f"%{client_key}%",),
+            ).fetchone()
+            if evidence is None:
+                target_state = "SUBMISSION_UNCERTAIN"
+            else:
+                target_state = "RESPONSE_OBSERVED"
+        request_json = str(row["request_json"] or "{}")
+        try:
+            json.loads(request_json)
+        except Exception:
+            request_json = "{}"
+        connection.execute(
+            """INSERT INTO app_server_effects(
+                effect_id, owner_kind, owner_id, binding_id, method, client_key,
+                request_json, state, version, legacy_intent_id, prepared_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?)""",
+            (
+                effect_id,
+                owner_kind,
+                str(row["intent_id"]),
+                None if row["binding_id"] is None else str(row["binding_id"]),
+                method,
+                client_key,
+                request_json,
+                target_state,
+                str(row["intent_id"]),
+                now,
+            ),
+        )
+        connection.execute(
+            "UPDATE mutation_intents SET superseded_by_effect_id = ? WHERE intent_id = ?",
+            (effect_id, str(row["intent_id"])),
+        )

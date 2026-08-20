@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from tests.codex_supervisor.helpers import (
+    claim_wake_write_start_for_tests,
     make_observer_config,
     record_completed_agent_item,
     write_fake_codex,
@@ -152,11 +153,9 @@ def test_managed_turn_submit_rejects_persisted_submitting(tmp_path: Path) -> Non
     store.mark_verification_required(binding_id)
     turns = ManagedTurns(store, client=None)  # type: ignore[arg-type]
     intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
-    seeded["supervisor"].connection.execute(
-        "UPDATE managed_turn_intents SET submission_state = 'SUBMITTING' WHERE turn_intent_id = ?",
-        (intent_id,),
-    )
-    seeded["supervisor"].connection.commit()
+    from tests.codex_supervisor.helpers import drive_turn_intent
+
+    drive_turn_intent(seeded["supervisor"].connection, intent_id, "SUBMITTING")
 
     async def body() -> None:
         with pytest.raises(ManagedTurnError, match="reconcile"):
@@ -197,7 +196,12 @@ def test_wake_submit_rejects_persisted_submitting(tmp_path: Path) -> None:
         None,
         instance_id="sched",
     )
-    scheduler.begin_submission(str(batch["wake_batch_id"]))
+    claim_wake_write_start_for_tests(
+        batches,
+        str(batch["wake_batch_id"]),
+        lease_holder=batch["lease_holder"],
+        lease_generation=batch["lease_generation"],
+    )
 
     async def body() -> None:
         with pytest.raises(WakeSchedulerError, match="reconcile"):
@@ -230,7 +234,7 @@ def test_thread_start_response_attach_is_one_durable_apply(tmp_path: Path) -> No
         store.attach_thread = crash  # type: ignore[method-assign]
         with pytest.raises(RuntimeError, match="crash after response"):
             await provisioner.create_fresh_thread(binding_id)
-        with pytest.raises(ProvisioningError, match="unresolved intent"):
+        with pytest.raises(ProvisioningError, match="unresolved"):
             await provisioner.create_fresh_thread(binding_id)
         assert sent.count("thread/start") == 1
         await transport.stop()
@@ -383,6 +387,7 @@ def test_one_session_level_watcher_handles_concurrent_rpc_responses(tmp_path: Pa
         first = ManagedAppServerSession.for_client(client, seeded["supervisor"])
         second = ManagedAppServerSession.for_client(client, seeded["supervisor"])
         assert first is second
+        assert first.owner is second.owner
         assert ManagedAppServerSession.active_watcher_count() >= 1
         await asyncio.gather(
             first.request("thread/list", {}),
@@ -431,9 +436,26 @@ def _active_batch(tmp_path: Path, turn_id: str = "turn_active") -> dict[str, obj
         lease_holder="sched",
     )
     mailbox.mark_delivered(message.message_id)
-    batches.set_state(
+    from tests.codex_supervisor.helpers import drive_wake_batch
+    from tools.codex_supervisor.durability.effects import EffectJournal
+
+    effect_id = str(batch.get("effect_id") or "")
+    if effect_id:
+        journal = EffectJournal(seeded["supervisor"].connection)
+        journal.claim_write(
+            effect_id,
+            run_id="fixture",
+            client_request_id="fixture",
+            request_row_id="fixture",
+            raw_request_seq=1,
+        )
+        journal.observe_response(effect_id, response={"result": {"turn": {"id": turn_id}}}, turn_id=turn_id)
+        journal.confirm_effect(effect_id, evidence_ref=f"turn:{turn_id}")
+
+    drive_wake_batch(
+        batches,
         str(batch["wake_batch_id"]),
-        state="ACTIVE",
+        "ACTIVE",
         app_server_turn_id=turn_id,
         observed_at=_now(),
     )
@@ -695,7 +717,12 @@ def test_source_resolution_during_submitting_batch_preserves_reconciliation(tmp_
         None,
         instance_id="sched",
     )
-    scheduler.begin_submission(str(batch["wake_batch_id"]))
+    claim_wake_write_start_for_tests(
+        batches,
+        str(batch["wake_batch_id"]),
+        lease_holder=batch["lease_holder"],
+        lease_generation=batch["lease_generation"],
+    )
     seeded["semantic"].connection.execute("UPDATE obligations SET state = 'RESOLVED' WHERE state = 'OPEN'")
     seeded["semantic"].connection.commit()
     scanner.scan()
@@ -729,7 +756,9 @@ def test_mailbox_command_with_unknown_ordering_is_rejected(tmp_path: Path) -> No
         messages=[message],
     )
     mailbox.mark_delivered(message.message_id)
-    batches.set_state(str(batch["wake_batch_id"]), state="COMPLETED", app_server_turn_id="turn_wake")
+    from tests.codex_supervisor.helpers import drive_wake_batch
+
+    drive_wake_batch(batches, str(batch["wake_batch_id"]), "COMPLETED", app_server_turn_id="turn_wake")
     gateway = CommandGateway(seeded["bindings"], seeded["bridge"], mailbox)
     body = {
         "schema_version": "1.0",

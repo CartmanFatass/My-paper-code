@@ -15,6 +15,9 @@ from .managed_models import (
     MemoryPolicyState,
     ThreadOrigin,
 )
+from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+from .durability.transaction import DurabilityTransaction
+from .durability.transitions import TransitionError, TransitionKernel
 from .semantic_bridge import ManagedActorSnapshot, SemanticBridge
 from .store import ObserverStore
 
@@ -207,10 +210,16 @@ class BindingStore:
         thread_id: str,
         *,
         mutation_intent_id: str | None = None,
+        effect_id: str | None = None,
     ) -> ManagedActorBinding:
-        if not mutation_intent_id:
-            raise BindingError("mutation intent is required")
-        return self._attach_thread(binding_id, thread_id, mutation_intent_id=mutation_intent_id)
+        if not mutation_intent_id and not effect_id:
+            raise BindingError("effect id is required")
+        return self._attach_thread(
+            binding_id,
+            thread_id,
+            mutation_intent_id=mutation_intent_id,
+            effect_id=effect_id,
+        )
 
     def _attach_thread(
         self,
@@ -218,6 +227,7 @@ class BindingStore:
         thread_id: str,
         *,
         mutation_intent_id: str | None,
+        effect_id: str | None = None,
     ) -> ManagedActorBinding:
         binding = self.get(binding_id)
         if binding is None:
@@ -228,34 +238,61 @@ class BindingStore:
         if other is not None:
             raise BindingError("thread is already bound")
         if self.bridge is not None:
-            snapshot = self.bridge.snapshot(binding.actor_context_id)
-            if snapshot.actor_kind != binding.actor_kind.value:
-                raise BindingError("actor kind no longer matches binding")
+            from .semantic_bridge import SemanticBridgeError
+
+            try:
+                actor = self.bridge.require_eligible(binding.actor_context_id)
+            except SemanticBridgeError as exc:
+                raise BindingError(str(exc)) from exc
+            if actor.actor_kind.value != binding.actor_kind.value or actor.scope_key != binding.semantic_scope_key:
+                raise BindingError("semantic actor no longer matches binding")
         now = _now()
-        with self.store._lock, self.store.connection:
-            cursor = self.store.connection.execute(
-                """UPDATE managed_actor_bindings
-                SET thread_id = ?, binding_state = ?, thread_created_at = ?
-                WHERE binding_id = ? AND binding_state = ?""",
-                (
-                    thread_id,
-                    BindingState.THREAD_CREATED.value,
-                    now,
-                    binding_id,
-                    BindingState.PREPARED.value,
-                ),
-            )
-            if cursor.rowcount != 1:
-                raise BindingError("binding is no longer PREPARED")
-            if mutation_intent_id is not None:
-                applied = self.store.connection.execute(
-                    """UPDATE mutation_intents
-                    SET state = ?, updated_at = ?
-                    WHERE intent_id = ? AND state = ?""",
-                    ("APPLIED", now, mutation_intent_id, "SUBMITTING"),
-                )
-                if applied.rowcount != 1:
-                    raise BindingError("mutation intent is not SUBMITTING")
+        version = int(self.store.connection.execute(
+            "SELECT version FROM managed_actor_bindings WHERE binding_id = ?",
+            (binding_id,),
+        ).fetchone()[0] or 0)
+        try:
+            with self.store._lock:
+                with DurabilityTransaction(self.store.connection):
+                    TransitionKernel(self.store.connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MANAGED_BINDING,
+                            aggregate_id=binding_id,
+                            expected_state=BindingState.PREPARED.value,
+                            expected_version=version,
+                            target_state=BindingState.THREAD_CREATED.value,
+                            cause_kind=TransitionCause.APP_SERVER_EFFECT,
+                            cause_ref=mutation_intent_id or "test-attach",
+                            field_updates={"thread_id": thread_id, "thread_created_at": now},
+                        )
+                    )
+                    if effect_id is not None:
+                        from .durability.effects import EffectJournal
+
+                        journal = EffectJournal(self.store.connection)
+                        effect = journal.get(effect_id)
+                        if effect.binding_id != binding_id or effect.owner_id != binding_id:
+                            raise BindingError("effect is owned by another binding")
+                        if effect.owner_kind not in {"THREAD_PROVISION", "THREAD_RESUME"}:
+                            raise BindingError("effect owner_kind cannot attach a thread")
+                        requested = str(effect.request.get("threadId") or "")
+                        if effect.owner_kind == "THREAD_RESUME" and requested != thread_id:
+                            raise BindingError("effect threadId does not match attach thread")
+                        if effect.state == "EFFECT_CONFIRMED":
+                            pass
+                        elif effect.state == "RESPONSE_OBSERVED":
+                            journal.confirm_effect(effect_id, evidence_ref=f"thread:{thread_id}")
+                        else:
+                            raise BindingError("effect is not observed; cannot attach")
+                    if mutation_intent_id is not None:
+                        current = self.store.connection.execute(
+                            "SELECT state FROM mutation_intents WHERE intent_id = ?",
+                            (mutation_intent_id,),
+                        ).fetchone()
+                        if current is None or str(current[0]) != "SUBMITTING":
+                            raise BindingError("mutation intent is not SUBMITTING")
+        except TransitionError as exc:
+            raise BindingError("binding is no longer PREPARED") from exc
         self._record_event(binding_id, "THREAD_ATTACHED", {"thread_id": thread_id})
         attached = self.get(binding_id)
         assert attached is not None
@@ -265,11 +302,26 @@ class BindingStore:
         binding = self.get(binding_id)
         if binding is None or binding.binding_state is not BindingState.THREAD_CREATED:
             raise BindingError("only THREAD_CREATED bindings may enter verification")
-        with self.store._lock, self.store.connection:
-            self.store.connection.execute(
-                "UPDATE managed_actor_bindings SET binding_state = ? WHERE binding_id = ?",
-                (BindingState.VERIFICATION_REQUIRED.value, binding_id),
-            )
+        version = int(self.store.connection.execute(
+            "SELECT version FROM managed_actor_bindings WHERE binding_id = ?",
+            (binding_id,),
+        ).fetchone()[0] or 0)
+        try:
+            with self.store._lock:
+                with DurabilityTransaction(self.store.connection):
+                    TransitionKernel(self.store.connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MANAGED_BINDING,
+                            aggregate_id=binding_id,
+                            expected_state=BindingState.THREAD_CREATED.value,
+                            expected_version=version,
+                            target_state=BindingState.VERIFICATION_REQUIRED.value,
+                            cause_kind=TransitionCause.OPERATOR_ACTION,
+                            cause_ref="verification-required",
+                        )
+                    )
+        except TransitionError as exc:
+            raise BindingError("only THREAD_CREATED bindings may enter verification") from exc
         self._record_event(binding_id, "VERIFICATION_REQUIRED", {})
         updated = self.get(binding_id)
         assert updated is not None
@@ -429,33 +481,38 @@ class BindingStore:
         ):
             raise BindingError("semantic tuple changed during activation")
         now = _now()
-        with self.store._lock, self.store.connection:
-            cursor = self.store.connection.execute(
-                """UPDATE managed_actor_bindings
-                SET binding_state = ?, activated_at = ?, last_verified_at = ?,
-                    verification_turn_intent_id = ?, verification_turn_id = ?,
-                    verification_command_id = ?, verification_receipt_id = ?,
-                    verified_checkpoint_id = ?, verified_state_version = ?,
-                    verified_epoch_id = ?, verified_epoch_revision = ?
-                WHERE binding_id = ? AND binding_state = ?""",
-                (
-                    BindingState.ACTIVE.value,
-                    now,
-                    now,
-                    evidence["verification_turn_intent_id"],
-                    evidence["verification_turn_id"],
-                    evidence["verification_command_id"],
-                    evidence["verification_receipt_id"],
-                    evidence["verified_checkpoint_id"],
-                    evidence["verified_state_version"],
-                    evidence["verified_epoch_id"] or None,
-                    evidence["verified_epoch_revision"],
-                    binding_id,
-                    BindingState.VERIFICATION_REQUIRED.value,
-                ),
-            )
-            if cursor.rowcount != 1:
-                raise BindingError("binding state changed during activation")
+        version = int(self.store.connection.execute(
+            "SELECT version FROM managed_actor_bindings WHERE binding_id = ?",
+            (binding_id,),
+        ).fetchone()[0] or 0)
+        try:
+            with self.store._lock:
+                with DurabilityTransaction(self.store.connection):
+                    TransitionKernel(self.store.connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MANAGED_BINDING,
+                            aggregate_id=binding_id,
+                            expected_state=BindingState.VERIFICATION_REQUIRED.value,
+                            expected_version=version,
+                            target_state=BindingState.ACTIVE.value,
+                            cause_kind=TransitionCause.CONTROL_COMMAND,
+                            cause_ref="activate",
+                            field_updates={
+                                "activated_at": now,
+                                "last_verified_at": now,
+                                "verification_turn_intent_id": evidence["verification_turn_intent_id"],
+                                "verification_turn_id": evidence["verification_turn_id"],
+                                "verification_command_id": evidence["verification_command_id"],
+                                "verification_receipt_id": evidence["verification_receipt_id"],
+                                "verified_checkpoint_id": evidence["verified_checkpoint_id"],
+                                "verified_state_version": evidence["verified_state_version"],
+                                "verified_epoch_id": evidence["verified_epoch_id"] or None,
+                                "verified_epoch_revision": evidence["verified_epoch_revision"],
+                            },
+                        )
+                    )
+        except TransitionError as exc:
+            raise BindingError("binding state changed during activation") from exc
         self._record_event(binding_id, "BINDING_ACTIVATED", evidence)
         updated = self.get(binding_id)
         assert updated is not None
@@ -466,11 +523,27 @@ class BindingStore:
         if binding is None or binding.binding_state in {BindingState.REVOKED, BindingState.SUSPENDED}:
             raise BindingError("binding cannot be suspended")
         now = _now()
-        with self.store._lock, self.store.connection:
-            self.store.connection.execute(
-                "UPDATE managed_actor_bindings SET binding_state = ?, suspended_at = ? WHERE binding_id = ?",
-                (BindingState.SUSPENDED.value, now, binding_id),
-            )
+        version = int(self.store.connection.execute(
+            "SELECT version FROM managed_actor_bindings WHERE binding_id = ?",
+            (binding_id,),
+        ).fetchone()[0] or 0)
+        try:
+            with self.store._lock:
+                with DurabilityTransaction(self.store.connection):
+                    TransitionKernel(self.store.connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MANAGED_BINDING,
+                            aggregate_id=binding_id,
+                            expected_state=binding.binding_state.value,
+                            expected_version=version,
+                            target_state=BindingState.SUSPENDED.value,
+                            cause_kind=TransitionCause.OPERATOR_ACTION,
+                            cause_ref="suspend",
+                            field_updates={"suspended_at": now},
+                        )
+                    )
+        except TransitionError as exc:
+            raise BindingError("binding cannot be suspended") from exc
         self._record_event(binding_id, "BINDING_SUSPENDED", {})
         updated = self.get(binding_id)
         assert updated is not None
@@ -483,11 +556,27 @@ class BindingStore:
         if binding.binding_state is BindingState.REVOKED:
             raise BindingError("binding is already revoked")
         now = _now()
-        with self.store._lock, self.store.connection:
-            self.store.connection.execute(
-                "UPDATE managed_actor_bindings SET binding_state = ?, revoked_at = ? WHERE binding_id = ?",
-                (BindingState.REVOKED.value, now, binding_id),
-            )
+        version = int(self.store.connection.execute(
+            "SELECT version FROM managed_actor_bindings WHERE binding_id = ?",
+            (binding_id,),
+        ).fetchone()[0] or 0)
+        try:
+            with self.store._lock:
+                with DurabilityTransaction(self.store.connection):
+                    TransitionKernel(self.store.connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MANAGED_BINDING,
+                            aggregate_id=binding_id,
+                            expected_state=binding.binding_state.value,
+                            expected_version=version,
+                            target_state=BindingState.REVOKED.value,
+                            cause_kind=TransitionCause.OPERATOR_ACTION,
+                            cause_ref="revoke",
+                            field_updates={"revoked_at": now},
+                        )
+                    )
+        except TransitionError as exc:
+            raise BindingError("binding cannot be revoked") from exc
         self._record_event(binding_id, "BINDING_REVOKED", {})
         updated = self.get(binding_id)
         assert updated is not None

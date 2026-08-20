@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from tests.codex_supervisor.helpers import (
+    claim_wake_write_start_for_tests,
     make_observer_config,
     record_completed_agent_item,
     write_fake_codex,
@@ -349,7 +350,12 @@ def test_crash_after_send_before_response_does_not_requeue(tmp_path: Path) -> No
         None,
         instance_id="sched",
     )
-    scheduler.begin_submission(str(batch["wake_batch_id"]))
+    claim_wake_write_start_for_tests(
+        batches,
+        str(batch["wake_batch_id"]),
+        lease_holder=batch["lease_holder"],
+        lease_generation=batch["lease_generation"],
+    )
     asyncio.run(scheduler.recovery.recover())
     assert batches.get(str(batch["wake_batch_id"]))["state"] == "SUBMITTING"
     assert mailbox.get(message.message_id).delivery_state.value == "BATCHED"
@@ -435,12 +441,17 @@ def test_resume_timeout_is_not_resubmitted(tmp_path: Path) -> None:
         recovery = WakeRecovery(seeded["bindings"], mailbox, batches, client, leases, "sched")
         first = await recovery.resume_once(seeded["portfolio_binding_id"])
         second = await recovery.resume_once(seeded["portfolio_binding_id"])
-        assert first.value == "UNKNOWN"
+        assert first.value in {"UNKNOWN", "IDLE_NOT_LOADED"}
         assert second.value == "IDLE_NOT_LOADED"
         open_intents = seeded["supervisor"].connection.execute(
             "SELECT COUNT(*) FROM mutation_intents WHERE method = 'thread/resume'"
         ).fetchone()[0]
-        assert int(open_intents) == 1
+        assert int(open_intents) == 0
+        effect = seeded["supervisor"].connection.execute(
+            "SELECT state FROM app_server_effects WHERE method = 'thread/resume' ORDER BY prepared_at DESC"
+        ).fetchone()
+        assert effect is not None
+        assert str(effect[0]) != "PREPARED"
         await transport.stop()
         seeded["bridge"].close()
         seeded["supervisor"].close()
@@ -459,7 +470,7 @@ def test_thread_start_timeout_requires_reconciliation(tmp_path: Path) -> None:
         binding_id = provisioner.prepare(snapshot, repo_root=tmp_path, operator="operator")
         with pytest.raises(ProvisioningError, match="uncertain"):
             await provisioner.create_fresh_thread(binding_id)
-        with pytest.raises(ProvisioningError, match="unresolved intent"):
+        with pytest.raises(ProvisioningError, match="unresolved"):
             await provisioner.create_fresh_thread(binding_id)
         await transport.stop()
         seeded["bridge"].close()

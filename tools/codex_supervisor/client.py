@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import random
+from dataclasses import dataclass
 from typing import Any, Awaitable, Callable, Mapping
 
 from .models import ObserverConfig, RequestClass, RpcShape
@@ -24,10 +25,30 @@ MUTATING_NO_RETRY_METHODS = frozenset(
         "turn/interrupt",
         "thread/compact/start",
         "review/start",
+        "thread/memoryMode/set",
     }
 )
 OVERLOAD_CODE = -32001
 CLIENT_NOTIFICATION_METHODS = frozenset({"initialized"})
+COMPATIBLE_REQUEST_METHODS = frozenset(
+    {
+        "initialize",
+        "thread/list",
+        "thread/read",
+        "thread/loaded/list",
+    }
+)
+MUTATING_OWNER_MESSAGE = "mutating requests require AppServerSessionOwner.submit_effect"
+
+
+@dataclass(frozen=True)
+class PreparedRpcRequest:
+    request_id: str
+    method: str
+    params: Mapping[str, object]
+    payload: Mapping[str, object]
+    request_class: RequestClass
+    future: asyncio.Future[dict[str, object]]
 
 
 class AppServerRpcError(RuntimeError):
@@ -145,6 +166,59 @@ class AppServerClient:
             raise HandshakeError(f"client notification not in local schema: {method}")
         await self.transport.send({"method": method, "params": dict(params or {})})
 
+    def prepare_request(
+        self,
+        method: str,
+        params: Mapping[str, object] | None = None,
+    ) -> PreparedRpcRequest:
+        self.start_reader()
+        if method != "initialize" and not self._initialize_complete:
+            raise HandshakeError("initialize/initialized must complete before other requests")
+        request_id = str(self._next_id)
+        self._next_id += 1
+        payload = {"id": int(request_id), "method": method, "params": dict(params or {})}
+        future: asyncio.Future[dict[str, object]] = asyncio.get_running_loop().create_future()
+        self._pending[request_id] = future
+        return PreparedRpcRequest(
+            request_id=request_id,
+            method=method,
+            params=dict(params or {}),
+            payload=payload,
+            request_class=request_class_for(method),
+            future=future,
+        )
+
+    def discard_prepared(self, prepared: PreparedRpcRequest) -> None:
+        future = self._pending.pop(prepared.request_id, None)
+        if future is not None and not future.done():
+            future.cancel()
+
+    async def send_prepared(self, prepared: PreparedRpcRequest) -> None:
+        await self.transport.send(dict(prepared.payload))
+
+    async def await_prepared(
+        self,
+        prepared: PreparedRpcRequest,
+        *,
+        timeout: float | None = None,
+    ) -> dict[str, object]:
+        try:
+            response = await asyncio.wait_for(
+                prepared.future, timeout=timeout or self.config.request_timeout_seconds
+            )
+        except Exception:
+            self._pending.pop(prepared.request_id, None)
+            raise
+        if "error" not in response:
+            return response
+        error = response.get("error") if isinstance(response.get("error"), Mapping) else {}
+        code = error.get("code") if isinstance(error, Mapping) else None
+        message = str(error.get("message") if isinstance(error, Mapping) else "rpc error")
+        rpc_error = AppServerRpcError(int(code) if isinstance(code, int) else None, message, response)
+        if isinstance(code, int) and code == OVERLOAD_CODE and prepared.request_class is not RequestClass.READ_IDEMPOTENT:
+            raise RetryRequired(code, message, response)
+        raise rpc_error
+
     async def request(
         self,
         method: str,
@@ -152,30 +226,17 @@ class AppServerClient:
         *,
         timeout: float | None = None,
     ) -> dict[str, object]:
-        self.start_reader()
-        if method != "initialize" and not self._initialize_complete:
-            raise HandshakeError("initialize/initialized must complete before other requests")
+        if method in MUTATING_NO_RETRY_METHODS:
+            raise RuntimeError(MUTATING_OWNER_MESSAGE)
         klass = request_class_for(method)
         attempt = 1
         while True:
-            request_id = str(self._next_id)
-            self._next_id += 1
-            payload = {"id": int(request_id), "method": method, "params": dict(params or {})}
-            future: asyncio.Future[dict[str, object]] = asyncio.get_running_loop().create_future()
-            self._pending[request_id] = future
-            await self.transport.send(payload)
+            prepared = self.prepare_request(method, params)
+            await self.send_prepared(prepared)
             try:
-                response = await asyncio.wait_for(
-                    future, timeout=timeout or self.config.request_timeout_seconds
-                )
-            except Exception:
-                self._pending.pop(request_id, None)
-                raise
-            if "error" in response:
-                error = response.get("error") if isinstance(response.get("error"), Mapping) else {}
-                code = error.get("code") if isinstance(error, Mapping) else None
-                message = str(error.get("message") if isinstance(error, Mapping) else "rpc error")
-                rpc_error = AppServerRpcError(int(code) if isinstance(code, int) else None, message, response)
+                return await self.await_prepared(prepared, timeout=timeout)
+            except AppServerRpcError as rpc_error:
+                code = rpc_error.code
                 if (
                     isinstance(code, int)
                     and code == OVERLOAD_CODE
@@ -186,10 +247,7 @@ class AppServerClient:
                     await self._sleep(delay)
                     attempt += 1
                     continue
-                if isinstance(code, int) and code == OVERLOAD_CODE and klass is not RequestClass.READ_IDEMPOTENT:
-                    raise RetryRequired(code, message, response)
-                raise rpc_error
-            return response
+                raise
 
     async def list_threads(self) -> list[dict[str, object]]:
         threads: list[dict[str, object]] = []

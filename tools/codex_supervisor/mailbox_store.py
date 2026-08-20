@@ -170,7 +170,16 @@ class MailboxStore:
         assert stored is not None
         return stored
 
-    def _set_delivery(self, message_id: str, new_state: DeliveryState, **fields: Any) -> MailboxMessage:
+    def _set_delivery(
+        self,
+        message_id: str,
+        new_state: DeliveryState,
+        **fields: Any,
+    ) -> MailboxMessage:
+        from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+        from .durability.transaction import DurabilityTransaction
+        from .durability.transitions import TransitionError, TransitionKernel
+
         current = self.get(message_id)
         if current is None:
             raise MailboxStoreError(f"unknown mailbox message: {message_id}")
@@ -181,17 +190,75 @@ class MailboxStore:
             raise MailboxStoreError(
                 f"cannot skip {current.delivery_state.value} → {new_state.value}"
             )
-        assignments = ["delivery_state = ?"]
-        values: list[object] = [new_state.value]
-        for key, value in fields.items():
-            assignments.append(f"{key} = ?")
-            values.append(value)
-        values.append(message_id)
-        with self.store._lock, self.store.connection:
+        cause = fields.pop("cause_kind", None) or (
+            TransitionCause.PRE_WRITE_CANCEL
+            if current.delivery_state is DeliveryState.BATCHED and new_state is DeliveryState.ELIGIBLE
+            else TransitionCause.CONTROL_COMMAND
+        )
+        if isinstance(cause, str):
+            cause = TransitionCause(cause)
+        version = int(
             self.store.connection.execute(
-                f"UPDATE mailbox_messages SET {', '.join(assignments)} WHERE message_id = ?",
-                values,
-            )
+                "SELECT delivery_version FROM mailbox_messages WHERE message_id = ?",
+                (message_id,),
+            ).fetchone()[0]
+            or 0
+        )
+        try:
+            with self.store._lock:
+                with DurabilityTransaction(self.store.connection):
+                    TransitionKernel(self.store.connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MAILBOX_DELIVERY,
+                            aggregate_id=message_id,
+                            expected_state=current.delivery_state.value,
+                            expected_version=version,
+                            target_state=new_state.value,
+                            cause_kind=cause,
+                            cause_ref=str(fields.get("dead_letter_reason") or new_state.value),
+                            field_updates=fields,
+                        )
+                    )
+        except TransitionError as exc:
+            raise MailboxStoreError(str(exc)) from exc
+        updated = self.get(message_id)
+        assert updated is not None
+        return updated
+
+    def _set_intake(self, message_id: str, new_state: IntakeState, **fields: Any) -> MailboxMessage:
+        from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+        from .durability.transaction import DurabilityTransaction
+        from .durability.transitions import TransitionError, TransitionKernel
+
+        current = self.get(message_id)
+        if current is None:
+            raise MailboxStoreError(f"unknown mailbox message: {message_id}")
+        if current.intake_state is new_state:
+            return current
+        version = int(
+            self.store.connection.execute(
+                "SELECT intake_version FROM mailbox_messages WHERE message_id = ?",
+                (message_id,),
+            ).fetchone()[0]
+            or 0
+        )
+        try:
+            with self.store._lock:
+                with DurabilityTransaction(self.store.connection):
+                    TransitionKernel(self.store.connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MAILBOX_INTAKE,
+                            aggregate_id=message_id,
+                            expected_state=current.intake_state.value,
+                            expected_version=version,
+                            target_state=new_state.value,
+                            cause_kind=TransitionCause.CONTROL_COMMAND,
+                            cause_ref=new_state.value,
+                            field_updates=fields,
+                        )
+                    )
+        except TransitionError as exc:
+            raise MailboxStoreError(str(exc)) from exc
         updated = self.get(message_id)
         assert updated is not None
         return updated
@@ -259,47 +326,87 @@ class MailboxStore:
         invalid_message_ids: set[str],
         reason: str = "SOURCE_RESOLVED",
     ) -> bool:
+        from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+        from .durability.transaction import DurabilityTransaction
+        from .durability.transitions import TransitionError, TransitionKernel
+
         now = _now()
-        with self.store._lock, self.store.connection:
-            cursor = self.store.connection.execute(
-                """UPDATE wake_batches
-                SET state = 'CANCELLED'
-                WHERE wake_batch_id = ? AND state = 'PREPARED'""",
-                (wake_batch_id,),
-            )
-            if cursor.rowcount != 1:
-                return False
-            rows = self.store.connection.execute(
-                """SELECT m.message_id, m.delivery_state
-                FROM mailbox_messages m
-                JOIN wake_batch_messages b ON b.message_id = m.message_id
-                WHERE b.wake_batch_id = ?""",
-                (wake_batch_id,),
-            ).fetchall()
-            for row in rows:
-                message_id = str(row["message_id"])
-                state = str(row["delivery_state"])
-                if message_id in invalid_message_ids:
-                    if state not in {
-                        DeliveryState.DELIVERED_TO_TURN.value,
-                        DeliveryState.SUBMISSION_UNCERTAIN.value,
-                        DeliveryState.DEAD_LETTER.value,
-                        DeliveryState.CANCELLED_SOURCE_RESOLVED.value,
-                    }:
-                        self.store.connection.execute(
-                            """UPDATE mailbox_messages
-                            SET delivery_state = ?, dead_letter_reason = ?, batched_at = NULL
-                            WHERE message_id = ?""",
-                            (DeliveryState.CANCELLED_SOURCE_RESOLVED.value, reason, message_id),
+        kernel = TransitionKernel(self.store.connection)
+        with self.store._lock:
+            with DurabilityTransaction(self.store.connection):
+                batch = self.store.connection.execute(
+                    "SELECT state, version FROM wake_batches WHERE wake_batch_id = ?",
+                    (wake_batch_id,),
+                ).fetchone()
+                if batch is None or str(batch["state"]) != "PREPARED":
+                    return False
+                try:
+                    kernel.apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.WAKE_BATCH,
+                            aggregate_id=wake_batch_id,
+                            expected_state="PREPARED",
+                            expected_version=int(batch["version"] or 0),
+                            target_state="CANCELLED",
+                            cause_kind=TransitionCause.SOURCE_RESOLUTION,
+                            cause_ref=reason,
                         )
-                elif state == DeliveryState.BATCHED.value:
-                    self.store.connection.execute(
-                        """UPDATE mailbox_messages
-                        SET delivery_state = ?, batched_at = NULL,
-                            eligible_at = COALESCE(eligible_at, ?)
-                        WHERE message_id = ?""",
-                        (DeliveryState.ELIGIBLE.value, now, message_id),
                     )
+                except TransitionError:
+                    return False
+                effect_id = self.store.connection.execute(
+                    "SELECT effect_id FROM wake_batches WHERE wake_batch_id = ?",
+                    (wake_batch_id,),
+                ).fetchone()
+                from .durability.effects import EffectJournal
+
+                EffectJournal(self.store.connection).cancel_prepared_if_present(
+                    None if effect_id is None or effect_id[0] is None else str(effect_id[0]),
+                    cause_ref=reason,
+                )
+                rows = self.store.connection.execute(
+                    """SELECT m.message_id, m.delivery_state, m.delivery_version
+                    FROM mailbox_messages m
+                    JOIN wake_batch_messages b ON b.message_id = m.message_id
+                    WHERE b.wake_batch_id = ?""",
+                    (wake_batch_id,),
+                ).fetchall()
+                for row in rows:
+                    message_id = str(row["message_id"])
+                    state = str(row["delivery_state"])
+                    version = int(row["delivery_version"] or 0)
+                    if message_id in invalid_message_ids:
+                        if state not in {
+                            DeliveryState.DELIVERED_TO_TURN.value,
+                            DeliveryState.SUBMISSION_UNCERTAIN.value,
+                            DeliveryState.DEAD_LETTER.value,
+                            DeliveryState.CANCELLED_SOURCE_RESOLVED.value,
+                        }:
+                            kernel.apply(
+                                TransitionRequest(
+                                    aggregate_kind=AggregateKind.MAILBOX_DELIVERY,
+                                    aggregate_id=message_id,
+                                    expected_state=state,
+                                    expected_version=version,
+                                    target_state=DeliveryState.CANCELLED_SOURCE_RESOLVED.value,
+                                    cause_kind=TransitionCause.SOURCE_INVALID_PREPARED_BATCH,
+                                    cause_ref=reason,
+                                    field_updates={"dead_letter_reason": reason, "batched_at": None},
+                                )
+                            )
+                    elif state == DeliveryState.BATCHED.value:
+                        kernel.apply(
+                            TransitionRequest(
+                                aggregate_kind=AggregateKind.MAILBOX_DELIVERY,
+                                aggregate_id=message_id,
+                                expected_state=state,
+                                expected_version=version,
+                                target_state=DeliveryState.ELIGIBLE.value,
+                                cause_kind=TransitionCause.SOURCE_INVALID_PREPARED_BATCH,
+                                cause_ref=reason,
+                                field_updates={"batched_at": None, "eligible_at": now},
+                            )
+                        )
         return True
 
     def cancel_source_resolved(self, message_id: str, reason: str = "SOURCE_RESOLVED") -> MailboxMessage:
@@ -326,13 +433,7 @@ class MailboxStore:
         if current.delivery_state is not DeliveryState.DELIVERED_TO_TURN:
             raise MailboxStoreError("ACK requires a delivered message")
         if current.intake_state is IntakeState.NOT_ACKNOWLEDGED:
-            with self.store._lock, self.store.connection:
-                self.store.connection.execute(
-                    """UPDATE mailbox_messages
-                    SET intake_state = ?, acknowledged_at = ?
-                    WHERE message_id = ?""",
-                    (IntakeState.ACKNOWLEDGED.value, _now(), message_id),
-                )
+            self._set_intake(message_id, IntakeState.ACKNOWLEDGED, acknowledged_at=_now())
         updated = self.get(message_id)
         assert updated is not None
         return updated
@@ -346,13 +447,7 @@ class MailboxStore:
             current = self.get(message_id)
             assert current is not None
         if current.intake_state is IntakeState.ACKNOWLEDGED:
-            with self.store._lock, self.store.connection:
-                self.store.connection.execute(
-                    """UPDATE mailbox_messages
-                    SET intake_state = ?, intaken_at = ?
-                    WHERE message_id = ?""",
-                    (IntakeState.INTAKEN.value, _now(), message_id),
-                )
+            self._set_intake(message_id, IntakeState.INTAKEN, intaken_at=_now())
         updated = self.get(message_id)
         assert updated is not None
         return updated

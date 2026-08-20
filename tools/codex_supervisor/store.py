@@ -149,6 +149,110 @@ class ObserverStore:
             )
             return int(cursor.lastrowid)
 
+    def record_effect_write_start(
+        self,
+        *,
+        effect_id: str,
+        run_id: str,
+        method: str,
+        payload: Mapping[str, Any],
+        params: Mapping[str, Any],
+        request_class: str,
+        extra_transitions: list[Any] | None = None,
+        extra_hooks: list[Any] | None = None,
+        request_override: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        from .durability.effects import EffectJournal, _canonical_request
+        from .durability.transaction import DurabilityError, DurabilityTransaction
+        from .durability.transitions import TransitionKernel
+        from .protocol import extract_protocol_ids
+
+        ids = extract_protocol_ids(payload)
+        client_request_id = str(payload.get("id") or ids.request_id or "")
+        request_row_id = _new_id("req")
+        encoded = canonical_json(dict(payload))
+        params_json = canonical_json(dict(params))
+        now = _now()
+        with self._lock:
+            if self.connection.in_transaction:
+                raise DurabilityError("write-start requires transaction ownership")
+            with DurabilityTransaction(self.connection):
+                if request_override is not None:
+                    updated = self.connection.execute(
+                        """UPDATE app_server_effects SET request_json = ?
+                        WHERE effect_id = ? AND state = 'PREPARED'""",
+                        (_canonical_request(request_override), effect_id),
+                    )
+                    if updated.rowcount != 1:
+                        raise DurabilityError("request override requires a PREPARED effect")
+                next_seq = int(
+                    self.connection.execute(
+                        """SELECT COALESCE(MAX(transport_seq), 0) + 1
+                        FROM raw_messages WHERE run_id = ? AND direction = 'stdin'""",
+                        (run_id,),
+                    ).fetchone()[0]
+                )
+                if extra_hooks:
+                    for hook in extra_hooks:
+                        hook(self.connection)
+                if extra_transitions:
+                    kernel = TransitionKernel(self.connection)
+                    for request in extra_transitions:
+                        kernel.apply(request)
+                cursor = self.connection.execute(
+                    """INSERT INTO raw_messages (
+                        run_id, direction, transport_seq, rpc_shape, request_id, method,
+                        thread_id, turn_id, item_id, canonical_json, observed_at, effect_id
+                    ) VALUES (?, 'stdin', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        run_id,
+                        next_seq,
+                        RpcShape.REQUEST.value,
+                        client_request_id,
+                        method,
+                        ids.thread_id,
+                        ids.turn_id,
+                        ids.item_id,
+                        encoded,
+                        now,
+                        effect_id,
+                    ),
+                )
+                raw_seq = int(cursor.lastrowid)
+                journal = EffectJournal(self.connection)
+                journal.claim_write(
+                    effect_id,
+                    run_id=run_id,
+                    client_request_id=client_request_id,
+                    request_row_id=request_row_id,
+                    raw_request_seq=raw_seq,
+                    transport_seq=next_seq,
+                )
+                self.connection.execute(
+                    """INSERT INTO rpc_requests (
+                        request_row_id, run_id, client_request_id, method, request_class,
+                        params_json, attempt_count, sent_at, completed_at, outcome,
+                        error_code, response_json, effect_id
+                    ) VALUES (?, ?, ?, ?, ?, ?, 1, ?, NULL, NULL, NULL, NULL, ?)""",
+                    (
+                        request_row_id,
+                        run_id,
+                        client_request_id,
+                        method,
+                        request_class,
+                        params_json,
+                        now,
+                        effect_id,
+                    ),
+                )
+        return {
+            "raw_request_seq": raw_seq,
+            "raw_message_seq": raw_seq,
+            "transport_seq": next_seq,
+            "request_row_id": request_row_id,
+            "client_request_id": client_request_id,
+        }
+
     def record_request_sent(
         self,
         *,

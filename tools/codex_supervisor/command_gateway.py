@@ -215,7 +215,7 @@ class CommandGateway:
     def _refuse_incident_source(self, binding: Any, turn_id: str) -> None:
         keys: list[str] = []
         turn = self.bindings.store.connection.execute(
-            """SELECT submission_state, client_user_message_id FROM managed_turn_intents
+            """SELECT submission_state, client_user_message_id, effect_id FROM managed_turn_intents
             WHERE binding_id = ? AND app_server_turn_id = ?""",
             (binding.binding_id, turn_id),
         ).fetchone()
@@ -223,8 +223,10 @@ class CommandGateway:
             raise CommandGatewayError("command turn is INCIDENT; no control effect")
         if turn is not None and turn[1]:
             keys.append(str(turn[1]))
+        if turn is not None and turn[2]:
+            self._refuse_unreconciled_effect(str(turn[2]))
         batch = self.bindings.store.connection.execute(
-            """SELECT state, client_user_message_id FROM wake_batches
+            """SELECT state, client_user_message_id, effect_id FROM wake_batches
             WHERE binding_id = ? AND app_server_turn_id = ?""",
             (binding.binding_id, turn_id),
         ).fetchone()
@@ -232,6 +234,8 @@ class CommandGateway:
             raise CommandGatewayError("wake batch is INCIDENT; no control effect")
         if batch is not None and batch[1]:
             keys.append(str(batch[1]))
+        if batch is not None and batch[2]:
+            self._refuse_unreconciled_effect(str(batch[2]))
         if keys:
             placeholders = ", ".join("?" for _ in keys)
             found = self.bindings.store.connection.execute(
@@ -241,6 +245,19 @@ class CommandGateway:
             ).fetchone()
             if found is not None:
                 raise CommandGatewayError("mutation intent is INCIDENT; no control effect")
+
+    def _refuse_unreconciled_effect(self, effect_id: str) -> None:
+        row = self.bindings.store.connection.execute(
+            "SELECT state FROM app_server_effects WHERE effect_id = ?",
+            (effect_id,),
+        ).fetchone()
+        if row is None:
+            return
+        state = str(row[0])
+        if state == "INCIDENT":
+            raise CommandGatewayError("linked effect is INCIDENT; no control effect")
+        if state in {"WRITE_STARTED", "SUBMISSION_UNCERTAIN"}:
+            raise CommandGatewayError("linked effect is unreconciled; no control effect")
 
     def _turn_order_key(self, turn_id: str, thread_id: str | None) -> tuple[str, object] | None:
         first_event = self.bindings.store.connection.execute(
@@ -342,6 +359,12 @@ class CommandGateway:
             if expected_tuple != receipt_tuple:
                 self._mark_command_incident(command_id, "receipt tuple does not match command")
                 raise CommandGatewayError("receipt tuple does not match command")
+            if state == CommandValidationState.RECEIVED.value:
+                self._update_command(
+                    command_id,
+                    validation_state=CommandValidationState.VALIDATED.value,
+                    validated_at=_now(),
+                )
             self._update_command(
                 command_id,
                 validation_state=CommandValidationState.APPLIED.value,
@@ -398,12 +421,39 @@ class CommandGateway:
         return {"effect": "MANAGED_PACKET_SEND", "packet_id": packet.get("packet_id"), "marker": packet.get("marker")}
 
     def _update_command(self, command_id: str, **fields: Any) -> None:
-        assignments = ", ".join(f"{key} = ?" for key in fields)
-        with self.bindings.store._lock, self.bindings.store.connection:
-            self.bindings.store.connection.execute(
-                f"UPDATE managed_actor_commands SET {assignments} WHERE command_id = ?",
-                list(fields.values()) + [command_id],
-            )
+        from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+        from .durability.transaction import DurabilityTransaction
+        from .durability.transitions import TransitionError, TransitionKernel
+
+        row = self.bindings.store.connection.execute(
+            "SELECT * FROM managed_actor_commands WHERE command_id = ?",
+            (command_id,),
+        ).fetchone()
+        if row is None:
+            raise CommandGatewayError(f"unknown command: {command_id}")
+        if "validation_state" not in fields:
+            raise CommandGatewayError("command updates must include validation_state")
+        target = str(fields.pop("validation_state"))
+        current = str(row["validation_state"])
+        if current == target:
+            return
+        try:
+            with self.bindings.store._lock:
+                with DurabilityTransaction(self.bindings.store.connection):
+                    TransitionKernel(self.bindings.store.connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MANAGED_COMMAND,
+                            aggregate_id=command_id,
+                            expected_state=current,
+                            expected_version=int(row["version"] or 0),
+                            target_state=target,
+                            cause_kind=TransitionCause.CONTROL_COMMAND,
+                            cause_ref=command_id,
+                            field_updates=fields,
+                        )
+                    )
+        except TransitionError as exc:
+            raise CommandGatewayError(str(exc)) from exc
 
     def _reject(self, command_id: str, reason: str) -> None:
         self._update_command(

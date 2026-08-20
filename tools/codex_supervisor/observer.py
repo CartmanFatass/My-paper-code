@@ -9,7 +9,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
-from .client import AppServerClient, UnexpectedServerRequest, request_class_for
+from .client import (
+    MUTATING_NO_RETRY_METHODS,
+    MUTATING_OWNER_MESSAGE,
+    AppServerClient,
+    UnexpectedServerRequest,
+    request_class_for,
+)
 from .codex_binary import read_codex_version
 from .models import (
     CanaryResult,
@@ -111,6 +117,14 @@ class ObserverService:
         encoded = encode_jsonl(message)
         self._stdin_seq += 1
         self.store.append_raw_file(self.run_id, "stdin.jsonl", encoded)
+        already = self.store.connection.execute(
+            "SELECT 1 FROM rpc_requests WHERE run_id = ? AND client_request_id = ?",
+            (self.run_id, str(message.get("id") or "")),
+        ).fetchone()
+        if already is not None:
+            if self.outbound_hook is not None:
+                self.outbound_hook(message)
+            return await original_send(message)
         self.store.record_raw_message(
             run_id=self.run_id,
             direction="stdin",
@@ -214,12 +228,40 @@ class ObserverService:
         params: dict[str, object] | None = None,
     ) -> dict[str, object]:
         assert self.client is not None
-        if self.session is not None:
-            response = await self.session.request(method, params)
-        else:
-            response = await self.client.request(method, params)
+        if method in MUTATING_NO_RETRY_METHODS:
+            raise RuntimeError(MUTATING_OWNER_MESSAGE)
+        from .durability.session_owner import AppServerSessionOwner
+
+        owner = AppServerSessionOwner.for_client(self.client, self.store)
+        response = dict(await owner.request_read(method, params))
         await self._drain_incident()
         return response
+
+    async def _submit_canary_effect(
+        self,
+        canary_id: str,
+        method: str,
+        params: Mapping[str, object],
+    ) -> dict[str, object]:
+        assert self.client is not None
+        from .durability.effects import EffectJournal
+        from .durability.session_owner import AppServerSessionOwner
+
+        owner = AppServerSessionOwner.for_client(self.client, self.store)
+        journal = EffectJournal(self.store.connection)
+        effect = journal.prepare_effect(
+            owner_kind="EPHEMERAL_CANARY",
+            owner_id=canary_id,
+            binding_id=None,
+            method=method,
+            client_key=f"canary:{method}:{canary_id}",
+            request=dict(params),
+        )
+        submitted = await owner.submit_effect(effect.effect_id)
+        if owner.classify_submission(submitted) != "observed":
+            raise RuntimeError("canary mutation was not observed")
+        await self._drain_incident()
+        return dict(submitted.response or {})
 
     async def _list_threads(self) -> list[dict[str, object]]:
         threads: list[dict[str, object]] = []
@@ -429,7 +471,8 @@ class ObserverService:
                     await self._terminate_unexpected(exc)
                     self.record_local_event("CANARY_INCIDENT_OBSERVED", {"reason": "server_request"})
                     return CanaryResult(canary_id, self.run_id, None, None, "incident", incident="server_request")
-            start = await self._session_request(
+            start = await self._submit_canary_effect(
+                canary_id,
                 "thread/start",
                 {"cwd": str(scratch.resolve()), "ephemeral": True, "approvalPolicy": "never"},
             )
@@ -446,7 +489,8 @@ class ObserverService:
                 self.record_local_event("CANARY_INCIDENT_OBSERVED", {"reason": "not_ephemeral"})
                 await self.stop(EndKind.PROTOCOL_INCIDENT.value)
                 return CanaryResult(canary_id, self.run_id, thread_id, None, "incident", incident="not_ephemeral")
-            turn = await self._session_request(
+            turn = await self._submit_canary_effect(
+                canary_id,
                 "turn/start",
                 {"threadId": thread_id, "input": list(CANARY_INPUT)},
             )

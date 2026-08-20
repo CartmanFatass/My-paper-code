@@ -86,8 +86,22 @@ def test_verify_activate_and_reject_wrong_thread_or_released_actor(tmp_path: Pat
             input_ref="bootstrap",
         )
         store.store.connection.execute(
-            "UPDATE managed_turn_intents SET app_server_turn_id = ?, submission_state = 'COMPLETED' WHERE turn_intent_id = ?",
+            """UPDATE managed_turn_intents
+            SET app_server_turn_id = ?, submission_state = 'SUBMITTING', version = version + 1
+            WHERE turn_intent_id = ?""",
             ("turn_port", other_intent),
+        )
+        store.store.connection.execute(
+            "UPDATE managed_turn_intents SET submission_state = 'SUBMITTED', version = version + 1 WHERE turn_intent_id = ?",
+            (other_intent,),
+        )
+        store.store.connection.execute(
+            "UPDATE managed_turn_intents SET submission_state = 'OBSERVED', version = version + 1 WHERE turn_intent_id = ?",
+            (other_intent,),
+        )
+        store.store.connection.execute(
+            "UPDATE managed_turn_intents SET submission_state = 'COMPLETED', version = version + 1 WHERE turn_intent_id = ?",
+            (other_intent,),
         )
         store.store.connection.commit()
         release_actor_context(seeded["semantic"], seeded["portfolio"].actor_context_id)

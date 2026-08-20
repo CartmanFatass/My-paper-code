@@ -15,9 +15,8 @@ from .managed_models import BindingState, ManagedActorKind
 from .scheduler_leases import LeaseError, SchedulerLeases
 from .semantic_bridge import SemanticBridge, SemanticBridgeError
 from .semantic_scanner import SemanticScanner
-from .session_guard import SessionGuard
 from .transport import TransportClosed
-from .wake_batches import WakeBatchError, WakeBatchStore
+from .wake_batches import WakeBatchStore
 from .wake_recovery import WakeRecovery
 
 
@@ -55,6 +54,7 @@ class WakeScheduler:
         if self.recovery.leases is None:
             self.recovery.leases = leases
         self.recovery.instance_id = instance_id
+        self.recovery.bridge = bridge
 
     def _sender_kinds(self) -> dict[str, str | None]:
         kinds: dict[str, str | None] = {}
@@ -81,19 +81,16 @@ class WakeScheduler:
         if not wake_batch_id:
             return
         batch = self.batches.get(wake_batch_id)
-        if batch is None or str(batch["state"]) not in {
-            WakeBatchState.PREPARED.value,
-            WakeBatchState.SUBMITTING.value,
-        }:
+        if batch is None:
             return
-        for message in self.batches.messages_for(wake_batch_id):
-            if message.delivery_state.value == "BATCHED":
-                self.mailbox.return_to_eligible(message.message_id)
-        self.batches.set_state(
-            wake_batch_id,
-            state=WakeBatchState.CANCELLED.value,
-            expected_state=str(batch["state"]),
-        )
+        if str(batch["state"]) == WakeBatchState.PREPARED.value:
+            from .durability.effects import cancel_prepared_wake
+
+            cancel_prepared_wake(
+                self.bindings.store.connection,
+                wake_batch_id,
+                cause_ref="actor-ineligible",
+            )
 
     def _assert_submit_fence(
         self,
@@ -118,29 +115,6 @@ class WakeScheduler:
             self._abort_unsubmitted_wake(binding_id, wake_batch_id)
             raise WakeSchedulerError("actor scope no longer matches binding")
 
-    def begin_submission(
-        self,
-        wake_batch_id: str,
-        *,
-        lease_holder: object = None,
-        lease_generation: object = None,
-    ) -> dict[str, object]:
-        batch = self.batches.get(wake_batch_id)
-        if batch is None:
-            raise WakeSchedulerError("unknown wake batch")
-        if batch["state"] != WakeBatchState.PREPARED.value:
-            raise WakeSchedulerError("wake batch is not PREPARED")
-        holder = lease_holder if lease_holder is not None else batch["lease_holder"]
-        generation = lease_generation if lease_generation is not None else batch["lease_generation"]
-        try:
-            return self.batches.claim_first_submission(
-                wake_batch_id,
-                lease_holder=holder,
-                lease_generation=generation,
-            )
-        except WakeBatchError as exc:
-            raise WakeSchedulerError(str(exc)) from exc
-
     async def submit_batch(
         self,
         wake_batch_id: str,
@@ -160,34 +134,72 @@ class WakeScheduler:
         generation = int(lease_generation)
         self._assert_submit_fence(str(batch["binding_id"]), generation, wake_batch_id=wake_batch_id)
         self.leases.renew(str(batch["binding_id"]), self.instance_id, generation=generation)
-        batch = self.begin_submission(
-            wake_batch_id,
-            lease_holder=self.instance_id,
-            lease_generation=generation,
-        )
         params = {
             "threadId": batch["thread_id"],
             "input": [{"type": "text", "text": input_text}],
             "approvalPolicy": "never",
             "clientUserMessageId": batch["client_user_message_id"],
         }
+        effect_id = str(batch.get("effect_id") or "")
+        if not effect_id:
+            raise WakeSchedulerError("wake batch has no linked effect")
+        from .durability.effects import EffectJournal
+        from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+        from .durability.session_owner import AppServerSessionOwner
+        from .durability.transaction import DurabilityTransaction
+        from .durability.transitions import TransitionError, TransitionKernel
 
-        def _incident(_payload: object) -> None:
-            self.batches.set_state(
-                wake_batch_id,
-                state=WakeBatchState.INCIDENT.value,
-                incident_json=json.dumps({"reason": "server_request"}),
-            )
-            self.recovery._record_attempt(
-                wake_batch_id,
-                WakeAttemptOutcome.INCIDENT,
-                error={"reason": "server_request"},
+        holder = self.instance_id
+        version = int(batch.get("version") or 0)
+
+        def _lease_and_attempt(connection) -> None:
+            current = connection.execute(
+                """SELECT state, lease_holder, lease_generation FROM wake_batches
+                WHERE wake_batch_id = ?""",
+                (wake_batch_id,),
+            ).fetchone()
+            if (
+                current is None
+                or str(current["state"]) != WakeBatchState.PREPARED.value
+                or current["lease_holder"] != holder
+                or current["lease_generation"] != generation
+            ):
+                raise WakeSchedulerError("wake batch is not PREPARED for this lease")
+            import uuid
+
+            connection.execute(
+                """INSERT INTO wake_attempts (
+                    wake_attempt_id, wake_batch_id, attempt_number, request_id,
+                    outcome, error_json, created_at
+                ) VALUES (?, ?, 1, NULL, ?, NULL, ?)""",
+                (
+                    f"watt_{uuid.uuid4().hex}",
+                    wake_batch_id,
+                    WakeAttemptOutcome.SUBMITTING.value,
+                    _now(),
+                ),
             )
 
-        guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
+        owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
             self._assert_submit_fence(str(batch["binding_id"]), generation, wake_batch_id=wake_batch_id)
-            response = await guard.request("turn/start", params)
+            submitted = await owner.submit_effect(
+                effect_id,
+                request_override=params,
+                extra_transitions=[
+                    TransitionRequest(
+                        aggregate_kind=AggregateKind.WAKE_BATCH,
+                        aggregate_id=wake_batch_id,
+                        expected_state=WakeBatchState.PREPARED.value,
+                        expected_version=version,
+                        target_state=WakeBatchState.SUBMITTING.value,
+                        cause_kind=TransitionCause.APP_SERVER_EFFECT,
+                        cause_ref=effect_id,
+                    )
+                ],
+                extra_hooks=[_lease_and_attempt],
+            )
+            response = dict(submitted.response or {})
         except RetryRequired as exc:
             self._mark_uncertain(wake_batch_id, {"reason": "overload"})
             raise WakeSchedulerError("wake turn/start uncertain; do not retry") from exc
@@ -196,27 +208,85 @@ class WakeScheduler:
         except (AppServerRpcError, TransportClosed, asyncio.TimeoutError) as exc:
             self._mark_uncertain(wake_batch_id, {"reason": type(exc).__name__})
             raise WakeSchedulerError("wake turn/start uncertain; do not retry") from exc
+        kind = owner.classify_submission(submitted)
+        current = self.batches.get(wake_batch_id)
+        if current is None:
+            raise WakeSchedulerError("unknown wake batch")
+        if kind == "incident" or current["state"] == WakeBatchState.INCIDENT.value:
+            raise WakeSchedulerError("wake turn/start incident; do not retry")
+        if kind == "uncertain":
+            self._mark_uncertain(wake_batch_id, {"reason": "timeout"})
+            raise WakeSchedulerError("wake turn/start uncertain; do not retry")
         result = response.get("result") if isinstance(response.get("result"), dict) else {}
         turn = result.get("turn") if isinstance(result.get("turn"), dict) else {}
         turn_id = turn.get("id")
+        if not turn_id:
+            self._mark_uncertain(wake_batch_id, {"reason": "missing_turn"})
+            raise WakeSchedulerError("wake turn/start uncertain; do not retry")
         now = _now()
-        updated = self.batches.set_state(
-            wake_batch_id,
-            state=WakeBatchState.ACTIVE.value,
-            app_server_turn_id=turn_id,
-            submitted_at=now,
-            observed_at=now,
-            expected_state=WakeBatchState.SUBMITTING.value,
-        )
-        if updated["state"] == WakeBatchState.INCIDENT.value:
-            raise WakeSchedulerError("wake turn/start incident; do not retry")
-        for message in self.batches.messages_for(wake_batch_id):
-            self.mailbox.mark_delivered(message.message_id)
+        current = self.batches.get(wake_batch_id)
+        assert current is not None
+        try:
+            with self.bindings.store._lock:
+                with DurabilityTransaction(self.bindings.store.connection):
+                    journal = EffectJournal(self.bindings.store.connection)
+                    kernel = TransitionKernel(self.bindings.store.connection)
+                    journal.confirm_effect(effect_id, evidence_ref=f"turn:{turn_id}")
+                    submitted_row = kernel.apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.WAKE_BATCH,
+                            aggregate_id=wake_batch_id,
+                            expected_state=WakeBatchState.SUBMITTING.value,
+                            expected_version=int(current["version"] or 0),
+                            target_state=WakeBatchState.SUBMITTED.value,
+                            cause_kind=TransitionCause.APP_SERVER_RESPONSE,
+                            cause_ref=effect_id,
+                            field_updates={"app_server_turn_id": turn_id, "submitted_at": now},
+                        )
+                    )
+                    kernel.apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.WAKE_BATCH,
+                            aggregate_id=wake_batch_id,
+                            expected_state=WakeBatchState.SUBMITTED.value,
+                            expected_version=submitted_row.to_version,
+                            target_state=WakeBatchState.ACTIVE.value,
+                            cause_kind=TransitionCause.APP_SERVER_RESPONSE,
+                            cause_ref=effect_id,
+                            field_updates={"observed_at": now},
+                        )
+                    )
+                    message_rows = self.bindings.store.connection.execute(
+                        """SELECT m.message_id, m.delivery_state, m.delivery_version
+                        FROM mailbox_messages m
+                        JOIN wake_batch_messages b ON b.message_id = m.message_id
+                        WHERE b.wake_batch_id = ?""",
+                        (wake_batch_id,),
+                    ).fetchall()
+                    for message in message_rows:
+                        if str(message["delivery_state"]) not in {"BATCHED", "SUBMISSION_UNCERTAIN"}:
+                            continue
+                        kernel.apply(
+                            TransitionRequest(
+                                aggregate_kind=AggregateKind.MAILBOX_DELIVERY,
+                                aggregate_id=str(message["message_id"]),
+                                expected_state=str(message["delivery_state"]),
+                                expected_version=int(message["delivery_version"] or 0),
+                                target_state="DELIVERED_TO_TURN",
+                                cause_kind=TransitionCause.APP_SERVER_RESPONSE,
+                                cause_ref=effect_id,
+                            )
+                        )
+        except TransitionError as exc:
+            raise WakeSchedulerError(str(exc)) from exc
+        owner.release_open_effect(effect_id)
         self.recovery._record_attempt(
             wake_batch_id,
             WakeAttemptOutcome.SUBMITTED,
             request_id=str(response.get("id") or ""),
         )
+        updated = self.batches.get(wake_batch_id)
+        assert updated is not None
         return updated
 
     def _mark_uncertain(self, wake_batch_id: str, error: dict[str, object]) -> None:
@@ -237,6 +307,21 @@ class WakeScheduler:
         )
 
     def observe_completion(self, wake_batch_id: str, status: str) -> dict[str, object]:
+        current = self.batches.get(wake_batch_id)
+        if current is None:
+            raise WakeSchedulerError("unknown wake batch")
+        if current["state"] == WakeBatchState.INCIDENT.value:
+            raise WakeSchedulerError("incident is terminal; operator recovery required")
+        if current["state"] != WakeBatchState.ACTIVE.value:
+            raise WakeSchedulerError("only ACTIVE wake batches may complete")
+        effect_id = str(current.get("effect_id") or "")
+        if effect_id:
+            from .durability.effects import effect_is_completion_ready
+
+            if not effect_is_completion_ready(self.bindings.store.connection, effect_id):
+                raise WakeSchedulerError(
+                    "completion requires EFFECT_CONFIRMED or TURN_OBSERVED operator-resolved effect"
+                )
         updated = self.batches.set_state(
             wake_batch_id,
             state=WakeBatchState.COMPLETED.value,
@@ -244,8 +329,6 @@ class WakeScheduler:
             completed_at=_now(),
             expected_state=WakeBatchState.ACTIVE.value,
         )
-        if updated["state"] == WakeBatchState.INCIDENT.value:
-            raise WakeSchedulerError("incident is terminal; operator recovery required")
         if updated["state"] != WakeBatchState.COMPLETED.value:
             raise WakeSchedulerError("only ACTIVE wake batches may complete")
         return updated

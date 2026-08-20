@@ -12,7 +12,6 @@ from .mailbox_models import (
     MAX_WAKE_MESSAGES,
     WAKE_ENVELOPE_HEADER,
     MailboxMessage,
-    WakeAttemptOutcome,
     WakeBatchState,
 )
 from .mailbox_store import MailboxStore
@@ -153,33 +152,46 @@ class WakeBatchStore:
         if not included:
             raise WakeBatchError("wake envelope could not include any message")
         now = _now()
-        with self.store._lock, self.store.connection:
-            self.store.connection.execute(
-                """INSERT INTO wake_batches (
-                    wake_batch_id, binding_id, thread_id, state, client_user_message_id,
-                    prepared_at, lease_generation, lease_holder
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-                (
-                    wake_batch_id,
-                    binding_id,
-                    thread_id,
-                    WakeBatchState.PREPARED.value,
-                    client_id,
-                    now,
-                    lease_generation,
-                    lease_holder,
-                ),
-            )
-            for ordinal, message in enumerate(included):
-                self.store.connection.execute(
-                    """INSERT INTO wake_batch_messages (wake_batch_id, message_id, ordinal)
-                    VALUES (?, ?, ?)""",
-                    (wake_batch_id, message.message_id, ordinal),
+        from .durability.effects import EffectJournal
+        from .durability.transaction import DurabilityTransaction
+
+        with self.store._lock:
+            with DurabilityTransaction(self.store.connection):
+                effect = EffectJournal(self.store.connection).prepare_effect(
+                    owner_kind="WAKE_BATCH",
+                    owner_id=wake_batch_id,
+                    binding_id=binding_id,
+                    method="turn/start",
+                    client_key=client_id,
+                    request={"threadId": thread_id, "clientUserMessageId": client_id},
                 )
-        for message in included:
-            if message.delivery_state.value == "ENQUEUED":
-                self.mailbox.mark_eligible(message.message_id)
-            self.mailbox.mark_batched(message.message_id)
+                self.store.connection.execute(
+                    """INSERT INTO wake_batches (
+                        wake_batch_id, binding_id, thread_id, state, client_user_message_id,
+                        prepared_at, lease_generation, lease_holder, effect_id
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        wake_batch_id,
+                        binding_id,
+                        thread_id,
+                        WakeBatchState.PREPARED.value,
+                        client_id,
+                        now,
+                        lease_generation,
+                        lease_holder,
+                        effect.effect_id,
+                    ),
+                )
+                for ordinal, message in enumerate(included):
+                    self.store.connection.execute(
+                        """INSERT INTO wake_batch_messages (wake_batch_id, message_id, ordinal)
+                        VALUES (?, ?, ?)""",
+                        (wake_batch_id, message.message_id, ordinal),
+                    )
+                for message in included:
+                    if message.delivery_state.value == "ENQUEUED":
+                        self.mailbox.mark_eligible(message.message_id)
+                    self.mailbox.mark_batched(message.message_id)
         record_context_injection(
             self.store,
             binding_id=binding_id,
@@ -195,71 +207,49 @@ class WakeBatchStore:
         row["excluded_message_ids"] = envelope.excluded_message_ids
         return row
 
-    def claim_first_submission(
-        self,
-        wake_batch_id: str,
-        *,
-        lease_holder: object = None,
-        lease_generation: object = None,
-    ) -> dict[str, object]:
-        now = _now()
-        with self.store._lock:
-            self.store.connection.execute("BEGIN IMMEDIATE")
-            try:
-                cursor = self.store.connection.execute(
-                    """UPDATE wake_batches
-                    SET state = ?
-                    WHERE wake_batch_id = ?
-                      AND state = ?
-                      AND lease_holder IS ?
-                      AND lease_generation IS ?""",
-                    (
-                        WakeBatchState.SUBMITTING.value,
-                        wake_batch_id,
-                        WakeBatchState.PREPARED.value,
-                        lease_holder,
-                        lease_generation,
-                    ),
-                )
-                if cursor.rowcount != 1:
-                    self.store.connection.rollback()
-                    row = self.get(wake_batch_id)
-                    if row is None:
-                        raise WakeBatchError("unknown wake batch")
-                    raise WakeBatchError("wake batch is not PREPARED for this lease")
-                self.store.connection.execute(
-                    """INSERT INTO wake_attempts (
-                        wake_attempt_id, wake_batch_id, attempt_number, request_id,
-                        outcome, error_json, created_at
-                    ) VALUES (?, ?, 1, NULL, ?, NULL, ?)""",
-                    (
-                        f"watt_{uuid.uuid4().hex}",
-                        wake_batch_id,
-                        WakeAttemptOutcome.SUBMITTING.value,
-                        now,
-                    ),
-                )
-                self.store.connection.commit()
-            except Exception:
-                try:
-                    self.store.connection.rollback()
-                except Exception:
-                    pass
-                raise
-        row = self.get(wake_batch_id)
-        assert row is not None
-        return row
-
     def set_state(self, wake_batch_id: str, **fields: object) -> dict[str, object]:
+        from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+        from .durability.transaction import DurabilityTransaction
+        from .durability.transitions import TransitionError, TransitionKernel
+
         expected = fields.pop("expected_state", None)
-        assignments = ", ".join(f"{key} = ?" for key in fields)
-        values = list(fields.values()) + [wake_batch_id]
-        sql = f"UPDATE wake_batches SET {assignments} WHERE wake_batch_id = ?"
-        if expected is not None:
-            sql += " AND state = ?"
-            values.append(expected)
-        with self.store._lock, self.store.connection:
-            self.store.connection.execute(sql, values)
+        current = self.get(wake_batch_id)
+        if current is None:
+            raise WakeBatchError("unknown wake batch")
+        if "state" in fields and fields["state"] != current["state"]:
+            target = str(fields["state"])
+            if str(current["state"]) == WakeBatchState.PREPARED.value and target == WakeBatchState.SUBMITTING.value:
+                raise WakeBatchError("PREPARED → SUBMITTING is only allowed in record_effect_write_start")
+            version = int(current.get("version") or 0)
+            cause = fields.pop("cause_kind", TransitionCause.CONTROL_COMMAND)
+            if isinstance(cause, str):
+                cause = TransitionCause(cause)
+            try:
+                with self.store._lock:
+                    with DurabilityTransaction(self.store.connection):
+                        TransitionKernel(self.store.connection).apply(
+                            TransitionRequest(
+                                aggregate_kind=AggregateKind.WAKE_BATCH,
+                                aggregate_id=wake_batch_id,
+                                expected_state=str(expected or current["state"]),
+                                expected_version=version,
+                                target_state=str(fields.pop("state")),
+                                cause_kind=cause,
+                                cause_ref=str(fields.get("completion_status") or "wake"),
+                                field_updates=fields,
+                            )
+                        )
+            except TransitionError as exc:
+                raise WakeBatchError(str(exc)) from exc
+        elif fields:
+            assignments = ", ".join(f"{key} = ?" for key in fields)
+            values = list(fields.values()) + [wake_batch_id]
+            sql = f"UPDATE wake_batches SET {assignments} WHERE wake_batch_id = ?"
+            if expected is not None:
+                sql += " AND state = ?"
+                values.append(expected)
+            with self.store._lock, self.store.connection:
+                self.store.connection.execute(sql, values)
         row = self.get(wake_batch_id)
         assert row is not None
         return row

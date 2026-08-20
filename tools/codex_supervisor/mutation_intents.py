@@ -60,39 +60,9 @@ class MutationIntentStore:
         binding_id: str | None = None,
         request: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
-        existing = self.get_open(method, client_key)
-        if existing is not None:
-            raise MutationIntentError(
-                f"{method} already has an unresolved intent; reconcile, do not resend"
-            )
-        incident = self.get_unresolved_incident(method, client_key)
-        if incident is not None:
-            raise MutationIntentError(
-                f"{method} has an unresolved INCIDENT; operator resolution required"
-            )
-        intent_id = f"mut_{uuid.uuid4().hex}"
-        now = _now()
-        with self.store._lock, self.store.connection:
-            self.store.connection.execute(
-                """INSERT INTO mutation_intents (
-                    intent_id, method, binding_id, client_key, state, request_json, created_at, updated_at
-                ) VALUES (?, ?, ?, ?, 'SUBMITTING', ?, ?, ?)""",
-                (
-                    intent_id,
-                    method,
-                    binding_id,
-                    client_key,
-                    None if request is None else json.dumps(request),
-                    now,
-                    now,
-                ),
-            )
-        row = self.store.connection.execute(
-            "SELECT * FROM mutation_intents WHERE intent_id = ?",
-            (intent_id,),
-        ).fetchone()
-        assert row is not None
-        return dict(row)
+        raise MutationIntentError(
+            "new mutation_intents writes are disabled; use AppServerSessionOwner.submit_effect"
+        )
 
     def set_state(
         self,
@@ -103,34 +73,7 @@ class MutationIntentStore:
         expected_states: frozenset[str] | None = None,
         **fields: Any,
     ) -> dict[str, Any]:
-        current = self.get(intent_id)
-        if current is None:
-            raise MutationIntentError(f"unknown mutation intent: {intent_id}")
-        if str(current["state"]) == UNRESOLVED_INCIDENT and state != OPERATOR_RESOLVED:
-            raise MutationIntentError("incident is terminal; operator recovery required")
-        assignments = ["state = ?", "updated_at = ?"]
-        values: list[object] = [state, _now()]
-        for key, value in fields.items():
-            assignments.append(f"{key} = ?")
-            values.append(value)
-        values.append(intent_id)
-        sql = f"UPDATE mutation_intents SET {', '.join(assignments)} WHERE intent_id = ?"
-        allowed = expected_states
-        if expected_state is not None:
-            allowed = frozenset({expected_state}) if allowed is None else allowed | {expected_state}
-        if allowed is not None:
-            sql += " AND state IN (" + ", ".join("?" for _ in allowed) + ")"
-            values.extend(sorted(allowed))
-        with self.store._lock, self.store.connection:
-            cursor = self.store.connection.execute(sql, values)
-            if cursor.rowcount != 1:
-                latest = self.get(intent_id)
-                if latest is not None and str(latest["state"]) == UNRESOLVED_INCIDENT:
-                    raise MutationIntentError("incident is terminal; operator recovery required")
-                raise MutationIntentError("invalid mutation intent transition")
-        row = self.get(intent_id)
-        assert row is not None
-        return row
+        raise MutationIntentError("mutation_intents rows are read-only legacy evidence")
 
     def mark_uncertain(self, intent_id: str, reason: str) -> dict[str, Any]:
         return self.set_state(

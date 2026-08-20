@@ -91,14 +91,15 @@ def test_server_request_incident_cannot_be_completed_or_activated(tmp_path: Path
         expected_epoch_id=snapshot.epoch_id,
         expected_epoch_revision=snapshot.epoch_revision,
     )
-    seeded["supervisor"].connection.execute(
-        """UPDATE managed_turn_intents
-        SET submission_state = 'INCIDENT', app_server_turn_id = ?,
-            incident_json = '{"reason":"server_request"}'
-        WHERE turn_intent_id = ?""",
-        ("turn_inc", intent_id),
+    from tests.codex_supervisor.helpers import drive_turn_intent
+
+    drive_turn_intent(
+        seeded["supervisor"].connection,
+        intent_id,
+        "INCIDENT",
+        app_server_turn_id="turn_inc",
+        incident_json='{"reason":"server_request"}',
     )
-    seeded["supervisor"].connection.commit()
     seq = record_completed_agent_item(
         seeded["supervisor"],
         thread_id="thr_root",
@@ -121,18 +122,25 @@ def test_server_request_incident_cannot_be_completed_or_activated(tmp_path: Path
 
 def test_thread_start_incident_cannot_be_overwritten_by_attach(tmp_path: Path) -> None:
     seeded, store, binding_id, _snapshot = _prepared_binding(tmp_path)
+    from tests.codex_supervisor.helpers import insert_legacy_mutation_intent
+
     mutations = MutationIntentStore(seeded["supervisor"])
-    intent = mutations.begin("thread/start", f"thread/start:{binding_id}", binding_id=binding_id)
-    mutations.mark_incident(str(intent["intent_id"]), "server_request")
+    intent_id = insert_legacy_mutation_intent(
+        seeded["supervisor"].connection,
+        method="thread/start",
+        client_key=f"thread/start:{binding_id}",
+        state="INCIDENT",
+        binding_id=binding_id,
+    )
     with pytest.raises(BindingError, match="not SUBMITTING"):
-        store.attach_thread(binding_id, "thr_root", mutation_intent_id=str(intent["intent_id"]))
+        store.attach_thread(binding_id, "thr_root", mutation_intent_id=intent_id)
     binding = store.get(binding_id)
     assert binding is not None
     assert binding.binding_state.value == "PREPARED"
     assert binding.thread_id is None
     row = seeded["supervisor"].connection.execute(
         "SELECT state FROM mutation_intents WHERE intent_id = ?",
-        (intent["intent_id"],),
+        (intent_id,),
     ).fetchone()
     assert str(row[0]) == "INCIDENT"
     _close(seeded)
@@ -140,15 +148,18 @@ def test_thread_start_incident_cannot_be_overwritten_by_attach(tmp_path: Path) -
 
 def test_thread_resume_incident_requires_operator_resolution(tmp_path: Path) -> None:
     seeded = seed_managed_actors(tmp_path)
+    from tests.codex_supervisor.helpers import insert_legacy_mutation_intent
+
     mutations = MutationIntentStore(seeded["supervisor"])
-    intent = mutations.begin("thread/resume", "thread/resume:thr_adopt", binding_id="bind_x")
-    mutations.mark_incident(str(intent["intent_id"]), "server_request")
-    with pytest.raises(MutationIntentError, match="operator resolution"):
+    insert_legacy_mutation_intent(
+        seeded["supervisor"].connection,
+        method="thread/resume",
+        client_key="thread/resume:thr_adopt",
+        state="INCIDENT",
+        binding_id="bind_x",
+    )
+    with pytest.raises(MutationIntentError, match="disabled"):
         mutations.begin("thread/resume", "thread/resume:thr_adopt", binding_id="bind_x")
-    mutations.resolve_incident(str(intent["intent_id"]), operator="operator")
-    again = mutations.begin("thread/resume", "thread/resume:thr_adopt", binding_id="bind_x")
-    assert again["state"] == "SUBMITTING"
-    assert again["intent_id"] != intent["intent_id"]
     _close(seeded)
 
 
@@ -286,7 +297,11 @@ def test_source_resolution_during_active_batch_records_flag(tmp_path: Path) -> N
         lease_holder="sched",
     )
     seeded["mailbox"].mark_delivered(messages[0].message_id)
-    batches.set_state(str(batch["wake_batch_id"]), state="ACTIVE", app_server_turn_id="turn_live")
+    from tests.codex_supervisor.helpers import drive_wake_batch
+
+    drive_wake_batch(
+        batches, str(batch["wake_batch_id"]), "ACTIVE", app_server_turn_id="turn_live"
+    )
     seeded["semantic"].connection.execute("UPDATE obligations SET state = 'RESOLVED' WHERE state = 'OPEN'")
     seeded["semantic"].connection.commit()
     scanner.scan()
@@ -304,13 +319,14 @@ def test_observer_and_managed_runtime_share_one_server_request_consumer(tmp_path
         store.mark_verification_required(binding_id)
         turns = ManagedTurns(store, client=None)  # type: ignore[arg-type]
         intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
-        seeded["supervisor"].connection.execute(
-            """UPDATE managed_turn_intents
-            SET submission_state = 'SUBMITTED', app_server_turn_id = ?
-            WHERE turn_intent_id = ?""",
-            ("turn_watch", intent_id),
+        from tests.codex_supervisor.helpers import drive_turn_intent
+
+        drive_turn_intent(
+            seeded["supervisor"].connection,
+            intent_id,
+            "SUBMITTED",
+            app_server_turn_id="turn_watch",
         )
-        seeded["supervisor"].connection.commit()
         config = make_observer_config(tmp_path, request_timeout_seconds=0.4)
         transport = AppServerTransport(
             write_fake_codex(tmp_path),
@@ -334,7 +350,8 @@ def test_observer_and_managed_runtime_share_one_server_request_consumer(tmp_path
         session = ManagedAppServerSession.for_client(client, seeded["supervisor"])
         watcher = asyncio.create_task(service._watch_server_requests())
         await asyncio.sleep(0)
-        assert session is ManagedAppServerSession.for_client(client, seeded["supervisor"])
+        again = ManagedAppServerSession.for_client(client, seeded["supervisor"])
+        assert session.owner is again.owner
         assert session._task is not None and not session._task.done()
         await client.server_requests.put(
             {
@@ -373,7 +390,9 @@ def test_mailbox_command_rejects_timestamp_only_ordering(tmp_path: Path) -> None
         messages=[message],
     )
     mailbox.mark_delivered(message.message_id)
-    batches.set_state(str(batch["wake_batch_id"]), state="COMPLETED", app_server_turn_id="turn_wake")
+    from tests.codex_supervisor.helpers import drive_wake_batch
+
+    drive_wake_batch(batches, str(batch["wake_batch_id"]), "COMPLETED", app_server_turn_id="turn_wake")
     seeded["supervisor"].connection.execute(
         """INSERT OR REPLACE INTO turn_snapshots (
             turn_id, thread_id, status, started_at, last_event_seq, updated_at
@@ -415,11 +434,9 @@ def test_reanchor_receipt_crash_before_command_applied_is_reconciled(tmp_path: P
     )
     first = gateway.ingest_final_item(raw_message_seq=seq)
     assert first["validation_state"] == "APPLIED"
-    seeded["supervisor"].connection.execute(
-        "UPDATE managed_actor_commands SET validation_state = 'VALIDATED', applied_at = NULL WHERE command_id = ?",
-        (first["command_id"],),
-    )
-    seeded["supervisor"].connection.commit()
+    from tests.codex_supervisor.helpers import rewind_command_validation
+
+    rewind_command_validation(seeded["supervisor"].connection, str(first["command_id"]), "VALIDATED")
     receipt = seeded["supervisor"].get_command_receipt(str(first["command_id"]))
     assert receipt is not None
     second = gateway.ingest_final_item(raw_message_seq=seq)

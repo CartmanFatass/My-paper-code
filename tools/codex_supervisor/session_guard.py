@@ -72,18 +72,20 @@ async def terminate_transport(client: AppServerClient) -> None:
 
 
 def mark_related_incidents(store: ObserverStore, payload: Mapping[str, Any]) -> None:
+    from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+    from .durability.transaction import DurabilityTransaction
+    from .durability.transitions import TransitionError, TransitionKernel
+
     ids = extract_protocol_ids(payload)
     thread_id = ids.thread_id
     turn_id = ids.turn_id
     incident = '{"reason":"server_request"}'
-    turn_sql = """UPDATE managed_turn_intents
-        SET submission_state = 'INCIDENT', incident_json = ?
+    turn_sql = """SELECT turn_intent_id, submission_state, version FROM managed_turn_intents
         WHERE submission_state IN ('SUBMITTING', 'SUBMITTED', 'SUBMISSION_UNCERTAIN', 'OBSERVED')"""
-    turn_params: list[object] = [incident]
-    batch_sql = """UPDATE wake_batches
-        SET state = 'INCIDENT', incident_json = ?
+    turn_params: list[object] = []
+    batch_sql = """SELECT wake_batch_id, state, version FROM wake_batches
         WHERE state IN ('SUBMITTING', 'SUBMITTED', 'SUBMISSION_UNCERTAIN', 'ACTIVE')"""
-    batch_params: list[object] = [incident]
+    batch_params: list[object] = []
     if thread_id or turn_id:
         clauses = []
         batch_clauses = []
@@ -99,69 +101,103 @@ def mark_related_incidents(store: ObserverStore, payload: Mapping[str, Any]) -> 
             batch_params.append(turn_id)
         turn_sql += " AND (" + " OR ".join(clauses) + ")"
         batch_sql += " AND (" + " OR ".join(batch_clauses) + ")"
-    with store._lock, store.connection:
-        store.connection.execute(turn_sql, turn_params)
-        store.connection.execute(batch_sql, batch_params)
-        store.connection.execute(
-            """UPDATE mutation_intents
-            SET state = 'INCIDENT', request_json = ?, updated_at = datetime('now')
-            WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED', 'SUBMITTED_UNRECONCILED')""",
-            (incident,),
-        )
+    kernel = TransitionKernel(store.connection)
+    with store._lock:
+        with DurabilityTransaction(store.connection):
+            for row in store.connection.execute(turn_sql, turn_params).fetchall():
+                try:
+                    kernel.apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MANAGED_TURN,
+                            aggregate_id=str(row["turn_intent_id"]),
+                            expected_state=str(row["submission_state"]),
+                            expected_version=int(row["version"] or 0),
+                            target_state="INCIDENT",
+                            cause_kind=TransitionCause.SERVER_REQUEST_INCIDENT,
+                            cause_ref="server_request",
+                            field_updates={"incident_json": incident},
+                        )
+                    )
+                except TransitionError:
+                    continue
+            for row in store.connection.execute(batch_sql, batch_params).fetchall():
+                try:
+                    kernel.apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.WAKE_BATCH,
+                            aggregate_id=str(row["wake_batch_id"]),
+                            expected_state=str(row["state"]),
+                            expected_version=int(row["version"] or 0),
+                            target_state="INCIDENT",
+                            cause_kind=TransitionCause.SERVER_REQUEST_INCIDENT,
+                            cause_ref="server_request",
+                            field_updates={"incident_json": incident},
+                        )
+                    )
+                except TransitionError:
+                    continue
+            pass
 
 
 class ManagedAppServerSession:
-    """One watcher per App Server client, covering the process lifetime."""
+    """Compatibility adapter around AppServerSessionOwner. Do not start a second watcher."""
 
-    _by_client: dict[int, ManagedAppServerSession] = {}
+    _wrappers: dict[int, ManagedAppServerSession] = {}
 
-    def __init__(self, client: AppServerClient, store: ObserverStore) -> None:
-        self.client = client
-        self.store = store
-        self.terminated = False
-        self.incident_payload: dict[str, Any] | None = None
-        self._incident = asyncio.Event()
-        self._task: asyncio.Task[None] | None = None
+    def __init__(self, owner: Any) -> None:
+        self.owner = owner
+        self.client = owner.client
+        self.store = owner.store
+
+    @property
+    def terminated(self) -> bool:
+        return bool(self.owner.terminated)
+
+    @property
+    def incident_payload(self) -> dict[str, Any] | None:
+        return self.owner.incident_payload
+
+    @property
+    def _task(self) -> asyncio.Task[None] | None:
+        return self.owner._task
+
+    @property
+    def _incident(self):
+        return self.owner._incident
 
     @classmethod
     def for_client(cls, client: AppServerClient, store: ObserverStore) -> ManagedAppServerSession:
-        existing = cls._by_client.get(id(client))
-        if existing is not None and existing._task is not None and not existing._task.done():
+        from .durability.session_owner import AppServerSessionOwner
+
+        owner = AppServerSessionOwner.for_client(client, store)
+        existing = cls._wrappers.get(id(owner))
+        if existing is not None:
             return existing
-        session = cls(client, store)
-        session.start()
-        cls._by_client[id(client)] = session
+        session = cls(owner)
+        cls._wrappers[id(owner)] = session
         return session
 
     @classmethod
     def active_watcher_count(cls) -> int:
-        return sum(1 for item in cls._by_client.values() if item._task is not None and not item._task.done())
+        from .durability.session_owner import AppServerSessionOwner
+
+        return AppServerSessionOwner.active_watcher_count()
 
     def start(self) -> None:
-        if self._task is None or self._task.done():
-            self._task = asyncio.create_task(self._watch())
+        self.owner.start()
 
     def close(self) -> None:
-        if self._task is not None and not self._task.done():
-            self._task.cancel()
-        self._by_client.pop(id(self.client), None)
+        self._wrappers.pop(id(self.owner), None)
+        self.owner._by_client.pop(id(self.client), None)
+        if self.owner._task is not None and not self.owner._task.done():
+            self.owner._task.cancel()
 
-    async def _watch(self) -> None:
-        try:
-            payload = await self.client.server_requests.get()
-        except Exception:
-            self.terminated = True
-            self._incident.set()
-            return
-        try:
-            persist_server_request(self.store, payload)
-            mark_related_incidents(self.store, payload)
-        except Exception:
-            mark_related_incidents(self.store, payload)
-        self.incident_payload = dict(payload)
-        self.terminated = True
-        self._incident.set()
-        await terminate_transport(self.client)
+    @classmethod
+    def close_all(cls) -> None:
+        from .durability.session_owner import AppServerSessionOwner
+
+        for owner in list(AppServerSessionOwner._by_client.values()):
+            cls(owner).close()
 
     async def request(
         self,
@@ -170,34 +206,7 @@ class ManagedAppServerSession:
         *,
         timeout: float | None = None,
     ) -> dict[str, object]:
-        if self.terminated:
-            raise UnexpectedServerRequest(self.incident_payload or {})
-        send = asyncio.create_task(self.client.request(method, params, timeout=timeout))
-        incident = asyncio.create_task(self._incident.wait())
-        done, pending = await asyncio.wait({send, incident}, return_when=asyncio.FIRST_COMPLETED)
-        for task in pending:
-            if task is incident:
-                task.cancel()
-                try:
-                    await task
-                except (asyncio.CancelledError, Exception):
-                    pass
-        if send in done:
-            await asyncio.sleep(0)
-            if self.terminated or self._incident.is_set():
-                raise UnexpectedServerRequest(self.incident_payload or {})
-            try:
-                return send.result()
-            except Exception:
-                if self.terminated or self._incident.is_set():
-                    raise UnexpectedServerRequest(self.incident_payload or {})
-                raise
-        send.cancel()
-        try:
-            await send
-        except (asyncio.CancelledError, Exception):
-            pass
-        raise UnexpectedServerRequest(self.incident_payload or {})
+        return await self.owner.request(method, params, timeout=timeout)
 
 
 class SessionGuard:
@@ -208,10 +217,13 @@ class SessionGuard:
         *,
         on_incident: Callable[[Mapping[str, Any]], None] | None = None,
     ) -> None:
+        from .durability.session_owner import AppServerSessionOwner
+
         self.client = client
         self.store = store
         self.on_incident = on_incident
-        self.session = ManagedAppServerSession.for_client(client, store)
+        self.owner = AppServerSessionOwner.for_client(client, store)
+        self.session = ManagedAppServerSession(self.owner)
 
     async def request(
         self,
@@ -220,11 +232,23 @@ class SessionGuard:
         *,
         timeout: float | None = None,
     ) -> dict[str, object]:
+        from .client import MUTATING_NO_RETRY_METHODS, MUTATING_OWNER_MESSAGE
+
+        if method in MUTATING_NO_RETRY_METHODS:
+            raise SessionGuardError(MUTATING_OWNER_MESSAGE)
         try:
-            return await self.session.request(method, params, timeout=timeout)
+            return await self.owner.request(method, params, timeout=timeout)
         except UnexpectedServerRequest as exc:
             if self.on_incident is not None:
                 self.on_incident(exc.payload)
             raise
         except asyncio.CancelledError as exc:
             raise TransportClosed("guarded request cancelled") from exc
+
+    async def submit_effect(self, effect_id: str, extra_transitions: list[Any] | None = None):
+        try:
+            return await self.owner.submit_effect(effect_id, extra_transitions=extra_transitions)
+        except UnexpectedServerRequest as exc:
+            if self.on_incident is not None:
+                self.on_incident(exc.payload)
+            raise

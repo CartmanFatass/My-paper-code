@@ -41,7 +41,24 @@ def test_ack_intake_and_cross_binding_reject(tmp_path: Path) -> None:
         messages=[message],
     )
     mailbox.mark_delivered(message.message_id)
-    batches.set_state(str(batch["wake_batch_id"]), state="COMPLETED", app_server_turn_id="turn_ack")
+    wake_id = str(batch["wake_batch_id"])
+    from tests.codex_supervisor.helpers import claim_wake_write_start_for_tests
+
+    claimed = claim_wake_write_start_for_tests(
+        batches,
+        wake_id,
+        lease_holder=batch["lease_holder"],
+        lease_generation=batch["lease_generation"],
+    )
+    from tools.codex_supervisor.durability.effects import EffectJournal
+
+    EffectJournal(seeded["supervisor"].connection).confirm_effect(
+        str(claimed["effect_id"]),
+        evidence_ref="turn:turn_ack",
+    )
+    batches.set_state(wake_id, state="SUBMITTED", expected_state="SUBMITTING", app_server_turn_id="turn_ack")
+    batches.set_state(wake_id, state="ACTIVE", expected_state="SUBMITTED")
+    batches.set_state(wake_id, state="COMPLETED", expected_state="ACTIVE")
     from tests.codex_supervisor.helpers import record_completed_agent_item
 
     record_completed_agent_item(

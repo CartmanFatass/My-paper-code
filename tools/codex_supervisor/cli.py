@@ -276,7 +276,7 @@ def _scheduler_command(args: argparse.Namespace, repo_root: Path, store: Observe
                 mailbox,
                 batches,
                 SchedulerLeases(store),
-                WakeRecovery(bindings, mailbox, batches, None),
+                WakeRecovery(bindings, mailbox, batches, None, bridge=bridge),
                 SemanticScanner(mailbox, bridge),
                 bridge,
                 None,
