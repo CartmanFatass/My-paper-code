@@ -431,6 +431,20 @@ def _active_batch(tmp_path: Path, turn_id: str = "turn_active") -> dict[str, obj
     )
     mailbox.mark_delivered(message.message_id)
     from tests.codex_supervisor.helpers import drive_wake_batch
+    from tools.codex_supervisor.durability.effects import EffectJournal
+
+    effect_id = str(batch.get("effect_id") or "")
+    if effect_id:
+        journal = EffectJournal(seeded["supervisor"].connection)
+        journal.claim_write(
+            effect_id,
+            run_id="fixture",
+            client_request_id="fixture",
+            request_row_id="fixture",
+            raw_request_seq=1,
+        )
+        journal.observe_response(effect_id, response={"result": {"turn": {"id": turn_id}}}, turn_id=turn_id)
+        journal.confirm_effect(effect_id, evidence_ref=f"turn:{turn_id}")
 
     drive_wake_batch(
         batches,

@@ -21,22 +21,19 @@ def test_legacy_rows_are_not_deleted(tmp_path: Path) -> None:
 def test_legacy_applied_can_be_superseded_by_effect(tmp_path: Path) -> None:
     connection = connect(tmp_path / "state.sqlite3")
     initialize_database(connection)
-    journal = EffectJournal(connection)
-    effect = journal.prepare_effect(
-        owner_kind="MANAGED_TURN",
-        owner_id="t1",
-        binding_id="bind1",
-        method="turn/start",
-        client_key="legacy-k1",
-        request={},
-    )
     connection.execute(
         """INSERT INTO mutation_intents(
-            intent_id,method,binding_id,client_key,state,request_json,created_at,updated_at,superseded_by_effect_id
-        ) VALUES ('mut1','turn/start','bind1','k1','APPLIED','{}','t','t',?)""",
-        (effect.effect_id,),
+            intent_id,method,binding_id,client_key,state,request_json,created_at,updated_at
+        ) VALUES ('mut1','turn/start','bind1','k1','APPLIED','{}','t','t')"""
     )
     connection.commit()
+    initialize_database(connection)
     row = connection.execute("SELECT superseded_by_effect_id FROM mutation_intents").fetchone()
-    assert row[0] == effect.effect_id
+    assert row[0]
+    effect = connection.execute(
+        "SELECT state, client_key FROM app_server_effects WHERE effect_id = ?",
+        (row[0],),
+    ).fetchone()
+    assert str(effect[0]) == "EFFECT_CONFIRMED"
+    assert str(effect[1]) == "k1"
     connection.close()

@@ -86,6 +86,32 @@ OPERATOR_ONLY_EDGES: frozenset[tuple[AggregateKind, str, str]] = frozenset(
     }
 )
 
+DISPOSITION_TARGETS: dict[str, dict[AggregateKind, frozenset[str]]] = {
+    "NO_SUBMISSION_EVIDENCE": {
+        AggregateKind.WAKE_BATCH: frozenset({"CANCELLED"}),
+        AggregateKind.MAILBOX_DELIVERY: frozenset({"ELIGIBLE"}),
+        AggregateKind.APP_SERVER_EFFECT: frozenset({"OPERATOR_RESOLVED"}),
+    },
+    "TURN_OBSERVED_ACTIVE": {
+        AggregateKind.WAKE_BATCH: frozenset({"ACTIVE"}),
+        AggregateKind.MAILBOX_DELIVERY: frozenset({"DELIVERED_TO_TURN"}),
+        AggregateKind.APP_SERVER_EFFECT: frozenset({"OPERATOR_RESOLVED"}),
+    },
+    "TURN_OBSERVED_COMPLETED": {
+        AggregateKind.WAKE_BATCH: frozenset({"COMPLETED"}),
+        AggregateKind.MAILBOX_DELIVERY: frozenset({"DELIVERED_TO_TURN"}),
+        AggregateKind.APP_SERVER_EFFECT: frozenset({"OPERATOR_RESOLVED"}),
+    },
+    "ABANDON": {
+        AggregateKind.WAKE_BATCH: frozenset({"ABANDONED"}),
+        AggregateKind.MAILBOX_DELIVERY: frozenset({"DEAD_LETTER"}),
+        AggregateKind.APP_SERVER_EFFECT: frozenset({"OPERATOR_RESOLVED"}),
+    },
+    "RECEIPT_CONFIRMED": {
+        AggregateKind.APP_SERVER_EFFECT: frozenset({"OPERATOR_RESOLVED"}),
+    },
+}
+
 BATCHED_TO_ELIGIBLE_CAUSES: frozenset[TransitionCause] = frozenset(
     {
         TransitionCause.PRE_WRITE_CANCEL,
@@ -107,6 +133,11 @@ def is_operator_only_edge(kind: AggregateKind, from_state: str, to_state: str) -
     return (kind, from_state, to_state) in OPERATOR_ONLY_EDGES
 
 
+def disposition_permits_target(disposition: str, kind: AggregateKind, target_state: str) -> bool:
+    allowed = DISPOSITION_TARGETS.get(disposition, {}).get(kind, frozenset())
+    return target_state in allowed
+
+
 def transition_trigger_sql(
     *,
     kind: AggregateKind,
@@ -124,14 +155,22 @@ def transition_trigger_sql(
             allowed = ", ".join(f"'{target}'" for target in automatic)
             legal_terms.append(f"(OLD.{state_column} = '{from_state}' AND NEW.{state_column} IN ({allowed}))")
         operator_targets = sorted(target for target in targets if is_operator_only_edge(kind, from_state, target))
-        if operator_targets:
-            allowed = ", ".join(f"'{target}'" for target in operator_targets)
+        for target in operator_targets:
+            dispositions = sorted(
+                name
+                for name, mapping in DISPOSITION_TARGETS.items()
+                if target in mapping.get(kind, frozenset())
+            )
+            if not dispositions:
+                continue
+            allowed = ", ".join(f"'{item}'" for item in dispositions)
             legal_terms.append(
                 "("
-                f"OLD.{state_column} = '{from_state}' AND NEW.{state_column} IN ({allowed}) "
+                f"OLD.{state_column} = '{from_state}' AND NEW.{state_column} = '{target}' "
                 "AND EXISTS ("
                 "SELECT 1 FROM operator_resolutions "
-                f"WHERE aggregate_kind = '{kind.value}' AND aggregate_id = OLD.{id_column}"
+                f"WHERE aggregate_kind = '{kind.value}' AND aggregate_id = OLD.{id_column} "
+                f"AND disposition IN ({allowed})"
                 ")"
                 ")"
             )

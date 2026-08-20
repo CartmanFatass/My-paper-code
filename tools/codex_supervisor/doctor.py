@@ -7,6 +7,7 @@ from pathlib import Path
 from .codex_binary import CodexBinaryError, read_codex_version, resolve_codex_binary
 from .config import load_observer_config
 from .db import SCHEMA_VERSION, connect
+from .durability.static_guards import scan_package, summarize_guard_violations
 
 
 def collect_doctor(
@@ -31,6 +32,7 @@ def collect_doctor(
         schema_present = schema_dir.is_dir() and any(schema_dir.rglob("capture-manifest.json"))
     observer_schema = None
     active_bindings = 0
+    unsuperseded_legacy = 0
     db_path = config.runtime_home / "state.sqlite3"
     if db_path.is_file():
         connection = connect(db_path)
@@ -43,7 +45,17 @@ def collect_doctor(
             )
         except Exception:
             active_bindings = 0
+        try:
+            unsuperseded_legacy = int(
+                connection.execute(
+                    "SELECT COUNT(*) FROM mutation_intents WHERE superseded_by_effect_id IS NULL"
+                ).fetchone()[0]
+            )
+        except Exception:
+            unsuperseded_legacy = 0
         connection.close()
+    violations = scan_package()
+    guards = summarize_guard_violations(violations, unsuperseded_legacy=unsuperseded_legacy)
     return {
         "status": "OK" if binary_error is None else "DEGRADED",
         "synthetic_stage": 4,
@@ -72,9 +84,10 @@ def collect_doctor(
         "observer_schema_version": observer_schema or SCHEMA_VERSION,
         "unexpected_server_request_policy": config.unexpected_server_request_policy,
         "durability_kernel_version": 1,
-        "direct_state_write_violations": 0,
-        "direct_mutation_call_violations": 0,
-        "new_legacy_mutation_writes": 0,
+        "direct_state_write_violations": guards["direct_state_write_violations"],
+        "direct_mutation_call_violations": guards["direct_mutation_call_violations"],
+        "new_legacy_mutation_writes": guards["new_legacy_mutation_writes"],
+        "static_guard_violations": violations,
         "automatic_resend_enabled": False,
         "operator_resolution_is_one_shot": True,
         "live_acceptance": False,

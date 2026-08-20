@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import json
 import sqlite3
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -392,6 +394,7 @@ SCHEMA_STATEMENTS = (
         client_request_id TEXT,
         request_row_id TEXT,
         raw_request_seq INTEGER,
+        transport_seq INTEGER,
         thread_id TEXT,
         turn_id TEXT,
         response_json TEXT,
@@ -558,6 +561,7 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _add_column_if_missing(connection, "raw_messages", "effect_id", "TEXT")
         _add_column_if_missing(connection, "rpc_requests", "effect_id", "TEXT")
         _add_column_if_missing(connection, "mutation_intents", "superseded_by_effect_id", "TEXT")
+        _add_column_if_missing(connection, "app_server_effects", "transport_seq", "INTEGER")
         connection.execute("DROP INDEX IF EXISTS mutation_intents_open_unique")
         connection.execute(
             """CREATE UNIQUE INDEX IF NOT EXISTS mutation_intents_open_unique
@@ -565,6 +569,7 @@ def initialize_database(connection: sqlite3.Connection) -> None:
             WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED_UNRECONCILED', 'INCIDENT')"""
         )
         _install_transition_guards(connection)
+        _migrate_legacy_mutation_intents(connection)
         if current < SCHEMA_VERSION:
             connection.execute(
                 "INSERT INTO schema_meta(version, applied_at) VALUES (?, ?)",
@@ -586,3 +591,72 @@ def _install_transition_guards(connection: sqlite3.Connection) -> None:
         )
         connection.execute(drop_sql)
         connection.execute(create_sql)
+
+
+def _migrate_legacy_mutation_intents(connection: sqlite3.Connection) -> None:
+    tables = {
+        str(row[0]) for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")
+    }
+    if "mutation_intents" not in tables or "app_server_effects" not in tables:
+        return
+    now = datetime.now(timezone.utc).isoformat()
+    owner_for = {
+        "thread/start": "THREAD_PROVISION",
+        "thread/resume": "THREAD_RESUME",
+        "turn/start": "MANAGED_TURN",
+        "thread/memoryMode/set": "THREAD_MEMORY",
+    }
+    state_for = {
+        "APPLIED": "EFFECT_CONFIRMED",
+        "OPERATOR_RESOLVED": "OPERATOR_RESOLVED",
+        "INCIDENT": "INCIDENT",
+        "SUBMITTED": "RESPONSE_OBSERVED",
+        "SUBMITTED_UNRECONCILED": "RESPONSE_OBSERVED",
+    }
+    rows = connection.execute(
+        """SELECT intent_id, method, binding_id, client_key, state, request_json
+        FROM mutation_intents WHERE superseded_by_effect_id IS NULL"""
+    ).fetchall()
+    for row in rows:
+        method = str(row["method"])
+        client_key = str(row["client_key"])
+        existing = connection.execute(
+            "SELECT effect_id FROM app_server_effects WHERE method = ? AND client_key = ?",
+            (method, client_key),
+        ).fetchone()
+        if existing is not None:
+            connection.execute(
+                "UPDATE mutation_intents SET superseded_by_effect_id = ? WHERE intent_id = ?",
+                (str(existing[0]), str(row["intent_id"])),
+            )
+            continue
+        effect_id = f"eff_legacy_{uuid.uuid4().hex}"
+        owner_kind = owner_for.get(method, "EPHEMERAL_CANARY")
+        target_state = state_for.get(str(row["state"]), "SUBMISSION_UNCERTAIN")
+        request_json = str(row["request_json"] or "{}")
+        try:
+            json.loads(request_json)
+        except Exception:
+            request_json = "{}"
+        connection.execute(
+            """INSERT INTO app_server_effects(
+                effect_id, owner_kind, owner_id, binding_id, method, client_key,
+                request_json, state, version, legacy_intent_id, prepared_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?)""",
+            (
+                effect_id,
+                owner_kind,
+                str(row["intent_id"]),
+                None if row["binding_id"] is None else str(row["binding_id"]),
+                method,
+                client_key,
+                request_json,
+                target_state,
+                str(row["intent_id"]),
+                now,
+            ),
+        )
+        connection.execute(
+            "UPDATE mutation_intents SET superseded_by_effect_id = ? WHERE intent_id = ?",
+            (effect_id, str(row["intent_id"])),
+        )

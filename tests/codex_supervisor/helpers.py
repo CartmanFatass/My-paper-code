@@ -10,6 +10,45 @@ from tools.codex_supervisor.protocol import extract_protocol_ids
 from tools.codex_supervisor.store import ObserverStore
 
 
+def rewind_command_validation(connection, command_id: str, state: str) -> None:
+    """Test-only crash reconstruction. Production code cannot rewind APPLIED."""
+    from tools.codex_supervisor.db import _install_transition_guards
+
+    connection.execute("DROP TRIGGER IF EXISTS durability_managed_actor_commands_validation_state_guard")
+    connection.execute(
+        """UPDATE managed_actor_commands
+        SET validation_state = ?, applied_at = NULL, version = version + 1
+        WHERE command_id = ?""",
+        (state, command_id),
+    )
+    _install_transition_guards(connection)
+    connection.commit()
+
+
+def insert_legacy_mutation_intent(
+    connection,
+    *,
+    method: str,
+    client_key: str,
+    state: str = "SUBMITTING",
+    binding_id: str | None = None,
+    intent_id: str | None = None,
+) -> str:
+    import uuid
+    from datetime import datetime, timezone
+
+    intent_id = intent_id or f"mut_{uuid.uuid4().hex}"
+    now = datetime.now(timezone.utc).isoformat()
+    connection.execute(
+        """INSERT INTO mutation_intents (
+            intent_id, method, binding_id, client_key, state, request_json, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, '{}', ?, ?)""",
+        (intent_id, method, binding_id, client_key, state, now, now),
+    )
+    connection.commit()
+    return intent_id
+
+
 def make_observer_config(tmp_path: Path, **overrides: object) -> ObserverConfig:
     values: dict[str, object] = {
         "schema_version": 1,

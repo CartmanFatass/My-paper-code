@@ -159,6 +159,7 @@ class ObserverStore:
         params: Mapping[str, Any],
         request_class: str,
         extra_transitions: list[Any] | None = None,
+        extra_hooks: list[Any] | None = None,
     ) -> dict[str, Any]:
         from .durability.effects import EffectJournal
         from .durability.transaction import DurabilityTransaction
@@ -180,18 +181,13 @@ class ObserverStore:
                         (run_id,),
                     ).fetchone()[0]
                 )
+                if extra_hooks:
+                    for hook in extra_hooks:
+                        hook(self.connection)
                 if extra_transitions:
                     kernel = TransitionKernel(self.connection)
                     for request in extra_transitions:
                         kernel.apply(request)
-                journal = EffectJournal(self.connection)
-                journal.claim_write(
-                    effect_id,
-                    run_id=run_id,
-                    client_request_id=client_request_id,
-                    request_row_id=request_row_id,
-                    raw_request_seq=next_seq,
-                )
                 cursor = self.connection.execute(
                     """INSERT INTO raw_messages (
                         run_id, direction, transport_seq, rpc_shape, request_id, method,
@@ -212,6 +208,15 @@ class ObserverStore:
                     ),
                 )
                 raw_seq = int(cursor.lastrowid)
+                journal = EffectJournal(self.connection)
+                journal.claim_write(
+                    effect_id,
+                    run_id=run_id,
+                    client_request_id=client_request_id,
+                    request_row_id=request_row_id,
+                    raw_request_seq=raw_seq,
+                    transport_seq=next_seq,
+                )
                 self.connection.execute(
                     """INSERT INTO rpc_requests (
                         request_row_id, run_id, client_request_id, method, request_class,
@@ -230,8 +235,9 @@ class ObserverStore:
                     ),
                 )
         return {
-            "raw_request_seq": next_seq,
+            "raw_request_seq": raw_seq,
             "raw_message_seq": raw_seq,
+            "transport_seq": next_seq,
             "request_row_id": request_row_id,
             "client_request_id": client_request_id,
         }

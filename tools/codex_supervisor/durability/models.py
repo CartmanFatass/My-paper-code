@@ -47,9 +47,19 @@ class EffectState(str, Enum):
 class EffectOwnerKind(str, Enum):
     THREAD_PROVISION = "THREAD_PROVISION"
     THREAD_RESUME = "THREAD_RESUME"
+    THREAD_MEMORY = "THREAD_MEMORY"
     MANAGED_TURN = "MANAGED_TURN"
     WAKE_BATCH = "WAKE_BATCH"
     EPHEMERAL_CANARY = "EPHEMERAL_CANARY"
+
+
+SUBMISSION_RESULT_STATES = frozenset(
+    {
+        EffectState.RESPONSE_OBSERVED.value,
+        EffectState.SUBMISSION_UNCERTAIN.value,
+        EffectState.INCIDENT.value,
+    }
+)
 
 
 @dataclass(frozen=True)

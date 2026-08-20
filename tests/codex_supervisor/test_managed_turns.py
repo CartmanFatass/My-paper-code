@@ -62,7 +62,7 @@ def test_submit_once_and_overload_is_uncertain(tmp_path: Path) -> None:
         intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
         assert client_user_message_id(intent_id).startswith("hmasd-managed:")
         row = await turns.submit(intent_id, "hello")
-        assert row["submission_state"] == SubmissionState.SUBMITTED.value
+        assert row["submission_state"] == SubmissionState.OBSERVED.value
         assert row["app_server_turn_id"] == "turn_canary"
         assert sent.count("turn/start") == 1
         await transport.stop()

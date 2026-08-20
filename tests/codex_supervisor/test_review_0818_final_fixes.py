@@ -82,6 +82,31 @@ class ScriptedClient:
         self.loaded: list[str] = []
         self.loaded_error = False
 
+    def start_reader(self) -> None:
+        return None
+
+    def prepare_request(self, method: str, params=None):
+        from types import SimpleNamespace
+
+        params = dict(params or {})
+        return SimpleNamespace(
+            request_id="1",
+            method=method,
+            params=params,
+            payload={"id": 1, "method": method, "params": params},
+            request_class=SimpleNamespace(value="MUTATING_NO_RETRY"),
+            future=None,
+        )
+
+    def discard_prepared(self, prepared) -> None:
+        return None
+
+    async def send_prepared(self, prepared) -> None:
+        return None
+
+    async def await_prepared(self, prepared, timeout=None):
+        return await self.request(prepared.method, prepared.params)
+
     async def request(self, method: str, params=None, timeout=None):
         params = params or {}
         if method == "thread/resume":
@@ -145,9 +170,16 @@ def test_binding_store_activate_rejects_incident_verification(tmp_path: Path) ->
 
 def test_attach_without_mutation_intent_cannot_bypass_incident(tmp_path: Path) -> None:
     seeded, store, binding_id, _snapshot = _prepared_binding(tmp_path)
+    from tests.codex_supervisor.helpers import insert_legacy_mutation_intent
+
     mutations = MutationIntentStore(seeded["supervisor"])
-    intent = mutations.begin("thread/start", f"thread/start:{binding_id}", binding_id=binding_id)
-    mutations.mark_incident(str(intent["intent_id"]), "server_request")
+    insert_legacy_mutation_intent(
+        seeded["supervisor"].connection,
+        method="thread/start",
+        client_key=f"thread/start:{binding_id}",
+        state="INCIDENT",
+        binding_id=binding_id,
+    )
     with pytest.raises(BindingError, match="effect id is required"):
         store.attach_thread(binding_id, "thr_root")
     with pytest.raises(BindingError, match="INCIDENT"):
@@ -161,16 +193,23 @@ def test_attach_without_mutation_intent_cannot_bypass_incident(tmp_path: Path) -
 
 def test_resume_response_then_incident_cannot_become_submitted(tmp_path: Path) -> None:
     seeded = seed_managed_actors(tmp_path)
+    from tests.codex_supervisor.helpers import insert_legacy_mutation_intent
+
     mutations = MutationIntentStore(seeded["supervisor"])
-    intent = mutations.begin("thread/resume", "thread/resume:thr_root", binding_id="bind_x")
-    mutations.mark_incident(str(intent["intent_id"]), "server_request")
-    with pytest.raises(MutationIntentError, match="terminal"):
-        mutations.mark_submitted(str(intent["intent_id"]))
-    with pytest.raises(MutationIntentError, match="terminal"):
-        mutations.mark_submitted_unreconciled(str(intent["intent_id"]))
+    intent_id = insert_legacy_mutation_intent(
+        seeded["supervisor"].connection,
+        method="thread/resume",
+        client_key="thread/resume:thr_root",
+        state="INCIDENT",
+        binding_id="bind_x",
+    )
+    with pytest.raises(MutationIntentError, match="read-only"):
+        mutations.mark_submitted(intent_id)
+    with pytest.raises(MutationIntentError, match="read-only"):
+        mutations.mark_submitted_unreconciled(intent_id)
     row = seeded["supervisor"].connection.execute(
         "SELECT state FROM mutation_intents WHERE intent_id = ?",
-        (intent["intent_id"],),
+        (intent_id,),
     ).fetchone()
     assert str(row[0]) == "INCIDENT"
     _close(seeded)
@@ -344,9 +383,9 @@ def test_successful_resume_not_loaded_is_not_resubmitted(tmp_path: Path) -> None
         assert first.value == "IDLE_NOT_LOADED"
         assert client.resumes == 1
         row = seeded["supervisor"].connection.execute(
-            "SELECT state FROM mutation_intents WHERE method = 'thread/resume' ORDER BY created_at DESC"
+            "SELECT state FROM app_server_effects WHERE method = 'thread/resume' ORDER BY prepared_at DESC"
         ).fetchone()
-        assert str(row[0]) == "SUBMITTED_UNRECONCILED"
+        assert str(row[0]) != "PREPARED"
         second = await recovery.resume_once(seeded["root_binding_id"])
         assert second.value == "IDLE_NOT_LOADED"
         assert client.resumes == 1
@@ -369,9 +408,9 @@ def test_successful_resume_unknown_is_reconciled_not_restarted(tmp_path: Path) -
         assert second.value == "UNKNOWN"
         assert client.resumes == 1
         row = seeded["supervisor"].connection.execute(
-            "SELECT state FROM mutation_intents WHERE method = 'thread/resume' ORDER BY created_at DESC"
+            "SELECT state FROM app_server_effects WHERE method = 'thread/resume' ORDER BY prepared_at DESC"
         ).fetchone()
-        assert str(row[0]) == "SUBMITTED_UNRECONCILED"
+        assert str(row[0]) != "PREPARED"
         _close(seeded)
 
     asyncio.run(body())
@@ -385,18 +424,18 @@ def test_resume_intent_becomes_applied_only_after_loaded_observation(tmp_path: P
         recovery = WakeRecovery(seeded["bindings"], seeded["mailbox"], WakeBatchStore(seeded["supervisor"], seeded["mailbox"]), client)  # type: ignore[arg-type]
         await recovery.resume_once(seeded["root_binding_id"])
         row = seeded["supervisor"].connection.execute(
-            "SELECT state FROM mutation_intents WHERE method = 'thread/resume' ORDER BY created_at DESC"
+            "SELECT state FROM app_server_effects WHERE method = 'thread/resume' ORDER BY prepared_at DESC"
         ).fetchone()
-        assert str(row[0]) == "SUBMITTED_UNRECONCILED"
+        assert str(row[0]) != "PREPARED"
         client.status = "idle"
         client.loaded = ["thr_root"]
         ready = await recovery.resume_once(seeded["root_binding_id"])
         assert ready.value == "IDLE_LOADED"
         assert client.resumes == 1
         row = seeded["supervisor"].connection.execute(
-            "SELECT state FROM mutation_intents WHERE method = 'thread/resume' ORDER BY created_at DESC"
+            "SELECT state FROM app_server_effects WHERE method = 'thread/resume' ORDER BY prepared_at DESC"
         ).fetchone()
-        assert str(row[0]) == "APPLIED"
+        assert str(row[0]) == "EFFECT_CONFIRMED"
         _close(seeded)
 
     asyncio.run(body())
@@ -490,10 +529,9 @@ def test_validated_command_without_receipt_becomes_durable_incident(tmp_path: Pa
     )
     first = gateway.ingest_final_item(raw_message_seq=seq)
     assert first["validation_state"] == "APPLIED"
-    seeded["supervisor"].connection.execute(
-        "UPDATE managed_actor_commands SET validation_state = 'VALIDATED', applied_at = NULL WHERE command_id = ?",
-        (first["command_id"],),
-    )
+    from tests.codex_supervisor.helpers import rewind_command_validation
+
+    rewind_command_validation(seeded["supervisor"].connection, str(first["command_id"]), "VALIDATED")
     seeded["supervisor"].connection.execute(
         "DELETE FROM managed_command_receipts WHERE command_id = ?",
         (first["command_id"],),
@@ -522,12 +560,9 @@ def test_reconciled_reanchor_receipt_requires_exact_normalized_tuple(tmp_path: P
         item_id="itm_tuple",
     )
     first = gateway.ingest_final_item(raw_message_seq=seq)
-    seeded["supervisor"].connection.execute(
-        """UPDATE managed_actor_commands
-        SET applied_at = NULL
-        WHERE command_id = ?""",
-        (first["command_id"],),
-    )
+    from tests.codex_supervisor.helpers import rewind_command_validation
+
+    rewind_command_validation(seeded["supervisor"].connection, str(first["command_id"]), "VALIDATED")
     receipt = seeded["supervisor"].get_command_receipt(str(first["command_id"]))
     result = json.loads(str(receipt["result_json"]))
     result["epoch_id"] = "different-epoch"

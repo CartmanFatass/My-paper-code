@@ -43,17 +43,27 @@ def plant_verification_receipt(store: BindingStore, binding_id: str, snapshot, t
         expected_epoch_id=snapshot.epoch_id,
         expected_epoch_revision=snapshot.epoch_revision,
     )
-    store.store.connection.execute(
-        """UPDATE managed_turn_intents
-        SET app_server_turn_id = ?, submission_state = 'SUBMITTING', version = version + 1
-        WHERE turn_intent_id = ?""",
-        (turn_id, intent_id),
-    )
-    store.store.connection.execute(
-        """UPDATE managed_turn_intents
-        SET submission_state = 'SUBMITTED', version = version + 1
-        WHERE turn_intent_id = ?""",
-        (intent_id,),
+    from tests.codex_supervisor.helpers import drive_turn_intent
+    from tools.codex_supervisor.durability.effects import EffectJournal
+
+    row = turns._row(intent_id)
+    effect_id = str(row.get("effect_id") or "")
+    if effect_id:
+        journal = EffectJournal(store.store.connection)
+        journal.claim_write(
+            effect_id,
+            run_id="fixture",
+            client_request_id="fixture",
+            request_row_id="fixture",
+            raw_request_seq=1,
+        )
+        journal.observe_response(effect_id, response={"result": {"turn": {"id": turn_id}}}, turn_id=turn_id)
+        journal.confirm_effect(effect_id, evidence_ref=f"turn:{turn_id}")
+    drive_turn_intent(
+        store.store.connection,
+        intent_id,
+        "OBSERVED",
+        app_server_turn_id=turn_id,
     )
     store.store.connection.commit()
     turns.record_completion(intent_id, "completed")

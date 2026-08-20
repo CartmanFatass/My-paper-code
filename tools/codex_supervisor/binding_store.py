@@ -269,13 +269,11 @@ class BindingStore:
                             evidence_ref=f"thread:{thread_id}",
                         )
                     if mutation_intent_id is not None:
-                        applied = self.store.connection.execute(
-                            """UPDATE mutation_intents
-                            SET state = ?, updated_at = ?
-                            WHERE intent_id = ? AND state = ?""",
-                            ("APPLIED", now, mutation_intent_id, "SUBMITTING"),
-                        )
-                        if applied.rowcount != 1:
+                        current = self.store.connection.execute(
+                            "SELECT state FROM mutation_intents WHERE intent_id = ?",
+                            (mutation_intent_id,),
+                        ).fetchone()
+                        if current is None or str(current[0]) != "SUBMITTING":
                             raise BindingError("mutation intent is not SUBMITTING")
         except TransitionError as exc:
             raise BindingError("binding is no longer PREPARED") from exc

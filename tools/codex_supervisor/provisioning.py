@@ -62,8 +62,19 @@ class ManagedProvisioner:
             if binding is None or not binding.thread_id:
                 raise ProvisioningError("binding has no thread")
             try:
-                await self.client.request(MEMORY_MODE_METHOD, {"threadId": binding.thread_id, "mode": "disabled"})
-            except (RetryRequired, AppServerRpcError, TransportClosed) as exc:
+                owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
+                effect = self.journal.prepare_effect(
+                    owner_kind="THREAD_MEMORY",
+                    owner_id=binding_id,
+                    binding_id=binding_id,
+                    method=MEMORY_MODE_METHOD,
+                    client_key=f"{MEMORY_MODE_METHOD}:{binding.thread_id}",
+                    request={"threadId": binding.thread_id, "mode": "disabled"},
+                )
+                result = await owner.submit_effect(effect.effect_id)
+                if owner.classify_submission(result) != "observed":
+                    raise ProvisioningError("memory-mode request was not confirmed")
+            except (RetryRequired, AppServerRpcError, TransportClosed, UnexpectedServerRequest) as exc:
                 raise ProvisioningError("memory-mode request was not confirmed") from exc
             with self.bindings.store._lock, self.bindings.store.connection:
                 self.bindings.store.connection.execute(
@@ -101,6 +112,8 @@ class ManagedProvisioner:
         owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
             submitted = await owner.submit_effect(effect.effect_id)
+            if owner.classify_submission(submitted) != "observed":
+                raise ProvisioningError("thread/start uncertain; do not retry automatically")
         except RetryRequired as exc:
             self.bindings._record_event(binding_id, "THREAD_START_UNCERTAIN", {"reason": "overload"})
             raise ProvisioningError("thread/start uncertain; do not retry automatically") from exc

@@ -136,12 +136,7 @@ def mark_related_incidents(store: ObserverStore, payload: Mapping[str, Any]) -> 
                     )
                 except TransitionError:
                     continue
-            store.connection.execute(
-                """UPDATE mutation_intents
-                SET state = 'INCIDENT', request_json = ?, updated_at = datetime('now')
-                WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED', 'SUBMITTED_UNRECONCILED')""",
-                (incident,),
-            )
+            pass
 
 
 class ManagedAppServerSession:
@@ -237,6 +232,10 @@ class SessionGuard:
         *,
         timeout: float | None = None,
     ) -> dict[str, object]:
+        from .client import MUTATING_NO_RETRY_METHODS, MUTATING_OWNER_MESSAGE
+
+        if method in MUTATING_NO_RETRY_METHODS:
+            raise SessionGuardError(MUTATING_OWNER_MESSAGE)
         try:
             return await self.owner.request(method, params, timeout=timeout)
         except UnexpectedServerRequest as exc:

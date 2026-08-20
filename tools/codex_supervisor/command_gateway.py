@@ -342,6 +342,12 @@ class CommandGateway:
             if expected_tuple != receipt_tuple:
                 self._mark_command_incident(command_id, "receipt tuple does not match command")
                 raise CommandGatewayError("receipt tuple does not match command")
+            if state == CommandValidationState.RECEIVED.value:
+                self._update_command(
+                    command_id,
+                    validation_state=CommandValidationState.VALIDATED.value,
+                    validated_at=_now(),
+                )
             self._update_command(
                 command_id,
                 validation_state=CommandValidationState.APPLIED.value,
@@ -398,15 +404,39 @@ class CommandGateway:
         return {"effect": "MANAGED_PACKET_SEND", "packet_id": packet.get("packet_id"), "marker": packet.get("marker")}
 
     def _update_command(self, command_id: str, **fields: Any) -> None:
-        assignments = [f"{key} = ?" for key in fields]
-        values = list(fields.values())
-        if "validation_state" in fields:
-            assignments.append("version = version + 1")
-        with self.bindings.store._lock, self.bindings.store.connection:
-            self.bindings.store.connection.execute(
-                f"UPDATE managed_actor_commands SET {', '.join(assignments)} WHERE command_id = ?",
-                values + [command_id],
-            )
+        from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+        from .durability.transaction import DurabilityTransaction
+        from .durability.transitions import TransitionError, TransitionKernel
+
+        row = self.bindings.store.connection.execute(
+            "SELECT * FROM managed_actor_commands WHERE command_id = ?",
+            (command_id,),
+        ).fetchone()
+        if row is None:
+            raise CommandGatewayError(f"unknown command: {command_id}")
+        if "validation_state" not in fields:
+            raise CommandGatewayError("command updates must include validation_state")
+        target = str(fields.pop("validation_state"))
+        current = str(row["validation_state"])
+        if current == target:
+            return
+        try:
+            with self.bindings.store._lock:
+                with DurabilityTransaction(self.bindings.store.connection):
+                    TransitionKernel(self.bindings.store.connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MANAGED_COMMAND,
+                            aggregate_id=command_id,
+                            expected_state=current,
+                            expected_version=int(row["version"] or 0),
+                            target_state=target,
+                            cause_kind=TransitionCause.CONTROL_COMMAND,
+                            cause_ref=command_id,
+                            field_updates=fields,
+                        )
+                    )
+        except TransitionError as exc:
+            raise CommandGatewayError(str(exc)) from exc
 
     def _reject(self, command_id: str, reason: str) -> None:
         self._update_command(

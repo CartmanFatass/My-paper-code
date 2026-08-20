@@ -25,6 +25,7 @@ MUTATING_NO_RETRY_METHODS = frozenset(
         "turn/interrupt",
         "thread/compact/start",
         "review/start",
+        "thread/memoryMode/set",
     }
 )
 OVERLOAD_CODE = -32001
@@ -186,6 +187,11 @@ class AppServerClient:
             request_class=request_class_for(method),
             future=future,
         )
+
+    def discard_prepared(self, prepared: PreparedRpcRequest) -> None:
+        future = self._pending.pop(prepared.request_id, None)
+        if future is not None and not future.done():
+            future.cancel()
 
     async def send_prepared(self, prepared: PreparedRpcRequest) -> None:
         await self.transport.send(dict(prepared.payload))

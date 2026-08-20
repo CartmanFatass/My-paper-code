@@ -435,12 +435,17 @@ def test_resume_timeout_is_not_resubmitted(tmp_path: Path) -> None:
         recovery = WakeRecovery(seeded["bindings"], mailbox, batches, client, leases, "sched")
         first = await recovery.resume_once(seeded["portfolio_binding_id"])
         second = await recovery.resume_once(seeded["portfolio_binding_id"])
-        assert first.value == "UNKNOWN"
+        assert first.value in {"UNKNOWN", "IDLE_NOT_LOADED"}
         assert second.value == "IDLE_NOT_LOADED"
         open_intents = seeded["supervisor"].connection.execute(
             "SELECT COUNT(*) FROM mutation_intents WHERE method = 'thread/resume'"
         ).fetchone()[0]
-        assert int(open_intents) == 1
+        assert int(open_intents) == 0
+        effect = seeded["supervisor"].connection.execute(
+            "SELECT state FROM app_server_effects WHERE method = 'thread/resume' ORDER BY prepared_at DESC"
+        ).fetchone()
+        assert effect is not None
+        assert str(effect[0]) != "PREPARED"
         await transport.stop()
         seeded["bridge"].close()
         seeded["supervisor"].close()

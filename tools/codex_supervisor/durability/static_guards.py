@@ -17,11 +17,11 @@ ALLOWED_MUTATING_CALLERS = {
     "client.py",
 }
 PROTECTED_UPDATE = re.compile(
-    r"UPDATE\s+(managed_actor_bindings|managed_turn_intents|wake_batches|mailbox_messages|managed_actor_commands|app_server_effects)\b",
+    r"UPDATE\s+(managed_actor_bindings|managed_turn_intents|wake_batches|mailbox_messages|managed_actor_commands|app_server_effects)\s+SET[\s\S]{0,240}?\b(binding_state|submission_state|delivery_state|intake_state|validation_state)\b",
     re.IGNORECASE,
 )
 MUTATING_CALL = re.compile(
-    r"""(?:client|self)\.request\(\s*['"](thread/start|thread/resume|thread/fork|turn/start|turn/steer|turn/interrupt|thread/compact/start|review/start)['"]""",
+    r"""(?:client|self)\.request\(\s*['"](thread/start|thread/resume|thread/fork|turn/start|turn/steer|turn/interrupt|thread/compact/start|review/start|thread/memoryMode/set)['"]""",
 )
 LEGACY_INSERT = re.compile(r"INSERT\s+INTO\s+mutation_intents\b", re.IGNORECASE)
 LEGACY_STATE_UPDATE = re.compile(r"UPDATE\s+mutation_intents\s+SET\s+state\b", re.IGNORECASE)
@@ -46,16 +46,10 @@ def scan_package(root: Path | None = None) -> list[str]:
             continue
         rel = _rel(path) if root is None else path.as_posix()
         text = path.read_text(encoding="utf-8")
-        if PROTECTED_UPDATE.search(text) and any(column in text for column in STATE_COLUMNS):
+        if PROTECTED_UPDATE.search(text):
             if not any(rel.endswith(allowed) or rel.replace("\\", "/").endswith(allowed) for allowed in ALLOWED_STATE_WRITERS):
-                if "SET" in text and any(f"{column}" in text for column in STATE_COLUMNS):
-                    if not rel.startswith("durability/"):
-                        if "version = version + 1" not in text or "TransitionKernel" not in text:
-                            if rel not in {"db.py"} and "durability/" not in rel:
-                                if PROTECTED_UPDATE.search(text):
-                                    # allow stores that already delegate to TransitionKernel
-                                    if "TransitionKernel" not in text:
-                                        violations.append(f"{rel}: direct protected state UPDATE")
+                if "durability/" not in rel and rel not in {"db.py"} and "TransitionKernel" not in text:
+                    violations.append(f"{rel}: direct protected state UPDATE")
         if MUTATING_CALL.search(text) and not any(rel.endswith(item) for item in ALLOWED_MUTATING_CALLERS):
             violations.append(f"{rel}: direct mutating client.request")
         if LEGACY_INSERT.search(text) and "db.py" not in rel and "test_" not in path.name:
@@ -64,6 +58,14 @@ def scan_package(root: Path | None = None) -> list[str]:
             if "legacy" not in text.lower() and "MutationIntentStore" not in text:
                 violations.append(f"{rel}: mutation_intents state update")
     return sorted(set(violations))
+
+
+def summarize_guard_violations(violations: list[str], *, unsuperseded_legacy: int = 0) -> dict[str, int]:
+    return {
+        "direct_state_write_violations": sum(1 for item in violations if "protected state" in item),
+        "direct_mutation_call_violations": sum(1 for item in violations if "mutating" in item),
+        "new_legacy_mutation_writes": sum(1 for item in violations if "mutation_intents" in item) + unsuperseded_legacy,
+    }
 
 
 def scan_source_text(text: str, *, name: str = "synthetic.py") -> list[str]:

@@ -167,10 +167,20 @@ class EffectJournal:
         client_request_id: str,
         request_row_id: str,
         raw_request_seq: int,
+        transport_seq: int | None = None,
     ) -> EffectRecord:
         current = self.get(effect_id)
         if current.state != EffectState.PREPARED.value:
             raise EffectError(f"only PREPARED can claim write; {effect_id} is {current.state}")
+        fields: dict[str, object] = {
+            "run_id": run_id,
+            "client_request_id": client_request_id,
+            "request_row_id": request_row_id,
+            "raw_request_seq": raw_request_seq,
+            "write_started_at": _now(),
+        }
+        if transport_seq is not None:
+            fields["transport_seq"] = transport_seq
         with self._tx():
             try:
                 self.kernel.apply(
@@ -183,13 +193,7 @@ class EffectJournal:
                         cause_kind=TransitionCause.APP_SERVER_EFFECT,
                         cause_ref=client_request_id,
                         evidence_ref=request_row_id,
-                        field_updates={
-                            "run_id": run_id,
-                            "client_request_id": client_request_id,
-                            "request_row_id": request_row_id,
-                            "raw_request_seq": raw_request_seq,
-                            "write_started_at": _now(),
-                        },
+                        field_updates=fields,
                     )
                 )
             except TransitionError as exc:

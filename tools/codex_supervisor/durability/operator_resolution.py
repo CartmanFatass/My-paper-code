@@ -31,6 +31,19 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def _mechanical_status(status: object) -> str | None:
+    if isinstance(status, dict):
+        status = status.get("type") or status.get("status")
+    if status is None:
+        return None
+    text = str(status)
+    if text in {"completed", "interrupted", "failed"}:
+        return text
+    if text in {"inProgress", "active"}:
+        return "active"
+    return None
+
+
 class OperatorResolutionService:
     def __init__(self, connection: sqlite3.Connection) -> None:
         self.connection = connection
@@ -69,6 +82,17 @@ class OperatorResolutionService:
                 raise OperatorResolutionError("wake batch is not INCIDENT")
             effect_id = None if batch["effect_id"] is None else str(batch["effect_id"])
             effect = self.journal.get(effect_id) if effect_id else None
+            if disposition in {
+                ResolutionDisposition.TURN_OBSERVED_ACTIVE,
+                ResolutionDisposition.TURN_OBSERVED_COMPLETED,
+            }:
+                self._require_turn_evidence(
+                    thread_id=str(batch["thread_id"]),
+                    turn_id=turn_id,
+                    client_key=str(batch["client_user_message_id"]),
+                    completion_status=completion_status,
+                    require_completed=disposition is ResolutionDisposition.TURN_OBSERVED_COMPLETED,
+                )
             target, message_target = self._wake_targets(
                 disposition,
                 effect=effect,
@@ -76,23 +100,17 @@ class OperatorResolutionService:
                 completion_status=completion_status,
             )
             resolution_id = f"ores_{uuid.uuid4().hex}"
-            self.connection.execute(
-                """INSERT INTO operator_resolutions(
-                    resolution_id, aggregate_kind, aggregate_id, effect_id, operator,
-                    disposition, evidence_kind, evidence_ref, payload_json, created_at
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                (
-                    resolution_id,
-                    AggregateKind.WAKE_BATCH.value,
-                    wake_batch_id,
-                    effect_id,
-                    operator,
-                    disposition.value,
-                    evidence_kind,
-                    evidence_ref,
-                    json.dumps(dict(payload or {}), sort_keys=True),
-                    _now(),
-                ),
+            payload_json = json.dumps(dict(payload or {}), sort_keys=True)
+            self._insert_resolution(
+                resolution_id=resolution_id,
+                aggregate_kind=AggregateKind.WAKE_BATCH.value,
+                aggregate_id=wake_batch_id,
+                effect_id=effect_id,
+                operator=operator,
+                disposition=disposition,
+                evidence_kind=evidence_kind,
+                evidence_ref=evidence_ref,
+                payload_json=payload_json,
             )
             self.kernel.apply(
                 TransitionRequest(
@@ -136,6 +154,18 @@ class OperatorResolutionService:
                 except TransitionError as exc:
                     raise OperatorResolutionError(str(exc)) from exc
             if effect is not None and effect.state == "INCIDENT":
+                effect_resolution_id = f"ores_{uuid.uuid4().hex}"
+                self._insert_resolution(
+                    resolution_id=effect_resolution_id,
+                    aggregate_kind=AggregateKind.APP_SERVER_EFFECT.value,
+                    aggregate_id=effect.effect_id,
+                    effect_id=effect.effect_id,
+                    operator=operator,
+                    disposition=disposition,
+                    evidence_kind=evidence_kind,
+                    evidence_ref=evidence_ref,
+                    payload_json=payload_json,
+                )
                 self.kernel.apply(
                     TransitionRequest(
                         aggregate_kind=AggregateKind.APP_SERVER_EFFECT,
@@ -144,11 +174,83 @@ class OperatorResolutionService:
                         expected_version=effect.version,
                         target_state="OPERATOR_RESOLVED",
                         cause_kind=TransitionCause.OPERATOR_RESOLUTION,
-                        cause_ref=resolution_id,
+                        cause_ref=effect_resolution_id,
                         evidence_ref=evidence_ref,
                     )
                 )
             return resolution_id
+
+    def _insert_resolution(
+        self,
+        *,
+        resolution_id: str,
+        aggregate_kind: str,
+        aggregate_id: str,
+        effect_id: str | None,
+        operator: str,
+        disposition: ResolutionDisposition,
+        evidence_kind: str,
+        evidence_ref: str,
+        payload_json: str,
+    ) -> None:
+        self.connection.execute(
+            """INSERT INTO operator_resolutions(
+                resolution_id, aggregate_kind, aggregate_id, effect_id, operator,
+                disposition, evidence_kind, evidence_ref, payload_json, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (
+                resolution_id,
+                aggregate_kind,
+                aggregate_id,
+                effect_id,
+                operator,
+                disposition.value,
+                evidence_kind,
+                evidence_ref,
+                payload_json,
+                _now(),
+            ),
+        )
+
+    def _require_turn_evidence(
+        self,
+        *,
+        thread_id: str,
+        turn_id: str | None,
+        client_key: str,
+        completion_status: str | None,
+        require_completed: bool,
+    ) -> None:
+        if not turn_id:
+            raise OperatorResolutionError("turn observed requires exact turn id")
+        snap = self.connection.execute(
+            "SELECT thread_id, status FROM turn_snapshots WHERE turn_id = ?",
+            (turn_id,),
+        ).fetchone()
+        if snap is None:
+            raise OperatorResolutionError("turn evidence is not stored")
+        if str(snap["thread_id"]) != thread_id:
+            raise OperatorResolutionError("turn thread does not match wake binding thread")
+        mechanical = _mechanical_status(snap["status"])
+        if require_completed:
+            if not completion_status:
+                raise OperatorResolutionError("completed observation requires turn id and status")
+            if mechanical != completion_status:
+                raise OperatorResolutionError("mechanical status does not match operator status")
+        elif mechanical != "active":
+            raise OperatorResolutionError("turn is not mechanically active")
+        raw = self.connection.execute(
+            """SELECT 1 FROM raw_messages
+            WHERE turn_id = ? AND canonical_json LIKE ?""",
+            (turn_id, f"%{client_key}%"),
+        ).fetchone()
+        effect = self.connection.execute(
+            """SELECT 1 FROM app_server_effects
+            WHERE turn_id = ? AND client_key = ?""",
+            (turn_id, client_key),
+        ).fetchone()
+        if raw is None and effect is None:
+            raise OperatorResolutionError("turn evidence missing clientUserMessageId")
 
     def _wake_targets(
         self,

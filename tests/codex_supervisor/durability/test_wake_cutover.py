@@ -90,6 +90,8 @@ def test_recovery_never_submits_an_existing_effect(tmp_path: Path) -> None:
         request={},
     )
     reconciler = EffectReconciler(store.connection)
+    import asyncio
+
     with pytest.raises(ReconciliationError, match="PREPARED"):
-        reconciler.reconcile(effect.effect_id)
+        asyncio.run(reconciler.reconcile(effect.effect_id))
     store.close()

@@ -10,25 +10,26 @@ live_acceptance=absent
 ## Schema
 
 Additive v6→v7 adds version columns, effect references, `app_server_effects`,
-`control_transitions`, and `operator_resolutions`. `mutation_intents` is
-preserved. No table is dropped.
+`control_transitions`, `operator_resolutions`, and `transport_seq` on effects.
+`mutation_intents` is preserved. No table is dropped.
+
+`initialize_database` conservatively migrates unmatched `mutation_intents`
+rows by creating a non-PREPARED `app_server_effects` row and setting
+`superseded_by_effect_id`. Existing rows remain queryable as legacy evidence.
 
 ## Direct-write inventory
 
-Before: 26 `UPDATE` sites across eight business modules.
+Protected state changes go through `TransitionKernel`, including
+`CommandGateway`. SQLite triggers reject illegal edges, version-less state
+updates, and operator-only exits whose resolution disposition does not match
+the target state.
 
-After cutover, protected state changes go through `TransitionKernel` for
-bindings, managed turns, wake batches, mailbox delivery/intake, commands, and
-effects. SQLite triggers reject illegal edges and version-less state updates.
+`MutationIntentStore.begin()` and all legacy state writes are disabled.
+`AppServerSessionOwner.request()` and `SessionGuard.request()` reject every
+mutating method. `WakeRecovery.resume_once()` uses `submit_effect` and later
+read-only classify/reconcile.
 
-## Known remaining compatibility paths
-
-`SessionGuard.request()` may still send mutations through the single session
-owner using prepare/send/await until every remaining caller is moved onto
-`submit_effect`. `MutationIntentStore.begin()` still exists for unread
-legacy rows; new managed-turn and provisioning paths no longer write it.
-
-## Live-only limitations
+## Remaining synthetic limits
 
 Live App Server, Phase 1, Stage 3, and Stage 4 acceptance remain deferred.
 That absence is not a code defect.

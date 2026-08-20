@@ -17,7 +17,7 @@ from ..protocol import extract_protocol_ids
 from ..store import ObserverStore
 from ..transport import TransportClosed
 from .effects import EffectError, EffectJournal, EffectRecord
-from .models import EffectState
+from .models import EffectState, SUBMISSION_RESULT_STATES
 
 
 @dataclass(frozen=True)
@@ -183,10 +183,23 @@ class AppServerSessionOwner:
 
         raise UnexpectedServerRequest(self.incident_payload or {})
 
+    def classify_submission(self, result: EffectSubmissionResult) -> str:
+        if result.state == EffectState.RESPONSE_OBSERVED.value:
+            return "observed"
+        if result.state == EffectState.SUBMISSION_UNCERTAIN.value:
+            return "uncertain"
+        if result.state == EffectState.INCIDENT.value:
+            return "incident"
+        raise SessionOwnerError(f"unexpected effect submission state {result.state}")
+
+    def release_open_effect(self, effect_id: str) -> None:
+        self._open_effect_ids.discard(effect_id)
+
     async def submit_effect(
         self,
         effect_id: str,
         extra_transitions: list[Any] | None = None,
+        extra_hooks: list[Any] | None = None,
     ) -> EffectSubmissionResult:
         from ..client import UnexpectedServerRequest
 
@@ -198,26 +211,35 @@ class AppServerSessionOwner:
                 f"effect {effect_id} is {record.state}; WRITE_STARTED or later is never automatically submitted again"
             )
         async with self._lock:
-            return await self._submit_locked(record, extra_transitions)
+            return await self._submit_locked(record, extra_transitions, extra_hooks)
 
     async def _submit_locked(
         self,
         record: EffectRecord,
         extra_transitions: list[Any] | None = None,
+        extra_hooks: list[Any] | None = None,
     ) -> EffectSubmissionResult:
         from ..client import UnexpectedServerRequest
 
         self._open_effect_ids.add(record.effect_id)
         prepared = self.client.prepare_request(record.method, record.request)
-        self.store.record_effect_write_start(
-            effect_id=record.effect_id,
-            run_id=self._ensure_run(),
-            method=record.method,
-            payload=dict(prepared.payload),
-            params=dict(prepared.params),
-            request_class=prepared.request_class.value,
-            extra_transitions=extra_transitions,
-        )
+        try:
+            self.store.record_effect_write_start(
+                effect_id=record.effect_id,
+                run_id=self._ensure_run(),
+                method=record.method,
+                payload=dict(prepared.payload),
+                params=dict(prepared.params),
+                request_class=prepared.request_class.value,
+                extra_transitions=extra_transitions,
+                extra_hooks=extra_hooks,
+            )
+        except Exception:
+            discard = getattr(self.client, "discard_prepared", None)
+            if callable(discard):
+                discard(prepared)
+            self._open_effect_ids.discard(record.effect_id)
+            raise
         await self.client.send_prepared(prepared)
         send = asyncio.create_task(self.client.await_prepared(prepared))
         incident = asyncio.create_task(self._incident.wait())
@@ -272,6 +294,8 @@ class AppServerSessionOwner:
         if self.terminated or self._incident.is_set():
             self._mark_open_effects_incident(self.incident_payload or {"reason": "server_request"})
             raise UnexpectedServerRequest(self.incident_payload or {})
+        if observed.state not in SUBMISSION_RESULT_STATES:
+            raise SessionOwnerError(f"unexpected effect submission state {observed.state}")
         return EffectSubmissionResult(record.effect_id, observed.state, response, None)
 
     async def request(
@@ -281,42 +305,7 @@ class AppServerSessionOwner:
         *,
         timeout: float | None = None,
     ) -> dict[str, object]:
-        """Compatibility request used by SessionGuard until caller cutover.
-
-        Reads use request_read. Mutations use prepare/send/await on this owner
-        so they still share the one watcher; they do not call client.request().
-        New callers must use submit_effect.
-        """
-        if method not in MUTATING_NO_RETRY_METHODS:
-            result = await self.request_read(method, params, timeout=timeout)
-            return dict(result)
-        from ..client import UnexpectedServerRequest
-
-        if self.terminated:
-            raise UnexpectedServerRequest(self.incident_payload or {})
-        prepared = self.client.prepare_request(method, params)
-        send = asyncio.create_task(self._send_and_await(prepared, timeout=timeout))
-        incident = asyncio.create_task(self._incident.wait())
-        done, pending = await asyncio.wait({send, incident}, return_when=asyncio.FIRST_COMPLETED)
-        for task in pending:
-            if task is incident:
-                task.cancel()
-                try:
-                    await task
-                except (asyncio.CancelledError, Exception):
-                    pass
-        if send in done:
-            await asyncio.sleep(0)
-            if self.terminated or self._incident.is_set():
-                raise UnexpectedServerRequest(self.incident_payload or {})
-            return send.result()
-        send.cancel()
-        try:
-            await send
-        except (asyncio.CancelledError, Exception):
-            pass
-        raise UnexpectedServerRequest(self.incident_payload or {})
-
-    async def _send_and_await(self, prepared, *, timeout: float | None) -> dict[str, object]:
-        await self.client.send_prepared(prepared)
-        return await self.client.await_prepared(prepared, timeout=timeout)
+        if method in MUTATING_NO_RETRY_METHODS:
+            raise SessionOwnerError(MUTATING_OWNER_MESSAGE)
+        result = await self.request_read(method, params, timeout=timeout)
+        return dict(result)

@@ -11,6 +11,7 @@ from typing import Mapping
 
 from .graphs import (
     BATCHED_TO_ELIGIBLE_CAUSES,
+    disposition_permits_target,
     is_legal_edge,
     is_operator_only_edge,
 )
@@ -127,6 +128,14 @@ _FIELD_NAME = frozenset(
         "verified_epoch_id",
         "verified_epoch_revision",
         "last_verified_at",
+        "command_kind",
+        "payload_json",
+        "expected_checkpoint_id",
+        "expected_state_version",
+        "expected_epoch_id",
+        "expected_epoch_revision",
+        "rejection_reason",
+        "transport_seq",
     }
 )
 
@@ -155,7 +164,7 @@ class TransitionKernel:
                     f"operator-only {request.aggregate_kind.value} edge "
                     f"{request.expected_state} -> {request.target_state} requires OPERATOR_RESOLUTION"
                 )
-            self._require_operator_resolution(request.aggregate_kind, request.aggregate_id)
+            self._require_operator_resolution(request)
         if (
             request.aggregate_kind == AggregateKind.MAILBOX_DELIVERY
             and request.expected_state == "BATCHED"
@@ -227,13 +236,23 @@ class TransitionKernel:
             row=mapping,
         )
 
-    def _require_operator_resolution(self, kind: AggregateKind, aggregate_id: str) -> None:
+    def _require_operator_resolution(self, request: TransitionRequest) -> None:
         row = self.connection.execute(
-            """SELECT resolution_id FROM operator_resolutions
+            """SELECT resolution_id, disposition FROM operator_resolutions
             WHERE aggregate_kind = ? AND aggregate_id = ?""",
-            (kind.value, aggregate_id),
+            (request.aggregate_kind.value, request.aggregate_id),
         ).fetchone()
         if row is None:
             raise TransitionError(
-                f"operator-only {kind.value} exit requires an unconsumed operator_resolutions row"
+                f"operator-only {request.aggregate_kind.value} exit requires an unconsumed operator_resolutions row"
+            )
+        if str(row["resolution_id"]) != request.cause_ref:
+            raise TransitionError("operator resolution cause_ref must equal resolution_id")
+        if not disposition_permits_target(
+            str(row["disposition"]),
+            request.aggregate_kind,
+            request.target_state,
+        ):
+            raise TransitionError(
+                f"resolution disposition {row['disposition']} does not permit {request.target_state}"
             )

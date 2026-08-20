@@ -122,18 +122,25 @@ def test_server_request_incident_cannot_be_completed_or_activated(tmp_path: Path
 
 def test_thread_start_incident_cannot_be_overwritten_by_attach(tmp_path: Path) -> None:
     seeded, store, binding_id, _snapshot = _prepared_binding(tmp_path)
+    from tests.codex_supervisor.helpers import insert_legacy_mutation_intent
+
     mutations = MutationIntentStore(seeded["supervisor"])
-    intent = mutations.begin("thread/start", f"thread/start:{binding_id}", binding_id=binding_id)
-    mutations.mark_incident(str(intent["intent_id"]), "server_request")
+    intent_id = insert_legacy_mutation_intent(
+        seeded["supervisor"].connection,
+        method="thread/start",
+        client_key=f"thread/start:{binding_id}",
+        state="INCIDENT",
+        binding_id=binding_id,
+    )
     with pytest.raises(BindingError, match="not SUBMITTING"):
-        store.attach_thread(binding_id, "thr_root", mutation_intent_id=str(intent["intent_id"]))
+        store.attach_thread(binding_id, "thr_root", mutation_intent_id=intent_id)
     binding = store.get(binding_id)
     assert binding is not None
     assert binding.binding_state.value == "PREPARED"
     assert binding.thread_id is None
     row = seeded["supervisor"].connection.execute(
         "SELECT state FROM mutation_intents WHERE intent_id = ?",
-        (intent["intent_id"],),
+        (intent_id,),
     ).fetchone()
     assert str(row[0]) == "INCIDENT"
     _close(seeded)
@@ -141,15 +148,18 @@ def test_thread_start_incident_cannot_be_overwritten_by_attach(tmp_path: Path) -
 
 def test_thread_resume_incident_requires_operator_resolution(tmp_path: Path) -> None:
     seeded = seed_managed_actors(tmp_path)
+    from tests.codex_supervisor.helpers import insert_legacy_mutation_intent
+
     mutations = MutationIntentStore(seeded["supervisor"])
-    intent = mutations.begin("thread/resume", "thread/resume:thr_adopt", binding_id="bind_x")
-    mutations.mark_incident(str(intent["intent_id"]), "server_request")
-    with pytest.raises(MutationIntentError, match="operator resolution"):
+    insert_legacy_mutation_intent(
+        seeded["supervisor"].connection,
+        method="thread/resume",
+        client_key="thread/resume:thr_adopt",
+        state="INCIDENT",
+        binding_id="bind_x",
+    )
+    with pytest.raises(MutationIntentError, match="disabled"):
         mutations.begin("thread/resume", "thread/resume:thr_adopt", binding_id="bind_x")
-    mutations.resolve_incident(str(intent["intent_id"]), operator="operator")
-    again = mutations.begin("thread/resume", "thread/resume:thr_adopt", binding_id="bind_x")
-    assert again["state"] == "SUBMITTING"
-    assert again["intent_id"] != intent["intent_id"]
     _close(seeded)
 
 
@@ -424,11 +434,9 @@ def test_reanchor_receipt_crash_before_command_applied_is_reconciled(tmp_path: P
     )
     first = gateway.ingest_final_item(raw_message_seq=seq)
     assert first["validation_state"] == "APPLIED"
-    seeded["supervisor"].connection.execute(
-        "UPDATE managed_actor_commands SET validation_state = 'VALIDATED', applied_at = NULL WHERE command_id = ?",
-        (first["command_id"],),
-    )
-    seeded["supervisor"].connection.commit()
+    from tests.codex_supervisor.helpers import rewind_command_validation
+
+    rewind_command_validation(seeded["supervisor"].connection, str(first["command_id"]), "VALIDATED")
     receipt = seeded["supervisor"].get_command_receipt(str(first["command_id"]))
     assert receipt is not None
     second = gateway.ingest_final_item(raw_message_seq=seq)

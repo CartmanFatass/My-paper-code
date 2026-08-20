@@ -69,7 +69,7 @@ def test_managed_turn_write_started_is_never_resubmitted(tmp_path: Path) -> None
         await turns.client.initialize()
         intent_id = turns.prepare(ctx["binding_id"], intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
         row = await turns.submit(intent_id, "hello")
-        assert row["submission_state"] == SubmissionState.SUBMITTED.value
+        assert row["submission_state"] == SubmissionState.OBSERVED.value
         with pytest.raises(ManagedTurnError, match="not PREPARED"):
             await turns.submit(intent_id, "hello")
         journal = EffectJournal(store.store.connection)
@@ -145,8 +145,8 @@ def test_managed_turn_effect_and_domain_state_never_diverge(tmp_path: Path) -> N
         row = await turns.submit(intent_id, "hello")
         journal = EffectJournal(store.store.connection)
         effect = journal.get(str(row["effect_id"]))
-        assert row["submission_state"] == SubmissionState.SUBMITTED.value
-        assert effect.state == EffectState.RESPONSE_OBSERVED.value
+        assert row["submission_state"] == SubmissionState.OBSERVED.value
+        assert effect.state == EffectState.EFFECT_CONFIRMED.value
         await ctx["transport"].stop()
         seeded = ctx["seeded"]
         seeded["bridge"].close()

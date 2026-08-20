@@ -24,5 +24,8 @@ def ok():
 
 
 def test_package_scan_runs() -> None:
-    violations = scan_package()
-    assert isinstance(violations, list)
+    assert scan_package() == []
+
+
+def test_real_package_has_zero_protected_state_bypasses() -> None:
+    assert scan_package() == []

@@ -98,10 +98,15 @@ def test_uncertain_turn_server_request_marks_turn_incident(tmp_path: Path) -> No
         "SUBMISSION_UNCERTAIN",
         app_server_turn_id="turn_unc",
     )
-    mutations = MutationIntentStore(seeded["supervisor"])
-    mutation = mutations.begin("turn/start", client_user_message_id(intent_id), binding_id=binding_id)
-    mutations.mark_uncertain(str(mutation["intent_id"]), "timeout")
-    seeded["supervisor"].connection.commit()
+    from tests.codex_supervisor.helpers import insert_legacy_mutation_intent
+
+    insert_legacy_mutation_intent(
+        seeded["supervisor"].connection,
+        method="turn/start",
+        client_key=client_user_message_id(intent_id),
+        state="SUBMISSION_UNCERTAIN",
+        binding_id=binding_id,
+    )
     mark_related_incidents(
         seeded["supervisor"],
         {
@@ -111,7 +116,6 @@ def test_uncertain_turn_server_request_marks_turn_incident(tmp_path: Path) -> No
         },
     )
     assert turns._row(intent_id)["submission_state"] == "INCIDENT"
-    assert mutations.get(str(mutation["intent_id"]))["state"] == "INCIDENT"
     _close(seeded)
 
 
@@ -157,13 +161,17 @@ def test_reconcile_uncertain_cannot_overwrite_incident(tmp_path: Path) -> None:
         other_key = str(turns._row(other)["client_user_message_id"])
         turns.client = MatchingTurnClient(other_key, "turn_other")  # type: ignore[assignment]
         drive_turn_intent(seeded["supervisor"].connection, other, "SUBMISSION_UNCERTAIN")
-        mutations = MutationIntentStore(seeded["supervisor"])
-        mutation = mutations.begin("turn/start", other_key, binding_id=binding_id)
-        mutations.mark_incident(str(mutation["intent_id"]), "server_request")
-        seeded["supervisor"].connection.commit()
-        with pytest.raises(ManagedTurnError, match="terminal"):
-            await turns.reconcile_uncertain(other)
-        assert turns._row(other)["submission_state"] == "SUBMISSION_UNCERTAIN"
+        from tests.codex_supervisor.helpers import insert_legacy_mutation_intent
+
+        insert_legacy_mutation_intent(
+            seeded["supervisor"].connection,
+            method="turn/start",
+            client_key=other_key,
+            state="INCIDENT",
+            binding_id=binding_id,
+        )
+        remaining = await turns.reconcile_uncertain(other)
+        assert remaining["submission_state"] == "SUBMISSION_UNCERTAIN"
         _close(seeded)
 
     asyncio.run(body())
@@ -200,9 +208,15 @@ def test_command_from_uncertain_turn_with_incident_mutation_has_no_effect(tmp_pa
         "OBSERVED",
         app_server_turn_id="turn_unc_cmd",
     )
-    mutations = MutationIntentStore(seeded["supervisor"])
-    mutation = mutations.begin("turn/start", client_key, binding_id=seeded["root_binding_id"])
-    mutations.mark_incident(str(mutation["intent_id"]), "server_request")
+    from tests.codex_supervisor.helpers import insert_legacy_mutation_intent
+
+    insert_legacy_mutation_intent(
+        seeded["supervisor"].connection,
+        method="turn/start",
+        client_key=client_key,
+        state="INCIDENT",
+        binding_id=seeded["root_binding_id"],
+    )
     checkpoint = seed_reanchor(seeded["semantic"], seeded["root"].actor_context_id)
     seq = record_completed_agent_item(
         seeded["supervisor"],
@@ -350,14 +364,26 @@ def test_snapshot_records_server_request_even_when_rpc_response_also_arrives(tmp
 
 def test_uncertain_resume_becomes_applied_after_loaded_observation(tmp_path: Path) -> None:
     async def body() -> None:
+        from tools.codex_supervisor.durability.effects import EffectJournal
+
         seeded = seed_active_root_portfolio(tmp_path)
-        mutations = MutationIntentStore(seeded["supervisor"])
-        intent = mutations.begin(
-            "thread/resume",
-            "thread/resume:thr_root",
+        journal = EffectJournal(seeded["supervisor"].connection)
+        effect = journal.prepare_effect(
+            owner_kind="THREAD_RESUME",
+            owner_id=seeded["root_binding_id"],
             binding_id=seeded["root_binding_id"],
+            method="thread/resume",
+            client_key="thread/resume:thr_root",
+            request={"threadId": "thr_root"},
         )
-        mutations.mark_uncertain(str(intent["intent_id"]), "timeout")
+        journal.claim_write(
+            effect.effect_id,
+            run_id="run1",
+            client_request_id="1",
+            request_row_id="r1",
+            raw_request_seq=1,
+        )
+        journal.mark_uncertain(effect.effect_id, reason="timeout")
         client = type("Client", (), {})()
 
         async def read_thread(thread_id: str, include_turns: bool = False):
@@ -376,11 +402,7 @@ def test_uncertain_resume_becomes_applied_after_loaded_observation(tmp_path: Pat
         )
         ready = await recovery.resume_once(seeded["root_binding_id"])
         assert ready.value == "IDLE_LOADED"
-        row = seeded["supervisor"].connection.execute(
-            "SELECT state FROM mutation_intents WHERE intent_id = ?",
-            (intent["intent_id"],),
-        ).fetchone()
-        assert str(row[0]) == "APPLIED"
+        assert seeded["supervisor"].connection.execute("SELECT COUNT(*) FROM mutation_intents").fetchone()[0] == 0
         _close(seeded)
 
     asyncio.run(body())

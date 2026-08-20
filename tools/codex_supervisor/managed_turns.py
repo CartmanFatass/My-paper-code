@@ -15,6 +15,7 @@ from .durability.session_owner import AppServerSessionOwner
 from .durability.transaction import DurabilityTransaction
 from .durability.transitions import TransitionError, TransitionKernel
 from .managed_models import BindingState, ManagedIntentKind, SubmissionState
+from .semantic_bridge import SemanticBridgeError
 from .transport import TransportClosed
 
 STAGE3_HAS_NO_AUTOMATIC_TURN_LOOP = True
@@ -113,6 +114,64 @@ class ManagedTurns:
         except TransitionError as exc:
             raise ManagedTurnError(str(exc)) from exc
 
+    def _cancel_prepared(self, turn_intent_id: str, effect_id: str, reason: str) -> None:
+        row = self._row(turn_intent_id)
+        if row["submission_state"] == SubmissionState.PREPARED.value:
+            self._apply(
+                TransitionRequest(
+                    aggregate_kind=AggregateKind.MANAGED_TURN,
+                    aggregate_id=turn_intent_id,
+                    expected_state=SubmissionState.PREPARED.value,
+                    expected_version=int(row["version"] or 0),
+                    target_state=SubmissionState.CANCELLED.value,
+                    cause_kind=TransitionCause.PRE_WRITE_CANCEL,
+                    cause_ref=reason,
+                )
+            )
+        try:
+            self.journal.cancel_before_write(effect_id, cause_ref=reason)
+        except Exception:
+            pass
+
+    def _assert_submit_fence(self, turn_intent_id: str, effect_id: str) -> None:
+        row = self._row(turn_intent_id)
+        binding = self.bindings.get(str(row["binding_id"]))
+        intent_kind = ManagedIntentKind(str(row["intent_kind"]))
+        allowed = (
+            BindingState.VERIFICATION_REQUIRED
+            if intent_kind in {ManagedIntentKind.BOOTSTRAP, ManagedIntentKind.IDENTITY_VERIFICATION}
+            else BindingState.ACTIVE
+        )
+        if binding is None or binding.binding_state is not allowed:
+            self._cancel_prepared(turn_intent_id, effect_id, "binding_ineligible")
+            raise ManagedTurnError("binding is not eligible for this managed turn")
+        bridge = getattr(self.bindings, "bridge", None)
+        if bridge is None:
+            return
+        try:
+            actor = bridge.require_eligible(binding.actor_context_id)
+        except SemanticBridgeError as exc:
+            self._cancel_prepared(turn_intent_id, effect_id, "actor_ineligible")
+            raise ManagedTurnError(str(exc)) from exc
+        if actor.actor_kind.value != binding.actor_kind.value or actor.scope_key != binding.semantic_scope_key:
+            self._cancel_prepared(turn_intent_id, effect_id, "actor_mismatch")
+            raise ManagedTurnError("semantic actor no longer matches binding")
+        snapshot = bridge.snapshot(binding.actor_context_id)
+        if row["checkpoint_id"] and snapshot.checkpoint_id != row["checkpoint_id"]:
+            self._cancel_prepared(turn_intent_id, effect_id, "checkpoint_mismatch")
+            raise ManagedTurnError("checkpoint no longer matches managed turn")
+        if row["expected_state_version"] is not None and snapshot.state_version != int(row["expected_state_version"]):
+            self._cancel_prepared(turn_intent_id, effect_id, "state_version_mismatch")
+            raise ManagedTurnError("state version no longer matches managed turn")
+
+    def _effect_is_confirmed(self, effect_id: str | None) -> bool:
+        if not effect_id:
+            return False
+        try:
+            return self.journal.get(str(effect_id)).state == "EFFECT_CONFIRMED"
+        except Exception:
+            return False
+
     async def submit(self, turn_intent_id: str, input_text: str) -> dict[str, Any]:
         import asyncio
 
@@ -135,12 +194,14 @@ class ManagedTurns:
             raise ManagedTurnError("linked effect is not PREPARED; reconcile, do not resend")
         if dict(existing.request) != {"threadId": row["app_server_thread_id"], "clientUserMessageId": row["client_user_message_id"]}:
             raise ManagedTurnError("linked effect request tuple mismatch")
+        self._assert_submit_fence(turn_intent_id, effect_id)
         self.bindings.store.connection.execute(
             "UPDATE app_server_effects SET request_json = ? WHERE effect_id = ? AND state = 'PREPARED'",
             (json.dumps(params, sort_keys=True, separators=(",", ":")), effect_id),
         )
         owner = self._owner()
         try:
+            self._assert_submit_fence(turn_intent_id, effect_id)
             result = await owner.submit_effect(
                 effect_id,
                 extra_transitions=[
@@ -156,29 +217,31 @@ class ManagedTurns:
                 ],
             )
         except RetryRequired as exc:
-            self._apply(
-                TransitionRequest(
-                    aggregate_kind=AggregateKind.MANAGED_TURN,
-                    aggregate_id=turn_intent_id,
-                    expected_state=SubmissionState.SUBMITTING.value,
-                    expected_version=int(self._row(turn_intent_id)["version"] or 0),
-                    target_state=SubmissionState.SUBMISSION_UNCERTAIN.value,
-                    cause_kind=TransitionCause.RECONCILIATION,
-                    cause_ref="overload",
-                    field_updates={"incident_json": json.dumps({"reason": "overload"})},
+            current = self._row(turn_intent_id)
+            if current["submission_state"] == SubmissionState.SUBMITTING.value:
+                self._apply(
+                    TransitionRequest(
+                        aggregate_kind=AggregateKind.MANAGED_TURN,
+                        aggregate_id=turn_intent_id,
+                        expected_state=SubmissionState.SUBMITTING.value,
+                        expected_version=int(current["version"] or 0),
+                        target_state=SubmissionState.SUBMISSION_UNCERTAIN.value,
+                        cause_kind=TransitionCause.RECONCILIATION,
+                        cause_ref="overload",
+                        field_updates={"incident_json": json.dumps({"reason": "overload"})},
+                    )
                 )
-            )
             raise ManagedTurnError("turn/start uncertain; do not retry") from exc
         except UnexpectedServerRequest as exc:
             raise ManagedTurnError("turn/start incident; do not retry") from exc
         except (AppServerRpcError, TransportClosed, asyncio.TimeoutError) as exc:
             current = self._row(turn_intent_id)
-            if current["submission_state"] != SubmissionState.INCIDENT.value:
+            if current["submission_state"] == SubmissionState.SUBMITTING.value:
                 self._apply(
                     TransitionRequest(
                         aggregate_kind=AggregateKind.MANAGED_TURN,
                         aggregate_id=turn_intent_id,
-                        expected_state=str(current["submission_state"]),
+                        expected_state=SubmissionState.SUBMITTING.value,
                         expected_version=int(current["version"] or 0),
                         target_state=SubmissionState.SUBMISSION_UNCERTAIN.value,
                         cause_kind=TransitionCause.RECONCILIATION,
@@ -187,46 +250,94 @@ class ManagedTurns:
                     )
                 )
             raise ManagedTurnError("turn/start uncertain; do not retry") from exc
+        kind = owner.classify_submission(result)
         current = self._row(turn_intent_id)
-        if current["submission_state"] == SubmissionState.INCIDENT.value:
+        if kind == "incident" or current["submission_state"] == SubmissionState.INCIDENT.value:
             raise ManagedTurnError("turn/start incident; do not retry")
+        if kind == "uncertain":
+            if current["submission_state"] == SubmissionState.SUBMITTING.value:
+                self._apply(
+                    TransitionRequest(
+                        aggregate_kind=AggregateKind.MANAGED_TURN,
+                        aggregate_id=turn_intent_id,
+                        expected_state=SubmissionState.SUBMITTING.value,
+                        expected_version=int(current["version"] or 0),
+                        target_state=SubmissionState.SUBMISSION_UNCERTAIN.value,
+                        cause_kind=TransitionCause.RECONCILIATION,
+                        cause_ref="uncertain",
+                        field_updates={"incident_json": json.dumps({"reason": "timeout"})},
+                    )
+                )
+            raise ManagedTurnError("turn/start uncertain; do not retry")
         response = result.response or {}
         turn_id = None
         inner = response.get("result") if isinstance(response.get("result"), dict) else {}
         if isinstance(inner.get("turn"), dict):
             turn_id = inner["turn"].get("id")
-        now = _now()
-        try:
-            self._apply(
-                TransitionRequest(
-                    aggregate_kind=AggregateKind.MANAGED_TURN,
-                    aggregate_id=turn_intent_id,
-                    expected_state=SubmissionState.SUBMITTING.value,
-                    expected_version=int(current["version"] or 0),
-                    target_state=SubmissionState.SUBMITTED.value,
-                    cause_kind=TransitionCause.APP_SERVER_RESPONSE,
-                    cause_ref=effect_id,
-                    field_updates={
-                        "app_server_turn_id": turn_id,
-                        "submitted_at": now,
-                        "observed_at": now,
-                    },
+        if not turn_id:
+            current = self._row(turn_intent_id)
+            if current["submission_state"] == SubmissionState.SUBMITTING.value:
+                self._apply(
+                    TransitionRequest(
+                        aggregate_kind=AggregateKind.MANAGED_TURN,
+                        aggregate_id=turn_intent_id,
+                        expected_state=SubmissionState.SUBMITTING.value,
+                        expected_version=int(current["version"] or 0),
+                        target_state=SubmissionState.SUBMISSION_UNCERTAIN.value,
+                        cause_kind=TransitionCause.RECONCILIATION,
+                        cause_ref="missing_turn",
+                    )
                 )
-            )
-        except ManagedTurnError:
+            raise ManagedTurnError("turn/start uncertain; do not retry")
+        now = _now()
+        current = self._row(turn_intent_id)
+        try:
+            with DurabilityTransaction(self.bindings.store.connection):
+                self.journal.confirm_effect(effect_id, evidence_ref=f"turn:{turn_id}")
+                submitted = self.kernel.apply(
+                    TransitionRequest(
+                        aggregate_kind=AggregateKind.MANAGED_TURN,
+                        aggregate_id=turn_intent_id,
+                        expected_state=SubmissionState.SUBMITTING.value,
+                        expected_version=int(current["version"] or 0),
+                        target_state=SubmissionState.SUBMITTED.value,
+                        cause_kind=TransitionCause.APP_SERVER_RESPONSE,
+                        cause_ref=effect_id,
+                        field_updates={
+                            "app_server_turn_id": turn_id,
+                            "submitted_at": now,
+                            "observed_at": now,
+                        },
+                    )
+                )
+                self.kernel.apply(
+                    TransitionRequest(
+                        aggregate_kind=AggregateKind.MANAGED_TURN,
+                        aggregate_id=turn_intent_id,
+                        expected_state=SubmissionState.SUBMITTED.value,
+                        expected_version=submitted.to_version,
+                        target_state=SubmissionState.OBSERVED.value,
+                        cause_kind=TransitionCause.APP_SERVER_RESPONSE,
+                        cause_ref=effect_id,
+                        field_updates={"observed_at": now},
+                    )
+                )
+        except TransitionError as exc:
             row = self._row(turn_intent_id)
             if row["submission_state"] == SubmissionState.INCIDENT.value:
                 raise ManagedTurnError("turn/start incident; do not retry")
-            return row
-        if turn_id:
-            with self.bindings.store._lock, self.bindings.store.connection:
-                self.bindings.store.connection.execute(
-                    "UPDATE managed_actor_bindings SET last_turn_id = ? WHERE binding_id = ?",
-                    (turn_id, row["binding_id"]),
-                )
+            raise ManagedTurnError(str(exc)) from exc
+        owner.release_open_effect(effect_id)
+        with self.bindings.store._lock, self.bindings.store.connection:
+            self.bindings.store.connection.execute(
+                "UPDATE managed_actor_bindings SET last_turn_id = ? WHERE binding_id = ?",
+                (turn_id, row["binding_id"]),
+            )
         return self._row(turn_intent_id)
 
     async def reconcile_uncertain(self, turn_intent_id: str) -> dict[str, Any]:
+        from .durability.reconciliation import EffectReconciler, ReconciliationError
+
         row = self._row(turn_intent_id)
         if row["submission_state"] == SubmissionState.INCIDENT.value:
             raise ManagedTurnError("incident is terminal; operator recovery required")
@@ -236,55 +347,26 @@ class ManagedTurns:
             SubmissionState.SUBMITTED.value,
         }:
             return row
-        owner = self._owner()
-        read = await owner.request_read(
-            "thread/read",
-            {"threadId": str(row["app_server_thread_id"]), "includeTurns": True},
-        )
-        row = self._row(turn_intent_id)
-        if row["submission_state"] == SubmissionState.INCIDENT.value:
+        effect_id = str(row.get("effect_id") or "")
+        if not effect_id:
+            return row
+        effect = self.journal.get(effect_id)
+        if effect.state == "PREPARED":
+            return row
+        if effect.state == "INCIDENT":
             raise ManagedTurnError("incident is terminal; operator recovery required")
-        thread = read.get("result") if isinstance(read.get("result"), dict) else read
-        thread_obj = thread.get("thread") if isinstance(thread.get("thread"), dict) else thread
-        turns = thread_obj.get("turns") if isinstance(thread_obj.get("turns"), list) else []
-        wanted = row["client_user_message_id"]
-        for turn in turns:
-            if isinstance(turn, dict) and turn.get("clientUserMessageId") == wanted:
-                effect_id = row.get("effect_id")
-                if effect_id:
-                    try:
-                        self.journal.confirm_effect(str(effect_id), evidence_ref=f"turn:{turn.get('id')}")
-                    except Exception:
-                        pass
-                try:
-                    self._apply(
-                        TransitionRequest(
-                            aggregate_kind=AggregateKind.MANAGED_TURN,
-                            aggregate_id=turn_intent_id,
-                            expected_state=str(row["submission_state"]),
-                            expected_version=int(row["version"] or 0),
-                            target_state=SubmissionState.OBSERVED.value,
-                            cause_kind=TransitionCause.RECONCILIATION,
-                            cause_ref=str(turn.get("id") or wanted),
-                            evidence_ref=str(turn.get("id") or ""),
-                            field_updates={
-                                "app_server_turn_id": turn.get("id"),
-                                "observed_at": _now(),
-                            },
-                        )
-                    )
-                except ManagedTurnError:
-                    row = self._row(turn_intent_id)
-                    if row["submission_state"] == SubmissionState.INCIDENT.value:
-                        raise ManagedTurnError("incident is terminal; operator recovery required")
-                    return row
-                return self._row(turn_intent_id)
-        return row
+        try:
+            await EffectReconciler(self.bindings.store.connection, self._owner()).reconcile(effect_id)
+        except ReconciliationError as exc:
+            raise ManagedTurnError(str(exc)) from exc
+        return self._row(turn_intent_id)
 
     def record_completion(self, turn_intent_id: str, status: str) -> dict[str, Any]:
         row = self._row(turn_intent_id)
         if row["submission_state"] == SubmissionState.INCIDENT.value:
             raise ManagedTurnError("incident is terminal; operator recovery required")
+        if not self._effect_is_confirmed(str(row.get("effect_id") or "")):
+            raise ManagedTurnError("completion requires EFFECT_CONFIRMED linked effect")
         now = _now()
         if row["submission_state"] == SubmissionState.SUBMITTED.value:
             self._apply(
