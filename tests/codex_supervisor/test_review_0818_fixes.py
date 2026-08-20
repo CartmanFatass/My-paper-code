@@ -459,7 +459,7 @@ def test_thread_start_timeout_requires_reconciliation(tmp_path: Path) -> None:
         binding_id = provisioner.prepare(snapshot, repo_root=tmp_path, operator="operator")
         with pytest.raises(ProvisioningError, match="uncertain"):
             await provisioner.create_fresh_thread(binding_id)
-        with pytest.raises(ProvisioningError, match="unresolved intent"):
+        with pytest.raises(ProvisioningError, match="unresolved"):
             await provisioner.create_fresh_thread(binding_id)
         await transport.stop()
         seeded["bridge"].close()

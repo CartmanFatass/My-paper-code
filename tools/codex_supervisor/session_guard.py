@@ -147,6 +147,8 @@ def mark_related_incidents(store: ObserverStore, payload: Mapping[str, Any]) -> 
 class ManagedAppServerSession:
     """Compatibility adapter around AppServerSessionOwner. Do not start a second watcher."""
 
+    _wrappers: dict[int, ManagedAppServerSession] = {}
+
     def __init__(self, owner: Any) -> None:
         self.owner = owner
         self.client = owner.client
@@ -172,7 +174,13 @@ class ManagedAppServerSession:
     def for_client(cls, client: AppServerClient, store: ObserverStore) -> ManagedAppServerSession:
         from .durability.session_owner import AppServerSessionOwner
 
-        return cls(AppServerSessionOwner.for_client(client, store))
+        owner = AppServerSessionOwner.for_client(client, store)
+        existing = cls._wrappers.get(id(owner))
+        if existing is not None:
+            return existing
+        session = cls(owner)
+        cls._wrappers[id(owner)] = session
+        return session
 
     @classmethod
     def active_watcher_count(cls) -> int:
@@ -184,6 +192,7 @@ class ManagedAppServerSession:
         self.owner.start()
 
     def close(self) -> None:
+        self._wrappers.pop(id(self.owner), None)
         self.owner._by_client.pop(id(self.client), None)
         if self.owner._task is not None and not self.owner._task.done():
             self.owner._task.cancel()

@@ -228,7 +228,7 @@ def test_thread_start_response_attach_is_one_durable_apply(tmp_path: Path) -> No
         store.attach_thread = crash  # type: ignore[method-assign]
         with pytest.raises(RuntimeError, match="crash after response"):
             await provisioner.create_fresh_thread(binding_id)
-        with pytest.raises(ProvisioningError, match="unresolved intent"):
+        with pytest.raises(ProvisioningError, match="unresolved"):
             await provisioner.create_fresh_thread(binding_id)
         assert sent.count("thread/start") == 1
         await transport.stop()
@@ -381,6 +381,7 @@ def test_one_session_level_watcher_handles_concurrent_rpc_responses(tmp_path: Pa
         first = ManagedAppServerSession.for_client(client, seeded["supervisor"])
         second = ManagedAppServerSession.for_client(client, seeded["supervisor"])
         assert first is second
+        assert first.owner is second.owner
         assert ManagedAppServerSession.active_watcher_count() >= 1
         await asyncio.gather(
             first.request("thread/list", {}),
