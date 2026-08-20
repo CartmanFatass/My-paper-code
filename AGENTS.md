@@ -111,6 +111,27 @@ For every project Python command, invoke
 `python`, `py`, or `conda run` unless the assignment explicitly requires a
 different interpreter.
 
+## Stable model/cost routing invariant
+
+Model selection allocates capability only; it never changes role authority,
+scientific or technical ownership, write scope, acceptance, Git authority, or
+the two-level topology. Apply a route only to a new task or turn. Never migrate
+an active agent mid-turn. Steady Operational Root guidance is Luna-high;
+Root integration or recovery is Terra-high; novel governance is Sol-high. EM
+remains Sol-max and CM remains Sol-high. Routine bounded implementation uses
+`hmasd-implementer-terra`/Terra-high, semantics-critical implementation uses
+`hmasd-implementer`/Sol-high, and mechanical or Operator work remains Luna.
+Reviewer and Verifier are optional and risk-driven, with no routine
+Implementer+Reviewer+Verifier chain, duplicate review scope, or automatic
+re-review.
+
+There is no automatic model fallback, including on model unavailability. The
+Project Scout capacity fallback below is the only named exception. Prospective
+canaries, runtime-only audit records, promotion triggers, and CP0--CP4
+integration/rollback boundaries are defined in
+`docs/project/HMASD_AGENT_MODEL_COST_OPTIMIZATION_V1.md`; they are not a
+workflow state machine or approval system.
+
 ## Shared Project Scout route
 
 `hmasd-project-scout` is the common read-only Spark lookup utility. Root, Code

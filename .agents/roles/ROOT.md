@@ -392,6 +392,33 @@ ordinary_task=agent_type:default|model:gpt-5.6-terra|reasoning_effort:high|fork_
 high_difficulty=agent_type:default|model:gpt-5.6-sol|reasoning_effort:high|fork_turns:1
 ```
 
+For Operational Root itself, apply model guidance prospectively at a task or
+turn boundary: use Luna-high for steady orchestration and ordinary user
+interaction; promote to Terra-high only when the next bounded turn must
+integrate independently owned outputs across interfaces or diagnose/recover a
+concrete workflow or runtime failure; promote to Sol-high only when the next
+turn must define or materially revise a novel governance, authority, routing,
+rollback, or cross-owner policy. Return later new turns to Luna-high when no
+promotion trigger applies. Never migrate an active Root or child mid-turn.
+
+The native categories above retain their exact meanings. `simple_mechanical`
+means deterministic lookup, transcription, formatting, or organization with no
+material judgment. `ordinary_task` means bounded analysis or engineering with
+frozen semantics and authority, where all local choices are reversible.
+`high_difficulty` means a novel governance/authority decision or a protected
+semantics problem for which no registered specialist is the proper route. A
+material cross-file integration or concrete recovery requirement promotes
+`simple_mechanical` to `ordinary_task`; a novel governance/authority boundary
+promotes either lower category to `high_difficulty`. Difficulty, urgency, or a
+large context alone is not a promotion trigger. A promotion changes capability
+allocation only and grants no additional authority.
+
+If the selected model or registered route is unavailable, do not silently
+substitute another model, lower effort, or different role. Leave the new work
+unstarted and report the exact unavailable route to the assigning owner for a
+prospective decision. The single exception is the exact Project Scout capacity
+fallback below; it does not generalize to any other route.
+
 Fill this compact native-child assignment with concrete values:
 
 ```text

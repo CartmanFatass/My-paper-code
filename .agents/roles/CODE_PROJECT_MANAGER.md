@@ -234,6 +234,23 @@ outcome, exact ownership, protected scientific semantics, and concrete
 completion evidence. Children return evidence to CM; they do not accept code,
 change science, contact the user, or perform Git integration.
 
+For a new bounded implementation assignment, default to
+`hmasd-implementer-terra`/Terra-high when the scientific and authority
+semantics are frozen and the remaining choices are reversible routine
+engineering: ordinary source/test work, refactoring, adapters, documentation,
+configuration, or deterministic integration. Use
+`hmasd-implementer`/Sol-high when the implementation binds or can alter any
+probability, gradient, replay, recurrent-state, RNG, checkpoint, result,
+quality-interpretation, owner-authority, routing, rollback, or safety semantics,
+or compatibility with already observed data. These are exact prospective
+promotion triggers; cost, urgency, context size, or a prior worker failure is
+not. Promotion changes capability allocation only, never the assignment,
+authority, evidence burden, or acceptance owner. Existing active agents are
+never migrated mid-turn. If the selected route or model is unavailable, CM
+does not automatically fall back, retry under another model, or weaken effort;
+it reports that exact unavailable route to its invoker. The Project Scout
+capacity fallback in `AGENTS.md` is the only named exception.
+
 Use specialist tools only when they reduce a concrete risk or save meaningful
 work:
 
@@ -252,6 +269,16 @@ Reviewer, Verifier, and Scout are optional, risk-driven tools. There is no
 default Reviewer, mandatory six-phase readiness exercise, automatic re-review,
 or required separate rehearsal. CM inspects action-bearing child conclusions
 and remains the sole technical acceptance owner for its scope.
+
+Use Reviewer only for one named material design, algorithm, numerical, or
+integration-correctness risk that benefits from read-only reasoning. Use
+Verifier only for one different, proof-sized executable question about a
+concrete entry point, environment binding, or artifact lifecycle. When one risk
+could be framed either way, CM chooses one route; it does not duplicate the
+scope. Both may be used only for separately named non-overlapping risks, never
+as a routine Implementer+Reviewer+Verifier chain. A completed review is not
+automatically repeated: a new review requires a newly introduced material risk
+and an explicitly distinct scope.
 
 ## Evidence, results, and logging
 

@@ -40,6 +40,11 @@ IMPLEMENTER_PROFILES = {
     ),
 }
 IMPLEMENTER_ROLE = REPOSITORY_ROOT / ".agents" / "roles" / "IMPLEMENTER.md"
+ROOT_ROLE = REPOSITORY_ROOT / ".agents" / "roles" / "ROOT.md"
+CODE_MANAGER_ROLE = REPOSITORY_ROOT / ".agents" / "roles" / "CODE_PROJECT_MANAGER.md"
+MODEL_COST_RUNBOOK = (
+    REPOSITORY_ROOT / "docs" / "project" / "HMASD_AGENT_MODEL_COST_OPTIMIZATION_V1.md"
+)
 
 L1_PROFILES = {
     "hmasd-code-project-manager": (
@@ -394,9 +399,134 @@ def test_leaf_roles_and_profiles_explicitly_forbid_spawn_and_cross_owner_contact
         assert "return" in role and "invoker" in role
 
 
+def test_steady_surge_model_routing_policy_is_explicit() -> None:
+    router = " ".join(ROUTER.read_text(encoding="utf-8").split())
+    root = " ".join(ROOT_ROLE.read_text(encoding="utf-8").split())
+    manager = " ".join(CODE_MANAGER_ROLE.read_text(encoding="utf-8").split())
+
+    for required in (
+        "Steady Operational Root guidance is Luna-high",
+        "Root integration or recovery is Terra-high",
+        "novel governance is Sol-high",
+        "EM remains Sol-max and CM remains Sol-high",
+        "There is no automatic model fallback",
+        "Project Scout capacity fallback below is the only named exception",
+        "Never migrate an active agent mid-turn",
+        "Model selection allocates capability only",
+    ):
+        assert required in router
+
+    for required in (
+        "use Luna-high for steady orchestration",
+        "promote to Terra-high only when",
+        "promote to Sol-high only when",
+        "simple_mechanical",
+        "ordinary_task",
+        "high_difficulty",
+        "Difficulty, urgency, or a large context alone is not a promotion trigger",
+        "do not silently substitute another model",
+    ):
+        assert required in root
+
+    for required in (
+        "hmasd-implementer-terra`/Terra-high",
+        "hmasd-implementer`/Sol-high",
+        "probability, gradient, replay, recurrent-state, RNG, checkpoint, result",
+        "cost, urgency, context size, or a prior worker failure is not",
+        "Use Reviewer only for one named material",
+        "Use Verifier only for one different, proof-sized executable question",
+        "never as a routine Implementer+Reviewer+Verifier chain",
+        "A completed review is not automatically repeated",
+    ):
+        assert required in manager
+
+
+def test_model_cost_runbook_has_canaries_records_and_rollback_boundaries() -> None:
+    assert MODEL_COST_RUNBOOK.is_file()
+    runbook_raw = MODEL_COST_RUNBOOK.read_text(encoding="utf-8")
+    runbook = " ".join(runbook_raw.split())
+    for required in (
+        "cp0_root_model=populate_from_cost_script_before_cp1",
+        "cp0_root_effort=populate_from_cost_script_before_cp1",
+        "runtime/codex-semantic-mvp/agent-model-cost-routing/",
+        "quality.jsonl",
+        "join-manifest.json",
+        "first_pass_accepted",
+        "material_defect_count",
+        "unauthorized_scope_or_semantic_escape",
+        "accepting_owner",
+        "Never infer quality from prose",
+        "019fec57-cea2-7f31-8595-8e9ca929b0dd",
+        "019ff336-ddf4-7751-b1da-99757fddbf64",
+        "01a009fa-30eb-7de2-8c8d-4e93e4419070",
+        "stdlib `sqlite3` to make a runtime snapshot",
+        "DELETE FROM threads WHERE id = ?",
+        "--state-db $HistoricalStateDb",
+        "--role unlabeled_root --role hmasd-implementer --role hmasd-implementer-terra",
+        "--unit both",
+        "--cost-scope self",
+        "zero eligible quality/task-class baseline",
+        "<role>/<task_class>",
+        "Every row deleted from a runtime filtered SQLite snapshot",
+        "<join-manifest.cp0_root_model>/<join-manifest.cp0_root_effort>",
+        "A/simple_mechanical",
+        "A/ordinary_task",
+        "B/ordinary_task",
+        "$Experiment = 'A' # Set to 'A' or 'B'.",
+        "$RuntimeDir/canary-$Experiment-$TaskClass-compare.json",
+        "Prospective quality records begin only after",
+        "Each populated experiment/task-class stratum has its own sample boundary",
+        "at least 10 eligible tasks with balanced arms and at least 5 eligible tasks in each arm",
+        "20-assigned-task per-stratum cap",
+        "fewer than 5 eligible in either arm is non-passing",
+        "No undersized or failing stratum may support activation or be hidden by pooling",
+        "For experiment A, control is the exact CP0 current-Root comparator",
+        "experimental is steady Operational Root `gpt-5.6-luna/high`",
+        "For experiment B, control is `hmasd-implementer`/`gpt-5.6-sol/high`",
+        "experimental is `hmasd-implementer-terra`/`gpt-5.6-terra/high`",
+        "validate arm identity for every otherwise eligible quality row",
+        "cost script to report exactly one model/effort group per arm",
+        "A mismatch cannot count toward the per-stratum sample minimum or activation",
+        "Full activation requires every populated stratum for that route to pass separately",
+        "Do not duplicate a task",
+        "hard-roll back",
+        "CP0 baseline",
+        "CP1 Root-only",
+        "CP2 CM/leaf routing",
+        "CP3 review policy",
+        "CP4 full activation",
+        "not runtime states, approval gates, or a workflow lifecycle",
+        "Root alone performs each Git integration or reversal",
+    ):
+        assert required in runbook
+
+    assert "cp0_root_comparator=gpt-5.6-sol/high" not in runbook
+    assert "exact CP0 current-Root comparator `gpt-5.6-sol/high`" not in runbook
+    assert "10--20 future tasks total" not in runbook
+    assert "The first comparison report is valid only at 10 eligible total" not in runbook
+    assert "$EligibleThreadIds" not in runbook
+    cp0_command = next(
+        line for line in runbook_raw.splitlines()
+        if "$CostScript summary" in line and "--label cp0_current_root" in line
+    )
+    assert "--project 'C:/Projects/HMASD'" in cp0_command
+    assert "--role" not in cp0_command
+    assert "$Cp0StartLocal" in cp0_command and "$Cp0EndLocal" in cp0_command
+    assert runbook_raw.count("Remove-Item -LiteralPath") == 3
+    assert "Remove-Item -LiteralPath $RawStateDb" not in runbook_raw
+    assert runbook_raw.count("& $Python -c $SnapshotCode") == 3
+    assert runbook.count("tests/hmasd_two_level_agent_topology_test.py") >= 5
+    for prior in ("exact CP0 version", "exact CP1 versions", "exact CP2 versions", "exact CP3"):
+        assert prior in runbook
+    assert "manual cost" not in runbook.lower()
+
+
+def test_direct_run_requires_pytest_instead_of_printing_partial_success() -> None:
+    source = Path(__file__).read_text(encoding="utf-8")
+    legacy_success_marker = "HMASD_MODEL_" + "ROUTING_OK"
+    assert legacy_success_marker not in source
+    assert 'raise SystemExit("Run with pytest' in source
+
+
 if __name__ == "__main__":
-    test_verifier_registration_and_model_routing()
-    test_cpm_mechanical_registration_and_model_routing()
-    test_explorer_mechanical_registration_and_model_routing()
-    test_implementer_registration_and_model_routing()
-    print("HMASD_MODEL_ROUTING_OK")
+    raise SystemExit("Run with pytest so every model-routing policy test executes.")

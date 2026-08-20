@@ -64,20 +64,29 @@ def test_workflow_manager_surfaces_are_not_active() -> None:
 
     config = _config()
     registered = "\n".join(config["agents"].keys()).lower()
-    assert "workflow" not in registered
+    for retired in (
+        "workflowdesignmanager",
+        "workflowauditor",
+        "workflowimplementer",
+        "workflowreviewer",
+    ):
+        assert retired not in registered
+    assert "hmasdworkflowrecoverymanager" in registered
 
     router = _text("AGENTS.md").lower()
     assert "workflow_design_manager" not in router
-    assert "hmasd-workflow" not in router
+    assert "hmasd-workflow-design" not in router
     assert "wdm" not in router
 
 
 def test_root_is_the_direct_default_executor() -> None:
     router = _text("AGENTS.md")
-    assert "Root handles user interaction, task scope, final integration, Git" in router
-    assert "an ordinary non-specialist task therefore defaults to Terra-high" in router
-    assert "A simple task never requires" in router
-    assert "Root may update agent configuration and instructions directly" in router
+    root_role = _text(".agents/roles/ROOT.md")
+    assert "The operational Root alone contacts the user" in router
+    assert "performs final Git actions" in router
+    assert "Handle truly trivial one-step work directly" in root_role
+    assert "A simple task never requires" in root_role
+    assert "ordinary_task=agent_type:default|model:gpt-5.6-terra" in root_role
 
 
 def test_only_research_and_code_are_registered_domain_managers() -> None:
@@ -90,12 +99,12 @@ def test_only_research_and_code_are_registered_domain_managers() -> None:
 
 
 def test_project_scout_is_optional_and_questions_are_split() -> None:
-    router = _text("AGENTS.md")
-    role = _text(".agents/roles/PROJECT_SCOUT.md")
-    assert "optional read-only repository lookup utility" in router
+    router = " ".join(_text("AGENTS.md").split())
+    role = " ".join(_text(".agents/roles/PROJECT_SCOUT.md").split())
+    assert "common read-only Spark lookup utility" in router
     assert "Split independent owners, routes, files, or evidence families" in router
     assert "allowed_callers=root|code_project_manager|independent_research_explorer" in role
-    assert "one narrow question" in role
+    assert "exactly one narrow factual question" in role
     assert "model=gpt-5.3-codex-spark" in role
     assert "default_fork_turns=1" in role
 
@@ -110,8 +119,9 @@ def test_every_registered_specialist_leaf_is_root_callable() -> None:
 
 def test_root_native_child_prompt_and_model_routing_are_explicit() -> None:
     router = _text("AGENTS.md")
-    assert "Every registered HMASD subagent is callable directly by Root" in router
-    assert "simple_mechanical=agent_type:default|model:gpt-5.6-luna|reasoning_effort:high|fork_turns:1" in router
-    assert "ordinary_task=agent_type:default|model:gpt-5.6-terra|reasoning_effort:high|fork_turns:1" in router
-    assert "high_difficulty=agent_type:default|model:gpt-5.6-sol|reasoning_effort:high|fork_turns:1" in router
-    assert "Complete exactly one bounded task and return the result to Root" in router
+    root_role = _text(".agents/roles/ROOT.md")
+    assert "Root may directly invoke every registered subagent" in router
+    assert "simple_mechanical=agent_type:default|model:gpt-5.6-luna|reasoning_effort:high|fork_turns:1" in root_role
+    assert "ordinary_task=agent_type:default|model:gpt-5.6-terra|reasoning_effort:high|fork_turns:1" in root_role
+    assert "high_difficulty=agent_type:default|model:gpt-5.6-sol|reasoning_effort:high|fork_turns:1" in root_role
+    assert "Complete exactly one bounded task and return the result to Root" in root_role
