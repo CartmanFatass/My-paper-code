@@ -41,7 +41,11 @@ def test_ack_intake_and_cross_binding_reject(tmp_path: Path) -> None:
         messages=[message],
     )
     mailbox.mark_delivered(message.message_id)
-    batches.set_state(str(batch["wake_batch_id"]), state="COMPLETED", app_server_turn_id="turn_ack")
+    wake_id = str(batch["wake_batch_id"])
+    batches.set_state(wake_id, state="SUBMITTING", expected_state="PREPARED")
+    batches.set_state(wake_id, state="SUBMITTED", expected_state="SUBMITTING", app_server_turn_id="turn_ack")
+    batches.set_state(wake_id, state="ACTIVE", expected_state="SUBMITTED")
+    batches.set_state(wake_id, state="COMPLETED", expected_state="ACTIVE")
     from tests.codex_supervisor.helpers import record_completed_agent_item
 
     record_completed_agent_item(

@@ -200,13 +200,18 @@ class WakeScheduler:
         turn = result.get("turn") if isinstance(result.get("turn"), dict) else {}
         turn_id = turn.get("id")
         now = _now()
+        self.batches.set_state(
+            wake_batch_id,
+            state=WakeBatchState.SUBMITTED.value,
+            app_server_turn_id=turn_id,
+            submitted_at=now,
+            expected_state=WakeBatchState.SUBMITTING.value,
+        )
         updated = self.batches.set_state(
             wake_batch_id,
             state=WakeBatchState.ACTIVE.value,
-            app_server_turn_id=turn_id,
-            submitted_at=now,
             observed_at=now,
-            expected_state=WakeBatchState.SUBMITTING.value,
+            expected_state=WakeBatchState.SUBMITTED.value,
         )
         if updated["state"] == WakeBatchState.INCIDENT.value:
             raise WakeSchedulerError("wake turn/start incident; do not retry")
