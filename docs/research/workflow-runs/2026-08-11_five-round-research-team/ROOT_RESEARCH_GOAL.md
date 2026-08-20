@@ -1,14 +1,13 @@
 # Root Research Goal
 
-## Active portfolio decision index — 2026-08-15
+## Active portfolio decision index — 2026-08-20
 
-The operative allocation cut is the final section, **2026-08-15 VNFC-B4
-post-definition portfolio adjudication**. Its complete owner decision is
-`VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`. It supersedes
-the prior RISP-B3/ONLGR target-host, revisit-definition, SGSP/RISP and overnight allocation cuts
-(`OVERNIGHT_POST_RESULT_PORTFOLIO_CAMPAIGN_ADJUDICATION_20260814.md`) for
-current allocation only; all earlier observations, frozen objects, claim
-ceilings and revisit conditions remain historical evidence.
+The operative allocation cut is the final section, **2026-08-20 SCDMP r07
+Stage-A post-result adjudication**. Its complete owner decision is
+`SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md`.
+It supersedes the 2026-08-19 SGSP/VNFC-Q0 cut only for current allocation;
+SGSP, RISP and RCLE empirical decisions, VNFC/ONLGR no-current decisions and
+all earlier frozen evidence and claim ceilings remain preserved.
 
 No historical child, CM, Operator, transport or recovery label is a scientific
 stop. A direction receives investment or no current investment only through an
@@ -16,11 +15,14 @@ explicit portfolio judgment based on scientific value, identifiability,
 redundancy, total cost and opportunity cost, with a concrete reconsideration
 condition. There is no required direction count or action-count quota.
 
-The current empirical investment is `RISP-B3-TRG-R03-FULL-PANEL`. Current definition-only
-investments are `VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION|SGSP-TARGET-BOUND-TWO-ZONE-DEFINITION|RCLE-COARSE-PERSISTENT-COMMITMENT-DEFINITION|SCDMP-TARGET-BOUND-ORDER-TO-VALUE-DEFINITION`.
-The exact `VNFC-B4-SCIENCE-20260815-05` object is complete, immutable and has
-no current empirical investment; the new VNFC definition is a distinct
-target-exclusive post-churn recovery object.
+Current empirical investments are
+`RISP-B3-TRG-R03-FULL-PANEL|RCLE-CPC-R04-FULL-PANEL|SGSP-RG2Z-R03-FULL-PANEL`.
+The sole current definition-only investment is
+`SCDMP-TBOV-SUPPORT-REPRESENTATION-FACTORIAL-CHECKPOINT-DEFINITION`; there is
+no current enabling-construction investment. Exact SCDMP r07 Stage A is
+complete under `MODIFY-CHECKPOINT`, and Stage B is ineligible and unauthorized.
+ONLGR host-card and VNFC full-graph reachability/certificate work are
+no-current with separate revisit conditions.
 
 ## Current two-session authority note
 
@@ -2248,10 +2250,11 @@ These are revisit conditions, not authorization to alter the card or restore
 ONLGR-B2. Any future investment must use the complete HEADLAND-90 panel and
 its stated gates; it must not be inferred from engineering availability alone.
 
-## 2026-08-15 VNFC-B4 post-definition portfolio adjudication
+## HISTORICAL_NONOPERATIVE — 2026-08-15 VNFC-B4 post-definition portfolio adjudication
 
-This is the current portfolio-owner delta, recorded in
-`VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`. It supersedes
+This was the then-current portfolio-owner delta, recorded in
+`VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`, and is superseded
+for allocation by the later SCDMP-TBOV r05 Stage-A cut. It superseded
 earlier VNFC-B4 and current-allocation entries only for live allocation; the
 exact B4 object, its evidence and its claim ceiling remain complete,
 immutable and non-rerunnable.
@@ -2299,3 +2302,185 @@ cheaper direct variable-`N` definition remains and B4 is the highest-
 information option. These conditions reopen a decision; they do not authorize
 construction automatically. No auto action, WIP/order/backfill/fusion,
 second surface or UAV action follows from this section.
+
+## 2026-08-15 SCDMP-TBOV-r05 Stage A empirical portfolio adjudication
+
+This is the newest controlling portfolio cut, recorded in
+`SCDMP_TBOV_R05_STAGE_A_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`. It
+supersedes the VNFC cut for current allocation only; all prior evidence,
+claim ceilings and revisit conditions remain preserved.
+
+- **Current empirical investments:**
+  `RISP-B3-TRG-R03-FULL-PANEL|SCDMP-TBOV-R05-STAGE-A`.
+- **Current definition-only investments:**
+  `VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION|SGSP-TARGET-BOUND-TWO-ZONE-DEFINITION|RCLE-COARSE-PERSISTENT-COMMITMENT-DEFINITION`.
+- Authorize construction plus complete atomic Stage A only: `6,000` updates
+  and `56,151,040` model examples. Stage A is an identical-checkpoint
+  correct-versus-reversed selector/triage for selecting, modifying or removing
+  one named order treatment; it is not value evidence.
+- Only `SELECT-ORDER-TR` or `MODIFY-TO-ORDER-Q` may open a later separate Stage
+  B decision with fresh independent coordinates. All other branches prohibit
+  Stage B without implying family-wide deletion or automatic revision. Stage B remains
+  unconstructed, unbound and unleased.
+- Full prospective cost is `36,000` logical AdamW steps, about `34.5B`
+  model-example evaluations, `100--420` elapsed host hours, and `4--8`
+  engineering days plus review/repair. No wall, attempt, provider or
+  engineering fact is a science stop.
+
+Stage A can support only exact-object physical-opportunity, checkpoint-
+qualification and literal-correct-versus-reversed path-fidelity conclusions;
+it supplies no task-value or trained-treatment claim. Only a later, separately
+authorized complete Stage B could at most support the exact deterministic
+fixed-`N=4`, finite-budget, held-out-complete-word and held-out-true-boundary
+fixed/switch-`k` package-value claim under the frozen qualifications. No
+arbitrary-`k`, variable-`N`, unique mediation, second-surface, cross-`N×k`,
+UAV, safety or real-flight claim is authorized. Do not create
+WIP/order/backfill/fusion, a second surface or UAV work. The strongest
+alternative is target-adapted finite supervision and
+optimizer geometry (visible words, optimization-visible p6/p8,
+auxiliary/residual curvature, clipping and AdamW history) explaining a positive
+contrast without unique semigroup mediation. Every complete Stage A branch
+returns for owner intake; only legal selection/modification can make Stage B
+eligible for a new portfolio decision, and it is never automatic.
+
+## 2026-08-15 RCLE-CPC-r04 and VNFC-TEPR-Q0 portfolio cut
+
+This is the final operative portfolio delta, recorded in
+`RCLE_CPC_R04_EMPIRICAL_VNFC_TEPR_Q0_PORTFOLIO_ADJUDICATION_20260815.md`.
+It supersedes the SCDMP-TBOV-r05 Stage-A cut only for live allocation;
+SCDMP evidence, branch actions and its Stage-B prohibition remain unchanged.
+No evidence, threshold, coordinate, claim or cost transfers between directions.
+
+### Current allocation
+
+- **Current empirical investments:** `RISP-B3-TRG-R03-FULL-PANEL|SCDMP-TBOV-R05-STAGE-A|RCLE-CPC-R04-FULL-PANEL`.
+- **Current enabling construction:** `VNFC-TEPR-FIXED-FH-QUOTIENT-AND-COST-CERTIFICATE-Q0`.
+- **Current definition-only investment:** `SGSP-TARGET-BOUND-TWO-ZONE-DEFINITION`.
+- **ONLGR:** no-current-investment unchanged; no automatic backfill, WIP, order, fusion, cross-`N×k`, second-surface or UAV action.
+
+### RCLE-CPC-r04 empirical investment
+
+`RCLE-CPC-SCIENCE-20260815-04` is Pro-closed, EM-intaken and CM-statically feasible. Root may reuse the pair through unchanged-science construction, static conformance, a direction-scoped lease and the complete frozen dual-corridor held-out-roster panel, followed by technical acceptance, EM intake and same-direction Pro result convergence. The point runtime forecast is 15–30 one-core wall minutes; 30–45 minutes is only the prudent lease envelope and never a scientific stop. Prospective engineering cost is 4–6 focused engineer-days.
+
+The maximum claim is exact finite-task package value or robustness only: no arbitrary `N`, transfer, UAV, safety or deployment claim. The strongest alternative is finite-budget active-subspace/representation-search geometry with centralized clue aggregation rather than uniquely binary cardinality. Every complete-panel result returns for Portfolio; no partial interpretation, quota, order gate or automatic successor is authorized.
+
+### VNFC-TEPR-Q0 enabling construction only
+
+`VNFC-TEPR-SCIENCE-20260815-04` is Pro-closed, EM-intaken and CM-statically bindable, but exact FIXED-FH certification carries material opportunity cost. Authorize only the pre-activity finite-stage construction and cost/spec record `VNFC-TEPR-FIXED-FH-QUOTIENT-AND-COST-CERTIFICATE-Q0`: finite solver/replay specification, quotient or bisimulation certificate, reduced-horizon agreement, and full-query cost bound. Q0 must return `PASS`, a concrete counterexample, cost separation, or complete-evidence-only indeterminate; every branch returns to Portfolio. It does not authorize a full solver, empirical VNFC panel, coordinates, training, evaluation, lease or compute.
+
+The leading alternative is capacity-one matching plus finite-budget pruning/regularization and surplus-`N=7` reserves; the FIXED-FH outside-class limitation is separate. Root-relayed 50--98 engineer-weeks, `1.1e5--1.01e7` CPU-hours and `>1e8` tail are not independently audited planning evidence and are not Q0 cost. The eventual ceiling is target-specific finite-budget post-loss `N=7` recovery over registered controls only; no arbitrary-`N`, transfer, UAV, safety or deployment claim follows.
+
+RCLE and VNFC continue independently. Their complete-panel and Q0 packets are the only return boundaries; engineering, provider and resource facts alone do not change allocation.
+
+## 2026-08-19 SGSP RG2Z r03 empirical / VNFC TEPR post-Q0 portfolio cut
+
+The controlling record is
+`SGSP_RG2Z_R03_EMPIRICAL_VNFC_TEPR_POST_Q0_PORTFOLIO_ADJUDICATION_20260819.md`.
+It consumes the two directions independently and transfers no evidence, cost,
+threshold, coordinate, acceptance or claim.
+
+### Current allocation
+
+- **Current empirical investments:** `RISP-B3-TRG-R03-FULL-PANEL|SCDMP-TBOV-R05-STAGE-A|RCLE-CPC-R04-FULL-PANEL|SGSP-RG2Z-R03-FULL-PANEL`.
+- **Current definition-only investments:** none.
+- **Current enabling construction:** none; VNFC Q0 is complete.
+- **No-current:** ONLGR host-card and `VNFC-TEPR-FULL-GRAPH-REACHABILITY-AND-COST-CERTIFICATE`, each with independent revisit conditions.
+
+### SGSP-RG2Z-r03 empirical investment
+
+Invest the immutable Pro-closed, EM-intaken and CM-feasible update-512 object.
+Root may reuse the SGSP pair through unchanged-science construction,
+conformance, fresh disjoint coordinate binding, technical acceptance, a later
+direction-scoped lease, the complete 24-seed panel, EM intake and same-Pro
+result convergence. The exact shared policy trains only at `N={9,15}` and is
+deployed without adaptation at `N={6,21}` against the competent strictly
+containing matched EDGE learner.
+
+The projected 4–7 CM days and 35–100 CPU core-hours, or optional 6–18 GPU
+elapsed hours, are planning facts only. The experiment is worth that bounded
+cost because one complete result retains or declines to retain the fixed
+physical prior for a direct variable-`N` target. The claim ceiling is the exact
+static RIDGEGATE-2Z update-512 package. Finite-budget regularization,
+curvature, and Adam preconditioning remain the strongest alternative to
+semantic truth. No partial result, second budget, second surface, fusion, UAV
+work, or automatic successor is authorized.
+
+### VNFC Q0 complete; no current full-graph investment
+
+Q0 validly demonstrates the exact reduced-domain quotient/checker method on
+horizons `1..3`, 64 agreement rows, 16 states, 224 edges and a checked 12-class
+partition. It remains technical evidence only. It measures no full-horizon
+`K_1..K_6` key counts or compression rate and therefore establishes neither
+full-solver feasibility nor empirical value.
+
+Do not open the full-graph reachability/certificate successor. The proposed
+census has no current finite termination/cost artifact distinct from resolving
+the unknown full graph itself, while direct variable-`N` value remains several
+expensive layers downstream. This no-current decision rests on decision value,
+identifiability, total cost and opportunity cost—not missing code, wall time,
+attempt, provider, runtime, WIP or a direction limit.
+
+Revisit only after a checked analytic factorization supplies finite full-
+horizon key/edge/memory/work bounds without full enumeration; a finite
+audited stage/full-solver cost is frozen; reusable exact infrastructure reduces
+incremental cost by at least an order of magnitude without weakening
+`FIXED-FH`; the exact target becomes decision-critical; or lower-cost
+variable-`N` routes become nonidentifying together with one of the preceding
+bounding facts. Every revisit returns for a new Portfolio decision and does
+not automatically authorize a full graph, solver, host, coordinates, training,
+evaluation or lease.
+
+## 2026-08-20 SCDMP r07 Stage-A post-result portfolio cut
+
+The controlling record is
+`SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md`.
+It consumes only the complete technically accepted, EM-intaken and
+same-conversation Pro-converged r07 Stage-A evidence.
+
+### Exact result and current allocation
+
+Exact `SCDMP-TBOV-SCIENCE-20260815-07` is complete, immutable and consumed.
+All nine physical-order opportunity lower bounds, the target competence bound,
+all 270 coordinate-variance gates and all 30 action-sensitivity gates passed.
+Five of ten independent untouched fit-support ratios exceeded the frozen
+per-seed `0.65` ceiling, so `COMP_A=false` and the sole legal branch is
+`MODIFY-CHECKPOINT`. Downstream correct-versus-reversed quantities are
+descriptive only. No order treatment was selected and Stage B remains
+ineligible.
+
+- **Current empirical investments:**
+  `RISP-B3-TRG-R03-FULL-PANEL|RCLE-CPC-R04-FULL-PANEL|SGSP-RG2Z-R03-FULL-PANEL`.
+- **Current definition-only investment:**
+  `SCDMP-TBOV-SUPPORT-REPRESENTATION-FACTORIAL-CHECKPOINT-DEFINITION`.
+- **Current enabling construction:** none.
+- **No-current:** ONLGR host-card and VNFC full-graph work under their existing
+  independent revisit conditions.
+
+### SCDMP definition-only continuation
+
+Invest only through a fresh meaning-complete 2×2 checkpoint definition. Cross
+the current versus a support-stratified equal-row allocation with the current
+versus one exactly specified improved segment representation. Retain 600
+logical AdamW steps, the optimizer, ten fresh independent seeds, the per-seed
+`0.65` competence ceiling and untouched evaluation. Freeze outcomes that
+distinguish a support effect, representation-package effect, interaction, or
+continued nonidentification and name at most one checkpoint law eligible for a
+later independent relation assay.
+
+The authorized endpoint is existing-SCDMP-Pro closure, a separate independent
+Gemini innovation consultation, EM intake, CM static bindability/observability/
+comparator feasibility and full prospective cost. No source, construction,
+tests, probes, coordinates, training, evaluation, checkpoint, empirical
+factorial or lease is authorized. No r07 seed, checkpoint, coordinate, assay
+quantity, threshold change, extra step, replacement seed or architecture menu
+may enter the new object.
+
+The current claim remains exact fixed-`N=4` physical-order opportunity plus
+checkpoint nonidentification only. A later factorial could at most identify a
+checkpoint-package competence effect. It cannot identify order direction or
+task value. Stage B would still require a fresh relation assay that selects one
+treatment and a separate Portfolio decision with fresh coordinates.
+
+This is a decision-value investment, not quota backfill. RISP, RCLE and SGSP
+continue independently; do not create WIP/order, fusion, cross-`N×k`, second-
+surface or UAV-production gates.

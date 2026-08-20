@@ -247,14 +247,41 @@ def _worker_loop(
                 metric_present[global_idx].fill(False)
             return env_obs, info
 
+        # A seeded vector reset establishes a deterministic, per-environment
+        # episode stream.  Keep this state in the worker because terminal
+        # resets happen while handling ``step`` and must not depend on which
+        # worker happens to finish first.
+        next_auto_reset_seeds: List[Optional[int]] = [None] * len(envs)
+        auto_reset_seed_stride: Optional[int] = None
+
         while True:
             command, payload = conn.recv()
 
             if command == "reset":
                 return_obs = bool(payload.get("return_obs", False)) if isinstance(payload, dict) else False
+                reset_seeds = payload.get("seeds") if isinstance(payload, dict) else None
+                seed_stride = payload.get("seed_stride") if isinstance(payload, dict) else None
+                if reset_seeds is None:
+                    reset_seeds = [None] * len(envs)
+                if len(reset_seeds) != len(envs):
+                    raise ValueError(
+                        f"Worker {worker_id} received {len(reset_seeds)} reset seeds for {len(envs)} environments"
+                    )
+                if any(seed is not None for seed in reset_seeds):
+                    if seed_stride is None or int(seed_stride) <= 0:
+                        raise ValueError("Seeded resets require a positive seed_stride")
+                    auto_reset_seed_stride = int(seed_stride)
+                else:
+                    auto_reset_seed_stride = None
                 results = []
                 for local_idx in range(len(envs)):
-                    env_obs, info = reset_env(local_idx)
+                    reset_seed = reset_seeds[local_idx]
+                    env_obs, info = reset_env(local_idx, seed=reset_seed)
+                    next_auto_reset_seeds[local_idx] = (
+                        None
+                        if reset_seed is None
+                        else int(reset_seed) + int(auto_reset_seed_stride)
+                    )
                     compact_info = _compact_info(info, metrics_mode)
                     compact_info.setdefault("state", states[global_indices[local_idx]].copy())
                     if return_obs:
@@ -286,7 +313,16 @@ def _worker_loop(
                         compact_info["next_state"] = next_states[global_idx].copy()
                     if done:
                         has_terminal[global_idx] = True
-                        _, reset_info = reset_env(local_idx, reset_step_outputs=False)
+                        auto_reset_seed = next_auto_reset_seeds[local_idx]
+                        _, reset_info = reset_env(
+                            local_idx,
+                            seed=auto_reset_seed,
+                            reset_step_outputs=False,
+                        )
+                        if auto_reset_seed is not None:
+                            if auto_reset_seed_stride is None:
+                                raise RuntimeError("Seeded auto-reset is missing its seed stride")
+                            next_auto_reset_seeds[local_idx] = auto_reset_seed + auto_reset_seed_stride
                         reset_states[global_idx] = states[global_idx]
                         if metrics_mode == "full":
                             compact_info["terminal_observation"] = terminal_observations[global_idx].copy()
@@ -491,9 +527,35 @@ class ShardedSubprocVecEnv(VecEnv):
             raise RuntimeError(f"ShardedSubprocVecEnv worker failed: {payload}")
         return payload
 
-    def reset(self):
-        for conn in self._parent_conns:
-            conn.send(("reset", {"return_obs": False}))
+    def _resolve_reset_seeds(self, seed: Optional[int]) -> List[Optional[int]]:
+        """Return the per-env seeds for one explicit vector reset.
+
+        ``VecEnv.seed(base)`` queues ``base + env_index`` for the next reset.
+        The public ``reset(seed=base)`` form offers the same behavior without
+        requiring a separate queuing call.  A reset without either form keeps
+        the historic unseeded behavior.
+        """
+        if seed is not None:
+            base_seed = int(seed)
+            seeds: List[Optional[int]] = [base_seed + env_idx for env_idx in range(self.num_envs)]
+        else:
+            seeds = list(self._seeds)
+        self._reset_seeds()
+        return seeds
+
+    def reset(self, seed: Optional[int] = None):
+        reset_seeds = self._resolve_reset_seeds(seed)
+        for conn, global_indices in zip(self._parent_conns, self._worker_global_indices):
+            conn.send(
+                (
+                    "reset",
+                    {
+                        "return_obs": False,
+                        "seeds": [reset_seeds[global_idx] for global_idx in global_indices],
+                        "seed_stride": self.num_envs,
+                    },
+                )
+            )
         worker_results = [self._check_worker_response(conn.recv()) for conn in self._parent_conns]
         self.reset_infos = [{} for _ in range(self.num_envs)]
         for global_indices, results in zip(self._worker_global_indices, worker_results):

@@ -14,9 +14,12 @@ from ha_ctse_process.variable_roster_event import (
     ORDINARY_PRODUCTION_ACTION_PATH,
     PRODUCTION_ACTION_PATHS,
     VariableRosterEventCore,
+    _pack_event_high_replay,
+    _replay_packed_event_token,
 )
 from ha_ctse_process.variable_roster_event_models import EventCommitmentPolicy
 from ha_ctse_process.variable_roster_event_types import (
+    ClosedEventRow,
     LifecycleRecord,
     PartnerInteractionHistory,
     PartnerInteractionRow,
@@ -117,6 +120,46 @@ def _complete_evidence() -> dict[str, bool]:
     return {name: True for name in mssr.RETAINED_EVIDENCE_FIELDS}
 
 
+def _mssr_replay_fixture():
+    evidence, _owner, core, _right = mssr._factory_triplet()
+    assert evidence == {
+        "factory_available": True,
+        "factory_identity": True,
+        "path_bound": True,
+        "factory_error": None,
+    }
+    history = mssr._drive_history(core, mssr.POSITIVE_HISTORY_SOURCE_OBS)
+    row = core.high_ledger[-1]
+    assert row.owner_lifecycle_key == mssr.OWNER
+    retained_p = float(history["historical_write"]["next_p"])
+    assert row.authenticated_partner_p == retained_p
+    closed = ClosedEventRow(
+        lifecycle_key=row.owner_lifecycle_key,
+        membership_epoch=row.membership_epoch,
+        policy_version=row.policy_version,
+        actor_valid=True,
+        start_time=row.physical_event_time,
+        end_time=row.physical_event_time + 1,
+        elapsed_physical_time=1,
+        discounted_reward=0.0,
+        old_value=row.old_owner_value,
+        bootstrap_value=0.0,
+        bootstrap_discount=0.0,
+        return_target=row.old_owner_value,
+        old_log_probability=row.old_token_log_probability,
+        token_ledger_index=len(core.high_ledger) - 1,
+        boundary_kind="ORDINARY_BOUNDARY",
+    )
+    packed = _pack_event_high_replay(
+        core,
+        closed,
+        row,
+        normalized_advantage=0.0,
+        raw_advantage=0.0,
+    )
+    return core, row, packed
+
+
 def test_registered_probe_constructs_factories_but_executes_no_policy(
     monkeypatch: pytest.MonkeyPatch,
 ):
@@ -195,6 +238,85 @@ def test_selective_partition_is_consumed_not_merely_labeled():
     assert not torch.equal(baseline, logits(s=1.0))
     assert not torch.equal(baseline, logits(p=1.0))
     assert not torch.equal(baseline, logits(f=1.0))
+
+
+@requires_factories
+def test_all_mssr_replay_paths_reuse_retained_p_and_first_action_head(
+    monkeypatch: pytest.MonkeyPatch,
+):
+    core, row, packed = _mssr_replay_fixture()
+    first_calls: list[float] = []
+    original_first_logits = EventCommitmentPolicy.first_logits
+
+    def tracked_first_logits(self, *args, **kwargs):
+        partition = kwargs["partition"]
+        first_calls.append(float(partition.partner_history.detach().cpu().item()))
+        return original_first_logits(self, *args, **kwargs)
+
+    def forbidden_ordinary_logits(*_args, **_kwargs):
+        raise AssertionError("MSSR replay called the ordinary post-recurrence head")
+
+    monkeypatch.setattr(EventCommitmentPolicy, "first_logits", tracked_first_logits)
+    monkeypatch.setattr(EventCommitmentPolicy, "logits", forbidden_ordinary_logits)
+
+    probabilities = core.replay_token_distribution(row, summary_source="working")
+    replay_logp, _value, _entropy = core.replay_event_token(row)
+    packed_logp, _packed_value, _packed_entropy = _replay_packed_event_token(packed)
+
+    assert probabilities == pytest.approx(row.direct_probabilities, abs=1.0e-7)
+    assert float(replay_logp.detach().cpu()) == pytest.approx(
+        row.old_token_log_probability, abs=1.0e-7
+    )
+    assert float(packed_logp.detach().cpu()) == pytest.approx(
+        row.old_token_log_probability, abs=1.0e-7
+    )
+    expected_tensor_p = float(np.float32(row.authenticated_partner_p))
+    assert first_calls == [expected_tensor_p] * 3
+
+
+@requires_factories
+@pytest.mark.parametrize(
+    "invalid_p",
+    [None, np.nan, np.inf, -1.0001, 1.0001, True, "0.25"],
+)
+def test_mssr_replay_fails_closed_without_valid_retained_pre_token_p(invalid_p):
+    core, row, _packed = _mssr_replay_fixture()
+    invalid_row = replace(row, authenticated_partner_p=invalid_p)
+    closed = ClosedEventRow(
+        lifecycle_key=invalid_row.owner_lifecycle_key,
+        membership_epoch=invalid_row.membership_epoch,
+        policy_version=invalid_row.policy_version,
+        actor_valid=True,
+        start_time=invalid_row.physical_event_time,
+        end_time=invalid_row.physical_event_time + 1,
+        elapsed_physical_time=1,
+        discounted_reward=0.0,
+        old_value=invalid_row.old_owner_value,
+        bootstrap_value=0.0,
+        bootstrap_discount=0.0,
+        return_target=invalid_row.old_owner_value,
+        old_log_probability=invalid_row.old_token_log_probability,
+        token_ledger_index=len(core.high_ledger) - 1,
+        boundary_kind="ORDINARY_BOUNDARY",
+    )
+    invalid_packed = _pack_event_high_replay(
+        core,
+        closed,
+        invalid_row,
+        normalized_advantage=0.0,
+        raw_advantage=0.0,
+    )
+
+    operations = (
+        lambda: core.replay_token_distribution(
+            invalid_row, summary_source="working"
+        ),
+        lambda: core.replay_event_token(invalid_row),
+        lambda: _replay_packed_event_token(invalid_packed),
+    )
+    for operation in operations:
+        with pytest.raises(ValueError, match="retained pre-token authenticated P"):
+            operation()
 
 
 @requires_factories

@@ -330,6 +330,53 @@ def test_native_loader_stages_the_exact_uav_source() -> None:
     assert staged_source.read_bytes() == backend._SOURCE.read_bytes()
 
 
+@pytest.mark.skipif(os.name != "nt", reason="Windows toolchain environment contract")
+def test_windows_toolchain_environment_is_restored_after_success(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    before = dict(os.environ)
+    module = type("FakeNativeModule", (), {})()
+
+    def fake_configure() -> None:
+        os.environ["PATH"] = "temporary-toolchain-path"
+        os.environ["INCLUDE"] = "temporary-include"
+        os.environ["LIB"] = "temporary-lib"
+        os.environ["VSCMD_ARG_TGT_ARCH"] = "x64"
+
+    monkeypatch.setattr(backend, "_configure_windows_toolchain", fake_configure)
+    monkeypatch.setattr(backend, "_build_identity", lambda: "test-identity")
+    monkeypatch.setattr(
+        backend, "load_source_keyed_extension", lambda **_kwargs: module
+    )
+
+    assert backend.load_uav_cpp_backend(build_root=tmp_path) is module
+    assert dict(os.environ) == before
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows toolchain environment contract")
+def test_windows_toolchain_environment_is_restored_after_failure(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    before = dict(os.environ)
+
+    def fake_configure() -> None:
+        os.environ["PATH"] = "temporary-toolchain-path"
+        os.environ["INCLUDE"] = "temporary-include"
+        os.environ["LIBPATH"] = "temporary-libpath"
+        os.environ["WindowsSdkDir"] = "temporary-sdk"
+
+    def fail_load(**_kwargs):
+        raise extension_cache.CppExtensionLoadFailed("synthetic build failure")
+
+    monkeypatch.setattr(backend, "_configure_windows_toolchain", fake_configure)
+    monkeypatch.setattr(backend, "_build_identity", lambda: "test-identity")
+    monkeypatch.setattr(backend, "load_source_keyed_extension", fail_load)
+
+    with pytest.raises(backend.UAVCppBackendUnavailable, match="failed to build/load"):
+        backend.load_uav_cpp_backend(build_root=tmp_path)
+    assert dict(os.environ) == before
+
+
 def test_shared_extension_loader_stages_once_and_caches_module(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -360,10 +407,44 @@ def test_shared_extension_loader_stages_once_and_caches_module(
     assert first is module
     assert second is module
     assert len(calls) == 1
-    assert calls[0]["name"] == "hmasd_test_module"
+    assert str(calls[0]["name"]).startswith("hmasd_test_module_")
     assert calls[0]["extra_cflags"] == ["-O3"]
-    staged_source = tmp_path / "build-root" / "build_identity" / "staged_kernel.cpp"
+    staged_source = Path(calls[0]["sources"][0])
     assert staged_source.read_bytes() == source.read_bytes()
+
+
+def test_shared_extension_loader_invalidates_same_process_cache_on_source_change(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    source = tmp_path / "mutable_kernel.cpp"
+    source.write_bytes(b"// version one\n")
+    calls: list[dict[str, object]] = []
+
+    def fake_load(**kwargs: object) -> object:
+        calls.append(kwargs)
+        return type(f"FakeModule{len(calls)}", (), {})()
+
+    monkeypatch.setattr("torch.utils.cpp_extension.load", fake_load)
+    common = dict(
+        cache_namespace="source_mutation_test",
+        identity="intentionally_stale_identity",
+        root=tmp_path / "source-mutation-build",
+        build_directory_name="build_identity",
+        source=source,
+        staged_source_name="staged_kernel.cpp",
+        module_name="hmasd_source_mutation_test",
+        compiler_flags=("-O3",),
+        verbose=False,
+    )
+    first = extension_cache.load_source_keyed_extension(**common)
+    source.write_bytes(b"// version two\n")
+    second = extension_cache.load_source_keyed_extension(**common)
+
+    assert first is not second
+    assert len(calls) == 2
+    assert calls[0]["name"] != calls[1]["name"]
+    assert Path(calls[0]["sources"][0]).read_bytes() == b"// version one\n"
+    assert Path(calls[1]["sources"][0]).read_bytes() == b"// version two\n"
 
 
 @pytest.mark.parametrize(

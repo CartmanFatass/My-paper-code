@@ -1,19 +1,36 @@
 import torch
 import numpy as np
 import time
+import copy
 from collections import deque
 import random
 from hmasd.logging import main_logger
 from hmasd.process_exploration import SkillProcessOutcomeExtractor
 
+
+def clone_replay_data(value):
+    """Detach replay data from caller-owned mutable storage recursively."""
+    if torch.is_tensor(value):
+        return value.detach().clone()
+    if isinstance(value, np.ndarray):
+        return value.copy()
+    if isinstance(value, dict):
+        return {clone_replay_data(key): clone_replay_data(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [clone_replay_data(item) for item in value]
+    if isinstance(value, tuple):
+        return tuple(clone_replay_data(item) for item in value)
+    return copy.deepcopy(value)
+
 class ReplayBuffer:
     """经验回放缓冲区，用于存储和采样训练数据"""
-    def __init__(self, capacity):
+    def __init__(self, capacity, rng_seed=0):
         self.buffer = deque(maxlen=capacity)
         self.capacity = capacity
         self._total_added = 0
         self._total_sampled = 0
         self._structure_validated = False
+        self._rng = random.Random(int(rng_seed))
     
     def push(self, experience):
         """
@@ -22,13 +39,13 @@ class ReplayBuffer:
         参数:
             experience: 经验元组，或参数列表(通过*args收集的多个参数)
         """
-        if not isinstance(experience, tuple):
+        if not isinstance(experience, (tuple, dict)):
             experience = (experience,)
 
         if len(self.buffer) >= self.capacity:
             self._total_added += 1
 
-        self.buffer.append(experience)
+        self.buffer.append(clone_replay_data(experience))
         
     def clear(self):
         """清空缓冲区"""
@@ -39,7 +56,7 @@ class ReplayBuffer:
     
     def sample(self, batch_size):
         """从缓冲区中随机采样一批经验"""
-        sampled_batch = random.sample(self.buffer, min(len(self.buffer), batch_size))
+        sampled_batch = self._rng.sample(self.buffer, min(len(self.buffer), batch_size))
         self._total_sampled += len(sampled_batch)
         
         # 验证样本结构
@@ -49,6 +66,98 @@ class ReplayBuffer:
             self._structure_validated = True
             
         return sampled_batch
+
+    def get_rng_state(self):
+        return self._rng.getstate()
+
+    def set_rng_state(self, state):
+        restored = random.Random()
+        try:
+            restored.setstate(state)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("invalid ReplayBuffer RNG state") from exc
+        self._rng = restored
+
+    def state_dict(self):
+        """Return the complete replay state required for an exact continuation."""
+        return {
+            "version": 1,
+            "capacity": self.capacity,
+            "buffer": copy.deepcopy(list(self.buffer)),
+            "total_added": self._total_added,
+            "total_sampled": self._total_sampled,
+            "structure_validated": self._structure_validated,
+            "rng_state": self.get_rng_state(),
+        }
+
+    def load_state_dict(self, state):
+        required = {
+            "version", "capacity", "buffer", "total_added", "total_sampled",
+            "structure_validated", "rng_state",
+        }
+        if not isinstance(state, dict) or not required.issubset(state):
+            raise ValueError("ReplayBuffer checkpoint is missing strict continuation state")
+        if state["version"] != 1:
+            raise ValueError("unsupported ReplayBuffer checkpoint version")
+        if int(state["capacity"]) != int(self.capacity):
+            raise ValueError("ReplayBuffer checkpoint capacity does not match runtime topology")
+        rows = state["buffer"]
+        if not isinstance(rows, list) or len(rows) > self.capacity:
+            raise ValueError("invalid ReplayBuffer checkpoint contents")
+        for name in ("total_added", "total_sampled"):
+            if not isinstance(state[name], (int, np.integer)) or int(state[name]) < 0:
+                raise ValueError(f"invalid ReplayBuffer {name}")
+        if not isinstance(state["structure_validated"], (bool, np.bool_)):
+            raise ValueError("invalid ReplayBuffer structure-validation flag")
+        self.set_rng_state(state["rng_state"])
+        self.buffer = deque(copy.deepcopy(rows), maxlen=self.capacity)
+        self._total_added = int(state["total_added"])
+        self._total_sampled = int(state["total_sampled"])
+        self._structure_validated = bool(state["structure_validated"])
+
+    def sample_torch(self, batch_size, device):
+        """Sample GNN-HMASD rows whose GAE was frozen before shuffling."""
+        sampled_batch = self.sample(batch_size)
+        if not sampled_batch:
+            return None
+        required = {
+            "obs",
+            "next_obs",
+            "action",
+            "reward",
+            "done",
+            "old_log_prob",
+            "role",
+            "old_value",
+            "advantage",
+            "return",
+            "trajectory_id",
+            "timestep",
+        }
+        if any(not isinstance(row, dict) or not required.issubset(row) for row in sampled_batch):
+            raise ValueError(
+                "GNN replay rows must be trajectory-finalized dictionaries with frozen GAE"
+            )
+
+        def tensor_column(values, *, dtype):
+            if torch.is_tensor(values[0]):
+                return torch.stack(
+                    [value.detach().to(device=device, dtype=dtype) for value in values]
+                )
+            return torch.as_tensor(np.asarray(values), dtype=dtype, device=device)
+
+        return (
+            tensor_column([row["obs"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["next_obs"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["action"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["reward"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["done"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["old_log_prob"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["role"] for row in sampled_batch], dtype=torch.long),
+            tensor_column([row["old_value"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["advantage"] for row in sampled_batch], dtype=torch.float32),
+            tensor_column([row["return"] for row in sampled_batch], dtype=torch.float32),
+        )
     
     def __len__(self):
         """返回缓冲区的当前大小"""
@@ -83,6 +192,7 @@ class RolloutBuffer:
         state_dim,
         action_space_type='continuous',
         compact_dim=0,
+        sampler_seed=0,
     ):
         self.num_steps = num_steps
         self.num_envs = num_envs
@@ -95,6 +205,7 @@ class RolloutBuffer:
         self.state_dim = state_dim
         self.action_space_type = action_space_type
         self.compact_dim = max(1, int(compact_dim or 0))
+        self._sampler_rng = np.random.default_rng(int(sampler_seed))
 
         self.reset()
         main_logger.info("已初始化重构后的RolloutBuffer，采用预分配数组存储。")
@@ -549,7 +660,10 @@ class RolloutBuffer:
                 next_non_terminal = 1.0 - dones
                 curr_next_val = last_values_real
             else:
-                next_non_terminal = 1.0 - dones_rollout[t + 1]
+                # ``dones_rollout[t]`` belongs to the transition from t to
+                # t+1.  Looking at t+1 leaks the first transition of a new
+                # episode into the preceding episode's GAE recursion.
+                next_non_terminal = 1.0 - dones_rollout[t]
                 curr_next_val = values_real[t + 1]
 
             curr_val = values_real[t]
@@ -862,7 +976,7 @@ class RolloutBuffer:
             }
         
         for epoch in range(ppo_epochs):
-            np.random.shuffle(sequence_indices)
+            self._sampler_rng.shuffle(sequence_indices)
             for start in range(0, num_total_sequences, num_sequences_per_batch):
                 end = min(start + num_sequences_per_batch, num_total_sequences)
                 batch_indices = sequence_indices[start:end]
@@ -966,7 +1080,7 @@ class RolloutBuffer:
             }
         
         for epoch in range(ppo_epochs):
-            np.random.shuffle(valid_indices)
+            self._sampler_rng.shuffle(valid_indices)
             for start in range(0, num_valid_samples, num_sequences_per_batch):
                 end = min(start + num_sequences_per_batch, num_valid_samples)
                 batch_indices = valid_indices[start:end]
@@ -1016,6 +1130,18 @@ class RolloutBuffer:
                         'agent_returns': torch.from_numpy(self.high_level_agent_returns[time_batch, env_batch]).float(),
                         'values': torch.from_numpy(data["high_level_state_values"][time_batch, env_batch]).float(),
                     }
+
+    def get_sampler_rng_state(self):
+        """Return an isolated, checkpoint-safe snapshot of sampler RNG state."""
+        return copy.deepcopy(self._sampler_rng.bit_generator.state)
+
+    def set_sampler_rng_state(self, state):
+        """Restore sampler RNG state, failing closed on incompatible state."""
+        if not isinstance(state, dict):
+            raise TypeError("sampler RNG state must be a bit-generator state dictionary")
+        restored = np.random.default_rng()
+        restored.bit_generator.state = copy.deepcopy(state)
+        self._sampler_rng = restored
 
 class SkillProcessSegmentBuffer:
     """Tracks variable-duration executed skill process segments.
@@ -1296,6 +1422,72 @@ def compute_gae(rewards, values, next_values, dones, gamma, lam):
     returns = advantages + values
     
     return advantages, returns
+
+
+def compute_ordered_trajectory_gae(
+    rewards,
+    values,
+    next_values,
+    dones,
+    trajectory_ids,
+    timesteps,
+    gamma,
+    lam,
+):
+    """Freeze GAE for one continuous, explicitly indexed trajectory segment."""
+    if not all(torch.is_tensor(item) for item in (rewards, values, next_values, dones)):
+        raise TypeError("trajectory GAE inputs must be torch tensors")
+    if not (rewards.shape == values.shape == next_values.shape == dones.shape):
+        raise ValueError(
+            "trajectory GAE inputs must have identical shapes: "
+            f"rewards={tuple(rewards.shape)}, values={tuple(values.shape)}, "
+            f"next_values={tuple(next_values.shape)}, dones={tuple(dones.shape)}"
+        )
+    if rewards.ndim != 1 or rewards.numel() == 0:
+        raise ValueError("trajectory GAE requires a non-empty one-dimensional segment")
+    if len(trajectory_ids) != rewards.numel() or len(timesteps) != rewards.numel():
+        raise ValueError("trajectory metadata length must match tensor length")
+    if len(set(trajectory_ids)) != 1:
+        raise ValueError("trajectory GAE segment contains multiple trajectory IDs")
+    integer_timesteps = [int(timestep) for timestep in timesteps]
+    if any(value != timestep for value, timestep in zip(integer_timesteps, timesteps)):
+        raise ValueError("trajectory timesteps must be integers")
+    expected = list(range(integer_timesteps[0], integer_timesteps[0] + rewards.numel()))
+    if integer_timesteps != expected:
+        raise ValueError(
+            f"trajectory timesteps must be contiguous and ordered: got {integer_timesteps}"
+        )
+    if bool(torch.any(dones[:-1].to(torch.bool)).item()):
+        raise ValueError("a terminal transition may only appear at the end of a segment")
+    for name, tensor in (
+        ("rewards", rewards),
+        ("values", values),
+        ("next_values", next_values),
+        ("dones", dones),
+    ):
+        if not bool(torch.all(torch.isfinite(tensor)).item()):
+            raise ValueError(f"trajectory GAE {name} must be finite")
+    if not bool(torch.all((dones == 0) | (dones == 1)).item()):
+        raise ValueError("trajectory GAE dones must contain only zero or one")
+    if not np.isfinite(float(gamma)) or not np.isfinite(float(lam)):
+        raise ValueError("trajectory GAE gamma and lambda must be finite")
+
+    dones = dones.to(rewards.dtype)
+    advantages = torch.zeros_like(rewards)
+    last_advantage = torch.zeros((), dtype=rewards.dtype, device=rewards.device)
+    for index in reversed(range(rewards.numel())):
+        non_terminal = 1.0 - dones[index]
+        delta = (
+            rewards[index]
+            + float(gamma) * non_terminal * next_values[index]
+            - values[index]
+        )
+        last_advantage = (
+            delta
+            + float(gamma) * float(lam) * non_terminal * last_advantage
+        )
+        advantages[index] = last_advantage
+    return advantages, advantages + values
 
 def compute_ppo_loss(policy, values, old_log_probs, actions, advantages, returns, 
                      clip_epsilon, entropy_coef, value_loss_coef):

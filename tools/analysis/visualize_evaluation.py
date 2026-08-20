@@ -1279,7 +1279,7 @@ def parse_args():
     
     # 模型和场景参数
     parser.add_argument('--model_path', type=str, default=None,
-                       help='训练好的模型文件路径 (如果未提供或不存在，将使用随机策略)')
+                       help='训练好的模型文件路径（除非显式指定 --use_random，否则必需且必须存在）')
     parser.add_argument('--config', type=str, default='config_1',
                        help='配置文件名，不带.py后缀')
     parser.add_argument('--preset', type=str, default='',
@@ -1321,7 +1321,12 @@ def main():
     args = parse_args()
     
     # 判断是否使用随机策略
-    use_random_agent = args.use_random or args.model_path is None or not os.path.exists(args.model_path or "")
+    use_random_agent = bool(args.use_random)
+    if not use_random_agent:
+        if args.model_path is None:
+            raise SystemExit("--model_path is required unless --use_random is explicit")
+        if not os.path.isfile(args.model_path):
+            raise SystemExit(f"model file does not exist: {args.model_path}")
     
     # 加载配置（基于论文参数）
     config_module = importlib.import_module(args.config)
@@ -1362,12 +1367,7 @@ def main():
     # 智能体选择和创建
     if use_random_agent:
         # 使用随机策略
-        if args.use_random:
-            print("🎲 强制使用随机策略进行演示")
-        elif args.model_path is None:
-            print("🎲 未提供模型路径，使用随机策略进行演示")
-        else:
-            print(f"🎲 模型文件 {args.model_path} 不存在，使用随机策略进行演示")
+        print("🎲 显式使用随机策略进行演示")
         
         agent = RandomAgent(config, seed=args.seed)
         
@@ -1384,28 +1384,12 @@ def main():
         # 使用训练好的模型
         print(f"🤖 加载训练好的模型: {args.model_path}")
         
-        try:
-            agent = HMASDAgent(config, device=torch.device('cpu'))
-            agent.load_model(args.model_path)
-            print("✅ 模型加载成功")
-            
-            # 创建评估结果保存文件夹
-            save_path = create_evaluation_folder(config, args.scenario, args.model_path)
-            
-        except Exception as e:
-            print(f"❌ 模型加载失败: {e}")
-            print("🎲 回退到随机策略进行演示")
-            
-            agent = RandomAgent(config, seed=args.seed)
-            
-            # 创建评估结果保存文件夹 (回退到随机策略)
-            timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-            experiment_config = f"scen{args.scenario}_uav{config.n_agents}_usr{config.n_users}_{config.user_distribution}"
-            folder_name = f"{timestamp}_{experiment_config}_random_fallback"
-            evaluation_dir = "evaluation"
-            save_path = os.path.join(evaluation_dir, folder_name)
-            os.makedirs(save_path, exist_ok=True)
-            print(f"评估结果将保存到: {save_path}")
+        agent = HMASDAgent(config, device=torch.device('cpu'))
+        agent.load_model(args.model_path)
+        print("✅ 模型加载成功")
+
+        # Only a successfully loaded model may create a model-labelled result path.
+        save_path = create_evaluation_folder(config, args.scenario, args.model_path)
     
     # 创建可视化环境（带保存路径）
     env = create_env(args.scenario, config, args.seed, save_path=save_path)

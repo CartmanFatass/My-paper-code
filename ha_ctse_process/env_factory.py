@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import inspect
 from typing import Any, Callable
 
 from pettingzoo.mpe import simple_spread_v3
@@ -21,7 +22,7 @@ from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
 from envs.pettingzoo.two_timescale_role_free_actions import (
     TwoTimescaleRoleFreeActionsEnv,
 )
-from ha_ctse_process.dynamic_roster_testbed import DynamicRosterEventEnv, TRAIN_LEDGER_SEED
+from ha_ctse_process.dynamic_roster_testbed import DynamicRosterEventEnv
 
 
 SCENARIO_ALIASES = {
@@ -80,6 +81,22 @@ def normalize_scenario(scenario: str) -> str:
     return SCENARIO_ALIASES[key]
 
 
+def _accepted_config_kwargs(constructor, config, **overrides) -> dict[str, Any]:
+    """Bind only constructor-declared config fields, preserving its defaults."""
+
+    parameters = inspect.signature(constructor).parameters
+    kwargs = {
+        name: getattr(config, name)
+        for name, parameter in parameters.items()
+        if name != "self"
+        and parameter.kind
+        not in (inspect.Parameter.VAR_POSITIONAL, inspect.Parameter.VAR_KEYWORD)
+        and hasattr(config, name)
+    }
+    kwargs.update({name: value for name, value in overrides.items() if name in parameters})
+    return kwargs
+
+
 @dataclass(frozen=True)
 class EnvSpec:
     scenario: str
@@ -103,15 +120,26 @@ def make_env(config, spec: EnvSpec) -> Callable[[], Any]:
         }
 
         if scenario == "generic_short_dynamic_roster":
-            return DynamicRosterEventEnv(
-                task_master_seed=int(
-                    getattr(config, "dynamic_roster_task_ledger_seed", TRAIN_LEDGER_SEED)
-                )
-            )
+            # The factory seed contract is the same for every scenario: rank is
+            # part of the environment identity.  Formal event runners that use
+            # the frozen 67_057/97_057 ledgers construct DynamicRosterEventEnv
+            # directly and therefore remain unchanged.
+            return DynamicRosterEventEnv(task_master_seed=env_seed)
         if scenario == "base":
             raw_env = UAVForcedRelayEnv(**kwargs)
         elif scenario == "belief_map":
-            raw_env = UAVBeliefMapEnv(**kwargs)
+            belief_kwargs = _accepted_config_kwargs(
+                UAVBeliefMapEnv,
+                config,
+                render_mode=spec.render_mode,
+                seed=env_seed,
+            )
+            # The shared config names roster size ``n_agents`` while the legacy
+            # belief-map constructor names the same dimension ``n_uavs``.
+            belief_kwargs["n_uavs"] = int(
+                getattr(config, "n_uavs", getattr(config, "n_agents", 12))
+            )
+            raw_env = UAVBeliefMapEnv(**belief_kwargs)
         elif scenario == "progress":
             raw_env = UAVProgressiveRelayEnv(
                 **kwargs,

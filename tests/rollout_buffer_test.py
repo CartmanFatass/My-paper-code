@@ -1,7 +1,8 @@
 import numpy as np
+import pytest
 import torch
 
-from hmasd.utils import RolloutBuffer
+from hmasd.utils import ReplayBuffer, RolloutBuffer, compute_ordered_trajectory_gae
 
 
 def make_buffer():
@@ -96,6 +97,108 @@ def test_rollout_buffer_advantages_are_unchanged_for_simple_case():
     )
     np.testing.assert_allclose(buffer.high_level_team_advantages[:2, 0], [3.0, 2.0])
     np.testing.assert_allclose(buffer.high_level_agent_returns[:2, 0, 0], [3.0, 2.0])
+
+
+def test_rollout_buffer_gae_does_not_cross_current_transition_done():
+    def advantages_with_final_reward(final_reward):
+        buffer = make_buffer()
+        assert add_step(buffer, 0, 1.0)
+        assert add_step(buffer, 1, 1.0)
+        assert add_step(buffer, 2, final_reward)
+        buffer.dones[1, 0] = True
+        buffer.compute_advantages(
+            last_values=np.full((1, 2), 50.0, dtype=np.float32),
+            dones=np.zeros(1, dtype=bool),
+            gamma=1.0,
+            gae_lambda=1.0,
+        )
+        return buffer.advantages[:3, 0, 0].copy()
+
+    baseline = advantages_with_final_reward(100.0)
+    changed_new_episode = advantages_with_final_reward(1000.0)
+    np.testing.assert_allclose(baseline[:2], [2.0, 1.0])
+    np.testing.assert_allclose(changed_new_episode[:2], baseline[:2])
+    assert changed_new_episode[2] != baseline[2]
+
+
+def test_ordered_trajectory_gae_uses_true_bootstraps_and_current_done():
+    advantages, returns = compute_ordered_trajectory_gae(
+        torch.tensor([1.0, 2.0]),
+        torch.tensor([0.5, 0.6]),
+        torch.tensor([0.6, 99.0]),
+        torch.tensor([0.0, 1.0]),
+        ["episode-a"] * 2,
+        [7, 8],
+        gamma=1.0,
+        lam=1.0,
+    )
+    torch.testing.assert_close(advantages[:2], torch.tensor([2.5, 1.4]))
+    torch.testing.assert_close(returns[:2], torch.tensor([3.0, 2.0]))
+
+
+def test_ordered_trajectory_gae_fails_closed_for_mixed_or_gapped_rows():
+    common = dict(
+        rewards=torch.ones(2),
+        values=torch.zeros(2),
+        next_values=torch.zeros(2),
+        dones=torch.zeros(2),
+        gamma=0.99,
+        lam=0.95,
+    )
+    with pytest.raises(ValueError, match="multiple trajectory"):
+        compute_ordered_trajectory_gae(
+            trajectory_ids=["a", "b"], timesteps=[0, 1], **common
+        )
+    with pytest.raises(ValueError, match="contiguous"):
+        compute_ordered_trajectory_gae(
+            trajectory_ids=["a", "a"], timesteps=[0, 2], **common
+        )
+
+
+def test_gnn_replay_tensor_sample_retains_each_rows_next_observation():
+    replay = ReplayBuffer(4)
+    for timestep, obs in enumerate((1.0, 2.0)):
+        replay.push({
+            'obs': np.array([obs]),
+            'next_obs': np.array([obs * 11.0]),
+            'action': np.array([0.1 * obs]),
+            'reward': obs,
+            'done': timestep == 1,
+            'old_log_prob': -0.2,
+            'role': timestep,
+            'old_value': 0.5,
+            'advantage': 10.0 + timestep,
+            'return': 20.0 + timestep,
+            'trajectory_id': 'trajectory-a',
+            'timestep': timestep,
+        })
+
+    obs, next_obs, *_, advantages, returns = replay.sample_torch(2, torch.device("cpu"))
+    observed_pairs = sorted(zip(obs[:, 0].tolist(), next_obs[:, 0].tolist()))
+    assert observed_pairs == [(1.0, 11.0), (2.0, 22.0)]
+    assert sorted(advantages.tolist()) == [10.0, 11.0]
+    assert sorted(returns.tolist()) == [20.0, 21.0]
+
+
+def test_gnn_replay_rejects_legacy_row_without_next_observation():
+    replay = ReplayBuffer(1)
+    replay.push((np.array([1.0]), np.array([0.1]), 1.0, False, -0.2, 0, 0.5))
+    with pytest.raises(ValueError, match="trajectory-finalized"):
+        replay.sample_torch(1, torch.device("cpu"))
+
+
+def test_rollout_sampler_rng_state_round_trip_isolated_from_global_numpy_rng():
+    first = make_buffer()
+    second = make_buffer()
+    state = first.get_sampler_rng_state()
+
+    first_order = first._sampler_rng.permutation(20)
+    np.random.seed(8675309)
+    _ = np.random.permutation(200)
+    second.set_sampler_rng_state(state)
+    second_order = second._sampler_rng.permutation(20)
+
+    np.testing.assert_array_equal(first_order, second_order)
 
 
 def test_rollout_buffer_process_rewards_are_added_to_low_level_rewards():

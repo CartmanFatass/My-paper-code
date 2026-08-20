@@ -36,6 +36,7 @@ class MultiUAVEnv(ParallelEnv):
         use_fdma=False,  # 是否启用FDMA频分多址（无干扰模式）
         bandwidth=20e6,  # 每个无人机的带宽 (Hz)，默认为20MHz
         ground_bs_tx_power=30,  # 地面基站发射功率 (dBm)
+        step_path_loss_cache=True,  # 每步复用完全相同链路的路径损耗
     ):
         """
         初始化多无人机基站环境
@@ -67,6 +68,9 @@ class MultiUAVEnv(ParallelEnv):
         self.channel_model = channel_model
         self.render_mode = render_mode
         self.seed_val = seed
+        if not isinstance(step_path_loss_cache, (bool, np.bool_)):
+            raise TypeError("step_path_loss_cache must be a bool")
+        self.step_path_loss_cache = bool(step_path_loss_cache)
         
         # 局部观测参数
         self.max_observed_uavs = max_observed_uavs
@@ -80,6 +84,19 @@ class MultiUAVEnv(ParallelEnv):
         
         # 初始化随机数生成器
         self.np_random = np.random.RandomState(seed)
+
+        # 路径损耗缓存只在一个物理状态代内有效。3GPP 链路即使关闭性能
+        # 缓存也必须保留一次抽样，保证同一步内所有消费者看到同一信道实现。
+        self._path_loss_cache = {}
+        self._path_loss_cache_context = None
+        self._path_loss_cache_generation = 0
+        self._path_loss_cache_hits = 0
+        self._path_loss_cache_misses = 0
+        self._uav_user_path_loss_matrix = None
+        self._uav_uav_path_loss_matrix = None
+        self._path_loss_matrix_context = None
+        self._path_loss_uav_position_bytes = None
+        self._path_loss_user_position_bytes = None
         
         # 通信参数 - 基于论文模型
         self.carrier_frequency = 2e9  # 载波频率 (Hz) - 论文中为2 GHz
@@ -127,13 +144,23 @@ class MultiUAVEnv(ParallelEnv):
         # 定义观测和动作空间
         self.observation_spaces = {
             agent: Dict({
-                "obs": Box(low=-float('inf'), high=float('inf'), shape=(self.obs_dim,)),
-                "action_mask": Box(low=0, high=1, shape=(3,))  # 3D速度控制
+                "obs": Box(
+                    low=-float('inf'),
+                    high=float('inf'),
+                    shape=(self.obs_dim,),
+                    dtype=np.float32,
+                ),
+                "action_mask": Box(
+                    low=0,
+                    high=1,
+                    shape=(3,),
+                    dtype=np.float32,
+                )
             }) for agent in self.possible_agents
         }
         
         self.action_spaces = {
-            agent: Box(low=-1, high=1, shape=(3,))  # 归一化的3D速度控制
+            agent: Box(low=-1, high=1, shape=(3,), dtype=np.float32)
             for agent in self.possible_agents
         }
         
@@ -200,6 +227,8 @@ class MultiUAVEnv(ParallelEnv):
         # 初始化连接矩阵和SINR矩阵
         self.connections = np.zeros((self.n_uavs, self.n_users), dtype=bool)
         self.sinr_matrix = np.zeros((self.n_uavs, self.n_users))
+
+        self._begin_path_loss_step()
         
         # 计算初始SINR和连接
         self._update_channel_state()
@@ -249,6 +278,9 @@ class MultiUAVEnv(ParallelEnv):
                 # 更新位置
                 self.uav_positions[agent_idx] = new_position
         
+        # UAV 位置已经更新，旧物理状态的缓存不得继续使用。
+        self._begin_path_loss_step()
+
         # 更新信道状态和连接
         self._update_channel_state()
         
@@ -384,10 +416,10 @@ class MultiUAVEnv(ParallelEnv):
         obs_components.append(step_normalized)
         
         # 组合所有观测
-        obs = np.concatenate(obs_components)
+        obs = np.concatenate(obs_components).astype(np.float32, copy=False)
         
         # 动作掩码（这里我们不限制动作，所以全为1）
-        action_mask = np.ones(3)
+        action_mask = np.ones(3, dtype=np.float32)
         
         return {"obs": obs, "action_mask": action_mask}
     
@@ -410,7 +442,7 @@ class MultiUAVEnv(ParallelEnv):
         elif self.user_distribution == "cluster":
             # 聚类分布
             n_clusters = min(5, self.n_users // 10 + 1)
-            cluster_centers = np.random.uniform(0, self.area_size, (n_clusters, 2))
+            cluster_centers = self.np_random.uniform(0, self.area_size, (n_clusters, 2))
             cluster_std = self.area_size / 10
             
             user_positions = np.zeros((self.n_users, 2))
@@ -515,6 +547,149 @@ class MultiUAVEnv(ParallelEnv):
         """
         return np.sqrt(np.sum((pos1 - pos2) ** 2))
     
+    def _begin_path_loss_step(self):
+        """Start a new physical-state generation for link-level channel values."""
+        self._path_loss_cache_generation += 1
+        self._path_loss_cache.clear()
+        self._path_loss_cache_context = self._path_loss_context()
+        self._path_loss_cache_hits = 0
+        self._path_loss_cache_misses = 0
+        self._uav_user_path_loss_matrix = None
+        self._uav_uav_path_loss_matrix = None
+        self._path_loss_matrix_context = None
+        self._path_loss_uav_position_bytes = None
+        self._path_loss_user_position_bytes = None
+
+    def _path_loss_context(self):
+        """Return every mutable non-position input used by path-loss formulas."""
+        return (
+            str(self.channel_model),
+            float(self.carrier_frequency),
+            bool(self.use_shadowing),
+            float(self.prob_channel_a),
+            float(self.prob_channel_b),
+            float(self.eta_los),
+            float(self.eta_nlos),
+            tuple(self.agents),
+        )
+
+    def _ensure_path_loss_context(self):
+        context = self._path_loss_context()
+        if context != self._path_loss_cache_context:
+            self._path_loss_cache.clear()
+            self._path_loss_cache_context = context
+        return context
+
+    def _prime_path_loss_matrices(self):
+        """Materialize each base-environment link once for the current state."""
+        if not (self.step_path_loss_cache or self.channel_model == "3gpp-36777"):
+            return
+
+        context = self._ensure_path_loss_context()
+        self._path_loss_matrix_context = context
+        self._path_loss_uav_position_bytes = tuple(
+            row.tobytes() for row in self.uav_positions
+        )
+        self._path_loss_user_position_bytes = tuple(
+            row.tobytes() for row in self.user_positions
+        )
+        self._uav_user_path_loss_matrix = np.empty((self.n_uavs, self.n_users), dtype=float)
+        self._uav_uav_path_loss_matrix = np.empty((self.n_uavs, self.n_uavs), dtype=float)
+
+        for uav_idx in range(self.n_uavs):
+            uav_pos = self.uav_positions[uav_idx]
+            for user_idx in range(self.n_users):
+                user_pos = self.user_positions[user_idx]
+                value = float(self._compute_path_loss_reference(uav_pos, user_pos))
+                if not np.isfinite(value):
+                    raise FloatingPointError("path-loss computation produced a non-finite value")
+                self._uav_user_path_loss_matrix[uav_idx, user_idx] = value
+                key = self._path_loss_key("uav_user", uav_pos, user_pos, context)
+                self._path_loss_cache[key] = value
+                self._path_loss_cache_misses += 1
+
+        for first_idx in range(self.n_uavs):
+            self._uav_uav_path_loss_matrix[first_idx, first_idx] = 0.0
+            for second_idx in range(first_idx + 1, self.n_uavs):
+                first_pos = self.uav_positions[first_idx]
+                second_pos = self.uav_positions[second_idx]
+                value = float(self._compute_uav_path_loss_reference(first_pos, second_pos))
+                if not np.isfinite(value):
+                    raise FloatingPointError("path-loss computation produced a non-finite value")
+                self._uav_uav_path_loss_matrix[first_idx, second_idx] = value
+                self._uav_uav_path_loss_matrix[second_idx, first_idx] = value
+                key = self._path_loss_key("uav_uav", first_pos, second_pos, context)
+                self._path_loss_cache[key] = value
+                self._path_loss_cache_misses += 1
+
+    def _cached_uav_user_path_loss(self, uav_idx, user_idx):
+        if self._uav_user_path_loss_matrix is not None:
+            if (
+                self._path_loss_context() == self._path_loss_matrix_context
+                and self.uav_positions[uav_idx].tobytes()
+                == self._path_loss_uav_position_bytes[uav_idx]
+                and self.user_positions[user_idx].tobytes()
+                == self._path_loss_user_position_bytes[user_idx]
+            ):
+                self._path_loss_cache_hits += 1
+                return self._uav_user_path_loss_matrix[uav_idx, user_idx]
+        return self._compute_path_loss(self.uav_positions[uav_idx], self.user_positions[user_idx])
+
+    def _cached_uav_uav_path_loss(self, first_idx, second_idx):
+        if self._uav_uav_path_loss_matrix is not None:
+            if (
+                self._path_loss_context() == self._path_loss_matrix_context
+                and self.uav_positions[first_idx].tobytes()
+                == self._path_loss_uav_position_bytes[first_idx]
+                and self.uav_positions[second_idx].tobytes()
+                == self._path_loss_uav_position_bytes[second_idx]
+            ):
+                self._path_loss_cache_hits += 1
+                return self._uav_uav_path_loss_matrix[first_idx, second_idx]
+        return self._compute_uav_path_loss(self.uav_positions[first_idx], self.uav_positions[second_idx])
+
+    @staticmethod
+    def _position_cache_key(position):
+        array = np.asarray(position)
+        if array.ndim != 1 or array.dtype.kind not in "fiu":
+            raise ValueError("path-loss positions must be finite one-dimensional numeric arrays")
+        contiguous = np.ascontiguousarray(array)
+        return (contiguous.dtype.str, contiguous.shape, contiguous.tobytes())
+
+    def _path_loss_key(self, link_kind, first_pos, second_pos, context):
+        first_key = self._position_cache_key(first_pos)
+        second_key = self._position_cache_key(second_pos)
+        if link_kind == "uav_uav" and second_key < first_key:
+            first_key, second_key = second_key, first_key
+        return (
+            self._path_loss_cache_generation,
+            context,
+            link_kind,
+            first_key,
+            second_key,
+        )
+
+    def _cache_path_loss(self, link_kind, first_pos, second_pos, compute):
+        # 3GPP is always cached because a link has exactly one stochastic channel
+        # realization per physical step. Other models honor the performance switch.
+        should_cache = self.step_path_loss_cache or self.channel_model == "3gpp-36777"
+        if not should_cache:
+            self._path_loss_cache_misses += 1
+            return compute()
+
+        context = self._ensure_path_loss_context()
+        key = self._path_loss_key(link_kind, first_pos, second_pos, context)
+        if key in self._path_loss_cache:
+            self._path_loss_cache_hits += 1
+            return self._path_loss_cache[key]
+
+        value = float(compute())
+        if not np.isfinite(value):
+            raise FloatingPointError("path-loss computation produced a non-finite value")
+        self._path_loss_cache[key] = value
+        self._path_loss_cache_misses += 1
+        return value
+
     def _compute_path_loss(self, uav_pos, user_pos):
         """
         计算路径损耗
@@ -529,6 +704,16 @@ class MultiUAVEnv(ParallelEnv):
         # 检查 user_pos 是否为整数索引，如果是则获取对应的用户位置
         if isinstance(user_pos, (int, np.integer)):
             user_pos = self.user_positions[user_pos]
+
+        return self._cache_path_loss(
+            "uav_user",
+            uav_pos,
+            user_pos,
+            lambda: self._compute_path_loss_reference(uav_pos, user_pos),
+        )
+
+    def _compute_path_loss_reference(self, uav_pos, user_pos):
+        """Uncached scalar reference formula used by the equivalence harness."""
             
         # 计算3D距离和2D距离
         # 确保 user_pos 是二维的 (x, y)
@@ -584,30 +769,21 @@ class MultiUAVEnv(ParallelEnv):
             
             # 模拟信道状态：根据LoS概率决定是LoS还是NLoS
             # 这是一个更符合实际仿真的蒙特卡洛方法，而不是计算期望值
-            if hasattr(self, 'np_random'):
-                is_los = self.np_random.uniform(0, 1) < p_los
-            else:
-                is_los = np.random.uniform(0, 1) < p_los
+            is_los = self.np_random.uniform(0, 1) < p_los
             
             if is_los:
                 # 视距 (LoS) 链路
                 path_loss = pl_los
                 if self.use_shadowing:
                     sigma_los = 4.0
-                    if hasattr(self, 'np_random'):
-                        shadowing = self.np_random.normal(0, sigma_los)
-                    else:
-                        shadowing = np.random.normal(0, sigma_los)
+                    shadowing = self.np_random.normal(0, sigma_los)
                     path_loss += shadowing
             else:
                 # 非视距 (NLoS) 链路
                 path_loss = pl_nlos
                 if self.use_shadowing:
                     sigma_nlos = 8.0
-                    if hasattr(self, 'np_random'):
-                        shadowing = self.np_random.normal(0, sigma_nlos)
-                    else:
-                        shadowing = np.random.normal(0, sigma_nlos)
+                    shadowing = self.np_random.normal(0, sigma_nlos)
                     path_loss += shadowing
         
         # 论文中的概率信道模型 (Probabilistic Channel Model)
@@ -654,18 +830,23 @@ class MultiUAVEnv(ParallelEnv):
             sinr: SINR值 (dB)
         """
         # 检查索引并获取位置
-        if isinstance(uav_idx, (int, np.integer)):
+        uav_is_index = isinstance(uav_idx, (int, np.integer))
+        if uav_is_index:
             uav_pos = self.uav_positions[uav_idx]
         else:
             uav_pos = uav_idx  # 假设已经是位置
             
-        if isinstance(user_idx, (int, np.integer)):
+        user_is_index = isinstance(user_idx, (int, np.integer))
+        if user_is_index:
             user_pos = self.user_positions[user_idx]
         else:
             user_pos = user_idx  # 假设已经是位置
         
         # 计算路径损耗
-        path_loss = self._compute_path_loss(uav_pos, user_pos)
+        if uav_is_index and user_is_index:
+            path_loss = self._cached_uav_user_path_loss(int(uav_idx), int(user_idx))
+        else:
+            path_loss = self._compute_path_loss(uav_pos, user_pos)
         
         # 计算接收功率 (dBm)
         rx_power = self.tx_power - path_loss
@@ -680,7 +861,10 @@ class MultiUAVEnv(ParallelEnv):
             for i in range(self.n_uavs):
                 if i != uav_idx:
                     interferer_pos = self.uav_positions[i]
-                    interferer_path_loss = self._compute_path_loss(interferer_pos, user_pos)
+                    if user_is_index:
+                        interferer_path_loss = self._cached_uav_user_path_loss(i, int(user_idx))
+                    else:
+                        interferer_path_loss = self._compute_path_loss(interferer_pos, user_pos)
                     interferer_power = self.tx_power - interferer_path_loss
                     interference_power.append(10 ** (interferer_power / 10))  # 转换为线性单位
             
@@ -711,7 +895,7 @@ class MultiUAVEnv(ParallelEnv):
         receiver_pos = self.uav_positions[receiver_idx]
         
         # 计算路径损耗（使用无人机到无人机的路径损耗计算）
-        path_loss = self._compute_uav_path_loss(sender_pos, receiver_pos)
+        path_loss = self._cached_uav_uav_path_loss(sender_idx, receiver_idx)
         
         # 计算接收功率 (dBm)
         rx_power = self.tx_power - path_loss
@@ -726,7 +910,7 @@ class MultiUAVEnv(ParallelEnv):
             for i in range(self.n_uavs):
                 if i != sender_idx and i != receiver_idx:  # 排除发送方和接收方
                     interferer_pos = self.uav_positions[i]
-                    interferer_path_loss = self._compute_uav_path_loss(interferer_pos, receiver_pos)
+                    interferer_path_loss = self._cached_uav_uav_path_loss(i, receiver_idx)
                     interferer_power = self.tx_power - interferer_path_loss
                     interference_power.append(10 ** (interferer_power / 10))  # 转换为线性单位
             
@@ -753,6 +937,15 @@ class MultiUAVEnv(ParallelEnv):
         返回:
             path_loss: 路径损耗 (dB)
         """
+        return self._cache_path_loss(
+            "uav_uav",
+            uav_pos1,
+            uav_pos2,
+            lambda: self._compute_uav_path_loss_reference(uav_pos1, uav_pos2),
+        )
+
+    def _compute_uav_path_loss_reference(self, uav_pos1, uav_pos2):
+        """Uncached scalar reference formula for an air-to-air link."""
         # 计算3D距离
         distance_3d = self._compute_distance(uav_pos1, uav_pos2)
         
@@ -804,6 +997,8 @@ class MultiUAVEnv(ParallelEnv):
         """
         更新信道状态和连接
         """
+        self._prime_path_loss_matrices()
+
         # 计算所有UAV-用户对的SINR
         for i in range(self.n_uavs):
             for j in range(self.n_users):

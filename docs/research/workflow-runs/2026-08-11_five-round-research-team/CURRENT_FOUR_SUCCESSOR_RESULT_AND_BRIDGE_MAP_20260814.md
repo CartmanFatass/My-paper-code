@@ -2,15 +2,109 @@
 
 ```text
 owner=portfolio-owned prospective/result-blind map
-allocation_decision=not made here
+allocation_decision=SGSP_RG2Z_R03_EMPIRICAL|RISP_B3_EMPIRICAL|RCLE_CPC_R04_EMPIRICAL|SCDMP_R07_STAGE_A_COMPLETE|SCDMP_SUPPORT_REPRESENTATION_FACTORIAL_DEFINITION|VNFC_FULL_GRAPH_NO_CURRENT|ONLGR_NO_CURRENT
 cross_direction_evidence_transfer=forbidden
 automatic_action_routing=false
 rcle_b2_branch_consumed=UNRESOLVED_VALIDITY
-current_status_pointer=VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md
-superseded_allocation_base=SGSP_R06_RISP_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260815.md|HISTORICAL_NONOPERATIVE
+current_status_pointer=SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md
+superseded_allocation_base=RCLE_CPC_R04_EMPIRICAL_VNFC_TEPR_Q0_PORTFOLIO_ADJUDICATION_20260815.md|HISTORICAL_NONOPERATIVE
 ```
 
-## 2026-08-15 VNFC-B4 post-definition status delta
+## 2026-08-20 current SCDMP r07 Stage-A post-result cut
+
+Exact SCDMP r07 Stage A is complete under `MODIFY-CHECKPOINT`: all registered
+physical-order opportunity and target/action qualifications passed, but five
+of ten independent untouched fit-support ratios exceeded the per-seed `0.65`
+competence ceiling. The correct-versus-reversed assay is nonidentifying and
+descriptive only. No treatment was selected; Stage B is ineligible.
+
+The current SCDMP action is definition-only for one fresh 2×2 checkpoint
+factorial: current versus support-stratified equal-row allocation crossed with
+current versus one frozen improved segment representation, with 600 steps,
+optimizer, ten fresh seeds, the same competence rule and untouched evaluation.
+Its branches must identify support, representation-package, interaction or
+continued nonidentification and name at most one checkpoint law for a later
+independent relation assay. It cannot itself select an order treatment or open
+Stage B.
+
+Current empirics are RISP-B3, RCLE-CPC and SGSP-RG2Z. The SCDMP factorial is
+the sole definition line. ONLGR host-card and VNFC full-graph remain no-current.
+No evidence transfer, fusion, cross-`N×k`, backfill, WIP/order, second-surface
+or UAV action follows.
+
+## Superseded/base 2026-08-19 SGSP RG2Z / VNFC post-Q0 cut
+
+Current empirics are RISP-B3 full panel, SCDMP-TBOV Stage A, RCLE-CPC r04
+full panel and SGSP-RG2Z r03 full panel. There is no current definition-only or
+enabling-construction line. ONLGR host-card and VNFC full-graph work are
+no-current with separate revisit conditions.
+
+SGSP's exact 24-seed update-512 panel is a direct variable-`N` choose/delete
+discriminator: one shared policy trains at `N={9,15}`, deploys unchanged at
+`N={6,21}`, and compares a narrow physical prior with its competent strictly
+containing matched EDGE learner. The maximum claim is the exact static
+RIDGEGATE-2Z finite-budget package; regularization/curvature/Adam
+preconditioning remains the strongest alternative. No branch opens another
+budget, surface, fusion or UAV action.
+
+VNFC Q0 is complete technical evidence only. The reduced-domain checker works,
+but full-horizon `K_1..K_6`, compression, solver feasibility and value remain
+unknown. Do not open the full-graph census until a checked analytic
+factorization, finite audited stage/full-solver cost, reusable exact substrate,
+or target-criticality plus bounded feasibility satisfies a recorded revisit
+condition. Q0 and SGSP evidence remain isolated.
+
+## Superseded/base 2026-08-15 RCLE-CPC / VNFC-TEPR cut
+
+The controlling current pointer is RCLE_CPC_R04_EMPIRICAL_VNFC_TEPR_Q0_PORTFOLIO_ADJUDICATION_20260815.md.
+Current empirical investments are RISP-B3 full panel, SCDMP-TBOV r05 Stage A, and RCLE-CPC r04 full panel.
+VNFC-TEPR is enabling construction-only Q0; SGSP remains definition-only two-zone and ONLGR has no current investment.
+No evidence, thresholds, coordinates, acceptance or claims transfer across directions.
+
+RCLE-CPC is a direct variable-N family-dividing finite-package panel on fresh dual-corridor held-out rosters. Its exact package costs 4–6 focused engineering days and 3,727,360 episodes. The point runtime forecast is 15–30 one-core wall minutes; 30–45 minutes is only the prudent lease envelope and has no scientific stopping meaning.
+Positive evidence can retain only this exact finite-task package; no arbitrary-N, semantic causality, transfer, UAV, safety or deployment claim. Strongest alternatives are optimizer/representation-search geometry, centralized clue aggregation and coarse commitment rather than unique binary cardinality. Any positive result still needs a later target/UAV bridge decision.
+
+VNFC-TEPR Q0 is proof/cost feasibility only, not value evidence. The quotient/replay certificate must preserve `A_fix`, `X_20`, `X_40`, `D_past`, the ratio and canonical tie law, agree exactly on a prospectively frozen reduced-horizon domain, and return full-query bounds. Q0 branches are `PASS` (accepted quotient and updated full-solver cost return for a new Portfolio decision), `COUNTEREXAMPLE` (only this quotient is rejected), `COST_SEPARATION` (numerical bounds and the dominant term are reported without scientific inference), or complete-evidence-only `INDETERMINATE` (named obligations remain unresolved); no branch authorizes the full solver or empirical action.
+The outside-FIXED-FH alternative remains live: a nonlearned controller outside FIXED-FH could erase learned value, while exact certification may remain uneconomic. No full solver, empirical panel, lease or compute follows from Q0. The relayed total-cost band is planning information, not an independently audited Q0 cost.
+
+RCLE positive evidence does not activate VNFC or any bridge automatically; VNFC Q0 can only make a later full-solver construction decision eligible. There is no fusion, WIP, ordering, backfill, cross-Nxk parent, second surface or UAV production action.
+
+## 2026-08-15 SCDMP-TBOV r05 Stage-A empirical cut (superseding current SCDMP narrative)
+
+The controlling SCDMP cut is `SCDMP_TBOV_R05_STAGE_A_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`.
+`SCDMP-TBOV-SCIENCE-20260815-05` is complete: same-conversation ChatGPT Pro
+`CLOSED`, EM-intaken and CM-statically feasible, with no definition ambiguity.
+No source, construction, coordinates, training, evaluation, lease or compute
+has occurred. Current empirics are RISP-B3 full panel plus SCDMP r05 Stage A;
+VNFC is target-exclusive, SGSP and RCLE definition-only.
+
+Stage A is the identical-checkpoint correct-versus-reversed assay. It selects,
+modifies or removes one named order treatment. Only `SELECT-ORDER-TR` or
+`MODIFY-TO-ORDER-Q` makes a later Stage-B decision eligible, never automatic;
+each of the seven remaining frozen branches prohibits Stage B and preserves
+its local meaning. Stage A can support only exact-object physical-opportunity,
+checkpoint-qualification and correct-versus-reversed path-fidelity conclusions;
+it supplies no value or trained-treatment claim. Only a later, separately
+authorized complete Stage B could at most support fixed-`N=4`, finite-budget
+held-out-complete-word and fixed/switch-`k` package value; no arbitrary-`k`,
+variable-`N`, unique mediation, second surface, UAV, safety or real-flight
+claim follows. Alternatives remain target-adapted finite supervision and optimizer
+geometry: visible words, optimization-visible `p6/p8`, auxiliary/residual
+curvature, clipping and AdamW history can explain a positive contrast without
+unique semigroup mediation.
+
+Stage A costs `6,000` logical AdamW steps and `56,151,040` model-example
+evaluations. The full conditional path costs `36,000` steps and
+`34,535,720,960` model-example evaluations, approximately `100–420 elapsed
+host hours` (not CPU-hours), plus `4–8` engineering days and review/repair;
+more than 99% of learned-model work is Stage B and Stage-A-only labor is not
+separately estimated. RISP and SCDMP are orthogonal variable-`k` mechanisms;
+no evidence transfers or fusion. Stage A alone does not open a bridge; only a
+later qualifying Stage B could reopen it. No WIP/order backfill, cross-`N×k`,
+second-surface or UAV action is created. Older prospective SCDMP rows are
+historical/superseded for allocation; Stage B remains unauthorized.
+
+## HISTORICAL_NONOPERATIVE — 2026-08-15 VNFC-B4 post-definition status delta
 
 The controlling current cut is
 `VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`. Exact

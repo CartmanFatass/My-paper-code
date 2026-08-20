@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Sequence
+from typing import Mapping, Sequence
 
 import numpy as np
 import torch
@@ -19,11 +19,117 @@ from ha_ctse_process.variable_roster_event_types import (
 )
 
 
+LEGACY_LOW_STEP_HOST_TRANSFER = "legacy"
+PACKED_LOW_STEP_HOST_TRANSFER = "packed"
+# The packed transfer is intentionally opt-in until the fixed-machine benchmark
+# demonstrates a positive median improvement on the production device.  CPU
+# tensors already expose NumPy views without a device copy, so packing them can
+# be slower even though it reduces CUDA synchronization points.
+DEFAULT_LOW_STEP_HOST_TRANSFER = LEGACY_LOW_STEP_HOST_TRANSFER
+
+_FLOAT_CPU_FIELDS = (
+    "member_obs",
+    "critic_member_features",
+    "critic_global_features",
+    "actor_hidden_before",
+    "critic_hidden_before",
+    "logp",
+    "values",
+    "actor_hidden",
+    "critic_hidden",
+    "critic_source",
+)
+_INTEGER_CPU_FIELDS = ("skills", "actions")
+
+
+def _validate_low_step_transfer_tensors(
+    tensors: Mapping[str, torch.Tensor],
+) -> None:
+    expected = frozenset((*_FLOAT_CPU_FIELDS, *_INTEGER_CPU_FIELDS))
+    if frozenset(tensors) != expected:
+        missing = sorted(expected.difference(tensors))
+        extra = sorted(frozenset(tensors).difference(expected))
+        raise ValueError(
+            f"low-step host-transfer fields are malformed: missing={missing}, extra={extra}"
+        )
+    devices = {tensor.device for tensor in tensors.values()}
+    if len(devices) != 1:
+        raise ValueError("low-step host-transfer tensors must share one device")
+    for name in _FLOAT_CPU_FIELDS:
+        if tensors[name].dtype != torch.float32:
+            raise TypeError(
+                f"low-step host-transfer field {name!r} must be torch.float32"
+            )
+    for name in _INTEGER_CPU_FIELDS:
+        if tensors[name].dtype != torch.int64:
+            raise TypeError(
+                f"low-step host-transfer field {name!r} must be torch.int64"
+            )
+
+
+def _legacy_low_step_cpu_cache(
+    tensors: Mapping[str, torch.Tensor],
+) -> dict[str, np.ndarray]:
+    """Reference transfer: preserve the original one-transfer-per-field path."""
+
+    _validate_low_step_transfer_tensors(tensors)
+    return {
+        name: tensor.detach().cpu().numpy() for name, tensor in tensors.items()
+    }
+
+
+def _pack_dtype_group(
+    tensors: Mapping[str, torch.Tensor], names: tuple[str, ...]
+) -> dict[str, np.ndarray]:
+    """Transfer one dtype group once, then reconstruct exact shaped CPU views."""
+
+    layouts: list[tuple[str, int, int, tuple[int, ...]]] = []
+    flattened: list[torch.Tensor] = []
+    offset = 0
+    for name in names:
+        tensor = tensors[name].detach()
+        count = int(tensor.numel())
+        layouts.append((name, offset, offset + count, tuple(tensor.shape)))
+        flattened.append(tensor.reshape(-1))
+        offset += count
+    packed = torch.cat(flattened, dim=0)
+    packed_cpu = packed.cpu().numpy()
+    return {
+        name: packed_cpu[start:end].reshape(shape)
+        for name, start, end, shape in layouts
+    }
+
+
+def _packed_low_step_cpu_cache(
+    tensors: Mapping[str, torch.Tensor],
+) -> dict[str, np.ndarray]:
+    """Optimized transfer: one device synchronization/copy per tensor dtype."""
+
+    _validate_low_step_transfer_tensors(tensors)
+    cpu = _pack_dtype_group(tensors, _FLOAT_CPU_FIELDS)
+    cpu.update(_pack_dtype_group(tensors, _INTEGER_CPU_FIELDS))
+    return cpu
+
+
+def _low_step_cpu_cache(
+    tensors: Mapping[str, torch.Tensor], *, host_transfer: str
+) -> dict[str, np.ndarray]:
+    if host_transfer == LEGACY_LOW_STEP_HOST_TRANSFER:
+        return _legacy_low_step_cpu_cache(tensors)
+    if host_transfer == PACKED_LOW_STEP_HOST_TRANSFER:
+        return _packed_low_step_cpu_cache(tensors)
+    raise ValueError(
+        "low-step host transfer must be exactly 'legacy' or 'packed', "
+        f"got {host_transfer!r}"
+    )
+
+
 def batched_low_step(
     cores: Sequence[VariableRosterEventCore],
     snapshots: Sequence[BoundarySnapshot],
     *,
     deterministic: bool = False,
+    host_transfer: str = DEFAULT_LOW_STEP_HOST_TRANSFER,
 ) -> BatchedLowStepResult:
     """Run one ragged active-only low step across all environments.
 
@@ -51,6 +157,15 @@ def batched_low_step(
     if any(core.action_space_type != owner.action_space_type for core in core_rows):
         raise ValueError("batched low step requires one action-space type")
 
+    if host_transfer not in {
+        LEGACY_LOW_STEP_HOST_TRANSFER,
+        PACKED_LOW_STEP_HOST_TRANSFER,
+    }:
+        raise ValueError(
+            "low-step host transfer must be exactly 'legacy' or 'packed', "
+            f"got {host_transfer!r}"
+        )
+
     packed_rows: list[PackedActiveBatch] = []
     routing_rows: list[ActiveRoutingView] = []
     actor_hidden_before_rows: list[torch.Tensor] = []
@@ -59,8 +174,6 @@ def batched_low_step(
     offsets = [0]
     for core, snapshot in zip(core_rows, snapshot_rows):
         packed, routing = core.pack_active(snapshot)
-        if bool(torch.any(packed.skills < 0).item()):
-            raise RuntimeError("low actor cannot run before genuine joins receive SET")
         packed_rows.append(packed)
         routing_rows.append(routing)
         actor_hidden_before_rows.append(packed.low_actor_hidden.clone())
@@ -79,6 +192,10 @@ def batched_low_step(
         [packed.critic_member_features for packed in packed_rows], dim=0
     )
     skills = torch.cat([packed.skills for packed in packed_rows], dim=0)
+    # One legality synchronization for the whole ragged batch, rather than one
+    # device synchronization per environment.
+    if bool(torch.any(skills < 0).item()):
+        raise RuntimeError("low actor cannot run before genuine joins receive SET")
     actor_hidden_before = torch.cat(actor_hidden_before_rows, dim=0)
     critic_hidden_before = torch.cat(critic_hidden_before_rows, dim=0)
     global_features = torch.cat(
@@ -104,20 +221,23 @@ def batched_low_step(
             critic_hidden_before,
         )
 
-    bulk_cpu = {
-        "member_obs": member_obs.detach().cpu().numpy(),
-        "skills": skills.detach().cpu().numpy(),
-        "critic_member_features": critic_member_features.detach().cpu().numpy(),
-        "critic_global_features": global_features.detach().cpu().numpy(),
-        "actor_hidden_before": actor_hidden_before.detach().cpu().numpy(),
-        "critic_hidden_before": critic_hidden_before.detach().cpu().numpy(),
-        "actions": actions.detach().cpu().numpy(),
-        "logp": logp.detach().cpu().numpy(),
-        "values": values.detach().cpu().numpy(),
-        "actor_hidden": actor_hidden.detach().cpu().numpy(),
-        "critic_hidden": critic_hidden.detach().cpu().numpy(),
-        "critic_source": critic_source.detach().cpu().numpy(),
-    }
+    bulk_cpu = _low_step_cpu_cache(
+        {
+            "member_obs": member_obs,
+            "skills": skills,
+            "critic_member_features": critic_member_features,
+            "critic_global_features": global_features,
+            "actor_hidden_before": actor_hidden_before,
+            "critic_hidden_before": critic_hidden_before,
+            "actions": actions,
+            "logp": logp,
+            "values": values,
+            "actor_hidden": actor_hidden,
+            "critic_hidden": critic_hidden,
+            "critic_source": critic_source,
+        },
+        host_transfer=host_transfer,
+    )
     per_core: list[tuple[torch.Tensor, torch.Tensor, torch.Tensor]] = []
     routed_actions: list[dict[str, int]] = []
     for core_index, (core, packed, routing) in enumerate(

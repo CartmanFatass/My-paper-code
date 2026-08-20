@@ -18,8 +18,11 @@ from ha_ctse_process.dynamic_roster_testbed import (
     ACTION_COUNT,
     EVALUATION_LEDGER_SEED,
     HORIZON,
+    IDLE,
     MAX_LIFECYCLES,
     OBSERVATION_DIM,
+    PERSIST,
+    SHORT,
     DynamicRosterEventEnv,
     DynamicRosterLedger,
     GenericShortDynamicRosterEnv,
@@ -120,9 +123,17 @@ class CleanProcessDynamicRosterEnv(GenericShortDynamicRosterEnv):
         self, actions: Mapping[int, int]
     ) -> tuple[float, bool, dict[str, Any]]:
         view = self.observe()
+        # Validate the complete primitive action before advancing either the
+        # audit-only process channel or the task environment.  In particular,
+        # a late invalid action must not leave earlier process rows advanced.
         normalized = {int(key): int(value) for key, value in actions.items()}
         if set(normalized) != set(view.active_keys):
             raise ValueError("clean-process action keys do not match active set")
+        if any(
+            value not in (IDLE, PERSIST, SHORT)
+            for value in normalized.values()
+        ):
+            raise ValueError("all primitive actions must lie in {IDLE,PERSIST,SHORT}")
         for key in view.active_keys:
             self._advance_process(key, normalized[key])
         reward, terminal, info = super().step(normalized)

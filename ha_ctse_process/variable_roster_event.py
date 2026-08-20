@@ -885,6 +885,54 @@ class VariableRosterEventCore:
             raise ValueError("MSSR historical P does not match its provenance tail")
         return prior
 
+    @staticmethod
+    def _validated_replay_partner_p(value: Any) -> float:
+        """Validate the immutable pre-token P carried by an MSSR ledger row."""
+
+        if value is None:
+            raise ValueError(
+                "MSSR replay requires retained pre-token authenticated P"
+            )
+        if isinstance(value, (bool, np.bool_)) or not isinstance(
+            value, (int, float, np.integer, np.floating)
+        ):
+            raise ValueError(
+                "MSSR replay retained pre-token authenticated P is invalid"
+            )
+        partner_p = float(value)
+        if not math.isfinite(partner_p) or not -1.0 <= partner_p <= 1.0:
+            raise ValueError(
+                "MSSR replay retained pre-token authenticated P is invalid"
+            )
+        return partner_p
+
+    def _replay_commitment_logits(
+        self,
+        member_embedding: torch.Tensor,
+        selected_summary: torch.Tensor,
+        pre_hidden: torch.Tensor,
+        *,
+        authenticated_partner_p: Any,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """Replay the production actor head without consulting live state."""
+
+        if not self.mssr_joint_production_enabled:
+            return self.commitment_model.logits(
+                member_embedding, selected_summary, pre_hidden
+            )
+        partner_p = self._validated_replay_partner_p(authenticated_partner_p)
+        partition = self.commitment_model.selective_spf_partition(
+            selected_summary,
+            pre_hidden,
+            partner_p,
+        )
+        return self.commitment_model.first_logits(
+            member_embedding,
+            selected_summary,
+            pre_hidden,
+            partition=partition,
+        )
+
     def _process_frontier(
         self,
         snapshot: BoundarySnapshot,
@@ -962,6 +1010,7 @@ class VariableRosterEventCore:
                 initial_summary if self.architecture_mode == "f0" else working_summary
             )
             mssr_partition = None
+            authenticated_p: float | None = None
             if self.mssr_joint_production_enabled:
                 authenticated_p = self._authenticated_partner_p(record)
                 mssr_partition = self.commitment_model.selective_spf_partition(
@@ -1134,6 +1183,7 @@ class VariableRosterEventCore:
                 old_token_log_probability=old_logp,
                 old_owner_value=old_value,
                 action_kind=action_kind,
+                authenticated_partner_p=authenticated_p,
                 **({} if direct_kernel is None else direct_kernel.row_fields()),
             )
             self.high_ledger.append(token_row)
@@ -1191,14 +1241,16 @@ class VariableRosterEventCore:
         summary = self.commitment_model.set_summary(
             initial_embeddings if source == "initial" else working_embeddings
         )
-        logits, _ = self.commitment_model.logits(
+        pre_hidden = torch.as_tensor(
+            row.pre_token_high_hidden,
+            dtype=torch.float32,
+            device=self.device,
+        )
+        logits, _ = self._replay_commitment_logits(
             working_embeddings[owner_index],
             summary,
-            torch.as_tensor(
-                row.pre_token_high_hidden,
-                dtype=torch.float32,
-                device=self.device,
-            ),
+            pre_hidden,
+            authenticated_partner_p=getattr(row, "authenticated_partner_p", None),
         )
         mask = torch.as_tensor(row.exact_legal_mask, dtype=torch.bool, device=self.device)
         probabilities = torch.softmax(logits.masked_fill(~mask, -torch.inf), dim=-1)
@@ -1235,12 +1287,14 @@ class VariableRosterEventCore:
         selected_summary = (
             initial_summary if self.architecture_mode == "f0" else working_summary
         )
-        logits, _new_hidden = self.commitment_model.logits(
+        pre_hidden = torch.as_tensor(
+            row.pre_token_high_hidden, dtype=torch.float32, device=self.device
+        )
+        logits, _new_hidden = self._replay_commitment_logits(
             working_embeddings[owner_index],
             selected_summary,
-            torch.as_tensor(
-                row.pre_token_high_hidden, dtype=torch.float32, device=self.device
-            ),
+            pre_hidden,
+            authenticated_partner_p=getattr(row, "authenticated_partner_p", None),
         )
         mask = torch.as_tensor(row.exact_legal_mask, dtype=torch.bool, device=self.device)
         masked_logits = logits.masked_fill(~mask, -torch.inf)
@@ -2051,6 +2105,7 @@ def _pack_event_high_replay(
             token.active_critic_member_features, torch.float32
         ),
         critic_global_features=tensor(token.critic_global_features, torch.float32),
+        authenticated_partner_p=getattr(token, "authenticated_partner_p", None),
         owner_index=token.active_lifecycle_keys.index(token.owner_lifecycle_key),
         action=int(token.combined_action),
         old_logp=torch.tensor(
@@ -2083,8 +2138,11 @@ def _replay_packed_event_token(
     initial_summary = core.commitment_model.set_summary(initial_embeddings)
     working_summary = core.commitment_model.set_summary(working_embeddings)
     summary = initial_summary if core.architecture_mode == "f0" else working_summary
-    logits, _new_hidden = core.commitment_model.logits(
-        working_embeddings[row.owner_index], summary, row.pre_hidden
+    logits, _new_hidden = core._replay_commitment_logits(
+        working_embeddings[row.owner_index],
+        summary,
+        row.pre_hidden,
+        authenticated_partner_p=row.authenticated_partner_p,
     )
     masked_logits = logits.masked_fill(~row.legal_mask, -torch.inf)
     logp = F.log_softmax(masked_logits, dim=-1)

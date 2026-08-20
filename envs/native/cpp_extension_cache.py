@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 from pathlib import Path
 import os
 import tempfile
@@ -9,7 +10,7 @@ from types import ModuleType
 from typing import Sequence
 
 
-_LOADED_MODULES: dict[tuple[str, str, str], ModuleType] = {}
+_LOADED_MODULES: dict[tuple[str, str, str, str], ModuleType] = {}
 
 
 class CppExtensionUnavailable(RuntimeError):
@@ -47,15 +48,20 @@ def load_source_keyed_extension(
 ) -> ModuleType:
     """Stage one source byte-for-byte, then build or reuse its CPU module."""
 
-    cache_key = cache_namespace, identity, str(root)
+    source_bytes = source.read_bytes()
+    source_digest = hashlib.sha256(source_bytes).hexdigest()
+    cache_key = cache_namespace, identity, str(root), source_digest
     cached = _LOADED_MODULES.get(cache_key)
     if cached is not None:
         return cached
 
-    build_directory = root / build_directory_name
+    # Include the independently observed source digest even when a caller
+    # accidentally supplies a stale ABI identity.  PyTorch caches imported
+    # modules by name, so both the directory and name must change with source.
+    source_key = source_digest[:16]
+    build_directory = root / build_directory_name / f"source_{source_key}"
     build_directory.mkdir(parents=True, exist_ok=True)
     staged_source = build_directory / staged_source_name
-    source_bytes = source.read_bytes()
     if not staged_source.exists() or staged_source.read_bytes() != source_bytes:
         staged_source.write_bytes(source_bytes)
 
@@ -65,7 +71,7 @@ def load_source_keyed_extension(
         raise CppExtensionUnavailable from error
     try:
         module = load(
-            name=module_name,
+            name=f"{module_name}_{source_key}",
             sources=[str(staged_source)],
             extra_cflags=list(compiler_flags),
             build_directory=str(build_directory),

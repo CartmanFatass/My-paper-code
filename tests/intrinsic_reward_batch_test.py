@@ -32,6 +32,7 @@ def make_agent(tmp_path, disable_rewards=False):
     config.disable_discriminator_rewards = disable_rewards
     config.disable_discriminator_training = False
     config.disable_high_level_training = False
+    config.seed = 79
     config.update_env_dims(state_dim=5, obs_dim=4, n_agents=2)
     return HMASDAgent(config, log_dir=str(tmp_path), device=torch.device("cpu"))
 

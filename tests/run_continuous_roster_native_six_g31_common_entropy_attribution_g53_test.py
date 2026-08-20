@@ -43,6 +43,12 @@ def test_runner_phase_inventory_configuration_and_source_controls() -> None:
     assert controls["predecessor_artifact_initialization_count"] == 0
     assert controls["G52_dependency_state_artifact_result_count"] == 0
     assert controls["post_treatment_trajectory_sharing"] is False
+    assert runner.source.seed_block(0, formal=False)["initialization"] == 11_441_000
+    assert runner.source.seed_block(2, formal=False)["initialization"] == 11_441_002
+    assert len({
+        runner.source.seed_block(index, formal=False)["initialization"]
+        for index in range(3)
+    }) == 3
 
 
 def test_formal_runtime_and_cli_authority_fail_closed() -> None:

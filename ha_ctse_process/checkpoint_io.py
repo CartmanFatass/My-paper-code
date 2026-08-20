@@ -3,14 +3,278 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
+from dataclasses import asdict, is_dataclass
 import json
+import math
 from pathlib import Path
+import random
 from typing import Any
 
 import numpy as np
 import torch
 
 from ha_ctse_process.standalone_agent import StandaloneProcessAgent
+
+
+STANDALONE_STRICT_SCHEMA_VERSION = 4
+STANDALONE_STRICT_RESUME_SEMANTICS = "strict_trajectory_v1"
+STANDALONE_COLLECTOR_SNAPSHOT_CAPABILITY = "standalone_collector_training_state"
+STANDALONE_COLLECTOR_SNAPSHOT_VERSION = 1
+
+_STRICT_MODULE_FIELDS = (
+    "high",
+    "compact",
+    "bridge",
+    "low",
+    "process",
+    "process_posterior",
+    "outcome_residual_probe",
+    "topology_role_probe",
+    "transition_discriminator",
+    "prototype_discriminator",
+    "compact_return_head",
+    "situation_hazard",
+    "team_transition",
+    "team_discriminator",
+    "high_value",
+    "team_conditioned_qd_probe",
+    "g_info_objective",
+    "assignment_actionability",
+    "team_effect_probe",
+)
+_STRICT_OPTIMIZER_FIELDS = (
+    "high_opt",
+    "low_opt",
+    "low_actor_opt",
+    "low_critic_opt",
+    "process_opt",
+    "prototype_disc_opt",
+    "team_transition_opt",
+    "team_disc_opt",
+    "team_conditioned_qd_opt",
+    "q_a_opt",
+)
+_STRICT_NORMALIZER_FIELDS = ("high_value_norm", "low_value_norm")
+
+_OPERATIONAL_ARGUMENT_FIELDS = {
+    "resume_from",
+    "total_timesteps",
+    "log_dir",
+    "checkpoint_keep_last",
+    "eval_checkpoint_name",
+}
+_OPERATIONAL_CONFIG_FIELDS = {
+    "log_dir",
+    "output_dir",
+    "r24_qd_export_dir",
+}
+_AGENT_CONTRACT_EXCLUDED_FIELDS = {
+    "assignment_actionability",
+    "device",
+    "q_a_opt",
+    "r24_qd_export_dir",
+    "team_effect_probe",
+}
+_CONTRACT_UNSUPPORTED = object()
+
+
+def _normalize_contract_value(value: Any) -> Any:
+    if value is None or isinstance(value, (bool, int, str)):
+        return value
+    if isinstance(value, (float, np.floating)):
+        result = float(value)
+        if not math.isfinite(result):
+            raise ValueError("training contract contains a non-finite float")
+        return result
+    if isinstance(value, np.integer):
+        return int(value)
+    if isinstance(value, (Path, torch.device)):
+        return str(value)
+    if is_dataclass(value):
+        return _normalize_contract_value(asdict(value))
+    if isinstance(value, dict):
+        result = {}
+        for key in sorted(value, key=lambda item: str(item)):
+            normalized = _normalize_contract_value(value[key])
+            if normalized is _CONTRACT_UNSUPPORTED:
+                return _CONTRACT_UNSUPPORTED
+            result[str(key)] = normalized
+        return result
+    if isinstance(value, (tuple, list)):
+        result = []
+        for item in value:
+            normalized = _normalize_contract_value(item)
+            if normalized is _CONTRACT_UNSUPPORTED:
+                return _CONTRACT_UNSUPPORTED
+            result.append(normalized)
+        return result
+    if isinstance(value, (set, frozenset)):
+        normalized = [_normalize_contract_value(item) for item in value]
+        if any(item is _CONTRACT_UNSUPPORTED for item in normalized):
+            return _CONTRACT_UNSUPPORTED
+        return sorted(normalized, key=lambda item: json.dumps(item, sort_keys=True))
+    return _CONTRACT_UNSUPPORTED
+
+
+def _namespace_contract(obj: Any, *, excluded: set[str]) -> dict[str, Any]:
+    contract: dict[str, Any] = {}
+    for name in sorted(name for name in dir(obj) if not name.startswith("_")):
+        if name in excluded:
+            continue
+        value = getattr(obj, name)
+        if callable(value):
+            continue
+        normalized = _normalize_contract_value(value)
+        if normalized is _CONTRACT_UNSUPPORTED:
+            raise TypeError(
+                f"training contract field {name!r} has unsupported type "
+                f"{type(value).__name__}"
+            )
+        contract[name] = normalized
+    return contract
+
+
+def _optimizer_hyperparameter_contract(agent: StandaloneProcessAgent) -> dict[str, Any]:
+    contract: dict[str, Any] = {}
+    for name in _STRICT_OPTIMIZER_FIELDS:
+        if name == "q_a_opt":
+            # q_A is created lazily after its feature dimensions are observed.
+            # Its presence at a checkpoint is trajectory state, not an
+            # effective-config difference from a fresh identical agent.  The
+            # lazy spec and strict optimizer state validate/restore it below.
+            contract[name] = {
+                "managed_by": "lazy_module_specs.assignment_actionability"
+            }
+            continue
+        optimizer = getattr(agent, name, None)
+        if optimizer is None:
+            contract[name] = None
+            continue
+        groups = []
+        for group in optimizer.param_groups:
+            normalized_group = {}
+            for key, value in sorted(group.items()):
+                if key == "params":
+                    continue
+                normalized = _normalize_contract_value(value)
+                if normalized is _CONTRACT_UNSUPPORTED:
+                    raise TypeError(
+                        f"optimizer contract {name}.{key} has unsupported type"
+                    )
+                normalized_group[str(key)] = normalized
+            groups.append(normalized_group)
+        contract[name] = groups
+    return contract
+
+
+def effective_training_contract(
+    agent: StandaloneProcessAgent,
+    args: argparse.Namespace,
+    config: Any,
+) -> dict[str, Any]:
+    """Normalize every effective update-semantic input before strict resume."""
+
+    agent_fields: dict[str, Any] = {}
+    for name, value in sorted(vars(agent).items()):
+        if (
+            name.startswith("_")
+            or name.startswith("checkpoint_")
+            or name in _AGENT_CONTRACT_EXCLUDED_FIELDS
+        ):
+            continue
+        normalized = _normalize_contract_value(value)
+        if normalized is not _CONTRACT_UNSUPPORTED:
+            agent_fields[name] = normalized
+
+    nested_config_sources = {}
+    nested_exclusions = {
+        "intrinsic_rewards": {"transition_normalizer", "segment_normalizer"},
+        "outcome_extractor": {"normalizer"},
+        "outcome_residual_extractor": {"normalizer"},
+    }
+    for name, exclusions in nested_exclusions.items():
+        value = getattr(agent, name, None)
+        if value is None:
+            nested_config_sources[name] = None
+            continue
+        nested_config_sources[name] = _namespace_contract(
+            value, excluded=exclusions
+        )
+
+    return {
+        "training_contract_schema_version": 1,
+        "resume_constraints": {
+            # This target may only increase at resume time.  Keeping the
+            # original floor prevents an apparent operational override from
+            # silently shortening the frozen training treatment.
+            "minimum_total_timesteps": int(args.total_timesteps),
+        },
+        "agent_effective": agent_fields,
+        "agent_nested_config": nested_config_sources,
+        "optimizer_hyperparameters": _optimizer_hyperparameter_contract(agent),
+        "args": _namespace_contract(args, excluded=_OPERATIONAL_ARGUMENT_FIELDS),
+        "config": _namespace_contract(config, excluded=_OPERATIONAL_CONFIG_FIELDS),
+    }
+
+
+def _validate_training_contract(
+    saved_contract: Any,
+    runtime_contract: dict[str, Any],
+    *,
+    checkpoint_total_steps: int,
+) -> None:
+    if not isinstance(saved_contract, dict):
+        raise ValueError("schema-4 training contract must be a mapping")
+    saved = deepcopy(saved_contract)
+    runtime = deepcopy(runtime_contract)
+    try:
+        saved_minimum = int(
+            saved.pop("resume_constraints")["minimum_total_timesteps"]
+        )
+        runtime_target = int(
+            runtime.pop("resume_constraints")["minimum_total_timesteps"]
+        )
+    except (KeyError, TypeError, ValueError) as exc:
+        raise ValueError("schema-4 training contract constraints mismatch") from exc
+    if saved != runtime or runtime_target < max(
+        saved_minimum, int(checkpoint_total_steps)
+    ):
+        raise ValueError(
+            "schema-4 effective training contract mismatch; "
+            "update-semantic configuration cannot change on strict resume"
+        )
+
+
+def capture_global_rng_state() -> dict[str, Any]:
+    return {
+        "python": random.getstate(),
+        "numpy": np.random.get_state(),
+        "torch_cpu": torch.random.get_rng_state().clone(),
+        "torch_cuda": (
+            [state.clone() for state in torch.cuda.get_rng_state_all()]
+            if torch.cuda.is_available()
+            else None
+        ),
+    }
+
+
+def restore_global_rng_state(state: dict[str, Any]) -> None:
+    required = {"python", "numpy", "torch_cpu", "torch_cuda"}
+    if not isinstance(state, dict) or set(state) != required:
+        raise ValueError("global RNG state schema mismatch")
+    random.setstate(state["python"])
+    np.random.set_state(state["numpy"])
+    torch.random.set_rng_state(torch.as_tensor(state["torch_cpu"], dtype=torch.uint8).cpu())
+    cuda_state = state["torch_cuda"]
+    if cuda_state is not None:
+        if not torch.cuda.is_available():
+            raise RuntimeError("checkpoint contains CUDA RNG state but CUDA is unavailable")
+        if len(cuda_state) != torch.cuda.device_count():
+            raise ValueError("CUDA RNG device-count mismatch")
+        torch.cuda.set_rng_state_all(
+            [torch.as_tensor(item, dtype=torch.uint8).cpu() for item in cuda_state]
+        )
 
 
 def checkpoint_payload(
@@ -22,6 +286,7 @@ def checkpoint_payload(
 ) -> dict[str, Any]:
     return {
         "checkpoint_schema_version": 2,
+        "resume_semantics": "weights_and_optimizer_warm_start_v1",
         "high": agent.high.state_dict(),
         "compact": agent.compact.state_dict(),
         "bridge": agent.bridge.state_dict(),
@@ -195,6 +460,238 @@ def checkpoint_payload(
     }
 
 
+_STRICT_RUNNER_STATE_FIELDS = {
+    "runner_state_schema_version",
+    "num_envs",
+    "observations",
+    "states",
+    "prev_state_info",
+    "prev_reward_info",
+    "last_eval_step",
+    "proto_ratio_over05_count",
+    "proto_ratio_consecutive_over05_count",
+    "proto_ratio_kill_triggered_count",
+    "team_disc_ratio_over05_count",
+    "team_disc_ratio_consecutive_over05_count",
+    "team_disc_ratio_kill_triggered_count",
+    "combined_intrinsic_ratio_over05_count",
+    "combined_intrinsic_ratio_consecutive_over05_count",
+    "combined_intrinsic_ratio_kill_triggered_count",
+}
+
+
+def _validate_runner_state(state: dict[str, Any], *, num_envs: int) -> None:
+    if not isinstance(state, dict) or set(state) != _STRICT_RUNNER_STATE_FIELDS:
+        actual = sorted(state) if isinstance(state, dict) else type(state).__name__
+        raise ValueError(
+            "strict runner state schema mismatch: "
+            f"expected={sorted(_STRICT_RUNNER_STATE_FIELDS)}, actual={actual}"
+        )
+    if int(state["runner_state_schema_version"]) != 1:
+        raise ValueError("unsupported strict runner state schema")
+    if int(state["num_envs"]) != int(num_envs):
+        raise ValueError("strict runner state num_envs mismatch")
+    for name in ("observations", "states", "prev_state_info", "prev_reward_info"):
+        if not isinstance(state[name], (list, tuple)) or len(state[name]) != int(num_envs):
+            raise ValueError(f"strict runner field {name} has the wrong environment count")
+
+
+def _collector_snapshot(collector) -> dict[str, Any]:
+    snapshot_fn = getattr(collector, "snapshot_training_state", None)
+    if not callable(snapshot_fn):
+        raise RuntimeError(
+            "strict standalone checkpoint requires collector.snapshot_training_state()"
+        )
+    snapshot = deepcopy(snapshot_fn())
+    if not isinstance(snapshot, dict):
+        raise TypeError("collector training snapshot must be a mapping")
+    if (
+        snapshot.get("snapshot_capability_name")
+        != STANDALONE_COLLECTOR_SNAPSHOT_CAPABILITY
+        or int(snapshot.get("snapshot_capability_version", -1))
+        != STANDALONE_COLLECTOR_SNAPSHOT_VERSION
+    ):
+        raise ValueError("collector training snapshot capability mismatch")
+    return snapshot
+
+
+def _lazy_module_specs(agent: StandaloneProcessAgent) -> dict[str, Any]:
+    assignment = getattr(agent, "assignment_actionability", None)
+    assignment_spec = None
+    if assignment is not None:
+        assignment_spec = {
+            "xi_dim": int(assignment.xi_dim),
+            "context_dim": int(assignment.context_dim),
+            "num_team_codes": int(assignment.num_team_codes),
+            "hidden_dim": int(agent.assignment_actionability_cfg.hidden_dim),
+        }
+    team_effect = getattr(agent, "team_effect_probe", None)
+    team_effect_spec = None
+    if team_effect is not None:
+        team_effect_spec = {
+            "target_dims": {
+                str(name): int(head[0].normalized_shape[0])
+                for name, head in team_effect.heads.items()
+            },
+            "num_team_codes": int(team_effect.num_team_codes),
+            "hidden_dim": int(agent.team_effect_audit_hidden_dim),
+            "lr": float(team_effect._lr),
+        }
+    return {
+        "assignment_actionability": assignment_spec,
+        "team_effect_probe": team_effect_spec,
+    }
+
+
+def _validate_strict_lazy_module_specs(
+    agent: StandaloneProcessAgent,
+    specs: Any,
+    *,
+    modules: dict[str, Any],
+    optimizers: dict[str, Any],
+    team_effect_optimizer: Any,
+) -> None:
+    """Validate lazy topology without instantiating or loading any state."""
+
+    required = {"assignment_actionability", "team_effect_probe"}
+    if not isinstance(specs, dict) or set(specs) != required:
+        raise ValueError("strict lazy-module specification mismatch")
+
+    assignment_spec = specs["assignment_actionability"]
+    if assignment_spec is None:
+        if modules["assignment_actionability"] is not None or optimizers["q_a_opt"] is not None:
+            raise ValueError("assignment-actionability lazy presence mismatch")
+    else:
+        expected = {"xi_dim", "context_dim", "num_team_codes", "hidden_dim"}
+        if not isinstance(assignment_spec, dict) or set(assignment_spec) != expected:
+            raise ValueError("assignment-actionability constructor specification mismatch")
+        if (
+            int(assignment_spec["xi_dim"]) <= 0
+            or int(assignment_spec["context_dim"]) < 0
+            or int(assignment_spec["num_team_codes"]) != int(agent.num_team_codes)
+            or int(assignment_spec["hidden_dim"])
+            != int(agent.assignment_actionability_cfg.hidden_dim)
+        ):
+            raise ValueError("assignment-actionability constructor identity mismatch")
+        if modules["assignment_actionability"] is None or optimizers["q_a_opt"] is None:
+            raise ValueError("assignment-actionability strict state is incomplete")
+
+    team_effect_spec = specs["team_effect_probe"]
+    if team_effect_spec is None:
+        if modules["team_effect_probe"] is not None or team_effect_optimizer is not None:
+            raise ValueError("team-effect lazy presence mismatch")
+    else:
+        expected = {"target_dims", "num_team_codes", "hidden_dim", "lr"}
+        if not isinstance(team_effect_spec, dict) or set(team_effect_spec) != expected:
+            raise ValueError("team-effect constructor specification mismatch")
+        target_dims = team_effect_spec["target_dims"]
+        if (
+            not isinstance(target_dims, dict)
+            or not target_dims
+            or any(int(value) <= 0 for value in target_dims.values())
+            or int(team_effect_spec["num_team_codes"]) != int(agent.num_team_codes)
+            or int(team_effect_spec["hidden_dim"])
+            != int(agent.team_effect_audit_hidden_dim)
+            or not math.isfinite(float(team_effect_spec["lr"]))
+            or float(team_effect_spec["lr"]) <= 0.0
+        ):
+            raise ValueError("team-effect constructor identity mismatch")
+        if modules["team_effect_probe"] is None:
+            raise ValueError("team-effect strict module state is incomplete")
+
+    current_specs = _lazy_module_specs(agent)
+    for name in required:
+        if current_specs[name] is not None and current_specs[name] != specs[name]:
+            raise ValueError(f"runtime lazy-module identity mismatch for {name}")
+
+
+def strict_checkpoint_payload(
+    agent: StandaloneProcessAgent,
+    args: argparse.Namespace,
+    config,
+    total_steps: int,
+    update_idx: int,
+    *,
+    collector,
+    runner_state: dict[str, Any],
+) -> dict[str, Any]:
+    _validate_runner_state(runner_state, num_envs=int(agent.num_envs))
+    payload = checkpoint_payload(agent, args, config, total_steps, update_idx)
+    collector_snapshot = _collector_snapshot(collector)
+    agent_lifecycle = agent.standalone_lifecycle_state_dict()
+    payload["checkpoint_schema_version"] = STANDALONE_STRICT_SCHEMA_VERSION
+    payload["resume_semantics"] = STANDALONE_STRICT_RESUME_SEMANTICS
+    payload["skill_interval"] = int(agent.skill_interval)
+    payload["strict_trajectory"] = {
+        "strict_trajectory_schema_version": 1,
+        "modules": {
+            name: (
+                getattr(agent, name).state_dict()
+                if getattr(agent, name, None) is not None
+                else None
+            )
+            for name in _STRICT_MODULE_FIELDS
+        },
+        "optimizers": {
+            name: (
+                getattr(agent, name).state_dict()
+                if getattr(agent, name, None) is not None
+                else None
+            )
+            for name in _STRICT_OPTIMIZER_FIELDS
+        },
+        "normalizers": {
+            name: (
+                getattr(agent, name).state_dict()
+                if getattr(agent, name, None) is not None
+                else None
+            )
+            for name in _STRICT_NORMALIZER_FIELDS
+        },
+        "lazy_module_specs": _lazy_module_specs(agent),
+        "team_effect_probe_optimizer": (
+            agent.team_effect_probe.opt.state_dict()
+            if getattr(agent, "team_effect_probe", None) is not None
+            and agent.team_effect_probe.opt is not None
+            else None
+        ),
+        "training_contract": effective_training_contract(agent, args, config),
+        "agent_lifecycle": agent_lifecycle,
+        "collector_snapshot": collector_snapshot,
+        "runner_state": deepcopy(runner_state),
+        # Capture this last so any snapshot serialization work is excluded from
+        # the resumed trajectory's next process-global draw.
+        "global_rng": capture_global_rng_state(),
+    }
+    return payload
+
+
+def save_training_checkpoint(
+    path: Path,
+    agent: StandaloneProcessAgent,
+    args: argparse.Namespace,
+    config,
+    total_steps: int,
+    update_idx: int,
+    *,
+    collector,
+    runner_state: dict[str, Any],
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    torch.save(
+        strict_checkpoint_payload(
+            agent,
+            args,
+            config,
+            total_steps,
+            update_idx,
+            collector=collector,
+            runner_state=runner_state,
+        ),
+        path,
+    )
+
+
 def save_checkpoint(
     path: Path,
     agent: StandaloneProcessAgent,
@@ -278,12 +775,258 @@ def load_reward_pure_legacy_high(
     return sorted(dropped)
 
 
+def _materialize_strict_lazy_modules(
+    agent: StandaloneProcessAgent,
+    specs: dict[str, Any],
+) -> None:
+    required = {"assignment_actionability", "team_effect_probe"}
+    if not isinstance(specs, dict) or set(specs) != required:
+        raise ValueError("strict lazy-module specification mismatch")
+
+    assignment_spec = specs["assignment_actionability"]
+    if assignment_spec is not None and getattr(agent, "assignment_actionability", None) is None:
+        from ha_ctse_process.assignment_actionability import (
+            AssignmentActionabilityDiscriminator,
+        )
+
+        expected = {"xi_dim", "context_dim", "num_team_codes", "hidden_dim"}
+        if not isinstance(assignment_spec, dict) or set(assignment_spec) != expected:
+            raise ValueError("assignment-actionability constructor specification mismatch")
+        agent.assignment_actionability = AssignmentActionabilityDiscriminator(
+            xi_dim=int(assignment_spec["xi_dim"]),
+            context_dim=int(assignment_spec["context_dim"]),
+            num_team_codes=int(assignment_spec["num_team_codes"]),
+            hidden_dim=int(assignment_spec["hidden_dim"]),
+        ).to(agent.device)
+        agent.q_a_opt = torch.optim.Adam(
+            agent.assignment_actionability.parameters(), lr=1e-3
+        )
+
+    team_effect_spec = specs["team_effect_probe"]
+    if team_effect_spec is not None and getattr(agent, "team_effect_probe", None) is None:
+        from ha_ctse_process.team_effect_targets import TeamEffectTargetProbe
+
+        expected = {"target_dims", "num_team_codes", "hidden_dim", "lr"}
+        if not isinstance(team_effect_spec, dict) or set(team_effect_spec) != expected:
+            raise ValueError("team-effect constructor specification mismatch")
+        agent.team_effect_probe = TeamEffectTargetProbe(
+            target_dims={
+                str(name): int(value)
+                for name, value in dict(team_effect_spec["target_dims"]).items()
+            },
+            num_team_codes=int(team_effect_spec["num_team_codes"]),
+            hidden_dim=int(team_effect_spec["hidden_dim"]),
+            lr=float(team_effect_spec["lr"]),
+        ).to(agent.device)
+        agent._team_effect_prior = torch.full(
+            (int(agent.num_team_codes),),
+            1.0 / float(agent.num_team_codes),
+            device=agent.device,
+        )
+
+
+def _strict_presence_and_load(
+    *,
+    owner: Any,
+    field: str,
+    saved_state: Any,
+    kind: str,
+) -> None:
+    target = getattr(owner, field, None)
+    if (saved_state is None) != (target is None):
+        raise ValueError(
+            f"strict {kind} presence mismatch for {field}: "
+            f"checkpoint={saved_state is not None}, runtime={target is not None}"
+        )
+    if target is None:
+        return
+    if kind == "module":
+        target.load_state_dict(saved_state, strict=True)
+    else:
+        target.load_state_dict(saved_state)
+
+
+def _load_schema4_agent_state(
+    checkpoint: dict[str, Any],
+    agent: StandaloneProcessAgent,
+    *,
+    load_optimizers: bool,
+) -> dict[str, Any]:
+    if int(checkpoint.get("checkpoint_schema_version", -1)) != STANDALONE_STRICT_SCHEMA_VERSION:
+        raise ValueError("strict trajectory resume requires standalone schema-4")
+    if checkpoint.get("resume_semantics") != STANDALONE_STRICT_RESUME_SEMANTICS:
+        raise ValueError("schema-4 checkpoint has the wrong resume semantics")
+    strict_identity = {
+        "n_agents": int(agent.n_agents),
+        "n_skills": int(agent.n_skills),
+        "action_dim": int(agent.action_dim),
+        "action_space_type": str(agent.action_space_type),
+        "duration_candidates": tuple(int(value) for value in agent.duration_candidates),
+        "skill_interval": int(agent.skill_interval),
+        "high_controller": str(agent.high_controller),
+        "use_recurrent_low_level": bool(agent.use_recurrent_low_level),
+        "low_level_architecture": str(agent.low_level_architecture),
+    }
+    for name, expected in strict_identity.items():
+        if name not in checkpoint:
+            raise ValueError(f"schema-4 checkpoint is missing identity field {name}")
+        actual = checkpoint[name]
+        if name == "duration_candidates":
+            actual = tuple(int(value) for value in actual)
+        elif name in {"n_agents", "n_skills", "action_dim", "skill_interval"}:
+            actual = int(actual)
+        elif name == "use_recurrent_low_level":
+            actual = bool(actual)
+        else:
+            actual = str(actual)
+        if actual != expected:
+            raise ValueError(
+                f"schema-4 checkpoint identity mismatch for {name}: "
+                f"checkpoint={actual!r}, runtime={expected!r}"
+            )
+    bundle = checkpoint.get("strict_trajectory")
+    if not isinstance(bundle, dict):
+        raise ValueError("schema-4 checkpoint is missing strict_trajectory")
+    required = {
+        "strict_trajectory_schema_version",
+        "modules",
+        "optimizers",
+        "normalizers",
+        "lazy_module_specs",
+        "team_effect_probe_optimizer",
+        "training_contract",
+        "agent_lifecycle",
+        "global_rng",
+        "collector_snapshot",
+        "runner_state",
+    }
+    if set(bundle) != required or int(bundle["strict_trajectory_schema_version"]) != 1:
+        raise ValueError("schema-4 strict trajectory bundle mismatch")
+    modules = bundle["modules"]
+    optimizers = bundle["optimizers"]
+    normalizers = bundle["normalizers"]
+    if not isinstance(modules, dict) or set(modules) != set(_STRICT_MODULE_FIELDS):
+        raise ValueError("schema-4 module schema mismatch")
+    if not isinstance(optimizers, dict) or set(optimizers) != set(_STRICT_OPTIMIZER_FIELDS):
+        raise ValueError("schema-4 optimizer schema mismatch")
+    if not isinstance(normalizers, dict) or set(normalizers) != set(_STRICT_NORMALIZER_FIELDS):
+        raise ValueError("schema-4 normalizer schema mismatch")
+
+    _validate_strict_lazy_module_specs(
+        agent,
+        bundle["lazy_module_specs"],
+        modules=modules,
+        optimizers=optimizers,
+        team_effect_optimizer=bundle["team_effect_probe_optimizer"],
+    )
+    _materialize_strict_lazy_modules(agent, bundle["lazy_module_specs"])
+    for name in _STRICT_MODULE_FIELDS:
+        _strict_presence_and_load(
+            owner=agent, field=name, saved_state=modules[name], kind="module"
+        )
+    for name in _STRICT_NORMALIZER_FIELDS:
+        _strict_presence_and_load(
+            owner=agent, field=name, saved_state=normalizers[name], kind="normalizer"
+        )
+    if load_optimizers:
+        for name in _STRICT_OPTIMIZER_FIELDS:
+            _strict_presence_and_load(
+                owner=agent,
+                field=name,
+                saved_state=optimizers[name],
+                kind="optimizer",
+            )
+        saved_team_effect_opt = bundle["team_effect_probe_optimizer"]
+        team_effect = getattr(agent, "team_effect_probe", None)
+        if saved_team_effect_opt is None:
+            if team_effect is not None and team_effect.opt is not None:
+                raise ValueError("strict team-effect optimizer presence mismatch")
+        else:
+            if team_effect is None:
+                raise ValueError("strict team-effect optimizer lacks its module")
+            team_effect._ensure_opt()
+            team_effect.opt.load_state_dict(saved_team_effect_opt)
+    agent.checkpoint_source_controller = str(checkpoint["high_controller"])
+    agent.checkpoint_migration_mode = "strict_schema4_resume"
+    agent.checkpoint_migrated_high_keys = tuple(agent.high.state_dict().keys())
+    return bundle
+
+
+def load_training_checkpoint(
+    path: str | Path,
+    agent: StandaloneProcessAgent,
+    *,
+    collector,
+    args: argparse.Namespace,
+    config: Any,
+) -> tuple[int, int, dict[str, Any]]:
+    checkpoint = torch.load(
+        Path(path), map_location=agent.device, weights_only=False
+    )
+    if int(checkpoint.get("checkpoint_schema_version", -1)) != STANDALONE_STRICT_SCHEMA_VERSION:
+        raise ValueError(
+            "strict training resume requires standalone schema-4; "
+            "older checkpoints are warm-start/evaluation only"
+        )
+    bundle = checkpoint.get("strict_trajectory")
+    if not isinstance(bundle, dict) or "training_contract" not in bundle:
+        raise ValueError("schema-4 checkpoint is missing its training contract")
+    expected_contract = effective_training_contract(agent, args, config)
+    _validate_training_contract(
+        bundle["training_contract"],
+        expected_contract,
+        checkpoint_total_steps=int(checkpoint.get("total_steps", 0)),
+    )
+    runner_state = deepcopy(bundle["runner_state"])
+    _validate_runner_state(runner_state, num_envs=int(agent.num_envs))
+    restore_fn = getattr(collector, "restore_training_state", None)
+    if not callable(restore_fn):
+        raise RuntimeError(
+            "strict standalone resume requires collector.restore_training_state(snapshot)"
+        )
+    collector_snapshot = deepcopy(bundle["collector_snapshot"])
+    if (
+        not isinstance(collector_snapshot, dict)
+        or collector_snapshot.get("snapshot_capability_name")
+        != STANDALONE_COLLECTOR_SNAPSHOT_CAPABILITY
+        or int(collector_snapshot.get("snapshot_capability_version", -1))
+        != STANDALONE_COLLECTOR_SNAPSHOT_VERSION
+    ):
+        raise ValueError("schema-4 collector snapshot capability mismatch")
+    bundle = _load_schema4_agent_state(checkpoint, agent, load_optimizers=True)
+    restore_fn(collector_snapshot)
+    agent.load_standalone_lifecycle_state_dict(bundle["agent_lifecycle"])
+    # Restore process-global streams last: neither deserialization nor collector
+    # restoration may consume a draw belonging to the resumed trajectory.
+    restore_global_rng_state(bundle["global_rng"])
+    return (
+        int(checkpoint.get("total_steps", 0)),
+        int(checkpoint.get("update_idx", 0)),
+        runner_state,
+    )
+
+
 def load_checkpoint(
     path: str | Path,
     agent: StandaloneProcessAgent,
     load_optimizers: bool = True,
 ) -> tuple[int, int]:
-    checkpoint = torch.load(Path(path), map_location=agent.device)
+    checkpoint = torch.load(
+        Path(path), map_location=agent.device, weights_only=False
+    )
+    checkpoint_schema = int(checkpoint.get("checkpoint_schema_version", 1))
+    if checkpoint_schema == STANDALONE_STRICT_SCHEMA_VERSION:
+        if load_optimizers:
+            raise ValueError(
+                "schema-4 training resume requires load_training_checkpoint(); "
+                "load_checkpoint() is evaluation/warm-start only"
+            )
+        _load_schema4_agent_state(checkpoint, agent, load_optimizers=False)
+        return int(checkpoint.get("total_steps", 0)), int(
+            checkpoint.get("update_idx", 0)
+        )
+    if checkpoint_schema == 3:
+        raise ValueError("event schema-3 checkpoints require the event checkpoint loader")
     source_controller = str(checkpoint.get("high_controller") or "legacy_duration")
     agent.checkpoint_source_controller = source_controller
     if bool(getattr(agent, "r30_enabled", False)):
@@ -331,55 +1074,55 @@ def load_checkpoint(
         ) from exc
     agent.process.load_state_dict(checkpoint["process"])
     if "process_posterior" in checkpoint:
-        agent.process_posterior.load_state_dict(checkpoint["process_posterior"], strict=False)
+        agent.process_posterior.load_state_dict(checkpoint["process_posterior"], strict=True)
     if (
         "outcome_residual_probe" in checkpoint
         and checkpoint.get("outcome_residual_probe") is not None
         and getattr(agent, "outcome_residual_probe", None) is not None
     ):
-        agent.outcome_residual_probe.load_state_dict(checkpoint["outcome_residual_probe"], strict=False)
+        agent.outcome_residual_probe.load_state_dict(checkpoint["outcome_residual_probe"], strict=True)
     if (
         "topology_role_probe" in checkpoint
         and checkpoint.get("topology_role_probe") is not None
         and getattr(agent, "topology_role_probe", None) is not None
     ):
-        agent.topology_role_probe.load_state_dict(checkpoint["topology_role_probe"], strict=False)
+        agent.topology_role_probe.load_state_dict(checkpoint["topology_role_probe"], strict=True)
     if (
         "transition_discriminator" in checkpoint
         and checkpoint.get("transition_discriminator") is not None
         and getattr(agent, "transition_discriminator", None) is not None
     ):
-        agent.transition_discriminator.load_state_dict(checkpoint["transition_discriminator"], strict=False)
+        agent.transition_discriminator.load_state_dict(checkpoint["transition_discriminator"], strict=True)
     if (
         "prototype_discriminator" in checkpoint
         and checkpoint.get("prototype_discriminator") is not None
         and getattr(agent, "prototype_discriminator", None) is not None
     ):
-        agent.prototype_discriminator.load_state_dict(checkpoint["prototype_discriminator"], strict=False)
+        agent.prototype_discriminator.load_state_dict(checkpoint["prototype_discriminator"], strict=True)
     if (
         "compact_return_head" in checkpoint
         and checkpoint.get("compact_return_head") is not None
         and getattr(agent, "compact_return_head", None) is not None
     ):
-        agent.compact_return_head.load_state_dict(checkpoint["compact_return_head"], strict=False)
+        agent.compact_return_head.load_state_dict(checkpoint["compact_return_head"], strict=True)
     if (
         "situation_hazard" in checkpoint
         and checkpoint.get("situation_hazard") is not None
         and getattr(agent, "situation_hazard", None) is not None
     ):
-        agent.situation_hazard.load_state_dict(checkpoint["situation_hazard"], strict=False)
+        agent.situation_hazard.load_state_dict(checkpoint["situation_hazard"], strict=True)
     if (
         "team_transition" in checkpoint
         and checkpoint.get("team_transition") is not None
         and getattr(agent, "team_transition", None) is not None
     ):
-        agent.team_transition.load_state_dict(checkpoint["team_transition"], strict=False)
+        agent.team_transition.load_state_dict(checkpoint["team_transition"], strict=True)
     if (
         "team_discriminator" in checkpoint
         and checkpoint.get("team_discriminator") is not None
         and getattr(agent, "team_discriminator", None) is not None
     ):
-        agent.team_discriminator.load_state_dict(checkpoint["team_discriminator"], strict=False)
+        agent.team_discriminator.load_state_dict(checkpoint["team_discriminator"], strict=True)
     if "team_intent_prior_counts" in checkpoint and checkpoint.get("team_intent_prior_counts") is not None:
         raw_prior_counts = checkpoint["team_intent_prior_counts"]
         if isinstance(raw_prior_counts, torch.Tensor):
@@ -413,10 +1156,7 @@ def load_checkpoint(
             if bool(getattr(agent, "r30_enabled", False)):
                 agent.high_opt.load_state_dict(checkpoint["high_opt"])
             else:
-                try:
-                    agent.high_opt.load_state_dict(checkpoint["high_opt"])
-                except ValueError:
-                    pass
+                agent.high_opt.load_state_dict(checkpoint["high_opt"])
         if "low_opt" in checkpoint and checkpoint.get("low_opt") is not None and agent.low_opt is not None:
             agent.low_opt.load_state_dict(checkpoint["low_opt"])
         if (
@@ -432,37 +1172,25 @@ def load_checkpoint(
         ):
             agent.low_critic_opt.load_state_dict(checkpoint["low_critic_opt"])
         if "process_opt" in checkpoint:
-            try:
-                agent.process_opt.load_state_dict(checkpoint["process_opt"])
-            except ValueError:
-                pass
+            agent.process_opt.load_state_dict(checkpoint["process_opt"])
         if (
             "prototype_disc_opt" in checkpoint
             and checkpoint.get("prototype_disc_opt") is not None
             and getattr(agent, "prototype_disc_opt", None) is not None
         ):
-            try:
-                agent.prototype_disc_opt.load_state_dict(checkpoint["prototype_disc_opt"])
-            except ValueError:
-                pass
+            agent.prototype_disc_opt.load_state_dict(checkpoint["prototype_disc_opt"])
         if (
             "team_transition_opt" in checkpoint
             and checkpoint.get("team_transition_opt") is not None
             and getattr(agent, "team_transition_opt", None) is not None
         ):
-            try:
-                agent.team_transition_opt.load_state_dict(checkpoint["team_transition_opt"])
-            except ValueError:
-                pass
+            agent.team_transition_opt.load_state_dict(checkpoint["team_transition_opt"])
         if (
             "team_disc_opt" in checkpoint
             and checkpoint.get("team_disc_opt") is not None
             and getattr(agent, "team_disc_opt", None) is not None
         ):
-            try:
-                agent.team_disc_opt.load_state_dict(checkpoint["team_disc_opt"])
-            except ValueError:
-                pass
+            agent.team_disc_opt.load_state_dict(checkpoint["team_disc_opt"])
     return int(checkpoint.get("total_steps", 0)), int(checkpoint.get("update_idx", 0))
 
 
@@ -539,6 +1267,7 @@ def load_checkpoint_metadata(path: str | Path) -> dict[str, Any]:
 
     return {
         "checkpoint_schema_version": checkpoint.get("checkpoint_schema_version", 1),
+        "resume_semantics": checkpoint.get("resume_semantics"),
         "high_controller": checkpoint.get("high_controller"),
         "r30_contract": checkpoint.get("r30_contract"),
         "checkpoint_migration": checkpoint.get("checkpoint_migration"),

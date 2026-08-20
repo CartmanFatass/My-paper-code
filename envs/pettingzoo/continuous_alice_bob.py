@@ -22,6 +22,7 @@ class ContinuousAliceBobEnv(ParallelEnv):
         self.possible_agents = ["alice", "bob"]
         self.agents = self.possible_agents[:]
         self.agent_ids = {name: i for i, name in enumerate(self.possible_agents)}
+        self.np_random = np.random.RandomState()
 
         self._action_space = {
             agent: gymnasium.spaces.Box(low=-1, high=1, shape=(2,), dtype=np.float32)
@@ -64,7 +65,7 @@ class ContinuousAliceBobEnv(ParallelEnv):
 
     def reset(self, seed=None, options=None):
         if seed is not None:
-            np.random.seed(seed)
+            self.np_random = np.random.RandomState(seed)
             
         self.agents = self.possible_agents[:]
         self.steps = 0
@@ -101,7 +102,7 @@ class ContinuousAliceBobEnv(ParallelEnv):
         for agent_idx in range(2):
             for attempt in range(max_attempts):
                 # Generate random position within world bounds, considering agent radius
-                pos = np.random.uniform(
+                pos = self.np_random.uniform(
                     low=self.agent_radius, 
                     high=self.world_size - self.agent_radius, 
                     size=2

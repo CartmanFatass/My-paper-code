@@ -407,9 +407,8 @@ class StandaloneLowUpdateMixin:
         actor_params = list(self.low.actor_update_parameters())
         critic_params = list(self.low.critic_update_parameters())
         update_count = 0
-        rng = np.random.default_rng()
         for _epoch in range(self.low_ppo_epochs):
-            order = rng.permutation(num_chunks)
+            order = self._low_update_shuffle_rng.permutation(num_chunks)
             for start in range(0, len(order), self.low_sequence_batch_size):
                 batch_ids = order[start : start + self.low_sequence_batch_size]
                 batch = self._low_batch_from_chunk_ids(data, batch_ids)

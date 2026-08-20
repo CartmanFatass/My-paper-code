@@ -2,6 +2,7 @@ import numpy as np
 from gymnasium.spaces import Box, Dict
 
 from envs.pettingzoo.relay.routed_core import UAVRoutedRelayEnv
+from envs.pettingzoo.uav_cpp_backend import DEFAULT_ENERGY_RELAY_GEOMETRY_BACKEND
 
 
 class _EnergyAwareConfigProxy:
@@ -53,6 +54,16 @@ class UAVEnergyAwareRelayEnv(UAVRoutedRelayEnv):
 
         base_overrides = self._build_profile_overrides(stage, config)
         base_overrides.update(kwargs)
+        base_overrides["relay_geometry_backend"] = kwargs.get(
+            "relay_geometry_backend",
+            getattr(
+                config,
+                "relay_geometry_backend",
+                DEFAULT_ENERGY_RELAY_GEOMETRY_BACKEND,
+            )
+            if config is not None
+            else DEFAULT_ENERGY_RELAY_GEOMETRY_BACKEND,
+        )
         base_overrides["reward_type"] = kwargs.get(
             "reward_type",
             getattr(config, "energy_reward_type", getattr(config, "reward_type", "load_balance")) if config else "load_balance",
@@ -61,6 +72,7 @@ class UAVEnergyAwareRelayEnv(UAVRoutedRelayEnv):
         # Scenario 7 adds energy state after the base transition, so the base
         # observations/state would be immediately discarded and rebuilt.
         self._defer_base_view_materialization = True
+        self._defer_base_topology_materialization = True
         proxy = _EnergyAwareConfigProxy(config, base_overrides)
         super().__init__(config=proxy, render_mode=kwargs.get("render_mode", None), seed=kwargs.get("seed", None))
         if self.action_space_type != "continuous":
@@ -451,6 +463,25 @@ class UAVEnergyAwareRelayEnv(UAVRoutedRelayEnv):
         self._init_charging_stations()
         self._reset_energy_state()
 
+        # The base reset necessarily runs before Scenario 7 samples its battery
+        # state.  Rebuild every communication consumer after that sample so a
+        # previous episode's unavailable mask cannot survive into the new one.
+        self._update_channel_state()
+        self._update_uav_connections()
+        if self.routing_protocol == "hggr":
+            self.hop_map = self._calculate_hop_map()
+        self._compute_routing_paths()
+        self.last_energy_reward_components = self._calculate_energy_reward_components()
+        self.current_graph_potential = (
+            self._graph_service_potential()
+            if self.scenario7_reward_variant in {
+                "qos_fixed_safety_graph_pbrs",
+                "qos_fixed_safety_unbounded_graph_pbrs",
+                "qos_adaptive_safety_graph_pbrs",
+            }
+            else 0.0
+        )
+
         observations = {agent: self._get_observation(agent) for agent in self.agents}
         observations = self._update_observations_dict(observations)
 
@@ -519,15 +550,9 @@ class UAVEnergyAwareRelayEnv(UAVRoutedRelayEnv):
         self.episode_energy_charged_wh = 0.0
         self.episode_graph_pbrs_sum = 0.0
         self.last_energy_reward_components = self._calculate_energy_reward_components()
-        self.current_graph_potential = (
-            self._graph_service_potential()
-            if self.scenario7_reward_variant in {
-                "qos_fixed_safety_graph_pbrs",
-                "qos_fixed_safety_unbounded_graph_pbrs",
-                "qos_adaptive_safety_graph_pbrs",
-            }
-            else 0.0
-        )
+        # Reset owns the one authoritative topology materialization and computes
+        # this potential after channel/connection/routing state is current.
+        self.current_graph_potential = 0.0
         self.current_euclidean_potential = 0.0
         self.last_user_rates_mbps = np.zeros(self.n_users, dtype=float)
         self.last_user_demand_bps = self._current_user_qos_demand_bps().copy()

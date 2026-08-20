@@ -1138,6 +1138,7 @@ class R_Actor(nn.Module):
         self._use_naive_recurrent_policy = args.use_naive_recurrent_policy
         self._use_recurrent_policy = args.use_recurrent_policy
         self._recurrent_N = args.recurrent_N
+        self._rnn_sequence_backend = getattr(args, "rnn_sequence_backend", "step_reference")
         self.tpdv = dict(dtype=torch.float32, device=device)
 
         obs_shape = get_shape_from_obs_space(obs_space)
@@ -1147,7 +1148,13 @@ class R_Actor(nn.Module):
         self.film_generator = nn.Linear(n_z, 2 * self.hidden_size)
 
         if self._use_naive_recurrent_policy or self._use_recurrent_policy:
-            self.rnn = RNNLayer(self.hidden_size, self.hidden_size, self._recurrent_N, self._use_orthogonal)
+            self.rnn = RNNLayer(
+                self.hidden_size,
+                self.hidden_size,
+                self._recurrent_N,
+                self._use_orthogonal,
+                sequence_backend=self._rnn_sequence_backend,
+            )
 
         self.act = ACTLayer(
             action_space,
@@ -1229,6 +1236,7 @@ class R_Critic(nn.Module):
         self._use_naive_recurrent_policy = args.use_naive_recurrent_policy
         self._use_recurrent_policy = args.use_recurrent_policy
         self._recurrent_N = args.recurrent_N
+        self._rnn_sequence_backend = getattr(args, "rnn_sequence_backend", "step_reference")
         self._use_popart = args.use_popart
         self.tpdv = dict(dtype=torch.float32, device=device)
         init_method = [nn.init.xavier_uniform_, nn.init.orthogonal_][self._use_orthogonal]
@@ -1240,7 +1248,13 @@ class R_Critic(nn.Module):
         self.film_generator = nn.Linear(n_Z, 2 * self.hidden_size)
 
         if self._use_naive_recurrent_policy or self._use_recurrent_policy:
-            self.rnn = RNNLayer(self.hidden_size, self.hidden_size, self._recurrent_N, self._use_orthogonal)
+            self.rnn = RNNLayer(
+                self.hidden_size,
+                self.hidden_size,
+                self._recurrent_N,
+                self._use_orthogonal,
+                sequence_backend=self._rnn_sequence_backend,
+            )
 
         def init_(m):
             return init(m, init_method, lambda x: nn.init.constant_(x, 0))
@@ -1306,6 +1320,9 @@ class SkillDiscoverer(nn.Module):
                 self.use_naive_recurrent_policy = False
                 self.use_recurrent_policy = True
                 self.recurrent_N = 1
+                self.rnn_sequence_backend = getattr(
+                    config, "rnn_sequence_backend", "step_reference"
+                )
                 self.use_feature_normalization = False
                 self.use_popart = False
                 self.continuous_action_distribution = getattr(
@@ -1413,10 +1430,19 @@ class SkillDiscoverer(nn.Module):
 
     def evaluate_sequence(self, observations_seq, agent_skills_seq, actions_seq, global_states_seq, team_skills_seq, initial_hxs=None, dones_seq=None, initial_critic_hxs=None, compact_context_seq=None):
         T, B, _ = observations_seq.shape
-        # The dones_seq from buffer might be (T, B, 1), ensure it's (T, B) for mask creation
+        if dones_seq is None:
+            dones_seq = torch.zeros((T, B), device=observations_seq.device)
+        # A stored done belongs to the transition leaving that row.  RNN masks
+        # are entry masks, so the done vector must be shifted by one row.
         if dones_seq.dim() > 2:
             dones_seq = dones_seq.squeeze(-1)
-        masks = (1 - dones_seq.float())
+        if dones_seq.shape != (T, B):
+            raise ValueError(
+                f"dones_seq must have shape {(T, B)} or {(T, B, 1)}, got {tuple(dones_seq.shape)}"
+            )
+        masks = torch.ones_like(dones_seq, dtype=torch.float32)
+        if T > 1:
+            masks[1:] = 1.0 - dones_seq[:-1].float()
         actor_observations = self._apply_compact_context(
             observations_seq,
             compact_context_seq,

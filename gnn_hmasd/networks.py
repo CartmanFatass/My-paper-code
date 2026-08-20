@@ -98,6 +98,41 @@ class GNNRoleAssigner(nn.Module):
             nn.Linear(self.gnn_hidden_dim // 2, 1)
         )
 
+    def _policy_value(self, graph_data):
+        """Return per-UAV role logits and one pooled value per input graph."""
+        x, edge_index = graph_data.x, graph_data.edge_index
+        x = self.conv1(x, edge_index)
+        x = F.relu(x)
+        x = self.conv2(x, edge_index)
+
+        uav_nodes_mask = graph_data.uav_mask
+        uav_features = x[uav_nodes_mask]
+        role_logits = self.role_head(uav_features)
+
+        node_batch = getattr(graph_data, "batch", None)
+        if node_batch is None:
+            graph_features = x.mean(dim=0, keepdim=True)
+            uav_batch = torch.zeros(
+                uav_features.shape[0], dtype=torch.long, device=x.device
+            )
+        else:
+            node_batch = node_batch.to(device=x.device, dtype=torch.long)
+            num_graphs = int(node_batch.max().item()) + 1 if node_batch.numel() else 0
+            if num_graphs <= 0:
+                raise ValueError("batched graph input contains no graphs")
+            graph_sums = torch.zeros(
+                (num_graphs, x.shape[-1]), dtype=x.dtype, device=x.device
+            )
+            graph_sums.index_add_(0, node_batch, x)
+            graph_counts = torch.bincount(node_batch, minlength=num_graphs).to(x.dtype)
+            if bool(torch.any(graph_counts <= 0).item()):
+                raise ValueError("batched graph input contains an empty graph")
+            graph_features = graph_sums / graph_counts.unsqueeze(-1)
+            uav_batch = node_batch[uav_nodes_mask]
+
+        values = self.value_head(graph_features).squeeze(-1)
+        return role_logits, values, uav_batch
+
     def forward(self, graph_data, deterministic=False):
         """
         参数:
@@ -109,20 +144,7 @@ class GNNRoleAssigner(nn.Module):
             role_logits: 角色分类的logits [num_uav_nodes, num_roles]
             value: 状态价值估计
         """
-        x, edge_index = graph_data.x, graph_data.edge_index
-
-        # GNN消息传递
-        x = self.conv1(x, edge_index)
-        x = F.relu(x)
-        x = F.dropout(x, p=0.5, training=self.training)
-        x = self.conv2(x, edge_index) # [num_nodes, gnn_hidden_dim]
-
-        # 仅为无人机节点计算角色和价值
-        uav_nodes_mask = graph_data.uav_mask
-        uav_features = x[uav_nodes_mask] # [num_uav_nodes, gnn_hidden_dim]
-
-        # 计算角色
-        role_logits = self.role_head(uav_features) # [num_uav_nodes, num_roles]
+        role_logits, values, _uav_batch = self._policy_value(graph_data)
         role_dist = Categorical(logits=role_logits)
 
         if deterministic:
@@ -132,11 +154,16 @@ class GNNRoleAssigner(nn.Module):
 
         role_log_probs = role_dist.log_prob(roles)
 
-        # 计算价值 (基于所有节点特征的均值池化)
-        global_graph_feature = x.mean(dim=0) # [gnn_hidden_dim]
-        value = self.value_head(global_graph_feature)
+        return roles, role_log_probs, role_logits, values
 
-        return roles, role_log_probs, role_logits, value
+    def evaluate_roles(self, graph_data, roles):
+        """Evaluate stored roles without sampling a replacement action."""
+        role_logits, values, uav_batch = self._policy_value(graph_data)
+        roles = torch.as_tensor(roles, dtype=torch.long, device=role_logits.device).reshape(-1)
+        if roles.numel() != role_logits.shape[0]:
+            raise ValueError("stored role count does not match batched UAV count")
+        distribution = Categorical(logits=role_logits)
+        return distribution.log_prob(roles), distribution.entropy(), values, uav_batch
 
 class TaskExecutor(nn.Module):
     """
@@ -171,6 +198,36 @@ class TaskExecutor(nn.Module):
         
         initialize_weights(self.action_mean, gain=0.01)
 
+    def _distribution_value(self, obs, role):
+        obs = obs.float()
+        role = role.long()
+        role_emb = self.role_embedding(role)
+        actor_input = torch.cat([obs, role_emb], dim=-1)
+        critic_input = torch.cat([obs, role_emb], dim=-1)
+        actor_features = self.actor_net(actor_input)
+        mean = self.action_mean(actor_features)
+        action_log_std = self.action_log_std.expand_as(mean)
+        distribution = torch.distributions.Normal(mean, torch.exp(action_log_std))
+        value = self.critic_net(critic_input).squeeze(-1)
+        return distribution, value
+
+    def get_value(self, obs, role):
+        return self._distribution_value(obs, role)[1]
+
+    def evaluate_actions(self, obs, role, actions):
+        distribution, value = self._distribution_value(obs, role)
+        actions = torch.as_tensor(actions, dtype=obs.dtype, device=obs.device)
+        if actions.shape != distribution.loc.shape:
+            raise ValueError(
+                f"stored action shape {tuple(actions.shape)} does not match "
+                f"policy shape {tuple(distribution.loc.shape)}"
+            )
+        return (
+            distribution.log_prob(actions).sum(dim=-1),
+            distribution.entropy().sum(dim=-1),
+            value,
+        )
+
     def forward(self, obs, role, deterministic=False):
         """
         参数:
@@ -182,29 +239,14 @@ class TaskExecutor(nn.Module):
             log_prob: 动作对数概率
             value: 价值估计
         """
-        role_emb = self.role_embedding(role)
-        
-        # 拼接观测和角色嵌入
-        actor_input = torch.cat([obs, role_emb], dim=-1)
-        critic_input = torch.cat([obs, role_emb], dim=-1)
-
-        # Actor
-        actor_features = self.actor_net(actor_input)
-        mean = self.action_mean(actor_features)
-        
-        action_log_std = self.action_log_std.expand_as(mean)
-        std = torch.exp(action_log_std)
-        action_dist = torch.distributions.Normal(mean, std)
+        action_dist, value = self._distribution_value(obs, role)
 
         if deterministic:
-            action = mean
+            action = action_dist.mean
         else:
             action = action_dist.sample()
         
         log_prob = action_dist.log_prob(action).sum(dim=-1)
-
-        # Critic
-        value = self.critic_net(critic_input).squeeze(-1)
 
         return action, log_prob, value
 

@@ -72,6 +72,19 @@ def test_train_loop_profiles_existing_direct_phase_boundaries_only() -> None:
     assert runner_source.count("agent.update_low(") == 1
 
 
+def test_periodic_checkpoint_follows_due_evaluation_frontier() -> None:
+    runner_source = inspect.getsource(standalone_train_runner.train_loop)
+
+    eval_guard = "if int(args.eval_interval) > 0"
+    save_guard = "if int(args.save_interval) > 0"
+    assert runner_source.count(eval_guard) == 1
+    assert runner_source.count(save_guard) == 1
+    assert runner_source.index(eval_guard) < runner_source.index(save_guard)
+    assert runner_source.index("last_eval_step = int(total_steps)") < runner_source.index(
+        save_guard
+    )
+
+
 def test_train_loop_constructs_profiler_only_in_the_positive_interval_branch() -> None:
     source = inspect.getsource(standalone_train_runner)
     assert source.count("InfrastructureProfiler(") == 1

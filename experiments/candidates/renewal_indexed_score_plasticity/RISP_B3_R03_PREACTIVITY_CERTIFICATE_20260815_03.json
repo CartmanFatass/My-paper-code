@@ -1,0 +1,120 @@
+{
+  "schema": "RISP-B3-TRG-R03-PREACTIVITY-CERTIFICATE-20260815-03",
+  "science_revision": "RISP-B3-TRG-SCIENCE-20260815-03",
+  "science_card": "C:\\Projects\\HMASD\\docs\\research\\candidates\\renewal_indexed_score_plasticity\\RISP_B3_TRACK_RELAY_GATED_COMPOSITE_R03.md",
+  "science_card_sha256": "11f0fca9ac767dfc4c519aa8b2307795124929ffecc69f13286b8dbff3915778",
+  "external_pro_closed_intake": "C:\\Projects\\HMASD\\docs\\research\\candidates\\renewal_indexed_score_plasticity\\RISP_B3_R03_EXTERNAL_PRO_CLOSED_INTAKE.md",
+  "external_pro_closed_intake_sha256": "9fccfcf84e92b1bf47ca4b6d8d4fe2e6899bb429b2bf907e96661ab51d977fa4",
+  "portfolio_authorization": "C:\\Projects\\HMASD\\docs\\research\\workflow-runs\\2026-08-11_five-round-research-team\\RISP_B3_ONLGR_HOST_CARD_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md",
+  "portfolio_authorization_sha256": "286d2e78da46b0218dca8465e2f2d63951f58fccd0bf6d634acf112330e11625",
+  "technical_acceptance": true,
+  "scientific_activity_started": false,
+  "partial_scientific_values_exposed": false,
+  "coordinate_schema": "RISP-B3-TRG-R03-LAZY-SHAKE256-PREFIX-20260815-01",
+  "coordinate_root": "5e823ac4fd4d14ebcd0f7293f69e61696d6cb8f57b56d98bd1cdd94e0602ed3a",
+  "coordinate_binding": {
+    "algorithm_seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    "generator": "SHAKE256 address-stable lazy prefixes",
+    "finite_word_conversion": "128/256/512/1024-bit prefix refinement with interval-certified left-closed/right-open inverse CDF",
+    "initialization_map": "first 53 bits as R_INIT; U53=R_INIT*2^-53",
+    "old_risp_coordinate_reuse": false,
+    "paired_relations": "both training arms share INIT_MODEL and base TRAIN event identities; all 13 evaluation cells share base EVAL identities; the two twin cells share independent TWIN identities"
+  },
+  "registered_panel": {
+    "training_units": 32,
+    "evaluation_units": 1040,
+    "atomic_units": 1072,
+    "architectures": ["TRACK-G-ANCHOR", "TRACK-CONTAIN"],
+    "schedules": ["4", "8", "12", "4->12", "12->4"],
+    "cell_families": [
+      "TRACK-G-ANCHOR|INTACT",
+      "TRACK-G-ANCHOR|MARGINAL-TWIN",
+      "TRACK-G-ANCHOR|NO-RECURRENCE",
+      "TRACK-G-ANCHOR|FIXED-PERSIST",
+      "TRACK-G-ANCHOR|GLOBAL-RATE",
+      "TRACK-CONTAIN|INTACT",
+      "TRACK-CONTAIN|MARGINAL-TWIN",
+      "TRACK-CONTAIN|NO-RECURRENCE",
+      "TRACK-CONTAIN|FIXED-PERSIST",
+      "TRACK-CONTAIN|GLOBAL-RATE",
+      "CONTAIN-G-BOUND",
+      "UNIFORM",
+      "STATE-ORACLE"
+    ],
+    "optimizer_updates_per_arm_seed": 512,
+    "training_two_agent_episodes": 262144,
+    "evaluation_two_agent_episodes": 66560,
+    "total_agent_ticks": 126222336,
+    "complete_ledger": {
+      "INIT_MODEL_unique": 960,
+      "INIT_SECTOR": 657408,
+      "ACTION": 22921216,
+      "MOTION": 22921216,
+      "ACK": 22921216,
+      "TWIN": 602112
+    }
+  },
+  "paths": {
+    "frontier": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B3_R03_RESUME_20260815_03",
+    "result_root": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B3_R03_RESULTS_20260815_03",
+    "result": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_B3_R03_RESULTS_20260815_03\\RISP_B3_R03_20260815_03.json",
+    "frontier_and_result_absent_at_acceptance": true
+  },
+  "production": {
+    "interpreter": "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe",
+    "working_directory": "C:\\Projects\\HMASD",
+    "command": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe experiments/candidates/renewal_indexed_score_plasticity/run_b3_r03_resume.py --slice-wall-seconds 13800 --rss-limit-bytes 1073741824",
+    "process_concurrency": 1,
+    "cpu_workers": 1,
+    "gpu": false,
+    "slice_wall_seconds": 13800,
+    "rss_limit_bytes": 1073741824,
+    "atomic_resume": true,
+    "result_emitted_only_after_complete_panel": true
+  },
+  "source_sha256": {
+    "experiments/candidates/renewal_indexed_score_plasticity/b3_r03_experiment.py": "bc355fa1364304ac417a1a083805b75bc533aa544b11108804ab8445177cb5c6",
+    "experiments/candidates/renewal_indexed_score_plasticity/b3_r03_resume.py": "0676836be7dc59af159e4638550b136553270d3cd00f4df50976f978c321354e",
+    "experiments/candidates/renewal_indexed_score_plasticity/run_b3_r03_resume.py": "1282756644e5fb27064b8512e407402c1e5fbab4623011da6ae48dd27aa7f0e7",
+    "tests/experiments/candidates/renewal_indexed_score_plasticity/test_b3_r03.py": "6b56bbca99906397e76278931f1193831e8cf413522083b3f39a417abe966c26",
+    "experiments/candidates/renewal_indexed_score_plasticity/b2_r02_experiment.py:interval_and_atomic_helpers_only": "6879c5f46cd7f64d3716e0ab34fce792674e467433b4283b9a47dcab0a907920"
+  },
+  "validation": {
+    "compile": "passed",
+    "pytest_command": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe -m pytest -q tests/experiments/candidates/renewal_indexed_score_plasticity/test_b3_r03.py",
+    "pytest_result": "8 passed",
+    "covered": [
+      "G raw/affinity/TV/DeltaV structural references for both ACK signs, all actions, and k=4/8/12",
+      "equal 75+39 scalar function domains and paired initialization",
+      "physical schedules, switch lifecycle, Q windows, and diagnostic row populations",
+      "fresh paired lazy-address behavior",
+      "software-certified binary64 tanh forward and finite analytic backward",
+      "one-update two-episode recurrence/optimizer lifecycle plus a four-update full-batch resource/conformance probe",
+      "evaluation DGP lifecycle",
+      "complete analyzer precedence fixture",
+      "1072-unit atomic frontier plan and Windows peak-RSS observability"
+    ],
+    "ruff": "not_available_in_project_environment"
+  },
+  "resource_probe": {
+    "activity_class": "unregistered seed-31 non-panel coordinate deterministic conformance probe",
+    "training_probe": "4 updates, 16 two-agent episodes, one architecture",
+    "training_elapsed_seconds": 17.17966290000186,
+    "training_peak_rss_bytes": 636006400,
+    "evaluation_probe": "64 episodes, fixed-k=4, CONTAIN-G-BOUND lifecycle from an untrained test checkpoint",
+    "evaluation_elapsed_seconds": 16.603675999998813,
+    "evaluation_peak_rss_bytes": 231010304,
+    "projected_complete_one_cpu_wall_hours": [20, 25],
+    "rss_below_one_gib_plausible": true,
+    "runtime_projection_is_not_a_scientific_cap": true
+  },
+  "protected_absences": {
+    "checkpoint_selection": false,
+    "partial_interpretation": false,
+    "standalone_transplant": false,
+    "sign_reversed_center": false,
+    "r02_rerun": false,
+    "second_surface": false,
+    "uav_work": false
+  }
+}

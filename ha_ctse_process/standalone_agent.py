@@ -1017,6 +1017,7 @@ class StandaloneProcessAgent(
         self._team_transition_open: list[TeamTransitionInterval | None] = [None for _ in range(self.num_envs)]
         self._team_transition_closed: list[TeamTransitionInterval] = []
         self._team_transition_env_steps = np.zeros(self.num_envs, dtype=np.int64)
+        self.initialize_standalone_rngs(int(getattr(config, "seed", 0)))
 
     def record_environment_step(
         self,

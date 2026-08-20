@@ -28,6 +28,7 @@ class UAVBaseStationEnv(MultiUAVEnv):
         max_connections=10,  # 每个无人机最大连接数
         coverage_weight=0.7,  # 覆盖率权重
         quality_weight=0.3,  # 服务质量权重
+        step_path_loss_cache=True,
     ):
         """
         初始化UAV基站环境
@@ -62,6 +63,7 @@ class UAVBaseStationEnv(MultiUAVEnv):
             channel_model=channel_model,
             render_mode=render_mode,
             seed=seed,
+            step_path_loss_cache=step_path_loss_cache,
         )
         
         # 场景特定参数
@@ -126,6 +128,8 @@ class UAVBaseStationEnv(MultiUAVEnv):
         
         在场景1中，无人机直接连接用户，不考虑回程
         """
+        self._prime_path_loss_matrices()
+
         # 计算所有UAV-用户对的SINR
         for i in range(self.n_uavs):
             for j in range(self.n_users):

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from types import SimpleNamespace
+import os
 
 import numpy as np
 import pytest
@@ -155,6 +156,36 @@ def test_native_loader_stages_the_exact_continuous_roster_source() -> None:
         Path(module.__file__).resolve().parent / "continuous_roster_toy_backend.cpp"
     )
     assert staged_source.read_bytes() == cpp._SOURCE.read_bytes()
+
+
+def test_build_identity_rechecks_source_bytes_in_same_process(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    source = tmp_path / "mutable_toy.cpp"
+    source.write_bytes(b"// first source\n")
+    monkeypatch.setattr(cpp, "_SOURCE", source)
+    monkeypatch.setattr(cpp.shutil, "which", lambda _name: cpp.sys.executable)
+    first = cpp._build_identity()
+    source.write_bytes(b"// second source\n")
+    second = cpp._build_identity()
+    assert first != second
+
+
+def test_windows_toolchain_context_restores_complete_environment_on_error(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(cpp.os, "name", "nt")
+    monkeypatch.setattr(cpp.shutil, "which", lambda _name: "C:/registered/tool.exe")
+    monkeypatch.setenv("VSCMD_ARG_TGT_ARCH", "x64")
+    before = dict(os.environ)
+
+    with pytest.raises(RuntimeError, match="probe"):
+        with cpp._windows_toolchain_environment():
+            os.environ["PATH"] = "C:/temporary/toolchain"
+            os.environ["HMASD_TEMP_ACTIVATION"] = "temporary"
+            raise RuntimeError("probe")
+
+    assert dict(os.environ) == before
 
 
 def test_benchmark_schema_is_bounded_and_oracle_gated() -> None:

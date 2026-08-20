@@ -42,6 +42,7 @@ from ha_ctse_process.anchored_residual_g19 import (
     normalize_advantage,
     replay_trajectory,
 )
+from ha_ctse_process.continuous_roster_seed import seed_block_from_bases
 
 
 ALGORITHM_ID = "CONTINUOUS_ROSTER_NATIVE_SIX_G31_COMMON_FAST_ANCHOR_ATTRIBUTION_G50"
@@ -180,8 +181,12 @@ class G50PhaseBProjection(g47.G47NoBaselineProjection):
 def seed_block(replicate: int, *, formal: bool) -> dict[str, int]:
     if isinstance(replicate, bool) or not isinstance(replicate, int) or not 0 <= replicate < 3:
         raise ValueError("G50 replicate outside frozen support")
-    offset = replicate if formal else NONFORMAL_SEED_OFFSET
-    return {name: base + offset for name, base in SEED_BASES.items()}
+    return seed_block_from_bases(
+        SEED_BASES,
+        replicate,
+        formal=formal,
+        nonformal_offset=NONFORMAL_SEED_OFFSET,
+    )
 
 
 def bootstrap_seed(*, formal: bool) -> int:

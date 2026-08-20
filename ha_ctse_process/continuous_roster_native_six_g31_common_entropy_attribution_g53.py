@@ -25,6 +25,7 @@ from ha_ctse_process import continuous_roster_native_six_credit_reduction_g40 as
 from ha_ctse_process import (
     continuous_roster_native_six_g31_common_fast_anchor_attribution_g50 as g50,
 )
+from ha_ctse_process.continuous_roster_seed import seed_block_from_bases
 from ha_ctse_process import (
     continuous_roster_native_six_g31_phase_a_shadow_baseline_module_reduction_g51 as g51,
 )
@@ -175,8 +176,12 @@ def entropy_coefficient(
 def seed_block(replicate: int, *, formal: bool) -> dict[str, int]:
     if isinstance(replicate, bool) or not isinstance(replicate, int) or not 0 <= replicate < 3:
         raise ValueError("G53 replicate outside frozen future support")
-    offset = replicate if formal else NONFORMAL_SEED_OFFSET
-    return {name: base + offset for name, base in SEED_BASES.items()}
+    return seed_block_from_bases(
+        SEED_BASES,
+        replicate,
+        formal=formal,
+        nonformal_offset=NONFORMAL_SEED_OFFSET,
+    )
 
 
 def bootstrap_seed(*, formal: bool) -> int:

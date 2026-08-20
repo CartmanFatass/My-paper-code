@@ -1,4 +1,5 @@
 import csv
+from concurrent.futures import ThreadPoolExecutor
 
 from ha_ctse_process import metrics_io
 from ha_ctse_process.metrics_io import append_csv, read_csv_records, write_csv
@@ -59,7 +60,7 @@ def test_append_csv_preserves_new_empty_and_ignored_extra_behavior(tmp_path):
     assert empty_file.read_bytes() == b"step\r\n2\r\n"
 
 
-def test_write_csv_and_read_csv_records_preserve_existing_behavior(tmp_path):
+def test_write_csv_and_read_csv_records_preserve_mixed_types_and_missingness(tmp_path):
     written = tmp_path / "metrics" / "written.csv"
     write_csv(written, [{"second": 2, "first": 1, "ignored": "value"}], ("first", "second"))
     with written.open(newline="", encoding="utf-8") as handle:
@@ -69,8 +70,23 @@ def test_write_csv_and_read_csv_records_preserve_existing_behavior(tmp_path):
 
     numeric = tmp_path / "metrics" / "numeric.csv"
     numeric.write_text("value,empty,text\n1.5,,not-a-number\n,,\n", encoding="utf-8")
-    assert read_csv_records(numeric) == [{"value": 1.5}]
+    assert read_csv_records(numeric) == [{"value": 1.5, "text": "not-a-number"}]
     assert read_csv_records(tmp_path / "missing.csv") == []
     empty = tmp_path / "metrics" / "header-only.csv"
     empty.write_text("value\n", encoding="utf-8")
     assert read_csv_records(empty) == []
+
+
+def test_append_csv_serializes_concurrent_writers_without_lost_rows(tmp_path):
+    path = tmp_path / "metrics" / "concurrent.csv"
+
+    def append(index):
+        append_csv(path, {"row": index, "checkpoint": f"ckpt-{index}"}, ("row", "checkpoint"))
+
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        list(pool.map(append, range(32)))
+
+    rows = read_csv_records(path)
+    assert sorted(int(row["row"]) for row in rows) == list(range(32))
+    assert {row["checkpoint"] for row in rows} == {f"ckpt-{index}" for index in range(32)}
+    assert not list(path.parent.glob("*.tmp"))

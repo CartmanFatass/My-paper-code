@@ -34,7 +34,7 @@ from __future__ import annotations
 
 import argparse
 import csv
-import glob
+import math
 import os
 import sys
 
@@ -51,37 +51,38 @@ INFO_KEYS = (
 CONTINUOUS_CORR_KEY = "p2_corr_credit_delta_bh_frac"
 
 
-def _discover_csv(log_root: str) -> str | None:
-    pattern = os.path.join(log_root, "*p2_recovery_precheck*", "metrics", "train_updates.csv")
-    matches = glob.glob(pattern)
-    if not matches:
-        return None
-    # Newest by mtime so re-running the precheck supersedes an older gate.
-    return max(matches, key=os.path.getmtime)
-
-
-def _tail_mean(rows: list[dict], key: str) -> float | None:
+def _tail_mean(rows: list[dict], key: str, *, require_complete: bool = False) -> float | None:
     vals = []
-    for r in rows:
+    tail_rows = rows[len(rows) // 2 :]
+    for r in tail_rows:
         raw = r.get(key, "")
         if raw in (None, ""):
+            if require_complete:
+                return None
             continue
         try:
-            vals.append(float(raw))
+            value = float(raw)
         except (TypeError, ValueError):
+            if require_complete:
+                return None
             continue
+        if not math.isfinite(value):
+            if require_complete:
+                return None
+            continue
+        vals.append(value)
     if not vals:
         return None
-    # Average over the converged tail (last half) so a few cold-start updates don't
-    # sink an otherwise-stable signal.
-    tail = vals[max(1, len(vals) // 2) - 1:]
-    return sum(tail) / len(tail)
+    return sum(vals) / len(vals)
 
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="P2-lite Pre-check 2 gate")
-    ap.add_argument("--log-root", default="logs")
-    ap.add_argument("--gate-csv", default="", help="Explicit precheck CSV; overrides discovery")
+    ap.add_argument(
+        "--gate-csv",
+        required=True,
+        help="Exact p2_recovery_precheck train_updates.csv to evaluate",
+    )
     ap.add_argument("--min-delta-phi", type=float, default=0.0)
     ap.add_argument("--min-corr", type=float, default=0.0,
                     help="Threshold for the continuous credit<->delta_bh_frac corr (only enforced with --require-corr)")
@@ -89,11 +90,11 @@ def main() -> int:
                     help="Also HARD-gate on p2_corr_credit_delta_bh_frac > --min-corr")
     args = ap.parse_args()
 
-    csv_path = args.gate_csv or _discover_csv(args.log_root)
-    if not csv_path or not os.path.isfile(csv_path):
+    csv_path = args.gate_csv
+    if not os.path.isfile(csv_path):
         print(
-            "[p2-gate] FAIL: no p2_recovery_precheck train_updates.csv found under "
-            f"'{args.log_root}'.  Run --experiment p2_recovery_precheck first.",
+            "[p2-gate] FAIL: explicit p2_recovery_precheck CSV does not exist: "
+            f"'{csv_path}'.",
             file=sys.stderr,
         )
         return 2
@@ -118,9 +119,12 @@ def main() -> int:
     failed = False
     print("[p2-gate] HARD gate (delta_phi moves during disconnect):")
     for key in HARD_KEYS:
-        val = _tail_mean(rows, key)
+        val = _tail_mean(rows, key, require_complete=True)
         if val is None:
-            print(f"[p2-gate]   {key}: no numeric values -> FAIL", file=sys.stderr)
+            print(
+                f"[p2-gate]   {key}: every tail row must contain a finite numeric value -> FAIL",
+                file=sys.stderr,
+            )
             failed = True
             continue
         ok = val > args.min_delta_phi

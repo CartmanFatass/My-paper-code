@@ -8,7 +8,7 @@ reward arithmetic for a synchronous batch.
 
 from __future__ import annotations
 
-from functools import lru_cache
+from contextlib import contextmanager
 import hashlib
 import os
 from pathlib import Path
@@ -17,6 +17,7 @@ import re
 import shutil
 import subprocess
 import sys
+import threading
 from types import ModuleType
 from typing import Final, Sequence
 
@@ -37,6 +38,9 @@ _SOURCE: Final[Path] = (
     / "continuous_roster_toy_backend.cpp"
 )
 _BUILD_INTERFACE_VERSION: Final[str] = "continuous_roster_toy_v1"
+_WINDOWS_TOOLCHAIN_ENV_LOCK = threading.RLock()
+
+
 class ContinuousRosterToyCppUnavailable(RuntimeError):
     """Raised when the registered CPU native toolchain cannot load the slice."""
 
@@ -51,76 +55,97 @@ def _compiler_flags() -> tuple[str, ...]:
     return "-O3", "-std=c++17", "-ffp-contract=off", "-fno-fast-math"
 
 
-@lru_cache(maxsize=1)
-def _configure_windows_toolchain() -> None:
+@contextmanager
+def _windows_toolchain_environment():
+    """Temporarily expose the registered MSVC toolchain without leaking env state."""
+
     if os.name != "nt":
+        yield
         return
-    if (
-        shutil.which("cl") is not None
-        and shutil.which("ninja") is not None
-        and os.environ.get("VSCMD_ARG_TGT_ARCH")
-    ):
-        return
-    program_files_x86 = Path(
-        os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)")
-    )
-    installation = program_files_x86 / "Microsoft Visual Studio" / "2022" / "BuildTools"
-    tool_versions = sorted(
-        (installation / "VC" / "Tools" / "MSVC").glob("*"), reverse=True
-    )
-    cl = (
-        tool_versions[0] / "bin" / "Hostx64" / "x64" / "cl.exe"
-        if tool_versions
-        else Path()
-    )
-    ninja = (
-        installation
-        / "Common7"
-        / "IDE"
-        / "CommonExtensions"
-        / "Microsoft"
-        / "CMake"
-        / "Ninja"
-        / "ninja.exe"
-    )
-    vcvars = installation / "VC" / "Auxiliary" / "Build" / "vcvars64.bat"
-    if not cl.is_file() or not ninja.is_file() or not vcvars.is_file():
-        raise ContinuousRosterToyCppUnavailable(
-            "MSVC x64, vcvars64, and Ninja are required at the registered Build Tools path"
-        )
-    try:
-        command_processor = os.environ.get("COMSPEC", "cmd.exe")
-        completed = subprocess.run(
-            f'"{command_processor}" /d /s /c ""{vcvars}" >nul && set"',
-            capture_output=True,
-            check=True,
-            text=True,
-            timeout=30.0,
-        )
-    except (OSError, subprocess.SubprocessError) as error:
-        raise ContinuousRosterToyCppUnavailable(
-            "failed to activate the registered MSVC x64 environment"
-        ) from error
-    activated: dict[str, str] = {}
-    for row in completed.stdout.splitlines():
-        if "=" in row:
-            name, value = row.split("=", 1)
-            if name == name.upper():
-                activated[name] = value
-    for name, value in activated.items():
-        os.environ[name] = value
-    tool_path = os.pathsep.join((str(ninja.parent), activated.get("PATH", "")))
-    # The desktop host can expose both PATH and Path.  Keep them identical so
-    # child-process environment serialization cannot select the stale spelling.
-    os.environ["PATH"] = tool_path
-    os.environ["Path"] = tool_path
-    if shutil.which("cl") is None or shutil.which("ninja") is None:
-        raise ContinuousRosterToyCppUnavailable(
-            "the activated MSVC environment did not expose cl and Ninja"
-        )
+    with _WINDOWS_TOOLCHAIN_ENV_LOCK:
+        original_environment = dict(os.environ)
+        try:
+            if not (
+                shutil.which("cl") is not None
+                and shutil.which("ninja") is not None
+                and os.environ.get("VSCMD_ARG_TGT_ARCH")
+            ):
+                program_files_x86 = Path(
+                    os.environ.get("ProgramFiles(x86)", r"C:\Program Files (x86)")
+                )
+                installation = (
+                    program_files_x86
+                    / "Microsoft Visual Studio"
+                    / "2022"
+                    / "BuildTools"
+                )
+                tool_versions = sorted(
+                    (installation / "VC" / "Tools" / "MSVC").glob("*"),
+                    reverse=True,
+                )
+                cl = (
+                    tool_versions[0] / "bin" / "Hostx64" / "x64" / "cl.exe"
+                    if tool_versions
+                    else Path()
+                )
+                ninja = (
+                    installation
+                    / "Common7"
+                    / "IDE"
+                    / "CommonExtensions"
+                    / "Microsoft"
+                    / "CMake"
+                    / "Ninja"
+                    / "ninja.exe"
+                )
+                vcvars = installation / "VC" / "Auxiliary" / "Build" / "vcvars64.bat"
+                if not cl.is_file() or not ninja.is_file() or not vcvars.is_file():
+                    raise ContinuousRosterToyCppUnavailable(
+                        "MSVC x64, vcvars64, and Ninja are required at the registered Build Tools path"
+                    )
+                try:
+                    command_processor = os.environ.get("COMSPEC", "cmd.exe")
+                    completed = subprocess.run(
+                        f'"{command_processor}" /d /s /c ""{vcvars}" >nul && set"',
+                        capture_output=True,
+                        check=True,
+                        text=True,
+                        timeout=30.0,
+                    )
+                except (OSError, subprocess.SubprocessError) as error:
+                    raise ContinuousRosterToyCppUnavailable(
+                        "failed to activate the registered MSVC x64 environment"
+                    ) from error
+                activated: dict[str, str] = {}
+                for row in completed.stdout.splitlines():
+                    if "=" in row:
+                        name, value = row.split("=", 1)
+                        if name and not name.startswith("="):
+                            activated[name] = value
+                os.environ.update(activated)
+                activated_path = next(
+                    (
+                        value
+                        for name, value in activated.items()
+                        if name.upper() == "PATH"
+                    ),
+                    "",
+                )
+                tool_path = os.pathsep.join(
+                    (str(ninja.parent), activated_path)
+                )
+                os.environ["PATH"] = tool_path
+                os.environ["Path"] = tool_path
+            if shutil.which("cl") is None or shutil.which("ninja") is None:
+                raise ContinuousRosterToyCppUnavailable(
+                    "the activated MSVC environment did not expose cl and Ninja"
+                )
+            yield
+        finally:
+            os.environ.clear()
+            os.environ.update(original_environment)
 
 
-@lru_cache(maxsize=1)
 def _build_identity() -> str:
     try:
         import torch
@@ -128,7 +153,6 @@ def _build_identity() -> str:
         raise ContinuousRosterToyCppUnavailable(
             "PyTorch is required to build the toy C++ backend"
         ) from error
-    _configure_windows_toolchain()
     compiler_name = os.environ.get("CXX") or ("cl" if os.name == "nt" else "c++")
     compiler = shutil.which(compiler_name)
     if compiler is None:
@@ -160,32 +184,33 @@ def load_continuous_roster_toy_cpp_backend(
 
     if not _SOURCE.is_file():
         raise ContinuousRosterToyCppUnavailable(f"native source is missing: {_SOURCE}")
-    identity = _build_identity()
-    root = resolve_build_root(
-        build_root,
-        environment_variable="HMASD_TOY_CPP_BUILD_ROOT",
-        default_name="hmasd_toy_cpp_extensions",
-    )
-    try:
-        return load_source_keyed_extension(
-            cache_namespace="continuous_roster_toy",
-            identity=identity,
-            root=root,
-            build_directory_name=f"build_{identity}",
-            source=_SOURCE,
-            staged_source_name="continuous_roster_toy_backend.cpp",
-            module_name=f"hmasd_continuous_roster_toy_{identity}",
-            compiler_flags=_compiler_flags(),
-            verbose=verbose,
+    with _windows_toolchain_environment():
+        identity = _build_identity()
+        root = resolve_build_root(
+            build_root,
+            environment_variable="HMASD_TOY_CPP_BUILD_ROOT",
+            default_name="hmasd_toy_cpp_extensions",
         )
-    except CppExtensionUnavailable as error:  # pragma: no cover - deployment path
-        raise ContinuousRosterToyCppUnavailable(
-            "torch.utils.cpp_extension is unavailable"
-        ) from error
-    except CppExtensionLoadFailed as error:
-        raise ContinuousRosterToyCppUnavailable(
-            "failed to build/load the continuous-roster toy C++ backend"
-        ) from error
+        try:
+            return load_source_keyed_extension(
+                cache_namespace="continuous_roster_toy",
+                identity=identity,
+                root=root,
+                build_directory_name=f"build_{identity}",
+                source=_SOURCE,
+                staged_source_name="continuous_roster_toy_backend.cpp",
+                module_name=f"hmasd_continuous_roster_toy_{identity}",
+                compiler_flags=_compiler_flags(),
+                verbose=verbose,
+            )
+        except CppExtensionUnavailable as error:  # pragma: no cover - deployment path
+            raise ContinuousRosterToyCppUnavailable(
+                "torch.utils.cpp_extension is unavailable"
+            ) from error
+        except CppExtensionLoadFailed as error:
+            raise ContinuousRosterToyCppUnavailable(
+                "failed to build/load the continuous-roster toy C++ backend"
+            ) from error
 
 
 def _require_array(

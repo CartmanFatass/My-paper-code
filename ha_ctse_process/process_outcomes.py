@@ -82,23 +82,38 @@ class ProcessOutcomeExtractor:
         return float(np.mean(finite))
 
     def _series(self, segment, aliases):
-        values = []
-        for info in getattr(segment, "reward_info_seq", []):
-            if not isinstance(info, dict):
-                continue
-            for key in aliases:
-                if key in info:
-                    scalar = self._scalar(info.get(key))
-                    if scalar is not None:
-                        values.append(scalar)
-                    break
-        return values
+        """Return values from one consistently selected metric key.
+
+        Aliases are compatibility names, not permission to splice differently
+        defined fields within one segment.  The first alias with at least one
+        finite value owns the whole returned series.
+        """
+
+        infos = [
+            info
+            for info in getattr(segment, "reward_info_seq", [])
+            if isinstance(info, dict)
+        ]
+        for key in aliases:
+            values = [self._scalar(info.get(key)) for info in infos if key in info]
+            finite = [value for value in values if value is not None]
+            if finite:
+                return finite
+        return []
 
     def _delta(self, segment, aliases, sign=1.0):
-        values = self._series(segment, aliases)
-        if len(values) < 2:
+        infos = getattr(segment, "reward_info_seq", [])
+        if len(infos) < 2 or not isinstance(infos[0], dict) or not isinstance(infos[-1], dict):
             return 0.0, False
-        return float(sign) * float(values[-1] - values[0]), True
+        first, last = infos[0], infos[-1]
+        for key in aliases:
+            if key not in first or key not in last:
+                continue
+            start = self._scalar(first.get(key))
+            end = self._scalar(last.get(key))
+            if start is not None and end is not None:
+                return float(sign) * float(end - start), True
+        return 0.0, False
 
     def _mean(self, segment, aliases, sign=1.0):
         values = self._series(segment, aliases)
@@ -121,57 +136,43 @@ class ProcessOutcomeExtractor:
         set_field("delta_coverage_ratio", self._delta(segment, ("coverage_ratio",)))
         set_field(
             "delta_effective_connected_users",
-            self._delta(segment, ("effective_connected_users", "connected_users", "served_users")),
+            self._delta(segment, ("effective_connected_users",)),
         )
         set_field(
             "delta_system_throughput_mbps",
             self._delta(
                 segment,
-                (
-                    "system_throughput_mbps",
-                    "effective_end_to_end_throughput_mbps",
-                    "capacity_limited_throughput_mbps",
-                ),
+                ("system_throughput_mbps",),
             ),
         )
         set_field(
             "delta_qos_satisfaction",
             self._delta(
                 segment,
-                (
-                    "qos_satisfaction_ratio",
-                    "qos_met_fraction",
-                    "demand_satisfaction_ratio",
-                    "qos_score",
-                ),
+                ("qos_satisfaction_ratio",),
             ),
         )
-        backhaul = self._delta(segment, ("min_serving_backhaul_bottleneck_mbps", "backhaul_margin"))
-        if not backhaul[1]:
-            backhaul = self._delta(segment, ("backhaul_margin_penalty_raw",), sign=-1.0)
-        if not backhaul[1]:
-            backhaul = self._delta(segment, ("backhaul_potential_reward",))
-        set_field("delta_backhaul_margin", backhaul)
+        set_field(
+            "delta_backhaul_margin",
+            self._delta(segment, ("min_serving_backhaul_bottleneck_mbps",)),
+        )
 
-        energy = self._delta(segment, ("battery_min_ratio", "battery_mean_ratio"))
-        if not energy[1]:
-            energy = self._delta(segment, ("normalized_propulsion_energy", "energy_penalty"), sign=-1.0)
-        set_field("delta_energy_ratio", energy)
+        set_field("delta_energy_ratio", self._delta(segment, ("battery_min_ratio",)))
 
         set_field(
             "delta_distance_to_nearest_charger",
-            self._delta(segment, ("distance_to_nearest_charger", "nearest_charger_distance"), sign=-1.0),
+            self._delta(segment, ("distance_to_nearest_charger",), sign=-1.0),
         )
 
-        charging = self._delta(segment, ("episode_energy_charged_wh", "energy_charged_wh", "step_net_energy_charged_wh"))
-        if not charging[1]:
-            charging = self._mean(segment, ("charging_uav_count", "effective_charging_session_count"))
-        set_field("charging_progress", charging)
+        set_field(
+            "charging_progress",
+            self._delta(segment, ("episode_energy_charged_wh",)),
+        )
 
-        pressure = self._delta(segment, ("return_constraint_cost", "return_risk_penalty"), sign=-1.0)
-        if not pressure[1]:
-            pressure = self._delta(segment, ("low_battery_distance_penalty", "energy_failure_penalty"), sign=-1.0)
-        set_field("return_pressure_change", pressure)
+        set_field(
+            "return_pressure_change",
+            self._delta(segment, ("return_constraint_cost",), sign=-1.0),
+        )
 
         if segment.obs and segment.end_obs is not None:
             start = np.asarray(segment.obs[0], dtype=np.float32)

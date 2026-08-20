@@ -3,7 +3,7 @@
 Owner: `direction:variable_n_fleet_churn_b4` Explorer Manager  
 Definition envelope: `VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION`  
 Treatment identity: `VNFC-TEPR-LRDA`  
-Revision: `VNFC-TEPR-SCIENCE-20260815-03`  
+Revision: `VNFC-TEPR-SCIENCE-20260815-04`
 Current authority: definition, independent same-direction External-Pro and
 External-Gemini consultation, EM intake, and CM static feasibility/full-cost
 assessment only
@@ -80,21 +80,34 @@ Thus at most one executing UAV per zone follows independently from airspace and
 terminal feasibility; it is not a reward penalty, action-space convenience, or
 post hoc duplicate-service rule.
 
-The relay volume and relay beam are likewise single-user. A relay UAV is not a
-second executor and cannot generate zone observations. It can carry the unique
-executor stream around an obstruction. Reserves remain at the command base. A
-handover is non-overlapping: the previous occupant must clear a service or relay
-volume before the successor begins acquisition. The acquired relay loiter ball
-is separated from the surveyed transit lane through the `R_z` waypoint; relay
-occupancy therefore does not manufacture a sliding-puzzle ingress block.
+The relay volume and relay beam are likewise single-user. `EXECz` and `RELAYz`
+are serial resources in one unique end-to-end surveillance stream. `EXECz` is
+the sole authenticated terminal-session endpoint. `RELAYz` transparently
+forwards that already authenticated stream; it does not originate another
+stream, open another terminal session, or require a second terminal pointing
+chain, modem, or acquisition chain. A relay UAV is not a second executor and
+cannot generate zone observations. For each zone,
+
+```text
+inf_{x in S_z,y in R_z} ||x-y|| >= d_min.
+```
+
+Thus one executor and one relay may simultaneously occupy their distinct
+volumes without violating the airborne-separation rule. Reserves remain at the
+command base. A handover is non-overlapping under the exact clearance law below.
+The acquired relay loiter ball is separated from the surveyed transit lane
+through the `R_z` waypoint; relay occupancy therefore does not manufacture a
+sliding-puzzle ingress block.
 
 This target premise is rejected rather than repaired if the intended physical
 system admits two separation-compliant vehicles in `S_z`, has a secondary
-pointing/acquisition chain, multiplexes two authenticated sessions, supports
-make-before-break multi-UAV acquisition, obtains additional unique value from
-simultaneous viewpoints, or can deliver the same unique stream through two
-independent executors. Such a finding deletes this target-exclusive object; it
-may not be converted into an artificial action mask.
+pointing/acquisition chain, multiplexes two authenticated sessions, requires a
+second terminal pointing/modem/acquisition/session for simultaneous execution
+and relay, supports make-before-break multi-UAV acquisition, obtains additional
+unique value from simultaneous viewpoints, or can deliver the same unique
+stream through two independent executors. Such a finding deletes this
+target-exclusive object; it may not be converted into an artificial action
+mask.
 
 ### Fixed graph, clocks, and motion
 
@@ -112,30 +125,99 @@ times:
 
 All other travel uses a shortest path. The only graph route from `B` to `S_z`
 passes through the `R_z` waypoint, but the transit lane and relay loiter ball are
-distinct as stated above. A fast UAV's edge time is
+distinct as stated above. Every modeled directed edge is a surveyed collection
+of mutually deconflicted transit lanes with capacity for all eight registered
+UAVs. Simultaneous same-direction and opposing-direction traffic creates no
+additional timing, feasibility, or action coupling. The failed-airframe
+emergency-egress corridor is disjoint from all controllable transit lanes except
+for the registered service-volume hazard lock. If these transit facts are false
+for the intended target, the exact object is invalid until a common corridor
+scheduler, legality grammar, reachability law, witness, comparators, and
+complexity statement are prospectively redefined; no scheduler is silently
+implied here. A fast UAV's edge time is
 `max(5, 5*ceil(0.75*T_standard/5))` seconds. Physics advances in exact one-second
 ticks. Mission assignments occur every twenty seconds. A UAV on an edge must
-finish it before accepting another destination. A service-volume arrival needs
-six consecutive seconds of acquisition; a relay-volume arrival needs four.
-Leaving or changing the token clears acquisition. Reissuing the same token to a
-stationary acquired UAV preserves it.
+finish its committed route before accepting another destination. A service-
+volume arrival needs six consecutive seconds of acquisition; a relay-volume
+arrival needs four.
+
+A **free UAV** is an active controllable UAV that is not on a directed edge at
+the decision boundary. En-route UAVs are not variables in the current matching;
+they retain their existing destination and token commitment. A token command
+persists through the registered shortest path. Arrival at an intermediate node
+atomically registers continuation onto the next route edge, whose motion begins
+in the next physical second, without a new high-level command. Thus an
+intermediate arrival coincident with a decision boundary remains an en-route
+fixed commitment when the observation is serialized. A relay token may be
+acquired before its executor exists, but produces no delivery until both serial
+resources are acquired in a `BLOCKED` zone.
+
+For ordinary token handover, reissuing the same token to its stationary acquired
+holder preserves acquisition, and reissuing it to a stationary acquiring holder
+preserves elapsed consecutive acquisition. If a stationary acquired or
+acquiring holder is not reissued that token, its delivery and acquired state end
+and its acquisition elapsed resets at the command boundary. It spends the first
+following physical second clearing the token volume while beginning its outbound
+route; the volume becomes clear at the end of that second. A successor assigned
+at the same boundary may travel immediately but cannot begin acquisition until
+the ordinary one-second clearance and any failed-airframe hazard lock have
+ended. The failed-service-volume lock on `[0,20)` supersedes ordinary clearance;
+entry at timestamp `20` is legal.
+
+For every physical second `[s,s+1)`, demand and obstruction are constant and the
+following ordered physics is exact:
+
+1. A UAV on an edge at timestamp `s` consumes its registered flight energy and
+   advances one second. Arrival occurs at `s+1`; it performs no acquisition,
+   charging, service-energy consumption, or delivery during that same second.
+2. A stationary UAV at `B` whose command is `B` charges for the full second. A
+   UAV arriving at `B` at `s+1` starts charging only in the next second.
+3. A stationary unacquired UAV at its commanded token node performs one full
+   acquisition second, consuming no energy and supplying no delivery. If this
+   completes acquisition, it becomes acquired at `s+1`.
+4. A UAV already acquired at `s`, reissued the identical token, and not clearing
+   consumes the registered executor or relay service energy for the full second,
+   even when obstruction or the missing complementary serial resource makes
+   delivered rate zero.
+5. Delivery on `[s,s+1)` uses only UAVs already acquired at timestamp `s`.
+
+Consequently, a UAV requiring `T` travel seconds and `A` acquisition seconds
+first supplies service at timestamp `t+T+A`.
 
 Energy is represented in fifth-units, so all state transitions are integer.
 Capacity is 160 energy units and the hard reserve is 20. Standard flight consumes
 1 unit/s, fast flight 1.2 units/s, acquired execution 0.4 units/s, acquired relay
 0.2 units/s, and base charging restores 2 units/s up to capacity. A token is
-legal only if an exact contingency rollout can hold it through the next decision
-boundary and then return the UAV to `B` without energy falling below the reserve.
-The same exact legality function is used by every arm and by the fixed controller.
+legal only under the exact contingency below. For a free UAV-token candidate at
+boundary `t`, ETA is the earliest acquisition-completion timestamp minus `t`
+under continuous execution of that candidate, including multiedge travel,
+ordinary handover, failed-airframe clearance, and acquisition. For an illegal
+candidate, its mask bit, ETA feature, and return-margin feature are exactly zero.
+An en-route UAV has all four variable legal-token mask bits zero and supplies no
+sampled, scored, or likelihood-bearing bid edge.
+
+The safe-return contingency issues the candidate at `t` and retains it through
+`[t,t+20)`. At every subsequent twenty-second boundary, including a synthetic
+return boundary at `t=120` if needed, an edge commitment continues; otherwise
+the UAV is commanded to `B`. If it reaches the candidate after `t+20` but before
+the next boundary, it may acquire and serve until that next boundary commands
+`B`. The contingency continues beyond the reward horizon, without additional
+reward or demand transition, until `B` is reached. A candidate is legal iff all
+compatibility, occupancy, clearance, and commitment conditions hold and energy
+never falls below 20 over this complete contingency. Its return-energy margin
+is the minimum energy over the contingency minus 20. The same exact legality
+function is used by every arm and by the fixed controller.
 
 At a decision boundary the order is:
 
-1. finish physics on `[t-20,t)` and apply arrivals, acquisition, service, and
-   energy changes;
+1. finish physics on `[t-20,t)`, apply arrivals, acquisition, service, energy,
+   and persistent-route continuation, and shift the exact public-history block
+   described below;
 2. advance public demand and obstruction states, except at `t=-120`;
 3. apply the sole membership event and start its physical clearance process at
    `t=0`;
-4. serialize the public observation and legal-token masks; and
+4. recompute current delivered rates, then serialize the public observation and
+   legal-token masks; and
 5. choose and start the next common low-level command.
 
 ### UAV types and roster law
@@ -211,7 +293,9 @@ than compensable reward terms. Training optimizes exactly this terminal utility.
 At `t=-120`, every pre-event active UAV is at `B`, fully charged, uncommitted,
 and has zeroed public history counters. One arm-blind deterministic operations
 controller runs at `t=-120,-100,-80,-60,-40,-20`. At each boundary it enumerates
-all legal complete target-role matchings. It first restricts to matchings that
+all legal variable target-role matchings conditional on the fixed en-route
+commitments, thereby producing complete commands. It first restricts to
+matchings that
 retain every currently acquired executor that remains legal and every currently
 acquired relay whose zone is currently `BLOCKED` and whose retention remains
 legal. It then chooses the lexicographically minimum serialization after
@@ -225,7 +309,7 @@ applying, in order:
 4. for `RELAY1` and then `RELAY2`, smaller tuples
    `(negative radio capacity,time to acquired relay,opaque rank)`, with a null
    required relay represented by an infinite sentinel; and
-5. the registered canonical complete-matching serialization.
+5. the registered exact complete-command serialization.
 
 Every free UAV not selected for a token is commanded to `B`. A relay in a
 `CLEAR` zone is not required and is returned to `B` unless selected for another
@@ -246,6 +330,23 @@ cleared the terminal area and leaves the physical model. This clearance object
 has no treatment action, consumes no roster slot, provides no service, follows
 the same deterministic law in every arm, and is represented by public
 `clearance_remaining in {20,19,...,0}`. No other membership event occurs.
+
+Each executor and relay token has exactly one of three public states:
+`VACANT`, `COMMITTED_OR_ACQUIRING`, or `ACQUIRED`; the acquisition-elapsed
+scalar supplies progress. At each boundary after completing the preceding
+interval and before the new demand/obstruction transition and `t=0` failure,
+one history block is shifted for every active UAV. The inserted block contains
+the token command governing the final second, acquisition elapsed at interval
+end, the UAV's attributed delivered rate in that final second, and time since
+its most recent second of positive attributed delivery saturated at 120. An
+acquired executor is attributed the zone's unique acknowledged rate. An
+acquired relay is attributed that same rate only while forwarding the active
+`BLOCKED`-zone stream; this duplicate feature never duplicates reward. The zone
+time-since-acknowledged-delivery counter resets after a second with `a_z>0` and
+otherwise increments to 120. At `t=-120` all history-present bits are zero;
+each inserted block has history-present one. After the boundary transition and
+any `t=0` failure but before action, current delivered rate is recomputed from
+the resulting physical state. The nonfailed zone's clearance field is zero.
 
 Failure and clearance are revealed through the ordinary membership/heartbeat
 and terminal-area observation at the same boundary. The remaining controllable
@@ -280,7 +381,7 @@ Every deployable arm receives the identical current public observation:
   edge and remaining travel time, energy/capacity, current token, acquisition
   time, exact legal-token mask, zone-specific ETA and return-energy margin, and
   the previous three assignment epochs of token, acquisition, delivered rate,
-  and time since last acquired service;
+  and time since most recent positive attributed delivery;
 - two labeled zone records containing current demand, obstruction, current
   executor/relay occupancy and acquisition state, current delivered rate, time
   since acknowledged delivery, and failed-airframe clearance remaining; and
@@ -293,7 +394,8 @@ The canonical agent record has width 65: flight-class one-hot (2), radio scalar
 remaining edge time (1), energy (1), current-token one-hot including null (5),
 acquisition elapsed (1), legal-token mask (4), four token ETAs (4), four
 return-energy margins (4), three history blocks each containing token one-hot
-plus acquisition, delivered rate, and time since last acquired service (24),
+plus acquisition, delivered rate, and time since positive attributed delivery
+(24),
 and three history-present bits (3). Each zone record has width 14: demand (1),
 obstruction one-hot (2), executor and relay occupancy/acquisition-state one-hots
 (6), executor and relay acquisition elapsed (2), delivered rate (1), time since
@@ -313,7 +415,7 @@ other saturation or calibration:
 | acquisition elapsed, executor or relay | `clip(x,0,6)/6` |
 | token ETA including clearance wait and acquisition | `clip(x,0,140)/140` |
 | return-energy margin above the hard reserve | `clip(x,0,140)/140` |
-| time since last acquired or acknowledged service | `clip(x,0,120)/120` |
+| time since positive attributed or acknowledged delivery | `clip(x,0,120)/120` |
 | post-event time | `t/120` |
 | set cardinality | `log(1+N)/log(8)` |
 | cumulative post-event demand | `D_past/480` |
@@ -347,11 +449,15 @@ L-RDA supplies the reference for PERMUTE. Unsupported states remain in `U_rec`.
 
 The four labeled physical tokens are
 `T={EXEC1,RELAY1,EXEC2,RELAY2}`. A legal mission command is a partial injective
-matching from tokens to active free UAVs. A UAV receives at most one token. A
-service or relay token receives at most one UAV. Tokens may be null. Agents on an
-edge retain their commitment; unmatched free agents are commanded to `B`.
-Terminal compatibility, energy, occupancy clearance, and edge commitment enter
-one common legality mask.
+matching `X` from currently available tokens to active free UAVs, conditional on
+the fixed en-route route/destination commitments `C`. A stationary currently
+occupied token remains available for either reissue to its holder or assignment
+to one successor under the handover law; a token fixed by an en-route commitment
+is unavailable. A UAV receives at most one token, and each token receives at
+most one fixed or variable UAV. Tokens may be null. En-route agents retain their
+route and destination; unmatched free agents are commanded to `B`. Terminal
+compatibility, energy, occupancy clearance, and edge commitment enter one common
+legality mask. Fixed commitments supply no bid term.
 
 For `N` free agents, the unmasked grammar has
 
@@ -363,11 +469,35 @@ At `N=7` the upper bound is 1,961 matchings. Streaming enumeration and the
 selected action require `O(N^4)` time and `O(N)` live memory for the fixed four
 tokens. No arbitrary-token-count or growing-task scalability claim is made.
 
-Given any legal matching `X`, bids `+2` on its agent-token edges and `-2` on
-every other legal edge make `X` the unique maximum-sum matching, with null bid
-zero and canonical opaque-rank tie serialization. Thus the RDA is surjective
-onto the complete legal target grammar. Every arm uses the same matching
-serializer and low-level motion/acquisition controller.
+Given fixed commitments `C` and any legal variable matching `X`, bids `+2` on
+its agent-token edges and `-2` on every other legal variable edge make `X` the
+unique maximum-sum matching, with null bid zero and the canonical tie law below.
+Thus the RDA is surjective onto every legal variable decision conditional on
+`C`. Every arm uses the same complete-command serializer and low-level
+motion/acquisition controller.
+
+### Exact complete-command serialization
+
+The world's eight opaque ranks are the integers `1,...,8`; sentinel `9` denotes
+null or padding. At a decision, `C` is the set of fixed en-route destination and
+token commitments and `X` is the variable matching from free UAVs to available
+tokens. In the exact token order `EXEC1,RELAY1,EXEC2,RELAY2`, define
+`occ_tau(C,X)` as the fixed committed UAV's rank when `tau` is fixed by `C`,
+otherwise the free UAV rank assigned by `X`, and otherwise `9`.
+
+Let `B(C,X)` be the ascending ranks of all active UAVs whose post-command
+destination is `B`, including unmatched free UAVs and fixed en-route-to-`B`
+UAVs, padded on the right with `9` to length eight. The complete serialization
+is
+
+```text
+[occ_EXEC1,occ_RELAY1,occ_EXEC2,occ_RELAY2,B(C,X)].
+```
+
+Every equal-score or equal-value decision takes the lexicographically smallest
+serialization. In DIRECT's residual branch, `|X|` counts only variable free-
+UAV/token edges. Fixed commitments `C` are represented in public state but do
+not enter the cardinality one-hot, selected-edge sum, or selected-edge maximum.
 
 ### Static action-value witness
 
@@ -488,8 +618,9 @@ DIRECT stochastic class strictly contains L-RDA without adding an illegal or
 projection-equivalent action.
 
 DIRECT's larger capacity, sparse residual policy, and different optimization
-geometry are part of the containing-policy package. The residual-use gate below
-requires the additional branch to be behaviorally active. Any positive L-RDA
+geometry are part of the containing-policy package. The executed-residual-use
+gate below requires the additional branch to be behaviorally active. Any
+positive L-RDA
 contrast is limited to finite-budget capacity-aligned inductive bias or
 trainability relative to that package, never superior expressivity or
 optimizer-independent architecture value. DIRECT has no unregistered token,
@@ -677,7 +808,20 @@ analysis are frozen without `N=7` data.
 For each replicate, deterministic initial and final learned checkpoints are
 evaluated on 64 fresh final-`N=3` and 64 fresh final-`N=5` validation worlds,
 equally stratified by failed zone. These worlds establish only in-support
-competence and DIRECT residual use.
+competence and executed DIRECT residual use.
+
+For every supported final-checkpoint DIRECT validation decision define
+
+```text
+I_select = 1[p_emb < 0.5]
+I_executed_change = 1[p_emb < 0.5 and X_residual != X_embedded],
+```
+
+where the exact `p_emb=0.5` tie selects embedded, `X_residual` is the canonical
+deterministic sparsemax action, and `X_embedded` is the canonical deterministic
+mean-bid RDA action. For each replicate, final size in `{3,5}`, and failed-zone
+cell, average each indicator over all supported DIRECT validation decisions in
+that cell.
 
 The untouched conclusion panel contains 128 fresh final-`N=7` worlds per
 replicate, with 64 failures of each zone. Every world includes the common
@@ -730,8 +874,8 @@ There are exactly three separately simultaneous families:
    `{L-RDA,DIRECT-SET}` crossed with final `N in {3,5}` and failed zone in
    `{1,2}`, for final-checkpoint minus initial-checkpoint `U_rec`.
 3. **Validity/mechanism, 16 coordinates:** DIRECT residual-selection rate at
-   each `(N in {3,5},failed zone)` (4); DIRECT residual-versus-embedded
-   matching-change rate in the same four cells (4); conclusion action-
+   each `(N in {3,5},failed zone)` (4); DIRECT executed-residual-change rate in
+   the same four cells (4); conclusion action-
    sensitivity rate by failed zone (2); permutation-opportunity rate by failed
    zone (2); association immediate-matching-change rate by failed zone (2); and
    association mean raw `Delta C_40` by failed zone (2).
@@ -774,7 +918,7 @@ fractions equally. No world pooling or alternate reduction is permitted.
 All forty-second viability, action-sensitivity, and association diagnostics use
 only decision states at `t in {0,20,40,60,80}`. The `t=100` action remains in
 every complete `U_rec` rollout but is excluded from those diagnostic
-denominators; no state or tape beyond `t=120` exists.
+denominators; no reward-bearing state or tape exists beyond `t=120`.
 
 On the treatment-blind `t=0` post-failure clone, physical viability enumerates
 every legal first matching, simulates it on the common realized tape to `t=20`,
@@ -791,7 +935,13 @@ current matching `X`, execute `X` for twenty seconds, apply `kappa_diag` at the
 next boundary, and simulate to `t+40` on the common tape. Let `C_40(X)` be raw
 unique delivered data-seconds. The state is action-sensitive iff
 `max_X C_40(X)-min_X C_40(X)>=6`; fewer than two legal current matchings counts
-as not sensitive and remains in the denominator.
+as not sensitive and remains in the denominator. For each replicate and failed-
+zone stratum, the denominator for both action sensitivity and permutation
+opportunity is every supported deterministic L-RDA conclusion state at these
+five epochs. The action-sensitivity numerator is the number satisfying the
+registered `C_40` threshold; the permutation-opportunity numerator is the
+number with at least one registered block of size at least two and complete row
+mappings.
 
 An association-opportunity state is a supported deterministic L-RDA conclusion
 state in the registered diagnostic epochs having a permutation block of size at
@@ -799,15 +949,32 @@ least two and complete row mappings. For every such state and each of eight
 derangements, compare the unpermuted and deranged immediate actions. At `t+20`
 both paths use ordinary frozen deterministic L-RDA in their respectively reached
 states, then terminate at `t+40` on the common tape. State-variant pairs have
-equal weight within replicate. Empty pair sets fail both association gates.
+equal weight within replicate. Thus the association denominator is every pair
+`(association-opportunity state,variant k)` for `k in {0,...,7}`. For both
+action sensitivity and association,
+
+```text
+C_40(pi;s_t) = integral_t^(t+40) [a_1^pi(u)+a_2^pi(u)] du.
+```
+
+If a replicate validation cell has no supported DIRECT decisions, its residual-
+selection and executed-residual-change entries are both zero. If a replicate
+failed-zone stratum has no supported L-RDA diagnostic states, its action-
+sensitivity and permutation-opportunity entries are both zero. If it has no
+association state-variant pairs, its association matching-change and mean
+`Delta C_40` entries are both zero. These numeric zeros enter the registered
+`20 x 16` validity/mechanism matrix and the corresponding gate fails. No
+replicate, state, world, variant, or denominator is omitted, replaced, or topped
+up.
 
 A positive L-RDA branch requires all of the following separately in each failed-
 zone stratum when stated:
 
 1. **Integrity and exclusivity:** exact event order, clearance object,
-   one-session/one-volume law, common worlds, legal masks, target-role matching,
-   `D_past`, utility, row mappings, and complete activity block all conform. No
-   collision, reserve, or duplicate-data violation occurs.
+   one-session/one-volume and transparent serial-relay law, deconflicted transit,
+   common worlds, legal masks, target-role matching, `D_past`, utility, row
+   mappings, and complete activity block all conform. No collision, reserve, or
+   duplicate-data violation occurs.
 2. **Physical viability and headroom:** the equal-replicate point viability rate
    is at least `0.90`. This establishes reachable recovery opportunity; the
    action-sensitivity gate separately requires nontrivial choice headroom.
@@ -818,11 +985,12 @@ zone stratum when stated:
    simultaneous 95% lower bounds strictly above `delta_rec`, and each learned
    arm's equal-replicate validation point mean is at least `0.75` for every
    training size and failed-zone cell.
-5. **Strict-containing capacity use:** in each of the four validation
-   size-by-failed-zone cells, DIRECT's evaluation gate selects residual and its
-   residual argmax differs from the embedded argmax on supported decisions with
-   simultaneous 95% lower bounds strictly above `0.10` for both rates. Empty
-   supported denominators fail.
+5. **Strict-containing executed capacity use:** in each of the four validation
+   size-by-failed-zone cells, the simultaneous 95% lower bounds for both
+   `I_select` and `I_executed_change` are strictly above `0.10`. Thus the
+   residual branch must be selected and must actually change the executed
+   action on the same supported decisions. Empty supported denominators use the
+   registered zero-row law and fail.
 6. **Fixed competence:** FIXED-FH's equal-replicate validation point mean is at
    least `0.75` for every training size and failed-zone cell.
 7. **Action sensitivity:** the simultaneous 95% lower bound for the registered
@@ -851,15 +1019,17 @@ and claim boundary; they are not portfolio allocations.
 First apply the validity map in order:
 
 1. **Delete invalid target/object.** If independent domain facts contradict the
-   service-volume, clearance, or single-chain/session law, or integrity,
-   exclusivity, or activity validity fails, delete this target-exclusive object.
-   Make no algorithm claim and do not replace the law with a mask.
+   service-volume, clearance, transparent serial-relay, single-chain/session, or
+   deconflicted-transit law, or integrity, exclusivity, or activity validity
+   fails, delete this target-exclusive object. Make no algorithm claim and do
+   not replace the law with a mask.
 2. **Delete nonidentifying physical discriminator.** If physical viability,
    either arm's component support, or action sensitivity fails, delete this exact
    experiment as a discriminator. Make no claim that learned or fixed recovery
    is absent.
 3. **Delete the four-way comparison for comparator failure.** If DIRECT or
-   FIXED competence fails, or DIRECT strict-containing residual use fails,
+   FIXED competence fails, or DIRECT strict-containing executed residual use
+   fails,
    L-RDA cannot be retained against those comparators. Report only valid
    descriptive rows; do not weaken or replace a comparator.
 4. **Delete L-RDA for treatment incompetence.** If L-RDA competence fails,
@@ -902,12 +1072,13 @@ automatic empirical successor.
 If and only if branch 6 is reached, the maximum claim is:
 
 > Conditional on the registered iid centrally symmetric replicate-row model and
-> the exact single-aperture/single-session and physical-clearance target law,
+> the exact single-aperture/single-session, transparent serial-relay,
+> deconflicted-transit, and physical-clearance target law,
 > one frozen shared
 > permutation-equivariant L-RDA bidder trained only after executor loss at active
 > rosters `N=3,5` achieved a material increase in acknowledged two-zone recovery
 > utility at post-loss `N=7` relative separately to a competent strictly
-> containing and materially residual-using DIRECT-SET learner, the registered
+> containing and executively residual-using DIRECT-SET learner, the registered
 > deployable full-horizon fixed
 > controller, and the exact same-checkpoint whole-row reassociation intervention,
 > separately for each failed zone and in aggregate. The registered opportunity and
@@ -936,8 +1107,8 @@ Question-relevant activity begins only when one atomic manifest contains all of:
 1. twenty initial and final L-RDA and DIRECT checkpoints and complete optimizer
    states;
 2. all registered training-support states and learned latent-action identities;
-3. complete `N=3,5` initial/final validation panels and competence/residual-use
-   rows;
+3. complete `N=3,5` initial/final validation panels and competence/executed-
+   residual-use rows;
 4. all 128 `N=7` conclusion worlds per replicate with common prehistory and
    exogenous tapes;
 5. complete L-RDA, DIRECT, FIXED-FH, and eight PERMUTE full-rollout rows;
@@ -969,8 +1140,9 @@ After same-conversation Pro closure and EM intake, CM is asked only to assess:
   atomic activity block are statically bindable and observable;
 - whether DIRECT contains L-RDA exactly and strictly without illegal-action or
   information advantage;
-- whether the single-aperture/terminal law and static action-value witness are
-  representable without reward leakage or artificial exclusivity; and
+- whether the single-aperture/terminal law, transparent serial relay,
+  deconflicted transit law, and static action-value witness are representable
+  without reward leakage or artificial exclusivity; and
 - full prospective engineering, training, validation, conclusion,
   full-horizon-expectation, sign-enumeration, wall-time, memory, storage, and
   technical-acceptance cost, including the dominant uncertainty.
@@ -983,19 +1155,22 @@ a scientific stop. Any meaning-changing ambiguity returns to this EM.
 
 This section is a review instruction, not a treatment condition. Review this
 entire complete revision independently for mathematical and causal closure. The
-prior revision-01 ruling identified seven outcome-changing defects in the
-failure-label law; prehistory and static witness; terminal-ratio information;
-learned functional/PPO specification; strict-containment argument; support,
-family, and reduction laws; and forty-second diagnostics. Revision 03 claims to
-resolve all seven together.
+revision-03 ruling found the conditional capacity-one premise defensible and the
+prior zero-support PPO defect resolved, but required four complete binding
+families: serial transparent relay plus deconflicted transit; a literal free-
+agent, route, handover, tick, legality, ETA, margin, token, and history law;
+canonical complete-command serialization; and executed DIRECT residual use plus
+numeric empty-denominator rows. Revision 04 incorporates those four families
+together without changing any already-closed treatment or panel condition.
 
-Audit the conditional physical capacity-one premise, clearance process,
-failure-zone strata, complete observation and tensor law, strict stochastic-
-containment witness, full-horizon fixed controller, training treatment,
-arm-specific support, exact simultaneous families, point reductions,
-diagnostics, claim ceiling, and exhaustive outcome map. Return `VERDICT: CLOSED`
-only if this exact composite has no remaining outcome-changing mathematical or
-causal ambiguity. Otherwise return `VERDICT: REVISION_REQUIRED`, naming each
-defect, its consequence, and the smallest complete replacement. Do not assess
-code, host availability, engineering feasibility, runtime cost, portfolio
-priority, or another direction.
+Audit the conditional physical capacity-one and serial-relay premise,
+deconflicted transit, exact clock/route/handover/history process, failure-zone
+strata, complete observation and tensor law, command serialization, strict
+stochastic-containment witness, executed-residual-use gate, full-horizon fixed
+controller, training treatment, arm-specific support, exact simultaneous
+families and empty-row laws, point reductions, diagnostics, claim ceiling, and
+exhaustive outcome map. Return `VERDICT: CLOSED` only if this exact composite
+has no remaining outcome-changing mathematical or causal ambiguity. Otherwise
+return `VERDICT: REVISION_REQUIRED`, naming each defect, its consequence, and
+the smallest complete replacement. Do not assess code, host availability,
+engineering feasibility, runtime cost, portfolio priority, or another direction.

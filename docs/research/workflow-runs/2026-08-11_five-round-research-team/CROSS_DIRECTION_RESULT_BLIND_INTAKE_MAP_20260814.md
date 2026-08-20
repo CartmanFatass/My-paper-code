@@ -8,9 +8,9 @@ pre_result_investments_at_map_freeze=SGSP-r05|RCLE-r04|RISP-r07|ONLGR-r04-checkp
 current_investment_count_is_not_a_quota=true
 automatic_result_to_action_routing=false
 cross_direction_evidence_transfer=false
-post_result_status_pointer=VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md
-current_consumed_result_metadata=ONLGR-B2-SCIENCE-20260814-02|SCDMP-B3-SCIENCE-20260814-01|SGSP-B1-SCIENCE-20260814-06|RISP-B2-SCIENCE-20260814-02|CONTAIN-LEARNED-E_vs_CONTAIN-G-TRANSPLANT-NO-CURRENT|RISP-B3-TRG-SCIENCE-20260815-03|ONLGR-TBH-HOST-CARD-20260815-03|VNFC-B4-SCIENCE-20260815-05
-current_portfolio_decision_metadata=RISP-B3-TRG-R03-FULL-PANEL=EMPIRICAL_INVEST|ONLGR-TBH-HOST-CARD-20260815-03=NO_CURRENT_INVESTMENT|VNFC-B4-SCIENCE-20260815-05=NO_CURRENT_EMPIRICAL|VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION=DEFINITION_INVEST
+post_result_status_pointer=SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md
+current_consumed_result_metadata=ONLGR-B2-SCIENCE-20260814-02|SCDMP-B3-SCIENCE-20260814-01|SGSP-B1-SCIENCE-20260814-06|RISP-B2-SCIENCE-20260814-02|CONTAIN-LEARNED-E_vs_CONTAIN-G-TRANSPLANT-NO-CURRENT|RISP-B3-TRG-SCIENCE-20260815-03|ONLGR-TBH-HOST-CARD-20260815-03|VNFC-B4-SCIENCE-20260815-05|SCDMP-TBOV-SCIENCE-20260815-05|RCLE-CPC-SCIENCE-20260815-04|VNFC-TEPR-SCIENCE-20260815-04|SGSP-RG2Z-SCIENCE-20260815-03|VNFC-TEPR-FIXED-FH-QUOTIENT-AND-COST-CERTIFICATE-Q0|SCDMP-TBOV-SCIENCE-20260815-07-STAGE-A-MODIFY-CHECKPOINT
+current_portfolio_decision_metadata=RISP-B3-TRG-R03-FULL-PANEL=EMPIRICAL_INVEST|RCLE-CPC-R04-FULL-PANEL=EMPIRICAL_INVEST|SGSP-RG2Z-R03-FULL-PANEL=EMPIRICAL_INVEST|SCDMP-TBOV-R07-STAGE-A=COMPLETE_MODIFY_CHECKPOINT|SCDMP-TBOV-SUPPORT-REPRESENTATION-FACTORIAL-CHECKPOINT-DEFINITION=DEFINITION_INVEST|SCDMP-TBOV-R07-STAGE-B=INELIGIBLE_UNAUTHORIZED|VNFC-TEPR-Q0=COMPLETE_TECHNICAL_EVIDENCE|VNFC-TEPR-FULL-GRAPH-REACHABILITY-AND-COST-CERTIFICATE=NO_CURRENT_INVESTMENT|ONLGR-TBH-HOST-CARD-20260815-03=NO_CURRENT_INVESTMENT
 prospective_branch_map_unchanged=true
 operative_allocation=false
 ```
@@ -31,8 +31,98 @@ those availability facts were excluded from every branch and portfolio
 judgment below. A later intake is judged only after this prospective map is
 fixed.
 
+## Current SCDMP r07 Stage-A post-result intake pointer — 2026-08-20
+
+The controlling adjudication is
+`SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md`.
+It consumes the complete exact r07 Stage-A branch `MODIFY-CHECKPOINT` only.
+The original result-blind thresholds, branch precedence and evidence-isolation
+law remain unchanged.
+
+Exact r07 Stage A is complete and immutable; Stage B is ineligible. The new
+Portfolio action is definition-only for one fresh support-by-representation
+factorial checkpoint object. It does not reuse r07 coordinates, checkpoints,
+seeds or descriptive assay values and does not authorize construction,
+training, evaluation or compute. SGSP, RISP and RCLE empirics and ONLGR/VNFC
+dispositions remain independent and unchanged.
+
+## Superseded/base SGSP r03 / VNFC post-Q0 intake pointer — 2026-08-19
+
+The controlling adjudication is
+`SGSP_RG2Z_R03_EMPIRICAL_VNFC_TEPR_POST_Q0_PORTFOLIO_ADJUDICATION_20260819.md`.
+It consumes `SGSP-RG2Z-SCIENCE-20260815-03` and the completed VNFC Q0 packet
+independently. The prospective thresholds, branch precedence and evidence-
+isolation law in this map are unchanged.
+
+SGSP receives exact construction plus its complete 24-seed update-512 panel.
+VNFC Q0 is recorded complete technical evidence; the full-graph reachability/
+certificate successor receives no current investment. No Q0 evidence is
+treated as a value result, and no SGSP evidence or cost enters the VNFC
+decision. No branch automatically authorizes a second budget, full solver,
+empirical VNFC work, fusion, surface or UAV action.
+
+## Superseded portfolio-owner SCDMP-TBOV r05 intake pointer — 2026-08-15
+
+The complete definition milestone `SCDMP-TBOV-SCIENCE-20260815-05` is consumed
+as portfolio metadata only. It is same-conversation ChatGPT Pro `CLOSED`,
+EM-intaken and CM-statically feasible; no source, construction, coordinates,
+training, evaluation, lease or compute has occurred. The controlling
+adjudication is
+`SCDMP_TBOV_R05_STAGE_A_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`.
+
+| Metadata | Value |
+| --- | --- |
+| Consumed exact object | `SCDMP-TBOV-SCIENCE-20260815-05` |
+| Current empirical decision | `CONSTRUCTION_AND_COMPLETE_STAGE_A_ONLY` |
+| Stage B decision | `UNAUTHORIZED_SEPARATE_PORTFOLIO_DECISION_REQUIRED` |
+
+This pointer does not alter any r05 threshold, seed law, first-true precedence,
+activity boundary, branch meaning or claim ceiling. Only
+`SELECT-ORDER-TR` or `MODIFY-TO-ORDER-Q` can make a later Stage B decision
+eligible; every other complete Stage A branch prohibits Stage B and does not
+imply family-wide deletion, automatic revision, rerun or a threshold/seed/budget
+change. Stage A itself supplies no task-value or trained-treatment claim. No
+partial result, WIP/order/backfill rule, fusion, cross-`N×k` parent, second
+surface or UAV action follows from this pointer.
+
 Completing this document completes only its governance design. It does not
 complete cross-direction research or any direction.
+
+## Current RCLE/VNFC post-definition intake pointer — 2026-08-15
+
+The complete definition packets `RCLE-CPC-SCIENCE-20260815-04` and
+`VNFC-TEPR-SCIENCE-20260815-04` are consumed independently. Both are
+same-direction Pro `CLOSED`, EM-intaken and CM-statically feasible/bindable;
+neither packet transfers evidence, thresholds, coordinates, acceptance or
+claims to the other. The controlling portfolio adjudication is
+`RCLE_CPC_R04_EMPIRICAL_VNFC_TEPR_Q0_PORTFOLIO_ADJUDICATION_20260815.md`.
+
+| Metadata | RCLE | VNFC |
+| --- | --- | --- |
+| Consumed exact object | `RCLE-CPC-SCIENCE-20260815-04` | `VNFC-TEPR-SCIENCE-20260815-04` |
+| Current portfolio decision | Full empirical construction and complete panel | Preactivity quotient-and-cost-certificate Q0 only; no full solver |
+| Empirical panel/lease | Authorized only after construction/static acceptance and a later Root lease | Not authorized; no full solver, empirical panel or lease |
+| Claim ceiling | Exact finite dual-corridor held-out-roster package only | No scientific claim; Q0 returns only technical proof/cost evidence |
+
+RCLE's strongest alternative remains finite-budget active-subspace or
+representation-search geometry plus centralized clue aggregation rather than
+unique binary cardinality. Its prospective panel is approximately 4–6 focused
+engineering days and 3,727,360 episodes; the point runtime forecast is 15–30
+one-core wall minutes and 30–45 minutes is only the prudent lease envelope,
+under 2 GiB. VNFC's Q0 stage must first characterize an exact FIXED-FH
+quotient and its proof/cost bounds before any full solver can be considered.
+The Root relay—not an independently located direction-owned cost artifact—
+reports a 50–98 engineer-week and 1.1e5–1.01e7 CPU-hour total-path planning
+range with a >1e8/non-completion tail; this is not Q0 stage cost.
+
+The original branch thresholds, first-match precedence, activity boundaries,
+and claim ceilings remain unchanged. No result, threshold, coordinate, seed,
+acceptance or claim is transferred between RCLE and VNFC. RCLE's complete
+panel returns after technical acceptance and EM/Pro convergence for a new
+portfolio adjudication; VNFC Q0 returns only its complete preactivity
+quotient/cost-certificate packet. No WIP, ordering, backfill,
+fusion, cross-`N×k` parent, second surface or UAV action follows from this
+pointer.
 
 ## Authority and admissibility
 
@@ -320,11 +410,11 @@ second-surface or UAV-production action follows from this pointer. Any later
 positive or opposite-sign branch remains bounded by the existing claim
 ceiling and must return separately for empirical portfolio adjudication.
 
-## Superseded empirical base pointer — 2026-08-15
+## HISTORICAL_NONOPERATIVE — superseded empirical base pointer — 2026-08-15
 
 The historical empirical base is
 `RISP_B3_ONLGR_HOST_CARD_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`; the
-current portfolio decision pointer is
+then-current portfolio decision pointer was
 `VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`.
 That historical base consumes the complete RISP-B3 and ONLGR host-card
 definition packets only; neither the base nor the current VNFC pointer amends
@@ -341,7 +431,7 @@ acceptance, claims or allocation are transferred between RISP and ONLGR. No
 quota, backfill, WIP/order gate, fusion, cross-`N×k` parent, second surface or
 UAV-production action follows from this pointer.
 
-## Portfolio-owner VNFC-B4 post-definition intake pointer — 2026-08-15
+## HISTORICAL_NONOPERATIVE — Portfolio-owner VNFC-B4 post-definition intake pointer — 2026-08-15
 
 The complete definition milestone `VNFC-B4-SCIENCE-20260815-05` is consumed
 here as portfolio metadata only. It is Pro CLOSED, EM-intaken and CM-statically

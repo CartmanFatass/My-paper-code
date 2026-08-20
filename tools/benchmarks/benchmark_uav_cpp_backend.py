@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
+import platform
 import statistics
+import subprocess
 import sys
 import time
 
@@ -16,7 +19,11 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
+from envs.pettingzoo.relay.routed_core import UAVRoutedRelayEnv
+from envs.pettingzoo.relay.energy_aware import UAVEnergyAwareRelayEnv
+from envs.pettingzoo.relay.forced_relay import UAVForcedRelayEnv
 from envs.pettingzoo.uav_cpp_backend import BatchedUAVGeometry, step_geometry_batch
+from config_1 import Config
 
 
 SPEEDUP_THRESHOLD = 1.20
@@ -231,10 +238,288 @@ def run_benchmark(*, repeats: int, iterations: int, seed: int) -> dict[str, obje
     }
 
 
+def _canonical(value):
+    if isinstance(value, np.ndarray):
+        array = np.ascontiguousarray(value)
+        return ("array", array.dtype.str, array.shape, array.tobytes())
+    if isinstance(value, np.generic):
+        scalar = np.asarray(value)
+        return ("scalar", scalar.dtype.str, scalar.tobytes())
+    if isinstance(value, dict):
+        return (
+            "dict",
+            tuple((key, _canonical(item)) for key, item in value.items()),
+        )
+    if isinstance(value, (list, tuple)):
+        return (type(value).__name__, tuple(_canonical(item) for item in value))
+    return (type(value).__name__, value)
+
+
+def _source_fingerprint() -> str:
+    digest = hashlib.sha256()
+    for relative in (
+        "envs/pettingzoo/native/uav_geometry_backend.cpp",
+        "envs/pettingzoo/uav_cpp_backend.py",
+        "envs/pettingzoo/relay/routed_core.py",
+        "envs/pettingzoo/relay/energy_aware.py",
+        "envs/pettingzoo/relay/forced_relay.py",
+        "tools/benchmarks/benchmark_uav_cpp_backend.py",
+    ):
+        path = REPOSITORY_ROOT / relative
+        digest.update(relative.encode("utf-8"))
+        digest.update(path.read_bytes())
+    return digest.hexdigest()
+
+
+def _commit_fingerprint() -> dict[str, object]:
+    commit = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=REPOSITORY_ROOT,
+        capture_output=True,
+        check=True,
+        text=True,
+    ).stdout.strip()
+    dirty = subprocess.run(
+        [
+            "git",
+            "status",
+            "--porcelain",
+            "--",
+            "envs/pettingzoo/native/uav_geometry_backend.cpp",
+            "envs/pettingzoo/uav_cpp_backend.py",
+            "envs/pettingzoo/relay/routed_core.py",
+            "envs/pettingzoo/relay/energy_aware.py",
+            "envs/pettingzoo/relay/forced_relay.py",
+            "tools/benchmarks/benchmark_uav_cpp_backend.py",
+        ],
+        cwd=REPOSITORY_ROOT,
+        capture_output=True,
+        check=True,
+        text=True,
+    ).stdout
+    return {"git_commit": commit, "owned_sources_dirty": bool(dirty.strip())}
+
+
+def _workload_config(workload: str) -> dict[str, object]:
+    if workload == "energy":
+        return {
+            "environment": "UAVEnergyAwareRelayEnv",
+            "preset": "S7-S3",
+            "max_steps": 1000,
+            "action": [0.2, -0.3, 0.1, -1.0],
+        }
+    return {
+        "environment": (
+            "UAVForcedRelayEnv" if workload == "forced" else "UAVRoutedRelayEnv"
+        ),
+        "uavs": 8,
+        "users": 30,
+        "ground_bases": 2,
+        "area_size": 1000.0,
+        "stationary_users": True,
+        "max_steps": 1000,
+        "action": [0.2, -0.3, 0.1],
+    }
+
+
+def _make_complete_environment(workload: str, backend: str, seed: int):
+    if workload == "energy":
+        config = Config("S7-S3")
+        config.max_steps = 1000
+        config.relay_geometry_backend = backend
+        return UAVEnergyAwareRelayEnv(config=config, seed=seed)
+    environment_type = (
+        UAVForcedRelayEnv if workload == "forced" else UAVRoutedRelayEnv
+    )
+    kwargs = dict(
+        n_uavs=8,
+        n_users=30,
+        n_ground_bs=2,
+        n_clusters=4,
+        area_size=1000.0,
+        max_steps=1000,
+        user_movement_model="stationary",
+        randomize_bs=True,
+        randomize_users=True,
+        randomize_uav_start=True,
+        relay_geometry_backend=backend,
+        seed=seed,
+    )
+    if workload == "routed":
+        kwargs["action_space_type"] = "continuous"
+    return environment_type(**kwargs)
+
+
+def _complete_environment_internal_evidence(environment):
+    evidence = {
+        name: getattr(environment, name)
+        for name in (
+            "uav_positions",
+            "user_positions",
+            "sinr_matrix",
+            "connections",
+            "uav_connections",
+            "uav_bs_connections",
+            "routing_paths",
+            "hop_map",
+            "global_bs_cache",
+            "state",
+            "serving_set_changes",
+            "uav_joins_count",
+            "uav_leaves_count",
+        )
+        if hasattr(environment, name)
+    }
+    for name in (
+        "uav_battery_ratios",
+        "uav_failed",
+        "uav_failure_timers",
+        "charging_wait_steps",
+        "current_graph_potential",
+        "last_energy_reward_components",
+    ):
+        if hasattr(environment, name):
+            evidence[name] = getattr(environment, name)
+    return _canonical(evidence)
+
+
+def _run_complete_environment_workload(
+    *, workload: str, repeats: int, seed: int
+) -> dict[str, object]:
+    config = _workload_config(workload)
+    config_fingerprint = hashlib.sha256(
+        json.dumps(config, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    reference = _make_complete_environment(workload, "python_reference", seed)
+    optimized = _make_complete_environment(workload, "cpp", seed)
+    try:
+        reference_reset = reference.reset(seed=seed)
+        optimized_reset = optimized.reset(seed=seed)
+        if _canonical(reference_reset) != _canonical(optimized_reset):
+            raise RuntimeError(f"{workload} reset payloads differ")
+        if _complete_environment_internal_evidence(
+            reference
+        ) != _complete_environment_internal_evidence(optimized):
+            raise RuntimeError(f"{workload} reset internals differ")
+        if _canonical(reference.np_random.get_state()) != _canonical(
+            optimized.np_random.get_state()
+        ):
+            raise RuntimeError(f"{workload} reset RNG differs")
+
+        action_vector = np.asarray(config["action"], dtype=np.float32)
+        reference_actions = {agent: action_vector.copy() for agent in reference.agents}
+        optimized_actions = {agent: action_vector.copy() for agent in optimized.agents}
+        for _ in range(3):
+            left = reference.step(reference_actions)
+            right = optimized.step(optimized_actions)
+            if _canonical(left) != _canonical(right):
+                raise RuntimeError(f"{workload} warmup trajectories differ")
+            if _complete_environment_internal_evidence(
+                reference
+            ) != _complete_environment_internal_evidence(optimized):
+                raise RuntimeError(f"{workload} warmup internals differ")
+            if _canonical(reference.np_random.get_state()) != _canonical(
+                optimized.np_random.get_state()
+            ):
+                raise RuntimeError(f"{workload} warmup RNG differs")
+
+        timings = {"python_reference": [], "cpp": []}
+        for repeat in range(repeats):
+            order = (
+                (
+                    ("python_reference", reference, reference_actions),
+                    ("cpp", optimized, optimized_actions),
+                )
+                if repeat % 2 == 0
+                else (
+                    ("cpp", optimized, optimized_actions),
+                    ("python_reference", reference, reference_actions),
+                )
+            )
+            outputs = {}
+            for name, environment, actions in order:
+                started = time.perf_counter()
+                outputs[name] = environment.step(actions)
+                timings[name].append(time.perf_counter() - started)
+            if _canonical(outputs["python_reference"]) != _canonical(outputs["cpp"]):
+                raise RuntimeError(f"{workload} trajectories differ at sample {repeat}")
+            if _complete_environment_internal_evidence(
+                reference
+            ) != _complete_environment_internal_evidence(optimized):
+                raise RuntimeError(f"{workload} internals differ at sample {repeat}")
+            if _canonical(reference.np_random.get_state()) != _canonical(
+                optimized.np_random.get_state()
+            ):
+                raise RuntimeError(f"{workload} RNG differs at sample {repeat}")
+
+        reference_median = statistics.median(timings["python_reference"])
+        cpp_median = statistics.median(timings["cpp"])
+        return {
+            "workload": workload,
+            "config": config,
+            "config_fingerprint": config_fingerprint,
+            "samples": repeats,
+            "warmup_pairs": 3,
+            "alternating_order": True,
+            "trajectory_exact": True,
+            "rng_state_exact": True,
+            "python_reference_seconds_per_step": timings["python_reference"],
+            "cpp_seconds_per_step": timings["cpp"],
+            "python_reference_median_seconds": reference_median,
+            "cpp_median_seconds": cpp_median,
+            "speedup": reference_median / cpp_median,
+            "accepted": cpp_median < reference_median,
+        }
+    finally:
+        reference.close()
+        optimized.close()
+
+
+def run_complete_environment_benchmark(
+    *, repeats: int, seed: int
+) -> dict[str, object]:
+    """Gate each production consumer on its own complete environment step."""
+
+    if repeats < 31 or repeats % 2 == 0:
+        raise ValueError(
+            "complete-environment benchmark requires an odd sample count >= 31"
+        )
+    results = [
+        _run_complete_environment_workload(
+            workload=workload, repeats=repeats, seed=seed
+        )
+        for workload in ("routed", "energy", "forced")
+    ]
+    return {
+        "schema": "hmasd.uav_cpp_complete_environment_benchmark.v2",
+        "formal": False,
+        "conclusion_bearing": False,
+        "backend": "cpu",
+        "machine": {
+            "platform": platform.platform(),
+            "processor": platform.processor(),
+            "python": platform.python_version(),
+            "numpy": np.__version__,
+            "torch": torch.__version__,
+        },
+        "source_fingerprint": _source_fingerprint(),
+        **_commit_fingerprint(),
+        "seed": seed,
+        "required_speedup": ">1.0 per workload",
+        "workloads": results,
+        "accepted": all(result["accepted"] for result in results),
+    }
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--repeats", type=int, default=7)
+    parser.add_argument(
+        "--scope",
+        choices=("complete_environment", "geometry_kernel"),
+        default="complete_environment",
+    )
+    parser.add_argument("--repeats", type=int, default=31)
     parser.add_argument("--iterations", type=int, default=5)
     parser.add_argument("--seed", type=int, default=20260725)
     return parser.parse_args()
@@ -244,9 +529,14 @@ def main() -> None:
     args = parse_args()
     if args.repeats < 3 or args.iterations < 1:
         raise ValueError("benchmark requires at least three repeats and one iteration")
-    result = run_benchmark(
-        repeats=args.repeats, iterations=args.iterations, seed=args.seed
-    )
+    if args.scope == "complete_environment":
+        result = run_complete_environment_benchmark(
+            repeats=args.repeats, seed=args.seed
+        )
+    else:
+        result = run_benchmark(
+            repeats=args.repeats, iterations=args.iterations, seed=args.seed
+        )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8"

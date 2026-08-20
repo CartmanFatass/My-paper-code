@@ -1,11 +1,13 @@
 import numpy as np
+import pickle
+import pytest
 import torch
 
 from config_test import Config
-from hmasd.agent import HMASDAgent
+from hmasd.agent import HMASDAgent, _rollout_sampler_seed_from_config
 
 
-def make_agent(tmp_path):
+def make_agent(tmp_path, *, seed=73):
     config = Config()
     config.n_agents = 2
     config.n_uavs = 2
@@ -32,8 +34,47 @@ def make_agent(tmp_path):
     config.disable_discriminator_rewards = True
     config.disable_discriminator_training = True
     config.disable_high_level_training = True
+    config.seed = seed
     config.update_env_dims(state_dim=5, obs_dim=4, n_agents=2)
     return HMASDAgent(config, log_dir=str(tmp_path), device=torch.device("cpu"))
+
+
+def test_rollout_sampler_seed_and_checkpoint_state_are_restored(tmp_path):
+    first = make_agent(tmp_path / "first")
+    second = make_agent(tmp_path / "second")
+    third = make_agent(tmp_path / "third", seed=74)
+    assert first.rollout_sampler_seed == _rollout_sampler_seed_from_config(
+        first.config, stream=0
+    )
+    assert first.rollout_sampler_seed != third.rollout_sampler_seed
+    assert (
+        pickle.dumps(first.rollout_buffer.get_sampler_rng_state(), protocol=5)
+        == pickle.dumps(second.rollout_buffer.get_sampler_rng_state(), protocol=5)
+    )
+
+    first.rollout_buffer._sampler_rng.integers(0, 10_000, size=19)
+    expected = pickle.dumps(
+        first.rollout_buffer.get_sampler_rng_state(), protocol=5
+    )
+    checkpoint_path = tmp_path / "sampler-state.pt"
+    first.save_model(checkpoint_path)
+    second.load_model(checkpoint_path)
+
+    assert second.rollout_sampler_seed == first.rollout_sampler_seed
+    assert pickle.dumps(
+        second.rollout_buffer.get_sampler_rng_state(), protocol=5
+    ) == expected
+
+    checkpoint = torch.load(checkpoint_path, weights_only=False)
+    assert "discriminator_optimizer" not in checkpoint
+    assert checkpoint["discriminator_optimizer_schema"] == (
+        "split_team_individual_adam_v1"
+    )
+    checkpoint["rollout_sampler_rng"]["streams"]["unexpected"] = {}
+    tampered_path = tmp_path / "sampler-state-tampered.pt"
+    torch.save(checkpoint, tampered_path)
+    with pytest.raises(ValueError, match="sampler RNG checkpoint metadata"):
+        second.load_model(tampered_path)
 
 
 def test_batched_step_uses_array_hidden_states_for_rollout_inputs(tmp_path):

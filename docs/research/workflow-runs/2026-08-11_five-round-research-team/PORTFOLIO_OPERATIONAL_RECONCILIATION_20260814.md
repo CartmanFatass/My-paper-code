@@ -3,9 +3,11 @@
 ## Active portfolio decision index
 
 ```text
-current_portfolio_cut=VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md
-current_empirical_investments=RISP-B3-TRG-R03-FULL-PANEL
-current_definition_investments=VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION|SGSP-TARGET-BOUND-TWO-ZONE-DEFINITION|RCLE-COARSE-PERSISTENT-COMMITMENT-DEFINITION|SCDMP-TARGET-BOUND-ORDER-TO-VALUE-DEFINITION
+current_portfolio_cut=SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md
+current_empirical_investments=RISP-B3-TRG-R03-FULL-PANEL|RCLE-CPC-R04-FULL-PANEL|SGSP-RG2Z-R03-FULL-PANEL
+current_enabling_construction=NONE
+current_definition_investments=SCDMP-TBOV-SUPPORT-REPRESENTATION-FACTORIAL-CHECKPOINT-DEFINITION
+current_no_current_investments=ONLGR-TBH-HOST-CARD-20260815-03|VNFC-TEPR-FULL-GRAPH-REACHABILITY-AND-COST-CERTIFICATE
 automatic_backfill=false
 no_quota_or_wip_gate=true
 ```
@@ -81,14 +83,61 @@ evidence; the portfolio-decision columns elsewhere remain owner-authored.
 
 | Direction | Current pair | Current stage | Lease state |
 | --- | --- | --- | --- |
-| RISP | Reused: `/root/em_renewal_indexed_score_plasticity` + `/root/cm_renewal_indexed_score_plasticity`; the live-route recovery established that the CM has the identical frozen envelope. | Active frozen empirical chain: technically accepted construction/conformance and fresh coordinate binding are complete for the Pro-closed, EM-intaken TRI-SECTOR-DELAYED-ACK-TRACK-RELAY external-`k` object. CM now owns result-blind complete execution, technical acceptance, then EM intake and same-Pro convergence. | Root lease issued: `temp/leases/RISP_B3_R03_ROOT_PRODUCTION_LEASE_20260815.json`, one CPU worker/process, no GPU, <1 GiB RSS, <=13,800-second resumable slices, valid through 2026-08-18T09:24:38-07:00. Slices may not alter or end the exact 16-seed × 5-schedule × 13-cell atomic panel. Historical R02 remains immutable. |
-| SGSP | Reuse `/root/em_semantic_graphon_shared_policy` + `/root/cm_semantic_graphon_shared_policy` for `SGSP-TARGET-BOUND-TWO-ZONE-DEFINITION`. | Current preactivity revision is `SGSP-RG2Z-SCIENCE-20260815-02`; it repaired r01's degenerate attenuation and freezes the exact task/trainer/support/branch law. Next is an existing-conversation Pro closure plus independent advisory Gemini attempt for r02, then EM intake and CM static feasibility/cost. | No lease, source/build/test/probe/coordinates or empirical activity. r01's zero-turn Gemini operation is locally fenced; it does not pause r02 or prevent a distinct r02 operation. |
-| VNFC | Reuse `/root/em_variable_n_fleet_churn_b4` + `/root/cm_variable_n_fleet_churn_b4` under the new `VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION` envelope. Exact `VNFC-B4-SCIENCE-20260815-05` is released and immutable; `/root/vnfc_pro_cdp_recovery` remains historical. | Current preactivity revision `VNFC-TEPR-SCIENCE-20260815-02` repairs target exclusivity, fair failure strata, action witness, clearance lock, arm-specific support and strict containing DIRECT branch. Recovery confirms the old-hash Pro operation never committed; it cannot close current r02. EM may now perform a distinct current-hash closure in the existing conversation after normal capacity/session preflight, then intake and CM static feasibility/cost. | No source/build/test/probe/coordinates/training/evaluation/lease/compute. The recovery fences only old-hash operation `VNFC-TEPR-PRO-MATH-CLOSURE-20260815-02`; it does not pause VNFC r02, Gemini intake or its later distinct current-hash closure. |
-| RCLE | Reuse `/root/em_roster_consistent_latent_exploration` + `/root/cm_roster_consistent_latent_exploration` for `RCLE-COARSE-PERSISTENT-COMMITMENT-DEFINITION`. | Current preactivity revision is `RCLE-CPC-SCIENCE-20260815-04`: r03 Pro required that all four mechanism contrasts be literally held-out `N=9, handoff=true`; r04 froze that repair without activity. Next is a distinct r04 closure in the existing Pro conversation, then EM intake and CM feasibility/cost. | No lease or empirical activity. The r03 operation is complete and immutable; r04 is a new object, not a resend. |
+| RISP | Frozen retained frontier; `/root/cm_risp_r03_resume` has applied the user stop-at-safe-boundary instruction. | Exactly 403/1072 result-blind packet/commit pairs reconcile intact (zero torn pairs, zero SHA-256 mismatch); one historical slice receipt remains, with no final result, `FINAL_COMPLETE` marker, active matching production process, or partial scientific value opened. No fresh broker, slice, lease, provider, science or Portfolio action follows before later workflow adjustment/testing. | The frozen 16-seed × 5-schedule × 13-cell object and all 403 retained identities remain unchanged. The stop fence applies only to RISP production/runtime advancement; it does not invalidate data, establish a claim, consume a treatment, or reallocate the direction. A later Root follow-up after workflow adjustment/testing is required before continuation. |
+| SGSP | Frozen retained frontier; `/root/cm_sgsp_rg2z_r03_empirical` applied the user safe-stop instruction to `SGSP-RG2Z-SCIENCE-20260815-03`. | Eight complete blinded atomic seed packets and four matched-update non-evaluable training frontiers are retained. Every COMPLETE/frontier record matches the exact revision/action/schema/arms and result/certificate/source bindings with valid packet/checkpoint or payload SHA-256 digests; complete and frontier seed sets are disjoint, temporary entry count is zero, `analysis.json` is absent, and no scientific values were opened. | No SGSP seed/lane launch, relaunch, replacement lease, complete-panel analysis, or further empirical scheduling may occur before new explicit user authority. The four in-flight seed/wrapper processes were terminated at the safe stop; active SGSP process count is zero. This does not establish a scientific or portfolio conclusion, or alter the frozen object, coordinates, seeds, or thresholds. |
+| VNFC | Released after exact `VNFC-TEPR-FIXED-FH-QUOTIENT-AND-COST-CERTIFICATE-Q0`; exact `VNFC-B4-SCIENCE-20260815-05` remains immutable. | Q0 is complete: its required pre-observation record, finite quotient/checker, independent certificate, reduced-domain agreement and analytic full-query bounds are retained. Portfolio makes no current investment in `VNFC-TEPR-FULL-GRAPH-REACHABILITY-AND-COST-CERTIFICATE`. | No full FIXED-FH solver, learned arm or empirical host construction; no coordinates, training, evaluation, empirical panel/lease or value claim. Reopen only on one recorded Portfolio revisit condition; Q0 is not a scientific falsification. |
+| RCLE | Frozen retained frontier; `/root/cm_rcle_r04_empirical` applied the user safe-stop instruction to exact `RCLE-CPC-SCIENCE-20260815-04`. | Exactly 13/16 registered blinded atomic seed packets are complete (4109, 4217, 4337, 4441, 4561, 4673, 4787, 4903, 5021, 5147, 5261, 5381, 5503). For every retained unit, COMPLETE metadata, revision/schema/seed identity, packet digest, and checkpoint digest agree; there are zero temporary seed directories, no `analysis.json`, no matching formal-run process, and no scientific values were opened. | No further RCLE scheduling, launch, renewal, or completion may occur before later user authority. The exact object, coordinates, result root, certificate, and 13 retained units remain unchanged; this does not establish a scientific claim, invalidate the data, reallocate the direction, or preclude a future same-envelope lease continuation to all 16 units. |
 | ONLGR | Released: `/root/em_opportunity_normalized_lease_gated_rebinding` + `/root/cm_opportunity_normalized_lease_gated_rebinding`; `ONLGR-TBH-HOST-CARD-20260815-03` remains immutable. | Completed target-host definition has **no current empirical investment**. Portfolio's decision rests on the narrow package-specific claim relative to 11–15 engineering weeks and 15.8–315.4 CPU-hours, not on code, provider, wall time, WIP or resource status. | No source/build/probe/coordinates/training/evaluation/compute/lease. Reopen only on one recorded portfolio revisit condition; Gemini's unobserved advisory operation remains operation-local. |
-| SCDMP | Reuse `/root/em_semigroup_consistent_duration_model_policy` + `/root/cm_semigroup_consistent_duration_model_policy` for `SCDMP-TARGET-BOUND-ORDER-TO-VALUE-DEFINITION`. | Current preactivity revision is `SCDMP-TBOV-SCIENCE-20260815-05`, which resolves r04's Stage-B deployment, assay-denominator and held-out-duration wording defects. Next is a distinct r05 closure in the existing Pro conversation, then EM intake and CM feasibility/cost. | No lease or empirical activity. Recovery for the earlier Gemini click-with-no-turn is complete: it fences that exact operation only and found no controller repair; r05 Pro remains live under a distinct capacity-preflighted operation. |
+| SCDMP | Reused pair `/root/em_scdmp_r07_stagea` + `/root/cm_scdmp_r07_stagea` for `SCDMP-TBOV-SUPPORT-REPRESENTATION-FACTORIAL-CHECKPOINT-DEFINITION`, exact revision `SCDMP-TBOV-SRF-CHECKPOINT-SCIENCE-20260819-02`. | The immutable r07 Stage A remains consumed under `MODIFY-CHECKPOINT`. The new 2×2 support-allocation × segment-representation checkpoint object is ChatGPT-Pro CLOSED, EM-intaken and CM-statically feasible, observable and comparator-feasible with no definition ambiguity. Its complete prospective cost is 40 checkpoints, 24,000 logical AdamW steps and 224,604,160 model examples; Root has relayed the completed definition/cost packet for the separate Portfolio empirical invest/no-current decision. | Definition-only until that decision: no source, construction, coordinates, checkpoints, training, evaluation, compute lease, empirical factorial, r07 rerun, Stage B, coordinate reuse, more-step repair, threshold relaxation, seed replacement or relation assay. The exact Gemini r01 advisory operation is observe-only/no-resend and non-gating. The complete object remains available for a Portfolio decision; any later action requires a new applied envelope. |
+
+### Portfolio decision application — 2026-08-19
+
+```text
+portfolio_packet=PORTFOLIO_TO_ROOT_SGSP_RG2Z_R03_EMPIRICAL_VNFC_POST_Q0_20260819
+controlling_record=SGSP_RG2Z_R03_EMPIRICAL_VNFC_TEPR_POST_Q0_PORTFOLIO_ADJUDICATION_20260819.md
+root_applied=SGSP r03 pair is active through construction/conformance, fresh coordinates, technical acceptance and a later Root lease for the exact complete panel. VNFC Q0 is complete/released; no full-graph successor, solver, host, coordinates, compute or empirical work opened.
+pair_state=SGSP `/root/em_sgsp_rg2z_r03_empirical` + `/root/cm_sgsp_rg2z_r03_empirical`; VNFC Q0 pair released.
+portfolio_ack=ROOT_TO_PORTFOLIO_SGSP_RG2Z_R03_VNFC_POST_Q0_APPLIED_20260819 submitted; target-side delivery visibility is being reconciled and is not required for this already received Portfolio decision to take effect.
+```
+
+### Portfolio decision application — 2026-08-20
+
+```text
+portfolio_packet=PORTFOLIO_TO_ROOT_SCDMP_TBOV_R07_POST_RESULT_DEFINITION_20260820
+controlling_record=SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md
+root_applied=Released the consumed immutable r07 Stage-A empirical envelope and reused the SCDMP EM/CM pair only for the newly allocated support-by-representation factorial checkpoint definition, Pro/Gemini/EM intake, CM static feasibility and full prospective cost chain.
+portfolio_ack=ROOT_TO_PORTFOLIO_SCDMP_TBOV_R07_POST_RESULT_DEFINITION_APPLIED_20260820 is visibly delivered to the dedicated Portfolio thread.
+local_fence=No r07 rerun, Stage B, coordinate reuse, more-step/threshold/seed repair, architecture menu, relation assay or empirical factorial action.
+direction_continuation=The fresh definition-only object may proceed independently through its authorized closure and feasibility envelope; no source or empirical activity is implied.
+next_decision_event=Complete Pro-closed, EM-intaken, CM-feasible and fully costed definition packet; material object/cost change; or genuine cross-scope conflict.
+```
+
+### Root-to-portfolio decision relay — 2026-08-20
+
+```text
+packet=ROOT_TO_PORTFOLIO_SCDMP_TBOV_R07_STAGE_A_COMPLETE_20260820
+conclusion=Exact SCDMP r07 Stage A is technically accepted, EM-intaken and same-conversation Pro CONCUR. Physical order opportunity qualifies, but five of ten frozen checkpoint competence gates fail, so the sole legal branch is MODIFY-CHECKPOINT and the relation assay is nonidentifying.
+requested_portfolio_action=Adjudicate no-current investment versus a distinct checkpoint-only definition discriminator, with a concrete rationale and revisit condition. Stage B, coordinate reuse, threshold relaxation, seed replacement and budget search remain unauthorized.
+delivery_state=DELIVERED_VISIBLE_TARGET: the exact packet marker is visible in the dedicated Portfolio thread. This records queue visibility only, not portfolio processing or agreement.
+```
+
+### Root-to-portfolio decision relay — 2026-08-20
+
+```text
+packet=ROOT_TO_PORTFOLIO_SCDMP_TBOV_SRF_R02_DEFINITION_COMPLETE_20260820
+conclusion=Exact SCDMP-TBOV-SRF-CHECKPOINT-SCIENCE-20260819-02 is Pro CLOSED, EM-intaken and CM-statically feasible, observable and comparator-feasible with no definition ambiguity. Its prospective ten-seed support-allocation × segment-representation checkpoint factorial requires 40 checkpoints, 24,000 logical AdamW steps and 224,604,160 model examples; no construction or scientific activity occurred.
+requested_portfolio_action=Adjudicate current empirical investment versus no current investment with a scientific-value, identifiability and opportunity-cost rationale plus revisit condition. Do not authorize r07 rerun, Stage B, coordinate reuse, threshold/seed/budget repair, relation assay or factorial activity without a new applied envelope.
+delivery_state=SUBMISSION_UNCERTAIN: the local direct-thread sender rejected available message argument shapes before a confirmed submission; no delivery or Portfolio decision is inferred. Reconcile the exact marker against the dedicated Portfolio thread on the next bounded handoff turn.
+```
 
 ### Root-to-portfolio decision relay — 2026-08-15
+
+```text
+packet=ROOT_TO_PORTFOLIO_SCDMP_TBOV_R05_DEFINITION_COMPLETE_20260815
+conclusion=SCDMP-TBOV-SCIENCE-20260815-05 completed its definition-only boundary: Pro CLOSED, EM intake and CM static feasibility/full prospective cost. The exact staged Stage A→conditional-Stage B path has no current construction or lease authority.
+requested_portfolio_action=Adjudicate current investment in exact construction plus Stage A only, versus no-current investment with a concrete value/identifiability/opportunity-cost reason and revisit condition. Stage B is not authorized by this relay.
+delivery_state=DELIVERED_VISIBLE_TARGET: the exact marker is visible as an active turn in the dedicated portfolio task. This records queue visibility, not an allocation decision.
+```
 
 ```text
 packet=ROOT_TO_PORTFOLIO:SGSP-B1-SCIENCE-20260814-06
@@ -167,6 +216,35 @@ delivery_state=DELIVERED_VISIBLE_TARGET: the exact applied-acknowledgment marker
 ```
 
 ### Final Root scheduling notification rule
+
+### Root-to-portfolio RCLE/VNFC completed-definition relay — 2026-08-15
+
+```text
+packet=ROOT_TO_PORTFOLIO_RCLE_CPC_R04_VNFC_TEPR_R04_COMPLETE_20260815
+conclusion=Two independent definition-only packets are complete. RCLE-CPC-SCIENCE-20260815-04 is Pro CLOSED, EM-intaken and statically feasible for its finite dual-corridor held-out-roster discriminator; its projected implementation cost is 4-6 focused engineer-days and a 30-45 minute one-core complete panel. VNFC-TEPR-SCIENCE-20260815-04 is Pro CLOSED, EM-intaken and statically bindable, but exact FIXED-FH comparator certification has a material 50-98 engineer-week and 1.1e5-1.01e7 CPU-hour planning range with a >1e8/non-completion tail.
+requested_portfolio_action=Independently adjudicate: (1) whether RCLE r04 merits empirical construction and a complete panel; (2) whether VNFC r04 merits only a bounded construction-stage FIXED-FH quotient/replay-certificate feasibility layer, or no current investment. Neither request authorizes empirical activity, and no evidence transfers between the directions.
+delivery_state=DELIVERED_VISIBLE_TARGET: the exact marker is visible in the active dedicated Portfolio turn. This records queue visibility, not the later allocation decision.
+```
+
+### RCLE empirical / VNFC Q0 application — 2026-08-15
+
+```text
+controlling_record=RCLE_CPC_R04_EMPIRICAL_VNFC_TEPR_Q0_PORTFOLIO_ADJUDICATION_20260815.md
+portfolio_to_root=RCLE-CPC-R04-FULL-PANEL is a current empirical investment. VNFC-TEPR-FIXED-FH-QUOTIENT-AND-COST-CERTIFICATE-Q0 is a current enabling-construction investment only; it authorizes no empirical VNFC work.
+root_applied=The RCLE pair is reused through exact r04 construction/conformance, fresh coordinates, later Root lease and complete atomic panel. The VNFC pair is reused only to freeze Q0's mandated stage-local artifact and perform deterministic quotient/checker/certificate work. RISP, SCDMP Stage A, SGSP definition and ONLGR no-current are unchanged.
+root_to_portfolio_ack=ROOT_TO_PORTFOLIO_RCLE_CPC_R04_VNFC_TEPR_Q0_APPLIED_20260815
+delivery_state=DELIVERED_VISIBLE_TARGET: the exact applied marker is visible in the active dedicated Portfolio turn; visibility does not add another allocation decision.
+```
+
+### Root-to-portfolio SGSP definition / VNFC Q0 completion relay — 2026-08-19
+
+```text
+packet=ROOT_TO_PORTFOLIO_SGSP_RG2Z_R03_VNFC_TEPR_Q0_COMPLETE_20260819
+conclusion=Two independent current-stage milestones are complete. SGSP-RG2Z-SCIENCE-20260815-03 is Pro CLOSED, EM-intaken and CM-statically feasible for the frozen 24-seed, update-512 variable-N choose/delete panel. VNFC Q0 completed its predeclared exact quotient/checker/cost-certificate stage but does not establish full-graph compression or any empirical value.
+key_observation=SGSP projected complete cost is 35-100 CPU core-hours (or optional 6-18 GPU hours) with 4-7 CM workdays. VNFC Q0 verified its reduced rational domain and counterexample law, while the full-graph cost remains parametrically unresolved and potentially prohibitive.
+requested_portfolio_action=Independently decide whether to invest in SGSP r03 construction plus its complete panel, and whether to invest in a subsequent VNFC full-graph reachability/certificate stage or hold no-current investment. VNFC Q0 does not authorize solver or empirical work.
+delivery_state=DELIVERED_VISIBLE_TARGET: the exact marker is visible in the dedicated Portfolio thread as of 2026-08-19. Delivery visibility is not Portfolio agreement and does not pause either completed milestone.
+```
 
 For every active direction pair, a complete technically accepted result does
 not end in silent owner-local convergence.  When the same-direction EM has
@@ -552,3 +630,121 @@ object cannot be made meaning-complete while broad VNFC is critical; or (4) no
 viable lower-cost direct variable-`N` object exists and B4 is the highest-
 information remaining route. These are revisit conditions, not automatic
 activity triggers.
+
+## Portfolio-owner SCDMP-TBOV-r05 Stage-A empirical decision delta — 2026-08-15
+
+This owner-authored delta consumes the exact complete
+`SCDMP-TBOV-SCIENCE-20260815-05` definition packet. The object is same-conversation
+ChatGPT-Pro CLOSED, EM-intaken and CM statically feasible, with no science-definition
+ambiguity; no source, construction, coordinates, training, evaluation, lease or
+compute has occurred. The controlling cut is
+`SCDMP_TBOV_R05_STAGE_A_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`. This delta
+does not rewrite Root-owned pair, stage or lease rows; Root updates those columns
+after applied acknowledgment.
+
+**Current empirical investment: construction plus complete atomic Stage A only.**
+Stage A is the frozen identical-checkpoint correct-versus-reversed assay that may
+select `ORDER-TR`, modify to `ORDER-Q`, remove the named treatment, or remain
+nonidentified/indeterminate. Stage B is unauthorized. Only `SELECT-ORDER-TR` or
+`MODIFY-TO-ORDER-Q` can make a separate Stage-B decision eligible; all other
+branches prohibit Stage B locally. The current RISP empirical investment and the
+three definition investments `VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION`,
+`SGSP-TARGET-BOUND-TWO-ZONE-DEFINITION`, and
+`RCLE-COARSE-PERSISTENT-COMMITMENT-DEFINITION` are unchanged.
+
+The complete selecting path has prospective lower-bound workload of 36,000 logical
+AdamW steps, 34,535,720,960 model-example evaluations, at least 263,649,280
+deterministic physics transitions, 25,816,320 oracle held-action word rollouts,
+and 23,040 final-value episodes; Stage A alone is comparatively bounded, while
+more than 99% of learned-model work is Stage B. Full Stage A→Stage B planning is
+approximately 100–420 elapsed host hours (4–18 days), with 4–8 engineering days
+plus 1–3 days of technical review/unchanged-science repair. This is an opportunity
+cost, not a wall-time or attempt stop.
+
+No partial result, wall/attempt stop, WIP/order/backfill/fusion/cross-`N×k` parent,
+second-surface, UAV, safety or real-flight action is introduced. No Stage-B
+construction or lease follows Stage A automatically; a legal Stage-A selector
+branch must first make a separate Stage-B portfolio decision eligible.
+
+## Portfolio-owner RCLE-CPC / VNFC-TEPR allocation delta — 2026-08-15
+
+This owner-authored delta consumes the two complete definition packets
+`RCLE-CPC-SCIENCE-20260815-04` and `VNFC-TEPR-SCIENCE-20260815-04`
+independently. Neither packet transfers evidence, thresholds, coordinates,
+acceptance or claims to the other. The controlling record is
+`RCLE_CPC_R04_EMPIRICAL_VNFC_TEPR_Q0_PORTFOLIO_ADJUDICATION_20260815.md`.
+
+| Scientific object | Portfolio decision now in force | Exact portfolio-owned boundary |
+| --- | --- | --- |
+| `RCLE-CPC-R04-FULL-PANEL` | **Current empirical investment: construction plus complete panel.** | Reuse the RCLE pair for the exact finite dual-corridor held-out-roster discriminator. First complete unchanged-science construction/static acceptance, then obtain a Root lease and run the complete panel. Prospective cost is 4–6 focused engineering days and 3,727,360 episodes; the point runtime forecast is 15–30 one-core wall minutes and 30–45 minutes is only the prudent lease envelope, under 2 GiB. Maximum claim is exact finite-task package value/robustness only; no arbitrary `N`, transfer, UAV, safety or deployment claim. Strongest alternative is active-subspace/representation-search geometry plus centralized clue aggregation rather than unique binary cardinality. |
+| `VNFC-TEPR-FIXED-FH-QUOTIENT-AND-COST-CERTIFICATE-Q0` | **Current enabling construction-only investment.** | Reuse the VNFC pair only for the preactivity quotient/cost-certificate Q0 after CM freezes the stage-local completion artifact, cost record, exact reduced-horizon agreement domain, Bellman-bisimulation obligations and full-query bounds. `PASS` returns an accepted quotient and updated full-solver cost for a new Portfolio decision; `COUNTEREXAMPLE` rejects only this quotient and reports an unchanged-science refinement route; `COST_SEPARATION` reports numerical bounds and the dominant term without scientific inference; `INDETERMINATE` is permitted only after the complete predeclared evidence exists with named unresolved obligations, never from time/attempt/tool/provider exhaustion. No branch authorizes the full solver, empirical panel, coordinates, training, evaluation, empirical lease or value claim. |
+| `SGSP-TARGET-BOUND-TWO-ZONE-DEFINITION` | **Current definition-only investment.** | Continue its independent meaning-complete definition, Pro closure, EM intake, CM static feasibility and cost packet. |
+| `ONLGR-TBH-HOST-CARD-20260815-03` | **No current investment.** | Preserve the immutable target-host card and its independent revisit conditions; no source, build, probe, coordinates, training, evaluation, lease or compute. |
+
+VNFC Q0 is a preactivity feasibility stage, not an empirical result. Its
+stage-local specification and cost record must be frozen before any Q0 source
+observation. The Root relay reports a 50–98 engineer-week and
+1.1e5–1.01e7 CPU-hour total-path planning range with a >1e8/non-completion
+tail; it is not independently source-audited and is not Q0 stage cost. The full
+solver and empirical panel remain unauthorized pending a later portfolio
+decision.
+RCLE's complete panel is not authorized until the unchanged object is
+technically accepted and Root issues its direction-scoped lease. Both lines
+retain their own claim ceilings and strongest alternatives; no cross-direction
+scientific updating occurs.
+
+The Root-owned pair, stage, provider and lease rows are intentionally not
+rewritten by this delta. Operational Root must update those rows and return an
+applied acknowledgment. This portfolio delta requests no WIP, ordering,
+backfill, fusion, cross-`N×k` parent, second-surface or UAV action. The prior
+SCDMP Stage-A cut is superseded for allocation only; its exact object, branch
+map, claim ceiling and Stage-B prohibition remain immutable historical
+evidence.
+
+## Superseded/base Portfolio-owner SGSP RG2Z r03 empirical / VNFC post-Q0 delta — 2026-08-19
+
+This owner-authored delta consumes
+`ROOT_TO_PORTFOLIO_SGSP_RG2Z_R03_VNFC_TEPR_Q0_COMPLETE_20260819` and is
+controlled by
+`SGSP_RG2Z_R03_EMPIRICAL_VNFC_TEPR_POST_Q0_PORTFOLIO_ADJUDICATION_20260819.md`.
+It does not rewrite the Root-owned pair, stage, provider or lease rows above;
+Operational Root updates those columns after applying the decision.
+
+| Scientific object | Portfolio decision | Exact portfolio-owned boundary |
+| --- | --- | --- |
+| `SGSP-RG2Z-R03-FULL-PANEL` | **Current empirical investment.** | Reuse the SGSP pair for unchanged-science construction/conformance, fresh disjoint coordinates, technical acceptance, later Root lease, and the complete 24-seed update-512 panel, followed by EM intake and same-Pro result convergence. Keep training `N={9,15}`, held-out `N={6,21}`, one checkpoint, literal strict containment and all frozen gates. No second budget, search, partial interpretation, surface or UAV action. |
+| `VNFC-TEPR-FIXED-FH-QUOTIENT-AND-COST-CERTIFICATE-Q0` | **Complete technical evidence; former enabling allocation consumed.** | Preserve the exact horizons-1..3 reduced-domain quotient/checker certificate and its counterexample law. It establishes no full-graph compression, solver feasibility, learned value or empirical authorization. |
+| `VNFC-TEPR-FULL-GRAPH-REACHABILITY-AND-COST-CERTIFICATE` | **No current investment.** | Do not open a full-graph census, full solver, host/learned construction, coordinates, training, evaluation or lease. The missing full-horizon `K_h`, compression factor and finite next-stage cost make the proposed enabling step low decision value relative to direct current panels. Revisit only on one of the explicit analytic-factorization, finite-cost, reusable-infrastructure, target-criticality or lower-cost-route conditions in the controlling record. |
+
+At that cut the empirical set was RISP-B3, SCDMP-TBOV Stage A, RCLE-CPC and
+SGSP-RG2Z. The later SCDMP r07 delta below consumes that Stage-A line and adds
+the definition-only checkpoint factorial. This was not a quota or
+vacancy/backfill rule. SGSP cost estimates and VNFC raw
+upper bounds are scheduling/opportunity-cost evidence only and never scientific
+stops. No evidence, thresholds, coordinates, acceptance or claims transfer
+between directions; no WIP/order, fusion, cross-`N×k` parent, second-surface or
+UAV action is introduced.
+
+## Portfolio-owner SCDMP r07 Stage-A post-result delta — 2026-08-20
+
+This owner-authored delta consumes
+`ROOT_TO_PORTFOLIO_SCDMP_TBOV_R07_STAGE_A_COMPLETE_20260820` and is controlled
+by
+`SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md`.
+It does not rewrite Root-owned pair, stage, provider or lease rows; Operational
+Root updates those columns after applying the decision.
+
+| Scientific object | Portfolio decision | Exact portfolio-owned boundary |
+| --- | --- | --- |
+| `SCDMP-TBOV-SCIENCE-20260815-07` Stage A | **Complete, immutable and consumed under `MODIFY-CHECKPOINT`.** | All physical opportunity and target/action qualifications passed, but five of ten per-seed untouched fit-support ratios exceeded `0.65`; no order treatment was selected. Do not rerun, add steps, relax thresholds, replace seeds, reuse coordinates or interpret downstream descriptive assay values. Stage B is ineligible and unauthorized. |
+| `SCDMP-TBOV-SUPPORT-REPRESENTATION-FACTORIAL-CHECKPOINT-DEFINITION` | **Current definition-only investment.** | Reuse the SCDMP pair only to freeze one fresh 2×2 current/support-stratified equal-row allocation × current/one-improved-segment-representation object, retaining 600 steps, optimizer, ten fresh seeds, the `0.65` competence rule and untouched evaluation. Complete existing-Pro closure, separate Gemini intake, EM intake, CM static feasibility and full cost. No source, construction, tests, probes, coordinates, checkpoints, training, evaluation or lease. |
+| Any r07 Stage B | **Ineligible and unauthorized.** | A later factorial can at most identify a checkpoint-package competence effect. A new independent relation assay must still select one treatment before a further Portfolio decision can consider Stage B. |
+
+The current empirical set is RISP-B3, RCLE-CPC and SGSP-RG2Z. SCDMP is the
+sole definition-only line; enabling construction remains empty. ONLGR and VNFC
+no-current decisions are unchanged. This allocation reflects the target's
+qualified physical order opportunity and the successor's ability to separate
+support, representation-package, interaction and continued nonidentification;
+it is not a direction-count or vacancy-backfill action. No evidence transfer,
+WIP/order gate, fusion, cross-`N×k` parent, second surface or UAV action is
+introduced.

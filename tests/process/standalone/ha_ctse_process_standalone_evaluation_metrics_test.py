@@ -82,6 +82,13 @@ def test_evaluation_numeric_and_alias_metric_schema_are_preserved():
     ]
     assert metrics["coverage"] == 0.5
     assert metrics["throughput"] == 7.0
+    assert "backhaul_connected_flag" not in metrics
+    assert standalone_evaluation.format_optional_metric(
+        metrics, "backhaul_connected_flag"
+    ) == "NA"
+    assert standalone_evaluation.format_optional_metric(
+        {"backhaul_connected_flag": 0.0}, "backhaul_connected_flag"
+    ) == "0.000000"
 
 
 class _Writer:

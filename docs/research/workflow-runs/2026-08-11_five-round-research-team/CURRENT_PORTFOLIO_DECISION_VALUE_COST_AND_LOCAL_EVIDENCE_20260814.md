@@ -1,14 +1,96 @@
 # Current portfolio decision value, cost, and local evidence (2026-08-14)
 
 ```text
-current_status_pointer=VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md
+current_status_pointer=SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md
 rcle_b2_status=COMPLETE_NO_CURRENT_INVESTMENT
-current_empirical_investments=RISP-B3-TRG-R03-FULL-PANEL
-current_definition_investments=VNFC-TARGET-EXCLUSIVE-POST-CHURN-RECOVERY-DEFINITION|SGSP-TARGET-BOUND-TWO-ZONE-DEFINITION|RCLE-COARSE-PERSISTENT-COMMITMENT-DEFINITION|SCDMP-TARGET-BOUND-ORDER-TO-VALUE-DEFINITION
+current_empirical_investments=RISP-B3-TRG-R03-FULL-PANEL|RCLE-CPC-R04-FULL-PANEL|SGSP-RG2Z-R03-FULL-PANEL
+current_enabling_construction=NONE
+current_definition_investments=SCDMP-TBOV-SUPPORT-REPRESENTATION-FACTORIAL-CHECKPOINT-DEFINITION
 automatic_backfill=false
 ```
 
-## 2026-08-15 VNFC-B4 post-definition allocation and cost cut
+## 2026-08-20 current SCDMP r07 Stage-A post-result cut
+
+Exact SCDMP r07 Stage A is completed sunk empirical evidence: ten independent
+checkpoints, 6,000 logical AdamW steps and 56,151,040 model examples. These
+counts are not a successor wall-time or resource forecast. The result consumed
+the Stage-A investment under
+`MODIFY-CHECKPOINT`; Stage B has no selected treatment and no authorization.
+
+The new SCDMP investment is definition-only. Its exact empirical cost is
+unknown until EM freezes the 2×2 support-by-representation object and CM returns
+construction, engineering, training/evaluation, wall, memory and implementation
+estimates. Holding 600 steps, ten seeds, row count, optimizer, competence rule
+and untouched evaluation fixed constrains scientific search, but an improved
+representation may change parameter/work cost; that difference must be
+reported as a package alternative rather than hidden as a pure mechanism
+effect.
+
+Definition work is currently worth its bounded information because r07 already
+qualified strong physical order opportunity and localized the barrier to
+checkpoint support/representation. Empirical activation is not yet justified:
+the factorial remains upstream of a fresh relation assay and still farther from
+Stage-B direct variable-`k` value. RISP, RCLE and SGSP empirical costs continue
+independently; no quota or automatic backfill exists.
+
+## Superseded/base 2026-08-19 SGSP RG2Z / VNFC post-Q0 cut
+
+SGSP-RG2Z r03 is a current empirical investment. Its projected full cost is
+4–7 focused CM days plus 35–100 CPU core-hours, or optional 6–18 GPU elapsed
+hours, for one complete 24-seed update-512 panel. The cost is bounded relative
+to its direct variable-`N` retain/delete decision and is scheduling input only.
+
+VNFC Q0 is completed sunk technical evidence, not an active cost line. It
+validated 64 reduced-domain agreement rows over a 16-state/224-edge fixture
+and 12 checked quotient classes, but left full-horizon `K_h` and compression
+unknown. The next full-graph census is no-current because it lacks a finite
+decision-changing stage/cost distinct from dominant enumeration; raw full-
+graph figures are upper envelopes, not runtime forecasts or science stops.
+
+Current opportunity cost is therefore allocated toward SGSP, RCLE, RISP and
+SCDMP direct empirical information. VNFC retains explicit bounded-feasibility
+revisit conditions; no quota or automatic backfill exists.
+
+## Superseded/base 2026-08-15 RCLE-CPC / VNFC-TEPR cut
+
+Current empirics are RISP-B3 full panel, SCDMP-TBOV r05 Stage A and RCLE-CPC r04 full panel. VNFC-TEPR is enabling construction-only Q0; SGSP is definition-only two-zone and ONLGR is no-current.
+RCLE-CPC is the direct variable-N family-dividing finite package: 4–6 focused engineering days and 3,727,360 episodes. Its point runtime forecast is 15–30 one-core wall minutes; 30–45 minutes is only the prudent lease envelope and has no scientific stopping meaning. Its claim ceiling is exact finite-task package value/robustness only; optimizer/representation-search geometry, centralized clue aggregation and coarse commitment remain strongest alternatives. Any positive result still requires a later target/UAV bridge decision.
+VNFC-TEPR Q0 is proof/cost feasibility, not value evidence. The quotient/cost certificate must preserve `A_fix`, `X_20`, `X_40`, `D_past`, the ratio and canonical ties, use a prospectively frozen reduced-horizon exact-agreement domain, and return full-query bounds. PASS only makes a new full-solver construction decision eligible; counterexample, cost separation and complete-evidence indeterminate branches do not authorize empirical work. The owner-card strongest alternative is capacity-one matching plus finite-budget pruning/regularization and surplus `N=7` reserves; controllers outside FIXED-FH are a separate limitation. Root-relayed total-path cost bands are not independently audited Q0 costs.
+No evidence transfers, fusion, WIP/order/backfill, cross-Nxk parent, second surface or UAV action.
+
+## 2026-08-15 SCDMP-TBOV r05 Stage-A empirical cut (superseding current SCDMP narrative)
+The controlling cut is `SCDMP_TBOV_R05_STAGE_A_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`.
+The exact object `SCDMP-TBOV-SCIENCE-20260815-05` is same-conversation Pro
+`CLOSED`, EM-intaken and CM-statically feasible, with no definition ambiguity;
+no source, construction, coordinates, training, evaluation, lease or compute
+has occurred. Current empirics are RISP-B3 full panel plus SCDMP r05 Stage A;
+VNFC is target-exclusive and SGSP/RCLE definition-only.
+
+Stage A uses an identical-checkpoint correct-versus-reversed assay to select,
+modify or remove one named order treatment. Only `SELECT-ORDER-TR` or
+`MODIFY-TO-ORDER-Q` makes a later Stage-B decision eligible (not automatic);
+all seven other branches prohibit Stage B. Stage A can support only exact-
+object physical-opportunity, checkpoint-qualification and correct-versus-
+reversed path-fidelity conclusions; it supplies no value or trained-treatment
+claim. Only a later, separately authorized complete Stage B could at most
+support fixed-`N=4`, finite-budget held-out-complete-word and fixed/switch-`k`
+package value; no arbitrary-`k`, variable-`N`, unique mediation, second surface,
+UAV, safety or real-flight claim follows. Strongest
+alternatives are target-adapted finite supervision and optimizer geometry,
+including visible words, optimization-visible `p6/p8`, auxiliary/residual
+curvature, clipping and AdamW history.
+
+Stage A costs `6,000` logical AdamW steps and `56,151,040` model-example
+evaluations. The full conditional path costs `36,000` and `34,535,720,960`,
+about `100–420 elapsed host hours` (not CPU-hours), plus `4–8` engineering days
+and review/repair; >99% is Stage B and Stage-A-only labor is not separately
+estimated. RISP and SCDMP are orthogonal variable-`k` mechanisms with no
+evidence transfer or fusion. Stage A alone does not open a bridge; only later
+qualifying Stage B could reopen it. No WIP/order backfill, cross-`N×k`,
+second-surface or UAV action is created. Older prospective SCDMP narrative is
+historical/superseded for allocation; Stage B remains unauthorized.
+
+## HISTORICAL_NONOPERATIVE — 2026-08-15 VNFC-B4 post-definition allocation and cost cut
 
 The controlling VNFC decision is `VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`.
 `VNFC-B4-SCIENCE-20260815-05` is complete and immutable, with no current

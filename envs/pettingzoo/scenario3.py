@@ -44,6 +44,7 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         paper_reward=False,  # 是否使用论文中的奖励函数
         use_fdma=True,  # 是否启用FDMA频分多址
         bandwidth=20e6,  # 每个无人机的带宽 (Hz)，默认为20MHz
+        step_path_loss_cache=True,
     ):
         """
         初始化UAV强制多跳环境
@@ -108,6 +109,7 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
             paper_reward=paper_reward,
             use_fdma=use_fdma,
             bandwidth=bandwidth,
+            step_path_loss_cache=step_path_loss_cache,
         )
         
         # 场景名称
@@ -139,20 +141,20 @@ class UAVMultiHopEnv(UAVCooperativeNetworkEnv):
         # 如果有更多基站，随机分布在边界附近
         for i in range(4, self.n_ground_bs):
             # 随机选择一个边界
-            edge = np.random.randint(0, 4)
+            edge = self.np_random.randint(0, 4)
             
             if edge == 0:  # 下边界
-                x = np.random.uniform(offset, self.area_size - offset)
+                x = self.np_random.uniform(offset, self.area_size - offset)
                 y = offset
             elif edge == 1:  # 右边界
                 x = self.area_size - offset
-                y = np.random.uniform(offset, self.area_size - offset)
+                y = self.np_random.uniform(offset, self.area_size - offset)
             elif edge == 2:  # 上边界
-                x = np.random.uniform(offset, self.area_size - offset)
+                x = self.np_random.uniform(offset, self.area_size - offset)
                 y = self.area_size - offset
             else:  # 左边界
                 x = offset
-                y = np.random.uniform(offset, self.area_size - offset)
+                y = self.np_random.uniform(offset, self.area_size - offset)
             
             self.ground_bs_positions[i] = [x, y, 30]
     

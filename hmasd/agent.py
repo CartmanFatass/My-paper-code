@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+from copy import deepcopy
 from torch.optim import Adam
 from torch.distributions import Categorical
 import time
@@ -72,6 +73,113 @@ from hmasd.process_exploration import (
     process_positive_skill_labels,
 )
 import random
+
+
+def _split_legacy_discriminator_adam_state_dict(
+    legacy_state_dict,
+    team_parameters,
+    individual_parameters,
+):
+    """Strictly split the old one-group Adam state by registered parameter order."""
+
+    if not isinstance(legacy_state_dict, dict) or set(legacy_state_dict) != {
+        'state', 'param_groups'
+    }:
+        raise ValueError('legacy discriminator optimizer state has an invalid schema')
+    groups = legacy_state_dict['param_groups']
+    states = legacy_state_dict['state']
+    if not isinstance(groups, list) or len(groups) != 1 or not isinstance(states, dict):
+        raise ValueError('legacy discriminator optimizer must contain exactly one Adam group')
+    group = groups[0]
+    if not isinstance(group, dict) or 'params' not in group:
+        raise ValueError('legacy discriminator optimizer parameter group is invalid')
+    parameter_ids = list(group['params'])
+    team_parameters = tuple(team_parameters)
+    individual_parameters = tuple(individual_parameters)
+    expected_count = len(team_parameters) + len(individual_parameters)
+    if len(parameter_ids) != expected_count or len(set(parameter_ids)) != expected_count:
+        raise ValueError('legacy discriminator optimizer parameter inventory mismatch')
+    if not set(states).issubset(set(parameter_ids)):
+        raise ValueError('legacy discriminator optimizer contains foreign state rows')
+
+    parameters = team_parameters + individual_parameters
+    allowed_state_fields = {'step', 'exp_avg', 'exp_avg_sq', 'max_exp_avg_sq'}
+    for parameter_id, parameter in zip(parameter_ids, parameters):
+        row = states.get(parameter_id)
+        if row is None:
+            continue
+        if not isinstance(row, dict) or not set(row).issubset(allowed_state_fields):
+            raise ValueError('legacy discriminator Adam state row is invalid')
+        if not {'step', 'exp_avg', 'exp_avg_sq'}.issubset(row):
+            raise ValueError('legacy discriminator Adam state row is incomplete')
+        for field in ('exp_avg', 'exp_avg_sq', 'max_exp_avg_sq'):
+            if field in row and (
+                not torch.is_tensor(row[field])
+                or tuple(row[field].shape) != tuple(parameter.shape)
+            ):
+                raise ValueError(
+                    f'legacy discriminator Adam {field} shape does not match parameter'
+                )
+        step = row['step']
+        if torch.is_tensor(step):
+            if step.numel() != 1:
+                raise ValueError('legacy discriminator Adam step must be scalar')
+        elif not isinstance(step, (int, float)):
+            raise ValueError('legacy discriminator Adam step has an invalid type')
+
+    team_count = len(team_parameters)
+
+    def split_group(selected_ids, start, stop):
+        selected = deepcopy(group)
+        selected['params'] = list(selected_ids)
+        if 'param_names' in selected:
+            names = list(selected['param_names'])
+            if len(names) != expected_count:
+                raise ValueError('legacy discriminator optimizer param_names mismatch')
+            selected['param_names'] = names[start:stop]
+        return {
+            'state': {
+                parameter_id: deepcopy(states[parameter_id])
+                for parameter_id in selected_ids
+                if parameter_id in states
+            },
+            'param_groups': [selected],
+        }
+
+    return (
+        split_group(parameter_ids[:team_count], 0, team_count),
+        split_group(parameter_ids[team_count:], team_count, expected_count),
+    )
+
+
+def _rollout_sampler_seed_from_config(config, *, stream: int) -> int:
+    """Derive one named sampler stream without consuming process-global RNG."""
+
+    explicit = getattr(config, 'rollout_sampler_seed', None)
+    if explicit is not None:
+        if isinstance(explicit, bool) or not isinstance(explicit, (int, np.integer)):
+            raise ValueError('rollout_sampler_seed must be an integer')
+        if int(explicit) < 0:
+            raise ValueError('rollout_sampler_seed must be non-negative')
+        return int(explicit)
+    run_seed = getattr(config, 'runtime_seed', None)
+    if run_seed is None:
+        run_seed = getattr(config, 'seed', None)
+    if run_seed is None:
+        raise ValueError(
+            'HMASDAgent requires config.runtime_seed or config.seed for rollout sampling'
+        )
+    if isinstance(run_seed, bool) or not isinstance(run_seed, (int, np.integer)):
+        raise ValueError('config.seed must be an integer for rollout sampling')
+    if int(run_seed) < 0:
+        raise ValueError('config.seed must be non-negative for rollout sampling')
+    if isinstance(stream, bool) or not isinstance(stream, int) or stream < 0:
+        raise ValueError('rollout sampler stream must be a non-negative integer')
+    return int(
+        np.random.SeedSequence(
+            [int(run_seed), 0x484D4153, int(stream)]
+        ).generate_state(1, dtype=np.uint64)[0]
+    )
 
 # 导入SB3集成功能
 try:
@@ -513,10 +621,18 @@ class HMASDAgent:
             lr=config.lr_discoverer_critic, # 使用独立的critic学习率
             weight_decay=config.weight_decay
         )
-        self.discriminator_optimizer = (
+        self.team_discriminator_optimizer = (
             Adam(
-                list(self.team_discriminator.parameters()) +
-                list(self.individual_discriminator.parameters()),
+                self.team_discriminator.parameters(),
+                lr=config.lr_discriminator,
+                weight_decay=config.weight_decay
+            )
+            if self.use_discriminator_path
+            else None
+        )
+        self.individual_discriminator_optimizer = (
+            Adam(
+                self.individual_discriminator.parameters(),
                 lr=config.lr_discriminator,
                 weight_decay=config.weight_decay
             )
@@ -561,14 +677,24 @@ class HMASDAgent:
                     total_iters=config.lr_decay_steps
                 )
                 self.discoverer_scheduler = None # 兼容性设置
-                self.discriminator_scheduler = (
+                self.team_discriminator_scheduler = (
                     LinearLR(
-                        self.discriminator_optimizer,
+                        self.team_discriminator_optimizer,
                         start_factor=1.0,
                         end_factor=config.discriminator_lr_decay_factor,
                         total_iters=config.lr_decay_steps
                     )
-                    if self.discriminator_optimizer is not None
+                    if self.team_discriminator_optimizer is not None
+                    else None
+                )
+                self.individual_discriminator_scheduler = (
+                    LinearLR(
+                        self.individual_discriminator_optimizer,
+                        start_factor=1.0,
+                        end_factor=config.discriminator_lr_decay_factor,
+                        total_iters=config.lr_decay_steps
+                    )
+                    if self.individual_discriminator_optimizer is not None
                     else None
                 )
             elif config.lr_decay_schedule == 'cosine':
@@ -582,11 +708,19 @@ class HMASDAgent:
                     self.discoverer_critic_optimizer, T_max=config.lr_decay_steps
                 )
                 self.discoverer_scheduler = None # 兼容性设置
-                self.discriminator_scheduler = (
+                self.team_discriminator_scheduler = (
                     CosineAnnealingLR(
-                        self.discriminator_optimizer, T_max=config.lr_decay_steps
+                        self.team_discriminator_optimizer, T_max=config.lr_decay_steps
                     )
-                    if self.discriminator_optimizer is not None
+                    if self.team_discriminator_optimizer is not None
+                    else None
+                )
+                self.individual_discriminator_scheduler = (
+                    CosineAnnealingLR(
+                        self.individual_discriminator_optimizer,
+                        T_max=config.lr_decay_steps
+                    )
+                    if self.individual_discriminator_optimizer is not None
                     else None
                 )
             
@@ -594,7 +728,8 @@ class HMASDAgent:
         else:
             self.coordinator_scheduler = None
             self.discoverer_scheduler = None  
-            self.discriminator_scheduler = None
+            self.team_discriminator_scheduler = None
+            self.individual_discriminator_scheduler = None
             main_logger.info("未启用学习率衰减")
         
         # 判别器只使用当前rollout数据，update后在clear_buffers中清空。
@@ -606,6 +741,11 @@ class HMASDAgent:
         num_envs = getattr(config, 'num_envs', 1)  # 并行环境数量
         gru_hidden_size = getattr(config, 'gru_hidden_size', 128)  # GRU隐状态大小
         action_space_type = getattr(config, 'action_space_type', 'continuous')  # 动作空间类型
+        rollout_sampler_seed = _rollout_sampler_seed_from_config(
+            config,
+            stream=0,
+        )
+        self.rollout_sampler_seed = rollout_sampler_seed
         
         self.rollout_buffer = RolloutBuffer(
             num_steps=rollout_length,
@@ -618,7 +758,8 @@ class HMASDAgent:
             n_z=config.n_z,
             state_dim=config.state_dim,
             action_space_type=action_space_type,
-            compact_dim=getattr(config, 'opt_compact_dim', 0) if (self.use_ha_ctse or self.use_low_level_compact) else 0
+            compact_dim=getattr(config, 'opt_compact_dim', 0) if (self.use_ha_ctse or self.use_low_level_compact) else 0,
+            sampler_seed=rollout_sampler_seed,
         )
         main_logger.info(f"初始化统一Rollout Buffer: 长度={rollout_length}, 环境数={num_envs}, "
                         f"智能体数={config.n_agents}, 团队技能数={config.n_Z}, 个体技能数={config.n_z}")
@@ -5249,6 +5390,8 @@ class HMASDAgent:
 
             for start_idx in range(0, max_samples, batch_size):
                 loss_terms = []
+                update_team = False
+                update_individual = False
 
                 if team_indices is not None and start_idx < num_team_samples:
                     end_idx = min(start_idx + batch_size, num_team_samples)
@@ -5261,6 +5404,7 @@ class HMASDAgent:
                     team_disc_logits = self._team_discriminator_logits(batch_states + state_noise, batch_compacts)
                     team_disc_loss = F.cross_entropy(team_disc_logits, batch_skills)
                     loss_terms.append(team_disc_loss)
+                    update_team = True
                     team_loss_accumulated += team_disc_loss.item()
                     team_update_count += 1
 
@@ -5280,6 +5424,7 @@ class HMASDAgent:
                     )
                     agent_disc_loss = F.cross_entropy(agent_disc_logits, batch_agent_skills)
                     loss_terms.append(agent_disc_loss)
+                    update_individual = True
                     ind_loss_accumulated += agent_disc_loss.item()
                     ind_update_count += 1
 
@@ -5287,13 +5432,24 @@ class HMASDAgent:
                     continue
 
                 fused_loss = torch.stack(loss_terms).sum()
-                self.discriminator_optimizer.zero_grad()
+                if update_team:
+                    self.team_discriminator_optimizer.zero_grad()
+                if update_individual:
+                    self.individual_discriminator_optimizer.zero_grad()
                 fused_loss.backward()
-                torch.nn.utils.clip_grad_norm_(
-                    list(self.team_discriminator.parameters()) + list(self.individual_discriminator.parameters()),
-                    self.config.max_grad_norm
-                )
-                self.discriminator_optimizer.step()
+                # The legacy combined Adam held independent per-parameter
+                # moments but clipped the fused parameter inventory together.
+                # Retain that clipping contract while separating optimizer state.
+                active_parameters = []
+                if update_team:
+                    active_parameters.extend(self.team_discriminator.parameters())
+                if update_individual:
+                    active_parameters.extend(self.individual_discriminator.parameters())
+                torch.nn.utils.clip_grad_norm_(active_parameters, self.config.max_grad_norm)
+                if update_team:
+                    self.team_discriminator_optimizer.step()
+                if update_individual:
+                    self.individual_discriminator_optimizer.step()
                 if self.r39_native_hmasd_toy:
                     self.native_toy_optimizer_updates['discriminator'] += 1
 
@@ -5442,10 +5598,10 @@ class HMASDAgent:
                     team_disc_logits = self._team_discriminator_logits(noisy_batch_states, batch_compacts)
                     team_disc_loss = F.cross_entropy(team_disc_logits, batch_skills)
                     
-                    self.discriminator_optimizer.zero_grad()
+                    self.team_discriminator_optimizer.zero_grad()
                     team_disc_loss.backward()
                     torch.nn.utils.clip_grad_norm_(self.team_discriminator.parameters(), self.config.max_grad_norm)
-                    self.discriminator_optimizer.step()
+                    self.team_discriminator_optimizer.step()
                     if self.r39_native_hmasd_toy:
                         self.native_toy_optimizer_updates['discriminator'] += 1
                     
@@ -5479,10 +5635,10 @@ class HMASDAgent:
                     )
                     agent_disc_loss = F.cross_entropy(agent_disc_logits, batch_agent_skills)
                     
-                    self.discriminator_optimizer.zero_grad()
+                    self.individual_discriminator_optimizer.zero_grad()
                     agent_disc_loss.backward()
                     torch.nn.utils.clip_grad_norm_(self.individual_discriminator.parameters(), self.config.max_grad_norm)
-                    self.discriminator_optimizer.step()
+                    self.individual_discriminator_optimizer.step()
                     if self.r39_native_hmasd_toy:
                         self.native_toy_optimizer_updates['discriminator'] += 1
                     
@@ -5788,8 +5944,10 @@ class HMASDAgent:
                 self.discoverer_actor_scheduler.step()
             if hasattr(self, 'discoverer_critic_scheduler') and self.discoverer_critic_scheduler is not None:
                 self.discoverer_critic_scheduler.step()
-            if self.discriminator_scheduler is not None:
-                self.discriminator_scheduler.step()
+            if self.team_discriminator_scheduler is not None:
+                self.team_discriminator_scheduler.step()
+            if self.individual_discriminator_scheduler is not None:
+                self.individual_discriminator_scheduler.step()
 
         # 更新训练信息
         self.training_info['high_level_loss'].append(coordinator_loss)
@@ -5836,11 +5994,18 @@ class HMASDAgent:
         current_coord_lr = self.coordinator_optimizer.param_groups[0]['lr']
         current_disc_actor_lr = self.discoverer_actor_optimizer.param_groups[0]['lr']
         current_disc_critic_lr = self.discoverer_critic_optimizer.param_groups[0]['lr']
-        current_discriminator_lr = (
-            self.discriminator_optimizer.param_groups[0]['lr']
-            if self.discriminator_optimizer is not None
+        current_team_discriminator_lr = (
+            self.team_discriminator_optimizer.param_groups[0]['lr']
+            if self.team_discriminator_optimizer is not None
             else 0.0
         )
+        current_individual_discriminator_lr = (
+            self.individual_discriminator_optimizer.param_groups[0]['lr']
+            if self.individual_discriminator_optimizer is not None
+            else 0.0
+        )
+        if current_team_discriminator_lr != current_individual_discriminator_lr:
+            raise RuntimeError('split discriminator learning rates diverged')
         current_process_lr = (
             self.process_optimizer.param_groups[0]['lr']
             if self.process_optimizer is not None
@@ -5851,7 +6016,9 @@ class HMASDAgent:
             'coordinator_lr': current_coord_lr,
             'discoverer_actor_lr': current_disc_actor_lr,
             'discoverer_critic_lr': current_disc_critic_lr,
-            'discriminator_lr': current_discriminator_lr,
+            'discriminator_lr': current_team_discriminator_lr,
+            'team_discriminator_lr': current_team_discriminator_lr,
+            'individual_discriminator_lr': current_individual_discriminator_lr,
             'process_encoder_lr': current_process_lr,
         }
 
@@ -5946,9 +6113,25 @@ class HMASDAgent:
             'coordinator_optimizer': self.coordinator_optimizer.state_dict(),
             'discoverer_actor_optimizer': self.discoverer_actor_optimizer.state_dict(),
             'discoverer_critic_optimizer': self.discoverer_critic_optimizer.state_dict(),
-            'discriminator_optimizer': (
-                self.discriminator_optimizer.state_dict()
-                if self.discriminator_optimizer is not None
+            'discriminator_optimizer_schema': 'split_team_individual_adam_v1',
+            'team_discriminator_optimizer': (
+                self.team_discriminator_optimizer.state_dict()
+                if self.team_discriminator_optimizer is not None
+                else None
+            ),
+            'individual_discriminator_optimizer': (
+                self.individual_discriminator_optimizer.state_dict()
+                if self.individual_discriminator_optimizer is not None
+                else None
+            ),
+            'team_discriminator_scheduler': (
+                self.team_discriminator_scheduler.state_dict()
+                if self.team_discriminator_scheduler is not None
+                else None
+            ),
+            'individual_discriminator_scheduler': (
+                self.individual_discriminator_scheduler.state_dict()
+                if self.individual_discriminator_scheduler is not None
                 else None
             ),
             'process_optimizer': self.process_optimizer.state_dict() if self.process_optimizer is not None else None,
@@ -5989,6 +6172,15 @@ class HMASDAgent:
                 'last_action_entropy': float(self.last_action_entropy),
             },
             'training_progress': dict(getattr(self, 'training_progress', {})),
+            'rollout_sampler_rng': {
+                'schema': 'hmasd_rollout_sampler_rng_v1',
+                'streams': {
+                    'main_rollout': {
+                        'seed': int(self.rollout_sampler_seed),
+                        'state': self.rollout_buffer.get_sampler_rng_state(),
+                    },
+                },
+            },
             'scenario7_safety_dual_state': dict(
                 getattr(self, 'scenario7_safety_dual_state', {})
             ),
@@ -6103,12 +6295,22 @@ class HMASDAgent:
             saved_optimizer_updates = saved_training_progress.get(
                 'native_toy_optimizer_updates', {}
             )
-            if isinstance(saved_optimizer_updates, dict):
-                self.native_toy_optimizer_updates.update(
+            if not isinstance(saved_optimizer_updates, dict):
+                raise ValueError('native toy optimizer progress must be a dictionary')
+            if saved_optimizer_updates:
+                native_toy_optimizer_updates = getattr(
+                    self, 'native_toy_optimizer_updates', None
+                )
+                if not isinstance(native_toy_optimizer_updates, dict):
+                    raise ValueError(
+                        'checkpoint contains native toy optimizer progress but '
+                        'the current agent has no matching counter inventory'
+                    )
+                native_toy_optimizer_updates.update(
                     {
                         key: int(value)
                         for key, value in saved_optimizer_updates.items()
-                        if key in self.native_toy_optimizer_updates
+                        if key in native_toy_optimizer_updates
                     }
                 )
 
@@ -6204,6 +6406,33 @@ class HMASDAgent:
             self.scenario7_safety_dual_state = dict(
                 checkpoint.get('scenario7_safety_dual_state', {})
             )
+
+        sampler_rng = checkpoint.get('rollout_sampler_rng')
+        if sampler_rng is not None:
+            if (
+                not isinstance(sampler_rng, dict)
+                or set(sampler_rng) != {'schema', 'streams'}
+                or sampler_rng['schema'] != 'hmasd_rollout_sampler_rng_v1'
+                or not isinstance(sampler_rng['streams'], dict)
+                or set(sampler_rng['streams']) != {'main_rollout'}
+            ):
+                raise ValueError('rollout sampler RNG checkpoint metadata is invalid')
+            main_rollout_rng = sampler_rng['streams']['main_rollout']
+            if (
+                not isinstance(main_rollout_rng, dict)
+                or set(main_rollout_rng) != {'seed', 'state'}
+                or isinstance(main_rollout_rng['seed'], bool)
+                or not isinstance(main_rollout_rng['seed'], int)
+                or main_rollout_rng['seed'] < 0
+            ):
+                raise ValueError('main rollout sampler RNG checkpoint is invalid')
+            self.rollout_buffer.set_sampler_rng_state(main_rollout_rng['state'])
+            self.rollout_sampler_seed = int(main_rollout_rng['seed'])
+        else:
+            main_logger.warning(
+                '旧检查点没有Rollout sampler RNG状态；仅可视为显式warm-start，'
+                '不得宣称严格轨迹续训。'
+            )
         
         # 使用 strict=False 来处理模型架构不匹配的问题
         # 这允许加载匹配的层，同时忽略不匹配的层（如旧的transformer vs 新的opt，或变化的智能体数量）
@@ -6245,9 +6474,73 @@ class HMASDAgent:
                 main_logger.warning("从旧的组合优化器状态恢复Discoverer Actor和Critic优化器")
             except ValueError as e:
                 main_logger.warning(f"旧Discoverer优化器状态与当前参数组不兼容，跳过恢复: {e}")
-        if self.discriminator_optimizer is not None and checkpoint.get('discriminator_optimizer') is not None:
-            self.discriminator_optimizer.load_state_dict(checkpoint['discriminator_optimizer'])
-            main_logger.info("已恢复Discriminator优化器状态")
+        if self.team_discriminator_optimizer is not None:
+            split_optimizer_fields = (
+                'team_discriminator_optimizer',
+                'individual_discriminator_optimizer',
+            )
+            has_split_optimizer = any(
+                field in checkpoint for field in split_optimizer_fields
+            )
+            if has_split_optimizer:
+                if (
+                    checkpoint.get('discriminator_optimizer_schema')
+                    != 'split_team_individual_adam_v1'
+                    or any(checkpoint.get(field) is None for field in split_optimizer_fields)
+                ):
+                    raise ValueError('split discriminator optimizer checkpoint is incomplete')
+                self.team_discriminator_optimizer.load_state_dict(
+                    checkpoint['team_discriminator_optimizer']
+                )
+                self.individual_discriminator_optimizer.load_state_dict(
+                    checkpoint['individual_discriminator_optimizer']
+                )
+                main_logger.info("已恢复拆分的Team和Individual Discriminator优化器状态")
+            elif checkpoint.get('discriminator_optimizer') is not None:
+                team_state, individual_state = (
+                    _split_legacy_discriminator_adam_state_dict(
+                        checkpoint['discriminator_optimizer'],
+                        self.team_discriminator.parameters(),
+                        self.individual_discriminator.parameters(),
+                    )
+                )
+                self.team_discriminator_optimizer.load_state_dict(team_state)
+                self.individual_discriminator_optimizer.load_state_dict(
+                    individual_state
+                )
+                main_logger.info("已严格拆分并恢复旧版Discriminator Adam状态")
+
+            split_scheduler_fields = (
+                'team_discriminator_scheduler',
+                'individual_discriminator_scheduler',
+            )
+            has_split_scheduler = any(
+                checkpoint.get(field) is not None for field in split_scheduler_fields
+            )
+            if has_split_scheduler:
+                if (
+                    self.team_discriminator_scheduler is None
+                    or self.individual_discriminator_scheduler is None
+                    or any(checkpoint.get(field) is None for field in split_scheduler_fields)
+                ):
+                    raise ValueError('split discriminator scheduler checkpoint is incompatible')
+                self.team_discriminator_scheduler.load_state_dict(
+                    checkpoint['team_discriminator_scheduler']
+                )
+                self.individual_discriminator_scheduler.load_state_dict(
+                    checkpoint['individual_discriminator_scheduler']
+                )
+            elif (
+                checkpoint.get('discriminator_scheduler') is not None
+                and self.team_discriminator_scheduler is not None
+                and self.individual_discriminator_scheduler is not None
+            ):
+                self.team_discriminator_scheduler.load_state_dict(
+                    checkpoint['discriminator_scheduler']
+                )
+                self.individual_discriminator_scheduler.load_state_dict(
+                    checkpoint['discriminator_scheduler']
+                )
         if self.process_optimizer is not None and checkpoint.get('process_optimizer') is not None:
             try:
                 self.process_optimizer.load_state_dict(checkpoint['process_optimizer'])

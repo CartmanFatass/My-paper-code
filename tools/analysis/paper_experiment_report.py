@@ -4,6 +4,7 @@
 import argparse
 import os
 from pathlib import Path
+import re
 
 import matplotlib
 matplotlib.use("Agg")
@@ -34,6 +35,19 @@ def _read_episode_files(root):
         if "seed" not in df.columns:
             seed = _infer_seed(path)
             df["seed"] = seed
+        if "run_seed" not in df.columns:
+            inferred = _infer_seed(path)
+            # Explicit legacy migration: historical paper rows used ``seed``
+            # for the trained run.  New rows keep evaluation-block ``seed``
+            # separate from ``run_seed``.
+            df["run_seed"] = inferred if inferred != "" else df["seed"]
+        if "eval_step" not in df.columns:
+            match = re.search(r"paper_eval_episodes_step_(\d+)\.csv$", path.name)
+            if match is None:
+                raise ValueError(f"cannot infer eval_step from {path}")
+            df["eval_step"] = int(match.group(1))
+        if "checkpoint" not in df.columns:
+            df["checkpoint"] = f"step_{int(df['eval_step'].iloc[0])}"
         frames.append(df)
     if not frames:
         return pd.DataFrame()
@@ -50,12 +64,40 @@ def _infer_seed(path):
     return ""
 
 
-def _summarize(df, group_cols, metrics):
+def _require_episode_identity(df, group_cols):
+    required = [*group_cols, "checkpoint", "eval_step", "run_seed", "seed"]
+    episode_col = "episode_id" if "episode_id" in df.columns else "episode" if "episode" in df.columns else None
+    if episode_col is None:
+        raise ValueError("paper episode rows require episode or episode_id")
+    required.append(episode_col)
+    missing = [col for col in required if col not in df.columns]
+    if missing:
+        raise ValueError(f"paper episode rows are missing identifiers: {missing}")
+    nulls = [col for col in required if df[col].isna().any() or (df[col].astype(str) == "").any()]
+    if nulls:
+        raise ValueError(f"paper episode identifiers contain missing values: {nulls}")
+    identity = [
+        *group_cols,
+        "checkpoint",
+        "eval_step",
+        "run_seed",
+        "seed",
+        episode_col,
+    ]
+    duplicates = df.duplicated(identity, keep=False)
+    if duplicates.any():
+        sample = df.loc[duplicates, identity].head(3).to_dict("records")
+        raise ValueError(f"duplicate paper episode identities: {sample}")
+    return episode_col
+
+
+def _summarize_per_seed(df, group_cols, metrics):
     rows = []
-    for group_key, group in df.groupby(group_cols, dropna=False):
+    seed_group_cols = [*group_cols, "checkpoint", "eval_step", "run_seed"]
+    for group_key, group in df.groupby(seed_group_cols, dropna=False):
         if not isinstance(group_key, tuple):
             group_key = (group_key,)
-        base = dict(zip(group_cols, group_key))
+        base = dict(zip(seed_group_cols, group_key))
         for metric in metrics:
             if metric not in group.columns:
                 continue
@@ -67,13 +109,45 @@ def _summarize(df, group_cols, metrics):
             rows.append({
                 **base,
                 "metric": metric,
-                "count": int(len(values)),
+                "episode_count": int(len(values)),
                 "mean": float(values.mean()),
                 "std": std,
                 "min": float(values.min()),
                 "max": float(values.max()),
                 "ci95": float(ci95),
             })
+    return pd.DataFrame(rows)
+
+
+def _summarize(df, group_cols, metrics):
+    """Compute confidence intervals over seed means, never episode rows."""
+
+    _require_episode_identity(df, group_cols)
+    per_seed = _summarize_per_seed(df, group_cols, metrics)
+    rows = []
+    aggregate_cols = [*group_cols, "checkpoint", "eval_step", "metric"]
+    for group_key, group in per_seed.groupby(aggregate_cols, dropna=False):
+        if not isinstance(group_key, tuple):
+            group_key = (group_key,)
+        means = group["mean"].to_numpy(dtype=float)
+        counts = group["episode_count"].to_numpy(dtype=int)
+        std = float(np.std(means, ddof=1)) if len(means) > 1 else 0.0
+        ci95 = 1.96 * std / np.sqrt(len(means)) if len(means) > 1 else 0.0
+        rows.append(
+            {
+                **dict(zip(aggregate_cols, group_key)),
+                "count": int(len(means)),
+                "n_seeds": int(len(means)),
+                "episode_count": int(np.sum(counts)),
+                "episodes_per_seed_min": int(np.min(counts)),
+                "episodes_per_seed_max": int(np.max(counts)),
+                "mean": float(np.mean(means)),
+                "std": std,
+                "min": float(np.min(means)),
+                "max": float(np.max(means)),
+                "ci95": float(ci95),
+            }
+        )
     return pd.DataFrame(rows)
 
 
@@ -89,7 +163,10 @@ def _plot_metric_bars(summary, output_dir, metrics):
         if metric_df.empty:
             continue
         metric_df = metric_df.sort_values(label_col)
-        labels = metric_df[label_col].astype(str).tolist()
+        labels = [
+            f"{row[label_col]} | {row['checkpoint']} @ {row['eval_step']}"
+            for _, row in metric_df.iterrows()
+        ]
         means = metric_df["mean"].to_numpy(dtype=float)
         errors = metric_df["ci95"].to_numpy(dtype=float)
 
@@ -129,12 +206,14 @@ def main():
     episodes_path = Path(args.output) / "paper_eval_episodes_all.csv"
     episodes.to_csv(episodes_path, index=False)
 
-    group_cols = [col for col in ["preset", "scenario_label", "seed"] if col in episodes.columns]
-    per_seed_summary = _summarize(episodes, group_cols, args.metrics)
+    group_cols = [col for col in ["preset", "scenario_label"] if col in episodes.columns]
+    if not group_cols:
+        raise ValueError("paper episode rows require preset or scenario_label")
+    _require_episode_identity(episodes, group_cols)
+    per_seed_summary = _summarize_per_seed(episodes, group_cols, args.metrics)
     per_seed_summary.to_csv(Path(args.output) / "paper_eval_summary_by_seed.csv", index=False)
 
-    group_cols_no_seed = [col for col in ["preset", "scenario_label"] if col in episodes.columns]
-    overall_summary = _summarize(episodes, group_cols_no_seed, args.metrics)
+    overall_summary = _summarize(episodes, group_cols, args.metrics)
     overall_summary.to_csv(Path(args.output) / "paper_eval_summary_overall.csv", index=False)
 
     _plot_metric_bars(overall_summary, args.output, args.metrics)

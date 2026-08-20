@@ -74,6 +74,10 @@ def test_runner_exact_configuration_sources_seeds_backend_and_threads() -> None:
     assert controls["retained_actor_parameter_count"] == 17
     assert controls["forced_common_post_first_step_trajectories"] is False
     assert source.seed_block(0, formal=False)["initialization"] == 11_421_000
+    assert source.seed_block(2, formal=False)["initialization"] == 11_421_002
+    assert len(
+        {source.seed_block(index, formal=False)["initialization"] for index in range(3)}
+    ) == 3
     assert source.seed_block(0, formal=True)["initialization"] == 10_521_000
     with pytest.raises(ValueError, match="outside frozen support"):
         source.seed_block(3, formal=True)

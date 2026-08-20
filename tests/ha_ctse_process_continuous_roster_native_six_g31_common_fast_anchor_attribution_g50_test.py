@@ -34,6 +34,10 @@ def test_frozen_identity_seeds_and_inventory_are_exact() -> None:
     assert formal["evaluation_action"] == 10_510_002
     assert nonformal["initialization"] == 11_401_000
     assert nonformal["phase_B_gradient_probe"] == 11_407_000
+    assert g50.seed_block(2, formal=False)["initialization"] == 11_401_002
+    assert len(
+        {g50.seed_block(index, formal=False)["initialization"] for index in range(3)}
+    ) == 3
     assert g50.bootstrap_seed(formal=False) == 11_411_050
 
     exercise = g50.static_configuration_certificate(formal=False)
