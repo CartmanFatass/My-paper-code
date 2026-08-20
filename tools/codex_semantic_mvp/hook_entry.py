@@ -32,6 +32,11 @@ from .protocol import ProtocolError, extract_return_envelope, validate_subagent_
 from .store import OPEN_TASK_LIFECYCLES, SemanticStore
 from .topology_probe import append_probe_record
 
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10 runtime
+    import tomli as tomllib
+
 
 SUPPORTED_EVENTS = frozenset(
     {
@@ -55,6 +60,18 @@ EVENT_KINDS = {
 }
 MAX_PREVIEW_BYTES = 2048
 PAUSE_SENTINEL_PATH = Path(__file__).resolve().parents[2] / ".codex" / "semantic-hooks.paused"
+SEMANTIC_CONFIG_PATH = Path(__file__).resolve().parents[2] / ".codex" / "config.toml"
+_ACTIVE_CONFIG_EVENTS = ("SessionStart", "SubagentStart", "SubagentStop", "Stop", "PreCompact", "PostCompact")
+_SHADOW_CONFIG_EVENTS = (
+    "SessionStart",
+    "SubagentStart",
+    "SubagentStop",
+    "Stop",
+    "PreToolUse",
+    "PreCompact",
+    "PostCompact",
+)
+_EXPECTED_MCP_ARGS = ("-m", "tools.codex_semantic_mvp.mcp_server", "--state-dir", "runtime/codex-semantic-mvp")
 
 GENERIC_SUBAGENT_CONTEXT = """This parent session is using the HMASD managed semantic protocol.
 
@@ -250,6 +267,93 @@ def _shadow_observe(payload: Mapping[str, object], state_dir: Path) -> dict[str,
         except Exception:
             pass
     return _neutral_response()
+
+
+def _matches_hook_config(
+    hooks: object,
+    expected_events: tuple[str, ...],
+    expected_mode: str,
+    expected_executable: str,
+) -> bool:
+    """Accept only one complete, homogeneous managed hook configuration."""
+    if not isinstance(hooks, Mapping) or set(hooks) != set(expected_events):
+        return False
+    expected_command = (
+        f"{expected_executable} -m tools.codex_semantic_mvp.hook_entry --mode {expected_mode}"
+    )
+    commands: set[str] = set()
+    for event in expected_events:
+        entries = hooks.get(event)
+        if not isinstance(entries, list) or len(entries) != 1 or not isinstance(entries[0], Mapping):
+            return False
+        handlers = entries[0].get("hooks")
+        if not isinstance(handlers, list) or len(handlers) != 1 or not isinstance(handlers[0], Mapping):
+            return False
+        handler = handlers[0]
+        command = handler.get("command")
+        windows_command = handler.get("commandWindows")
+        if (
+            handler.get("type") != "command"
+            or not isinstance(command, str)
+            or command != windows_command
+            or command != expected_command
+        ):
+            return False
+        commands.add(command)
+    return len(commands) == 1
+
+
+def _configured_hook_mode() -> str | None:
+    """Return a safe live hook mode, never inferring intent from a stale argv."""
+    try:
+        config = tomllib.loads(SEMANTIC_CONFIG_PATH.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, tomllib.TOMLDecodeError):
+        return None
+    if not isinstance(config, Mapping):
+        return None
+    features = config.get("features")
+    servers = config.get("mcp_servers")
+    if not isinstance(features, Mapping) or features.get("hooks") is not True:
+        return None
+    if not isinstance(servers, Mapping):
+        return None
+    orchestrator = servers.get("hmasd_orchestrator")
+    orchestrator_args = orchestrator.get("args") if isinstance(orchestrator, Mapping) else None
+    orchestrator_command = (
+        orchestrator.get("command") if isinstance(orchestrator, Mapping) else None
+    )
+    if (
+        not isinstance(orchestrator, Mapping)
+        or orchestrator.get("enabled") is not True
+        or not isinstance(orchestrator_command, str)
+        or not orchestrator_command
+        or not isinstance(orchestrator_args, list)
+        or tuple(orchestrator_args) != _EXPECTED_MCP_ARGS
+    ):
+        return None
+    hooks = config.get("hooks")
+    if _matches_hook_config(hooks, _ACTIVE_CONFIG_EVENTS, "active", orchestrator_command):
+        return "active"
+    if _matches_hook_config(hooks, _SHADOW_CONFIG_EVENTS, "shadow", orchestrator_command):
+        return "shadow_mcp"
+    return None
+
+
+def _effective_cli_mode(requested_mode: str) -> str | None:
+    """Fence stale active argv against the current authoritative activation file."""
+    requested_mode = requested_mode.lower()
+    if requested_mode not in {"active", SHADOW_MODE}:
+        return None
+    if requested_mode != "active":
+        return requested_mode
+    configured_mode = _configured_hook_mode()
+    if configured_mode == "active":
+        return "active"
+    if configured_mode == "shadow_mcp":
+        return SHADOW_MODE
+    # A missing, malformed, or mixed config must never permit an old active
+    # command to manufacture semantic state.
+    return None
 
 
 def _active_workflow(store: SemanticStore, session_id: str) -> dict[str, object] | None:
@@ -978,14 +1082,18 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     state_dir = state_dir_from_environment()
-    if args.mode == SHADOW_MODE:
+    effective_mode = _effective_cli_mode(args.mode)
+    if effective_mode is None:
+        sys.stdout.write(json.dumps(_neutral_response(), separators=(",", ":")) + "\n")
+        return 0
+    if effective_mode == SHADOW_MODE:
         response = _shadow_observe(payload, state_dir)
         sys.stdout.write(json.dumps(response, separators=(",", ":")) + "\n")
         return 0
     store: SemanticStore | None = None
     try:
         store = SemanticStore(state_dir / "state.sqlite3").initialize()
-        response = handle_hook(payload, args.mode, store)
+        response = handle_hook(payload, effective_mode, store)
     except Exception as exc:
         _record_fail_open(state_dir, "HOOK_FAIL_OPEN", type(exc).__name__)
         response = _neutral_response()

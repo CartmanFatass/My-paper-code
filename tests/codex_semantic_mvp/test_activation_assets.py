@@ -26,8 +26,9 @@ def _stage(repo_root: Path, tmp_path: Path) -> Path:
     (stage / ".codex").mkdir(parents=True)
     for name in ("hooks.json", "config.toml", "hooks.semantic-mvp.shadow.json", "hooks.semantic-mvp.active.json"):
         shutil.copy2(repo_root / ".codex" / name, stage / ".codex" / name)
-    # The shared feature worktree may be ACTIVE; test stages always start from
-    # an isolated OFF baseline without changing the live workspace.
+    # The shared worktree may be safe-paused, ACTIVE, or ShadowMcp.  Test
+    # stages always start from one isolated OFF baseline without changing the
+    # live workspace or inheriting its activation receipt/configuration.
     config = stage / ".codex" / "config.toml"
     text = config.read_text()
     text = re.sub(
@@ -39,6 +40,12 @@ def _stage(repo_root: Path, tmp_path: Path) -> Path:
     text = re.sub(
         r"(?s)(# BEGIN HMASD CODEX SEMANTIC MVP.*?# END HMASD CODEX SEMANTIC MVP)",
         lambda match: match.group(1).replace("enabled = true", "enabled = false", 1),
+        text,
+        count=1,
+    )
+    text = re.sub(
+        r"(?ms)(^\[features\][ \t]*\r?\n.*?^[ \t]*hooks[ \t]*=[ \t]*)(?:true|false)([ \t]*(?:\r?$))",
+        r"\1false\2",
         text,
         count=1,
     )
@@ -132,7 +139,7 @@ def test_doctor_reports_machine_readable_activation_state(repo_root: Path):
     assert result["runtime_writable"] is True
     # A live ACTIVE block that predates compaction hooks is not the current
     # exact event set, so doctor must not call it active until reactivation.
-    assert result["mode"] in ({"active", "off", "unknown"} if expected_enabled else {"off", "unknown"})
+    assert result["mode"] in ({"active", "shadow_mcp", "off", "unknown"} if expected_enabled else {"off", "unknown"})
     assert result["user_trust"] == {
         "status": "unknown",
         "scope": "repository_only",
