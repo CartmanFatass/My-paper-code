@@ -182,6 +182,7 @@ def isolated_sources(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> dict[st
         / "docs/research/workflow-runs/2026-08-11_five-round-research-team/events_v2.jsonl"
     )
     long_effect = _long_effect(tmp_path / "runtime/test-long-effects/run-1", terminal=True)
+    (tmp_path / "runtime/hmasd-control-plane/mcp-instances").mkdir(parents=True)
     return {
         "repo": tmp_path,
         "semantic": semantic,

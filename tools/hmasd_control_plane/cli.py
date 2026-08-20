@@ -18,6 +18,7 @@ COMPONENTS = (
     "agentify",
     "long-effect",
     "research-events",
+    "mcp-runtime",
 )
 
 

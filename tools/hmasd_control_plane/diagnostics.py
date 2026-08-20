@@ -18,11 +18,19 @@ from pathlib import Path
 from typing import Iterable, Mapping, Sequence
 
 from .long_effect import RUN_FILE_NAMES
+from .mcp_runtime import inspect_mcp_instances
 
 
 DOCTOR_SCHEMA = "HMASD_CONTROL_PLANE_DOCTOR_V1"
 COMPONENTS = frozenset(
-    {"semantic", "supervisor", "agentify", "long-effect", "research-events"}
+    {
+        "semantic",
+        "supervisor",
+        "agentify",
+        "long-effect",
+        "research-events",
+        "mcp-runtime",
+    }
 )
 _RESEARCH_EVENTS_REL = Path(
     "docs/research/workflow-runs/2026-08-11_five-round-research-team/events_v2.jsonl"
@@ -784,6 +792,124 @@ def _long_effect_source(roots: Sequence[Path], since: datetime | None, generated
     )
 
 
+def _mcp_runtime_source(
+    repo_root: Path, since: datetime | None, generated_at: str
+) -> _SourceResult:
+    """Index runtime-only MCP process evidence without cleaning or signalling it."""
+
+    index = inspect_mcp_instances(repo_root)
+    registry_root = str(index["registry_root"])
+    if not index.get("registry_exists"):
+        return _source_unavailable("mcp-runtime", Path(registry_root), "missing")
+    selected: list[Mapping[str, object]] = []
+    for item in index["instances"]:
+        if not isinstance(item, Mapping):
+            continue
+        if item.get("status") == "ACTIVE" or _at_or_after(
+            item.get("finished_at") or item.get("started_at"), since
+        ):
+            selected.append(item)
+
+    findings: list[dict[str, object]] = []
+    incidents: list[dict[str, object]] = []
+    for error in index["record_errors"]:
+        if not isinstance(error, Mapping):
+            continue
+        path = str(error.get("path") or registry_root)
+        category = str(error.get("error") or "UnknownRecordError")
+        fact = (
+            f"MCP runtime lifecycle evidence is unreadable ({category}); "
+            "no server, workflow, or scientific disposition follows."
+        )
+        findings.append(
+            _finding(
+                severity="ERROR",
+                component="mcp-runtime",
+                exact_object=path,
+                observed_fact=fact,
+                evidence_refs=[path],
+                action_owner="control-plane operator",
+            )
+        )
+        incidents.append(
+            _incident(
+                component="mcp-runtime",
+                exact_object=path,
+                observed_fact=fact,
+                local_fence="Do not infer process state from the unreadable record or delete it automatically.",
+                owner="control-plane operator",
+                evidence_refs=[path],
+                generated_at=generated_at,
+            )
+        )
+
+    counts = {status: 0 for status in ("ACTIVE", "CLOSED", "STALE", "UNKNOWN")}
+    for item in selected:
+        status = str(item.get("status") or "UNKNOWN")
+        counts[status if status in counts else "UNKNOWN"] += 1
+        if status not in {"STALE", "UNKNOWN"}:
+            continue
+        exact = str(item.get("instance_id") or "unknown-instance")
+        reason = str(item.get("reason") or "unknown")
+        fact = (
+            f"MCP instance is {status} ({reason}); this is process-lifecycle evidence only."
+        )
+        refs = [str(value) for value in item.get("evidence_refs", ())]
+        findings.append(
+            _finding(
+                severity="WARNING",
+                component="mcp-runtime",
+                exact_object=exact,
+                observed_fact=fact,
+                evidence_refs=refs,
+                action_owner="control-plane operator",
+            )
+        )
+        incidents.append(
+            _incident(
+                component="mcp-runtime",
+                exact_object=exact,
+                observed_fact=fact,
+                local_fence="Do not restart, terminate, or clean the instance automatically.",
+                owner="control-plane operator",
+                evidence_refs=refs,
+                generated_at=generated_at,
+                first_seen=item.get("started_at"),
+                last_seen=item.get("finished_at") or generated_at,
+            )
+        )
+
+    if counts["ACTIVE"] > 1:
+        findings.append(
+            _finding(
+                severity="INFO",
+                component="mcp-runtime",
+                exact_object=registry_root,
+                observed_fact=(
+                    f"Observed {counts['ACTIVE']} active stdio MCP instances; "
+                    "multiplicity alone is not a singleton or leak failure."
+                ),
+                evidence_refs=[registry_root],
+                action_owner="control-plane operator",
+            )
+        )
+
+    return _SourceResult(
+        name="mcp-runtime",
+        status="ATTENTION" if findings else "OK",
+        details={"path": registry_root, "schema": index["schema"]},
+        findings=tuple(findings),
+        incidents=tuple(incidents),
+        counters=(
+            ("mcp_instances", len(selected)),
+            ("mcp_instances_active", counts["ACTIVE"]),
+            ("mcp_instances_closed", counts["CLOSED"]),
+            ("mcp_instances_stale", counts["STALE"]),
+            ("mcp_instances_unknown", counts["UNKNOWN"]),
+        ),
+    )
+
+
 def _deduplicate_incidents(records: Iterable[dict[str, object]]) -> list[dict[str, object]]:
     merged: dict[tuple[str, str], dict[str, object]] = {}
     for record in records:
@@ -885,6 +1011,8 @@ def _collect(
         supplied = tuple(Path(value) for value in experiment_roots)
         roots = supplied or (root / _DEFAULT_LONG_EFFECT_REL,)
         results.append(_long_effect_source(roots, since_dt, generated_at))
+    if "mcp-runtime" in selected:
+        results.append(_mcp_runtime_source(root, since_dt, generated_at))
 
     findings = sorted(
         (finding for result in results for finding in result.findings),
@@ -898,7 +1026,10 @@ def _collect(
             counters[name] = counters.get(name, 0) + int(value)
     unavailable = any(result.status == "UNAVAILABLE" for result in results)
     has_error = any(finding["severity"] == "ERROR" for finding in findings)
-    status = "UNAVAILABLE" if unavailable else ("ATTENTION" if has_error else "OK")
+    has_attention = any(
+        finding["severity"] in {"WARNING", "ERROR"} for finding in findings
+    )
+    status = "UNAVAILABLE" if unavailable else ("ATTENTION" if has_attention else "OK")
     exit_code = 2 if unavailable else (1 if has_error else 0)
     doctor = {
         "schema": DOCTOR_SCHEMA,
