@@ -5,6 +5,7 @@ Copy everything below the line to another model that can read this branch.
 ```text
 document_kind=synthetic_durability_kernel_review_prompt
 branch=codex-supervisor-durability-kernel-v1
+reviewed_commit=7593bd11
 baseline=04eb640f4090993b251b204096cff26b44350b90
 prior_review=REVISION_REQUIRED on f5b5a754
 ```
