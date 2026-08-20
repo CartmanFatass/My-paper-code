@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import sqlite3
 from pathlib import Path
 
 import pytest
@@ -913,6 +914,20 @@ def test_resume_reconciler_uses_thread_snapshot_status_type(tmp_path: Path) -> N
     journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
     journal.mark_uncertain(effect.effect_id, reason="timeout")
     connection.execute(
+        """INSERT INTO observer_runs(run_id, codex_binary, codex_version, client_name, started_at, runtime_home)
+        VALUES ('run1', 'b', 'v', 'c', 't', '.')"""
+    )
+    connection.execute(
+        """INSERT INTO raw_messages(
+            raw_message_seq, run_id, direction, transport_seq, rpc_shape, thread_id, canonical_json, observed_at
+        ) VALUES (2, 'run1', 'stdout', 2, 'notification', 'thr1', '{}', 't')"""
+    )
+    connection.execute(
+        """INSERT INTO normalized_events(
+            event_seq, run_id, raw_message_seq, event_kind, thread_id, payload_json, observed_at
+        ) VALUES (2, 'run1', 2, 'THREAD_STATUS', 'thr1', '{}', 't')"""
+    )
+    connection.execute(
         """INSERT INTO thread_snapshots(thread_id, status_type, last_event_seq, first_observed_at, updated_at)
         VALUES ('thr1', 'idle', 2, 't', 't')"""
     )
@@ -1334,5 +1349,405 @@ def test_stale_stored_resume_snapshot_does_not_confirm(tmp_path: Path) -> None:
     connection.commit()
     result = asyncio.run(EffectReconciler(connection).reconcile(effect.effect_id))
     assert result.state == EffectState.SUBMISSION_UNCERTAIN.value
+    connection.close()
+
+
+def _assert_write_start_visible(path: Path, *, effect_id: str, owner_kind: str, owner_id: str) -> None:
+    other = sqlite3.connect(str(path))
+    other.row_factory = sqlite3.Row
+    try:
+        effect = other.execute(
+            "SELECT state FROM app_server_effects WHERE effect_id = ?",
+            (effect_id,),
+        ).fetchone()
+        assert effect is not None
+        assert str(effect[0]) == EffectState.WRITE_STARTED.value
+        if owner_kind == "MANAGED_TURN":
+            owner = other.execute(
+                "SELECT submission_state FROM managed_turn_intents WHERE turn_intent_id = ?",
+                (owner_id,),
+            ).fetchone()
+        else:
+            owner = other.execute(
+                "SELECT state FROM wake_batches WHERE wake_batch_id = ?",
+                (owner_id,),
+            ).fetchone()
+        assert owner is not None
+        assert str(owner[0]) == "SUBMITTING"
+        raw = other.execute(
+            "SELECT 1 FROM raw_messages WHERE effect_id = ? AND direction = 'stdin'",
+            (effect_id,),
+        ).fetchone()
+        rpc = other.execute(
+            "SELECT 1 FROM rpc_requests WHERE effect_id = ?",
+            (effect_id,),
+        ).fetchone()
+        assert raw is not None
+        assert rpc is not None
+    finally:
+        other.close()
+
+
+def test_write_started_is_committed_before_transport_send_with_existing_run(tmp_path: Path) -> None:
+    async def body() -> None:
+        seeded = seed_managed_actors(tmp_path)
+        store = BindingStore(seeded["supervisor"], seeded["bridge"])
+        snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+        binding_id = store.prepare_binding(
+            snapshot,
+            repo_root=str(tmp_path),
+            thread_cwd=str(tmp_path),
+            created_by_operator="operator",
+            thread_origin=ThreadOrigin.NEW,
+            history_trust=HistoryTrust.FRESH,
+        )
+        store.attach_thread_for_tests(binding_id, "thr_canary")
+        store.mark_verification_required(binding_id)
+        seeded["supervisor"].start_run(codex_binary="b", codex_version="v", client_name="c", process_id=None)
+        transport, client = _client(tmp_path, "handshake_ok")
+        await transport.start()
+        await client.initialize()
+        turns = ManagedTurns(store, client)
+        intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
+        row = turns._row(intent_id)
+        effect_id = str(row["effect_id"])
+        original = client.send_prepared
+
+        async def checking_send(prepared):
+            assert not seeded["supervisor"].connection.in_transaction
+            _assert_write_start_visible(
+                seeded["supervisor"].path,
+                effect_id=effect_id,
+                owner_kind="MANAGED_TURN",
+                owner_id=intent_id,
+            )
+            await original(prepared)
+
+        client.send_prepared = checking_send  # type: ignore[method-assign]
+        await turns.submit(intent_id, "hello")
+        await transport.stop()
+        seeded["bridge"].close()
+        seeded["supervisor"].close()
+        seeded["semantic"].close()
+
+    _run(body())
+
+
+def test_crash_after_send_before_response_cannot_revert_effect_to_prepared(tmp_path: Path) -> None:
+    async def body() -> None:
+        seeded = seed_managed_actors(tmp_path)
+        store = BindingStore(seeded["supervisor"], seeded["bridge"])
+        snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+        binding_id = store.prepare_binding(
+            snapshot,
+            repo_root=str(tmp_path),
+            thread_cwd=str(tmp_path),
+            created_by_operator="operator",
+            thread_origin=ThreadOrigin.NEW,
+            history_trust=HistoryTrust.FRESH,
+        )
+        store.attach_thread_for_tests(binding_id, "thr_canary")
+        store.mark_verification_required(binding_id)
+        seeded["supervisor"].start_run(codex_binary="b", codex_version="v", client_name="c", process_id=None)
+        transport, client = _client(tmp_path, "handshake_ok")
+        await transport.start()
+        await client.initialize()
+        turns = ManagedTurns(store, client)
+        intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
+        row = turns._row(intent_id)
+        effect_id = str(row["effect_id"])
+        original = client.send_prepared
+
+        async def checking_send(prepared):
+            seeded["supervisor"].connection.rollback()
+            _assert_write_start_visible(
+                seeded["supervisor"].path,
+                effect_id=effect_id,
+                owner_kind="MANAGED_TURN",
+                owner_id=intent_id,
+            )
+            await original(prepared)
+
+        client.send_prepared = checking_send  # type: ignore[method-assign]
+        await turns.submit(intent_id, "hello")
+        await transport.stop()
+        seeded["bridge"].close()
+        seeded["supervisor"].close()
+        seeded["semantic"].close()
+
+    _run(body())
+
+
+def test_managed_turn_submit_has_no_ambient_transaction_at_send(tmp_path: Path) -> None:
+    async def body() -> None:
+        seeded = seed_managed_actors(tmp_path)
+        store = BindingStore(seeded["supervisor"], seeded["bridge"])
+        snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+        binding_id = store.prepare_binding(
+            snapshot,
+            repo_root=str(tmp_path),
+            thread_cwd=str(tmp_path),
+            created_by_operator="operator",
+            thread_origin=ThreadOrigin.NEW,
+            history_trust=HistoryTrust.FRESH,
+        )
+        store.attach_thread_for_tests(binding_id, "thr_canary")
+        store.mark_verification_required(binding_id)
+        seeded["supervisor"].start_run(codex_binary="b", codex_version="v", client_name="c", process_id=None)
+        transport, client = _client(tmp_path, "handshake_ok")
+        await transport.start()
+        await client.initialize()
+        seen = {"in_txn": True}
+        original = client.send_prepared
+
+        async def checking_send(prepared):
+            seen["in_txn"] = seeded["supervisor"].connection.in_transaction
+            await original(prepared)
+
+        client.send_prepared = checking_send  # type: ignore[method-assign]
+        turns = ManagedTurns(store, client)
+        intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
+        await turns.submit(intent_id, "hello")
+        assert seen["in_txn"] is False
+        await transport.stop()
+        seeded["bridge"].close()
+        seeded["supervisor"].close()
+        seeded["semantic"].close()
+
+    _run(body())
+
+
+def test_wake_submit_has_no_ambient_transaction_at_send(tmp_path: Path) -> None:
+    async def body() -> None:
+        seeded = seed_active_root_portfolio(tmp_path)
+        mailbox = seeded["mailbox"]
+        message = mailbox.enqueue(
+            source_system="OPERATOR",
+            source_event_key="k-commit",
+            target_actor_context_id=seeded["portfolio"].actor_context_id,
+            message_kind="OPERATOR_ATTENTION_REQUEST",
+            subject_ref="s",
+            payload_ref="p",
+        )
+        mailbox.mark_eligible(message.message_id)
+        batches = WakeBatchStore(seeded["supervisor"], mailbox)
+        snapshot = seeded["bridge"].snapshot(seeded["portfolio"].actor_context_id)
+        leases = SchedulerLeases(seeded["supervisor"])
+        lease = leases.acquire(seeded["portfolio_binding_id"], "sched")
+        batch = batches.prepare(
+            binding_id=seeded["portfolio_binding_id"],
+            thread_id="thr_canary",
+            snapshot=snapshot,
+            messages=[message],
+            lease_generation=int(lease["generation"]),
+            lease_holder="sched",
+        )
+        seeded["supervisor"].start_run(codex_binary="b", codex_version="v", client_name="c", process_id=None)
+        transport, client = _client(tmp_path, "handshake_ok")
+        await transport.start()
+        await client.initialize()
+        seen = {"in_txn": True}
+        original = client.send_prepared
+
+        async def checking_send(prepared):
+            seen["in_txn"] = seeded["supervisor"].connection.in_transaction
+            _assert_write_start_visible(
+                seeded["supervisor"].path,
+                effect_id=str(batch["effect_id"]),
+                owner_kind="WAKE_BATCH",
+                owner_id=str(batch["wake_batch_id"]),
+            )
+            await original(prepared)
+
+        client.send_prepared = checking_send  # type: ignore[method-assign]
+        scheduler = WakeScheduler(
+            seeded["bindings"],
+            mailbox,
+            batches,
+            leases,
+            WakeRecovery(seeded["bindings"], mailbox, batches, client, leases, "sched"),
+            SemanticScanner(mailbox, seeded["bridge"]),
+            seeded["bridge"],
+            client,
+            instance_id="sched",
+        )
+        await scheduler.submit_batch(
+            str(batch["wake_batch_id"]),
+            str(batch["input_text"]),
+            lease_generation=int(lease["generation"]),
+        )
+        assert seen["in_txn"] is False
+        await transport.stop()
+        seeded["bridge"].close()
+        seeded["supervisor"].close()
+        seeded["semantic"].close()
+
+    _run(body())
+
+
+def test_prepared_request_materialization_is_retry_idempotent(tmp_path: Path) -> None:
+    async def body() -> None:
+        seeded = seed_managed_actors(tmp_path)
+        store = BindingStore(seeded["supervisor"], seeded["bridge"])
+        snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+        binding_id = store.prepare_binding(
+            snapshot,
+            repo_root=str(tmp_path),
+            thread_cwd=str(tmp_path),
+            created_by_operator="operator",
+            thread_origin=ThreadOrigin.NEW,
+            history_trust=HistoryTrust.FRESH,
+        )
+        store.attach_thread_for_tests(binding_id, "thr_canary")
+        store.mark_verification_required(binding_id)
+        transport, client = _client(tmp_path, "handshake_ok")
+        await transport.start()
+        await client.initialize()
+        turns = ManagedTurns(store, client)
+        intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
+        row = turns._row(intent_id)
+        effect_id = str(row["effect_id"])
+        original = seeded["supervisor"].record_effect_write_start
+
+        def boom(*args, **kwargs):
+            raise RuntimeError("materialized but not claimed")
+
+        seeded["supervisor"].record_effect_write_start = boom  # type: ignore[method-assign]
+        with pytest.raises(RuntimeError, match="not claimed"):
+            await turns.submit(intent_id, "hello")
+        effect = EffectJournal(store.store.connection).get(effect_id)
+        assert effect.state == EffectState.PREPARED.value
+        assert dict(effect.request) == {
+            "threadId": "thr_canary",
+            "clientUserMessageId": row["client_user_message_id"],
+        }
+        seeded["supervisor"].record_effect_write_start = original  # type: ignore[method-assign]
+        await turns.submit(intent_id, "hello")
+        updated = turns._row(intent_id)
+        assert updated["submission_state"] in {SubmissionState.OBSERVED.value, SubmissionState.SUBMITTED.value, "OBSERVED"}
+        await transport.stop()
+        seeded["bridge"].close()
+        seeded["supervisor"].close()
+        seeded["semantic"].close()
+
+    _run(body())
+
+
+def test_generic_wake_set_state_cannot_claim_submission(tmp_path: Path) -> None:
+    seeded = seed_active_root_portfolio(tmp_path)
+    mailbox = seeded["mailbox"]
+    message = mailbox.enqueue(
+        source_system="OPERATOR",
+        source_event_key="k-set-state",
+        target_actor_context_id=seeded["portfolio"].actor_context_id,
+        message_kind="OPERATOR_ATTENTION_REQUEST",
+        subject_ref="s",
+        payload_ref="p",
+    )
+    batches = WakeBatchStore(seeded["supervisor"], mailbox)
+    snapshot = seeded["bridge"].snapshot(seeded["portfolio"].actor_context_id)
+    batch = batches.prepare(
+        binding_id=seeded["portfolio_binding_id"],
+        thread_id="thr_port",
+        snapshot=snapshot,
+        messages=[message],
+        lease_generation=1,
+        lease_holder="sched",
+    )
+    from tools.codex_supervisor.wake_batches import WakeBatchError
+
+    with pytest.raises(WakeBatchError, match="record_effect_write_start"):
+        batches.set_state(str(batch["wake_batch_id"]), state="SUBMITTING", expected_state="PREPARED")
+    row = batches.get(str(batch["wake_batch_id"]))
+    assert row is not None
+    assert row["state"] == "PREPARED"
+    effect = EffectJournal(seeded["supervisor"].connection).get(str(batch["effect_id"]))
+    assert effect.state == EffectState.PREPARED.value
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_stale_snapshot_with_larger_normalized_seq_does_not_confirm_resume(tmp_path: Path) -> None:
+    connection = connect(tmp_path / "s.sqlite3")
+    initialize_database(connection)
+    journal = EffectJournal(connection)
+    effect = journal.prepare_effect(
+        owner_kind="THREAD_RESUME",
+        owner_id="b1",
+        binding_id="b1",
+        method="thread/resume",
+        client_key="thread/resume:thr-mix",
+        request={"threadId": "thr-mix"},
+    )
+    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=50)
+    journal.mark_uncertain(effect.effect_id, reason="timeout")
+    connection.execute(
+        """INSERT INTO observer_runs(run_id, codex_binary, codex_version, client_name, started_at, runtime_home)
+        VALUES ('run1', 'b', 'v', 'c', 't', '.')"""
+    )
+    connection.execute(
+        """INSERT INTO raw_messages(
+            raw_message_seq, run_id, direction, transport_seq, rpc_shape, thread_id, canonical_json, observed_at
+        ) VALUES (40, 'run1', 'stdout', 1, 'notification', 'thr-mix', '{}', 't')"""
+    )
+    connection.execute(
+        """INSERT INTO normalized_events(
+            event_seq, run_id, raw_message_seq, event_kind, thread_id, payload_json, observed_at
+        ) VALUES (100, 'run1', 40, 'THREAD_STATUS', 'thr-mix', '{}', 't')"""
+    )
+    connection.execute(
+        """INSERT INTO thread_snapshots(thread_id, status_type, last_event_seq, first_observed_at, updated_at)
+        VALUES ('thr-mix', 'idle', 100, 't', 't')"""
+    )
+    connection.commit()
+    result = asyncio.run(EffectReconciler(connection).reconcile(effect.effect_id))
+    assert result.state == EffectState.SUBMISSION_UNCERTAIN.value
+    connection.close()
+
+
+def test_stored_resume_requires_supporting_raw_message_after_effect_write(tmp_path: Path) -> None:
+    connection = connect(tmp_path / "s.sqlite3")
+    initialize_database(connection)
+    journal = EffectJournal(connection)
+    effect = journal.prepare_effect(
+        owner_kind="THREAD_RESUME",
+        owner_id="b1",
+        binding_id="b1",
+        method="thread/resume",
+        client_key="thread/resume:thr-late",
+        request={"threadId": "thr-late"},
+    )
+    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=5)
+    journal.mark_uncertain(effect.effect_id, reason="timeout")
+    connection.execute(
+        """INSERT INTO observer_runs(run_id, codex_binary, codex_version, client_name, started_at, runtime_home)
+        VALUES ('run1', 'b', 'v', 'c', 't', '.')"""
+    )
+    connection.execute(
+        """INSERT INTO raw_messages(
+            raw_message_seq, run_id, direction, transport_seq, rpc_shape, thread_id, canonical_json, observed_at
+        ) VALUES (3, 'run1', 'stdout', 1, 'notification', 'thr-late', '{}', 't')"""
+    )
+    connection.execute(
+        """INSERT INTO normalized_events(
+            event_seq, run_id, raw_message_seq, event_kind, thread_id, payload_json, observed_at
+        ) VALUES (3, 'run1', 3, 'THREAD_STATUS', 'thr-late', '{}', 't')"""
+    )
+    connection.execute(
+        """INSERT INTO thread_snapshots(thread_id, status_type, last_event_seq, first_observed_at, updated_at)
+        VALUES ('thr-late', 'idle', 3, 't', 't')"""
+    )
+    connection.commit()
+    first = asyncio.run(EffectReconciler(connection).reconcile(effect.effect_id))
+    assert first.state == EffectState.SUBMISSION_UNCERTAIN.value
+    connection.execute(
+        """INSERT INTO raw_messages(
+            raw_message_seq, run_id, direction, transport_seq, rpc_shape, thread_id, canonical_json, observed_at
+        ) VALUES (6, 'run1', 'stdout', 2, 'notification', 'thr-late', '{}', 't')"""
+    )
+    connection.commit()
+    second = asyncio.run(EffectReconciler(connection).reconcile(effect.effect_id))
+    assert second.state == EffectState.EFFECT_CONFIRMED.value
     connection.close()
 

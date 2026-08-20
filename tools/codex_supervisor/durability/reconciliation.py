@@ -290,7 +290,13 @@ class EffectReconciler:
         sequences: list[int] = []
         snap_seq = snap["last_event_seq"] if snap["last_event_seq"] is not None else None
         if snap_seq is not None:
-            sequences.append(int(snap_seq))
+            supporting = self.connection.execute(
+                """SELECT raw_message_seq FROM normalized_events
+                WHERE event_seq = ? AND thread_id = ?""",
+                (int(snap_seq), thread_id),
+            ).fetchone()
+            if supporting is not None and supporting[0] is not None:
+                sequences.append(int(supporting[0]))
         raw = self.connection.execute(
             "SELECT MAX(raw_message_seq) FROM raw_messages WHERE thread_id = ?",
             (thread_id,),

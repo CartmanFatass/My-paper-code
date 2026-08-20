@@ -149,10 +149,6 @@ class WakeScheduler:
         from .durability.transaction import DurabilityTransaction
         from .durability.transitions import TransitionError, TransitionKernel
 
-        self.bindings.store.connection.execute(
-            "UPDATE app_server_effects SET request_json = ? WHERE effect_id = ? AND state = 'PREPARED'",
-            (json.dumps(params, sort_keys=True, separators=(",", ":")), effect_id),
-        )
         holder = self.instance_id
         version = int(batch.get("version") or 0)
 
@@ -189,6 +185,7 @@ class WakeScheduler:
             self._assert_submit_fence(str(batch["binding_id"]), generation, wake_batch_id=wake_batch_id)
             submitted = await owner.submit_effect(
                 effect_id,
+                request_override=params,
                 extra_transitions=[
                     TransitionRequest(
                         aggregate_kind=AggregateKind.WAKE_BATCH,

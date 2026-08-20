@@ -265,7 +265,14 @@ def test_recovery_cannot_overwrite_incident_with_active(tmp_path: Path) -> None:
             snapshot=snapshot,
             messages=[message],
         )
-        batches.set_state(str(batch["wake_batch_id"]), state="SUBMITTING")
+        from tests.codex_supervisor.helpers import claim_wake_write_start_for_tests
+
+        claim_wake_write_start_for_tests(
+            batches,
+            str(batch["wake_batch_id"]),
+            lease_holder=batch["lease_holder"],
+            lease_generation=batch["lease_generation"],
+        )
         batches.set_state(str(batch["wake_batch_id"]), state="INCIDENT")
         client = ScriptedClient()
         client.status = "idle"

@@ -160,9 +160,10 @@ class ObserverStore:
         request_class: str,
         extra_transitions: list[Any] | None = None,
         extra_hooks: list[Any] | None = None,
+        request_override: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
-        from .durability.effects import EffectJournal
-        from .durability.transaction import DurabilityTransaction
+        from .durability.effects import EffectJournal, _canonical_request
+        from .durability.transaction import DurabilityError, DurabilityTransaction
         from .durability.transitions import TransitionKernel
         from .protocol import extract_protocol_ids
 
@@ -173,7 +174,17 @@ class ObserverStore:
         params_json = canonical_json(dict(params))
         now = _now()
         with self._lock:
+            if self.connection.in_transaction:
+                raise DurabilityError("write-start requires transaction ownership")
             with DurabilityTransaction(self.connection):
+                if request_override is not None:
+                    updated = self.connection.execute(
+                        """UPDATE app_server_effects SET request_json = ?
+                        WHERE effect_id = ? AND state = 'PREPARED'""",
+                        (_canonical_request(request_override), effect_id),
+                    )
+                    if updated.rowcount != 1:
+                        raise DurabilityError("request override requires a PREPARED effect")
                 next_seq = int(
                     self.connection.execute(
                         """SELECT COALESCE(MAX(transport_seq), 0) + 1

@@ -217,6 +217,9 @@ class WakeBatchStore:
         if current is None:
             raise WakeBatchError("unknown wake batch")
         if "state" in fields and fields["state"] != current["state"]:
+            target = str(fields["state"])
+            if str(current["state"]) == WakeBatchState.PREPARED.value and target == WakeBatchState.SUBMITTING.value:
+                raise WakeBatchError("PREPARED → SUBMITTING is only allowed in record_effect_write_start")
             version = int(current.get("version") or 0)
             cause = fields.pop("cause_kind", TransitionCause.CONTROL_COMMAND)
             if isinstance(cause, str):

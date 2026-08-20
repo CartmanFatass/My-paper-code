@@ -187,15 +187,12 @@ class ManagedTurns:
         if dict(existing.request) != {"threadId": row["app_server_thread_id"], "clientUserMessageId": row["client_user_message_id"]}:
             raise ManagedTurnError("linked effect request tuple mismatch")
         self._assert_submit_fence(turn_intent_id, effect_id)
-        self.bindings.store.connection.execute(
-            "UPDATE app_server_effects SET request_json = ? WHERE effect_id = ? AND state = 'PREPARED'",
-            (json.dumps(params, sort_keys=True, separators=(",", ":")), effect_id),
-        )
         owner = self._owner()
         try:
             self._assert_submit_fence(turn_intent_id, effect_id)
             result = await owner.submit_effect(
                 effect_id,
+                request_override=params,
                 extra_transitions=[
                     TransitionRequest(
                         aggregate_kind=AggregateKind.MANAGED_TURN,

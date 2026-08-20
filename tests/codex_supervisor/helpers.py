@@ -95,14 +95,15 @@ def claim_wake_write_start_for_tests(
             except TransitionError as exc:
                 raise WakeBatchError("wake batch is not PREPARED for this lease") from exc
             effect_id = None if current["effect_id"] is None else str(current["effect_id"])
-            if effect_id:
-                EffectJournal(batches.store.connection).claim_write(
-                    effect_id,
-                    run_id="fixture",
-                    client_request_id="fixture",
-                    request_row_id="fixture",
-                    raw_request_seq=1,
-                )
+            if not effect_id:
+                raise WakeBatchError("fixture claim requires a linked PREPARED effect")
+            EffectJournal(batches.store.connection).claim_write(
+                effect_id,
+                run_id="fixture",
+                client_request_id="fixture",
+                request_row_id="fixture",
+                raw_request_seq=1,
+            )
             batches.store.connection.execute(
                 """INSERT INTO wake_attempts (
                     wake_attempt_id, wake_batch_id, attempt_number, request_id,
@@ -248,6 +249,39 @@ def drive_wake_batch(batches, wake_id: str, target: str, **fields: object) -> No
         if current == target:
             return
         extra = fields if state == target else {}
+        if current == "PREPARED" and state == "SUBMITTING":
+            row = batches.get(wake_id)
+            effect_id = None if row is None else row.get("effect_id")
+            if not effect_id:
+                raise RuntimeError("fixture wake walk requires a linked effect")
+            from tools.codex_supervisor.durability.effects import EffectJournal
+            from tools.codex_supervisor.durability.models import AggregateKind, TransitionCause, TransitionRequest
+            from tools.codex_supervisor.durability.transaction import DurabilityTransaction
+            from tools.codex_supervisor.durability.transitions import TransitionKernel
+
+            effect = EffectJournal(batches.store.connection).get(str(effect_id))
+            if effect.state == "PREPARED":
+                claim_wake_write_start_for_tests(
+                    batches,
+                    wake_id,
+                    lease_holder=row["lease_holder"],
+                    lease_generation=row["lease_generation"],
+                )
+            else:
+                with DurabilityTransaction(batches.store.connection):
+                    TransitionKernel(batches.store.connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.WAKE_BATCH,
+                            aggregate_id=wake_id,
+                            expected_state="PREPARED",
+                            expected_version=int(row["version"] or 0),
+                            target_state="SUBMITTING",
+                            cause_kind=TransitionCause.APP_SERVER_EFFECT,
+                            cause_ref=str(effect_id),
+                        )
+                    )
+            current = state
+            continue
         batches.set_state(wake_id, state=state, expected_state=current, **extra)
         current = state
 

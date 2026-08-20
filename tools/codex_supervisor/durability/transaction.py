@@ -5,6 +5,10 @@ from __future__ import annotations
 import sqlite3
 
 
+class DurabilityError(RuntimeError):
+    """Raised when a durability write cannot own its transaction."""
+
+
 class DurabilityTransaction:
     """One explicit immediate transaction. Do not nest `with connection:`."""
 

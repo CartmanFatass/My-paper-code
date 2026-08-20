@@ -200,6 +200,7 @@ class AppServerSessionOwner:
         effect_id: str,
         extra_transitions: list[Any] | None = None,
         extra_hooks: list[Any] | None = None,
+        request_override: Mapping[str, object] | None = None,
     ) -> EffectSubmissionResult:
         from ..client import UnexpectedServerRequest
 
@@ -212,7 +213,7 @@ class AppServerSessionOwner:
             )
         self._require_owner_submittable(record)
         async with self._lock:
-            return await self._submit_locked(record, extra_transitions, extra_hooks)
+            return await self._submit_locked(record, extra_transitions, extra_hooks, request_override)
 
     def _require_owner_submittable(self, record) -> None:
         if record.owner_kind == "EPHEMERAL_CANARY":
@@ -261,11 +262,13 @@ class AppServerSessionOwner:
         record: EffectRecord,
         extra_transitions: list[Any] | None = None,
         extra_hooks: list[Any] | None = None,
+        request_override: Mapping[str, object] | None = None,
     ) -> EffectSubmissionResult:
         from ..client import UnexpectedServerRequest
 
         self._open_effect_ids.add(record.effect_id)
-        prepared = self.client.prepare_request(record.method, record.request)
+        request = dict(request_override) if request_override is not None else dict(record.request)
+        prepared = self.client.prepare_request(record.method, request)
         try:
             self.store.record_effect_write_start(
                 effect_id=record.effect_id,
@@ -276,6 +279,7 @@ class AppServerSessionOwner:
                 request_class=prepared.request_class.value,
                 extra_transitions=extra_transitions,
                 extra_hooks=extra_hooks,
+                request_override=request_override,
             )
         except Exception:
             discard = getattr(self.client, "discard_prepared", None)
