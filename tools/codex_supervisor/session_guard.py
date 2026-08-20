@@ -164,6 +164,10 @@ class ManagedAppServerSession:
     def _task(self) -> asyncio.Task[None] | None:
         return self.owner._task
 
+    @property
+    def _incident(self):
+        return self.owner._incident
+
     @classmethod
     def for_client(cls, client: AppServerClient, store: ObserverStore) -> ManagedAppServerSession:
         from .durability.session_owner import AppServerSessionOwner

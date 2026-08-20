@@ -147,8 +147,10 @@ def test_mutation_overload_sends_once(tmp_path: Path, method: str) -> None:
         client = AppServerClient(transport, config)
         await transport.start()
         await client.initialize()
+        prepared = client.prepare_request(method, {"threadId": "thr_x"})
+        await client.send_prepared(prepared)
         with pytest.raises(RetryRequired):
-            await client.request(method, {"threadId": "thr_x"})
+            await client.await_prepared(prepared)
         assert sent.count(method) == 1
         await transport.stop()
 

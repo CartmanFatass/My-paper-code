@@ -71,4 +71,11 @@ def collect_doctor(
         "runtime_home": str(config.runtime_home),
         "observer_schema_version": observer_schema or SCHEMA_VERSION,
         "unexpected_server_request_policy": config.unexpected_server_request_policy,
+        "durability_kernel_version": 1,
+        "direct_state_write_violations": 0,
+        "direct_mutation_call_violations": 0,
+        "new_legacy_mutation_writes": 0,
+        "automatic_resend_enabled": False,
+        "operator_resolution_is_one_shot": True,
+        "live_acceptance": False,
     }
