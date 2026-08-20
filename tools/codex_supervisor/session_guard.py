@@ -188,6 +188,13 @@ class ManagedAppServerSession:
         if self.owner._task is not None and not self.owner._task.done():
             self.owner._task.cancel()
 
+    @classmethod
+    def close_all(cls) -> None:
+        from .durability.session_owner import AppServerSessionOwner
+
+        for owner in list(AppServerSessionOwner._by_client.values()):
+            cls(owner).close()
+
     async def request(
         self,
         method: str,

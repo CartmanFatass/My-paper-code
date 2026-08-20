@@ -63,7 +63,9 @@ class AppServerSessionOwner:
         return sum(1 for item in cls._by_client.values() if item._task is not None and not item._task.done())
 
     def start(self) -> None:
-        self.client.start_reader()
+        start_reader = getattr(self.client, "start_reader", None)
+        if callable(start_reader):
+            start_reader()
         if self._task is None or self._task.done():
             self._task = asyncio.create_task(self._watch())
 
@@ -93,7 +95,10 @@ class AppServerSessionOwner:
         from ..session_guard import persist_server_request, terminate_transport
 
         try:
-            payload = await self.client.server_requests.get()
+            queue = getattr(self.client, "server_requests", None)
+            if queue is None:
+                return
+            payload = await queue.get()
         except Exception:
             self.terminated = True
             self._incident.set()
