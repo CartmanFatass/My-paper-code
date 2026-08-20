@@ -46,8 +46,16 @@ ROOT_EXPLICIT_CLOSURE_KINDS = frozenset(
     {"COMPLETED", "USER_CANCELLED", "SCOPE_TRANSFERRED", "DEFERRED_BY_USER", "GOAL_BLOCKED_AFTER_AUDIT"}
 )
 MECHANICAL_CLOSURE_KINDS = frozenset({"EMPTY_SESSION_ENDED"})
-CLOSURE_KINDS = ROOT_EXPLICIT_CLOSURE_KINDS | MECHANICAL_CLOSURE_KINDS
+CONTROL_PLANE_CLOSURE_KINDS = frozenset({"CONTROL_PLANE_ROLLOVER"})
+CLOSURE_KINDS = (
+    ROOT_EXPLICIT_CLOSURE_KINDS
+    | MECHANICAL_CLOSURE_KINDS
+    | CONTROL_PLANE_CLOSURE_KINDS
+)
 CLOSED_WORKFLOW_STATES = frozenset({"CLOSED", "CANCELLED"})
+
+ROLLOVER_RECEIPT_SCHEMA = "HMASD_CONTROL_PLANE_ROLLOVER_RECEIPT_V1"
+ROLLOVER_RESOLUTION_KIND = "CONTROL_PLANE_EPOCH_ROLLOVER"
 
 
 def _now() -> str:
@@ -843,12 +851,20 @@ class SemanticStore:
                 "SELECT * FROM obligations WHERE workflow_id = ? AND state = 'OPEN' ORDER BY created_at, obligation_id",
                 (workflow_id,),
             ).fetchall()]
+            latest_event_seq = self.connection.execute(
+                "SELECT COALESCE(MAX(seq), 0) FROM events WHERE workflow_id = ?",
+                (workflow_id,),
+            ).fetchone()[0]
             for item in obligations:
                 item["kind"] = normalize_obligation_kind(str(item.get("kind") or ""))
             result = dict(workflow)
             result["tasks"] = tasks
             result["open_obligations"] = obligations
             result["obligation_count"] = len(obligations)
+            # This is the only cursor callers may feed back to after_seq.
+            # state_version tracks workflow mutations and deliberately has
+            # independent semantics from the durable event stream.
+            result["await_cursor"] = int(latest_event_seq)
             result["open_task_ids"] = [
                 task["task_id"] for task in tasks if task["lifecycle"] not in {"INTAKEN", "CANCELLED"}
             ]
@@ -875,6 +891,8 @@ class SemanticStore:
     ) -> str:
         if closure_kind not in CLOSURE_KINDS:
             raise ValueError(f"unknown closure kind: {closure_kind}")
+        if closure_kind in CONTROL_PLANE_CLOSURE_KINDS:
+            raise ValueError("CONTROL_PLANE_ROLLOVER requires workflow-reconcile")
         with self._lock, self.connection:
             state = self.workflow_state(workflow_id)
             if state["open_obligations"]:
@@ -899,6 +917,252 @@ class SemanticStore:
                 {"closure_kind": closure_kind}, f"WORKFLOW_CLOSED:{workflow_id}"
             )
             return receipt_id
+
+    @staticmethod
+    def _rollover_receipt_payload(row: sqlite3.Row | Mapping[str, Any]) -> dict[str, Any] | None:
+        """Decode only receipts produced by the explicit rollover operation."""
+        if str(row["closure_kind"]) != "CONTROL_PLANE_ROLLOVER":
+            return None
+        try:
+            payload = json.loads(str(row["summary"]))
+        except (TypeError, ValueError, json.JSONDecodeError):
+            return None
+        if not isinstance(payload, dict) or payload.get("schema") != ROLLOVER_RECEIPT_SCHEMA:
+            return None
+        return payload
+
+    def reconcile_workflow(
+        self,
+        workflow_id: str,
+        *,
+        expected_state_version: int,
+        expected_await_cursor: int,
+        reconciliation_id: str,
+        reason: str,
+        apply: bool,
+        operator_id: str | None = None,
+    ) -> dict[str, Any]:
+        """Plan or atomically apply one explicit control-plane epoch rollover.
+
+        This operation deliberately bypasses ordinary scientific intake.  It
+        retains every report and existing event while retiring only the stale
+        delivery-control objects named by the selected workflow.
+        """
+        if not workflow_id:
+            raise ValueError("workflow_id is required")
+        if expected_state_version < 0 or expected_await_cursor < 0:
+            raise ValueError("expected state version and await cursor must be non-negative")
+        if not reconciliation_id.strip():
+            raise ValueError("reconciliation_id is required")
+        if not reason.strip():
+            raise ValueError("reason is required")
+        if apply and operator_id != "/root":
+            raise ValueError("workflow-reconcile --apply requires operator_id=/root")
+
+        with self._lock:
+            # Planning uses a consistent read snapshot without acquiring a
+            # reserved writer lock.  Only the mutating path uses IMMEDIATE so
+            # the expected-version/cursor comparison and all changes are one
+            # indivisible writer transaction.
+            self.connection.execute("BEGIN IMMEDIATE" if apply else "BEGIN")
+            try:
+                prior = self.connection.execute(
+                    "SELECT * FROM closure_receipts WHERE workflow_id = ?",
+                    (workflow_id,),
+                ).fetchone()
+                if prior is not None:
+                    payload = self._rollover_receipt_payload(prior)
+                    if payload is None:
+                        raise ValueError("workflow already has a non-rollover closure receipt")
+                    if payload.get("reconciliation_id") != reconciliation_id:
+                        raise ValueError("workflow was rolled over by a different reconciliation_id")
+                    result = dict(payload)
+                    result.update(
+                        {
+                            "workflow_id": workflow_id,
+                            "receipt_id": str(prior["receipt_id"]),
+                            "eligible": True,
+                            "applied": True,
+                            "replayed": True,
+                        }
+                    )
+                    self.connection.rollback()
+                    return result
+
+                workflow = self.connection.execute(
+                    "SELECT * FROM workflows WHERE workflow_id = ?",
+                    (workflow_id,),
+                ).fetchone()
+                if workflow is None:
+                    raise KeyError(f"unknown workflow: {workflow_id}")
+
+                actual_state_version = int(workflow["state_version"])
+                actual_await_cursor = int(
+                    self.connection.execute(
+                        "SELECT COALESCE(MAX(seq), 0) FROM events WHERE workflow_id = ?",
+                        (workflow_id,),
+                    ).fetchone()[0]
+                )
+                if actual_state_version != expected_state_version:
+                    raise ValueError(
+                        "expected_state_version mismatch: "
+                        f"expected {expected_state_version}, observed {actual_state_version}"
+                    )
+                if actual_await_cursor != expected_await_cursor:
+                    raise ValueError(
+                        "expected_await_cursor mismatch: "
+                        f"expected {expected_await_cursor}, observed {actual_await_cursor}"
+                    )
+
+                exclusions: list[dict[str, str]] = []
+                if str(workflow["state"]) != "ACTIVE":
+                    exclusions.append(
+                        {
+                            "kind": "WORKFLOW_NOT_ACTIVE",
+                            "exact_object": workflow_id,
+                            "observed_fact": f"state={workflow['state']}",
+                        }
+                    )
+                if str(workflow["scope"]) != "session":
+                    exclusions.append(
+                        {
+                            "kind": "NON_SESSION_SCOPE",
+                            "exact_object": workflow_id,
+                            "observed_fact": f"scope={workflow['scope']}",
+                        }
+                    )
+
+                user_decisions = self.connection.execute(
+                    """SELECT obligation_id FROM obligations
+                    WHERE workflow_id = ? AND state = 'OPEN' AND kind = ?
+                    ORDER BY created_at, obligation_id""",
+                    (workflow_id, ObligationKind.USER_DECISION_REQUIRED.value),
+                ).fetchall()
+                for obligation in user_decisions:
+                    exclusions.append(
+                        {
+                            "kind": "USER_DECISION_OBLIGATION",
+                            "exact_object": str(obligation["obligation_id"]),
+                            "observed_fact": "open USER_DECISION_REQUIRED obligation",
+                        }
+                    )
+
+                open_obligation_count = int(
+                    self.connection.execute(
+                        "SELECT COUNT(*) FROM obligations WHERE workflow_id = ? AND state = 'OPEN'",
+                        (workflow_id,),
+                    ).fetchone()[0]
+                )
+                cancellable_task_count = int(
+                    self.connection.execute(
+                        """SELECT COUNT(*) FROM tasks
+                        WHERE workflow_id = ? AND lifecycle NOT IN ('INTAKEN', 'CANCELLED')""",
+                        (workflow_id,),
+                    ).fetchone()[0]
+                )
+                intaken_task_count = int(
+                    self.connection.execute(
+                        "SELECT COUNT(*) FROM tasks WHERE workflow_id = ? AND lifecycle = 'INTAKEN'",
+                        (workflow_id,),
+                    ).fetchone()[0]
+                )
+                report_count = int(
+                    self.connection.execute(
+                        "SELECT COUNT(*) FROM reports WHERE workflow_id = ?", (workflow_id,)
+                    ).fetchone()[0]
+                )
+                event_count = int(
+                    self.connection.execute(
+                        "SELECT COUNT(*) FROM events WHERE workflow_id = ?", (workflow_id,)
+                    ).fetchone()[0]
+                )
+
+                plan = {
+                    "schema": ROLLOVER_RECEIPT_SCHEMA,
+                    "workflow_id": workflow_id,
+                    "reconciliation_id": reconciliation_id,
+                    "reason": reason,
+                    "operator_id": operator_id if apply else None,
+                    "old_state_version": actual_state_version,
+                    "old_await_cursor": actual_await_cursor,
+                    "cancelled_obligation_count": open_obligation_count,
+                    "cancelled_task_count": cancellable_task_count,
+                    "preserved_intaken_task_count": intaken_task_count,
+                    "preserved_report_count": report_count,
+                    "preserved_event_count": event_count,
+                }
+                if exclusions:
+                    self.connection.rollback()
+                    return {
+                        **plan,
+                        "eligible": False,
+                        "applied": False,
+                        "replayed": False,
+                        "exclusions": exclusions,
+                    }
+                if not apply:
+                    self.connection.rollback()
+                    return {
+                        **plan,
+                        "eligible": True,
+                        "applied": False,
+                        "replayed": False,
+                        "exclusions": [],
+                    }
+
+                now = _now()
+                resolution = _json(
+                    {
+                        "resolution_kind": ROLLOVER_RESOLUTION_KIND,
+                        "reconciliation_id": reconciliation_id,
+                        "reason": reason,
+                    }
+                )
+                self.connection.execute(
+                    """UPDATE obligations
+                    SET state = 'CANCELLED', resolution_json = ?, resolved_at = ?
+                    WHERE workflow_id = ? AND state = 'OPEN'""",
+                    (resolution, now, workflow_id),
+                )
+                if self.connection.execute("SELECT changes()").fetchone()[0] != open_obligation_count:
+                    raise RuntimeError("open obligation set changed during rollover")
+                self.connection.execute(
+                    """UPDATE tasks SET lifecycle = 'CANCELLED'
+                    WHERE workflow_id = ? AND lifecycle NOT IN ('INTAKEN', 'CANCELLED')""",
+                    (workflow_id,),
+                )
+                if self.connection.execute("SELECT changes()").fetchone()[0] != cancellable_task_count:
+                    raise RuntimeError("open task set changed during rollover")
+
+                receipt_id = _new_id("receipt")
+                receipt_summary = _json({**plan, "operator_id": operator_id})
+                self.connection.execute(
+                    """INSERT INTO closure_receipts
+                    (receipt_id, workflow_id, closure_kind, summary, created_at)
+                    VALUES (?, ?, 'CONTROL_PLANE_ROLLOVER', ?, ?)""",
+                    (receipt_id, workflow_id, receipt_summary, now),
+                )
+                self._touch_workflow(workflow_id, "CANCELLED")
+                self._append_event(
+                    workflow_id,
+                    "WORKFLOW_ROLLED_OVER",
+                    receipt_id,
+                    {**plan, "operator_id": operator_id, "receipt_id": receipt_id},
+                    f"WORKFLOW_ROLLED_OVER:{workflow_id}:{reconciliation_id}",
+                )
+                self.connection.commit()
+                return {
+                    **plan,
+                    "operator_id": operator_id,
+                    "receipt_id": receipt_id,
+                    "eligible": True,
+                    "applied": True,
+                    "replayed": False,
+                    "exclusions": [],
+                }
+            except Exception:
+                self.connection.rollback()
+                raise
 
     def acquire_guard_once(self, guard_key: str, event_name: str) -> bool:
         with self._lock, self.connection:

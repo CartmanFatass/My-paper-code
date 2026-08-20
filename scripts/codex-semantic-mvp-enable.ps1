@@ -1,13 +1,14 @@
 [CmdletBinding()]
 param(
-    [ValidateSet("Shadow", "Active")]
+    [ValidateSet("Shadow", "ShadowMcp", "Active")]
     [string]$Mode = "Shadow",
     [string]$RepoRoot = ".",
     [string]$ExpectedHooksHash = "",
-    [ValidateSet("none", "backup", "hooks", "config", "state")]
+    [ValidateSet("none", "backup", "hooks", "config", "state", "sentinel")]
     [string]$InjectFailureAt = "none",
     [string]$PythonExecutable = "C:\Users\fires\.conda\envs\hmasd-amd-cpu\python.exe",
-    [switch]$DryRun
+    [switch]$DryRun,
+    [switch]$ResumePausedHooks
 )
 
 $ErrorActionPreference = "Stop"
@@ -48,13 +49,18 @@ function Invoke-InjectedFailure([string]$Point) {
 
 function Get-SemanticHookEvents([string]$Mode) {
     $events = @('SessionStart', 'SubagentStart', 'SubagentStop', 'Stop')
-    if ($Mode -eq 'Shadow') { $events += @('PreToolUse', 'PreCompact', 'PostCompact') }
+    if ($Mode -in @('Shadow', 'ShadowMcp')) { $events += @('PreToolUse', 'PreCompact', 'PostCompact') }
     if ($Mode -eq 'Active') { $events += @('PreCompact', 'PostCompact') }
     return $events
 }
 
+function Get-HookRuntimeMode([string]$Mode) {
+    if ($Mode -eq 'ShadowMcp') { return 'shadow' }
+    return $Mode.ToLowerInvariant()
+}
+
 function New-SemanticHookToml([string]$Mode, [string]$TomlPython) {
-    $command = $TomlPython + ' -m tools.codex_semantic_mvp.hook_entry --mode ' + $Mode.ToLowerInvariant()
+    $command = $TomlPython + ' -m tools.codex_semantic_mvp.hook_entry --mode ' + (Get-HookRuntimeMode $Mode)
     $lines = @(
         '# BEGIN HMASD CODEX SEMANTIC HOOKS',
         '[hooks]'
@@ -101,6 +107,31 @@ function Ensure-SemanticFeatureFlags([string]$Text) {
     return $Text.Substring(0, $featuresMatch.Index) + $section + $Text.Substring($featuresMatch.Index + $featuresMatch.Length)
 }
 
+function Set-SemanticFeatureHooks([string]$Text, [string]$Value) {
+    $featuresMatches = [regex]::Matches($Text, '(?ms)^\[features\][ \t]*(?:\r?$).*?(?=^\[|\Z)')
+    if ($featuresMatches.Count -ne 1) { throw "FEATURES_SECTION_INVALID" }
+    $featuresMatch = $featuresMatches[0]
+    $section = $featuresMatch.Value
+    $assignments = [regex]::Matches($section, '(?m)^[ \t]*hooks[ \t]*=[ \t]*(?:true|false)[ \t]*(?:\r?$)')
+    if ($assignments.Count -ne 1) { throw "FEATURES_ASSIGNMENT_INVALID:hooks" }
+    $assignment = $assignments[0]
+    $oldLine = $assignment.Value
+    $ending = if ($oldLine.EndsWith("`r")) { "`r" } else { "" }
+    $indent = ([regex]::Match($oldLine, '^[ \t]*')).Value
+    $newLine = $indent + 'hooks = ' + $Value + $ending
+    $section = $section.Substring(0, $assignment.Index) + $newLine + $section.Substring($assignment.Index + $assignment.Length)
+    return $Text.Substring(0, $featuresMatch.Index) + $section + $Text.Substring($featuresMatch.Index + $featuresMatch.Length)
+}
+
+function Get-SafePausedConfig([string]$Text) {
+    # This path is only compensation after a requested activation could not
+    # finish.  It leaves unrelated configuration intact while forcing this
+    # control plane back behind the feature pause.  MCP enablement belongs to
+    # its own explicit configuration and is restored exactly from the prior
+    # configuration; a failed hook rollout must not silently change it.
+    return Set-SemanticFeatureHooks $Text 'false'
+}
+
 function Test-RootHookAssignment([string]$Text, [string]$Pattern) {
     $tableName = ""
     foreach ($line in ($Text -split "`r?`n")) {
@@ -113,7 +144,7 @@ function Test-RootHookAssignment([string]$Text, [string]$Pattern) {
             continue
         }
         if ($line -match $Pattern) {
-            if ($tableName -eq "features" -and $line -match '^[ \t]*hooks[ \t]*=[ \t]*true[ \t]*(?:#.*)?$') { continue }
+            if ($tableName -eq "features" -and $line -match '^[ \t]*hooks[ \t]*=[ \t]*(?:true|false)[ \t]*(?:#.*)?$') { continue }
             return $true
         }
     }
@@ -242,6 +273,10 @@ function New-DryRunRoot([string]$Source) {
     foreach ($name in @("hooks.json", "config.toml", "hooks.semantic-mvp.shadow.json", "hooks.semantic-mvp.active.json")) {
         Copy-Item -LiteralPath (Join-Path $Source ".codex\$name") -Destination (Join-Path $stage ".codex\$name")
     }
+    $pauseSentinel = Join-Path $Source ".codex\semantic-hooks.paused"
+    if (Test-Path -LiteralPath $pauseSentinel -PathType Leaf) {
+        Copy-Item -LiteralPath $pauseSentinel -Destination (Join-Path $stage ".codex\semantic-hooks.paused")
+    }
     return $stage
 }
 
@@ -257,6 +292,7 @@ try {
     $codex = Join-Path $workRoot ".codex"
     $hooksPath = Join-Path $codex "hooks.json"
     $configPath = Join-Path $codex "config.toml"
+    $pauseSentinelPath = Join-Path $codex "semantic-hooks.paused"
     $runtime = Join-Path $workRoot "runtime\codex-semantic-mvp"
     $backupDir = Join-Path $runtime "backups"
     $statePath = Join-Path $runtime "activation-state.json"
@@ -264,6 +300,15 @@ try {
     $currentHash = Get-BytesHash $hooksBytes
     $configBytes = [IO.File]::ReadAllBytes($configPath)
     $configHash = Get-BytesHash $configBytes
+    $pauseSentinelExisted = Test-Path -LiteralPath $pauseSentinelPath -PathType Leaf
+    if ($pauseSentinelExisted -and -not $ResumePausedHooks) {
+        throw "SEMANTIC_HOOKS_PAUSED: pass -ResumePausedHooks to explicitly archive and resume shadow hooks"
+    }
+    if ($pauseSentinelExisted -and $ResumePausedHooks -and $Mode -ne "ShadowMcp") {
+        throw "PAUSE_RESUME_REQUIRES_SHADOW_MCP"
+    }
+    $pauseSentinelBytes = if ($pauseSentinelExisted) { [IO.File]::ReadAllBytes($pauseSentinelPath) } else { $null }
+    $pauseSentinelHash = if ($pauseSentinelExisted) { Get-BytesHash $pauseSentinelBytes } else { $null }
     if ($ExpectedHooksHash -and $ExpectedHooksHash -notmatch '^[0-9a-fA-F]{64}$') {
         throw "INITIAL_BASELINE_HASH_INVALID"
     }
@@ -276,7 +321,7 @@ try {
     }
     $state = if ($stateValidation) { $stateValidation.Object } else { $null }
     $configText = [Text.UTF8Encoding]::new($false).GetString($configBytes)
-    $desired = if ($Mode -eq "Active") { "true" } else { "false" }
+    $desired = if ($Mode -eq "Shadow") { "false" } else { "true" }
     $configMutation = Get-StrictConfigMutation $configText $desired $Mode $tomlPython
     $updatedConfigBytes = [Text.UTF8Encoding]::new($false).GetBytes($configMutation.Text)
     $backupName = "hooks-$currentHash.bak"
@@ -285,6 +330,18 @@ try {
     $oldBackupBytes = if ($backupExisted) { [IO.File]::ReadAllBytes($backupPath) } else { $null }
     if ($backupExisted) {
         if ((Get-BytesHash ([IO.File]::ReadAllBytes($backupPath))) -ne $currentHash) { throw "BACKUP_HASH_MISMATCH $backupName" }
+    }
+    $pauseBackupName = if ($pauseSentinelExisted) { "semantic-hooks-paused-$pauseSentinelHash.bak" } else { "" }
+    $pauseBackupPath = if ($pauseSentinelExisted) { Join-Path $backupDir $pauseBackupName } else { "" }
+    $pauseBackupExisted = if ($pauseSentinelExisted) { Test-Path -LiteralPath $pauseBackupPath -PathType Leaf } else { $false }
+    if ($pauseBackupExisted -and (Get-BytesHash ([IO.File]::ReadAllBytes($pauseBackupPath))) -ne $pauseSentinelHash) {
+        throw "PAUSE_SENTINEL_BACKUP_HASH_MISMATCH $pauseBackupName"
+    }
+    $pausedConfigBackupName = if ($pauseSentinelExisted) { "config-paused-$configHash.bak" } else { "" }
+    $pausedConfigBackupPath = if ($pauseSentinelExisted) { Join-Path $backupDir $pausedConfigBackupName } else { "" }
+    $pausedConfigBackupExisted = if ($pauseSentinelExisted) { Test-Path -LiteralPath $pausedConfigBackupPath -PathType Leaf } else { $false }
+    if ($pausedConfigBackupExisted -and (Get-BytesHash ([IO.File]::ReadAllBytes($pausedConfigBackupPath))) -ne $configHash) {
+        throw "PAUSED_CONFIG_BACKUP_HASH_MISMATCH $pausedConfigBackupName"
     }
 
     if (-not $state) {
@@ -296,23 +353,37 @@ try {
     }
     $state | Add-Member -NotePropertyName current_hooks_sha256 -NotePropertyValue $currentHash -Force
     $state | Add-Member -NotePropertyName current_config_sha256 -NotePropertyValue (Get-BytesHash $updatedConfigBytes) -Force
-    $state | Add-Member -NotePropertyName mode -NotePropertyValue $Mode.ToLowerInvariant() -Force
+    $stateMode = if ($Mode -eq 'ShadowMcp') { 'shadow_mcp' } else { $Mode.ToLowerInvariant() }
+    $state | Add-Member -NotePropertyName mode -NotePropertyValue $stateMode -Force
     $state | Add-Member -NotePropertyName last_backup -NotePropertyValue "backups/$backupName" -Force
     $state | Add-Member -NotePropertyName python_executable -NotePropertyValue $python -Force
+    if ($pauseSentinelExisted) {
+        $state | Add-Member -NotePropertyName pause_sentinel_backup -NotePropertyValue "backups/$pauseBackupName" -Force
+        $state | Add-Member -NotePropertyName pause_sentinel_sha256 -NotePropertyValue $pauseSentinelHash -Force
+        $state | Add-Member -NotePropertyName paused_config_backup -NotePropertyValue "backups/$pausedConfigBackupName" -Force
+        $state | Add-Member -NotePropertyName paused_config_sha256 -NotePropertyValue $configHash -Force
+    }
     $newStateBytes = [Text.UTF8Encoding]::new($false).GetBytes(($state | ConvertTo-Json -Depth 4))
     try { $null = ([Text.UTF8Encoding]::new($false).GetString($newStateBytes) | ConvertFrom-Json) } catch { throw "ACTIVATION_STATE_BUILD_INVALID" }
 
     $stateExisted = Test-Path -LiteralPath $statePath -PathType Leaf
     $oldStateBytes = if ($stateExisted) { [IO.File]::ReadAllBytes($statePath) } else { $null }
-    $hooksWritten = $false; $configWritten = $false; $stateWritten = $false; $backupWritten = $false
+    $hooksWritten = $false; $configWritten = $false; $stateWritten = $false; $backupWritten = $false; $pauseBackupWritten = $false; $pausedConfigBackupWritten = $false; $pauseSentinelRemoved = $false
     try {
         if (-not $backupExisted) { $backupWritten = $true; Write-BytesAtomic $backupPath $hooksBytes }
         Invoke-InjectedFailure "backup"
+        if ($pauseSentinelExisted -and -not $pauseBackupExisted) { $pauseBackupWritten = $true; Write-BytesAtomic $pauseBackupPath $pauseSentinelBytes }
+        if ($pauseSentinelExisted -and -not $pausedConfigBackupExisted) { $pausedConfigBackupWritten = $true; Write-BytesAtomic $pausedConfigBackupPath $configBytes }
         Invoke-InjectedFailure "hooks"
         $configWritten = $true; Write-BytesAtomic $configPath $updatedConfigBytes
         Invoke-InjectedFailure "config"
         $stateWritten = $true; Write-BytesAtomic $statePath $newStateBytes
         Invoke-InjectedFailure "state"
+        if ($pauseSentinelExisted) {
+            Invoke-InjectedFailure "sentinel"
+            [IO.File]::Delete($pauseSentinelPath)
+            $pauseSentinelRemoved = $true
+        }
     }
     catch {
         $originalError = $_; $compensationErrors = @()
@@ -320,13 +391,27 @@ try {
             if ($stateWritten -and $stateExisted) { Write-BytesAtomic $statePath $oldStateBytes }
             elseif ($stateWritten -and -not $stateExisted -and (Test-Path -LiteralPath $statePath)) { [IO.File]::Delete($statePath) }
         } catch { $compensationErrors += "state:$($_.Exception.Message)" }
-        try { if ($configWritten) { Write-BytesAtomic $configPath $configBytes } } catch { $compensationErrors += "config:$($_.Exception.Message)" }
+        try {
+            if ($configWritten) {
+                $baselineConfigText = [Text.UTF8Encoding]::new($false).GetString($configBytes)
+                $pausedConfigText = Get-SafePausedConfig $baselineConfigText
+                $pausedConfigBytes = [Text.UTF8Encoding]::new($false).GetBytes($pausedConfigText)
+                Write-BytesAtomic $configPath $pausedConfigBytes
+            }
+        } catch { $compensationErrors += "config:$($_.Exception.Message)" }
         try { if ($hooksWritten) { Write-BytesAtomic $hooksPath $hooksBytes } } catch { $compensationErrors += "hooks:$($_.Exception.Message)" }
+        try {
+            if ($pauseSentinelExisted -and (-not (Test-Path -LiteralPath $pauseSentinelPath -PathType Leaf) -or $pauseSentinelRemoved)) {
+                Write-BytesAtomic $pauseSentinelPath $pauseSentinelBytes
+            }
+        } catch { $compensationErrors += "sentinel:$($_.Exception.Message)" }
         try { if ($backupWritten -and (Test-Path -LiteralPath $backupPath)) { [IO.File]::Delete($backupPath) } } catch { $compensationErrors += "backup:$($_.Exception.Message)" }
+        try { if ($pauseBackupWritten -and (Test-Path -LiteralPath $pauseBackupPath)) { [IO.File]::Delete($pauseBackupPath) } } catch { $compensationErrors += "pause_backup:$($_.Exception.Message)" }
+        try { if ($pausedConfigBackupWritten -and (Test-Path -LiteralPath $pausedConfigBackupPath)) { [IO.File]::Delete($pausedConfigBackupPath) } } catch { $compensationErrors += "paused_config_backup:$($_.Exception.Message)" }
         if ($compensationErrors.Count -gt 0) { throw "TRANSACTION_COMPENSATION_FAILED: $($compensationErrors -join '; ')" }
         throw $originalError
     }
-    $result = [ordered]@{ MODE = $Mode.ToUpperInvariant(); DRY_RUN = [bool]$DryRun; LIVE_HOOKS_HASH = (Get-BytesHash ([IO.File]::ReadAllBytes($hooksPath))); CONFIG_HASH = (Get-BytesHash ([IO.File]::ReadAllBytes($configPath))); BACKUP = "runtime/codex-semantic-mvp/$backupName" }
+    $result = [ordered]@{ MODE = $Mode.ToUpperInvariant(); DRY_RUN = [bool]$DryRun; LIVE_HOOKS_HASH = (Get-BytesHash ([IO.File]::ReadAllBytes($hooksPath))); CONFIG_HASH = (Get-BytesHash ([IO.File]::ReadAllBytes($configPath))); BACKUP = "runtime/codex-semantic-mvp/$backupName"; PAUSE_SENTINEL_ARCHIVED = [bool]$pauseSentinelExisted }
     $result | ConvertTo-Json -Compress
 }
 finally {

@@ -4,9 +4,8 @@ from __future__ import annotations
 
 import argparse
 import json
+from pathlib import Path
 from typing import Any
-
-from . import mcp_server
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -33,10 +32,55 @@ def _parser() -> argparse.ArgumentParser:
     close_parser.add_argument("closure_kind")
     close_parser.add_argument("--summary", default="")
 
+    reconcile_parser = sub.add_parser("workflow-reconcile")
+    reconcile_parser.add_argument("--workflow-id", required=True)
+    reconcile_parser.add_argument("--expected-state-version", required=True, type=int)
+    reconcile_parser.add_argument("--expected-await-cursor", required=True, type=int)
+    reconcile_parser.add_argument("--reconciliation-id", required=True)
+    reconcile_parser.add_argument("--reason", required=True)
+    mode = reconcile_parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--dry-run", action="store_true")
+    mode.add_argument("--apply", action="store_true")
+    reconcile_parser.add_argument("--operator-id")
+    reconcile_parser.add_argument("--confirm-workflow-id")
+
     return parser
 
 
+def _require_reconcile_pause(repo_root: Path) -> None:
+    """Fail closed unless semantic hooks are explicitly paused."""
+    sentinel = repo_root / ".codex" / "semantic-hooks.paused"
+    if not sentinel.is_file():
+        raise RuntimeError("workflow-reconcile requires .codex/semantic-hooks.paused")
+    try:
+        import tomllib
+    except ModuleNotFoundError:  # Python 3.10 project environment
+        import tomli as tomllib
+
+    config_path = repo_root / ".codex" / "config.toml"
+    try:
+        config = tomllib.loads(config_path.read_text(encoding="utf-8"))
+    except (OSError, tomllib.TOMLDecodeError) as exc:
+        raise RuntimeError("workflow-reconcile could not read .codex/config.toml") from exc
+    if config.get("features", {}).get("hooks") is not False:
+        raise RuntimeError("workflow-reconcile requires features.hooks=false")
+
+
 def _dispatch(args: argparse.Namespace) -> dict[str, Any]:
+    if args.command == "workflow-reconcile":
+        # Check the operator-owned pause boundary before even opening or
+        # migrating the selected ledger.
+        _require_reconcile_pause(Path.cwd())
+        if args.apply:
+            if args.confirm_workflow_id != args.workflow_id:
+                raise ValueError("--confirm-workflow-id must exactly match --workflow-id")
+            if args.operator_id != "/root":
+                raise ValueError("--apply requires --operator-id /root")
+        elif args.operator_id is not None or args.confirm_workflow_id is not None:
+            raise ValueError("operator confirmation arguments are valid only with --apply")
+
+    from . import mcp_server
+
     mcp_server.build_server(args.state_dir)
     store = mcp_server._get_store()
     if args.command == "runtime-health":
@@ -56,6 +100,16 @@ def _dispatch(args: argparse.Namespace) -> dict[str, Any]:
     if args.command == "workflow-close":
         receipt_id = store.create_closure_receipt(args.workflow_id, args.closure_kind, args.summary)
         return {"workflow_id": args.workflow_id, "receipt_id": receipt_id, "closure_kind": args.closure_kind}
+    if args.command == "workflow-reconcile":
+        return store.reconcile_workflow(
+            args.workflow_id,
+            expected_state_version=args.expected_state_version,
+            expected_await_cursor=args.expected_await_cursor,
+            reconciliation_id=args.reconciliation_id,
+            reason=args.reason,
+            apply=bool(args.apply),
+            operator_id=args.operator_id,
+        )
     raise ValueError(f"unknown command: {args.command}")
 
 

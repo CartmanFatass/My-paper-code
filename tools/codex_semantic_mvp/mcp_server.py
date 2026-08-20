@@ -9,7 +9,7 @@ import os
 import sqlite3
 import sys
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Literal, Mapping
 
 from mcp.server import MCPServer
 
@@ -133,6 +133,13 @@ def _event_summary(store: SemanticStore, event: Mapping[str, Any]) -> dict[str, 
     return result
 
 
+AwaitCondition = Literal[
+    "ANY_REPORT",
+    "ALL_REQUIRED_RETURNED",
+    "OPEN_OBLIGATION_CHANGED",
+    "WORKFLOW_QUIESCENT",
+]
+
 _AWAIT_CONDITIONS = frozenset(
     {"ANY_REPORT", "ALL_REQUIRED_RETURNED", "OPEN_OBLIGATION_CHANGED", "WORKFLOW_QUIESCENT"}
 )
@@ -223,7 +230,7 @@ def _register_tools(server: MCPServer) -> MCPServer:
             "ledger_role": "control_plane_delivery_and_obligation_ledger",
         }
 
-    @server.tool(description="Return the current session workflow id and thin obligation summary.")
+    @server.tool(description="Return the current session workflow id, await cursor, and thin obligation summary.")
     def workflow_current(session_id: str) -> dict[str, Any]:
         store = _get_store()
         workflow = store.current_workflow(session_id)
@@ -232,6 +239,7 @@ def _register_tools(server: MCPServer) -> MCPServer:
                 "workflow_id": None,
                 "state": None,
                 "state_version": None,
+                "await_cursor": None,
                 "open_obligation_ids": [],
                 "unconsumed_report_ids": [],
             }
@@ -241,6 +249,7 @@ def _register_tools(server: MCPServer) -> MCPServer:
             "workflow_id": workflow["workflow_id"],
             "state": workflow["state"],
             "state_version": state.get("state_version"),
+            "await_cursor": state.get("await_cursor"),
             "open_obligation_ids": [item["obligation_id"] for item in obligations],
             "unconsumed_report_ids": [
                 item["subject"]
@@ -291,7 +300,7 @@ def _register_tools(server: MCPServer) -> MCPServer:
         event_id = store.record_agent_started(workflow_id, task_id, agent_id, agent_type)
         return {"workflow_id": workflow_id, "task_id": task_id, "agent_id": agent_id, "event_id": event_id, "lifecycle": "RUNNING"}
 
-    @server.tool(description="Return the persisted workflow state and open obligations.")
+    @server.tool(description="Return persisted workflow state, open obligations, and await_cursor. state_version is not an event cursor.")
     def workflow_state(workflow_id: str) -> dict[str, Any]:
         return _jsonable(_get_store().workflow_state(workflow_id))
 
@@ -352,11 +361,16 @@ def _register_tools(server: MCPServer) -> MCPServer:
         resolved = store.resolve_obligation(workflow_id, obligation_id, resolution)
         return {"workflow_id": workflow_id, "obligation_id": resolved, "state": "RESOLVED"}
 
-    @server.tool(description="Wait for an event matching a bounded workflow condition.")
+    @server.tool(description=(
+        "Wait for one workflow event. condition is one of ANY_REPORT, "
+        "ALL_REQUIRED_RETURNED, OPEN_OBLIGATION_CHANGED, or WORKFLOW_QUIESCENT. "
+        "Use await_cursor returned by workflow_state or workflow_current as after_seq; "
+        "state_version is not an event cursor."
+    ))
     async def workflow_await_event(
         workflow_id: str,
         after_seq: int = 0,
-        condition: str = "ANY_REPORT",
+        condition: AwaitCondition = "ANY_REPORT",
         task_ids: list[str] | None = None,
         timeout_s: float = 900,
     ) -> dict[str, Any]:

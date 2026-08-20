@@ -54,6 +54,7 @@ EVENT_KINDS = {
     "PostCompact": "COMPACTION_COMPLETED",
 }
 MAX_PREVIEW_BYTES = 2048
+PAUSE_SENTINEL_PATH = Path(__file__).resolve().parents[2] / ".codex" / "semantic-hooks.paused"
 
 GENERIC_SUBAGENT_CONTEXT = """This parent session is using the HMASD managed semantic protocol.
 
@@ -221,6 +222,34 @@ def _record_fail_open(state_dir: Path, kind: str, exception_class: str) -> None:
 
 def _neutral_response() -> dict[str, object]:
     return {"continue": True}
+
+
+def _hooks_paused() -> bool:
+    """Return whether this repository has fail-open paused semantic hooks."""
+    try:
+        return PAUSE_SENTINEL_PATH.exists()
+    except OSError:
+        # A pause check must never become a hook gate.
+        return False
+
+
+def _shadow_observe(payload: Mapping[str, object], state_dir: Path) -> dict[str, object]:
+    """Write bounded runtime-only diagnostics for a shadow hook invocation."""
+    event = str(payload.get("hook_event_name") or payload.get("event") or "")
+    kind = EVENT_KINDS.get(event, "UNKNOWN_HOOK_EVENT")
+    diagnostic = _diagnostic_payload(payload, event)
+    diagnostic["mode"] = SHADOW_MODE
+    _append_audit(state_dir, kind, diagnostic)
+    if event in {"PreCompact", "PostCompact"}:
+        try:
+            append_probe_record(
+                state_dir / "topology-probe.jsonl",
+                normalize_hook_identity(payload),
+                payload,
+            )
+        except Exception:
+            pass
+    return _neutral_response()
 
 
 def _active_workflow(store: SemanticStore, session_id: str) -> dict[str, object] | None:
@@ -844,12 +873,23 @@ def handle_hook(
     payload: Mapping[str, object], mode: str, store: SemanticStore | None
 ) -> dict[str, object] | None:
     """Observe one hook invocation and return a behavior-neutral response."""
+    if _hooks_paused():
+        return _neutral_response()
     if os.environ.get("HMASD_CODEX_MVP_DISABLE") == "1":
         return None
     event = str(payload.get("hook_event_name") or payload.get("event") or "") if isinstance(payload, Mapping) else ""
     kind = EVENT_KINDS.get(event, "UNKNOWN_HOOK_EVENT")
     diagnostic = _diagnostic_payload(payload if isinstance(payload, Mapping) else {}, event)
     diagnostic["mode"] = mode
+    # Shadow is deliberately outside the semantic ledger.  It may leave a
+    # bounded runtime audit/probe for operational debugging, but it must not
+    # manufacture workflows, tasks, obligations, reports, or ledger events.
+    # In particular this keeps Stop/SubagentStop observational even when an
+    # old database contains unresolved delivery debt.
+    if mode == SHADOW_MODE:
+        if store is not None:
+            return _shadow_observe(payload, store.path.parent)
+        return _neutral_response()
     if store is not None:
         try:
             store.append_event(
@@ -867,21 +907,6 @@ def handle_hook(
             _append_audit(store.path.parent, kind, diagnostic)
         except Exception:
             pass
-        if mode == SHADOW_MODE and event in {"PreCompact", "PostCompact"}:
-            try:
-                append_probe_record(
-                    store.path.parent / "topology-probe.jsonl",
-                    normalize_hook_identity(payload),
-                    payload,
-                )
-            except Exception:
-                pass
-            try:
-                if event == "PreCompact":
-                    return _shadow_precompact(payload, store)
-                return _shadow_postcompact(payload, store)
-            except Exception:
-                return _neutral_response()
         if mode == "active" and event == "PreCompact":
             try:
                 return _active_precompact(payload, store)
@@ -948,8 +973,15 @@ def main(argv: list[str] | None = None) -> int:
     if payload is None:
         _append_audit(state_dir_from_environment(), "MALFORMED_HOOK_INPUT", {})
         return 0
+    if _hooks_paused():
+        sys.stdout.write(json.dumps(_neutral_response(), separators=(",", ":")) + "\n")
+        return 0
 
     state_dir = state_dir_from_environment()
+    if args.mode == SHADOW_MODE:
+        response = _shadow_observe(payload, state_dir)
+        sys.stdout.write(json.dumps(response, separators=(",", ":")) + "\n")
+        return 0
     store: SemanticStore | None = None
     try:
         store = SemanticStore(state_dir / "state.sqlite3").initialize()

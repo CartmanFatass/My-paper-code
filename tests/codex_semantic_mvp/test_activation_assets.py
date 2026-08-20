@@ -158,6 +158,100 @@ def test_doctor_reports_shadow_from_inline_toml(repo_root: Path, tmp_path: Path)
     assert result["mode"] == "shadow"
 
 
+def test_shadow_mcp_archives_explicit_pause_and_keeps_mcp_enabled(
+    repo_root: Path, tmp_path: Path
+) -> None:
+    stage = _stage(repo_root, tmp_path)
+    sentinel = stage / ".codex" / "semantic-hooks.paused"
+    sentinel.write_bytes(b"user-authorized pause\n")
+    config_before = (stage / ".codex" / "config.toml").read_bytes()
+
+    refused = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "ShadowMcp")
+    assert refused.returncode != 0
+    assert "SEMANTIC_HOOKS_PAUSED" in (refused.stdout + refused.stderr)
+    assert sentinel.read_bytes() == b"user-authorized pause\n"
+    assert (stage / ".codex" / "config.toml").read_bytes() == config_before
+
+    active_refused = _run_operator(
+        repo_root,
+        stage,
+        "codex-semantic-mvp-enable.ps1",
+        "-Mode",
+        "Active",
+        "-ResumePausedHooks",
+    )
+    assert active_refused.returncode != 0
+    assert "PAUSE_RESUME_REQUIRES_SHADOW_MCP" in (active_refused.stdout + active_refused.stderr)
+    assert sentinel.read_bytes() == b"user-authorized pause\n"
+
+    enabled = _run_operator(
+        repo_root,
+        stage,
+        "codex-semantic-mvp-enable.ps1",
+        "-Mode",
+        "ShadowMcp",
+        "-ResumePausedHooks",
+    )
+    assert enabled.returncode == 0, enabled.stderr
+    config = (stage / ".codex" / "config.toml").read_text()
+    assert "hooks = true" in config
+    assert config.count("enabled = true") == 1
+    assert "--mode shadow" in config
+    assert "--mode shadowmcp" not in config
+    assert not sentinel.exists()
+    state = json.loads((stage / "runtime/codex-semantic-mvp/activation-state.json").read_text())
+    assert state["mode"] == "shadow_mcp"
+    pause_backup = stage / "runtime/codex-semantic-mvp" / state["pause_sentinel_backup"]
+    assert pause_backup.read_bytes() == b"user-authorized pause\n"
+    assert collect_baseline(stage)["mode"] == "shadow_mcp"
+
+
+def test_disable_restore_pause_returns_to_paused_baseline(
+    repo_root: Path, tmp_path: Path
+) -> None:
+    stage = _stage(repo_root, tmp_path)
+    sentinel = stage / ".codex" / "semantic-hooks.paused"
+    sentinel.write_bytes(b"paused baseline\n")
+    enabled = _run_operator(
+        repo_root,
+        stage,
+        "codex-semantic-mvp-enable.ps1",
+        "-Mode",
+        "ShadowMcp",
+        "-ResumePausedHooks",
+    )
+    assert enabled.returncode == 0, enabled.stderr
+
+    disabled = _run_operator(repo_root, stage, "codex-semantic-mvp-disable.ps1", "-RestorePause")
+    assert disabled.returncode == 0, disabled.stderr
+    config = (stage / ".codex" / "config.toml").read_text()
+    assert "hooks = false" in config
+    assert config.count("enabled = false") == 1
+    assert sentinel.read_bytes() == b"paused baseline\n"
+
+
+def test_shadow_mcp_failure_restores_pause_and_feature_pause(
+    repo_root: Path, tmp_path: Path
+) -> None:
+    stage = _stage(repo_root, tmp_path)
+    sentinel = stage / ".codex" / "semantic-hooks.paused"
+    sentinel.write_bytes(b"pause remains authoritative\n")
+    result = _run_operator(
+        repo_root,
+        stage,
+        "codex-semantic-mvp-enable.ps1",
+        "-Mode",
+        "ShadowMcp",
+        "-ResumePausedHooks",
+        "-InjectFailureAt",
+        "config",
+    )
+    assert result.returncode != 0
+    assert "INJECTED_FAILURE" in (result.stdout + result.stderr)
+    assert sentinel.read_bytes() == b"pause remains authoritative\n"
+    assert "hooks = false" in (stage / ".codex" / "config.toml").read_text()
+
+
 def test_doctor_never_reports_active_for_malformed_inline_toml(repo_root: Path, tmp_path: Path):
     stage = _stage(repo_root, tmp_path)
     enabled = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", "Active")
@@ -678,7 +772,7 @@ def _native_active_stage(repo_root: Path, tmp_path: Path) -> Path:
     stage = _stage(repo_root, tmp_path)
     config = stage / ".codex" / "config.toml"
     config.write_text(
-        config.read_text().replace("enabled = false", "enabled = true", 1)
+        config.read_text().replace("hooks = false", "hooks = true", 1).replace("enabled = false", "enabled = true", 1)
         + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'
         + ''.join(
             f'[[hooks.{event}]]\n[[hooks.{event}.hooks]]\ntype = "command"\n'
@@ -831,7 +925,7 @@ def test_native_smoke_accepts_fake_native_audit_event_without_mutating_config_or
 ):
     stage = _stage(repo_root, tmp_path)
     config = stage / ".codex" / "config.toml"
-    config.write_text(config.read_text().replace("enabled = false", "enabled = true", 1))
+    config.write_text(config.read_text().replace("hooks = false", "hooks = true", 1).replace("enabled = false", "enabled = true", 1))
     config.write_text(
         config.read_text()
         + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'
@@ -879,7 +973,7 @@ def test_native_smoke_accepts_fake_native_audit_event_without_mutating_config_or
 def test_native_smoke_rejects_stdout_without_new_audit_event(repo_root: Path, tmp_path: Path):
     stage = _stage(repo_root, tmp_path)
     config = stage / ".codex" / "config.toml"
-    config.write_text(config.read_text().replace("enabled = false", "enabled = true", 1))
+    config.write_text(config.read_text().replace("hooks = false", "hooks = true", 1).replace("enabled = false", "enabled = true", 1))
     config.write_text(
         config.read_text()
         + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'
@@ -908,7 +1002,7 @@ def test_native_smoke_rejects_stdout_without_new_audit_event(repo_root: Path, tm
 def test_native_smoke_rejects_audit_event_for_wrong_cli_session(repo_root: Path, tmp_path: Path):
     stage = _stage(repo_root, tmp_path)
     config = stage / ".codex" / "config.toml"
-    config.write_text(config.read_text().replace("enabled = false", "enabled = true", 1))
+    config.write_text(config.read_text().replace("hooks = false", "hooks = true", 1).replace("enabled = false", "enabled = true", 1))
     config.write_text(
         config.read_text()
         + '\n# BEGIN HMASD CODEX SEMANTIC HOOKS\n'

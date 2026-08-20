@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
+import io
 import json
 from pathlib import Path
 
 import pytest
 
+from tools.codex_semantic_mvp import hook_entry
 from tools.codex_semantic_mvp.hook_entry import handle_hook
 from tools.codex_semantic_mvp.store import SemanticStore
 
@@ -16,6 +18,19 @@ def store(tmp_path: Path) -> SemanticStore:
     instance = SemanticStore(tmp_path / "state.sqlite3").initialize()
     yield instance
     instance.close()
+
+
+@pytest.fixture(autouse=True)
+def unpaused_semantic_hooks(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    """Keep ordinary behavior tests independent of the live pause sentinel."""
+    monkeypatch.setattr(hook_entry, "PAUSE_SENTINEL_PATH", tmp_path / "absent-hooks-pause-sentinel")
+
+
+@pytest.fixture
+def pause_sentinel(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> Path:
+    sentinel = tmp_path / "semantic-hooks.paused"
+    monkeypatch.setattr(hook_entry, "PAUSE_SENTINEL_PATH", sentinel)
+    return sentinel
 
 
 def valid_message(workflow_id: str, task_id: str) -> str:
@@ -78,6 +93,79 @@ def test_session_start_opens_always_on_workflow(store: SemanticStore) -> None:
     context = str(result.get("additionalContext") or "")
     assert "HMASD_WORKFLOW_CURRENT_V1" in context
     assert f"workflow_id={workflow['workflow_id']}" in context
+
+
+def test_pause_sentinel_makes_active_session_start_neutral_then_restores(
+    store: SemanticStore, pause_sentinel: Path
+) -> None:
+    pause_sentinel.write_text("paused\n", encoding="utf-8")
+
+    assert handle_hook(payload("SessionStart"), "active", store) == {"continue": True}
+    assert store.events_after(None) == []
+    assert store.current_workflow("session-active") is None
+
+    pause_sentinel.unlink()
+    restored = handle_hook(payload("SessionStart"), "active", store)
+    assert restored and "HMASD_WORKFLOW_CURRENT_V1" in restored["additionalContext"]
+    assert store.current_workflow("session-active") is not None
+
+
+def test_pause_sentinel_makes_active_subagent_stop_neutral_without_report_mutation(
+    store: SemanticStore, pause_sentinel: Path
+) -> None:
+    workflow_id, task_id = managed(store)
+    before_events = store.events_after(None)
+    pause_sentinel.write_text("paused\n", encoding="utf-8")
+
+    result = handle_hook(
+        payload("SubagentStop", last_assistant_message=valid_message(workflow_id, task_id)),
+        "active",
+        store,
+    )
+    assert result == {"continue": True}
+    assert store.events_after(None) == before_events
+    assert store.workflow_state(workflow_id)["tasks"][0]["lifecycle"] == "DECLARED"
+
+    pause_sentinel.unlink()
+    assert handle_hook(
+        payload("SubagentStop", last_assistant_message=valid_message(workflow_id, task_id)),
+        "active",
+        store,
+    ) == {"continue": True}
+    assert store.workflow_state(workflow_id)["tasks"][0]["lifecycle"] == "RETURNED_TYPED"
+
+
+def test_pause_sentinel_makes_active_stop_neutral_without_obligation_mutation(
+    store: SemanticStore, pause_sentinel: Path
+) -> None:
+    workflow_id, task_id = managed(store)
+    store.record_agent_started(workflow_id, task_id, "agent-1", "default")
+    before_events = store.events_after(None)
+    pause_sentinel.write_text("paused\n", encoding="utf-8")
+
+    assert handle_hook(payload("Stop"), "active", store) == {"continue": True}
+    assert store.events_after(None) == before_events
+
+    pause_sentinel.unlink()
+    restored = handle_hook(payload("Stop"), "active", store)
+    assert restored and restored["decision"] == "block"
+
+
+def test_pause_sentinel_skips_store_initialization(
+    monkeypatch: pytest.MonkeyPatch, pause_sentinel: Path
+) -> None:
+    pause_sentinel.write_text("paused\n", encoding="utf-8")
+
+    def store_must_not_initialize(*_args: object, **_kwargs: object) -> None:
+        raise AssertionError("SemanticStore must not initialize while paused")
+
+    output = io.StringIO()
+    monkeypatch.setattr(hook_entry, "SemanticStore", store_must_not_initialize)
+    monkeypatch.setattr(hook_entry.sys, "stdin", io.StringIO(json.dumps(payload("SessionStart"))))
+    monkeypatch.setattr(hook_entry.sys, "stdout", output)
+
+    assert hook_entry.main(["--mode", "active"]) == 0
+    assert json.loads(output.getvalue()) == {"continue": True}
 
 
 def test_subagent_start_auto_opens_and_adds_contract(store: SemanticStore) -> None:

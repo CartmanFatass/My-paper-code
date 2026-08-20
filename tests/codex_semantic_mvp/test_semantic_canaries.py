@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from tools.codex_semantic_mvp import hook_entry
 from tools.codex_semantic_mvp.constants import RETURN_END, RETURN_START
 from tools.codex_semantic_mvp.hook_entry import handle_hook
 from tools.codex_semantic_mvp.protocol import (
@@ -20,6 +21,11 @@ RAW_PHRASES = [
     "I cannot proceed",
     "released",
 ]
+
+
+@pytest.fixture(autouse=True)
+def unpaused_semantic_hooks(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    monkeypatch.setattr(hook_entry, "PAUSE_SENTINEL_PATH", tmp_path / "absent-hooks-pause-sentinel")
 
 
 def valid_data() -> dict[str, object]:

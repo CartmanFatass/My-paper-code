@@ -177,6 +177,61 @@ def test_invalid_wait_bounds_and_condition_are_rejected(tmp_path, arguments):
     run(scenario)
 
 
+def test_await_tool_schema_exposes_closed_condition_enum(tmp_path):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            tools = await client.list_tools()
+            await_tool = next(tool for tool in tools.tools if tool.name == "workflow_await_event")
+            condition_schema = await_tool.input_schema["properties"]["condition"]
+            assert condition_schema["enum"] == [
+                "ANY_REPORT",
+                "ALL_REQUIRED_RETURNED",
+                "OPEN_OBLIGATION_CHANGED",
+                "WORKFLOW_QUIESCENT",
+            ]
+            assert condition_schema["default"] == "ANY_REPORT"
+
+    run(scenario)
+
+
+def test_await_runtime_keeps_server_side_condition_validation(tmp_path):
+    async def scenario():
+        mcp_server.build_server(tmp_path)
+        store = mcp_server._get_store()
+        with pytest.raises(
+            ValueError,
+            match="unknown await condition: decision-level report from recovery owner",
+        ):
+            await mcp_server.await_events(
+                store,
+                "uncreated-workflow",
+                condition="decision-level report from recovery owner",
+                timeout_s=1,
+            )
+        assert store.events_after(None) == []
+
+    run(scenario)
+
+
+def test_state_and_current_expose_await_cursor_not_state_version(tmp_path):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            workflow_id = await open_workflow(client)
+            before = await call(client, "workflow_state", {"workflow_id": workflow_id})
+            mcp_server._get_store().append_event(
+                workflow_id, "CURSOR_CANARY", "subject", {}, "cursor-canary"
+            )
+            state = await call(client, "workflow_state", {"workflow_id": workflow_id})
+            current = await call(client, "workflow_current", {"session_id": "long-wait-session"})
+
+            assert state["state_version"] == before["state_version"]
+            assert state["await_cursor"] > before["await_cursor"]
+            assert state["await_cursor"] != state["state_version"]
+            assert current["await_cursor"] == state["await_cursor"]
+
+    run(scenario)
+
+
 def test_task_ids_must_belong_to_workflow(tmp_path):
     async def scenario():
         async with connected_server(tmp_path) as client:

@@ -189,6 +189,11 @@ def _mode(
             return "active"
         if hook_mode == "shadow" and not server_enabled:
             return "shadow"
+        if hook_mode == "shadow" and server_enabled:
+            # ShadowMcp intentionally keeps the explicit MCP tools enabled
+            # while hooks remain audit/probe-only.  It is distinct from the
+            # legacy offline shadow rollout rather than an invalid hybrid.
+            return "shadow_mcp"
     return "unknown"
 
 

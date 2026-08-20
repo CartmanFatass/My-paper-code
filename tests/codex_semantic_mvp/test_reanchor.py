@@ -1,5 +1,8 @@
 from pathlib import Path
 
+import pytest
+
+from tools.codex_semantic_mvp import hook_entry
 from tools.codex_semantic_mvp.actor_registry import register_session_root
 from tools.codex_semantic_mvp.checkpoints import (
     context_reanchor_ack,
@@ -10,6 +13,11 @@ from tools.codex_semantic_mvp.checkpoints import (
 )
 from tools.codex_semantic_mvp.hook_entry import handle_hook
 from tools.codex_semantic_mvp.store import SemanticStore
+
+
+@pytest.fixture(autouse=True)
+def unpaused_semantic_hooks(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+    monkeypatch.setattr(hook_entry, "PAUSE_SENTINEL_PATH", tmp_path / "absent-hooks-pause-sentinel")
 
 
 def test_compact_and_resume_open_reanchor_obligation(tmp_path: Path) -> None:
