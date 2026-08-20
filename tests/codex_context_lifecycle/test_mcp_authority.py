@@ -1,17 +1,30 @@
+import ast
+import inspect
 import json
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 import anyio
+import pytest
 
 from mcp.client import ClientSession
 from mcp.shared.memory import create_client_server_memory_streams
 
 from tests.codex_context_lifecycle.helpers import make_pair, open_em_epoch
-from tools.codex_context_lifecycle.authority import bind_requester, grant_user_authority
+from tools.codex_context_lifecycle.authority import (
+    AuthorityError,
+    bind_requester,
+    grant_user_authority,
+)
 from tools.codex_context_lifecycle.models import PromotionKind
 from tools.codex_semantic_mvp import mcp_server
 from tools.codex_semantic_mvp.actor_models import EpochKind
 from tools.codex_semantic_mvp.epochs import plan_epoch_open
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover
+    import tomli as tomllib
 
 
 def run(coro):
@@ -257,3 +270,173 @@ def test_mcp_epoch_revise_rejects_source_not_visible_to_actor(tmp_path) -> None:
             )
             assert result.is_error
     run(scenario)
+
+
+def test_every_mutation_tool_has_explicit_admission_parameters_and_call(tmp_path) -> None:
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            tools = {tool.name: tool for tool in (await client.list_tools()).tools}
+            assert set(tools) == set(mcp_server.ORCHESTRATOR_TOOL_ALLOWLIST)
+            assert set(mcp_server.MUTATION_OPERATION_BY_TOOL) == set(
+                mcp_server.MUTATING_TOOL_NAMES
+            )
+            for name in mcp_server.MUTATING_TOOL_NAMES:
+                properties = tools[name].input_schema["properties"]
+                assert {
+                    "source_kind",
+                    "requester_actor_context_id",
+                    "user_authority_id",
+                } <= set(properties), name
+
+        tree = ast.parse(inspect.getsource(mcp_server._register_tools))
+        functions = {
+            node.name: node
+            for node in ast.walk(tree)
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+        }
+        for name in mcp_server.MUTATING_TOOL_NAMES:
+            calls = {
+                node.func.id
+                for node in ast.walk(functions[name])
+                if isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+            }
+            assert "_admit_mutation" in calls, name
+
+    run(scenario)
+
+
+def test_uniform_admission_rejects_wrong_owner_inactive_and_missing_source_without_writes(
+    tmp_path,
+) -> None:
+    mcp_server.build_server(tmp_path)
+    store = mcp_server._get_store()
+    root, em, cm = make_pair(store)
+
+    for operation in sorted(set(mcp_server.MUTATION_OPERATION_BY_TOOL.values())):
+        bind_requester(em.actor_context_id)
+        before = store.connection.total_changes
+        accepted_store, accepted = mcp_server._admit_mutation(
+            em.actor_context_id,
+            "ROLE_CONTRACT",
+            operation,
+            owner_actor_context_id=em.actor_context_id,
+        )
+        assert accepted_store is store
+        assert accepted.actor_context_id == em.actor_context_id
+        assert store.connection.total_changes == before
+
+        bind_requester(cm.actor_context_id)
+        grant = grant_user_authority(
+            store, actor_context_id=cm.actor_context_id, operation=operation
+        )
+        before = store.connection.total_changes
+        with pytest.raises(AuthorityError):
+            mcp_server._admit_mutation(
+                cm.actor_context_id,
+                "USER_AUTHORITY",
+                operation,
+                grant["grant_id"],
+                owner_actor_context_id=em.actor_context_id,
+            )
+        assert store.connection.total_changes == before
+        consumed = store.connection.execute(
+            "SELECT consumed_at FROM user_authority_grants WHERE grant_id = ?",
+            (grant["grant_id"],),
+        ).fetchone()
+        assert consumed["consumed_at"] is None
+
+        bind_requester(em.actor_context_id)
+        before = store.connection.total_changes
+        with pytest.raises(AuthorityError):
+            mcp_server._admit_mutation(
+                em.actor_context_id,
+                None,
+                operation,
+                owner_actor_context_id=em.actor_context_id,
+            )
+        assert store.connection.total_changes == before
+
+    store.connection.execute(
+        "UPDATE actor_contexts SET state = 'RELEASED' WHERE actor_context_id = ?",
+        (em.actor_context_id,),
+    )
+    store.connection.commit()
+    bind_requester(em.actor_context_id)
+    before = store.connection.total_changes
+    with pytest.raises(AuthorityError, match="not ACTIVE"):
+        mcp_server._admit_mutation(
+            em.actor_context_id,
+            "ROLE_CONTRACT",
+            "write_semantic_commit",
+            owner_actor_context_id=em.actor_context_id,
+        )
+    assert store.connection.total_changes == before
+    del root
+
+
+def test_root_only_admission_and_raw_report_access_are_owner_scoped(tmp_path) -> None:
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            store = mcp_server._get_store()
+            root, em, _cm = make_pair(store, session_id="raw-session")
+            root_workflow = store.current_actor_workflow(root.actor_context_id)
+            assert root_workflow is not None
+            workflow_id = str(root_workflow["workflow_id"])
+            store.register_task(workflow_id, "child", "worker", "return", True)
+            report_id = store.record_untyped_return(
+                workflow_id, "child", "agent", "worker", "sensitive raw report"
+            )
+
+            bind_requester(em.actor_context_id)
+            wrong = await client.call_tool(
+                "report_get",
+                {
+                    "workflow_id": workflow_id,
+                    "report_id": report_id,
+                    "include_raw": True,
+                    "requester_actor_context_id": em.actor_context_id,
+                },
+            )
+            assert wrong.is_error
+
+            bind_requester(root.actor_context_id)
+            raw = await call(
+                client,
+                "report_get",
+                {
+                    "workflow_id": workflow_id,
+                    "report_id": report_id,
+                    "include_raw": True,
+                    "requester_actor_context_id": root.actor_context_id,
+                },
+            )
+            assert raw["raw_message"] == "sensitive raw report"
+
+            bind_requester(em.actor_context_id)
+            with pytest.raises(AuthorityError):
+                mcp_server._admit_mutation(
+                    em.actor_context_id,
+                    "ROLE_CONTRACT",
+                    "open_workflow",
+                    owner_actor_context_id=em.actor_context_id,
+                    root_only=True,
+                )
+
+    run(scenario)
+
+
+def test_live_config_allowlists_match_static_server_inventories() -> None:
+    root = Path(__file__).resolve().parents[2]
+    config = tomllib.loads((root / ".codex/config.toml").read_text(encoding="utf-8"))
+    orchestrator = config["mcp_servers"]["hmasd_orchestrator"]
+    observability = config["mcp_servers"]["hmasd_observability"]
+    from tools.hmasd_control_plane.mcp_server import OBSERVABILITY_TOOL_ALLOWLIST
+
+    assert orchestrator["enabled"] is True
+    assert orchestrator["required"] is False
+    assert orchestrator["enabled_tools"] == list(
+        mcp_server.ORCHESTRATOR_TOOL_ALLOWLIST
+    )
+    assert observability["enabled"] is True
+    assert observability["required"] is False
+    assert observability["enabled_tools"] == list(OBSERVABILITY_TOOL_ALLOWLIST)

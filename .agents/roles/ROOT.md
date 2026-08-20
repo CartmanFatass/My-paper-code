@@ -182,6 +182,21 @@ cross-scope conflict, new user authority, or a science-bearing change. Root
 allocates shared resources but does not receive guard readings, launcher facts,
 Operator progress or routine retry reports.
 
+## Deterministic active-turn waiting
+
+Waiting is routed by owner rather than inferred from free text. First inspect
+the native collaboration tree. If any native child is still running, use
+`collaboration.wait_agent`; the semantic ledger is not a substitute for that
+native wait. Only when no native child is running may Root call
+`workflow_wait_plan(session_id)`. Call `workflow_await_event` only when that
+read-only plan returns `WAIT_SEMANTIC_EVENT`, and copy its exact `condition`,
+`after_seq`, `task_ids`, and `timeout_s`. `after_seq` always comes from the
+workflow `await_cursor`, never `state_version`, and an await condition is never
+free-form prose. File-backed long effects are observed only with
+`long_effect_observe`; their synchronous owner or Experiment Operator retains
+execution ownership. If none of those routes applies, end the current Root
+turn. No wait tool provides automatic wake after a Codex task has ended.
+
 ## Decision milestones and report filtering
 
 Return to Root when the core mechanism is supported, contradicted or cannot be

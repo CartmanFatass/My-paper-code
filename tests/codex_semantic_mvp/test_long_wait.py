@@ -11,6 +11,8 @@ from mcp.client import ClientSession
 from mcp.shared.memory import create_client_server_memory_streams
 
 from tools.codex_semantic_mvp import mcp_server
+from tools.codex_context_lifecycle.authority import bind_requester
+from tools.codex_semantic_mvp.actor_registry import register_session_root
 
 
 def run(coro):
@@ -35,7 +37,22 @@ async def connected_server(state_dir):
 
 
 async def call(client, name, arguments=None):
-    result = await client.call_tool(name, arguments or {})
+    arguments = dict(arguments or {})
+    if name in mcp_server.MUTATING_TOOL_NAMES and "requester_actor_context_id" not in arguments:
+        store = mcp_server._get_store()
+        if name == "workflow_open":
+            actor = register_session_root(store, session_id=arguments["session_id"])
+            requester = actor.actor_context_id
+        elif "workflow_id" in arguments:
+            requester = mcp_server._workflow_owner(store, arguments["workflow_id"])
+        else:  # pragma: no cover - this helper only exercises Root workflow tools
+            raise AssertionError(f"test helper cannot infer owner for {name}")
+        bind_requester(requester)
+        arguments.update(
+            source_kind="ROLE_CONTRACT",
+            requester_actor_context_id=requester,
+        )
+    result = await client.call_tool(name, arguments)
     if result.is_error:
         text = result.content[0].text if result.content else ""
         raise RuntimeError(text)
@@ -177,6 +194,53 @@ def test_invalid_wait_bounds_and_condition_are_rejected(tmp_path, arguments):
     run(scenario)
 
 
+def test_wait_holds_no_sqlite_transaction_across_sleep(tmp_path):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            workflow_id = await open_workflow(client)
+            await call(
+                client,
+                "task_register",
+                {
+                    "workflow_id": workflow_id,
+                    "task_id": "child",
+                    "expected_agent_type": "worker",
+                    "objective": "emit report",
+                },
+            )
+            store = mcp_server._get_store()
+            cursor = store.workflow_state(workflow_id)["await_cursor"]
+            waiter = asyncio.create_task(
+                call(
+                    client,
+                    "workflow_await_event",
+                    {
+                        "workflow_id": workflow_id,
+                        "after_seq": cursor,
+                        "condition": "ANY_REPORT",
+                        "timeout_s": 5,
+                    },
+                )
+            )
+            await asyncio.sleep(0.1)
+            assert store.connection.in_transaction is False
+
+            from tools.codex_semantic_mvp.store import SemanticStore
+
+            writer = SemanticStore(store.path).initialize()
+            try:
+                writer.record_untyped_return(
+                    workflow_id, "child", "agent", "worker", "cross-connection"
+                )
+            finally:
+                writer.close()
+            result = await waiter
+            assert result["status"] == "EVENT"
+            assert result["events"][0]["task_id"] == "child"
+
+    run(scenario)
+
+
 def test_await_tool_schema_exposes_closed_condition_enum(tmp_path):
     async def scenario():
         async with connected_server(tmp_path) as client:
@@ -258,6 +322,182 @@ def test_store_exposes_cursor_first_await_events(tmp_path):
             store.append_event(workflow_id, "CANARY", "subject", {}, "canary-await-events")
             events = store.await_events(workflow_id, after_seq=0)
             assert [event["kind"] for event in events] == ["WORKFLOW_OPENED", "CANARY"]
+
+    run(scenario)
+
+
+def test_wait_plan_covers_all_actions_with_fixed_priority(tmp_path):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            none = await call(
+                client, "workflow_wait_plan", {"session_id": "no-workflow"}
+            )
+            assert none == {
+                "schema": "HMASD_WORKFLOW_WAIT_PLAN_V1",
+                "action": "NO_ACTIVE_WORKFLOW",
+                "workflow_id": None,
+                "condition": None,
+                "after_seq": None,
+                "task_ids": [],
+                "timeout_s": None,
+                "reason_code": "NO_ACTIVE_WORKFLOW",
+            }
+
+            close_workflow = (
+                await call(
+                    client,
+                    "workflow_open",
+                    {
+                        "session_id": "close-session",
+                        "opened_turn_id": "turn",
+                        "scope": "test",
+                        "objective": "close",
+                    },
+                )
+            )["workflow_id"]
+            close_plan = await call(
+                client, "workflow_wait_plan", {"session_id": "close-session"}
+            )
+            assert close_plan["action"] == "WORKFLOW_CLOSE_ELIGIBLE"
+            assert close_plan["workflow_id"] == close_workflow
+
+            wait_workflow = (
+                await call(
+                    client,
+                    "workflow_open",
+                    {
+                        "session_id": "wait-session",
+                        "opened_turn_id": "turn",
+                        "scope": "test",
+                        "objective": "wait",
+                    },
+                )
+            )["workflow_id"]
+            await call(
+                client,
+                "task_register",
+                {
+                    "workflow_id": wait_workflow,
+                    "task_id": "child-wait",
+                    "expected_agent_type": "worker",
+                    "objective": "return",
+                },
+            )
+            mcp_server._get_store().append_event(
+                wait_workflow, "CURSOR_ONLY", "fixture", {}, "wait-plan-cursor-only"
+            )
+            state_before = await call(
+                client, "workflow_state", {"workflow_id": wait_workflow}
+            )
+            wait_plan = await call(
+                client,
+                "workflow_wait_plan",
+                {"session_id": "wait-session", "timeout_s": 321},
+            )
+            assert wait_plan["action"] == "WAIT_SEMANTIC_EVENT"
+            assert wait_plan["condition"] == "ANY_REPORT"
+            assert wait_plan["after_seq"] == state_before["await_cursor"]
+            assert wait_plan["after_seq"] != state_before["state_version"]
+            assert wait_plan["task_ids"] == ["child-wait"]
+            assert wait_plan["timeout_s"] == 321
+            assert await call(
+                client, "workflow_state", {"workflow_id": wait_workflow}
+            ) == state_before
+
+            obligation_workflow = (
+                await call(
+                    client,
+                    "workflow_open",
+                    {
+                        "session_id": "obligation-session",
+                        "opened_turn_id": "turn",
+                        "scope": "test",
+                        "objective": "obligation",
+                    },
+                )
+            )["workflow_id"]
+            await call(
+                client,
+                "obligation_open",
+                {
+                    "workflow_id": obligation_workflow,
+                    "kind": "USER_DECISION_REQUIRED",
+                    "owner": "/root",
+                    "subject": "choice",
+                    "reason": "choose",
+                    "source_ref": "user",
+                },
+            )
+            obligation_plan = await call(
+                client,
+                "workflow_wait_plan",
+                {"session_id": "obligation-session"},
+            )
+            assert obligation_plan["action"] == "OBLIGATION_ACTION_REQUIRED"
+
+            report_workflow = (
+                await call(
+                    client,
+                    "workflow_open",
+                    {
+                        "session_id": "report-session",
+                        "opened_turn_id": "turn",
+                        "scope": "test",
+                        "objective": "report",
+                    },
+                )
+            )["workflow_id"]
+            await call(
+                client,
+                "task_register",
+                {
+                    "workflow_id": report_workflow,
+                    "task_id": "child-report",
+                    "expected_agent_type": "worker",
+                    "objective": "return",
+                },
+            )
+            mcp_server._get_store().record_untyped_return(
+                report_workflow, "child-report", "agent", "worker", "private"
+            )
+            report_plan = await call(
+                client,
+                "workflow_wait_plan",
+                {"session_id": "report-session"},
+            )
+            assert report_plan["action"] == "REPORT_INTAKE_REQUIRED"
+            assert report_plan["task_ids"] == ["child-report"]
+            assert report_plan["condition"] is None
+            assert report_plan["after_seq"] is None
+
+    run(scenario)
+
+
+def test_wait_plan_schema_and_server_instructions_lock_native_routing(tmp_path):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            tools = await client.list_tools()
+            assert tuple(tool.name for tool in tools.tools) == mcp_server.ORCHESTRATOR_TOOL_ALLOWLIST
+            wait_plan = next(tool for tool in tools.tools if tool.name == "workflow_wait_plan")
+            timeout_schema = wait_plan.input_schema["properties"]["timeout_s"]
+            assert timeout_schema["default"] == 900
+            assert "collaboration.wait_agent" in mcp_server.ORCHESTRATOR_INSTRUCTIONS
+            assert "workflow_wait_plan" in mcp_server.ORCHESTRATOR_INSTRUCTIONS
+            assert "await_cursor" in mcp_server.ORCHESTRATOR_INSTRUCTIONS
+            assert "state_version" in mcp_server.ORCHESTRATOR_INSTRUCTIONS
+
+    run(scenario)
+
+
+@pytest.mark.parametrize("timeout_s", [0, 1501, 1.5, True])
+def test_wait_plan_timeout_is_strict(tmp_path, timeout_s):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            result = await client.call_tool(
+                "workflow_wait_plan",
+                {"session_id": "session", "timeout_s": timeout_s},
+            )
+            assert result.is_error
 
     run(scenario)
 

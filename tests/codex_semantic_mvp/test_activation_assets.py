@@ -8,6 +8,11 @@ from pathlib import Path
 
 import pytest
 
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover
+    import tomli as tomllib
+
 from tests.codex_semantic_mvp.conftest import powershell_executable, windows_powershell_51
 from tools.codex_semantic_mvp.constants import (
     ACTIVE_HOOK_EVENTS,
@@ -19,6 +24,19 @@ from tools.codex_semantic_mvp.constants import (
     STATE_DIR_ENV,
 )
 from tools.codex_semantic_mvp.doctor import _runtime_writable, collect_baseline, installed_mcp_version
+
+
+def _mcp_enabled(config_text: str, server_name: str) -> bool:
+    return bool(tomllib.loads(config_text)["mcp_servers"][server_name]["enabled"])
+
+
+def _normalize_orchestrator_enabled(config_text: str) -> str:
+    return re.sub(
+        r"(?ms)(^\[mcp_servers\.hmasd_orchestrator\]\s*.*?^enabled\s*=\s*)(?:true|false)(\s*$)",
+        r"\1<mcp>\2",
+        config_text,
+        count=1,
+    )
 
 
 def _stage(repo_root: Path, tmp_path: Path) -> Path:
@@ -125,7 +143,10 @@ def test_activation_templates_and_config_contract(repo_root: Path):
     assert config.count("# END HMASD CODEX SEMANTIC MVP") == 1
     assert '"C:\\\\Users\\\\fires\\\\.conda\\\\envs\\\\hmasd-amd-cpu\\\\python.exe"' in config
     assert "tool_timeout_sec = 1800" in config
-    assert ("enabled = true" if "# BEGIN HMASD CODEX SEMANTIC HOOKS" in config else "enabled = false") in config
+    assert _mcp_enabled(config, "hmasd_orchestrator") is (
+        "# BEGIN HMASD CODEX SEMANTIC HOOKS" in config
+    )
+    assert _mcp_enabled(config, "hmasd_observability") is True
 
 
 def test_doctor_reports_machine_readable_activation_state(repo_root: Path):
@@ -134,7 +155,10 @@ def test_doctor_reports_machine_readable_activation_state(repo_root: Path):
     assert result["config_hash"] == result["config_toml"]["sha256"]
     assert result["mcp_version"] == "2.0.0"
     assert result["server_config_present"] is True
-    expected_enabled = 'enabled = true' in (repo_root / ".codex" / "config.toml").read_text()
+    expected_enabled = _mcp_enabled(
+        (repo_root / ".codex" / "config.toml").read_text(),
+        "hmasd_orchestrator",
+    )
     assert result["server_enabled"] is expected_enabled
     assert result["runtime_writable"] is True
     # A live ACTIVE block that predates compaction hooks is not the current
@@ -202,7 +226,8 @@ def test_shadow_mcp_archives_explicit_pause_and_keeps_mcp_enabled(
     assert enabled.returncode == 0, enabled.stderr
     config = (stage / ".codex" / "config.toml").read_text()
     assert "hooks = true" in config
-    assert config.count("enabled = true") == 1
+    assert _mcp_enabled(config, "hmasd_orchestrator") is True
+    assert _mcp_enabled(config, "hmasd_observability") is True
     assert "--mode shadow" in config
     assert "--mode shadowmcp" not in config
     assert not sentinel.exists()
@@ -233,7 +258,8 @@ def test_disable_restore_pause_returns_to_paused_baseline(
     assert disabled.returncode == 0, disabled.stderr
     config = (stage / ".codex" / "config.toml").read_text()
     assert "hooks = false" in config
-    assert config.count("enabled = false") == 1
+    assert _mcp_enabled(config, "hmasd_orchestrator") is False
+    assert _mcp_enabled(config, "hmasd_observability") is True
     assert sentinel.read_bytes() == b"paused baseline\n"
 
 
@@ -596,8 +622,8 @@ def test_successful_activation_sets_explicit_mcp_enabled_value(
     result = _run_operator(repo_root, stage, "codex-semantic-mvp-enable.ps1", "-Mode", mode)
     assert result.returncode == 0, result.stderr
     config = (stage / ".codex" / "config.toml").read_text()
-    assert config.count(f"enabled = {expected}") == 1
-    assert config.count("enabled = true") + config.count("enabled = false") == 1
+    assert _mcp_enabled(config, "hmasd_orchestrator") is (expected == "true")
+    assert _mcp_enabled(config, "hmasd_observability") is True
 
 
 def test_successful_disable_restores_hooks_config_and_expected_state(
@@ -644,8 +670,8 @@ def test_active_activation_installs_inline_toml_handlers_and_enables_mcp(
     assert f'command = "{toml_python} -m tools.codex_semantic_mvp.hook_entry --mode active"' in hook_block
     assert hook_block.count(f'commandWindows = "{toml_python} -m tools.codex_semantic_mvp.hook_entry --mode active"') == len(ACTIVE_HOOK_EVENTS)
     assert '"runtime/codex-semantic-mvp"' in config
-    assert config.count("enabled = true") == 1
-    assert config.count("enabled = false") == 0
+    assert _mcp_enabled(config, "hmasd_orchestrator") is True
+    assert _mcp_enabled(config, "hmasd_observability") is True
 
 
 def test_activation_leaves_legacy_hooks_json_byte_exact(
@@ -720,7 +746,9 @@ def test_active_replaces_managed_shadow_block_without_changing_unrelated_config(
     shadow_end = shadow_text.index(end) + len(end)
     active_begin = active_text.index(begin)
     active_end = active_text.index(end) + len(end)
-    assert shadow_text[:shadow_begin].replace("enabled = false", "enabled = <mcp>") == active_text[:active_begin].replace("enabled = true", "enabled = <mcp>")
+    assert _normalize_orchestrator_enabled(
+        shadow_text[:shadow_begin]
+    ) == _normalize_orchestrator_enabled(active_text[:active_begin])
     assert shadow_text[shadow_end:] == active_text[active_end:]
     assert "--mode shadow" in shadow_text[shadow_begin:shadow_end]
     assert "--mode active" in active_text[active_begin:active_end]
@@ -741,8 +769,8 @@ def test_disable_removes_inline_toml_handlers_and_disables_mcp(
     config = (stage / ".codex" / "config.toml").read_text()
     assert "# BEGIN HMASD CODEX SEMANTIC HOOKS" not in config
     assert "# END HMASD CODEX SEMANTIC HOOKS" not in config
-    assert config.count("enabled = false") == 1
-    assert config.count("enabled = true") == 0
+    assert _mcp_enabled(config, "hmasd_orchestrator") is False
+    assert _mcp_enabled(config, "hmasd_observability") is True
 
 
 @pytest.mark.parametrize(

@@ -148,6 +148,62 @@ startup_timeout_sec = 15
 tool_timeout_sec = 1800
 enabled = true
 required = false
+enabled_tools = [
+  "runtime_health",
+  "workflow_current",
+  "workflow_wait_plan",
+  "workflow_open",
+  "task_register",
+  "task_bind",
+  "workflow_state",
+  "report_get",
+  "root_record_intake",
+  "obligation_open",
+  "obligation_resolve",
+  "workflow_await_event",
+  "workflow_close",
+  "actor_context_current",
+  "plan_epoch_open",
+  "plan_epoch_current",
+  "plan_epoch_revise",
+  "plan_epoch_close",
+  "semantic_commit_write",
+  "semantic_commit_current",
+  "context_checkpoint_materialize",
+  "context_checkpoint_current",
+  "context_reanchor_ack",
+  "packet_register",
+  "packet_ack",
+  "context_promotion_propose",
+  "context_promotion_resolve",
+  "context_promotion_mark_applied",
+  "context_promotion_list",
+  "plan_epoch_rollover_prepare",
+  "plan_epoch_rollover_confirm",
+  "plan_epoch_rollover_apply",
+  "plan_epoch_rollover_current",
+  "working_set_refs",
+]
+
+[mcp_servers.hmasd_observability]
+command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe"
+args = [
+  "-m",
+  "tools.hmasd_control_plane.mcp_server",
+  "--repo-root",
+  "C:\\Projects\\HMASD"
+]
+startup_timeout_sec = 15
+tool_timeout_sec = 120
+enabled = true
+required = false
+enabled_tools = [
+  "control_plane_health",
+  "control_plane_doctor",
+  "control_plane_incidents",
+  "long_effect_observe",
+  "mcp_instance_list",
+]
 # END HMASD CODEX SEMANTIC MVP
 
 # BEGIN HMASD CODEX SEMANTIC HOOKS

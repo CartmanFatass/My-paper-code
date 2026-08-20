@@ -11,6 +11,8 @@ from mcp.client import ClientSession
 from mcp.shared.memory import create_client_server_memory_streams
 
 from tools.codex_semantic_mvp import mcp_server
+from tools.codex_context_lifecycle.authority import bind_requester
+from tools.codex_semantic_mvp.actor_registry import register_session_root
 
 
 def run(coro):
@@ -35,7 +37,22 @@ async def connected_server(state_dir):
 
 
 async def call(client, name, arguments=None):
-    result = await client.call_tool(name, arguments or {})
+    arguments = dict(arguments or {})
+    if name in mcp_server.MUTATING_TOOL_NAMES and "requester_actor_context_id" not in arguments:
+        store = mcp_server._get_store()
+        if name == "workflow_open":
+            actor = register_session_root(store, session_id=arguments["session_id"])
+            requester = actor.actor_context_id
+        elif "workflow_id" in arguments:
+            requester = mcp_server._workflow_owner(store, arguments["workflow_id"])
+        else:  # pragma: no cover - this helper only exercises Root workflow tools
+            raise AssertionError(f"test helper cannot infer owner for {name}")
+        bind_requester(requester)
+        arguments.update(
+            source_kind="ROLE_CONTRACT",
+            requester_actor_context_id=requester,
+        )
+    result = await client.call_tool(name, arguments)
     if result.is_error:
         text = result.content[0].text if result.content else ""
         raise RuntimeError(text)
