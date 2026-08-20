@@ -153,12 +153,22 @@ class WakeBatchStore:
         if not included:
             raise WakeBatchError("wake envelope could not include any message")
         now = _now()
+        from .durability.effects import EffectJournal
+
+        effect = EffectJournal(self.store.connection).prepare_effect(
+            owner_kind="WAKE_BATCH",
+            owner_id=wake_batch_id,
+            binding_id=binding_id,
+            method="turn/start",
+            client_key=client_id,
+            request={"threadId": thread_id, "clientUserMessageId": client_id},
+        )
         with self.store._lock, self.store.connection:
             self.store.connection.execute(
                 """INSERT INTO wake_batches (
                     wake_batch_id, binding_id, thread_id, state, client_user_message_id,
-                    prepared_at, lease_generation, lease_holder
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                    prepared_at, lease_generation, lease_holder, effect_id
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
                     wake_batch_id,
                     binding_id,
@@ -168,6 +178,7 @@ class WakeBatchStore:
                     now,
                     lease_generation,
                     lease_holder,
+                    effect.effect_id,
                 ),
             )
             for ordinal, message in enumerate(included):

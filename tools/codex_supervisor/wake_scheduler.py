@@ -15,7 +15,6 @@ from .managed_models import BindingState, ManagedActorKind
 from .scheduler_leases import LeaseError, SchedulerLeases
 from .semantic_bridge import SemanticBridge, SemanticBridgeError
 from .semantic_scanner import SemanticScanner
-from .session_guard import SessionGuard
 from .transport import TransportClosed
 from .wake_batches import WakeBatchError, WakeBatchStore
 from .wake_recovery import WakeRecovery
@@ -171,23 +170,20 @@ class WakeScheduler:
             "approvalPolicy": "never",
             "clientUserMessageId": batch["client_user_message_id"],
         }
+        effect_id = str(batch.get("effect_id") or "")
+        if not effect_id:
+            raise WakeSchedulerError("wake batch has no linked effect")
+        from .durability.session_owner import AppServerSessionOwner
 
-        def _incident(_payload: object) -> None:
-            self.batches.set_state(
-                wake_batch_id,
-                state=WakeBatchState.INCIDENT.value,
-                incident_json=json.dumps({"reason": "server_request"}),
-            )
-            self.recovery._record_attempt(
-                wake_batch_id,
-                WakeAttemptOutcome.INCIDENT,
-                error={"reason": "server_request"},
-            )
-
-        guard = SessionGuard(self.client, self.bindings.store, on_incident=_incident)
+        self.bindings.store.connection.execute(
+            "UPDATE app_server_effects SET request_json = ? WHERE effect_id = ? AND state = 'PREPARED'",
+            (json.dumps(params, sort_keys=True, separators=(",", ":")), effect_id),
+        )
+        owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
             self._assert_submit_fence(str(batch["binding_id"]), generation, wake_batch_id=wake_batch_id)
-            response = await guard.request("turn/start", params)
+            submitted = await owner.submit_effect(effect_id)
+            response = dict(submitted.response or {})
         except RetryRequired as exc:
             self._mark_uncertain(wake_batch_id, {"reason": "overload"})
             raise WakeSchedulerError("wake turn/start uncertain; do not retry") from exc
@@ -242,6 +238,13 @@ class WakeScheduler:
         )
 
     def observe_completion(self, wake_batch_id: str, status: str) -> dict[str, object]:
+        current = self.batches.get(wake_batch_id)
+        if current is None:
+            raise WakeSchedulerError("unknown wake batch")
+        if current["state"] == WakeBatchState.INCIDENT.value:
+            raise WakeSchedulerError("incident is terminal; operator recovery required")
+        if current["state"] != WakeBatchState.ACTIVE.value:
+            raise WakeSchedulerError("only ACTIVE wake batches may complete")
         updated = self.batches.set_state(
             wake_batch_id,
             state=WakeBatchState.COMPLETED.value,
@@ -249,8 +252,6 @@ class WakeScheduler:
             completed_at=_now(),
             expected_state=WakeBatchState.ACTIVE.value,
         )
-        if updated["state"] == WakeBatchState.INCIDENT.value:
-            raise WakeSchedulerError("incident is terminal; operator recovery required")
         if updated["state"] != WakeBatchState.COMPLETED.value:
             raise WakeSchedulerError("only ACTIVE wake batches may complete")
         return updated

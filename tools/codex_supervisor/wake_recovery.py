@@ -202,12 +202,21 @@ class WakeRecovery:
                     turn_id = turn.get("id")
                     from datetime import datetime, timezone
 
+                    expected = state.value
+                    if state is WakeBatchState.SUBMITTING:
+                        self.batches.set_state(
+                            wake_batch_id,
+                            state=WakeBatchState.SUBMITTED.value,
+                            app_server_turn_id=turn_id,
+                            expected_state=WakeBatchState.SUBMITTING.value,
+                        )
+                        expected = WakeBatchState.SUBMITTED.value
                     updated = self.batches.set_state(
                         wake_batch_id,
                         state=WakeBatchState.ACTIVE.value,
                         app_server_turn_id=turn_id,
                         observed_at=datetime.now(timezone.utc).isoformat(),
-                        expected_state=state.value,
+                        expected_state=expected,
                     )
                     if updated["state"] == WakeBatchState.INCIDENT.value:
                         return updated
@@ -320,7 +329,11 @@ class WakeRecovery:
         turn_id: str | None = None,
         completion_status: str | None = None,
     ) -> dict[str, object]:
-        import json
+        from .durability.operator_resolution import (
+            OperatorResolutionError,
+            OperatorResolutionService,
+            ResolutionDisposition,
+        )
 
         if not str(operator or "").strip():
             raise WakeIncidentError("operator identity is required to resolve a wake incident")
@@ -331,82 +344,48 @@ class WakeRecovery:
                 chosen = WakeIncidentDisposition(str(disposition))
             except ValueError as exc:
                 raise WakeIncidentError("unknown wake incident disposition") from exc
+        mapping = {
+            WakeIncidentDisposition.NO_SUBMISSION_EVIDENCE: ResolutionDisposition.NO_SUBMISSION_EVIDENCE,
+            WakeIncidentDisposition.ABANDON: ResolutionDisposition.ABANDON,
+        }
         batch = self.batches.get(wake_batch_id)
         if batch is None:
             raise WakeIncidentError(f"unknown wake batch: {wake_batch_id}")
         if str(batch["state"]) != WakeBatchState.INCIDENT.value:
             raise WakeIncidentError("only INCIDENT wake batches may be operator-resolved")
-        receipt = {
-            "reason": "operator_resolved",
-            "operator": str(operator).strip(),
-            "disposition": chosen.value,
-        }
-        if chosen is WakeIncidentDisposition.NO_SUBMISSION_EVIDENCE:
-            if self._has_possible_submission(wake_batch_id, batch):
-                raise WakeIncidentError("cannot requeue incident with possible submission")
-            for message in self.batches.messages_for(wake_batch_id):
-                if message.delivery_state.value != "BATCHED":
-                    continue
-                if message.source_resolved_after_submission:
-                    self.mailbox.cancel_source_resolved(message.message_id)
-                else:
-                    self.mailbox.return_to_eligible(message.message_id)
-            updated = self.batches.set_state(
-                wake_batch_id,
-                state=WakeBatchState.CANCELLED.value,
-                incident_json=json.dumps(receipt),
-                expected_state=WakeBatchState.INCIDENT.value,
-            )
-            self._record_attempt(wake_batch_id, WakeAttemptOutcome.CANCELLED, error=receipt)
-            return updated
+        if chosen is WakeIncidentDisposition.NO_SUBMISSION_EVIDENCE and self._has_possible_submission(
+            wake_batch_id, batch
+        ):
+            raise WakeIncidentError("cannot requeue incident with possible submission")
         if chosen is WakeIncidentDisposition.TURN_OBSERVED:
-            observed_turn = turn_id or batch.get("app_server_turn_id")
-            if not observed_turn:
-                raise WakeIncidentError("TURN_OBSERVED requires a turn id")
-            for message in self.batches.messages_for(wake_batch_id):
-                if message.delivery_state.value in {"BATCHED", "SUBMISSION_UNCERTAIN"}:
-                    self.mailbox.mark_delivered(message.message_id)
-            from datetime import datetime, timezone
-
-            now = datetime.now(timezone.utc).isoformat()
-            fields: dict[str, object] = {
-                "app_server_turn_id": observed_turn,
-                "observed_at": now,
-                "incident_json": json.dumps(receipt),
-            }
-            if completion_status in {"completed", "interrupted", "failed"}:
-                fields["state"] = WakeBatchState.COMPLETED.value
-                fields["completion_status"] = completion_status
-                fields["completed_at"] = now
-                outcome = WakeAttemptOutcome.RECONCILED
-            else:
-                fields["state"] = WakeBatchState.ACTIVE.value
-                outcome = WakeAttemptOutcome.RECONCILED
-            updated = self.batches.set_state(
+            kernel_disposition = (
+                ResolutionDisposition.TURN_OBSERVED_COMPLETED
+                if completion_status in {"completed", "interrupted", "failed"}
+                else ResolutionDisposition.TURN_OBSERVED_ACTIVE
+            )
+        else:
+            kernel_disposition = mapping[chosen]
+        try:
+            OperatorResolutionService(self.bindings.store.connection).resolve_wake(
                 wake_batch_id,
-                expected_state=WakeBatchState.INCIDENT.value,
-                **fields,
+                operator=str(operator).strip(),
+                disposition=kernel_disposition,
+                evidence_kind="OPERATOR",
+                evidence_ref=f"wake-incident:{wake_batch_id}",
+                turn_id=turn_id,
+                completion_status=completion_status,
             )
-            self._record_attempt(wake_batch_id, outcome, error=receipt)
-            return updated
-        for message in self.batches.messages_for(wake_batch_id):
-            if message.delivery_state.value in {
-                "DEAD_LETTER",
-                "CANCELLED_SOURCE_RESOLVED",
-            }:
-                continue
-            self.mailbox.dead_letter(message.message_id, f"operator_abandon:{operator}")
-            self.mailbox.record_command_receipt(
-                command_id=f"wake-incident:{wake_batch_id}",
-                message_id=message.message_id,
-                action="ABANDON",
-            )
-        updated = self.batches.set_state(
+        except OperatorResolutionError as exc:
+            raise WakeIncidentError(str(exc)) from exc
+        updated = self.batches.get(wake_batch_id)
+        assert updated is not None
+        self._record_attempt(
             wake_batch_id,
-            incident_json=json.dumps(receipt),
-            expected_state=WakeBatchState.INCIDENT.value,
+            WakeAttemptOutcome.CANCELLED
+            if kernel_disposition is ResolutionDisposition.NO_SUBMISSION_EVIDENCE
+            else WakeAttemptOutcome.RECONCILED,
+            error={"operator": str(operator).strip(), "disposition": chosen.value},
         )
-        self._record_attempt(wake_batch_id, WakeAttemptOutcome.INCIDENT, error=receipt)
         return updated
 
     async def recover(self) -> dict[str, object]:
