@@ -215,13 +215,15 @@ class AppServerSessionOwner:
             return await self._submit_locked(record, extra_transitions, extra_hooks)
 
     def _require_owner_submittable(self, record) -> None:
+        if record.owner_kind == "EPHEMERAL_CANARY":
+            return
         if record.owner_kind == "MANAGED_TURN":
             row = self.store.connection.execute(
                 "SELECT submission_state FROM managed_turn_intents WHERE turn_intent_id = ?",
                 (record.owner_id,),
             ).fetchone()
             if row is None:
-                return
+                raise SessionOwnerError("linked managed turn is missing; cannot submit")
             if str(row[0]) != "PREPARED":
                 raise SessionOwnerError("linked managed turn is not PREPARED; cannot submit")
             return
@@ -231,17 +233,18 @@ class AppServerSessionOwner:
                 (record.owner_id,),
             ).fetchone()
             if row is None:
-                return
+                raise SessionOwnerError("linked wake batch is missing; cannot submit")
             if str(row[0]) != "PREPARED":
                 raise SessionOwnerError("linked wake batch is not PREPARED; cannot submit")
             return
-        if record.owner_kind in {"THREAD_PROVISION", "THREAD_RESUME"} and record.binding_id:
+        if record.owner_kind in {"THREAD_PROVISION", "THREAD_RESUME", "THREAD_MEMORY"}:
+            binding_id = record.binding_id or record.owner_id
             row = self.store.connection.execute(
                 "SELECT binding_state FROM managed_actor_bindings WHERE binding_id = ?",
-                (record.binding_id,),
+                (binding_id,),
             ).fetchone()
             if row is None:
-                return
+                raise SessionOwnerError("linked binding is missing; cannot submit")
             allowed = {"PREPARED"} if record.owner_kind == "THREAD_PROVISION" else {
                 "PREPARED",
                 "THREAD_CREATED",
@@ -250,6 +253,8 @@ class AppServerSessionOwner:
             }
             if str(row[0]) not in allowed:
                 raise SessionOwnerError("linked binding cannot submit this effect")
+            return
+        raise SessionOwnerError(f"effect owner {record.owner_kind} cannot be submitted")
 
     async def _submit_locked(
         self,

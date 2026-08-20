@@ -7,7 +7,12 @@ from pathlib import Path
 
 import pytest
 
-from tests.codex_supervisor.helpers import make_observer_config, record_completed_agent_item, write_fake_codex
+from tests.codex_supervisor.helpers import (
+    claim_wake_write_start_for_tests,
+    make_observer_config,
+    record_completed_agent_item,
+    write_fake_codex,
+)
 from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors, seed_reanchor
 from tools.codex_supervisor.binding_store import BindingStore
@@ -270,7 +275,8 @@ def test_concurrent_wake_claim_has_exactly_one_winner(tmp_path: Path) -> None:
             batches = WakeBatchStore(store, mailbox)
             barrier.wait()
             try:
-                batches.claim_first_submission(
+                claim_wake_write_start_for_tests(
+                    batches,
                     wake_batch_id,
                     lease_holder="sched",
                     lease_generation=1,
@@ -325,7 +331,8 @@ def test_stale_lease_claim_cannot_leave_batch_submitting(tmp_path: Path) -> None
     )
     wake_batch_id = str(batch["wake_batch_id"])
     with pytest.raises(WakeBatchError, match="PREPARED"):
-        batches.claim_first_submission(
+        claim_wake_write_start_for_tests(
+            batches,
             wake_batch_id,
             lease_holder="stale",
             lease_generation=1,

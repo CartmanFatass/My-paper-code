@@ -5,7 +5,11 @@ from pathlib import Path
 
 import pytest
 
-from tests.codex_supervisor.helpers import make_observer_config, write_fake_codex
+from tests.codex_supervisor.helpers import (
+    claim_wake_write_start_for_tests,
+    make_observer_config,
+    write_fake_codex,
+)
 from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors
 from tools.codex_supervisor.binding_store import BindingStore
@@ -63,7 +67,8 @@ def test_null_lease_claim_cannot_bypass_nonnull_batch_lease(tmp_path: Path) -> N
         lease_generation=2,
     )
     with pytest.raises(WakeBatchError, match="PREPARED"):
-        batches.claim_first_submission(
+        claim_wake_write_start_for_tests(
+            batches,
             wake_batch_id,
             lease_holder=None,
             lease_generation=None,
@@ -86,7 +91,8 @@ def test_unleased_batch_accepts_only_null_lease_claim(tmp_path: Path) -> None:
         lease_generation=None,
     )
     with pytest.raises(WakeBatchError, match="PREPARED"):
-        batches.claim_first_submission(
+        claim_wake_write_start_for_tests(
+            batches,
             wake_batch_id,
             lease_holder="sched",
             lease_generation=1,
@@ -94,7 +100,8 @@ def test_unleased_batch_accepts_only_null_lease_claim(tmp_path: Path) -> None:
     row = batches.get(wake_batch_id)
     assert row is not None
     assert row["state"] == "PREPARED"
-    claimed = batches.claim_first_submission(
+    claimed = claim_wake_write_start_for_tests(
+        batches,
         wake_batch_id,
         lease_holder=None,
         lease_generation=None,
@@ -109,7 +116,8 @@ def test_pre_response_wake_incident_does_not_strand_batched_messages(tmp_path: P
         lease_holder="sched",
         lease_generation=1,
     )
-    batches.claim_first_submission(
+    claimed = claim_wake_write_start_for_tests(
+        batches,
         wake_batch_id,
         lease_holder="sched",
         lease_generation=1,
@@ -121,6 +129,13 @@ def test_pre_response_wake_incident_does_not_strand_batched_messages(tmp_path: P
             "method": "item/command/request",
             "params": {"threadId": "thr_port"},
         },
+    )
+    from tools.codex_supervisor.durability.effects import EffectJournal
+
+    EffectJournal(seeded["supervisor"].connection).mark_incident(
+        str(claimed["effect_id"]),
+        evidence_ref="sreq_pre",
+        incident={"reason": "server_request"},
     )
     batch = batches.get(wake_batch_id)
     assert batch is not None
@@ -140,12 +155,12 @@ def test_pre_response_wake_incident_does_not_strand_batched_messages(tmp_path: P
     resolved = recovery.resolve_incident(
         wake_batch_id,
         operator="operator",
-        disposition=WakeIncidentDisposition.NO_SUBMISSION_EVIDENCE,
+        disposition=WakeIncidentDisposition.ABANDON,
     )
-    assert resolved["state"] == "CANCELLED"
+    assert resolved["state"] == "ABANDONED"
     restored = mailbox.get(message.message_id)
     assert restored is not None
-    assert restored.delivery_state.value == "ELIGIBLE"
+    assert restored.delivery_state.value == "DEAD_LETTER"
     _close(seeded)
 
 

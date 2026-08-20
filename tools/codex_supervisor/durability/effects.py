@@ -459,6 +459,26 @@ def cancel_prepared_turn(connection: sqlite3.Connection, turn_intent_id: str, ef
         journal.cancel_prepared_if_present(effect_id, cause_ref=cause_ref)
 
 
-    def has_possible_submission(self, effect_id: str) -> bool:
-        current = self.get(effect_id)
-        return current.state != EffectState.PREPARED.value or current.raw_request_seq is not None
+TURN_OBSERVED_DISPOSITIONS = frozenset({"TURN_OBSERVED_ACTIVE", "TURN_OBSERVED_COMPLETED"})
+
+
+def effect_is_completion_ready(connection: sqlite3.Connection, effect_id: str) -> bool:
+    """True when completion may treat the linked effect as evidence-confirmed."""
+    row = connection.execute(
+        "SELECT state FROM app_server_effects WHERE effect_id = ?",
+        (effect_id,),
+    ).fetchone()
+    if row is None:
+        return False
+    state = str(row[0])
+    if state == EffectState.EFFECT_CONFIRMED.value:
+        return True
+    if state != EffectState.OPERATOR_RESOLVED.value:
+        return False
+    resolution = connection.execute(
+        """SELECT disposition FROM operator_resolutions
+        WHERE aggregate_kind = ? AND aggregate_id = ?
+        ORDER BY created_at DESC LIMIT 1""",
+        (AggregateKind.APP_SERVER_EFFECT.value, effect_id),
+    ).fetchone()
+    return resolution is not None and str(resolution[0]) in TURN_OBSERVED_DISPOSITIONS

@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from tests.codex_supervisor.helpers import (
+    claim_wake_write_start_for_tests,
     make_observer_config,
     record_completed_agent_item,
     write_fake_codex,
@@ -349,7 +350,12 @@ def test_crash_after_send_before_response_does_not_requeue(tmp_path: Path) -> No
         None,
         instance_id="sched",
     )
-    scheduler.begin_submission(str(batch["wake_batch_id"]))
+    claim_wake_write_start_for_tests(
+        batches,
+        str(batch["wake_batch_id"]),
+        lease_holder=batch["lease_holder"],
+        lease_generation=batch["lease_generation"],
+    )
     asyncio.run(scheduler.recovery.recover())
     assert batches.get(str(batch["wake_batch_id"]))["state"] == "SUBMITTING"
     assert mailbox.get(message.message_id).delivery_state.value == "BATCHED"

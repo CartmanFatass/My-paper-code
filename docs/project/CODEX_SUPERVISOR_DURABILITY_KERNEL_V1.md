@@ -40,6 +40,12 @@ the linked App Server effect reached WRITE_STARTED
 ```
 
 A newly prepared turn or wake batch is `PREPARED`, never `SUBMITTING`.
+There is no domain-only wake claim API. `SUBMITTING` is recorded only together
+with effect `WRITE_STARTED` through `submit_effect`.
+
+Completion of an `ACTIVE` wake accepts a linked effect that is
+`EFFECT_CONFIRMED`, or `OPERATOR_RESOLVED` with disposition
+`TURN_OBSERVED_ACTIVE` / `TURN_OBSERVED_COMPLETED`.
 
 ## Single writers
 

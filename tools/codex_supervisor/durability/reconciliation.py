@@ -257,13 +257,15 @@ class EffectReconciler:
         if not thread_id:
             return record
         snap = self.connection.execute(
-            "SELECT status_type FROM thread_snapshots WHERE thread_id = ?",
+            "SELECT status_type, last_event_seq FROM thread_snapshots WHERE thread_id = ?",
             (str(thread_id),),
         ).fetchone()
         idle_loaded = False
+        stored_is_fresh = False
         if snap is not None:
             status_type = snap["status_type"]
             idle_loaded = str(status_type) in {"idle", "IDLE_LOADED"}
+            stored_is_fresh = self._stored_resume_is_fresh(record, snap, str(thread_id))
         if self.owner is not None:
             read = await self._read("thread/read", {"threadId": str(thread_id)})
             thread = read.get("result") if isinstance(read.get("result"), Mapping) else read
@@ -275,9 +277,29 @@ class EffectReconciler:
             data = result.get("data") if isinstance(result, Mapping) else None
             ids = {str(item) for item in data} if isinstance(data, list) else set()
             idle_loaded = str(status_type) == "idle" and str(thread_id) in ids
-        if not idle_loaded:
+            if not idle_loaded:
+                return record
+            return self._confirm_with_owner(record, evidence_ref="resume:idle_loaded", thread_id=str(thread_id))
+        if not idle_loaded or not stored_is_fresh:
             return record
         return self._confirm_with_owner(record, evidence_ref="resume:idle_loaded", thread_id=str(thread_id))
+
+    def _stored_resume_is_fresh(self, record: EffectRecord, snap, thread_id: str) -> bool:
+        if record.raw_request_seq is None:
+            return False
+        sequences: list[int] = []
+        snap_seq = snap["last_event_seq"] if snap["last_event_seq"] is not None else None
+        if snap_seq is not None:
+            sequences.append(int(snap_seq))
+        raw = self.connection.execute(
+            "SELECT MAX(raw_message_seq) FROM raw_messages WHERE thread_id = ?",
+            (thread_id,),
+        ).fetchone()
+        if raw is not None and raw[0] is not None:
+            sequences.append(int(raw[0]))
+        if not sequences:
+            return False
+        return max(sequences) > int(record.raw_request_seq)
 
     async def reconcile_thread_start(self, record: EffectRecord, *, evidence_row_id: str | None = None) -> object:
         thread_id = record.thread_id

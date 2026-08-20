@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from tests.codex_supervisor.helpers import (
+    claim_wake_write_start_for_tests,
     make_observer_config,
     record_completed_agent_item,
     write_fake_codex,
@@ -195,7 +196,12 @@ def test_wake_submit_rejects_persisted_submitting(tmp_path: Path) -> None:
         None,
         instance_id="sched",
     )
-    scheduler.begin_submission(str(batch["wake_batch_id"]))
+    claim_wake_write_start_for_tests(
+        batches,
+        str(batch["wake_batch_id"]),
+        lease_holder=batch["lease_holder"],
+        lease_generation=batch["lease_generation"],
+    )
 
     async def body() -> None:
         with pytest.raises(WakeSchedulerError, match="reconcile"):
@@ -711,7 +717,12 @@ def test_source_resolution_during_submitting_batch_preserves_reconciliation(tmp_
         None,
         instance_id="sched",
     )
-    scheduler.begin_submission(str(batch["wake_batch_id"]))
+    claim_wake_write_start_for_tests(
+        batches,
+        str(batch["wake_batch_id"]),
+        lease_holder=batch["lease_holder"],
+        lease_generation=batch["lease_generation"],
+    )
     seeded["semantic"].connection.execute("UPDATE obligations SET state = 'RESOLVED' WHERE state = 'OPEN'")
     seeded["semantic"].connection.commit()
     scanner.scan()

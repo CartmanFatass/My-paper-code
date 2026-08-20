@@ -16,7 +16,7 @@ from .scheduler_leases import LeaseError, SchedulerLeases
 from .semantic_bridge import SemanticBridge, SemanticBridgeError
 from .semantic_scanner import SemanticScanner
 from .transport import TransportClosed
-from .wake_batches import WakeBatchError, WakeBatchStore
+from .wake_batches import WakeBatchStore
 from .wake_recovery import WakeRecovery
 
 
@@ -54,6 +54,7 @@ class WakeScheduler:
         if self.recovery.leases is None:
             self.recovery.leases = leases
         self.recovery.instance_id = instance_id
+        self.recovery.bridge = bridge
 
     def _sender_kinds(self) -> dict[str, str | None]:
         kinds: dict[str, str | None] = {}
@@ -113,29 +114,6 @@ class WakeScheduler:
         if actor.scope_key != binding.semantic_scope_key:
             self._abort_unsubmitted_wake(binding_id, wake_batch_id)
             raise WakeSchedulerError("actor scope no longer matches binding")
-
-    def begin_submission(
-        self,
-        wake_batch_id: str,
-        *,
-        lease_holder: object = None,
-        lease_generation: object = None,
-    ) -> dict[str, object]:
-        batch = self.batches.get(wake_batch_id)
-        if batch is None:
-            raise WakeSchedulerError("unknown wake batch")
-        if batch["state"] != WakeBatchState.PREPARED.value:
-            raise WakeSchedulerError("wake batch is not PREPARED")
-        holder = lease_holder if lease_holder is not None else batch["lease_holder"]
-        generation = lease_generation if lease_generation is not None else batch["lease_generation"]
-        try:
-            return self.batches.claim_first_submission(
-                wake_batch_id,
-                lease_holder=holder,
-                lease_generation=generation,
-            )
-        except WakeBatchError as exc:
-            raise WakeSchedulerError(str(exc)) from exc
 
     async def submit_batch(
         self,
@@ -332,8 +310,6 @@ class WakeScheduler:
         )
 
     def observe_completion(self, wake_batch_id: str, status: str) -> dict[str, object]:
-        from .durability.effects import EffectJournal
-
         current = self.batches.get(wake_batch_id)
         if current is None:
             raise WakeSchedulerError("unknown wake batch")
@@ -343,9 +319,12 @@ class WakeScheduler:
             raise WakeSchedulerError("only ACTIVE wake batches may complete")
         effect_id = str(current.get("effect_id") or "")
         if effect_id:
-            effect = EffectJournal(self.bindings.store.connection).get(effect_id)
-            if effect.state != "EFFECT_CONFIRMED":
-                raise WakeSchedulerError("completion requires EFFECT_CONFIRMED linked effect")
+            from .durability.effects import effect_is_completion_ready
+
+            if not effect_is_completion_ready(self.bindings.store.connection, effect_id):
+                raise WakeSchedulerError(
+                    "completion requires EFFECT_CONFIRMED or TURN_OBSERVED operator-resolved effect"
+                )
         updated = self.batches.set_state(
             wake_batch_id,
             state=WakeBatchState.COMPLETED.value,

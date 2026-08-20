@@ -64,38 +64,39 @@ class ManagedTurns:
             raise ManagedTurnError("manual turn requires ACTIVE binding")
         intent_id = f"intent_{uuid.uuid4().hex}"
         message_id = client_user_message_id(intent_id)
-        effect = self.journal.prepare_effect(
-            owner_kind="MANAGED_TURN",
-            owner_id=intent_id,
-            binding_id=binding_id,
-            method="turn/start",
-            client_key=message_id,
-            request={"threadId": binding.thread_id, "clientUserMessageId": message_id},
-        )
-        with self.bindings.store._lock, self.bindings.store.connection:
-            self.bindings.store.connection.execute(
-                """INSERT INTO managed_turn_intents (
-                    turn_intent_id, binding_id, intent_kind, client_user_message_id,
-                    checkpoint_id, expected_state_version, expected_epoch_id,
-                    expected_epoch_revision, input_ref, submission_state,
-                    app_server_thread_id, prepared_at, version, effect_id
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)""",
-                (
-                    intent_id,
-                    binding_id,
-                    intent_kind.value,
-                    message_id,
-                    checkpoint_id,
-                    expected_state_version,
-                    expected_epoch_id,
-                    expected_epoch_revision,
-                    input_ref,
-                    SubmissionState.PREPARED.value,
-                    binding.thread_id,
-                    _now(),
-                    effect.effect_id,
-                ),
-            )
+        with self.bindings.store._lock:
+            with DurabilityTransaction(self.bindings.store.connection):
+                effect = self.journal.prepare_effect(
+                    owner_kind="MANAGED_TURN",
+                    owner_id=intent_id,
+                    binding_id=binding_id,
+                    method="turn/start",
+                    client_key=message_id,
+                    request={"threadId": binding.thread_id, "clientUserMessageId": message_id},
+                )
+                self.bindings.store.connection.execute(
+                    """INSERT INTO managed_turn_intents (
+                        turn_intent_id, binding_id, intent_kind, client_user_message_id,
+                        checkpoint_id, expected_state_version, expected_epoch_id,
+                        expected_epoch_revision, input_ref, submission_state,
+                        app_server_thread_id, prepared_at, version, effect_id
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?)""",
+                    (
+                        intent_id,
+                        binding_id,
+                        intent_kind.value,
+                        message_id,
+                        checkpoint_id,
+                        expected_state_version,
+                        expected_epoch_id,
+                        expected_epoch_revision,
+                        input_ref,
+                        SubmissionState.PREPARED.value,
+                        binding.thread_id,
+                        _now(),
+                        effect.effect_id,
+                    ),
+                )
         return intent_id
 
     def _row(self, turn_intent_id: str) -> dict[str, Any]:

@@ -913,8 +913,8 @@ def test_resume_reconciler_uses_thread_snapshot_status_type(tmp_path: Path) -> N
     journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
     journal.mark_uncertain(effect.effect_id, reason="timeout")
     connection.execute(
-        """INSERT INTO thread_snapshots(thread_id, status_type, first_observed_at, updated_at)
-        VALUES ('thr1', 'idle', 't', 't')"""
+        """INSERT INTO thread_snapshots(thread_id, status_type, last_event_seq, first_observed_at, updated_at)
+        VALUES ('thr1', 'idle', 2, 't', 't')"""
     )
     connection.commit()
     confirmed = asyncio.run(EffectReconciler(connection).reconcile(effect.effect_id))
@@ -976,4 +976,363 @@ def test_released_actor_cannot_create_managed_thread(tmp_path: Path) -> None:
     seeded["bridge"].close()
     seeded["supervisor"].close()
     seeded["semantic"].close()
+
+
+def _incident_wake(connection, *, effect_state: str, client_key: str = "hmasd-wake:wake1"):
+    connection.execute(
+        """INSERT INTO wake_batches(
+            wake_batch_id,binding_id,thread_id,state,client_user_message_id,prepared_at,version
+        ) VALUES ('wake1','bind1','thr1','INCIDENT',?,'t',1)""",
+        (client_key,),
+    )
+    connection.execute(
+        """INSERT INTO mailbox_messages(
+            message_id,source_system,source_event_key,target_actor_context_id,
+            message_kind,subject_ref,payload_ref,priority,delivery_state,intake_state,created_at
+        ) VALUES ('msg1','OPERATOR','src1','act1','OPERATOR_ATTENTION_REQUEST','s','p',1,'BATCHED','NOT_ACKNOWLEDGED','t')"""
+    )
+    connection.execute("INSERT INTO wake_batch_messages(wake_batch_id,message_id,ordinal) VALUES ('wake1','msg1',0)")
+    journal = EffectJournal(connection)
+    effect = journal.prepare_effect(
+        owner_kind="WAKE_BATCH",
+        owner_id="wake1",
+        binding_id="bind1",
+        method="turn/start",
+        client_key=client_key,
+        request={"threadId": "thr1"},
+    )
+    if effect_state != "PREPARED":
+        journal.claim_write(
+            effect.effect_id,
+            run_id="run1",
+            client_request_id="1",
+            request_row_id="r1",
+            raw_request_seq=1,
+        )
+        if effect_state == "INCIDENT":
+            journal.mark_incident(effect.effect_id, evidence_ref="sr1", incident={"reason": "server_request"})
+        elif effect_state == "SUBMISSION_UNCERTAIN":
+            journal.mark_uncertain(effect.effect_id, reason="timeout")
+        elif effect_state == "RESPONSE_OBSERVED":
+            journal.observe_response(effect.effect_id, response={"ok": True}, turn_id="turn1")
+    connection.execute("UPDATE wake_batches SET effect_id = ? WHERE wake_batch_id = 'wake1'", (effect.effect_id,))
+    connection.execute(
+        """INSERT INTO turn_snapshots(turn_id, thread_id, status, updated_at)
+        VALUES ('turn1', 'thr1', 'active', 't')"""
+    )
+    connection.execute(
+        """INSERT INTO observer_runs(run_id, codex_binary, codex_version, client_name, started_at, runtime_home)
+        VALUES ('run1', 'b', 'v', 'c', 't', '.')"""
+    )
+    connection.execute(
+        """INSERT INTO raw_messages(
+            run_id, direction, transport_seq, rpc_shape, turn_id, canonical_json, observed_at
+        ) VALUES ('run1', 'stdout', 1, 'notification', 'turn1', ?, 't')""",
+        (f'{{"clientUserMessageId":"{client_key}"}}',),
+    )
+    connection.commit()
+    return effect
+
+
+def test_operator_resolved_active_wake_can_complete(tmp_path: Path) -> None:
+    from tools.codex_supervisor.durability.effects import effect_is_completion_ready
+    from tools.codex_supervisor.mailbox_store import MailboxStore
+    from tools.codex_supervisor.wake_batches import WakeBatchStore
+    from tools.codex_supervisor.wake_scheduler import WakeScheduler
+
+    store = ObserverStore(tmp_path / "runtime")
+    _incident_wake(store.connection, effect_state="INCIDENT")
+    OperatorResolutionService(store.connection).resolve_wake(
+        "wake1",
+        operator="op",
+        disposition=ResolutionDisposition.TURN_OBSERVED_ACTIVE,
+        evidence_kind="TURN",
+        evidence_ref="turn1",
+        turn_id="turn1",
+    )
+    assert store.connection.execute("SELECT state FROM wake_batches").fetchone()[0] == "ACTIVE"
+    effect_id = store.connection.execute("SELECT effect_id FROM wake_batches").fetchone()[0]
+    assert effect_is_completion_ready(store.connection, str(effect_id))
+    batches = WakeBatchStore(store, MailboxStore(store))
+    scheduler = WakeScheduler.__new__(WakeScheduler)
+    scheduler.batches = batches
+    scheduler.bindings = type("Bindings", (), {"store": store})()
+    updated = scheduler.observe_completion("wake1", "completed")
+    assert updated["state"] == "COMPLETED"
+    store.close()
+
+
+def test_operator_observed_active_reconciles_nonincident_effect(tmp_path: Path) -> None:
+    connection = connect(tmp_path / "s.sqlite3")
+    initialize_database(connection)
+    effect = _incident_wake(connection, effect_state="WRITE_STARTED")
+    OperatorResolutionService(connection).resolve_wake(
+        "wake1",
+        operator="op",
+        disposition=ResolutionDisposition.TURN_OBSERVED_ACTIVE,
+        evidence_kind="TURN",
+        evidence_ref="turn1",
+        turn_id="turn1",
+    )
+    assert connection.execute("SELECT state FROM wake_batches").fetchone()[0] == "ACTIVE"
+    assert EffectJournal(connection).get(effect.effect_id).state == EffectState.EFFECT_CONFIRMED.value
+    connection.close()
+
+
+def test_turn_observed_resolution_rejects_prepared_effect(tmp_path: Path) -> None:
+    connection = connect(tmp_path / "s.sqlite3")
+    initialize_database(connection)
+    _incident_wake(connection, effect_state="PREPARED")
+    with pytest.raises(OperatorResolutionError, match="PREPARED"):
+        OperatorResolutionService(connection).resolve_wake(
+            "wake1",
+            operator="op",
+            disposition=ResolutionDisposition.TURN_OBSERVED_ACTIVE,
+            evidence_kind="TURN",
+            evidence_ref="turn1",
+            turn_id="turn1",
+        )
+    assert connection.execute("SELECT state FROM wake_batches").fetchone()[0] == "INCIDENT"
+    assert connection.execute("SELECT state FROM app_server_effects").fetchone()[0] == "PREPARED"
+    connection.close()
+
+
+def test_no_domain_only_wake_claim_api_exists() -> None:
+    import ast
+
+    from tools.codex_supervisor.durability.static_guards import PACKAGE_ROOT
+
+    forbidden = {"begin_submission", "claim_first_submission"}
+    for path in PACKAGE_ROOT.rglob("*.py"):
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name in forbidden:
+                pytest.fail(f"{path} still defines {node.name}")
+
+
+def test_wake_submitting_always_has_write_started_effect(tmp_path: Path) -> None:
+    seeded = seed_active_root_portfolio(tmp_path)
+    mailbox = seeded["mailbox"]
+    message = mailbox.enqueue(
+        source_system="OPERATOR",
+        source_event_key="k-submit",
+        target_actor_context_id=seeded["portfolio"].actor_context_id,
+        message_kind="OPERATOR_ATTENTION_REQUEST",
+        subject_ref="s",
+        payload_ref="p",
+    )
+    batches = WakeBatchStore(seeded["supervisor"], mailbox)
+    snapshot = seeded["bridge"].snapshot(seeded["portfolio"].actor_context_id)
+    batch = batches.prepare(
+        binding_id=seeded["portfolio_binding_id"],
+        thread_id="thr_port",
+        snapshot=snapshot,
+        messages=[message],
+        lease_generation=1,
+        lease_holder="sched",
+    )
+    run_id = seeded["supervisor"].start_run(
+        codex_binary="b",
+        codex_version="v",
+        client_name="c",
+        process_id=None,
+    )
+    from tools.codex_supervisor.durability.models import AggregateKind, TransitionCause, TransitionRequest
+
+    seeded["supervisor"].record_effect_write_start(
+        effect_id=str(batch["effect_id"]),
+        run_id=run_id,
+        method="turn/start",
+        payload={"id": 1, "method": "turn/start", "params": {}},
+        params={},
+        request_class="MUTATING_NO_RETRY",
+        extra_transitions=[
+            TransitionRequest(
+                aggregate_kind=AggregateKind.WAKE_BATCH,
+                aggregate_id=str(batch["wake_batch_id"]),
+                expected_state="PREPARED",
+                expected_version=int(batch["version"] or 0),
+                target_state="SUBMITTING",
+                cause_kind=TransitionCause.APP_SERVER_EFFECT,
+                cause_ref=str(batch["effect_id"]),
+            )
+        ],
+    )
+    updated = batches.get(str(batch["wake_batch_id"]))
+    assert updated is not None
+    assert updated["state"] == "SUBMITTING"
+    effect = EffectJournal(seeded["supervisor"].connection).get(str(batch["effect_id"]))
+    assert effect.state == EffectState.WRITE_STARTED.value
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_released_actor_cannot_receive_recovery_resume(tmp_path: Path) -> None:
+    from tools.codex_semantic_mvp.actor_registry import release_actor_context
+
+    seeded = seed_active_root_portfolio(tmp_path)
+    release_actor_context(seeded["semantic"], seeded["root"].actor_context_id)
+    recovery = WakeRecovery(
+        seeded["bindings"],
+        seeded["mailbox"],
+        WakeBatchStore(seeded["supervisor"], seeded["mailbox"]),
+        object(),
+        bridge=seeded["bridge"],
+    )
+    readiness = asyncio.run(recovery.resume_once(seeded["root_binding_id"]))
+    assert readiness.value == "UNKNOWN"
+    count = seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM app_server_effects WHERE method = 'thread/resume'"
+    ).fetchone()[0]
+    assert int(count) == 0
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_nonactive_binding_cannot_receive_recovery_resume(tmp_path: Path) -> None:
+    seeded = seed_active_root_portfolio(tmp_path)
+    seeded["bindings"].suspend(seeded["root_binding_id"])
+    recovery = WakeRecovery(
+        seeded["bindings"],
+        seeded["mailbox"],
+        WakeBatchStore(seeded["supervisor"], seeded["mailbox"]),
+        object(),
+        bridge=seeded["bridge"],
+    )
+    readiness = asyncio.run(recovery.resume_once(seeded["root_binding_id"]))
+    assert readiness.value == "UNKNOWN"
+    count = seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM app_server_effects WHERE method = 'thread/resume'"
+    ).fetchone()[0]
+    assert int(count) == 0
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_managed_turn_prepare_rolls_back_effect_when_owner_insert_fails(tmp_path, monkeypatch) -> None:
+    import uuid
+
+    seeded = seed_managed_actors(tmp_path)
+    store = BindingStore(seeded["supervisor"], seeded["bridge"])
+    snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+    binding_id = store.prepare_binding(
+        snapshot,
+        repo_root=str(tmp_path),
+        thread_cwd=str(tmp_path),
+        created_by_operator="operator",
+        thread_origin=ThreadOrigin.NEW,
+        history_trust=HistoryTrust.FRESH,
+    )
+    store.attach_thread_for_tests(binding_id, "thr_root")
+    store.mark_verification_required(binding_id)
+    fixed = uuid.UUID(int=7)
+    intent_id = f"intent_{fixed.hex}"
+    seeded["supervisor"].connection.execute(
+        """INSERT INTO managed_turn_intents (
+            turn_intent_id, binding_id, intent_kind, client_user_message_id,
+            input_ref, submission_state, app_server_thread_id, prepared_at, version
+        ) VALUES (?, ?, 'BOOTSTRAP', 'dup-key', 'ref', 'PREPARED', 'thr_root', 't', 0)""",
+        (intent_id, binding_id),
+    )
+    seeded["supervisor"].connection.commit()
+    monkeypatch.setattr("tools.codex_supervisor.managed_turns.uuid.uuid4", lambda: fixed)
+    turns = ManagedTurns(store, object())  # type: ignore[arg-type]
+    with pytest.raises(Exception):
+        turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
+    leftover = seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM app_server_effects WHERE owner_id = ?",
+        (intent_id,),
+    ).fetchone()[0]
+    assert int(leftover) == 0
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_wake_prepare_rolls_back_effect_when_batch_insert_fails(tmp_path, monkeypatch) -> None:
+    import uuid
+
+    seeded = seed_active_root_portfolio(tmp_path)
+    mailbox = seeded["mailbox"]
+    message = mailbox.enqueue(
+        source_system="OPERATOR",
+        source_event_key="k-rollback",
+        target_actor_context_id=seeded["portfolio"].actor_context_id,
+        message_kind="OPERATOR_ATTENTION_REQUEST",
+        subject_ref="s",
+        payload_ref="p",
+    )
+    snapshot = seeded["bridge"].snapshot(seeded["portfolio"].actor_context_id)
+    batches = WakeBatchStore(seeded["supervisor"], mailbox)
+    fixed = uuid.UUID(int=9)
+    wake_id = f"wake_{fixed.hex}"
+    seeded["supervisor"].connection.execute(
+        """INSERT INTO wake_batches(
+            wake_batch_id,binding_id,thread_id,state,client_user_message_id,prepared_at
+        ) VALUES (?, 'bindx', 'thr_port', 'PREPARED', 'dup-wake-key', 't')""",
+        (wake_id,),
+    )
+    seeded["supervisor"].connection.commit()
+    monkeypatch.setattr("tools.codex_supervisor.wake_batches.uuid.uuid4", lambda: fixed)
+    with pytest.raises(Exception):
+        batches.prepare(
+            binding_id=seeded["portfolio_binding_id"],
+            thread_id="thr_port",
+            snapshot=snapshot,
+            messages=[message],
+            lease_generation=1,
+            lease_holder="sched",
+        )
+    leftover = seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM app_server_effects WHERE owner_id = ?",
+        (wake_id,),
+    ).fetchone()[0]
+    assert int(leftover) == 0
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_orphan_effect_cannot_be_submitted(tmp_path: Path) -> None:
+    store = ObserverStore(tmp_path / "runtime")
+    journal = EffectJournal(store.connection)
+    effect = journal.prepare_effect(
+        owner_kind="WAKE_BATCH",
+        owner_id="missing-wake",
+        binding_id="bind1",
+        method="turn/start",
+        client_key="orphan-key",
+        request={"threadId": "thr1"},
+    )
+    owner = AppServerSessionOwner(object(), store)  # type: ignore[arg-type]
+    with pytest.raises(SessionOwnerError, match="missing"):
+        asyncio.run(owner.submit_effect(effect.effect_id))
+    store.close()
+
+
+def test_stale_stored_resume_snapshot_does_not_confirm(tmp_path: Path) -> None:
+    connection = connect(tmp_path / "s.sqlite3")
+    initialize_database(connection)
+    journal = EffectJournal(connection)
+    effect = journal.prepare_effect(
+        owner_kind="THREAD_RESUME",
+        owner_id="b1",
+        binding_id="b1",
+        method="thread/resume",
+        client_key="thread/resume:thr-stale",
+        request={"threadId": "thr-stale"},
+    )
+    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=5)
+    journal.mark_uncertain(effect.effect_id, reason="timeout")
+    connection.execute(
+        """INSERT INTO thread_snapshots(thread_id, status_type, last_event_seq, first_observed_at, updated_at)
+        VALUES ('thr-stale', 'idle', 5, 't', 't')"""
+    )
+    connection.commit()
+    result = asyncio.run(EffectReconciler(connection).reconcile(effect.effect_id))
+    assert result.state == EffectState.SUBMISSION_UNCERTAIN.value
+    connection.close()
 

@@ -82,10 +82,11 @@ class OperatorResolutionService:
                 raise OperatorResolutionError("wake batch is not INCIDENT")
             effect_id = None if batch["effect_id"] is None else str(batch["effect_id"])
             effect = self.journal.get(effect_id) if effect_id else None
-            if disposition in {
+            observed = disposition in {
                 ResolutionDisposition.TURN_OBSERVED_ACTIVE,
                 ResolutionDisposition.TURN_OBSERVED_COMPLETED,
-            }:
+            }
+            if observed:
                 self._require_turn_evidence(
                     thread_id=str(batch["thread_id"]),
                     turn_id=turn_id,
@@ -93,6 +94,10 @@ class OperatorResolutionService:
                     completion_status=completion_status,
                     require_completed=disposition is ResolutionDisposition.TURN_OBSERVED_COMPLETED,
                 )
+                if effect is not None and effect.state == "PREPARED":
+                    raise OperatorResolutionError(
+                        "TURN_OBSERVED cannot apply to a PREPARED effect"
+                    )
             target, message_target = self._wake_targets(
                 disposition,
                 effect=effect,
@@ -154,7 +159,19 @@ class OperatorResolutionService:
                 except TransitionError as exc:
                     raise OperatorResolutionError(str(exc)) from exc
             if effect is not None and effect.state == "PREPARED":
+                if observed:
+                    raise OperatorResolutionError(
+                        "TURN_OBSERVED cannot apply to a PREPARED effect"
+                    )
                 self.journal.cancel_before_write(effect.effect_id, cause_ref=resolution_id)
+            if effect is not None and effect.state in {
+                "WRITE_STARTED",
+                "RESPONSE_OBSERVED",
+                "SUBMISSION_UNCERTAIN",
+            }:
+                if observed:
+                    self.journal.confirm_effect(effect.effect_id, evidence_ref=evidence_ref)
+                    effect = self.journal.get(effect.effect_id)
             if effect is not None and effect.state == "INCIDENT":
                 effect_resolution_id = f"ores_{uuid.uuid4().hex}"
                 self._insert_resolution(

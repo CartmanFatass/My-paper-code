@@ -10,6 +10,116 @@ from tools.codex_supervisor.protocol import extract_protocol_ids
 from tools.codex_supervisor.store import ObserverStore
 
 
+def insert_submittable_owner_for_effect(connection, effect) -> None:
+    """Test helper: give a prepared effect a matching owner aggregate row."""
+    if effect.owner_kind == "MANAGED_TURN":
+        connection.execute(
+            """INSERT INTO managed_turn_intents (
+                turn_intent_id, binding_id, intent_kind, client_user_message_id,
+                input_ref, submission_state, app_server_thread_id, prepared_at, version, effect_id
+            ) VALUES (?, ?, 'MANUAL_OPERATOR', ?, 'ref', 'PREPARED', 'thr1', 't', 0, ?)""",
+            (effect.owner_id, effect.binding_id or "bind1", effect.client_key, effect.effect_id),
+        )
+    elif effect.owner_kind == "WAKE_BATCH":
+        connection.execute(
+            """INSERT INTO wake_batches (
+                wake_batch_id, binding_id, thread_id, state, client_user_message_id,
+                prepared_at, version, effect_id
+            ) VALUES (?, ?, 'thr1', 'PREPARED', ?, 't', 0, ?)""",
+            (effect.owner_id, effect.binding_id or "bind1", effect.client_key, effect.effect_id),
+        )
+    elif effect.owner_kind in {"THREAD_PROVISION", "THREAD_RESUME", "THREAD_MEMORY"}:
+        binding_id = effect.binding_id or effect.owner_id
+        existing = connection.execute(
+            "SELECT 1 FROM managed_actor_bindings WHERE binding_id = ?",
+            (binding_id,),
+        ).fetchone()
+        if existing is None:
+            state = "PREPARED" if effect.owner_kind == "THREAD_PROVISION" else "ACTIVE"
+            connection.execute(
+                """INSERT INTO managed_actor_bindings (
+                    binding_id, actor_context_id, actor_kind, semantic_scope_key,
+                    thread_origin, history_trust, binding_state, memory_policy_state,
+                    repo_root, thread_cwd, created_by_operator, created_at
+                ) VALUES (?, ?, 'OPERATIONAL_ROOT', 'scope', 'NEW', 'FRESH', ?, 'UNVERIFIED', '.', '.', 'op', 't')""",
+                (binding_id, f"act-{binding_id}", state),
+            )
+    connection.commit()
+
+
+def claim_wake_write_start_for_tests(
+    batches,
+    wake_batch_id: str,
+    *,
+    lease_holder: object = None,
+    lease_generation: object = None,
+) -> dict[str, object]:
+    """Fixture-only mid-flight wake. Production code must use submit_effect."""
+    import uuid
+    from datetime import datetime, timezone
+
+    from tools.codex_supervisor.durability.effects import EffectJournal
+    from tools.codex_supervisor.durability.models import AggregateKind, TransitionCause, TransitionRequest
+    from tools.codex_supervisor.durability.transaction import DurabilityTransaction
+    from tools.codex_supervisor.durability.transitions import TransitionError, TransitionKernel
+    from tools.codex_supervisor.mailbox_models import WakeAttemptOutcome, WakeBatchState
+    from tools.codex_supervisor.wake_batches import WakeBatchError
+
+    now = datetime.now(timezone.utc).isoformat()
+    with batches.store._lock:
+        with DurabilityTransaction(batches.store.connection):
+            current = batches.store.connection.execute(
+                """SELECT state, version, lease_holder, lease_generation, effect_id
+                FROM wake_batches WHERE wake_batch_id = ?""",
+                (wake_batch_id,),
+            ).fetchone()
+            if (
+                current is None
+                or str(current["state"]) != WakeBatchState.PREPARED.value
+                or current["lease_holder"] != lease_holder
+                or current["lease_generation"] != lease_generation
+            ):
+                raise WakeBatchError("wake batch is not PREPARED for this lease")
+            try:
+                TransitionKernel(batches.store.connection).apply(
+                    TransitionRequest(
+                        aggregate_kind=AggregateKind.WAKE_BATCH,
+                        aggregate_id=wake_batch_id,
+                        expected_state=WakeBatchState.PREPARED.value,
+                        expected_version=int(current["version"] or 0),
+                        target_state=WakeBatchState.SUBMITTING.value,
+                        cause_kind=TransitionCause.APP_SERVER_EFFECT,
+                        cause_ref="test-wake-claim",
+                    )
+                )
+            except TransitionError as exc:
+                raise WakeBatchError("wake batch is not PREPARED for this lease") from exc
+            effect_id = None if current["effect_id"] is None else str(current["effect_id"])
+            if effect_id:
+                EffectJournal(batches.store.connection).claim_write(
+                    effect_id,
+                    run_id="fixture",
+                    client_request_id="fixture",
+                    request_row_id="fixture",
+                    raw_request_seq=1,
+                )
+            batches.store.connection.execute(
+                """INSERT INTO wake_attempts (
+                    wake_attempt_id, wake_batch_id, attempt_number, request_id,
+                    outcome, error_json, created_at
+                ) VALUES (?, ?, 1, NULL, ?, NULL, ?)""",
+                (
+                    f"watt_{uuid.uuid4().hex}",
+                    wake_batch_id,
+                    WakeAttemptOutcome.SUBMITTING.value,
+                    now,
+                ),
+            )
+    row = batches.get(wake_batch_id)
+    assert row is not None
+    return row
+
+
 def rewind_command_validation(connection, command_id: str, state: str) -> None:
     """Test-only crash reconstruction. Production code cannot rewind APPLIED."""
     from tools.codex_supervisor.db import _install_transition_guards

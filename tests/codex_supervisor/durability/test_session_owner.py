@@ -5,7 +5,11 @@ from pathlib import Path
 
 import pytest
 
-from tests.codex_supervisor.helpers import make_observer_config, write_fake_codex
+from tests.codex_supervisor.helpers import (
+    insert_submittable_owner_for_effect,
+    make_observer_config,
+    write_fake_codex,
+)
 from tools.codex_supervisor.client import UnexpectedServerRequest
 from tools.codex_supervisor.durability.effects import EffectJournal
 from tools.codex_supervisor.durability.models import EffectState
@@ -52,6 +56,7 @@ def test_server_request_before_response_marks_effect_incident(tmp_path: Path) ->
             client_key="wake-1",
             request={"threadId": "thr_canary", "input": []},
         )
+        insert_submittable_owner_for_effect(store.connection, effect)
         with pytest.raises(UnexpectedServerRequest):
             await owner.submit_effect(effect.effect_id)
         assert journal.get(effect.effect_id).state == EffectState.INCIDENT.value
@@ -77,6 +82,7 @@ def test_server_request_with_response_still_incidents(tmp_path: Path) -> None:
             client_key="thread/start:bind1",
             request={"cwd": str(tmp_path), "ephemeral": True, "approvalPolicy": "never"},
         )
+        insert_submittable_owner_for_effect(store.connection, effect)
         with pytest.raises(UnexpectedServerRequest):
             await owner.submit_effect(effect.effect_id)
         assert journal.get(effect.effect_id).state == EffectState.INCIDENT.value
@@ -101,6 +107,7 @@ def test_server_request_after_response_marks_linked_effect(tmp_path: Path) -> No
             client_key="hmasd-wake:wake1",
             request={"threadId": "thr_canary", "input": []},
         )
+        insert_submittable_owner_for_effect(store.connection, effect)
         try:
             result = await owner.submit_effect(effect.effect_id)
             assert result.state in {EffectState.RESPONSE_OBSERVED.value, EffectState.INCIDENT.value}
@@ -163,6 +170,7 @@ def test_effect_incident_persists_after_response_race(tmp_path: Path) -> None:
             client_key="thread/start:bind1",
             request={"cwd": str(tmp_path), "ephemeral": True},
         )
+        insert_submittable_owner_for_effect(store.connection, effect)
         with pytest.raises(UnexpectedServerRequest):
             await owner.submit_effect(effect.effect_id)
         later = journal.get(effect.effect_id)
@@ -190,6 +198,7 @@ def test_write_started_effect_is_not_resubmitted(tmp_path: Path) -> None:
             client_key="k1",
             request={"threadId": "thr_canary", "input": []},
         )
+        insert_submittable_owner_for_effect(store.connection, effect)
         first = await owner.submit_effect(effect.effect_id)
         assert first.state == EffectState.RESPONSE_OBSERVED.value
         with pytest.raises(Exception, match="never automatically submitted"):

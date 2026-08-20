@@ -16,6 +16,7 @@ from .mailbox_models import (
 from .mailbox_store import MailboxStore
 from .managed_models import BindingState
 from .scheduler_leases import LeaseError, SchedulerLeases
+from .semantic_bridge import SemanticBridge, SemanticBridgeError
 from .transport import TransportClosed
 from .wake_batches import WakeBatchStore
 
@@ -33,6 +34,7 @@ class WakeRecovery:
         client: AppServerClient | None = None,
         leases: SchedulerLeases | None = None,
         instance_id: str = "recovery",
+        bridge: SemanticBridge | None = None,
     ) -> None:
         self.bindings = bindings
         self.mailbox = mailbox
@@ -40,6 +42,7 @@ class WakeRecovery:
         self.client = client
         self.leases = leases
         self.instance_id = instance_id
+        self.bridge = bridge
 
     async def list_loaded_ids(self) -> set[str] | None:
         if self.client is None:
@@ -93,8 +96,9 @@ class WakeRecovery:
         client_key = f"thread/resume:{binding.thread_id}"
         journal = EffectJournal(self.bindings.store.connection)
         existing = journal.get_by_key("thread/resume", client_key)
-        owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
+
         async def _confirm_if_loaded(effect_id: str) -> ThreadWakeReadiness:
+            owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
             readiness = await self.classify(binding_id)
             if readiness is ThreadWakeReadiness.IDLE_LOADED:
                 try:
@@ -113,6 +117,10 @@ class WakeRecovery:
 
         if existing is not None and existing.state != "PREPARED":
             return await _confirm_if_loaded(existing.effect_id)
+        if not self._resume_fence_ok(binding):
+            if existing is not None and existing.state == "PREPARED":
+                journal.cancel_prepared_if_present(existing.effect_id, cause_ref="resume-actor-ineligible")
+            return ThreadWakeReadiness.UNKNOWN
         if existing is None:
             existing = journal.prepare_effect(
                 owner_kind="THREAD_RESUME",
@@ -122,6 +130,7 @@ class WakeRecovery:
                 client_key=client_key,
                 request={"threadId": binding.thread_id},
             )
+        owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
             result = await owner.submit_effect(existing.effect_id)
             kind = owner.classify_submission(result)
@@ -132,6 +141,21 @@ class WakeRecovery:
         if kind != "observed":
             return await self.classify(binding_id)
         return await _confirm_if_loaded(existing.effect_id)
+
+    def _resume_fence_ok(self, binding) -> bool:
+        if binding.binding_state is not BindingState.ACTIVE:
+            return False
+        bridge = self.bridge or getattr(self.bindings, "bridge", None)
+        if bridge is None:
+            return False
+        try:
+            actor = bridge.require_eligible(binding.actor_context_id)
+        except SemanticBridgeError:
+            return False
+        return (
+            actor.actor_kind.value == binding.actor_kind.value
+            and actor.scope_key == binding.semantic_scope_key
+        )
 
     def _record_attempt(
         self,
@@ -263,12 +287,13 @@ class WakeRecovery:
             now = datetime.now(timezone.utc).isoformat()
             with DurabilityTransaction(self.bindings.store.connection):
                 if effect_id:
+                    from .durability.effects import effect_is_completion_ready
+
                     effect = journal.get(effect_id)
                     if effect.state in {"RESPONSE_OBSERVED", "SUBMISSION_UNCERTAIN", "WRITE_STARTED"}:
                         turn_ref = str(batch.get("app_server_turn_id") or status)
                         journal.confirm_effect(effect_id, evidence_ref=f"turn:{turn_ref}:{status}")
-                        effect = journal.get(effect_id)
-                    if effect.state != "EFFECT_CONFIRMED":
+                    if not effect_is_completion_ready(self.bindings.store.connection, effect_id):
                         raise RuntimeError("wake completion requires EFFECT_CONFIRMED")
                 current = self.batches.get(wake_batch_id)
                 assert current is not None

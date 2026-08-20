@@ -27,20 +27,33 @@ def test_wake_batch_and_effect_share_client_key(tmp_path: Path) -> None:
 
 
 def test_wake_claim_requires_explicit_lease(tmp_path: Path) -> None:
+    from tests.codex_supervisor.helpers import claim_wake_write_start_for_tests
+
     store = ObserverStore(tmp_path)
     mailbox = MailboxStore(store)
     batches = WakeBatchStore(store, mailbox)
+    journal = EffectJournal(store.connection)
+    effect = journal.prepare_effect(
+        owner_kind="WAKE_BATCH",
+        owner_id="wake1",
+        binding_id="bind1",
+        method="turn/start",
+        client_key="hmasd-wake:wake1",
+        request={"threadId": "thr1"},
+    )
     store.connection.execute(
         """INSERT INTO wake_batches(
             wake_batch_id,binding_id,thread_id,state,client_user_message_id,prepared_at,
-            lease_holder,lease_generation
-        ) VALUES ('wake1','bind1','thr1','PREPARED','hmasd-wake:wake1','t','holder',3)"""
+            lease_holder,lease_generation,effect_id
+        ) VALUES ('wake1','bind1','thr1','PREPARED','hmasd-wake:wake1','t','holder',3,?)""",
+        (effect.effect_id,),
     )
     store.connection.commit()
     with pytest.raises(WakeBatchError):
-        batches.claim_first_submission("wake1", lease_holder=None, lease_generation=None)
-    claimed = batches.claim_first_submission("wake1", lease_holder="holder", lease_generation=3)
+        claim_wake_write_start_for_tests(batches, "wake1", lease_holder=None, lease_generation=None)
+    claimed = claim_wake_write_start_for_tests(batches, "wake1", lease_holder="holder", lease_generation=3)
     assert claimed["state"] == "SUBMITTING"
+    assert journal.get(effect.effect_id).state == "WRITE_STARTED"
     store.close()
 
 
