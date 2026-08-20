@@ -91,14 +91,15 @@ def test_server_request_incident_cannot_be_completed_or_activated(tmp_path: Path
         expected_epoch_id=snapshot.epoch_id,
         expected_epoch_revision=snapshot.epoch_revision,
     )
-    seeded["supervisor"].connection.execute(
-        """UPDATE managed_turn_intents
-        SET submission_state = 'INCIDENT', app_server_turn_id = ?,
-            incident_json = '{"reason":"server_request"}'
-        WHERE turn_intent_id = ?""",
-        ("turn_inc", intent_id),
+    from tests.codex_supervisor.helpers import drive_turn_intent
+
+    drive_turn_intent(
+        seeded["supervisor"].connection,
+        intent_id,
+        "INCIDENT",
+        app_server_turn_id="turn_inc",
+        incident_json='{"reason":"server_request"}',
     )
-    seeded["supervisor"].connection.commit()
     seq = record_completed_agent_item(
         seeded["supervisor"],
         thread_id="thr_root",
@@ -286,7 +287,11 @@ def test_source_resolution_during_active_batch_records_flag(tmp_path: Path) -> N
         lease_holder="sched",
     )
     seeded["mailbox"].mark_delivered(messages[0].message_id)
-    batches.set_state(str(batch["wake_batch_id"]), state="ACTIVE", app_server_turn_id="turn_live")
+    from tests.codex_supervisor.helpers import drive_wake_batch
+
+    drive_wake_batch(
+        batches, str(batch["wake_batch_id"]), "ACTIVE", app_server_turn_id="turn_live"
+    )
     seeded["semantic"].connection.execute("UPDATE obligations SET state = 'RESOLVED' WHERE state = 'OPEN'")
     seeded["semantic"].connection.commit()
     scanner.scan()
@@ -304,13 +309,14 @@ def test_observer_and_managed_runtime_share_one_server_request_consumer(tmp_path
         store.mark_verification_required(binding_id)
         turns = ManagedTurns(store, client=None)  # type: ignore[arg-type]
         intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
-        seeded["supervisor"].connection.execute(
-            """UPDATE managed_turn_intents
-            SET submission_state = 'SUBMITTED', app_server_turn_id = ?
-            WHERE turn_intent_id = ?""",
-            ("turn_watch", intent_id),
+        from tests.codex_supervisor.helpers import drive_turn_intent
+
+        drive_turn_intent(
+            seeded["supervisor"].connection,
+            intent_id,
+            "SUBMITTED",
+            app_server_turn_id="turn_watch",
         )
-        seeded["supervisor"].connection.commit()
         config = make_observer_config(tmp_path, request_timeout_seconds=0.4)
         transport = AppServerTransport(
             write_fake_codex(tmp_path),
@@ -334,7 +340,8 @@ def test_observer_and_managed_runtime_share_one_server_request_consumer(tmp_path
         session = ManagedAppServerSession.for_client(client, seeded["supervisor"])
         watcher = asyncio.create_task(service._watch_server_requests())
         await asyncio.sleep(0)
-        assert session is ManagedAppServerSession.for_client(client, seeded["supervisor"])
+        again = ManagedAppServerSession.for_client(client, seeded["supervisor"])
+        assert session.owner is again.owner
         assert session._task is not None and not session._task.done()
         await client.server_requests.put(
             {
@@ -373,7 +380,9 @@ def test_mailbox_command_rejects_timestamp_only_ordering(tmp_path: Path) -> None
         messages=[message],
     )
     mailbox.mark_delivered(message.message_id)
-    batches.set_state(str(batch["wake_batch_id"]), state="COMPLETED", app_server_turn_id="turn_wake")
+    from tests.codex_supervisor.helpers import drive_wake_batch
+
+    drive_wake_batch(batches, str(batch["wake_batch_id"]), "COMPLETED", app_server_turn_id="turn_wake")
     seeded["supervisor"].connection.execute(
         """INSERT OR REPLACE INTO turn_snapshots (
             turn_id, thread_id, status, started_at, last_event_seq, updated_at

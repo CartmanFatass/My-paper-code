@@ -48,6 +48,61 @@ def write_fake_codex(tmp_path: Path) -> Path:
     return binary
 
 
+def drive_turn_intent(connection, turn_intent_id: str, target: str, **fields: object) -> None:
+    """Walk legal managed-turn edges so tests do not jump the kernel graph."""
+    paths = {
+        "SUBMITTING": ("SUBMITTING",),
+        "SUBMITTED": ("SUBMITTING", "SUBMITTED"),
+        "SUBMISSION_UNCERTAIN": ("SUBMITTING", "SUBMISSION_UNCERTAIN"),
+        "OBSERVED": ("SUBMITTING", "SUBMITTED", "OBSERVED"),
+        "COMPLETED": ("SUBMITTING", "SUBMITTED", "OBSERVED", "COMPLETED"),
+        "INCIDENT": ("INCIDENT",),
+        "CANCELLED": ("CANCELLED",),
+    }
+    current = str(
+        connection.execute(
+            "SELECT submission_state FROM managed_turn_intents WHERE turn_intent_id = ?",
+            (turn_intent_id,),
+        ).fetchone()[0]
+    )
+    assignments = ", ".join(f"{key} = ?" for key in fields)
+    for state in paths[target]:
+        if current == target:
+            return
+        extra_sql = f", {assignments}" if assignments and state == target else ""
+        values: list[object] = [state]
+        if extra_sql:
+            values.extend(fields.values())
+        values.append(turn_intent_id)
+        connection.execute(
+            f"""UPDATE managed_turn_intents
+            SET submission_state = ?, version = version + 1{extra_sql}
+            WHERE turn_intent_id = ?""",
+            values,
+        )
+        current = state
+    connection.commit()
+
+
+def drive_wake_batch(batches, wake_id: str, target: str, **fields: object) -> None:
+    """Walk legal wake-batch edges so tests do not jump the kernel graph."""
+    paths = {
+        "SUBMITTING": ("SUBMITTING",),
+        "SUBMITTED": ("SUBMITTING", "SUBMITTED"),
+        "ACTIVE": ("SUBMITTING", "SUBMITTED", "ACTIVE"),
+        "COMPLETED": ("SUBMITTING", "SUBMITTED", "ACTIVE", "COMPLETED"),
+        "INCIDENT": ("INCIDENT",),
+        "CANCELLED": ("CANCELLED",),
+    }
+    current = str(batches.get(wake_id)["state"])
+    for state in paths[target]:
+        if current == target:
+            return
+        extra = fields if state == target else {}
+        batches.set_state(wake_id, state=state, expected_state=current, **extra)
+        current = state
+
+
 def _ensure_run(store: ObserverStore) -> str:
     row = store.connection.execute("SELECT run_id FROM observer_runs ORDER BY started_at DESC LIMIT 1").fetchone()
     if row is not None:

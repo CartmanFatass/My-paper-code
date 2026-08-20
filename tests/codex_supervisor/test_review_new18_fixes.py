@@ -152,11 +152,9 @@ def test_managed_turn_submit_rejects_persisted_submitting(tmp_path: Path) -> Non
     store.mark_verification_required(binding_id)
     turns = ManagedTurns(store, client=None)  # type: ignore[arg-type]
     intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
-    seeded["supervisor"].connection.execute(
-        "UPDATE managed_turn_intents SET submission_state = 'SUBMITTING' WHERE turn_intent_id = ?",
-        (intent_id,),
-    )
-    seeded["supervisor"].connection.commit()
+    from tests.codex_supervisor.helpers import drive_turn_intent
+
+    drive_turn_intent(seeded["supervisor"].connection, intent_id, "SUBMITTING")
 
     async def body() -> None:
         with pytest.raises(ManagedTurnError, match="reconcile"):
@@ -431,9 +429,12 @@ def _active_batch(tmp_path: Path, turn_id: str = "turn_active") -> dict[str, obj
         lease_holder="sched",
     )
     mailbox.mark_delivered(message.message_id)
-    batches.set_state(
+    from tests.codex_supervisor.helpers import drive_wake_batch
+
+    drive_wake_batch(
+        batches,
         str(batch["wake_batch_id"]),
-        state="ACTIVE",
+        "ACTIVE",
         app_server_turn_id=turn_id,
         observed_at=_now(),
     )
@@ -729,7 +730,9 @@ def test_mailbox_command_with_unknown_ordering_is_rejected(tmp_path: Path) -> No
         messages=[message],
     )
     mailbox.mark_delivered(message.message_id)
-    batches.set_state(str(batch["wake_batch_id"]), state="COMPLETED", app_server_turn_id="turn_wake")
+    from tests.codex_supervisor.helpers import drive_wake_batch
+
+    drive_wake_batch(batches, str(batch["wake_batch_id"]), "COMPLETED", app_server_turn_id="turn_wake")
     gateway = CommandGateway(seeded["bindings"], seeded["bridge"], mailbox)
     body = {
         "schema_version": "1.0",

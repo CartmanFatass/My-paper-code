@@ -26,8 +26,7 @@ from tools.codex_supervisor.wake_recovery import WakeIncidentError, WakeRecovery
 
 
 def _close(seeded) -> None:
-    for session in list(ManagedAppServerSession._by_client.values()):
-        session.close()
+    ManagedAppServerSession.close_all()
     seeded["bridge"].close()
     seeded["supervisor"].close()
     seeded["semantic"].close()
@@ -275,13 +274,13 @@ def test_overload_marks_matching_mutation_uncertain(tmp_path: Path) -> None:
             await turns.submit(intent_id, "hello")
         row = turns._row(intent_id)
         assert row["submission_state"] == "SUBMISSION_UNCERTAIN"
-        mutation = seeded["supervisor"].connection.execute(
-            """SELECT state FROM mutation_intents
+        effect = seeded["supervisor"].connection.execute(
+            """SELECT state FROM app_server_effects
             WHERE method = 'turn/start' AND client_key = ?""",
             (client_user_message_id(intent_id),),
         ).fetchone()
-        assert mutation is not None
-        assert str(mutation[0]) == "SUBMISSION_UNCERTAIN"
+        assert effect is not None
+        assert str(effect[0]) == "SUBMISSION_UNCERTAIN"
         await transport.stop()
         _close(seeded)
 

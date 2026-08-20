@@ -24,8 +24,7 @@ from tools.codex_supervisor.wake_recovery import WakeRecovery
 
 
 def _close(seeded) -> None:
-    for session in list(ManagedAppServerSession._by_client.values()):
-        session.close()
+    ManagedAppServerSession.close_all()
     seeded["bridge"].close()
     seeded["supervisor"].close()
     seeded["semantic"].close()
@@ -91,11 +90,13 @@ def test_uncertain_turn_server_request_marks_turn_incident(tmp_path: Path) -> No
         expected_epoch_id=snapshot.epoch_id,
         expected_epoch_revision=snapshot.epoch_revision,
     )
-    seeded["supervisor"].connection.execute(
-        """UPDATE managed_turn_intents
-        SET submission_state = 'SUBMISSION_UNCERTAIN', app_server_turn_id = ?
-        WHERE turn_intent_id = ?""",
-        ("turn_unc", intent_id),
+    from tests.codex_supervisor.helpers import drive_turn_intent
+
+    drive_turn_intent(
+        seeded["supervisor"].connection,
+        intent_id,
+        "SUBMISSION_UNCERTAIN",
+        app_server_turn_id="turn_unc",
     )
     mutations = MutationIntentStore(seeded["supervisor"])
     mutation = mutations.begin("turn/start", client_user_message_id(intent_id), binding_id=binding_id)
@@ -131,13 +132,15 @@ def test_reconcile_uncertain_cannot_overwrite_incident(tmp_path: Path) -> None:
         )
         message_id = str(turns._row(intent_id)["client_user_message_id"])
         turns.client = MatchingTurnClient(message_id)  # type: ignore[assignment]
-        seeded["supervisor"].connection.execute(
-            """UPDATE managed_turn_intents
-            SET submission_state = 'INCIDENT', app_server_turn_id = ?, incident_json = ?
-            WHERE turn_intent_id = ?""",
-            ("turn_inc", json.dumps({"reason": "server_request"}), intent_id),
+        from tests.codex_supervisor.helpers import drive_turn_intent
+
+        drive_turn_intent(
+            seeded["supervisor"].connection,
+            intent_id,
+            "INCIDENT",
+            app_server_turn_id="turn_inc",
+            incident_json=json.dumps({"reason": "server_request"}),
         )
-        seeded["supervisor"].connection.commit()
         with pytest.raises(ManagedTurnError, match="terminal"):
             await turns.reconcile_uncertain(intent_id)
         assert turns._row(intent_id)["submission_state"] == "INCIDENT"
@@ -153,10 +156,7 @@ def test_reconcile_uncertain_cannot_overwrite_incident(tmp_path: Path) -> None:
         )
         other_key = str(turns._row(other)["client_user_message_id"])
         turns.client = MatchingTurnClient(other_key, "turn_other")  # type: ignore[assignment]
-        seeded["supervisor"].connection.execute(
-            "UPDATE managed_turn_intents SET submission_state = 'SUBMISSION_UNCERTAIN' WHERE turn_intent_id = ?",
-            (other,),
-        )
+        drive_turn_intent(seeded["supervisor"].connection, other, "SUBMISSION_UNCERTAIN")
         mutations = MutationIntentStore(seeded["supervisor"])
         mutation = mutations.begin("turn/start", other_key, binding_id=binding_id)
         mutations.mark_incident(str(mutation["intent_id"]), "server_request")
@@ -174,8 +174,11 @@ def test_command_from_uncertain_turn_with_incident_mutation_has_no_effect(tmp_pa
     store = seeded["bindings"]
     snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
     turns = ManagedTurns(store, client=None)  # type: ignore[arg-type]
+    store.suspend(seeded["root_binding_id"])
     store.store.connection.execute(
-        "UPDATE managed_actor_bindings SET binding_state = 'VERIFICATION_REQUIRED' WHERE binding_id = ?",
+        """UPDATE managed_actor_bindings
+        SET binding_state = 'VERIFICATION_REQUIRED', version = version + 1
+        WHERE binding_id = ?""",
         (seeded["root_binding_id"],),
     )
     store.store.connection.commit()
@@ -189,11 +192,13 @@ def test_command_from_uncertain_turn_with_incident_mutation_has_no_effect(tmp_pa
         expected_epoch_revision=snapshot.epoch_revision,
     )
     client_key = str(turns._row(intent_id)["client_user_message_id"])
-    seeded["supervisor"].connection.execute(
-        """UPDATE managed_turn_intents
-        SET submission_state = 'OBSERVED', app_server_turn_id = ?
-        WHERE turn_intent_id = ?""",
-        ("turn_unc_cmd", intent_id),
+    from tests.codex_supervisor.helpers import drive_turn_intent
+
+    drive_turn_intent(
+        seeded["supervisor"].connection,
+        intent_id,
+        "OBSERVED",
+        app_server_turn_id="turn_unc_cmd",
     )
     mutations = MutationIntentStore(seeded["supervisor"])
     mutation = mutations.begin("turn/start", client_key, binding_id=seeded["root_binding_id"])
