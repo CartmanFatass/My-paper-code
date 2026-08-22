@@ -162,3 +162,39 @@ owner = "research_owners"
 actors = ["PORTFOLIO", "OPERATIONAL_ROOT", "EM"]
 load_policy = "ASSIGNMENT_ONLY"
 canonical = true
+
+[[source]]
+id = "decision-index"
+path = "docs/project/DECISIONS_INDEX.md"
+kind = "NAVIGATION"
+owner = "operational_root"
+actors = ["PORTFOLIO", "OPERATIONAL_ROOT", "CM"]
+load_policy = "ON_DEMAND"
+canonical = true
+
+[[source]]
+id = "app-server-observer-policy"
+path = "docs/project/CODEX_APP_SERVER_OBSERVER_POLICY.md"
+kind = "PROCEDURE"
+owner = "operational_root"
+actors = ["OPERATIONAL_ROOT", "CM"]
+load_policy = "ASSIGNMENT_ONLY"
+canonical = true
+
+[[source]]
+id = "managed-actor-mailbox-policy"
+path = "docs/project/CODEX_MANAGED_ACTOR_AND_MAILBOX_POLICY.md"
+kind = "PROCEDURE"
+owner = "operational_root"
+actors = ["PORTFOLIO", "OPERATIONAL_ROOT"]
+load_policy = "ASSIGNMENT_ONLY"
+canonical = true
+
+[[source]]
+id = "durability-kernel-policy"
+path = "docs/project/CODEX_SUPERVISOR_DURABILITY_KERNEL_V1.md"
+kind = "CANONICAL_OWNER_ARTIFACT"
+owner = "operational_root"
+actors = ["OPERATIONAL_ROOT", "CM"]
+load_policy = "ASSIGNMENT_ONLY"
+canonical = true

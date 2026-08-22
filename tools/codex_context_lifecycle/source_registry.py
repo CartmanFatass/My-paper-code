@@ -30,11 +30,11 @@ AUTHORITY_KINDS = {
     ContextSourceKind.STAGE_OR_PORTFOLIO_CONTRACT,
 }
 CONDITIONAL_POLICIES = {
+    LoadPolicy.ON_DEMAND,
     LoadPolicy.ASSIGNMENT_ONLY,
     LoadPolicy.ASSIGNMENT_REFERENCED,
     LoadPolicy.EPOCH_REFERENCED,
 }
-CONDITIONAL_KINDS = {ContextSourceKind.EXPLICIT_USER_CONTROL_PLANE_CORRECTION}
 
 DEFAULT_REGISTRY_PATH = Path("docs/project/CONTEXT_SOURCE_REGISTRY.toml")
 
@@ -85,6 +85,10 @@ def load_registry(path: Path) -> ContextSourceRegistry:
                 actors=actors,
                 load_policy=policy,
                 canonical=bool(item.get("canonical")),
+                direction_id=(
+                    str(item["direction_id"]) if "direction_id" in item else None
+                ),
+                scope_key=str(item["scope_key"]) if "scope_key" in item else None,
             )
         )
     return ContextSourceRegistry(
@@ -114,17 +118,17 @@ def sources_for_actor(
     scope_key: str | None = None,
     requested_source_ids: tuple[str, ...] | list[str] = (),
 ) -> tuple[ContextSource, ...]:
-    del direction_id, scope_key
     kind = actor_kind.value if isinstance(actor_kind, ActorKind) else str(actor_kind)
     requested = set(requested_source_ids)
     selected: list[ContextSource] = []
     for source in registry.sources:
         if kind not in source.actors:
             continue
-        if (
-            (source.load_policy in CONDITIONAL_POLICIES or source.kind in CONDITIONAL_KINDS)
-            and source.id not in requested
-        ):
+        if source.direction_id is not None and source.direction_id != direction_id:
+            continue
+        if source.scope_key is not None and source.scope_key != scope_key:
+            continue
+        if source.load_policy in CONDITIONAL_POLICIES and source.id not in requested:
             continue
         selected.append(source)
     return tuple(selected)

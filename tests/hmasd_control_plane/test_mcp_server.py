@@ -2,8 +2,15 @@ from __future__ import annotations
 
 import hashlib
 import json
+import shutil
+import sqlite3
 from contextlib import asynccontextmanager
 from pathlib import Path
+
+try:
+    import tomllib
+except ModuleNotFoundError:
+    import tomli as tomllib
 
 import anyio
 from mcp.client import ClientSession
@@ -53,7 +60,30 @@ def _hashes(root: Path) -> dict[str, str]:
     }
 
 
-def test_server_exposes_only_five_readonly_tools_and_instructions(tmp_path: Path) -> None:
+def _file_state(root: Path) -> dict[str, tuple[str, int, int]]:
+    return {
+        str(path.relative_to(root)): (
+            hashlib.sha256(path.read_bytes()).hexdigest(),
+            path.stat().st_size,
+            path.stat().st_mtime_ns,
+        )
+        for path in sorted(root.rglob("*"))
+        if path.is_file()
+    }
+
+
+CONTEXT_QUERY_TOOL_NAMES = (
+    "context_foundation_health",
+    "context_sources_for_actor",
+    "decision_list",
+    "decision_get",
+    "project_map_validate",
+    "project_map_resolve_anchor",
+    "current_work_index",
+)
+
+
+def test_server_exposes_readonly_tools_and_instructions(tmp_path: Path) -> None:
     async def scenario():
         async with connected_server(tmp_path) as (client, initialization):
             tools = await client.list_tools()
@@ -64,6 +94,100 @@ def test_server_exposes_only_five_readonly_tools_and_instructions(tmp_path: Path
             assert health["server"] == "hmasd_observability"
 
     run(scenario)
+
+
+def test_context_query_mcp_has_no_mutating_tool(tmp_path: Path) -> None:
+    async def scenario():
+        async with connected_server(tmp_path) as (client, _initialization):
+            tools = await client.list_tools()
+            names = {tool.name for tool in tools.tools}
+            assert set(CONTEXT_QUERY_TOOL_NAMES) <= names
+            assert "decision_write" not in names
+            assert "project_map_write" not in names
+            assert "current_work_write" not in names
+
+    run(scenario)
+
+
+def test_context_query_tools_are_enabled_only_for_observability() -> None:
+    repo_root = Path(__file__).resolve().parents[2]
+    config = tomllib.loads((repo_root / ".codex/config.toml").read_text(encoding="utf-8"))
+    servers = config["mcp_servers"]
+    observability = tuple(servers["hmasd_observability"]["enabled_tools"])
+    orchestrator = set(servers["hmasd_orchestrator"]["enabled_tools"])
+    assert observability == mcp_server.OBSERVABILITY_TOOL_ALLOWLIST
+    assert set(CONTEXT_QUERY_TOOL_NAMES).isdisjoint(orchestrator)
+
+
+def _copy_context_fixture(source: Path, target: Path) -> None:
+    paths = [
+        Path("docs/project/PROJECT_MAP.md"),
+        Path("docs/project/CURRENT_WORK.md"),
+        Path("docs/project/CONTEXT_SOURCE_REGISTRY.toml"),
+        Path("docs/project/DECISIONS_INDEX.md"),
+        Path("docs/project/CONTEXT_PRECEDENCE.md"),
+        Path("docs/project/CONTEXT_RETENTION_POLICY.md"),
+        Path("docs/project/LOW_INTRUSION_CONTROL_PLANE.md"),
+        Path("docs/project/PROJECT_REQUIREMENTS.toml"),
+        Path("docs/project/ASSIGNMENT_AND_INTAKE_PROTOCOL.md"),
+        Path("docs/project/CODEX_APP_SERVER_OBSERVER_POLICY.md"),
+        Path("docs/project/CODEX_MANAGED_ACTOR_AND_MAILBOX_POLICY.md"),
+        Path("docs/project/CODEX_SUPERVISOR_DURABILITY_KERNEL_V1.md"),
+        Path(
+            "docs/research/workflow-runs/2026-08-15_codex-semantic-mvp/"
+            "ACTOR_CONTEXT_AND_COMPACTION_CONTRACT.md"
+        ),
+    ]
+    paths.extend(
+        path.relative_to(source)
+        for path in sorted((source / "docs/project/decisions").glob("ADR-*.md"))
+    )
+    for relative in paths:
+        destination = target / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source / relative, destination)
+
+
+def test_seven_context_query_tools_mutate_no_repository_sqlite_or_runtime_state(
+    tmp_path: Path,
+    monkeypatch,
+) -> None:
+    repo_root = Path(__file__).resolve().parents[2]
+    isolated = tmp_path / "repo"
+    _copy_context_fixture(repo_root, isolated)
+    sqlite = isolated / "runtime/context.sqlite3"
+    sqlite.parent.mkdir(parents=True, exist_ok=True)
+    sqlite.write_bytes(b"not-a-database-readonly-sentinel")
+    runtime_state = isolated / "runtime/observer/state.json"
+    runtime_state.parent.mkdir(parents=True, exist_ok=True)
+    runtime_state.write_text('{"sentinel": true}\n', encoding="utf-8")
+    before = _file_state(isolated)
+
+    def forbid_sqlite_open(*_args, **_kwargs):
+        raise AssertionError("context query tools must not open SQLite")
+
+    monkeypatch.setattr(sqlite3, "connect", forbid_sqlite_open)
+
+    async def scenario():
+        async with connected_server(isolated) as (client, _initialization):
+            await call(client, "context_foundation_health")
+            await call(
+                client,
+                "context_sources_for_actor",
+                {"actor": "CM", "requested_ids": []},
+            )
+            await call(client, "decision_list")
+            await call(client, "decision_get", {"decision_id": "ADR-0001"})
+            await call(client, "project_map_validate")
+            await call(
+                client,
+                "project_map_resolve_anchor",
+                {"anchor": "Codex App Server runtime plane"},
+            )
+            await call(client, "current_work_index")
+
+    run(scenario)
+    assert _file_state(isolated) == before
 
 
 def test_doctor_wrapper_matches_collector_and_mutates_no_source(tmp_path: Path) -> None:

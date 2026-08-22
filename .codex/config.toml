@@ -204,5 +204,12 @@ enabled_tools = [
   "control_plane_incidents",
   "long_effect_observe",
   "mcp_instance_list",
+  "context_foundation_health",
+  "context_sources_for_actor",
+  "decision_list",
+  "decision_get",
+  "project_map_validate",
+  "project_map_resolve_anchor",
+  "current_work_index",
 ]
 # END HMASD CODEX SEMANTIC MVP

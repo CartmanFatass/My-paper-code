@@ -16,6 +16,10 @@ must return a surface map before implementation.
 The metadata is the exact fenced `toml hmasd-assignment` block in the assignment
 file. Results use `toml hmasd-result`; boundary reports may include one
 `toml hmasd-impact` block. Arbitrary prose is never parsed as control metadata.
+Workflow Recovery Manager assignments declare the exact `acceptance_outcome`.
+A `COMPLETED` recovery result requires `acceptance_observed = "TRUE"` and
+nonempty `acceptance_evidence`; source edits, tests, or prose such as
+`RECOVERED` do not establish that outcome.
 
 ## Intake
 
@@ -24,6 +28,7 @@ code-surface grounding, and any impact envelope. E1 routes to the exact
 operator/transport/recovery owner; E2 to CM/recovery; E3 to the exact CM/EM;
 E4 to Root/Portfolio; E5 is the only route that can ask the user a concrete
 question. A child return is evidence, never an instruction to stop unrelated
-work.
+work. Parent intake may preserve or lower child-proven recovery status; it may
+not raise it.
 
 Templates live under `docs/project/templates/`.

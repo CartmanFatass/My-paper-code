@@ -11,6 +11,7 @@ from mcp.server import MCPServer
 from pydantic import Field
 
 from tools.codex_context_lifecycle.authority import default_repo_root
+from tools.codex_context_lifecycle import context_query
 
 from .diagnostics import COMPONENTS, collect_doctor, collect_incidents
 from .long_effect import observe_long_effect
@@ -36,6 +37,13 @@ OBSERVABILITY_TOOL_ALLOWLIST = (
     "control_plane_incidents",
     "long_effect_observe",
     "mcp_instance_list",
+    "context_foundation_health",
+    "context_sources_for_actor",
+    "decision_list",
+    "decision_get",
+    "project_map_validate",
+    "project_map_resolve_anchor",
+    "current_work_index",
 )
 
 _active_repo_root: Path | None = None
@@ -181,6 +189,39 @@ def _register_tools(server: MCPServer) -> MCPServer:
             "truncated": len(selected) > selected_limit,
             "total_items": len(selected),
         }
+
+    @server.tool(description="Return read-only repository context-foundation health.")
+    def context_foundation_health() -> dict[str, Any]:
+        return context_query.context_foundation_health(_get_repo_root())
+
+    @server.tool(description="List bounded context sources selected for one actor.")
+    def context_sources_for_actor(
+        actor: str,
+        requested_ids: list[str] | None = None,
+    ) -> list[dict[str, Any]]:
+        return context_query.context_sources_for_actor(
+            _get_repo_root(), actor, tuple(requested_ids or ())
+        )
+
+    @server.tool(description="List bounded repository decision metadata.")
+    def decision_list(status: str | None = None) -> list[dict[str, Any]]:
+        return context_query.decision_list(_get_repo_root(), status)
+
+    @server.tool(description="Get one exact repository decision record.")
+    def decision_get(decision_id: str) -> dict[str, Any]:
+        return context_query.decision_get(_get_repo_root(), decision_id)
+
+    @server.tool(description="Validate the repository PROJECT_MAP without writing it.")
+    def project_map_validate() -> dict[str, Any]:
+        return context_query.project_map_validate(_get_repo_root())
+
+    @server.tool(description="Resolve one exact PROJECT_MAP H2 anchor.")
+    def project_map_resolve_anchor(anchor: str) -> dict[str, Any]:
+        return context_query.project_map_resolve_anchor(_get_repo_root(), anchor)
+
+    @server.tool(description="List bounded repository CURRENT_WORK pointers.")
+    def current_work_index() -> list[dict[str, Any]]:
+        return context_query.current_work_index(_get_repo_root())
 
     return server
 

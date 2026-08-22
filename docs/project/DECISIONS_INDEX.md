@@ -11,6 +11,9 @@ portfolio allocation.
 - `ADR-0002` PROJECT_MAP is the single stable codemap (shared:codex-context-control-plane)
 - `ADR-0003` Checkpoints are reanchor cache, not canonical memory (shared:codex-context-control-plane)
 - `ADR-0004` Controlled forgetting excludes without deleting (shared:codex-context-control-plane)
+- `ADR-0005` Normal workflow uses low-intrusion artifact-first control (shared:codex-context-control-plane)
+- `ADR-0006` App Server supervisor is a noncanonical runtime plane (shared:codex-app-server-runtime)
+- `ADR-0007` Nontrivial code dispatch is file-anchored and PROJECT_MAP-grounded (shared:codex-assignment-control)
 
 ## Superseded ADRs
 

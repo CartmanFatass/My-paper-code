@@ -6,7 +6,9 @@ scientific, technical, or portfolio owner artifacts.
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
+from pathlib import PurePosixPath
 
 try:
     import tomllib
@@ -16,6 +18,7 @@ except ModuleNotFoundError:  # Python 3.10 project interpreter
 from .models import DecisionRecord
 
 ALLOWED_STATUSES = frozenset({"accepted", "superseded", "proposed"})
+SHARED_ADR_OWNERS = frozenset({"operational_root", "user"})
 DECISIONS_DIR = Path("docs/project/decisions")
 INDEX_PATH = Path("docs/project/DECISIONS_INDEX.md")
 EXTERNAL_SYSTEMS = (
@@ -28,6 +31,40 @@ EXTERNAL_SYSTEMS = (
 
 class DecisionError(ValueError):
     """Raised when an ADR front matter is invalid."""
+
+
+_PATH_SCHEME_OR_DRIVE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
+
+
+def _repository_relative_source(source: str) -> str:
+    """Return a normalized source path after repository-relative validation."""
+
+    normalized = source.replace("\\", "/")
+    parts = PurePosixPath(normalized).parts
+    if (
+        not normalized
+        or normalized.startswith("/")
+        or _PATH_SCHEME_OR_DRIVE.match(normalized)
+        or ".." in parts
+    ):
+        raise DecisionError(
+            "canonical source must be a repository-relative path; "
+            f"absolute path, scheme, drive, or parent traversal is forbidden: {source}"
+        )
+    return normalized
+
+
+def _resolved_repository_source(root: Path, source: str) -> Path:
+    repository = Path(root).resolve()
+    candidate = (repository / _repository_relative_source(source)).resolve()
+    try:
+        candidate.relative_to(repository)
+    except ValueError as exc:
+        raise DecisionError(
+            "canonical source must resolve inside the repository: "
+            f"{source}"
+        ) from exc
+    return candidate
 
 
 def _front_matter(text: str) -> dict[str, object]:
@@ -68,11 +105,7 @@ def parse_decision(path: Path) -> DecisionRecord:
         raise DecisionError("self-supersede is forbidden")
     sources = _as_tuple(data.get("canonical_sources"), "canonical_sources")
     for source in sources:
-        normalized = source.replace("\\", "/")
-        if Path(normalized).is_absolute() or normalized.startswith("/") or (
-            len(normalized) > 1 and normalized[1] == ":"
-        ):
-            raise DecisionError(f"absolute path is forbidden: {source}")
+        _repository_relative_source(source)
     return DecisionRecord(
         decision_id=decision_id,
         title=str(data.get("title") or ""),
@@ -87,6 +120,41 @@ def parse_decision(path: Path) -> DecisionRecord:
     )
 
 
+def validate_decision_set(
+    root: Path,
+    records: tuple[DecisionRecord, ...],
+) -> tuple[str, ...]:
+    errors: list[str] = []
+    by_id = {item.decision_id: item for item in records}
+    for record in records:
+        if record.status == "accepted" and record.scope.startswith("shared:"):
+            if record.owner not in SHARED_ADR_OWNERS:
+                errors.append(
+                    f"{record.decision_id}: shared accepted ADR owner must be operational_root or user"
+                )
+        for source in record.canonical_sources:
+            try:
+                source_path = _resolved_repository_source(root, source)
+            except DecisionError as exc:
+                errors.append(f"{record.decision_id}: {exc}")
+                continue
+            if record.status == "accepted" and not source_path.is_file():
+                errors.append(
+                    f"{record.decision_id}: missing canonical source {source}"
+                )
+        for superseded_id in record.supersedes:
+            peer = by_id.get(superseded_id)
+            if peer is None:
+                errors.append(
+                    f"{record.decision_id}: unknown superseded ADR {superseded_id}"
+                )
+            elif record.status == "accepted" and peer.status != "superseded":
+                errors.append(
+                    f"{record.decision_id}: superseded ADR {superseded_id} must be marked superseded"
+                )
+    return tuple(errors)
+
+
 def collect_decisions(root: Path) -> tuple[DecisionRecord, ...]:
     directory = Path(root) / "docs" / "project" / "decisions"
     if not directory.is_dir():
@@ -99,7 +167,9 @@ def collect_decisions(root: Path) -> tuple[DecisionRecord, ...]:
             raise DecisionError(f"duplicate ID: {record.decision_id}")
         seen.add(record.decision_id)
         records.append(record)
-    ids = {record.decision_id: record for record in records}
+    decision_set = tuple(records)
+    errors = list(validate_decision_set(root, decision_set))
+    ids = {record.decision_id: record for record in decision_set}
     accepted_pairs: set[tuple[str, str]] = set()
     for record in records:
         if record.status != "accepted":
@@ -110,11 +180,13 @@ def collect_decisions(root: Path) -> tuple[DecisionRecord, ...]:
                 pair = tuple(sorted((record.decision_id, other)))
                 accepted_pairs.add(pair)
     if accepted_pairs:
-        raise DecisionError(
+        errors.append(
             "two accepted ADRs that supersede each other: "
             + ", ".join(f"{left}/{right}" for left, right in sorted(accepted_pairs))
         )
-    return tuple(records)
+    if errors:
+        raise DecisionError("\n".join(errors))
+    return decision_set
 
 
 def render_decision_index(records: tuple[DecisionRecord, ...] | list[DecisionRecord]) -> str:

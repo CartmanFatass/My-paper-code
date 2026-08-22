@@ -1,0 +1,25 @@
+﻿{
+    "schema_version":  1,
+    "preflight_id":  "resource_1a595382366b4023b181e9ddfb84f38c",
+    "assignment_id":  "asg_context_runtime_calibration",
+    "captured_at":  "2026-08-22T18:59:58.6688874Z",
+    "host_identity":  "JACOB",
+    "route_id":  "continuous_roster_native",
+    "backend":  "cpp",
+    "cpu":  {
+                "physical_cores":  8,
+                "logical_processors":  16,
+                "load_percent":  9
+            },
+    "memory":  {
+                   "total_gib":  29.7861,
+                   "available_gib":  6.7934
+               },
+    "selection":  {
+                      "selected_worker_count":  2,
+                      "threads_per_worker":  1,
+                      "parallel":  true,
+                      "selection_rationale":  "Host preflight: 8 physical/16 logical CPUs, three system-total CPU readings 22/10/8 percent and 6.49-6.89 GiB available; two-worker bounded Task 10 calibration only within \u003c=8 GiB lease; not a project default.",
+                      "cm_owner":  "CM:shared:context-foundation"
+                  }
+}

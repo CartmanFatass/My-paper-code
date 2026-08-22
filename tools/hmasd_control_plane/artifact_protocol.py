@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Mapping
+from typing import Literal, Mapping
 
 try:
     import tomllib
@@ -19,6 +19,7 @@ from .requirements_registry import Requirement, require_active
 KNOWN_ROLES = {
     "hmasd-implementer", "hmasd-implementer-terra", "hmasd-experiment-operator",
     "hmasd-workflow-recovery-manager", "hmasd-code-project-manager", "hmasd-independent-research-explorer",
+    "hmasd-reviewer",
 }
 KNOWN_PROFILES = {
     "R0_NAVIGATION_AND_MECHANICAL", "R1_ROUTINE_ENGINEERING", "R2_EXPERIMENT_EXECUTION",
@@ -56,6 +57,7 @@ class AssignmentArtifact:
     non_target_surfaces: tuple[str, ...]
     outcome: str = ""
     source_path: str = ""
+    acceptance_outcome: str = ""
 
 
 @dataclass(frozen=True)
@@ -71,6 +73,8 @@ class ResultArtifact:
     direct_consumer_checked: str
     impact: ImpactEnvelope | None
     source_path: str = ""
+    acceptance_observed: Literal["TRUE", "FALSE", "UNKNOWN"] = "UNKNOWN"
+    acceptance_evidence: tuple[str, ...] = ()
 
 
 def _tuple(raw: object, field: str, allow_empty: bool = True) -> tuple[str, ...]:
@@ -128,6 +132,7 @@ def parse_assignment(path: Path) -> AssignmentArtifact:
         non_target_surfaces=_tuple(raw.get("non_target_surfaces"), "non_target_surfaces", allow_empty=False),
         outcome=_extract_section(text, "Outcome"),
         source_path=str(path),
+        acceptance_outcome=str(raw.get("acceptance_outcome") or "").strip(),
     )
 
 
@@ -173,6 +178,8 @@ def parse_result(path: Path) -> ResultArtifact:
         direct_consumer_checked=str(raw.get("direct_consumer_checked") or ""),
         impact=impact,
         source_path=str(path),
+        acceptance_observed=str(raw.get("acceptance_observed") or "UNKNOWN"),
+        acceptance_evidence=_tuple(raw.get("acceptance_evidence"), "acceptance_evidence"),
     )
 
 
@@ -195,6 +202,95 @@ def _root_for_assignment(assignment: AssignmentArtifact) -> Path:
     return Path.cwd().resolve()
 
 
+def _validate_review_search_roots(root: Path, search_roots: tuple[str, ...]) -> list[str]:
+    errors: list[str] = []
+    resolved_root = root.resolve()
+    for value in search_roots:
+        path = _repo_path(value)
+        if re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", value) or _has_parent(value):
+            errors.append(f"search_roots contains non-repository path: {value}")
+            continue
+        if len(path.parts) < 2:
+            errors.append(f"search_roots must identify a bounded subtree: {value}")
+            continue
+        resolved = (resolved_root / path).resolve()
+        try:
+            resolved.relative_to(resolved_root)
+        except ValueError:
+            errors.append(f"search_roots resolves outside repository: {value}")
+            continue
+        if not resolved.is_dir():
+            errors.append(f"search_roots path does not exist: {value}")
+    return errors
+
+
+def _validate_recovery_acceptance(
+    root: Path,
+    result: ResultArtifact,
+    assignment: AssignmentArtifact,
+) -> list[str]:
+    if (
+        assignment.executor_role != "hmasd-workflow-recovery-manager"
+        or result.result_kind != "COMPLETED"
+    ):
+        return []
+    errors: list[str] = []
+    if not assignment.acceptance_outcome.strip():
+        errors.append("WRM COMPLETED requires a nonblank exact acceptance_outcome")
+    if result.acceptance_observed != "TRUE" or not result.acceptance_evidence:
+        errors.append("WRM COMPLETED requires directly observed acceptance and evidence")
+        return errors
+    resolved_root = root.resolve()
+    observed = {value.replace("\\", "/") for value in result.files_observed}
+    for value in result.acceptance_evidence:
+        path = _repo_path(value)
+        if re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", value) or _has_parent(value):
+            errors.append(
+                f"acceptance_evidence contains non-repository path: {value}"
+            )
+            continue
+        resolved = (resolved_root / path).resolve()
+        try:
+            resolved.relative_to(resolved_root)
+        except ValueError:
+            errors.append(f"acceptance_evidence resolves outside repository: {value}")
+            continue
+        if not resolved.is_file():
+            errors.append(f"acceptance_evidence file does not exist: {value}")
+        if value.replace("\\", "/") not in observed:
+            errors.append(
+                f"acceptance_evidence must be listed in files_observed: {value}"
+            )
+    return errors
+
+
+def recovery_acceptance_proven(
+    assignment: AssignmentArtifact, result: ResultArtifact
+) -> bool:
+    """Return structural recovery evidence status without interpreting file content."""
+    return (
+        assignment.executor_role == "hmasd-workflow-recovery-manager"
+        and result.result_kind == "COMPLETED"
+        and not _validate_recovery_acceptance(
+            _root_for_assignment(assignment), result, assignment
+        )
+    )
+
+
+def _is_narrow_wrm_completed_recovery_claim(
+    assignment: AssignmentArtifact, result: ResultArtifact
+) -> bool:
+    permitted_actions = {"accept_recovery", "recovery_completed"}
+    affected_actions = set(result.impact.affected_actions) if result.impact else set()
+    return (
+        assignment.executor_role == "hmasd-workflow-recovery-manager"
+        and result.impact is not None
+        and bool(affected_actions)
+        and affected_actions <= permitted_actions
+        and recovery_acceptance_proven(assignment, result)
+    )
+
+
 def _map_headings(root: Path | None = None) -> set[str]:
     map_path = (root or Path.cwd()) / "docs/project/PROJECT_MAP.md"
     if not map_path.exists():
@@ -211,6 +307,9 @@ def validate_assignment(assignment: AssignmentArtifact, registry: Mapping[str, R
         errors.append(f"unknown assignment_mode: {assignment.assignment_mode}")
     if assignment.executor_role not in KNOWN_ROLES:
         errors.append(f"unknown executor_role: {assignment.executor_role}")
+    if assignment.executor_role == "hmasd-workflow-recovery-manager":
+        if not assignment.acceptance_outcome.strip():
+            errors.append("WRM assignment requires acceptance_outcome")
     if assignment.strictness_profile not in KNOWN_PROFILES:
         errors.append(f"unknown strictness_profile: {assignment.strictness_profile}")
     if assignment.evidence_class not in KNOWN_EVIDENCE:
@@ -224,6 +323,14 @@ def validate_assignment(assignment: AssignmentArtifact, registry: Mapping[str, R
             errors.append("DISCOVERY assignments cannot name writable files")
         if not assignment.search_roots:
             errors.append("DISCOVERY assignment requires bounded search_roots")
+    elif assignment.assignment_mode == "REVIEW":
+        if not assignment.affected_files and not assignment.create_files:
+            if not assignment.search_roots:
+                errors.append(
+                    "REVIEW assignment requires exact files or bounded search_roots"
+                )
+        if assignment.search_roots:
+            errors.extend(_validate_review_search_roots(root, assignment.search_roots))
     elif not assignment.affected_files and not assignment.create_files:
         errors.append("implementation/review/operation assignment requires exact files")
     if not assignment.direct_consumers:
@@ -258,6 +365,9 @@ def validate_result(result: ResultArtifact, assignment: AssignmentArtifact) -> l
         errors.append(f"unknown result_kind: {result.result_kind}")
     if result.author_role != assignment.executor_role:
         errors.append("author_role does not match assignment executor_role")
+    if result.acceptance_observed not in {"TRUE", "FALSE", "UNKNOWN"}:
+        errors.append(f"unknown acceptance_observed: {result.acceptance_observed}")
+    errors.extend(_validate_recovery_acceptance(root, result, assignment))
     if result.owner_return != assignment.return_to:
         errors.append("owner_return does not match assignment return_to")
     if result.project_map_anchor != assignment.project_map_anchor:
@@ -272,7 +382,12 @@ def validate_result(result: ResultArtifact, assignment: AssignmentArtifact) -> l
         else:
             errors.extend(validate_impact(result.impact))
     if result.impact is not None and result.result_kind == "COMPLETED":
-        errors.append("completed result should not carry an impact envelope")
+        errors.extend(validate_impact(result.impact))
+        if not _is_narrow_wrm_completed_recovery_claim(assignment, result):
+            errors.append(
+                "completed result may carry impact only for a validated WRM "
+                "recovery acceptance claim"
+            )
     for name, values in (("files_observed", result.files_observed), ("files_changed", result.files_changed)):
         for value in values:
             if _has_parent(value):

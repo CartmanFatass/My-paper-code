@@ -1,0 +1,20 @@
+{
+  "schema_version": 3,
+  "previous_plan_baseline_present": true,
+  "source_registry_valid": true,
+  "project_map_contract_valid": true,
+  "current_work_valid": true,
+  "required_adr_ids_present": true,
+  "current_control_plane_sources_present": true,
+  "behavioral_hooks_disabled": true,
+  "decision_index_current": true,
+  "memory_authority": "none",
+  "compaction_summary_authority": "none",
+  "physical_deletion_enabled": false,
+  "active_actor_count": 0,
+  "open_promotion_count": 0,
+  "prepared_rollover_count": 0,
+  "archive_candidate_count": 0,
+  "runtime_state_status": "READ_ONLY",
+  "runtime_state_diagnostics": []
+}

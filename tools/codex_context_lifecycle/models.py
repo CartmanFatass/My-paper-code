@@ -115,6 +115,8 @@ class ContextSource:
     actors: tuple[str, ...]
     load_policy: LoadPolicy
     canonical: bool
+    direction_id: str | None = None
+    scope_key: str | None = None
 
 
 @dataclass(frozen=True)

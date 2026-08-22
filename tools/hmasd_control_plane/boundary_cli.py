@@ -72,7 +72,19 @@ def main(argv: list[str] | None = None) -> int:
         _out({"valid": not errors, "errors": errors, "assignment_id": item.assignment_id})
         return 1 if errors else 0
     if args.command == "incident":
-        result_item = parse_result(Path(args.result)); assignment_item = parse_assignment(Path(args.assignment)); requirements = load_requirements(Path(args.requirements));
+        result_item = parse_result(Path(args.result)); assignment_item = parse_assignment(Path(args.assignment)); requirements = load_requirements(Path(args.requirements))
+        assignment_errors = validate_assignment(assignment_item, requirements)
+        result_errors = validate_result(result_item, assignment_item)
+        if assignment_errors or result_errors:
+            _out({
+                "valid": False,
+                "errors": {
+                    "assignment": assignment_errors,
+                    "result": result_errors,
+                },
+                "assignment_id": assignment_item.assignment_id,
+            })
+            return 1
         return _out(route_result(assignment_item, result_item, requirements).__dict__)
     if args.command == "preflight":
         item = load_resource_preflight(Path(args.path)); errors = validate_resource_preflight(item)

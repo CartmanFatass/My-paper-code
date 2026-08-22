@@ -4,7 +4,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .artifact_protocol import AssignmentArtifact, ResultArtifact
+from .artifact_protocol import (
+    AssignmentArtifact,
+    ResultArtifact,
+    recovery_acceptance_proven,
+    validate_assignment,
+    validate_result,
+)
 from .incident_scope import IncidentLevel, validate_impact
 from .requirements_registry import Requirement
 
@@ -20,6 +26,15 @@ class IntakeDecision:
 
 
 def route_result(assignment: AssignmentArtifact, result: ResultArtifact, registry: dict[str, Requirement]) -> IntakeDecision:
+    assignment_errors = validate_assignment(assignment, registry)
+    result_errors = validate_result(result, assignment)
+    if assignment_errors or result_errors:
+        parts: list[str] = []
+        if assignment_errors:
+            parts.append("assignment validation failed: " + "; ".join(assignment_errors))
+        if result_errors:
+            parts.append("result validation failed: " + "; ".join(result_errors))
+        raise ValueError(" | ".join(parts))
     if result.assignment_id != assignment.assignment_id:
         raise ValueError("assignment/result identity mismatch")
     if result.impact is None:
@@ -42,11 +57,17 @@ def route_result(assignment: AssignmentArtifact, result: ResultArtifact, registr
         IncidentLevel.E4_CROSS_OWNER_DECISION: result.impact.escalate_to,
         IncidentLevel.E5_USER_AUTHORITY_REQUIRED: "USER",
     }
+    claims_recovery_acceptance = (
+        assignment.executor_role == "hmasd-workflow-recovery-manager"
+        and bool({"accept_recovery", "recovery_completed"}.intersection(forbidden))
+    )
+    acceptance_proven = recovery_acceptance_proven(assignment, result)
     return IntakeDecision(
         level.value,
         routes[level],
         "USER_QUESTION_REQUIRED" if level == IncidentLevel.E5_USER_AUTHORITY_REQUIRED else "ROUTE_SCOPE_LOCAL",
         result.impact.user_question,
         level != IncidentLevel.E5_USER_AUTHORITY_REQUIRED,
-        level in {IncidentLevel.E3_DOMAIN_OWNER_DECISION, IncidentLevel.E4_CROSS_OWNER_DECISION, IncidentLevel.E5_USER_AUTHORITY_REQUIRED},
+        level in {IncidentLevel.E3_DOMAIN_OWNER_DECISION, IncidentLevel.E4_CROSS_OWNER_DECISION, IncidentLevel.E5_USER_AUTHORITY_REQUIRED}
+        and not (claims_recovery_acceptance and not acceptance_proven),
     )

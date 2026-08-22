@@ -2,7 +2,12 @@ from pathlib import Path
 
 import pytest
 
-from tools.codex_context_lifecycle.models import LoadPolicy
+from tools.codex_context_lifecycle.models import (
+    ContextSource,
+    ContextSourceKind,
+    ContextSourceRegistry,
+    LoadPolicy,
+)
 from tools.codex_context_lifecycle.source_registry import (
     RegistryError,
     load_registry,
@@ -17,6 +22,156 @@ def _registry(repo_root: Path):
     return load_registry(repo_root / "docs/project/CONTEXT_SOURCE_REGISTRY.toml")
 
 
+def registry_with_source(
+    *,
+    actors: tuple[str, ...],
+    load_policy: str,
+    kind: ContextSourceKind = ContextSourceKind.CANONICAL_OWNER_ARTIFACT,
+    direction_id: str | None = None,
+    scope_key: str | None = None,
+) -> ContextSourceRegistry:
+    return ContextSourceRegistry(
+        schema_version=1,
+        registry_revision=1,
+        sources=(
+            ContextSource(
+                id="source-x",
+                path="docs/project/source-x.md",
+                kind=kind,
+                owner="test-owner",
+                actors=actors,
+                load_policy=LoadPolicy(load_policy),
+                canonical=False,
+                direction_id=direction_id,
+                scope_key=scope_key,
+            ),
+        ),
+    )
+
+
+def test_role_required_source_is_selected_by_default_regardless_of_kind() -> None:
+    registry = registry_with_source(
+        actors=("OPERATIONAL_ROOT",),
+        load_policy="ROLE_REQUIRED",
+        kind=ContextSourceKind.EXPLICIT_USER_CONTROL_PLANE_CORRECTION,
+    )
+
+    assert tuple(
+        source.id for source in sources_for_actor(registry, ActorKind.OPERATIONAL_ROOT)
+    ) == ("source-x",)
+
+
+def test_on_demand_source_requires_an_explicit_request() -> None:
+    registry = registry_with_source(
+        actors=("OPERATIONAL_ROOT",),
+        load_policy="ON_DEMAND",
+    )
+
+    assert sources_for_actor(registry, ActorKind.OPERATIONAL_ROOT) == ()
+    assert tuple(
+        source.id
+        for source in sources_for_actor(
+            registry,
+            ActorKind.OPERATIONAL_ROOT,
+            requested_source_ids=("source-x",),
+        )
+    ) == ("source-x",)
+
+
+def test_sources_for_actor_keeps_positional_call_shape_and_scope_filters() -> None:
+    registry = registry_with_source(
+        actors=("EM",),
+        load_policy="ON_DEMAND",
+        direction_id="direction:alpha",
+        scope_key="scope:one",
+    )
+
+    assert sources_for_actor(
+        registry,
+        "EM",
+        "direction:beta",
+        "scope:one",
+        ["source-x"],
+    ) == ()
+    assert tuple(
+        source.id
+        for source in sources_for_actor(
+            registry,
+            "EM",
+            "direction:alpha",
+            "scope:one",
+            ["source-x"],
+        )
+    ) == ("source-x",)
+
+
+def test_registry_contains_current_context_foundation_sources(repo_root: Path) -> None:
+    registry = load_registry(
+        repo_root / "docs/project/CONTEXT_SOURCE_REGISTRY.toml"
+    )
+    ids = {item.id for item in registry.sources}
+    assert {
+        "decision-index",
+        "app-server-observer-policy",
+        "managed-actor-mailbox-policy",
+        "durability-kernel-policy",
+    } <= ids
+
+
+def test_registry_parses_optional_direction_and_scope_fields(tmp_path: Path) -> None:
+    path = tmp_path / "registry.toml"
+    path.write_text(
+        """
+schema_version = 1
+registry_revision = 1
+[[source]]
+id = "source-x"
+path = "docs/project/source-x.md"
+kind = "CANONICAL_OWNER_ARTIFACT"
+owner = "test-owner"
+actors = ["EM"]
+load_policy = "ASSIGNMENT_REFERENCED"
+canonical = false
+direction_id = "direction:alpha"
+scope_key = "scope:one"
+""",
+        encoding="utf-8",
+    )
+
+    source = load_registry(path).sources[0]
+
+    assert source.direction_id == "direction:alpha"
+    assert source.scope_key == "scope:one"
+
+
+def test_direction_scoped_source_is_not_selected_for_other_direction() -> None:
+    registry = registry_with_source(
+        actors=("EM",),
+        direction_id="direction:alpha",
+        load_policy="ASSIGNMENT_REFERENCED",
+    )
+    assert sources_for_actor(
+        registry,
+        "EM",
+        direction_id="direction:beta",
+        requested_source_ids=("source-x",),
+    ) == ()
+
+
+def test_scope_scoped_source_is_not_selected_for_other_scope() -> None:
+    registry = registry_with_source(
+        actors=("EM",),
+        scope_key="scope:alpha",
+        load_policy="ASSIGNMENT_REFERENCED",
+    )
+    assert sources_for_actor(
+        registry,
+        "EM",
+        scope_key="scope:beta",
+        requested_source_ids=("source-x",),
+    ) == ()
+
+
 def test_operational_root_projection_excludes_em_cm_internals(repo_root: Path) -> None:
     registry = _registry(repo_root)
     assert validate_registry(registry, repo_root) == ()
@@ -25,14 +180,22 @@ def test_operational_root_projection_excludes_em_cm_internals(repo_root: Path) -
     assert {
         "root-router",
         "root-role",
-        "current-work-index",
-        "project-map",
         "portfolio-contract",
+        "p0-hidden-limit-control-plane-correction",
     } <= ids
+    assert "current-work-index" not in ids
+    assert "project-map" not in ids
     assert "em-role" not in ids
     assert "cm-role" not in ids
     assert "em-procedure" not in ids
     assert "agent-runtime-context" not in ids
+    requested = sources_for_actor(
+        registry,
+        ActorKind.OPERATIONAL_ROOT,
+        requested_source_ids=("current-work-index", "project-map"),
+    )
+    requested_ids = {source.id for source in requested}
+    assert {"current-work-index", "project-map"} <= requested_ids
 
 
 def test_portfolio_projection_excludes_runtime_map(repo_root: Path) -> None:
@@ -75,21 +238,29 @@ def test_cm_projection_needs_assigned_runtime_and_science_refs(repo_root: Path) 
     registry = _registry(repo_root)
     sources = sources_for_actor(registry, ActorKind.CM)
     ids = {source.id for source in sources}
-    assert {"root-router", "cm-role", "project-map"} <= ids
+    assert {
+        "root-router",
+        "cm-role",
+        "p0-hidden-limit-control-plane-correction",
+    } <= ids
+    assert "project-map" not in ids
     assert "agent-runtime-context" not in ids
     assigned = sources_for_actor(
         registry,
         ActorKind.CM,
-        requested_source_ids=("agent-runtime-context",),
+        requested_source_ids=("agent-runtime-context", "project-map"),
     )
-    assert any(source.id == "agent-runtime-context" for source in assigned)
+    assigned_ids = {source.id for source in assigned}
+    assert {"agent-runtime-context", "project-map"} <= assigned_ids
 
 
-def test_leaf_receives_router_only_until_assignment_refs(repo_root: Path) -> None:
+def test_leaf_receives_router_and_role_required_sources_until_assignment_refs(
+    repo_root: Path,
+) -> None:
     registry = _registry(repo_root)
     sources = sources_for_actor(registry, ActorKind.LEAF)
     ids = {source.id for source in sources}
-    assert ids == {"root-router"}
+    assert ids == {"root-router", "p0-hidden-limit-control-plane-correction"}
 
 
 def test_registry_rejects_duplicate_and_absolute_paths(tmp_path: Path) -> None:
