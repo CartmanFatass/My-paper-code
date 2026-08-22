@@ -14,5 +14,7 @@
   "active_actor_count": 0,
   "open_promotion_count": 0,
   "prepared_rollover_count": 0,
-  "archive_candidate_count": 0
+  "archive_candidate_count": 0,
+  "runtime_state_status": "READ_ONLY",
+  "runtime_state_diagnostics": []
 }
