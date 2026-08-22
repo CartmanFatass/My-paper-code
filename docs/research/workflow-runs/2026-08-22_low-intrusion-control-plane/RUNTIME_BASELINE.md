@@ -75,9 +75,9 @@ environment-steps-per-second values; none is extrapolated.
 
 | Artifact | Warmup env steps | Measured env steps | Optimizer updates | Evaluations | Measured wall seconds | Backend | Workers x threads | Parallel | Result-bearing | Runtime profile | Throughput (env steps/s) | Assessment |
 |---|---:|---:|---:|---:|---:|---|---:|---|---|---|---:|---|
-| `runtime/TOY_ENV_SAMPLE.json` | 768 | 768 | 0 | 0 | 0.018435200094245374 | `cpp` | 1 x 1 | false | false | `TOY_SMOKE` | 41659.433913 | `PLAUSIBLE` |
+| `runtime/TOY_ENV_SAMPLE.json` | 384 | 768 | 0 | 0 | 0.018435200094245374 | `cpp` | 1 x 1 | false | false | `TOY_SMOKE` | 41659.433913 | `PLAUSIBLE` |
 | `runtime/LEARNER_UPDATE_SAMPLE.json` | 192 | 576 | 9 | 0 | 3.6362880000378937 | `python_torch_cpu` | 1 x 1 | false | false | `TOY_EXPLORATORY` | 158.403295 | `PLAUSIBLE` |
-| `runtime/CPP_PARALLEL_SAMPLE.json` | 1536 | 1536 | 0 | 0 | 0.030842300038784742 | `cpp` | 2 x 1 | true | true | `TOY_EXPLORATORY` | 49801.733271 | `PLAUSIBLE` |
+| `runtime/CPP_PARALLEL_SAMPLE.json` | 768 | 1536 | 0 | 0 | 0.030842300038784742 | `cpp` | 2 x 1 | true | true | `TOY_EXPLORATORY` | 49801.733271 | `PLAUSIBLE` |
 | `runtime/PYTHON_REFERENCE_SAMPLE.json` | 384 | 768 | 0 | 0 | 0.042542300070635974 | `python_reference` | 1 x 1 | false | false | `REFERENCE_ORACLE` | 18052.620538 | `PLAUSIBLE` |
 
 The learner/update sample used integrated source commit
@@ -135,9 +135,9 @@ show no concrete false classification, so no runtime threshold was modified.
 | Artifact | SHA-256 |
 |---|---|
 | `runtime/RESOURCE_PREFLIGHT.json` | `C571B54F481B2E70D254C1BC6FA3F22F33BC8354C3603E0F9E52CDD8C88383F3` |
-| `runtime/TOY_ENV_SAMPLE.json` | `6370E38D3E35C2B840B537E7CCD3EA094831552ADA4A470BA0ED668CFEF2D757` |
+| `runtime/TOY_ENV_SAMPLE.json` | `F8A948C0A494E79BDFB04F90F715B79EDD28496B4AF865C21B7A47580A832438` |
 | `runtime/LEARNER_UPDATE_SAMPLE.json` | `FAF70A496AF0DAF68D166D8C6612386F14C2536AFE24FBB16B167C64837C0CB8` |
-| `runtime/CPP_PARALLEL_SAMPLE.json` | `0DF1AED41926AE1725F201EA7D8F4EBA2BD8BA5A19ABA3B9AF6FF7FF8AF7B611` |
+| `runtime/CPP_PARALLEL_SAMPLE.json` | `0F20F10E76044F5DA0CFC7533BE7396DBF3AE42121C3A4E382D3D63A2F708104` |
 | `runtime/PYTHON_REFERENCE_SAMPLE.json` | `FA832E0DFF04ADCC90E3937941E664A230CD168D8ABCD710C011D37347248694` |
 
 ## Limitations and policy disposition

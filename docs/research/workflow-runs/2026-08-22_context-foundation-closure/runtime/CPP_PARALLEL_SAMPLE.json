@@ -70,6 +70,6 @@
   "target_steps_unit": "environment_steps",
   "threads_per_worker": 1,
   "wall_seconds": 0.030842300038784742,
-  "warmup_environment_steps": 1536,
+  "warmup_environment_steps": 768,
   "worker_count": 2
 }
