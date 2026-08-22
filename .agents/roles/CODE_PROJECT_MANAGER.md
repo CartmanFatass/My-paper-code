@@ -111,8 +111,9 @@ part of the construction brief, not a post-hoc optimization. Before writing a
 production runner or a long-lived Python training/evaluation loop, CM must
 freeze and validate:
 
-- the exact `envs.native.production_backend` component and candidate-local
-  source-keyed loader contract;
+- the exact native boundary named by the assignment and
+  `EXECUTION_BACKEND_REGISTRY`, plus the candidate-local source-keyed loader
+  contract;
 - a real C++ batched reset/step/terminal boundary (or the exact native host
   boundary for a non-environment workload), ABI/size probes and malformed-input
   fail-closed tests;
