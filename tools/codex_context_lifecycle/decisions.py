@@ -6,7 +6,9 @@ scientific, technical, or portfolio owner artifacts.
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
+from pathlib import PurePosixPath
 
 try:
     import tomllib
@@ -29,6 +31,40 @@ EXTERNAL_SYSTEMS = (
 
 class DecisionError(ValueError):
     """Raised when an ADR front matter is invalid."""
+
+
+_PATH_SCHEME_OR_DRIVE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
+
+
+def _repository_relative_source(source: str) -> str:
+    """Return a normalized source path after repository-relative validation."""
+
+    normalized = source.replace("\\", "/")
+    parts = PurePosixPath(normalized).parts
+    if (
+        not normalized
+        or normalized.startswith("/")
+        or _PATH_SCHEME_OR_DRIVE.match(normalized)
+        or ".." in parts
+    ):
+        raise DecisionError(
+            "canonical source must be a repository-relative path; "
+            f"absolute path, scheme, drive, or parent traversal is forbidden: {source}"
+        )
+    return normalized
+
+
+def _resolved_repository_source(root: Path, source: str) -> Path:
+    repository = Path(root).resolve()
+    candidate = (repository / _repository_relative_source(source)).resolve()
+    try:
+        candidate.relative_to(repository)
+    except ValueError as exc:
+        raise DecisionError(
+            "canonical source must resolve inside the repository: "
+            f"{source}"
+        ) from exc
+    return candidate
 
 
 def _front_matter(text: str) -> dict[str, object]:
@@ -69,11 +105,7 @@ def parse_decision(path: Path) -> DecisionRecord:
         raise DecisionError("self-supersede is forbidden")
     sources = _as_tuple(data.get("canonical_sources"), "canonical_sources")
     for source in sources:
-        normalized = source.replace("\\", "/")
-        if Path(normalized).is_absolute() or normalized.startswith("/") or (
-            len(normalized) > 1 and normalized[1] == ":"
-        ):
-            raise DecisionError(f"absolute path is forbidden: {source}")
+        _repository_relative_source(source)
     return DecisionRecord(
         decision_id=decision_id,
         title=str(data.get("title") or ""),
@@ -101,7 +133,12 @@ def validate_decision_set(
                     f"{record.decision_id}: shared accepted ADR owner must be operational_root or user"
                 )
         for source in record.canonical_sources:
-            if record.status == "accepted" and not (Path(root) / source).is_file():
+            try:
+                source_path = _resolved_repository_source(root, source)
+            except DecisionError as exc:
+                errors.append(f"{record.decision_id}: {exc}")
+                continue
+            if record.status == "accepted" and not source_path.is_file():
                 errors.append(
                     f"{record.decision_id}: missing canonical source {source}"
                 )

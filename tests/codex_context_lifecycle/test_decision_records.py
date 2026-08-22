@@ -146,6 +146,40 @@ def test_parse_rejects_invalid_front_matter(tmp_path: Path, body: str, match: st
         parse_decision(path)
 
 
+@pytest.mark.parametrize(
+    "canonical_source",
+    [
+        '"../outside.md"',
+        '"docs/project/../outside.md"',
+        "'docs\\..\\outside.md'",
+        '"https://example.invalid/source.md"',
+        "'C:\\outside.md'",
+    ],
+)
+def test_parse_rejects_non_repository_relative_canonical_source(
+    tmp_path: Path,
+    canonical_source: str,
+) -> None:
+    path = _write_adr(
+        tmp_path,
+        "ADR-X.md",
+        f'''+++
+decision_id = "ADR-X"
+title = "x"
+owner = "operational_root"
+scope = "shared:test"
+status = "accepted"
+decision_date = "2026-08-17"
+supersedes = []
+canonical_sources = [{canonical_source}]
+revisit_conditions = []
++++
+''',
+    )
+    with pytest.raises(DecisionError, match="repository-relative path"):
+        parse_decision(path)
+
+
 def test_collect_rejects_duplicate_and_mutual_supersede(tmp_path: Path) -> None:
     decisions = tmp_path / "docs" / "project" / "decisions"
     decisions.mkdir(parents=True)
@@ -191,6 +225,31 @@ def test_accepted_adr_requires_existing_canonical_source(tmp_path):
         canonical_sources=["docs/project/missing.md"],
     )
     with pytest.raises(DecisionError, match="missing canonical source"):
+        collect_decisions(tmp_path)
+
+
+def test_collect_rejects_resolved_canonical_source_escape(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    write_adr(
+        tmp_path,
+        decision_id="ADR-0098",
+        owner="operational_root",
+        status="accepted",
+        canonical_sources=["linked-outside/source.md"],
+    )
+    repository = tmp_path.resolve()
+    escaped_source = tmp_path.parent / "outside" / "source.md"
+    original_resolve = Path.resolve
+
+    def resolve_with_escape(path: Path, *args, **kwargs) -> Path:
+        if path == repository / "linked-outside" / "source.md":
+            return escaped_source
+        return original_resolve(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "resolve", resolve_with_escape)
+    with pytest.raises(DecisionError, match="resolve inside the repository"):
         collect_decisions(tmp_path)
 
 
