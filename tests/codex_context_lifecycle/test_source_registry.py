@@ -26,6 +26,7 @@ def registry_with_source(
     *,
     actors: tuple[str, ...],
     load_policy: str,
+    kind: ContextSourceKind = ContextSourceKind.CANONICAL_OWNER_ARTIFACT,
     direction_id: str | None = None,
     scope_key: str | None = None,
 ) -> ContextSourceRegistry:
@@ -36,7 +37,7 @@ def registry_with_source(
             ContextSource(
                 id="source-x",
                 path="docs/project/source-x.md",
-                kind=ContextSourceKind.CANONICAL_OWNER_ARTIFACT,
+                kind=kind,
                 owner="test-owner",
                 actors=actors,
                 load_policy=LoadPolicy(load_policy),
@@ -46,6 +47,62 @@ def registry_with_source(
             ),
         ),
     )
+
+
+def test_role_required_source_is_selected_by_default_regardless_of_kind() -> None:
+    registry = registry_with_source(
+        actors=("OPERATIONAL_ROOT",),
+        load_policy="ROLE_REQUIRED",
+        kind=ContextSourceKind.EXPLICIT_USER_CONTROL_PLANE_CORRECTION,
+    )
+
+    assert tuple(
+        source.id for source in sources_for_actor(registry, ActorKind.OPERATIONAL_ROOT)
+    ) == ("source-x",)
+
+
+def test_on_demand_source_requires_an_explicit_request() -> None:
+    registry = registry_with_source(
+        actors=("OPERATIONAL_ROOT",),
+        load_policy="ON_DEMAND",
+    )
+
+    assert sources_for_actor(registry, ActorKind.OPERATIONAL_ROOT) == ()
+    assert tuple(
+        source.id
+        for source in sources_for_actor(
+            registry,
+            ActorKind.OPERATIONAL_ROOT,
+            requested_source_ids=("source-x",),
+        )
+    ) == ("source-x",)
+
+
+def test_sources_for_actor_keeps_positional_call_shape_and_scope_filters() -> None:
+    registry = registry_with_source(
+        actors=("EM",),
+        load_policy="ON_DEMAND",
+        direction_id="direction:alpha",
+        scope_key="scope:one",
+    )
+
+    assert sources_for_actor(
+        registry,
+        "EM",
+        "direction:beta",
+        "scope:one",
+        ["source-x"],
+    ) == ()
+    assert tuple(
+        source.id
+        for source in sources_for_actor(
+            registry,
+            "EM",
+            "direction:alpha",
+            "scope:one",
+            ["source-x"],
+        )
+    ) == ("source-x",)
 
 
 def test_registry_contains_current_context_foundation_sources(repo_root: Path) -> None:
@@ -123,14 +180,22 @@ def test_operational_root_projection_excludes_em_cm_internals(repo_root: Path) -
     assert {
         "root-router",
         "root-role",
-        "current-work-index",
-        "project-map",
         "portfolio-contract",
+        "p0-hidden-limit-control-plane-correction",
     } <= ids
+    assert "current-work-index" not in ids
+    assert "project-map" not in ids
     assert "em-role" not in ids
     assert "cm-role" not in ids
     assert "em-procedure" not in ids
     assert "agent-runtime-context" not in ids
+    requested = sources_for_actor(
+        registry,
+        ActorKind.OPERATIONAL_ROOT,
+        requested_source_ids=("current-work-index", "project-map"),
+    )
+    requested_ids = {source.id for source in requested}
+    assert {"current-work-index", "project-map"} <= requested_ids
 
 
 def test_portfolio_projection_excludes_runtime_map(repo_root: Path) -> None:
@@ -173,21 +238,29 @@ def test_cm_projection_needs_assigned_runtime_and_science_refs(repo_root: Path) 
     registry = _registry(repo_root)
     sources = sources_for_actor(registry, ActorKind.CM)
     ids = {source.id for source in sources}
-    assert {"root-router", "cm-role", "project-map"} <= ids
+    assert {
+        "root-router",
+        "cm-role",
+        "p0-hidden-limit-control-plane-correction",
+    } <= ids
+    assert "project-map" not in ids
     assert "agent-runtime-context" not in ids
     assigned = sources_for_actor(
         registry,
         ActorKind.CM,
-        requested_source_ids=("agent-runtime-context",),
+        requested_source_ids=("agent-runtime-context", "project-map"),
     )
-    assert any(source.id == "agent-runtime-context" for source in assigned)
+    assigned_ids = {source.id for source in assigned}
+    assert {"agent-runtime-context", "project-map"} <= assigned_ids
 
 
-def test_leaf_receives_router_only_until_assignment_refs(repo_root: Path) -> None:
+def test_leaf_receives_router_and_role_required_sources_until_assignment_refs(
+    repo_root: Path,
+) -> None:
     registry = _registry(repo_root)
     sources = sources_for_actor(registry, ActorKind.LEAF)
     ids = {source.id for source in sources}
-    assert ids == {"root-router"}
+    assert ids == {"root-router", "p0-hidden-limit-control-plane-correction"}
 
 
 def test_registry_rejects_duplicate_and_absolute_paths(tmp_path: Path) -> None:

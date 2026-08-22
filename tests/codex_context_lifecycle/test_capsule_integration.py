@@ -57,7 +57,9 @@ def test_role_examples_are_visible(repo_root: Path) -> None:
     cm = {
         source.id
         for source in sources_for_actor(
-            registry, "CM", requested_source_ids=("agent-runtime-context",)
+            registry,
+            "CM",
+            requested_source_ids=("agent-runtime-context", "project-map"),
         )
     }
     portfolio = {
@@ -69,6 +71,7 @@ def test_role_examples_are_visible(repo_root: Path) -> None:
         )
     }
     assert "em-procedure" in em
+    assert "cm-role" in cm
     assert "project-map" in cm
     assert "agent-runtime-context" in cm
     assert "portfolio-contract" in portfolio
