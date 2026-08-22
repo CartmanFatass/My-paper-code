@@ -1,15 +1,484 @@
 # Current portfolio decision value, cost, and local evidence (2026-08-14)
 
 ```text
-current_status_pointer=SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md
+current_status_pointer=CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md
+current_residual_value_screen=CLOSED_DIRECTION_RESIDUAL_VALUE_SCREEN_PORTFOLIO_ADJUDICATION_20260822.md|NO_NEW_PROSPECTIVE_DEFINITION_INVESTMENT_AT_THIS_CUT
 rcle_b2_status=COMPLETE_NO_CURRENT_INVESTMENT
-current_empirical_investments=RISP-B3-TRG-R03-FULL-PANEL|RCLE-CPC-R04-FULL-PANEL|SGSP-RG2Z-R03-FULL-PANEL
-current_enabling_construction=NONE
-current_definition_investments=SCDMP-TBOV-SUPPORT-REPRESENTATION-FACTORIAL-CHECKPOINT-DEFINITION
+current_empirical_investments=RISP-G-INIT-REACH-R01-FULL-PANEL|RCLE-TBCFV-R04-FULL-EMPIRICAL-PANEL
+current_enabling_construction=SGSP-RG2Z-RSCF-R01-RUNNER-AND-GATE-B-CONFORMANCE
+current_definition_investments=VQFP-FERL-R05-SUCCESSOR-DEFINITION|DISH-RBHR-R05-SUCCESSOR-DEFINITION|VNFC-PCPI-R02-SUCCESSOR-DEFINITION
+current_no_current_results=SCDMP-TBCC-R02|VNFC-BPCR-R09
+current_uav_empiricals=NONE
+preferred_next_uav_path=DISH-RBHR-R05-SUCCESSOR-DEFINITION|DEFINITION_ONLY
+operational_queue_count_is_not_portfolio_count=true
 automatic_backfill=false
+shared_provider_boundary=PROCESS_LOCAL_REFRESH_SOURCE_RECOVERY_COMPLETE|LEGACY_ACTIVE_PROCESS_HAS_NO_REFRESH_ENDPOINT|FUTURE_NORMAL_DEPLOYMENT_LIVE_CLEARANCE_PENDING|DISH_VNFC_VQFP_EM_OWNED_PRO_HELD_UNMATERIALIZED
 ```
 
-## 2026-08-20 current SCDMP r07 Stage-A post-result cut
+## 2026-08-21 current RISP r01 process-group memory decision-value cut
+
+Slice 0001 crossed only the 1.5-GiB process-group guard after 4,387.712
+seconds. Both workers stayed within 1 GiB, no atomic unit was installed and no
+partial value was read. Portfolio therefore preserves the active coordinate
+and increases only group memory to 2.5 GiB; CPU, wall, worker/core, GPU and
+storage ceilings remain unchanged.
+
+This does not change RISP's scientific value or portfolio rank. It prevents an
+engineering accounting limit from stopping the already purchased complete
+reachability discriminator. A later resource need returns as an operational
+cost fact, never as evidence against the mechanism.
+
+## 2026-08-21 base RCLE TBCFV r04 empirical decision-value cut — action remains current
+
+Native construction is accepted and its former entry cost is consumed. The
+remaining empirical purchase is 3–6 engineer-days plus a measured 24.049 CPU
+core-hours, 2.220–8.861 elapsed hours with up to four workers, 0.25–1 GiB
+durable and 4–12 GiB scratch planning envelopes.
+
+The panel directly tests held-out active `8->12/12->8` recovery against a
+competent strict-containing FLEX controller after independent opportunity and
+controllability gates. All twelve result branches change what RCLE can claim
+or whether the package continues. Portfolio therefore buys the complete panel,
+not a pilot or another feasibility gate.
+
+## 2026-08-21 base SCDMP TBCC revision-02 decision-value and cost cut — action remains current
+
+The exact definition is Pro-closed, EM-intaken and statically feasible. One
+parameterization spans training `k={5,11}` and held-out fixed/switch `7/13`;
+foundation competence and a full-mission order-opportunity assay must qualify
+before any adapter exists. FOUNDATION, containing FREE, tied REVERSED and
+matched SET make later positive, negative and nonidentified branches useful.
+
+The full forecast is 24–40 engineer-days, 80–240 CPU core-hours, 24–72 elapsed
+hours with four one-thread workers, 12/20 GiB minimum/preferred RAM, at most 10
+GiB scratch and 4 GiB durable data. Portfolio buys only the target-native host,
+semantic conformance, synthetic lifecycle and full-chain result-blind cost
+measurement. No empirical panel or lease is authorized.
+
+## 2026-08-21 current SGSP support-slack clarification — no cost or allocation delta
+
+The analyzer quantities are uniquely recoverable without a new revision or
+provider turn. Gate B continues under the same cost envelope; the clarification
+adds no empirical work and no physical-prior evidence.
+
+## 2026-08-21 base SGSP RSCF r01 runner/Gate-B decision-value cut — action remains current
+
+Gate A exactly matched every fixture output at widths `32/64/128/256` and
+outer concurrency `1/2/4`, with `13.2199x` through `24.7634x` paired warm
+speedups and about 229 MB maximum sampled working set. This removes the frozen
+suffix-feasibility risk but carries no physical-prior evidence.
+
+Portfolio buys the next preactivity runner/Gate-B stage because it alone can
+measure selector, factual autograd, native-target transfer, frontier I/O,
+evaluation and full worker scaling. The prior 24–41-workday and 120–500-CPU-
+hour full-path range remains conservative until this measurement. No identity,
+coordinate, real training/evaluation or lease is authorized.
+
+## 2026-08-21 base RCLE TBCFV r04 decision-value and cost cut — action remains current
+
+The complete r04 definition buys a direct held-out roster-churn value test:
+one shared policy trains at `N={6,10}` and faces active `8->12/12->8` changes
+without adaptation. Physical recovery/unserved-demand endpoints, literal
+treatment-in-FLEX containment, three scripted prerequisites and one complete
+72-tail result map make the object answerable without CPC reuse.
+
+Its cost is not small: 22–39 engineer-days, with a later projected 80–180 CPU
+core-hours, 24–60 elapsed hours and 2–4 GiB RSS per worker. Portfolio buys only
+the native host/oracle/ABI/conformance/full-chain measurement stage now. That
+stage can replace the forecast before identities exist and supports a later
+empirical decision; it carries no treatment or variable-`N` result claim.
+
+## 2026-08-21 base RISP r01 expanded-resource decision-value cut — action remains current
+
+Candidate-local native conformance preserves the exact frozen science but
+raises the representative projection from the former 26-CPU-hour maximum to
+29.92 CPU-hours with two workers; projected wall is 20.48 hours and group
+memory is 1.5 GiB. The CPU increase is about 15.1%, while wall remains within
+the former range.
+
+The complete panel still answers all four reachability branches, and no lower-
+cost subset preserves that question. Portfolio therefore continues it under a
+rounded <=32 CPU-hour, <=24 wall-hour, two-worker/two-core, no-GPU ceiling
+after final full-chain efficiency acceptance. This cost update changes no RISP
+claim and creates no cross-direction ranking.
+
+## 2026-08-21 base SGSP RSCF r01 Gate-A decision-value and cost cut — action remains current
+
+RSCF reduces CCA's Q/alternative work by 48x and total environment/learned
+decisions by about 38x. Its full projected compute falls to 120–500 CPU
+core-hours, but its 24–41 engineering workdays overlap CCA's 26–45; only
+compute reduction is currently established.
+
+The accepted line-item decomposition assigns 15–26 workdays to fixture/schema,
+native host/loader and Gate-A benchmark/hardening. Portfolio buys that bounded
+stage because it can avoid the remaining runner, Gate B and panel purchase if
+exact equivalence or >=2x paired warm suffix speed fails. This arithmetic is a
+Portfolio planning decomposition, not a standalone CM-certified Gate-A cost.
+
+Gate A carries no SGSP value claim. A pass returns measured technical cost for
+a new decision; a fail leaves the physical-prior hypothesis scientifically
+unresolved and makes the current native route no-current absent a cheaper or
+reusable substrate.
+
+## 2026-08-21 base ONLGR TBVUUS r03 decision-value and cost cut — action remains current
+
+ONLGR TBVUUS r03 is now a current empirical purchase. Its 7–10 engineer-day,
+3–7 CPU-hour, 1–2 post-readiness wall-hour and <=4 GiB RSS/storage-class cost
+buys one direct prerequisite that the old timing panel lacked: an actually
+executed, support-audited voluntary target-state update with net-value and
+matched-shell payload-value endpoints.
+
+Only a fully qualifying complete result makes a later timing definition
+eligible; every other complete branch keeps timing closed for an exact stated
+reason. This is higher decision value than reopening a rate grid before action
+utility exists. Native construction and the mandatory end-to-end efficiency
+review remain included engineering work; `WITHHOLD` before readiness is not a
+Portfolio stop.
+
+## 2026-08-21 current RISP r01 decision-value and cost cut
+
+RISP r01 is now a current empirical purchase. The definition and cost milestone
+removes the earlier unknown-cost reason for holding it at definition-only:
+40–64 active engineer-hours, 18–26 one-thread CPU hours, 0.70–0.85 GiB peak
+RSS, under 10 MiB retained artifacts and at most 64 MiB control/scratch.
+
+That cost buys an exhaustive answer to the strongest live r03 alternative.
+Fixed `G` was exploitable, while the zero-start containing recurrence did not
+qualify. R01 changes only `E_0=G` versus `E_0=0` with zero decay center in both
+arms. Every valid `Psi` outcome retains, removes or closes a concrete RISP
+branch. This makes the moderate purchase higher-value than another open-ended
+diagnostic or budget/checkpoint menu.
+
+The claim ceiling remains initialization-dependent finite-package
+answerability/reachability, not learned-treatment value or ACK semantics.
+Generic structured-initialization and alignment-proximity explanations remain
+live. VNFC and RISP costs are not transferred or pooled, and no shared-resource
+scheduling fact changes either scientific allocation.
+
+## 2026-08-21 current residual-value definition-cost cut
+
+The user-authorized correction moves cost comparison to the correct boundary.
+Unknown empirical cost cannot block low-risk definition work whose purpose is
+to make the target, comparator, branches and total cost explicit. It can and
+must block construction/empirical authorization when the completed package's
+decision information is not proportionate to its disclosed cost.
+
+| Definition line | Current purchased information | Cost return required |
+| --- | --- | --- |
+| RISP reachability | Whether one exact initialization axis can make the containing recurrence answerable. | Complete construction/training/evaluation/engineering class. |
+| SCDMP competent-controller-first | Whether a single treatment-independent competence prerequisite can support direct order value without another checkpoint menu. | Competence-stage plus full direct-value path cost. |
+| ONLGR voluntary-update utility | Whether a materially new action can be supported and useful before any rate/timing family is bought. | Action/host construction and minimal utility-panel cost; no timing-grid cost yet. |
+| SGSP low-work prior value | Whether a lower-work or broader-value target can materially improve on the CCA's 26–45-workday / 2,500–9,000-CPU-hour opportunity cost. | Exact comparison to that CCA burden and full new path cost. |
+| RCLE commitment fragmentation | Whether a real target-bound fragmentation problem yields a direct-value object outside CPC. | Full target/host/training/evaluation cost with containing flexible control. |
+
+Each line may return `scientifically uninstantiable`, redundant or uneconomic
+with concrete evidence. Definition work itself is not withheld until those
+facts already exist. This is now a base snapshot for RISP; current empirical
+cost envelopes are VNFC and RISP r01.
+
+## Superseded/base 2026-08-21 RISP decision-value and cost cut
+
+The completed r03 panel buys one useful positive fact—fixed-G exploitability—
+but no learned-treatment value claim. A tightly frozen G-start versus zero-start
+definition can decide whether another finite-budget recurrence comparison is
+scientifically reachable. That is sufficient value for definition work, not
+for empirical purchase.
+
+The result packet contains no frozen prospective successor cost. Full
+engineering, training, evaluation, wall, memory, storage and implementation
+cost must return with the Pro-closed definition. Empirical investment awaits
+that cross-direction opportunity-cost comparison. VNFC remains the sole current
+empirical cost envelope.
+
+## 2026-08-21 current SCDMP/ONLGR result-value cut
+
+The sunk complete panels have answered their registered package-level
+identifiability questions. Further immediate SCDMP spending would buy another
+competence rescue after both checkpoint and direct-UAV packages failed to
+produce a competent learned comparison. Further immediate ONLGR spending would
+buy another rate/action rescue before any voluntary action has established
+direct utility. Neither purchase currently has family-dividing value.
+
+This is an opportunity-cost judgment, not a resource stop. New target-bound
+facts can reopen either family under the exact revisit conditions in the
+controlling adjudication. Current spend remains RISP and VNFC; VNFC's cost and
+BCRH exception ceilings are unchanged.
+
+## 2026-08-21 current VNFC BPCR r09 BCRH policy-exception cost cut
+
+The full empirical ceiling remains 24–38 engineer-days, 200–1,500 CPU core-
+hours, 2–8 compute days, 8–30 GiB retained and 20–60 GiB scratch. The exception
+does not expand that purchase.
+
+Inside it, BCRH is capped at 1,961 commands per each of six boundaries,
+4,415,000 logical operations per decision and 27,715,520,000 total registered
+logical operations including scorer/checker, action sensitivity and fixtures.
+Those exact limits buy a stronger physical reference than a selected sixteen-
+candidate menu and therefore preserve the decision value of the VNFC panel.
+
+Before identity/lease, CM records one zero-coordinate complexity certificate.
+Any ceiling increase returns to Portfolio. Throughput or wall misses inside the
+same ceiling affect only Root resource slices.
+
+## Superseded/base 2026-08-21 VNFC BPCR r09 post-construction empirical cost cut
+
+Native construction is now sunk accepted evidence. Remaining empirical work is
+24–38 focused engineer-days, 200–1,500 CPU core-hours, approximately 2–8
+compute days, 8–30 GiB retained artifacts and 20–60 GiB scratch.
+
+That purchase buys the only current direct UAV held-out-variable-`N` panel:
+sixteen fresh replicate roles, exact MAPR/DIRECT/CUT/BCRH comparisons, direct
+recovery/non-harm endpoints, finite exact inference and exhaustive branches.
+It is proportionate to the axis-level decision value and distinct from the
+already invested RISP, ONLGR and SCDMP external-`k` questions. Portfolio buys
+the whole atomic panel rather than another intermediate gate.
+
+Resource slices may schedule work but cannot stop or interpret it. A material
+science/object/cost change returns; otherwise accepted pipeline freeze leads to
+ordinary Root identity/coordinate binding and lease without another Portfolio
+vote. Construction and definition-only sets are empty.
+
+## Superseded/base 2026-08-20 VNFC BPCR r09 native-construction cost cut
+
+Revision 09 has a finite standalone envelope: 61–93 focused engineer-days,
+200–1,500 CPU core-hours, about 2–8 elapsed days on a 16-core host, 2–6 GiB per
+worker, 8–30 GiB retained and at most 80 GiB reserved scratch/build space. An
+accepted reusable native substrate may save 8–14 engineer-days, but the
+portfolio decision does not assume that saving.
+
+This is the largest current construction purchase. It buys the only direct UAV
+held-out-variable-`N` discriminator, with an active strict-containing learner,
+bounded physical comparator, direct first-sixty-second recovery endpoint and
+finite exact inference. The old route's unbounded solver tail is not inherited.
+That nonredundant axis coverage makes construction worthwhile even though the
+later empirical purchase remains separately undecided.
+
+Current empirics remain RISP, ONLGR and SCDMP. VNFC is enabling construction;
+definition-only work is empty. Resource scheduling may sequence commands but
+cannot stop the science or become a result. No identity, coordinate, empirical
+panel or lease is included in this purchase.
+
+## Superseded/base 2026-08-20 SCDMP UAV r02 post-construction empirical cost cut
+
+Native construction is now sunk accepted evidence. Remaining empirical work is
+10–17 engineer-days, 24–72 CPU core-hours, 7–20 elapsed hours with four
+workers, 8/12 GiB RAM, at most 6 GiB scratch and 2 GiB durable artifacts.
+
+That remaining cost buys the complete 18-replicate, 54-checkpoint, direct
+performance/robustness panel with strict containment, tied reversal,
+order-insensitive control and exhaustive branches. It is proportionate to the
+decision value and distinct from the already invested RISP and ONLGR questions.
+Portfolio therefore buys the whole atomic panel, not another intermediate
+checkpoint or construction gate.
+
+Resource slices may schedule the work but cannot stop or interpret it. A
+material science/object/cost change returns; otherwise technical acceptance
+leads directly to ordinary Root coordinate binding and lease without another
+Portfolio vote.
+
+Current empirics are RISP, ONLGR and SCDMP; enabling construction is empty;
+VNFC remains definition-only. No quota, backfill, WIP/order, fusion, Stage B,
+surface, production or deployment follows.
+
+## Superseded/base 2026-08-20 SCDMP UAV r02 native-construction cost cut
+
+The complete SCDMP definition turns a previously unknown UAV order-value line
+into a costed direct variable-`k` purchase. Its full prospective envelope is
+15–24 engineer-days, 24–72 CPU core-hours, 7–20 elapsed hours with four
+workers, 8 GiB minimum / 12 GiB preferred RAM, at most 6 GiB scratch and 2 GiB
+durable artifacts.
+
+That cost buys one answerable fixed-three-UAV family discriminator with strict
+containment, tied reversal, a competent order-insensitive control, direct
+performance/robustness endpoints and exhaustive branches. It is materially
+lower than SGSP CCA and scientifically distinct from the already invested
+ONLGR rate-allocation panel. Portfolio therefore buys exact task-specific
+native construction/conformance now, not the empirical panel.
+
+The construction return must separate sunk construction from remaining runner,
+coordinate, training, evaluation, wall, memory, storage and engineering cost.
+Missing registered code is CM work; wall time and resource readings cannot stop
+the investment or become algorithm evidence. A material cost expansion returns
+for a new allocation decision.
+
+Current empirics remain RISP and ONLGR; current enabling construction is SCDMP;
+VNFC remains definition-only. No empirical SCDMP lease, quota, backfill,
+WIP/order, fusion, Stage B, surface, production or deployment follows.
+
+## Superseded/base 2026-08-20 ONLGR post-construction empirical cost cut
+
+Accepted HEADLAND-90 construction materially changes the earlier opportunity-
+cost comparison. The exact empirical lifecycle is now measured at
+`37,847,040` physical ticks, `3.64–4.71` raw CPU-hours and `10.91–14.13`
+CPU-hours at the frozen `3x` reserve. The remaining empirical engineering
+forecast is 3–5 focused engineer-weeks. This replaces the earlier unresolved
+11–15 engineer-week and 15.8–315.4 CPU-hour total-path range as the current
+purchase surface; it does not rewrite that historical estimate.
+
+| Direction/object | Current purchase | Current cost fact | Decision value |
+| --- | --- | --- | --- |
+| RISP B3-R03 | continue the existing complete-panel empirical envelope | prior 24–40 engineering-hour / 16–24 one-CPU-hour forecast remains planning evidence; any material current change returns | direct variable-`k` package value, isolated from ONLGR |
+| ONLGR HEADLAND-90 R03 | exact fresh CAL/HOLD empirical panel | 3–5 focused engineer-weeks; 3.64–4.71 raw CPU-hours and 10.91–14.13 CPU-hours at 3x reserve; first compile/RSS/storage remain preactivity CM facts | the most mature current direct two-UAV reciprocal TWO-STRATUM-versus-GLOBAL-BEST value discriminator |
+| SCDMP UAV order value | definition/closure/static cost only | unknown; complete prospective cost must return before construction | determines whether a direct external-`k` suspended-payload order treatment is coherent and affordable |
+| VNFC bounded UAV recovery | definition/closure/static cost only | unknown; must remain a finite alternative to the closed unbounded full-graph route | preserves a direct held-out-`N` recovery path without reopening exact full-graph enumeration |
+| SGSP CCA / RCLE CPC | none current | preserved cost/result evidence only | neither current revisit boundary is met |
+
+The ONLGR purchase is proportional to one closed, answer-changing, package-
+specific UAV panel; it does not follow automatically from construction or the
+three-UAV entry metric. Its maximum result remains the exact simultaneous
+mean/lower-decile HEADLAND-90 claim. No tenure-only causality, arbitrary
+`k`/`N`, aircraft transfer, production, deployment or general superiority is
+purchased. Wall slices and resource readings can schedule the atomic panel but
+cannot stop or interpret it.
+
+Current empirical opportunity cost is allocated to RISP and ONLGR. SCDMP and
+VNFC continue definition-only. There is no enabling-construction line, quota,
+vacancy, backfill, WIP/order, fusion, Stage-B, second-surface or production
+action.
+
+## Superseded/base 2026-08-20 all-direction UAV-entry cost cut
+
+The current purchase is deliberately layered rather than normalized into one
+cross-direction cost number:
+
+| Direction/object | Current purchase | Known or required cost fact | Decision value |
+| --- | --- | --- | --- |
+| RISP B3-R03 | finish existing empirical panel | original 24–40 engineering-hour / 16–24 one-CPU-hour forecast is historical planning input; material current cost change returns | direct variable-`k` package value; not UAV entry |
+| ONLGR HEADLAND-90 | exact UAV host construction/conformance only | full path remains 11–15 engineer-weeks, 15.8–315.4 CPU-hours, 16 GiB RAM, <=4 GiB storage; construction must return completed/remaining decomposition | converts a closed two-UAV card into an accepted host before a distinct empirical decision |
+| SCDMP UAV order value | definition/closure/static cost only | unknown; CM must return complete build/train/eval/wall/memory/storage/engineering cost | decides whether an independently specified multi-UAV external-`k` treatment exists before spending on another experiment |
+| VNFC bounded UAV recovery | definition/closure/static cost only | unknown and must be materially bounded below the old 50–98 week / `1.1e5–1.01e7` CPU-hour full-graph path | preserves direct held-out-`N` UAV recovery value without buying unbounded exact enumeration |
+| SGSP CCA | none current | 26–45 workdays and 2,500–9,000 core-hours for a narrow possibly nonidentified toy result | insufficient without a concrete revisit fact |
+| RCLE | none current | no costed new object exists | no target fact/object to buy; CPC result is consumed |
+
+The new target-value objective justifies ONLGR construction and two bounded
+definitions, not three empirical runs. There are exactly three formal UAV
+entries but zero UAV empirical activities. Shared C++/batched infrastructure
+is relevant only after a direction-owned semantics-preserving cost result; its
+mere existence neither lowers these figures nor supplies a scientific branch.
+
+## Superseded/base 2026-08-20 SCDMP TBOV SRF r03 post-result cut
+
+The completed SRF factorial's 6–10 engineer-day and 2–5 serialized-CPU-hour
+cost is now sunk evidence. It yields no competent checkpoint and no eligible
+relation assay; buying another checkpoint/factor menu would add a third
+upstream qualification layer before any task-value result.
+
+Portfolio therefore ends further checkpoint spending. The only current SCDMP
+purchase is definition/cost discovery for a materially new direct external-
+`k` value object that bypasses old checkpoints and Stage B. That definition is
+worthwhile because r07 established physical order opportunity, but empirical
+cost and feasibility are unknown and must return before any build or run.
+
+RISP is now the sole empirical opportunity-cost line. This does not grant RISP
+priority evidence or create a vacancy; it simply records that SCDMP empirical
+work is complete while its next possible purchase is still being defined.
+
+## Superseded/base 2026-08-20 SGSP RG2Z CCA r01 post-definition cut
+
+CCA's full prospective cost is now a direction-owned fact rather than an
+unknown: 37,299,806,208 learned decisions, 3,454,009,344 environment slots,
+24,576 backward calls, 26–45 CPU-ready CM workdays and 2,500–9,000 CPU
+core-hours. Four CPU workers imply roughly 26–94 elapsed days. GPU benefit is
+not established and would require additional engineering plus a bounded exact-
+semantics benchmark.
+
+The corresponding maximum information is narrow: retain/decline one physical
+prior on exact RIDGEGATE-2Z at update 512, or remain nonidentified. The object
+does not estimate a trainer effect, credit causality, efficiency or a bridge.
+That combination yields low current information per total opportunity cost
+relative to the already active RISP and SCDMP panels.
+
+Portfolio therefore closes the definition line and makes empirical CCA
+no-current. This is not a wall-time cap: the complete panel would have to finish
+if invested. The decision is whether to buy it before activity, and at present
+the exact scientific answer is too narrow for the full disclosed cost.
+
+Revisit requires a material semantics-preserving cost reduction, target-
+critical need, lower-work direct object or reusable shared substrate. Current
+empirical opportunity cost remains allocated to RISP and SCDMP; there is no
+automatic replacement.
+
+## Superseded/base 2026-08-20 SGSP RG2Z r03 post-result cut
+
+SGSP r03's 4–7 focused CM days and 35–100 CPU core-hours are now sunk complete
+evidence. The panel is hard-valid but buys no retain/delete answer because both
+answerability gates and both EDGE competence gates fail. Another r03 run,
+budget/checkpoint search or threshold/seed repair has no current decision value.
+
+The counterfactual-credit candidate has potentially high information value but
+unknown total cost. It can restore the exact target-bound variable-`N`
+retain/delete comparison or end the line after one further competence/
+answerability failure. Counterfactual continuation rollouts may multiply useful
+work substantially, and the exact estimator, coupling, legality, rollout count,
+wall/memory/storage class and implementation burden are not frozen.
+
+Portfolio therefore funds only meaning-complete definition, existing-Pro
+closure, EM intake and CM static feasibility/full cost. Empirical construction
+remains a later decision. This is cost discovery for a single-axis
+family-dividing object, not a missing-code or runtime stop.
+
+Current empirical opportunity cost remains allocated to RISP and the count-
+corrected SCDMP factorial. RCLE, ONLGR and VNFC remain no-current. SGSP
+completion creates no empirical vacancy or automatic replacement.
+
+## Superseded/base 2026-08-20 RCLE CPC r04 post-result cut
+
+RCLE-CPC's 4–6 focused engineering days and complete 3,727,360-episode panel
+are now sunk evidence, not an active cost line. The valid result places both
+registered value/robustness effects inside the no-material region and provides
+no fixed-binary retention or within-CPC successor decision value.
+
+Further CPC spending would buy post-result rescue rather than a new family-
+dividing test. A materially new RCLE object remains eligible only after target
+evidence makes commitment fragmentation value-critical and a new containing-
+comparator design is frozen. This is scientific opportunity-cost reasoning,
+not a provider, runtime or resource stop.
+
+Current opportunity cost remains allocated to RISP, SGSP and the count-
+corrected SCDMP pathway. RCLE completion alone does not make the high-cost VNFC
+full-graph route worthwhile and does not create an empirical vacancy.
+
+## Superseded/base 2026-08-20 SCDMP SRF count-semantics correction
+
+The corrected prospective direct-only expectation is `204,697,600` forwards.
+The exact realized total is stochastic under the frozen final-prefix law:
+`202,854,400 + 90 * sum_{s,a}(n10_{s,a})`, bounded in
+`[202,854,400,206,540,800]`. It is recorded after the atomic panel and is not
+a target, gate, stopping rule or claim.
+
+Do not budget the excluded `19,906,560` r07 relation-path calls: SRF defines no
+observable for them. Nevertheless, the engineering and resource class remains
+6–10 experienced-engineer days, 2–5 serialized CPU hours, 4–8 GiB planned RAM
+and about 5 GiB scratch headroom. The opportunity-cost comparison and
+investment decision therefore remain unchanged.
+
+Exact r02 as written is preactivity-superseded. The count-only successor must
+close through Pro/EM/CM before identities or activity; after closure, no repeat
+Portfolio vote is needed for the existing empirical chain.
+
+## Superseded/base 2026-08-20 SCDMP SRF r02 empirical cut
+
+The exact r02 factorial costs 40 checkpoints, 24,000 logical AdamW steps and
+224,604,160 registered model-example evaluations. CM projects 6–10
+experienced-engineer days, 2–5 serialized CPU core-hours, 4–8 GiB planned RAM
+and about 5 GiB scratch headroom. These values are prospective planning facts,
+not a scientific stop or completion deadline.
+
+This purchase is upstream of direct value, but its compute cost is small and
+its decision map is finite: the complete panel separates support,
+representation-package, interaction, practical-smallness and indeterminate
+factor patterns while independently reporting four-cell competence. Because
+r07 already established physical order opportunity and failed specifically at
+checkpoint competence, the factorial can prevent the much larger relation and
+Stage-B path from proceeding on an unqualified checkpoint.
+
+The opportunity cost is acceptable alongside current direct RISP, RCLE and
+SGSP panels. This is not automatic backfill or a direction-count target. Any
+favorable result remains a package effect under finite optimizer geometry and
+only returns a possible fresh relation-assay definition; it does not open value
+work automatically.
+
+## Superseded/base 2026-08-20 SCDMP r07 Stage-A post-result cut
 
 Exact SCDMP r07 Stage A is completed sunk empirical evidence: ten independent
 checkpoints, 6,000 logical AdamW steps and 56,151,040 model examples. These
@@ -272,6 +741,38 @@ Safe MAMuJoCo tasks/separately configured agent counts and provides no frozen
 one-policy cross-`N`, roster-event, UAV-simulator or flight result. It therefore
 does not activate a bridge or change allocation.
 
+## 2026-08-21 operative decision-value and cost classification
+
+The controlling record is
+`CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md`.
+Current portfolio accounting separates two empirics, one enabling
+construction and three definition-only investments. These classes cannot be
+added into one queue-size or normalized-cost score.
+
+RISP and RCLE retain their already authorized empirical scopes and object-local
+resource envelopes. SGSP Gate B is purchased because it produces
+the full-chain feasibility, answerability and total-cost evidence needed for a
+later empirical decision; it is not empirical evidence. SCDMP ABI2
+reacceptance is consumed historical technical evidence after the complete TBCC
+r02 result; the stale ABI1 benchmark cannot be used as current cost proof.
+
+VQFP-FERL r05, DISH r05 and VNFC-PCPI r02 presently consume only Portfolio-EM
+definition/provider work. All three exact Pro operations are held behind one
+shared Agentify application-reload authority boundary; that mechanical fact
+does not stop their science or alter their rank. VQFP retains the prior
+45/76/120-engineer-day and conditional 32/142/758-CPU-hour construction
+forecast and remains no-current for full construction. DISH/VNFC construction,
+CPU, wall, memory and implementation costs require later exact CM requests.
+Empirical investment remains possible only after each object has closure,
+target law, strict-containing comparator, direct endpoints, answerability/
+branch map, claim ceiling and full prospective cost.
+
+ONLGR TBVUUS, SCDMP TBCC r02 and VNFC BPCR r09 are complete/no-current and are
+not current costs. SGSP-CBRR is no-current for redundancy with active RSCF,
+not for an engineering ceiling. There is no current direct UAV empirical;
+DISH r05 is a definition-only prospective bridge. The historical three-entry UAV
+catalog and any three-command operational batch have no allocation meaning.
+
 ## Evidence status and trigger
 
 Exact counts above are frozen science-card/resource-object facts. Derived
@@ -279,20 +780,20 @@ counts are marked explicitly; prospective ceilings are forecasts; missing
 wall/RSS/lease values remain unknown. A portfolio review is warranted only for
 a complete EM/Pro-converged milestone, a science-bearing claim/object change,
 a concrete cross-scope conflict with no semantics-preserving schedule, or a
- materially changed prospective total/opportunity cost. This record incorporates
- the complete RCLE-B2, ONLGR-B2, SCDMP-B3, SGSP-r06, RISP-B2-R02, RISP-B3
- definition and ONLGR target-host-card owner decisions. RISP-B3-R03 is the sole
- current empirical investment. VNFC-B4, SGSP target-bound two-zone, RCLE coarse
- persistent commitment and SCDMP target-bound order-to-value are the current
- definition-only investments. ONLGR HEADLAND-90 has no current empirical
- investment. VNFC-B4 r05 is complete immutable/no-current empirical, with a
- distinct target-exclusive post-churn recovery definition retained alongside
- SGSP, RCLE and SCDMP. No completion creates an automatic replacement. The current set is not a quota,
+materially changed prospective total/opportunity cost. This record preserves
+all historical decisions as evidence while the final controlling pointer sets
+two current empirics, SGSP Gate B as one enabling construction, and VQFP-FERL
+r05, DISH r05 plus VNFC-PCPI r02 as three definition-only investments. ONLGR
+TBVUUS, SCDMP TBCC r02, VNFC BPCR r09 and older exact
+objects remain complete/no-current under their object-local records. No
+completion creates an automatic replacement. The current set is not a quota,
 WIP cap or ordering gate. Counts remain heterogeneous and must not be
 normalized into one cost unit; the decision uses outcome-dependent reach and
 downstream tails rather than an artificial cross-unit total.
 
-Sources: `VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`,
+Sources:
+`CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md`,
+`VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`,
 `ONLGR_B2_SCDMP_B3_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md`,
 `RCLE_B2_POST_RESULT_PORTFOLIO_ADJUDICATION_20260814.md`,
 `CROSS_DIRECTION_POST_RESULT_ADJUDICATION_20260814.md`,

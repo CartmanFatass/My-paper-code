@@ -54,6 +54,21 @@ replaces the direction's dedicated ChatGPT External Pro conversation and never
 owns convergence, causal closure, result acceptance, technical acceptance, or
 portfolio choice.
 
+For visible picker/focus mechanics, use revision-bound native observe→act→observe
+steps on the disposable tab. Each action must target one visible, hit-tested,
+unambiguous control from the immediately preceding observation; never repeat an
+action blindly. The surface rejects protected-default mutations and response
+controls, and cannot replace strict Send.
+
+Loading/hydration or a pending visible selection is `NOT_YET_OBSERVED`; wait
+for the native predicate and only report its bounded evidence timeout.
+
+If a shared ChatGPT preflight surface is encountered by a maintenance canary,
+`High`/`Pro` denote reasoning strength rather than a model. It may use only the
+revision-bound visible rendered-text-to-unique-actionable-ancestor mapping;
+ordinary, hidden, occluded, offscreen, hit-test-failing or duplicate candidates
+are fail-closed and never permit a pixel click.
+
 Do not choose, modify, interpret, approve, rank, implement, execute, or
 technically accept science. Do not contact the user or another task, spawn, use
 Git, run tests, or write canonical project state. Return conclusion-first

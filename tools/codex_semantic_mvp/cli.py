@@ -44,6 +44,14 @@ def _parser() -> argparse.ArgumentParser:
     reconcile_parser.add_argument("--operator-id")
     reconcile_parser.add_argument("--confirm-workflow-id")
 
+    native_signal = sub.add_parser("native-child-signal")
+    native_signal.add_argument("--workflow-id", required=True)
+    native_signal.add_argument("--task-id", required=True)
+    native_signal.add_argument("--agent-id", required=True)
+    native_signal.add_argument("--agent-type", required=True)
+    native_signal.add_argument("--signal-id", required=True)
+    native_signal.add_argument("--outcome", required=True, choices=("COMPLETED", "ANOMALY"))
+
     return parser
 
 
@@ -109,6 +117,15 @@ def _dispatch(args: argparse.Namespace) -> dict[str, Any]:
             reason=args.reason,
             apply=bool(args.apply),
             operator_id=args.operator_id,
+        )
+    if args.command == "native-child-signal":
+        return store.record_native_child_signal(
+            args.workflow_id,
+            args.task_id,
+            args.agent_id,
+            args.agent_type,
+            args.signal_id,
+            args.outcome,
         )
     raise ValueError(f"unknown command: {args.command}")
 

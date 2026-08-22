@@ -3,16 +3,464 @@
 ```text
 document_kind=portfolio_owned_cross_family_map
 owner=Dedicated Portfolio Session 019ffc20-5001-7453-a08a-dac783cf4d80
-allocation_change=SGSP_RG2Z_R03_EMPIRICAL|RISP_B3_EMPIRICAL|RCLE_CPC_R04_EMPIRICAL|SCDMP_R07_STAGE_A_COMPLETE|SCDMP_SUPPORT_REPRESENTATION_FACTORIAL_DEFINITION|VNFC_FULL_GRAPH_NO_CURRENT|ONLGR_NO_CURRENT
-operational_action_change=run_sgsp_rg2z_r03_full_panel|run_risp_b3_full_panel|run_rcle_cpc_r04_full_panel|release_scdmp_r07_stage_a|define_scdmp_support_representation_factorial|release_vnfc_q0_without_successor|keep_onlgr_released
+allocation_change=RISP_G_INIT_REACH_R01_FULL_EMPIRICAL_CONTINUES|RCLE_TBCFV_R04_FULL_EMPIRICAL_CONTINUES|SGSP_RSCF_R01_RUNNER_GATE_B_ENABLING_CONTINUES|VQFP_FERL_R05_DEFINITION_ONLY_COMPLETE_PRO_HELD|DISH_RBHR_R05_DEFINITION_ONLY_PRO_HELD|VNFC_PCPI_R02_DEFINITION_ONLY_PRO_HELD|SCDMP_TBCC_R02_COMPLETE_NO_CURRENT|VNFC_BPCR_R09_COMPLETE_NO_CURRENT|OLD_EXACT_OBJECTS_REMAIN_NO_CURRENT
+operational_action_change=continue_two_empirics|continue_sgsp_gate_b|portfolio_owns_three_definition_only_ems|operational_root_does_not_create_definition_ems_or_cms_until_later_exact_request|preserve_exact_object_fences
 cross_direction_evidence_transfer=false
 direction_count_is_not_a_quota=true
 no_wip_or_action_order_gate=true
-current_status_pointer=SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md
-superseded_allocation_base=RCLE_CPC_R04_EMPIRICAL_VNFC_TEPR_Q0_PORTFOLIO_ADJUDICATION_20260815.md|HISTORICAL_NONOPERATIVE
+current_status_pointer=CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md
+current_residual_value_screen=CLOSED_DIRECTION_RESIDUAL_VALUE_SCREEN_PORTFOLIO_ADJUDICATION_20260822.md|NO_NEW_PROSPECTIVE_DEFINITION_INVESTMENT_AT_THIS_CUT
+current_stage_classification=EMPIRICAL_2|ENABLING_CONSTRUCTION_1|DEFINITION_ONLY_3
+current_uav_empiricals=NONE
+preferred_next_uav_path=DISH-RBHR-R05-SUCCESSOR-DEFINITION|DEFINITION_ONLY
+historical_uav_catalog=ONLGR|SCDMP|VNFC
+shared_provider_boundary=PROCESS_LOCAL_REFRESH_SOURCE_RECOVERY_COMPLETE|LEGACY_ACTIVE_PROCESS_HAS_NO_REFRESH_ENDPOINT|FUTURE_NORMAL_DEPLOYMENT_LIVE_CLEARANCE_PENDING|DIRECTION_TRANSPORTS_EM_OWNED|ALL_THREE_PRO_TUPLES_HELD_UNMATERIALIZED
+superseded_allocation_base=ONLGR_TBVUUS_R03_POST_RESULT_PORTFOLIO_ADJUDICATION_20260821.md|BASE_EVIDENCE_AND_DECISION_REMAIN_OPERATIVE_ALLOCATION_SUPERSEDED
 ```
 
-## 2026-08-20 current SCDMP r07 Stage-A post-result cut
+## 2026-08-21 VNFC PCPI r02 definition competition cut
+
+The self-contained r01 Pro review found five substantive definition defects,
+not a negative architecture result. Portfolio invests one r02 definition-only
+revision because the corrections are finite and jointly decide whether the
+invariant decoder is literally nested inside a capable presentation-sensitive
+family before another expensive variable-`N` value panel.
+
+This is a low-current-cost architecture discriminator, not a task-value or UAV
+investment. It competes against abandoning the presentation question with the
+state generator, containment, finite-budget law, interventions and branch map
+still undefined. No CM or experiment is opened. Pro `REVISION_REQUIRED` on r02
+does not create r03 automatically; revisit then requires a materially simpler
+closed construction, a target-bound presentation failure, or evidence that
+presentation variance is the binding cause in a current variable-`N` value
+object.
+
+## 2026-08-21 current RISP r01 resource-continuation competition cut
+
+The 2.5-GiB group-memory expansion is not a new direction purchase and does
+not alter competition, rank or the current two-empirical allocation. It
+preserves the same complete RISP discriminator after a lease-only boundary;
+RCLE empirical and SGSP enabling construction continue independently, while
+VQFP r05, DISH r05 and VNFC-PCPI r02 remain definition-only. No vacancy, backfill, WIP or
+order rule follows.
+
+## 2026-08-21 base RCLE TBCFV r04 empirical competition cut — action remains current
+
+RCLE advances from consumed native construction to one complete direct
+variable-`N` value panel. The measured purchase is 24.049 CPU core-hours plus
+3–6 remaining engineer-days, materially below its prior envelope and
+comparable to RISP while answering downstream held-out roster-churn value.
+
+Its mechanism is not redundant with VNFC post-loss allocation or SGSP
+physical-prior aggregation. It competes only with declining an answer-changing,
+fully constructed experiment—not with stopping another direction. Resource
+sequencing changes command order only; it does not shrink the panel or create
+a WIP rule.
+
+## 2026-08-21 base SCDMP TBCC revision-02 construction competition cut — action remains current
+
+SCDMP moves from definition-only to one native-first enabling purchase. It is
+the only current direct fixed/switch external-`k` order-value object with
+treatment-independent competence and opportunity gates, a literal containing
+comparator and direct physical endpoints. Its 24–40 engineer-day entry cost is
+material, so Portfolio purchases host/conformance/measurement before the
+projected 80–240 CPU-hour empirical path.
+
+The direction is not a substitute for RISP initialization reachability or
+ONLGR voluntary-update utility, and it does not displace variable-`N` work. A
+technical defect is repaired or returned; it cannot become SCDMP evidence.
+Passing construction opens only a distinct empirical decision.
+
+## 2026-08-21 current SGSP support-slack clarification — allocation unchanged
+
+The twelve support rows are uniquely recoverable from frozen text. This
+removes an analyzer-definition ambiguity without changing the r01 object, Pro
+closure, Gate-B allocation, cost comparison or bridge status.
+
+## 2026-08-21 base SGSP RSCF r01 runner/Gate-B competition cut — action remains current
+
+Gate A is complete and consumed after exact equivalence and 13–25x paired warm
+suffix speedups at all frozen widths. SGSP now competes only for the preactivity
+runner/Gate-B purchase that measures prefix, selector, factual autograd, native
+targets, frontier, evaluation and worker scaling before any empirical identity.
+
+The purchase is selected because the direct held-out-`N` object remains
+answer-changing and Gate A removed its frozen native-route risk by a wide
+margin. The old 24–41-workday / 120–500-CPU-hour envelope remains broad; Gate B
+must replace it with measured full-path cost. A pass enables only a new
+empirical decision, while a technical defect remains engineering evidence.
+
+## 2026-08-21 base RCLE TBCFV r04 native-first competition cut — action remains current
+
+RCLE moves from definition-only to one native-first enabling-construction
+purchase. The direct held-out `8->12/12->8` roster-churn recovery question is
+distinct from VNFC post-loss allocation and SGSP fixed-prior aggregation. Its
+strict-containing FLEX comparator, scripted prerequisites and exhaustive map
+make both favorable and unfavorable complete outcomes decision-changing.
+
+The 22–39 engineer-day entry cost is material, but construction occurs before
+scientific identities and replaces the unmeasured 80–180 CPU-hour / 24–60-hour
+panel forecast with exact full-chain evidence. It competes against declining
+that staged option, not against stopping another direction. Passing
+construction makes only a separate empirical decision eligible; an engineering
+defect is repaired or returned without becoming RCLE evidence.
+
+## 2026-08-21 base RISP r01 expanded-resource competition cut — action remains current
+
+RISP's opportunity-cost comparison changes only quantitatively: representative
+CPU cost rises about 15.1%, while wall time remains in the former band and all
+four branches retain the same decision value. Portfolio continues it without
+reducing the panel or pausing another direction.
+
+The new ceiling is two workers/two cores, no GPU, 32 CPU-hours, 24 wall-hours,
+one GiB per worker and 1.5 GiB group memory after final CM efficiency
+acceptance. A larger accepted projection returns; it does not automatically
+make RISP no-current or trigger backfill.
+
+## 2026-08-21 base SGSP RSCF r01 Gate-A competition cut — action remains current
+
+SGSP moves from definition-only competition to one enabling-construction
+purchase. It competes against declining the unreduced 24–41-workday full path,
+not against stopping VNFC, RISP, ONLGR, SCDMP or RCLE. The roughly 38x logical
+reduction is real, but material engineering reduction is not; Gate A is chosen
+because it tests equivalence and >=2x warm suffix speed before runner cost.
+
+If Gate A fails, current native-route investment ends without a scientific
+nonpass. Revisit requires reusable native substrate, a materially cheaper
+semantics-preserving path or a target-critical physical-prior need. If it
+passes, only a new runner/Gate-B cost decision becomes eligible. No WIP,
+vacancy/backfill or first-result rule applies.
+
+## 2026-08-21 base ONLGR TBVUUS r03 competition and revisit cut — action remains current
+
+ONLGR moves from definition competition to empirical investment. It competes
+against doing no further ONLGR work, not against pausing VNFC, RISP or the
+three remaining definitions. The exact fixed-`t=0` screen is the smallest
+object that can establish supported voluntary-update utility before timing.
+
+Only `ROAD_PATCH_DIRECT_UTILITY_QUALIFIES` creates timing-definition
+eligibility. Package, comparator, support, non-harm, materiality or power
+branches keep timing closed without deleting the wider family. No branch
+reopens old HEADLAND r03 or automatically authorizes timing construction.
+
+## 2026-08-21 current RISP r01 competition and revisit cut
+
+RISP r01 moves from definition competition to empirical investment. It competes
+against doing no further RISP work, not against stopping VNFC or the four
+definition lines. The purchase is justified by a positive fixed-`G`
+prerequisite, a single-axis answerability object, four decision-changing
+branches and a bounded 5–8 engineer-day / 18–26 CPU-hour cost.
+
+The object does not yet compete as a direct-value algorithm. A `G`-only result
+retains only initialization-sensitive reachability; both starts qualifying
+removes initialization necessity; neither closes the current finite package;
+zero-only rejects `G` start as an aid. Any semantic/value successor must be a
+new object and return to Portfolio. R03, checkpoint transplant, sign-reversed
+center, second surface and UAV routes remain fenced.
+
+The remaining current definition competition set is SCDMP, ONLGR, SGSP and
+RCLE. Their completion order does not rank them or alter RISP/VNFC. No WIP,
+quota, vacancy/backfill or first-result rule applies.
+
+## 2026-08-21 current residual-value competition and revisit cut
+
+Exact-object closure no longer competes against family discovery. Portfolio
+discovery is always active, and a credible residual question may receive
+definition-only investment before its target fact or complete card is already
+proved. The competition decision moves to the end of definition: which frozen
+object buys enough direct variable-`N`/`k` decision information for its full
+construction and empirical cost.
+
+Base snapshot at this cut: VNFC BPCR-r09 only. RISP has since advanced to the
+empirical panel above. The remaining current definition competition set is:
+
+| Family | Current definition question | What must be returned before construction |
+| --- | --- | --- |
+| SCDMP | Can one treatment-independent competent shared controller support a new target-bound direct order-value comparison? | Named target, single competence prerequisite, containing/reversed controls and total cost. |
+| ONLGR | Can a materially new voluntary-update action establish supported direct utility over never updating before timing is considered? | Effectful action law, per-cell support, direct mean/lower-tail endpoints and total cost. |
+| SGSP | Can a lower-work or broader-value object make a physical prior identifiable against competent EDGE without CCA-scale cost? | One frozen credit/endpoint law, component answerability, direct held-out-`N` value and cost separation. |
+| RCLE | Is there a real roster-change commitment-fragmentation target for a persistent/common latent against competent flexible containment? | Target fact, shared variable-`N` object, direct endpoint, controls and total cost. |
+
+These lines do not backfill a slot and do not inherit one another's evidence.
+Any line may return scientific non-instantiability, redundancy or uneconomic
+cost; that return is useful definition evidence and affects no sibling.
+
+After a complete definition, this Portfolio owner may make a separate
+construction/empirical decision without another user-confirmation turn. Root
+still applies the exact packet and owns providers, leases and resources. No
+later action is automatic.
+
+## Superseded/base 2026-08-21 RISP reachability competition cut
+
+RISP's next definition competes against doing no further recurrence work, not
+against VNFC's ongoing empirical panel. Its value comes from a positive fixed-G
+prerequisite and a narrow remaining uncertainty: initialization-dependent
+finite reachability. The definition must show that a single-axis two-arm object
+can close this uncertainty without a menu/search and at proportionate cost.
+
+If it cannot, RISP receives no empirical action. If it can, the complete
+definition returns independently; no other direction closes or backfills.
+
+## Superseded/base 2026-08-21 competence/action-support competition cut
+
+SCDMP and ONLGR now compete primarily against their own prerequisites rather
+than against each other. SCDMP needs a controller that is independently
+competent on the exact direct-value host before order attribution. ONLGR needs
+a voluntary-update action family with supported direct utility before rate
+heterogeneity. These are distinct bottlenecks and no evidence transfers.
+
+RISP and VNFC remain current empirics because they retain direct answer-bearing
+panels under already frozen comparisons. No direction is opened to replace a
+completed slot; revisit remains target- and object-bound.
+
+## Preserved VNFC BPCR r09 policy-exception competition cut
+
+VNFC retains its empirical allocation because the exact BCRH exception protects
+rather than weakens cross-family comparison. A sixteen-candidate replacement
+could reduce cost but would make the physical baseline depend on a new menu-
+generation assumption and thereby lower the credibility of any MAPR positive.
+
+The exception's opportunity cost is already inside the accepted 24–38
+engineer-day / 200–1,500 CPU-hour envelope. It is confined to fixed-`N=7`
+reference evidence and creates no advantage in ranking MAPR's deployment
+complexity against RISP, ONLGR or SCDMP. All four empirical families remain
+scientifically complementary and evidence-isolated.
+
+No other direction receives an exception or precedent. Any ceiling expansion
+returns before activity.
+
+## Superseded/base 2026-08-21 VNFC BPCR r09 empirical competition cut
+
+VNFC now competes successfully for empirical allocation because accepted
+construction removes the old host/full-graph uncertainty and leaves one bounded
+24–38 engineer-day / 200–1,500 CPU-hour purchase. It directly chooses among an
+exact MAPR factorization package, active strict-containing DIRECT learning,
+bounded physical sufficiency, decline and nonidentification.
+
+The four empirical mechanisms remain complementary: RISP tests outcome-coupled
+recurrence, ONLGR tests package-conditioned event rate, SCDMP tests event-order-
+conditioned joint risk, and VNFC tests post-loss roster-size factorization from
+training `N={3,5}` to held-out `N=7`. Their evidence and parameter families
+remain isolated.
+
+VNFC's simpler-control, finite-budget/trainability, DIRECT-prefix, BCRH-tail,
+reserve and inference-power alternatives cap every result. Empirical admission
+creates no ranking, WIP/order, quota, backfill, fusion, surface or production
+action.
+
+## Superseded/base 2026-08-20 VNFC BPCR r09 construction competition cut
+
+VNFC competes successfully for enabling-construction allocation because it is
+the only current direct UAV variable-`N` route. RISP, ONLGR and SCDMP all test
+external-`k`, recurrence, timing-rate or event-order mechanisms; none answers
+post-loss shared-policy transfer from training `N={3,5}` to held-out `N=7`.
+
+The 61–93 engineer-day and 200–1,500 CPU-hour path is materially larger than
+the other current purchases. Revision 09 nevertheless changes the comparison:
+the old unbounded full-graph tail is gone, the learned comparator strictly
+contains MAPR and remains behaviorally active, the physical controller is
+finite and checked, and the result can retain or decline a direct recovery-
+value package. Construction is therefore purchased before empirical activity.
+
+Simpler physical heuristics, finite-budget/trainability geometry and
+conservative inference remain explicit alternatives. The purchase creates no
+rank, quota, WIP/order, backfill, fusion, surface or production rule.
+
+## Superseded/base 2026-08-20 SCDMP UAV r02 empirical competition cut
+
+SCDMP now competes successfully for empirical allocation because exact native
+construction removes the last host uncertainty while leaving a bounded
+10–17 engineer-day / 24–72 CPU-hour purchase. The panel directly retains or
+declines one external-`k` UAV order-conditioned policy package rather than
+adding another upstream checkpoint diagnostic.
+
+The three empirical mechanisms remain complementary: RISP tests outcome-
+coupled recurrence, ONLGR tests package-conditioned event rate, and SCDMP tests
+event-order-conditioned joint risk. Their scientific evidence and parameter
+families remain isolated. VNFC's later definition/result is not preempted by
+this purchase.
+
+SCDMP's finite-budget/optimization, risk-aversion, numeric-`k`, damage-feedback,
+last-event and simulator-abstraction alternatives cap any result. Empirical
+admission creates no ranking, WIP/order, quota, backfill, fusion, Stage B,
+surface or production action.
+
+## Superseded/base 2026-08-20 SCDMP UAV r02 construction competition cut
+
+SCDMP now competes successfully for enabling-construction allocation because
+its closed direct UAV/external-`k` question is answerable, nonredundant and
+bounded at 15–24 engineer-days and 24–72 CPU core-hours for the full path. The
+present purchase is smaller: build and accept the exact native task, then
+return measured remaining empirical cost before any panel.
+
+ONLGR and SCDMP are complementary rather than substitutes. ONLGR tests
+prospectively observable package-rate allocation against pooled global rate;
+SCDMP tests whether equal-multiset physical event order should change joint
+action risk under one shared external-`k` policy. RISP remains a third isolated
+empirical recurrence route. VNFC remains definition-only.
+
+The key SCDMP alternatives—optimization geometry, generic risk aversion,
+numeric-`k`, damage feedback and last-event shortcut—remain visible even after
+construction and cap the future claim. Construction does not outrank another
+family or activate empirical work. No quota, backfill, WIP/order, fusion,
+Stage B, surface, production or first-result-wins rule follows.
+
+## Superseded/base 2026-08-20 ONLGR empirical competition cut
+
+ONLGR now competes successfully for empirical allocation because the accepted
+host converts the prior 15.8–315.4 CPU-hour uncertainty into a measured
+10.91–14.13 CPU-hour reserved lifecycle and leaves 3–5 focused engineer-weeks.
+That purchase answers an exact direct two-UAV value question with reciprocal
+controls and a competent pooled baseline.
+
+RISP and ONLGR are complementary empirical routes: RISP tests outcome-coupled
+recurrence under held-out/switched external `k`; ONLGR tests prospectively
+observable package-rate heterogeneity on a two-UAV analytic host. Neither
+evidence enters the other. SCDMP and VNFC remain definition purchases because
+their exact empirical objects/costs are not closed. SGSP and RCLE remain
+no-current for their existing independent conditions.
+
+ONLGR's narrower claim and geometry/tenure confound remain explicit, so a
+positive cannot outrank or delete another family automatically. The three UAV
+entry count remains descriptive; no fourth-entry duty, WIP/order, backfill,
+fusion, surface, production or first-result-wins rule follows.
+
+## Superseded/base 2026-08-20 all-direction competition and UAV-entry cut
+
+The delivery objective changes the value of target-bound UAV work but does not
+erase mechanism competition or scientific gates. The current entries are:
+
+- ONLGR is the most mature explicit UAV host and receives exact construction/
+  conformance only. Its cost and narrow two-rate claim still require a later
+  empirical decision.
+- SCDMP receives a UAV-specific direct external-`k` definition because a
+  physics-derived order treatment can bypass the exhausted checkpoint route.
+- VNFC receives a bounded direct-value UAV definition because the physical
+  post-churn target is valuable but the old exact full-graph route is not.
+- RISP continues its existing direct variable-`k` empirical panel but remains
+  a toy abstraction until a complete result makes a specific bridge component
+  decision-bearing.
+- SGSP remains no-current because neither a concrete target-critical prior fact
+  nor audited cost reduction exists. RCLE remains no-current because neither
+  its Level-1 target fact nor Level-2 object exists.
+
+ONLGR, SCDMP and VNFC are nonredundant: rate heterogeneity, ordered dynamics
+and roster-loss allocation respectively. They transfer no evidence and are not
+fused. Exactly three formal preactivity entries exist, with zero UAV empirical
+activities authorized. The metric creates no quota, replacement duty, WIP,
+order or first-result-wins rule.
+
+## Superseded/base 2026-08-20 SCDMP TBOV SRF r03 post-result cut
+
+SCDMP no longer competes as a checkpoint empirical route. Its complete
+factorial supplies no competent cell, bounds support/interaction small and
+leaves representation unresolved. Another checkpoint/factor menu would be
+post-result search and still sit upstream of relation direction and value.
+
+The family remains competitive only through one direct definition reset. A
+target-bound end-to-end object can compete with RISP as a distinct external-
+`k` mechanism only if it names its treatment independently, uses a competent
+containing comparator and returns direct value/robustness rather than another
+checkpoint qualification. Definition/cost is therefore current; empirical
+competition is not.
+
+RISP is the sole empirical and tests outcome-coupled recurrence, while SCDMP
+definition asks ordered composition value. They remain complements, not a
+fusion or evidence-sharing pair. SGSP, RCLE, ONLGR and VNFC conditions remain
+unchanged. No vacancy, backfill, quota, WIP/order, surface or UAV action exists.
+
+## Superseded/base 2026-08-20 SGSP RG2Z CCA r01 post-definition cut
+
+SGSP CCA is scientifically coherent but does not compete successfully for
+current empirical allocation. Its 155–174× logical expansion, 26–45 workdays
+and 2,500–9,000 CPU core-hours purchase only one exact prior decision and may
+again stop at answerability/competence nonidentification. It cannot compare
+trainers or open a bridge automatically.
+
+RISP remains the direct current variable-`k` value route and SCDMP the bounded
+checkpoint-family discriminator. Their evidence does not enter SGSP, but their
+already active and materially lower-cost decision surfaces make CCA's current
+opportunity cost concrete. No empirical slot exists that SGSP must fill.
+
+SGSP's best future competition route is conditional: audited reusable branch
+infrastructure or hardware must materially reduce its total cost, or a target
+must make the exact physical-prior decision critical. Another direction's
+failure alone cannot reopen CCA. RCLE, VNFC and ONLGR conditions remain
+independent and unsatisfied.
+
+No current fusion, cross-`N×k` parent, surface, UAV, backfill, quota or WIP/order
+action exists.
+
+## Superseded/base 2026-08-20 SGSP RG2Z r03 post-result cut
+
+SGSP no longer competes as a current empirical purchase: exact r03 is complete
+but cannot compare the physical prior against a competent containing learner.
+The result is nonidentification, not prior deletion or equivalence. It does not
+raise RCLE or VNFC and transfers no evidence.
+
+SGSP remains the sole current variable-`N` definition line because the proposed
+counterfactual-credit object attacks one localized shared training axis and has
+a terminal outcome map: restore an identifying retain/delete comparison or,
+after another competence/answerability failure, close this target-bound line.
+Its empirical cost is unknown, so definition/closure/static-cost is the only
+current purchase.
+
+This does not satisfy RCLE's target-fact plus new-object revisit boundary.
+It also does not satisfy VNFC's independent analytic-factorization, bounded-
+cost, reusable-substrate or target-criticality-plus-feasibility conditions.
+RISP and SCDMP remain the current independent variable-`k` empirics; ONLGR
+remains no-current. No vacancy, backfill, WIP/order, fusion, cross-`N×k`,
+surface or UAV action exists.
+
+## Superseded/base 2026-08-20 RCLE CPC r04 post-result cut
+
+RCLE no longer competes as a current empirical purchase: its fixed binary
+restriction has no registered material advantage over the flexible containing
+class on the exact target, and the mechanism gates do not identify a reason to
+retain it. The result does not establish flexible superiority or delete
+persistent-latent behavior generally.
+
+SGSP remains the active variable-`N` physical-kernel route, but RCLE does not
+raise SGSP's rank or transfer evidence. VNFC remains no-current because RCLE
+completion supplies neither bounded full-graph feasibility nor target-critical
+evidence. A future RCLE route must begin from a new target failure plus a new
+direct-value object, not from CPC repair.
+
+RISP and SCDMP continue as independent variable-`k` routes. No vacancy,
+automatic backfill, WIP/order, fusion, cross-`N×k`, surface or UAV action exists.
+
+## Superseded/base 2026-08-20 SCDMP SRF count-semantics correction
+
+The correction does not change SCDMP's competition or bridge position. It
+remains a distinct low-compute enabling variable-`k` route, upstream of a
+separate relation assay and Stage B, while RISP directly tests recurrence
+value and RCLE/SGSP test complementary variable-`N` families.
+
+The approximately 8.9% lower expected direct ledger does not materially change
+the 6–10 engineer-day or 2–5 CPU-hour class. Therefore it supplies neither a
+new reason to drop SCDMP nor a reason to outrank, pause or absorb another
+direction. Closure of the count-only revision is a scientific correctness
+condition, not a WIP/order or resource gate.
+
+## Superseded/base 2026-08-20 SCDMP SRF r02 empirical cut
+
+SCDMP-SRF-r02 is a current low-compute, moderate-engineering enabling
+investment. It does not compete with RISP on mechanism: RISP directly tests
+outcome-coupled recurrence value under external `k`, whereas SRF asks whether
+support allocation, one context-conditioned representation package or their
+interaction can produce a competent checkpoint for a still-future order assay.
+
+RCLE and SGSP remain complementary variable-`N` empirics. The SCDMP factorial
+does not pause or absorb them and creates no ordering rule. A favorable SRF
+result still has two portfolio boundaries before value: a separately frozen
+fresh relation assay must first select a treatment, and Stage B then requires
+another explicit investment. A nonqualifying or indeterminate result does not
+authorize seed, threshold, budget or architecture repair.
+
+ONLGR and VNFC revisit conditions remain unchanged. No current fusion,
+cross-`N×k` parent, surface, UAV, WIP/order or automatic backfill exists.
+
+## Superseded/base 2026-08-20 SCDMP r07 Stage-A post-result cut
 
 SCDMP r07 establishes target-local physical transition, reward and held-action
 opportunity but not a competent shared-checkpoint relation assay. The failure
@@ -382,10 +830,46 @@ parameterization tested under held-out changes on both axes and their
 interaction, matched fixed/adaptive baselines, and complete observation/action/
 credit semantics. None of these current admission conditions is met.
 
+## 2026-08-21 operative residual-value competition and bridge cut
+
+The controlling record is
+`CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md`.
+The two empirical objects answer different direct questions: RISP tests
+finite-budget initialization reachability inside matched recurrence, while
+RCLE tests persistent commitment under roster churn. Completed VNFC BPCR r09
+and SCDMP TBCC r02 remain direction-local result evidence only; none supplies
+evidence for another.
+
+SGSP RSCF Gate B is enabling construction, not a fifth empirical result. Its
+accepted full-chain cost and answerability package selects empirical investment
+or no-current. SGSP-CBRR stays no-current while RSCF can answer the same
+physical-prior credit question at lower redundancy.
+
+VQFP-FERL r05, DISH r05 successor and VNFC-PCPI r02 compete at definition cost only.
+VQFP-FERL targets fixed total physical-effort allocation across variable `N`;
+DISH targets direct degraded-incumbent handover value under external `k`; and
+VNFC-PCPI asks whether physical-command semantics commute with presentation
+relabeling before another value panel. Their first bridge is a
+meaning-complete target-bound definition with a strict-containing comparator,
+not construction or UAV production. A definition that cannot specify a direct
+endpoint, competent containing comparator and outcome-dependent family action
+returns as scientifically incomplete without blocking the other direction.
+
+Revisit boundaries remain object-specific. ONLGR ROAD-PATCH returns only for a
+materially different direct-update mechanism or degraded-incumbent fact;
+SGSP-CBRR returns only after RSCF nonanswerability, disproportionate cost or a
+distinct target-critical fact. No empirical closure creates a vacancy or
+automatic replacement. There is no current direct UAV empirical; DISH r05 is
+a UAV definition only. The historical ONLGR/SCDMP/VNFC catalog is not a live
+bridge count.
+
 ## Source locators
 
+- `CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md`
+  (current allocation and classification entrypoint).
+
 - `VNFC_B4_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260815.md`
-  (current controlling cut: VNFC-B4 r05 complete immutable/no-current empirical,
+  (historical lineage: VNFC-B4 r05 complete immutable/no-current empirical,
   target-exclusive post-churn recovery definition retained, and four explicit
   B4 empirical revisit triggers).
 - `RISP_B3_ONLGR_HOST_CARD_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260815.md`

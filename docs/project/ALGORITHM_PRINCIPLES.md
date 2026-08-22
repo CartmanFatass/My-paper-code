@@ -169,13 +169,12 @@ is launched.
 
 Scientific attribution is treatment/direction/design/source/run/root/seed
 isolation. Already-selected and independently frozen ordinary A/B work across
-directions is parallel-first within the CPM 3-unit experiment pool; default to
-one result-bearing treatment per direction. Serialize only for a named
-direction dependency or intake, a shared mutable/path conflict, an observed
-resource constraint, or formal/explicit-heavy experiment-pool exclusivity; no
-experiment capacity condition blocks non-runtime work. Do not invent or fill
-capacity, reprioritize science, or reactivate parked directions. Choose by
-information gain, cost and reversibility,
+directions is parallel-first. Serialize only for a named direction dependency
+or intake, a shared mutable/path conflict, or an observed resource constraint;
+there is no CPM experiment pool, default one-treatment rule, WIP limit, or
+experiment-capacity admission condition. Do not invent or fill capacity,
+reprioritize science, or reactivate parked directions. Choose by information
+gain, cost and reversibility,
 normally in this order: derivation, counterexample, accepted-evidence
 reanalysis, toy, bounded prototype, formal experiment. Unscheduled ideas remain
 live or parked with a reactivation condition.
@@ -218,19 +217,21 @@ environment steps do not imply equal learning opportunity.
 
 Create an implementation plan when implementation is the cheapest necessary
 evidence action and the research object is precise enough that two reasonable
-implementations instantiate the same intended comparison. Add at most one
-focused operational check for a concrete corruption risk the evidence-bearing
-run cannot cheaply expose. Do not repeatedly re-prove accepted facts without a
+implementations instantiate the same intended comparison. Add focused
+operational checks only for concrete corruption risks the evidence-bearing run
+cannot cheaply expose; their number and scope follow the named risk, not a
+fixed project limit. Do not repeatedly re-prove accepted facts without a
 concrete contradiction or named result-relevant question.
 
 For C, evaluate claimed learning signals at the forced initial state, prove
 that a positive control makes the target behavior necessary rather than merely
 permitted, construct witnesses for result gates, check threshold arithmetic
-and zero denominators, and freeze result-sensitive choices. Before a formal or
-conclusion-bearing run, External Pro reads the pushed implementation commit
-and decides whether code and scientific contract align. These are scoped
-scientific assertion checks, not generic review layers or a per-iteration gate
-on B.
+and zero denominators, and freeze result-sensitive choices. External Pro
+remains science-only: it may assess the frozen scientific object and claim
+boundary under the governing science route, but never reads a pushed
+implementation commit for code acceptance. CM owns implementation conformance
+and technical acceptance. These are scoped scientific assertion checks, not
+generic review layers or a per-iteration gate on B.
 
 ## 5. Toys, Access, and Transfer
 

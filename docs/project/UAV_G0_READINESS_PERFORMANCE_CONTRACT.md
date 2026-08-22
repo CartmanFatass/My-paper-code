@@ -1,8 +1,12 @@
-# UAV G0 Readiness Performance Contract
+# Historical UAV G0 readiness receipt contract
 
 ```text
-document_kind=execution_readiness_performance_contract
+document_kind=historical_object_local_execution_readiness_receipt
 request_id=UAV_G0_READINESS_PERFORMANCE_CONTRACT_V3
+current_routing_authority=none
+science_stop_authority=none
+portfolio_stop_authority=none
+attempt_timeout_authority=mechanical_receipt_only
 selected_option=B_EVIDENCE_BACKED_TIMEOUT_REVISION
 candidate_identity=checked_out_clean_HEAD
 source_execution_bridge=forbidden
@@ -34,11 +38,23 @@ automatic_timeout_increase=forbidden
 automatic_retry=operational_only_within_unchanged_candidate_and_contract
 ```
 
+## Historical and local-only status
+
+The timeout values, ordered phases, clean-root records, and three-attempt
+inventory below are preserved measurements and receipt mechanics for this
+named historical UAV G0 object only. They do not govern a current project
+route, construction decision, experiment admission, scientific interpretation,
+portfolio allocation, or direction stop. A timeout or exhausted receipt attempt
+is an engineering observation for CM; it cannot change science, consume a
+direction, or prevent unchanged-science repair under a later appropriate
+resource slice.
+
 ## Frozen boundary
 
 This contract revises only the proof-sized readiness time budget for the UAV
 native environment and safety ledger. It preserves the accepted G0 source
-contract, geometry, `R=273`, `O(H*K_search)`, RNG and seed identities, pairing,
+contract, geometry, `R=273`, its recorded historical complexity notation, RNG
+and seed identities, pairing,
 controls, oracle, metrics, estimator, first-match order and independent replay.
 It also preserves the real production entry, proof inventory, artifact schema,
 canonical validators and reload requirements. A readiness attempt remains

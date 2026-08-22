@@ -48,7 +48,7 @@ def _make_routed(*, backend="python_reference", seed=123, routing="widest_path")
     )
 
 
-def test_unpromoted_native_geometry_keeps_per_environment_reference_defaults():
+def test_native_geometry_is_the_fail_closed_per_environment_default():
     routed = UAVRoutedRelayEnv(
         n_uavs=2,
         n_users=4,
@@ -74,13 +74,13 @@ def test_unpromoted_native_geometry_keeps_per_environment_reference_defaults():
         seed=29,
     )
     try:
-        assert geometry_backend.DEFAULT_ROUTED_RELAY_GEOMETRY_BACKEND == "python_reference"
-        assert geometry_backend.DEFAULT_ENERGY_RELAY_GEOMETRY_BACKEND == "python_reference"
-        assert geometry_backend.DEFAULT_FORCED_RELAY_GEOMETRY_BACKEND == "python_reference"
-        assert geometry_backend.DEFAULT_RELAY_GEOMETRY_BACKEND == "python_reference"
-        assert routed.relay_geometry_backend == "python_reference"
-        assert energy.relay_geometry_backend == "python_reference"
-        assert forced.relay_geometry_backend == "python_reference"
+        assert geometry_backend.DEFAULT_ROUTED_RELAY_GEOMETRY_BACKEND == "cpp"
+        assert geometry_backend.DEFAULT_ENERGY_RELAY_GEOMETRY_BACKEND == "cpp"
+        assert geometry_backend.DEFAULT_FORCED_RELAY_GEOMETRY_BACKEND == "cpp"
+        assert geometry_backend.DEFAULT_RELAY_GEOMETRY_BACKEND == "cpp"
+        assert routed.relay_geometry_backend == "cpp"
+        assert energy.relay_geometry_backend == "cpp"
+        assert forced.relay_geometry_backend == "cpp"
     finally:
         routed.close()
         energy.close()
@@ -376,3 +376,81 @@ def test_cpp_selection_fails_closed_without_native_backend(monkeypatch):
             env.reset(seed=47)
     finally:
         env.close()
+
+
+@pytest.mark.parametrize(
+    ("field", "mutation"),
+    (
+        ("tx_power", lambda value: float(value) + 1.0),
+        ("ground_bs_tx_power", lambda value: float(value) + 1.0),
+        ("noise_power", lambda value: float(value) + 1.0),
+        ("carrier_frequency", lambda value: float(value) * 1.01),
+        ("use_fdma", lambda value: not bool(value)),
+        ("aclr_linear", lambda value: float(value) * 2.0 + 1.0e-9),
+        (
+            "environment_type",
+            lambda value: "suburban" if str(value) != "suburban" else "urban",
+        ),
+        ("n_uavs", lambda value: int(value) + 1),
+        ("n_users", lambda value: int(value) + 1),
+        ("n_ground_bs", lambda value: int(value) + 1),
+    ),
+)
+def test_forced_retained_radio_invalidates_every_material_configuration_field(
+    field, mutation
+) -> None:
+    environment = UAVForcedRelayEnv(
+        n_uavs=4,
+        n_users=8,
+        n_ground_bs=2,
+        n_clusters=4,
+        max_steps=4,
+        user_movement_model="stationary",
+        relay_geometry_backend="cpp",
+        seed=53,
+    )
+    try:
+        environment.reset(seed=53)
+        assert environment._retained_radio() is not None
+        current = getattr(
+            environment, field, "urban" if field == "environment_type" else None
+        )
+        setattr(environment, field, mutation(current))
+        # Even the observation-local position-validation fast path must first
+        # validate every scalar/count that determines the retained radio tensor.
+        environment._retained_radio_validation_active = True
+        assert environment._retained_radio() is None
+    finally:
+        environment.close()
+
+
+def test_forced_radio_config_mutation_uses_scalar_fallback_not_stale_tensor(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    environment = UAVForcedRelayEnv(
+        n_uavs=4,
+        n_users=8,
+        n_ground_bs=2,
+        n_clusters=4,
+        max_steps=4,
+        user_movement_model="stationary",
+        relay_geometry_backend="cpp",
+        seed=59,
+    )
+    try:
+        environment.reset(seed=59)
+        assert environment._retained_radio() is not None
+        environment.tx_power = float(environment.tx_power) + 1.0
+        calls = []
+
+        def scalar_fallback(uav_idx, user_idx, rx_power):
+            calls.append((uav_idx, user_idx, rx_power))
+            return 123.25
+
+        monkeypatch.setattr(
+            environment, "_compute_uav_to_user_sinr", scalar_fallback
+        )
+        assert environment._compute_sinr(0, 0) == 123.25
+        assert calls and calls[0][:2] == (0, 0)
+    finally:
+        environment.close()

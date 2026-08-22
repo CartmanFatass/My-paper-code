@@ -61,15 +61,46 @@ Use the current checkout and write only the exact frozen assignment paths.
 must be explicit paths inside the current checkout. Do not require or create a
 worktree-ticket identity. Preserve disjoint edits made by other workers.
 
-Before result-bearing implementation, verify the assignment declares an
-evidence action inside `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`. Do not
-implement nested rollout/replanning, horizon-growing search or another action
-above its `O(H*K_search)` and `16*H` ceilings. Report the concrete fact that the
-requested evidence design exceeds its registered asymptotic ceiling to Code
-Project Manager; native optimization is not a repair. This is an
-assignment-local design fact, not a status or scientific stop. For scalable
-dynamic-agent code, flag a new dense pairwise deployment
-path unless it is explicitly the fixed-small-N exact reference.
+Before result-bearing implementation, read any object-level complexity and
+cost context relevant to the assignment. Implement the frozen object; do not
+invent a project-wide candidate, transition, `K_search`, neighbor, or
+asymptotic ceiling. When a requested realization is recursive, nested,
+horizon-growing, dense, or materially expensive, report the concrete workload,
+semantic alternatives, and engineering risks to Code Project Manager. CM and
+the owning EM/Portfolio decide object-level value and allocation. Complexity is
+not an automatic implementation refusal, review escalation, or scientific
+stop. Object-local card, coordinate, activity, and lease bounds remain binding.
+
+## Efficiency-by-construction instruction
+
+For every assignment that can execute in a production experiment, design the
+entire execution chain before writing the hot path. The first implementation
+must identify the environment/native boundary, loader/cache, batch shape,
+worker/thread plan, policy forward/recurrent state, backward/optimizer path,
+rollout packing, evaluation consumers, serialization/checkpoint writes and
+resume frontier. Do not create a serial Python production scaffold with a
+promise to port it later. Use C++/native batching and bounded parallel lanes
+from the first production-capable environment/rollout implementation; Python
+is limited to the explicit oracle, fixture, test or lifecycle adapter at that
+hot-path boundary. An assignment may explicitly retain Python/PyTorch model
+forward/backward or optimizer code when that is its frozen model interface,
+but that stage must still be batched, profiled and free of a Python
+environment or rollout fallback.
+
+Keep production loops batchable and measurable: avoid hidden per-agent or
+per-episode environment calls, duplicate rollouts for analysis, repeated model
+forward passes for the same packed state, and unbounded per-row I/O. Expose a
+small result-blind benchmark seam for each material stage and preserve exact
+RNG/order, pairing, counts, endpoint, checkpoint and resume equivalence. If a
+stage is genuinely not applicable, state why in the assignment result instead
+of silently omitting it.
+
+The implementation result must report the planned chain coverage and its
+dominant bottleneck, plus the evidence still required from CM: baseline versus
+optimized throughput, CPU/RSS/I/O, projected full-panel wall/storage cost,
+semantic equivalence and rollback nodes. A missing or days-scale obvious
+efficiency path is an engineering repair request to CM, not a scientific
+conclusion; do not accept the package or launch formal activity on that basis.
 
 Run only assigned proof-sized checks. Do not mutate Git, launch formal compute,
 contact External Pro or another task, invoke Skills, spawn children or accept

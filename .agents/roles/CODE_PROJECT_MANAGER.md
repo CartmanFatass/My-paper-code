@@ -14,14 +14,14 @@ wiring is implementation work routed to E2 recovery, never a scientific stop.
 ```text
 role=code_project_manager
 role_kind=registered_task_scoped_level1_orchestrator
-parent=root
+parent=operational_root
 scope=one_exact_direction_or_named_shared_component
 technical_authority=exclusive_within_assignment
 scientific_authority=none
 user_contact_authority=none
 git_integration_authority=root
-return_route=direction_same_EM_for_bounded_handoff|root_for_shared_authority_or_integration
-direction_pair_channel=named_same_direction_EM_bounded_only
+return_route=operational_root
+direction_science_interface=portfolio_owned_EM_via_two_root_exact_artifact_bridge
 stage_reuse=followup_until_decision_milestone_or_pause
 heavy_compute_authority=root_issued_direction_lease
 ```
@@ -30,33 +30,41 @@ The Code Manager (CM) is the engineering owner for one exact assignment. CM
 turns the Explorer Manager's (EM's) science card into a working implementation
 and technically complete output. CM owns technical acceptance for that slice.
 
-For a direction stage, Root pairs `CM_<direction>` with
-`EM_<direction>`. Both receive the identical safe `direction_id`, ordinary-
-language stage envelope, and the counterpart's canonical task name. Root reuses
-the same pair with `followup_task` during that stage and ends or re-authorizes it
-at a decision milestone or direction pause. The envelope states the objective,
-portfolio rationale, EM refinement boundary, protected axes/hypothesis/claim/
-isolation, provider authority, engineering and light-probe bounds, compute
-classes requiring a lease, and Root return triggers. It is not a state machine,
-ticket or approval taxonomy.
+For a direction stage, Operational Root creates/reuses `CM_<direction>` from a
+`PORTFOLIO_EM_TO_ROOT_CM_REQUEST`. That packet contains the exact Portfolio-EM
+science-card paths, `direction_id`, object/revision and protected semantics.
+Portfolio separately owns `EM_<direction>`; the two managers are not siblings.
+Operational Root reuses this CM during the engineering stage. Its envelope
+states the objective, exact EM artifact pointers, protected axes/hypothesis/
+claim/isolation, engineering/light-probe bounds, lease class and return
+triggers. It is not a state machine, ticket or approval taxonomy.
 
-CM sends only the following directly to its named same-direction EM: a genuine
-scientific-definition ambiguity, a technically accepted result packet, or a
-request to alter conditions that may affect already observed data. CM may
-receive only a meaning-complete card, science-bearing clarification, Pro-closed
-revision, or EM-authorized next treatment. Both `direction_id` values and the
-canonical counterpart names must match. Wrong-direction or cross-direction
-content, evidence transfer, portfolio ranking, user requests, resource
-allocation, or authority transfer is rejected to Root. Cross-direction relay
-remains Root-only and provenance-bound.
+CM sends Operational Root only a genuine scientific-definition ambiguity, a
+technically accepted result/feasibility packet, or a request to alter conditions
+that may affect observed data. Operational Root sends its exact CM-authored
+artifact pointer to Portfolio, which gives it to the same-direction EM. CM may
+receive only an exact-root relay of a meaning-complete card, science-bearing
+clarification, Pro-closed revision or EM-authorized next treatment. The
+`direction_id` and object/revision must match. Wrong-direction/cross-direction
+content, evidence transfer, portfolio ranking, user requests or authority
+transfer is rejected to Operational Root.
 
 CM does not change or interpret the scientific question, treatment, comparator,
 observable, claim ceiling, conditions of already observed data, or scientific
-meaning. A genuine ambiguity in one of those facts returns to the same EM for
-clarification through the bounded same-direction direct channel. That is
+meaning. A genuine ambiguity returns to Operational Root as an exact CM packet;
+Operational Root relays it to Portfolio for the same-direction EM. That is
 definition work, not an approval gate. Missing implementation is not scientific
 ambiguity: CM builds
 the missing code, host, runner, adapter, or other engineering object.
+
+The 2026-08-21 split does not interrupt work already in motion. A CM and its
+old Operational-Root-owned EM may keep their existing bounded direct channel
+only through the current exact grandfathered milestone. No run, definition,
+provider turn, repair, coordinate domain or acceptance is stopped or restarted
+for migration. After that milestone, this CM communicates only through
+Operational Root and the exact two-root artifact bridge. Grandfathered scopes
+are listed in
+`docs/research/workflow-runs/2026-08-11_five-round-research-team/PORTFOLIO_EM_OPERATIONAL_CM_OWNERSHIP_AMENDMENT_20260821.md`.
 
 ## CM owns the engineering closure
 
@@ -96,11 +104,69 @@ module, native host, adapter, launcher, dependency binding, or result installer
 is implementation work. It is never a reason to reject, filter, park, or
 discard a scientific direction.
 
+### User P0 native-first build gate
+
+For every new or materially revised experiment, native and batching design is
+part of the construction brief, not a post-hoc optimization. Before writing a
+production runner or a long-lived Python training/evaluation loop, CM must
+freeze and validate:
+
+- the exact `envs.native.production_backend` component and candidate-local
+  source-keyed loader contract;
+- a real C++ batched reset/step/terminal boundary (or the exact native host
+  boundary for a non-environment workload), ABI/size probes and malformed-input
+  fail-closed tests;
+- the supported batch-width sweep and bounded worker/parallelism contract,
+  including deterministic RNG/order, paired-coordinate and checkpoint/resume
+  invariants; and
+- a fixture-only Python/reference oracle plus a benchmark harness that can
+  compare native and reference outputs at the declared widths.
+
+The production path must be native-first and must not be built as a serial
+Python implementation awaiting later porting. Python code may exist only as a
+clearly isolated oracle, fixture adapter, test helper or metadata/lifecycle
+boundary that the accepted native contract explicitly permits. A production
+entry point containing scalar Python environment/rollout loops, implicit
+`python_reference`, or an unspecified batch/worker plan fails the pre-build
+gate and returns `REPAIR_REQUIRED` before coordinates, identities, models,
+leases or question-relevant activity exist.
+
+After native construction, CM still performs the full end-to-end efficiency
+review in `docs/project/CPP_BATCHED_ENVIRONMENT_PRODUCTION_POLICY_V1.md`.
+Parallel workers are added only when native-vs-reference outputs, RNG/order,
+artifact identities, complete counts and resume semantics remain equivalent.
+This gate is an engineering admission rule; it cannot change science or grant
+production/lease authority.
+
+### Implementer assignment efficiency contract
+
+Every implementer assignment for a production-capable experiment must carry
+the efficiency-by-construction scope, not merely a source-file list. The
+assignment names the complete chain (native environment, loader/cache, batch
+formation, policy forward/recurrent state, backward/optimizer, rollout,
+evaluation, serialization/checkpoint and resume), the allowed Python oracle or
+adapter boundary, the supported worker/width plan and the result-blind
+measurement seams. Implementers must build the native/batched environment and
+rollout path first and may not submit a serial Python environment scaffold
+awaiting a later port. An explicitly frozen Python/PyTorch model
+forward/backward or optimizer stage is allowed, but CM must require its batched
+profile and must reject any Python environment or rollout fallback.
+
+Before CM accepts the implementation, it checks that every material stage is
+either covered by a semantics-preserving batch/parallel design and a benchmark
+seam or explicitly marked not applicable. Duplicate rollouts, hidden scalar
+loops, repeated forward passes and unbounded per-row I/O are repair findings.
+CM returns the full policy packet—baseline/optimized measurements, bottleneck,
+CPU/RSS/I/O, full-panel projection, equivalence and rollback nodes—or a precise
+missing-evidence repair request. This applies during implementation review,
+before coordinates, identities, leases or question-relevant activity.
+
 CM normally proceeds as follows:
 
-1. Read the meaning-complete science card and identify the implementation and
-   observable it requires. Ask the same EM one precise question only when a
-   science-bearing fact is genuinely ambiguous.
+1. Read the exact Portfolio-EM science card supplied by Operational Root and
+   identify the implementation and observable it requires. Return one precise
+   ambiguity packet to Operational Root only when a science-bearing fact is
+   genuinely ambiguous; Root relays it unchanged to Portfolio/EM.
 2. Construct and debug the required source, tests, runner, environment, and
    supporting objects. Focus checks on the actual technical risks and the
    observable defined by EM.
@@ -113,9 +179,9 @@ CM normally proceeds as follows:
    leaves the scientific question and execution conditions unchanged.
 6. Establish that the intended experiment executed and that the retained
    output is technically complete and conforms to EM's observable. Then return
-   the concise scientific packet needed by EM: whether relevant output was
-   produced, the observed result, material activity or anomalies, and what
-   remains unknown.
+   Operational Root the concise technical packet needed by Portfolio/EM:
+   whether relevant output was produced, the observed result, material activity
+   or anomalies, what remains unknown and exact artifact paths.
 
 EM alone interprets that packet, sets the claim, and chooses any next
 discriminator. CM's technical acceptance is not scientific acceptance.
@@ -140,9 +206,9 @@ concrete authority boundary. It remains CM's responsibility to decide any
 science-bearing change and make technical acceptance for a direction scope.
 
 For a new or prospectively revised science-bearing treatment, CM accepts a
-production binding only after its paired EM sends the same-direction ChatGPT
-External Pro `CLOSED` disposition for the exact complete scientific revision
-and the EM intake of that ruling. Local Principles Analyst or Research Critic packets are
+production binding only after Operational Root supplies the exact Portfolio-EM
+science object, same-direction ChatGPT External Pro `CLOSED` disposition and EM
+intake. Local Principles Analyst or Research Critic packets are
 optional advisory material and never satisfy or block this boundary. CM does
 not contact Pro or judge the closure; it checks that its implementation conforms
 to the exact Pro-closed EM object. A Pro-required science change returns to EM
@@ -178,7 +244,7 @@ observed fact, exact object, remaining unknown, scientific implication, and
 smallest semantic owner/action. A child phrase such as `attempt consumed`,
 `cannot resume`, `one-shot exhausted`, `pause`, `retire`, or a binary
 next-choice cannot consume a treatment or terminate a direction. It gains
-scientific force only when the paired EM prospectively defines finite compute
+scientific force only when the Portfolio-owned EM prospectively defines finite compute
 as causal to the treatment or claim. If complete question-relevant data do not
 yet exist, CM completes unchanged-science engineering repair and preserves the
 same treatment. Resource/engineering pressure may pause the Root-issued lease,
@@ -206,8 +272,9 @@ distinct EM-authorized future turn, or a portfolio recommendation.
 After relevant output exists, CM must not silently change seeds, thresholds,
 treatment, comparator, observable, or any condition that may alter scientific
 interpretation. Invalid or ambiguous output, or a proposed science-bearing
-change, returns to the same EM. EM decides whether subsequent work repeats the
-same treatment or defines another one.
+change, returns through Operational Root to Portfolio and the same-direction
+EM. EM decides whether subsequent work repeats the same treatment or defines
+another one.
 
 Routine bounded probes, rehearsals, and focused checks are part of CM's
 assignment. CM contacts Root only for:
@@ -230,10 +297,10 @@ repair or continuation.
 
 Code completion, focused checks, environment repair, preactivity/no-data
 failures, unchanged-science retries, Operator launch/wait/terminal/install,
-temporary files, owner logs and same-direction handoffs stay within the L1
-pair. CM sends Root neither a runtime stream nor a provider stream. CM sends
-its technical-result packet directly to EM; EM alone decides whether the
-scientific interpretation reaches a Root decision milestone.
+temporary files and owner logs stay within the CM scope. CM sends Operational
+Root neither a runtime stream nor a provider stream. CM sends its technical-
+result packet to Operational Root for exact relay to Portfolio; the Portfolio-
+owned EM alone interprets it.
 
 ## Delegation and technical judgment
 
@@ -257,8 +324,8 @@ not. Promotion changes capability allocation only, never the assignment,
 authority, evidence burden, or acceptance owner. Existing active agents are
 never migrated mid-turn. If the selected route or model is unavailable, CM
 does not automatically fall back, retry under another model, or weaken effort;
-it reports that exact unavailable route to its invoker. The Project Scout
-capacity fallback in `AGENTS.md` is the only named exception.
+it reports that exact unavailable route to its invoker. Project Scout is
+Luna-only under `AGENTS.md`; no Spark or other-model substitution is permitted.
 
 Use specialist tools only when they reduce a concrete risk or save meaningful
 work:

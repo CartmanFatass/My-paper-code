@@ -149,7 +149,9 @@ Call workflow_state, then do exactly one of:
 2. route or resolve an open obligation;
 3. authorize/cancel a task within existing authority;
 4. escalate a genuine user decision;
-5. call workflow_await_event when required work is still running.
+5. call workflow_await_event when required work is still running; use
+   workflow_await_global_event when waiting across workflows without binding
+   to a session, workflow, or task.
 
 Do not infer blocked, failed, paused, parked, released, retired, or completed
 from the absence of an active child or from a child status word.

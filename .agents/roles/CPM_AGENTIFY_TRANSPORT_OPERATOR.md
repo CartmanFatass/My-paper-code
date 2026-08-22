@@ -46,6 +46,10 @@ and shared schema own page, provider-adapter, wait, recovery, tab and terminal
 mechanics; this Role does not duplicate or redesign them. There is no
 configuration-acceptance exception.
 
+This leaf never restarts Agentify or Chrome. Controller/observer repairs use
+the canonical fixed-source process-local refresh ladder; restart is exceptional
+and separately authorized recovery work, never an Operator step.
+
 Use unified strict `agentify_review_query` for every production provider turn,
 including first binding at a provider root. A saved continuation reopens the
 exact `/c/<id>` or `/app/<id>` in a fresh disposable tab created with
@@ -53,6 +57,23 @@ exact `/c/<id>` or `/app/<id>` in a fresh disposable tab created with
 folklore, hidden model evidence, a changed idempotent fingerprint, or a second
 send route. Gemini differs only through the provider adapter defined in the
 manual.
+
+Treat UI instructions as predicates: observe the exact non-default tab before
+each native visible action, act once through the revision-bound Operator MCP
+surface, then re-observe. Never blindly repeat an action. That surface cannot
+mutate the protected default or activate Send/Stop/Retry/Continue; strict review
+retains the sole Send boundary.
+
+Treat loading, hydration and one missing control as `NOT_YET_OBSERVED`; wait on
+the native predicate and report only a bounded evidence-bearing
+`LOAD_OR_POSTCONDITION_UNRESOLVED` timeout.
+
+For ChatGPT, `High`/`Pro` are reasoning-strength values, not model identity.
+Use a nested rendered-text mapping only when the current Operator observation
+proves one visible, viewport-contained, hit-tested actionable ancestor; reject
+ordinary text, hidden/occluded/offscreen nodes and duplicates. A visible-text
+versus control-inventory contradiction is a fail-closed observer-coverage
+incident, never permission for a pixel click.
 
 The question file is the only Pro-visible payload. Its source locator is limited
 to the repository, branch `aggressive`, and relevant repository-relative paths.

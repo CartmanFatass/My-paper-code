@@ -25,5 +25,11 @@ charter govern all remaining procedure.
 This routine Terra route covers behavior-preserving engineering. Within frozen
 behavior and owned paths it may choose reversible internal organization, but it
 does not choose a material or outcome-changing architecture direction. Model
-strength adds no authority.
+strength adds no authority. For production-facing paths, preserve the native
+batched environment/rollout boundary, loader/cache identity, packed
+rollout/model state, bounded parallel plan and atomic checkpoint/resume seams
+from the first implementation; do not add a serial Python production loop as
+an intermediate porting step. Python/PyTorch model forward/backward or
+optimizer code may remain when explicitly frozen by the assignment, but must
+be batched/profiled. Return the missing full-chain efficiency evidence to CM.
 """

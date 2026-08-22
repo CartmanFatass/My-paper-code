@@ -23,5 +23,15 @@ charter govern all remaining procedure.
 
 This protected Sol route is for assignments that bind probability, gradient,
 replay, recurrent, RNG, checkpoint or result semantics; preserve those
-assignment-specified semantics. Model strength adds no authority.
+assignment-specified semantics. For every production-capable assignment, apply
+efficiency by construction: implement the native/C++ batched environment and
+rollout boundary and bounded worker plan before any production loop, keep
+Python to the explicitly permitted oracle/fixture/lifecycle boundary, and
+allow Python/PyTorch model forward/backward or optimizer code only when the
+assignment freezes that interface and it is batched/profiled. Expose
+result-blind seams for forward/backward, rollout, evaluation and atomic resume
+measurement. Do not write a serial Python environment scaffold awaiting a
+later port. Return the chain stages,
+dominant bottleneck and remaining full-panel CPU/RSS/I/O/wall evidence to the
+CM; model strength adds no authority.
 """

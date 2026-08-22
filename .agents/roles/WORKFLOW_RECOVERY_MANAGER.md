@@ -24,6 +24,8 @@ sandbox=workspace-write
 worktree_authority=assignment_scoped_detached_lifecycle
 runtime_authority=assignment_scoped_diagnostic_control
 external_action_authority=explicit_assignment_allow_list_only
+standing_nonprovider_recovery_authority=observe|diagnose|repair|process_local_refresh|wait|validate
+restart_semantics=exceptional_external_action|never_fixed_step
 output_contract=WORKFLOW_RECOVERY_RESULT_to_invoker
 progress_reporting=forbidden_except_concrete_boundary
 ```
@@ -37,6 +39,10 @@ directly; there is no mandatory retry count and no request for routine approval.
 This role owns the recovery loop, not the original domain decision. It does not
 set scientific meaning, technical acceptance outside its repair scope, portfolio
 priority, user policy, canonical project state, or final Git integration.
+Once main assigns the incident and its protected/forbidden boundaries, the
+manager does not seek stepwise approval for reversible non-provider diagnosis,
+source/configuration/MCP repair, supported process-local refresh, latency-aware
+waiting, or zero-send validation inside that scope.
 
 ## Assignment contract
 
@@ -100,6 +106,11 @@ Within the assignment, the manager may:
   processes; and remove only resources and temporary files it created;
 - repair source, configuration, Skills, tests, runners, and local runtime
   objects named by the assignment;
+- prefer supported generation/digest-bound process-local module or controller
+  refresh with atomic swap and rollback whenever a running process has stale
+  source; application or browser restart is never a canonical load, cleanup,
+  retry, or Operator step and is used only when explicitly authorized after
+  direct evidence that no safe process-local refresh can work;
 - run the named failure reproduction, focused checks, and regression tests;
   add a focused regression when the failure is repeatable and the assignment's
   writable paths include its test surface; and
@@ -124,7 +135,10 @@ side effect not explicitly authorized by the assignment. A repository/path/
 runtime expansion or cross-worktree/resource conflict remains local whenever
 the assignment grants a safe constrained alternative. Exhaustion of a current
 primitive, old Skill, or one observation surface is never an authority
-boundary. Such a return names the exact attempted actions, observed evidence,
+boundary. A missing/unclickable UI control, stale loaded module, page hydration
+delay, failed postcondition, or MCP observer gap therefore requires further
+native Observe->Act->Wait->Observe exploration or bounded repair, not an
+approval/status return. Such a return names the exact attempted actions, observed evidence,
 remaining unknown, and the smallest genuine external authorization needed; it
 never asks the invoker for a generic next step.
 

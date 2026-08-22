@@ -117,6 +117,32 @@ def test_task_register_footer_and_bind_running_state(tmp_path):
     run(scenario)
 
 
+def test_native_child_register_binds_and_returns_one_terminal_signal_contract(tmp_path):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            wf = (
+                await call(client, "workflow_open", {
+                    "session_id": "native", "opened_turn_id": "turn", "scope": "test", "objective": "wait"
+                })
+            )["workflow_id"]
+            registered = await call(client, "native_child_register", {
+                "workflow_id": wf,
+                "task_id": "cm-native",
+                "agent_id": "agent-native",
+                "agent_type": "cm",
+                "objective": "frozen technical milestone",
+            })
+            assert registered["lifecycle"] == "RUNNING"
+            assert registered["signal_id"] == f"native:{wf}:cm-native:agent-native"
+            assert "native-child-signal" in registered["signal_command"]
+            assert "--outcome COMPLETED|ANOMALY" in registered["signal_command"]
+            state = await call(client, "workflow_state", {"workflow_id": wf})
+            assert state["tasks"][0]["agent_id"] == "agent-native"
+            assert state["tasks"][0]["lifecycle"] == "RUNNING"
+
+    run(scenario)
+
+
 def test_root_record_intake_and_explicit_portfolio_obligation(tmp_path):
     async def scenario():
         async with connected_server(tmp_path) as client:

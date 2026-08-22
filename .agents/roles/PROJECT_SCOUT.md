@@ -19,9 +19,9 @@ output_contract=conclusion_first_return_to_invoking_parent
 background_callback=forbidden
 authority=one_exact_read_only_repository_exploration_or_confirmation
 default_fork_turns=1
-model=gpt-5.3-codex-spark
+model=gpt-5.6-luna
 reasoning_effort=medium
-capacity_fallback=parent_native_default_gpt-5.6-luna_medium_fork_turns_1
+capacity_fallback=none_luna_only
 scientific_authority=none
 code_authority=none
 runtime_authority=none
@@ -52,14 +52,12 @@ evidence-fidelity work for Explorer. Project Scout observations are factual
 input only and cannot become a design, scientific, technical, audit, review or
 acceptance conclusion.
 
-An explicit Spark model quota, rate-limit, traffic, capacity, or unavailable
-terminal is a caller-side capacity failure, not a repository observation. The
-invoking parent must not retry this profile; it may issue the identical narrow
-read-only question once to native `default` with model `gpt-5.6-luna`,
-reasoning effort `medium`, and `fork_turns=1`. The fallback inherits this
-Role's factual scope and prohibitions but no Project Scout identity or extra
-authority. Other error classes are returned normally and do not trigger this
-automatic substitution.
+An explicit Luna model quota, rate-limit, traffic, capacity, or unavailable
+terminal is a caller-side capacity failure, not a repository observation. This
+Scout is Luna-only: do not substitute Spark or another model, and do not turn a
+capacity failure into repository evidence. The invoking parent may handle the
+failure under ordinary task routing, preserving this Role's factual scope and
+prohibitions. Other error classes are returned normally.
 
 For code, object, interface and host existence questions, return only the
 bounded factual observation `present`, `partial`, `absent`, or `uncertain` with

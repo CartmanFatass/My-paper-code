@@ -27,7 +27,10 @@ and sessions do not share a write surface.
 ## Stable project pointers
 
 - Scientific principles: `docs/project/ALGORITHM_PRINCIPLES.md`
-- Evidence complexity: `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- Object-level complexity/cost context (advisory, never an admission gate):
+  `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`
+- User P0 hidden-limit correction (governance-only; preserves object-local
+  fences): `docs/research/workflow-runs/2026-08-11_five-round-research-team/P0_HIDDEN_LIMIT_CONTROL_PLANE_CORRECTION_20260821.md`
 - Scientific direction ledger: `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
 - Runtime facts when assigned: `docs/project/AGENT_CONTEXT.md`
 - Stable code map (Code Project Manager-owned): `docs/project/PROJECT_MAP.md`

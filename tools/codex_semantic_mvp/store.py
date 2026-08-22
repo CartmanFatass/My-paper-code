@@ -720,6 +720,147 @@ class SemanticStore:
             "RETURNED_UNTYPED", "UNTYPED_REPORT_AVAILABLE"
         )
 
+    def register_native_child_bridge(
+        self,
+        workflow_id: str,
+        task_id: str,
+        agent_id: str,
+        agent_type: str,
+        objective: str,
+        required: bool = True,
+    ) -> str | None:
+        """Register and bind one native child for the explicit wait bridge.
+
+        This is deliberately only task delivery metadata.  It does not infer a
+        child result, scientific state, or any disposition.  Repeating the
+        same registration is idempotent; a conflicting identity or terminal
+        task is rejected before a new event can be written.
+        """
+        for label, value in {
+            "workflow_id": workflow_id,
+            "task_id": task_id,
+            "agent_id": agent_id,
+            "agent_type": agent_type,
+            "objective": objective,
+        }.items():
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError(f"{label} must be non-empty")
+        with self._lock:
+            workflow = self.connection.execute(
+                "SELECT state FROM workflows WHERE workflow_id = ?", (workflow_id,)
+            ).fetchone()
+            if workflow is None:
+                raise KeyError(f"unknown workflow: {workflow_id}")
+            if str(workflow["state"]) != "ACTIVE":
+                raise ValueError("native child bridge requires an ACTIVE workflow")
+            task = self.connection.execute(
+                "SELECT * FROM tasks WHERE workflow_id = ? AND task_id = ?",
+                (workflow_id, task_id),
+            ).fetchone()
+            if task is None:
+                self.register_task(
+                    workflow_id, task_id, agent_type, objective, required=required
+                )
+            else:
+                if str(task["expected_agent_type"]) != agent_type:
+                    raise ValueError("native child agent_type conflicts with declared task")
+                if str(task["objective"]) != objective or bool(task["required"]) != bool(required):
+                    raise ValueError("native child registration conflicts with declared task")
+                bound_agent_id = str(task["agent_id"] or "")
+                if bound_agent_id and bound_agent_id != agent_id:
+                    raise ValueError("native child agent_id conflicts with declared task")
+                if str(task["lifecycle"]) in {"RETURNED_TYPED", "RETURNED_UNTYPED", "INTAKEN", "CANCELLED"}:
+                    raise ValueError("native child task is already terminal")
+            return self.record_agent_started(workflow_id, task_id, agent_id, agent_type)
+
+    def record_native_child_signal(
+        self,
+        workflow_id: str,
+        task_id: str,
+        agent_id: str,
+        agent_type: str,
+        signal_id: str,
+        outcome: str,
+    ) -> dict[str, Any]:
+        """Append one idempotent, content-free native-child report event.
+
+        The child calls this immediately before its ordinary final return.  It
+        gives a waiting Root a durable cursor wake-up, but the actual child
+        conclusion remains on the native collaboration channel.  ``ANOMALY``
+        is therefore a report event, never a direction disposition.
+        """
+        allowed_outcomes = {"COMPLETED", "ANOMALY"}
+        if outcome not in allowed_outcomes:
+            raise ValueError("outcome must be COMPLETED or ANOMALY")
+        for label, value in {
+            "workflow_id": workflow_id,
+            "task_id": task_id,
+            "agent_id": agent_id,
+            "agent_type": agent_type,
+            "signal_id": signal_id,
+        }.items():
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError(f"{label} must be non-empty")
+        if len(signal_id) > 256:
+            raise ValueError("signal_id must be at most 256 characters")
+
+        raw_message = _json(
+            {
+                "schema": "HMASD_NATIVE_CHILD_SIGNAL_V1",
+                "signal_id": signal_id,
+                "outcome": outcome,
+            }
+        )
+        digest = hashlib.sha256(raw_message.encode("utf-8")).hexdigest()
+        with self._lock:
+            workflow = self.connection.execute(
+                "SELECT state FROM workflows WHERE workflow_id = ?", (workflow_id,)
+            ).fetchone()
+            if workflow is None:
+                raise KeyError(f"unknown workflow: {workflow_id}")
+            if str(workflow["state"]) != "ACTIVE":
+                raise ValueError("native child signal requires an ACTIVE workflow")
+            task = self.connection.execute(
+                "SELECT * FROM tasks WHERE workflow_id = ? AND task_id = ?",
+                (workflow_id, task_id),
+            ).fetchone()
+            if task is None:
+                raise KeyError(f"unknown task: {workflow_id}/{task_id}")
+            if str(task["agent_id"] or "") != agent_id:
+                raise ValueError("native child signal agent_id is not bound to task")
+            existing = self.connection.execute(
+                """SELECT report_id FROM reports
+                WHERE workflow_id = ? AND task_id = ? AND raw_sha256 = ?""",
+                (workflow_id, task_id, digest),
+            ).fetchone()
+            if existing is not None:
+                return {
+                    "workflow_id": workflow_id,
+                    "task_id": task_id,
+                    "report_id": str(existing["report_id"]),
+                    "outcome": outcome,
+                    "idempotent": True,
+                }
+            if str(task["lifecycle"]) != "RUNNING":
+                raise ValueError("native child task is not running and cannot signal")
+            report_id = self._record_report(
+                workflow_id,
+                task_id,
+                agent_id,
+                agent_type,
+                raw_message,
+                None,
+                "RETURNED_UNTYPED",
+                "NATIVE_CHILD_REPORT_AVAILABLE",
+            )
+            return {
+                "workflow_id": workflow_id,
+                "task_id": task_id,
+                "report_id": report_id,
+                "outcome": outcome,
+                "idempotent": False,
+            }
+
     def record_intake(
         self,
         workflow_id: str,
@@ -825,6 +966,16 @@ class SemanticStore:
         """
         self.workflow_state(workflow_id)
         return self.events_after(workflow_id, after_seq)
+
+    def await_global_events(self, after_seq: int = 0) -> list[dict[str, Any]]:
+        """Return the global durable event stream after a caller-owned cursor.
+
+        ``events.seq`` is a database-wide AUTOINCREMENT cursor, so this path
+        intentionally has no workflow, session, or task binding. It is used by
+        the cross-workflow wait primitive; callers still own the cursor and
+        must pass the returned value back to avoid replaying observed events.
+        """
+        return self.events_after(None, after_seq)
 
     def validate_task_ids(self, workflow_id: str, task_ids: list[str] | tuple[str, ...]) -> None:
         """Reject task filters that name tasks outside the selected workflow."""

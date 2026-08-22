@@ -25,6 +25,15 @@ isolated validation; it is not a production transport tier.
 
 ## Assignment and authority
 
+Direction scientific ChatGPT Pro/Gemini transport normally belongs to the
+corresponding Portfolio EM, which owns its frozen question, exact partition,
+result path, provider intake, and interpretation. Operational Root is not the
+default scientific transport owner. The active main Root may invoke this leaf
+directly under umbrella authority while explicitly acting for that EM or for a
+bounded root-research-support task; the raw mechanical result still returns to
+the named semantic owner. This caller flexibility never enlarges the leaf or
+weakens exact-one Send, no-resend, provider, tab, and archive fences.
+
 The requester supplies exactly:
 
 ```text
@@ -54,6 +63,38 @@ user; use Git; write canonical project state; or spawn.
 
 ## Deterministic procedure
 
+### Closed-loop native UI control
+
+The lifecycle invariants are predicates and safety fences, not a literal click
+script. Before any visible UI change, use `agentify_operator_observe` on the
+exact existing non-default tab. Select at most one visible, hit-tested,
+non-ambiguous target; call `agentify_operator_act` with that observation's
+`tabId`, exact URL, revision and target ID; then inspect its after-action
+observation before selecting another action. Never repeat a click or key action
+blindly. The surface rejects stale URL/revision, hidden/ambiguous targets,
+Send/Stop/Retry/Continue controls and every protected-default mutation.
+
+After navigation or an action, use `agentify_operator_wait` with a visible
+interactive or exact role/label/selected predicate. Loading, hydration, a
+changing revision/URL, or a missing control in one observation is
+`NOT_YET_OBSERVED`, not an error. Only its bounded evidence timeline may end in
+`LOAD_OR_POSTCONDITION_UNRESOLVED`; do not repeat an action while waiting.
+
+For ChatGPT reasoning strength, `High` and `Pro` are rendered values on the
+same axis, not model identities. A nested rendered `High`/`Pro` may be acted on
+only when the current observation maps its exact visible text to one unique
+visible, viewport-contained, hit-tested actionable ancestor with role, bounds,
+and revision evidence. `High` additionally needs a popup/controlled-menu
+relationship; `Pro` must be a visible actionable option in the rendered menu.
+Ordinary text, hidden, occluded, offscreen, hit-test-failing, or duplicate
+ancestors fail closed. If visible text and the semantic control inventory ever
+disagree, report the observer-coverage defect; never pixel-click or guess.
+
+Use this only for non-sending preflight mechanics. `text`/`paste` requires an
+exact absolute UTF-8 path and SHA and returns `sendActionCount=0` and
+`operationCreated=false`; it cannot replace the armed `agentify_review_query`
+Send boundary. After Send, return to observation only.
+
 For every ordered question:
 
 1. **Validate locally.** Freeze provider, exact new-versus-continuation
@@ -72,8 +113,10 @@ For every ordered question:
    `tabId` to the saved exact URL. Require live status URL and registry-row URL
    to equal the intended URL before strict review.
 4. **Confirm live preflight.** Require idle composer, no active generation,
-   correct conversation relationship, and genuine visible model controls.
-   ChatGPT requires visible Pro. For Gemini, pass
+   correct conversation relationship, and genuine visible controls. On current
+   ChatGPT, `High` and `Pro` are the same reasoning-strength axis: normalize a
+   fresh tab's visible `High` to exact `Pro` with the native no-send
+   `agentify_review_reasoning_mode_preflight`, then require its receipt. For Gemini, pass
    `Gemini 3.1 Pro extended`; the strict shared adapter independently selects
    and visibly verifies exact `3.1 Pro` plus selected `Extended thinking`
    before baseline capture. Account-plan text, generic `Pro`, menu availability,
@@ -130,8 +173,13 @@ For every ordered question:
     an active answer or keep an idle tab to preserve remote memory. Report close
     failure.
 
-Do not fall back to `agentify_query`. Do not restart/reload Agentify while any
-provider generation or submitted-unverified operation may exist. A status,
+Do not fall back to `agentify_query`. When a controller/observer repair must be
+loaded, use the native fixed-source process-local refresh ladder in the
+canonical manual before considering any application restart. It has no provider
+or tab input and fails closed during any generation, inflight query or strict
+operation. Restart is exceptional, never an Operator step, and needs separate
+explicit authority after direct evidence that refresh cannot work. Do not
+restart/reload Agentify while any provider generation or submitted-unverified operation may exist. A status,
 registry, model, URL, or archive conflict is a reason to reconcile or fail
 closed, never permission to send.
 

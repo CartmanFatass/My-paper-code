@@ -10,12 +10,33 @@ all_workspace_agents_auto_load_this_file=true
 root=current_cli_task
 topology=root|optional_domain_manager|optional_specialist_leaf
 max_subagent_depth=2
+main_conversation_umbrella_authority=all_workspace_roles_and_reversible_actions_within_user_scope
+role_split_semantics=default_complexity_provenance_and_review_routing|not_main_permission_denial
 ```
 
 A fresh CLI invocation starts as Root. Root reads the current user request,
 this router, and `.agents/roles/ROOT.md`. Every other agent reads this router,
 its exact assignment, registered Profile, and named Role; it does not load the
 Root Role or unrelated owner procedure.
+
+## Main conversation umbrella authority
+
+The active user-facing Root/main conversation is the workspace authority
+superset. Role and session splits below are default decomposition for context
+control, provenance, independent judgment and review—not permission fences on
+the main conversation. Inside the user's requested scope and the ordinary
+external-action, scientific-freeze, compute-lease, destructive-action and Git
+safety boundaries, the main Root may directly inspect, edit, run, validate,
+integrate, perform Portfolio/EM/CM/WRM/Operator-like work, or create/reuse any
+appropriate registered manager or specialist. It chooses local execution or
+delegation by complexity, independence, context load and risk.
+
+When main acts in a delegated lane, it names the semantic role being performed
+and preserves that role's artifact meaning, frozen science, no-resend facts and
+acceptance standard. It need not relay work to another Root/session merely to
+obtain permission it already holds. Delegation never removes main's integration
+authority; conversely, a child receives only its exact assignment and does not
+inherit the main Root's umbrella authority.
 
 Automatic memory, compaction summaries, recent child prose and historical
 preferences are retrieval hints only. They cannot create authority, tasks,
@@ -36,21 +57,26 @@ current actor and assignment require them.
 | External Gemini Transport | `.codex/agents/hmasd-external-gemini-transport.toml` | `.agents/roles/EXTERNAL_GEMINI_TRANSPORT_OPERATOR.md` |
 | Registered specialist | exact entry in `.codex/config.toml` | Role named by its Profile |
 
-Root may directly invoke every registered subagent. A specialist called by
-Root is a non-spawning depth-1 leaf; the same specialist may be a depth-2 leaf
-under Code Manager or Explorer Manager. Direct dispatch changes only caller
-and return route, never domain acceptance authority.
+Registered subagent calls normally follow semantic ownership: Portfolio work
+uses Explorer Managers and research specialists, while engineering work uses
+Code Managers and engineering/recovery specialists. This is the preferred
+context and provenance route, not a limitation on the active main Root. Main
+may invoke any registered manager or specialist, or perform the bounded role
+locally, when that better serves the user's task. A specialist called by Root is a
+non-spawning depth-1 leaf; the same specialist may be a depth-2 leaf under Code
+Manager or Explorer Manager. Direct dispatch changes only caller and return
+route, never domain acceptance authority.
 
-The operational Root alone contacts the user, relays authorized packets across
-sessions and directions, performs final Git actions, and allocates shared
-compute. The dedicated portfolio session named below may author only the
-portfolio sections of shared canonical research state; that exception grants no
-Git or user-contact authority. A
-stage-paired EM and CM may contact only their named same-direction counterpart
-through the bounded direct channel defined below. All other sibling contact is
-forbidden. Children remain inside their exact assignment and Role, do not spawn
-unless their manager Role explicitly allows it, and never stage, commit, or
-push.
+By default the user-facing/operational lane performs Git integration and shared
+compute allocation, the Portfolio lane carries portfolio judgment and EM work,
+and the engineering lane carries CM work. The active main conversation retains
+all of those authorities inside the user's scope and may collapse the lanes
+locally; when it does, it explicitly labels the semantic role and preserves
+separate science, technical-acceptance, lease, and Git evidence. Cross-session
+EM and CM children do not contact each other directly and neither child rewrites
+the other's packet. Children remain inside their exact assignment and
+Role, do not spawn unless their manager Role explicitly allows it, and never
+stage, commit, or push.
 
 The Workflow Recovery Manager is a task-scoped L1 recovery owner, not a
 production transport or domain authority. Root or a Code Manager transfers one
@@ -58,17 +84,24 @@ production transport or domain authority. Root or a Code Manager transfers one
 observation surface, or cross-file/runtime diagnosis prevents ordinary workers
 from completing their assignment. Its Role authorizes isolated worktree repair,
 task-scoped runtime control, focused validation, and only assignment-explicit
-external actions. It returns only recovery completion or a concrete authority
-boundary; routine failure streams do not wake its invoker.
+external actions. Inside its authorized non-provider recovery surface it has
+standing authority to observe, diagnose, repair, refresh/reload supported
+process-local modules, wait for UI hydration, and validate through a reversible
+Observe->Act->Wait->Observe loop. Missing controls, stale module instances,
+ordinary postcondition delays, or a deficient MCP primitive are internal
+recovery evidence, not approval boundaries. It returns only recovery completion
+or a genuine external authority boundary; routine failure streams do not wake
+its invoker.
 
 ### Mandatory non-core workflow-anomaly route
 
 Use the workspace skill `hmasd-workflow-anomaly-routing` whenever an EM or CM
 encounters a non-core provider transport, Agentify/UI observability,
 protocol/controller, cross-file workflow-state, runtime-orchestration, or
-repeated unchanged-science recovery anomaly. The detecting EM or CM reports
-`WORKFLOW_ANOMALY_REPORT` directly to Root, never only to its sibling. Root
-must register one task-scoped Terra-high Workflow Recovery Manager before any
+repeated unchanged-science recovery anomaly. A detecting EM reports
+`WORKFLOW_ANOMALY_REPORT` to its Portfolio parent; a detecting CM reports it to
+Operational Root. The receiving Root, never the opposite-domain child, must
+register one task-scoped Terra-high Workflow Recovery Manager before any
 fresh direction retry, unless the report is plainly an ordinary CM
 source/runner repair. This route preserves the frozen science and exact
 provider no-resend boundary; it never turns a workflow anomaly into a
@@ -97,63 +130,107 @@ forbidden.
 ### Mandatory portfolio–operational handoff route
 
 Use the workspace skill `hmasd-portfolio-operational-handoff` for every
-direction-stage milestone, direction request to Root, or received portfolio
-decision. The stable Root-owned anchor is
+direction-stage milestone, cross-root science/engineering request, or received
+portfolio decision. The stable shared anchor is
 `docs/research/workflow-runs/2026-08-11_five-round-research-team/PORTFOLIO_OPERATIONAL_RECONCILIATION_20260814.md`;
-do not create a competing progress file. EM and CM send each completion,
-acceptance, material ambiguity, authority/lease need, or cross-scope conflict
-directly to Root using the skill's compact packet, even if the same-direction
-counterpart has already received it. Root remains event-waiting while an owner
-is active, reports the completed conclusion to the main session, and updates
-the anchor in that same turn before any necessary decision-level portfolio
-relay. A completed object must never remain described as `pending`, awaiting,
-or under review. Portfolio receives only the bounded decision packet; runtime,
-partial-result and transport streams remain excluded.
+do not create a competing progress file. EM sends science milestones to
+Portfolio; CM sends engineering milestones to Operational Root. Portfolio
+requests CM work with an exact EM-authored artifact pointer; Operational Root
+returns exact CM-authored technical evidence to Portfolio. Each Root updates
+only its owned anchor fields in the same active turn. A completed object must
+never remain described as `pending`, awaiting, or under review. Runtime,
+partial-result and transport streams remain excluded from the cross-root
+interface.
 
 For every project Python command, invoke
 `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` directly. Do not use bare
 `python`, `py`, or `conda run` unless the assignment explicitly requires a
 different interpreter.
 
+### Formal global MCP event wait
+
+When Operational Root needs to remain idle while independent CM/Operator work
+continues, use the exposed read-only
+`mcp__hmasd_orchestrator__workflow_await_global_event` tool directly. It binds
+to no session, workflow or task. Use `condition="ANY_REPORT"` for ordinary
+decision-level returns, `condition="OPEN_OBLIGATION_CHANGED"` for control-plane
+obligation changes, or `condition="ANY_EVENT"` when either is relevant. Set
+`timeout_s=900` (15 minutes) and carry the returned global `cursor` into the
+next call as `after_seq`; an event returns early, so the wait does not delay
+independent work. Do not call `workflow_wait_plan` first and do not invent a
+temporary task binding for this route.
+When a known stale workflow is continuously emitting historical reports, pass
+its exact id in `ignore_workflow_ids`; this remains a globally unbound wait and
+advances the cursor without letting that stale workflow wake the call.
+
+Use at most one global wait call in one idle Root turn. If a historical or
+unrelated event wakes it early, record that fact, carry the returned cursor,
+and end the turn; do not immediately re-call the global wait, substitute a
+60-second wait, or build a short-wait polling loop. Native child returns are
+collected on their owner route in a later turn.
+
+This global wait is an observation/latency mechanism only. It does not create,
+wake, retry, stop, pause, lease, or interpret a child. After an event, collect
+the ordinary native CM/Operator return through the normal collaboration route
+and apply the existing owner/authority rules. For an explicitly bridged native
+child, use the child-specific signal route instead; for an unbridged native
+child, `collaboration.wait_agent` remains the direct fallback.
+
+Native-first efficiency is also an implementer-time instruction, not only a
+final review gate. Every CM/implementer assignment for a production-capable
+experiment must design the full chain up front: native environment and
+loader/cache, batch/worker plan, policy forward/recurrent state,
+backward/optimizer, rollout, evaluation, serialization/checkpoint and atomic
+resume. The first production-capable environment/rollout path must be
+C++/batched/parallel where semantics permit; no serial Python environment or
+rollout scaffold may be written as a future porting step. Python is limited to
+the accepted oracle/fixture/test/lifecycle boundary there. Explicitly frozen
+Python/PyTorch model forward/backward or optimizer stages may remain, but must
+be batched and profiled. Implementers expose result-blind measurement seams and
+return bottleneck plus missing CPU/RSS/I/O/full-panel projection/equivalence
+evidence to CM. CM must repair obvious omissions before coordinates, identities,
+leases or question-relevant activity.
+
 ## Stable model/cost routing invariant
 
 Model selection allocates capability only; it never changes role authority,
 scientific or technical ownership, write scope, acceptance, Git authority, or
 the two-level topology. Apply a route only to a new task or turn. Never migrate
-an active agent mid-turn. Steady Operational Root guidance is Luna-high;
-Root integration or recovery is Terra-high; novel governance is Sol-high. EM
-remains Sol-max and CM remains Sol-high. Routine bounded implementation uses
+an active agent mid-turn. Steady Operational Root guidance is Luna-high; Root
+integration or recovery is Terra-high; novel governance is Sol-high. The
+dedicated Portfolio/main session uses `gpt-5.6-sol` at medium effort for
+ordinary routing, milestone intake and research-task allocation, with a bounded
+high-effort turn only for genuinely novel portfolio integration or governance.
+Actual long-chain or high-load single- or cross-direction research is delegated
+to an EM at Sol-max. CM remains Sol-high. Routine bounded implementation uses
 `hmasd-implementer-terra`/Terra-high, semantics-critical implementation uses
 `hmasd-implementer`/Sol-high, and mechanical or Operator work remains Luna.
 Reviewer and Verifier are optional and risk-driven, with no routine
 Implementer+Reviewer+Verifier chain, duplicate review scope, or automatic
 re-review.
 
-There is no automatic model fallback, including on model unavailability. The
-Project Scout capacity fallback below is the only named exception. Prospective
-canaries, runtime-only audit records, promotion triggers, and CP0--CP4
-integration/rollback boundaries are defined in
+There is no automatic model fallback, including on model unavailability.
+Project Scout is explicitly Luna-only; no Spark substitution is permitted.
+Prospective canaries, runtime-only audit records, promotion triggers, and
+CP0--CP4 integration/rollback boundaries are defined in
 `docs/project/HMASD_AGENT_MODEL_COST_OPTIMIZATION_V1.md`; they are not a
 workflow state machine or approval system.
 
 ## Shared Project Scout route
 
-`hmasd-project-scout` is the common read-only Spark lookup utility. Root, Code
+`hmasd-project-scout` is the common read-only Luna lookup utility. Root, Code
 Manager, or Explorer Manager may invoke it with `fork_turns=1`. Give one Scout
 exactly one narrow factual question. Split independent owners, routes, files,
 or evidence families into multiple separate Scout calls and run independent
 calls in parallel. Scout output is factual evidence only, never design,
 implementation, scientific judgment, technical judgment, review, or acceptance.
 
-If a Project Scout call returns an explicit model quota, rate-limit, traffic,
-capacity, or model-unavailable failure, do not retry Spark. The invoking Root,
-Code Manager, or Explorer Manager immediately reissues the same one narrow
-read-only factual question as a native child with exactly
-`agent_type=default`, `model=gpt-5.6-luna`, `reasoning_effort=medium`, and
-`fork_turns=1`. This is a transport-capacity fallback only: preserve the exact
-scope and factual-output boundary, do not add scientific/technical judgment,
-and do not use it for Research Scout, Code Scout, Critic, Innovator, Reviewer,
-Verifier, or other professional roles.
+If a Project Scout call returns an explicit Luna quota, rate-limit, traffic,
+capacity, or model-unavailable failure, treat it as a caller-side capacity
+failure, not repository evidence. Do not substitute Spark or another model;
+preserve the exact narrow factual scope and use ordinary task routing if a
+future retry is authorized. This rule does not apply to Research Scout, Code
+Scout, Critic, Innovator, Reviewer, Verifier, or other professional roles.
 
 ## Root research-route invariants
 
@@ -161,71 +238,102 @@ These constraints are automatically reloaded with this router and take
 precedence over recent task messages, child status wording, historical workflow
 labels, and compacted chat summaries.
 
-### Stable two-session authority split
+### Default two-session ownership split
+
+The controlling split and no-stop migration are recorded in
+`docs/research/workflow-runs/2026-08-11_five-round-research-team/PORTFOLIO_EM_OPERATIONAL_CM_OWNERSHIP_AMENDMENT_20260821.md`; pre-split Git
+identities and the preserved pre-existing Root-role delta are recorded in
+`CONTROL_PLANE_PRE_PORTFOLIO_EM_SPLIT_ROLLBACK_MANIFEST_20260821.md` in the same
+directory.
+
+The dedicated Portfolio session normally creates, reuses and manages frozen
+single- or cross-direction research EMs, while the Operational Root normally creates, reuses and
+manages direction-stage CMs. This split reduces mainline context and preserves
+independent evidence; it does not remove the active main Root's umbrella
+authority to create either role or perform either bounded lane locally.
 
 The dedicated Codex sidebar portfolio session
-`019ffc20-5001-7453-a08a-dac783cf4d80` is the active and exclusive owner of
-cross-direction scientific discovery, comparison, synthesis and portfolio
-judgment until the user changes that session identity. It owns coherent
-problem/mechanism-family discovery across directions; provenance-bound
-cross-direction comparison and synthesis; redundancy, competition and fusion
-assessment; and invest, pause, retire and revisit decisions. It also authors
-only the portfolio sections of shared canonical research state. It does not
-contact the user, perform Git integration/publication, create or manage
-provider conversations, Agentify, browser tabs, CPU/PID/RSS or Operator work,
-tests, implementation, single-direction science cards, EM/CM acceptance, or
-direction-local results.
+`019ffc20-5001-7453-a08a-dac783cf4d80` is the default continuity owner of
+research-task allocation, final cross-direction integration and portfolio
+judgment until the user changes that session identity. It owns redundancy,
+competition and fusion assessment plus invest, pause, retire and revisit
+decisions. It delegates substantive discovery, comparison and synthesis to a
+frozen Sol-max EM and normally creates/reuses EMs for `direction:<id>`,
+`cross_direction:<id>` or other bounded `research:<id>` scopes. Direction-mode
+EMs own science cards, provider questions/intakes, result interpretation and
+next discriminators; cross-direction EMs own only their named
+provenance-bounded research return. Ordinarily EMs coordinate direction scientific
+Agentify transport leaves, and a separate CM carries technical acceptance. The
+active main Root may instead operate or invoke those exact roles locally when
+needed, including Agentify/MCP, implementation, tests, integration, or user
+communication, while retaining the semantic owner labels and all provider,
+science, lease, and Git fences.
 
-The current operational Root is not the portfolio owner while that dedicated
-session is active. It creates, reuses and manages direction-stage EM/CM pairs;
-issues shared compute leases; coordinates shared tools; handles user
+For every Codex thread-send relay to Portfolio, use the explicit default target
+`codex://threads/019ffc20-5001-7453-a08a-dac783cf4d80` with
+`model=gpt-5.6-sol` and `thinking=medium`. These parameters must be supplied on
+each send; do not silently inherit or substitute another model/effort. Main
+keeps Sol's research-routing capability at this lower steady effort; it assigns
+substantive long-chain research execution to a Sol-max EM.
+
+Every cross-session target is bound as an explicit
+`(thread_id, model, thinking)` tuple and all three values are supplied on every
+send. The current Portfolio binding is recorded in
+`docs/session/CROSS_SESSION_SEND_CONTRACT.md`. The reverse Operational-Root
+binding is `codex://threads/019fff33-ac9b-7433-b6d8-42c810dec99c` with
+`model=gpt-5.6-luna` and `thinking=xhigh`; Portfolio must use that target
+binding rather than forwarding its own Sol settings. A different target
+needs its own owner- or user-established binding before first use. In one Root turn, merge
+all currently pending sends for the same target into one call. When the body is
+long, contains multiple owner packets, or needs detailed evidence, write the
+complete body once under `docs/session/` and send only a compact marker,
+document path and instruction to read it. Do not duplicate that body inline.
+
+The operational session is the default CM/engineering lane while the dedicated
+portfolio session is active. It ordinarily creates, reuses and manages
+direction-stage CMs; issues shared compute leases; coordinates engineering tools; handles user
 communication; publishes owner-prepared direction artifacts; relays the
 bounded packets defined below; and performs necessary final Git integration or
-publication. It receives and implements portfolio decisions without redoing
-their discovery, comparison or portfolio reasoning. It may continue all
-authorized direction-local work, including existing stages and runs, without
-waiting for portfolio input. Only a new or changed cross-direction investment,
-pause, fusion or priority decision needs the dedicated portfolio session. If an
-emergency user instruction conflicts with that boundary, or the portfolio
-session is unavailable, operational Root surfaces the choice to the user rather
-than silently reassuming portfolio authority.
+publication. It ordinarily receives and implements portfolio decisions without redoing
+their direction science, discovery, comparison or portfolio reasoning. It may
+continue every authorized CM stage and run without waiting for Portfolio input.
+The active main Root may create/follow up an EM or perform portfolio work
+directly when useful; doing so is an explicit local role selection, not silent
+authority reassumption and not a transfer of that umbrella authority to a child.
 
-The minimal interface is decision-level only. L1 owners send their compact
-direction-local milestone packet to operational Root. When a cross-direction
-judgment is needed, operational Root relays only a provenance-bound packet with
-the bounded objective, conclusion, key observation, strongest alternative,
-claim ceiling, possible portfolio effect, next discriminator and exact decision
-requested. The portfolio session returns only the bounded objective,
-conclusion, leading and no-investment decisions, strongest alternatives, claim
-ceilings, next discriminator, revisit conditions and exact operational action.
-Neither direction has authority to send runtime/status streams, hashes,
-receipts, tab state or ordinary direction mechanics through this interface.
-When a runtime/resource/engineering fact is decision-relevant, the packet still
-states its plain causal meaning, exact scientific unknown and every live
-semantics-preserving alternative; it never substitutes a terminal label or
-binary child recommendation. In a file-backed cross-session bridge,
-operational Root authors a distinct `ROOT_TO_PORTFOLIO` entry and the dedicated
-session authors a distinct `PORTFOLIO_TO_ROOT` entry. A later canonical-state
-append does not substitute for either provenance record.
+When the lanes are actually separated across sessions, the minimal interface is
+owner-artifact and decision-level only. A Portfolio
+EM sends its science milestone to Portfolio. When CM evidence is needed,
+Portfolio sends `PORTFOLIO_EM_TO_ROOT_CM_REQUEST` with exact EM-authored paths,
+protected semantics and the bounded technical question. Operational Root gives
+that packet unchanged to its CM. CM returns its technical artifact to
+Operational Root, which sends `ROOT_CM_TO_PORTFOLIO_RETURN` with exact
+CM-authored paths and plain engineering facts. Portfolio gives that return to
+the same-direction EM for interpretation. Portfolio normally then sends any
+allocation or object-specific construction/empirical decision to Operational
+Root. Neither Root paraphrases the other owner's science or technical
+acceptance, and neither interface carries runtime/status streams, hashes,
+receipts, tab state or ordinary mechanics. A canonical-state append does not
+substitute for the distinct provenance packet in either direction.
 
 Both Roots re-read this router, `.agents/roles/ROOT.md`, and
 `docs/research/workflow-runs/2026-08-11_five-round-research-team/CROSS_DIRECTION_PORTFOLIO_HANDOFF_SOL_ULTRA.md`
 after compaction or restart before exercising their respective authority. The
-dedicated session records portfolio state; operational Root retains its
-direction-stage authorities and all historical scientific evidence unchanged.
+dedicated session records portfolio and EM state; operational Root retains its
+CM/stage/lease authorities and all historical scientific evidence unchanged.
 
 Single-direction development and cross-direction portfolio research remain one
-research graph, but the two sessions own different resolutions. Following a
-portfolio decision, operational Root may immediately invoke the selected
-direction's EM to make the scientific object meaning-complete and its CM to
-assess, construct or run it whenever answer-changing. There is no fixed
-direction count, WIP slot or requirement to wait for another direction to
-close. Operational Root allocates direction-scoped compute leases around
-concrete host resource conflicts; the owning CM schedules actual commands
-inside its lease. Resource scheduling never becomes a scientific admission
-limit.
+research graph with semantically separate science and engineering evidence.
+Following a portfolio decision, the main Root or Portfolio may immediately
+invoke the selected direction's EM to make the object meaning-complete and may
+itself create/reuse, or request the engineering lane to create/reuse, the
+direction CM for feasibility, construction or execution.
+There is no fixed direction count, WIP slot or requirement to wait for another
+direction to close. Operational Root allocates direction-scoped compute leases
+around concrete host conflicts; the owning CM schedules actual commands inside
+its lease. Resource scheduling never becomes a scientific admission limit.
 
-For each active promising algorithm direction, Root establishes two independent
+For each active promising algorithm direction, its Portfolio-owned EM establishes two independent
 external conversations early enough to improve the design: one dedicated
 **ChatGPT External Pro** conversation and one additional **External Gemini
 innovator** conversation. This default also applies to an answer-changing
@@ -291,6 +399,15 @@ generation is active. A later question reopens that saved remote session in a
 new tab and closes it again after archival. Never keep an idle tab merely to
 preserve a session, never close a tab while an answer is active, and report a
 tab-close failure plainly.
+
+User-approved Agentify application lifetime rule (2026-08-21): do not close,
+restart, or reload the Agentify/Chrome application merely to clean up one
+Operator. Repeated application teardown/relaunch can add a fresh login or
+profile/session step. Keep the applications and protected default tab alive;
+each Operator owns only its disposable tab and closes that tab after its own
+natural completion or durably archived mechanical incident, with generation
+inactive. A tab-level cleanup failure is reported and does not authorize
+application teardown, provider resend, or a scientific-stage change.
 
 For Gemini, a click or `sendActionCount` alone is not a submitted provider turn.
 Commitment requires a visible user turn and a concrete `/app/<conversation-id>`.
@@ -444,6 +561,15 @@ failure cannot pause a scientific direction. A resource slice may pause only
 its lease; CM owns semantics-preserving same-coordinate, blinded, atomic
 continuation until complete question-relevant data exist.
 
+No project-wide fixed candidate, transition, `K_search`, neighbor, width,
+worker, wall-time, CPU, memory, storage, or asymptotic number may be promoted
+from a performance observation into an implementation refusal, reviewer P0,
+science/portfolio gate, or exception process. Complexity and total cost are
+object-level disclosure for EM/Portfolio judgment and CM engineering work.
+Only an exact science card, object-specific Portfolio decision, or Root lease
+may bind a quantity, and its effect remains limited to that named object or
+resource slice.
+
 For a protocol/workflow designer recovery whose assignment explicitly grants
 source change, diagnostics, runtime control, and bounded live validation, an
 old Skill, current primitive, or one exhausted observation surface is internal
@@ -457,6 +583,11 @@ assignment explicitly did not authorize.
 
 Use semantic ownership before acting:
 
+- the active main Root holds umbrella execution and integration authority over
+  every workspace role inside the user's scope; it may perform or dispatch any
+  lane, but must label the semantic role and preserve that role's evidence and
+  acceptance boundary;
+
 - EM owns the scientific question, meaning-complete science card, comparator,
   observable, activity-start criterion, interpretation, claim ceiling, and
   next discriminator;
@@ -468,22 +599,29 @@ Use semantic ownership before acting:
 - transport owns page mechanics and raw External-Pro response capture;
 - the actor that performed an action owns the truth of its append-only log
   event;
-- the dedicated portfolio session owns problem-family discovery and screening,
-  portfolio allocation, cross-direction comparison/synthesis and portfolio
-  sections of canonical research state; operational Root owns user contact,
-  provenance-bound relay, shared-resource allocation and necessary final Git
-  integration/publication.
+- the dedicated portfolio session is the default owner of research-task
+  allocation, EM creation, direction-science envelopes, final portfolio
+  integration/allocation and portfolio sections of canonical research state;
+- a frozen EM owns the sustained single- or cross-direction research assignment,
+  with provenance isolation and no final Portfolio-allocation authority;
+- Operational Root is the default owner of CMs, user contact, engineering-stage application,
+  shared-resource allocation, compute leases and necessary final Git
+  integration/publication; and
+- when those roles are separated across sessions, the two Roots use exact-pointer
+  relay across the science/engineering boundary; relay does not transfer or
+  reinterpret EM or CM child authority.
 
-## Direction-stage L1 delegation
+## Default split direction-stage L1 delegation
 
-For each invested direction stage, Root creates or reuses a paired
-`EM_<direction>` and `CM_<direction>`. Both assignments contain the identical
-`direction_id`, the same ordinary-language direction-stage authority envelope,
-and the counterpart's canonical task name. Root delegates through the next
-decision-level scientific milestone, reuses the same L1 pair with
-`followup_task` while that envelope remains valid, and ends or re-authorizes the
-pair at the milestone or when the direction is paused. This is stage-scoped
-context reuse, not a direction-lifetime process.
+For each invested direction stage, Portfolio normally creates or reuses
+`EM_<direction>` and Operational Root normally creates or reuses
+`CM_<direction>`. The active main Root may create either or perform the bounded
+lane locally. Delegated assignments carry the identical `direction_id`, exact
+object/revision and compatible ordinary-language stage envelope, but neither
+child is a sibling or child of the other. Each owning Root reuses only its own
+L1 with `followup_task` while that envelope remains valid and ends or
+reauthorizes it at the exact milestone. This is stage-scoped context reuse, not
+a direction-lifetime process.
 
 The authority envelope states the direction and stage objective; why the
 portfolio is investing; which treatments, comparisons and discriminators EM
@@ -494,17 +632,17 @@ lease; and the exact events that must return to Root. It is an ordinary-language
 delegation boundary, not a state machine, ticket, status taxonomy or approval
 ledger.
 
-The same-direction direct channel transfers owner-authored work without
-transferring authority. EM may send CM only a meaning-complete science card, a
-science-bearing clarification, a Pro-closed revision, or an EM-authorized next
-treatment inside the envelope. CM may send EM only a scientific-definition
-ambiguity, a technically accepted result packet, or a request to change a
-condition that could affect already observed data. Each message must match both
-owners' `direction_id` and named counterpart. Wrong-direction messages,
-cross-direction material or evidence, portfolio rankings, user requests,
-shared-resource allocation, and scientific or technical authority transfer are
-rejected and returned to Root. Cross-direction relay remains Root-only and
-provenance-bound.
+When distinct sessions are used, the cross-root direction channel transfers
+exact owner artifacts without transferring child authority. Portfolio sends Operational Root only a meaning-
+complete card, science-bearing clarification, Pro-closed revision or
+EM-authorized next treatment through `PORTFOLIO_EM_TO_ROOT_CM_REQUEST`.
+Operational Root sends Portfolio only a CM scientific-definition ambiguity,
+technically accepted result/feasibility packet or request to change a condition
+through `ROOT_CM_TO_PORTFOLIO_RETURN`. Each packet must match `direction_id`,
+object/revision and owner paths. The receiving Root forwards it unchanged to
+its owner child. Wrong-direction material, cross-direction evidence, portfolio
+ranking inside a CM return, user requests, shared-resource allocation inside an
+EM card, and authority transfer are rejected to the sending Root.
 
 Root issues a direction-scoped heavy-compute lease that names resource limits,
 concurrency, validity period and stage boundary. Within that lease CM owns the
@@ -515,31 +653,22 @@ returns only to expand the lease, resolve a real cross-scope resource conflict,
 obtain new user authority, or request a science-bearing change. Light probes
 remain inside the envelope when explicitly bounded there.
 
-The initiating L1 owner closes its own observation loop and filters reports
-before anything reaches Root. CM owns scope-local CPU, memory, process,
-restart-risk, resource, artifact-frontier and Operator facts; EM owns its
-transport-child coordination and direction-local review/intake facts. Their
-leaves return to that L1, not directly to Root. Routine `running`, `inflight`,
+Each L1 closes its own observation loop and filters reports before its parent
+Root sees them. CM owns scope-local CPU, memory, process, restart-risk,
+artifact-frontier and Operator facts; EM owns transport-child coordination and
+direction-local review/intake facts. Routine `running`, `inflight`,
 `pending_init`, PID/RSS/CPU, tab, send-phase, file-exists, retry-progress and
-unchanged-state messages remain inside the L1 scope. The L1 returns to Root only
-when the core mechanism is supported, contradicted or non-identified; the claim
-ceiling or strongest alternative changes materially; another direction creates
-competition, absorption, fusion or a joint hypothesis; no valuable successor
-remains; the envelope or resource need is exceeded; a new provider conversation,
-external authority or user decision is required; or final Git/canonical
-integration is needed. Code completion, focused checks, environment repair,
-preactivity/no-data engineering failures, unchanged-science retries, Operator
-launch/wait/terminal/install facts, provider page/wait facts, the first explicit
-noncommit recovery, ordinary Pro revisions, owner logs and local handoffs stay
-inside the L1 pair. A high CPU reading, an ordinary wait or retry, and a tool
-timeout are not Root escalation conditions by themselves.
+unchanged-state messages remain inside that L1 scope. CM reaches Operational
+Root only at its named technical/lease/conflict boundary. EM reaches Portfolio
+only at its named science/interpretation/definition boundary. The two Roots
+exchange only the exact bounded packets above; code progress and provider page
+facts never cross that interface.
 
-At a decision milestone EM sends operational Root one compact scientific packet:
+At a decision milestone EM sends Portfolio one compact scientific packet:
 conclusion, key observation, strongest alternative explanation, claim ceiling,
-possible portfolio effect, next discriminator and the exact operational decision
-requested. It omits runtime and transport streams. Operational Root relays it
-to the dedicated portfolio session only when its requested decision is
-cross-direction; that session independently makes the portfolio judgment.
+possible portfolio effect and next discriminator. Portfolio independently
+makes the allocation or object-specific experiment decision and sends only its
+exact operational action to Operational Root.
 
 When CPU idleness matters for a scoped launch, the initiating CM or other L1
 requester measures exactly three actual system-total CPU readings within at
@@ -547,11 +676,18 @@ most one minute and makes the within-envelope decision locally. Root receives
 only a concrete shared-resource conflict or authority-expansion request, not
 the three readings or a routine launch guard.
 
-Root does not routinely write another owner's specs, handoffs, results,
+Delegated children and separated sessions do not routinely write another
+semantic owner's specs, handoffs, results,
 receipts, runtime observations, environment files, or log entries. Topology may
-require Root to relay an owner-prepared packet, but Root does not rewrite or
+require relay of an owner-prepared packet, but the receiving child does not rewrite or
 mechanically validate it. Hashes, byte counts, CRLF/LF identity, receipt shape,
-and float-bit equality are never Root research gates.
+and float-bit equality are never research gates. The active main Root may write
+or integrate any in-scope surface while explicitly acting as its semantic role;
+that local collapse never changes the meaning of EM, CM, lease, or provider
+evidence.
+
+The 2026-08-21 ownership migration is prospective and non-disruptive: all in-flight stages continue unchanged to their current exact milestone under their existing EM/CM owners. Do not cancel, restart, reparent, resend, rebind coordinates or suspend a run, definition, provider turn, repair or technical stage merely to install the split. At that milestone, Operational Root stops following up the grandfathered EM; any later science stage is created by Portfolio, while Operational Root may reuse the CM. The exact grandfathered objects and task names are recorded in
+`docs/research/workflow-runs/2026-08-11_five-round-research-team/PORTFOLIO_EM_OPERATIONAL_CM_OWNERSHIP_AMENDMENT_20260821.md`.
 
 The VQFP treatment already beyond its activity boundary when this contract was
 adopted is grandfathered: do not retrofit its running control flow. After it

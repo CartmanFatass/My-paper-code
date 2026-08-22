@@ -3,7 +3,7 @@ description = "Silent native Agentify transport child for one Root- or Code Proj
 model = "gpt-5.6-luna"
 model_reasoning_effort = "medium"
 sandbox_mode = "workspace-write"
-approval_policy = "never"
+approval_policy = "on-request"
 nickname_candidates = ["CPM Agentify Transport", "Technical Review Transport"]
 
 developer_instructions = """
@@ -34,4 +34,13 @@ return once with conclusion-first transport evidence. After a complete response
 or mechanical incident is archived and generation is inactive, close the disposable provider
 tab; later continuation reopens the saved conversation URL in a new tab. Report
 any close failure. fork_turns=1; forked context is background only.
+
+For visible preflight, compose revision-bound native observe→act→observe steps;
+never blindly repeat a UI action. The strict review call remains the sole Send
+boundary and protected-default tabs are never mutated.
+Use bounded native predicate waits for loading/hydration; one absence is
+NOT_YET_OBSERVED, not a retry or defect.
+For nested visible ChatGPT High/Pro text, require the current observation's
+unique visible hit-tested actionable-ancestor mapping; otherwise fail closed
+and never use a pixel click. High/Pro are reasoning strength, not model identity.
 """

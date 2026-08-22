@@ -1,4 +1,12 @@
-# G33 UAV localized-demand-burst source-witness transition
+# Historical G33 UAV localized-demand-burst source-witness transition
+
+> **HISTORICAL_NONOPERATIVE.** This preserved G33 plan records the original
+> nested-search cost observation and its then-current response. Its former
+> `16/16H`, `K_search`, wall-time, and `NON_EXECUTABLE_EVIDENCE_DESIGN`
+> language has no current implementation, review, scientific, portfolio, or
+> routing authority. Object-level complexity is now disclosed under
+> `docs/project/EVIDENCE_COMPLEXITY_POLICY.md`; no reader may reuse this plan
+> to refuse construction or stop a direction.
 
 > Use `$hmasd-agile-research-development`. Generic Superpowers execution,
 > compatibility work, workflow hashes and review stacks are disabled.

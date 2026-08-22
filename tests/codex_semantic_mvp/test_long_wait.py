@@ -61,14 +61,16 @@ async def call(client, name, arguments=None):
     return json.loads(result.content[0].text)
 
 
-async def open_workflow(client):
+async def open_workflow(
+    client, session_id: str = "long-wait-session", opened_turn_id: str = "turn-1"
+):
     return (
         await call(
             client,
             "workflow_open",
             {
-                "session_id": "long-wait-session",
-                "opened_turn_id": "turn-1",
+                "session_id": session_id,
+                "opened_turn_id": opened_turn_id,
                 "scope": "test",
                 "objective": "exercise long wait",
             },
@@ -190,6 +192,172 @@ def test_invalid_wait_bounds_and_condition_are_rejected(tmp_path, arguments):
                 {"workflow_id": workflow_id, **arguments},
             )
             assert result.is_error
+
+    run(scenario)
+
+
+def test_global_wait_has_no_workflow_or_task_binding_and_observes_any_workflow(tmp_path):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            first = await open_workflow(client)
+            second = await call(
+                client,
+                "workflow_open",
+                {
+                    "session_id": "global-wait-second-session",
+                    "opened_turn_id": "turn-2",
+                    "scope": "test",
+                    "objective": "second workflow",
+                },
+            )
+            second = second["workflow_id"]
+            await call(
+                client,
+                "task_register",
+                {
+                    "workflow_id": second,
+                    "task_id": "second-child",
+                    "expected_agent_type": "worker",
+                    "objective": "emit report",
+                },
+            )
+            store = mcp_server._get_store()
+            after_seq = store.events_after(None, 0)[-1]["seq"]
+
+            async def delayed_report():
+                await asyncio.sleep(1)
+                store.record_untyped_return(
+                    second, "second-child", "agent", "worker", "cross-workflow"
+                )
+
+            result, _ = await asyncio.gather(
+                call(
+                    client,
+                    "workflow_await_global_event",
+                    {
+                        "after_seq": after_seq,
+                        "condition": "ANY_REPORT",
+                        "timeout_s": 5,
+                    },
+                ),
+                delayed_report(),
+            )
+            assert result["status"] == "EVENT"
+            assert result["scope"] == "GLOBAL_EVENT_STREAM"
+            assert result["events"][0]["workflow_id"] == second
+            assert result["events"][0]["task_id"] == "second-child"
+            assert result["cursor"] > after_seq
+            assert first != second
+            assert "secret" not in json.dumps(result)
+
+    run(scenario)
+
+
+def test_global_wait_cursor_is_global_and_timeout_is_neutral(tmp_path):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            workflow_id = await open_workflow(client)
+            store = mcp_server._get_store()
+            first = await call(
+                client,
+                "workflow_await_global_event",
+                {"after_seq": 0, "condition": "ANY_EVENT", "timeout_s": 1},
+            )
+            assert first["status"] == "EVENT"
+            cursor = first["cursor"]
+            store.append_event(workflow_id, "GLOBAL_CANARY", "subject", {}, "global-canary")
+            second = await call(
+                client,
+                "workflow_await_global_event",
+                {"after_seq": cursor, "condition": "ANY_EVENT", "timeout_s": 1},
+            )
+            assert second["status"] == "EVENT"
+            assert second["events"][0]["kind"] == "GLOBAL_CANARY"
+            timeout = await call(
+                client,
+                "workflow_await_global_event",
+                {"after_seq": second["cursor"], "condition": "ANY_REPORT", "timeout_s": 1},
+            )
+            assert timeout == {
+                "status": "TIMEOUT_NO_DISPOSITION",
+                "scope": "GLOBAL_EVENT_STREAM",
+                "cursor": second["cursor"],
+            }
+
+    run(scenario)
+
+
+def test_global_wait_can_ignore_stale_workflows_without_binding(tmp_path):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            stale_workflow = await open_workflow(client, "stale-session", "stale-turn")
+            live_workflow = await open_workflow(client, "live-session", "live-turn")
+            store = mcp_server._get_store()
+            after_seq = store.events_after(None, 0)[-1]["seq"]
+            store.append_event(
+                stale_workflow,
+                "UNTYPED_REPORT_AVAILABLE",
+                "stale-subject",
+                {},
+                "stale-report",
+            )
+
+            async def delayed_live_report():
+                await asyncio.sleep(1)
+                store.append_event(
+                    live_workflow,
+                    "UNTYPED_REPORT_AVAILABLE",
+                    "live-subject",
+                    {},
+                    "live-report",
+                )
+
+            result, _ = await asyncio.gather(
+                call(
+                    client,
+                    "workflow_await_global_event",
+                    {
+                        "after_seq": after_seq,
+                        "condition": "ANY_REPORT",
+                        "timeout_s": 5,
+                        "ignore_workflow_ids": [stale_workflow],
+                    },
+                ),
+                delayed_live_report(),
+            )
+            assert result["status"] == "EVENT"
+            assert result["events"][0]["workflow_id"] == live_workflow
+            assert result["events"][0]["kind"] == "UNTYPED_REPORT_AVAILABLE"
+
+    run(scenario)
+
+
+def test_global_wait_schema_is_explicitly_unbound(tmp_path):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            tools = await client.list_tools()
+            await_tool = next(
+                tool for tool in tools.tools if tool.name == "workflow_await_global_event"
+            )
+            properties = await_tool.input_schema["properties"]
+            assert set(properties) == {
+                "after_seq",
+                "condition",
+                "timeout_s",
+                "ignore_workflow_ids",
+            }
+            assert "workflow_id" not in properties
+            assert "task_ids" not in properties
+            assert properties["condition"]["enum"] == [
+                "ANY_EVENT",
+                "ANY_REPORT",
+                "OPEN_OBLIGATION_CHANGED",
+            ]
+            assert properties["condition"]["default"] == "ANY_REPORT"
+            ignored_schema = properties["ignore_workflow_ids"]
+            assert ignored_schema.get("type") == "array" or any(
+                item.get("type") == "array" for item in ignored_schema.get("anyOf", [])
+            )
 
     run(scenario)
 

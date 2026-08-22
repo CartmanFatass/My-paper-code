@@ -389,6 +389,7 @@ root_record_intake
 obligation_open
 obligation_resolve
 workflow_await_event
+workflow_await_global_event
 workflow_close
 ```
 
@@ -453,6 +454,30 @@ Implementation requirements:
 - Do not include raw child text in the default event result.
 - Cancellation must exit without modifying state.
 - A timeout never automatically asks the model to wait again.
+
+### 5.2 `workflow_await_global_event`
+
+This is the cross-workflow wait primitive. It intentionally has no
+`session_id`, `workflow_id`, or `task_ids` input, so one active Root turn can
+wait for the next matching event from any managed workflow without repeatedly
+polling each task. It uses the database-wide `events.seq` cursor and returns
+source `workflow_id` metadata in a neutral event summary.
+
+Input:
+
+```json
+{
+  "after_seq": 42,
+  "condition": "ANY_REPORT",
+  "timeout_s": 900
+}
+```
+
+Allowed conditions are `ANY_EVENT`, `ANY_REPORT`, and
+`OPEN_OBLIGATION_CHANGED`; the default is `ANY_REPORT`. The returned
+`scope` is `GLOBAL_EVENT_STREAM`, and the returned `cursor` is passed back as
+`after_seq` for the next call. This remains a foreground MCP wait: it does not
+wake an already-ended Codex task or create a background daemon.
 
 ---
 

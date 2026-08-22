@@ -74,13 +74,17 @@ def run_benchmark(*, batch_size: int, capacity: int, repeats: int) -> dict[str, 
 
     python_seconds: list[float] = []
     native_seconds: list[float] = []
-    for _repeat in range(repeats):
-        started = perf_counter()
-        _python_episode(ledgers, actions)
-        python_seconds.append(perf_counter() - started)
-        started = perf_counter()
-        _native_episode(ledgers, actions)
-        native_seconds.append(perf_counter() - started)
+    for repeat in range(repeats):
+        order = (
+            (("python", _python_episode), ("native", _native_episode))
+            if repeat % 2 == 0
+            else (("native", _native_episode), ("python", _python_episode))
+        )
+        for name, implementation in order:
+            started = perf_counter()
+            implementation(ledgers, actions)
+            elapsed = perf_counter() - started
+            (python_seconds if name == "python" else native_seconds).append(elapsed)
     python_median = median(python_seconds)
     native_median = median(native_seconds)
     return {
@@ -91,6 +95,7 @@ def run_benchmark(*, batch_size: int, capacity: int, repeats: int) -> dict[str, 
         "capacity": capacity,
         "horizon": roster_env.HORIZON,
         "repeats": repeats,
+        "alternating_order": True,
         "python_seconds": python_seconds,
         "native_seconds": native_seconds,
         "python_median_seconds": python_median,
@@ -99,16 +104,48 @@ def run_benchmark(*, batch_size: int, capacity: int, repeats: int) -> dict[str, 
     }
 
 
+def run_benchmark_matrix(
+    *, batch_sizes: tuple[int, ...], capacity: int, repeats: int
+) -> dict[str, object]:
+    """Benchmark complete reset-to-terminal episodes at declared batch widths."""
+
+    if not batch_sizes or any(width <= 0 for width in batch_sizes):
+        raise ValueError("batch_sizes must contain positive widths")
+    if len(set(batch_sizes)) != len(batch_sizes):
+        raise ValueError("batch_sizes must be unique")
+    cold_started = perf_counter()
+    cpp.load_continuous_roster_toy_cpp_backend()
+    process_cold_preflight_seconds = perf_counter() - cold_started
+    results = [
+        run_benchmark(batch_size=width, capacity=capacity, repeats=repeats)
+        for width in batch_sizes
+    ]
+    return {
+        "schema": "continuous_roster_toy_cpp_batch_matrix_v2",
+        "formal": False,
+        "conclusion_bearing": False,
+        "native_scope": "observation_reward_hot_path_with_python_lifecycle",
+        "full_reset_to_terminal_episode": True,
+        "process_cold_preflight_seconds": process_cold_preflight_seconds,
+        "steady_measurement_excludes_process_cold_preflight": True,
+        "batch_sizes": list(batch_sizes),
+        "results": results,
+        "bitwise_outcome_oracle": all(
+            result["bitwise_outcome_oracle"] for result in results
+        ),
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--batch-size", type=int, default=64)
+    parser.add_argument("--batch-sizes", type=int, nargs="+", default=(1, 8, 32))
     parser.add_argument("--capacity", type=int, choices=(6, 8, 12), default=8)
     parser.add_argument("--repeats", type=int, default=10)
     arguments = parser.parse_args()
     print(
         json.dumps(
-            run_benchmark(
-                batch_size=arguments.batch_size,
+            run_benchmark_matrix(
+                batch_sizes=tuple(arguments.batch_sizes),
                 capacity=arguments.capacity,
                 repeats=arguments.repeats,
             ),

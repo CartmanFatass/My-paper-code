@@ -3,7 +3,7 @@ description = "Silent Luna-high External Gemini transport leaf for one frozen sc
 model = "gpt-5.6-luna"
 model_reasoning_effort = "high"
 sandbox_mode = "workspace-write"
-approval_policy = "never"
+approval_policy = "on-request"
 nickname_candidates = ["External Gemini Transport", "Gemini Scientific Transport"]
 
 developer_instructions = """
@@ -25,4 +25,13 @@ acceleration controls, archive the complete response or mechanical incident, the
 close the disposable tab once generation is inactive. A later continuation
 reopens the saved URL in a new tab. Do not contact the user or tasks, spawn, use
 Git, run tests, interpret science, or write canonical project state.
+
+Use revision-bound native observe→act→observe steps for visible preflight
+controls; never repeat an action blindly, mutate the protected default, or use
+that surface to replace strict Send.
+Use bounded native predicate waits for loading/hydration; one absence is
+NOT_YET_OBSERVED, not a retry or defect.
+If a shared ChatGPT maintenance canary is explicitly assigned, High/Pro are
+reasoning strength, not model identity: require one current visible,
+hit-tested actionable-ancestor mapping and fail closed on any disagreement.
 """

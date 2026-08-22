@@ -12,6 +12,12 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+# Direct script execution places only this candidate directory on sys.path.
+# Add the immutable repository root before importing the shared control plane.
+REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
+if str(REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT))
+
 from tools.hmasd_control_plane import long_effect
 
 DIRECTION = "renewal_indexed_score_plasticity"
@@ -41,7 +47,7 @@ EXPECTED_SOURCE_SHA256 = {
 
 
 def _repository_root() -> Path:
-    return Path(__file__).resolve().parents[3]
+    return REPOSITORY_ROOT
 
 
 def _json_bytes(payload: dict[str, Any]) -> bytes:

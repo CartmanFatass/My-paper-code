@@ -18,7 +18,32 @@ returns to unchanged-science CM repair (or EM interpretation), not a scientific
 failure.  This follows the maintained diagnosis (especially lines 118–184,
 246–257) and the router's P0 amendment.
 
-## Overnight current-cut control statement
+## Current residual-value semantic correction — 2026-08-21
+
+The current allocation pointer is
+`CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md`;
+the controlling semantic correction remains
+`RESIDUAL_VALUE_CONTINUATION_AND_AUTONOMOUS_EXPERIMENT_AUTHORITY_PORTFOLIO_ADJUDICATION_20260821.md`.
+The user has explicitly removed a second class of wrongful fence: treating an
+exact-object Portfolio `no-current`, `closed`, `consumed` or
+`NONE_WITHIN_CURRENT_*` disposition as a family-wide discovery or definition
+stop.
+
+Always-on Portfolio discovery, cross-direction absorption and prospective
+hypothesis generation require no revisit proof. A credible residual question
+may enter a bounded definition-only EM/CM envelope before a Level-1 target fact
+is established or a complete Level-2 card exists. Those become outputs of
+definition. A complete object and cost remain prerequisites for construction/
+empirical allocation, not for scientific exploration.
+
+This correction preserves exact-object immutability, provider no-resend,
+complete-panel interpretation and all postactivity science laws. It authorizes
+no automatic activity. Under the current cut, RISP and RCLE are empirical,
+SGSP Gate B is enabling construction, and VQFP-FERL r04, DISH r05 and
+VNFC-PCPI r02 are definition-only. SCDMP TBCC r02 and VNFC BPCR r09 are complete/
+no-current; no engineering, provider or status fact produced that disposition.
+
+## Historical overnight current-cut control statement
 
 The current allocation pointer is
 `OVERNIGHT_POST_RESULT_PORTFOLIO_CAMPAIGN_ADJUDICATION_20260814.md`; older

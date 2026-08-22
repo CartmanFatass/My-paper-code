@@ -65,13 +65,14 @@ retryable failures are residual risks unless the assignment supplies a
 supported normal-path reproduction. Never request an identity ledger, wrapper,
 compatibility layer or permanent gate merely because it is theoretically safer.
 
-Treat a violation of `docs/project/EVIDENCE_COMPLEXITY_POLICY.md` as an
-actionable P0 operational finding: in particular nested remaining-horizon
-replanning, more than `16*H` hypothetical transitions, or a dense pairwise path
-claimed as scalable. A fixed-small-N exact simulator is not such a claim.
-Describe the exact exceeded ceiling and realized code path in plain language;
-do not replace that observation with `NON_EXECUTABLE_EVIDENCE_DESIGN` or any
-other routing label. It is not a scientific result or a direction stop.
+Treat complexity as an object-level review fact, not a project-wide P0 gate.
+For nested, recursive, horizon-growing, dense, or materially expensive code,
+describe the realized workload, scientific/engineering consequence, and any
+smaller semantics-preserving alternative. Make a finding only when the assigned
+object or its stated claim is contradicted, not because a global numerical
+ceiling was crossed. Do not create a special routing label. Complexity is not a
+scientific result, direction stop, or
+automatic escalation; object-local card and lease bounds remain in force.
 
 Remain read-only. Do not mutate Git, train, contact External Pro or another
 task, invoke Skills, spawn children or accept the package. Return actionable

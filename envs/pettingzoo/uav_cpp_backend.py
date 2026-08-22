@@ -39,16 +39,17 @@ _LOS_PARAMETERS: Final[dict[str, tuple[float, float, float, float]]] = {
 VALID_RELAY_GEOMETRY_BACKENDS: Final[frozenset[str]] = frozenset(
     {"python_reference", "cpp"}
 )
-# The native implementation remains explicitly selectable, but each production
-# consumer defaults to the reference path until its own complete-environment
-# fixed-machine median gate is positive.  The current 31-sample gate was
-# semantically exact for all three consumers but slower for each one.
-DEFAULT_ROUTED_RELAY_GEOMETRY_BACKEND: Final[str] = "python_reference"
-DEFAULT_ENERGY_RELAY_GEOMETRY_BACKEND: Final[str] = "python_reference"
-DEFAULT_FORCED_RELAY_GEOMETRY_BACKEND: Final[str] = "python_reference"
+# The native geometry boundary is the production default.  Python remains an
+# explicit reference/oracle selection for equivalence tests and debugging; no
+# dispatcher silently falls back to it when native build/load fails.
+DEFAULT_ROUTED_RELAY_GEOMETRY_BACKEND: Final[str] = "cpp"
+DEFAULT_ENERGY_RELAY_GEOMETRY_BACKEND: Final[str] = "cpp"
+DEFAULT_FORCED_RELAY_GEOMETRY_BACKEND: Final[str] = "cpp"
 # Backward-compatible name for routed/progressive consumers.
 DEFAULT_RELAY_GEOMETRY_BACKEND: Final[str] = DEFAULT_ROUTED_RELAY_GEOMETRY_BACKEND
 _WINDOWS_TOOLCHAIN_LOCK: Final[threading.RLock] = threading.RLock()
+_BACKEND_MODULE_CACHE_LOCK: Final[threading.RLock] = threading.RLock()
+_LOADED_BACKENDS: dict[str, ModuleType] = {}
 
 
 class UAVCppBackendUnavailable(RuntimeError):
@@ -61,6 +62,14 @@ class BatchedUAVGeometry:
     access_path_loss: np.ndarray
     air_path_loss: np.ndarray
     base_path_loss: np.ndarray
+
+
+@dataclass(frozen=True)
+class BatchedUAVRadio:
+    access_sinr: np.ndarray
+    air_sinr: np.ndarray
+    uav_to_base_sinr: np.ndarray
+    base_to_uav_sinr: np.ndarray
 
 
 def _safe_component(value: str) -> str:
@@ -187,42 +196,69 @@ def _build_identity() -> str:
     )
 
 
+def _process_cache_key(build_root: str | os.PathLike[str] | None) -> tuple[str, Path]:
+    """Return a cheap source/runtime-ABI key before compiler probing."""
+
+    if not _SOURCE.is_file():
+        raise UAVCppBackendUnavailable(f"native source is missing: {_SOURCE}")
+    root = resolve_build_root(
+        build_root,
+        environment_variable="HMASD_UAV_CPP_BUILD_ROOT",
+        default_name="hmasd_uav_cpp_extensions",
+    )
+    material = "|".join(
+        (
+            hashlib.sha256(_SOURCE.read_bytes()).hexdigest(),
+            "\0".join(_compiler_flags()),
+            _torch_version(),
+            sys.implementation.cache_tag or "unknown_python",
+            platform.machine() or "unknown_cpu",
+            _BUILD_INTERFACE_VERSION,
+            str(root),
+        )
+    )
+    return hashlib.sha256(material.encode("utf-8")).hexdigest(), root
+
+
 def load_uav_cpp_backend(
     *, build_root: str | os.PathLike[str] | None = None, verbose: bool = False
 ) -> ModuleType:
     """Build or reuse the ABI/source-keyed native module outside tracked files."""
 
-    if not _SOURCE.is_file():
-        raise UAVCppBackendUnavailable(f"native source is missing: {_SOURCE}")
-    with _windows_toolchain_context():
-        identity = _build_identity()
-        root = resolve_build_root(
-            build_root,
-            environment_variable="HMASD_UAV_CPP_BUILD_ROOT",
-            default_name="hmasd_uav_cpp_extensions",
-        )
-        module_digest = hashlib.sha256(identity.encode()).hexdigest()[:16]
-        try:
-            return load_source_keyed_extension(
-                cache_namespace="uav_geometry",
-                identity=identity,
-                root=root,
-                build_directory_name=f"build_{module_digest}",
-                source=_SOURCE,
-                staged_source_name="uav_geometry_backend.cpp",
-                module_name=f"hmasd_uav_geometry_{module_digest}",
-                compiler_flags=_compiler_flags(),
-                verbose=verbose,
-            )
-        except CppExtensionUnavailable as error:  # pragma: no cover - deployment path
-            raise UAVCppBackendUnavailable(
-                "torch.utils.cpp_extension is unavailable"
-            ) from error
-        except CppExtensionLoadFailed as error:
-            raise UAVCppBackendUnavailable(
-                "failed to build/load the UAV C++ backend; provision the registered "
-                "CPU compiler toolchain and inspect the chained build error"
-            ) from error
+    cache_key, root = _process_cache_key(build_root)
+    cached = _LOADED_BACKENDS.get(cache_key)
+    if cached is not None:
+        return cached
+    with _BACKEND_MODULE_CACHE_LOCK:
+        cached = _LOADED_BACKENDS.get(cache_key)
+        if cached is not None:
+            return cached
+        with _windows_toolchain_context():
+            identity = _build_identity()
+            module_digest = hashlib.sha256(identity.encode()).hexdigest()[:16]
+            try:
+                module = load_source_keyed_extension(
+                    cache_namespace="uav_geometry",
+                    identity=identity,
+                    root=root,
+                    build_directory_name=f"build_{module_digest}",
+                    source=_SOURCE,
+                    staged_source_name="uav_geometry_backend.cpp",
+                    module_name=f"hmasd_uav_geometry_{module_digest}",
+                    compiler_flags=_compiler_flags(),
+                    verbose=verbose,
+                )
+            except CppExtensionUnavailable as error:  # pragma: no cover - deployment path
+                raise UAVCppBackendUnavailable(
+                    "torch.utils.cpp_extension is unavailable"
+                ) from error
+            except CppExtensionLoadFailed as error:
+                raise UAVCppBackendUnavailable(
+                    "failed to build/load the UAV C++ backend; provision the registered "
+                    "CPU compiler toolchain and inspect the chained build error"
+                ) from error
+        _LOADED_BACKENDS[cache_key] = module
+        return module
 
 
 def _require_array(
@@ -458,6 +494,218 @@ def step_relay_geometry_batch(*, backend: str, **kwargs) -> BatchedUAVGeometry:
         return step_geometry_batch(**kwargs)
     raise ValueError(
         f"unknown relay geometry backend {selected!r}; expected one of "
+        f"{sorted(VALID_RELAY_GEOMETRY_BACKENDS)}"
+    )
+
+
+def _validated_radio_inputs(
+    *,
+    uav_positions: np.ndarray,
+    user_positions: np.ndarray,
+    ground_bs_positions: np.ndarray,
+    access_path_loss: np.ndarray,
+    air_path_loss: np.ndarray,
+    base_path_loss: np.ndarray,
+    uav_tx_power_dbm: float,
+    ground_bs_tx_power_dbm: float,
+    noise_power_dbm: float,
+    interference_radius: float,
+    use_fdma: bool,
+    aclr_linear: float,
+    exclude_receiver_uav: bool,
+) -> tuple[object, ...]:
+    uavs = _require_array(
+        "uav_positions", uav_positions, dtype=np.dtype(np.float64), rank=3, trailing=3
+    )
+    users = _require_array(
+        "user_positions", user_positions, dtype=np.dtype(np.float64), rank=3, trailing=3
+    )
+    bases = _require_array(
+        "ground_bs_positions",
+        ground_bs_positions,
+        dtype=np.dtype(np.float64),
+        rank=3,
+        trailing=3,
+    )
+    access = _require_array(
+        "access_path_loss", access_path_loss, dtype=np.dtype(np.float64), rank=3
+    )
+    air = _require_array(
+        "air_path_loss", air_path_loss, dtype=np.dtype(np.float64), rank=3
+    )
+    base = _require_array(
+        "base_path_loss", base_path_loss, dtype=np.dtype(np.float64), rank=3
+    )
+    batch, uav_count, _ = uavs.shape
+    if users.shape[0] != batch or bases.shape[0] != batch:
+        raise ValueError("all radio position arrays must share the batch dimension")
+    if access.shape != (batch, uav_count, users.shape[1]):
+        raise ValueError("access_path_loss shape does not match radio positions")
+    if air.shape != (batch, uav_count, uav_count):
+        raise ValueError("air_path_loss shape does not match radio positions")
+    if base.shape != (batch, uav_count, bases.shape[1]):
+        raise ValueError("base_path_loss shape does not match radio positions")
+    scalars = tuple(
+        _require_finite_scalar(name, value)
+        for name, value in (
+            ("uav_tx_power_dbm", uav_tx_power_dbm),
+            ("ground_bs_tx_power_dbm", ground_bs_tx_power_dbm),
+            ("noise_power_dbm", noise_power_dbm),
+            ("interference_radius", interference_radius),
+            ("aclr_linear", aclr_linear),
+        )
+    )
+    if scalars[3] < 0.0 or scalars[4] < 0.0:
+        raise ValueError("interference_radius and aclr_linear must be nonnegative")
+    if not isinstance(use_fdma, (bool, np.bool_)) or not isinstance(
+        exclude_receiver_uav, (bool, np.bool_)
+    ):
+        raise TypeError("radio boolean controls must be bool")
+    return (
+        uavs,
+        users,
+        bases,
+        access,
+        air,
+        base,
+        *scalars,
+        bool(use_fdma),
+        bool(exclude_receiver_uav),
+    )
+
+
+def compute_radio_reference_batch(**kwargs) -> BatchedUAVRadio:
+    """Exact Python oracle for the stateless native radio tensor boundary."""
+
+    (
+        uavs,
+        users,
+        bases,
+        access,
+        air,
+        base,
+        uav_tx,
+        ground_tx,
+        noise_dbm,
+        radius,
+        aclr,
+        use_fdma,
+        exclude_receiver,
+    ) = _validated_radio_inputs(**kwargs)
+    batch, uav_count, _ = uavs.shape
+    user_count = users.shape[1]
+    base_count = bases.shape[1]
+    access_sinr = np.empty((batch, uav_count, user_count), dtype=np.float64)
+    air_sinr = np.empty((batch, uav_count, uav_count), dtype=np.float64)
+    uplink_sinr = np.empty((batch, uav_count, base_count), dtype=np.float64)
+    downlink_sinr = np.empty((batch, uav_count, base_count), dtype=np.float64)
+    noise_linear = 10 ** (noise_dbm / 10)
+    scale = aclr if use_fdma else 1.0
+
+    def within(first: np.ndarray, second: np.ndarray) -> bool:
+        return np.sqrt(np.sum((first - second) ** 2)) <= radius
+
+    def sinr(signal: float, powers: list[float]) -> float:
+        return signal - 10 * np.log10(noise_linear + np.sum(powers))
+
+    for b in range(batch):
+        for tx in range(uav_count):
+            for user in range(user_count):
+                powers = [
+                    10 ** ((uav_tx - access[b, source, user]) / 10) * scale
+                    for source in range(uav_count)
+                    if source != tx and within(uavs[b, source], users[b, user])
+                ]
+                access_sinr[b, tx, user] = sinr(
+                    uav_tx - access[b, tx, user], powers
+                )
+            for rx in range(uav_count):
+                powers = [
+                    10 ** ((uav_tx - air[b, source, rx]) / 10) * scale
+                    for source in range(uav_count)
+                    if source != tx
+                    and (not exclude_receiver or source != rx)
+                    and within(uavs[b, source], uavs[b, rx])
+                ]
+                air_sinr[b, tx, rx] = sinr(uav_tx - air[b, tx, rx], powers)
+            for bs in range(base_count):
+                uplink_powers = [
+                    10 ** ((uav_tx - base[b, source, bs]) / 10) * scale
+                    for source in range(uav_count)
+                    if source != tx and within(uavs[b, source], bases[b, bs])
+                ]
+                uplink_sinr[b, tx, bs] = sinr(
+                    uav_tx - base[b, tx, bs], uplink_powers
+                )
+                downlink_powers = [
+                    10 ** ((uav_tx - air[b, source, tx]) / 10) * scale
+                    for source in range(uav_count)
+                    if (not exclude_receiver or source != tx)
+                    and within(uavs[b, source], uavs[b, tx])
+                ]
+                downlink_sinr[b, tx, bs] = sinr(
+                    ground_tx - base[b, tx, bs], downlink_powers
+                )
+    return BatchedUAVRadio(access_sinr, air_sinr, uplink_sinr, downlink_sinr)
+
+
+def compute_radio_batch(
+    *, build_root: str | os.PathLike[str] | None = None, **kwargs
+) -> BatchedUAVRadio:
+    """Execute the fused stateless native radio tensor boundary."""
+
+    values = _validated_radio_inputs(**kwargs)
+    uavs, users, bases, access, air, base = values[:6]
+    uav_tx, ground_tx, noise_dbm, radius, aclr = values[6:11]
+    use_fdma, exclude_receiver = values[11:13]
+    raw = load_uav_cpp_backend(build_root=build_root).compute_radio_batch(
+        uavs,
+        users,
+        bases,
+        access,
+        air,
+        base,
+        uav_tx,
+        ground_tx,
+        noise_dbm,
+        radius,
+        use_fdma,
+        aclr,
+        exclude_receiver,
+    )
+    batch, uav_count, _ = uavs.shape
+    expected_shapes = (
+        (batch, uav_count, users.shape[1]),
+        (batch, uav_count, uav_count),
+        (batch, uav_count, bases.shape[1]),
+        (batch, uav_count, bases.shape[1]),
+    )
+    if not isinstance(raw, tuple) or len(raw) != 4:
+        raise RuntimeError("native radio backend returned an invalid payload")
+    checked: list[np.ndarray] = []
+    for index, (value, shape) in enumerate(zip(raw, expected_shapes)):
+        if (
+            not isinstance(value, np.ndarray)
+            or value.shape != shape
+            or value.dtype != np.dtype(np.float64)
+            or not value.flags.c_contiguous
+            or not np.isfinite(value).all()
+        ):
+            raise RuntimeError(f"native radio output {index} violated constraints")
+        checked.append(value)
+    return BatchedUAVRadio(*checked)
+
+
+def compute_relay_radio_batch(*, backend: str, **kwargs) -> BatchedUAVRadio:
+    """Dispatch the explicit native or reference radio tensor implementation."""
+
+    selected = str(backend)
+    if selected == "python_reference":
+        return compute_radio_reference_batch(**kwargs)
+    if selected == "cpp":
+        return compute_radio_batch(**kwargs)
+    raise ValueError(
+        f"unknown relay radio backend {selected!r}; expected one of "
         f"{sorted(VALID_RELAY_GEOMETRY_BACKENDS)}"
     )
 

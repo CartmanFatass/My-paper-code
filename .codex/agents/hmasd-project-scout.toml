@@ -1,6 +1,6 @@
 name = "hmasd-project-scout"
-description = "Read-only Spark project scout for bounded repository exploration and factual confirmation."
-model = "gpt-5.3-codex-spark"
+description = "Read-only Luna project scout for bounded repository exploration and factual confirmation."
+model = "gpt-5.6-luna"
 model_reasoning_effort = "medium"
 sandbox_mode = "read-only"
 approval_policy = "never"

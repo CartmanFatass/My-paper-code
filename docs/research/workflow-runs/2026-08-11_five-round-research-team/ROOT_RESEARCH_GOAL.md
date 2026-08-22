@@ -1,28 +1,52 @@
 # Root Research Goal
 
-## Active portfolio decision index — 2026-08-20
+## Active portfolio decision index — 2026-08-21
 
-The operative allocation cut is the final section, **2026-08-20 SCDMP r07
-Stage-A post-result adjudication**. Its complete owner decision is
-`SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md`.
-It supersedes the 2026-08-19 SGSP/VNFC-Q0 cut only for current allocation;
-SGSP, RISP and RCLE empirical decisions, VNFC/ONLGR no-current decisions and
-all earlier frozen evidence and claim ceilings remain preserved.
+The operative allocation cut is the final section, **2026-08-21 current
+classification and residual-definition decision**. Its complete owner decision
+is
+`CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md`.
+It supersedes older queue-count and UAV-catalog shorthand without changing any
+frozen empirical object. The base completed-result allocation is
+`ONLGR_TBVUUS_R03_POST_RESULT_PORTFOLIO_ADJUDICATION_20260821.md`.
+The operative owner topology is
+`PORTFOLIO_EM_OPERATIONAL_CM_OWNERSHIP_AMENDMENT_20260821.md`: Portfolio owns
+prospective EM/science work; Operational Root owns prospective CM/engineering/
+lease work. Its rollback identities are recorded in
+`CONTROL_PLANE_PRE_PORTFOLIO_EM_SPLIT_ROLLBACK_MANIFEST_20260821.md`.
+RISP and RCLE empirical actions plus SGSP runner/Gate B remain fully
+operative. VQFP-FERL r05, DISH r05 and VNFC-PCPI r02 are current
+definition-only investments. SCDMP TBCC r02, VNFC BPCR r09 and ONLGR TBVUUS
+are complete/no-current and create no vacancy or backfill action.
 
 No historical child, CM, Operator, transport or recovery label is a scientific
 stop. A direction receives investment or no current investment only through an
 explicit portfolio judgment based on scientific value, identifiability,
 redundancy, total cost and opportunity cost, with a concrete reconsideration
-condition. There is no required direction count or action-count quota.
+condition. The earlier three-entry UAV catalog is historical inventory, not a
+direction quota, backfill rule or permission to invent a successor. There is
+currently no direct UAV empirical; DISH r05 is the preferred prospective path
+but remains definition-only.
 
-Current empirical investments are
-`RISP-B3-TRG-R03-FULL-PANEL|RCLE-CPC-R04-FULL-PANEL|SGSP-RG2Z-R03-FULL-PANEL`.
-The sole current definition-only investment is
-`SCDMP-TBOV-SUPPORT-REPRESENTATION-FACTORIAL-CHECKPOINT-DEFINITION`; there is
-no current enabling-construction investment. Exact SCDMP r07 Stage A is
-complete under `MODIFY-CHECKPOINT`, and Stage B is ineligible and unauthorized.
-ONLGR host-card and VNFC full-graph reachability/certificate work are
-no-current with separate revisit conditions.
+Current empirical investments are `RISP-G-INIT-REACH-R01-FULL-PANEL` and
+`RCLE-TBCFV-R04-FULL-EMPIRICAL-PANEL`. Current definition-only investments are
+`VQFP-FERL-R05-SUCCESSOR-DEFINITION`,
+`DISH-RBHR-R05-SUCCESSOR-DEFINITION`, and
+`VNFC-PCPI-R02-SUCCESSOR-DEFINITION`. Current enabling
+construction is `SGSP-RG2Z-RSCF-R01-RUNNER-AND-GATE-B-CONFORMANCE`. No current
+object is a direct UAV empirical program; DISH r05 is a prospective UAV
+definition only.
+RISP r01 is an empirical tracking/relay abstraction rather than a UAV empirical
+program.
+All production/deployment remains unauthorized.
+
+Exact SGSP CCA remains empirical no-current; exact RCLE CPC and all within-CPC
+successors remain no-current. Exact SCDMP SRF/UAV checkpoint repairs, relation
+assay and Stage B remain unauthorized. Exact ONLGR HEADLAND-90 timing, SGSP
+RG2Z/CCA and RCLE CPC objects remain immutable. Their wider families may now
+proceed only through the materially new definition lines above. `No-current`
+does not block discovery or definition. The old VNFC full-graph/certificate
+path remains no-current.
 
 ## Current two-session authority note
 
@@ -35,12 +59,14 @@ maintenance, and portfolio invest/pause/retire/revisit decisions, and it authors
 the portfolio sections of shared canonical research state. In those contexts,
 every unqualified `Root` below means that dedicated portfolio session.
 
-The operational Root owns direction-stage EM/CM orchestration, shared-compute
-leases and tools, user communication, provenance-bound cross-session relay,
-owner-prepared direction publication, and final Git integration. In those
-contexts, every unqualified `Root` below means the operational Root. A sentence
-that combines both scopes is read as this split, not as shared authority. Both
-sessions re-read `AGENTS.md`, `.agents/roles/ROOT.md`, and
+The dedicated Portfolio session owns prospective direction EM orchestration,
+direction science/provider/intake/interpretation and portfolio decisions. The
+operational Root owns direction CM orchestration, shared-compute leases and
+tools, user communication, provenance-bound cross-session relay, owner-prepared
+publication and final Git integration. In those contexts, every unqualified
+`Root` below is resolved by semantic ownership. A sentence that combines both
+scopes is read as this split, not as shared authority. Both sessions re-read
+`AGENTS.md`, `.agents/roles/ROOT.md`, and
 `CROSS_DIRECTION_PORTFOLIO_HANDOFF_SOL_ULTRA.md` after compaction or restart.
 
 ## Project outcome
@@ -2430,7 +2456,86 @@ bounding facts. Every revisit returns for a new Portfolio decision and does
 not automatically authorize a full graph, solver, host, coordinates, training,
 evaluation or lease.
 
-## 2026-08-20 SCDMP r07 Stage-A post-result portfolio cut
+## 2026-08-20 RCLE CPC r04 post-result portfolio cut
+
+The controlling owner record is
+`RCLE_CPC_R04_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md`. Exact
+`RCLE-CPC-SCIENCE-20260815-04` is technically complete, EM-intaken and same-
+conversation Pro-converged under `NO_COARSE_ADVANTAGE`.
+
+Both registered co-primary intervals lie wholly inside the prospective
+`[-0.03,0.03]` no-material region: `Delta_VALUE` is
+`[0.0157020181,0.0245888144]` and `Delta_ROBUST` is
+`[-0.00409381260,0.00436897943]`. All mechanism gates fail; fragmentation is
+directionally positive but below its `0.08` material gate. The fixed binary
+restriction is therefore not retained for this target, with no zero-effect,
+general equivalence, flexible superiority or general latent-family claim.
+
+Exact CPC is complete/immutable and has no within-formulation successor. RCLE
+receives no current investment, without deleting common/persistent latent
+exploration generally. Revisit requires both a material target-bound
+commitment-fragmentation fact and a materially new Pro-closed direct-value
+object with a competent containing comparator and fresh coordinates. Another
+direction's result or RCLE nonpassage alone is insufficient.
+
+Operational Root releases the RCLE pair. RISP, SGSP and the count-corrected
+SCDMP path continue; VNFC and ONLGR remain no-current. No vacancy/backfill,
+quota, WIP/order, rescue, fusion, surface or UAV action follows.
+
+## Superseded/base 2026-08-20 SCDMP SRF r02 count-semantics correction
+
+The controlling record is
+`SCDMP_TBOV_SRF_R02_COUNT_SEMANTICS_PORTFOLIO_CORRECTION_20260820.md`.
+Before any identity or activity, review established that `224,604,160` imports
+excluded old relation-path calls and that `204,697,600` is an expectation, not
+an exact realized total. Under the unchanged prefix law, actual direct forwards
+are `202,854,400 + 90 * sum_{s,a}(n10_{s,a})`, bounded in
+`[202,854,400,206,540,800]`, and are recorded only after the complete atomic
+panel with no branch or stopping role.
+
+Portfolio continues the SCDMP investment through one count-only corrected
+revision. EM freezes the expected-ledger/realized-formula correction, obtains
+same-Pro `CLOSED` and EM intake, and CM reaccepts the exact composite. The
+existing construction→fresh-coordinate→later-Root-lease→complete-panel
+authorization then resumes automatically; this count correction does not
+create a repeated allocation gate.
+
+All factors, row/permutation laws, representation, 600-step optimizer budget,
+ten-seed registry, thresholds, inference branches, alternatives and claim
+ceiling remain unchanged. Do not rebalance/pad the prefix, import relation
+paths, materialize identities from r02 as written, open a relation assay or
+Stage B, or use the realized count for stopping. The 6–10 engineer-day and
+2–5 CPU-hour class is unchanged.
+
+## Superseded/base 2026-08-20 SCDMP SRF r02 empirical portfolio cut
+
+The controlling owner record is
+`SCDMP_TBOV_SRF_R02_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260820.md`.
+`SCDMP-TBOV-SRF-CHECKPOINT-SCIENCE-20260819-02` is Pro `CLOSED`, EM-intaken
+and CM-statically feasible. Portfolio invests the complete ten-seed 2×2
+support-allocation × segment-representation factorial through unchanged-
+science construction/conformance, fresh disjoint identities and coordinates,
+a later direction-scoped Root lease, the complete atomic result, CM acceptance,
+EM intake and same-Pro result convergence.
+
+The frozen package retains 600 AdamW steps, the optimizer law, row count,
+untouched evaluation and per-seed `0.65` competence ceiling. Its exact cost is
+40 checkpoints, 24,000 logical steps and 224,604,160 registered model-example
+evaluations, estimated at 6–10 experienced-engineer days and 2–5 serialized
+CPU hours. It can distinguish support, representation-package, interaction,
+smallness or indeterminacy while separately reporting the complete four-cell
+competence vector. Its ceiling is only an exact fixed-four-carrier checkpoint-
+package effect; finite optimizer/package geometry remains the strongest
+alternative.
+
+No r07 rerun, coordinate/checkpoint reuse, threshold/seed/budget repair,
+relation assay, Stage B, second surface or UAV work is authorized. Every
+complete branch returns for a new Portfolio decision; even a favorable cell
+only makes a separately defined fresh relation assay eligible for later
+consideration. Current empirics are RISP, RCLE, SGSP and this SCDMP factorial;
+the count is not a quota and creates no WIP/order/backfill/fusion gate.
+
+## Superseded/base 2026-08-20 SCDMP r07 Stage-A post-result portfolio cut
 
 The controlling record is
 `SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md`.
@@ -2484,3 +2589,720 @@ treatment and a separate Portfolio decision with fresh coordinates.
 This is a decision-value investment, not quota backfill. RISP, RCLE and SGSP
 continue independently; do not create WIP/order, fusion, cross-`N×k`, second-
 surface or UAV-production gates.
+
+## 2026-08-20 SGSP RG2Z r03 post-result portfolio cut
+
+The controlling owner record is
+`SGSP_RG2Z_R03_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md`. Exact
+`SGSP-RG2Z-SCIENCE-20260815-03` is technically complete, EM-intaken and same-
+conversation Pro-converged under `NONANSWERABLE_OR_INCOMPETENT_COMPARATOR`.
+
+Both held-out answerability lower bounds fail the required positive gate:
+`A(6)=-0.0326110` and `A(21)=-0.0113787`. The strictly containing EDGE arm
+also fails the material competence floor at both seen sizes:
+`e(9)=0.0107624` and `e(15)=0.0132324`, each requiring `>0.08`. Frozen
+precedence therefore makes every later exact-zero direct/cut contrast
+descriptive only. Exact r03 is complete, immutable and consumed; it neither
+retains nor deletes the physical prior and supports no equivalence, zero-effect
+or mechanism-absence claim.
+
+The leading explanation is terminal-return credit underlearning, but endpoint/
+action-support limitation, weak task-policy actionability, the competence floor
+and shared finite-budget optimization geometry remain unidentified. Portfolio
+therefore invests only in
+`SGSP-RG2Z-COUNTERFACTUAL-CREDIT-ASSIGNMENT-DEFINITION`, not in another run.
+
+The new definition must preserve RIDGEGATE-2Z, nested PHY/EDGE classes,
+training `N={9,15}`, held-out `N={6,21}`, one update-512 checkpoint, 24 fresh
+paired seeds, margins and first-match law while replacing the learned-critic
+terminal-return advantage symmetrically with one exact matched one-step-
+deviation counterfactual advantage. It must freeze coupling, legal rollout
+opportunity, no leakage, useful-work matching, exhaustive outcomes, claim
+ceiling and full prospective cost.
+
+Authorization ends at meaning-complete EM definition, existing-Pro closure,
+optional independent Gemini advisory, EM intake, CM static feasibility and
+full cost. No source, construction, tests, probes, identities, coordinates,
+training, evaluation, checkpoint, lease or empirical activity is authorized.
+A complete definition returns for a separate empirical decision. If a later
+authorized panel still fails competence or answerability, this target-bound
+line closes without a third trainer, budget, checkpoint or task rescue.
+
+Current empirics are RISP-B3-R03 and the count-corrected SCDMP factorial.
+RCLE, ONLGR and VNFC remain no-current under their independent conditions.
+SGSP completion creates no vacancy/backfill, quota, WIP/order, fusion,
+cross-`N×k`, second-surface or UAV action.
+
+## 2026-08-20 SGSP RG2Z CCA r01 post-definition portfolio cut
+
+The controlling owner record is
+`SGSP_RG2Z_CCA_R01_POST_DEFINITION_PORTFOLIO_ADJUDICATION_20260820.md`. Exact
+`SGSP-RG2Z-CCA-SCIENCE-20260820-01` is same-conversation Pro `CLOSED`,
+EM-intaken and CM-statically feasible without science-bearing ambiguity. No
+source, identity, coordinate, training, evaluation or compute activity occurred.
+
+CCA preserves exact RIDGEGATE-2Z, nested PHY/EDGE classes, training
+`N={9,15}`, held-out `N={6,21}`, update 512 and the r03 decision law while
+using exhaustive unilateral one-tape counterfactual actor credit. The complete
+logical object requires `37,299,806,208` learned policy decisions,
+`3,454,009,344` environment slots and `24,576` backward calls. Prospective cost
+is 26–45 CM workdays and 2,500–9,000 CPU core-hours; GPU benefit is unmeasured.
+
+Portfolio records exact CCA definition/feasibility/cost complete but makes its
+construction and empirical panel no-current. The reason is not a runtime or
+engineering failure: this very large purchase can only retain/decline one prior
+on one fixed toy/update package or return another nonidentification. Even a
+positive cannot establish r03 credit causation, trainer superiority, efficiency,
+another budget/roster, second-surface or UAV value.
+
+The SGSP family is not deleted. Revisit after an audited semantics-preserving
+order-of-magnitude compute reduction or half-reduction in incremental
+engineering; target evidence making this prior decision-critical; a lower-work
+Pro-closed direct-value object; or reusable shared infrastructure that
+materially reduces incremental burden. Another direction's result or an idle
+resource alone is insufficient, and every revisit requires a new Portfolio
+decision.
+
+Operational Root releases the SGSP pair and opens no construction, benchmark,
+source/build/test/probe, identities, coordinates, training, evaluation, lease,
+second surface, fusion or UAV work. Current empirics remain RISP-B3-R03 and the
+count-corrected SCDMP factorial; there is no vacancy/backfill, quota or WIP/order
+action.
+
+## 2026-08-20 SCDMP TBOV SRF r03 post-result portfolio cut
+
+The controlling owner record is
+`SCDMP_TBOV_SRF_R03_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md`. Exact
+`SCDMP-TBOV-SRF-CHECKPOINT-SCIENCE-20260820-03` is complete, technically
+accepted, EM-intaken and same-Pro-converged under
+`FACTORIAL-EFFECT-INDETERMINATE|NO-COMPETENT-CELL`.
+
+Support and interaction intervals lie wholly inside the registered `±0.01`
+small region. The representation interval `[-0.0212930388,0.0375190454]`
+remains unresolved. Every structural/variance/action gate passed, but every
+cell had five of ten fit-support seeds above `rho=0.65`; all four competence
+Booleans are false and no checkpoint may enter a relation assay.
+
+Exact SRF and all further checkpoint repair are complete/no-current. No rerun,
+extra steps, seed/threshold repair, factor/architecture search, checkpoint
+reuse, relation assay or Stage B is authorized. The result does not delete
+SCDMP or establish zero representation effect.
+
+Portfolio invests only in
+`SCDMP-TARGET-BOUND-END-TO-END-ORDER-VALUE-DEFINITION`. It must bypass the old
+checkpoint/relation/Stage-B chain and freeze one independently specified
+target-bound external-`k` order treatment, one shared parameterization, a
+competent containing `FREE-DIRECT`, matched reversed/order-insensitive controls,
+direct value/robustness endpoints, exhaustive branches, claim ceiling and full
+cost. No observed r07/SRF output may select its treatment.
+
+Authorization ends at EM definition, existing-Pro closure, optional independent
+Gemini advisory, EM intake and CM static feasibility/full cost. No source,
+construction, tests, probes, identities, coordinates, training, evaluation or
+compute is authorized. If no independent direct treatment can be defined, EM
+returns the precise scientific reason rather than opening another factor menu.
+
+RISP-B3-R03 is the sole current empirical. SGSP, RCLE, ONLGR, VNFC and exact
+SCDMP checkpoint work remain no-current. No vacancy, backfill, WIP/order,
+fusion, cross-`N×k`, second-surface or UAV action follows.
+
+## 2026-08-20 all-directions / three-UAV-entry portfolio adjudication
+
+The controlling owner record is
+`ALL_DIRECTIONS_UAV_ENTRY_PORTFOLIO_ADJUDICATION_20260820.md`. It preserves
+RISP-B3-R03 as the sole empirical investment and gives one explicit action to
+all six live families.
+
+- Continue RISP's exact result-blind panel; it remains a finite abstraction and
+  is not counted as UAV evidence or activity.
+- Replace SCDMP's generic definition with
+  `SCDMP-UAV-SUSPENDED-PAYLOAD-ORDER-VALUE-DEFINITION`, ending at Pro/Gemini,
+  EM intake, CM static feasibility and full cost.
+- Reopen ONLGR only through exact immutable HEADLAND-90 two-UAV host
+  construction and deterministic conformance. Return before calibration,
+  coordinates, empirical activity or lease.
+- Open `VNFC-UAV-BOUNDED-POST-CHURN-RECOVERY-DEFINITION` without reopening the
+  old full-graph exact-solver path; return a Pro-closed, EM-intaken,
+  CM-feasible and fully costed object before any build.
+- Keep SGSP CCA and RCLE CPC/no-within-CPC successors no-current under their
+  existing cost, identifiability and target-fact conditions.
+
+ONLGR, SCDMP and VNFC are exactly three formal UAV experiment entries at
+preactivity construction/definition layers. No UAV empirical activity,
+production, deployment, Stage B, relation assay, fusion, cross-`N×k` parent,
+second surface, WIP/order or automatic replacement is authorized. Each active
+stage returns independently at its named complete milestone.
+
+## Superseded/base 2026-08-20 ONLGR HEADLAND-90 post-construction empirical adjudication
+
+The controlling owner record is
+`ONLGR_HEADLAND90_POST_CONSTRUCTION_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260820.md`.
+Exact HEADLAND-90 construction/conformance is complete, technically accepted
+and EM-intaken without scientific activity. The frozen 37,847,040-tick panel
+now projects 3.64–4.71 raw CPU-hours and 10.91–14.13 CPU-hours at the 3×
+reserve, with 3–5 focused engineer-weeks remaining.
+
+Portfolio invests `ONLGR-HEADLAND90-R03-CAL-HOLD-FULL-PANEL`: exact
+compiler/math/source/schema freeze, mandatory batched C++ with no Python
+fallback, fresh CAL/HOLD coordinates, later Root lease, the complete 9,856-
+controller-replicate atomic panel, CM acceptance, EM intake and same-Pro
+convergence. No partial interpretation, search, retuning or wall-time stop is
+allowed.
+
+Current empirics are RISP-B3-R03 and ONLGR HEADLAND-90. SCDMP/VNFC remain
+definition-only; SGSP/RCLE and the old SCDMP/VNFC routes remain no-current.
+ONLGR is the sole UAV empirical activity. No production, deployment, another
+surface, fusion, Stage B, WIP/order or automatic successor is authorized.
+
+## Superseded/base 2026-08-20 SCDMP UAV r02 native-construction adjudication
+
+The controlling owner record is
+`SCDMP_UAV_SP_R02_NATIVE_CONSTRUCTION_PORTFOLIO_ADJUDICATION_20260820.md`.
+Exact `SCDMP-UAV-SP-ORDER-VALUE-SCIENCE-20260820-02` is Pro `CLOSED`,
+EM-intaken and CM-statically accepted. Its direct fixed-three-UAV external-`k`
+question, strict-containing `FREE-DIRECT`, tied `REVERSED`, competent
+order-insensitive `SET-FREE`, direct endpoints and exhaustive result map are
+complete; no source or empirical activity occurred.
+
+Portfolio invests only in
+`SCDMP-UAV-SP-R02-NATIVE-CONSTRUCTION-AND-CONFORMANCE`. The same SCDMP pair may
+implement/register the exact task-specific full reset-to-terminal C++ batch
+component, deterministic conformance fixtures and fail-closed
+`require_cpp_batched_production` guard with no Python fallback. Existing generic
+or ONLGR hosts cannot substitute for the exact task. Complete technical
+acceptance and remaining empirical cost return before any empirical decision.
+
+Current empirics remain RISP-B3-R03 and ONLGR HEADLAND-90. VNFC remains
+definition-only. SCDMP identities, coordinates, model/checkpoints, rollouts,
+training, evaluation, empirical lease, Stage B, relation assay, second surface,
+production, deployment and flight remain unauthorized. No WIP/order, quota,
+backfill or fusion action follows.
+
+## Superseded/base 2026-08-20 SCDMP UAV r02 post-construction empirical adjudication
+
+The controlling owner record is
+`SCDMP_UAV_SP_R02_POST_CONSTRUCTION_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260820.md`.
+Exact SCDMP task-specific ABI-v2 native construction/conformance is technically
+accepted, immutable and consumed without empirical activity.
+
+Portfolio invests `SCDMP-UAV-SP-R02-FULL-EMPIRICAL-PANEL`: unchanged-science
+model/trainer/runner/support/evaluation/statistics acceptance, fresh master and
+disjoint replicate domains, a later Root lease, 124,416 AdamW steps, 54
+checkpoints and the complete atomic panel bounded by 62,363,520 primitive
+slots, followed by CM acceptance, EM intake and same-Pro convergence. The
+accepted task-specific C++ batch host is mandatory with no Python fallback.
+
+Current empirics are RISP-B3-R03, ONLGR HEADLAND-90 and SCDMP UAV r02. VNFC
+remains definition-only. No partial interpretation, search, coordinate reuse,
+wall-time stop, Stage B, relation assay, second surface, production, deployment
+or flight is authorized. Every complete result returns to Portfolio.
+
+## Superseded/base 2026-08-20 VNFC BPCR r09 native-construction adjudication
+
+The controlling owner record is
+`VNFC_BPCR_R09_NATIVE_CONSTRUCTION_PORTFOLIO_ADJUDICATION_20260820.md`.
+Exact `VNFC-BPCR-SCIENCE-20260820-09` is Pro `CLOSED`, EM-intaken and
+CM-statically accepted without source or scientific activity. One shared
+`MAPR-4` policy trains at post-loss `N={3,5}` and is frozen at held-out
+post-loss `N=7`, against behaviorally active strict-containing
+`DIRECT-SET-AR` and bounded `BCRH-PERSIST` on direct first-sixty-second
+failed-zone service.
+
+Portfolio invests only
+`VNFC-BPCR-R09-NATIVE-CONSTRUCTION-AND-CONFORMANCE`. The same VNFC pair may
+implement the exact C++ batched host and command law, MAPR/DIRECT containment,
+association cut, BCRH scorer plus independent checker, corrected finite sign-
+flip inference, deterministic fixtures and atomic evidence lifecycle. The
+route must fail closed through `require_cpp_batched_production`; no scalar
+Python environment/action loop or fallback is allowed.
+
+The complete path is projected at 61–93 focused engineer-days and 200–1,500
+CPU core-hours. This material purchase is justified because it is the only
+current direct held-out-variable-`N` UAV route and revision 09 removes the old
+unbounded full-graph tail. It is not justified by the three-UAV count, a free
+slot, missing code or idle compute.
+
+Current empirics remain RISP-B3-R03, ONLGR HEADLAND-90 and SCDMP UAV r02.
+There is no current definition-only line. VNFC master/replicate identities,
+coordinates, learned model, training, checkpoints, evaluation, empirical
+panel and lease remain unauthorized until construction acceptance and a new
+Portfolio decision. SGSP/RCLE, old SCDMP checkpoint work and old VNFC full-
+graph work remain no-current. No quota, backfill, WIP/order, fusion, surface,
+production, deployment or flight action follows.
+
+## Superseded/base 2026-08-21 VNFC BPCR r09 post-construction empirical adjudication
+
+The controlling owner record is
+`VNFC_BPCR_R09_POST_CONSTRUCTION_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260821.md`.
+Exact VNFC observation-conditioned ABI-1 native construction/conformance is
+technically accepted, immutable and consumed without empirical activity.
+
+Portfolio invests `VNFC-BPCR-R09-FULL-EMPIRICAL-PANEL`: refresh/reaccept the
+shared native-boundary wording, freeze the exact unchanged-science
+MAPR/DIRECT/CUT/BCRH/trainer/runner/inference pipeline, bind fresh sixteen-
+replicate identities and disjoint coordinates, issue a later Root lease, and
+complete the indivisible atomic panel followed by CM acceptance, EM intake and
+same-Pro convergence. The accepted C++ batch host and
+`require_cpp_batched_production` are mandatory with no Python fallback.
+
+The remaining 24–38 engineer-day / 200–1,500 CPU-hour purchase is material but
+justified because this is the only current direct UAV held-out-variable-`N`
+route. Its maximum result is one exact finite two-zone, one-loss,
+train-`N={3,5}` to held-out-`N=7` recovery package and separately qualified
+association statement. No arbitrary `N`, repeated churn, global optimality,
+hardware, safety, production, deployment or flight claim follows.
+
+Current empirics are RISP-B3-R03, ONLGR HEADLAND-90, SCDMP UAV r02 and VNFC
+BPCR r09. Construction and definition-only sets are empty. No partial
+interpretation, replacement, retuning, search, coordinate reuse, wall-time
+stop, quota, backfill, WIP/order, fusion, second surface, production,
+deployment or flight is authorized. Every complete result returns to Portfolio.
+
+## 2026-08-21 VNFC BPCR r09 BCRH evidence-complexity policy exception
+
+The controlling owner record is
+`VNFC_BPCR_R09_EVIDENCE_COMPLEXITY_POLICY_EXCEPTION_PORTFOLIO_ADJUDICATION_20260821.md`.
+VNFC r09 empirical investment continues under one exact-object,
+nonprecedential exception for the frozen `BCRH-PERSIST` scorer and independent
+checker.
+
+BCRH may enumerate at most 1,961 currently legal commands at each of exactly
+six real boundaries, follow one deterministic nonbranching persistent tail per
+command and repeat the pass in the independent checker. The ceiling is
+4,415,000 logical operations per decision and 27,715,520,000 total registered
+BCRH logical operations, inside the unchanged 24–38 engineer-day and
+200–1,500 CPU-hour full-path envelope.
+
+The exception is scientifically justified because BCRH is the strongest fixed-
+`N=7` nonlearned physical reference. Replacing it with a selected sixteen-
+candidate menu could weaken the baseline and introduce a new candidate-
+generation assumption. BCRH is not the scalable learned algorithm and gains
+no arbitrary-`N`, runtime, deployment or policy-precedent status.
+
+Before identity or lease, CM must accept one zero-coordinate certificate
+binding the candidate/boundary/tail/operation/cost ceilings and proving absence
+of recursive or branching search. No truncation, sampling, weakened comparator,
+gate/branch change or old-route reuse is allowed. Once accepted, the already
+authorized fresh identities, later lease and complete atomic panel continue
+without another Portfolio gate. All other current actions remain unchanged.
+
+## 2026-08-21 SCDMP UAV r02 and ONLGR HEADLAND-90 r03 post-result cut
+
+The controlling owner record is
+`SCDMP_UAV_SP_R02_ONLGR_HEADLAND90_R03_POST_RESULT_PORTFOLIO_ADJUDICATION_20260821.md`.
+
+Exact SCDMP UAV r02 is complete and consumed under
+`DIRECT-UAV-ORDER-VALUE-NONIDENTIFIED`. Its physical order opportunity and
+action sensitivity passed, but TREAT, FREE and SET all failed the registered RG
+competence conjunction. This supports exact-panel nonidentification only, not a
+positive, negative, equality, null or family-deletion claim. SCDMP receives no
+current investment because another immediate checkpoint or competence repair
+would not yet be a direct variable-`k`/UAV family discriminator. Revisit
+requires a materially new target-bound order-value object with an independently
+competent shared controller or one frozen treatment-independent competence
+prerequisite, direct endpoints, strict containment, fresh coordinates and full
+cost.
+
+Exact ONLGR HEADLAND-90 r03 is complete and consumed under
+`GLOBAL_VOLUNTARY_ACTION_SUPPORT_FAILED`. GLOBAL, TWO, FLEX and both reciprocal
+controls all alias `theta-000`, take no voluntary update and have `q=0` in both
+route packages. The zero contrasts are alias identities, not timing nulls or
+fixed-rate sufficiency. The exact timing line receives no current investment.
+Revisit requires a materially new voluntary-update action that independently
+establishes supported non-harmful physical value over never updating before a
+separate route-package timing question.
+
+The current empirical set is RISP-B3-R03 and VNFC-BPCR-r09. VNFC's exact,
+nonprecedential BCRH exception remains unchanged. Both completed UAV stage
+envelopes are released; neither wider family is deleted. No rerun, repair menu,
+backfill, quota, WIP/order, fusion, second surface, production, deployment or
+flight follows.
+
+## 2026-08-21 RISP-B3 r03 post-result reachability-definition cut
+
+The controlling owner record is
+`RISP_B3_R03_POST_RESULT_REACHABILITY_DEFINITION_PORTFOLIO_ADJUDICATION_20260821.md`.
+
+Exact RISP-B3 r03 is complete and consumed under
+`G_EXPLOITABLE_BUT_MATCHED_VALUE_NONIDENTIFYING`. The complete valid panel shows
+that fixed `G` is physically exploitable in the exact finite package, but the
+zero-start containing recurrence missed the prospectively registered
+intact-minus-uniform answerability floor at `k=4`, `k=8` and `TARGET`. The
+maximum claim is fixed-G exploitability plus matched-value nonidentification;
+there is no learned G-prior, recurrence/lineage value, harm, deletion,
+arbitrary-`k`, UAV or deployment claim.
+
+Portfolio consumes the empirical stage and invests only in
+`RISP-G-INITIALIZATION-REACHABILITY-DEFINITION`. The new object must compare
+`G-START/ZERO-CENTER` with `ZERO-START/ZERO-CENTER`, identical elsewhere, and
+freeze prospective answerability branches, fresh future coordinates, maximum
+claim and full cost. It proceeds only through same-Pro closure, EM intake and CM
+static feasibility/cost. No empirical source, identity, coordinate, training,
+evaluation, lease, sign-reversed center, second surface or UAV action is
+authorized.
+
+VNFC-BPCR-r09 is now the sole empirical investment and retains its exact-object
+BCRH exception. No automatic successor, vacancy, backfill, quota, WIP/order,
+fusion, production, deployment or flight follows.
+
+## 2026-08-21 base residual-value continuation and autonomous-experiment-authority cut
+
+This allocation snapshot is superseded by the RISP r01 empirical cut below;
+its semantic correction and standing object-specific decision authority remain
+operative. The controlling base record is
+`RESIDUAL_VALUE_CONTINUATION_AND_AUTONOMOUS_EXPERIMENT_AUTHORITY_PORTFOLIO_ADJUDICATION_20260821.md`.
+It supersedes the preceding RISP-only definition allocation while preserving
+every exact result and claim boundary.
+
+The user authorizes the dedicated Portfolio owner to keep cross-direction
+discovery active and to issue later object-specific HMASD definition,
+construction and empirical decisions without a repeated user-confirmation
+turn. `No-current`, `closed`, `consumed` and `NONE_WITHIN_CURRENT_*` now fence
+only the named exact object/formulation. They do not block wider-family
+discovery or a materially new definition-only object.
+
+Current empirical investment remains only
+`VNFC-BPCR-R09-FULL-EMPIRICAL-PANEL`. Current definition-only investments are:
+
+- `RISP-G-INITIALIZATION-REACHABILITY-DEFINITION`;
+- `SCDMP-TARGET-BOUND-COMPETENT-CONTROLLER-ORDER-VALUE-DEFINITION`;
+- `ONLGR-TARGET-BOUND-VOLUNTARY-UPDATE-UTILITY-SCREEN-DEFINITION`;
+- `SGSP-LOW-WORK-TARGET-BOUND-PHYSICAL-PRIOR-VALUE-DEFINITION`; and
+- `RCLE-TARGET-BOUND-COMMITMENT-FRAGMENTATION-VALUE-DEFINITION`.
+
+Each definition line proceeds only through meaning-complete EM card,
+direction-specific Pro closure, optional independent Gemini advisory, EM
+intake, CM static feasibility and full prospective cost. The already-running
+pairs continue unchanged through their current exact milestone. Thereafter
+Portfolio creates/reuses EMs and their scientific provider work; Operational
+Root creates/reuses CMs and manages engineering/leases. No construction,
+identities, coordinates, training, evaluation or lease is authorized by this
+cut.
+
+After a complete object-specific packet, Portfolio may independently authorize
+construction or empirical work without another user turn; Operational Root
+still must receive the explicit packet and retains CM, shared-resource, lease,
+compute and Git authority. Production/deployment, safety
+certification and real-flight activity remain outside this standing authority.
+
+Old exact RISP, SCDMP, ONLGR, SGSP and RCLE objects remain immutable and may not
+be rerun or repaired. No direction count, vacancy/backfill, WIP/order,
+first-result-wins, fusion, second-surface or production rule follows.
+
+## 2026-08-21 RISP r01 reachability empirical cut
+
+The controlling owner decision is
+`RISP_G_INIT_REACH_R01_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260821.md`.
+The exact `RISP-G-INIT-REACH-SCIENCE-20260821-01` definition is complete,
+Pro `CLOSED`, EM-intaken, CM-statically accepted and fully costed. Portfolio
+invests `RISP-G-INIT-REACH-R01-FULL-PANEL`.
+
+This purchase is justified because r03 established a usable fixed-`G` region
+while its equal-function-class zero-start containing recurrence did not
+establish answerability. R01 changes only recurrent initialization, fixes zero
+decay center in both arms and has four exhaustive branches that retain, delete
+or close the next RISP route. Its projected 40–64 engineer-hours and 18–26
+one-thread CPU-hours are proportionate to that branch-dividing information.
+
+The exact purchase is sixteen fresh paired seeds, two learned arms, 512
+updates, five schedules, four evaluation cells, 262,144 training plus 20,480
+evaluation two-agent episodes and 352 atomic units. Only update 512 and the
+complete `Psi=(B_G,B_0)` reduction carry conclusions. Partial evidence,
+search, replacement, retuning, coordinate reuse and wall-time scientific stops
+are forbidden.
+
+The maximum claim is finite-package initialization-dependent answerability/
+reachability at `k=4`, `k=8` and `TARGET`. No learned G-prior or recurrence
+value, ACK semantics, arbitrary-`k`/`N`, UAV, safety, deployment or production
+claim follows. R03 rerun, checkpoint transplant, sign-reversed center and any
+semantic/value successor remain unauthorized.
+
+Current empirics are VNFC-BPCR-r09 and RISP r01. SCDMP, ONLGR, SGSP and RCLE
+remain independently active at definition-only. Portfolio owns the prospective
+RISP EM and result interpretation; Operational Root owns the CM, construction,
+later lease, runtime and technical acceptance. No other allocation changes.
+
+## 2026-08-21 ONLGR r03 voluntary-update utility empirical cut
+
+The controlling owner decision is
+`ONLGR_TBVUUS_R03_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260821.md`.
+Exact `ONLGR-TBVUUS-SCIENCE-20260821-03` is Pro `CLOSED`, EM-intaken,
+CM-statically accepted and fully costed. Portfolio invests
+`ONLGR-TBVUUS-R03-FULL-PANEL`.
+
+This is not a retry of the completed HEADLAND timing experiment. It removes
+timing/rate and tests one fixed-`t=0` ROAD target-state patch against NEVER,
+matched SHAM and descriptive RAW. Complete action/effective-payload support,
+NEVER competence, hard non-harm, mean/tail net utility and matched-shell
+payload utility are prospectively required. Only the fully qualifying branch
+may make a separately frozen timing definition eligible.
+
+The purchase is exactly four arms, 128 fresh paired replicates, 512 controller-
+replicates, 20,480 encounters, 1,966,080 ticks and 5,120 ROAD/RAW/SHAM shells
+each. Exact-stage native C++ construction, no Python production fallback and a
+full B=1/8/32 end-to-end efficiency/equivalence review precede fresh production
+coordinates and the later Root lease.
+
+Projected cost is 7–10 engineer-days, 3–7 CPU hours, 1–2 post-readiness panel
+wall-hours, at most 4 GiB RSS and 4 GiB storage. The maximum claim is local to
+the exact analytic fixed-`t=0` ROAD-patch package; no timing/rate, repeated
+action, arbitrary-`k`/`N`, aircraft, safety, deployment or production claim
+follows.
+
+Current empirics are VNFC, RISP r01 and ONLGR TBVUUS r03. SCDMP, SGSP and RCLE
+remain independently definition-only. Portfolio owns the new ONLGR EM and
+result interpretation; Operational Root owns CM construction, efficiency,
+coordinates, lease, runtime and technical acceptance. No other allocation
+changes.
+
+## 2026-08-21 SGSP RSCF r01 Gate-A native-construction cut
+
+The controlling owner decision is
+`SGSP_RG2Z_RSCF_R01_GATE_A_NATIVE_CONSTRUCTION_PORTFOLIO_ADJUDICATION_20260821.md`.
+Exact `SGSP-RG2Z-RSCF-SCIENCE-20260821-01` is Pro `CLOSED`, EM-intaken,
+CM-statically accepted, fully costed and preactivity. Portfolio consumes the
+definition and purchases only
+`SGSP-RG2Z-RSCF-R01-GATE-A-NATIVE-HOST-LOADER-ORACLE-BENCHMARK`.
+
+RSCF preserves the matched direct variable-`N` question while reducing CCA's
+logical workload by about 38x. Its full 24–41 workday engineering envelope is
+not materially below CCA, so Gate A tests the decisive implementation premise
+before any production runner: exact native/oracle full-suffix equivalence and
+at least 2x paired warm end-to-end suffix speed at one width selected from
+`32|64|128|256`.
+
+Gate A includes only the source-keyed C++17 CPU suffix host, fail-closed
+loader/cache, deterministic TEST-only Python oracle and result-blind benchmark.
+A conformance or speed failure leaves the runner unwritten and supplies no
+negative SGSP evidence. A pass makes only a separately costed runner/Gate-B
+decision eligible.
+
+Production-runner source, Gate B, scientific selectors/seeds/coordinates,
+models, checkpoints, training/evaluation, empirical lease/panel, r03/CCA
+reuse, second surface and UAV activity remain unauthorized. Current empirics
+remain VNFC, RISP r01 and ONLGR utility r03; SCDMP and RCLE remain
+definition-only. SGSP is the sole enabling-construction line. No other
+allocation changes.
+
+## 2026-08-21 RISP r01 expanded-resource continuation cut
+
+The controlling owner decision is
+`RISP_G_INIT_REACH_R01_NATIVE_RESOURCE_CONTINUATION_PORTFOLIO_ADJUDICATION_20260821.md`.
+Candidate-local native functional conformance is accepted for shared
+preadmission; shared registry acceptance, guard integration, final full-chain
+efficiency acceptance and lease readiness remain Operational-CM work. No
+scientific activity or result exists.
+
+Portfolio continues the exact unchanged RISP r01 empirical investment. The
+representative two-worker projection is 29.92 CPU-hours and 20.48 wall-hours,
+about 15.1% above the old CPU ceiling while wall remains inside the old band.
+Every valid `Psi` branch still changes a concrete finite-package continuation,
+so the expanded cost remains proportionate.
+
+After final CM acceptance, Root may issue the ordinary lease without another
+Portfolio gate when the projection remains at most two workers/two cores, no
+GPU, 32 CPU-hours, 24 wall-hours, one GiB per worker and 1.5 GiB for the
+process group. Lease slices cannot stop or consume the panel; CM preserves one
+blinded atomic frontier until all 352 units are complete.
+
+No panel, precision, replay, threshold or science change is authorized. SGSP
+Gate A and every other current action remain unchanged.
+
+## 2026-08-21 RCLE TBCFV r04 native-first construction cut
+
+The controlling owner record is
+`RCLE_TBCFV_R04_NATIVE_FIRST_CONSTRUCTION_PORTFOLIO_ADJUDICATION_20260821.md`.
+Exact r04 is definition-complete, Pro `CLOSED`, Portfolio-EM-intaken and
+CM-statically accepted, with no scientific activity.
+
+Portfolio invests only the target-specific native-first construction and
+result-blind benchmark. The scientific reason is direct held-out variable-`N`
+value: one shared parameterization trains at `N={6,10}` and faces active
+`8->12/12->8` churn with physical recovery/unserved-demand endpoints against a
+literal strict-containing FLEX controller. Independent prerequisites and the
+complete 72-tail result map bound every later interpretation.
+
+The 22–39 engineer-day construction and projected 80–180 CPU-hour later panel
+are material but proportionate to this answer-changing object. Construction
+first freezes the exact C++ host, TEST-only oracle, fail-closed loader/ABI and
+shared registration, package/analyzer/resume conformance, and full-chain
+performance/resource measurements before identities exist.
+
+No empirical runner, coordinate, identity, model, checkpoint, training,
+evaluation, result or lease is authorized. Technical acceptance returns for a
+new empirical decision. Exact CPC remains complete/no-current, and no WIP,
+backfill, second-surface, UAV or deployment action follows.
+
+## 2026-08-21 SGSP RSCF r01 runner/Gate-B construction cut
+
+The controlling owner record is
+`SGSP_RSCF_R01_RUNNER_GATE_B_PORTFOLIO_ADJUDICATION_20260821.md`. Gate A is
+technically complete and consumed: every tested width and concurrency matched
+the oracle exactly, and warm suffix speedups were 13.2x–24.8x against the
+frozen 2x gate. These are engineering facts only.
+
+Portfolio invests the next preactivity runner/Gate-B stage. It must establish
+full prefix carriage, arm-independent selectors, immutable snapshots, factual
+autograd and stopped targets, accepted native transfer, literal PHY-within-EDGE
+matching, analyzers, atomic frontier/resume, evaluation consumers and complete
+1/2/4-worker full-chain resource measurements.
+
+The stage is justified because the direct train-`N={9,15}` to held-out-
+`N={6,21}` value question remains answer-changing and Gate A removed its native
+suffix risk by a wide margin. The old 24–41-workday / 120–500-CPU-hour range
+remains unresolved until Gate B measures the whole pipeline.
+
+No scientific identity, coordinate, model initialization, training,
+evaluation, result or lease is authorized. A technically accepted Gate B
+returns for a distinct empirical decision; RCLE and every other current action
+continue independently.
+
+## 2026-08-21 SCDMP TBCC revision-02 native-first construction cut
+
+The controlling owner record is
+`SCDMP_TBCC_R02_NATIVE_FIRST_CONSTRUCTION_PORTFOLIO_ADJUDICATION_20260821.md`.
+Exact r02 is definition-complete, Pro `CLOSED`, Portfolio-EM-intaken and
+CM-statically accepted with no scientific activity or question-relevant
+output.
+
+Portfolio invests only native-first construction and result-blind benchmark.
+The direct project value is one shared parameterization across training
+`k={5,11}` and held-out fixed/switch `7/13`, with foundation competence and a
+full-mission order-opportunity gate before any adapter exists. FOUNDATION,
+strict-containing FREE, tied REVERSED and matched SET bound later incremental
+value, orientation, capacity and order-insensitive alternatives.
+
+The 24–40 engineer-day construction and projected 80–240 CPU-hour complete
+path are material. Construction first creates and measures the exact
+candidate-local C++ host, source-keyed loader, TEST-only oracle, target/event/
+public-alias/endpoints, prerequisite/control conformance, widths
+`1/8/12/32/120/144`, deterministic `1/2/4`-worker equivalence and atomic
+resume. This converts the forecast before empirical identities exist.
+
+No empirical master, coordinate, model, checkpoint, competence/opportunity
+panel, final evaluation, result or heavy lease is authorized. A technically
+accepted construction returns for a separate empirical decision. Earlier
+SCDMP objects, relation assay, Stage B, second surface, deployment and flight
+remain no-current.
+
+The active SGSP runner/Gate-B object has also received a non-revision science
+clarification: frozen r03 Section 6.4 and r01 Sections 8–10 uniquely determine
+the twelve support-slack rows, positive signs, paired two-sided `0.05/28`
+intervals, lower-endpoint gates and branch precedence. Existing r01 and Pro
+`CLOSED` remain controlling; Root relays the exact EM artifact to CM and Gate B
+continues without a new provider turn or empirical authority.
+
+## 2026-08-21 RCLE TBCFV r04 full empirical cut
+
+The controlling owner record is
+`RCLE_TBCFV_R04_POST_CONSTRUCTION_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260821.md`.
+Native construction, exact package/containment/analyzer conformance, atomic
+resume and full-chain measurement are technically accepted and consumed with
+no scientific output.
+
+Portfolio invests one complete `RCLE-TBCFV-R04-FULL-EMPIRICAL-PANEL`. It
+directly tests one shared policy trained at `N={6,10}` on held-out active
+`8->12`/`12->8` churn, with recovery time and integrated unserved demand,
+after independent opportunity, coherent-scaffold and competent-containing-
+FLEX gates. The 72-tail/twelve-branch map can retain, narrow or delete the exact
+package without a post-result arm, seed, threshold or checkpoint choice.
+
+The measured purchase is 24.049 CPU core-hours, 2.220–8.861 elapsed hours with
+up to four equivalence-preserving workers and 3–6 remaining engineer-days.
+This is materially below the former envelope and proportionate to direct
+variable-`N` value. It does not order, displace or pause another direction.
+
+The authorization covers runner preflight, one fresh 20-block coordinate
+family, later Operational-Root lease, all five learned arms, three scripted
+packages, every cell/count, atomic completion, technical acceptance,
+Portfolio-EM intake and same-Pro result convergence. No additional runner or
+lease Portfolio gate applies.
+
+Wall duration, worker loss, attempt label or lease slice cannot scientifically
+stop the panel. After activity, CM preserves the same blinded coordinates and
+resumes across Root-issued slices until the complete result exists. CPC rescue,
+partial interpretation, second surface, UAV simulation, deployment, hardware
+and flight remain unauthorized.
+
+## 2026-08-21 RISP r01 process-group memory continuation cut
+
+The controlling record is
+`RISP_G_INIT_REACH_R01_PROCESS_GROUP_MEMORY_CONTINUATION_PORTFOLIO_ADJUDICATION_20260821.md`.
+RISP remains an empirical investment. Slice 0001 began activity on the one
+frozen coordinate but left all 352 atomic units uncommitted and exposed no
+partial result; only the 1.5-GiB process-group guard fired.
+
+Portfolio changes that lease field alone to 2.5 GiB. All individual-worker,
+CPU, wall, worker/core, GPU, storage, treatment, coordinate and inference
+conditions remain fixed. Root resumes the same blinded frontier under a
+revised lease. The resource event has no scientific branch meaning and cannot
+stop, rerun or replace the experiment.
+
+## 2026-08-21 SCDMP TBCC r02 full empirical-panel investment cut
+
+The controlling record is
+`SCDMP_TBCC_R02_FULL_EMPIRICAL_PANEL_PORTFOLIO_ADJUDICATION_20260821.md`.
+Candidate construction, exact Stage-1b `Q/D/S`, result-blind efficiency and
+shared native registration are technically accepted. Portfolio therefore
+invests in the unchanged Pro-closed direct fixed/switch external-`k` empirical
+chain rather than leaving a completed construction without a value test.
+
+CM next constructs and accepts only the production runner, analyzer and atomic
+frontier. After preactivity technical/efficiency acceptance it binds one fresh
+disjoint blinded identity/coordinate family; Operational Root may then issue a
+direction-scoped CPU lease for one complete prerequisite-dependent realized
+path. The packet itself starts no activity. Stage B, old-object reuse, search,
+partial interpretation, second surface, deployment and flight remain forbidden.
+
+## 2026-08-21 ONLGR TBVUUS r03 post-result cut
+
+The controlling record is
+`ONLGR_TBVUUS_R03_POST_RESULT_PORTFOLIO_ADJUDICATION_20260821.md`. Canonical
+`RESULT_V2`, Portfolio-owned EM intake and the same ONLGR Pro conversation have
+converged. The exact result is valid, supported, comparator-competent and hard-
+nonharmful, but reaches `VALID_ROAD_PATCH_DIRECT_UTILITY_NONPASS`.
+
+ROAD loses `0.0477832` mean service and `0.0463379` lower-tail service versus
+competent NEVER. Against matched SHAM, its estimator payload recovers only
+`0.00107178` mean and `0.00197754` tail, far below the frozen margins. The
+strongest explanation is that the competent BOOT estimate is already effective
+at the synchronized `t=0` action, while the shell blackout and buffer clear
+produce almost all net cost; ROAD mainly prevents the exact RAW patch's severe
+degradation.
+
+Portfolio records the exact ROAD-PATCH family complete/immutable/consumed and
+assigns it no current investment. Its predeclared timing successor is
+ineligible; no rerun, retune, alternate action time, shell, estimator or
+same-coordinate rescue is authorized. Broader ONLGR discovery remains open
+only for a fresh direct-value object independently motivated by a materially
+different update mechanism, degraded-incumbent failure regime or target-
+critical variable-`k` component.
+
+Current empirics are VNFC BPCR r09, RISP G-init r01, RCLE TBCFV r04 and SCDMP
+TBCC r02. SGSP RSCF runner/Gate B remains enabling construction. ONLGR closure
+creates no vacancy, quota, backfill, WIP/order, fusion, surface, deployment or
+flight action.
+
+## 2026-08-21 current classification and residual-definition cut
+
+The controlling record is
+`CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md`.
+The current portfolio contains two empirical objects, one enabling
+construction and three definition-only investments. These are scientific-stage
+classes, not a direction quota, WIP cap, execution order or count target.
+
+The two empirics are RISP G-init r01 and RCLE TBCFV r04. SGSP RSCF r01 remains an enabling runner/Gate-B construction
+whose accepted output returns for an empirical invest/no-current decision.
+VQFP-FERL r04, the independent DISH r05 external-`k` shadow-handover direction,
+and VNFC-PCPI r02 are definition-only research under Portfolio-owned EMs. No
+definition grants CM construction, coordinates, a lease or empirical activity.
+
+There is no current direct UAV empirical. `ONLGR|SCDMP|VNFC` is a historical
+formal-entry catalog, not a current portfolio or runtime count. DISH is a
+prospective UAV definition and RCLE is not a UAV claim. Operational batching of
+three commands therefore has no scientific-routing meaning.
+
+SCDMP TBCC r02 and VNFC BPCR r09 are complete, immutable and no-current under
+their separate accepted results. Their earlier native/shared-host and lease
+records are consumed technical history, not current allocation or bridge
+authority.

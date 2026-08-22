@@ -10,6 +10,7 @@ from envs.pettingzoo.relay.channel_geometry import RelayChannelGeometry
 from envs.pettingzoo.uav_cpp_backend import (
     DEFAULT_FORCED_RELAY_GEOMETRY_BACKEND,
     VALID_RELAY_GEOMETRY_BACKENDS,
+    compute_relay_radio_batch,
     step_relay_geometry_batch,
 )
 try:
@@ -1980,6 +1981,9 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
         """
         重写父类方法，使用场景4的精确信道模型计算SINR
         """
+        retained = self._retained_radio()
+        if retained is not None:
+            return float(retained["radio"].access_sinr[0, uav_idx, user_idx])
         uav_pos = self.uav_positions[uav_idx]
         user_pos_3d = self.user_positions[user_idx]  # 现在用户位置已经是三维的
         
@@ -2110,6 +2114,23 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
             str(getattr(self, "environment_type", "urban")),
         )
 
+    def _relay_radio_signature(self):
+        """Return every scalar/count consumed by the retained radio tensor."""
+
+        return (
+            float(self.tx_power),
+            float(self.ground_bs_tx_power),
+            float(self.noise_power),
+            float(self.carrier_frequency),
+            bool(self.use_fdma),
+            float(self.aclr_linear),
+            float(self._compute_interference_radius()),
+            str(getattr(self, "environment_type", "urban")),
+            int(self.n_uavs),
+            int(self.n_users),
+            int(self.n_ground_bs),
+        )
+
     def _refresh_relay_geometry_state(self):
         result = step_relay_geometry_batch(
             backend=self.relay_geometry_backend,
@@ -2132,6 +2153,7 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
         )
         self._relay_geometry_state = {
             "config": self._relay_geometry_signature(),
+            "radio_config": self._relay_radio_signature(),
             "uav_positions": np.asarray(self.uav_positions).copy(),
             "user_positions": np.asarray(self.user_positions).copy(),
             "ground_bs_positions": np.asarray(self.ground_bs_positions).copy(),
@@ -2139,6 +2161,28 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
             "air_path_loss": np.ascontiguousarray(result.air_path_loss[0]),
             "base_path_loss": np.ascontiguousarray(result.base_path_loss[0]),
         }
+        self._relay_geometry_state["radio"] = compute_relay_radio_batch(
+            backend=self.relay_geometry_backend,
+            uav_positions=np.ascontiguousarray(
+                np.asarray(self.uav_positions, dtype=np.float64)[None, ...]
+            ),
+            user_positions=np.ascontiguousarray(
+                np.asarray(self.user_positions, dtype=np.float64)[None, ...]
+            ),
+            ground_bs_positions=np.ascontiguousarray(
+                np.asarray(self.ground_bs_positions, dtype=np.float64)[None, ...]
+            ),
+            access_path_loss=np.ascontiguousarray(result.access_path_loss),
+            air_path_loss=np.ascontiguousarray(result.air_path_loss),
+            base_path_loss=np.ascontiguousarray(result.base_path_loss),
+            uav_tx_power_dbm=float(self.tx_power),
+            ground_bs_tx_power_dbm=float(self.ground_bs_tx_power),
+            noise_power_dbm=float(self.noise_power),
+            interference_radius=float(self._compute_interference_radius()),
+            use_fdma=bool(self.use_fdma),
+            aclr_linear=float(self.aclr_linear),
+            exclude_receiver_uav=False,
+        )
 
     @staticmethod
     def _geometry_position_index(positions, position):
@@ -2148,6 +2192,28 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
     def _retained_geometry(self):
         retained = getattr(self, "_relay_geometry_state", None)
         if retained is None or retained["config"] != self._relay_geometry_signature():
+            return None
+        return retained
+
+    def _retained_radio(self):
+        retained = self._retained_geometry()
+        if (
+            retained is None
+            or "radio" not in retained
+            or retained.get("radio_config") != self._relay_radio_signature()
+        ):
+            return None
+        if (
+            bool(getattr(self, "_retained_radio_validation_active", False))
+        ):
+            return retained
+        if (
+            not np.array_equal(retained["uav_positions"], self.uav_positions)
+            or not np.array_equal(retained["user_positions"], self.user_positions)
+            or not np.array_equal(
+                retained["ground_bs_positions"], self.ground_bs_positions
+            )
+        ):
             return None
         return retained
 
@@ -2209,10 +2275,10 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
         """
         self._refresh_relay_geometry_state()
 
-        # 计算所有UAV-用户对的SINR
-        for i in range(self.n_uavs):
-            for j in range(self.n_users):
-                self.sinr_matrix[i, j] = self._compute_sinr(i, j)
+        # The fused native tensor is an exact stateless replacement for the
+        # deterministic per-pair radio loops. Lifecycle and connection objects
+        # remain Python-owned below.
+        self.sinr_matrix[...] = self._relay_geometry_state["radio"].access_sinr[0]
 
         # 记录旧的连接状态，用于切换统计
         old_connections = self.connections.copy()
@@ -2437,6 +2503,11 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
         """
         使用场景4的精确信道模型计算UAV到UAV的SINR
         """
+        retained = self._retained_radio()
+        if retained is not None:
+            return float(
+                retained["radio"].air_sinr[0, sender_idx, receiver_idx]
+            )
         sender_pos = self.uav_positions[sender_idx]
         receiver_pos = self.uav_positions[receiver_idx]
         
@@ -2805,6 +2876,20 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
 
 
     def _get_observation(self, agent):
+        """Materialize one view under one exact retained-radio validation."""
+        retained = self._retained_radio()
+        if retained is None:
+            return self._get_observation_cached_body(agent)
+        previous = bool(
+            getattr(self, "_retained_radio_validation_active", False)
+        )
+        self._retained_radio_validation_active = True
+        try:
+            return self._get_observation_cached_body(agent)
+        finally:
+            self._retained_radio_validation_active = previous
+
+    def _get_observation_cached_body(self, agent):
         """
         获取指定智能体基于通信能力的局部观测
         
@@ -3098,23 +3183,48 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
         else:
             return 0
         
-        # 计算距离
-        distance = self._compute_distance(pos1, pos2)
-        safe_distance = max(distance, 1e-6)
-        
+        retained = self._retained_radio()
+
         # 根据链路类型选择正确的路径损耗计算和发射功率
         if node1_type == "uav" and node2_type == "uav":
             # 空对空通信：UAV到UAV - 使用精确的A2A自由空间模型
-            path_loss = self._compute_air_to_air_path_loss(pos1, pos2)
+            path_loss = (
+                float(retained["air_path_loss"][node1_idx, node2_idx])
+                if retained is not None
+                else self._compute_air_to_air_path_loss(pos1, pos2)
+            )
             tx_power = self.tx_power  # 使用UAV发射功率
+            retained_sinr = (
+                float(retained["radio"].air_sinr[0, node1_idx, node2_idx])
+                if retained is not None
+                else None
+            )
         elif node1_type == "uav" and node2_type == "ground_bs":
             # 上行链路：UAV到地面基站 - 使用A2G模型
-            path_loss = self._compute_air_to_ground_path_loss(pos1, pos2)
+            path_loss = (
+                float(retained["base_path_loss"][node1_idx, node2_idx])
+                if retained is not None
+                else self._compute_air_to_ground_path_loss(pos1, pos2)
+            )
             tx_power = self.tx_power  # 使用UAV发射功率
+            retained_sinr = (
+                float(retained["radio"].uav_to_base_sinr[0, node1_idx, node2_idx])
+                if retained is not None
+                else None
+            )
         elif node1_type == "ground_bs" and node2_type == "uav":
             # 下行链路：地面基站到UAV - 使用G2A模型
-            path_loss = self._compute_ground_to_air_path_loss(pos1, pos2)
+            path_loss = (
+                float(retained["base_path_loss"][node2_idx, node1_idx])
+                if retained is not None
+                else self._compute_ground_to_air_path_loss(pos1, pos2)
+            )
             tx_power = self.ground_bs_tx_power  # 使用基站发射功率
+            retained_sinr = (
+                float(retained["radio"].base_to_uav_sinr[0, node2_idx, node1_idx])
+                if retained is not None
+                else None
+            )
         else:
             return 0  # 不支持的连接类型
         
@@ -3122,7 +3232,13 @@ class UAVForcedRelayEnv(ParallelEnv, RelayChannelGeometry):
         rx_power = tx_power - path_loss
         
         # 计算SINR (dB) - 考虑实际干扰情况
-        sinr_db = self._compute_link_sinr(node1_type, node1_idx, node2_type, node2_idx, rx_power)
+        sinr_db = (
+            retained_sinr
+            if retained_sinr is not None
+            else self._compute_link_sinr(
+                node1_type, node1_idx, node2_type, node2_idx, rx_power
+            )
+        )
         
         # 检查SINR是否满足最小阈值
         if sinr_db < self.min_sinr:

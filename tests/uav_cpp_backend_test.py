@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import os
+from contextlib import contextmanager
+import hashlib
 from pathlib import Path
 import subprocess
 import sys
@@ -183,6 +185,135 @@ def test_native_geometry_matches_independent_sequential_oracle_bitwise():
         assert np.array_equal(candidate, reference)
 
 
+def _radio_test_kwargs(
+    batch_width: int,
+    *,
+    exclude_receiver_uav: bool,
+    use_fdma: bool = True,
+    interference_radius: float = 1500.0,
+):
+    rng = np.random.default_rng(90210 + batch_width)
+    uavs = np.empty((batch_width, 8, 3), dtype=np.float64)
+    uavs[..., :2] = rng.uniform(0.0, 1000.0, size=(batch_width, 8, 2))
+    uavs[..., 2] = rng.uniform(50.0, 200.0, size=(batch_width, 8))
+    users = np.empty((batch_width, 30, 3), dtype=np.float64)
+    users[..., :2] = rng.uniform(0.0, 1000.0, size=(batch_width, 30, 2))
+    users[..., 2] = 1.5
+    bases = np.repeat(
+        np.array([[[0.0, 500.0, 0.0], [1000.0, 500.0, 0.0]]]),
+        batch_width,
+        axis=0,
+    )
+    geometry = backend.step_geometry_reference_batch(
+        uav_positions=uavs,
+        user_positions=users,
+        ground_bs_positions=bases,
+        prepared_velocities=np.zeros((batch_width, 8, 3), dtype=np.float32),
+        movable_mask=np.zeros((batch_width, 8), dtype=np.bool_),
+        time_step=1.0,
+        area_size=1000.0,
+        height_range=(50.0, 200.0),
+        carrier_frequency=2.0e9,
+        environment_type="urban",
+    )
+    return dict(
+        uav_positions=uavs,
+        user_positions=users,
+        ground_bs_positions=bases,
+        access_path_loss=geometry.access_path_loss,
+        air_path_loss=geometry.air_path_loss,
+        base_path_loss=geometry.base_path_loss,
+        uav_tx_power_dbm=30.0,
+        ground_bs_tx_power_dbm=40.0,
+        noise_power_dbm=-100.0,
+        interference_radius=interference_radius,
+        use_fdma=use_fdma,
+        aclr_linear=0.001,
+        exclude_receiver_uav=exclude_receiver_uav,
+    )
+
+
+@pytest.mark.parametrize("batch_width", (1, 8, 32))
+@pytest.mark.parametrize("exclude_receiver_uav", (False, True))
+def test_native_radio_batch_matches_exact_python_oracle(
+    batch_width: int, exclude_receiver_uav: bool
+) -> None:
+    kwargs = _radio_test_kwargs(
+        batch_width, exclude_receiver_uav=exclude_receiver_uav
+    )
+    expected = backend.compute_radio_reference_batch(**kwargs)
+    actual = backend.compute_radio_batch(**kwargs)
+    for left, right in zip(
+        (
+            actual.access_sinr,
+            actual.air_sinr,
+            actual.uav_to_base_sinr,
+            actual.base_to_uav_sinr,
+        ),
+        (
+            expected.access_sinr,
+            expected.air_sinr,
+            expected.uav_to_base_sinr,
+            expected.base_to_uav_sinr,
+        ),
+    ):
+        np.testing.assert_array_equal(left, right)
+
+
+@pytest.mark.parametrize("use_fdma", (False, True))
+@pytest.mark.parametrize("exclude_receiver_uav", (False, True))
+@pytest.mark.parametrize("interference_radius", (0.0, 350.0))
+def test_native_radio_preserves_interference_boundaries_and_empty_noise_only_lists(
+    use_fdma: bool,
+    exclude_receiver_uav: bool,
+    interference_radius: float,
+) -> None:
+    kwargs = _radio_test_kwargs(
+        2,
+        exclude_receiver_uav=exclude_receiver_uav,
+        use_fdma=use_fdma,
+        interference_radius=interference_radius,
+    )
+    expected = backend.compute_radio_reference_batch(**kwargs)
+    actual = backend.compute_radio_batch(**kwargs)
+    np.testing.assert_array_equal(actual.access_sinr, expected.access_sinr)
+    np.testing.assert_array_equal(actual.air_sinr, expected.air_sinr)
+    np.testing.assert_array_equal(
+        actual.uav_to_base_sinr, expected.uav_to_base_sinr
+    )
+    np.testing.assert_array_equal(
+        actual.base_to_uav_sinr, expected.base_to_uav_sinr
+    )
+
+
+@pytest.mark.parametrize("failure", ("shape", "nonfinite"))
+def test_radio_boundary_rejects_malformed_native_payload(
+    monkeypatch: pytest.MonkeyPatch, failure: str
+) -> None:
+    kwargs = _radio_test_kwargs(1, exclude_receiver_uav=True)
+    valid = (
+        np.zeros((1, 8, 30), dtype=np.float64),
+        np.zeros((1, 8, 8), dtype=np.float64),
+        np.zeros((1, 8, 2), dtype=np.float64),
+        np.zeros((1, 8, 2), dtype=np.float64),
+    )
+    values = list(valid)
+    if failure == "shape":
+        values[0] = values[0][..., :-1]
+    else:
+        values[1][0, 0, 0] = np.nan
+
+    class MalformedRadio:
+        def compute_radio_batch(self, *_args):
+            return tuple(values)
+
+    monkeypatch.setattr(
+        backend, "load_uav_cpp_backend", lambda **_kwargs: MalformedRadio()
+    )
+    with pytest.raises(RuntimeError, match="native radio output"):
+        backend.compute_radio_batch(**kwargs)
+
+
 def test_nonbinary_time_step_preserves_float32_delta_and_clip_order():
     uavs = np.array(
         [
@@ -328,6 +459,48 @@ def test_native_loader_stages_the_exact_uav_source() -> None:
     module = backend.load_uav_cpp_backend()
     staged_source = Path(module.__file__).resolve().parent / "uav_geometry_backend.cpp"
     assert staged_source.read_bytes() == backend._SOURCE.read_bytes()
+
+
+def test_process_cache_skips_repeated_compiler_probe_and_invalidates_source(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    source = tmp_path / "geometry.cpp"
+    source.write_bytes(b"// v1\n")
+    calls: list[str] = []
+
+    @contextmanager
+    def toolchain():
+        calls.append("toolchain")
+        yield
+
+    def build_identity() -> str:
+        return hashlib.sha256(source.read_bytes()).hexdigest()
+
+    def load(**_kwargs):
+        calls.append("load")
+        return type(f"Module{len(calls)}", (), {})()
+
+    monkeypatch.setattr(backend, "_SOURCE", source)
+    monkeypatch.setattr(backend, "_LOADED_BACKENDS", {})
+    monkeypatch.setattr(backend, "_windows_toolchain_context", toolchain)
+    monkeypatch.setattr(backend, "_build_identity", build_identity)
+    monkeypatch.setattr(backend, "load_source_keyed_extension", load)
+
+    first = backend.load_uav_cpp_backend(build_root=tmp_path / "build")
+    second = backend.load_uav_cpp_backend(build_root=tmp_path / "build")
+    assert first is second
+    assert calls == ["toolchain", "load"]
+
+    source.write_bytes(b"// v2\n")
+    third = backend.load_uav_cpp_backend(build_root=tmp_path / "build")
+    assert third is not first
+    assert calls == ["toolchain", "load", "toolchain", "load"]
+
+    fourth = backend.load_uav_cpp_backend(build_root=tmp_path / "other-build")
+    assert fourth is not third
+    assert calls == [
+        "toolchain", "load", "toolchain", "load", "toolchain", "load"
+    ]
 
 
 @pytest.mark.skipif(os.name != "nt", reason="Windows toolchain environment contract")

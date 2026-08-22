@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import subprocess
 import sys
 import uuid
 from datetime import datetime, timedelta, timezone
@@ -179,3 +180,15 @@ def test_interface_and_source_contain_no_duplicate_process_lifecycle() -> None:
     source = LAUNCHER.read_text(encoding="utf-8")
     for forbidden in ("subprocess.Popen", "def _supervise", "def _exclusive_write", "def _claim_owner", "owner.json", "terminal.json"):
         assert forbidden not in source
+
+
+def test_direct_script_entry_can_import_shared_control_plane() -> None:
+    completed = subprocess.run(
+        [sys.executable, str(LAUNCHER), "--help"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert completed.returncode == 0, completed.stderr
+    assert "{launch,observe}" in completed.stdout

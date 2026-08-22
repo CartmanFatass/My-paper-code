@@ -146,3 +146,35 @@ Future control-plane repairs use the fixed loop:
 `incident -> minimal reproduction -> minimal repair -> focused test -> harmless
 live canary -> acceptance`. Doctor and incident snapshots remain runtime state,
 never canonical scientific state.
+
+## Native-child semantic wait bridge follow-up — 2026-08-20
+
+The V1.1 follow-up adds an explicit, opt-in bridge for a native EM/CM child that
+Root wants to await through the semantic event cursor. Root first registers the
+child with `native_child_register`; the returned content-free signal command is
+included in that exact child assignment. The child emits exactly one
+`COMPLETED` or `ANOMALY` signal immediately before its ordinary native return.
+The signal only creates `NATIVE_CHILD_REPORT_AVAILABLE`; it contains no result
+text and does not imply a scientific disposition. Root then uses
+`workflow_wait_plan` and, only for `WAIT_SEMANTIC_EVENT`, calls
+`workflow_await_event` with the returned `await_cursor`; the formal result still
+comes from `collaboration.wait_agent`.
+
+Validation:
+
+```text
+tests/codex_semantic_mvp/test_native_wait_bridge.py
+tests/codex_semantic_mvp/test_long_wait.py
+tests/codex_semantic_mvp/test_mcp_tools.py
+tests/hmasd_control_plane/test_stdio_servers.py
+result=37 passed
+python= C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe
+basetemp= C:/Projects/HMASD/.pytest-basetemp-native-bridge-20260820-02
+```
+
+The bridge is not automatic wake, scheduler serve, retry, or task resurrection.
+Unbridged children continue to use native `collaboration.wait_agent`; cancelled
+semantic workflows reject bridge registration/signals. No live semantic DB,
+scientific runner, provider operation, lease or result was changed by this
+follow-up. The bridge is therefore eligible for new EM/CM assignments only;
+already-running children retain their existing native wait route.

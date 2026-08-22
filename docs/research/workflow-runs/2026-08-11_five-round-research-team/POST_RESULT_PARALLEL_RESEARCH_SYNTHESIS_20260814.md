@@ -3,17 +3,348 @@
 ```text
 document_kind=portfolio_owner_research_note
 owner=Dedicated Portfolio Session 019ffc20-5001-7453-a08a-dac783cf4d80
-controlling_decision=SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md
-base_decision=CROSS_DIRECTION_POST_RESULT_ADJUDICATION_20260814.md
-allocation_change=SGSP_RG2Z_R03_EMPIRICAL|RISP_B3_EMPIRICAL|RCLE_CPC_R04_EMPIRICAL|SCDMP_R07_STAGE_A_COMPLETE|SCDMP_SUPPORT_REPRESENTATION_FACTORIAL_DEFINITION|VNFC_FULL_GRAPH_NO_CURRENT|ONLGR_NO_CURRENT
-operational_action_change=RUN_SGSP_RG2Z_R03_FULL_PANEL|RUN_RISP_B3_FULL_PANEL|RUN_RCLE_CPC_R04_FULL_PANEL|RELEASE_SCDMP_R07_STAGE_A|DEFINE_SCDMP_SUPPORT_REPRESENTATION_FACTORIAL|RELEASE_VNFC_Q0_WITHOUT_SUCCESSOR|KEEP_ONLGR_RELEASED
+controlling_decision=CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md
+base_decision=RESIDUAL_VALUE_CONTINUATION_AND_AUTONOMOUS_EXPERIMENT_AUTHORITY_PORTFOLIO_ADJUDICATION_20260821.md
+allocation_change=RISP_RCLE_EMPIRICS_CONTINUE|SGSP_GATE_B_ENABLING_CONTINUES|VQFP_R03_DISH_R04_VNFC_PCPI_DEFINITIONS_CONTINUE|SCDMP_TBCC_VNFC_BPCR_COMPLETE_NO_CURRENT|OLD_EXACT_OBJECTS_IMMUTABLE
+operational_action_change=KEEP_RISP_RCLE|KEEP_SGSP_GATE_B|PORTFOLIO_OWNS_THREE_DEFINITION_EMS|NO_CURRENT_DOES_NOT_BLOCK_DISCOVERY_OR_NEW_DEFINITION|ENABLE_FUTURE_OBJECT_SPECIFIC_PORTFOLIO_DECISIONS_WITHOUT_REPEATED_USER_CONFIRMATION
 direction_science_card_authority=false
 cross_direction_evidence_transfer=false
 local_sources_only=true
 web_or_download_used=false
 ```
 
-## 2026-08-20 current SCDMP r07 Stage-A post-result cut
+## 2026-08-21 operative current synthesis
+
+Current research is two empirics (RISP G-init r01 and RCLE TBCFV r04), one
+enabling construction (SGSP RSCF Gate B), and three definition-only objects
+(VQFP-FERL r04 successor, DISH r05 successor and VNFC-PCPI r02). SCDMP TBCC r02 and
+VNFC BPCR r09 are complete/no-current under their separate exact results.
+There is no current direct UAV empirical; DISH r05 is the preferred prospective
+path but remains definition-only. This classification is descriptive, not a
+quota or backfill rule.
+
+## Superseded/base 2026-08-21 residual-value continuation synthesis
+
+The five closed exact objects are not a dead inventory. They have localized
+five different decision surfaces: RISP reachability, SCDMP common controller
+competence, ONLGR action utility, SGSP comparator/credit answerability and RCLE
+target-specific restriction value. The corrected Portfolio semantics use these
+surfaces without modifying any result.
+
+Always-on discovery and five parallel definition-only lines are current. A
+definition may establish or reject its Level-1 target fact while freezing the
+Level-2 object; requiring both to exist before definition was circular. The
+complete definition and cost then compete for construction/empirical purchase.
+
+The user authorizes this Portfolio owner to issue those later object-specific
+decisions without another confirmation turn. No stage is automatic: Root must
+receive each explicit packet and retains providers, pairs, compute leases and
+Git. VNFC is the sole current empirical investment; no new empirical activity
+was authorized by that historical semantic correction. The operative current
+classification above supersedes that allocation snapshot.
+
+## Superseded/base 2026-08-21 RISP post-result synthesis
+
+RISP differs from the completed SCDMP and ONLGR lines because its package
+contains a positive fixed-structure prerequisite: fixed G can be exploited.
+The learned comparison is nevertheless nonidentified because the zero-start
+containing recurrence never becomes basically answerable. The smallest useful
+continuation is therefore a definition-only initialization-reachability
+comparison, not another checkpoint diagnostic and not a semantic-value claim.
+
+VNFC remains the sole empirical investment. RISP definition work may proceed
+concurrently and returns on its own complete definition/cost milestone. No
+quota, replacement slot or evidence transfer is introduced.
+
+## Superseded/base 2026-08-21 SCDMP/ONLGR post-result synthesis
+
+Two direct UAV panels completed without identifying their intended mechanism,
+but for different reasons. SCDMP reached physical order opportunity and action
+sensitivity while all learned comparators failed the shared RG competence
+gate. ONLGR never instantiated a voluntary update: every logical family mapped
+to the same `q=0` controller. The former is a competence bottleneck; the latter
+is an action-support bottleneck.
+
+The correct synthesis is not a common negative UAV conclusion and not a fusion.
+It is to require each family to satisfy its own prerequisite before another
+value-bearing investment. RISP and VNFC remain the only current empirics. No
+backfill, quota, WIP/order or first-result-wins rule is introduced.
+
+## Preserved VNFC BPCR r09 BCRH policy-exception synthesis
+
+The evidence-complexity conflict is resolved without weakening the VNFC
+scientific object. Exact BCRH remains the fixed-`N=7` physical reference because
+complete legal-command coverage is what makes a future MAPR positive credible
+against the simpler physical-control alternative.
+
+A sixteen-candidate replacement would be cheaper but would introduce a new
+menu-generation assumption and could transform the panel into a comparison
+against a deliberately weaker baseline. The bounded one-object exception is
+therefore more informative than revision, provided the existing operation and
+cost ceilings are certified before coordinates.
+
+MAPR/DIRECT remain the scalable learned paths; BCRH receives no deployment or
+general complexity claim. RISP, ONLGR, SCDMP and VNFC allocations remain
+unchanged, and no exception precedent transfers across directions.
+
+## Superseded/base 2026-08-21 VNFC BPCR r09 empirical synthesis
+
+VNFC's definition-to-construction campaign has resolved both scientific meaning
+and native host feasibility without observing a scientific coordinate. Exact
+construction is accepted, remaining work is bounded, and the full panel can
+answer a direct UAV held-out-variable-`N` retain/decline/nonidentify question.
+
+The information-maximizing action is therefore the complete frozen panel, not
+another pre-empirical gate. After shared native-boundary reacceptance and exact
+pipeline acceptance, fresh sixteen-replicate identities and coordinates enter
+one later Root lease and one blinded atomic result. No partial output or wall-
+time event has scientific meaning.
+
+RISP, ONLGR, SCDMP and VNFC now supply four distinct empirical mechanisms;
+VNFC alone supplies direct variable-`N` UAV value. This is a scientific
+portfolio cut, not a direction-count quota. It creates no backfill, ordering,
+fusion, surface, production or deployment action.
+
+## Superseded/base 2026-08-20 VNFC BPCR r09 native-construction synthesis
+
+VNFC's definition campaign has converted the old unbounded exact-solver route
+into a finite direct UAV variable-`N` question. One shared `MAPR-4` policy now
+has a literal train-`N={3,5}` to held-out-`N=7` recovery endpoint, an active
+strict-containing learned comparator, a bounded physical controller, finite
+exact inference and an exhaustive claim boundary.
+
+The next information-maximizing action is exact native construction, not
+empirical activity or another upstream definition. Construction must bind the
+C++ batch law, MAPR/DIRECT containment, association cut, independent BCRH
+checker, inference and atomic lifecycle, then return observed remaining cost.
+
+This 61–93 engineer-day purchase is materially larger than the other current
+directions, but it supplies the only direct variable-`N` UAV axis while RISP,
+ONLGR and SCDMP remain external-`k`/recurrence/timing/order empirics. The three
+empirical lines continue independently. No quota, WIP/order, backfill, fusion,
+surface, production or deployment action follows.
+
+## Superseded/base 2026-08-20 SCDMP UAV r02 empirical synthesis
+
+The SCDMP definition-to-construction campaign has now resolved both meaning and
+host feasibility without observing a scientific coordinate. Exact native
+construction is accepted, the remaining work class is bounded, and the panel
+can answer a direct UAV/external-`k` retain-or-decline question.
+
+The information-maximizing action is therefore to execute the full frozen
+panel, not introduce another pre-empirical gate. The exact trainer/runner and
+support/statistics implementation must be accepted before fresh identities,
+then the ordinary Root lease carries one blinded atomic panel through result
+convergence. No partial output or wall-time event has scientific meaning.
+
+RISP, ONLGR and SCDMP now supply three distinct empirical mechanisms:
+recurrence, timing-rate allocation and physical-order-conditioned risk. VNFC
+continues its independent variable-`N` definition. This is a scientific
+portfolio cut, not a direction-count quota; it creates no backfill, ordering,
+fusion, Stage B, surface, production or deployment action.
+
+## Superseded/base 2026-08-20 SCDMP UAV r02 native-construction synthesis
+
+SCDMP has completed the scientific definition loop without returning to its
+failed checkpoint route. The new object is an end-to-end suspended-payload UAV
+value test: one shared policy across held-out/switched external `k`, one
+physics-specified risk tilt, strict-containing FREE, tied reversal and a
+competent order-insensitive control. Its possible outcomes divide the exact
+treatment rather than merely locating another upstream failure.
+
+The next information-maximizing action is the distinct task-specific native
+construction. Existing shared C++ work is useful substrate, but neither a
+generic UAV component nor ONLGR's host encodes the SCDMP plant, equal-slot event
+order, endpoints or lifecycle. Construction must therefore add and register
+the literal reset-to-terminal batch component and fail closed without Python
+fallback.
+
+This action is justified independently of the three-UAV count. The full path's
+15–24 engineer-day / 24–72 CPU-hour class is proportionate to a direct UAV
+external-`k` result and nonredundant with ONLGR's rate-allocation question.
+Still, construction acceptance must return before empirical purchase because
+real throughput and remaining cost are not yet accepted on the exact host.
+
+RISP and ONLGR remain empirical; SCDMP becomes enabling construction; VNFC
+remains definition-only. SGSP/RCLE and the old SCDMP/VNFC routes remain
+no-current. No SCDMP coordinates, empirical lease, Stage B, relation assay,
+surface, production or deployment action follows.
+
+## Superseded/base 2026-08-20 ONLGR post-construction empirical synthesis
+
+HEADLAND-90 construction has converted the earlier high-uncertainty host-card
+option into an accepted, directly executable scientific purchase. The frozen
+CAL/HOLD lifecycle now has 9,856 controller-replicates and 37,847,040 physical
+ticks, measured at 3.64–4.71 raw CPU-hours and 10.91–14.13 CPU-hours under the
+registered 3x reserve, with 3–5 focused engineer-weeks remaining. That material
+cost contraction satisfies the prior reusable-host revisit condition and makes
+the reciprocal two-rate UAV question competitive with the existing RISP panel.
+
+Portfolio therefore invests exact
+`ONLGR-HEADLAND90-R03-CAL-HOLD-FULL-PANEL` alongside
+`RISP-B3-TRG-R03-FULL-PANEL`. The two directions remain evidence-isolated:
+RISP tests one finite external-`k` recurrent package, while ONLGR tests one
+analytic two-UAV, ex-ante two-stratum rate allocation against calibration-best
+pooled global rate. SCDMP and VNFC remain definition-only; SGSP and RCLE remain
+no-current.
+
+ONLGR's information value is bounded. A positive can retain only the exact
+HEADLAND-90 two-rate package; package geometry, planner, radio, blackout,
+battery, lockout and finite selection remain the strongest alternative. The
+complete panel cannot establish tenure-only causality, general timing
+adaptation, arbitrary `k`/`N`, aircraft transfer, safety, deployment or general
+superiority. Every valid branch returns before another timing definition,
+surface or production action.
+
+The three formal UAV entries remain ONLGR, SCDMP and VNFC, but ONLGR is now the
+sole UAV empirical activity. This is a decision-value result of construction
+and cost evidence, not a quota/backfill response. There is still no WIP/order,
+fusion, Stage-B, second-surface, production or deployment action.
+
+## Superseded/base 2026-08-20 all-direction / three-UAV-entry synthesis
+
+The requested portfolio output is satisfied by three scientifically distinct
+preactivity programs rather than by renaming three toys as UAV work.
+
+ONLGR is closest to execution: its exact two-UAV host card is already closed
+and feasible, so the next purchase is construction/conformance and an observed
+remaining-cost decomposition. SCDMP has a legitimate physical order unknown
+but exhausted its checkpoint route, so it enters only through an independently
+specified multi-UAV payload/formation definition. VNFC already has a detailed
+post-loss UAV target, but its exact full-graph comparator path is unbounded; it
+enters through a new finite direct-value definition with honest comparator and
+claim limits.
+
+RISP continues its current result-blind empirical panel because it is already a
+direct variable-`k` value test, but its abstract tracking/relay target is not
+counted as UAV work. SGSP's massive CCA purchase still lacks a target-critical
+fact or audited cost reduction. RCLE still lacks both a material UAV
+commitment-fragmentation fact and a new direct-value object.
+
+This cut therefore creates three formal UAV experiment entries, one at exact
+host construction and two at definition, while authorizing zero UAV empirical
+activities. The distinction prevents a delivery metric from becoming a false
+claim, a WIP quota or an automatic successor generator.
+
+## Superseded/base 2026-08-20 SCDMP TBOV SRF r03 post-result cut
+
+SRF resolves the checkpoint-repair portfolio question even though one factor
+remains statistically unresolved. Support allocation and its interaction with
+representation are too small at the registered scale, while representation
+heterogeneity is not precise enough to select a package. More importantly, no
+cell satisfies the frozen all-seed competence gate.
+
+The information-maximizing response is not a larger factor menu, more steps or
+a relaxed gate. Those actions would use observed heterogeneity to search for a
+checkpoint and would still leave relation direction and task value unanswered.
+The checkpoint route is therefore consumed.
+
+SCDMP retains scientific value only by changing resolution: define one direct
+target-bound external-`k` order treatment independently of these results and
+test it eventually against a competent containing controller. This is a new
+direct-value object, not SRF repair or Stage B continuation. Definition-only
+work can reveal whether that object is coherent and affordable without
+starting another experiment.
+
+RISP becomes the sole empirical line; SCDMP becomes definition-only. That
+change follows mechanism/identifiability, not a WIP slot, and opens no fusion,
+surface or UAV action.
+
+## Superseded/base 2026-08-20 SGSP RG2Z CCA r01 post-definition cut
+
+The definition campaign has done its job: it converted a plausible credit-
+assignment idea into an exact object and exposed its true purchase. The object
+is causal enough for PHY-versus-EDGE under one compound trainer, but it is not a
+trainer comparison and cannot identify why r03 was nonidentified.
+
+Its exhaustive unilateral continuation law expands the package to 37.30B
+learned decisions and 3.454B environment slots. The resulting 26–45 workday,
+2,500–9,000-core-hour purchase is disproportionate to an exact-toy prior
+decision that may again fail answerability or competence and has no automatic
+surface/UAV bridge.
+
+The highest-information current action is therefore to retain the complete
+definition and decline empirical activity, not to spend further merely because
+the science is implementable. This is precisely where definition-only work
+should end: after making both scientific meaning and total opportunity cost
+auditable.
+
+SGSP can reopen on material cost collapse or target-critical value, not on an
+idle slot or another direction's nonidentification. RISP and SCDMP continue as
+the two active empirical lines; no fusion or replacement follows.
+
+## Superseded/base 2026-08-20 SGSP RG2Z r03 post-result cut
+
+SGSP r03 answers a different question from the one sought: it proves that the
+frozen panel was valid yet scientifically unable to compare the prior against a
+competent containing learner. The exact-zero downstream contrasts are therefore
+not evidence of equivalence or an absent physical-kernel mechanism.
+
+The next useful purchase is not more data from r03 or a second budget. It is a
+definition-only counterfactual-credit object that removes the learned critic
+symmetrically while preserving the task, nested classes, finite budget,
+roster-axis law and decision thresholds. This is coherent because the full
+future branch map has a stop: another competence/answerability failure ends the
+target-bound line rather than triggering trainer search.
+
+The definition must expose a central alternative before any empirical vote:
+counterfactual training can change variance, curvature and finite-budget
+geometry even when scientifically matched, so a later favorable result cannot
+establish unique credit causality. Its claim can only be physical-prior value
+under the exact counterfactual package.
+
+SGSP moves from empirical to definition-only. RISP and SCDMP remain current
+empirics; RCLE, ONLGR and VNFC remain no-current. No replacement quota,
+backfill, fusion, cross-axis parent, surface or UAV action follows.
+
+## Superseded/base 2026-08-20 RCLE CPC r04 post-result cut
+
+RCLE-CPC supplies a clean target-local deletion decision: the fixed binary
+restriction earns no registered material advantage over its flexible
+containing comparator, and its mechanism family does not qualify. The
+scientific conclusion is bounded no-materiality, not zero effect, flexible
+superiority or a general persistent-latent failure.
+
+The highest-information RCLE action is therefore no current work, not tuning
+or another CPC assay. Only a new physical target failure plus a materially new
+direct-value design can reopen the family. This removes one empirical line
+without creating a vacancy or changing the independent RISP, SGSP and SCDMP
+questions.
+
+## Superseded/base 2026-08-20 SCDMP SRF count-semantics correction
+
+The new observation is bookkeeping semantics, not scientific evidence. The
+final-prefix law makes realized direct forwards stochastic, so forcing an
+exact total would itself contaminate the frozen experiment. Correctness is
+preserved by reporting the expectation prospectively and the formula-derived
+realized total only after the complete panel.
+
+This correction leaves the same discriminator, alternatives, claim ceiling,
+resource class and cross-family competition. Portfolio therefore preserves the
+empirical purchase, requires a count-only Pro-closed successor before activity,
+and removes any repeat allocation gate after that closure. It opens no relation
+assay, Stage B, fusion, surface or UAV work.
+
+## Superseded/base 2026-08-20 SCDMP SRF r02 empirical cut
+
+The complete definition closes the only uncertainty left at the prior cut:
+the factorial is exact, observable and moderately costed. Portfolio therefore
+invests the whole fresh 2×2 panel. Its scientific purpose is to decide whether
+support allocation, one context-conditioned representation package or their
+interaction changes checkpoint competence at the unchanged 600-step budget.
+
+The purchase is enabling rather than direct value evidence, but it is
+decision-efficient because r07 has already qualified the physical opportunity
+and isolated checkpoint competence as the gate. A noncompetent or
+non-decision-changing complete result ends any automatic checkpoint successor;
+a favorable result only returns one possible checkpoint law for a newly
+defined independent relation assay. Stage B remains a later separate decision.
+
+RISP, RCLE and SGSP continue as distinct direct empirics. ONLGR and VNFC remain
+no-current. No fusion, evidence transfer, WIP/order, backfill, surface or UAV
+action follows.
+
+## Superseded/base 2026-08-20 SCDMP r07 Stage-A post-result cut
 
 The complete r07 result narrows the SCDMP uncertainty without answering the
 value question. The target has strong registered physical order opportunity,

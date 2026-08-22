@@ -38,10 +38,19 @@ _active_store: SemanticStore | None = None
 _active_instance_id: str | None = None
 
 ORCHESTRATOR_INSTRUCTIONS = (
-    "For live native subagents use collaboration.wait_agent, not this server. "
-    "For semantic work call workflow_wait_plan first; call workflow_await_event "
+    "For an explicitly native_child_register-bound EM/CM child, include its "
+    "native-child-signal command in the child assignment, then call workflow_wait_plan first; "
+    "call workflow_await_event "
     "only when it returns WAIT_SEMANTIC_EVENT. Pass await_cursor as after_seq, "
     "never state_version, and use only the four declared condition enum values. "
+    "For an unbridged native child use collaboration.wait_agent. After a native "
+    "bridge event, collect the ordinary native return through collaboration; the "
+    "bridge signal contains no scientific conclusion. "
+    "For a cross-workflow wait that must not bind to a session, workflow, or task, "
+    "call workflow_await_global_event directly with the global cursor returned by "
+    "the previous call; it does not require workflow_wait_plan. "
+    "Known stale workflow ids may be passed as ignore_workflow_ids without "
+    "binding the wait to a workflow. "
     "Control-plane errors never imply scientific failure, direction pause, or "
     "portfolio disposition. Mutations require a bound ACTIVE actor and explicit "
     "role-compatible authority. This server does not schedule, retry, or wake an "
@@ -55,12 +64,14 @@ ORCHESTRATOR_TOOL_ALLOWLIST = (
     "workflow_open",
     "task_register",
     "task_bind",
+    "native_child_register",
     "workflow_state",
     "report_get",
     "root_record_intake",
     "obligation_open",
     "obligation_resolve",
     "workflow_await_event",
+    "workflow_await_global_event",
     "workflow_close",
     "actor_context_current",
     "plan_epoch_open",
@@ -92,6 +103,7 @@ READ_ONLY_TOOL_NAMES = frozenset(
         "workflow_state",
         "report_get",
         "workflow_await_event",
+        "workflow_await_global_event",
         "actor_context_current",
         "plan_epoch_current",
         "semantic_commit_current",
@@ -106,6 +118,7 @@ MUTATION_OPERATION_BY_TOOL = {
     "workflow_open": "open_workflow",
     "task_register": "register_task",
     "task_bind": "bind_task",
+    "native_child_register": "register_task",
     "root_record_intake": "record_intake",
     "obligation_open": "open_obligation",
     "obligation_resolve": "resolve_obligation",
@@ -265,7 +278,7 @@ def _report_dict(store: SemanticStore, report_id: str, workflow_id: str, include
 def _event_matches(store: SemanticStore, event: Mapping[str, Any], condition: str, task_ids: list[str]) -> bool:
     kind = str(event["kind"])
     if condition == "ANY_REPORT":
-        if kind not in {"REPORT_AVAILABLE", "UNTYPED_REPORT_AVAILABLE"}:
+        if kind not in {"REPORT_AVAILABLE", "UNTYPED_REPORT_AVAILABLE", "NATIVE_CHILD_REPORT_AVAILABLE"}:
             return False
         if not task_ids:
             return True
@@ -286,7 +299,7 @@ def _event_summary(store: SemanticStore, event: Mapping[str, Any]) -> dict[str, 
         "disposition_implied": False,
     }
     subject_id = event.get("subject_id")
-    if event["kind"] in {"REPORT_AVAILABLE", "UNTYPED_REPORT_AVAILABLE"}:
+    if event["kind"] in {"REPORT_AVAILABLE", "UNTYPED_REPORT_AVAILABLE", "NATIVE_CHILD_REPORT_AVAILABLE"}:
         row = store.connection.execute("SELECT task_id FROM reports WHERE report_id = ?", (subject_id,)).fetchone()
         if row is not None:
             result["task_id"] = row[0]
@@ -302,6 +315,11 @@ AwaitCondition = Literal[
 
 _AWAIT_CONDITIONS = frozenset(
     {"ANY_REPORT", "ALL_REQUIRED_RETURNED", "OPEN_OBLIGATION_CHANGED", "WORKFLOW_QUIESCENT"}
+)
+
+GlobalAwaitCondition = Literal["ANY_EVENT", "ANY_REPORT", "OPEN_OBLIGATION_CHANGED"]
+_GLOBAL_AWAIT_CONDITIONS = frozenset(
+    {"ANY_EVENT", "ANY_REPORT", "OPEN_OBLIGATION_CHANGED"}
 )
 
 
@@ -364,6 +382,95 @@ async def await_events(
                 "cursor": cursor,
                 "open_tasks": state["open_task_ids"],
                 "open_obligations": [item["obligation_id"] for item in state["open_obligations"]],
+            }
+        await asyncio.sleep(min(WAIT_POLL_SECONDS, remaining))
+
+
+def _validate_global_await_inputs(
+    after_seq: int,
+    condition: str,
+    timeout_s: float,
+    ignore_workflow_ids: list[str] | None,
+) -> list[str]:
+    if condition not in _GLOBAL_AWAIT_CONDITIONS:
+        raise ValueError(f"unknown global await condition: {condition}")
+    if isinstance(timeout_s, bool) or not isinstance(timeout_s, (int, float)):
+        raise ValueError("timeout_s must be a finite number between 1 and 1500 seconds")
+    if not math.isfinite(float(timeout_s)) or not 1 <= float(timeout_s) <= MAX_WAIT_SECONDS:
+        raise ValueError(f"timeout_s must be between 1 and {MAX_WAIT_SECONDS} seconds")
+    if isinstance(after_seq, bool) or not isinstance(after_seq, int) or after_seq < 0:
+        raise ValueError("after_seq must be a non-negative integer")
+    selected = list(ignore_workflow_ids or [])
+    if any(not isinstance(item, str) or not item.strip() for item in selected):
+        raise ValueError("ignore_workflow_ids must contain non-empty strings")
+    if len(set(selected)) != len(selected):
+        raise ValueError("ignore_workflow_ids must be unique")
+    return selected
+
+
+def _global_event_matches(
+    event: Mapping[str, Any], condition: str, ignored_workflows: set[str]
+) -> bool:
+    if str(event.get("workflow_id") or "") in ignored_workflows:
+        return False
+    if condition == "ANY_EVENT":
+        return True
+    kind = str(event["kind"])
+    if condition == "ANY_REPORT":
+        return kind in {
+            "REPORT_AVAILABLE",
+            "UNTYPED_REPORT_AVAILABLE",
+            "NATIVE_CHILD_REPORT_AVAILABLE",
+        }
+    if condition == "OPEN_OBLIGATION_CHANGED":
+        return kind.startswith("OBLIGATION_")
+    raise ValueError(f"unknown global await condition: {condition}")
+
+
+def _global_event_summary(store: SemanticStore, event: Mapping[str, Any]) -> dict[str, Any]:
+    """Return a neutral event summary with source workflow metadata only."""
+    result = _event_summary(store, event)
+    result["workflow_id"] = event.get("workflow_id")
+    return result
+
+
+async def await_global_events(
+    store: SemanticStore,
+    after_seq: int = 0,
+    condition: str = "ANY_REPORT",
+    timeout_s: float = 900,
+    ignore_workflow_ids: list[str] | None = None,
+) -> dict[str, Any]:
+    """Wait for one event from any workflow without task/session binding.
+
+    This is deliberately an event-stream primitive rather than a workflow
+    state predicate. A global SQLite ``seq`` cursor makes the operation
+    resumable across all managed workflows while preserving the existing
+    task-bound ``workflow_await_event`` contract.
+    """
+    selected_ignored = _validate_global_await_inputs(
+        after_seq, condition, timeout_s, ignore_workflow_ids
+    )
+    ignored_workflows = set(selected_ignored)
+    deadline = asyncio.get_running_loop().time() + float(timeout_s)
+    cursor = after_seq
+    while True:
+        events = store.await_global_events(cursor)
+        for event in events:
+            cursor = max(cursor, int(event["seq"]))
+            if _global_event_matches(event, condition, ignored_workflows):
+                return {
+                    "status": "EVENT",
+                    "scope": "GLOBAL_EVENT_STREAM",
+                    "cursor": cursor,
+                    "events": [_global_event_summary(store, event)],
+                }
+        remaining = deadline - asyncio.get_running_loop().time()
+        if remaining <= 0:
+            return {
+                "status": "TIMEOUT_NO_DISPOSITION",
+                "scope": "GLOBAL_EVENT_STREAM",
+                "cursor": cursor,
             }
         await asyncio.sleep(min(WAIT_POLL_SECONDS, remaining))
 
@@ -605,6 +712,64 @@ def _register_tools(server: MCPServer) -> MCPServer:
         event_id = store.record_agent_started(workflow_id, task_id, agent_id, agent_type)
         return {"workflow_id": workflow_id, "task_id": task_id, "agent_id": agent_id, "event_id": event_id, "lifecycle": "RUNNING"}
 
+    @server.tool(description=(
+        "Register and bind one native EM/CM child for file-backed semantic waiting. "
+        "Return a content-free terminal signal command for the child to invoke once "
+        "immediately before its ordinary native final return."
+    ))
+    def native_child_register(
+        workflow_id: str,
+        task_id: str,
+        agent_id: str,
+        agent_type: str,
+        objective: str,
+        required: bool = True,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
+        store = _get_store()
+        owner = _workflow_owner(store, workflow_id)
+        store, _requester = _admit_mutation(
+            requester_actor_context_id,
+            source_kind,
+            "register_task",
+            user_authority_id,
+            owner_actor_context_id=owner,
+            root_only=True,
+        )
+        event_id = store.register_native_child_bridge(
+            workflow_id, task_id, agent_id, agent_type, objective, required
+        )
+        signal_id = f"native:{workflow_id}:{task_id}:{agent_id}"
+        command = " ".join(
+            [
+                '"C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe"',
+                "-m tools.codex_semantic_mvp.cli",
+                f'--state-dir "{store.path.parent}"',
+                "native-child-signal",
+                f'--workflow-id "{workflow_id}"',
+                f'--task-id "{task_id}"',
+                f'--agent-id "{agent_id}"',
+                f'--agent-type "{agent_type}"',
+                f'--signal-id "{signal_id}"',
+                "--outcome COMPLETED|ANOMALY",
+            ]
+        )
+        return {
+            "workflow_id": workflow_id,
+            "task_id": task_id,
+            "agent_id": agent_id,
+            "event_id": event_id,
+            "lifecycle": "RUNNING",
+            "signal_id": signal_id,
+            "signal_command": command,
+            "signal_contract": (
+                "Invoke exactly once immediately before the native final return. "
+                "Use ANOMALY only for a WORKFLOW_ANOMALY_REPORT; do not include result text."
+            ),
+        }
+
     @server.tool(description="Return persisted workflow state, open obligations, and await_cursor. state_version is not an event cursor.")
     def workflow_state(workflow_id: str) -> dict[str, Any]:
         return _jsonable(_get_store().workflow_state(workflow_id))
@@ -723,6 +888,23 @@ def _register_tools(server: MCPServer) -> MCPServer:
     ) -> dict[str, Any]:
         return await await_events(
             _get_store(), workflow_id, after_seq, condition, task_ids, timeout_s
+        )
+
+    @server.tool(description=(
+        "Wait for one event from any managed workflow without binding to a "
+        "session, workflow, or task. condition is ANY_EVENT, ANY_REPORT, or "
+        "OPEN_OBLIGATION_CHANGED. Pass the returned global cursor as after_seq. "
+        "Optional ignore_workflow_ids skips explicitly stale workflow ids while "
+        "remaining globally unbound."
+    ))
+    async def workflow_await_global_event(
+        after_seq: int = 0,
+        condition: GlobalAwaitCondition = "ANY_REPORT",
+        timeout_s: float = 900,
+        ignore_workflow_ids: list[str] | None = None,
+    ) -> dict[str, Any]:
+        return await await_global_events(
+            _get_store(), after_seq, condition, timeout_s, ignore_workflow_ids
         )
 
     @server.tool(description="Close a workflow after validating task and obligation obligations.")

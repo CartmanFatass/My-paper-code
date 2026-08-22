@@ -184,8 +184,8 @@ generation, and reopen that URL in a new disposable tab for continuation.
 | First-binding ID | `__new__` | `__new__` |
 | Concrete URL | `https://chatgpt.com/c/<id>` | `https://gemini.google.com/app/<id>` |
 | Concrete ID | segment after `/c/` | segment after `/app/` |
-| Expected model string | the frozen visible Pro label, normally `Pro` | `Gemini 3.1 Pro extended` |
-| Required visible evidence | selected composer model is Pro | visible selected `3.1 Pro` and visible enabled `Extended thinking` |
+| Expected strict label | exact visible ChatGPT reasoning mode `Pro` | `Gemini 3.1 Pro extended` |
+| Required visible evidence | selected composer reasoning mode is exact `Pro` (the same axis that can read `High` on a fresh tab) | visible selected `3.1 Pro` and visible enabled `Extended thinking` |
 
 **Verified:** strict input accepts only `chatgpt` or `gemini`, validates the two
 roots for first binding, and extracts exact IDs from `/c/` or `/app/`
@@ -412,7 +412,11 @@ and Extended-thinking selection. Strict review invokes that same adapter before
 baseline capture. Its canonical receipt is accepted only after two distinct,
 visible, selected, menu-scoped items were observed. On the verified 2026-08-13
 Gemini UI, the visible menu item's semantic `.label` child is authoritative:
-`3.1 Pro` and either `Extended thinking` or the localized `扩展思考`. The parent
+`3.1 Pro` and either `Extended thinking`, the localized `扩展思考`, or the localized `확장`.
+On the selected, visible, menu-scoped Gemini control only, a short semantic
+model label `Pro` canonically confirms the expected `3.1 Pro`; it cannot
+confirm another Gemini Pro version and never substitutes for the independent
+selected Extended-thinking item. The parent
 menu item's full text also contains localized descriptions and badges and must
 not be compared as the model label. `data-active=true` and class `active` are
 keyboard/focus state, not selection. Selection requires class `selected`,
@@ -422,6 +426,91 @@ or `Pro 扩展`; it is useful only to open the menu and is not exact two-part
 evidence. Generic `Pro`, hidden menu remnants, unscoped role-menu nodes, and
 plan text fail closed. That run-local preflight receipt remains the model
 identity evidence after the menu closes for composer typing and Send.
+
+**Observed native Gemini route (2026-08-21).** On a fresh disposable provider
+root `https://gemini.google.com/app`, open only the one visible
+`data-test-id=bard-mode-menu-button` control (its localized accessible name can
+read “open mode selector, current mode Pro” and it controls the menu through
+`aria-controls`). Read the menu's visible semantic `.label` items, not their
+descriptions. Require exactly one selected `3.1 Pro`/short selected `Pro` and
+one selected `Extended thinking`/`扩展思考`/`확장`. If the model is selected
+but one exact visible thinking item is unselected, select that one item only,
+then reopen the same unique selector and reread both selected states. The
+bounded native sidecar is
+`scripts/review-gemini-composite-preflight-sidecar.mjs`; its receipt has
+`promptInsertCount=0`, `sendActionCount=0`, and `operationCreated=false`.
+Missing, duplicate, unscoped, or nonselected evidence fails closed. This is
+pre-send mechanical normalization only; it does not authorize a strict
+operation or provider turn.
+
+**Gemini Send boundary.** After exact composer identity is established, a
+unique visible Gemini Send control must be hit-tested and receive exactly one
+native pointer press/release; do not treat `HTMLElement.click()` as provider
+commitment. Persist the causal click receipt before observing the result, then
+require one new visible user turn and a concrete `/app/<id>` identity. A click
+receipt with zero turn/identity remains `SUBMITTED_UNVERIFIED`, permanently
+no-resend for that operation, even when `sendCount=0`.
+
+#### ChatGPT exact-Pro reasoning-mode normalization
+
+On the current ChatGPT web control, `High` and `Pro` are values of the **same
+visible reasoning-strength/mode axis**. They are not separate provider-model
+and reasoning axes, and `High` is never provider/account failure evidence. A
+fresh disposable tab may reset from `Pro` to `High`; normalize it before every
+strict ChatGPT operation with only the native, no-prompt
+`agentify_review_reasoning_mode_preflight`:
+
+For a file-backed strict request, first use the local-only
+`agentify_review_prompt_sha256_preflight` (or the equivalent bounded native
+sidecar when application lifetime forbids MCP reload). It reads one exact
+UTF-8 file and returns its byte length, SHA, BOM/final-LF and line-ending
+metadata with `promptInsertCount=0`, `sendActionCount=0`, and
+`operationCreated=false`. It authorizes neither a strict operation nor a
+provider turn.
+
+1. Create and inspect the disposable tab; require root URL, idle composer and
+   no active generation.
+2. Read the selected visible reasoning mode. If it is already exact `Pro`, the
+   primitive does no UI change and verifies it.
+3. If it is `High`, open only that visible reasoning-mode picker, select exact
+   `Pro` only when one visible controlled-menu option is unambiguous, and
+   reread exact selected `Pro`.
+4. Require the no-send receipt: `reasoningModeEvidence=Pro`, an exact
+   `reasoningModeReceipt`, `promptInsertCount=0`, and `sendActionCount=0`.
+   Only then may a later strict operation perform its independent live identity
+   check with its own immutable key.
+
+The primitive has no stable key, idempotency key, prompt, composer-write,
+ledger, or Send capability. Missing/ambiguous controls or Pro options fail
+closed pre-send. Do not use `agentify_query`, type a prompt, select a
+likely-looking unrelated menu, infer from account text, or use hidden DOM. A
+zero-commit operation remains retired; after successful normalization, only a
+separately owner-authorized **new** operation may submit. A committed operation
+remains permanently no-resend.
+
+#### Rendered-text observer coverage recipe
+
+When the complete visible page can render exact `High` or `Pro` text outside a
+direct-control inventory, use the native Operator observation's
+`reasoning.targets`/`reasoning.diagnostics` surface. It binds the current tab,
+URL and observation revision to the exact rendered text (or accessible label),
+the unique actionable ancestor's role, bounds, and hit test. `High` is admitted
+only from one visible, viewport-contained, hit-tested button-like ancestor with
+a popup/controlled-menu relationship. `Pro` is admitted only from one such
+visible menu/listbox option after the High control has been opened and the menu
+has rendered. Ordinary noninteractive text, hidden/occluded/offscreen or
+hit-test-failing nodes, forbidden Send-family controls and duplicate ancestors
+produce no target. A visible-text/control-inventory contradiction is
+`VISIBLE_UI_OBSERVER_COVERAGE_DEFECT`: stop, retain both result-blind
+observations, and do not use a pixel click or ordinary-browser fallback.
+
+If an exact `High` or `Pro` is observed but no target is eligible, retain the
+corresponding `reasoning.diagnostics.<mode>.candidates` rows. They report only
+the candidate's ancestor key, role, bounds, visibility, viewport, hit-test,
+actionability, ambiguity, forbidden, popup/menu scope and explicit exclusion
+predicates; they intentionally omit arbitrary page/ancestor labels. Diagnose
+from that result-blind audit before another live canary. A `Pro` candidate with
+`pro_not_menu_scoped` is not a menu option and must not be clicked.
 
 ### 7.5 Strict invocation
 
@@ -702,8 +791,11 @@ retire or accept scientific work. The invoking Skill maps every non-complete
 archive outcome to its factual `INCIDENT_REPORTED` contract.
 
 After durable archive and confirmed inactive generation, close only the
-disposable tab. Report close failure. Run the result-path guard using the
-project interpreter:
+disposable tab owned by that Operator. Keep the Agentify/Chrome application and
+protected default tab alive: repeated application teardown/relaunch can add a
+fresh login or profile/session step. Never close an active answer or use an
+application restart as a cleanup fallback. Report tab-close failure. Run the
+result-path guard using the project interpreter:
 
 ```powershell
 C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
@@ -822,7 +914,95 @@ If an HMASD archive is missing or stale:
 | Timeout | Deadline/client ended; send state unknown from timeout alone | Ledger first, then exact observe-only recovery. |
 | Stale results archive | Local result disagrees with valid ledger | Preserve it; perform ledger-only recovery. Do not revisit provider to make the archive agree. |
 
+### 10.1 Mechanical recovery matrix
+
+This is a transport-mechanics matrix, not a cross-role status taxonomy. First
+inspect the exact native registry tab and exact-page DOM, then the durable
+strict ledger; preserve the frozen science and archive. One demonstrated root
+cause and every directly induced tab/preflight/archive consequence reuse the
+same Workflow Recovery Manager (WRM) until its consolidated result. Do not
+create serial recovery owners or generic retry counts.
+
+**Application lifetime / tab-only cleanup.** Keep Agentify, its managed
+Chrome/CDP process, and the protected default tab alive throughout transport
+and recovery. An Operator owns only its disposable non-default tab. The normal
+repair load ladder is: (1) install a source-identity-bound controller repair,
+(2) call native `agentify_runtime_controller_refresh_status`, then (3) use
+native `agentify_runtime_controller_refresh` with the exact loaded generation
+and digest. The refresh is process-local, has no provider/tab/path input, and
+must fail closed while any generation, inflight query, or strict operation is
+active. It atomically validates and rebinds existing controllers while
+preserving the managed profile, protected default, registry and sessions; a
+failed prepare restores the prior controller generation. A runtime reload that
+would replace the managed browser or protected tab is forbidden. Application
+restart is exceptional—not an Operator step or cleanup fallback—and requires
+separate explicit authority after direct proof that the supported refresh path
+cannot load the repair. After a natural completion or durably archived
+mechanical incident with no generation, close only that disposable tab. If
+close fails, record and report it; never escalate to application teardown, a
+provider resend, or a science/portfolio change.
+
+For a visible ChatGPT Model Selector whose first popup is structured or
+localized, inspect only visible interactive descendants of that opened popup:
+role, accessible name, selection/popup relationships, bounded ancestor
+structure, and the first visible semantic label line. Never compare a label
+plus its descriptive wrapper. A nested reasoning submenu may be opened only
+when one visible semantic `Low`/`Medium`/`High`/`Pro` trigger with a popup
+relationship is unique. Select only one exact semantic `Pro` option, then
+require a closed-state exact `Pro` receipt; otherwise fail closed with the
+bounded menu evidence and zero prompt/send counts.
+
+| Mechanical case and direct evidence | Exact operation fence | Same operation / new operation | Recovery owner, safe next action, and durable artifacts | Does not imply |
+|---|---|---|---|---|
+| **Pre-send zero-commit / Pro-mode mismatch.** Ledger proves `sendActionCount=0`, `sendCount=0`, no turn/identity, and `noClickProven` or `failureStage=before_send_click`; native preflight lacks exact selected `Pro` reasoning mode. | Retire that immutable operation/fingerprint; never mutate its mode/key/path to evade it. | Same: ledger/native observation only; no retry or resubmission. New: only a separately authorized operation after a passing native Pro-mode normalization. | Same WRM diagnoses control drift. Use `agentify_review_reasoning_mode_preflight`; a fresh tab may read `High`, which is the same reasoning axis and must normalize to exact `Pro`. Archive the terminal and close inactive disposable tab. Retain ledger row, archive, mode receipt/diagnostics, and close fact. | Provider/account failure, scientific rejection, a consumed treatment, direction pause, or permission for ordinary-query fallback. |
+| **Committed turn, saved identity, response not intakeable.** Durable `userMessageId`, exact URL/ID, or `sendCount=1` exists but completion/response receipt is absent. | Exact operation is permanently no-resend. | Same: exact-fingerprint `verifyExisting` observation only when validated `userMessageId` exists; never retry/resubmit. New: not for the same turn; only a later owner-authored distinct turn after recovery/intake. | Same WRM observes naturally—no Stop/Continue/Retry/Answer-now—and preserves causal receipt, anchor, URL/ID, display diagnostics, and archive. | Lost science, a direction pause, or authority to reconstruct/replace provider content. |
+| **Saved-conversation redirect or identity mismatch.** Native live URL, registry URL, saved URL/ID, or provider turns disagree. | No send while identity conflict exists; existing committed operation remains observe-only. | Same: one idle native `navigate(tabId, saved exact URL)` then reread registry/live DOM; no retry/resubmit. New: only after a clean, separately authorized relationship is established. | Same WRM reconciles the exact keyed tab and ledger binding; retain status/DOM observations and saved URL. | Permission to substitute a title, list entry, root URL, or guessed conversation ID; science failure. |
+| **Active generation or timeout.** Native controls/active query show generation, or client deadline ends without a decisive ledger fact. | No second Send and no close while generation may be active. | Same: observe/wait; `verifyExisting` only with the exact eligible anchor; never retry/resubmit. New: none until the current operation is mechanically resolved. | Same WRM inspects ledger first, then exact page; retain timestamps, active-control evidence, ledger state, and later completion/archive. | A failed provider turn, permission to activate response controls, or direction pause. |
+| **Ambiguous send.** `sendActionCount=1`, a visible turn, concrete identity, or an observed-turn anchor exists without validated completion; distinguish an anchor with validated `userMessageId` from one with only `observedUserMessageId`. | Permanently no-resend for that exact operation. | Validated anchor: same exact observer may run. Observed-only/no validated anchor: same operation is ledger/page observation only. Neither may retry/resubmit. New: only a later distinct owner-authorized turn, never as a retry. | Same WRM preserves causal/send receipt, observed anchor, safe serializer diagnostics, URL/ID, and archive; it never fabricates an anchor. | That no turn happened, that rendered Markdown proves source bytes, or that science is paused. |
+| **`max_inflight` contention.** Fresh strict admission returns pre-send `rate_limited`, `reason=max_inflight`, `operationKind=strict-review`, zero Send facts. | No strict ledger operation/fingerprint is created by that rejection. | Same: no retry inside the call; observe the owning L1 admission only. New: an unchanged planned operation may be later authorized after capacity exists, with its original frozen semantics and a fresh key only if no prior operation was created. | Owning L1 schedules; same WRM only if contention is part of a shared workflow defect. Retain admission/status evidence, not a fabricated archive receipt. | Provider/model failure, a scientific attempt, or a portfolio/lease pause. |
+| **Profile/session/reasoning-control drift.** Exact native DOM shows a real access gate, missing/ambiguous mode control, or a fresh-tab `High` reset; status/account text alone is insufficient. | No send while exact selected `Pro` is unproved. | Same: non-sending native inspection or reasoning-mode preflight only; no retry/resubmit. New: only after the Pro-mode fact is established and separately authorized. | Same WRM uses one disposable tab and the native mode receipt; `High`→`Pro` is a permitted reversible normalization, while missing/ambiguous controls require scoped controller repair. Retain exact-tab DOM/status, safe control diagnostics, source/runtime version, and tab-close fact. | Logout/account/model denial, a user request, or any science/portfolio conclusion unless the exact interface proves it. |
+| **Result-path or archive guard failure.** Result guard rejects the assigned/returned path, archive is missing/stale, or an archive conflicts with ledger. | Never overwrite the existing archive; no page action to make records agree. | Same: ledger-only restoration only for a valid COMPLETE exact operation; no retry/resubmit. New: use a new unused assignment result path when required, not a new provider turn. | Same WRM preserves original archive and uses authoritative ledger plus frozen batch/SHA; retain guard output, source receipt, and restoration record. | Loss of the response, permission to resend, or a Git/publication prerequisite. |
+| **Inactive-tab close failure.** Archive is durable, native status proves no generation, but `tab_close` errors or its cleanup marker remains pending. | No page/input/send action; never close an active/uncertain tab. | Same: close/registry observation only; no retry/resubmit. New: unrelated later conversation work uses a fresh disposable tab. | Same WRM records close error and rechecks native registry; it reconciles a write-once archive with a later close fact without rewriting it. Retain archive, close attempt/result, registry evidence, and saved remote URL. | Remote conversation loss, provider failure, a direction pause, or permission to keep idle tabs. |
+
 ## 11. Clean examples
+
+### Closed-loop Operator recipe
+
+Use `agentify_operator_observe(tabId)` before every native UI action. It returns
+the exact URL, visible role/label/selected/expanded state, hit-tested bounds,
+composer hash metadata, generation controls and an observation revision. Choose
+one permitted target, then call `agentify_operator_act` with the same `tabId`,
+URL, revision and target ID. Its receipt contains the after-action observation;
+use that new state rather than repeating the prior action. The action surface
+fails closed for URL/revision drift, hidden or ambiguous controls, protected
+default tabs, and Send/Stop/Retry/Continue controls. It uses native pointer,
+key and insert-text input only—never `HTMLElement.click()`, hidden DOM or
+coordinate guesses.
+
+After navigation or action, use `agentify_operator_wait` with a visible
+interactive or exact role/label/selected predicate. A single missing element,
+changing URL/revision or pending selected state is `NOT_YET_OBSERVED`; bounded
+wait timeout is `LOAD_OR_POSTCONDITION_UNRESOLVED` with its observation
+timeline, never an excuse for a repeat click or provider fallback.
+
+For file-backed preparation, text/paste supplies the frozen path and SHA and
+must return `sendActionCount=0` and `operationCreated=false`; strict review
+alone owns the one Send action. A zero-commit terminal, ambiguous commit, or
+committed no-response remains observe-only/no-resend as specified above.
+
+Troubleshooting recipes are closed-loop: (1) ChatGPT `High`→`Pro`: observe the
+one visible mode trigger (including a uniquely mapped nested rendered `High`),
+act once to open it, re-observe, then act once on the unique exact visible menu
+`Pro` target; a mapping contradiction is an observer-coverage defect, not a
+click permission; (2) root/login-like versus saved conversation:
+observe exact URL and visible controls, native-navigate only the saved exact URL
+when authorized, then re-observe; (3) picker/submenu discovery: use roles,
+labels, selected/expanded state and hit-test bounds, never a fixed menu shape;
+(4) persisted draft: observe editable empty/hash state, focus/selection/delete
+through distinct actions and re-observe before file-backed preparation; (5)
+long response: observe the same operation naturally and never target response
+controls; (6) zero-commit, ambiguous-commit, or committed-no-response: use the
+ledger rule and observe-only recovery, never an action that resends.
 
 The following are call shapes, not permission to send.
 

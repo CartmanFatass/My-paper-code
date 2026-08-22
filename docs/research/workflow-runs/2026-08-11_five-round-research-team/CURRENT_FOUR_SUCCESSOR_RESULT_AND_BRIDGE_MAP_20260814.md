@@ -2,15 +2,427 @@
 
 ```text
 owner=portfolio-owned prospective/result-blind map
-allocation_decision=SGSP_RG2Z_R03_EMPIRICAL|RISP_B3_EMPIRICAL|RCLE_CPC_R04_EMPIRICAL|SCDMP_R07_STAGE_A_COMPLETE|SCDMP_SUPPORT_REPRESENTATION_FACTORIAL_DEFINITION|VNFC_FULL_GRAPH_NO_CURRENT|ONLGR_NO_CURRENT
+allocation_decision=RISP_G_INIT_REACH_R01_EMPIRICAL_CONTINUES|RCLE_TBCFV_R04_FULL_EMPIRICAL_CONTINUES|SGSP_RSCF_R01_RUNNER_GATE_B_ENABLING_CONSTRUCTION|VQFP_FERL_R05_DEFINITION_ONLY|DISH_RBHR_R05_DEFINITION_ONLY|VNFC_PCPI_R02_DEFINITION_ONLY|SCDMP_TBCC_R02_COMPLETE_NO_CURRENT|VNFC_BPCR_R09_COMPLETE_NO_CURRENT|ONLGR_TBVUUS_R03_COMPLETE_NO_CURRENT|OLD_EXACT_OBJECTS_IMMUTABLE
 cross_direction_evidence_transfer=forbidden
 automatic_action_routing=false
 rcle_b2_branch_consumed=UNRESOLVED_VALIDITY
-current_status_pointer=SCDMP_TBOV_R07_STAGE_A_POST_RESULT_PORTFOLIO_ADJUDICATION_20260820.md
-superseded_allocation_base=RCLE_CPC_R04_EMPIRICAL_VNFC_TEPR_Q0_PORTFOLIO_ADJUDICATION_20260815.md|HISTORICAL_NONOPERATIVE
+current_status_pointer=CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md
+current_stage_classification=EMPIRICAL_2|ENABLING_CONSTRUCTION_1|DEFINITION_ONLY_3
+current_uav_empiricals=NONE
+preferred_next_uav_path=DISH-RBHR-R05-SUCCESSOR-DEFINITION|DEFINITION_ONLY
+superseded_allocation_base=ONLGR_TBVUUS_R03_POST_RESULT_PORTFOLIO_ADJUDICATION_20260821.md|BASE_EVIDENCE_AND_DECISION_REMAIN_OPERATIVE_ALLOCATION_SUPERSEDED
 ```
 
-## 2026-08-20 current SCDMP r07 Stage-A post-result cut
+## 2026-08-21 operative classification notice
+
+This historical result/bridge map is now read through
+`CURRENT_PORTFOLIO_CLASSIFICATION_RESIDUAL_VALUE_AND_DEFINITION_CUT_20260821.md`.
+Its frozen direction-local branch maps remain evidence, but its older current-
+action prose does not route work. Current objects are two empirics (RISP and
+RCLE), SGSP Gate B enabling construction, and VQFP-FERL r05, DISH r05 plus
+VNFC-PCPI r02 definition-only. SCDMP TBCC r02, VNFC BPCR r09 and ONLGR TBVUUS are
+complete/no-current. No operational queue or UAV catalog count changes this
+classification.
+
+## 2026-08-21 current RISP r01 resource-boundary result map
+
+The slice-0001 terminal is not a scientific result: the active frozen
+coordinate remains intact, all 352 atomic commits are absent and no partial
+value was opened. Portfolio authorizes only a 2.5-GiB process-group lease and
+same-frontier continuation. The ordered `Psi` branches and claim ceiling are
+unchanged; only a complete accepted panel may enter this map.
+
+## 2026-08-21 base RCLE TBCFV r04 empirical result map — action remains current
+
+Construction has no branch meaning and is consumed. The next admissible RCLE
+milestone is only the complete 20-block empirical artifact. The frozen map
+first checks opportunity, coherent-scaffold controllability and containing
+FLEX competence, then distinguishes C1P1 package/component/scale value, FLEX
+superiority, fragmentation without value, target no-materiality and unresolved
+states.
+
+No partial block, arm, cell, checkpoint or resource interruption enters this
+map. A positive branch remains toy-bound and only reopens a later Portfolio
+bridge question; no branch automatically opens a surface or UAV experiment.
+
+## 2026-08-21 base SCDMP TBCC revision-02 native-first map — action remains current
+
+The definition is complete and consumed into construction only. Native-host,
+oracle, comparator, lifecycle and result-blind efficiency evidence carries no
+competence, opportunity or order-value branch meaning. Technical acceptance
+makes only the exact frozen prerequisite-plus-final panel eligible for a new
+Portfolio decision.
+
+The direct bridge remains conditional: one shared policy must first pass the
+foundation and physical-order opportunity gates, then identify value or
+robustness across fixed/switch external `k` against FOUNDATION, containing
+FREE, tied REVERSED and matched SET. Construction cannot activate this bridge.
+
+## 2026-08-21 current SGSP support-slack clarification — allocation unchanged
+
+All twelve rows are a unique expansion of frozen r03 definitions under r01's
+28-family law. Revision r01 and Gate B remain unchanged; analyzer completion
+does not itself identify or bridge PHY-TRUST.
+
+## 2026-08-21 base SGSP RSCF r01 runner/Gate-B map — action remains current
+
+Gate A is a consumed technical branch: exact equivalence and the `>=2x` suffix
+speed gate passed at every width. Runner/Gate B now has one role only—establish
+full-path conformance and measured cost before any SGSP result exists.
+
+Passing Gate B makes the exact complete panel eligible for a new Portfolio
+decision; it does not open a scientific branch, second surface or UAV bridge.
+Failure or cost expansion remains technical/allocation evidence and cannot
+retain or delete PHY-TRUST.
+
+## 2026-08-21 base RCLE TBCFV r04 construction and bridge map — action remains current
+
+Native construction has no scientific branch. It must establish exact host,
+package, treatment/FLEX containment, scripted prerequisite, 72-tail analyzer
+and atomic-resume conformance plus measured full-chain cost before any RCLE
+identity exists.
+
+Technical acceptance makes only the frozen complete TBCFV panel eligible for a
+new Portfolio decision. It does not open CPC, another surface or UAV work. A
+technical mismatch is repaired or returned without deleting common persistent
+commitment; a material measured-cost increase may change allocation but cannot
+be interpreted as an RCLE result.
+
+## 2026-08-21 base RISP r01 expanded-resource map — action remains current
+
+The four scientific branches and every bridge limit are unchanged. Native
+functional conformance, two-worker scaling and the 29.92-CPU-hour projection
+carry no branch meaning. After final efficiency acceptance within the expanded
+ceiling, only the complete 352-unit `Psi` result enters this map.
+
+Resource slices may continue the same blinded frontier but cannot create a
+partial bridge, stop or result. Any projection beyond the expanded ceiling
+returns for resource allocation without changing RISP science.
+
+## 2026-08-21 base SGSP RSCF r01 Gate-A map — action remains current
+
+Gate A has three complete technical uses: reject the route on an exact
+equivalence/conformance defect; reject current continuation when equivalent
+warm suffix speed is below 2x; or retain eligibility for one separately costed
+runner/Gate-B decision when exact equivalence and the speed gate both pass.
+
+None is an SGSP scientific branch. Gate A has no seed-level estimator,
+physical-prior value or bridge claim. A pass does not open empirical activity,
+a second surface or UAV work; a fail does not delete SGSP or the physical-prior
+hypothesis.
+
+## 2026-08-21 base ONLGR TBVUUS r03 result and bridge map — action remains current
+
+The complete four-arm panel first asks whether the ROAD action is valid,
+supported, comparator-answerable and non-harmful, then whether it improves both
+mean and lower-tail service over NEVER and matched SHAM. Only
+`ROAD_PATCH_DIRECT_UTILITY_QUALIFIES` opens eligibility for a new fixed-
+ROAD-transform timing definition on fresh coordinates.
+
+No other branch opens a bridge. Even a positive bridges only from direct
+one-shot utility to a later definition decision; it does not establish timing,
+repeated-update, arbitrary-`k`, another UAV surface or deployment value.
+
+## 2026-08-21 current RISP r01 empirical result and bridge map
+
+The complete Pro-closed, EM-intaken and CM-feasible r01 definition is now an
+empirical investment. Its exact result is only `Psi=(B_G,B_0)` after the
+complete validity fence:
+
+| Complete r01 branch | Portfolio-eligible scientific use | Bridge limit |
+| --- | --- | --- |
+| `G_START_ONLY_ANSWERABILITY_QUALIFIED` | Retain finite-package initialization-sensitive reachability. | No value/UAV bridge; a new semantic or direct-value object is still required. |
+| `BOTH_STARTS_ANSWERABILITY_QUALIFIED` | Remove initialization necessity at the registered qualification bar. | At most makes a separately frozen semantic/value comparison eligible. |
+| `NEITHER_START_ANSWERABILITY_QUALIFIED` | Close the current finite-package recurrence route without a general failure claim. | No bridge. |
+| `ZERO_START_ONLY_ANSWERABILITY_QUALIFIED` | Do not retain the registered `G` start as a reachability aid. | No bridge. |
+
+The maximum claim is exact finite-package initialization-dependent
+answerability/reachability. Even a favorable result cannot establish ACK
+semantics, learned recurrence value, arbitrary `k`, UAV transfer or deployment.
+R03, checkpoint transplant and sign-reversed center remain unavailable.
+
+## 2026-08-21 base residual-value definition and bridge map
+
+The completed exact results open no automatic bridge, but their residual
+questions may now be actively converted into prospective definition objects.
+This is the corrected use of nonidentification: localize the missing
+prerequisite, define one new value-bearing object, and return before any
+construction or activity.
+
+| Family | Current definition-only object | Earliest bridge eligibility |
+| --- | --- | --- |
+| SCDMP | Competent-controller-first target-bound order value | One treatment-independent shared controller qualifies and a later direct order-value object passes. |
+| ONLGR | Voluntary-update utility before timing | A materially new action shows supported direct physical value over never updating; timing remains a later decision. |
+| SGSP | Lower-work target-bound physical-prior value | Competent EDGE and held-out-`N` answerability support a direct prior-value comparison at proportionate cost. |
+| RCLE | Target-bound commitment-fragmentation value | A real roster-change target and competent flexible containment make persistent commitment directly answerable. |
+
+Definition completion alone opens no bridge. A later qualifying empirical
+result still requires its own Portfolio decision and exact claim ceiling.
+At this base snapshot VNFC BPCR-r09 was the sole empirical bridge. RISP r01 is
+now empirical but remains an upstream reachability object rather than a direct
+value/UAV bridge.
+
+## Superseded/base 2026-08-21 RISP result and bridge map
+
+RISP-B3 r03 is complete/nonidentified at the containing-arm answerability gate,
+while fixed-G exploitability is retained as exact-package evidence. It opens no
+UAV or value bridge. One definition-only object may determine whether G-start
+changes finite-budget reachability relative to zero-start under the same zero
+decay center. A positive definition or later result would still require a
+separate semantic/value decision.
+
+VNFC-BPCR-r09 is the sole empirical bridge. RISP definition work is not an
+empirical replacement slot and creates no automatic downstream action.
+
+## Superseded/base 2026-08-21 SCDMP/ONLGR result and bridge map
+
+SCDMP UAV r02 and ONLGR HEADLAND-90 r03 are complete, immutable,
+nonidentified and no-current. SCDMP preserves physical order-opportunity
+evidence but has no competent learned comparison; ONLGR preserves the exact
+never-update alias/support facts but has no instantiated timing contrast.
+
+Neither exact result opens a bridge. SCDMP requires a new target-bound direct-
+value object with an independently competent shared controller or one frozen
+competence prerequisite. ONLGR requires a new voluntary-update action that
+first shows supported non-harmful direct value over never updating. Current
+empirical bridges are RISP-B3-R03 and VNFC-BPCR-r09 only.
+
+## Preserved VNFC BPCR r09 policy-exception result/bridge map
+
+The exact empirical result and bridge map is unchanged. BCRH receives one
+fixed-`N=7`, nonprecedential reference exception only so that the complete
+panel retains the strongest registered physical alternative rather than a
+selected weaker candidate menu.
+
+The exception has no branch role. It may not activate or change a MAPR,
+DIRECT, BCRH, association, decline or nonidentification outcome. A positive
+still bridges only to one finite train-`N={3,5}` to held-out-`N=7` UAV recovery
+package; it does not bridge to scalable BCRH, arbitrary `N`, repeated churn,
+another surface, production, deployment or flight.
+
+## Superseded/base 2026-08-21 VNFC BPCR r09 empirical result/bridge map
+
+Accepted native construction makes the exact VNFC revision-09 panel
+empirically reachable. Its complete association/value maps may retain the
+exact MAPR factorization package, retain only broader DIRECT-set learning,
+record bounded BCRH sufficiency, decline exact robust MAPR, or return exact
+nonidentification/invalid evidence. No partial output has portfolio use.
+
+A qualifying positive is already a direct UAV held-out-variable-`N` result but
+remains bounded to the exact two-zone, one-loss, train-`N={3,5}` to held-out-
+`N=7` package. It does not bridge automatically to arbitrary roster sizes,
+repeated churn, another surface, hardware, production, deployment or flight.
+Every complete branch returns before further VNFC action.
+
+RISP, ONLGR and SCDMP remain the other empirical routes. No cross-direction
+result, coordinate, threshold or claim is transferred.
+
+## Superseded/base 2026-08-20 VNFC BPCR r09 construction/result/bridge map
+
+Exact VNFC revision 09 is definition-complete and moves only into native
+construction/conformance. Construction can establish exact C++ batch semantics,
+MAPR/DIRECT containment, BCRH scorer/checker agreement, finite sign-flip
+inference, deterministic conformance and remaining empirical cost. It cannot
+select a value, association, retain, decline or nonidentification branch.
+
+A later separately authorized complete panel would directly test one shared
+post-loss policy trained at `N={3,5}` and frozen at held-out `N=7`. Even a
+positive remains one finite two-zone, one-loss, first-sixty-second recovery
+package and cannot bridge automatically to arbitrary `N`, repeated churn,
+hardware, production, deployment or flight.
+
+RISP, ONLGR and SCDMP remain evidence-isolated empirics. No result, coordinate,
+threshold or claim transfers into VNFC construction.
+
+## Superseded/base 2026-08-20 SCDMP UAV r02 empirical result/bridge map
+
+Accepted native construction makes the exact SCDMP UAV panel empirically
+reachable. Its complete first-true outcomes may retain exact
+`TAUT-GUST-RISK-TILT`, decline that exact package, record direct UAV
+order-value nonidentification, or return invalid evidence to its owner. No
+partial output has portfolio use.
+
+A positive is already a direct fixed-three-UAV external-`k` result, but remains
+bounded to the exact planar simulator, eighteen replicates and four registered
+target regimes. It does not bridge automatically to semigroup/general sequence
+claims, another UAV surface, aircraft, production or deployment. Every complete
+branch returns before further SCDMP action.
+
+RISP and ONLGR remain the other empirical routes; VNFC remains definition-only.
+No cross-direction result, seed, threshold or claim is transferred.
+
+## Superseded/base 2026-08-20 SCDMP UAV r02 construction/result/bridge map
+
+Exact SCDMP UAV r02 is now definition-complete and moves only into native
+construction/conformance. The construction object has one use: establish a
+literal task-specific full reset-to-terminal C++ batch host, deterministic
+conformance and measured remaining empirical cost. It cannot select a
+treatment, result branch, bridge or claim.
+
+If a later separately authorized complete panel is valid, its result map may
+retain exact `TAUT-GUST-RISK-TILT`, decline that exact package, or record direct
+UAV order-value nonidentification. Even a positive remains one planar fixed-
+three-UAV, four-regime external-`k` package; it opens no automatic Stage B,
+surface, production, deployment or flight bridge.
+
+Current empirics remain RISP and ONLGR. VNFC remains definition-only. SCDMP's
+old checkpoint path remains no-current and supplies no checkpoint, factor,
+threshold, seed or coordinate to the UAV object.
+
+## Superseded/base 2026-08-20 ONLGR empirical result/bridge map
+
+Exact HEADLAND-90 construction is complete and the fresh CAL/HOLD full panel is
+now a current empirical investment. Its complete outcomes have only these
+portfolio uses: retain the exact local two-rate package, record a valid
+opposite-sign crossover, prefer GLOBAL as the exact local simplicity action,
+make a distinct continuous-timing definition eligible, record
+nonidentification or return invalid evidence to its owner. No branch directly
+opens production, deployment, another surface or a general timing family.
+
+The empirical authorization preserves the 192-controller calibration family,
+five logical held-out tags, reciprocal swaps, aliases, endpoints, support and
+branch laws. Fresh coordinates and the complete 37,847,040-tick panel are
+atomic; no partial branch or search is allowed.
+
+RISP remains the other empirical route. SCDMP/VNFC remain UAV definitions;
+SGSP/RCLE and old checkpoint/full-graph routes remain no-current. The three UAV
+entries remain ONLGR/SCDMP/VNFC, with ONLGR the sole UAV empirical activity.
+
+## Superseded/base 2026-08-20 all-direction UAV-entry map
+
+The current map contains one existing empirical route and three formal UAV
+program entries:
+
+| Direction | Current next object | Result/bridge boundary |
+| --- | --- | --- |
+| RISP | complete exact B3-R03 panel | No UAV bridge before a complete result identifies a concrete recurrence component. |
+| ONLGR | exact HEADLAND-90 host construction/conformance | Return before calibration/coordinates/empirical lease; later result can only be package-specific two-rate UAV-simulator value. |
+| SCDMP | multi-UAV suspended-payload/formation order-value definition | Return Pro-closed, EM-intaken, CM-feasible and costed before construction; no checkpoint or Stage-B route. |
+| VNFC | bounded two-zone UAV post-churn recovery definition | Return a finite competent-comparator/cost object without full-graph enumeration before construction. |
+| SGSP | none current | CCA remains too costly/narrow absent its existing revisit fact. |
+| RCLE | none current | No Level-1 UAV commitment-fragmentation fact or Level-2 object exists. |
+
+The three UAV entries are ONLGR, SCDMP and VNFC at preactivity construction or
+definition layers. No UAV empirical activity or claim is current. The old
+SCDMP checkpoint route and VNFC full-graph route remain no-current; no evidence
+transfer, fusion, quota, backfill or execution-order action follows.
+
+## Superseded/base 2026-08-20 SCDMP TBOV SRF r03 post-result cut
+
+Exact SRF r03 is complete and valid. Support and interaction are bounded
+practically small; representation remains unresolved. All four cells fail the
+all-seed competence conjunction, so no checkpoint can enter a relation assay.
+
+No further checkpoint result branch exists. Rerun, more steps, threshold/seed
+repair, factor/architecture menus, checkpoint reuse, relation assay and Stage B
+are no-current. The exact result does not delete SCDMP.
+
+The one current successor is definition-only and materially new:
+`SCDMP-TARGET-BOUND-END-TO-END-ORDER-VALUE-DEFINITION`. It must specify its
+treatment independently of observed r07/SRF outputs and test direct external-
+`k` value against a competent containing FREE-DIRECT plus reversed/order-
+insensitive controls. It bypasses checkpoint selection and the old Stage-B
+route; no empirical activity is current.
+
+RISP-B3 is the sole empirical investment. SGSP, RCLE, ONLGR and VNFC remain
+no-current, with no evidence transfer or automatic replacement.
+
+## Superseded/base 2026-08-20 SGSP RG2Z CCA r01 post-definition cut
+
+Exact CCA r01 is definition-complete, Pro-closed, EM-intaken and statically
+feasible. Its future complete branches remain invalid/repair,
+`NONIDENTIFIED`, exact-package prior retention or exact-package do-not-retain;
+no branch identifies a trainer effect against r03.
+
+The empirical object is no-current. It requires 37.30B learned decisions,
+3.454B environment slots, 26–45 CM workdays and 2,500–9,000 CPU core-hours for
+one fixed toy/update/package answer. A positive has no automatic bridge and a
+second nonidentification supplies no broader deletion.
+
+The definition remains ready evidence and SGSP is not deleted. Revisit only on
+a material semantics-preserving cost reduction, target-critical physical-prior
+need, lower-work Pro-closed direct-value object or reusable shared substrate.
+No source, benchmark, construction, coordinates or empirical activity is
+current.
+
+Current empirics are RISP-B3 and the count-corrected SCDMP factorial. There is
+no definition or enabling line; RCLE, ONLGR and VNFC remain no-current.
+
+## Superseded/base 2026-08-20 SGSP RG2Z r03 post-result cut
+
+Exact SGSP r03 is complete and nonidentified. Its two held-out answerability
+lower bounds are negative and EDGE competence at both training sizes is far
+below the registered `0.08` floor. Frozen precedence makes all later exact-zero
+comparisons descriptive only; the panel neither retains nor deletes the
+physical prior and opens no second surface.
+
+The only current SGSP successor is definition-only for a matched
+counterfactual-credit object. It keeps RIDGEGATE-2Z, nested PHY/EDGE families,
+the update-512 budget, train/held-out roster sizes, fresh 24-seed law and full
+branch map while replacing terminal-return learned-critic credit symmetrically
+with one exact one-step-deviation counterfactual advantage. The definition must
+freeze coupling, useful-work matching, falsifiers and total cost.
+
+Future branches are bounded prospectively: invalid/incomplete returns for CM
+repair; another competence/answerability failure closes this target-bound line;
+a qualified result either retains or does not retain the prior on the same
+intact/cut conjunctions. No definition branch authorizes empirical activity,
+another trainer/budget/task, surface, fusion or UAV work.
+
+Current empirics are RISP-B3 and the count-corrected SCDMP factorial. RCLE,
+ONLGR and VNFC remain no-current, with no vacancy/backfill or evidence transfer.
+
+## Superseded/base 2026-08-20 RCLE CPC r04 post-result cut
+
+Exact RCLE-CPC r04 is complete under `NO_COARSE_ADVANTAGE`. Both co-primary
+intervals are inside the prospective no-material band and no mechanism gate
+passes. The fixed binary restriction is not retained, the exact CPC object is
+immutable, and there is no within-CPC successor.
+
+The broader RCLE family is not deleted, but no result branch supplies a
+current bridge. A future route requires new target-bound evidence of material
+commitment fragmentation and a materially new direct-value object; seed,
+threshold, cardinality, optimizer or checkpoint rescue is ineligible.
+
+Current empirics are RISP-B3, SGSP-RG2Z and the count-corrected SCDMP factorial
+path. RCLE completion does not reopen VNFC, transfer evidence to SGSP or create
+backfill, fusion, surface or UAV work.
+
+## Superseded/base 2026-08-20 SCDMP SRF count-semantics correction
+
+The factorial investment continues through a count-only successor. The four
+cells, ten seeds, 600-step optimizer law, effect family, competence vector and
+every result/bridge boundary remain unchanged. `204,697,600` is only the
+prospective expectation; actual direct forwards follow
+`202,854,400 + 90 * sum_{s,a}(n10_{s,a})` within
+`[202,854,400,206,540,800]` and are recorded after the atomic panel.
+
+Exact r02 as written cannot create identities or activity. Once the corrected
+revision is same-Pro closed, EM-intaken and CM-reaccepted, its already invested
+empirical chain resumes automatically. No filler/rebalancing, relation paths,
+relation assay or Stage B is allowed. Every complete result retains the same
+post-result Portfolio return and toy→relation-assay→value bridge boundaries.
+
+## Superseded/base 2026-08-20 SCDMP SRF r02 empirical cut
+
+The complete r02 definition is now a current empirical investment. Its one
+atomic ten-seed panel crosses the current/support-stratified equal-row
+allocation with the current/context-conditioned segment representation while
+holding 600 AdamW steps, optimizer, row count, untouched evaluation and the
+per-seed `0.65` competence rule fixed. The exact eight-branch effect map and
+four-cell competence modifier remain result-blind.
+
+Every valid outcome can only retain, constrain or end the checkpoint route.
+No branch selects relation direction or Stage B. A later relation assay must
+be a new Pro-closed object with at most one prospectively named checkpoint law
+and fresh coordinates, and it still requires a new Portfolio decision. The
+maximum r02 claim is a fixed-four-carrier checkpoint-package effect.
+
+Current empirics are RISP-B3, RCLE-CPC, SGSP-RG2Z and SCDMP-SRF-r02. ONLGR
+host-card and VNFC full-graph remain no-current. No evidence transfer, fusion,
+cross-`N×k`, WIP/order, backfill, second-surface or UAV action follows.
+
+## Superseded/base 2026-08-20 SCDMP r07 Stage-A post-result cut
 
 Exact SCDMP r07 Stage A is complete under `MODIFY-CHECKPOINT`: all registered
 physical-order opportunity and target/action qualifications passed, but five

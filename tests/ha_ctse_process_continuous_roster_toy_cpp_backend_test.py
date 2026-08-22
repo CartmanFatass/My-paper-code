@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from pathlib import Path
 from types import SimpleNamespace
+from contextlib import contextmanager
+import hashlib
 import os
 
 import numpy as np
@@ -158,6 +160,50 @@ def test_native_loader_stages_the_exact_continuous_roster_source() -> None:
     assert staged_source.read_bytes() == cpp._SOURCE.read_bytes()
 
 
+def test_process_cache_skips_repeated_toolchain_activation_and_invalidates_source(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    source = tmp_path / "toy.cpp"
+    source.write_bytes(b"// v1\n")
+    calls: list[str] = []
+
+    @contextmanager
+    def toolchain():
+        calls.append("toolchain")
+        yield
+
+    def build_identity() -> str:
+        return hashlib.sha256(source.read_bytes()).hexdigest()[:20]
+
+    def load(**_kwargs):
+        calls.append("load")
+        return SimpleNamespace(__name__=f"module_{len(calls)}")
+
+    monkeypatch.setattr(cpp, "_SOURCE", source)
+    monkeypatch.setattr(cpp, "_LOADED_BACKENDS", {})
+    monkeypatch.setattr(cpp, "_windows_toolchain_environment", toolchain)
+    monkeypatch.setattr(cpp, "_build_identity", build_identity)
+    monkeypatch.setattr(cpp, "load_source_keyed_extension", load)
+
+    first = cpp.load_continuous_roster_toy_cpp_backend(build_root=tmp_path / "build")
+    second = cpp.load_continuous_roster_toy_cpp_backend(build_root=tmp_path / "build")
+    assert first is second
+    assert calls == ["toolchain", "load"]
+
+    source.write_bytes(b"// v2\n")
+    third = cpp.load_continuous_roster_toy_cpp_backend(build_root=tmp_path / "build")
+    assert third is not first
+    assert calls == ["toolchain", "load", "toolchain", "load"]
+
+    fourth = cpp.load_continuous_roster_toy_cpp_backend(
+        build_root=tmp_path / "other-build"
+    )
+    assert fourth is not third
+    assert calls == [
+        "toolchain", "load", "toolchain", "load", "toolchain", "load"
+    ]
+
+
 def test_build_identity_rechecks_source_bytes_in_same_process(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -200,3 +246,31 @@ def test_benchmark_schema_is_bounded_and_oracle_gated() -> None:
     assert result["python_median_seconds"] > 0.0
     assert result["native_median_seconds"] > 0.0
     assert result["speedup"] > 0.0
+
+
+def test_benchmark_matrix_covers_required_batch_widths(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        benchmark.cpp,
+        "load_continuous_roster_toy_cpp_backend",
+        lambda: SimpleNamespace(),
+    )
+    monkeypatch.setattr(
+        benchmark,
+        "run_benchmark",
+        lambda *, batch_size, capacity, repeats: {
+            "batch_size": batch_size,
+            "capacity": capacity,
+            "repeats": repeats,
+            "bitwise_outcome_oracle": True,
+        },
+    )
+    result = benchmark.run_benchmark_matrix(
+        batch_sizes=(1, 8, 32), capacity=8, repeats=5
+    )
+    assert result["schema"] == "continuous_roster_toy_cpp_batch_matrix_v2"
+    assert result["batch_sizes"] == [1, 8, 32]
+    assert result["full_reset_to_terminal_episode"] is True
+    assert result["steady_measurement_excludes_process_cold_preflight"] is True
+    assert [row["batch_size"] for row in result["results"]] == [1, 8, 32]

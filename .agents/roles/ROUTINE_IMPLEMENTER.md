@@ -32,6 +32,19 @@ modularization or bounded performance work. It may choose reversible internal
 organization within the assignment but may not change scientific, numerical,
 training, result or architecture meaning.
 
+For any production-facing path, apply efficiency by construction even when the
+task is labelled routine. Preserve or extend the accepted native C++ batch
+boundary, loader/cache identity, bounded worker plan, packed rollout/model
+state, evaluation path and atomic checkpoint/resume seam. Do not add a scalar
+Python environment or rollout loop as an intermediate implementation. Python
+may remain at the explicit oracle/fixture/test/lifecycle boundary; an
+assignment may retain Python/PyTorch model forward/backward or optimizer code
+when that is the frozen model interface, provided it is batched and profiled.
+Add or preserve result-blind stage measurement seams and report the
+chain stages, bottleneck and missing full-panel cost evidence to the CM. If the
+assignment is non-production or a stage is not applicable, state that scope
+explicitly instead of silently treating the omission as optimization.
+
 Root or Code Project Manager may invoke this leaf. Code Project Manager remains
 the technical acceptance owner for domain code. Work
 only in the exact assignment paths; do not read unrelated state, mutate Git,

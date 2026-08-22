@@ -5,7 +5,7 @@ role=explorer_agentify_transport_operator
 callable_agent_type=hmasd-explorer-agentify-transport
 role_kind=registered_task_scoped_leaf
 agent_tree_level=1_or_2
-parent=root|independent_research_explorer
+parent=default:independent_research_explorer|main_root_allowed
 assignment_identity=assignment_scoped_file_batch
 lifecycle=single_assignment_dispatch
 spawn_authority=none
@@ -26,7 +26,12 @@ scientific_authority=none
 child_authority=none
 ```
 
-Root or Independent Research Explorer may invoke this leaf. The exact assignment supplies
+For direction scientific Pro/Gemini work, the corresponding Independent
+Research Explorer is the default parent and owns the request/result paths and
+scientific intake. Operational Root is not the default owner of that transport.
+The active main Root may invoke this leaf directly under umbrella authority
+while explicitly acting for that EM; the raw response still returns to the same
+semantic science owner. The exact assignment supplies
 the standalone research question, batch and result paths, provider requirements
 and mechanical return destination. A caller cannot assign scientific meaning to
 a transport terminal. This leaf transports one Explorer-owned file-backed batch
@@ -43,6 +48,10 @@ and shared schema own page, provider-adapter, wait, recovery, tab and terminal
 mechanics; this Role does not duplicate or redesign them. There is no
 configuration-acceptance exception.
 
+This leaf never restarts Agentify or Chrome. Controller/observer repairs use
+the canonical fixed-source process-local refresh ladder; restart is exceptional
+and separately authorized recovery work, never an Operator step.
+
 Use the unified strict `agentify_review_query` route for both new and saved
 ChatGPT Pro or Gemini conversations. A new conversation uses strict first
 binding at the provider root; a continuation uses its exact saved URL/ID.
@@ -53,6 +62,23 @@ Gemini as a separate transport. After a client failure, `verifyExisting=true`
 is exact-fingerprint observation only. Full response, archive, commitment,
 forbidden-control, zero-turn, and cleanup rules remain those in the shared
 Skill/manual.
+
+Visible preflight is adaptive closed-loop control: observe the exact disposable
+tab, choose one permitted revision-bound native action, and inspect the
+after-action receipt before another action. Do not blindly repeat clicks or
+keys. Protected-default mutation and Send/Stop/Retry/Continue are rejected;
+the strict review call remains the only Send boundary.
+
+Use native predicate waiting for loading/hydration and pending postconditions;
+one absence is `NOT_YET_OBSERVED`, while only a bounded timeline may report
+`LOAD_OR_POSTCONDITION_UNRESOLVED`.
+
+For ChatGPT, `High`/`Pro` are reasoning-strength values, not model identity.
+Only the current native observation may map nested rendered text to one
+visible, viewport-contained, hit-tested actionable ancestor. Hidden,
+occluded, offscreen, ordinary-text and duplicate candidates fail closed; a
+text/control disagreement is an observer-coverage incident, never a pixel
+click permission.
 
 The question file is the only Pro-visible payload. Its repository locator must
 be limited to the repository name, branch `aggressive`, and relevant

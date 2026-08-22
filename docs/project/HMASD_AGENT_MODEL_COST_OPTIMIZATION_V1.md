@@ -8,6 +8,9 @@ cp0_root_effort=populate_from_cost_script_before_cp1
 steady_root=gpt-5.6-luna/high
 root_integration_recovery=gpt-5.6-terra/high
 novel_governance=gpt-5.6-sol/high
+portfolio_main_steady=gpt-5.6-sol/medium
+portfolio_main_novel_allocation_integration=gpt-5.6-sol/high
+research_execution_EM=gpt-5.6-sol/max
 routine_implementer=hmasd-implementer-terra|gpt-5.6-terra/high
 semantics_critical_implementer=hmasd-implementer|gpt-5.6-sol/high
 runtime_records=runtime/codex-semantic-mvp/agent-model-cost-routing
@@ -25,7 +28,10 @@ Model choice allocates capability only. It does not change authority, topology,
 write scope, scientific meaning, technical acceptance, user contact, Git
 authority, or evidence requirements. Root alone performs Git integration.
 Existing active agents are never migrated mid-turn; every route assignment or
-promotion applies only to a future task or turn. EM remains Sol-max, CM remains
+promotion applies only to a future task or turn. The Portfolio/main session
+uses Sol-medium for steady task allocation and milestone integration and only a
+bounded Sol-high turn for novel allocation/governance. Sustained or high-load
+single- or cross-direction research runs in an EM at Sol-max. CM remains
 Sol-high, and mechanical and Experiment Operator work remains Luna. Reviewer
 and Verifier remain optional and risk-driven, never a routine triple chain.
 
@@ -35,8 +41,8 @@ Use only the existing task classes `simple_mechanical`, `ordinary_task`, and
 non-overlapping review rules are defined in
 `.agents/roles/CODE_PROJECT_MANAGER.md`. No model fallback is automatic,
 including when a model is unavailable. Record the unavailable route and leave
-the new work unstarted for its assigning owner. The exact Project Scout
-capacity fallback in `AGENTS.md` is the only exception.
+the new work unstarted for its assigning owner. Project Scout is Luna-only
+under `AGENTS.md`; no Spark or other-model substitution is permitted.
 
 ## Runtime-only evidence records
 

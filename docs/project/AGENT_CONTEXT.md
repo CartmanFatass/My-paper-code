@@ -34,6 +34,11 @@ Context hierarchy pointers, loaded only when the current actor needs them:
   There is no project-wide worker default or cap. This is distinct from
   portfolio direction count, neighbor-count ceilings, and evidence
   candidate-count ceilings; none of those values supplies a worker count.
+- User P0 native-first rule: a new experiment must freeze its native C++ batch
+  boundary, loader/ABI identity, supported widths, worker contract and
+  reference benchmark before production Python loops are written. Python is
+  oracle/fixture-only; an unspecified serial production path is
+  `REPAIR_REQUIRED` and cannot receive a heavy lease.
 
 ## Git
 

@@ -1,0 +1,141 @@
+{
+  "direction_id": "renewal_indexed_score_plasticity",
+  "exact_object_revision": "RISP-G-INIT-REACH-R01-FULL-PANEL / RISP-G-INIT-REACH-SCIENCE-20260821-01",
+  "marker": "PORTFOLIO_EM_TO_ROOT_CM_RISP_G_INIT_REACH_R01_RSS_VALIDATOR_SUCCESSOR_20260821",
+  "parents": {
+    "backend_acceptance": {
+      "path": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_BACKEND_EFFICIENCY_ACCEPTANCE_20260821_01.json",
+      "sha256": "7d1f170c2090e145af60753fa4619f7da41f3de63f769c996e3fce8e01764a20"
+    },
+    "direction_local_protected_sources": {
+      "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\b2_r02_experiment.py": "6879c5f46cd7f64d3716e0ab34fce792674e467433b4283b9a47dcab0a907920",
+      "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_coordinate_certificate.py": "0f01cba1efca1492fafe6a24bc252e480e07eef2fa12ad00f606eea0aefab8f4",
+      "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_experiment.py": "4b218d50e1ca73b51ba0cd2088c478fed935a46186d6539d4e6fdb56ba9e33b8",
+      "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_native_backend.cpp": "206402854779255db12246ecf99ed542c3fd60c00a68bb7a8ba8b3703e5afcda",
+      "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_native_backend.py": "8e246c7b7792a763db432ce6d7ada5dc37244695b756187f5c33449bea803503",
+      "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_resume.py": "e7a850ffde01bbd0d8576cf9730ba4e5a32a4afbf516ec76be4f67c02561fbad",
+      "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\run_g_init_r01_resume.py": "a336aa4bf96fe7066167fa1076aeaffe77db9170b8cb280357d97f770cc96bd5"
+    },
+    "native_semantic_identity": {
+      "abi_version": 1,
+      "artifact_sha256": "3b20ba9e5a55c2cc0df9ad5582bb957155931856fc2e643422104ca8d56c7709",
+      "batch_widths": [
+        1,
+        8,
+        32
+      ],
+      "build_key": "76a7332a0df5508787387a184c9e1f4f95c66f7931014257fdaff80e001a3f0b",
+      "full_reset_step_cpp": true,
+      "python_environment_state": false,
+      "python_fallback": false,
+      "python_interactive_call_loop": true,
+      "python_materialized_event_adapter": true,
+      "python_reset_step_transition": false,
+      "schema": "RISP-G-INIT-REACH-R01-NATIVE-ARTIFACT-IDENTITY-V1",
+      "source_sha256": "206402854779255db12246ecf99ed542c3fd60c00a68bb7a8ba8b3703e5afcda",
+      "struct_sizes": {
+        "extended_step_input": 288,
+        "reset_input": 160,
+        "step_input": 64,
+        "transition_output": 104
+      }
+    },
+    "original_certificate": {
+      "path": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_PRODUCTION_CERTIFICATE_20260821_01.json",
+      "sha256": "2d7339ad9c103cd9f0ed398b644d03c59f4d561aa0b3649e1d1bab14b93421a2"
+    },
+    "original_source_manifest": {
+      "entries": {
+        "C:\\Projects\\HMASD\\envs\\native\\production_backend.py": "086f107f045939dc465ac0e98abd15877ce9e76bb8b75435dc56b6dcea7e0571",
+        "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\b2_r02_experiment.py": "6879c5f46cd7f64d3716e0ab34fce792674e467433b4283b9a47dcab0a907920",
+        "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_coordinate_certificate.py": "0f01cba1efca1492fafe6a24bc252e480e07eef2fa12ad00f606eea0aefab8f4",
+        "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_experiment.py": "4b218d50e1ca73b51ba0cd2088c478fed935a46186d6539d4e6fdb56ba9e33b8",
+        "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_native_backend.cpp": "206402854779255db12246ecf99ed542c3fd60c00a68bb7a8ba8b3703e5afcda",
+        "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_native_backend.py": "8e246c7b7792a763db432ce6d7ada5dc37244695b756187f5c33449bea803503",
+        "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_resume.py": "e7a850ffde01bbd0d8576cf9730ba4e5a32a4afbf516ec76be4f67c02561fbad",
+        "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\run_g_init_r01_resume.py": "a336aa4bf96fe7066167fa1076aeaffe77db9170b8cb280357d97f770cc96bd5"
+      },
+      "sha256": "5b5dcf5159105f91f8332ea3e761853195e1e3e9f4332c26be8c14745f475eac"
+    },
+    "predecessor_lease": {
+      "path": "C:\\Projects\\HMASD\\temp\\leases\\RISP_G_INIT_REACH_R01_ROOT_EMPIRICAL_LEASE_20260821_01.json",
+      "sha256": "6a92243cd3e9b8960688eee94b6a3015b90d54ee9a580352df699c6401aea69b",
+      "validity_reinterpreted": false
+    },
+    "shared_component_semantic_identity": {
+      "backend": "cpp",
+      "batch_width": 32,
+      "component": "risp.g_init_reach.r01.full_host",
+      "full_reset_step_cpp": true,
+      "native_artifact_sha256": "3b20ba9e5a55c2cc0df9ad5582bb957155931856fc2e643422104ca8d56c7709",
+      "native_binding_kind": "ctypes_cdll",
+      "native_boundary": "complete_g_init_r01_cpp_host_with_batched_interactive_reset_raw_prefix_motion_ack_step_close_and_no_python_environment_fallback",
+      "python_fallback": false,
+      "schema": "HMASD_CPP_BATCHED_PRODUCTION_PREFLIGHT_V1"
+    },
+    "shared_registry_lineage": {
+      "accepted_only_by_original_component_semantic_identity": true,
+      "byte_identity_changed_outside_successor_scope": true,
+      "current_sha256": "ab22b31bd22eb4b4ca2e1ba2f4ab21658b5ba1467aecd0872eacbabd19714913",
+      "path": "C:\\Projects\\HMASD\\envs\\native\\production_backend.py",
+      "stored_sha256": "086f107f045939dc465ac0e98abd15877ce9e76bb8b75435dc56b6dcea7e0571"
+    },
+    "zero_commit_frontier": {
+      "commit_count": 0,
+      "manifest_path": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_RESUME_20260821_01\\manifest.json",
+      "manifest_sha256": "8ffcf4b19281af8054aeb1cdc2eaa55a7899de6540da3b26100d00ae71f00e6f",
+      "result_absent": true,
+      "result_path": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_RESULTS_20260821_01\\RISP_G_INIT_REACH_R01_COMPLETE.json"
+    }
+  },
+  "production_coordinate_read_by_successor": false,
+  "production_coordinate_serialized": false,
+  "schema": "RISP-G-INIT-REACH-R01-RSS-TECHNICAL-SUCCESSOR-ACCEPTANCE-V1",
+  "science_revision_changed": false,
+  "successor_sources": {
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_rss_successor.py": "9721e9c028908c4c595dc53f41e64418bf5363b2526b890611a431c94776b2a9",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\run_g_init_r01_rss_successor.py": "46dda73f4e444ed9e828c15a1c1ea7c561cab54f98de42462c969ac133552a79"
+  },
+  "successor_tests": {
+    "C:\\Projects\\HMASD\\tests\\experiments\\candidates\\renewal_indexed_score_plasticity\\test_g_init_r01_rss_successor.py": "fae66b15c47c01fa216f1bb1e00b6b20dcf472ae8a5b5df8233adc2dd9b48629"
+  },
+  "technical_lineage_only": true,
+  "test_only_fixture": false,
+  "whitelist": {
+    "atomic_install_order": "parent_all_success_then_plan_order",
+    "predecessor_resources": {
+      "complete_cpu_hours_upper": 32,
+      "complete_wall_seconds_upper": 86400,
+      "cpu_cores": 2,
+      "cpu_workers": 2,
+      "gpu": false,
+      "per_worker_rss_limit_bytes": 1073741824,
+      "process_concurrency": 2,
+      "process_group_rss_limit_bytes": 1610612736,
+      "resumable_only": true,
+      "slice_wall_seconds": 13800
+    },
+    "rng_event_native_identity_unchanged": true,
+    "sole_resource_change": {
+      "after": 2684354560,
+      "before": 1610612736,
+      "field": "process_group_rss_limit_bytes"
+    },
+    "successor_resources": {
+      "complete_cpu_hours_upper": 32,
+      "complete_wall_seconds_upper": 86400,
+      "cpu_cores": 2,
+      "cpu_workers": 2,
+      "gpu": false,
+      "per_worker_rss_limit_bytes": 1073741824,
+      "process_concurrency": 2,
+      "process_group_rss_limit_bytes": 2684354560,
+      "resumable_only": true,
+      "slice_wall_seconds": 13800
+    },
+    "unchanged_canonical_worker_payload_sha256": "1a9d4328be262f7458ab1e6887191229909aa3fce43f49a718dd0b23eae69139",
+    "unchanged_original_runner_core": true,
+    "unchanged_unit_plan_sha256": "8d1c8d9da3e96ebef62c82a15a2d558d1584a65c33252a09e5892b27db3a138b",
+    "unchanged_worker_loop": true
+  }
+}

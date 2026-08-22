@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <string>
 #include <utility>
+#include <vector>
 
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
@@ -211,6 +212,197 @@ py::tuple step_geometry_batch(
         std::move(base_path_loss));
 }
 
+double distance_three(const double* first, const double* second) {
+    const double dx = first[0] - second[0];
+    const double dy = first[1] - second[1];
+    const double dz = first[2] - second[2];
+    return std::sqrt(dx * dx + dy * dy + dz * dz);
+}
+
+double sum_interference(const std::vector<double>& values) {
+    double result = 0.0;
+    for (const double value : values) {
+        result += value;
+    }
+    return result;
+}
+
+py::tuple compute_radio_batch(
+    const DoubleArray& uav_positions,
+    const DoubleArray& user_positions,
+    const DoubleArray& ground_bs_positions,
+    const DoubleArray& access_path_loss,
+    const DoubleArray& air_path_loss,
+    const DoubleArray& base_path_loss,
+    double uav_tx_power_dbm,
+    double ground_bs_tx_power_dbm,
+    double noise_power_dbm,
+    double interference_radius,
+    bool use_fdma,
+    double aclr_linear,
+    bool exclude_receiver_uav) {
+    const py::buffer_info uav_info = uav_positions.request();
+    const py::buffer_info user_info = user_positions.request();
+    const py::buffer_info bs_info = ground_bs_positions.request();
+    const py::buffer_info access_info = access_path_loss.request();
+    const py::buffer_info air_info = air_path_loss.request();
+    const py::buffer_info base_info = base_path_loss.request();
+    require_rank(uav_info, 3, "uav_positions");
+    require_rank(user_info, 3, "user_positions");
+    require_rank(bs_info, 3, "ground_bs_positions");
+    require_rank(access_info, 3, "access_path_loss");
+    require_rank(air_info, 3, "air_path_loss");
+    require_rank(base_info, 3, "base_path_loss");
+
+    const py::ssize_t batch = uav_info.shape[0];
+    const py::ssize_t uavs = uav_info.shape[1];
+    const py::ssize_t users = user_info.shape[1];
+    const py::ssize_t bases = bs_info.shape[1];
+    if (uav_info.shape[2] != 3 || user_info.shape[2] != 3 ||
+        bs_info.shape[2] != 3 || user_info.shape[0] != batch ||
+        bs_info.shape[0] != batch || access_info.shape[0] != batch ||
+        access_info.shape[1] != uavs || access_info.shape[2] != users ||
+        air_info.shape[0] != batch || air_info.shape[1] != uavs ||
+        air_info.shape[2] != uavs || base_info.shape[0] != batch ||
+        base_info.shape[1] != uavs || base_info.shape[2] != bases) {
+        throw std::invalid_argument("radio batch dimensions do not match");
+    }
+    if (!(interference_radius >= 0.0) || !(aclr_linear >= 0.0)) {
+        throw std::invalid_argument("invalid radio configuration");
+    }
+
+    DoubleArray access_sinr({batch, uavs, users});
+    DoubleArray air_sinr({batch, uavs, uavs});
+    DoubleArray uav_to_base_sinr({batch, uavs, bases});
+    DoubleArray base_to_uav_sinr({batch, uavs, bases});
+    const auto* uav_data = static_cast<const double*>(uav_info.ptr);
+    const auto* user_data = static_cast<const double*>(user_info.ptr);
+    const auto* bs_data = static_cast<const double*>(bs_info.ptr);
+    const auto* access_data = static_cast<const double*>(access_info.ptr);
+    const auto* air_data = static_cast<const double*>(air_info.ptr);
+    const auto* base_data = static_cast<const double*>(base_info.ptr);
+    auto* access_sinr_data = static_cast<double*>(access_sinr.request().ptr);
+    auto* air_sinr_data = static_cast<double*>(air_sinr.request().ptr);
+    auto* uav_base_data = static_cast<double*>(uav_to_base_sinr.request().ptr);
+    auto* base_uav_data = static_cast<double*>(base_to_uav_sinr.request().ptr);
+    const double noise_linear = std::pow(10.0, noise_power_dbm / 10.0);
+    const double interference_scale = use_fdma ? aclr_linear : 1.0;
+
+    {
+        py::gil_scoped_release release;
+        for (py::ssize_t b = 0; b < batch; ++b) {
+            for (py::ssize_t tx = 0; tx < uavs; ++tx) {
+                for (py::ssize_t user = 0; user < users; ++user) {
+                    std::vector<double> powers;
+                    const double* receiver = user_data +
+                        static_cast<std::size_t>((b * users + user) * 3);
+                    for (py::ssize_t source = 0; source < uavs; ++source) {
+                        if (source == tx) {
+                            continue;
+                        }
+                        const double* interferer = uav_data +
+                            static_cast<std::size_t>((b * uavs + source) * 3);
+                        if (distance_three(interferer, receiver) > interference_radius) {
+                            continue;
+                        }
+                        const double path_loss = access_data[
+                            (b * uavs + source) * users + user];
+                        powers.push_back(
+                            std::pow(10.0, (uav_tx_power_dbm - path_loss) / 10.0) *
+                            interference_scale);
+                    }
+                    const double signal = uav_tx_power_dbm - access_data[
+                        (b * uavs + tx) * users + user];
+                    access_sinr_data[(b * uavs + tx) * users + user] =
+                        signal - 10.0 * std::log10(
+                            noise_linear + sum_interference(powers));
+                }
+
+                for (py::ssize_t rx = 0; rx < uavs; ++rx) {
+                    std::vector<double> powers;
+                    const double* receiver = uav_data +
+                        static_cast<std::size_t>((b * uavs + rx) * 3);
+                    for (py::ssize_t source = 0; source < uavs; ++source) {
+                        if (source == tx || (exclude_receiver_uav && source == rx)) {
+                            continue;
+                        }
+                        const double* interferer = uav_data +
+                            static_cast<std::size_t>((b * uavs + source) * 3);
+                        if (distance_three(interferer, receiver) > interference_radius) {
+                            continue;
+                        }
+                        const double path_loss = air_data[
+                            (b * uavs + source) * uavs + rx];
+                        powers.push_back(
+                            std::pow(10.0, (uav_tx_power_dbm - path_loss) / 10.0) *
+                            interference_scale);
+                    }
+                    const double signal = uav_tx_power_dbm - air_data[
+                        (b * uavs + tx) * uavs + rx];
+                    air_sinr_data[(b * uavs + tx) * uavs + rx] =
+                        signal - 10.0 * std::log10(
+                            noise_linear + sum_interference(powers));
+                }
+
+                for (py::ssize_t base = 0; base < bases; ++base) {
+                    std::vector<double> uplink_powers;
+                    const double* base_receiver = bs_data +
+                        static_cast<std::size_t>((b * bases + base) * 3);
+                    for (py::ssize_t source = 0; source < uavs; ++source) {
+                        if (source == tx) {
+                            continue;
+                        }
+                        const double* interferer = uav_data +
+                            static_cast<std::size_t>((b * uavs + source) * 3);
+                        if (distance_three(interferer, base_receiver) > interference_radius) {
+                            continue;
+                        }
+                        const double path_loss = base_data[
+                            (b * uavs + source) * bases + base];
+                        uplink_powers.push_back(
+                            std::pow(10.0, (uav_tx_power_dbm - path_loss) / 10.0) *
+                            interference_scale);
+                    }
+                    const double uplink_signal = uav_tx_power_dbm - base_data[
+                        (b * uavs + tx) * bases + base];
+                    uav_base_data[(b * uavs + tx) * bases + base] =
+                        uplink_signal - 10.0 * std::log10(
+                            noise_linear + sum_interference(uplink_powers));
+
+                    std::vector<double> downlink_powers;
+                    const double* uav_receiver = uav_data +
+                        static_cast<std::size_t>((b * uavs + tx) * 3);
+                    for (py::ssize_t source = 0; source < uavs; ++source) {
+                        if (exclude_receiver_uav && source == tx) {
+                            continue;
+                        }
+                        const double* interferer = uav_data +
+                            static_cast<std::size_t>((b * uavs + source) * 3);
+                        if (distance_three(interferer, uav_receiver) > interference_radius) {
+                            continue;
+                        }
+                        const double path_loss = air_data[
+                            (b * uavs + source) * uavs + tx];
+                        downlink_powers.push_back(
+                            std::pow(10.0, (uav_tx_power_dbm - path_loss) / 10.0) *
+                            interference_scale);
+                    }
+                    const double downlink_signal = ground_bs_tx_power_dbm - base_data[
+                        (b * uavs + tx) * bases + base];
+                    base_uav_data[(b * uavs + tx) * bases + base] =
+                        downlink_signal - 10.0 * std::log10(
+                            noise_linear + sum_interference(downlink_powers));
+                }
+            }
+        }
+    }
+    return py::make_tuple(
+        std::move(access_sinr),
+        std::move(air_sinr),
+        std::move(uav_to_base_sinr),
+        std::move(base_to_uav_sinr));
+}
+
 }  // namespace
 
 PYBIND11_MODULE(TORCH_EXTENSION_NAME, module) {
@@ -232,4 +424,20 @@ PYBIND11_MODULE(TORCH_EXTENSION_NAME, module) {
         py::arg("los_b"),
         py::arg("eta_los"),
         py::arg("eta_nlos"));
+    module.def(
+        "compute_radio_batch",
+        &compute_radio_batch,
+        py::arg("uav_positions"),
+        py::arg("user_positions"),
+        py::arg("ground_bs_positions"),
+        py::arg("access_path_loss"),
+        py::arg("air_path_loss"),
+        py::arg("base_path_loss"),
+        py::arg("uav_tx_power_dbm"),
+        py::arg("ground_bs_tx_power_dbm"),
+        py::arg("noise_power_dbm"),
+        py::arg("interference_radius"),
+        py::arg("use_fdma"),
+        py::arg("aclr_linear"),
+        py::arg("exclude_receiver_uav"));
 }

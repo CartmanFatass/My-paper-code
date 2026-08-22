@@ -92,6 +92,24 @@ load_policy = "ON_DEMAND"
 canonical = true
 
 [[source]]
+id = "object-level-complexity-context"
+path = "docs/project/EVIDENCE_COMPLEXITY_POLICY.md"
+kind = "ADVISORY_OBJECT_COST_CONTEXT"
+owner = "em_cm_object_pair"
+actors = ["PORTFOLIO", "OPERATIONAL_ROOT", "EM", "CM", "LEAF"]
+load_policy = "ASSIGNMENT_REFERENCED"
+canonical = false
+
+[[source]]
+id = "p0-hidden-limit-control-plane-correction"
+path = "docs/research/workflow-runs/2026-08-11_five-round-research-team/P0_HIDDEN_LIMIT_CONTROL_PLANE_CORRECTION_20260821.md"
+kind = "EXPLICIT_USER_CONTROL_PLANE_CORRECTION"
+owner = "operational_root"
+actors = ["PORTFOLIO", "OPERATIONAL_ROOT", "EM", "CM", "LEAF"]
+load_policy = "ROLE_REQUIRED"
+canonical = true
+
+[[source]]
 id = "agent-runtime-context"
 path = "docs/project/AGENT_CONTEXT.md"
 kind = "CANONICAL_OWNER_ARTIFACT"

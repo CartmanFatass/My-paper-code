@@ -30,7 +30,7 @@ config_file = "./agents/hmasd-independent-research-explorer.toml"
 nickname_candidates = ["Independent Research Explorer", "Research Manager", "Scientific Explorer"]
 
 [agents."HMASDProjectScout"]
-description = "Read-only Spark project scout for bounded repository exploration and factual confirmation."
+description = "Read-only Luna project scout for bounded repository exploration and factual confirmation."
 config_file = "./agents/hmasd-project-scout.toml"
 nickname_candidates = ["Project Scout", "Repository Scout", "Read-only Scout"]
 
@@ -154,12 +154,14 @@ enabled_tools = [
   "workflow_open",
   "task_register",
   "task_bind",
+  "native_child_register",
   "workflow_state",
   "report_get",
   "root_record_intake",
   "obligation_open",
   "obligation_resolve",
   "workflow_await_event",
+  "workflow_await_global_event",
   "workflow_close",
   "actor_context_current",
   "plan_epoch_open",

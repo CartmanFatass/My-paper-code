@@ -1,0 +1,99 @@
+{
+  "backend_binding": {
+    "path": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_BACKEND_EFFICIENCY_ACCEPTANCE_20260821_01.json",
+    "sha256": "7d1f170c2090e145af60753fa4619f7da41f3de63f769c996e3fce8e01764a20"
+  },
+  "certificate_schema": "RISP-G-INIT-REACH-R01-COORDINATE-CERTIFICATE-20260821-01",
+  "coordinate_binding_activity_fact": "sole production coordinate binding committed before any model, optimizer, training, or evaluation",
+  "coordinate_binding_activity_started": true,
+  "coordinate_root": "7ce16ce2ffd0d0d7f0b3b4810f24da29b8ac1ff86e2d5af6334f1b268585ed9a",
+  "coordinate_schema": "RISP-G-INIT-REACH-R01-LAZY-SHAKE256-PREFIX-20260821-01",
+  "immutable_inputs": {
+    "C:\\Projects\\HMASD\\docs\\research\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INITIALIZATION_REACHABILITY_DEFINITION_AND_COST_MILESTONE_R01.md": "648ce58c2d3dd085e791d4d7c51c7c6135c632fdc265e6ba19535dc2d45dce65",
+    "C:\\Projects\\HMASD\\docs\\research\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INITIALIZATION_REACHABILITY_EXTERNAL_PRO_CLOSED_INTAKE_R01.md": "538011b23c78a71d309ee29d284a02e9b806dc76288b6270c837fc0a7a1a9399",
+    "C:\\Projects\\HMASD\\docs\\research\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INITIALIZATION_REACHABILITY_SCIENCE_CARD_R01.md": "f715cbbcbd349c9b9e538afbfd081e7999e90acdac8dc71aac97f1ba8016e3da",
+    "C:\\Projects\\HMASD\\docs\\research\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_EMPIRICAL_STAGE_EM_HANDOFF_20260821.md": "91abd1905d88544efd257b4f8845ef3723659e105448c8f31f259c3934a57efd",
+    "C:\\Projects\\HMASD\\docs\\research\\workflow-runs\\2026-08-11_five-round-research-team\\RISP_G_INIT_REACH_R01_EMPIRICAL_PORTFOLIO_ADJUDICATION_20260821.md": "0ef721e420717fb82d70d764f71208f3cac55251a1fea49c4162fd7e26c70139"
+  },
+  "lease_binding": {
+    "path": "C:\\Projects\\HMASD\\temp\\leases\\RISP_G_INIT_REACH_R01_ROOT_EMPIRICAL_LEASE_20260821_01.json",
+    "sha256": "6a92243cd3e9b8960688eee94b6a3015b90d54ee9a580352df699c6401aea69b"
+  },
+  "model_or_optimizer_materialized": false,
+  "partial_scientific_values_exposed": false,
+  "paths": {
+    "certificate": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_PRODUCTION_CERTIFICATE_20260821_01.json",
+    "frontier": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_RESUME_20260821_01",
+    "result": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_RESULTS_20260821_01\\RISP_G_INIT_REACH_R01_COMPLETE.json",
+    "result_root": "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_RESULTS_20260821_01"
+  },
+  "production": {
+    "command": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe experiments/candidates/renewal_indexed_score_plasticity/run_g_init_r01_resume.py --certificate C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_PRODUCTION_CERTIFICATE_20260821_01.json --frontier C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_RESUME_20260821_01 --result-root C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\RISP_G_INIT_REACH_R01_RESULTS_20260821_01 --workers 2 --cpu-cores 2 --slice-wall-seconds 13800 --per-worker-rss-limit-bytes 1073741824 --process-group-rss-limit-bytes 1610612736",
+    "complete_cpu_hours_upper": 32,
+    "complete_wall_seconds_upper": 86400,
+    "cpu_cores": 2,
+    "cpu_workers": 2,
+    "gpu": false,
+    "interpreter": "C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe",
+    "per_worker_rss_limit_bytes": 1073741824,
+    "process_concurrency": 2,
+    "process_group_rss_limit_bytes": 1610612736,
+    "resumable_only": true,
+    "slice_wall_seconds": 13800,
+    "working_directory": "C:\\Projects\\HMASD"
+  },
+  "registered_panel": {
+    "algorithm_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "arms": [
+      "G-START/ZERO-CENTER",
+      "ZERO-START/ZERO-CENTER"
+    ],
+    "atomic_units": 352,
+    "cell_families": [
+      "G-START/ZERO-CENTER-INTACT",
+      "ZERO-START/ZERO-CENTER-INTACT",
+      "UNIFORM",
+      "STATE-ORACLE"
+    ],
+    "evaluation_units": 320,
+    "schedules": [
+      "4",
+      "8",
+      "12",
+      "4->12",
+      "12->4"
+    ],
+    "training_units": 32,
+    "updates": 512
+  },
+  "science_revision": "RISP-G-INIT-REACH-SCIENCE-20260821-01",
+  "source_manifest": {
+    "C:\\Projects\\HMASD\\envs\\native\\production_backend.py": "086f107f045939dc465ac0e98abd15877ce9e76bb8b75435dc56b6dcea7e0571",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\b2_r02_experiment.py": "6879c5f46cd7f64d3716e0ab34fce792674e467433b4283b9a47dcab0a907920",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_coordinate_certificate.py": "0f01cba1efca1492fafe6a24bc252e480e07eef2fa12ad00f606eea0aefab8f4",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_experiment.py": "4b218d50e1ca73b51ba0cd2088c478fed935a46186d6539d4e6fdb56ba9e33b8",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_native_backend.cpp": "206402854779255db12246ecf99ed542c3fd60c00a68bb7a8ba8b3703e5afcda",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_native_backend.py": "8e246c7b7792a763db432ce6d7ada5dc37244695b756187f5c33449bea803503",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\g_init_r01_resume.py": "e7a850ffde01bbd0d8576cf9730ba4e5a32a4afbf516ec76be4f67c02561fbad",
+    "C:\\Projects\\HMASD\\experiments\\candidates\\renewal_indexed_score_plasticity\\run_g_init_r01_resume.py": "a336aa4bf96fe7066167fa1076aeaffe77db9170b8cb280357d97f770cc96bd5"
+  },
+  "technical_acceptance": true,
+  "training_or_evaluation_executed": false
+}

@@ -1,6 +1,6 @@
 ---
 name: hmasd-workflow-anomaly-routing
-description: Route an HMASD EM/CM non-core workflow anomaly to a Terra-high Workflow Recovery Manager. Use whenever a direction's science or technical work is impeded by provider transport, Agentify/UI observability, protocol/controller behavior, cross-file workflow state, runtime orchestration, or repeated unchanged-science recovery—not by a missing scientific definition or direction-local implementation defect.
+description: Use when an HMASD Portfolio-owned EM or Operational-Root-owned CM encounters a non-core provider, Agentify/UI, protocol, workflow-state, runtime-orchestration, or repeated unchanged-science recovery anomaly.
 ---
 
 # HMASD workflow anomaly routing
@@ -27,8 +27,9 @@ compute-lease conflict, or a complete result requiring portfolio judgment.
 
 ## Required report from EM or CM
 
-Stop only the affected mechanical action. Preserve all frozen science and send
-Root one `WORKFLOW_ANOMALY_REPORT` directly; do not report only to a sibling.
+Stop only the affected mechanical action. Preserve all frozen science. EM sends
+`WORKFLOW_ANOMALY_REPORT` to Portfolio; CM sends it to Operational Root. Do not
+send it to the opposite-domain child.
 
 ```text
 WORKFLOW_ANOMALY_REPORT
@@ -53,13 +54,20 @@ No-resend fences that exact operation identity only. It does not ban a later
 distinct EM-authored provider turn, direction-local repair, CM work, or the
 scientific investment unless a separately authorized owner says so.
 
-## Root routing
+A stage grandfathered by the 2026-08-21 owner split keeps its current recovery
+owner and continues to the current milestone. Do not cancel, restart or
+reparent an active recovery merely to install the prospective split.
 
-On receipt, Root must register one task-scoped
-`hmasd-workflow-recovery-manager` (Terra-high) before any fresh direction
-retry, unless the report is plainly an ordinary CM source/runner fix. Give the
-manager the exact object, evidence boundary, permitted source/runtime/UI
-diagnosis, validation target, and forbidden science/provider actions.
+## Owning-main routing
+
+On receipt, the active main Root owns the whole recovery decision. It normally
+registers one task-scoped `hmasd-workflow-recovery-manager` (Terra-high), or may
+execute the same bounded loop locally when local integration is clearer. Role
+splits never require forwarding the incident to another Root merely to obtain
+permission. A detecting child still must not expand its own authority. Plain
+ordinary CM source/runner repair may stay with CM. Give any delegated manager
+the exact object, evidence boundary, permitted source/runtime/UI diagnosis,
+validation target, and forbidden science/provider actions.
 
 Every recovery follows this required sequence before returning a conclusion:
 
@@ -74,8 +82,9 @@ Every recovery follows this required sequence before returning a conclusion:
    observed failure. Identify alternatives, not just the first plausible fault.
 4. **Freeze a repair plan.** Name the defect hypothesis, exact files/surfaces,
    reversible repair, tests that distinguish it from alternatives, and actions
-   that remain forbidden. Return to Root first only if that plan would expand
-   authority or alter science.
+   that remain forbidden. Return to main first only if that plan needs a genuine
+   external effect, would alter frozen science, or exceeds the assignment's
+   protected scope.
 5. **Repair and validate.** Within the assigned authority, implement the
    smallest repair, run focused regression and live/non-destructive validation,
    and verify the original reproduction no longer occurs. Preserve unrelated
@@ -100,7 +109,7 @@ forbidden_actions=<science/allocation/provider/compute/Git or other exclusions>
 completion=<consolidated context→reproduction→exploration→plan→repair→test report>
 ```
 
-For an Agentify/provider anomaly, Root's recovery dispatch must additionally
+For an Agentify/provider anomaly, main's recovery dispatch or local recovery must additionally
 require the manager to read before acting: the exact frozen request and every
 incident archive; the complete `hmasd-agentify-transport` skill; the complete
 canonical `AGENTIFY_TRANSPORT_INSTRUCTIONS.md`; and the current relevant
@@ -138,9 +147,20 @@ production-tab variant, later preflight, or other downstream manifestation of
 the same anomaly. Create a new recovery task only when direct evidence shows a
 different root cause and a disjoint repair scope.
 
+Once assigned, the recovery manager has standing authority over every
+reversible non-provider step needed to close the authorized incident: native
+MCP/DOM observation, latency-aware predicate waits, source/config/controller
+repair, supported process-local atomic refresh with rollback, and zero-send
+validation. A missing or unclickable control, stale loaded module, unresolved
+postcondition, slow page hydration, or deficient observer primitive is internal
+recovery evidence and must not produce stepwise approval or status returns.
+Application/browser restart is exceptional, never a fixed recipe or cleanup
+step, and requires explicit authority only when direct evidence proves no safe
+process-local refresh can load the repair.
+
 The recovery manager may repair and validate the workflow surface. It must not
 alter treatments, comparators, claims, thresholds, coordinates, allocation, or
-Git; it sends no provider turn unless Root gives a later explicit, separate
+Git; it sends no provider turn unless Portfolio gives a later explicit, separate
 authorization after recovery.
 
 ## Semantic return fence
@@ -156,8 +176,9 @@ a Root workflow decision.
 
 ## Recovery return
 
-Return directly to Root with observed fact, exact object, actions taken and not
-taken, validation performed, remaining unknown, causal hypotheses, and the
-smallest next authority/action. Root reports a completed recovery or a genuine
-external boundary to the main session, relays only a decision-level scientific
-milestone to portfolio, and never relays routine workflow mechanics.
+Return directly to main with observed fact, exact object, actions
+taken/not taken, validation, remaining unknown, hypotheses and the smallest
+next authority/action. EM-side and CM-side labels preserve semantic provenance,
+but main may own either recovery locally. Only an actually separated
+cross-session decision uses the exact two-root artifact bridge, never routine
+workflow mechanics.
