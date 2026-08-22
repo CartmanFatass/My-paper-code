@@ -52,7 +52,24 @@ def _copy_minimal_healthy_foundation(repo_root: Path, destination: Path) -> None
         repo_root / "docs/project/DECISIONS_INDEX.md",
         project / "DECISIONS_INDEX.md",
     )
-    (project / "CURRENT_WORK.md").write_text("# Current Work\n", encoding="utf-8")
+    shutil.copyfile(
+        repo_root / "docs/project/CURRENT_WORK.md", project / "CURRENT_WORK.md"
+    )
+    legacy_snapshot = "archive/CURRENT_WORK_LEGACY_2026-08-01.md"
+    legacy_target = project / legacy_snapshot
+    legacy_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(repo_root / "docs/project" / legacy_snapshot, legacy_target)
+    for relative_path in (
+        "current-work/sessions/code_project_manager.md",
+        "current-work/common/formal_toy_research.md",
+        "current-work/common/uav_validation.md",
+        "current-work/common/explorer_project_validation.md",
+        "current-work/common/independent_research_explorer_pointer.md",
+        "current-work/common/control_plane_runtime.md",
+    ):
+        target = project / relative_path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(repo_root / "docs/project" / relative_path, target)
     for decision in collect_decisions(repo_root):
         for source in decision.canonical_sources:
             target = destination / source
