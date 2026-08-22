@@ -143,3 +143,10 @@ def test_committed_index_matches_renderer(repo_root: Path) -> None:
     committed = (repo_root / "docs/project/DECISIONS_INDEX.md").read_text(encoding="utf-8")
     assert rendered == committed
     assert any(record.decision_id == "ADR-0001" for record in records)
+
+
+def test_current_shared_architecture_adrs_are_present(repo_root):
+    records = {item.decision_id: item for item in collect_decisions(repo_root)}
+    assert records["ADR-0005"].status == "accepted"
+    assert records["ADR-0006"].status == "accepted"
+    assert records["ADR-0007"].status == "accepted"
