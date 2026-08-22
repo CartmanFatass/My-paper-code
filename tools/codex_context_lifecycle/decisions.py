@@ -16,6 +16,7 @@ except ModuleNotFoundError:  # Python 3.10 project interpreter
 from .models import DecisionRecord
 
 ALLOWED_STATUSES = frozenset({"accepted", "superseded", "proposed"})
+SHARED_ADR_OWNERS = frozenset({"operational_root", "user"})
 DECISIONS_DIR = Path("docs/project/decisions")
 INDEX_PATH = Path("docs/project/DECISIONS_INDEX.md")
 EXTERNAL_SYSTEMS = (
@@ -87,6 +88,36 @@ def parse_decision(path: Path) -> DecisionRecord:
     )
 
 
+def validate_decision_set(
+    root: Path,
+    records: tuple[DecisionRecord, ...],
+) -> tuple[str, ...]:
+    errors: list[str] = []
+    by_id = {item.decision_id: item for item in records}
+    for record in records:
+        if record.status == "accepted" and record.scope.startswith("shared:"):
+            if record.owner not in SHARED_ADR_OWNERS:
+                errors.append(
+                    f"{record.decision_id}: shared accepted ADR owner must be operational_root or user"
+                )
+        for source in record.canonical_sources:
+            if record.status == "accepted" and not (Path(root) / source).is_file():
+                errors.append(
+                    f"{record.decision_id}: missing canonical source {source}"
+                )
+        for superseded_id in record.supersedes:
+            peer = by_id.get(superseded_id)
+            if peer is None:
+                errors.append(
+                    f"{record.decision_id}: unknown superseded ADR {superseded_id}"
+                )
+            elif record.status == "accepted" and peer.status != "superseded":
+                errors.append(
+                    f"{record.decision_id}: superseded ADR {superseded_id} must be marked superseded"
+                )
+    return tuple(errors)
+
+
 def collect_decisions(root: Path) -> tuple[DecisionRecord, ...]:
     directory = Path(root) / "docs" / "project" / "decisions"
     if not directory.is_dir():
@@ -99,7 +130,9 @@ def collect_decisions(root: Path) -> tuple[DecisionRecord, ...]:
             raise DecisionError(f"duplicate ID: {record.decision_id}")
         seen.add(record.decision_id)
         records.append(record)
-    ids = {record.decision_id: record for record in records}
+    decision_set = tuple(records)
+    errors = list(validate_decision_set(root, decision_set))
+    ids = {record.decision_id: record for record in decision_set}
     accepted_pairs: set[tuple[str, str]] = set()
     for record in records:
         if record.status != "accepted":
@@ -110,11 +143,13 @@ def collect_decisions(root: Path) -> tuple[DecisionRecord, ...]:
                 pair = tuple(sorted((record.decision_id, other)))
                 accepted_pairs.add(pair)
     if accepted_pairs:
-        raise DecisionError(
+        errors.append(
             "two accepted ADRs that supersede each other: "
             + ", ".join(f"{left}/{right}" for left, right in sorted(accepted_pairs))
         )
-    return tuple(records)
+    if errors:
+        raise DecisionError("\n".join(errors))
+    return decision_set
 
 
 def render_decision_index(records: tuple[DecisionRecord, ...] | list[DecisionRecord]) -> str:
