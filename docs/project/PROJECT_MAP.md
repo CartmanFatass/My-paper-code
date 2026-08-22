@@ -126,6 +126,30 @@ validate these artifacts. They are control-plane boundaries, not scientific
 state owners; the direct consumers are CM/Root intake and the explicit
 experiment operator.
 
+## Codex App Server runtime plane
+
+[`tools/codex_supervisor/`](../../tools/codex_supervisor/) and its
+[`durability/`](../../tools/codex_supervisor/durability/) subtree implement the
+mechanical App Server supervisor; [`tests/codex_supervisor/`](../../tests/codex_supervisor/)
+holds its contract coverage. The observer, managed-actor, and mailbox command
+surfaces are [`scripts/codex-app-server-observer-*.ps1`](../../scripts/),
+[`scripts/codex-managed-actor-*.ps1`](../../scripts/), and
+[`scripts/codex-mailbox-*.ps1`](../../scripts/), respectively. Their operational
+boundaries are recorded in
+[`CODEX_APP_SERVER_OBSERVER_POLICY.md`](CODEX_APP_SERVER_OBSERVER_POLICY.md),
+[`CODEX_MANAGED_ACTOR_AND_MAILBOX_POLICY.md`](CODEX_MANAGED_ACTOR_AND_MAILBOX_POLICY.md),
+and [`CODEX_SUPERVISOR_DURABILITY_KERNEL_V1.md`](CODEX_SUPERVISOR_DURABILITY_KERNEL_V1.md).
+The stable source paths are `docs/project/PROJECT_REQUIREMENTS.toml`,
+`docs/project/ASSIGNMENT_AND_INTAKE_PROTOCOL.md`,
+`docs/project/CODEX_APP_SERVER_OBSERVER_POLICY.md`,
+`docs/project/CODEX_MANAGED_ACTOR_AND_MAILBOX_POLICY.md`, and
+`docs/project/CODEX_SUPERVISOR_DURABILITY_KERNEL_V1.md`.
+
+Supervisor runtime SQLite is noncanonical: runtime SQLite is external and
+noncanonical. The supervisor owns mechanical transport/delivery/recovery.
+Canonical repository artifacts remain owner-authored; the supervisor does not write canonical repository artifacts.
+Managed actor identity is `threadId → binding_id → actor_context_id`.
+
 ## Repository context lifecycle
 
 Progressive context layers, loaded only when the current actor and assignment

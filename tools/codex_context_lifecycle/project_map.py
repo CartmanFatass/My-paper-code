@@ -7,6 +7,8 @@ from pathlib import Path
 REQUIRED_HEADINGS = (
     "Stable lineages",
     "Agent context control plane",
+    "Low-intrusion control-plane route",
+    "Codex App Server runtime plane",
     "Repository context lifecycle",
     "Maintenance Protocol",
 )
@@ -18,9 +20,19 @@ REQUIRED_PATHS = (
     "tests/codex_context_lifecycle/",
     "docs/project/CONTEXT_SOURCE_REGISTRY.toml",
     "docs/project/DECISIONS_INDEX.md",
+    "tools/hmasd_control_plane/",
+    "tools/codex_supervisor/",
+    "tests/codex_supervisor/",
+    "docs/project/PROJECT_REQUIREMENTS.toml",
+    "docs/project/ASSIGNMENT_AND_INTAKE_PROTOCOL.md",
+    "docs/project/CODEX_APP_SERVER_OBSERVER_POLICY.md",
+    "docs/project/CODEX_MANAGED_ACTOR_AND_MAILBOX_POLICY.md",
+    "docs/project/CODEX_SUPERVISOR_DURABILITY_KERNEL_V1.md",
 )
 REQUIRED_PHRASES = (
     "runtime SQLite is noncanonical",
+    "supervisor runtime SQLite is noncanonical",
+    "supervisor does not write canonical repository artifacts",
     "PROJECT_MAP is the stable codemap",
     "CURRENT_WORK is the current-work index",
 )
