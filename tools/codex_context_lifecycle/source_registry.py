@@ -85,6 +85,10 @@ def load_registry(path: Path) -> ContextSourceRegistry:
                 actors=actors,
                 load_policy=policy,
                 canonical=bool(item.get("canonical")),
+                direction_id=(
+                    str(item["direction_id"]) if "direction_id" in item else None
+                ),
+                scope_key=str(item["scope_key"]) if "scope_key" in item else None,
             )
         )
     return ContextSourceRegistry(
@@ -114,12 +118,15 @@ def sources_for_actor(
     scope_key: str | None = None,
     requested_source_ids: tuple[str, ...] | list[str] = (),
 ) -> tuple[ContextSource, ...]:
-    del direction_id, scope_key
     kind = actor_kind.value if isinstance(actor_kind, ActorKind) else str(actor_kind)
     requested = set(requested_source_ids)
     selected: list[ContextSource] = []
     for source in registry.sources:
         if kind not in source.actors:
+            continue
+        if source.direction_id is not None and source.direction_id != direction_id:
+            continue
+        if source.scope_key is not None and source.scope_key != scope_key:
             continue
         if (
             (source.load_policy in CONDITIONAL_POLICIES or source.kind in CONDITIONAL_KINDS)

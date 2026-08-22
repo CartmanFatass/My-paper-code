@@ -2,7 +2,12 @@ from pathlib import Path
 
 import pytest
 
-from tools.codex_context_lifecycle.models import LoadPolicy
+from tools.codex_context_lifecycle.models import (
+    ContextSource,
+    ContextSourceKind,
+    ContextSourceRegistry,
+    LoadPolicy,
+)
 from tools.codex_context_lifecycle.source_registry import (
     RegistryError,
     load_registry,
@@ -15,6 +20,99 @@ from tools.codex_semantic_mvp.epochs import plan_epoch_current, plan_epoch_open
 
 def _registry(repo_root: Path):
     return load_registry(repo_root / "docs/project/CONTEXT_SOURCE_REGISTRY.toml")
+
+
+def registry_with_source(
+    *,
+    actors: tuple[str, ...],
+    load_policy: str,
+    direction_id: str | None = None,
+    scope_key: str | None = None,
+) -> ContextSourceRegistry:
+    return ContextSourceRegistry(
+        schema_version=1,
+        registry_revision=1,
+        sources=(
+            ContextSource(
+                id="source-x",
+                path="docs/project/source-x.md",
+                kind=ContextSourceKind.CANONICAL_OWNER_ARTIFACT,
+                owner="test-owner",
+                actors=actors,
+                load_policy=LoadPolicy(load_policy),
+                canonical=False,
+                direction_id=direction_id,
+                scope_key=scope_key,
+            ),
+        ),
+    )
+
+
+def test_registry_contains_current_context_foundation_sources(repo_root: Path) -> None:
+    registry = load_registry(
+        repo_root / "docs/project/CONTEXT_SOURCE_REGISTRY.toml"
+    )
+    ids = {item.id for item in registry.sources}
+    assert {
+        "decision-index",
+        "app-server-observer-policy",
+        "managed-actor-mailbox-policy",
+        "durability-kernel-policy",
+    } <= ids
+
+
+def test_registry_parses_optional_direction_and_scope_fields(tmp_path: Path) -> None:
+    path = tmp_path / "registry.toml"
+    path.write_text(
+        """
+schema_version = 1
+registry_revision = 1
+[[source]]
+id = "source-x"
+path = "docs/project/source-x.md"
+kind = "CANONICAL_OWNER_ARTIFACT"
+owner = "test-owner"
+actors = ["EM"]
+load_policy = "ASSIGNMENT_REFERENCED"
+canonical = false
+direction_id = "direction:alpha"
+scope_key = "scope:one"
+""",
+        encoding="utf-8",
+    )
+
+    source = load_registry(path).sources[0]
+
+    assert source.direction_id == "direction:alpha"
+    assert source.scope_key == "scope:one"
+
+
+def test_direction_scoped_source_is_not_selected_for_other_direction() -> None:
+    registry = registry_with_source(
+        actors=("EM",),
+        direction_id="direction:alpha",
+        load_policy="ASSIGNMENT_REFERENCED",
+    )
+    assert sources_for_actor(
+        registry,
+        "EM",
+        direction_id="direction:beta",
+        requested_source_ids=("source-x",),
+    ) == ()
+
+
+def test_scope_scoped_source_is_not_selected_for_other_scope() -> None:
+    registry = registry_with_source(
+        actors=("EM",),
+        scope_key="scope:alpha",
+        load_policy="ASSIGNMENT_REFERENCED",
+    )
+    assert sources_for_actor(
+        registry,
+        "EM",
+        scope_key="scope:beta",
+        requested_source_ids=("source-x",),
+    ) == ()
 
 
 def test_operational_root_projection_excludes_em_cm_internals(repo_root: Path) -> None:
