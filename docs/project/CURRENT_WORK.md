@@ -4,9 +4,9 @@
 document_kind=current_work_index
 schema_version=4
 index_owner=root
-state_updated=2026-08-11
+state_updated=2026-08-22
 session_record_ids=code_project_manager
-common_record_ids=formal_toy_research|uav_validation|explorer_project_validation|independent_research_explorer_pointer
+common_record_ids=formal_toy_research|uav_validation|explorer_project_validation|independent_research_explorer_pointer|control_plane_runtime
 legacy_snapshot=docs/project/archive/CURRENT_WORK_LEGACY_2026-08-01.md
 ```
 

@@ -63,9 +63,46 @@ def test_collects_only_strict_project_pointer_links(tmp_path: Path) -> None:
     assert validate_current_work(tmp_path) == ()
 
 
+def test_current_work_rejects_common_record_metadata_missing_linked_record(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "docs/project/CURRENT_WORK.md"
+    other = tmp_path / "docs/project/current-work/common/other.md"
+    runtime = tmp_path / "docs/project/current-work/common/control_plane_runtime.md"
+    other.parent.mkdir(parents=True)
+    other.write_text("owner=operational_root\n", encoding="utf-8")
+    runtime.write_text("owner=operational_root\n", encoding="utf-8")
+    path.write_text(
+        "\n".join(
+            (
+                "# Current Work",
+                "",
+                "```text",
+                "common_record_ids=other",
+                "```",
+                "",
+                "## Common records",
+                "- [Other](current-work/common/other.md)",
+                "- [Runtime](current-work/common/control_plane_runtime.md)",
+                "",
+            )
+        ),
+        encoding="utf-8",
+    )
+
+    assert validate_current_work(tmp_path) == (
+        "CURRENT_WORK common_record_ids missing linked records: control_plane_runtime",
+    )
+
+
 def test_repository_current_work_is_valid_and_exposed_by_doctor_and_cli(
     repo_root: Path, capsys
 ) -> None:
+    text = (repo_root / "docs/project/CURRENT_WORK.md").read_text(encoding="utf-8")
+    assert "state_updated=2026-08-22" in text
+    assert "control_plane_runtime" in next(
+        line for line in text.splitlines() if line.startswith("common_record_ids=")
+    )
     assert validate_current_work(repo_root) == ()
     assert collect_doctor(repo_root)["current_work_valid"] is True
 

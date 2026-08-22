@@ -11,6 +11,7 @@ from .decisions import (
     collect_decisions,
     render_decision_index,
 )
+from .doctor import required_foundation_file_checks
 from .models import DecisionRecord
 from .project_map import validate_project_map
 from .source_registry import (
@@ -201,6 +202,8 @@ def context_foundation_health(root: Path) -> dict[str, object]:
 
     repo_root = Path(root)
     components: dict[str, dict[str, object]] = {}
+    registry = None
+    records = ()
 
     try:
         registry = load_registry(repo_root / DEFAULT_REGISTRY_PATH)
@@ -236,6 +239,27 @@ def context_foundation_health(root: Path) -> dict[str, object]:
             "errors": [_bounded_text(exc)],
             "decision_count": 0,
         }
+
+    required_files = required_foundation_file_checks(repo_root, registry, records)
+    required_file_errors: list[str] = []
+    if required_files.missing_required_adr_ids:
+        required_file_errors.append(
+            "required accepted ADRs missing: "
+            + ", ".join(required_files.missing_required_adr_ids)
+        )
+    if required_files.missing_control_plane_source_ids:
+        required_file_errors.append(
+            "required canonical control-plane sources missing: "
+            + ", ".join(required_files.missing_control_plane_source_ids)
+        )
+    components["required_foundation_files"] = {
+        "valid": not required_file_errors,
+        "errors": _bounded_errors(required_file_errors),
+        "required_adr_ids_present": required_files.required_adr_ids_present,
+        "current_control_plane_sources_present": (
+            required_files.current_control_plane_sources_present
+        ),
+    }
 
     components["project_map"] = project_map_validate(repo_root)
     try:

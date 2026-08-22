@@ -1,8 +1,12 @@
+import json
 from pathlib import Path
 import shutil
+import sqlite3
 
 import pytest
 
+import tools.codex_context_lifecycle.doctor as doctor_module
+from tools.codex_context_lifecycle.cli import main
 from tools.codex_context_lifecycle.doctor import collect_doctor
 
 
@@ -137,3 +141,71 @@ def test_doctor_requires_every_required_adr_to_be_accepted(
         )
 
     assert collect_doctor(tmp_path)["required_adr_ids_present"] is False
+
+
+@pytest.mark.parametrize(
+    ("schema_sql", "expected_diagnostic"),
+    (
+        (
+            "CREATE TABLE sentinel (value TEXT); INSERT INTO sentinel VALUES ('keep');",
+            "missing table: schema_meta",
+        ),
+        (
+            """
+            CREATE TABLE schema_meta (version INTEGER);
+            INSERT INTO schema_meta VALUES (2);
+            CREATE TABLE actor_contexts (sentinel TEXT);
+            CREATE TABLE promotion_proposals (sentinel TEXT);
+            CREATE TABLE epoch_rollovers (sentinel TEXT);
+            CREATE TABLE context_retention_marks (sentinel TEXT);
+            """,
+            "actor_contexts query unavailable: no such column: state",
+        ),
+    ),
+)
+def test_cli_doctor_inspects_incomplete_database_without_mutation(
+    tmp_path: Path,
+    repo_root: Path,
+    monkeypatch,
+    capsys,
+    schema_sql: str,
+    expected_diagnostic: str,
+) -> None:
+    state_path = tmp_path / "sentinel.sqlite3"
+    with sqlite3.connect(state_path) as connection:
+        connection.executescript(schema_sql)
+
+    def file_state() -> dict[str, bytes]:
+        return {
+            path.name: path.read_bytes()
+            for path in sorted(tmp_path.glob(f"{state_path.name}*"))
+            if path.is_file()
+        }
+
+    before = file_state()
+
+    def forbidden_initialization(*args, **kwargs):
+        raise AssertionError("doctor must not initialize or migrate runtime state")
+
+    monkeypatch.setattr(
+        doctor_module,
+        "initialize_database",
+        forbidden_initialization,
+        raising=False,
+    )
+
+    assert main(
+        [
+            "doctor",
+            "--repo-root",
+            str(repo_root),
+            "--state",
+            str(state_path),
+        ]
+    ) == 0
+    payload = json.loads(capsys.readouterr().out)
+
+    assert payload["runtime_state_status"] == "INCOMPATIBLE"
+    assert expected_diagnostic in payload["runtime_state_diagnostics"]
+    assert len(payload["runtime_state_diagnostics"]) <= 5
+    assert file_state() == before
