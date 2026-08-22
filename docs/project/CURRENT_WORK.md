@@ -23,6 +23,7 @@ and sessions do not share a write surface.
 - [UAV validation](current-work/common/uav_validation.md)
 - [Explorer project validation](current-work/common/explorer_project_validation.md)
 - [Independent Research Explorer pointer](current-work/common/independent_research_explorer_pointer.md)
+- [Control-plane runtime](current-work/common/control_plane_runtime.md)
 
 ## Stable project pointers
 

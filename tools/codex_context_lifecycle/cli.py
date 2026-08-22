@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import asdict
 import json
 import sys
 from pathlib import Path
@@ -10,6 +11,7 @@ from pathlib import Path
 from tools.codex_semantic_mvp.db import DEFAULT_STATE_PATH
 from tools.codex_semantic_mvp.store import SemanticStore
 
+from .current_work import collect_current_work
 from .decisions import write_decision_index
 from .doctor import collect_doctor
 from .retention import apply_gc_marks, record_dry_run
@@ -38,6 +40,7 @@ def main(argv: list[str] | None = None) -> int:
     sources = sub.add_parser("sources", parents=[shared])
     sources.add_argument("--actor", required=True)
     sources.add_argument("--requested", nargs="*", default=[])
+    sub.add_parser("current-work", parents=[shared])
     sub.add_parser("decisions-index", parents=[shared])
     working = sub.add_parser("working-set", parents=[shared])
     working.add_argument("--actor", required=True)
@@ -60,6 +63,8 @@ def main(argv: list[str] | None = None) -> int:
             registry, args.actor, requested_source_ids=tuple(args.requested)
         )
         return _print([source.id for source in selected])
+    if args.command == "current-work":
+        return _print([asdict(pointer) for pointer in collect_current_work(repo_root)])
     if args.command == "decisions-index":
         write_decision_index(repo_root)
         return 0

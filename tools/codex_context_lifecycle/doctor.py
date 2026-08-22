@@ -6,6 +6,7 @@ from pathlib import Path
 
 from tools.codex_semantic_mvp.db import DEFAULT_STATE_PATH, SCHEMA_VERSION, connect, initialize_database
 
+from .current_work import validate_current_work
 from .decisions import collect_decisions, render_decision_index
 from .project_map import validate_project_map
 from .source_registry import load_registry, validate_registry
@@ -54,6 +55,7 @@ def collect_doctor(repo_root: Path, state_path: str | Path | None = None) -> dic
         "previous_plan_baseline_present": baseline.is_file(),
         "source_registry_valid": registry_valid,
         "project_map_contract_valid": map_valid,
+        "current_work_valid": validate_current_work(root) == (),
         "decision_index_current": decision_index_current,
         "memory_authority": "none",
         "compaction_summary_authority": "none",
