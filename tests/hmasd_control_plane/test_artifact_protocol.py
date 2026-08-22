@@ -1,5 +1,6 @@
 from dataclasses import replace
 from pathlib import Path
+import tempfile
 
 import pytest
 
@@ -114,6 +115,174 @@ def test_wrm_assignment_requires_acceptance_outcome(valid_assignment):
     )
     assert "WRM assignment requires acceptance_outcome" in validate_assignment(
         assignment, {}
+    )
+
+
+def test_reviewer_role_is_registered(valid_assignment):
+    assignment = replace(
+        valid_assignment,
+        assignment_mode="REVIEW",
+        executor_role="hmasd-reviewer",
+    )
+
+    assert not any(
+        error.startswith("unknown executor_role:")
+        for error in validate_assignment(assignment, {})
+    )
+
+
+def test_file_empty_review_accepts_real_bounded_search_roots(
+    valid_assignment, tmp_path
+):
+    for search_root in (
+        "tools/codex_context_lifecycle",
+        "tools/hmasd_control_plane",
+    ):
+        (tmp_path / search_root).mkdir(parents=True)
+    assignment = replace(
+        valid_assignment,
+        assignment_mode="REVIEW",
+        executor_role="hmasd-reviewer",
+        affected_files=(),
+        create_files=(),
+        search_roots=(
+            "tools/codex_context_lifecycle",
+            "tools/hmasd_control_plane",
+            "docs/project",
+        ),
+    )
+
+    assert validate_assignment(assignment, {}) == []
+
+
+def test_file_empty_review_requires_search_roots(valid_assignment):
+    assignment = replace(
+        valid_assignment,
+        assignment_mode="REVIEW",
+        executor_role="hmasd-reviewer",
+        affected_files=(),
+        create_files=(),
+        search_roots=(),
+    )
+
+    assert "REVIEW assignment requires exact files or bounded search_roots" in (
+        validate_assignment(assignment, {})
+    )
+
+
+@pytest.mark.parametrize(
+    "search_root",
+    (
+        ".",
+        "tools",
+        "..",
+        "https://example.invalid/review",
+        "missing/subtree",
+    ),
+)
+def test_file_empty_review_rejects_unbounded_or_escaping_search_roots(
+    valid_assignment, tmp_path, search_root
+):
+    (tmp_path / "tools").mkdir(exist_ok=True)
+    assignment = replace(
+        valid_assignment,
+        assignment_mode="REVIEW",
+        executor_role="hmasd-reviewer",
+        affected_files=(),
+        create_files=(),
+        search_roots=(search_root,),
+    )
+
+    errors = validate_assignment(assignment, {})
+
+    assert any("search_roots" in error for error in errors)
+
+
+def test_file_empty_review_rejects_absolute_search_root(valid_assignment, tmp_path):
+    absolute_root = tmp_path / "tools" / "hmasd_control_plane"
+    absolute_root.mkdir(parents=True)
+    assignment = replace(
+        valid_assignment,
+        assignment_mode="REVIEW",
+        executor_role="hmasd-reviewer",
+        affected_files=(),
+        create_files=(),
+        search_roots=(str(absolute_root),),
+    )
+
+    assert any(
+        "search_roots" in error for error in validate_assignment(assignment, {})
+    )
+
+
+@pytest.mark.parametrize(
+    "search_root",
+    (
+        ".",
+        "tools",
+        "..",
+        "https://example.invalid/review",
+        "<absolute>",
+        "missing/subtree",
+    ),
+)
+def test_review_with_affected_files_still_validates_every_search_root(
+    valid_assignment, tmp_path, search_root
+):
+    (tmp_path / "tools").mkdir(exist_ok=True)
+    if search_root == "<absolute>":
+        absolute_root = tmp_path / "tools" / "hmasd_control_plane"
+        absolute_root.mkdir(parents=True)
+        search_root = str(absolute_root)
+    assignment = replace(
+        valid_assignment,
+        assignment_mode="REVIEW",
+        executor_role="hmasd-reviewer",
+        search_roots=(search_root,),
+    )
+
+    assert any(
+        "search_roots" in error for error in validate_assignment(assignment, {})
+    )
+
+
+def test_review_rejects_search_root_symlink_resolving_outside_repository(
+    valid_assignment, tmp_path
+):
+    link = tmp_path / "tools" / "external_review"
+    link.parent.mkdir(parents=True)
+    with tempfile.TemporaryDirectory(prefix="hmasd-task11-outside-") as outside:
+        try:
+            link.symlink_to(Path(outside), target_is_directory=True)
+        except OSError as exc:
+            pytest.skip(f"host refused directory symlink creation: {exc}")
+        assignment = replace(
+            valid_assignment,
+            assignment_mode="REVIEW",
+            executor_role="hmasd-reviewer",
+            search_roots=("tools/external_review",),
+        )
+
+        assert "search_roots resolves outside repository: tools/external_review" in (
+            validate_assignment(assignment, {})
+        )
+
+
+@pytest.mark.parametrize("mode", ("IMPLEMENTATION", "OPERATION"))
+def test_non_review_write_modes_still_require_exact_files(
+    valid_assignment, tmp_path, mode
+):
+    (tmp_path / "tools" / "hmasd_control_plane").mkdir(parents=True)
+    assignment = replace(
+        valid_assignment,
+        assignment_mode=mode,
+        affected_files=(),
+        create_files=(),
+        search_roots=("tools/hmasd_control_plane",),
+    )
+
+    assert "implementation/review/operation assignment requires exact files" in (
+        validate_assignment(assignment, {})
     )
 
 

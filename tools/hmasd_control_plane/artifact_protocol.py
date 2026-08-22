@@ -19,6 +19,7 @@ from .requirements_registry import Requirement, require_active
 KNOWN_ROLES = {
     "hmasd-implementer", "hmasd-implementer-terra", "hmasd-experiment-operator",
     "hmasd-workflow-recovery-manager", "hmasd-code-project-manager", "hmasd-independent-research-explorer",
+    "hmasd-reviewer",
 }
 KNOWN_PROFILES = {
     "R0_NAVIGATION_AND_MECHANICAL", "R1_ROUTINE_ENGINEERING", "R2_EXPERIMENT_EXECUTION",
@@ -201,6 +202,28 @@ def _root_for_assignment(assignment: AssignmentArtifact) -> Path:
     return Path.cwd().resolve()
 
 
+def _validate_review_search_roots(root: Path, search_roots: tuple[str, ...]) -> list[str]:
+    errors: list[str] = []
+    resolved_root = root.resolve()
+    for value in search_roots:
+        path = _repo_path(value)
+        if re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", value) or _has_parent(value):
+            errors.append(f"search_roots contains non-repository path: {value}")
+            continue
+        if len(path.parts) < 2:
+            errors.append(f"search_roots must identify a bounded subtree: {value}")
+            continue
+        resolved = (resolved_root / path).resolve()
+        try:
+            resolved.relative_to(resolved_root)
+        except ValueError:
+            errors.append(f"search_roots resolves outside repository: {value}")
+            continue
+        if not resolved.is_dir():
+            errors.append(f"search_roots path does not exist: {value}")
+    return errors
+
+
 def _map_headings(root: Path | None = None) -> set[str]:
     map_path = (root or Path.cwd()) / "docs/project/PROJECT_MAP.md"
     if not map_path.exists():
@@ -233,6 +256,14 @@ def validate_assignment(assignment: AssignmentArtifact, registry: Mapping[str, R
             errors.append("DISCOVERY assignments cannot name writable files")
         if not assignment.search_roots:
             errors.append("DISCOVERY assignment requires bounded search_roots")
+    elif assignment.assignment_mode == "REVIEW":
+        if not assignment.affected_files and not assignment.create_files:
+            if not assignment.search_roots:
+                errors.append(
+                    "REVIEW assignment requires exact files or bounded search_roots"
+                )
+        if assignment.search_roots:
+            errors.extend(_validate_review_search_roots(root, assignment.search_roots))
     elif not assignment.affected_files and not assignment.create_files:
         errors.append("implementation/review/operation assignment requires exact files")
     if not assignment.direct_consumers:
