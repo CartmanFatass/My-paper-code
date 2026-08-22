@@ -1,0 +1,23 @@
+schema_version = 1
+preflight_id = "resource_<id>"
+assignment_id = "asg_<id>"
+captured_at = "<UTC>"
+host_identity = "<machine/process identity>"
+route_id = "<route>"
+backend = "cpp"
+
+[cpu]
+physical_cores = 0
+logical_processors = 0
+load_percent = 0.0
+
+[memory]
+total_gib = 0.0
+available_gib = 0.0
+
+[selection]
+selected_worker_count = 0
+threads_per_worker = 1
+parallel = true
+selection_rationale = "<CM explanation based on observed host and route>"
+cm_owner = "CM:<scope>"

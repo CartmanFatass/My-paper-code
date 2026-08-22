@@ -1,4 +1,8 @@
-"""Fail-open SHADOW/ACTIVE hook entrypoint for the semantic MVP.
+"""Historical hook entrypoint retained as dormant evidence.
+
+The low-intrusion policy keeps this module importable for old diagnostics and
+tests, but `.codex/config.toml` contains no hook tables and never invokes it
+during ordinary turns.
 
 SHADOW mode is deliberately observational: it records bounded diagnostics and
 always returns a neutral continuation response.  ACTIVE mode adds managed

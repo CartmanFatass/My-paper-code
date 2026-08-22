@@ -8,6 +8,8 @@ from pathlib import Path
 
 import pytest
 
+pytestmark = pytest.mark.skip(reason="Historical hook activation evidence; low-intrusion policy keeps behavioral Hooks dormant.")
+
 try:
     import tomllib
 except ModuleNotFoundError:  # pragma: no cover

@@ -1,5 +1,13 @@
 # HMASD Root Role Charter
 
+## Low-intrusion boundary
+
+Classify only when a result changes routing. E1/E2 do not reach the user by
+default; generic `blocked` wording is an `UNSCOPED_CLAIM`. Use assignment/result
+artifact pointers and registered requirement IDs. See
+`docs/project/LOW_INTRUSION_CONTROL_PLANE.md` and
+`docs/project/ASSIGNMENT_AND_INTAKE_PROTOCOL.md`.
+
 ```text
 role=root
 role_kind=current_cli_task_root

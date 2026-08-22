@@ -11,6 +11,42 @@ load_policy = "AUTO_ROUTER"
 canonical = true
 
 [[source]]
+id = "low-intrusion-control-plane"
+path = "docs/project/LOW_INTRUSION_CONTROL_PLANE.md"
+kind = "CANONICAL_OWNER_ARTIFACT"
+owner = "operational_root"
+actors = ["OPERATIONAL_ROOT", "CM", "EM", "LEAF"]
+load_policy = "ASSIGNMENT_ONLY"
+canonical = true
+
+[[source]]
+id = "project-requirements"
+path = "docs/project/PROJECT_REQUIREMENTS.toml"
+kind = "CANONICAL_OWNER_ARTIFACT"
+owner = "operational_root"
+actors = ["OPERATIONAL_ROOT", "CM", "EM"]
+load_policy = "ASSIGNMENT_ONLY"
+canonical = true
+
+[[source]]
+id = "assignment-intake-protocol"
+path = "docs/project/ASSIGNMENT_AND_INTAKE_PROTOCOL.md"
+kind = "PROCEDURE"
+owner = "operational_root"
+actors = ["OPERATIONAL_ROOT", "CM", "EM", "LEAF"]
+load_policy = "ASSIGNMENT_ONLY"
+canonical = true
+
+[[source]]
+id = "experiment-execution-policy"
+path = "docs/project/EXPERIMENT_EXECUTION_POLICY.md"
+kind = "PROCEDURE"
+owner = "cm"
+actors = ["OPERATIONAL_ROOT", "CM", "LEAF"]
+load_policy = "ASSIGNMENT_ONLY"
+canonical = true
+
+[[source]]
 id = "root-role"
 path = ".agents/roles/ROOT.md"
 kind = "ROLE_CONTRACT"

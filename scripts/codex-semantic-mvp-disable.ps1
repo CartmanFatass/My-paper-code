@@ -170,7 +170,9 @@ try {
     $updatedConfigBytes = if ($RestorePause) { $pausedConfigRestoreBytes } else { [Text.UTF8Encoding]::new($false).GetBytes($updatedConfigText) }
     $state | Add-Member -NotePropertyName current_hooks_sha256 -NotePropertyValue $backupHash -Force
     $state | Add-Member -NotePropertyName current_config_sha256 -NotePropertyValue (Get-BytesHash $updatedConfigBytes) -Force
-    $state | Add-Member -NotePropertyName mode -NotePropertyValue "off" -Force
+    $state | Add-Member -NotePropertyName mode -NotePropertyValue "disabled_low_intrusion" -Force
+    $state | Add-Member -NotePropertyName desired_mode -NotePropertyValue "disabled_low_intrusion" -Force
+    $state | Add-Member -NotePropertyName reason -NotePropertyValue "NR-HIGH_FREQUENCY_HOOKS-001|NR-COMPACTION-HOOKS-001" -Force
     $newStateBytes = [Text.UTF8Encoding]::new($false).GetBytes(($state | ConvertTo-Json -Depth 4))
     $hooksWritten = $false; $configWritten = $false; $stateWritten = $false; $pauseWritten = $false
     try {

@@ -1,5 +1,12 @@
 # HMASD Workflow Recovery Manager Role Charter
 
+## Low-intrusion recovery boundary
+
+Receive an E1/E2 bundle with its impact envelope, repair one concrete root
+cause, and do not expand the blast radius. Return either recovered evidence or
+the exact next E-level with affected/unaffected actions; never turn local
+recovery wording into a direction or user disposition.
+
 ```text
 role=workflow_recovery_manager
 callable_agent_type=hmasd-workflow-recovery-manager

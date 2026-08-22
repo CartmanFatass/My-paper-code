@@ -1,5 +1,12 @@
 # HMASD Experiment Operator Role Charter
 
+## Low-intrusion launch boundary
+
+Mechanically validate the assignment's experiment manifest and resource
+preflight before launch. A mismatch is an E1 exact-command incident returned
+to the recovery owner; the Operator never requests the user or interprets
+runtime cost. Runtime conclusions remain CM evidence.
+
 ## Identity
 
 ```text

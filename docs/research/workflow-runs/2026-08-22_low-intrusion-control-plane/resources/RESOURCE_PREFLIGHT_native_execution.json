@@ -1,0 +1,25 @@
+﻿{
+    "schema_version":  1,
+    "preflight_id":  "resource_f4bbe9b93fa948cc9f0a6805e2971a42",
+    "assignment_id":  "asg_native_execution_preflight",
+    "captured_at":  "2026-08-22T11:06:35.8178044Z",
+    "host_identity":  "JACOB",
+    "route_id":  "continuous_roster_native",
+    "backend":  "cpp",
+    "cpu":  {
+                "physical_cores":  8,
+                "logical_processors":  16,
+                "load_percent":  6
+            },
+    "memory":  {
+                   "total_gib":  29.7861,
+                   "available_gib":  9.0526
+               },
+    "selection":  {
+                      "selected_worker_count":  2,
+                      "threads_per_worker":  1,
+                      "parallel":  true,
+                      "selection_rationale":  "CM selected two workers after current CPU/memory observation; available memory supports the toy sample without a project default.",
+                      "cm_owner":  "CM:continuous-roster"
+                  }
+}

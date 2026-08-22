@@ -2,10 +2,9 @@
 
 [features]
 multi_agent_v2 = true
-# Semantic lifecycle hook execution is managed by the activation scripts.
-# ShadowMcp mode is audit-only; it does not create semantic obligations or
-# block task completion.
-hooks = true
+# Behavioral lifecycle Hooks are disabled by the low-intrusion control-plane
+# policy. Native auto-compaction remains unchanged.
+hooks = false
 
 [agents]
 max_threads = 40
@@ -205,56 +204,3 @@ enabled_tools = [
   "mcp_instance_list",
 ]
 # END HMASD CODEX SEMANTIC MVP
-
-# BEGIN HMASD CODEX SEMANTIC HOOKS
-[hooks]
-[[hooks.SessionStart]]
-[[hooks.SessionStart.hooks]]
-type = "command"
-command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-timeout = 5
-
-[[hooks.SubagentStart]]
-[[hooks.SubagentStart.hooks]]
-type = "command"
-command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-timeout = 5
-
-[[hooks.SubagentStop]]
-[[hooks.SubagentStop.hooks]]
-type = "command"
-command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-timeout = 5
-
-[[hooks.Stop]]
-[[hooks.Stop.hooks]]
-type = "command"
-command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-timeout = 5
-
-[[hooks.PreToolUse]]
-[[hooks.PreToolUse.hooks]]
-type = "command"
-command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-timeout = 5
-
-[[hooks.PreCompact]]
-[[hooks.PreCompact.hooks]]
-type = "command"
-command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-timeout = 5
-
-[[hooks.PostCompact]]
-[[hooks.PostCompact.hooks]]
-type = "command"
-command = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-commandWindows = "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe -m tools.codex_semantic_mvp.hook_entry --mode shadow"
-timeout = 5
-
-# END HMASD CODEX SEMANTIC HOOKS

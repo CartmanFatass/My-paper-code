@@ -1,5 +1,9 @@
 # HMASD Role Router
 
+Low-intrusion drift containment, requirements, incident scope, assignment and
+execution policy: `docs/project/LOW_INTRUSION_CONTROL_PLANE.md` and linked
+project policies. These do not change Role ownership.
+
 ```text
 document_kind=role_router
 all_workspace_agents_auto_load_this_file=true

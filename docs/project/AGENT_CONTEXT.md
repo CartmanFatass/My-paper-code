@@ -13,30 +13,36 @@ Context hierarchy pointers, loaded only when the current actor needs them:
 - Promotion: `docs/project/CONTEXT_PROMOTION_POLICY.md`
 - Retention: `docs/project/CONTEXT_RETENTION_POLICY.md`
 - Decisions: `docs/project/DECISIONS_INDEX.md`
+- Assignment/execution boundary when assigned: `docs/project/ASSIGNMENT_AND_INTAKE_PROTOCOL.md`
+- Experiment execution and preflight when assigned: `docs/project/EXPERIMENT_EXECUTION_POLICY.md`
 
 ## Execution environment
 
 - Run Python directly with
   `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`
   (`torch 2.7.0+cpu`) on the registered CPU backend.
-- Use CPU with torch threads 1 for every arm and paired replicate. Never mix
-  backends or thread configurations, and never resume a checkpoint across
-  backends.
+- Use CPU with torch threads 1 where the assignment's registered CPU contract
+  applies. Never mix backends or thread configurations, and never resume a
+  checkpoint across backends.
 - Do not use `conda run`; invoke the registered interpreter directly.
 - For scripts outside the repository root, set `PYTHONPATH` to this workspace.
 - The focused suite and formal-path exercise use the registered CPU/one-thread
   contract and fail closed on backend or thread mismatch. Never add a fallback
   or infer CPU/CUDA trajectory equivalence.
-- Experiment-specific environment widths, budgets and minimum representative
-  test batch sizes come only from the assignment-named design. This reference
-  never supplies a default scientific value.
+- Experiment-specific worker/environment widths come only from a current
+  CPU/memory resource preflight and the CM selection for that host and route.
+  There is no project-wide worker default or cap. This is distinct from
+  portfolio direction count, neighbor-count ceilings, and evidence
+  candidate-count ceilings; none of those values supplies a worker count.
 
 ## Git
 
 Root stages, commits, and pushes only when the current user request authorizes
 those Git effects. Native children never run Git and leave their exact owned
 paths to Root. There is no separate Git lane, Controller handoff,
-per-file hash exchange, or callback receipt.
+per-file SHA-256 handoff requirement, or callback receipt. Internal handoffs
+use repository-relative paths, object/revision identity, owner, and Git commit
+when needed.
 
 If a markdown file will not stage, that is the repository's bare `*.md` ignore
 rule. The remedy is a per-directory negation in `.gitignore`, never `git add -f`.

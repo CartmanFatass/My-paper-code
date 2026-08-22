@@ -28,3 +28,11 @@ natural-language assignment. In particular:
 Historical content was deliberately removed under the user-approved P0
 control-plane amendment because its stale gates and authority model repeatedly
 reintroduced non-scientific stops.
+
+## Optional boundary procedures
+
+When an assignment reaches a named boundary, use the repository tools and
+policies for requirements, assignment/result validation, incident routing,
+resource preflight, experiment manifests, runtime plausibility, and constraint
+lint. These are not per-turn checks and are not required for ordinary child
+returns.

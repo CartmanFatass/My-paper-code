@@ -114,6 +114,18 @@ obligation, epoch, and reanchor ledger. runtime SQLite is noncanonical.
 
 PROJECT_MAP is the stable codemap. CURRENT_WORK is the current-work index.
 
+## Low-intrusion control-plane route
+
+The repository-owned assignment/intake, incident, requirement, and
+resource-grounded execution surfaces live in [`LOW_INTRUSION_CONTROL_PLANE.md`](LOW_INTRUSION_CONTROL_PLANE.md),
+[`PROJECT_REQUIREMENTS.toml`](PROJECT_REQUIREMENTS.toml),
+[`ASSIGNMENT_AND_INTAKE_PROTOCOL.md`](ASSIGNMENT_AND_INTAKE_PROTOCOL.md), and
+[`EXPERIMENT_EXECUTION_POLICY.md`](EXPERIMENT_EXECUTION_POLICY.md). The Python
+boundary modules under [`tools/hmasd_control_plane/`](../../tools/hmasd_control_plane/)
+validate these artifacts. They are control-plane boundaries, not scientific
+state owners; the direct consumers are CM/Root intake and the explicit
+experiment operator.
+
 ## Repository context lifecycle
 
 Progressive context layers, loaded only when the current actor and assignment

@@ -36,3 +36,8 @@ and sessions do not share a write surface.
 - Stable decisions index: `docs/project/DECISIONS_INDEX.md`
 - Promotion policy: `docs/project/CONTEXT_PROMOTION_POLICY.md`
 - Retention policy: `docs/project/CONTEXT_RETENTION_POLICY.md`
+- Low-intrusion control-plane contract: `docs/project/LOW_INTRUSION_CONTROL_PLANE.md`
+- Active requirement registry: `docs/project/PROJECT_REQUIREMENTS.toml`
+- Assignment/intake protocol: `docs/project/ASSIGNMENT_AND_INTAKE_PROTOCOL.md`
+- Experiment execution policy: `docs/project/EXPERIMENT_EXECUTION_POLICY.md`
+- Current resource/manifest boundary tools: `tools/hmasd_control_plane/`

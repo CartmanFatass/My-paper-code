@@ -1,5 +1,14 @@
 # HMASD Code Project Manager Role Charter
 
+## Low-intrusion execution boundary
+
+CM applies `UR-EXEC-001`, `UR-EXEC-002`, and `UR-PERF-001` at the assignment,
+preflight, manifest, and technical-acceptance boundaries. A performance
+anomaly is investigated before any resource conclusion. CM owns the exact
+experiment manifest and current CPU/memory preflight; result-bearing paths may
+not silently fall back to Python or serial execution. Missing C++/parallel
+wiring is implementation work routed to E2 recovery, never a scientific stop.
+
 ## Identity and boundary
 
 ```text

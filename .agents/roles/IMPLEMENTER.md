@@ -1,5 +1,12 @@
 # HMASD Implementer Role Charter
 
+## Low-intrusion assignment boundary
+
+Read the exact file-backed assignment first and do not repeat the full project
+registry in ordinary context. Return an impact envelope only for a limitation
+or incident, and never return generic `blocked` wording; report the exact
+object, affected action, remaining authorized work, and recovery owner.
+
 ```text
 role=implementer
 callable_agent_type=hmasd-implementer
