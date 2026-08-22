@@ -224,6 +224,73 @@ def _validate_review_search_roots(root: Path, search_roots: tuple[str, ...]) -> 
     return errors
 
 
+def _validate_recovery_acceptance(
+    root: Path,
+    result: ResultArtifact,
+    assignment: AssignmentArtifact,
+) -> list[str]:
+    if (
+        assignment.executor_role != "hmasd-workflow-recovery-manager"
+        or result.result_kind != "COMPLETED"
+    ):
+        return []
+    errors: list[str] = []
+    if not assignment.acceptance_outcome.strip():
+        errors.append("WRM COMPLETED requires a nonblank exact acceptance_outcome")
+    if result.acceptance_observed != "TRUE" or not result.acceptance_evidence:
+        errors.append("WRM COMPLETED requires directly observed acceptance and evidence")
+        return errors
+    resolved_root = root.resolve()
+    observed = {value.replace("\\", "/") for value in result.files_observed}
+    for value in result.acceptance_evidence:
+        path = _repo_path(value)
+        if re.match(r"^[A-Za-z][A-Za-z0-9+.-]*:", value) or _has_parent(value):
+            errors.append(
+                f"acceptance_evidence contains non-repository path: {value}"
+            )
+            continue
+        resolved = (resolved_root / path).resolve()
+        try:
+            resolved.relative_to(resolved_root)
+        except ValueError:
+            errors.append(f"acceptance_evidence resolves outside repository: {value}")
+            continue
+        if not resolved.is_file():
+            errors.append(f"acceptance_evidence file does not exist: {value}")
+        if value.replace("\\", "/") not in observed:
+            errors.append(
+                f"acceptance_evidence must be listed in files_observed: {value}"
+            )
+    return errors
+
+
+def recovery_acceptance_proven(
+    assignment: AssignmentArtifact, result: ResultArtifact
+) -> bool:
+    """Return structural recovery evidence status without interpreting file content."""
+    return (
+        assignment.executor_role == "hmasd-workflow-recovery-manager"
+        and result.result_kind == "COMPLETED"
+        and not _validate_recovery_acceptance(
+            _root_for_assignment(assignment), result, assignment
+        )
+    )
+
+
+def _is_narrow_wrm_completed_recovery_claim(
+    assignment: AssignmentArtifact, result: ResultArtifact
+) -> bool:
+    permitted_actions = {"accept_recovery", "recovery_completed"}
+    affected_actions = set(result.impact.affected_actions) if result.impact else set()
+    return (
+        assignment.executor_role == "hmasd-workflow-recovery-manager"
+        and result.impact is not None
+        and bool(affected_actions)
+        and affected_actions <= permitted_actions
+        and recovery_acceptance_proven(assignment, result)
+    )
+
+
 def _map_headings(root: Path | None = None) -> set[str]:
     map_path = (root or Path.cwd()) / "docs/project/PROJECT_MAP.md"
     if not map_path.exists():
@@ -298,12 +365,9 @@ def validate_result(result: ResultArtifact, assignment: AssignmentArtifact) -> l
         errors.append(f"unknown result_kind: {result.result_kind}")
     if result.author_role != assignment.executor_role:
         errors.append("author_role does not match assignment executor_role")
-    if assignment.executor_role == "hmasd-workflow-recovery-manager":
-        if result.result_kind == "COMPLETED":
-            if result.acceptance_observed != "TRUE" or not result.acceptance_evidence:
-                errors.append(
-                    "WRM COMPLETED requires directly observed acceptance and evidence"
-                )
+    if result.acceptance_observed not in {"TRUE", "FALSE", "UNKNOWN"}:
+        errors.append(f"unknown acceptance_observed: {result.acceptance_observed}")
+    errors.extend(_validate_recovery_acceptance(root, result, assignment))
     if result.owner_return != assignment.return_to:
         errors.append("owner_return does not match assignment return_to")
     if result.project_map_anchor != assignment.project_map_anchor:
@@ -318,7 +382,12 @@ def validate_result(result: ResultArtifact, assignment: AssignmentArtifact) -> l
         else:
             errors.extend(validate_impact(result.impact))
     if result.impact is not None and result.result_kind == "COMPLETED":
-        errors.append("completed result should not carry an impact envelope")
+        errors.extend(validate_impact(result.impact))
+        if not _is_narrow_wrm_completed_recovery_claim(assignment, result):
+            errors.append(
+                "completed result may carry impact only for a validated WRM "
+                "recovery acceptance claim"
+            )
     for name, values in (("files_observed", result.files_observed), ("files_changed", result.files_changed)):
         for value in values:
             if _has_parent(value):

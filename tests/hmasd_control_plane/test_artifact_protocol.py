@@ -12,6 +12,7 @@ from tools.hmasd_control_plane.artifact_protocol import (
     validate_assignment,
     validate_result,
 )
+from tools.hmasd_control_plane.incident_scope import ImpactEnvelope, IncidentLevel
 from tools.hmasd_control_plane.requirements_registry import load_requirements
 
 
@@ -296,6 +297,128 @@ def test_wrm_completed_result_requires_observed_acceptance(
     )
     assert (
         "WRM COMPLETED requires directly observed acceptance and evidence"
+        in validate_result(result, valid_wrm_assignment)
+    )
+
+
+@pytest.mark.parametrize(
+    "evidence",
+    (
+        "docs/session/missing.json",
+        "../outside.json",
+        "https://example.invalid/evidence.json",
+        "<absolute>",
+    ),
+)
+def test_wrm_completed_result_rejects_invalid_acceptance_evidence_path(
+    valid_wrm_assignment, valid_result, tmp_path, evidence
+):
+    if evidence == "<absolute>":
+        evidence = str(tmp_path / "absolute.json")
+    result = valid_result(
+        acceptance_observed="TRUE",
+        acceptance_evidence=(evidence,),
+        files_observed=(evidence,),
+    )
+
+    errors = validate_result(result, valid_wrm_assignment)
+
+    assert any("acceptance_evidence" in error for error in errors)
+
+
+def test_wrm_completed_result_requires_evidence_to_be_observed(
+    valid_wrm_assignment, valid_result, tmp_path
+):
+    evidence = tmp_path / "docs/session/runtime-boundary.json"
+    evidence.parent.mkdir(parents=True)
+    evidence.write_text("{}\n", encoding="utf-8")
+    result = valid_result(
+        acceptance_observed="TRUE",
+        acceptance_evidence=("docs/session/runtime-boundary.json",),
+        files_observed=("consumer.py",),
+    )
+
+    assert (
+        "acceptance_evidence must be listed in files_observed: "
+        "docs/session/runtime-boundary.json"
+        in validate_result(result, valid_wrm_assignment)
+    )
+
+
+def test_wrm_completed_result_accepts_existing_observed_evidence_file(
+    valid_wrm_assignment, valid_result, tmp_path
+):
+    evidence = tmp_path / "docs/session/runtime-boundary.json"
+    evidence.parent.mkdir(parents=True)
+    evidence.write_text("{}\n", encoding="utf-8")
+    result = valid_result(
+        acceptance_observed="TRUE",
+        acceptance_evidence=("docs/session/runtime-boundary.json",),
+        files_observed=("consumer.py", "docs/session/runtime-boundary.json"),
+    )
+
+    assert not any(
+        "acceptance_evidence" in error
+        for error in validate_result(result, valid_wrm_assignment)
+    )
+
+
+def test_wrm_completed_result_rejects_evidence_symlink_outside_repository(
+    valid_wrm_assignment, valid_result, tmp_path
+):
+    with tempfile.TemporaryDirectory(prefix="hmasd-package-d-outside-") as outside:
+        outside_evidence = Path(outside) / "runtime-boundary.json"
+        outside_evidence.write_text("{}\n", encoding="utf-8")
+        evidence = tmp_path / "docs/session/runtime-boundary.json"
+        evidence.parent.mkdir(parents=True)
+        try:
+            evidence.symlink_to(outside_evidence)
+        except OSError as exc:
+            pytest.skip(f"host refused file symlink creation: {exc}")
+        result = valid_result(
+            acceptance_observed="TRUE",
+            acceptance_evidence=("docs/session/runtime-boundary.json",),
+            files_observed=("docs/session/runtime-boundary.json",),
+        )
+
+        assert (
+            "acceptance_evidence resolves outside repository: "
+            "docs/session/runtime-boundary.json"
+            in validate_result(result, valid_wrm_assignment)
+        )
+
+
+@pytest.mark.parametrize(
+    "extra_action",
+    ("direction_retired", "coordinate_cross_owner_dependency"),
+)
+def test_wrm_completed_recovery_claim_rejects_any_extra_affected_action(
+    valid_wrm_assignment, valid_result, tmp_path, extra_action
+):
+    evidence = tmp_path / "docs/session/runtime-boundary.json"
+    evidence.parent.mkdir(parents=True)
+    evidence.write_text("{}\n", encoding="utf-8")
+    impact = ImpactEnvelope(
+        IncidentLevel.E3_DOMAIN_OWNER_DECISION,
+        "runtime",
+        "run-1",
+        ("accept_recovery", extra_action),
+        ("continue_other_work",),
+        ("direction_paused",),
+        "CM:x",
+        "ROOT",
+        (),
+    )
+    result = valid_result(
+        impact=impact,
+        acceptance_observed="TRUE",
+        acceptance_evidence=("docs/session/runtime-boundary.json",),
+        files_observed=("consumer.py", "docs/session/runtime-boundary.json"),
+    )
+
+    assert (
+        "completed result may carry impact only for a validated WRM "
+        "recovery acceptance claim"
         in validate_result(result, valid_wrm_assignment)
     )
 
