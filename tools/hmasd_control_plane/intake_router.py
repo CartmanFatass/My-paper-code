@@ -42,11 +42,22 @@ def route_result(assignment: AssignmentArtifact, result: ResultArtifact, registr
         IncidentLevel.E4_CROSS_OWNER_DECISION: result.impact.escalate_to,
         IncidentLevel.E5_USER_AUTHORITY_REQUIRED: "USER",
     }
+    claims_recovery_acceptance = (
+        assignment.executor_role == "hmasd-workflow-recovery-manager"
+        and bool({"accept_recovery", "recovery_completed"}.intersection(forbidden))
+    )
+    recovery_acceptance_proven = (
+        bool(assignment.acceptance_outcome.strip())
+        and result.result_kind == "COMPLETED"
+        and result.acceptance_observed == "TRUE"
+        and bool(result.acceptance_evidence)
+    )
     return IntakeDecision(
         level.value,
         routes[level],
         "USER_QUESTION_REQUIRED" if level == IncidentLevel.E5_USER_AUTHORITY_REQUIRED else "ROUTE_SCOPE_LOCAL",
         result.impact.user_question,
         level != IncidentLevel.E5_USER_AUTHORITY_REQUIRED,
-        level in {IncidentLevel.E3_DOMAIN_OWNER_DECISION, IncidentLevel.E4_CROSS_OWNER_DECISION, IncidentLevel.E5_USER_AUTHORITY_REQUIRED},
+        level in {IncidentLevel.E3_DOMAIN_OWNER_DECISION, IncidentLevel.E4_CROSS_OWNER_DECISION, IncidentLevel.E5_USER_AUTHORITY_REQUIRED}
+        and not (claims_recovery_acceptance and not recovery_acceptance_proven),
     )

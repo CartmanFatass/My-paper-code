@@ -325,6 +325,7 @@ or logout evidence. For Agentify, Root first reconciles the exact native tab
 through `agentify_tabs` and exact-tab `agentify_read_page`/DOM; only then may
 it assess a directly observed provider gate. User observation is evidence to
 reconcile, not a reflexive substitute for the native record.
+Parent intake may preserve or lower child-proven recovery status; it may not raise it.
 
 Operational Root alone may declare the task goal blocked. It may do so only
 after its own consecutive goal turns have independently verified the same

@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Mapping
+from typing import Literal, Mapping
 
 try:
     import tomllib
@@ -56,6 +56,7 @@ class AssignmentArtifact:
     non_target_surfaces: tuple[str, ...]
     outcome: str = ""
     source_path: str = ""
+    acceptance_outcome: str = ""
 
 
 @dataclass(frozen=True)
@@ -71,6 +72,8 @@ class ResultArtifact:
     direct_consumer_checked: str
     impact: ImpactEnvelope | None
     source_path: str = ""
+    acceptance_observed: Literal["TRUE", "FALSE", "UNKNOWN"] = "UNKNOWN"
+    acceptance_evidence: tuple[str, ...] = ()
 
 
 def _tuple(raw: object, field: str, allow_empty: bool = True) -> tuple[str, ...]:
@@ -128,6 +131,7 @@ def parse_assignment(path: Path) -> AssignmentArtifact:
         non_target_surfaces=_tuple(raw.get("non_target_surfaces"), "non_target_surfaces", allow_empty=False),
         outcome=_extract_section(text, "Outcome"),
         source_path=str(path),
+        acceptance_outcome=str(raw.get("acceptance_outcome") or "").strip(),
     )
 
 
@@ -173,6 +177,8 @@ def parse_result(path: Path) -> ResultArtifact:
         direct_consumer_checked=str(raw.get("direct_consumer_checked") or ""),
         impact=impact,
         source_path=str(path),
+        acceptance_observed=str(raw.get("acceptance_observed") or "UNKNOWN"),
+        acceptance_evidence=_tuple(raw.get("acceptance_evidence"), "acceptance_evidence"),
     )
 
 
@@ -211,6 +217,9 @@ def validate_assignment(assignment: AssignmentArtifact, registry: Mapping[str, R
         errors.append(f"unknown assignment_mode: {assignment.assignment_mode}")
     if assignment.executor_role not in KNOWN_ROLES:
         errors.append(f"unknown executor_role: {assignment.executor_role}")
+    if assignment.executor_role == "hmasd-workflow-recovery-manager":
+        if not assignment.acceptance_outcome.strip():
+            errors.append("WRM assignment requires acceptance_outcome")
     if assignment.strictness_profile not in KNOWN_PROFILES:
         errors.append(f"unknown strictness_profile: {assignment.strictness_profile}")
     if assignment.evidence_class not in KNOWN_EVIDENCE:
@@ -258,6 +267,12 @@ def validate_result(result: ResultArtifact, assignment: AssignmentArtifact) -> l
         errors.append(f"unknown result_kind: {result.result_kind}")
     if result.author_role != assignment.executor_role:
         errors.append("author_role does not match assignment executor_role")
+    if assignment.executor_role == "hmasd-workflow-recovery-manager":
+        if result.result_kind == "COMPLETED":
+            if result.acceptance_observed != "TRUE" or not result.acceptance_evidence:
+                errors.append(
+                    "WRM COMPLETED requires directly observed acceptance and evidence"
+                )
     if result.owner_return != assignment.return_to:
         errors.append("owner_return does not match assignment return_to")
     if result.project_map_anchor != assignment.project_map_anchor:

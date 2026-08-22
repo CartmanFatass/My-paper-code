@@ -11,6 +11,8 @@ files_observed = ["<repo-relative path>"]
 files_changed = ["<repo-relative path>"]
 symbols_changed = ["<symbol>"]
 direct_consumer_checked = "<repo-relative path>"
+acceptance_observed = "UNKNOWN"
+acceptance_evidence = []
 ```
 
 ## Conclusion

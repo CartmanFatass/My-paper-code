@@ -163,6 +163,9 @@ workflow-wide ban.
 
 ## Acceptance and handoff
 
+RECOVERED means the assignment's exact acceptance_outcome was directly observed.
+Source edits, tests, plans, process start, or a narrower substitute do not satisfy it.
+
 Accept recovery only when the original failure is reproducible or equivalently
 diagnosed, the selected repair has a causal explanation, the named focused
 reproduction/regression passes, protected invariants remain intact, and task

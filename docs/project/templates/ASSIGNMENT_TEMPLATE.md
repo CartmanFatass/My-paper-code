@@ -14,6 +14,7 @@ runtime_profile = ""
 requirement_ids = []
 nonrequirement_ids = []
 recovery_owner = "CM:<scope>"
+acceptance_outcome = ""
 result_path = "docs/project/current-work/results/RESULT_<id>.md"
 project_map_anchor = "<exact PROJECT_MAP heading>"
 architecture_role = "ENTRYPOINT"
