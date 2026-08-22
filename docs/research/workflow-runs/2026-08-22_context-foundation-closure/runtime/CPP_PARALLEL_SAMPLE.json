@@ -1,0 +1,75 @@
+{
+  "assignment_id": "asg_context_runtime_calibration",
+  "backend": "cpp",
+  "basis": "MEASURED",
+  "build_mode": "source_keyed_torch_cpp_extension_optimized_cpu",
+  "conclusion_bearing": false,
+  "environment_steps": 1536,
+  "evaluations": 0,
+  "formal": false,
+  "measured_at": "2026-08-22T19:10:00.759930Z",
+  "measured_command": "C:\\Users\\fires\\.conda\\envs\\hmasd-amd-cpu\\python.exe .tmp_task10_calibration/task10_measure.py cpp-parallel --out .tmp_task10_calibration/CPP_PARALLEL_SAMPLE.json",
+  "measured_mode": "cpp-parallel",
+  "measurement_details": {
+    "batch_size_per_worker": 8,
+    "cold_build_load_excluded": true,
+    "compiler_flags": [
+      [
+        "/O2",
+        "/std:c++17",
+        "/EHsc",
+        "/fp:precise"
+      ],
+      [
+        "/O2",
+        "/std:c++17",
+        "/EHsc",
+        "/fp:precise"
+      ]
+    ],
+    "fixture_and_batch_construction_excluded": true,
+    "group_wall_boundary": "parent_release_through_both_completions",
+    "horizon": 48,
+    "measured_native_episodes_per_worker": 2,
+    "measured_region": "coordinated_native_batch_episode_steps",
+    "native_modules": [
+      "hmasd_continuous_roster_toy_7c93f47b08639efb33b5_e9da45bc4d2d5b29",
+      "hmasd_continuous_roster_toy_7c93f47b08639efb33b5_e9da45bc4d2d5b29"
+    ],
+    "oracle_equivalent": true,
+    "oracle_reference_episodes_per_worker": 1,
+    "outcome_digest": "8dc6ee0695ea1b4d660b92064a41e3679b4b3bc2a6b1023e8386329e08b2290a",
+    "python_role": "spawn_synchronization_and_lifecycle_orchestration_only",
+    "serial_or_python_fallback": false,
+    "synchronization": "multiprocessing_spawn_barrier",
+    "warmup_native_episodes_per_worker": 1,
+    "worker_elapsed_seconds": [
+      0.029708900023251772,
+      0.025415599928237498
+    ],
+    "worker_environment_steps": [
+      768,
+      768
+    ],
+    "worker_pids": [
+      24244,
+      28956
+    ],
+    "workers_agree": true,
+    "workers_complete": true
+  },
+  "optimizer_updates": 0,
+  "parallel": true,
+  "result_bearing": true,
+  "route_id": "continuous_roster_native",
+  "runtime_profile": "TOY_EXPLORATORY",
+  "sample_id": "task10_cpp_parallel_528296657e3a4dd9b2bb20d48e8f7495",
+  "schema_version": 1,
+  "scientific_conclusion": null,
+  "target_steps": 1536,
+  "target_steps_unit": "environment_steps",
+  "threads_per_worker": 1,
+  "wall_seconds": 0.030842300038784742,
+  "warmup_environment_steps": 1536,
+  "worker_count": 2
+}
