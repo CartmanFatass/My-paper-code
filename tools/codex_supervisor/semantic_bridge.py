@@ -24,6 +24,14 @@ class SemanticBridgeError(ValueError):
     """Raised when a managed actor is ineligible or a reanchor is invalid."""
 
 
+class SemanticActorEligibilityError(SemanticBridgeError):
+    """Raised only when the guarded semantic actor is not managed and ACTIVE."""
+
+
+class SemanticCurrentnessError(SemanticBridgeError):
+    """Raised only when the guarded four-field currentness tuple changed."""
+
+
 @dataclass(frozen=True)
 class ManagedActorSnapshot:
     actor_context_id: str
@@ -56,12 +64,16 @@ class SemanticBridge:
             (actor_context_id,),
         ).fetchone()
         if row is None:
-            raise SemanticBridgeError(f"unknown actor: {actor_context_id}")
+            raise SemanticActorEligibilityError(f"unknown actor: {actor_context_id}")
         actor = actor_context_from_row(row)
         if actor.actor_kind not in ELIGIBLE_KINDS:
-            raise SemanticBridgeError(f"actor kind is not managed: {actor.actor_kind.value}")
+            raise SemanticActorEligibilityError(
+                f"actor kind is not managed: {actor.actor_kind.value}"
+            )
         if actor.state is not ActorState.ACTIVE:
-            raise SemanticBridgeError(f"actor is not ACTIVE: {actor.state.value}")
+            raise SemanticActorEligibilityError(
+                f"actor is not ACTIVE: {actor.state.value}"
+            )
         return actor
 
     def require_eligible(self, actor_context_id: str):
@@ -149,7 +161,9 @@ class SemanticBridge:
                     snapshot.epoch_revision,
                 )
                 if actual != expected:
-                    raise SemanticBridgeError("semantic currentness tuple no longer matches")
+                    raise SemanticCurrentnessError(
+                        "semantic currentness tuple no longer matches"
+                    )
                 yield snapshot
                 if not connection.in_transaction:
                     raise SemanticBridgeError("semantic currentness guard was released prematurely")
@@ -177,7 +191,7 @@ class SemanticBridge:
             snapshot.epoch_revision,
         )
         if actual != expected:
-            raise SemanticBridgeError("semantic currentness tuple no longer matches")
+            raise SemanticCurrentnessError("semantic currentness tuple no longer matches")
         return snapshot
 
     def acknowledge_reanchor(

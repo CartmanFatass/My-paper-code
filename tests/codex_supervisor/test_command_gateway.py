@@ -9,12 +9,13 @@ import tools.codex_supervisor.managed_packet_send as managed_packet_send_module
 import tools.codex_supervisor.semantic_bridge as semantic_bridge_module
 
 from tests.codex_supervisor.helpers import ingest_recorded_command, record_completed_agent_item
-from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
+from tests.codex_supervisor.mailbox_fixtures import activate_binding, seed_active_root_portfolio
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors, seed_reanchor
+from tools.codex_semantic_mvp.actor_registry import register_session_root
 from tools.codex_supervisor.binding_store import BindingStore
 from tools.codex_supervisor.command_gateway import CommandGateway, CommandGatewayError
 from tools.codex_supervisor.managed_packet_send import ManagedPacketSender
-from tools.codex_supervisor.managed_models import HistoryTrust, ThreadOrigin
+from tools.codex_supervisor.managed_models import BindingState, HistoryTrust, ThreadOrigin
 
 
 def _ready_binding(tmp_path: Path):
@@ -130,7 +131,7 @@ def test_reanchor_and_stale_and_unbound_thread(tmp_path: Path) -> None:
 def test_stale_currentness_rejects_every_mutating_action_before_effect(
     tmp_path: Path, action: str, inner: dict
 ) -> None:
-    seeded, _store, gateway = _ready_binding(tmp_path)
+    seeded, store, gateway = _ready_binding(tmp_path)
     snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
     payload = {
         "schema_version": "1.0",
@@ -153,6 +154,7 @@ def test_stale_currentness_rejects_every_mutating_action_before_effect(
     assert seeded["supervisor"].connection.execute(
         "SELECT COUNT(*) FROM managed_command_receipts"
     ).fetchone()[0] == 0
+    assert store.binding_for_thread("thr_cmd").binding_state is BindingState.VERIFICATION_REQUIRED
     seeded["bridge"].close()
     seeded["supervisor"].close()
     seeded["semantic"].close()
@@ -542,6 +544,249 @@ def test_gateway_packet_write_joins_guard_without_premature_commit(
     )
     assert applied["validation_state"] == "APPLIED"
     assert observed["joined"] is True
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_gateway_eligibility_decision_uses_only_guarded_state_at_former_gap(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    seeded = seed_active_root_portfolio(tmp_path)
+    payload_path = tmp_path / "guarded-eligibility-packet.md"
+    payload_path.write_text("guarded eligibility", encoding="utf-8")
+    sender = ManagedPacketSender(seeded["bindings"], seeded["bridge"], tmp_path)
+    gateway = CommandGateway(
+        seeded["bindings"], seeded["bridge"], seeded["mailbox"], sender
+    )
+    snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+    body = {
+        "schema_version": "1.0",
+        "packet_kind": "MANAGED_ACTOR_COMMAND",
+        "action_kind": "MANAGED_PACKET_SEND",
+        "expected": {
+            "checkpoint_id": snapshot.checkpoint_id,
+            "state_version": snapshot.state_version,
+            "epoch_id": snapshot.epoch_id,
+            "epoch_revision": snapshot.epoch_revision,
+        },
+        "payload": {
+            "packet_kind": "ROOT_TO_PORTFOLIO_REVIEW",
+            "target_alias": "PORTFOLIO",
+            "payload_ref": payload_path.name,
+            "marker": "guarded-eligibility-marker",
+            "direction_id": None,
+        },
+    }
+    with seeded["semantic"]._lock, seeded["semantic"].connection:
+        seeded["semantic"].connection.execute(
+            "UPDATE actor_contexts SET state = 'RELEASED' WHERE actor_context_id = ?",
+            (seeded["root"].actor_context_id,),
+        )
+
+    original_guard = seeded["bridge"].currentness_guard
+    interleaving = {"writer_ran": False}
+
+    @contextmanager
+    def invalid_to_valid_before_guard(actor_context_id: str, **expected):
+        with seeded["semantic"]._lock, seeded["semantic"].connection:
+            seeded["semantic"].connection.execute(
+                "UPDATE actor_contexts SET state = 'ACTIVE' WHERE actor_context_id = ?",
+                (actor_context_id,),
+            )
+        interleaving["writer_ran"] = True
+        with original_guard(actor_context_id, **expected) as guarded:
+            yield guarded
+
+    monkeypatch.setattr(
+        seeded["bridge"], "currentness_guard", invalid_to_valid_before_guard
+    )
+    text = (
+        "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n"
+        + json.dumps(body)
+        + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
+    )
+    applied = ingest_recorded_command(
+        gateway,
+        seeded["supervisor"],
+        thread_id="thr_root",
+        turn_id="turn_guarded_eligibility",
+        text=text,
+        item_id="item_guarded_eligibility",
+    )
+    assert applied["validation_state"] == "APPLIED"
+    assert interleaving["writer_ran"] is True
+    assert seeded["bindings"].get(seeded["root_binding_id"]).binding_state is BindingState.ACTIVE
+    assert seeded["bridge"].semantic.connection.execute(
+        "SELECT COUNT(*) FROM packet_refs WHERE marker = 'guarded-eligibility-marker'"
+    ).fetchone()[0] == 1
+    assert seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM mailbox_messages"
+    ).fetchone()[0] == 0
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_gateway_stable_guarded_ineligibility_suspends_without_action_effect(
+    tmp_path: Path,
+) -> None:
+    seeded = seed_active_root_portfolio(tmp_path)
+    payload_path = tmp_path / "stable-ineligible-packet.md"
+    payload_path.write_text("must not register", encoding="utf-8")
+    sender = ManagedPacketSender(seeded["bindings"], seeded["bridge"], tmp_path)
+    gateway = CommandGateway(
+        seeded["bindings"], seeded["bridge"], seeded["mailbox"], sender
+    )
+    snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+    with seeded["semantic"]._lock, seeded["semantic"].connection:
+        seeded["semantic"].connection.execute(
+            "UPDATE actor_contexts SET state = 'RELEASED' WHERE actor_context_id = ?",
+            (seeded["root"].actor_context_id,),
+        )
+    body = {
+        "schema_version": "1.0",
+        "packet_kind": "MANAGED_ACTOR_COMMAND",
+        "action_kind": "MANAGED_PACKET_SEND",
+        "expected": {
+            "checkpoint_id": snapshot.checkpoint_id,
+            "state_version": snapshot.state_version,
+            "epoch_id": snapshot.epoch_id,
+            "epoch_revision": snapshot.epoch_revision,
+        },
+        "payload": {
+            "packet_kind": "ROOT_TO_PORTFOLIO_REVIEW",
+            "target_alias": "PORTFOLIO",
+            "payload_ref": payload_path.name,
+            "marker": "stable-ineligible-marker",
+        },
+    }
+    text = (
+        "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n"
+        + json.dumps(body)
+        + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
+    )
+    seq = record_completed_agent_item(
+        seeded["supervisor"],
+        thread_id="thr_root",
+        turn_id="turn_stable_ineligible",
+        text=text,
+        item_id="item_stable_ineligible",
+    )
+    with pytest.raises(CommandGatewayError, match="not ACTIVE"):
+        gateway.ingest_final_item(raw_message_seq=seq)
+    command = seeded["supervisor"].connection.execute(
+        "SELECT command_id FROM managed_actor_commands WHERE raw_message_seq = ?", (seq,)
+    ).fetchone()
+    assert seeded["bindings"].get(seeded["root_binding_id"]).binding_state is BindingState.SUSPENDED
+    assert seeded["bridge"].semantic.connection.execute(
+        "SELECT COUNT(*) FROM packet_refs WHERE marker = 'stable-ineligible-marker'"
+    ).fetchone()[0] == 0
+    assert seeded["supervisor"].get_command_receipt(str(command["command_id"])) is None
+    assert seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM mailbox_messages"
+    ).fetchone()[0] == 0
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_gateway_packet_alias_ambiguity_fails_before_any_action_effect(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    seeded = seed_active_root_portfolio(tmp_path)
+    second_root = register_session_root(
+        seeded["semantic"], session_id="session-second-operational-root"
+    )
+    seeded["semantic"].open_actor_workflow(
+        second_root.actor_context_id,
+        "turn-second-root",
+        "second-root",
+        "coordinate",
+    )
+    second_snapshot = seeded["bridge"].snapshot(second_root.actor_context_id)
+    second_root_binding_id = activate_binding(
+        seeded["bindings"], second_snapshot, tmp_path, "thr_second_root"
+    )
+    payload_path = tmp_path / "ambiguous-target-packet.md"
+    payload_path.write_text("must not register", encoding="utf-8")
+    sender = ManagedPacketSender(seeded["bindings"], seeded["bridge"], tmp_path)
+    gateway = CommandGateway(
+        seeded["bindings"], seeded["bridge"], seeded["mailbox"], sender
+    )
+    snapshot = seeded["bridge"].snapshot(seeded["portfolio"].actor_context_id)
+    body = {
+        "schema_version": "1.0",
+        "packet_kind": "MANAGED_ACTOR_COMMAND",
+        "action_kind": "MANAGED_PACKET_SEND",
+        "expected": {
+            "checkpoint_id": snapshot.checkpoint_id,
+            "state_version": snapshot.state_version,
+            "epoch_id": snapshot.epoch_id,
+            "epoch_revision": snapshot.epoch_revision,
+        },
+        "payload": {
+            "packet_kind": "PORTFOLIO_TO_ROOT_DECISION",
+            "target_alias": "OPERATIONAL_ROOT",
+            "payload_ref": payload_path.name,
+            "marker": "ambiguous-target-marker",
+        },
+    }
+    packet_count = seeded["bridge"].semantic.connection.execute(
+        "SELECT COUNT(*) FROM packet_refs"
+    ).fetchone()[0]
+    mailbox_count = seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM mailbox_messages"
+    ).fetchone()[0]
+    mailbox_receipt_count = seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM mailbox_command_receipts"
+    ).fetchone()[0]
+    binding_event_count = seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM managed_binding_events"
+    ).fetchone()[0]
+    packet_register_called = {"value": False}
+
+    def forbidden_packet_register(*args, **kwargs):
+        packet_register_called["value"] = True
+        pytest.fail("ambiguous target reached packet_register")
+
+    monkeypatch.setattr(
+        managed_packet_send_module, "packet_register", forbidden_packet_register
+    )
+    text = (
+        "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n"
+        + json.dumps(body)
+        + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
+    )
+    seq = record_completed_agent_item(
+        seeded["supervisor"],
+        thread_id="thr_port",
+        turn_id="turn_ambiguous_target",
+        text=text,
+        item_id="item_ambiguous_target",
+    )
+    with pytest.raises(CommandGatewayError, match="exactly one ACTIVE binding"):
+        gateway.ingest_final_item(raw_message_seq=seq)
+    command = seeded["supervisor"].connection.execute(
+        "SELECT command_id FROM managed_actor_commands WHERE raw_message_seq = ?", (seq,)
+    ).fetchone()
+    assert seeded["bridge"].semantic.connection.execute(
+        "SELECT COUNT(*) FROM packet_refs"
+    ).fetchone()[0] == packet_count
+    assert seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM mailbox_messages"
+    ).fetchone()[0] == mailbox_count
+    assert seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM mailbox_command_receipts"
+    ).fetchone()[0] == mailbox_receipt_count
+    assert seeded["supervisor"].get_command_receipt(str(command["command_id"])) is None
+    assert packet_register_called["value"] is False
+    assert seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM managed_binding_events"
+    ).fetchone()[0] == binding_event_count
+    assert seeded["bindings"].get(seeded["root_binding_id"]).binding_state is BindingState.ACTIVE
+    assert seeded["bindings"].get(second_root_binding_id).binding_state is BindingState.ACTIVE
+    assert seeded["bindings"].get(seeded["portfolio_binding_id"]).binding_state is BindingState.ACTIVE
     seeded["bridge"].close()
     seeded["supervisor"].close()
     seeded["semantic"].close()

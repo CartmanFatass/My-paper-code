@@ -86,11 +86,14 @@ class MailboxStore:
 
     def get(self, message_id: str) -> MailboxMessage | None:
         with self.store._lock:
-            row = self.store.connection.execute(
-                "SELECT * FROM mailbox_messages WHERE message_id = ?",
-                (message_id,),
-            ).fetchone()
-            return None if row is None else _row_to_message(row)
+            return self._get_unlocked(message_id)
+
+    def _get_unlocked(self, message_id: str) -> MailboxMessage | None:
+        row = self.store.connection.execute(
+            "SELECT * FROM mailbox_messages WHERE message_id = ?",
+            (message_id,),
+        ).fetchone()
+        return None if row is None else _row_to_message(row)
 
     def get_by_source_key(self, source_event_key: str) -> MailboxMessage | None:
         with self.store._lock:
@@ -232,12 +235,18 @@ class MailboxStore:
         assert updated is not None
         return updated
 
-    def _set_intake(self, message_id: str, new_state: IntakeState, **fields: Any) -> MailboxMessage:
+    def _set_intake_in_transaction(
+        self,
+        message_id: str,
+        new_state: IntakeState,
+        **fields: Any,
+    ) -> MailboxMessage:
         from .durability.models import AggregateKind, TransitionCause, TransitionRequest
-        from .durability.transaction import DurabilityTransaction
         from .durability.transitions import TransitionError, TransitionKernel
 
-        current = self.get(message_id)
+        if not self.store.connection.in_transaction:
+            raise MailboxStoreError("mailbox intake transition requires an ambient transaction")
+        current = self._get_unlocked(message_id)
         if current is None:
             raise MailboxStoreError(f"unknown mailbox message: {message_id}")
         if current.intake_state is new_state:
@@ -250,25 +259,30 @@ class MailboxStore:
             or 0
         )
         try:
-            with self.store._lock:
-                with DurabilityTransaction(self.store.connection):
-                    TransitionKernel(self.store.connection).apply(
-                        TransitionRequest(
-                            aggregate_kind=AggregateKind.MAILBOX_INTAKE,
-                            aggregate_id=message_id,
-                            expected_state=current.intake_state.value,
-                            expected_version=version,
-                            target_state=new_state.value,
-                            cause_kind=TransitionCause.CONTROL_COMMAND,
-                            cause_ref=new_state.value,
-                            field_updates=fields,
-                        )
-                    )
+            TransitionKernel(self.store.connection).apply(
+                TransitionRequest(
+                    aggregate_kind=AggregateKind.MAILBOX_INTAKE,
+                    aggregate_id=message_id,
+                    expected_state=current.intake_state.value,
+                    expected_version=version,
+                    target_state=new_state.value,
+                    cause_kind=TransitionCause.CONTROL_COMMAND,
+                    cause_ref=new_state.value,
+                    field_updates=fields,
+                )
+            )
         except TransitionError as exc:
             raise MailboxStoreError(str(exc)) from exc
-        updated = self.get(message_id)
+        updated = self._get_unlocked(message_id)
         assert updated is not None
         return updated
+
+    def _set_intake(self, message_id: str, new_state: IntakeState, **fields: Any) -> MailboxMessage:
+        from .durability.transaction import DurabilityTransaction
+
+        with self.store._lock:
+            with DurabilityTransaction(self.store.connection):
+                return self._set_intake_in_transaction(message_id, new_state, **fields)
 
     def mark_eligible(self, message_id: str) -> MailboxMessage:
         return self._set_delivery(message_id, DeliveryState.ELIGIBLE, eligible_at=_now())
@@ -433,33 +447,70 @@ class MailboxStore:
             dead_letter_reason=reason,
         )
 
-    def acknowledge(self, message_id: str) -> MailboxMessage:
-        current = self.get(message_id)
+    def validate_ack_in_transaction(self, message_id: str) -> MailboxMessage:
+        if not self.store.connection.in_transaction:
+            raise MailboxStoreError("mailbox ACK validation requires an ambient transaction")
+        current = self._get_unlocked(message_id)
         if current is None:
             raise MailboxStoreError(f"unknown mailbox message: {message_id}")
         if current.delivery_state is not DeliveryState.DELIVERED_TO_TURN:
             raise MailboxStoreError("ACK requires a delivered message")
+        return current
+
+    def _acknowledge_in_transaction(self, message_id: str) -> MailboxMessage:
+        current = self.validate_ack_in_transaction(message_id)
         if current.intake_state is IntakeState.NOT_ACKNOWLEDGED:
-            self._set_intake(message_id, IntakeState.ACKNOWLEDGED, acknowledged_at=_now())
-        updated = self.get(message_id)
+            self._set_intake_in_transaction(
+                message_id,
+                IntakeState.ACKNOWLEDGED,
+                acknowledged_at=_now(),
+            )
+        updated = self._get_unlocked(message_id)
+        assert updated is not None
+        return updated
+
+    def acknowledge(self, message_id: str) -> MailboxMessage:
+        from .durability.transaction import DurabilityTransaction
+
+        with self.store._lock:
+            with DurabilityTransaction(self.store.connection):
+                return self._acknowledge_in_transaction(message_id)
+
+    def validate_intake_in_transaction(self, message_id: str) -> MailboxMessage:
+        return self.validate_ack_in_transaction(message_id)
+
+    def _intake_in_transaction(self, message_id: str) -> MailboxMessage:
+        current = self.validate_intake_in_transaction(message_id)
+        if current.intake_state is IntakeState.NOT_ACKNOWLEDGED:
+            self._acknowledge_in_transaction(message_id)
+            current = self._get_unlocked(message_id)
+            assert current is not None
+        if current.intake_state is IntakeState.ACKNOWLEDGED:
+            self._set_intake_in_transaction(
+                message_id,
+                IntakeState.INTAKEN,
+                intaken_at=_now(),
+            )
+        updated = self._get_unlocked(message_id)
         assert updated is not None
         return updated
 
     def intake(self, message_id: str) -> MailboxMessage:
-        current = self.get(message_id)
-        if current is None:
-            raise MailboxStoreError(f"unknown mailbox message: {message_id}")
-        if current.intake_state is IntakeState.NOT_ACKNOWLEDGED:
-            self.acknowledge(message_id)
-            current = self.get(message_id)
-            assert current is not None
-        if current.intake_state is IntakeState.ACKNOWLEDGED:
-            self._set_intake(message_id, IntakeState.INTAKEN, intaken_at=_now())
-        updated = self.get(message_id)
-        assert updated is not None
-        return updated
+        from .durability.transaction import DurabilityTransaction
 
-    def record_command_receipt(self, *, command_id: str, message_id: str, action: str) -> str:
+        with self.store._lock:
+            with DurabilityTransaction(self.store.connection):
+                return self._intake_in_transaction(message_id)
+
+    def _record_command_receipt_in_transaction(
+        self,
+        *,
+        command_id: str,
+        message_id: str,
+        action: str,
+    ) -> str:
+        if not self.store.connection.in_transaction:
+            raise MailboxStoreError("mailbox receipt requires an ambient transaction")
         existing = self.store.connection.execute(
             """SELECT receipt_id FROM mailbox_command_receipts
             WHERE command_id = ? AND message_id = ? AND action = ?""",
@@ -468,14 +519,24 @@ class MailboxStore:
         if existing is not None:
             return str(existing[0])
         receipt_id = f"mrcpt_{uuid.uuid4().hex}"
-        with self.store._lock, self.store.connection:
-            self.store.connection.execute(
-                """INSERT INTO mailbox_command_receipts (
-                    receipt_id, command_id, message_id, action, created_at
-                ) VALUES (?, ?, ?, ?, ?)""",
-                (receipt_id, command_id, message_id, action, _now()),
-            )
+        self.store.connection.execute(
+            """INSERT INTO mailbox_command_receipts (
+                receipt_id, command_id, message_id, action, created_at
+            ) VALUES (?, ?, ?, ?, ?)""",
+            (receipt_id, command_id, message_id, action, _now()),
+        )
         return receipt_id
+
+    def record_command_receipt(self, *, command_id: str, message_id: str, action: str) -> str:
+        from .durability.transaction import DurabilityTransaction
+
+        with self.store._lock:
+            with DurabilityTransaction(self.store.connection):
+                return self._record_command_receipt_in_transaction(
+                    command_id=command_id,
+                    message_id=message_id,
+                    action=action,
+                )
 
     def active_batch_message_ids(self) -> set[str]:
         with self.store._lock:

@@ -13,7 +13,11 @@ from .mailbox_store import MailboxStore
 from .managed_models import BindingState, CommandValidationState, ManagedActionKind
 from .managed_packet_send import ManagedPacketSendError, ManagedPacketSender
 from .observer_evidence import ObserverEvidenceError, load_completed_final_item
-from .semantic_bridge import SemanticBridge, SemanticBridgeError
+from .semantic_bridge import (
+    SemanticActorEligibilityError,
+    SemanticBridge,
+    SemanticBridgeError,
+)
 
 
 class CommandGatewayError(RuntimeError):
@@ -144,63 +148,66 @@ class CommandGateway:
         if action is ManagedActionKind.NO_CONTROL_ACTION:
             return {"effect": "none"}
         self._refuse_incident_source(binding, turn_id)
-        if action is not ManagedActionKind.NO_CONTROL_ACTION:
-            try:
-                actor = self.bridge.require_eligible(binding.actor_context_id)
-            except SemanticBridgeError as exc:
-                try:
-                    self.bindings.suspend(binding.binding_id)
-                except Exception:
-                    pass
-                raise CommandGatewayError(str(exc)) from exc
-            if actor.actor_kind.value != binding.actor_kind.value:
-                raise CommandGatewayError("actor kind no longer matches binding")
         expected = parsed["expected"]
         # BEGIN IMMEDIATE is held across the first durable action boundary.
         # Semantic helpers join this transaction; mailbox effects commit on
         # the supervisor database while semantic writers remain fenced.
-        with self.bridge.currentness_guard(
-            binding.actor_context_id,
-            checkpoint_id=expected["checkpoint_id"],
-            state_version=int(expected["state_version"]),
-            epoch_id=expected["epoch_id"],
-            epoch_revision=expected["epoch_revision"],
-        ):
-            if action is ManagedActionKind.CONTEXT_REANCHOR_ACK:
-                result = self.bridge.acknowledge_reanchor(
-                    actor_context_id=binding.actor_context_id,
-                    checkpoint_id=str(expected.get("checkpoint_id") or ""),
-                    expected_state_version=int(expected.get("state_version") or 0),
-                    expected_epoch_id=expected.get("epoch_id"),
-                    expected_epoch_revision=expected.get("epoch_revision"),
-                    app_server_turn_id=turn_id,
-                    supervisor_command_id=command_id,
-                )
-                result["checkpoint_id"] = expected["checkpoint_id"]
-                result["state_version"] = int(expected["state_version"])
-                result["epoch_id"] = expected.get("epoch_id")
-                result["epoch_revision"] = expected.get("epoch_revision")
-                return result
-            inner = parsed.get("payload") if isinstance(parsed.get("payload"), dict) else {}
-            if action is ManagedActionKind.MAILBOX_ACK:
-                result = self._mailbox_ack(binding, command_id, turn_id, inner)
-            if action is ManagedActionKind.MAILBOX_INTAKE:
-                result = self._mailbox_intake(binding, command_id, turn_id, inner)
-            if action is ManagedActionKind.MANAGED_PACKET_SEND:
-                result = self._packet_send(binding, inner)
-            if action not in {
-                ManagedActionKind.MAILBOX_ACK,
-                ManagedActionKind.MAILBOX_INTAKE,
-                ManagedActionKind.MANAGED_PACKET_SEND,
-            }:
-                raise CommandGatewayError(f"unsupported action: {action.value}")
-            result.update(
+        try:
+            with self.bridge.currentness_guard(
+                binding.actor_context_id,
                 checkpoint_id=expected["checkpoint_id"],
-                state_version=expected["state_version"],
+                state_version=int(expected["state_version"]),
                 epoch_id=expected["epoch_id"],
                 epoch_revision=expected["epoch_revision"],
-            )
-            return result
+            ) as guarded_snapshot:
+                if guarded_snapshot.actor_kind != binding.actor_kind.value:
+                    raise CommandGatewayError("actor kind no longer matches binding")
+                if guarded_snapshot.scope_key != binding.semantic_scope_key:
+                    raise CommandGatewayError("actor scope no longer matches binding")
+                if action is ManagedActionKind.CONTEXT_REANCHOR_ACK:
+                    result = self.bridge.acknowledge_reanchor(
+                        actor_context_id=binding.actor_context_id,
+                        checkpoint_id=str(expected.get("checkpoint_id") or ""),
+                        expected_state_version=int(expected.get("state_version") or 0),
+                        expected_epoch_id=expected.get("epoch_id"),
+                        expected_epoch_revision=expected.get("epoch_revision"),
+                        app_server_turn_id=turn_id,
+                        supervisor_command_id=command_id,
+                    )
+                    result["checkpoint_id"] = expected["checkpoint_id"]
+                    result["state_version"] = int(expected["state_version"])
+                    result["epoch_id"] = expected.get("epoch_id")
+                    result["epoch_revision"] = expected.get("epoch_revision")
+                    return result
+                inner = parsed.get("payload") if isinstance(parsed.get("payload"), dict) else {}
+                if action is ManagedActionKind.MAILBOX_ACK:
+                    result = self._mailbox_ack(binding, command_id, turn_id, inner)
+                if action is ManagedActionKind.MAILBOX_INTAKE:
+                    result = self._mailbox_intake(binding, command_id, turn_id, inner)
+                if action is ManagedActionKind.MANAGED_PACKET_SEND:
+                    result = self._packet_send(binding, inner)
+                if action not in {
+                    ManagedActionKind.MAILBOX_ACK,
+                    ManagedActionKind.MAILBOX_INTAKE,
+                    ManagedActionKind.MANAGED_PACKET_SEND,
+                }:
+                    raise CommandGatewayError(f"unsupported action: {action.value}")
+                result.update(
+                    checkpoint_id=expected["checkpoint_id"],
+                    state_version=expected["state_version"],
+                    epoch_id=expected["epoch_id"],
+                    epoch_revision=expected["epoch_revision"],
+                )
+                return result
+        except SemanticActorEligibilityError as exc:
+            # Suspension is based only on the typed result observed after the
+            # guard acquired its semantic writer fence.  Currentness mismatch
+            # and stale pre-fence observations never suspend the binding.
+            try:
+                self.bindings.suspend(binding.binding_id)
+            except Exception:
+                pass
+            raise CommandGatewayError(str(exc)) from exc
 
     def _require_mailbox(self) -> MailboxStore:
         if self.mailbox is None:
@@ -209,35 +216,63 @@ class CommandGateway:
 
     def _message_owned_and_delivered(self, binding: Any, message_id: str) -> None:
         mailbox = self._require_mailbox()
-        message = mailbox.get(message_id)
+        message = mailbox._get_unlocked(message_id)
         if message is None:
             raise CommandGatewayError(f"unknown mailbox message: {message_id}")
         if message.target_actor_context_id != binding.actor_context_id:
             raise CommandGatewayError("mailbox message is not owned by this binding")
-        delivered = mailbox.store.connection.execute(
-            """SELECT b.app_server_turn_id FROM wake_batch_messages w
-            JOIN wake_batches b ON b.wake_batch_id = w.wake_batch_id
-            WHERE w.message_id = ? AND b.binding_id = ?
-              AND b.state IN ('ACTIVE', 'COMPLETED')""",
-            (message_id, binding.binding_id),
-        ).fetchone()
-        if delivered is None or message.delivery_state.value != "DELIVERED_TO_TURN":
+        if message.delivery_state.value != "DELIVERED_TO_TURN":
             raise CommandGatewayError("mailbox message was not delivered to this binding")
 
-    def _command_turn_follows_wake(self, binding: Any, turn_id: str, message_id: str) -> None:
-        row = self.bindings.store.connection.execute(
-            """SELECT b.app_server_turn_id, t.started_at AS wake_started
+    def _delivery_wake_turn(self, binding: Any, message_id: str) -> str | None:
+        """Return the one delivery-relevant wake turn, or None for direct delivery.
+
+        CANCELLED/requeued attempts are history rather than delivery evidence.  A
+        ACTIVE/COMPLETED rows are delivery evidence only for the exact binding.
+        More than one such batch cannot identify which batch delivered the
+        message, even if corrupt rows name the same turn, so it fails closed.
+        Rows from another binding never participate in this binding's selection.
+        """
+
+        thread_id = str(binding.thread_id or "")
+        rows = self.bindings.store.connection.execute(
+            """SELECT b.wake_batch_id, b.app_server_turn_id
             FROM wake_batch_messages w
             JOIN wake_batches b ON b.wake_batch_id = w.wake_batch_id
-            LEFT JOIN turn_snapshots t ON t.turn_id = b.app_server_turn_id
-            WHERE w.message_id = ? AND b.binding_id = ?""",
-            (message_id, binding.binding_id),
-        ).fetchone()
-        if row is None or not row["app_server_turn_id"]:
+            WHERE w.message_id = ? AND b.binding_id = ? AND b.thread_id = ?
+              AND b.state IN ('ACTIVE', 'COMPLETED')""",
+            (message_id, binding.binding_id, thread_id),
+        ).fetchall()
+        if not rows:
+            foreign_delivery = self.bindings.store.connection.execute(
+                """SELECT 1 FROM wake_batch_messages w
+                JOIN wake_batches b ON b.wake_batch_id = w.wake_batch_id
+                WHERE w.message_id = ? AND b.state IN ('ACTIVE', 'COMPLETED')
+                  AND (b.binding_id <> ? OR b.thread_id <> ?)
+                LIMIT 1""",
+                (message_id, binding.binding_id, thread_id),
+            ).fetchone()
+            if foreign_delivery is not None:
+                raise CommandGatewayError(
+                    "mailbox message was not delivered to this binding"
+                )
+            # Direct/manual delivery has no wake history and therefore no wake
+            # turn to order against.  Its durable message state was checked by
+            # _message_owned_and_delivered.
+            return None
+
+        if len(rows) != 1:
+            raise CommandGatewayError("mailbox delivery wake history is ambiguous")
+        selected_turn = rows[0]["app_server_turn_id"]
+        if selected_turn is None:
             raise CommandGatewayError("command/wake ordering cannot be proven")
-        if str(row["app_server_turn_id"]) == turn_id:
+        return str(selected_turn)
+
+    def _command_turn_follows_wake(self, binding: Any, turn_id: str, message_id: str) -> None:
+        wake_turn_id = self._delivery_wake_turn(binding, message_id)
+        if wake_turn_id is None or wake_turn_id == turn_id:
             return
-        wake_key = self._turn_order_key(str(row["app_server_turn_id"]), binding.thread_id)
+        wake_key = self._turn_order_key(wake_turn_id, binding.thread_id)
         command_key = self._turn_order_key(turn_id, binding.thread_id)
         if wake_key is None or command_key is None or wake_key[0] != command_key[0]:
             raise CommandGatewayError("command/wake ordering cannot be proven")
@@ -459,24 +494,65 @@ class CommandGateway:
 
     def _mailbox_ack(self, binding: Any, command_id: str, turn_id: str, inner: dict[str, Any]) -> dict[str, Any]:
         mailbox = self._require_mailbox()
-        receipts = []
-        for message_id in inner.get("message_ids") or []:
-            self._message_owned_and_delivered(binding, str(message_id))
-            self._command_turn_follows_wake(binding, turn_id, str(message_id))
-            mailbox.acknowledge(str(message_id))
-            receipts.append(mailbox.record_command_receipt(command_id=command_id, message_id=str(message_id), action="ACK"))
+        from .durability.transaction import DurabilityTransaction
+
+        message_ids = [str(message_id) for message_id in inner.get("message_ids") or []]
+        self._require_distinct_mailbox_messages(message_ids)
+        receipts: list[str] = []
+        with mailbox.store._lock:
+            with DurabilityTransaction(mailbox.store.connection):
+                # Validate the complete batch under the same snapshot used for
+                # its writes.  No transition or receipt is staged until every
+                # item has passed every invariant.
+                for message_id in message_ids:
+                    self._message_owned_and_delivered(binding, message_id)
+                    self._command_turn_follows_wake(binding, turn_id, message_id)
+                    mailbox.validate_ack_in_transaction(message_id)
+                for message_id in message_ids:
+                    mailbox._acknowledge_in_transaction(message_id)
+                    receipts.append(
+                        mailbox._record_command_receipt_in_transaction(
+                            command_id=command_id,
+                            message_id=message_id,
+                            action="ACK",
+                        )
+                    )
         return {"effect": "MAILBOX_ACK", "receipts": receipts, "turn_id": turn_id}
 
     def _mailbox_intake(self, binding: Any, command_id: str, turn_id: str, inner: dict[str, Any]) -> dict[str, Any]:
         mailbox = self._require_mailbox()
-        receipts = []
-        for item in inner.get("items") or []:
-            message_id = str(item.get("message_id") or "")
-            self._message_owned_and_delivered(binding, message_id)
-            self._command_turn_follows_wake(binding, turn_id, message_id)
-            mailbox.intake(message_id)
-            receipts.append(mailbox.record_command_receipt(command_id=command_id, message_id=message_id, action="INTAKE"))
+        from .durability.transaction import DurabilityTransaction
+
+        items = list(inner.get("items") or [])
+        message_ids = [str(item.get("message_id") or "") for item in items]
+        self._require_distinct_mailbox_messages(message_ids)
+        receipts: list[str] = []
+        with mailbox.store._lock:
+            with DurabilityTransaction(mailbox.store.connection):
+                for item, message_id in zip(items, message_ids):
+                    intake_kind = item.get("intake_kind")
+                    if not isinstance(intake_kind, str) or not intake_kind.strip():
+                        raise CommandGatewayError("MAILBOX_INTAKE intake_kind must be a non-empty string")
+                    self._message_owned_and_delivered(binding, message_id)
+                    self._command_turn_follows_wake(binding, turn_id, message_id)
+                    mailbox.validate_intake_in_transaction(message_id)
+                for message_id in message_ids:
+                    mailbox._intake_in_transaction(message_id)
+                    receipts.append(
+                        mailbox._record_command_receipt_in_transaction(
+                            command_id=command_id,
+                            message_id=message_id,
+                            action="INTAKE",
+                        )
+                    )
         return {"effect": "MAILBOX_INTAKE", "receipts": receipts, "turn_id": turn_id}
+
+    @staticmethod
+    def _require_distinct_mailbox_messages(message_ids: list[str]) -> None:
+        if any(not message_id for message_id in message_ids):
+            raise CommandGatewayError("mailbox message_id must be non-empty")
+        if len(message_ids) != len(set(message_ids)):
+            raise CommandGatewayError("mailbox command contains duplicate message_ids")
 
     def _packet_send(self, binding: Any, inner: dict[str, Any]) -> dict[str, Any]:
         if self.packets is None:

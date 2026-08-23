@@ -98,13 +98,19 @@ class ManagedPacketSender:
         alias = TARGET_ALIASES.get(target_alias)
         if alias is None:
             raise ManagedPacketSendError(f"unknown target alias: {target_alias}")
-        target = None
-        for binding in self.bindings.list_bindings():
-            if binding.actor_kind is alias and binding.binding_state is BindingState.ACTIVE:
-                target = binding
-                break
-        if target is None:
+        targets = [
+            binding
+            for binding in self.bindings.list_bindings()
+            if binding.actor_kind is alias
+            and binding.binding_state is BindingState.ACTIVE
+        ]
+        if not targets:
             raise ManagedPacketSendError("target alias has no ACTIVE binding")
+        if len(targets) != 1:
+            raise ManagedPacketSendError(
+                "target alias does not resolve to exactly one ACTIVE binding"
+            )
+        target = targets[0]
         self._require_live_actor(target)
         try:
             evaluate_automatic_delivery(
