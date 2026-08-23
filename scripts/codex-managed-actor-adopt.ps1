@@ -23,5 +23,5 @@ if ([string]::IsNullOrWhiteSpace($RepoRoot) -or [string]::IsNullOrWhiteSpace($Se
 }
 # Compatibility only: the validated host launch tuple owns repo/state authority.
 $request = [ordered]@{ actor_context_id = $ActorContextId; thread_id = $ThreadId; allow_existing_history = $true; confirm_history_nonauthoritative = $true; confirm_global_memory_disabled = $true }
-& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MANAGED_ADOPT' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -TimeoutSeconds $TimeoutSeconds
+& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MANAGED_ADOPT' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -ExpectedRepoRoot $RepoRoot -ExpectedSemanticState $SemanticState -ExpectedCodexBinary $CodexBinary -TimeoutSeconds $TimeoutSeconds
 if ($LASTEXITCODE -ne 0) { throw "managed adopt host request exited with code $LASTEXITCODE" }

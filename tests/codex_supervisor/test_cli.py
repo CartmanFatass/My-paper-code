@@ -12,6 +12,7 @@ from tools.codex_supervisor.models import ProtocolIds, RpcShape
 from tools.codex_supervisor.normalizer import apply_normalized_event, normalize_message
 from tools.codex_supervisor.runtime_profiles import RuntimeProfile
 from tools.codex_supervisor.store import ObserverStore
+from tools.codex_semantic_mvp.store import SemanticStore
 
 
 def test_doctor_does_not_launch_app_server(tmp_path: Path, repo_root: Path, capsys) -> None:
@@ -114,9 +115,11 @@ def test_serve_semantic_state_is_profile_bound_and_external(
     repo = tmp_path / "repo"
     repo.mkdir()
     external = tmp_path / "semantic.sqlite3"
-    external.touch()
+    external_semantic = SemanticStore(external).initialize()
+    external_semantic.close()
     resident = repo / "semantic.sqlite3"
-    resident.touch()
+    resident_semantic = SemanticStore(resident).initialize()
+    resident_semantic.close()
 
     assert (
         _semantic_state_for_profile(

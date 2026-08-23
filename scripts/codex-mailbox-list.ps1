@@ -12,7 +12,10 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+if ([string]::IsNullOrWhiteSpace($RepoRoot)) {
+    throw "RepoRoot must be non-empty and non-whitespace."
+}
 $request = [ordered]@{}
 if ($Target) { $request.target_actor_context_id = $Target }
-& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MAILBOX_LIST' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -TimeoutSeconds $TimeoutSeconds
+& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MAILBOX_LIST' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -ExpectedRepoRoot $RepoRoot -ExpectedCodexBinary $CodexBinary -TimeoutSeconds $TimeoutSeconds
 if ($LASTEXITCODE -ne 0) { throw "mailbox list host request exited with code $LASTEXITCODE" }

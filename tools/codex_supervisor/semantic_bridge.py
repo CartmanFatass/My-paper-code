@@ -42,7 +42,7 @@ class ManagedActorSnapshot:
 class SemanticBridge:
     def __init__(self, semantic_state_path: Path, supervisor_store: ObserverStore | None = None) -> None:
         self.semantic_state_path = Path(semantic_state_path)
-        self.semantic = SemanticStore(self.semantic_state_path).initialize()
+        self.semantic = SemanticStore.open_existing(self.semantic_state_path)
         self.supervisor_store = supervisor_store
 
     def close(self) -> None:

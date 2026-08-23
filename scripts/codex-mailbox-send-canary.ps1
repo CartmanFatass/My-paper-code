@@ -27,5 +27,5 @@ if ([string]::IsNullOrWhiteSpace($RepoRoot) -or [string]::IsNullOrWhiteSpace($Se
 }
 # References only: the launch-bound host owns repo/state and derives both actor snapshots.
 $request = [ordered]@{ source_actor_context_id = $SourceActorContextId; target_actor_context_id = $TargetActorContextId; message_kind = 'ROOT_TO_PORTFOLIO_REVIEW'; subject_ref = $SubjectRef; payload_ref = $PayloadRef; priority = 20 }
-& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MAILBOX_ENQUEUE' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -TimeoutSeconds $TimeoutSeconds
+& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MAILBOX_ENQUEUE' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -ExpectedRepoRoot $RepoRoot -ExpectedSemanticState $SemanticState -ExpectedCodexBinary $CodexBinary -TimeoutSeconds $TimeoutSeconds
 if ($LASTEXITCODE -ne 0) { throw "mailbox enqueue host request exited with code $LASTEXITCODE" }

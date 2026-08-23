@@ -1,13 +1,15 @@
 from __future__ import annotations
 
 import asyncio
+import os
+import subprocess
 from pathlib import Path
 
 import pytest
 
 from tests.codex_supervisor.helpers import make_observer_config, write_fake_codex
 from tools.codex_supervisor.protocol import ProtocolError, ProtocolLineTooLarge, encode_jsonl
-from tools.codex_supervisor.transport import AppServerTransport, TransportClosed
+from tools.codex_supervisor.transport import AppServerTransport, TransportClosed, process_exec_argv
 
 
 def _run(coro):
@@ -47,6 +49,62 @@ def test_transport_writes_and_reads_jsonl(tmp_path: Path) -> None:
         await transport.stop()
 
     _run(body())
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows command-processor shape")
+def test_process_exec_argv_uses_one_exact_spaced_batch_command(tmp_path: Path) -> None:
+    binary = tmp_path / "directory with spaces" / "codex app shim.cmd"
+    argv = process_exec_argv(binary)
+    assert argv == [
+        os.environ.get("COMSPEC") or "cmd.exe",
+        "/d",
+        "/s",
+        "/c",
+        "call",
+        str(binary),
+        "app-server",
+    ]
+    assert argv.count("app-server") == 1
+    assert subprocess.list2cmdline(argv).endswith(f'call "{binary}" app-server')
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows command-processor shape")
+def test_transport_runs_spaced_batch_path_end_to_end(tmp_path: Path) -> None:
+    async def body() -> None:
+        binary_directory = tmp_path / "Codex (ordinary) directory with spaces"
+        binary_directory.mkdir()
+        generated = write_fake_codex(binary_directory)
+        binary = generated.with_name("codex app shim.cmd")
+        generated.rename(binary)
+        config = make_observer_config(tmp_path)
+        transport = AppServerTransport(
+            binary,
+            config,
+            process_cwd=tmp_path,
+            stderr_path=tmp_path / "spaced-stderr.log",
+            stdin_close_timeout=0.4,
+            terminate_timeout=0.4,
+            extra_env={"FAKE_APP_SERVER_MODE": "handshake_ok"},
+        )
+        await transport.start()
+        assert transport.process_id is not None
+        await transport.send(
+            {"id": 1, "method": "initialize", "params": {"clientInfo": {"name": "t", "version": "0"}}}
+        )
+        message = await transport.recv()
+        assert message.payload["id"] == 1
+        assert "result" in message.payload
+        await transport.stop()
+
+    _run(body())
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows command-processor shape")
+def test_process_exec_argv_rejects_batch_shell_metacharacters(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="metacharacters"):
+        process_exec_argv(tmp_path / "unsafe&codex.cmd")
+    with pytest.raises(ValueError, match="metacharacters"):
+        process_exec_argv(tmp_path / "unsafe %name%" / "codex.cmd")
 
 
 def test_transport_records_stderr_separately(tmp_path: Path) -> None:

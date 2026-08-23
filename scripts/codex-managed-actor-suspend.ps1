@@ -21,5 +21,5 @@ if ([string]::IsNullOrWhiteSpace($RepoRoot) -or [string]::IsNullOrWhiteSpace($Se
 }
 # SemanticState is launch-time only and is intentionally absent from this request.
 $request = [ordered]@{ binding_id = $BindingId }
-& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MANAGED_SUSPEND' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -TimeoutSeconds $TimeoutSeconds
+& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MANAGED_SUSPEND' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -ExpectedRepoRoot $RepoRoot -ExpectedSemanticState $SemanticState -ExpectedCodexBinary $CodexBinary -TimeoutSeconds $TimeoutSeconds
 if ($LASTEXITCODE -ne 0) { throw "managed suspend host request exited with code $LASTEXITCODE" }

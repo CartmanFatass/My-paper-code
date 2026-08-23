@@ -31,6 +31,7 @@ from tools.codex_supervisor.runtime_profiles import (
 )
 from tools.codex_supervisor.provisioning import ManagedProvisioner
 from tools.codex_supervisor.store import ObserverStore
+from tools.codex_semantic_mvp.store import SemanticStore
 
 
 def _now() -> str:
@@ -72,7 +73,8 @@ def _channel(
     canonical_repo.mkdir(parents=True, exist_ok=True)
     if profile is not RuntimeProfile.OBSERVER and semantic_state_path is None:
         semantic_state_path = base / "semantic.sqlite3"
-        semantic_state_path.touch(exist_ok=True)
+        semantic = SemanticStore(semantic_state_path).initialize()
+        semantic.close()
     return HostControlChannel(
         control_home,
         profile=profile,
@@ -118,9 +120,11 @@ def test_channel_configuration_fail_closes_semantic_state_authority(
     repo = tmp_path / "repo"
     repo.mkdir()
     external_state = tmp_path / "semantic.sqlite3"
-    external_state.touch()
+    external_semantic = SemanticStore(external_state).initialize()
+    external_semantic.close()
     resident_state = repo / "semantic.sqlite3"
-    resident_state.touch()
+    resident_semantic = SemanticStore(resident_state).initialize()
+    resident_semantic.close()
 
     with pytest.raises(HostControlValidationError, match="requires"):
         HostControlChannel(

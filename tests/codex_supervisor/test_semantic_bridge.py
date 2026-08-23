@@ -69,3 +69,20 @@ def test_bridge_does_not_import_promotion_or_write_files() -> None:
     assert "write_text" not in source
     assert "open(" not in source
     assert not hasattr(SemanticBridge, "write_file")
+
+
+def test_bridge_opens_existing_database_without_initialize(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from tools.codex_semantic_mvp.store import SemanticStore
+
+    semantic = SemanticStore(tmp_path / "semantic.sqlite3").initialize()
+    semantic.close()
+
+    def initialize_must_not_run(self):
+        raise AssertionError("host bridge must not initialize or migrate semantic state")
+
+    monkeypatch.setattr(SemanticStore, "initialize", initialize_must_not_run)
+    bridge = SemanticBridge(tmp_path / "semantic.sqlite3")
+    bridge.close()

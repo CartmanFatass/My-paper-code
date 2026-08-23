@@ -99,7 +99,138 @@ function Test-ExactFields([object]$Value, [string[]]$Expected) {
 
 function Resolve-CanonicalExecutable([string]$Executable, [string]$Label) {
     if ([string]::IsNullOrWhiteSpace($Executable)) { throw "$Label is required" }
+    if (-not (Test-Path -LiteralPath $Executable -PathType Leaf)) { throw "$Label must be an existing regular file" }
     return (Resolve-Path -LiteralPath $Executable -ErrorAction Stop).Path
+}
+
+function Test-SafeCmdBatchPath([string]$CanonicalBatchPath) {
+    if ([string]::IsNullOrWhiteSpace($CanonicalBatchPath)) { return $false }
+    if ($CanonicalBatchPath.IndexOfAny([char[]]"`r`n`"%!") -ge 0) { return $false }
+    $hasQuoteSensitive = ($CanonicalBatchPath.IndexOfAny([char[]]"^&|<>()") -ge 0)
+    return (-not $hasQuoteSensitive -or $CanonicalBatchPath -match '\s')
+}
+
+function Test-ExactCmdAppServerVector(
+    [object[]]$Actual,
+    [string]$CommandProcessor,
+    [string]$CanonicalBatchPath
+) {
+    try {
+        $values = @($Actual | ForEach-Object { [string]$_ })
+        if ($values.Count -ne 7 -or -not (Test-SamePath $values[0] $CommandProcessor)) { return $false }
+        if ($values[1] -cne '/d' -or $values[2] -cne '/s' -or $values[3] -cne '/c') { return $false }
+        if ($values[4] -cne 'call' -or -not (Test-SafeCmdBatchPath $CanonicalBatchPath)) { return $false }
+        if ($values[5] -cne $CanonicalBatchPath -or $values[6] -cne 'app-server') { return $false }
+        return $true
+    } catch { return $false }
+}
+
+function ConvertFrom-WindowsCommandLine([string]$CommandLine) {
+    if ([string]::IsNullOrWhiteSpace($CommandLine)) { return $null }
+    if ($null -eq ([System.Management.Automation.PSTypeName]'HMASD.NativeCommandLine').Type) {
+        Add-Type -TypeDefinition @'
+using System;
+using System.Runtime.InteropServices;
+namespace HMASD {
+    public static class NativeCommandLine {
+        [DllImport("shell32.dll", SetLastError = true)]
+        public static extern IntPtr CommandLineToArgvW(
+            [MarshalAs(UnmanagedType.LPWStr)] string commandLine,
+            out int argumentCount);
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr LocalFree(IntPtr memory);
+    }
+}
+'@
+    }
+    $argumentCount = 0
+    $native = [HMASD.NativeCommandLine]::CommandLineToArgvW($CommandLine, [ref]$argumentCount)
+    if ($native -eq [IntPtr]::Zero -or $argumentCount -le 0) { return $null }
+    try {
+        $result = @()
+        for ($index = 0; $index -lt $argumentCount; $index++) {
+            $pointer = [Runtime.InteropServices.Marshal]::ReadIntPtr($native, $index * [IntPtr]::Size)
+            $result += [Runtime.InteropServices.Marshal]::PtrToStringUni($pointer)
+        }
+        return @($result)
+    } finally {
+        [void][HMASD.NativeCommandLine]::LocalFree($native)
+    }
+}
+
+function Get-ObservedProcessFacts([int]$ProcessId) {
+    try {
+        if ($ProcessId -le 0) { return $null }
+        $rows = @(Get-CimInstance -ClassName Win32_Process -Filter ("ProcessId = {0}" -f $ProcessId) -ErrorAction Stop)
+        if ($rows.Count -ne 1) { return $null }
+        $row = $rows[0]
+        if ([int]$row.ProcessId -ne $ProcessId -or [string]::IsNullOrWhiteSpace([string]$row.ExecutablePath) -or [string]::IsNullOrWhiteSpace([string]$row.CommandLine)) { return $null }
+        $process = Get-Process -Id $ProcessId -ErrorAction Stop
+        $processPath = [System.IO.Path]::GetFullPath([string]$process.Path)
+        $cimPath = [System.IO.Path]::GetFullPath([string]$row.ExecutablePath)
+        if (-not (Test-SamePath $processPath $cimPath)) { return $null }
+        return [pscustomobject]@{
+            process_id = [int]$row.ProcessId
+            parent_process_id = [int]$row.ParentProcessId
+            executable = $processPath
+            command_line = [string]$row.CommandLine
+            argument_vector = @(ConvertFrom-WindowsCommandLine ([string]$row.CommandLine))
+            process_start_time_utc = $process.StartTime.ToUniversalTime().ToString('o')
+        }
+    } catch { return $null }
+}
+
+function Test-ExactObservedProcessVector([object]$Facts, [string]$ExpectedExecutable, [string[]]$ExpectedArguments) {
+    try {
+        if ($null -eq $Facts -or -not (Test-SamePath ([string]$Facts.executable) $ExpectedExecutable)) { return $false }
+        $actual = @($Facts.argument_vector)
+        if ($actual.Count -ne ($ExpectedArguments.Count + 1)) { return $false }
+        if (-not (Test-SamePath ([string]$actual[0]) $ExpectedExecutable)) { return $false }
+        for ($index = 0; $index -lt $ExpectedArguments.Count; $index++) {
+            if ([string]$actual[$index + 1] -cne [string]$ExpectedArguments[$index]) { return $false }
+        }
+        return $true
+    } catch { return $false }
+}
+
+function Test-SupervisorHostProcessBinding([object]$Record, [string]$RequestedPythonPath, [string[]]$ExpectedArguments) {
+    try {
+        $facts = Get-ObservedProcessFacts ([int]$Record.pid)
+        if ($null -eq $facts) { return $false }
+        if ([string]$facts.process_start_time_utc -ne [string]$Record.process_start_time_utc) { return $false }
+        if (-not (Test-SamePath ([string]$facts.executable) ([string]$Record.executable)) -or -not (Test-SamePath ([string]$facts.executable) $RequestedPythonPath)) { return $false }
+        return (Test-ExactObservedProcessVector $facts $RequestedPythonPath $ExpectedArguments)
+    } catch { return $false }
+}
+
+function Test-AppServerProcessBinding(
+    [int]$ChildProcessId,
+    [object]$HostRecord,
+    [string]$ActiveCodexBin,
+    [string]$InitializedAt
+) {
+    try {
+        if ($ChildProcessId -le 0 -or $ChildProcessId -eq [int]$HostRecord.pid) { return $false }
+        $hostFacts = Get-ObservedProcessFacts ([int]$HostRecord.pid)
+        $childFacts = Get-ObservedProcessFacts $ChildProcessId
+        if ($null -eq $hostFacts -or $null -eq $childFacts) { return $false }
+        if ([string]$hostFacts.process_start_time_utc -ne [string]$HostRecord.process_start_time_utc) { return $false }
+        if ([int]$childFacts.parent_process_id -ne [int]$HostRecord.pid) { return $false }
+        $initialized = [DateTimeOffset]::Parse($InitializedAt, [Globalization.CultureInfo]::InvariantCulture).UtcDateTime
+        $hostStarted = [DateTimeOffset]::Parse([string]$hostFacts.process_start_time_utc, [Globalization.CultureInfo]::InvariantCulture).UtcDateTime
+        $childStarted = [DateTimeOffset]::Parse([string]$childFacts.process_start_time_utc, [Globalization.CultureInfo]::InvariantCulture).UtcDateTime
+        if ($childStarted -lt $hostStarted.AddSeconds(-1) -or $childStarted -gt $initialized.AddSeconds(1)) { return $false }
+        $activeBinary = Resolve-CanonicalExecutable $ActiveCodexBin 'active Codex binary'
+        $suffix = [System.IO.Path]::GetExtension($activeBinary).ToLowerInvariant()
+        if ($suffix -eq '.cmd' -or $suffix -eq '.bat') {
+            $commandProcessor = $env:COMSPEC
+            if ([string]::IsNullOrWhiteSpace($commandProcessor)) { $commandProcessor = Join-Path $env:SystemRoot 'System32\cmd.exe' }
+            $commandProcessor = Resolve-CanonicalExecutable $commandProcessor 'COMSPEC'
+            if (-not (Test-SamePath ([string]$childFacts.executable) $commandProcessor)) { return $false }
+            return (Test-ExactCmdAppServerVector @($childFacts.argument_vector) $commandProcessor $activeBinary)
+        }
+        return (Test-ExactObservedProcessVector $childFacts $activeBinary @('app-server'))
+    } catch { return $false }
 }
 
 function Test-ExactArgumentVector([object[]]$Actual, [string[]]$Expected) {
@@ -208,7 +339,7 @@ function Test-LaunchEvidenceBinding([string]$EvidencePath, [string[]]$ExpectedVe
 
 function Test-ReadyAndActiveRun([string]$ProcessPath, [string]$ReadyPath, [string]$RuntimePath, [string]$Root) {
     $snippet = @'
-import sqlite3, sys
+import json, sqlite3, sys
 from pathlib import Path
 from tools.codex_supervisor.host_state import load_process_record, load_ready_record, validate_ready_record
 try:
@@ -221,20 +352,46 @@ try:
         raise SystemExit(1)
     with sqlite3.connect(str(database)) as connection:
         row = connection.execute(
-            "SELECT initialized_at, ended_at, runtime_home FROM observer_runs WHERE run_id = ?",
+            "SELECT initialized_at, ended_at, runtime_home, codex_binary, process_id FROM observer_runs WHERE run_id = ?",
             (ready.run_id,),
         ).fetchone()
-    active = bool(row and row[0] is not None and row[1] is None)
-    same_home = bool(row and Path(row[2]).resolve() == Path(sys.argv[3]).resolve())
-    raise SystemExit(0 if active and same_home else 1)
-except Exception:
+    active = bool(
+        row and row[0] is not None and str(row[0]).strip() and row[1] is None
+        and row[2] is not None and Path(row[2]).resolve() == Path(sys.argv[3]).resolve()
+        and row[3] is not None and str(row[3]).strip()
+        and type(row[4]) is int and row[4] > 0
+    )
+    print(json.dumps({
+        "valid_ready": True, "active_observer_run": active, "run_id": ready.run_id,
+        "codex_binary": str(row[3]) if active else None,
+        "app_server_process_id": int(row[4]) if active else None,
+        "initialized_at": ready.initialized_at,
+    }))
+except Exception as exc:
+    print(json.dumps({"valid_ready": False, "active_observer_run": False, "codex_binary": None, "app_server_process_id": None, "initialized_at": None, "error": str(exc)}))
     raise SystemExit(1)
 '@
+    $encodedSnippet = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($snippet))
     Push-Location -LiteralPath $Root
     try {
-        & $PythonPath -c $snippet $ProcessPath $ReadyPath $RuntimePath 2>$null
-        return ($LASTEXITCODE -eq 0)
+        $raw = & $PythonPath -c 'import base64,sys;code=base64.b64decode(sys.argv.pop(1));exec(code)' $encodedSnippet $ProcessPath $ReadyPath $RuntimePath 2>$null
+        if ($LASTEXITCODE -ne 0 -or -not $raw) { return $null }
+        try { return (($raw -join "`n") | ConvertFrom-Json) } catch { return $null }
     } finally { Pop-Location }
+}
+
+function Test-ReadyProcessTruth(
+    [object]$ReadyFacts,
+    [object]$HostRecord,
+    [string]$LaunchCodexBin,
+    [bool]$LaunchCodexWasBound
+) {
+    try {
+        if ($null -eq $ReadyFacts -or -not [bool]$ReadyFacts.valid_ready -or -not [bool]$ReadyFacts.active_observer_run) { return $false }
+        $activeCodexBin = Resolve-CanonicalExecutable ([string]$ReadyFacts.codex_binary) 'active Codex binary'
+        if ($LaunchCodexWasBound -and -not (Test-SamePath $activeCodexBin $LaunchCodexBin)) { return $false }
+        return (Test-AppServerProcessBinding ([int]$ReadyFacts.app_server_process_id) $HostRecord $activeCodexBin ([string]$ReadyFacts.initialized_at))
+    } catch { return $false }
 }
 
 function Test-ExistingInvocation(
@@ -432,6 +589,8 @@ try {
     $RepoRoot = $paths.RepoRoot
     $RuntimeHome = $paths.RuntimeHome
     $PythonPath = Resolve-CanonicalExecutable $PythonPath 'PythonPath'
+    $codexWasBound = $PSBoundParameters.ContainsKey('CodexBin')
+    if ($codexWasBound) { $CodexBin = Resolve-CanonicalExecutable $CodexBin 'CodexBin' }
     if ([string]::IsNullOrWhiteSpace($ReadyFile)) { $ReadyFile = Join-Path $RuntimeHome 'ready.json' }
     if ([string]::IsNullOrWhiteSpace($ControlHome)) { $ControlHome = Join-Path $RuntimeHome 'control' }
     $ReadyFile = Resolve-ExternalTarget $ReadyFile $RepoRoot 'ready file'
@@ -459,7 +618,8 @@ try {
             $existing = Get-Content -Raw -LiteralPath $processPath | ConvertFrom-Json -ErrorAction Stop
             $existingIdentity = Test-ProcessRecordIdentity $existing
             $matchesInvocation = Test-ExistingInvocation $existing $RepoRoot $RuntimeHome $Profile $ReadyFile $ControlHome $PythonPath $arguments
-            if ($existingIdentity -and $matchesInvocation -and (Test-ReadyAndActiveRun $processPath ([string]$existing.ready_file) $RuntimeHome $RepoRoot)) {
+            $existingReady = Test-ReadyAndActiveRun $processPath ([string]$existing.ready_file) $RuntimeHome $RepoRoot
+            if ($existingIdentity -and $matchesInvocation -and (Test-SupervisorHostProcessBinding $existing $PythonPath $arguments) -and (Test-ReadyProcessTruth $existingReady $existing $CodexBin $codexWasBound)) {
                 Write-Output 'HMASD_SUPERVISOR_READY_V2'
                 exit 0
             }
@@ -482,6 +642,9 @@ try {
     $launched = $true
     $launchedIdentity = Get-ExactProcessIdentity $process.Id
     if ($null -eq $launchedIdentity) { throw 'started supervisor process identity could not be observed' }
+    if (-not (Test-SupervisorHostProcessBinding ([pscustomobject]@{ pid = $launchedIdentity.Pid; process_start_time_utc = $launchedIdentity.StartTimeUtc; executable = $launchedIdentity.Executable }) $PythonPath $arguments)) {
+        throw 'started supervisor host executable or command line does not match the exact serialized launch vector'
+    }
 
     Write-AtomicJson (Join-Path $RuntimeHome 'supervisor-launch-evidence.json') ([ordered]@{
         schema = 'HMASD_SUPERVISOR_LAUNCH_EVIDENCE_V2'; observed_at = [datetime]::UtcNow.ToString('o'); argument_vector = @($arguments)
@@ -503,7 +666,8 @@ try {
         if ($null -eq (Test-ProcessRecordIdentity $record)) {
             throw 'supervisor process exited or identity changed before readiness'
         }
-        if ((Test-Path -LiteralPath $ReadyFile) -and (Test-ReadyAndActiveRun $processPath $ReadyFile $RuntimeHome $RepoRoot)) {
+        $readyFacts = $(if (Test-Path -LiteralPath $ReadyFile) { Test-ReadyAndActiveRun $processPath $ReadyFile $RuntimeHome $RepoRoot } else { $null })
+        if ($null -ne $readyFacts -and (Test-SupervisorHostProcessBinding ([pscustomobject]$record) $PythonPath $arguments) -and (Test-ReadyProcessTruth $readyFacts ([pscustomobject]$record) $CodexBin $codexWasBound)) {
             $readyValidated = $true
             Write-Output 'HMASD_SUPERVISOR_READY_V2'
             exit 0

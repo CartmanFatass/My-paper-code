@@ -275,10 +275,22 @@ def _require_profile_semantic_state(
     try:
         resolved.relative_to(repo_root)
     except ValueError:
-        return resolved
-    raise HostControlValidationError(
-        "semantic state must be external to the repository"
+        pass
+    else:
+        raise HostControlValidationError(
+            "semantic state must be external to the repository"
+        )
+    from tools.codex_semantic_mvp.db import (
+        SemanticDatabaseValidationError,
+        validate_existing_database,
     )
+
+    try:
+        return validate_existing_database(resolved)
+    except SemanticDatabaseValidationError as exc:
+        raise HostControlValidationError(
+            f"semantic state is not an initialized compatible HMASD database: {exc}"
+        ) from exc
 
 
 class HostControlChannel:

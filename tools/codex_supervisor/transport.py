@@ -17,17 +17,30 @@ class TransportClosed(RuntimeError):
 
 
 def process_exec_argv(binary: Path) -> list[str]:
-    """Return argv that CreateProcess can start.
+    """Return the complete argv for exactly one ``codex app-server`` launch.
 
-    Official launch is `<codex> app-server`. On Windows a `.cmd`/`.bat` shim
-    cannot be the CreateProcess image, so prefix `COMSPEC /d /s /c`.
+    A Windows batch shim is interpreted by an explicit command processor.  The
+    exact tail after ``/c`` is ``call <quoted canonical path> app-server``;
+    keeping those tokens distinct lets CreateProcess quote a spaced path
+    without introducing backslash-escaped quotes into cmd.exe's payload.
     """
 
     resolved = Path(binary)
     if os.name == "nt" and resolved.suffix.lower() in {".cmd", ".bat"}:
         comspec = os.environ.get("COMSPEC") or "cmd.exe"
-        return [comspec, "/d", "/s", "/c", str(resolved)]
-    return [str(resolved)]
+        batch_path = str(resolved)
+        always_unsafe = '\r\n"%!'
+        quote_sensitive = '^&|<>()'
+        if any(character in batch_path for character in always_unsafe) or (
+            any(character in batch_path for character in quote_sensitive)
+            and not any(character.isspace() for character in batch_path)
+        ):
+            raise ValueError("batch Codex path contains command-processor metacharacters")
+        # Keep CALL, the path, and the one subcommand as distinct CreateProcess
+        # arguments.  Python then emits the required quotes around a spaced path
+        # without embedding backslash-escaped quotes inside the /c payload.
+        return [comspec, "/d", "/s", "/c", "call", batch_path, "app-server"]
+    return [str(resolved), "app-server"]
 
 
 async def _windows_kill_tree(pid: int, *, force: bool) -> None:
@@ -84,7 +97,6 @@ class AppServerTransport:
         argv = process_exec_argv(self.binary)
         self._process = await asyncio.create_subprocess_exec(
             *argv,
-            "app-server",
             stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,

@@ -18,7 +18,13 @@ from enum import Enum
 from pathlib import Path
 from typing import Any, Mapping
 
-from .db import DEFAULT_STATE_PATH, connect, initialize_database
+from .db import (
+    DEFAULT_STATE_PATH,
+    connect,
+    connect_existing,
+    initialize_database,
+    validate_existing_database,
+)
 from .models import (
     IntakeKind,
     ObligationKind,
@@ -90,6 +96,27 @@ class SemanticStore:
         with self._lock:
             initialize_database(self.connection)
         return self
+
+    @classmethod
+    def open_existing(cls, path: str | Path) -> "SemanticStore":
+        """Open one already initialized compatible database without migrating it."""
+
+        resolved = validate_existing_database(path)
+        connection = connect_existing(resolved)
+        try:
+            # Bind the compatibility check to the connection that will be used
+            # for host mutations as well as to the prior zero-write probe.
+            from .db import _validate_schema_v3_connection
+
+            _validate_schema_v3_connection(connection)
+        except Exception:
+            connection.close()
+            raise
+        instance = cls.__new__(cls)
+        instance.path = resolved
+        instance.connection = connection
+        instance._lock = threading.RLock()
+        return instance
 
     def close(self) -> None:
         with self._lock:

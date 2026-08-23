@@ -6,11 +6,11 @@ import shutil
 import subprocess
 import tempfile
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pytest
 
-from tests.codex_supervisor.helpers import write_fake_codex
 from tools.codex_supervisor.db import connect, initialize_database
 
 
@@ -111,6 +111,93 @@ def process_exists(process_id: int) -> bool:
         check=False,
     )
     return result.returncode == 0
+
+
+def terminate_inert_tree(process: subprocess.Popen[bytes] | subprocess.Popen[str]) -> None:
+    if process.poll() is not None:
+        return
+    subprocess.run(
+        ["taskkill.exe", "/PID", str(process.pid), "/T", "/F"],
+        capture_output=True,
+        check=False,
+    )
+    try:
+        process.wait(timeout=5)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        process.wait(timeout=5)
+
+
+def spawn_inert_supervisor_shape(
+    fixture_root: Path,
+    logical_vector: list[str],
+    *,
+    codex_kind: str = "exe",
+    child_mode: str = "valid",
+    codex_path: Path | None = None,
+) -> tuple[subprocess.Popen[bytes], int, Path]:
+    """Start only inert Python fixtures with the production host/child argv shape."""
+
+    package = fixture_root / "tools" / "codex_supervisor"
+    package.mkdir(parents=True)
+    (fixture_root / "tools" / "__init__.py").write_text("", encoding="utf-8")
+    (package / "__init__.py").write_text("", encoding="utf-8")
+    (fixture_root / "app-server").write_text(
+        "import time\ntime.sleep(60)\n", encoding="utf-8"
+    )
+    pid_file = fixture_root / "child-pid.json"
+    if codex_path is not None:
+        codex = codex_path.resolve()
+    elif codex_kind == "cmd":
+        codex = fixture_root / "codex app shim.cmd"
+        codex.write_text(
+            f'@echo off\r\n"{PROJECT_PYTHON.resolve()}" app-server\r\n',
+            encoding="utf-8",
+        )
+    else:
+        codex = PROJECT_PYTHON.resolve()
+    module = (
+        "import json,os,subprocess,time\n"
+        "from pathlib import Path\n"
+        "codex=os.environ['HMASD_INERT_CODEX']\n"
+        "mode=os.environ['HMASD_INERT_CHILD_MODE']\n"
+        "if mode == 'wrong-command':\n"
+        "    argv=[os.environ['HMASD_INERT_PYTHON'],'-c','import time;time.sleep(60)']\n"
+        "elif Path(codex).suffix.lower() in {'.cmd','.bat'}:\n"
+        "    argv=[os.environ.get('COMSPEC') or 'cmd.exe','/d','/s','/c','call',codex,'app-server']\n"
+        "else:\n"
+        "    argv=[codex,'app-server']\n"
+        "child=subprocess.Popen(argv, cwd=os.getcwd())\n"
+        "Path(os.environ['HMASD_INERT_PID_FILE']).write_text(json.dumps({'pid':child.pid}))\n"
+        "time.sleep(60)\n"
+    )
+    (package / "__main__.py").write_text(module, encoding="utf-8")
+    environment = os.environ.copy()
+    environment.update(
+        {
+            "HMASD_INERT_CODEX": str(codex),
+            "HMASD_INERT_CHILD_MODE": child_mode,
+            "HMASD_INERT_PYTHON": str(PROJECT_PYTHON.resolve()),
+            "HMASD_INERT_PID_FILE": str(pid_file),
+        }
+    )
+    host = subprocess.Popen(
+        [str(PROJECT_PYTHON.resolve()), *logical_vector],
+        cwd=fixture_root,
+        env=environment,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    for _ in range(100):
+        if pid_file.is_file():
+            child_id = int(json.loads(pid_file.read_text(encoding="utf-8"))["pid"])
+            if process_exists(child_id):
+                return host, child_id, codex.resolve()
+        if host.poll() is not None:
+            break
+        time.sleep(0.05)
+    terminate_inert_tree(host)
+    raise AssertionError("inert supervisor-shape fixture did not publish a live child")
 
 
 def test_start_script_uses_external_default_and_rejects_repo_runtime_home(repo_root):
@@ -247,9 +334,249 @@ def test_start_binds_semantic_state_to_nonobserver_profiles_before_launch(repo_r
 
 def test_status_requires_identity_ready_doctor_and_matching_active_run(repo_root):
     text = read_script(repo_root, "hmasd-root-supervisor-status.ps1")
-    for required in ("HMASD_SUPERVISOR_STATUS_V2", "STOPPED", "PROCESS_STARTING", "READY", "STALE_IDENTITY", "INCIDENT", "validate_ready_record", "observer_runs", "ready.run_id", "codex_binary", "schema_capture_present", "static_guard_violations", "Test-ProcessRecordIdentity", "Test-ActiveCodexBinding", "Test-FullyQualifiedPath"):
+    for required in ("HMASD_SUPERVISOR_STATUS_V2", "STOPPED", "PROCESS_STARTING", "READY", "STALE_IDENTITY", "INCIDENT", "validate_ready_record", "observer_runs", "ready.run_id", "codex_binary", "process_id", "schema_capture_present", "static_guard_violations", "Test-ProcessRecordIdentity", "Test-SupervisorHostProcessBinding", "Test-AppServerProcessBinding", "Test-ActiveCodexBinding", "Test-FullyQualifiedPath"):
         assert required in text
     assert "Test-RecordAndLaunchBinding $record $RepoRoot $RuntimeHome" in text
+
+
+def test_status_binds_real_inert_host_and_exe_child_process_truth(repo_root, tmp_path):
+    vector = [
+        "-m", "tools.codex_supervisor", "--repo-root", str(repo_root.resolve()),
+        "--runtime-home", str((tmp_path / "runtime").resolve()), "serve",
+        "--profile", "OBSERVER", "--ready-file", str((tmp_path / "ready.json").resolve()),
+        "--control-home", str((tmp_path / "control").resolve()),
+    ]
+    host, child_id, active_codex = spawn_inert_supervisor_shape(
+        tmp_path / "host-exe", vector
+    )
+    unrelated = subprocess.Popen(
+        [str(PROJECT_PYTHON), "-c", "import time;time.sleep(60)"],
+        cwd=tmp_path,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    dead = subprocess.Popen(
+        [str(PROJECT_PYTHON), "-c", "import time;time.sleep(60)"],
+        cwd=tmp_path,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    dead_id = dead.pid
+    dead.terminate()
+    dead.wait(timeout=5)
+    try:
+        record = process_identity(host.pid)
+        record["pid"] = record.pop("Pid")
+        record["process_start_time_utc"] = record.pop("StartTimeUtc")
+        record["executable"] = record.pop("Executable")
+        initialized = datetime.now(timezone.utc).isoformat()
+        body = (
+            "$record=$A1|ConvertFrom-Json;$vector=ConvertFrom-Json -InputObject $A2;"
+            "[ordered]@{host=(Test-SupervisorHostProcessBinding $record $A3 $vector);"
+            "child=(Test-AppServerProcessBinding ([int]$A4) $record $A3 $A5);"
+            "missing=(Test-AppServerProcessBinding 2147483000 $record $A3 $A5);"
+            "dead=(Test-AppServerProcessBinding ([int]$A7) $record $A3 $A5);"
+            "wrong_parent=(Test-AppServerProcessBinding ([int]$A6) $record $A3 $A5)}|ConvertTo-Json -Compress"
+        )
+        result = invoke_start_helpers(
+            script_path(repo_root, "hmasd-root-supervisor-status.ps1"),
+            (
+                "Test-SamePath", "Resolve-CanonicalExecutable",
+                "Test-SafeCmdBatchPath", "Test-ExactCmdAppServerVector",
+                "ConvertFrom-WindowsCommandLine", "Get-ObservedProcessFacts",
+                "Test-ExactObservedProcessVector", "Test-SupervisorHostProcessBinding",
+                "Test-AppServerProcessBinding",
+            ),
+            body,
+            json.dumps(record), json.dumps(vector), str(PROJECT_PYTHON.resolve()),
+            str(child_id), initialized, str(unrelated.pid), str(dead_id),
+        )
+        assert result.returncode == 0, result.stderr + result.stdout
+        assert json.loads(result.stdout) == {
+            "host": True,
+            "child": True,
+            "missing": False,
+            "dead": False,
+            "wrong_parent": False,
+        }
+        wrong_codex = tmp_path / "other-codex.cmd"
+        wrong_codex.write_text("@echo off\r\n", encoding="utf-8")
+        ready_facts = {
+            "valid_ready": True,
+            "active_observer_run": True,
+            "codex_binary": str(active_codex),
+            "app_server_process_id": child_id,
+            "initialized_at": initialized,
+        }
+        start_result = invoke_start_helpers(
+            script_path(repo_root, "hmasd-root-supervisor-start.ps1"),
+            (
+                "Test-SamePath", "Resolve-CanonicalExecutable",
+                "Test-SafeCmdBatchPath", "Test-ExactCmdAppServerVector",
+                "ConvertFrom-WindowsCommandLine", "Get-ObservedProcessFacts",
+                "Test-ExactObservedProcessVector", "Test-AppServerProcessBinding",
+                "Test-ReadyProcessTruth",
+            ),
+            (
+                "$ready=$A1|ConvertFrom-Json;$record=$A2|ConvertFrom-Json;"
+                "[ordered]@{explicit_match=(Test-ReadyProcessTruth $ready $record $A3 $true);"
+                "explicit_drift=(Test-ReadyProcessTruth $ready $record $A4 $true);"
+                "default_binding=(Test-ReadyProcessTruth $ready $record '' $false)}|ConvertTo-Json -Compress"
+            ),
+            json.dumps(ready_facts), json.dumps(record), str(active_codex),
+            str(wrong_codex.resolve()),
+        )
+        assert start_result.returncode == 0, start_result.stderr + start_result.stdout
+        assert json.loads(start_result.stdout) == {
+            "explicit_match": True,
+            "explicit_drift": False,
+            "default_binding": True,
+        }
+    finally:
+        terminate_inert_tree(host)
+        terminate_inert_tree(unrelated)
+
+
+def test_status_rejects_fabricated_host_and_wrong_child_command_line(repo_root, tmp_path):
+    vector = [
+        "-m", "tools.codex_supervisor", "--repo-root", str(repo_root.resolve()),
+        "--runtime-home", str((tmp_path / "runtime").resolve()), "serve",
+        "--profile", "OBSERVER", "--ready-file", str((tmp_path / "ready.json").resolve()),
+        "--control-home", str((tmp_path / "control").resolve()),
+    ]
+    host, child_id, active_codex = spawn_inert_supervisor_shape(
+        tmp_path / "wrong-command-host", vector, child_mode="wrong-command"
+    )
+    wrong_launcher = tmp_path / "wrong-launcher.cmd"
+    wrong_launcher.write_text("@echo off\r\n", encoding="utf-8")
+    sleeper = subprocess.Popen(
+        [str(PROJECT_PYTHON), "-c", "import time;time.sleep(60)"],
+        cwd=tmp_path,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    try:
+        host_record = process_identity(host.pid)
+        host_record = {
+            "pid": host_record["Pid"],
+            "process_start_time_utc": host_record["StartTimeUtc"],
+            "executable": host_record["Executable"],
+        }
+        sleeper_record = process_identity(sleeper.pid)
+        sleeper_record = {
+            "pid": sleeper_record["Pid"],
+            "process_start_time_utc": sleeper_record["StartTimeUtc"],
+            "executable": sleeper_record["Executable"],
+        }
+        initialized = datetime.now(timezone.utc).isoformat()
+        body = (
+            "$host=$A1|ConvertFrom-Json;$sleeper=$A2|ConvertFrom-Json;$vector=ConvertFrom-Json -InputObject $A3;"
+            "[ordered]@{fabricated_host=(Test-SupervisorHostProcessBinding $sleeper $A4 $vector);"
+            "wrong_child_command=(Test-AppServerProcessBinding ([int]$A5) $host $A4 $A6);"
+            "wrong_launcher=(Test-AppServerProcessBinding ([int]$A5) $host $A7 $A6)}|ConvertTo-Json -Compress"
+        )
+        result = invoke_start_helpers(
+            script_path(repo_root, "hmasd-root-supervisor-status.ps1"),
+            (
+                "Test-SamePath", "Resolve-CanonicalExecutable",
+                "Test-SafeCmdBatchPath", "Test-ExactCmdAppServerVector",
+                "ConvertFrom-WindowsCommandLine", "Get-ObservedProcessFacts",
+                "Test-ExactObservedProcessVector", "Test-SupervisorHostProcessBinding",
+                "Test-AppServerProcessBinding",
+            ),
+            body,
+            json.dumps(host_record), json.dumps(sleeper_record), json.dumps(vector),
+            str(PROJECT_PYTHON.resolve()), str(child_id), initialized,
+            str(wrong_launcher.resolve()),
+        )
+        assert result.returncode == 0, result.stderr + result.stdout
+        assert json.loads(result.stdout) == {
+            "fabricated_host": False,
+            "wrong_child_command": False,
+            "wrong_launcher": False,
+        }
+    finally:
+        terminate_inert_tree(host)
+        terminate_inert_tree(sleeper)
+
+
+def test_status_accepts_exact_cmd_comspec_app_server_child_with_spaced_path(repo_root, tmp_path):
+    fixture_root = tmp_path / "host directory (ordinary) with spaces"
+    codex = (fixture_root / "codex app shim.cmd").resolve()
+    vector = [
+        "-m", "tools.codex_supervisor", "--repo-root", str(repo_root.resolve()),
+        "--runtime-home", str((tmp_path / "runtime").resolve()),
+        "--codex-bin", str(codex), "serve", "--profile", "OBSERVER",
+        "--ready-file", str((tmp_path / "ready.json").resolve()),
+        "--control-home", str((tmp_path / "control").resolve()),
+    ]
+    host, child_id, active_codex = spawn_inert_supervisor_shape(
+        fixture_root, vector, codex_kind="cmd"
+    )
+    try:
+        raw = process_identity(host.pid)
+        record = {
+            "pid": raw["Pid"],
+            "process_start_time_utc": raw["StartTimeUtc"],
+            "executable": raw["Executable"],
+        }
+        initialized = datetime.now(timezone.utc).isoformat()
+        body = (
+            "$record=$A1|ConvertFrom-Json;$vector=ConvertFrom-Json -InputObject $A2;"
+            "[ordered]@{host=(Test-SupervisorHostProcessBinding $record $A3 $vector);"
+            "child=(Test-AppServerProcessBinding ([int]$A4) $record $A5 $A6)}|ConvertTo-Json -Compress"
+        )
+        result = invoke_start_helpers(
+            script_path(repo_root, "hmasd-root-supervisor-status.ps1"),
+            (
+                "Test-SamePath", "Resolve-CanonicalExecutable",
+                "Test-SafeCmdBatchPath", "Test-ExactCmdAppServerVector",
+                "ConvertFrom-WindowsCommandLine", "Get-ObservedProcessFacts",
+                "Test-ExactObservedProcessVector", "Test-SupervisorHostProcessBinding",
+                "Test-AppServerProcessBinding",
+            ),
+            body,
+            json.dumps(record), json.dumps(vector), str(PROJECT_PYTHON.resolve()),
+            str(child_id), str(active_codex), initialized,
+        )
+        assert result.returncode == 0, result.stderr + result.stdout
+        assert json.loads(result.stdout) == {"host": True, "child": True}
+    finally:
+        terminate_inert_tree(host)
+
+
+def test_status_rejects_combined_quoted_or_extra_cmd_app_server_shapes(repo_root, tmp_path):
+    command_processor = Path(os.environ.get("COMSPEC") or "C:/Windows/System32/cmd.exe").resolve()
+    batch = (tmp_path / "batch path with spaces" / "codex app shim.cmd").resolve()
+    batch.parent.mkdir(parents=True)
+    batch.write_text("@echo off\r\n", encoding="utf-8")
+    body = (
+        "$valid=@($A1,'/d','/s','/c','call',$A2,'app-server');"
+        "$combined=@($A1,'/d','/s','/c',('call \"'+$A2+'\" app-server'));"
+        "$quotedPath=@($A1,'/d','/s','/c','call',('\"'+$A2+'\"'),'app-server');"
+        "$pathCaseDrift=@($A1,'/d','/s','/c','call',$A2.ToUpperInvariant(),'app-server');"
+        "$extra=@($A1,'/d','/s','/c','call',$A2,'app-server','&','echo','unexpected');"
+        "[ordered]@{valid=(Test-ExactCmdAppServerVector $valid $A1 $A2);"
+        "combined=(Test-ExactCmdAppServerVector $combined $A1 $A2);"
+        "quoted_path=(Test-ExactCmdAppServerVector $quotedPath $A1 $A2);"
+        "path_case_drift=(Test-ExactCmdAppServerVector $pathCaseDrift $A1 $A2);"
+        "extra=(Test-ExactCmdAppServerVector $extra $A1 $A2)}|ConvertTo-Json -Compress"
+    )
+    result = invoke_start_helpers(
+        script_path(repo_root, "hmasd-root-supervisor-status.ps1"),
+        ("Test-SamePath", "Test-SafeCmdBatchPath", "Test-ExactCmdAppServerVector"),
+        body,
+        str(command_processor),
+        str(batch),
+    )
+    assert result.returncode == 0, result.stderr + result.stdout
+    assert json.loads(result.stdout) == {
+        "valid": True,
+        "combined": False,
+        "quoted_path": False,
+        "path_case_drift": False,
+        "extra": False,
+    }
 
 
 def test_status_strictly_parses_launch_vector_and_binds_python_and_codex(repo_root, tmp_path):
@@ -408,13 +735,50 @@ def test_status_rejects_relative_codex_paths_before_binding_comparisons(repo_roo
     }
 
 
+def test_start_canonicalizes_explicit_relative_codex_before_launch_vector(repo_root, tmp_path):
+    codex = tmp_path / "relative-codex.cmd"
+    codex.write_text("@echo off\r\necho codex-inert\r\n", encoding="utf-8")
+    relative = os.path.relpath(codex, repo_root)
+    other_directory = tmp_path / "other-cwd"
+    other_directory.mkdir()
+    body = (
+        "$resolved=Resolve-CanonicalExecutable $A1 'CodexBin';"
+        "$vector=@(Get-SupervisorArgumentVector $A2 $A3 'OBSERVER' '' $A4 $A5 $resolved $false 0);"
+        "Push-Location $A6;try{$stable=[System.IO.Path]::IsPathRooted($vector[7]) -and (Test-SamePath $vector[7] $resolved)}finally{Pop-Location};"
+        "[ordered]@{resolved=$resolved;vector_codex=$vector[7];stable=$stable}|ConvertTo-Json -Compress"
+    )
+    result = invoke_start_helpers(
+        script_path(repo_root, "hmasd-root-supervisor-start.ps1"),
+        ("Test-SamePath", "Resolve-CanonicalExecutable", "Get-SupervisorArgumentVector"),
+        body,
+        relative,
+        str(repo_root.resolve()),
+        str((tmp_path / "runtime").resolve()),
+        str((tmp_path / "ready.json").resolve()),
+        str((tmp_path / "control").resolve()),
+        str(other_directory.resolve()),
+    )
+    assert result.returncode == 0, result.stderr + result.stdout
+    payload = json.loads(result.stdout)
+    assert Path(payload["resolved"]).resolve() == codex.resolve()
+    assert Path(payload["vector_codex"]).resolve() == codex.resolve()
+    assert payload["stable"] is True
+
+
 def test_status_uses_active_run_binary_when_default_launch_and_environment_change(repo_root, tmp_path):
     assert POWER_SHELL is not None
     assert PROJECT_PYTHON.is_file()
-    active_dir = tmp_path / "active codex"
+    active_dir = tmp_path / "active-codex"
     active_dir.mkdir()
-    active_codex = write_fake_codex(active_dir).resolve()
-    caller_dir = tmp_path / "caller codex"
+    active_codex = (active_dir / "codex.cmd").resolve()
+    active_codex.write_text(
+        "@echo off\r\n"
+        "if \"%1\"==\"--version\" (echo codex-inert 0.0-test& exit /b 0)\r\n"
+        f'if "%1"=="app-server" ("{PROJECT_PYTHON.resolve()}" app-server& exit /b %ERRORLEVEL%)\r\n'
+        "exit /b 2\r\n",
+        encoding="utf-8",
+    )
+    caller_dir = tmp_path / "caller-codex"
     caller_dir.mkdir()
     caller_marker = caller_dir / "caller-invoked.txt"
     caller_codex = caller_dir / "codex.cmd"
@@ -422,22 +786,27 @@ def test_status_uses_active_run_binary_when_default_launch_and_environment_chang
         f'@echo off\r\necho invoked>"{caller_marker}"\r\necho codex-caller 0.0-test\r\n',
         encoding="utf-8",
     )
-    sleeper = subprocess.Popen(
-        [str(PROJECT_PYTHON), "-c", "import time; time.sleep(30)"],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
-    try:
-        identity = process_identity(sleeper.pid)
-        with tempfile.TemporaryDirectory(prefix="hmasd-status-active-binary-") as external:
-            runtime_home = Path(external).resolve()
+    with tempfile.TemporaryDirectory(prefix="hmasd-status-active-binary-") as external:
+        runtime_home = Path(external).resolve()
+        ready_path = runtime_home / "ready.json"
+        control_home = runtime_home / "control"
+        launch_vector = [
+            "-m", "tools.codex_supervisor", "--repo-root", str(repo_root.resolve()),
+            "--runtime-home", str(runtime_home), "serve", "--profile", "OBSERVER",
+            "--ready-file", str(ready_path), "--control-home", str(control_home),
+        ]
+        host, child_id, fixture_codex = spawn_inert_supervisor_shape(
+            tmp_path / "active-host", launch_vector, codex_path=active_codex
+        )
+        try:
+            identity = process_identity(host.pid)
             ready_path = runtime_home / "ready.json"
             control_home = runtime_home / "control"
             run_id = "run-active-binary"
-            initialized_at = "2026-08-23T00:00:00Z"
+            initialized_at = datetime.now(timezone.utc).isoformat()
             process_record = {
                 "schema": "HMASD_SUPERVISOR_PROCESS_V1",
-                "pid": sleeper.pid,
+                "pid": host.pid,
                 "process_start_time_utc": identity["StartTimeUtc"],
                 "executable": identity["Executable"],
                 "repo_root": str(repo_root.resolve()),
@@ -454,7 +823,7 @@ def test_status_uses_active_run_binary_when_default_launch_and_environment_chang
                     {
                         "schema": "HMASD_SUPERVISOR_READY_V2",
                         "run_id": run_id,
-                        "process_id": sleeper.pid,
+                        "process_id": host.pid,
                         "initialized_at": initialized_at,
                         "watcher_active": True,
                         "first_reconciliation_completed": True,
@@ -470,11 +839,7 @@ def test_status_uses_active_run_binary_when_default_launch_and_environment_chang
                     {
                         "schema": "HMASD_SUPERVISOR_LAUNCH_EVIDENCE_V2",
                         "observed_at": initialized_at,
-                        "argument_vector": [
-                            "-m", "tools.codex_supervisor", "--repo-root", str(repo_root.resolve()),
-                            "--runtime-home", str(runtime_home), "serve", "--profile", "OBSERVER",
-                            "--ready-file", str(ready_path), "--control-home", str(control_home),
-                        ],
+                        "argument_vector": launch_vector,
                         "control_home": str(control_home),
                         "ready_file": str(ready_path),
                     }
@@ -494,7 +859,7 @@ def test_status_uses_active_run_binary_when_default_launch_and_environment_chang
                         str(active_codex),
                         "codex-fake 0.0-test",
                         "status-test",
-                        sleeper.pid,
+                        child_id,
                         initialized_at,
                         initialized_at,
                         str(runtime_home),
@@ -532,6 +897,7 @@ def test_status_uses_active_run_binary_when_default_launch_and_environment_chang
             payload = json.loads(result.stdout)
             assert payload["state"] == "READY", result.stderr + json.dumps(payload, indent=2)
             assert Path(payload["ready"]["codex_binary"]).resolve() == active_codex
+            assert payload["ready"]["app_server_process_id"] == child_id
             assert Path(payload["doctor"]["codex_binary"]).resolve() == active_codex
             assert not caller_marker.exists()
 
@@ -547,9 +913,8 @@ def test_status_uses_active_run_binary_when_default_launch_and_environment_chang
             assert mismatch_payload["state"] == "INCIDENT"
             assert mismatch_payload["doctor"] is None
             assert not caller_marker.exists()
-    finally:
-        sleeper.terminate()
-        sleeper.wait(timeout=5)
+        finally:
+            terminate_inert_tree(host)
 
 
 def test_existing_host_binding_rejects_another_repo_or_control_path(repo_root, tmp_path):
@@ -738,8 +1103,9 @@ def test_existing_host_binding_requires_exact_codex_and_duration_vector(repo_roo
 
 def test_start_ready_validation_requires_initialized_unended_run_in_same_runtime(repo_root):
     text = read_script(repo_root, "hmasd-root-supervisor-start.ps1")
-    assert "SELECT initialized_at, ended_at, runtime_home FROM observer_runs WHERE run_id = ?" in text
-    assert "active and same_home" in text
+    assert "SELECT initialized_at, ended_at, runtime_home, codex_binary, process_id FROM observer_runs WHERE run_id = ?" in text
+    assert "Test-ReadyProcessTruth" in text
+    assert "Test-AppServerProcessBinding" in text
     assert "Archive-SignalFile $RuntimeHome $ReadyFile 'ready-prelaunch'" in text
 
 

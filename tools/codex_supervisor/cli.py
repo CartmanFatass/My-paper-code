@@ -223,7 +223,18 @@ def _semantic_state_for_profile(
         raise SystemExit("semantic state must be an existing regular file") from exc
     if not resolved.is_file():
         raise SystemExit("semantic state must be an existing regular file")
-    return _require_external_path(repo_root, resolved, "semantic state")
+    resolved = _require_external_path(repo_root, resolved, "semantic state")
+    from tools.codex_semantic_mvp.db import (
+        SemanticDatabaseValidationError,
+        validate_existing_database,
+    )
+
+    try:
+        return validate_existing_database(resolved)
+    except SemanticDatabaseValidationError as exc:
+        raise SystemExit(
+            f"semantic state is not an initialized compatible HMASD database: {exc}"
+        ) from exc
 
 
 def _archive_host_signal(path: Path, runtime_home: Path, label: str) -> Path | None:

@@ -5,6 +5,9 @@ param(
     [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$Operator,
     [string]$RuntimeHome,
     [string]$PythonExecutable = 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
+    [string]$ExpectedRepoRoot,
+    [string]$ExpectedSemanticState,
+    [string]$ExpectedCodexBinary,
     [ValidateRange(1, 86400)][int]$TimeoutSeconds = 30
 )
 
@@ -53,15 +56,26 @@ function Test-ExternalExistingFile([string]$Path, [string]$RepoRoot) {
     try { return (Test-Path -LiteralPath $Path -PathType Leaf) } catch { return $false }
 }
 
+function Resolve-CanonicalDirectory([string]$Path) {
+    if ([string]::IsNullOrWhiteSpace($Path) -or -not (Test-Path -LiteralPath $Path -PathType Container)) { return $null }
+    try { return (Resolve-Path -LiteralPath $Path -ErrorAction Stop).Path } catch { return $null }
+}
+
+function Resolve-CanonicalExistingFile([string]$Path) {
+    if ([string]::IsNullOrWhiteSpace($Path) -or -not (Test-Path -LiteralPath $Path -PathType Leaf)) { return $null }
+    try { return (Resolve-Path -LiteralPath $Path -ErrorAction Stop).Path } catch { return $null }
+}
+
 function Parse-StrictLaunchArgumentVector([object[]]$ArgumentVector) {
     try {
         if ($null -eq $ArgumentVector) { return $null }
         $values = @($ArgumentVector | ForEach-Object { [string]$_ })
         if ($values.Count -notin @(13, 15, 17, 19)) { return $null }
         if ($values[0] -cne '-m' -or $values[1] -cne 'tools.codex_supervisor' -or $values[2] -cne '--repo-root' -or $values[4] -cne '--runtime-home') { return $null }
-        $index = 6
+        $index = 6; $codexExecutable = $null
         if ($values[$index] -ceq '--codex-bin') {
             if ($index + 1 -ge $values.Count -or -not (Test-FullyQualifiedPath $values[$index + 1])) { return $null }
+            $codexExecutable = $values[$index + 1]
             $index += 2
         }
         if ($index + 2 -ge $values.Count -or $values[$index] -cne 'serve' -or $values[$index + 1] -cne '--profile') { return $null }
@@ -85,15 +99,19 @@ function Parse-StrictLaunchArgumentVector([object[]]$ArgumentVector) {
             $next += 2
         }
         if ($next -ne $values.Count) { return $null }
-        return [pscustomobject]@{ repo_root = $values[3]; runtime_home = $values[5]; profile = $profile; semantic_state = $semanticState; ready_file = $readyFile; control_home = $controlHome }
+        return [pscustomobject]@{ repo_root = $values[3]; runtime_home = $values[5]; codex_bin = $codexExecutable; profile = $profile; semantic_state = $semanticState; ready_file = $readyFile; control_home = $controlHome }
     } catch { return $null }
 }
 
-function Get-ReadyStatus([string]$RecordedRepoRoot, [string]$RuntimePath, [string]$Interpreter) {
+function Get-ReadyStatus([string]$RecordedRepoRoot, [string]$RuntimePath, [string]$Interpreter, [string]$ExpectedBinary) {
     $statusScript = Join-Path $PSScriptRoot 'hmasd-root-supervisor-status.ps1'
     try {
-        $raw = & $statusScript -RepoRoot $RecordedRepoRoot -RuntimeHome $RuntimePath -PythonPath $Interpreter 2>$null
-        if ($LASTEXITCODE -ne 0 -or -not $raw) { return $null }
+        if (-not [string]::IsNullOrWhiteSpace($ExpectedBinary)) {
+            $raw = & $statusScript -RepoRoot $RecordedRepoRoot -RuntimeHome $RuntimePath -PythonPath $Interpreter -CodexBin $ExpectedBinary 2>$null
+        } else {
+            $raw = & $statusScript -RepoRoot $RecordedRepoRoot -RuntimeHome $RuntimePath -PythonPath $Interpreter 2>$null
+        }
+        if (-not $raw) { return $null }
         $status = (($raw -join "`n") | ConvertFrom-Json -ErrorAction Stop)
         if (-not (Test-ExactFields $status @('schema', 'state', 'observed_at', 'process', 'ready', 'doctor', 'incident'))) { return $null }
         if ($status.schema -ne 'HMASD_SUPERVISOR_STATUS_V2' -or $status.state -ne 'READY' -or $null -eq $status.process -or $null -eq $status.ready) { return $null }
@@ -101,7 +119,7 @@ function Get-ReadyStatus([string]$RecordedRepoRoot, [string]$RuntimePath, [strin
     } catch { return $null }
 }
 
-function Get-ValidatedControlHome([string]$RuntimePath, [object]$Status, [object]$Record) {
+function Get-ValidatedHostBinding([string]$RuntimePath, [object]$Status, [object]$Record) {
     try {
         $fields = @('schema', 'pid', 'process_start_time_utc', 'executable', 'repo_root', 'runtime_home', 'profile', 'started_at', 'ready_file')
         if (-not (Test-ExactFields $Record $fields) -or -not (Test-ExactFields $Status.process $fields)) { return $null }
@@ -120,8 +138,31 @@ function Get-ValidatedControlHome([string]$RuntimePath, [object]$Status, [object
         if (-not (Test-SamePath ([string]$launch.repo_root) ([string]$Record.repo_root)) -or -not (Test-SamePath ([string]$launch.runtime_home) $RuntimePath) -or [string]$launch.profile -cne [string]$Record.profile) { return $null }
         if (-not (Test-SamePath ([string]$launch.ready_file) ([string]$Record.ready_file)) -or -not (Test-SamePath ([string]$evidence.ready_file) ([string]$launch.ready_file))) { return $null }
         if (-not (Test-SamePath ([string]$launch.control_home) ([string]$evidence.control_home)) -or -not (Test-ExternalPath ([string]$launch.control_home) ([string]$Record.repo_root))) { return $null }
-        return [System.IO.Path]::GetFullPath([string]$launch.control_home)
+        if ([string]$Record.profile -eq 'OBSERVER' -or [string]::IsNullOrWhiteSpace([string]$launch.semantic_state)) { return $null }
+        $semantic = Resolve-CanonicalExistingFile ([string]$launch.semantic_state)
+        $root = Resolve-CanonicalDirectory ([string]$launch.repo_root)
+        if ($null -eq $semantic -or $null -eq $root -or -not (Test-ExternalExistingFile $semantic $root)) { return $null }
+        return [pscustomobject]@{ control_home = [System.IO.Path]::GetFullPath([string]$launch.control_home); repo_root = $root; semantic_state = $semantic; active_codex_bin = [string]$Status.ready.codex_binary }
     } catch { return $null }
+}
+
+function Test-ExpectedHostTuple([object]$Binding, [string]$ExpectedRoot, [string]$ExpectedState, [string]$ExpectedBinary) {
+    try {
+        if ($null -eq $Binding) { return $false }
+        if (-not [string]::IsNullOrWhiteSpace($ExpectedRoot)) {
+            $root = Resolve-CanonicalDirectory $ExpectedRoot
+            if ($null -eq $root -or -not (Test-SamePath $root ([string]$Binding.repo_root))) { return $false }
+        }
+        if (-not [string]::IsNullOrWhiteSpace($ExpectedState)) {
+            $state = Resolve-CanonicalExistingFile $ExpectedState
+            if ($null -eq $state -or -not (Test-ExternalExistingFile $state ([string]$Binding.repo_root)) -or -not (Test-SamePath $state ([string]$Binding.semantic_state))) { return $false }
+        }
+        if (-not [string]::IsNullOrWhiteSpace($ExpectedBinary)) {
+            $binary = Resolve-CanonicalExistingFile $ExpectedBinary
+            if ($null -eq $binary -or -not (Test-SamePath $binary ([string]$Binding.active_codex_bin))) { return $false }
+        }
+        return $true
+    } catch { return $false }
 }
 
 function Invoke-ValidationSnippet([string]$RepoRoot, [string]$Interpreter, [string]$Snippet, [string[]]$Arguments) {
@@ -138,8 +179,16 @@ function Test-CommandAllowed([string]$RepoRoot, [string]$Interpreter, [string]$P
     return (Invoke-ValidationSnippet $RepoRoot $Interpreter 'import sys; from tools.codex_supervisor.runtime_profiles import CommandKind, RuntimeProfile, require_command_allowed; require_command_allowed(RuntimeProfile(sys.argv[1]), CommandKind(sys.argv[2]))' @($Profile, $Kind))
 }
 
-function Test-ValidatedResponse([string]$RepoRoot, [string]$Interpreter, [string]$ResponsePath, [string]$RequestId) {
-    return (Invoke-ValidationSnippet $RepoRoot $Interpreter 'import json,sys; from pathlib import Path; from tools.codex_supervisor.host_control import parse_response; value=json.loads(Path(sys.argv[1]).read_bytes().decode()); response=parse_response(value); raise SystemExit(0 if response.request_id == sys.argv[2] else 1)' @($ResponsePath, $RequestId))
+function Test-ValidatedResponseCapture([string]$RepoRoot, [string]$Interpreter, [byte[]]$ResponseBytes, [string]$SnapshotPath, [string]$RequestId) {
+    # The outbox is read once by the caller.  Validation reads only this
+    # immutable private snapshot of those exact captured bytes, never the
+    # mutable outbox path again.
+    try {
+        [System.IO.Directory]::CreateDirectory((Split-Path -Parent $SnapshotPath)) | Out-Null
+        [System.IO.File]::WriteAllBytes($SnapshotPath, $ResponseBytes)
+        return (Invoke-ValidationSnippet $RepoRoot $Interpreter 'import json,sys; from pathlib import Path; from tools.codex_supervisor.host_control import parse_response; value=json.loads(Path(sys.argv[1]).read_bytes().decode()); response=parse_response(value); raise SystemExit(0 if response.request_id == sys.argv[2] else 1)' @($SnapshotPath, $RequestId))
+    } catch { return $false }
+    finally { if (Test-Path -LiteralPath $SnapshotPath) { Remove-Item -LiteralPath $SnapshotPath -Force } }
 }
 
 function Write-AtomicRequest([string]$Destination, [string]$Json) {
@@ -156,19 +205,21 @@ try {
     if (-not (Test-Path -LiteralPath $processPath -PathType Leaf)) { Write-Output 'HMASD_SUPERVISOR_HOST_REQUIRED_V1'; exit 1 }
     $processRecord = Get-Content -Raw -LiteralPath $processPath | ConvertFrom-Json -ErrorAction Stop
     $recordedRepoRoot = [System.IO.Path]::GetFullPath([string]$processRecord.repo_root)
-    $status = Get-ReadyStatus $recordedRepoRoot $RuntimeHome $PythonExecutable
+    $status = Get-ReadyStatus $recordedRepoRoot $RuntimeHome $PythonExecutable $ExpectedCodexBinary
     if ($null -eq $status) { Write-Output 'HMASD_SUPERVISOR_HOST_REQUIRED_V1'; exit 1 }
-    $control = Get-ValidatedControlHome $RuntimeHome $status $processRecord
-    if ($null -eq $control -or -not (Test-CommandAllowed $recordedRepoRoot $PythonExecutable ([string]$processRecord.profile) $Command)) { Write-Output 'HMASD_SUPERVISOR_HOST_REQUIRED_V1'; exit 1 }
+    $binding = Get-ValidatedHostBinding $RuntimeHome $status $processRecord
+    if ($null -eq $binding -or -not (Test-ExpectedHostTuple $binding $ExpectedRepoRoot $ExpectedSemanticState $ExpectedCodexBinary) -or -not (Test-CommandAllowed $recordedRepoRoot $PythonExecutable ([string]$processRecord.profile) $Command)) { Write-Output 'HMASD_SUPERVISOR_HOST_REQUIRED_V1'; exit 1 }
     $requestId = [guid]::NewGuid().ToString()
     $request = [ordered]@{ schema = 'HMASD_SUPERVISOR_CONTROL_REQUEST_V1'; request_id = $requestId; created_at = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.ffffffK'); operator = $Operator; command = $Command; arguments = $arguments }
     $requestJson = $request | ConvertTo-Json -Depth 32 -Compress
-    $requestPath = Join-Path (Join-Path $control 'inbox') ($requestId + '.json'); Write-AtomicRequest $requestPath $requestJson
-    $responsePath = Join-Path (Join-Path $control 'outbox') ($requestId + '.json'); $deadline = [datetime]::UtcNow.AddSeconds($TimeoutSeconds)
+    $requestPath = Join-Path (Join-Path $binding.control_home 'inbox') ($requestId + '.json'); Write-AtomicRequest $requestPath $requestJson
+    $responsePath = Join-Path (Join-Path $binding.control_home 'outbox') ($requestId + '.json'); $deadline = [datetime]::UtcNow.AddSeconds($TimeoutSeconds)
     while ([datetime]::UtcNow -lt $deadline) {
         if (Test-Path -LiteralPath $responsePath -PathType Leaf) {
-            if (-not (Test-ValidatedResponse $recordedRepoRoot $PythonExecutable $responsePath $requestId)) { throw 'control response violates the HostControlResponse contract' }
-            Write-Output ((Get-Content -Raw -LiteralPath $responsePath).TrimEnd("`r", "`n")); exit 0
+            $responseBytes = [System.IO.File]::ReadAllBytes($responsePath)
+            $snapshot = Join-Path (Join-Path $binding.control_home 'validation') ($requestId + '.capture.json')
+            if (-not (Test-ValidatedResponseCapture $recordedRepoRoot $PythonExecutable $responseBytes $snapshot $requestId)) { throw 'control response violates the HostControlResponse contract' }
+            Write-Output ([Text.Encoding]::UTF8.GetString($responseBytes).TrimEnd("`r", "`n")); exit 0
         }
         Start-Sleep -Milliseconds 100
     }
