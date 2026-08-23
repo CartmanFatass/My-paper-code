@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Any
+from contextlib import contextmanager
+from typing import Any, Iterator
 
 from .binding_store import BindingStore
 from .client import AppServerClient, AppServerRpcError, UnexpectedServerRequest
@@ -23,6 +24,27 @@ from .wake_batches import WakeBatchStore
 
 class WakeIncidentError(RuntimeError):
     """Raised when an operator cannot legally resolve a wake incident."""
+
+
+async def _legacy_confirm_if_loaded(recovery, binding_id, effect_id, journal):
+    """Observe/reconcile a pre-cutover resume without creating a new send."""
+
+    from .durability.reconciliation import EffectReconciler
+    from .durability.session_owner import AppServerSessionOwner
+
+    owner = AppServerSessionOwner.for_client(recovery.client, recovery.bindings.store)
+    readiness = await recovery.classify(binding_id)
+    try:
+        await EffectReconciler(recovery.bindings.store.connection, owner).reconcile(
+            effect_id
+        )
+    except Exception:
+        if readiness is ThreadWakeReadiness.IDLE_LOADED:
+            try:
+                journal.confirm_effect(effect_id, evidence_ref="resume:idle_loaded")
+            except Exception:
+                pass
+    return readiness
 
 
 class WakeRecovery:
@@ -85,16 +107,36 @@ class WakeRecovery:
             return ThreadWakeReadiness.IDLE_NOT_LOADED
         return ThreadWakeReadiness.UNKNOWN
 
-    async def resume_once(self, binding_id: str) -> ThreadWakeReadiness:
+    async def resume_once(
+        self, binding_id: str, *, wake_batch_id: str | None = None
+    ) -> ThreadWakeReadiness:
         from .durability.effects import EffectJournal
         from .durability.reconciliation import EffectReconciler
         from .durability.session_owner import AppServerSessionOwner
+        from .durability.transaction import DurabilityTransaction
 
         binding = self.bindings.get(binding_id)
         if binding is None or not binding.thread_id or self.client is None:
             return ThreadWakeReadiness.UNKNOWN
-        client_key = f"thread/resume:{binding.thread_id}"
         journal = EffectJournal(self.bindings.store.connection)
+        if wake_batch_id is None:
+            # Compatibility is reconciliation-only.  A new resume submission
+            # always requires a wake batch's exact durable context tuple.
+            legacy = journal.get_by_key(
+                "thread/resume", f"thread/resume:{binding.thread_id}"
+            )
+            if legacy is not None and legacy.state != "PREPARED":
+                return await _legacy_confirm_if_loaded(
+                    self, binding_id, legacy.effect_id, journal
+                )
+            return ThreadWakeReadiness.UNKNOWN
+        context_row = self._wake_context(binding_id, wake_batch_id)
+        if context_row is None:
+            self._cancel_resume_and_wake(
+                wake_batch_id, None, cause_ref="missing_or_ambiguous_context_binding"
+            )
+            return ThreadWakeReadiness.UNKNOWN
+        client_key = f"thread/resume:{binding.thread_id}:{wake_batch_id}"
         existing = journal.get_by_key("thread/resume", client_key)
 
         async def _confirm_if_loaded(effect_id: str) -> ThreadWakeReadiness:
@@ -117,45 +159,155 @@ class WakeRecovery:
 
         if existing is not None and existing.state != "PREPARED":
             return await _confirm_if_loaded(existing.effect_id)
-        if not self._resume_fence_ok(binding):
-            if existing is not None and existing.state == "PREPARED":
-                journal.cancel_prepared_if_present(existing.effect_id, cause_ref="resume-actor-ineligible")
-            return ThreadWakeReadiness.UNKNOWN
         if existing is None:
-            existing = journal.prepare_effect(
-                owner_kind="THREAD_RESUME",
-                owner_id=binding_id,
-                binding_id=binding_id,
-                method="thread/resume",
-                client_key=client_key,
-                request={"threadId": binding.thread_id},
-            )
+            try:
+                with self.bindings.store._lock, DurabilityTransaction(
+                    self.bindings.store.connection
+                ):
+                    self.bindings.require_exact_binding_in_transaction(
+                        binding_id,
+                        expected_state=BindingState.ACTIVE,
+                        actor_context_id=binding.actor_context_id,
+                        actor_kind=binding.actor_kind.value,
+                        semantic_scope_key=binding.semantic_scope_key,
+                        thread_id=binding.thread_id,
+                        direction_id=binding.direction_id,
+                    )
+                    existing = journal.prepare_effect(
+                        owner_kind="THREAD_RESUME",
+                        owner_id=binding_id,
+                        binding_id=binding_id,
+                        method="thread/resume",
+                        client_key=client_key,
+                        request={"threadId": binding.thread_id},
+                    )
+            except Exception:
+                self._cancel_resume_and_wake(
+                    wake_batch_id,
+                    None,
+                    cause_ref="wake_resume_binding_not_active",
+                )
+                return ThreadWakeReadiness.UNKNOWN
         owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
-            result = await owner.submit_effect(existing.effect_id)
+            def _binding_hook(connection) -> None:
+                self.bindings.require_exact_binding_in_transaction(
+                    binding_id,
+                    expected_state=BindingState.ACTIVE,
+                    actor_context_id=binding.actor_context_id,
+                    actor_kind=binding.actor_kind.value,
+                    semantic_scope_key=binding.semantic_scope_key,
+                    thread_id=binding.thread_id,
+                    direction_id=binding.direction_id,
+                )
+                batch = connection.execute(
+                    "SELECT state FROM wake_batches WHERE wake_batch_id = ? AND binding_id = ?",
+                    (wake_batch_id, binding_id),
+                ).fetchone()
+                if batch is None or str(batch["state"]) != WakeBatchState.PREPARED.value:
+                    raise WakeIncidentError("wake batch is not PREPARED at resume write start")
+                rows = connection.execute(
+                    """SELECT checkpoint_id, state_version, epoch_id, epoch_revision
+                    FROM managed_context_injections
+                    WHERE turn_intent_id = ? AND binding_id = ?
+                    ORDER BY created_at, injection_id""",
+                    (wake_batch_id, binding_id),
+                ).fetchall()
+                if len(rows) != 1 or tuple(rows[0]) != tuple(context_row):
+                    raise WakeIncidentError(
+                        "wake context binding changed before resume write start"
+                    )
+
+            result = await owner.submit_effect(
+                existing.effect_id,
+                extra_hooks=[_binding_hook],
+                pre_write_guard=lambda: self._resume_semantic_guard(
+                    binding, context_row
+                ),
+            )
             kind = owner.classify_submission(result)
-        except UnexpectedServerRequest:
+        except SemanticBridgeError:
+            self._cancel_resume_and_wake(
+                wake_batch_id,
+                existing.effect_id,
+                cause_ref="wake_resume_semantic_drift",
+            )
             return ThreadWakeReadiness.UNKNOWN
-        except (AppServerRpcError, TransportClosed, asyncio.TimeoutError):
-            return ThreadWakeReadiness.UNKNOWN
+        except Exception as exc:
+            # A guard failure occurs before WRITE_STARTED and is safely
+            # cancellable.  Transport failures after that boundary remain
+            # uncertain and are handled below rather than requeued.
+            current = journal.get(existing.effect_id)
+            if current.state == "PREPARED":
+                self._cancel_resume_and_wake(
+                    wake_batch_id,
+                    existing.effect_id,
+                    cause_ref="wake_resume_prewrite_guard_failed",
+                )
+                return ThreadWakeReadiness.UNKNOWN
+            if isinstance(exc, UnexpectedServerRequest):
+                return ThreadWakeReadiness.UNKNOWN
+            if isinstance(exc, (AppServerRpcError, TransportClosed, asyncio.TimeoutError)):
+                return ThreadWakeReadiness.UNKNOWN
+            raise
         if kind != "observed":
             return await self.classify(binding_id)
         return await _confirm_if_loaded(existing.effect_id)
 
-    def _resume_fence_ok(self, binding) -> bool:
-        if binding.binding_state is not BindingState.ACTIVE:
-            return False
+    def _wake_context(self, binding_id: str, wake_batch_id: str):
+        rows = self.bindings.store.connection.execute(
+            """SELECT checkpoint_id, state_version, epoch_id, epoch_revision
+            FROM managed_context_injections
+            WHERE turn_intent_id = ? AND binding_id = ?
+            ORDER BY created_at, injection_id""",
+            (wake_batch_id, binding_id),
+        ).fetchall()
+        return rows[0] if len(rows) == 1 else None
+
+    @contextmanager
+    def _resume_semantic_guard(self, binding, context_row) -> Iterator[object]:
         bridge = self.bridge or getattr(self.bindings, "bridge", None)
         if bridge is None:
-            return False
-        try:
-            actor = bridge.require_eligible(binding.actor_context_id)
-        except SemanticBridgeError:
-            return False
-        return (
-            actor.actor_kind.value == binding.actor_kind.value
-            and actor.scope_key == binding.semantic_scope_key
-        )
+            raise WakeIncidentError("wake resume has no semantic bridge")
+        with bridge.currentness_guard(
+            binding.actor_context_id,
+            checkpoint_id=context_row["checkpoint_id"],
+            state_version=int(context_row["state_version"] or 0),
+            epoch_id=context_row["epoch_id"],
+            epoch_revision=(
+                None
+                if context_row["epoch_revision"] is None
+                else int(context_row["epoch_revision"])
+            ),
+        ) as snapshot:
+            if (
+                snapshot.actor_kind != binding.actor_kind.value
+                or snapshot.scope_key != binding.semantic_scope_key
+            ):
+                raise WakeIncidentError("wake resume actor identity changed")
+            yield snapshot
+
+    def _cancel_resume_and_wake(
+        self,
+        wake_batch_id: str,
+        effect_id: str | None,
+        *,
+        cause_ref: str,
+    ) -> None:
+        from .durability.effects import EffectJournal, cancel_prepared_wake
+        from .durability.transaction import DurabilityTransaction
+
+        with self.bindings.store._lock, DurabilityTransaction(
+            self.bindings.store.connection
+        ):
+            EffectJournal(self.bindings.store.connection).cancel_prepared_if_present(
+                effect_id, cause_ref=cause_ref
+            )
+            cancel_prepared_wake(
+                self.bindings.store.connection,
+                wake_batch_id,
+                cause_ref=cause_ref,
+            )
 
     def _record_attempt(
         self,

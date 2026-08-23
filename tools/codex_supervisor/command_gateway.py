@@ -160,6 +160,20 @@ class CommandGateway:
                 epoch_id=expected["epoch_id"],
                 epoch_revision=expected["epoch_revision"],
             ) as guarded_snapshot:
+                if (
+                    binding.binding_state is BindingState.VERIFICATION_REQUIRED
+                    and action is not ManagedActionKind.CONTEXT_REANCHOR_ACK
+                ):
+                    raise CommandGatewayError(
+                        "VERIFICATION_REQUIRED binding may only acknowledge reanchor"
+                    )
+                if (
+                    action is not ManagedActionKind.CONTEXT_REANCHOR_ACK
+                    and binding.binding_state is not BindingState.ACTIVE
+                ):
+                    raise CommandGatewayError(
+                        "normal managed mutation requires ACTIVE binding"
+                    )
                 if guarded_snapshot.actor_kind != binding.actor_kind.value:
                     raise CommandGatewayError("actor kind no longer matches binding")
                 if guarded_snapshot.scope_key != binding.semantic_scope_key:
@@ -180,25 +194,42 @@ class CommandGateway:
                     result["epoch_revision"] = expected.get("epoch_revision")
                     return result
                 inner = parsed.get("payload") if isinstance(parsed.get("payload"), dict) else {}
-                if action is ManagedActionKind.MAILBOX_ACK:
-                    result = self._mailbox_ack(binding, command_id, turn_id, inner)
-                if action is ManagedActionKind.MAILBOX_INTAKE:
-                    result = self._mailbox_intake(binding, command_id, turn_id, inner)
-                if action is ManagedActionKind.MANAGED_PACKET_SEND:
-                    result = self._packet_send(binding, inner)
-                if action not in {
-                    ManagedActionKind.MAILBOX_ACK,
-                    ManagedActionKind.MAILBOX_INTAKE,
-                    ManagedActionKind.MANAGED_PACKET_SEND,
-                }:
-                    raise CommandGatewayError(f"unsupported action: {action.value}")
-                result.update(
-                    checkpoint_id=expected["checkpoint_id"],
-                    state_version=expected["state_version"],
-                    epoch_id=expected["epoch_id"],
-                    epoch_revision=expected["epoch_revision"],
-                )
-                return result
+                from .durability.transaction import DurabilityTransaction
+
+                # The binding is re-read under the exact supervisor write
+                # transaction that owns all mailbox/command side effects.
+                # The enclosing semantic guard remains held until this commits.
+                with self.bindings.store._lock, DurabilityTransaction(
+                    self.bindings.store.connection
+                ):
+                    self.bindings.require_exact_binding_in_transaction(
+                        binding.binding_id,
+                        expected_state=BindingState.ACTIVE,
+                        actor_context_id=binding.actor_context_id,
+                        actor_kind=binding.actor_kind.value,
+                        semantic_scope_key=binding.semantic_scope_key,
+                        thread_id=binding.thread_id,
+                        direction_id=binding.direction_id,
+                    )
+                    if action is ManagedActionKind.MAILBOX_ACK:
+                        result = self._mailbox_ack(binding, command_id, turn_id, inner)
+                    if action is ManagedActionKind.MAILBOX_INTAKE:
+                        result = self._mailbox_intake(binding, command_id, turn_id, inner)
+                    if action is ManagedActionKind.MANAGED_PACKET_SEND:
+                        result = self._packet_send(binding, inner)
+                    if action not in {
+                        ManagedActionKind.MAILBOX_ACK,
+                        ManagedActionKind.MAILBOX_INTAKE,
+                        ManagedActionKind.MANAGED_PACKET_SEND,
+                    }:
+                        raise CommandGatewayError(f"unsupported action: {action.value}")
+                    result.update(
+                        checkpoint_id=expected["checkpoint_id"],
+                        state_version=expected["state_version"],
+                        epoch_id=expected["epoch_id"],
+                        epoch_revision=expected["epoch_revision"],
+                    )
+                    return result
         except SemanticActorEligibilityError as exc:
             # Suspension is based only on the typed result observed after the
             # guard acquired its semantic writer fence.  Currentness mismatch

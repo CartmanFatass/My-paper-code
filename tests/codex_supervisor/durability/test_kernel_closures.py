@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from tests.codex_supervisor.helpers import make_observer_config, write_fake_codex
-from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
+from tests.codex_supervisor.mailbox_fixtures import prepare_resume_batch, seed_active_root_portfolio
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors
 from tools.codex_supervisor.binding_store import BindingStore
 from tools.codex_supervisor.client import AppServerClient, MUTATING_OWNER_MESSAGE
@@ -106,7 +106,7 @@ def test_timeout_result_cannot_advance_wake_to_active(tmp_path: Path) -> None:
         lease = leases.acquire(seeded["portfolio_binding_id"], "sched")
         batch = batches.prepare(
             binding_id=seeded["portfolio_binding_id"],
-            thread_id="thr_canary",
+            thread_id="thr_port",
             snapshot=snapshot,
             messages=[message],
             lease_generation=int(lease["generation"]),
@@ -317,7 +317,12 @@ def test_wake_recovery_creates_no_mutation_intent(tmp_path: Path) -> None:
             WakeBatchStore(seeded["supervisor"], seeded["mailbox"]),
             client,
         )
-        await recovery.resume_once(seeded["root_binding_id"])
+        batch_id = prepare_resume_batch(
+            seeded, seeded["root_binding_id"], "kernel:resume:no-intent"
+        )
+        await recovery.resume_once(
+            seeded["root_binding_id"], wake_batch_id=batch_id
+        )
         count = seeded["supervisor"].connection.execute("SELECT COUNT(*) FROM mutation_intents").fetchone()[0]
         assert int(count) == 0
         await transport.stop()
@@ -1187,6 +1192,9 @@ def test_released_actor_cannot_receive_recovery_resume(tmp_path: Path) -> None:
     from tools.codex_semantic_mvp.actor_registry import release_actor_context
 
     seeded = seed_active_root_portfolio(tmp_path)
+    batch_id = prepare_resume_batch(
+        seeded, seeded["root_binding_id"], "kernel:resume:released"
+    )
     release_actor_context(seeded["semantic"], seeded["root"].actor_context_id)
     recovery = WakeRecovery(
         seeded["bindings"],
@@ -1195,12 +1203,17 @@ def test_released_actor_cannot_receive_recovery_resume(tmp_path: Path) -> None:
         object(),
         bridge=seeded["bridge"],
     )
-    readiness = asyncio.run(recovery.resume_once(seeded["root_binding_id"]))
+    readiness = asyncio.run(
+        recovery.resume_once(seeded["root_binding_id"], wake_batch_id=batch_id)
+    )
     assert readiness.value == "UNKNOWN"
     count = seeded["supervisor"].connection.execute(
         "SELECT COUNT(*) FROM app_server_effects WHERE method = 'thread/resume'"
     ).fetchone()[0]
-    assert int(count) == 0
+    assert int(count) == 1
+    assert seeded["supervisor"].connection.execute(
+        "SELECT state FROM app_server_effects WHERE method = 'thread/resume'"
+    ).fetchone()[0] == "CANCELLED_BEFORE_WRITE"
     seeded["bridge"].close()
     seeded["supervisor"].close()
     seeded["semantic"].close()
@@ -1208,6 +1221,9 @@ def test_released_actor_cannot_receive_recovery_resume(tmp_path: Path) -> None:
 
 def test_nonactive_binding_cannot_receive_recovery_resume(tmp_path: Path) -> None:
     seeded = seed_active_root_portfolio(tmp_path)
+    batch_id = prepare_resume_batch(
+        seeded, seeded["root_binding_id"], "kernel:resume:suspended"
+    )
     seeded["bindings"].suspend(seeded["root_binding_id"])
     recovery = WakeRecovery(
         seeded["bindings"],
@@ -1216,7 +1232,9 @@ def test_nonactive_binding_cannot_receive_recovery_resume(tmp_path: Path) -> Non
         object(),
         bridge=seeded["bridge"],
     )
-    readiness = asyncio.run(recovery.resume_once(seeded["root_binding_id"]))
+    readiness = asyncio.run(
+        recovery.resume_once(seeded["root_binding_id"], wake_batch_id=batch_id)
+    )
     assert readiness.value == "UNKNOWN"
     count = seeded["supervisor"].connection.execute(
         "SELECT COUNT(*) FROM app_server_effects WHERE method = 'thread/resume'"
@@ -1536,7 +1554,7 @@ def test_wake_submit_has_no_ambient_transaction_at_send(tmp_path: Path) -> None:
         lease = leases.acquire(seeded["portfolio_binding_id"], "sched")
         batch = batches.prepare(
             binding_id=seeded["portfolio_binding_id"],
-            thread_id="thr_canary",
+            thread_id="thr_port",
             snapshot=snapshot,
             messages=[message],
             lease_generation=int(lease["generation"]),

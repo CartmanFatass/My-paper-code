@@ -13,7 +13,7 @@ from tests.codex_supervisor.helpers import (
     record_completed_agent_item,
     write_fake_codex,
 )
-from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
+from tests.codex_supervisor.mailbox_fixtures import prepare_resume_batch, seed_active_root_portfolio
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors
 from tools.codex_supervisor.binding_store import BindingError, BindingStore
 from tools.codex_supervisor.cli import main
@@ -443,8 +443,15 @@ def test_resume_timeout_is_not_resubmitted(tmp_path: Path) -> None:
         batches = WakeBatchStore(seeded["supervisor"], mailbox)
         leases = SchedulerLeases(seeded["supervisor"])
         recovery = WakeRecovery(seeded["bindings"], mailbox, batches, client, leases, "sched")
-        first = await recovery.resume_once(seeded["portfolio_binding_id"])
-        second = await recovery.resume_once(seeded["portfolio_binding_id"])
+        batch_id = prepare_resume_batch(
+            seeded, seeded["portfolio_binding_id"], "review0818:resume:timeout"
+        )
+        first = await recovery.resume_once(
+            seeded["portfolio_binding_id"], wake_batch_id=batch_id
+        )
+        second = await recovery.resume_once(
+            seeded["portfolio_binding_id"], wake_batch_id=batch_id
+        )
         assert first.value in {"UNKNOWN", "IDLE_NOT_LOADED"}
         assert second.value == "IDLE_NOT_LOADED"
         open_intents = seeded["supervisor"].connection.execute(

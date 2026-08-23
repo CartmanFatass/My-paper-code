@@ -121,6 +121,10 @@ class ManagedActorBinding:
     thread_cwd: str
     created_by_operator: str
     created_at: str
+    prepared_checkpoint_id: str | None = None
+    prepared_state_version: int = 0
+    prepared_epoch_id: str | None = None
+    prepared_epoch_revision: int | None = None
     verification_turn_intent_id: str | None = None
     verification_turn_id: str | None = None
     verification_command_id: str | None = None

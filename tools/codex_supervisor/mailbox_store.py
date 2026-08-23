@@ -136,23 +136,30 @@ class MailboxStore:
             payload_ref = validate_mailbox_ref(payload_ref, field_name="payload_ref")
         except MailboxRefError as exc:
             raise MailboxStoreError(str(exc)) from exc
-        existing = self.get_by_source_key(source_event_key)
-        if existing is not None:
-            same = (
-                existing.source_system == source_system
-                and existing.sender_actor_context_id == sender_actor_context_id
-                and existing.target_actor_context_id == target_actor_context_id
-                and existing.message_kind is kind
-                and existing.subject_ref == subject_ref
-                and existing.payload_ref == payload_ref
-                and existing.direction_id == direction_id
-            )
-            if not same:
-                raise MailboxStoreError("source_event_key conflicts with an existing message")
-            return existing
-        message_id = f"msg_{uuid.uuid4().hex}"
-        now = _now()
-        with self.store._lock, self.store.connection:
+        from .durability.transaction import DurabilityTransaction
+
+        with self.store._lock, DurabilityTransaction(self.store.connection):
+            row = self.store.connection.execute(
+                "SELECT * FROM mailbox_messages WHERE source_event_key = ?",
+                (source_event_key,),
+            ).fetchone()
+            if row is not None:
+                existing = _row_to_message(row)
+                same = (
+                    existing.source_system == source_system
+                    and existing.sender_actor_context_id == sender_actor_context_id
+                    and existing.target_actor_context_id == target_actor_context_id
+                    and existing.message_kind is kind
+                    and existing.subject_ref == subject_ref
+                    and existing.payload_ref == payload_ref
+                    and existing.direction_id == direction_id
+                    and existing.epoch_id == epoch_id
+                )
+                if not same:
+                    raise MailboxStoreError("source_event_key conflicts with an existing message")
+                return existing
+            message_id = f"msg_{uuid.uuid4().hex}"
+            now = _now()
             self.store.connection.execute(
                 """INSERT INTO mailbox_messages (
                     message_id, source_system, source_event_key, sender_actor_context_id,
@@ -307,10 +314,12 @@ class MailboxStore:
         )
 
     def note_source_resolved_after_submission(self, message_id: str) -> MailboxMessage:
+        from .durability.transaction import DurabilityTransaction
+
         current = self.get(message_id)
         if current is None:
             raise MailboxStoreError(f"unknown mailbox message: {message_id}")
-        with self.store._lock, self.store.connection:
+        with self.store._lock, DurabilityTransaction(self.store.connection):
             self.store.connection.execute(
                 """UPDATE mailbox_messages
                 SET source_resolved_after_submission = 1

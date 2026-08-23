@@ -173,6 +173,38 @@ class SemanticBridge:
                     connection.rollback()
                 raise
 
+    @contextmanager
+    def writer_guard(self) -> Iterator[None]:
+        """Own the semantic writer fence for a cross-ledger operation."""
+
+        with self.semantic._lock:
+            connection = self.semantic.connection
+            if connection.in_transaction:
+                raise SemanticBridgeError("semantic writer guard requires transaction ownership")
+            connection.execute("BEGIN IMMEDIATE")
+            try:
+                yield
+                if not connection.in_transaction:
+                    raise SemanticBridgeError("semantic writer guard was released prematurely")
+                connection.commit()
+            except Exception:
+                if connection.in_transaction:
+                    connection.rollback()
+                raise
+
+    @contextmanager
+    def actor_pair_guard(
+        self,
+        source_actor_context_id: str,
+        target_actor_context_id: str,
+    ) -> Iterator[tuple[ManagedActorSnapshot, ManagedActorSnapshot]]:
+        """Return two eligible snapshots from one semantic writer snapshot."""
+
+        with self.writer_guard():
+            source = self._snapshot_unlocked(source_actor_context_id)
+            target = self._snapshot_unlocked(target_actor_context_id)
+            yield source, target
+
     def assert_currentness(
         self,
         actor_context_id: str,

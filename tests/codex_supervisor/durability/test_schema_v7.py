@@ -250,8 +250,8 @@ def test_v6_to_v7_preserves_rows_and_adds_kernel_tables(tmp_path: Path) -> None:
     _seed_v6(path)
     connection = connect(path)
     initialize_database(connection)
-    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 7
-    assert SCHEMA_VERSION == 7
+    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 8
+    assert SCHEMA_VERSION == 8
     tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
     assert set(REQUIRED_TABLES) <= tables
     assert "app_server_effects" in tables
@@ -288,7 +288,7 @@ def test_v6_to_v7_preserves_rows_and_adds_kernel_tables(tmp_path: Path) -> None:
     assert "SUBMITTED_UNRECONCILED" in index_sql
     assert "INCIDENT" in index_sql
     initialize_database(connection)
-    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 7
+    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 8
     connection.close()
 
 

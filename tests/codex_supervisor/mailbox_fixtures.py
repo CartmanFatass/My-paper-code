@@ -5,8 +5,10 @@ from tests.codex_supervisor.semantic_fixtures import seed_managed_actors, seed_r
 from tools.codex_supervisor.binding_store import BindingStore
 from tools.codex_supervisor.command_gateway import CommandGateway
 from tools.codex_supervisor.mailbox_store import MailboxStore
+from tools.codex_supervisor.mailbox_models import MailboxMessageKind, MailboxSourceSystem
 from tools.codex_supervisor.managed_models import HistoryTrust, ManagedIntentKind, ThreadOrigin
 from tools.codex_supervisor.managed_turns import ManagedTurns
+from tools.codex_supervisor.wake_batches import WakeBatchStore
 
 
 def _ack_text(checkpoint: dict) -> str:
@@ -104,3 +106,28 @@ def seed_active_root_portfolio(tmp_path: Path) -> dict[str, object]:
     seeded["root_binding_id"] = activate_binding(store, root_snapshot, tmp_path, "thr_root")
     seeded["portfolio_binding_id"] = activate_binding(store, port_snapshot, tmp_path, "thr_port")
     return seeded
+
+
+def prepare_resume_batch(seeded: dict[str, object], binding_id: str, key: str) -> str:
+    """Create the exact durable context required by wake-recovery resume tests."""
+
+    bindings = seeded["bindings"]
+    binding = bindings.get(binding_id)
+    assert binding is not None and binding.thread_id
+    mailbox = seeded["mailbox"]
+    message = mailbox.enqueue(
+        source_system=MailboxSourceSystem.OPERATOR.value,
+        source_event_key=key,
+        target_actor_context_id=binding.actor_context_id,
+        message_kind=MailboxMessageKind.OPERATOR_ATTENTION_REQUEST,
+        subject_ref="resume",
+        payload_ref="resume",
+    )
+    mailbox.mark_eligible(message.message_id)
+    batch = WakeBatchStore(seeded["supervisor"], mailbox).prepare(
+        binding_id=binding_id,
+        thread_id=binding.thread_id,
+        snapshot=seeded["bridge"].snapshot(binding.actor_context_id),
+        messages=[message],
+    )
+    return str(batch["wake_batch_id"])

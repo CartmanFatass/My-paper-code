@@ -2483,6 +2483,8 @@ Use a separate external runtime subdirectory:
 powershell.exe -NoProfile -NonInteractive -File `
   scripts/codex-app-server-observer-canary.ps1 `
   -RepoRoot C:/Projects/HMASD-app-server-live-runtime `
+  -PythonExecutable C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
+  -NormalRuntimeHome "$env:LOCALAPPDATA\HMASD\codex-supervisor" `
   -RuntimeHome "$env:LOCALAPPDATA\HMASD\codex-supervisor-canary"
 ```
 

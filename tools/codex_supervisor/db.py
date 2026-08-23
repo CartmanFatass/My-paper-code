@@ -8,7 +8,7 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 7
+SCHEMA_VERSION = 8
 
 SCHEMA_STATEMENTS = (
     """
@@ -167,6 +167,10 @@ SCHEMA_STATEMENTS = (
         thread_cwd TEXT NOT NULL,
         created_by_operator TEXT NOT NULL,
         created_at TEXT NOT NULL,
+        prepared_checkpoint_id TEXT,
+        prepared_state_version INTEGER NOT NULL DEFAULT 0,
+        prepared_epoch_id TEXT,
+        prepared_epoch_revision INTEGER,
         thread_created_at TEXT,
         verified_at TEXT,
         activated_at TEXT,
@@ -545,6 +549,10 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _add_column_if_missing(connection, "managed_actor_bindings", "verified_state_version", "INTEGER")
         _add_column_if_missing(connection, "managed_actor_bindings", "verified_epoch_id", "TEXT")
         _add_column_if_missing(connection, "managed_actor_bindings", "verified_epoch_revision", "INTEGER")
+        _add_column_if_missing(connection, "managed_actor_bindings", "prepared_checkpoint_id", "TEXT")
+        _add_column_if_missing(connection, "managed_actor_bindings", "prepared_state_version", "INTEGER NOT NULL DEFAULT 0")
+        _add_column_if_missing(connection, "managed_actor_bindings", "prepared_epoch_id", "TEXT")
+        _add_column_if_missing(connection, "managed_actor_bindings", "prepared_epoch_revision", "INTEGER")
         _add_column_if_missing(connection, "mailbox_messages", "source_resolved_after_submission", "INTEGER NOT NULL DEFAULT 0")
         _add_column_if_missing(connection, "wake_batches", "lease_generation", "INTEGER")
         _add_column_if_missing(connection, "wake_batches", "lease_holder", "TEXT")

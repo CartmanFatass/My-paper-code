@@ -35,6 +35,8 @@ class SemanticScanner:
         return dict(row) if row is not None else {}
 
     def _write_cursor(self, **fields: Any) -> None:
+        from .durability.transaction import DurabilityTransaction
+
         now = self._now()
         existing = self._cursor()
         payload = {
@@ -44,7 +46,7 @@ class SemanticScanner:
             "last_report_observed_at": existing.get("last_report_observed_at"),
         }
         payload.update(fields)
-        with self.mailbox.store._lock, self.mailbox.store.connection:
+        with self.mailbox.store._lock, DurabilityTransaction(self.mailbox.store.connection):
             self.mailbox.store.connection.execute(
                 """INSERT INTO semantic_scan_cursors (
                     scanner_id, last_scan_at, last_obligation_observed_at,
@@ -125,62 +127,82 @@ class SemanticScanner:
             self.mailbox.cancel_source_resolved(message_id, reason)
 
     def scan(self) -> list[str]:
-        self._reconcile_existing()
-        created: list[str] = []
-        last_obligation = None
-        last_packet = None
-        last_report = None
-        obligation_rows = self.bridge.semantic.connection.execute(
-            """SELECT obligation_id, kind, owner, subject, source_ref, state,
-                      created_at, owner_actor_context_id
-               FROM obligations WHERE state = 'OPEN'"""
-        ).fetchall()
-        for row in obligation_rows:
-            target = str(row["owner_actor_context_id"] or row["owner"] or "")
-            if not target:
-                continue
-            kind = normalize_obligation_kind(str(row["kind"]))
-            message_kind = OBLIGATION_KIND_MAP.get(kind, MailboxMessageKind.OBLIGATION_AVAILABLE)
-            key = f"semantic:obligation:{row['obligation_id']}:OPEN"
-            message = self.mailbox.enqueue(
-                source_system=MailboxSourceSystem.SEMANTIC_LEDGER.value,
-                source_event_key=key,
-                target_actor_context_id=target,
-                message_kind=message_kind,
-                subject_ref=str(row["obligation_id"]),
-                payload_ref=str(row["obligation_id"]),
-                priority=10 if message_kind is MailboxMessageKind.REANCHOR_REQUIRED else 5,
-            )
-            created.append(message.message_id)
-            last_obligation = str(row["created_at"])
-            if kind == ObligationKind.REPORT_INTAKE_REQUIRED.value:
-                last_report = str(row["created_at"])
-        packet_rows = self.bridge.semantic.connection.execute(
-            """SELECT packet_id, packet_kind, target_actor_context_id, payload_ref,
-                      delivery_state, intake_state, created_at, direction_id
-               FROM packet_refs WHERE intake_state != 'APPLIED'"""
-        ).fetchall()
-        for row in packet_rows:
-            key = (
-                f"semantic:packet:{row['packet_id']}:"
-                f"{row['delivery_state']}:{row['intake_state']}"
-            )
-            message = self.mailbox.enqueue(
-                source_system=MailboxSourceSystem.SEMANTIC_LEDGER.value,
-                source_event_key=key,
-                target_actor_context_id=str(row["target_actor_context_id"]),
-                message_kind=MailboxMessageKind.PACKET_AVAILABLE,
-                subject_ref=str(row["packet_id"]),
-                payload_ref=str(row["payload_ref"]),
-                direction_id=None if row["direction_id"] is None else str(row["direction_id"]),
-                priority=7,
-            )
-            created.append(message.message_id)
-            last_packet = str(row["created_at"])
-        self._write_cursor(
-            last_scan_at=self._now(),
-            last_obligation_observed_at=last_obligation,
-            last_packet_observed_at=last_packet,
-            last_report_observed_at=last_report,
-        )
-        return created
+        from .durability.transaction import DurabilityTransaction
+
+        # Lock order is semantic then supervisor everywhere on this path.  The
+        # semantic writer fence makes source closure/advance linearize before
+        # selection; the one supervisor transaction makes reconciliation,
+        # enqueue, and cursor advancement all-or-nothing.
+        with self.bridge.writer_guard():
+            with self.mailbox.store._lock, DurabilityTransaction(
+                self.mailbox.store.connection
+            ):
+                self._reconcile_existing()
+                created: list[str] = []
+                last_obligation = None
+                last_packet = None
+                last_report = None
+                obligation_rows = self.bridge.semantic.connection.execute(
+                    """SELECT obligation_id, kind, owner, subject, source_ref, state,
+                              created_at, owner_actor_context_id
+                       FROM obligations WHERE state = 'OPEN'"""
+                ).fetchall()
+                for row in obligation_rows:
+                    target = str(row["owner_actor_context_id"] or row["owner"] or "")
+                    if not target:
+                        continue
+                    kind = normalize_obligation_kind(str(row["kind"]))
+                    message_kind = OBLIGATION_KIND_MAP.get(
+                        kind, MailboxMessageKind.OBLIGATION_AVAILABLE
+                    )
+                    key = f"semantic:obligation:{row['obligation_id']}:OPEN"
+                    message = self.mailbox.enqueue(
+                        source_system=MailboxSourceSystem.SEMANTIC_LEDGER.value,
+                        source_event_key=key,
+                        target_actor_context_id=target,
+                        message_kind=message_kind,
+                        subject_ref=str(row["obligation_id"]),
+                        payload_ref=str(row["obligation_id"]),
+                        priority=(
+                            10
+                            if message_kind is MailboxMessageKind.REANCHOR_REQUIRED
+                            else 5
+                        ),
+                    )
+                    created.append(message.message_id)
+                    last_obligation = str(row["created_at"])
+                    if kind == ObligationKind.REPORT_INTAKE_REQUIRED.value:
+                        last_report = str(row["created_at"])
+                packet_rows = self.bridge.semantic.connection.execute(
+                    """SELECT packet_id, packet_kind, target_actor_context_id, payload_ref,
+                              delivery_state, intake_state, created_at, direction_id
+                       FROM packet_refs WHERE intake_state != 'APPLIED'"""
+                ).fetchall()
+                for row in packet_rows:
+                    key = (
+                        f"semantic:packet:{row['packet_id']}:"
+                        f"{row['delivery_state']}:{row['intake_state']}"
+                    )
+                    message = self.mailbox.enqueue(
+                        source_system=MailboxSourceSystem.SEMANTIC_LEDGER.value,
+                        source_event_key=key,
+                        target_actor_context_id=str(row["target_actor_context_id"]),
+                        message_kind=MailboxMessageKind.PACKET_AVAILABLE,
+                        subject_ref=str(row["packet_id"]),
+                        payload_ref=str(row["payload_ref"]),
+                        direction_id=(
+                            None
+                            if row["direction_id"] is None
+                            else str(row["direction_id"])
+                        ),
+                        priority=7,
+                    )
+                    created.append(message.message_id)
+                    last_packet = str(row["created_at"])
+                self._write_cursor(
+                    last_scan_at=self._now(),
+                    last_obligation_observed_at=last_obligation,
+                    last_packet_observed_at=last_packet,
+                    last_report_observed_at=last_report,
+                )
+                return created

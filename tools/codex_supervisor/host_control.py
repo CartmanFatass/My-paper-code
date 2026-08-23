@@ -873,6 +873,10 @@ async def _dispatch_mailbox_mutation(request, *, bindings, bridge, client):
     args = request.arguments
     mailbox = MailboxStore(bindings.store)
     if request.command is CommandKind.MAILBOX_ENQUEUE:
+        from .durability.transaction import DurabilityTransaction
+        from .mailbox_acl import MailboxAclError, evaluate_automatic_delivery
+        from .managed_models import BindingState
+
         required = frozenset(
             {
                 "source_actor_context_id",
@@ -884,16 +888,10 @@ async def _dispatch_mailbox_mutation(request, *, bindings, bridge, client):
             }
         )
         _require_arguments(args, required, frozenset({"source_event_key"}))
-        source = _snapshot_for_actor(
-            bridge, _require_arg_string(args, "source_actor_context_id")
-        )
-        target = _snapshot_for_actor(
-            bridge, _require_arg_string(args, "target_actor_context_id")
-        )
-        if source.actor_context_id == target.actor_context_id:
+        source_actor_context_id = _require_arg_string(args, "source_actor_context_id")
+        target_actor_context_id = _require_arg_string(args, "target_actor_context_id")
+        if source_actor_context_id == target_actor_context_id:
             raise HostControlValidationError("mailbox source and target must differ")
-        _require_bound_actor(bindings, source)
-        _require_bound_actor(bindings, target)
         priority = args["priority"]
         if type(priority) is not int:
             raise HostControlValidationError("arguments.priority must be an integer")
@@ -904,18 +902,59 @@ async def _dispatch_mailbox_mutation(request, *, bindings, bridge, client):
         source_key = args.get("source_event_key")
         if source_key is None:
             source_key = f"host-control:{request.request_id}"
-        message = mailbox.enqueue(
-            source_system=MailboxSourceSystem.MANAGED_ACTOR.value,
-            source_event_key=_require_nonempty_string(source_key, "arguments.source_event_key"),
-            sender_actor_context_id=source.actor_context_id,
-            target_actor_context_id=target.actor_context_id,
-            message_kind=kind,
-            subject_ref=_require_arg_string(args, "subject_ref"),
-            payload_ref=_require_arg_string(args, "payload_ref"),
-            direction_id=target.direction_id,
-            epoch_id=target.epoch_id,
-            priority=priority,
-        )
+        source_key = _require_nonempty_string(source_key, "arguments.source_event_key")
+        subject_ref = _require_arg_string(args, "subject_ref")
+        payload_ref = _require_arg_string(args, "payload_ref")
+        try:
+            with bridge.actor_pair_guard(
+                source_actor_context_id, target_actor_context_id
+            ) as (source, target):
+                with bindings.store._lock, DurabilityTransaction(
+                    bindings.store.connection
+                ):
+                    source_binding = bindings.binding_for_actor(source.actor_context_id)
+                    target_binding = bindings.binding_for_actor(target.actor_context_id)
+                    if source_binding is None or target_binding is None:
+                        raise HostControlValidationError("mailbox actor has no managed binding")
+                    bindings.require_exact_binding_in_transaction(
+                        source_binding.binding_id,
+                        expected_state=BindingState.ACTIVE,
+                        actor_context_id=source.actor_context_id,
+                        actor_kind=source.actor_kind,
+                        semantic_scope_key=source.scope_key,
+                        direction_id=source.direction_id,
+                    )
+                    bindings.require_exact_binding_in_transaction(
+                        target_binding.binding_id,
+                        expected_state=BindingState.ACTIVE,
+                        actor_context_id=target.actor_context_id,
+                        actor_kind=target.actor_kind,
+                        semantic_scope_key=target.scope_key,
+                        direction_id=target.direction_id,
+                    )
+                    evaluate_automatic_delivery(
+                        source_system=MailboxSourceSystem.MANAGED_ACTOR.value,
+                        sender_kind=source.actor_kind,
+                        sender_actor_context_id=source.actor_context_id,
+                        target_kind=target.actor_kind,
+                        target_actor_context_id=target.actor_context_id,
+                        target_binding_state=BindingState.ACTIVE.value,
+                        message_kind=kind,
+                    )
+                    message = mailbox.enqueue(
+                        source_system=MailboxSourceSystem.MANAGED_ACTOR.value,
+                        source_event_key=source_key,
+                        sender_actor_context_id=source.actor_context_id,
+                        target_actor_context_id=target.actor_context_id,
+                        message_kind=kind,
+                        subject_ref=subject_ref,
+                        payload_ref=payload_ref,
+                        direction_id=target.direction_id,
+                        epoch_id=target.epoch_id,
+                        priority=priority,
+                    )
+        except MailboxAclError as exc:
+            raise HostControlValidationError(str(exc)) from exc
         return {"message": _json_object(asdict(message))}, "OK", None
 
     _require_arguments(

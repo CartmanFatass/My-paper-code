@@ -1,5 +1,6 @@
 import asyncio
 import sqlite3
+from contextlib import contextmanager
 from pathlib import Path
 
 import pytest
@@ -328,5 +329,246 @@ def test_wake_drift_immediately_before_guard_writes_no_effect_and_requeues(
         seeded["bridge"].close()
         seeded["supervisor"].close()
         seeded["semantic"].close()
+
+    asyncio.run(body())
+
+
+def _prepared_raw_failure_wake(tmp_path: Path, instance_id: str):
+    seeded = seed_active_root_portfolio(tmp_path)
+    binding_id = str(seeded["portfolio_binding_id"])
+    actor_id = seeded["portfolio"].actor_context_id
+    mailbox = seeded["mailbox"]
+    message = mailbox.enqueue(
+        source_system=MailboxSourceSystem.OPERATOR.value,
+        source_event_key=f"op:{instance_id}",
+        target_actor_context_id=actor_id,
+        message_kind=MailboxMessageKind.OPERATOR_ATTENTION_REQUEST,
+        subject_ref="wake",
+        payload_ref="ref",
+        priority=8,
+    )
+    batches = WakeBatchStore(seeded["supervisor"], mailbox)
+    leases = SchedulerLeases(seeded["supervisor"])
+    lease = leases.acquire(binding_id, instance_id)
+    batch = batches.prepare(
+        binding_id=binding_id,
+        thread_id="thr_port",
+        snapshot=seeded["bridge"].snapshot(actor_id),
+        messages=[message],
+        lease_generation=int(lease["generation"]),
+        lease_holder=instance_id,
+    )
+    scheduler = WakeScheduler(
+        seeded["bindings"],
+        mailbox,
+        batches,
+        leases,
+        WakeRecovery(seeded["bindings"], mailbox, batches, client=None),  # type: ignore[arg-type]
+        SemanticScanner(mailbox, seeded["bridge"]),
+        seeded["bridge"],
+        client=object(),  # type: ignore[arg-type]
+        instance_id=instance_id,
+    )
+    return seeded, scheduler, batches, mailbox, message, batch, lease
+
+
+def _close_raw_failure_wake(seeded) -> None:
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_raw_sqlite_guard_failure_cancels_exact_prepared_wake_and_requeues(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    async def body() -> None:
+        from tools.codex_supervisor.durability.effects import EffectJournal
+        from tools.codex_supervisor.durability.session_owner import AppServerSessionOwner
+        from tools.codex_supervisor.managed_models import BindingState
+
+        seeded, scheduler, batches, mailbox, message, batch, lease = (
+            _prepared_raw_failure_wake(tmp_path, "sched-raw-locked")
+        )
+        sends = 0
+
+        @contextmanager
+        def locked_guard(*args, **kwargs):
+            raise sqlite3.OperationalError("database is locked")
+            yield  # pragma: no cover
+
+        monkeypatch.setattr(seeded["bridge"], "currentness_guard", locked_guard)
+
+        class GuardEnteringOwner:
+            async def submit_effect(self, effect_id, **kwargs):
+                nonlocal sends
+                with kwargs["pre_write_guard"]():
+                    pass
+                sends += 1
+                raise AssertionError("send boundary must not be reached")
+
+        monkeypatch.setattr(
+            AppServerSessionOwner,
+            "for_client",
+            staticmethod(lambda client, store: GuardEnteringOwner()),
+        )
+        batch_id = str(batch["wake_batch_id"])
+        with pytest.raises(WakeSchedulerError, match="failed before write.*cancelled") as caught:
+            await scheduler.submit_batch(
+                batch_id,
+                str(batch["input_text"]),
+                lease_generation=int(lease["generation"]),
+            )
+        assert isinstance(caught.value.__cause__, sqlite3.OperationalError)
+        assert sends == 0
+        assert (
+            seeded["bindings"].get(str(batch["binding_id"])).binding_state
+            is BindingState.ACTIVE
+        )
+        assert batches.get(batch_id)["state"] == "CANCELLED"
+        assert mailbox.get(message.message_id).delivery_state.value == "ELIGIBLE"
+        assert EffectJournal(seeded["supervisor"].connection).get(
+            str(batch["effect_id"])
+        ).state == "CANCELLED_BEFORE_WRITE"
+        assert seeded["supervisor"].connection.execute(
+            "SELECT COUNT(*) FROM raw_messages WHERE effect_id = ?",
+            (batch["effect_id"],),
+        ).fetchone()[0] == 0
+        _close_raw_failure_wake(seeded)
+
+    asyncio.run(body())
+
+
+@pytest.mark.parametrize("crossed_state", ["WRITE_STARTED", "SUBMISSION_UNCERTAIN"])
+def test_raw_submit_failure_never_requeues_crossed_effect_state(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, crossed_state: str
+) -> None:
+    async def body() -> None:
+        from tools.codex_supervisor.durability.effects import EffectJournal
+        from tools.codex_supervisor.durability.models import (
+            AggregateKind,
+            TransitionCause,
+            TransitionRequest,
+        )
+        from tools.codex_supervisor.durability.session_owner import AppServerSessionOwner
+        from tools.codex_supervisor.durability.transaction import DurabilityTransaction
+        from tools.codex_supervisor.durability.transitions import TransitionKernel
+
+        seeded, scheduler, batches, mailbox, message, batch, lease = (
+            _prepared_raw_failure_wake(tmp_path, f"sched-raw-{crossed_state.lower()}")
+        )
+        journal = EffectJournal(seeded["supervisor"].connection)
+
+        class CrossedOwner:
+            async def submit_effect(self, effect_id, **kwargs):
+                with seeded["supervisor"]._lock, DurabilityTransaction(
+                    seeded["supervisor"].connection
+                ):
+                    TransitionKernel(seeded["supervisor"].connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.WAKE_BATCH,
+                            aggregate_id=str(batch["wake_batch_id"]),
+                            expected_state="PREPARED",
+                            expected_version=int(batch["version"] or 0),
+                            target_state="SUBMITTING",
+                            cause_kind=TransitionCause.APP_SERVER_EFFECT,
+                            cause_ref=effect_id,
+                        )
+                    )
+                    journal.claim_write(
+                        effect_id,
+                        run_id="run-crossed",
+                        client_request_id="req-crossed",
+                        request_row_id="row-crossed",
+                        raw_request_seq=1,
+                    )
+                if crossed_state == "SUBMISSION_UNCERTAIN":
+                    journal.mark_uncertain(effect_id, reason="test-crossed")
+                raise sqlite3.OperationalError("database is locked after write boundary")
+
+        monkeypatch.setattr(
+            AppServerSessionOwner,
+            "for_client",
+            staticmethod(lambda client, store: CrossedOwner()),
+        )
+        batch_id = str(batch["wake_batch_id"])
+        with pytest.raises(
+            WakeSchedulerError, match=f"reached {crossed_state}.*do not retry"
+        ) as caught:
+            await scheduler.submit_batch(
+                batch_id,
+                str(batch["input_text"]),
+                lease_generation=int(lease["generation"]),
+            )
+        assert isinstance(caught.value.__cause__, sqlite3.OperationalError)
+        assert journal.get(str(batch["effect_id"])).state == crossed_state
+        assert batches.get(batch_id)["state"] == "SUBMITTING"
+        assert mailbox.get(message.message_id).delivery_state.value == "BATCHED"
+        _close_raw_failure_wake(seeded)
+
+    asyncio.run(body())
+
+
+@pytest.mark.parametrize("containment_failure", ["cancel_failure", "unknown_effect"])
+def test_raw_submit_containment_failure_or_unknown_effect_fails_closed(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    containment_failure: str,
+) -> None:
+    async def body() -> None:
+        from tools.codex_supervisor.durability import effects
+        from tools.codex_supervisor.durability.effects import EffectJournal
+        from tools.codex_supervisor.durability.session_owner import AppServerSessionOwner
+
+        seeded, scheduler, batches, mailbox, message, batch, lease = (
+            _prepared_raw_failure_wake(tmp_path, f"sched-raw-{containment_failure}")
+        )
+
+        class RawFailureOwner:
+            async def submit_effect(self, effect_id, **kwargs):
+                raise sqlite3.OperationalError("database is locked")
+
+        monkeypatch.setattr(
+            AppServerSessionOwner,
+            "for_client",
+            staticmethod(lambda client, store: RawFailureOwner()),
+        )
+        if containment_failure == "cancel_failure":
+            def fail_cancel(*args, **kwargs):
+                raise sqlite3.OperationalError("containment database is locked")
+
+            monkeypatch.setattr(
+                effects,
+                "cancel_prepared_wake",
+                fail_cancel,
+            )
+        else:
+            seeded["supervisor"].connection.execute(
+                "DELETE FROM app_server_effects WHERE effect_id = ?",
+                (batch["effect_id"],),
+            )
+            seeded["supervisor"].connection.commit()
+
+        batch_id = str(batch["wake_batch_id"])
+        with pytest.raises(
+            WakeSchedulerError, match="containment failed closed.*do not retry"
+        ) as caught:
+            await scheduler.submit_batch(
+                batch_id,
+                str(batch["input_text"]),
+                lease_generation=int(lease["generation"]),
+            )
+        assert isinstance(caught.value.__cause__, sqlite3.OperationalError)
+        assert batches.get(batch_id)["state"] == "PREPARED"
+        assert mailbox.get(message.message_id).delivery_state.value == "BATCHED"
+        if containment_failure == "cancel_failure":
+            assert EffectJournal(seeded["supervisor"].connection).get(
+                str(batch["effect_id"])
+            ).state == "PREPARED"
+        else:
+            assert seeded["supervisor"].connection.execute(
+                "SELECT COUNT(*) FROM app_server_effects WHERE effect_id = ?",
+                (batch["effect_id"],),
+            ).fetchone()[0] == 0
+        _close_raw_failure_wake(seeded)
 
     asyncio.run(body())

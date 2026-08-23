@@ -42,7 +42,8 @@ def _parser() -> argparse.ArgumentParser:
     serve.add_argument("--semantic-state")
     serve.add_argument("--ready-file")
     serve.add_argument("--control-home")
-    sub.add_parser("canary")
+    canary = sub.add_parser("canary")
+    canary.add_argument("--normal-runtime-home", required=True)
     timeline = sub.add_parser("timeline")
     timeline.add_argument("--thread-id", required=True)
     timeline.add_argument("--out")
@@ -71,6 +72,19 @@ def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     repo_root = Path(args.repo_root).resolve()
     runtime_home = Path(args.runtime_home) if args.runtime_home else None
+    if args.command == "canary":
+        if runtime_home is None:
+            raise SystemExit("canary requires an explicitly supplied --runtime-home")
+        runtime_home = _require_external_path(repo_root, runtime_home, "canary runtime home")
+        normal_runtime_home = _require_external_path(
+            repo_root, Path(args.normal_runtime_home), "normal supervisor runtime home"
+        )
+        if runtime_home == normal_runtime_home:
+            raise SystemExit("canary runtime home must differ from normal supervisor runtime home")
+        if (normal_runtime_home / "supervisor-process.json").exists():
+            raise SystemExit(
+                "normal supervisor runtime must have no process record after STOPPED preflight"
+            )
     config = load_observer_config(repo_root, runtime_home)
     profile: RuntimeProfile | None = None
     semantic_state_path: Path | None = None

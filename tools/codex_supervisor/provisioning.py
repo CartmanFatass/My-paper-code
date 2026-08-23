@@ -3,14 +3,15 @@
 from __future__ import annotations
 
 import asyncio
+from contextlib import contextmanager
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterator
 
 from .binding_store import BindingError, BindingStore
 from .client import AppServerClient, AppServerRpcError, RetryRequired, UnexpectedServerRequest
 from .durability.effects import EffectJournal
 from .durability.session_owner import AppServerSessionOwner
-from .managed_models import HistoryTrust, ThreadOrigin
+from .managed_models import BindingState, HistoryTrust, ThreadOrigin
 from .semantic_bridge import ManagedActorSnapshot, SemanticBridgeError
 from .transport import TransportClosed
 
@@ -54,6 +55,51 @@ class ManagedProvisioner:
             raise ProvisioningError("operator identity is required")
         self.bindings.confirm_global_memory_disabled(binding_id, operator=operator)
 
+    @contextmanager
+    def _semantic_prewrite_guard(self, binding) -> Iterator[object]:
+        bridge = getattr(self.bindings, "bridge", None)
+        if bridge is None:
+            raise ProvisioningError("provisioning requires a semantic bridge")
+        with bridge.currentness_guard(
+            binding.actor_context_id,
+            checkpoint_id=binding.prepared_checkpoint_id,
+            state_version=binding.prepared_state_version,
+            epoch_id=binding.prepared_epoch_id,
+            epoch_revision=binding.prepared_epoch_revision,
+        ) as snapshot:
+            if (
+                snapshot.actor_kind != binding.actor_kind.value
+                or snapshot.scope_key != binding.semantic_scope_key
+            ):
+                raise ProvisioningError("semantic actor no longer matches binding")
+            yield snapshot
+
+    def _binding_prewrite_hook(self, binding, expected_state: BindingState):
+        def _hook(_connection) -> None:
+            self.bindings.require_exact_binding_in_transaction(
+                binding.binding_id,
+                expected_state=expected_state,
+                actor_context_id=binding.actor_context_id,
+                actor_kind=binding.actor_kind.value,
+                semantic_scope_key=binding.semantic_scope_key,
+                thread_id=binding.thread_id,
+                direction_id=binding.direction_id,
+                prepared_currentness=(
+                    binding.prepared_checkpoint_id,
+                    binding.prepared_state_version,
+                    binding.prepared_epoch_id,
+                    binding.prepared_epoch_revision,
+                ),
+            )
+
+        return _hook
+
+    def _contain_prewrite_failure(self, binding_id: str, effect_id: str, cause_ref: str) -> None:
+        if self.journal.get(effect_id).state == "PREPARED":
+            self.bindings.cancel_prepared_binding_effect(
+                binding_id, effect_id, cause_ref=cause_ref
+            )
+
     async def apply_memory_policy(self, binding_id: str, *, schema_blob: str, operator: str) -> None:
         if memory_mode_method_supported(schema_blob):
             if self.client is None:
@@ -71,7 +117,18 @@ class ManagedProvisioner:
                     client_key=f"{MEMORY_MODE_METHOD}:{binding.thread_id}",
                     request={"threadId": binding.thread_id, "mode": "disabled"},
                 )
-                result = await owner.submit_effect(effect.effect_id)
+                expected_state = binding.binding_state
+                try:
+                    result = await owner.submit_effect(
+                        effect.effect_id,
+                        extra_hooks=[self._binding_prewrite_hook(binding, expected_state)],
+                        pre_write_guard=lambda: self._semantic_prewrite_guard(binding),
+                    )
+                except Exception:
+                    self._contain_prewrite_failure(
+                        binding_id, effect.effect_id, "memory_policy_prewrite_guard_failed"
+                    )
+                    raise ProvisioningError("memory-policy pre-write guard failed")
                 if owner.classify_submission(result) != "observed":
                     raise ProvisioningError("memory-mode request was not confirmed")
             except (RetryRequired, AppServerRpcError, TransportClosed, UnexpectedServerRequest) as exc:
@@ -91,14 +148,22 @@ class ManagedProvisioner:
         if bridge is None:
             return
         try:
-            actor = bridge.require_eligible(binding.actor_context_id)
+            actor = bridge.assert_currentness(
+                binding.actor_context_id,
+                checkpoint_id=binding.prepared_checkpoint_id,
+                state_version=binding.prepared_state_version,
+                epoch_id=binding.prepared_epoch_id,
+                epoch_revision=binding.prepared_epoch_revision,
+            )
         except SemanticBridgeError as exc:
-            if effect_id:
-                self.journal.cancel_prepared_if_present(effect_id, cause_ref="actor_ineligible")
+            self.bindings.cancel_prepared_binding_effect(
+                binding.binding_id, effect_id, cause_ref="provision_currentness_mismatch"
+            )
             raise ProvisioningError(str(exc)) from exc
-        if actor.actor_kind.value != binding.actor_kind.value or actor.scope_key != binding.semantic_scope_key:
-            if effect_id:
-                self.journal.cancel_prepared_if_present(effect_id, cause_ref="actor_mismatch")
+        if actor.actor_kind != binding.actor_kind.value or actor.scope_key != binding.semantic_scope_key:
+            self.bindings.cancel_prepared_binding_effect(
+                binding.binding_id, effect_id, cause_ref="provision_actor_mismatch"
+            )
             raise ProvisioningError("semantic actor no longer matches binding")
 
     async def create_fresh_thread(self, binding_id: str) -> str:
@@ -128,7 +193,13 @@ class ManagedProvisioner:
         self._assert_provision_fence(binding, effect_id=effect.effect_id)
         owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
-            submitted = await owner.submit_effect(effect.effect_id)
+            submitted = await owner.submit_effect(
+                effect.effect_id,
+                extra_hooks=[
+                    self._binding_prewrite_hook(binding, BindingState.PREPARED)
+                ],
+                pre_write_guard=lambda: self._semantic_prewrite_guard(binding),
+            )
             if owner.classify_submission(submitted) != "observed":
                 raise ProvisioningError("thread/start uncertain; do not retry automatically")
         except RetryRequired as exc:
@@ -140,6 +211,15 @@ class ManagedProvisioner:
         except (AppServerRpcError, TransportClosed, asyncio.TimeoutError) as exc:
             self.bindings._record_event(binding_id, "THREAD_START_UNCERTAIN", {"reason": type(exc).__name__})
             raise ProvisioningError("thread/start uncertain; do not retry automatically") from exc
+        except Exception as exc:
+            if self.journal.get(effect.effect_id).state == "PREPARED":
+                self._contain_prewrite_failure(
+                    binding_id, effect.effect_id, "thread_start_prewrite_guard_failed"
+                )
+                raise ProvisioningError("thread/start pre-write guard failed") from exc
+            if isinstance(exc, ProvisioningError):
+                raise
+            raise
         response = submitted.response or {}
         result = response.get("result") if isinstance(response.get("result"), dict) else {}
         thread = result.get("thread") if isinstance(result.get("thread"), dict) else {}
@@ -198,12 +278,28 @@ class ManagedProvisioner:
         self._assert_provision_fence(binding, effect_id=effect.effect_id)
         owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
-            submitted = await owner.submit_effect(effect.effect_id)
+            assert binding is not None
+            submitted = await owner.submit_effect(
+                effect.effect_id,
+                extra_hooks=[
+                    self._binding_prewrite_hook(binding, BindingState.PREPARED)
+                ],
+                pre_write_guard=lambda: self._semantic_prewrite_guard(binding),
+            )
             if owner.classify_submission(submitted) != "observed":
                 raise ProvisioningError("thread/resume uncertain; do not retry automatically")
         except (RetryRequired, AppServerRpcError, TransportClosed, asyncio.TimeoutError, UnexpectedServerRequest) as exc:
             kind = "THREAD_RESUME_INCIDENT" if isinstance(exc, UnexpectedServerRequest) else "THREAD_RESUME_UNCERTAIN"
             self.bindings._record_event(binding_id, kind, {"reason": type(exc).__name__})
             raise ProvisioningError("thread/resume uncertain; do not retry automatically") from exc
+        except Exception as exc:
+            if self.journal.get(effect.effect_id).state == "PREPARED":
+                self._contain_prewrite_failure(
+                    binding_id, effect.effect_id, "thread_resume_prewrite_guard_failed"
+                )
+                raise ProvisioningError("thread/resume pre-write guard failed") from exc
+            if isinstance(exc, ProvisioningError):
+                raise
+            raise
         self.bindings.attach_thread(binding_id, thread_id, effect_id=effect.effect_id)
         return binding_id

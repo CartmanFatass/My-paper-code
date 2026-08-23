@@ -12,7 +12,7 @@ from tests.codex_supervisor.helpers import (
     record_completed_agent_item,
     write_fake_codex,
 )
-from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
+from tests.codex_supervisor.mailbox_fixtures import prepare_resume_batch, seed_active_root_portfolio
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors, seed_reanchor
 from tools.codex_semantic_mvp.actor_registry import release_actor_context
 from tools.codex_supervisor.binding_store import BindingError, BindingStore
@@ -392,14 +392,15 @@ def test_successful_resume_not_loaded_is_not_resubmitted(tmp_path: Path) -> None
         client = ScriptedClient()
         client.status = "notLoaded"
         recovery = WakeRecovery(seeded["bindings"], seeded["mailbox"], WakeBatchStore(seeded["supervisor"], seeded["mailbox"]), client)  # type: ignore[arg-type]
-        first = await recovery.resume_once(seeded["root_binding_id"])
+        batch_id = prepare_resume_batch(seeded, seeded["root_binding_id"], "review0818:resume:not-loaded")
+        first = await recovery.resume_once(seeded["root_binding_id"], wake_batch_id=batch_id)
         assert first.value == "IDLE_NOT_LOADED"
         assert client.resumes == 1
         row = seeded["supervisor"].connection.execute(
             "SELECT state FROM app_server_effects WHERE method = 'thread/resume' ORDER BY prepared_at DESC"
         ).fetchone()
         assert str(row[0]) != "PREPARED"
-        second = await recovery.resume_once(seeded["root_binding_id"])
+        second = await recovery.resume_once(seeded["root_binding_id"], wake_batch_id=batch_id)
         assert second.value == "IDLE_NOT_LOADED"
         assert client.resumes == 1
         _close(seeded)
@@ -414,10 +415,11 @@ def test_successful_resume_unknown_is_reconciled_not_restarted(tmp_path: Path) -
         client.status = "idle"
         client.loaded_error = True
         recovery = WakeRecovery(seeded["bindings"], seeded["mailbox"], WakeBatchStore(seeded["supervisor"], seeded["mailbox"]), client)  # type: ignore[arg-type]
-        first = await recovery.resume_once(seeded["root_binding_id"])
+        batch_id = prepare_resume_batch(seeded, seeded["root_binding_id"], "review0818:resume:unknown")
+        first = await recovery.resume_once(seeded["root_binding_id"], wake_batch_id=batch_id)
         assert first.value == "UNKNOWN"
         assert client.resumes == 1
-        second = await recovery.resume_once(seeded["root_binding_id"])
+        second = await recovery.resume_once(seeded["root_binding_id"], wake_batch_id=batch_id)
         assert second.value == "UNKNOWN"
         assert client.resumes == 1
         row = seeded["supervisor"].connection.execute(
@@ -435,14 +437,15 @@ def test_resume_intent_becomes_applied_only_after_loaded_observation(tmp_path: P
         client = ScriptedClient()
         client.status = "notLoaded"
         recovery = WakeRecovery(seeded["bindings"], seeded["mailbox"], WakeBatchStore(seeded["supervisor"], seeded["mailbox"]), client)  # type: ignore[arg-type]
-        await recovery.resume_once(seeded["root_binding_id"])
+        batch_id = prepare_resume_batch(seeded, seeded["root_binding_id"], "review0818:resume:confirm")
+        await recovery.resume_once(seeded["root_binding_id"], wake_batch_id=batch_id)
         row = seeded["supervisor"].connection.execute(
             "SELECT state FROM app_server_effects WHERE method = 'thread/resume' ORDER BY prepared_at DESC"
         ).fetchone()
         assert str(row[0]) != "PREPARED"
         client.status = "idle"
         client.loaded = ["thr_root"]
-        ready = await recovery.resume_once(seeded["root_binding_id"])
+        ready = await recovery.resume_once(seeded["root_binding_id"], wake_batch_id=batch_id)
         assert ready.value == "IDLE_LOADED"
         assert client.resumes == 1
         row = seeded["supervisor"].connection.execute(
@@ -529,7 +532,7 @@ def test_serve_establishes_session_watcher_before_thread_list(tmp_path: Path) ->
     asyncio.run(body())
 
 
-def test_validated_command_without_receipt_becomes_durable_incident(tmp_path: Path) -> None:
+def test_validated_reanchor_without_receipt_recovers_durable_effect(tmp_path: Path) -> None:
     seeded = seed_active_root_portfolio(tmp_path)
     checkpoint = seed_reanchor(seeded["semantic"], seeded["root"].actor_context_id)
     gateway = CommandGateway(seeded["bindings"], seeded["bridge"])
@@ -550,14 +553,10 @@ def test_validated_command_without_receipt_becomes_durable_incident(tmp_path: Pa
         (first["command_id"],),
     )
     seeded["supervisor"].connection.commit()
-    with pytest.raises(CommandGatewayError, match="receipt is missing"):
-        gateway.ingest_final_item(raw_message_seq=seq)
-    row = seeded["supervisor"].connection.execute(
-        "SELECT validation_state, rejection_reason FROM managed_actor_commands WHERE command_id = ?",
-        (first["command_id"],),
-    ).fetchone()
-    assert str(row[0]) == "INCIDENT"
-    assert "receipt is missing" in str(row[1])
+    recovered = gateway.ingest_final_item(raw_message_seq=seq)
+    assert recovered["validation_state"] == "APPLIED"
+    assert recovered["reconciled"] is True
+    assert seeded["supervisor"].get_command_receipt(str(first["command_id"])) is not None
     _close(seeded)
 
 
@@ -708,7 +707,7 @@ def test_semantic_actor_released_after_batch_prepare_prevents_wake_submit(tmp_pa
                 str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
-        assert seeded["bindings"].get(seeded["portfolio_binding_id"]).binding_state.value == "SUSPENDED"
+        assert seeded["bindings"].get(seeded["portfolio_binding_id"]).binding_state.value == "ACTIVE"
         assert batches.get(str(batch["wake_batch_id"]))["state"] == "CANCELLED"
         assert mailbox.get(message.message_id).delivery_state.value == "ELIGIBLE"
         _close(seeded)

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import uuid
+from contextlib import nullcontext
 from datetime import datetime, timezone
 from typing import Any  # noqa: F401 - used by row helpers
 
@@ -57,6 +58,16 @@ def _row_to_binding(row: Any) -> ManagedActorBinding:
         thread_cwd=str(row["thread_cwd"]),
         created_by_operator=str(row["created_by_operator"]),
         created_at=str(row["created_at"]),
+        prepared_checkpoint_id=None
+        if _row_value(row, "prepared_checkpoint_id") is None
+        else str(row["prepared_checkpoint_id"]),
+        prepared_state_version=int(_row_value(row, "prepared_state_version") or 0),
+        prepared_epoch_id=None
+        if _row_value(row, "prepared_epoch_id") is None
+        else str(row["prepared_epoch_id"]),
+        prepared_epoch_revision=None
+        if _row_value(row, "prepared_epoch_revision") is None
+        else int(row["prepared_epoch_revision"]),
         verification_turn_intent_id=None
         if _row_value(row, "verification_turn_intent_id") is None
         else str(row["verification_turn_intent_id"]),
@@ -157,19 +168,38 @@ class BindingStore:
     ) -> str:
         if actor_snapshot.actor_kind not in {kind.value for kind in ManagedActorKind}:
             raise BindingError(f"actor kind cannot be bound: {actor_snapshot.actor_kind}")
-        existing = self.binding_for_actor(actor_snapshot.actor_context_id)
-        if existing is not None:
-            raise BindingError("actor already has a non-revoked binding")
         binding_id = _new_id("bind")
         now = _now()
-        with self.store._lock, self.store.connection:
-            self.store.connection.execute(
+        guard = (
+            self.bridge.currentness_guard(
+                actor_snapshot.actor_context_id,
+                checkpoint_id=actor_snapshot.checkpoint_id,
+                state_version=actor_snapshot.state_version,
+                epoch_id=actor_snapshot.epoch_id,
+                epoch_revision=actor_snapshot.epoch_revision,
+            )
+            if self.bridge is not None
+            else nullcontext(actor_snapshot)
+        )
+        with guard as guarded:
+            if guarded.actor_kind != actor_snapshot.actor_kind or guarded.scope_key != actor_snapshot.scope_key:
+                raise BindingError("semantic actor identity changed before binding preparation")
+            with self.store._lock, DurabilityTransaction(self.store.connection):
+                existing = self.store.connection.execute(
+                    """SELECT 1 FROM managed_actor_bindings
+                    WHERE actor_context_id = ? AND binding_state != ?""",
+                    (actor_snapshot.actor_context_id, BindingState.REVOKED.value),
+                ).fetchone()
+                if existing is not None:
+                    raise BindingError("actor already has a non-revoked binding")
+                self.store.connection.execute(
                 """INSERT INTO managed_actor_bindings (
                     binding_id, actor_context_id, actor_kind, semantic_scope_key,
                     direction_id, thread_id, thread_origin, history_trust,
                     binding_state, memory_policy_state, repo_root, thread_cwd,
-                    created_by_operator, created_at
-                ) VALUES (?, ?, ?, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    created_by_operator, created_at, prepared_checkpoint_id,
+                    prepared_state_version, prepared_epoch_id, prepared_epoch_revision
+                ) VALUES (?, ?, ?, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
                     binding_id,
                     actor_snapshot.actor_context_id,
@@ -184,10 +214,108 @@ class BindingStore:
                     thread_cwd,
                     created_by_operator,
                     now,
+                    actor_snapshot.checkpoint_id,
+                    actor_snapshot.state_version,
+                    actor_snapshot.epoch_id,
+                    actor_snapshot.epoch_revision,
                 ),
             )
-        self._record_event(binding_id, "BINDING_PREPARED", {"actor_kind": actor_snapshot.actor_kind})
+                self.store.connection.execute(
+                    """INSERT INTO managed_binding_events (
+                        binding_id, event_kind, payload_json, created_at
+                    ) VALUES (?, ?, ?, ?)""",
+                    (
+                        binding_id,
+                        "BINDING_PREPARED",
+                        json.dumps({"actor_kind": actor_snapshot.actor_kind}, ensure_ascii=False),
+                        now,
+                    ),
+                )
         return binding_id
+
+    def require_exact_binding_in_transaction(
+        self,
+        binding_id: str,
+        *,
+        expected_state: BindingState,
+        actor_context_id: str,
+        actor_kind: str,
+        semantic_scope_key: str,
+        thread_id: str | None = None,
+        direction_id: str | None | object = ...,
+        prepared_currentness: tuple[str | None, int, str | None, int | None] | None = None,
+    ) -> ManagedActorBinding:
+        """Re-read one exact binding inside the caller-owned durability txn."""
+
+        if not self.store.connection.in_transaction:
+            raise BindingError("exact binding check requires an ambient supervisor transaction")
+        row = self.store.connection.execute(
+            "SELECT * FROM managed_actor_bindings WHERE binding_id = ?",
+            (binding_id,),
+        ).fetchone()
+        if row is None:
+            raise BindingError("managed binding disappeared")
+        current = _row_to_binding(row)
+        if current.binding_state is not expected_state:
+            raise BindingError(f"binding is not {expected_state.value}")
+        if (
+            current.actor_context_id != actor_context_id
+            or current.actor_kind.value != actor_kind
+            or current.semantic_scope_key != semantic_scope_key
+            or (thread_id is not None and current.thread_id != thread_id)
+        ):
+            raise BindingError("managed binding identity changed")
+        if direction_id is not ... and current.direction_id != direction_id:
+            raise BindingError("managed binding direction changed")
+        if prepared_currentness is not None and (
+            current.prepared_checkpoint_id,
+            current.prepared_state_version,
+            current.prepared_epoch_id,
+            current.prepared_epoch_revision,
+        ) != prepared_currentness:
+            raise BindingError("managed binding currentness tuple changed")
+        return current
+
+    def cancel_prepared_binding_effect(self, binding_id: str, effect_id: str | None, *, cause_ref: str) -> None:
+        """Atomically contain a binding and its still-PREPARED effect."""
+
+        from .durability.effects import EffectJournal
+
+        with self.store._lock, DurabilityTransaction(self.store.connection):
+            row = self.store.connection.execute(
+                "SELECT binding_state, version FROM managed_actor_bindings WHERE binding_id = ?",
+                (binding_id,),
+            ).fetchone()
+            if row is not None and str(row["binding_state"]) not in {
+                BindingState.REVOKED.value,
+                BindingState.SUSPENDED.value,
+            }:
+                current_state = str(row["binding_state"])
+                target_state = (
+                    BindingState.SUSPENDED.value
+                    if current_state in {
+                        BindingState.VERIFICATION_REQUIRED.value,
+                        BindingState.ACTIVE.value,
+                    }
+                    else BindingState.REVOKED.value
+                )
+                TransitionKernel(self.store.connection).apply(
+                    TransitionRequest(
+                        aggregate_kind=AggregateKind.MANAGED_BINDING,
+                        aggregate_id=binding_id,
+                        expected_state=current_state,
+                        expected_version=int(row["version"] or 0),
+                        target_state=target_state,
+                        cause_kind=TransitionCause.PRE_WRITE_CANCEL,
+                        cause_ref=cause_ref,
+                        field_updates={
+                            "suspended_at" if target_state == BindingState.SUSPENDED.value else "revoked_at": _now()
+                        },
+                    )
+                )
+            EffectJournal(self.store.connection).cancel_prepared_if_present(
+                effect_id, cause_ref=cause_ref
+            )
 
     def _unresolved_start_incident(self, binding_id: str) -> dict[str, object] | None:
         row = self.store.connection.execute(
