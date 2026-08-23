@@ -13,20 +13,11 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$ThreadId,
     [string]$CodexBinary,
-    [string]$RuntimeHome
+    [string]$RuntimeHome,
+    [int]$TimeoutSeconds = 30
 )
 
 $ErrorActionPreference = "Stop"
-$arguments = @("-m", "tools.codex_supervisor", "--repo-root", $RepoRoot)
-if ($RuntimeHome) { $arguments += @("--runtime-home", $RuntimeHome) }
-if ($CodexBinary) { $arguments += @("--codex-bin", $CodexBinary) }
-$arguments += @(
-    "managed", "--operator", $Operator, "adopt",
-    "--actor-context-id", $ActorContextId,
-    "--semantic-state", $SemanticState,
-    "--thread-id", $ThreadId,
-    "--allow-existing-history",
-    "--confirm-history-nonauthoritative"
-)
-& $PythonExecutable @arguments
-if ($LASTEXITCODE -ne 0) { throw "managed adopt exited with code $LASTEXITCODE" }
+$request = [ordered]@{ repo_root = $RepoRoot; semantic_state = $SemanticState; actor_context_id = $ActorContextId; thread_id = $ThreadId; allow_existing_history = $true; confirm_history_nonauthoritative = $true; confirm_global_memory_disabled = $true }
+& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MANAGED_ADOPT' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -TimeoutSeconds $TimeoutSeconds
+if ($LASTEXITCODE -ne 0) { throw "managed adopt host request exited with code $LASTEXITCODE" }

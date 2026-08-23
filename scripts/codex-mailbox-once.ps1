@@ -8,14 +8,14 @@ param(
     [string]$Operator,
     [Parameter(Mandatory = $true)]
     [string]$SemanticState,
+    [Parameter(Mandatory = $true)]
+    [string]$TargetActorContextId,
     [string]$CodexBinary,
-    [string]$RuntimeHome
+    [string]$RuntimeHome,
+    [int]$TimeoutSeconds = 1800
 )
 
 $ErrorActionPreference = "Stop"
-$arguments = @("-m", "tools.codex_supervisor", "--repo-root", $RepoRoot)
-if ($RuntimeHome) { $arguments += @("--runtime-home", $RuntimeHome) }
-if ($CodexBinary) { $arguments += @("--codex-bin", $CodexBinary) }
-$arguments += @("scheduler", "once", "--operator", $Operator, "--semantic-state", $SemanticState)
-& $PythonExecutable @arguments
-if ($LASTEXITCODE -ne 0) { throw "mailbox once exited with code $LASTEXITCODE" }
+$request = [ordered]@{ semantic_state = $SemanticState; target_actor_context_id = $TargetActorContextId }
+& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MAILBOX_DELIVER_ONCE' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -TimeoutSeconds $TimeoutSeconds
+if ($LASTEXITCODE -ne 0) { throw "mailbox delivery host request exited with code $LASTEXITCODE" }

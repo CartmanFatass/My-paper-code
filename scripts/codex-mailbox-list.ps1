@@ -6,14 +6,13 @@ param(
     [string]$PythonExecutable,
     [string]$CodexBinary,
     [string]$RuntimeHome,
-    [string]$Target
+    [string]$Target,
+    [string]$Operator = 'mailbox-list',
+    [int]$TimeoutSeconds = 30
 )
 
 $ErrorActionPreference = "Stop"
-$arguments = @("-m", "tools.codex_supervisor", "--repo-root", $RepoRoot)
-if ($RuntimeHome) { $arguments += @("--runtime-home", $RuntimeHome) }
-if ($CodexBinary) { $arguments += @("--codex-bin", $CodexBinary) }
-$arguments += @("mailbox", "list")
-if ($Target) { $arguments += @("--target", $Target) }
-& $PythonExecutable @arguments
-if ($LASTEXITCODE -ne 0) { throw "mailbox list exited with code $LASTEXITCODE" }
+$request = [ordered]@{}
+if ($Target) { $request.target_actor_context_id = $Target }
+& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MAILBOX_LIST' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -TimeoutSeconds $TimeoutSeconds
+if ($LASTEXITCODE -ne 0) { throw "mailbox list host request exited with code $LASTEXITCODE" }

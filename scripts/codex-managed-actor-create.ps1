@@ -11,13 +11,11 @@ param(
     [Parameter(Mandatory = $true)]
     [string]$SemanticState,
     [string]$CodexBinary,
-    [string]$RuntimeHome
+    [string]$RuntimeHome,
+    [int]$TimeoutSeconds = 30
 )
 
 $ErrorActionPreference = "Stop"
-$arguments = @("-m", "tools.codex_supervisor", "--repo-root", $RepoRoot)
-if ($RuntimeHome) { $arguments += @("--runtime-home", $RuntimeHome) }
-if ($CodexBinary) { $arguments += @("--codex-bin", $CodexBinary) }
-$arguments += @("managed", "--operator", $Operator, "create", "--actor-context-id", $ActorContextId, "--semantic-state", $SemanticState, "--confirm-global-memory-disabled")
-& $PythonExecutable @arguments
-if ($LASTEXITCODE -ne 0) { throw "managed create exited with code $LASTEXITCODE" }
+$request = [ordered]@{ repo_root = $RepoRoot; semantic_state = $SemanticState; actor_context_id = $ActorContextId; confirm_global_memory_disabled = $true }
+& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MANAGED_CREATE' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -TimeoutSeconds $TimeoutSeconds
+if ($LASTEXITCODE -ne 0) { throw "managed create host request exited with code $LASTEXITCODE" }

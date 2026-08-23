@@ -8,14 +8,14 @@ param(
     [string]$Operator,
     [Parameter(Mandatory = $true)]
     [string]$BindingId,
+    [Parameter(Mandatory = $true)]
+    [string]$SemanticState,
     [string]$CodexBinary,
-    [string]$RuntimeHome
+    [string]$RuntimeHome,
+    [int]$TimeoutSeconds = 30
 )
 
 $ErrorActionPreference = "Stop"
-$arguments = @("-m", "tools.codex_supervisor", "--repo-root", $RepoRoot)
-if ($RuntimeHome) { $arguments += @("--runtime-home", $RuntimeHome) }
-if ($CodexBinary) { $arguments += @("--codex-bin", $CodexBinary) }
-$arguments += @("managed", "--operator", $Operator, "suspend", "--binding-id", $BindingId)
-& $PythonExecutable @arguments
-if ($LASTEXITCODE -ne 0) { throw "managed suspend exited with code $LASTEXITCODE" }
+$request = [ordered]@{ semantic_state = $SemanticState; binding_id = $BindingId }
+& (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MANAGED_SUSPEND' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -TimeoutSeconds $TimeoutSeconds
+if ($LASTEXITCODE -ne 0) { throw "managed suspend host request exited with code $LASTEXITCODE" }
