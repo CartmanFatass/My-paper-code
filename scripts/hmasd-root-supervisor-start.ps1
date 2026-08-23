@@ -6,6 +6,7 @@ param(
     [string]$CodexBin,
     [ValidateSet('OBSERVER', 'MANAGED_MANUAL', 'MAILBOX_MANUAL', 'SINGLE_WAKE')]
     [string]$Profile = 'OBSERVER',
+    [string]$SemanticState,
     [string]$ReadyFile,
     [string]$ControlHome,
     [double]$DurationSeconds
@@ -68,6 +69,20 @@ function Resolve-ExternalTarget([string]$Target, [string]$Root, [string]$Label) 
     return $candidate
 }
 
+function Resolve-ExternalExistingFile([string]$Target, [string]$Root, [string]$Label) {
+    if ([string]::IsNullOrWhiteSpace($Target)) { throw "$Label is required" }
+    if (-not (Test-Path -LiteralPath $Target -PathType Leaf)) {
+        throw "$Label must be an existing regular file"
+    }
+    $resolved = (Resolve-Path -LiteralPath $Target -ErrorAction Stop).Path
+    $rootKey = $Root.TrimEnd('\', '/').ToLowerInvariant()
+    $targetKey = $resolved.TrimEnd('\', '/').ToLowerInvariant()
+    if ($targetKey -eq $rootKey -or $targetKey.StartsWith($rootKey + '\') -or $targetKey.StartsWith($rootKey + '/')) {
+        throw "$Label must be external to the repository"
+    }
+    return $resolved
+}
+
 function Test-SamePath([string]$Left, [string]$Right) {
     if ([string]::IsNullOrWhiteSpace($Left) -or [string]::IsNullOrWhiteSpace($Right)) { return $false }
     $leftKey = [System.IO.Path]::GetFullPath($Left).TrimEnd('\', '/').ToLowerInvariant()
@@ -99,6 +114,7 @@ function Get-SupervisorArgumentVector(
     [string]$Root,
     [string]$RuntimePath,
     [string]$ProfileName,
+    [string]$SemanticPath,
     [string]$ReadyPath,
     [string]$ControlPath,
     [string]$CodexExecutable,
@@ -107,7 +123,9 @@ function Get-SupervisorArgumentVector(
 ) {
     $arguments = @('-m', 'tools.codex_supervisor', '--repo-root', $Root, '--runtime-home', $RuntimePath)
     if (-not [string]::IsNullOrWhiteSpace($CodexExecutable)) { $arguments += @('--codex-bin', $CodexExecutable) }
-    $arguments += @('serve', '--profile', $ProfileName, '--ready-file', $ReadyPath, '--control-home', $ControlPath)
+    $arguments += @('serve', '--profile', $ProfileName)
+    if (-not [string]::IsNullOrWhiteSpace($SemanticPath)) { $arguments += @('--semantic-state', $SemanticPath) }
+    $arguments += @('--ready-file', $ReadyPath, '--control-home', $ControlPath)
     if ($IncludeDuration) {
         $arguments += @('--duration-seconds', $DurationValue.ToString([System.Globalization.CultureInfo]::InvariantCulture))
     }
@@ -418,12 +436,22 @@ try {
     if ([string]::IsNullOrWhiteSpace($ControlHome)) { $ControlHome = Join-Path $RuntimeHome 'control' }
     $ReadyFile = Resolve-ExternalTarget $ReadyFile $RepoRoot 'ready file'
     $ControlHome = Resolve-ExternalTarget $ControlHome $RepoRoot 'control home'
+    $semanticWasBound = $PSBoundParameters.ContainsKey('SemanticState')
+    if ($Profile -eq 'OBSERVER') {
+        if ($semanticWasBound) { throw 'OBSERVER profile forbids SemanticState' }
+        $SemanticState = $null
+    } else {
+        if (-not $semanticWasBound -or [string]::IsNullOrWhiteSpace($SemanticState)) {
+            throw "$Profile profile requires SemanticState"
+        }
+        $SemanticState = Resolve-ExternalExistingFile $SemanticState $RepoRoot 'semantic state'
+    }
     New-Item -ItemType Directory -Force -Path $ControlHome | Out-Null
     $durationWasBound = $PSBoundParameters.ContainsKey('DurationSeconds')
     if ($durationWasBound -and ([double]::IsNaN($DurationSeconds) -or [double]::IsInfinity($DurationSeconds) -or $DurationSeconds -le 0)) {
         throw 'DurationSeconds must be a finite positive value when supplied'
     }
-    $arguments = @(Get-SupervisorArgumentVector $RepoRoot $RuntimeHome $Profile $ReadyFile $ControlHome $CodexBin $durationWasBound $DurationSeconds)
+    $arguments = @(Get-SupervisorArgumentVector $RepoRoot $RuntimeHome $Profile $SemanticState $ReadyFile $ControlHome $CodexBin $durationWasBound $DurationSeconds)
 
     $processPath = Join-Path $RuntimeHome 'supervisor-process.json'
     if (Test-Path -LiteralPath $processPath) {
@@ -435,7 +463,7 @@ try {
                 Write-Output 'HMASD_SUPERVISOR_READY_V2'
                 exit 0
             }
-            Write-Incident $RuntimeHome 'existing host does not match the requested executable and exact repo/runtime/profile/ready/control/codex/duration launch vector and active run; stop then start is required'
+            Write-Incident $RuntimeHome 'existing host does not match the requested executable and exact repo/runtime/profile/semantic-state/ready/control/codex/duration launch vector and active run; stop then start is required'
             Write-Output 'HMASD_SUPERVISOR_INCIDENT_V2'
             exit 1
         } catch {

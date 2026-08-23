@@ -18,6 +18,10 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$request = [ordered]@{ semantic_state = $SemanticState; binding_id = $BindingId; text = $Text }
+if ([string]::IsNullOrWhiteSpace($RepoRoot) -or [string]::IsNullOrWhiteSpace($SemanticState)) {
+    throw 'RepoRoot and SemanticState compatibility values are required; they never select request authority'
+}
+# SemanticState is launch-time only and is intentionally absent from this request.
+$request = [ordered]@{ binding_id = $BindingId; text = $Text }
 & (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MANAGED_TURN' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -TimeoutSeconds $TimeoutSeconds
 if ($LASTEXITCODE -ne 0) { throw "managed turn host request exited with code $LASTEXITCODE" }

@@ -158,7 +158,9 @@ def test_start_script_requires_valid_ready_evidence_not_pid_only(repo_root):
 
 def test_start_passes_frozen_runtime_arguments_to_serve(repo_root):
     text = read_script(repo_root, "hmasd-root-supervisor-start.ps1")
-    assert "'serve', '--profile', $ProfileName, '--ready-file', $ReadyPath, '--control-home', $ControlPath" in text
+    assert "$arguments += @('serve', '--profile', $ProfileName)" in text
+    assert "$arguments += @('--semantic-state', $SemanticPath)" in text
+    assert "$arguments += @('--ready-file', $ReadyPath, '--control-home', $ControlPath)" in text
 
 
 def test_start_argument_helper_uses_bound_duration_without_nullable_members(repo_root):
@@ -169,7 +171,7 @@ def test_start_argument_helper_uses_bound_duration_without_nullable_members(repo
     assert ".HasValue" not in text
     assert ".Value" not in text
     body = (
-        "$result=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' $A3 $A4 '' $true ([double]0.125)); "
+        "$result=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' '' $A3 $A4 '' $true ([double]0.125)); "
         "$result|ConvertTo-Json -Compress"
     )
     result = invoke_start_helpers(
@@ -231,6 +233,18 @@ def test_start_rejects_custom_ready_and_control_paths_before_writing_or_launchin
     assert text.index(control_guard) < text.index("Start-Process -FilePath")
 
 
+def test_start_binds_semantic_state_to_nonobserver_profiles_before_launch(repo_root):
+    text = read_script(repo_root, "hmasd-root-supervisor-start.ps1")
+    semantic_guard = "Resolve-ExternalExistingFile $SemanticState $RepoRoot 'semantic state'"
+    launch = "Start-Process -FilePath"
+    assert "$PSBoundParameters.ContainsKey('SemanticState')" in text
+    assert "OBSERVER profile forbids SemanticState" in text
+    assert 'profile requires SemanticState' in text
+    assert "must be an existing regular file" in text
+    assert semantic_guard in text
+    assert text.index(semantic_guard) < text.index(launch)
+
+
 def test_status_requires_identity_ready_doctor_and_matching_active_run(repo_root):
     text = read_script(repo_root, "hmasd-root-supervisor-status.ps1")
     for required in ("HMASD_SUPERVISOR_STATUS_V2", "STOPPED", "PROCESS_STARTING", "READY", "STALE_IDENTITY", "INCIDENT", "validate_ready_record", "observer_runs", "ready.run_id", "codex_binary", "schema_capture_present", "static_guard_violations", "Test-ProcessRecordIdentity", "Test-ActiveCodexBinding", "Test-FullyQualifiedPath"):
@@ -277,7 +291,7 @@ def test_status_strictly_parses_launch_vector_and_binds_python_and_codex(repo_ro
     )
     result = invoke_start_helpers(
         path,
-        ("Test-SamePath", "Test-FullyQualifiedPath", "Test-ExactFields", "Parse-StrictLaunchArgumentVector", "Test-RecordAndLaunchBinding", "Test-ActiveCodexBinding"),
+        ("Test-SamePath", "Test-FullyQualifiedPath", "Test-ExternalExistingFile", "Test-ExactFields", "Parse-StrictLaunchArgumentVector", "Test-RecordAndLaunchBinding", "Test-ActiveCodexBinding"),
         body,
         str(repo_root), str(runtime_home), str(ready), json.dumps(record),
         str(PROJECT_PYTHON.resolve()), codex, str(tmp_path / "other-python.exe"),
@@ -292,6 +306,53 @@ def test_status_strictly_parses_launch_vector_and_binds_python_and_codex(repo_ro
         "wrong_codex": False,
         "wrong_python": False,
         "duplicate_parsed": False,
+    }
+
+
+def test_status_strict_parser_enforces_profile_semantic_state_relationship(tmp_path):
+    path = Path(__file__).resolve().parents[2] / "scripts" / "hmasd-root-supervisor-status.ps1"
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    runtime = tmp_path / "runtime"
+    runtime.mkdir()
+    semantic = tmp_path / "semantic.sqlite3"
+    semantic.touch()
+    resident = repo / "semantic.sqlite3"
+    resident.touch()
+    common = [
+        "-m", "tools.codex_supervisor", "--repo-root", str(repo),
+        "--runtime-home", str(runtime), "serve", "--profile",
+    ]
+    tail = ["--ready-file", str(runtime / "ready.json"), "--control-home", str(runtime / "control")]
+    valid = common + ["MANAGED_MANUAL", "--semantic-state", str(semantic)] + tail
+    missing = common + ["MAILBOX_MANUAL"] + tail
+    observer_with_state = common + ["OBSERVER", "--semantic-state", str(semantic)] + tail
+    resident_state = common + ["SINGLE_WAKE", "--semantic-state", str(resident)] + tail
+    body = (
+        "$valid=ConvertFrom-Json -InputObject $A1;$missing=ConvertFrom-Json -InputObject $A2;"
+        "$observer=ConvertFrom-Json -InputObject $A3;$resident=ConvertFrom-Json -InputObject $A4;"
+        "$parsed=Parse-StrictLaunchArgumentVector $valid;"
+        "[ordered]@{valid=[bool]$parsed;semantic=[string]$parsed.semantic_state;"
+        "missing=[bool](Parse-StrictLaunchArgumentVector $missing);"
+        "observer=[bool](Parse-StrictLaunchArgumentVector $observer);"
+        "resident=[bool](Parse-StrictLaunchArgumentVector $resident)}|ConvertTo-Json -Compress"
+    )
+    result = invoke_start_helpers(
+        path,
+        ("Test-FullyQualifiedPath", "Test-ExternalExistingFile", "Parse-StrictLaunchArgumentVector"),
+        body,
+        json.dumps(valid),
+        json.dumps(missing),
+        json.dumps(observer_with_state),
+        json.dumps(resident_state),
+    )
+    assert result.returncode == 0, result.stderr + result.stdout
+    assert json.loads(result.stdout) == {
+        "valid": True,
+        "semantic": str(semantic.resolve()),
+        "missing": False,
+        "observer": False,
+        "resident": False,
     }
 
 
@@ -324,7 +385,7 @@ def test_status_rejects_relative_codex_paths_before_binding_comparisons(repo_roo
     result = invoke_start_helpers(
         path,
         (
-            "Test-SamePath", "Test-FullyQualifiedPath", "Parse-StrictLaunchArgumentVector",
+            "Test-SamePath", "Test-FullyQualifiedPath", "Test-ExternalExistingFile", "Parse-StrictLaunchArgumentVector",
             "Test-ActiveCodexBinding", "Test-DoctorGuards",
         ),
         body,
@@ -532,7 +593,7 @@ def test_existing_host_binding_rejects_another_repo_or_control_path(repo_root, t
     }
     body = (
         "$record=$A5|ConvertFrom-Json; "
-        "$expected=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' $A3 $A4 '' $false 0); "
+        "$expected=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' '' $A3 $A4 '' $false 0); "
         "$matched=Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A4 $A7 $expected; "
         "$wrongControl=Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A6 $A7 $expected; "
         "$wrongRepo=Test-ExistingInvocation $record $A6 $A2 'OBSERVER' $A3 $A4 $A7 $expected; "
@@ -559,6 +620,70 @@ def test_existing_host_binding_rejects_another_repo_or_control_path(repo_root, t
     )
     assert result.returncode == 0, result.stderr + result.stdout
     assert json.loads(result.stdout) == {"matched": True, "wrong_control": False, "wrong_repo": False}
+
+
+def test_existing_host_binding_requires_exact_semantic_state_vector(repo_root, tmp_path):
+    path = script_path(repo_root, "hmasd-root-supervisor-start.ps1")
+    runtime_home = tmp_path / "runtime"
+    runtime_home.mkdir()
+    ready = runtime_home / "ready.json"
+    control = runtime_home / "control"
+    semantic = tmp_path / "semantic.sqlite3"
+    other_semantic = tmp_path / "other-semantic.sqlite3"
+    semantic.touch()
+    other_semantic.touch()
+    expected = [
+        "-m", "tools.codex_supervisor", "--repo-root", str(repo_root),
+        "--runtime-home", str(runtime_home), "serve", "--profile", "MANAGED_MANUAL",
+        "--semantic-state", str(semantic), "--ready-file", str(ready),
+        "--control-home", str(control),
+    ]
+    evidence_path = runtime_home / "supervisor-launch-evidence.json"
+    evidence_path.write_text(
+        json.dumps(
+            {
+                "schema": "HMASD_SUPERVISOR_LAUNCH_EVIDENCE_V2",
+                "observed_at": "2026-08-23T00:00:00Z",
+                "argument_vector": expected,
+                "control_home": str(control),
+                "ready_file": str(ready),
+            }
+        ),
+        encoding="utf-8",
+    )
+    record = {
+        "schema": "HMASD_SUPERVISOR_PROCESS_V1", "pid": 1234,
+        "process_start_time_utc": "2026-08-23T00:00:00.0000000Z",
+        "executable": str(PROJECT_PYTHON.resolve()), "repo_root": str(repo_root),
+        "runtime_home": str(runtime_home), "profile": "MANAGED_MANUAL",
+        "started_at": "2026-08-23T00:00:00Z", "ready_file": str(ready),
+    }
+    body = (
+        "$record=$A5|ConvertFrom-Json;"
+        "$expected=@(Get-SupervisorArgumentVector $A1 $A2 'MANAGED_MANUAL' $A3 $A6 $A7 '' $false 0);"
+        "$other=@(Get-SupervisorArgumentVector $A1 $A2 'MANAGED_MANUAL' $A4 $A6 $A7 '' $false 0);"
+        "[ordered]@{matched=(Test-ExistingInvocation $record $A1 $A2 'MANAGED_MANUAL' $A6 $A7 $A8 $expected);"
+        "other=(Test-ExistingInvocation $record $A1 $A2 'MANAGED_MANUAL' $A6 $A7 $A8 $other)}|ConvertTo-Json -Compress"
+    )
+    result = invoke_start_helpers(
+        path,
+        (
+            "Test-SamePath", "Test-ExactFields", "Test-ExactArgumentVector",
+            "Get-SupervisorArgumentVector", "Test-LaunchEvidenceBinding",
+            "Test-ExistingInvocation",
+        ),
+        body,
+        str(repo_root),
+        str(runtime_home),
+        str(semantic),
+        str(other_semantic),
+        json.dumps(record),
+        str(ready),
+        str(control),
+        str(PROJECT_PYTHON.resolve()),
+    )
+    assert result.returncode == 0, result.stderr + result.stdout
+    assert json.loads(result.stdout) == {"matched": True, "other": False}
 
 
 def test_existing_host_binding_requires_exact_codex_and_duration_vector(repo_root, tmp_path):
@@ -591,9 +716,9 @@ def test_existing_host_binding_requires_exact_codex_and_duration_vector(repo_roo
     }
     body = (
         "$record=$A5|ConvertFrom-Json; "
-        "$bounded=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' $A3 $A4 $A6 $true 0.125); "
-        "$unbounded=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' $A3 $A4 $A6 $false 0); "
-        "$wrongCodex=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' $A3 $A4 'other-codex' $true 0.125); "
+        "$bounded=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' '' $A3 $A4 $A6 $true 0.125); "
+        "$unbounded=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' '' $A3 $A4 $A6 $false 0); "
+        "$wrongCodex=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' '' $A3 $A4 'other-codex' $true 0.125); "
         "$duplicate=@($bounded + @('--profile','OBSERVER')); "
         "[ordered]@{bounded=(Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A4 $A7 $bounded); "
         "unbounded=(Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A4 $A7 $unbounded); "

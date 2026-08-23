@@ -16,6 +16,10 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$request = [ordered]@{ repo_root = $RepoRoot; semantic_state = $SemanticState; actor_context_id = $ActorContextId; confirm_global_memory_disabled = $true }
+if ([string]::IsNullOrWhiteSpace($RepoRoot) -or [string]::IsNullOrWhiteSpace($SemanticState)) {
+    throw 'RepoRoot and SemanticState compatibility values are required; they never select request authority'
+}
+# Compatibility only: the validated host launch tuple owns repo/state authority.
+$request = [ordered]@{ actor_context_id = $ActorContextId; confirm_global_memory_disabled = $true }
 & (Join-Path $PSScriptRoot 'hmasd-supervisor-request.ps1') -Command 'MANAGED_CREATE' -ArgumentsJson ($request | ConvertTo-Json -Compress) -Operator $Operator -RuntimeHome $RuntimeHome -PythonExecutable $PythonExecutable -TimeoutSeconds $TimeoutSeconds
 if ($LASTEXITCODE -ne 0) { throw "managed create host request exited with code $LASTEXITCODE" }

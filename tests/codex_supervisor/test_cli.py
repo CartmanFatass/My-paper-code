@@ -4,10 +4,13 @@ import json
 import tempfile
 from pathlib import Path
 
+import pytest
+
 from tests.codex_supervisor.helpers import write_fake_codex
-from tools.codex_supervisor.cli import main
+from tools.codex_supervisor.cli import _parser, _semantic_state_for_profile, main
 from tools.codex_supervisor.models import ProtocolIds, RpcShape
 from tools.codex_supervisor.normalizer import apply_normalized_event, normalize_message
+from tools.codex_supervisor.runtime_profiles import RuntimeProfile
 from tools.codex_supervisor.store import ObserverStore
 
 
@@ -79,3 +82,63 @@ def test_timeline_cli(tmp_path: Path, repo_root: Path, capsys) -> None:
     assert code == 0
     out = capsys.readouterr().out
     assert "TURN_COMPLETED_OBSERVED status=failed" in out
+
+
+@pytest.mark.parametrize("command", ["once", "serve"])
+def test_scheduler_mutating_commands_are_rejected_at_parse_time(command: str) -> None:
+    with pytest.raises(SystemExit) as exc:
+        _parser().parse_args(["scheduler", command])
+    assert exc.value.code == 2
+
+
+def test_scheduler_status_remains_read_only(tmp_path: Path, repo_root: Path, capsys) -> None:
+    runtime = Path(tempfile.mkdtemp(prefix="hmasd-obs-cli-"))
+    code = main(
+        [
+            "--repo-root",
+            str(repo_root),
+            "--runtime-home",
+            str(runtime),
+            "scheduler",
+            "status",
+        ]
+    )
+    assert code == 0
+    payload = json.loads(capsys.readouterr().out)
+    assert set(payload) == {"leases", "open_wake_batches", "mailbox"}
+
+
+def test_serve_semantic_state_is_profile_bound_and_external(
+    tmp_path: Path,
+) -> None:
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    external = tmp_path / "semantic.sqlite3"
+    external.touch()
+    resident = repo / "semantic.sqlite3"
+    resident.touch()
+
+    assert (
+        _semantic_state_for_profile(
+            repo,
+            RuntimeProfile.MANAGED_MANUAL,
+            str(external),
+        )
+        == external.resolve()
+    )
+    with pytest.raises(SystemExit, match="requires"):
+        _semantic_state_for_profile(repo, RuntimeProfile.MAILBOX_MANUAL, None)
+    with pytest.raises(SystemExit, match="forbids"):
+        _semantic_state_for_profile(repo, RuntimeProfile.OBSERVER, str(external))
+    with pytest.raises(SystemExit, match="existing regular file"):
+        _semantic_state_for_profile(
+            repo,
+            RuntimeProfile.SINGLE_WAKE,
+            str(tmp_path / "missing.sqlite3"),
+        )
+    with pytest.raises(SystemExit, match="must not live"):
+        _semantic_state_for_profile(
+            repo,
+            RuntimeProfile.MANAGED_MANUAL,
+            str(resident),
+        )

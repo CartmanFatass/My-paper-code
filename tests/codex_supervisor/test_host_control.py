@@ -59,8 +59,31 @@ def _response(request_id: str) -> HostControlResponse:
     )
 
 
+def _channel(
+    control_home: Path,
+    *,
+    profile: RuntimeProfile = RuntimeProfile.OBSERVER,
+    repo_root: Path | None = None,
+    semantic_state_path: Path | None = None,
+    **kwargs: object,
+) -> HostControlChannel:
+    base = control_home.parent if control_home.name == "control" else control_home
+    canonical_repo = repo_root or base / "repo"
+    canonical_repo.mkdir(parents=True, exist_ok=True)
+    if profile is not RuntimeProfile.OBSERVER and semantic_state_path is None:
+        semantic_state_path = base / "semantic.sqlite3"
+        semantic_state_path.touch(exist_ok=True)
+    return HostControlChannel(
+        control_home,
+        profile=profile,
+        repo_root=canonical_repo,
+        semantic_state_path=semantic_state_path,
+        **kwargs,
+    )
+
+
 def test_duplicate_request_returns_existing_response(tmp_path: Path) -> None:
-    channel = HostControlChannel(tmp_path)
+    channel = _channel(tmp_path)
     request = _request("req-1")
     channel.submit(request)
     channel.write_response(_response("req-1"))
@@ -70,7 +93,7 @@ def test_duplicate_request_returns_existing_response(tmp_path: Path) -> None:
 
 
 def test_duplicate_request_conflict_is_rejected(tmp_path: Path) -> None:
-    channel = HostControlChannel(tmp_path)
+    channel = _channel(tmp_path)
     channel.submit(_request("req-1"))
     conflict = _request("req-1", CommandKind.INSPECT, thread_id="thr-x")
     with pytest.raises(HostControlConflictError):
@@ -89,8 +112,56 @@ def test_observer_profile_rejects_managed_turn(tmp_path: Path) -> None:
         require_command_allowed(RuntimeProfile.OBSERVER, request.command)
 
 
+def test_channel_configuration_fail_closes_semantic_state_authority(
+    tmp_path: Path,
+) -> None:
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    external_state = tmp_path / "semantic.sqlite3"
+    external_state.touch()
+    resident_state = repo / "semantic.sqlite3"
+    resident_state.touch()
+
+    with pytest.raises(HostControlValidationError, match="requires"):
+        HostControlChannel(
+            tmp_path / "missing",
+            profile=RuntimeProfile.MANAGED_MANUAL,
+            repo_root=repo,
+        )
+    with pytest.raises(HostControlValidationError, match="existing regular file"):
+        HostControlChannel(
+            tmp_path / "missing-file",
+            profile=RuntimeProfile.MANAGED_MANUAL,
+            repo_root=repo,
+            semantic_state_path=tmp_path / "absent.sqlite3",
+        )
+    with pytest.raises(HostControlValidationError, match="external"):
+        HostControlChannel(
+            tmp_path / "resident",
+            profile=RuntimeProfile.MAILBOX_MANUAL,
+            repo_root=repo,
+            semantic_state_path=resident_state,
+        )
+    with pytest.raises(HostControlValidationError, match="forbids"):
+        HostControlChannel(
+            tmp_path / "observer-state",
+            profile=RuntimeProfile.OBSERVER,
+            repo_root=repo,
+            semantic_state_path=external_state,
+        )
+
+    channel = HostControlChannel(
+        tmp_path / "valid",
+        profile=RuntimeProfile.SINGLE_WAKE,
+        repo_root=repo,
+        semantic_state_path=external_state,
+    )
+    assert channel.repo_root == repo.resolve()
+    assert channel.semantic_state_path == external_state.resolve()
+
+
 def test_claim_is_atomic_and_retains_durable_request(tmp_path: Path) -> None:
-    channel = HostControlChannel(tmp_path)
+    channel = _channel(tmp_path)
     request = _request("req-claim")
     channel.submit(request)
     assert channel.claim_next() == request
@@ -99,7 +170,7 @@ def test_claim_is_atomic_and_retains_durable_request(tmp_path: Path) -> None:
 
 
 def test_malformed_and_stale_requests_move_to_rejected(tmp_path: Path) -> None:
-    channel = HostControlChannel(tmp_path, max_request_age_seconds=1)
+    channel = _channel(tmp_path, max_request_age_seconds=1)
     (channel.inbox / "malformed.json").write_text("{", encoding="utf-8")
     stale = replace(
         _request("stale"),
@@ -124,13 +195,16 @@ def test_stop_claim_priority_ignores_filename_order_and_leaves_later_mutation_un
     tmp_path: Path,
 ) -> None:
     async def body() -> None:
-        channel = HostControlChannel(tmp_path / "control", poll_interval_seconds=0.01)
+        channel = _channel(
+            tmp_path / "control",
+            profile=RuntimeProfile.MANAGED_MANUAL,
+            poll_interval_seconds=0.01,
+        )
         channel.submit(_request("z-stop", CommandKind.STOP))
         channel.submit(
             _request(
                 "a-later-mutation",
                 CommandKind.MANAGED_TURN,
-                semantic_state="unused",
                 snapshot={},
                 binding_id="binding-x",
                 text="must not run",
@@ -157,11 +231,10 @@ def test_stop_claim_priority_ignores_filename_order_and_leaves_later_mutation_un
 def test_stop_published_during_mutation_claim_preempts_and_requeues_mutation(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    channel = HostControlChannel(tmp_path / "control")
+    channel = _channel(tmp_path / "control", profile=RuntimeProfile.MANAGED_MANUAL)
     mutation = _request(
         "a-mutation",
         CommandKind.MANAGED_TURN,
-        semantic_state="unused",
         snapshot={},
         binding_id="binding-x",
         text="must remain unclaimed",
@@ -197,14 +270,14 @@ def test_invalid_stop_published_during_mutation_claim_does_not_fence(
     monkeypatch: pytest.MonkeyPatch,
     invalid_stop: str,
 ) -> None:
-    channel = HostControlChannel(
+    channel = _channel(
         tmp_path / "control",
+        profile=RuntimeProfile.MANAGED_MANUAL,
         max_request_age_seconds=1,
     )
     mutation = _request(
         "a-mutation",
         CommandKind.MANAGED_TURN,
-        semantic_state="unused",
         snapshot={},
         binding_id="binding-x",
         text="must be claimed",
@@ -253,7 +326,7 @@ def test_invalid_stop_published_during_mutation_claim_does_not_fence(
 
 def test_single_wake_is_typed_not_implemented_and_does_not_arm(tmp_path: Path) -> None:
     async def body() -> None:
-        channel = HostControlChannel(tmp_path / "control")
+        channel = _channel(tmp_path / "control", profile=RuntimeProfile.SINGLE_WAKE)
         store = ObserverStore(tmp_path / "runtime")
         service = SimpleNamespace(store=store, run_id="run-1", client=object(), transport=None, _stopped=False)
         response = await channel.dispatch(
@@ -269,8 +342,34 @@ def test_single_wake_is_typed_not_implemented_and_does_not_arm(tmp_path: Path) -
     asyncio.run(body())
 
 
+def test_status_distinguishes_host_and_app_server_child_processes(
+    tmp_path: Path,
+) -> None:
+    async def body() -> None:
+        channel = _channel(tmp_path / "control")
+        store = ObserverStore(tmp_path / "runtime")
+        service = SimpleNamespace(
+            store=store,
+            run_id="run-status",
+            transport=SimpleNamespace(process_id=8123),
+            _stopped=False,
+        )
+        response = await channel.dispatch(
+            _request("status"),
+            profile=RuntimeProfile.OBSERVER,
+            service=service,
+            stop_event=asyncio.Event(),
+        )
+        assert response.payload["host_process_id"] == host_control_module.os.getpid()
+        assert response.payload["app_server_child_process_id"] == 8123
+        assert "process_id" not in response.payload
+        store.close()
+
+    asyncio.run(body())
+
+
 def test_response_json_is_strict_and_atomic(tmp_path: Path) -> None:
-    channel = HostControlChannel(tmp_path)
+    channel = _channel(tmp_path)
     channel.submit(_request("response"))
     channel.write_response(_response("response"))
     payload = json.loads((channel.outbox / "response.json").read_text(encoding="utf-8"))
@@ -285,12 +384,11 @@ def test_response_json_is_strict_and_atomic(tmp_path: Path) -> None:
 
 
 def test_restart_does_not_resend_claimed_mutation(tmp_path: Path) -> None:
-    first = HostControlChannel(tmp_path / "control")
+    first = _channel(tmp_path / "control", profile=RuntimeProfile.MANAGED_MANUAL)
     first.submit(
         _request(
             "claimed-turn",
             CommandKind.MANAGED_TURN,
-            semantic_state="unused",
             snapshot={},
             binding_id="binding-x",
             text="must not resend",
@@ -299,7 +397,7 @@ def test_restart_does_not_resend_claimed_mutation(tmp_path: Path) -> None:
     assert first.claim_next() is not None
 
     async def body() -> None:
-        restarted = HostControlChannel(tmp_path / "control")
+        restarted = _channel(tmp_path / "control", profile=RuntimeProfile.MANAGED_MANUAL)
         store = ObserverStore(tmp_path / "runtime")
         service = SimpleNamespace(
             store=store,
@@ -348,7 +446,7 @@ def test_inspect_selectors_return_json_payloads(
     expected_type: type,
 ) -> None:
     async def body() -> None:
-        channel = HostControlChannel(tmp_path / "control")
+        channel = _channel(tmp_path / "control")
         store = ObserverStore(tmp_path / "runtime")
         service = SimpleNamespace(store=store, run_id="run-inspect", transport=None, _stopped=False)
         response = await channel.dispatch(
@@ -375,7 +473,11 @@ def test_managed_create_derives_snapshot_from_actor_id(
     monkeypatch.setattr(ManagedProvisioner, "create_fresh_thread", fake_create)
 
     async def body() -> None:
-        channel = HostControlChannel(tmp_path / "control")
+        channel = _channel(
+            tmp_path / "control",
+            profile=RuntimeProfile.MANAGED_MANUAL,
+            semantic_state_path=tmp_path / "semantic.sqlite3",
+        )
         service = SimpleNamespace(
             store=seeded["supervisor"],
             run_id="run-managed",
@@ -388,9 +490,7 @@ def test_managed_create_derives_snapshot_from_actor_id(
             _request(
                 "create-derived",
                 CommandKind.MANAGED_CREATE,
-                semantic_state=str(tmp_path / "semantic.sqlite3"),
                 actor_context_id=root.actor_context_id,
-                repo_root=str(tmp_path / "repo"),
                 confirm_global_memory_disabled=True,
             ),
             profile=RuntimeProfile.MANAGED_MANUAL,
@@ -414,7 +514,11 @@ def test_managed_contract_rejects_caller_snapshot_and_nonmanaged_actor(tmp_path:
     seeded = seed_managed_actors(tmp_path)
 
     async def body() -> None:
-        channel = HostControlChannel(tmp_path / "control")
+        channel = _channel(
+            tmp_path / "control",
+            profile=RuntimeProfile.MANAGED_MANUAL,
+            semantic_state_path=tmp_path / "semantic.sqlite3",
+        )
         service = SimpleNamespace(
             store=seeded["supervisor"], run_id="run", client=object(), transport=None, _stopped=False
         )
@@ -424,9 +528,7 @@ def test_managed_contract_rejects_caller_snapshot_and_nonmanaged_actor(tmp_path:
                 _request(
                     "caller-snapshot",
                     CommandKind.MANAGED_CREATE,
-                    semantic_state=str(tmp_path / "semantic.sqlite3"),
                     actor_context_id=root.actor_context_id,
-                    repo_root=str(tmp_path / "repo"),
                     confirm_global_memory_disabled=True,
                     snapshot={"capsule_text": "caller-controlled"},
                 ),
@@ -439,11 +541,50 @@ def test_managed_contract_rejects_caller_snapshot_and_nonmanaged_actor(tmp_path:
                 _request(
                     "em-create",
                     CommandKind.MANAGED_CREATE,
-                    semantic_state=str(tmp_path / "semantic.sqlite3"),
                     actor_context_id=seeded["em"].actor_context_id,
-                    repo_root=str(tmp_path / "repo"),
                     confirm_global_memory_disabled=True,
                 ),
+                profile=RuntimeProfile.MANAGED_MANUAL,
+                service=service,
+                stop_event=asyncio.Event(),
+            )
+
+    try:
+        asyncio.run(body())
+    finally:
+        seeded["bridge"].close()
+        seeded["supervisor"].close()
+        seeded["semantic"].close()
+
+
+@pytest.mark.parametrize("extra_field", ["semantic_state", "repo_root"])
+def test_managed_request_cannot_select_launch_authority(
+    tmp_path: Path,
+    extra_field: str,
+) -> None:
+    seeded = seed_managed_actors(tmp_path)
+
+    async def body() -> None:
+        channel = _channel(
+            tmp_path / "control",
+            profile=RuntimeProfile.MANAGED_MANUAL,
+            semantic_state_path=tmp_path / "semantic.sqlite3",
+        )
+        service = SimpleNamespace(
+            store=seeded["supervisor"],
+            run_id="run",
+            client=object(),
+            transport=None,
+            _stopped=False,
+        )
+        arguments: dict[str, object] = {
+            "actor_context_id": seeded["root"].actor_context_id,
+            "confirm_global_memory_disabled": True,
+            extra_field: str(tmp_path / "caller-selected"),
+        }
+        with pytest.raises(HostControlValidationError, match="extra"):
+            await channel.dispatch(
+                _request("caller-authority", CommandKind.MANAGED_CREATE, **arguments),
                 profile=RuntimeProfile.MANAGED_MANUAL,
                 service=service,
                 stop_event=asyncio.Event(),
@@ -471,7 +612,11 @@ def test_binding_commands_fail_closed_for_unknown_and_mismatched_binding(tmp_pat
     seeded["supervisor"].connection.commit()
 
     async def body() -> None:
-        channel = HostControlChannel(tmp_path / "control")
+        channel = _channel(
+            tmp_path / "control",
+            profile=RuntimeProfile.MAILBOX_MANUAL,
+            semantic_state_path=tmp_path / "semantic.sqlite3",
+        )
         service = SimpleNamespace(
             store=seeded["supervisor"], run_id="run", client=object(), transport=None, _stopped=False
         )
@@ -481,7 +626,6 @@ def test_binding_commands_fail_closed_for_unknown_and_mismatched_binding(tmp_pat
                     _request(
                         request_id,
                         CommandKind.MANAGED_SUSPEND,
-                        semantic_state=str(tmp_path / "semantic.sqlite3"),
                         binding_id=candidate,
                     ),
                     profile=RuntimeProfile.MAILBOX_MANUAL,
@@ -505,7 +649,11 @@ def test_root_to_portfolio_canary_contract_derives_bindings_and_is_acl_eligible(
     mailbox = seeded["mailbox"]
 
     async def body() -> None:
-        channel = HostControlChannel(tmp_path / "control")
+        channel = _channel(
+            tmp_path / "control",
+            profile=RuntimeProfile.MAILBOX_MANUAL,
+            semantic_state_path=tmp_path / "semantic.sqlite3",
+        )
         service = SimpleNamespace(
             store=seeded["supervisor"], run_id="run", client=object(), transport=None, _stopped=False
         )
@@ -513,7 +661,6 @@ def test_root_to_portfolio_canary_contract_derives_bindings_and_is_acl_eligible(
             _request(
                 "mail-derived",
                 CommandKind.MAILBOX_ENQUEUE,
-                semantic_state=str(tmp_path / "semantic.sqlite3"),
                 source_actor_context_id=seeded["root"].actor_context_id,
                 target_actor_context_id=seeded["portfolio"].actor_context_id,
                 message_kind="ROOT_TO_PORTFOLIO_REVIEW",
@@ -569,12 +716,16 @@ def test_restart_replay_fence_is_exact(
     expected_status: str,
 ) -> None:
     control_home = tmp_path / command.value.lower()
-    first = HostControlChannel(control_home)
+    first = _channel(control_home, profile=profile)
     first.submit(_request("recovered", command))
     assert first.claim_next() is not None
 
     async def body() -> None:
-        restarted = HostControlChannel(control_home, poll_interval_seconds=0.01)
+        restarted = _channel(
+            control_home,
+            profile=profile,
+            poll_interval_seconds=0.01,
+        )
         store = ObserverStore(tmp_path / f"runtime-{command.value.lower()}")
         service = SimpleNamespace(
             store=store, run_id="new-run", client=object(), transport=None, _stopped=False

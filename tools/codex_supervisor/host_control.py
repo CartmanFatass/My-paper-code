@@ -237,6 +237,50 @@ def _canonical_request(request: HostControlRequest) -> str:
     )
 
 
+def _require_existing_directory(path: Path, label: str) -> Path:
+    try:
+        resolved = Path(path).resolve(strict=True)
+    except (OSError, RuntimeError) as exc:
+        raise HostControlValidationError(f"{label} must be an existing directory") from exc
+    if not resolved.is_dir():
+        raise HostControlValidationError(f"{label} must be an existing directory")
+    return resolved
+
+
+def _require_profile_semantic_state(
+    profile: RuntimeProfile,
+    repo_root: Path,
+    semantic_state_path: Path | None,
+) -> Path | None:
+    if profile is RuntimeProfile.OBSERVER:
+        if semantic_state_path is not None:
+            raise HostControlValidationError(
+                "OBSERVER profile forbids a semantic state path"
+            )
+        return None
+    if semantic_state_path is None:
+        raise HostControlValidationError(
+            f"{profile.value} profile requires a launch-bound semantic state path"
+        )
+    try:
+        resolved = Path(semantic_state_path).resolve(strict=True)
+    except (OSError, RuntimeError) as exc:
+        raise HostControlValidationError(
+            "semantic state must be an existing regular file"
+        ) from exc
+    if not resolved.is_file():
+        raise HostControlValidationError(
+            "semantic state must be an existing regular file"
+        )
+    try:
+        resolved.relative_to(repo_root)
+    except ValueError:
+        return resolved
+    raise HostControlValidationError(
+        "semantic state must be external to the repository"
+    )
+
+
 class HostControlChannel:
     """Atomic request inbox, single-host claims, and durable responses."""
 
@@ -244,10 +288,22 @@ class HostControlChannel:
         self,
         control_home: Path,
         *,
+        profile: RuntimeProfile,
+        repo_root: Path,
+        semantic_state_path: Path | None = None,
         max_request_age_seconds: float = DEFAULT_MAX_REQUEST_AGE_SECONDS,
         future_skew_seconds: float = DEFAULT_FUTURE_SKEW_SECONDS,
         poll_interval_seconds: float = 0.05,
     ) -> None:
+        if not isinstance(profile, RuntimeProfile):
+            raise HostControlValidationError("profile must be a RuntimeProfile")
+        self.profile = profile
+        self.repo_root = _require_existing_directory(repo_root, "repo root")
+        self.semantic_state_path = _require_profile_semantic_state(
+            profile,
+            self.repo_root,
+            semantic_state_path,
+        )
         self.control_home = Path(control_home).resolve()
         self.inbox = self.control_home / "inbox"
         self.processing = self.control_home / "processing"
@@ -447,11 +503,20 @@ class HostControlChannel:
         service: object,
         stop_event: asyncio.Event,
     ) -> HostControlResponse:
+        if profile is not self.profile:
+            raise HostControlValidationError(
+                "dispatch profile does not match the immutable host channel profile"
+            )
         require_command_allowed(profile, request.command)
         if stop_event.is_set() and request.command in _MUTATING_COMMANDS:
             raise HostControlValidationError("host is stopping and accepts no new mutation")
         payload, status, error = await _dispatch_allowlisted(
-            request, profile=profile, service=service, stop_event=stop_event
+            request,
+            profile=profile,
+            service=service,
+            stop_event=stop_event,
+            repo_root=self.repo_root,
+            semantic_state_path=self.semantic_state_path,
         )
         return HostControlResponse(
             schema=CONTROL_RESPONSE_SCHEMA,
@@ -569,6 +634,8 @@ async def _dispatch_allowlisted(
     profile: RuntimeProfile,
     service: object,
     stop_event: asyncio.Event,
+    repo_root: Path,
+    semantic_state_path: Path | None,
 ) -> tuple[dict[str, object], str, str | None]:
     command = request.command
     arguments = request.arguments
@@ -607,10 +674,18 @@ async def _dispatch_allowlisted(
         CommandKind.MAILBOX_ENQUEUE,
         CommandKind.MAILBOX_DELIVER_ONCE,
     }:
-        semantic_state = Path(_require_arg_string(arguments, "semantic_state"))
         from .binding_store import BindingStore
         from .semantic_bridge import SemanticBridge
 
+        semantic_state = _require_profile_semantic_state(
+            profile,
+            repo_root,
+            semantic_state_path,
+        )
+        if semantic_state is None:  # defensive: mutating commands are never OBSERVER commands
+            raise HostControlValidationError(
+                "this host profile has no launch-bound semantic state"
+            )
         bridge = SemanticBridge(semantic_state, store)
         try:
             bindings = BindingStore(store, bridge)
@@ -623,7 +698,11 @@ async def _dispatch_allowlisted(
                 CommandKind.MANAGED_REVOKE,
             }:
                 return await _dispatch_managed(
-                    request, bindings=bindings, bridge=bridge, client=client
+                    request,
+                    bindings=bindings,
+                    bridge=bridge,
+                    client=client,
+                    repo_root=repo_root,
                 )
             return await _dispatch_mailbox_mutation(
                 request, bindings=bindings, bridge=bridge, client=client
@@ -644,7 +723,7 @@ async def _dispatch_allowlisted(
     raise HostControlValidationError(f"no dispatcher for command {command.value}")
 
 
-async def _dispatch_managed(request, *, bindings, bridge, client):
+async def _dispatch_managed(request, *, bindings, bridge, client, repo_root: Path):
     from .command_gateway import CommandGateway
     from .managed_models import ManagedIntentKind
     from .managed_runtime import ManagedRuntime
@@ -657,17 +736,15 @@ async def _dispatch_managed(request, *, bindings, bridge, client):
     provisioner = ManagedProvisioner(bindings, client)
 
     if command is CommandKind.MANAGED_CREATE:
-        common = frozenset({"semantic_state", "actor_context_id"})
-        _require_arguments(
-            args, common | {"repo_root", "confirm_global_memory_disabled"}
-        )
+        common = frozenset({"actor_context_id"})
+        _require_arguments(args, common | {"confirm_global_memory_disabled"})
         snapshot = _snapshot_for_actor(
             bridge, _require_arg_string(args, "actor_context_id")
         )
         _require_true(args, "confirm_global_memory_disabled")
         binding_id = provisioner.prepare(
             snapshot,
-            repo_root=Path(_require_arg_string(args, "repo_root")),
+            repo_root=repo_root,
             operator=request.operator,
         )
         provisioner.confirm_global_memory_disabled(binding_id, operator=request.operator)
@@ -675,12 +752,11 @@ async def _dispatch_managed(request, *, bindings, bridge, client):
         return {"binding_id": binding_id, "thread_id": thread_id}, "OK", None
 
     if command is CommandKind.MANAGED_ADOPT:
-        common = frozenset({"semantic_state", "actor_context_id"})
+        common = frozenset({"actor_context_id"})
         _require_arguments(
             args,
             common
             | {
-                "repo_root",
                 "thread_id",
                 "allow_existing_history",
                 "confirm_history_nonauthoritative",
@@ -696,7 +772,7 @@ async def _dispatch_managed(request, *, bindings, bridge, client):
         binding_id = await provisioner.adopt_existing_thread(
             snapshot,
             thread_id=_require_arg_string(args, "thread_id"),
-            repo_root=Path(_require_arg_string(args, "repo_root")),
+            repo_root=repo_root,
             operator=request.operator,
             allow_existing_history=True,
             confirm_history_nonauthoritative=True,
@@ -706,7 +782,7 @@ async def _dispatch_managed(request, *, bindings, bridge, client):
 
     binding_id = _require_arg_string(args, "binding_id")
     snapshot = _snapshot_for_binding(bindings, bridge, binding_id)
-    common = frozenset({"semantic_state", "binding_id"})
+    common = frozenset({"binding_id"})
 
     if command is CommandKind.MANAGED_VERIFY:
         _require_arguments(args, common, frozenset({"raw_message_seq"}))
@@ -761,7 +837,6 @@ async def _dispatch_mailbox_mutation(request, *, bindings, bridge, client):
     if request.command is CommandKind.MAILBOX_ENQUEUE:
         required = frozenset(
             {
-                "semantic_state",
                 "source_actor_context_id",
                 "target_actor_context_id",
                 "message_kind",
@@ -807,7 +882,7 @@ async def _dispatch_mailbox_mutation(request, *, bindings, bridge, client):
 
     _require_arguments(
         args,
-        frozenset({"semantic_state", "target_actor_context_id"}),
+        frozenset({"target_actor_context_id"}),
     )
     target = _snapshot_for_actor(
         bridge, _require_arg_string(args, "target_actor_context_id")
@@ -913,7 +988,10 @@ def _mechanical_status(service: object, profile: RuntimeProfile) -> dict[str, ob
     store = getattr(service, "store")
     return {
         "run_id": str(getattr(service, "run_id", "") or ""),
-        "process_id": getattr(getattr(service, "transport", None), "process_id", None),
+        "host_process_id": os.getpid(),
+        "app_server_child_process_id": getattr(
+            getattr(service, "transport", None), "process_id", None
+        ),
         "profile": profile.value,
         "stopped": bool(getattr(service, "_stopped", False)),
         "thread_count": _table_count(store, "thread_snapshots"),

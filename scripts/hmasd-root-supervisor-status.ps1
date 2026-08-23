@@ -38,6 +38,18 @@ function Test-FullyQualifiedPath([string]$Path) {
     } catch { return $false }
 }
 
+function Test-ExternalExistingFile([string]$Path, [string]$RepoRoot) {
+    try {
+        if (-not (Test-FullyQualifiedPath $Path)) { return $false }
+        if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) { return $false }
+        $resolved = (Resolve-Path -LiteralPath $Path -ErrorAction Stop).Path
+        $resolvedRoot = (Resolve-Path -LiteralPath $RepoRoot -ErrorAction Stop).Path
+        $rootKey = $resolvedRoot.TrimEnd('\', '/').ToLowerInvariant()
+        $pathKey = $resolved.TrimEnd('\', '/').ToLowerInvariant()
+        return -not ($pathKey -eq $rootKey -or $pathKey.StartsWith($rootKey + '\') -or $pathKey.StartsWith($rootKey + '/'))
+    } catch { return $false }
+}
+
 function Test-ExactFields([object]$Value, [string[]]$Expected) {
     if ($null -eq $Value) { return $false }
     $actual = @($Value.PSObject.Properties | ForEach-Object { $_.Name } | Sort-Object)
@@ -54,7 +66,7 @@ function Parse-StrictLaunchArgumentVector([object[]]$ArgumentVector) {
     try {
         if ($null -eq $ArgumentVector) { return $null }
         $values = @($ArgumentVector | ForEach-Object { [string]$_ })
-        if ($values.Count -notin @(13, 15, 17)) { return $null }
+        if ($values.Count -notin @(13, 15, 17, 19)) { return $null }
         if ($values[0] -cne '-m' -or $values[1] -cne 'tools.codex_supervisor' -or $values[2] -cne '--repo-root' -or $values[4] -cne '--runtime-home') { return $null }
         $index = 6
         $codexExecutable = $null
@@ -63,10 +75,27 @@ function Parse-StrictLaunchArgumentVector([object[]]$ArgumentVector) {
             $codexExecutable = $values[$index + 1]
             $index += 2
         }
-        if ($values[$index] -cne 'serve' -or $values[$index + 1] -cne '--profile' -or $values[$index + 3] -cne '--ready-file' -or $values[$index + 5] -cne '--control-home') { return $null }
-        if ([string]::IsNullOrWhiteSpace($values[3]) -or [string]::IsNullOrWhiteSpace($values[5]) -or [string]::IsNullOrWhiteSpace($values[$index + 2]) -or [string]::IsNullOrWhiteSpace($values[$index + 4]) -or [string]::IsNullOrWhiteSpace($values[$index + 6])) { return $null }
-        if ($values[$index + 2] -notin @('OBSERVER', 'MANAGED_MANUAL', 'MAILBOX_MANUAL', 'SINGLE_WAKE')) { return $null }
-        $next = $index + 7
+        if ($values[$index] -cne 'serve' -or $values[$index + 1] -cne '--profile') { return $null }
+        $profile = $values[$index + 2]
+        if ($profile -notin @('OBSERVER', 'MANAGED_MANUAL', 'MAILBOX_MANUAL', 'SINGLE_WAKE')) { return $null }
+        $next = $index + 3
+        $semanticState = $null
+        if ($next -lt $values.Count -and $values[$next] -ceq '--semantic-state') {
+            if ($next + 1 -ge $values.Count) { return $null }
+            $semanticState = $values[$next + 1]
+            $next += 2
+        }
+        if ($profile -eq 'OBSERVER') {
+            if ($null -ne $semanticState) { return $null }
+        } else {
+            if ($null -eq $semanticState -or -not (Test-ExternalExistingFile $semanticState $values[3])) { return $null }
+            $semanticState = (Resolve-Path -LiteralPath $semanticState -ErrorAction Stop).Path
+        }
+        if ($next + 3 -ge $values.Count -or $values[$next] -cne '--ready-file' -or $values[$next + 2] -cne '--control-home') { return $null }
+        if ([string]::IsNullOrWhiteSpace($values[3]) -or [string]::IsNullOrWhiteSpace($values[5]) -or [string]::IsNullOrWhiteSpace($values[$next + 1]) -or [string]::IsNullOrWhiteSpace($values[$next + 3])) { return $null }
+        $readyFile = $values[$next + 1]
+        $controlHome = $values[$next + 3]
+        $next += 4
         $durationPresent = $false
         $durationValue = $null
         if ($next -lt $values.Count) {
@@ -81,7 +110,7 @@ function Parse-StrictLaunchArgumentVector([object[]]$ArgumentVector) {
         if ($next -ne $values.Count) { return $null }
         return [pscustomobject]@{
             repo_root = $values[3]; runtime_home = $values[5]; codex_bin = $codexExecutable
-            profile = $values[$index + 2]; ready_file = $values[$index + 4]; control_home = $values[$index + 6]
+            profile = $profile; semantic_state = $semanticState; ready_file = $readyFile; control_home = $controlHome
             duration_present = $durationPresent; duration_seconds = $durationValue
         }
     } catch { return $null }

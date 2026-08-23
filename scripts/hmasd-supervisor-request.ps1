@@ -1,18 +1,11 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string]$Command,
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string]$ArgumentsJson,
-    [Parameter(Mandatory = $true)]
-    [ValidateNotNullOrEmpty()]
-    [string]$Operator,
+    [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$Command,
+    [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$ArgumentsJson,
+    [Parameter(Mandatory = $true)][ValidateNotNullOrEmpty()][string]$Operator,
     [string]$RuntimeHome,
     [string]$PythonExecutable = 'C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe',
-    [ValidateRange(1, 86400)]
-    [int]$TimeoutSeconds = 30
+    [ValidateRange(1, 86400)][int]$TimeoutSeconds = 30
 )
 
 $ErrorActionPreference = 'Stop'
@@ -32,143 +25,153 @@ function Test-ExactFields([object]$Value, [string[]]$Expected) {
     return (($actual -join "`n") -eq ($wanted -join "`n"))
 }
 
-function Test-ExactReadyHost([string]$RuntimePath) {
-    $processPath = Join-Path $RuntimePath 'supervisor-process.json'
-    if (-not (Test-Path -LiteralPath $processPath -PathType Leaf)) { return $false }
+function Test-SamePath([string]$Left, [string]$Right) {
+    if ([string]::IsNullOrWhiteSpace($Left) -or [string]::IsNullOrWhiteSpace($Right)) { return $false }
+    try { return ([System.IO.Path]::GetFullPath($Left).TrimEnd('\', '/').ToLowerInvariant() -eq [System.IO.Path]::GetFullPath($Right).TrimEnd('\', '/').ToLowerInvariant()) } catch { return $false }
+}
+
+function Test-FullyQualifiedPath([string]$Path) {
+    if ([string]::IsNullOrWhiteSpace($Path)) { return $false }
     try {
-        $record = Get-Content -Raw -LiteralPath $processPath | ConvertFrom-Json -ErrorAction Stop
-        if (-not (Test-ExactFields $record @('schema', 'pid', 'process_start_time_utc', 'executable', 'repo_root', 'runtime_home', 'profile', 'started_at', 'ready_file'))) { return $false }
-        if ($record.schema -ne 'HMASD_SUPERVISOR_PROCESS_V1' -or [int]$record.pid -le 0) { return $false }
-        if ([System.IO.Path]::GetFullPath([string]$record.runtime_home).TrimEnd('\', '/').ToLowerInvariant() -ne $RuntimePath.TrimEnd('\', '/').ToLowerInvariant()) { return $false }
-        $process = Get-Process -Id ([int]$record.pid) -ErrorAction Stop
-        $actualStart = $process.StartTime.ToUniversalTime().ToString('o')
-        $actualExecutable = [System.IO.Path]::GetFullPath([string]$process.Path).TrimEnd('\', '/').ToLowerInvariant()
-        if ($actualStart -ne [string]$record.process_start_time_utc -or $actualExecutable -ne ([string]$record.executable).TrimEnd('\', '/').ToLowerInvariant()) { return $false }
-        $readyPath = [System.IO.Path]::GetFullPath([string]$record.ready_file)
-        if (-not (Test-Path -LiteralPath $readyPath -PathType Leaf)) { return $false }
-        $ready = Get-Content -Raw -LiteralPath $readyPath | ConvertFrom-Json -ErrorAction Stop
-        if (-not (Test-ExactFields $ready @('schema', 'run_id', 'process_id', 'initialized_at', 'watcher_active', 'first_reconciliation_completed', 'thread_count', 'runtime_home', 'profile'))) { return $false }
-        if ($ready.schema -ne 'HMASD_SUPERVISOR_READY_V2' -or [int]$ready.process_id -ne [int]$record.pid) { return $false }
-        if ([string]::IsNullOrWhiteSpace([string]$ready.run_id) -or [string]::IsNullOrWhiteSpace([string]$ready.initialized_at)) { return $false }
-        if ($ready.watcher_active -ne $true -or $ready.first_reconciliation_completed -ne $true -or [int]$ready.thread_count -lt 0) { return $false }
-        if ([System.IO.Path]::GetFullPath([string]$ready.runtime_home).TrimEnd('\', '/').ToLowerInvariant() -ne $RuntimePath.TrimEnd('\', '/').ToLowerInvariant()) { return $false }
-        return ([string]$ready.profile -eq [string]$record.profile)
+        if ($Path -notmatch '^(?:[A-Za-z]:[\\/]|[\\/]{2}[^\\/]+[\\/][^\\/]+(?:[\\/]|$))') { return $false }
+        [void][System.IO.Path]::GetFullPath($Path)
+        return $true
     } catch { return $false }
 }
 
-function Test-ActiveObserverRun([string]$RuntimePath, [string]$RunId, [string]$Interpreter) {
-    $database = Join-Path $RuntimePath 'state.sqlite3'
-    if (-not (Test-Path -LiteralPath $database -PathType Leaf)) { return $false }
-    $snippet = 'import sqlite3,sys; row=sqlite3.connect(sys.argv[1]).execute(\"SELECT initialized_at, ended_at FROM observer_runs WHERE run_id = ?\",(sys.argv[2],)).fetchone(); raise SystemExit(0 if row and row[0] is not None and row[1] is None else 1)'
-    $previousPreference = $ErrorActionPreference
+function Test-ExternalPath([string]$Path, [string]$RepoRoot) {
+    if (-not (Test-FullyQualifiedPath $Path)) { return $false }
     try {
-        $ErrorActionPreference = 'Continue'
-        & $Interpreter -c $snippet $database $RunId
-        $queryExitCode = $LASTEXITCODE
-    } finally {
-        $ErrorActionPreference = $previousPreference
-    }
-    return ($queryExitCode -eq 0)
+        $pathKey = [System.IO.Path]::GetFullPath($Path).TrimEnd('\', '/').ToLowerInvariant()
+        $rootKey = [System.IO.Path]::GetFullPath($RepoRoot).TrimEnd('\', '/').ToLowerInvariant()
+        return -not ($pathKey -eq $rootKey -or $pathKey.StartsWith($rootKey + '\') -or $pathKey.StartsWith($rootKey + '/'))
+    } catch { return $false }
 }
 
-function Get-ValidatedControlHome([string]$RuntimePath, [object]$Record) {
-    $evidencePath = Join-Path $RuntimePath 'supervisor-launch-evidence.json'
-    if (-not (Test-Path -LiteralPath $evidencePath -PathType Leaf)) { return $null }
+function Test-ExternalExistingFile([string]$Path, [string]$RepoRoot) {
+    if (-not (Test-ExternalPath $Path $RepoRoot)) { return $false }
+    try { return (Test-Path -LiteralPath $Path -PathType Leaf) } catch { return $false }
+}
+
+function Parse-StrictLaunchArgumentVector([object[]]$ArgumentVector) {
     try {
-        $evidence = Get-Content -Raw -LiteralPath $evidencePath | ConvertFrom-Json -ErrorAction Stop
-        if (-not (Test-ExactFields $evidence @('schema', 'observed_at', 'argument_vector', 'control_home', 'ready_file'))) { return $null }
-        if ($evidence.schema -ne 'HMASD_SUPERVISOR_LAUNCH_EVIDENCE_V2' -or -not ($evidence.argument_vector -is [System.Array])) { return $null }
-        if ([string]::IsNullOrWhiteSpace([string]$evidence.observed_at) -or [string]::IsNullOrWhiteSpace([string]$evidence.control_home) -or [string]::IsNullOrWhiteSpace([string]$evidence.ready_file)) { return $null }
-        $controlPath = [System.IO.Path]::GetFullPath([string]$evidence.control_home)
-        $repoRoot = [System.IO.Path]::GetFullPath([string]$Record.repo_root)
-        $readyPath = [System.IO.Path]::GetFullPath([string]$evidence.ready_file)
-        if ($readyPath.TrimEnd('\', '/').ToLowerInvariant() -ne ([System.IO.Path]::GetFullPath([string]$Record.ready_file)).TrimEnd('\', '/').ToLowerInvariant()) { return $null }
-        $repoKey = $repoRoot.TrimEnd('\', '/').ToLowerInvariant()
-        $controlKey = $controlPath.TrimEnd('\', '/').ToLowerInvariant()
-        if ($controlKey -eq $repoKey -or $controlKey.StartsWith($repoKey + '\') -or $controlKey.StartsWith($repoKey + '/')) { return $null }
-        return $controlPath
+        if ($null -eq $ArgumentVector) { return $null }
+        $values = @($ArgumentVector | ForEach-Object { [string]$_ })
+        if ($values.Count -notin @(13, 15, 17, 19)) { return $null }
+        if ($values[0] -cne '-m' -or $values[1] -cne 'tools.codex_supervisor' -or $values[2] -cne '--repo-root' -or $values[4] -cne '--runtime-home') { return $null }
+        $index = 6
+        if ($values[$index] -ceq '--codex-bin') {
+            if ($index + 1 -ge $values.Count -or -not (Test-FullyQualifiedPath $values[$index + 1])) { return $null }
+            $index += 2
+        }
+        if ($index + 2 -ge $values.Count -or $values[$index] -cne 'serve' -or $values[$index + 1] -cne '--profile') { return $null }
+        $profile = $values[$index + 2]
+        if ($profile -notin @('OBSERVER', 'MANAGED_MANUAL', 'MAILBOX_MANUAL', 'SINGLE_WAKE')) { return $null }
+        $next = $index + 3; $semanticState = $null
+        if ($next -lt $values.Count -and $values[$next] -ceq '--semantic-state') {
+            if ($next + 1 -ge $values.Count) { return $null }
+            $semanticState = $values[$next + 1]; $next += 2
+        }
+        if ($profile -eq 'OBSERVER') {
+            if ($null -ne $semanticState) { return $null }
+        } elseif ($null -eq $semanticState -or -not (Test-ExternalExistingFile $semanticState $values[3])) { return $null }
+        if ($next + 3 -ge $values.Count -or $values[$next] -cne '--ready-file' -or $values[$next + 2] -cne '--control-home') { return $null }
+        if ([string]::IsNullOrWhiteSpace($values[3]) -or [string]::IsNullOrWhiteSpace($values[5]) -or [string]::IsNullOrWhiteSpace($values[$next + 1]) -or [string]::IsNullOrWhiteSpace($values[$next + 3])) { return $null }
+        $readyFile = $values[$next + 1]; $controlHome = $values[$next + 3]; $next += 4
+        if ($next -lt $values.Count) {
+            if ($next + 2 -ne $values.Count -or $values[$next] -cne '--duration-seconds') { return $null }
+            $duration = [double]0
+            if (-not [double]::TryParse($values[$next + 1], [System.Globalization.NumberStyles]::Float, [System.Globalization.CultureInfo]::InvariantCulture, [ref]$duration) -or [double]::IsNaN($duration) -or [double]::IsInfinity($duration) -or $duration -le 0) { return $null }
+            $next += 2
+        }
+        if ($next -ne $values.Count) { return $null }
+        return [pscustomobject]@{ repo_root = $values[3]; runtime_home = $values[5]; profile = $profile; semantic_state = $semanticState; ready_file = $readyFile; control_home = $controlHome }
     } catch { return $null }
 }
 
-function Write-AtomicRequest([string]$Destination, [string]$Json) {
-    $directory = Split-Path -Parent $Destination
-    New-Item -ItemType Directory -Force -Path $directory | Out-Null
-    $temporary = Join-Path $directory ('.{0}.{1}.tmp' -f (Split-Path -Leaf $Destination), [guid]::NewGuid().ToString('N'))
+function Get-ReadyStatus([string]$RecordedRepoRoot, [string]$RuntimePath, [string]$Interpreter) {
+    $statusScript = Join-Path $PSScriptRoot 'hmasd-root-supervisor-status.ps1'
     try {
-        [System.IO.File]::WriteAllText($temporary, $Json + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false)))
-        [System.IO.File]::Move($temporary, $Destination)
-    } finally {
-        if (Test-Path -LiteralPath $temporary) { Remove-Item -LiteralPath $temporary -Force }
-    }
+        $raw = & $statusScript -RepoRoot $RecordedRepoRoot -RuntimeHome $RuntimePath -PythonPath $Interpreter 2>$null
+        if ($LASTEXITCODE -ne 0 -or -not $raw) { return $null }
+        $status = (($raw -join "`n") | ConvertFrom-Json -ErrorAction Stop)
+        if (-not (Test-ExactFields $status @('schema', 'state', 'observed_at', 'process', 'ready', 'doctor', 'incident'))) { return $null }
+        if ($status.schema -ne 'HMASD_SUPERVISOR_STATUS_V2' -or $status.state -ne 'READY' -or $null -eq $status.process -or $null -eq $status.ready) { return $null }
+        return $status
+    } catch { return $null }
+}
+
+function Get-ValidatedControlHome([string]$RuntimePath, [object]$Status, [object]$Record) {
+    try {
+        $fields = @('schema', 'pid', 'process_start_time_utc', 'executable', 'repo_root', 'runtime_home', 'profile', 'started_at', 'ready_file')
+        if (-not (Test-ExactFields $Record $fields) -or -not (Test-ExactFields $Status.process $fields)) { return $null }
+        foreach ($name in $fields) {
+            $statusValue = [string]$Status.process.$name; $recordValue = [string]$Record.$name
+            if ($name -in @('executable', 'repo_root', 'runtime_home', 'ready_file')) {
+                if (-not (Test-SamePath $statusValue $recordValue)) { return $null }
+            } elseif ($statusValue -cne $recordValue) { return $null }
+        }
+        if (-not (Test-SamePath ([string]$Record.runtime_home) $RuntimePath)) { return $null }
+        $evidence = Get-Content -Raw -LiteralPath (Join-Path $RuntimePath 'supervisor-launch-evidence.json') | ConvertFrom-Json -ErrorAction Stop
+        if (-not (Test-ExactFields $evidence @('schema', 'observed_at', 'argument_vector', 'control_home', 'ready_file'))) { return $null }
+        if ($evidence.schema -ne 'HMASD_SUPERVISOR_LAUNCH_EVIDENCE_V2' -or -not ($evidence.argument_vector -is [System.Array])) { return $null }
+        $launch = Parse-StrictLaunchArgumentVector @($evidence.argument_vector)
+        if ($null -eq $launch) { return $null }
+        if (-not (Test-SamePath ([string]$launch.repo_root) ([string]$Record.repo_root)) -or -not (Test-SamePath ([string]$launch.runtime_home) $RuntimePath) -or [string]$launch.profile -cne [string]$Record.profile) { return $null }
+        if (-not (Test-SamePath ([string]$launch.ready_file) ([string]$Record.ready_file)) -or -not (Test-SamePath ([string]$evidence.ready_file) ([string]$launch.ready_file))) { return $null }
+        if (-not (Test-SamePath ([string]$launch.control_home) ([string]$evidence.control_home)) -or -not (Test-ExternalPath ([string]$launch.control_home) ([string]$Record.repo_root))) { return $null }
+        return [System.IO.Path]::GetFullPath([string]$launch.control_home)
+    } catch { return $null }
+}
+
+function Invoke-ValidationSnippet([string]$RepoRoot, [string]$Interpreter, [string]$Snippet, [string[]]$Arguments) {
+    $oldPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = 'Continue'; Push-Location -LiteralPath $RepoRoot
+        & $Interpreter -c $Snippet @Arguments 2>$null
+        return ($LASTEXITCODE -eq 0)
+    } catch { return $false }
+    finally { if ((Get-Location).Path -eq $RepoRoot) { Pop-Location }; $ErrorActionPreference = $oldPreference }
+}
+
+function Test-CommandAllowed([string]$RepoRoot, [string]$Interpreter, [string]$Profile, [string]$Kind) {
+    return (Invoke-ValidationSnippet $RepoRoot $Interpreter 'import sys; from tools.codex_supervisor.runtime_profiles import CommandKind, RuntimeProfile, require_command_allowed; require_command_allowed(RuntimeProfile(sys.argv[1]), CommandKind(sys.argv[2]))' @($Profile, $Kind))
+}
+
+function Test-ValidatedResponse([string]$RepoRoot, [string]$Interpreter, [string]$ResponsePath, [string]$RequestId) {
+    return (Invoke-ValidationSnippet $RepoRoot $Interpreter 'import json,sys; from pathlib import Path; from tools.codex_supervisor.host_control import parse_response; value=json.loads(Path(sys.argv[1]).read_bytes().decode()); response=parse_response(value); raise SystemExit(0 if response.request_id == sys.argv[2] else 1)' @($ResponsePath, $RequestId))
+}
+
+function Write-AtomicRequest([string]$Destination, [string]$Json) {
+    $directory = Split-Path -Parent $Destination; New-Item -ItemType Directory -Force -Path $directory | Out-Null
+    $temporary = Join-Path $directory ('.{0}.{1}.tmp' -f (Split-Path -Leaf $Destination), [guid]::NewGuid().ToString('N'))
+    try { [System.IO.File]::WriteAllText($temporary, $Json + [Environment]::NewLine, (New-Object System.Text.UTF8Encoding($false))); [System.IO.File]::Move($temporary, $Destination) }
+    finally { if (Test-Path -LiteralPath $temporary) { Remove-Item -LiteralPath $temporary -Force } }
 }
 
 try {
     $arguments = $ArgumentsJson | ConvertFrom-Json -ErrorAction Stop
     if ($null -eq $arguments -or -not ($arguments -is [pscustomobject])) { throw 'ArgumentsJson must be one JSON object' }
-    $RuntimeHome = Resolve-RuntimeHome $RuntimeHome
-    # No inbox directory is created until a ready record and the exact live process identity agree.
-    if (-not (Test-ExactReadyHost $RuntimeHome)) {
-        Write-Output 'HMASD_SUPERVISOR_HOST_REQUIRED_V1'
-        exit 1
-    }
-    $processRecord = Get-Content -Raw -LiteralPath (Join-Path $RuntimeHome 'supervisor-process.json') | ConvertFrom-Json -ErrorAction Stop
-    $readyRecord = Get-Content -Raw -LiteralPath ([System.IO.Path]::GetFullPath([string]$processRecord.ready_file)) | ConvertFrom-Json -ErrorAction Stop
-    if (-not (Test-ActiveObserverRun $RuntimeHome ([string]$readyRecord.run_id) $PythonExecutable)) {
-        Write-Output 'HMASD_SUPERVISOR_HOST_REQUIRED_V1'
-        exit 1
-    }
-    $control = Get-ValidatedControlHome $RuntimeHome $processRecord
-    if ($null -eq $control) {
-        Write-Output 'HMASD_SUPERVISOR_HOST_REQUIRED_V1'
-        exit 1
-    }
+    $RuntimeHome = Resolve-RuntimeHome $RuntimeHome; $processPath = Join-Path $RuntimeHome 'supervisor-process.json'
+    if (-not (Test-Path -LiteralPath $processPath -PathType Leaf)) { Write-Output 'HMASD_SUPERVISOR_HOST_REQUIRED_V1'; exit 1 }
+    $processRecord = Get-Content -Raw -LiteralPath $processPath | ConvertFrom-Json -ErrorAction Stop
+    $recordedRepoRoot = [System.IO.Path]::GetFullPath([string]$processRecord.repo_root)
+    $status = Get-ReadyStatus $recordedRepoRoot $RuntimeHome $PythonExecutable
+    if ($null -eq $status) { Write-Output 'HMASD_SUPERVISOR_HOST_REQUIRED_V1'; exit 1 }
+    $control = Get-ValidatedControlHome $RuntimeHome $status $processRecord
+    if ($null -eq $control -or -not (Test-CommandAllowed $recordedRepoRoot $PythonExecutable ([string]$processRecord.profile) $Command)) { Write-Output 'HMASD_SUPERVISOR_HOST_REQUIRED_V1'; exit 1 }
     $requestId = [guid]::NewGuid().ToString()
-    $request = [ordered]@{
-        schema = 'HMASD_SUPERVISOR_CONTROL_REQUEST_V1'
-        request_id = $requestId
-        # Python's datetime parser accepts ISO-8601 microseconds (six digits),
-        # while .NET's round-trip format emits seven fractional digits.
-        created_at = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.ffffffK')
-        operator = $Operator
-        command = $Command
-        arguments = $arguments
-    }
+    $request = [ordered]@{ schema = 'HMASD_SUPERVISOR_CONTROL_REQUEST_V1'; request_id = $requestId; created_at = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.ffffffK'); operator = $Operator; command = $Command; arguments = $arguments }
     $requestJson = $request | ConvertTo-Json -Depth 32 -Compress
-    $requestPath = Join-Path (Join-Path $control 'inbox') ($requestId + '.json')
-    Write-AtomicRequest $requestPath $requestJson
-    $responsePath = Join-Path (Join-Path $control 'outbox') ($requestId + '.json')
-    $deadline = [datetime]::UtcNow.AddSeconds($TimeoutSeconds)
+    $requestPath = Join-Path (Join-Path $control 'inbox') ($requestId + '.json'); Write-AtomicRequest $requestPath $requestJson
+    $responsePath = Join-Path (Join-Path $control 'outbox') ($requestId + '.json'); $deadline = [datetime]::UtcNow.AddSeconds($TimeoutSeconds)
     while ([datetime]::UtcNow -lt $deadline) {
         if (Test-Path -LiteralPath $responsePath -PathType Leaf) {
-            $rawResponse = Get-Content -Raw -LiteralPath $responsePath
-            $response = $rawResponse | ConvertFrom-Json -ErrorAction Stop
-            if (-not (Test-ExactFields $response @('schema', 'request_id', 'status', 'payload', 'error', 'completed_at'))) { throw 'control response fields are invalid' }
-            if ($response.schema -ne 'HMASD_SUPERVISOR_CONTROL_RESPONSE_V1') { throw 'control response schema is invalid' }
-            if ($response.request_id -ne $requestId) { throw 'control response request_id does not match the submitted request' }
-            if (@('OK', 'ERROR', 'REJECTED', 'NOT_IMPLEMENTED', 'SUBMISSION_UNCERTAIN') -notcontains [string]$response.status) { throw 'control response status is invalid' }
-            # In particular, SUBMISSION_UNCERTAIN is emitted verbatim; this wrapper never replaces its request ID.
-            Write-Output $rawResponse.TrimEnd("`r", "`n")
-            exit 0
+            if (-not (Test-ValidatedResponse $recordedRepoRoot $PythonExecutable $responsePath $requestId)) { throw 'control response violates the HostControlResponse contract' }
+            Write-Output ((Get-Content -Raw -LiteralPath $responsePath).TrimEnd("`r", "`n")); exit 0
         }
         Start-Sleep -Milliseconds 100
     }
-    # The request is already durable and may have crossed the host mutation
-    # boundary.  Report uncertainty under the original ID and never resubmit.
-    $timeoutResponse = [ordered]@{
-        schema = 'HMASD_SUPERVISOR_CONTROL_RESPONSE_V1'
-        request_id = $requestId
-        status = 'SUBMISSION_UNCERTAIN'
-        payload = [ordered]@{
-            local_response_timeout = $true
-            durable_request_written = $true
-            timeout_seconds = $TimeoutSeconds
-        }
-        error = 'local response timeout after durable request write; inspect the durable request and host state; do not retry this request'
-        completed_at = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.ffffffK')
-    }
-    Write-Output ($timeoutResponse | ConvertTo-Json -Depth 32 -Compress)
-    exit 0
-} catch {
-    Write-Error $_.Exception.Message
-    exit 1
-}
+    $timeoutResponse = [ordered]@{ schema = 'HMASD_SUPERVISOR_CONTROL_RESPONSE_V1'; request_id = $requestId; status = 'SUBMISSION_UNCERTAIN'; payload = [ordered]@{ local_response_timeout = $true; durable_request_written = $true; timeout_seconds = $TimeoutSeconds }; error = 'local response timeout after durable request write; inspect the durable request and host state; do not retry this request'; completed_at = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.ffffffK') }
+    Write-Output ($timeoutResponse | ConvertTo-Json -Depth 32 -Compress); exit 0
+} catch { Write-Error $_.Exception.Message; exit 1 }
