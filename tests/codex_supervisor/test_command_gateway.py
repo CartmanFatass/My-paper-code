@@ -1,12 +1,19 @@
 import json
+import sqlite3
+from contextlib import contextmanager
 from pathlib import Path
 
 import pytest
 
+import tools.codex_supervisor.managed_packet_send as managed_packet_send_module
+import tools.codex_supervisor.semantic_bridge as semantic_bridge_module
+
 from tests.codex_supervisor.helpers import ingest_recorded_command, record_completed_agent_item
+from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors, seed_reanchor
 from tools.codex_supervisor.binding_store import BindingStore
 from tools.codex_supervisor.command_gateway import CommandGateway, CommandGatewayError
+from tools.codex_supervisor.managed_packet_send import ManagedPacketSender
 from tools.codex_supervisor.managed_models import HistoryTrust, ThreadOrigin
 
 
@@ -25,6 +32,16 @@ def _ready_binding(tmp_path: Path):
     store.attach_thread_for_tests(binding_id, "thr_cmd")
     store.mark_verification_required(binding_id)
     return seeded, store, CommandGateway(store, seeded["bridge"])
+
+
+def _assert_semantic_writer_blocked(path: Path) -> None:
+    writer = sqlite3.connect(path, timeout=0.0, isolation_level=None)
+    try:
+        writer.execute("PRAGMA busy_timeout = 0")
+        with pytest.raises(sqlite3.OperationalError, match="locked"):
+            writer.execute("BEGIN IMMEDIATE")
+    finally:
+        writer.close()
 
 
 def test_no_control_action_and_duplicate(tmp_path: Path) -> None:
@@ -96,6 +113,435 @@ def test_reanchor_and_stale_and_unbound_thread(tmp_path: Path) -> None:
     seeded["supervisor"].connection.commit()
     with pytest.raises(CommandGatewayError):
         gateway.ingest_final_item(raw_message_seq=seq)
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+@pytest.mark.parametrize(
+    "action,inner",
+    [
+        ("MAILBOX_ACK", {"message_ids": ["msg_missing"]}),
+        ("MAILBOX_INTAKE", {"items": [{"message_id": "msg_missing", "intake_kind": "READ"}]}),
+        ("MANAGED_PACKET_SEND", {"packet_kind": "X", "target_alias": "root", "payload_ref": "ref", "marker": "marker-stale"}),
+        ("CONTEXT_REANCHOR_ACK", {}),
+    ],
+)
+def test_stale_currentness_rejects_every_mutating_action_before_effect(
+    tmp_path: Path, action: str, inner: dict
+) -> None:
+    seeded, _store, gateway = _ready_binding(tmp_path)
+    snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+    payload = {
+        "schema_version": "1.0",
+        "packet_kind": "MANAGED_ACTOR_COMMAND",
+        "action_kind": action,
+        "expected": {
+            "checkpoint_id": "ctx_stale" if action == "CONTEXT_REANCHOR_ACK" else snapshot.checkpoint_id,
+            "state_version": snapshot.state_version + 1,
+            "epoch_id": snapshot.epoch_id,
+            "epoch_revision": snapshot.epoch_revision,
+        },
+        "payload": inner,
+    }
+    text = "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n" + json.dumps(payload) + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
+    with pytest.raises(CommandGatewayError, match="currentness"):
+        ingest_recorded_command(
+            gateway, seeded["supervisor"], thread_id="thr_cmd",
+            turn_id=f"turn_{action}", text=text, item_id=f"item_{action}"
+        )
+    assert seeded["supervisor"].connection.execute(
+        "SELECT COUNT(*) FROM managed_command_receipts"
+    ).fetchone()[0] == 0
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_gateway_holds_semantic_writer_guard_through_reanchor_effect(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    seeded, _store, gateway = _ready_binding(tmp_path)
+    checkpoint = seed_reanchor(seeded["semantic"], seeded["root"].actor_context_id)
+    payload = {
+        "schema_version": "1.0",
+        "packet_kind": "MANAGED_ACTOR_COMMAND",
+        "action_kind": "CONTEXT_REANCHOR_ACK",
+        "expected": {
+            "checkpoint_id": checkpoint["checkpoint_id"],
+            "state_version": int(checkpoint["state_version"]),
+            "epoch_id": checkpoint.get("epoch_id"),
+            "epoch_revision": checkpoint.get("epoch_revision"),
+        },
+        "payload": {},
+    }
+    original = semantic_bridge_module.context_reanchor_ack
+    observed = {"blocked_at_effect": False}
+
+    def checked_reanchor(*args, **kwargs):
+        _assert_semantic_writer_blocked(seeded["bridge"].semantic_state_path)
+        observed["blocked_at_effect"] = True
+        return original(*args, **kwargs)
+
+    monkeypatch.setattr(
+        semantic_bridge_module,
+        "context_reanchor_ack",
+        checked_reanchor,
+    )
+    text = (
+        "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n"
+        + json.dumps(payload)
+        + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
+    )
+    applied = ingest_recorded_command(
+        gateway,
+        seeded["supervisor"],
+        thread_id="thr_cmd",
+        turn_id="turn_guarded_ack",
+        text=text,
+        item_id="item_guarded_ack",
+    )
+    assert applied["validation_state"] == "APPLIED"
+    assert observed["blocked_at_effect"] is True
+    writer = sqlite3.connect(
+        seeded["bridge"].semantic_state_path,
+        timeout=0.0,
+        isolation_level=None,
+    )
+    try:
+        writer.execute("BEGIN IMMEDIATE")
+        writer.rollback()
+    finally:
+        writer.close()
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_gateway_records_reanchor_receipt_only_after_semantic_commit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    seeded, _store, gateway = _ready_binding(tmp_path)
+    checkpoint = seed_reanchor(seeded["semantic"], seeded["root"].actor_context_id)
+    payload = {
+        "schema_version": "1.0",
+        "packet_kind": "MANAGED_ACTOR_COMMAND",
+        "action_kind": "CONTEXT_REANCHOR_ACK",
+        "expected": {
+            "checkpoint_id": checkpoint["checkpoint_id"],
+            "state_version": int(checkpoint["state_version"]),
+            "epoch_id": checkpoint.get("epoch_id"),
+            "epoch_revision": checkpoint.get("epoch_revision"),
+        },
+        "payload": {},
+    }
+    original_record = seeded["supervisor"].record_command_receipt
+    observed = {"durable_before_receipt": False}
+
+    def checked_record(**kwargs):
+        if kwargs["effect_kind"] == "CONTEXT_REANCHOR_ACK":
+            reader = sqlite3.connect(seeded["bridge"].semantic_state_path)
+            try:
+                ack_id = str(kwargs["result"]["ack_id"])
+                assert reader.execute(
+                    "SELECT 1 FROM reanchor_acks WHERE ack_id = ?", (ack_id,)
+                ).fetchone() is not None
+                assert reader.execute(
+                    "SELECT state FROM obligations WHERE subject = ?",
+                    (checkpoint["checkpoint_id"],),
+                ).fetchone()[0] == "RESOLVED"
+                observed["durable_before_receipt"] = True
+            finally:
+                reader.close()
+        return original_record(**kwargs)
+
+    monkeypatch.setattr(seeded["supervisor"], "record_command_receipt", checked_record)
+    text = (
+        "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n"
+        + json.dumps(payload)
+        + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
+    )
+    result = ingest_recorded_command(
+        gateway,
+        seeded["supervisor"],
+        thread_id="thr_cmd",
+        turn_id="turn_post_commit_receipt",
+        text=text,
+        item_id="item_post_commit_receipt",
+    )
+    assert result["validation_state"] == "APPLIED"
+    assert observed["durable_before_receipt"] is True
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_gateway_reanchor_crash_rollback_has_no_receipt_and_cannot_recover_applied(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    seeded, _store, gateway = _ready_binding(tmp_path)
+    checkpoint = seed_reanchor(seeded["semantic"], seeded["root"].actor_context_id)
+    expected = {
+        "checkpoint_id": checkpoint["checkpoint_id"],
+        "state_version": int(checkpoint["state_version"]),
+        "epoch_id": checkpoint.get("epoch_id"),
+        "epoch_revision": checkpoint.get("epoch_revision"),
+    }
+    payload = {
+        "schema_version": "1.0",
+        "packet_kind": "MANAGED_ACTOR_COMMAND",
+        "action_kind": "CONTEXT_REANCHOR_ACK",
+        "expected": expected,
+        "payload": {},
+    }
+
+    @contextmanager
+    def rollback_guard(actor_context_id: str, **kwargs):
+        connection = seeded["bridge"].semantic.connection
+        with seeded["bridge"].semantic._lock:
+            connection.execute("BEGIN IMMEDIATE")
+            try:
+                snapshot = seeded["bridge"]._snapshot_unlocked(actor_context_id)
+                assert (
+                    snapshot.checkpoint_id,
+                    snapshot.state_version,
+                    snapshot.epoch_id,
+                    snapshot.epoch_revision,
+                ) == (
+                    kwargs["checkpoint_id"],
+                    kwargs["state_version"],
+                    kwargs["epoch_id"],
+                    kwargs["epoch_revision"],
+                )
+                yield snapshot
+                connection.rollback()
+                raise RuntimeError("crash-equivalent before semantic commit")
+            except Exception:
+                if connection.in_transaction:
+                    connection.rollback()
+                raise
+
+    monkeypatch.setattr(seeded["bridge"], "currentness_guard", rollback_guard)
+    text = (
+        "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n"
+        + json.dumps(payload)
+        + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
+    )
+    seq = record_completed_agent_item(
+        seeded["supervisor"],
+        thread_id="thr_cmd",
+        turn_id="turn_crash_rollback",
+        text=text,
+        item_id="item_crash_rollback",
+    )
+    with pytest.raises(RuntimeError, match="crash-equivalent"):
+        gateway.ingest_final_item(raw_message_seq=seq)
+    row = seeded["supervisor"].connection.execute(
+        "SELECT command_id, validation_state FROM managed_actor_commands WHERE raw_message_seq = ?",
+        (seq,),
+    ).fetchone()
+    assert str(row["validation_state"]) == "VALIDATED"
+    assert seeded["supervisor"].get_command_receipt(str(row["command_id"])) is None
+    assert seeded["bridge"].semantic.connection.execute(
+        "SELECT 1 FROM reanchor_acks WHERE actor_turn_id = 'turn_crash_rollback'"
+    ).fetchone() is None
+    assert seeded["bridge"].semantic.connection.execute(
+        "SELECT state FROM obligations WHERE subject = ?",
+        (checkpoint["checkpoint_id"],),
+    ).fetchone()[0] == "OPEN"
+    with pytest.raises(CommandGatewayError, match="receipt is missing"):
+        gateway.ingest_final_item(raw_message_seq=seq)
+    assert seeded["supervisor"].connection.execute(
+        "SELECT validation_state FROM managed_actor_commands WHERE command_id = ?",
+        (row["command_id"],),
+    ).fetchone()[0] == "INCIDENT"
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_gateway_recovers_committed_reanchor_when_supervisor_receipt_was_not_written(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    seeded, _store, gateway = _ready_binding(tmp_path)
+    checkpoint = seed_reanchor(seeded["semantic"], seeded["root"].actor_context_id)
+    payload = {
+        "schema_version": "1.0",
+        "packet_kind": "MANAGED_ACTOR_COMMAND",
+        "action_kind": "CONTEXT_REANCHOR_ACK",
+        "expected": {
+            "checkpoint_id": checkpoint["checkpoint_id"],
+            "state_version": int(checkpoint["state_version"]),
+            "epoch_id": checkpoint.get("epoch_id"),
+            "epoch_revision": checkpoint.get("epoch_revision"),
+        },
+        "payload": {},
+    }
+    text = (
+        "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n"
+        + json.dumps(payload)
+        + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
+    )
+    seq = record_completed_agent_item(
+        seeded["supervisor"],
+        thread_id="thr_cmd",
+        turn_id="turn_committed_orphan",
+        text=text,
+        item_id="item_committed_orphan",
+    )
+    original_record = seeded["supervisor"].record_command_receipt
+
+    def fail_receipt(**kwargs):
+        raise RuntimeError("forced receipt crash gap")
+
+    monkeypatch.setattr(seeded["supervisor"], "record_command_receipt", fail_receipt)
+    with pytest.raises(RuntimeError, match="forced receipt crash gap"):
+        gateway.ingest_final_item(raw_message_seq=seq)
+    row = seeded["supervisor"].connection.execute(
+        "SELECT command_id, validation_state FROM managed_actor_commands WHERE raw_message_seq = ?",
+        (seq,),
+    ).fetchone()
+    assert str(row["validation_state"]) == "VALIDATED"
+    assert seeded["supervisor"].get_command_receipt(str(row["command_id"])) is None
+    assert seeded["bridge"].semantic.connection.execute(
+        "SELECT COUNT(*) FROM reanchor_acks WHERE actor_turn_id = 'turn_committed_orphan'"
+    ).fetchone()[0] == 1
+
+    monkeypatch.setattr(seeded["supervisor"], "record_command_receipt", original_record)
+    recovered = gateway.ingest_final_item(raw_message_seq=seq)
+    assert recovered["validation_state"] == "APPLIED"
+    assert recovered["reconciled"] is True
+    assert seeded["supervisor"].get_command_receipt(str(row["command_id"])) is not None
+    assert seeded["bridge"].semantic.connection.execute(
+        "SELECT COUNT(*) FROM reanchor_acks WHERE actor_turn_id = 'turn_committed_orphan'"
+    ).fetchone()[0] == 1
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_recovery_rejects_orphan_reanchor_receipt_without_semantic_effect(
+    tmp_path: Path,
+) -> None:
+    seeded, _store, gateway = _ready_binding(tmp_path)
+    checkpoint = seed_reanchor(seeded["semantic"], seeded["root"].actor_context_id)
+    payload = {
+        "schema_version": "1.0",
+        "packet_kind": "MANAGED_ACTOR_COMMAND",
+        "action_kind": "CONTEXT_REANCHOR_ACK",
+        "expected": {
+            "checkpoint_id": checkpoint["checkpoint_id"],
+            "state_version": int(checkpoint["state_version"]),
+            "epoch_id": checkpoint.get("epoch_id"),
+            "epoch_revision": checkpoint.get("epoch_revision"),
+        },
+        "payload": {},
+    }
+    text = (
+        "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n"
+        + json.dumps(payload)
+        + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
+    )
+    first = ingest_recorded_command(
+        gateway,
+        seeded["supervisor"],
+        thread_id="thr_cmd",
+        turn_id="turn_orphan_receipt",
+        text=text,
+        item_id="item_orphan_receipt",
+    )
+    from tests.codex_supervisor.helpers import rewind_command_validation
+
+    rewind_command_validation(
+        seeded["supervisor"].connection, str(first["command_id"]), "VALIDATED"
+    )
+    semantic = seeded["bridge"].semantic.connection
+    semantic.execute(
+        "DELETE FROM reanchor_acks WHERE actor_turn_id = 'turn_orphan_receipt'"
+    )
+    semantic.execute(
+        "UPDATE obligations SET state = 'OPEN', resolved_at = NULL WHERE subject = ?",
+        (checkpoint["checkpoint_id"],),
+    )
+    semantic.commit()
+    raw_seq = seeded["supervisor"].connection.execute(
+        "SELECT raw_message_seq FROM managed_actor_commands WHERE command_id = ?",
+        (first["command_id"],),
+    ).fetchone()[0]
+    with pytest.raises(CommandGatewayError, match="no durable semantic effect"):
+        gateway.ingest_final_item(raw_message_seq=int(raw_seq))
+    assert seeded["supervisor"].connection.execute(
+        "SELECT validation_state FROM managed_actor_commands WHERE command_id = ?",
+        (first["command_id"],),
+    ).fetchone()[0] == "INCIDENT"
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()
+
+
+def test_gateway_packet_write_joins_guard_without_premature_commit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    seeded = seed_active_root_portfolio(tmp_path)
+    payload_path = tmp_path / "guarded-packet.md"
+    payload_path.write_text("guarded packet", encoding="utf-8")
+    sender = ManagedPacketSender(seeded["bindings"], seeded["bridge"], tmp_path)
+    gateway = CommandGateway(
+        seeded["bindings"],
+        seeded["bridge"],
+        seeded["mailbox"],
+        sender,
+    )
+    snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+    body = {
+        "schema_version": "1.0",
+        "packet_kind": "MANAGED_ACTOR_COMMAND",
+        "action_kind": "MANAGED_PACKET_SEND",
+        "expected": {
+            "checkpoint_id": snapshot.checkpoint_id,
+            "state_version": snapshot.state_version,
+            "epoch_id": snapshot.epoch_id,
+            "epoch_revision": snapshot.epoch_revision,
+        },
+        "payload": {
+            "packet_kind": "ROOT_TO_PORTFOLIO_REVIEW",
+            "target_alias": "PORTFOLIO",
+            "payload_ref": payload_path.name,
+            "marker": "guarded-packet-marker",
+            "direction_id": None,
+        },
+    }
+    original = managed_packet_send_module.packet_register
+    observed = {"joined": False}
+
+    def checked_packet_register(*args, **kwargs):
+        _assert_semantic_writer_blocked(seeded["bridge"].semantic_state_path)
+        result = original(*args, **kwargs)
+        assert seeded["bridge"].semantic.connection.in_transaction
+        _assert_semantic_writer_blocked(seeded["bridge"].semantic_state_path)
+        observed["joined"] = True
+        return result
+
+    monkeypatch.setattr(
+        managed_packet_send_module,
+        "packet_register",
+        checked_packet_register,
+    )
+    text = (
+        "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n"
+        + json.dumps(body)
+        + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
+    )
+    applied = ingest_recorded_command(
+        gateway,
+        seeded["supervisor"],
+        thread_id="thr_root",
+        turn_id="turn_guarded_packet",
+        text=text,
+        item_id="item_guarded_packet",
+    )
+    assert applied["validation_state"] == "APPLIED"
+    assert observed["joined"] is True
     seeded["bridge"].close()
     seeded["supervisor"].close()
     seeded["semantic"].close()

@@ -3,11 +3,13 @@ from __future__ import annotations
 import shutil
 import sqlite3
 import struct
+import threading
 from pathlib import Path
 
 import pytest
 
 import tools.codex_semantic_mvp.db as semantic_db
+import tools.codex_semantic_mvp.store as semantic_store
 from tools.codex_semantic_mvp.db import (
     SCHEMA_VERSION,
     SemanticDatabaseValidationError,
@@ -53,6 +55,27 @@ def _copy_live_wal_triplet(tmp_path: Path, name: str = "copy") -> Path:
     return target
 
 
+def _copy_live_wal_without_shm(tmp_path: Path, name: str = "wal-only") -> Path:
+    source = tmp_path / f"{name}-source" / "semantic.sqlite3"
+    source.parent.mkdir(exist_ok=True)
+    store = SemanticStore(source).initialize()
+    target = tmp_path / name / "semantic.sqlite3"
+    target.parent.mkdir(exist_ok=True)
+    try:
+        store.connection.execute(
+            """INSERT INTO hook_guards
+            (guard_key, event_name, count, created_at, updated_at)
+            VALUES ('wal-only-committed', 'fixture', 7, 'created', 'updated')"""
+        )
+        store.connection.commit()
+        shutil.copyfile(source, target)
+        shutil.copyfile(Path(f"{source}-wal"), Path(f"{target}-wal"))
+    finally:
+        store.close()
+    assert not Path(f"{target}-shm").exists()
+    return target
+
+
 def _shm_max_frame(path: Path) -> int:
     header = Path(f"{path}-shm").read_bytes()[:48]
     for prefix in ("<", ">"):
@@ -79,17 +102,20 @@ def _copy_restart_reused_wal_triplet(tmp_path: Path, name: str = "restart-copy")
     try:
         connection = store.connection
         connection.execute("PRAGMA wal_autocheckpoint = 0")
-        connection.execute("CREATE TABLE wal_restart_fixture(value BLOB NOT NULL)")
         for value in range(16):
             connection.execute(
-                "INSERT INTO wal_restart_fixture(value) VALUES (?)",
-                (bytes([value]) * 3072,),
+                """INSERT INTO hook_guards
+                (guard_key, event_name, count, created_at, updated_at)
+                VALUES (?, 'fixture', 1, ?, ?)""",
+                (f"fixture-{value}-" + ("x" * 3072), str(value), str(value)),
             )
             connection.commit()
         checkpoint = connection.execute("PRAGMA wal_checkpoint(RESTART)").fetchone()
         assert tuple(checkpoint) == (0, checkpoint[1], checkpoint[1])
         connection.execute(
-            "INSERT INTO wal_restart_fixture(value) VALUES (?)", (b"current",)
+            """INSERT INTO hook_guards
+            (guard_key, event_name, count, created_at, updated_at)
+            VALUES ('fixture-current', 'fixture', 1, 'current', 'current')"""
         )
         connection.commit()
         for suffix in ("", "-wal", "-shm"):
@@ -210,6 +236,63 @@ def test_valid_initialized_schema_v3_database_passes_existing_open(
         store.close()
 
 
+@pytest.mark.parametrize("mutation", ["extra_column", "altered_type", "constraint", "trigger", "object"])
+def test_noncanonical_schema_manifest_fails_closed_without_mutation(
+    tmp_path: Path, mutation: str
+) -> None:
+    path = tmp_path / "semantic.sqlite3"
+    _initialize(path)
+    connection = sqlite3.connect(path)
+    if mutation == "extra_column":
+        connection.execute("ALTER TABLE hook_guards ADD COLUMN surprise TEXT")
+    elif mutation in {"altered_type", "constraint"}:
+        operation = "INTEGER NOT NULL" if mutation == "altered_type" else "TEXT NOT NULL CHECK(length(operation) > 0)"
+        connection.execute("ALTER TABLE user_authority_grants RENAME TO old_grants")
+        connection.execute(
+            f"""CREATE TABLE user_authority_grants (
+            grant_id TEXT PRIMARY KEY, actor_context_id TEXT NOT NULL,
+            operation {operation}, created_at TEXT NOT NULL, consumed_at TEXT
+            )"""
+        )
+        connection.execute("DROP TABLE old_grants")
+    elif mutation == "trigger":
+        connection.execute(
+            "CREATE TRIGGER surprise_trigger AFTER INSERT ON hook_guards BEGIN SELECT 1; END"
+        )
+    else:
+        connection.execute("CREATE TABLE surprise_object(value TEXT)")
+    connection.commit()
+    connection.close()
+    before = _directory_snapshot(path)
+
+    with pytest.raises(SemanticDatabaseValidationError, match="schema manifest"):
+        validate_existing_database(path)
+    assert _directory_snapshot(path) == before
+
+
+def test_open_existing_rejects_same_bytes_path_replacement_between_probe_and_open(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = tmp_path / "semantic.sqlite3"
+    _initialize(path)
+    replacement_dir = tmp_path / "replacement"
+    replacement_dir.mkdir()
+    replacement = replacement_dir / "semantic.sqlite3"
+    replacement.write_bytes(path.read_bytes())
+    replacement_bytes = replacement.read_bytes()
+    original = semantic_store.connect_existing
+
+    def replace_then_open(token):
+        replacement.replace(path)
+        return original(token)
+
+    monkeypatch.setattr(semantic_store, "connect_existing", replace_then_open)
+    with pytest.raises(SemanticDatabaseValidationError, match="input changed after validation"):
+        SemanticStore.open_existing(path)
+    assert path.read_bytes() == replacement_bytes
+    assert list(replacement_dir.iterdir()) == []
+
+
 def test_copied_live_wal_triplet_passes_without_source_file_mutation(
     tmp_path: Path,
 ) -> None:
@@ -219,6 +302,249 @@ def test_copied_live_wal_triplet_passes_without_source_file_mutation(
     assert validate_existing_database(path) == path.resolve()
 
     assert _directory_snapshot(path) == before
+
+
+def test_wal_without_shm_validates_without_source_mutation_and_opens_with_data(
+    tmp_path: Path,
+) -> None:
+    path = _copy_live_wal_without_shm(tmp_path)
+    before = _directory_snapshot(path)
+
+    assert validate_existing_database(path) == path.resolve()
+    assert _directory_snapshot(path) == before
+
+    store = SemanticStore.open_existing(path)
+    try:
+        row = store.connection.execute(
+            "SELECT count FROM hook_guards WHERE guard_key = 'wal-only-committed'"
+        ).fetchone()
+        assert row is not None and int(row[0]) == 7
+        assert Path(f"{path}-shm").is_file()
+    finally:
+        store.close()
+
+
+def test_wal_without_shm_acquires_writer_fence_before_shm_or_full_sync(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The only sidecar-creating operation is fenced before it can run."""
+
+    path = _copy_live_wal_without_shm(tmp_path, "wal-only-ordering")
+    shm_path = Path(f"{path}-shm")
+    events: list[str] = []
+    original_connect = semantic_db.sqlite3.connect
+    original_transfer = semantic_db.LiveExistingDatabaseBinding.transfer_to
+    transfer_completed = False
+
+    class RecordingConnection:
+        def __init__(self, connection: sqlite3.Connection) -> None:
+            self._connection = connection
+
+        @property
+        def in_transaction(self) -> bool:
+            return self._connection.in_transaction
+
+        def execute(self, statement, *args, **kwargs):
+            normalized = " ".join(str(statement).upper().split())
+            if normalized == "BEGIN IMMEDIATE":
+                assert not shm_path.exists()
+                events.append("begin")
+            elif normalized == "PRAGMA SYNCHRONOUS = FULL":
+                assert transfer_completed is True
+                assert not self._connection.in_transaction
+                events.append("synchronous")
+            return self._connection.execute(statement, *args, **kwargs)
+
+        def __getattr__(self, name: str):
+            return getattr(self._connection, name)
+
+    live_uri = f"{path.resolve().as_uri()}?mode=rw"
+
+    def instrumented_connect(database, *args, **kwargs):
+        connection = original_connect(database, *args, **kwargs)
+        if str(database) == live_uri:
+            return RecordingConnection(connection)
+        return connection
+
+    def instrumented_transfer(binding, owner):
+        nonlocal transfer_completed
+        assert events == ["begin"]
+        result = original_transfer(binding, owner)
+        transfer_completed = True
+        events.append("transfer")
+        return result
+
+    monkeypatch.setattr(semantic_db.sqlite3, "connect", instrumented_connect)
+    monkeypatch.setattr(
+        semantic_db.LiveExistingDatabaseBinding,
+        "transfer_to",
+        instrumented_transfer,
+    )
+
+    store = SemanticStore.open_existing(path)
+    try:
+        assert events == ["begin", "transfer", "synchronous"]
+        assert shm_path.is_file()
+        assert store.connection.execute("PRAGMA synchronous").fetchone()[0] == 2
+    finally:
+        store.close()
+
+
+def test_wal_without_shm_drift_between_validation_and_live_bind_is_rejected(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = _copy_live_wal_without_shm(tmp_path, "wal-only-drift")
+    wal_path = Path(f"{path}-wal")
+    original = semantic_store.connect_existing
+
+    def drift_then_open(token):
+        wal = bytearray(wal_path.read_bytes())
+        wal[-1] ^= 0x01
+        wal_path.write_bytes(wal)
+        return original(token)
+
+    monkeypatch.setattr(semantic_store, "connect_existing", drift_then_open)
+    with pytest.raises(
+        SemanticDatabaseValidationError,
+        match="input changed after validation",
+    ):
+        SemanticStore.open_existing(path)
+    assert not Path(f"{path}-shm").exists()
+
+
+def test_main_only_token_rejects_wal_committed_during_live_connect(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    path = tmp_path / "main-only" / "semantic.sqlite3"
+    path.parent.mkdir()
+    _initialize(path)
+    wal_path = Path(f"{path}-wal")
+    shm_path = Path(f"{path}-shm")
+    assert not wal_path.exists()
+    assert not shm_path.exists()
+    before_main = path.read_bytes()
+    before_names = {item.name for item in path.parent.iterdir()}
+    original_connect = semantic_db.sqlite3.connect
+    live_uri = f"{path.resolve().as_uri()}?mode=rw"
+    writers: list[sqlite3.Connection] = []
+
+    def connect_with_interleaving(database, *args, **kwargs):
+        if str(database) == live_uri and not writers:
+            writer = original_connect(path, isolation_level=None)
+            writer.execute("PRAGMA wal_autocheckpoint = 0")
+            writer.execute(
+                """INSERT INTO hook_guards
+                (guard_key, event_name, count, created_at, updated_at)
+                VALUES ('connect-race', 'fixture', 91, 'created', 'updated')"""
+            )
+            writers.append(writer)
+            assert wal_path.is_file()
+            assert shm_path.is_file()
+        return original_connect(database, *args, **kwargs)
+
+    monkeypatch.setattr(semantic_db.sqlite3, "connect", connect_with_interleaving)
+    try:
+        with pytest.raises(
+            SemanticDatabaseValidationError,
+            match="sibling set changed after validation",
+        ):
+            SemanticStore.open_existing(path)
+        assert path.read_bytes() == before_main
+        assert {item.name for item in path.parent.iterdir()} == before_names | {
+            wal_path.name,
+            shm_path.name,
+        }
+        assert writers[0].execute(
+            "SELECT count FROM hook_guards WHERE guard_key = 'connect-race'"
+        ).fetchone()[0] == 91
+    finally:
+        for writer in writers:
+            writer.close()
+
+
+@pytest.mark.parametrize("source_kind", ["main_only", "existing_wal"])
+def test_live_bind_writer_fence_blocks_final_check_to_transfer_writer(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    source_kind: str,
+) -> None:
+    if source_kind == "main_only":
+        path = tmp_path / "fenced-main" / "semantic.sqlite3"
+        path.parent.mkdir()
+        _initialize(path)
+    else:
+        path = _copy_live_wal_triplet(tmp_path, "fenced-wal")
+
+    original = semantic_db._validate_live_binding_under_fence
+    original_transfer = semantic_db.LiveExistingDatabaseBinding.transfer_to
+    writer_started = threading.Event()
+    writer_acquired = threading.Event()
+    writer_finished = threading.Event()
+    writer_errors: list[BaseException] = []
+    threads: list[threading.Thread] = []
+    observed = {"absent_while_fenced": False, "blocked_at_transfer": False}
+
+    def writer() -> None:
+        connection = sqlite3.connect(path, timeout=5.0, isolation_level=None)
+        try:
+            connection.execute("PRAGMA busy_timeout = 5000")
+            writer_started.set()
+            connection.execute("BEGIN IMMEDIATE")
+            writer_acquired.set()
+            connection.execute(
+                """INSERT INTO hook_guards
+                (guard_key, event_name, count, created_at, updated_at)
+                VALUES ('post-validation-writer', 'fixture', 1, 'created', 'updated')"""
+            )
+            connection.commit()
+        except BaseException as exc:  # pragma: no cover - asserted in parent thread
+            writer_errors.append(exc)
+        finally:
+            connection.close()
+            writer_finished.set()
+
+    def validate_then_contend(connection, token) -> None:
+        original(connection, token)
+        thread = threading.Thread(target=writer, daemon=True)
+        threads.append(thread)
+        thread.start()
+        assert writer_started.wait(2.0)
+        assert not writer_acquired.wait(0.15)
+        observed["absent_while_fenced"] = connection.execute(
+            "SELECT 1 FROM hook_guards WHERE guard_key = 'post-validation-writer'"
+        ).fetchone() is None
+
+    monkeypatch.setattr(
+        semantic_db,
+        "_validate_live_binding_under_fence",
+        validate_then_contend,
+    )
+
+    def checked_transfer(binding, owner):
+        assert not writer_acquired.is_set()
+        observed["blocked_at_transfer"] = True
+        return original_transfer(binding, owner)
+
+    monkeypatch.setattr(
+        semantic_db.LiveExistingDatabaseBinding,
+        "transfer_to",
+        checked_transfer,
+    )
+    store = SemanticStore.open_existing(path)
+    try:
+        assert observed["absent_while_fenced"] is True
+        assert observed["blocked_at_transfer"] is True
+        assert writer_acquired.wait(2.0)
+        assert writer_finished.wait(2.0)
+        assert writer_errors == []
+        assert store.connection.execute(
+            "SELECT count FROM hook_guards WHERE guard_key = 'post-validation-writer'"
+        ).fetchone()[0] == 1
+    finally:
+        store.close()
+        for thread in threads:
+            thread.join(timeout=2.0)
+            assert not thread.is_alive()
 
 
 def test_restart_reused_wal_ignores_aligned_stale_physical_tail(

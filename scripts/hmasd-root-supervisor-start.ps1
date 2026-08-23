@@ -103,6 +103,19 @@ function Resolve-CanonicalExecutable([string]$Executable, [string]$Label) {
     return (Resolve-Path -LiteralPath $Executable -ErrorAction Stop).Path
 }
 
+function Get-StartupReadyTimeout([string]$Root, [string]$RuntimePath, [string]$Interpreter) {
+    Push-Location -LiteralPath $Root
+    try {
+        $raw = & $Interpreter -c 'import sys; from pathlib import Path; from tools.codex_supervisor.config import load_observer_config; root=Path(sys.argv[1]).resolve(); print(load_observer_config(root, root.parent / ".hmasd-supervisor-config-probe").startup_ready_timeout_seconds)' $Root 2>$null
+        if ($LASTEXITCODE -ne 0 -or -not $raw) { throw 'observer startup timeout configuration is invalid' }
+        $value = [double]0
+        if (-not [double]::TryParse([string]($raw | Select-Object -Last 1), [Globalization.NumberStyles]::Float, [Globalization.CultureInfo]::InvariantCulture, [ref]$value) -or [double]::IsNaN($value) -or [double]::IsInfinity($value) -or $value -le 0) {
+            throw 'observer startup timeout configuration is invalid'
+        }
+        return $value
+    } finally { Pop-Location }
+}
+
 function Test-SafeCmdBatchPath([string]$CanonicalBatchPath) {
     if ([string]::IsNullOrWhiteSpace($CanonicalBatchPath)) { return $false }
     if ($CanonicalBatchPath.IndexOfAny([char[]]"`r`n`"%!") -ge 0) { return $false }
@@ -325,14 +338,15 @@ function Test-ProcessRecordIdentity([object]$Record) {
     return $identity
 }
 
-function Test-LaunchEvidenceBinding([string]$EvidencePath, [string[]]$ExpectedVector, [string]$ReadyPath, [string]$ControlPath) {
+function Test-LaunchEvidenceBinding([string]$EvidencePath, [string[]]$ExpectedVector, [string]$ReadyPath, [string]$ControlPath, [double]$ExpectedReadyTimeout) {
     try {
         if (-not (Test-Path -LiteralPath $EvidencePath -PathType Leaf)) { return $false }
         $evidence = Get-Content -Raw -LiteralPath $EvidencePath | ConvertFrom-Json -ErrorAction Stop
-        if (-not (Test-ExactFields $evidence @('schema', 'observed_at', 'argument_vector', 'control_home', 'ready_file'))) { return $false }
+        if (-not (Test-ExactFields $evidence @('schema', 'observed_at', 'argument_vector', 'control_home', 'ready_file', 'startup_ready_timeout_seconds'))) { return $false }
         if ($evidence.schema -ne 'HMASD_SUPERVISOR_LAUNCH_EVIDENCE_V2' -or -not ($evidence.argument_vector -is [System.Array])) { return $false }
         if (-not (Test-SamePath ([string]$evidence.control_home) $ControlPath)) { return $false }
         if (-not (Test-SamePath ([string]$evidence.ready_file) $ReadyPath)) { return $false }
+        if ([double]$evidence.startup_ready_timeout_seconds -ne $ExpectedReadyTimeout) { return $false }
         return (Test-ExactArgumentVector @($evidence.argument_vector) $ExpectedVector)
     } catch { return $false }
 }
@@ -402,7 +416,8 @@ function Test-ExistingInvocation(
     [string]$ReadyPath,
     [string]$ControlPath,
     [string]$RequestedPythonPath,
-    [string[]]$ExpectedVector
+    [string[]]$ExpectedVector,
+    [double]$ExpectedReadyTimeout
 ) {
     if (-not (Test-ExactFields $Record @('schema', 'pid', 'process_start_time_utc', 'executable', 'repo_root', 'runtime_home', 'profile', 'started_at', 'ready_file'))) { return $false }
     if ([string]$Record.schema -cne 'HMASD_SUPERVISOR_PROCESS_V1') { return $false }
@@ -412,7 +427,7 @@ function Test-ExistingInvocation(
     if (-not (Test-SamePath ([string]$Record.ready_file) $ReadyPath)) { return $false }
     if (-not (Test-SamePath ([string]$Record.executable) $RequestedPythonPath)) { return $false }
     $evidencePath = Join-Path $RuntimePath 'supervisor-launch-evidence.json'
-    return (Test-LaunchEvidenceBinding $evidencePath $ExpectedVector $ReadyPath $ControlPath)
+    return (Test-LaunchEvidenceBinding $evidencePath $ExpectedVector $ReadyPath $ControlPath $ExpectedReadyTimeout)
 }
 
 function Archive-SignalFile([string]$RuntimePath, [string]$Path, [string]$Label) {
@@ -589,6 +604,7 @@ try {
     $RepoRoot = $paths.RepoRoot
     $RuntimeHome = $paths.RuntimeHome
     $PythonPath = Resolve-CanonicalExecutable $PythonPath 'PythonPath'
+    $startupReadyTimeoutSeconds = Get-StartupReadyTimeout $RepoRoot $RuntimeHome $PythonPath
     $codexWasBound = $PSBoundParameters.ContainsKey('CodexBin')
     if ($codexWasBound) { $CodexBin = Resolve-CanonicalExecutable $CodexBin 'CodexBin' }
     if ([string]::IsNullOrWhiteSpace($ReadyFile)) { $ReadyFile = Join-Path $RuntimeHome 'ready.json' }
@@ -617,7 +633,7 @@ try {
         try {
             $existing = Get-Content -Raw -LiteralPath $processPath | ConvertFrom-Json -ErrorAction Stop
             $existingIdentity = Test-ProcessRecordIdentity $existing
-            $matchesInvocation = Test-ExistingInvocation $existing $RepoRoot $RuntimeHome $Profile $ReadyFile $ControlHome $PythonPath $arguments
+            $matchesInvocation = Test-ExistingInvocation $existing $RepoRoot $RuntimeHome $Profile $ReadyFile $ControlHome $PythonPath $arguments $startupReadyTimeoutSeconds
             $existingReady = Test-ReadyAndActiveRun $processPath ([string]$existing.ready_file) $RuntimeHome $RepoRoot
             if ($existingIdentity -and $matchesInvocation -and (Test-SupervisorHostProcessBinding $existing $PythonPath $arguments) -and (Test-ReadyProcessTruth $existingReady $existing $CodexBin $codexWasBound)) {
                 Write-Output 'HMASD_SUPERVISOR_READY_V2'
@@ -649,6 +665,7 @@ try {
     Write-AtomicJson (Join-Path $RuntimeHome 'supervisor-launch-evidence.json') ([ordered]@{
         schema = 'HMASD_SUPERVISOR_LAUNCH_EVIDENCE_V2'; observed_at = [datetime]::UtcNow.ToString('o'); argument_vector = @($arguments)
         control_home = $ControlHome; ready_file = $ReadyFile
+        startup_ready_timeout_seconds = $startupReadyTimeoutSeconds
     })
     $record = [ordered]@{
         schema = 'HMASD_SUPERVISOR_PROCESS_V1'; pid = $launchedIdentity.Pid; process_start_time_utc = $launchedIdentity.StartTimeUtc
@@ -661,7 +678,7 @@ try {
         pid = $launchedIdentity.Pid; process_start_time_utc = $launchedIdentity.StartTimeUtc; process_record = $processPath
     })
 
-    $deadline = [datetime]::UtcNow.AddSeconds(20)
+    $deadline = [datetime]::UtcNow.AddSeconds($startupReadyTimeoutSeconds)
     while ([datetime]::UtcNow -lt $deadline) {
         if ($null -eq (Test-ProcessRecordIdentity $record)) {
             throw 'supervisor process exited or identity changed before readiness'
@@ -674,7 +691,7 @@ try {
         }
         Start-Sleep -Milliseconds 200
     }
-    throw 'ready.json did not identify a newly initialized active observer run before the 20-second deadline'
+    throw ('ready.json did not identify a newly initialized active observer run before the configured {0}-second deadline' -f $startupReadyTimeoutSeconds)
 } catch {
     $reason = $_.Exception.Message
     if ($launched -and -not $readyValidated) {

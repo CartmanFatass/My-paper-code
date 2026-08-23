@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import json
 import uuid
+from contextlib import contextmanager
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, Iterator
 
 from .binding_store import BindingStore
 from .client import AppServerClient, AppServerRpcError, RetryRequired, UnexpectedServerRequest
@@ -62,6 +63,13 @@ class ManagedTurns:
                 raise ManagedTurnError("bootstrap requires VERIFICATION_REQUIRED")
         elif binding.binding_state is not BindingState.ACTIVE:
             raise ManagedTurnError("manual turn requires ACTIVE binding")
+        bridge = getattr(self.bindings, "bridge", None)
+        if bridge is not None and expected_state_version is None:
+            snapshot = bridge.snapshot(binding.actor_context_id)
+            checkpoint_id = snapshot.checkpoint_id
+            expected_state_version = snapshot.state_version
+            expected_epoch_id = snapshot.epoch_id
+            expected_epoch_revision = snapshot.epoch_revision
         intent_id = f"intent_{uuid.uuid4().hex}"
         message_id = client_user_message_id(intent_id)
         with self.bindings.store._lock:
@@ -141,20 +149,61 @@ class ManagedTurns:
         if bridge is None:
             return
         try:
-            actor = bridge.require_eligible(binding.actor_context_id)
+            snapshot = bridge.snapshot(binding.actor_context_id)
         except SemanticBridgeError as exc:
             self._cancel_prepared(turn_intent_id, effect_id, "actor_ineligible")
             raise ManagedTurnError(str(exc)) from exc
-        if actor.actor_kind.value != binding.actor_kind.value or actor.scope_key != binding.semantic_scope_key:
+        if snapshot.actor_kind != binding.actor_kind.value or snapshot.scope_key != binding.semantic_scope_key:
             self._cancel_prepared(turn_intent_id, effect_id, "actor_mismatch")
             raise ManagedTurnError("semantic actor no longer matches binding")
-        snapshot = bridge.snapshot(binding.actor_context_id)
-        if row["checkpoint_id"] and snapshot.checkpoint_id != row["checkpoint_id"]:
-            self._cancel_prepared(turn_intent_id, effect_id, "checkpoint_mismatch")
-            raise ManagedTurnError("checkpoint no longer matches managed turn")
-        if row["expected_state_version"] is not None and snapshot.state_version != int(row["expected_state_version"]):
-            self._cancel_prepared(turn_intent_id, effect_id, "state_version_mismatch")
-            raise ManagedTurnError("state version no longer matches managed turn")
+        expected = (
+            row["checkpoint_id"],
+            None if row["expected_state_version"] is None else int(row["expected_state_version"]),
+            row["expected_epoch_id"],
+            None if row["expected_epoch_revision"] is None else int(row["expected_epoch_revision"]),
+        )
+        actual = (
+            snapshot.checkpoint_id,
+            snapshot.state_version,
+            snapshot.epoch_id,
+            snapshot.epoch_revision,
+        )
+        if actual != expected:
+            self._cancel_prepared(turn_intent_id, effect_id, "semantic_currentness_mismatch")
+            raise ManagedTurnError("semantic currentness no longer matches managed turn")
+
+    @contextmanager
+    def _semantic_write_guard(
+        self,
+        *,
+        binding: Any,
+        row: dict[str, Any],
+    ) -> Iterator[object]:
+        bridge = getattr(self.bindings, "bridge", None)
+        if bridge is None:
+            yield None
+            return
+        with bridge.currentness_guard(
+            binding.actor_context_id,
+            checkpoint_id=row["checkpoint_id"],
+            state_version=(
+                None
+                if row["expected_state_version"] is None
+                else int(row["expected_state_version"])
+            ),
+            epoch_id=row["expected_epoch_id"],
+            epoch_revision=(
+                None
+                if row["expected_epoch_revision"] is None
+                else int(row["expected_epoch_revision"])
+            ),
+        ) as snapshot:
+            if (
+                snapshot.actor_kind != binding.actor_kind.value
+                or snapshot.scope_key != binding.semantic_scope_key
+            ):
+                raise SemanticBridgeError("semantic actor no longer matches binding")
+            yield snapshot
 
     def _effect_is_confirmed(self, effect_id: str | None) -> bool:
         if not effect_id:
@@ -188,6 +237,25 @@ class ManagedTurns:
             raise ManagedTurnError("linked effect request tuple mismatch")
         self._assert_submit_fence(turn_intent_id, effect_id)
         owner = self._owner()
+        binding = self.bindings.get(str(row["binding_id"]))
+        if binding is None:
+            self._cancel_prepared(turn_intent_id, effect_id, "binding_missing")
+            raise ManagedTurnError("binding is not eligible for this managed turn")
+        intent_kind = ManagedIntentKind(str(row["intent_kind"]))
+        allowed_binding_state = (
+            BindingState.VERIFICATION_REQUIRED.value
+            if intent_kind in {ManagedIntentKind.BOOTSTRAP, ManagedIntentKind.IDENTITY_VERIFICATION}
+            else BindingState.ACTIVE.value
+        )
+
+        def _binding_write_fence(connection) -> None:
+            current_binding = connection.execute(
+                "SELECT binding_state FROM managed_actor_bindings WHERE binding_id = ?",
+                (binding.binding_id,),
+            ).fetchone()
+            if current_binding is None or str(current_binding[0]) != allowed_binding_state:
+                raise ManagedTurnError("binding is not eligible at managed-turn write start")
+
         try:
             self._assert_submit_fence(turn_intent_id, effect_id)
             result = await owner.submit_effect(
@@ -204,7 +272,16 @@ class ManagedTurns:
                         cause_ref=effect_id,
                     )
                 ],
+                extra_hooks=[_binding_write_fence],
+                pre_write_guard=lambda: self._semantic_write_guard(
+                    binding=binding,
+                    row=row,
+                ),
             )
+        except (SemanticBridgeError, ManagedTurnError) as exc:
+            if self.journal.get(effect_id).state == "PREPARED":
+                self._cancel_prepared(turn_intent_id, effect_id, "semantic_currentness_mismatch")
+            raise ManagedTurnError(str(exc)) from exc
         except RetryRequired as exc:
             current = self._row(turn_intent_id)
             if current["submission_state"] == SubmissionState.SUBMITTING.value:

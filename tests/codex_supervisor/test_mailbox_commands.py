@@ -10,11 +10,17 @@ from tools.codex_supervisor.mailbox_models import MailboxMessageKind, MailboxSou
 from tools.codex_supervisor.wake_batches import WakeBatchStore
 
 
-def _envelope(action: str, payload: dict) -> str:
+def _envelope(action: str, payload: dict, snapshot) -> str:
     body = {
         "schema_version": "1.0",
         "packet_kind": "MANAGED_ACTOR_COMMAND",
         "action_kind": action,
+        "expected": {
+            "checkpoint_id": snapshot.checkpoint_id,
+            "state_version": snapshot.state_version,
+            "epoch_id": snapshot.epoch_id,
+            "epoch_revision": snapshot.epoch_revision,
+        },
         "payload": payload,
     }
     return "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n" + json.dumps(body) + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
@@ -75,7 +81,7 @@ def test_ack_intake_and_cross_binding_reject(tmp_path: Path) -> None:
         seeded["supervisor"],
         thread_id="thr_port",
         turn_id="turn_ack",
-        text=_envelope("MAILBOX_ACK", {"message_ids": [message.message_id]}),
+        text=_envelope("MAILBOX_ACK", {"message_ids": [message.message_id]}, snapshot),
         item_id="itm_ack",
     )
     assert applied["validation_state"] == "APPLIED"
@@ -88,6 +94,7 @@ def test_ack_intake_and_cross_binding_reject(tmp_path: Path) -> None:
         text=_envelope(
             "MAILBOX_INTAKE",
             {"items": [{"message_id": message.message_id, "intake_kind": "READ_AND_ROUTED", "result_ref": "ref"}]},
+            snapshot,
         ),
         item_id="itm_in",
     )
@@ -98,7 +105,10 @@ def test_ack_intake_and_cross_binding_reject(tmp_path: Path) -> None:
             seeded["supervisor"],
             thread_id="thr_root",
             turn_id="turn_x",
-            text=_envelope("MAILBOX_ACK", {"message_ids": [message.message_id]}),
+            text=_envelope(
+                "MAILBOX_ACK", {"message_ids": [message.message_id]},
+                seeded["bridge"].snapshot(seeded["root"].actor_context_id),
+            ),
             item_id="itm_x",
         )
     seeded["bridge"].close()

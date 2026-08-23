@@ -131,8 +131,10 @@ function Get-ValidatedHostBinding([string]$RuntimePath, [object]$Status, [object
         }
         if (-not (Test-SamePath ([string]$Record.runtime_home) $RuntimePath)) { return $null }
         $evidence = Get-Content -Raw -LiteralPath (Join-Path $RuntimePath 'supervisor-launch-evidence.json') | ConvertFrom-Json -ErrorAction Stop
-        if (-not (Test-ExactFields $evidence @('schema', 'observed_at', 'argument_vector', 'control_home', 'ready_file'))) { return $null }
+        if (-not (Test-ExactFields $evidence @('schema', 'observed_at', 'argument_vector', 'control_home', 'ready_file', 'startup_ready_timeout_seconds'))) { return $null }
         if ($evidence.schema -ne 'HMASD_SUPERVISOR_LAUNCH_EVIDENCE_V2' -or -not ($evidence.argument_vector -is [System.Array])) { return $null }
+        $readyTimeout = [double]$evidence.startup_ready_timeout_seconds
+        if ([double]::IsNaN($readyTimeout) -or [double]::IsInfinity($readyTimeout) -or $readyTimeout -le 0) { return $null }
         $launch = Parse-StrictLaunchArgumentVector @($evidence.argument_vector)
         if ($null -eq $launch) { return $null }
         if (-not (Test-SamePath ([string]$launch.repo_root) ([string]$Record.repo_root)) -or -not (Test-SamePath ([string]$launch.runtime_home) $RuntimePath) -or [string]$launch.profile -cne [string]$Record.profile) { return $null }

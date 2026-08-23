@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import asyncio
 import json
+from contextlib import contextmanager
 from datetime import datetime, timezone
-from typing import Any
+from typing import Any, Iterator
 
 from .binding_store import BindingStore
 from .client import AppServerClient, AppServerRpcError, RetryRequired, UnexpectedServerRequest
@@ -92,6 +93,15 @@ class WakeScheduler:
                 cause_ref="actor-ineligible",
             )
 
+    def _cancel_currentness_drift(self, wake_batch_id: str, reason: str) -> None:
+        from .durability.effects import cancel_prepared_wake
+
+        cancel_prepared_wake(
+            self.bindings.store.connection,
+            wake_batch_id,
+            cause_ref=reason,
+        )
+
     def _assert_submit_fence(
         self,
         binding_id: str,
@@ -103,17 +113,88 @@ class WakeScheduler:
         binding = self.bindings.get(binding_id)
         if binding is None or binding.binding_state is not BindingState.ACTIVE:
             raise WakeSchedulerError("binding is not ACTIVE")
+        context_row = None
+        if wake_batch_id is not None:
+            rows = self.bindings.store.connection.execute(
+                """SELECT checkpoint_id, state_version, epoch_id, epoch_revision
+                FROM managed_context_injections
+                WHERE turn_intent_id = ? AND binding_id = ?
+                ORDER BY created_at, injection_id""",
+                (wake_batch_id, binding_id),
+            ).fetchall()
+            if len(rows) != 1:
+                self._cancel_currentness_drift(wake_batch_id, "missing_or_ambiguous_context_binding")
+                raise WakeSchedulerError("wake batch has no exact durable context binding")
+            context_row = rows[0]
         try:
-            actor = self.bridge.require_eligible(binding.actor_context_id)
+            snapshot = self.bridge.snapshot(binding.actor_context_id)
         except SemanticBridgeError as exc:
             self._abort_unsubmitted_wake(binding_id, wake_batch_id)
             raise WakeSchedulerError(str(exc)) from exc
-        if actor.actor_kind.value != binding.actor_kind.value:
+        if snapshot.actor_kind != binding.actor_kind.value:
             self._abort_unsubmitted_wake(binding_id, wake_batch_id)
             raise WakeSchedulerError("actor kind no longer matches binding")
-        if actor.scope_key != binding.semantic_scope_key:
+        if snapshot.scope_key != binding.semantic_scope_key:
             self._abort_unsubmitted_wake(binding_id, wake_batch_id)
             raise WakeSchedulerError("actor scope no longer matches binding")
+        if context_row is not None:
+            row = context_row
+            expected = (
+                row["checkpoint_id"],
+                None if row["state_version"] is None else int(row["state_version"]),
+                row["epoch_id"],
+                None if row["epoch_revision"] is None else int(row["epoch_revision"]),
+            )
+            actual = (
+                snapshot.checkpoint_id,
+                snapshot.state_version,
+                snapshot.epoch_id,
+                snapshot.epoch_revision,
+            )
+            if actual != expected:
+                self._cancel_currentness_drift(wake_batch_id, "semantic_currentness_mismatch")
+                raise WakeSchedulerError("wake batch semantic currentness no longer matches")
+
+    @contextmanager
+    def _semantic_write_guard(
+        self,
+        *,
+        binding_id: str,
+        generation: int,
+        wake_batch_id: str,
+    ) -> Iterator[object]:
+        self.leases.assert_held(binding_id, self.instance_id, generation)
+        binding = self.bindings.get(binding_id)
+        if binding is None or binding.binding_state is not BindingState.ACTIVE:
+            raise WakeSchedulerError("binding is not ACTIVE")
+        rows = self.bindings.store.connection.execute(
+            """SELECT checkpoint_id, state_version, epoch_id, epoch_revision
+            FROM managed_context_injections
+            WHERE turn_intent_id = ? AND binding_id = ?
+            ORDER BY created_at, injection_id""",
+            (wake_batch_id, binding_id),
+        ).fetchall()
+        if len(rows) != 1:
+            raise WakeSchedulerError("wake batch has no exact durable context binding")
+        expected = rows[0]
+        with self.bridge.currentness_guard(
+            binding.actor_context_id,
+            checkpoint_id=expected["checkpoint_id"],
+            state_version=(
+                None if expected["state_version"] is None else int(expected["state_version"])
+            ),
+            epoch_id=expected["epoch_id"],
+            epoch_revision=(
+                None
+                if expected["epoch_revision"] is None
+                else int(expected["epoch_revision"])
+            ),
+        ) as snapshot:
+            if snapshot.actor_kind != binding.actor_kind.value:
+                raise WakeSchedulerError("actor kind no longer matches binding")
+            if snapshot.scope_key != binding.semantic_scope_key:
+                raise WakeSchedulerError("actor scope no longer matches binding")
+            yield snapshot
 
     async def submit_batch(
         self,
@@ -165,6 +246,12 @@ class WakeScheduler:
                 or current["lease_generation"] != generation
             ):
                 raise WakeSchedulerError("wake batch is not PREPARED for this lease")
+            binding_row = connection.execute(
+                "SELECT binding_state FROM managed_actor_bindings WHERE binding_id = ?",
+                (str(batch["binding_id"]),),
+            ).fetchone()
+            if binding_row is None or str(binding_row[0]) != BindingState.ACTIVE.value:
+                raise WakeSchedulerError("binding is not ACTIVE at wake write start")
             import uuid
 
             connection.execute(
@@ -198,8 +285,31 @@ class WakeScheduler:
                     )
                 ],
                 extra_hooks=[_lease_and_attempt],
+                pre_write_guard=lambda: self._semantic_write_guard(
+                    binding_id=str(batch["binding_id"]),
+                    generation=generation,
+                    wake_batch_id=wake_batch_id,
+                ),
             )
             response = dict(submitted.response or {})
+        except SemanticBridgeError as exc:
+            from .durability.effects import EffectJournal
+
+            if EffectJournal(self.bindings.store.connection).get(effect_id).state == "PREPARED":
+                self._cancel_currentness_drift(wake_batch_id, "semantic_currentness_mismatch")
+            raise WakeSchedulerError(str(exc)) from exc
+        except WakeSchedulerError:
+            from .durability.effects import EffectJournal
+
+            if EffectJournal(self.bindings.store.connection).get(effect_id).state == "PREPARED":
+                self._cancel_currentness_drift(wake_batch_id, "pre_write_fence_failed")
+            raise
+        except LeaseError:
+            from .durability.effects import EffectJournal
+
+            if EffectJournal(self.bindings.store.connection).get(effect_id).state == "PREPARED":
+                self._cancel_currentness_drift(wake_batch_id, "lease_lost_before_write")
+            raise
         except RetryRequired as exc:
             self._mark_uncertain(wake_batch_id, {"reason": "overload"})
             raise WakeSchedulerError("wake turn/start uncertain; do not retry") from exc

@@ -21,6 +21,8 @@ KNOWN_KEYS = frozenset(
         "experimental_api",
         "initialize_timeout_seconds",
         "request_timeout_seconds",
+        "first_reconciliation_timeout_seconds",
+        "startup_ready_timeout_seconds",
         "reconcile_interval_seconds",
         "max_jsonl_line_bytes",
         "read_retry_attempts",
@@ -70,11 +72,25 @@ def load_observer_config(repo_root: Path, runtime_home: Path | None = None) -> O
     timeouts = (
         float(raw["initialize_timeout_seconds"]),
         float(raw["request_timeout_seconds"]),
+        float(raw["first_reconciliation_timeout_seconds"]),
+        float(raw["startup_ready_timeout_seconds"]),
         float(raw["reconcile_interval_seconds"]),
         float(raw["read_retry_base_seconds"]),
     )
     if any(value <= 0 for value in timeouts) or int(raw["read_retry_attempts"]) <= 0:
         raise ObserverConfigError("timeouts and retry attempts must be positive")
+    initialize_timeout = float(raw["initialize_timeout_seconds"])
+    request_timeout = float(raw["request_timeout_seconds"])
+    first_reconciliation_timeout = float(raw["first_reconciliation_timeout_seconds"])
+    startup_ready_timeout = float(raw["startup_ready_timeout_seconds"])
+    if first_reconciliation_timeout < request_timeout:
+        raise ObserverConfigError(
+            "first_reconciliation_timeout_seconds must cover one request timeout"
+        )
+    if startup_ready_timeout < initialize_timeout + first_reconciliation_timeout:
+        raise ObserverConfigError(
+            "startup_ready_timeout_seconds must cover initialize plus first reconciliation"
+        )
     line_limit = int(raw["max_jsonl_line_bytes"])
     if line_limit < MIN_LINE_BYTES or line_limit > MAX_LINE_BYTES:
         raise ObserverConfigError("max_jsonl_line_bytes must be between 1 MiB and 64 MiB")
@@ -89,6 +105,8 @@ def load_observer_config(repo_root: Path, runtime_home: Path | None = None) -> O
         experimental_api=bool(raw["experimental_api"]),
         initialize_timeout_seconds=float(raw["initialize_timeout_seconds"]),
         request_timeout_seconds=float(raw["request_timeout_seconds"]),
+        first_reconciliation_timeout_seconds=first_reconciliation_timeout,
+        startup_ready_timeout_seconds=startup_ready_timeout,
         reconcile_interval_seconds=float(raw["reconcile_interval_seconds"]),
         max_jsonl_line_bytes=line_limit,
         read_retry_attempts=int(raw["read_retry_attempts"]),

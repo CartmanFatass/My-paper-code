@@ -77,7 +77,7 @@ def record_context_injection(
     mailbox_message_ids: tuple[str, ...] = (),
 ) -> str:
     injection_id = f"inj_{uuid.uuid4().hex}"
-    with store._lock, store.connection:
+    def _insert() -> None:
         store.connection.execute(
             """INSERT INTO managed_context_injections (
                 injection_id, turn_intent_id, binding_id, checkpoint_id, state_version,
@@ -99,4 +99,10 @@ def record_context_injection(
                 _now(),
             ),
         )
+    with store._lock:
+        if store.connection.in_transaction:
+            _insert()
+        else:
+            with store.connection:
+                _insert()
     return injection_id

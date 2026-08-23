@@ -361,9 +361,9 @@ V3_COLUMNS = {
 
 
 # Opening a host-bound semantic database is deliberately stricter than the
-# administrative ``initialize_database`` path.  These are the complete table
-# columns produced by schema v3; additional future columns are harmless to a
-# v3 reader, but every named column must be present before the host may write.
+# administrative ``initialize_database`` path.  These names are retained as a
+# useful diagnostic inventory; authority is established by the complete
+# canonical manifest below, never by a required-column subset.
 REQUIRED_SCHEMA_V3_COLUMNS = {
     "schema_meta": frozenset({"version", "applied_at"}),
     "workflows": frozenset(
@@ -526,6 +526,139 @@ class _SourceFileState:
     sha256: str
 
 
+@dataclass(frozen=True)
+class ValidatedExistingDatabase:
+    """Immutable authority token for one exact validated SQLite source set."""
+
+    path: Path
+    directory_names: frozenset[str]
+    source_states: tuple[tuple[Path, _SourceFileState], ...]
+    schema_manifest: tuple[object, ...]
+    content_digest: str
+
+
+@dataclass
+class LiveExistingDatabaseBinding:
+    """One validated live connection whose handoff still owns the writer fence."""
+
+    connection: sqlite3.Connection
+    token: ValidatedExistingDatabase
+    _transferred: bool = False
+
+    def transfer_to(self, owner: object) -> sqlite3.Connection:
+        """Release the fence only after the exact connection is installed on owner."""
+
+        if self._transferred:
+            raise SemanticDatabaseValidationError(
+                "live semantic database binding was already transferred"
+            )
+        if getattr(owner, "connection", None) is not self.connection:
+            raise SemanticDatabaseValidationError(
+                "live semantic database binding transfer changed the connection"
+            )
+        if not self.connection.in_transaction:
+            raise SemanticDatabaseValidationError(
+                "live semantic database binding lost its writer fence before transfer"
+            )
+        self.connection.commit()
+        self._transferred = True
+        return self.connection
+
+    def close(self) -> None:
+        if self.connection.in_transaction:
+            self.connection.rollback()
+        self.connection.close()
+
+
+def _normalized_schema_sql(sql: object) -> str | None:
+    if sql is None:
+        return None
+    source = str(sql).strip()
+    normalized: list[str] = []
+    literal = False
+    pending_space = False
+    offset = 0
+    while offset < len(source):
+        character = source[offset]
+        if character == "'":
+            if pending_space and normalized:
+                normalized.append(" ")
+            pending_space = False
+            normalized.append(character)
+            if literal and offset + 1 < len(source) and source[offset + 1] == "'":
+                normalized.append("'")
+                offset += 2
+                continue
+            literal = not literal
+        elif literal:
+            normalized.append(character)
+        elif character.isspace():
+            pending_space = True
+        else:
+            if pending_space and normalized:
+                normalized.append(" ")
+            pending_space = False
+            normalized.append(character.casefold())
+        offset += 1
+    return "".join(normalized)
+
+
+def _pragma_rows(connection: sqlite3.Connection, pragma: str, name: str) -> tuple[tuple[object, ...], ...]:
+    escaped = name.replace('"', '""')
+    return tuple(tuple(row) for row in connection.execute(f'PRAGMA {pragma}("{escaped}")'))
+
+
+def _schema_v3_manifest(connection: sqlite3.Connection) -> tuple[object, ...]:
+    """Return the complete result-blind schema authority manifest."""
+
+    objects = tuple(
+        (
+            str(row[0]),
+            str(row[1]),
+            str(row[2]),
+            _normalized_schema_sql(row[3]),
+        )
+        for row in connection.execute(
+            """SELECT type, name, tbl_name, sql FROM sqlite_master
+            WHERE type IN ('table', 'index', 'view', 'trigger')
+            ORDER BY type, name"""
+        )
+    )
+    tables = tuple(sorted(str(row[1]) for row in objects if row[0] == "table"))
+    indexes = tuple(sorted(str(row[1]) for row in objects if row[0] == "index"))
+    table_details = tuple(
+        (
+            table,
+            _pragma_rows(connection, "table_xinfo", table),
+            _pragma_rows(connection, "foreign_key_list", table),
+            _pragma_rows(connection, "index_list", table),
+        )
+        for table in tables
+    )
+    index_details = tuple(
+        (index, _pragma_rows(connection, "index_xinfo", index))
+        for index in indexes
+    )
+    return (objects, table_details, index_details)
+
+
+_CANONICAL_SCHEMA_V3_MANIFEST: tuple[object, ...] | None = None
+
+
+def _canonical_schema_v3_manifest() -> tuple[object, ...]:
+    global _CANONICAL_SCHEMA_V3_MANIFEST
+    if _CANONICAL_SCHEMA_V3_MANIFEST is None:
+        reference = sqlite3.connect(":memory:")
+        try:
+            reference.row_factory = sqlite3.Row
+            reference.execute("PRAGMA foreign_keys = ON")
+            initialize_database(reference)
+            _CANONICAL_SCHEMA_V3_MANIFEST = _schema_v3_manifest(reference)
+        finally:
+            reference.close()
+    return _CANONICAL_SCHEMA_V3_MANIFEST
+
+
 def _sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as source:
@@ -558,6 +691,74 @@ def _source_file_state(path: Path) -> _SourceFileState:
             f"semantic database validation input changed while hashing: {path.name}"
         )
     return _SourceFileState(*identity, digest)
+
+
+def _source_file_identity(path: Path) -> tuple[int, int, int]:
+    """Return stable path identity fields while SQLite may own an SHM handle."""
+
+    try:
+        stat = path.stat(follow_symlinks=False)
+        if not path.is_file() or path.is_symlink():
+            raise OSError("not a regular non-symbolic-link file")
+        final = path.stat(follow_symlinks=False)
+    except OSError as exc:
+        raise SemanticDatabaseValidationError(
+            f"semantic database validation input is not a stable regular file: {path.name}"
+        ) from exc
+    identity = (stat.st_dev, stat.st_ino, stat.st_size)
+    if identity != (final.st_dev, final.st_ino, final.st_size):
+        raise SemanticDatabaseValidationError(
+            f"semantic database validation input changed while identifying: {path.name}"
+        )
+    return identity
+
+
+def _digest_part(digest, value: bytes) -> None:
+    digest.update(len(value).to_bytes(8, "big"))
+    digest.update(value)
+
+
+def _encoded_sqlite_value(value: object) -> bytes:
+    if value is None:
+        return b"n"
+    if isinstance(value, int):
+        return b"i" + str(value).encode("ascii")
+    if isinstance(value, float):
+        return b"f" + struct.pack(">d", value)
+    if isinstance(value, str):
+        return b"t" + value.encode("utf-8")
+    if isinstance(value, bytes):
+        return b"b" + value
+    raise SemanticDatabaseValidationError(
+        f"semantic database contains unsupported SQLite value type: {type(value).__name__}"
+    )
+
+
+def _logical_content_digest(connection: sqlite3.Connection) -> str:
+    """Hash every logical row independent of physical row or WAL placement."""
+
+    digest = hashlib.sha256()
+    tables = tuple(
+        str(row[0])
+        for row in connection.execute(
+            "SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name"
+        )
+    )
+    for table in tables:
+        _digest_part(digest, table.encode("utf-8"))
+        escaped = table.replace('"', '""')
+        row_digests: list[bytes] = []
+        for row in connection.execute(f'SELECT * FROM "{escaped}"'):
+            row_digest = hashlib.sha256()
+            row_digest.update(len(row).to_bytes(8, "big"))
+            for value in row:
+                _digest_part(row_digest, _encoded_sqlite_value(value))
+            row_digests.append(row_digest.digest())
+        row_digests.sort()
+        digest.update(len(row_digests).to_bytes(8, "big"))
+        for row_digest in row_digests:
+            digest.update(row_digest)
+    return digest.hexdigest()
 
 
 def _copy_snapshot_file(source: Path, destination: Path) -> str:
@@ -866,27 +1067,6 @@ def _validate_schema_v3_connection(connection: sqlite3.Connection) -> None:
             f"semantic database integrity check failed: {detail}"
         )
 
-    tables = {
-        str(row[0])
-        for row in connection.execute(
-            "SELECT name FROM sqlite_master WHERE type = 'table'"
-        )
-    }
-    missing_tables = sorted(set(REQUIRED_SCHEMA_V3_COLUMNS) - tables)
-    if missing_tables:
-        raise SemanticDatabaseValidationError(
-            "semantic database is missing required tables: " + ", ".join(missing_tables)
-        )
-
-    for table, required_columns in REQUIRED_SCHEMA_V3_COLUMNS.items():
-        actual_columns = _column_names(connection, table)
-        missing_columns = sorted(required_columns - actual_columns)
-        if missing_columns:
-            raise SemanticDatabaseValidationError(
-                f"semantic database table {table!r} is missing required columns: "
-                + ", ".join(missing_columns)
-            )
-
     versions = connection.execute(
         "SELECT version FROM schema_meta ORDER BY version"
     ).fetchall()
@@ -904,14 +1084,102 @@ def _validate_schema_v3_connection(connection: sqlite3.Connection) -> None:
             f"required exactly {SCHEMA_VERSION}"
         )
     _validate_required_indexes(connection)
+    actual_manifest = _schema_v3_manifest(connection)
+    if actual_manifest != _canonical_schema_v3_manifest():
+        raise SemanticDatabaseValidationError(
+            "semantic database schema manifest is not the exact canonical schema v3"
+        )
 
 
-def validate_existing_database(path: str | Path) -> Path:
+def _assert_validation_token_current(
+    token: ValidatedExistingDatabase,
+    *,
+    allow_sqlite_sidecar_creation: bool = False,
+    allow_bound_empty_wal_pair: bool = False,
+    live_writer_fenced: bool = False,
+) -> None:
+    current_names = _directory_names(token.path.parent)
+    expected_names = token.directory_names
+    created_sidecars: tuple[Path, ...] = ()
+    if allow_sqlite_sidecar_creation:
+        source_names = {source.name for source, _state in token.source_states}
+        wal_path = Path(f"{token.path}-wal")
+        shm_path = Path(f"{token.path}-shm")
+        # Opening a validated WAL without its transient wal-index is the only
+        # live-bind operation that may create a sidecar.  In particular, a
+        # token for a main-only database must never acquire a new WAL: that WAL
+        # can contain committed data which was absent from validation.
+        allowed_created = (
+            (shm_path,)
+            if wal_path.name in source_names and shm_path.name not in source_names
+            else ()
+        )
+        # BEGIN IMMEDIATE on a WAL-configured main-only database creates
+        # SQLite's own empty WAL and transient SHM after it owns the writer
+        # fence.  Admit only that exact empty pair; any committed frame remains
+        # authority-changing.
+        if (
+            allow_bound_empty_wal_pair
+            and wal_path.name not in source_names
+            and shm_path.name not in source_names
+            and current_names == expected_names | {wal_path.name, shm_path.name}
+            and wal_path.is_file()
+            and wal_path.stat().st_size == 0
+        ):
+            allowed_created = (wal_path, shm_path)
+        with_sidecars = expected_names | {sidecar.name for sidecar in allowed_created}
+        if allowed_created and current_names == with_sidecars:
+            created_sidecars = allowed_created
+    if current_names != expected_names and not created_sidecars:
+        raise SemanticDatabaseValidationError(
+            "semantic database sibling set changed after validation"
+        )
+    for source, expected in token.source_states:
+        is_shm = source.name == f"{token.path.name}-shm"
+        if live_writer_fenced and is_shm:
+            # Windows denies ordinary reads of SHM while SQLite owns it.  Its
+            # path identity stays observable; exact WAL bytes plus the logical
+            # content digest below bind the authoritative frame boundary.
+            matches = _source_file_identity(source) == (
+                expected.device,
+                expected.inode,
+                expected.size,
+            )
+        else:
+            matches = _source_file_state(source) == expected
+        if not matches:
+            raise SemanticDatabaseValidationError(
+                f"semantic database input changed after validation: {source.name}"
+            )
+    for sidecar in created_sidecars:
+        is_shm = sidecar.name == f"{token.path.name}-shm"
+        if live_writer_fenced and is_shm:
+            first_identity = _source_file_identity(sidecar)
+            if _source_file_identity(sidecar) != first_identity:
+                raise SemanticDatabaseValidationError(
+                    f"live SQLite sidecar is not stable: {sidecar.name}"
+                )
+            continue
+        first = _source_file_state(sidecar)
+        if (
+            sidecar.name == f"{token.path.name}-wal"
+            and first.size != 0
+        ):
+            raise SemanticDatabaseValidationError(
+                "live SQLite created WAL contains unvalidated committed data"
+            )
+        if _source_file_state(sidecar) != first:
+            raise SemanticDatabaseValidationError(
+                f"live SQLite sidecar is not stable: {sidecar.name}"
+            )
+
+
+def _validate_existing_database(path: str | Path) -> ValidatedExistingDatabase:
     """Validate one existing schema-v3 database without opening its files in SQLite.
 
     SQLite is allowed to recover or rebuild sidecars only inside a private
     snapshot.  Repeated identity and digest checks bind that snapshot to one
-    stable main/WAL/SHM source set and fail closed when a writer races it.
+    stable main/WAL[/SHM] source set and fail closed when a writer races it.
     """
 
     try:
@@ -938,12 +1206,18 @@ def validate_existing_database(path: str | Path) -> Path:
         )
     wal_exists = wal_path.name in initial_names
     shm_exists = shm_path.name in initial_names
-    if wal_exists != shm_exists:
+    if shm_exists and not wal_exists:
         raise SemanticDatabaseValidationError(
             "semantic database has an incomplete WAL sidecar set"
         )
 
-    source_paths = (resolved, wal_path, shm_path) if wal_exists else (resolved,)
+    source_paths = (
+        (resolved, wal_path, shm_path)
+        if wal_exists and shm_exists
+        else (resolved, wal_path)
+        if wal_exists
+        else (resolved,)
+    )
     if _directory_names(resolved.parent) != initial_names:
         raise SemanticDatabaseValidationError(
             "semantic database sibling set changed during sidecar selection"
@@ -985,17 +1259,23 @@ def validate_existing_database(path: str | Path) -> Path:
             raise SemanticDatabaseValidationError(
                 "semantic database file size is not page aligned"
             )
+        wal_header: dict[str, object] | None = None
         if wal_exists:
             wal_header = _validate_wal_header(
                 snapshot_paths[wal_path], database_page_size
             )
-            shm_info = _validate_shm_file(snapshot_paths[shm_path], wal_header)
-            _validate_wal_file(snapshot_paths[wal_path], wal_header, shm_info)
+            if shm_exists:
+                shm_info = _validate_shm_file(snapshot_paths[shm_path], wal_header)
+                _validate_wal_file(snapshot_paths[wal_path], wal_header, shm_info)
 
         connection: sqlite3.Connection | None = None
         try:
+            # A WAL without SHM is a legitimate portable SQLite source set.
+            # Open only the private snapshot read/write so SQLite can rebuild
+            # its transient wal-index; the public source remains read-only.
+            snapshot_mode = "rw" if wal_exists and not shm_exists else "ro"
             connection = sqlite3.connect(
-                f"{snapshot_main.as_uri()}?mode=ro",
+                f"{snapshot_main.as_uri()}?mode={snapshot_mode}",
                 uri=True,
                 timeout=0.0,
                 check_same_thread=False,
@@ -1010,6 +1290,16 @@ def validate_existing_database(path: str | Path) -> Path:
                     "semantic database is not persistently configured for WAL journal mode"
                 )
             _validate_schema_v3_connection(connection)
+            schema_manifest = _schema_v3_manifest(connection)
+            content_digest = _logical_content_digest(connection)
+            if wal_exists and not shm_exists:
+                snapshot_shm = snapshot_paths[shm_path]
+                if not snapshot_shm.is_file() or wal_header is None:
+                    raise SemanticDatabaseValidationError(
+                        "private SQLite snapshot did not reconstruct its SHM sidecar"
+                    )
+                shm_info = _validate_shm_file(snapshot_shm, wal_header)
+                _validate_wal_file(snapshot_paths[wal_path], wal_header, shm_info)
         except SemanticDatabaseValidationError:
             raise
         except sqlite3.Error as exc:
@@ -1029,13 +1319,72 @@ def validate_existing_database(path: str | Path) -> Path:
         raise SemanticDatabaseValidationError(
             "semantic database changed before validation completed"
         )
-    return resolved
+    return ValidatedExistingDatabase(
+        path=resolved,
+        directory_names=initial_names,
+        source_states=tuple((source, initial_states[source]) for source in source_paths),
+        schema_manifest=schema_manifest,
+        content_digest=content_digest,
+    )
 
 
-def connect_existing(path: str | Path) -> sqlite3.Connection:
-    """Open an existing database read/write without initialization or migration."""
+def validate_existing_database(path: str | Path) -> Path:
+    """Public zero-write compatibility probe; returns the canonical path."""
 
-    resolved = Path(path).resolve(strict=True)
+    return _validate_existing_database(path).path
+
+
+def _validate_live_binding_under_fence(
+    connection: sqlite3.Connection,
+    token: ValidatedExistingDatabase,
+) -> None:
+    """Rebind an immutable validation token to one writer-fenced connection."""
+
+    source_names = {source.name for source, _state in token.source_states}
+    had_wal = f"{token.path.name}-wal" in source_names
+    _assert_validation_token_current(
+        token,
+        allow_sqlite_sidecar_creation=True,
+        allow_bound_empty_wal_pair=not had_wal,
+        live_writer_fenced=True,
+    )
+    database_path = Path(
+        str(connection.execute("PRAGMA database_list").fetchone()[2])
+    ).resolve(strict=True)
+    if database_path != token.path:
+        raise SemanticDatabaseValidationError(
+            "live SQLite connection is not bound to the validated database path"
+        )
+    journal_mode = str(connection.execute("PRAGMA journal_mode").fetchone()[0]).lower()
+    if journal_mode != "wal":
+        raise SemanticDatabaseValidationError(
+            "semantic database is not persistently configured for WAL journal mode"
+        )
+    _validate_schema_v3_connection(connection)
+    if _schema_v3_manifest(connection) != token.schema_manifest:
+        raise SemanticDatabaseValidationError(
+            "live SQLite schema differs from the validated manifest"
+        )
+    if _logical_content_digest(connection) != token.content_digest:
+        raise SemanticDatabaseValidationError(
+            "live SQLite content differs from the validated source"
+        )
+    _assert_validation_token_current(
+        token,
+        allow_sqlite_sidecar_creation=True,
+        allow_bound_empty_wal_pair=not had_wal,
+        live_writer_fenced=True,
+    )
+
+
+def connect_existing(
+    path: str | Path | ValidatedExistingDatabase,
+) -> LiveExistingDatabaseBinding:
+    """Open and fence an exact validated database for explicit store transfer."""
+
+    token = path if isinstance(path, ValidatedExistingDatabase) else _validate_existing_database(path)
+    resolved = token.path
+    _assert_validation_token_current(token)
     connection = sqlite3.connect(
         f"{resolved.as_uri()}?mode=rw",
         uri=True,
@@ -1044,10 +1393,22 @@ def connect_existing(path: str | Path) -> sqlite3.Connection:
         isolation_level="DEFERRED",
     )
     connection.row_factory = sqlite3.Row
-    connection.execute("PRAGMA foreign_keys = ON")
-    connection.execute("PRAGMA busy_timeout = 5000")
-    connection.execute("PRAGMA synchronous = FULL")
-    return connection
+    try:
+        # These connection-local settings are pager-free.  In particular, do
+        # not configure ``synchronous`` here: on a WAL source without its SHM
+        # sidecar SQLite may create that sidecar while applying the pragma.
+        # BEGIN IMMEDIATE must remain the first pager-touching operation so it
+        # owns the writer fence before SQLite is allowed to materialize one.
+        connection.execute("PRAGMA foreign_keys = ON")
+        connection.execute("PRAGMA busy_timeout = 5000")
+        connection.execute("BEGIN IMMEDIATE")
+        _validate_live_binding_under_fence(connection, token)
+        return LiveExistingDatabaseBinding(connection=connection, token=token)
+    except Exception:
+        if connection.in_transaction:
+            connection.rollback()
+        connection.close()
+        raise
 
 
 def _apply_schema_v1(connection: sqlite3.Connection) -> None:

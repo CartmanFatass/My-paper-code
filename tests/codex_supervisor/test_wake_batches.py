@@ -82,3 +82,39 @@ def test_corrupt_legacy_reference_fails_before_wake_persistence(tmp_path: Path) 
     seeded["bridge"].close()
     seeded["supervisor"].close()
     seeded["semantic"].close()
+
+
+def test_context_binding_failure_rolls_back_batch_effect_and_message_transition(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    seeded = seed_active_root_portfolio(tmp_path)
+    mailbox = seeded["mailbox"]
+    message = mailbox.enqueue(
+        source_system=MailboxSourceSystem.OPERATOR.value,
+        source_event_key="op:context-crash-gap",
+        target_actor_context_id=seeded["portfolio"].actor_context_id,
+        message_kind=MailboxMessageKind.OPERATOR_ATTENTION_REQUEST,
+        subject_ref="wake",
+        payload_ref="ref",
+    )
+    snapshot = seeded["bridge"].snapshot(seeded["portfolio"].actor_context_id)
+    batches = WakeBatchStore(seeded["supervisor"], mailbox)
+
+    def fail_binding(*args, **kwargs):
+        raise RuntimeError("fixture context binding failure")
+
+    monkeypatch.setattr("tools.codex_supervisor.wake_batches.record_context_injection", fail_binding)
+    with pytest.raises(RuntimeError, match="context binding failure"):
+        batches.prepare(
+            binding_id=seeded["portfolio_binding_id"],
+            thread_id="thr_port",
+            snapshot=snapshot,
+            messages=[message],
+        )
+    connection = seeded["supervisor"].connection
+    assert connection.execute("SELECT COUNT(*) FROM wake_batches").fetchone()[0] == 0
+    assert connection.execute("SELECT COUNT(*) FROM app_server_effects WHERE owner_kind='WAKE_BATCH'").fetchone()[0] == 0
+    assert mailbox.get(message.message_id).delivery_state.value == "ENQUEUED"
+    seeded["bridge"].close()
+    seeded["supervisor"].close()
+    seeded["semantic"].close()

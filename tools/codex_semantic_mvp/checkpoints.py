@@ -144,57 +144,115 @@ def context_reanchor_ack(
 ) -> dict[str, object]:
     from .models import ObligationKind
 
-    checkpoint = store.connection.execute(
-        "SELECT * FROM context_checkpoints WHERE checkpoint_id = ? AND actor_context_id = ?",
-        (checkpoint_id, actor_context_id),
-    ).fetchone()
-    if checkpoint is None:
-        raise ValueError("checkpoint does not belong to actor")
-    workflow = store.current_actor_workflow(actor_context_id)
-    current_version = int((workflow or {}).get("state_version") or 0)
-    epoch = plan_epoch_current(store, actor_context_id)
-    current_epoch = str(epoch["epoch_id"]) if epoch else None
-    current_revision = int(epoch["revision"]) if epoch else None
-    if int(state_version) != current_version:
-        raise ValueError("reanchor ack is stale: state_version differs")
-    if (epoch_id or None) != current_epoch or (epoch_revision if epoch_revision is not None else None) != current_revision:
-        raise ValueError("reanchor ack is stale: epoch differs")
-    if workflow is None:
-        raise ValueError("matching CONTEXT_REANCHOR_REQUIRED is not open")
-    obligation = store.connection.execute(
-        """SELECT obligation_id FROM obligations
-        WHERE workflow_id = ? AND kind = ? AND subject = ? AND state = 'OPEN'""",
-        (
-            workflow["workflow_id"],
-            ObligationKind.CONTEXT_REANCHOR_REQUIRED.value,
-            checkpoint_id,
-        ),
-    ).fetchone()
-    if obligation is None:
-        raise ValueError("matching CONTEXT_REANCHOR_REQUIRED is not open")
-    ack_id = _new_id("ack")
-    with store._lock, store.connection:
-        store.connection.execute(
-            """INSERT INTO reanchor_acks (
-                ack_id, actor_context_id, checkpoint_id, state_version, epoch_id,
-                epoch_revision, actor_turn_id, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-            (
-                ack_id,
-                actor_context_id,
-                checkpoint_id,
-                state_version,
-                epoch_id,
-                epoch_revision,
-                actor_turn_id,
-                _now(),
-            ),
-        )
-        store.connection.execute(
-            "UPDATE obligations SET state = 'RESOLVED', resolved_at = ? WHERE obligation_id = ?",
-            (_now(), obligation[0]),
-        )
-        store._touch_workflow(str(workflow["workflow_id"]))
+    with store._lock:
+        owns_transaction = not store.connection.in_transaction
+        if owns_transaction:
+            store.connection.execute("BEGIN IMMEDIATE")
+        try:
+            existing = store.connection.execute(
+                """SELECT ack_id FROM reanchor_acks
+                WHERE actor_context_id = ? AND checkpoint_id = ?
+                  AND state_version = ? AND epoch_id IS ?
+                  AND epoch_revision IS ? AND actor_turn_id = ?""",
+                (
+                    actor_context_id,
+                    checkpoint_id,
+                    state_version,
+                    epoch_id,
+                    epoch_revision,
+                    actor_turn_id,
+                ),
+            ).fetchone()
+            if existing is not None:
+                resolved = store.connection.execute(
+                    """SELECT COUNT(*) AS total,
+                        SUM(CASE WHEN obligations.state = 'RESOLVED'
+                                      AND obligations.resolved_at IS NOT NULL
+                                 THEN 1 ELSE 0 END) AS resolved
+                    FROM obligations
+                    JOIN workflows ON workflows.workflow_id = obligations.workflow_id
+                    WHERE workflows.actor_context_id = ?
+                      AND obligations.kind = ? AND obligations.subject = ?""",
+                    (
+                        actor_context_id,
+                        ObligationKind.CONTEXT_REANCHOR_REQUIRED.value,
+                        checkpoint_id,
+                    ),
+                ).fetchone()
+                if (
+                    resolved is None
+                    or int(resolved["total"] or 0) == 0
+                    or int(resolved["resolved"] or 0) != int(resolved["total"] or 0)
+                ):
+                    raise ValueError("existing reanchor ack has no durable obligation resolution")
+                if owns_transaction:
+                    store.connection.commit()
+                return {
+                    "ack_id": str(existing["ack_id"]),
+                    "actor_context_id": actor_context_id,
+                    "checkpoint_id": checkpoint_id,
+                }
+
+            checkpoint = store.connection.execute(
+                "SELECT * FROM context_checkpoints WHERE checkpoint_id = ? AND actor_context_id = ?",
+                (checkpoint_id, actor_context_id),
+            ).fetchone()
+            if checkpoint is None:
+                raise ValueError("checkpoint does not belong to actor")
+            workflow = store.current_actor_workflow(actor_context_id)
+            current_version = int((workflow or {}).get("state_version") or 0)
+            epoch = plan_epoch_current(store, actor_context_id)
+            current_epoch = str(epoch["epoch_id"]) if epoch else None
+            current_revision = int(epoch["revision"]) if epoch else None
+            if int(state_version) != current_version:
+                raise ValueError("reanchor ack is stale: state_version differs")
+            if (
+                (epoch_id or None) != current_epoch
+                or (epoch_revision if epoch_revision is not None else None)
+                != current_revision
+            ):
+                raise ValueError("reanchor ack is stale: epoch differs")
+            if workflow is None:
+                raise ValueError("matching CONTEXT_REANCHOR_REQUIRED is not open")
+            obligation = store.connection.execute(
+                """SELECT obligation_id FROM obligations
+                WHERE workflow_id = ? AND kind = ? AND subject = ? AND state = 'OPEN'""",
+                (
+                    workflow["workflow_id"],
+                    ObligationKind.CONTEXT_REANCHOR_REQUIRED.value,
+                    checkpoint_id,
+                ),
+            ).fetchone()
+            if obligation is None:
+                raise ValueError("matching CONTEXT_REANCHOR_REQUIRED is not open")
+            ack_id = _new_id("ack")
+            store.connection.execute(
+                """INSERT INTO reanchor_acks (
+                    ack_id, actor_context_id, checkpoint_id, state_version, epoch_id,
+                    epoch_revision, actor_turn_id, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    ack_id,
+                    actor_context_id,
+                    checkpoint_id,
+                    state_version,
+                    epoch_id,
+                    epoch_revision,
+                    actor_turn_id,
+                    _now(),
+                ),
+            )
+            store.connection.execute(
+                "UPDATE obligations SET state = 'RESOLVED', resolved_at = ? WHERE obligation_id = ?",
+                (_now(), obligation[0]),
+            )
+            store._touch_workflow(str(workflow["workflow_id"]))
+            if owns_transaction:
+                store.connection.commit()
+        except Exception:
+            if owns_transaction and store.connection.in_transaction:
+                store.connection.rollback()
+            raise
     return {"ack_id": ack_id, "actor_context_id": actor_context_id, "checkpoint_id": checkpoint_id}
 
 

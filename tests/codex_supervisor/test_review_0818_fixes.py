@@ -69,7 +69,9 @@ def test_activate_requires_applied_verification_receipt(tmp_path: Path) -> None:
     seeded["semantic"].close()
 
 
-def test_cli_activate_cannot_bypass_verification(tmp_path: Path, repo_root: Path) -> None:
+def test_cli_activate_cannot_bypass_verification(
+    tmp_path: Path, repo_root: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
     seeded = seed_managed_actors(tmp_path)
     runtime = Path(tempfile.mkdtemp(prefix="hmasd-obs-cli-"))
     observer = ObserverStore(runtime)
@@ -87,7 +89,7 @@ def test_cli_activate_cannot_bypass_verification(tmp_path: Path, repo_root: Path
     bindings.mark_verification_required(binding_id)
     bindings.confirm_global_memory_disabled(binding_id, operator="operator")
     observer.close()
-    with pytest.raises(SystemExit, match="cannot bypass verification"):
+    with pytest.raises(SystemExit) as exc_info:
         main(
             [
                 "--repo-root",
@@ -102,6 +104,8 @@ def test_cli_activate_cannot_bypass_verification(tmp_path: Path, repo_root: Path
                 binding_id,
             ]
         )
+    assert exc_info.value.code == 2
+    assert "invalid choice" in capsys.readouterr().err
     seeded["bridge"].close()
     seeded["supervisor"].close()
     seeded["semantic"].close()

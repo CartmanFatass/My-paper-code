@@ -168,3 +168,39 @@ def test_ready_hook_is_not_called_when_startup_gate_fails(tmp_path: Path, failur
     import asyncio
 
     asyncio.run(body())
+
+
+def test_first_reconciliation_has_bounded_timeout_and_never_emits_ready_on_timeout(
+    tmp_path: Path,
+) -> None:
+    async def body() -> None:
+        import asyncio
+
+        service = ObserverService(
+            make_observer_config(
+                tmp_path,
+                first_reconciliation_timeout_seconds=0.01,
+                startup_ready_timeout_seconds=15.01,
+            ),
+            binary=write_fake_codex(tmp_path),
+            store=ObserverStore(tmp_path / "runtime-timeout"),
+            process_cwd=tmp_path,
+            extra_env={"FAKE_APP_SERVER_MODE": "handshake_ok"},
+            stdin_close_timeout=0.4,
+            terminate_timeout=0.4,
+        )
+        observed: list[dict[str, object]] = []
+
+        async def slow_reconciliation() -> dict[str, object]:
+            await asyncio.sleep(0.05)
+            return {"thread_count": 0, "outcome": "OK"}
+
+        service.reconcile_threads = slow_reconciliation  # type: ignore[method-assign]
+        with pytest.raises(asyncio.TimeoutError):
+            await service.serve(duration_seconds=0.01, ready_hook=observed.append)
+        assert observed == []
+        service.store.close()
+
+    import asyncio
+
+    asyncio.run(body())

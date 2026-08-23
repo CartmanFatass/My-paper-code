@@ -63,6 +63,17 @@ function Resolve-CanonicalExecutable([string]$Executable, [string]$Label) {
     return (Resolve-Path -LiteralPath $Executable -ErrorAction Stop).Path
 }
 
+function Get-StartupReadyTimeout([string]$Root, [string]$RuntimePath, [string]$Interpreter) {
+    Push-Location -LiteralPath $Root
+    try {
+        $raw = & $Interpreter -c 'import sys; from pathlib import Path; from tools.codex_supervisor.config import load_observer_config; root=Path(sys.argv[1]).resolve(); print(load_observer_config(root, root.parent / ".hmasd-supervisor-config-probe").startup_ready_timeout_seconds)' $Root 2>$null
+        if ($LASTEXITCODE -ne 0 -or -not $raw) { return $null }
+        $value = [double]0
+        if (-not [double]::TryParse([string]($raw | Select-Object -Last 1), [Globalization.NumberStyles]::Float, [Globalization.CultureInfo]::InvariantCulture, [ref]$value) -or [double]::IsNaN($value) -or [double]::IsInfinity($value) -or $value -le 0) { return $null }
+        return $value
+    } finally { Pop-Location }
+}
+
 function Test-SafeCmdBatchPath([string]$CanonicalBatchPath) {
     if ([string]::IsNullOrWhiteSpace($CanonicalBatchPath)) { return $false }
     if ($CanonicalBatchPath.IndexOfAny([char[]]"`r`n`"%!") -ge 0) { return $false }
@@ -262,7 +273,7 @@ function Test-RecordAndLaunchBinding(
         $evidencePath = Join-Path $RequestedHome 'supervisor-launch-evidence.json'
         if (-not (Test-Path -LiteralPath $evidencePath -PathType Leaf)) { return $false }
         $evidence = Get-Content -Raw -LiteralPath $evidencePath | ConvertFrom-Json -ErrorAction Stop
-        if (-not (Test-ExactFields $evidence @('schema', 'observed_at', 'argument_vector', 'control_home', 'ready_file'))) { return $false }
+        if (-not (Test-ExactFields $evidence @('schema', 'observed_at', 'argument_vector', 'control_home', 'ready_file', 'startup_ready_timeout_seconds'))) { return $false }
         if ($evidence.schema -ne 'HMASD_SUPERVISOR_LAUNCH_EVIDENCE_V2' -or -not ($evidence.argument_vector -is [System.Array])) { return $false }
         $parsed = Parse-StrictLaunchArgumentVector @($evidence.argument_vector)
         if ($null -eq $parsed) { return $false }
@@ -271,6 +282,8 @@ function Test-RecordAndLaunchBinding(
         if ([string]$parsed.profile -cne [string]$Record.profile) { return $false }
         if (-not (Test-SamePath ([string]$parsed.ready_file) ([string]$Record.ready_file)) -or -not (Test-SamePath ([string]$evidence.ready_file) ([string]$parsed.ready_file))) { return $false }
         if (-not (Test-SamePath ([string]$evidence.control_home) ([string]$parsed.control_home))) { return $false }
+        $readyTimeout = [double]$evidence.startup_ready_timeout_seconds
+        if ([double]::IsNaN($readyTimeout) -or [double]::IsInfinity($readyTimeout) -or $readyTimeout -le 0) { return $false }
         $parsed | Add-Member -NotePropertyName launch_argument_vector -NotePropertyValue @($evidence.argument_vector) -Force
         return $parsed
     } catch { return $false }

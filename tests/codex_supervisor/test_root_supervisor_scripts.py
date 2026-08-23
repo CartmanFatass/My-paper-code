@@ -238,7 +238,9 @@ def test_start_script_requires_valid_ready_evidence_not_pid_only(repo_root):
     assert "Test-ProcessRecordIdentity" in text
     assert "Start-Sleep -Milliseconds 200" in text
     assert "Start-Sleep -Milliseconds 300" not in text
-    assert "AddSeconds(20)" in text
+    assert "AddSeconds($startupReadyTimeoutSeconds)" in text
+    assert "startup_ready_timeout_seconds" in text
+    assert "AddSeconds(20)" not in text
     assert "HMASD_SUPERVISOR_READY_V2" in text
     assert "HMASD_SUPERVISOR_INCIDENT_V2" in text
 
@@ -596,6 +598,7 @@ def test_status_strictly_parses_launch_vector_and_binds_python_and_codex(repo_ro
         "schema": "HMASD_SUPERVISOR_LAUNCH_EVIDENCE_V2",
         "observed_at": "2026-08-23T00:00:00Z", "argument_vector": vector,
         "control_home": str(control), "ready_file": str(ready),
+        "startup_ready_timeout_seconds": 150.0,
     }
     evidence_path = runtime_home / "supervisor-launch-evidence.json"
     evidence_path.write_text(json.dumps(evidence), encoding="utf-8")
@@ -618,7 +621,7 @@ def test_status_strictly_parses_launch_vector_and_binds_python_and_codex(repo_ro
     )
     result = invoke_start_helpers(
         path,
-        ("Test-SamePath", "Test-FullyQualifiedPath", "Test-ExternalExistingFile", "Test-ExactFields", "Parse-StrictLaunchArgumentVector", "Test-RecordAndLaunchBinding", "Test-ActiveCodexBinding"),
+        ("Test-SamePath", "Test-FullyQualifiedPath", "Test-ExternalExistingFile", "Test-ExactFields", "Get-StartupReadyTimeout", "Parse-StrictLaunchArgumentVector", "Test-RecordAndLaunchBinding", "Test-ActiveCodexBinding"),
         body,
         str(repo_root), str(runtime_home), str(ready), json.dumps(record),
         str(PROJECT_PYTHON.resolve()), codex, str(tmp_path / "other-python.exe"),
@@ -842,6 +845,7 @@ def test_status_uses_active_run_binary_when_default_launch_and_environment_chang
                         "argument_vector": launch_vector,
                         "control_home": str(control_home),
                         "ready_file": str(ready_path),
+                        "startup_ready_timeout_seconds": 150.0,
                     }
                 ),
                 encoding="utf-8",
@@ -943,6 +947,7 @@ def test_existing_host_binding_rejects_another_repo_or_control_path(repo_root, t
         ],
         "control_home": str(control),
         "ready_file": str(ready),
+        "startup_ready_timeout_seconds": 150.0,
     }
     (runtime_home / "supervisor-launch-evidence.json").write_text(json.dumps(evidence), encoding="utf-8")
     record = {
@@ -959,9 +964,9 @@ def test_existing_host_binding_rejects_another_repo_or_control_path(repo_root, t
     body = (
         "$record=$A5|ConvertFrom-Json; "
         "$expected=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' '' $A3 $A4 '' $false 0); "
-        "$matched=Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A4 $A7 $expected; "
-        "$wrongControl=Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A6 $A7 $expected; "
-        "$wrongRepo=Test-ExistingInvocation $record $A6 $A2 'OBSERVER' $A3 $A4 $A7 $expected; "
+        "$matched=Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A4 $A7 $expected 150.0; "
+        "$wrongControl=Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A6 $A7 $expected 150.0; "
+        "$wrongRepo=Test-ExistingInvocation $record $A6 $A2 'OBSERVER' $A3 $A4 $A7 $expected 150.0; "
         "[ordered]@{matched=$matched;wrong_control=$wrongControl;wrong_repo=$wrongRepo}|ConvertTo-Json -Compress"
     )
     result = invoke_start_helpers(
@@ -1012,6 +1017,7 @@ def test_existing_host_binding_requires_exact_semantic_state_vector(repo_root, t
                 "argument_vector": expected,
                 "control_home": str(control),
                 "ready_file": str(ready),
+                "startup_ready_timeout_seconds": 150.0,
             }
         ),
         encoding="utf-8",
@@ -1027,8 +1033,8 @@ def test_existing_host_binding_requires_exact_semantic_state_vector(repo_root, t
         "$record=$A5|ConvertFrom-Json;"
         "$expected=@(Get-SupervisorArgumentVector $A1 $A2 'MANAGED_MANUAL' $A3 $A6 $A7 '' $false 0);"
         "$other=@(Get-SupervisorArgumentVector $A1 $A2 'MANAGED_MANUAL' $A4 $A6 $A7 '' $false 0);"
-        "[ordered]@{matched=(Test-ExistingInvocation $record $A1 $A2 'MANAGED_MANUAL' $A6 $A7 $A8 $expected);"
-        "other=(Test-ExistingInvocation $record $A1 $A2 'MANAGED_MANUAL' $A6 $A7 $A8 $other)}|ConvertTo-Json -Compress"
+        "[ordered]@{matched=(Test-ExistingInvocation $record $A1 $A2 'MANAGED_MANUAL' $A6 $A7 $A8 $expected 150.0);"
+        "other=(Test-ExistingInvocation $record $A1 $A2 'MANAGED_MANUAL' $A6 $A7 $A8 $other 150.0)}|ConvertTo-Json -Compress"
     )
     result = invoke_start_helpers(
         path,
@@ -1070,6 +1076,7 @@ def test_existing_host_binding_requires_exact_codex_and_duration_vector(repo_roo
         "argument_vector": bounded,
         "control_home": str(control),
         "ready_file": str(ready),
+        "startup_ready_timeout_seconds": 150.0,
     }
     (runtime_home / "supervisor-launch-evidence.json").write_text(json.dumps(evidence), encoding="utf-8")
     record = {
@@ -1085,9 +1092,9 @@ def test_existing_host_binding_requires_exact_codex_and_duration_vector(repo_roo
         "$unbounded=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' '' $A3 $A4 $A6 $false 0); "
         "$wrongCodex=@(Get-SupervisorArgumentVector $A1 $A2 'OBSERVER' '' $A3 $A4 'other-codex' $true 0.125); "
         "$duplicate=@($bounded + @('--profile','OBSERVER')); "
-        "[ordered]@{bounded=(Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A4 $A7 $bounded); "
-        "unbounded=(Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A4 $A7 $unbounded); "
-        "wrong_codex=(Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A4 $A7 $wrongCodex); "
+        "[ordered]@{bounded=(Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A4 $A7 $bounded 150.0); "
+        "unbounded=(Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A4 $A7 $unbounded 150.0); "
+        "wrong_codex=(Test-ExistingInvocation $record $A1 $A2 'OBSERVER' $A3 $A4 $A7 $wrongCodex 150.0); "
         "duplicate=(Test-LaunchEvidenceBinding $A8 $duplicate $A3 $A4)}|ConvertTo-Json -Compress"
     )
     result = invoke_start_helpers(

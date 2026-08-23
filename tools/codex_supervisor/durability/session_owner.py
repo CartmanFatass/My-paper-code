@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import asyncio
+from contextlib import nullcontext
 from dataclasses import dataclass
-from typing import Any, Mapping
+from typing import Any, Callable, ContextManager, Mapping
 
 from ..client import (
     COMPATIBLE_REQUEST_METHODS,
@@ -201,6 +202,7 @@ class AppServerSessionOwner:
         extra_transitions: list[Any] | None = None,
         extra_hooks: list[Any] | None = None,
         request_override: Mapping[str, object] | None = None,
+        pre_write_guard: Callable[[], ContextManager[object]] | None = None,
     ) -> EffectSubmissionResult:
         from ..client import UnexpectedServerRequest
 
@@ -213,7 +215,13 @@ class AppServerSessionOwner:
             )
         self._require_owner_submittable(record)
         async with self._lock:
-            return await self._submit_locked(record, extra_transitions, extra_hooks, request_override)
+            return await self._submit_locked(
+                record,
+                extra_transitions,
+                extra_hooks,
+                request_override,
+                pre_write_guard,
+            )
 
     def _require_owner_submittable(self, record) -> None:
         if record.owner_kind == "EPHEMERAL_CANARY":
@@ -263,6 +271,7 @@ class AppServerSessionOwner:
         extra_transitions: list[Any] | None = None,
         extra_hooks: list[Any] | None = None,
         request_override: Mapping[str, object] | None = None,
+        pre_write_guard: Callable[[], ContextManager[object]] | None = None,
     ) -> EffectSubmissionResult:
         from ..client import UnexpectedServerRequest
 
@@ -270,17 +279,20 @@ class AppServerSessionOwner:
         request = dict(request_override) if request_override is not None else dict(record.request)
         prepared = self.client.prepare_request(record.method, request)
         try:
-            self.store.record_effect_write_start(
-                effect_id=record.effect_id,
-                run_id=self._ensure_run(),
-                method=record.method,
-                payload=dict(prepared.payload),
-                params=dict(prepared.params),
-                request_class=prepared.request_class.value,
-                extra_transitions=extra_transitions,
-                extra_hooks=extra_hooks,
-                request_override=request_override,
-            )
+            run_id = self._ensure_run()
+            guard = pre_write_guard() if pre_write_guard is not None else nullcontext()
+            with guard:
+                self.store.record_effect_write_start(
+                    effect_id=record.effect_id,
+                    run_id=run_id,
+                    method=record.method,
+                    payload=dict(prepared.payload),
+                    params=dict(prepared.params),
+                    request_class=prepared.request_class.value,
+                    extra_transitions=extra_transitions,
+                    extra_hooks=extra_hooks,
+                    request_override=request_override,
+                )
         except Exception:
             discard = getattr(self.client, "discard_prepared", None)
             if callable(discard):

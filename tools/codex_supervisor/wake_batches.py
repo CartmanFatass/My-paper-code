@@ -207,14 +207,14 @@ class WakeBatchStore:
                     if message.delivery_state.value == "ENQUEUED":
                         self.mailbox.mark_eligible(message.message_id)
                     self.mailbox.mark_batched(message.message_id)
-        record_context_injection(
-            self.store,
-            binding_id=binding_id,
-            turn_intent_id=wake_batch_id,
-            snapshot=snapshot,
-            input_text=envelope.text,
-            mailbox_message_ids=envelope.included_message_ids,
-        )
+                record_context_injection(
+                    self.store,
+                    binding_id=binding_id,
+                    turn_intent_id=wake_batch_id,
+                    snapshot=snapshot,
+                    input_text=envelope.text,
+                    mailbox_message_ids=envelope.included_message_ids,
+                )
         row = self.get(wake_batch_id)
         assert row is not None
         row["input_text"] = envelope.text

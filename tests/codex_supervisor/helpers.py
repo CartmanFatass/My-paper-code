@@ -169,6 +169,8 @@ def make_observer_config(tmp_path: Path, **overrides: object) -> ObserverConfig:
         "experimental_api": False,
         "initialize_timeout_seconds": 15.0,
         "request_timeout_seconds": 30.0,
+        "first_reconciliation_timeout_seconds": 120.0,
+        "startup_ready_timeout_seconds": 150.0,
         "reconcile_interval_seconds": 60.0,
         "max_jsonl_line_bytes": 1_048_576,
         "read_retry_attempts": 5,

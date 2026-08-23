@@ -209,6 +209,7 @@ def _write_ready_fixture(
                 ],
                 "control_home": str(control),
                 "ready_file": str(ready),
+                "startup_ready_timeout_seconds": 150.0,
             }
         ),
         encoding="utf-8",

@@ -62,6 +62,12 @@ def test_root_and_portfolio_independent_wake(tmp_path: Path) -> None:
             "schema_version": "1.0",
             "packet_kind": "MANAGED_ACTOR_COMMAND",
             "action_kind": "MAILBOX_ACK",
+            "expected": {
+                "checkpoint_id": (ack_snapshot := seeded["bridge"].snapshot(seeded["portfolio"].actor_context_id)).checkpoint_id,
+                "state_version": ack_snapshot.state_version,
+                "epoch_id": ack_snapshot.epoch_id,
+                "epoch_revision": ack_snapshot.epoch_revision,
+            },
             "payload": {"message_ids": [delivered[0].message_id]},
         }
         ingest_recorded_command(

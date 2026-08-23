@@ -358,6 +358,12 @@ def test_command_from_incident_turn_has_no_control_effect(tmp_path: Path) -> Non
         "schema_version": "1.0",
         "packet_kind": "MANAGED_ACTOR_COMMAND",
         "action_kind": "MAILBOX_ACK",
+        "expected": {
+            "checkpoint_id": snapshot.checkpoint_id,
+            "state_version": snapshot.state_version,
+            "epoch_id": snapshot.epoch_id,
+            "epoch_revision": snapshot.epoch_revision,
+        },
         "payload": {"message_ids": [message.message_id]},
     }
     text = "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n" + json.dumps(body) + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"
@@ -636,6 +642,12 @@ def test_mailbox_command_started_before_wake_but_completed_after_is_rejected(tmp
         "schema_version": "1.0",
         "packet_kind": "MANAGED_ACTOR_COMMAND",
         "action_kind": "MAILBOX_ACK",
+        "expected": {
+            "checkpoint_id": snapshot.checkpoint_id,
+            "state_version": snapshot.state_version,
+            "epoch_id": snapshot.epoch_id,
+            "epoch_revision": snapshot.epoch_revision,
+        },
         "payload": {"message_ids": [message.message_id]},
     }
     text = "<HMASD_MANAGED_ACTOR_COMMAND_V1>\n" + json.dumps(body) + "\n</HMASD_MANAGED_ACTOR_COMMAND_V1>"

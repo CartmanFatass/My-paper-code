@@ -123,6 +123,16 @@ class CommandGateway:
         )
         return {"validation_state": CommandValidationState.APPLIED.value, "command_id": command_id, "receipt_id": receipt_id, "result": result}
 
+    def _assert_currentness(self, binding: Any, parsed: dict[str, Any]) -> None:
+        expected = parsed["expected"]
+        self.bridge.assert_currentness(
+            binding.actor_context_id,
+            checkpoint_id=expected["checkpoint_id"],
+            state_version=int(expected["state_version"]),
+            epoch_id=expected["epoch_id"],
+            epoch_revision=expected["epoch_revision"],
+        )
+
     def _apply_action(
         self,
         action: ManagedActionKind,
@@ -145,30 +155,52 @@ class CommandGateway:
                 raise CommandGatewayError(str(exc)) from exc
             if actor.actor_kind.value != binding.actor_kind.value:
                 raise CommandGatewayError("actor kind no longer matches binding")
-        if action is ManagedActionKind.CONTEXT_REANCHOR_ACK:
-            expected = parsed.get("expected") if isinstance(parsed.get("expected"), dict) else {}
-            result = self.bridge.acknowledge_reanchor(
-                actor_context_id=binding.actor_context_id,
-                checkpoint_id=str(expected.get("checkpoint_id") or ""),
-                expected_state_version=int(expected.get("state_version") or 0),
-                expected_epoch_id=expected.get("epoch_id"),
-                expected_epoch_revision=expected.get("epoch_revision"),
-                app_server_turn_id=turn_id,
-                supervisor_command_id=command_id,
+        expected = parsed["expected"]
+        # BEGIN IMMEDIATE is held across the first durable action boundary.
+        # Semantic helpers join this transaction; mailbox effects commit on
+        # the supervisor database while semantic writers remain fenced.
+        with self.bridge.currentness_guard(
+            binding.actor_context_id,
+            checkpoint_id=expected["checkpoint_id"],
+            state_version=int(expected["state_version"]),
+            epoch_id=expected["epoch_id"],
+            epoch_revision=expected["epoch_revision"],
+        ):
+            if action is ManagedActionKind.CONTEXT_REANCHOR_ACK:
+                result = self.bridge.acknowledge_reanchor(
+                    actor_context_id=binding.actor_context_id,
+                    checkpoint_id=str(expected.get("checkpoint_id") or ""),
+                    expected_state_version=int(expected.get("state_version") or 0),
+                    expected_epoch_id=expected.get("epoch_id"),
+                    expected_epoch_revision=expected.get("epoch_revision"),
+                    app_server_turn_id=turn_id,
+                    supervisor_command_id=command_id,
+                )
+                result["checkpoint_id"] = expected["checkpoint_id"]
+                result["state_version"] = int(expected["state_version"])
+                result["epoch_id"] = expected.get("epoch_id")
+                result["epoch_revision"] = expected.get("epoch_revision")
+                return result
+            inner = parsed.get("payload") if isinstance(parsed.get("payload"), dict) else {}
+            if action is ManagedActionKind.MAILBOX_ACK:
+                result = self._mailbox_ack(binding, command_id, turn_id, inner)
+            if action is ManagedActionKind.MAILBOX_INTAKE:
+                result = self._mailbox_intake(binding, command_id, turn_id, inner)
+            if action is ManagedActionKind.MANAGED_PACKET_SEND:
+                result = self._packet_send(binding, inner)
+            if action not in {
+                ManagedActionKind.MAILBOX_ACK,
+                ManagedActionKind.MAILBOX_INTAKE,
+                ManagedActionKind.MANAGED_PACKET_SEND,
+            }:
+                raise CommandGatewayError(f"unsupported action: {action.value}")
+            result.update(
+                checkpoint_id=expected["checkpoint_id"],
+                state_version=expected["state_version"],
+                epoch_id=expected["epoch_id"],
+                epoch_revision=expected["epoch_revision"],
             )
-            result["checkpoint_id"] = str(expected.get("checkpoint_id") or result.get("checkpoint_id") or "")
-            result["state_version"] = int(expected.get("state_version") or 0)
-            result["epoch_id"] = expected.get("epoch_id")
-            result["epoch_revision"] = expected.get("epoch_revision")
             return result
-        inner = parsed.get("payload") if isinstance(parsed.get("payload"), dict) else {}
-        if action is ManagedActionKind.MAILBOX_ACK:
-            return self._mailbox_ack(binding, command_id, turn_id, inner)
-        if action is ManagedActionKind.MAILBOX_INTAKE:
-            return self._mailbox_intake(binding, command_id, turn_id, inner)
-        if action is ManagedActionKind.MANAGED_PACKET_SEND:
-            return self._packet_send(binding, inner)
-        raise CommandGatewayError(f"unsupported action: {action.value}")
 
     def _require_mailbox(self) -> MailboxStore:
         if self.mailbox is None:
@@ -325,6 +357,32 @@ class CommandGateway:
             CommandValidationState.RECEIVED.value,
             CommandValidationState.VALIDATED.value,
         }:
+            payload = json.loads(str(existing["payload_json"] or "{}"))
+            expected = payload.get("expected") if isinstance(payload.get("expected"), dict) else {}
+            if (
+                receipt is None
+                and str(existing["command_kind"] or "")
+                == ManagedActionKind.CONTEXT_REANCHOR_ACK.value
+            ):
+                binding = self.bindings.get(str(existing["binding_id"]))
+                if binding is not None:
+                    recovered = self.bridge.recover_durable_reanchor_effect(
+                        actor_context_id=binding.actor_context_id,
+                        checkpoint_id=str(expected.get("checkpoint_id") or ""),
+                        state_version=int(expected.get("state_version") or 0),
+                        epoch_id=expected.get("epoch_id"),
+                        epoch_revision=expected.get("epoch_revision"),
+                        actor_turn_id=str(existing["turn_id"]),
+                    )
+                    if recovered is not None:
+                        recovered["supervisor_command_id"] = command_id
+                        self.bindings.store.record_command_receipt(
+                            command_id=command_id,
+                            effect_kind=ManagedActionKind.CONTEXT_REANCHOR_ACK.value,
+                            semantic_ref=str(recovered.get("ack_id") or ""),
+                            result=recovered,
+                        )
+                        receipt = self.bindings.store.get_command_receipt(command_id)
             if receipt is None:
                 if self._effect_receipt_exists(existing):
                     self._mark_command_incident(
@@ -341,8 +399,6 @@ class CommandGateway:
                 raise CommandGatewayError(
                     "command effect requires operator reconciliation; receipt is missing"
                 )
-            payload = json.loads(str(existing["payload_json"] or "{}"))
-            expected = payload.get("expected") if isinstance(payload.get("expected"), dict) else {}
             receipt_result = json.loads(str(receipt["result_json"] or "{}"))
             expected_tuple = currentness_tuple(
                 expected.get("checkpoint_id"),
@@ -359,6 +415,24 @@ class CommandGateway:
             if expected_tuple != receipt_tuple:
                 self._mark_command_incident(command_id, "receipt tuple does not match command")
                 raise CommandGatewayError("receipt tuple does not match command")
+            if str(existing["command_kind"] or "") == ManagedActionKind.CONTEXT_REANCHOR_ACK.value:
+                binding = self.bindings.get(str(existing["binding_id"]))
+                if binding is None:
+                    self._mark_command_incident(command_id, "reanchor receipt binding is missing")
+                    raise CommandGatewayError("reanchor receipt binding is missing")
+                try:
+                    self.bridge.require_durable_reanchor_effect(
+                        actor_context_id=binding.actor_context_id,
+                        checkpoint_id=str(expected.get("checkpoint_id") or ""),
+                        state_version=int(expected.get("state_version") or 0),
+                        epoch_id=expected.get("epoch_id"),
+                        epoch_revision=expected.get("epoch_revision"),
+                        actor_turn_id=str(existing["turn_id"]),
+                        payload=receipt_result,
+                    )
+                except SemanticBridgeError as exc:
+                    self._mark_command_incident(command_id, str(exc))
+                    raise CommandGatewayError(str(exc)) from exc
             if state == CommandValidationState.RECEIVED.value:
                 self._update_command(
                     command_id,

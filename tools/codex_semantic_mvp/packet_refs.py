@@ -46,43 +46,53 @@ def packet_register(
     packet_id = _new_id("pkt")
     marker = marker or f"marker:{packet_id}"
     now = _now()
-    with store._lock, store.connection:
-        store.connection.execute(
-            """INSERT INTO packet_refs (
-                packet_id, packet_kind, source_actor_context_id, target_actor_context_id,
-                direction_id, marker, payload_ref, delivery_state, intake_state,
-                created_at, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, 'PREPARED', 'NOT_INTAKEN', ?, ?)""",
-            (
-                packet_id,
-                packet_kind,
-                source_actor_context_id,
-                target_actor_context_id,
-                direction_id,
-                marker,
-                payload_ref,
-                now,
-                now,
-            ),
-        )
-        target_workflow = store.current_actor_workflow(target_actor_context_id)
-        if target_workflow is not None:
-            store._insert_obligation(
-                store.connection,
-                str(target_workflow["workflow_id"]),
-                ObligationKind.PACKET_INTAKE_REQUIRED,
-                target_actor_context_id,
-                packet_id,
-                "A typed packet requires target-local intake.",
-                packet_id,
-                owner_actor_context_id=target_actor_context_id,
-                source_actor_context_id=source_actor_context_id,
+    with store._lock:
+        owns_transaction = not store.connection.in_transaction
+        if owns_transaction:
+            store.connection.execute("BEGIN IMMEDIATE")
+        try:
+            store.connection.execute(
+                """INSERT INTO packet_refs (
+                    packet_id, packet_kind, source_actor_context_id, target_actor_context_id,
+                    direction_id, marker, payload_ref, delivery_state, intake_state,
+                    created_at, updated_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, 'PREPARED', 'NOT_INTAKEN', ?, ?)""",
+                (
+                    packet_id,
+                    packet_kind,
+                    source_actor_context_id,
+                    target_actor_context_id,
+                    direction_id,
+                    marker,
+                    payload_ref,
+                    now,
+                    now,
+                ),
             )
-            store._touch_workflow(str(target_workflow["workflow_id"]))
-        row = store.connection.execute(
-            "SELECT * FROM packet_refs WHERE packet_id = ?", (packet_id,)
-        ).fetchone()
-        return _row(row)
+            target_workflow = store.current_actor_workflow(target_actor_context_id)
+            if target_workflow is not None:
+                store._insert_obligation(
+                    store.connection,
+                    str(target_workflow["workflow_id"]),
+                    ObligationKind.PACKET_INTAKE_REQUIRED,
+                    target_actor_context_id,
+                    packet_id,
+                    "A typed packet requires target-local intake.",
+                    packet_id,
+                    owner_actor_context_id=target_actor_context_id,
+                    source_actor_context_id=source_actor_context_id,
+                )
+                store._touch_workflow(str(target_workflow["workflow_id"]))
+            row = store.connection.execute(
+                "SELECT * FROM packet_refs WHERE packet_id = ?", (packet_id,)
+            ).fetchone()
+            if owns_transaction:
+                store.connection.commit()
+            return _row(row)
+        except Exception:
+            if owns_transaction and store.connection.in_transaction:
+                store.connection.rollback()
+            raise
 
 
 def _set_delivery(store: SemanticStore, packet_id: str, state: str) -> dict[str, Any]:

@@ -401,7 +401,28 @@ class HostControlChannel:
 
     def claim_next(self) -> HostControlRequest | None:
         while self._recovered_processing:
-            name = min(self._recovered_processing)
+            # A valid recovered STOP is local containment, not an App Server
+            # replay.  Validate every candidate before prioritizing it so a
+            # malformed file can neither masquerade as STOP nor suppress the
+            # ordinary rejection/handling of the remaining recovered work.
+            def recovered_priority(name: str) -> tuple[int, str]:
+                processing_path = self.processing / name
+                try:
+                    candidate = parse_request(
+                        _load_json(processing_path, "control request")
+                    )
+                    if processing_path.stem != candidate.request_id:
+                        raise HostControlValidationError(
+                            "request_id does not match its file name"
+                        )
+                except HostControlValidationError:
+                    return (1, name)
+                return (
+                    0 if candidate.command is CommandKind.STOP else 1,
+                    name,
+                )
+
+            name = min(self._recovered_processing, key=recovered_priority)
             self._recovered_processing.remove(name)
             processing_path = self.processing / name
             if not processing_path.exists():
@@ -563,6 +584,11 @@ class HostControlChannel:
             self._recovered_request_ids.discard(request.request_id)
             try:
                 if recovered and request.command in _REPLAY_FENCED_COMMANDS:
+                    # STOP has no App Server effect to replay.  Its local
+                    # containment obligation survives host replacement and
+                    # takes effect before another inbox request is claimed.
+                    if request.command is CommandKind.STOP:
+                        stop_event.set()
                     response = HostControlResponse(
                         schema=CONTROL_RESPONSE_SCHEMA,
                         request_id=request.request_id,

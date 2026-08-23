@@ -45,6 +45,8 @@ class ObserverConfig:
     experimental_api: bool
     initialize_timeout_seconds: float
     request_timeout_seconds: float
+    first_reconciliation_timeout_seconds: float
+    startup_ready_timeout_seconds: float
     reconcile_interval_seconds: float
     max_jsonl_line_bytes: int
     read_retry_attempts: int

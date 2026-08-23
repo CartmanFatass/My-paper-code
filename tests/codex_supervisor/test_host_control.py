@@ -723,6 +723,8 @@ def test_restart_replay_fence_is_exact(
     first = _channel(control_home, profile=profile)
     first.submit(_request("recovered", command))
     assert first.claim_next() is not None
+    if command is CommandKind.STOP:
+        first.submit(_request("after-stop", CommandKind.STATUS))
 
     async def body() -> None:
         restarted = _channel(
@@ -746,8 +748,112 @@ def test_restart_replay_fence_is_exact(
         else:
             raise AssertionError("recovered request produced no response")
         assert response.status == expected_status
+        if command is CommandKind.STOP:
+            assert stop_event.is_set()
+        else:
+            assert not stop_event.is_set()
+            assert not task.done()
+            stop_event.set()
+        await task
+        if command is CommandKind.STOP:
+            assert restarted.response("after-stop") is None
+        store.close()
+
+    asyncio.run(body())
+
+
+def test_recovered_stop_preempts_recovered_read_and_mutation(tmp_path: Path) -> None:
+    control_home = tmp_path / "recovered-stop-priority"
+    first = _channel(control_home, profile=RuntimeProfile.MANAGED_MANUAL)
+    requests = (
+        _request("a-read", CommandKind.STATUS),
+        _request(
+            "b-mutation",
+            CommandKind.MANAGED_TURN,
+            binding_id="binding-never-dispatched",
+            text="must not dispatch",
+        ),
+        _request("z-stop", CommandKind.STOP),
+    )
+    for request in requests:
+        first.submit(request)
+        (first.inbox / f"{request.request_id}.json").replace(
+            first.processing / f"{request.request_id}.json"
+        )
+
+    async def body() -> None:
+        restarted = _channel(control_home, profile=RuntimeProfile.MANAGED_MANUAL)
+        store = ObserverStore(tmp_path / "runtime-recovered-priority")
+        service = SimpleNamespace(
+            store=store,
+            run_id="run-recovered-priority",
+            client=object(),
+            transport=None,
+            _stopped=False,
+        )
+        stop_event = asyncio.Event()
+        await restarted.serve(
+            profile=RuntimeProfile.MANAGED_MANUAL,
+            service=service,
+            stop_event=stop_event,
+        )
+        assert stop_event.is_set()
+        stop_response = restarted.response("z-stop")
+        assert stop_response is not None
+        assert stop_response.status == "SUBMISSION_UNCERTAIN"
+        assert restarted.response("a-read") is None
+        assert restarted.response("b-mutation") is None
+        store.close()
+
+    asyncio.run(body())
+
+
+def test_invalid_recovered_stop_is_rejected_without_suppressing_valid_read(
+    tmp_path: Path,
+) -> None:
+    control_home = tmp_path / "invalid-recovered-stop"
+    first = _channel(control_home, profile=RuntimeProfile.OBSERVER)
+    read = _request("b-read", CommandKind.STATUS)
+    first.submit(read)
+    (first.inbox / "b-read.json").replace(first.processing / "b-read.json")
+    invalid = _request("a-invalid-stop", CommandKind.STOP).to_dict()
+    del invalid["operator"]
+    (first.processing / "a-invalid-stop.json").write_text(
+        json.dumps(invalid), encoding="utf-8"
+    )
+
+    async def body() -> None:
+        restarted = _channel(
+            control_home,
+            profile=RuntimeProfile.OBSERVER,
+            poll_interval_seconds=0.01,
+        )
+        store = ObserverStore(tmp_path / "runtime-invalid-recovered-stop")
+        service = SimpleNamespace(
+            store=store,
+            run_id="run-invalid-stop",
+            client=object(),
+            transport=None,
+            _stopped=False,
+        )
+        stop_event = asyncio.Event()
+        task = asyncio.create_task(
+            restarted.serve(
+                profile=RuntimeProfile.OBSERVER,
+                service=service,
+                stop_event=stop_event,
+            )
+        )
+        for _ in range(100):
+            response = restarted.response("b-read")
+            if response is not None:
+                break
+            await asyncio.sleep(0.01)
+        else:
+            raise AssertionError("valid recovered read was suppressed")
+        assert response.status == "OK"
+        assert list(restarted.rejected.glob("a-invalid-stop.json"))
         assert not stop_event.is_set()
-        assert not task.done()
         stop_event.set()
         await task
         store.close()

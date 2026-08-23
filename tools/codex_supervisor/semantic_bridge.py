@@ -3,13 +3,15 @@
 from __future__ import annotations
 
 import json
+from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterator
 
 from tools.codex_semantic_mvp.actor_models import ActorKind, ActorState, actor_context_from_row
 from tools.codex_semantic_mvp.checkpoints import context_reanchor_ack, current_checkpoint
 from tools.codex_semantic_mvp.epochs import plan_epoch_current
+from tools.codex_semantic_mvp.models import ObligationKind
 from tools.codex_semantic_mvp.store import SemanticStore
 
 from .managed_models import ManagedActorKind
@@ -48,7 +50,7 @@ class SemanticBridge:
     def close(self) -> None:
         self.semantic.close()
 
-    def require_eligible(self, actor_context_id: str):
+    def _require_eligible_unlocked(self, actor_context_id: str):
         row = self.semantic.connection.execute(
             "SELECT * FROM actor_contexts WHERE actor_context_id = ?",
             (actor_context_id,),
@@ -62,8 +64,13 @@ class SemanticBridge:
             raise SemanticBridgeError(f"actor is not ACTIVE: {actor.state.value}")
         return actor
 
-    def snapshot(self, actor_context_id: str) -> ManagedActorSnapshot:
-        actor = self.require_eligible(actor_context_id)
+    def require_eligible(self, actor_context_id: str):
+        with self.semantic._lock:
+            return self._require_eligible_unlocked(actor_context_id)
+
+    def _snapshot_unlocked(self, actor_context_id: str) -> ManagedActorSnapshot:
+        connection = self.semantic.connection
+        actor = self._require_eligible_unlocked(actor_context_id)
         workflow = self.semantic.current_actor_workflow(actor_context_id)
         epoch = plan_epoch_current(self.semantic, actor_context_id)
         checkpoint = current_checkpoint(self.semantic, actor_context_id)
@@ -72,7 +79,7 @@ class SemanticBridge:
             capsule = checkpoint["capsule"]
         obligation_ids: list[str] = []
         if workflow is not None:
-            rows = self.semantic.connection.execute(
+            rows = connection.execute(
                 "SELECT obligation_id FROM obligations WHERE workflow_id = ? AND state = 'OPEN'",
                 (workflow["workflow_id"],),
             ).fetchall()
@@ -94,6 +101,85 @@ class SemanticBridge:
             open_obligation_ids=tuple(obligation_ids),
         )
 
+    def snapshot(self, actor_context_id: str) -> ManagedActorSnapshot:
+        with self.semantic._lock:
+            connection = self.semantic.connection
+            owns_transaction = not connection.in_transaction
+            if owns_transaction:
+                connection.execute("BEGIN")
+            try:
+                result = self._snapshot_unlocked(actor_context_id)
+                if owns_transaction:
+                    connection.commit()
+                return result
+            except Exception:
+                if owns_transaction and connection.in_transaction:
+                    connection.rollback()
+                raise
+
+    @contextmanager
+    def currentness_guard(
+        self,
+        actor_context_id: str,
+        *,
+        checkpoint_id: str | None,
+        state_version: int,
+        epoch_id: str | None,
+        epoch_revision: int | None,
+    ) -> Iterator[ManagedActorSnapshot]:
+        """Hold one exact semantic writer fence through a caller's first effect.
+
+        The guard owns ``BEGIN IMMEDIATE``.  Semantic write helpers invoked by
+        the caller must therefore join the ambient transaction rather than
+        committing it.  Network waits are intentionally outside this scope.
+        """
+
+        with self.semantic._lock:
+            connection = self.semantic.connection
+            if connection.in_transaction:
+                raise SemanticBridgeError("semantic currentness guard requires transaction ownership")
+            connection.execute("BEGIN IMMEDIATE")
+            try:
+                snapshot = self._snapshot_unlocked(actor_context_id)
+                expected = (checkpoint_id, state_version, epoch_id, epoch_revision)
+                actual = (
+                    snapshot.checkpoint_id,
+                    snapshot.state_version,
+                    snapshot.epoch_id,
+                    snapshot.epoch_revision,
+                )
+                if actual != expected:
+                    raise SemanticBridgeError("semantic currentness tuple no longer matches")
+                yield snapshot
+                if not connection.in_transaction:
+                    raise SemanticBridgeError("semantic currentness guard was released prematurely")
+                connection.commit()
+            except Exception:
+                if connection.in_transaction:
+                    connection.rollback()
+                raise
+
+    def assert_currentness(
+        self,
+        actor_context_id: str,
+        *,
+        checkpoint_id: str | None,
+        state_version: int,
+        epoch_id: str | None,
+        epoch_revision: int | None,
+    ) -> ManagedActorSnapshot:
+        snapshot = self.snapshot(actor_context_id)
+        expected = (checkpoint_id, state_version, epoch_id, epoch_revision)
+        actual = (
+            snapshot.checkpoint_id,
+            snapshot.state_version,
+            snapshot.epoch_id,
+            snapshot.epoch_revision,
+        )
+        if actual != expected:
+            raise SemanticBridgeError("semantic currentness tuple no longer matches")
+        return snapshot
+
     def acknowledge_reanchor(
         self,
         *,
@@ -108,24 +194,105 @@ class SemanticBridge:
         if self.supervisor_store is not None:
             existing = self.supervisor_store.get_command_receipt(supervisor_command_id)
             if existing is not None:
-                return json.loads(existing["result_json"])
-        self.require_eligible(actor_context_id)
-        result = context_reanchor_ack(
-            self.semantic,
-            actor_context_id=actor_context_id,
-            checkpoint_id=checkpoint_id,
-            state_version=expected_state_version,
-            epoch_id=expected_epoch_id,
-            epoch_revision=expected_epoch_revision,
-            actor_turn_id=app_server_turn_id,
+                payload = json.loads(existing["result_json"])
+                self.require_durable_reanchor_effect(
+                    actor_context_id=actor_context_id,
+                    checkpoint_id=checkpoint_id,
+                    state_version=expected_state_version,
+                    epoch_id=expected_epoch_id,
+                    epoch_revision=expected_epoch_revision,
+                    actor_turn_id=str(payload.get("actor_turn_id") or app_server_turn_id),
+                    payload=payload,
+                )
+                return payload
+
+        # A cheap exact-ack lookup distinguishes recovery from a new effect.
+        # The new-effect path performs no eligibility/currentness/checkpoint/
+        # epoch/obligation read before currentness_guard owns BEGIN IMMEDIATE.
+        with self.semantic._lock:
+            existing_ack = self.semantic.connection.execute(
+                """SELECT 1 FROM reanchor_acks
+                WHERE actor_context_id = ? AND checkpoint_id = ?
+                  AND state_version = ? AND epoch_id IS ?
+                  AND epoch_revision IS ? AND actor_turn_id = ?""",
+                (
+                    actor_context_id,
+                    checkpoint_id,
+                    expected_state_version,
+                    expected_epoch_id,
+                    expected_epoch_revision,
+                    app_server_turn_id,
+                ),
+            ).fetchone()
+        recovered = (
+            self.recover_durable_reanchor_effect(
+                actor_context_id=actor_context_id,
+                checkpoint_id=checkpoint_id,
+                state_version=expected_state_version,
+                epoch_id=expected_epoch_id,
+                epoch_revision=expected_epoch_revision,
+                actor_turn_id=app_server_turn_id,
+            )
+            if existing_ack is not None
+            else None
         )
+        if recovered is not None:
+            recovered["supervisor_command_id"] = supervisor_command_id
+            if self.supervisor_store is not None:
+                self.supervisor_store.record_command_receipt(
+                    command_id=supervisor_command_id,
+                    effect_kind="CONTEXT_REANCHOR_ACK",
+                    semantic_ref=str(recovered.get("ack_id") or ""),
+                    result=recovered,
+                )
+            return recovered
+
+        with self.semantic._lock:
+            connection = self.semantic.connection
+            joined_ambient_transaction = connection.in_transaction
+            if joined_ambient_transaction:
+                self._require_eligible_unlocked(actor_context_id)
+                result = context_reanchor_ack(
+                    self.semantic,
+                    actor_context_id=actor_context_id,
+                    checkpoint_id=checkpoint_id,
+                    state_version=expected_state_version,
+                    epoch_id=expected_epoch_id,
+                    epoch_revision=expected_epoch_revision,
+                    actor_turn_id=app_server_turn_id,
+                )
+            else:
+                # Direct bridge callers use the same writer/currentness guard
+                # as the command gateway.  Eligibility, tuple, checkpoint and
+                # obligation reads therefore occur only after BEGIN IMMEDIATE.
+                with self.currentness_guard(
+                    actor_context_id,
+                    checkpoint_id=checkpoint_id,
+                    state_version=expected_state_version,
+                    epoch_id=expected_epoch_id,
+                    epoch_revision=expected_epoch_revision,
+                ):
+                    result = context_reanchor_ack(
+                        self.semantic,
+                        actor_context_id=actor_context_id,
+                        checkpoint_id=checkpoint_id,
+                        state_version=expected_state_version,
+                        epoch_id=expected_epoch_id,
+                        epoch_revision=expected_epoch_revision,
+                        actor_turn_id=app_server_turn_id,
+                    )
         payload = dict(result)
         payload["supervisor_command_id"] = supervisor_command_id
         payload["checkpoint_id"] = checkpoint_id
         payload["state_version"] = expected_state_version
         payload["epoch_id"] = expected_epoch_id
         payload["epoch_revision"] = expected_epoch_revision
-        if self.supervisor_store is not None:
+        payload["actor_turn_id"] = app_server_turn_id
+        # An ambient transaction (the gateway currentness guard) has not
+        # committed when this method returns.  Its caller owns the post-commit
+        # receipt.  Without an ambient transaction, context_reanchor_ack has
+        # already committed successfully, so direct bridge calls may record it.
+        if self.supervisor_store is not None and not joined_ambient_transaction:
             self.supervisor_store.record_command_receipt(
                 command_id=supervisor_command_id,
                 effect_kind="CONTEXT_REANCHOR_ACK",
@@ -133,6 +300,106 @@ class SemanticBridge:
                 result=payload,
             )
         return payload
+
+    def recover_durable_reanchor_effect(
+        self,
+        *,
+        actor_context_id: str,
+        checkpoint_id: str,
+        state_version: int,
+        epoch_id: str | None,
+        epoch_revision: int | None,
+        actor_turn_id: str,
+    ) -> dict[str, Any] | None:
+        """Return one exact committed ack/resolution pair without reapplying it."""
+
+        with self.semantic._lock:
+            connection = self.semantic.connection
+            owns_transaction = not connection.in_transaction
+            if owns_transaction:
+                connection.execute("BEGIN")
+            try:
+                ack = connection.execute(
+                    """SELECT ack_id FROM reanchor_acks
+                    WHERE actor_context_id = ? AND checkpoint_id = ?
+                      AND state_version = ? AND epoch_id IS ?
+                      AND epoch_revision IS ? AND actor_turn_id = ?""",
+                    (
+                        actor_context_id,
+                        checkpoint_id,
+                        state_version,
+                        epoch_id,
+                        epoch_revision,
+                        actor_turn_id,
+                    ),
+                ).fetchone()
+                obligations = connection.execute(
+                    """SELECT
+                        COUNT(*) AS total,
+                        SUM(CASE WHEN obligations.state = 'RESOLVED'
+                                      AND obligations.resolved_at IS NOT NULL
+                                 THEN 1 ELSE 0 END) AS resolved
+                    FROM obligations
+                    JOIN workflows ON workflows.workflow_id = obligations.workflow_id
+                    WHERE workflows.actor_context_id = ?
+                      AND obligations.kind = ? AND obligations.subject = ?""",
+                    (
+                        actor_context_id,
+                        ObligationKind.CONTEXT_REANCHOR_REQUIRED.value,
+                        checkpoint_id,
+                    ),
+                ).fetchone()
+                durable = (
+                    ack is not None
+                    and obligations is not None
+                    and int(obligations["total"] or 0) > 0
+                    and int(obligations["resolved"] or 0)
+                    == int(obligations["total"] or 0)
+                )
+                if owns_transaction:
+                    connection.commit()
+            except Exception:
+                if owns_transaction and connection.in_transaction:
+                    connection.rollback()
+                raise
+        if not durable:
+            return None
+        return {
+            "ack_id": str(ack["ack_id"]),
+            "actor_context_id": actor_context_id,
+            "checkpoint_id": checkpoint_id,
+            "state_version": state_version,
+            "epoch_id": epoch_id,
+            "epoch_revision": epoch_revision,
+            "actor_turn_id": actor_turn_id,
+        }
+
+    def require_durable_reanchor_effect(
+        self,
+        *,
+        actor_context_id: str,
+        checkpoint_id: str,
+        state_version: int,
+        epoch_id: str | None,
+        epoch_revision: int | None,
+        actor_turn_id: str,
+        payload: dict[str, Any],
+    ) -> None:
+        """Reject a supervisor receipt unless its exact semantic effect committed."""
+
+        expected_ack_id = str(payload.get("ack_id") or "")
+        if not expected_ack_id:
+            raise SemanticBridgeError("reanchor receipt has no durable semantic effect")
+        recovered = self.recover_durable_reanchor_effect(
+            actor_context_id=actor_context_id,
+            checkpoint_id=checkpoint_id,
+            state_version=state_version,
+            epoch_id=epoch_id,
+            epoch_revision=epoch_revision,
+            actor_turn_id=actor_turn_id,
+        )
+        if recovered is None or str(recovered["ack_id"]) != expected_ack_id:
+            raise SemanticBridgeError("reanchor receipt has no durable semantic effect")
 
 
 def managed_kind_from_snapshot(snapshot: ManagedActorSnapshot) -> ManagedActorKind:

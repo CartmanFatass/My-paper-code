@@ -23,7 +23,7 @@ from .db import (
     connect,
     connect_existing,
     initialize_database,
-    validate_existing_database,
+    _validate_existing_database,
 )
 from .models import (
     IntakeKind,
@@ -101,22 +101,24 @@ class SemanticStore:
     def open_existing(cls, path: str | Path) -> "SemanticStore":
         """Open one already initialized compatible database without migrating it."""
 
-        resolved = validate_existing_database(path)
-        connection = connect_existing(resolved)
-        try:
-            # Bind the compatibility check to the connection that will be used
-            # for host mutations as well as to the prior zero-write probe.
-            from .db import _validate_schema_v3_connection
-
-            _validate_schema_v3_connection(connection)
-        except Exception:
-            connection.close()
-            raise
+        token = _validate_existing_database(path)
+        binding = connect_existing(token)
         instance = cls.__new__(cls)
-        instance.path = resolved
-        instance.connection = connection
-        instance._lock = threading.RLock()
-        return instance
+        try:
+            instance.path = token.path
+            instance.connection = binding.connection
+            instance._lock = threading.RLock()
+            binding.transfer_to(instance)
+            # ``synchronous`` can cause SQLite to materialize a missing WAL
+            # index.  The exact connection is now installed and its fenced
+            # transfer transaction has committed, but the store is still
+            # private to this constructor.  Set the durability mode only in
+            # this interval, before exposing the store to its caller.
+            instance.connection.execute("PRAGMA synchronous = FULL")
+            return instance
+        except Exception:
+            binding.close()
+            raise
 
     def close(self) -> None:
         with self._lock:

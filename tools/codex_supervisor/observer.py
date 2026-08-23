@@ -364,7 +364,10 @@ class ObserverService:
                 if exc is not None:
                     raise exc
                 raise RuntimeError("server-request watcher stopped before readiness")
-            reconciliation = await self.reconcile_threads()
+            reconciliation = await asyncio.wait_for(
+                self.reconcile_threads(),
+                timeout=self.config.first_reconciliation_timeout_seconds,
+            )
             if watcher.done():
                 exc = watcher.exception()
                 if exc is not None:

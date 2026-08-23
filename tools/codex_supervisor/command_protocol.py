@@ -56,14 +56,29 @@ def extract_managed_command(text: str) -> dict[str, Any] | None:
         raise CommandProtocolError("unsupported schema_version")
     if payload.get("packet_kind") != "MANAGED_ACTOR_COMMAND":
         raise CommandProtocolError("packet_kind must be MANAGED_ACTOR_COMMAND")
-    if kind is ManagedActionKind.CONTEXT_REANCHOR_ACK:
+    if kind is not ManagedActionKind.NO_CONTROL_ACTION:
         expected = payload.get("expected")
         if not isinstance(expected, Mapping):
-            raise CommandProtocolError("CONTEXT_REANCHOR_ACK requires expected currentness fields")
+            raise CommandProtocolError(f"{kind.value} requires expected currentness fields")
         required = ("checkpoint_id", "state_version", "epoch_id", "epoch_revision")
         missing = [key for key in required if key not in expected]
         if missing:
-            raise CommandProtocolError(f"CONTEXT_REANCHOR_ACK missing {missing}")
+            raise CommandProtocolError(f"{kind.value} missing expected fields {missing}")
+        for key in ("checkpoint_id", "epoch_id"):
+            if expected[key] is not None and not isinstance(expected[key], str):
+                raise CommandProtocolError(f"expected.{key} must be a string or null")
+        if isinstance(expected["state_version"], bool) or not isinstance(expected["state_version"], int):
+            raise CommandProtocolError("expected.state_version must be an integer")
+        if (
+            expected["epoch_revision"] is not None
+            and (
+                isinstance(expected["epoch_revision"], bool)
+                or not isinstance(expected["epoch_revision"], int)
+            )
+        ):
+            raise CommandProtocolError("expected.epoch_revision must be an integer or null")
+        if kind is ManagedActionKind.CONTEXT_REANCHOR_ACK and not expected["checkpoint_id"]:
+            raise CommandProtocolError("CONTEXT_REANCHOR_ACK requires a checkpoint_id")
     if kind is ManagedActionKind.MAILBOX_ACK:
         inner = payload.get("payload")
         if not isinstance(inner, Mapping) or not isinstance(inner.get("message_ids"), list) or not inner["message_ids"]:
