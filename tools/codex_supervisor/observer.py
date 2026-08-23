@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import asyncio
+import inspect
+import os
 import shutil
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Callable, Mapping
+from typing import TYPE_CHECKING, Any, Awaitable, Callable, Mapping
 
 from .client import (
     MUTATING_NO_RETRY_METHODS,
@@ -28,9 +30,13 @@ from .models import (
 )
 from .normalizer import apply_normalized_event, normalize_message, thread_snapshot_fields
 from .protocol import classify_rpc_message, encode_jsonl, extract_protocol_ids
+from .runtime_profiles import RuntimeProfile
 from .session_guard import ManagedAppServerSession
 from .store import ObserverStore
 from .transport import AppServerTransport, TransportClosed, TransportMessage
+
+if TYPE_CHECKING:
+    from .host_control import HostControlChannel
 
 CANARY_PROMPT = "Reply exactly: HMASD_APP_SERVER_OBSERVER_OK\nDo not use tools."
 CANARY_TEXT = "HMASD_APP_SERVER_OBSERVER_OK"
@@ -333,28 +339,93 @@ class ObserverService:
         await session._incident.wait()
         raise UnexpectedServerRequest(session.incident_payload or {})
 
-    async def serve(self, duration_seconds: float | None = None) -> ObserverRunResult:
-        await self.start()
+    async def serve(
+        self,
+        duration_seconds: float | None = None,
+        ready_hook: Callable[[dict[str, object]], Awaitable[None] | None] | None = None,
+        *,
+        control: HostControlChannel | None = None,
+        profile: RuntimeProfile = RuntimeProfile.OBSERVER,
+    ) -> ObserverRunResult:
         watcher: asyncio.Task[None] | None = None
+        command_task: asyncio.Task[None] | None = None
+        stop_waiter: asyncio.Task[bool] | None = None
+        host_stop_event = asyncio.Event()
         try:
+            # Startup is part of the lifecycle guarded by this cleanup block.
+            # ``start`` may have created a run and an App Server transport
+            # before a later startup step fails.
+            await self.start()
             await self.initialize()
             watcher = asyncio.create_task(self._watch_server_requests())
             await asyncio.sleep(0)
-            await self.reconcile_threads()
+            if watcher.done():
+                exc = watcher.exception()
+                if exc is not None:
+                    raise exc
+                raise RuntimeError("server-request watcher stopped before readiness")
+            reconciliation = await self.reconcile_threads()
+            if watcher.done():
+                exc = watcher.exception()
+                if exc is not None:
+                    raise exc
+                raise RuntimeError("server-request watcher stopped before readiness")
+            if ready_hook is not None:
+                assert self.run_id is not None and self.transport is not None
+                ready_result = ready_hook(
+                    {
+                        "run_id": self.run_id,
+                        # READY identifies the long-lived Python supervisor
+                        # host.  The distinct App Server child PID remains in
+                        # observer_runs and APP_SERVER_PROCESS_* facts.
+                        "process_id": os.getpid(),
+                        "initialized_at": _now(),
+                        "watcher_active": not watcher.done(),
+                        "first_reconciliation_completed": True,
+                        "thread_count": int(reconciliation["thread_count"]),
+                    }
+                )
+                if inspect.isawaitable(ready_result):
+                    await ready_result
+            if control is not None:
+                command_task = asyncio.create_task(
+                    control.serve(
+                        profile=profile,
+                        service=self,
+                        stop_event=host_stop_event,
+                    )
+                )
+                stop_waiter = asyncio.create_task(host_stop_event.wait())
             deadline = None if duration_seconds is None else asyncio.get_running_loop().time() + duration_seconds
             while True:
+                if host_stop_event.is_set():
+                    return await self.stop(EndKind.NORMAL.value)
                 if deadline is not None and asyncio.get_running_loop().time() >= deadline:
                     return await self.stop(EndKind.NORMAL.value)
                 timeout = self.config.reconcile_interval_seconds
                 if deadline is not None:
                     timeout = min(timeout, max(0.05, deadline - asyncio.get_running_loop().time()))
-                done, _pending = await asyncio.wait({watcher}, timeout=timeout)
+                waited: set[asyncio.Task[Any]] = {watcher}
+                if command_task is not None:
+                    waited.add(command_task)
+                if stop_waiter is not None:
+                    waited.add(stop_waiter)
+                done, _pending = await asyncio.wait(waited, timeout=timeout)
                 if watcher in done:
                     exc = watcher.exception()
                     if isinstance(exc, UnexpectedServerRequest):
                         return await self._terminate_unexpected(exc)
                     if exc:
                         raise exc
+                if stop_waiter is not None and stop_waiter in done:
+                    return await self.stop(EndKind.NORMAL.value)
+                if command_task is not None and command_task in done:
+                    exc = command_task.exception()
+                    if exc is not None:
+                        raise exc
+                    if not host_stop_event.is_set():
+                        raise RuntimeError("host control loop stopped unexpectedly")
+                    return await self.stop(EndKind.NORMAL.value)
                 await self.reconcile_threads()
         except UnexpectedServerRequest as exc:
             return await self._terminate_unexpected(exc)
@@ -369,8 +440,16 @@ class ObserverService:
                 await self.stop(EndKind.PROTOCOL_INCIDENT.value)
             raise
         finally:
-            if watcher is not None and not watcher.done():
-                watcher.cancel()
+            host_stop_event.set()
+            tasks = tuple(
+                task
+                for task in (watcher, command_task, stop_waiter)
+                if task is not None and not task.done()
+            )
+            for task in tasks:
+                task.cancel()
+            if tasks:
+                await asyncio.gather(*tasks, return_exceptions=True)
 
     async def run_snapshot(self) -> dict[str, object] | ObserverRunResult:
         await self.start()

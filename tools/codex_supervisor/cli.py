@@ -5,12 +5,19 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import shutil
+import uuid
+from dataclasses import asdict
+from datetime import datetime, timezone
 from pathlib import Path
 
 from .codex_binary import resolve_codex_binary
 from .config import load_observer_config
 from .doctor import collect_doctor
+from .host_control import HostControlChannel
+from .host_state import READY_RECORD_SCHEMA, SupervisorReadyRecord, atomic_write_json
 from .observer import ObserverService
+from .runtime_profiles import RuntimeProfile
 from .schema_capture import capture_app_server_schema
 from .store import ObserverStore
 from .timeline import mailbox_timeline, render_thread_timeline_markdown, thread_timeline, wake_timeline
@@ -27,6 +34,13 @@ def _parser() -> argparse.ArgumentParser:
     sub.add_parser("snapshot")
     serve = sub.add_parser("serve")
     serve.add_argument("--duration-seconds", type=float, default=None)
+    serve.add_argument(
+        "--profile",
+        choices=tuple(profile.value for profile in RuntimeProfile),
+        default=RuntimeProfile.OBSERVER.value,
+    )
+    serve.add_argument("--ready-file")
+    serve.add_argument("--control-home")
     sub.add_parser("canary")
     timeline = sub.add_parser("timeline")
     timeline.add_argument("--thread-id", required=True)
@@ -141,7 +155,58 @@ def main(argv: list[str] | None = None) -> int:
                 print(json.dumps(result, indent=2))
                 return 0
             if args.command == "serve":
-                result = await service.serve(args.duration_seconds)
+                profile = RuntimeProfile(args.profile)
+                ready_file = (
+                    _require_external_path(repo_root, Path(args.ready_file), "ready file")
+                    if args.ready_file
+                    else None
+                )
+                control_home = _require_external_path(
+                    repo_root,
+                    Path(args.control_home)
+                    if args.control_home
+                    else config.runtime_home / "control",
+                    "control home",
+                )
+                if ready_file is not None:
+                    _archive_host_signal(
+                        ready_file,
+                        config.runtime_home,
+                        "ready-prelaunch",
+                    )
+
+                async def _ready_hook(payload: dict[str, object]) -> None:
+                    if ready_file is None:
+                        return
+                    record = SupervisorReadyRecord(
+                        schema=READY_RECORD_SCHEMA,
+                        run_id=str(payload["run_id"]),
+                        process_id=int(payload["process_id"]),
+                        initialized_at=str(payload["initialized_at"]),
+                        watcher_active=payload["watcher_active"] is True,
+                        first_reconciliation_completed=(
+                            payload["first_reconciliation_completed"] is True
+                        ),
+                        thread_count=int(payload["thread_count"]),
+                        runtime_home=str(config.runtime_home),
+                        profile=profile.value,
+                    )
+                    atomic_write_json(ready_file, asdict(record))
+
+                try:
+                    result = await service.serve(
+                        args.duration_seconds,
+                        _ready_hook,
+                        control=HostControlChannel(control_home),
+                        profile=profile,
+                    )
+                finally:
+                    if ready_file is not None:
+                        _archive_host_signal(
+                            ready_file,
+                            config.runtime_home,
+                            "ready-stopped",
+                        )
                 print(json.dumps({"run_id": result.run_id, "end_kind": result.end_kind}, indent=2))
                 return 0
             if args.command == "canary":
@@ -153,6 +218,30 @@ def main(argv: list[str] | None = None) -> int:
         return asyncio.run(_run())
     finally:
         store.close()
+
+
+def _require_external_path(repo_root: Path, path: Path, label: str) -> Path:
+    resolved = path.resolve()
+    try:
+        resolved.relative_to(repo_root.resolve())
+    except ValueError:
+        return resolved
+    raise SystemExit(f"{label} must not live inside the repository")
+
+
+def _archive_host_signal(path: Path, runtime_home: Path, label: str) -> Path | None:
+    """Remove one live signal while retaining its bytes as external audit evidence."""
+
+    signal = Path(path)
+    if not signal.is_file():
+        return None
+    archive = Path(runtime_home) / "archive"
+    archive.mkdir(parents=True, exist_ok=True)
+    stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+    destination = archive / f"{label}.{stamp}.{uuid.uuid4().hex}.json"
+    shutil.copy2(signal, destination)
+    signal.unlink()
+    return destination
 
 
 def _require_operator(args: argparse.Namespace) -> str:
