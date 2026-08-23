@@ -11,8 +11,10 @@ from .mailbox_models import (
     MAX_WAKE_INPUT_BYTES,
     MAX_WAKE_MESSAGES,
     WAKE_ENVELOPE_HEADER,
+    MailboxRefError,
     MailboxMessage,
     WakeBatchState,
+    validate_mailbox_ref,
 )
 from .mailbox_store import MailboxStore
 from .managed_context import record_context_injection
@@ -45,6 +47,19 @@ def build_wake_text(
     wake_batch_id: str,
     messages: list[MailboxMessage],
 ) -> WakeEnvelope:
+    validated_messages: list[tuple[MailboxMessage, str, str]] = []
+    try:
+        for message in messages:
+            validated_messages.append(
+                (
+                    message,
+                    validate_mailbox_ref(message.subject_ref, field_name="subject_ref"),
+                    validate_mailbox_ref(message.payload_ref, field_name="payload_ref"),
+                )
+            )
+    except MailboxRefError as exc:
+        raise WakeBatchError(f"invalid mailbox reference: {exc}") from exc
+
     lines = [
         WAKE_ENVELOPE_HEADER,
         "",
@@ -60,12 +75,12 @@ def build_wake_text(
         "MESSAGES",
     ]
     included: list[MailboxMessage] = []
-    for message in messages[:MAX_WAKE_MESSAGES]:
+    for message, subject_ref, payload_ref in validated_messages[:MAX_WAKE_MESSAGES]:
         block = [
             f"- message_id={message.message_id}",
             f"  kind={message.message_kind.value}",
-            f"  subject_ref={message.subject_ref}",
-            f"  payload_ref={message.payload_ref}",
+            f"  subject_ref={subject_ref}",
+            f"  payload_ref={payload_ref}",
         ]
         candidate = "\n".join(lines + block + ["", "Required:", "1. inspect each typed reference;"])
         if len(candidate.encode("utf-8")) > MAX_WAKE_INPUT_BYTES:

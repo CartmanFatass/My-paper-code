@@ -147,7 +147,7 @@ class SemanticScanner:
                 source_event_key=key,
                 target_actor_context_id=target,
                 message_kind=message_kind,
-                subject_ref=str(row["subject"]),
+                subject_ref=str(row["obligation_id"]),
                 payload_ref=str(row["obligation_id"]),
                 priority=10 if message_kind is MailboxMessageKind.REANCHOR_REQUIRED else 5,
             )

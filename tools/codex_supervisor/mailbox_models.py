@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from enum import Enum
 
@@ -97,6 +98,58 @@ MAX_WAKE_MESSAGES = 16
 MAX_WAKE_INPUT_BYTES = 24 * 1024
 DEFAULT_LEASE_SECONDS = 30.0
 SCANNER_ID = "semantic_liveness_v1"
+MAX_MAILBOX_REF_BYTES = 4096
+
+_URI_SCHEME = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
+_SAFE_REF_SEGMENT = re.compile(r"^[A-Za-z0-9@+_.-]+$")
+
+
+class MailboxRefError(ValueError):
+    """Raised when a mailbox field is not a closed, typed reference."""
+
+
+@dataclass(frozen=True)
+class MailboxRef:
+    """A one-line identifier or repository-relative artifact reference."""
+
+    value: str
+
+    @classmethod
+    def parse(cls, value: str, *, field_name: str = "mailbox_ref") -> MailboxRef:
+        if not isinstance(value, str):
+            raise MailboxRefError(f"{field_name} must be a string reference")
+        if not value or value != value.strip():
+            raise MailboxRefError(f"{field_name} must be non-empty without outer whitespace")
+        try:
+            encoded = value.encode("utf-8")
+        except UnicodeEncodeError as exc:
+            raise MailboxRefError(f"{field_name} must be valid UTF-8") from exc
+        if len(encoded) > MAX_MAILBOX_REF_BYTES:
+            raise MailboxRefError(
+                f"{field_name} exceeds {MAX_MAILBOX_REF_BYTES} UTF-8 bytes"
+            )
+        if any(ord(character) < 32 or ord(character) == 127 for character in value):
+            raise MailboxRefError(f"{field_name} contains an ASCII control character")
+        if any(character.isspace() for character in value):
+            raise MailboxRefError(f"{field_name} must not contain whitespace or prose")
+        if value.startswith(("/", "\\")) or re.match(r"^[A-Za-z]:", value):
+            raise MailboxRefError(f"{field_name} must not be an absolute or drive-relative path")
+        if _URI_SCHEME.match(value):
+            raise MailboxRefError(f"{field_name} must not be a URI or scheme reference")
+        segments = re.split(r"[/\\]", value)
+        if any(segment in {"", ".", ".."} for segment in segments):
+            raise MailboxRefError(f"{field_name} contains an unsafe path segment")
+        if any(_SAFE_REF_SEGMENT.fullmatch(segment) is None for segment in segments):
+            raise MailboxRefError(
+                f"{field_name} must use only safe identifier or repository-path characters"
+            )
+        return cls(value=value)
+
+
+def validate_mailbox_ref(value: str, *, field_name: str = "mailbox_ref") -> str:
+    """Validate and return a typed reference without resolving or dereferencing it."""
+
+    return MailboxRef.parse(value, field_name=field_name).value
 
 
 @dataclass(frozen=True)

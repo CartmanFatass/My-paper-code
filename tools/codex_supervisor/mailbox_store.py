@@ -11,8 +11,10 @@ from .mailbox_models import (
     FORBIDDEN_MAILBOX_KINDS,
     DeliveryState,
     IntakeState,
+    MailboxRefError,
     MailboxMessage,
     MailboxMessageKind,
+    validate_mailbox_ref,
 )
 from .store import ObserverStore
 
@@ -126,6 +128,11 @@ class MailboxStore:
         kind = MailboxMessageKind(message_kind) if not isinstance(message_kind, MailboxMessageKind) else message_kind
         if kind.value in FORBIDDEN_MAILBOX_KINDS:
             raise MailboxStoreError(f"forbidden mailbox kind: {kind.value}")
+        try:
+            subject_ref = validate_mailbox_ref(subject_ref, field_name="subject_ref")
+            payload_ref = validate_mailbox_ref(payload_ref, field_name="payload_ref")
+        except MailboxRefError as exc:
+            raise MailboxStoreError(str(exc)) from exc
         existing = self.get_by_source_key(source_event_key)
         if existing is not None:
             same = (
