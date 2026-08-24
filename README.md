@@ -5,7 +5,8 @@
 > the 33 research directions and their source directories, see the
 > [research map](docs/research/RESEARCH_MAP.md);
 > and for the standalone process-core route, see
-> [ha_ctse_process/README.md](ha_ctse_process/README.md).
+> [ha_ctse_process/README.md](ha_ctse_process/README.md). Local generated files
+> and linked worktrees follow the [workspace layout](temp/README.md).
 
 这个项目是论文《Hierarchical Multi-Agent Skill Discovery》(Yang 等，2023) 中提出的 HMASD 算法的 PyTorch 实现，并将其应用于多无人机基站服务场景。HMASD 是一个用于多智能体强化学习的层次化技能发现方法，能够同时学习团队技能和个体技能，并有效地应用于稀疏奖励环境。
 

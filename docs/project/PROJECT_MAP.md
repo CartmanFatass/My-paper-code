@@ -11,6 +11,7 @@ registry, or current-work ledger.
 | Exact scientific meaning | The direction's files under [`../research/candidates/`](../research/candidates/) |
 | Candidate implementations | [`../../experiments/candidates/`](../../experiments/candidates/) |
 | Standalone process-core usage | [`../../ha_ctse_process/README.md`](../../ha_ctse_process/README.md) |
+| Local temporary files and worktree layout | [`../../temp/README.md`](../../temp/README.md) |
 
 ## Stable lineages
 
