@@ -305,6 +305,24 @@ def test_every_mutation_tool_has_explicit_admission_parameters_and_call(tmp_path
     run(scenario)
 
 
+def test_tool_annotations_match_server_effect_inventory(tmp_path) -> None:
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            tools = {tool.name: tool for tool in (await client.list_tools()).tools}
+            for name in mcp_server.READ_ONLY_TOOL_NAMES:
+                annotations = tools[name].annotations
+                assert annotations is not None, name
+                assert annotations.read_only_hint is True, name
+                assert annotations.destructive_hint is False, name
+                assert annotations.idempotent_hint is True, name
+                assert annotations.open_world_hint is False, name
+            for name in mcp_server.MUTATING_TOOL_NAMES:
+                annotations = tools[name].annotations
+                assert annotations is None or annotations.read_only_hint is not True, name
+
+    run(scenario)
+
+
 def test_uniform_admission_rejects_wrong_owner_inactive_and_missing_source_without_writes(
     tmp_path,
 ) -> None:
@@ -434,6 +452,7 @@ def test_live_config_allowlists_match_static_server_inventories() -> None:
 
     assert orchestrator["enabled"] is True
     assert orchestrator["required"] is False
+    assert orchestrator["default_tools_approval_mode"] == "approve"
     assert orchestrator["enabled_tools"] == list(
         mcp_server.ORCHESTRATOR_TOOL_ALLOWLIST
     )

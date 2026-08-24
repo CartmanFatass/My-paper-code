@@ -5,8 +5,10 @@ import pytest
 
 from tools.codex_semantic_mvp.actor_models import ActorKind, ActorState
 from tools.codex_semantic_mvp.actor_registry import (
+    _insert_actor,
     bind_agent_identity,
     link_counterparts,
+    reconcile_session_root_actor,
     register_child_actor,
     register_session_root,
     release_actor_context,
@@ -15,7 +17,7 @@ from tools.codex_semantic_mvp.actor_registry import (
 from tools.codex_semantic_mvp.store import SemanticStore
 
 
-PORTFOLIO_SESSION = "019ffc20-5001-7453-a08a-dac783cf4d80"
+PORTFOLIO_SESSION = "01a03351-e8ef-7620-b2ab-b77b9512f499"
 
 
 @pytest.fixture
@@ -195,3 +197,28 @@ def test_releasing_actor_does_not_change_kind(store: SemanticStore) -> None:
     assert released.state == ActorState.RELEASED
     assert released.actor_kind == ActorKind.EM
     assert released.direction_id == "y"
+
+
+def test_session_root_cutover_reconciles_the_existing_actor_only(store: SemanticStore) -> None:
+    actor_id = "actor-cutover"
+    session_id = PORTFOLIO_SESSION
+    _insert_actor(
+        store,
+        session_id=session_id,
+        actor_kind=ActorKind.OPERATIONAL_ROOT,
+        scope_key=f"session:{session_id}",
+        identity_source="TEST_PRECUTOVER",
+        actor_context_id=actor_id,
+    )
+    transitioned = reconcile_session_root_actor(
+        store,
+        actor_context_id=actor_id,
+        session_id=session_id,
+        cutover_evidence_ref="docs/session/PORTFOLIO_SUCCESSOR_ATOMIC_ROUTING_CUTOVER_20260824.md",
+    )
+    assert transitioned.actor_context_id == actor_id
+    assert transitioned.actor_kind is ActorKind.PORTFOLIO
+    assert transitioned.session_id == session_id
+    assert transitioned.scope_key == f"session:{session_id}"
+    assert transitioned.state is ActorState.ACTIVE
+    assert "PORTFOLIO_SUCCESSOR_ATOMIC_ROUTING_CUTOVER_20260824" in transitioned.identity_source

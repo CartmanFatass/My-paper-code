@@ -11,8 +11,9 @@ from mcp.client import ClientSession
 from mcp.shared.memory import create_client_server_memory_streams
 
 from tools.codex_semantic_mvp import mcp_server
-from tools.codex_context_lifecycle.authority import bind_requester
-from tools.codex_semantic_mvp.actor_registry import register_session_root
+from tools.codex_context_lifecycle.authority import bind_requester, grant_user_authority
+from tools.codex_semantic_mvp.actor_models import ActorKind
+from tools.codex_semantic_mvp.actor_registry import _insert_actor, register_session_root
 
 
 def run(coro):
@@ -114,6 +115,51 @@ def test_task_register_footer_and_bind_running_state(tmp_path):
             })
             state = await call(client, "workflow_state", {"workflow_id": wf})
             assert state["tasks"][0]["lifecycle"] == "RUNNING"
+    run(scenario)
+
+
+def test_session_root_cutover_is_explicit_and_preserves_actor_identity(tmp_path):
+    async def scenario():
+        async with connected_server(tmp_path) as client:
+            store = mcp_server._get_store()
+            session_id = "01a03351-e8ef-7620-b2ab-b77b9512f499"
+            actor = _insert_actor(
+                store,
+                session_id=session_id,
+                actor_kind=ActorKind.OPERATIONAL_ROOT,
+                scope_key=f"session:{session_id}",
+                identity_source="TEST_PRECUTOVER",
+                actor_context_id="actor-cutover-mcp",
+            )
+            bind_requester(actor.actor_context_id)
+            grant = grant_user_authority(
+                store,
+                actor_context_id=actor.actor_context_id,
+                operation="change_actor_state",
+            )
+            result = await call(client, "actor_context_reconcile_session_root", {
+                "actor_context_id": actor.actor_context_id,
+                "session_id": session_id,
+                "cutover_evidence_ref": "docs/session/PORTFOLIO_SUCCESSOR_ATOMIC_ROUTING_CUTOVER_20260824.md",
+                "source_kind": "USER_AUTHORITY",
+                "requester_actor_context_id": actor.actor_context_id,
+                "user_authority_id": grant["grant_id"],
+            })
+            assert result["actor_context"] == {
+                "actor_context_id": actor.actor_context_id,
+                "actor_kind": "PORTFOLIO",
+                "session_id": session_id,
+                "scope_key": f"session:{session_id}",
+                "state": "ACTIVE",
+                "identity_source": (
+                    "SESSION_ROOT_CUTOVER_MAPPING:"
+                    "docs/session/PORTFOLIO_SUCCESSOR_ATOMIC_ROUTING_CUTOVER_20260824.md"
+                ),
+            }
+            current = await call(client, "actor_context_current", {"session_id": session_id})
+            assert current["actor_context"]["actor_context_id"] == actor.actor_context_id
+            assert current["actor_context"]["actor_kind"] == "PORTFOLIO"
+            assert current["actor_context"]["state"] == "ACTIVE"
     run(scenario)
 
 

@@ -31,6 +31,88 @@ integrate, perform Portfolio/EM/CM/WRM/Operator-like work, or create/reuse any
 appropriate registered manager or specialist. It chooses local execution or
 delegation by complexity, independence, context load and risk.
 
+Actual-execution exception: actual train/evaluate/analyze and every leased or
+question-relevant command may not be locally collapsed into Root or CM.
+Root/CM freeze or relay the exact command, manifest, preflight,
+scientific-activity criterion and output paths and dispatch exactly one
+registered `hmasd-experiment-operator`; that Operator exclusively launches
+once and owns and waits for the foreground process handle through terminal.
+Root/CM retain all bounded non-experiment work.
+
+Long-Operator return exception: an Operator command expected to outlast an
+ordinary active Codex turn is dispatched by the current Operational Root from
+the CM-established run-ready packet, after which Root ends the turn normally.
+The external Codex App thread heartbeat is the default return route and targets
+that same current Operational Root. Before launch, estimate the minutes from
+arming through the next observable terminal or decision boundary, including
+prelaunch delay, then select `clamp(ceil(estimate), 15, 60)` minutes; use 30
+minutes only when no credible estimate exists. Confirm the current-Root target,
+exact watched object and receipt paths, ACTIVE state, and selected 15--60-minute
+schedule before dispatch. The same Root task's goal auto-continuation must be
+paused or absent while heartbeat coverage owns the wait; goal turns never
+substitute for scheduler liveness. `ACTIVE + target + schedule` is configuration
+evidence only. After an App/session, target, or heartbeat-configuration change,
+one real same-thread scheduled canary must have fired before a long launch. If
+any condition cannot be established,
+return exact `CONTROL_PLANE_CAPABILITY_BOUNDARY` with `launched=false`; do not
+launch. Each scheduled turn performs exactly one bounded check
+of the exact native child or its named durable terminal receipt. A nonterminal
+check ends normally, may re-estimate the remaining time and update the cadence
+inside 15--60 minutes, and leaves the heartbeat ACTIVE. A terminal check
+collects the ordinary Operator-to-CM native return through Root. Coverage stays
+ACTIVE through CM intake and required owner reconciliation/relay; only then may
+Root pause it. `no active Operator` alone is never a pause condition while a
+terminal receipt or decision handoff remains unreconciled. Any unrelated Root
+turn arriving during coverage must preserve or complete this exact watch before
+pausing it.
+Never use CPU, file, frontier, partial-value, `functions.exec`, `write_stdin`,
+or hidden-loop polling for completion. The heartbeat is an external scheduled
+turn trigger, never an event-driven/native-child/orchestrator/subagent wake.
+Those surfaces cannot wake an ended Codex task, and signals or receipts carry
+execution facts only, never scientific interpretation, acceptance, or
+disposition. No heartbeat or observation may relaunch or duplicate a command;
+the Operator retains the foreground handle and durable terminal receipt.
+
+Quiescent continuation is not active work. Root classifies every no-immediate-
+action handoff as exactly one of `DORMANT_SCHEDULED_CONTINUATION` (an exact
+future event has one scheduled owner), `IDLE_COMPLETE` (no unfinished
+obligation), or `UNOWNED_STALL` (an unfinished obligation has neither an active
+worker nor a valid scheduled owner). Only the last is a workflow anomaly.
+Never keep or create a placeholder EM, CM, Operator, or other child merely to
+make a task look active. A file-backed `PRESTART` lease with no admitted
+activity is a dormant future authorization record, not a current Goal blocker,
+worker, process, capacity reservation, or session hold.
+
+Goals cover finite actionable tranches. Do not create a Goal whose only
+remaining completion condition is elapsed time or an external event. Finish
+the actionable tranche by durably assigning its continuation owner, then leave
+Goal mode paused, cleared, or absent until that event becomes actionable. An
+already-misscoped blocked Goal is only a local rapid-retry circuit breaker; it
+is never project/workflow status and must not be mirrored by the other Root.
+If it cannot be paused or cleared through the available product surface, report
+`GOAL_HEARTBEAT_INTERLOCK_REQUIRED` once rather than spawning a dummy child or
+consuming repeated Goal turns.
+
+The estimate-driven 15--60-minute heartbeat applies to an active or
+unknown-duration long effect. A known future time gate with no active process
+uses one exact scheduled same-task return at the boundary and no intermediate
+polling turns. Every quiescent handoff states `continuity_state`,
+`active_worker`, `continuity_owner`, and `next_event`, so `blocked` cannot be
+mistaken for abandonment.
+
+CM-stage implementation exception: within a CM-owned direction or named
+shared-component engineering stage, Root may not collapse substantial,
+production-capable, novel, native, exact-arithmetic, or
+science-conformance-critical source implementation into the Root or CM role.
+Root/CM freeze the remaining implementation and dispatch exactly one registered
+Implementer; authority, RNG, exact-arithmetic, and science-conformance semantics
+use `hmasd-implementer`/Sol-high, while routine reversible frozen-semantics
+engineering uses `hmasd-implementer-terra`/Terra-high. After a coherent
+semantics-critical candidate exists, Root/CM dispatch exactly one independent
+Reviewer for the named material risk; review is advisory and CM retains final
+technical acceptance. Root retains its ordinary umbrella authority outside a
+CM-owned stage and for small, bounded, low-risk integration or diagnostic work.
+
 When main acts in a delegated lane, it names the semantic role being performed
 and preserves that role's artifact meaning, frozen science, no-resend facts and
 acceptance standard. It need not relay work to another Root/session merely to
@@ -79,53 +161,27 @@ Role, do not spawn unless their manager Role explicitly allows it, and never
 stage, commit, or push.
 
 The Workflow Recovery Manager is a task-scoped L1 recovery owner, not a
-production transport or domain authority. Root or a Code Manager transfers one
-`recovery:<incident-id>` when repeated failure, no new evidence, a constrained
-observation surface, or cross-file/runtime diagnosis prevents ordinary workers
-from completing their assignment. Its Role authorizes isolated worktree repair,
-task-scoped runtime control, focused validation, and only assignment-explicit
-external actions. Inside its authorized non-provider recovery surface it has
-standing authority to observe, diagnose, repair, refresh/reload supported
-process-local modules, wait for UI hydration, and validate through a reversible
-Observe->Act->Wait->Observe loop. Missing controls, stale module instances,
-ordinary postcondition delays, or a deficient MCP primitive are internal
-recovery evidence, not approval boundaries. It returns only recovery completion
-or a genuine external authority boundary; routine failure streams do not wake
-its invoker.
+production transport, infrastructure program, or domain authority. Root or a
+Code Manager transfers one `recovery:<incident-id>` only when repeated failure
+prevents the ordinary worker from completing a named observable outcome. The
+assignment must state that original outcome and its protected invariants.
+Source changes, helpers, tests, receipts, diagnostics and runtime mechanisms are
+means, never recovery completion. WRM accepts recovery only when the original
+outcome works end to end. It has no application-restart authority and may not
+use a lifecycle action as a substitute for visible Observe->Act->Wait->Observe
+work. Routine steps and intermediate failures remain local.
 
 ### Mandatory non-core workflow-anomaly route
 
-Use the workspace skill `hmasd-workflow-anomaly-routing` whenever an EM or CM
-encounters a non-core provider transport, Agentify/UI observability,
-protocol/controller, cross-file workflow-state, runtime-orchestration, or
-repeated unchanged-science recovery anomaly. A detecting EM reports
-`WORKFLOW_ANOMALY_REPORT` to its Portfolio parent; a detecting CM reports it to
-Operational Root. The receiving Root, never the opposite-domain child, must
-register one task-scoped Terra-high Workflow Recovery Manager before any
-fresh direction retry, unless the report is plainly an ordinary CM
-source/runner repair. This route preserves the frozen science and exact
-provider no-resend boundary; it never turns a workflow anomaly into a
-scientific stop, portfolio decision, consumed attempt, or user request.
-One root cause and every directly induced workflow consequence remain with the
-same recovery owner through follow-up reuse; do not create parallel or serial
-replacement recovery tasks merely because a new production-tab, timing, or
-other downstream manifestation is observed. A new recovery owner requires
-direct evidence of a distinct root cause and disjoint repair scope.
-Every Workflow Recovery Manager assignment follows the common contract in
-`hmasd-workflow-anomaly-routing`: locate the governing instructions/skill/role
-and task context; reproduce safely from direct evidence; inspect the relevant
-source, runtime, configuration and tool boundary; freeze a minimal repair and
-test plan; repair and run focused validation within authority; then return one
-consolidated evidence-bound conclusion. A page/status inspection alone is not
-a recovery. Agentify adds its provider/MCP-specific context requirements but
-does not replace this general sequence.
-For an Agentify/provider anomaly, the Root recovery dispatch must require the
-manager to read the complete transport skill and canonical manual, exact
-request/incident archives, and relevant current MCP controller/source/runtime
-before diagnosis. It must name the task as MCP-controlled browser work and use
-only the approved native Agentify registry/DOM primitives; generic browser
-assumptions, hidden DOM, ordinary-query fallback and alternate send routes are
-forbidden.
+Use `hmasd-workflow-anomaly-routing` for a repeated non-core provider/UI,
+protocol, controller, workflow-state or orchestration failure. A detecting EM
+reports to Portfolio; a detecting CM reports to Operational Root. Reuse one WRM
+for one common cause. The recovery starts from the ordinary worker's existing
+capabilities and uses one safe reproduction, the smallest causal repair, and
+one end-to-end acceptance run. Every new mechanism must reduce the production
+hot path; historical incident detail stays nonoperative. This route preserves
+frozen science and exact provider no-resend and never creates a scientific
+stop, portfolio decision, consumed attempt, or user request.
 
 ### Mandatory portfolio–operational handoff route
 
@@ -142,12 +198,28 @@ never remain described as `pending`, awaiting, or under review. Runtime,
 partial-result and transport streams remain excluded from the cross-root
 interface.
 
+The human-readable Portfolio queue surface is
+`docs/HR/RESEARCH_DIRECTION_DASHBOARD.md`, governed by
+`docs/HR/RESEARCH_QUEUE_SCHEMA.md`. It is a compact projection of owner
+artifacts, not a competing scientific or technical authority. Portfolio updates
+it in the same active turn whenever a direction's primary queue, scientific
+disposition, owner, next event or revisit condition changes; Operational Root
+supplies its exact engineering/activity fact through the ordinary handoff.
+Every directory under `docs/research/candidates/` appears exactly once. A cut
+tuple, `blocked`, `failed`, `pending` or `no-current` never substitutes for the
+row. Missing materially invested custody is `ORPHAN_RECOVERY`; missing
+preliminary custody is `TRIAGE_UNOWNED`; neither may disappear into an
+aggregate stopped count.
+
 For every project Python command, invoke
 `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe` directly. Do not use bare
 `python`, `py`, or `conda run` unless the assignment explicitly requires a
 different interpreter.
 
 ### Formal global MCP event wait
+
+This section governs an already-active idle Root turn only. It is distinct
+from the external Codex App thread heartbeat used for a long Operator return.
 
 When Operational Root needs to remain idle while independent CM/Operator work
 continues, use the exposed read-only
@@ -170,7 +242,8 @@ and end the turn; do not immediately re-call the global wait, substitute a
 collected on their owner route in a later turn.
 
 This global wait is an observation/latency mechanism only. It does not create,
-wake, retry, stop, pause, lease, or interpret a child. After an event, collect
+wake, retry, stop, pause, lease, or interpret a child, and it cannot wake an
+ended Codex task. After an event in the already-active turn, collect
 the ordinary native CM/Operator return through the normal collaboration route
 and apply the existing owner/authority rules. For an explicitly bridged native
 child, use the child-specific signal route instead; for an unbridged native
@@ -191,6 +264,31 @@ return bottleneck plus missing CPU/RSS/I/O/full-panel projection/equivalence
 evidence to CM. CM must repair obvious omissions before coordinates, identities,
 leases or question-relevant activity.
 
+All new or materially revised MARL paths also use the explicit
+`HMASD-MARL-FP32-BASELINE-V1` numerical contract in
+`docs/project/HMASD_MARL_NUMERICAL_PRECISION_STANDARD_V1.md`. The ordinary
+training/rollout hot path is FP32, not an unspecified "standard numerical"
+mode; small post-run reporting reductions remain FP32 by default and may use
+isolated FP64 only as an optional local choice. Any wider, reduced, mixed or
+proof-grade hot-path precision is a named, measured exception and never follows
+from a generic claim of accuracy, exactness or determinism.
+Experimental reproducibility freezes integer RNG identity/order and lifecycle
+facts; it does not imply per-operation correctly rounded re-evaluation. When a
+narrow FP32-versus-FP64 sensitivity control preserves the registered observable
+and decision tolerance, precision escalation stops.
+
+Before CM accepts any new or materially revised production-capable MARL path,
+it also requires one current `HMASD-MARL-SANCHECK-V1` receipt from
+`tools/hmasd_marl_sancheck.py` under
+`docs/project/HMASD_MARL_SANITY_ADMISSION_V1.md`. The fast lane must prove a
+source-bound C++ reset/step/terminal path, no Python environment fallback,
+measured batching/parallel efficiency, FP32 hot-path numerics and a complete
+toy-plan 1800-second preferred boundary. Crossing a measured preference is not
+a hard stop: it requires one hash-bound explanation from the exact responsible
+non-root subagent, after which status is `EXPLANATION_RECORDED` and CM still
+judges the deviation. Missing, stale or unverifiable evidence remains
+`REPAIR_REQUIRED`; neither status is a scientific result or grants a lease.
+
 ## Stable model/cost routing invariant
 
 Model selection allocates capability only; it never changes role authority,
@@ -198,16 +296,19 @@ scientific or technical ownership, write scope, acceptance, Git authority, or
 the two-level topology. Apply a route only to a new task or turn. Never migrate
 an active agent mid-turn. Steady Operational Root guidance is Luna-high; Root
 integration or recovery is Terra-high; novel governance is Sol-high. The
-dedicated Portfolio/main session uses `gpt-5.6-sol` at medium effort for
-ordinary routing, milestone intake and research-task allocation, with a bounded
-high-effort turn only for genuinely novel portfolio integration or governance.
-Actual long-chain or high-load single- or cross-direction research is delegated
-to an EM at Sol-max. CM remains Sol-high. Routine bounded implementation uses
+dedicated Portfolio/main session uses `gpt-5.6-sol` at high effort for ordinary
+routing, milestone intake, research-task allocation and portfolio integration.
+Actual long-chain or high-load single- or cross-direction research is still
+delegated to an EM at Sol-max for bounded context, independent judgment,
+parallelism and provenance—not to reduce the Portfolio session's effort. CM
+remains Sol-high. Routine bounded implementation uses
 `hmasd-implementer-terra`/Terra-high, semantics-critical implementation uses
 `hmasd-implementer`/Sol-high, and mechanical or Operator work remains Luna.
-Reviewer and Verifier are optional and risk-driven, with no routine
-Implementer+Reviewer+Verifier chain, duplicate review scope, or automatic
-re-review.
+Exactly one independent Reviewer is required for a coherent semantics-critical
+implementation candidate and remains advisory; routine low-risk work has no
+automatic Reviewer. Verifier remains optional for one proof-sized distinct
+risk, with no routine Implementer+Reviewer+Verifier chain, duplicate review
+scope, or automatic re-review.
 
 There is no automatic model fallback, including on model unavailability.
 Project Scout is explicitly Luna-only; no Spark substitution is permitted.
@@ -240,6 +341,24 @@ labels, and compacted chat summaries.
 
 ### Default two-session ownership split
 
+### Completed session routing cutovers — 2026-08-24
+
+The user-authorized dual-session migration in
+`docs/session/ROOT_PORTFOLIO_DUAL_SESSION_MIGRATION_PLAN_20260822.md` completed
+after both predecessor handoffs and successor acknowledgments. The later
+user-authorized Operational-Root-only cutover is recorded in
+`docs/session/OPERATIONAL_ROOT_SUCCESSOR_ATOMIC_ROUTING_CUTOVER_20260823.md`.
+The later user-authorized Portfolio-only cutover is recorded in
+`docs/session/PORTFOLIO_SUCCESSOR_ATOMIC_ROUTING_CUTOVER_20260824.md`.
+Current routes are Portfolio `01a03351-e8ef-7620-b2ab-b77b9512f499` and
+Operational Root `01a02e4e-e50b-7402-930d-f4243e5bf5b1`. Immediate
+Portfolio predecessor `01a02b11-f3da-7022-b821-a33f9c7e0bac`, immediate
+Operational predecessor `01a02b19-b6fa-76d3-997a-c91b416b09fd`, and earlier
+predecessors `019ffc20-5001-7453-a08a-dac783cf4d80` and
+`019fff33-ac9b-7433-b6d8-42c810dec99c` are historical provenance only and
+receive no new cross-session sends or child tasks. No active science, compute,
+lease, coordinate or frontier was cancelled by either migration.
+
 The controlling split and no-stop migration are recorded in
 `docs/research/workflow-runs/2026-08-11_five-round-research-team/PORTFOLIO_EM_OPERATIONAL_CM_OWNERSHIP_AMENDMENT_20260821.md`; pre-split Git
 identities and the preserved pre-existing Root-role delta are recorded in
@@ -253,7 +372,7 @@ independent evidence; it does not remove the active main Root's umbrella
 authority to create either role or perform either bounded lane locally.
 
 The dedicated Codex sidebar portfolio session
-`019ffc20-5001-7453-a08a-dac783cf4d80` is the default continuity owner of
+`01a03351-e8ef-7620-b2ab-b77b9512f499` is the default continuity owner of
 research-task allocation, final cross-direction integration and portfolio
 judgment until the user changes that session identity. It owns redundancy,
 competition and fusion assessment plus invest, pause, retire and revisit
@@ -270,17 +389,17 @@ communication, while retaining the semantic owner labels and all provider,
 science, lease, and Git fences.
 
 For every Codex thread-send relay to Portfolio, use the explicit default target
-`codex://threads/019ffc20-5001-7453-a08a-dac783cf4d80` with
-`model=gpt-5.6-sol` and `thinking=medium`. These parameters must be supplied on
+`codex://threads/01a03351-e8ef-7620-b2ab-b77b9512f499` with
+`model=gpt-5.6-sol` and `thinking=high`. These parameters must be supplied on
 each send; do not silently inherit or substitute another model/effort. Main
-keeps Sol's research-routing capability at this lower steady effort; it assigns
-substantive long-chain research execution to a Sol-max EM.
+retains high-effort Portfolio integration while assigning substantive long-chain
+research execution to a frozen Sol-max EM for context and provenance isolation.
 
 Every cross-session target is bound as an explicit
 `(thread_id, model, thinking)` tuple and all three values are supplied on every
 send. The current Portfolio binding is recorded in
 `docs/session/CROSS_SESSION_SEND_CONTRACT.md`. The reverse Operational-Root
-binding is `codex://threads/019fff33-ac9b-7433-b6d8-42c810dec99c` with
+binding is `codex://threads/01a02e4e-e50b-7402-930d-f4243e5bf5b1` with
 `model=gpt-5.6-luna` and `thinking=xhigh`; Portfolio must use that target
 binding rather than forwarding its own Sol settings. A different target
 needs its own owner- or user-established binding before first use. In one Root turn, merge
@@ -418,9 +537,23 @@ archive and report that error, then close the tab. Do not retry inside the same
 transport call. Within an active direction-stage envelope, the owning EM may
 authorize a later fresh-tab attempt for the identical request only when the
 prior record proves zero provider turns, no conversation identity and no active
-generation. No fixed attempt count has scientific or portfolio meaning. Any
-ambiguous commitment or existing provider turn/identity remains permanently
-observe-only and must never be resent. Only a genuinely new conversation,
+generation. No fixed attempt count has scientific or portfolio meaning.
+Provider retry authority derives from durable commitment, response, and
+generation evidence, never from a bare missing local answer archive:
+
+```text
+SEND_NOT_COMMITTED=exact_frozen_prompt_retry_allowed
+COMMITTED_ACTIVE_OR_RESPONSE_UNKNOWN=reconnect_or_observe|duplicate_send_forbidden
+COMMITTED_TERMINAL_NO_RESPONSE_PROVED=exactly_one_provenance_linked_identical_frozen_prompt_recovery_resend_allowed
+COMPLETE_RESPONSE_PRESENT=archive|no_resend
+```
+
+The third class requires direct proof that generation is inactive and no
+assistant answer exists in the bound conversation; the recovery operation
+names the original operation and preserves the exact frozen prompt. A transport
+leaf may classify and report the positive evidence, but never authorizes the
+recovery resend or resends within its original call. It returns the evidence to
+its owner or assigned WRM. Only a genuinely new conversation,
 external-authority expansion or user decision returns to Root.
 
 Multi-direction exploration must produce portfolio choices, not an ever-growing
@@ -495,22 +628,27 @@ or unavailable tool is evidence only about its named object; it does not imply
 that any broader layer is paused, forbidden, complete, or scientifically
 invalid.
 
-Exact provider **no-resend** means only that the same operation/turn identity
-may not be submitted again. It never forbids direction continuation,
-unchanged-science repair, CM construction, or an EM-authored distinct future
-turn when the direction envelope and provider facts make that appropriate. If
-an existing turn's commitment is ambiguous, state precisely which operation is
-fenced, what remains unknown, which non-sending recovery/observation continues,
-and what new Root authority—if any—a distinct future turn would require. Do
-not convert the fence into a direction-wide “cannot retry” rule.
+Exact provider **no-resend** is lifecycle-scoped. It forbids a duplicate send
+while a committed turn is active, may have a response, or remains unknown, and
+after a complete response is present. `SEND_NOT_COMMITTED` permits an exact
+retry. `COMMITTED_TERMINAL_NO_RESPONSE_PROVED` permits exactly one
+provenance-linked recovery resend of the identical frozen prompt. Bare absence
+of a local answer archive proves neither commitment nor remote absence. None of
+these transaction classes forbids direction continuation, unchanged-science
+repair, CM construction, local EM intake, Portfolio disposition, or an
+EM-authored distinct future turn.
 
 Only an explicit user instruction, a Root compute-lease boundary, an
 EM-established scientific activity boundary, or a dedicated portfolio decision
 may mark a direction/stage as paused. Root writes that scope and reason in the
 stable anchor; children may never infer it from their own limitation. Every
-report carrying a prohibition or boundary therefore includes `applies_to`,
-`does_not_imply`, `continuation_owner`, and `root_decision_class` in addition
-to its ordinary evidence fields.
+local subagent, transport, CM, Operator, resource, lease, or control-plane
+return carrying a prohibition or boundary therefore includes
+`boundary_domain`, `affected_scope`, `affected_actions`, `unaffected_scopes`,
+`continuation_owner`, `next_event`, and `evidence_ref`. It may propose no
+direction-primary-queue change. Root may apply such a change only from an exact
+same-direction EM or Portfolio owner artifact; the local return remains
+scope-contained evidence.
 
 No non-Root agent may return or act on a generic `BLOCKED` terminal status as a
 thread, goal, routing, production-pause, or authority conclusion. A child that
@@ -553,13 +691,15 @@ recommend-park language, fixed wall-time caps presented as science limits,
 terminal/`ERROR` routing, mandatory archive/commit/push before scientific
 intake, fixed review/readiness chains, and stale Pro/Gemini retry schemas. They
 remain mechanical facts or local safety constraints, never evidence that an
-invested direction should pause, retire, or stop. This does not weaken exact
-provider no-resend after a visible/provider turn or concrete conversation
-identity, the science-card activity boundary, complete-panel claim conditions,
-or the ban on silent seed/threshold/treatment changes. Provider transport
-failure cannot pause a scientific direction. A resource slice may pause only
-its lease; CM owns semantics-preserving same-coordinate, blinded, atomic
-continuation until complete question-relevant data exist.
+invested direction should pause, retire, or stop. This does not weaken
+duplicate-send protection for a committed active, response-unknown, or complete
+provider turn, the science-card activity boundary, complete-panel claim
+conditions, or the ban on silent seed/threshold/treatment changes. It
+supersedes blanket `permanent no-resend` wording with the four evidence classes
+above. Provider transport failure cannot pause a scientific direction. A
+resource slice may pause only its lease; CM owns semantics-preserving
+same-coordinate, blinded, atomic continuation until complete question-relevant
+data exist.
 
 No project-wide fixed candidate, transition, `K_search`, neighbor, width,
 worker, wall-time, CPU, memory, storage, or asymptotic number may be promoted
@@ -591,9 +731,13 @@ Use semantic ownership before acting:
 - EM owns the scientific question, meaning-complete science card, comparator,
   observable, activity-start criterion, interpretation, claim ceiling, and
   next discriminator;
-- CM owns assignment-scoped source, tests, runner, worktree contents,
-  temporary files, environment, launcher, ABI/resource work, unchanged-science
-  repair/retry, Operator dispatch, and retained-result installation;
+- CM owns the architecture and semantics of assignment-scoped source, tests,
+  runner, worktree contents, temporary files, environment, launcher,
+  ABI/resource work, unchanged-science repair/retry, Operator dispatch, and
+  retained-result installation. That ownership grants final technical
+  acceptance, not primary source-authoring authority beyond small, bounded,
+  low-risk integration or diagnostic work; mandatory source implementation is
+  delegated to the registered Implementer route;
 - Operator owns execution facts and returns failures to CM without scientific
   interpretation;
 - transport owns page mechanics and raw External-Pro response capture;
@@ -685,6 +829,88 @@ and float-bit equality are never research gates. The active main Root may write
 or integrate any in-scope surface while explicitly acting as its semantic role;
 that local collapse never changes the meaning of EM, CM, lease, or provider
 evidence.
+
+CM-stage implementation exception: within a CM-owned direction or named
+shared-component engineering stage, Root may not collapse substantial,
+production-capable, novel, native, exact-arithmetic, or
+science-conformance-critical source implementation into the Root or CM role.
+Root/CM freeze the remaining implementation and dispatch exactly one registered
+Implementer; authority, RNG, exact-arithmetic, and science-conformance semantics
+use `hmasd-implementer`/Sol-high, while routine reversible frozen-semantics
+engineering uses `hmasd-implementer-terra`/Terra-high. After a coherent
+semantics-critical candidate exists, Root/CM dispatch exactly one independent
+Reviewer for the named material risk; review is advisory and CM retains final
+technical acceptance. Root retains its ordinary umbrella authority outside a
+CM-owned stage and for small, bounded, low-risk integration or diagnostic work.
+
+Actual-execution exception: actual train/evaluate/analyze and every leased or
+question-relevant command may not be locally collapsed into Root or CM.
+Root/CM freeze or relay the exact command, manifest, preflight,
+scientific-activity criterion and output paths and dispatch exactly one
+registered `hmasd-experiment-operator`; that Operator exclusively launches
+once and owns and waits for the foreground process handle through terminal.
+Root/CM retain all bounded non-experiment work.
+
+Long-Operator return exception: an Operator command expected to outlast an
+ordinary active Codex turn is dispatched by the current Operational Root from
+the CM-established run-ready packet, after which Root ends the turn normally.
+The external Codex App thread heartbeat is the default return route and targets
+that same current Operational Root. Before launch, estimate the minutes from
+arming through the next observable terminal or decision boundary, including
+prelaunch delay, then select `clamp(ceil(estimate), 15, 60)` minutes; use 30
+minutes only when no credible estimate exists. Confirm the current-Root target,
+exact watched object and receipt paths, ACTIVE state, and selected 15--60-minute
+schedule before dispatch. The same Root task's goal auto-continuation must be
+paused or absent while heartbeat coverage owns the wait; goal turns never
+substitute for scheduler liveness. `ACTIVE + target + schedule` is configuration
+evidence only. After an App/session, target, or heartbeat-configuration change,
+one real same-thread scheduled canary must have fired before a long launch. If
+any condition cannot be established,
+return exact `CONTROL_PLANE_CAPABILITY_BOUNDARY` with `launched=false`; do not
+launch. Each scheduled turn performs exactly one bounded check
+of the exact native child or its named durable terminal receipt. A nonterminal
+check ends normally, may re-estimate the remaining time and update the cadence
+inside 15--60 minutes, and leaves the heartbeat ACTIVE. A terminal check
+collects the ordinary Operator-to-CM native return through Root. Coverage stays
+ACTIVE through CM intake and required owner reconciliation/relay; only then may
+Root pause it. `no active Operator` alone is never a pause condition while a
+terminal receipt or decision handoff remains unreconciled. Any unrelated Root
+turn arriving during coverage must preserve or complete this exact watch before
+pausing it.
+Never use CPU, file, frontier, partial-value, `functions.exec`, `write_stdin`,
+or hidden-loop polling for completion. The heartbeat is an external scheduled
+turn trigger, never an event-driven/native-child/orchestrator/subagent wake.
+Those surfaces cannot wake an ended Codex task, and signals or receipts carry
+execution facts only, never scientific interpretation, acceptance, or
+disposition. No heartbeat or observation may relaunch or duplicate a command;
+the Operator retains the foreground handle and durable terminal receipt.
+
+Quiescent continuation is not active work. Root classifies every no-immediate-
+action handoff as exactly one of `DORMANT_SCHEDULED_CONTINUATION` (an exact
+future event has one scheduled owner), `IDLE_COMPLETE` (no unfinished
+obligation), or `UNOWNED_STALL` (an unfinished obligation has neither an active
+worker nor a valid scheduled owner). Only the last is a workflow anomaly.
+Never keep or create a placeholder EM, CM, Operator, or other child merely to
+make a task look active. A file-backed `PRESTART` lease with no admitted
+activity is a dormant future authorization record, not a current Goal blocker,
+worker, process, capacity reservation, or session hold.
+
+Goals cover finite actionable tranches. Do not create a Goal whose only
+remaining completion condition is elapsed time or an external event. Finish
+the actionable tranche by durably assigning its continuation owner, then leave
+Goal mode paused, cleared, or absent until that event becomes actionable. An
+already-misscoped blocked Goal is only a local rapid-retry circuit breaker; it
+is never project/workflow status and must not be mirrored by the other Root.
+If it cannot be paused or cleared through the available product surface, report
+`GOAL_HEARTBEAT_INTERLOCK_REQUIRED` once rather than spawning a dummy child or
+consuming repeated Goal turns.
+
+The estimate-driven 15--60-minute heartbeat applies to an active or
+unknown-duration long effect. A known future time gate with no active process
+uses one exact scheduled same-task return at the boundary and no intermediate
+polling turns. Every quiescent handoff states `continuity_state`,
+`active_worker`, `continuity_owner`, and `next_event`, so `blocked` cannot be
+mistaken for abandonment.
 
 The 2026-08-21 ownership migration is prospective and non-disruptive: all in-flight stages continue unchanged to their current exact milestone under their existing EM/CM owners. Do not cancel, restart, reparent, resend, rebind coordinates or suspend a run, definition, provider turn, repair or technical stage merely to install the split. At that milestone, Operational Root stops following up the grandfathered EM; any later science stage is created by Portfolio, while Operational Root may reuse the CM. The exact grandfathered objects and task names are recorded in
 `docs/research/workflow-runs/2026-08-11_five-round-research-team/PORTFOLIO_EM_OPERATIONAL_CM_OWNERSHIP_AMENDMENT_20260821.md`.

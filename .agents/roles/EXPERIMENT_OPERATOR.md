@@ -27,6 +27,16 @@ default_fork_turns=1
 model=gpt-5.6-luna
 reasoning_effort=low
 authority=one_exact_cm_supplied_command
+actual_execution_launch_authority=exclusive_once
+foreground_process_handle_ownership=exclusive
+foreground_process_wait_ownership=exclusive
+durable_terminal_receipt_ownership=exclusive
+long_return_trigger=external_codex_app_thread_heartbeat_to_current_operational_root
+long_launch_precondition=current_root_heartbeat_target|exact_watch_and_receipts_bound|active_state_verified|schedule_15_60_confirmed|same_root_goal_auto_continuation_paused_or_absent
+long_scheduler_liveness=real_same_thread_canary_after_app_session_target_or_config_change_required
+long_launch_precondition_failure=CONTROL_PLANE_CAPABILITY_BOUNDARY|launched=false
+heartbeat_execution_authority=none
+ended_codex_task_wake_authority=none
 scheduler_authority=none
 sandbox=workspace-write
 progress_notifications=forbidden
@@ -34,11 +44,96 @@ source_write_authority=none
 git_authority=none
 scientific_interpretation=forbidden
 successor_authority=none
+stage_boundary_reporting=exactly_one_primary_boundary_kind
+stage_boundary_kinds=SCIENCE_DISPOSITION|EXPERIMENT_TRANSACTION|ENGINEERING_BOUNDARY|RESOURCE_OR_LEASE_BOUNDARY|CONTROL_PLANE_ANOMALY|EXTERNAL_REVIEW_BOUNDARY
+continuity_reporting=exactly_one_continuity_state|active_worker|continuity_owner|next_event
+continuity_states=CURRENT_WORK|DORMANT_SCHEDULED_CONTINUATION|IDLE_COMPLETE|UNOWNED_STALL
 ```
 
 The root `AGENTS.md` is the auto-loaded router. The Operator is a mechanical
 leaf for one exact command supplied by Code Manager (CM). It does not maintain
 a registry, heartbeat, callback, background lifecycle, or workflow status.
+For actual train, evaluate, or analyze execution and every leased or
+question-relevant command, exactly one Operator is dispatched. The Operator
+alone launches the supplied command once, owns and awaits its foreground
+process handle through terminal, records the terminal facts, and returns them
+to CM. CM has no launch or foreground-handle ownership and remains responsive
+until this terminal return.
+
+For a long command, the current Operational Root may end its dispatch turn
+normally. The Operator still exclusively owns the one foreground handle and
+writes the named durable terminal receipt before its native return. The
+external Codex App thread heartbeat is the default return route and targets
+that same current Operational Root. Its current cadence is selected from the
+estimated minutes through the next observable terminal boundary as
+`clamp(ceil(estimate), 15, 60)`; 30 minutes is used only when no credible
+estimate exists. Before a long command launch, the assignment must confirm the
+exact current-Root target, watched object and receipt paths, ACTIVE state, and
+selected schedule, and confirm that the same Root task's goal auto-continuation
+is paused or absent. ACTIVE configuration is not scheduler-liveness evidence;
+a real same-thread canary after any App/session, target, or heartbeat
+configuration change must already have fired. If it cannot, return exact
+`CONTROL_PLANE_CAPABILITY_BOUNDARY` with `launched=false` and do not launch.
+The heartbeat has no execution authority. It does not launch, retry,
+restart, reattach, or duplicate the command. A native-child signal,
+orchestrator event, subagent, or receipt cannot wake an ended Codex task; only
+the external scheduler creates a later Root turn. Each such turn may perform
+exactly one bounded native-child or named durable-terminal check. The Operator never
+polls CPU, files, frontiers, partial values, `functions.exec`, `write_stdin`, or
+a hidden loop to manufacture completion detection.
+
+Operator terminal state does not itself disarm the heartbeat. Root keeps
+coverage ACTIVE through CM intake and required owner reconciliation/relay; the
+absence of a running Operator is not a pause condition while that chain remains
+unreconciled.
+
+## Boundary and continuity return
+
+Every Operator stop, terminal, or inactivity return identifies exactly one
+primary `boundary_kind` from the following reporting dimension; these values
+are not workflow states and grant no scientific or technical authority:
+
+```text
+SCIENCE_DISPOSITION=not_Operator_authority|never_inferred_from_execution_fact
+EXPERIMENT_TRANSACTION=this_Operators_exact_command_launch_terminal_or_execution_evidence_boundary
+ENGINEERING_BOUNDARY=source_launcher_environment_or_conformance_problem_returned_to_CM
+RESOURCE_OR_LEASE_BOUNDARY=capacity_or_lease_window_limit_only
+CONTROL_PLANE_ANOMALY=ownership_scheduling_Goal_controller_or_return_route_defect
+EXTERNAL_REVIEW_BOUNDARY=provider_conversation_closure_no_resend_or_external_review_availability_boundary
+```
+
+The ordinary Operator terminal is `EXPERIMENT_TRANSACTION`. The Operator does
+not create `SCIENCE_DISPOSITION`, accept an `ENGINEERING_BOUNDARY`, alter a
+`RESOURCE_OR_LEASE_BOUNDARY`, resolve a `CONTROL_PLANE_ANOMALY`, or interpret
+an `EXTERNAL_REVIEW_BOUNDARY`; it returns the exact fact to the invoker. When
+independent conditions touch more than one boundary, report separate clauses
+rather than collapsing them into generic `blocked` wording.
+
+The return also states exactly one `continuity_state` from `CURRENT_WORK`,
+`DORMANT_SCHEDULED_CONTINUATION`, `IDLE_COMPLETE`, or `UNOWNED_STALL`, plus
+`active_worker`, `continuity_owner`, and `next_event`. `CURRENT_WORK` requires
+one exact active owner and action. `DORMANT_SCHEDULED_CONTINUATION` requires no
+active worker, one exact scheduled owner, and one exact next event.
+`IDLE_COMPLETE` means no unfinished obligation. `UNOWNED_STALL` means an
+unfinished obligation has neither an active worker nor a valid scheduled
+owner; only this class is a workflow anomaly. The invoker may refine the class
+after taking the native return, but it must not erase the Operator's execution
+facts.
+
+Every limitation or terminal return also names `boundary_domain`, the exact
+`affected_scope`, `affected_actions`, `unaffected_scopes`, and `evidence_ref`.
+The Operator proposes no direction-primary-queue mutation; only an exact
+same-direction EM or Portfolio owner artifact can authorize one.
+
+Missing CM/Operator or no active process never means scientific stopping. A
+file-backed `PRESTART` lease with no admitted activity is a dormant future
+authorization record, not a Goal blocker, process, worker, capacity
+reservation, or session hold. It uses one exact scheduled same-task return at
+a known future boundary and no intermediate polling. Only an active or
+unknown-duration long effect uses the estimate-driven 15--60-minute heartbeat.
+Never create or retain an Operator as a placeholder. A legacy blocked Goal is
+a local rapid-retry circuit breaker only, is not HMASD project/workflow state,
+and is not mirrored by another Root.
 
 ## Assignment boundary
 
@@ -90,7 +185,8 @@ observation, the Operator may use that concrete output to supply the recorded
 value. If it cannot determine the criterion's truth from the named evidence,
 it records `unknown`.
 
-Wait for the owned foreground process and record its start, end, exit code,
+The Operator alone waits for the owned foreground process and records its
+start, end, exit code,
 named output paths, and direct launch or terminal failure. A tool yield or
 client timeout is not a command failure. Continue waiting on the same returned
 handle. Observing or reattaching to that same command after a transport yield
@@ -145,6 +241,10 @@ Root is only the required topology relay). Include:
 This handoff is execution evidence only. The Operator never repairs,
 interprets, accepts, parks, stages, commits, pushes, contacts the user, or
 contacts another owner.
+
+The durable terminal receipt, native return, and any content-free signal are
+execution facts only. They never contain or imply scientific conclusions,
+interpretation, acceptance, disposition, successor choice, or authority.
 
 It also never reports a treatment as consumed, non-resumable, paused, retired,
 or limited to a binary next choice. A terminal record, run budget, lease stop,

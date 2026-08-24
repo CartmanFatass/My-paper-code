@@ -7,6 +7,8 @@ and exact-commit `CODE_SCIENCE_INDEX.md` files.
 | Question | Source |
 | --- | --- |
 | Current work routing | [`CURRENT_WORK.md`](CURRENT_WORK.md) |
+| Human-readable research queues, owners, stop reasons, and next events | [`../HR/RESEARCH_DIRECTION_DASHBOARD.md`](../HR/RESEARCH_DIRECTION_DASHBOARD.md) |
+| Mechanically checked per-direction object, custody, evidence, code, test, and runtime drill-down | [`../HR/RESEARCH_DIRECTION_REGISTRY.toml`](../HR/RESEARCH_DIRECTION_REGISTRY.toml) |
 | Exact scientific meaning for a named task | Its assignment-named scientific contract |
 | Exact claim-to-code and test connection | The matching exact-commit `CODE_SCIENCE_INDEX.md` |
 | Stable repository architecture | This map |
@@ -19,7 +21,7 @@ and exact-commit `CODE_SCIENCE_INDEX.md` files.
 | [`train_multiproc_config_1.py`](../../train_multiproc_config_1.py) | Root/legacy multiprocess and baseline route, not the standalone process-core entry. |
 | [`ha_ctse_process/`](../../ha_ctse_process/) | Standalone process-core platform, entered with `python -m ha_ctse_process.train`; it uses its own [`config.Config`](../../ha_ctse_process/config.py) and does not train through `hmasd.agent`. |
 | [`envs/`](../../envs/) | Shared environment and source infrastructure. [`ha_ctse_process/env_factory.py`](../../ha_ctse_process/env_factory.py) selects the standalone environment. |
-| [`experiments/candidates/`](../../experiments/candidates/) | Isolated proof-sized candidates. Production code has no import edge into this package. |
+| [`experiments/candidates/`](../../experiments/candidates/) | Isolated proof-sized candidates. Production code has no import edge into this package. Its [`README.md`](../../experiments/candidates/README.md) supplies code-to-science backlinks without promoting candidates into the default route. |
 | [`gnn_hmasd/`](../../gnn_hmasd/) and [`manifold_hmasd/`](../../manifold_hmasd/) | Alternative lineages, not default standalone dependencies. |
 | [`scripts/`](../../scripts/), [`tests/`](../../tests/), [`docs/research/designs/`](../research/designs/), [`docs/research/candidates/`](../research/candidates/), [`docs/research/cdc/`](../research/cdc/), and [`docs/external-review/`](../external-review/) | Contract- or assignment-scoped support surfaces; their presence alone does not make them part of a default route. |
 
@@ -153,3 +155,7 @@ owner, stable dependency direction, or isolated/legacy route membership
 changes. Ordinary local internals and temporary experiments do not trigger an
 update. A discovered discrepancy is a documentation defect corrected as a
 necessary consequential change.
+
+The dashboard and direction registry are status/navigation projections; they
+never replace this file as the stable architecture map. Conversely, this map
+does not carry per-direction scientific disposition or queue state.

@@ -85,11 +85,11 @@ def test_cm_projection_needs_assigned_runtime_and_science_refs(repo_root: Path) 
     assert any(source.id == "agent-runtime-context" for source in assigned)
 
 
-def test_leaf_receives_router_only_until_assignment_refs(repo_root: Path) -> None:
+def test_leaf_receives_router_and_shared_projection_schema(repo_root: Path) -> None:
     registry = _registry(repo_root)
     sources = sources_for_actor(registry, ActorKind.LEAF)
     ids = {source.id for source in sources}
-    assert ids == {"root-router"}
+    assert ids == {"root-router", "research-queue-schema"}
 
 
 def test_registry_rejects_duplicate_and_absolute_paths(tmp_path: Path) -> None:

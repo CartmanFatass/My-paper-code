@@ -40,6 +40,10 @@ _KIND_TO_LAYER = {
     ContextSourceKind.NAVIGATION: PrecedenceLayer.NAVIGATION,
     ContextSourceKind.PROCEDURE: PrecedenceLayer.PROCEDURE,
     ContextSourceKind.HISTORY: PrecedenceLayer.HISTORY,
+    ContextSourceKind.HISTORICAL_SCIENCE_LINEAGE: PrecedenceLayer.HISTORY,
+    ContextSourceKind.HUMAN_STATUS_PROJECTION: PrecedenceLayer.NAVIGATION,
+    ContextSourceKind.MECHANICALLY_CHECKED_STATUS_PROJECTION: PrecedenceLayer.NAVIGATION,
+    ContextSourceKind.PROJECTION_SCHEMA: PrecedenceLayer.PROCEDURE,
 }
 
 AUTHORITY_OPERATIONS = frozenset(

@@ -23,19 +23,19 @@ root_child_default_fork_turns=1
 shared_canonical_state_write_authority=main_root_all_in_scope|delegated_children_semantic_owner_only
 assignment_scoped_file_write_authority=main_root_all_in_scope|delegated_children_semantic_owner_only
 git_authority=exclusive
-macro_portfolio_authority=main_root|default_continuity_session:019ffc20-5001-7453-a08a-dac783cf4d80
+macro_portfolio_authority=main_root|default_continuity_session:01a03351-e8ef-7620-b2ab-b77b9512f499
 root_research_leaf_scope=research_task_allocation|general_research_support|operational_coordination
 research_execution_scope=independent_research_explorer(research:<id>|direction:<id>|cross_direction:<id>)
 research_team_loop=dedicated_portfolio_EM_science|operational_CM_engineering
 research_l1_relation=stage_scoped|followup_reuse|one_frozen_research_assignment
-direction_em_parent=default:dedicated_portfolio_session:019ffc20-5001-7453-a08a-dac783cf4d80|main_root_allowed
+direction_em_parent=default:dedicated_portfolio_session:01a03351-e8ef-7620-b2ab-b77b9512f499|main_root_allowed
 direction_cm_parent=default:operational_root|main_root_allowed
 owner_split_governance=docs/research/workflow-runs/2026-08-11_five-round-research-team/PORTFOLIO_EM_OPERATIONAL_CM_OWNERSHIP_AMENDMENT_20260821.md
 owner_split_rollback=docs/research/workflow-runs/2026-08-11_five-round-research-team/CONTROL_PLANE_PRE_PORTFOLIO_EM_SPLIT_ROLLBACK_MANIFEST_20260821.md
 em_concurrency_effect=latency_only
 portfolio_execution_economics=dedicated_session:scientific_value|decision_information|time_to_discriminator|engineering_cost|runtime_cost|opportunity_cost|reuse
 portfolio_main_model=gpt-5.6-sol
-portfolio_main_steady_effort=medium
+portfolio_main_steady_effort=high
 portfolio_main_novel_integration_effort=high
 research_em_effort=max
 cross_direction_relay=Root_only|provenance_bound_inspiration|no_evidence_transfer
@@ -67,6 +67,91 @@ boundary, and acceptance standard. A child receives only its exact assignment
 and never inherits main's umbrella authority. A simple task still needs no
 manager, reviewer, worktree, receipt, progress protocol, state migration, or
 workflow-design lane merely for formality.
+
+Actual train/evaluate/analyze and every leased or question-relevant command are
+the execution exception: Root never launches or owns their foreground process
+handle. For a long command expected to outlast an ordinary active turn, CM
+returns one run-ready packet and the current Operational Root dispatches
+exactly one `hmasd-experiment-operator`, then ends the turn normally. The
+external Codex App thread heartbeat is the default return route and targets
+this same current Operational Root. Root estimates the current minutes from
+arming through the next observable terminal or decision boundary, including
+prelaunch delay, and selects `clamp(ceil(estimate), 15, 60)` minutes; 30 minutes
+is the fallback only when no credible estimate exists. Before dispatch, Root
+confirms the current-Root target, exact watched object and receipt paths, ACTIVE
+state, and selected 15--60-minute schedule. Goal auto-continuation in this same
+Root task must be paused or absent while the heartbeat owns the wait; it cannot
+serve as heartbeat evidence or compete for the scheduled turn. Configuration
+readback is not scheduler liveness. After an App/session, target, or heartbeat
+configuration change, require one real same-thread scheduled canary before any
+long launch. If any cannot be
+established, return exact `CONTROL_PLANE_CAPABILITY_BOUNDARY` with
+`launched=false`; do not dispatch the Operator. Each scheduled turn performs exactly one bounded native-child check
+or one point-in-time check of the named durable terminal receipt. If the run is
+not terminal, Root may re-estimate the remaining time and update the cadence
+inside 15--60 minutes, then ends normally with the heartbeat ACTIVE. If
+terminal, Root collects the ordinary Operator-to-CM native return and routes it
+to CM for technical intake. The heartbeat remains ACTIVE through CM intake and
+required owner reconciliation/relay and pauses only after that chain completes.
+The absence of an active Operator is not enough to pause while a terminal
+receipt or decision handoff is unreconciled. Any unrelated Root turn arriving
+during coverage must preserve or complete the exact watch before pausing it.
+
+The same estimated 15--60-minute heartbeat is the default for any other
+Root-owned external wait that will outlast an ordinary turn and requires a
+later action in this same task. Do not keep the turn open or consume repeated
+goal continuations merely to observe unchanged time or external state.
+
+Distinguish an active or unknown-duration long effect from a known future time
+gate. The former uses the estimate-driven 15--60-minute heartbeat. The latter,
+when no CM, Operator, foreground command, or admitted activity exists, uses one
+exact scheduled same-task return at the boundary and no intermediate polling
+turns. A file-backed `PRESTART` lease is a dormant future authorization record;
+it is not a Goal blocker, active worker, process, resource reservation, or
+session hold.
+
+At the end of every actionable tranche, classify continuity explicitly:
+
+```text
+CURRENT_WORK=one exact active owner and current action
+DORMANT_SCHEDULED_CONTINUATION=no active worker expected|one exact scheduled owner|one next event
+IDLE_COMPLETE=no unfinished obligation|no scheduled owner required
+UNOWNED_STALL=unfinished obligation|no active worker|no valid scheduled owner
+```
+
+Only `UNOWNED_STALL` is a workflow anomaly. Do not retain or spawn a placeholder
+child merely to make a Root look active. Every quiescent user-facing return
+states `continuity_state`, `active_worker`, `continuity_owner`, and `next_event`.
+
+The dedicated Portfolio session maintains
+`docs/HR/RESEARCH_DIRECTION_DASHBOARD.md` under
+`docs/HR/RESEARCH_QUEUE_SCHEMA.md`. The dashboard is a human-readable,
+mechanically checked projection of owner evidence, not an authority source.
+Update it in the same active turn whenever a direction changes primary queue,
+science disposition, owner, next event, or revisit condition. Every
+`docs/research/candidates/` directory appears exactly once. Never report a cut
+tuple or generic `blocked`/`failed`/`pending`/`no-current` in place of the
+direction row. An invested object missing custody/disposition enters
+`ORPHAN_RECOVERY`; a preliminary unowned concept enters `TRIAGE_UNOWNED` until
+Portfolio explicitly screens it.
+
+Goals are finite actionable tranches, not continuity ledgers. Do not create a
+Goal whose only remaining completion condition is elapsed time or an external
+event. Once a future continuation is durably assigned, Goal mode is paused,
+cleared, or absent until the event becomes actionable. A legacy blocked Goal
+is only the local rapid-retry circuit breaker and never project/workflow
+status; the other Root must not mirror it. When the available product surface
+cannot pause or clear such a Goal, report `GOAL_HEARTBEAT_INTERLOCK_REQUIRED`
+once and do not create dummy children or consume repeated Goal turns.
+
+This heartbeat is an external scheduled turn trigger, not an event-driven
+callback and not a native-child, orchestrator, or subagent wake. None of those
+surfaces can wake an ended Codex task. A heartbeat, signal, receipt, or later
+observation never launches, retries, restarts, or duplicates the command and
+contains execution facts only, never scientific interpretation, acceptance,
+or disposition. The Operator exclusively retains the foreground handle and
+durable terminal receipt. Root never polls CPU, files, frontiers, partial
+values, `functions.exec`, `write_stdin`, or a hidden loop for completion.
 
 Root uses decision-milestone-only returns. The initiating L1 owns scope-local
 observation, child coordination, within-authority judgment, and report
@@ -114,8 +199,23 @@ authority between them and cannot make the final Portfolio allocation decision.
 
 ## Dedicated portfolio session and operational interface
 
+### Completed session routing cutovers
+
+The dual-session cutover in
+`docs/session/ROOT_PORTFOLIO_DUAL_SESSION_MIGRATION_PLAN_20260822.md` and the
+later Operational-Root-only cutover in
+`docs/session/OPERATIONAL_ROOT_SUCCESSOR_ATOMIC_ROUTING_CUTOVER_20260823.md`
+and the Portfolio-only cutover in
+`docs/session/PORTFOLIO_SUCCESSOR_ATOMIC_ROUTING_CUTOVER_20260824.md` are
+complete. Current routes are Portfolio
+`01a03351-e8ef-7620-b2ab-b77b9512f499` and Operational Root
+`01a02e4e-e50b-7402-930d-f4243e5bf5b1`. Immediate Portfolio predecessor
+`01a02b11-f3da-7022-b821-a33f9c7e0bac`, immediate Operational predecessor
+`01a02b19-b6fa-76d3-997a-c91b416b09fd` and the earlier predecessor IDs remain
+immutable historical provenance and receive no new sends or child tasks.
+
 The dedicated Codex sidebar session
-`019ffc20-5001-7453-a08a-dac783cf4d80` is the default portfolio continuity owner
+`01a03351-e8ef-7620-b2ab-b77b9512f499` is the default portfolio continuity owner
 until the user changes it. It owns research-task allocation, final
 cross-direction integration, redundancy/competition/fusion assessment, and
 portfolio investment, pause, retirement and revisit decisions. It delegates
@@ -132,16 +232,17 @@ technical acceptance while explicitly acting as that semantic role.
 
 When Operational Root sends a message to this portfolio session through the
 Codex thread-send function, the default target is
-`codex://threads/019ffc20-5001-7453-a08a-dac783cf4d80` with explicit
-`model=gpt-5.6-sol` and `thinking=medium`. Do not omit or substitute either
-parameter for portfolio relays. The medium-effort Sol main frames and allocates
-research; actual long-chain or high-load research runs in a Sol-max EM.
+`codex://threads/01a03351-e8ef-7620-b2ab-b77b9512f499` with explicit
+`model=gpt-5.6-sol` and `thinking=high`. Do not omit or substitute either
+parameter for portfolio relays. The high-effort Sol main frames, allocates and
+integrates research; actual long-chain or high-load research still runs in a
+frozen Sol-max EM for bounded context, independent judgment and provenance.
 
 Apply the general cross-session contract in
 `docs/session/CROSS_SESSION_SEND_CONTRACT.md`. Each target is an explicit
 `(thread_id, model, thinking)` binding; do not infer settings from the current
 thread. Portfolio-to-Operational-Root sends target
-`codex://threads/019fff33-ac9b-7433-b6d8-42c810dec99c` with explicit
+`codex://threads/01a02e4e-e50b-7402-930d-f4243e5bf5b1` with explicit
 `model=gpt-5.6-luna` and `thinking=xhigh`; the sender's Sol settings never
 propagate to the Operational Root target. Coalesce every currently pending
 message for one target into one send.
@@ -250,14 +351,16 @@ Only when that read-only plan returns `WAIT_SEMANTIC_EVENT` may Root call
 and `timeout_s`. `after_seq` always comes from the workflow `await_cursor`,
 never `state_version`, and an await condition is never free-form prose. The
 child emits exactly one content-free `COMPLETED` or `ANOMALY` signal immediately
-before its ordinary native final return; that signal wakes Root but supplies no
-scientific conclusion or disposition. Root then collects the ordinary native
+before its ordinary native final return; that signal releases only Root's
+already-active wait and supplies no scientific conclusion or disposition. Root
+then collects the ordinary native
 return through `collaboration.wait_agent`. An unbridged native child continues
 to use `collaboration.wait_agent` directly. File-backed long effects are
 observed only with `long_effect_observe`; their synchronous owner or Experiment
 Operator retains execution ownership. If none of those routes applies, end the
-current Root turn. No wait tool provides automatic wake after a Codex task has
-ended.
+current Root turn. No wait tool, event, native-child signal, receipt, or
+subagent provides automatic wake after a Codex task has ended. Long Operator
+returns use the external scheduled heartbeat defined above, not this wait path.
 
 ### Agentify application lifetime
 
@@ -273,6 +376,9 @@ authority.
 
 ### Global MCP idle wait
 
+This is a one-call wait inside an already-active Root turn. It is distinct from
+the external scheduled thread heartbeat for long Operator returns.
+
 Operational Root may use the read-only
 `mcp__hmasd_orchestrator__workflow_await_global_event` tool when the next useful
 action is a decision-level child return but no single workflow/task should be
@@ -280,8 +386,9 @@ bound. Call it directly with `timeout_s=900` and one of `ANY_REPORT`,
 `OPEN_OBLIGATION_CHANGED`, or `ANY_EVENT`; pass the returned global `cursor` as
 `after_seq` on the next call. The event-driven wait returns immediately when a
 matching event arrives and therefore does not block independent CM/Operator
-work. It is not a task registration, wake, retry, stop, pause, lease or science
-authority. After a global event, Root collects the ordinary native return via
+work. It is not a task registration, wake of an ended task, retry, stop, pause,
+lease or science authority. After a global event in the already-active turn,
+Root collects the ordinary native return via
 collaboration and translates it through the normal four-layer boundary. Do not
 create a temporary task binding merely to use this wait. Use the explicit
 native-child signal route for bridged children and `collaboration.wait_agent`
@@ -335,13 +442,19 @@ satisfies that audit, transfers Root authority, or pauses a separate
 scientific/technical stage. Translate it into the observed object, unknown,
 and smallest semantic owner/action instead.
 
-Before Root acts on any child restriction, record four layers: exact observed
-object; exact action fenced; direction work that remains authorized; and the
-Root decision class. No-resend applies only to the exact provider-operation
-identity, never automatically to a new distinct EM-authored closure turn,
-unchanged-science CM work, or portfolio investment. Root may write a broader
-pause only from explicit user, lease, EM scientific-boundary, or portfolio
-authority.
+This Goal-runtime rule does not make a known future `PRESTART` record a
+workflow blocker. If the actionable tranche has ended and one exact scheduled
+continuation owns the future event, report
+`DORMANT_SCHEDULED_CONTINUATION`; never surface the Goal's local `blocked` label
+as project state.
+
+Before Root acts on any child restriction, require `boundary_domain`,
+`affected_scope`, `affected_actions`, `unaffected_scopes`,
+`continuation_owner`, `next_event`, and `evidence_ref`. The return proposes no
+direction-primary-queue mutation. Root may write a broader pause or queue
+change only from an exact user, lease, same-direction EM, or Portfolio owner
+artifact. A local subagent, transport, CM, Operator, resource, lease, or
+control-plane fact stays confined to its affected scope.
 
 For every CM, Operator, recovery, or transport return, Root also states the
 observed fact, exact object, remaining unknown, scientific implication, and
@@ -360,11 +473,14 @@ one-attempt/no-retry, CM-recommend-park, fixed-wall-cap-as-science,
 terminal/`ERROR`, archive/commit/push-before-intake, fixed review/readiness
 chains, and stale Pro/Gemini retry wording as mechanical context, not scientific
 or portfolio routing commands. Root neither relays such wording as a direction
-stop nor asks the portfolio session to treat it as one. Exact no-resend remains
-after a visible provider turn or concrete conversation identity; a transport
-failure still cannot pause the direction. Resource slices may pause a lease
-only; CM continues the same blinded atomic coordinates until complete
-question-relevant data exist.
+stop nor asks the portfolio session to treat it as one. Duplicate-send
+protection remains while a committed turn is active, response-unknown, or
+complete. A proved zero-commit operation is retryable; a committed turn proved
+terminal with no assistant response permits exactly one provenance-linked
+recovery resend of the identical frozen prompt. A missing local archive proves
+neither condition. A transport failure still cannot pause the direction.
+Resource slices may pause a lease only; CM continues the same blinded atomic
+coordinates until complete question-relevant data exist.
 
 Each target completed loop retains one result-convergence ChatGPT External Pro
 scientific request. In addition, each active promising algorithm direction gets
@@ -447,14 +563,15 @@ Transport assignments must use observed session and visible model facts
 without guessed parameters; the transport Role owns page operation and
 raw-response archival.
 
-After an explicit `SEND_NOT_COMMITTED` with `prompt_sent=false` and
-`response_received=false`, EM may arrange a later fresh-tab attempt for the
-identical request inside the envelope when the prior record proves zero turns,
-no identity and no active generation. No fixed attempt count affects science or
-portfolio state. Ambiguous commitment or an existing provider turn/identity is
-permanently observe-only. A genuinely new conversation or scientific-scope
-expansion returns to Portfolio; a user/external-authority expansion then reaches
-Operational Root. The Pro and Gemini
+Provider recovery uses exactly four evidence classes:
+`SEND_NOT_COMMITTED` permits an exact retry;
+`COMMITTED_ACTIVE_OR_RESPONSE_UNKNOWN` permits reconnect/observe but no
+duplicate send; `COMMITTED_TERMINAL_NO_RESPONSE_PROVED` permits exactly one
+provenance-linked recovery resend of the identical frozen prompt; and
+`COMPLETE_RESPONSE_PRESENT` requires archive/no resend. Bare absence of a local
+answer archive proves neither send commitment nor remote answer absence. A
+genuinely new conversation or scientific-scope expansion returns to Portfolio;
+a user/external-authority expansion then reaches Operational Root. The Pro and Gemini
 prompts, current answers, conversation identities and archives remain separate
 and mutually blind.
 
@@ -495,14 +612,12 @@ ordinary_task=agent_type:default|model:gpt-5.6-terra|reasoning_effort:high|fork_
 high_difficulty=agent_type:default|model:gpt-5.6-sol|reasoning_effort:high|fork_turns:1
 ```
 
-For the dedicated Portfolio/main session, use `gpt-5.6-sol` at medium effort
-for steady milestone intake, research-task decomposition, child dispatch and
-ordinary integration. A future bounded turn may use high effort only for a
-novel cross-direction allocation, governance design, or unusually coupled
-integration that main must resolve itself. Do not keep main at max for actual
-research execution: dispatch one Sol-max EM with a frozen single- or
-cross-direction research scope, then integrate its decision-level return at
-medium/high.
+For the dedicated Portfolio/main session, use `gpt-5.6-sol` at high effort for
+steady milestone intake, research-task decomposition, child dispatch and
+portfolio integration. Keep substantive long-chain research in one frozen
+Sol-max EM when bounded context, independent judgment, provenance isolation or
+parallel work makes delegation useful; this is a complexity split, not an
+effort downgrade. Integrate its decision-level return at high effort.
 
 For Operational Root itself, apply model guidance prospectively at a task or
 turn boundary: use Luna-high for steady orchestration and ordinary user

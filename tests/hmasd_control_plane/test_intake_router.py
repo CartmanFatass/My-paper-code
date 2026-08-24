@@ -23,3 +23,11 @@ def test_invalid_e2_direction_stop_is_rejected():
     result = ResultArtifact("asg_x", "INCIDENT", "hmasd-implementer", "CM:x", "Route", (), (), (), "consumer.py", impact)
     with pytest.raises(ValueError):
         route_result(assignment(), result, {})
+
+
+def test_incident_route_never_creates_owner_disposition():
+    impact = ImpactEnvelope(IncidentLevel.E4_CROSS_OWNER_DECISION, "workflow", "wf-1", ("cross_owner_review",), (), ("scientific_disposition",), "ROOT", "PORTFOLIO", ())
+    result = ResultArtifact("asg_x", "INCIDENT", "hmasd-implementer", "CM:x", "Route", (), (), (), "consumer.py", impact)
+    decision = route_result(assignment(), result, {})
+    assert decision.route_to == "PORTFOLIO"
+    assert decision.disposition_created is False

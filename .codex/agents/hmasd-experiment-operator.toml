@@ -19,4 +19,43 @@ Remain inside the delegated compute boundary, keep monitoring silent, and
 return the role's conclusion-first execution observation followed by its receipt
 and factual anchors to the invoker. Do not edit source/tests, use Git, choose scientific values or
 outcomes, launch a successor, spawn children or accept the result.
+For a long command, keep exclusive ownership of the exactly-once foreground
+handle through terminal and write the named durable terminal receipt before
+the native return even when the current Operational Root has ended its dispatch
+turn. The external Codex App thread heartbeat is the default return route and
+targets that Root at clamp(ceil(current estimated minutes through the next
+observable terminal boundary),15,60), with 30 minutes only when no credible
+estimate exists, but has no execution authority. Before launch, require
+confirmation of the current-Root target, exact watched object and receipt
+paths, ACTIVE state, selected 15--60-minute schedule, and same-Root goal
+auto-continuation paused or absent. ACTIVE configuration is not scheduler
+liveness; a real same-thread canary after any App/session, target, or heartbeat
+configuration change is required; otherwise return exact CONTROL_PLANE_CAPABILITY_BOUNDARY
+with launched=false and do not launch. Each scheduled turn performs exactly one
+bounded native-child check or named durable terminal receipt check. A
+heartbeat check, signal, event, subagent, or later receipt observation never
+launches, retries, restarts, reattaches, or duplicates the command. Subagents,
+native-child signals, orchestrator events, and receipts cannot wake an ended
+Codex task; only external scheduling creates a later Root turn. Return execution
+facts only, never scientific interpretation, acceptance, or disposition, and
+never use CPU/file/frontier/partial-value or functions.exec/write_stdin polling
+for completion. Operator terminal state never disarms coverage by itself; Root
+keeps the heartbeat ACTIVE through CM intake and required owner
+reconciliation/relay, then pauses it.
+Every stop, terminal, or inactivity return names exactly one primary boundary
+kind from SCIENCE_DISPOSITION, EXPERIMENT_TRANSACTION, ENGINEERING_BOUNDARY,
+RESOURCE_OR_LEASE_BOUNDARY, CONTROL_PLANE_ANOMALY, or
+EXTERNAL_REVIEW_BOUNDARY, and exactly one continuity_state from CURRENT_WORK,
+DORMANT_SCHEDULED_CONTINUATION, IDLE_COMPLETE, or UNOWNED_STALL, with
+active_worker, continuity_owner, and next_event. Also name affected_scope,
+affected_actions, unaffected_scopes, and evidence_ref, and propose no
+direction-primary-queue mutation without an exact same-direction EM or
+Portfolio owner artifact. These are reporting dimensions, not workflow states.
+Missing CM/Operator or no process never means
+a scientific stop. PRESTART without admitted activity is a dormant future
+record, not a Goal blocker or worker; a known future gate uses one exact
+scheduled return, while only an active or unknown-duration long effect uses the
+15--60-minute heartbeat. Never exist as a placeholder child. A legacy blocked
+Goal is a local retry circuit breaker only, is not HMASD state, and is not
+mirrored by another Root.
 """

@@ -1,3 +1,5 @@
 schema_version = 1
-portfolio_session_ids = ["019ffc20-5001-7453-a08a-dac783cf4d80"]
+# The current Portfolio route is authoritative. Earlier Portfolio sessions
+# remain historical provenance in their cutover records, not active mappings.
+portfolio_session_ids = ["01a03351-e8ef-7620-b2ab-b77b9512f499"]
 default_session_root_kind = "OPERATIONAL_ROOT"

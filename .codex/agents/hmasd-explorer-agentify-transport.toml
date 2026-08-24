@@ -38,13 +38,9 @@ or mechanical incident is archived and generation is inactive, close the disposa
 tab; later continuation reopens the saved conversation URL in a new tab. Report
 any close failure. fork_turns=1; forked context is background only.
 
-For visible preflight, compose revision-bound native observe→act→observe steps;
-never blindly repeat a UI action. The strict review call remains the sole Send
-boundary and protected-default tabs are never mutated.
-Use bounded native predicate waits for loading/hydration; one absence is
-NOT_YET_OBSERVED, not a retry or defect.
-For nested visible ChatGPT High/Pro text, require the current observation's
-unique visible hit-tested actionable-ancestor mapping; otherwise fail closed
-and never use a pixel click. High/Pro are reasoning strength, not model identity.
+Use adaptive visible Observe -> Act -> Wait -> Observe until the requested final
+selected state is directly established. Intermediate menu shape and per-click
+trace are diagnostic, not acceptance gates. The strict review call remains the
+sole Send boundary and protected-default tabs are never mutated.
 
 """

@@ -157,8 +157,36 @@ canonical = true
 [[source]]
 id = "research-direction-ledger"
 path = "docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md"
-kind = "NAVIGATION"
+kind = "HISTORICAL_SCIENCE_LINEAGE"
 owner = "research_owners"
 actors = ["PORTFOLIO", "OPERATIONAL_ROOT", "EM"]
 load_policy = "ASSIGNMENT_ONLY"
+canonical = true
+current_33_direction_status_authority = false
+
+[[source]]
+id = "research-direction-dashboard"
+path = "docs/HR/RESEARCH_DIRECTION_DASHBOARD.md"
+kind = "HUMAN_STATUS_PROJECTION"
+owner = "portfolio"
+actors = ["PORTFOLIO", "OPERATIONAL_ROOT", "EM", "CM"]
+load_policy = "ON_DEMAND"
+canonical = false
+
+[[source]]
+id = "research-direction-registry"
+path = "docs/HR/RESEARCH_DIRECTION_REGISTRY.toml"
+kind = "MECHANICALLY_CHECKED_STATUS_PROJECTION"
+owner = "portfolio"
+actors = ["PORTFOLIO", "OPERATIONAL_ROOT", "EM", "CM"]
+load_policy = "ON_DEMAND"
+canonical = false
+
+[[source]]
+id = "research-queue-schema"
+path = "docs/HR/RESEARCH_QUEUE_SCHEMA.md"
+kind = "PROJECTION_SCHEMA"
+owner = "portfolio"
+actors = ["PORTFOLIO", "OPERATIONAL_ROOT", "EM", "CM", "LEAF"]
+load_policy = "ON_DEMAND"
 canonical = true

@@ -35,8 +35,19 @@ def lint_text(text: str, path: str = "<text>") -> list[ConstraintFinding]:
         offset += len(block) + 2
         flat = re.sub(r"\s+", " ", block)
         registered = bool(re.search(r"\[REQ:[A-Z0-9_.-]+\]|\b(?:UR|NR)-[A-Z0-9_.-]+\b|assignment_local\s*=\s*true|science_contract\s*=", flat, re.I))
-        negated = bool(re.search(r"\b(?:there is no|no required|no fixed)\b[^.]*?(?:fixed|default|global|hard|maximum|cap|limit|direction|worker)", flat, re.I))
-        historical_non_authority = bool(re.search(r"no (?:scientific|portfolio).*authority|not .*routing authority", flat, re.I))
+        negated = bool(re.search(
+            r"\b(?:there is no|no required|no fixed|not required|no longer required|"
+            r"optional|neither prerequisites?|do not build|must not build)\b[^.]*?"
+            r"(?:fixed|default|global|hard|maximum|cap|limit|direction|worker|review)",
+            flat,
+            re.I,
+        ))
+        historical_non_authority = bool(re.search(
+            r"(?:no (?:scientific|portfolio).*authority|not .*routing authority|"
+            r"legacy[^.]*?(?:factual|mechanical|not .*authority|cannot gate|not .*command))",
+            flat,
+            re.I,
+        ))
         if historical_non_authority or (negated and not re.search(r"\b(?:retry|resend|one[- ]attempt)\b", flat, re.I)):
             continue
         allowed_assignment = registered and ("resource_preflight_ref" in block or "NR-WORKER-LIMIT-001" in block)
@@ -66,5 +77,11 @@ def lint_repository(root: Path) -> list[ConstraintFinding]:
     }
     paths = [path for path in (root / "docs/project").rglob("*.md") if path.name not in excluded and "migration-validation" not in path.parts]
     paths += [path for path in (root / "docs/project").rglob("*.toml") if path.name not in excluded]
+    roles_root = root / ".agents/roles"
+    skills_root = root / ".agents/skills"
+    if roles_root.exists():
+        paths += list(roles_root.rglob("*.md"))
+    if skills_root.exists():
+        paths += list(skills_root.rglob("SKILL.md"))
     paths += [root / "AGENTS.md"]
     return lint_paths(paths)

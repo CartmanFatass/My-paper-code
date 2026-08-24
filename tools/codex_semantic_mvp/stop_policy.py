@@ -6,6 +6,7 @@ from typing import Any
 
 from .actor_models import ActorKind, actor_context_from_row
 from .models import normalize_obligation_kind
+from .responsibility import responsibility_blocks_stop
 from .store import OPEN_TASK_LIFECYCLES, SemanticStore
 
 
@@ -79,7 +80,10 @@ def stop_decision_for_actor(
     blocking = [
         item
         for item in obligations
-        if normalize_obligation_kind(str(item.get("kind") or "")) in _blocking_kinds(actor.actor_kind)
+        if (
+            normalize_obligation_kind(str(item.get("kind") or "")) in _blocking_kinds(actor.actor_kind)
+            or responsibility_blocks_stop(dict(item.get("responsibility") or {}))
+        )
     ]
     local_tasks = [
         task

@@ -56,6 +56,7 @@ class AssignmentArtifact:
     non_target_surfaces: tuple[str, ...]
     outcome: str = ""
     source_path: str = ""
+    original_outcome: str = ""
 
 
 @dataclass(frozen=True)
@@ -71,6 +72,8 @@ class ResultArtifact:
     direct_consumer_checked: str
     impact: ImpactEnvelope | None
     source_path: str = ""
+    original_outcome: str = ""
+    outcome_evidence: str = ""
 
 
 def _tuple(raw: object, field: str, allow_empty: bool = True) -> tuple[str, ...]:
@@ -128,6 +131,7 @@ def parse_assignment(path: Path) -> AssignmentArtifact:
         non_target_surfaces=_tuple(raw.get("non_target_surfaces"), "non_target_surfaces", allow_empty=False),
         outcome=_extract_section(text, "Outcome"),
         source_path=str(path),
+        original_outcome=str(raw.get("original_outcome") or "").strip(),
     )
 
 
@@ -173,6 +177,8 @@ def parse_result(path: Path) -> ResultArtifact:
         direct_consumer_checked=str(raw.get("direct_consumer_checked") or ""),
         impact=impact,
         source_path=str(path),
+        original_outcome=str(raw.get("original_outcome") or "").strip(),
+        outcome_evidence=str(raw.get("outcome_evidence") or "").strip(),
     )
 
 
@@ -246,6 +252,8 @@ def validate_assignment(assignment: AssignmentArtifact, registry: Mapping[str, R
                 errors.append(f"{name} path does not exist: {value}")
     if assignment.result_bearing and assignment.strictness_profile == "R2_EXPERIMENT_EXECUTION" and not assignment.runtime_profile:
         errors.append("result-bearing R2 assignment requires runtime_profile")
+    if assignment.executor_role == "hmasd-workflow-recovery-manager" and not assignment.original_outcome:
+        errors.append("workflow recovery assignment requires exact original_outcome")
     return errors
 
 
@@ -273,6 +281,21 @@ def validate_result(result: ResultArtifact, assignment: AssignmentArtifact) -> l
             errors.extend(validate_impact(result.impact))
     if result.impact is not None and result.result_kind == "COMPLETED":
         errors.append("completed result should not carry an impact envelope")
+    allowed_writes = set(assignment.affected_files) | set(assignment.create_files)
+    for value in result.files_changed:
+        if value not in allowed_writes:
+            errors.append(f"files_changed exceeds assignment write scope: {value}")
+    if assignment.affected_symbols:
+        for value in result.symbols_changed:
+            if value not in assignment.affected_symbols:
+                errors.append(f"symbols_changed exceeds assignment symbol scope: {value}")
+    if result.direct_consumer_checked and result.direct_consumer_checked not in assignment.direct_consumers:
+        errors.append("direct_consumer_checked is not an assigned direct consumer")
+    if assignment.executor_role == "hmasd-workflow-recovery-manager" and result.result_kind == "COMPLETED":
+        if result.original_outcome != assignment.original_outcome:
+            errors.append("recovery result original_outcome must exactly match assignment")
+        if not result.outcome_evidence:
+            errors.append("recovery completion requires direct outcome_evidence")
     for name, values in (("files_observed", result.files_observed), ("files_changed", result.files_changed)):
         for value in values:
             if _has_parent(value):

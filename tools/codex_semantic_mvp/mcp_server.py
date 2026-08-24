@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Annotated, Any, Literal, Mapping
 
 from mcp.server import MCPServer
+from mcp.types import ToolAnnotations
 from pydantic import Field
 
 from tools.codex_context_lifecycle.authority import (
@@ -24,10 +25,16 @@ from tools.codex_context_lifecycle.authority import (
 )
 from tools.hmasd_control_plane.mcp_runtime import begin_mcp_instance
 
-from .actor_models import ActorContext, ActorKind
+from .actor_models import ActorContext, ActorKind, ActorState, actor_context_from_row
 from .db import DEFAULT_STATE_PATH
 from .constants import MAX_WAIT_SECONDS, WAIT_POLL_SECONDS
 from .models import ObligationKind
+from .responsibility import (
+    CUSTODY_HANDOFF_STAGES,
+    ResponsibilityStage,
+    build_responsibility,
+    validate_handoff_successor,
+)
 from .store import CLOSURE_KINDS, SemanticStore
 
 
@@ -70,10 +77,20 @@ ORCHESTRATOR_TOOL_ALLOWLIST = (
     "root_record_intake",
     "obligation_open",
     "obligation_resolve",
+    "responsibility_handoff_open",
+    "responsibility_handoff_accept",
+    "responsibility_scheduled_record",
+    "responsibility_idle_complete_record",
+    "responsibility_local_boundary_record",
+    "responsibility_orphan_detect",
+    "responsibility_orphan_assign",
+    "provider_transaction_classify",
+    "provider_recovery_resend_authorize",
     "workflow_await_event",
     "workflow_await_global_event",
     "workflow_close",
     "actor_context_current",
+    "actor_context_reconcile_session_root",
     "plan_epoch_open",
     "plan_epoch_current",
     "plan_epoch_revise",
@@ -114,6 +131,12 @@ READ_ONLY_TOOL_NAMES = frozenset(
     }
 )
 MUTATING_TOOL_NAMES = frozenset(ORCHESTRATOR_TOOL_ALLOWLIST) - READ_ONLY_TOOL_NAMES
+READ_ONLY_TOOL_ANNOTATIONS = ToolAnnotations(
+    readOnlyHint=True,
+    destructiveHint=False,
+    idempotentHint=True,
+    openWorldHint=False,
+)
 MUTATION_OPERATION_BY_TOOL = {
     "workflow_open": "open_workflow",
     "task_register": "register_task",
@@ -122,7 +145,17 @@ MUTATION_OPERATION_BY_TOOL = {
     "root_record_intake": "record_intake",
     "obligation_open": "open_obligation",
     "obligation_resolve": "resolve_obligation",
+    "responsibility_handoff_open": "open_obligation",
+    "responsibility_handoff_accept": "resolve_obligation",
+    "responsibility_scheduled_record": "open_obligation",
+    "responsibility_idle_complete_record": "open_obligation",
+    "responsibility_local_boundary_record": "open_obligation",
+    "responsibility_orphan_detect": "open_obligation",
+    "responsibility_orphan_assign": "open_obligation",
+    "provider_transaction_classify": "open_obligation",
+    "provider_recovery_resend_authorize": "open_obligation",
     "workflow_close": "close_workflow",
+    "actor_context_reconcile_session_root": "change_actor_state",
     "plan_epoch_open": "open_epoch",
     "plan_epoch_revise": "revise_epoch",
     "plan_epoch_close": "close_epoch",
@@ -144,6 +177,19 @@ if READ_ONLY_TOOL_NAMES | MUTATING_TOOL_NAMES != frozenset(
     raise RuntimeError("orchestrator tool inventory is inconsistent")
 if frozenset(MUTATION_OPERATION_BY_TOOL) != MUTATING_TOOL_NAMES:  # pragma: no cover
     raise RuntimeError("orchestrator mutation operation map is incomplete")
+
+
+class OrchestratorMCPServer(MCPServer):
+    """Publish the server's existing effect inventory as MCP tool metadata."""
+
+    def tool(self, name: str | None = None, **kwargs: Any):
+        def decorator(fn):
+            effective_name = name or fn.__name__
+            if kwargs.get("annotations") is None and effective_name in READ_ONLY_TOOL_NAMES:
+                kwargs["annotations"] = READ_ONLY_TOOL_ANNOTATIONS
+            return super(OrchestratorMCPServer, self).tool(name=name, **kwargs)(fn)
+
+        return decorator
 
 
 def _state_path(state_dir: str | Path | None) -> Path:
@@ -208,9 +254,11 @@ def _admit_mutation(
     return store, requester
 
 
-def _workflow_owner(store: SemanticStore, workflow_id: str) -> str:
+def _workflow_owner(
+    store: SemanticStore, workflow_id: str, *, require_active: bool = True
+) -> str:
     row = store.connection.execute(
-        "SELECT actor_context_id FROM workflows WHERE workflow_id = ?",
+        "SELECT actor_context_id, state FROM workflows WHERE workflow_id = ?",
         (workflow_id,),
     ).fetchone()
     if row is None:
@@ -218,7 +266,156 @@ def _workflow_owner(store: SemanticStore, workflow_id: str) -> str:
     owner = str(row["actor_context_id"] or "")
     if not owner:
         raise AuthorityError("workflow has no explicit actor owner")
+    if require_active and str(row["state"]) != "ACTIVE":
+        raise AuthorityError("workflow is not ACTIVE")
     return owner
+
+
+def _require_active_actor_context(
+    store: SemanticStore, actor_context_id: str, field_name: str
+) -> str:
+    """Require one explicit ACTIVE actor identity used by a responsibility."""
+
+    actor_id = str(actor_context_id or "").strip()
+    if not actor_id:
+        raise AuthorityError(f"{field_name} is required")
+    row = store.connection.execute(
+        "SELECT state FROM actor_contexts WHERE actor_context_id = ?",
+        (actor_id,),
+    ).fetchone()
+    if row is None:
+        raise AuthorityError(f"unknown {field_name}: {actor_id}")
+    if str(row["state"]) != ActorState.ACTIVE.value:
+        raise AuthorityError(f"{field_name} actor is not ACTIVE")
+    return actor_id
+
+
+def _active_actor_context(
+    store: SemanticStore, actor_context_id: str, field_name: str
+) -> ActorContext:
+    actor_id = _require_active_actor_context(store, actor_context_id, field_name)
+    row = store.connection.execute(
+        "SELECT * FROM actor_contexts WHERE actor_context_id = ?", (actor_id,)
+    ).fetchone()
+    if row is None:  # pragma: no cover - guarded by the preceding lookup
+        raise AuthorityError(f"unknown {field_name}: {actor_id}")
+    return actor_context_from_row(row)
+
+
+def _workflow_owner_requester(
+    store: SemanticStore,
+    workflow_id: str,
+    requester_actor_context_id: str | None,
+) -> ActorContext:
+    """Resolve and owner-check a requester without consuming mutation authority."""
+
+    owner = _workflow_owner(store, workflow_id)
+    _store, requester = _resolve_requester(requester_actor_context_id)
+    if requester.actor_context_id != owner:
+        raise AuthorityError("requester does not own the target object")
+    return requester
+
+
+_CUSTODY_STAGE_ACTOR_KINDS = {
+    ResponsibilityStage.CM_RETURN_TO_SAME_DIRECTION_EM_INTAKE: (
+        frozenset({ActorKind.CM}),
+        ActorKind.EM,
+    ),
+    ResponsibilityStage.OPERATOR_TERMINAL_TO_CM_TECHNICAL_INTAKE: (
+        frozenset({ActorKind.OPERATIONAL_ROOT, ActorKind.CM}),
+        ActorKind.CM,
+    ),
+    ResponsibilityStage.CM_TECHNICAL_INTAKE_TO_SCIENCE_RECONCILIATION: (
+        frozenset({ActorKind.OPERATIONAL_ROOT, ActorKind.CM}),
+        ActorKind.EM,
+    ),
+    ResponsibilityStage.SAME_DIRECTION_EM_INTAKE_TO_PORTFOLIO_DECISION: (
+        frozenset({ActorKind.EM}),
+        ActorKind.PORTFOLIO,
+    ),
+}
+_CUSTODY_PAYLOAD_KEYS = frozenset(
+    {
+        "stage",
+        "receiving_owner",
+        "next_event",
+        "evidence_ref",
+        "disposition_reason",
+        "affected_scope",
+    }
+)
+
+
+def _prepare_custody_responsibility(
+    store: SemanticStore,
+    *,
+    source_actor: ActorContext,
+    subject: str,
+    payload: dict[str, Any],
+) -> dict[str, Any]:
+    """Validate and normalize one custody-chain responsibility before admission."""
+
+    unexpected = set(payload) - _CUSTODY_PAYLOAD_KEYS
+    if unexpected:
+        raise ValueError(
+            "custody handoff does not accept override fields: "
+            + ", ".join(sorted(unexpected))
+        )
+    try:
+        stage = ResponsibilityStage(str(payload.get("stage") or ""))
+    except ValueError as exc:
+        raise ValueError("unknown responsibility stage") from exc
+    if stage not in CUSTODY_HANDOFF_STAGES:
+        raise ValueError("responsibility_handoff_open accepts custody-chain stages only")
+    receiver = _active_actor_context(
+        store, str(payload.get("receiving_owner") or ""), "receiving_owner"
+    )
+    source_kinds, receiver_kind = _CUSTODY_STAGE_ACTOR_KINDS[stage]
+    if source_actor.actor_kind not in source_kinds or receiver.actor_kind is not receiver_kind:
+        raise AuthorityError(
+            f"{stage.value} requires {sorted(kind.value for kind in source_kinds)} "
+            f"source and {receiver_kind.value} receiver"
+        )
+    if source_actor.actor_kind in {ActorKind.CM, ActorKind.EM} and receiver.actor_kind in {
+        ActorKind.CM,
+        ActorKind.EM,
+    }:
+        if (
+            not source_actor.direction_id
+            or not receiver.direction_id
+            or source_actor.direction_id != receiver.direction_id
+        ):
+            raise AuthorityError("direction-local custody handoff requires identical direction_id")
+    return build_responsibility(
+        stage=stage,
+        receiving_owner=receiver.actor_context_id,
+        next_event=payload.get("next_event"),
+        evidence_ref=payload.get("evidence_ref"),
+        disposition_reason=payload.get("disposition_reason"),
+        active_worker=receiver.actor_context_id,
+        continuation_owner=receiver.actor_context_id,
+        affected_scope=payload.get("affected_scope") or subject,
+    )
+
+
+def _open_typed_responsibility(
+    store: SemanticStore, workflow_id: str, obligation_id: str
+) -> dict[str, Any]:
+    """Return one validated open typed responsibility without changing its ledger."""
+
+    row = store.connection.execute(
+        """SELECT kind, reason FROM obligations
+        WHERE workflow_id = ? AND obligation_id = ? AND state = 'OPEN'""",
+        (workflow_id, obligation_id),
+    ).fetchone()
+    if row is None:
+        raise KeyError(f"open obligation not found: {obligation_id}")
+    if str(row["kind"]) != ObligationKind.RESPONSIBILITY_HANDOFF_REQUIRED.value:
+        raise ValueError("obligation is not a typed responsibility handoff")
+    projection = store._responsibility_row(dict(row))
+    if projection is None:
+        raise ValueError("obligation is not a typed responsibility handoff")
+    return projection
 
 
 def _rollover_owner(store: SemanticStore, rollover_id: str) -> str:
@@ -783,7 +980,7 @@ def _register_tools(server: MCPServer) -> MCPServer:
     ) -> dict[str, Any]:
         store = _get_store()
         if include_raw:
-            owner = _workflow_owner(store, workflow_id)
+            owner = _workflow_owner(store, workflow_id, require_active=False)
             _store, requester = _resolve_requester(requester_actor_context_id)
             if requester.actor_context_id != owner:
                 raise AuthorityError("raw report access requires the workflow owner")
@@ -855,6 +1052,7 @@ def _register_tools(server: MCPServer) -> MCPServer:
         user_authority_id: str | None = None,
     ) -> dict[str, Any]:
         store = _get_store()
+        _workflow_owner(store, workflow_id)
         row = store.connection.execute(
             """SELECT obligation_id, owner_actor_context_id, owner FROM obligations
             WHERE obligation_id = ? AND workflow_id = ?""",
@@ -872,6 +1070,422 @@ def _register_tools(server: MCPServer) -> MCPServer:
         )
         resolved = store.resolve_obligation(workflow_id, obligation_id, resolution)
         return {"workflow_id": workflow_id, "obligation_id": resolved, "state": "RESOLVED"}
+
+    @server.tool(description="Open one receiver-owned typed responsibility handoff.")
+    def responsibility_handoff_open(
+        workflow_id: str,
+        subject: str,
+        stage: str,
+        receiving_owner: str,
+        next_event: str,
+        evidence_ref: str,
+        disposition_reason: str,
+        affected_scope: str | None = None,
+        obligation_id: str | None = None,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
+        store = _get_store()
+        workflow_owner = _workflow_owner(store, workflow_id)
+        requester = _workflow_owner_requester(
+            store, workflow_id, requester_actor_context_id
+        )
+        projection = _prepare_custody_responsibility(store, source_actor=requester, subject=subject, payload={
+            "stage": stage,
+            "receiving_owner": receiving_owner,
+            "next_event": next_event,
+            "evidence_ref": evidence_ref,
+            "disposition_reason": disposition_reason,
+            "affected_scope": affected_scope,
+        })
+        if obligation_id and store.connection.execute(
+            "SELECT 1 FROM obligations WHERE obligation_id = ?", (obligation_id,)
+        ).fetchone() is not None:
+            raise ValueError("obligation_id already exists")
+        store, _requester = _admit_mutation(
+            requester_actor_context_id, source_kind, "open_obligation",
+            user_authority_id, owner_actor_context_id=workflow_owner,
+        )
+        opened = store.open_responsibility(
+            workflow_id, subject, stage=str(projection["stage"]),
+            receiving_owner=str(projection["receiving_owner"]),
+            next_event=str(projection["next_event"]),
+            evidence_ref=str(projection["evidence_ref"]),
+            disposition_reason=str(projection["disposition_reason"]),
+            active_worker=str(projection["active_worker"]),
+            continuation_owner=str(projection["continuation_owner"]),
+            affected_scope=str(projection["affected_scope"]),
+            obligation_id=obligation_id,
+        )
+        return {"workflow_id": workflow_id, "obligation_id": opened, "state": "OPEN"}
+
+    @server.tool(description=(
+        "Atomically accept one open typed responsibility handoff as its exact receiver "
+        "and open the mandatory successor when required."
+    ))
+    def responsibility_handoff_accept(
+        workflow_id: str,
+        obligation_id: str,
+        next_responsibility: dict[str, Any] | None = None,
+        portfolio_accepted: bool = False,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
+        store = _get_store()
+        _workflow_owner(store, workflow_id)
+        current = _open_typed_responsibility(store, workflow_id, obligation_id)
+        receiver = _active_actor_context(
+            store, str(current["receiving_owner"]), "receiving_owner"
+        )
+        _store, requester = _resolve_requester(requester_actor_context_id)
+        if requester.actor_context_id != receiver.actor_context_id:
+            raise AuthorityError("requester does not own the target object")
+        prepared_successor = None
+        if next_responsibility is not None:
+            prepared_successor = _prepare_custody_responsibility(
+                store,
+                source_actor=requester,
+                subject=str(current["affected_scope"]),
+                payload=next_responsibility,
+            )
+        validate_handoff_successor(
+            str(current["stage"]),
+            str(prepared_successor["stage"]) if prepared_successor is not None else None,
+            portfolio_accepted=portfolio_accepted,
+        )
+        if portfolio_accepted:
+            if requester.actor_kind is not ActorKind.PORTFOLIO:
+                raise AuthorityError("portfolio_accepted requires the Portfolio actor")
+        store, requester = _admit_mutation(
+            requester_actor_context_id, source_kind, "resolve_obligation",
+            user_authority_id, owner_actor_context_id=receiver.actor_context_id,
+        )
+        successor = store.accept_responsibility_handoff(
+            workflow_id, obligation_id, accepted_by=requester.actor_context_id,
+            next_responsibility=prepared_successor,
+            portfolio_accepted=portfolio_accepted,
+        )
+        return {
+            "workflow_id": workflow_id,
+            "obligation_id": obligation_id,
+            "state": "RESOLVED",
+            "successor_obligation_id": successor,
+        }
+
+    @server.tool(description="Record one dormant scheduled responsibility with zero open obligations.")
+    def responsibility_scheduled_record(
+        workflow_id: str,
+        subject: str,
+        receiving_owner: str,
+        continuity_owner: str,
+        next_event: str,
+        evidence_ref: str,
+        disposition_reason: str,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
+        store = _get_store()
+        workflow_owner = _workflow_owner(store, workflow_id)
+        requester = _workflow_owner_requester(
+            store, workflow_id, requester_actor_context_id
+        )
+        if (
+            receiving_owner != requester.actor_context_id
+            or continuity_owner != requester.actor_context_id
+        ):
+            raise AuthorityError(
+                "scheduled responsibility must be self-owned by the workflow requester"
+            )
+        _require_active_actor_context(store, receiving_owner, "receiving_owner")
+        _require_active_actor_context(store, continuity_owner, "continuity_owner")
+        build_responsibility(
+            stage=ResponsibilityStage.PRESTART_TIME_GATE_TO_SCHEDULED_CONTINUATION,
+            receiving_owner=receiving_owner,
+            continuity_owner=continuity_owner,
+            next_event=next_event,
+            evidence_ref=evidence_ref,
+            disposition_reason=disposition_reason,
+            affected_scope=subject,
+        )
+        store, _requester = _admit_mutation(
+            requester_actor_context_id, source_kind, "open_obligation",
+            user_authority_id, owner_actor_context_id=workflow_owner,
+        )
+        recorded = store.record_scheduled_responsibility(
+            workflow_id, subject, receiving_owner=receiving_owner,
+            continuity_owner=continuity_owner, next_event=next_event,
+            evidence_ref=evidence_ref, disposition_reason=disposition_reason,
+        )
+        return {"workflow_id": workflow_id, "obligation_id": recorded, "state": "RESOLVED"}
+
+    @server.tool(description="Record one idle-complete typed responsibility disposition.")
+    def responsibility_idle_complete_record(
+        workflow_id: str,
+        subject: str,
+        receiving_owner: str,
+        next_event: str,
+        evidence_ref: str,
+        disposition_reason: str,
+        revisit_condition: str,
+        stage: str = "SCIENCE_NEGATIVE_TO_SCIENTIFIC_NO_CURRENT",
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
+        store = _get_store()
+        workflow_owner = _workflow_owner(store, workflow_id)
+        requester = _workflow_owner_requester(
+            store, workflow_id, requester_actor_context_id
+        )
+        if receiving_owner != requester.actor_context_id:
+            raise AuthorityError(
+                "idle-complete responsibility must be self-owned by the workflow requester"
+            )
+        _require_active_actor_context(store, receiving_owner, "receiving_owner")
+        try:
+            stage_value = ResponsibilityStage(stage)
+        except ValueError as exc:
+            raise ValueError("unknown responsibility stage") from exc
+        if stage_value not in {
+            ResponsibilityStage.SCIENCE_NEGATIVE_TO_SCIENTIFIC_NO_CURRENT,
+            ResponsibilityStage.RESOURCE_SHORTAGE_TO_RESOURCE_OR_SUBSTRATE_WAIT,
+        }:
+            raise ValueError("idle-complete record accepts science-negative or resource-shortage only")
+        if (
+            stage_value is ResponsibilityStage.SCIENCE_NEGATIVE_TO_SCIENTIFIC_NO_CURRENT
+            and requester.actor_kind not in {ActorKind.EM, ActorKind.PORTFOLIO}
+        ):
+            raise AuthorityError("science-negative disposition requires EM or Portfolio ownership")
+        build_responsibility(
+            stage=stage_value,
+            receiving_owner=receiving_owner,
+            next_event=next_event,
+            evidence_ref=evidence_ref,
+            disposition_reason=disposition_reason,
+            affected_scope=subject,
+            revisit_condition=revisit_condition,
+        )
+        store, _requester = _admit_mutation(
+            requester_actor_context_id, source_kind, "open_obligation",
+            user_authority_id, owner_actor_context_id=workflow_owner,
+        )
+        recorded = store.record_completed_responsibility(
+            workflow_id, subject, receiving_owner=receiving_owner,
+            next_event=next_event, evidence_ref=evidence_ref,
+            disposition_reason=disposition_reason,
+            revisit_condition=revisit_condition, stage=stage_value,
+            source_actor_context_id=requester.actor_context_id,
+        )
+        return {"workflow_id": workflow_id, "obligation_id": recorded, "state": "RESOLVED"}
+
+    @server.tool(description=(
+        "Record one local boundary return while preserving the direction primary queue."
+    ))
+    def responsibility_local_boundary_record(
+        workflow_id: str,
+        subject: str,
+        receiving_owner: str,
+        active_worker: str,
+        boundary_domain: str,
+        affected_scope: str,
+        affected_actions: list[str],
+        unaffected_scopes: list[str],
+        direction_primary_queue: str,
+        next_event: str,
+        evidence_ref: str,
+        disposition_reason: str,
+        continuation_owner: str | None = None,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
+        store = _get_store()
+        workflow_owner = _workflow_owner(store, workflow_id)
+        _workflow_owner_requester(store, workflow_id, requester_actor_context_id)
+        continuation = continuation_owner or receiving_owner
+        if len({receiving_owner, active_worker, continuation}) != 1:
+            raise AuthorityError(
+                "local boundary receiving_owner, active_worker, and continuation_owner must match"
+            )
+        _require_active_actor_context(store, receiving_owner, "continuation_owner")
+        build_responsibility(
+            stage=ResponsibilityStage.LOCAL_BOUNDARY_RETURN_TO_CONTINUATION,
+            receiving_owner=receiving_owner,
+            active_worker=receiving_owner,
+            continuation_owner=receiving_owner,
+            boundary_domain=boundary_domain,
+            affected_scope=affected_scope,
+            affected_actions=affected_actions,
+            unaffected_scopes=unaffected_scopes,
+            direction_primary_queue=direction_primary_queue,
+            prior_direction_primary_queue=direction_primary_queue,
+            next_event=next_event,
+            evidence_ref=evidence_ref,
+            disposition_reason=disposition_reason,
+        )
+        store, _requester = _admit_mutation(
+            requester_actor_context_id, source_kind, "open_obligation",
+            user_authority_id, owner_actor_context_id=workflow_owner,
+        )
+        opened = store.record_local_boundary_return(
+            workflow_id, subject, receiving_owner=receiving_owner,
+            active_worker=receiving_owner, boundary_domain=boundary_domain,
+            affected_scope=affected_scope, affected_actions=affected_actions,
+            unaffected_scopes=unaffected_scopes,
+            direction_primary_queue=direction_primary_queue,
+            next_event=next_event, evidence_ref=evidence_ref,
+            disposition_reason=disposition_reason,
+            continuation_owner=receiving_owner,
+        )
+        return {"workflow_id": workflow_id, "obligation_id": opened, "state": "OPEN"}
+
+    @server.tool(description="Record one ownerless material object as a visible orphan stall.")
+    def responsibility_orphan_detect(
+        workflow_id: str,
+        subject: str,
+        next_event: str,
+        evidence_ref: str,
+        disposition_reason: str,
+        orphan_id: str | None = None,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
+        store = _get_store()
+        workflow_owner = _workflow_owner(store, workflow_id)
+        _workflow_owner_requester(store, workflow_id, requester_actor_context_id)
+        store.validate_orphan_detection(
+            workflow_id, subject, next_event=next_event, evidence_ref=evidence_ref,
+            disposition_reason=disposition_reason, orphan_id=orphan_id,
+        )
+        store, _requester = _admit_mutation(
+            requester_actor_context_id, source_kind, "open_obligation",
+            user_authority_id, owner_actor_context_id=workflow_owner,
+        )
+        detected = store.detect_orphaned_material(
+            workflow_id, subject, next_event=next_event,
+            evidence_ref=evidence_ref, disposition_reason=disposition_reason,
+            orphan_id=orphan_id,
+        )
+        return {"workflow_id": workflow_id, "orphan_id": detected, "state": "UNOWNED_STALL"}
+
+    @server.tool(description="Assign exact ACTIVE recovery custody to one recorded orphan.")
+    def responsibility_orphan_assign(
+        workflow_id: str,
+        orphan_id: str,
+        recovery_owner: str,
+        next_event: str,
+        evidence_ref: str,
+        disposition_reason: str,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
+        store = _get_store()
+        workflow_owner = _workflow_owner(store, workflow_id)
+        _workflow_owner_requester(store, workflow_id, requester_actor_context_id)
+        _require_active_actor_context(store, recovery_owner, "recovery_owner")
+        store.validate_orphan_assignment(
+            workflow_id, orphan_id, recovery_owner=recovery_owner,
+            next_event=next_event, evidence_ref=evidence_ref,
+            disposition_reason=disposition_reason,
+        )
+        store, _requester = _admit_mutation(
+            requester_actor_context_id, source_kind, "open_obligation",
+            user_authority_id, owner_actor_context_id=workflow_owner,
+        )
+        assigned = store.assign_orphan_recovery(
+            workflow_id, orphan_id, recovery_owner=recovery_owner,
+            next_event=next_event, evidence_ref=evidence_ref,
+            disposition_reason=disposition_reason,
+        )
+        return {"workflow_id": workflow_id, "obligation_id": assigned, "state": "OPEN"}
+
+    @server.tool(description=(
+        "Record evidence-only provider transaction lifecycle classification; never send or retry."
+    ))
+    def provider_transaction_classify(
+        workflow_id: str,
+        transaction_id: str,
+        send_commit_proved: bool | None,
+        evidence_ref: str,
+        remote_active_or_response_unknown: bool = False,
+        terminal_no_response_proved: bool = False,
+        complete_response_present: bool = False,
+        local_archive_present: bool | None = None,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
+        store = _get_store()
+        workflow_owner = _workflow_owner(store, workflow_id)
+        _workflow_owner_requester(store, workflow_id, requester_actor_context_id)
+        store.validate_provider_transaction_lifecycle(
+            workflow_id, transaction_id, send_commit_proved=send_commit_proved,
+            remote_active_or_response_unknown=remote_active_or_response_unknown,
+            terminal_no_response_proved=terminal_no_response_proved,
+            complete_response_present=complete_response_present,
+            local_archive_present=local_archive_present, evidence_ref=evidence_ref,
+        )
+        store, _requester = _admit_mutation(
+            requester_actor_context_id, source_kind, "open_obligation",
+            user_authority_id, owner_actor_context_id=workflow_owner,
+        )
+        classification = store.record_provider_transaction_lifecycle(
+            workflow_id, transaction_id, send_commit_proved=send_commit_proved,
+            remote_active_or_response_unknown=remote_active_or_response_unknown,
+            terminal_no_response_proved=terminal_no_response_proved,
+            complete_response_present=complete_response_present,
+            local_archive_present=local_archive_present, evidence_ref=evidence_ref,
+        )
+        return {
+            "workflow_id": workflow_id,
+            "transaction_id": transaction_id,
+            "classification": classification,
+        }
+
+    @server.tool(description=(
+        "Record one exact, provenance-linked recovery-resend authorization; never send or retry."
+    ))
+    def provider_recovery_resend_authorize(
+        workflow_id: str,
+        transaction_id: str,
+        lifecycle: str,
+        original_frozen_prompt_ref: str,
+        recovery_frozen_prompt_ref: str,
+        provenance_ref: str,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
+        store = _get_store()
+        workflow_owner = _workflow_owner(store, workflow_id)
+        _workflow_owner_requester(store, workflow_id, requester_actor_context_id)
+        store.validate_provider_recovery_resend(
+            workflow_id, transaction_id, lifecycle=lifecycle,
+            original_frozen_prompt_ref=original_frozen_prompt_ref,
+            recovery_frozen_prompt_ref=recovery_frozen_prompt_ref,
+            provenance_ref=provenance_ref,
+        )
+        store, _requester = _admit_mutation(
+            requester_actor_context_id, source_kind, "open_obligation",
+            user_authority_id, owner_actor_context_id=workflow_owner,
+        )
+        event_id = store.authorize_provider_recovery_resend(
+            workflow_id, transaction_id, lifecycle=lifecycle,
+            original_frozen_prompt_ref=original_frozen_prompt_ref,
+            recovery_frozen_prompt_ref=recovery_frozen_prompt_ref,
+            provenance_ref=provenance_ref,
+        )
+        return {
+            "workflow_id": workflow_id,
+            "transaction_id": transaction_id,
+            "authorization_event_id": event_id,
+            "state": "AUTHORIZED",
+        }
 
     @server.tool(description=(
         "Wait for one workflow event. condition is one of ANY_REPORT, "
@@ -959,6 +1573,51 @@ def _register_tools(server: MCPServer) -> MCPServer:
                 "state": actor.state.value,
             },
             "workflow": _jsonable(workflow) if workflow is not None else None,
+        }
+
+    @server.tool(description=(
+        "With one trusted user-authority grant and cutover evidence, reconcile the exact "
+        "ACTIVE session-root actor in place from OPERATIONAL_ROOT to the current mapped "
+        "PORTFOLIO route. This never creates, releases, or rebinds an actor."
+    ))
+    def actor_context_reconcile_session_root(
+        actor_context_id: str,
+        session_id: str,
+        cutover_evidence_ref: str,
+        source_kind: str | None = None,
+        requester_actor_context_id: str | None = None,
+        user_authority_id: str | None = None,
+    ) -> dict[str, Any]:
+        """Perform the one explicit, provenance-bound session-root cutover."""
+        from .actor_registry import reconcile_session_root_actor
+
+        if source_kind != "USER_AUTHORITY":
+            raise AuthorityError("session-root role reconciliation requires USER_AUTHORITY")
+        store, requester = _admit_mutation(
+            requester_actor_context_id,
+            source_kind,
+            "change_actor_state",
+            user_authority_id,
+            owner_actor_context_id=actor_context_id,
+        )
+        if requester.actor_kind is not ActorKind.OPERATIONAL_ROOT:
+            raise AuthorityError("only the current OPERATIONAL_ROOT actor may perform its cutover")
+        actor = reconcile_session_root_actor(
+            store,
+            actor_context_id=actor_context_id,
+            session_id=session_id,
+            cutover_evidence_ref=cutover_evidence_ref,
+        )
+        return {
+            "actor_context": {
+                "actor_context_id": actor.actor_context_id,
+                "actor_kind": actor.actor_kind.value,
+                "session_id": actor.session_id,
+                "scope_key": actor.scope_key,
+                "state": actor.state.value,
+                "identity_source": actor.identity_source,
+            },
+            "cutover_evidence_ref": cutover_evidence_ref,
         }
 
     @server.tool(description="Open one role-compatible plan epoch for an actor.")
@@ -1447,7 +2106,7 @@ def build_server(state_dir: str | Path | None = None) -> MCPServer:
     bind_requester(None)
     _active_store = SemanticStore(_state_path(state_dir)).initialize()
     return _register_tools(
-        MCPServer(
+        OrchestratorMCPServer(
             SERVER_NAME,
             version=SERVER_VERSION,
             instructions=ORCHESTRATOR_INSTRUCTIONS,

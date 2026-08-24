@@ -27,6 +27,18 @@ from .models import (
     normalize_obligation_kind,
 )
 from .protocol import ProtocolError, validate_subagent_return
+from .responsibility import (
+    ContinuityState,
+    BoundaryDomain,
+    DirectionQueueAuthority,
+    ProviderTransactionLifecycle,
+    ResponsibilityStage,
+    build_responsibility,
+    classify_provider_transaction,
+    responsibility_from_reason,
+    validate_handoff_successor,
+    validate_provider_lifecycle_transition,
+)
 
 
 TASK_LIFECYCLES = frozenset(
@@ -587,6 +599,474 @@ class SemanticStore:
             )
             return result
 
+    @staticmethod
+    def _responsibility_row(row: Mapping[str, Any]) -> dict[str, Any] | None:
+        return responsibility_from_reason(str(row.get("reason") or ""))
+
+    def open_responsibility(
+        self, workflow_id: str, subject: str, *, stage: ResponsibilityStage | str,
+        receiving_owner: str, next_event: str, evidence_ref: str, disposition_reason: str,
+        active_worker: str | None = None, continuity_owner: str | None = None,
+        continuation_owner: str | None = None, affected_scope: str | None = None,
+        affected_actions: tuple[str, ...] | list[str] = (),
+        unaffected_scopes: tuple[str, ...] | list[str] = (),
+        direction_primary_queue: str | None = None, prior_direction_primary_queue: str | None = None,
+        queue_authority_artifact: str | None = None,
+        queue_authority_owner: DirectionQueueAuthority | str | None = None,
+        boundary_domain: BoundaryDomain | str | None = None,
+        revisit_condition: str | None = None, current_work: bool = False,
+        obligation_id: str | None = None,
+    ) -> str:
+        """Open one receiver-owned, typed stage handoff in the existing ledger."""
+        projection = build_responsibility(
+            stage=stage, receiving_owner=receiving_owner, next_event=next_event,
+            evidence_ref=evidence_ref, disposition_reason=disposition_reason,
+            active_worker=active_worker, continuity_owner=continuity_owner,
+            continuation_owner=continuation_owner, affected_scope=affected_scope or subject,
+            affected_actions=affected_actions, unaffected_scopes=unaffected_scopes,
+            direction_primary_queue=direction_primary_queue,
+            prior_direction_primary_queue=prior_direction_primary_queue,
+            queue_authority_artifact=queue_authority_artifact,
+            queue_authority_owner=queue_authority_owner, boundary_domain=boundary_domain,
+            revisit_condition=revisit_condition, current_work=current_work,
+        )
+        if projection["continuity_state"] == ContinuityState.IDLE_COMPLETE.value:
+            raise ValueError("idle-complete disposition must be recorded, not opened")
+        if projection["continuity_state"] == ContinuityState.DORMANT_SCHEDULED_CONTINUATION.value:
+            raise ValueError("scheduled continuation must be recorded, not opened")
+        if projection["continuity_state"] == ContinuityState.UNOWNED_STALL.value:
+            raise ValueError("unowned material must be detected before a recovery owner accepts it")
+        with self._lock, self.connection:
+            result = self._insert_obligation(
+                self.connection, workflow_id, ObligationKind.RESPONSIBILITY_HANDOFF_REQUIRED,
+                str(projection["receiving_owner"]), subject, _json(projection), evidence_ref,
+                obligation_id,
+            )
+            self._touch_workflow(workflow_id)
+            self._append_event(
+                workflow_id, "RESPONSIBILITY_OPENED", result, {"responsibility": projection},
+                f"RESPONSIBILITY_OPENED:{result}",
+            )
+            return result
+
+    def record_local_boundary_return(
+        self, workflow_id: str, subject: str, *, receiving_owner: str, active_worker: str,
+        boundary_domain: BoundaryDomain | str, affected_scope: str,
+        affected_actions: tuple[str, ...] | list[str], unaffected_scopes: tuple[str, ...] | list[str],
+        direction_primary_queue: str, next_event: str, evidence_ref: str, disposition_reason: str,
+        continuation_owner: str | None = None,
+    ) -> str:
+        """Keep a local failure/return scoped while its direction owner remains visible."""
+        return self.open_responsibility(
+            workflow_id, subject, stage=ResponsibilityStage.LOCAL_BOUNDARY_RETURN_TO_CONTINUATION,
+            receiving_owner=receiving_owner, active_worker=active_worker,
+            continuation_owner=continuation_owner, boundary_domain=boundary_domain,
+            affected_scope=affected_scope, affected_actions=affected_actions,
+            unaffected_scopes=unaffected_scopes,
+            direction_primary_queue=direction_primary_queue,
+            prior_direction_primary_queue=direction_primary_queue,
+            next_event=next_event, evidence_ref=evidence_ref, disposition_reason=disposition_reason,
+        )
+
+    def _provider_transaction_projection(
+        self, transaction_id: str
+    ) -> dict[str, Any] | None:
+        """Project one transaction's current state from its existing event ledger."""
+
+        rows = self.connection.execute(
+            """SELECT event_id, workflow_id, kind, payload_json, seq
+            FROM events WHERE subject_id = ? AND kind IN (
+                'PROVIDER_TRANSACTION_CLASSIFIED',
+                'PROVIDER_RECOVERY_RESEND_AUTHORIZED'
+            ) ORDER BY seq""",
+            (transaction_id,),
+        ).fetchall()
+        if not rows:
+            return None
+        workflow_ids = {str(row["workflow_id"] or "") for row in rows}
+        if len(workflow_ids) != 1 or "" in workflow_ids:
+            raise ValueError("provider transaction is bound to multiple workflows")
+        classifications = [
+            row for row in rows if str(row["kind"]) == "PROVIDER_TRANSACTION_CLASSIFIED"
+        ]
+        if not classifications:
+            raise ValueError("provider authorization has no transaction classification")
+        current_row = classifications[-1]
+        current_payload = json.loads(str(current_row["payload_json"]))
+        classification = dict(current_payload.get("classification") or {})
+        if not classification.get("lifecycle"):
+            raise ValueError("provider classification event is malformed")
+        authorization_rows = [
+            row
+            for row in rows
+            if str(row["kind"]) == "PROVIDER_RECOVERY_RESEND_AUTHORIZED"
+        ]
+        if len(authorization_rows) > 1:
+            raise ValueError("provider transaction has multiple recovery authorizations")
+        authorization = None
+        if authorization_rows:
+            authorization_row = authorization_rows[0]
+            authorization = {
+                "event_id": str(authorization_row["event_id"]),
+                **dict(json.loads(str(authorization_row["payload_json"]))),
+            }
+        return {
+            "transaction_id": transaction_id,
+            "workflow_id": next(iter(workflow_ids)),
+            "lifecycle": str(classification["lifecycle"]),
+            "classification": classification,
+            "evidence_ref": str(current_payload.get("evidence_ref") or ""),
+            "recovery_resend_authorization": authorization,
+        }
+
+    def validate_provider_transaction_lifecycle(
+        self, workflow_id: str, transaction_id: str, *, send_commit_proved: bool | None,
+        remote_active_or_response_unknown: bool = False,
+        terminal_no_response_proved: bool = False,
+        complete_response_present: bool = False,
+        local_archive_present: bool | None = None, evidence_ref: str,
+    ) -> dict[str, Any]:
+        """Validate one evidence-only transition without writing its event."""
+
+        if not transaction_id.strip() or not evidence_ref.strip():
+            raise ValueError("transaction_id and evidence_ref are required")
+        classification = classify_provider_transaction(
+            send_commit_proved=send_commit_proved,
+            remote_active_or_response_unknown=remote_active_or_response_unknown,
+            terminal_no_response_proved=terminal_no_response_proved,
+            complete_response_present=complete_response_present,
+            local_archive_present=local_archive_present,
+        )
+        current = self._provider_transaction_projection(transaction_id)
+        if current is None:
+            return {"classification": classification, "idempotent": False}
+        if current["workflow_id"] != workflow_id:
+            raise ValueError("provider transaction_id is already bound to another workflow")
+        if current["recovery_resend_authorization"] is not None:
+            raise ValueError("provider transaction cannot change after recovery authorization")
+        validate_provider_lifecycle_transition(
+            str(current["lifecycle"]), str(classification["lifecycle"])
+        )
+        if current["lifecycle"] == classification["lifecycle"]:
+            if current["classification"] != classification or current["evidence_ref"] != evidence_ref:
+                raise ValueError("same-state provider reclassification must be identical")
+            return {"classification": classification, "idempotent": True}
+        return {"classification": classification, "idempotent": False}
+
+    def record_provider_transaction_lifecycle(
+        self, workflow_id: str, transaction_id: str, *, send_commit_proved: bool | None,
+        remote_active_or_response_unknown: bool = False, terminal_no_response_proved: bool = False,
+        complete_response_present: bool = False, local_archive_present: bool | None = None,
+        evidence_ref: str,
+    ) -> dict[str, object]:
+        """Append one monotone evidence-only provider classification; this never sends."""
+
+        with self._lock, self.connection:
+            validated = self.validate_provider_transaction_lifecycle(
+                workflow_id, transaction_id, send_commit_proved=send_commit_proved,
+                remote_active_or_response_unknown=remote_active_or_response_unknown,
+                terminal_no_response_proved=terminal_no_response_proved,
+                complete_response_present=complete_response_present,
+                local_archive_present=local_archive_present, evidence_ref=evidence_ref,
+            )
+            classification = dict(validated["classification"])
+            if validated["idempotent"]:
+                return classification
+            event_id = self._append_event(
+                workflow_id, "PROVIDER_TRANSACTION_CLASSIFIED", transaction_id,
+                {"classification": classification, "evidence_ref": evidence_ref},
+                f"PROVIDER_TRANSACTION_CLASSIFIED:{transaction_id}:{classification['lifecycle']}",
+            )
+            if event_id is None:
+                raise ValueError("provider classification event already exists")
+            self._touch_workflow(workflow_id)
+            return classification
+
+    def validate_provider_recovery_resend(
+        self, workflow_id: str, transaction_id: str, *, lifecycle: str,
+        original_frozen_prompt_ref: str, recovery_frozen_prompt_ref: str,
+        provenance_ref: str,
+    ) -> dict[str, Any]:
+        """Validate one transaction-global recovery authorization without writing it."""
+
+        if lifecycle != ProviderTransactionLifecycle.COMMITTED_TERMINAL_NO_RESPONSE_PROVED.value:
+            raise ValueError("recovery resend requires COMMITTED_TERMINAL_NO_RESPONSE_PROVED")
+        if not original_frozen_prompt_ref.strip() or not provenance_ref.strip():
+            raise ValueError("frozen prompt and provenance references are required")
+        if original_frozen_prompt_ref != recovery_frozen_prompt_ref:
+            raise ValueError("recovery resend must use the identical frozen prompt reference")
+        current = self._provider_transaction_projection(transaction_id)
+        if current is None:
+            raise ValueError("recovery resend requires recorded terminal-no-response evidence")
+        if current["workflow_id"] != workflow_id:
+            raise ValueError("provider transaction_id is already bound to another workflow")
+        if current["lifecycle"] != lifecycle:
+            raise ValueError("recovery resend requires current terminal-no-response evidence")
+        if provenance_ref != current["evidence_ref"]:
+            raise ValueError(
+                "recovery resend provenance must reference the current terminal-no-response evidence"
+            )
+        if current["recovery_resend_authorization"] is not None:
+            raise ValueError("one recovery resend authorization already exists")
+        return current
+
+    def authorize_provider_recovery_resend(
+        self, workflow_id: str, transaction_id: str, *, lifecycle: str,
+        original_frozen_prompt_ref: str, recovery_frozen_prompt_ref: str, provenance_ref: str,
+    ) -> str:
+        """Record the sole allowable recovery resend authorization, never the send itself."""
+        with self._lock, self.connection:
+            self.validate_provider_recovery_resend(
+                workflow_id, transaction_id, lifecycle=lifecycle,
+                original_frozen_prompt_ref=original_frozen_prompt_ref,
+                recovery_frozen_prompt_ref=recovery_frozen_prompt_ref,
+                provenance_ref=provenance_ref,
+            )
+            dedupe = f"PROVIDER_RECOVERY_RESEND_AUTHORIZED:{transaction_id}"
+            event_id = self._append_event(
+                workflow_id, "PROVIDER_RECOVERY_RESEND_AUTHORIZED", transaction_id,
+                {
+                    "lifecycle": lifecycle,
+                    "frozen_prompt_ref": original_frozen_prompt_ref,
+                    "provenance_ref": provenance_ref,
+                },
+                dedupe,
+            )
+            if event_id is None:
+                raise ValueError("one recovery resend authorization already exists")
+            self._touch_workflow(workflow_id)
+            return str(event_id)
+
+    def record_scheduled_responsibility(
+        self, workflow_id: str, subject: str, *, receiving_owner: str, continuity_owner: str,
+        next_event: str, evidence_ref: str, disposition_reason: str,
+    ) -> str:
+        """Persist a future time-gate continuation without holding the actionable workflow open."""
+        projection = build_responsibility(
+            stage=ResponsibilityStage.PRESTART_TIME_GATE_TO_SCHEDULED_CONTINUATION,
+            receiving_owner=receiving_owner, continuity_owner=continuity_owner,
+            affected_scope=subject, next_event=next_event, evidence_ref=evidence_ref, disposition_reason=disposition_reason,
+        )
+        with self._lock, self.connection:
+            obligation_id = self._insert_obligation(
+                self.connection, workflow_id, ObligationKind.RESPONSIBILITY_HANDOFF_REQUIRED,
+                receiving_owner, subject, _json(projection), evidence_ref,
+            )
+            resolution = {"resolution_kind": "DORMANT_SCHEDULED_CONTINUATION"}
+            self.connection.execute(
+                "UPDATE obligations SET state = 'RESOLVED', resolution_json = ?, resolved_at = ? WHERE obligation_id = ?",
+                (_json(resolution), _now(), obligation_id),
+            )
+            self._touch_workflow(workflow_id)
+            self._append_event(
+                workflow_id, "RESPONSIBILITY_SCHEDULED", obligation_id,
+                {"responsibility": projection, "resolution": resolution},
+                f"RESPONSIBILITY_SCHEDULED:{obligation_id}",
+            )
+            return obligation_id
+
+    def accept_responsibility_handoff(
+        self, workflow_id: str, obligation_id: str, *, accepted_by: str,
+        next_responsibility: Mapping[str, Any] | None = None,
+        portfolio_accepted: bool = False,
+    ) -> str | None:
+        """Atomically accept exactly one stage handoff and optionally open its successor."""
+        if not isinstance(accepted_by, str) or not accepted_by.strip():
+            raise ValueError("accepted_by is required")
+        with self._lock, self.connection:
+            row = self.connection.execute(
+                "SELECT * FROM obligations WHERE workflow_id = ? AND obligation_id = ? AND state = 'OPEN'",
+                (workflow_id, obligation_id),
+            ).fetchone()
+            if row is None:
+                raise KeyError(f"open obligation not found: {obligation_id}")
+            current = self._responsibility_row(dict(row))
+            if current is None:
+                raise ValueError("obligation is not a typed responsibility handoff")
+            if current["receiving_owner"] != accepted_by.strip():
+                raise ValueError("only the exact receiving owner may accept this handoff")
+            successor: dict[str, Any] | None = None
+            if next_responsibility is not None:
+                successor = build_responsibility(
+                    stage=next_responsibility.get("stage"),
+                    receiving_owner=next_responsibility.get("receiving_owner"),
+                    next_event=next_responsibility.get("next_event"),
+                    evidence_ref=next_responsibility.get("evidence_ref"),
+                    disposition_reason=next_responsibility.get("disposition_reason"),
+                    active_worker=next_responsibility.get("active_worker"),
+                    continuity_owner=next_responsibility.get("continuity_owner"),
+                    continuation_owner=next_responsibility.get("continuation_owner"),
+                    affected_scope=next_responsibility.get("affected_scope") or str(row["subject"]),
+                    affected_actions=next_responsibility.get("affected_actions") or (),
+                    unaffected_scopes=next_responsibility.get("unaffected_scopes") or (),
+                    direction_primary_queue=next_responsibility.get("direction_primary_queue"),
+                    prior_direction_primary_queue=next_responsibility.get("prior_direction_primary_queue"),
+                    queue_authority_artifact=next_responsibility.get("queue_authority_artifact"),
+                    queue_authority_owner=next_responsibility.get("queue_authority_owner"),
+                    boundary_domain=next_responsibility.get("boundary_domain"),
+                    revisit_condition=next_responsibility.get("revisit_condition"),
+                    current_work=bool(next_responsibility.get("current_work", False)),
+                )
+                if successor["continuity_state"] in {
+                    ContinuityState.IDLE_COMPLETE.value, ContinuityState.UNOWNED_STALL.value,
+                }:
+                    raise ValueError("handoff successor must be an unfinished receiver responsibility")
+            validate_handoff_successor(
+                current["stage"], successor["stage"] if successor is not None else None,
+                portfolio_accepted=portfolio_accepted,
+            )
+            resolution = {
+                "resolution_kind": "PORTFOLIO_ACCEPTED" if portfolio_accepted else "RECEIVER_ACCEPTED",
+                "accepted_by": accepted_by.strip(),
+            }
+            self.connection.execute(
+                "UPDATE obligations SET state = 'RESOLVED', resolution_json = ?, resolved_at = ? WHERE obligation_id = ?",
+                (_json(resolution), _now(), obligation_id),
+            )
+            successor_id = None
+            if successor is not None:
+                successor_id = self._insert_obligation(
+                    self.connection, workflow_id, ObligationKind.RESPONSIBILITY_HANDOFF_REQUIRED,
+                    str(successor["receiving_owner"]), str(row["subject"]), _json(successor),
+                    str(successor["evidence_ref"]),
+                )
+            self._touch_workflow(workflow_id)
+            self._append_event(
+                workflow_id, "RESPONSIBILITY_ACCEPTED", obligation_id,
+                {"accepted_by": accepted_by.strip(), "successor_obligation_id": successor_id},
+                f"RESPONSIBILITY_ACCEPTED:{obligation_id}",
+            )
+            if successor_id is not None:
+                self._append_event(
+                    workflow_id, "RESPONSIBILITY_OPENED", successor_id,
+                    {"responsibility": successor}, f"RESPONSIBILITY_OPENED:{successor_id}",
+                )
+            return successor_id
+
+    def record_completed_responsibility(
+        self, workflow_id: str, subject: str, *, receiving_owner: str, next_event: str,
+        evidence_ref: str, disposition_reason: str, revisit_condition: str,
+        stage: ResponsibilityStage | str = ResponsibilityStage.SCIENCE_NEGATIVE_TO_SCIENTIFIC_NO_CURRENT,
+        source_actor_context_id: str | None = None,
+    ) -> str:
+        """Persist a scientific-no-current disposition without a placeholder task."""
+        projection = build_responsibility(
+            stage=stage,
+            receiving_owner=receiving_owner, next_event=next_event, evidence_ref=evidence_ref,
+            disposition_reason=disposition_reason, affected_scope=subject, revisit_condition=revisit_condition,
+        )
+        if projection["continuity_state"] != ContinuityState.IDLE_COMPLETE.value:
+            raise ValueError("only an idle-complete responsibility may be recorded as complete")
+        with self._lock, self.connection:
+            obligation_id = self._insert_obligation(
+                self.connection, workflow_id, ObligationKind.RESPONSIBILITY_HANDOFF_REQUIRED,
+                receiving_owner, subject, _json(projection), evidence_ref,
+                source_actor_context_id=source_actor_context_id,
+            )
+            resolution = {"resolution_kind": "IDLE_COMPLETE"}
+            self.connection.execute(
+                "UPDATE obligations SET state = 'RESOLVED', resolution_json = ?, resolved_at = ? WHERE obligation_id = ?",
+                (_json(resolution), _now(), obligation_id),
+            )
+            self._touch_workflow(workflow_id)
+            self._append_event(
+                workflow_id, "RESPONSIBILITY_COMPLETED", obligation_id,
+                {"responsibility": projection, "resolution": resolution},
+                f"RESPONSIBILITY_COMPLETED:{obligation_id}",
+            )
+            return obligation_id
+
+    def validate_orphan_detection(
+        self, workflow_id: str, subject: str, *, next_event: str, evidence_ref: str,
+        disposition_reason: str, orphan_id: str | None = None,
+    ) -> dict[str, Any]:
+        """Validate one orphan detection without writing its event."""
+
+        projection = build_responsibility(
+            stage=ResponsibilityStage.MATERIAL_RESULT_WITHOUT_OWNER_TO_ORPHAN_RECOVERY,
+            receiving_owner=None, next_event=next_event, evidence_ref=evidence_ref,
+            disposition_reason=disposition_reason, affected_scope=subject,
+        )
+        if orphan_id and self.connection.execute(
+            """SELECT 1 FROM events WHERE kind = 'RESPONSIBILITY_ORPHAN_DETECTED'
+            AND subject_id = ?""",
+            (orphan_id,),
+        ).fetchone() is not None:
+            raise ValueError("orphan detection already exists")
+        return projection
+
+    def detect_orphaned_material(
+        self, workflow_id: str, subject: str, *, next_event: str, evidence_ref: str,
+        disposition_reason: str, orphan_id: str | None = None,
+    ) -> str:
+        """Record an ownerless material object as UNOWNED_STALL, without inventing an owner."""
+        orphan_id = orphan_id or _new_id("orphan")
+        with self._lock, self.connection:
+            projection = self.validate_orphan_detection(
+                workflow_id, subject, next_event=next_event, evidence_ref=evidence_ref,
+                disposition_reason=disposition_reason, orphan_id=orphan_id,
+            )
+            event_id = self._append_event(
+                workflow_id, "RESPONSIBILITY_ORPHAN_DETECTED", orphan_id,
+                {"subject": subject, "responsibility": projection},
+                f"RESPONSIBILITY_ORPHAN_DETECTED:{orphan_id}",
+            )
+            if event_id is None:
+                raise ValueError("orphan detection already exists")
+            self._touch_workflow(workflow_id)
+        return orphan_id
+
+    def validate_orphan_assignment(
+        self, workflow_id: str, orphan_id: str, *, recovery_owner: str, next_event: str,
+        evidence_ref: str, disposition_reason: str,
+    ) -> dict[str, Any]:
+        """Validate exact recovery custody without opening its obligation."""
+
+        if not recovery_owner.strip():
+            raise ValueError("recovery_owner is required")
+        event = self.connection.execute(
+            """SELECT payload_json FROM events WHERE workflow_id = ?
+            AND kind = 'RESPONSIBILITY_ORPHAN_DETECTED' AND subject_id = ?""",
+            (workflow_id, orphan_id),
+        ).fetchone()
+        if event is None:
+            raise KeyError(f"orphan detection not found: {orphan_id}")
+        if self._event_exists(f"RESPONSIBILITY_ORPHAN_ASSIGNED:{orphan_id}"):
+            raise ValueError("orphan already assigned")
+        subject = str(json.loads(str(event["payload_json"]))["subject"])
+        projection = build_responsibility(
+            stage=ResponsibilityStage.MATERIAL_RESULT_WITHOUT_OWNER_TO_ORPHAN_RECOVERY,
+            receiving_owner=recovery_owner, next_event=next_event, evidence_ref=evidence_ref,
+            disposition_reason=disposition_reason, active_worker=recovery_owner,
+            affected_scope=subject,
+        )
+        return {"subject": subject, "responsibility": projection}
+
+    def assign_orphan_recovery(
+        self, workflow_id: str, orphan_id: str, *, recovery_owner: str, next_event: str,
+        evidence_ref: str, disposition_reason: str,
+    ) -> str:
+        """Turn one durable orphan detection into a receiver-owned recovery obligation."""
+        with self._lock, self.connection:
+            validated = self.validate_orphan_assignment(
+                workflow_id, orphan_id, recovery_owner=recovery_owner,
+                next_event=next_event, evidence_ref=evidence_ref,
+                disposition_reason=disposition_reason,
+            )
+            subject = str(validated["subject"])
+            projection = dict(validated["responsibility"])
+            obligation_id = self._insert_obligation(
+                self.connection, workflow_id, ObligationKind.RESPONSIBILITY_HANDOFF_REQUIRED,
+                recovery_owner, subject, _json(projection), evidence_ref,
+            )
+            self._touch_workflow(workflow_id)
+            self._append_event(
+                workflow_id, "RESPONSIBILITY_ORPHAN_ASSIGNED", orphan_id,
+                {"obligation_id": obligation_id, "recovery_owner": recovery_owner},
+                f"RESPONSIBILITY_ORPHAN_ASSIGNED:{orphan_id}",
+            )
+            return obligation_id
+
     def _report_values(
         self, raw_message: str, packet: SubagentReturnPacket | Mapping[str, Any] | None
     ) -> tuple[str | None, int, str]:
@@ -927,6 +1407,12 @@ class SemanticStore:
         self, workflow_id: str, obligation_id: str, resolution: Mapping[str, Any] | None = None
     ) -> str:
         with self._lock, self.connection:
+            row = self.connection.execute(
+                "SELECT kind FROM obligations WHERE workflow_id = ? AND obligation_id = ? AND state = 'OPEN'",
+                (workflow_id, obligation_id),
+            ).fetchone()
+            if row is not None and normalize_obligation_kind(str(row["kind"])) == ObligationKind.RESPONSIBILITY_HANDOFF_REQUIRED.value:
+                raise ValueError("typed responsibility handoffs require accept_responsibility_handoff")
             cursor = self.connection.execute(
                 """UPDATE obligations SET state = 'RESOLVED', resolution_json = ?, resolved_at = ?
                 WHERE workflow_id = ? AND obligation_id = ? AND state = 'OPEN'""",
@@ -1002,16 +1488,85 @@ class SemanticStore:
                 "SELECT * FROM obligations WHERE workflow_id = ? AND state = 'OPEN' ORDER BY created_at, obligation_id",
                 (workflow_id,),
             ).fetchall()]
+            responsibility_rows = [dict(row) for row in self.connection.execute(
+                "SELECT * FROM obligations WHERE workflow_id = ? ORDER BY created_at, obligation_id", (workflow_id,)
+            ).fetchall()]
+            orphan_rows = self.connection.execute(
+                """SELECT subject_id, payload_json FROM events WHERE workflow_id = ?
+                AND kind = 'RESPONSIBILITY_ORPHAN_DETECTED' ORDER BY seq""", (workflow_id,)
+            ).fetchall()
+            assigned_orphans = {
+                str(row[0]) for row in self.connection.execute(
+                    "SELECT subject_id FROM events WHERE workflow_id = ? AND kind = 'RESPONSIBILITY_ORPHAN_ASSIGNED'",
+                    (workflow_id,),
+                ).fetchall()
+            }
+            provider_transaction_ids = sorted(
+                {
+                    str(row[0])
+                    for row in self.connection.execute(
+                        """SELECT subject_id FROM events WHERE workflow_id = ?
+                        AND kind = 'PROVIDER_TRANSACTION_CLASSIFIED'
+                        AND subject_id IS NOT NULL""",
+                        (workflow_id,),
+                    ).fetchall()
+                }
+            )
             latest_event_seq = self.connection.execute(
                 "SELECT COALESCE(MAX(seq), 0) FROM events WHERE workflow_id = ?",
                 (workflow_id,),
             ).fetchone()[0]
             for item in obligations:
                 item["kind"] = normalize_obligation_kind(str(item.get("kind") or ""))
+                projection = self._responsibility_row(item)
+                if projection is not None:
+                    item["responsibility"] = projection
+                    item.update({key: projection[key] for key in (
+                        "stage", "primary_queue", "receiving_owner", "next_event", "boundary_domain",
+                        "continuity_state", "active_worker", "continuity_owner", "continuation_owner",
+                        "affected_scope", "affected_actions", "unaffected_scopes",
+                        "direction_primary_queue", "prior_direction_primary_queue",
+                        "queue_authority_artifact", "queue_authority_owner", "evidence_ref",
+                    )})
+            responsibilities = []
+            current_by_subject: dict[str, dict[str, Any]] = {}
+            for item in responsibility_rows:
+                projection = self._responsibility_row(item)
+                if projection is not None:
+                    record = {
+                        "obligation_id": item["obligation_id"], "subject": item["subject"],
+                        "state": item["state"], "resolution_json": item["resolution_json"],
+                        "responsibility": projection,
+                    }
+                    responsibilities.append(record)
+                    current_by_subject[str(item["subject"])] = record
+            unowned_stalls = []
+            for row in orphan_rows:
+                orphan_id = str(row["subject_id"])
+                if orphan_id not in assigned_orphans:
+                    payload = json.loads(str(row["payload_json"]))
+                    orphan = {"orphan_id": orphan_id, **dict(payload)}
+                    unowned_stalls.append(orphan)
+                    current_by_subject[str(orphan["subject"])] = {
+                        "orphan_id": orphan_id, "subject": orphan["subject"],
+                        "state": ContinuityState.UNOWNED_STALL.value,
+                        "responsibility": orphan["responsibility"],
+                    }
             result = dict(workflow)
             result["tasks"] = tasks
             result["open_obligations"] = obligations
             result["obligation_count"] = len(obligations)
+            result["responsibilities"] = responsibilities
+            result["current_responsibilities"] = list(current_by_subject.values())
+            result["unowned_stalls"] = unowned_stalls
+            result["provider_transactions"] = [
+                projection
+                for transaction_id in provider_transaction_ids
+                if (
+                    projection := self._provider_transaction_projection(transaction_id)
+                ) is not None
+                and projection["workflow_id"] == workflow_id
+            ]
             # This is the only cursor callers may feed back to after_seq.
             # state_version tracks workflow mutations and deliberately has
             # independent semantics from the durable event stream.

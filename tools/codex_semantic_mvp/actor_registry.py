@@ -15,7 +15,7 @@ from .store import SemanticStore, _new_id, _now
 
 
 DEFAULT_ACTORS_PATH = Path(".codex/semantic-actors.toml")
-DEFAULT_PORTFOLIO_SESSION_ID = "019ffc20-5001-7453-a08a-dac783cf4d80"
+DEFAULT_PORTFOLIO_SESSION_ID = "01a03351-e8ef-7620-b2ab-b77b9512f499"
 DEFAULT_SESSION_ROOT_KIND = ActorKind.OPERATIONAL_ROOT
 
 
@@ -172,6 +172,78 @@ def register_session_root(
             scope_key=f"session:{session_id}",
             identity_source="SESSION_ROOT_MAPPING",
         )
+
+
+def reconcile_session_root_actor(
+    store: SemanticStore,
+    *,
+    actor_context_id: str,
+    session_id: str,
+    cutover_evidence_ref: str,
+    mapping_path: Path | None = None,
+) -> ActorContext:
+    """Apply one explicit mapped Operational-Root-to-Portfolio cutover in place.
+
+    The caller is responsible for authority admission.  This registry operation
+    never creates, releases, or rebinds an actor; it only reconciles the exact
+    active session-root row when the reviewed mapping names that session as the
+    current Portfolio route.
+    """
+    if not actor_context_id or not session_id:
+        raise ValueError("actor_context_id and session_id are required")
+    if not cutover_evidence_ref.strip():
+        raise ValueError("cutover_evidence_ref is required")
+    evidence_path = Path(cutover_evidence_ref)
+    resolved_evidence = (_repo_root() / evidence_path).resolve()
+    if evidence_path.is_absolute() or ".." in evidence_path.parts or not resolved_evidence.is_file():
+        raise ValueError("cutover_evidence_ref must name an existing repository artifact")
+    if session_root_kind(session_id, load_actor_mapping(mapping_path)) is not ActorKind.PORTFOLIO:
+        raise ValueError("session is not mapped as the current Portfolio route")
+    expected_scope = f"session:{session_id}"
+    with store._lock, store.connection:
+        row = store.connection.execute(
+            "SELECT * FROM actor_contexts WHERE actor_context_id = ?", (actor_context_id,)
+        ).fetchone()
+        if row is None:
+            raise KeyError(f"unknown actor: {actor_context_id}")
+        actor = actor_context_from_row(row)
+        if actor.session_id != session_id or actor.scope_key != expected_scope:
+            raise ValueError("actor does not match the exact session-root scope")
+        if actor.state is not ActorState.ACTIVE:
+            raise ValueError("actor must be ACTIVE for a session-root cutover")
+        if actor.actor_kind is not ActorKind.OPERATIONAL_ROOT:
+            raise ValueError("only an OPERATIONAL_ROOT actor may transition to PORTFOLIO")
+        root_count = store.connection.execute(
+            """SELECT COUNT(*) FROM actor_contexts
+            WHERE session_id = ? AND actor_kind IN ('PORTFOLIO', 'OPERATIONAL_ROOT', 'SESSION_ROOT_UNCLASSIFIED')""",
+            (session_id,),
+        ).fetchone()[0]
+        if root_count != 1:
+            raise ValueError("session must have exactly one session-root actor for cutover")
+        updated_count = store.connection.execute(
+            """UPDATE actor_contexts
+            SET actor_kind = ?, identity_source = ?, updated_at = ?
+            WHERE actor_context_id = ? AND session_id = ? AND scope_key = ?
+              AND actor_kind = ? AND state = ?""",
+            (
+                ActorKind.PORTFOLIO.value,
+                f"SESSION_ROOT_CUTOVER_MAPPING:{cutover_evidence_ref}",
+                _now(),
+                actor_context_id,
+                session_id,
+                expected_scope,
+                ActorKind.OPERATIONAL_ROOT.value,
+                ActorState.ACTIVE.value,
+            ),
+        )
+        if updated_count.rowcount != 1:
+            raise RuntimeError("session-root actor changed during cutover reconciliation")
+        updated = store.connection.execute(
+            "SELECT * FROM actor_contexts WHERE actor_context_id = ?", (actor_context_id,)
+        ).fetchone()
+        if updated is None:  # pragma: no cover - protected by the prior exact lookup
+            raise KeyError(f"unknown actor: {actor_context_id}")
+        return actor_context_from_row(updated)
 
 
 def register_child_actor(

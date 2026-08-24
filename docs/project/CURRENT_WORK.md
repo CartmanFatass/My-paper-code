@@ -4,7 +4,7 @@
 document_kind=current_work_index
 schema_version=4
 index_owner=root
-state_updated=2026-08-11
+state_updated=2026-08-23
 session_record_ids=code_project_manager
 common_record_ids=formal_toy_research|uav_validation|explorer_project_validation|independent_research_explorer_pointer
 legacy_snapshot=docs/project/archive/CURRENT_WORK_LEGACY_2026-08-01.md
@@ -32,6 +32,12 @@ and sessions do not share a write surface.
 - User P0 hidden-limit correction (governance-only; preserves object-local
   fences): `docs/research/workflow-runs/2026-08-11_five-round-research-team/P0_HIDDEN_LIMIT_CONTROL_PLANE_CORRECTION_20260821.md`
 - Scientific direction ledger: `docs/research/cdc/RESEARCH_DIRECTION_LEDGER.md`
+- Human-readable 33-direction Portfolio queues, owners and next events:
+  `docs/HR/RESEARCH_DIRECTION_DASHBOARD.md`
+- Mechanically checked direction/object/evidence/code drill-down:
+  `docs/HR/RESEARCH_DIRECTION_REGISTRY.toml`
+- Direction projection validator:
+  `tools/validate_research_direction_registry.py`
 - Runtime facts when assigned: `docs/project/AGENT_CONTEXT.md`
 - Stable code map (Code Project Manager-owned): `docs/project/PROJECT_MAP.md`
 - Repository context precedence: `docs/project/CONTEXT_PRECEDENCE.md`

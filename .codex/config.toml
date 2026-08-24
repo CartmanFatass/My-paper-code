@@ -147,6 +147,9 @@ startup_timeout_sec = 15
 tool_timeout_sec = 1800
 enabled = true
 required = false
+# This repository-local server is allowlisted and independently enforces
+# actor, owner, ACTIVE-workflow, and user-authority constraints on mutations.
+default_tools_approval_mode = "approve"
 enabled_tools = [
   "runtime_health",
   "workflow_current",
@@ -160,6 +163,15 @@ enabled_tools = [
   "root_record_intake",
   "obligation_open",
   "obligation_resolve",
+  "responsibility_handoff_open",
+  "responsibility_handoff_accept",
+  "responsibility_scheduled_record",
+  "responsibility_idle_complete_record",
+  "responsibility_local_boundary_record",
+  "responsibility_orphan_detect",
+  "responsibility_orphan_assign",
+  "provider_transaction_classify",
+  "provider_recovery_resend_authorize",
   "workflow_await_event",
   "workflow_await_global_event",
   "workflow_close",

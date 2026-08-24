@@ -48,5 +48,5 @@ def route_result(assignment: AssignmentArtifact, result: ResultArtifact, registr
         "USER_QUESTION_REQUIRED" if level == IncidentLevel.E5_USER_AUTHORITY_REQUIRED else "ROUTE_SCOPE_LOCAL",
         result.impact.user_question,
         level != IncidentLevel.E5_USER_AUTHORITY_REQUIRED,
-        level in {IncidentLevel.E3_DOMAIN_OWNER_DECISION, IncidentLevel.E4_CROSS_OWNER_DECISION, IncidentLevel.E5_USER_AUTHORITY_REQUIRED},
+        False,
     )
