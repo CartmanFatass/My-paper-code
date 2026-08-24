@@ -46,39 +46,17 @@ data/
 *.pdf
 *.md
 !README.md
-!CLAUDE.md
 !AGENTS.md
-# Repository-scoped skill instructions and references are durable workflow source.
-!.agents/skills/**/*.md
-# Stable role charters are durable workflow authority.
-!.agents/roles/
-!.agents/roles/*.md
-# Canonical project memory + plan docs are load-bearing collaboration state — track them
-# (scratch under memory/backup_*/ and memory/tmp/ stays ignored via the bare *.md rule).
+# Stable project and research documentation.
 !memory/*.md
-# Project control plane is load-bearing collaboration state.
 !docs/project/*.md
-!docs/project/current-work/
-!docs/project/current-work/**/*.md
-!docs/session-workspaces/
-!docs/session-workspaces/**/*.md
 !docs/report/*.md
 !docs/plans/*.md
-!docs/superpowers/plans/*.md
-!docs/superpowers/specs/*.md
-# CDC records are durable algorithm-research state.
+!docs/research/RESEARCH_MAP.md
 !docs/research/cdc/**/*.md
-# Maintained diagnosis and repair memory for the active research-team session.
-!docs/research/workflow-runs/2026-08-11_five-round-research-team/SESSION_WORKFLOW_DIAGNOSIS.md
-!docs/research/workflow-runs/2026-08-11_five-round-research-team/MINIMAL_CONTROL_PLANE_REPAIR_PLAN.md
-!docs/research/workflow-runs/2026-08-11_five-round-research-team/ROOT_PROBLEM_FAMILY_PORTFOLIO.md
-# PM-accepted active research designs are durable algorithm source.
 !docs/research/designs/*.md
-# Active candidate evidence mirrors candidate code under experiments/candidates.
 !docs/research/candidates/
 !docs/research/candidates/**/*.md
-# Custom subagent definitions are durable project tooling.
-!.claude/agents/*.md
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
 # User-requested isolated Git worktrees for parallel HMASD implementation.
