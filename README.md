@@ -1,7 +1,8 @@
 # HMASD: 层次化多智能体技能发现 - 多无人机基站场景
 
 > This root README documents the original HMASD/legacy entry. For the stable
-> code architecture, see [the project map](docs/project/PROJECT_MAP.md); for
+> code architecture and directory standards, see the
+> [project map / codemap](docs/project/PROJECT_MAP.md); for
 > the 33 research directions and their source directories, see the
 > [research map](docs/research/RESEARCH_MAP.md);
 > and for the standalone process-core route, see

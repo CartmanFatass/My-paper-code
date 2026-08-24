@@ -1,4 +1,4 @@
-# HMASD Project Map
+# HMASD Project Map / Codemap
 
 This is the stable code-architecture map. It describes executable code and
 dependency direction only. It is not a task router, permission system, lease
@@ -10,8 +10,30 @@ registry, or current-work ledger.
 | Research directions, current scientific position, and directories | [`../research/RESEARCH_MAP.md`](../research/RESEARCH_MAP.md) |
 | Exact scientific meaning | The direction's files under [`../research/candidates/`](../research/candidates/) |
 | Candidate implementations | [`../../experiments/candidates/`](../../experiments/candidates/) |
+| Candidate test source | [`../../tests/experiments/candidates/`](../../tests/experiments/candidates/) |
+| Per-direction implementation, test, and scratch mapping | [`../research/RESEARCH_MAP.md#code-tests-and-generated-output`](../research/RESEARCH_MAP.md#code-tests-and-generated-output) |
 | Standalone process-core usage | [`../../ha_ctse_process/README.md`](../../ha_ctse_process/README.md) |
 | Local temporary files and worktree layout | [`../../temp/README.md`](../../temp/README.md) |
+
+## Research-direction codemap standard
+
+The stable research-direction key is the directory name under
+`docs/research/candidates/`. That same key joins the four surfaces below; it is
+a navigation convention, not workflow state.
+
+| Surface | Canonical location | Contents |
+| --- | --- | --- |
+| Durable research artifacts | `docs/research/candidates/<direction-id>/` | Science definitions, accepted manifests, result summaries, dispositions, and code-science indexes. |
+| Candidate implementation | `experiments/candidates/<implementation>/` | Versioned implementation source. The exact primary implementation name is recorded per direction in `RESEARCH_MAP.md`. |
+| Candidate tests | `tests/experiments/candidates/<implementation>/` | Versioned test source for the primary or retained implementation. |
+| Local experiment output | `temp/directions/<direction-id>/exp/` | Ignored runs, checkpoints, profiles, captured output, and rebuildable generated manifests. |
+| Local test output | `temp/directions/<direction-id>/test/` | Ignored pytest bases, fixtures, test databases, and compiler probes. |
+
+`RESEARCH_MAP.md` is the per-direction inventory: it records all 33 direction
+keys and their current primary implementation and test paths. `AGENTS.md`
+defines how agents must create and use the local directories. `temp/README.md`
+defines cleanup and worktree layout. Do not duplicate the 33-row inventory in
+another document.
 
 ## Stable lineages
 
@@ -101,6 +123,7 @@ Codex delegation. Those files select collaborators only; they do not sit in
 the application import graph. The `codex/control-plane-free-20260824` branch
 omits that layer while keeping the same product and research tree.
 
-Update this map when a stable executable route or dependency direction
-changes. Ordinary experiments, task status, reviews, and temporary work do not
-belong here.
+Update this map when a stable executable route, dependency direction, or the
+codemap layout contract changes. Update `RESEARCH_MAP.md` when an individual
+direction changes its primary implementation or test mapping. Ordinary runs,
+task status, reviews, and temporary work do not belong here.
