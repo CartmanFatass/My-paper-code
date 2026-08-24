@@ -689,14 +689,34 @@ async def _dispatch_allowlisted(
         stop_event.set()
         return {"stopping": True, "run_id": str(getattr(service, "run_id", "") or "")}, "OK", None
     if command is CommandKind.INSPECT:
-        return _inspect(arguments, store), "OK", None
+        return _inspect(arguments, store, service=service), "OK", None
     if command is CommandKind.ARM_SINGLE_WAKE:
         _require_arguments(arguments, frozenset())
-        return (
-            {"armed": False, "implemented": False},
-            "NOT_IMPLEMENTED",
-            "ARM_SINGLE_WAKE is reserved for Task 25 and did not arm a wake",
+        client = getattr(service, "client", None)
+        if client is None or not hasattr(service, "arm_single_wake"):
+            raise HostControlValidationError("live single-wake host is unavailable")
+        semantic_state = _require_profile_semantic_state(profile, repo_root, semantic_state_path)
+        assert semantic_state is not None
+        from .binding_store import BindingStore
+        from .mailbox_store import MailboxStore
+        from .scheduler_leases import SchedulerLeases
+        from .semantic_bridge import SemanticBridge
+        from .semantic_scanner import SemanticScanner
+        from .wake_batches import WakeBatchStore
+        from .wake_recovery import WakeRecovery
+        from .wake_scheduler import WakeScheduler
+
+        bridge = SemanticBridge(semantic_state, store)
+        bindings = BindingStore(store, bridge)
+        mailbox = MailboxStore(store)
+        batches = WakeBatchStore(store, mailbox)
+        leases = SchedulerLeases(store)
+        scheduler = WakeScheduler(
+            bindings, mailbox, batches, leases,
+            WakeRecovery(bindings, mailbox, batches, client, leases, "single-wake", bridge),
+            SemanticScanner(mailbox, bridge), bridge, client, instance_id="single-wake",
         )
+        return service.arm_single_wake(scheduler, resource=bridge), "OK", None
 
     client = getattr(service, "client", None)
     if client is None:
@@ -1063,7 +1083,7 @@ def _require_bound_actor(bindings, snapshot) -> None:
 
 def _mechanical_status(service: object, profile: RuntimeProfile) -> dict[str, object]:
     store = getattr(service, "store")
-    return {
+    result = {
         "run_id": str(getattr(service, "run_id", "") or ""),
         "host_process_id": os.getpid(),
         "app_server_child_process_id": getattr(
@@ -1082,32 +1102,57 @@ def _mechanical_status(service: object, profile: RuntimeProfile) -> dict[str, ob
         ),
         "automatic_wake": False,
     }
+    status = getattr(service, "single_wake_status", None)
+    if callable(status):
+        result["single_wake"] = status()
+    return result
 
 
-def _inspect(arguments: Mapping[str, object], store) -> dict[str, object]:
+def _inspect(arguments: Mapping[str, object], store, *, service: object | None = None) -> dict[str, object]:
     from .timeline import binding_timeline, mailbox_timeline, thread_timeline, wake_timeline
+    from .runtime_inspect import (
+        explain_why_not_wake, inspect_actor, inspect_binding, inspect_effect,
+        inspect_incident, inspect_thread,
+    )
 
     selectors = frozenset(
-        {"thread_id", "binding_id", "target_actor_context_id", "wake_batch_id"}
+        {
+            "thread_id", "binding_id", "target_actor_context_id", "wake_batch_id",
+            "actor_context_id", "effect_id", "incident_id", "explain_why_not_wake",
+        }
     )
     _require_arguments(arguments, frozenset(), selectors)
     supplied = [key for key in selectors if key in arguments]
     if len(supplied) > 1:
         raise HostControlValidationError("INSPECT accepts at most one selector")
     if not supplied:
-        return {
+        result = {
             "thread_count": _table_count(store, "thread_snapshots"),
             "reconciliation_count": _table_count(store, "reconciliation_runs"),
             "binding_count": _table_count(store, "managed_actor_bindings"),
             "mailbox_count": _table_count(store, "mailbox_messages"),
             "wake_batch_count": _table_count(store, "wake_batches"),
         }
+        status = getattr(service, "single_wake_status", None)
+        if callable(status):
+            result["single_wake"] = status()
+        return result
     key = supplied[0]
     value = _require_nonempty_string(arguments[key], f"arguments.{key}")
+    if key == "actor_context_id":
+        return {"actor": inspect_actor(store, value)}
+    if key == "effect_id":
+        return {"effect": inspect_effect(store, value)}
+    if key == "incident_id":
+        return {"incident": inspect_incident(store, value)}
+    if key == "explain_why_not_wake":
+        status = getattr(service, "single_wake_status", None)
+        arm_state = status().get("state") if callable(status) else None
+        return {"why_not_wake": explain_why_not_wake(store, value, single_wake_state=arm_state)}
     if key == "thread_id":
-        return {"thread": _json_object(thread_timeline(store, value))}
+        return {"thread": inspect_thread(store, value), "timeline": _json_object(thread_timeline(store, value))}
     if key == "binding_id":
-        return {"binding": _json_value(binding_timeline(store, value))}
+        return {"binding": inspect_binding(store, value), "timeline": _json_value(binding_timeline(store, value))}
     if key == "target_actor_context_id":
         return {"mailbox": _json_value(mailbox_timeline(store, target_actor_context_id=value))}
     return {"wake": _json_value(wake_timeline(store, value))}

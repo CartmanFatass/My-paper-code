@@ -16,6 +16,9 @@ from tools.codex_semantic_mvp.store import SemanticStore
 
 
 def test_doctor_does_not_launch_app_server(tmp_path: Path, repo_root: Path, capsys) -> None:
+    wrapper = (repo_root / "scripts/codex-supervisor-durability-doctor.ps1").read_text(encoding="utf-8")
+    assert "-m tools.codex_supervisor --repo-root $RepoRoot doctor" in wrapper
+    assert "exit $LASTEXITCODE" in wrapper
     runtime = Path(tempfile.mkdtemp(prefix="hmasd-obs-cli-"))
     binary = write_fake_codex(tmp_path)
     code = main(

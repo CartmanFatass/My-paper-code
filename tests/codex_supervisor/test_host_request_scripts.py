@@ -204,7 +204,8 @@ def _write_ready_fixture(
                 "argument_vector": [
                     "-m", "tools.codex_supervisor", "--repo-root", str(repo_root.resolve()),
                     "--runtime-home", str(runtime_home), "--codex-bin", str(Path(CODEX_BINARY).resolve()),
-                    "serve", "--profile", profile.value, "--semantic-state", str(semantic_state),
+                    "serve", "--profile", profile.value,
+                    *([] if profile is RuntimeProfile.OBSERVER else ["--semantic-state", str(semantic_state)]),
                     "--ready-file", str(ready), "--control-home", str(control),
                 ],
                 "control_home": str(control),
@@ -234,7 +235,8 @@ def _start_ready_fixture(
     vector = [
         "-m", "tools.codex_supervisor", "--repo-root", str(fixture_repo),
         "--runtime-home", str(runtime_home), "--codex-bin", str(Path(CODEX_BINARY).resolve()),
-        "serve", "--profile", profile.value, "--semantic-state", str(semantic_state),
+        "serve", "--profile", profile.value,
+        *([] if profile is RuntimeProfile.OBSERVER else ["--semantic-state", str(semantic_state)]),
         "--ready-file", str(ready), "--control-home", str(control),
     ]
     host, child_id = _fixture_supervisor_process(fixture_repo, vector)
@@ -466,6 +468,42 @@ def test_profile_disallowed_command_returns_host_required_without_inbox_write(re
         assert result.returncode != 0
         assert result.stdout.strip() == "HMASD_SUPERVISOR_HOST_REQUIRED_V1"
         assert not (control / "inbox").exists()
+    finally:
+        if host is not None: _terminate_inert_tree(host)
+
+
+@pytest.mark.parametrize("command", ("STATUS", "INSPECT"))
+def test_observer_read_command_uses_validated_generic_host_binding(
+    repo_root: Path, tmp_path: Path, command: str
+) -> None:
+    if POWER_SHELL is None:
+        pytest.skip("Windows PowerShell is unavailable")
+    host = None
+    try:
+        fixture_repo, runtime_home, control, _, host = _start_ready_fixture(
+            tmp_path, repo_root, profile=RuntimeProfile.OBSERVER
+        )
+        process = subprocess.Popen(
+            [
+                POWER_SHELL, "-NoProfile", "-NonInteractive", "-File",
+                str(_script(repo_root, "hmasd-supervisor-request.ps1")),
+                "-Command", command, "-ArgumentsJson", "{}", "-Operator", "test-operator",
+                "-RuntimeHome", str(runtime_home), "-ExpectedRepoRoot", str(fixture_repo),
+                "-TimeoutSeconds", "5",
+            ], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+        )
+        requests = _await_published_request(process, control / "inbox")
+        assert len(requests) == 1
+        request = json.loads(requests[0].read_text(encoding="utf-8"))
+        outbox = control / "outbox"; outbox.mkdir(parents=True, exist_ok=True)
+        (outbox / requests[0].name).write_text(json.dumps({
+            "schema": "HMASD_SUPERVISOR_CONTROL_RESPONSE_V1", "request_id": request["request_id"],
+            "status": "OK", "payload": {"read_only": True}, "error": None,
+            "completed_at": "2026-08-23T00:00:00+00:00",
+        }), encoding="utf-8")
+        stdout, stderr = process.communicate(timeout=5)
+        assert process.returncode == 0, stderr
+        assert json.loads(stdout)["payload"] == {"read_only": True}
     finally:
         if host is not None: _terminate_inert_tree(host)
 

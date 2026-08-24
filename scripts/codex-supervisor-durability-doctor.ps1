@@ -5,4 +5,5 @@ param(
     [string]$PythonExecutable
 )
 $ErrorActionPreference = "Stop"
-& $PythonExecutable -m tools.codex_supervisor doctor --repo-root $RepoRoot
+& $PythonExecutable -m tools.codex_supervisor --repo-root $RepoRoot doctor
+exit $LASTEXITCODE

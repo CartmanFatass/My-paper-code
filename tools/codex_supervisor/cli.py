@@ -65,6 +65,15 @@ def _parser() -> argparse.ArgumentParser:
     wake_sub = wake.add_subparsers(dest="wake_command", required=True)
     wake_show = wake_sub.add_parser("show")
     wake_show.add_argument("--wake-batch-id")
+    inspect_runtime = sub.add_parser("inspect")
+    inspect_group = inspect_runtime.add_mutually_exclusive_group(required=True)
+    inspect_group.add_argument("--actor-context-id")
+    inspect_group.add_argument("--binding-id")
+    inspect_group.add_argument("--thread-id")
+    inspect_group.add_argument("--effect-id")
+    inspect_group.add_argument("--incident-id")
+    explain = sub.add_parser("explain")
+    explain.add_argument("--binding-id", required=True)
     return parser
 
 
@@ -102,6 +111,26 @@ def main(argv: list[str] | None = None) -> int:
         binary = resolve_codex_binary(args.codex_bin)
         capture = capture_app_server_schema(binary, config.runtime_home / "schema", repo_root=repo_root)
         print(json.dumps({"codex_version": capture.version, "schema_root": str(capture.output_root)}, indent=2))
+        return 0
+    if args.command in {"inspect", "explain"}:
+        from .runtime_inspect import (
+            ReadOnlyRuntime, explain_why_not_wake, inspect_actor, inspect_binding,
+            inspect_effect, inspect_incident, inspect_thread,
+        )
+        with ReadOnlyRuntime(config.runtime_home) as store:
+            if args.command == "explain":
+                payload = explain_why_not_wake(store, args.binding_id)
+            elif args.actor_context_id:
+                payload = inspect_actor(store, args.actor_context_id)
+            elif args.binding_id:
+                payload = inspect_binding(store, args.binding_id)
+            elif args.thread_id:
+                payload = inspect_thread(store, args.thread_id)
+            elif args.effect_id:
+                payload = inspect_effect(store, args.effect_id)
+            else:
+                payload = inspect_incident(store, args.incident_id)
+        print(json.dumps(payload, indent=2, default=str))
         return 0
     store = ObserverStore(config.runtime_home)
     try:

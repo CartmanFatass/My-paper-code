@@ -330,19 +330,28 @@ def test_invalid_stop_published_during_mutation_claim_does_not_fence(
     assert (channel.rejected / "z-stop.json").exists()
 
 
-def test_single_wake_is_typed_not_implemented_and_does_not_arm(tmp_path: Path) -> None:
+def test_single_wake_command_builds_one_typed_arm(tmp_path: Path) -> None:
     async def body() -> None:
         channel = _channel(tmp_path / "control", profile=RuntimeProfile.SINGLE_WAKE)
         store = ObserverStore(tmp_path / "runtime")
-        service = SimpleNamespace(store=store, run_id="run-1", client=object(), transport=None, _stopped=False)
+        calls = []
+        def arm(scheduler, *, resource=None):
+            calls.append(scheduler)
+            resource.close()
+            return {"state": "ARMED", "armed": True, "consumed": False, "attempt_count": 0, "result": None}
+        service = SimpleNamespace(
+            store=store, run_id="run-1", client=object(), transport=None,
+            _stopped=False, arm_single_wake=arm,
+        )
         response = await channel.dispatch(
             _request("arm", CommandKind.ARM_SINGLE_WAKE),
             profile=RuntimeProfile.SINGLE_WAKE,
             service=service,
             stop_event=asyncio.Event(),
         )
-        assert response.status == "NOT_IMPLEMENTED"
-        assert response.payload == {"armed": False, "implemented": False}
+        assert response.status == "OK"
+        assert response.payload["state"] == "ARMED"
+        assert len(calls) == 1
         store.close()
 
     asyncio.run(body())
@@ -440,7 +449,7 @@ def test_restart_does_not_resend_claimed_mutation(tmp_path: Path) -> None:
     ("selector", "response_key", "expected_type"),
     [
         ({"thread_id": "thr-none"}, "thread", dict),
-        ({"binding_id": "bind-none"}, "binding", list),
+        ({"binding_id": "bind-none"}, "binding", dict),
         ({"target_actor_context_id": "actor-none"}, "mailbox", list),
         ({"wake_batch_id": "wake-none"}, "wake", list),
     ],

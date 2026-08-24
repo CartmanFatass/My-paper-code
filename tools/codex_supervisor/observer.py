@@ -78,6 +78,54 @@ class ObserverService:
         self._end_kind = EndKind.NORMAL.value
         self._stopped = False
         self.session: ManagedAppServerSession | None = None
+        self._single_wake_state = "UNARMED"
+        self._single_wake_attempts = 0
+        self._single_wake_result: dict[str, object] | None = None
+        self._single_wake_task: asyncio.Task[None] | None = None
+        self._single_wake_resource: object | None = None
+
+    def single_wake_status(self) -> dict[str, object]:
+        return {
+            "state": self._single_wake_state,
+            "armed": self._single_wake_state in {"ARMED", "ATTEMPTING"},
+            "consumed": self._single_wake_state == "CONSUMED",
+            "attempt_count": self._single_wake_attempts,
+            "result": self._single_wake_result,
+        }
+
+    def arm_single_wake(self, scheduler: object, *, resource: object | None = None) -> dict[str, object]:
+        if self._single_wake_state != "UNARMED" or self._stopped:
+            close = getattr(resource, "close", None)
+            if callable(close):
+                close()
+            raise ValueError("single wake was already armed or host is stopped")
+        self._single_wake_state = "ARMED"
+        self._single_wake_resource = resource
+        self._single_wake_task = asyncio.create_task(self._run_single_wake(scheduler))
+        return self.single_wake_status()
+
+    async def _run_single_wake(self, scheduler: object) -> None:
+        try:
+            while not scheduler.has_eligible_work():
+                await asyncio.sleep(min(0.25, self.config.reconcile_interval_seconds))
+            self._single_wake_state = "ATTEMPTING"
+            self._single_wake_attempts = 1
+            try:
+                result = await scheduler.once()
+                self._single_wake_result = {"outcome": "RETURNED", "detail": result}
+            except Exception as exc:
+                self._single_wake_result = {
+                    "outcome": "REJECTED_OR_UNCERTAIN", "error": str(exc) or type(exc).__name__
+                }
+            self._single_wake_state = "CONSUMED"
+        except asyncio.CancelledError:
+            self._single_wake_state = "CANCELLED"
+            raise
+        finally:
+            close = getattr(self._single_wake_resource, "close", None)
+            if callable(close):
+                close()
+            self._single_wake_resource = None
 
     async def start(self) -> None:
         self.store.recover_incomplete_runs()
@@ -580,6 +628,14 @@ class ObserverService:
                 thread_count=int(count),
             )
         self._stopped = True
+        if self._single_wake_task is not None and not self._single_wake_task.done():
+            self._single_wake_state = "CANCELLED"
+            self._single_wake_task.cancel()
+            await asyncio.gather(self._single_wake_task, return_exceptions=True)
+            close = getattr(self._single_wake_resource, "close", None)
+            if callable(close):
+                close()
+            self._single_wake_resource = None
         await asyncio.sleep(0)
         self._end_kind = end_kind
         if self.session is not None:

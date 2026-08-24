@@ -140,10 +140,16 @@ function Get-ValidatedHostBinding([string]$RuntimePath, [object]$Status, [object
         if (-not (Test-SamePath ([string]$launch.repo_root) ([string]$Record.repo_root)) -or -not (Test-SamePath ([string]$launch.runtime_home) $RuntimePath) -or [string]$launch.profile -cne [string]$Record.profile) { return $null }
         if (-not (Test-SamePath ([string]$launch.ready_file) ([string]$Record.ready_file)) -or -not (Test-SamePath ([string]$evidence.ready_file) ([string]$launch.ready_file))) { return $null }
         if (-not (Test-SamePath ([string]$launch.control_home) ([string]$evidence.control_home)) -or -not (Test-ExternalPath ([string]$launch.control_home) ([string]$Record.repo_root))) { return $null }
-        if ([string]$Record.profile -eq 'OBSERVER' -or [string]::IsNullOrWhiteSpace([string]$launch.semantic_state)) { return $null }
-        $semantic = Resolve-CanonicalExistingFile ([string]$launch.semantic_state)
         $root = Resolve-CanonicalDirectory ([string]$launch.repo_root)
-        if ($null -eq $semantic -or $null -eq $root -or -not (Test-ExternalExistingFile $semantic $root)) { return $null }
+        if ($null -eq $root) { return $null }
+        $semantic = $null
+        if ([string]$Record.profile -eq 'OBSERVER') {
+            if (-not [string]::IsNullOrWhiteSpace([string]$launch.semantic_state)) { return $null }
+        } else {
+            if ([string]::IsNullOrWhiteSpace([string]$launch.semantic_state)) { return $null }
+            $semantic = Resolve-CanonicalExistingFile ([string]$launch.semantic_state)
+            if ($null -eq $semantic -or -not (Test-ExternalExistingFile $semantic $root)) { return $null }
+        }
         return [pscustomobject]@{ control_home = [System.IO.Path]::GetFullPath([string]$launch.control_home); repo_root = $root; semantic_state = $semantic; active_codex_bin = [string]$Status.ready.codex_binary }
     } catch { return $null }
 }

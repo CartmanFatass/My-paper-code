@@ -75,6 +75,14 @@ class WakeScheduler:
             sender_kind_for=self._sender_kinds(),
         )
 
+    def has_eligible_work(self) -> bool:
+        """Check only the local mailbox/binding ledger; never contact App Server."""
+        return any(
+            binding.actor_kind in {ManagedActorKind.OPERATIONAL_ROOT, ManagedActorKind.PORTFOLIO}
+            and bool(self._eligible_messages(binding.binding_id))
+            for binding in self.bindings.list_bindings()
+        )
+
     def _validate_once(self, binding_id: str, wake_batch_id: str, generation: int) -> tuple[Any, dict[str, object]]:
         self.leases.assert_held(binding_id, self.instance_id, generation)
         binding = self.bindings.get(binding_id)
