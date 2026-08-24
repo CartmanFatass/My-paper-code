@@ -278,6 +278,31 @@ def test_start_argument_helper_uses_bound_duration_without_nullable_members(repo
     assert arguments[arguments.index("--repo-root") + 1] == "C:/repo with space"
 
 
+@pytest.mark.parametrize(
+    "name",
+    ("hmasd-root-supervisor-start.ps1", "hmasd-root-supervisor-status.ps1"),
+)
+def test_startup_timeout_probe_is_argv_safe_in_windows_powershell_51(repo_root, tmp_path, name):
+    if POWER_SHELL is None:
+        pytest.skip("Windows PowerShell is unavailable")
+    runtime_home = tmp_path / "external runtime"
+    runtime_home.mkdir()
+    body = (
+        "$timeout=Get-StartupReadyTimeout $A1 $A2 $A3; "
+        "[ordered]@{startup_ready_timeout_seconds=$timeout}|ConvertTo-Json -Compress"
+    )
+    result = invoke_start_helpers(
+        script_path(repo_root, name),
+        ("Get-StartupReadyTimeout",),
+        body,
+        str(repo_root),
+        str(runtime_home),
+        str(PROJECT_PYTHON.resolve()),
+    )
+    assert result.returncode == 0, result.stderr + result.stdout
+    assert json.loads(result.stdout)["startup_ready_timeout_seconds"] > 0
+
+
 def test_windows_powershell_51_argument_serialization_round_trips_real_child_argv(repo_root, tmp_path):
     assert PROJECT_PYTHON.is_file()
     output = tmp_path / "argv output with spaces.json"

@@ -64,9 +64,17 @@ function Resolve-CanonicalExecutable([string]$Executable, [string]$Label) {
 }
 
 function Get-StartupReadyTimeout([string]$Root, [string]$RuntimePath, [string]$Interpreter) {
+    $snippet = @'
+import sys
+from pathlib import Path
+from tools.codex_supervisor.config import load_observer_config
+root = Path(sys.argv[1]).resolve()
+print(load_observer_config(root, root.parent / ".hmasd-supervisor-config-probe").startup_ready_timeout_seconds)
+'@
+    $encodedSnippet = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($snippet))
     Push-Location -LiteralPath $Root
     try {
-        $raw = & $Interpreter -c 'import sys; from pathlib import Path; from tools.codex_supervisor.config import load_observer_config; root=Path(sys.argv[1]).resolve(); print(load_observer_config(root, root.parent / ".hmasd-supervisor-config-probe").startup_ready_timeout_seconds)' $Root 2>$null
+        $raw = & $Interpreter -c 'import base64,sys;code=base64.b64decode(sys.argv.pop(1));exec(code)' $encodedSnippet $Root 2>$null
         if ($LASTEXITCODE -ne 0 -or -not $raw) { return $null }
         $value = [double]0
         if (-not [double]::TryParse([string]($raw | Select-Object -Last 1), [Globalization.NumberStyles]::Float, [Globalization.CultureInfo]::InvariantCulture, [ref]$value) -or [double]::IsNaN($value) -or [double]::IsInfinity($value) -or $value -le 0) { return $null }
