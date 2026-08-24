@@ -1,63 +1,93 @@
 # HMASD External Review Workflow
 
-Canonical authority is in `AGENTS.md` and `.agents/roles/`. This file describes
-the compact artifact and transport sequence only.
+This directory contains durable external-review prompts and the exact raw
+archives imported from Agentify. The active layout is keyed by a direction and
+a deterministic frozen round; the older `rounds/` tree is historical
+provenance only and is never parsed as active workflow state.
 
-## Default two-provider direction policy
-
-Every eligible active algorithm direction receives two separate external
-conversations by default:
-
-1. **ChatGPT External Pro** for rigorous causal/mathematical scrutiny,
-   comparator and shortcut adequacy, claim boundaries, result challenge, and
-   convergence.
-2. **External Gemini innovator** for divergent search using broad world/domain
-   knowledge: mechanisms, analogies, overlooked regimes, counterexamples,
-   scenario families, controls, and toy-to-UAV bridges.
-
-Gemini never counts as or replaces ChatGPT External Pro. It supplies hypotheses,
-not convergence, formal acceptance, technical acceptance, or portfolio choice.
-The same-direction EM filters both answers locally; Root owns portfolio use and
-CM owns technical acceptance. Freeze the two questions independently and retain
-separate conversations, raw archives, and intakes. Agentify capacity may
-serialize transport without merging the reviews.
-
-## Research Operations Manager sequence
-
-1. Research Operations Manager follows the active grant or exact clarification
-   request and authors the reviewer-visible brief, allow-list and question.
-2. Research Operations Manager commits and pushes that exact boundary.
-3. The registered Pro transport submits the ChatGPT External Pro question once;
-   the registered Gemini transport separately submits the divergent Gemini
-   question once when Agentify capacity is idle.
-4. Each exact natural response is archived and accompanied by its own
-   provenance-bound same-direction intake. Neither archive is a substitute for
-   the other and neither provider receives the other's current answer by
-   default.
-5. The same-direction scientific owner reconciles Gemini as innovation input
-   and ChatGPT External Pro as rigorous review input. Root decides portfolio use;
-   local scientific and technical authority remain unchanged.
-
-Each provider owns only its exact question-scoped answer. The same-direction
-scientific owner owns interpretation; Root owns portfolio use; Code Project
-Manager owns implementation and technical acceptance. Neither review itself
-authorizes code or compute.
-
-## Transport identity
-
-The defining rules are in `.agents/skills/hmasd-agentify-pro-transport/SKILL.md`.
-
-## Round files
+## Active layout
 
 ```text
-rounds/YYYYMMDD_topic/
-  00_REVIEW_BRIEF.md
-  01_SHARED_SOURCE_MANIFEST.md
-  20_PRO_OPEN_QUESTION.md
-  21_PRO_OPEN_RAW.md
-  50_MECHANICAL_INTAKE_RECORD.md
+docs/external-review/directions/<direction-id>/<round-id>/
+├── GEMINI_DIVERGENT_PROMPT.md
+├── PRO_DIVERGENT_PROMPT.md
+├── PRO_CONVERGENCE_PROMPT.md
+├── gemini/
+│   ├── NATURAL_COMPLETION_ARCHIVE.json
+│   └── HANDOFF.md
+├── pro-divergent/
+│   ├── NATURAL_COMPLETION_ARCHIVE.json
+│   └── HANDOFF.md
+└── pro-convergence/
+    ├── NATURAL_COMPLETION_ARCHIVE.json
+    └── HANDOFF.md
 ```
 
-Historical files retain their original authorship markers. New rounds use
-Research Operations Manager direct transport. There is no Controller, Exchange
-task, dispatcher, separate persistent transport task or completion callback.
+The provider directories are populated only after the corresponding Agentify
+operation returns a verified natural-completion archive. Temporary handoff
+inputs used by Artifact Writer remain under the ignored local workflow/runtime
+area; `HANDOFF.md` is the durable, EM-authored scientific intake.
+
+A round is identified by the first 20 hexadecimal characters of:
+
+```text
+sha256(direction_id + "\n" + question_sha256 + "\n" +
+evidence_set_sha256 + "\n" + workflow_version)
+```
+
+Consequently, reusing a direction, question, evidence set, and workflow version
+reuses the same round identity. A changed frozen question or evidence set creates
+a new round and leaves the old round labeled historical provenance.
+
+## Blind provider sequence
+
+1. Freeze the question and declared evidence SHAs.
+2. Keep the Gemini divergent and Pro divergent prompts separate and mutually
+   blind. Each provider receives only its own provider-specific prompt.
+3. Perform local EM research and write the EM-authored local synthesis.
+4. Author the Pro convergence prompt from that synthesis and declared repository
+   evidence only. It must not include or link either divergent prompt, provider
+   response, archive, handoff, conversation, or operation context.
+5. Submit through Agentify's provider-specific transport and monitor through
+   provider-independent monitor transports.
+6. Import the exact archive bytes and give Artifact Writer the ignored handoff
+   input. EM owns the scientific handoff and external-review index update.
+
+Gemini is divergent inspiration and Pro convergence is a later synthesis check;
+neither provider answer is an authority for portfolio choice, implementation,
+or scientific acceptance.
+
+## Agentify boundary
+
+Agentify's Schema-v2 ledger is the sole authority for browser submission,
+idempotency, send counts, and commitment. HMASD stores operation references and
+validated exact archives; it never reconstructs or writes the ledger, sends a
+message, opens a browser, or treats an unknown commitment as resendable.
+
+`scripts/hmasd_external_review.py` is a local Root-only helper:
+
+```text
+round-id --direction <id> --question-sha <sha> --evidence-sha <sha> \
+  --workflow-version <version>
+validate-prompts --round-dir <path>
+partition-monitors --sessions <json> --count 1|2|3
+validate-archive --operation-ref <json> --archive <json>
+validate-archive --operation-ref <json> --archive <json> --out <tracked-json>
+render-handoff-input --archive <json> --out <ignored-json>
+```
+
+Archive import is create-if-absent. It writes the source bytes exactly, fsyncs
+the file and parent directory, accepts a concurrent same-response-SHA writer as
+idempotent, and reports a different-SHA destination as a conflict. Archive
+validation requires Agentify's native
+`agentify_review_natural_completion_archive_v1`, verified natural completion,
+at-most-once send counters, matching operation identity, and an exact
+`responseSha256` over UTF-8 `responseText`. HMASD does not add
+`schema_version`, `revision`, or `writer` to the foreign archive.
+
+## Historical provenance
+
+Existing material under `docs/external-review/rounds/` remains available for
+lineage and comparison. It may contain the terminology and layout of the
+previous workflow, but it is not a current prompt, archive, handoff, or state
+input. New work must use the direction/round layout above.

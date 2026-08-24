@@ -1,0 +1,141 @@
+{
+  "attempt_budget": 3,
+  "compaction": {
+    "current_checkpoint_sha": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "current_revision": 4,
+    "logical_identity": "EM-example-direction",
+    "generation": 4,
+    "pending_next_action": "WAIT_FOR_NATIVE_EVENT",
+    "state_revision": 4
+  },
+  "effects": [
+    {
+      "effect": "manager",
+      "logical_identity": "EM-example-direction",
+      "expected": "revive_matching_generation_or_reconstruct_once"
+    },
+    {
+      "effect": "run",
+      "expected": "observe_or_mark_unknown_never_reexecute",
+      "run_id": "example-run"
+    },
+    {
+      "effect": "git",
+      "expected": "inspect_existing_worktree_never_provision_twice",
+      "worktree_ref": "wt-example"
+    },
+    {
+      "effect": "external",
+      "expected": "verify_existing_operation_never_resend",
+      "operation_id": "11111111-1111-4111-8111-111111111111"
+    }
+  ],
+  "exhausted_blocker": {
+    "code": "RECOVERY_EXHAUSTED",
+    "failure_class": "external_commitment_unknown",
+    "resume_condition": "user_decides_how_to_verify_the_existing_operation_before_any_resend",
+    "user_visible": true
+  },
+  "generation_mismatch": {
+    "durable_generation": 4,
+    "late_generation": 3,
+    "action": "reconcile_before_effectful_work"
+  },
+  "matrix": [
+    {
+      "failure": "pure research task failed",
+      "forbidden": "treating old partial prose as accepted",
+      "safe": "new attempt with distinct assignment"
+    },
+    {
+      "failure": "manager missing after resume",
+      "forbidden": "creating duplicate live manager blindly",
+      "safe": "revive matching generation or reconstruct"
+    },
+    {
+      "failure": "partial code work",
+      "forbidden": "applying patch twice",
+      "safe": "resume or retain for recovery"
+    },
+    {
+      "failure": "run says RUNNING",
+      "forbidden": "relaunching same command blindly",
+      "safe": "observe or mark UNKNOWN"
+    },
+    {
+      "failure": "memory refusal",
+      "forbidden": "asking user to approve overcommit",
+      "safe": "reduce/batch/shard"
+    },
+    {
+      "failure": "Git conflict/stale base",
+      "forbidden": "auto-resolving semantic conflict",
+      "safe": "return to Root for new integration plan"
+    },
+    {
+      "failure": "push outcome unknown",
+      "forbidden": "pushing again without comparison",
+      "safe": "fetch remote tip and compare"
+    },
+    {
+      "failure": "external commitment unknown",
+      "forbidden": "resend",
+      "safe": "verify existing/observe"
+    },
+    {
+      "failure": "late specialist output",
+      "forbidden": "overwrite newer state",
+      "safe": "archive as superseded evidence"
+    },
+    {
+      "failure": "Dashboard failure",
+      "forbidden": "blocking workflow",
+      "safe": "restart or run without Dashboard"
+    }
+  ],
+  "reconstruction": {
+    "authoritative_sources": [
+      "portfolio_registry",
+      "research_state",
+      "engineering_state",
+      "external_review_index",
+      "run_manifest",
+      "accepted_result",
+      "agent_result",
+      "runtime_agents",
+      "runtime_worktrees"
+    ],
+    "expected_agent": {
+      "generation": 1,
+      "logical_identity": "EM-example-direction",
+      "parent_identity": "Portfolio"
+    },
+    "expected_worktree": {
+      "assignment_id": "run-example",
+      "direction_id": "example-direction",
+      "worktree_ref": "wt-example"
+    }
+  },
+  "repeated_attempts": [
+    {
+      "assignment_id": "recovery-example-run-observe",
+      "effect_class": "run",
+      "route": "observe-existing"
+    },
+    {
+      "assignment_id": "recovery-example-run-observe",
+      "effect_class": "run",
+      "route": "observe-existing"
+    },
+    {
+      "assignment_id": "recovery-example-run-unknown",
+      "effect_class": "run",
+      "route": "mark-unknown"
+    },
+    {
+      "assignment_id": "recovery-example-worktree-retain",
+      "effect_class": "git",
+      "route": "retain-existing"
+    }
+  ]
+}

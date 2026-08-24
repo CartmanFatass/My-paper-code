@@ -1,0 +1,10 @@
+{
+  "servers": {
+    "pyright": {
+      "rootMarkers": [".omp"]
+    },
+    "clangd": {
+      "rootMarkers": [".omp"]
+    }
+  }
+}

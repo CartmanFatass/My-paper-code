@@ -46,7 +46,32 @@ data/
 *.pdf
 *.md
 !README.md
-!AGENTS.md
+# OMP native control-plane definitions are trackable despite broad Markdown
+# ignores.
+!/.omp/AGENTS.md
+!/.omp/config.yml
+!/.omp/mcp.json
+!/.omp/lsp.json
+!/.omp/agents/
+!/.omp/agents/*.md
+!/.omp/WATCHDOG.md
+!/.omp/RULES.md
+!/.omp/skills/
+!/.omp/skills/*/
+!/.omp/skills/*/SKILL.md
+# Runtime registries and transient locks remain local-only.
+/.omp/runtime/**
+# OMP runtime caches, logs, and sessions remain local-only.
+/.omp/cache/
+/.omp/logs/
+/.omp/sessions/
+/.omp/**/cache/
+/.omp/**/logs/
+!docs/research/portfolio/
+!docs/research/portfolio/**
+!docs/external-review/directions/
+!docs/external-review/directions/**
+/.omp/**/sessions/
 # Stable project and research documentation.
 !memory/*.md
 !docs/project/*.md
@@ -63,8 +88,7 @@ data/
 # Retired non-native assistant layouts must not reappear as hidden local state.
 /.agents/
 /.claude/
-# Generated from the account-visible Codex model cache; never commit account
-# catalog contents. Rebuild with .codex/refresh-model-catalog-v2-workaround.ps1.
+# Account-visible model catalog workarounds remain local-only.
 runtime/model-catalog-v2-workaround.json
 # Exact R27-G2 design/review evidence is durable project state.
 !docs/research/R27_G2_FORCED_Z_TRAJECTORY_EFFECT_DESIGN_20260712.md

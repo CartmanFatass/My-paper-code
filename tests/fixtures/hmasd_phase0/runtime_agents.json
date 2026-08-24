@@ -1,0 +1,19 @@
+{
+  "agents": [
+    {
+      "agent_type": "hmasd-em",
+      "generation": 1,
+      "last_seen_at": "2026-08-24T00:00:00Z",
+      "lifecycle": "PARKED",
+      "logical_identity": "EM-example-direction",
+      "job_ref": "EMExampleDirection",
+      "parent_identity": "Portfolio",
+      "runtime_ref": "runtime-example-em",
+      "session_ref": "session-example-em"
+    }
+  ],
+  "revision": 1,
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "writer": "Root"
+}

@@ -1,0 +1,9 @@
+{
+  "direction_id": "degraded_incumbent_shadow_handover",
+  "revision": 1,
+  "rounds": [],
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "workflow_version": "hmasd-external-review-v1",
+  "writer": "EM-degraded_incumbent_shadow_handover"
+}

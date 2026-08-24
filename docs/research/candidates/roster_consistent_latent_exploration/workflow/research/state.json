@@ -1,0 +1,26 @@
+{
+  "actionable": false,
+  "active_agents": [],
+  "active_round_id": null,
+  "blockers": [],
+  "direction_id": "roster_consistent_latent_exploration",
+  "direction_ref": {
+    "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+    "sha256": "f98b477bfb15f286f1b6a4fd798cb949713986f19911adb676b031829e0f71f2"
+  },
+  "engineering_request": null,
+  "evidence_set_sha256": "03e131b71d63db78ca5c13ffe497fa778a9ae23a6cc53e301bb0350797543ce0",
+  "last_checkpoint_sha": null,
+  "next_action": {
+    "input_refs": [],
+    "kind": "IDLE"
+  },
+  "phase": "IDLE",
+  "question_sha256": "b02a61943ad67c19a55ebe4ca841d92917dd38825246be39ca78d5bd187e8e2b",
+  "registry_revision_seen": 1,
+  "revision": 1,
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "waiting_on": [],
+  "writer": "EM-roster_consistent_latent_exploration"
+}

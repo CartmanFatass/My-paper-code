@@ -1,0 +1,22 @@
+{
+  "revision": 1,
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "worktrees": [
+    {
+      "assignment_id": "run-example",
+      "base_sha": "1111111111111111111111111111111111111111",
+      "branch": "omp/example-direction/engineering/run-example",
+      "candidate_sha": null,
+      "canonical_absolute_path": "/home/fires/hmasd-worktrees/example-direction-engineering-run-example",
+      "direction_id": "example-direction",
+      "integrated_sha": null,
+      "kind": "engineering",
+      "lifecycle": "PROVISIONED",
+      "receipt_path": "temp/runtime/receipts/run-example.json",
+      "operation_token": null,
+      "worktree_ref": "wt-example"
+    }
+  ],
+  "writer": "Root"
+}

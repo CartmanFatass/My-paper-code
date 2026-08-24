@@ -1,0 +1,26 @@
+{
+  "actionable": false,
+  "active_agents": [],
+  "active_round_id": null,
+  "blockers": [],
+  "direction_id": "finite_semantic_boundary_support",
+  "direction_ref": {
+    "path": "docs/research/candidates/finite_semantic_boundary_support/DIRECTION.md",
+    "sha256": "e4b39b5f4ee2423be76fee03956e25c02f2c60a18f0b24fa3a4a0a9e9c03dce1"
+  },
+  "engineering_request": null,
+  "evidence_set_sha256": "a3ad2573a18fb8832888c01ee8b536d4164922d66b638e8f83c805be9ca976e5",
+  "last_checkpoint_sha": null,
+  "next_action": {
+    "input_refs": [],
+    "kind": "IDLE"
+  },
+  "phase": "IDLE",
+  "question_sha256": "e780a3dc58e18e641feb75afc4f41ea0b04fb77d3f23ff288a608d6e4b10d45b",
+  "registry_revision_seen": 1,
+  "revision": 1,
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "waiting_on": [],
+  "writer": "EM-finite_semantic_boundary_support"
+}

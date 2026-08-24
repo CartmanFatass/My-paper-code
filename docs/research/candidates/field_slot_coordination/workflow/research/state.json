@@ -1,0 +1,26 @@
+{
+  "actionable": false,
+  "active_agents": [],
+  "active_round_id": null,
+  "blockers": [],
+  "direction_id": "field_slot_coordination",
+  "direction_ref": {
+    "path": "docs/research/candidates/field_slot_coordination/DIRECTION.md",
+    "sha256": "3d0c32b1135d1208daf852e10a4228be9b2f8965e8d079644896b62b2fc7ab17"
+  },
+  "engineering_request": null,
+  "evidence_set_sha256": "226247ed77440e41c509f6beb5fa2c78531b94a1fe93594e30d1504f7e3099d8",
+  "last_checkpoint_sha": null,
+  "next_action": {
+    "input_refs": [],
+    "kind": "IDLE"
+  },
+  "phase": "IDLE",
+  "question_sha256": "84c7596d668cee211f06cdf655882f11bdceadb5d6350835567a4802c75da618",
+  "registry_revision_seen": 1,
+  "revision": 1,
+  "schema_version": 1,
+  "updated_at": "2026-08-24T00:00:00Z",
+  "waiting_on": [],
+  "writer": "EM-field_slot_coordination"
+}
