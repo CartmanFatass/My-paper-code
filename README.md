@@ -2,7 +2,8 @@
 
 > This root README documents the original HMASD/legacy entry. For the stable
 > code architecture, see [the project map](docs/project/PROJECT_MAP.md); for
-> current work routing, see [CURRENT_WORK.md](docs/project/CURRENT_WORK.md);
+> the 33 research directions and their source directories, see the
+> [research map](docs/research/RESEARCH_MAP.md);
 > and for the standalone process-core route, see
 > [ha_ctse_process/README.md](ha_ctse_process/README.md).
 
