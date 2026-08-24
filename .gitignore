@@ -59,8 +59,10 @@ data/
 !docs/research/candidates/**/*.md
 # Visual brainstorming and runtime capability probes are local scratch.
 .superpowers/
-# User-requested isolated Git worktrees for parallel HMASD implementation.
-.worktrees/
+
+# Retired non-native assistant layouts must not reappear as hidden local state.
+/.agents/
+/.claude/
 # Generated from the account-visible Codex model cache; never commit account
 # catalog contents. Rebuild with .codex/refresh-model-catalog-v2-workaround.ps1.
 runtime/model-catalog-v2-workaround.json
@@ -115,12 +117,22 @@ evaluation/
 *~
 .*.swp
 ._*
+*.tmp
+*.temp
+*.bak
+*.orig
 .pytest_cache/
+**/.pytest_cache/
 .pytest_tmp*/
 .pytest-*/
 .pytest_r*_tmp*/
 .codex_tmp_pytest*/
 .tmp_pytest*/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
 
 # Local generated workflow/test output. These directories contain rebuildable
 # runtime traces, benchmark payloads, and scratch frontiers; durable research
@@ -130,6 +142,18 @@ evaluation/
 /runtime/
 /tmp/
 /.charter/cache/
+
+# Canonical local scratch layout. All repository-local generated work goes
+# under temp/; only its short layout guide is versioned. Linked Git worktrees
+# live outside the checkout under C:/Projects/HMASD-worktrees/.
+/temp/**
+!/temp/README.md
+/.cache/
+/cache/
+/scratch/
+/work/
+/worktrees/
+/.worktrees/
 
 # Candidate-local generated result/checkpoint trees. Keep candidate source
 # files visible so new implementations can still be reviewed and committed.
@@ -182,9 +206,7 @@ temp_collection_log/
 
 /runtime/codex-semantic-mvp/
 
-# Live cross-task semantic handoffs are ignored under temp/handoffs; only their stable contract is tracked.
-/temp/*
-!/temp/README.md
+# Local handoffs are ordinary scratch payloads under the canonical temp root.
 
 # Keep the isolated remote log sync utility trackable under dist.
 !dist/

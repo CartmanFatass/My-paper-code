@@ -1,18 +1,36 @@
-# Temporary compatibility work
+# Local temporary workspace
 
-`temp/sessions/<role>/` is a stable compatibility path holding short-lived,
-assignment-owned working files. It is not a live session, thread, successor,
-cross-task routing protocol or identity layer. A fresh CLI Root task uses only
-the exact path named by its assignment.
+`temp/` is the only repository-local scratch root. Everything below this file
+is ignored by Git and may be deleted after the command or task that owns it has
+finished.
 
-Cross-owner and cross-task results return to Root; Root performs any permitted
-relay to another owner. A long payload may be a plain UTF-8 file in the
-writer's exact assignment path, with the parent receiving only that relative
-path. A temporary file is a bounded byte payload, not a direct sibling channel,
-semantic acceptance record or identity mechanism. Workflow admission never
-depends on byte counts, SHA-256, an external identity, or a repository route
-table.
+Use these conventional subdirectories:
 
-Actual temporary payloads are ignored by Git and never enter a commit or push.
-Root controls relay and lifecycle; only the assignment owner writes its exact
-temporary bytes, and cleanup follows Root's bounded lifecycle decision.
+| Path | Purpose |
+| --- | --- |
+| `temp/directions/<direction-id>/exp/` | one direction's disposable experiment runs, checkpoints, profiles, and captured output |
+| `temp/directions/<direction-id>/test/` | one direction's pytest base directory, fixtures, test databases, and build probes |
+| `temp/tests/` | pytest base directories and synthetic fixtures |
+| `temp/runtime/` | local process state, sockets, receipts, and transient databases |
+| `temp/cache/` | rebuildable compiler, model, and benchmark caches |
+| `temp/handoffs/` | short-lived large payloads passed between local collaborators |
+| `temp/downloads/` | disposable downloads and extracted third-party material |
+| `temp/sessions/` | compatibility location for older scripts that already use it |
+
+Direction-specific work always uses `temp/directions/<direction-id>/`. The
+shared `temp/tests/`, `temp/runtime/`, and `temp/cache/` paths are reserved for
+genuinely cross-direction infrastructure and legacy compatibility.
+
+Do not create new root-level `temp_*`, `tmp_*`, cache, runtime, or ad-hoc
+worktree directories. Code that needs the operating system's temporary
+directory should use the standard `tempfile` API and clean up its context.
+
+Git worktrees are not temporary files and must not be nested in this checkout.
+New HMASD worktrees belong under the single sibling root
+`C:/Projects/HMASD-worktrees/<name>`. The primary checkout remains
+`C:/Projects/HMASD`. Use `scripts/new_hmasd_worktree.ps1` for new linked
+worktrees so they do not spread across `C:/Projects`, OneDrive, or the checkout.
+
+Durable source, research decisions, and results that must survive cleanup do
+not belong here; move them to their documented project or research directory
+before deleting the owning scratch directory.

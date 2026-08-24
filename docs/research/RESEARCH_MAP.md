@@ -64,3 +64,55 @@ documents, and `CODE_SCIENCE_INDEX.md` where present. Candidate code is
 isolated until deliberately integrated into a production route. Update this
 map when the concise scientific position or stable directory mapping changes;
 do not add runtime status, leases, process IDs, reviewers, or handoff receipts.
+
+## Code, tests, and generated output
+
+The research directory in the table above is the durable artifact location
+for scientific definitions, result summaries, accepted manifests, and
+dispositions. Candidate implementation and test source are versioned; raw run
+output is not. Every direction uses the following local scratch structure:
+
+```text
+temp/directions/<direction-id>/exp/
+temp/directions/<direction-id>/test/
+```
+
+| Direction | Primary implementation | Test source | Local scratch `<direction-id>` |
+| --- | --- | --- | --- |
+| APFI | — | — | `active_post_churn_population_flow_identification` |
+| ACVC | [`acvc/`](../../experiments/candidates/acvc/) | [`acvc/`](../../tests/experiments/candidates/acvc/) | `acvc` |
+| CRTO | [`commitment_residual_triggered_options/`](../../experiments/candidates/commitment_residual_triggered_options/) | — | `commitment_residual_triggered_options` |
+| CCIC | [`covariance_calibrated_information_clock/`](../../experiments/candidates/covariance_calibrated_information_clock/) | — | `covariance_calibrated_information_clock` |
+| DISH | [`degraded_incumbent_shadow_handover_rbhr_r06/`](../../experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/) | [`degraded_incumbent_shadow_handover_rbhr_r06/`](../../tests/experiments/candidates/degraded_incumbent_shadow_handover_rbhr_r06/) | `degraded_incumbent_shadow_handover` |
+| DEARS | [`dual_epoch_receipt_survival/`](../../experiments/candidates/dual_epoch_receipt_survival/) | [`dual_epoch_receipt_survival/`](../../tests/experiments/candidates/dual_epoch_receipt_survival/) | `dual_epoch_receipt_survival` |
+| EC4G | [`ec4g_r1/`](../../experiments/candidates/ec4g_r1/) | [`ec4g_r1/`](../../tests/experiments/candidates/ec4g_r1/) | `ec4g_r1` |
+| EOCIV-lite | [`eociv_lite/`](../../experiments/candidates/eociv_lite/) | [`eociv_lite/`](../../tests/experiments/candidates/eociv_lite/) | `eociv_lite` |
+| EBCR | [`ebcr_variable_k/`](../../experiments/candidates/ebcr_variable_k/) | [`ebcr_variable_k/`](../../tests/experiments/candidates/ebcr_variable_k/) | `event_triggered_budgeted_cooperative_renewal` |
+| EGRR | [`expressibility_gated_renewal_credit_relay/`](../../experiments/candidates/expressibility_gated_renewal_credit_relay/) | — | `expressibility_gated_renewal_credit_relay` |
+| Field-slot coordination | — | — | `field_slot_coordination` |
+| FSBS | — | — | `finite_semantic_boundary_support` |
+| MGTAP | [`metric_ground_transport_allocation/`](../../experiments/candidates/metric_ground_transport_allocation/) | [`metric_ground_transport_allocation/`](../../tests/experiments/candidates/metric_ground_transport_allocation/) | `metric_ground_transport_allocation` |
+| ONLGR | [`opportunity_normalized_lease_gated_rebinding/`](../../experiments/candidates/opportunity_normalized_lease_gated_rebinding/) | [`opportunity_normalized_lease_gated_rebinding/`](../../tests/experiments/candidates/opportunity_normalized_lease_gated_rebinding/) | `opportunity_normalized_lease_gated_rebinding` |
+| OEER | [`optimizer_entropy_exposure_boundary_relay/`](../../experiments/candidates/optimizer_entropy_exposure_boundary_relay/) | [`optimizer_entropy_exposure_boundary_relay/`](../../tests/experiments/candidates/optimizer_entropy_exposure_boundary_relay/) | `optimizer_entropy_exposure_boundary_relay` |
+| Orbit shadow read | [`orbit_shadow_read/`](../../experiments/candidates/orbit_shadow_read/) | [`orbit_shadow_read/`](../../tests/experiments/candidates/orbit_shadow_read/) | `orbit_shadow_read` |
+| RECCT-lite | [`recct_lite/`](../../experiments/candidates/recct_lite/) | [`recct_lite/`](../../tests/experiments/candidates/recct_lite/) | `recct_lite` |
+| RISP | [`renewal_indexed_score_plasticity/`](../../experiments/candidates/renewal_indexed_score_plasticity/) | [`renewal_indexed_score_plasticity/`](../../tests/experiments/candidates/renewal_indexed_score_plasticity/) | `renewal_indexed_score_plasticity` |
+| RCLE | [`roster_consistent_latent_exploration_tbcfv/`](../../experiments/candidates/roster_consistent_latent_exploration_tbcfv/) | [`roster_consistent_latent_exploration_tbcfv/`](../../tests/experiments/candidates/roster_consistent_latent_exploration_tbcfv/) | `roster_consistent_latent_exploration` |
+| Roster SMF | [`roster_smf/`](../../experiments/candidates/roster_smf/) | [`roster_smf/`](../../tests/experiments/candidates/roster_smf/) | `roster_smf` |
+| Scope-1s | [`scope_1s/`](../../experiments/candidates/scope_1s/) | [`scope_1s/`](../../tests/experiments/candidates/scope_1s/) | `scope_1s` |
+| SGSP | [`semantic_graphon_shared_policy_rscf_r01/`](../../experiments/candidates/semantic_graphon_shared_policy_rscf_r01/) | [`semantic_graphon_shared_policy_rscf_r01/`](../../tests/experiments/candidates/semantic_graphon_shared_policy_rscf_r01/) | `semantic_graphon_shared_policy` |
+| SCDMP | [`scdmp_variable_k/`](../../experiments/candidates/scdmp_variable_k/) | [`scdmp_variable_k/`](../../tests/experiments/candidates/scdmp_variable_k/) | `semigroup_consistent_duration_model_policy` |
+| UCOPE | [`ucope/`](../../experiments/candidates/ucope/) | [`ucope/`](../../tests/experiments/candidates/ucope/) | `ucope` |
+| VAP/FOLR core | [`folr_core/`](../../experiments/candidates/folr_core/) | [`folr_core/`](../../tests/experiments/candidates/folr_core/) | `vap_folr_core` |
+| VNFC | [`variable_n_fleet_churn_bpcr_r09/`](../../experiments/candidates/variable_n_fleet_churn_bpcr_r09/) | [`variable_n_fleet_churn_bpcr_r09/`](../../tests/experiments/candidates/variable_n_fleet_churn_bpcr_r09/) | `variable_n_fleet_churn` |
+| VQFP | [`vqfp_vnpa_r03/`](../../experiments/candidates/vqfp_vnpa_r03/) | [`vqfp_vnpa_r03/`](../../tests/experiments/candidates/vqfp_vnpa_r03/) | `voronoi_quadrature_field_policy` |
+| VSP-02 | [`vsp_02/`](../../experiments/candidates/vsp_02/) | [`vsp_02/`](../../tests/experiments/candidates/vsp_02/) | `vsp_02` |
+| VSP-03 | [`vsp_03/`](../../experiments/candidates/vsp_03/) | [`vsp_03/`](../../tests/experiments/candidates/vsp_03/) | `vsp_03` |
+| VSP-04 | [`vsp_04/`](../../experiments/candidates/vsp_04/) | [`vsp_04/`](../../tests/experiments/candidates/vsp_04/) | `vsp_04` |
+| VSP-05 | [`vsp_05/`](../../experiments/candidates/vsp_05/) | [`vsp_05/`](../../tests/experiments/candidates/vsp_05/) | `vsp_05` |
+| VSP-06 MSSR | [`vsp_06_mssr/`](../../experiments/candidates/vsp_06_mssr/) | [`vsp_06_mssr/`](../../tests/experiments/candidates/vsp_06_mssr/) | `vsp_06_mssr` |
+| VSP-C1 | [`vsp_c1/`](../../experiments/candidates/vsp_c1/) | [`vsp_c1/`](../../tests/experiments/candidates/vsp_c1/) | `vsp_c1` |
+
+Some directions retain older or auxiliary candidate directories beside the
+primary implementation. They are provenance and comparison code, not the
+current default named in this map.
