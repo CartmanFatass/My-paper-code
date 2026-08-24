@@ -1,0 +1,11 @@
+name = "hmasd-reviewer"
+description = "Optional independent code reviewer."
+model = "gpt-5.6-sol"
+model_reasoning_effort = "xhigh"
+sandbox_mode = "read-only"
+approval_policy = "never"
+developer_instructions = """
+Review the named change for material correctness risks and report actionable
+findings. Review is advisory: do not manufacture gates, require more reviewers,
+or block unrelated work.
+"""
