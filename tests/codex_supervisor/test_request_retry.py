@@ -6,7 +6,8 @@ from pathlib import Path
 import pytest
 
 from tests.codex_supervisor.helpers import make_observer_config, write_fake_codex
-from tools.codex_supervisor.client import AppServerClient, AppServerRpcError, RetryRequired
+from tools.codex_supervisor.client import MUTATING_OWNER_MESSAGE, AppServerClient
+from tools.codex_supervisor.protocol import encode_jsonl
 from tools.codex_supervisor.transport import AppServerTransport, TransportClosed
 
 
@@ -72,47 +73,62 @@ def test_read_overload_retries_with_backoff(tmp_path: Path) -> None:
     _run(body())
 
 
-def test_mutation_overload_is_not_retried(tmp_path: Path) -> None:
-    async def body() -> None:
-        transport, client, delays, sent = _client(tmp_path, "mutation_overload")
-        await transport.start()
-        await client.initialize()
-        prepared = client.prepare_request("thread/start", {})
-        await client.send_prepared(prepared)
-        with pytest.raises(RetryRequired) as exc:
-            await client.await_prepared(prepared)
-        assert exc.value.code == -32001
-        starts = [item for item in sent if item.get("method") == "thread/start"]
-        assert len(starts) == 1
-        assert delays == []
-        await transport.stop()
-
-    _run(body())
-
-
-def test_turn_start_overload_is_not_retried(tmp_path: Path) -> None:
-    async def body() -> None:
-        transport, client, delays, sent = _client(tmp_path, "mutation_overload")
-        await transport.start()
-        await client.initialize()
-        prepared = client.prepare_request("turn/start", {"threadId": "thr_x", "input": []})
-        await client.send_prepared(prepared)
-        with pytest.raises(RetryRequired):
-            await client.await_prepared(prepared)
-        assert [item.get("method") for item in sent if item.get("method") == "turn/start"] == ["turn/start"]
-        assert delays == []
-        await transport.stop()
-
-    _run(body())
-
-
-def test_non_overload_error_is_not_retried(tmp_path: Path) -> None:
+def test_loaded_list_read_overload_retries_with_backoff(tmp_path: Path) -> None:
     async def body() -> None:
         transport, client, delays, sent = _client(tmp_path, "handshake_ok")
         await transport.start()
         await client.initialize()
-        with pytest.raises(AppServerRpcError):
+        original_send = transport.send
+        attempts = 0
+
+        async def loaded_overload(message: dict) -> bytes:
+            nonlocal attempts
+            if message.get("method") != "thread/loaded/list":
+                return await original_send(message)
+            sent.append(dict(message))
+            attempts += 1
+            if attempts <= 2:
+                await client._route(
+                    {"id": message["id"], "error": {"code": -32001, "message": "busy"}}
+                )
+            else:
+                await client._route({"id": message["id"], "result": {"data": []}})
+            return encode_jsonl(message)
+
+        transport.send = loaded_overload  # type: ignore[method-assign]
+        await client.list_loaded_threads()
+        sends = [item for item in sent if item.get("method") == "thread/loaded/list"]
+        assert len(sends) == 3
+        assert delays == [0.25, 0.5]
+        await transport.stop()
+
+    _run(body())
+
+
+@pytest.mark.parametrize("method", ["thread/start", "turn/start"])
+def test_prepared_mutation_is_rejected_before_transport(tmp_path: Path, method: str) -> None:
+    async def body() -> None:
+        transport, client, delays, sent = _client(tmp_path, "mutation_overload")
+        await transport.start()
+        await client.initialize()
+        prepared = client.prepare_request(method, {"threadId": "thr_x", "input": []})
+        with pytest.raises(RuntimeError, match=MUTATING_OWNER_MESSAGE):
+            await client.send_prepared(prepared)
+        assert not [item for item in sent if item.get("method") == method]
+        assert delays == []
+        await transport.stop()
+
+    _run(body())
+
+
+def test_unknown_method_is_rejected_before_transport(tmp_path: Path) -> None:
+    async def body() -> None:
+        transport, client, delays, sent = _client(tmp_path, "handshake_ok")
+        await transport.start()
+        await client.initialize()
+        with pytest.raises(RuntimeError, match=MUTATING_OWNER_MESSAGE):
             await client.request("thread/not-a-method", {})
+        assert not [item for item in sent if item.get("method") == "thread/not-a-method"]
         assert delays == []
         await transport.stop()
 

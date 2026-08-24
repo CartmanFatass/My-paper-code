@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import uuid
 from datetime import datetime, timezone
 
@@ -151,9 +152,6 @@ class WakeBatchStore:
         lease_generation: int | None = None,
         lease_holder: str | None = None,
     ) -> dict[str, object]:
-        existing = self.open_batch_for_binding(binding_id)
-        if existing is not None:
-            raise WakeBatchError("binding already has an open wake batch")
         if not messages:
             raise WakeBatchError("wake batch requires at least one message")
         ordered = sorted(
@@ -167,46 +165,55 @@ class WakeBatchStore:
         if not included:
             raise WakeBatchError("wake envelope could not include any message")
         now = _now()
-        from .durability.effects import EffectJournal
         from .durability.transaction import DurabilityTransaction
 
         with self.store._lock:
             with DurabilityTransaction(self.store.connection):
-                effect = EffectJournal(self.store.connection).prepare_effect(
-                    owner_kind="WAKE_BATCH",
-                    owner_id=wake_batch_id,
-                    binding_id=binding_id,
-                    method="turn/start",
-                    client_key=client_id,
-                    request={"threadId": thread_id, "clientUserMessageId": client_id},
+                try:
+                    self.store.connection.execute(
+                        """INSERT INTO wake_batches (
+                            wake_batch_id, binding_id, thread_id, state, client_user_message_id,
+                            prepared_at, lease_generation, lease_holder, effect_id
+                        ) VALUES (?, ?, ?, 'PREPARED', ?, ?, ?, ?, NULL)""",
+                        (
+                            wake_batch_id, binding_id, thread_id, client_id, now,
+                            lease_generation, lease_holder,
+                        ),
+                    )
+                except Exception as exc:
+                    raise WakeBatchError("binding already has an open wake batch") from exc
+                members_json = json.dumps(
+                    [
+                        {"message_id": message.message_id, "ordinal": ordinal}
+                        for ordinal, message in enumerate(included)
+                    ],
+                    separators=(",", ":"),
                 )
                 self.store.connection.execute(
-                    """INSERT INTO wake_batches (
-                        wake_batch_id, binding_id, thread_id, state, client_user_message_id,
-                        prepared_at, lease_generation, lease_holder, effect_id
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                    (
-                        wake_batch_id,
-                        binding_id,
-                        thread_id,
-                        WakeBatchState.PREPARED.value,
-                        client_id,
-                        now,
-                        lease_generation,
-                        lease_holder,
-                        effect.effect_id,
-                    ),
+                    """INSERT INTO wake_batch_messages(wake_batch_id, message_id, ordinal)
+                    SELECT ?, json_extract(value, '$.message_id'),
+                           CAST(json_extract(value, '$.ordinal') AS INTEGER)
+                    FROM json_each(?)""",
+                    (wake_batch_id, members_json),
                 )
-                for ordinal, message in enumerate(included):
-                    self.store.connection.execute(
-                        """INSERT INTO wake_batch_messages (wake_batch_id, message_id, ordinal)
-                        VALUES (?, ?, ?)""",
-                        (wake_batch_id, message.message_id, ordinal),
-                    )
-                for message in included:
-                    if message.delivery_state.value == "ENQUEUED":
-                        self.mailbox.mark_eligible(message.message_id)
-                    self.mailbox.mark_batched(message.message_id)
+                self.store.connection.execute(
+                    """UPDATE mailbox_messages
+                    SET delivery_state = 'ELIGIBLE', delivery_version = delivery_version + 1,
+                        eligible_at = ?
+                    WHERE delivery_state = 'ENQUEUED' AND message_id IN (
+                        SELECT json_extract(value, '$.message_id') FROM json_each(?)
+                    )""",
+                    (now, members_json),
+                )
+                self.store.connection.execute(
+                    """UPDATE mailbox_messages
+                    SET delivery_state = 'BATCHED', delivery_version = delivery_version + 1,
+                        batched_at = ?
+                    WHERE delivery_state = 'ELIGIBLE' AND message_id IN (
+                        SELECT json_extract(value, '$.message_id') FROM json_each(?)
+                    )""",
+                    (now, members_json),
+                )
                 record_context_injection(
                     self.store,
                     binding_id=binding_id,

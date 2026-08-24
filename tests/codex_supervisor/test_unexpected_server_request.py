@@ -36,7 +36,7 @@ def test_successful_canary(tmp_path: Path) -> None:
         methods = [
             row[0]
             for row in service.store.connection.execute(
-                "SELECT method FROM raw_messages WHERE direction='stdin'"
+                "SELECT method FROM app_server_outbox"
             )
         ]
         assert methods.count("thread/start") == 1

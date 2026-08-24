@@ -11,6 +11,7 @@ import pytest
 
 import tools.codex_supervisor.host_control as host_control_module
 from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
+from tests.codex_supervisor.helpers import make_observer_config, write_fake_codex
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors
 from tools.codex_supervisor.binding_store import BindingStore
 from tools.codex_supervisor.host_control import (
@@ -30,6 +31,7 @@ from tools.codex_supervisor.runtime_profiles import (
     require_command_allowed,
 )
 from tools.codex_supervisor.provisioning import ManagedProvisioner
+from tools.codex_supervisor.observer import ObserverService
 from tools.codex_supervisor.store import ObserverStore
 from tools.codex_semantic_mvp.store import SemanticStore
 
@@ -857,5 +859,45 @@ def test_invalid_recovered_stop_is_rejected_without_suppressing_valid_read(
         stop_event.set()
         await task
         store.close()
+
+    asyncio.run(body())
+
+
+def test_reader_eof_quarantines_session_while_host_control_remains_available(tmp_path: Path) -> None:
+    async def body() -> None:
+        config = make_observer_config(tmp_path, reconcile_interval_seconds=0.02)
+        service = ObserverService(
+            config, binary=write_fake_codex(tmp_path), store=ObserverStore(tmp_path / "runtime"),
+            process_cwd=tmp_path, extra_env={"FAKE_APP_SERVER_MODE": "handshake_ok"},
+            stdin_close_timeout=0.4, terminate_timeout=0.4,
+        )
+        control = _channel(tmp_path / "control", poll_interval_seconds=0.01)
+        controller = None
+
+        async def after_ready(_facts: dict[str, object]) -> None:
+            nonlocal controller
+            async def fault_then_control() -> None:
+                assert service.transport is not None and service.transport._process is not None
+                await service.transport._signal_stop(service.transport._process, force=True)
+                await service.transport._process.wait()
+                assert service.session is not None
+                await asyncio.wait_for(service.session._incident.wait(), timeout=2)
+                count = service.store.connection.execute("SELECT COUNT(*) FROM reconciliation_runs").fetchone()[0]
+                for request in (_request("status"), _request("inspect", CommandKind.INSPECT)):
+                    control.submit(request)
+                    while control.response(request.request_id) is None:
+                        await asyncio.sleep(0.01)
+                    assert control.response(request.request_id).status == "OK"
+                assert service.store.connection.execute("SELECT COUNT(*) FROM reconciliation_runs").fetchone()[0] == count
+                control.submit(_request("stop", CommandKind.STOP))
+            controller = asyncio.create_task(fault_then_control())
+
+        result = await service.serve(duration_seconds=5, ready_hook=after_ready, control=control)
+        assert controller is not None
+        await controller
+        assert result.end_kind == "NORMAL"
+        assert service.session is not None and service.session.terminated
+        assert service.session.incident_payload["reason"] == "reader_terminal"
+        service.store.close()
 
     asyncio.run(body())

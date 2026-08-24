@@ -51,6 +51,17 @@ def test_transport_writes_and_reads_jsonl(tmp_path: Path) -> None:
     _run(body())
 
 
+def test_send_bytes_rejects_multiple_jsonl_frames(tmp_path: Path) -> None:
+    async def body() -> None:
+        transport = _transport(tmp_path, "handshake_ok")
+        await transport.start()
+        with pytest.raises(ValueError, match="one bounded exact JSONL record"):
+            await transport.send_bytes(b'{"id":1}\n{"id":2}\n')
+        await transport.stop()
+
+    _run(body())
+
+
 @pytest.mark.skipif(os.name != "nt", reason="Windows command-processor shape")
 def test_process_exec_argv_uses_one_exact_spaced_batch_command(tmp_path: Path) -> None:
     binary = tmp_path / "directory with spaces" / "codex app shim.cmd"

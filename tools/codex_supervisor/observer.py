@@ -35,7 +35,7 @@ from .models import (
     RpcShape,
 )
 from .normalizer import apply_normalized_event, normalize_message, thread_snapshot_fields
-from .protocol import classify_rpc_message, encode_jsonl, extract_protocol_ids
+from .protocol import classify_rpc_message, decode_jsonl_line, encode_jsonl, extract_protocol_ids
 from .runtime_profiles import RuntimeProfile
 from .session_guard import ManagedAppServerSession
 from .store import ObserverStore
@@ -110,11 +110,19 @@ class ObserverService:
             on_inbound=self._on_inbound,
         )
         original_send = self.transport.send
+        original_send_bytes = self.transport.send_bytes
 
         async def recorded_send(message: dict[str, Any]) -> bytes:
-            return await self._record_and_send(original_send, message)
+            return await self._record_and_send(original_send_bytes, message)
+
+        async def exact_mutation_send(exact_jsonl: bytes) -> bytes:
+            message = decode_jsonl_line(exact_jsonl, self.config.max_jsonl_line_bytes)
+            if self.outbound_hook is not None:
+                self.outbound_hook(message)
+            return await original_send_bytes(exact_jsonl)
 
         self.transport.send = recorded_send  # type: ignore[method-assign]
+        self.transport.send_bytes = exact_mutation_send  # type: ignore[method-assign]
         self.client.start_reader()
         self.session = ManagedAppServerSession.for_client(self.client, self.store)
         self.record_local_event("APP_SERVER_PROCESS_STARTED_OBSERVED", {"pid": self.transport.process_id})
@@ -151,7 +159,7 @@ class ObserverService:
                 params=message.get("params") if isinstance(message.get("params"), dict) else {},
                 attempt_count=1,
             )
-        return await original_send(message)
+        return await original_send(encoded)
 
     def record_local_event(self, kind: str, params: dict[str, Any]) -> int:
         assert self.run_id is not None
@@ -244,35 +252,57 @@ class ObserverService:
         await self._drain_incident()
         return response
 
-    async def _submit_canary_effect(
-        self,
-        canary_id: str,
-        method: str,
-        params: Mapping[str, object],
-        *,
-        predecessor_effect_id: str | None = None,
-    ) -> dict[str, object]:
+    async def _start_canary_thread(self, canary_id: str) -> dict[str, object]:
         assert self.client is not None
-        from .durability.effects import EffectJournal
+        from .durability.outbox import MutationSpec, OperationState
         from .durability.session_owner import AppServerSessionOwner
 
         owner = AppServerSessionOwner.for_client(self.client, self.store)
-        journal = EffectJournal(self.store.connection)
-        effect = journal.prepare_effect(
-            owner_kind="EPHEMERAL_CANARY",
-            owner_id=canary_id,
-            binding_id=None,
-            method=method,
-            client_key=f"canary:{method}:{canary_id}",
-            request=dict(params),
-            predecessor_effect_id=predecessor_effect_id,
+        operation = owner.enqueue_mutation(
+            MutationSpec(
+                dedupe_key=f"canary-thread:{canary_id}",
+                protocol_session_id=owner.protocol_session_id,
+                run_id=owner.protocol_session_id,
+                method="thread/start",
+                params=canonical_canary_thread_start_request(self.store.runtime_home, canary_id),
+                target=f"canary:{canary_id}",
+            )
         )
-        submitted = await owner.submit_effect(effect.effect_id)
-        if owner.classify_submission(submitted) != "observed":
-            raise RuntimeError("canary mutation was not observed")
+        submitted = await owner.submit(operation.operation_id)
+        if submitted.state is not OperationState.DONE or submitted.outcome != "OK":
+            if owner.terminated:
+                raise UnexpectedServerRequest(owner.incident_payload or {})
+            raise RuntimeError("canary thread/start was not observed")
         await self._drain_incident()
         response = dict(submitted.response or {})
-        response["_hmasd_effect_id"] = effect.effect_id
+        response["_hmasd_operation_id"] = operation.operation_id
+        return response
+
+    async def _start_canary_turn(self, canary_id: str, thread_id: str) -> dict[str, object]:
+        assert self.client is not None
+        from .durability.outbox import MutationSpec, OperationState
+        from .durability.session_owner import AppServerSessionOwner
+
+        owner = AppServerSessionOwner.for_client(self.client, self.store)
+        operation = owner.enqueue_mutation(
+            MutationSpec(
+                dedupe_key=f"canary-turn:{canary_id}",
+                protocol_session_id=owner.protocol_session_id,
+                run_id=owner.protocol_session_id,
+                method="turn/start",
+                params=canonical_canary_turn_start_request(thread_id),
+                target=f"canary:{canary_id}",
+                thread_id=thread_id,
+            )
+        )
+        submitted = await owner.submit(operation.operation_id)
+        if submitted.state is not OperationState.DONE or submitted.outcome != "OK":
+            if owner.terminated:
+                raise UnexpectedServerRequest(owner.incident_payload or {})
+            raise RuntimeError("canary turn/start was not observed")
+        await self._drain_incident()
+        response = dict(submitted.response or {})
+        response["_hmasd_operation_id"] = operation.operation_id
         return response
 
     async def _list_threads(self) -> list[dict[str, object]]:
@@ -345,6 +375,11 @@ class ObserverService:
         await session._incident.wait()
         raise UnexpectedServerRequest(session.incident_payload or {})
 
+    async def _await_reader_quarantine(self) -> None:
+        assert self.client is not None and self.session is not None
+        await self.client.reader_terminal.wait()
+        await self.session._incident.wait()
+
     async def serve(
         self,
         duration_seconds: float | None = None,
@@ -353,6 +388,8 @@ class ObserverService:
         control: HostControlChannel | None = None,
         profile: RuntimeProfile = RuntimeProfile.OBSERVER,
     ) -> ObserverRunResult:
+        from .durability.session_owner import SessionOwnerError
+
         watcher: asyncio.Task[None] | None = None
         command_task: asyncio.Task[None] | None = None
         stop_waiter: asyncio.Task[bool] | None = None
@@ -365,20 +402,41 @@ class ObserverService:
             await self.initialize()
             watcher = asyncio.create_task(self._watch_server_requests())
             await asyncio.sleep(0)
+            session_available = True
             if watcher.done():
                 exc = watcher.exception()
-                if exc is not None:
+                if isinstance(exc, UnexpectedServerRequest):
+                    session_available = False
+                    watcher = None
+                elif exc is not None:
                     raise exc
-                raise RuntimeError("server-request watcher stopped before readiness")
-            reconciliation = await asyncio.wait_for(
-                self.reconcile_threads(),
-                timeout=self.config.first_reconciliation_timeout_seconds,
-            )
-            if watcher.done():
-                exc = watcher.exception()
-                if exc is not None:
-                    raise exc
-                raise RuntimeError("server-request watcher stopped before readiness")
+                else:
+                    raise RuntimeError("server-request watcher stopped before readiness")
+            if session_available:
+                try:
+                    reconciliation = await asyncio.wait_for(
+                        self.reconcile_threads(),
+                        timeout=self.config.first_reconciliation_timeout_seconds,
+                    )
+                except TransportClosed:
+                    await self._await_reader_quarantine()
+                    reconciliation = {"thread_count": 0, "outcome": "SESSION_UNAVAILABLE"}
+                    session_available = False
+                    watcher = None
+                except (UnexpectedServerRequest, SessionOwnerError):
+                    reconciliation = {"thread_count": 0, "outcome": "SESSION_UNAVAILABLE"}
+                    session_available = False
+                    watcher = None
+                if watcher is not None and watcher.done():
+                    exc = watcher.exception()
+                    if isinstance(exc, UnexpectedServerRequest):
+                        reconciliation = {"thread_count": 0, "outcome": "SESSION_UNAVAILABLE"}
+                        session_available = False
+                        watcher = None
+                    elif exc is not None:
+                        raise exc
+            else:
+                reconciliation = {"thread_count": 0, "outcome": "SESSION_UNAVAILABLE"}
             if ready_hook is not None:
                 assert self.run_id is not None and self.transport is not None
                 ready_result = ready_hook(
@@ -389,8 +447,8 @@ class ObserverService:
                         # observer_runs and APP_SERVER_PROCESS_* facts.
                         "process_id": os.getpid(),
                         "initialized_at": _now(),
-                        "watcher_active": not watcher.done(),
-                        "first_reconciliation_completed": True,
+                        "watcher_active": watcher is not None and not watcher.done(),
+                        "first_reconciliation_completed": reconciliation["outcome"] == "OK",
                         "thread_count": int(reconciliation["thread_count"]),
                     }
                 )
@@ -414,16 +472,25 @@ class ObserverService:
                 timeout = self.config.reconcile_interval_seconds
                 if deadline is not None:
                     timeout = min(timeout, max(0.05, deadline - asyncio.get_running_loop().time()))
-                waited: set[asyncio.Task[Any]] = {watcher}
+                waited: set[asyncio.Task[Any]] = set()
+                if watcher is not None:
+                    waited.add(watcher)
                 if command_task is not None:
                     waited.add(command_task)
                 if stop_waiter is not None:
                     waited.add(stop_waiter)
-                done, _pending = await asyncio.wait(waited, timeout=timeout)
-                if watcher in done:
+                if waited:
+                    done, _pending = await asyncio.wait(waited, timeout=timeout)
+                else:
+                    await asyncio.sleep(timeout)
+                    done = set()
+                if watcher is not None and watcher in done:
                     exc = watcher.exception()
                     if isinstance(exc, UnexpectedServerRequest):
-                        return await self._terminate_unexpected(exc)
+                        # Quarantine only the failed protocol session. Host
+                        # control/status remains available in bounded degraded mode.
+                        watcher = None
+                        continue
                     if exc:
                         raise exc
                 if stop_waiter is not None and stop_waiter in done:
@@ -435,7 +502,12 @@ class ObserverService:
                     if not host_stop_event.is_set():
                         raise RuntimeError("host control loop stopped unexpectedly")
                     return await self.stop(EndKind.NORMAL.value)
-                await self.reconcile_threads()
+                if self.session is None or not self.session.terminated:
+                    try:
+                        await self.reconcile_threads()
+                    except TransportClosed:
+                        await self._await_reader_quarantine()
+                        watcher = None
         except UnexpectedServerRequest as exc:
             return await self._terminate_unexpected(exc)
         except TransportClosed:
@@ -509,8 +581,6 @@ class ObserverService:
             )
         self._stopped = True
         await asyncio.sleep(0)
-        if self.session is not None and self.session.terminated and end_kind == EndKind.NORMAL.value:
-            end_kind = EndKind.UNEXPECTED_SERVER_REQUEST.value
         self._end_kind = end_kind
         if self.session is not None:
             self.session.close()
@@ -559,14 +629,8 @@ class ObserverService:
                     await self._terminate_unexpected(exc)
                     self.record_local_event("CANARY_INCIDENT_OBSERVED", {"reason": "server_request"})
                     return CanaryResult(canary_id, self.run_id, None, None, "incident", incident="server_request")
-            start = await self._submit_canary_effect(
-                canary_id,
-                "thread/start",
-                canonical_canary_thread_start_request(
-                    self.store.runtime_home, canary_id
-                ),
-            )
-            predecessor_effect_id = str(start.pop("_hmasd_effect_id"))
+            start = await self._start_canary_thread(canary_id)
+            start.pop("_hmasd_operation_id", None)
             if watcher.done():
                 exc = watcher.exception()
                 if isinstance(exc, UnexpectedServerRequest):
@@ -580,13 +644,8 @@ class ObserverService:
                 self.record_local_event("CANARY_INCIDENT_OBSERVED", {"reason": "not_ephemeral"})
                 await self.stop(EndKind.PROTOCOL_INCIDENT.value)
                 return CanaryResult(canary_id, self.run_id, thread_id, None, "incident", incident="not_ephemeral")
-            turn = await self._submit_canary_effect(
-                canary_id,
-                "turn/start",
-                canonical_canary_turn_start_request(thread_id),
-                predecessor_effect_id=predecessor_effect_id,
-            )
-            turn.pop("_hmasd_effect_id", None)
+            turn = await self._start_canary_turn(canary_id, thread_id)
+            turn.pop("_hmasd_operation_id", None)
             if outbound.count("thread/start") != 1 or outbound.count("turn/start") != 1:
                 raise RuntimeError("mutating canary requests must be sent exactly once")
             turn_id = extract_protocol_ids(turn).turn_id

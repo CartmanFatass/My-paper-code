@@ -8,7 +8,7 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 10
+SCHEMA_VERSION = 12
 
 SCHEMA_STATEMENTS = (
     """
@@ -416,6 +416,40 @@ SCHEMA_STATEMENTS = (
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS app_server_rpc_sequence (
+        singleton INTEGER PRIMARY KEY CHECK(singleton = 1),
+        next_id INTEGER NOT NULL CHECK(next_id > 0)
+    )
+    """,
+    """
+    CREATE TABLE IF NOT EXISTS app_server_outbox (
+        operation_id TEXT PRIMARY KEY,
+        dedupe_key TEXT NOT NULL UNIQUE,
+        protocol_session_id TEXT NOT NULL,
+        run_id TEXT NOT NULL,
+        binding_id TEXT,
+        target TEXT NOT NULL,
+        thread_id TEXT,
+        rpc_request_id INTEGER NOT NULL UNIQUE,
+        method TEXT NOT NULL,
+        wire_bytes BLOB NOT NULL,
+        delivery_class TEXT NOT NULL CHECK(delivery_class IN ('MUTATION_AT_MOST_ONCE')),
+        state TEXT NOT NULL CHECK(state IN ('READY', 'SENDING', 'DONE', 'UNKNOWN')),
+        claim_token TEXT,
+        created_at TEXT NOT NULL,
+        claimed_at TEXT,
+        completed_at TEXT,
+        outcome TEXT,
+        error TEXT,
+        response_raw_ref TEXT,
+        CHECK((state = 'SENDING') = (claim_token IS NOT NULL))
+    )
+    """,
+    """
+    CREATE INDEX IF NOT EXISTS app_server_outbox_session_state
+    ON app_server_outbox(protocol_session_id, state)
+    """,
+    """
     CREATE TABLE IF NOT EXISTS control_transitions (
         transition_id TEXT PRIMARY KEY,
         aggregate_kind TEXT NOT NULL,
@@ -504,10 +538,13 @@ REQUIRED_TABLES = (
     "app_server_effects",
     "control_transitions",
     "operator_resolutions",
+    "app_server_rpc_sequence",
+    "app_server_outbox",
 )
 
 
 def connect(path: str | Path) -> sqlite3.Connection:
+    backup_before_v12(path)
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     connection = sqlite3.connect(str(path))
     connection.row_factory = sqlite3.Row
@@ -516,6 +553,33 @@ def connect(path: str | Path) -> sqlite3.Connection:
     connection.execute("PRAGMA synchronous = FULL")
     connection.execute("PRAGMA busy_timeout = 5000")
     return connection
+
+
+def backup_before_v12(path: str | Path) -> Path | None:
+    """Create the stopped-host rollback database before an additive v12 migration."""
+    database = Path(path)
+    if not database.exists() or database.stat().st_size == 0:
+        return None
+    source = sqlite3.connect(str(database))
+    try:
+        try:
+            row = source.execute("SELECT MAX(version) FROM schema_meta").fetchone()
+            version = int((row or (0,))[0] or 0)
+        except sqlite3.DatabaseError:
+            version = 0
+        if version >= SCHEMA_VERSION:
+            return None
+        backup = database.with_name(f"{database.name}.v{version}.rollback")
+        if backup.exists():
+            return backup
+        destination = sqlite3.connect(str(backup))
+        try:
+            source.backup(destination)
+        finally:
+            destination.close()
+        return backup
+    finally:
+        source.close()
 
 
 def _table_columns(connection: sqlite3.Connection, table: str) -> set[str]:
@@ -533,7 +597,10 @@ def _add_column_if_missing(connection: sqlite3.Connection, table: str, name: str
 
 def initialize_database(connection: sqlite3.Connection) -> None:
     applied_at = datetime.now(timezone.utc).isoformat()
-    with connection:
+    owns_transaction = not connection.in_transaction
+    if owns_transaction:
+        connection.execute("BEGIN EXCLUSIVE")
+    try:
         connection.execute(SCHEMA_STATEMENTS[0])
         current = connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0]
         current = int(current or 0)
@@ -541,8 +608,23 @@ def initialize_database(connection: sqlite3.Connection) -> None:
             raise RuntimeError(
                 f"observer schema version {current} is newer than supported {SCHEMA_VERSION}"
             )
+        if current == SCHEMA_VERSION:
+            present = {
+                str(row[0])
+                for row in connection.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table'"
+                )
+            }
+            missing_current = set(REQUIRED_TABLES) - present
+            if missing_current:
+                raise RuntimeError(
+                    f"observer v12 schema is incomplete: {sorted(missing_current)}"
+                )
         for statement in SCHEMA_STATEMENTS:
             connection.execute(statement)
+        connection.execute(
+            "INSERT OR IGNORE INTO app_server_rpc_sequence(singleton, next_id) VALUES (1, 1)"
+        )
         _add_column_if_missing(connection, "managed_actor_bindings", "verification_turn_intent_id", "TEXT")
         _add_column_if_missing(connection, "managed_actor_bindings", "verification_turn_id", "TEXT")
         _add_column_if_missing(connection, "managed_actor_bindings", "verification_command_id", "TEXT")
@@ -581,7 +663,8 @@ def initialize_database(connection: sqlite3.Connection) -> None:
             WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED_UNRECONCILED', 'INCIDENT')"""
         )
         _install_transition_guards(connection)
-        _migrate_legacy_mutation_intents(connection)
+        if current < SCHEMA_VERSION:
+            _migrate_legacy_mutation_intents(connection)
         if current < 9:
             _migrate_prepared_context_provenance(connection)
         if current < SCHEMA_VERSION:
@@ -589,6 +672,18 @@ def initialize_database(connection: sqlite3.Connection) -> None:
                 "INSERT INTO schema_meta(version, applied_at) VALUES (?, ?)",
                 (SCHEMA_VERSION, applied_at),
             )
+        missing = set(REQUIRED_TABLES) - {
+            str(row[0])
+            for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        }
+        if missing:
+            raise RuntimeError(f"observer v12 schema is incomplete: {sorted(missing)}")
+        if owns_transaction:
+            connection.commit()
+    except BaseException:
+        if owns_transaction:
+            connection.rollback()
+        raise
 
 
 def _install_transition_guards(connection: sqlite3.Connection) -> None:

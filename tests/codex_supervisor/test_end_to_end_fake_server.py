@@ -57,14 +57,14 @@ def test_end_to_end_initialize_and_reconcile(tmp_path: Path) -> None:
     _run(body())
 
 
-def test_unexpected_request_terminates(tmp_path: Path) -> None:
+def test_unexpected_request_quarantines_session_but_host_reaches_deadline(tmp_path: Path) -> None:
     async def body() -> None:
         service = _service(tmp_path, "unexpected_request")
         result = await service.serve(duration_seconds=2)
-        assert result.end_kind == "UNEXPECTED_SERVER_REQUEST"
+        assert result.end_kind == "NORMAL"
         rows = service.store.connection.execute("SELECT handling, method FROM server_requests").fetchall()
         assert rows
-        assert rows[0][0] == "TERMINATE"
+        assert rows[0][0] == "SESSION_QUARANTINE"
         assert rows[0][1] == "item/commandExecution/requestApproval"
         service.store.close()
 

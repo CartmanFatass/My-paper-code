@@ -8,13 +8,13 @@ from dataclasses import dataclass
 from typing import Any, Awaitable, Callable, Mapping
 
 from .models import ObserverConfig, RequestClass, RpcShape
-from .protocol import classify_rpc_message
+from .protocol import classify_rpc_message, decode_jsonl_line, encode_jsonl
 from .transport import AppServerTransport, TransportClosed, TransportMessage
 
 # Method strings present in both official app-server docs and the host
 # ClientRequest.json from `codex-cli 0.147.0`. Unknown methods default to
 # MUTATING_NO_RETRY.
-READ_IDEMPOTENT_METHODS = frozenset({"thread/list", "thread/read"})
+READ_IDEMPOTENT_METHODS = frozenset({"thread/list", "thread/read", "thread/loaded/list"})
 MUTATING_NO_RETRY_METHODS = frozenset(
     {
         "thread/start",
@@ -48,6 +48,14 @@ class PreparedRpcRequest:
     params: Mapping[str, object]
     payload: Mapping[str, object]
     request_class: RequestClass
+    future: asyncio.Future[dict[str, object]]
+
+
+@dataclass(frozen=True)
+class FrozenRpcRequest:
+    request_id: int
+    method: str
+    wire_bytes: bytes
     future: asyncio.Future[dict[str, object]]
 
 
@@ -93,7 +101,9 @@ class AppServerClient:
         self.transport = transport
         self.config = config
         self._pending: dict[str, asyncio.Future[dict[str, object]]] = {}
-        self._next_id = 1
+        # Durable mutation ids are positive. Ephemeral handshake/read ids use a
+        # disjoint negative range and can therefore never collide after restart.
+        self._next_id = -1
         self._initialize_complete = False
         self._reader: asyncio.Task[None] | None = None
         self._sleep = sleep or asyncio.sleep
@@ -101,6 +111,8 @@ class AppServerClient:
         self._on_inbound = on_inbound
         self.notifications: asyncio.Queue[dict[str, object]] = asyncio.Queue()
         self.server_requests: asyncio.Queue[dict[str, object]] = asyncio.Queue()
+        self.reader_terminal = asyncio.Event()
+        self.reader_terminal_exception: BaseException | None = None
 
     def start_reader(self) -> None:
         if self._reader is None:
@@ -114,9 +126,13 @@ class AppServerClient:
                     self._on_inbound(message)
                 await self._route(dict(message.payload))
         except TransportClosed as exc:
+            self.reader_terminal_exception = exc
             self._fail_pending(exc)
+            self.reader_terminal.set()
         except Exception as exc:
+            self.reader_terminal_exception = exc
             self._fail_pending(exc)
+            self.reader_terminal.set()
 
     def _fail_pending(self, exc: BaseException) -> None:
         for future in list(self._pending.values()):
@@ -130,7 +146,10 @@ class AppServerClient:
             request_id = str(payload.get("id"))
             future = self._pending.pop(request_id, None)
             if future is None:
-                raise RuntimeError(f"unknown response id: {request_id}")
+                # A bounded read may time out before its late response arrives.
+                # The response is still captured by the observer; it must not
+                # take down the session or another mutation lane.
+                return
             if not future.done():
                 future.set_result(payload)
             return
@@ -175,7 +194,7 @@ class AppServerClient:
         if method != "initialize" and not self._initialize_complete:
             raise HandshakeError("initialize/initialized must complete before other requests")
         request_id = str(self._next_id)
-        self._next_id += 1
+        self._next_id -= 1
         payload = {"id": int(request_id), "method": method, "params": dict(params or {})}
         future: asyncio.Future[dict[str, object]] = asyncio.get_running_loop().create_future()
         self._pending[request_id] = future
@@ -194,7 +213,74 @@ class AppServerClient:
             future.cancel()
 
     async def send_prepared(self, prepared: PreparedRpcRequest) -> None:
-        await self.transport.send(dict(prepared.payload))
+        actual = dict(prepared.payload)
+        expected = {
+            "id": int(prepared.request_id),
+            "method": prepared.method,
+            "params": dict(prepared.params),
+        }
+        actual_method = actual.get("method")
+        actual_class = request_class_for(str(actual_method or ""))
+        expected_class = request_class_for(prepared.method)
+        if (
+            actual_class is RequestClass.MUTATING_NO_RETRY
+            or expected_class is RequestClass.MUTATING_NO_RETRY
+            or prepared.request_class is not expected_class
+        ):
+            self.discard_prepared(prepared)
+            raise RuntimeError(MUTATING_OWNER_MESSAGE)
+        if actual != expected:
+            self.discard_prepared(prepared)
+            raise RuntimeError("prepared request changed before send")
+        await self.transport.send(actual)
+
+    @staticmethod
+    def freeze_request(
+        request_id: int, method: str, params: Mapping[str, object] | None = None
+    ) -> bytes:
+        if request_id <= 0:
+            raise ValueError("durable mutation request id must be positive")
+        return encode_jsonl(
+            {"id": request_id, "method": method, "params": dict(params or {})}
+        )
+
+    def activate_frozen(
+        self, request_id: int, method: str, wire_bytes: bytes
+    ) -> FrozenRpcRequest:
+        self.start_reader()
+        if not self._initialize_complete:
+            raise HandshakeError("initialize/initialized must complete before mutations")
+        decoded = decode_jsonl_line(wire_bytes, self.config.max_jsonl_line_bytes)
+        if decoded.get("id") != request_id or decoded.get("method") != method:
+            raise ValueError("frozen request identity does not match its wire bytes")
+        key = str(request_id)
+        if key in self._pending:
+            raise RuntimeError(f"request id is already active: {request_id}")
+        future: asyncio.Future[dict[str, object]] = asyncio.get_running_loop().create_future()
+        self._pending[key] = future
+        return FrozenRpcRequest(request_id, method, bytes(wire_bytes), future)
+
+    def discard_frozen(self, frozen: FrozenRpcRequest) -> None:
+        future = self._pending.pop(str(frozen.request_id), None)
+        if future is not None and not future.done():
+            future.cancel()
+
+    async def await_frozen(
+        self, frozen: FrozenRpcRequest, *, timeout: float | None = None
+    ) -> dict[str, object]:
+        try:
+            response = await asyncio.wait_for(
+                frozen.future, timeout=timeout or self.config.request_timeout_seconds
+            )
+        except BaseException:
+            self._pending.pop(str(frozen.request_id), None)
+            raise
+        if "error" not in response:
+            return response
+        error = response.get("error") if isinstance(response.get("error"), Mapping) else {}
+        code = error.get("code") if isinstance(error, Mapping) else None
+        message = str(error.get("message") if isinstance(error, Mapping) else "rpc error")
+        raise AppServerRpcError(int(code) if isinstance(code, int) else None, message, response)
 
     async def await_prepared(
         self,

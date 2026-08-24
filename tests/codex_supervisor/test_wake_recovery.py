@@ -2,8 +2,9 @@ import asyncio
 from pathlib import Path
 
 from tests.codex_supervisor.helpers import make_observer_config, write_fake_codex
-from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
+from tests.codex_supervisor.mailbox_fixtures import prepare_resume_batch, seed_active_root_portfolio
 from tools.codex_supervisor.client import AppServerClient
+from tools.codex_supervisor.durability.outbox import AppServerOutbox, MutationSpec
 from tools.codex_supervisor.mailbox_models import MailboxMessageKind, MailboxSourceSystem, WakeBatchState
 from tools.codex_supervisor.transport import AppServerTransport
 from tools.codex_supervisor.wake_batches import WakeBatchStore
@@ -63,5 +64,38 @@ def test_prepared_batch_returns_to_eligible_and_delivered_is_preserved(tmp_path:
         seeded["bridge"].close()
         seeded["supervisor"].close()
         seeded["semantic"].close()
+
+    asyncio.run(body())
+
+
+def test_resume_outbox_crash_gap_contains_prepared_batch(tmp_path: Path) -> None:
+    async def body() -> None:
+        seeded = seed_active_root_portfolio(tmp_path)
+        store, binding_id = seeded["supervisor"], seeded["portfolio_binding_id"]
+        batch_id = prepare_resume_batch(seeded, binding_id, "op:resume-crash-gap")
+        binding = seeded["bindings"].get(binding_id)
+        run_id = store.start_run(
+            codex_binary="fake", codex_version="1", client_name="test", process_id=None
+        )
+        outbox = AppServerOutbox(store.connection)
+        operation = outbox.enqueue(MutationSpec(
+            f"wake-resume:{batch_id}:{binding.thread_id}", run_id, run_id,
+            "thread/resume", {"threadId": binding.thread_id},
+            f"binding:{binding_id}", binding.thread_id, binding_id,
+        ))
+        claim = outbox.claim(
+            operation.operation_id, protocol_session_id=run_id,
+            target=f"binding:{binding_id}", thread_id=binding.thread_id,
+        )
+        outbox.mark_unknown(claim, error="crash")
+        assert store.connection.execute(
+            "SELECT COUNT(*) FROM wake_attempts WHERE wake_batch_id = ?", (batch_id,)
+        ).fetchone()[0] == 0
+        result = await WakeRecovery(
+            seeded["bindings"], seeded["mailbox"], WakeBatchStore(store, seeded["mailbox"])
+        ).reconcile_batch(batch_id)
+        assert result["state"] == "SUBMISSION_UNCERTAIN"
+        assert {m.delivery_state.value for m in seeded["mailbox"].list_messages()} == {"SUBMISSION_UNCERTAIN"}
+        seeded["bridge"].close(); store.close(); seeded["semantic"].close()
 
     asyncio.run(body())

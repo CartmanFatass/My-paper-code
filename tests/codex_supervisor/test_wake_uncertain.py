@@ -56,14 +56,18 @@ def test_uncertain_wake_is_not_resent(tmp_path: Path) -> None:
             seeded["bridge"],
             client,
         )
-        with pytest.raises(WakeSchedulerError, match="uncertain"):
+        with pytest.raises(WakeSchedulerError, match="provider-rejected"):
             await scheduler.once()
-        open_batch = batches.open_batch_for_binding(seeded["portfolio_binding_id"])
-        assert open_batch is not None
-        assert open_batch["state"] == "SUBMISSION_UNCERTAIN"
-        with pytest.raises(WakeSchedulerError, match="not PREPARED"):
+        open_batch = dict(seeded["supervisor"].connection.execute(
+            "SELECT * FROM wake_batches WHERE binding_id = ? ORDER BY prepared_at DESC LIMIT 1",
+            (seeded["portfolio_binding_id"],),
+        ).fetchone())
+        assert open_batch["state"] == "INCIDENT"
+        with pytest.raises(WakeSchedulerError, match="requires client and lease"):
             await scheduler.submit_batch(str(open_batch["wake_batch_id"]), "no")
-        assert batches.open_batch_for_binding(seeded["portfolio_binding_id"])["wake_batch_id"] == open_batch["wake_batch_id"]
+        assert seeded["supervisor"].connection.execute(
+            "SELECT COUNT(*) FROM app_server_outbox WHERE method = 'turn/start'"
+        ).fetchone()[0] == 1
         await transport.stop()
         seeded["bridge"].close()
         seeded["supervisor"].close()

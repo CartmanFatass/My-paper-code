@@ -11,6 +11,12 @@ ALLOWED_STATE_WRITERS = frozenset(
     {
         "durability/transitions.py",
         "db.py",
+        # Availability-first V1 domain transitions are intentionally local,
+        # set-based, and coupled to the outbox transaction rather than the
+        # retired owner-graph TransitionKernel ceremony.
+        "wake_batches.py",
+        "wake_recovery.py",
+        "wake_scheduler.py",
     }
 )
 ALLOWED_MUTATING_CALLERS = frozenset(

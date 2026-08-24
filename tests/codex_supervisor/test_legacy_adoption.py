@@ -12,6 +12,7 @@ from tools.codex_supervisor.client import AppServerClient
 from tools.codex_supervisor.managed_context import build_bootstrap_text
 from tools.codex_supervisor.managed_models import HistoryTrust, ThreadOrigin
 from tools.codex_supervisor.provisioning import ManagedProvisioner, ProvisioningError
+from tools.codex_supervisor.protocol import decode_jsonl_line
 from tools.codex_supervisor.transport import AppServerTransport
 
 
@@ -78,13 +79,14 @@ def test_adopt_idle_thread_is_legacy(tmp_path: Path) -> None:
             terminate_timeout=0.4,
         )
         sent: list[str] = []
-        original = transport.send
+        original = transport.send_bytes
 
-        async def capture(message: dict) -> bytes:
+        async def capture(wire: bytes) -> bytes:
+            message = decode_jsonl_line(wire, config.max_jsonl_line_bytes)
             sent.append(str(message.get("method") or ""))
-            return await original(message)
+            return await original(wire)
 
-        transport.send = capture  # type: ignore[method-assign]
+        transport.send_bytes = capture  # type: ignore[method-assign]
         client = AppServerClient(transport, config)
         await transport.start()
         await client.initialize()

@@ -107,9 +107,18 @@ class AppServerTransport:
         self._stderr_task = asyncio.create_task(self._drain_stderr())
 
     async def send(self, message: dict[str, Any]) -> bytes:
+        return await self.send_bytes(encode_jsonl(message))
+
+    async def send_bytes(self, exact_jsonl: bytes) -> bytes:
         if self._closed or self._process is None or self._process.stdin is None:
             raise TransportClosed("transport is not started")
-        payload = encode_jsonl(message)
+        if (
+            not exact_jsonl.endswith(b"\n")
+            or exact_jsonl.count(b"\n") != 1
+            or len(exact_jsonl) > self.config.max_jsonl_line_bytes
+        ):
+            raise ValueError("transport requires one bounded exact JSONL record")
+        payload = bytes(exact_jsonl)
         async with self._send_lock:
             if self._closed or self._process.stdin.is_closing():
                 raise TransportClosed("transport stdin is closed")

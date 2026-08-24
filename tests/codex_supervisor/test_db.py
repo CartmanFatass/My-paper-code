@@ -33,3 +33,16 @@ def test_schema_tables_and_constraints(tmp_path: Path) -> None:
     initialize_database(connection)
     assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == SCHEMA_VERSION
     connection.close()
+
+
+def test_current_v12_startup_does_not_scan_legacy_mutations(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    connection = connect(tmp_path / "state.sqlite3")
+    initialize_database(connection)
+    monkeypatch.setattr(
+        "tools.codex_supervisor.db._migrate_legacy_mutation_intents",
+        lambda _connection: (_ for _ in ()).throw(AssertionError("legacy scan")),
+    )
+    initialize_database(connection)
+    connection.close()

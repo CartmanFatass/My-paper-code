@@ -11,6 +11,7 @@ from tools.codex_supervisor.binding_store import BindingStore
 from tools.codex_supervisor.client import AppServerClient
 from tools.codex_supervisor.managed_models import BindingState, HistoryTrust, ThreadOrigin
 from tools.codex_supervisor.provisioning import ManagedProvisioner, ProvisioningError
+from tools.codex_supervisor.protocol import decode_jsonl_line
 from tools.codex_supervisor.transport import AppServerTransport
 
 
@@ -32,13 +33,14 @@ def test_fresh_thread_is_created_once(tmp_path: Path) -> None:
             terminate_timeout=0.4,
         )
         sent: list[str] = []
-        original = transport.send
+        original = transport.send_bytes
 
-        async def capture(message: dict) -> bytes:
+        async def capture(wire: bytes) -> bytes:
+            message = decode_jsonl_line(wire, config.max_jsonl_line_bytes)
             sent.append(str(message.get("method") or ""))
-            return await original(message)
+            return await original(wire)
 
-        transport.send = capture  # type: ignore[method-assign]
+        transport.send_bytes = capture  # type: ignore[method-assign]
         client = AppServerClient(transport, config)
         await transport.start()
         await client.initialize()
@@ -73,13 +75,14 @@ def test_thread_start_overload_is_not_retried(tmp_path: Path) -> None:
             terminate_timeout=0.4,
         )
         sent: list[str] = []
-        original = transport.send
+        original = transport.send_bytes
 
-        async def capture(message: dict) -> bytes:
+        async def capture(wire: bytes) -> bytes:
+            message = decode_jsonl_line(wire, config.max_jsonl_line_bytes)
             sent.append(str(message.get("method") or ""))
-            return await original(message)
+            return await original(wire)
 
-        transport.send = capture  # type: ignore[method-assign]
+        transport.send_bytes = capture  # type: ignore[method-assign]
         client = AppServerClient(transport, config)
         await transport.start()
         await client.initialize()
@@ -87,7 +90,7 @@ def test_thread_start_overload_is_not_retried(tmp_path: Path) -> None:
         provisioner = ManagedProvisioner(store, client)
         snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
         binding_id = provisioner.prepare(snapshot, repo_root=tmp_path, operator="operator")
-        with pytest.raises(ProvisioningError, match="uncertain"):
+        with pytest.raises(ProvisioningError, match="PROVIDER_REJECTED"):
             await provisioner.create_fresh_thread(binding_id)
         assert store.get(binding_id).binding_state is BindingState.PREPARED
         assert sent.count("thread/start") == 1

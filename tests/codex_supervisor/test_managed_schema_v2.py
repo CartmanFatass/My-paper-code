@@ -118,10 +118,10 @@ def test_newer_schema_fails_closed(tmp_path: Path) -> None:
     connection.close()
 
 
-def test_fresh_store_is_schema_2(tmp_path: Path) -> None:
+def test_fresh_store_is_current_schema(tmp_path: Path) -> None:
     store = ObserverStore(tmp_path)
     version = store.connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0]
-    assert version == SCHEMA_VERSION == 10
+    assert version == SCHEMA_VERSION == 12
     assert ManagedActorKind.OPERATIONAL_ROOT.value == "OPERATIONAL_ROOT"
     assert BindingState.PREPARED.value == "PREPARED"
     store.close()

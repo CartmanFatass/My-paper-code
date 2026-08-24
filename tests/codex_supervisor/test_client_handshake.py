@@ -1,13 +1,19 @@
 from __future__ import annotations
 
 import asyncio
+from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
 import pytest
 
 from tests.codex_supervisor.helpers import make_observer_config, write_fake_codex
-from tools.codex_supervisor.client import AppServerClient, HandshakeError, request_class_for
+from tools.codex_supervisor.client import (
+    MUTATING_OWNER_MESSAGE,
+    AppServerClient,
+    HandshakeError,
+    request_class_for,
+)
 from tools.codex_supervisor.models import RequestClass
 from tools.codex_supervisor.transport import AppServerTransport
 
@@ -48,7 +54,9 @@ def test_handshake_sends_initialize_then_initialized(tmp_path: Path) -> None:
         assert "result" in response
         assert [item.get("method") for item in sent] == ["initialize", "initialized"]
         initialize = sent[0]
-        assert initialize["id"] == 1
+        # Ephemeral read/handshake ids are negative and therefore disjoint
+        # from durable positive mutation ids.
+        assert initialize["id"] == -1
         assert "jsonrpc" not in initialize
         assert initialize["params"]["clientInfo"] == {
             "name": "hmasd-codex-app-server-observer",
@@ -88,6 +96,7 @@ def test_request_classes_match_docs_and_schema() -> None:
     assert request_class_for("initialize") is RequestClass.HANDSHAKE
     assert request_class_for("thread/list") is RequestClass.READ_IDEMPOTENT
     assert request_class_for("thread/read") is RequestClass.READ_IDEMPOTENT
+    assert request_class_for("thread/loaded/list") is RequestClass.READ_IDEMPOTENT
     for method in (
         "thread/start",
         "thread/resume",
@@ -100,6 +109,27 @@ def test_request_classes_match_docs_and_schema() -> None:
         "thread/archive",
     ):
         assert request_class_for(method) is RequestClass.MUTATING_NO_RETRY
+
+
+def test_prepared_read_cannot_be_mutated_or_reclassified_into_a_write(tmp_path: Path) -> None:
+    async def body() -> None:
+        transport, client, sent = _started(tmp_path)
+        await transport.start()
+        await client.initialize()
+        prepared = client.prepare_request("thread/list", {})
+        prepared.payload["method"] = "turn/start"  # type: ignore[index]
+        with pytest.raises(RuntimeError, match=MUTATING_OWNER_MESSAGE):
+            await client.send_prepared(prepared)
+        stale = replace(
+            client.prepare_request("thread/list", {}),
+            request_class=RequestClass.MUTATING_NO_RETRY,
+        )
+        with pytest.raises(RuntimeError, match=MUTATING_OWNER_MESSAGE):
+            await client.send_prepared(stale)
+        assert all(item.get("method") != "turn/start" for item in sent)
+        await transport.stop()
+
+    _run(body())
 
 
 def test_queues_unexpected_server_request(tmp_path: Path) -> None:
