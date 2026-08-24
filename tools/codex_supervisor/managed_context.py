@@ -46,20 +46,45 @@ def build_bootstrap_text(
     ]
     if history_trust is HistoryTrust.LEGACY_UNTRUSTED_HISTORY:
         lines.extend(["", "LEGACY_HISTORY_AUTHORITY=NONE"])
-    lines.extend(
-        [
+    if snapshot.checkpoint_id:
+        command = json.dumps(
+            {
+                "schema_version": "1.0",
+                "packet_kind": "MANAGED_ACTOR_COMMAND",
+                "action_kind": "CONTEXT_REANCHOR_ACK",
+                "expected": {
+                    "checkpoint_id": snapshot.checkpoint_id,
+                    "state_version": snapshot.state_version,
+                    "epoch_id": snapshot.epoch_id,
+                    "epoch_revision": snapshot.epoch_revision,
+                },
+                "payload": {},
+            },
+            separators=(",", ":"),
+        )
+        required_response = [
+            "",
+            "Do not infer authority from this message.",
+            "After reading the references above, the final response must be exactly:",
+            "<HMASD_MANAGED_ACTOR_COMMAND_V1>",
+            command,
+            "</HMASD_MANAGED_ACTOR_COMMAND_V1>",
+            "",
+        ]
+    else:
+        required_response = [
             "",
             "Do not infer authority from this message.",
             "Return exactly one HMASD_MANAGED_ACTOR_COMMAND_V1 envelope with",
             "action_kind=CONTEXT_REANCHOR_ACK if the checkpoint is current.",
             "",
         ]
-    )
     for ref in refs:
-        candidate = "\n".join(lines + [f"- {ref}", ""])
+        candidate = "\n".join(lines + [f"- {ref}"] + required_response)
         if len(candidate.encode("utf-8")) > MAX_MANAGED_INPUT_BYTES:
             break
         lines.append(f"- {ref}")
+    lines.extend(required_response)
     text = "\n".join(lines) + "\n"
     encoded = text.encode("utf-8")
     if len(encoded) > MAX_MANAGED_INPUT_BYTES:
