@@ -12,6 +12,7 @@ from ..client import (
     MUTATING_NO_RETRY_METHODS,
     MUTATING_OWNER_MESSAGE,
     AppServerClient,
+    CommittedClaimCapability,
     PreparedRpcRequest,
     RetryRequired,
 )
@@ -49,9 +50,10 @@ class EffectSubmissionResult:
 class SendPermit:
     """Immutable single-use proof that the exact prepared RPC was claimed."""
 
-    token: str
     effect_id: str
     prepared: PreparedRpcRequest
+    capability: CommittedClaimCapability | None = None
+    fallback_token: str | None = None
 
 
 class SessionOwnerError(RuntimeError):
@@ -309,14 +311,32 @@ class AppServerSessionOwner:
                 except BaseException:
                     pass
             raise
+        issuer = getattr(self.client, "_issue_committed_claim", None)
+        if callable(issuer):
+            capability = issuer(prepared, effect_id=plan.effect_id)
+            return SendPermit(
+                effect_id=plan.effect_id,
+                prepared=prepared,
+                capability=capability,
+            )
+        # Test doubles do not own a real transport boundary.  Keep their
+        # legacy local permit registry so cleanup assertions remain explicit.
         token = f"permit_{uuid.uuid4().hex}"
         self._send_permits.add(token)
-        return SendPermit(token=token, effect_id=plan.effect_id, prepared=prepared)
+        return SendPermit(
+            effect_id=plan.effect_id,
+            prepared=prepared,
+            fallback_token=token,
+        )
 
     async def _consume_send_permit(self, permit: SendPermit) -> None:
-        if permit.token not in self._send_permits:
+        if permit.capability is not None:
+            await self.client.send_prepared(permit.prepared, permit.capability)
+            return
+        token = permit.fallback_token
+        if token is None or token not in self._send_permits:
             raise SessionOwnerError("send permit is unknown or already consumed")
-        self._send_permits.remove(permit.token)
+        self._send_permits.remove(token)
         await self.client.send_prepared(permit.prepared)
 
     async def _submit_locked(self, plan: OwnerPlan) -> EffectSubmissionResult:

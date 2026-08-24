@@ -365,6 +365,14 @@ SCHEMA_STATEMENTS = (
     )
     """,
     """
+    CREATE TABLE IF NOT EXISTS app_server_authority_kernel (
+        singleton INTEGER PRIMARY KEY CHECK(singleton = 1),
+        marker TEXT NOT NULL,
+        kernel_version INTEGER NOT NULL,
+        generation TEXT NOT NULL
+    )
+    """,
+    """
     CREATE TABLE IF NOT EXISTS mailbox_command_receipts (
         receipt_id TEXT PRIMARY KEY,
         command_id TEXT NOT NULL,
@@ -401,6 +409,9 @@ SCHEMA_STATEMENTS = (
         request_byte_length INTEGER,
         sealed_at TEXT,
         plan_version INTEGER NOT NULL DEFAULT 0,
+        kernel_claim_marker TEXT,
+        kernel_claim_version INTEGER NOT NULL DEFAULT 0,
+        kernel_claim_generation TEXT,
         state TEXT NOT NULL,
         version INTEGER NOT NULL DEFAULT 0,
         run_id TEXT,
@@ -588,6 +599,15 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _add_column_if_missing(connection, "app_server_effects", "request_byte_length", "INTEGER")
         _add_column_if_missing(connection, "app_server_effects", "sealed_at", "TEXT")
         _add_column_if_missing(connection, "app_server_effects", "plan_version", "INTEGER NOT NULL DEFAULT 0")
+        _add_column_if_missing(connection, "app_server_effects", "kernel_claim_marker", "TEXT")
+        _add_column_if_missing(connection, "app_server_effects", "kernel_claim_version", "INTEGER NOT NULL DEFAULT 0")
+        _add_column_if_missing(connection, "app_server_effects", "kernel_claim_generation", "TEXT")
+        connection.execute(
+            """INSERT OR IGNORE INTO app_server_authority_kernel(
+                singleton,marker,kernel_version,generation
+            ) VALUES (1,'HMASD_AUTHORITY_KERNEL_CLAIM_V11',1,?)""",
+            (f"kernel_{uuid.uuid4().hex}",),
+        )
         connection.execute("DROP INDEX IF EXISTS mutation_intents_open_unique")
         connection.execute(
             """CREATE UNIQUE INDEX IF NOT EXISTS mutation_intents_open_unique
@@ -652,6 +672,35 @@ def _install_authority_seal_guards(connection: sqlite3.Connection) -> None:
         END"""
     )
     connection.execute("DROP TRIGGER IF EXISTS managed_context_input_immutable")
+    connection.execute("DROP TRIGGER IF EXISTS app_server_kernel_claim_credential_guard")
+    connection.execute(
+        """CREATE TRIGGER app_server_kernel_claim_credential_guard
+        BEFORE UPDATE OF kernel_claim_marker,kernel_claim_version,kernel_claim_generation
+        ON app_server_effects
+        WHEN NEW.kernel_claim_marker IS NOT OLD.kernel_claim_marker
+          OR NEW.kernel_claim_version IS NOT OLD.kernel_claim_version
+          OR NEW.kernel_claim_generation IS NOT OLD.kernel_claim_generation
+        BEGIN
+          SELECT CASE
+            WHEN OLD.state != 'PREPARED' OR NEW.state != 'PREPARED' THEN
+              RAISE(ABORT, 'kernel claim credential may only arm PREPARED')
+            WHEN NEW.plan_version != 1
+              OR NEW.request_sha256 IS NULL
+              OR NEW.request_byte_length IS NULL
+              OR NEW.sealed_at IS NULL THEN
+              RAISE(ABORT, 'kernel claim credential requires complete current seal')
+            WHEN NOT EXISTS (
+              SELECT 1 FROM app_server_authority_kernel k
+              WHERE k.singleton = 1
+                AND NEW.kernel_claim_marker = k.marker
+                AND NEW.kernel_claim_version = k.kernel_version
+                AND NEW.kernel_claim_generation = k.generation
+            ) THEN
+              RAISE(ABORT, 'kernel claim credential is not current')
+            ELSE NULL
+          END;
+        END"""
+    )
     connection.execute(
         """CREATE TRIGGER managed_context_input_immutable
         BEFORE UPDATE OF input_bytes, input_sha256 ON managed_context_injections
@@ -735,9 +784,15 @@ def _migrate_authority_seals_v11(connection: sqlite3.Connection) -> None:
                         == f"thread/resume:{parsed.get('threadId')}"
                     )
                 elif owner_kind == "THREAD_MEMORY":
+                    from .durability.authority_kernel import (
+                        THREAD_MEMORY_ALLOWED_BINDING_STATES,
+                    )
+
                     can_reseal = bool(
                         exact_owner
                         and binding is not None
+                        and str(binding["binding_state"])
+                        in THREAD_MEMORY_ALLOWED_BINDING_STATES
                         and set(parsed) == {"threadId", "mode"}
                         and type(parsed.get("threadId")) is str
                         and parsed.get("threadId") == binding["thread_id"]

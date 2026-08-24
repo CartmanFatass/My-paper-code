@@ -177,6 +177,29 @@ def transition_trigger_sql(
     legal_sql = " OR ".join(legal_terms) if legal_terms else "0"
     trigger_name = f"durability_{table}_{state_column}_guard"
     drop_sql = f"DROP TRIGGER IF EXISTS {trigger_name}"
+    claim_guard_sql = ""
+    if kind is AggregateKind.APP_SERVER_EFFECT:
+        claim_guard_sql = f"""
+        WHEN OLD.{state_column} = 'PREPARED'
+          AND NEW.{state_column} = 'WRITE_STARTED'
+          AND (
+               NEW.plan_version != 1
+            OR NEW.request_sha256 IS NULL
+            OR length(NEW.request_sha256) != 64
+            OR NEW.request_byte_length IS NULL
+            OR NEW.request_byte_length < 2
+            OR NEW.sealed_at IS NULL
+            OR length(NEW.sealed_at) = 0
+            OR NOT EXISTS (
+              SELECT 1 FROM app_server_authority_kernel k
+              WHERE k.singleton = 1
+                AND NEW.kernel_claim_marker = k.marker
+                AND NEW.kernel_claim_version = k.kernel_version
+                AND NEW.kernel_claim_generation = k.generation
+            )
+          ) THEN
+          RAISE(ABORT, 'WRITE_STARTED requires current authority kernel claim')
+        """
     create_sql = f"""CREATE TRIGGER {trigger_name}
     BEFORE UPDATE OF {state_column} ON {table}
     FOR EACH ROW
@@ -187,6 +210,7 @@ def transition_trigger_sql(
           RAISE(ABORT, 'illegal {kind.value} transition')
         WHEN NEW.{version_column} != OLD.{version_column} + 1 THEN
           RAISE(ABORT, '{kind.value} version must increment by 1')
+        {claim_guard_sql}
         ELSE NULL
       END;
     END"""

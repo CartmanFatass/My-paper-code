@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from tests.codex_supervisor.helpers import record_completed_agent_item
+from tests.codex_supervisor.helpers import claim_effect_for_tests, record_completed_agent_item
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors, seed_reanchor
 from tools.codex_supervisor.binding_store import BindingStore
 from tools.codex_supervisor.command_gateway import CommandGateway
@@ -8,6 +8,7 @@ from tools.codex_supervisor.mailbox_store import MailboxStore
 from tools.codex_supervisor.mailbox_models import MailboxMessageKind, MailboxSourceSystem
 from tools.codex_supervisor.managed_models import HistoryTrust, ManagedIntentKind, ThreadOrigin
 from tools.codex_supervisor.managed_turns import ManagedTurns
+from tools.codex_supervisor.scheduler_leases import SchedulerLeases
 from tools.codex_supervisor.wake_batches import WakeBatchStore
 
 
@@ -52,7 +53,8 @@ def plant_verification_receipt(store: BindingStore, binding_id: str, snapshot, t
     effect_id = str(row.get("effect_id") or "")
     if effect_id:
         journal = EffectJournal(store.store.connection)
-        journal._claim_write(
+        claim_effect_for_tests(
+            journal,
             effect_id,
             run_id="fixture",
             client_request_id="fixture",
@@ -124,10 +126,14 @@ def prepare_resume_batch(seeded: dict[str, object], binding_id: str, key: str) -
         payload_ref="resume",
     )
     mailbox.mark_eligible(message.message_id)
+    leases = SchedulerLeases(seeded["supervisor"])
+    lease = leases.acquire(binding_id, "recovery", ttl_seconds=300.0)
     batch = WakeBatchStore(seeded["supervisor"], mailbox).prepare(
         binding_id=binding_id,
         thread_id=binding.thread_id,
         snapshot=seeded["bridge"].snapshot(binding.actor_context_id),
         messages=[message],
+        lease_holder="recovery",
+        lease_generation=int(lease["generation"]),
     )
     return str(batch["wake_batch_id"])

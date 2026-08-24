@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import random
+import uuid
 from dataclasses import dataclass
 from typing import Any, Awaitable, Callable, Mapping
 
@@ -14,7 +15,9 @@ from .transport import AppServerTransport, TransportClosed, TransportMessage
 # Method strings present in both official app-server docs and the host
 # ClientRequest.json from `codex-cli 0.147.0`. Unknown methods default to
 # MUTATING_NO_RETRY.
-READ_IDEMPOTENT_METHODS = frozenset({"thread/list", "thread/read"})
+READ_IDEMPOTENT_METHODS = frozenset(
+    {"thread/list", "thread/read", "thread/loaded/list"}
+)
 MUTATING_NO_RETRY_METHODS = frozenset(
     {
         "thread/start",
@@ -49,6 +52,21 @@ class PreparedRpcRequest:
     payload: Mapping[str, object]
     request_class: RequestClass
     future: asyncio.Future[dict[str, object]]
+
+
+@dataclass(frozen=True)
+class CommittedClaimCapability:
+    """Client-owned, immutable authority to send one exact claimed RPC once.
+
+    Possession of an object with matching fields is insufficient: the issuing
+    client also retains an identity-bound registry entry which is consumed
+    before the transport write is attempted.
+    """
+
+    token: str
+    effect_id: str
+    request_id: str
+    method: str
 
 
 class AppServerRpcError(RuntimeError):
@@ -93,6 +111,7 @@ class AppServerClient:
         self.transport = transport
         self.config = config
         self._pending: dict[str, asyncio.Future[dict[str, object]]] = {}
+        self._committed_claims: dict[str, tuple[int, str, str, str]] = {}
         self._next_id = 1
         self._initialize_complete = False
         self._reader: asyncio.Task[None] | None = None
@@ -192,8 +211,61 @@ class AppServerClient:
         future = self._pending.pop(prepared.request_id, None)
         if future is not None and not future.done():
             future.cancel()
+        stale = [
+            token
+            for token, claim in self._committed_claims.items()
+            if claim[0] == id(prepared)
+        ]
+        for token in stale:
+            self._committed_claims.pop(token, None)
 
-    async def send_prepared(self, prepared: PreparedRpcRequest) -> None:
+    def _issue_committed_claim(
+        self, prepared: PreparedRpcRequest, *, effect_id: str
+    ) -> CommittedClaimCapability:
+        """Issue a transport capability after the caller committed WRITE_STARTED."""
+
+        if prepared.request_class is not RequestClass.MUTATING_NO_RETRY:
+            raise RuntimeError("committed claims are only valid for mutating requests")
+        if prepared.request_id not in self._pending:
+            raise RuntimeError("cannot claim an unknown prepared request")
+        token = f"claim_{uuid.uuid4().hex}"
+        capability = CommittedClaimCapability(
+            token=token,
+            effect_id=effect_id,
+            request_id=prepared.request_id,
+            method=prepared.method,
+        )
+        self._committed_claims[token] = (
+            id(prepared),
+            effect_id,
+            prepared.request_id,
+            prepared.method,
+        )
+        return capability
+
+    async def send_prepared(
+        self,
+        prepared: PreparedRpcRequest,
+        capability: CommittedClaimCapability | None = None,
+    ) -> None:
+        if prepared.request_class is RequestClass.MUTATING_NO_RETRY:
+            if not isinstance(capability, CommittedClaimCapability):
+                raise RuntimeError(MUTATING_OWNER_MESSAGE)
+            expected = self._committed_claims.pop(capability.token, None)
+            actual = (
+                id(prepared),
+                capability.effect_id,
+                prepared.request_id,
+                prepared.method,
+            )
+            if (
+                expected != actual
+                or capability.request_id != prepared.request_id
+                or capability.method != prepared.method
+            ):
+                raise RuntimeError("committed claim capability is invalid or already consumed")
+        elif capability is not None:
+            raise RuntimeError("read and handshake requests do not accept mutation capabilities")
         await self.transport.send(dict(prepared.payload))
 
     async def await_prepared(
@@ -226,7 +298,7 @@ class AppServerClient:
         *,
         timeout: float | None = None,
     ) -> dict[str, object]:
-        if method in MUTATING_NO_RETRY_METHODS:
+        if request_class_for(method) is RequestClass.MUTATING_NO_RETRY:
             raise RuntimeError(MUTATING_OWNER_MESSAGE)
         klass = request_class_for(method)
         attempt = 1

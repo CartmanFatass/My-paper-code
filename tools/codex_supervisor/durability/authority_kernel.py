@@ -13,7 +13,7 @@ import sqlite3
 import uuid
 from contextlib import nullcontext
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from enum import Enum
 from typing import TypeAlias
 
@@ -30,6 +30,13 @@ from .models import AggregateKind, TransitionCause, TransitionRequest
 from .transitions import TransitionKernel
 
 AUTHORITY_PLAN_VERSION = 1
+THREAD_MEMORY_ALLOWED_BINDING_STATES = frozenset(
+    {"PREPARED", "THREAD_CREATED", "VERIFICATION_REQUIRED", "ACTIVE"}
+)
+
+
+class AuthorityLeaseError(EffectError):
+    """Final authoritative scheduler-lease proof failed before write."""
 
 
 class ResumeMode(str, Enum):
@@ -81,6 +88,7 @@ class ManagedTurnPlan(_OwnerPlan):
 @dataclass(frozen=True)
 class WakeBatchPlan(_OwnerPlan):
     batch_version: int
+    lease_key: str
     lease_holder: str
     lease_generation: int
     context_injection_id: str
@@ -98,6 +106,9 @@ class ThreadResumePlan(_OwnerPlan):
     mode: ResumeMode
     wake_batch_id: str | None
     context_injection_id: str | None
+    lease_key: str | None
+    lease_holder: str | None
+    lease_generation: int | None
 
 
 @dataclass(frozen=True)
@@ -342,6 +353,7 @@ def seal_wake_batch(
     return WakeBatchPlan(
         *base,
         batch_version=int(wake["version"] or 0),
+        lease_key=f"wake:{wake['binding_id']}",
         lease_holder=lease_holder,
         lease_generation=lease_generation,
         context_injection_id=str(wake["context_injection_id"]),
@@ -369,7 +381,10 @@ def seal_thread_provision(connection: sqlite3.Connection, effect_id: str) -> Thr
 
 
 def seal_thread_memory(connection: sqlite3.Connection, effect_id: str) -> ThreadMemoryPlan:
-    return ThreadMemoryPlan(*_seal_binding_owner(connection, effect_id, "THREAD_MEMORY"))
+    base = _seal_binding_owner(connection, effect_id, "THREAD_MEMORY")
+    if base[17] not in THREAD_MEMORY_ALLOWED_BINDING_STATES:
+        raise EffectError("thread-memory binding state is not allowed")
+    return ThreadMemoryPlan(*base)
 
 
 def seal_thread_resume(
@@ -381,6 +396,9 @@ def seal_thread_resume(
 ) -> ThreadResumePlan:
     base = _seal_binding_owner(connection, effect_id, "THREAD_RESUME")
     context_id = None
+    lease_key = None
+    lease_holder = None
+    lease_generation = None
     if mode is ResumeMode.ADOPTION:
         if wake_batch_id is not None:
             raise EffectError("adoption resume cannot name a wake batch")
@@ -405,6 +423,13 @@ def seal_thread_resume(
         ):
             raise EffectError("wake-recovery resume relation is not exact")
         context_id = str(wake["context_injection_id"])
+        lease_key = f"wake:{wake['binding_id']}"
+        lease_holder = None if wake["lease_holder"] is None else str(wake["lease_holder"])
+        lease_generation = (
+            None if wake["lease_generation"] is None else int(wake["lease_generation"])
+        )
+        if not lease_holder or lease_generation is None:
+            raise EffectError("wake-recovery resume has no exact lease identity")
         context = connection.execute(
             "SELECT * FROM managed_context_injections WHERE injection_id=?",
             (context_id,),
@@ -420,7 +445,13 @@ def seal_thread_resume(
         ]
         base = tuple(base_items)
     return ThreadResumePlan(
-        *base, mode=mode, wake_batch_id=wake_batch_id, context_injection_id=context_id
+        *base,
+        mode=mode,
+        wake_batch_id=wake_batch_id,
+        context_injection_id=context_id,
+        lease_key=lease_key,
+        lease_holder=lease_holder,
+        lease_generation=lease_generation,
     )
 
 
@@ -608,6 +639,43 @@ def _prove_binding(connection: sqlite3.Connection, plan: OwnerPlan) -> sqlite3.R
     return row
 
 
+def _prove_current_scheduler_lease(
+    connection: sqlite3.Connection,
+    *,
+    binding_id: str | None,
+    lease_key: str | None,
+    lease_holder: str | None,
+    lease_generation: int | None,
+) -> None:
+    if binding_id is None:
+        raise AuthorityLeaseError("wake authority has no binding")
+    expected_key = f"wake:{binding_id}"
+    if (
+        lease_key != expected_key
+        or not lease_holder
+        or lease_generation is None
+    ):
+        raise AuthorityLeaseError("wake authority lease identity is incomplete")
+    row = connection.execute(
+        "SELECT * FROM scheduler_leases WHERE lease_key=?", (expected_key,)
+    ).fetchone()
+    if row is None:
+        raise AuthorityLeaseError("authoritative scheduler lease is missing")
+    try:
+        expires_at = datetime.fromisoformat(str(row["expires_at"]))
+    except (TypeError, ValueError) as exc:
+        raise AuthorityLeaseError("authoritative scheduler lease expiry is invalid") from exc
+    if expires_at.tzinfo is None or expires_at.utcoffset() != timedelta(0):
+        raise AuthorityLeaseError("authoritative scheduler lease expiry is not strict UTC")
+    if (
+        str(row["lease_key"]) != expected_key
+        or str(row["holder_instance_id"]) != lease_holder
+        or int(row["generation"]) != lease_generation
+        or expires_at <= datetime.now(timezone.utc)
+    ):
+        raise AuthorityLeaseError("authoritative scheduler lease expired or transferred")
+
+
 def final_authority_proof(
     connection: sqlite3.Connection, plan: OwnerPlan, *, run_id: str
 ) -> None:
@@ -710,6 +778,13 @@ def final_authority_proof(
         return
 
     if isinstance(plan, WakeBatchPlan):
+        _prove_current_scheduler_lease(
+            connection,
+            binding_id=plan.binding_id,
+            lease_key=plan.lease_key,
+            lease_holder=plan.lease_holder,
+            lease_generation=plan.lease_generation,
+        )
         final_wake_authority_proof(connection, plan)
         return
 
@@ -725,6 +800,7 @@ def final_authority_proof(
     if isinstance(plan, ThreadMemoryPlan):
         if (
             binding is None
+            or plan.binding_state not in THREAD_MEMORY_ALLOWED_BINDING_STATES
             or request["threadId"] != binding["thread_id"]
             or plan.client_key != f"thread/memoryMode/set:{plan.thread_id}"
         ):
@@ -737,10 +813,20 @@ def final_authority_proof(
             if (
                 plan.binding_state != "PREPARED"
                 or plan.wake_batch_id is not None
+                or plan.lease_key is not None
+                or plan.lease_holder is not None
+                or plan.lease_generation is not None
                 or plan.client_key != f"thread/resume:{plan.thread_id}"
             ):
                 raise EffectError("adoption resume variant changed")
         else:
+            _prove_current_scheduler_lease(
+                connection,
+                binding_id=plan.binding_id,
+                lease_key=plan.lease_key,
+                lease_holder=plan.lease_holder,
+                lease_generation=plan.lease_generation,
+            )
             wake = connection.execute(
                 "SELECT * FROM wake_batches WHERE wake_batch_id=?", (plan.wake_batch_id,)
             ).fetchone()

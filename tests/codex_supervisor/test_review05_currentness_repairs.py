@@ -355,7 +355,7 @@ def test_wake_resume_context_drift_cancels_resume_and_wake_without_network(
 ) -> None:
     async def body() -> None:
         seeded = seed_active_root_portfolio(tmp_path)
-        binding_id, message, batches, _leases, _lease, batch = _prepared_wake(
+        binding_id, message, batches, leases, _lease, batch = _prepared_wake(
             seeded, key="review05:f07", holder="review05-f07"
         )
         config = make_observer_config(tmp_path)
@@ -390,6 +390,8 @@ def test_wake_resume_context_drift_cancels_resume_and_wake_without_network(
             seeded["mailbox"],
             batches,
             client,
+            leases,
+            "review05-f07",
             bridge=seeded["bridge"],
         )
         readiness = await recovery.resume_once(

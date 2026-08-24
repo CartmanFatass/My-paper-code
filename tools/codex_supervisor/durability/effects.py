@@ -27,6 +27,10 @@ class EffectError(RuntimeError):
     """Raised when an App Server effect cannot be prepared or advanced."""
 
 
+AUTHORITY_KERNEL_CLAIM_MARKER = "HMASD_AUTHORITY_KERNEL_CLAIM_V11"
+AUTHORITY_KERNEL_CLAIM_VERSION = 1
+
+
 @dataclass(frozen=True)
 class EffectRecord:
     effect_id: str
@@ -41,6 +45,9 @@ class EffectRecord:
     request_byte_length: int | None
     sealed_at: str | None
     plan_version: int
+    kernel_claim_marker: str | None
+    kernel_claim_version: int
+    kernel_claim_generation: str | None
     state: str
     version: int
     run_id: str | None = None
@@ -97,6 +104,17 @@ def _record(row: Mapping[str, Any] | sqlite3.Row) -> EffectRecord:
         ),
         sealed_at=None if data.get("sealed_at") is None else str(data["sealed_at"]),
         plan_version=int(data.get("plan_version") or 0),
+        kernel_claim_marker=(
+            None
+            if data.get("kernel_claim_marker") is None
+            else str(data["kernel_claim_marker"])
+        ),
+        kernel_claim_version=int(data.get("kernel_claim_version") or 0),
+        kernel_claim_generation=(
+            None
+            if data.get("kernel_claim_generation") is None
+            else str(data["kernel_claim_generation"])
+        ),
         state=str(data["state"]),
         version=int(data["version"] or 0),
         run_id=None if data["run_id"] is None else str(data["run_id"]),
@@ -276,6 +294,51 @@ class EffectJournal:
                 )
             except TransitionError as exc:
                 raise EffectError(str(exc)) from exc
+        return self.get(effect_id)
+
+    def _arm_kernel_claim(self, effect_id: str) -> EffectRecord:
+        """Attach the current database generation immediately before claim.
+
+        This private operation is intentionally absent from pre-v11 writers.
+        The database trigger validates the credential again on the subsequent
+        PREPARED -> WRITE_STARTED transition in the same outer transaction.
+        """
+
+        if not self.connection.in_transaction:
+            raise EffectError("kernel claim arming requires an ambient transaction")
+        current = self.get(effect_id)
+        if (
+            current.state != EffectState.PREPARED.value
+            or current.plan_version != AUTHORITY_KERNEL_CLAIM_VERSION
+            or not current.request_sha256
+            or current.request_byte_length is None
+            or not current.sealed_at
+        ):
+            raise EffectError("kernel claim requires a complete current authority seal")
+        kernel = self.connection.execute(
+            """SELECT marker,kernel_version,generation
+            FROM app_server_authority_kernel WHERE singleton=1"""
+        ).fetchone()
+        if (
+            kernel is None
+            or str(kernel["marker"]) != AUTHORITY_KERNEL_CLAIM_MARKER
+            or int(kernel["kernel_version"]) != AUTHORITY_KERNEL_CLAIM_VERSION
+            or not str(kernel["generation"] or "")
+        ):
+            raise EffectError("current authority kernel generation is unavailable")
+        updated = self.connection.execute(
+            """UPDATE app_server_effects
+            SET kernel_claim_marker=?,kernel_claim_version=?,kernel_claim_generation=?
+            WHERE effect_id=? AND state='PREPARED' AND plan_version=1""",
+            (
+                AUTHORITY_KERNEL_CLAIM_MARKER,
+                AUTHORITY_KERNEL_CLAIM_VERSION,
+                str(kernel["generation"]),
+                effect_id,
+            ),
+        )
+        if updated.rowcount != 1:
+            raise EffectError("kernel claim lost PREPARED authority")
         return self.get(effect_id)
 
     def observe_response(

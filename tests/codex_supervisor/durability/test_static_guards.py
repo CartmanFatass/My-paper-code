@@ -42,3 +42,15 @@ def bad(connection):
 '''
     found = scan_source_text(text, name="provisioning.py")
     assert any("protected state" in item for item in found)
+
+
+def test_scanner_rejects_prepared_transport_boundary_outside_owner() -> None:
+    found = scan_source_text(
+        """
+def bad(client, prepared):
+    client.prepare_request(method, {})
+    client.send_prepared(prepared)
+""",
+        name="observer.py",
+    )
+    assert any("prepared mutation boundary" in item for item in found)

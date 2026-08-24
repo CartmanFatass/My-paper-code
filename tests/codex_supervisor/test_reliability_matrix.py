@@ -148,10 +148,10 @@ def test_mutation_overload_sends_once(tmp_path: Path, method: str) -> None:
         await transport.start()
         await client.initialize()
         prepared = client.prepare_request(method, {"threadId": "thr_x"})
-        await client.send_prepared(prepared)
-        with pytest.raises(RetryRequired):
-            await client.await_prepared(prepared)
-        assert sent.count(method) == 1
+        with pytest.raises(RuntimeError, match="typed AppServerSessionOwner"):
+            await client.send_prepared(prepared)
+        assert sent.count(method) == 0
+        client.discard_prepared(prepared)
         await transport.stop()
 
     _run(body())

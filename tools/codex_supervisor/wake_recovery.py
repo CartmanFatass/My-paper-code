@@ -110,7 +110,11 @@ class WakeRecovery:
     async def resume_once(
         self, binding_id: str, *, wake_batch_id: str | None = None
     ) -> ThreadWakeReadiness:
-        from .durability.authority_kernel import ResumeMode, seal_thread_resume
+        from .durability.authority_kernel import (
+            AuthorityLeaseError,
+            ResumeMode,
+            seal_thread_resume,
+        )
         from .durability.effects import EffectJournal
         from .durability.reconciliation import EffectReconciler
         from .durability.session_owner import AppServerSessionOwner
@@ -137,6 +141,19 @@ class WakeRecovery:
                 wake_batch_id, cause_ref="missing_or_ambiguous_context_binding"
             )
             return ThreadWakeReadiness.UNKNOWN
+        wake_lease = self.bindings.store.connection.execute(
+            """SELECT lease_holder,lease_generation FROM wake_batches
+            WHERE wake_batch_id=? AND binding_id=? AND state='PREPARED'""",
+            (wake_batch_id, binding_id),
+        ).fetchone()
+        if wake_lease is None:
+            raise LeaseError("wake recovery requires an authoritative lease identity")
+        leases = self.leases or SchedulerLeases(self.bindings.store)
+        lease_holder = str(wake_lease["lease_holder"] or "")
+        lease_generation = int(wake_lease["lease_generation"] or 0)
+        if lease_holder != self.instance_id or lease_generation <= 0:
+            raise LeaseError("wake recovery lease identity does not match this instance")
+        leases.assert_held(binding_id, lease_holder, lease_generation)
         client_key = f"thread/resume:{binding.thread_id}:{wake_batch_id}"
         existing = journal.get_by_key("thread/resume", client_key)
 
@@ -225,6 +242,10 @@ class WakeRecovery:
                 context_row,
                 cause_ref="wake_resume_semantic_drift",
             )
+            return ThreadWakeReadiness.UNKNOWN
+        except AuthorityLeaseError:
+            # A final lock-wait lease loss is a no-change pre-write refusal.
+            # The prepared wake remains owned by the new/renewed holder.
             return ThreadWakeReadiness.UNKNOWN
         except Exception as exc:
             # A guard failure occurs before WRITE_STARTED and is safely

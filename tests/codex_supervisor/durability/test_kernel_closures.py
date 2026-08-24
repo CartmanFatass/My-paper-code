@@ -30,7 +30,7 @@ from tools.codex_supervisor.mailbox_store import MailboxStore
 from tools.codex_supervisor.managed_models import HistoryTrust, ManagedIntentKind, SubmissionState, ThreadOrigin
 from tools.codex_supervisor.managed_turns import ManagedTurnError, ManagedTurns
 from tools.codex_supervisor.mutation_intents import MutationIntentError, MutationIntentStore
-from tools.codex_supervisor.scheduler_leases import SchedulerLeases
+from tools.codex_supervisor.scheduler_leases import LeaseError, SchedulerLeases
 from tools.codex_supervisor.semantic_scanner import SemanticScanner
 from tools.codex_supervisor.store import ObserverStore
 from tools.codex_supervisor.transport import AppServerTransport
@@ -569,31 +569,68 @@ def test_released_actor_before_managed_turn_write_cancels_effect(tmp_path: Path)
     seeded["semantic"].close()
 
 
-def test_prepared_future_is_removed_when_write_recording_fails(tmp_path: Path) -> None:
+def test_prepared_future_is_removed_when_write_recording_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     async def body() -> None:
+        seeded = seed_managed_actors(tmp_path)
+        bindings = BindingStore(seeded["supervisor"], seeded["bridge"])
+        snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+        binding_id = bindings.prepare_binding(
+            snapshot,
+            repo_root=str(tmp_path),
+            thread_cwd=str(tmp_path),
+            created_by_operator="operator",
+            thread_origin=ThreadOrigin.NEW,
+            history_trust=HistoryTrust.FRESH,
+        )
+        bindings.attach_thread_for_tests(binding_id, "thr_canary")
+        bindings.mark_verification_required(binding_id)
         transport, client = _client(tmp_path, "handshake_ok")
         await transport.start()
         await client.initialize()
-        store = ObserverStore(tmp_path / "runtime")
-        store.start_run(codex_binary="b", codex_version="v", client_name="c", process_id=None)
-        owner = AppServerSessionOwner.for_client(client, store)
-        journal = EffectJournal(store.connection)
-        effect = journal.prepare_effect(
-            owner_kind="MANAGED_TURN",
-            owner_id="t1",
-            binding_id="b1",
-            method="turn/start",
-            client_key="k1",
-            request={"threadId": "thr_canary", "input": []},
+        turns = ManagedTurns(bindings, client)
+        intent_id = turns.prepare(
+            binding_id,
+            intent_kind=ManagedIntentKind.BOOTSTRAP,
+            input_ref="cleanup",
         )
-        journal._claim_write(effect.effect_id, run_id="runx", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+        from tools.codex_supervisor.durability.authority_kernel import seal_managed_turn
+        from tools.codex_supervisor.durability.transaction import DurabilityTransaction
+
+        with seeded["supervisor"]._lock, DurabilityTransaction(
+            seeded["supervisor"].connection
+        ):
+            plan = seal_managed_turn(
+                seeded["supervisor"].connection, intent_id, "cleanup input"
+            )
+        owner = AppServerSessionOwner.for_client(client, seeded["supervisor"])
+
+        def fail_valid_typed_claim(**_kwargs):
+            raise sqlite3.OperationalError("typed claim failed")
+
+        monkeypatch.setattr(
+            seeded["supervisor"],
+            "_record_authorized_effect_claim",
+            fail_valid_typed_claim,
+        )
         pending_before = dict(client._pending)
-        with pytest.raises(Exception):
-            await owner.submit_effect(effect.effect_id)
+        with pytest.raises(sqlite3.OperationalError, match="typed claim failed"):
+            await owner.submit_managed_turn(plan)
         assert client._pending.keys() == pending_before.keys()
+        assert client._committed_claims == {}
+        assert owner._send_permits == set()
+        assert plan.effect_id not in owner._open_effect_ids
+        assert EffectJournal(seeded["supervisor"].connection).get(plan.effect_id).state == "PREPARED"
+        assert turns._row(intent_id)["submission_state"] == "PREPARED"
+        assert seeded["supervisor"].connection.execute(
+            "SELECT COUNT(*) FROM raw_messages WHERE effect_id=?", (plan.effect_id,)
+        ).fetchone()[0] == 0
         await owner.close()
         await transport.stop()
-        store.close()
+        seeded["bridge"].close()
+        seeded["supervisor"].close()
+        seeded["semantic"].close()
 
     _run(body())
 
@@ -610,6 +647,7 @@ def test_effect_raw_request_seq_points_to_exact_raw_message_row(tmp_path: Path) 
         client_key="k1",
         request={"threadId": "thr1"},
     )
+    journal.seal_effect(effect.effect_id)
     from tools.codex_supervisor.durability.transaction import DurabilityTransaction
 
     with store._lock, DurabilityTransaction(store.connection):
@@ -1244,7 +1282,7 @@ def test_nonactive_binding_cannot_receive_recovery_resume(tmp_path: Path) -> Non
         object(),
         bridge=seeded["bridge"],
     )
-    with pytest.raises(EffectError):
+    with pytest.raises((EffectError, LeaseError)):
         asyncio.run(
             recovery.resume_once(seeded["root_binding_id"], wake_batch_id=batch_id)
         )
@@ -1443,7 +1481,7 @@ def test_write_started_is_committed_before_transport_send_with_existing_run(tmp_
         effect_id = str(row["effect_id"])
         original = client.send_prepared
 
-        async def checking_send(prepared):
+        async def checking_send(prepared, capability=None):
             assert not seeded["supervisor"].connection.in_transaction
             _assert_write_start_visible(
                 seeded["supervisor"].path,
@@ -1451,7 +1489,7 @@ def test_write_started_is_committed_before_transport_send_with_existing_run(tmp_
                 owner_kind="MANAGED_TURN",
                 owner_id=intent_id,
             )
-            await original(prepared)
+            await original(prepared, capability)
 
         client.send_prepared = checking_send  # type: ignore[method-assign]
         await turns.submit(intent_id, "hello")
@@ -1488,7 +1526,7 @@ def test_crash_after_send_before_response_cannot_revert_effect_to_prepared(tmp_p
         effect_id = str(row["effect_id"])
         original = client.send_prepared
 
-        async def checking_send(prepared):
+        async def checking_send(prepared, capability=None):
             seeded["supervisor"].connection.rollback()
             _assert_write_start_visible(
                 seeded["supervisor"].path,
@@ -1496,7 +1534,7 @@ def test_crash_after_send_before_response_cannot_revert_effect_to_prepared(tmp_p
                 owner_kind="MANAGED_TURN",
                 owner_id=intent_id,
             )
-            await original(prepared)
+            await original(prepared, capability)
 
         client.send_prepared = checking_send  # type: ignore[method-assign]
         await turns.submit(intent_id, "hello")
@@ -1530,9 +1568,9 @@ def test_managed_turn_submit_has_no_ambient_transaction_at_send(tmp_path: Path) 
         seen = {"in_txn": True}
         original = client.send_prepared
 
-        async def checking_send(prepared):
+        async def checking_send(prepared, capability=None):
             seen["in_txn"] = seeded["supervisor"].connection.in_transaction
-            await original(prepared)
+            await original(prepared, capability)
 
         client.send_prepared = checking_send  # type: ignore[method-assign]
         turns = ManagedTurns(store, client)
@@ -1579,7 +1617,7 @@ def test_wake_submit_has_no_ambient_transaction_at_send(tmp_path: Path) -> None:
         seen = {"in_txn": True}
         original = client.send_prepared
 
-        async def checking_send(prepared):
+        async def checking_send(prepared, capability=None):
             seen["in_txn"] = seeded["supervisor"].connection.in_transaction
             _assert_write_start_visible(
                 seeded["supervisor"].path,
@@ -1587,7 +1625,7 @@ def test_wake_submit_has_no_ambient_transaction_at_send(tmp_path: Path) -> None:
                 owner_kind="WAKE_BATCH",
                 owner_id=str(batch["wake_batch_id"]),
             )
-            await original(prepared)
+            await original(prepared, capability)
 
         client.send_prepared = checking_send  # type: ignore[method-assign]
         scheduler = WakeScheduler(

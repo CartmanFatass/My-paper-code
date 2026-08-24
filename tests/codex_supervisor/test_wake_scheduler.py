@@ -210,7 +210,7 @@ def test_wake_guard_spans_write_started_and_ends_before_send(
         )
         original_send = client.send_prepared
 
-        async def checked_send(prepared):
+        async def checked_send(prepared, capability=None):
             writer = sqlite3.connect(
                 seeded["bridge"].semantic_state_path,
                 timeout=0.0,
@@ -222,7 +222,7 @@ def test_wake_guard_spans_write_started_and_ends_before_send(
                 observed["released_at_send"] = True
             finally:
                 writer.close()
-            await original_send(prepared)
+            await original_send(prepared, capability)
 
         client.send_prepared = checked_send  # type: ignore[method-assign]
         scheduler = WakeScheduler(
@@ -475,6 +475,7 @@ def test_raw_submit_failure_never_requeues_crossed_effect_state(
                             cause_ref=effect_id,
                         )
                     )
+                    journal._arm_kernel_claim(effect_id)
                     journal._claim_write(
                         effect_id,
                         run_id="run-crossed",

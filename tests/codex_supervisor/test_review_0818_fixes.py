@@ -442,7 +442,9 @@ def test_resume_timeout_is_not_resubmitted(tmp_path: Path) -> None:
         )
         batches = WakeBatchStore(seeded["supervisor"], mailbox)
         leases = SchedulerLeases(seeded["supervisor"])
-        recovery = WakeRecovery(seeded["bindings"], mailbox, batches, client, leases, "sched")
+        recovery = WakeRecovery(
+            seeded["bindings"], mailbox, batches, client, leases, "recovery"
+        )
         batch_id = prepare_resume_batch(
             seeded, seeded["portfolio_binding_id"], "review0818:resume:timeout"
         )

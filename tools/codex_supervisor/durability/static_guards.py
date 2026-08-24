@@ -41,6 +41,9 @@ MUTATING_METHODS = (
 MUTATING_CALL = re.compile(
     r"""(?:client|self)\.request\(\s*['"](""" + "|".join(re.escape(item) for item in MUTATING_METHODS) + r""")['"]""",
 )
+MUTATING_BOUNDARY_CALL = re.compile(
+    r"\.(?:prepare_request|send_prepared|_issue_committed_claim)\s*\("
+)
 LEGACY_INSERT = re.compile(r"INSERT\s+INTO\s+mutation_intents\b", re.IGNORECASE)
 LEGACY_STATE_UPDATE = re.compile(r"UPDATE\s+mutation_intents\s+SET\s+state\b", re.IGNORECASE)
 UPDATE_TABLE = re.compile(
@@ -112,6 +115,10 @@ def scan_package(root: Path | None = None) -> list[str]:
             rel.endswith(item) for item in ALLOWED_MUTATING_CALLERS
         ):
             violations.append(f"{rel}: direct mutating client.request")
+        if MUTATING_BOUNDARY_CALL.search(text) and rel not in ALLOWED_MUTATING_CALLERS and not any(
+            rel.endswith(item) for item in ALLOWED_MUTATING_CALLERS
+        ):
+            violations.append(f"{rel}: direct prepared mutation boundary call")
     return sorted(set(violations))
 
 
@@ -140,4 +147,11 @@ def scan_source_text(text: str, *, name: str = "synthetic.py") -> list[str]:
                 violations.append(f"{name}: new mutation_intents insert")
     if re.search(r'client\.request\(\s*"turn/start"', text):
         violations.append(f"{name}: direct mutating client.request")
+    normalized = name.replace("\\", "/")
+    if (
+        MUTATING_BOUNDARY_CALL.search(text)
+        and normalized not in ALLOWED_MUTATING_CALLERS
+        and not normalized.endswith(tuple(ALLOWED_MUTATING_CALLERS))
+    ):
+        violations.append(f"{name}: direct prepared mutation boundary call")
     return sorted(set(violations))

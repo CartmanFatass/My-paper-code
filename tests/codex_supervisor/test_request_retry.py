@@ -78,13 +78,12 @@ def test_mutation_overload_is_not_retried(tmp_path: Path) -> None:
         await transport.start()
         await client.initialize()
         prepared = client.prepare_request("thread/start", {})
-        await client.send_prepared(prepared)
-        with pytest.raises(RetryRequired) as exc:
-            await client.await_prepared(prepared)
-        assert exc.value.code == -32001
+        with pytest.raises(RuntimeError, match="typed AppServerSessionOwner"):
+            await client.send_prepared(prepared)
         starts = [item for item in sent if item.get("method") == "thread/start"]
-        assert len(starts) == 1
+        assert len(starts) == 0
         assert delays == []
+        client.discard_prepared(prepared)
         await transport.stop()
 
     _run(body())
@@ -96,11 +95,11 @@ def test_turn_start_overload_is_not_retried(tmp_path: Path) -> None:
         await transport.start()
         await client.initialize()
         prepared = client.prepare_request("turn/start", {"threadId": "thr_x", "input": []})
-        await client.send_prepared(prepared)
-        with pytest.raises(RetryRequired):
-            await client.await_prepared(prepared)
-        assert [item.get("method") for item in sent if item.get("method") == "turn/start"] == ["turn/start"]
+        with pytest.raises(RuntimeError, match="typed AppServerSessionOwner"):
+            await client.send_prepared(prepared)
+        assert [item.get("method") for item in sent if item.get("method") == "turn/start"] == []
         assert delays == []
+        client.discard_prepared(prepared)
         await transport.stop()
 
     _run(body())
@@ -111,8 +110,9 @@ def test_non_overload_error_is_not_retried(tmp_path: Path) -> None:
         transport, client, delays, sent = _client(tmp_path, "handshake_ok")
         await transport.start()
         await client.initialize()
-        with pytest.raises(AppServerRpcError):
+        with pytest.raises(RuntimeError, match="typed AppServerSessionOwner"):
             await client.request("thread/not-a-method", {})
+        assert not [item for item in sent if item.get("method") == "thread/not-a-method"]
         assert delays == []
         await transport.stop()
 

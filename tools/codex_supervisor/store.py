@@ -206,6 +206,7 @@ class ObserverStore:
                 )
         raw_seq = int(cursor.lastrowid)
         journal = EffectJournal(self.connection)
+        journal._arm_kernel_claim(effect_id)
         journal._claim_write(
             effect_id,
             run_id=run_id,

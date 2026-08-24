@@ -6,6 +6,7 @@ import pytest
 
 from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
 from tests.codex_supervisor.helpers import insert_submittable_owner_for_effect
+from tests.codex_supervisor.semantic_fixtures import seed_managed_actors
 from tests.codex_supervisor.test_wake_scheduler import (
     _close_raw_failure_wake,
     _prepared_raw_failure_wake,
@@ -15,6 +16,23 @@ from tools.codex_supervisor.canary_contract import (
     canonical_canary_turn_start_request,
 )
 from tools.codex_supervisor.binding_store import BindingError
+from tools.codex_supervisor.binding_store import BindingStore
+from tools.codex_supervisor.managed_models import (
+    HistoryTrust,
+    ManagedIntentKind,
+    ThreadOrigin,
+)
+from tools.codex_supervisor.managed_turns import ManagedTurns
+from tools.codex_supervisor.durability.authority_kernel import (
+    CanaryPhase,
+    ResumeMode,
+    seal_ephemeral_canary,
+    seal_managed_turn,
+    seal_thread_memory,
+    seal_thread_provision,
+    seal_thread_resume,
+)
+from tools.codex_supervisor.durability.transaction import DurabilityTransaction
 from tools.codex_supervisor.durability.effects import (
     EffectError,
     EffectJournal,
@@ -181,105 +199,268 @@ def test_final_write_transaction_reproof_blocks_interleaved_foreign_owner(
 
 @pytest.mark.parametrize("foreign_state", ["PREPARED", "WRITE_STARTED"])
 @pytest.mark.parametrize(
-    ("owner_kind", "method"),
+    "variant",
     [
-        ("MANAGED_TURN", "turn/start"),
-        ("WAKE_BATCH", "turn/start"),
-        ("THREAD_PROVISION", "thread/start"),
-        ("THREAD_RESUME", "thread/resume"),
-        ("THREAD_MEMORY", "thread/memoryMode/set"),
-        ("EPHEMERAL_CANARY", "thread/start"),
+        "MANAGED_TURN",
+        "WAKE_BATCH",
+        "THREAD_PROVISION",
+        "THREAD_MEMORY",
+        "THREAD_RESUME_ADOPTION",
+        "THREAD_RESUME_WAKE_RECOVERY",
+        "EPHEMERAL_CANARY_THREAD_START",
+        "EPHEMERAL_CANARY_TURN_START",
     ],
 )
 def test_every_session_owner_path_reproves_inside_final_write_transaction(
-    tmp_path: Path, owner_kind: str, method: str, foreign_state: str
+    tmp_path: Path, variant: str, foreign_state: str
 ) -> None:
     async def body() -> None:
-        assert not hasattr(AppServerSessionOwner, "submit_effect")
-        assert {
-            "submit_managed_turn",
-            "submit_wake_batch",
-            "submit_thread_provision",
-            "submit_thread_resume",
-            "submit_thread_memory",
-            "submit_ephemeral_canary",
-        }.issubset(set(dir(AppServerSessionOwner)))
-        return
-        store = ObserverStore(tmp_path)
-        journal = EffectJournal(store.connection)
-        if owner_kind == "EPHEMERAL_CANARY":
+        case_path = tmp_path / f"{variant.lower()}-{foreign_state.lower()}"
+        seeded = None
+        messages = []
+        wake_batch_id = None
+        if variant == "WAKE_BATCH":
+            seeded, _scheduler, batches, _mailbox, message, batch, _lease = (
+                _prepared_raw_failure_wake(case_path, f"matrix-{foreign_state}")
+            )
+            store = seeded["supervisor"]
+            from tools.codex_supervisor.durability.authority_kernel import seal_wake_batch
+
+            with store._lock, DurabilityTransaction(store.connection):
+                plan = seal_wake_batch(
+                    store.connection,
+                    str(batch["wake_batch_id"]),
+                    str(batch["lease_holder"]),
+                    int(batch["lease_generation"]),
+                )
+            messages = [message]
+            wake_batch_id = str(batch["wake_batch_id"])
+        elif variant == "THREAD_RESUME_WAKE_RECOVERY":
+            from tests.codex_supervisor.test_review06_cancellation_cleanup import (
+                _prepared_resume,
+            )
+
+            seeded, binding, messages, batches, batch, _client, _recovery = _prepared_resume(
+                case_path, f"matrix-{foreign_state}"
+            )
+            store = seeded["supervisor"]
+            effect = EffectJournal(store.connection).prepare_effect(
+                owner_kind="THREAD_RESUME",
+                owner_id=binding.binding_id,
+                binding_id=binding.binding_id,
+                method="thread/resume",
+                client_key=f"thread/resume:{binding.thread_id}:{batch['wake_batch_id']}",
+                request={"threadId": binding.thread_id},
+            )
+            with store._lock, DurabilityTransaction(store.connection):
+                plan = seal_thread_resume(
+                    store.connection,
+                    effect.effect_id,
+                    mode=ResumeMode.WAKE_RECOVERY,
+                    wake_batch_id=str(batch["wake_batch_id"]),
+                )
+            wake_batch_id = str(batch["wake_batch_id"])
+        elif variant in {"THREAD_PROVISION", "THREAD_RESUME_ADOPTION"}:
+            seeded = seed_managed_actors(case_path)
+            bindings = BindingStore(seeded["supervisor"], seeded["bridge"])
+            snapshot = seeded["bridge"].snapshot(seeded["root"].actor_context_id)
+            binding_id = bindings.prepare_binding(
+                snapshot,
+                repo_root=str(case_path),
+                thread_cwd=str(case_path),
+                created_by_operator="test",
+                thread_origin=ThreadOrigin.NEW,
+                history_trust=HistoryTrust.FRESH,
+            )
+            store = seeded["supervisor"]
+            journal = EffectJournal(store.connection)
+            if variant == "THREAD_PROVISION":
+                effect = journal.prepare_effect(
+                    owner_kind="THREAD_PROVISION",
+                    owner_id=binding_id,
+                    binding_id=binding_id,
+                    method="thread/start",
+                    client_key=f"thread/start:{binding_id}",
+                    request={
+                        "cwd": str(case_path),
+                        "ephemeral": False,
+                        "approvalPolicy": "never",
+                    },
+                )
+                with store._lock, DurabilityTransaction(store.connection):
+                    plan = seal_thread_provision(store.connection, effect.effect_id)
+            else:
+                effect = journal.prepare_effect(
+                    owner_kind="THREAD_RESUME",
+                    owner_id=binding_id,
+                    binding_id=binding_id,
+                    method="thread/resume",
+                    client_key="thread/resume:thr-adopt",
+                    request={"threadId": "thr-adopt"},
+                )
+                with store._lock, DurabilityTransaction(store.connection):
+                    plan = seal_thread_resume(
+                        store.connection, effect.effect_id, mode=ResumeMode.ADOPTION
+                    )
+        elif variant.startswith("EPHEMERAL_CANARY"):
+            store = ObserverStore(case_path)
             run_id = store.start_run(
                 codex_binary="codex",
                 codex_version="test",
-                client_name="final-write-canary-test",
+                client_name="matrix-canary",
                 process_id=None,
             )
-            predecessor = journal.prepare_effect(
-                owner_kind="EPHEMERAL_CANARY",
-                owner_id=CANARY_ID,
-                binding_id=None,
-                method="thread/start",
-                client_key=f"canary:thread/start:{CANARY_ID}",
-                request=canonical_canary_thread_start_request(tmp_path, CANARY_ID),
-            )
-            journal._claim_write(
-                predecessor.effect_id,
-                run_id=run_id,
-                client_request_id="req-final-canary-thread",
-                request_row_id="row-final-canary-thread",
-                raw_request_seq=1,
-            )
-            journal.observe_response(
-                predecessor.effect_id,
-                response={
-                    "result": {
-                        "thread": {
-                            "id": CANARY_THREAD_ID,
-                            "ephemeral": True,
-                        }
-                    }
-                },
-                thread_id=CANARY_THREAD_ID,
-            )
+            journal = EffectJournal(store.connection)
+            predecessor_id = None
+            if variant.endswith("TURN_START"):
+                predecessor = journal.prepare_effect(
+                    owner_kind="EPHEMERAL_CANARY",
+                    owner_id=CANARY_ID,
+                    binding_id=None,
+                    method="thread/start",
+                    client_key=f"canary:thread/start:{CANARY_ID}",
+                    request=canonical_canary_thread_start_request(case_path, CANARY_ID),
+                )
+                journal._claim_write(
+                    predecessor.effect_id,
+                    run_id=run_id,
+                    client_request_id="predecessor",
+                    request_row_id="predecessor-row",
+                    raw_request_seq=1,
+                )
+                journal.observe_response(
+                    predecessor.effect_id,
+                    response={"result": {"thread": {"id": CANARY_THREAD_ID, "ephemeral": True}}},
+                    thread_id=CANARY_THREAD_ID,
+                )
+                predecessor_id = predecessor.effect_id
+                method = "turn/start"
+                request = canonical_canary_turn_start_request(CANARY_THREAD_ID)
+                phase = CanaryPhase.TURN_START
+            else:
+                method = "thread/start"
+                request = canonical_canary_thread_start_request(case_path, CANARY_ID)
+                phase = CanaryPhase.THREAD_START
             effect = journal.prepare_effect(
                 owner_kind="EPHEMERAL_CANARY",
                 owner_id=CANARY_ID,
                 binding_id=None,
-                predecessor_effect_id=predecessor.effect_id,
-                method="turn/start",
-                client_key=f"canary:turn/start:{CANARY_ID}",
-                request=canonical_canary_turn_start_request(CANARY_THREAD_ID),
-            )
-        else:
-            owner_id = f"owner-{owner_kind.lower()}"
-            effect = journal.prepare_effect(
-                owner_kind=owner_kind,
-                owner_id=owner_id,
-                binding_id=owner_id,
+                predecessor_effect_id=predecessor_id,
                 method=method,
-                client_key=f"key-{owner_kind.lower()}",
-                request={"threadId": "thr1"},
+                client_key=f"canary:{method}:{CANARY_ID}",
+                request=request,
             )
-        insert_submittable_owner_for_effect(store.connection, effect)
-        client = _GenericFinalInterleavingClient(
-            store.connection, effect, foreign_state
+            with store._lock, DurabilityTransaction(store.connection):
+                plan = seal_ephemeral_canary(
+                    store.connection, effect.effect_id, phase=phase
+                )
+        else:
+            seeded = seed_active_root_portfolio(case_path)
+            store = seeded["supervisor"]
+            binding_id = str(seeded["portfolio_binding_id"])
+            if variant == "MANAGED_TURN":
+                turns = ManagedTurns(seeded["bindings"], client=None)  # type: ignore[arg-type]
+                intent_id = turns.prepare(
+                    binding_id,
+                    intent_kind=ManagedIntentKind.MANUAL_OPERATOR,
+                    input_ref="matrix",
+                )
+                with store._lock, DurabilityTransaction(store.connection):
+                    plan = seal_managed_turn(store.connection, intent_id, "matrix input")
+            else:
+                effect = EffectJournal(store.connection).prepare_effect(
+                    owner_kind="THREAD_MEMORY",
+                    owner_id=binding_id,
+                    binding_id=binding_id,
+                    method="thread/memoryMode/set",
+                    client_key="thread/memoryMode/set:thr_port",
+                    request={"threadId": "thr_port", "mode": "disabled"},
+                )
+                with store._lock, DurabilityTransaction(store.connection):
+                    plan = seal_thread_memory(store.connection, effect.effect_id)
+                # This matrix isolates the supervisor final boundary from the
+                # independently covered semantic-currentness fence.
+                store._semantic_bridge = None
+
+        effect = EffectJournal(store.connection).get(plan.effect_id)
+        client = _GenericFinalInterleavingClient(store.connection, effect, foreign_state)
+        # The matrix owns the exact final-boundary interleaving; preparation
+        # itself remains side-effect free.
+        client.prepare_request = lambda method, params=None: SimpleNamespace(
+            request_id="matrix-1",
+            method=method,
+            params=dict(params or {}),
+            payload={"id": 1, "method": method, "params": dict(params or {})},
+            request_class=SimpleNamespace(value="MUTATING_NO_RETRY"),
         )
+        journal = EffectJournal(store.connection)
         owner = AppServerSessionOwner(client, store)
 
-        with pytest.raises(SessionOwnerError, match="ownership is not exact"):
-            await owner.submit_effect(effect.effect_id)
+        def inject_foreign(_plan) -> None:
+            store.connection.execute(
+                """INSERT INTO app_server_effects(
+                    effect_id,owner_kind,owner_id,binding_id,method,client_key,
+                    request_json,state,prepared_at
+                ) VALUES (?,?,?,?,?,?,?,?,?)""",
+                (
+                    f"eff_matrix_foreign_{foreign_state.lower()}",
+                    plan.owner_kind,
+                    plan.owner_id,
+                    None if plan.binding_id is None else "foreign-binding",
+                    plan.method,
+                    f"foreign-{variant}-{foreign_state}",
+                    "{}",
+                    foreign_state,
+                    "t",
+                ),
+            )
+
+        owner._before_final_authority_proof = inject_foreign  # type: ignore[method-assign]
+        submit = {
+            "MANAGED_TURN": owner.submit_managed_turn,
+            "WAKE_BATCH": owner.submit_wake_batch,
+            "THREAD_PROVISION": owner.submit_thread_provision,
+            "THREAD_MEMORY": owner.submit_thread_memory,
+            "THREAD_RESUME_ADOPTION": owner.submit_thread_resume,
+            "THREAD_RESUME_WAKE_RECOVERY": owner.submit_thread_resume,
+            "EPHEMERAL_CANARY_THREAD_START": owner.submit_ephemeral_canary,
+            "EPHEMERAL_CANARY_TURN_START": owner.submit_ephemeral_canary,
+        }[variant]
+        with pytest.raises(
+            EffectError, match="ambiguous|unexpected predecessor or peer"
+        ):
+            await submit(plan)
 
         assert journal.get(effect.effect_id).state == "PREPARED"
         assert client.discard_count == 1
         assert client.send_count == 0
         assert effect.effect_id not in owner._open_effect_ids
+        assert owner._send_permits == set()
         assert store.connection.execute(
             "SELECT COUNT(*) FROM raw_messages WHERE effect_id = ?", (effect.effect_id,)
         ).fetchone()[0] == 0
         assert store.connection.execute(
             "SELECT COUNT(*) FROM rpc_requests WHERE effect_id = ?", (effect.effect_id,)
         ).fetchone()[0] == 0
-        store.close()
+        assert store.connection.execute(
+            "SELECT COUNT(*) FROM app_server_effects WHERE effect_id LIKE 'eff_matrix_foreign_%'"
+        ).fetchone()[0] == 0
+        if wake_batch_id is not None:
+            assert batches.get(wake_batch_id)["state"] == "PREPARED"
+            assert all(
+                seeded["mailbox"].get(item.message_id).delivery_state.value == "BATCHED"
+                for item in messages
+            )
+            assert store.connection.execute(
+                "SELECT COUNT(*) FROM wake_attempts WHERE wake_batch_id=?",
+                (wake_batch_id,),
+            ).fetchone()[0] == 0
+        if seeded is None:
+            store.close()
+        elif "bridge" in seeded:
+            seeded["bridge"].close()
+            seeded["supervisor"].close()
+            seeded["semantic"].close()
 
     asyncio.run(body())
 

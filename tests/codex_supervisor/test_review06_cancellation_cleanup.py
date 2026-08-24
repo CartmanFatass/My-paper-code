@@ -17,6 +17,7 @@ from tools.codex_supervisor.durability.session_owner import (
 from tools.codex_supervisor.mailbox_models import MailboxMessageKind, MailboxSourceSystem
 from tools.codex_supervisor.wake_batches import WakeBatchStore
 from tools.codex_supervisor.wake_recovery import WakeRecovery
+from tools.codex_supervisor.scheduler_leases import SchedulerLeases
 
 
 def _close_seeded(seeded) -> None:
@@ -177,6 +178,8 @@ class _CancelledResumeClient:
         self.server_requests = asyncio.Queue()
         self.discard_count = 0
         self.send_count = 0
+        self._pending = {}
+        self._committed_claims = {}
 
     def start_reader(self) -> None:
         return None
@@ -218,11 +221,15 @@ def _prepared_resume(tmp_path: Path, key: str, *, message_count: int = 2):
         seeded["mailbox"].mark_eligible(message.message_id)
         messages.append(message)
     batches = WakeBatchStore(seeded["supervisor"], seeded["mailbox"])
+    leases = SchedulerLeases(seeded["supervisor"])
+    lease = leases.acquire(binding_id, "recovery", ttl_seconds=300.0)
     batch = batches.prepare(
         binding_id=binding_id,
         thread_id=binding.thread_id,
         snapshot=seeded["bridge"].snapshot(binding.actor_context_id),
         messages=messages,
+        lease_holder="recovery",
+        lease_generation=int(lease["generation"]),
     )
     client = _CancelledResumeClient()
     recovery = WakeRecovery(
@@ -230,6 +237,8 @@ def _prepared_resume(tmp_path: Path, key: str, *, message_count: int = 2):
         seeded["mailbox"],
         batches,
         client,  # type: ignore[arg-type]
+        leases,
+        "recovery",
         bridge=seeded["bridge"],
     )
     return seeded, binding, messages, batches, batch, client, recovery
@@ -303,13 +312,12 @@ def test_cancelled_resume_prewrite_cleans_owner_then_atomically_requeues_message
         "same_owner_foreign_binding_write_started",
     ],
 )
-def test_cancelled_resume_ambiguous_or_postwrite_state_never_requeues(
+def _legacy_cancelled_resume_matrix_case(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, corruption: str
 ) -> None:
     async def body() -> None:
         assert not hasattr(ObserverStore, "record_effect_write_start")
         assert hasattr(ObserverStore, "_record_authorized_effect_claim")
-        return
         seeded, binding, messages, batches, batch, client, recovery = _prepared_resume(
             tmp_path, f"review06:resume-cancel-{corruption}"
         )
@@ -458,6 +466,211 @@ def test_cancelled_resume_ambiguous_or_postwrite_state_never_requeues(
             assert connection.execute(
                 "SELECT COUNT(*) FROM raw_messages WHERE effect_id = ?", (resume.effect_id,)
             ).fetchone()[0] == 0
+        await owner.close()
+        _close_seeded(seeded)
+
+    asyncio.run(body())
+
+
+@pytest.mark.parametrize(
+    "corruption",
+    [
+        "missing_context",
+        "foreign_resume",
+        "duplicate_resume",
+        "crossed_wake_effect",
+        "duplicate_context",
+        "foreign_message",
+        "containment_failure",
+        "writer_lock",
+        "write_started",
+        "same_owner_foreign_binding_prepared",
+        "same_owner_foreign_binding_write_started",
+    ],
+)
+def test_cancelled_resume_ambiguous_or_postwrite_state_never_requeues(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, corruption: str
+) -> None:
+    async def body() -> None:
+        from contextlib import contextmanager
+
+        from tools.codex_supervisor.durability.authority_kernel import (
+            ResumeMode,
+            seal_thread_resume,
+        )
+        from tools.codex_supervisor.durability.transaction import DurabilityTransaction
+
+        seeded, binding, messages, batches, batch, client, recovery = _prepared_resume(
+            tmp_path, f"review08:resume-cleanup-{corruption}"
+        )
+        connection = seeded["supervisor"].connection
+        journal = EffectJournal(connection)
+        resume = journal.prepare_effect(
+            owner_kind="THREAD_RESUME",
+            owner_id=binding.binding_id,
+            binding_id=binding.binding_id,
+            method="thread/resume",
+            client_key=f"thread/resume:{binding.thread_id}:{batch['wake_batch_id']}",
+            request={"threadId": binding.thread_id},
+        )
+        with seeded["supervisor"]._lock, DurabilityTransaction(connection):
+            plan = seal_thread_resume(
+                connection,
+                resume.effect_id,
+                mode=ResumeMode.WAKE_RECOVERY,
+                wake_batch_id=str(batch["wake_batch_id"]),
+            )
+        owner = AppServerSessionOwner(client, seeded["supervisor"])
+        external_writer = None
+
+        if corruption == "write_started":
+            original_guard = seeded["bridge"].currentness_guard
+
+            @contextmanager
+            def fail_after_claim(*args, **kwargs):
+                with original_guard(*args, **kwargs) as snapshot:
+                    yield snapshot
+                    raise RuntimeError("post-write uncertainty")
+
+            monkeypatch.setattr(seeded["bridge"], "currentness_guard", fail_after_claim)
+            with pytest.raises(RuntimeError, match="post-write uncertainty"):
+                await owner.submit_thread_resume(plan)
+        elif corruption == "writer_lock":
+            external_writer = sqlite3.connect(
+                seeded["supervisor"].path, timeout=0.0, isolation_level=None
+            )
+            external_writer.execute("PRAGMA busy_timeout = 0")
+            external_writer.execute("BEGIN IMMEDIATE")
+            connection.execute("PRAGMA busy_timeout = 0")
+            with pytest.raises(sqlite3.OperationalError, match="locked"):
+                await owner.submit_thread_resume(plan)
+        else:
+
+            def cancel_at_typed_final_boundary(_plan) -> None:
+                if corruption == "missing_context":
+                    connection.execute(
+                        "DELETE FROM managed_context_injections WHERE turn_intent_id=?",
+                        (batch["wake_batch_id"],),
+                    )
+                elif corruption in {"foreign_resume", "duplicate_resume"}:
+                    connection.execute(
+                        """INSERT INTO app_server_effects(
+                            effect_id,owner_kind,owner_id,binding_id,method,client_key,
+                            request_json,state,prepared_at
+                        ) VALUES (?,?,?,?,?,?,?,?,?)""",
+                        (
+                            f"eff_{corruption}",
+                            "THREAD_RESUME",
+                            binding.binding_id,
+                            "foreign-binding" if corruption == "foreign_resume" else binding.binding_id,
+                            "thread/resume",
+                            f"key-{corruption}",
+                            "{}",
+                            "PREPARED",
+                            "t",
+                        ),
+                    )
+                elif corruption == "crossed_wake_effect":
+                    connection.execute(
+                        "UPDATE wake_batches SET effect_id='foreign' WHERE wake_batch_id=?",
+                        (batch["wake_batch_id"],),
+                    )
+                elif corruption == "duplicate_context":
+                    connection.execute(
+                        """INSERT INTO managed_context_injections(
+                            injection_id,turn_intent_id,binding_id,checkpoint_id,state_version,
+                            epoch_id,epoch_revision,canonical_refs_json,open_obligation_ids_json,
+                            mailbox_message_ids_json,input_byte_length,input_bytes,input_sha256,created_at
+                        ) SELECT 'inj_duplicate',turn_intent_id,binding_id,checkpoint_id,
+                                 state_version,epoch_id,epoch_revision,canonical_refs_json,
+                                 open_obligation_ids_json,mailbox_message_ids_json,
+                                 input_byte_length,input_bytes,input_sha256,'z'
+                          FROM managed_context_injections WHERE turn_intent_id=?""",
+                        (batch["wake_batch_id"],),
+                    )
+                elif corruption == "foreign_message":
+                    connection.execute(
+                        "UPDATE mailbox_messages SET target_actor_context_id='foreign' WHERE message_id=?",
+                        (messages[0].message_id,),
+                    )
+                elif corruption.startswith("same_owner_foreign_binding_"):
+                    state = "PREPARED" if corruption.endswith("prepared") else "WRITE_STARTED"
+                    connection.execute(
+                        """INSERT INTO app_server_effects(
+                            effect_id,owner_kind,owner_id,binding_id,method,client_key,
+                            request_json,state,prepared_at
+                        ) VALUES (?,?,?,?,?,?,?,?,?)""",
+                        (
+                            f"eff_{corruption}",
+                            "THREAD_RESUME",
+                            binding.binding_id,
+                            "binding_foreign",
+                            "thread/resume",
+                            f"key-{corruption}",
+                            "{}",
+                            state,
+                            "t",
+                        ),
+                    )
+                raise asyncio.CancelledError(f"resume-{corruption}")
+
+            owner._before_final_authority_proof = cancel_at_typed_final_boundary  # type: ignore[method-assign]
+            with pytest.raises(
+                (asyncio.CancelledError, sqlite3.IntegrityError, EffectError)
+            ):
+                await owner.submit_thread_resume(plan)
+
+            if corruption == "containment_failure":
+                from tools.codex_supervisor.durability import effects
+
+                def fail_containment(local_connection, *args, **kwargs):
+                    local_connection.execute(
+                        """UPDATE wake_batches
+                        SET state='CANCELLED',version=version+1
+                        WHERE wake_batch_id=?""",
+                        (batch["wake_batch_id"],),
+                    )
+                    raise sqlite3.OperationalError("forced containment failure")
+
+                monkeypatch.setattr(
+                    effects, "cancel_exact_prepared_resume_and_wake", fail_containment
+                )
+                with pytest.raises(sqlite3.OperationalError, match="forced containment"):
+                    recovery._contain_cancelled_resume_and_wake(
+                        binding,
+                        str(batch["wake_batch_id"]),
+                        resume.effect_id,
+                        recovery._wake_context(
+                            binding.binding_id, str(batch["wake_batch_id"])
+                        ),
+                    )
+
+        if external_writer is not None:
+            external_writer.rollback()
+            external_writer.close()
+        current = journal.get(resume.effect_id)
+        crossed = corruption == "write_started"
+        assert current.state == ("SUBMISSION_UNCERTAIN" if crossed else "PREPARED")
+        assert batches.get(str(batch["wake_batch_id"]))["state"] == "PREPARED"
+        assert all(
+            seeded["mailbox"].get(message.message_id).delivery_state.value == "BATCHED"
+            for message in messages
+        )
+        assert client.send_count == 0
+        assert client._pending == {}
+        assert client._committed_claims == {}
+        assert owner._send_permits == set()
+        assert connection.execute(
+            "SELECT COUNT(*) FROM raw_messages WHERE effect_id=?", (current.effect_id,)
+        ).fetchone()[0] == (1 if crossed else 0)
+        assert connection.execute(
+            "SELECT COUNT(*) FROM rpc_requests WHERE effect_id=?", (current.effect_id,)
+        ).fetchone()[0] == (1 if crossed else 0)
+        assert connection.execute(
+            "SELECT COUNT(*) FROM wake_attempts WHERE wake_batch_id=?",
+            (batch["wake_batch_id"],),
+        ).fetchone()[0] == 0
+        assert not connection.in_transaction
         await owner.close()
         _close_seeded(seeded)
 

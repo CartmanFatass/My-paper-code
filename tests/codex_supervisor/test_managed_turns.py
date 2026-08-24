@@ -231,7 +231,7 @@ def test_managed_turn_guard_spans_write_started_and_ends_before_send(
         )
         original_send = client.send_prepared
 
-        async def checked_send(prepared):
+        async def checked_send(prepared, capability=None):
             writer = sqlite3.connect(
                 seeded["bridge"].semantic_state_path,
                 timeout=0.0,
@@ -243,7 +243,7 @@ def test_managed_turn_guard_spans_write_started_and_ends_before_send(
                 observed["released_at_send"] = True
             finally:
                 writer.close()
-            await original_send(prepared)
+            await original_send(prepared, capability)
 
         client.send_prepared = checked_send  # type: ignore[method-assign]
         turns = ManagedTurns(store, client)

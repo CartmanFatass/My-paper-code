@@ -280,20 +280,10 @@ def test_turn_start_revalidates_the_historical_predecessor_request(
         valid_predecessor = canonical_canary_thread_start_request(
             tmp_path, CANARY_ID
         )
-        predecessor = _seed_predecessor(store, run_id, valid_predecessor)
         malformed_predecessor = _malformed_thread_request(
             valid_predecessor, case, tmp_path
         )
-        store.connection.execute(
-            "UPDATE app_server_effects SET request_json = ? WHERE effect_id = ?",
-            (
-                json.dumps(
-                    malformed_predecessor, sort_keys=True, separators=(",", ":")
-                ),
-                predecessor.effect_id,
-            ),
-        )
-        store.connection.commit()
+        predecessor = _seed_predecessor(store, run_id, malformed_predecessor)
         valid_turn = canonical_canary_turn_start_request(THREAD_ID)
         effect = EffectJournal(store.connection).prepare_effect(
             owner_kind="EPHEMERAL_CANARY",

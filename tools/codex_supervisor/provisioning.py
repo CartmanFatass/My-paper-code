@@ -11,6 +11,7 @@ from .binding_store import BindingError, BindingStore
 from .client import AppServerClient, AppServerRpcError, RetryRequired, UnexpectedServerRequest
 from .durability.effects import EffectJournal
 from .durability.authority_kernel import (
+    THREAD_MEMORY_ALLOWED_BINDING_STATES,
     ResumeMode,
     seal_thread_memory,
     seal_thread_provision,
@@ -143,6 +144,8 @@ class ManagedProvisioner:
             binding = self.bindings.get(binding_id)
             if binding is None or not binding.thread_id:
                 raise ProvisioningError("binding has no thread")
+            if binding.binding_state.value not in THREAD_MEMORY_ALLOWED_BINDING_STATES:
+                raise ProvisioningError("binding state does not allow memory-policy mutation")
             try:
                 owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
                 effect = self.journal.prepare_effect(
@@ -153,7 +156,6 @@ class ManagedProvisioner:
                     client_key=f"{MEMORY_MODE_METHOD}:{binding.thread_id}",
                     request={"threadId": binding.thread_id, "mode": "disabled"},
                 )
-                expected_state = binding.binding_state
                 try:
                     with self.bindings.store._lock, DurabilityTransaction(
                         self.bindings.store.connection

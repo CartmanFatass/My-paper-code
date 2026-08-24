@@ -6,7 +6,10 @@ from pathlib import Path
 import pytest
 
 from tests.codex_supervisor.test_request_retry import _client
-from tools.codex_supervisor.client import MUTATING_OWNER_MESSAGE
+from tools.codex_supervisor.client import (
+    MUTATING_OWNER_MESSAGE,
+    CommittedClaimCapability,
+)
 from tools.codex_supervisor.durability.effects import EffectJournal
 from tools.codex_supervisor.durability.models import EffectState
 from tools.codex_supervisor.durability.transaction import DurabilityTransaction
@@ -60,6 +63,56 @@ def test_request_rejects_mutating_methods(tmp_path: Path) -> None:
     _run(body())
 
 
+@pytest.mark.parametrize("method", ["turn/start", "future/mutating/method"])
+def test_mutating_send_boundary_requires_client_owned_claim(
+    tmp_path: Path, method: str
+) -> None:
+    async def body() -> None:
+        transport, client, _delays, sent = _client(tmp_path, "handshake_ok")
+        await transport.start()
+        await client.initialize()
+        sent.clear()
+        prepared = client.prepare_request(method, {"threadId": "thr1"})
+        with pytest.raises(RuntimeError, match=MUTATING_OWNER_MESSAGE):
+            await client.send_prepared(prepared)
+        forged = CommittedClaimCapability(
+            token="claim_forged",
+            effect_id="eff_forged",
+            request_id=prepared.request_id,
+            method=prepared.method,
+        )
+        with pytest.raises(RuntimeError, match="invalid or already consumed"):
+            await client.send_prepared(prepared, forged)
+        assert sent == []
+        assert prepared.request_id in client._pending
+        client.discard_prepared(prepared)
+        assert prepared.request_id not in client._pending
+        assert client._committed_claims == {}
+        await transport.stop()
+
+    _run(body())
+
+
+def test_committed_claim_is_identity_bound_and_single_use(tmp_path: Path) -> None:
+    async def body() -> None:
+        transport, client, _delays, sent = _client(tmp_path, "mutation_overload")
+        await transport.start()
+        await client.initialize()
+        sent.clear()
+        prepared = client.prepare_request("future/mutating/method", {"value": 1})
+        capability = client._issue_committed_claim(prepared, effect_id="eff_claimed")
+        await client.send_prepared(prepared, capability)
+        assert [item.get("method") for item in sent] == ["future/mutating/method"]
+        with pytest.raises(RuntimeError, match="invalid or already consumed"):
+            await client.send_prepared(prepared, capability)
+        assert [item.get("method") for item in sent] == ["future/mutating/method"]
+        assert client._committed_claims == {}
+        client.discard_prepared(prepared)
+        await transport.stop()
+
+    _run(body())
+
+
 def test_record_effect_write_start_is_one_transaction(tmp_path: Path) -> None:
     store = ObserverStore(tmp_path / "runtime")
     run_id = store.start_run(
@@ -77,6 +130,7 @@ def test_record_effect_write_start_is_one_transaction(tmp_path: Path) -> None:
         client_key="msg1",
         request={"threadId": "thr1"},
     )
+    journal.seal_effect(effect.effect_id)
     with store._lock, DurabilityTransaction(store.connection):
         result = store._record_authorized_effect_claim(
             effect_id=effect.effect_id,
@@ -124,6 +178,7 @@ def test_write_start_rolls_back_if_claim_fails(tmp_path: Path) -> None:
         client_key="msg1",
         request={"threadId": "thr1"},
     )
+    journal.seal_effect(effect.effect_id)
     with store._lock, DurabilityTransaction(store.connection):
         store._record_authorized_effect_claim(
             effect_id=effect.effect_id,

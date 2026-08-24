@@ -13,20 +13,28 @@ from types import SimpleNamespace
 import pytest
 
 from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
+from tests.codex_supervisor.test_review06_cancellation_cleanup import _prepared_resume
 from tools.codex_supervisor.db import initialize_database
+from tools.codex_supervisor.db import connect
 from tools.codex_supervisor.durability.authority_kernel import (
     EphemeralCanaryPlan,
+    AuthorityLeaseError,
     ManagedTurnPlan,
     ThreadMemoryPlan,
     ThreadProvisionPlan,
     ThreadResumePlan,
     WakeBatchPlan,
+    ResumeMode,
+    seal_thread_resume,
     seal_wake_batch,
 )
 from tools.codex_supervisor.durability.effects import EffectError, EffectJournal
 from tools.codex_supervisor.durability.session_owner import AppServerSessionOwner
 from tools.codex_supervisor.durability.transaction import DurabilityTransaction
 from tools.codex_supervisor.mailbox_models import MailboxMessageKind
+from tools.codex_supervisor.scheduler_leases import SchedulerLeases
+from tools.codex_supervisor.provisioning import ManagedProvisioner, ProvisioningError
+from tools.codex_supervisor.store import ObserverStore
 from tools.codex_supervisor.wake_batches import WakeBatchStore
 from tools.codex_supervisor.wake_scheduler import WakeScheduler
 
@@ -70,6 +78,9 @@ def _prepared_wake(tmp_path: Path, key: str = "v11"):
         payload_ref="payload",
     )
     batches = WakeBatchStore(seeded["supervisor"], seeded["mailbox"])
+    lease = SchedulerLeases(seeded["supervisor"]).acquire(
+        binding_id, "kernel-test", ttl_seconds=300.0
+    )
     batch = batches.prepare(
         binding_id=binding_id,
         thread_id="thr_port",
@@ -78,7 +89,7 @@ def _prepared_wake(tmp_path: Path, key: str = "v11"):
         ),
         messages=[message],
         lease_holder="kernel-test",
-        lease_generation=1,
+        lease_generation=int(lease["generation"]),
     )
     with seeded["supervisor"]._lock, DurabilityTransaction(
         seeded["supervisor"].connection
@@ -87,7 +98,7 @@ def _prepared_wake(tmp_path: Path, key: str = "v11"):
             seeded["supervisor"].connection,
             str(batch["wake_batch_id"]),
             "kernel-test",
-            1,
+            int(lease["generation"]),
         )
     return seeded, batches, message, batch, plan
 
@@ -308,3 +319,231 @@ def test_static_closed_union_and_no_generic_submission_surface() -> None:
         "record_effect_write_start",
     ):
         assert forbidden not in production
+
+
+def test_already_open_v10_writer_is_fenced_after_peer_v11_migration(
+    tmp_path: Path,
+) -> None:
+    path = tmp_path / "mixed.sqlite3"
+    stale = connect(path)
+    initialize_database(stale)
+    run_id = "run-stale-v10"
+    stale.execute(
+        """INSERT INTO observer_runs(
+            run_id,codex_binary,codex_version,client_name,started_at,runtime_home
+        ) VALUES (?,?,?,?,?,?)""",
+        (run_id, "old", "v10", "old-writer", "t", str(tmp_path)),
+    )
+    stale.execute("DELETE FROM schema_meta WHERE version=11")
+    stale.execute("INSERT OR IGNORE INTO schema_meta(version,applied_at) VALUES (10,'old')")
+    stale.commit()
+
+    peer = connect(path)
+    initialize_database(peer)
+    peer.close()
+
+    effect = EffectJournal(stale).prepare_effect(
+        owner_kind="THREAD_MEMORY",
+        owner_id="legacy-binding",
+        binding_id="legacy-binding",
+        method="thread/memoryMode/set",
+        client_key="legacy-memory",
+        request={"threadId": "thr-legacy", "mode": "disabled"},
+    )
+    send_count = 0
+    stale.execute("BEGIN IMMEDIATE")
+    try:
+        stale.execute(
+            """INSERT INTO raw_messages(
+                run_id,direction,transport_seq,rpc_shape,request_id,method,
+                canonical_json,observed_at,effect_id
+            ) VALUES (?, 'stdin', 1, 'REQUEST', '1', ?, '{}', 't', ?)""",
+            (run_id, effect.method, effect.effect_id),
+        )
+        with pytest.raises(sqlite3.IntegrityError, match="current authority kernel claim"):
+            stale.execute(
+                """UPDATE app_server_effects
+                SET state='WRITE_STARTED',version=version+1,run_id=?,
+                    client_request_id='1',request_row_id='old-rpc',raw_request_seq=1,
+                    write_started_at='t'
+                WHERE effect_id=? AND state='PREPARED'""",
+                (run_id, effect.effect_id),
+            )
+        stale.rollback()
+    finally:
+        if stale.in_transaction:
+            stale.rollback()
+    current = EffectJournal(stale).get(effect.effect_id)
+    assert current.state == "PREPARED"
+    assert current.plan_version == 0
+    assert current.kernel_claim_marker is None
+    assert stale.execute(
+        "SELECT COUNT(*) FROM raw_messages WHERE effect_id=?", (effect.effect_id,)
+    ).fetchone()[0] == 0
+    assert stale.execute(
+        "SELECT COUNT(*) FROM rpc_requests WHERE effect_id=?", (effect.effect_id,)
+    ).fetchone()[0] == 0
+    assert send_count == 0
+    stale.close()
+
+
+@pytest.mark.parametrize("binding_state", ["SUSPENDED", "REVOKED"])
+def test_thread_memory_public_entry_rejects_closed_states_without_effect(
+    tmp_path: Path, binding_state: str
+) -> None:
+    async def body() -> None:
+        seeded = seed_active_root_portfolio(tmp_path)
+        binding_id = str(seeded["portfolio_binding_id"])
+        if binding_state == "SUSPENDED":
+            seeded["bindings"].suspend(binding_id)
+        else:
+            seeded["bindings"].revoke(binding_id)
+        client = _NoSendClient()
+        provisioner = ManagedProvisioner(
+            seeded["bindings"], client  # type: ignore[arg-type]
+        )
+        with pytest.raises(ProvisioningError, match="does not allow"):
+            await provisioner.apply_memory_policy(
+                binding_id,
+                schema_blob="thread/memoryMode/set",
+                operator="test",
+            )
+        assert client.send_count == 0
+        assert seeded["supervisor"].connection.execute(
+            "SELECT COUNT(*) FROM app_server_effects WHERE owner_kind='THREAD_MEMORY'"
+        ).fetchone()[0] == 0
+        assert seeded["bindings"].get(binding_id).binding_state.value == binding_state
+        _close(seeded)
+
+    asyncio.run(body())
+
+
+@pytest.mark.parametrize("binding_state", ["SUSPENDED", "REVOKED"])
+def test_v11_migration_cancels_legacy_memory_for_closed_binding_state(
+    tmp_path: Path, binding_state: str
+) -> None:
+    seeded = seed_active_root_portfolio(tmp_path)
+    binding_id = str(seeded["portfolio_binding_id"])
+    if binding_state == "SUSPENDED":
+        seeded["bindings"].suspend(binding_id)
+    else:
+        seeded["bindings"].revoke(binding_id)
+    connection = seeded["supervisor"].connection
+    effect = EffectJournal(connection).prepare_effect(
+        owner_kind="THREAD_MEMORY",
+        owner_id=binding_id,
+        binding_id=binding_id,
+        method="thread/memoryMode/set",
+        client_key=f"legacy-memory:{binding_state}",
+        request={"threadId": "thr_port", "mode": "disabled"},
+    )
+    connection.execute("DELETE FROM schema_meta WHERE version=11")
+    connection.execute("INSERT OR IGNORE INTO schema_meta(version,applied_at) VALUES (10,'old')")
+    connection.commit()
+    initialize_database(connection)
+    current = EffectJournal(connection).get(effect.effect_id)
+    assert current.state == "CANCELLED_BEFORE_WRITE"
+    assert current.plan_version == 0
+    assert seeded["bindings"].get(binding_id).binding_state.value == binding_state
+    _close(seeded)
+
+
+@pytest.mark.parametrize("lease_change", ["expiry", "transfer"])
+@pytest.mark.parametrize("submission_kind", ["wake", "wake_recovery"])
+def test_final_lock_wait_lease_loss_rolls_back_without_requeue(
+    tmp_path: Path, lease_change: str, submission_kind: str
+) -> None:
+    async def body() -> None:
+        if submission_kind == "wake":
+            seeded, batches, message, batch, plan = _prepared_wake(
+                tmp_path, f"lease-{lease_change}-wake"
+            )
+            messages = [message]
+            client = _NoSendClient()
+            owner = AppServerSessionOwner(
+                client, seeded["supervisor"]  # type: ignore[arg-type]
+            )
+            submit = lambda: owner.submit_wake_batch(plan)
+            effect_id = plan.effect_id
+            binding_id = str(plan.binding_id)
+        else:
+            (
+                seeded,
+                binding,
+                messages,
+                batches,
+                batch,
+                client,
+                _recovery,
+            ) = _prepared_resume(tmp_path, f"lease-{lease_change}-recovery")
+            journal = EffectJournal(seeded["supervisor"].connection)
+            effect = journal.prepare_effect(
+                owner_kind="THREAD_RESUME",
+                owner_id=binding.binding_id,
+                binding_id=binding.binding_id,
+                method="thread/resume",
+                client_key=f"thread/resume:{binding.thread_id}:{batch['wake_batch_id']}",
+                request={"threadId": binding.thread_id},
+            )
+            with seeded["supervisor"]._lock, DurabilityTransaction(
+                seeded["supervisor"].connection
+            ):
+                plan = seal_thread_resume(
+                    seeded["supervisor"].connection,
+                    effect.effect_id,
+                    mode=ResumeMode.WAKE_RECOVERY,
+                    wake_batch_id=str(batch["wake_batch_id"]),
+                )
+            owner = AppServerSessionOwner(
+                client, seeded["supervisor"]  # type: ignore[arg-type]
+            )
+            submit = lambda: owner.submit_thread_resume(plan)
+            effect_id = effect.effect_id
+            binding_id = binding.binding_id
+
+        await owner._lock.acquire()
+        task = asyncio.create_task(submit())
+        await asyncio.sleep(0)
+        await asyncio.sleep(0)
+        connection = seeded["supervisor"].connection
+        if lease_change == "expiry":
+            connection.execute(
+                "UPDATE scheduler_leases SET expires_at='2000-01-01T00:00:00+00:00' WHERE lease_key=?",
+                (f"wake:{binding_id}",),
+            )
+        else:
+            connection.execute(
+                """UPDATE scheduler_leases
+                SET holder_instance_id='new-holder',generation=generation+1,
+                    expires_at='2999-01-01T00:00:00+00:00'
+                WHERE lease_key=?""",
+                (f"wake:{binding_id}",),
+            )
+        connection.commit()
+        owner._lock.release()
+        with pytest.raises(AuthorityLeaseError, match="expired or transferred"):
+            await task
+
+        assert client.send_count == 0
+        assert client.discard_count == 1
+        assert owner._send_permits == set()
+        assert effect_id not in owner._open_effect_ids
+        assert EffectJournal(connection).get(effect_id).state == "PREPARED"
+        assert batches.get(str(batch["wake_batch_id"]))["state"] == "PREPARED"
+        assert all(
+            seeded["mailbox"].get(item.message_id).delivery_state.value == "BATCHED"
+            for item in messages
+        )
+        assert connection.execute(
+            "SELECT COUNT(*) FROM wake_attempts WHERE wake_batch_id=?",
+            (batch["wake_batch_id"],),
+        ).fetchone()[0] == 0
+        assert connection.execute(
+            "SELECT COUNT(*) FROM raw_messages WHERE effect_id=?", (effect_id,)
+        ).fetchone()[0] == 0
+        assert connection.execute(
+            "SELECT COUNT(*) FROM rpc_requests WHERE effect_id=?", (effect_id,)
+        ).fetchone()[0] == 0
+        _close(seeded)
+
+    asyncio.run(body())

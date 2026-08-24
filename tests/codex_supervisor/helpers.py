@@ -175,6 +175,15 @@ def insert_submittable_owner_for_effect(connection, effect) -> None:
     connection.commit()
 
 
+def claim_effect_for_tests(journal, effect_id: str, **kwargs):
+    """Fixture-only current-kernel claim with a complete durable seal."""
+
+    with journal._tx():
+        journal.seal_effect(effect_id)
+        journal._arm_kernel_claim(effect_id)
+        return journal._claim_write(effect_id, **kwargs)
+
+
 def claim_wake_write_start_for_tests(
     batches,
     wake_batch_id: str,

@@ -23,6 +23,7 @@ from .semantic_scanner import SemanticScanner
 from .transport import TransportClosed
 from .wake_batches import WakeBatchStore
 from .wake_recovery import WakeRecovery
+from .durability.authority_kernel import AuthorityLeaseError
 
 
 class WakeSchedulerError(RuntimeError):
@@ -404,6 +405,10 @@ class WakeScheduler:
             if effect_id and binding_id:
                 self._contain_raw_submit_failure(wake_batch_id, effect_id)
             raise
+        except AuthorityLeaseError as exc:
+            raise WakeSchedulerError(
+                "wake final authority lease proof failed before write"
+            ) from exc
         except RetryRequired as exc:
             if effect_id and self._contain_raw_submit_failure(wake_batch_id, effect_id) == "CANCELLED_BEFORE_WRITE":
                 raise WakeSchedulerError("wake submit cancelled before write") from exc
