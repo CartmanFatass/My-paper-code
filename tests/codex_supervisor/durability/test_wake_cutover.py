@@ -70,7 +70,7 @@ def test_write_started_wake_is_never_automatically_requeued(tmp_path: Path) -> N
         client_key="hmasd-wake:wake1",
         request={},
     )
-    journal.claim_write(
+    journal._claim_write(
         effect.effect_id,
         run_id="run1",
         client_request_id="1",
@@ -79,7 +79,7 @@ def test_write_started_wake_is_never_automatically_requeued(tmp_path: Path) -> N
     )
     assert journal.has_possible_submission(effect.effect_id)
     with pytest.raises(Exception):
-        journal.claim_write(
+        journal._claim_write(
             effect.effect_id,
             run_id="run1",
             client_request_id="2",

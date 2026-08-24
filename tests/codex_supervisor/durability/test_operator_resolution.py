@@ -70,7 +70,7 @@ def test_write_started_effect_cannot_use_no_submission_resolution(tmp_path: Path
         client_key="hmasd-wake:wake1",
         request={"threadId": "thr1"},
     )
-    journal.claim_write(
+    journal._claim_write(
         effect.effect_id,
         run_id="run1",
         client_request_id="1",

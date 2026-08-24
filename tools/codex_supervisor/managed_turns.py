@@ -11,6 +11,7 @@ from typing import Any, Iterator
 from .binding_store import BindingStore
 from .client import AppServerClient, AppServerRpcError, RetryRequired, UnexpectedServerRequest
 from .durability.effects import EffectJournal
+from .durability.authority_kernel import seal_managed_turn
 from .durability.models import AggregateKind, TransitionCause, TransitionRequest
 from .durability.session_owner import AppServerSessionOwner
 from .durability.transaction import DurabilityTransaction
@@ -224,16 +225,23 @@ class ManagedTurns:
         effect_id = str(row["effect_id"] or "")
         if not effect_id:
             raise ManagedTurnError("managed turn has no linked effect")
-        params = {
+        existing = self.journal.get(effect_id)
+        if existing.state != "PREPARED":
+            raise ManagedTurnError("linked effect is not PREPARED; reconcile, do not resend")
+        partial_request = {
+            "threadId": row["app_server_thread_id"],
+            "clientUserMessageId": row["client_user_message_id"],
+        }
+        sealed_request = {
             "threadId": row["app_server_thread_id"],
             "input": [{"type": "text", "text": input_text}],
             "approvalPolicy": "never",
             "clientUserMessageId": row["client_user_message_id"],
         }
-        existing = self.journal.get(effect_id)
-        if existing.state != "PREPARED":
-            raise ManagedTurnError("linked effect is not PREPARED; reconcile, do not resend")
-        if dict(existing.request) != {"threadId": row["app_server_thread_id"], "clientUserMessageId": row["client_user_message_id"]}:
+        if (
+            dict(existing.request) != partial_request
+            and dict(existing.request) != sealed_request
+        ):
             raise ManagedTurnError("linked effect request tuple mismatch")
         self._assert_submit_fence(turn_intent_id, effect_id)
         owner = self._owner()
@@ -241,43 +249,15 @@ class ManagedTurns:
         if binding is None:
             self._cancel_prepared(turn_intent_id, effect_id, "binding_missing")
             raise ManagedTurnError("binding is not eligible for this managed turn")
-        intent_kind = ManagedIntentKind(str(row["intent_kind"]))
-        allowed_binding_state = (
-            BindingState.VERIFICATION_REQUIRED.value
-            if intent_kind in {ManagedIntentKind.BOOTSTRAP, ManagedIntentKind.IDENTITY_VERIFICATION}
-            else BindingState.ACTIVE.value
-        )
-
-        def _binding_write_fence(connection) -> None:
-            current_binding = connection.execute(
-                "SELECT binding_state FROM managed_actor_bindings WHERE binding_id = ?",
-                (binding.binding_id,),
-            ).fetchone()
-            if current_binding is None or str(current_binding[0]) != allowed_binding_state:
-                raise ManagedTurnError("binding is not eligible at managed-turn write start")
-
         try:
             self._assert_submit_fence(turn_intent_id, effect_id)
-            result = await owner.submit_effect(
-                effect_id,
-                request_override=params,
-                extra_transitions=[
-                    TransitionRequest(
-                        aggregate_kind=AggregateKind.MANAGED_TURN,
-                        aggregate_id=turn_intent_id,
-                        expected_state=SubmissionState.PREPARED.value,
-                        expected_version=int(row["version"] or 0),
-                        target_state=SubmissionState.SUBMITTING.value,
-                        cause_kind=TransitionCause.APP_SERVER_EFFECT,
-                        cause_ref=effect_id,
-                    )
-                ],
-                extra_hooks=[_binding_write_fence],
-                pre_write_guard=lambda: self._semantic_write_guard(
-                    binding=binding,
-                    row=row,
-                ),
-            )
+            with self.bindings.store._lock, DurabilityTransaction(
+                self.bindings.store.connection
+            ):
+                plan = seal_managed_turn(
+                    self.bindings.store.connection, turn_intent_id, input_text
+                )
+            result = await owner.submit_managed_turn(plan)
         except (SemanticBridgeError, ManagedTurnError) as exc:
             if self.journal.get(effect_id).state == "PREPARED":
                 self._cancel_prepared(turn_intent_id, effect_id, "semantic_currentness_mismatch")

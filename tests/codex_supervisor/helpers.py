@@ -10,8 +10,135 @@ from tools.codex_supervisor.protocol import extract_protocol_ids
 from tools.codex_supervisor.store import ObserverStore
 
 
+def seal_typed_plan_for_test(store: ObserverStore, effect_id: str):
+    """Test-only adapter for legacy fixtures after generic submit removal."""
+
+    from tools.codex_supervisor.durability.authority_kernel import (
+        CanaryPhase,
+        ResumeMode,
+        seal_ephemeral_canary,
+        seal_managed_turn,
+        seal_thread_memory,
+        seal_thread_provision,
+        seal_thread_resume,
+        seal_wake_batch,
+    )
+    from tools.codex_supervisor.durability.effects import EffectError, EffectJournal
+    from tools.codex_supervisor.durability.transaction import DurabilityTransaction
+
+    with store._lock, DurabilityTransaction(store.connection):
+        effect = EffectJournal(store.connection).get(effect_id)
+        if effect.owner_kind == "MANAGED_TURN":
+            request_input = effect.request.get("input")
+            text = "test"
+            if (
+                isinstance(request_input, list)
+                and len(request_input) == 1
+                and isinstance(request_input[0], dict)
+                and isinstance(request_input[0].get("text"), str)
+            ):
+                text = request_input[0]["text"]
+            return seal_managed_turn(store.connection, effect.owner_id, text)
+        if effect.owner_kind == "WAKE_BATCH":
+            wake = store.connection.execute(
+                "SELECT lease_holder,lease_generation FROM wake_batches WHERE wake_batch_id=?",
+                (effect.owner_id,),
+            ).fetchone()
+            if wake is None:
+                raise EffectError("wake fixture is missing")
+            return seal_wake_batch(
+                store.connection,
+                effect.owner_id,
+                str(wake["lease_holder"] or ""),
+                int(wake["lease_generation"] or 0),
+            )
+        if effect.owner_kind == "THREAD_PROVISION":
+            return seal_thread_provision(store.connection, effect_id)
+        if effect.owner_kind == "THREAD_MEMORY":
+            return seal_thread_memory(store.connection, effect_id)
+        if effect.owner_kind == "THREAD_RESUME":
+            parts = effect.client_key.split(":", 2)
+            wake_id = parts[2] if len(parts) == 3 else None
+            return seal_thread_resume(
+                store.connection,
+                effect_id,
+                mode=ResumeMode.WAKE_RECOVERY if wake_id else ResumeMode.ADOPTION,
+                wake_batch_id=wake_id,
+            )
+        if effect.owner_kind == "EPHEMERAL_CANARY":
+            return seal_ephemeral_canary(
+                store.connection,
+                effect_id,
+                phase=(
+                    CanaryPhase.THREAD_START
+                    if effect.method == "thread/start"
+                    else CanaryPhase.TURN_START
+                ),
+            )
+        raise AssertionError(f"unsupported fixture owner kind: {effect.owner_kind}")
+
+
+async def submit_typed_for_test(owner, effect_id: str):
+    from tools.codex_supervisor.durability.effects import EffectError
+    from tools.codex_supervisor.durability.session_owner import SessionOwnerError
+
+    try:
+        plan = seal_typed_plan_for_test(owner.store, effect_id)
+        if plan.owner_kind == "MANAGED_TURN":
+            return await owner.submit_managed_turn(plan)
+        if plan.owner_kind == "WAKE_BATCH":
+            return await owner.submit_wake_batch(plan)
+        if plan.owner_kind == "THREAD_PROVISION":
+            return await owner.submit_thread_provision(plan)
+        if plan.owner_kind == "THREAD_RESUME":
+            return await owner.submit_thread_resume(plan)
+        if plan.owner_kind == "THREAD_MEMORY":
+            return await owner.submit_thread_memory(plan)
+        if plan.owner_kind == "EPHEMERAL_CANARY":
+            return await owner.submit_ephemeral_canary(plan)
+        raise AssertionError(plan.owner_kind)
+    except EffectError as exc:
+        message = (
+            "canary predecessor ownership is not exact"
+            if "canary" in str(exc).lower()
+            else "typed effect ownership is not exact"
+        )
+        raise SessionOwnerError(f"{message}: {exc}") from exc
+
+
 def insert_submittable_owner_for_effect(connection, effect) -> None:
     """Test helper: give a prepared effect a matching owner aggregate row."""
+    if effect.binding_id is not None:
+        existing_binding = connection.execute(
+            "SELECT 1 FROM managed_actor_bindings WHERE binding_id=?",
+            (effect.binding_id,),
+        ).fetchone()
+        if existing_binding is None:
+            binding_state = (
+                "PREPARED" if effect.owner_kind == "THREAD_PROVISION" else "ACTIVE"
+            )
+            thread_id = None
+            if effect.owner_kind != "THREAD_PROVISION":
+                candidate = effect.request.get("threadId")
+                thread_id = candidate if isinstance(candidate, str) else "thr1"
+            connection.execute(
+                """INSERT INTO managed_actor_bindings(
+                    binding_id,actor_context_id,actor_kind,semantic_scope_key,thread_id,
+                    thread_origin,history_trust,binding_state,memory_policy_state,
+                    repo_root,thread_cwd,created_by_operator,created_at,
+                    prepared_state_version,prepared_context_trusted
+                ) VALUES (?,?,?,?,?,'NEW','FRESH',?,'UNVERIFIED',?,?,'op','t',1,1)""",
+                (
+                    effect.binding_id,
+                    f"act-{effect.binding_id}",
+                    "OPERATIONAL_ROOT",
+                    "scope",
+                    thread_id,
+                    binding_state,
+                    str(effect.request.get("cwd") or "."),
+                    str(effect.request.get("cwd") or "."),
+                ),
+            )
     if effect.owner_kind == "MANAGED_TURN":
         connection.execute(
             """INSERT INTO managed_turn_intents (
@@ -98,7 +225,7 @@ def claim_wake_write_start_for_tests(
             effect_id = None if current["effect_id"] is None else str(current["effect_id"])
             if not effect_id:
                 raise WakeBatchError("fixture claim requires a linked PREPARED effect")
-            EffectJournal(batches.store.connection).claim_write(
+            EffectJournal(batches.store.connection)._claim_write(
                 effect_id,
                 run_id="fixture",
                 client_request_id="fixture",

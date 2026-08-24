@@ -54,7 +54,6 @@ def test_first_preflight_operational_error_fails_closed_before_any_effect(
         with pytest.raises(WakeSchedulerError, match="failed closed.*do not retry"):
             await scheduler.submit_batch(
                 str(batch["wake_batch_id"]),
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
         assert owner_calls == 0
@@ -108,11 +107,10 @@ def test_cancelled_error_before_write_discards_locally_then_requeues_exact_wake(
         def cancel_record(**_kwargs):
             raise asyncio.CancelledError()
 
-        monkeypatch.setattr(seeded["supervisor"], "record_effect_write_start", cancel_record)
+        monkeypatch.setattr(seeded["supervisor"], "_record_authorized_effect_claim", cancel_record)
         with pytest.raises(asyncio.CancelledError):
             await scheduler.submit_batch(
                 str(batch["wake_batch_id"]),
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
         owner = AppServerSessionOwner._by_client[id(client)]
@@ -142,22 +140,19 @@ def test_cancelled_error_after_write_started_preserves_uncertainty_without_reque
         )
         client = _CancelBeforeWriteClient()
         scheduler.client = client  # type: ignore[assignment]
-        original = seeded["supervisor"].record_effect_write_start
+        owner = AppServerSessionOwner.for_client(client, seeded["supervisor"])
 
-        def commit_then_cancel(**kwargs):
-            original(**kwargs)
+        async def commit_then_cancel(_permit):
             raise asyncio.CancelledError()
 
         monkeypatch.setattr(
-            seeded["supervisor"], "record_effect_write_start", commit_then_cancel
+            owner, "_consume_send_permit", commit_then_cancel
         )
         with pytest.raises(asyncio.CancelledError):
             await scheduler.submit_batch(
                 str(batch["wake_batch_id"]),
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
-        owner = AppServerSessionOwner._by_client[id(client)]
         assert client.discard_count == 0
         assert client.send_count == 0
         assert str(batch["effect_id"]) in owner._open_effect_ids
@@ -165,7 +160,7 @@ def test_cancelled_error_after_write_started_preserves_uncertainty_without_reque
         assert mailbox.get(message.message_id).delivery_state.value == "BATCHED"
         assert EffectJournal(seeded["supervisor"].connection).get(
             str(batch["effect_id"])
-        ).state == "WRITE_STARTED"
+        ).state == "SUBMISSION_UNCERTAIN"
         assert seeded["supervisor"].connection.execute(
             "SELECT COUNT(*) FROM raw_messages WHERE effect_id = ?", (batch["effect_id"],)
         ).fetchone()[0] == 1
@@ -216,7 +211,7 @@ def test_exact_wake_ownership_ambiguity_never_sends_or_requeues(
                 (batch["wake_batch_id"], batch["binding_id"]),
             )
         elif corruption == "crossed":
-            EffectJournal(connection).claim_write(
+            EffectJournal(connection)._claim_write(
                 str(batch["effect_id"]),
                 run_id="crossed",
                 client_request_id="1",
@@ -260,7 +255,6 @@ def test_exact_wake_ownership_ambiguity_never_sends_or_requeues(
         with pytest.raises(WakeSchedulerError, match="failed closed.*do not retry"):
             await scheduler.submit_batch(
                 str(batch["wake_batch_id"]),
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
         assert owner_calls == 0

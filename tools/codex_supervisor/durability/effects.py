@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import sqlite3
 import uuid
 from contextlib import nullcontext
@@ -36,6 +37,10 @@ class EffectRecord:
     method: str
     client_key: str
     request: Mapping[str, object]
+    request_sha256: str | None
+    request_byte_length: int | None
+    sealed_at: str | None
+    plan_version: int
     state: str
     version: int
     run_id: str | None = None
@@ -82,6 +87,16 @@ def _record(row: Mapping[str, Any] | sqlite3.Row) -> EffectRecord:
         method=str(data["method"]),
         client_key=str(data["client_key"]),
         request=dict(parsed) if isinstance(parsed, Mapping) else {},
+        request_sha256=(
+            None if data.get("request_sha256") is None else str(data["request_sha256"])
+        ),
+        request_byte_length=(
+            None
+            if data.get("request_byte_length") is None
+            else int(data["request_byte_length"])
+        ),
+        sealed_at=None if data.get("sealed_at") is None else str(data["sealed_at"]),
+        plan_version=int(data.get("plan_version") or 0),
         state=str(data["state"]),
         version=int(data["version"] or 0),
         run_id=None if data["run_id"] is None else str(data["run_id"]),
@@ -178,7 +193,51 @@ class EffectJournal:
             )
         return self.get(effect_id)
 
-    def claim_write(
+    def seal_effect(
+        self,
+        effect_id: str,
+        *,
+        request: Mapping[str, object] | None = None,
+        plan_version: int = 1,
+    ) -> EffectRecord:
+        """Install or verify the immutable durable request authority seal.
+
+        Sealing is idempotent only for byte-identical owner/request data.  The
+        v11 database trigger makes every authority-bearing column immutable
+        after this method succeeds.
+        """
+
+        if plan_version != 1:
+            raise EffectError("unsupported authority plan version")
+        current = self.get(effect_id)
+        if current.state != EffectState.PREPARED.value:
+            raise EffectError("only PREPARED effects may be sealed")
+        canonical = _canonical_request(request if request is not None else current.request)
+        encoded = canonical.encode("utf-8")
+        digest = hashlib.sha256(encoded).hexdigest()
+        if current.plan_version > 0:
+            if (
+                current.plan_version != plan_version
+                or current.request_sha256 != digest
+                or current.request_byte_length != len(encoded)
+                or _canonical_request(current.request) != canonical
+                or not current.sealed_at
+            ):
+                raise EffectError("sealed effect does not match the requested authority plan")
+            return current
+        with self._tx():
+            updated = self.connection.execute(
+                """UPDATE app_server_effects
+                SET request_json=?, request_sha256=?, request_byte_length=?,
+                    sealed_at=?, plan_version=?
+                WHERE effect_id=? AND state='PREPARED' AND plan_version=0""",
+                (canonical, digest, len(encoded), _now(), plan_version, effect_id),
+            )
+            if updated.rowcount != 1:
+                raise EffectError("authority seal lost its PREPARED ownership")
+        return self.get(effect_id)
+
+    def _claim_write(
         self,
         effect_id: str,
         *,
@@ -714,22 +773,15 @@ def require_exact_prepared_wake_ownership(
         or str(row["effect_client_key"]) != expected_client_key
         or request.get("clientUserMessageId") != expected_client_key
         or str(request.get("threadId") or "") != str(row["thread_id"])
-        or not request_keys.issubset(
-            {"clientUserMessageId", "threadId", "input", "approvalPolicy"}
-        )
-        or (
-            "approvalPolicy" in request and request.get("approvalPolicy") != "never"
-        )
-        or (
-            "input" in request
-            and (
-                not isinstance(request.get("input"), list)
-                or len(request["input"]) != 1
-                or not isinstance(request["input"][0], Mapping)
-                or request["input"][0].get("type") != "text"
-                or not isinstance(request["input"][0].get("text"), str)
-            )
-        )
+        or request_keys
+        != {"clientUserMessageId", "threadId", "input", "approvalPolicy"}
+        or request.get("approvalPolicy") != "never"
+        or type(request.get("input")) is not list
+        or len(request["input"]) != 1
+        or type(request["input"][0]) is not dict
+        or set(request["input"][0]) != {"type", "text"}
+        or request["input"][0].get("type") != "text"
+        or type(request["input"][0].get("text")) is not str
     ):
         raise EffectError("prepared wake effect/request ownership is not exact")
 
@@ -766,30 +818,37 @@ def require_exact_prepared_wake_ownership(
         ).fetchall()
         if len(owners) != 1 or str(owners[0][0]) != wake_batch_id:
             raise EffectError("prepared wake message membership is not sole")
-    if "input" in request:
-        injections = connection.execute(
-            """SELECT binding_id, mailbox_message_ids_json, input_byte_length
-            FROM managed_context_injections WHERE turn_intent_id = ?
-            ORDER BY injection_id""",
-            (wake_batch_id,),
-        ).fetchall()
-        if (
-            len(injections) != 1
-            or str(injections[0]["binding_id"]) != str(row["binding_id"])
-        ):
-            raise EffectError("prepared wake durable context relation is not exact")
-        try:
-            injected_messages = json.loads(
-                str(injections[0]["mailbox_message_ids_json"])
-            )
-        except (TypeError, ValueError, json.JSONDecodeError) as exc:
-            raise EffectError("prepared wake durable message relation is not exact") from exc
-        membership_ids = [str(item["message_id"]) for item in memberships]
-        if injected_messages != membership_ids:
-            raise EffectError("prepared wake durable message relation is not exact")
-        input_text = str(request["input"][0]["text"])
-        if len(input_text.encode("utf-8")) != int(injections[0]["input_byte_length"]):
-            raise EffectError("prepared wake input relation is not exact")
+    injections = connection.execute(
+        """SELECT injection_id, binding_id, mailbox_message_ids_json,
+                  input_byte_length, input_bytes, input_sha256
+        FROM managed_context_injections WHERE turn_intent_id = ?
+        ORDER BY injection_id""",
+        (wake_batch_id,),
+    ).fetchall()
+    if (
+        len(injections) != 1
+        or str(injections[0]["injection_id"])
+        != str(row.get("context_injection_id") or "")
+        or str(injections[0]["binding_id"]) != str(row["binding_id"])
+    ):
+        raise EffectError("prepared wake durable context relation is not exact")
+    try:
+        injected_messages = json.loads(
+            str(injections[0]["mailbox_message_ids_json"])
+        )
+    except (TypeError, ValueError, json.JSONDecodeError) as exc:
+        raise EffectError("prepared wake durable message relation is not exact") from exc
+    membership_ids = [str(item["message_id"]) for item in memberships]
+    if injected_messages != membership_ids:
+        raise EffectError("prepared wake durable message relation is not exact")
+    input_bytes = request["input"][0]["text"].encode("utf-8")
+    digest = hashlib.sha256(input_bytes).hexdigest()
+    if (
+        bytes(injections[0]["input_bytes"] or b"") != input_bytes
+        or str(injections[0]["input_sha256"] or "") != digest
+        or len(input_bytes) != int(injections[0]["input_byte_length"])
+    ):
+        raise EffectError("prepared wake input bytes/digest relation is not exact")
     return row
 
 
@@ -1030,8 +1089,11 @@ def cancel_exact_prepared_resume_and_wake(
         or str(wake["effect_owner_kind"]) != "WAKE_BATCH"
         or str(wake["effect_method"]) != "turn/start"
         or str(wake["effect_client_key"]) != wake_client_id
-        or wake_request
-        != {"clientUserMessageId": wake_client_id, "threadId": thread_id}
+            or set(wake_request)
+            != {"clientUserMessageId", "threadId", "input", "approvalPolicy"}
+            or wake_request.get("clientUserMessageId") != wake_client_id
+            or wake_request.get("threadId") != thread_id
+            or wake_request.get("approvalPolicy") != "never"
     ):
         raise EffectError("cancelled wake batch ownership is not exact")
     open_batches = connection.execute(

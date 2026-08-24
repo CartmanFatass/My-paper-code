@@ -8,7 +8,7 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 10
+SCHEMA_VERSION = 11
 
 SCHEMA_STATEMENTS = (
     """
@@ -238,6 +238,8 @@ SCHEMA_STATEMENTS = (
         open_obligation_ids_json TEXT NOT NULL,
         mailbox_message_ids_json TEXT NOT NULL,
         input_byte_length INTEGER NOT NULL,
+        input_bytes BLOB,
+        input_sha256 TEXT,
         created_at TEXT NOT NULL
     )
     """,
@@ -328,6 +330,7 @@ SCHEMA_STATEMENTS = (
         incident_json TEXT,
         lease_generation INTEGER,
         lease_holder TEXT,
+        context_injection_id TEXT,
         version INTEGER NOT NULL DEFAULT 0,
         effect_id TEXT
     )
@@ -394,6 +397,10 @@ SCHEMA_STATEMENTS = (
         method TEXT NOT NULL,
         client_key TEXT NOT NULL,
         request_json TEXT NOT NULL,
+        request_sha256 TEXT,
+        request_byte_length INTEGER,
+        sealed_at TEXT,
+        plan_version INTEGER NOT NULL DEFAULT 0,
         state TEXT NOT NULL,
         version INTEGER NOT NULL DEFAULT 0,
         run_id TEXT,
@@ -559,6 +566,9 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _add_column_if_missing(connection, "mailbox_messages", "source_resolved_after_submission", "INTEGER NOT NULL DEFAULT 0")
         _add_column_if_missing(connection, "wake_batches", "lease_generation", "INTEGER")
         _add_column_if_missing(connection, "wake_batches", "lease_holder", "TEXT")
+        _add_column_if_missing(connection, "wake_batches", "context_injection_id", "TEXT")
+        _add_column_if_missing(connection, "managed_context_injections", "input_bytes", "BLOB")
+        _add_column_if_missing(connection, "managed_context_injections", "input_sha256", "TEXT")
         _add_column_if_missing(connection, "thread_snapshots", "preview_present", "INTEGER")
         _add_column_if_missing(connection, "thread_snapshots", "preview_byte_length", "INTEGER")
         _add_column_if_missing(connection, "managed_actor_bindings", "version", "INTEGER NOT NULL DEFAULT 0")
@@ -574,6 +584,10 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _add_column_if_missing(connection, "mutation_intents", "superseded_by_effect_id", "TEXT")
         _add_column_if_missing(connection, "app_server_effects", "transport_seq", "INTEGER")
         _add_column_if_missing(connection, "app_server_effects", "predecessor_effect_id", "TEXT")
+        _add_column_if_missing(connection, "app_server_effects", "request_sha256", "TEXT")
+        _add_column_if_missing(connection, "app_server_effects", "request_byte_length", "INTEGER")
+        _add_column_if_missing(connection, "app_server_effects", "sealed_at", "TEXT")
+        _add_column_if_missing(connection, "app_server_effects", "plan_version", "INTEGER NOT NULL DEFAULT 0")
         connection.execute("DROP INDEX IF EXISTS mutation_intents_open_unique")
         connection.execute(
             """CREATE UNIQUE INDEX IF NOT EXISTS mutation_intents_open_unique
@@ -581,9 +595,12 @@ def initialize_database(connection: sqlite3.Connection) -> None:
             WHERE state IN ('SUBMITTING', 'SUBMISSION_UNCERTAIN', 'SUBMITTED_UNRECONCILED', 'INCIDENT')"""
         )
         _install_transition_guards(connection)
+        _install_authority_seal_guards(connection)
         _migrate_legacy_mutation_intents(connection)
         if current < 9:
             _migrate_prepared_context_provenance(connection)
+        if current < 11:
+            _migrate_authority_seals_v11(connection)
         if current < SCHEMA_VERSION:
             connection.execute(
                 "INSERT INTO schema_meta(version, applied_at) VALUES (?, ?)",
@@ -605,6 +622,190 @@ def _install_transition_guards(connection: sqlite3.Connection) -> None:
         )
         connection.execute(drop_sql)
         connection.execute(create_sql)
+
+
+def _install_authority_seal_guards(connection: sqlite3.Connection) -> None:
+    """Make a v11 authority seal immutable once installed."""
+
+    connection.execute("DROP TRIGGER IF EXISTS app_server_effect_seal_immutable")
+    connection.execute(
+        """CREATE TRIGGER app_server_effect_seal_immutable
+        BEFORE UPDATE OF owner_kind, owner_id, binding_id, predecessor_effect_id,
+                         method, client_key, request_json, request_sha256,
+                         request_byte_length, sealed_at, plan_version
+        ON app_server_effects
+        WHEN OLD.plan_version > 0 AND (
+             NEW.owner_kind IS NOT OLD.owner_kind
+          OR NEW.owner_id IS NOT OLD.owner_id
+          OR NEW.binding_id IS NOT OLD.binding_id
+          OR NEW.predecessor_effect_id IS NOT OLD.predecessor_effect_id
+          OR NEW.method IS NOT OLD.method
+          OR NEW.client_key IS NOT OLD.client_key
+          OR NEW.request_json IS NOT OLD.request_json
+          OR NEW.request_sha256 IS NOT OLD.request_sha256
+          OR NEW.request_byte_length IS NOT OLD.request_byte_length
+          OR NEW.sealed_at IS NOT OLD.sealed_at
+          OR NEW.plan_version IS NOT OLD.plan_version
+        )
+        BEGIN
+          SELECT RAISE(ABORT, 'sealed app-server authority plan is immutable');
+        END"""
+    )
+    connection.execute("DROP TRIGGER IF EXISTS managed_context_input_immutable")
+    connection.execute(
+        """CREATE TRIGGER managed_context_input_immutable
+        BEFORE UPDATE OF input_bytes, input_sha256 ON managed_context_injections
+        WHEN OLD.input_bytes IS NOT NULL AND (
+             NEW.input_bytes IS NOT OLD.input_bytes
+          OR NEW.input_sha256 IS NOT OLD.input_sha256
+        )
+        BEGIN
+          SELECT RAISE(ABORT, 'sealed managed input is immutable');
+        END"""
+    )
+    connection.execute("DROP TRIGGER IF EXISTS wake_context_relation_immutable")
+    connection.execute(
+        """CREATE TRIGGER wake_context_relation_immutable
+        BEFORE UPDATE OF context_injection_id ON wake_batches
+        WHEN OLD.context_injection_id IS NOT NULL
+         AND NEW.context_injection_id IS NOT OLD.context_injection_id
+        BEGIN
+          SELECT RAISE(ABORT, 'sealed wake context relation is immutable');
+        END"""
+    )
+
+
+def _migrate_authority_seals_v11(connection: sqlite3.Connection) -> None:
+    """Fail closed for legacy PREPARED rows; never infer missing exact input.
+
+    Binding-owned non-input requests can be reconstructed from their own
+    durable owner rows.  Managed-turn and wake input cannot be reconstructed
+    from the legacy byte length, so their PREPARED effects are cancelled.
+    Historical/crossed rows remain untouched and reconciliation-only.
+    """
+
+    import hashlib
+
+    from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+    from .durability.transitions import TransitionKernel
+
+    kernel = TransitionKernel(connection)
+    now = datetime.now(timezone.utc).isoformat()
+    rows = connection.execute(
+        "SELECT * FROM app_server_effects WHERE state = 'PREPARED' ORDER BY effect_id"
+    ).fetchall()
+    for row in rows:
+        effect_id = str(row["effect_id"])
+        owner_kind = str(row["owner_kind"])
+        request_json = str(row["request_json"] or "")
+        can_reseal = False
+        try:
+            parsed = json.loads(request_json)
+            canonical = json.dumps(parsed, sort_keys=True, separators=(",", ":"))
+            if isinstance(parsed, dict) and canonical == request_json:
+                binding_id = None if row["binding_id"] is None else str(row["binding_id"])
+                binding = (
+                    None
+                    if binding_id is None
+                    else connection.execute(
+                        "SELECT * FROM managed_actor_bindings WHERE binding_id=?",
+                        (binding_id,),
+                    ).fetchone()
+                )
+                exact_owner = binding_id is not None and str(row["owner_id"]) == binding_id
+                if owner_kind == "THREAD_PROVISION":
+                    can_reseal = bool(
+                        exact_owner
+                        and binding is not None
+                        and str(binding["binding_state"]) == "PREPARED"
+                        and set(parsed) == {"cwd", "ephemeral", "approvalPolicy"}
+                        and type(parsed.get("cwd")) is str
+                        and parsed.get("cwd") == binding["thread_cwd"]
+                        and parsed.get("ephemeral") is False
+                        and parsed.get("approvalPolicy") == "never"
+                    )
+                elif owner_kind == "THREAD_RESUME":
+                    can_reseal = bool(
+                        exact_owner
+                        and binding is not None
+                        and str(binding["binding_state"]) == "PREPARED"
+                        and set(parsed) == {"threadId"}
+                        and type(parsed.get("threadId")) is str
+                        and str(row["client_key"])
+                        == f"thread/resume:{parsed.get('threadId')}"
+                    )
+                elif owner_kind == "THREAD_MEMORY":
+                    can_reseal = bool(
+                        exact_owner
+                        and binding is not None
+                        and set(parsed) == {"threadId", "mode"}
+                        and type(parsed.get("threadId")) is str
+                        and parsed.get("threadId") == binding["thread_id"]
+                        and parsed.get("mode") == "disabled"
+                    )
+        except Exception:
+            can_reseal = False
+            canonical = ""
+        if can_reseal:
+            encoded = canonical.encode("utf-8")
+            connection.execute(
+                """UPDATE app_server_effects
+                SET request_sha256=?, request_byte_length=?, sealed_at=?, plan_version=1
+                WHERE effect_id=? AND state='PREPARED' AND plan_version=0""",
+                (hashlib.sha256(encoded).hexdigest(), len(encoded), now, effect_id),
+            )
+            continue
+        kernel.apply(
+            TransitionRequest(
+                aggregate_kind=AggregateKind.APP_SERVER_EFFECT,
+                aggregate_id=effect_id,
+                expected_state="PREPARED",
+                expected_version=int(row["version"] or 0),
+                target_state="CANCELLED_BEFORE_WRITE",
+                cause_kind=TransitionCause.MIGRATION,
+                cause_ref="v11_missing_exact_authority_input",
+                field_updates={"resolved_at": now},
+            )
+        )
+        if owner_kind == "MANAGED_TURN":
+            owner = connection.execute(
+                "SELECT submission_state, version FROM managed_turn_intents WHERE turn_intent_id=?",
+                (str(row["owner_id"]),),
+            ).fetchone()
+            if owner is not None and str(owner["submission_state"]) == "PREPARED":
+                kernel.apply(
+                    TransitionRequest(
+                        aggregate_kind=AggregateKind.MANAGED_TURN,
+                        aggregate_id=str(row["owner_id"]),
+                        expected_state="PREPARED",
+                        expected_version=int(owner["version"] or 0),
+                        target_state="CANCELLED",
+                        cause_kind=TransitionCause.MIGRATION,
+                        cause_ref="v11_missing_exact_authority_input",
+                    )
+                )
+        elif owner_kind == "WAKE_BATCH":
+            owner = connection.execute(
+                "SELECT state, version FROM wake_batches WHERE wake_batch_id=?",
+                (str(row["owner_id"]),),
+            ).fetchone()
+            if owner is not None and str(owner["state"]) == "PREPARED":
+                kernel.apply(
+                    TransitionRequest(
+                        aggregate_kind=AggregateKind.WAKE_BATCH,
+                        aggregate_id=str(row["owner_id"]),
+                        expected_state="PREPARED",
+                        expected_version=int(owner["version"] or 0),
+                        target_state="INCIDENT",
+                        cause_kind=TransitionCause.MIGRATION,
+                        cause_ref="v11_missing_exact_authority_input",
+                        field_updates={
+                            "incident_json": json.dumps(
+                                {"reason": "v11_missing_exact_authority_input"}
+                            )
+                        },
+                    )
+                )
 
 
 def _migrate_legacy_mutation_intents(connection: sqlite3.Connection) -> None:

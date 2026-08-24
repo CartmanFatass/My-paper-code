@@ -110,6 +110,7 @@ class WakeRecovery:
     async def resume_once(
         self, binding_id: str, *, wake_batch_id: str | None = None
     ) -> ThreadWakeReadiness:
+        from .durability.authority_kernel import ResumeMode, seal_thread_resume
         from .durability.effects import EffectJournal
         from .durability.reconciliation import EffectReconciler
         from .durability.session_owner import AppServerSessionOwner
@@ -189,44 +190,19 @@ class WakeRecovery:
                 return ThreadWakeReadiness.UNKNOWN
         owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
-            def _binding_hook(connection) -> None:
-                self.bindings.require_exact_binding_in_transaction(
-                    binding_id,
-                    expected_state=BindingState.ACTIVE,
-                    actor_context_id=binding.actor_context_id,
-                    actor_kind=binding.actor_kind.value,
-                    semantic_scope_key=binding.semantic_scope_key,
-                    thread_id=binding.thread_id,
-                    direction_id=binding.direction_id,
+            with self.bindings.store._lock, DurabilityTransaction(
+                self.bindings.store.connection
+            ):
+                plan = seal_thread_resume(
+                    self.bindings.store.connection,
+                    existing.effect_id,
+                    mode=ResumeMode.WAKE_RECOVERY,
+                    wake_batch_id=wake_batch_id,
                 )
-                batch = connection.execute(
-                    "SELECT state FROM wake_batches WHERE wake_batch_id = ? AND binding_id = ?",
-                    (wake_batch_id, binding_id),
-                ).fetchone()
-                if batch is None or str(batch["state"]) != WakeBatchState.PREPARED.value:
-                    raise WakeIncidentError("wake batch is not PREPARED at resume write start")
-                rows = connection.execute(
-                    """SELECT checkpoint_id, state_version, epoch_id, epoch_revision
-                    FROM managed_context_injections
-                    WHERE turn_intent_id = ? AND binding_id = ?
-                    ORDER BY created_at, injection_id""",
-                    (wake_batch_id, binding_id),
-                ).fetchall()
-                if len(rows) != 1 or tuple(rows[0]) != tuple(context_row):
-                    raise WakeIncidentError(
-                        "wake context binding changed before resume write start"
-                    )
-
-            result = await owner.submit_effect(
-                existing.effect_id,
-                extra_hooks=[_binding_hook],
-                pre_write_guard=lambda: self._resume_semantic_guard(
-                    binding, context_row
-                ),
-            )
+            result = await owner.submit_thread_resume(plan)
             kind = owner.classify_submission(result)
         except asyncio.CancelledError:
-            # submit_effect first discards its local prepared request and open
+            # The typed owner first discards its local prepared request and open
             # effect marker when cancellation happened before WRITE_STARTED.
             # Only after that local cleanup may the two ledgers be contained.
             try:

@@ -244,11 +244,3 @@ class SessionGuard:
             raise
         except asyncio.CancelledError as exc:
             raise TransportClosed("guarded request cancelled") from exc
-
-    async def submit_effect(self, effect_id: str, extra_transitions: list[Any] | None = None):
-        try:
-            return await self.owner.submit_effect(effect_id, extra_transitions=extra_transitions)
-        except UnexpectedServerRequest as exc:
-            if self.on_incident is not None:
-                self.on_incident(exc.payload)
-            raise

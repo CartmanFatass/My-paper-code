@@ -7,7 +7,7 @@ import threading
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Callable, Mapping
+from typing import Any, Mapping
 
 from .db import connect, initialize_database
 from .models import EndKind, NormalizedEvent, ProtocolIds, RpcShape
@@ -149,7 +149,7 @@ class ObserverStore:
             )
             return int(cursor.lastrowid)
 
-    def record_effect_write_start(
+    def _record_authorized_effect_claim(
         self,
         *,
         effect_id: str,
@@ -158,14 +158,16 @@ class ObserverStore:
         payload: Mapping[str, Any],
         params: Mapping[str, Any],
         request_class: str,
-        extra_transitions: list[Any] | None = None,
-        extra_hooks: list[Any] | None = None,
-        request_override: Mapping[str, Any] | None = None,
-        final_owner_guard: Callable[[object], None] | None = None,
     ) -> dict[str, Any]:
-        from .durability.effects import EffectJournal, _canonical_request
-        from .durability.transaction import DurabilityError, DurabilityTransaction
-        from .durability.transitions import TransitionKernel
+        """Append raw/RPC/WRITE_STARTED after the kernel's final proof.
+
+        This method deliberately has no callback, transition, override, or
+        guard surface.  Its caller must own the ambient BEGIN IMMEDIATE and may
+        invoke it only after all typed preclaim operations and final reproof.
+        """
+
+        from .durability.effects import EffectJournal
+        from .durability.transaction import DurabilityError
         from .protocol import extract_protocol_ids
 
         ids = extract_protocol_ids(payload)
@@ -174,45 +176,16 @@ class ObserverStore:
         encoded = canonical_json(dict(payload))
         params_json = canonical_json(dict(params))
         now = _now()
-        with self._lock:
-            if self.connection.in_transaction:
-                raise DurabilityError("write-start requires transaction ownership")
-            with DurabilityTransaction(self.connection):
-                # An override is the request that will actually cross the
-                # transport boundary.  Install it transactionally before the
-                # final ownership/contract proof so that proof cannot validate
-                # a different, originally prepared request.  Any failed proof
-                # rolls this update back with the whole write-start attempt.
-                if request_override is not None:
-                    updated = self.connection.execute(
-                        """UPDATE app_server_effects SET request_json = ?
-                        WHERE effect_id = ? AND state = 'PREPARED'""",
-                        (_canonical_request(request_override), effect_id),
-                    )
-                    if updated.rowcount != 1:
-                        raise DurabilityError("request override requires a PREPARED effect")
-                # This is the final supervisor-side submission boundary.  It
-                # must run after BEGIN IMMEDIATE and before *any* effect,
-                # aggregate, request, or raw-transport write so an ownership
-                # change between the caller's preflight and this transaction
-                # cannot cross WRITE_STARTED.
-                if final_owner_guard is not None:
-                    final_owner_guard(self.connection)
-                next_seq = int(
-                    self.connection.execute(
-                        """SELECT COALESCE(MAX(transport_seq), 0) + 1
-                        FROM raw_messages WHERE run_id = ? AND direction = 'stdin'""",
-                        (run_id,),
-                    ).fetchone()[0]
-                )
-                if extra_hooks:
-                    for hook in extra_hooks:
-                        hook(self.connection)
-                if extra_transitions:
-                    kernel = TransitionKernel(self.connection)
-                    for request in extra_transitions:
-                        kernel.apply(request)
-                cursor = self.connection.execute(
+        if not self.connection.in_transaction:
+            raise DurabilityError("authorized effect claim requires an ambient transaction")
+        next_seq = int(
+            self.connection.execute(
+                """SELECT COALESCE(MAX(transport_seq), 0) + 1
+                FROM raw_messages WHERE run_id = ? AND direction = 'stdin'""",
+                (run_id,),
+            ).fetchone()[0]
+        )
+        cursor = self.connection.execute(
                     """INSERT INTO raw_messages (
                         run_id, direction, transport_seq, rpc_shape, request_id, method,
                         thread_id, turn_id, item_id, canonical_json, observed_at, effect_id
@@ -231,17 +204,17 @@ class ObserverStore:
                         effect_id,
                     ),
                 )
-                raw_seq = int(cursor.lastrowid)
-                journal = EffectJournal(self.connection)
-                journal.claim_write(
-                    effect_id,
-                    run_id=run_id,
-                    client_request_id=client_request_id,
-                    request_row_id=request_row_id,
-                    raw_request_seq=raw_seq,
-                    transport_seq=next_seq,
-                )
-                self.connection.execute(
+        raw_seq = int(cursor.lastrowid)
+        journal = EffectJournal(self.connection)
+        journal._claim_write(
+            effect_id,
+            run_id=run_id,
+            client_request_id=client_request_id,
+            request_row_id=request_row_id,
+            raw_request_seq=raw_seq,
+            transport_seq=next_seq,
+        )
+        self.connection.execute(
                     """INSERT INTO rpc_requests (
                         request_row_id, run_id, client_request_id, method, request_class,
                         params_json, attempt_count, sent_at, completed_at, outcome,
@@ -257,7 +230,7 @@ class ObserverStore:
                         now,
                         effect_id,
                     ),
-                )
+        )
         return {
             "raw_request_seq": raw_seq,
             "raw_message_seq": raw_seq,

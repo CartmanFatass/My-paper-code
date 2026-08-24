@@ -19,7 +19,7 @@ def test_write_started_is_never_automatically_resent(tmp_path: Path) -> None:
         client_key="k1",
         request={},
     )
-    journal.claim_write(
+    journal._claim_write(
         effect.effect_id,
         run_id="run1",
         client_request_id="1",
@@ -27,7 +27,7 @@ def test_write_started_is_never_automatically_resent(tmp_path: Path) -> None:
         raw_request_seq=1,
     )
     with pytest.raises(EffectError):
-        journal.claim_write(
+        journal._claim_write(
             effect.effect_id,
             run_id="run1",
             client_request_id="2",

@@ -383,7 +383,7 @@ def test_uncertain_resume_becomes_applied_after_loaded_observation(tmp_path: Pat
             client_key="thread/resume:thr_root",
             request={"threadId": "thr_root"},
         )
-        journal.claim_write(
+        journal._claim_write(
             effect.effect_id,
             run_id="run1",
             client_request_id="1",

@@ -52,7 +52,7 @@ def plant_verification_receipt(store: BindingStore, binding_id: str, snapshot, t
     effect_id = str(row.get("effect_id") or "")
     if effect_id:
         journal = EffectJournal(store.store.connection)
-        journal.claim_write(
+        journal._claim_write(
             effect_id,
             run_id="fixture",
             client_request_id="fixture",

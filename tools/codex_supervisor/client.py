@@ -38,7 +38,7 @@ COMPATIBLE_REQUEST_METHODS = frozenset(
         "thread/loaded/list",
     }
 )
-MUTATING_OWNER_MESSAGE = "mutating requests require AppServerSessionOwner.submit_effect"
+MUTATING_OWNER_MESSAGE = "mutating requests require a typed AppServerSessionOwner submission plan"
 
 
 @dataclass(frozen=True)

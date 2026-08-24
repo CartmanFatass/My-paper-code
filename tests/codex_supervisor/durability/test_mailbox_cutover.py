@@ -1,4 +1,6 @@
 from pathlib import Path
+import hashlib
+import json
 
 import pytest
 
@@ -86,7 +88,12 @@ def test_prepared_batch_cancel_is_atomic(tmp_path: Path) -> None:
         binding_id="bind1",
         method="turn/start",
         client_key="hmasd-wake:wake1",
-        request={"threadId": "thr1", "clientUserMessageId": "hmasd-wake:wake1"},
+            request={
+                "threadId": "thr1",
+                "input": [{"type": "text", "text": "wake"}],
+                "approvalPolicy": "never",
+                "clientUserMessageId": "hmasd-wake:wake1",
+            },
     )
     store.connection.execute(
         """INSERT INTO wake_batches(
@@ -102,6 +109,24 @@ def test_prepared_batch_cancel_is_atomic(tmp_path: Path) -> None:
         "INSERT INTO wake_batch_messages(wake_batch_id,message_id,ordinal) VALUES ('wake1', ?, 1)",
         (second.message_id,),
     )
+    input_bytes = b"wake"
+    store.connection.execute(
+        """INSERT INTO managed_context_injections(
+            injection_id,turn_intent_id,binding_id,canonical_refs_json,
+            open_obligation_ids_json,mailbox_message_ids_json,input_byte_length,
+            input_bytes,input_sha256,created_at
+        ) VALUES ('inj-wake1','wake1','bind1','[]','[]',?,?,?,?, 't')""",
+        (
+            json.dumps([first.message_id, second.message_id]),
+            len(input_bytes),
+            input_bytes,
+            hashlib.sha256(input_bytes).hexdigest(),
+        ),
+    )
+    store.connection.execute(
+        "UPDATE wake_batches SET context_injection_id='inj-wake1' WHERE wake_batch_id='wake1'"
+    )
+    EffectJournal(store.connection).seal_effect(effect.effect_id)
     store.connection.commit()
     assert mailbox.cancel_prepared_batch_source_resolved("wake1", {first.message_id}) is True
     assert mailbox.get(first.message_id).delivery_state is DeliveryState.CANCELLED_SOURCE_RESOLVED

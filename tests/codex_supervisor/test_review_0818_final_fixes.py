@@ -704,7 +704,6 @@ def test_semantic_actor_released_after_batch_prepare_prevents_wake_submit(tmp_pa
         with pytest.raises(WakeSchedulerError, match="not ACTIVE"):
             await scheduler.submit_batch(
                 str(batch["wake_batch_id"]),
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
         assert seeded["bindings"].get(seeded["portfolio_binding_id"]).binding_state.value == "ACTIVE"

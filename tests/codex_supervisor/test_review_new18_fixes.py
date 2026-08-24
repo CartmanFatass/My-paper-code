@@ -205,7 +205,7 @@ def test_wake_submit_rejects_persisted_submitting(tmp_path: Path) -> None:
 
     async def body() -> None:
         with pytest.raises(WakeSchedulerError, match="reconcile"):
-            await scheduler.submit_batch(str(batch["wake_batch_id"]), "no", lease_generation=1)
+            await scheduler.submit_batch(str(batch["wake_batch_id"]), lease_generation=1)
 
     asyncio.run(body())
     _close(seeded)
@@ -442,7 +442,7 @@ def _active_batch(tmp_path: Path, turn_id: str = "turn_active") -> dict[str, obj
     effect_id = str(batch.get("effect_id") or "")
     if effect_id:
         journal = EffectJournal(seeded["supervisor"].connection)
-        journal.claim_write(
+        journal._claim_write(
             effect_id,
             run_id="fixture",
             client_request_id="fixture",
@@ -572,7 +572,7 @@ def test_automatic_submit_requires_lease_generation(tmp_path: Path) -> None:
 
     async def body() -> None:
         with pytest.raises(WakeSchedulerError, match="lease generation"):
-            await scheduler.submit_batch(str(batch["wake_batch_id"]), "no")
+            await scheduler.submit_batch(str(batch["wake_batch_id"]))
 
     asyncio.run(body())
     _close(seeded)
@@ -634,7 +634,6 @@ def test_binding_revoked_after_batch_prepare_prevents_submission(tmp_path: Path)
         with pytest.raises(WakeSchedulerError):
             await scheduler.submit_batch(
                 str(batch["wake_batch_id"]),
-                "no",
                 lease_generation=int(lease["generation"]),
             )
 

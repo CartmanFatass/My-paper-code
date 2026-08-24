@@ -61,7 +61,7 @@ class MutationIntentStore:
         request: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         raise MutationIntentError(
-            "new mutation_intents writes are disabled; use AppServerSessionOwner.submit_effect"
+            "new mutation_intents writes are disabled; use a typed AppServerSessionOwner submission"
         )
 
     def set_state(

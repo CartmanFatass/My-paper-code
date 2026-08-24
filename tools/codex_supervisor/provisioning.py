@@ -10,6 +10,13 @@ from typing import Any, Iterator
 from .binding_store import BindingError, BindingStore
 from .client import AppServerClient, AppServerRpcError, RetryRequired, UnexpectedServerRequest
 from .durability.effects import EffectJournal
+from .durability.authority_kernel import (
+    ResumeMode,
+    seal_thread_memory,
+    seal_thread_provision,
+    seal_thread_resume,
+)
+from .durability.transaction import DurabilityTransaction
 from .durability.session_owner import AppServerSessionOwner
 from .managed_models import BindingState, HistoryTrust, ThreadOrigin
 from .semantic_bridge import ManagedActorSnapshot, SemanticBridgeError
@@ -148,11 +155,13 @@ class ManagedProvisioner:
                 )
                 expected_state = binding.binding_state
                 try:
-                    result = await owner.submit_effect(
-                        effect.effect_id,
-                        extra_hooks=[self._binding_prewrite_hook(binding, expected_state)],
-                        pre_write_guard=lambda: self._semantic_prewrite_guard(binding),
-                    )
+                    with self.bindings.store._lock, DurabilityTransaction(
+                        self.bindings.store.connection
+                    ):
+                        plan = seal_thread_memory(
+                            self.bindings.store.connection, effect.effect_id
+                        )
+                    result = await owner.submit_thread_memory(plan)
                 except Exception:
                     self._contain_prewrite_failure(
                         binding_id, effect.effect_id, "memory_policy_prewrite_guard_failed"
@@ -228,13 +237,13 @@ class ManagedProvisioner:
         self._assert_provision_fence(binding, effect_id=effect.effect_id)
         owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
-            submitted = await owner.submit_effect(
-                effect.effect_id,
-                extra_hooks=[
-                    self._binding_prewrite_hook(binding, BindingState.PREPARED)
-                ],
-                pre_write_guard=lambda: self._semantic_prewrite_guard(binding),
-            )
+            with self.bindings.store._lock, DurabilityTransaction(
+                self.bindings.store.connection
+            ):
+                plan = seal_thread_provision(
+                    self.bindings.store.connection, effect.effect_id
+                )
+            submitted = await owner.submit_thread_provision(plan)
             if owner.classify_submission(submitted) != "observed":
                 raise ProvisioningError("thread/start uncertain; do not retry automatically")
         except RetryRequired as exc:
@@ -314,13 +323,15 @@ class ManagedProvisioner:
         owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
         try:
             assert binding is not None
-            submitted = await owner.submit_effect(
-                effect.effect_id,
-                extra_hooks=[
-                    self._binding_prewrite_hook(binding, BindingState.PREPARED)
-                ],
-                pre_write_guard=lambda: self._semantic_prewrite_guard(binding),
-            )
+            with self.bindings.store._lock, DurabilityTransaction(
+                self.bindings.store.connection
+            ):
+                plan = seal_thread_resume(
+                    self.bindings.store.connection,
+                    effect.effect_id,
+                    mode=ResumeMode.ADOPTION,
+                )
+            submitted = await owner.submit_thread_resume(plan)
             if owner.classify_submission(submitted) != "observed":
                 raise ProvisioningError("thread/resume uncertain; do not retry automatically")
         except (RetryRequired, AppServerRpcError, TransportClosed, asyncio.TimeoutError, UnexpectedServerRequest) as exc:

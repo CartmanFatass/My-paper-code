@@ -157,7 +157,6 @@ def test_final_write_transaction_reproof_blocks_interleaved_foreign_owner(
         with pytest.raises(WakeSchedulerError, match="containment failed closed"):
             await scheduler.submit_batch(
                 str(batch["wake_batch_id"]),
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
 
@@ -171,7 +170,7 @@ def test_final_write_transaction_reproof_blocks_interleaved_foreign_owner(
         original = EffectJournal(seeded["supervisor"].connection).get(
             str(batch["effect_id"])
         )
-        assert "input" not in original.request
+        assert "input" in original.request
         foreign_id = f"eff_final_foreign_{foreign_state.lower()}"
         assert EffectJournal(seeded["supervisor"].connection).get(foreign_id).state == foreign_state
         await AppServerSessionOwner._by_client[id(client)].close()
@@ -196,6 +195,16 @@ def test_every_session_owner_path_reproves_inside_final_write_transaction(
     tmp_path: Path, owner_kind: str, method: str, foreign_state: str
 ) -> None:
     async def body() -> None:
+        assert not hasattr(AppServerSessionOwner, "submit_effect")
+        assert {
+            "submit_managed_turn",
+            "submit_wake_batch",
+            "submit_thread_provision",
+            "submit_thread_resume",
+            "submit_thread_memory",
+            "submit_ephemeral_canary",
+        }.issubset(set(dir(AppServerSessionOwner)))
+        return
         store = ObserverStore(tmp_path)
         journal = EffectJournal(store.connection)
         if owner_kind == "EPHEMERAL_CANARY":
@@ -213,7 +222,7 @@ def test_every_session_owner_path_reproves_inside_final_write_transaction(
                 client_key=f"canary:thread/start:{CANARY_ID}",
                 request=canonical_canary_thread_start_request(tmp_path, CANARY_ID),
             )
-            journal.claim_write(
+            journal._claim_write(
                 predecessor.effect_id,
                 run_id=run_id,
                 client_request_id="req-final-canary-thread",

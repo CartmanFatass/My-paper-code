@@ -59,7 +59,7 @@ def test_prepare_is_idempotent_by_method_and_client_key(tmp_path: Path) -> None:
 def test_only_prepared_can_claim_write(tmp_path: Path) -> None:
     journal = _journal(tmp_path)
     effect_id = _prepare(journal)
-    claimed = journal.claim_write(
+    claimed = journal._claim_write(
         effect_id,
         run_id="run1",
         client_request_id="1",
@@ -69,7 +69,7 @@ def test_only_prepared_can_claim_write(tmp_path: Path) -> None:
     assert claimed.state == EffectState.WRITE_STARTED.value
     assert claimed.version == 1
     with pytest.raises(EffectError, match="only PREPARED"):
-        journal.claim_write(
+        journal._claim_write(
             effect_id,
             run_id="run1",
             client_request_id="2",
@@ -81,7 +81,7 @@ def test_only_prepared_can_claim_write(tmp_path: Path) -> None:
 def test_write_started_cannot_be_prepared_again(tmp_path: Path) -> None:
     journal = _journal(tmp_path)
     effect_id = _prepare(journal, "k2")
-    journal.claim_write(
+    journal._claim_write(
         effect_id,
         run_id="run1",
         client_request_id="1",
@@ -102,7 +102,7 @@ def test_write_started_cannot_be_prepared_again(tmp_path: Path) -> None:
 def test_timeout_after_write_started_becomes_uncertain(tmp_path: Path) -> None:
     journal = _journal(tmp_path)
     effect_id = _prepare(journal)
-    journal.claim_write(
+    journal._claim_write(
         effect_id,
         run_id="run1",
         client_request_id="1",
@@ -117,7 +117,7 @@ def test_timeout_after_write_started_becomes_uncertain(tmp_path: Path) -> None:
 def test_response_becomes_response_observed(tmp_path: Path) -> None:
     journal = _journal(tmp_path)
     effect_id = _prepare(journal)
-    journal.claim_write(
+    journal._claim_write(
         effect_id,
         run_id="run1",
         client_request_id="1",
@@ -137,7 +137,7 @@ def test_response_becomes_response_observed(tmp_path: Path) -> None:
 def test_confirmation_requires_evidence_ref(tmp_path: Path) -> None:
     journal = _journal(tmp_path)
     effect_id = _prepare(journal)
-    journal.claim_write(
+    journal._claim_write(
         effect_id,
         run_id="run1",
         client_request_id="1",
@@ -154,7 +154,7 @@ def test_confirmation_requires_evidence_ref(tmp_path: Path) -> None:
 def test_incident_is_terminal(tmp_path: Path) -> None:
     journal = _journal(tmp_path)
     effect_id = _prepare(journal)
-    journal.claim_write(
+    journal._claim_write(
         effect_id,
         run_id="run1",
         client_request_id="1",

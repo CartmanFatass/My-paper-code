@@ -1,9 +1,12 @@
 import asyncio
 import json
+import sqlite3
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+
+from tests.codex_supervisor.helpers import submit_typed_for_test
 
 from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
 from tests.codex_supervisor.test_wake_scheduler import (
@@ -91,7 +94,7 @@ def test_canary_turn_reproves_one_exact_predecessor_at_final_write_boundary(
             client_key=f"canary:thread/start:{owner_id}",
             request=canonical_canary_thread_start_request(tmp_path, owner_id),
         )
-        journal.claim_write(
+        journal._claim_write(
             predecessor.effect_id,
             run_id=run_id,
             client_request_id="req-thread",
@@ -116,7 +119,7 @@ def test_canary_turn_reproves_one_exact_predecessor_at_final_write_boundary(
         owner = AppServerSessionOwner(client, store)
 
         with pytest.raises(SessionOwnerError, match="predecessor ownership is not exact"):
-            await owner.submit_effect(turn.effect_id)
+            await submit_typed_for_test(owner, turn.effect_id)
 
         assert journal.get(turn.effect_id).state == "PREPARED"
         assert client.discard_count == 1
@@ -241,15 +244,21 @@ def test_base_prepared_wake_cancellation_proves_complete_durable_tuple(
             (batch["binding_id"],),
         )
     elif tamper == "effect_method":
-        connection.execute(
-            "UPDATE app_server_effects SET method='thread/start' WHERE effect_id=?",
-            (effect_id,),
-        )
+        with pytest.raises(sqlite3.IntegrityError, match="immutable"):
+            connection.execute(
+                "UPDATE app_server_effects SET method='thread/start' WHERE effect_id=?",
+                (effect_id,),
+            )
+        _close_raw_failure_wake(seeded)
+        return
     elif tamper == "effect_client_key":
-        connection.execute(
-            "UPDATE app_server_effects SET client_key='tampered' WHERE effect_id=?",
-            (effect_id,),
-        )
+        with pytest.raises(sqlite3.IntegrityError, match="immutable"):
+            connection.execute(
+                "UPDATE app_server_effects SET client_key='tampered' WHERE effect_id=?",
+                (effect_id,),
+            )
+        _close_raw_failure_wake(seeded)
+        return
     elif tamper in {
         "request_thread",
         "request_user_message",
@@ -267,10 +276,13 @@ def test_base_prepared_wake_cancellation_proves_complete_durable_tuple(
         elif tamper == "request_input_length":
             request["approvalPolicy"] = "never"
             request["input"] = [{"type": "text", "text": "wrong"}]
-        connection.execute(
-            "UPDATE app_server_effects SET request_json=? WHERE effect_id=?",
-            (json.dumps(request, sort_keys=True), effect_id),
-        )
+        with pytest.raises(sqlite3.IntegrityError, match="immutable"):
+            connection.execute(
+                "UPDATE app_server_effects SET request_json=? WHERE effect_id=?",
+                (json.dumps(request, sort_keys=True), effect_id),
+            )
+        _close_raw_failure_wake(seeded)
+        return
     elif tamper == "message_target":
         connection.execute(
             "UPDATE mailbox_messages SET target_actor_context_id='actor_tampered' WHERE message_id=?",

@@ -254,7 +254,12 @@ class ObserverService:
     ) -> dict[str, object]:
         assert self.client is not None
         from .durability.effects import EffectJournal
+        from .durability.authority_kernel import (
+            CanaryPhase,
+            seal_ephemeral_canary,
+        )
         from .durability.session_owner import AppServerSessionOwner
+        from .durability.transaction import DurabilityTransaction
 
         owner = AppServerSessionOwner.for_client(self.client, self.store)
         journal = EffectJournal(self.store.connection)
@@ -267,7 +272,16 @@ class ObserverService:
             request=dict(params),
             predecessor_effect_id=predecessor_effect_id,
         )
-        submitted = await owner.submit_effect(effect.effect_id)
+        phase = (
+            CanaryPhase.THREAD_START
+            if method == "thread/start"
+            else CanaryPhase.TURN_START
+        )
+        with self.store._lock, DurabilityTransaction(self.store.connection):
+            plan = seal_ephemeral_canary(
+                self.store.connection, effect.effect_id, phase=phase
+            )
+        submitted = await owner.submit_ephemeral_canary(plan)
         if owner.classify_submission(submitted) != "observed":
             raise RuntimeError("canary mutation was not observed")
         await self._drain_incident()

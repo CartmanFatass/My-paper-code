@@ -97,7 +97,7 @@ def test_guarded_wake_ineligibility_suspends_and_cancels_atomically(
         from tools.codex_supervisor.durability.session_owner import AppServerSessionOwner
 
         owner = AppServerSessionOwner.for_client(client, seeded["supervisor"])
-        original = owner.submit_effect
+        original = owner.submit_wake_batch
 
         async def release_then_submit(*args, **kwargs):
             release_actor_context(
@@ -105,7 +105,7 @@ def test_guarded_wake_ineligibility_suspends_and_cancels_atomically(
             )
             return await original(*args, **kwargs)
 
-        monkeypatch.setattr(owner, "submit_effect", release_then_submit)
+        monkeypatch.setattr(owner, "submit_wake_batch", release_then_submit)
         scheduler = WakeScheduler(
             seeded["bindings"],
             seeded["mailbox"],
@@ -120,7 +120,6 @@ def test_guarded_wake_ineligibility_suspends_and_cancels_atomically(
         with pytest.raises(WakeSchedulerError, match="ACTIVE"):
             await scheduler.submit_batch(
                 str(batch["wake_batch_id"]),
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
         assert seeded["bindings"].get(binding_id).binding_state is BindingState.SUSPENDED
@@ -375,7 +374,7 @@ def test_wake_resume_context_drift_cancels_resume_and_wake_without_network(
         from tools.codex_supervisor.durability.session_owner import AppServerSessionOwner
 
         owner = AppServerSessionOwner.for_client(client, seeded["supervisor"])
-        original = owner.submit_effect
+        original = owner.submit_thread_resume
 
         async def drift_then_submit(*args, **kwargs):
             with seeded["semantic"]._lock, seeded["semantic"].connection:
@@ -385,7 +384,7 @@ def test_wake_resume_context_drift_cancels_resume_and_wake_without_network(
                 )
             return await original(*args, **kwargs)
 
-        monkeypatch.setattr(owner, "submit_effect", drift_then_submit)
+        monkeypatch.setattr(owner, "submit_thread_resume", drift_then_submit)
         recovery = WakeRecovery(
             seeded["bindings"],
             seeded["mailbox"],

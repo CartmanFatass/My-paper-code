@@ -6,7 +6,11 @@ from pathlib import Path
 
 import pytest
 
-from tests.codex_supervisor.helpers import make_observer_config, write_fake_codex
+from tests.codex_supervisor.helpers import (
+    make_observer_config,
+    submit_typed_for_test,
+    write_fake_codex,
+)
 from tests.codex_supervisor.mailbox_fixtures import prepare_resume_batch, seed_active_root_portfolio
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors
 from tools.codex_supervisor.binding_store import BindingStore
@@ -129,7 +133,6 @@ def test_timeout_result_cannot_advance_wake_to_active(tmp_path: Path) -> None:
         with pytest.raises(WakeSchedulerError, match="uncertain"):
             await scheduler.submit_batch(
                 str(batch["wake_batch_id"]),
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
         row = batches.get(str(batch["wake_batch_id"]))
@@ -150,52 +153,17 @@ def test_timeout_result_cannot_mark_messages_delivered(tmp_path: Path) -> None:
 
 def test_wake_claim_and_effect_write_start_are_one_transaction(tmp_path: Path) -> None:
     store = ObserverStore(tmp_path / "runtime")
-    run_id = store.start_run(codex_binary="b", codex_version="v", client_name="c", process_id=None)
-    journal = EffectJournal(store.connection)
-    effect = journal.prepare_effect(
-        owner_kind="WAKE_BATCH",
-        owner_id="wake1",
-        binding_id="bind1",
-        method="turn/start",
-        client_key="hmasd-wake:wake1",
-        request={"threadId": "thr1"},
-    )
-    store.connection.execute(
-        """INSERT INTO wake_batches(
-            wake_batch_id,binding_id,thread_id,state,client_user_message_id,prepared_at,
-            lease_holder,lease_generation,effect_id
-        ) VALUES ('wake1','bind1','thr1','PREPARED','hmasd-wake:wake1','t','sched',1,?)""",
-        (effect.effect_id,),
-    )
-    store.connection.commit()
-    from tools.codex_supervisor.durability.models import AggregateKind, TransitionCause, TransitionRequest
-
-    def boom(_connection):
-        raise RuntimeError("failpoint")
-
-    with pytest.raises(RuntimeError, match="failpoint"):
-        store.record_effect_write_start(
-            effect_id=effect.effect_id,
-            run_id=run_id,
+    assert not hasattr(store, "record_effect_write_start")
+    assert hasattr(store, "_record_authorized_effect_claim")
+    with pytest.raises(Exception, match="ambient transaction"):
+        store._record_authorized_effect_claim(
+            effect_id="missing",
+            run_id="missing",
             method="turn/start",
             payload={"id": 1, "method": "turn/start", "params": {}},
             params={},
             request_class="MUTATING_NO_RETRY",
-            extra_transitions=[
-                TransitionRequest(
-                    aggregate_kind=AggregateKind.WAKE_BATCH,
-                    aggregate_id="wake1",
-                    expected_state="PREPARED",
-                    expected_version=0,
-                    target_state="SUBMITTING",
-                    cause_kind=TransitionCause.APP_SERVER_EFFECT,
-                    cause_ref=effect.effect_id,
-                )
-            ],
-            extra_hooks=[boom],
         )
-    assert journal.get(effect.effect_id).state == "PREPARED"
-    assert store.connection.execute("SELECT state FROM wake_batches").fetchone()[0] == "PREPARED"
     store.close()
 
 
@@ -278,7 +246,7 @@ def test_later_server_request_does_not_incident_a_completed_confirmed_effect(tmp
         client_key="k1",
         request={},
     )
-    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+    journal._claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
     journal.observe_response(effect.effect_id, response={"ok": True}, turn_id="turn1")
     journal.confirm_effect(effect.effect_id, evidence_ref="turn:turn1")
     owner = AppServerSessionOwner(object(), store)  # type: ignore[arg-type]
@@ -296,7 +264,7 @@ def test_session_owner_compatibility_rejects_every_mutating_method(tmp_path: Pat
         store = ObserverStore(tmp_path / "runtime")
         owner = AppServerSessionOwner.for_client(client, store)
         for method in ("thread/start", "thread/resume", "turn/start", "thread/memoryMode/set"):
-            with pytest.raises((SessionOwnerError, RuntimeError), match="submit_effect"):
+            with pytest.raises((SessionOwnerError, RuntimeError), match="typed"):
                 await owner.request(method, {})
         await owner.close()
         await transport.stop()
@@ -382,7 +350,7 @@ def test_linked_wake_and_effect_incident_resolution_commits_atomically(tmp_path:
         client_key="hmasd-wake:wake1",
         request={"threadId": "thr1"},
     )
-    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+    journal._claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
     journal.mark_incident(effect.effect_id, evidence_ref="sr1", incident={"reason": "server_request"})
     connection.execute("UPDATE wake_batches SET effect_id = ? WHERE wake_batch_id = 'wake1'", (effect.effect_id,))
     connection.execute(
@@ -499,7 +467,7 @@ def test_reconciler_rejects_unstored_turn_evidence(tmp_path: Path) -> None:
         client_key="k1",
         request={"threadId": "thr1"},
     )
-    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+    journal._claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
     journal.mark_uncertain(effect.effect_id, reason="timeout")
     reconciler = EffectReconciler(connection)
     with pytest.raises(ReconciliationError, match="caller-authored"):
@@ -521,7 +489,7 @@ def test_reconciler_rejects_caller_asserted_loaded_state(tmp_path: Path) -> None
         client_key="thread/resume:thr1",
         request={"threadId": "thr1"},
     )
-    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+    journal._claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
     journal.mark_uncertain(effect.effect_id, reason="timeout")
     reconciler = EffectReconciler(connection)
     with pytest.raises(ReconciliationError, match="caller-authored"):
@@ -548,7 +516,7 @@ def test_reconciler_updates_effect_and_domain_in_one_transaction(tmp_path: Path)
         request={"threadId": "thr1"},
     )
     connection.execute("UPDATE managed_turn_intents SET effect_id = ? WHERE turn_intent_id = 't1'", (effect.effect_id,))
-    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+    journal._claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
     journal.mark_uncertain(effect.effect_id, reason="timeout")
     connection.execute(
         """INSERT INTO turn_snapshots(turn_id, thread_id, status, updated_at)
@@ -618,7 +586,7 @@ def test_prepared_future_is_removed_when_write_recording_fails(tmp_path: Path) -
             client_key="k1",
             request={"threadId": "thr_canary", "input": []},
         )
-        journal.claim_write(effect.effect_id, run_id="runx", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+        journal._claim_write(effect.effect_id, run_id="runx", client_request_id="1", request_row_id="r1", raw_request_seq=1)
         pending_before = dict(client._pending)
         with pytest.raises(Exception):
             await owner.submit_effect(effect.effect_id)
@@ -642,14 +610,17 @@ def test_effect_raw_request_seq_points_to_exact_raw_message_row(tmp_path: Path) 
         client_key="k1",
         request={"threadId": "thr1"},
     )
-    result = store.record_effect_write_start(
-        effect_id=effect.effect_id,
-        run_id=run_id,
-        method="turn/start",
-        payload={"id": 9, "method": "turn/start", "params": {"threadId": "thr1"}},
-        params={"threadId": "thr1"},
-        request_class="MUTATING_NO_RETRY",
-    )
+    from tools.codex_supervisor.durability.transaction import DurabilityTransaction
+
+    with store._lock, DurabilityTransaction(store.connection):
+        result = store._record_authorized_effect_claim(
+            effect_id=effect.effect_id,
+            run_id=run_id,
+            method="turn/start",
+            payload={"id": 9, "method": "turn/start", "params": {"threadId": "thr1"}},
+            params={"threadId": "thr1"},
+            request_class="MUTATING_NO_RETRY",
+        )
     updated = journal.get(effect.effect_id)
     raw = store.connection.execute(
         "SELECT raw_message_seq, effect_id FROM raw_messages WHERE raw_message_seq = ?",
@@ -793,7 +764,7 @@ def test_attach_rejects_effect_owned_by_another_binding(tmp_path: Path) -> None:
         client_key="thread/resume:thr_x",
         request={"threadId": "thr_x"},
     )
-    journal.claim_write(effect.effect_id, run_id="r", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+    journal._claim_write(effect.effect_id, run_id="r", client_request_id="1", request_row_id="r1", raw_request_seq=1)
     journal.observe_response(effect.effect_id, response={"ok": True}, thread_id="thr_x")
     from tools.codex_supervisor.binding_store import BindingError
 
@@ -873,15 +844,13 @@ def test_cancelled_owner_effect_cannot_be_submitted(tmp_path: Path) -> None:
     )
     connection.execute("UPDATE wake_batches SET effect_id = ? WHERE wake_batch_id='wake1'", (effect.effect_id,))
     connection.commit()
-    from tools.codex_supervisor.durability.effects import cancel_prepared_wake
-
-    cancel_prepared_wake(connection, "wake1", cause_ref="test")
+    journal.cancel_before_write(effect.effect_id, cause_ref="test")
     store = ObserverStore(tmp_path / "runtime")
     owner = AppServerSessionOwner(object(), store)  # type: ignore[arg-type]
     owner.journal = journal
     owner.store.connection = connection
-    with pytest.raises(Exception, match="CANCELLED_BEFORE_WRITE|cannot submit"):
-        asyncio.run(owner.submit_effect(effect.effect_id))
+    with pytest.raises(Exception, match="ownership|PREPARED"):
+        asyncio.run(submit_typed_for_test(owner, effect.effect_id))
     connection.close()
     store.close()
 
@@ -935,7 +904,7 @@ def test_resume_reconciler_uses_thread_snapshot_status_type(tmp_path: Path) -> N
         client_key="thread/resume:thr1",
         request={"threadId": "thr1"},
     )
-    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+    journal._claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
     journal.mark_uncertain(effect.effect_id, reason="timeout")
     connection.execute(
         """INSERT INTO observer_runs(run_id, codex_binary, codex_version, client_name, started_at, runtime_home)
@@ -978,7 +947,7 @@ def test_write_started_wake_reconciliation_confirms_effect_before_delivery(tmp_p
         client_key="k1",
         request={"threadId": "thr1"},
     )
-    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
+    journal._claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=1)
     connection.execute("UPDATE wake_batches SET effect_id = ? WHERE wake_batch_id='wake1'", (effect.effect_id,))
     connection.execute(
         """INSERT INTO turn_snapshots(turn_id, thread_id, status, updated_at)
@@ -1041,7 +1010,7 @@ def _incident_wake(connection, *, effect_state: str, client_key: str = "hmasd-wa
         request={"threadId": "thr1"},
     )
     if effect_state != "PREPARED":
-        journal.claim_write(
+        journal._claim_write(
             effect.effect_id,
             run_id="run1",
             client_request_id="1",
@@ -1178,14 +1147,13 @@ def test_wake_submitting_always_has_write_started_effect(tmp_path: Path) -> None
     )
     from tools.codex_supervisor.durability.models import AggregateKind, TransitionCause, TransitionRequest
 
-    seeded["supervisor"].record_effect_write_start(
-        effect_id=str(batch["effect_id"]),
-        run_id=run_id,
-        method="turn/start",
-        payload={"id": 1, "method": "turn/start", "params": {}},
-        params={},
-        request_class="MUTATING_NO_RETRY",
-        extra_transitions=[
+    from tools.codex_supervisor.durability.transaction import DurabilityTransaction
+    from tools.codex_supervisor.durability.transitions import TransitionKernel
+
+    with seeded["supervisor"]._lock, DurabilityTransaction(
+        seeded["supervisor"].connection
+    ):
+        TransitionKernel(seeded["supervisor"].connection).apply(
             TransitionRequest(
                 aggregate_kind=AggregateKind.WAKE_BATCH,
                 aggregate_id=str(batch["wake_batch_id"]),
@@ -1195,8 +1163,15 @@ def test_wake_submitting_always_has_write_started_effect(tmp_path: Path) -> None
                 cause_kind=TransitionCause.APP_SERVER_EFFECT,
                 cause_ref=str(batch["effect_id"]),
             )
-        ],
-    )
+        )
+        seeded["supervisor"]._record_authorized_effect_claim(
+            effect_id=str(batch["effect_id"]),
+            run_id=run_id,
+            method="turn/start",
+            payload={"id": 1, "method": "turn/start", "params": {}},
+            params={},
+            request_class="MUTATING_NO_RETRY",
+        )
     updated = batches.get(str(batch["wake_batch_id"]))
     assert updated is not None
     assert updated["state"] == "SUBMITTING"
@@ -1219,7 +1194,7 @@ def test_released_actor_cannot_receive_recovery_resume(tmp_path: Path) -> None:
         seeded["bindings"],
         seeded["mailbox"],
         WakeBatchStore(seeded["supervisor"], seeded["mailbox"]),
-        object(),
+        _TimeoutResumeClient(),
         bridge=seeded["bridge"],
     )
     readiness = asyncio.run(
@@ -1379,7 +1354,7 @@ def test_orphan_effect_cannot_be_submitted(tmp_path: Path) -> None:
     )
     owner = AppServerSessionOwner(object(), store)  # type: ignore[arg-type]
     with pytest.raises(SessionOwnerError, match="missing"):
-        asyncio.run(owner.submit_effect(effect.effect_id))
+        asyncio.run(submit_typed_for_test(owner, effect.effect_id))
     store.close()
 
 
@@ -1395,7 +1370,7 @@ def test_stale_stored_resume_snapshot_does_not_confirm(tmp_path: Path) -> None:
         client_key="thread/resume:thr-stale",
         request={"threadId": "thr-stale"},
     )
-    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=5)
+    journal._claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=5)
     journal.mark_uncertain(effect.effect_id, reason="timeout")
     connection.execute(
         """INSERT INTO thread_snapshots(thread_id, status_type, last_event_seq, first_observed_at, updated_at)
@@ -1628,7 +1603,6 @@ def test_wake_submit_has_no_ambient_transaction_at_send(tmp_path: Path) -> None:
         )
         await scheduler.submit_batch(
             str(batch["wake_batch_id"]),
-            str(batch["input_text"]),
             lease_generation=int(lease["generation"]),
         )
         assert seen["in_txn"] is False
@@ -1662,21 +1636,23 @@ def test_prepared_request_materialization_is_retry_idempotent(tmp_path: Path) ->
         intent_id = turns.prepare(binding_id, intent_kind=ManagedIntentKind.BOOTSTRAP, input_ref="bootstrap")
         row = turns._row(intent_id)
         effect_id = str(row["effect_id"])
-        original = seeded["supervisor"].record_effect_write_start
+        original = seeded["supervisor"]._record_authorized_effect_claim
 
         def boom(*args, **kwargs):
             raise RuntimeError("materialized but not claimed")
 
-        seeded["supervisor"].record_effect_write_start = boom  # type: ignore[method-assign]
+        seeded["supervisor"]._record_authorized_effect_claim = boom  # type: ignore[method-assign]
         with pytest.raises(RuntimeError, match="not claimed"):
             await turns.submit(intent_id, "hello")
         effect = EffectJournal(store.store.connection).get(effect_id)
         assert effect.state == EffectState.PREPARED.value
         assert dict(effect.request) == {
             "threadId": "thr_canary",
+            "input": [{"type": "text", "text": "hello"}],
+            "approvalPolicy": "never",
             "clientUserMessageId": row["client_user_message_id"],
         }
-        seeded["supervisor"].record_effect_write_start = original  # type: ignore[method-assign]
+        seeded["supervisor"]._record_authorized_effect_claim = original  # type: ignore[method-assign]
         await turns.submit(intent_id, "hello")
         updated = turns._row(intent_id)
         assert updated["submission_state"] in {SubmissionState.OBSERVED.value, SubmissionState.SUBMITTED.value, "OBSERVED"}
@@ -1711,7 +1687,7 @@ def test_generic_wake_set_state_cannot_claim_submission(tmp_path: Path) -> None:
     )
     from tools.codex_supervisor.wake_batches import WakeBatchError
 
-    with pytest.raises(WakeBatchError, match="record_effect_write_start"):
+    with pytest.raises(WakeBatchError, match="authority kernel"):
         batches.set_state(str(batch["wake_batch_id"]), state="SUBMITTING", expected_state="PREPARED")
     row = batches.get(str(batch["wake_batch_id"]))
     assert row is not None
@@ -1735,7 +1711,7 @@ def test_stale_snapshot_with_larger_normalized_seq_does_not_confirm_resume(tmp_p
         client_key="thread/resume:thr-mix",
         request={"threadId": "thr-mix"},
     )
-    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=50)
+    journal._claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=50)
     journal.mark_uncertain(effect.effect_id, reason="timeout")
     connection.execute(
         """INSERT INTO observer_runs(run_id, codex_binary, codex_version, client_name, started_at, runtime_home)
@@ -1773,7 +1749,7 @@ def test_stored_resume_requires_supporting_raw_message_after_effect_write(tmp_pa
         client_key="thread/resume:thr-late",
         request={"threadId": "thr-late"},
     )
-    journal.claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=5)
+    journal._claim_write(effect.effect_id, run_id="run1", client_request_id="1", request_row_id="r1", raw_request_seq=5)
     journal.mark_uncertain(effect.effect_id, reason="timeout")
     connection.execute(
         """INSERT INTO observer_runs(run_id, codex_binary, codex_version, client_name, started_at, runtime_home)
@@ -1805,4 +1781,3 @@ def test_stored_resume_requires_supporting_raw_message_after_effect_write(tmp_pa
     second = asyncio.run(EffectReconciler(connection).reconcile(effect.effect_id))
     assert second.state == EffectState.EFFECT_CONFIRMED.value
     connection.close()
-

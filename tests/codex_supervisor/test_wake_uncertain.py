@@ -62,7 +62,7 @@ def test_uncertain_wake_is_not_resent(tmp_path: Path) -> None:
         assert open_batch is not None
         assert open_batch["state"] == "SUBMISSION_UNCERTAIN"
         with pytest.raises(WakeSchedulerError, match="not PREPARED"):
-            await scheduler.submit_batch(str(open_batch["wake_batch_id"]), "no")
+            await scheduler.submit_batch(str(open_batch["wake_batch_id"]))
         assert batches.open_batch_for_binding(seeded["portfolio_binding_id"])["wake_batch_id"] == open_batch["wake_batch_id"]
         await transport.stop()
         seeded["bridge"].close()

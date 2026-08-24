@@ -215,7 +215,7 @@ def test_managed_turn_guard_spans_write_started_and_ends_before_send(
         client = AppServerClient(transport, config)
         await transport.start()
         await client.initialize()
-        original_write_start = seeded["supervisor"].record_effect_write_start
+        original_write_start = seeded["supervisor"]._record_authorized_effect_claim
         observed = {"before": False, "after": False, "released_at_send": False}
 
         def checked_write_start(**kwargs):
@@ -227,7 +227,7 @@ def test_managed_turn_guard_spans_write_started_and_ends_before_send(
             return result
 
         monkeypatch.setattr(
-            seeded["supervisor"], "record_effect_write_start", checked_write_start
+            seeded["supervisor"], "_record_authorized_effect_claim", checked_write_start
         )
         original_send = client.send_prepared
 
@@ -301,7 +301,7 @@ def test_managed_turn_drift_immediately_before_guard_writes_no_effect(
         )
         row = turns._row(intent_id)
         owner = turns._owner()
-        original_submit = owner.submit_effect
+        original_submit = owner.submit_managed_turn
 
         async def drift_then_submit(*args, **kwargs):
             with seeded["semantic"]._lock, seeded["semantic"].connection:
@@ -311,7 +311,7 @@ def test_managed_turn_drift_immediately_before_guard_writes_no_effect(
                 )
             return await original_submit(*args, **kwargs)
 
-        monkeypatch.setattr(owner, "submit_effect", drift_then_submit)
+        monkeypatch.setattr(owner, "submit_managed_turn", drift_then_submit)
         with pytest.raises(ManagedTurnError, match="currentness"):
             await turns.submit(intent_id, "must-not-send")
         assert turns._row(intent_id)["submission_state"] == "CANCELLED"

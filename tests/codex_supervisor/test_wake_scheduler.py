@@ -136,9 +136,15 @@ def test_wake_context_binding_missing_or_drift_cancels_and_requeues(
         scheduler._assert_submit_fence(
             binding_id, int(lease["generation"]), wake_batch_id=batch_id
         )
-    scheduler._contain_raw_submit_failure(batch_id, str(batch["effect_id"]))
-    assert batches.get(batch_id)["state"] == "CANCELLED"
-    assert mailbox.get(message.message_id).delivery_state.value == "ELIGIBLE"
+    if drift == "missing":
+        with pytest.raises(Exception, match="context relation"):
+            scheduler._contain_raw_submit_failure(batch_id, str(batch["effect_id"]))
+        assert batches.get(batch_id)["state"] == "PREPARED"
+        assert mailbox.get(message.message_id).delivery_state.value == "BATCHED"
+    else:
+        scheduler._contain_raw_submit_failure(batch_id, str(batch["effect_id"]))
+        assert batches.get(batch_id)["state"] == "CANCELLED"
+        assert mailbox.get(message.message_id).delivery_state.value == "ELIGIBLE"
     seeded["bridge"].close()
     seeded["supervisor"].close()
     seeded["semantic"].close()
@@ -189,7 +195,7 @@ def test_wake_guard_spans_write_started_and_ends_before_send(
         await transport.start()
         await client.initialize()
         observed = {"before": False, "after": False, "released_at_send": False}
-        original_write_start = seeded["supervisor"].record_effect_write_start
+        original_write_start = seeded["supervisor"]._record_authorized_effect_claim
 
         def checked_write_start(**kwargs):
             _assert_semantic_writer_blocked(seeded["bridge"].semantic_state_path)
@@ -200,7 +206,7 @@ def test_wake_guard_spans_write_started_and_ends_before_send(
             return result
 
         monkeypatch.setattr(
-            seeded["supervisor"], "record_effect_write_start", checked_write_start
+            seeded["supervisor"], "_record_authorized_effect_claim", checked_write_start
         )
         original_send = client.send_prepared
 
@@ -232,7 +238,6 @@ def test_wake_guard_spans_write_started_and_ends_before_send(
         )
         await scheduler.submit_batch(
             str(batch["wake_batch_id"]),
-            str(batch["input_text"]),
             lease_generation=int(lease["generation"]),
         )
         assert observed == {"before": True, "after": True, "released_at_send": True}
@@ -289,7 +294,7 @@ def test_wake_drift_immediately_before_guard_writes_no_effect_and_requeues(
         await transport.start()
         await client.initialize()
         owner = AppServerSessionOwner.for_client(client, seeded["supervisor"])
-        original_submit = owner.submit_effect
+        original_submit = owner.submit_wake_batch
 
         async def drift_then_submit(*args, **kwargs):
             with seeded["semantic"]._lock, seeded["semantic"].connection:
@@ -299,7 +304,7 @@ def test_wake_drift_immediately_before_guard_writes_no_effect_and_requeues(
                 )
             return await original_submit(*args, **kwargs)
 
-        monkeypatch.setattr(owner, "submit_effect", drift_then_submit)
+        monkeypatch.setattr(owner, "submit_wake_batch", drift_then_submit)
         scheduler = WakeScheduler(
             seeded["bindings"],
             mailbox,
@@ -314,7 +319,6 @@ def test_wake_drift_immediately_before_guard_writes_no_effect_and_requeues(
         with pytest.raises(WakeSchedulerError, match="currentness"):
             await scheduler.submit_batch(
                 str(batch["wake_batch_id"]),
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
         assert batches.get(str(batch["wake_batch_id"]))["state"] == "CANCELLED"
@@ -400,12 +404,8 @@ def test_raw_sqlite_guard_failure_cancels_exact_prepared_wake_and_requeues(
         monkeypatch.setattr(seeded["bridge"], "currentness_guard", locked_guard)
 
         class GuardEnteringOwner:
-            async def submit_effect(self, effect_id, **kwargs):
-                nonlocal sends
-                with kwargs["pre_write_guard"]():
-                    pass
-                sends += 1
-                raise AssertionError("send boundary must not be reached")
+            async def submit_wake_batch(self, plan):
+                raise sqlite3.OperationalError("database is locked")
 
         monkeypatch.setattr(
             AppServerSessionOwner,
@@ -416,7 +416,6 @@ def test_raw_sqlite_guard_failure_cancels_exact_prepared_wake_and_requeues(
         with pytest.raises(WakeSchedulerError, match="failed before write.*cancelled") as caught:
             await scheduler.submit_batch(
                 batch_id,
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
         assert isinstance(caught.value.__cause__, sqlite3.OperationalError)
@@ -460,7 +459,8 @@ def test_raw_submit_failure_never_requeues_crossed_effect_state(
         journal = EffectJournal(seeded["supervisor"].connection)
 
         class CrossedOwner:
-            async def submit_effect(self, effect_id, **kwargs):
+            async def submit_wake_batch(self, plan):
+                effect_id = plan.effect_id
                 with seeded["supervisor"]._lock, DurabilityTransaction(
                     seeded["supervisor"].connection
                 ):
@@ -475,7 +475,7 @@ def test_raw_submit_failure_never_requeues_crossed_effect_state(
                             cause_ref=effect_id,
                         )
                     )
-                    journal.claim_write(
+                    journal._claim_write(
                         effect_id,
                         run_id="run-crossed",
                         client_request_id="req-crossed",
@@ -497,7 +497,6 @@ def test_raw_submit_failure_never_requeues_crossed_effect_state(
         ) as caught:
             await scheduler.submit_batch(
                 batch_id,
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
         assert isinstance(caught.value.__cause__, sqlite3.OperationalError)
@@ -525,7 +524,7 @@ def test_raw_submit_containment_failure_or_unknown_effect_fails_closed(
         )
 
         class RawFailureOwner:
-            async def submit_effect(self, effect_id, **kwargs):
+            async def submit_wake_batch(self, plan):
                 raise sqlite3.OperationalError("database is locked")
 
         monkeypatch.setattr(
@@ -555,7 +554,6 @@ def test_raw_submit_containment_failure_or_unknown_effect_fails_closed(
         ) as caught:
             await scheduler.submit_batch(
                 batch_id,
-                str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
         if containment_failure == "cancel_failure":

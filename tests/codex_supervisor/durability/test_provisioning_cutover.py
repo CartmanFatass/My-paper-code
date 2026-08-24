@@ -81,7 +81,7 @@ def test_unresolved_write_started_prevents_second_thread_start(tmp_path: Path) -
             client_key=f"thread/start:{binding_id}",
             request={"cwd": str(tmp_path)},
         )
-        journal.claim_write(
+        journal._claim_write(
             journal.get_by_key("thread/start", f"thread/start:{binding_id}").effect_id,
             run_id="run1",
             client_request_id="1",

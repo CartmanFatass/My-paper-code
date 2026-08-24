@@ -40,7 +40,7 @@ def test_turn_start_reconciles_by_original_client_key(tmp_path: Path) -> None:
         client_key="hmasd-managed:t1",
         request={"threadId": "thr1"},
     )
-    journal.claim_write(
+    journal._claim_write(
         effect.effect_id,
         run_id="run1",
         client_request_id="1",
@@ -82,7 +82,7 @@ def test_restart_reconciliation_is_idempotent(tmp_path: Path) -> None:
         client_key="k1",
         request={},
     )
-    journal.claim_write(
+    journal._claim_write(
         effect.effect_id,
         run_id="run1",
         client_request_id="1",

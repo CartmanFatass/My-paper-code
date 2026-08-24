@@ -9,6 +9,7 @@ from tests.codex_supervisor.test_request_retry import _client
 from tools.codex_supervisor.client import MUTATING_OWNER_MESSAGE
 from tools.codex_supervisor.durability.effects import EffectJournal
 from tools.codex_supervisor.durability.models import EffectState
+from tools.codex_supervisor.durability.transaction import DurabilityTransaction
 from tools.codex_supervisor.store import ObserverStore
 
 
@@ -76,14 +77,15 @@ def test_record_effect_write_start_is_one_transaction(tmp_path: Path) -> None:
         client_key="msg1",
         request={"threadId": "thr1"},
     )
-    result = store.record_effect_write_start(
-        effect_id=effect.effect_id,
-        run_id=run_id,
-        method="turn/start",
-        payload={"id": 9, "method": "turn/start", "params": {"threadId": "thr1"}},
-        params={"threadId": "thr1"},
-        request_class="MUTATING_NO_RETRY",
-    )
+    with store._lock, DurabilityTransaction(store.connection):
+        result = store._record_authorized_effect_claim(
+            effect_id=effect.effect_id,
+            run_id=run_id,
+            method="turn/start",
+            payload={"id": 9, "method": "turn/start", "params": {"threadId": "thr1"}},
+            params={"threadId": "thr1"},
+            request_class="MUTATING_NO_RETRY",
+        )
     updated = journal.get(effect.effect_id)
     assert updated.state == EffectState.WRITE_STARTED.value
     assert updated.raw_request_seq == result["raw_request_seq"]
@@ -122,23 +124,25 @@ def test_write_start_rolls_back_if_claim_fails(tmp_path: Path) -> None:
         client_key="msg1",
         request={"threadId": "thr1"},
     )
-    store.record_effect_write_start(
-        effect_id=effect.effect_id,
-        run_id=run_id,
-        method="turn/start",
-        payload={"id": 1, "method": "turn/start", "params": {}},
-        params={},
-        request_class="MUTATING_NO_RETRY",
-    )
-    with pytest.raises(Exception):
-        store.record_effect_write_start(
+    with store._lock, DurabilityTransaction(store.connection):
+        store._record_authorized_effect_claim(
             effect_id=effect.effect_id,
             run_id=run_id,
             method="turn/start",
-            payload={"id": 2, "method": "turn/start", "params": {}},
+            payload={"id": 1, "method": "turn/start", "params": {}},
             params={},
             request_class="MUTATING_NO_RETRY",
         )
+    with pytest.raises(Exception):
+        with store._lock, DurabilityTransaction(store.connection):
+            store._record_authorized_effect_claim(
+                effect_id=effect.effect_id,
+                run_id=run_id,
+                method="turn/start",
+                payload={"id": 2, "method": "turn/start", "params": {}},
+                params={},
+                request_class="MUTATING_NO_RETRY",
+            )
     assert store.connection.execute("SELECT COUNT(*) FROM rpc_requests").fetchone()[0] == 1
     assert journal.get(effect.effect_id).state == EffectState.WRITE_STARTED.value
     store.close()

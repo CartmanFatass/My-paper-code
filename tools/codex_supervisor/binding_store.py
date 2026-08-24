@@ -118,6 +118,9 @@ class BindingStore:
     def __init__(self, store: ObserverStore, bridge: SemanticBridge | None = None) -> None:
         self.store = store
         self.bridge = bridge
+        # The submission kernel, not a caller-provided callback, owns the
+        # semantic -> supervisor lock ordering for all typed owner plans.
+        setattr(self.store, "_semantic_bridge", bridge)
 
     def _record_event(self, binding_id: str, event_kind: str, payload: dict[str, Any]) -> None:
         with self.store._lock, self.store.connection:

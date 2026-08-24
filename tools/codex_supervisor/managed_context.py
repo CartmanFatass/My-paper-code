@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import uuid
 from datetime import datetime, timezone
 
@@ -77,13 +78,16 @@ def record_context_injection(
     mailbox_message_ids: tuple[str, ...] = (),
 ) -> str:
     injection_id = f"inj_{uuid.uuid4().hex}"
+    input_bytes = input_text.encode("utf-8")
+    input_sha256 = hashlib.sha256(input_bytes).hexdigest()
     def _insert() -> None:
         store.connection.execute(
             """INSERT INTO managed_context_injections (
                 injection_id, turn_intent_id, binding_id, checkpoint_id, state_version,
                 epoch_id, epoch_revision, canonical_refs_json, open_obligation_ids_json,
-                mailbox_message_ids_json, input_byte_length, created_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                mailbox_message_ids_json, input_byte_length, input_bytes,
+                input_sha256, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
             (
                 injection_id,
                 turn_intent_id,
@@ -95,7 +99,9 @@ def record_context_injection(
                 json.dumps(list(snapshot.canonical_refs)),
                 json.dumps(list(snapshot.open_obligation_ids)),
                 json.dumps(list(mailbox_message_ids)),
-                len(input_text.encode("utf-8")),
+                len(input_bytes),
+                input_bytes,
+                input_sha256,
                 _now(),
             ),
         )

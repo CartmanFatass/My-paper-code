@@ -178,7 +178,12 @@ class WakeBatchStore:
                     binding_id=binding_id,
                     method="turn/start",
                     client_key=client_id,
-                    request={"threadId": thread_id, "clientUserMessageId": client_id},
+                    request={
+                        "threadId": thread_id,
+                        "input": [{"type": "text", "text": envelope.text}],
+                        "approvalPolicy": "never",
+                        "clientUserMessageId": client_id,
+                    },
                 )
                 self.store.connection.execute(
                     """INSERT INTO wake_batches (
@@ -207,7 +212,7 @@ class WakeBatchStore:
                     if message.delivery_state.value == "ENQUEUED":
                         self.mailbox.mark_eligible(message.message_id)
                     self.mailbox.mark_batched(message.message_id)
-                record_context_injection(
+                injection_id = record_context_injection(
                     self.store,
                     binding_id=binding_id,
                     turn_intent_id=wake_batch_id,
@@ -215,6 +220,11 @@ class WakeBatchStore:
                     input_text=envelope.text,
                     mailbox_message_ids=envelope.included_message_ids,
                 )
+                self.store.connection.execute(
+                    "UPDATE wake_batches SET context_injection_id=? WHERE wake_batch_id=?",
+                    (injection_id, wake_batch_id),
+                )
+                EffectJournal(self.store.connection).seal_effect(effect.effect_id)
         row = self.get(wake_batch_id)
         assert row is not None
         row["input_text"] = envelope.text
@@ -234,7 +244,7 @@ class WakeBatchStore:
         if "state" in fields and fields["state"] != current["state"]:
             target = str(fields["state"])
             if str(current["state"]) == WakeBatchState.PREPARED.value and target == WakeBatchState.SUBMITTING.value:
-                raise WakeBatchError("PREPARED → SUBMITTING is only allowed in record_effect_write_start")
+                raise WakeBatchError("PREPARED → SUBMITTING is only allowed in the authority kernel")
             version = int(current.get("version") or 0)
             cause = fields.pop("cause_kind", TransitionCause.CONTROL_COMMAND)
             if isinstance(cause, str):

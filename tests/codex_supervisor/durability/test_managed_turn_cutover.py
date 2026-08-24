@@ -76,7 +76,7 @@ def test_managed_turn_write_started_is_never_resubmitted(tmp_path: Path) -> None
         effect = journal.get(str(row["effect_id"]))
         assert effect.state != EffectState.PREPARED.value
         with pytest.raises(Exception):
-            journal.claim_write(
+            journal._claim_write(
                 effect.effect_id,
                 run_id="runx",
                 client_request_id="x",

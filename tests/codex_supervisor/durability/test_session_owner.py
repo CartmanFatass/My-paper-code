@@ -8,6 +8,7 @@ import pytest
 from tests.codex_supervisor.helpers import (
     insert_submittable_owner_for_effect,
     make_observer_config,
+    submit_typed_for_test,
     write_fake_codex,
 )
 from tools.codex_supervisor.client import UnexpectedServerRequest
@@ -54,11 +55,11 @@ def test_server_request_before_response_marks_effect_incident(tmp_path: Path) ->
             binding_id="bind1",
             method="turn/start",
             client_key="wake-1",
-            request={"threadId": "thr_canary", "input": []},
+            request={"threadId": "thr_canary", "input": [{"type": "text", "text": "test"}], "approvalPolicy": "never", "clientUserMessageId": "PLACEHOLDER"},
         )
         insert_submittable_owner_for_effect(store.connection, effect)
         with pytest.raises(UnexpectedServerRequest):
-            await owner.submit_effect(effect.effect_id)
+            await submit_typed_for_test(owner, effect.effect_id)
         assert journal.get(effect.effect_id).state == EffectState.INCIDENT.value
         assert AppServerSessionOwner.active_watcher_count() == 1
         await owner.close()
@@ -80,11 +81,11 @@ def test_server_request_with_response_still_incidents(tmp_path: Path) -> None:
             binding_id="bind1",
             method="thread/start",
             client_key="thread/start:bind1",
-            request={"cwd": str(tmp_path), "ephemeral": True, "approvalPolicy": "never"},
+            request={"cwd": str(tmp_path), "ephemeral": False, "approvalPolicy": "never"},
         )
         insert_submittable_owner_for_effect(store.connection, effect)
         with pytest.raises(UnexpectedServerRequest):
-            await owner.submit_effect(effect.effect_id)
+            await submit_typed_for_test(owner, effect.effect_id)
         assert journal.get(effect.effect_id).state == EffectState.INCIDENT.value
         await owner.close()
         await transport.stop()
@@ -105,11 +106,11 @@ def test_server_request_after_response_marks_linked_effect(tmp_path: Path) -> No
             binding_id="bind1",
             method="turn/start",
             client_key="hmasd-managed:turn1",
-            request={"threadId": "thr_canary", "input": []},
+            request={"threadId": "thr_canary", "input": [{"type": "text", "text": "test"}], "approvalPolicy": "never", "clientUserMessageId": "PLACEHOLDER"},
         )
         insert_submittable_owner_for_effect(store.connection, effect)
         try:
-            result = await owner.submit_effect(effect.effect_id)
+            result = await submit_typed_for_test(owner, effect.effect_id)
             assert result.state in {EffectState.RESPONSE_OBSERVED.value, EffectState.INCIDENT.value}
         except UnexpectedServerRequest:
             pass
@@ -168,11 +169,11 @@ def test_effect_incident_persists_after_response_race(tmp_path: Path) -> None:
             binding_id="bind1",
             method="thread/start",
             client_key="thread/start:bind1",
-            request={"cwd": str(tmp_path), "ephemeral": True},
+            request={"cwd": str(tmp_path), "ephemeral": False, "approvalPolicy": "never"},
         )
         insert_submittable_owner_for_effect(store.connection, effect)
         with pytest.raises(UnexpectedServerRequest):
-            await owner.submit_effect(effect.effect_id)
+            await submit_typed_for_test(owner, effect.effect_id)
         later = journal.get(effect.effect_id)
         assert later.state == EffectState.INCIDENT.value
         with pytest.raises(Exception):
@@ -196,13 +197,13 @@ def test_write_started_effect_is_not_resubmitted(tmp_path: Path) -> None:
             binding_id="bind1",
             method="turn/start",
             client_key="k1",
-            request={"threadId": "thr_canary", "input": []},
+            request={"threadId": "thr_canary", "input": [{"type": "text", "text": "test"}], "approvalPolicy": "never", "clientUserMessageId": "PLACEHOLDER"},
         )
         insert_submittable_owner_for_effect(store.connection, effect)
-        first = await owner.submit_effect(effect.effect_id)
+        first = await submit_typed_for_test(owner, effect.effect_id)
         assert first.state == EffectState.RESPONSE_OBSERVED.value
-        with pytest.raises(Exception, match="never automatically submitted"):
-            await owner.submit_effect(effect.effect_id)
+        with pytest.raises(Exception, match="not PREPARED|never automatically submitted"):
+            await submit_typed_for_test(owner, effect.effect_id)
         await owner.close()
         await transport.stop()
 

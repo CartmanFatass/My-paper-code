@@ -330,10 +330,10 @@ class WakeScheduler:
     async def submit_batch(
         self,
         wake_batch_id: str,
-        input_text: str,
         *,
         lease_generation: int | None = None,
     ) -> dict[str, object]:
+        from .durability.authority_kernel import seal_wake_batch
         from .durability.effects import EffectJournal, require_exact_prepared_wake_ownership
         from .durability.models import AggregateKind, TransitionCause, TransitionRequest
         from .durability.session_owner import AppServerSessionOwner
@@ -361,83 +361,20 @@ class WakeScheduler:
                 raise WakeSchedulerError("wake binding is missing")
             self._assert_submit_fence(binding_id, generation, wake_batch_id=wake_batch_id)
             self.leases.renew(binding_id, self.instance_id, generation=generation)
-            params = {
-                "threadId": batch["thread_id"],
-                "input": [{"type": "text", "text": input_text}],
-                "approvalPolicy": "never",
-                "clientUserMessageId": batch["client_user_message_id"],
-            }
             holder = self.instance_id
-            version = int(batch.get("version") or 0)
-
-            def _lease_and_attempt(connection) -> None:
-                # Exact ownership is re-proved at the WRITE_STARTED boundary,
-                # before any wake transition, attempt, request, or raw write.
-                require_exact_prepared_wake_ownership(
-                    connection,
-                    wake_batch_id,
-                    effect_id=effect_id,
-                    binding_id=binding_id,
-                )
-                current = connection.execute(
-                    """SELECT state, lease_holder, lease_generation FROM wake_batches
-                    WHERE wake_batch_id = ?""",
-                    (wake_batch_id,),
-                ).fetchone()
-                if (
-                    current is None
-                    or str(current["state"]) != WakeBatchState.PREPARED.value
-                    or current["lease_holder"] != holder
-                    or current["lease_generation"] != generation
-                ):
-                    raise WakeSchedulerError("wake batch is not PREPARED for this lease")
-                self.bindings.require_exact_binding_in_transaction(
-                    binding_id,
-                    expected_state=BindingState.ACTIVE,
-                    actor_context_id=binding.actor_context_id,
-                    actor_kind=binding.actor_kind.value,
-                    semantic_scope_key=binding.semantic_scope_key,
-                    thread_id=str(batch["thread_id"]),
-                    direction_id=binding.direction_id,
-                )
-                import uuid
-
-                connection.execute(
-                    """INSERT INTO wake_attempts (
-                        wake_attempt_id, wake_batch_id, attempt_number, request_id,
-                        outcome, error_json, created_at
-                    ) VALUES (?, ?, 1, NULL, ?, NULL, ?)""",
-                    (
-                        f"watt_{uuid.uuid4().hex}",
-                        wake_batch_id,
-                        WakeAttemptOutcome.SUBMITTING.value,
-                        _now(),
-                    ),
-                )
 
             owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
             self._assert_submit_fence(binding_id, generation, wake_batch_id=wake_batch_id)
-            submitted = await owner.submit_effect(
-                effect_id,
-                request_override=params,
-                extra_transitions=[
-                    TransitionRequest(
-                        aggregate_kind=AggregateKind.WAKE_BATCH,
-                        aggregate_id=wake_batch_id,
-                        expected_state=WakeBatchState.PREPARED.value,
-                        expected_version=version,
-                        target_state=WakeBatchState.SUBMITTING.value,
-                        cause_kind=TransitionCause.APP_SERVER_EFFECT,
-                        cause_ref=effect_id,
-                    )
-                ],
-                extra_hooks=[_lease_and_attempt],
-                pre_write_guard=lambda: self._semantic_write_guard(
-                    binding_id=binding_id,
-                    generation=generation,
-                    wake_batch_id=wake_batch_id,
-                ),
-            )
+            with self.bindings.store._lock, DurabilityTransaction(
+                self.bindings.store.connection
+            ):
+                plan = seal_wake_batch(
+                    self.bindings.store.connection,
+                    wake_batch_id,
+                    holder,
+                    generation,
+                )
+            submitted = await owner.submit_wake_batch(plan)
             response = dict(submitted.response or {})
         except asyncio.CancelledError:
             if effect_id and binding_id:
@@ -673,7 +610,6 @@ class WakeScheduler:
             return {"binding_id": binding_id, "readiness": readiness.value}
         submitted = await self.submit_batch(
             str(batch["wake_batch_id"]),
-            str(batch["input_text"]),
             lease_generation=lease_generation,
         )
         return submitted

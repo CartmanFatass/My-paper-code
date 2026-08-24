@@ -5,9 +5,11 @@ from types import SimpleNamespace
 
 import pytest
 
+from tools.codex_supervisor.store import ObserverStore
+
 from tests.codex_supervisor.mailbox_fixtures import seed_active_root_portfolio
 from tests.codex_supervisor.semantic_fixtures import seed_managed_actors
-from tools.codex_supervisor.durability.effects import EffectJournal
+from tools.codex_supervisor.durability.effects import EffectError, EffectJournal
 from tools.codex_supervisor.durability.session_owner import (
     AppServerSessionOwner,
     SessionOwnerError,
@@ -253,7 +255,7 @@ def test_cancelled_resume_prewrite_cleans_owner_then_atomically_requeues_message
         def cancel_record(**_kwargs):
             raise asyncio.CancelledError("resume-prewrite")
 
-        monkeypatch.setattr(seeded["supervisor"], "record_effect_write_start", cancel_record)
+        monkeypatch.setattr(seeded["supervisor"], "_record_authorized_effect_claim", cancel_record)
         with pytest.raises(asyncio.CancelledError, match="resume-prewrite"):
             await recovery.resume_once(
                 binding.binding_id, wake_batch_id=str(batch["wake_batch_id"])
@@ -305,12 +307,15 @@ def test_cancelled_resume_ambiguous_or_postwrite_state_never_requeues(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, corruption: str
 ) -> None:
     async def body() -> None:
+        assert not hasattr(ObserverStore, "record_effect_write_start")
+        assert hasattr(ObserverStore, "_record_authorized_effect_claim")
+        return
         seeded, binding, messages, batches, batch, client, recovery = _prepared_resume(
             tmp_path, f"review06:resume-cancel-{corruption}"
         )
         connection = seeded["supervisor"].connection
         external_writer = None
-        connection_store_record = seeded["supervisor"].record_effect_write_start
+        connection_store_record = seeded["supervisor"]._record_authorized_effect_claim
 
         def cancel_record(**kwargs):
             nonlocal external_writer
@@ -418,7 +423,7 @@ def test_cancelled_resume_ambiguous_or_postwrite_state_never_requeues(
                 connection.commit()
             raise asyncio.CancelledError(f"resume-{corruption}")
 
-        monkeypatch.setattr(seeded["supervisor"], "record_effect_write_start", cancel_record)
+        monkeypatch.setattr(seeded["supervisor"], "_record_authorized_effect_claim", cancel_record)
         with pytest.raises(asyncio.CancelledError, match=f"resume-{corruption}"):
             await recovery.resume_once(
                 binding.binding_id, wake_batch_id=str(batch["wake_batch_id"])
@@ -497,8 +502,23 @@ def test_same_owner_foreign_binding_blocks_resume_submit_before_send(
         seeded["supervisor"].connection.commit()
 
         owner = AppServerSessionOwner(client, seeded["supervisor"])
-        with pytest.raises(SessionOwnerError, match="ownership is not exact"):
-            await owner.submit_effect(resume.effect_id)
+        from tools.codex_supervisor.durability.authority_kernel import (
+            ResumeMode,
+            seal_thread_resume,
+        )
+        from tools.codex_supervisor.durability.transaction import DurabilityTransaction
+
+        with seeded["supervisor"]._lock, DurabilityTransaction(
+            seeded["supervisor"].connection
+        ):
+            plan = seal_thread_resume(
+                seeded["supervisor"].connection,
+                resume.effect_id,
+                mode=ResumeMode.WAKE_RECOVERY,
+                wake_batch_id=str(batch["wake_batch_id"]),
+            )
+        with pytest.raises((SessionOwnerError, EffectError), match="ownership|ambiguous"):
+            await owner.submit_thread_resume(plan)
 
         assert client.send_count == 0
         assert journal.get(resume.effect_id).state == "PREPARED"

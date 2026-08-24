@@ -1,10 +1,13 @@
 import asyncio
 import json
+import sqlite3
 from copy import deepcopy
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+
+from tests.codex_supervisor.helpers import seal_typed_plan_for_test, submit_typed_for_test
 
 from tools.codex_supervisor.canary_contract import (
     canonical_canary_thread_start_request,
@@ -120,7 +123,7 @@ def _seed_predecessor(
         client_key=f"canary:thread/start:{CANARY_ID}",
         request=request,
     )
-    journal.claim_write(
+    journal._claim_write(
         predecessor.effect_id,
         run_id=run_id,
         client_request_id="req-thread",
@@ -140,12 +143,14 @@ def _assert_prewrite_rejected(
     effect_id: str,
     client: _NoSendClient,
     original_request: dict[str, object],
+    *,
+    discard_count: int = 1,
 ) -> None:
     journal = EffectJournal(store.connection)
     effect = journal.get(effect_id)
     assert effect.state == "PREPARED"
     assert dict(effect.request) == original_request
-    assert client.discard_count == 1
+    assert client.discard_count == discard_count
     assert client.send_count == 0
     assert store.connection.execute(
         "SELECT COUNT(*) FROM raw_messages WHERE effect_id = ?", (effect_id,)
@@ -236,7 +241,7 @@ def test_thread_start_rejects_every_noncanonical_request_before_write(
         owner = AppServerSessionOwner(client, store)  # type: ignore[arg-type]
 
         with pytest.raises(SessionOwnerError, match="canary predecessor ownership"):
-            await owner.submit_effect(effect.effect_id)
+            await submit_typed_for_test(owner, effect.effect_id)
 
         _assert_prewrite_rejected(store, effect.effect_id, client, malformed)
         store.close()
@@ -303,7 +308,7 @@ def test_turn_start_revalidates_the_historical_predecessor_request(
         owner = AppServerSessionOwner(client, store)  # type: ignore[arg-type]
 
         with pytest.raises(SessionOwnerError, match="canary predecessor ownership"):
-            await owner.submit_effect(effect.effect_id)
+            await submit_typed_for_test(owner, effect.effect_id)
 
         _assert_prewrite_rejected(store, effect.effect_id, client, valid_turn)
         store.close()
@@ -434,7 +439,7 @@ def test_turn_start_rejects_every_noncanonical_request_before_write(
         owner = AppServerSessionOwner(client, store)  # type: ignore[arg-type]
 
         with pytest.raises(SessionOwnerError, match="canary predecessor ownership"):
-            await owner.submit_effect(effect.effect_id)
+            await submit_typed_for_test(owner, effect.effect_id)
 
         _assert_prewrite_rejected(store, effect.effect_id, client, malformed)
         store.close()
@@ -491,7 +496,7 @@ def test_turn_start_rejects_coerced_predecessor_response_thread_id(
         owner = AppServerSessionOwner(client, store)  # type: ignore[arg-type]
 
         with pytest.raises(SessionOwnerError, match="canary predecessor ownership"):
-            await owner.submit_effect(effect.effect_id)
+            await submit_typed_for_test(owner, effect.effect_id)
 
         _assert_prewrite_rejected(store, effect.effect_id, client, request)
         store.close()
@@ -500,7 +505,7 @@ def test_turn_start_rejects_coerced_predecessor_response_thread_id(
 
 
 @pytest.mark.parametrize("method", ["thread/start", "turn/start"])
-def test_final_proof_validates_the_effective_request_override(
+def test_sealed_canary_request_rejects_late_override(
     tmp_path: Path, method: str
 ) -> None:
     async def body() -> None:
@@ -531,14 +536,15 @@ def test_final_proof_validates_the_effective_request_override(
         override = deepcopy(valid)
         override["unrecognized"] = True
         client = _NoSendClient()
-        owner = AppServerSessionOwner(client, store)  # type: ignore[arg-type]
-
-        with pytest.raises(SessionOwnerError, match="canary predecessor ownership"):
-            await owner.submit_effect(effect.effect_id, request_override=override)
-
-        # The same write-start transaction that rejects the override also
-        # rolls the journal request back to its original canonical value.
-        _assert_prewrite_rejected(store, effect.effect_id, client, valid)
+        seal_typed_plan_for_test(store, effect.effect_id)
+        with pytest.raises(sqlite3.IntegrityError, match="immutable"):
+            store.connection.execute(
+                "UPDATE app_server_effects SET request_json=? WHERE effect_id=?",
+                (json.dumps(override, sort_keys=True, separators=(",", ":")), effect.effect_id),
+            )
+        _assert_prewrite_rejected(
+            store, effect.effect_id, client, valid, discard_count=0
+        )
         store.close()
 
     asyncio.run(body())
@@ -562,12 +568,15 @@ def test_effective_canary_override_rejects_unsupported_non_json_before_write(
         override = dict(valid)
         override["unsupported"] = ("tuple",)
         client = _NoSendClient()
-        owner = AppServerSessionOwner(client, store)  # type: ignore[arg-type]
-
+        seal_typed_plan_for_test(store, effect.effect_id)
         with pytest.raises(EffectError, match="non-JSON"):
-            await owner.submit_effect(effect.effect_id, request_override=override)
+            EffectJournal(store.connection).seal_effect(
+                effect.effect_id, request=override
+            )
 
-        _assert_prewrite_rejected(store, effect.effect_id, client, valid)
+        _assert_prewrite_rejected(
+            store, effect.effect_id, client, valid, discard_count=0
+        )
         store.close()
 
     asyncio.run(body())

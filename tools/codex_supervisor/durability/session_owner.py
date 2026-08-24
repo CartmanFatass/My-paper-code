@@ -1,24 +1,40 @@
-"""One process-lifetime App Server session owner."""
+"""One process-lifetime App Server session owner and typed send authority."""
 
 from __future__ import annotations
 
 import asyncio
-from contextlib import nullcontext
+import uuid
 from dataclasses import dataclass
-from typing import Any, Callable, ContextManager, Mapping
+from typing import Any, Mapping
 
 from ..client import (
     COMPATIBLE_REQUEST_METHODS,
     MUTATING_NO_RETRY_METHODS,
     MUTATING_OWNER_MESSAGE,
     AppServerClient,
+    PreparedRpcRequest,
     RetryRequired,
 )
 from ..protocol import extract_protocol_ids
 from ..store import ObserverStore
 from ..transport import TransportClosed
-from .effects import EffectError, EffectJournal, EffectRecord
+from .authority_kernel import (
+    EphemeralCanaryPlan,
+    ManagedTurnPlan,
+    OwnerPlan,
+    ThreadMemoryPlan,
+    ThreadProvisionPlan,
+    ThreadResumePlan,
+    WakeBatchPlan,
+    apply_typed_preclaim,
+    final_authority_proof,
+    prove_prepared_rpc,
+    request_object,
+    semantic_guard,
+)
+from .effects import EffectError, EffectJournal
 from .models import EffectState, SUBMISSION_RESULT_STATES
+from .transaction import DurabilityTransaction
 
 
 @dataclass(frozen=True)
@@ -29,14 +45,23 @@ class EffectSubmissionResult:
     incident: Mapping[str, object] | None = None
 
 
+@dataclass(frozen=True)
+class SendPermit:
+    """Immutable single-use proof that the exact prepared RPC was claimed."""
+
+    token: str
+    effect_id: str
+    prepared: PreparedRpcRequest
+
+
 class SessionOwnerError(RuntimeError):
     """Raised when the session owner cannot submit or read."""
 
 
 class AppServerSessionOwner:
-    """One client, one watcher, one mutating submit path."""
+    """One client, one watcher, and one closed-union mutation kernel."""
 
-    _by_client: dict[int, AppServerSessionOwner] = {}
+    _by_client: dict[int, "AppServerSessionOwner"] = {}
 
     def __init__(self, client: AppServerClient, store: ObserverStore) -> None:
         self.client = client
@@ -48,9 +73,10 @@ class AppServerSessionOwner:
         self._task: asyncio.Task[None] | None = None
         self._lock = asyncio.Lock()
         self._open_effect_ids: set[str] = set()
+        self._send_permits: set[str] = set()
 
     @classmethod
-    def for_client(cls, client: AppServerClient, store: ObserverStore) -> AppServerSessionOwner:
+    def for_client(cls, client: AppServerClient, store: ObserverStore) -> "AppServerSessionOwner":
         existing = cls._by_client.get(id(client))
         if existing is not None and existing._task is not None and not existing._task.done():
             return existing
@@ -61,7 +87,11 @@ class AppServerSessionOwner:
 
     @classmethod
     def active_watcher_count(cls) -> int:
-        return sum(1 for item in cls._by_client.values() if item._task is not None and not item._task.done())
+        return sum(
+            1
+            for item in cls._by_client.values()
+            if item._task is not None and not item._task.done()
+        )
 
     def start(self) -> None:
         start_reader = getattr(self.client, "start_reader", None)
@@ -134,7 +164,11 @@ class AppServerSessionOwner:
             }:
                 continue
             try:
-                self.journal.mark_incident(effect_id, evidence_ref=f"server_request:{evidence}", incident=incident)
+                self.journal.mark_incident(
+                    effect_id,
+                    evidence_ref=f"server_request:{evidence}",
+                    incident=incident,
+                )
             except EffectError:
                 continue
 
@@ -196,199 +230,126 @@ class AppServerSessionOwner:
     def release_open_effect(self, effect_id: str) -> None:
         self._open_effect_ids.discard(effect_id)
 
-    async def submit_effect(
-        self,
-        effect_id: str,
-        extra_transitions: list[Any] | None = None,
-        extra_hooks: list[Any] | None = None,
-        request_override: Mapping[str, object] | None = None,
-        pre_write_guard: Callable[[], ContextManager[object]] | None = None,
+    async def submit_managed_turn(self, plan: ManagedTurnPlan) -> EffectSubmissionResult:
+        return await self._submit_plan(plan)
+
+    async def submit_wake_batch(self, plan: WakeBatchPlan) -> EffectSubmissionResult:
+        return await self._submit_plan(plan)
+
+    async def submit_thread_provision(
+        self, plan: ThreadProvisionPlan
     ) -> EffectSubmissionResult:
+        return await self._submit_plan(plan)
+
+    async def submit_thread_resume(self, plan: ThreadResumePlan) -> EffectSubmissionResult:
+        return await self._submit_plan(plan)
+
+    async def submit_thread_memory(self, plan: ThreadMemoryPlan) -> EffectSubmissionResult:
+        return await self._submit_plan(plan)
+
+    async def submit_ephemeral_canary(
+        self, plan: EphemeralCanaryPlan
+    ) -> EffectSubmissionResult:
+        return await self._submit_plan(plan)
+
+    async def _submit_plan(self, plan: OwnerPlan) -> EffectSubmissionResult:
         from ..client import UnexpectedServerRequest
 
         if self.terminated:
             raise UnexpectedServerRequest(self.incident_payload or {})
-        from .transaction import DurabilityTransaction
-
         with self.store._lock, DurabilityTransaction(self.store.connection):
-            record = self.journal.get(effect_id)
-            if record.state != EffectState.PREPARED.value:
+            current = self.journal.get(plan.effect_id)
+            if current.state != EffectState.PREPARED.value:
                 raise SessionOwnerError(
-                    f"effect {effect_id} is {record.state}; WRITE_STARTED or later is never automatically submitted again"
+                    f"effect {plan.effect_id} is {current.state}; crossed effects are never submitted again"
                 )
-            self._require_owner_submittable(record)
         async with self._lock:
-            return await self._submit_locked(
-                record,
-                extra_transitions,
-                extra_hooks,
-                request_override,
-                pre_write_guard,
-            )
+            return await self._submit_locked(plan)
 
-    def _require_owner_submittable(
-        self, record, *, run_id: str | None = None
-    ) -> None:
-        from .effects import (
-            require_exact_canary_submission_ownership,
-            require_exact_open_effect_ownership,
-        )
+    def _before_final_authority_proof(self, plan: OwnerPlan) -> None:
+        """Result-blind test seam before the mandatory final reproof."""
 
-        # One canary owner intentionally performs thread/start followed by
-        # turn/start.  Its already RESPONSE_OBSERVED first effect is historical
-        # evidence, not another submittable write.  All states that could still
-        # write, be retried, or require no-resend containment remain globally
-        # enumerated for the final proof.
-        if record.owner_kind == "EPHEMERAL_CANARY":
-            try:
-                require_exact_canary_submission_ownership(
-                    self.store.connection,
-                    record,
-                    run_id=run_id,
-                    validate_contract=run_id is not None,
-                )
-            except EffectError as exc:
-                raise SessionOwnerError(
-                    "canary predecessor ownership is not exact; cannot submit"
-                ) from exc
-            return
-        try:
-            require_exact_open_effect_ownership(
-                self.store.connection,
-                owner_kind=record.owner_kind,
-                owner_id=record.owner_id,
-                effect_id=record.effect_id,
-                binding_id=record.binding_id,
-                expected_states=(EffectState.PREPARED.value,),
-            )
-        except EffectError as exc:
-            raise SessionOwnerError(
-                "effect owner PREPARED ownership is not exact; cannot submit"
-            ) from exc
-        if record.owner_kind == "MANAGED_TURN":
-            row = self.store.connection.execute(
-                "SELECT submission_state FROM managed_turn_intents WHERE turn_intent_id = ?",
-                (record.owner_id,),
-            ).fetchone()
-            if row is None:
-                raise SessionOwnerError("linked managed turn is missing; cannot submit")
-            if str(row[0]) != "PREPARED":
-                raise SessionOwnerError("linked managed turn is not PREPARED; cannot submit")
-            return
-        if record.owner_kind == "WAKE_BATCH":
-            from .effects import (
-                require_exact_prepared_wake_ownership,
-                require_exact_wake_ownership,
-            )
-
-            try:
-                proof = (
-                    require_exact_prepared_wake_ownership
-                    if run_id is not None
-                    else require_exact_wake_ownership
-                )
-                proof(
-                    self.store.connection, record.owner_id,
-                    effect_id=record.effect_id, binding_id=record.binding_id,
-                )
-            except EffectError as exc:
-                raise SessionOwnerError(
-                    "linked wake is missing or ownership is not exact; cannot submit"
-                ) from exc
-            return
-        if record.owner_kind in {"THREAD_PROVISION", "THREAD_RESUME", "THREAD_MEMORY"}:
-            if record.owner_kind == "THREAD_RESUME":
-                from .effects import require_exact_open_effect_ownership
-
-                try:
-                    require_exact_open_effect_ownership(
-                        self.store.connection,
-                        owner_kind="THREAD_RESUME",
-                        owner_id=record.owner_id,
-                        effect_id=record.effect_id,
-                        binding_id=record.binding_id,
-                        expected_states=(EffectState.PREPARED.value,),
-                    )
-                except EffectError as exc:
-                    raise SessionOwnerError(
-                        "linked resume effect ownership is not exact; cannot submit"
-                    ) from exc
-            binding_id = record.binding_id or record.owner_id
-            row = self.store.connection.execute(
-                """SELECT binding_state, prepared_context_trusted
-                FROM managed_actor_bindings WHERE binding_id = ?""",
-                (binding_id,),
-            ).fetchone()
-            if row is None:
-                raise SessionOwnerError("linked binding is missing; cannot submit")
-            if int(row["prepared_context_trusted"] or 0) != 1:
-                raise SessionOwnerError("linked binding has no trusted prepared-context provenance")
-            allowed = {"PREPARED"} if record.owner_kind == "THREAD_PROVISION" else {
-                "PREPARED",
-                "THREAD_CREATED",
-                "VERIFICATION_REQUIRED",
-                "ACTIVE",
-            }
-            if str(row[0]) not in allowed:
-                raise SessionOwnerError("linked binding cannot submit this effect")
-            return
-        raise SessionOwnerError(f"effect owner {record.owner_kind} cannot be submitted")
-
-    async def _submit_locked(
+    def _authorize_and_claim(
         self,
-        record: EffectRecord,
-        extra_transitions: list[Any] | None = None,
-        extra_hooks: list[Any] | None = None,
-        request_override: Mapping[str, object] | None = None,
-        pre_write_guard: Callable[[], ContextManager[object]] | None = None,
-    ) -> EffectSubmissionResult:
+        plan: OwnerPlan,
+        prepared: PreparedRpcRequest,
+        run_id: str,
+    ) -> SendPermit:
+        prove_prepared_rpc(plan, prepared)
+        guard = semantic_guard(self.store, plan)
+        try:
+            with guard:
+                with self.store._lock, DurabilityTransaction(self.store.connection):
+                    apply_typed_preclaim(self.store.connection, plan)
+                    self._before_final_authority_proof(plan)
+                    final_authority_proof(self.store.connection, plan, run_id=run_id)
+                    # From here through commit there is no caller code and no
+                    # owner/aggregate mutation, only raw/RPC/effect claim writes.
+                    self.store._record_authorized_effect_claim(
+                        effect_id=plan.effect_id,
+                        run_id=run_id,
+                        method=plan.method,
+                        payload=dict(prepared.payload),
+                        params=dict(prepared.params),
+                        request_class=prepared.request_class.value,
+                    )
+        except BaseException:
+            crossed = False
+            try:
+                crossed = self.journal.get(plan.effect_id).state != EffectState.PREPARED.value
+            except BaseException:
+                crossed = True
+            if crossed:
+                try:
+                    current = self.journal.get(plan.effect_id)
+                    if current.state == EffectState.WRITE_STARTED.value:
+                        self.journal.mark_uncertain(
+                            plan.effect_id, reason="outer_semantic_commit_failed"
+                        )
+                except BaseException:
+                    pass
+            raise
+        token = f"permit_{uuid.uuid4().hex}"
+        self._send_permits.add(token)
+        return SendPermit(token=token, effect_id=plan.effect_id, prepared=prepared)
+
+    async def _consume_send_permit(self, permit: SendPermit) -> None:
+        if permit.token not in self._send_permits:
+            raise SessionOwnerError("send permit is unknown or already consumed")
+        self._send_permits.remove(permit.token)
+        await self.client.send_prepared(permit.prepared)
+
+    async def _submit_locked(self, plan: OwnerPlan) -> EffectSubmissionResult:
         from ..client import UnexpectedServerRequest
 
-        self._open_effect_ids.add(record.effect_id)
-        request = dict(request_override) if request_override is not None else dict(record.request)
-        prepared = None
+        self._open_effect_ids.add(plan.effect_id)
+        prepared: PreparedRpcRequest | None = None
+        permit: SendPermit | None = None
         try:
-            prepared = self.client.prepare_request(record.method, request)
-            run_id = self._ensure_run()
-            guard = pre_write_guard() if pre_write_guard is not None else nullcontext()
-            with guard:
-                self.store.record_effect_write_start(
-                    effect_id=record.effect_id,
-                    run_id=run_id,
-                    method=record.method,
-                    payload=dict(prepared.payload),
-                    params=dict(prepared.params),
-                    request_class=prepared.request_class.value,
-                    extra_transitions=extra_transitions,
-                    extra_hooks=extra_hooks,
-                    request_override=request_override,
-                    final_owner_guard=lambda _connection: self._require_owner_submittable(
-                        record, run_id=run_id
-                    ),
-                )
-        except asyncio.CancelledError:
+            prepared = self.client.prepare_request(plan.method, request_object(plan))
+            permit = self._authorize_and_claim(plan, prepared, self._ensure_run())
+        except BaseException:
+            crossed = False
             try:
-                still_prepared = (
-                    self.journal.get(record.effect_id).state == EffectState.PREPARED.value
-                )
-            except EffectError:
-                still_prepared = False
-            if still_prepared:
-                if prepared is not None:
-                    discard = getattr(self.client, "discard_prepared", None)
-                    if callable(discard):
-                        discard(prepared)
-                self._open_effect_ids.discard(record.effect_id)
-            raise
-        except Exception:
+                crossed = self.journal.get(plan.effect_id).state != EffectState.PREPARED.value
+            except BaseException:
+                crossed = True
             if prepared is not None:
-                discard = getattr(self.client, "discard_prepared", None)
-                if callable(discard):
-                    discard(prepared)
-            self._open_effect_ids.discard(record.effect_id)
+                self.client.discard_prepared(prepared)
+            if not crossed:
+                self._open_effect_ids.discard(plan.effect_id)
             raise
-        assert prepared is not None
-        await self.client.send_prepared(prepared)
+        assert prepared is not None and permit is not None
+        try:
+            await self._consume_send_permit(permit)
+        except BaseException:
+            try:
+                current = self.journal.get(plan.effect_id)
+                if current.state == EffectState.WRITE_STARTED.value:
+                    self.journal.mark_uncertain(plan.effect_id, reason="send_failed")
+            except BaseException:
+                pass
+            raise
         send = asyncio.create_task(self.client.await_prepared(prepared))
         incident = asyncio.create_task(self._incident.wait())
         done, pending = await asyncio.wait({send, incident}, return_when=asyncio.FIRST_COMPLETED)
@@ -405,46 +366,64 @@ class AppServerSessionOwner:
                 await send
             except (asyncio.CancelledError, Exception):
                 pass
-            self._mark_open_effects_incident(self.incident_payload or {"reason": "server_request"})
+            self._mark_open_effects_incident(
+                self.incident_payload or {"reason": "server_request"}
+            )
             raise UnexpectedServerRequest(self.incident_payload or {})
         await asyncio.sleep(0)
         if self.terminated or self._incident.is_set():
-            self._mark_open_effects_incident(self.incident_payload or {"reason": "server_request"})
+            self._mark_open_effects_incident(
+                self.incident_payload or {"reason": "server_request"}
+            )
             raise UnexpectedServerRequest(self.incident_payload or {})
         try:
             response = send.result()
         except RetryRequired:
-            self.journal.mark_uncertain(record.effect_id, reason="overload")
+            self.journal.mark_uncertain(plan.effect_id, reason="overload")
             raise
         except (TimeoutError, asyncio.TimeoutError, TransportClosed):
-            updated = self.journal.mark_uncertain(record.effect_id, reason="timeout")
-            return EffectSubmissionResult(record.effect_id, updated.state, None, {"reason": "timeout"})
+            updated = self.journal.mark_uncertain(plan.effect_id, reason="timeout")
+            return EffectSubmissionResult(
+                plan.effect_id, updated.state, None, {"reason": "timeout"}
+            )
         except Exception:
             if self.terminated or self._incident.is_set():
-                self._mark_open_effects_incident(self.incident_payload or {"reason": "server_request"})
+                self._mark_open_effects_incident(
+                    self.incident_payload or {"reason": "server_request"}
+                )
                 raise UnexpectedServerRequest(self.incident_payload or {})
-            self.journal.mark_uncertain(record.effect_id, reason="transport")
+            self.journal.mark_uncertain(plan.effect_id, reason="transport")
             raise
-        current = self.journal.get(record.effect_id)
+        current = self.journal.get(plan.effect_id)
         if current.state == EffectState.INCIDENT.value:
             raise UnexpectedServerRequest(self.incident_payload or {})
         ids = extract_protocol_ids(response)
         inner = response.get("result") if isinstance(response.get("result"), Mapping) else {}
-        thread = inner.get("thread") if isinstance(inner, Mapping) and isinstance(inner.get("thread"), Mapping) else {}
-        turn = inner.get("turn") if isinstance(inner, Mapping) and isinstance(inner.get("turn"), Mapping) else {}
+        thread = (
+            inner.get("thread")
+            if isinstance(inner, Mapping) and isinstance(inner.get("thread"), Mapping)
+            else {}
+        )
+        turn = (
+            inner.get("turn")
+            if isinstance(inner, Mapping) and isinstance(inner.get("turn"), Mapping)
+            else {}
+        )
         observed = self.journal.observe_response(
-            record.effect_id,
+            plan.effect_id,
             response=response,
             thread_id=ids.thread_id or (str(thread.get("id")) if thread else None),
             turn_id=ids.turn_id or (str(turn.get("id")) if turn else None),
         )
         await asyncio.sleep(0)
         if self.terminated or self._incident.is_set():
-            self._mark_open_effects_incident(self.incident_payload or {"reason": "server_request"})
+            self._mark_open_effects_incident(
+                self.incident_payload or {"reason": "server_request"}
+            )
             raise UnexpectedServerRequest(self.incident_payload or {})
         if observed.state not in SUBMISSION_RESULT_STATES:
             raise SessionOwnerError(f"unexpected effect submission state {observed.state}")
-        return EffectSubmissionResult(record.effect_id, observed.state, response, None)
+        return EffectSubmissionResult(plan.effect_id, observed.state, response, None)
 
     async def request(
         self,
