@@ -1,7 +1,0 @@
-{
-  "description": "disabled by user-authorized low-intrusion control-plane policy",
-  "mode": "disabled_low_intrusion",
-  "desired_mode": "disabled_low_intrusion",
-  "reason": "NR-HIGH_FREQUENCY_HOOKS-001|NR-COMPACTION-HOOKS-001",
-  "hooks": {}
-}

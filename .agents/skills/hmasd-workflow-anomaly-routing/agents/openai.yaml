@@ -1,4 +1,0 @@
-interface:
-  display_name: "HMASD Workflow Anomaly Routing"
-  short_description: "Route non-core workflow anomalies to recovery"
-  default_prompt: "Use $hmasd-workflow-anomaly-routing to route this EM or CM workflow anomaly."
