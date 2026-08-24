@@ -55,17 +55,44 @@ class ManagedProvisioner:
             raise ProvisioningError("operator identity is required")
         self.bindings.confirm_global_memory_disabled(binding_id, operator=operator)
 
+    @staticmethod
+    def _trusted_currentness(binding) -> tuple[str | None, int, str | None, int | None]:
+        if not binding.prepared_context_trusted:
+            raise ProvisioningError("binding has no trusted prepared-context provenance")
+        if binding.binding_state is BindingState.ACTIVE:
+            if (
+                binding.verified_state_version is None
+                or binding.verification_turn_intent_id is None
+                or binding.verification_turn_id is None
+                or binding.verification_command_id is None
+                or binding.verification_receipt_id is None
+            ):
+                raise ProvisioningError("ACTIVE binding has no durable verified-context provenance")
+            return (
+                binding.verified_checkpoint_id,
+                binding.verified_state_version,
+                binding.verified_epoch_id,
+                binding.verified_epoch_revision,
+            )
+        return (
+            binding.prepared_checkpoint_id,
+            binding.prepared_state_version,
+            binding.prepared_epoch_id,
+            binding.prepared_epoch_revision,
+        )
+
     @contextmanager
     def _semantic_prewrite_guard(self, binding) -> Iterator[object]:
         bridge = getattr(self.bindings, "bridge", None)
         if bridge is None:
             raise ProvisioningError("provisioning requires a semantic bridge")
+        currentness = self._trusted_currentness(binding)
         with bridge.currentness_guard(
             binding.actor_context_id,
-            checkpoint_id=binding.prepared_checkpoint_id,
-            state_version=binding.prepared_state_version,
-            epoch_id=binding.prepared_epoch_id,
-            epoch_revision=binding.prepared_epoch_revision,
+            checkpoint_id=currentness[0],
+            state_version=currentness[1],
+            epoch_id=currentness[2],
+            epoch_revision=currentness[3],
         ) as snapshot:
             if (
                 snapshot.actor_kind != binding.actor_kind.value
@@ -76,6 +103,7 @@ class ManagedProvisioner:
 
     def _binding_prewrite_hook(self, binding, expected_state: BindingState):
         def _hook(_connection) -> None:
+            currentness = self._trusted_currentness(binding)
             self.bindings.require_exact_binding_in_transaction(
                 binding.binding_id,
                 expected_state=expected_state,
@@ -84,12 +112,13 @@ class ManagedProvisioner:
                 semantic_scope_key=binding.semantic_scope_key,
                 thread_id=binding.thread_id,
                 direction_id=binding.direction_id,
-                prepared_currentness=(
-                    binding.prepared_checkpoint_id,
-                    binding.prepared_state_version,
-                    binding.prepared_epoch_id,
-                    binding.prepared_epoch_revision,
-                ),
+                prepared_currentness=currentness
+                if expected_state is not BindingState.ACTIVE
+                else None,
+                verified_currentness=currentness
+                if expected_state is BindingState.ACTIVE
+                else None,
+                require_trusted_prepared_context=True,
             )
 
         return _hook
@@ -142,18 +171,24 @@ class ManagedProvisioner:
         self.confirm_global_memory_disabled(binding_id, operator=operator)
 
     def _assert_provision_fence(self, binding, *, effect_id: str | None = None) -> None:
+        if not binding.prepared_context_trusted:
+            self.bindings.cancel_prepared_binding_effect(
+                binding.binding_id, effect_id, cause_ref="untrusted_prepared_context"
+            )
+            raise ProvisioningError("binding has no trusted prepared-context provenance")
         if binding.binding_state.value != "PREPARED":
             raise ProvisioningError("binding is not PREPARED")
         bridge = getattr(self.bindings, "bridge", None)
         if bridge is None:
             return
+        currentness = self._trusted_currentness(binding)
         try:
             actor = bridge.assert_currentness(
                 binding.actor_context_id,
-                checkpoint_id=binding.prepared_checkpoint_id,
-                state_version=binding.prepared_state_version,
-                epoch_id=binding.prepared_epoch_id,
-                epoch_revision=binding.prepared_epoch_revision,
+                checkpoint_id=currentness[0],
+                state_version=currentness[1],
+                epoch_id=currentness[2],
+                epoch_revision=currentness[3],
             )
         except SemanticBridgeError as exc:
             self.bindings.cancel_prepared_binding_effect(

@@ -125,6 +125,7 @@ class ManagedActorBinding:
     prepared_state_version: int = 0
     prepared_epoch_id: str | None = None
     prepared_epoch_revision: int | None = None
+    prepared_context_trusted: bool = False
     verification_turn_intent_id: str | None = None
     verification_turn_id: str | None = None
     verification_command_id: str | None = None

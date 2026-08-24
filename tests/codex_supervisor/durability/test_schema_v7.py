@@ -250,8 +250,8 @@ def test_v6_to_v7_preserves_rows_and_adds_kernel_tables(tmp_path: Path) -> None:
     _seed_v6(path)
     connection = connect(path)
     initialize_database(connection)
-    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 8
-    assert SCHEMA_VERSION == 8
+    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 10
+    assert SCHEMA_VERSION == 10
     tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
     assert set(REQUIRED_TABLES) <= tables
     assert "app_server_effects" in tables
@@ -266,7 +266,11 @@ def test_v6_to_v7_preserves_rows_and_adds_kernel_tables(tmp_path: Path) -> None:
     assert connection.execute("SELECT intent_id FROM mutation_intents").fetchone()[0] == "mut1"
     assert connection.execute("SELECT request_row_id FROM rpc_requests").fetchone()[0] == "rpc1"
     assert connection.execute("SELECT COUNT(*) FROM raw_messages").fetchone()[0] == 1
-    assert connection.execute("SELECT version FROM managed_actor_bindings").fetchone()[0] == 0
+    migrated_binding = connection.execute(
+        """SELECT binding_state, version, prepared_context_trusted
+        FROM managed_actor_bindings"""
+    ).fetchone()
+    assert tuple(migrated_binding) == ("SUSPENDED", 1, 0)
     assert connection.execute("SELECT version FROM managed_turn_intents").fetchone()[0] == 0
     assert connection.execute("SELECT version FROM wake_batches").fetchone()[0] == 0
     assert connection.execute("SELECT delivery_version FROM mailbox_messages").fetchone()[0] == 0
@@ -277,18 +281,22 @@ def test_v6_to_v7_preserves_rows_and_adds_kernel_tables(tmp_path: Path) -> None:
     raw_cols = {row[1] for row in connection.execute("PRAGMA table_info(raw_messages)")}
     rpc_cols = {row[1] for row in connection.execute("PRAGMA table_info(rpc_requests)")}
     mut_cols = {row[1] for row in connection.execute("PRAGMA table_info(mutation_intents)")}
+    binding_cols = {
+        row[1] for row in connection.execute("PRAGMA table_info(managed_actor_bindings)")
+    }
     assert "effect_id" in turn_cols
     assert "effect_id" in wake_cols
     assert "effect_id" in raw_cols
     assert "effect_id" in rpc_cols
     assert "superseded_by_effect_id" in mut_cols
+    assert "prepared_context_trusted" in binding_cols
     index_sql = connection.execute(
         "SELECT sql FROM sqlite_master WHERE type='index' AND name='mutation_intents_open_unique'"
     ).fetchone()[0]
     assert "SUBMITTED_UNRECONCILED" in index_sql
     assert "INCIDENT" in index_sql
     initialize_database(connection)
-    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 8
+    assert connection.execute("SELECT MAX(version) FROM schema_meta").fetchone()[0] == 10
     connection.close()
 
 

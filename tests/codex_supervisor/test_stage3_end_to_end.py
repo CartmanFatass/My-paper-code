@@ -114,7 +114,9 @@ def test_verify_activate_and_reject_wrong_thread_or_released_actor(tmp_path: Pat
         )
         with pytest.raises(ManagedRuntimeError):
             runtime.complete_activation(other, raw_message_seq=other_seq)
-        assert store.get(other).binding_state is BindingState.SUSPENDED
+        # Direct suspension must not bypass the still-PREPARED verification
+        # effect.  Exact containment remains a separate operator action.
+        assert store.get(other).binding_state is BindingState.VERIFICATION_REQUIRED
         await transport.stop()
         seeded["bridge"].close()
         seeded["supervisor"].close()

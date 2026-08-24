@@ -11,6 +11,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Awaitable, Callable, Mapping
 
+from .canary_contract import (
+    CANARY_TEXT,
+    canonical_canary_scratch,
+    canonical_canary_thread_start_request,
+    canonical_canary_turn_start_request,
+)
 from .client import (
     MUTATING_NO_RETRY_METHODS,
     MUTATING_OWNER_MESSAGE,
@@ -37,11 +43,6 @@ from .transport import AppServerTransport, TransportClosed, TransportMessage
 
 if TYPE_CHECKING:
     from .host_control import HostControlChannel
-
-CANARY_PROMPT = "Reply exactly: HMASD_APP_SERVER_OBSERVER_OK\nDo not use tools."
-CANARY_TEXT = "HMASD_APP_SERVER_OBSERVER_OK"
-CANARY_INPUT = [{"type": "text", "text": CANARY_PROMPT}]
-
 
 def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -248,6 +249,8 @@ class ObserverService:
         canary_id: str,
         method: str,
         params: Mapping[str, object],
+        *,
+        predecessor_effect_id: str | None = None,
     ) -> dict[str, object]:
         assert self.client is not None
         from .durability.effects import EffectJournal
@@ -262,12 +265,15 @@ class ObserverService:
             method=method,
             client_key=f"canary:{method}:{canary_id}",
             request=dict(params),
+            predecessor_effect_id=predecessor_effect_id,
         )
         submitted = await owner.submit_effect(effect.effect_id)
         if owner.classify_submission(submitted) != "observed":
             raise RuntimeError("canary mutation was not observed")
         await self._drain_incident()
-        return dict(submitted.response or {})
+        response = dict(submitted.response or {})
+        response["_hmasd_effect_id"] = effect.effect_id
+        return response
 
     async def _list_threads(self) -> list[dict[str, object]]:
         threads: list[dict[str, object]] = []
@@ -529,7 +535,7 @@ class ObserverService:
 
     async def run_ephemeral_canary(self, timeout_seconds: float = 300) -> CanaryResult:
         canary_id = f"canary_{uuid.uuid4().hex}"
-        scratch = self.store.runtime_home / "scratch" / canary_id
+        scratch = canonical_canary_scratch(self.store.runtime_home, canary_id)
         scratch.mkdir(parents=True, exist_ok=True)
         outbound: list[str] = []
         previous_hook = self.outbound_hook
@@ -556,8 +562,11 @@ class ObserverService:
             start = await self._submit_canary_effect(
                 canary_id,
                 "thread/start",
-                {"cwd": str(scratch.resolve()), "ephemeral": True, "approvalPolicy": "never"},
+                canonical_canary_thread_start_request(
+                    self.store.runtime_home, canary_id
+                ),
             )
+            predecessor_effect_id = str(start.pop("_hmasd_effect_id"))
             if watcher.done():
                 exc = watcher.exception()
                 if isinstance(exc, UnexpectedServerRequest):
@@ -574,8 +583,10 @@ class ObserverService:
             turn = await self._submit_canary_effect(
                 canary_id,
                 "turn/start",
-                {"threadId": thread_id, "input": list(CANARY_INPUT)},
+                canonical_canary_turn_start_request(thread_id),
+                predecessor_effect_id=predecessor_effect_id,
             )
+            turn.pop("_hmasd_effect_id", None)
             if outbound.count("thread/start") != 1 or outbound.count("turn/start") != 1:
                 raise RuntimeError("mutating canary requests must be sent exactly once")
             turn_id = extract_protocol_ids(turn).turn_id

@@ -78,27 +78,45 @@ class WakeScheduler:
             sender_kind_for=self._sender_kinds(),
         )
 
-    def _abort_unsubmitted_wake(self, binding_id: str, wake_batch_id: str | None) -> None:
-        """Cancel/requeue only; plain snapshot failures never suspend actors."""
+    def _prove_exact_prepared_wake(self, wake_batch_id: str) -> dict[str, object]:
+        from .durability.effects import require_exact_prepared_wake_ownership
+        from .durability.transaction import DurabilityTransaction
 
-        if not wake_batch_id:
-            return
-        batch = self.batches.get(wake_batch_id)
-        if batch is None:
-            return
-        if str(batch["state"]) == WakeBatchState.PREPARED.value:
-            from .durability.effects import cancel_prepared_wake
+        connection = self.bindings.store.connection
+        with self.bindings.store._lock, DurabilityTransaction(connection):
+            return require_exact_prepared_wake_ownership(connection, wake_batch_id)
 
-            cancel_prepared_wake(
-                self.bindings.store.connection,
+    def _cancel_exact_prepared_wake(
+        self,
+        wake_batch_id: str,
+        *,
+        effect_id: str,
+        binding_id: str,
+        cause_ref: str,
+    ) -> None:
+        from .durability.effects import cancel_exact_prepared_wake
+        from .durability.transaction import DurabilityTransaction
+
+        connection = self.bindings.store.connection
+        with self.bindings.store._lock, DurabilityTransaction(connection):
+            cancel_exact_prepared_wake(
+                connection,
                 wake_batch_id,
-                cause_ref="prewrite-snapshot-failed",
+                effect_id=effect_id,
+                binding_id=binding_id,
+                cause_ref=cause_ref,
             )
 
-    def _contain_guarded_ineligible_actor(self, binding_id: str, wake_batch_id: str) -> None:
+    def _contain_guarded_ineligible_actor(
+        self, binding_id: str, wake_batch_id: str, effect_id: str
+    ) -> None:
         """Atomically suspend and cancel only after typed guarded ineligibility."""
 
-        from .durability.effects import cancel_prepared_wake
+        from .durability.effects import (
+            cancel_exact_prepared_wake,
+            require_exact_binding_containment_ownership,
+            require_exact_prepared_wake_ownership,
+        )
         from .durability.models import AggregateKind, TransitionCause, TransitionRequest
         from .durability.transaction import DurabilityTransaction
         from .durability.transitions import TransitionKernel
@@ -106,6 +124,19 @@ class WakeScheduler:
         with self.bindings.store._lock, DurabilityTransaction(
             self.bindings.store.connection
         ):
+            require_exact_prepared_wake_ownership(
+                self.bindings.store.connection,
+                wake_batch_id,
+                effect_id=effect_id,
+                binding_id=binding_id,
+            )
+            require_exact_binding_containment_ownership(
+                self.bindings.store.connection,
+                binding_id=binding_id,
+                effect_id=effect_id,
+                owner_kind="WAKE_BATCH",
+                owner_id=wake_batch_id,
+            )
             row = self.bindings.store.connection.execute(
                 "SELECT binding_state, version FROM managed_actor_bindings WHERE binding_id = ?",
                 (binding_id,),
@@ -123,18 +154,21 @@ class WakeScheduler:
                         field_updates={"suspended_at": _now()},
                     )
                 )
-            cancel_prepared_wake(
+            cancel_exact_prepared_wake(
                 self.bindings.store.connection,
                 wake_batch_id,
+                effect_id=effect_id,
+                binding_id=binding_id,
                 cause_ref="guarded_actor_ineligible",
             )
 
-    def _cancel_currentness_drift(self, wake_batch_id: str, reason: str) -> None:
-        from .durability.effects import cancel_prepared_wake
-
-        cancel_prepared_wake(
-            self.bindings.store.connection,
+    def _cancel_currentness_drift(
+        self, wake_batch_id: str, effect_id: str, binding_id: str, reason: str
+    ) -> None:
+        self._cancel_exact_prepared_wake(
             wake_batch_id,
+            effect_id=effect_id,
+            binding_id=binding_id,
             cause_ref=reason,
         )
 
@@ -146,7 +180,10 @@ class WakeScheduler:
         fails closed without making a second requeue decision.
         """
 
-        from .durability.effects import cancel_prepared_wake
+        from .durability.effects import (
+            cancel_exact_prepared_wake,
+            require_exact_wake_ownership,
+        )
         from .durability.transaction import DurabilityTransaction
 
         connection = self.bindings.store.connection
@@ -156,21 +193,20 @@ class WakeScheduler:
                     "wake submit containment cannot own the durability transaction"
                 )
             with DurabilityTransaction(connection):
-                effect_row = connection.execute(
-                    "SELECT state FROM app_server_effects WHERE effect_id = ?",
-                    (effect_id,),
-                ).fetchone()
-                if effect_row is None:
-                    raise WakeSchedulerError(
-                        "wake submit containment cannot establish the linked effect state"
-                    )
-                effect_state = str(effect_row["state"])
+                ownership = require_exact_wake_ownership(
+                    connection,
+                    wake_batch_id,
+                    effect_id=effect_id,
+                )
+                effect_state = str(ownership["effect_state"])
                 if effect_state != "PREPARED":
                     return effect_state
 
-                cancel_prepared_wake(
+                cancel_exact_prepared_wake(
                     connection,
                     wake_batch_id,
+                    effect_id=effect_id,
+                    binding_id=str(ownership["binding_id"]),
                     cause_ref="raw_prewrite_submit_failure",
                 )
                 final_effect = connection.execute(
@@ -223,19 +259,15 @@ class WakeScheduler:
                 (wake_batch_id, binding_id),
             ).fetchall()
             if len(rows) != 1:
-                self._cancel_currentness_drift(wake_batch_id, "missing_or_ambiguous_context_binding")
                 raise WakeSchedulerError("wake batch has no exact durable context binding")
             context_row = rows[0]
         try:
             snapshot = self.bridge.snapshot(binding.actor_context_id)
         except SemanticBridgeError as exc:
-            self._abort_unsubmitted_wake(binding_id, wake_batch_id)
             raise WakeSchedulerError(str(exc)) from exc
         if snapshot.actor_kind != binding.actor_kind.value:
-            self._abort_unsubmitted_wake(binding_id, wake_batch_id)
             raise WakeSchedulerError("actor kind no longer matches binding")
         if snapshot.scope_key != binding.semantic_scope_key:
-            self._abort_unsubmitted_wake(binding_id, wake_batch_id)
             raise WakeSchedulerError("actor scope no longer matches binding")
         if context_row is not None:
             row = context_row
@@ -252,7 +284,6 @@ class WakeScheduler:
                 snapshot.epoch_revision,
             )
             if actual != expected:
-                self._cancel_currentness_drift(wake_batch_id, "semantic_currentness_mismatch")
                 raise WakeSchedulerError("wake batch semantic currentness no longer matches")
 
     @contextmanager
@@ -303,85 +334,89 @@ class WakeScheduler:
         *,
         lease_generation: int | None = None,
     ) -> dict[str, object]:
-        batch = self.batches.get(wake_batch_id)
-        if batch is None:
-            raise WakeSchedulerError("unknown wake batch")
-        if batch["state"] != WakeBatchState.PREPARED.value:
-            raise WakeSchedulerError("wake batch is not PREPARED; reconcile, do not resend")
-        if self.client is None:
-            raise WakeSchedulerError("client required to submit a wake")
-        if lease_generation is None:
-            raise WakeSchedulerError("automatic submit requires lease generation")
-        generation = int(lease_generation)
-        binding = self.bindings.get(str(batch["binding_id"]))
-        if binding is None:
-            raise WakeSchedulerError("wake binding is missing")
-        self._assert_submit_fence(str(batch["binding_id"]), generation, wake_batch_id=wake_batch_id)
-        self.leases.renew(str(batch["binding_id"]), self.instance_id, generation=generation)
-        params = {
-            "threadId": batch["thread_id"],
-            "input": [{"type": "text", "text": input_text}],
-            "approvalPolicy": "never",
-            "clientUserMessageId": batch["client_user_message_id"],
-        }
-        effect_id = str(batch.get("effect_id") or "")
-        if not effect_id:
-            raise WakeSchedulerError("wake batch has no linked effect")
-        from .durability.effects import EffectJournal
+        from .durability.effects import EffectJournal, require_exact_prepared_wake_ownership
         from .durability.models import AggregateKind, TransitionCause, TransitionRequest
         from .durability.session_owner import AppServerSessionOwner
         from .durability.transaction import DurabilityTransaction
         from .durability.transitions import TransitionError, TransitionKernel
-
-        holder = self.instance_id
-        version = int(batch.get("version") or 0)
-
-        def _lease_and_attempt(connection) -> None:
-            current = connection.execute(
-                """SELECT state, lease_holder, lease_generation FROM wake_batches
-                WHERE wake_batch_id = ?""",
-                (wake_batch_id,),
-            ).fetchone()
-            if (
-                current is None
-                or str(current["state"]) != WakeBatchState.PREPARED.value
-                or current["lease_holder"] != holder
-                or current["lease_generation"] != generation
-            ):
-                raise WakeSchedulerError("wake batch is not PREPARED for this lease")
-            binding_row = connection.execute(
-                "SELECT * FROM managed_actor_bindings WHERE binding_id = ?",
-                (str(batch["binding_id"]),),
-            ).fetchone()
-            if binding_row is None:
-                raise WakeSchedulerError("binding is missing at wake write start")
-            self.bindings.require_exact_binding_in_transaction(
-                str(batch["binding_id"]),
-                expected_state=BindingState.ACTIVE,
-                actor_context_id=binding.actor_context_id,
-                actor_kind=binding.actor_kind.value,
-                semantic_scope_key=binding.semantic_scope_key,
-                thread_id=str(batch["thread_id"]),
-                direction_id=binding.direction_id,
-            )
-            import uuid
-
-            connection.execute(
-                """INSERT INTO wake_attempts (
-                    wake_attempt_id, wake_batch_id, attempt_number, request_id,
-                    outcome, error_json, created_at
-                ) VALUES (?, ?, 1, NULL, ?, NULL, ?)""",
-                (
-                    f"watt_{uuid.uuid4().hex}",
-                    wake_batch_id,
-                    WakeAttemptOutcome.SUBMITTING.value,
-                    _now(),
-                ),
-            )
-
-        owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
+        batch: dict[str, object] | None = None
+        binding = None
+        binding_id = ""
+        effect_id = ""
+        owner = None
+        generation = 0
         try:
-            self._assert_submit_fence(str(batch["binding_id"]), generation, wake_batch_id=wake_batch_id)
+            # This is intentionally the first supervisor read in the submit path.
+            # It owns BEGIN IMMEDIATE and proves the complete batch/effect tuple.
+            batch = self._prove_exact_prepared_wake(wake_batch_id)
+            binding_id = str(batch["binding_id"])
+            effect_id = str(batch["effect_id"])
+            if self.client is None:
+                raise WakeSchedulerError("client required to submit a wake")
+            if lease_generation is None:
+                raise WakeSchedulerError("automatic submit requires lease generation")
+            generation = int(lease_generation)
+            binding = self.bindings.get(binding_id)
+            if binding is None:
+                raise WakeSchedulerError("wake binding is missing")
+            self._assert_submit_fence(binding_id, generation, wake_batch_id=wake_batch_id)
+            self.leases.renew(binding_id, self.instance_id, generation=generation)
+            params = {
+                "threadId": batch["thread_id"],
+                "input": [{"type": "text", "text": input_text}],
+                "approvalPolicy": "never",
+                "clientUserMessageId": batch["client_user_message_id"],
+            }
+            holder = self.instance_id
+            version = int(batch.get("version") or 0)
+
+            def _lease_and_attempt(connection) -> None:
+                # Exact ownership is re-proved at the WRITE_STARTED boundary,
+                # before any wake transition, attempt, request, or raw write.
+                require_exact_prepared_wake_ownership(
+                    connection,
+                    wake_batch_id,
+                    effect_id=effect_id,
+                    binding_id=binding_id,
+                )
+                current = connection.execute(
+                    """SELECT state, lease_holder, lease_generation FROM wake_batches
+                    WHERE wake_batch_id = ?""",
+                    (wake_batch_id,),
+                ).fetchone()
+                if (
+                    current is None
+                    or str(current["state"]) != WakeBatchState.PREPARED.value
+                    or current["lease_holder"] != holder
+                    or current["lease_generation"] != generation
+                ):
+                    raise WakeSchedulerError("wake batch is not PREPARED for this lease")
+                self.bindings.require_exact_binding_in_transaction(
+                    binding_id,
+                    expected_state=BindingState.ACTIVE,
+                    actor_context_id=binding.actor_context_id,
+                    actor_kind=binding.actor_kind.value,
+                    semantic_scope_key=binding.semantic_scope_key,
+                    thread_id=str(batch["thread_id"]),
+                    direction_id=binding.direction_id,
+                )
+                import uuid
+
+                connection.execute(
+                    """INSERT INTO wake_attempts (
+                        wake_attempt_id, wake_batch_id, attempt_number, request_id,
+                        outcome, error_json, created_at
+                    ) VALUES (?, ?, 1, NULL, ?, NULL, ?)""",
+                    (
+                        f"watt_{uuid.uuid4().hex}",
+                        wake_batch_id,
+                        WakeAttemptOutcome.SUBMITTING.value,
+                        _now(),
+                    ),
+                )
+
+            owner = AppServerSessionOwner.for_client(self.client, self.bindings.store)
+            self._assert_submit_fence(binding_id, generation, wake_batch_id=wake_batch_id)
             submitted = await owner.submit_effect(
                 effect_id,
                 request_override=params,
@@ -398,47 +433,60 @@ class WakeScheduler:
                 ],
                 extra_hooks=[_lease_and_attempt],
                 pre_write_guard=lambda: self._semantic_write_guard(
-                    binding_id=str(batch["binding_id"]),
+                    binding_id=binding_id,
                     generation=generation,
                     wake_batch_id=wake_batch_id,
                 ),
             )
             response = dict(submitted.response or {})
+        except asyncio.CancelledError:
+            if effect_id and binding_id:
+                try:
+                    self._contain_raw_submit_failure(wake_batch_id, effect_id)
+                except Exception:
+                    # Ambiguous ownership or a containment fault must preserve
+                    # the durable state exactly as found. Cancellation remains
+                    # cancellation and is never replaced or swallowed.
+                    pass
+            raise
         except SemanticActorEligibilityError as exc:
-            from .durability.effects import EffectJournal
-
-            if EffectJournal(self.bindings.store.connection).get(effect_id).state == "PREPARED":
+            if effect_id and binding_id:
                 self._contain_guarded_ineligible_actor(
-                    str(batch["binding_id"]), wake_batch_id
+                    binding_id, wake_batch_id, effect_id
                 )
             raise WakeSchedulerError(str(exc)) from exc
         except SemanticBridgeError as exc:
-            from .durability.effects import EffectJournal
-
-            if EffectJournal(self.bindings.store.connection).get(effect_id).state == "PREPARED":
-                self._cancel_currentness_drift(wake_batch_id, "semantic_currentness_mismatch")
+            if effect_id and binding_id:
+                self._contain_raw_submit_failure(wake_batch_id, effect_id)
             raise WakeSchedulerError(str(exc)) from exc
         except WakeSchedulerError:
-            from .durability.effects import EffectJournal
-
-            if EffectJournal(self.bindings.store.connection).get(effect_id).state == "PREPARED":
-                self._cancel_currentness_drift(wake_batch_id, "pre_write_fence_failed")
+            if effect_id and binding_id:
+                self._contain_raw_submit_failure(wake_batch_id, effect_id)
             raise
         except LeaseError:
-            from .durability.effects import EffectJournal
-
-            if EffectJournal(self.bindings.store.connection).get(effect_id).state == "PREPARED":
-                self._cancel_currentness_drift(wake_batch_id, "lease_lost_before_write")
+            if effect_id and binding_id:
+                self._contain_raw_submit_failure(wake_batch_id, effect_id)
             raise
         except RetryRequired as exc:
+            if effect_id and self._contain_raw_submit_failure(wake_batch_id, effect_id) == "CANCELLED_BEFORE_WRITE":
+                raise WakeSchedulerError("wake submit cancelled before write") from exc
             self._mark_uncertain(wake_batch_id, {"reason": "overload"})
             raise WakeSchedulerError("wake turn/start uncertain; do not retry") from exc
         except UnexpectedServerRequest as exc:
+            if effect_id:
+                self._contain_raw_submit_failure(wake_batch_id, effect_id)
             raise WakeSchedulerError("wake turn/start incident; do not retry") from exc
         except (AppServerRpcError, TransportClosed, asyncio.TimeoutError) as exc:
+            if effect_id and self._contain_raw_submit_failure(wake_batch_id, effect_id) == "CANCELLED_BEFORE_WRITE":
+                raise WakeSchedulerError("wake submit cancelled before write") from exc
             self._mark_uncertain(wake_batch_id, {"reason": type(exc).__name__})
             raise WakeSchedulerError("wake turn/start uncertain; do not retry") from exc
         except Exception as exc:
+            if not effect_id:
+                raise WakeSchedulerError(
+                    "wake submit failure containment failed closed; "
+                    f"{type(exc).__name__}: {exc}; reconcile, do not retry"
+                ) from exc
             try:
                 effect_state = self._contain_raw_submit_failure(wake_batch_id, effect_id)
             except Exception as containment_exc:

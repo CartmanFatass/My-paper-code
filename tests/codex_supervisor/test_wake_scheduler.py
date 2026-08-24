@@ -136,6 +136,7 @@ def test_wake_context_binding_missing_or_drift_cancels_and_requeues(
         scheduler._assert_submit_fence(
             binding_id, int(lease["generation"]), wake_batch_id=batch_id
         )
+    scheduler._contain_raw_submit_failure(batch_id, str(batch["effect_id"]))
     assert batches.get(batch_id)["state"] == "CANCELLED"
     assert mailbox.get(message.message_id).delivery_state.value == "ELIGIBLE"
     seeded["bridge"].close()
@@ -557,7 +558,12 @@ def test_raw_submit_containment_failure_or_unknown_effect_fails_closed(
                 str(batch["input_text"]),
                 lease_generation=int(lease["generation"]),
             )
-        assert isinstance(caught.value.__cause__, sqlite3.OperationalError)
+        if containment_failure == "cancel_failure":
+            assert isinstance(caught.value.__cause__, sqlite3.OperationalError)
+        else:
+            from tools.codex_supervisor.durability.effects import EffectError
+
+            assert isinstance(caught.value.__cause__, EffectError)
         assert batches.get(batch_id)["state"] == "PREPARED"
         assert mailbox.get(message.message_id).delivery_state.value == "BATCHED"
         if containment_failure == "cancel_failure":

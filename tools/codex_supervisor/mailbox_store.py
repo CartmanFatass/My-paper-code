@@ -356,87 +356,58 @@ class MailboxStore:
         invalid_message_ids: set[str],
         reason: str = "SOURCE_RESOLVED",
     ) -> bool:
-        from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+        from .durability.effects import EffectError, cancel_prepared_wake
+        from .durability.models import TransitionCause
         from .durability.transaction import DurabilityTransaction
-        from .durability.transitions import TransitionError, TransitionKernel
 
         now = _now()
-        kernel = TransitionKernel(self.store.connection)
         with self.store._lock:
-            with DurabilityTransaction(self.store.connection):
-                batch = self.store.connection.execute(
-                    "SELECT state, version FROM wake_batches WHERE wake_batch_id = ?",
-                    (wake_batch_id,),
-                ).fetchone()
-                if batch is None or str(batch["state"]) != "PREPARED":
-                    return False
-                try:
-                    kernel.apply(
-                        TransitionRequest(
-                            aggregate_kind=AggregateKind.WAKE_BATCH,
-                            aggregate_id=wake_batch_id,
-                            expected_state="PREPARED",
-                            expected_version=int(batch["version"] or 0),
-                            target_state="CANCELLED",
-                            cause_kind=TransitionCause.SOURCE_RESOLUTION,
-                            cause_ref=reason,
+            try:
+                with DurabilityTransaction(self.store.connection):
+                    rows = self.store.connection.execute(
+                        """SELECT m.message_id
+                        FROM mailbox_messages m
+                        JOIN wake_batch_messages b ON b.message_id = m.message_id
+                        WHERE b.wake_batch_id = ?
+                        ORDER BY b.ordinal, m.message_id""",
+                        (wake_batch_id,),
+                    ).fetchall()
+                    message_ids = [str(row["message_id"]) for row in rows]
+                    if not invalid_message_ids or not invalid_message_ids.issubset(
+                        message_ids
+                    ):
+                        raise MailboxStoreError(
+                            "source-resolution message set is not owned by the prepared wake"
                         )
+                    targets = {
+                        message_id: (
+                            DeliveryState.CANCELLED_SOURCE_RESOLVED.value
+                            if message_id in invalid_message_ids
+                            else DeliveryState.ELIGIBLE.value
+                        )
+                        for message_id in message_ids
+                    }
+                    updates = {
+                        message_id: (
+                            {"dead_letter_reason": reason, "batched_at": None}
+                            if message_id in invalid_message_ids
+                            else {"batched_at": None, "eligible_at": now}
+                        )
+                        for message_id in message_ids
+                    }
+                    cancel_prepared_wake(
+                        self.store.connection,
+                        wake_batch_id,
+                        cause_ref=reason,
+                        message_targets=targets,
+                        message_field_updates=updates,
+                        batch_cause_kind=TransitionCause.SOURCE_RESOLUTION,
+                        message_cause_kind=TransitionCause.SOURCE_INVALID_PREPARED_BATCH,
                     )
-                except TransitionError:
-                    return False
-                effect_id = self.store.connection.execute(
-                    "SELECT effect_id FROM wake_batches WHERE wake_batch_id = ?",
-                    (wake_batch_id,),
-                ).fetchone()
-                from .durability.effects import EffectJournal
-
-                EffectJournal(self.store.connection).cancel_prepared_if_present(
-                    None if effect_id is None or effect_id[0] is None else str(effect_id[0]),
-                    cause_ref=reason,
-                )
-                rows = self.store.connection.execute(
-                    """SELECT m.message_id, m.delivery_state, m.delivery_version
-                    FROM mailbox_messages m
-                    JOIN wake_batch_messages b ON b.message_id = m.message_id
-                    WHERE b.wake_batch_id = ?""",
-                    (wake_batch_id,),
-                ).fetchall()
-                for row in rows:
-                    message_id = str(row["message_id"])
-                    state = str(row["delivery_state"])
-                    version = int(row["delivery_version"] or 0)
-                    if message_id in invalid_message_ids:
-                        if state not in {
-                            DeliveryState.DELIVERED_TO_TURN.value,
-                            DeliveryState.SUBMISSION_UNCERTAIN.value,
-                            DeliveryState.DEAD_LETTER.value,
-                            DeliveryState.CANCELLED_SOURCE_RESOLVED.value,
-                        }:
-                            kernel.apply(
-                                TransitionRequest(
-                                    aggregate_kind=AggregateKind.MAILBOX_DELIVERY,
-                                    aggregate_id=message_id,
-                                    expected_state=state,
-                                    expected_version=version,
-                                    target_state=DeliveryState.CANCELLED_SOURCE_RESOLVED.value,
-                                    cause_kind=TransitionCause.SOURCE_INVALID_PREPARED_BATCH,
-                                    cause_ref=reason,
-                                    field_updates={"dead_letter_reason": reason, "batched_at": None},
-                                )
-                            )
-                    elif state == DeliveryState.BATCHED.value:
-                        kernel.apply(
-                            TransitionRequest(
-                                aggregate_kind=AggregateKind.MAILBOX_DELIVERY,
-                                aggregate_id=message_id,
-                                expected_state=state,
-                                expected_version=version,
-                                target_state=DeliveryState.ELIGIBLE.value,
-                                cause_kind=TransitionCause.SOURCE_INVALID_PREPARED_BATCH,
-                                cause_ref=reason,
-                                field_updates={"batched_at": None, "eligible_at": now},
-                            )
-                        )
+            except EffectError as exc:
+                raise MailboxStoreError(
+                    "prepared wake source resolution ownership is not exact"
+                ) from exc
         return True
 
     def cancel_source_resolved(self, message_id: str, reason: str = "SOURCE_RESOLVED") -> MailboxMessage:

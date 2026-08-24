@@ -100,11 +100,11 @@ def test_server_request_after_response_marks_linked_effect(tmp_path: Path) -> No
         owner = AppServerSessionOwner.for_client(client, store)
         journal = EffectJournal(store.connection)
         effect = journal.prepare_effect(
-            owner_kind="WAKE_BATCH",
-            owner_id="wake1",
+            owner_kind="MANAGED_TURN",
+            owner_id="turn1",
             binding_id="bind1",
             method="turn/start",
-            client_key="hmasd-wake:wake1",
+            client_key="hmasd-managed:turn1",
             request={"threadId": "thr_canary", "input": []},
         )
         insert_submittable_owner_for_effect(store.connection, effect)

@@ -3,6 +3,7 @@ from pathlib import Path
 import pytest
 
 from tools.codex_supervisor.db import connect, initialize_database
+from tools.codex_supervisor.durability.effects import EffectJournal
 from tools.codex_supervisor.mailbox_models import DeliveryState, IntakeState, MailboxMessageKind
 from tools.codex_supervisor.mailbox_store import MailboxStore, MailboxStoreError
 from tools.codex_supervisor.store import ObserverStore
@@ -49,6 +50,14 @@ def test_mailbox_intake_cannot_skip_ack(tmp_path: Path) -> None:
 def test_prepared_batch_cancel_is_atomic(tmp_path: Path) -> None:
     store = ObserverStore(tmp_path)
     mailbox = MailboxStore(store)
+    store.connection.execute(
+        """INSERT INTO managed_actor_bindings(
+            binding_id,actor_context_id,actor_kind,semantic_scope_key,thread_id,
+            thread_origin,history_trust,binding_state,memory_policy_state,
+            repo_root,thread_cwd,created_by_operator,created_at
+        ) VALUES ('bind1','act1','ROOT','root','thr1','NEW','FRESH','ACTIVE',
+                  'OPERATOR_CONFIRMED_GLOBAL_DISABLED','r','r','op','t')"""
+    )
     first = mailbox.enqueue(
         source_system="OPERATOR",
         source_event_key="k3",
@@ -71,10 +80,19 @@ def test_prepared_batch_cancel_is_atomic(tmp_path: Path) -> None:
     mailbox.mark_eligible(second.message_id)
     mailbox.mark_batched(first.message_id)
     mailbox.mark_batched(second.message_id)
+    effect = EffectJournal(store.connection).prepare_effect(
+        owner_kind="WAKE_BATCH",
+        owner_id="wake1",
+        binding_id="bind1",
+        method="turn/start",
+        client_key="hmasd-wake:wake1",
+        request={"threadId": "thr1", "clientUserMessageId": "hmasd-wake:wake1"},
+    )
     store.connection.execute(
         """INSERT INTO wake_batches(
-            wake_batch_id,binding_id,thread_id,state,client_user_message_id,prepared_at
-        ) VALUES ('wake1','bind1','thr1','PREPARED','hmasd-wake:wake1','t')"""
+            wake_batch_id,binding_id,thread_id,state,client_user_message_id,prepared_at,effect_id
+        ) VALUES ('wake1','bind1','thr1','PREPARED','hmasd-wake:wake1','t',?)""",
+        (effect.effect_id,),
     )
     store.connection.execute(
         "INSERT INTO wake_batch_messages(wake_batch_id,message_id,ordinal) VALUES ('wake1', ?, 0)",
@@ -89,4 +107,5 @@ def test_prepared_batch_cancel_is_atomic(tmp_path: Path) -> None:
     assert mailbox.get(first.message_id).delivery_state is DeliveryState.CANCELLED_SOURCE_RESOLVED
     assert mailbox.get(second.message_id).delivery_state is DeliveryState.ELIGIBLE
     assert store.connection.execute("SELECT state FROM wake_batches").fetchone()[0] == "CANCELLED"
+    assert EffectJournal(store.connection).get(effect.effect_id).state == "CANCELLED_BEFORE_WRITE"
     store.close()

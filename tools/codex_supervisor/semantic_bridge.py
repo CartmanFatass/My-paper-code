@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import sys
 from contextlib import contextmanager
 from dataclasses import dataclass
 from pathlib import Path
@@ -150,8 +151,11 @@ class SemanticBridge:
             connection = self.semantic.connection
             if connection.in_transaction:
                 raise SemanticBridgeError("semantic currentness guard requires transaction ownership")
-            connection.execute("BEGIN IMMEDIATE")
+            committed = False
             try:
+                # Keep BEGIN inside the protected region: a connection wrapper
+                # may raise after SQLite has already acquired the transaction.
+                connection.execute("BEGIN IMMEDIATE")
                 snapshot = self._snapshot_unlocked(actor_context_id)
                 expected = (checkpoint_id, state_version, epoch_id, epoch_revision)
                 actual = (
@@ -168,10 +172,9 @@ class SemanticBridge:
                 if not connection.in_transaction:
                     raise SemanticBridgeError("semantic currentness guard was released prematurely")
                 connection.commit()
-            except Exception:
-                if connection.in_transaction:
-                    connection.rollback()
-                raise
+                committed = True
+            finally:
+                self._rollback_uncommitted_owned_transaction(connection, committed)
 
     @contextmanager
     def writer_guard(self) -> Iterator[None]:
@@ -181,16 +184,33 @@ class SemanticBridge:
             connection = self.semantic.connection
             if connection.in_transaction:
                 raise SemanticBridgeError("semantic writer guard requires transaction ownership")
-            connection.execute("BEGIN IMMEDIATE")
+            committed = False
             try:
+                connection.execute("BEGIN IMMEDIATE")
                 yield
                 if not connection.in_transaction:
                     raise SemanticBridgeError("semantic writer guard was released prematurely")
                 connection.commit()
-            except Exception:
-                if connection.in_transaction:
-                    connection.rollback()
-                raise
+                committed = True
+            finally:
+                self._rollback_uncommitted_owned_transaction(connection, committed)
+
+    @staticmethod
+    def _rollback_uncommitted_owned_transaction(connection: Any, committed: bool) -> None:
+        """Release an owned writer transaction without replacing an active failure."""
+
+        if committed or not connection.in_transaction:
+            return
+        active_failure = sys.exc_info()[0] is not None
+        if not active_failure:
+            connection.rollback()
+            return
+        try:
+            connection.rollback()
+        except BaseException:
+            # Cleanup must never translate or replace the BaseException which
+            # caused this context manager to unwind.
+            pass
 
     @contextmanager
     def actor_pair_guard(

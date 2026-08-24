@@ -601,6 +601,22 @@ def test_binding_revoked_after_batch_prepare_prevents_submission(tmp_path: Path)
     )
     leases = SchedulerLeases(seeded["supervisor"])
     lease = leases.acquire(seeded["portfolio_binding_id"], "sched")
+    with pytest.raises(BindingError, match="cannot be revoked"):
+        seeded["bindings"].revoke(seeded["portfolio_binding_id"])
+    assert batches.get(str(batch["wake_batch_id"]))["state"] == "PREPARED"
+    from tools.codex_supervisor.durability.effects import cancel_exact_prepared_wake
+    from tools.codex_supervisor.durability.transaction import DurabilityTransaction
+
+    with seeded["supervisor"]._lock, DurabilityTransaction(
+        seeded["supervisor"].connection
+    ):
+        cancel_exact_prepared_wake(
+            seeded["supervisor"].connection,
+            str(batch["wake_batch_id"]),
+            effect_id=str(batch["effect_id"]),
+            binding_id=str(batch["binding_id"]),
+            cause_ref="test-explicit-prepared-containment",
+        )
     seeded["bindings"].revoke(seeded["portfolio_binding_id"])
     scheduler = WakeScheduler(
         seeded["bindings"],
@@ -615,7 +631,7 @@ def test_binding_revoked_after_batch_prepare_prevents_submission(tmp_path: Path)
     )
 
     async def body() -> None:
-        with pytest.raises(WakeSchedulerError, match="ACTIVE"):
+        with pytest.raises(WakeSchedulerError):
             await scheduler.submit_batch(
                 str(batch["wake_batch_id"]),
                 "no",

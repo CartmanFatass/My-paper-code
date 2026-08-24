@@ -17,6 +17,10 @@ from .managed_models import (
     ThreadOrigin,
 )
 from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+from .durability.effects import (
+    EffectError,
+    require_exact_binding_containment_ownership,
+)
 from .durability.transaction import DurabilityTransaction
 from .durability.transitions import TransitionError, TransitionKernel
 from .semantic_bridge import ManagedActorSnapshot, SemanticBridge
@@ -68,6 +72,7 @@ def _row_to_binding(row: Any) -> ManagedActorBinding:
         prepared_epoch_revision=None
         if _row_value(row, "prepared_epoch_revision") is None
         else int(row["prepared_epoch_revision"]),
+        prepared_context_trusted=bool(int(_row_value(row, "prepared_context_trusted") or 0)),
         verification_turn_intent_id=None
         if _row_value(row, "verification_turn_intent_id") is None
         else str(row["verification_turn_intent_id"]),
@@ -198,8 +203,9 @@ class BindingStore:
                     direction_id, thread_id, thread_origin, history_trust,
                     binding_state, memory_policy_state, repo_root, thread_cwd,
                     created_by_operator, created_at, prepared_checkpoint_id,
-                    prepared_state_version, prepared_epoch_id, prepared_epoch_revision
-                ) VALUES (?, ?, ?, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    prepared_state_version, prepared_epoch_id, prepared_epoch_revision,
+                    prepared_context_trusted
+                ) VALUES (?, ?, ?, ?, ?, NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)""",
                 (
                     binding_id,
                     actor_snapshot.actor_context_id,
@@ -244,6 +250,8 @@ class BindingStore:
         thread_id: str | None = None,
         direction_id: str | None | object = ...,
         prepared_currentness: tuple[str | None, int, str | None, int | None] | None = None,
+        verified_currentness: tuple[str | None, int, str | None, int | None] | None = None,
+        require_trusted_prepared_context: bool = False,
     ) -> ManagedActorBinding:
         """Re-read one exact binding inside the caller-owned durability txn."""
 
@@ -267,6 +275,8 @@ class BindingStore:
             raise BindingError("managed binding identity changed")
         if direction_id is not ... and current.direction_id != direction_id:
             raise BindingError("managed binding direction changed")
+        if require_trusted_prepared_context and not current.prepared_context_trusted:
+            raise BindingError("managed binding prepared-context provenance is untrusted")
         if prepared_currentness is not None and (
             current.prepared_checkpoint_id,
             current.prepared_state_version,
@@ -274,48 +284,70 @@ class BindingStore:
             current.prepared_epoch_revision,
         ) != prepared_currentness:
             raise BindingError("managed binding currentness tuple changed")
+        if verified_currentness is not None and (
+            current.verified_checkpoint_id,
+            current.verified_state_version,
+            current.verified_epoch_id,
+            current.verified_epoch_revision,
+        ) != verified_currentness:
+            raise BindingError("managed binding verified currentness tuple changed")
         return current
 
     def cancel_prepared_binding_effect(self, binding_id: str, effect_id: str | None, *, cause_ref: str) -> None:
         """Atomically contain a binding and its still-PREPARED effect."""
 
-        from .durability.effects import EffectJournal
+        from .durability.effects import (
+            EffectError,
+            EffectJournal,
+            require_exact_binding_containment_ownership,
+        )
 
-        with self.store._lock, DurabilityTransaction(self.store.connection):
-            row = self.store.connection.execute(
-                "SELECT binding_state, version FROM managed_actor_bindings WHERE binding_id = ?",
-                (binding_id,),
-            ).fetchone()
-            if row is not None and str(row["binding_state"]) not in {
-                BindingState.REVOKED.value,
-                BindingState.SUSPENDED.value,
-            }:
-                current_state = str(row["binding_state"])
-                target_state = (
-                    BindingState.SUSPENDED.value
-                    if current_state in {
-                        BindingState.VERIFICATION_REQUIRED.value,
-                        BindingState.ACTIVE.value,
-                    }
-                    else BindingState.REVOKED.value
+        try:
+            with self.store._lock, DurabilityTransaction(self.store.connection):
+                row = self.store.connection.execute(
+                    "SELECT binding_state, version FROM managed_actor_bindings WHERE binding_id = ?",
+                    (binding_id,),
+                ).fetchone()
+                if row is None:
+                    raise BindingError("binding containment target is missing")
+                require_exact_binding_containment_ownership(
+                    self.store.connection,
+                    binding_id=binding_id,
+                    effect_id=effect_id,
                 )
-                TransitionKernel(self.store.connection).apply(
-                    TransitionRequest(
-                        aggregate_kind=AggregateKind.MANAGED_BINDING,
-                        aggregate_id=binding_id,
-                        expected_state=current_state,
-                        expected_version=int(row["version"] or 0),
-                        target_state=target_state,
-                        cause_kind=TransitionCause.PRE_WRITE_CANCEL,
-                        cause_ref=cause_ref,
-                        field_updates={
-                            "suspended_at" if target_state == BindingState.SUSPENDED.value else "revoked_at": _now()
-                        },
+                if str(row["binding_state"]) not in {
+                    BindingState.REVOKED.value,
+                    BindingState.SUSPENDED.value,
+                }:
+                    current_state = str(row["binding_state"])
+                    target_state = (
+                        BindingState.SUSPENDED.value
+                        if current_state in {
+                            BindingState.VERIFICATION_REQUIRED.value,
+                            BindingState.ACTIVE.value,
+                        }
+                        else BindingState.REVOKED.value
                     )
-                )
-            EffectJournal(self.store.connection).cancel_prepared_if_present(
-                effect_id, cause_ref=cause_ref
-            )
+                    TransitionKernel(self.store.connection).apply(
+                        TransitionRequest(
+                            aggregate_kind=AggregateKind.MANAGED_BINDING,
+                            aggregate_id=binding_id,
+                            expected_state=current_state,
+                            expected_version=int(row["version"] or 0),
+                            target_state=target_state,
+                            cause_kind=TransitionCause.PRE_WRITE_CANCEL,
+                            cause_ref=cause_ref,
+                            field_updates={
+                                "suspended_at" if target_state == BindingState.SUSPENDED.value else "revoked_at": _now()
+                            },
+                        )
+                    )
+                if effect_id is not None:
+                    EffectJournal(self.store.connection).cancel_before_write(
+                        effect_id, cause_ref=cause_ref
+                    )
+        except EffectError as exc:
+            raise BindingError("binding containment effect ownership is not exact") from exc
 
     def _unresolved_start_incident(self, binding_id: str) -> dict[str, object] | None:
         row = self.store.connection.execute(
@@ -362,6 +394,11 @@ class BindingStore:
             raise BindingError(f"unknown binding: {binding_id}")
         if binding.binding_state is not BindingState.PREPARED:
             raise BindingError("only PREPARED bindings may attach a thread")
+        if not binding.prepared_context_trusted:
+            self.cancel_prepared_binding_effect(
+                binding_id, effect_id, cause_ref="untrusted_prepared_context"
+            )
+            raise BindingError("binding has no trusted prepared-context provenance")
         other = self.binding_for_thread(thread_id)
         if other is not None:
             raise BindingError("thread is already bound")
@@ -430,6 +467,11 @@ class BindingStore:
         binding = self.get(binding_id)
         if binding is None or binding.binding_state is not BindingState.THREAD_CREATED:
             raise BindingError("only THREAD_CREATED bindings may enter verification")
+        if not binding.prepared_context_trusted:
+            self.cancel_prepared_binding_effect(
+                binding_id, None, cause_ref="untrusted_prepared_context"
+            )
+            raise BindingError("binding has no trusted prepared-context provenance")
         version = int(self.store.connection.execute(
             "SELECT version FROM managed_actor_bindings WHERE binding_id = ?",
             (binding_id,),
@@ -590,6 +632,11 @@ class BindingStore:
             raise BindingError(f"unknown binding: {binding_id}")
         if binding.binding_state is not BindingState.VERIFICATION_REQUIRED:
             raise BindingError("only VERIFICATION_REQUIRED bindings may activate")
+        if not binding.prepared_context_trusted:
+            self.cancel_prepared_binding_effect(
+                binding_id, None, cause_ref="untrusted_prepared_context"
+            )
+            raise BindingError("binding has no trusted prepared-context provenance")
         if binding.memory_policy_state is MemoryPolicyState.UNVERIFIED:
             raise BindingError("memory policy is unverified")
         if not binding.thread_id:
@@ -658,6 +705,9 @@ class BindingStore:
         try:
             with self.store._lock:
                 with DurabilityTransaction(self.store.connection):
+                    require_exact_binding_containment_ownership(
+                        self.store.connection, binding_id=binding_id
+                    )
                     TransitionKernel(self.store.connection).apply(
                         TransitionRequest(
                             aggregate_kind=AggregateKind.MANAGED_BINDING,
@@ -670,7 +720,7 @@ class BindingStore:
                             field_updates={"suspended_at": now},
                         )
                     )
-        except TransitionError as exc:
+        except (TransitionError, EffectError) as exc:
             raise BindingError("binding cannot be suspended") from exc
         self._record_event(binding_id, "BINDING_SUSPENDED", {})
         updated = self.get(binding_id)
@@ -691,6 +741,9 @@ class BindingStore:
         try:
             with self.store._lock:
                 with DurabilityTransaction(self.store.connection):
+                    require_exact_binding_containment_ownership(
+                        self.store.connection, binding_id=binding_id
+                    )
                     TransitionKernel(self.store.connection).apply(
                         TransitionRequest(
                             aggregate_kind=AggregateKind.MANAGED_BINDING,
@@ -703,7 +756,7 @@ class BindingStore:
                             field_updates={"revoked_at": now},
                         )
                     )
-        except TransitionError as exc:
+        except (TransitionError, EffectError) as exc:
             raise BindingError("binding cannot be revoked") from exc
         self._record_event(binding_id, "BINDING_REVOKED", {})
         updated = self.get(binding_id)

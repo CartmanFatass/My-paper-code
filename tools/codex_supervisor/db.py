@@ -8,7 +8,7 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-SCHEMA_VERSION = 8
+SCHEMA_VERSION = 10
 
 SCHEMA_STATEMENTS = (
     """
@@ -171,6 +171,7 @@ SCHEMA_STATEMENTS = (
         prepared_state_version INTEGER NOT NULL DEFAULT 0,
         prepared_epoch_id TEXT,
         prepared_epoch_revision INTEGER,
+        prepared_context_trusted INTEGER NOT NULL DEFAULT 0,
         thread_created_at TEXT,
         verified_at TEXT,
         activated_at TEXT,
@@ -389,6 +390,7 @@ SCHEMA_STATEMENTS = (
         owner_kind TEXT NOT NULL,
         owner_id TEXT NOT NULL,
         binding_id TEXT,
+        predecessor_effect_id TEXT,
         method TEXT NOT NULL,
         client_key TEXT NOT NULL,
         request_json TEXT NOT NULL,
@@ -553,6 +555,7 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _add_column_if_missing(connection, "managed_actor_bindings", "prepared_state_version", "INTEGER NOT NULL DEFAULT 0")
         _add_column_if_missing(connection, "managed_actor_bindings", "prepared_epoch_id", "TEXT")
         _add_column_if_missing(connection, "managed_actor_bindings", "prepared_epoch_revision", "INTEGER")
+        _add_column_if_missing(connection, "managed_actor_bindings", "prepared_context_trusted", "INTEGER NOT NULL DEFAULT 0")
         _add_column_if_missing(connection, "mailbox_messages", "source_resolved_after_submission", "INTEGER NOT NULL DEFAULT 0")
         _add_column_if_missing(connection, "wake_batches", "lease_generation", "INTEGER")
         _add_column_if_missing(connection, "wake_batches", "lease_holder", "TEXT")
@@ -570,6 +573,7 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         _add_column_if_missing(connection, "rpc_requests", "effect_id", "TEXT")
         _add_column_if_missing(connection, "mutation_intents", "superseded_by_effect_id", "TEXT")
         _add_column_if_missing(connection, "app_server_effects", "transport_seq", "INTEGER")
+        _add_column_if_missing(connection, "app_server_effects", "predecessor_effect_id", "TEXT")
         connection.execute("DROP INDEX IF EXISTS mutation_intents_open_unique")
         connection.execute(
             """CREATE UNIQUE INDEX IF NOT EXISTS mutation_intents_open_unique
@@ -578,6 +582,8 @@ def initialize_database(connection: sqlite3.Connection) -> None:
         )
         _install_transition_guards(connection)
         _migrate_legacy_mutation_intents(connection)
+        if current < 9:
+            _migrate_prepared_context_provenance(connection)
         if current < SCHEMA_VERSION:
             connection.execute(
                 "INSERT INTO schema_meta(version, applied_at) VALUES (?, ?)",
@@ -678,4 +684,118 @@ def _migrate_legacy_mutation_intents(connection: sqlite3.Connection) -> None:
         connection.execute(
             "UPDATE mutation_intents SET superseded_by_effect_id = ? WHERE intent_id = ?",
             (effect_id, str(row["intent_id"])),
+        )
+
+
+def _migrate_prepared_context_provenance(connection: sqlite3.Connection) -> None:
+    """Migrate legacy bindings without manufacturing trusted currentness.
+
+    A legacy ACTIVE binding is preserved only when the supervisor ledger
+    independently carries the complete applied verification chain and a
+    non-default verified state version.  No prepared tuple is backfilled.
+    Every other nonterminal binding is quarantined and any still-PREPARED
+    binding-owned effect is cancelled before write in this same transaction.
+    """
+
+    from .durability.models import AggregateKind, TransitionCause, TransitionRequest
+    from .durability.transitions import TransitionKernel
+
+    kernel = TransitionKernel(connection)
+    binding_columns = _table_columns(connection, "managed_actor_bindings")
+    rows = connection.execute(
+        """SELECT * FROM managed_actor_bindings
+        WHERE prepared_context_trusted = 0
+          AND binding_state IN ('PREPARED','THREAD_CREATED','VERIFICATION_REQUIRED','ACTIVE')
+        ORDER BY created_at, binding_id"""
+    ).fetchall()
+    now = datetime.now(timezone.utc).isoformat()
+    for row in rows:
+        binding_id = str(row["binding_id"])
+        verified = None
+        if (
+            str(row["binding_state"]) == "ACTIVE"
+            and row["verification_turn_intent_id"] is not None
+            and row["verification_turn_id"] is not None
+            and row["verification_command_id"] is not None
+            and row["verification_receipt_id"] is not None
+            and row["prepared_state_version"] is not None
+            and int(row["prepared_state_version"]) > 0
+            and row["verified_state_version"] is not None
+            and int(row["verified_state_version"]) > 0
+        ):
+            verified = connection.execute(
+                """SELECT 1
+                FROM managed_turn_intents i
+                JOIN managed_actor_commands c
+                  ON c.command_id = ? AND c.binding_id = i.binding_id
+                 AND c.turn_id = i.app_server_turn_id
+                 AND c.validation_state = 'APPLIED'
+                JOIN managed_command_receipts r
+                  ON r.receipt_id = ? AND r.command_id = c.command_id
+                WHERE i.turn_intent_id = ? AND i.binding_id = ?
+                  AND i.submission_state = 'COMPLETED'
+                  AND i.app_server_turn_id = ?""",
+                (
+                    str(row["verification_command_id"]),
+                    str(row["verification_receipt_id"]),
+                    str(row["verification_turn_intent_id"]),
+                    binding_id,
+                    str(row["verification_turn_id"]),
+                ),
+            ).fetchone()
+        if verified is not None:
+            connection.execute(
+                """UPDATE managed_actor_bindings
+                SET prepared_context_trusted = 1 WHERE binding_id = ?""",
+                (binding_id,),
+            )
+            connection.execute(
+                """INSERT INTO managed_binding_events(
+                    binding_id,event_kind,payload_json,created_at
+                ) VALUES (?, 'MIGRATION_VERIFIED_PROVENANCE_PRESERVED', '{}', ?)""",
+                (binding_id, now),
+            )
+            continue
+
+        effects = connection.execute(
+            """SELECT effect_id, version FROM app_server_effects
+            WHERE binding_id = ? AND state = 'PREPARED'
+              AND owner_kind IN ('THREAD_PROVISION','THREAD_RESUME','THREAD_MEMORY')""",
+            (binding_id,),
+        ).fetchall()
+        for effect in effects:
+            kernel.apply(
+                TransitionRequest(
+                    aggregate_kind=AggregateKind.APP_SERVER_EFFECT,
+                    aggregate_id=str(effect["effect_id"]),
+                    expected_state="PREPARED",
+                    expected_version=int(effect["version"] or 0),
+                    target_state="CANCELLED_BEFORE_WRITE",
+                    cause_kind=TransitionCause.MIGRATION,
+                    cause_ref="untrusted_prepared_context",
+                    field_updates={"resolved_at": now},
+                )
+            )
+        state = str(row["binding_state"])
+        target = "SUSPENDED" if state in {"VERIFICATION_REQUIRED", "ACTIVE"} else "REVOKED"
+        timestamp_field = "suspended_at" if target == "SUSPENDED" else "revoked_at"
+        kernel.apply(
+            TransitionRequest(
+                aggregate_kind=AggregateKind.MANAGED_BINDING,
+                aggregate_id=binding_id,
+                expected_state=state,
+                expected_version=int(row["version"] or 0),
+                target_state=target,
+                cause_kind=TransitionCause.MIGRATION,
+                cause_ref="untrusted_prepared_context",
+                field_updates={timestamp_field: now}
+                if timestamp_field in binding_columns
+                else {},
+            )
+        )
+        connection.execute(
+            """INSERT INTO managed_binding_events(
+                binding_id,event_kind,payload_json,created_at
+            ) VALUES (?, 'MIGRATION_UNTRUSTED_CONTEXT_QUARANTINED', ?, ?)""",
+            (binding_id, json.dumps({"from_state": state, "to_state": target}), now),
         )

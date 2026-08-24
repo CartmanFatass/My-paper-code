@@ -40,8 +40,9 @@ def insert_submittable_owner_for_effect(connection, effect) -> None:
                 """INSERT INTO managed_actor_bindings (
                     binding_id, actor_context_id, actor_kind, semantic_scope_key,
                     thread_origin, history_trust, binding_state, memory_policy_state,
-                    repo_root, thread_cwd, created_by_operator, created_at
-                ) VALUES (?, ?, 'OPERATIONAL_ROOT', 'scope', 'NEW', 'FRESH', ?, 'UNVERIFIED', '.', '.', 'op', 't')""",
+                    repo_root, thread_cwd, created_by_operator, created_at,
+                    prepared_state_version, prepared_context_trusted
+                ) VALUES (?, ?, 'OPERATIONAL_ROOT', 'scope', 'NEW', 'FRESH', ?, 'UNVERIFIED', '.', '.', 'op', 't', 1, 1)""",
                 (binding_id, f"act-{binding_id}", state),
             )
     connection.commit()

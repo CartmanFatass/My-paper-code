@@ -839,9 +839,28 @@ def test_cancelled_owner_effect_cannot_be_submitted(tmp_path: Path) -> None:
     connection = connect(tmp_path / "s.sqlite3")
     initialize_database(connection)
     connection.execute(
+        """INSERT INTO managed_actor_bindings(
+            binding_id,actor_context_id,actor_kind,semantic_scope_key,thread_id,
+            thread_origin,history_trust,binding_state,memory_policy_state,
+            repo_root,thread_cwd,created_by_operator,created_at
+        ) VALUES ('bind1','act1','ROOT','root','thr1','NEW','FRESH','ACTIVE',
+                  'OPERATOR_CONFIRMED_GLOBAL_DISABLED','r','r','op','t')"""
+    )
+    connection.execute(
         """INSERT INTO wake_batches(
             wake_batch_id,binding_id,thread_id,state,client_user_message_id,prepared_at,version
-        ) VALUES ('wake1','bind1','thr1','PREPARED','k1','t',0)"""
+        ) VALUES ('wake1','bind1','thr1','PREPARED','hmasd-wake:wake1','t',0)"""
+    )
+    connection.execute(
+        """INSERT INTO mailbox_messages(
+            message_id,source_system,source_event_key,target_actor_context_id,
+            message_kind,subject_ref,payload_ref,priority,delivery_state,intake_state,created_at
+        ) VALUES ('msg-cancelled-owner','OPERATOR','src-cancelled-owner','act1',
+                  'OPERATOR_ATTENTION_REQUEST','s','p',1,'BATCHED','NOT_ACKNOWLEDGED','t')"""
+    )
+    connection.execute(
+        """INSERT INTO wake_batch_messages(wake_batch_id,message_id,ordinal)
+        VALUES ('wake1','msg-cancelled-owner',0)"""
     )
     journal = EffectJournal(connection)
     effect = journal.prepare_effect(
@@ -849,8 +868,8 @@ def test_cancelled_owner_effect_cannot_be_submitted(tmp_path: Path) -> None:
         owner_id="wake1",
         binding_id="bind1",
         method="turn/start",
-        client_key="k1",
-        request={"threadId": "thr1"},
+        client_key="hmasd-wake:wake1",
+        request={"threadId": "thr1", "clientUserMessageId": "hmasd-wake:wake1"},
     )
     connection.execute("UPDATE wake_batches SET effect_id = ? WHERE wake_batch_id='wake1'", (effect.effect_id,))
     connection.commit()
@@ -1224,6 +1243,24 @@ def test_nonactive_binding_cannot_receive_recovery_resume(tmp_path: Path) -> Non
     batch_id = prepare_resume_batch(
         seeded, seeded["root_binding_id"], "kernel:resume:suspended"
     )
+    from tools.codex_supervisor.durability.effects import (
+        EffectError,
+        cancel_exact_prepared_wake,
+    )
+    from tools.codex_supervisor.durability.transaction import DurabilityTransaction
+
+    batch = WakeBatchStore(seeded["supervisor"], seeded["mailbox"]).get(batch_id)
+    assert batch is not None
+    with seeded["supervisor"]._lock, DurabilityTransaction(
+        seeded["supervisor"].connection
+    ):
+        cancel_exact_prepared_wake(
+            seeded["supervisor"].connection,
+            batch_id,
+            effect_id=str(batch["effect_id"]),
+            binding_id=str(batch["binding_id"]),
+            cause_ref="test-explicit-prepared-containment",
+        )
     seeded["bindings"].suspend(seeded["root_binding_id"])
     recovery = WakeRecovery(
         seeded["bindings"],
@@ -1232,10 +1269,10 @@ def test_nonactive_binding_cannot_receive_recovery_resume(tmp_path: Path) -> Non
         object(),
         bridge=seeded["bridge"],
     )
-    readiness = asyncio.run(
-        recovery.resume_once(seeded["root_binding_id"], wake_batch_id=batch_id)
-    )
-    assert readiness.value == "UNKNOWN"
+    with pytest.raises(EffectError):
+        asyncio.run(
+            recovery.resume_once(seeded["root_binding_id"], wake_batch_id=batch_id)
+        )
     count = seeded["supervisor"].connection.execute(
         "SELECT COUNT(*) FROM app_server_effects WHERE method = 'thread/resume'"
     ).fetchone()[0]

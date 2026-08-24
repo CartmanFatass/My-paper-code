@@ -132,8 +132,8 @@ class WakeRecovery:
             return ThreadWakeReadiness.UNKNOWN
         context_row = self._wake_context(binding_id, wake_batch_id)
         if context_row is None:
-            self._cancel_resume_and_wake(
-                wake_batch_id, None, cause_ref="missing_or_ambiguous_context_binding"
+            self._cancel_wake_without_resume_effect(
+                wake_batch_id, cause_ref="missing_or_ambiguous_context_binding"
             )
             return ThreadWakeReadiness.UNKNOWN
         client_key = f"thread/resume:{binding.thread_id}:{wake_batch_id}"
@@ -182,9 +182,8 @@ class WakeRecovery:
                         request={"threadId": binding.thread_id},
                     )
             except Exception:
-                self._cancel_resume_and_wake(
+                self._cancel_wake_without_resume_effect(
                     wake_batch_id,
-                    None,
                     cause_ref="wake_resume_binding_not_active",
                 )
                 return ThreadWakeReadiness.UNKNOWN
@@ -226,10 +225,28 @@ class WakeRecovery:
                 ),
             )
             kind = owner.classify_submission(result)
+        except asyncio.CancelledError:
+            # submit_effect first discards its local prepared request and open
+            # effect marker when cancellation happened before WRITE_STARTED.
+            # Only after that local cleanup may the two ledgers be contained.
+            try:
+                self._contain_cancelled_resume_and_wake(
+                    binding,
+                    wake_batch_id,
+                    existing.effect_id,
+                    context_row,
+                )
+            except BaseException:
+                # A failed or ambiguous containment transaction is deliberately
+                # no-change.  It must never replace the caller's cancellation.
+                pass
+            raise
         except SemanticBridgeError:
-            self._cancel_resume_and_wake(
+            self._contain_cancelled_resume_and_wake(
+                binding,
                 wake_batch_id,
                 existing.effect_id,
+                context_row,
                 cause_ref="wake_resume_semantic_drift",
             )
             return ThreadWakeReadiness.UNKNOWN
@@ -239,9 +256,11 @@ class WakeRecovery:
             # uncertain and are handled below rather than requeued.
             current = journal.get(existing.effect_id)
             if current.state == "PREPARED":
-                self._cancel_resume_and_wake(
+                self._contain_cancelled_resume_and_wake(
+                    binding,
                     wake_batch_id,
                     existing.effect_id,
+                    context_row,
                     cause_ref="wake_resume_prewrite_guard_failed",
                 )
                 return ThreadWakeReadiness.UNKNOWN
@@ -287,25 +306,68 @@ class WakeRecovery:
                 raise WakeIncidentError("wake resume actor identity changed")
             yield snapshot
 
-    def _cancel_resume_and_wake(
+    def _cancel_wake_without_resume_effect(
         self,
         wake_batch_id: str,
-        effect_id: str | None,
         *,
         cause_ref: str,
     ) -> None:
-        from .durability.effects import EffectJournal, cancel_prepared_wake
+        from .durability.effects import (
+            cancel_exact_prepared_wake,
+            require_exact_prepared_wake_ownership,
+        )
         from .durability.transaction import DurabilityTransaction
 
         with self.bindings.store._lock, DurabilityTransaction(
             self.bindings.store.connection
         ):
-            EffectJournal(self.bindings.store.connection).cancel_prepared_if_present(
-                effect_id, cause_ref=cause_ref
-            )
-            cancel_prepared_wake(
+            wake = require_exact_prepared_wake_ownership(
                 self.bindings.store.connection,
                 wake_batch_id,
+            )
+            cancel_exact_prepared_wake(
+                self.bindings.store.connection,
+                wake_batch_id,
+                effect_id=str(wake["effect_id"]),
+                binding_id=str(wake["binding_id"]),
+                cause_ref=cause_ref,
+            )
+
+    def _contain_cancelled_resume_and_wake(
+        self,
+        binding,
+        wake_batch_id: str,
+        resume_effect_id: str,
+        context_row,
+        *,
+        cause_ref: str = "wake_resume_cancelled_before_write",
+    ) -> None:
+        """Contain only an exact pre-write recovery resume cancellation."""
+
+        from .durability.effects import cancel_exact_prepared_resume_and_wake
+        from .durability.transaction import DurabilityTransaction
+
+        with self.bindings.store._lock, DurabilityTransaction(
+            self.bindings.store.connection
+        ):
+            cancel_exact_prepared_resume_and_wake(
+                self.bindings.store.connection,
+                wake_batch_id,
+                resume_effect_id=resume_effect_id,
+                binding_id=binding.binding_id,
+                actor_context_id=binding.actor_context_id,
+                actor_kind=binding.actor_kind.value,
+                semantic_scope_key=binding.semantic_scope_key,
+                direction_id=binding.direction_id,
+                thread_id=binding.thread_id,
+                checkpoint_id=context_row["checkpoint_id"],
+                state_version=int(context_row["state_version"] or 0),
+                epoch_id=context_row["epoch_id"],
+                epoch_revision=(
+                    None
+                    if context_row["epoch_revision"] is None
+                    else int(context_row["epoch_revision"])
+                ),
                 cause_ref=cause_ref,
             )
 

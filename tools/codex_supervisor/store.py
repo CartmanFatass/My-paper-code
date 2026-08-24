@@ -7,7 +7,7 @@ import threading
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any, Callable, Mapping
 
 from .db import connect, initialize_database
 from .models import EndKind, NormalizedEvent, ProtocolIds, RpcShape
@@ -161,6 +161,7 @@ class ObserverStore:
         extra_transitions: list[Any] | None = None,
         extra_hooks: list[Any] | None = None,
         request_override: Mapping[str, Any] | None = None,
+        final_owner_guard: Callable[[object], None] | None = None,
     ) -> dict[str, Any]:
         from .durability.effects import EffectJournal, _canonical_request
         from .durability.transaction import DurabilityError, DurabilityTransaction
@@ -177,6 +178,11 @@ class ObserverStore:
             if self.connection.in_transaction:
                 raise DurabilityError("write-start requires transaction ownership")
             with DurabilityTransaction(self.connection):
+                # An override is the request that will actually cross the
+                # transport boundary.  Install it transactionally before the
+                # final ownership/contract proof so that proof cannot validate
+                # a different, originally prepared request.  Any failed proof
+                # rolls this update back with the whole write-start attempt.
                 if request_override is not None:
                     updated = self.connection.execute(
                         """UPDATE app_server_effects SET request_json = ?
@@ -185,6 +191,13 @@ class ObserverStore:
                     )
                     if updated.rowcount != 1:
                         raise DurabilityError("request override requires a PREPARED effect")
+                # This is the final supervisor-side submission boundary.  It
+                # must run after BEGIN IMMEDIATE and before *any* effect,
+                # aggregate, request, or raw-transport write so an ownership
+                # change between the caller's preflight and this transaction
+                # cannot cross WRITE_STARTED.
+                if final_owner_guard is not None:
+                    final_owner_guard(self.connection)
                 next_seq = int(
                     self.connection.execute(
                         """SELECT COALESCE(MAX(transport_seq), 0) + 1
