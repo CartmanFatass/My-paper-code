@@ -8,12 +8,18 @@ Use these conventional subdirectories:
 
 | Path | Purpose |
 | --- | --- |
+| `temp/directions/<direction-id>/exp/` | one direction's disposable experiment runs, checkpoints, profiles, and captured output |
+| `temp/directions/<direction-id>/test/` | one direction's pytest base directory, fixtures, test databases, and build probes |
 | `temp/tests/` | pytest base directories and synthetic fixtures |
 | `temp/runtime/` | local process state, sockets, receipts, and transient databases |
 | `temp/cache/` | rebuildable compiler, model, and benchmark caches |
 | `temp/handoffs/` | short-lived large payloads passed between local collaborators |
 | `temp/downloads/` | disposable downloads and extracted third-party material |
 | `temp/sessions/` | compatibility location for older scripts that already use it |
+
+Direction-specific work always uses `temp/directions/<direction-id>/`. The
+shared `temp/tests/`, `temp/runtime/`, and `temp/cache/` paths are reserved for
+genuinely cross-direction infrastructure and legacy compatibility.
 
 Do not create new root-level `temp_*`, `tmp_*`, cache, runtime, or ad-hoc
 worktree directories. Code that needs the operating system's temporary

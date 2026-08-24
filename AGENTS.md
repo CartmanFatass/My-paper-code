@@ -57,5 +57,35 @@ diagnostics, local tests, or other non-effectful work.
 - For project Python commands, prefer
   `C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe`.
 
+## Direction workspace layout
+
+Every research direction uses its directory name from
+`docs/research/RESEARCH_MAP.md` as the stable `<direction-id>`. Before running
+an experiment or test for that direction, create these local directories:
+
+```text
+temp/directions/<direction-id>/exp/
+temp/directions/<direction-id>/test/
+```
+
+- Put experiment runs, checkpoints, generated manifests, profiles, captured
+  stdout/stderr, and other disposable execution output under `exp/`.
+- Point pytest `--basetemp`, synthetic fixtures, test databases, compiler
+  probes, and other disposable test output at `test/`.
+- Do not create new direction-specific `temp_*`, `tmp_*`, result, pytest, or
+  worktree directories at the repository root or directly under `temp/`.
+- Source implementations live under `experiments/candidates/`; test source
+  lives under `tests/experiments/candidates/`. Neither belongs in `temp/`.
+- Durable scientific definitions, result summaries, accepted manifests, and
+  dispositions live under the matching `docs/research/candidates/` directory.
+  Promote only the small durable artifact; raw and reproducible run output
+  stays ignored under `temp/directions/`.
+- Shared infrastructure may use `temp/runtime/`, `temp/cache/`, or
+  `temp/downloads/` when it is genuinely cross-direction. Direction work must
+  not use those shared paths merely for convenience.
+
+Everything under `temp/directions/` is local and deletable. Its presence,
+absence, or contents never authorize, block, or describe research progress.
+
 Historical CM/EM/lease terminology in research artifacts is provenance only.
 It is never executable control state.
