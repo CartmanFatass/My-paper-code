@@ -380,12 +380,12 @@ function Get-Doctor([string]$Root, [string]$RuntimePath, [string]$ActiveCodexBin
     finally { Pop-Location }
 }
 
-function Test-DoctorGuards([object]$Doctor, [string]$ActiveCodexBin) {
+function Test-DoctorGuards([object]$Doctor, [string]$ActiveCodexBin, [bool]$RequireSchemaCapture) {
     if ($null -eq $Doctor) { return $false }
     if (-not (Test-FullyQualifiedPath $ActiveCodexBin)) { return $false }
     $doctorCodexBin = [string]$Doctor.codex_binary
     if (-not (Test-FullyQualifiedPath $doctorCodexBin)) { return $false }
-    return ($Doctor.status -eq 'OK' -and $null -eq $Doctor.binary_error -and (Test-SamePath $doctorCodexBin $ActiveCodexBin) -and [bool]$Doctor.codex_version -and [bool]$Doctor.schema_capture_present -and @($Doctor.static_guard_violations).Count -eq 0 -and [int]$Doctor.direct_state_write_violations -eq 0 -and [int]$Doctor.direct_mutation_call_violations -eq 0 -and [int]$Doctor.new_legacy_mutation_writes -eq 0)
+    return ($Doctor.status -eq 'OK' -and $null -eq $Doctor.binary_error -and (Test-SamePath $doctorCodexBin $ActiveCodexBin) -and [bool]$Doctor.codex_version -and ((-not $RequireSchemaCapture) -or [bool]$Doctor.schema_capture_present) -and @($Doctor.static_guard_violations).Count -eq 0 -and [int]$Doctor.direct_state_write_violations -eq 0 -and [int]$Doctor.direct_mutation_call_violations -eq 0 -and [int]$Doctor.new_legacy_mutation_writes -eq 0)
 }
 
 $payload = [ordered]@{ schema = 'HMASD_SUPERVISOR_STATUS_V2'; state = 'INCIDENT'; observed_at = [datetime]::UtcNow.ToString('o'); process = $null; ready = $null; doctor = $null; incident = $null }
@@ -428,7 +428,7 @@ try {
     }
     $doctor = Get-Doctor $RepoRoot $RuntimeHome $activeCodexBin
     $payload.doctor = $doctor
-    if (-not (Test-DoctorGuards $doctor $activeCodexBin)) { $payload.state = 'INCIDENT'; $payload.incident = 'doctor binary, schema, or static guard failed'; $payload | ConvertTo-Json -Depth 8; exit 0 }
+    if (-not (Test-DoctorGuards $doctor $activeCodexBin ([string]$record.profile -ne 'OBSERVER'))) { $payload.state = 'INCIDENT'; $payload.incident = 'doctor binary, schema, or static guard failed'; $payload | ConvertTo-Json -Depth 8; exit 0 }
     $payload.state = 'READY'
 } catch { $payload.state = 'INCIDENT'; $payload.incident = $_.Exception.Message }
 $payload | ConvertTo-Json -Depth 8

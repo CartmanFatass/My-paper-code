@@ -734,7 +734,7 @@ def test_status_rejects_relative_codex_paths_before_binding_comparisons(repo_roo
         "active_relative=(Test-ActiveCodexBinding $relative $absolute $false '');"
         "launch_relative=(Test-ActiveCodexBinding $absolute $relative $false '');"
         "caller_relative=(Test-ActiveCodexBinding $absolute '' $true $relative);"
-        "doctor_relative=(Test-DoctorGuards $doctor $absolute);"
+        "doctor_relative=(Test-DoctorGuards $doctor $absolute $true);"
         "parsed_relative_launch=[bool](Parse-StrictLaunchArgumentVector $vector)}|ConvertTo-Json -Compress"
     )
     result = invoke_start_helpers(
@@ -761,6 +761,29 @@ def test_status_rejects_relative_codex_paths_before_binding_comparisons(repo_roo
         "doctor_relative": False,
         "parsed_relative_launch": False,
     }
+
+
+def test_status_requires_schema_capture_only_for_nonobserver_profiles(repo_root):
+    path = script_path(repo_root, "hmasd-root-supervisor-status.ps1")
+    binary = "C:/Program Files/Codex/codex.exe"
+    body = (
+        "$doctor=[pscustomobject]@{status='OK';binary_error=$null;codex_binary=$A1;"
+        "codex_version='codex-test';schema_capture_present=$false;static_guard_violations=@();"
+        "direct_state_write_violations=0;direct_mutation_call_violations=0;new_legacy_mutation_writes=0}; "
+        "[ordered]@{observer=(Test-DoctorGuards $doctor $A1 $false);"
+        "nonobserver=(Test-DoctorGuards $doctor $A1 $true)}|ConvertTo-Json -Compress"
+    )
+    result = invoke_start_helpers(
+        path,
+        ("Test-SamePath", "Test-FullyQualifiedPath", "Test-DoctorGuards"),
+        body,
+        binary,
+    )
+    assert result.returncode == 0, result.stderr + result.stdout
+    assert json.loads(result.stdout) == {"observer": True, "nonobserver": False}
+    assert "Test-DoctorGuards $doctor $activeCodexBin ([string]$record.profile -ne 'OBSERVER')" in read_script(
+        repo_root, "hmasd-root-supervisor-status.ps1"
+    )
 
 
 def test_start_canonicalizes_explicit_relative_codex_before_launch_vector(repo_root, tmp_path):
