@@ -22,10 +22,19 @@ recovery work directly.
 - **Transport**: performs one explicitly requested external send and archives
   its response.
 - **WRM**: repairs one repeated workflow failure with the smallest causal fix.
+- **Watcher Advisor**: optional read-only observer that detects proxy capture,
+  verification recursion, and workflow tail chasing. It uses
+  `.codex/prompts/hmasd-anti-tail-chasing-watcher.md`, emits non-blocking
+  advice, and has no execution or approval authority.
 
 Delegation is optional. Do not create a manager, reviewer, verifier, receipt,
 handoff document, lease, or test merely to satisfy a workflow shape. No role
 may bounce an authorized task to another role solely for permission.
+
+The Watcher Advisor may run alongside the main session when useful. Its output
+is traceability and course-correction input, not a gate. Main may apply a
+watcher recommendation immediately when it is reversible and inside the user
+scope; no acknowledgment, manual review, or watcher approval is required.
 
 ## The only hard boundaries
 
