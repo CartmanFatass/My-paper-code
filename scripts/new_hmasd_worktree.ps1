@@ -11,14 +11,14 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$repo = [System.IO.Path]::GetFullPath(
-    (& git rev-parse --show-toplevel).Trim()
-)
-if ($LASTEXITCODE -ne 0) {
+$commonRaw = & git rev-parse --path-format=absolute --git-common-dir
+if ($LASTEXITCODE -ne 0 -or -not $commonRaw) {
     throw 'Run this script from an HMASD Git checkout.'
 }
+$common = [System.IO.Path]::GetFullPath(([string]$commonRaw).Trim())
+$repo = Split-Path -Parent $common
 
-$container = Join-Path (Split-Path -Parent $repo) 'HMASD-worktrees'
+$container = Join-Path (Split-Path -Parent $repo) "$(Split-Path -Leaf $repo)-worktrees"
 $target = [System.IO.Path]::GetFullPath((Join-Path $container $Name))
 $containerPrefix = [System.IO.Path]::GetFullPath($container) + [System.IO.Path]::DirectorySeparatorChar
 
