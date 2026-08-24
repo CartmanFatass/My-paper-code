@@ -1,239 +1,141 @@
 ---
 name: hmasd-agentify-transport
-description: Execute one HMASD file-backed ChatGPT Pro or Gemini consultation through Agentify's unified strict exact-one transport, archive the mechanical result, and return it to the invoking L1 owner.
+description: Use when an HMASD owner has frozen one file-backed ChatGPT Pro or Gemini consultation for exact-one delivery through Agentify.
 ---
 
 # HMASD Agentify transport
 
-```text
-agentify_transport_child=parent-specific_registered_leaf
-transport_core=agentify_review_query
-providers=chatgpt|gemini
-manual=C:/Projects/HMASD/docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md
-```
+## Purpose
 
-Read the canonical manual completely before any Agentify action. The manual is
-normative for page, tab, provider, model, identity, strict-send, recovery,
-archive, and cleanup mechanics. Provider-specific skills or historical notes
-cannot weaken it. Gemini is a provider adapter of the same strict transport;
-do not route it through ordinary query, a parallel workflow, hidden DOM
-evidence, or provider-special-case folklore.
+Complete one provider conversation turn with the smallest safe transaction.
+The Operator is an adaptive UI worker, not a fixed click script and not a
+workflow-repair engineer.
 
-Routine frozen transports are executed by the registered Luna-medium transport
-leaf. Terra-high is reserved for contract design, diagnosis, implementation, and
-isolated validation; it is not a production transport tier.
+The normative manual is
+`C:/Projects/HMASD/docs/project/AGENTIFY_TRANSPORT_INSTRUCTIONS.md`.
 
-## Assignment and authority
+## Assignment
 
-Direction scientific ChatGPT Pro/Gemini transport normally belongs to the
-corresponding Portfolio EM, which owns its frozen question, exact partition,
-result path, provider intake, and interpretation. Operational Root is not the
-default scientific transport owner. The active main Root may invoke this leaf
-directly under umbrella authority while explicitly acting for that EM or for a
-bounded root-research-support task; the raw mechanical result still returns to
-the named semantic owner. This caller flexibility never enlarges the leaf or
-weakens exact-one Send, no-resend, provider, tab, and archive fences.
-
-The requester supplies exactly:
+The caller supplies:
 
 ```text
 AGENTIFY_REVIEW_BATCH_ASSIGNMENT
-batch_path=<absolute UTF-8 JSON in the requester's closed partition>
-results_path=<exact assignment-specific output path in that partition>
+batch_path=<absolute UTF-8 JSON in the caller's closed partition>
+results_path=<exact output path in that partition>
 ```
 
-Allowed requester partitions are:
+Read only the named batch, its `context_path`, and its ordered
+`question_paths`. Context is local understanding input. Only the exact question
+file is provider-visible. The Operator has no scientific, technical, portfolio,
+Git, user-contact, or child-spawn authority.
 
-```text
-temp/sessions/agentify_transport_operator/root/<assignment>/
-temp/sessions/agentify_transport_operator/code_project_manager/<assignment>/
-temp/sessions/agentify_transport_operator/independent_research_explorer/<assignment>/
-```
+## Safety kernel
 
-Read the exact batch once, then its exact `context_path` and ordered
-`question_paths`. Do not scan temporary directories, infer paths, regroup
-questions, or cross requester partitions. The context is local understanding
-input; only the exact UTF-8 question file is provider-visible. Reject a prompt
-containing a local absolute path, `file://` URI, requester temp path, workspace
-path, shell/tool wrapper, hash/receipt block, or code/runtime-review request.
+These invariants are the hard boundary:
 
-This leaf has mechanical transport authority only. It does not choose,
-interpret, approve, rank, implement, or accept science or code; contact the
-user; use Git; write canonical project state; or spawn.
+- Use one disposable non-default tab; never mutate the protected default tab.
+- Configure visible provider controls before inserting the question.
+- Only `agentify_review_query` may cross the exact-one Send boundary.
+- Bind the immutable stable key, idempotency key, question SHA, provider,
+  conversation relationship, and expected model/mode.
+- Derive retry authority from positive commitment, response, and generation
+  evidence; a missing local answer archive is never commitment or remote-absence
+  proof.
+- Never activate Stop, Continue, Retry, Response Retry, Answer now, regenerate,
+  or equivalent response controls.
+- Archive the mechanical result before closing the inactive disposable tab.
 
-## Deterministic procedure
+Everything else is implementation choice or diagnostic evidence.
 
-### Closed-loop native UI control
+## Normative hot path
 
-The lifecycle invariants are predicates and safety fences, not a literal click
-script. Before any visible UI change, use `agentify_operator_observe` on the
-exact existing non-default tab. Select at most one visible, hit-tested,
-non-ambiguous target; call `agentify_operator_act` with that observation's
-`tabId`, exact URL, revision and target ID; then inspect its after-action
-observation before selecting another action. Never repeat a click or key action
-blindly. The surface rejects stale URL/revision, hidden/ambiguous targets,
-Send/Stop/Retry/Continue controls and every protected-default mutation.
+1. Validate the frozen files, keys, provider, conversation relationship, SHA,
+   result path, and current exact-one ledger facts.
+2. Create or reopen one correctly keyed disposable tab at the exact provider
+   root or saved conversation URL.
+3. Let the page settle. Configure the requested visible model/reasoning state
+   with an adaptive `Observe -> Act -> Wait -> Observe` loop.
+4. Confirm the final visible selected state: ChatGPT reasoning strength `Pro`,
+   or Gemini `3.1 Pro` with `Extended thinking`.
+5. Once the composer is ready and the final requested state is visible, call
+   strict review immediately with the frozen question and immutable operation
+   identity.
+6. Observe the same operation to natural completion. Do not accelerate,
+   regenerate, duplicate a committed active/unknown turn, or create another
+   send route inside this call.
+7. Write the canonical result once, run the result-path guard, and close only
+   the inactive disposable tab.
 
-After navigation or an action, use `agentify_operator_wait` with a visible
-interactive or exact role/label/selected predicate. Loading, hydration, a
-changing revision/URL, or a missing control in one observation is
-`NOT_YET_OBSERVED`, not an error. Only its bounded evidence timeline may end in
-`LOAD_OR_POSTCONDITION_UNRESOLVED`; do not repeat an action while waiting.
+## Adaptive visible-control rule
 
-For ChatGPT reasoning strength, `High` and `Pro` are rendered values on the
-same axis, not model identities. A nested rendered `High`/`Pro` may be acted on
-only when the current observation maps its exact visible text to one unique
-visible, viewport-contained, hit-tested actionable ancestor with role, bounds,
-and revision evidence. `High` additionally needs a popup/controlled-menu
-relationship; `Pro` must be a visible actionable option in the rendered menu.
-Ordinary text, hidden, occluded, offscreen, hit-test-failing, or duplicate
-ancestors fail closed. If visible text and the semantic control inventory ever
-disagree, report the observer-coverage defect; never pixel-click or guess.
+UI configuration is outcome-driven. Use the current visible page and native
+Agentify observation/action primitives. After each action, wait for the page or
+menu to settle and observe again. Menus may be nested, portaled, delayed,
+localized, or reorganized. Explore the visible menu within the no-text,
+no-operation, no-Send boundary until either the requested final selected state
+is visible or direct evidence establishes a genuine access/credential gate.
 
-Use this only for non-sending preflight mechanics. `text`/`paste` requires an
-exact absolute UTF-8 path and SHA and returns `sendActionCount=0` and
-`operationCreated=false`; it cannot replace the armed `agentify_review_query`
-Send boundary. After Send, return to observation only.
+Choose controls by visible text, accessible label, current bounds, and the
+surrounding opened picker. Mouse and keyboard navigation are both legitimate
+when they operate only inside the visible picker. Do not use hidden DOM,
+unrelated account-plan text, or Send-family controls.
 
-For every ordered question:
+Intermediate UI trace is diagnostic, not an acceptance gate. A successful
+configuration requires the final visible selected state plus the unchanged
+safety kernel; it does not require one particular menu hierarchy, ARIA wrapper,
+sidecar, preflight sequence, or receipt for every intermediate click.
 
-1. **Validate locally.** Freeze provider, exact new-versus-continuation
-   relationship, immutable conversation `stableKey`, new immutable
-   `idempotencyKey`, exact expected visible model, exact URL/ID, question bytes,
-   lowercase SHA-256, result path, and `2700000` ms timeout.
-2. **Use L1 admission.** Proceed only inside the invoking L1's shared
-   `max_inflight` admission. Root does not poll or schedule the leaf. Agentify's
-   unified ordinary/strict governor is only the last safety barrier: a fresh
-   strict capacity rejection is pre-send `rate_limited` with
-   `reason=max_inflight`, `operationKind=strict-review`, and
-   `sendActionCount=0`. Do not retry inside the call. Exact existing-operation
-   observation/`verifyExisting` does not reserve a second send slot.
-3. **Bind one disposable tab.** Preserve the protected default. Create the
-   provider tab with `key=name=stableKey`. For a continuation, navigate by
-   `tabId` to the saved exact URL. Require live status URL and registry-row URL
-   to equal the intended URL before strict review.
-4. **Confirm live preflight.** Require idle composer, no active generation,
-   correct conversation relationship, and genuine visible controls. On current
-   ChatGPT, `High` and `Pro` are the same reasoning-strength axis: normalize a
-   fresh tab's visible `High` to exact `Pro` with the native no-send
-   `agentify_review_reasoning_mode_preflight`, then require its receipt. For Gemini, pass
-   `Gemini 3.1 Pro extended`; the strict shared adapter independently selects
-   and visibly verifies exact `3.1 Pro` plus selected `Extended thinking`
-   before baseline capture. Account-plan text, generic `Pro`, menu availability,
-   synthetic/hidden DOM, and helper-injected evidence are invalid.
-5. **Call strict review once.** Use only `agentify_review_query` with the exact
-   `promptPath`, SHA, stable key, idempotency key, provider/model, URL/ID,
-   `existingTabId`, timeout, and correct `firstBinding` flag. New ChatGPT uses
-   `https://chatgpt.com/` plus `__new__`; new Gemini uses
-   `https://gemini.google.com/app` plus `__new__`. A continuation uses its saved
-  concrete `/c/<id>` or `/app/<id>` and `firstBinding=false`.
-   Gemini bootstrap-first is an owner-opt-in-only route: it uses one archived
-   non-scientific bootstrap operation under the genuinely selected default
-   model, then one distinct `geminiBootstrapContinuation` operation after the
-   exact saved `/app/<id>` is reopened and `3.1 Pro` plus `Extended thinking`
-   are visibly selected. Neither operation is a retry and the bootstrap must
-   never be represented as the scientific request.
-6. **Classify commitment from postconditions.** Composer typing, a click, or
-   `sendActionCount` is not a provider turn. Before Send require exact composer
-   serialization; afterward require exactly one new readable user turn whose
-   rendered text equals the frozen prompt, plus concrete provider identity. An
-   unreadable/mismatched post-click turn is ambiguous and must never be resent.
-   If Gemini stabilizes at zero turns, no `/app/`
-   ID, the full prompt retained, and no generation, archive
-    `SEND_NOT_COMMITTED` with `prompt_sent=false` and
-    `response_received=false`; do not retry in this call. A later send is an
-    EM-owned prospective decision only when this exact zero-turn/no-identity/
-    inactive-generation record remains valid; no fixed attempt count affects
-    science or portfolio state. Any turn, identity, `sendCount=1`, or ambiguity
-    means never resend.
-7. **Observe naturally.** Never activate Stop, Continue, Retry, Response Retry,
-   Answer now, regenerate, or acceleration controls. `IN_PROGRESS` means keep
-   observing the same operation. After a client/fetch failure, inspect the
-   durable strict operation. Use `verifyExisting=true` only for the exact
-   original fingerprint and only as observation; never change a field or call
-   another send route.
-8. **Accept only strict natural completion.** Require `status=COMPLETE`, full
-   nonempty `responseText`, exact concrete URL/ID, visible model evidence,
-   `sendCount=1`, `sendActionCount=1`, matching `promptSha256`, two stable
-   snapshots, no active forbidden controls, and
-   `terminalState=NATURAL_COMPLETION_VERIFIED`.
-9. **Archive before cleanup.** Write the canonical schema defined in the manual
-   once at the exact `results_path`, preserving question order and any completed
-   earlier rows. Copy response and receipt only from the structured strict
-   result. A stale/missing archive may be restored only from a valid authoritative
-   local strict ledger operation and without page action; never overwrite an
-   existing archive. For a one-row `COMPLETE` operation, use
-   `scripts/restore_complete_agentify_ledger.py` with the original strict state,
-   frozen batch, idempotency key, and a new unused result path. It reconstructs
-   the canonical row/receipt only after strict ledger invariants, response SHA,
-   two stable snapshots, controls, and frozen question SHA all pass; it records
-   tab-close state as unknown rather than inventing it.
-10. **Close safely.** After a complete response or mechanical incident is durably
-    archived and generation is inactive, close the disposable tab. Never close
-    an active answer or keep an idle tab to preserve remote memory. Report close
-    failure.
+A missing control in one observation means the page may still be loading.
+Wait and re-observe before concluding that the control is absent. Do not blindly
+repeat the preceding action.
 
-Do not fall back to `agentify_query`. When a controller/observer repair must be
-loaded, use the native fixed-source process-local refresh ladder in the
-canonical manual before considering any application restart. It has no provider
-or tab input and fails closed during any generation, inflight query or strict
-operation. Restart is exceptional, never an Operator step, and needs separate
-explicit authority after direct evidence that refresh cannot work. Do not
-restart/reload Agentify while any provider generation or submitted-unverified operation may exist. A status,
-registry, model, URL, or archive conflict is a reason to reconcile or fail
-closed, never permission to send.
+Pre-send work must remain a short configuration transaction, not an open-ended
+diagnostic phase. Distinguish these states:
 
-### Incident observation and authority boundary
+- Page/composer/menu still changing or hydrating: wait briefly, then observe.
+- Page ready and the next visible configuration action is known: act now.
+- Final requested state visibly selected: send now.
+- Page ready but repeated observations make no progress toward the requested
+  state: archive a pre-send incident; do not spend the provider timeout on an
+  idle tab.
 
-A transport incident is a mechanical report, never a goal or thread conclusion.
-Inspect the native Agentify surface first: use `agentify_tabs` to identify the
-exact tab, then exact-tab `agentify_read_page`/DOM evidence. Scoped status and
-`loginLike` are diagnostic hints only. A Computer Use/Chrome safety refusal to
-capture the URL is `UNOBSERVED`, not login/logout evidence; user observation is
-evidence to reconcile, not automatic replacement for the native record.
+Do not run a canary, sidecar, helper, duplicate preflight, repeated page-wide
+enumeration, or recovery proof before Send. The immutable file/ledger checks,
+one adaptive visible configuration loop, and final selected-state observation
+are sufficient.
 
-For any non-complete terminal, archive the exact-one mechanical state without
-another send, then return `INCIDENT_REPORTED`, never generic `BLOCKED` or a
-claim that the thread, goal, production, unrelated work, or user is blocked.
-The report must include observed facts, observation method, actions taken,
-actions not taken, remaining unknown, causal hypotheses, and the smallest
-next authority/action. `ERROR`, `BLOCKED`, or similar values retained inside a
-strict ledger or results archive remain mechanical terminal facts; they do not
-become the leaf's routing or goal status.
+## Strict operation and commitment
 
-The transport return is evidence only, never a command to CM, Root, EM, or the
-portfolio session. An exact-one terminal, non-resend boundary, absent response,
-or resource limit must not be phrased as
-the scientific treatment being consumed, non-resumable, paused, retired, or
-limited to a binary next choice. Without complete question-relevant data, the
-invoking L1 routes unchanged-science repair/completion to CM. Only a
-same-direction EM's prospective definition of finite compute as causal can
-give that budget scientific force. Preserve the strict ledger's internal status
-facts and exact-one/no-resend protections while retaining a resumable blinded
-atomic frontier whenever the frozen transport semantics allow it.
+Use strict first binding at the provider root for a new conversation and the
+saved exact URL/ID for continuation. A click, composer mutation, or client
+timeout alone is not proof of provider commitment. Reconcile the strict ledger,
+visible user turn, concrete conversation identity, and active generation.
 
-Under the user-approved P0 control-plane amendment, one-attempt/no-retry,
-CM-recommend-park, fixed wall-cap, terminal/`ERROR`,
-archive/commit/push-before-intake, and stale
-Pro/Gemini retry schemas are not transport authority to pause, retire, or
-scientifically route a direction. They remain mechanical facts. Do not infer
-permission for a resend:
-the exact no-resend boundary remains absolute after any visible/provider turn or
-concrete conversation identity. A transport failure without that commitment
-still cannot pause the scientific direction; the invoking L1/CM retains
-same-coordinate, semantics-preserving atomic completion while a resource slice
-pauses only its lease.
+- `SEND_NOT_COMMITTED`: positive evidence proves no user turn, no conversation
+  identity, no active generation, and no Send commitment. An exact later retry
+  of the frozen prompt is allowed; never retry inside this call.
+- `COMMITTED_ACTIVE_OR_RESPONSE_UNKNOWN`: a committed turn exists and
+  generation is active, a response may exist, or remote state is ambiguous.
+  Reconnect/observe; duplicate send is forbidden.
+- `COMMITTED_TERMINAL_NO_RESPONSE_PROVED`: direct bound-conversation evidence
+  proves generation inactive and no assistant response exists. Return that
+  evidence. A separately owner-assigned recovery operation may issue exactly
+  one provenance-linked resend of the identical frozen prompt; this call does
+  not resend.
+- `COMPLETE_RESPONSE_PRESENT`: require the full nonempty response, concrete
+  identity, stable completion evidence, and inactive generation; archive and
+  do not resend.
 
-If the invoking L1's protocol/workflow-design recovery explicitly authorizes
-source repair, diagnostics, runtime control, and bounded live validation, an
-old transport primitive, stale Skill, or one exhausted observation surface is
-internal design evidence. The L1 must construct and use the next constrained
-observation/input primitive within its authorized validation budget; the leaf's
-incident report cannot convert it into a user/Root/portfolio boundary. This
-does not authorize a second provider turn after the exact no-resend predicate.
-Only a directly required user-exclusive credential or physical action, an
-irreversible external risk, or an unapproved external side effect is a genuine
-external boundary.
+Bare absence of a local answer archive proves none of these classes. A recovery
+resend records the prior operation identity, frozen-question hash, and its one
+recovery-use consumption.
+
+## Incident boundary
+
+Do not repair Agentify, rewrite skills, build helpers, run canaries, or request
+an application lifecycle action during a production transport. Archive direct
+facts and return `INCIDENT_REPORTED`. A transport incident is not a scientific
+failure, direction pause, or user request.
 
 ## Result guard and return
 
@@ -247,21 +149,27 @@ C:/Users/fires/.conda/envs/hmasd-amd-cpu/python.exe `
   --returned-results-path <assigned-results-path>
 ```
 
-On guard failure return `INCIDENT_REPORTED` with an empty `results_path`; do
-not move, copy, rewrite, or read another result file. Return exactly once to the invoker,
-conclusion first, then:
+Return once:
 
 ```text
 AGENTIFY_REVIEW_BATCH_RESULT
 status=COMPLETE|INCIDENT_REPORTED
 results_path=<exact assigned path or empty>
-transport_terminal=<COMPLETE|ERROR|SEND_NOT_COMMITTED|SUBMITTED_UNVERIFIED|other exact mechanical terminal>
-error=<empty or actual mechanical error>
-observed_facts=<direct facts only>
-observation_method=<native exact-tab method, ledger/archive, or UNOBSERVED>
+transport_terminal=<mechanical terminal>
+error=<empty or exact error>
+observed_facts=<direct facts>
 actions_taken=<exact actions>
-actions_not_taken=<no resend/other safety-preserving omissions>
+actions_not_taken=<safety-preserving omissions>
 remaining_unknown=<none or exact unknown>
-causal_hypotheses=<evidence-backed alternatives>
-next_authority_or_action=<non-binding smallest semantic owner/question, or none>
+provider_lifecycle=<one exact evidence class above>
+boundary_domain=<exact local boundary>
+affected_scope=<exact operation/turn>
+affected_actions=<exact fenced or allowed local actions>
+unaffected_scopes=<explicit unaffected owner domains>
+continuation_owner=<exact owner or none>
+next_event=<exact event or none>
+evidence_ref=<exact result/receipt path>
 ```
+
+The transport return proposes no direction-primary-queue mutation. Only an
+exact same-direction EM or Portfolio owner artifact can authorize one.

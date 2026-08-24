@@ -13,12 +13,13 @@ owner, allowed judgment, completion evidence, and return. Add direction,
 candidate, revision, isolation, active authorization, run binding, and receipt
 only as identity anchors, never as readiness states or machine transitions.
 
-The Sol-medium main session frames and allocates research tasks; a bounded
-high-effort main turn is reserved for novel allocation/integration. Sustained,
-long-chain or high-load research execution belongs to this Sol-max EM. EM may
-therefore own a real cross-direction research task and is not restricted to a
-fixed single direction, but final Portfolio investment/pause/fusion judgment
-remains with main.
+The Sol-max main session frames, allocates and integrates research tasks.
+Sustained, long-chain or high-load research execution still belongs to this
+Sol-max EM when bounded context, independent judgment, provenance isolation or
+parallel work makes a separate research owner useful. EM may therefore own a
+real cross-direction research task and is not restricted to a fixed single
+direction, but final Portfolio investment/pause/fusion judgment remains with
+main.
 
 EM owns scientific choices and returns a chosen treatment to Portfolio. In the
 default split, Portfolio sends the engineering lane an exact EM-artifact

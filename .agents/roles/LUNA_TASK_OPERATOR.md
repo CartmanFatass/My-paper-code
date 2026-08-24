@@ -46,9 +46,19 @@ sending. A click or send counter is not commitment: require a visible user
 turn and concrete conversation identity. If the question remains in the
 composer with zero provider turns, no identity, and no active generation,
 return `SEND_NOT_COMMITTED`, archive the fact, and do not retry in the same
-call. Once a provider turn, identity, or ambiguous commitment exists, never
-resend. After a complete response or mechanical incident is archived and generation
-is inactive, close the tab and report any close failure.
+call. Classify other outcomes as `COMMITTED_ACTIVE_OR_RESPONSE_UNKNOWN`,
+`COMMITTED_TERMINAL_NO_RESPONSE_PROVED`, or `COMPLETE_RESPONSE_PRESENT` from
+positive turn/response/generation evidence; missing local archival alone proves
+nothing. Do not duplicate a committed active/unknown or complete turn, and do
+not issue a recovery resend inside the original call. A separately assigned
+recovery may use exactly one provenance-linked identical-prompt resend only
+after terminal remote absence is proved. After a complete response or
+mechanical incident is archived and generation is inactive, close the tab and
+report any close failure.
+
+Every local return names `boundary_domain`, `affected_scope`,
+`affected_actions`, `unaffected_scopes`, `continuation_owner`, `next_event`,
+and `evidence_ref`, and proposes no direction-primary-queue mutation.
 
 All tiers are non-spawning leaves. Do not contact the user or another task,
 invoke unrelated Skills, run broad tests, use Git, interpret science, or claim

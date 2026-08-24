@@ -62,11 +62,11 @@ evidence to main under the same acceptance standard.
   exclusions, deliverable and return decision are explicit. It cannot silently
   become a Portfolio-wide standing owner.
 
-Main uses Sol-medium/high to frame and allocate these tasks. Sustained or
-high-load research execution belongs here at Sol-max, so the main conversation
-can remain a lower-effort routing and integration loop. One EM may cover a real
-cross-direction research task; it is no longer required to masquerade as a
-single fixed direction.
+Main uses Sol-max to frame, allocate and integrate these tasks. Sustained or
+high-load research execution still belongs here at Sol-max when bounded
+context, independent judgment, provenance isolation or parallel work makes a
+separate EM useful. One EM may cover a real cross-direction research task; it
+is no longer required to masquerade as a single fixed direction.
 
 The card may be short, but it is meaning-complete. It states or links every fact
 needed to distinguish treatment from comparator, compute the observable, and
@@ -163,21 +163,24 @@ conversations for closure, convergence and authorized innovation while keeping
 the providers' prompts, answers, sessions and archives independent and mutually
 blind. Routine tab,
 model-selection, typing, sending, waiting, `inflight`, receipt-field and
-unchanged-state facts remain inside the EM scope. After an explicit
-`SEND_NOT_COMMITTED` with `prompt_sent=false` and `response_received=false`, EM
-may arrange a later fresh-tab attempt for the identical request only when the
-prior record proves zero turns, no conversation identity and no active
-generation. No fixed attempt count affects science or portfolio state.
-Ambiguous commitment or an existing provider turn/identity is permanently
-observe-only. A genuinely new scientific conversation or scope expansion
+unchanged-state facts remain inside the EM scope. Provider recovery uses four
+evidence classes: `SEND_NOT_COMMITTED` permits an exact retry;
+`COMMITTED_ACTIVE_OR_RESPONSE_UNKNOWN` permits reconnect/observe but no
+duplicate send; `COMMITTED_TERMINAL_NO_RESPONSE_PROVED` permits exactly one
+provenance-linked recovery resend of the identical frozen prompt; and
+`COMPLETE_RESPONSE_PRESENT` requires archive/no resend. Bare absence of a local
+answer archive proves neither send commitment nor remote answer absence. No
+fixed attempt count affects science or portfolio state. A genuinely new
+scientific conversation or scope expansion
 returns to Portfolio; a user/external-authority expansion is then relayed to
 Operational Root. In-envelope transport incidents and
 science-neutral recovery do not wake the opposite Root or pause the direction.
 
 When reporting a transport or provider restriction, state its exact operation
-identity, the prohibited action, the scientific-stage work that remains live,
-and whether Portfolio must decide a distinct later science turn or Operational
-Root must supply external authority. Never write or imply that
+identity plus `boundary_domain`, `affected_scope`, `affected_actions`,
+`unaffected_scopes`, `continuation_owner`, `next_event`, and `evidence_ref`.
+The return proposes no direction-primary-queue mutation; only an exact
+same-direction EM/Portfolio owner artifact may change that queue. Never write or imply that
 operation-level no-resend pauses the direction, cancels CM work, or changes
 portfolio allocation.
 

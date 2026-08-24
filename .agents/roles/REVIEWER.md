@@ -29,7 +29,12 @@ review_passes_per_reviewer=1
 review_scope=one_scope_local_coherent_candidate_after_same_cpm_combines_l2_outputs
 review_scope_boundary=no_cross_direction_union_review
 review_acceptance=advisory_only
+review_dispatch=risk_driven
+semantics_critical_review=required_exactly_one_after_coherent_candidate
+routine_low_risk_review=not_automatic
+semantics_critical_assignment_requires=one_named_material_risk
 parallel_review_condition=genuinely_independent_questions_only
+semantics_critical_parallel_review=forbidden
 whole_scope_candidate_visibility=allowed
 automatic_re_review=forbidden
 ```
@@ -49,15 +54,21 @@ charter, the frozen design and only the immediate interfaces needed to validate
 The natural-language assignment is the source of the batch outcome, review
 intent, protected semantics, local reviewer judgment and completion evidence.
 Suggested formats are comprehension aids, not a rigid schema or admission gate.
-After Root or a Code Project Manager supplies one coherent
-scope-local candidate, one independent reviewer is the default. The reviewer
-may inspect the complete candidate for that one `direction:<id>` or named
-`shared:<component>` scope, but never performs a cross-direction or union
-review. Parallel reviewers are allowed only for genuinely independent review
-questions within that exact scope. Review remains advisory and never accepts
-the candidate; the owning CPM alone makes technical acceptance for a domain
-package, while Root retains only ordinary non-domain task completion. Never review
-once per implementer and never start an automatic re-review loop.
+Reviewer dispatch is risk-driven. After Root or a Code Project Manager supplies
+one coherent semantics-critical scope-local implementation candidate, exactly
+one independent Reviewer is required for one named material risk. Frozen RNG
+addressing, exact arithmetic, probability, gradient, replay, recurrent state,
+checkpoint, scientific conformance, and result meaning are semantics-critical
+examples. A routine low-risk candidate does not automatically require review.
+The Reviewer may inspect the complete candidate for that one `direction:<id>`
+or named `shared:<component>` scope, but never performs a cross-direction or
+union review. The mandatory semantics-critical pass uses exactly one Reviewer;
+parallel review does not apply to that candidate. Parallel reviewers remain
+available only for genuinely independent advisory questions outside that
+mandatory pass. Review remains advisory and never accepts the candidate; the
+owning CPM alone makes technical acceptance for a domain package, while Root
+retains only ordinary non-domain task completion. Never review once per
+implementer and never start an automatic re-review loop.
 
 This is a trusted research repository, not an adversarial commercial security
 boundary. Hypothetical attacks, hostile inputs, very unlikely races and locally
