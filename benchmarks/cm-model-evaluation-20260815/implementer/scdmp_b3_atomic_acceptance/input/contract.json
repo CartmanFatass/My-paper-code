@@ -1,9 +1,0 @@
-{
-  "direction": "semigroup_consistent_duration_model_policy",
-  "revision": "SCDMP-B3-SCIENCE-20260814-01",
-  "frozen_seeds": [101, 211, 307, 401, 503, 601, 701, 809],
-  "arms": ["FREE", "CORRECT", "SHUFFLE"],
-  "updates": 1000,
-  "calibration_cells": 24,
-  "trace_rows": 24000
-}

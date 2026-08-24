@@ -1,7 +1,0 @@
-{
-  "direction": "semigroup_consistent_duration_model_policy",
-  "revision": "SCDMP-B3-SCIENCE-20260814-01",
-  "passed": true,
-  "registered_stochastic_object_materialized": false,
-  "focused_deterministic_tests_passed": 12
-}
