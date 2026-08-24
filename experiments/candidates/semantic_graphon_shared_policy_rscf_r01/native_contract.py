@@ -15,8 +15,8 @@ from typing import Mapping
 import numpy as np
 
 
-ABI_VERSION = "SGSP_RSCF_NATIVE_ABI_V3"
-HOST_KIND = "RIDGEGATE_2Z_RSCF_FACTUAL_TRACE_AND_FULL_SUFFIX_CPU_TEST_V3"
+ABI_VERSION = "SGSP_RSCF_NATIVE_ABI_V4_FP32"
+HOST_KIND = "RIDGEGATE_2Z_RSCF_FACTUAL_TRACE_AND_FULL_SUFFIX_CPU_TEST_V4_FP32"
 NATIVE_THREADS = 1
 LANGUAGE_STANDARD = "C++17"
 ALLOWED_ROSTERS = (6, 9, 15, 21)
@@ -80,7 +80,7 @@ def _readonly(array: np.ndarray) -> np.ndarray:
 
 def _synthetic_values(shape: tuple[int, ...], scale: float, phase: float) -> np.ndarray:
     count = math.prod(shape)
-    index = np.arange(1, count + 1, dtype=np.float64)
+    index = np.arange(1, count + 1, dtype=np.float32)
     values = scale * (
         np.sin(index * 0.17320508075688773 + phase)
         + 0.5 * np.cos(index * 0.113 + 0.7 * phase)
@@ -285,7 +285,7 @@ def _require_array(
 def validate_actor_parameters(parameters: ActorParameters) -> None:
     for name, shape in _ACTOR_SHAPES.items():
         value = getattr(parameters, name)
-        _require_array(name, value, np.float64, shape)
+        _require_array(name, value, np.float32, shape)
         if not np.isfinite(value).all():
             raise ValueError(f"{name} contains a nonfinite value")
 
@@ -312,20 +312,20 @@ def _batch_shapes(width: int) -> Mapping[str, tuple[np.dtype, tuple[int, ...]]]:
         "previous_action": (np.dtype(np.int64), (width, MAX_AGENTS)),
         "previous_success": (np.dtype(np.int64), (width, MAX_AGENTS)),
         "event_schedule": (np.dtype(np.int64), (width, 2, 3)),
-        "post_gru_hidden": (np.dtype(np.float64), (width, MAX_AGENTS, HIDDEN_DIM)),
-        "current_observations": (np.dtype(np.float64), (width, MAX_AGENTS, OBS_DIM)),
-        "current_messages": (np.dtype(np.float64), (width, MAX_AGENTS, MESSAGE_DIM)),
-        "current_legal_probabilities": (np.dtype(np.float64), (width, MAX_AGENTS, N_ACTIONS)),
+        "post_gru_hidden": (np.dtype(np.float32), (width, MAX_AGENTS, HIDDEN_DIM)),
+        "current_observations": (np.dtype(np.float32), (width, MAX_AGENTS, OBS_DIM)),
+        "current_messages": (np.dtype(np.float32), (width, MAX_AGENTS, MESSAGE_DIM)),
+        "current_legal_probabilities": (np.dtype(np.float32), (width, MAX_AGENTS, N_ACTIONS)),
         "factual_joint_action": (np.dtype(np.int64), (width, MAX_AGENTS)),
         "focal_intervention": (np.dtype(np.int64), (width,)),
-        "factual_terminal": (np.dtype(np.float64), (width,)),
-        "detection_uniform": (np.dtype(np.float64), (width, HORIZON, MAX_AGENTS)),
+        "factual_terminal": (np.dtype(np.float32), (width,)),
+        "detection_uniform": (np.dtype(np.float32), (width, HORIZON, MAX_AGENTS)),
         "uplink_uniform": (
-            np.dtype(np.float64),
+            np.dtype(np.float32),
             (width, HORIZON, MAX_AGENTS, MAX_AGENTS),
         ),
-        "base_uniform": (np.dtype(np.float64), (width, HORIZON, MAX_AGENTS)),
-        "action_uniform": (np.dtype(np.float64), (width, HORIZON, MAX_AGENTS)),
+        "base_uniform": (np.dtype(np.float32), (width, HORIZON, MAX_AGENTS)),
+        "action_uniform": (np.dtype(np.float32), (width, HORIZON, MAX_AGENTS)),
     }
 
 
@@ -336,7 +336,7 @@ def validate_suffix_batch(batch: SuffixBatch) -> None:
     for name, (dtype, shape) in _batch_shapes(width).items():
         value = getattr(batch, name)
         _require_array(name, value, dtype, shape)
-        if dtype == np.dtype(np.float64) and not np.isfinite(value).all():
+        if dtype == np.dtype(np.float32) and not np.isfinite(value).all():
             raise ValueError(f"{name} contains a nonfinite value")
 
     for lane, n_agents in enumerate(batch.n_agents.tolist()):
@@ -379,7 +379,7 @@ def validate_suffix_batch(batch: SuffixBatch) -> None:
                 raise ValueError(f"lane {lane}: illegal factual action for agent {agent}")
             probs = batch.current_legal_probabilities[lane, agent]
             legal = LEGAL_ACTIONS[role]
-            if np.any(probs < 0.0) or abs(float(probs.sum()) - 1.0) > 1e-12:
+            if np.any(probs < 0.0) or abs(float(probs.sum(dtype=np.float32)) - 1.0) > 1.0e-5:
                 raise ValueError(f"lane {lane}: invalid current legal distribution")
             illegal = tuple(action_index for action_index in range(N_ACTIONS) if action_index not in legal)
             if any(probs[action_index] != 0.0 for action_index in illegal):
@@ -437,13 +437,13 @@ def _episode_shapes(width: int) -> Mapping[str, tuple[np.dtype, tuple[int, ...]]
         "event_schedule": (np.dtype(np.int64), (width, 2, 3)),
         "selector_slot": (np.dtype(np.int64), (width, N_ROLES)),
         "selector_local_index": (np.dtype(np.int64), (width, N_ROLES)),
-        "detection_uniform": (np.dtype(np.float64), (width, HORIZON, MAX_AGENTS)),
+        "detection_uniform": (np.dtype(np.float32), (width, HORIZON, MAX_AGENTS)),
         "uplink_uniform": (
-            np.dtype(np.float64),
+            np.dtype(np.float32),
             (width, HORIZON, MAX_AGENTS, MAX_AGENTS),
         ),
-        "base_uniform": (np.dtype(np.float64), (width, HORIZON, MAX_AGENTS)),
-        "action_uniform": (np.dtype(np.float64), (width, HORIZON, MAX_AGENTS)),
+        "base_uniform": (np.dtype(np.float32), (width, HORIZON, MAX_AGENTS)),
+        "action_uniform": (np.dtype(np.float32), (width, HORIZON, MAX_AGENTS)),
     }
 
 
@@ -454,7 +454,7 @@ def validate_factual_episode_batch(batch: FactualEpisodeBatch) -> None:
     for name, (dtype, shape) in _episode_shapes(width).items():
         value = getattr(batch, name)
         _require_array(name, value, dtype, shape)
-        if dtype == np.dtype(np.float64) and not np.isfinite(value).all():
+        if dtype == np.dtype(np.float32) and not np.isfinite(value).all():
             raise ValueError(f"{name} contains a nonfinite value")
     for lane, n_agents in enumerate(batch.n_agents.tolist()):
         if n_agents == 0:
@@ -500,14 +500,14 @@ def make_test_factual_episode_batch(
     event_schedule = np.zeros((width, 2, 3), dtype=np.int64)
     selector_slot = np.zeros((width, N_ROLES), dtype=np.int64)
     selector_local_index = np.zeros((width, N_ROLES), dtype=np.int64)
-    detection_uniform = np.zeros((width, HORIZON, MAX_AGENTS), dtype=np.float64)
+    detection_uniform = np.zeros((width, HORIZON, MAX_AGENTS), dtype=np.float32)
     uplink_uniform = np.zeros(
-        (width, HORIZON, MAX_AGENTS, MAX_AGENTS), dtype=np.float64
+        (width, HORIZON, MAX_AGENTS, MAX_AGENTS), dtype=np.float32
     )
-    base_uniform = np.zeros((width, HORIZON, MAX_AGENTS), dtype=np.float64)
-    action_uniform = np.zeros((width, HORIZON, MAX_AGENTS), dtype=np.float64)
-    tape_values = np.asarray((0.10, 0.34, 0.63, 0.89), dtype=np.float64)
-    action_values = np.asarray((0.11, 0.30, 0.49, 0.68, 0.87), dtype=np.float64)
+    base_uniform = np.zeros((width, HORIZON, MAX_AGENTS), dtype=np.float32)
+    action_uniform = np.zeros((width, HORIZON, MAX_AGENTS), dtype=np.float32)
+    tape_values = np.asarray((0.10, 0.34, 0.63, 0.89), dtype=np.float32)
+    action_values = np.asarray((0.11, 0.30, 0.49, 0.68, 0.87), dtype=np.float32)
     for lane in range(active):
         roster = ALLOWED_ROSTERS[lane % len(ALLOWED_ROSTERS)]
         per_role = roster // 3
@@ -608,11 +608,11 @@ def suffix_batch_from_factual_trajectory(
     metrics = np.zeros((width, METRIC_DIM), dtype=np.int64)
     previous_action = np.full((width, MAX_AGENTS), -1, dtype=np.int64)
     previous_success = np.zeros((width, MAX_AGENTS), dtype=np.int64)
-    post_gru_hidden = np.zeros((width, MAX_AGENTS, HIDDEN_DIM), dtype=np.float64)
-    current_observations = np.zeros((width, MAX_AGENTS, OBS_DIM), dtype=np.float64)
-    current_messages = np.zeros((width, MAX_AGENTS, MESSAGE_DIM), dtype=np.float64)
+    post_gru_hidden = np.zeros((width, MAX_AGENTS, HIDDEN_DIM), dtype=np.float32)
+    current_observations = np.zeros((width, MAX_AGENTS, OBS_DIM), dtype=np.float32)
+    current_messages = np.zeros((width, MAX_AGENTS, MESSAGE_DIM), dtype=np.float32)
     current_legal_probabilities = np.zeros(
-        (width, MAX_AGENTS, N_ACTIONS), dtype=np.float64
+        (width, MAX_AGENTS, N_ACTIONS), dtype=np.float32
     )
     factual_joint_action = np.full((width, MAX_AGENTS), -1, dtype=np.int64)
     focal_intervention = np.full(width, -1, dtype=np.int64)
@@ -703,7 +703,7 @@ def with_factual_actions(batch: SuffixBatch) -> SuffixBatch:
 
 
 def with_factual_terminal(batch: SuffixBatch, terminal: np.ndarray) -> SuffixBatch:
-    terminal_array = np.asarray(terminal, dtype=np.float64)
+    terminal_array = np.asarray(terminal, dtype=np.float32)
     if terminal_array.shape != (batch.width,) or not np.isfinite(terminal_array).all():
         raise ValueError("terminal must be a finite width-vector")
     return batch.replaced(factual_terminal=terminal_array)

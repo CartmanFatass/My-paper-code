@@ -26,6 +26,7 @@ from experiments.candidates.roster_consistent_latent_exploration_tbcfv.empirical
 from experiments.candidates.roster_consistent_latent_exploration_tbcfv.host_oracle import Snapshot
 from experiments.candidates.roster_consistent_latent_exploration_tbcfv.config import FLEX
 from experiments.candidates.roster_consistent_latent_exploration_tbcfv.models import make_conformance_fixture_model
+from experiments.candidates.roster_consistent_latent_exploration_tbcfv.process_workers import make_process_resource_object
 
 
 def _certificate(tmp_path: Path) -> dict[str, object]:
@@ -82,6 +83,39 @@ def test_coordinate_proposal_is_unbound_and_has_exact_pairings() -> None:
         "coherent_fragmented_scenarios_shared_through_intervention": True,
         "unused_draws_have_no_forward_or_score_path": True,
     }
+
+
+def test_production_process_resource_is_consumed_from_exact_request_lease_paths(
+    tmp_path: Path,
+) -> None:
+    result_root = tmp_path / "result"
+    resource = make_process_resource_object(
+        canonical_result_root=result_root,
+        private_scratch_roots=[tmp_path / f"private_{index}" for index in range(4)],
+        source_set_sha256="1" * 64,
+        native_binding_sha256="2" * 64,
+    )
+    authority = SimpleNamespace(
+        result_root=result_root.resolve(),
+        certificate={
+            "source": {"source_set_sha256": "1" * 64},
+            "native": {"native_identity_sha256": "2" * 64},
+        },
+        permit=SimpleNamespace(
+            resources={"process_resource": resource},
+            paths=dict(resource["paths"]),
+        ),
+    )
+    assert runner._production_process_resource(authority) == resource
+    alternate = make_process_resource_object(
+        canonical_result_root=result_root,
+        private_scratch_roots=[tmp_path / f"alternate_{index}" for index in range(4)],
+        source_set_sha256="1" * 64,
+        native_binding_sha256="2" * 64,
+    )
+    authority.permit.resources["process_resource"] = alternate
+    with pytest.raises(runner.EmpiricalRunnerError, match="differs from request/lease"):
+        runner._production_process_resource(authority)
 
 
 def test_preactivity_summary_rejects_incomplete_chain_measurement(
@@ -174,6 +208,33 @@ def test_synthetic_binding_cannot_enter_production_validator() -> None:
             permit,
             now=datetime(2026, 8, 21, 1, tzinfo=timezone.utc),
         )
+
+
+def test_production_parallelism_routes_to_parent_process_integrator(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    authority = SimpleNamespace(require_active=lambda **_kwargs: None)
+    frontier = SimpleNamespace(root=tmp_path / "frontier")
+    frontier.root.mkdir()
+    calls: list[int] = []
+    monkeypatch.setattr(
+        runner,
+        "open_frontier",
+        lambda *_args, **_kwargs: frontier,
+    )
+    def process_blocks(_frontier, _authority, *, workers):
+        assert _frontier is frontier and _authority is authority
+        calls.append(workers)
+        raise runner.EmpiricalRunnerError("TEST_PROCESS_DISPATCH_REACHED")
+
+    monkeypatch.setattr(runner, "_execute_process_blocks", process_blocks)
+    with pytest.raises(runner.EmpiricalRunnerError, match="TEST_PROCESS_DISPATCH_REACHED"):
+        runner.execute_full_panel(
+            authority,
+            now=datetime(2026, 8, 21, 1, tzinfo=timezone.utc),
+            workers=4,
+        )
+    assert calls == [4]
 
 
 def test_cli_coordinate_proposal_and_fail_closed_run(
@@ -332,18 +393,106 @@ def test_public_model_tensor_adapter_excludes_transport_keys() -> None:
 def test_fixed_synthetic_microfixture_exercises_exact_update_and_event_seam() -> None:
     rng = runner.SyntheticTestRNG("SYNTHETIC-TEST-RCLE-TBCFV-RUNNER-A")
     model = make_conformance_fixture_model()
+    authority_checks: list[str] = []
     baselines, counts = runner.execute_training_update(
         model,
         FLEX,
         rng,
         0,
         torch.zeros(8, dtype=torch.float64),
+        authority_check=lambda: authority_checks.append("before-gradient-mutation"),
     )
     assert baselines.shape == (8,)
     assert counts["training_episodes"] == 64
     assert counts["environment_ticks"] == 4_096
     assert counts["candidate_pointer_scores"] == counts["agent_claim_decisions"] * 6
     assert rng.synthetic_test_only is True
+    assert authority_checks == ["before-gradient-mutation"]
+
+
+@pytest.mark.parametrize("arm", runner.LEARNED_PACKAGES)
+def test_masked_b8_consumer_matches_scalar_reference_exactly(arm: str) -> None:
+    scalar_model = make_conformance_fixture_model()
+    batched_model = make_conformance_fixture_model()
+    batched_model.load_state_dict(scalar_model.state_dict())
+    scalar_rng = runner.SyntheticTestRNG("SYNTHETIC-TEST-RCLE-TBCFV-RUNNER-A")
+    batched_rng = runner.SyntheticTestRNG("SYNTHETIC-TEST-RCLE-TBCFV-RUNNER-A")
+    cell = runner.TRAINING_CELLS[0]
+    coordinates = tuple(runner.EpisodeCoordinate(0, cell, 0, row) for row in range(8))
+
+    scalar = runner._execute_learned_batch_scalar_reference(
+        scalar_model, arm, scalar_rng, coordinates, training=True
+    )
+    batched = runner.execute_learned_batch(
+        batched_model, arm, batched_rng, coordinates, training=True
+    )
+
+    assert len(scalar) == len(batched) == 8
+    for expected, observed in zip(scalar, batched):
+        assert (observed.tau, observed.U, observed.F, observed.Y) == (
+            expected.tau,
+            expected.U,
+            expected.F,
+            expected.Y,
+        )
+        assert observed.agent_ticks == expected.agent_ticks
+        assert observed.claim_decisions == expected.claim_decisions
+        assert len(observed.plan_scores) == len(expected.plan_scores)
+        assert len(observed.claim_scores) == len(expected.claim_scores)
+        assert all(
+            torch.equal(actual, reference)
+            for actual, reference in zip(observed.plan_scores, expected.plan_scores)
+        )
+        assert all(
+            torch.equal(actual, reference)
+            for actual, reference in zip(observed.claim_scores, expected.claim_scores)
+        )
+
+
+@pytest.mark.parametrize("arm", runner.LEARNED_PACKAGES)
+def test_masked_b32_mixed_cells_matches_four_scalar_b8_calls_exactly(arm: str) -> None:
+    scalar_model = make_conformance_fixture_model()
+    batched_model = make_conformance_fixture_model()
+    batched_model.load_state_dict(scalar_model.state_dict())
+    scalar_rng = runner.SyntheticTestRNG("SYNTHETIC-TEST-RCLE-TBCFV-RUNNER-A")
+    batched_rng = runner.SyntheticTestRNG("SYNTHETIC-TEST-RCLE-TBCFV-RUNNER-A")
+    cells = runner.TRAINING_CELLS[:4]
+    coordinates = tuple(
+        runner.EpisodeCoordinate(0, cell, 0, row) for cell in cells for row in range(8)
+    )
+
+    scalar = tuple(
+        episode
+        for offset in range(0, 32, 8)
+        for episode in runner._execute_learned_batch_scalar_reference(
+            scalar_model,
+            arm,
+            scalar_rng,
+            coordinates[offset : offset + 8],
+            training=True,
+        )
+    )
+    batched = runner.execute_learned_batch(
+        batched_model, arm, batched_rng, coordinates, training=True
+    )
+
+    for expected, observed in zip(scalar, batched):
+        assert (observed.tau, observed.U, observed.F, observed.Y) == (
+            expected.tau,
+            expected.U,
+            expected.F,
+            expected.Y,
+        )
+        assert observed.agent_ticks == expected.agent_ticks
+        assert observed.claim_decisions == expected.claim_decisions
+        assert all(
+            torch.equal(actual, reference)
+            for actual, reference in zip(observed.plan_scores, expected.plan_scores)
+        )
+        assert all(
+            torch.equal(actual, reference)
+            for actual, reference in zip(observed.claim_scores, expected.claim_scores)
+        )
 
 
 def test_runner_owner_bound_staging_recovers_injected_process_loss(tmp_path: Path) -> None:

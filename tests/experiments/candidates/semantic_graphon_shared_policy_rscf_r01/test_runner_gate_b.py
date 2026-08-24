@@ -1,6 +1,10 @@
 from __future__ import annotations
 
 from dataclasses import replace
+import os
+from pathlib import Path
+import subprocess
+import sys
 
 import numpy as np
 import pytest
@@ -29,6 +33,14 @@ from experiments.candidates.semantic_graphon_shared_policy_rscf_r01.lifecycle im
     WriteOnceConflictError,
     canonical_sha256,
 )
+from experiments.candidates.semantic_graphon_shared_policy_rscf_r01.native_loader import (
+    _ACCEPTED_ARTIFACT_SHA256,
+    _ACCEPTED_BUILD_KEY_SHA256,
+    _load_authenticated_prebuilt_module,
+    _merge_case_insensitive_environment,
+    _retained_prebuilt_artifact_path,
+    _verify_prebuilt_artifact_bytes,
+)
 from experiments.candidates.semantic_graphon_shared_policy_rscf_r01.policy import (
     ACTOR_PARAMETER_SHAPES,
     CRITIC_PARAMETER_SHAPES,
@@ -51,6 +63,70 @@ def _literal_parameters(shapes: dict[str, tuple[int, ...]], phase: int) -> dict[
         result[name] = (0.015 * torch.sin(values * 0.017 + phase)).reshape(shape).contiguous()
         cursor += count
     return result
+
+
+def test_vcvars_environment_merge_is_case_insensitive_and_keeps_first_compiler_path() -> None:
+    vcvars_path = r"C:\VS\VC\Tools\MSVC\bin\HostX64\x64;C:\Windows\System32"
+    stale_parent_path = r"C:\managed-sandbox-parent"
+    environment = {
+        "PATH": stale_parent_path,
+        "PRESERVED_PARENT": "parent-value",
+    }
+    _merge_case_insensitive_environment(
+        "\n".join((
+            f"PATH={vcvars_path}",
+            "INCLUDE=C:\\VS\\VC\\include",
+            f"Path={stale_parent_path}",
+            "LIB=C:\\VS\\VC\\lib",
+        )),
+        environment,
+    )
+    assert environment["PATH"] == vcvars_path
+    assert "Path" not in environment
+    assert environment["INCLUDE"] == r"C:\VS\VC\include"
+    assert environment["LIB"] == r"C:\VS\VC\lib"
+    assert environment["PRESERVED_PARENT"] == "parent-value"
+
+
+def test_retained_native_module_load_ignores_torch_cache_and_never_rebuilds(tmp_path) -> None:
+    module_name = f"sgsp_rscf_native_v4_{_ACCEPTED_BUILD_KEY_SHA256[:20]}"
+    artifact = _retained_prebuilt_artifact_path(module_name)
+    assert artifact.is_file()
+    assert _verify_prebuilt_artifact_bytes(artifact) == artifact.resolve(strict=True)
+    assert _load_authenticated_prebuilt_module(module_name).__file__ == str(artifact)
+
+    forbidden_cache = tmp_path / "FORBIDDEN_TORCH_CACHE_SENTINEL"
+    forbidden_cache.write_bytes(b"TEST_ONLY_DO_NOT_WRITE")
+    environment = dict(os.environ)
+    environment["TORCH_EXTENSIONS_DIR"] = str(forbidden_cache)
+    completed = subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            (
+                "from experiments.candidates.semantic_graphon_shared_policy_rscf_r01."
+                "native_loader import load_native_host; print(load_native_host().artifact_path)"
+            ),
+        ],
+        cwd=Path(__file__).resolve().parents[4],
+        env=environment,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert completed.stdout.strip() == str(artifact)
+    assert forbidden_cache.read_bytes() == b"TEST_ONLY_DO_NOT_WRITE"
+
+
+def test_retained_native_artifact_tamper_fails_before_module_import(tmp_path) -> None:
+    module_name = f"sgsp_rscf_native_v4_{_ACCEPTED_BUILD_KEY_SHA256[:20]}"
+    accepted = _retained_prebuilt_artifact_path(module_name).read_bytes()
+    tampered = bytearray(accepted)
+    tampered[-1] ^= 0x01
+    path = tmp_path / f"{_ACCEPTED_ARTIFACT_SHA256}.pyd"
+    path.write_bytes(tampered)
+    with pytest.raises(RuntimeError, match="artifact hash differs"):
+        _verify_prebuilt_artifact_bytes(path)
 
 
 @pytest.fixture(scope="module")

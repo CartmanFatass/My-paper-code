@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "candidate_id": "SGSP-RG2Z-RSCF-SCIENCE-20260821-01|FROZEN_OLD_IDENTITY_AT_VALID_BLINDED_GENERATION154|EXPLICIT_CONTINUATION_LINEAGE_CANDIDATE",
+  "evidence_manifest_sha256": "c52e3366a25a0cef9f60937ee4c5e9a1bf74d69f9e40129a6b2788d933bef77a",
+  "responsible_subagent_task": "/root/sgsp_identity_feasibility_cm/sgsp_lineage_implementer",
+  "responsible_role": "hmasd-implementer",
+  "authored_at_utc": "2026-08-23T20:35:00Z",
+  "covered_finding_codes": [
+    "CPU_PARALLELISM_ABSENT",
+    "TOY_WALL_OVER_1800S"
+  ],
+  "why_deviation_is_necessary": "The frozen continuation contract requires exactly one outer worker, one allocated CPU core, and one native thread, so worker-count parallelism cannot be added without changing the authorized execution identity. The unchanged complete 24-seed, 512-update panel projects to 744938.572103712 seconds and therefore necessarily crosses the sanity preference despite a measured 23.94x native speedup.",
+  "alternatives_considered": "Additional CPU workers or native threads were rejected because they would change the frozen worker-mode identity and ordering contract. Reducing seeds, updates, rosters, origins, width, evaluation cells, or the 28-family was rejected because each changes the registered object. The retained width-32 batched C++ host is the cheapest authorized execution lane measured here.",
+  "bounded_cost_and_risk": "The implementation acceptance remains TEST-only and used one core, one native thread, about 289.1 MiB observed RSS, and about 52 seconds for the targeted benchmark. A later empirical continuation remains below the 15-day stop boundary; the refreshed result-blind preflight projects about 210.1 wall hours and 141919136 retained bytes. No lease or activity is granted by this explanation.",
+  "recheck_or_revert_condition": "Rerun the result-blind benchmark and SANCHECK before acceptance if any hot-path source, native artifact, compiler binding, width, worker or thread count, precision profile, lineage schema, projected panel cost, or registered workload count changes. Revert to no continuation and return to the owner if exact action, RNG/order, state, optimizer, or complete-only provenance conformance fails.",
+  "scientific_semantics_changed": false,
+  "requested_cm_disposition": "ACCEPT_DEVIATION_FOR_CM_REVIEW"
+}

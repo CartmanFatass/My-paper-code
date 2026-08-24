@@ -51,6 +51,8 @@ def build_parser() -> argparse.ArgumentParser:
         command.add_argument("--predecessor-lease", type=Path, action="append", default=[])
         command.add_argument("--coordinate-binding", type=Path, required=True)
         command.add_argument("--result-root", type=Path, required=True)
+        if name == "run":
+            command.add_argument("--workers", type=int, choices=(1, 2, 4), default=1)
     repair = commands.add_parser("repair-resume")
     repair.add_argument("--predecessor-certificate", type=Path, required=True)
     repair.add_argument("--predecessor-accepted-binding", type=Path, required=True)
@@ -64,6 +66,7 @@ def build_parser() -> argparse.ArgumentParser:
     repair.add_argument("--run-identity", type=Path, required=True)
     repair.add_argument("--failed-terminal", type=Path, required=True)
     repair.add_argument("--result-root", type=Path, required=True)
+    repair.add_argument("--workers", type=int, choices=(1, 2, 4), default=1)
     return parser
 
 
@@ -100,7 +103,7 @@ def main(argv: list[str] | None = None) -> int:
                 result_root=args.result_root,
                 now=now,
             )
-            output = execute_full_panel(authority, now=now)
+            output = execute_full_panel(authority, now=now, workers=args.workers)
         else:
             now = datetime.now(timezone.utc)
             authority = read_admission_files(
@@ -114,7 +117,7 @@ def main(argv: list[str] | None = None) -> int:
                 predecessor_lease_paths=args.predecessor_lease,
             )
             output = (
-                execute_full_panel(authority, now=now)
+                execute_full_panel(authority, now=now, workers=args.workers)
                 if args.command == "run"
                 else analyze_complete_panel(authority, now=now)
             )

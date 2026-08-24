@@ -188,28 +188,28 @@ def _validate_snapshot(snapshot: PretransitionSnapshot, *, verify_digest: bool) 
     observations = _require_array(
         snapshot.observations,
         name="observations",
-        dtype=np.dtype(np.float64),
+        dtype=np.dtype(np.float32),
         shape=(MAX_AGENTS, OBSERVATION_DIM),
     )
     messages = _require_array(
         snapshot.messages,
         name="messages",
-        dtype=np.dtype(np.float64),
+        dtype=np.dtype(np.float32),
         shape=(MAX_AGENTS, MESSAGE_DIM),
     )
-    summaries = _require_array(snapshot.role_summaries, name="role_summaries", dtype=np.dtype(np.float64))
+    summaries = _require_array(snapshot.role_summaries, name="role_summaries", dtype=np.dtype(np.float32))
     if summaries.ndim != 2 or summaries.shape[0] != MAX_AGENTS or summaries.shape[1] <= 0:
         raise ContractError("role summaries must be [MAX_AGENTS, positive_width]")
     hidden = _require_array(
         snapshot.post_gru_hidden,
         name="post_gru_hidden",
-        dtype=np.dtype(np.float64),
+        dtype=np.dtype(np.float32),
         shape=(MAX_AGENTS, HIDDEN_DIM),
     )
     distribution = _require_array(
         snapshot.legal_distribution,
         name="legal_distribution",
-        dtype=np.dtype(np.float64),
+        dtype=np.dtype(np.float32),
         shape=(MAX_AGENTS, ACTION_COUNT),
     )
     actions = _require_array(
@@ -231,10 +231,15 @@ def _validate_snapshot(snapshot: PretransitionSnapshot, *, verify_digest: bool) 
         illegal = tuple(action for action in range(ACTION_COUNT) if action not in legal)
         if illegal and not bool(np.all(distribution[agent, list(illegal)] == 0.0)):
             raise ContractError("legal distribution gives probability to a masked action")
-        if not np.isclose(float(distribution[agent, list(legal)].sum()), 1.0, atol=1e-12, rtol=0.0):
+        if not np.isclose(
+            float(distribution[agent, list(legal)].sum(dtype=np.float32)),
+            1.0,
+            atol=1.0e-5,
+            rtol=1.3e-6,
+        ):
             raise ContractError("legal distribution row does not sum to one")
         floor = 0.04 / len(legal)
-        if bool(np.any(distribution[agent, list(legal)] < floor - 1e-12)):
+        if bool(np.any(distribution[agent, list(legal)] < floor - 1.0e-6)):
             raise ContractError("legal distribution violates the 0.04 legal-uniform floor")
         if int(actions[agent]) not in legal:
             raise ContractError("factual joint action violates its public-role mask")

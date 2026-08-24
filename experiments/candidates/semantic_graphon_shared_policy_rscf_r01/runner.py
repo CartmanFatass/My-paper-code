@@ -169,7 +169,7 @@ def _native_parameters(actor: RSCFActor) -> ActorParameters:
     """Freeze the exact pre-update actor into the ABI-V2 parameter schema."""
 
     def array(value: Tensor) -> np.ndarray:
-        result = value.detach().cpu().to(torch.float64).contiguous().numpy().copy()
+        result = value.detach().cpu().to(torch.float32).contiguous().numpy().copy()
         result.setflags(write=False)
         return result
 
@@ -1299,9 +1299,9 @@ class RSCFGateBRunner:
                 trajectory = bundle.full_rotated
             else:
                 trajectory = bundle.intact
-            mean_return = float(trajectory.terminal_return.mean(dtype=np.float64))
-            west = float((trajectory.final_delivered[:, 0] / 3.0).mean(dtype=np.float64))
-            east = float((trajectory.final_delivered[:, 1] / 3.0).mean(dtype=np.float64))
+            mean_return = float(trajectory.terminal_return.mean(dtype=np.float32))
+            west = float((trajectory.final_delivered[:, 0] / 3.0).mean(dtype=np.float32))
+            east = float((trajectory.final_delivered[:, 1] / 3.0).mean(dtype=np.float32))
             tv_mean: float | None = None
             tv_sup: float | None = None
             if arm_name == PHY and condition == INTACT and roster_size in (6, 21):
@@ -1309,13 +1309,13 @@ class RSCFGateBRunner:
                 tv = 0.5 * np.abs(
                     bundle.intact.legal_probabilities
                     - bundle.shadow.legal_probabilities
-                ).sum(axis=-1, dtype=np.float64)
+                ).sum(axis=-1, dtype=np.float32)
                 tv = np.where(active[..., 0], tv, 0.0)
-                counts = bundle.episode.n_agents.astype(np.float64) * 12.0
-                per_episode_tv = tv.sum(axis=(1, 2), dtype=np.float64) / counts
+                counts = bundle.episode.n_agents.astype(np.float32) * 12.0
+                per_episode_tv = tv.sum(axis=(1, 2), dtype=np.float32) / counts
                 per_episode_sup = tv.max(axis=(1, 2))
-                tv_mean = float(per_episode_tv.mean(dtype=np.float64))
-                tv_sup = float(per_episode_sup.mean(dtype=np.float64))
+                tv_mean = float(per_episode_tv.mean(dtype=np.float32))
+                tv_sup = float(per_episode_sup.mean(dtype=np.float32))
             accumulator_sha = hashlib.sha256()
             accumulator_sha.update(packet.resume_identity.test_schedule_id.encode("ascii"))
             accumulator_sha.update(str((roster_size, arm_name, condition)).encode("ascii"))

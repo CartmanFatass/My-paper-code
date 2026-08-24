@@ -3,9 +3,12 @@
 #include <cmath>
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
+#include <functional>
 #include <memory>
 #include <mutex>
 #include <new>
+#include <string>
 #include <unordered_set>
 #include <vector>
 
@@ -29,6 +32,18 @@ constexpr int CLAIM_PERIOD = 4;
 constexpr int ACTIVE_CONTINUATION = 0;
 constexpr int NEW_EPOCH = 1;
 constexpr int EVENT_POSITION = -2;
+
+const char* CELL_NAMES[16] = {
+    "6_to_6.ACTIVE_CONTINUATION", "6_to_6.NEW_EPOCH",
+    "10_to_10.ACTIVE_CONTINUATION", "10_to_10.NEW_EPOCH",
+    "6_to_10.ACTIVE_CONTINUATION", "6_to_10.NEW_EPOCH",
+    "10_to_6.ACTIVE_CONTINUATION", "10_to_6.NEW_EPOCH",
+    "8_to_8.ACTIVE_CONTINUATION", "8_to_8.NEW_EPOCH",
+    "12_to_12.ACTIVE_CONTINUATION", "12_to_12.NEW_EPOCH",
+    "8_to_12.ACTIVE_CONTINUATION", "8_to_12.NEW_EPOCH",
+    "12_to_8.ACTIVE_CONTINUATION", "12_to_8.NEW_EPOCH"};
+constexpr int CELL_BEFORE[16] = {6,6,10,10,6,6,10,10,8,8,12,12,8,8,12,12};
+constexpr int CELL_AFTER[16] = {6,6,10,10,10,10,6,6,8,8,12,12,12,12,8,8};
 
 struct FixtureInput {
     std::uint64_t magic;
@@ -87,6 +102,188 @@ struct Snapshot {
     double endpoint_f;
     double endpoint_y;
 };
+
+// Candidate-local semantic-address acceleration.  This structure contains
+// only the exact public semantic address fields; it never contains a model,
+// coordinate root, result value, or mutable host state.  The two tagged fields
+// preserve the frozen JSON distinction between an integer and a string.
+struct SemanticAddressInput {
+    std::int64_t run_block;
+    const char* parameter_entry;
+    const char* arm_only_variable;
+    const char* cell;
+    std::int64_t update_or_scenario;
+    std::int64_t physical_tick;
+    std::int64_t roster_event_integer;
+    const char* roster_event_string;
+    std::int32_t roster_event_is_integer;
+    std::int64_t physical_agent_integer;
+    const char* physical_agent_string;
+    std::int32_t physical_agent_is_integer;
+    const char* draw_kind;
+    std::int64_t draw_index;
+};
+
+struct Sha256 {
+    std::uint32_t state[8] = {
+        UINT32_C(0x6a09e667), UINT32_C(0xbb67ae85), UINT32_C(0x3c6ef372), UINT32_C(0xa54ff53a),
+        UINT32_C(0x510e527f), UINT32_C(0x9b05688c), UINT32_C(0x1f83d9ab), UINT32_C(0x5be0cd19)};
+    std::uint8_t block[64]{};
+    std::size_t used = 0;
+    std::uint64_t bytes = 0;
+};
+
+constexpr std::uint32_t SHA256_K[64] = {
+    0x428a2f98u,0x71374491u,0xb5c0fbcfu,0xe9b5dba5u,0x3956c25bu,0x59f111f1u,0x923f82a4u,0xab1c5ed5u,
+    0xd807aa98u,0x12835b01u,0x243185beu,0x550c7dc3u,0x72be5d74u,0x80deb1feu,0x9bdc06a7u,0xc19bf174u,
+    0xe49b69c1u,0xefbe4786u,0x0fc19dc6u,0x240ca1ccu,0x2de92c6fu,0x4a7484aau,0x5cb0a9dcu,0x76f988dau,
+    0x983e5152u,0xa831c66du,0xb00327c8u,0xbf597fc7u,0xc6e00bf3u,0xd5a79147u,0x06ca6351u,0x14292967u,
+    0x27b70a85u,0x2e1b2138u,0x4d2c6dfcu,0x53380d13u,0x650a7354u,0x766a0abbu,0x81c2c92eu,0x92722c85u,
+    0xa2bfe8a1u,0xa81a664bu,0xc24b8b70u,0xc76c51a3u,0xd192e819u,0xd6990624u,0xf40e3585u,0x106aa070u,
+    0x19a4c116u,0x1e376c08u,0x2748774cu,0x34b0bcb5u,0x391c0cb3u,0x4ed8aa4au,0x5b9cca4fu,0x682e6ff3u,
+    0x748f82eeu,0x78a5636fu,0x84c87814u,0x8cc70208u,0x90befffau,0xa4506cebu,0xbef9a3f7u,0xc67178f2u};
+
+std::uint32_t rotate_right(std::uint32_t value, int bits) {
+    return (value >> bits) | (value << (32 - bits));
+}
+
+void sha256_transform(Sha256& sha, const std::uint8_t* input) {
+    std::uint32_t words[64]{};
+    for (int index = 0; index < 16; ++index) {
+        const int offset = index * 4;
+        words[index] = (static_cast<std::uint32_t>(input[offset]) << 24) |
+                       (static_cast<std::uint32_t>(input[offset + 1]) << 16) |
+                       (static_cast<std::uint32_t>(input[offset + 2]) << 8) |
+                       static_cast<std::uint32_t>(input[offset + 3]);
+    }
+    for (int index = 16; index < 64; ++index) {
+        const std::uint32_t s0 = rotate_right(words[index - 15], 7) ^
+                                 rotate_right(words[index - 15], 18) ^
+                                 (words[index - 15] >> 3);
+        const std::uint32_t s1 = rotate_right(words[index - 2], 17) ^
+                                 rotate_right(words[index - 2], 19) ^
+                                 (words[index - 2] >> 10);
+        words[index] = words[index - 16] + s0 + words[index - 7] + s1;
+    }
+    std::uint32_t a = sha.state[0], b = sha.state[1], c = sha.state[2], d = sha.state[3];
+    std::uint32_t e = sha.state[4], f = sha.state[5], g = sha.state[6], h = sha.state[7];
+    for (int index = 0; index < 64; ++index) {
+        const std::uint32_t s1 = rotate_right(e, 6) ^ rotate_right(e, 11) ^ rotate_right(e, 25);
+        const std::uint32_t choice = (e & f) ^ ((~e) & g);
+        const std::uint32_t temp1 = h + s1 + choice + SHA256_K[index] + words[index];
+        const std::uint32_t s0 = rotate_right(a, 2) ^ rotate_right(a, 13) ^ rotate_right(a, 22);
+        const std::uint32_t majority = (a & b) ^ (a & c) ^ (b & c);
+        const std::uint32_t temp2 = s0 + majority;
+        h = g; g = f; f = e; e = d + temp1; d = c; c = b; b = a; a = temp1 + temp2;
+    }
+    sha.state[0] += a; sha.state[1] += b; sha.state[2] += c; sha.state[3] += d;
+    sha.state[4] += e; sha.state[5] += f; sha.state[6] += g; sha.state[7] += h;
+}
+
+void sha256_update(Sha256& sha, const std::uint8_t* input, std::size_t size) {
+    sha.bytes += size;
+    while (size > 0) {
+        const std::size_t amount = std::min(size, sizeof(sha.block) - sha.used);
+        std::memcpy(sha.block + sha.used, input, amount);
+        sha.used += amount; input += amount; size -= amount;
+        if (sha.used == sizeof(sha.block)) {
+            sha256_transform(sha, sha.block);
+            sha.used = 0;
+        }
+    }
+}
+
+void sha256_finish(Sha256& sha, std::uint8_t output[32]) {
+    const std::uint64_t bit_count = sha.bytes * 8;
+    sha.block[sha.used++] = 0x80;
+    if (sha.used > 56) {
+        while (sha.used < 64) sha.block[sha.used++] = 0;
+        sha256_transform(sha, sha.block);
+        sha.used = 0;
+    }
+    while (sha.used < 56) sha.block[sha.used++] = 0;
+    for (int shift = 56; shift >= 0; shift -= 8) {
+        sha.block[sha.used++] = static_cast<std::uint8_t>(bit_count >> shift);
+    }
+    sha256_transform(sha, sha.block);
+    for (int index = 0; index < 8; ++index) {
+        output[index * 4] = static_cast<std::uint8_t>(sha.state[index] >> 24);
+        output[index * 4 + 1] = static_cast<std::uint8_t>(sha.state[index] >> 16);
+        output[index * 4 + 2] = static_cast<std::uint8_t>(sha.state[index] >> 8);
+        output[index * 4 + 3] = static_cast<std::uint8_t>(sha.state[index]);
+    }
+}
+
+void hmac_sha256(const std::uint8_t key[32], const std::string& payload, std::uint8_t output[32]) {
+    std::uint8_t inner_pad[64], outer_pad[64], inner_digest[32];
+    for (int index = 0; index < 64; ++index) {
+        const std::uint8_t value = index < 32 ? key[index] : 0;
+        inner_pad[index] = static_cast<std::uint8_t>(value ^ 0x36);
+        outer_pad[index] = static_cast<std::uint8_t>(value ^ 0x5c);
+    }
+    Sha256 inner;
+    sha256_update(inner, inner_pad, sizeof(inner_pad));
+    sha256_update(inner, reinterpret_cast<const std::uint8_t*>(payload.data()), payload.size());
+    sha256_finish(inner, inner_digest);
+    Sha256 outer;
+    sha256_update(outer, outer_pad, sizeof(outer_pad));
+    sha256_update(outer, inner_digest, sizeof(inner_digest));
+    sha256_finish(outer, output);
+}
+
+bool safe_json_string(const char* value) {
+    if (value == nullptr) return false;
+    for (const unsigned char* cursor = reinterpret_cast<const unsigned char*>(value); *cursor; ++cursor) {
+        if (*cursor < 0x20 || *cursor >= 0x7f || *cursor == '"' || *cursor == '\\') return false;
+    }
+    return true;
+}
+
+void append_json_string(std::string& output, const char* value) {
+    output.push_back('"'); output.append(value); output.push_back('"');
+}
+
+bool semantic_payload(const SemanticAddressInput& input, std::string& output) {
+    if (!safe_json_string(input.parameter_entry) || !safe_json_string(input.arm_only_variable) ||
+        !safe_json_string(input.cell) || !safe_json_string(input.draw_kind)) return false;
+    if ((!input.roster_event_is_integer && !safe_json_string(input.roster_event_string)) ||
+        (!input.physical_agent_is_integer && !safe_json_string(input.physical_agent_string))) return false;
+    output.clear();
+    output.reserve(384);
+    output.append("{\"arm_only_variable\":"); append_json_string(output, input.arm_only_variable);
+    output.append(",\"cell\":"); append_json_string(output, input.cell);
+    output.append(",\"domain\":\"RCLE-TBCFV-R04/semantic-uniform/v1\"");
+    output.append(",\"draw_index\":").append(std::to_string(input.draw_index));
+    output.append(",\"draw_kind\":"); append_json_string(output, input.draw_kind);
+    output.append(",\"parameter_entry\":"); append_json_string(output, input.parameter_entry);
+    output.append(",\"physical_agent\":");
+    if (input.physical_agent_is_integer) output.append(std::to_string(input.physical_agent_integer));
+    else append_json_string(output, input.physical_agent_string);
+    output.append(",\"physical_tick\":").append(std::to_string(input.physical_tick));
+    output.append(",\"roster_event\":");
+    if (input.roster_event_is_integer) output.append(std::to_string(input.roster_event_integer));
+    else append_json_string(output, input.roster_event_string);
+    output.append(",\"run_block\":").append(std::to_string(input.run_block));
+    output.append(",\"update_or_scenario\":").append(std::to_string(input.update_or_scenario));
+    output.append("}\n");
+    return true;
+}
+
+std::uint64_t semantic_word(
+    const std::uint8_t key[32], const SemanticAddressInput& address, std::string& payload) {
+    std::uint8_t digest[32];
+    if (!semantic_payload(address, payload)) return UINT64_MAX;
+    hmac_sha256(key, payload, digest);
+    std::uint64_t word = 0;
+    for (int byte = 0; byte < 8; ++byte) word = (word << 8) | digest[byte];
+    return word;
+}
+
+double semantic_uniform(
+    const std::uint8_t key[32], const SemanticAddressInput& address, std::string& payload) {
+    constexpr double WORD_SCALE = 1.0 / 18446744073709551616.0;
+    return (static_cast<double>(semantic_word(key, address, payload)) + 0.5) * WORD_SCALE;
+}
 
 struct Agent {
     int key = -1;
@@ -436,6 +633,84 @@ std::unique_ptr<Host> make_host(const FixtureInput& fixture) {
     return host;
 }
 
+int circular_distance(int left, int right) {
+    const int delta = std::abs(left - right) % SECTORS;
+    return std::min(delta, SECTORS - delta);
+}
+
+struct Assignment {
+    bool valid = false;
+    int distance = 0;
+    int changes = 0;
+    std::vector<int> slots;
+};
+
+bool assignment_less(const Assignment& left, const Assignment& right) {
+    if (!right.valid) return true;
+    if (left.distance != right.distance) return left.distance < right.distance;
+    if (left.changes != right.changes) return left.changes < right.changes;
+    return left.slots < right.slots;
+}
+
+int coherent_actions(
+    const Snapshot& snapshot_row,
+    const std::int32_t* previous,
+    const std::uint8_t* survivor,
+    bool first_or_epoch,
+    std::int32_t* output) {
+    const int n = snapshot_row.agent_count;
+    if (n < 1 || n > MAX_AGENTS) return -40;
+    std::vector<int> angular(static_cast<std::size_t>(n));
+    for (int index = 0; index < n; ++index) angular[static_cast<std::size_t>(index)] = index;
+    std::sort(angular.begin(), angular.end(), [&](int left, int right) {
+        if (snapshot_row.positions[left] != snapshot_row.positions[right])
+            return snapshot_row.positions[left] < snapshot_row.positions[right];
+        return snapshot_row.transport_keys[left] < snapshot_row.transport_keys[right];
+    });
+    std::vector<int> slots;
+    slots.reserve(static_cast<std::size_t>(n));
+    for (int beacon = 0; beacon < BEACONS; ++beacon) {
+        if (snapshot_row.demands[beacon] < 0) return -41;
+        for (int count = 0; count < snapshot_row.demands[beacon]; ++count) slots.push_back(beacon);
+    }
+    if (static_cast<int>(slots.size()) != n) return -41;
+    const int mask_count = 1 << n;
+    std::vector<Assignment> memo(static_cast<std::size_t>((n + 1) * mask_count));
+    std::vector<std::uint8_t> seen(static_cast<std::size_t>((n + 1) * mask_count), 0);
+    std::function<const Assignment&(int,int)> solve = [&](int rank, int mask) -> const Assignment& {
+        const std::size_t memo_index = static_cast<std::size_t>(rank * mask_count + mask);
+        if (seen[memo_index]) return memo[memo_index];
+        seen[memo_index] = 1;
+        Assignment& best = memo[memo_index];
+        if (rank == n) { best.valid = true; return best; }
+        const int agent = angular[static_cast<std::size_t>(rank)];
+        for (int slot_index = 0; slot_index < n; ++slot_index) {
+            if (mask & (1 << slot_index)) continue;
+            const Assignment& tail = solve(rank + 1, mask | (1 << slot_index));
+            if (!tail.valid) continue;
+            Assignment candidate;
+            candidate.valid = true;
+            candidate.distance = circular_distance(
+                snapshot_row.positions[agent], snapshot_row.beacon_positions[slots[static_cast<std::size_t>(slot_index)]]) + tail.distance;
+            candidate.changes =
+                ((!first_or_epoch && survivor[agent] && previous[agent] >= 0 &&
+                  previous[agent] != slots[static_cast<std::size_t>(slot_index)]) ? 1 : 0) + tail.changes;
+            candidate.slots.reserve(static_cast<std::size_t>(n - rank));
+            candidate.slots.push_back(slot_index);
+            candidate.slots.insert(candidate.slots.end(), tail.slots.begin(), tail.slots.end());
+            if (assignment_less(candidate, best)) best = std::move(candidate);
+        }
+        return best;
+    };
+    const Assignment& chosen = solve(0, 0);
+    if (!chosen.valid || static_cast<int>(chosen.slots.size()) != n) return -42;
+    for (int rank = 0; rank < n; ++rank) {
+        const int agent = angular[static_cast<std::size_t>(rank)];
+        output[agent] = slots[static_cast<std::size_t>(chosen.slots[static_cast<std::size_t>(rank)])];
+    }
+    return 0;
+}
+
 }  // namespace
 
 TBCFV_EXPORT std::int32_t rcle_tbcfv_abi_version() { return ABI; }
@@ -444,6 +719,295 @@ TBCFV_EXPORT std::size_t rcle_tbcfv_sizeof_fixture_input() { return sizeof(Fixtu
 TBCFV_EXPORT std::size_t rcle_tbcfv_sizeof_step_input() { return sizeof(StepInput); }
 TBCFV_EXPORT std::size_t rcle_tbcfv_sizeof_event_input() { return sizeof(EventInput); }
 TBCFV_EXPORT std::size_t rcle_tbcfv_sizeof_snapshot() { return sizeof(Snapshot); }
+TBCFV_EXPORT std::size_t rcle_tbcfv_sizeof_semantic_address_input() { return sizeof(SemanticAddressInput); }
+
+TBCFV_EXPORT std::int32_t rcle_tbcfv_semantic_uniform_words(
+    const std::uint8_t* key,
+    const SemanticAddressInput* inputs,
+    std::int32_t count,
+    std::uint64_t* outputs) {
+    if (key == nullptr || inputs == nullptr || outputs == nullptr || count < 1 || count > 65536) return -30;
+    std::string payload;
+    std::uint8_t digest[32];
+    for (int index = 0; index < count; ++index) {
+        if (!semantic_payload(inputs[index], payload)) return -31;
+        hmac_sha256(key, payload, digest);
+        std::uint64_t word = 0;
+        for (int byte = 0; byte < 8; ++byte) word = (word << 8) | digest[byte];
+        outputs[index] = word;
+    }
+    return 0;
+}
+
+TBCFV_EXPORT std::int32_t rcle_tbcfv_semantic_claims(
+    const std::uint8_t* key,
+    const SemanticAddressInput* inputs,
+    const double* probabilities,
+    std::int32_t count,
+    std::int32_t* outputs) {
+    if (key == nullptr || inputs == nullptr || probabilities == nullptr || outputs == nullptr ||
+        count < 1 || count > 65536) return -32;
+    std::vector<std::uint64_t> words(static_cast<std::size_t>(count));
+    const int status = rcle_tbcfv_semantic_uniform_words(key, inputs, count, words.data());
+    if (status != 0) return status;
+    constexpr double WORD_SCALE = 1.0 / 18446744073709551616.0;
+    for (int row = 0; row < count; ++row) {
+        const double uniform = (static_cast<double>(words[static_cast<std::size_t>(row)]) + 0.5) * WORD_SCALE;
+        double cumulative = 0.0;
+        int selected = BEACONS - 1;
+        for (int candidate = 0; candidate < BEACONS; ++candidate) {
+            const double probability = probabilities[static_cast<std::size_t>(row) * BEACONS + candidate];
+            if (!std::isfinite(probability) || probability < 0.0 || probability > 1.0) return -33;
+            cumulative += probability;
+            if (uniform < cumulative) { selected = candidate; break; }
+        }
+        outputs[row] = selected;
+    }
+    return 0;
+}
+
+TBCFV_EXPORT std::int32_t rcle_tbcfv_semantic_claims_compact(
+    const std::uint8_t* key,
+    std::int64_t run_block,
+    const std::int32_t* cell_codes,
+    const std::int64_t* update_or_scenarios,
+    const std::int64_t* roster_events,
+    const std::int64_t* physical_agents,
+    const std::int64_t* physical_ticks,
+    const double* probabilities,
+    std::int32_t count,
+    std::int32_t* outputs) {
+    if (key == nullptr || cell_codes == nullptr || update_or_scenarios == nullptr ||
+        roster_events == nullptr || physical_agents == nullptr || physical_ticks == nullptr ||
+        probabilities == nullptr || outputs == nullptr || count < 1 || count > 65536) return -34;
+    std::string payload;
+    std::uint8_t digest[32];
+    constexpr double WORD_SCALE = 1.0 / 18446744073709551616.0;
+    for (int row = 0; row < count; ++row) {
+        if (cell_codes[row] < 0 || cell_codes[row] >= 16) return -35;
+        const SemanticAddressInput address{
+            run_block, "", "", CELL_NAMES[cell_codes[row]], update_or_scenarios[row], physical_ticks[row],
+            roster_events[row], "", 1, physical_agents[row], "", 1, "actor-claim", 0};
+        if (!semantic_payload(address, payload)) return -31;
+        hmac_sha256(key, payload, digest);
+        std::uint64_t word = 0;
+        for (int byte = 0; byte < 8; ++byte) word = (word << 8) | digest[byte];
+        const double uniform = (static_cast<double>(word) + 0.5) * WORD_SCALE;
+        double cumulative = 0.0;
+        int selected = BEACONS - 1;
+        for (int candidate = 0; candidate < BEACONS; ++candidate) {
+            const double probability = probabilities[static_cast<std::size_t>(row) * BEACONS + candidate];
+            if (!std::isfinite(probability) || probability < 0.0 || probability > 1.0) return -33;
+            cumulative += probability;
+            if (uniform < cumulative) { selected = candidate; break; }
+        }
+        outputs[row] = selected;
+    }
+    return 0;
+}
+
+TBCFV_EXPORT std::int32_t rcle_tbcfv_materialize_fixtures(
+    const std::uint8_t* key,
+    std::int64_t run_block,
+    const std::int32_t* cell_codes,
+    const std::int64_t* update_or_scenarios,
+    const std::int64_t* episode_rows,
+    std::int32_t width,
+    FixtureInput* outputs) {
+    if (key == nullptr || cell_codes == nullptr || update_or_scenarios == nullptr ||
+        episode_rows == nullptr || outputs == nullptr || !supported_width(width)) return -50;
+    std::string payload;
+    for (int lane = 0; lane < width; ++lane) {
+        const int cell = cell_codes[lane];
+        if (cell < 0 || cell >= 16) return -51;
+        const int before = CELL_BEFORE[cell];
+        const int after = CELL_AFTER[cell];
+        FixtureInput fixture{};
+        fixture.magic = MAGIC;
+        fixture.abi = ABI;
+        fixture.initial_n = before;
+        fixture.after_n = after;
+        fixture.event_condition = (cell % 2 == 1) ? NEW_EPOCH : ACTIVE_CONTINUATION;
+        fixture.omega_plus = 0;
+        fixture.kappa_plus = 0;
+        std::fill(std::begin(fixture.initial_keys), std::end(fixture.initial_keys), -1);
+        std::fill(std::begin(fixture.initial_positions), std::end(fixture.initial_positions), -1);
+        std::fill(std::begin(fixture.after_keys), std::end(fixture.after_keys), -1);
+        std::fill(std::begin(fixture.after_positions), std::end(fixture.after_positions), -1);
+
+        std::vector<std::pair<double,int>> ranked_positions;
+        ranked_positions.reserve(SECTORS);
+        for (int sector = 0; sector < SECTORS; ++sector) {
+            const SemanticAddressInput address{
+                run_block, "", "", CELL_NAMES[cell], update_or_scenarios[lane], 0,
+                0, "", 0, episode_rows[lane], "", 1,
+                "initial-position-permutation", sector};
+            ranked_positions.emplace_back(semantic_uniform(key, address, payload), sector);
+        }
+        std::sort(ranked_positions.begin(), ranked_positions.end());
+        for (int index = 0; index < before; ++index) {
+            fixture.initial_keys[index] = index;
+            fixture.initial_positions[index] = ranked_positions[static_cast<std::size_t>(index)].second;
+        }
+        std::vector<int> after_keys;
+        if (after < before) {
+            std::vector<std::pair<double,int>> survivors;
+            survivors.reserve(static_cast<std::size_t>(before));
+            for (int agent = 0; agent < before; ++agent) {
+                const SemanticAddressInput address{
+                    run_block, "", "", CELL_NAMES[cell], update_or_scenarios[lane], 0,
+                    0, "contraction", 0, episode_rows[lane], "", 1,
+                    "survivor-subset", agent};
+                survivors.emplace_back(semantic_uniform(key, address, payload), agent);
+            }
+            std::sort(survivors.begin(), survivors.end());
+            for (int index = 0; index < after; ++index)
+                after_keys.push_back(survivors[static_cast<std::size_t>(index)].second);
+            std::sort(after_keys.begin(), after_keys.end());
+        } else {
+            for (int agent = 0; agent < after; ++agent) after_keys.push_back(agent);
+        }
+        for (int index = 0; index < after; ++index) {
+            fixture.after_keys[index] = after_keys[static_cast<std::size_t>(index)];
+            fixture.after_positions[index] = after_keys[static_cast<std::size_t>(index)] < before
+                ? -1 : EVENT_POSITION;
+        }
+        if (fixture.event_condition == NEW_EPOCH) {
+            const SemanticAddressInput omega_address{
+                run_block, "", "", CELL_NAMES[cell], update_or_scenarios[lane], 0,
+                0, "new_epoch", 0, episode_rows[lane], "", 1, "omega-plus", 0};
+            const SemanticAddressInput kappa_address{
+                run_block, "", "", CELL_NAMES[cell], update_or_scenarios[lane], 0,
+                0, "new_epoch", 0, episode_rows[lane], "", 1, "kappa-plus", 0};
+            const double omega = semantic_uniform(key, omega_address, payload);
+            const double kappa = semantic_uniform(key, kappa_address, payload);
+            fixture.omega_plus = std::array<int,3>{5,10,15}[static_cast<std::size_t>(std::min(static_cast<int>(omega * 3.0), 2))];
+            fixture.kappa_plus = std::min(static_cast<int>(kappa * 5.0), 4) + 1;
+        }
+        const int status = validate_fixture(fixture);
+        if (status != 0) return status;
+        outputs[lane] = fixture;
+    }
+    return 0;
+}
+
+TBCFV_EXPORT std::int32_t rcle_tbcfv_materialize_events(
+    const std::uint8_t* key,
+    std::int64_t run_block,
+    const std::int32_t* cell_codes,
+    const std::int64_t* update_or_scenarios,
+    const std::int64_t* episode_rows,
+    const Snapshot* snapshots,
+    const FixtureInput* fixtures,
+    std::int32_t width,
+    EventInput* outputs) {
+    if (key == nullptr || cell_codes == nullptr || update_or_scenarios == nullptr ||
+        episode_rows == nullptr || snapshots == nullptr || fixtures == nullptr ||
+        outputs == nullptr || !supported_width(width)) return -52;
+    std::string payload;
+    for (int lane = 0; lane < width; ++lane) {
+        const int cell = cell_codes[lane];
+        if (cell < 0 || cell >= 16 || snapshots[lane].status != 0 ||
+            !snapshots[lane].event_input_required || snapshots[lane].tick != EVENT_TICK) return -53;
+        const FixtureInput& fixture = fixtures[lane];
+        const int status = validate_fixture(fixture);
+        if (status != 0) return status;
+        std::vector<int> newcomer_keys;
+        for (int index = 0; index < fixture.after_n; ++index) {
+            const int candidate = fixture.after_keys[index];
+            if (!contains(fixture.initial_keys, fixture.initial_n, candidate)) newcomer_keys.push_back(candidate);
+        }
+        std::array<bool,SECTORS> occupied{};
+        for (int index = 0; index < snapshots[lane].agent_count; ++index) {
+            const int physical_key = snapshots[lane].transport_keys[index];
+            if (contains(fixture.after_keys, fixture.after_n, physical_key) &&
+                contains(fixture.initial_keys, fixture.initial_n, physical_key))
+                occupied[static_cast<std::size_t>(snapshots[lane].positions[index])] = true;
+        }
+        std::vector<std::pair<double,int>> ranked;
+        ranked.reserve(SECTORS);
+        for (int sector = 0; sector < SECTORS; ++sector) {
+            if (occupied[static_cast<std::size_t>(sector)]) continue;
+            const SemanticAddressInput address{
+                run_block, "", "", CELL_NAMES[cell], update_or_scenarios[lane], EVENT_TICK,
+                0, "newcomer-entry", 0, episode_rows[lane], "", 1,
+                "newcomer-position-permutation", sector};
+            ranked.emplace_back(semantic_uniform(key, address, payload), sector);
+        }
+        std::sort(ranked.begin(), ranked.end());
+        EventInput event{};
+        event.magic = MAGIC;
+        event.abi = ABI;
+        event.newcomer_count = static_cast<int>(newcomer_keys.size());
+        std::fill(std::begin(event.newcomer_positions), std::end(event.newcomer_positions), -1);
+        for (int index = 0; index < event.newcomer_count; ++index)
+            event.newcomer_positions[index] = ranked[static_cast<std::size_t>(index)].second;
+        outputs[lane] = event;
+    }
+    return 0;
+}
+
+TBCFV_EXPORT std::int32_t rcle_tbcfv_scripted_actions(
+    const Snapshot* snapshots,
+    std::int32_t width,
+    std::int32_t package_code,
+    const std::int32_t* previous_claims,
+    const std::uint8_t* survivors,
+    const std::uint8_t* first_or_epoch,
+    const std::uint8_t* active_churn,
+    const std::int32_t* post_event_claim_index,
+    StepInput* outputs) {
+    if (!supported_width(width) || snapshots == nullptr || previous_claims == nullptr ||
+        survivors == nullptr || first_or_epoch == nullptr || active_churn == nullptr ||
+        post_event_claim_index == nullptr || outputs == nullptr || package_code < 0 || package_code > 2) return -43;
+    for (int lane = 0; lane < width; ++lane) {
+        const Snapshot& row = snapshots[lane];
+        if (row.status != 0 || row.terminal || !row.claim_required || row.agent_count < 1 || row.agent_count > MAX_AGENTS) return -44;
+        StepInput action{};
+        action.magic = MAGIC;
+        action.abi = ABI;
+        action.claim_count = row.agent_count;
+        std::fill(std::begin(action.claims), std::end(action.claims), -1);
+        if (package_code == 2) {
+            for (int agent = 0; agent < row.agent_count; ++agent) {
+                int selected = 0;
+                int best = circular_distance(row.positions[agent], row.beacon_positions[0]);
+                for (int beacon = 1; beacon < BEACONS; ++beacon) {
+                    const int distance = circular_distance(row.positions[agent], row.beacon_positions[beacon]);
+                    if (distance < best) { best = distance; selected = beacon; }
+                }
+                action.claims[agent] = selected;
+            }
+        } else {
+            const int status = coherent_actions(
+                row,
+                previous_claims + static_cast<std::size_t>(lane) * MAX_AGENTS,
+                survivors + static_cast<std::size_t>(lane) * MAX_AGENTS,
+                first_or_epoch[lane] != 0,
+                action.claims);
+            if (status != 0) return status;
+            if (package_code == 1 && active_churn[lane] &&
+                (post_event_claim_index[lane] == 0 || post_event_claim_index[lane] == 1)) {
+                std::vector<int> angular(static_cast<std::size_t>(row.agent_count));
+                for (int index = 0; index < row.agent_count; ++index) angular[static_cast<std::size_t>(index)] = index;
+                std::sort(angular.begin(), angular.end(), [&](int left, int right) {
+                    if (row.positions[left] != row.positions[right]) return row.positions[left] < row.positions[right];
+                    return row.transport_keys[left] < row.transport_keys[right];
+                });
+                for (int lower : {0, 2, 4}) {
+                    const int source = lower + 1;
+                    auto found = std::find_if(angular.begin(), angular.end(), [&](int agent) {
+                        return action.claims[agent] == source;
+                    });
+                    if (found == angular.end()) return -45;
+                    action.claims[*found] = lower;
+                }
+            }
+        }
+        outputs[lane] = action;
+    }
+    return 0;
+}
 
 TBCFV_EXPORT std::int32_t rcle_tbcfv_reset_batch(
     const FixtureInput* inputs, std::int32_t width, void** handles, Snapshot* outputs) {

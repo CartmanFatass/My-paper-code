@@ -105,25 +105,25 @@ def make_test_parameter_bundle(identity: TestIdentity) -> FixtureParameterBundle
     code = _case_code(identity)
     actor = FrozenRecord.freeze(
         {
-            "message_encoder_weight": _literal_array(code, (OBSERVATION_DIM, MESSAGE_DIM), 101, dtype=np.dtype(np.float64)),
-            "message_encoder_bias": _literal_array(code, (MESSAGE_DIM,), 102, dtype=np.dtype(np.float64)),
-            "gru_input_weight": _literal_array(code, (3 * HIDDEN_DIM, OBSERVATION_DIM + ROLE_SUMMARY_DIM), 103, dtype=np.dtype(np.float64)),
-            "gru_hidden_weight": _literal_array(code, (3 * HIDDEN_DIM, HIDDEN_DIM), 104, dtype=np.dtype(np.float64)),
-            "action_head_weight": _literal_array(code, (HIDDEN_DIM, ACTION_COUNT), 105, dtype=np.dtype(np.float64)),
-            "action_head_bias": _literal_array(code, (ACTION_COUNT,), 106, dtype=np.dtype(np.float64)),
+            "message_encoder_weight": _literal_array(code, (OBSERVATION_DIM, MESSAGE_DIM), 101, dtype=np.dtype(np.float32)),
+            "message_encoder_bias": _literal_array(code, (MESSAGE_DIM,), 102, dtype=np.dtype(np.float32)),
+            "gru_input_weight": _literal_array(code, (3 * HIDDEN_DIM, OBSERVATION_DIM + ROLE_SUMMARY_DIM), 103, dtype=np.dtype(np.float32)),
+            "gru_hidden_weight": _literal_array(code, (3 * HIDDEN_DIM, HIDDEN_DIM), 104, dtype=np.dtype(np.float32)),
+            "action_head_weight": _literal_array(code, (HIDDEN_DIM, ACTION_COUNT), 105, dtype=np.dtype(np.float32)),
+            "action_head_bias": _literal_array(code, (ACTION_COUNT,), 106, dtype=np.dtype(np.float32)),
         },
         path="fixture_actor_carriage",
     )
     critic = FrozenRecord.freeze(
         {
-            "global_value_weight": _literal_array(code, (HIDDEN_DIM,), 201, dtype=np.dtype(np.float64)),
+            "global_value_weight": _literal_array(code, (HIDDEN_DIM,), 201, dtype=np.dtype(np.float32)),
             "global_value_bias": float((code % 31) - 15) / 32.0,
         },
         path="fixture_critic_carriage",
     )
     residual = FrozenRecord.freeze(
         {
-            "shared_eighteen_coefficients": _literal_array(code, (18,), 301, dtype=np.dtype(np.float64)) / 16.0,
+            "shared_eighteen_coefficients": _literal_array(code, (18,), 301, dtype=np.dtype(np.float32)) / 16.0,
             "phy_projection": [-0.15, 0.15],
             "edge_projection": [-1.50, 1.50],
         },
@@ -161,20 +161,20 @@ def make_test_pretransition_snapshot(
     local = np.full(MAX_AGENTS, -1, dtype=np.int16)
     local[:n] = np.tile(np.arange(multiplicity, dtype=np.int16), ROLE_COUNT)
 
-    observations = np.zeros((MAX_AGENTS, OBSERVATION_DIM), dtype=np.float64)
-    messages = np.zeros((MAX_AGENTS, MESSAGE_DIM), dtype=np.float64)
-    summaries = np.zeros((MAX_AGENTS, ROLE_SUMMARY_DIM), dtype=np.float64)
-    hidden = np.zeros((MAX_AGENTS, HIDDEN_DIM), dtype=np.float64)
-    observations[:n] = _literal_array(code, (n, OBSERVATION_DIM), 11, dtype=np.dtype(np.float64))
-    messages[:n] = _literal_array(code, (n, MESSAGE_DIM), 12, dtype=np.dtype(np.float64))
-    summaries[:n] = _literal_array(code, (n, ROLE_SUMMARY_DIM), 13, dtype=np.dtype(np.float64))
-    hidden[:n] = _literal_array(code, (n, HIDDEN_DIM), 14, dtype=np.dtype(np.float64))
+    observations = np.zeros((MAX_AGENTS, OBSERVATION_DIM), dtype=np.float32)
+    messages = np.zeros((MAX_AGENTS, MESSAGE_DIM), dtype=np.float32)
+    summaries = np.zeros((MAX_AGENTS, ROLE_SUMMARY_DIM), dtype=np.float32)
+    hidden = np.zeros((MAX_AGENTS, HIDDEN_DIM), dtype=np.float32)
+    observations[:n] = _literal_array(code, (n, OBSERVATION_DIM), 11, dtype=np.dtype(np.float32))
+    messages[:n] = _literal_array(code, (n, MESSAGE_DIM), 12, dtype=np.dtype(np.float32))
+    summaries[:n] = _literal_array(code, (n, ROLE_SUMMARY_DIM), 13, dtype=np.dtype(np.float32))
+    hidden[:n] = _literal_array(code, (n, HIDDEN_DIM), 14, dtype=np.dtype(np.float32))
 
-    distribution = np.zeros((MAX_AGENTS, ACTION_COUNT), dtype=np.float64)
+    distribution = np.zeros((MAX_AGENTS, ACTION_COUNT), dtype=np.float32)
     actions = np.full(MAX_AGENTS, -1, dtype=np.int8)
     for agent in range(n):
         legal = legal_actions(int(roles[agent]))
-        raw = np.asarray([1 + _word(code, 15, agent, action) % 97 for action in legal], dtype=np.float64)
+        raw = np.asarray([1 + _word(code, 15, agent, action) % 97 for action in legal], dtype=np.float32)
         row = 0.96 * raw / raw.sum() + 0.04 / len(legal)
         distribution[agent, list(legal)] = row
         needle = _word(code, 16, agent) % 10_000

@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 import hashlib
 import json
 import os
+import time
 from pathlib import Path
 from typing import Callable, Mapping
 
@@ -153,6 +155,28 @@ def _resume(
         lease_document_sha256=lease_document_sha256,
         process_alive_probe=process_alive_probe,
     )
+
+
+def test_parent_commit_lock_serializes_threads_in_one_worker_process(tmp_path: Path) -> None:
+    frontier = _create(tmp_path / "frontier")
+    order: list[str] = []
+
+    def commit(label: str) -> None:
+        with frontier._exclusive_commit(OWNER):
+            order.append(f"{label}:enter")
+            time.sleep(0.02)
+            order.append(f"{label}:exit")
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        futures = [pool.submit(commit, label) for label in ("a", "b")]
+        for future in futures:
+            future.result()
+
+    assert order in (
+        ["a:enter", "a:exit", "b:enter", "b:exit"],
+        ["b:enter", "b:exit", "a:enter", "a:exit"],
+    )
+    assert not (frontier.root / "PARENT_COMMIT.lock").exists()
 
 
 def _write_ref(root: Path, block_index: int, name: str, generation: int = 0) -> ArtifactRef:

@@ -143,6 +143,27 @@ evaluation/
 .pytest_r*_tmp*/
 .codex_tmp_pytest*/
 .tmp_pytest*/
+
+# Local generated workflow/test output. These directories contain rebuildable
+# runtime traces, benchmark payloads, and scratch frontiers; durable research
+# decisions remain under docs/ and source remains under experiments/.
+/.tmp*
+/artifacts/
+/runtime/
+/tmp/
+/.charter/cache/
+
+# Candidate-local generated result/checkpoint trees. Keep candidate source
+# files visible so new implementations can still be reviewed and committed.
+/experiments/**/RISP_*_RESUME_*/
+/experiments/**/RISP_*_RESULTS_*/
+/experiments/**/RISP_*_CHECKPOINTS_*/
+/experiments/**/RCLE_*_RESULTS_*/
+*.npz
+*.sqlite3
+
+# One-off root-level operator scratch payloads.
+/temp_*.json
 tmp_pytest*/
 pytest_tmp*/
 .pycache*/

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -47,6 +48,7 @@ from experiments.candidates.roster_consistent_latent_exploration_tbcfv.empirical
     validate_archived_initial_lease_for_source_repair,
     validate_archived_preactivity_certificate,
     validate_archived_resource_request,
+    validate_archived_source_repair_replacement_lease,
     validate_benchmark_evidence_payload,
     validate_native_identity,
     validate_preactivity_certificate,
@@ -67,11 +69,11 @@ from experiments.candidates.roster_consistent_latent_exploration_tbcfv.inference
 def _synthetic_native_observation() -> dict[str, object]:
     return {
         "path": "SYNTHETIC-TEST-NATIVE-ARTIFACT.dll",
-        "sha256": "023eecbc0a69710ee6a4fe06aa8e1b0b5165870bbcfc5a7ae2198e86372baf15",
+        "sha256": "c4db07f1d5ffaf7bd61354edd74a2bf861e9c1a20a2eec96faa85dd1d9f56cfd",
         "size": 1234,
         "mtime_ns": 0,
-        "source_sha256": "ddb14c33d822924b21b872713745f242fee92f16b4329efed439a1e2b816a910",
-        "build_key": "8e80ba3cf3ba026c486d75d330aa9a99f820fe60803334dce7841032a48a5f91",
+        "source_sha256": "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819",
+        "build_key": "d2501eb514977026c645a3c23a53d86626a5817a51ee859dbdfa9f07f3523e81",
         "resolved_build_root": "SYNTHETIC-TEST-BUILD-ROOT",
         "runtime_abi": {"fixture_only": True, "label": "SYNTHETIC-TEST-RUNTIME"},
         "toolchain": {"fixture_only": True, "label": "SYNTHETIC-TEST-TOOLCHAIN"},
@@ -92,6 +94,24 @@ def _certificate(tmp_path: Path) -> dict[str, object]:
     return build_preactivity_certificate(
         source_paths=production_source_paths(),
         native_identity=native_identity_from_observation(_synthetic_native_observation()),
+    )
+
+
+def test_live_inventory_adds_process_worker_and_archived_legacy_inventory_remains_valid() -> None:
+    paths = production_source_paths()
+    assert contract.PROCESS_WORKERS_LOGICAL_PATH in paths
+    assert set(paths) == set(contract.PRODUCTION_SOURCE_LOGICAL_PATHS)
+    assert len(paths) == len(contract.LEGACY_PRODUCTION_SOURCE_LOGICAL_PATHS) + 3
+    live = contract.canonical_source_identity(paths)
+    assert set(live["files"]) == set(contract.PRODUCTION_SOURCE_LOGICAL_PATHS)
+    archived_path = Path(
+        "experiments/candidates/roster_consistent_latent_exploration_tbcfv/"
+        "RCLE_TBCFV_R04_PREACTIVITY_CERTIFICATE_20260821.json"
+    )
+    archived = json.loads(archived_path.read_text(encoding="ascii"))
+    accepted = validate_archived_preactivity_certificate(archived)
+    assert set(accepted["source"]["files"]) == set(
+        contract.LEGACY_PRODUCTION_SOURCE_LOGICAL_PATHS
     )
 
 
@@ -217,6 +237,13 @@ def _repaired_request(
     repaired["benchmark_evidence"]["source_set_sha256"] = repaired_certificate[
         "source"
     ]["source_set_sha256"]
+    old_process = repaired["resources"]["process_resource"]
+    repaired["resources"]["process_resource"] = contract.make_process_resource_object(
+        canonical_result_root=Path(old_process["canonical_result_root"]),
+        private_scratch_roots=[Path(item) for item in old_process["paths"].values()],
+        source_set_sha256=repaired_certificate["source"]["source_set_sha256"],
+        native_binding_sha256=repaired_certificate["native"]["native_identity_sha256"],
+    )
     return repaired
 
 
@@ -679,42 +706,27 @@ def test_result_blind_resource_request_is_proposal_only(tmp_path: Path) -> None:
         "worker_and_resource_stage_ceiling_preserved": True,
         "replacement_coordinate_materialization": False,
     }
-    assert request["resources"] == {
-        "cpu_only": True,
-        "gpu_count": 0,
-        "one_thread_per_worker": True,
-        "max_independent_workers": 4,
-        "projected_cpu_core_hours": 24.795777452256946,
-        "cpu_core_hours_upper": 30.0,
-        "projected_wall_hours_one_worker": 8.675334549445355,
-        "projected_wall_hours_four_workers_lower": 2.173962706944659,
-        "measured_rss_bytes_per_worker": 486_055_936,
-        "measured_io_read_bytes": 2_558_500,
-        "measured_io_write_bytes": 656_876,
-        "measured_durable_fixture_bytes": 634_160,
-        "measured_scratch_fixture_bytes_peak": 156_160,
-        "rss_gib_per_worker_upper": 4.0,
-        "scratch_gib_upper": 12.0,
-        "durable_artifacts_gib_upper": 1.0,
-        "validity_hours": 24,
-    }
-    assert request["benchmark_evidence"] == {
-        "logical_path": BENCHMARK_EVIDENCE_LOGICAL_PATH,
-        "sha256": "565514e31c68155c728b9283af87e26bd33e4034034c865ab2e59aa5931a5b50",
-        "schema": "RCLE_TBCFV_R04_FIXTURE_EFFICIENCY_REVIEW_V1",
-        "native_source_sha256": "ddb14c33d822924b21b872713745f242fee92f16b4329efed439a1e2b816a910",
-        "projected_cpu_core_hours": 24.795777452256946,
-        "projected_wall_hours_one_worker": 8.675334549445355,
-        "projected_wall_hours_four_workers_lower": 2.173962706944659,
-        "measured_basis": {
-            "rss_per_worker_bytes": 486_055_936,
-            "measured_read_bytes": 2_558_500,
-            "measured_write_bytes": 656_876,
-            "durable_fixture_bytes_for_20_blocks": 634_160,
-            "scratch_fixture_bytes_peak": 156_160,
-        },
-        "source_set_sha256": certificate["source"]["source_set_sha256"],
-    }
+    resources = request["resources"]
+    assert resources["cpu_only"] is True
+    assert resources["gpu_count"] == 0
+    assert resources["one_thread_per_worker"] is True
+    assert resources["max_independent_workers"] == 4
+    assert resources["projected_cpu_core_hours"] <= 32.0
+    assert resources["projected_wall_hours_four_workers"] <= 8.861
+    assert resources["measured_process_group_rss_bytes"] <= 2 * 1024**3
+    assert resources["projected_private_scratch_bytes"] <= 12 * 1024**3
+    assert resources["projected_canonical_durable_bytes"] <= 1024**3
+    assert resources["projected_checkpoint_read_bytes"] <= 4 * 1024**3
+    assert resources["projected_checkpoint_write_bytes"] <= 1024**3
+    process_resource = resources["process_resource"]
+    assert process_resource["source_set_sha256"] == certificate["source"]["source_set_sha256"]
+    assert Path(process_resource["canonical_result_root"]).resolve() == result_root.resolve()
+    assert len(process_resource["paths"]) == 4
+    assert all(request["paths"][key] == value for key, value in process_resource["paths"].items())
+    evidence = request["benchmark_evidence"]
+    assert evidence["logical_path"] == contract.PRODUCTION_PROTOCOL_BENCHMARK_LOGICAL_PATH
+    assert evidence["native_source_sha256"] == contract.ACCEPTED_NATIVE_SOURCE_SHA256
+    assert evidence["source_set_sha256"] == certificate["source"]["source_set_sha256"]
     assert not result_root.exists()
 
 
@@ -827,7 +839,7 @@ def test_synthetic_lineage_fixture_proves_initial_and_exact_replacement_contract
     assert second.origin_lease_id == first.origin_lease_id
     assert second.predecessor_lease_id == first.lease_id
     assert second.replacement_index == 1
-    assert second.lease_lineage == SYNTHETIC_TEST_IDENTITIES
+    assert second.lease_lineage == SYNTHETIC_TEST_IDENTITIES[:2]
     assert second.stage_binding_sha256 == first.stage_binding_sha256
     assert second.paths == first.paths and second.resources == first.resources
     assert second.immutable_frontier_lease_binding() == first.immutable_frontier_lease_binding()
@@ -1001,6 +1013,759 @@ def test_source_repair_transition_and_index1_replacement_preserve_original_autho
             certificate=fixture["repaired_certificate"],
             now=datetime(2026, 8, 21, 13, tzinfo=timezone.utc),
         )
+
+
+def test_archived_index1_lineage_accepts_exact_current_index2_successor_with_full_run_identity(
+    tmp_path: Path,
+) -> None:
+    repository = Path(__file__).resolve().parents[4]
+    result_root = repository / ".tmp" / f"SYNTHETIC_TEST_INDEX2_{tmp_path.name}"
+    current_certificate = _certificate(tmp_path)
+    predecessor_certificate = json.loads(
+        Path(
+            "experiments/candidates/roster_consistent_latent_exploration_tbcfv/"
+            "RCLE_TBCFV_R04_PREACTIVITY_CERTIFICATE_SOURCE_REPAIR_20260821_01.json"
+        ).read_text(encoding="ascii")
+    )
+    origin_certificate = json.loads(
+        Path(
+            "experiments/candidates/roster_consistent_latent_exploration_tbcfv/"
+            "RCLE_TBCFV_R04_PREACTIVITY_CERTIFICATE_20260821.json"
+        ).read_text(encoding="ascii")
+    )
+    predecessor_binding = _accepted_binding(predecessor_certificate)
+    predecessor_request = resource_request_proposal(
+        current_certificate, repository_root=repository, result_root=result_root
+    )
+    legacy_row = predecessor_certificate["source"]["files"][
+        BENCHMARK_EVIDENCE_LOGICAL_PATH
+    ]
+    legacy_payload = Path(BENCHMARK_EVIDENCE_LOGICAL_PATH).read_bytes()
+    legacy_benchmark = validate_benchmark_evidence_payload(
+        legacy_payload, expected_sha256=legacy_row["sha256"]
+    )
+    legacy_benchmark["source_set_sha256"] = predecessor_certificate["source"][
+        "source_set_sha256"
+    ]
+    predecessor_request.update(
+        preactivity_certificate_sha256=predecessor_certificate["certificate_sha256"],
+        coordinate_proposal_sha256=predecessor_certificate["coordinate_proposal"]["proposal_sha256"],
+        source_set_sha256=predecessor_certificate["source"]["source_set_sha256"],
+        config_sha256=predecessor_certificate["config"]["config_sha256"],
+        native_identity_sha256=predecessor_certificate["native"]["native_identity_sha256"],
+        analyzer_sha256=predecessor_certificate["analyzer"]["analyzer_sha256"],
+        benchmark_evidence=legacy_benchmark,
+    )
+    predecessor_request["paths"] = {
+        key: predecessor_request["paths"][key]
+        for key in (
+            "result_root", "frontier_root", "run_identity_path",
+            "complete_manifest_path", "technical_acceptance_path",
+        )
+    }
+    measured = legacy_benchmark["measured_basis"]
+    predecessor_request["resources"] = {
+        "cpu_only": True,
+        "gpu_count": 0,
+        "one_thread_per_worker": True,
+        "max_independent_workers": 4,
+        "projected_cpu_core_hours": legacy_benchmark["projected_cpu_core_hours"],
+        "cpu_core_hours_upper": 30.0,
+        "projected_wall_hours_one_worker": legacy_benchmark["projected_wall_hours_one_worker"],
+        "projected_wall_hours_four_workers_lower": legacy_benchmark[
+            "projected_wall_hours_four_workers_lower"
+        ],
+        "measured_rss_bytes_per_worker": measured["rss_per_worker_bytes"],
+        "measured_io_read_bytes": measured["measured_read_bytes"],
+        "measured_io_write_bytes": measured["measured_write_bytes"],
+        "measured_durable_fixture_bytes": measured["durable_fixture_bytes_for_20_blocks"],
+        "measured_scratch_fixture_bytes_peak": measured["scratch_fixture_bytes_peak"],
+        "rss_gib_per_worker_upper": 4.0,
+        "scratch_gib_upper": 12.0,
+        "durable_artifacts_gib_upper": 1.0,
+        "validity_hours": 24,
+    }
+    predecessor_certificate = validate_archived_preactivity_certificate(
+        predecessor_certificate
+    )
+    predecessor_binding = validate_archived_accepted_binding(
+        predecessor_binding, predecessor_certificate
+    )
+    predecessor_request = validate_archived_resource_request(
+        predecessor_request, predecessor_certificate
+    )
+    origin_certificate = validate_archived_preactivity_certificate(origin_certificate)
+    origin_binding = validate_archived_accepted_binding(
+        _accepted_binding(origin_certificate), origin_certificate
+    )
+    origin_request = json.loads(json.dumps(predecessor_request))
+    origin_request.update(
+        preactivity_certificate_sha256=origin_certificate["certificate_sha256"],
+        coordinate_proposal_sha256=origin_certificate["coordinate_proposal"]["proposal_sha256"],
+        source_set_sha256=origin_certificate["source"]["source_set_sha256"],
+        config_sha256=origin_certificate["config"]["config_sha256"],
+        native_identity_sha256=origin_certificate["native"]["native_identity_sha256"],
+        analyzer_sha256=origin_certificate["analyzer"]["analyzer_sha256"],
+    )
+    origin_request["benchmark_evidence"]["source_set_sha256"] = origin_certificate[
+        "source"
+    ]["source_set_sha256"]
+    origin_request = validate_archived_resource_request(
+        origin_request, origin_certificate
+    )
+    origin_stage = contract._stage_binding_from_validated(
+        origin_certificate, origin_binding, origin_request
+    )
+    predecessor_stage = contract._stage_binding_from_validated(
+        predecessor_certificate, predecessor_binding, predecessor_request
+    )
+    run_path = Path(predecessor_request["paths"]["run_identity_path"])
+    run_path.parent.mkdir(parents=True, exist_ok=True)
+    run_body = {
+        "schema": contract.MATERIALIZED_BINDING_SCHEMA,
+        "identity": "SYNTHETIC-RCLE-TBCFV-R04-FULL-RUN-IDENTITY",
+        "science_revision": SCIENCE_REVISION,
+        "empirical_object": "SYNTHETIC-TEST-ONLY",
+        "fixture_only": True,
+        "non_scientific": True,
+        "authority": SYNTHETIC_TEST_IDENTITIES[0],
+        "stage_binding_sha256": origin_stage["stage_binding_sha256"],
+        "numeric_seed_present": False,
+        "master_material_exposed": False,
+        "master_digest": "5" * 64,
+        "run_block_count": 20,
+        "run_block_roots": [
+            {"block_index": index, "root_digest": f"{index + 1:064x}"}
+            for index in range(20)
+        ],
+    }
+    run_document = {**run_body, "binding_sha256": document_sha256(run_body)}
+    run_path.write_bytes(canonical_json_bytes(run_document))
+    failed_path = result_root / "FAILED_TERMINAL.json"
+    failed_document = {"terminal": True, "result_blind": True}
+    failed_path.write_bytes(canonical_json_bytes(failed_document))
+    run_record = {
+        "path": str(run_path.resolve()),
+        "file_sha256": hashlib.sha256(canonical_json_bytes(run_document)).hexdigest(),
+        "binding_sha256": run_document["binding_sha256"],
+        "master_digest": run_document["master_digest"],
+        "run_block_roots": run_document["run_block_roots"],
+        "identity": run_document["identity"],
+        "stage_binding_sha256": origin_stage["stage_binding_sha256"],
+        "origin_lease_id": SYNTHETIC_TEST_IDENTITIES[0],
+    }
+    failed_record = {
+        **failed_document,
+        "file_sha256": hashlib.sha256(canonical_json_bytes(failed_document)).hexdigest(),
+        "path": str(failed_path.resolve()),
+    }
+    predecessor_transition_body = {
+        "schema": contract.SOURCE_REPAIR_TRANSITION_SCHEMA,
+        "fixture_only": True,
+        "non_scientific": True,
+        "reason": SOURCE_REPAIR_REASON,
+        "direction_id": "roster_consistent_latent_exploration",
+        "science_revision": SCIENCE_REVISION,
+        "empirical_object": EMPIRICAL_OBJECT,
+        "origin_lease_id": SYNTHETIC_TEST_IDENTITIES[0],
+        "original": {
+            "certificate_sha256": origin_certificate["certificate_sha256"],
+            "binding_sha256": origin_binding["binding_sha256"],
+            "request_sha256": document_sha256(origin_request),
+            "source_set_sha256": origin_certificate["source"]["source_set_sha256"],
+            "stage_binding_sha256": origin_stage["stage_binding_sha256"],
+            "lease_id": SYNTHETIC_TEST_IDENTITIES[0],
+        },
+        "repaired": {
+            "certificate_sha256": predecessor_certificate["certificate_sha256"],
+            "binding_sha256": predecessor_binding["binding_sha256"],
+            "request_sha256": document_sha256(predecessor_request),
+            "source_set_sha256": predecessor_certificate["source"]["source_set_sha256"],
+            "stage_binding_sha256": predecessor_stage["stage_binding_sha256"],
+        },
+        "run_identity": run_record,
+        "failed_terminal": failed_record,
+        "source_deltas": [
+            contract._expected_source_repair_delta(
+                label,
+                origin_certificate["source"]["files"].get(label),
+                predecessor_certificate["source"]["files"].get(label),
+            )
+            for label in contract.PRODUCTION_SOURCE_LOGICAL_PATHS
+            if origin_certificate["source"]["files"].get(label)
+            != predecessor_certificate["source"]["files"].get(label)
+        ],
+        "preserved": {
+            "coordinate_binding_sha256": run_record["binding_sha256"],
+            "master_digest": run_record["master_digest"],
+            "run_block_roots": run_record["run_block_roots"],
+            "result_root": predecessor_request["paths"]["result_root"],
+            "resource_ceiling": predecessor_request["resources"],
+            "config_sha256": predecessor_certificate["config"]["config_sha256"],
+            "native_identity_sha256": predecessor_certificate["native"]["native_identity_sha256"],
+            "analyzer_sha256": predecessor_certificate["analyzer"]["analyzer_sha256"],
+            "counts": predecessor_certificate["counts"],
+        },
+        "science_change": False,
+        "coordinate_materialization_authorized": False,
+        "partial_interpretation_permitted": False,
+    }
+    predecessor_transition = {
+        **predecessor_transition_body,
+        "repair_transition_sha256": document_sha256(predecessor_transition_body),
+    }
+    predecessor_permit = RootLeasePermit(
+        lease_id=SYNTHETIC_TEST_IDENTITIES[1],
+        origin_lease_id=SYNTHETIC_TEST_IDENTITIES[0],
+        predecessor_lease_id=SYNTHETIC_TEST_IDENTITIES[0],
+        replacement_index=1,
+        lease_lineage=SYNTHETIC_TEST_IDENTITIES[:2],
+        stage_binding_sha256=predecessor_stage["stage_binding_sha256"],
+        accepted_binding_sha256=predecessor_binding["binding_sha256"],
+        preactivity_certificate_sha256=predecessor_certificate["certificate_sha256"],
+        coordinate_proposal_sha256=predecessor_certificate["coordinate_proposal"]["proposal_sha256"],
+        issued_at="2026-08-21T12:00:00Z",
+        expires_at="2026-08-21T14:00:00Z",
+        paths=predecessor_request["paths"],
+        resources=predecessor_request["resources"],
+        fixture_only=True,
+        repair_transition_sha256=predecessor_transition["repair_transition_sha256"],
+        archived_only=True,
+        _seal=contract._PERMIT_SEAL,
+    )
+    current_binding = _accepted_binding(current_certificate)
+    current_request = resource_request_proposal(
+        current_certificate, repository_root=repository, result_root=result_root
+    )
+    old_files = predecessor_certificate["source"]["files"]
+    new_files = current_certificate["source"]["files"]
+    source_deltas = [
+        contract._expected_source_repair_delta(
+            label, old_files.get(label), new_files.get(label)
+        )
+        for label in contract.PRODUCTION_SOURCE_LOGICAL_PATHS
+        if old_files.get(label) != new_files.get(label)
+    ]
+    transition = build_source_repair_transition(
+        original_certificate=predecessor_certificate,
+        original_binding=predecessor_binding,
+        original_request=predecessor_request,
+        original_permit=predecessor_permit,
+        predecessor_transition=predecessor_transition,
+        repaired_certificate=current_certificate,
+        repaired_binding=current_binding,
+        repaired_request=current_request,
+        run_identity_path=run_path,
+        failed_terminal_path=failed_path,
+        source_deltas=source_deltas,
+        synthetic_fixture=True,
+    )
+    successor = {
+        "schema": contract.SOURCE_REPAIR_LEASE_SCHEMA,
+        "issuer": "SYNTHETIC-TEST-ONLY",
+        "fixture_only": True,
+        "lease_id": SYNTHETIC_TEST_IDENTITIES[2],
+        "origin_lease_id": predecessor_permit.origin_lease_id,
+        "predecessor_lease_id": predecessor_permit.lease_id,
+        "replacement_index": 2,
+        "stage_binding_sha256": transition["repaired"]["stage_binding_sha256"],
+        "repair_transition_sha256": transition["repair_transition_sha256"],
+        "activity_authorized": False,
+        "coordinate_materialization_authorized": False,
+        "direction_id": "roster_consistent_latent_exploration",
+        "science_revision": SCIENCE_REVISION,
+        "empirical_object": EMPIRICAL_OBJECT,
+        "issued_at": "2026-08-21T14:00:00Z",
+        "expires_at": "2026-08-21T16:00:00Z",
+        "preactivity_certificate_sha256": current_certificate["certificate_sha256"],
+        "accepted_binding_sha256": current_binding["binding_sha256"],
+        "coordinate_proposal_sha256": current_certificate["coordinate_proposal"]["proposal_sha256"],
+        "source_set_sha256": current_certificate["source"]["source_set_sha256"],
+        "config_sha256": current_certificate["config"]["config_sha256"],
+        "native_identity_sha256": current_certificate["native"]["native_identity_sha256"],
+        "analyzer_sha256": current_certificate["analyzer"]["analyzer_sha256"],
+        "component": "rcle.tbcfv.r04.full_host",
+        "abi_version": 2,
+        "batch_width": 8,
+        "paths": current_request["paths"],
+        "resources": current_request["resources"],
+        "counts": dict(PANEL_COUNTS),
+        "complete_panel_only": True,
+        "result_blind_until_complete": True,
+        "python_fallback": False,
+    }
+    permit = validate_source_repair_replacement_lease(
+        successor,
+        repair_transition=transition,
+        original_permit=predecessor_permit,
+        repaired_certificate=current_certificate,
+        repaired_binding=current_binding,
+        repaired_request=current_request,
+        now=datetime(2026, 8, 21, 15, tzinfo=timezone.utc),
+        synthetic_fixture=True,
+    )
+    assert permit.replacement_index == 2
+    assert permit.lease_lineage == SYNTHETIC_TEST_IDENTITIES[:3]
+    assert permit.paths == current_request["paths"]
+    assert transition["run_identity"] == predecessor_transition["run_identity"]
+    assert transition["failed_terminal"] == predecessor_transition["failed_terminal"]
+
+    for label, mutate in (
+        (
+            "original locator",
+            lambda value: value["original"].update(lease_id="SYNTHETIC-TAMPER"),
+        ),
+        (
+            "preserved coordinate",
+            lambda value: value["preserved"].update(coordinate_binding_sha256="8" * 64),
+        ),
+        (
+            "preserved master",
+            lambda value: value["preserved"].update(master_digest="9" * 64),
+        ),
+        (
+            "preserved counts",
+            lambda value: value["preserved"].update(counts={**PANEL_COUNTS, "run_blocks": 19}),
+        ),
+        (
+            "preserved resource ceiling",
+            lambda value: value["preserved"].update(
+                resource_ceiling={**predecessor_request["resources"], "validity_hours": 23}
+            ),
+        ),
+    ):
+        tampered = json.loads(json.dumps(predecessor_transition))
+        mutate(tampered)
+        tampered_body = {
+            key: item for key, item in tampered.items()
+            if key != "repair_transition_sha256"
+        }
+        tampered["repair_transition_sha256"] = document_sha256(tampered_body)
+        tampered_permit = replace(
+            predecessor_permit,
+            repair_transition_sha256=tampered["repair_transition_sha256"],
+        )
+        with pytest.raises(EmpiricalContractError, match="index-1 predecessor"):
+            build_source_repair_transition(
+                original_certificate=predecessor_certificate,
+                original_binding=predecessor_binding,
+                original_request=predecessor_request,
+                original_permit=tampered_permit,
+                predecessor_transition=tampered,
+                repaired_certificate=current_certificate,
+                repaired_binding=current_binding,
+                repaired_request=current_request,
+                run_identity_path=run_path,
+                failed_terminal_path=failed_path,
+                source_deltas=source_deltas,
+                synthetic_fixture=True,
+            )
+
+
+def _mutate_source_certificate(
+    certificate: dict[str, object], *, logical_path: str, sha256: str
+) -> tuple[dict[str, object], dict[str, object]]:
+    changed = json.loads(json.dumps(certificate))
+    old_row = dict(changed["source"]["files"][logical_path])
+    new_row = {"bytes": old_row["bytes"] + 1, "sha256": sha256}
+    changed["source"]["files"][logical_path] = new_row
+    source_body = {
+        "files": changed["source"]["files"],
+        "ordering": changed["source"]["ordering"],
+    }
+    changed["source"]["source_set_sha256"] = document_sha256(source_body)
+    certificate_body = {
+        key: value for key, value in changed.items() if key != "certificate_sha256"
+    }
+    changed["certificate_sha256"] = document_sha256(certificate_body)
+    return changed, contract._expected_source_repair_delta(
+        logical_path, old_row, new_row
+    )
+
+
+def _replacement_lease_for_test(
+    template: dict[str, object],
+    *,
+    permit: RootLeasePermit,
+    certificate: dict[str, object],
+    binding: dict[str, object],
+    request: dict[str, object],
+    transition: dict[str, object],
+    lease_id: str,
+    issued_at: str,
+    expires_at: str,
+) -> dict[str, object]:
+    lease = json.loads(json.dumps(template))
+    lease.update(
+        lease_id=lease_id,
+        origin_lease_id=permit.origin_lease_id,
+        predecessor_lease_id=permit.lease_id,
+        replacement_index=permit.replacement_index + 1,
+        stage_binding_sha256=transition["repaired"]["stage_binding_sha256"],
+        repair_transition_sha256=transition["repair_transition_sha256"],
+        issued_at=issued_at,
+        expires_at=expires_at,
+        preactivity_certificate_sha256=certificate["certificate_sha256"],
+        accepted_binding_sha256=binding["binding_sha256"],
+        coordinate_proposal_sha256=certificate["coordinate_proposal"]["proposal_sha256"],
+        source_set_sha256=certificate["source"]["source_set_sha256"],
+        config_sha256=certificate["config"]["config_sha256"],
+        native_identity_sha256=certificate["native"]["native_identity_sha256"],
+        analyzer_sha256=certificate["analyzer"]["analyzer_sha256"],
+        paths=request["paths"],
+        resources=request["resources"],
+    )
+    return lease
+
+
+def test_exact_index2_predecessor_accepts_only_contiguous_index3_successor(
+    tmp_path: Path,
+) -> None:
+    fixture = _repair_fixture(tmp_path)
+    permit1 = validate_archived_source_repair_replacement_lease(
+        fixture["replacement_lease"],
+        repair_transition=fixture["transition"],
+        original_permit=fixture["original_permit"],
+        repaired_certificate=fixture["repaired_certificate"],
+        repaired_binding=fixture["repaired_binding"],
+        repaired_request=fixture["repaired_request"],
+        synthetic_fixture=True,
+    )
+    assert permit1.archived_only is True
+    with pytest.raises(LeaseError, match="runtime authority"):
+        permit1.runtime_authority()
+
+    certificate2, delta2 = _mutate_source_certificate(
+        fixture["repaired_certificate"],
+        logical_path=(
+            "experiments/candidates/roster_consistent_latent_exploration_tbcfv/"
+            "empirical_runner.py"
+        ),
+        sha256="b" * 64,
+    )
+    binding2 = _accepted_binding(certificate2)
+    request2 = _repaired_request(fixture["repaired_request"], certificate2)
+    transition2 = build_source_repair_transition(
+        original_certificate=fixture["repaired_certificate"],
+        original_binding=fixture["repaired_binding"],
+        original_request=fixture["repaired_request"],
+        original_permit=permit1,
+        predecessor_transition=fixture["transition"],
+        predecessor_original_certificate=fixture["original_certificate"],
+        predecessor_original_binding=fixture["original_binding"],
+        predecessor_original_request=fixture["original_request"],
+        repaired_certificate=certificate2,
+        repaired_binding=binding2,
+        repaired_request=request2,
+        run_identity_path=fixture["run_identity_path"],
+        failed_terminal_path=fixture["failed_terminal_path"],
+        source_deltas=[delta2],
+        synthetic_fixture=True,
+    )
+    lease2 = _replacement_lease_for_test(
+        fixture["replacement_lease"],
+        permit=permit1,
+        certificate=certificate2,
+        binding=binding2,
+        request=request2,
+        transition=transition2,
+        lease_id=SYNTHETIC_TEST_IDENTITIES[2],
+        issued_at="2026-08-21T14:00:00Z",
+        expires_at="2026-08-21T16:00:00Z",
+    )
+    permit2 = validate_archived_source_repair_replacement_lease(
+        lease2,
+        repair_transition=transition2,
+        original_permit=permit1,
+        repaired_certificate=certificate2,
+        repaired_binding=binding2,
+        repaired_request=request2,
+        synthetic_fixture=True,
+    )
+    assert permit2.archived_only is True
+    assert permit2.lease_lineage == SYNTHETIC_TEST_IDENTITIES[:3]
+
+    certificate3, delta3 = _mutate_source_certificate(
+        certificate2,
+        logical_path=(
+            "experiments/candidates/roster_consistent_latent_exploration_tbcfv/"
+            "empirical_contract.py"
+        ),
+        sha256="c" * 64,
+    )
+    binding3 = _accepted_binding(certificate3)
+    request3 = _repaired_request(request2, certificate3)
+    transition3 = build_source_repair_transition(
+        original_certificate=certificate2,
+        original_binding=binding2,
+        original_request=request2,
+        original_permit=permit2,
+        predecessor_transition=transition2,
+        predecessor_original_certificate=fixture["repaired_certificate"],
+        predecessor_original_binding=fixture["repaired_binding"],
+        predecessor_original_request=fixture["repaired_request"],
+        repaired_certificate=certificate3,
+        repaired_binding=binding3,
+        repaired_request=request3,
+        run_identity_path=fixture["run_identity_path"],
+        failed_terminal_path=fixture["failed_terminal_path"],
+        source_deltas=[delta3],
+        synthetic_fixture=True,
+    )
+    lease3 = _replacement_lease_for_test(
+        fixture["replacement_lease"],
+        permit=permit2,
+        certificate=certificate3,
+        binding=binding3,
+        request=request3,
+        transition=transition3,
+        lease_id=SYNTHETIC_TEST_IDENTITIES[3],
+        issued_at="2026-08-21T16:00:00Z",
+        expires_at="2026-08-21T18:00:00Z",
+    )
+    permit3 = validate_source_repair_replacement_lease(
+        lease3,
+        repair_transition=transition3,
+        original_permit=permit2,
+        repaired_certificate=certificate3,
+        repaired_binding=binding3,
+        repaired_request=request3,
+        now=datetime(2026, 8, 21, 17, tzinfo=timezone.utc),
+        synthetic_fixture=True,
+    )
+    assert permit3.replacement_index == contract.MAX_SOURCE_REPAIR_REPLACEMENT_INDEX == 3
+    assert permit3.lease_lineage == SYNTHETIC_TEST_IDENTITIES[:4]
+    assert lease3["counts"] == PANEL_COUNTS and lease3["complete_panel_only"] is True
+    assert lease3["result_blind_until_complete"] is True
+    assert lease3["coordinate_materialization_authorized"] is False
+    process_resource = lease3["resources"]["process_resource"]
+    assert process_resource["limits"]["max_workers"] == 4
+    assert len(process_resource["paths"]) == 4
+    assert process_resource["result_blind"] is True
+    with pytest.raises(LeaseError, match="cannot authorize|cannot rematerialize"):
+        materialize_coordinates(
+            "SYNTHETIC-NONREGISTERED-PRODUCTION-SHAPE",
+            master_material=b"x" * 32,
+            permit=permit3,
+            accepted_binding=binding3,
+            certificate=certificate3,
+            now=datetime(2026, 8, 21, 17, tzinfo=timezone.utc),
+        )
+
+    tampered_transition2 = json.loads(json.dumps(transition2))
+    tampered_transition2["source_deltas"][0]["new_sha256"] = "d" * 64
+    tampered_body = {
+        key: value
+        for key, value in tampered_transition2.items()
+        if key != "repair_transition_sha256"
+    }
+    tampered_transition2["repair_transition_sha256"] = document_sha256(tampered_body)
+    tampered_permit2 = replace(
+        permit2,
+        repair_transition_sha256=tampered_transition2["repair_transition_sha256"],
+    )
+    with pytest.raises(EmpiricalContractError, match="source delta"):
+        build_source_repair_transition(
+            original_certificate=certificate2,
+            original_binding=binding2,
+            original_request=request2,
+            original_permit=tampered_permit2,
+            predecessor_transition=tampered_transition2,
+            predecessor_original_certificate=fixture["repaired_certificate"],
+            predecessor_original_binding=fixture["repaired_binding"],
+            predecessor_original_request=fixture["repaired_request"],
+            repaired_certificate=certificate3,
+            repaired_binding=binding3,
+            repaired_request=request3,
+            run_identity_path=fixture["run_identity_path"],
+            failed_terminal_path=fixture["failed_terminal_path"],
+            source_deltas=[delta3],
+            synthetic_fixture=True,
+        )
+
+    for field, value, match in (
+        ("predecessor_lease_id", SYNTHETIC_TEST_IDENTITIES[1], "predecessor_lease_id"),
+        ("replacement_index", 2, "replacement_index"),
+        ("issued_at", "2026-08-21T16:00:01Z", "gap or overlap"),
+        ("issued_at", "2026-08-21T15:59:59Z", "gap or overlap"),
+        ("repair_transition_sha256", "f" * 64, "repair_transition_sha256"),
+        ("source_set_sha256", "e" * 64, "source_set_sha256"),
+        ("activity_authorized", True, "activity_authorized"),
+        ("issuer", "SYNTHETIC-WRONG-AUTHORITY", "issuer"),
+        ("coordinate_materialization_authorized", True, "coordinate_materialization_authorized"),
+    ):
+        tampered = json.loads(json.dumps(lease3))
+        tampered[field] = value
+        with pytest.raises(LeaseError, match=match):
+            validate_source_repair_replacement_lease(
+                tampered,
+                repair_transition=transition3,
+                original_permit=permit2,
+                repaired_certificate=certificate3,
+                repaired_binding=binding3,
+                repaired_request=request3,
+                now=datetime(2026, 8, 21, 17, tzinfo=timezone.utc),
+                synthetic_fixture=True,
+            )
+
+    with pytest.raises(LeaseError, match="predecessor lineage is not exact"):
+        validate_source_repair_replacement_lease(
+            lease3,
+            repair_transition=transition3,
+            original_permit=permit3,
+            repaired_certificate=certificate3,
+            repaired_binding=binding3,
+            repaired_request=request3,
+            now=datetime(2026, 8, 21, 17, tzinfo=timezone.utc),
+            synthetic_fixture=True,
+        )
+
+def test_current_shared_registry_was_the_only_unassigned_intake_source_delta() -> None:
+    accepted = json.loads(
+        Path(
+            "temp/handoffs/code_manager_to_root/"
+            "RCLE_TBCFV_R04_PREACTIVITY_CERTIFICATE_ROOT_VALIDATION_REPAIR_20260822.json"
+        ).read_text(encoding="ascii")
+    )
+    assert accepted["source"]["source_set_sha256"] == (
+        "52cba6878f26f96dec8a8b721473949e3b6707e1d365aec14e3c1a0eb4ab7190"
+    )
+    registry = "envs/native/production_backend.py"
+    contract_path = (
+        "experiments/candidates/roster_consistent_latent_exploration_tbcfv/"
+        "empirical_contract.py"
+    )
+    assert accepted["source"]["files"][registry] == {
+        "bytes": 18_087,
+        "sha256": "c79a26e4a71678dcde16993a33a01cff735d90116d8ea70b6577232be39939ce",
+    }
+    intake_files = json.loads(json.dumps(accepted["source"]["files"]))
+    intake_files[registry] = {
+        "bytes": 19_237,
+        "sha256": "b867019cf7ef08d1a0dcbcfaf2cb5c9f8f60d8a7363c3374d057a9544c4caf8e",
+    }
+    assert document_sha256(
+        {"files": intake_files, "ordering": "logical-path byte order"}
+    ) == "a967f36264a9f6417177f2592398923eb468217cf17bd845d7574d9b858cd527"
+
+    live = contract.canonical_source_identity(production_source_paths())
+    changed = {
+        label
+        for label in contract.PRODUCTION_SOURCE_LOGICAL_PATHS
+        if accepted["source"]["files"].get(label) != live["files"].get(label)
+    }
+    assert changed == {registry, contract_path}
+    assert live["files"][registry] == intake_files[registry]
+
+
+def test_generic_root_lease_cannot_bypass_repair_lineage_index3_cap(
+    tmp_path: Path,
+) -> None:
+    certificate = _certificate(tmp_path)
+    binding = _accepted_binding(certificate)
+    repository = Path(__file__).resolve().parents[4]
+    request = resource_request_proposal(
+        certificate,
+        repository_root=repository,
+        result_root=repository / ".tmp" / f"SYNTHETIC_TEST_INDEX4_{tmp_path.name}",
+    )
+    stage = stage_binding_identity(
+        certificate=certificate,
+        accepted_binding=binding,
+        resource_request=request,
+    )
+    lineage = (
+        "RCLE-TBCFV-R04-ROOT-EMPIRICAL-TEST-01",
+        "RCLE-TBCFV-R04-ROOT-EMPIRICAL-TEST-02",
+        "RCLE-TBCFV-R04-ROOT-EMPIRICAL-TEST-03",
+        "RCLE-TBCFV-R04-ROOT-EMPIRICAL-TEST-04",
+    )
+    permit3 = RootLeasePermit(
+        lease_id=lineage[-1],
+        origin_lease_id=lineage[0],
+        predecessor_lease_id=lineage[-2],
+        replacement_index=3,
+        lease_lineage=lineage,
+        stage_binding_sha256=stage["stage_binding_sha256"],
+        accepted_binding_sha256=binding["binding_sha256"],
+        preactivity_certificate_sha256=certificate["certificate_sha256"],
+        coordinate_proposal_sha256=certificate["coordinate_proposal"]["proposal_sha256"],
+        issued_at="2026-08-21T16:00:00Z",
+        expires_at="2026-08-21T18:00:00Z",
+        paths=request["paths"],
+        resources=request["resources"],
+        fixture_only=False,
+        repair_transition_sha256="f" * 64,
+        _seal=contract._PERMIT_SEAL,
+    )
+    index4 = _synthetic_lease(
+        certificate,
+        binding,
+        request,
+        lease_id=SYNTHETIC_TEST_IDENTITIES[0],
+        origin_lease_id=SYNTHETIC_TEST_IDENTITIES[0],
+        predecessor_lease_id=SYNTHETIC_TEST_IDENTITIES[0],
+        replacement_index=4,
+        issued_at="2026-08-21T18:00:00Z",
+        expires_at="2026-08-21T20:00:00Z",
+    )
+    index4.update(
+        issuer="Operational Root",
+        fixture_only=False,
+        activity_authorized=True,
+        lease_id="RCLE-TBCFV-R04-ROOT-EMPIRICAL-TEST-05",
+        origin_lease_id=permit3.origin_lease_id,
+        predecessor_lease_id=permit3.lease_id,
+    )
+    with pytest.raises(LeaseError, match="repair lineage cannot bypass"):
+        validate_root_lease(
+            index4,
+            certificate=certificate,
+            accepted_binding=binding,
+            resource_request=request,
+            predecessor_permit=permit3,
+            now=datetime(2026, 8, 21, 19, tzinfo=timezone.utc),
+        )
+
+
+def test_current_byte_validator_admits_only_exact_issued_bytes_without_launch(
+    tmp_path: Path,
+) -> None:
+    import importlib.util
+
+    validator_path = Path(
+        "temp/handoffs/code_manager_to_root/"
+        "validate_rcle_tbcfv_r04_index3_current_byte_request_20260823.py"
+    ).resolve()
+    spec = importlib.util.spec_from_file_location("rcle_index3_validator_test", validator_path)
+    assert spec is not None and spec.loader is not None
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    outputs = validator.compute_outputs()
+    validator.verify_installed(outputs)
+    proposed = outputs["REQUEST"]["proposed_lease"]
+    issued = tmp_path / "EXACT_ISSUED_INDEX3.json"
+    issued.write_bytes(canonical_json_bytes(proposed))
+    receipt = validator.admit_issued(
+        outputs, str(issued), "2026-08-24T14:01:24Z"
+    )
+    assert receipt == {
+        "issued_lease_admitted": True,
+        "lease_id": "RCLE-TBCFV-R04-ROOT-EMPIRICAL-20260824-04",
+        "replacement_index": 3,
+        "lease_file_sha256": outputs["REQUEST"]["proposed_lease_sha256"],
+        "active_utc": "2026-08-24T14:01:24Z",
+        "result_blind": True,
+        "launch_performed": False,
+        "coordinate_materialization_performed": False,
+        "frontier_contents_read": False,
+        "result_values_read": False,
+    }
+    tampered = dict(proposed)
+    tampered["complete_panel_only"] = False
+    issued.write_bytes(canonical_json_bytes(tampered))
+    with pytest.raises(RuntimeError, match="bytes differ"):
+        validator.admit_issued(outputs, str(issued), "2026-08-24T14:01:24Z")
 
 
 def test_archived_initial_lease_requires_exact_repair_bridge_and_cannot_run(

@@ -9,20 +9,24 @@ empirical frontier.  There is no Python environment fallback.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from concurrent.futures import ProcessPoolExecutor
+from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 import hashlib
 import hmac
 import io
 import json
 import math
+import multiprocessing
 import os
 from pathlib import Path
 import re
+import shutil
 import tempfile
 from typing import Any, Callable, Final, Mapping, Sequence
 
 import torch
+import numpy as np
 
 from envs.native.production_backend import require_cpp_batched_production
 
@@ -42,6 +46,7 @@ from .empirical_contract import (
     PRODUCTION_SOURCE_LOGICAL_PATHS,
     RootLeasePermit,
     SELECTED_BATCH_WIDTH,
+    SUPPORTED_BATCH_WIDTHS,
     SHARED_COMPONENT,
     canonical_json_bytes,
     coordinate_proposal,
@@ -55,7 +60,14 @@ from .empirical_contract import (
     validate_source_repair_replacement_lease,
     validate_source_repair_transition,
 )
-from .native_backend import native_artifact_identity
+from .native_backend import (
+    bind_native_backend,
+    native_artifact_identity,
+    materialize_fixtures_compact as native_materialize_fixtures_compact,
+    semantic_claims as native_semantic_claims,
+    semantic_claims_compact as native_semantic_claims_compact,
+    semantic_uniform_words as native_semantic_uniform_words,
+)
 from .host_oracle import (
     ACTIVE_CONTINUATION as HOST_ACTIVE_CONTINUATION,
     EVENT_POSITION,
@@ -67,6 +79,7 @@ from .host_oracle import (
 )
 from .inference import HELDOUT_CELLS, TRAINING_CELLS
 from .models import (
+    ManagerOutput,
     TBCFVModel,
     apply_affine_fixture_uniforms,
     apply_registered_block_update,
@@ -78,6 +91,16 @@ from .models import (
     stopped_normal_inverse_cdf,
     stopped_normal_log_density,
 )
+from .process_workers import (
+    make_process_resource_object,
+    make_spawn_payload,
+    make_worker_authorization,
+    run_production_block_worker,
+    tree_size_bytes,
+    validate_process_resource_object,
+    validate_production_worker_packet,
+    write_spawn_payload,
+)
 from .native_backend import reset_native_batch
 from .packages import FixtureDrawBank, PlanState, initialize_plans, transition_plans
 from .scripted import coherent_scaffold, fragmented_scaffold, independent_nearest
@@ -88,6 +111,20 @@ RUNNER_SCHEMA: Final[str] = "RCLE_TBCFV_R04_EMPIRICAL_RUNNER_V1"
 _HEX = re.compile(r"[0-9a-f]{64}")
 _SAFE_IDENTITY = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,127}")
 _AUTHORITY_SEAL: Final[object] = object()
+_SUPPORTED_WORKERS: Final[tuple[int, ...]] = (1, 2, 4)
+_POSITION_FEATURES: Final[torch.Tensor] = torch.tensor(
+    [
+        [
+            math.sin(2.0 * math.pi * position / 120.0),
+            math.cos(2.0 * math.pi * position / 120.0),
+        ]
+        for position in range(120)
+    ],
+    dtype=torch.float64,
+)
+_CELL_CODES: Final[dict[str, int]] = {
+    cell: index for index, cell in enumerate((*TRAINING_CELLS, *HELDOUT_CELLS))
+}
 
 
 class EmpiricalRunnerError(RuntimeError):
@@ -791,6 +828,15 @@ class SemanticRNG:
         self.synthetic_test_only = False
         self.block_index = block_index
         self._key = bytes.fromhex(authority.block_root_digest(block_index))
+        self._native_binding = bind_native_backend()
+        frozen_native = authority.certificate.get("native")
+        if not isinstance(frozen_native, Mapping) or (
+            frozen_native.get("source_sha256") != self._native_binding.source_sha256
+            or frozen_native.get("build_key") != self._native_binding.build_key
+        ):
+            raise EmpiricalRunnerError(
+                "source-keyed semantic/reset native binding differs before run block"
+            )
 
     def uniform(self, **address: object) -> float:
         if set(address) != set(self._FIELDS):
@@ -805,6 +851,74 @@ class SemanticRNG:
         )
         word = int.from_bytes(hmac.new(self._key, payload, hashlib.sha256).digest()[:8], "big")
         return (word + 0.5) / float(1 << 64)
+
+    def uniform_many(self, addresses: Sequence[Mapping[str, object]]) -> tuple[float, ...]:
+        """Evaluate a nonempty exact address batch through the C++ hot path."""
+
+        rows = tuple(addresses)
+        for address in rows:
+            if set(address) != set(self._FIELDS):
+                raise EmpiricalRunnerError("semantic RNG address inventory differs")
+            if address["run_block"] != self.block_index:
+                raise EmpiricalRunnerError("semantic RNG address crosses run-block identity")
+        words = native_semantic_uniform_words(
+            self._key, rows, binding=self._native_binding
+        )
+        return tuple((word + 0.5) / float(1 << 64) for word in words)
+
+    def claim_many(
+        self,
+        addresses: Sequence[Mapping[str, object]],
+        probabilities: torch.Tensor,
+    ) -> tuple[int, ...]:
+        """Evaluate exact address words and sequential six-way choices natively."""
+
+        rows = tuple(addresses)
+        for address in rows:
+            if set(address) != set(self._FIELDS):
+                raise EmpiricalRunnerError("semantic RNG address inventory differs")
+            if address["run_block"] != self.block_index:
+                raise EmpiricalRunnerError("semantic RNG address crosses run-block identity")
+        values = probabilities.detach().to(device="cpu", dtype=torch.float64).contiguous()
+        return native_semantic_claims(
+            self._key, rows, values.numpy(), binding=self._native_binding
+        )
+
+    def claim_compact(
+        self,
+        coordinates: Sequence["EpisodeCoordinate"],
+        snapshots: Sequence[Snapshot],
+        probabilities: torch.Tensor,
+    ) -> tuple[int, ...]:
+        """Use the frozen actor-claim address inventory without Python mappings."""
+
+        if len(coordinates) != len(snapshots):
+            raise EmpiricalRunnerError("compact claim lane inventory differs")
+        cell_codes: list[int] = []
+        updates: list[int] = []
+        roster_events: list[int] = []
+        physical_agents: list[int] = []
+        ticks: list[int] = []
+        for coordinate, snapshot in zip(coordinates, snapshots):
+            keys = tuple(int(key) for key in snapshot.transport_keys)
+            count = len(keys)
+            cell_codes.extend([_CELL_CODES[coordinate.cell]] * count)
+            updates.extend([coordinate.update_or_scenario] * count)
+            roster_events.extend([coordinate.episode_row] * count)
+            physical_agents.extend(keys)
+            ticks.extend([snapshot.tick] * count)
+        values = probabilities.detach().to(device="cpu", dtype=torch.float64).contiguous()
+        return native_semantic_claims_compact(
+            self._key,
+            self.block_index,
+            np.asarray(cell_codes, dtype=np.int32),
+            np.asarray(updates, dtype=np.int64),
+            np.asarray(roster_events, dtype=np.int64),
+            np.asarray(physical_agents, dtype=np.int64),
+            np.asarray(ticks, dtype=np.int64),
+            values.numpy(),
+            binding=self._native_binding,
+        )
 
     def require_runtime_authority(self) -> None:
         if self.synthetic_test_only:
@@ -849,6 +963,7 @@ class SyntheticTestRNG(SemanticRNG):
         self.synthetic_test_only = True
         self.block_index = 0
         self._key = hashlib.sha256(label.encode("ascii")).digest()
+        self._native_binding = bind_native_backend()
 
 
 def _require_semantic_rng(rng: object) -> SemanticRNG:
@@ -916,39 +1031,39 @@ def materialize_fixture(rng: SemanticRNG, coordinate: EpisodeCoordinate) -> Fixt
     _require_semantic_rng(rng)
     before, after, event = _parse_cell(coordinate.cell)
     base = dict(cell=coordinate.cell, update_or_scenario=coordinate.update_or_scenario)
+    position_uniforms = rng.uniform_many(
+        tuple(
+            _address(
+                coordinate.block_index,
+                **base,
+                physical_agent=coordinate.episode_row,
+                draw_kind="initial-position-permutation",
+                draw_index=sector,
+            )
+            for sector in range(120)
+        )
+    )
     ranked_positions = sorted(
-        range(120),
-        key=lambda sector: (
-            rng.uniform(
-                **_address(
-                    coordinate.block_index,
-                    **base,
-                    physical_agent=coordinate.episode_row,
-                    draw_kind="initial-position-permutation",
-                    draw_index=sector,
-                )
-            ),
-            sector,
-        ),
+        range(120), key=lambda sector: (position_uniforms[sector], sector)
     )
     positions = tuple(ranked_positions[:before])
     initial_keys = tuple(range(before))
     if after < before:
+        survivor_uniforms = rng.uniform_many(
+            tuple(
+                _address(
+                    coordinate.block_index,
+                    **base,
+                    physical_agent=coordinate.episode_row,
+                    roster_event="contraction",
+                    draw_kind="survivor-subset",
+                    draw_index=key,
+                )
+                for key in initial_keys
+            )
+        )
         ranked_keys = sorted(
-            initial_keys,
-            key=lambda key: (
-                rng.uniform(
-                    **_address(
-                        coordinate.block_index,
-                        **base,
-                        physical_agent=coordinate.episode_row,
-                        roster_event="contraction",
-                        draw_kind="survivor-subset",
-                        draw_index=key,
-                    )
-                ),
-                key,
-            ),
+            initial_keys, key=lambda key: (survivor_uniforms[key], key)
         )
         after_keys = tuple(sorted(ranked_keys[:after]))
     elif after > before:
@@ -957,24 +1072,24 @@ def materialize_fixture(rng: SemanticRNG, coordinate: EpisodeCoordinate) -> Fixt
         after_keys = initial_keys
     after_positions = tuple(-1 if key in initial_keys else EVENT_POSITION for key in after_keys)
     if event == "NEW_EPOCH":
-        omega_u = rng.uniform(
-            **_address(
-                coordinate.block_index,
-                **base,
-                physical_agent=coordinate.episode_row,
-                roster_event="new_epoch",
-                draw_kind="omega-plus",
-                draw_index=0,
-            )
-        )
-        kappa_u = rng.uniform(
-            **_address(
-                coordinate.block_index,
-                **base,
-                physical_agent=coordinate.episode_row,
-                roster_event="new_epoch",
-                draw_kind="kappa-plus",
-                draw_index=0,
+        omega_u, kappa_u = rng.uniform_many(
+            (
+                _address(
+                    coordinate.block_index,
+                    **base,
+                    physical_agent=coordinate.episode_row,
+                    roster_event="new_epoch",
+                    draw_kind="omega-plus",
+                    draw_index=0,
+                ),
+                _address(
+                    coordinate.block_index,
+                    **base,
+                    physical_agent=coordinate.episode_row,
+                    roster_event="new_epoch",
+                    draw_kind="kappa-plus",
+                    draw_index=0,
+                ),
             )
         )
         omega_plus = (5, 10, 15)[min(int(omega_u * 3), 2)]
@@ -1011,25 +1126,78 @@ def materialize_event_input(
     available = tuple(
         sector for sector in range(120) if sector not in occupied_after_departure
     )
-    ranked = sorted(
-        available,
-        key=lambda sector: (
-            rng.uniform(
-                **_address(
-                    coordinate.block_index,
-                    cell=coordinate.cell,
-                    update_or_scenario=coordinate.update_or_scenario,
-                    physical_tick=24,
-                    roster_event="newcomer-entry",
-                    physical_agent=coordinate.episode_row,
-                    draw_kind="newcomer-position-permutation",
-                    draw_index=sector,
-                )
-            ),
-            sector,
-        ),
+    event_uniforms = rng.uniform_many(
+        tuple(
+            _address(
+                coordinate.block_index,
+                cell=coordinate.cell,
+                update_or_scenario=coordinate.update_or_scenario,
+                physical_tick=24,
+                roster_event="newcomer-entry",
+                physical_agent=coordinate.episode_row,
+                draw_kind="newcomer-position-permutation",
+                draw_index=sector,
+            )
+            for sector in available
+        )
+    )
+    ranked = tuple(
+        sector
+        for _, sector in sorted(
+            zip(event_uniforms, available), key=lambda item: (item[0], item[1])
+        )
     )
     return EventInput(tuple(ranked[: len(newcomers)]))
+
+
+def _compact_coordinate_columns(
+    coordinates: Sequence[EpisodeCoordinate],
+) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    rows = tuple(coordinates)
+    return (
+        np.asarray([_CELL_CODES[item.cell] for item in rows], dtype=np.int32),
+        np.asarray([item.update_or_scenario for item in rows], dtype=np.int64),
+        np.asarray([item.episode_row for item in rows], dtype=np.int64),
+    )
+
+
+def materialize_fixture_batch(
+    rng: SemanticRNG, coordinates: Sequence[EpisodeCoordinate]
+) -> tuple[FixtureSpec, ...]:
+    """Production compiled reset materializer; scalar Python remains TEST oracle."""
+
+    semantic = _require_semantic_rng(rng)
+    rows = tuple(coordinates)
+    cells, updates, episode_rows = _compact_coordinate_columns(rows)
+    return native_materialize_fixtures_compact(
+        semantic._key,
+        semantic.block_index,
+        cells,
+        updates,
+        episode_rows,
+        binding=semantic._native_binding,
+    )
+
+
+def materialize_event_batch(
+    rng: SemanticRNG,
+    coordinates: Sequence[EpisodeCoordinate],
+    batch: Any,
+    fixtures: Sequence[FixtureSpec],
+) -> tuple[EventInput, ...]:
+    """Production compiled t=24 materializer against the native snapshot batch."""
+
+    semantic = _require_semantic_rng(rng)
+    rows = tuple(coordinates)
+    cells, updates, episode_rows = _compact_coordinate_columns(rows)
+    return batch.materialize_events_compact(
+        semantic._key,
+        semantic.block_index,
+        cells,
+        updates,
+        episode_rows,
+        fixtures,
+    )
 
 
 def _public_tensors(snapshot: Snapshot) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
@@ -1092,6 +1260,133 @@ def _public_tensors(snapshot: Snapshot) -> tuple[torch.Tensor, torch.Tensor, tor
     return agents, beacons, context, own, torch.tensor(candidates, dtype=torch.float64)
 
 
+@dataclass(frozen=True)
+class _BatchedPublicTensors:
+    agents: torch.Tensor
+    agent_mask: torch.Tensor
+    beacons: torch.Tensor
+    contexts: torch.Tensor
+    own: torch.Tensor
+    candidates: torch.Tensor
+    counts: tuple[int, ...]
+
+
+def _batched_public_tensors(snapshots: Sequence[Snapshot]) -> _BatchedPublicTensors:
+    """Pack one native batch for a single masked model forward.
+
+    Physical transport keys never enter these tensors.  The lane-major active
+    mask preserves the exact per-lane/public ordering used by the scalar
+    reference path while avoiding eight repeated model calls per claim tick.
+    """
+
+    rows = tuple(snapshots)
+    if not rows:
+        raise EmpiricalRunnerError("batched public tensors require at least one lane")
+    public_rows = tuple(snapshot.public_observation() for snapshot in rows)
+    counts = tuple(len(public.positions) for public in public_rows)
+    if any(count < 1 or count > 12 for count in counts):
+        raise EmpiricalRunnerError("public roster width is outside 1..12")
+    width = len(rows)
+
+    def padded(values: Sequence[object], count: int, fill: int = 0) -> list[object]:
+        return [*values, *([fill] * (12 - count))]
+
+    positions = torch.tensor(
+        [padded(public.positions, count) for public, count in zip(public_rows, counts)],
+        dtype=torch.int64,
+    )
+    newcomers = torch.tensor(
+        [padded(public.newcomers, count) for public, count in zip(public_rows, counts)],
+        dtype=torch.float64,
+    )
+    angular_ranks = torch.tensor(
+        [padded(public.angular_ranks, count) for public, count in zip(public_rows, counts)],
+        dtype=torch.float64,
+    )
+    displacements = torch.tensor(
+        [
+            padded(public.previous_displacements, count)
+            for public, count in zip(public_rows, counts)
+        ],
+        dtype=torch.float64,
+    )
+    beacon_positions = torch.tensor(
+        [public.beacon_positions for public in public_rows], dtype=torch.int64
+    )
+    demands = torch.tensor([public.demands for public in public_rows], dtype=torch.float64)
+    count_tensor = torch.tensor(counts, dtype=torch.int64)
+    agent_mask = torch.arange(12, dtype=torch.int64).view(1, 12) < count_tensor.view(width, 1)
+    active = agent_mask.to(torch.float64).unsqueeze(-1)
+
+    agent_positions = _POSITION_FEATURES[positions]
+    agents = torch.cat((agent_positions, newcomers.unsqueeze(-1)), dim=-1) * active
+    beacons = torch.cat(
+        (_POSITION_FEATURES[beacon_positions], (demands / 2.0).unsqueeze(-1)), dim=-1
+    )
+    contexts = torch.tensor(
+        [
+            [
+                count / 12.0,
+                public.tick / 64.0,
+                float(public.roster_event),
+                float(public.new_epoch),
+            ]
+            for public, count in zip(public_rows, counts)
+        ],
+        dtype=torch.float64,
+    )
+    denominators = torch.clamp(count_tensor - 1, min=1).to(torch.float64).view(width, 1)
+    own = torch.cat(
+        (
+            agent_positions,
+            (angular_ranks / denominators).unsqueeze(-1),
+            (displacements / 3.0).unsqueeze(-1),
+            newcomers.unsqueeze(-1),
+        ),
+        dim=-1,
+    ) * active
+    candidate_positions = _POSITION_FEATURES[beacon_positions].view(width, 1, 6, 2).expand(
+        width, 12, 6, 2
+    )
+    candidate_demands = (demands / 2.0).view(width, 1, 6, 1).expand(width, 12, 6, 1)
+    signed = (beacon_positions.view(width, 1, 6) - positions.view(width, 12, 1)) % 120
+    signed = torch.where(signed <= 60, signed, signed - 120).to(torch.float64) / 60.0
+    candidates = torch.cat(
+        (candidate_positions, candidate_demands, signed.unsqueeze(-1)), dim=-1
+    ) * agent_mask.view(width, 12, 1, 1).to(torch.float64)
+    return _BatchedPublicTensors(
+        agents=agents,
+        agent_mask=agent_mask,
+        beacons=beacons,
+        contexts=contexts,
+        own=own,
+        candidates=candidates,
+        counts=counts,
+    )
+
+
+def _batched_manager(
+    model: TBCFVModel, packed: _BatchedPublicTensors
+) -> ManagerOutput:
+    return model.manager(
+        packed.agents,
+        packed.beacons,
+        packed.contexts,
+        agent_mask=packed.agent_mask,
+    )
+
+
+def _manager_lane(manager: ManagerOutput, lane: int) -> ManagerOutput:
+    return ManagerOutput(
+        mean=manager.mean[lane],
+        raw_log_scale=manager.raw_log_scale[lane],
+        log_scale=manager.log_scale[lane],
+        scale=manager.scale[lane],
+        pooled_summary=manager.pooled_summary[lane],
+        public_summary=manager.public_summary[lane],
+    )
+
+
 def _uniform_tensor(
     rng: SemanticRNG,
     coordinate: EpisodeCoordinate,
@@ -1101,10 +1396,8 @@ def _uniform_tensor(
     arm_only_variable: str = "",
     physical_tick: int = 0,
 ) -> torch.Tensor:
-    values = [
-        [
-            rng.uniform(
-                **_address(
+    addresses = tuple(
+        _address(
                     coordinate.block_index,
                     arm_only_variable=arm_only_variable,
                     cell=coordinate.cell,
@@ -1115,12 +1408,11 @@ def _uniform_tensor(
                     draw_kind=draw_kind,
                     draw_index=index,
                 )
-            )
-            for index in range(4)
-        ]
         for key in physical_keys
-    ]
-    return torch.tensor(values, dtype=torch.float64)
+        for index in range(4)
+    )
+    values = rng.uniform_many(addresses)
+    return torch.tensor(values, dtype=torch.float64).reshape(len(physical_keys), 4)
 
 
 @dataclass
@@ -1173,6 +1465,38 @@ def _initial_lane_plans(
     return _LanePlans(transition.state, current, manager, scores, [])
 
 
+def _initial_batch_plans(
+    model: TBCFVModel,
+    arm: str,
+    rng: SemanticRNG,
+    coordinates: Sequence[EpisodeCoordinate],
+    snapshots: Sequence[Snapshot],
+) -> list[_LanePlans]:
+    packed = _batched_public_tensors(snapshots)
+    manager = _batched_manager(model, packed)
+    result: list[_LanePlans] = []
+    for lane, (coordinate, snapshot) in enumerate(zip(coordinates, snapshots)):
+        lane_manager = _manager_lane(manager, lane)
+        keys = tuple(int(key) for key in snapshot.transport_keys)
+        common_arm = arm in LEARNED_PACKAGES[:3]
+        draw_keys: tuple[int | str, ...] = ("COMMON",) if common_arm else keys
+        plans, scores = _sample_manager_plans(
+            rng,
+            coordinate,
+            lane_manager,
+            draw_keys,
+            draw_kind="epoch-plan",
+        )
+        if common_arm:
+            draws = FixtureDrawBank(epoch_common=plans["COMMON"])
+        else:
+            draws = FixtureDrawBank(epoch_private={key: plans[key] for key in keys})
+        transition = initialize_plans(arm, keys, draws)
+        current = {key: transition.plans[index] for index, key in enumerate(keys)}
+        result.append(_LanePlans(transition.state, current, lane_manager, scores, []))
+    return result
+
+
 def _draw_claims(
     model: TBCFVModel,
     arm: str,
@@ -1221,6 +1545,59 @@ def _draw_claims(
     claim_tensor = torch.tensor(claims, dtype=torch.int64)
     plans.claim_scores.extend(selected_claim_log_probability(probabilities, claim_tensor).unbind())
     return StepInput(tuple(claims))
+
+
+def _draw_claims_batch(
+    model: TBCFVModel,
+    arm: str,
+    rng: SemanticRNG,
+    coordinates: Sequence[EpisodeCoordinate],
+    snapshots: Sequence[Snapshot],
+    plans_by_lane: Sequence[_LanePlans],
+) -> list[StepInput]:
+    packed = _batched_public_tensors(snapshots)
+    manager = _batched_manager(model, packed)
+    pooled_rows: list[torch.Tensor] = []
+    context_rows: list[torch.Tensor] = []
+    own_rows: list[torch.Tensor] = []
+    candidate_rows: list[torch.Tensor] = []
+    plan_rows: list[torch.Tensor] = []
+    for lane, (snapshot, plans) in enumerate(zip(snapshots, plans_by_lane)):
+        count = packed.counts[lane]
+        keys = tuple(int(key) for key in snapshot.transport_keys)
+        if len(keys) != count:
+            raise EmpiricalRunnerError("batched public/transport roster counts differ")
+        pooled_rows.append(manager.pooled_summary[lane].expand(count, -1))
+        context_rows.append(packed.contexts[lane].expand(count, -1))
+        own_rows.append(packed.own[lane, :count])
+        candidate_rows.append(packed.candidates[lane, :count])
+        plan_rows.append(torch.stack([plans.current[key] for key in keys]))
+    pointer = make_pointer_inputs(
+        torch.cat(pooled_rows, dim=0),
+        torch.cat(own_rows, dim=0),
+        torch.cat(context_rows, dim=0),
+        torch.cat(candidate_rows, dim=0),
+        torch.cat(plan_rows, dim=0),
+    )
+    probabilities = model.claim_probabilities(pointer)
+    selected_claims = rng.claim_compact(coordinates, snapshots, probabilities)
+    actions: list[StepInput] = []
+    offset = 0
+    for coordinate, snapshot, plans, count in zip(
+        coordinates, snapshots, plans_by_lane, packed.counts
+    ):
+        keys = tuple(int(key) for key in snapshot.transport_keys)
+        lane_probabilities = probabilities[offset : offset + count]
+        claims = list(selected_claims[offset : offset + count])
+        offset += count
+        claim_tensor = torch.tensor(claims, dtype=torch.int64)
+        plans.claim_scores.extend(
+            selected_claim_log_probability(lane_probabilities, claim_tensor).unbind()
+        )
+        actions.append(StepInput(tuple(claims)))
+    if offset != probabilities.shape[0]:
+        raise EmpiricalRunnerError("batched claim output inventory differs")
+    return actions
 
 
 def _apply_plan_event(
@@ -1292,6 +1669,88 @@ def _apply_plan_event(
     plans.current = {key: transition.plans[index] for index, key in enumerate(keys)}
 
 
+def _apply_plan_event_batch(
+    model: TBCFVModel,
+    arm: str,
+    rng: SemanticRNG,
+    coordinates: Sequence[EpisodeCoordinate],
+    snapshots: Sequence[Snapshot],
+    plans_by_lane: Sequence[_LanePlans],
+) -> None:
+    packed = _batched_public_tensors(snapshots)
+    manager = _batched_manager(model, packed)
+    for lane, (coordinate, snapshot, plans) in enumerate(
+        zip(coordinates, snapshots, plans_by_lane)
+    ):
+        lane_manager = _manager_lane(manager, lane)
+        keys = tuple(int(key) for key in snapshot.transport_keys)
+        own = packed.own[lane, : packed.counts[lane]]
+        _, _, event = _parse_cell(coordinate.cell)
+        new_epoch = event == "NEW_EPOCH"
+        draw_values: dict[str, object] = {}
+
+        def sampled(
+            source: Any, selected_keys: Sequence[int | str], kind: str
+        ) -> dict[int | str, torch.Tensor]:
+            values, scores = _sample_manager_plans(
+                rng, coordinate, source, selected_keys, draw_kind=kind
+            )
+            plans.plan_scores.extend(scores)
+            return values
+
+        if new_epoch:
+            if arm in LEARNED_PACKAGES[:3]:
+                values = sampled(lane_manager, ("COMMON",), "new-epoch-common-plan")
+                draw_values["new_epoch_common"] = values["COMMON"]
+            else:
+                values = sampled(lane_manager, keys, "new-epoch-private-plan")
+                draw_values["new_epoch_private"] = {key: values[key] for key in keys}
+        elif arm == LEARNED_PACKAGES[2]:
+            values = sampled(plans.initial_manager, ("COMMON",), "active-common-refresh")
+            draw_values["active_common_refresh"] = values["COMMON"]
+        elif arm == LEARNED_PACKAGES[4]:
+            values = sampled(plans.initial_manager, keys, "active-private-refresh")
+            draw_values["active_private_refresh"] = {key: values[key] for key in keys}
+        elif arm == LEARNED_PACKAGES[3]:
+            old = set(plans.current)
+            newcomers = tuple(key for key in keys if key not in old)
+            if newcomers:
+                values = sampled(
+                    plans.initial_manager, newcomers, "active-newcomer-private"
+                )
+                draw_values["newcomer_private"] = {
+                    key: values[key] for key in newcomers
+                }
+        if arm == LEARNED_PACKAGES[1]:
+            noise = _uniform_tensor(
+                rng,
+                coordinate,
+                draw_kind="flex-event-noise",
+                physical_keys=keys,
+                arm_only_variable=arm,
+                physical_tick=24,
+            )
+            noise = math.sqrt(2.0) * torch.erfinv(2.0 * noise - 1.0)
+            draw_values["flex_event_noise"] = {
+                key: noise[index] for index, key in enumerate(keys)
+            }
+        transition = transition_plans(
+            plans.state,
+            keys,
+            "NEW_EPOCH" if new_epoch else "ACTIVE_CONTINUATION",
+            FixtureDrawBank(**draw_values),
+            model=model if arm == LEARNED_PACKAGES[1] else None,
+            public_event_summary=(
+                lane_manager.public_summary if arm == LEARNED_PACKAGES[1] else None
+            ),
+            physical_features=own if arm == LEARNED_PACKAGES[1] else None,
+        )
+        plans.state = transition.state
+        plans.current = {
+            key: transition.plans[index] for index, key in enumerate(keys)
+        }
+
+
 @dataclass(frozen=True)
 class LearnedEpisodeResult:
     tau: float
@@ -1304,7 +1763,7 @@ class LearnedEpisodeResult:
     claim_decisions: int
 
 
-def execute_learned_batch(
+def _execute_learned_batch_scalar_reference(
     model: TBCFVModel,
     arm: str,
     rng: SemanticRNG,
@@ -1312,14 +1771,14 @@ def execute_learned_batch(
     *,
     training: bool,
 ) -> tuple[LearnedEpisodeResult, ...]:
-    """Execute one exact native B8 cell batch with batched model consumers."""
+    """TEST-only scalar-model reference for the production B8 consumer."""
 
     coords = tuple(coordinates)
     _require_semantic_rng(rng).require_runtime_authority()
     if len(coords) != SELECTED_BATCH_WIDTH or len({item.cell for item in coords}) != 1:
         raise EmpiricalRunnerError("learned host calls require exactly one B8 cell batch")
     fixtures = tuple(materialize_fixture(rng, item) for item in coords)
-    batch = reset_native_batch(fixtures)
+    batch = reset_native_batch(fixtures, binding=rng._native_binding)
     lane_plans = [
         _initial_lane_plans(model, arm, rng, coordinate, snapshot)
         for coordinate, snapshot in zip(coords, batch.snapshots)
@@ -1375,6 +1834,75 @@ def execute_learned_batch(
             batch.close()
 
 
+def execute_learned_batch(
+    model: TBCFVModel,
+    arm: str,
+    rng: SemanticRNG,
+    coordinates: Sequence[EpisodeCoordinate],
+    *,
+    training: bool,
+) -> tuple[LearnedEpisodeResult, ...]:
+    """Execute one exact native B8 cell batch with masked batched model calls."""
+
+    coords = tuple(coordinates)
+    _require_semantic_rng(rng).require_runtime_authority()
+    width = len(coords)
+    if width not in SUPPORTED_BATCH_WIDTHS:
+        raise EmpiricalRunnerError("learned host width is not supported by the RCLE native ABI")
+    fixtures = materialize_fixture_batch(rng, coords)
+    batch = reset_native_batch(
+        fixtures, packed_views=True, binding=rng._native_binding
+    )
+    lane_plans = _initial_batch_plans(model, arm, rng, coords, batch.snapshots)
+    agent_ticks = [0] * width
+    claim_decisions = [0] * width
+    try:
+        while not all(snapshot.terminal for snapshot in batch.snapshots):
+            snapshots = batch.snapshots
+            if any(snapshot.event_input_required for snapshot in snapshots):
+                if not all(snapshot.event_input_required for snapshot in snapshots):
+                    raise EmpiricalRunnerError("native event lifecycle diverged across B8 lanes")
+                events = materialize_event_batch(rng, coords, batch, fixtures)
+                snapshots = batch.apply_event(events)
+                _apply_plan_event_batch(model, arm, rng, coords, snapshots, lane_plans)
+            for lane, snapshot in enumerate(snapshots):
+                if snapshot.terminal:
+                    raise EmpiricalRunnerError("one native lane terminated before its B8 peers")
+                agent_ticks[lane] += len(snapshot.positions)
+            claim_lanes = [snapshot.claim_required for snapshot in snapshots]
+            if any(claim_lanes):
+                if not all(claim_lanes):
+                    raise EmpiricalRunnerError("native claim lifecycle diverged across B8 lanes")
+                actions = _draw_claims_batch(
+                    model, arm, rng, coords, snapshots, lane_plans
+                )
+                for lane, action in enumerate(actions):
+                    claim_decisions[lane] += len(action.claims)
+            else:
+                actions = [StepInput.no_claims() for _ in snapshots]
+            batch.step(tuple(actions))
+        results: list[LearnedEpisodeResult] = []
+        for lane, (snapshot, plans) in enumerate(zip(batch.snapshots, lane_plans)):
+            if any(value is None for value in (snapshot.tau, snapshot.U, snapshot.F, snapshot.Y)):
+                raise EmpiricalRunnerError("terminal native endpoint is incomplete")
+            results.append(
+                LearnedEpisodeResult(
+                    tau=float(snapshot.tau),
+                    U=float(snapshot.U),
+                    F=float(snapshot.F),
+                    Y=float(snapshot.Y),
+                    plan_scores=tuple(plans.plan_scores) if training else (),
+                    claim_scores=tuple(plans.claim_scores) if training else (),
+                    agent_ticks=agent_ticks[lane],
+                    claim_decisions=claim_decisions[lane],
+                )
+            )
+        return tuple(results)
+    finally:
+        if not batch.closed:
+            batch.close()
+
+
 @dataclass(frozen=True)
 class ScriptedEpisodeResult:
     tau: float
@@ -1384,6 +1912,54 @@ class ScriptedEpisodeResult:
     claim_decisions: int
 
 
+def _scripted_actions_python_oracle(
+    package: str,
+    coordinates: Sequence[EpisodeCoordinate],
+    snapshots: Sequence[Snapshot],
+    previous: Sequence[Mapping[int, int]],
+) -> tuple[StepInput, ...]:
+    """TEST-only scalar oracle for the compiled scripted action kernel."""
+
+    actions: list[StepInput] = []
+    for coordinate, snapshot, lane_previous in zip(coordinates, snapshots, previous):
+        if not snapshot.claim_required:
+            actions.append(StepInput.no_claims())
+            continue
+        keys = tuple(int(key) for key in snapshot.transport_keys)
+        prior = tuple(lane_previous.get(key, -1) for key in keys)
+        survivors = tuple(key in lane_previous for key in keys)
+        first_or_epoch = snapshot.tick == 0 or snapshot.new_epoch
+        before, after, event = _parse_cell(coordinate.cell)
+        if package == SCRIPTED_PACKAGES[0]:
+            raw = coherent_scaffold(
+                snapshot.positions,
+                snapshot.beacon_positions,
+                snapshot.demands,
+                previous_claims=prior,
+                survivor=survivors,
+                first_claim_or_new_epoch=first_or_epoch,
+                entry_tiebreak=keys,
+            )
+        elif package == SCRIPTED_PACKAGES[1]:
+            raw = fragmented_scaffold(
+                snapshot.positions,
+                snapshot.beacon_positions,
+                snapshot.demands,
+                active_churn=(before != after and event == "ACTIVE_CONTINUATION"),
+                post_event_claim_index=(
+                    (snapshot.tick - 24) // 4 if snapshot.tick >= 24 else None
+                ),
+                previous_claims=prior,
+                survivor=survivors,
+                first_claim_or_new_epoch=first_or_epoch,
+                entry_tiebreak=keys,
+            )
+        else:
+            raw = independent_nearest(snapshot.positions, snapshot.beacon_positions)
+        actions.append(StepInput(tuple(int(value) for value in raw.tolist())))
+    return tuple(actions)
+
+
 def execute_scripted_batch(
     package: str,
     rng: SemanticRNG,
@@ -1391,10 +1967,14 @@ def execute_scripted_batch(
 ) -> tuple[ScriptedEpisodeResult, ...]:
     coords = tuple(coordinates)
     _require_semantic_rng(rng).require_runtime_authority()
-    if package not in SCRIPTED_PACKAGES or len(coords) != SELECTED_BATCH_WIDTH:
-        raise EmpiricalRunnerError("scripted execution requires one registered package and B8")
-    fixtures = tuple(materialize_fixture(rng, item) for item in coords)
-    batch = reset_native_batch(fixtures)
+    if package not in SCRIPTED_PACKAGES or len(coords) not in SUPPORTED_BATCH_WIDTHS:
+        raise EmpiricalRunnerError(
+            "scripted execution requires one registered package and a supported native width"
+        )
+    fixtures = materialize_fixture_batch(rng, coords)
+    batch = reset_native_batch(
+        fixtures, packed_views=True, binding=rng._native_binding
+    )
     previous: list[dict[int, int]] = [dict() for _ in coords]
     agent_ticks = [0] * len(coords)
     decisions = [0] * len(coords)
@@ -1405,51 +1985,43 @@ def execute_scripted_batch(
                 if not all(snapshot.event_input_required for snapshot in snapshots):
                     raise EmpiricalRunnerError("native event lifecycle diverged across scripted B8")
                 snapshots = batch.apply_event(
-                    tuple(
-                        materialize_event_input(rng, coordinate, snapshot, fixture)
-                        for coordinate, snapshot, fixture in zip(coords, snapshots, fixtures)
-                    )
+                    materialize_event_batch(rng, coords, batch, fixtures)
                 )
-            actions: list[StepInput] = []
-            for lane, (coordinate, snapshot) in enumerate(zip(coords, snapshots)):
+            for lane, snapshot in enumerate(snapshots):
                 agent_ticks[lane] += len(snapshot.positions)
-                if not snapshot.claim_required:
-                    actions.append(StepInput.no_claims())
-                    continue
-                keys = tuple(int(key) for key in snapshot.transport_keys)
-                prior = tuple(previous[lane].get(key, -1) for key in keys)
-                survivors = tuple(key in previous[lane] for key in keys)
-                first_or_epoch = snapshot.tick == 0 or snapshot.new_epoch
-                before, after, event = _parse_cell(coordinate.cell)
-                if package == SCRIPTED_PACKAGES[0]:
-                    raw = coherent_scaffold(
-                        snapshot.positions,
-                        snapshot.beacon_positions,
-                        snapshot.demands,
-                        previous_claims=prior,
-                        survivor=survivors,
-                        first_claim_or_new_epoch=first_or_epoch,
-                        entry_tiebreak=keys,
-                    )
-                elif package == SCRIPTED_PACKAGES[1]:
-                    post_index = (snapshot.tick - 24) // 4 if snapshot.tick >= 24 else None
-                    raw = fragmented_scaffold(
-                        snapshot.positions,
-                        snapshot.beacon_positions,
-                        snapshot.demands,
-                        active_churn=(before != after and event == "ACTIVE_CONTINUATION"),
-                        post_event_claim_index=post_index,
-                        previous_claims=prior,
-                        survivor=survivors,
-                        first_claim_or_new_epoch=first_or_epoch,
-                        entry_tiebreak=keys,
-                    )
-                else:
-                    raw = independent_nearest(snapshot.positions, snapshot.beacon_positions)
-                claims = tuple(int(value) for value in raw.tolist())
-                previous[lane] = dict(zip(keys, claims))
-                decisions[lane] += len(claims)
-                actions.append(StepInput(claims))
+            if snapshots[0].claim_required:
+                if not all(snapshot.claim_required for snapshot in snapshots):
+                    raise EmpiricalRunnerError("scripted claim lifecycle diverged across lanes")
+                keys_by_lane = [
+                    tuple(int(key) for key in snapshot.transport_keys) for snapshot in snapshots
+                ]
+                prior_by_lane = [
+                    tuple(previous[lane].get(key, -1) for key in keys)
+                    for lane, keys in enumerate(keys_by_lane)
+                ]
+                survivor_by_lane = [
+                    tuple(key in previous[lane] for key in keys)
+                    for lane, keys in enumerate(keys_by_lane)
+                ]
+                active_churn: list[bool] = []
+                for coordinate in coords:
+                    before, after, event = _parse_cell(coordinate.cell)
+                    active_churn.append(before != after and event == "ACTIVE_CONTINUATION")
+                actions = batch.scripted_actions(
+                    SCRIPTED_PACKAGES.index(package),
+                    prior_by_lane,
+                    survivor_by_lane,
+                    [snapshot.tick == 0 or snapshot.new_epoch for snapshot in snapshots],
+                    active_churn,
+                    [((snapshot.tick - 24) // 4 if snapshot.tick >= 24 else -1) for snapshot in snapshots],
+                )
+                for lane, (keys, action) in enumerate(zip(keys_by_lane, actions)):
+                    previous[lane] = dict(zip(keys, action.claims))
+                    decisions[lane] += len(action.claims)
+            else:
+                if any(snapshot.claim_required for snapshot in snapshots):
+                    raise EmpiricalRunnerError("scripted claim lifecycle diverged across lanes")
+                actions = tuple(StepInput.no_claims() for _ in snapshots)
             batch.step(tuple(actions))
         result: list[ScriptedEpisodeResult] = []
         for lane, snapshot in enumerate(batch.snapshots):
@@ -1478,17 +2050,17 @@ def initialize_block_models(rng: SemanticRNG) -> dict[str, TBCFVModel]:
     uniforms: dict[str, torch.Tensor] = {}
     for name, shape in required_affine_fixture_uniforms(reference).items():
         count = math.prod(shape)
-        values = [
-            rng.uniform(
-                **_address(
+        values = rng.uniform_many(
+            tuple(
+                _address(
                     rng.block_index,
                     parameter_entry=name,
                     draw_kind="common-initial-parameter",
                     draw_index=index,
                 )
+                for index in range(count)
             )
-            for index in range(count)
-        ]
+        )
         uniforms[name] = torch.tensor(values, dtype=torch.float64).reshape(shape)
     apply_affine_fixture_uniforms(reference, uniforms)
     models: dict[str, TBCFVModel] = {}
@@ -1505,6 +2077,8 @@ def execute_training_update(
     rng: SemanticRNG,
     update: int,
     baselines: torch.Tensor,
+    *,
+    authority_check: Callable[[], None] | None = None,
 ) -> tuple[torch.Tensor, dict[str, int]]:
     if arm not in LEARNED_PACKAGES or not 0 <= update < 800:
         raise EmpiricalRunnerError("training update address differs from r04")
@@ -1512,13 +2086,17 @@ def execute_training_update(
         raise EmpiricalRunnerError("training baselines must contain exact eight cells")
     results: list[LearnedEpisodeResult] = []
     cells: list[int] = []
-    for cell_index, cell in enumerate(TRAINING_CELLS):
+    for cell_start in range(0, len(TRAINING_CELLS), 4):
+        selected_cells = TRAINING_CELLS[cell_start : cell_start + 4]
         coordinates = tuple(
-            EpisodeCoordinate(rng.block_index, cell, update, row) for row in range(8)
+            EpisodeCoordinate(rng.block_index, cell, update, row)
+            for cell in selected_cells
+            for row in range(8)
         )
         batch_results = execute_learned_batch(model, arm, rng, coordinates, training=True)
         results.extend(batch_results)
-        cells.extend([cell_index] * 8)
+        for cell_index in range(cell_start, cell_start + len(selected_cells)):
+            cells.extend([cell_index] * 8)
     if len(results) != 64:
         raise EmpiricalRunnerError("one training update did not produce exactly 64 episodes")
     returns = torch.tensor([item.Y for item in results], dtype=torch.float64)
@@ -1534,6 +2112,8 @@ def execute_training_update(
     if not bool(torch.isfinite(loss)):
         raise EmpiricalRunnerError("training loss is nonfinite")
     loss.backward()
+    if authority_check is not None:
+        authority_check()
     audit = apply_registered_block_update(model, baselines, returns, cell_indices)
     counts = {
         "training_episodes": 64,
@@ -1722,6 +2302,7 @@ def _persist_runtime(
     runtime: _BlockRuntime,
     *,
     failure_hook: Callable[[str], None] | None = None,
+    authority_check: Callable[[], None] | None = None,
 ) -> str:
     payloads: dict[str, bytes] = {}
     for index, arm in enumerate(LEARNED_PACKAGES):
@@ -1753,6 +2334,8 @@ def _persist_runtime(
         }
     )
     payloads["aggregates.json"] = _canonical_bytes(runtime.aggregates)
+    if authority_check is not None:
+        authority_check()
     staged = frontier.stage_generation_payloads(
         block_index,
         payloads,
@@ -1778,6 +2361,8 @@ def _persist_runtime(
         scripted_heldout_completed={package: dict(cells) for package, cells in runtime.scripted_completed.items()},
         counts=dict(runtime.counts),
     )
+    if authority_check is not None:
+        authority_check()
     return frontier.commit_staged_resume(
         staged,
         state,
@@ -1846,6 +2431,59 @@ def _restore_runtime(frontier: AtomicEmpiricalFrontier, block_index: int) -> _Bl
         },
         counts=dict(state.counts),
     )
+
+
+def _prepare_synthetic_ordinary_frontier(
+    temp_root: Path,
+) -> tuple[AtomicEmpiricalFrontier, _BlockRuntime]:
+    """Prepare disposable state outside measurement for one ordinary transaction."""
+
+    class SyntheticPreflightPermit:
+        lease_id = "SYNTHETIC-TEST-PREFLIGHT"
+        origin_lease_id = lease_id
+        predecessor_lease_id = None
+        replacement_index = 0
+        lease_lineage = (lease_id,)
+        stage_binding_sha256 = "6" * 64
+        accepted_binding_sha256 = "7" * 64
+        preactivity_certificate_sha256 = "8" * 64
+        coordinate_proposal_sha256 = "9" * 64
+
+        def require_active(self, *, now: datetime) -> None:
+            if now.tzinfo is None:
+                raise EmpiricalRunnerError("synthetic preflight time must be timezone-aware")
+
+        def immutable_frontier_lease_binding(self) -> dict[str, str]:
+            return {
+                "origin_lease_id": self.origin_lease_id,
+                "lease_id": self.origin_lease_id,
+                "lease_binding_sha256": self.stage_binding_sha256,
+            }
+
+    workspace = Path(tempfile.mkdtemp(prefix="rcle_runner_ordinary_", dir=temp_root))
+    frontier_root = workspace / "frontier"
+    bindings = EmpiricalBindings(
+        source_manifest_sha256="1" * 64,
+        config_sha256="2" * 64,
+        native_binding_sha256="3" * 64,
+        coordinate_digest="4" * 64,
+        master_digest="5" * 64,
+        origin_lease_id=SyntheticPreflightPermit.origin_lease_id,
+        lease_id=SyntheticPreflightPermit.origin_lease_id,
+        lease_binding_sha256=SyntheticPreflightPermit.stage_binding_sha256,
+    )
+    permit = SyntheticPreflightPermit()
+    now = datetime.now(timezone.utc)
+    frontier = AtomicEmpiricalFrontier.create(
+        frontier_root,
+        bindings,
+        owner_token=OWNER_TOKEN,
+        permit=permit,
+        now=now,
+        lease_document_sha256="a" * 64,
+    )
+    runtime = _new_block_runtime(SyntheticTestRNG())
+    return frontier, runtime
 
 
 def _synthetic_empirical_frontier_chain(temp_root: Path) -> dict[str, object]:
@@ -1987,6 +2625,9 @@ def execute_run_block(
     """Execute/resume one blinded block; commits only fixed mechanical boundaries."""
 
     authority.require_active(now=now)
+    def require_live_authority() -> None:
+        authority.require_active(now=datetime.now(timezone.utc))
+
     block_complete = frontier.root / "blocks" / f"block_{block_index:02d}" / "COMPLETE.json"
     if block_complete.is_file():
         frontier.validate()
@@ -1995,25 +2636,36 @@ def execute_run_block(
     runtime = _restore_runtime(frontier, block_index)
     if runtime is None:
         runtime = _new_block_runtime(rng)
-        _persist_runtime(frontier, block_index, runtime)
+        _persist_runtime(
+            frontier, block_index, runtime, authority_check=require_live_authority
+        )
 
     if runtime.phase == "TRAINING":
         if len(set(runtime.updates.values())) != 1:
             raise EmpiricalRunnerError("resume training arms are not at the same paired update")
         start = next(iter(runtime.updates.values()))
         for update in range(start, 800):
-            authority.require_active(now=datetime.now(timezone.utc))
+            require_live_authority()
             for arm in LEARNED_PACKAGES:
                 baselines, counts = execute_training_update(
-                    runtime.models[arm], arm, rng, update, runtime.baselines[arm]
+                    runtime.models[arm],
+                    arm,
+                    rng,
+                    update,
+                    runtime.baselines[arm],
+                    authority_check=require_live_authority,
                 )
                 runtime.baselines[arm] = baselines
                 runtime.updates[arm] = update + 1
                 _add_counts(runtime.counts, counts)
             if (update + 1) % 100 == 0:
-                _persist_runtime(frontier, block_index, runtime)
+                _persist_runtime(
+                    frontier, block_index, runtime, authority_check=require_live_authority
+                )
         runtime.phase = "LEARNED_EVALUATION"
-        _persist_runtime(frontier, block_index, runtime)
+        _persist_runtime(
+            frontier, block_index, runtime, authority_check=require_live_authority
+        )
 
     if runtime.phase == "LEARNED_EVALUATION":
         for arm in LEARNED_PACKAGES:
@@ -2023,10 +2675,13 @@ def execute_run_block(
                     continue
                 if completed != 0:
                     raise EmpiricalRunnerError("learned heldout resume must be cell-atomic")
-                for start in range(0, 2_048, SELECTED_BATCH_WIDTH):
+                for start in range(0, 2_048, max(SUPPORTED_BATCH_WIDTHS)):
+                    width = max(SUPPORTED_BATCH_WIDTHS)
                     coordinates = tuple(
-                        EpisodeCoordinate(block_index, cell, start + row, row)
-                        for row in range(SELECTED_BATCH_WIDTH)
+                        EpisodeCoordinate(
+                            block_index, cell, start + row, row % SELECTED_BATCH_WIDTH
+                        )
+                        for row in range(width)
                     )
                     with torch.no_grad():
                         episodes = execute_learned_batch(
@@ -2036,9 +2691,13 @@ def execute_run_block(
                     _add_counts(runtime.counts, _evaluation_counts(episodes, learned=True))
                 runtime.learned_completed[arm][cell] = 2_048
             # One arm/cell-panel is the atomic learned-evaluation frontier.
-            _persist_runtime(frontier, block_index, runtime)
+            _persist_runtime(
+                frontier, block_index, runtime, authority_check=require_live_authority
+            )
         runtime.phase = "SCRIPTED_EVALUATION"
-        _persist_runtime(frontier, block_index, runtime)
+        _persist_runtime(
+            frontier, block_index, runtime, authority_check=require_live_authority
+        )
 
     if runtime.phase == "SCRIPTED_EVALUATION":
         for package in SCRIPTED_PACKAGES:
@@ -2048,17 +2707,22 @@ def execute_run_block(
                     continue
                 if completed != 0:
                     raise EmpiricalRunnerError("scripted heldout resume must be cell-atomic")
-                for start in range(0, 2_048, SELECTED_BATCH_WIDTH):
+                for start in range(0, 2_048, max(SUPPORTED_BATCH_WIDTHS)):
+                    width = max(SUPPORTED_BATCH_WIDTHS)
                     coordinates = tuple(
-                        EpisodeCoordinate(block_index, cell, start + row, row)
-                        for row in range(SELECTED_BATCH_WIDTH)
+                        EpisodeCoordinate(
+                            block_index, cell, start + row, row % SELECTED_BATCH_WIDTH
+                        )
+                        for row in range(width)
                     )
                     episodes = execute_scripted_batch(package, rng, coordinates)
                     _add_endpoints(runtime.aggregates["scripted"][package][cell], episodes)
                     _add_counts(runtime.counts, _evaluation_counts(episodes, learned=False))
                 runtime.scripted_completed[package][cell] = 2_048
             # One complete eight-cell package is the atomic scripted frontier.
-            _persist_runtime(frontier, block_index, runtime)
+            _persist_runtime(
+                frontier, block_index, runtime, authority_check=require_live_authority
+            )
         runtime.phase = "BLOCK_COMPLETE"
         if runtime.counts != BLOCK_COUNTS:
             raise EmpiricalRunnerError(
@@ -2067,10 +2731,13 @@ def execute_run_block(
         # Validate all registered block quantities before sealing, without
         # exposing them outside the blinded frontier.
         registered_block_aggregates(runtime.aggregates)
-        _persist_runtime(frontier, block_index, runtime)
+        _persist_runtime(
+            frontier, block_index, runtime, authority_check=require_live_authority
+        )
 
     if runtime.phase != "BLOCK_COMPLETE":
         raise EmpiricalRunnerError("run block stopped at an unknown mechanical phase")
+    require_live_authority()
     return frontier.seal_block(block_index, owner_token=OWNER_TOKEN)
 
 
@@ -2171,6 +2838,8 @@ def _live_native_preflight(authority: ProductionAuthority, *, now: datetime) -> 
     """Load the exact B8 shared component only after complete admission."""
 
     authority.require_active(now=now)
+    if not isinstance(getattr(authority, "certificate", None), Mapping):
+        raise EmpiricalRunnerError("production process execution requires fully admitted authority")
     receipt = require_cpp_batched_production(
         SHARED_COMPONENT,
         backend="cpp",
@@ -2345,13 +3014,240 @@ def read_source_repair_admission_files(
     )
 
 
-def execute_full_panel(authority: ProductionAuthority, *, now: datetime) -> Mapping[str, object]:
+def _production_process_resource(authority: ProductionAuthority) -> dict[str, object]:
+    """Consume the exact request/lease-bound four-root process resource."""
+
+    native = authority.certificate["native"]
+    source = authority.certificate["source"]
+    if not isinstance(native, Mapping) or not isinstance(source, Mapping):
+        raise EmpiricalRunnerError("process resource certificate binding is malformed")
+    resource_value = authority.permit.resources.get("process_resource")
+    if not isinstance(resource_value, Mapping):
+        raise EmpiricalRunnerError("Root lease omits the exact process resource")
+    resource = validate_process_resource_object(resource_value)
+    paths = resource["paths"]
+    if not isinstance(paths, Mapping):
+        raise EmpiricalRunnerError("process resource paths are malformed")
+    if (
+        Path(str(resource["canonical_result_root"])).resolve() != authority.result_root
+        or resource["source_set_sha256"] != source["source_set_sha256"]
+        or resource["native_binding_sha256"] != native["native_identity_sha256"]
+        or any(authority.permit.paths.get(str(key)) != str(item) for key, item in paths.items())
+    ):
+        raise EmpiricalRunnerError("process resource differs from request/lease/certificate")
+    return resource
+
+
+def _production_worker_context(
+    frontier: AtomicEmpiricalFrontier,
+    authority: ProductionAuthority,
+    payload: Mapping[str, object],
+) -> dict[str, object]:
+    native = authority.certificate["native"]
+    if not isinstance(native, Mapping):
+        raise EmpiricalRunnerError("production worker native binding is malformed")
+    bindings = empirical_bindings(authority)
+    audit_paths = sorted((frontier.root / "lease_audits").glob("lease_*.json"))
+    if not audit_paths:
+        raise EmpiricalRunnerError("production frontier lease audit is absent")
+    current_audit = _read_canonical_mapping(audit_paths[-1], "production lease audit")
+    if current_audit.get("lease_document_sha256") != document_sha256(authority.lease_document):
+        raise EmpiricalRunnerError("production frontier lease document differs")
+    body: dict[str, object] = {
+        "schema": "RCLE_TBCFV_R04_CLOSED_ONE_BLOCK_PRODUCTION_CONTEXT_V1",
+        "block_index": payload["block_index"],
+        "identity": str(authority.coordinate_binding["identity"]),
+        "coordinate_binding_sha256": authority.coordinate_digest,
+        "master_digest": authority.master_digest,
+        "block_root_digest": payload["block_root_digest"],
+        "source_set_sha256": payload["source_set_sha256"],
+        "native_binding_sha256": payload["native_binding_sha256"],
+        "native_source_sha256": native["source_sha256"],
+        "native_build_key": native["build_key"],
+        "native_artifact_sha256": native["artifact_sha256"],
+        "empirical_bindings": asdict(bindings),
+        "origin_lease_id": authority.permit.origin_lease_id,
+        "stage_binding_sha256": authority.permit.stage_binding_sha256,
+        "accepted_binding_sha256": authority.permit.accepted_binding_sha256,
+        "preactivity_certificate_sha256": authority.permit.preactivity_certificate_sha256,
+        "coordinate_proposal_sha256": authority.permit.coordinate_proposal_sha256,
+        "lease_document_sha256": document_sha256(authority.lease_document),
+        "lease_validated_at": current_audit["validated_at"],
+        "expires_at": authority.permit.expires_at,
+        "one_thread": True,
+        "gpu_count": 0,
+        "canonical_paths_present": False,
+        "result_blind": True,
+        "protocol_canary": False,
+        "protocol_canary_failure_once": False,
+    }
+    return {**body, "context_sha256": hashlib.sha256(canonical_json_bytes(body)).hexdigest()}
+
+
+def _prepare_production_worker_call(
+    frontier: AtomicEmpiricalFrontier,
+    authority: ProductionAuthority,
+    resource: Mapping[str, object],
+    block_index: int,
+) -> tuple[str, dict[str, object], dict[str, object]]:
+    native = authority.certificate["native"]
+    if not isinstance(native, Mapping):
+        raise EmpiricalRunnerError("production worker native identity is malformed")
+    payload = make_spawn_payload(
+        resource,
+        block_index=block_index,
+        block_root_digest=authority.block_root_digest(block_index),
+        native_source_sha256=str(native["source_sha256"]),
+        native_build_key=str(native["build_key"]),
+        expires_at=authority.permit.expires_at,
+        test_only=False,
+        test_steps=1,
+    )
+    context = _production_worker_context(frontier, authority, payload)
+    authorization = make_worker_authorization(
+        resource, payload, production_context=context
+    )
+    payload_path = (
+        Path(str(payload["private_scratch_root"]))
+        / f"b{block_index:02d}"
+        / "p.json"
+    )
+    if payload_path.exists():
+        observed = _read_canonical_mapping(payload_path, "production spawn payload")
+        if observed != payload:
+            raise EmpiricalRunnerError("existing production spawn payload differs")
+    else:
+        write_spawn_payload(payload_path, payload)
+    return str(payload_path), authorization, payload
+
+
+def _prevalidate_production_packet(
+    frontier: AtomicEmpiricalFrontier,
+    authority: ProductionAuthority,
+    packet_path: str,
+    payload: Mapping[str, object],
+    authorization: Mapping[str, object],
+) -> Mapping[str, object]:
+    manifest = validate_production_worker_packet(
+        packet_path, payload, worker_authorization=authorization
+    )
+    validation_root = Path(
+        tempfile.mkdtemp(prefix=".rcle-parent-validate-", dir=frontier.root.parent)
+    )
+    try:
+        shutil.copy2(frontier.root / "bindings.json", validation_root / "bindings.json")
+        shutil.copytree(frontier.root / "lease_audits", validation_root / "lease_audits")
+        if (frontier.root / "stage_repairs").exists():
+            shutil.copytree(frontier.root / "stage_repairs", validation_root / "stage_repairs")
+        (validation_root / "blocks").mkdir()
+        block_index = int(manifest["block_index"])
+        shutil.copytree(
+            Path(packet_path) / "block",
+            validation_root / "blocks" / f"block_{block_index:02d}",
+        )
+        validation = AtomicEmpiricalFrontier.resume(
+            validation_root,
+            frontier.bindings,
+            owner_token=OWNER_TOKEN,
+            permit=authority.permit,
+            now=datetime.now(timezone.utc),
+            lease_document_sha256=document_sha256(authority.lease_document),
+        )
+        validation._validate_block(block_index)
+    finally:
+        shutil.rmtree(validation_root)
+    return manifest
+
+
+def _install_prevalidated_production_packet(
+    frontier: AtomicEmpiricalFrontier,
+    packet_path: str,
+    manifest: Mapping[str, object],
+) -> None:
+    block_index = int(manifest["block_index"])
+    target = frontier.root / "blocks" / f"block_{block_index:02d}"
+    if target.exists():
+        frontier._validate_block(block_index)
+        marker = target / "COMPLETE.json"
+        if hashlib.sha256(marker.read_bytes()).hexdigest() != manifest["complete_marker_sha256"]:
+            raise EmpiricalRunnerError("existing canonical block differs from worker packet")
+        return
+    container = Path(
+        tempfile.mkdtemp(prefix=f".rcle-block-{block_index:02d}-", dir=frontier.root.parent)
+    )
+    staging = container / f"block_{block_index:02d}"
+    try:
+        shutil.copytree(Path(packet_path) / "block", staging)
+        with frontier._exclusive_commit(OWNER_TOKEN):
+            if target.exists():
+                raise EmpiricalRunnerError("canonical block appeared during parent install")
+            os.rename(staging, target)
+            frontier._validate_block(block_index)
+    finally:
+        if container.exists():
+            shutil.rmtree(container)
+
+
+def _execute_process_blocks(
+    frontier: AtomicEmpiricalFrontier,
+    authority: ProductionAuthority,
+    *,
+    workers: int,
+) -> None:
+    resource = _production_process_resource(authority)
+    calls: list[tuple[str, dict[str, object], dict[str, object]]] = []
+    for block_index in range(20):
+        marker = frontier.root / "blocks" / f"block_{block_index:02d}" / "COMPLETE.json"
+        if marker.is_file():
+            frontier._validate_block(block_index)
+            continue
+        calls.append(_prepare_production_worker_call(frontier, authority, resource, block_index))
+    if calls:
+        with ProcessPoolExecutor(
+            max_workers=workers,
+            mp_context=multiprocessing.get_context("spawn"),
+        ) as pool:
+            futures = [
+                pool.submit(run_production_block_worker, path, authorization)
+                for path, authorization, _ in calls
+            ]
+            rows = [future.result() for future in futures]
+        prevalidated: list[tuple[int, str, Mapping[str, object]]] = []
+        for row, (_, authorization, payload) in zip(rows, calls):
+            packet_path = str(row["packet_path"])
+            manifest = _prevalidate_production_packet(
+                frontier, authority, packet_path, payload, authorization
+            )
+            prevalidated.append((int(manifest["block_index"]), packet_path, manifest))
+        for _, packet_path, manifest in sorted(prevalidated, key=lambda item: item[0]):
+            authority.require_active(now=datetime.now(timezone.utc))
+            _install_prevalidated_production_packet(frontier, packet_path, manifest)
+    paths = resource["paths"]
+    assert isinstance(paths, Mapping)
+    private_bytes = sum(tree_size_bytes(str(path)) for path in paths.values())
+    if private_bytes > 12 * 1024**3:
+        raise EmpiricalRunnerError("combined private worker scratch exceeds 12 GiB")
+    if tree_size_bytes(frontier.root) > 1024**3:
+        raise EmpiricalRunnerError("canonical durable frontier exceeds 1 GiB")
+
+
+def execute_full_panel(
+    authority: ProductionAuthority, *, now: datetime, workers: int = 1
+) -> Mapping[str, object]:
     """Execute/resume exactly twenty blocks and publish only the complete panel."""
 
     authority.require_active(now=now)
+    if workers not in _SUPPORTED_WORKERS:
+        raise EmpiricalRunnerError("workers must be one of 1, 2, or 4")
     torch.set_num_threads(1)
     if torch.get_num_threads() != 1:
         raise EmpiricalRunnerError("production requires one Torch CPU thread per worker")
+    try:
+        torch.set_num_interop_threads(1)
+    except RuntimeError:
+        pass
+    if torch.get_num_interop_threads() != 1:
+        raise EmpiricalRunnerError("production requires one Torch inter-op thread per process")
     frontier = open_frontier(authority, now=now)
     published = frontier.root / "published"
     if published.exists():
@@ -2367,8 +3263,8 @@ def execute_full_panel(authority: ProductionAuthority, *, now: datetime) -> Mapp
             ).hexdigest(),
             "result_exposed": False,
         }
-    for block_index in range(20):
-        execute_run_block(frontier, authority, block_index, now=datetime.now(timezone.utc))
+    _execute_process_blocks(frontier, authority, workers=workers)
+    authority.require_active(now=datetime.now(timezone.utc))
     frontier.validate(require_complete_blocks=True, permit_published=False)
     records = [empirical_block_record(frontier, index) for index in range(20)]
     complete_cell_aggregates = [
@@ -2377,6 +3273,7 @@ def execute_full_panel(authority: ProductionAuthority, *, now: datetime) -> Mapp
     ]
     from .empirical_inference import analyze_empirical_complete_panel
 
+    authority.require_active(now=datetime.now(timezone.utc))
     outcome = analyze_empirical_complete_panel(records, expected_bindings=frontier.bindings)
     if (
         not outcome.admitted_empirical
@@ -2404,6 +3301,7 @@ def execute_full_panel(authority: ProductionAuthority, *, now: datetime) -> Mapp
             },
         }
     )
+    authority.require_active(now=datetime.now(timezone.utc))
     published_path = frontier.publish_complete_panel(
         branch=outcome.scientific_branch,
         analyzer_payload=outcome.analyzer_payload,

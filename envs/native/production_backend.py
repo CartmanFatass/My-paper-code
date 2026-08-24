@@ -37,6 +37,10 @@ RCLE_TBCFV_R04_FULL_HOST: Final[str] = "rcle.tbcfv.r04.full_host"
 SCDMP_TBCC_ORDER_VALUE_R02_FULL_HOST: Final[str] = (
     "scdmp.tbcc_order_value.r02.full_host"
 )
+VQFP_VNPA_R03_FULL_CHAIN: Final[str] = "vqfp.vnpa.r03.full_chain"
+UCOPE_VARIABLE_K_PAID_PROBE_R01_R03_FULL_HOST: Final[str] = (
+    "ucope.variable_k_paid_probe.r01_r03.full_host"
+)
 
 
 class ProductionBackendError(RuntimeError):
@@ -112,18 +116,16 @@ _CAPABILITIES: Final[Mapping[str, BackendCapability]] = {
     ),
     RIDGEGATE_2Z_FULL_ENVIRONMENT: BackendCapability(
         component=RIDGEGATE_2Z_FULL_ENVIRONMENT,
-        production_supported=False,
-        production_backend=None,
+        production_supported=True,
+        production_backend="cpp",
         reference_backend="python_torch_reference",
-        native_boundary=None,
-        batch_api=False,
-        minimum_production_batch_width=None,
-        full_reset_step_cpp=False,
-        loader_key=None,
-        unsupported_reason=(
-            "RIDGEGATE-2Z has no native environment backend or batched reset/step "
-            "entry point"
-        ),
+        native_boundary="complete_ridgegate2z_reset_to_terminal_and_full_suffix_cpp_host",
+        batch_api=True,
+        minimum_production_batch_width=32,
+        full_reset_step_cpp=True,
+        loader_key="sgsp_rscf_r01_full_host",
+        unsupported_reason=None,
+        supported_batch_widths=(32, 64, 128, 256),
     ),
     ONLGR_HEADLAND90_R03_CAL_HOLD_FULL_HOST: BackendCapability(
         component=ONLGR_HEADLAND90_R03_CAL_HOLD_FULL_HOST,
@@ -234,6 +236,42 @@ _CAPABILITIES: Final[Mapping[str, BackendCapability]] = {
         unsupported_reason=None,
         supported_batch_widths=(8, 12, 32, 120, 144),
     ),
+    VQFP_VNPA_R03_FULL_CHAIN: BackendCapability(
+        component=VQFP_VNPA_R03_FULL_CHAIN,
+        production_supported=False,
+        production_backend=None,
+        reference_backend="fixture_only_python_fraction_oracle",
+        native_boundary=(
+            "partial_vqfp_vnpa_r03_exact_philox_rational_geometry_policy_lr_"
+            "fixture_and_result_blind_benchmark_only"
+        ),
+        batch_api=False,
+        minimum_production_batch_width=None,
+        full_reset_step_cpp=False,
+        loader_key=None,
+        unsupported_reason=(
+            "the native candidate does not yet implement the complete frozen host, "
+            "search, evaluation, resampling, terminal, and atomic resume chain"
+        ),
+        supported_batch_widths=None,
+    ),
+    UCOPE_VARIABLE_K_PAID_PROBE_R01_R03_FULL_HOST: BackendCapability(
+        component=UCOPE_VARIABLE_K_PAID_PROBE_R01_R03_FULL_HOST,
+        production_supported=True,
+        production_backend="cpp",
+        reference_backend="test_only_python_scalar_oracle",
+        native_boundary=(
+            "complete_ucope_r01_r03_batched_reset_root_probe_tail_terminal_close_"
+            "cpp_host_with_counter_addressed_fp32_transitions_potential_population_"
+            "and_all_six_arm_semantic_primitives_with_no_python_fallback"
+        ),
+        batch_api=True,
+        minimum_production_batch_width=8,
+        full_reset_step_cpp=True,
+        loader_key="ucope_variable_k_paid_probe_r01_r03_full_host",
+        unsupported_reason=None,
+        supported_batch_widths=(8, 32, 256, 768),
+    ),
 }
 
 
@@ -266,6 +304,14 @@ def _uav_geometry_loader(*, build_root: str | Path | None) -> ModuleType:
     from envs.pettingzoo.uav_cpp_backend import load_uav_cpp_backend
 
     return load_uav_cpp_backend(build_root=build_root)
+
+
+def _sgsp_rscf_r01_loader(*, build_root: str | Path | None) -> ModuleType:
+    from experiments.candidates.semantic_graphon_shared_policy_rscf_r01.native_loader import (
+        require_cpp_batched_backend,
+    )
+
+    return require_cpp_batched_backend(build_root=build_root)
 
 
 def _onlgr_headland90_loader(*, build_root: str | Path | None) -> ctypes.CDLL:
@@ -350,9 +396,28 @@ def _scdmp_tbcc_order_value_r02_loader(
     return require_cpp_batched_backend(build_root=build_root)
 
 
+def _vqfp_vnpa_r03_loader(*, build_root: str | Path | None) -> ctypes.CDLL:
+    from experiments.candidates.vqfp_vnpa_r03.native_backend import (
+        require_cpp_batched_backend,
+    )
+
+    return require_cpp_batched_backend(build_root=build_root)
+
+
+def _ucope_variable_k_paid_probe_r01_r03_loader(
+    *, build_root: str | Path | None
+) -> ctypes.CDLL:
+    from experiments.candidates.ucope.variable_k_paid_probe_r01_r03.native_backend import (
+        require_cpp_batched_backend,
+    )
+
+    return require_cpp_batched_backend(build_root=build_root)
+
+
 _LOADERS: Final[Mapping[str, Callable[..., object]]] = {
     "continuous_roster_toy": _continuous_roster_loader,
     "uav_relay_geometry": _uav_geometry_loader,
+    "sgsp_rscf_r01_full_host": _sgsp_rscf_r01_loader,
     "onlgr_headland90_r03_cal_hold_full_host": _onlgr_headland90_loader,
     "scdmp_uav_sp_order_value_r02_full_host": _scdmp_uav_sp_order_value_loader,
     "vnfc_bpcr_r09_full_host": _vnfc_bpcr_r09_loader,
@@ -360,6 +425,10 @@ _LOADERS: Final[Mapping[str, Callable[..., object]]] = {
     "onlgr_tbvuus_r03_full_host": _onlgr_tbvuus_r03_loader,
     "rcle_tbcfv_r04_full_host": _rcle_tbcfv_r04_loader,
     "scdmp_tbcc_order_value_r02_full_host": _scdmp_tbcc_order_value_r02_loader,
+    "vqfp_vnpa_r03_full_chain": _vqfp_vnpa_r03_loader,
+    "ucope_variable_k_paid_probe_r01_r03_full_host": (
+        _ucope_variable_k_paid_probe_r01_r03_loader
+    ),
 }
 
 

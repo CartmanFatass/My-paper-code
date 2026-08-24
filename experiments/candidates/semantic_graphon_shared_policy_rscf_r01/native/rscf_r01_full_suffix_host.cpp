@@ -18,8 +18,8 @@ namespace py = pybind11;
 
 namespace {
 
-constexpr const char* kAbi = "SGSP_RSCF_NATIVE_ABI_V3";
-constexpr const char* kHostKind = "RIDGEGATE_2Z_RSCF_FACTUAL_TRACE_AND_FULL_SUFFIX_CPU_TEST_V3";
+constexpr const char* kAbi = "SGSP_RSCF_NATIVE_ABI_V4_FP32";
+constexpr const char* kHostKind = "RIDGEGATE_2Z_RSCF_FACTUAL_TRACE_AND_FULL_SUFFIX_CPU_TEST_V4_FP32";
 constexpr int64_t kHorizon = 12;
 constexpr int64_t kMaxAgents = 21;
 constexpr int64_t kFifo = 4;
@@ -93,8 +93,8 @@ template <typename T>
 void require_finite(const py::array_t<T>&) {}
 
 template <>
-void require_finite<double>(const py::array_t<double>& array) {
-  const double* data = array.data();
+void require_finite<float>(const py::array_t<float>& array) {
+  const float* data = array.data();
   for (py::ssize_t index = 0; index < array.size(); ++index) {
     if (!std::isfinite(data[index])) {
       throw std::invalid_argument("nonfinite native input");
@@ -119,30 +119,30 @@ uint64_t fnv_u64(uint64_t value, uint64_t item) {
   return fnv_bytes(value, &item, sizeof(item));
 }
 
-uint64_t fnv_f64(uint64_t value, double item) {
+uint64_t fnv_f32(uint64_t value, float item) {
   return fnv_bytes(value, &item, sizeof(item));
 }
 
-uint64_t fnv_canonical_f64(uint64_t value, double item) {
-  const int64_t quantized = static_cast<int64_t>(std::llround(item * 1.0e8));
+uint64_t fnv_canonical_f32(uint64_t value, float item) {
+  const int64_t quantized = static_cast<int64_t>(std::llround(item * 1.0e8f));
   return fnv_i64(value, quantized);
 }
 
-double sigmoid(double value) { return 1.0 / (1.0 + std::exp(-value)); }
+float sigmoid(float value) { return 1.0f / (1.0f + std::exp(-value)); }
 
-double link_probability(double base, int64_t multiplicity) {
-  const double logit = std::log(base / (1.0 - base));
-  return sigmoid(logit - 0.22 * static_cast<double>(multiplicity - 1));
+float link_probability(float base, int64_t multiplicity) {
+  const float logit = std::log(base / (1.0f - base));
+  return sigmoid(logit - 0.22f * static_cast<float>(multiplicity - 1));
 }
 
-const std::array<double, 9> P0 = {
-    0.92, 0.48, 0.88,
-    0.48, 0.92, 0.82,
-    0.86, 0.78, 0.90};
-const std::array<double, 9> LATENCY = {
-    1.0, 2.0, 1.0,
-    2.0, 1.0, 1.0,
-    1.0, 1.0, 1.0};
+const std::array<float, 9> P0 = {
+    0.92f, 0.48f, 0.88f,
+    0.48f, 0.92f, 0.82f,
+    0.86f, 0.78f, 0.90f};
+const std::array<float, 9> LATENCY = {
+    1.0f, 2.0f, 1.0f,
+    2.0f, 1.0f, 1.0f,
+    1.0f, 1.0f, 1.0f};
 const std::array<int64_t, 3> ROTATED_SOURCE_COLUMN = {2, 0, 1};
 
 std::array<int64_t, 4> legal_actions(int64_t role, int64_t* count) {
@@ -198,7 +198,7 @@ struct LaneState {
   std::array<int64_t, kMaxAgents> previous_action{};
   std::array<int64_t, kMaxAgents> previous_success{};
   std::array<int64_t, 6> events{};
-  std::array<double, kMaxAgents * kHidden> hidden{};
+  std::array<float, kMaxAgents * kHidden> hidden{};
   std::vector<Scheduled> scheduled;
 
   Packet& packet(int64_t agent, int64_t position) {
@@ -296,67 +296,67 @@ void process_arrivals(LaneState& state, int64_t slot) {
 }
 
 struct Parameters {
-  const double* encoder_w1;
-  const double* encoder_b1;
-  const double* encoder_w2;
-  const double* encoder_b2;
-  const double* beta;
-  const double* gru_w;
-  const double* gru_u;
-  const double* gru_b;
-  const double* actor_w;
-  const double* actor_b;
+  const float* encoder_w1;
+  const float* encoder_b1;
+  const float* encoder_w2;
+  const float* encoder_b2;
+  const float* beta;
+  const float* gru_w;
+  const float* gru_u;
+  const float* gru_b;
+  const float* actor_w;
+  const float* actor_b;
 };
 
-void form_observations(const LaneState& state, int64_t slot, std::vector<double>& observations) {
-  observations.assign(static_cast<size_t>(state.n * kObs), 0.0);
-  const double normalized_count = (static_cast<double>(state.n) / 3.0) / 7.0;
+void form_observations(const LaneState& state, int64_t slot, std::vector<float>& observations) {
+  observations.assign(static_cast<size_t>(state.n * kObs), 0.0f);
+  const float normalized_count = (static_cast<float>(state.n) / 3.0f) / 7.0f;
   for (int64_t agent = 0; agent < state.n; ++agent) {
-    double* obs = observations.data() + agent * kObs;
-    obs[state.roles[agent]] = 1.0;
-    obs[3] = static_cast<double>(slot) / 11.0;
+    float* obs = observations.data() + agent * kObs;
+    obs[state.roles[agent]] = 1.0f;
+    obs[3] = static_cast<float>(slot) / 11.0f;
     obs[4] = normalized_count;
     obs[5] = normalized_count;
     obs[6] = normalized_count;
     for (int64_t position = 0; position < kFifo; ++position) {
       const Packet packet = state.packet(agent, position);
       if (packet.valid()) {
-        obs[7 + 2 * position] = 1.0;
+        obs[7 + 2 * position] = 1.0f;
         const int64_t age = std::min<int64_t>(std::max<int64_t>(slot - packet.birth, 0), 3);
-        obs[8 + 2 * position] = static_cast<double>(age) / 3.0;
+        obs[8 + 2 * position] = static_cast<float>(age) / 3.0f;
       }
     }
     if (state.previous_action[agent] >= 0) {
-      obs[15 + state.previous_action[agent]] = 1.0;
+      obs[15 + state.previous_action[agent]] = 1.0f;
     }
-    obs[21] = static_cast<double>(state.previous_success[agent]);
+    obs[21] = static_cast<float>(state.previous_success[agent]);
   }
 }
 
 void policy_step(
     LaneState& state,
     const Parameters& p,
-    const std::vector<double>& observations,
-    const double* action_uniform,
+    const std::vector<float>& observations,
+    const float* action_uniform,
     std::array<int64_t, kMaxAgents>& actions,
     int64_t mode = 0,
-    double* messages_output = nullptr,
-    double* summaries_output = nullptr,
-    double* denominators_output = nullptr,
-    double* probabilities_output = nullptr,
-    const double* messages_override = nullptr) {
+    float* messages_output = nullptr,
+    float* summaries_output = nullptr,
+    float* denominators_output = nullptr,
+    float* probabilities_output = nullptr,
+    const float* messages_override = nullptr) {
   if (mode != 0 && mode != 1) {
     throw std::invalid_argument("unsupported policy mode");
   }
-  std::vector<double> messages(static_cast<size_t>(state.n * kMessage));
-  std::array<double, 64> layer{};
-  std::array<double, 3 * kMessage> role_sums{};
+  std::vector<float> messages(static_cast<size_t>(state.n * kMessage));
+  std::array<float, 64> layer{};
+  std::array<float, 3 * kMessage> role_sums{};
   std::array<int64_t, 3> counts{};
   for (int64_t agent = 0; agent < state.n; ++agent) {
     counts[state.roles[agent]] += 1;
     if (messages_override == nullptr) {
       for (int64_t out = 0; out < 64; ++out) {
-        double value = p.encoder_b1[out];
+        float value = p.encoder_b1[out];
         for (int64_t input = 0; input < kObs; ++input) {
           value += p.encoder_w1[out * kObs + input] * observations[agent * kObs + input];
         }
@@ -364,9 +364,9 @@ void policy_step(
       }
     }
     for (int64_t out = 0; out < kMessage; ++out) {
-      double message = 0.0;
+      float message = 0.0f;
       if (messages_override == nullptr) {
-        double value = p.encoder_b2[out];
+        float value = p.encoder_b2[out];
         for (int64_t input = 0; input < 64; ++input) {
           value += p.encoder_w2[out * 64 + input] * layer[input];
         }
@@ -382,43 +382,43 @@ void policy_step(
     }
   }
 
-  std::array<double, 9> omega{};
+  std::array<float, 9> omega{};
   for (int64_t receiver = 0; receiver < 3; ++receiver) {
     for (int64_t sender = 0; sender < 3; ++sender) {
       const int64_t multiplicity = counts[sender];
       const size_t edge = static_cast<size_t>(receiver * 3 + sender);
       const int64_t physical_sender = mode == 0 ? sender : ROTATED_SOURCE_COLUMN[sender];
       const size_t physical_edge = static_cast<size_t>(receiver * 3 + physical_sender);
-      const double probability = link_probability(P0[physical_edge], multiplicity);
-      const double k0 = probability / LATENCY[physical_edge];
-      const double v =
-          (2.0 * std::log(static_cast<double>(multiplicity)) - std::log(14.0)) /
-          std::log(7.0 / 2.0);
-      const double residual = p.beta[edge * 2] + p.beta[edge * 2 + 1] * v;
+      const float probability = link_probability(P0[physical_edge], multiplicity);
+      const float k0 = probability / LATENCY[physical_edge];
+      const float v =
+          (2.0f * std::log(static_cast<float>(multiplicity)) - std::log(14.0f)) /
+          std::log(7.0f / 2.0f);
+      const float residual = p.beta[edge * 2] + p.beta[edge * 2 + 1] * v;
       omega[edge] = k0 * std::exp(residual);
     }
   }
 
-  std::array<double, kActorInput> actor_input{};
-  std::array<double, kHidden> reset_hidden{};
-  std::array<double, kHidden> z{};
-  std::array<double, kHidden> r{};
-  std::array<double, kHidden> candidate{};
+  std::array<float, kActorInput> actor_input{};
+  std::array<float, kHidden> reset_hidden{};
+  std::array<float, kHidden> z{};
+  std::array<float, kHidden> r{};
+  std::array<float, kHidden> candidate{};
   for (int64_t agent = 0; agent < state.n; ++agent) {
     const int64_t receiver = state.roles[agent];
     for (int64_t index = 0; index < kObs; ++index) {
       actor_input[index] = observations[agent * kObs + index];
     }
-    double denominator = 0.0;
+    float denominator = 0.0f;
     for (int64_t sender = 0; sender < 3; ++sender) {
-      denominator += static_cast<double>(counts[sender]) * omega[receiver * 3 + sender];
+      denominator += static_cast<float>(counts[sender]) * omega[receiver * 3 + sender];
     }
     for (int64_t component = 0; component < kMessage; ++component) {
-      double numerator = 0.0;
+      float numerator = 0.0f;
       for (int64_t sender = 0; sender < 3; ++sender) {
         numerator += omega[receiver * 3 + sender] * role_sums[sender * kMessage + component];
       }
-      actor_input[kObs + component] = numerator / (denominator + 1e-12);
+      actor_input[kObs + component] = numerator / (denominator + 1e-12f);
     }
     actor_input[54] = denominator;
     if (denominators_output != nullptr) {
@@ -430,10 +430,10 @@ void policy_step(
       }
     }
 
-    const double* prior_hidden = state.hidden.data() + agent * kHidden;
+    const float* prior_hidden = state.hidden.data() + agent * kHidden;
     for (int64_t unit = 0; unit < kHidden; ++unit) {
-      double z_value = p.gru_b[unit];
-      double r_value = p.gru_b[kHidden + unit];
+      float z_value = p.gru_b[unit];
+      float r_value = p.gru_b[kHidden + unit];
       for (int64_t input = 0; input < kActorInput; ++input) {
         z_value += p.gru_w[(0 * kHidden + unit) * kActorInput + input] * actor_input[input];
         r_value += p.gru_w[(1 * kHidden + unit) * kActorInput + input] * actor_input[input];
@@ -447,7 +447,7 @@ void policy_step(
       reset_hidden[unit] = r[unit] * prior_hidden[unit];
     }
     for (int64_t unit = 0; unit < kHidden; ++unit) {
-      double value = p.gru_b[2 * kHidden + unit];
+      float value = p.gru_b[2 * kHidden + unit];
       for (int64_t input = 0; input < kActorInput; ++input) {
         value += p.gru_w[(2 * kHidden + unit) * kActorInput + input] * actor_input[input];
       }
@@ -456,14 +456,14 @@ void policy_step(
       }
       candidate[unit] = std::tanh(value);
     }
-    double* next_hidden = state.hidden.data() + agent * kHidden;
+    float* next_hidden = state.hidden.data() + agent * kHidden;
     for (int64_t unit = 0; unit < kHidden; ++unit) {
-      next_hidden[unit] = (1.0 - z[unit]) * candidate[unit] + z[unit] * prior_hidden[unit];
+      next_hidden[unit] = (1.0f - z[unit]) * candidate[unit] + z[unit] * prior_hidden[unit];
     }
 
-    std::array<double, kActions> logits{};
+    std::array<float, kActions> logits{};
     for (int64_t action = 0; action < kActions; ++action) {
-      double value = p.actor_b[action];
+      float value = p.actor_b[action];
       for (int64_t unit = 0; unit < kHidden; ++unit) {
         value += p.actor_w[action * kHidden + unit] * next_hidden[unit];
       }
@@ -471,30 +471,30 @@ void policy_step(
     }
     int64_t legal_count = 0;
     const auto legal = legal_actions(receiver, &legal_count);
-    double maximum = -std::numeric_limits<double>::infinity();
+    float maximum = -std::numeric_limits<float>::infinity();
     for (int64_t index = 0; index < legal_count; ++index) {
       maximum = std::max(maximum, logits[legal[index]]);
     }
-    std::array<double, 4> probability{};
+    std::array<float, 4> probability{};
     if (probabilities_output != nullptr) {
       for (int64_t action = 0; action < kActions; ++action) {
-        probabilities_output[agent * kActions + action] = 0.0;
+        probabilities_output[agent * kActions + action] = 0.0f;
       }
     }
-    double total = 0.0;
+    float total = 0.0f;
     for (int64_t index = 0; index < legal_count; ++index) {
       probability[index] = std::exp(logits[legal[index]] - maximum);
       total += probability[index];
     }
-    std::array<double, 4> executed_probability{};
+    std::array<float, 4> executed_probability{};
     for (int64_t index = 0; index < legal_count; ++index) {
       executed_probability[index] =
-          0.96 * probability[index] / total + 0.04 / legal_count;
+          0.96f * probability[index] / total + 0.04f / legal_count;
       if (probabilities_output != nullptr) {
         probabilities_output[agent * kActions + legal[index]] = executed_probability[index];
       }
     }
-    double cumulative = 0.0;
+    float cumulative = 0.0f;
     actions[agent] = legal[legal_count - 1];
     for (int64_t index = 0; index < legal_count; ++index) {
       cumulative += executed_probability[index];
@@ -510,8 +510,8 @@ void schedule_radio(
     LaneState& state,
     int64_t slot,
     const std::array<int64_t, kMaxAgents>& actions,
-    const double* uplink_uniform,
-    const double* base_uniform) {
+    const float* uplink_uniform,
+    const float* base_uniform) {
   const int64_t per_role = state.n / 3;
   for (int64_t agent = 0; agent < state.n; ++agent) {
     const int64_t action = actions[agent];
@@ -560,7 +560,7 @@ void schedule_radio(
     const int64_t due = slot + 1;
     std::set<int64_t> decoded_nonexpired;
     if (slot < kHorizon - 1) {
-      const double probability = link_probability(P0[ROLE_RELAY * 3 + surveyor_role], per_role);
+      const float probability = link_probability(P0[ROLE_RELAY * 3 + surveyor_role], per_role);
       for (const int64_t receiver : listeners) {
         if (uplink_uniform[sender * kMaxAgents + receiver] < probability) {
           state.scheduled.push_back(
@@ -605,7 +605,7 @@ void schedule_radio(
     const Packet packet = fifo_head(state, sender);
     const int64_t due = slot + 1;
     const bool decoded =
-        slot < kHorizon - 1 && base_uniform[sender] < link_probability(0.90, per_role);
+        slot < kHorizon - 1 && base_uniform[sender] < link_probability(0.90f, per_role);
     const bool new_timely = decoded && due < packet.birth + 4 &&
                             state.delivered[packet.basin * 3 + packet.ordinal] == 0;
     if (decoded) {
@@ -625,21 +625,21 @@ void scan(
     LaneState& state,
     int64_t slot,
     const std::array<int64_t, kMaxAgents>& actions,
-    const double* detection_uniform) {
+    const float* detection_uniform) {
   for (int64_t agent = 0; agent < state.n; ++agent) {
     const int64_t role = state.roles[agent];
     if ((role != ROLE_WEST && role != ROLE_EAST) || actions[agent] != ACTION_SCAN) {
       continue;
     }
     for (int64_t ordinal = 0; ordinal < 3; ++ordinal) {
-      if (state.events[role * 3 + ordinal] == slot && detection_uniform[agent] < 0.75) {
+      if (state.events[role * 3 + ordinal] == slot && detection_uniform[agent] < 0.75f) {
         fifo_append(state, agent, 2, Packet{role, ordinal, slot});
       }
     }
   }
 }
 
-double terminal(const LaneState& state) {
+float terminal(const LaneState& state) {
   int64_t west = 0;
   int64_t east = 0;
   for (int64_t ordinal = 0; ordinal < 3; ++ordinal) {
@@ -647,10 +647,10 @@ double terminal(const LaneState& state) {
     east += state.delivered[3 + ordinal];
   }
   const int64_t radio = state.metrics[METRIC_RADIO];
-  const double waste = radio == 0 ? 0.0 : static_cast<double>(state.metrics[METRIC_WASTE]) / radio;
-  return 0.65 * static_cast<double>(west + east) / 6.0 +
-         0.25 * static_cast<double>(std::min(west, east)) / 3.0 +
-         0.10 * (1.0 - waste);
+  const float waste = radio == 0 ? 0.0f : static_cast<float>(state.metrics[METRIC_WASTE]) / radio;
+  return 0.65f * static_cast<float>(west + east) / 6.0f +
+         0.25f * static_cast<float>(std::min(west, east)) / 3.0f +
+         0.10f * (1.0f - waste);
 }
 
 struct BatchInputs {
@@ -675,17 +675,17 @@ struct BatchInputs {
   py::array_t<int64_t> previous_action;
   py::array_t<int64_t> previous_success;
   py::array_t<int64_t> event_schedule;
-  py::array_t<double> post_gru_hidden;
-  py::array_t<double> current_observations;
-  py::array_t<double> current_messages;
-  py::array_t<double> current_legal_probabilities;
+  py::array_t<float> post_gru_hidden;
+  py::array_t<float> current_observations;
+  py::array_t<float> current_messages;
+  py::array_t<float> current_legal_probabilities;
   py::array_t<int64_t> factual_joint_action;
   py::array_t<int64_t> focal_intervention;
-  py::array_t<double> factual_terminal;
-  py::array_t<double> detection_uniform;
-  py::array_t<double> uplink_uniform;
-  py::array_t<double> base_uniform;
-  py::array_t<double> action_uniform;
+  py::array_t<float> factual_terminal;
+  py::array_t<float> detection_uniform;
+  py::array_t<float> uplink_uniform;
+  py::array_t<float> base_uniform;
+  py::array_t<float> action_uniform;
 
   explicit BatchInputs(const py::dict& batch)
       : width(py::reinterpret_borrow<py::array>(batch["n_agents"]).shape(0)),
@@ -709,17 +709,17 @@ struct BatchInputs {
         previous_action(require_array<int64_t>(batch, "previous_action", {width, kMaxAgents})),
         previous_success(require_array<int64_t>(batch, "previous_success", {width, kMaxAgents})),
         event_schedule(require_array<int64_t>(batch, "event_schedule", {width, 2, 3})),
-        post_gru_hidden(require_array<double>(batch, "post_gru_hidden", {width, kMaxAgents, kHidden})),
-        current_observations(require_array<double>(batch, "current_observations", {width, kMaxAgents, kObs})),
-        current_messages(require_array<double>(batch, "current_messages", {width, kMaxAgents, kMessage})),
-        current_legal_probabilities(require_array<double>(batch, "current_legal_probabilities", {width, kMaxAgents, kActions})),
+        post_gru_hidden(require_array<float>(batch, "post_gru_hidden", {width, kMaxAgents, kHidden})),
+        current_observations(require_array<float>(batch, "current_observations", {width, kMaxAgents, kObs})),
+        current_messages(require_array<float>(batch, "current_messages", {width, kMaxAgents, kMessage})),
+        current_legal_probabilities(require_array<float>(batch, "current_legal_probabilities", {width, kMaxAgents, kActions})),
         factual_joint_action(require_array<int64_t>(batch, "factual_joint_action", {width, kMaxAgents})),
         focal_intervention(require_array<int64_t>(batch, "focal_intervention", {width})),
-        factual_terminal(require_array<double>(batch, "factual_terminal", {width})),
-        detection_uniform(require_array<double>(batch, "detection_uniform", {width, kHorizon, kMaxAgents})),
-        uplink_uniform(require_array<double>(batch, "uplink_uniform", {width, kHorizon, kMaxAgents, kMaxAgents})),
-        base_uniform(require_array<double>(batch, "base_uniform", {width, kHorizon, kMaxAgents})),
-        action_uniform(require_array<double>(batch, "action_uniform", {width, kHorizon, kMaxAgents})) {
+        factual_terminal(require_array<float>(batch, "factual_terminal", {width})),
+        detection_uniform(require_array<float>(batch, "detection_uniform", {width, kHorizon, kMaxAgents})),
+        uplink_uniform(require_array<float>(batch, "uplink_uniform", {width, kHorizon, kMaxAgents, kMaxAgents})),
+        base_uniform(require_array<float>(batch, "base_uniform", {width, kHorizon, kMaxAgents})),
+        action_uniform(require_array<float>(batch, "action_uniform", {width, kHorizon, kMaxAgents})) {
     if (!(width == 32 || width == 64 || width == 128 || width == 256)) {
       throw std::invalid_argument("unsupported width");
     }
@@ -736,28 +736,28 @@ struct BatchInputs {
 };
 
 struct ParameterInputs {
-  py::array_t<double> encoder_w1;
-  py::array_t<double> encoder_b1;
-  py::array_t<double> encoder_w2;
-  py::array_t<double> encoder_b2;
-  py::array_t<double> beta;
-  py::array_t<double> gru_w;
-  py::array_t<double> gru_u;
-  py::array_t<double> gru_b;
-  py::array_t<double> actor_w;
-  py::array_t<double> actor_b;
+  py::array_t<float> encoder_w1;
+  py::array_t<float> encoder_b1;
+  py::array_t<float> encoder_w2;
+  py::array_t<float> encoder_b2;
+  py::array_t<float> beta;
+  py::array_t<float> gru_w;
+  py::array_t<float> gru_u;
+  py::array_t<float> gru_b;
+  py::array_t<float> actor_w;
+  py::array_t<float> actor_b;
 
   explicit ParameterInputs(const py::dict& values)
-      : encoder_w1(require_array<double>(values, "encoder_w1", {64, 22})),
-        encoder_b1(require_array<double>(values, "encoder_b1", {64})),
-        encoder_w2(require_array<double>(values, "encoder_w2", {32, 64})),
-        encoder_b2(require_array<double>(values, "encoder_b2", {32})),
-        beta(require_array<double>(values, "beta", {3, 3, 2})),
-        gru_w(require_array<double>(values, "gru_w", {3, 64, 55})),
-        gru_u(require_array<double>(values, "gru_u", {3, 64, 64})),
-        gru_b(require_array<double>(values, "gru_b", {3, 64})),
-        actor_w(require_array<double>(values, "actor_w", {6, 64})),
-        actor_b(require_array<double>(values, "actor_b", {6})) {
+      : encoder_w1(require_array<float>(values, "encoder_w1", {64, 22})),
+        encoder_b1(require_array<float>(values, "encoder_b1", {64})),
+        encoder_w2(require_array<float>(values, "encoder_w2", {32, 64})),
+        encoder_b2(require_array<float>(values, "encoder_b2", {32})),
+        beta(require_array<float>(values, "beta", {3, 3, 2})),
+        gru_w(require_array<float>(values, "gru_w", {3, 64, 55})),
+        gru_u(require_array<float>(values, "gru_u", {3, 64, 64})),
+        gru_b(require_array<float>(values, "gru_b", {3, 64})),
+        actor_w(require_array<float>(values, "actor_w", {6, 64})),
+        actor_b(require_array<float>(values, "actor_b", {6})) {
     require_finite(encoder_w1);
     require_finite(encoder_b1);
     require_finite(encoder_w2);
@@ -783,10 +783,10 @@ struct EpisodeInputs {
   py::array_t<int64_t> event_schedule;
   py::array_t<int64_t> selector_slot;
   py::array_t<int64_t> selector_local_index;
-  py::array_t<double> detection_uniform;
-  py::array_t<double> uplink_uniform;
-  py::array_t<double> base_uniform;
-  py::array_t<double> action_uniform;
+  py::array_t<float> detection_uniform;
+  py::array_t<float> uplink_uniform;
+  py::array_t<float> base_uniform;
+  py::array_t<float> action_uniform;
 
   explicit EpisodeInputs(const py::dict& batch)
       : width(py::reinterpret_borrow<py::array>(batch["n_agents"]).shape(0)),
@@ -795,10 +795,10 @@ struct EpisodeInputs {
         event_schedule(require_array<int64_t>(batch, "event_schedule", {width, 2, 3})),
         selector_slot(require_array<int64_t>(batch, "selector_slot", {width, 3})),
         selector_local_index(require_array<int64_t>(batch, "selector_local_index", {width, 3})),
-        detection_uniform(require_array<double>(batch, "detection_uniform", {width, kHorizon, kMaxAgents})),
-        uplink_uniform(require_array<double>(batch, "uplink_uniform", {width, kHorizon, kMaxAgents, kMaxAgents})),
-        base_uniform(require_array<double>(batch, "base_uniform", {width, kHorizon, kMaxAgents})),
-        action_uniform(require_array<double>(batch, "action_uniform", {width, kHorizon, kMaxAgents})) {
+        detection_uniform(require_array<float>(batch, "detection_uniform", {width, kHorizon, kMaxAgents})),
+        uplink_uniform(require_array<float>(batch, "uplink_uniform", {width, kHorizon, kMaxAgents, kMaxAgents})),
+        base_uniform(require_array<float>(batch, "base_uniform", {width, kHorizon, kMaxAgents})),
+        action_uniform(require_array<float>(batch, "action_uniform", {width, kHorizon, kMaxAgents})) {
     if (!(width == 32 || width == 64 || width == 128 || width == 256)) {
       throw std::invalid_argument("unsupported episode width");
     }
@@ -812,19 +812,19 @@ struct EpisodeInputs {
 uint64_t common_tape_digest(const BatchInputs& input, py::ssize_t lane, int64_t n, int64_t origin) {
   uint64_t digest = fnv_i64(kFnvOffset, n);
   digest = fnv_i64(digest, origin);
-  const double* detection = input.detection_uniform.data();
-  const double* base = input.base_uniform.data();
-  const double* action = input.action_uniform.data();
-  const double* uplink = input.uplink_uniform.data();
+  const float* detection = input.detection_uniform.data();
+  const float* base = input.base_uniform.data();
+  const float* action = input.action_uniform.data();
+  const float* uplink = input.uplink_uniform.data();
   for (int64_t slot = origin; slot < kHorizon; ++slot) {
     for (int64_t agent = 0; agent < n; ++agent) {
       const size_t index3 = static_cast<size_t>((lane * kHorizon + slot) * kMaxAgents + agent);
-      digest = fnv_f64(digest, detection[index3]);
-      digest = fnv_f64(digest, base[index3]);
-      digest = fnv_f64(digest, action[index3]);
+      digest = fnv_f32(digest, detection[index3]);
+      digest = fnv_f32(digest, base[index3]);
+      digest = fnv_f32(digest, action[index3]);
       for (int64_t receiver = 0; receiver < n; ++receiver) {
         const size_t index4 = static_cast<size_t>(((lane * kHorizon + slot) * kMaxAgents + agent) * kMaxAgents + receiver);
-        digest = fnv_f64(digest, uplink[index4]);
+        digest = fnv_f32(digest, uplink[index4]);
       }
     }
   }
@@ -837,13 +837,13 @@ uint64_t episode_common_tape_digest(const EpisodeInputs& input, py::ssize_t lane
   for (int64_t slot = 0; slot < kHorizon; ++slot) {
     for (int64_t agent = 0; agent < n; ++agent) {
       const size_t index3 = static_cast<size_t>((lane * kHorizon + slot) * kMaxAgents + agent);
-      digest = fnv_f64(digest, input.detection_uniform.data()[index3]);
-      digest = fnv_f64(digest, input.base_uniform.data()[index3]);
-      digest = fnv_f64(digest, input.action_uniform.data()[index3]);
+      digest = fnv_f32(digest, input.detection_uniform.data()[index3]);
+      digest = fnv_f32(digest, input.base_uniform.data()[index3]);
+      digest = fnv_f32(digest, input.action_uniform.data()[index3]);
       for (int64_t receiver = 0; receiver < n; ++receiver) {
         const size_t index4 = static_cast<size_t>(
             ((lane * kHorizon + slot) * kMaxAgents + agent) * kMaxAgents + receiver);
-        digest = fnv_f64(digest, input.uplink_uniform.data()[index4]);
+        digest = fnv_f32(digest, input.uplink_uniform.data()[index4]);
       }
     }
   }
@@ -853,13 +853,13 @@ uint64_t episode_common_tape_digest(const EpisodeInputs& input, py::ssize_t lane
 uint64_t trace_snapshot_digest(
     int64_t slot,
     const LaneState& state,
-    const std::vector<double>& observations,
-    const double* messages,
-    const double* summaries,
-    const double* denominators,
-    const double* incoming_hidden,
-    const double* post_hidden,
-    const double* probabilities,
+    const std::vector<float>& observations,
+    const float* messages,
+    const float* summaries,
+    const float* denominators,
+    const float* incoming_hidden,
+    const float* post_hidden,
+    const float* probabilities,
     const std::array<int64_t, kMaxAgents>& actions) {
   uint64_t digest = fnv_i64(kFnvOffset, slot);
   for (int64_t agent = 0; agent < state.n; ++agent) {
@@ -898,13 +898,13 @@ uint64_t trace_snapshot_digest(
   for (int64_t agent = 0; agent < state.n; ++agent) {
     digest = fnv_i64(digest, actions[agent]);
   }
-  const double* float_arrays[] = {
+  const float* float_arrays[] = {
       observations.data(), messages, summaries, denominators,
       incoming_hidden, post_hidden, probabilities};
   const int64_t widths[] = {kObs, kMessage, kMessage, 1, kHidden, kHidden, kActions};
   for (int64_t array = 0; array < 7; ++array) {
     for (int64_t index = 0; index < state.n * widths[array]; ++index) {
-      digest = fnv_canonical_f64(digest, float_arrays[array][index]);
+      digest = fnv_canonical_f32(digest, float_arrays[array][index]);
     }
   }
   return digest;
@@ -945,7 +945,7 @@ uint64_t audit_prefix(
   for (int64_t index = 0; index < 6; ++index) {
     digest = fnv_i64(digest, input.event_schedule.data()[lane * 6 + index]);
   }
-  const double* float_arrays[] = {
+  const float* float_arrays[] = {
       input.post_gru_hidden.data() + lane * kMaxAgents * kHidden,
       input.current_observations.data() + lane * kMaxAgents * kObs,
       input.current_messages.data() + lane * kMaxAgents * kMessage,
@@ -953,7 +953,7 @@ uint64_t audit_prefix(
   const int64_t float_widths[] = {kHidden, kObs, kMessage, kActions};
   for (int64_t array = 0; array < 4; ++array) {
     for (int64_t index = 0; index < n * float_widths[array]; ++index) {
-      digest = fnv_f64(digest, float_arrays[array][index]);
+      digest = fnv_f32(digest, float_arrays[array][index]);
     }
   }
   for (int64_t agent = 0; agent < n; ++agent) {
@@ -975,16 +975,16 @@ py::dict run_factual_trajectory(
     throw std::invalid_argument("unsupported factual trajectory mode");
   }
   const py::ssize_t width = input.width;
-  auto f64 = [](const std::vector<py::ssize_t>& shape) { return py::array_t<double>(shape); };
+  auto f32 = [](const std::vector<py::ssize_t>& shape) { return py::array_t<float>(shape); };
   auto i64 = [](const std::vector<py::ssize_t>& shape) { return py::array_t<int64_t>(shape); };
   auto u64 = [](const std::vector<py::ssize_t>& shape) { return py::array_t<uint64_t>(shape); };
-  py::array_t<double> observations = f64({width, kHorizon, kMaxAgents, kObs});
-  py::array_t<double> messages = f64({width, kHorizon, kMaxAgents, kMessage});
-  py::array_t<double> summaries = f64({width, kHorizon, kMaxAgents, kMessage});
-  py::array_t<double> denominators = f64({width, kHorizon, kMaxAgents});
-  py::array_t<double> incoming_hidden = f64({width, kHorizon, kMaxAgents, kHidden});
-  py::array_t<double> post_hidden = f64({width, kHorizon, kMaxAgents, kHidden});
-  py::array_t<double> probabilities = f64({width, kHorizon, kMaxAgents, kActions});
+  py::array_t<float> observations = f32({width, kHorizon, kMaxAgents, kObs});
+  py::array_t<float> messages = f32({width, kHorizon, kMaxAgents, kMessage});
+  py::array_t<float> summaries = f32({width, kHorizon, kMaxAgents, kMessage});
+  py::array_t<float> denominators = f32({width, kHorizon, kMaxAgents});
+  py::array_t<float> incoming_hidden = f32({width, kHorizon, kMaxAgents, kHidden});
+  py::array_t<float> post_hidden = f32({width, kHorizon, kMaxAgents, kHidden});
+  py::array_t<float> probabilities = f32({width, kHorizon, kMaxAgents, kActions});
   py::array_t<int64_t> actions_trace = i64({width, kHorizon, kMaxAgents});
   py::array_t<int64_t> fifo_basin_trace = i64({width, kHorizon, kMaxAgents, kFifo});
   py::array_t<int64_t> fifo_ordinal_trace = i64({width, kHorizon, kMaxAgents, kFifo});
@@ -998,20 +998,20 @@ py::dict run_factual_trajectory(
   py::array_t<int64_t> origin_slot = i64({width, 3});
   py::array_t<int64_t> origin_agent = i64({width, 3});
   py::array_t<uint64_t> origin_snapshot_digest = u64({width, 3});
-  py::array_t<double> terminal_return = f64({width});
+  py::array_t<float> terminal_return = f32({width});
   py::array_t<int64_t> final_delivered = i64({width, 2});
   py::array_t<int64_t> final_metrics = i64({width, kMetricDim});
   py::array_t<uint64_t> common_digest = u64({width});
   py::array_t<uint64_t> trajectory_digest = u64({width});
   py::array_t<bool> active(width);
 
-  std::fill_n(observations.mutable_data(), observations.size(), 0.0);
-  std::fill_n(messages.mutable_data(), messages.size(), 0.0);
-  std::fill_n(summaries.mutable_data(), summaries.size(), 0.0);
-  std::fill_n(denominators.mutable_data(), denominators.size(), 0.0);
-  std::fill_n(incoming_hidden.mutable_data(), incoming_hidden.size(), 0.0);
-  std::fill_n(post_hidden.mutable_data(), post_hidden.size(), 0.0);
-  std::fill_n(probabilities.mutable_data(), probabilities.size(), 0.0);
+  std::fill_n(observations.mutable_data(), observations.size(), 0.0f);
+  std::fill_n(messages.mutable_data(), messages.size(), 0.0f);
+  std::fill_n(summaries.mutable_data(), summaries.size(), 0.0f);
+  std::fill_n(denominators.mutable_data(), denominators.size(), 0.0f);
+  std::fill_n(incoming_hidden.mutable_data(), incoming_hidden.size(), 0.0f);
+  std::fill_n(post_hidden.mutable_data(), post_hidden.size(), 0.0f);
+  std::fill_n(probabilities.mutable_data(), probabilities.size(), 0.0f);
   std::fill_n(actions_trace.mutable_data(), actions_trace.size(), int64_t{-1});
   std::fill_n(fifo_basin_trace.mutable_data(), fifo_basin_trace.size(), int64_t{-1});
   std::fill_n(fifo_ordinal_trace.mutable_data(), fifo_ordinal_trace.size(), int64_t{-1});
@@ -1025,7 +1025,7 @@ py::dict run_factual_trajectory(
   std::fill_n(origin_slot.mutable_data(), origin_slot.size(), int64_t{0});
   std::fill_n(origin_agent.mutable_data(), origin_agent.size(), int64_t{0});
   std::fill_n(origin_snapshot_digest.mutable_data(), origin_snapshot_digest.size(), uint64_t{0});
-  std::fill_n(terminal_return.mutable_data(), terminal_return.size(), 0.0);
+  std::fill_n(terminal_return.mutable_data(), terminal_return.size(), 0.0f);
   std::fill_n(final_delivered.mutable_data(), final_delivered.size(), int64_t{0});
   std::fill_n(final_metrics.mutable_data(), final_metrics.size(), int64_t{0});
   std::fill_n(common_digest.mutable_data(), common_digest.size(), uint64_t{0});
@@ -1081,27 +1081,27 @@ py::dict run_factual_trajectory(
       for (int64_t slot = 0; slot < kHorizon; ++slot) {
         for (int64_t agent = 0; agent < n; ++agent) {
           const size_t index3 = static_cast<size_t>((lane * kHorizon + slot) * kMaxAgents + agent);
-          const double values[] = {
+          const float values[] = {
               input.detection_uniform.data()[index3],
               input.base_uniform.data()[index3],
               input.action_uniform.data()[index3]};
-          for (const double value : values) {
-            if (value < 0.0 || value >= 1.0) {
+          for (const float value : values) {
+            if (value < 0.0f || value >= 1.0f) {
               throw std::invalid_argument("factual tape outside [0,1)");
             }
           }
           for (int64_t receiver = 0; receiver < n; ++receiver) {
             const size_t index4 = static_cast<size_t>(
                 ((lane * kHorizon + slot) * kMaxAgents + agent) * kMaxAgents + receiver);
-            const double value = input.uplink_uniform.data()[index4];
-            if (value < 0.0 || value >= 1.0) {
+            const float value = input.uplink_uniform.data()[index4];
+            if (value < 0.0f || value >= 1.0f) {
               throw std::invalid_argument("factual uplink tape outside [0,1)");
             }
           }
         }
       }
       active.mutable_data()[lane] = true;
-      std::vector<double> slot_observations;
+      std::vector<float> slot_observations;
       std::array<int64_t, kMaxAgents> actions{};
       for (int64_t slot = 0; slot < kHorizon; ++slot) {
         if (slot > 0) {
@@ -1121,11 +1121,11 @@ py::dict run_factual_trajectory(
           std::memcpy(
               observations.mutable_data() + obs_offset + agent * kObs,
               slot_observations.data() + agent * kObs,
-              sizeof(double) * kObs);
+              sizeof(float) * kObs);
           std::memcpy(
               incoming_hidden.mutable_data() + hidden_offset + agent * kHidden,
               state.hidden.data() + agent * kHidden,
-              sizeof(double) * kHidden);
+              sizeof(float) * kHidden);
           previous_action_trace.mutable_data()[slot_agent + agent] = state.previous_action[agent];
           previous_success_trace.mutable_data()[slot_agent + agent] = state.previous_success[agent];
           for (int64_t position = 0; position < kFifo; ++position) {
@@ -1142,7 +1142,7 @@ py::dict run_factual_trajectory(
         std::memcpy(
             metrics_trace.mutable_data() + (lane * kHorizon + slot) * kMetricDim,
             state.metrics.data(), sizeof(int64_t) * kMetricDim);
-        const double* uniforms = input.action_uniform.data() + slot_agent;
+        const float* uniforms = input.action_uniform.data() + slot_agent;
         policy_step(
             state,
             parameters,
@@ -1158,7 +1158,7 @@ py::dict run_factual_trajectory(
           std::memcpy(
               post_hidden.mutable_data() + hidden_offset + agent * kHidden,
               state.hidden.data() + agent * kHidden,
-              sizeof(double) * kHidden);
+              sizeof(float) * kHidden);
           actions_trace.mutable_data()[slot_agent + agent] = actions[agent];
         }
         const uint64_t slot_digest = trace_snapshot_digest(
@@ -1177,13 +1177,13 @@ py::dict run_factual_trajectory(
           state.previous_action[agent] = actions[agent];
           state.previous_success[agent] = 0;
         }
-        const double* uplink = input.uplink_uniform.data() + slot_agent * kMaxAgents;
-        const double* base = input.base_uniform.data() + slot_agent;
-        const double* detection = input.detection_uniform.data() + slot_agent;
+        const float* uplink = input.uplink_uniform.data() + slot_agent * kMaxAgents;
+        const float* base = input.base_uniform.data() + slot_agent;
+        const float* detection = input.detection_uniform.data() + slot_agent;
         schedule_radio(state, slot, actions, uplink, base);
         scan(state, slot, actions, detection);
       }
-      const double target = terminal(state);
+      const float target = terminal(state);
       terminal_return.mutable_data()[lane] = target;
       for (int64_t basin = 0; basin < 2; ++basin) {
         int64_t count = 0;
@@ -1202,7 +1202,7 @@ py::dict run_factual_trajectory(
       for (int64_t slot = 0; slot < kHorizon; ++slot) {
         digest = fnv_u64(digest, snapshot_digest.data()[lane * kHorizon + slot]);
       }
-      digest = fnv_f64(digest, target);
+      digest = fnv_f32(digest, target);
       trajectory_digest.mutable_data()[lane] = digest;
       for (int64_t role = 0; role < 3; ++role) {
         const int64_t selected_slot = origin_slot.data()[lane * 3 + role];
@@ -1250,11 +1250,11 @@ py::dict run_shadow_trajectory(
   ParameterInputs parameter_input(parameter_dict);
   const Parameters parameters = parameter_input.pointers();
   const py::ssize_t width = input.width;
-  const auto observations = require_array<double>(
+  const auto observations = require_array<float>(
       trace_dict, "observations", {width, kHorizon, kMaxAgents, kObs});
-  const auto messages = require_array<double>(
+  const auto messages = require_array<float>(
       trace_dict, "messages", {width, kHorizon, kMaxAgents, kMessage});
-  const auto incoming = require_array<double>(
+  const auto incoming = require_array<float>(
       trace_dict, "incoming_hidden", {width, kHorizon, kMaxAgents, kHidden});
   const auto intact_digest = require_array<uint64_t>(
       trace_dict, "snapshot_digest", {width, kHorizon});
@@ -1263,21 +1263,21 @@ py::dict run_shadow_trajectory(
   require_finite(messages);
   require_finite(incoming);
 
-  py::array_t<double> summaries(
+  py::array_t<float> summaries(
       std::vector<py::ssize_t>{width, kHorizon, kMaxAgents, kMessage});
-  py::array_t<double> denominators(
+  py::array_t<float> denominators(
       std::vector<py::ssize_t>{width, kHorizon, kMaxAgents});
-  py::array_t<double> post_hidden(
+  py::array_t<float> post_hidden(
       std::vector<py::ssize_t>{width, kHorizon, kMaxAgents, kHidden});
-  py::array_t<double> probabilities(
+  py::array_t<float> probabilities(
       std::vector<py::ssize_t>{width, kHorizon, kMaxAgents, kActions});
   py::array_t<uint64_t> snapshot_digest(
       std::vector<py::ssize_t>{width, kHorizon});
   py::array_t<bool> active(width);
-  std::fill_n(summaries.mutable_data(), summaries.size(), 0.0);
-  std::fill_n(denominators.mutable_data(), denominators.size(), 0.0);
-  std::fill_n(post_hidden.mutable_data(), post_hidden.size(), 0.0);
-  std::fill_n(probabilities.mutable_data(), probabilities.size(), 0.0);
+  std::fill_n(summaries.mutable_data(), summaries.size(), 0.0f);
+  std::fill_n(denominators.mutable_data(), denominators.size(), 0.0f);
+  std::fill_n(post_hidden.mutable_data(), post_hidden.size(), 0.0f);
+  std::fill_n(probabilities.mutable_data(), probabilities.size(), 0.0f);
   std::fill_n(snapshot_digest.mutable_data(), snapshot_digest.size(), uint64_t{0});
   std::fill_n(active.mutable_data(), active.size(), false);
 
@@ -1297,7 +1297,7 @@ py::dict run_shadow_trajectory(
         state.roles[agent] = input.roles.data()[lane * kMaxAgents + agent];
       }
       std::array<int64_t, kMaxAgents> actions{};
-      std::vector<double> slot_observations(static_cast<size_t>(n * kObs));
+      std::vector<float> slot_observations(static_cast<size_t>(n * kObs));
       for (int64_t slot = 0; slot < kHorizon; ++slot) {
         const size_t slot_agent = static_cast<size_t>((lane * kHorizon + slot) * kMaxAgents);
         const size_t obs_offset = slot_agent * kObs;
@@ -1305,9 +1305,9 @@ py::dict run_shadow_trajectory(
         const size_t hidden_offset = slot_agent * kHidden;
         const size_t probability_offset = slot_agent * kActions;
         std::memcpy(
-            slot_observations.data(), observations.data() + obs_offset, sizeof(double) * n * kObs);
+            slot_observations.data(), observations.data() + obs_offset, sizeof(float) * n * kObs);
         std::memcpy(
-            state.hidden.data(), incoming.data() + hidden_offset, sizeof(double) * n * kHidden);
+            state.hidden.data(), incoming.data() + hidden_offset, sizeof(float) * n * kHidden);
         policy_step(
             state,
             parameters,
@@ -1322,10 +1322,10 @@ py::dict run_shadow_trajectory(
             messages.data() + message_offset);
         std::memcpy(
             post_hidden.mutable_data() + hidden_offset,
-            state.hidden.data(), sizeof(double) * n * kHidden);
+            state.hidden.data(), sizeof(float) * n * kHidden);
         uint64_t digest = fnv_u64(
             kFnvOffset, intact_digest.data()[lane * kHorizon + slot]);
-        const double* arrays[] = {
+        const float* arrays[] = {
             summaries.data() + message_offset,
             denominators.data() + slot_agent,
             post_hidden.data() + hidden_offset,
@@ -1333,7 +1333,7 @@ py::dict run_shadow_trajectory(
         const int64_t widths[] = {kMessage, 1, kHidden, kActions};
         for (int64_t array = 0; array < 4; ++array) {
           for (int64_t index = 0; index < n * widths[array]; ++index) {
-            digest = fnv_canonical_f64(digest, arrays[array][index]);
+            digest = fnv_canonical_f32(digest, arrays[array][index]);
           }
         }
         snapshot_digest.mutable_data()[lane * kHorizon + slot] = digest;
@@ -1357,7 +1357,7 @@ py::dict run_suffix(const py::dict& batch_dict, const py::dict& parameter_dict) 
   const Parameters parameters = parameter_input.pointers();
   const py::ssize_t width = input.width;
 
-  py::array_t<double> terminal_target(width);
+  py::array_t<float> terminal_target(width);
   py::array_t<int64_t> final_delivered({width, static_cast<py::ssize_t>(2)});
   py::array_t<int64_t> final_metrics({width, static_cast<py::ssize_t>(kMetricDim)});
   py::array_t<int64_t> counters({width, static_cast<py::ssize_t>(4)});
@@ -1367,7 +1367,7 @@ py::dict run_suffix(const py::dict& batch_dict, const py::dict& parameter_dict) 
   py::array_t<bool> factual_identity(width);
   py::array_t<bool> active(width);
 
-  std::fill_n(terminal_target.mutable_data(), terminal_target.size(), 0.0);
+  std::fill_n(terminal_target.mutable_data(), terminal_target.size(), 0.0f);
   std::fill_n(final_delivered.mutable_data(), final_delivered.size(), int64_t{0});
   std::fill_n(final_metrics.mutable_data(), final_metrics.size(), int64_t{0});
   std::fill_n(counters.mutable_data(), counters.size(), int64_t{0});
@@ -1442,23 +1442,23 @@ py::dict run_suffix(const py::dict& batch_dict, const py::dict& parameter_dict) 
         std::memcpy(
             state.hidden.data() + agent * kHidden,
             input.post_gru_hidden.data() + agent_index * kHidden,
-            sizeof(double) * kHidden);
-        double probability_sum = 0.0;
+            sizeof(float) * kHidden);
+        float probability_sum = 0.0f;
         int64_t legal_count = 0;
         const auto legal = legal_actions(state.roles[agent], &legal_count);
         for (int64_t action = 0; action < kActions; ++action) {
-          const double probability = input.current_legal_probabilities.data()[agent_index * kActions + action];
+          const float probability = input.current_legal_probabilities.data()[agent_index * kActions + action];
           bool legal_action = false;
           for (int64_t index = 0; index < legal_count; ++index) {
             legal_action = legal_action || legal[index] == action;
           }
-          if ((!legal_action && probability != 0.0) ||
-              (legal_action && probability < 0.04 / legal_count)) {
+          if ((!legal_action && probability != 0.0f) ||
+              (legal_action && probability < 0.04f / legal_count)) {
             throw std::invalid_argument("invalid current legal probability");
           }
           probability_sum += probability;
         }
-        if (std::abs(probability_sum - 1.0) > 1e-12) {
+        if (std::abs(probability_sum - 1.0f) > 1.0e-5f) {
           throw std::invalid_argument("current legal probabilities do not sum to one");
         }
       }
@@ -1536,20 +1536,20 @@ py::dict run_suffix(const py::dict& batch_dict, const py::dict& parameter_dict) 
       for (int64_t slot = 0; slot < kHorizon; ++slot) {
         for (int64_t agent = 0; agent < n; ++agent) {
           const size_t index3 = static_cast<size_t>((lane * kHorizon + slot) * kMaxAgents + agent);
-          const double values[] = {
+          const float values[] = {
               input.detection_uniform.data()[index3],
               input.base_uniform.data()[index3],
               input.action_uniform.data()[index3]};
-          for (const double value : values) {
-            if (value < 0.0 || value >= 1.0) {
+          for (const float value : values) {
+            if (value < 0.0f || value >= 1.0f) {
               throw std::invalid_argument("common tape value outside [0,1)");
             }
           }
           for (int64_t receiver = 0; receiver < n; ++receiver) {
             const size_t index4 = static_cast<size_t>(
                 ((lane * kHorizon + slot) * kMaxAgents + agent) * kMaxAgents + receiver);
-            const double value = input.uplink_uniform.data()[index4];
-            if (value < 0.0 || value >= 1.0) {
+            const float value = input.uplink_uniform.data()[index4];
+            if (value < 0.0f || value >= 1.0f) {
               throw std::invalid_argument("uplink tape value outside [0,1)");
             }
           }
@@ -1564,13 +1564,13 @@ py::dict run_suffix(const py::dict& batch_dict, const py::dict& parameter_dict) 
       int64_t transitions = 0;
       int64_t future_rounds = 0;
       int64_t future_decisions = 0;
-      std::vector<double> observations;
+      std::vector<float> observations;
       for (int64_t slot = origin; slot < kHorizon; ++slot) {
         if (slot > origin) {
           process_arrivals(state, slot);
           purge_expired(state, slot);
           form_observations(state, slot, observations);
-          const double* uniforms = input.action_uniform.data() +
+          const float* uniforms = input.action_uniform.data() +
               (lane * kHorizon + slot) * kMaxAgents;
           policy_step(state, parameters, observations, uniforms, actions);
           future_rounds += 1;
@@ -1580,18 +1580,18 @@ py::dict run_suffix(const py::dict& batch_dict, const py::dict& parameter_dict) 
           state.previous_action[agent] = actions[agent];
           state.previous_success[agent] = 0;
         }
-        const double* uplink = input.uplink_uniform.data() +
+        const float* uplink = input.uplink_uniform.data() +
             ((lane * kHorizon + slot) * kMaxAgents) * kMaxAgents;
-        const double* base = input.base_uniform.data() +
+        const float* base = input.base_uniform.data() +
             (lane * kHorizon + slot) * kMaxAgents;
-        const double* detection = input.detection_uniform.data() +
+        const float* detection = input.detection_uniform.data() +
             (lane * kHorizon + slot) * kMaxAgents;
         schedule_radio(state, slot, actions, uplink, base);
         scan(state, slot, actions, detection);
         transitions += 1;
       }
 
-      const double target = terminal(state);
+      const float target = terminal(state);
       terminal_target.mutable_data()[lane] = target;
       for (int64_t basin = 0; basin < 2; ++basin) {
         int64_t count = 0;
@@ -1618,15 +1618,15 @@ py::dict run_suffix(const py::dict& batch_dict, const py::dict& parameter_dict) 
       for (const int64_t value : state.metrics) {
         audit = fnv_i64(audit, value);
       }
-      audit = fnv_f64(audit, target);
+      audit = fnv_f32(audit, target);
       audit_digest.mutable_data()[lane] = audit;
 
       const bool candidate = input.focal_intervention.data()[lane] ==
                              input.factual_joint_action.data()[lane * kMaxAgents + focal];
       factual_candidate.mutable_data()[lane] = candidate;
-      const double expected = input.factual_terminal.data()[lane];
+      const float expected = input.factual_terminal.data()[lane];
       factual_identity.mutable_data()[lane] =
-          candidate && std::memcmp(&target, &expected, sizeof(double)) == 0;
+          candidate && std::memcmp(&target, &expected, sizeof(float)) == 0;
     }
   }
 

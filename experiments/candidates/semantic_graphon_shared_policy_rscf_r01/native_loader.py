@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
+from collections.abc import MutableMapping
 import hashlib
+import importlib.util
 import os
 from pathlib import Path
 import platform
@@ -15,7 +17,6 @@ from types import ModuleType
 
 import numpy as np
 import torch
-from torch.utils.cpp_extension import load
 
 from .native_contract import (
     ABI_VERSION,
@@ -40,19 +41,35 @@ _SOURCE = Path(__file__).with_name("native") / "rscf_r01_full_suffix_host.cpp"
 _LOCK = threading.Lock()
 _MODULES: dict[str, ModuleType] = {}
 _IDENTITIES: dict[str, "NativeHostIdentity"] = {}
+_REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
+_ACCEPTED_BUILD_KEY_SHA256 = "0c14c2f7b3fa5840fe53a01ca7c9e219ba9309907533af2f971fa66f590cd5c9"
+_ACCEPTED_ARTIFACT_SHA256 = "4a09f6e71eff77333e00aa30f0adcafc162485279a41a7fa79e9dec851d53962"
+_ACCEPTED_ARTIFACT_SIZE_BYTES = 249_344
 
 
-def _ensure_ninja_on_path() -> None:
-    """Expose the environment-owned Ninja binary without selecting another toolchain."""
+def _merge_case_insensitive_environment(
+    output: str, target: MutableMapping[str, str]
+) -> None:
+    """Import `cmd set` output with Windows first-wins name semantics.
 
-    try:
-        import ninja  # type: ignore[import-not-found]
-    except ImportError as error:
-        raise RuntimeError("the required environment-local Ninja package is unavailable") from error
-    bin_dir = str(Path(ninja.BIN_DIR).resolve(strict=True))
-    path_entries = os.environ.get("PATH", "").split(os.pathsep)
-    if bin_dir not in path_entries:
-        os.environ["PATH"] = bin_dir + os.pathsep + os.environ.get("PATH", "")
+    Some managed shells expose both a vcvars-produced ``PATH=`` and a later
+    stale inherited ``Path=``.  Windows treats those names as identical, so a
+    sequential merge would silently discard the compiler path.  Collapse all
+    incoming names case-insensitively before mutating the target; the first
+    vcvars value remains authoritative and the later alias cannot overwrite it.
+    """
+
+    existing_names = {name.casefold(): name for name in target}
+    imported: set[str] = set()
+    for line in output.splitlines():
+        if "=" not in line:
+            continue
+        name, value = line.split("=", 1)
+        folded = name.casefold()
+        if not name or folded in imported:
+            continue
+        imported.add(folded)
+        target[existing_names.get(folded, name)] = value
 
 
 def _ensure_compiler_environment() -> str:
@@ -81,10 +98,7 @@ def _ensure_compiler_environment() -> str:
         shell=True,
         executable=os.environ.get("COMSPEC", "cmd.exe"),
     )
-    for line in completed.stdout.splitlines():
-        if "=" in line:
-            name, value = line.split("=", 1)
-            os.environ[name] = value
+    _merge_case_insensitive_environment(completed.stdout, os.environ)
     compiler = shutil.which("cl")
     if compiler is None:
         raise RuntimeError("MSVC x64 environment did not expose cl.exe")
@@ -97,6 +111,55 @@ def _sha256(path: Path) -> str:
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _retained_prebuilt_artifact_path(module_name: str) -> Path:
+    return (
+        Path(__file__).with_name("native")
+        / "accepted"
+        / _ACCEPTED_ARTIFACT_SHA256
+        / f"{module_name}.pyd"
+    ).resolve(strict=False)
+
+
+def _verify_prebuilt_artifact_bytes(path: Path) -> Path:
+    artifact = path.resolve(strict=True)
+    if artifact.stat().st_size != _ACCEPTED_ARTIFACT_SIZE_BYTES:
+        raise RuntimeError("retained native artifact size differs from the accepted tuple")
+    if _sha256(artifact) != _ACCEPTED_ARTIFACT_SHA256:
+        raise RuntimeError("retained native artifact hash differs from the accepted tuple")
+    return artifact
+
+
+def _load_authenticated_prebuilt_module(module_name: str) -> ModuleType:
+    """Import the exact retained extension without Torch cache/build activity."""
+
+    expected_name = f"sgsp_rscf_native_v4_{_ACCEPTED_BUILD_KEY_SHA256[:20]}"
+    if module_name != expected_name:
+        raise RuntimeError("prebuilt native module name differs from the accepted build identity")
+    artifact = _verify_prebuilt_artifact_bytes(
+        _retained_prebuilt_artifact_path(module_name)
+    )
+    existing = sys.modules.get(module_name)
+    if existing is not None:
+        existing_path = Path(str(getattr(existing, "__file__", ""))).resolve(strict=True)
+        if existing_path != artifact:
+            raise RuntimeError("native module name is already bound to a non-retained path")
+        return existing
+    spec = importlib.util.spec_from_file_location(module_name, artifact)
+    if spec is None or spec.loader is None:
+        raise RuntimeError("retained native artifact has no Python extension loader")
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[module_name] = module
+    try:
+        spec.loader.exec_module(module)
+    except BaseException:
+        sys.modules.pop(module_name, None)
+        raise
+    if Path(str(module.__file__)).resolve(strict=True) != artifact:
+        raise RuntimeError("retained native module loaded from a different path")
+    _verify_prebuilt_artifact_bytes(artifact)
+    return module
 
 
 def _expected_flags() -> tuple[str, ...]:
@@ -193,21 +256,14 @@ def load_native_host(expected_identity: NativeHostIdentity | None = None) -> Nat
     source_sha256 = _sha256(source)
     compiler_path = _ensure_compiler_environment()
     build_key, descriptor = _build_descriptor(source_sha256, compiler_path)
-    module_name = f"sgsp_rscf_native_v3_{build_key[:20]}"
+    if build_key != _ACCEPTED_BUILD_KEY_SHA256:
+        raise RuntimeError("current compiler/runtime binding differs from the accepted native build")
+    module_name = f"sgsp_rscf_native_v4_{build_key[:20]}"
     with _LOCK:
         module = _MODULES.get(build_key)
         identity = _IDENTITIES.get(build_key)
         if module is None:
-            _ensure_ninja_on_path()
-            flags = list(_expected_flags())
-            module = load(
-                name=module_name,
-                sources=[str(source)],
-                extra_cflags=flags,
-                with_cuda=False,
-                verbose=False,
-                is_python_module=True,
-            )
+            module = _load_authenticated_prebuilt_module(module_name)
             artifact, compiler_id, verified_flags = _verify_module(module, module_name)
             identity = NativeHostIdentity(
                 abi_version=ABI_VERSION,
@@ -239,6 +295,15 @@ def load_native_host(expected_identity: NativeHostIdentity | None = None) -> Nat
         return identity
 
 
+def require_cpp_batched_backend(*, build_root: str | Path | None = None) -> ModuleType:
+    """Return the authenticated full reset-to-terminal extension for the shared guard."""
+
+    if build_root is not None:
+        raise ValueError("the retained source-keyed SGSP host rejects build_root overrides")
+    identity = load_native_host()
+    return _MODULES[identity.build_key_sha256]
+
+
 def native_factual_trajectory(
     episode: FactualEpisodeBatch,
     parameters: ActorParameters,
@@ -259,13 +324,13 @@ def native_factual_trajectory(
     )
     width = episode.width
     required = {
-        "observations": (np.float64, (width, 12, 21, 22)),
-        "messages": (np.float64, (width, 12, 21, 32)),
-        "role_summaries": (np.float64, (width, 12, 21, 32)),
-        "denominators": (np.float64, (width, 12, 21)),
-        "incoming_hidden": (np.float64, (width, 12, 21, 64)),
-        "post_gru_hidden": (np.float64, (width, 12, 21, 64)),
-        "legal_probabilities": (np.float64, (width, 12, 21, 6)),
+        "observations": (np.float32, (width, 12, 21, 22)),
+        "messages": (np.float32, (width, 12, 21, 32)),
+        "role_summaries": (np.float32, (width, 12, 21, 32)),
+        "denominators": (np.float32, (width, 12, 21)),
+        "incoming_hidden": (np.float32, (width, 12, 21, 64)),
+        "post_gru_hidden": (np.float32, (width, 12, 21, 64)),
+        "legal_probabilities": (np.float32, (width, 12, 21, 6)),
         "factual_actions": (np.int64, (width, 12, 21)),
         "fifo_basin": (np.int64, (width, 12, 21, 4)),
         "fifo_ordinal": (np.int64, (width, 12, 21, 4)),
@@ -279,7 +344,7 @@ def native_factual_trajectory(
         "origin_slot": (np.int64, (width, 3)),
         "origin_agent": (np.int64, (width, 3)),
         "origin_snapshot_digest": (np.uint64, (width, 3)),
-        "terminal_return": (np.float64, (width,)),
+        "terminal_return": (np.float32, (width,)),
         "final_delivered": (np.int64, (width, 2)),
         "final_metrics": (np.int64, (width, 8)),
         "common_tape_digest": (np.uint64, (width,)),
@@ -293,7 +358,7 @@ def native_factual_trajectory(
         value = np.asarray(raw[name])
         if value.dtype != np.dtype(dtype) or value.shape != shape or not value.flags.c_contiguous:
             raise RuntimeError(f"native factual output {name} violates ABI")
-        if value.dtype == np.float64 and not np.isfinite(value).all():
+        if value.dtype == np.float32 and not np.isfinite(value).all():
             raise RuntimeError(f"native factual output {name} is nonfinite")
         value.setflags(write=False)
         outputs[name] = value
@@ -337,10 +402,10 @@ def native_shadow_trajectory(
     )
     width = episode.width
     required = {
-        "role_summaries": (np.float64, (width, 12, 21, 32)),
-        "denominators": (np.float64, (width, 12, 21)),
-        "post_gru_hidden": (np.float64, (width, 12, 21, 64)),
-        "legal_probabilities": (np.float64, (width, 12, 21, 6)),
+        "role_summaries": (np.float32, (width, 12, 21, 32)),
+        "denominators": (np.float32, (width, 12, 21)),
+        "post_gru_hidden": (np.float32, (width, 12, 21, 64)),
+        "legal_probabilities": (np.float32, (width, 12, 21, 6)),
         "snapshot_digest": (np.uint64, (width, 12)),
         "active": (np.bool_, (width,)),
     }
@@ -351,7 +416,7 @@ def native_shadow_trajectory(
         value = np.asarray(raw[name])
         if value.dtype != np.dtype(dtype) or value.shape != shape or not value.flags.c_contiguous:
             raise RuntimeError(f"native shadow output {name} violates ABI")
-        if value.dtype == np.float64 and not np.isfinite(value).all():
+        if value.dtype == np.float32 and not np.isfinite(value).all():
             raise RuntimeError(f"native shadow output {name} is nonfinite")
         value.setflags(write=False)
         outputs[name] = value
@@ -377,7 +442,7 @@ def native_full_suffix(
     module = _MODULES[loaded_identity.build_key_sha256]
     raw = module.run_suffix(batch.as_native_dict(), parameters.as_native_dict())
     required = {
-        "terminal_target": (np.float64, (batch.width,)),
+        "terminal_target": (np.float32, (batch.width,)),
         "final_delivered": (np.int64, (batch.width, 2)),
         "final_metrics": (np.int64, (batch.width, 8)),
         "counters": (np.int64, (batch.width, 4)),
@@ -394,7 +459,7 @@ def native_full_suffix(
         value = np.asarray(raw[name])
         if value.dtype != np.dtype(dtype) or value.shape != shape or not value.flags.c_contiguous:
             raise RuntimeError(f"native output {name} violates ABI")
-        if value.dtype == np.float64 and not np.isfinite(value).all():
+        if value.dtype == np.float32 and not np.isfinite(value).all():
             raise RuntimeError(f"native output {name} is nonfinite")
         value.setflags(write=False)
         outputs[name] = value

@@ -40,6 +40,17 @@ from .inference import (
     TRAINING_CELLS,
 )
 from .native_backend import NATIVE_ABI_VERSION, SUPPORTED_BATCH_WIDTHS
+from .process_workers import (
+    CANONICAL_DURABLE_CEILING,
+    CHECKPOINT_READ_CEILING,
+    CHECKPOINT_WRITE_CEILING,
+    CPU_HOURS_CEILING,
+    FOUR_PROCESS_WALL_HOURS_CEILING,
+    PRIVATE_SCRATCH_COMBINED_CEILING,
+    PROCESS_GROUP_RSS_CEILING,
+    make_process_resource_object,
+    validate_process_resource_object,
+)
 
 
 EMPIRICAL_OBJECT: Final[str] = "RCLE-TBCFV-R04-FULL-EMPIRICAL-PANEL"
@@ -47,13 +58,16 @@ SHARED_COMPONENT: Final[str] = "rcle.tbcfv.r04.full_host"
 SELECTED_BATCH_WIDTH: Final[int] = 8
 CM_OWNER: Final[str] = "/root/cm_rcle_cpc_r04"
 ACCEPTED_NATIVE_SOURCE_SHA256: Final[str] = (
+    "18d45b95a29c1ca8d17b4d192a9328ddc9c56a821a2690f118de44dbf0054819"
+)
+LEGACY_ACCEPTED_NATIVE_SOURCE_SHA256: Final[str] = (
     "ddb14c33d822924b21b872713745f242fee92f16b4329efed439a1e2b816a910"
 )
 ACCEPTED_NATIVE_BUILD_KEY: Final[str] = (
-    "8e80ba3cf3ba026c486d75d330aa9a99f820fe60803334dce7841032a48a5f91"
+    "d2501eb514977026c645a3c23a53d86626a5817a51ee859dbdfa9f07f3523e81"
 )
 ACCEPTED_NATIVE_ARTIFACT_SHA256: Final[str] = (
-    "023eecbc0a69710ee6a4fe06aa8e1b0b5165870bbcfc5a7ae2198e86372baf15"
+    "c4db07f1d5ffaf7bd61354edd74a2bf861e9c1a20a2eec96faa85dd1d9f56cfd"
 )
 
 PREACTIVITY_SCHEMA: Final[str] = "RCLE_TBCFV_R04_PREACTIVITY_CERTIFICATE_V1"
@@ -77,6 +91,7 @@ SOURCE_REPAIR_FAILED_TERMINAL_SCHEMA: Final[str] = (
 SOURCE_REPAIR_BOOTSTRAP_SCHEMA: Final[str] = (
     "RCLE_TBCFV_R04_SOURCE_REPAIR_BOOTSTRAP_V1"
 )
+MAX_SOURCE_REPAIR_REPLACEMENT_INDEX: Final[int] = 3
 SOURCE_REPAIR_REASON: Final[str] = "WINDOWS_ATOMIC_TEMP_BASENAME_PATH_LENGTH"
 SOURCE_REPAIR_SHARED_POLICY_REASON: Final[str] = (
     "SHARED_POLICY_ABI2_RECEIPT_ALIGNMENT"
@@ -91,6 +106,10 @@ SOURCE_REPAIR_SHARED_POLICY_NEW_SHA256: Final[str] = (
     "088fee8c6b2f1521df755a1255642de77fb6a1c104d3440e02cc3c0fcfcd8ef9"
 )
 SOURCE_REPAIR_SHARED_POLICY_NEW_BYTES: Final[int] = 23_618
+SOURCE_REPAIR_SHARED_POLICY_CURRENT_SHA256: Final[str] = (
+    "e71099351f40aa891f38ad57ba4d178d1ab42771d78cc4933d78c70fe72d3221"
+)
+SOURCE_REPAIR_SHARED_POLICY_CURRENT_BYTES: Final[int] = 25_935
 SOURCE_REPAIR_OPERATOR_TERMINAL_LOGICAL_PATH: Final[str] = (
     "temp/leases/RCLE_TBCFV_R04_OPERATOR_TERMINAL_20260821_01.json"
 )
@@ -122,10 +141,20 @@ SOURCE_REPAIR_OPERATOR_OUTPUT_PATH: Final[str] = (
 )
 SOURCE_REPAIR_ALLOWED_LOGICAL_PATHS: Final[tuple[str, ...]] = (
     "experiments/candidates/roster_consistent_latent_exploration_tbcfv/__main__.py",
+    "envs/native/production_backend.py",
     "experiments/candidates/roster_consistent_latent_exploration_tbcfv/empirical_artifacts.py",
     "experiments/candidates/roster_consistent_latent_exploration_tbcfv/empirical_contract.py",
     "experiments/candidates/roster_consistent_latent_exploration_tbcfv/empirical_runner.py",
+    "experiments/candidates/roster_consistent_latent_exploration_tbcfv/native/tbcfv_backend.cpp",
+    "experiments/candidates/roster_consistent_latent_exploration_tbcfv/native_backend.py",
+    "experiments/candidates/roster_consistent_latent_exploration_tbcfv/process_workers.py",
+    "runtime/benchmarks/rcle_tbcfv_r04_production_protocol_efficiency_20260822.json",
+    "tools/benchmarks/benchmark_rcle_tbcfv_r04_runner_chain.py",
 )
+PROCESS_WORKERS_LOGICAL_PATH: Final[str] = (
+    "experiments/candidates/roster_consistent_latent_exploration_tbcfv/process_workers.py"
+)
+SOURCE_ABSENT_SHA256: Final[str] = "0" * 64
 
 PANEL_COUNTS: Final[dict[str, int]] = {
     "run_blocks": 20,
@@ -153,7 +182,7 @@ _SAFE_LABEL = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,127}")
 _PERMIT_SEAL: Final[object] = object()
 _SOURCE_REPAIR_BOOTSTRAP_SEAL: Final[object] = object()
 
-PRODUCTION_SOURCE_LOGICAL_PATHS: Final[tuple[str, ...]] = (
+LEGACY_PRODUCTION_SOURCE_LOGICAL_PATHS: Final[tuple[str, ...]] = (
     "docs/project/CPP_BATCHED_ENVIRONMENT_PRODUCTION_POLICY_V1.md",
     "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TARGET_BOUND_COMMITMENT_FRAGMENTATION_VALUE_SCIENCE_CARD.md",
     "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_FULL_EMPIRICAL_PANEL_EM_HANDOFF_20260821.md",
@@ -176,6 +205,24 @@ PRODUCTION_SOURCE_LOGICAL_PATHS: Final[tuple[str, ...]] = (
     "runtime/benchmarks/rcle_tbcfv_r04_efficiency_20260821.json",
     "tools/benchmarks/benchmark_rcle_tbcfv_r04_native.py",
 )
+PROCESS_PRODUCTION_SOURCE_LOGICAL_PATHS: Final[tuple[str, ...]] = tuple(
+    sorted((*LEGACY_PRODUCTION_SOURCE_LOGICAL_PATHS, PROCESS_WORKERS_LOGICAL_PATH))
+)
+PRODUCTION_PROTOCOL_BENCHMARK_LOGICAL_PATH: Final[str] = (
+    "runtime/benchmarks/rcle_tbcfv_r04_production_protocol_efficiency_20260822.json"
+)
+PRODUCTION_PROTOCOL_BENCHMARK_SCRIPT_LOGICAL_PATH: Final[str] = (
+    "tools/benchmarks/benchmark_rcle_tbcfv_r04_runner_chain.py"
+)
+PRODUCTION_SOURCE_LOGICAL_PATHS: Final[tuple[str, ...]] = tuple(
+    sorted(
+        (
+            *PROCESS_PRODUCTION_SOURCE_LOGICAL_PATHS,
+            PRODUCTION_PROTOCOL_BENCHMARK_LOGICAL_PATH,
+            PRODUCTION_PROTOCOL_BENCHMARK_SCRIPT_LOGICAL_PATH,
+        )
+    )
+)
 BENCHMARK_EVIDENCE_LOGICAL_PATH: Final[str] = (
     "runtime/benchmarks/rcle_tbcfv_r04_efficiency_20260821.json"
 )
@@ -183,10 +230,14 @@ BENCHMARK_EVIDENCE_LOGICAL_PATH: Final[str] = (
 SYNTHETIC_TEST_IDENTITIES: Final[tuple[str, ...]] = (
     "SYNTHETIC-TEST-RCLE-TBCFV-R04-A",
     "SYNTHETIC-TEST-RCLE-TBCFV-R04-B",
+    "SYNTHETIC-TEST-RCLE-TBCFV-R04-C",
+    "SYNTHETIC-TEST-RCLE-TBCFV-R04-D",
 )
 _SYNTHETIC_TEST_KEYS: Final[dict[str, bytes]] = {
     SYNTHETIC_TEST_IDENTITIES[0]: b"RCLE-TBCFV-R04-SYNTHETIC-TEST-KEY-A-v1",
     SYNTHETIC_TEST_IDENTITIES[1]: b"RCLE-TBCFV-R04-SYNTHETIC-TEST-KEY-B-v1",
+    SYNTHETIC_TEST_IDENTITIES[2]: b"RCLE-TBCFV-R04-SYNTHETIC-TEST-KEY-C-v1",
+    SYNTHETIC_TEST_IDENTITIES[3]: b"RCLE-TBCFV-R04-SYNTHETIC-TEST-KEY-D-v1",
 }
 
 
@@ -454,7 +505,9 @@ def native_identity_from_observation(observation: Mapping[str, object]) -> dict[
     return validate_native_identity(sealed)
 
 
-def validate_native_identity(value: Mapping[str, object]) -> dict[str, object]:
+def validate_native_identity(
+    value: Mapping[str, object], *, require_current_acceptance: bool = True
+) -> dict[str, object]:
     required = {
         "component",
         "backend",
@@ -506,7 +559,7 @@ def validate_native_identity(value: Mapping[str, object]) -> dict[str, object]:
         raise EmpiricalContractError("native ABI binding differs")
     for key in ("source_sha256", "artifact_sha256", "build_key"):
         _require_sha256(mapping[key], f"native {key}")
-    if (
+    if require_current_acceptance and (
         mapping["source_sha256"] != ACCEPTED_NATIVE_SOURCE_SHA256
         or mapping["build_key"] != ACCEPTED_NATIVE_BUILD_KEY
         or mapping["artifact_sha256"] != ACCEPTED_NATIVE_ARTIFACT_SHA256
@@ -723,11 +776,15 @@ def validate_preactivity_certificate(
             archived_source = validate_source_identity(source)
             archived_files = archived_source["files"]
             assert isinstance(archived_files, Mapping)
-            if set(archived_files) != set(PRODUCTION_SOURCE_LOGICAL_PATHS):
+            if set(archived_files) not in (
+                set(LEGACY_PRODUCTION_SOURCE_LOGICAL_PATHS),
+                set(PROCESS_PRODUCTION_SOURCE_LOGICAL_PATHS),
+                set(PRODUCTION_SOURCE_LOGICAL_PATHS),
+            ):
                 raise EmpiricalContractError(
                     "production source logical-path inventory differs"
                 )
-    validate_native_identity(native)
+    validate_native_identity(native, require_current_acceptance=validate_live_sources)
     validate_coordinate_proposal(proposal)
     if mapping["frozen_inventories"] != {
         "learned_packages": list(LEARNED_PACKAGES),
@@ -858,7 +915,7 @@ def validate_benchmark_evidence_payload(
     component = _exact_mapping(
         benchmark["component_identity"], {"abi", "contract", "source_sha256"}, "benchmark component"
     )
-    if component["source_sha256"] != ACCEPTED_NATIVE_SOURCE_SHA256:
+    if component["source_sha256"] != LEGACY_ACCEPTED_NATIVE_SOURCE_SHA256:
         raise EmpiricalContractError("benchmark native source identity is stale")
     if component["abi"] != {
         "abi_version": 2,
@@ -1082,18 +1139,159 @@ def _load_bound_benchmark_evidence(
     assert isinstance(source, Mapping)
     files = source["files"]
     assert isinstance(files, Mapping)
-    row = files.get(BENCHMARK_EVIDENCE_LOGICAL_PATH)
+    row = files.get(PRODUCTION_PROTOCOL_BENCHMARK_LOGICAL_PATH)
     if not isinstance(row, Mapping):
-        raise EmpiricalContractError("benchmark evidence is absent from production source binding")
+        raise EmpiricalContractError("production protocol evidence is absent from source binding")
     expected_sha256 = _require_sha256(row.get("sha256"), "benchmark source row")
-    path = production_source_paths()[BENCHMARK_EVIDENCE_LOGICAL_PATH].resolve(strict=True)
+    path = production_source_paths()[PRODUCTION_PROTOCOL_BENCHMARK_LOGICAL_PATH].resolve(strict=True)
     payload = path.read_bytes()
-    evidence = validate_benchmark_evidence_payload(payload, expected_sha256=expected_sha256)
+    evidence = validate_production_protocol_evidence_payload(
+        payload, expected_sha256=expected_sha256
+    )
     if row.get("bytes") != len(payload):
         raise EmpiricalContractError("benchmark evidence byte count differs from source binding")
+    bound = evidence["source_binding"]
+    assert isinstance(bound, Mapping)
+    expected_bound_rows = {
+        "native_source_sha256": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/native/tbcfv_backend.cpp",
+        "empirical_runner_sha256": "experiments/candidates/roster_consistent_latent_exploration_tbcfv/empirical_runner.py",
+        "process_workers_sha256": PROCESS_WORKERS_LOGICAL_PATH,
+        "benchmark_sha256": PRODUCTION_PROTOCOL_BENCHMARK_SCRIPT_LOGICAL_PATH,
+    }
+    for evidence_key, logical_path in expected_bound_rows.items():
+        source_row = files.get(logical_path)
+        if not isinstance(source_row, Mapping) or bound[evidence_key] != source_row.get("sha256"):
+            raise EmpiricalContractError("production protocol evidence source bytes differ")
     return {
         **evidence,
         "source_set_sha256": source["source_set_sha256"],
+    }
+
+
+def validate_production_protocol_evidence_payload(
+    payload: bytes, *, expected_sha256: str
+) -> dict[str, object]:
+    """Validate the non-circular current-byte production-protocol evidence."""
+
+    actual_sha256 = hashlib.sha256(payload).hexdigest()
+    if actual_sha256 != _require_sha256(expected_sha256, "protocol evidence"):
+        raise EmpiricalContractError("production protocol evidence SHA-256 differs")
+    try:
+        value = json.loads(payload.decode("ascii"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise EmpiricalContractError("production protocol evidence is not ASCII JSON") from exc
+    required = {
+        "schema", "mode", "source_binding", "projection", "resources",
+        "equivalence", "failure_resume", "ceiling_checks",
+        "scientific_identity_materialized", "production_authority_used",
+        "result_value_exposed",
+    }
+    evidence = _exact_mapping(value, required, "production protocol evidence")
+    if canonical_json_bytes(evidence) != payload:
+        raise EmpiricalContractError("production protocol evidence is not canonical")
+    if (
+        evidence["schema"] != "RCLE_TBCFV_R04_PRODUCTION_PROTOCOL_EFFICIENCY_EVIDENCE_V1"
+        or evidence["mode"] != "FIXED_SYNTHETIC_RESULT_BLIND_PRODUCTION_PROTOCOL"
+        or evidence["scientific_identity_materialized"] is not False
+        or evidence["production_authority_used"] is not False
+        or evidence["result_value_exposed"] is not False
+    ):
+        raise EmpiricalContractError("production protocol evidence boundary differs")
+    source = _exact_mapping(
+        evidence["source_binding"],
+        {
+            "native_source_sha256", "native_build_key", "native_artifact_sha256",
+            "empirical_runner_sha256", "process_workers_sha256", "benchmark_sha256",
+        },
+        "production protocol source binding",
+    )
+    for key, item in source.items():
+        _require_sha256(item, f"protocol {key}")
+    if (
+        source["native_source_sha256"] != ACCEPTED_NATIVE_SOURCE_SHA256
+        or source["native_build_key"] != ACCEPTED_NATIVE_BUILD_KEY
+        or source["native_artifact_sha256"] != ACCEPTED_NATIVE_ARTIFACT_SHA256
+    ):
+        raise EmpiricalContractError("production protocol native identity differs")
+    projection = _exact_mapping(
+        evidence["projection"],
+        {
+            "complete_cpu_core_hours", "one_process_wall_hours",
+            "four_process_wall_hours", "checkpoint_read_bytes",
+            "checkpoint_write_bytes",
+        },
+        "production protocol projection",
+    )
+    cpu = _finite_nonnegative(projection["complete_cpu_core_hours"], "protocol CPU")
+    wall_one = _finite_nonnegative(projection["one_process_wall_hours"], "protocol one-process wall")
+    wall_four = _finite_nonnegative(projection["four_process_wall_hours"], "protocol four-process wall")
+    checkpoint_read = int(_finite_nonnegative(projection["checkpoint_read_bytes"], "protocol checkpoint read"))
+    checkpoint_write = int(_finite_nonnegative(projection["checkpoint_write_bytes"], "protocol checkpoint write"))
+    resources = _exact_mapping(
+        evidence["resources"],
+        {
+            "process_group_rss_bytes", "private_scratch_projected_bytes",
+            "canonical_durable_projected_bytes", "measured_io_read_bytes",
+            "measured_io_write_bytes",
+        },
+        "production protocol resources",
+    )
+    normalized_resources = {
+        key: int(_finite_nonnegative(item, f"protocol {key}"))
+        for key, item in resources.items()
+    }
+    if any(normalized_resources[key] != resources[key] for key in resources):
+        raise EmpiricalContractError("production protocol resource bytes are not integers")
+    equivalence = _exact_mapping(
+        evidence["equivalence"],
+        {
+            "widths_1_8_32_exact", "spawn_1_2_4_exact",
+            "normalized_block_tree_sha256", "parent_prevalidation_install_exact",
+            "closed_one_block_authorization_exact",
+        },
+        "production protocol equivalence",
+    )
+    if any(equivalence[key] is not True for key in equivalence if key != "normalized_block_tree_sha256"):
+        raise EmpiricalContractError("production protocol equivalence differs")
+    _require_sha256(equivalence["normalized_block_tree_sha256"], "protocol equivalence")
+    failure = _exact_mapping(
+        evidence["failure_resume"],
+        {
+            "injected_failure_observed", "packet_absent_after_failure",
+            "canonical_absent_after_failure", "same_payload_resumed",
+            "private_generation_preserved", "final_packet_exact",
+        },
+        "production protocol failure/resume",
+    )
+    if any(item is not True for item in failure.values()):
+        raise EmpiricalContractError("production protocol failure/resume differs")
+    checks = evidence["ceiling_checks"]
+    if not isinstance(checks, Mapping) or not checks or any(item is not True for item in checks.values()):
+        raise EmpiricalContractError("production protocol ceiling check failed")
+    if (
+        cpu > CPU_HOURS_CEILING
+        or wall_four > FOUR_PROCESS_WALL_HOURS_CEILING
+        or normalized_resources["process_group_rss_bytes"] > PROCESS_GROUP_RSS_CEILING
+        or normalized_resources["private_scratch_projected_bytes"] > PRIVATE_SCRATCH_COMBINED_CEILING
+        or normalized_resources["canonical_durable_projected_bytes"] > CANONICAL_DURABLE_CEILING
+        or checkpoint_read > CHECKPOINT_READ_CEILING
+        or checkpoint_write > CHECKPOINT_WRITE_CEILING
+    ):
+        raise EmpiricalContractError("production protocol evidence exceeds fixed ceiling")
+    return {
+        "logical_path": PRODUCTION_PROTOCOL_BENCHMARK_LOGICAL_PATH,
+        "sha256": actual_sha256,
+        "schema": evidence["schema"],
+        "native_source_sha256": source["native_source_sha256"],
+        "projected_cpu_core_hours": cpu,
+        "projected_wall_hours_one_worker": wall_one,
+        "projected_wall_hours_four_workers": wall_four,
+        "measured_basis": normalized_resources,
+        "checkpoint_read_bytes": checkpoint_read,
+        "checkpoint_write_bytes": checkpoint_write,
+        "equivalence": dict(equivalence),
+        "failure_resume": dict(failure),
+        "source_binding": dict(source),
     }
 
 
@@ -1120,23 +1318,38 @@ def resource_request_proposal(
     projected_wall_hours_one_worker = float(
         benchmark["projected_wall_hours_one_worker"]
     )
-    projected_wall_hours_four_workers_lower = float(
-        benchmark["projected_wall_hours_four_workers_lower"]
+    projected_wall_hours_four_workers = float(
+        benchmark["projected_wall_hours_four_workers"]
     )
-    if projected_cpu_core_hours > 30.0:
+    if projected_cpu_core_hours > CPU_HOURS_CEILING:
         raise EmpiricalContractError("benchmark CPU projection exceeds stage ceiling")
-    if int(measured["rss_per_worker_bytes"]) > 4 * 1024**3:
-        raise EmpiricalContractError("benchmark RSS exceeds per-worker stage ceiling")
-    if int(measured["durable_fixture_bytes_for_20_blocks"]) > 1024**3:
+    if int(measured["process_group_rss_bytes"]) > PROCESS_GROUP_RSS_CEILING:
+        raise EmpiricalContractError("benchmark process-group RSS exceeds stage ceiling")
+    if int(measured["canonical_durable_projected_bytes"]) > CANONICAL_DURABLE_CEILING:
         raise EmpiricalContractError("benchmark durable bytes exceed stage ceiling")
-    if int(measured["scratch_fixture_bytes_peak"]) > 12 * 1024**3:
+    if int(measured["private_scratch_projected_bytes"]) > PRIVATE_SCRATCH_COMBINED_CEILING:
         raise EmpiricalContractError("benchmark scratch bytes exceed stage ceiling")
+    private_scope = str(proposal["proposal_sha256"])[:12]
+    private_parent = result.parent / ".r04p" / private_scope
+    process_resource = validate_process_resource_object(
+        make_process_resource_object(
+            canonical_result_root=result,
+            private_scratch_roots=[
+                private_parent / f"worker_{index:02d}" for index in range(4)
+            ],
+            source_set_sha256=str(validated["source"]["source_set_sha256"]),  # type: ignore[index]
+            native_binding_sha256=str(native["native_identity_sha256"]),
+        )
+    )
+    process_paths = process_resource["paths"]
+    assert isinstance(process_paths, Mapping)
     paths = {
         "result_root": str(result),
         "frontier_root": str(result / "frontiers"),
         "run_identity_path": str(result / "RUN_IDENTITY.json"),
         "complete_manifest_path": str(result / "COMPLETE_MANIFEST.json"),
         "technical_acceptance_path": str(result / "CM_TECHNICAL_ACCEPTANCE.json"),
+        **{str(key): str(item) for key, item in process_paths.items()},
     }
     return {
         "schema": RESOURCE_REQUEST_SCHEMA,
@@ -1164,21 +1377,27 @@ def resource_request_proposal(
             "one_thread_per_worker": True,
             "max_independent_workers": 4,
             "projected_cpu_core_hours": projected_cpu_core_hours,
-            "cpu_core_hours_upper": 30.0,
+            "cpu_core_hours_upper": CPU_HOURS_CEILING,
             "projected_wall_hours_one_worker": projected_wall_hours_one_worker,
-            "projected_wall_hours_four_workers_lower": projected_wall_hours_four_workers_lower,
-            "measured_rss_bytes_per_worker": int(measured["rss_per_worker_bytes"]),
-            "measured_io_read_bytes": int(measured["measured_read_bytes"]),
-            "measured_io_write_bytes": int(measured["measured_write_bytes"]),
-            "measured_durable_fixture_bytes": int(
-                measured["durable_fixture_bytes_for_20_blocks"]
+            "projected_wall_hours_four_workers_lower": projected_wall_hours_four_workers,
+            "projected_wall_hours_four_workers": projected_wall_hours_four_workers,
+            "measured_process_group_rss_bytes": int(measured["process_group_rss_bytes"]),
+            "measured_io_read_bytes": int(measured["measured_io_read_bytes"]),
+            "measured_io_write_bytes": int(measured["measured_io_write_bytes"]),
+            "projected_canonical_durable_bytes": int(
+                measured["canonical_durable_projected_bytes"]
             ),
-            "measured_scratch_fixture_bytes_peak": int(
-                measured["scratch_fixture_bytes_peak"]
+            "projected_private_scratch_bytes": int(
+                measured["private_scratch_projected_bytes"]
             ),
-            "rss_gib_per_worker_upper": 4.0,
+            "projected_checkpoint_read_bytes": int(benchmark["checkpoint_read_bytes"]),
+            "projected_checkpoint_write_bytes": int(benchmark["checkpoint_write_bytes"]),
+            "process_group_rss_bytes_upper": PROCESS_GROUP_RSS_CEILING,
             "scratch_gib_upper": 12.0,
             "durable_artifacts_gib_upper": 1.0,
+            "checkpoint_read_bytes_upper": CHECKPOINT_READ_CEILING,
+            "checkpoint_write_bytes_upper": CHECKPOINT_WRITE_CEILING,
+            "process_resource": process_resource,
             "validity_hours": 24,
         },
         "counts": dict(PANEL_COUNTS),
@@ -1353,6 +1572,72 @@ def validate_archived_resource_request(
         if request.get(key) != expected:
             raise EmpiricalContractError(f"archived resource request differs: {key}")
     benchmark = request["benchmark_evidence"]
+    if (
+        isinstance(benchmark, Mapping)
+        and benchmark.get("logical_path") == PRODUCTION_PROTOCOL_BENCHMARK_LOGICAL_PATH
+    ):
+        expected_benchmark_keys = {
+            "logical_path", "sha256", "schema", "native_source_sha256",
+            "projected_cpu_core_hours", "projected_wall_hours_one_worker",
+            "projected_wall_hours_four_workers", "measured_basis",
+            "checkpoint_read_bytes", "checkpoint_write_bytes", "equivalence",
+            "failure_resume", "source_binding", "source_set_sha256",
+        }
+        if set(benchmark) != expected_benchmark_keys:
+            raise EmpiricalContractError("archived protocol evidence inventory differs")
+        if (
+            benchmark["source_set_sha256"] != cert["source"]["source_set_sha256"]  # type: ignore[index]
+            or benchmark["native_source_sha256"] != cert["native"]["source_sha256"]  # type: ignore[index]
+        ):
+            raise EmpiricalContractError("archived protocol/source binding differs")
+        resources = request["resources"]
+        measured = benchmark["measured_basis"]
+        if not isinstance(resources, Mapping) or not isinstance(measured, Mapping):
+            raise EmpiricalContractError("archived protocol resources are malformed")
+        process_resource_value = resources.get("process_resource")
+        if not isinstance(process_resource_value, Mapping):
+            raise EmpiricalContractError(
+                "archived protocol resource measurements differ: process resource is absent"
+            )
+        process_resource = validate_process_resource_object(process_resource_value)
+        expected_links = {
+            "projected_cpu_core_hours": benchmark["projected_cpu_core_hours"],
+            "projected_wall_hours_one_worker": benchmark["projected_wall_hours_one_worker"],
+            "projected_wall_hours_four_workers": benchmark["projected_wall_hours_four_workers"],
+            "projected_wall_hours_four_workers_lower": benchmark["projected_wall_hours_four_workers"],
+            "measured_process_group_rss_bytes": measured.get("process_group_rss_bytes"),
+            "measured_io_read_bytes": measured.get("measured_io_read_bytes"),
+            "measured_io_write_bytes": measured.get("measured_io_write_bytes"),
+            "projected_canonical_durable_bytes": measured.get("canonical_durable_projected_bytes"),
+            "projected_private_scratch_bytes": measured.get("private_scratch_projected_bytes"),
+            "projected_checkpoint_read_bytes": benchmark["checkpoint_read_bytes"],
+            "projected_checkpoint_write_bytes": benchmark["checkpoint_write_bytes"],
+        }
+        if any(resources.get(key) != item for key, item in expected_links.items()):
+            raise EmpiricalContractError("archived protocol resource measurements differ")
+        if (
+            process_resource["source_set_sha256"] != cert["source"]["source_set_sha256"]  # type: ignore[index]
+            or process_resource["native_binding_sha256"] != cert["native"]["native_identity_sha256"]  # type: ignore[index]
+        ):
+            raise EmpiricalContractError("archived process resource identity differs")
+        paths = request["paths"]
+        process_paths = process_resource["paths"]
+        if not isinstance(paths, Mapping) or not isinstance(process_paths, Mapping):
+            raise EmpiricalContractError("archived protocol path inventory differs")
+        standard_keys = {
+            "result_root", "frontier_root", "run_identity_path",
+            "complete_manifest_path", "technical_acceptance_path",
+        }
+        if set(paths) != standard_keys | set(process_paths) or any(
+            paths.get(key) != item for key, item in process_paths.items()
+        ):
+            raise EmpiricalContractError("archived protocol path inventory differs")
+        result_root = Path(str(paths["result_root"])).resolve()
+        try:
+            result_root.relative_to(Path(__file__).resolve().parents[3])
+        except ValueError as exc:
+            raise EmpiricalContractError("archived result root escapes repository") from exc
+        return dict(request)
     if not isinstance(benchmark, Mapping) or set(benchmark) != {
         "logical_path",
         "sha256",
@@ -1373,7 +1658,7 @@ def validate_archived_resource_request(
         benchmark["logical_path"] != BENCHMARK_EVIDENCE_LOGICAL_PATH
         or benchmark["sha256"] != benchmark_row["sha256"]
         or benchmark["source_set_sha256"] != cert["source"]["source_set_sha256"]  # type: ignore[index]
-        or benchmark["native_source_sha256"] != ACCEPTED_NATIVE_SOURCE_SHA256
+        or benchmark["native_source_sha256"] != cert["native"]["source_sha256"]  # type: ignore[index]
     ):
         raise EmpiricalContractError("archived benchmark/source binding differs")
     resources = request["resources"]
@@ -1776,26 +2061,293 @@ def validate_source_repair_failed_terminal(
 
 
 def _expected_source_repair_delta(
-    label: str, old_row: Mapping[str, object], new_row: Mapping[str, object]
+    label: str,
+    old_row: Mapping[str, object] | None,
+    new_row: Mapping[str, object] | None,
 ) -> dict[str, object]:
-    if label in SOURCE_REPAIR_ALLOWED_LOGICAL_PATHS:
+    if label in SOURCE_REPAIR_ALLOWED_LOGICAL_PATHS and old_row is None and new_row is not None:
         reason = SOURCE_REPAIR_REASON
+        old_sha256 = SOURCE_ABSENT_SHA256
+        new_sha256 = new_row["sha256"]
+    elif label in SOURCE_REPAIR_ALLOWED_LOGICAL_PATHS and old_row is not None and new_row is not None:
+        reason = SOURCE_REPAIR_REASON
+        old_sha256 = old_row["sha256"]
+        new_sha256 = new_row["sha256"]
     elif label == SOURCE_REPAIR_SHARED_POLICY_LOGICAL_PATH:
-        if (
-            old_row.get("sha256") != SOURCE_REPAIR_SHARED_POLICY_OLD_SHA256
-            or new_row.get("sha256") != SOURCE_REPAIR_SHARED_POLICY_NEW_SHA256
-            or new_row.get("bytes") != SOURCE_REPAIR_SHARED_POLICY_NEW_BYTES
-        ):
+        if old_row is None or new_row is None:
+            raise EmpiricalContractError("shared-policy repair row is absent")
+        first_repair = (
+            old_row.get("sha256") == SOURCE_REPAIR_SHARED_POLICY_OLD_SHA256
+            and new_row.get("sha256") == SOURCE_REPAIR_SHARED_POLICY_NEW_SHA256
+            and new_row.get("bytes") == SOURCE_REPAIR_SHARED_POLICY_NEW_BYTES
+        )
+        current_successor = (
+            old_row.get("sha256") == SOURCE_REPAIR_SHARED_POLICY_NEW_SHA256
+            and new_row.get("sha256") == SOURCE_REPAIR_SHARED_POLICY_CURRENT_SHA256
+            and new_row.get("bytes") == SOURCE_REPAIR_SHARED_POLICY_CURRENT_BYTES
+        )
+        if not (first_repair or current_successor):
             raise EmpiricalContractError("shared-policy repair identity differs")
-        reason = SOURCE_REPAIR_SHARED_POLICY_REASON
+        reason = (
+            SOURCE_REPAIR_SHARED_POLICY_REASON if first_repair else SOURCE_REPAIR_REASON
+        )
+        old_sha256 = old_row["sha256"]
+        new_sha256 = new_row["sha256"]
     else:
         raise EmpiricalContractError("source repair changes a protected science/runtime source")
     return {
         "logical_path": label,
-        "old_sha256": old_row["sha256"],
-        "new_sha256": new_row["sha256"],
+        "old_sha256": old_sha256,
+        "new_sha256": new_sha256,
         "reason": reason,
     }
+
+
+def _validate_index1_predecessor_transition(
+    value: Mapping[str, object],
+    *,
+    original_permit: RootLeasePermit,
+    old_certificate: Mapping[str, object],
+    old_binding: Mapping[str, object],
+    old_request: Mapping[str, object],
+    old_stage: Mapping[str, object],
+    synthetic_fixture: bool,
+    predecessor_original_certificate: Mapping[str, object] | None = None,
+    predecessor_original_binding: Mapping[str, object] | None = None,
+    predecessor_original_request: Mapping[str, object] | None = None,
+) -> tuple[dict[str, object], dict[str, object]]:
+    """Validate the exact immediately preceding index-1 or index-2 transition."""
+
+    required = {
+        "schema",
+        "fixture_only",
+        "non_scientific",
+        "reason",
+        "direction_id",
+        "science_revision",
+        "empirical_object",
+        "origin_lease_id",
+        "original",
+        "repaired",
+        "run_identity",
+        "failed_terminal",
+        "source_deltas",
+        "preserved",
+        "science_change",
+        "coordinate_materialization_authorized",
+        "partial_interpretation_permitted",
+        "repair_transition_sha256",
+    }
+    predecessor = _exact_mapping(value, required, "index-1 predecessor transition")
+    predecessor_body = {
+        key: item
+        for key, item in predecessor.items()
+        if key != "repair_transition_sha256"
+    }
+    predecessor_digest = predecessor["repair_transition_sha256"]
+    if (
+        predecessor_digest != document_sha256(predecessor_body)
+        or predecessor_digest != original_permit.repair_transition_sha256
+    ):
+        raise EmpiricalContractError("index-1 predecessor transition digest differs")
+    if (
+        predecessor["schema"] != SOURCE_REPAIR_TRANSITION_SCHEMA
+        or predecessor["fixture_only"] is not synthetic_fixture
+        or predecessor["non_scientific"] is not synthetic_fixture
+        or predecessor["reason"] != SOURCE_REPAIR_REASON
+        or predecessor["direction_id"] != DIRECTION_ID
+        or predecessor["science_revision"] != SCIENCE_REVISION
+        or predecessor["empirical_object"] != EMPIRICAL_OBJECT
+        or predecessor["origin_lease_id"] != original_permit.origin_lease_id
+        or predecessor["science_change"] is not False
+        or predecessor["coordinate_materialization_authorized"] is not False
+        or predecessor["partial_interpretation_permitted"] is not False
+    ):
+        raise EmpiricalContractError("index-1 predecessor transition authority differs")
+
+    original = _exact_mapping(
+        predecessor["original"],
+        {
+            "certificate_sha256",
+            "binding_sha256",
+            "request_sha256",
+            "source_set_sha256",
+            "stage_binding_sha256",
+            "lease_id",
+        },
+        "index-1 predecessor original locator",
+    )
+    expected_origin_lease = original_permit.predecessor_lease_id
+    lineage_original_cert: Mapping[str, object] | None = None
+    lineage_original_binding: Mapping[str, object] | None = None
+    lineage_original_request: Mapping[str, object] | None = None
+    lineage_original_stage: Mapping[str, object] | None = None
+    predecessor_original_values = (
+        predecessor_original_certificate,
+        predecessor_original_binding,
+        predecessor_original_request,
+    )
+    if any(value is not None for value in predecessor_original_values):
+        if any(value is None for value in predecessor_original_values):
+            raise EmpiricalContractError(
+                "predecessor original stage inventory is incomplete"
+            )
+        assert predecessor_original_certificate is not None
+        assert predecessor_original_binding is not None
+        assert predecessor_original_request is not None
+        lineage_original_cert = validate_archived_preactivity_certificate(
+            predecessor_original_certificate
+        )
+        lineage_original_binding = validate_archived_accepted_binding(
+            predecessor_original_binding, lineage_original_cert
+        )
+        lineage_original_request = validate_archived_resource_request(
+            predecessor_original_request, lineage_original_cert
+        )
+        lineage_original_stage = _stage_binding_from_validated(
+            lineage_original_cert,
+            lineage_original_binding,
+            lineage_original_request,
+        )
+    elif original_permit.replacement_index == 2:
+        raise EmpiricalContractError(
+            "index-2 predecessor requires its exact archived original stage"
+        )
+    if (
+        expected_origin_lease is None
+        or len(original_permit.lease_lineage) < 2
+        or expected_origin_lease != original_permit.lease_lineage[-2]
+        or original["lease_id"] != expected_origin_lease
+    ):
+        raise EmpiricalContractError("index-1 predecessor original lease locator differs")
+    for label in (
+        "certificate_sha256",
+        "binding_sha256",
+        "request_sha256",
+        "source_set_sha256",
+        "stage_binding_sha256",
+    ):
+        _require_sha256(original[label], f"index-1 predecessor original {label}")
+    if lineage_original_cert is not None:
+        assert lineage_original_binding is not None
+        assert lineage_original_request is not None
+        assert lineage_original_stage is not None
+        expected_original = {
+            "certificate_sha256": lineage_original_cert["certificate_sha256"],
+            "binding_sha256": lineage_original_binding["binding_sha256"],
+            "request_sha256": document_sha256(lineage_original_request),
+            "source_set_sha256": lineage_original_cert["source"]["source_set_sha256"],  # type: ignore[index]
+            "stage_binding_sha256": lineage_original_stage["stage_binding_sha256"],
+            "lease_id": expected_origin_lease,
+        }
+        if original != expected_original:
+            raise EmpiricalContractError("index-2 predecessor original stage differs")
+
+    repaired = _exact_mapping(
+        predecessor["repaired"],
+        {
+            "certificate_sha256",
+            "binding_sha256",
+            "request_sha256",
+            "source_set_sha256",
+            "stage_binding_sha256",
+        },
+        "index-1 predecessor repaired locator",
+    )
+    expected_repaired = {
+        "certificate_sha256": old_certificate["certificate_sha256"],
+        "binding_sha256": old_binding["binding_sha256"],
+        "request_sha256": document_sha256(old_request),
+        "source_set_sha256": old_certificate["source"]["source_set_sha256"],  # type: ignore[index]
+        "stage_binding_sha256": old_stage["stage_binding_sha256"],
+    }
+    if repaired != expected_repaired:
+        raise EmpiricalContractError("index-1 predecessor repaired locator differs")
+
+    run_record = predecessor["run_identity"]
+    failed_record = predecessor["failed_terminal"]
+    if not isinstance(run_record, Mapping) or not isinstance(failed_record, Mapping):
+        raise EmpiricalContractError("index-1 predecessor durable records are malformed")
+    for key in ("binding_sha256", "master_digest", "run_block_roots"):
+        if key not in run_record:
+            raise EmpiricalContractError("index-1 predecessor RUN_IDENTITY binding is incomplete")
+    _require_sha256(run_record["binding_sha256"], "index-1 predecessor coordinate")
+    _require_sha256(run_record["master_digest"], "index-1 predecessor master")
+    run_roots = run_record["run_block_roots"]
+    if not isinstance(run_roots, list):
+        raise EmpiricalContractError("index-1 predecessor root inventory is malformed")
+
+    preserved = _exact_mapping(
+        predecessor["preserved"],
+        {
+            "coordinate_binding_sha256",
+            "master_digest",
+            "run_block_roots",
+            "result_root",
+            "resource_ceiling",
+            "config_sha256",
+            "native_identity_sha256",
+            "analyzer_sha256",
+            "counts",
+        },
+        "index-1 predecessor preserved bindings",
+    )
+    preserved_certificate = lineage_original_cert or old_certificate
+    preserved_request = lineage_original_request or old_request
+    expected_preserved = {
+        "coordinate_binding_sha256": run_record["binding_sha256"],
+        "master_digest": run_record["master_digest"],
+        "run_block_roots": run_roots,
+        "result_root": preserved_request["paths"]["result_root"],  # type: ignore[index]
+        "resource_ceiling": preserved_request["resources"],
+        "config_sha256": preserved_certificate["config"]["config_sha256"],  # type: ignore[index]
+        "native_identity_sha256": preserved_certificate["native"]["native_identity_sha256"],  # type: ignore[index]
+        "analyzer_sha256": preserved_certificate["analyzer"]["analyzer_sha256"],  # type: ignore[index]
+        "counts": preserved_certificate["counts"],
+    }
+    if preserved != expected_preserved:
+        raise EmpiricalContractError("index-1 predecessor preserved binding differs")
+
+    deltas = predecessor["source_deltas"]
+    if not isinstance(deltas, list) or not deltas:
+        raise EmpiricalContractError("index-1 predecessor source delta inventory is empty")
+    labels: list[str] = []
+    for row in deltas:
+        delta = _exact_mapping(
+            row,
+            {"logical_path", "old_sha256", "new_sha256", "reason"},
+            "index-1 predecessor source delta",
+        )
+        label = delta["logical_path"]
+        if (
+            not isinstance(label, str)
+            or label not in PRODUCTION_SOURCE_LOGICAL_PATHS
+            or label in labels
+            or delta["old_sha256"] == delta["new_sha256"]
+            or delta["reason"]
+            not in {SOURCE_REPAIR_REASON, SOURCE_REPAIR_SHARED_POLICY_REASON}
+        ):
+            raise EmpiricalContractError("index-1 predecessor source delta differs")
+        _require_sha256(delta["old_sha256"], "index-1 predecessor old source")
+        _require_sha256(delta["new_sha256"], "index-1 predecessor new source")
+        labels.append(label)
+    if labels != [
+        label for label in PRODUCTION_SOURCE_LOGICAL_PATHS if label in labels
+    ]:
+        raise EmpiricalContractError("index-1 predecessor source delta ordering differs")
+    if lineage_original_cert is not None:
+        prior_files = lineage_original_cert["source"]["files"]  # type: ignore[index]
+        repaired_files = old_certificate["source"]["files"]  # type: ignore[index]
+        expected_deltas = [
+            _expected_source_repair_delta(
+                label, prior_files.get(label), repaired_files.get(label)
+            )
+            for label in PRODUCTION_SOURCE_LOGICAL_PATHS
+            if prior_files.get(label) != repaired_files.get(label)
+        ]
+        if list(deltas) != expected_deltas:
+            raise EmpiricalContractError("predecessor source delta binding differs")
+    return dict(run_record), dict(failed_record)
 
 
 def build_source_repair_transition(
@@ -1811,6 +2363,10 @@ def build_source_repair_transition(
     failed_terminal_path: str | Path,
     source_deltas: list[Mapping[str, object]],
     synthetic_fixture: bool = False,
+    predecessor_transition: Mapping[str, object] | None = None,
+    predecessor_original_certificate: Mapping[str, object] | None = None,
+    predecessor_original_binding: Mapping[str, object] | None = None,
+    predecessor_original_request: Mapping[str, object] | None = None,
     _bootstrap_failed_terminal: Mapping[str, object] | None = None,
     _bootstrap_seal: object | None = None,
 ) -> dict[str, object]:
@@ -1819,12 +2375,32 @@ def build_source_repair_transition(
     if (
         original_permit._seal is not _PERMIT_SEAL
         or original_permit.fixture_only is not synthetic_fixture
-        or original_permit.replacement_index != 0
-        or original_permit.origin_lease_id != original_permit.lease_id
-        or original_permit.predecessor_lease_id is not None
-        or original_permit.repair_transition_sha256 is not None
+        or original_permit.replacement_index not in (0, 1, 2)
+        or len(original_permit.lease_lineage) != original_permit.replacement_index + 1
+        or original_permit.lease_lineage[0] != original_permit.origin_lease_id
+        or original_permit.lease_lineage[-1] != original_permit.lease_id
+        or (
+            original_permit.replacement_index == 0
+            and (
+                original_permit.origin_lease_id != original_permit.lease_id
+                or original_permit.predecessor_lease_id is not None
+                or original_permit.repair_transition_sha256 is not None
+                or predecessor_transition is not None
+            )
+        )
+        or (
+            original_permit.replacement_index in (1, 2)
+            and (
+                original_permit.predecessor_lease_id
+                != original_permit.lease_lineage[-2]
+                or original_permit.repair_transition_sha256 is None
+                or predecessor_transition is None
+            )
+        )
     ):
-        raise EmpiricalContractError("source repair requires the exact original initial permit")
+        raise EmpiricalContractError(
+            "source repair requires an exact contiguous index-0, index-1, or index-2 predecessor"
+        )
     old_cert = validate_archived_preactivity_certificate(original_certificate)
     old_binding = validate_archived_accepted_binding(original_binding, old_cert)
     old_request = validate_archived_resource_request(original_request, old_cert)
@@ -1852,7 +2428,6 @@ def build_source_repair_transition(
         "science_revision",
         "coordinate_proposal",
         "config",
-        "native",
         "analyzer",
         "counts",
         "frozen_inventories",
@@ -1862,9 +2437,17 @@ def build_source_repair_transition(
             raise EmpiricalContractError(f"source repair changes frozen certificate field: {key}")
     if old_cert["empirical_object"] != new_cert["empirical_object"]:
         raise EmpiricalContractError("source repair changes empirical object")
+    old_native = dict(old_cert["native"])  # type: ignore[arg-type]
+    new_native = dict(new_cert["native"])  # type: ignore[arg-type]
     for key in (
-        "paths",
-        "resources",
+        "source_sha256", "artifact_sha256", "build_key", "runtime_abi",
+        "toolchain", "native_identity_sha256",
+    ):
+        old_native.pop(key, None)
+        new_native.pop(key, None)
+    if old_native != new_native:
+        raise EmpiricalContractError("source repair changes native ABI semantics")
+    for key in (
         "counts",
         "component",
         "abi_version",
@@ -1877,18 +2460,99 @@ def build_source_repair_transition(
     ):
         if old_request[key] != new_request[key]:
             raise EmpiricalContractError(f"source repair changes request field: {key}")
+    standard_paths = {
+        "result_root", "frontier_root", "run_identity_path",
+        "complete_manifest_path", "technical_acceptance_path",
+    }
+    old_paths = old_request["paths"]
+    new_paths = new_request["paths"]
+    if not isinstance(old_paths, Mapping) or not isinstance(new_paths, Mapping) or any(
+        old_paths.get(key) != new_paths.get(key) for key in standard_paths
+    ):
+        raise EmpiricalContractError("source repair changes request field: paths")
+    old_resources = dict(old_request["resources"])
+    new_resources = dict(new_request["resources"])
+    old_process_value = old_resources.pop("process_resource", None)
+    new_process_value = new_resources.pop("process_resource", None)
+    resource_invariants = {
+        "cpu_only": True,
+        "gpu_count": 0,
+        "one_thread_per_worker": True,
+        "max_independent_workers": 4,
+        "scratch_gib_upper": 12.0,
+        "durable_artifacts_gib_upper": 1.0,
+        "validity_hours": 24,
+    }
+    if any(
+        old_resources.get(key) != expected or new_resources.get(key) != expected
+        for key, expected in resource_invariants.items()
+    ):
+        raise EmpiricalContractError("source repair changes fixed resource ceiling")
+    if new_process_value is None:
+        if old_process_value is not None or old_resources != new_resources:
+            raise EmpiricalContractError("source repair removes or changes process resources")
+        if set(old_paths) != standard_paths or set(new_paths) != standard_paths:
+            raise EmpiricalContractError("source repair legacy path inventory differs")
+        new_process = None
+    else:
+        new_process = validate_process_resource_object(new_process_value)
+        if (
+            float(old_resources.get("cpu_core_hours_upper", CPU_HOURS_CEILING))
+            > CPU_HOURS_CEILING
+            or new_resources.get("cpu_core_hours_upper") != CPU_HOURS_CEILING
+            or new_resources.get("process_group_rss_bytes_upper")
+            != PROCESS_GROUP_RSS_CEILING
+            or new_resources.get("checkpoint_read_bytes_upper") != CHECKPOINT_READ_CEILING
+            or new_resources.get("checkpoint_write_bytes_upper") != CHECKPOINT_WRITE_CEILING
+        ):
+            raise EmpiricalContractError("source repair current resource ceiling differs")
+        new_process_paths = new_process["paths"]
+        assert isinstance(new_process_paths, Mapping)
+        if set(new_paths) != standard_paths | set(new_process_paths) or any(
+            new_paths.get(key) != item for key, item in new_process_paths.items()
+        ):
+            raise EmpiricalContractError("source repair current private-root paths differ")
+    if old_process_value is not None and new_process is not None:
+        if old_resources != new_resources:
+            raise EmpiricalContractError("source repair changes request field: resources")
+        old_process = validate_process_resource_object(old_process_value)
+        for key in set(old_process) - {
+            "source_set_sha256", "native_binding_sha256", "resource_sha256"
+        }:
+            if old_process[key] != new_process[key]:
+                raise EmpiricalContractError("source repair changes process resource topology")
+    elif old_process_value is None and set(old_paths) != standard_paths:
+        raise EmpiricalContractError("source repair predecessor path inventory differs")
+    if new_process is not None and (
+        new_process["source_set_sha256"] != new_cert["source"]["source_set_sha256"]  # type: ignore[index]
+        or new_process["native_binding_sha256"] != new_cert["native"]["native_identity_sha256"]  # type: ignore[index]
+    ):
+        raise EmpiricalContractError("source repair process resource identity differs")
+    if old_process_value is not None and (
+        old_process["source_set_sha256"] != old_cert["source"]["source_set_sha256"]  # type: ignore[index]
+        or old_process["native_binding_sha256"] != old_cert["native"]["native_identity_sha256"]  # type: ignore[index]
+    ):
+        raise EmpiricalContractError("source repair predecessor process resource differs")
     old_benchmark = dict(old_request["benchmark_evidence"])  # type: ignore[arg-type]
     new_benchmark = dict(new_request["benchmark_evidence"])  # type: ignore[arg-type]
     old_benchmark.pop("source_set_sha256", None)
     new_benchmark.pop("source_set_sha256", None)
-    if old_benchmark != new_benchmark:
-        raise EmpiricalContractError("source repair changes benchmark evidence")
+    if old_benchmark.get("logical_path") == new_benchmark.get("logical_path"):
+        if old_benchmark != new_benchmark:
+            raise EmpiricalContractError("source repair changes same-revision benchmark evidence")
+    elif (
+        old_benchmark.get("logical_path") != BENCHMARK_EVIDENCE_LOGICAL_PATH
+        or new_benchmark.get("logical_path") != PRODUCTION_PROTOCOL_BENCHMARK_LOGICAL_PATH
+    ):
+        raise EmpiricalContractError("source repair benchmark successor is not exact")
 
     old_files = old_cert["source"]["files"]  # type: ignore[index]
     new_files = new_cert["source"]["files"]  # type: ignore[index]
     assert isinstance(old_files, Mapping) and isinstance(new_files, Mapping)
     actual_changed = tuple(
-        label for label in PRODUCTION_SOURCE_LOGICAL_PATHS if old_files[label] != new_files[label]
+        label
+        for label in PRODUCTION_SOURCE_LOGICAL_PATHS
+        if old_files.get(label) != new_files.get(label)
     )
     if not actual_changed:
         raise EmpiricalContractError("source repair contains no source delta")
@@ -1898,11 +2562,13 @@ def build_source_repair_transition(
             row, {"logical_path", "old_sha256", "new_sha256", "reason"}, "source delta"
         )
         label = mapping["logical_path"]
-        if not isinstance(label, str) or label not in old_files or label not in new_files:
+        if not isinstance(label, str) or label not in new_files:
             raise EmpiricalContractError("source delta logical path is not repair-authorized")
-        old_row = old_files[label]
+        old_row = old_files.get(label)
         new_row = new_files[label]
-        assert isinstance(old_row, Mapping) and isinstance(new_row, Mapping)
+        if old_row is not None and not isinstance(old_row, Mapping):
+            raise EmpiricalContractError("old source delta row is malformed")
+        assert isinstance(new_row, Mapping)
         expected = _expected_source_repair_delta(label, old_row, new_row)
         if dict(mapping) != expected or expected["old_sha256"] == expected["new_sha256"]:
             raise EmpiricalContractError("source delta hash/reason differs")
@@ -1910,17 +2576,68 @@ def build_source_repair_transition(
     if tuple(row["logical_path"] for row in normalized_deltas) != actual_changed:
         raise EmpiricalContractError("enumerated source delta is incomplete or out of order")
 
-    run_identity = validate_frozen_run_identity(
-        run_identity_path, original_permit, synthetic_fixture=synthetic_fixture
-    )
-    if _bootstrap_failed_terminal is None:
+    if original_permit.replacement_index in (1, 2):
+        assert predecessor_transition is not None
+        run_record, failed_record = _validate_index1_predecessor_transition(
+            predecessor_transition,
+            original_permit=original_permit,
+            old_certificate=old_cert,
+            old_binding=old_binding,
+            old_request=old_request,
+            old_stage=old_stage,
+            synthetic_fixture=synthetic_fixture,
+            predecessor_original_certificate=predecessor_original_certificate,
+            predecessor_original_binding=predecessor_original_binding,
+            predecessor_original_request=predecessor_original_request,
+        )
+        predecessor_original = predecessor_transition["original"]
+        assert isinstance(predecessor_original, Mapping)
+        origin_identity_permit = RootLeasePermit(
+            lease_id=original_permit.origin_lease_id,
+            origin_lease_id=original_permit.origin_lease_id,
+            predecessor_lease_id=None,
+            replacement_index=0,
+            lease_lineage=(original_permit.origin_lease_id,),
+            stage_binding_sha256=str(run_record["stage_binding_sha256"]),
+            accepted_binding_sha256=str(predecessor_original["binding_sha256"]),
+            preactivity_certificate_sha256=str(predecessor_original["certificate_sha256"]),
+            coordinate_proposal_sha256=original_permit.coordinate_proposal_sha256,
+            issued_at=original_permit.issued_at,
+            expires_at=original_permit.expires_at,
+            paths=original_permit.paths,
+            resources=original_permit.resources,
+            fixture_only=synthetic_fixture,
+            repair_transition_sha256=None,
+            archived_only=True,
+            _seal=_PERMIT_SEAL,
+        )
+        run_identity = validate_frozen_run_identity(
+            run_identity_path,
+            origin_identity_permit,
+            synthetic_fixture=synthetic_fixture,
+        )
+        failed_value, failed_file_sha256 = _read_canonical_artifact(
+            failed_terminal_path, "index-1 frozen FAILED_TERMINAL"
+        )
+        failed_terminal = {
+            **failed_value,
+            "file_sha256": failed_file_sha256,
+            "path": str(Path(failed_terminal_path).resolve()),
+        }
+        if run_identity != run_record or failed_terminal != failed_record:
+            raise EmpiricalContractError("index-1 predecessor durable artifact differs")
+    else:
+        run_identity = validate_frozen_run_identity(
+            run_identity_path, original_permit, synthetic_fixture=synthetic_fixture
+        )
+    if original_permit.replacement_index == 0 and _bootstrap_failed_terminal is None:
         failed_terminal = validate_source_repair_failed_terminal(
             failed_terminal_path,
             run_identity,
             original_permit,
             synthetic_fixture=synthetic_fixture,
         )
-    else:
+    elif original_permit.replacement_index == 0:
         if _bootstrap_seal is not _SOURCE_REPAIR_BOOTSTRAP_SEAL:
             raise EmpiricalContractError("source repair bootstrap record is unsealed")
         target = Path(failed_terminal_path).resolve()
@@ -2128,22 +2845,24 @@ def _validate_archived_repair_bridge(
         label = delta["logical_path"]
         if (
             not isinstance(label, str)
-            or label not in old_files
             or (
                 label not in SOURCE_REPAIR_ALLOWED_LOGICAL_PATHS
                 and label != SOURCE_REPAIR_SHARED_POLICY_LOGICAL_PATH
             )
         ):
             raise LeaseError("archived source repair delta path differs")
-        old_row = old_files[label]
-        assert isinstance(old_row, Mapping)
+        old_row = old_files.get(label)
+        added_source = label in SOURCE_REPAIR_ALLOWED_LOGICAL_PATHS and old_row is None
+        if old_row is not None and not isinstance(old_row, Mapping):
+            raise LeaseError("archived source repair old row is malformed")
         expected_reason = (
             SOURCE_REPAIR_SHARED_POLICY_REASON
             if label == SOURCE_REPAIR_SHARED_POLICY_LOGICAL_PATH
             else SOURCE_REPAIR_REASON
         )
         if (
-            delta["old_sha256"] != old_row["sha256"]
+            delta["old_sha256"]
+            != (SOURCE_ABSENT_SHA256 if added_source else old_row["sha256"])
             or delta["new_sha256"] == delta["old_sha256"]
             or delta["reason"] != expected_reason
             or (
@@ -2609,6 +3328,13 @@ def validate_root_lease(
         or replacement_index < 0
     ):
         raise LeaseError("Root lease replacement index is malformed")
+    if replacement_index > MAX_SOURCE_REPAIR_REPLACEMENT_INDEX:
+        if (
+            predecessor_permit is not None
+            and predecessor_permit.repair_transition_sha256 is not None
+        ):
+            raise LeaseError("repair lineage cannot bypass the exact index-3 cap")
+        raise LeaseError("Root lease replacement index exceeds the exact index-3 cap")
     stage_binding_sha256 = _require_sha256(
         lease["stage_binding_sha256"], "Root stage binding"
     )
@@ -2723,7 +3449,7 @@ def validate_root_lease(
     )
 
 
-def validate_source_repair_replacement_lease(
+def _validate_source_repair_replacement_lease(
     value: Mapping[str, object],
     *,
     repair_transition: Mapping[str, object],
@@ -2733,17 +3459,32 @@ def validate_source_repair_replacement_lease(
     repaired_request: Mapping[str, object],
     now: datetime,
     synthetic_fixture: bool = False,
+    archived_stage: bool = False,
 ) -> RootLeasePermit:
-    """Validate the sole index-1 lease that crosses an accepted source repair."""
+    """Validate one exact contiguous source-repair lease, capped at index 3."""
 
     if (
         original_permit._seal is not _PERMIT_SEAL
         or original_permit.fixture_only is not synthetic_fixture
-        or original_permit.replacement_index != 0
-        or original_permit.origin_lease_id != original_permit.lease_id
-        or original_permit.repair_transition_sha256 is not None
+        or original_permit.replacement_index not in (0, 1, 2)
+        or len(original_permit.lease_lineage) != original_permit.replacement_index + 1
+        or original_permit.lease_lineage[0] != original_permit.origin_lease_id
+        or original_permit.lease_lineage[-1] != original_permit.lease_id
+        or (
+            original_permit.replacement_index == 0
+            and (
+                original_permit.origin_lease_id != original_permit.lease_id
+                or original_permit.repair_transition_sha256 is not None
+            )
+        )
+        or (
+            original_permit.replacement_index in (1, 2)
+            and original_permit.repair_transition_sha256 is None
+        )
     ):
-        raise LeaseError("source repair predecessor is not the original initial permit")
+        raise LeaseError("source repair predecessor lineage is not exact")
+    if original_permit.replacement_index + 1 > MAX_SOURCE_REPAIR_REPLACEMENT_INDEX:
+        raise LeaseError("source repair replacement index exceeds the exact index-3 cap")
     transition = dict(repair_transition)
     if set(transition) != {
         "schema",
@@ -2795,19 +3536,24 @@ def validate_source_repair_replacement_lease(
     ):
         raise LeaseError("source repair transition predecessor binding differs")
 
-    cert = validate_preactivity_certificate(
-        repaired_certificate, validate_live_sources=not synthetic_fixture
-    )
-    binding = validate_accepted_binding(
-        repaired_binding,
-        cert,
-        validate_live_sources=not synthetic_fixture,
-    )
-    request = (
-        validate_archived_resource_request(repaired_request, cert)
-        if synthetic_fixture
-        else _validated_resource_request(cert, repaired_request)
-    )
+    if archived_stage:
+        cert = validate_archived_preactivity_certificate(repaired_certificate)
+        binding = validate_archived_accepted_binding(repaired_binding, cert)
+        request = validate_archived_resource_request(repaired_request, cert)
+    else:
+        cert = validate_preactivity_certificate(
+            repaired_certificate, validate_live_sources=not synthetic_fixture
+        )
+        binding = validate_accepted_binding(
+            repaired_binding,
+            cert,
+            validate_live_sources=not synthetic_fixture,
+        )
+        request = (
+            validate_archived_resource_request(repaired_request, cert)
+            if synthetic_fixture
+            else _validated_resource_request(cert, repaired_request)
+        )
     stage = _stage_binding_from_validated(cert, binding, request)
     if (
         repaired.get("certificate_sha256") != cert["certificate_sha256"]
@@ -2865,7 +3611,7 @@ def validate_source_repair_replacement_lease(
         "fixture_only": synthetic_fixture,
         "origin_lease_id": original_permit.origin_lease_id,
         "predecessor_lease_id": original_permit.lease_id,
-        "replacement_index": 1,
+        "replacement_index": original_permit.replacement_index + 1,
         "stage_binding_sha256": stage["stage_binding_sha256"],
         "repair_transition_sha256": transition["repair_transition_sha256"],
         "activity_authorized": not synthetic_fixture,
@@ -2912,8 +3658,8 @@ def validate_source_repair_replacement_lease(
         lease_id=lease_id,
         origin_lease_id=original_permit.origin_lease_id,
         predecessor_lease_id=original_permit.lease_id,
-        replacement_index=1,
-        lease_lineage=(original_permit.lease_id, lease_id),
+        replacement_index=original_permit.replacement_index + 1,
+        lease_lineage=(*original_permit.lease_lineage, lease_id),
         stage_binding_sha256=str(stage["stage_binding_sha256"]),
         accepted_binding_sha256=str(binding["binding_sha256"]),
         preactivity_certificate_sha256=str(cert["certificate_sha256"]),
@@ -2924,8 +3670,65 @@ def validate_source_repair_replacement_lease(
         resources=dict(request["resources"]),  # type: ignore[arg-type]
         fixture_only=synthetic_fixture,
         repair_transition_sha256=str(transition["repair_transition_sha256"]),
+        archived_only=archived_stage,
         _seal=_PERMIT_SEAL,
     )
+
+
+def validate_source_repair_replacement_lease(
+    value: Mapping[str, object],
+    *,
+    repair_transition: Mapping[str, object],
+    original_permit: RootLeasePermit,
+    repaired_certificate: Mapping[str, object],
+    repaired_binding: Mapping[str, object],
+    repaired_request: Mapping[str, object],
+    now: datetime,
+    synthetic_fixture: bool = False,
+) -> RootLeasePermit:
+    """Validate one active exact contiguous source-repair lease."""
+
+    return _validate_source_repair_replacement_lease(
+        value,
+        repair_transition=repair_transition,
+        original_permit=original_permit,
+        repaired_certificate=repaired_certificate,
+        repaired_binding=repaired_binding,
+        repaired_request=repaired_request,
+        now=now,
+        synthetic_fixture=synthetic_fixture,
+        archived_stage=False,
+    )
+
+
+def validate_archived_source_repair_replacement_lease(
+    value: Mapping[str, object],
+    *,
+    repair_transition: Mapping[str, object],
+    original_permit: RootLeasePermit,
+    repaired_certificate: Mapping[str, object],
+    repaired_binding: Mapping[str, object],
+    repaired_request: Mapping[str, object],
+    synthetic_fixture: bool = False,
+) -> RootLeasePermit:
+    """Reconstruct a validated replacement lease without runtime authority."""
+
+    try:
+        issued_at = value["issued_at"]
+    except (KeyError, TypeError) as exc:
+        raise LeaseError("archived source repair lease issued_at is absent") from exc
+    permit = _validate_source_repair_replacement_lease(
+        value,
+        repair_transition=repair_transition,
+        original_permit=original_permit,
+        repaired_certificate=repaired_certificate,
+        repaired_binding=repaired_binding,
+        repaired_request=repaired_request,
+        now=_parse_aware_datetime(issued_at, "issued_at"),
+        synthetic_fixture=synthetic_fixture,
+        archived_stage=True,
+    )
+    return permit
 
 
 def _derive_block_digest(key: bytes, identity: str, block_index: int) -> str:
@@ -3048,6 +3851,7 @@ __all__ = [
     "EmpiricalContractError",
     "LeaseError",
     "MATERIALIZED_BINDING_SCHEMA",
+    "MAX_SOURCE_REPAIR_REPLACEMENT_INDEX",
     "PANEL_COUNTS",
     "PREACTIVITY_SCHEMA",
     "PRODUCTION_SOURCE_LOGICAL_PATHS",
@@ -3094,6 +3898,7 @@ __all__ = [
     "validate_archived_initial_lease_for_source_repair",
     "validate_archived_preactivity_certificate",
     "validate_archived_resource_request",
+    "validate_archived_source_repair_replacement_lease",
     "validate_benchmark_evidence_payload",
     "validate_coordinate_proposal",
     "validate_native_identity",
