@@ -280,10 +280,13 @@ def test_bundled_disablement_root_only_dispatch_and_legacy_cleanup() -> None:
     for bundled in ("scout", "reviewer", "sonic", "designer", "security-reviewer"):
         assert re.search(rf"^    - {re.escape(bundled)}$", config, re.MULTILINE)
 
+    # This is an OMP configuration cleanup contract.  Codex-facing adapters
+    # may legitimately use the same logical role names (for example the
+    # Dashboard's top-level Portfolio task), so do not treat ordinary source
+    # code as an OMP agent definition.
     active_paths = [
         path
-        for root in (REPO_ROOT / ".omp", REPO_ROOT / "scripts")
-        for path in root.rglob("*")
+        for path in (REPO_ROOT / ".omp").rglob("*")
         if path.is_file()
         and path.suffix.lower() in {".json", ".md", ".py", ".yaml", ".yml"}
     ]
@@ -418,7 +421,7 @@ def test_agentify_uses_windows_node_and_visible_windows_chrome_runtime() -> None
     config = json.loads((REPO_ROOT / ".omp" / "mcp.json").read_text(encoding="utf-8"))
     server = config["mcpServers"]["agentify-desktop"]
     assert server["type"] == "stdio"
-    assert server["command"] == "/mnt/c/Program Files/nodejs/node.exe"
+    assert server["command"] == "node"
     assert server["args"] == [
         r"C:\Projects\agentify-desktop\bin\agentify-desktop.mjs",
         "mcp",

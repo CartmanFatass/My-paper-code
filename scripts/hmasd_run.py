@@ -9,9 +9,9 @@ child's exact exit status.
 from __future__ import annotations
 
 import argparse
+import ctypes
 import datetime as _datetime
 import errno
-import fcntl
 import hashlib
 import json
 import math
@@ -28,10 +28,15 @@ from contextlib import contextmanager, nullcontext
 from pathlib import Path
 from typing import Any, Iterator, Mapping, Sequence
 
+if os.name == "nt":
+    from ctypes import wintypes
+
 try:
     from scripts import hmasd_resource_preflight as resource_preflight
-except ModuleNotFoundError:
+    from scripts import hmasd_platform
+except ImportError:
     import hmasd_resource_preflight as resource_preflight
+    import hmasd_platform
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE_SCRIPT = ROOT / "scripts" / "hmasd_state.py"
@@ -55,6 +60,104 @@ IDENTITY_GONE = "GONE"
 IDENTITY_REUSED = "REUSED"
 IDENTITY_UNRECORDED = "UNRECORDED"
 
+# OMP manifests were historically produced in a Linux/WSL checkout.  A
+# native Windows runner must never reinterpret those paths as a directory on
+# the current drive: doing so turns a useful refusal into a misleading
+# CreateProcess ``file not found`` error.  These prefixes cover the Linux
+# roots used by the project while leaving native drive and UNC paths intact.
+_WINDOWS_WSL_PATH_PREFIXES = (
+    "/home/",
+    "/mnt/",
+    "/opt/",
+    "/proc/",
+    "/tmp/",
+    "/usr/",
+    "/var/",
+    "/workspace/",
+    "/workspaces/",
+)
+
+
+def _looks_like_wsl_absolute(value: str) -> bool:
+    if not value:
+        return False
+    normalized = value.replace("\\", "/")
+    return normalized == "/" or normalized.startswith(_WINDOWS_WSL_PATH_PREFIXES)
+
+
+def _validate_native_command(command: Sequence[str]) -> None:
+    """Reject Linux/WSL command forms before changing run state on Windows."""
+
+    if os.name != "nt" or not command:
+        return
+    first = command[0]
+    first_name = Path(first.replace("\\", "/")).name.casefold()
+    if re.fullmatch(r"python3(?:\.\d+)?(?:\.exe)?", first_name):
+        raise RunInputError(
+            "native Windows runs must invoke Python with sys.executable; "
+            "the WSL-only python3 command is not an executable here"
+        )
+    if _looks_like_wsl_absolute(first):
+        raise RunInputError(
+            f"command uses a WSL/POSIX executable path ({first!r}); "
+            "use a native Windows drive or UNC path"
+        )
+    if first.casefold().endswith(".py"):
+        raise RunInputError(
+            "native Windows cannot execute a .py file directly; invoke it "
+            "through sys.executable"
+        )
+    for value in command[1:]:
+        # Catch both a standalone path argument and common --option=/path
+        # forms, without rejecting ordinary switches such as /? or /verbose.
+        candidate = value.split("=", 1)[-1] if "=" in value else value
+        if _looks_like_wsl_absolute(candidate):
+            raise RunInputError(
+                f"command argument uses a WSL/POSIX path ({value!r}); "
+                "use a native Windows drive or UNC path"
+            )
+
+
+if os.name == "nt":
+
+    def _windows_kernel32() -> Any:
+        kernel32 = ctypes.windll.kernel32
+        kernel32.OpenProcess.argtypes = [
+            wintypes.DWORD,
+            wintypes.BOOL,
+            wintypes.DWORD,
+        ]
+        kernel32.OpenProcess.restype = wintypes.HANDLE
+        kernel32.CloseHandle.argtypes = [wintypes.HANDLE]
+        kernel32.CloseHandle.restype = wintypes.BOOL
+        kernel32.GetProcessTimes.argtypes = [
+            wintypes.HANDLE,
+            ctypes.POINTER(wintypes.FILETIME),
+            ctypes.POINTER(wintypes.FILETIME),
+            ctypes.POINTER(wintypes.FILETIME),
+            ctypes.POINTER(wintypes.FILETIME),
+        ]
+        kernel32.GetProcessTimes.restype = wintypes.BOOL
+        kernel32.TerminateProcess.argtypes = [wintypes.HANDLE, wintypes.UINT]
+        kernel32.TerminateProcess.restype = wintypes.BOOL
+        kernel32.CreateToolhelp32Snapshot.argtypes = [wintypes.DWORD, wintypes.DWORD]
+        kernel32.CreateToolhelp32Snapshot.restype = wintypes.HANDLE
+        return kernel32
+
+
+    def _windows_ntdll() -> Any:
+        ntdll = ctypes.windll.ntdll
+        ntdll.NtQuerySystemInformation.argtypes = [
+            wintypes.ULONG,
+            wintypes.LPVOID,
+            wintypes.ULONG,
+            ctypes.POINTER(wintypes.ULONG),
+        ]
+        ntdll.NtQuerySystemInformation.restype = wintypes.LONG
+        ntdll.NtResumeProcess.argtypes = [wintypes.HANDLE]
+        ntdll.NtResumeProcess.restype = wintypes.LONG
+        return ntdll
+
 
 
 
@@ -77,10 +180,9 @@ def _path_lock(path: Path) -> Iterator[None]:
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     descriptor = os.open(lock_path, os.O_RDWR | os.O_CREAT, 0o600)
     try:
-        fcntl.flock(descriptor, fcntl.LOCK_EX)
-        yield
+        with hmasd_platform.exclusive_file_lock(descriptor):
+            yield
     finally:
-        fcntl.flock(descriptor, fcntl.LOCK_UN)
         os.close(descriptor)
 
 
@@ -131,15 +233,7 @@ def _atomic_write_bytes(path: Path, payload: bytes) -> None:
             os.fsync(stream.fileno())
         os.replace(temporary, path)
         temporary = None
-        try:
-            directory_fd = os.open(path.parent, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
-        except OSError:
-            directory_fd = -1
-        if directory_fd >= 0:
-            try:
-                os.fsync(directory_fd)
-            finally:
-                os.close(directory_fd)
+        hmasd_platform.fsync_directory(path.parent)
     finally:
         if temporary is not None:
             try:
@@ -350,8 +444,20 @@ def _manifest_direction_root(
     direction_id = _validate_identifier(manifest.get("direction_id"), "direction_id")
     run_id = _validate_identifier(manifest.get("run_id"), "run_id")
     cwd_raw = manifest.get("cwd")
+    if os.name == "nt" and isinstance(cwd_raw, str) and _looks_like_wsl_absolute(cwd_raw):
+        raise RunRefusal(
+            5,
+            f"manifest cwd uses a WSL/POSIX path ({cwd_raw!r}); regenerate the "
+            "manifest from the native Windows checkout",
+        )
     if not isinstance(cwd_raw, str) or not Path(cwd_raw).is_absolute():
-        raise RunRefusal(4, "manifest cwd is invalid")
+        raise RunRefusal(
+            4,
+            "manifest cwd is invalid; use a native absolute Windows path when "
+            "running from a native Windows checkout",
+        )
+    if os.name == "nt" and not Path(cwd_raw).is_dir():
+        raise RunRefusal(5, f"manifest cwd does not exist on this Windows host: {cwd_raw}")
     expected_root = _expected_run_root(Path(cwd_raw), direction_id, run_id)
     if manifest_path.parent != expected_root:
         raise RunRefusal(5, "manifest path is not owned by its direction and run")
@@ -615,6 +721,7 @@ def _verify_manifest_provenance(
         or _command_digest(command) != manifest.get("command_sha256")
     ):
         raise RunRefusal(4, "manifest command digest is invalid")
+    _validate_native_command(command)
     parameters = manifest.get("parameters")
     if (
         not isinstance(parameters, Mapping)
@@ -849,6 +956,25 @@ def _consume_approval(root: Path, manifest: Mapping[str, Any], approval_path: Pa
 
 
 def _read_boot_id() -> str | None:
+    if os.name == "nt":
+        class SYSTEM_TIMEOFDAY_INFORMATION(ctypes.Structure):
+            _fields_ = [
+                ("boot_time", ctypes.c_longlong),
+                ("current_time", ctypes.c_longlong),
+                ("time_zone_bias", ctypes.c_longlong),
+                ("current_time_zone_id", ctypes.c_ulong),
+                ("reserved", ctypes.c_ulong),
+                ("boot_time_bias", ctypes.c_ulonglong),
+                ("sleep_time_bias", ctypes.c_ulonglong),
+            ]
+
+        value = SYSTEM_TIMEOFDAY_INFORMATION()
+        status = _windows_ntdll().NtQuerySystemInformation(
+            3, ctypes.byref(value), ctypes.sizeof(value), None
+        )
+        if status != 0:
+            return None
+        return f"windows:{int(value.boot_time):016x}"
     try:
         return Path("/proc/sys/kernel/random/boot_id").read_text(encoding="utf-8").strip()
     except OSError:
@@ -856,6 +982,30 @@ def _read_boot_id() -> str | None:
 
 
 def _proc_start_ticks(pid: int) -> int | None:
+    if os.name == "nt":
+        process_query_limited_information = 0x1000
+        kernel32 = _windows_kernel32()
+        handle = kernel32.OpenProcess(
+            process_query_limited_information, False, pid
+        )
+        if not handle:
+            return None
+        try:
+            creation = wintypes.FILETIME()
+            exit_time = wintypes.FILETIME()
+            kernel = wintypes.FILETIME()
+            user = wintypes.FILETIME()
+            if not kernel32.GetProcessTimes(
+                handle,
+                ctypes.byref(creation),
+                ctypes.byref(exit_time),
+                ctypes.byref(kernel),
+                ctypes.byref(user),
+            ):
+                return None
+            return (int(creation.dwHighDateTime) << 32) | int(creation.dwLowDateTime)
+        finally:
+            kernel32.CloseHandle(handle)
     try:
         raw = Path(f"/proc/{pid}/stat").read_text(encoding="utf-8")
     except OSError:
@@ -873,6 +1023,8 @@ def _proc_start_ticks(pid: int) -> int | None:
 
 
 def _proc_command_digest(pid: int) -> str | None:
+    if os.name == "nt":
+        return None
     try:
         raw = Path(f"/proc/{pid}/cmdline").read_bytes()
     except OSError:
@@ -884,6 +1036,8 @@ def _proc_command_digest(pid: int) -> str | None:
 
 
 def _proc_pgid(pid: int) -> int | None:
+    if os.name == "nt":
+        return pid if _proc_start_ticks(pid) is not None else None
     try:
         return os.getpgid(pid)
     except OSError:
@@ -891,6 +1045,8 @@ def _proc_pgid(pid: int) -> int | None:
 
 
 def _proc_sid(pid: int) -> int | None:
+    if os.name == "nt":
+        return 0 if _proc_start_ticks(pid) is not None else None
     try:
         return os.getsid(pid)
     except OSError:
@@ -898,6 +1054,64 @@ def _proc_sid(pid: int) -> int | None:
 
 
 def _group_pids(pgid: int) -> list[int]:
+    if os.name == "nt":
+        th32cs_snapprocess = 0x00000002
+        invalid_handle_value = ctypes.c_void_p(-1).value
+
+        class PROCESSENTRY32W(ctypes.Structure):
+            _fields_ = [
+                ("dwSize", ctypes.c_ulong),
+                ("cntUsage", ctypes.c_ulong),
+                ("th32ProcessID", ctypes.c_ulong),
+                ("th32DefaultHeapID", ctypes.c_void_p),
+                ("th32ModuleID", ctypes.c_ulong),
+                ("cntThreads", ctypes.c_ulong),
+                ("th32ParentProcessID", ctypes.c_ulong),
+                ("pcPriClassBase", ctypes.c_long),
+                ("dwFlags", ctypes.c_ulong),
+                ("szExeFile", ctypes.c_wchar * 260),
+            ]
+
+        kernel32 = _windows_kernel32()
+        snapshot = kernel32.CreateToolhelp32Snapshot(
+            th32cs_snapprocess, 0
+        )
+        if snapshot == invalid_handle_value:
+            return []
+        parents: dict[int, int] = {}
+        try:
+            entry = PROCESSENTRY32W()
+            entry.dwSize = ctypes.sizeof(entry)
+            kernel32.Process32FirstW.argtypes = [
+                wintypes.HANDLE,
+                ctypes.POINTER(PROCESSENTRY32W),
+            ]
+            kernel32.Process32FirstW.restype = wintypes.BOOL
+            kernel32.Process32NextW.argtypes = [
+                wintypes.HANDLE,
+                ctypes.POINTER(PROCESSENTRY32W),
+            ]
+            kernel32.Process32NextW.restype = wintypes.BOOL
+            if kernel32.Process32FirstW(snapshot, ctypes.byref(entry)):
+                while True:
+                    parents[int(entry.th32ProcessID)] = int(entry.th32ParentProcessID)
+                    if not kernel32.Process32NextW(
+                        snapshot, ctypes.byref(entry)
+                    ):
+                        break
+        finally:
+            kernel32.CloseHandle(snapshot)
+
+        members = {pgid}
+        changed = True
+        while changed:
+            changed = False
+            for pid, parent in parents.items():
+                if pid not in members and parent in members:
+                    members.add(pid)
+                    changed = True
+        return sorted(pid for pid in members if pid in parents)
+
     pids: list[int] = []
     try:
         entries = os.listdir("/proc")
@@ -936,8 +1150,11 @@ def _capture_descendant_identities(manifest: Mapping[str, Any]) -> list[dict[str
         or not isinstance(boot_id, str)
         or boot_id != _read_boot_id()
         or _proc_start_ticks(pid) != start_ticks
-        or _proc_pgid(pid) != pgid
-        or _proc_command_digest(pid) != manifest.get("command_sha256")
+        or (os.name != "nt" and _proc_pgid(pid) != pgid)
+        or (
+            os.name != "nt"
+            and _proc_command_digest(pid) != manifest.get("command_sha256")
+        )
     ):
         return []
     captured: list[dict[str, Any]] = []
@@ -949,7 +1166,7 @@ def _capture_descendant_identities(manifest: Mapping[str, Any]) -> list[dict[str
         if (
             descendant_start is None
             or descendant_sid is None
-            or _proc_pgid(descendant_pid) != pgid
+            or (os.name != "nt" and _proc_pgid(descendant_pid) != pgid)
         ):
             continue
         captured.append(
@@ -1030,8 +1247,8 @@ def _descendant_group_is_tied(
             or identity.get("linux_boot_id") != boot_id
             or identity.get("process_group_id") != pgid
             or identity.get("proc_start_ticks") != _proc_start_ticks(pid)
-            or identity.get("session_id") != _proc_sid(pid)
-            or _proc_pgid(pid) != pgid
+            or (os.name != "nt" and identity.get("session_id") != _proc_sid(pid))
+            or (os.name != "nt" and _proc_pgid(pid) != pgid)
         ):
             return False
     return True
@@ -1060,7 +1277,7 @@ def _observe_process_identity(
         if _descendant_group_is_tied(manifest, group_pids, descendant_identities):
             return IDENTITY_DESCENDANTS, True
         return IDENTITY_REUSED, True
-    if observed_start != start_ticks or _proc_pgid(pid) != pgid:
+    if observed_start != start_ticks or (os.name != "nt" and _proc_pgid(pid) != pgid):
         return IDENTITY_REUSED, group_live
     digest = _proc_command_digest(pid)
     if digest is not None and digest != manifest.get("command_sha256"):
@@ -1077,7 +1294,28 @@ def _wait_group_quiescent(pgid: int, timeout: float = 5.0) -> bool:
     return not _group_pids(pgid)
 
 
+def _terminate_windows_pid(pid: int) -> None:
+    process_terminate = 0x0001
+    kernel32 = _windows_kernel32()
+    handle = kernel32.OpenProcess(process_terminate, False, pid)
+    if not handle:
+        if _proc_start_ticks(pid) is None:
+            return
+        raise RunRefusal(5, f"cannot open owned Windows process {pid} for termination")
+    try:
+        if not kernel32.TerminateProcess(handle, 1):
+            raise RunRefusal(5, f"cannot terminate owned Windows process {pid}")
+    finally:
+        kernel32.CloseHandle(handle)
+
+
 def _terminate_new_group(pgid: int, *, grace: float = 1.0) -> None:
+    if os.name == "nt":
+        for pid in reversed(_group_pids(pgid)):
+            _terminate_windows_pid(pid)
+        if not _wait_group_quiescent(pgid):
+            raise RunRefusal(5, f"Windows process tree {pgid} did not become quiescent")
+        return
     try:
         os.killpg(pgid, signal.SIGTERM)
     except ProcessLookupError:
@@ -1111,6 +1349,23 @@ def _terminate_owned_group(
         return
     if identity in {IDENTITY_REUSED, IDENTITY_UNRECORDED}:
         raise RunRefusal(6, "process identity was reused or cannot be proven; no signal sent")
+    if os.name == "nt":
+        captured = _merge_descendant_identities(
+            descendant_identities, _capture_descendant_identities(manifest)
+        )
+        group_pids = _group_pids(pgid)
+        descendants = [pid for pid in group_pids if pid != process.get("pid")]
+        if descendants and not _descendant_group_is_tied(
+            manifest, descendants, captured
+        ):
+            raise RunRefusal(
+                6, "Windows descendant identity cannot be proven; no process was terminated"
+            )
+        for pid in reversed(group_pids):
+            _terminate_windows_pid(pid)
+        if not _wait_group_quiescent(pgid):
+            raise RunRefusal(5, f"Windows process tree {pgid} did not become quiescent")
+        return
     try:
         os.killpg(pgid, signal.SIGTERM)
     except ProcessLookupError:
@@ -1145,9 +1400,26 @@ def _open_output(root: Path, name: str) -> Any:
     return os.fdopen(descriptor, "wb", closefd=True)
 
 
+class _WindowsSuspendedGate:
+    def __init__(self, process: subprocess.Popen[bytes]) -> None:
+        self.process = process
+
+
 def _spawn_gated_child(
     manifest: Mapping[str, Any], stdout: Any, stderr: Any
-) -> tuple[subprocess.Popen[bytes], int]:
+) -> tuple[subprocess.Popen[bytes], int | _WindowsSuspendedGate]:
+    if os.name == "nt":
+        create_suspended = 0x00000004
+        child = subprocess.Popen(
+            manifest["command"],
+            cwd=manifest["cwd"],
+            shell=False,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | create_suspended,
+            stdout=stdout,
+            stderr=stderr,
+        )
+        return child, _WindowsSuspendedGate(child)
+
     read_fd, write_fd = os.pipe()
     try:
         child = subprocess.Popen(
@@ -1175,23 +1447,62 @@ def _spawn_gated_child(
     return child, write_fd
 
 
+def _close_gate(gate: int | _WindowsSuspendedGate) -> None:
+    if isinstance(gate, _WindowsSuspendedGate):
+        return
+    os.close(gate)
+
+
+def _release_gate(gate: int | _WindowsSuspendedGate, timeout: float = 5.0) -> bool:
+    if isinstance(gate, _WindowsSuspendedGate):
+        process_handle = int(getattr(gate.process, "_handle"))
+        return _windows_ntdll().NtResumeProcess(process_handle) == 0
+    os.write(gate, b"\x01")
+    return True
+
+
 def _exec_gate(args: argparse.Namespace) -> int:
     command = list(args.command)
     if command and command[0] == "--":
         command.pop(0)
     if not command:
         return 125
-    try:
-        released = os.read(args.gate_fd, 1)
-    except OSError:
-        return 125
-    finally:
+    if args.gate_path:
+        gate_path = Path(args.gate_path)
+        released = b""
+        deadline = time.monotonic() + 30.0
+        while time.monotonic() < deadline:
+            try:
+                released = gate_path.read_bytes()
+            except FileNotFoundError:
+                return 125
+            except OSError:
+                return 125
+            if released:
+                break
+            time.sleep(0.01)
         try:
-            os.close(args.gate_fd)
+            gate_path.unlink()
         except OSError:
             pass
+    else:
+        try:
+            released = os.read(args.gate_fd, 1)
+        except OSError:
+            return 125
+        finally:
+            try:
+                os.close(args.gate_fd)
+            except OSError:
+                pass
     if released != b"\x01":
         return 125
+    if os.name == "nt":
+        try:
+            return subprocess.call(command, shell=False)
+        except OSError as exc:
+            print(f"hmasd exec gate failed: {exc}", file=sys.stderr)
+            return 126
     try:
         os.execvpe(command[0], command, os.environ)
     except OSError as exc:
@@ -1243,6 +1554,7 @@ def _prepare(args: argparse.Namespace) -> int:
         command.pop(0)
     if not command or any(not isinstance(part, str) for part in command):
         raise RunInputError("an exact argv is required after --")
+    _validate_native_command(command)
     output_root = _validate_output_root(
         args.output_root,
         cwd=cwd,
@@ -1334,7 +1646,7 @@ def _execute(args: argparse.Namespace) -> int:
     stdout: Any = None
     stderr: Any = None
     child: subprocess.Popen[bytes] | None = None
-    gate_write_fd: int | None = None
+    gate_write_fd: int | _WindowsSuspendedGate | None = None
     descendant_identities: list[dict[str, Any]] = []
     terminal_recorded = False
     owned_manifest: dict[str, Any] | None = None
@@ -1347,7 +1659,10 @@ def _execute(args: argparse.Namespace) -> int:
         cancelled = True
         if child is not None and child.poll() is None and owned_pgid is not None:
             try:
-                os.killpg(owned_pgid, signal.SIGTERM)
+                if os.name == "nt":
+                    child.terminate()
+                else:
+                    os.killpg(owned_pgid, signal.SIGTERM)
             except (ProcessLookupError, PermissionError):
                 pass
 
@@ -1555,7 +1870,7 @@ def _execute(args: argparse.Namespace) -> int:
                 boot_id = _read_boot_id()
                 start_ticks = _proc_start_ticks(pid)
                 if owned_pgid is None or boot_id is None or start_ticks is None:
-                    os.close(gate_write_fd)
+                    _close_gate(gate_write_fd)
                     gate_write_fd = None
                     child.wait(timeout=5)
                     if owned_pgid is not None and _group_pids(owned_pgid):
@@ -1591,7 +1906,7 @@ def _execute(args: argparse.Namespace) -> int:
                 )
 
                 if cancelled:
-                    os.close(gate_write_fd)
+                    _close_gate(gate_write_fd)
                     gate_write_fd = None
                     if child.poll() is None:
                         _terminate_new_group(owned_pgid)
@@ -1615,9 +1930,9 @@ def _execute(args: argparse.Namespace) -> int:
                     )
                     return 1
                 try:
-                    os.write(gate_write_fd, b"\x01")
+                    release_observed = _release_gate(gate_write_fd)
                 except OSError as exc:
-                    os.close(gate_write_fd)
+                    _close_gate(gate_write_fd)
                     gate_write_fd = None
                     if child.poll() is None:
                         _terminate_new_group(owned_pgid)
@@ -1641,15 +1956,18 @@ def _execute(args: argparse.Namespace) -> int:
                     )
                     raise RunRefusal(1, f"child release failed: {exc}") from exc
                 else:
-                    os.close(gate_write_fd)
+                    _close_gate(gate_write_fd)
                     gate_write_fd = None
-                deadline = time.monotonic() + 5.0
-                while time.monotonic() < deadline:
-                    digest = _proc_command_digest(pid)
-                    if digest == manifest["command_sha256"] or child.poll() is not None:
-                        break
-                    time.sleep(0.005)
-                else:
+                transition_observed = release_observed
+                if os.name != "nt":
+                    deadline = time.monotonic() + 5.0
+                    while time.monotonic() < deadline:
+                        digest = _proc_command_digest(pid)
+                        if digest == manifest["command_sha256"] or child.poll() is not None:
+                            transition_observed = True
+                            break
+                        time.sleep(0.005)
+                if not transition_observed:
                     _terminate_new_group(owned_pgid)
                     child.wait(timeout=5)
                     unknown = dict(owned_manifest)
@@ -1752,7 +2070,7 @@ def _execute(args: argparse.Namespace) -> int:
     finally:
         if gate_write_fd is not None:
             try:
-                os.close(gate_write_fd)
+                _close_gate(gate_write_fd)
             except OSError:
                 pass
         if child is not None:
@@ -2078,7 +2396,9 @@ def _parser() -> argparse.ArgumentParser:
     promote.add_argument("--result-json", required=True)
     promote.add_argument("--result-markdown", required=True)
     exec_gate = modes.add_parser("_exec-gate", help=argparse.SUPPRESS)
-    exec_gate.add_argument("--gate-fd", required=True, type=int)
+    gate_source = exec_gate.add_mutually_exclusive_group(required=True)
+    gate_source.add_argument("--gate-fd", type=int)
+    gate_source.add_argument("--gate-path")
     exec_gate.add_argument("command", nargs=argparse.REMAINDER)
     return parser
 

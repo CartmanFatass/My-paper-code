@@ -304,7 +304,7 @@ def test_running_reconcile_observes_once_and_duplicate_execute_is_refused(
 def test_worktree_inspect_and_provision_refuse_an_orphan_duplicate(
     tmp_path: Path,
 ) -> None:
-    """A journaled Git mutation is inspected, never blindly provisioned twice."""
+    """A legacy journal without its receipt is rejected before import or reuse."""
 
     repo = tmp_path / "repo"
     repo.mkdir()
@@ -335,13 +335,17 @@ def test_worktree_inspect_and_provision_refuse_an_orphan_duplicate(
     runtime_path = runtime_dir / "worktrees.json"
     runtime_path.write_text(json.dumps(runtime, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
+    canonical_path = repo / ".codex" / "runtime" / "worktrees.json"
+    legacy_before = runtime_path.read_bytes()
     inspected = _run(WORKTREE_SCRIPT, "inspect", "--worktree-ref", "wt-example", cwd=repo)
     assert inspected.returncode == 6, (inspected.stdout, inspected.stderr)
     observation = _load_json_text(inspected.stdout)
-    assert observation.get("orphaned") is True, observation
-    assert observation.get("orphan_reason"), observation
+    assert observation["code"] == 6, observation
+    assert "worktree receipt is absent" in observation["error"], observation
+    assert "orphaned" not in observation, observation
+    assert not canonical_path.exists()
+    assert runtime_path.read_bytes() == legacy_before
 
-    before = runtime_path.read_bytes()
     provisioned = _run(
         WORKTREE_SCRIPT,
         "provision",
@@ -360,8 +364,13 @@ def test_worktree_inspect_and_provision_refuse_an_orphan_duplicate(
         cwd=repo,
     )
     assert provisioned.returncode == 6, (provisioned.stdout, provisioned.stderr)
-    assert runtime_path.read_bytes() == before
+    provision_observation = _load_json_text(provisioned.stdout)
+    assert provision_observation["code"] == 6, provision_observation
+    assert "worktree receipt is absent" in provision_observation["error"], provision_observation
+    assert not canonical_path.exists()
+    assert runtime_path.read_bytes() == legacy_before
     assert not (container / "example-direction-engineering-run-example").exists()
+
 
 def test_external_unknown_commitment_is_not_resent_and_archive_import_is_idempotent(
     tmp_path: Path,

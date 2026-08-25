@@ -66,6 +66,19 @@ def test_valid_phase0_fixtures_validate() -> None:
         result = run_cli("validate", "--kind", kind, "--path", str(path))
         assert result.returncode == 0, (kind, result.stderr)
 
+
+def test_state_lock_key_is_stable_for_relative_and_absolute_spellings() -> None:
+    """Relative CLI paths must not bypass a lock held for their absolute form."""
+
+    from scripts import hmasd_state
+
+    relative = Path("temp") / "directions" / "workflow-codex-migration" / "test" / "state.json"
+    absolute = Path.cwd() / relative
+    lock_path = hmasd_state._lock_path(relative)
+    assert lock_path == hmasd_state._lock_path(absolute)
+    assert lock_path.parts[-4:-1] == (".codex", "runtime", "locks")
+    assert ".omp" not in lock_path.parts
+
 def test_portfolio_payload_is_root_owned_after_manager_merge(tmp_path: Path) -> None:
     document = fixture("agent_result")
     document.update(

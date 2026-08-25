@@ -3,7 +3,7 @@
   "mcpServers": {
     "agentify-desktop": {
       "type": "stdio",
-      "command": "/mnt/c/Program Files/nodejs/node.exe",
+      "command": "node",
       "args": [
         "C:\\Projects\\agentify-desktop\\bin\\agentify-desktop.mjs",
         "mcp"

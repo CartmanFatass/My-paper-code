@@ -2,17 +2,17 @@
 """Root-owned Git worktree lifecycle for the HMASD workflow.
 
 The helper deliberately keeps the lifecycle small and fail-closed.  Git is the
-source of truth for checkout and ref state; ``.omp/runtime/worktrees.json`` is
-an ignored, CAS-protected journal maintained through ``hmasd_state.py``.  A
+source of truth for checkout and ref state; ``.codex/runtime/worktrees.json``
+is an ignored, CAS-protected journal maintained through ``hmasd_state.py``.  A
 receipt captures every fact used by prepare/apply so Root never applies a stale
-plan.
+plan.  The former ``.omp/runtime/worktrees.json`` path is a read-only,
+one-time import source while the control plane is being cut over.
 """
 
 from __future__ import annotations
 
 import argparse
 import datetime as _datetime
-import fcntl
 import hashlib
 import json
 import os
@@ -25,6 +25,11 @@ import tempfile
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Generator, Iterable, Mapping, Sequence
+
+try:
+    from scripts import hmasd_platform
+except ImportError:
+    import hmasd_platform
 
 
 STATE_SCRIPT = Path(__file__).with_name("hmasd_state.py")
@@ -114,6 +119,10 @@ def _lexical_absolute(raw: os.PathLike[str] | str, *, label: str) -> Path:
         raise InvalidInput(f"{label} must be a non-empty absolute path")
     path = Path(text)
     if not path.is_absolute():
+        if os.name == "nt" and text.startswith("/"):
+            raise InvalidInput(
+                f"{label} uses a POSIX/WSL absolute path; use a native Windows drive or UNC path"
+            )
         raise InvalidInput(f"{label} must be absolute")
     if any(part in {".", ".."} for part in path.parts):
         raise OwnershipRefusal(f"{label} contains an alias component")
@@ -135,8 +144,8 @@ def _assert_no_symlink_chain(path: Path, *, label: str, require_existing: bool =
     current = path
     while True:
         info = _lstat(current)
-        if info is not None and stat.S_ISLNK(info.st_mode):
-            raise OwnershipRefusal(f"{label} contains a symlink: {current}")
+        if info is not None and hmasd_platform.is_reparse_or_symlink(current, info):
+            raise OwnershipRefusal(f"{label} contains a symlink or reparse point: {current}")
         if current == current.parent:
             break
         current = current.parent
@@ -170,6 +179,14 @@ def _canonical_path(
 
 
 def _same_path(left: Path, right: Path) -> bool:
+    # Native Windows filesystems compare paths case-insensitively even when
+    # Git emits a different drive-letter or component casing.  Keep the
+    # comparison lexical (aliases are rejected separately) while matching the
+    # host filesystem's equality semantics.
+    if os.name == "nt":
+        return os.path.normcase(os.path.normpath(os.fspath(left))) == os.path.normcase(
+            os.path.normpath(os.fspath(right))
+        )
     return left == right
 
 
@@ -251,12 +268,22 @@ def _repo_context(raw: os.PathLike[str] | str) -> tuple[Path, Path]:
         raw = Path.cwd()
     repo = _canonical_path(raw, label="repo", must_exist=True, directory=True)
     control = repo / ".omp"
-    _canonical_path(control, label="repo .omp", must_exist=True, directory=True)
-    if not ((control / "AGENTS.md").is_file() or (control / "config.yml").is_file()):
-        raise OwnershipRefusal("repo lacks .omp/AGENTS.md or .omp/config.yml")
+    if _lstat(control) is not None:
+        _canonical_path(control, label="repo .omp", must_exist=True, directory=True)
+        if not ((control / "AGENTS.md").is_file() or (control / "config.yml").is_file()):
+            raise OwnershipRefusal("repo lacks .omp/AGENTS.md or .omp/config.yml")
+    else:
+        # After clean cutover the retired OMP control directory may be gone.
+        # A Codex control directory plus the repository-level instructions (or
+        # Codex project config) is the replacement identity marker.  Do not
+        # recreate .omp merely to satisfy the legacy check.
+        codex = repo / ".codex"
+        _canonical_path(codex, label="repo .codex", must_exist=True, directory=True)
+        if not ((repo / "AGENTS.md").is_file() or (codex / "config.toml").is_file()):
+            raise OwnershipRefusal("repo lacks .omp control or Codex control marker")
     top_raw = _git_value(repo, "rev-parse", "--show-toplevel")
     top = _canonical_path(top_raw, label="repository top", must_exist=True, directory=True)
-    if top != repo:
+    if not _same_path(top, repo):
         raise OwnershipRefusal("repo is not the exact Git top-level path")
     common_raw = _git_value(repo, "rev-parse", "--git-common-dir")
     common = Path(common_raw)
@@ -302,20 +329,17 @@ def _container_lock(container: Path) -> Generator[dict[str, Any], None, None]:
         info = os.fstat(fd)
         if not stat.S_ISREG(info.st_mode):
             raise OwnershipRefusal("container lock is not a regular file")
-        fcntl.flock(fd, fcntl.LOCK_EX)
-        current = _canonical_path(container, label="container", must_exist=True, directory=True)
-        parent = _canonical_path(current.parent, label="container parent", must_exist=True, directory=True)
-        identities = {
-            "container": _identity(current),
-            "container_parent": _identity(parent),
-            "lock": {"device": int(info.st_dev), "inode": int(info.st_ino)},
-        }
-        yield identities
+        with hmasd_platform.exclusive_file_lock(fd):
+            current = _canonical_path(container, label="container", must_exist=True, directory=True)
+            parent = _canonical_path(current.parent, label="container parent", must_exist=True, directory=True)
+            identities = {
+                "container": _identity(current),
+                "container_parent": _identity(parent),
+                "lock": {"device": int(info.st_dev), "inode": int(info.st_ino)},
+            }
+            yield identities
     finally:
-        try:
-            fcntl.flock(fd, fcntl.LOCK_UN)
-        finally:
-            os.close(fd)
+        os.close(fd)
 
 
 def _revalidate_container(container: Path, identities: Mapping[str, Any]) -> None:
@@ -327,8 +351,8 @@ def _revalidate_container(container: Path, identities: Mapping[str, Any]) -> Non
         info = _lstat(path)
         if info is None:
             raise UnsafeState(f"{label} disappeared during worktree operation")
-        if stat.S_ISLNK(info.st_mode):
-            raise UnsafeState(f"{label} became a symlink during worktree operation")
+        if hmasd_platform.is_reparse_or_symlink(path, info):
+            raise UnsafeState(f"{label} became a symlink or reparse point during worktree operation")
     if not _identity_equal(container, identities["container"]):
         raise UnsafeState("container identity changed during worktree operation")
     if not _identity_equal(container.parent, identities["container_parent"]):
@@ -525,14 +549,51 @@ def _ensure_controlled_checkout(
 
 
 def _runtime_path(repo: Path) -> Path:
-    runtime = repo / ".omp" / "runtime"
-    _assert_no_symlink_chain(runtime.parent, label="runtime parent", require_existing=True)
+    """Return the Codex-owned canonical worktree journal path.
+
+    The ``.codex`` and ``runtime`` directories are created lazily for small
+    disposable repositories used by the helper tests.  Every existing
+    component is checked before it is traversed so a junction/reparse alias
+    cannot become a state authority boundary.
+    """
+
+    _assert_no_symlink_chain(repo, label="repository", require_existing=True)
+    codex = repo / ".codex"
+    if _lstat(codex) is None:
+        codex.mkdir(mode=0o700)
+    _assert_no_symlink_chain(codex, label="Codex control directory", require_existing=True)
+    codex_info = _lstat(codex)
+    if codex_info is None or not stat.S_ISDIR(codex_info.st_mode):
+        raise OwnershipRefusal(f"Codex control directory is not a directory: {codex}")
+    runtime = codex / "runtime"
     if _lstat(runtime) is None:
         runtime.mkdir(mode=0o700)
-    _assert_no_symlink_chain(runtime, label="runtime", require_existing=True)
+    _assert_no_symlink_chain(runtime, label="Codex runtime", require_existing=True)
     path = runtime / "worktrees.json"
     if _lstat(path) is not None:
-        _assert_no_symlink_chain(path, label="runtime registry", require_existing=True)
+        _assert_no_symlink_chain(path, label="Codex runtime registry", require_existing=True)
+    return path
+
+
+def _legacy_runtime_path(repo: Path) -> Path:
+    """Return the transition-only OMP journal path without creating it."""
+
+    omp = repo / ".omp"
+    if _lstat(omp) is None:
+        # Clean cutover is allowed to remove the retired OMP tree.  Returning
+        # the notional path keeps the caller's existence check simple while
+        # never creating or traversing a legacy directory.
+        return omp / "runtime" / "worktrees.json"
+    _assert_no_symlink_chain(omp, label="legacy OMP control directory", require_existing=True)
+    runtime = omp / "runtime"
+    if _lstat(runtime) is not None:
+        _assert_no_symlink_chain(runtime, label="legacy OMP runtime", require_existing=True)
+        runtime_info = _lstat(runtime)
+        if runtime_info is None or not stat.S_ISDIR(runtime_info.st_mode):
+            raise OwnershipRefusal(f"legacy OMP runtime is not a directory: {runtime}")
+    path = runtime / "worktrees.json"
+    if _lstat(path) is not None:
+        _assert_no_symlink_chain(path, label="legacy OMP runtime registry", require_existing=True)
     return path
 
 
@@ -557,11 +618,7 @@ def _atomic_write(path: Path, value: Mapping[str, Any]) -> None:
             stream.flush()
             os.fsync(stream.fileno())
         os.replace(name, path)
-        dir_fd = os.open(path.parent, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
-        try:
-            os.fsync(dir_fd)
-        finally:
-            os.close(dir_fd)
+        hmasd_platform.fsync_directory(path.parent)
     except Exception:
         try:
             os.unlink(name)
@@ -596,22 +653,130 @@ def _state_call(command: str, *, path: Path, input_path: Path | None = None, exp
         raise WorktreeError(detail)
 
 
-def _load_registry(repo: Path, *, required: bool = True) -> tuple[Path, dict[str, Any]] | None:
-    path = _runtime_path(repo)
-    if _lstat(path) is None:
-        if required:
-            raise UnsafeState("runtime worktree registry is absent")
-        return None
+def _read_validated_registry(path: Path, *, label: str) -> dict[str, Any]:
+    """Validate and load one registry document through the state contract."""
+
     _state_call("validate", path=path)
     try:
         state = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, ValueError) as exc:
-        raise InvalidInput(f"runtime registry is unreadable: {exc}") from exc
+        raise InvalidInput(f"{label} worktree registry is unreadable: {exc}") from exc
     if not isinstance(state, dict) or not isinstance(state.get("worktrees"), list):
-        raise InvalidInput("runtime registry has invalid shape")
+        raise InvalidInput(f"{label} worktree registry has invalid shape")
     if not isinstance(state.get("revision"), int) or state["revision"] < 1:
-        raise InvalidInput("runtime registry revision is invalid")
-    return path, state
+        raise InvalidInput(f"{label} worktree registry revision is invalid")
+    return state
+
+
+def _registry_facts(state: Mapping[str, Any]) -> tuple[int, dict[str, dict[str, Any]]]:
+    """Return revision and order-independent rows for dual-journal comparison."""
+
+    rows: dict[str, dict[str, Any]] = {}
+    for row in state.get("worktrees", []):
+        if not isinstance(row, dict):
+            raise InvalidInput("runtime worktree registry contains a non-object row")
+        ref = row.get("worktree_ref")
+        if not isinstance(ref, str) or ref in rows:
+            raise InvalidInput("runtime worktree registry has duplicate worktree_ref")
+        rows[ref] = dict(row)
+    return int(state["revision"]), rows
+
+
+def _assert_dual_registry_agreement(canonical: Mapping[str, Any], legacy: Mapping[str, Any]) -> None:
+    """Refuse split-brain journals while allowing canonical progress."""
+
+    canonical_revision, canonical_rows = _registry_facts(canonical)
+    legacy_revision, legacy_rows = _registry_facts(legacy)
+    if legacy_revision > canonical_revision or (
+        legacy_revision == canonical_revision and canonical_rows != legacy_rows
+    ):
+        raise UnsafeState(
+            "canonical Codex and legacy OMP worktree registries conflict; "
+            "only Root may resolve the observed split-brain state"
+        )
+
+
+def _validate_import_facts(repo: Path, state: Mapping[str, Any]) -> None:
+    """Verify Git, path, and receipt facts before importing a legacy journal."""
+
+    for row in state.get("worktrees", []):
+        if not isinstance(row, dict):
+            raise InvalidInput("legacy worktree registry contains a non-object row")
+        ref = str(row.get("worktree_ref", ""))
+        try:
+            _canonical_path(
+                str(row["canonical_absolute_path"]),
+                label=f"legacy worktree {ref} path",
+                must_exist=False,
+            )
+        except KeyError as exc:
+            raise InvalidInput(f"legacy worktree {ref} lacks canonical path") from exc
+
+        # Every imported row must have a receipt whose immutable authority
+        # matches the row.  This also rejects missing, aliased, or stale paths.
+        # Include revision/lifecycle/candidate checks: importing a journal with
+        # an otherwise valid but stale receipt would create a false authority.
+        _load_current_receipt(repo, state, row)
+        observation = _observation(repo, row)
+        lifecycle = row.get("lifecycle")
+        if lifecycle == "RELEASED":
+            if observation.get("target_exists") or observation.get("registration_count") != 0 or observation.get("branch_sha") is not None:
+                raise UnsafeState(f"legacy released worktree {ref} still has Git registration or path")
+            continue
+        if lifecycle in UNKNOWN_LIFECYCLES:
+            # Unknown effects are observe-only.  Their recorded observation is
+            # the authority; do not attempt a compensating Git mutation.
+            recorded = row.get("unknown_outcome", {}).get("observation") if isinstance(row.get("unknown_outcome"), dict) else None
+            if isinstance(recorded, dict):
+                for key in ("worktree_exists", "registration_count", "registration_branch", "registration_head", "branch_sha"):
+                    observed_key = {"worktree_exists": "target_exists"}.get(key, key)
+                    if key in recorded and observation.get(observed_key) != recorded[key]:
+                        raise StaleFacts(f"legacy unknown worktree {ref} observation changed")
+            continue
+        if not observation.get("exact_registration"):
+            raise UnsafeState(f"legacy worktree {ref} Git registration/path facts do not match journal")
+
+
+def _load_registry(repo: Path, *, required: bool = True) -> tuple[Path, dict[str, Any]] | None:
+    path = _runtime_path(repo)
+    legacy_path = _legacy_runtime_path(repo)
+    canonical_exists = _lstat(path) is not None
+    legacy_exists = _lstat(legacy_path) is not None
+
+    if canonical_exists:
+        canonical = _read_validated_registry(path, label="canonical")
+        if legacy_exists:
+            legacy = _read_validated_registry(legacy_path, label="legacy")
+            _assert_dual_registry_agreement(canonical, legacy)
+        return path, canonical
+
+    if legacy_exists:
+        # Validation and Git/receipt checks happen before the one and only
+        # initialize at the Codex path.  The OMP source is never removed or
+        # rewritten and remains read-only for the rest of the transition.
+        legacy = _read_validated_registry(legacy_path, label="legacy")
+        _validate_import_facts(repo, legacy)
+        input_path = _state_input(legacy)
+        try:
+            try:
+                _state_call("initialize", path=path, input_path=input_path)
+            except StaleFacts:
+                # Another Root reconciler may have won initialization.  It is
+                # safe to continue only after rereading the winner and
+                # checking it against the legacy source.
+                pass
+        finally:
+            try:
+                input_path.unlink()
+            except OSError:
+                pass
+        canonical = _read_validated_registry(path, label="canonical")
+        _assert_dual_registry_agreement(canonical, legacy)
+        return path, canonical
+
+    if required:
+        raise UnsafeState("runtime worktree registry is absent")
+    return None
 
 
 def _state_input(value: Mapping[str, Any]) -> Path:
@@ -870,7 +1035,9 @@ def _load_receipt(repo: Path, entry: Mapping[str, Any]) -> tuple[Path, dict[str,
             raise InvalidInput(f"worktree receipt lacks {key}")
     if value["worktree_ref"] != entry["worktree_ref"] or value["operation_token"] != entry.get("operation_token"):
         raise StaleFacts("worktree receipt operation token does not match registry")
-    if Path(str(value["repo"])) != repo or Path(str(value["worktree_path"])) != Path(str(entry["canonical_absolute_path"])):
+    if not _same_path(Path(str(value["repo"])), repo) or not _same_path(
+        Path(str(value["worktree_path"])), Path(str(entry["canonical_absolute_path"]))
+    ):
         raise OwnershipRefusal("worktree receipt repository/path identity mismatch")
     if value["branch"] != entry["branch"] or value["base_sha"] != entry["base_sha"]:
         raise StaleFacts("worktree receipt base or branch fact changed")
@@ -976,14 +1143,14 @@ def _observation(repo: Path, entry: Mapping[str, Any]) -> dict[str, Any]:
     if len(registrations) == 1:
         observed["registration_branch"] = registrations[0].get("branch")
         observed["registration_head"] = registrations[0].get("head")
-    if target.is_dir() and not target.is_symlink() and len(registrations) == 1:
+    if target.is_dir() and not hmasd_platform.is_reparse_or_symlink(target) and len(registrations) == 1:
         try:
             observed["status"] = _status(target)
         except WorktreeError as exc:
             observed["status_error"] = str(exc)
     exact = (
         target.is_dir()
-        and not target.is_symlink()
+        and not hmasd_platform.is_reparse_or_symlink(target)
         and len(registrations) == 1
         and registrations[0].get("branch") == f"refs/heads/{branch}"
         and str(registrations[0].get("head", "")).lower() == str(entry.get("candidate_sha") or entry.get("base_sha", "")).lower()
@@ -1386,6 +1553,10 @@ def provision(repo_raw: str, container_raw: str | None, direction: str, kind: st
                     pass
             if isinstance(exc, WorktreeError):
                 raise
+            if isinstance(exc, OSError):
+                raise OwnershipRefusal(
+                    f"native filesystem refused a worktree namespace change: {exc}"
+                ) from exc
             raise WorktreeError(str(exc)) from exc
 
 

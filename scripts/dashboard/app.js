@@ -143,6 +143,7 @@
     const rows = agents.map((agent) => [
       cell(agent.logical_identity, "strong"),
       agent.agent_type,
+      agent.task_level || "—",
       agent.parent_identity || "—",
       agent.direction_id || "—",
       agent.job_name,
@@ -152,8 +153,8 @@
       agent.last_seen_at || "—",
     ]);
     const node = document.createDocumentFragment();
-    node.appendChild(heading("Agents", "Direct Root → EM/CM ownership and runtime lifecycle; inspect detail in Agent Hub", current.status));
-    node.appendChild(table(["Logical identity", "Type", "Parent", "Direction", "Job", "Lifecycle", "Phase", "Generation", "Last seen"], rows, "No logical agents are currently visible."));
+    node.appendChild(heading("Tasks", "Top-level Root / Portfolio / EM / CM tasks and direct leaf runtime observations", current.status));
+    node.appendChild(table(["Logical identity", "Type", "Task level", "Parent", "Direction", "Job", "Lifecycle", "Phase", "Generation", "Last seen"], rows, "No tasks are currently visible."));
     view.replaceChildren(node);
   }
 

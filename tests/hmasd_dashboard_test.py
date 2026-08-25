@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import http.client
+import io
 import json
 from pathlib import Path
 import shutil
@@ -124,6 +125,23 @@ def _serve_in_thread(root: Path) -> tuple[dashboard.DashboardServer, threading.T
     return server, thread
 
 
+class _Cp1252Stdout:
+    """Minimal Windows-like text stream whose binary buffer accepts UTF-8."""
+
+    encoding = "cp1252"
+
+    def __init__(self) -> None:
+        self.buffer = io.BytesIO()
+
+    def write(self, value: str) -> int:
+        # The old text write path would fail here for non-ASCII task titles.
+        encoded = value.encode(self.encoding)
+        return len(encoded)
+
+    def flush(self) -> None:
+        self.buffer.flush()
+
+
 def test_all_five_projections_are_deterministic_and_field_allowlisted(tmp_path: Path) -> None:
     root = fixture_root(tmp_path)
     first = dashboard.build_snapshot(root)
@@ -195,7 +213,10 @@ def test_optional_runtime_failures_are_isolated(tmp_path: Path) -> None:
     (root / dashboard.RUNTIME_AGENTS_REL).unlink()
     (root / dashboard.RUNTIME_WORKTREES_REL).write_text("{broken", encoding="utf-8")
     snapshot = dashboard.build_snapshot(root)
-    assert snapshot["data"]["agents"]["status"] == "missing"
+    # Codex task/process maps are disposable.  A fresh checkout without one
+    # still has a healthy empty projection derived from durable state.
+    assert snapshot["data"]["agents"]["status"] == "ok"
+    assert snapshot["data"]["agents"]["warnings"] == []
     assert snapshot["data"]["worktrees"]["status"] == "invalid"
     assert snapshot["data"]["portfolio"]["status"] == "ok"
     assert snapshot["data"]["portfolio"]["data"]["directions"]
@@ -289,13 +310,79 @@ def test_valid_root_em_and_cm_runtime_rows_are_reconciled(tmp_path: Path) -> Non
     assert agents["status"] == "ok"
     assert agents["warnings"] == []
     by_identity = {item["logical_identity"]: item for item in agents["data"]["agents"]}
-    assert set(by_identity) == {"Root", "EM-example-direction", "CM-example-direction"}
+    assert set(by_identity) == {"Root", "Portfolio", "EM-example-direction", "CM-example-direction"}
     assert by_identity["Root"]["agent_type"] == "hmasd-root"
+    assert by_identity["Portfolio"]["agent_type"] == "hmasd-portfolio"
     assert by_identity["EM-example-direction"]["parent_identity"] == "Root"
     assert by_identity["EM-example-direction"]["direction_id"] == "example-direction"
     assert by_identity["CM-example-direction"]["agent_type"] == "hmasd-cm"
     assert by_identity["CM-example-direction"]["parent_identity"] == "Root"
     assert by_identity["CM-example-direction"]["phase"] == "SCOPING"
+
+
+def test_legacy_omp_runtime_maps_remain_read_only_compatible(tmp_path: Path) -> None:
+    root = fixture_root(tmp_path)
+    (root / dashboard.RUNTIME_AGENTS_REL).unlink()
+    (root / dashboard.RUNTIME_WORKTREES_REL).unlink()
+    _copy_json("runtime_agents.json", root / dashboard.LEGACY_RUNTIME_AGENTS_REL)
+    _copy_json("runtime_worktrees.json", root / dashboard.LEGACY_RUNTIME_WORKTREES_REL)
+
+    snapshot = dashboard.build_snapshot(root)
+
+    assert snapshot["data"]["agents"]["status"] == "ok"
+    assert snapshot["data"]["worktrees"]["status"] == "ok"
+    assert snapshot["data"]["agents"]["revision_refs"]["runtime_agents"] == 1
+    assert snapshot["data"]["worktrees"]["revision_refs"]["runtime_worktrees"] == 1
+
+
+def test_codex_task_map_projects_top_level_tasks_and_direct_leaves(tmp_path: Path) -> None:
+    root = fixture_root(tmp_path)
+    tasks_path = root / dashboard.RUNTIME_TASKS_REL
+    tasks_path.parent.mkdir(parents=True, exist_ok=True)
+    tasks_path.write_bytes(
+        dashboard._json_bytes(
+            {
+                "schema_version": 1,
+                "revision": 3,
+                "updated_at": "2026-08-24T00:00:03Z",
+                "writer": "Root",
+                "tasks": [
+                    {
+                        "logical_identity": "Portfolio",
+                        "kind": "portfolio",
+                        "generation": 1,
+                        "task_title": "HMASD Portfolio",
+                        "thread_id": "secret-thread",
+                        "host_id": "secret-host",
+                        "last_cursor": "secret-cursor",
+                        "project_root": str(root),
+                        "lifecycle": "IDLE",
+                    },
+                    {
+                        "logical_identity": "Implementer-example-direction",
+                        "kind": "implementer",
+                        "generation": 1,
+                        "task_title": "Candidate implementation",
+                        "parent_identity": "CM-example-direction",
+                        "lifecycle": "RUNNING",
+                    },
+                ],
+            }
+        )
+    )
+
+    agents = dashboard.build_snapshot(root)["data"]["agents"]
+
+    assert agents["status"] == "ok"
+    assert agents["revision_refs"]["runtime_tasks"] == 3
+    by_identity = {item["logical_identity"]: item for item in agents["data"]["agents"]}
+    assert by_identity["Portfolio"]["task_level"] == "top-level"
+    assert by_identity["Portfolio"]["job_name"] == "HMASD Portfolio"
+    assert by_identity["Implementer-example-direction"]["task_level"] == "leaf"
+    assert by_identity["Implementer-example-direction"]["parent_identity"] == "CM-example-direction"
+    assert "thread_id" not in dashboard._json_text(agents)
+    assert "secret-thread" not in dashboard._json_text(agents)
+    assert "project_root" not in dashboard._json_text(agents)
 
 
 def test_runtime_manager_generation_mismatch_remains_stale(tmp_path: Path) -> None:
@@ -335,3 +422,49 @@ def test_snapshot_cli_is_deterministic_and_invalid_root_has_exit_two(tmp_path: P
         text=True,
     )
     assert invalid.returncode == 2
+
+
+def test_snapshot_cli_writes_utf8_bytes_for_non_ascii_task_title(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = fixture_root(tmp_path)
+    task_title = "中文运行任务"
+    tasks_path = root / dashboard.RUNTIME_TASKS_REL
+    tasks_path.parent.mkdir(parents=True, exist_ok=True)
+    tasks_path.write_bytes(
+        dashboard._json_bytes(
+            {
+                "schema_version": 1,
+                "revision": 1,
+                "updated_at": "2026-08-24T00:00:01Z",
+                "writer": "Root",
+                "tasks": [
+                    {
+                        "logical_identity": "CM-example-direction",
+                        "kind": "cm",
+                        "generation": 1,
+                        "task_title": task_title,
+                        "lifecycle": "RUNNING",
+                    }
+                ],
+            }
+        )
+    )
+
+    stdout = _Cp1252Stdout()
+    monkeypatch.setattr(sys, "stdout", stdout)
+
+    result = dashboard.main(
+        ["snapshot", "--root", str(root)]
+    )
+
+    assert result == 0
+    raw = stdout.buffer.getvalue()
+    assert task_title.encode("utf-8") in raw
+    payload = json.loads(raw.decode("utf-8"))
+    agents = payload["data"]["agents"]["data"]["agents"]
+    projected = next(
+        item for item in agents if item["logical_identity"] == "CM-example-direction"
+    )
+    assert projected["job_name"] == task_title

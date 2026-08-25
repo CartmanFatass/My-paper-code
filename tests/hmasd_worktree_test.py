@@ -25,6 +25,15 @@ SCRIPT = ROOT / "scripts" / "hmasd_worktree.py"
 FIXTURE = Path(__file__).resolve().parent / "fixtures" / "hmasd_worktree" / "candidate_metadata.json"
 
 
+def _symlink_or_skip(link: Path, target: Path, *, target_is_directory: bool) -> None:
+    try:
+        link.symlink_to(target, target_is_directory=target_is_directory)
+    except OSError as exc:
+        if os.name == "nt" and getattr(exc, "winerror", None) == 1314:
+            pytest.skip("Windows symlink privilege is unavailable")
+        raise
+
+
 def git(cwd: Path, *args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
     result = subprocess.run(
         ["git", *args],
@@ -59,6 +68,24 @@ def payload(result: subprocess.CompletedProcess[str]) -> dict[str, Any]:
     return value
 
 
+def test_native_path_comparison_matches_windows_case_insensitivity() -> None:
+    from scripts import hmasd_worktree
+
+    if os.name == "nt":
+        assert hmasd_worktree._same_path(Path("C:/Projects/HMASD"), Path("c:/projects/hmasd"))
+    else:
+        assert not hmasd_worktree._same_path(Path("/tmp/HMASD"), Path("/tmp/hmasd"))
+
+
+def test_windows_rejects_posix_absolute_worktree_paths_with_actionable_error() -> None:
+    from scripts import hmasd_worktree
+
+    if os.name != "nt":
+        pytest.skip("POSIX hosts accept POSIX absolute paths")
+    with pytest.raises(hmasd_worktree.InvalidInput, match="POSIX/WSL"):
+        hmasd_worktree._lexical_absolute("/mnt/c/Projects/HMASD-worktrees", label="container")
+
+
 def commit(cwd: Path, message: str) -> str:
     git(cwd, "add", "-A")
     git(cwd, "-c", "user.name=HMASD Test", "-c", "user.email=hmasd@example.invalid", "commit", "-m", message)
@@ -72,7 +99,7 @@ def repo_and_container(tmp_path: Path) -> tuple[Path, Path]:
     repo.mkdir()
     (repo / ".omp").mkdir()
     (repo / ".omp" / "AGENTS.md").write_text("# test\n", encoding="utf-8")
-    (repo / ".gitignore").write_text(".omp/runtime/\ntemp/\n*.ignored\n", encoding="utf-8")
+    (repo / ".gitignore").write_text(".omp/runtime/\n.codex/runtime/\ntemp/\n*.ignored\n", encoding="utf-8")
     (repo / "src").mkdir()
     (repo / "src" / "owned.py").write_text("VALUE = 1\n", encoding="utf-8")
     git(repo, "init", "-b", "omp/workflow")
@@ -181,7 +208,7 @@ def test_clean_candidate_prepare_apply_and_release_once(repo_and_container: tupl
     assert git(repo, "show-ref", "--verify", "refs/heads/" + worktree["branch"], check=False).returncode != 0
 
 
-def test_default_container_uses_linux_sibling_root(repo_and_container: tuple[Path, Path]) -> None:
+def test_default_container_uses_native_sibling_root(repo_and_container: tuple[Path, Path]) -> None:
     repo, _ = repo_and_container
     base = git(repo, "rev-parse", "HEAD").stdout.strip()
     result = run_cli(
@@ -203,6 +230,159 @@ def test_default_container_uses_linux_sibling_root(repo_and_container: tuple[Pat
     assert path.parent == repo.parent / f"{repo.name}-worktrees"
     run_cli(repo, "retain", "--worktree-ref", entry(payload(result))["worktree_ref"], "--actor", "root", "--reason", "test cleanup")
     shutil.rmtree(path, ignore_errors=True)
+
+
+def test_fresh_worktree_journal_is_codex_owned(repo_and_container: tuple[Path, Path]) -> None:
+    repo, container = repo_and_container
+    provision(repo, container, "fresh-codex-journal")
+    canonical = repo / ".codex" / "runtime" / "worktrees.json"
+    legacy = repo / ".omp" / "runtime" / "worktrees.json"
+    assert canonical.is_file()
+    assert not legacy.exists()
+
+
+def test_canonical_worktree_operation_survives_missing_omp_control(
+    repo_and_container: tuple[Path, Path],
+) -> None:
+    repo, container = repo_and_container
+    worktree = entry(provision(repo, container, "no-legacy-control"))
+    # The real repository retains root AGENTS.md after the OMP tree is retired;
+    # provide the same Codex identity marker in this minimal fixture.
+    (repo / "AGENTS.md").write_text("# Codex control marker\n", encoding="utf-8")
+    shutil.rmtree(repo / ".omp")
+
+    inspected = run_cli(repo, "inspect", "--worktree-ref", worktree["worktree_ref"])
+    assert inspected.returncode == 0, (inspected.stdout, inspected.stderr)
+    assert not (repo / ".omp").exists()
+
+
+def test_legacy_only_journal_is_validated_imported_once_and_left_read_only(
+    repo_and_container: tuple[Path, Path],
+) -> None:
+    repo, container = repo_and_container
+    worktree = entry(provision(repo, container, "legacy-import"))
+    canonical = repo / ".codex" / "runtime" / "worktrees.json"
+    legacy = repo / ".omp" / "runtime" / "worktrees.json"
+    legacy.parent.mkdir(parents=True)
+    legacy.write_bytes(canonical.read_bytes())
+    legacy_bytes = legacy.read_bytes()
+    canonical.unlink()
+
+    inspected = run_cli(repo, "inspect", "--worktree-ref", worktree["worktree_ref"])
+    assert inspected.returncode == 0, (inspected.stdout, inspected.stderr)
+    assert canonical.is_file()
+    assert legacy.read_bytes() == legacy_bytes
+    assert payload(inspected)["worktree"]["worktree_ref"] == worktree["worktree_ref"]
+
+
+def test_imported_journal_allows_canonical_progress_without_legacy_write(
+    repo_and_container: tuple[Path, Path],
+) -> None:
+    repo, container = repo_and_container
+    worktree = entry(provision(repo, container, "import-progress"))
+    canonical = repo / ".codex" / "runtime" / "worktrees.json"
+    legacy = repo / ".omp" / "runtime" / "worktrees.json"
+    legacy.parent.mkdir(parents=True)
+    legacy.write_bytes(canonical.read_bytes())
+    canonical.unlink()
+
+    imported = run_cli(repo, "inspect", "--worktree-ref", worktree["worktree_ref"])
+    assert imported.returncode == 0, (imported.stdout, imported.stderr)
+    legacy_bytes = legacy.read_bytes()
+    legacy_revision = json.loads(legacy_bytes)["revision"]
+
+    progressed = run_cli(
+        repo,
+        "retain",
+        "--worktree-ref",
+        worktree["worktree_ref"],
+        "--actor",
+        "root",
+        "--reason",
+        "preserve post-import state",
+    )
+    assert progressed.returncode == 0, (progressed.stdout, progressed.stderr)
+    canonical_document = json.loads(canonical.read_text(encoding="utf-8"))
+    assert canonical_document["revision"] > legacy_revision
+    assert legacy.read_bytes() == legacy_bytes
+
+    inspected = run_cli(repo, "inspect", "--worktree-ref", worktree["worktree_ref"])
+    assert inspected.returncode == 0, (inspected.stdout, inspected.stderr)
+
+
+def test_legacy_import_refuses_stale_receipt_before_creating_canonical(
+    repo_and_container: tuple[Path, Path],
+) -> None:
+    repo, container = repo_and_container
+    worktree = entry(provision(repo, container, "legacy-stale-receipt"))
+    canonical = repo / ".codex" / "runtime" / "worktrees.json"
+    legacy = repo / ".omp" / "runtime" / "worktrees.json"
+    legacy.parent.mkdir(parents=True)
+    document = json.loads(canonical.read_text(encoding="utf-8"))
+    document["worktrees"][0]["canonical_absolute_path"] = str(
+        Path(worktree["canonical_absolute_path"]).with_name("wrong-worktree-path")
+    )
+    legacy.write_text(json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    canonical.unlink()
+
+    refused = run_cli(repo, "inspect", "--worktree-ref", worktree["worktree_ref"])
+    assert refused.returncode == 5
+    assert not canonical.exists()
+
+
+def test_dual_journal_agreement_then_conflict_fails_closed(
+    repo_and_container: tuple[Path, Path],
+) -> None:
+    repo, container = repo_and_container
+    worktree = entry(provision(repo, container, "dual-journal"))
+    canonical = repo / ".codex" / "runtime" / "worktrees.json"
+    legacy = repo / ".omp" / "runtime" / "worktrees.json"
+    legacy.parent.mkdir(parents=True)
+    legacy.write_bytes(canonical.read_bytes())
+
+    agreement = run_cli(repo, "inspect", "--worktree-ref", worktree["worktree_ref"])
+    assert agreement.returncode == 0, (agreement.stdout, agreement.stderr)
+
+    conflicting = json.loads(legacy.read_text(encoding="utf-8"))
+    conflicting["worktrees"][0]["lifecycle"] = "CANDIDATE_READY"
+    legacy.write_text(json.dumps(conflicting, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    same_revision_conflict = run_cli(repo, "inspect", "--worktree-ref", worktree["worktree_ref"])
+    assert same_revision_conflict.returncode == 6
+    assert "conflict" in payload(same_revision_conflict)["error"]
+
+    conflicting = json.loads(canonical.read_text(encoding="utf-8"))
+    conflicting["revision"] += 1
+    legacy.write_text(json.dumps(conflicting, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    refused = run_cli(repo, "inspect", "--worktree-ref", worktree["worktree_ref"])
+    assert refused.returncode == 6
+    assert "conflict" in payload(refused)["error"]
+
+
+def test_codex_runtime_reparse_alias_is_refused(
+    repo_and_container: tuple[Path, Path],
+) -> None:
+    repo, container = repo_and_container
+    outside = repo.parent / "codex-runtime-outside"
+    outside.mkdir()
+    codex = repo / ".codex"
+    _symlink_or_skip(codex, outside, target_is_directory=True)
+    refused = run_cli(
+        repo,
+        "provision",
+        "--repo",
+        str(repo),
+        "--container",
+        str(container),
+        "--direction",
+        "example-direction",
+        "--kind",
+        "engineering",
+        "--assignment",
+        "codex-reparse",
+        "--base",
+        git(repo, "rev-parse", "HEAD").stdout.strip(),
+    )
+    assert refused.returncode == 5
 
 
 def test_canonical_path_escape_and_initial_symlink_container_refuse(repo_and_container: tuple[Path, Path]) -> None:
@@ -227,7 +407,7 @@ def test_canonical_path_escape_and_initial_symlink_container_refuse(repo_and_con
     )
     assert escaped.returncode in {2, 5}
     link = repo.parent / "container-link"
-    link.symlink_to(outside, target_is_directory=True)
+    _symlink_or_skip(link, outside, target_is_directory=True)
 
     symlinked = run_cli(
         repo,
@@ -260,7 +440,7 @@ def test_mid_provision_container_swap_fails_closed(repo_and_container: tuple[Pat
         result = original_run_git(cwd, *args, **kwargs)
         if not swapped and args[:3] == ("worktree", "add", "-b"):
             container.rename(backup)
-            container.symlink_to(backup, target_is_directory=True)
+            _symlink_or_skip(container, backup, target_is_directory=True)
             swapped = True
         return result
 
@@ -358,7 +538,9 @@ def test_allowed_path_and_symlink_escape_are_refused(repo_and_container: tuple[P
     provisioned = provision(repo, container, "symlink-change")
     second = entry(provisioned)
     second_path = Path(second["canonical_absolute_path"])
-    (second_path / "src" / "escape").symlink_to(repo.parent, target_is_directory=True)
+    _symlink_or_skip(
+        second_path / "src" / "escape", repo.parent, target_is_directory=True
+    )
     candidate = commit(second_path, "tracked symlink")
     assert run_cli(repo, "record-candidate", "--worktree-ref", second["worktree_ref"], "--candidate", candidate).returncode == 0
     result = run_cli(
@@ -410,7 +592,7 @@ def test_release_registry_race_before_lock_has_no_git_or_path_effect(
     repo, container = repo_and_container
     worktree = entry(provision(repo, container, "release-registry-race"))
     path = Path(worktree["canonical_absolute_path"])
-    registry_path = repo / ".omp" / "runtime" / "worktrees.json"
+    registry_path = repo / ".codex" / "runtime" / "worktrees.json"
     branch_before = git(repo, "rev-parse", worktree["branch"]).stdout.strip()
     original_lock = worktree_module._container_lock
     raced = False
@@ -443,7 +625,7 @@ def test_apply_receipt_race_before_lock_has_no_git_or_registry_effect(
 
     repo, container = repo_and_container
     _, _, _, receipt_path = prepared_candidate(repo, container, "apply-receipt-race")
-    registry_path = repo / ".omp" / "runtime" / "worktrees.json"
+    registry_path = repo / ".codex" / "runtime" / "worktrees.json"
     registry_before = registry_path.read_bytes()
     target_before = git(repo, "rev-parse", "omp/workflow").stdout.strip()
     original_lock = worktree_module._container_lock
@@ -481,7 +663,7 @@ def test_apply_refuses_target_or_registry_advance_while_container_lock_is_held(
 
     repo, container = repo_and_container
     worktree, _, candidate, receipt_path = prepared_candidate(repo, container, f"locked-{advanced_fact}-race")
-    registry_path = repo / ".omp" / "runtime" / "worktrees.json"
+    registry_path = repo / ".codex" / "runtime" / "worktrees.json"
     target_before = git(repo, "rev-parse", "omp/workflow").stdout.strip()
     expected_target = target_before
     original_lock = worktree_module._container_lock
@@ -532,7 +714,7 @@ def test_apply_post_effect_cas_failure_is_recoverably_journaled(
     with pytest.raises(worktree_module.UnknownApply):
         worktree_module.apply(str(receipt_path), "root")
     assert git(repo, "rev-parse", "omp/workflow").stdout.strip() == candidate
-    registry = json.loads((repo / ".omp" / "runtime" / "worktrees.json").read_text(encoding="utf-8"))
+    registry = json.loads((repo / ".codex" / "runtime" / "worktrees.json").read_text(encoding="utf-8"))
     current = next(row for row in registry["worktrees"] if row["worktree_ref"] == worktree["worktree_ref"])
     assert current["lifecycle"] == "APPLY_OUTCOME_UNKNOWN"
     assert current["unknown_outcome"]["operation"] == "APPLY"
@@ -571,7 +753,7 @@ def test_release_post_effect_cas_failure_is_recoverably_journaled(
         worktree_module.release(str(repo), worktree["worktree_ref"], "root", "refuse")
     assert not target.exists()
     assert git(repo, "show-ref", "--verify", "refs/heads/" + worktree["branch"], check=False).returncode != 0
-    registry = json.loads((repo / ".omp" / "runtime" / "worktrees.json").read_text(encoding="utf-8"))
+    registry = json.loads((repo / ".codex" / "runtime" / "worktrees.json").read_text(encoding="utf-8"))
     current = next(row for row in registry["worktrees"] if row["worktree_ref"] == worktree["worktree_ref"])
     assert current["lifecycle"] == "RELEASE_OUTCOME_UNKNOWN"
     assert current["unknown_outcome"]["operation"] == "RELEASE"
@@ -585,7 +767,7 @@ def test_orphaned_provision_is_reported_exactly_and_not_duplicated(repo_and_cont
     repo, container = repo_and_container
     provisioned = provision(repo, container, "orphan-case")
     worktree = entry(provisioned)
-    registry_path = repo / ".omp" / "runtime" / "worktrees.json"
+    registry_path = repo / ".codex" / "runtime" / "worktrees.json"
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
     row = next(item for item in registry["worktrees"] if item["worktree_ref"] == worktree["worktree_ref"])
     row["lifecycle"] = "PROVISIONING"

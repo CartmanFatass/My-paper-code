@@ -19,8 +19,14 @@ import re
 import tempfile
 import sys
 import uuid
+import ctypes
 from pathlib import Path
 from typing import Any, Mapping
+
+try:
+    from scripts import hmasd_platform
+except ImportError:
+    import hmasd_platform
 
 SCHEMA_VERSION = 1
 GIB = 1024**3
@@ -61,15 +67,7 @@ def _atomic_write_json(path: Path, payload: Mapping[str, Any]) -> None:
             os.fsync(stream.fileno())
         os.replace(temporary, path)
         temporary = None
-        try:
-            directory_fd = os.open(path.parent, os.O_RDONLY | getattr(os, "O_DIRECTORY", 0))
-        except OSError:
-            directory_fd = -1
-        if directory_fd >= 0:
-            try:
-                os.fsync(directory_fd)
-            finally:
-                os.close(directory_fd)
+        hmasd_platform.fsync_directory(path.parent)
     finally:
         if temporary is not None:
             try:
@@ -152,7 +150,7 @@ def _read_cpu() -> dict[str, Any]:
     physical = len(physical_ids) or logical
     try:
         load_one = os.getloadavg()[0]
-    except OSError:
+    except (AttributeError, OSError):
         load_one = 0.0
     return {
         "physical_cores": physical,
@@ -163,6 +161,29 @@ def _read_cpu() -> dict[str, Any]:
 
 
 def _read_meminfo() -> dict[str, Any]:
+    if os.name == "nt":
+        class MEMORYSTATUSEX(ctypes.Structure):
+            _fields_ = [
+                ("dwLength", ctypes.c_ulong),
+                ("dwMemoryLoad", ctypes.c_ulong),
+                ("ullTotalPhys", ctypes.c_ulonglong),
+                ("ullAvailPhys", ctypes.c_ulonglong),
+                ("ullTotalPageFile", ctypes.c_ulonglong),
+                ("ullAvailPageFile", ctypes.c_ulonglong),
+                ("ullTotalVirtual", ctypes.c_ulonglong),
+                ("ullAvailVirtual", ctypes.c_ulonglong),
+                ("ullAvailExtendedVirtual", ctypes.c_ulonglong),
+            ]
+
+        status = MEMORYSTATUSEX()
+        status.dwLength = ctypes.sizeof(status)
+        if not ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(status)):
+            return {}
+        return {
+            "MemTotal": int(status.ullTotalPhys),
+            "MemAvailable": int(status.ullAvailPhys),
+        }
+
     values: dict[str, int] = {}
     try:
         lines = PROC_MEMINFO.read_text(encoding="utf-8").splitlines()

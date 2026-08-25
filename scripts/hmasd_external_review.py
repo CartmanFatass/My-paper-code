@@ -22,6 +22,11 @@ from pathlib import Path, PurePosixPath
 from typing import Any, Mapping, Sequence
 from urllib.parse import urlsplit
 
+try:
+    from scripts import hmasd_platform
+except ImportError:
+    import hmasd_platform
+
 
 ROUND_ID_HEX_LENGTH = 20
 ARCHIVE_SCHEMA = "agentify_review_natural_completion_archive_v1"
@@ -388,9 +393,15 @@ def _normalise_prompt(value: str) -> str:
     return " ".join(value.split()).casefold()
 
 
+def _is_alias(path: Path) -> bool:
+    """Recognize POSIX symlinks and Windows junction/reparse aliases."""
+
+    return hmasd_platform.is_reparse_or_symlink(path)
+
+
 def _read_prompt(round_dir: Path, filename: str) -> tuple[Path, str]:
     path = round_dir / filename
-    if not path.is_file() or path.is_symlink():
+    if not path.is_file() or _is_alias(path):
         raise ExternalReviewError(f"missing prompt file: {path}")
     try:
         text = path.read_text(encoding="utf-8")
@@ -411,7 +422,7 @@ def validate_prompts(round_dir: os.PathLike[str] | str) -> dict[str, Any]:
     """Validate provider separation and the Pro convergence isolation boundary."""
 
     directory = Path(round_dir)
-    if not directory.is_dir() or directory.is_symlink():
+    if not directory.is_dir() or _is_alias(directory):
         raise ExternalReviewError(f"round directory is not a regular directory: {directory}")
     loaded = {name: _read_prompt(directory, name) for name in PROMPT_FILES}
     gemini = loaded["GEMINI_DIVERGENT_PROMPT.md"][1]
@@ -530,12 +541,7 @@ def validate_archive(operation_ref: Any, archive: Any) -> dict[str, Any]:
 
 
 def _fsync_directory(path: Path) -> None:
-    flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0)
-    fd = os.open(path, flags)
-    try:
-        os.fsync(fd)
-    finally:
-        os.close(fd)
+    hmasd_platform.fsync_directory(path)
 
 
 def _ensure_parent(path: Path) -> None:
@@ -560,15 +566,15 @@ def _owned_destination(operation: Mapping[str, Any], destination: os.PathLike[st
         parent = root
         for component in relative.parts[:-1]:
             parent /= component
-            if parent.is_symlink():
-                raise PathRefusal(f"owned archive path contains a symlinked parent: {parent}")
+            if _is_alias(parent):
+                raise PathRefusal(f"owned archive path contains a symlink or reparse parent: {parent}")
     except (OSError, RuntimeError) as exc:
         raise PathRefusal(f"cannot resolve owned archive destination: {target}: {exc}") from exc
     return expected
 
 
 def _existing_archive(destination: Path) -> ArchiveRecord:
-    if destination.is_symlink() or not destination.is_file():
+    if _is_alias(destination) or not destination.is_file():
         raise PathRefusal(f"archive destination is not a regular file: {destination}")
     return _archive_record(None, destination)
 

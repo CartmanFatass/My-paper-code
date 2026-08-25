@@ -9,6 +9,8 @@ import sys
 import time
 from pathlib import Path
 
+import pytest
+
 from scripts import hmasd_run
 
 
@@ -156,6 +158,41 @@ def _prepare(
     return output_root / "manifest.json"
 def _execute_process(manifest_path: str, results) -> None:
     results.put(hmasd_run.main(["execute", "--manifest", manifest_path]))
+
+
+@pytest.mark.skipif(os.name != "nt", reason="native Windows compatibility contract")
+@pytest.mark.parametrize(
+    "command",
+    [
+        ("python3", "-c", "pass"),
+        ("python3.11", "-c", "pass"),
+        ("/home/fires/HMASD/scripts/train.py",),
+        (sys.executable, "/mnt/c/Projects/HMASD/config.json"),
+    ],
+)
+def test_prepare_refuses_omp_linux_command_paths_on_native_windows(
+    monkeypatch, tmp_path: Path, command: tuple[str, ...]
+) -> None:
+    _prepare(monkeypatch, tmp_path, *command, expected_code=2)
+
+
+@pytest.mark.skipif(os.name != "nt", reason="native Windows compatibility contract")
+def test_manifest_with_wsl_cwd_is_refused_before_file_open(tmp_path: Path) -> None:
+    manifest_path = tmp_path / "manifest.json"
+    manifest_path.write_text(
+        json.dumps(
+            {
+                "direction_id": "direction",
+                "run_id": "run",
+                "cwd": "/home/fires/HMASD",
+            }
+        ),
+        encoding="utf-8",
+    )
+    with pytest.raises(hmasd_run.RunRefusal, match="WSL/POSIX"):
+        hmasd_run._manifest_direction_root(
+            manifest_path, json.loads(manifest_path.read_text(encoding="utf-8"))
+        )
 
 
 
@@ -377,7 +414,7 @@ def test_direction_digest_claim_blocks_duplicate_launch_across_run_roots(
     command = [sys.executable, "-c", "import time; time.sleep(1.0)"]
     first = _prepare(monkeypatch, tmp_path, *command, run_id="run-one")
     second = _prepare(monkeypatch, tmp_path, *command, run_id="run-two")
-    context = multiprocessing.get_context("fork")
+    context = multiprocessing.get_context("spawn" if os.name == "nt" else "fork")
     results = context.Queue()
     process = context.Process(target=_execute_process, args=(str(first), results))
     process.start()
@@ -441,6 +478,26 @@ def test_target_command_starts_only_after_process_identity_is_persisted(
 
 def test_exec_gate_eof_prevents_popen_to_persistence_orphan(tmp_path: Path) -> None:
     marker = tmp_path / "target-started"
+    if os.name == "nt":
+        gate = tmp_path / "unreleased.gate"
+        gate.touch()
+        child = subprocess.Popen(
+            [
+                sys.executable,
+                str(Path(hmasd_run.__file__).resolve()),
+                "_exec-gate",
+                "--gate-path",
+                str(gate),
+                "--",
+                sys.executable,
+                "-c",
+                f"from pathlib import Path; Path({str(marker)!r}).touch()",
+            ]
+        )
+        gate.unlink()
+        assert child.wait(timeout=5) != 0
+        assert not marker.exists()
+        return
     read_fd, write_fd = os.pipe()
     child = subprocess.Popen(
         [
@@ -482,7 +539,14 @@ def test_reused_pid_identity_is_not_treated_as_an_owned_group(
     monkeypatch.setattr(hmasd_run, "_read_boot_id", lambda: "boot-a")
     monkeypatch.setattr(hmasd_run, "_proc_start_ticks", lambda _pid: 200)
     monkeypatch.setattr(hmasd_run, "_group_pids", lambda _pgid: [4242])
-    monkeypatch.setattr(os, "killpg", lambda pgid, signum: killed.append((pgid, signum)))
+    if os.name == "nt":
+        monkeypatch.setattr(
+            hmasd_run,
+            "_terminate_windows_pid",
+            lambda pid: killed.append((pid, 0)),
+        )
+    else:
+        monkeypatch.setattr(os, "killpg", lambda pgid, signum: killed.append((pgid, signum)))
 
     assert hmasd_run.main(["cancel", "--manifest", str(manifest_path)]) == 6
     assert killed == []
@@ -512,7 +576,14 @@ def test_absent_leader_with_untied_reused_pgid_is_never_signalled(
         lambda pid: None if pid == 4242 else 900,
     )
     monkeypatch.setattr(hmasd_run, "_group_pids", lambda _pgid: [5000])
-    monkeypatch.setattr(os, "killpg", lambda pgid, signum: killed.append((pgid, signum)))
+    if os.name == "nt":
+        monkeypatch.setattr(
+            hmasd_run,
+            "_terminate_windows_pid",
+            lambda pid: killed.append((pid, 0)),
+        )
+    else:
+        monkeypatch.setattr(os, "killpg", lambda pgid, signum: killed.append((pgid, signum)))
 
     assert hmasd_run.main(["cancel", "--manifest", str(manifest_path)]) == 6
     assert killed == []

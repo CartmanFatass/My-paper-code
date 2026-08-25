@@ -30,8 +30,15 @@ MAX_SNAPSHOT_ATTEMPTS = 3
 EPOCH = "1970-01-01T00:00:00Z"
 
 REGISTRY_REL = "docs/research/portfolio/workflow/registry.json"
-RUNTIME_AGENTS_REL = ".omp/runtime/agents.json"
-RUNTIME_WORKTREES_REL = ".omp/runtime/worktrees.json"
+# Codex runtime references are disposable observations.  Keep the old OMP
+# locations as a read-only fallback so a historical checkout remains visible
+# during cutover, but do not make their absence an error condition.
+RUNTIME_AGENTS_REL = ".codex/runtime/agents.json"
+RUNTIME_WORKTREES_REL = ".codex/runtime/worktrees.json"
+RUNTIME_TASKS_REL = ".codex/runtime/tasks.json"
+LEGACY_RUNTIME_AGENTS_REL = ".omp/runtime/agents.json"
+LEGACY_RUNTIME_WORKTREES_REL = ".omp/runtime/worktrees.json"
+LEGACY_RUNTIME_TASKS_REL = ".omp/runtime/tasks.json"
 
 ASSET_NAMES = {
     "/": ("index.html", "text/html; charset=utf-8"),
@@ -104,13 +111,19 @@ def resolve_root(raw: str | os.PathLike[str]) -> Root:
         raise InvalidRootError("root is not a readable directory") from exc
     if not candidate.is_dir():
         raise InvalidRootError("root is not a directory")
-    marker = candidate / ".omp" / "AGENTS.md"
-    try:
-        marker_stat = marker.stat()
-    except OSError as exc:
-        raise InvalidRootError("root is missing .omp/AGENTS.md") from exc
-    if not marker.is_file() or marker_stat.st_size == 0:
-        raise InvalidRootError("root is missing .omp/AGENTS.md")
+    markers = (
+        candidate / "AGENTS.md",
+        candidate / ".codex" / "config.toml",
+        candidate / ".omp" / "AGENTS.md",
+    )
+    def has_marker(path: Path) -> bool:
+        try:
+            return path.is_file() and path.stat().st_size > 0
+        except OSError:
+            return False
+
+    if not any(has_marker(marker) for marker in markers):
+        raise InvalidRootError("root is missing AGENTS.md or Codex/OMP project metadata")
     return Root(candidate)
 
 
@@ -123,6 +136,20 @@ def _json_bytes(value: Any) -> bytes:
 
 def _json_text(value: Any) -> str:
     return _json_bytes(value).decode("utf-8")
+
+
+def _write_json_stdout(value: Any) -> None:
+    """Write CLI JSON as UTF-8 bytes regardless of the console code page."""
+
+    body = _json_bytes(value)
+    stdout_buffer = getattr(sys.stdout, "buffer", None)
+    if stdout_buffer is not None:
+        stdout_buffer.write(body)
+        stdout_buffer.flush()
+        return
+    # Embedded callers may provide a text-only stream (for example, a test
+    # capture object).  The real CLI always has ``stdout.buffer``.
+    sys.stdout.write(body.decode("utf-8"))
 
 
 def _under_root(root: Path, path: Path) -> bool:
@@ -300,6 +327,7 @@ def _basic_kind_shape(kind: str, value: Mapping[str, Any]) -> bool:
         "accepted_result": ("schema_version", "revision", "updated_at", "writer", "result_id", "direction_id"),
         "runtime_agents": ("schema_version", "revision", "updated_at", "writer", "agents"),
         "runtime_worktrees": ("schema_version", "revision", "updated_at", "writer", "worktrees"),
+        "runtime_tasks": ("schema_version", "revision", "updated_at", "writer", "tasks"),
     }
     if kind == "external_archive":
         return value.get("schema") == "agentify_review_natural_completion_archive_v1"
@@ -366,6 +394,20 @@ def _semantic_valid(kind: str, value: Mapping[str, Any]) -> bool:
         if len(ids) != len(values) or any(not isinstance(identifier, str) for identifier in ids):
             return False
         return len(ids) == len(set(ids))
+    if kind == "runtime_tasks":
+        values = value.get("tasks")
+        if not isinstance(values, list):
+            return False
+        identities = [
+            item.get("logical_identity")
+            for item in values
+            if isinstance(item, Mapping)
+        ]
+        if len(identities) != len(values) or any(
+            not isinstance(identity, str) for identity in identities
+        ):
+            return False
+        return len(identities) == len(set(identities))
     return True
 
 
@@ -464,6 +506,31 @@ class _SnapshotAttempt:
             self._file_digests[path] = document.digest
             self._file_labels[path] = relative
         return document
+
+    def read_runtime_document(
+        self,
+        relative: str,
+        legacy_relative: str,
+        kind: str,
+        empty_value: Mapping[str, Any],
+    ) -> Document:
+        """Read the active runtime map, falling back to the OMP map.
+
+        Runtime maps are disposable task/process observations rather than
+        workflow authorities.  A fresh Codex checkout normally has neither
+        map, so both missing paths intentionally collapse to an empty, healthy
+        projection.  Malformed or otherwise unreadable data is still surfaced
+        when a map exists; that keeps real runtime corruption observable while
+        avoiding noisy ``cannot open file`` failures during normal startup.
+        """
+
+        active = self.read_document(relative, kind)
+        if active.status != "missing":
+            return active
+        legacy = self.read_document(legacy_relative, kind)
+        if legacy.status != "missing":
+            return legacy
+        return Document("ok", dict(empty_value), None, None, None)
 
     def read_digest(self, relative: str) -> str | None:
         path = _safe_relative_path(self.root, relative, must_exist=False)
@@ -709,6 +776,8 @@ def _build_portfolio(root: Path, registry_doc: Document, sources: _SnapshotAttem
 def _agent_type(logical_identity: str) -> str:
     if logical_identity == "Root":
         return "hmasd-root"
+    if logical_identity == "Portfolio":
+        return "hmasd-portfolio"
     if logical_identity.startswith("EM-"):
         return "hmasd-em"
     if logical_identity.startswith("CM-"):
@@ -729,10 +798,22 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
         "Root": {
             "logical_identity": "Root",
             "agent_type": "hmasd-root",
+            "task_level": "top-level",
             "generation": 1,
             "lifecycle": "ACTIVE",
             "job_name": "Root",
             "parent_identity": "Root",
+        },
+        # Portfolio is a user-facing top-level task in Codex.  It is not
+        # derived from a direction registry entry and therefore remains
+        # visible even when no disposable runtime map has been created.
+        "Portfolio": {
+            "logical_identity": "Portfolio",
+            "agent_type": "hmasd-portfolio",
+            "task_level": "top-level",
+            "generation": 1,
+            "lifecycle": "ACTIVE",
+            "job_name": "Portfolio",
         },
     }
     if registry_doc.status == "ok" and registry_doc.value is not None:
@@ -748,6 +829,7 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
                 logical[identity] = {
                     "logical_identity": identity,
                     "agent_type": _agent_type(identity),
+                    "task_level": "top-level",
                     "generation": generation,
                     "lifecycle": item.get("lifecycle", "UNKNOWN"),
                     "job_name": agent.get("job_name", identity),
@@ -780,6 +862,7 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
                 logical[cm_identity] = {
                     "logical_identity": cm_identity,
                     "agent_type": "hmasd-cm",
+                    "task_level": "top-level",
                     "generation": generation,
                     "lifecycle": phase if isinstance(phase, str) else "UNKNOWN",
                     "job_name": _manager_job_name("CM", identifier),
@@ -791,7 +874,12 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
         statuses.append(registry_doc.status)
         _warning_add(warnings, registry_doc.warning)
 
-    runtime = sources.read_document(RUNTIME_AGENTS_REL, "runtime_agents")
+    runtime = sources.read_runtime_document(
+        RUNTIME_AGENTS_REL,
+        LEGACY_RUNTIME_AGENTS_REL,
+        "runtime_agents",
+        {"schema_version": 1, "revision": 0, "agents": []},
+    )
     generated_values.append(runtime.updated_at)
     if runtime.revision is not None:
         refs["runtime_agents"] = runtime.revision
@@ -820,6 +908,7 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
                 {
                     "logical_identity": identity,
                     "agent_type": item.get("agent_type", _agent_type(identity)),
+                    "task_level": "leaf",
                     "generation": item.get("generation", 1),
                     "lifecycle": "UNKNOWN",
                     "job_name": item.get("job_ref", identity),
@@ -849,6 +938,77 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
                 if source in item and isinstance(item[source], (str, int)):
                     entry[target] = item[source]
 
+    # The Codex task map carries live task/thread references in ignored
+    # runtime state.  Project only the non-sensitive identity/lifecycle fields;
+    # missing maps are quiet, while malformed maps remain visible as invalid.
+    tasks = sources.read_runtime_document(
+        RUNTIME_TASKS_REL,
+        LEGACY_RUNTIME_TASKS_REL,
+        "runtime_tasks",
+        {"schema_version": 1, "revision": 0, "tasks": []},
+    )
+    generated_values.append(tasks.updated_at)
+    if tasks.revision is not None:
+        refs["runtime_tasks"] = tasks.revision
+    if tasks.status != "ok" or tasks.value is None:
+        statuses.append(tasks.status)
+        _warning_add(warnings, tasks.warning)
+    else:
+        task_items = tasks.value.get("tasks", [])
+        if not isinstance(task_items, list):
+            statuses.append("invalid")
+            _warning_add(warnings, "invalid:runtime_tasks")
+            task_items = []
+        kind_types = {
+            "root": "hmasd-root",
+            "portfolio": "hmasd-portfolio",
+            "em": "hmasd-em",
+            "cm": "hmasd-cm",
+        }
+        top_level_kinds = set(kind_types)
+        for item in sorted(
+            (entry for entry in task_items if isinstance(entry, Mapping)),
+            key=lambda entry: str(entry.get("logical_identity", "")),
+        ):
+            identity = item.get("logical_identity")
+            if not isinstance(identity, str):
+                statuses.append("invalid")
+                _warning_add(warnings, "invalid:runtime_tasks_identity")
+                continue
+            kind = item.get("kind")
+            task_type = item.get("agent_type")
+            if not isinstance(task_type, str):
+                task_type = kind_types.get(kind, _agent_type(identity))
+            task_level = "top-level" if kind in top_level_kinds else "leaf"
+            entry = logical.setdefault(
+                identity,
+                {
+                    "logical_identity": identity,
+                    "agent_type": task_type,
+                    "task_level": task_level,
+                    "generation": item.get("generation", 1),
+                    "lifecycle": "UNKNOWN",
+                    "job_name": item.get("task_title", identity),
+                },
+            )
+            expected_generation = entry.get("generation")
+            observed_generation = item.get("generation")
+            if isinstance(observed_generation, int) and expected_generation != observed_generation:
+                statuses.append("stale")
+                _warning_add(warnings, f"stale:task_generation:{identity}")
+            for source, target in (
+                ("agent_type", "agent_type"),
+                ("generation", "generation"),
+                ("task_title", "job_name"),
+                ("direction_id", "direction_id"),
+                ("lifecycle", "lifecycle"),
+                ("parent_identity", "parent_identity"),
+                ("last_seen_at", "last_seen_at"),
+            ):
+                if source in item and isinstance(item[source], (str, int)):
+                    entry[target] = item[source]
+            entry["task_level"] = task_level
+
     agents: list[dict[str, Any]] = []
     for identity in sorted(logical):
         entry = logical[identity]
@@ -857,6 +1017,7 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
             for key in (
                 "logical_identity",
                 "agent_type",
+                "task_level",
                 "parent_identity",
                 "direction_id",
                 "generation",
@@ -867,7 +1028,6 @@ def _build_agents(registry_doc: Document, sources: _SnapshotAttempt) -> dict[str
             )
             if key in entry and isinstance(entry[key], (str, int))
         }
-        output["hub_instruction"] = f"Inspect {identity} in Agent Hub via /agents."
         agents.append(output)
     if not statuses:
         statuses = ["ok"]
@@ -1175,7 +1335,12 @@ def _build_worktrees(registry_doc: Document, sources: _SnapshotAttempt) -> dict[
     generated_values: list[str | None] = [registry_doc.updated_at]
     if registry_doc.status != "ok":
         statuses.append(registry_doc.status)
-    doc = sources.read_document(RUNTIME_WORKTREES_REL, "runtime_worktrees")
+    doc = sources.read_runtime_document(
+        RUNTIME_WORKTREES_REL,
+        LEGACY_RUNTIME_WORKTREES_REL,
+        "runtime_worktrees",
+        {"schema_version": 1, "revision": 0, "worktrees": []},
+    )
     generated_values.append(doc.updated_at)
     if doc.revision is not None:
         refs["runtime_worktrees"] = doc.revision
@@ -1455,9 +1620,9 @@ def main(argv: list[str] | None = None) -> int:
                     snapshot = json.loads(str(exc))
                 except json.JSONDecodeError:
                     snapshot = _unstable_snapshot()
-                sys.stdout.write(_json_text(snapshot))
+                _write_json_stdout(snapshot)
                 return 4
-            sys.stdout.write(_json_text(snapshot))
+            _write_json_stdout(snapshot)
             if snapshot.get("status") == "invalid":
                 return 2
             return 0

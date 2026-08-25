@@ -1,0 +1,87 @@
+#:schema https://developers.openai.com/codex/config-schema.json
+
+[features]
+multi_agent_v2 = true
+hooks = false
+
+[agents]
+max_threads = 40
+max_depth = 1
+interrupt_message = true
+
+[agents.HMASDCodeProjectManager]
+description = "Engineering manager for one bounded code scope."
+config_file = "./agents/hmasd-code-project-manager.toml"
+
+[agents.HMASDIndependentResearchExplorer]
+description = "Research manager for one bounded scientific scope."
+config_file = "./agents/hmasd-independent-research-explorer.toml"
+
+[agents.HMASDProjectScout]
+description = "Read-only repository scout."
+config_file = "./agents/hmasd-project-scout.toml"
+
+[agents.HMASDCodeScout]
+description = "Read-only code/interface scout."
+config_file = "./agents/hmasd-code-scout.toml"
+
+[agents.HMASDImplementer]
+description = "Implementation worker for semantics-sensitive code."
+config_file = "./agents/hmasd-implementer.toml"
+
+[agents.HMASDRoutineImplementer]
+description = "Implementation worker for routine engineering."
+config_file = "./agents/hmasd-implementer-terra.toml"
+
+[agents.HMASDReviewer]
+description = "Optional independent code reviewer."
+config_file = "./agents/hmasd-reviewer.toml"
+
+[agents.HMASDVerifier]
+description = "Optional focused runtime verifier."
+config_file = "./agents/hmasd-verifier.toml"
+
+[agents.HMASDExperimentOperator]
+description = "Operator for one actual train/evaluate/analyze command."
+config_file = "./agents/hmasd-experiment-operator.toml"
+
+[agents.HMASDWorkflowRecoveryManager]
+description = "Recovery owner for one repeated workflow failure."
+config_file = "./agents/hmasd-workflow-recovery-manager.toml"
+
+[agents.HMASDCPMAgentifyTransport]
+description = "Transport for one engineering consultation."
+config_file = "./agents/hmasd-cpm-agentify-transport.toml"
+
+[agents.HMASDExplorerAgentifyTransport]
+description = "Transport for one research consultation."
+config_file = "./agents/hmasd-explorer-agentify-transport.toml"
+
+[agents.HMASDExternalGeminiTransport]
+description = "Transport for one Gemini research consultation."
+config_file = "./agents/hmasd-external-gemini-transport.toml"
+
+[agents.HMASDResearchScout]
+description = "Research evidence scout."
+config_file = "./agents/hmasd-research-scout.toml"
+
+[agents.HMASDResearchInnovator]
+description = "Research mechanism and discriminator innovator."
+config_file = "./agents/hmasd-research-innovator.toml"
+
+[agents.HMASDResearchCritic]
+description = "Research claim critic."
+config_file = "./agents/hmasd-research-critic.toml"
+
+[agents.HMASDResearchPrinciplesAnalyst]
+description = "Learning-dynamics and principles analyst."
+config_file = "./agents/hmasd-research-principles-analyst.toml"
+
+[agents.HMASDResearchArtifactWriter]
+description = "Writer for an exact research artifact."
+config_file = "./agents/hmasd-research-artifact-writer.toml"
+
+[mcp_servers.agentify-desktop]
+command = "node"
+args = ['C:\Projects\agentify-desktop\bin\agentify-desktop.mjs', "mcp"]
+tool_timeout_sec = 2700

@@ -13,7 +13,6 @@ import argparse
 import contextlib
 import copy
 import datetime as _datetime
-import fcntl
 import hashlib
 import json
 import os
@@ -22,6 +21,11 @@ import re
 import sys
 import tempfile
 from typing import Any, Callable, Iterator, Mapping, NoReturn
+
+try:
+    from scripts import hmasd_platform
+except ImportError:
+    import hmasd_platform
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -39,13 +43,14 @@ KIND_ALIASES = {
     "agent_result": "agent_result",
     "runtime_agents": "runtime_agents",
     "runtime_worktrees": "runtime_worktrees",
+    "runtime_tasks": "runtime_tasks",
 }
 
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 GIT_SHA_RE = re.compile(r"^[0-9a-f]{40}(?:[0-9a-f]{24})?$")
 DIRECTION_RE = re.compile(r"^[a-z0-9][a-z0-9_-]{1,63}$")
 TIMESTAMP_RE = re.compile(
-    r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,6})?Z$"
+    r"^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,9})?Z$"
 )
 PATH_RE = re.compile(r"^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\.\.(?:/|$))(?!.*\\)[^\x00]+$")
 ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
@@ -250,7 +255,14 @@ def _ensure_timestamp(value: Any, name: str) -> None:
     if not isinstance(value, str) or TIMESTAMP_RE.fullmatch(value) is None:
         raise ValidationError(f"{name} is not a UTC RFC3339 timestamp with Z")
     try:
-        _datetime.datetime.fromisoformat(value[:-1])
+        # Codex's native host may emit seven fractional digits while Python's
+        # datetime parser accepts at most six.  Validation still checks the
+        # complete lexical timestamp; truncation is only for calendar parsing.
+        parse_value = value[:-1]
+        if "." in parse_value:
+            whole, fraction = parse_value.split(".", 1)
+            parse_value = f"{whole}.{fraction[:6]}"
+        _datetime.datetime.fromisoformat(parse_value)
     except ValueError as exc:
         raise ValidationError(f"{name} is not a valid timestamp") from exc
 
@@ -266,6 +278,28 @@ def _ensure_path(value: Any, name: str, *, absolute: bool = False) -> None:
         return
     if PATH_RE.fullmatch(value) is None:
         raise ValidationError(f"{name} is not a repository-relative POSIX path")
+
+
+def _ensure_absolute_runtime_path(value: Any, name: str) -> None:
+    """Validate a reconstructable runtime path without resolving aliases."""
+
+    _ensure_path(value, name, absolute=True)
+    path = Path(value)
+    if any(part in {".", ".."} for part in path.parts):
+        raise OwnershipError(f"{name} contains an alias component")
+
+
+def _reject_runtime_alias_chain(path: Path, name: str) -> None:
+    """Reject an existing symlink/reparse component in an absolute path."""
+
+    current = path
+    while True:
+        if _is_alias(current):
+            raise OwnershipError(f"{name} traverses symlink or reparse point: {current}")
+        parent = current.parent
+        if parent == current:
+            break
+        current = parent
 
 
 def _ensure_sha(value: Any, name: str, *, git: bool = False) -> None:
@@ -288,6 +322,42 @@ def _ref_path(ref: Any, name: str) -> str | None:
 
 def _owner_error(message: str) -> OwnershipError:
     return OwnershipError(message)
+
+
+def _is_alias(path: Path) -> bool:
+    """Return whether *path* is a symlink or native reparse-point alias.
+
+    ``Path.is_symlink()`` does not identify Windows junctions and other
+    reparse points.  State paths are authority boundaries, so using the host
+    adapter here keeps native Windows checks equivalent to the POSIX checks.
+    """
+
+    return hmasd_platform.is_reparse_or_symlink(path)
+
+
+def _validate_runtime_tasks_path(path: str | os.PathLike[str]) -> Path:
+    """Require the task cache's canonical ``.codex/runtime/tasks.json`` path.
+
+    The helper accepts a relative spelling for CLI callers and an equivalent
+    absolute spelling for tests/embedding.  It deliberately checks lexical
+    components rather than resolving the path: resolving would allow a
+    junction or symlink to become the runtime authority before it is rejected.
+    """
+
+    target = Path(path)
+    if target.parts[-3:] != (".codex", "runtime", "tasks.json"):
+        raise _owner_error("runtime_tasks path must be .codex/runtime/tasks.json")
+    if any(part in {".", ".."} for part in target.parts):
+        raise _owner_error("runtime_tasks path contains an alias component")
+    current = target
+    while True:
+        if _is_alias(current):
+            raise _owner_error(f"runtime_tasks path traverses symlink or reparse point: {current}")
+        parent = current.parent
+        if parent == current:
+            break
+        current = parent
+    return target
 
 def _immutable_conflict(name: str) -> NoReturn:
     raise ObservedConflictError(f"{name} is immutable across replacement")
@@ -420,7 +490,7 @@ def _reconcile_research_direction_ref(document: Mapping[str, Any]) -> None:
     """Check a research ref against the on-disk registry when available."""
 
     registry_path = ROOT / "docs" / "research" / "portfolio" / "workflow" / "registry.json"
-    if not registry_path.is_file() or registry_path.is_symlink():
+    if not registry_path.is_file() or _is_alias(registry_path):
         return
     try:
         _, registry = _read_document(registry_path)
@@ -447,7 +517,7 @@ def _reconcile_research_direction_ref(document: Mapping[str, Any]) -> None:
     if reference["path"] != expected_path:
         raise ValidationError("research direction_ref path is stale against registry")
     target = ROOT / Path(expected_path)
-    if not target.is_file() or target.is_symlink():
+    if not target.is_file() or _is_alias(target):
         raise ValidationError("research direction_ref target is missing or symlinked")
     if sha256_file(target) != reference["sha256"]:
         raise ValidationError("research direction_ref SHA does not match exact file bytes")
@@ -610,8 +680,41 @@ def _validate_runtime_worktrees(document: Mapping[str, Any]) -> None:
         if worktree["branch"] != expected_branch:
             raise OwnershipError("runtime worktree branch is not assignment-owned")
         candidate = Path(path)
-        if candidate.exists() and candidate.is_symlink():
-            raise OwnershipError("runtime worktree canonical path is a symlink")
+        if candidate.exists() and _is_alias(candidate):
+            raise OwnershipError("runtime worktree canonical path is a symlink or reparse point")
+
+
+def _validate_runtime_tasks(document: Mapping[str, Any]) -> None:
+    """Validate the reconstructable Codex task reference rows."""
+
+    identities: set[str] = set()
+    for task in document["tasks"]:
+        identity = task["logical_identity"]
+        if identity in identities:
+            raise ValidationError(f"duplicate runtime task logical identity: {identity}")
+        identities.add(identity)
+
+        # These fields are intentionally optional in the cache: a task row can
+        # be rebuilt from native task listing before its volatile handles are
+        # observed.  When present, the schema validates their shape and the
+        # checks below validate host/path/timestamp semantics.
+        project_root = task.get("project_root")
+        if project_root is not None:
+            _ensure_absolute_runtime_path(project_root, f"task {identity}.project_root")
+            project_path = Path(project_root)
+            _reject_runtime_alias_chain(project_path, f"task {identity}.project_root")
+        last_seen = task.get("last_seen_at")
+        if last_seen is not None:
+            _ensure_timestamp(last_seen, f"task {identity}.last_seen_at")
+
+        # A checkpoint is a content identity, while worktree/thread/host/cursor
+        # values are opaque runtime handles.  Their exact values are checked by
+        # the schema but are never interpreted as authority here.
+        checkpoint = task.get("checkpoint_sha")
+        if checkpoint is not None:
+            _ensure_sha(checkpoint, f"task {identity}.checkpoint_sha")
+
+
 
 
 def _validate_archive(document: Mapping[str, Any]) -> None:
@@ -641,6 +744,8 @@ def _validate_custom(kind: str, document: Mapping[str, Any]) -> None:
         _validate_runtime_agents(document)
     elif kind == "runtime_worktrees":
         _validate_runtime_worktrees(document)
+    elif kind == "runtime_tasks":
+        _validate_runtime_tasks(document)
     elif kind == "external_archive":
         _validate_archive(document)
 
@@ -673,7 +778,7 @@ def _precheck_writer_ownership(kind: str, document: Mapping[str, Any]) -> None:
             expected = f"EM-{direction_id}"
             if document["writer"] != expected:
                 raise _owner_error(f"accepted_result writer must be {expected}")
-    elif kind in {"runtime_agents", "runtime_worktrees"} and "writer" in document:
+    elif kind in {"runtime_agents", "runtime_worktrees", "runtime_tasks"} and "writer" in document:
         if document["writer"] != "Root":
             raise _owner_error(f"{kind} writer must be Root")
 
@@ -686,8 +791,8 @@ def _reject_symlink_components(value: str, name: str) -> None:
         if component in {"", "."}:
             continue
         candidate /= component
-        if candidate.is_symlink():
-            raise _owner_error(f"{name} traverses symlink component {candidate}")
+        if _is_alias(candidate):
+            raise _owner_error(f"{name} traverses symlink or reparse component {candidate}")
 
 
 def _check_document_paths(value: Any, prefix: str = "$") -> None:
@@ -742,8 +847,8 @@ validate = validate_document
 
 
 def _read_document(path: Path) -> tuple[bytes, dict[str, Any]]:
-    if path.is_symlink():
-        raise OwnershipError(f"refusing symlink state path: {path}")
+    if _is_alias(path):
+        raise OwnershipError(f"refusing symlink or reparse state path: {path}")
     try:
         raw = path.read_bytes()
     except OSError as exc:
@@ -759,7 +864,10 @@ def _read_document(path: Path) -> tuple[bytes, dict[str, Any]]:
 
 
 def read_state(kind: str, path: str | os.PathLike[str]) -> dict[str, Any]:
-    _, document = _read_document(Path(path))
+    target = Path(path)
+    if normalize_kind(kind) == "runtime_tasks":
+        _validate_runtime_tasks_path(target)
+    _, document = _read_document(target)
     return validate_document(kind, document)
 
 
@@ -802,8 +910,14 @@ def _input_document_and_bytes(
 
 
 def _lock_path(path: Path) -> Path:
-    digest = sha256_bytes(os.fsencode(str(path.absolute())))
-    return ROOT / ".omp" / "runtime" / "locks" / f"{digest}.lock"
+    # Callers may spell one state path as ``docs/...`` and another time as a
+    # native absolute path.  Hash a lexical, host-normalized absolute path so
+    # both spellings share one lock.  ``abspath`` intentionally does not
+    # resolve symlinks/reparse points; those are rejected by the authority
+    # checks after the lock is acquired.
+    lock_key = os.path.normcase(os.path.abspath(os.fspath(path)))
+    digest = sha256_bytes(os.fsencode(lock_key))
+    return ROOT / ".codex" / "runtime" / "locks" / f"{digest}.lock"
 
 
 @contextlib.contextmanager
@@ -812,31 +926,21 @@ def state_lock(path: str | os.PathLike[str]) -> Iterator[None]:
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     try:
         with lock_path.open("a+b") as handle:
-            fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
-            try:
+            with hmasd_platform.exclusive_file_lock(handle.fileno()):
                 yield
-            finally:
-                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
     except OSError as exc:
         raise StateError(f"cannot acquire state lock {lock_path}: {exc}") from exc
 
 
 def _fsync_parent(path: Path) -> None:
-    flags = os.O_RDONLY
-    if hasattr(os, "O_DIRECTORY"):
-        flags |= os.O_DIRECTORY
-    fd = os.open(str(path), flags)
-    try:
-        os.fsync(fd)
-    finally:
-        os.close(fd)
+    hmasd_platform.fsync_directory(path)
 
 
 def atomic_write(path: str | os.PathLike[str], data: bytes) -> None:
     target = Path(path)
     target.parent.mkdir(parents=True, exist_ok=True)
-    if target.is_symlink():
-        raise OwnershipError(f"refusing symlink state path: {target}")
+    if _is_alias(target):
+        raise OwnershipError(f"refusing symlink or reparse state path: {target}")
     mode = 0o666
     try:
         mode = target.stat().st_mode & 0o777
@@ -845,7 +949,7 @@ def atomic_write(path: str | os.PathLike[str], data: bytes) -> None:
     fd, temp_name = tempfile.mkstemp(prefix=f".{target.name}.", suffix=".tmp", dir=str(target.parent))
     temp_path = Path(temp_name)
     try:
-        os.fchmod(fd, mode)
+        hmasd_platform.apply_fd_mode(fd, mode)
         view = memoryview(data)
         while view:
             written = os.write(fd, view)
@@ -872,8 +976,8 @@ def _initialize_unlocked(
 ) -> dict[str, Any]:
     validate_document(kind, document, writer=writer)
     target.parent.mkdir(parents=True, exist_ok=True)
-    if target.is_symlink():
-        raise OwnershipError(f"refusing symlink state path: {target}")
+    if _is_alias(target):
+        raise OwnershipError(f"refusing symlink or reparse state path: {target}")
     data = _canonical_bytes(document) if input_bytes is None else input_bytes
     # Stage the complete bytes in the same directory, then publish with a
     # hard-link create.  ``mkstemp`` supplies O_CREAT|O_EXCL and the final
@@ -916,6 +1020,8 @@ def initialize(
     input: Mapping[str, Any] | str | os.PathLike[str],
 ) -> dict[str, Any]:
     target = Path(path)
+    if normalize_kind(kind) == "runtime_tasks":
+        _validate_runtime_tasks_path(target)
     document, input_bytes = _input_document_and_bytes(input)
     with state_lock(target):
         return _initialize_unlocked(kind, target, writer, document, input_bytes)
@@ -932,6 +1038,8 @@ def replace(
     if normalized in {"agent_result", "external_archive"}:
         raise ObservedConflictError(f"{normalized} is an immutable record")
     target = Path(path)
+    if normalized == "runtime_tasks":
+        _validate_runtime_tasks_path(target)
     document = _input_document(input)
     validate_document(normalized, document, writer=writer)
     if not isinstance(expected_revision, int) or isinstance(expected_revision, bool) or expected_revision < 1:
@@ -1248,6 +1356,35 @@ def _validate_runtime_worktrees_transition(
             )
 
 
+def _validate_runtime_tasks_transition(
+    current: Mapping[str, Any], next_document: Mapping[str, Any]
+) -> None:
+    """Keep task identity stable while allowing cache rows to be rebuilt.
+
+    Unlike durable records, rows may be added or removed as native Codex tasks
+    appear/disappear.  A row that survives a replacement is matched by its
+    logical identity; its kind and generation are the only immutable identity
+    coordinates.  Handles and lifecycle/timestamp observations remain freely
+    replaceable runtime facts.
+    """
+
+    next_by_identity = {
+        task["logical_identity"]: task for task in next_document["tasks"]
+    }
+    for current_task in current["tasks"]:
+        identity = current_task["logical_identity"]
+        next_task = next_by_identity.get(identity)
+        if next_task is None:
+            continue
+        label = f"runtime task {identity!r}"
+        _require_unchanged_fields(
+            current_task,
+            next_task,
+            ("kind", "generation"),
+            label,
+        )
+
+
 def _validate_transition(kind: str, current: Mapping[str, Any], next_document: Mapping[str, Any]) -> None:
     if kind == "portfolio_registry":
         _validate_portfolio_registry_transition(current, next_document)
@@ -1263,6 +1400,8 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
         _validate_runtime_agents_transition(current, next_document)
     elif kind == "runtime_worktrees":
         _validate_runtime_worktrees_transition(current, next_document)
+    elif kind == "runtime_tasks":
+        _validate_runtime_tasks_transition(current, next_document)
 
 
 def register_migration(kind: str, from_version: int, function: Migration) -> None:
@@ -1285,6 +1424,8 @@ def migrate(
     if normalized in {"agent_result", "external_archive"}:
         raise ObservedConflictError(f"{normalized} is an immutable record")
     target = Path(path)
+    if normalized == "runtime_tasks":
+        _validate_runtime_tasks_path(target)
     with state_lock(target):
         current_bytes, current = _read_document(target)
         validate_document(normalized, current, writer=writer)
@@ -1354,7 +1495,11 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     try:
         if args.command == "validate":
-            validate_document(args.kind, _read_document(Path(args.path))[1])
+            target = Path(args.path)
+            normalized = normalize_kind(args.kind)
+            if normalized == "runtime_tasks":
+                _validate_runtime_tasks_path(target)
+            validate_document(normalized, _read_document(target)[1])
         elif args.command == "initialize":
             initialize(args.kind, args.path, args.writer, args.input)
         elif args.command == "replace":
