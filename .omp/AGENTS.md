@@ -50,6 +50,12 @@ project inventory is the 17 `hmasd-*` definitions under `.omp/agents/`.
   a permission failure.
 - Use `task` with `maxRecursionDepth: 2` only for a valid declared spawn edge.
   Root → EM/CM → specialist is the maximum path.
+- Task-item `effort` overrides role frontmatter when enabled and coarse `hi`
+  selects the model's highest supported tier, which is `max` for GPT-5.6.
+  Therefore `task.enableEffort` remains disabled: every project role uses the
+  audited `thinking-level` in its `.omp/agents/<role>.md`. Do not pass per-task
+  effort hints or silently raise a low/medium/high operational role to `max`.
+
 
 ## Hub lifecycle
 

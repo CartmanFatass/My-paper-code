@@ -15,7 +15,7 @@ launch:
 task:
   maxConcurrency: 32
   maxRecursionDepth: 2
-  enableEffort: true
+  enableEffort: false
   enableLsp: true
   agentAdvisor:
     hmasd-implementer: opencode-go/glm-5.3:high

@@ -782,6 +782,13 @@ never edits source. Transports receive only the exact Agentify MCP tools exposed
 by the migrated server; they never receive direct browser, write, or shell
 access.
 
+Task-item effort overrides are disabled. With OMP effort hints enabled, coarse
+`hi` means the selected model's highest supported tier and therefore maps to
+`max` on GPT-5.6; it does not preserve a role's configured `high`. The audited
+`thinking-level` in each project agent definition is authoritative so Operator,
+Transport, Scout, CM, EM, and scientific specialist cost/quality tiers remain
+distinct.
+
 Root loads `hmasd-root-control` and `hmasd-git-integration` through mandatory
 instructions in `.omp/AGENTS.md`, because Root is the main session rather than a
 project task-agent definition.

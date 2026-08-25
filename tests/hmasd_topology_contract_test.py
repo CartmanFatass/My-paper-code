@@ -279,6 +279,7 @@ def test_bundled_disablement_root_only_dispatch_and_legacy_cleanup() -> None:
     config = (REPO_ROOT / ".omp" / "config.yml").read_text(encoding="utf-8")
     for bundled in ("scout", "reviewer", "sonic", "designer", "security-reviewer"):
         assert re.search(rf"^    - {re.escape(bundled)}$", config, re.MULTILINE)
+    assert re.search(r"^  enableEffort: false$", config, re.MULTILINE)
 
     active_paths = [
         path
@@ -301,6 +302,8 @@ def test_bundled_disablement_root_only_dispatch_and_legacy_cleanup() -> None:
     assert "bundled `librarian`" in instructions
     assert "hmasd-project-scout" in instructions
     assert "bundled `scout`" not in instructions
+    assert "task.enableEffort` remains disabled" in instructions
+    assert "highest supported tier" in instructions
 
 
 def test_seven_complete_skills_and_authority_files() -> None:
