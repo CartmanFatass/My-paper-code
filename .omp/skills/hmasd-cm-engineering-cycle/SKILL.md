@@ -7,9 +7,10 @@ description: Coordinate one bounded engineering scope from frozen direction evid
 
 ## Purpose
 
-Advance one `CM-<direction>` logical identity through scope freeze, implementation,
-focused verification, and a Root-owned Git candidate. CM coordinates work; it
-never silently redefines science, grants approval, or integrates outside Root.
+Advance one `CM-<direction>` logical identity through scope freeze,
+implementation, focused verification, and one assignment-owned Git checkpoint.
+CM coordinates work; it never silently redefines science, grants approval, or
+integrates outside its provisioned engineering worktree.
 
 ## Inputs
 
@@ -31,9 +32,12 @@ never silently redefines science, grants approval, or integrates outside Root.
    durable `next_action.owner=EM` research request to Root, never a CM
    reinterpretation. Runnable code or verification remains owner `CM`; one
    frozen result-bearing command becomes owner `EXPERIMENT_OPERATOR`.
-5. Produce one candidate through the Root-owned Git helper. Do not commit,
-   integrate, or push from CM. Return one bounded engineering result with an
-   explicit next owner.
+5. At cycle completion, use the provisioned engineering worktree and Git
+   Integration Skill to stage only assignment-owned paths, create/apply one
+   commit as `cm:<direction>`, fetch/compare, and push `omp/workflow`. Report
+   stale base, dirty target, non-fast-forward, mixed ownership, or conflict to
+   Root without resolving it. Return one bounded result with an explicit next
+   owner.
 
 A cycle has one frozen scope, one specialist wave at a time, and one candidate
 boundary. A parent wake-up is required for a new scope or material checkpoint;

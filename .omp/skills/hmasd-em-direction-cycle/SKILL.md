@@ -53,8 +53,13 @@ fan-out is allowed.
   `workflow/research/state.json` via the state CLI.
 - Write external round pointers only to `workflow/external-review/index.json`
   after transport return; exact archive bytes remain Root-owned.
-- Do not write Portfolio registry, engineering state, run manifests, Agentify
-  ledger state, or Git integration.
+- Do not write Portfolio registry, engineering state, run manifests, or
+  Agentify ledger state.
+- At cycle completion, use the provisioned research worktree and Git Integration
+  Skill to stage only assignment-owned direction paths, create/apply one commit
+  as `em:<direction>`, fetch/compare, and push `omp/workflow`. Report stale base,
+  dirty target, non-fast-forward, mixed ownership, or conflict to Root without
+  resolving it.
 
 ## Returned result envelope
 

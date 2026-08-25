@@ -80,17 +80,25 @@ project inventory is the 17 `hmasd-*` definitions under `.omp/agents/`.
 - Material checkpoints are event-driven, not timer-driven: completed research
   or engineering rounds, accepted-result promotion, terminal-run evidence
   promotion, external prompt/archive readiness, Portfolio lifecycle changes,
-  and schema migrations. Before a dependent dispatch or any Root stop, Root
-  commits the checkpoint and attempts its push to `omp/workflow`; no completed
-  checkpoint may cross a Root wake-cycle boundary uncommitted.
-- Root stages only validated Root-owned authority paths and assignment-owned
-  paths named by settled envelopes. `git add -A` is forbidden for automatic
-  checkpoints. Unrelated user changes remain unstaged; mixed ownership in one
-  path is a conflict. Runtime maps, raw runs, generated logs, secrets, and
-  unverified source are never checkpoint content.
-- Before pushing, Root fetches and compares the remote tip. An unknown push
-  outcome is reconciled by fetching before any retry; it is never blindly
-  pushed again or merged into a later checkpoint.
+  and schema migrations.
+- Direction-scoped EM and CM cycles own their orthogonal Git checkpoint. Root
+  provisions a dedicated assignment worktree; the manager stages only its exact
+  assignment paths, creates one cycle-completion commit, applies it with actor
+  `em:<direction>` or `cm:<direction>`, fetches, compares, and pushes
+  `omp/workflow`. A stale base, dirty target, non-fast-forward, mixed ownership,
+  or path/semantic conflict stops unchanged and is reported to Root. Managers
+  never auto-resolve cross-direction or shared-authority conflicts.
+- Root commits only Root/shared authorities, cross-direction Portfolio changes,
+  schemas/control-plane changes, external archive promotion, and recovery
+  integration. It does not recommit settled manager-owned paths or create a Git
+  checkpoint for every manager transition.
+- Every writer uses an exact path allowlist. `git add -A` is forbidden.
+  Unrelated user changes remain unstaged; mixed ownership in one path is a
+  conflict. Runtime maps, raw runs, generated logs, secrets, and unverified
+  source are never checkpoint content.
+- Before pushing, the owning writer fetches and compares the remote tip. An
+  unknown push outcome is reconciled by fetching before any retry; it is never
+  blindly pushed again or merged into a later checkpoint.
 - Agents skip formatters, linters, project-wide tests, and unrelated
   validation unless their exact assignment says otherwise. Root performs
   unified validation after integration.
@@ -117,9 +125,10 @@ mutation, selects the model.
   local tab mappings stay under ignored `.omp/runtime/` or `temp/`.
 - All long-lived JSON goes through `scripts/hmasd_state.py` and its schema,
   revision, expected-revision CAS, and exit-code contract.
-- Root alone applies a verified single candidate to `omp/workflow`. Children
-  preserve user changes and never commit or push unless their exact assignment
-  says so.
+- Root alone owns shared-authority and recovery integration. An EM or CM may
+  apply and push exactly one verified direction/kind-owned candidate from its
+  provisioned worktree to `omp/workflow`; all other children never commit or
+  push unless their exact assignment names a recovery effect.
 - Agentify remains the sole external submission ledger. The configured MCP
   command runs `C:\Projects\agentify-desktop` with Windows `node.exe` from its
   WSL mount, so Agentify opens the user's configured, visible Windows Chrome

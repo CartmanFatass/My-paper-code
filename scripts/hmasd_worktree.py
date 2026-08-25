@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Root-owned Git worktree lifecycle for the HMASD workflow.
+"""Fail-closed Git worktree lifecycle for the HMASD workflow.
 
-The helper deliberately keeps the lifecycle small and fail-closed.  Git is the
-source of truth for checkout and ref state; ``.omp/runtime/worktrees.json`` is
-an ignored, CAS-protected journal maintained through ``hmasd_state.py``.  A
-receipt captures every fact used by prepare/apply so Root never applies a stale
-plan.
+Git is the source of truth for checkout and ref state;
+``.omp/runtime/worktrees.json`` is an ignored, CAS-protected journal maintained
+through ``hmasd_state.py``. A receipt captures every fact used by prepare/apply
+so Root or the direction/kind-owning EM/CM never applies a stale plan.
 """
 
 from __future__ import annotations
@@ -1690,9 +1689,18 @@ def _validated_apply_candidate(
     return candidate, expected_facts
 
 
+def _validate_apply_actor(actor: str, entry: Mapping[str, Any]) -> None:
+    if actor == "root":
+        return
+    role = {"research": "em", "engineering": "cm"}.get(str(entry.get("kind")))
+    expected = f"{role}:{entry.get('direction_id')}" if role is not None else None
+    if actor != expected:
+        raise OwnershipRefusal(
+            "integration actor must be Root or the direction/kind-owning EM/CM"
+        )
+
+
 def apply(receipt_raw: str, actor: str) -> dict[str, Any]:
-    if actor != "root":
-        raise OwnershipRefusal("only Root may apply an integration receipt")
     receipt_input = Path(receipt_raw)
     if not receipt_input.is_absolute():
         receipt_input = Path.cwd() / receipt_input
@@ -1713,6 +1721,7 @@ def apply(receipt_raw: str, actor: str) -> dict[str, Any]:
         entry,
         identities,
     ):
+        _validate_apply_actor(actor, entry)
         actual_receipt_path, receipt = _load_current_receipt(repo, state, entry)
         if not _same_path(actual_receipt_path, receipt_input):
             raise OwnershipRefusal("receipt path is not the registry-authorized receipt")

@@ -15,7 +15,7 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
     "hmasd-em": {
         "model": "openai-codex/gpt-5.6-sol",
         "thinking-level": "max",
-        "tools": ["read", "write", "edit", "grep", "glob", "task", "hub"],
+        "tools": ["read", "write", "edit", "grep", "glob", "bash", "task", "hub"],
         "spawns": [
             "hmasd-research-scout",
             "hmasd-research-innovator",
@@ -30,6 +30,7 @@ EXPECTED_AGENTS: dict[str, dict[str, FrontmatterValue]] = {
         "autoloadSkills": [
             "hmasd-em-direction-cycle",
             "hmasd-scientific-external-review",
+            "hmasd-git-integration",
         ],
     },
     "hmasd-cm": {
@@ -331,7 +332,7 @@ def test_seven_complete_skills_and_authority_files() -> None:
             "two specialists",
             "at most six",
             "lsp",
-            "root-owned git",
+            "provisioned engineering worktree",
             "scientific ambiguity",
         ),
         "hmasd-result-run": (
@@ -368,9 +369,10 @@ def test_seven_complete_skills_and_authority_files() -> None:
         "hmasd-git-integration": (
             "canonical",
             "omp/workflow",
-            "one commit",
+            "one candidate commit",
             "stale bases",
-            "root",
+            "em:<direction>",
+            "cm:<direction>",
         ),
     }
     skill_paths = sorted((REPO_ROOT / ".omp" / "skills").glob("*/SKILL.md"))
@@ -427,10 +429,15 @@ def test_root_material_checkpoints_are_event_driven_scoped_and_pushed() -> None:
         assert "event-driven" in lowered
         assert "git add -a" in lowered
         assert "unrelated" in lowered
-        assert "uncommitted" in lowered
         assert "fetch" in lowered
-        assert "unknown push" in lowered
         assert "omp/workflow" in lowered
+
+    combined = "\n".join((instructions, root_skill, concept, implementation))
+    assert "em:<direction>" in combined
+    assert "cm:<direction>" in combined
+    assert "unknown push" in combined.lower()
+    assert "conflict" in combined.lower()
+    assert "report" in combined.lower()
 
     for trigger in (
         "research or engineering round",

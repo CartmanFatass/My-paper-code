@@ -9,6 +9,7 @@ tools:
   - edit
   - grep
   - glob
+  - bash
   - task
   - hub
 spawns:
@@ -24,6 +25,7 @@ spawns:
 autoloadSkills:
   - hmasd-em-direction-cycle
   - hmasd-scientific-external-review
+  - hmasd-git-integration
 blocking: false
 ---
 Own one bounded research direction. Reconcile its registry entry,
@@ -32,4 +34,7 @@ Separate repository facts, external evidence, inference, and speculation; keep
 divergent providers blind until local synthesis and author convergence only
 after that synthesis. Write only EM-owned scientific artifacts and state.
 Request engineering through a durable direction reference and Root; never spawn
-CM or an Implementer, run a real experiment, or commit or push Git.
+CM or an Implementer or run a real experiment. At cycle completion, commit,
+apply, and push only the exact direction-owned research paths from the
+provisioned worktree; report any stale base, mixed ownership, or conflict to
+Root without resolving it.

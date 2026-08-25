@@ -81,7 +81,12 @@ def repo_and_container(tmp_path: Path) -> tuple[Path, Path]:
     return repo, container
 
 
-def provision(repo: Path, container: Path, assignment: str = "assignment-one") -> dict[str, Any]:
+def provision(
+    repo: Path,
+    container: Path,
+    assignment: str = "assignment-one",
+    kind: str = "engineering",
+) -> dict[str, Any]:
     base = git(repo, "rev-parse", "omp/workflow").stdout.strip()
     result = run_cli(
         repo,
@@ -93,7 +98,7 @@ def provision(repo: Path, container: Path, assignment: str = "assignment-one") -
         "--direction",
         "example-direction",
         "--kind",
-        "engineering",
+        kind,
         "--assignment",
         assignment,
         "--base",
@@ -113,8 +118,9 @@ def prepared_candidate(
     repo: Path,
     container: Path,
     assignment: str,
+    kind: str = "engineering",
 ) -> tuple[dict[str, Any], Path, str, Path]:
-    worktree = entry(provision(repo, container, assignment))
+    worktree = entry(provision(repo, container, assignment, kind))
     path = Path(worktree["canonical_absolute_path"])
     (path / "src" / "owned.py").write_text(f"VALUE = {assignment!r}\n", encoding="utf-8")
     candidate = commit(path, "candidate")
@@ -170,7 +176,24 @@ def test_clean_candidate_prepare_apply_and_release_once(repo_and_container: tupl
     assert prepared.returncode == 0, prepared.stderr
     receipt = payload(prepared)["receipt"]
     assert payload(prepared)["verification_evidence"]["status"] == "MISSING"
-    applied = run_cli(repo, "apply", "--receipt", receipt, "--actor", "root")
+    refused = run_cli(
+        repo,
+        "apply",
+        "--receipt",
+        receipt,
+        "--actor",
+        "em:example-direction",
+    )
+    assert refused.returncode == 5
+    assert git(repo, "rev-parse", "omp/workflow").stdout.strip() != candidate
+    applied = run_cli(
+        repo,
+        "apply",
+        "--receipt",
+        receipt,
+        "--actor",
+        "cm:example-direction",
+    )
     assert applied.returncode == 0, applied.stderr
     assert git(repo, "rev-parse", "omp/workflow").stdout.strip() == candidate
     second = run_cli(repo, "apply", "--receipt", receipt, "--actor", "root")
@@ -179,6 +202,48 @@ def test_clean_candidate_prepare_apply_and_release_once(repo_and_container: tupl
     assert released.returncode == 0, released.stderr
     assert not path.exists()
     assert git(repo, "show-ref", "--verify", "refs/heads/" + worktree["branch"], check=False).returncode != 0
+
+
+def test_research_candidate_accepts_only_matching_em_actor(
+    repo_and_container: tuple[Path, Path],
+) -> None:
+    repo, container = repo_and_container
+    worktree, path, candidate, receipt = prepared_candidate(
+        repo,
+        container,
+        "research-actor",
+        "research",
+    )
+    refused = run_cli(
+        repo,
+        "apply",
+        "--receipt",
+        str(receipt),
+        "--actor",
+        "cm:example-direction",
+    )
+    assert refused.returncode == 5
+    assert git(repo, "rev-parse", "omp/workflow").stdout.strip() != candidate
+    applied = run_cli(
+        repo,
+        "apply",
+        "--receipt",
+        str(receipt),
+        "--actor",
+        "em:example-direction",
+    )
+    assert applied.returncode == 0, applied.stderr
+    assert git(repo, "rev-parse", "omp/workflow").stdout.strip() == candidate
+    released = run_cli(
+        repo,
+        "release",
+        "--worktree-ref",
+        worktree["worktree_ref"],
+        "--actor",
+        "root",
+    )
+    assert released.returncode == 0, released.stderr
+    assert not path.exists()
 
 
 def test_default_container_uses_linux_sibling_root(repo_and_container: tuple[Path, Path]) -> None:

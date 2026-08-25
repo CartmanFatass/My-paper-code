@@ -185,9 +185,10 @@ managers; specialists are leaves and Workflow Recovery remains Root-only.
 
 Root owns user scope, cross-direction selection and synthesis, resource
 attention, shared scientific opportunities, direction lifecycle, direct EM/CM
-dispatch, recovery, and final integration. Root may directly invoke every
-project agent. Bundled `task` is retained for Root only when no project-specific
-role fits; bundled `librarian` is available to Root, EM, and CM.
+dispatch, recovery, and shared-authority integration. Root may directly invoke
+every project agent. Bundled `task` is retained for Root only when no
+project-specific role fits; bundled `librarian` is available to Root, EM, and
+CM.
 
 Root records lifecycle reasons in `PORTFOLIO.md` and replaces the registry by
 CAS using the durable authority writer `Portfolio`; that writer label is not an
@@ -195,15 +196,17 @@ agent identity. Root does not directly implement direction code.
 
 ### EM authority
 
-Each EM owns one bounded research direction. It may invoke research specialists,
-artifact writer, code scout, external-review transports, and librarian. It may
-request engineering through durable direction state and Root, but cannot invoke
-CM or implementers directly.
+Each EM owns one bounded research direction, its provisioned research worktree,
+and one exact cycle-completion Git checkpoint. It may invoke research
+specialists, artifact writer, code scout, external-review transports, and
+librarian. It may request engineering through durable direction state and Root,
+but cannot invoke CM or implementers directly.
 
 ### CM authority
 
-Each CM owns one bounded engineering scope. It may invoke all engineering
-specialists, Experiment Operator, research scout, and librarian. Scientific
+Each CM owns one bounded engineering scope, its provisioned engineering
+worktree, and one exact cycle-completion Git checkpoint. It may invoke all
+engineering specialists plus research scout and librarian. Scientific
 ambiguity returns to Root/EM rather than being silently redefined by CM.
 
 ### Agent inventory
@@ -578,32 +581,29 @@ A normal Python helper—not an OMP Extension—handles:
 - worktree creation/reuse;
 - conflict detection;
 - verification-result references;
-- clean application into `omp/workflow`;
-- structured error return to Root.
+- clean direction-owner or Root application into `omp/workflow`;
+- actor/direction/kind matching;
+- structured stale/conflict return to Root.
 
-A conflict-free, path-compliant change may integrate automatically. Conflict,
-stale base, or out-of-scope paths return to Root. Git operations on
-`omp/workflow` do not require user approval. Other branches do.
+A conflict-free, path-compliant direction change may be committed, applied, and
+pushed by its EM or CM from the provisioned assignment worktree. Root retains
+shared-authority and recovery integration. Conflict, stale base,
+non-fast-forward, mixed ownership, or out-of-scope paths stop unchanged and
+return to Root. Git operations on `omp/workflow` do not require user approval.
 
-Root commits and pushes at event-driven material checkpoints:
+Direction managers checkpoint once at bounded research/engineering cycle
+completion, including accepted direction results and direction-owned external
+prompt readiness. Root checkpoints only cross-direction Portfolio/lifecycle,
+schemas/control-plane, exact external archive promotion, and recovery changes.
+This is not a timer or background poller.
 
-- research or engineering round completion;
-- accepted result promotion;
-- run terminal evidence promotion;
-- external-review prompt or archive readiness;
-- material direction/portfolio lifecycle change; and
-- schema migration.
-
-This is not a timer or background poller. Before a dependent dispatch or Root
-stop, Root validates the exact changed paths, stages only Root-owned authority
-paths and assignment-owned paths named by settled envelopes, commits locally,
-and attempts the push to `omp/workflow`. `git add -A` is forbidden for automatic
-checkpoints. Unrelated user changes remain unstaged; runtime maps, raw runs,
-generated logs, secrets, and unverified source never enter a checkpoint.
-Ordinary intermediate events may batch, but no completed material checkpoint
-crosses a Root wake-cycle boundary uncommitted. Root fetches and compares the
-remote tip before push; unknown push outcome is fetched and reconciled before
-any retry.
+Every writer stages an exact owned path allowlist; `git add -A` is forbidden and
+unrelated user changes remain unstaged. Managers batch intermediate direction
+transitions rather than asking Root to commit each one. Before push, the owner
+fetches and compares the remote tip.
+Unknown outcome is fetched/reconciled before retry. A manager never rebases,
+merges, or retries a stale/conflicting candidate blindly; it returns the exact
+evidence to Root.
 
 ## External scientific review
 

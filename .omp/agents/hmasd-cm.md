@@ -33,6 +33,7 @@ references. Map files and interfaces before decomposition, give disjoint path
 ownership to specialists, and require native LSP evidence for exported-symbol
 work. Verification is focused; review and Advisor output are advisory. Delegate
 an actual result-bearing command to exactly one Experiment Operator. Return
-scientific ambiguity to Root and EM without reinterpretation, and integrate only
-through the Root-owned Git boundary. Do not commit or push unless the assignment
-explicitly authorizes that exact effect.
+scientific ambiguity to Root and EM without reinterpretation. At cycle
+completion, commit, apply, and push only the exact assignment-owned engineering
+paths from the provisioned worktree; report any stale base, mixed ownership, or
+conflict to Root without resolving it.

@@ -212,7 +212,7 @@ provenance and are never parsed as active workflow instructions.
 | Browser submission and commitment state | Agentify Schema-v2 ledger | Agentify only |
 | OMP session/job handles | `.omp/runtime/agents.json` | Root reconciliation code |
 | Absolute worktree paths | `.omp/runtime/worktrees.json` | Root worktree helper |
-| Candidate and integration commits | Git | Root on `omp/workflow` |
+| Candidate and integration commits | Git | direction EM/CM from provisioned worktree; Root for shared/recovery changes |
 | UI presentation | derived Dashboard snapshot | no authoritative writer |
 
 A helper's `writer` field is provenance, not authentication. Single-writer
@@ -828,7 +828,8 @@ condition.
 - Separate facts, external evidence, inference, and speculation.
 - Run divergent review, local research, synthesis, and convergence in order.
 - Request engineering through a durable reference; never spawn CM directly.
-- Update only EM-owned files and return a material result envelope.
+- Update only EM-owned files, create/apply/push one exact research-cycle
+  checkpoint from its provisioned worktree, and return conflicts to Root.
 
 ### `hmasd-cm-engineering-cycle`
 
@@ -839,7 +840,8 @@ condition.
 - Require Implementer LSP references before exported-symbol edits and LSP rename
   for cross-file renames.
 - Obtain focused verification; review is optional and advisory.
-- Integrate only through the Root-owned Git helper.
+- Create/apply/push one exact engineering-cycle checkpoint from its provisioned
+  worktree; report stale base, mixed ownership, or conflict to Root.
 - Return scientific ambiguity to Root/EM without reinterpretation.
 
 ### `hmasd-result-run`
@@ -886,11 +888,13 @@ condition.
 ### `hmasd-git-integration`
 
 - Resolve canonical paths and exact `omp/workflow` base SHA.
-- Enforce assignment-owned paths and a single candidate commit.
-- Refuse dirty worktrees, stale bases, conflicts, non-OMP target branches, and
-  out-of-scope paths.
-- Root alone applies a verified candidate to `omp/workflow`.
-- Commit and push at material checkpoints; batch ordinary intermediate events.
+- Enforce assignment-owned paths, one candidate commit, and exact actor match:
+  `em:<direction>` for research, `cm:<direction>` for engineering, or Root for
+  shared/recovery integration.
+- Refuse dirty worktrees, stale bases, conflicts, non-OMP target branches,
+  non-fast-forward pushes, and out-of-scope paths.
+- Direction managers checkpoint at cycle completion; Root batches only
+  shared/cross-direction checkpoints.
 
 ## 11. `.omp/RULES.md` hard boundaries
 
@@ -953,7 +957,7 @@ inspect --worktree-ref <id>
 record-candidate --worktree-ref <id> --candidate <full-sha>
 prepare-integration --worktree-ref <id> --target omp/workflow
                     --allowed-path <path>...
-apply --receipt <json> --actor root
+apply --receipt <json> --actor root|em:<direction>|cm:<direction>
 release --worktree-ref <id> --actor root
         --ignored-artifacts refuse|discard|retain
 retain --worktree-ref <id> --actor root --reason <text>
@@ -1324,11 +1328,11 @@ submission is forbidden.
 
 ## 15. Git, checkpoint, and path policy
 
-Root owns canonical `omp/workflow`. Automated work may create, commit, inspect,
-and delete only the assignment branch
-`omp/<direction>/<kind>/<assignment>` plus integrate it into `omp/workflow`.
-Any operation affecting a branch outside `omp/*` returns exit `8` with the exact
-branch and proposed effect.
+Root owns canonical `omp/workflow` shared/recovery integration. Automated work
+may create, commit, inspect, and delete only the assignment branch
+`omp/<direction>/<kind>/<assignment>`. A direction EM or CM may apply its one
+verified candidate as `em:<direction>` or `cm:<direction>` and push
+`omp/workflow`; branches outside `omp/*` still require the exact user boundary.
 
 Material checkpoints are:
 
@@ -1339,19 +1343,20 @@ Material checkpoints are:
 - direction lifecycle create/register/activate/return-to-registered/merge/close/reactivate; and
 - schema migration, including cross-role routing owners.
 
-The trigger is event-driven, never a timer or recurring model poller. Before a
-dependent dispatch or Root stop, Root validates every changed path, stages only
-Root-owned authority paths and assignment-owned paths named by settled
-envelopes, commits the checkpoint locally, and attempts its push to
-`omp/workflow`. Automatic checkpointing must never use `git add -A`. Unrelated
-user changes remain unstaged; a path containing mixed ownership is a conflict.
-Checkpoint content excludes ignored runtime state, raw runs, generated logs,
-secrets, and unverified source.
+The trigger is event-driven, never a timer or recurring model poller.
+Direction-owned research/engineering checkpoints are batched and committed once
+by the EM/CM at bounded cycle completion from a provisioned worktree. Root
+commits only shared Portfolio/lifecycle, schemas/control plane, tracked external
+archive promotion, and recovery integration.
 
-Intermediate state updates may batch into the next checkpoint, but no completed
-material checkpoint may cross a Root wake-cycle boundary uncommitted. Root
-fetches before push and compares the remote SHA; an unknown push outcome is
-reconciled before retry and never folded blindly into a later checkpoint.
+Every writer stages an exact allowlist; `git add -A` is forbidden. Unrelated
+user changes remain unstaged; mixed ownership in one path is a conflict.
+Runtime state, raw runs, generated logs, secrets, and unverified source stay
+out of checkpoints. Before push, the owner fetches and compares the remote tip.
+Unknown outcome is fetched/reconciled before retry. A manager encountering a
+stale base, non-fast-forward, dirty target, mixed ownership, or conflict stops
+unchanged and reports exact evidence to Root; it never blindly rebases, merges,
+or retries.
 
 ## 16. Recovery matrix
 

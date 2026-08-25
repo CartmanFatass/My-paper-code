@@ -80,18 +80,19 @@ absolute worktree paths, and local tab mappings remain in ignored runtime state.
 9. Treat a completed research or engineering round, accepted-result promotion,
    terminal-run evidence promotion, external prompt/archive readiness,
    Portfolio lifecycle change, or schema migration as a material checkpoint.
-   The trigger is event-driven, not a timer or recurring poller.
-   Before dispatching work that consumes it or stopping Root, validate every
-   changed path, stage only Root-owned authority paths and assignment-owned
-   paths named by settled envelopes, commit the checkpoint, and attempt its
-   push to `omp/workflow`. Never use `git add -A` for automatic checkpoints;
-   leave unrelated changes unstaged and return a conflict when one path mixes
-   ownership. Exclude runtime maps, raw runs, generated logs, secrets, and
-   unverified source.
-10. Fetch and compare the remote tip before a checkpoint push. Reconcile an
-   unknown push outcome by fetching before retry. Ordinary intermediate events
-   may batch into the next checkpoint, but no completed material checkpoint may
-   cross a Root wake-cycle boundary uncommitted.
+   The trigger is event-driven, not a timer or recurring poller. Provision
+   direction-scoped EM/CM assignments in dedicated worktrees and require each
+   manager to commit, apply, fetch/compare, and push its one exact
+   direction-owned cycle checkpoint. Root commits only shared/Root authorities,
+   cross-direction changes, schemas/control plane, external archive promotion,
+   and recovery integration.
+10. For every Root-owned push, stage an exact allowlist, never `git add -A`,
+   leave unrelated user changes unstaged, fetch and compare the remote tip, and
+   reconcile unknown push outcome by fetching
+   before retry. A manager-reported stale base, dirty target,
+   non-fast-forward, mixed ownership, or conflict returns to Root as frozen
+   evidence; Root never treats it as permission for a blind merge. Ordinary
+   intermediate events batch at their owning manager or Root checkpoint.
 11. Wait on Hub completion, process exit, an observed file change, or one
    bounded reassessment. Never continuously poll or create a successor merely
    because an observation is delayed. Apply one safe recovery route when
