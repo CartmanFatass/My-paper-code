@@ -617,3 +617,56 @@ request only if exact implementation scope, acceptance, preserved invariants,
 source paths, and resource boundary are evidence-backed. It authorizes no CM
 dispatch by EM, source mutation, external provider turn, result command,
 Operator, or Git integration.
+
+## Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z
+
+### Screening correction
+
+The user's continuation wake identifies that two active directions are too few
+for the available bounded evidence work. The fresh screen treats historical
+`RESOURCE_WAIT`, `DORMANT_REVISIT`, `RETAINED_RESULT`,
+`SCIENTIFIC_NO_CURRENT`, and `ACTIVE_ENGINEERING` labels only as provenance.
+They are neither current lifecycle values nor reasons to suppress a direction.
+Missing resource estimates, mathematical closure, or technical acceptance are
+preparation work when the underlying authority names an exact next action.
+
+The screen preserves the two evidence-based parks. FSBS lacks the actual
+variable-axis cooperative/UAV science authority, and SCDMP lacks same-target
+native fusion identity. Those are present authority gaps with exact
+reactivation conditions, not inherited labels. The remaining registered
+directions are not implicitly parked or discarded; they remain eligible for a
+later wake when a prospective object, witness, host, or independent value is
+recorded.
+
+### Newly activated directions
+
+| Direction | Registry lifecycle | Evidence-backed bounded next action |
+| --- | --- | --- |
+| `degraded_incumbent_shadow_handover` | `ACTIVE` | R06 is a complete definition but explicitly has `mathematical_closure=false`. Its exact next boundary is one same-direction External-Pro mathematical/causal disposition. EM must first freeze the prompt and evidence identity; no provider send is authorized merely by activation. |
+| `roster_consistent_latent_exploration` | `ACTIVE` | The Pro-closed panel and accepted production bytes are retained. The immediate-window intake names one exact bounded technical question: whether a distinct current-authority lease can supersede the immutable PRESTART record while preserving the index-3 cap, history bytes, and all frozen science/resource fields. EM must turn that into a durable engineering request before CM. |
+| `semantic_graphon_shared_policy` | `ACTIVE` | The RSCF definition has same-conversation Pro closure and explicitly requires a CM static full-cost assessment before Portfolio can decide construction. EM must freeze the non-scientific cost-estimation scope and acceptance; construction remains unauthorized. |
+| `variable_n_fleet_churn` | `ACTIVE` | PCPI r05 is a complete prospective object but explicitly requires mathematical/causal closure in the existing same-direction Pro conversation and EM intake before construction. EM first prepares the exact closure boundary; no provider send or construction is implied. |
+| `voronoi_quadrature_field_policy` | `ACTIVE` | R03 is definition-frozen, `portfolio_selection_recommended=true`, `pro_closed=false`, and names same-direction Pro intake/revision as the continuation. EM first reconciles the exact reclosure prompt/evidence boundary; no CM or empirical activity follows without a later bridge. |
+
+MGTAP and UCOPE remain `ACTIVE`, producing seven active directions in total.
+Formal dependencies remain `[]`; parallel attention does not manufacture a
+dependency graph.
+
+### Bounded dispatch boundary
+
+Dispatch generation 1 of the five matching EM logical identities against
+registry revision 6 and their exact direction/research/external authorities.
+Each cycle is limited to one local evidence reconciliation and one durable next
+boundary:
+
+- DISH, VNFC, and VQFP may prepare an exact deterministic external-review round
+  identity and prompt/evidence bundle, but activation alone authorizes no
+  provider send;
+- RCLE may author a technical-reacceptance engineering request only if the
+  immutable accepted bytes, index cap, history preservation, lineage, and
+  fail-closed supersession acceptance are exact;
+- SGSP may author a static full-cost engineering request only for resource and
+  construction feasibility measurement, never construction itself.
+
+No new EM may run a scientific command, inspect partial values, mutate source,
+dispatch CM, commit Git, issue a lease, or reinterpret retained results.

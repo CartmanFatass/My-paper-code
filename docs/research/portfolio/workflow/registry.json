@@ -100,11 +100,11 @@
       "engineering_state_path": "docs/research/candidates/degraded_incumbent_shadow_handover/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/degraded_incumbent_shadow_handover/workflow/external-review/index.json",
       "id": "degraded_incumbent_shadow_handover",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+        "sha256": "9ebacd188f15e273111fc47d90389aec3e4a2988c8e51c51ed5769024bfada47"
       },
       "path": "docs/research/candidates/degraded_incumbent_shadow_handover",
       "reactivation_condition_ref": null,
@@ -412,11 +412,11 @@
       "engineering_state_path": "docs/research/candidates/roster_consistent_latent_exploration/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/roster_consistent_latent_exploration/workflow/external-review/index.json",
       "id": "roster_consistent_latent_exploration",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+        "sha256": "9ebacd188f15e273111fc47d90389aec3e4a2988c8e51c51ed5769024bfada47"
       },
       "path": "docs/research/candidates/roster_consistent_latent_exploration",
       "reactivation_condition_ref": null,
@@ -478,11 +478,11 @@
       "engineering_state_path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/external-review/index.json",
       "id": "semantic_graphon_shared_policy",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+        "sha256": "9ebacd188f15e273111fc47d90389aec3e4a2988c8e51c51ed5769024bfada47"
       },
       "path": "docs/research/candidates/semantic_graphon_shared_policy",
       "reactivation_condition_ref": null,
@@ -570,11 +570,11 @@
       "engineering_state_path": "docs/research/candidates/variable_n_fleet_churn/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/variable_n_fleet_churn/workflow/external-review/index.json",
       "id": "variable_n_fleet_churn",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+        "sha256": "9ebacd188f15e273111fc47d90389aec3e4a2988c8e51c51ed5769024bfada47"
       },
       "path": "docs/research/candidates/variable_n_fleet_churn",
       "reactivation_condition_ref": null,
@@ -592,11 +592,11 @@
       "engineering_state_path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/engineering/state.json",
       "external_review_index_path": "docs/research/candidates/voronoi_quadrature_field_policy/workflow/external-review/index.json",
       "id": "voronoi_quadrature_field_policy",
-      "lifecycle": "REGISTERED",
+      "lifecycle": "ACTIVE",
       "lifecycle_decision_ref": {
-        "heading": "Startup wake cycle — 2026-08-25T03:33:31Z",
+        "heading": "Legacy-state correction and Portfolio expansion — 2026-08-25T11:50:42Z",
         "path": "docs/research/portfolio/PORTFOLIO.md",
-        "sha256": "646de900dea9cab01ed77d9658c327183f37effe66d2bdede581b7ad3d4d6d23"
+        "sha256": "9ebacd188f15e273111fc47d90389aec3e4a2988c8e51c51ed5769024bfada47"
       },
       "path": "docs/research/candidates/voronoi_quadrature_field_policy",
       "reactivation_condition_ref": null,
@@ -737,11 +737,11 @@
   ],
   "goal": {
     "path": "docs/research/portfolio/PORTFOLIO.md",
-    "sha256": "95b17c62eeb57583c99385fb5cde683f46c30c0a0b2cb72a0fda62146527f657"
+    "sha256": "9ebacd188f15e273111fc47d90389aec3e4a2988c8e51c51ed5769024bfada47"
   },
-  "revision": 5,
+  "revision": 6,
   "schema_version": 1,
-  "updated_at": "2026-08-25T11:40:48Z",
+  "updated_at": "2026-08-25T11:50:42Z",
   "workflow_version": "hmasd-autonomous-v1",
   "writer": "Portfolio"
 }
