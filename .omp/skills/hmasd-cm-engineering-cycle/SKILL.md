@@ -27,10 +27,13 @@ never silently redefines science, grants approval, or integrates outside Root.
 3. Require Implementer LSP references before exported-symbol edits and LSP rename
    for cross-file renames. Keep Reviewer and Verifier advisory and focused.
 4. Request observed runs only through the Result Run Skill. Collect exact
-   verification evidence and report scientific ambiguity to Root/EM without
-   reinterpretation.
+   verification evidence. A scientific ambiguity or missing principle is a
+   durable `next_action.owner=EM` research request to Root, never a CM
+   reinterpretation. Runnable code or verification remains owner `CM`; one
+   frozen result-bearing command becomes owner `EXPERIMENT_OPERATOR`.
 5. Produce one candidate through the Root-owned Git helper. Do not commit,
-   integrate, or push from CM. Return one bounded engineering result.
+   integrate, or push from CM. Return one bounded engineering result with an
+   explicit next owner.
 
 A cycle has one frozen scope, one specialist wave at a time, and one candidate
 boundary. A parent wake-up is required for a new scope or material checkpoint;

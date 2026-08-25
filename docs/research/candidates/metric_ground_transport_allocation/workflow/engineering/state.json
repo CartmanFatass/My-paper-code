@@ -24,28 +24,35 @@
       },
       {
         "path": "experiments/candidates/metric_ground_transport_allocation/resource_estimate.py",
-        "sha256": "cc64a6401eb3effc508d867d8a91356107f5f9eb8f3d1090877783e21a3787ed"
+        "sha256": "a065fe181556049d3ce041197c5ffd74e985ed22f0db28a00cd72d7dc5b47e62"
       },
       {
         "path": "tests/experiments/candidates/metric_ground_transport_allocation/test_resource_estimate.py",
-        "sha256": "f54b971836beffea431f587a8090c65bc63676497129110264c78cc5b3d7acfd"
+        "sha256": "5a8cc96aad63cdef34734ef874012ddcbddf6ade6a80c36b491b2b32f3684bf8"
       },
-      "python -m pytest -q tests/experiments/candidates/metric_ground_transport_allocation/test_resource_estimate.py",
-      "python -m experiments.candidates.metric_ground_transport_allocation.resource_estimate --help"
+      {
+        "path": "requirements-cloud-test.txt",
+        "sha256": "c8d90af08df1c4040970f43eeeab3157c41ddbdbd3cbcd36759a4d1779ccd926"
+      },
+      "uv run --isolated --no-project --python 3.10 --with-requirements requirements-cloud-test.txt python -m pytest -q tests/experiments/candidates/metric_ground_transport_allocation/test_resource_estimate.py",
+      "uv run --isolated --no-project --python 3.10 --with-requirements requirements-cloud-test.txt python -m experiments.candidates.metric_ground_transport_allocation.resource_estimate --help"
     ],
-    "kind": "ROOT_RUN_FOCUSED_ESTIMATOR_VALIDATION"
+    "kind": "ROOT_RUN_LINUX_CPU_FOCUSED_ESTIMATOR_VALIDATION",
+    "owner": "ROOT"
   },
   "phase": "VERIFYING",
-  "revision": 2,
+  "revision": 4,
   "run_refs": [],
-  "schema_version": 1,
+  "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/metric_ground_transport_allocation/DIRECTION.md",
     "sha256": "d368bedff409a2919b39995daafe4383207b672cfab26e14f7f53be85f254403"
   },
-  "updated_at": "2026-08-25T08:15:11Z",
-  "verification_refs": [],
+  "updated_at": "2026-08-25T11:52:33Z",
+  "verification_refs": [
+    "agent://MGTAPEstimatorVerifyCMG2.MGTAPEstimatorImplementerG2"
+  ],
   "waiting_on": [],
   "worktree_ref": null,
   "writer": "CM-metric_ground_transport_allocation"

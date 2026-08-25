@@ -13,13 +13,14 @@
   "last_checkpoint_sha": null,
   "next_action": {
     "input_refs": [],
-    "kind": "DISPATCH_RESEARCH"
+    "kind": "DISPATCH_RESEARCH",
+    "owner": "EM"
   },
   "phase": "SCOPING",
   "question_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
   "registry_revision_seen": 1,
   "revision": 1,
-  "schema_version": 1,
+  "schema_version": 2,
   "updated_at": "2026-08-24T00:00:00Z",
   "waiting_on": [],
   "writer": "EM-example-direction"

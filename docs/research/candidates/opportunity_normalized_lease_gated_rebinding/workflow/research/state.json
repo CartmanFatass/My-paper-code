@@ -13,13 +13,14 @@
   "last_checkpoint_sha": null,
   "next_action": {
     "input_refs": [],
-    "kind": "IDLE"
+    "kind": "IDLE",
+    "owner": "ROOT"
   },
   "phase": "IDLE",
   "question_sha256": "d220e8f525298a41c2763789b90871c5c253379b483d824e29b35c8ec4d02154",
   "registry_revision_seen": 1,
-  "revision": 1,
-  "schema_version": 1,
+  "revision": 2,
+  "schema_version": 2,
   "updated_at": "2026-08-24T00:00:00Z",
   "waiting_on": [],
   "writer": "EM-opportunity_normalized_lease_gated_rebinding"

@@ -13,13 +13,14 @@
   "last_checkpoint_sha": null,
   "next_action": {
     "input_refs": [],
-    "kind": "IDLE"
+    "kind": "IDLE",
+    "owner": "ROOT"
   },
   "phase": "IDLE",
   "question_sha256": "8a389e77e8514515e9fd16d2bbbd27ab9ce6134d2fc60882f25417bc7db1d221",
   "registry_revision_seen": 1,
-  "revision": 1,
-  "schema_version": 1,
+  "revision": 2,
+  "schema_version": 2,
   "updated_at": "2026-08-24T00:00:00Z",
   "waiting_on": [],
   "writer": "EM-vap_folr_core"

@@ -34,8 +34,12 @@ engineering through durable references rather than spawning CM directly.
 4. Separate repository facts, external evidence, inference, and speculation;
    synthesize the direction and author a convergence prompt only after the local
    synthesis.
-5. Update EM-owned research state and external pointers once, request engineering
-   through a durable reference when needed, and return one material result.
+5. Update EM-owned research state and external pointers once. Every material
+   return names `next_action.owner`: retain `EM` for further derivation or
+   interpretation, use `CM` with a durable engineering scope/acceptance request,
+   or use `TRANSPORT` with a frozen external-review target. EM requests these
+   handoffs through durable references rather than spawning the next role.
+   Return one material result.
 
 One cycle has one frozen question/evidence set and one synthesis. A wake-up or
 parent message is required for another round; no polling or unbounded specialist

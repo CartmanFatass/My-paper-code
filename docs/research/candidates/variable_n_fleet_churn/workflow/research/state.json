@@ -2,25 +2,86 @@
   "actionable": false,
   "active_agents": [],
   "active_round_id": null,
-  "blockers": [],
+  "blockers": [
+    {
+      "code": "EXTERNAL_PRO_COMMITMENT_OBSERVATION_REQUIRED",
+      "observed_refs": [
+        {
+          "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_CHATGPT_PRO_SELF_CONTAINED_MATHEMATICAL_CLOSURE_QUESTION_20260822.md",
+          "sha256": "ac0e569144ebe0e48177d62c08588d9ca6c12f9f5b944f10a5c92de52d7dd037"
+        },
+        {
+          "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_PRO_OPERATION_BINDING_20260822.md",
+          "sha256": "e524fef5821992a5224c2b3e9b413ca7becb7c3c4cd935f2974fcda97b96a233"
+        },
+        {
+          "path": "docs/research/candidates/variable_n_fleet_churn/workflow/external-review/index.json",
+          "sha256": "0ea6037d9aa3be8498a7b1ab346b8af6303a6a6fce10293ed403feb81d5ce9c6"
+        },
+        {
+          "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_EXTERNAL_PRO_CLOSURE_READINESS_20260825.md",
+          "sha256": "6dc88801e66fd51fc77536910f8120f2de6b82a22152ef34b9cc2398887b1335"
+        }
+      ],
+      "resume_condition_ref": {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_EXTERNAL_PRO_CLOSURE_READINESS_20260825.md",
+        "sha256": "6dc88801e66fd51fc77536910f8120f2de6b82a22152ef34b9cc2398887b1335"
+      }
+    }
+  ],
   "direction_id": "variable_n_fleet_churn",
   "direction_ref": {
     "path": "docs/research/candidates/variable_n_fleet_churn/DIRECTION.md",
-    "sha256": "1694607aa22670221facfbb13b0f15b70fdc8ad69e96de743368a31618c8c0f9"
+    "sha256": "20ceb1fb1e485abee32ff8ee0af8ad5afa3fd9a05731d9efae14260bf3692ad1"
   },
   "engineering_request": null,
-  "evidence_set_sha256": "a0594146a3e8637db4e85b49dd2987bb6b10d7ad04a253685b5c9a2b3b193239",
-  "last_checkpoint_sha": null,
+  "evidence_set_sha256": "164a5c60213850cf7652917443eb65208d232f7abf9d950680d258503f87bc48",
+  "last_checkpoint_sha": "6dc88801e66fd51fc77536910f8120f2de6b82a22152ef34b9cc2398887b1335",
   "next_action": {
-    "input_refs": [],
-    "kind": "IDLE"
+    "input_refs": [
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_EXTERNAL_PRO_CLOSURE_READINESS_20260825.md",
+        "sha256": "6dc88801e66fd51fc77536910f8120f2de6b82a22152ef34b9cc2398887b1335"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_CHATGPT_PRO_SELF_CONTAINED_MATHEMATICAL_CLOSURE_QUESTION_20260822.md",
+        "sha256": "ac0e569144ebe0e48177d62c08588d9ca6c12f9f5b944f10a5c92de52d7dd037"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_SCIENCE_CARD_20260822.md",
+        "sha256": "164a5c60213850cf7652917443eb65208d232f7abf9d950680d258503f87bc48"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_PRO_OPERATION_BINDING_20260822.md",
+        "sha256": "e524fef5821992a5224c2b3e9b413ca7becb7c3c4cd935f2974fcda97b96a233"
+      },
+      {
+        "path": "docs/research/candidates/variable_n_fleet_churn/workflow/external-review/index.json",
+        "sha256": "0ea6037d9aa3be8498a7b1ab346b8af6303a6a6fce10293ed403feb81d5ce9c6"
+      }
+    ],
+    "kind": "OBSERVE_EXTERNAL_PRO_BINDING_COMMITMENT",
+    "owner": "TRANSPORT"
   },
-  "phase": "IDLE",
-  "question_sha256": "c67d6a9b9a95a24390bc1aedab5d2faf3324bfbbff6dd01ddf5be32aefed36f6",
-  "registry_revision_seen": 1,
-  "revision": 1,
-  "schema_version": 1,
-  "updated_at": "2026-08-24T00:00:00Z",
-  "waiting_on": [],
+  "phase": "WAITING",
+  "question_sha256": "ac0e569144ebe0e48177d62c08588d9ca6c12f9f5b944f10a5c92de52d7dd037",
+  "registry_revision_seen": 9,
+  "revision": 3,
+  "schema_version": 2,
+  "updated_at": "2026-08-25T12:13:10Z",
+  "waiting_on": [
+    {
+      "expected_terminal_states": [
+        "PREPARED_ZERO_COMMIT",
+        "EXISTING_COMMITTED_OPERATION",
+        "UNKNOWN_COMMITMENT"
+      ],
+      "kind": "TRANSPORT_EXTERNAL_PRO_COMMITMENT_OBSERVATION",
+      "ref": {
+        "path": "docs/research/candidates/variable_n_fleet_churn/VNFC_PCPI_R05_EXTERNAL_PRO_CLOSURE_READINESS_20260825.md",
+        "sha256": "6dc88801e66fd51fc77536910f8120f2de6b82a22152ef34b9cc2398887b1335"
+      }
+    }
+  ],
   "writer": "EM-variable_n_fleet_churn"
 }

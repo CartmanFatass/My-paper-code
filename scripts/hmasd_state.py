@@ -26,7 +26,7 @@ from typing import Any, Callable, Iterator, Mapping, NoReturn
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = Path(__file__).resolve().parent / "schemas"
-SUPPORTED_SCHEMA_VERSION = 1
+SUPPORTED_SCHEMA_VERSION = 2
 
 KIND_ALIASES = {
     "portfolio_registry": "portfolio_registry",
@@ -40,6 +40,12 @@ KIND_ALIASES = {
     "runtime_agents": "runtime_agents",
     "runtime_worktrees": "runtime_worktrees",
 }
+
+CURRENT_WRITE_SCHEMA_VERSIONS = {
+    "research_state": 2,
+    "engineering_state": 2,
+}
+
 
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 GIT_SHA_RE = re.compile(r"^[0-9a-f]{40}(?:[0-9a-f]{24})?$")
@@ -386,11 +392,6 @@ def _validate_registry(document: Mapping[str, Any]) -> None:
         for dependency in direction["dependencies"]:
             if dependency not in ids and dependency not in {item["id"] for item in directions}:
                 raise ValidationError(f"unknown dependency {dependency}")
-        if direction["lifecycle"] == "ACTIVE":
-            # Counted after structural validation; no minimum is imposed.
-            pass
-    if sum(item["lifecycle"] == "ACTIVE" for item in directions) > 8:
-        raise ValidationError("portfolio registry permits at most eight ACTIVE directions")
     graph = {item["id"]: set(item["dependencies"]) for item in directions}
     for node, dependencies in graph.items():
         if node in dependencies:
@@ -416,7 +417,9 @@ def _validate_registry(document: Mapping[str, Any]) -> None:
         visit(node)
 
 
-def _reconcile_research_direction_ref(document: Mapping[str, Any]) -> None:
+def _reconcile_research_direction_ref(
+    document: Mapping[str, Any], *, allow_live_sha_drift: bool = False
+) -> None:
     """Check a research ref against the on-disk registry when available."""
 
     registry_path = ROOT / "docs" / "research" / "portfolio" / "workflow" / "registry.json"
@@ -449,11 +452,16 @@ def _reconcile_research_direction_ref(document: Mapping[str, Any]) -> None:
     target = ROOT / Path(expected_path)
     if not target.is_file() or target.is_symlink():
         raise ValidationError("research direction_ref target is missing or symlinked")
-    if sha256_file(target) != reference["sha256"]:
+    if sha256_file(target) != reference["sha256"] and not allow_live_sha_drift:
         raise ValidationError("research direction_ref SHA does not match exact file bytes")
 
 
-def _validate_direction_state(document: Mapping[str, Any], kind: str) -> str:
+def _validate_direction_state(
+    document: Mapping[str, Any],
+    kind: str,
+    *,
+    allow_stale_research_direction_ref: bool = False,
+) -> str:
     direction_id = document["direction_id"]
     expected_prefix = "EM-" if kind in {"research_state", "external_review_index"} else "CM-"
     expected_writer = expected_prefix + direction_id
@@ -463,10 +471,15 @@ def _validate_direction_state(document: Mapping[str, Any], kind: str) -> str:
     if kind == "research_state":
         if document["direction_ref"]["path"] != expected_direction_path:
             raise _owner_error("research direction_ref path is not direction-owned")
-        _reconcile_research_direction_ref(document)
+        _reconcile_research_direction_ref(
+            document, allow_live_sha_drift=allow_stale_research_direction_ref
+        )
     elif kind == "engineering_state":
         if document["scope_ref"]["path"] != expected_direction_path:
             raise _owner_error("engineering scope_ref path is not direction-owned")
+    if kind in {"research_state", "engineering_state"} and document["schema_version"] >= 2:
+        if "owner" not in document["next_action"]:
+            raise ValidationError("schema v2 next_action requires an explicit owner")
     return direction_id
 
 
@@ -624,11 +637,20 @@ def _validate_archive(document: Mapping[str, Any]) -> None:
         raise ValidationError("archive responseSha256 does not match responseText UTF-8 bytes")
 
 
-def _validate_custom(kind: str, document: Mapping[str, Any]) -> None:
+def _validate_custom(
+    kind: str,
+    document: Mapping[str, Any],
+    *,
+    allow_stale_research_direction_ref: bool = False,
+) -> None:
     if kind == "portfolio_registry":
         _validate_registry(document)
     elif kind in {"research_state", "engineering_state"}:
-        _validate_direction_state(document, kind)
+        _validate_direction_state(
+            document,
+            kind,
+            allow_stale_research_direction_ref=allow_stale_research_direction_ref,
+        )
     elif kind == "external_review_index":
         _validate_external_index(document)
     elif kind == "run_manifest":
@@ -703,13 +725,14 @@ def _check_document_paths(value: Any, prefix: str = "$") -> None:
             _check_document_paths(item, f"{prefix}[{index}]")
 
 
-def validate_document(
+def _validate_document(
     kind: str,
     document: Mapping[str, Any],
     *,
     writer: str | None = None,
+    allow_stale_research_direction_ref: bool = False,
 ) -> dict[str, Any]:
-    """Validate and return a JSON object without mutating it."""
+    """Validate a document with an internal current-state relaxation."""
 
     normalized = normalize_kind(kind)
     if not isinstance(document, dict):
@@ -732,8 +755,38 @@ def validate_document(
         _ensure_timestamp(document["updated_at"], "updated_at")
         if writer is not None and document["writer"] != writer:
             raise _owner_error(f"writer {document['writer']!r} does not match requested writer {writer!r}")
-    _validate_custom(normalized, document)
+    _validate_custom(
+        normalized,
+        document,
+        allow_stale_research_direction_ref=allow_stale_research_direction_ref,
+    )
     return document
+
+def validate_document(
+    kind: str,
+    document: Mapping[str, Any],
+    *,
+    writer: str | None = None,
+) -> dict[str, Any]:
+    """Validate and return a JSON object without mutating it."""
+
+    return _validate_document(kind, document, writer=writer)
+
+
+def _validate_current_document(
+    kind: str,
+    document: Mapping[str, Any],
+    *,
+    writer: str | None = None,
+) -> dict[str, Any]:
+    """Validate persisted state while allowing only research live-ref SHA drift."""
+
+    return _validate_document(
+        kind,
+        document,
+        writer=writer,
+        allow_stale_research_direction_ref=normalize_kind(kind) == "research_state",
+    )
 
 
 # Aliases kept intentionally boring for callers that use verb-oriented names.
@@ -863,6 +916,16 @@ def atomic_write(path: str | os.PathLike[str], data: bytes) -> None:
         with contextlib.suppress(FileNotFoundError):
             temp_path.unlink()
         raise
+
+def _require_current_write_schema(kind: str, document: Mapping[str, Any]) -> None:
+    normalized = normalize_kind(kind)
+    expected = CURRENT_WRITE_SCHEMA_VERSIONS.get(normalized)
+    if expected is not None and document.get("schema_version") != expected:
+        raise UnsupportedVersionError(
+            f"{normalized} writes require schema version {expected}; migrate persisted state first"
+        )
+
+
 def _initialize_unlocked(
     kind: str,
     target: Path,
@@ -870,6 +933,7 @@ def _initialize_unlocked(
     document: dict[str, Any],
     input_bytes: bytes | None = None,
 ) -> dict[str, Any]:
+    _require_current_write_schema(kind, document)
     validate_document(kind, document, writer=writer)
     target.parent.mkdir(parents=True, exist_ok=True)
     if target.is_symlink():
@@ -933,12 +997,13 @@ def replace(
         raise ObservedConflictError(f"{normalized} is an immutable record")
     target = Path(path)
     document = _input_document(input)
+    _require_current_write_schema(normalized, document)
     validate_document(normalized, document, writer=writer)
     if not isinstance(expected_revision, int) or isinstance(expected_revision, bool) or expected_revision < 1:
         raise RevisionConflictError("expected_revision must be a positive integer")
     with state_lock(target):
         current_bytes, current = _read_document(target)
-        validate_document(normalized, current, writer=writer)
+        _validate_current_document(normalized, current, writer=writer)
         current_revision = current["revision"]
         if current_revision != expected_revision:
             raise RevisionConflictError(
@@ -1265,6 +1330,44 @@ def _validate_transition(kind: str, current: Mapping[str, Any], next_document: M
         _validate_runtime_worktrees_transition(current, next_document)
 
 
+_RESEARCH_V1_ROUTE_OWNERS = {
+    "AWAIT_VARIABLE_AXIS_COOPERATIVE_UAV_SCIENCE_AUTHORITY": "EM",
+    "DISPATCH_RESEARCH": "EM",
+    "IDLE": "ROOT",
+    "PORTFOLIO_RECONCILE_FUSION_AUTHORITY_GAP": "EM",
+    "ROOT_DISPATCH_PREACTIVITY_RESOURCE_ESTIMATOR": "CM",
+}
+
+_ENGINEERING_V1_ROUTE_OWNERS = {
+    "ROOT_RUN_LINUX_CPU_FOCUSED_ESTIMATOR_VALIDATION": "ROOT",
+    "SCOUT_CODE": "CM",
+    "UNREQUESTED": "ROOT",
+    "WAIT": "ROOT",
+}
+
+
+def _migrate_routed_state_v1(
+    document: dict[str, Any],
+    route_owners: Mapping[str, str],
+) -> dict[str, Any]:
+    action = document["next_action"]
+    kind = action["kind"]
+    owner = route_owners.get(kind)
+    if owner is None:
+        raise ValidationError(f"schema v1 next_action {kind!r} has no deterministic route")
+    action["owner"] = owner
+    document["schema_version"] = 2
+    return document
+
+
+def _migrate_research_state_v1(document: dict[str, Any]) -> dict[str, Any]:
+    return _migrate_routed_state_v1(document, _RESEARCH_V1_ROUTE_OWNERS)
+
+
+def _migrate_engineering_state_v1(document: dict[str, Any]) -> dict[str, Any]:
+    return _migrate_routed_state_v1(document, _ENGINEERING_V1_ROUTE_OWNERS)
+
+
 def register_migration(kind: str, from_version: int, function: Migration) -> None:
     normalized = normalize_kind(kind)
     if not isinstance(from_version, int) or from_version < 1:
@@ -1272,6 +1375,9 @@ def register_migration(kind: str, from_version: int, function: Migration) -> Non
     if not callable(function):
         raise TypeError("migration must be callable")
     MIGRATIONS.setdefault(normalized, {})[from_version] = function
+register_migration("research_state", 1, _migrate_research_state_v1)
+register_migration("engineering_state", 1, _migrate_engineering_state_v1)
+
 
 
 def migrate(
@@ -1287,7 +1393,7 @@ def migrate(
     target = Path(path)
     with state_lock(target):
         current_bytes, current = _read_document(target)
-        validate_document(normalized, current, writer=writer)
+        _validate_current_document(normalized, current, writer=writer)
         if current["revision"] != expected_revision:
             raise RevisionConflictError(
                 f"expected revision {expected_revision}, observed {current['revision']}"

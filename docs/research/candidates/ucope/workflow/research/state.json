@@ -1,5 +1,5 @@
 {
-  "actionable": false,
+  "actionable": true,
   "active_agents": [],
   "active_round_id": null,
   "blockers": [],
@@ -8,19 +8,68 @@
     "path": "docs/research/candidates/ucope/DIRECTION.md",
     "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
   },
-  "engineering_request": null,
-  "evidence_set_sha256": "724ce24ab8548807ca400aa8179a05b5e103a023bb61f8f639c9a16b5aeeebee",
-  "last_checkpoint_sha": null,
-  "next_action": {
-    "input_refs": [],
-    "kind": "IDLE"
+  "engineering_request": {
+    "acceptance_refs": [
+      "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_S1_ENGINEERING_REQUEST_20260825.md#observable-acceptance-criteria",
+      "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_S1_ENGINEERING_REQUEST_20260825.md#resource-boundary",
+      "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_S1_ENGINEERING_REQUEST_20260825.md#explicit-non-scope"
+    ],
+    "scope_ref": "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_S1_ENGINEERING_REQUEST_20260825.md#engineering-request--s1-current-byte-semantic-core-verification-and-repair"
   },
-  "phase": "IDLE",
+  "evidence_set_sha256": "724ce24ab8548807ca400aa8179a05b5e103a023bb61f8f639c9a16b5aeeebee",
+  "last_checkpoint_sha": "974c5c0400bf10e3bd5044c96d7e8ffea4e0ccaefef4eec2a8241c0977c1d864",
+  "next_action": {
+    "input_refs": [
+      {
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+      },
+      {
+        "path": "docs/research/portfolio/workflow/registry.json",
+        "sha256": "37cb52e953ceb5244a15bf9433cd2956e5410094522dc7769aa226df6ea948c8"
+      },
+      {
+        "path": "docs/research/candidates/ucope/DIRECTION.md",
+        "sha256": "ad2751f64021596e6831fbc051f46f0f5450f815c458771dc9d1f71ac068f22d"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_SCIENCE_CARD_20260823.md",
+        "sha256": "e08744fa18d708c9ad570bdce8b71296407991a4f5f79d502d37330913435fd8"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_CURRENT_OBJECT_PORTFOLIO_SELECTION_20260823.md",
+        "sha256": "b5789c78a3505eef553bbbf69e03bc8b6a7f4b432bee8b08d421cec5faf8ceed"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_STATIC_FEASIBILITY_PORTFOLIO_EM_VALUE_INTAKE_20260823.md",
+        "sha256": "7586f4624111974dc993c328c7ae47b21adcd7801b38fd7a31e1b6c380112554"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_FINITE_STAGED_CONSTRUCTION_PORTFOLIO_SELECTION_20260823.md",
+        "sha256": "7818c4b353037243993590a5d4968d429a92433b38ffbea99271789febc18aec"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_S0_CM_TECHNICAL_ACCEPTANCE_PORTFOLIO_EM_INTAKE_20260824.md",
+        "sha256": "f7d5522506c3bd96d84c222dc6474cc40b6f4dfbb0aed12b7be68c1bda63b7ae"
+      },
+      {
+        "path": "docs/research/candidates/ucope/workflow/external-review/index.json",
+        "sha256": "ce294036d6f75b08d5096a37eceeb19969e3e148b911816fca75584eb05037ad"
+      },
+      {
+        "path": "docs/research/candidates/ucope/UCOPE_VARIABLE_K_PAID_PROBE_CONTAINMENT_R01_R03_S1_ENGINEERING_REQUEST_20260825.md",
+        "sha256": "974c5c0400bf10e3bd5044c96d7e8ffea4e0ccaefef4eec2a8241c0977c1d864"
+      }
+    ],
+    "kind": "ROOT_DISPATCH_UCOPE_S1_CURRENT_BYTE_REPAIR",
+    "owner": "CM"
+  },
+  "phase": "ENGINEERING_REQUESTED",
   "question_sha256": "0c608c5f791d055f58fd51a308065b2c4024f1e1b4eeb8ef6b3995bb90eaad58",
-  "registry_revision_seen": 1,
-  "revision": 1,
-  "schema_version": 1,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "registry_revision_seen": 8,
+  "revision": 4,
+  "schema_version": 2,
+  "updated_at": "2026-08-25T12:06:26Z",
   "waiting_on": [],
   "writer": "EM-ucope"
 }

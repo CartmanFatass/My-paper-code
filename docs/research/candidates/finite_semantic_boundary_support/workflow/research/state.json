@@ -48,13 +48,14 @@
         "sha256": "4a4853e3c36fd2ec788d13c5bfa5c20cc1084f8dd9df36fdd9e2af8e365e570c"
       }
     ],
-    "kind": "AWAIT_VARIABLE_AXIS_COOPERATIVE_UAV_SCIENCE_AUTHORITY"
+    "kind": "AWAIT_VARIABLE_AXIS_COOPERATIVE_UAV_SCIENCE_AUTHORITY",
+    "owner": "EM"
   },
   "phase": "WAITING",
   "question_sha256": "e780a3dc58e18e641feb75afc4f41ea0b04fb77d3f23ff288a608d6e4b10d45b",
   "registry_revision_seen": 4,
-  "revision": 3,
-  "schema_version": 1,
+  "revision": 4,
+  "schema_version": 2,
   "updated_at": "2026-08-25T07:13:30Z",
   "waiting_on": [
     {

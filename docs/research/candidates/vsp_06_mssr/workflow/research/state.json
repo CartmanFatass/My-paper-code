@@ -13,13 +13,14 @@
   "last_checkpoint_sha": null,
   "next_action": {
     "input_refs": [],
-    "kind": "IDLE"
+    "kind": "IDLE",
+    "owner": "ROOT"
   },
   "phase": "IDLE",
   "question_sha256": "41ee8a394c9285054c15eadff2cb58a9716d44f451f7d3179920d79dc0dbdec0",
   "registry_revision_seen": 1,
-  "revision": 1,
-  "schema_version": 1,
+  "revision": 2,
+  "schema_version": 2,
   "updated_at": "2026-08-24T00:00:00Z",
   "waiting_on": [],
   "writer": "EM-vsp_06_mssr"

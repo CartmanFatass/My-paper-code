@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 import importlib
 import json
 from pathlib import Path
@@ -9,6 +10,11 @@ from types import ModuleType
 import pytest
 
 from experiments.candidates.metric_ground_transport_allocation import resource_estimate as estimate
+
+
+def _mapping(value: object) -> Mapping[str, object]:
+    assert isinstance(value, Mapping)
+    return value
 
 
 def _fabricated_measurements(
@@ -83,8 +89,9 @@ def _fabricated_capacities() -> dict[str, int]:
 
 def test_literal_projection_schema_and_storage_unknowns() -> None:
     report = estimate._build_report(_fabricated_measurements(), _fabricated_capacities())
+    workload = _mapping(report["workload"])
 
-    assert report["workload"]["counts"] == {
+    assert workload["counts"] == {
         "gate_training_updates": 24_576,
         "validation_panels": 192,
         "conditional_training_updates": 32_768,
@@ -95,16 +102,17 @@ def test_literal_projection_schema_and_storage_unknowns() -> None:
         "neutral_table_io_units": 1,
         "neutral_metadata_json_io_units": 1,
     }
-    assert report["workload"]["formulas"]["gate_only_wall_and_cpu"] == (
+    formulas = _mapping(workload["formulas"])
+    assert formulas["gate_only_wall_and_cpu"] == (
         "24_576 * training_update_unit + 192 * validation_panel_unit"
     )
-    assert report["workload"]["formulas"]["all_pass_wall_and_cpu"] == (
+    assert formulas["all_pass_wall_and_cpu"] == (
         "gate_only + 32_768 * training_update_unit + 64 * base_plus_replay_fit_unit + "
         "16 * four_fit_concatenation_unit + 16 * packet_compression_write_unit + "
         "16 * packet_read_access_unit + 1 * neutral_table_io_unit + "
         "1 * neutral_metadata_json_io_unit"
     )
-    assert report["workload"]["fixture_shapes"] == {
+    assert workload["fixture_shapes"] == {
         "training_episodes": 48,
         "training_epochs": 2,
         "validation_panel_rows": 1_536,
@@ -127,11 +135,13 @@ def test_literal_projection_schema_and_storage_unknowns() -> None:
         "thread_count",
         "accelerator_count",
     }
+    paths = _mapping(report["paths"])
     for path_name in ("gate_only", "all_pass"):
-        metrics = report["paths"][path_name]["metrics"]
+        path = _mapping(paths[path_name])
+        metrics = _mapping(path["metrics"])
         assert set(metrics) == expected_metric_names
         for metric in metrics.values():
-            assert set(metric) == {
+            assert set(_mapping(metric)) == {
                 "unit",
                 "status",
                 "central",
@@ -141,8 +151,12 @@ def test_literal_projection_schema_and_storage_unknowns() -> None:
 
     gate_count = 24_576 + 192
     all_pass_count = gate_count + 32_768 + 64 + 16 + 16 + 16 + 1 + 1
-    gate_wall = report["paths"]["gate_only"]["metrics"]["wall_seconds"]
-    all_pass_wall = report["paths"]["all_pass"]["metrics"]["wall_seconds"]
+    gate_path = _mapping(paths["gate_only"])
+    all_pass_path = _mapping(paths["all_pass"])
+    gate_metrics = _mapping(gate_path["metrics"])
+    all_pass_metrics = _mapping(all_pass_path["metrics"])
+    gate_wall = _mapping(gate_metrics["wall_seconds"])
+    all_pass_wall = _mapping(all_pass_metrics["wall_seconds"])
     assert gate_wall["status"] == "grounded"
     assert gate_wall["central"] == pytest.approx(gate_count * 0.002)
     assert gate_wall["conservative_upper"] == pytest.approx(gate_count * 0.003 * 1.25)
@@ -151,25 +165,36 @@ def test_literal_projection_schema_and_storage_unknowns() -> None:
     assert all_pass_wall["conservative_upper"] == pytest.approx(
         all_pass_count * 0.003 * 1.25
     )
-    assert report["paths"]["gate_only"]["metrics"]["temporary_bytes"]["status"] == "unknown"
-    assert report["paths"]["gate_only"]["metrics"]["temporary_bytes"]["central"] is None
-    assert report["paths"]["gate_only"]["metrics"]["retained_bytes"]["conservative_upper"] is None
-    assert report["paths"]["gate_only"]["comparisons"]["disk"]["within_safe_available"] is None
-    assert report["paths"]["gate_only"]["comparisons"]["disk"]["within_source_envelope"] is None
-    assert {item["quantity"] for item in report["unknowns"]} == {
+    gate_temporary = _mapping(gate_metrics["temporary_bytes"])
+    gate_retained = _mapping(gate_metrics["retained_bytes"])
+    assert gate_temporary["status"] == "unknown"
+    assert gate_temporary["central"] is None
+    assert gate_retained["conservative_upper"] is None
+    gate_comparisons = _mapping(gate_path["comparisons"])
+    gate_disk_comparison = _mapping(gate_comparisons["disk"])
+    assert gate_disk_comparison["within_safe_available"] is None
+    assert gate_disk_comparison["within_source_envelope"] is None
+    unknowns = report["unknowns"]
+    assert isinstance(unknowns, list)
+    assert {_mapping(item)["quantity"] for item in unknowns} == {
         "gate_only.temporary_bytes",
         "gate_only.retained_bytes",
     }
-    assert report["measurements"]["peak_rss_observer"] == {
+    measurements = _mapping(report["measurements"])
+    assert measurements["peak_rss_observer"] == {
         "platform": "Linux",
         "source": "resource.getrusage(RUSAGE_SELF).ru_maxrss",
         "native_unit": "KiB",
         "conversion": "integer KiB * 1024 bytes",
     }
-    assert report["measurements"]["storage_units"]["compressed_per_packet"]["formula"] == (
+    storage_units = _mapping(measurements["storage_units"])
+    compressed_per_packet = _mapping(storage_units["compressed_per_packet"])
+    assert compressed_per_packet["formula"] == (
         "observed compressed NPZ packet bytes"
     )
-    assert report["paths"]["all_pass"]["comparisons"]["disk"]["estimate_formula"] == (
+    all_pass_comparisons = _mapping(all_pass_path["comparisons"])
+    all_pass_disk_comparison = _mapping(all_pass_comparisons["disk"])
+    assert all_pass_disk_comparison["estimate_formula"] == (
         "max(temporary_bytes.conservative_upper, retained_bytes.conservative_upper)"
     )
     assert report["actions"] == {

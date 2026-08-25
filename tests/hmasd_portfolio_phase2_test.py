@@ -80,10 +80,10 @@ def test_registry_preserves_stable_ids_and_validates_live_contract() -> None:
     registry = load_json(REGISTRY_PATH)
     assert tuple(direction["id"] for direction in registry["directions"]) == EXPECTED_IDS
     assert len(registry["directions"]) == len(EXPECTED_IDS)
-    assert sum(direction["lifecycle"] == "ACTIVE" for direction in registry["directions"]) <= 8
     assert {direction["lifecycle"] for direction in registry["directions"]} <= {
-        "REGISTERED", "ACTIVE", "PARKED", "CLOSED"
+        "REGISTERED", "ACTIVE", "CLOSED"
     }
+    assert all(direction["lifecycle"] != "PARKED" for direction in registry["directions"])
     assert all(direction["dependencies"] == [] for direction in registry["directions"])
 
     result = run_cli("validate", "--kind", "portfolio_registry", "--path", str(REGISTRY_PATH))
@@ -120,6 +120,16 @@ def test_each_direction_authority_and_three_states_reconcile_to_registry() -> No
         research = load_json(research_path)
         engineering = load_json(engineering_path)
         external = load_json(external_path)
+        for state in (research, engineering):
+            assert state["schema_version"] == 2
+            assert state["next_action"]["owner"] in {
+                "ROOT",
+                "EM",
+                "CM",
+                "TRANSPORT",
+                "EXPERIMENT_OPERATOR",
+                "USER",
+            }
         authority_sha = sha256(authority)
         assert research["direction_id"] == direction_id
         assert research["writer"] == f"EM-{direction_id}"
@@ -155,7 +165,8 @@ def test_each_direction_authority_and_three_states_reconcile_to_registry() -> No
         }
         assert isinstance(engineering["actionable"], bool)
         assert engineering["scope_ref"]["path"] == research["direction_ref"]["path"]
-        assert engineering["scope_ref"]["sha256"] == authority_sha
+        if engineering["phase"] != "UNREQUESTED":
+            assert engineering["scope_ref"]["sha256"] == authority_sha
         assert external["direction_id"] == direction_id
         assert external["writer"] == f"EM-{direction_id}"
         assert isinstance(external["rounds"], list)
@@ -182,7 +193,7 @@ def test_registry_rejects_duplicate_ids_abbreviations_paths_and_jobs(tmp_path: P
         assert result.returncode == 2, (label, result.stderr)
 
 
-def test_registry_rejects_dependency_cycles_and_more_than_eight_active(tmp_path: Path) -> None:
+def test_registry_rejects_dependency_cycles_and_accepts_active_queues(tmp_path: Path) -> None:
     source = load_json(FIXTURES / "portfolio_registry.json")
     cyclic = copy.deepcopy(source)
     cyclic["directions"][0]["dependencies"] = [cyclic["directions"][1]["id"]]
@@ -192,13 +203,13 @@ def test_registry_rejects_dependency_cycles_and_more_than_eight_active(tmp_path:
     result = run_cli("validate", "--kind", "portfolio_registry", "--path", str(cyclic_path))
     assert result.returncode == 2, result.stderr
 
-    overflow = copy.deepcopy(source)
-    for direction in overflow["directions"][:9]:
+    queued = copy.deepcopy(source)
+    for direction in queued["directions"][:9]:
         direction["lifecycle"] = "ACTIVE"
-    overflow_path = tmp_path / "active-overflow.json"
-    write_json(overflow_path, overflow)
-    result = run_cli("validate", "--kind", "portfolio_registry", "--path", str(overflow_path))
-    assert result.returncode == 2, result.stderr
+    queued_path = tmp_path / "active-queues.json"
+    write_json(queued_path, queued)
+    result = run_cli("validate", "--kind", "portfolio_registry", "--path", str(queued_path))
+    assert result.returncode == 0, result.stderr
 
 
 def test_state_reconciliation_rejects_stale_missing_and_inconsistent_refs(tmp_path: Path) -> None:

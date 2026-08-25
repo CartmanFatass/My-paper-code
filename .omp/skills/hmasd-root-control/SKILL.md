@@ -43,26 +43,41 @@ absolute worktree paths, and local tab mappings remain in ignored runtime state.
    observation as current, stale, missing, conflicted, or materially changed.
 3. Rank eligible directions from current authorities and newest cited handoffs.
    Qualify work by expected discriminative information, specificity, portfolio
-   leverage, dependencies, and executable next action. Target 2–8 ACTIVE
-   directions only when justified; zero is a valid `IDLE` result.
-4. Separate scientific qualification from resource scheduling. Missing command
-   estimates create preparation work, never a parking reason. Schedule exact
-   commands within safe workstation capacity when estimated at most 7200
-   seconds. Above 7200 seconds, attempt a performance-reasonableness review and
-   request explicit user approval. Unsafe memory is refused mechanically and
-   reduced, batched, or sharded.
-5. Record every create, activate, park, merge, close, or reactivate reason in
-   `PORTFOLIO.md`, then replace the registry through `scripts/hmasd_state.py`
-   using expected-revision CAS and the authority writer `Portfolio`. Never use a
-   relative cost multiplier or absent estimate as the sole parking reason.
-6. Reuse one stable `EM-<direction>` or `CM-<direction>` logical session while
+   leverage, dependencies, and executable next action. `ACTIVE` includes
+   bounded work queues and has no fixed direction-count target; actual EM, CM,
+   Transport, and Experiment Operator concurrency follows worker and local
+   resource capacity. Zero is a valid `IDLE` result.
+4. Route every material transition before ending the wake. Scientific question,
+   principle derivation, evidence synthesis, or result interpretation routes to
+   `EM`; implementation, code repair, code verification, or resource-estimator
+   construction routes to `CM`; external scientific critique routes to
+   `TRANSPORT`; one exact result-bearing command routes to
+   `EXPERIMENT_OPERATOR`; integration and lifecycle reconciliation route to
+   `ROOT`; genuine approval/decision boundaries route to `USER`. Persist the
+   role in `next_action.owner`. A runnable handoff is dispatched in the same
+   wake; an unavailable dependency or capacity becomes exact `waiting_on`
+   queue state with the same next owner. Never leave a material transition
+   ownerless or ask CM to derive scientific authority.
+5. Separate scientific qualification from resource scheduling. Missing command
+   estimates create CM preparation work and never deactivate a direction.
+   Queue exact commands within safe workstation capacity when estimated at most
+   7200 seconds. Above 7200 seconds, attempt a performance-reasonableness review
+   and request explicit user approval. Unsafe memory is refused mechanically
+   and reduced, batched, or sharded.
+6. Record every create, register, activate, return-to-registered, merge, close,
+   or reactivate reason in `PORTFOLIO.md`, then replace the registry through
+   `scripts/hmasd_state.py` using expected-revision CAS and authority writer
+   `Portfolio`. `PARKED` is not a Portfolio lifecycle. `REGISTERED` preserves
+   an eligible direction without a selected queue; `ACTIVE` includes runnable
+   and owned waiting work; `CLOSED` is an exact scientific lifecycle decision.
+7. Reuse one stable `EM-<direction>` or `CM-<direction>` logical session while
    its role, identity, assignment-owned paths, and frozen checkpoint remain
    compatible. Hub may update compatible managers in place. Dispatch EMs and
    CMs directly from Root; no intermediate Portfolio session exists.
-7. Keep the task tree at two subagent levels: Root → EM/CM → specialist. EM and
+8. Keep the task tree at two subagent levels: Root → EM/CM → specialist. EM and
    CM are the only project spawn-capable managers; specialists are leaves.
    Ordinary worker target is 28, preserving four Root/review/recovery slots.
-8. Treat a completed research or engineering round, accepted-result promotion,
+9. Treat a completed research or engineering round, accepted-result promotion,
    terminal-run evidence promotion, external prompt/archive readiness,
    Portfolio lifecycle change, or schema migration as a material checkpoint.
    The trigger is event-driven, not a timer or recurring poller.
@@ -73,15 +88,15 @@ absolute worktree paths, and local tab mappings remain in ignored runtime state.
    leave unrelated changes unstaged and return a conflict when one path mixes
    ownership. Exclude runtime maps, raw runs, generated logs, secrets, and
    unverified source.
-9. Fetch and compare the remote tip before a checkpoint push. Reconcile an
+10. Fetch and compare the remote tip before a checkpoint push. Reconcile an
    unknown push outcome by fetching before retry. Ordinary intermediate events
    may batch into the next checkpoint, but no completed material checkpoint may
    cross a Root wake-cycle boundary uncommitted.
-10. Wait on Hub completion, process exit, an observed file change, or one
+11. Wait on Hub completion, process exit, an observed file change, or one
    bounded reassessment. Never continuously poll or create a successor merely
    because an observation is delayed. Apply one safe recovery route when
    needed.
-11. Stop only at `IDLE`, `COMPLETE`, an explicit user decision request, or an
+12. Stop only at `IDLE`, `COMPLETE`, an explicit user decision request, or an
    exhausted safe recovery result.
 
 The cycle has one reconciliation pass and at most one bounded reassessment per

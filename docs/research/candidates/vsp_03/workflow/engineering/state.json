@@ -14,12 +14,13 @@
   "last_checkpoint_sha": null,
   "next_action": {
     "input_refs": [],
-    "kind": "UNREQUESTED"
+    "kind": "UNREQUESTED",
+    "owner": "ROOT"
   },
   "phase": "UNREQUESTED",
-  "revision": 1,
+  "revision": 2,
   "run_refs": [],
-  "schema_version": 1,
+  "schema_version": 2,
   "scope_ref": {
     "heading": "Engineering request",
     "path": "docs/research/candidates/vsp_03/DIRECTION.md",

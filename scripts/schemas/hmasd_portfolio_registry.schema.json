@@ -76,7 +76,7 @@
         "id": { "$ref": "#/$defs/direction_id" },
         "abbreviation": { "type": "string", "pattern": "^[A-Z][A-Z0-9]{1,15}$" },
         "path": { "$ref": "#/$defs/path" },
-        "lifecycle": { "type": "string", "enum": ["REGISTERED", "ACTIVE", "PARKED", "CLOSED"] },
+        "lifecycle": { "type": "string", "enum": ["REGISTERED", "ACTIVE", "CLOSED"] },
         "dependencies": {
           "type": "array",
           "items": { "$ref": "#/$defs/direction_id" }

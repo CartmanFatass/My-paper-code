@@ -30,7 +30,7 @@ for _environment_name in ("CUDA_VISIBLE_DEVICES", "HIP_VISIBLE_DEVICES", "ROCR_V
 
 import argparse
 import builtins
-from collections.abc import Callable, Iterator, Mapping
+from collections.abc import Callable, Iterator, Mapping, Sequence
 from contextlib import contextmanager
 from dataclasses import dataclass
 import gc
@@ -47,7 +47,6 @@ import sys
 import tempfile
 import time
 from types import ModuleType
-from typing import Any
 import zlib
 
 import numpy as np
@@ -623,15 +622,21 @@ def _collect_fixture_measurements(spec: _FixtureSpec, temporary_parent: Path) ->
 
     timing, _ = _measure_operation(lambda: _training_update_operation(spec), spec.repetitions)
     timing_units["training_update_unit"] = timing
-    rss_stages["actor_autograd"] = int(timing["peak_rss_bytes"])
+    rss_stages["actor_autograd"] = _positive_int(
+        timing["peak_rss_bytes"], "actor/autograd peak RSS"
+    )
 
     timing, _ = _measure_operation(lambda: _validation_panel_operation(spec), spec.repetitions)
     timing_units["validation_panel_unit"] = timing
-    rss_stages["validation_panel"] = int(timing["peak_rss_bytes"])
+    rss_stages["validation_panel"] = _positive_int(
+        timing["peak_rss_bytes"], "validation panel peak RSS"
+    )
 
     timing, _ = _measure_operation(lambda: _base_plus_replay_fit_operation(spec), spec.repetitions)
     timing_units["base_plus_replay_fit_unit"] = timing
-    rss_stages["base_plus_replay_fit"] = int(timing["peak_rss_bytes"])
+    rss_stages["base_plus_replay_fit"] = _positive_int(
+        timing["peak_rss_bytes"], "base-plus-replay fit peak RSS"
+    )
 
     fit_chunks = _neutral_fit_chunks(spec)
     timing, _ = _measure_operation(
@@ -639,7 +644,9 @@ def _collect_fixture_measurements(spec: _FixtureSpec, temporary_parent: Path) ->
         spec.repetitions,
     )
     timing_units["four_fit_concatenation_unit"] = timing
-    rss_stages["four_fit_concatenation"] = int(timing["peak_rss_bytes"])
+    rss_stages["four_fit_concatenation"] = _positive_int(
+        timing["peak_rss_bytes"], "four-fit concatenation peak RSS"
+    )
     del fit_chunks
     gc.collect()
 
@@ -658,11 +665,16 @@ def _collect_fixture_measurements(spec: _FixtureSpec, temporary_parent: Path) ->
             spec.repetitions,
         )
         timing_units["packet_compression_write_unit"] = timing
-        rss_stages["packet_compression_write"] = int(timing["peak_rss_bytes"])
+        rss_stages["packet_compression_write"] = _positive_int(
+            timing["peak_rss_bytes"], "packet compression write peak RSS"
+        )
         packet_sizes = [outcome for outcome in packet_outcomes if isinstance(outcome, dict)]
         if len(packet_sizes) != spec.repetitions:
             raise ResourceEstimateError("The neutral packet write observations were incomplete")
-        compressed_sizes = {int(outcome["compressed_bytes"]) for outcome in packet_sizes}
+        compressed_sizes = {
+            _positive_int(outcome.get("compressed_bytes"), "compressed packet bytes")
+            for outcome in packet_sizes
+        }
         if len(compressed_sizes) != 1:
             raise ResourceEstimateError("The deterministic packet size changed across repetitions")
         compressed_packet_bytes = compressed_sizes.pop()
@@ -671,24 +683,33 @@ def _collect_fixture_measurements(spec: _FixtureSpec, temporary_parent: Path) ->
 
         timing, _ = _measure_operation(lambda: _compression_probe_operation(spec), spec.repetitions)
         timing_units["compression_probe_unit"] = timing
-        rss_stages["compression"] = int(timing["peak_rss_bytes"])
+        rss_stages["compression"] = _positive_int(
+            timing["peak_rss_bytes"], "compression probe peak RSS"
+        )
 
         timing, _ = _measure_operation(
             lambda: _packet_read_access_operation(temporary_path, spec.raw_packet_payload_bytes),
             spec.repetitions,
         )
         timing_units["packet_read_access_unit"] = timing
-        rss_stages["packet_read_access"] = int(timing["peak_rss_bytes"])
+        rss_stages["packet_read_access"] = _positive_int(
+            timing["peak_rss_bytes"], "packet read access peak RSS"
+        )
 
         timing, table_outcomes = _measure_operation(
             lambda: _neutral_table_io_operation(temporary_path, spec), spec.repetitions
         )
         timing_units["neutral_table_io_unit"] = timing
-        rss_stages["neutral_table_io"] = int(timing["peak_rss_bytes"])
+        rss_stages["neutral_table_io"] = _positive_int(
+            timing["peak_rss_bytes"], "neutral table I/O peak RSS"
+        )
         table_sizes = [outcome for outcome in table_outcomes if isinstance(outcome, dict)]
         if len(table_sizes) != spec.repetitions:
             raise ResourceEstimateError("The neutral table observations were incomplete")
-        compressed_table_sizes = {int(outcome["compressed_bytes"]) for outcome in table_sizes}
+        compressed_table_sizes = {
+            _positive_int(outcome.get("compressed_bytes"), "compressed table bytes")
+            for outcome in table_sizes
+        }
         if len(compressed_table_sizes) != 1:
             raise ResourceEstimateError("The deterministic table size changed across repetitions")
         compressed_table_bytes = compressed_table_sizes.pop()
@@ -697,7 +718,9 @@ def _collect_fixture_measurements(spec: _FixtureSpec, temporary_parent: Path) ->
             lambda: _neutral_metadata_json_io_operation(temporary_path), spec.repetitions
         )
         timing_units["neutral_metadata_json_io_unit"] = timing
-        rss_stages["neutral_metadata_json_io"] = int(timing["peak_rss_bytes"])
+        rss_stages["neutral_metadata_json_io"] = _positive_int(
+            timing["peak_rss_bytes"], "neutral metadata JSON I/O peak RSS"
+        )
 
         metadata_json_bytes = (temporary_path / "neutral_metadata.json").stat().st_size
         logical_sixteen_packet_bytes = compressed_packet_bytes * LOGICAL_PACKET_COUNT
@@ -736,7 +759,7 @@ def _is_forbidden_module(name: str) -> bool:
 def _import_candidates(
     name: str,
     globals_dict: Mapping[str, object] | None,
-    fromlist: tuple[object, ...] | list[object],
+    fromlist: Sequence[str] | None,
     level: int,
 ) -> set[str]:
     resolved = name
@@ -748,7 +771,7 @@ def _import_candidates(
             except (ImportError, ValueError):
                 resolved = name
     candidates = {resolved}
-    for item in fromlist:
+    for item in fromlist or ():
         if isinstance(item, str) and item != "*":
             candidates.add(f"{resolved}.{item}")
     return candidates
@@ -765,7 +788,7 @@ def _blocked_mgtap_imports() -> Iterator[None]:
         name: str,
         globals: Mapping[str, object] | None = None,
         locals: Mapping[str, object] | None = None,
-        fromlist: tuple[object, ...] | list[object] = (),
+        fromlist: Sequence[str] | None = (),
         level: int = 0,
     ) -> ModuleType:
         candidates = _import_candidates(name, globals, fromlist, level)
@@ -1226,6 +1249,12 @@ def _build_report(
     disk_raw = _optional_nonnegative_int(capacities.get("disk_available_bytes"), "available disk")
     memory_capacity = _capacity(memory_raw)
     disk_capacity = _capacity(disk_raw)
+    memory_safe_available = _optional_nonnegative_int(
+        memory_capacity.get("safe_available"), "safe available memory"
+    )
+    disk_safe_available = _optional_nonnegative_int(
+        disk_capacity.get("safe_available"), "safe available disk"
+    )
     unknowns: list[dict[str, str]] = [
         {
             "quantity": "gate_only.temporary_bytes",
@@ -1278,13 +1307,13 @@ def _build_report(
         comparisons = {
             "memory": _comparison(
                 peak_upper,
-                memory_capacity["safe_available"],
+                memory_safe_available,
                 MEMORY_SOURCE_ENVELOPE_BYTES,
                 "peak_rss_bytes.conservative_upper",
             ),
             "disk": _comparison(
                 disk_upper,
-                disk_capacity["safe_available"],
+                disk_safe_available,
                 DISK_SOURCE_ENVELOPE_BYTES,
                 "max(temporary_bytes.conservative_upper, retained_bytes.conservative_upper)",
             ),

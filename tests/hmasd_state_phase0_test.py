@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import importlib.util
 import json
 import subprocess
 import sys
@@ -16,6 +17,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any
 
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -106,12 +108,12 @@ def test_unknown_version_extra_key_and_invalid_path_are_refused_without_rewrite(
     path.write_bytes(json.dumps(source, indent=2, sort_keys=True).encode() + b"\n")
 
     original = path.read_bytes()
-    unknown = dict(source, schema_version=2)
+    unknown = dict(source, schema_version=3)
     unknown_path = tmp_path / "unknown.json"
     unknown_path.write_bytes(json.dumps(unknown, indent=2, sort_keys=True).encode() + b"\n")
     result = run_cli("validate", "--kind", "research_state", "--path", str(unknown_path))
     assert result.returncode == 3
-    assert unknown_path.read_bytes() == original.replace(b'"schema_version": 1', b'"schema_version": 2')
+    assert unknown_path.read_bytes() == original.replace(b'"schema_version": 2', b'"schema_version": 3')
 
     extra_path = tmp_path / "extra.json"
     extra_path.write_bytes(
@@ -447,7 +449,7 @@ def test_initialize_replace_and_migrate_are_revision_cas_and_byte_preserving(
 
     replacement = fixture("research_state")
     replacement["revision"] = 2
-    replacement["next_action"] = {"kind": "WAIT", "input_refs": []}
+    replacement["next_action"] = {"kind": "WAIT", "owner": "ROOT", "input_refs": []}
     replacement_path = tmp_path / "replacement.json"
     replacement_path.write_text(json.dumps(replacement), encoding="utf-8")
     stale = run_cli(
@@ -486,6 +488,120 @@ def test_initialize_replace_and_migrate_are_revision_cas_and_byte_preserving(
     assert migrate.returncode == 3
     assert unsupported_path.read_text(encoding="utf-8") == unsupported_path.read_text(encoding="utf-8")
 
+    legacy = fixture("research_state")
+    legacy["schema_version"] = 1
+    legacy["next_action"].pop("owner")
+    legacy_path = tmp_path / "legacy.json"
+    legacy_input = tmp_path / "legacy-input.json"
+    legacy_input.write_text(json.dumps(legacy), encoding="utf-8")
+    initialize_legacy = run_cli(
+        "initialize",
+        "--kind",
+        "research_state",
+        "--path",
+        str(legacy_path),
+        "--writer",
+        "EM-example-direction",
+        "--input",
+        str(legacy_input),
+    )
+    assert initialize_legacy.returncode == 3, initialize_legacy.stderr
+    assert not legacy_path.exists()
+    legacy_path.write_text(json.dumps(legacy), encoding="utf-8")
+    migrate_legacy = run_cli(
+        "migrate",
+        "--kind",
+        "research_state",
+        "--path",
+        str(legacy_path),
+        "--writer",
+        "EM-example-direction",
+        "--expected-revision",
+        "1",
+        "--to-version",
+        "2",
+    )
+    assert migrate_legacy.returncode == 0, migrate_legacy.stderr
+    migrated = json.loads(legacy_path.read_text(encoding="utf-8"))
+    assert migrated["schema_version"] == 2
+    assert migrated["revision"] == 2
+    assert migrated["next_action"]["owner"] == "EM"
+
+
+def test_replace_repairs_only_stale_current_research_direction_ref(
+    tmp_path: Path, monkeypatch
+) -> None:
+    spec = importlib.util.spec_from_file_location("hmasd_state_live_ref", SCRIPT)
+    assert spec is not None and spec.loader is not None
+    state = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(state)
+
+    isolated_root = tmp_path / "root"
+    direction_ref = "docs/research/candidates/example-direction/DIRECTION.md"
+    authority = isolated_root / direction_ref
+    authority.parent.mkdir(parents=True)
+    authority.write_text("# current authority\n", encoding="utf-8")
+    live_sha = hashlib.sha256(authority.read_bytes()).hexdigest()
+    registry_path = isolated_root / "docs/research/portfolio/workflow/registry.json"
+    registry_path.parent.mkdir(parents=True)
+    registry_path.write_text(
+        json.dumps(
+            {
+                "directions": [
+                    {
+                        "id": "example-direction",
+                        "path": "docs/research/candidates/example-direction",
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(state, "ROOT", isolated_root)
+
+    current = fixture("research_state")
+    current["direction_ref"]["sha256"] = "a" * 64
+    target = tmp_path / "state.json"
+    target.write_text(json.dumps(current), encoding="utf-8")
+    candidate = copy.deepcopy(current)
+    candidate["direction_ref"]["sha256"] = live_sha
+    candidate["revision"] = 2
+
+    with pytest.raises(state.ValidationError, match="research direction_ref SHA"):
+        state.validate_document("research_state", current, writer=current["writer"])
+    assert state.validate_document("research_state", candidate, writer=candidate["writer"]) == candidate
+
+    before = target.read_bytes()
+    stale_candidate = copy.deepcopy(candidate)
+    stale_candidate["direction_ref"]["sha256"] = "b" * 64
+    with pytest.raises(state.ValidationError, match="research direction_ref SHA"):
+        state.replace(
+            "research_state",
+            target,
+            candidate["writer"],
+            expected_revision=1,
+            input=stale_candidate,
+        )
+    assert target.read_bytes() == before
+
+    with pytest.raises(state.RevisionConflictError, match="expected revision 2, observed 1"):
+        state.replace(
+            "research_state",
+            target,
+            candidate["writer"],
+            expected_revision=2,
+            input=candidate,
+        )
+    assert target.read_bytes() == before
+
+    assert state.replace(
+        "research_state",
+        target,
+        candidate["writer"],
+        expected_revision=1,
+        input=candidate,
+    ) == candidate
+    assert json.loads(target.read_text(encoding="utf-8")) == candidate
 
 def test_concurrent_initialize_has_one_winner_and_losers_preserve_bytes(tmp_path: Path) -> None:
     source = FIXTURES / "research_state.json"

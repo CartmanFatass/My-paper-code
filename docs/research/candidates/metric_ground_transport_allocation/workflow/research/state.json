@@ -45,13 +45,14 @@
       },
       "docs/research/candidates/metric_ground_transport_allocation/MGTAP_MATCHED_UPDATE_SUPPORT_IDENTIFIABILITY_RESOURCE_HANDOFF_20260825.md"
     ],
-    "kind": "ROOT_DISPATCH_PREACTIVITY_RESOURCE_ESTIMATOR"
+    "kind": "ROOT_DISPATCH_PREACTIVITY_RESOURCE_ESTIMATOR",
+    "owner": "CM"
   },
   "phase": "ENGINEERING_REQUESTED",
   "question_sha256": "f9bd1122f7fa3daca8b9631ce908b9499ceb7eb8f70caece39ee6482b85e0935",
   "registry_revision_seen": 4,
-  "revision": 3,
-  "schema_version": 1,
+  "revision": 4,
+  "schema_version": 2,
   "updated_at": "2026-08-25T05:37:47Z",
   "waiting_on": [],
   "writer": "EM-metric_ground_transport_allocation"

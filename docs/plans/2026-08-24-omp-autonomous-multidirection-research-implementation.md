@@ -16,7 +16,7 @@
 The implementation is complete when one resumed Root OMP session can:
 
 1. reconcile durable portfolio and direction state directly in Root;
-2. maintain 2–8 active research directions without a fixed registration cap;
+2. maintain an uncapped evidence-backed active queue while bounding execution by resources;
 3. revive bounded EM and CM logical sessions instead of polling;
 4. execute scientific research, engineering, local CPU runs, external review,
    Git integration, recovery, and compact reporting through a two-level
@@ -311,8 +311,8 @@ HMASD validates its native `schema` discriminator and never adds
 
 Validation:
 
-- `lifecycle` is `REGISTERED | ACTIVE | PARKED | CLOSED`;
-- at most eight directions may be `ACTIVE`; the schema never forces a minimum;
+- `lifecycle` is `REGISTERED | ACTIVE | CLOSED`; generic `PARKED` is rejected;
+- `ACTIVE` includes runnable and queued work and has no fixed count cap;
 - direction IDs, abbreviations, paths, logical identities, and job names are
   unique;
 - dependencies refer to registered IDs and form an acyclic graph;
@@ -324,7 +324,7 @@ Validation:
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "revision": 1,
   "updated_at": "2026-08-24T00:00:00Z",
   "writer": "EM-example-direction",
@@ -346,6 +346,7 @@ Validation:
   "last_checkpoint_sha": null,
   "next_action": {
     "kind": "DISPATCH_RESEARCH",
+    "owner": "EM",
     "input_refs": []
   }
 }
@@ -365,13 +366,15 @@ blockers may reference manifests, logs, state, or Git evidence.
 `active_agents[]` contains logical identity, generation, assignment ID, and a
 nullable runtime reference; it never stores a session transcript.
 `engineering_request` contains only scope and acceptance references into
-`DIRECTION.md`, never rewritten scientific text.
+`DIRECTION.md`, never rewritten scientific text. `next_action.owner` is one of
+`ROOT | EM | CM | TRANSPORT | EXPERIMENT_OPERATOR | USER` and makes the
+cross-role handoff deterministic.
 
 ### 7.3 Engineering state
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "revision": 1,
   "updated_at": "2026-08-24T00:00:00Z",
   "writer": "CM-example-direction",
@@ -400,6 +403,7 @@ nullable runtime reference; it never stores a session transcript.
   "last_checkpoint_sha": null,
   "next_action": {
     "kind": "SCOUT_CODE",
+    "owner": "CM",
     "input_refs": []
   }
 }
@@ -792,15 +796,17 @@ condition.
 
 - Reconcile `PORTFOLIO.md`, registry, all direction states, `.omp/runtime`, Hub
   jobs, worktrees, runs, Agentify references, and Git before dispatch.
-- Rank current and recently active directions; target 2–8 only after scientific
-  qualification, with zero as a valid IDLE result.
-- Create, activate, park, merge, close, and reactivate with reasons written only
-  to `PORTFOLIO.md`, then replace registry state by CAS using authority writer
-  `Portfolio`.
-- Keep scientific qualification separate from resources: missing estimates
-  create preparation work; absolute safe work up to 7200 seconds is schedulable;
-  longer work requires performance review and explicit user approval; unsafe
-  memory is reduced, batched, or sharded.
+- Rank current and recently active directions. Activate every scientifically
+  qualified runnable or exact queued next action; zero remains a valid IDLE
+  result and execution concurrency remains resource-bounded.
+- Create, register, activate, return-to-registered, merge, close, and reactivate
+  with reasons written only to `PORTFOLIO.md`, then replace registry state by
+  CAS using authority writer `Portfolio`. `PARKED` is not a Portfolio
+  lifecycle.
+- Route science to EM, implementation to CM, external review to Transport,
+  exact commands to an Experiment Operator resource queue, integration and
+  lifecycle to Root, and genuine decisions to the user. Persist
+  `next_action.owner`; never end a material wake with an ownerless handoff.
 - Start or revive EM and CM sessions directly. Inject only material transitions
   and keep Root → EM/CM → specialist as the maximum path.
 - Stop at IDLE, COMPLETE, a rules-defined user decision, or exhausted recovery.
@@ -840,8 +846,10 @@ condition.
   gap and remains fail-open for asking the user.
 - Return exit code `8` with a frozen decision request binding direction/run ID,
   argv, code SHA, parameters, estimates, and evidence SHAs. Approval resumes
-  exactly that request and dispatches one Operator; rejection cancels or parks
-  it. Advisor/reviewer output is never the approval token.
+  exactly that request and dispatches one Operator; rejection cancels the run
+  request or returns engineering state to exact `WAITING`. It never creates an
+  ambiguous Portfolio lifecycle. Advisor/reviewer output is never the approval
+  token.
 - At `<= 7200`, one Operator uses Hub to own one `hmasd_run.py execute` process.
 - Inspect duplicate manifests and PID identity before launch.
 - Never start a successor or reinterpret metrics.
@@ -1321,8 +1329,8 @@ Material checkpoints are:
 - accepted result promotion;
 - terminal run evidence promotion;
 - external prompt/archive readiness;
-- direction lifecycle create/activate/park/merge/close/reactivate; and
-- schema migration.
+- direction lifecycle create/register/activate/return-to-registered/merge/close/reactivate; and
+- schema migration, including cross-role routing owners.
 
 The trigger is event-driven, never a timer or recurring model poller. Before a
 dependent dispatch or Root stop, Root validates every changed path, stages only
@@ -1448,11 +1456,12 @@ GREEN:
 
 Acceptance:
 
-- registered directions have no hard cap;
-- at most eight may be active;
-- Root targets 2–8 only after scientific qualification and may enter IDLE with
-  zero qualified directions;
-- parking/closure does not delete science;
+- registered and active directions have no hard count cap;
+- active includes runnable work and exact dependency/resource queues;
+- Root may enter IDLE with zero qualified directions;
+- science routes to EM, code to CM, external critique to Transport, commands to
+  Experiment Operators, and decisions to the user;
+- return to `REGISTERED` or closure does not delete science;
 - no primary model polls while IDLE.
 
 ### Phase 3: Git worktrees and CM engineering

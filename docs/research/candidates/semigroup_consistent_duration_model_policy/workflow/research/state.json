@@ -30,13 +30,14 @@
         "sha256": "d65024518079a22b3e0e34fe7b23c5edfe274a98502ca4dc0e3b275d484bd9be"
       }
     ],
-    "kind": "PORTFOLIO_RECONCILE_FUSION_AUTHORITY_GAP"
+    "kind": "PORTFOLIO_RECONCILE_FUSION_AUTHORITY_GAP",
+    "owner": "EM"
   },
   "phase": "COMPLETE",
   "question_sha256": "d035824e97cd047514d224000300b3ff19025d86707685441bba67b984912e75",
   "registry_revision_seen": 4,
-  "revision": 3,
-  "schema_version": 1,
+  "revision": 4,
+  "schema_version": 2,
   "updated_at": "2026-08-25T07:19:16.142591Z",
   "waiting_on": [],
   "writer": "EM-semigroup_consistent_duration_model_policy"

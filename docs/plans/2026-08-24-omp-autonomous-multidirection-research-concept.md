@@ -123,8 +123,8 @@ it reaches a real approval or decision boundary.
 
 Ordinary automatic work includes:
 
-- Portfolio activation, reactivation, ranking, merging, parking, and closure of
-  research directions;
+- Portfolio registration, activation, return to registered attention, ranking,
+  merging, closure, and reactivation of research directions;
 - EM research, specialist dispatch, local synthesis, and external-review rounds;
 - CM code scouting, implementation, review, verification, ordinary recovery,
   and OMP-branch integration;
@@ -324,8 +324,8 @@ control/recovery reserve implemented in Skills, not a lease system or mechanical
 capacity gate. Ordinary work targets at most 28 active worker slots; urgent
 control or recovery work may start and let ordinary work queue naturally.
 
-- Root dynamically chooses 2–8 active directions after mechanical eligibility
-  filtering and scientific ranking.
+- Root activates every evidence-backed runnable or explicitly queued direction;
+  active direction count is not a concurrency limit.
 - Each EM starts two specialists by default and may expand to four when the
   material question and current capacity justify it.
 - Each CM starts two specialists by default and may expand to six when file
@@ -336,10 +336,12 @@ control or recovery work may start and let ordinary work queue naturally.
 No new capacity scheduler or resource lease is introduced. Real resource
 conflicts may justify a later narrow mechanism only after they are observed.
 
-Root may create, register, activate, park, merge, close, and reactivate
-directions. Registered directions have no hard count limit. Every merge or
-closure records a material scientific reason, inheritance relationship, and
-reactivation condition in authoritative Markdown/Git history.
+Root may create, register, activate, return a direction to registered attention,
+merge, close, and reactivate directions. Registered and active directions have
+no hard count limit; worker and workstation resources bound only concurrent
+execution. Every merge or closure records a material scientific reason,
+inheritance relationship, and reactivation condition in authoritative
+Markdown/Git history.
 
 Mechanical eligibility filters hard blockers, duplicate IDs, dependencies, and
 resource impossibility. Root performs scientific ranking using information
@@ -444,12 +446,17 @@ agent references, run references, and next mechanical action.
 Direction lifecycle and waiting conditions are orthogonal:
 
 ```text
-lifecycle: REGISTERED | ACTIVE | PARKED | CLOSED
+lifecycle: REGISTERED | ACTIVE | CLOSED
 actionable: boolean
 blockers: [...]
 waiting_on: [...]
+next_action: { kind, owner, input_refs }
 active_round: optional reference
 ```
+
+`PARKED` is deliberately not a Portfolio lifecycle. `REGISTERED` preserves an
+eligible direction without a selected queue. `ACTIVE` includes runnable work
+and exact queues for unavailable dependencies or capacity.
 
 Ordinary material changes do not create immutable event files. File changes
 trigger automation; Git history provides traceability. There is no tracked

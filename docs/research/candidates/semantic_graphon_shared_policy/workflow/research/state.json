@@ -1,5 +1,5 @@
 {
-  "actionable": false,
+  "actionable": true,
   "active_agents": [],
   "active_round_id": null,
   "blockers": [],
@@ -8,19 +8,59 @@
     "path": "docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md",
     "sha256": "2fb5239b02eff2ca71421a44612ceac3539c3e0638c7fa9adeccb763e09fdb78"
   },
-  "engineering_request": null,
-  "evidence_set_sha256": "6b7c08b8b459e644467a4e6fe827f098717d8049acdea0da3b6dab064c21186e",
-  "last_checkpoint_sha": null,
-  "next_action": {
-    "input_refs": [],
-    "kind": "IDLE"
+  "engineering_request": {
+    "acceptance_refs": [
+      "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_STATIC_FULL_COST_ASSESSMENT_HANDOFF_20260825.md#acceptance-criteria",
+      "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_STATIC_FULL_COST_ASSESSMENT_HANDOFF_20260825.md#explicit-forbidden-boundary"
+    ],
+    "scope_ref": "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_STATIC_FULL_COST_ASSESSMENT_HANDOFF_20260825.md#engineering-request-cm-static-full-cost-assessment"
   },
-  "phase": "IDLE",
+  "evidence_set_sha256": "6b7c08b8b459e644467a4e6fe827f098717d8049acdea0da3b6dab064c21186e",
+  "last_checkpoint_sha": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a",
+  "next_action": {
+    "input_refs": [
+      {
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "7d5353ab63a8ead4f90f6cb565df9620f68fb605d27150e2e8315c6ec49df86a"
+      },
+      {
+        "path": "docs/research/portfolio/workflow/registry.json",
+        "sha256": "d02edd6b91c1fb103964f1f5b5a72c5f4d1fb0c0a651ba7b792bb2d1f2d685ee"
+      },
+      {
+        "path": "docs/research/candidates/semantic_graphon_shared_policy/DIRECTION.md",
+        "sha256": "2fb5239b02eff2ca71421a44612ceac3539c3e0638c7fa9adeccb763e09fdb78"
+      },
+      {
+        "path": "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RG2Z_ROLE_SAMPLED_CF_R01_SCIENCE_CARD.md",
+        "sha256": "1af5b6add80af436ab7c2ecc334673f15cbddae3d18e2ac6fe7b726e8b97eaa4"
+      },
+      {
+        "path": "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RG2Z_COUNTERFACTUAL_CREDIT_ASSIGNMENT_R01_SCIENCE_CARD.md",
+        "sha256": "1fd0a7446365f109b94ae2ec1761656b7b99c8127df3ea103388ff1ca7e38dcb"
+      },
+      {
+        "path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/external-review/index.json",
+        "sha256": "2574d62e5712580f4c6d625cb0eee5531cabd775374b27ba0e43d1f39f74fce2"
+      },
+      {
+        "path": "docs/research/candidates/semantic_graphon_shared_policy/workflow/engineering/state.json",
+        "sha256": "24fe82913c1c159b443a3a5ca1be28d049d36e582d82d9e05b759075c580229f"
+      },
+      {
+        "path": "docs/research/candidates/semantic_graphon_shared_policy/SGSP_RSCF_STATIC_FULL_COST_ASSESSMENT_HANDOFF_20260825.md",
+        "sha256": "99f02e729b5924ec2e9403f3cade56da266a23f7b4115fdaaaf09cfd2de29fb1"
+      }
+    ],
+    "kind": "ROOT_ROUTE_CM_STATIC_FULL_COST_ASSESSMENT",
+    "owner": "CM"
+  },
+  "phase": "ENGINEERING_REQUESTED",
   "question_sha256": "70b2ed242ca4fcee5c54c00e814d336cbccc945a45252278093e4955f98d52cf",
-  "registry_revision_seen": 1,
-  "revision": 1,
-  "schema_version": 1,
-  "updated_at": "2026-08-24T00:00:00Z",
+  "registry_revision_seen": 9,
+  "revision": 4,
+  "schema_version": 2,
+  "updated_at": "2026-08-25T12:10:58Z",
   "waiting_on": [],
   "writer": "EM-semantic_graphon_shared_policy"
 }

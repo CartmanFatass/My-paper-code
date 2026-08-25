@@ -13,13 +13,14 @@
   "last_checkpoint_sha": null,
   "next_action": {
     "input_refs": [],
-    "kind": "IDLE"
+    "kind": "IDLE",
+    "owner": "ROOT"
   },
   "phase": "IDLE",
   "question_sha256": "e675e2fe23aa8fb9788717c331872285762732fd21bc83a7062350412ba9174a",
   "registry_revision_seen": 1,
   "revision": 1,
-  "schema_version": 1,
+  "schema_version": 2,
   "updated_at": "2026-08-24T00:00:00Z",
   "waiting_on": [],
   "writer": "EM-active_post_churn_population_flow_identification"

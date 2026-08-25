@@ -670,3 +670,77 @@ boundary:
 
 No new EM may run a scientific command, inspect partial values, mutate source,
 dispatch CM, commit Git, issue a lease, or reinterpret retained results.
+
+## PARKED lifecycle retirement — 2026-08-25T11:56:36Z
+
+The generic Portfolio lifecycle `PARKED` is retired by clean cutover. Historical
+uses remain provenance, but no current or future registry entry may use it.
+The state was ambiguous: it conflated absence of scientific value with missing
+EM scope work, unavailable CM capacity, missing resource estimates, compute
+capacity, transport readiness, and exact science-authority gaps. That ambiguity
+could remove valuable directions from attention without placing their next
+work in an owned queue.
+
+Current Portfolio lifecycle is:
+
+```text
+REGISTERED | ACTIVE | CLOSED
+```
+
+- `REGISTERED` means the direction is preserved, eligible, and screened at each
+  material Portfolio ranking wake, but no current bounded owner is assigned.
+  It is not parked, rejected, dormant, or valueless.
+- `ACTIVE` means Root has selected at least one bounded current owner or wait
+  queue. It includes EM research, CM implementation or verification, strict
+  external transport preparation/observation, resource estimation, safe
+  compute-capacity waiting, and explicit user-decision waiting.
+- `CLOSED` means the current authority supports no continuation and records an
+  exact scientific lifecycle decision. Closure preserves all evidence.
+
+Waiting requirements live in the owning direction state rather than a vague
+Portfolio label. A wait records `phase=WAITING` where applicable,
+`actionable`, exact `blockers`, `waiting_on.kind`, the responsible reference
+and expected terminal states, and a concrete `next_action` with input refs.
+Missing CM creation, cost estimates, worktree capacity, safe compute slots, or
+transport availability keeps a selected direction `ACTIVE`; it creates queued
+preparation work and never deactivates the direction. Unsafe memory still
+requires reduction, batching, or sharding.
+
+FSBS and SCDMP return to `REGISTERED`. Their exact research states and evidence
+artifacts continue to express respectively the missing variable-axis
+cooperative/UAV science authority and the missing same-target native fusion
+authority. They are not discarded and will be screened on later Portfolio
+wakes. This section supersedes their prior `PARKED` lifecycle decisions without
+rewriting those historical records.
+
+## Deterministic cross-role pipeline routing — 2026-08-25T12:06:26Z
+
+Portfolio lifecycle is not an execution-slot counter. `ACTIVE` now includes
+every evidence-backed runnable direction and every selected direction with an
+exact dependency or resource queue. There is no fixed active-direction cap.
+Worker count, local CPU/RAM, strict transport availability, and the 7200-second
+approval boundary limit concurrent execution without erasing queued work.
+
+Every material checkpoint records one next responsible role:
+
+| Work exposed by the checkpoint | `next_action.owner` |
+|---|---|
+| scientific question, principle derivation, evidence synthesis, result interpretation | `EM` |
+| implementation, code repair, code verification, resource-estimator construction | `CM` |
+| frozen external scientific critique | `TRANSPORT` |
+| one exact result-bearing command | `EXPERIMENT_OPERATOR` |
+| Portfolio lifecycle, Git integration, checkpoint reconciliation | `ROOT` |
+| genuine approval or scientific choice unavailable from authority | `USER` |
+
+The owner is the role responsible for the next work, not the role that noticed
+the gap. CM therefore returns an unresolved scientific principle to Root with
+owner `EM`; EM returns a frozen implementation request with owner `CM`.
+Runnable handoffs dispatch in the same Root wake. Capacity or dependency waits
+retain the same owner and gain exact `waiting_on` references rather than
+cross-role silence.
+
+FSBS and SCDMP are reactivated into the EM queue. Their schema-v2 research
+states now name owner `EM` for the exact variable-axis cooperative/UAV science
+authority and same-target fusion-authority work respectively. This activation
+supersedes their immediately prior no-owner `REGISTERED` transition; neither
+direction is discarded or sent to CM before its scientific authority exists.

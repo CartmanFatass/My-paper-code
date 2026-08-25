@@ -2,7 +2,28 @@
   "actionable": false,
   "active_agents": [],
   "active_round_id": null,
-  "blockers": [],
+  "blockers": [
+    {
+      "code": "RCLE_HISTORY_BYTES_ABSENT",
+      "observed_refs": [
+        {
+          "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_IMMEDIATE_SUPERSEDING_LEASE_PORTFOLIO_EM_INTAKE_20260824.md",
+          "sha256": "0f2f4d1f9a36c0815cf3db89b95b0f47a38fc4640eb47926e0f3fe863f544a85"
+        },
+        "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_CURRENT_AUTHORITY_REACCEPTANCE_EVIDENCE_GAP_20260825.md#exact-technical-evidence-gap-and-resume-condition"
+      ],
+      "resume_condition_ref": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_CURRENT_AUTHORITY_REACCEPTANCE_EVIDENCE_GAP_20260825.md#exact-technical-evidence-gap-and-resume-condition"
+    },
+    {
+      "code": "RCLE_SOLE_GATE_UNDEFINED",
+      "observed_refs": [
+        "experiments/candidates/roster_consistent_latent_exploration_tbcfv/empirical_runner.py#admit_production",
+        "experiments/candidates/roster_consistent_latent_exploration_tbcfv/__main__.py#main",
+        "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_CURRENT_AUTHORITY_REACCEPTANCE_EVIDENCE_GAP_20260825.md#material-conclusion"
+      ],
+      "resume_condition_ref": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_CURRENT_AUTHORITY_REACCEPTANCE_EVIDENCE_GAP_20260825.md#exact-technical-evidence-gap-and-resume-condition"
+    }
+  ],
   "direction_id": "roster_consistent_latent_exploration",
   "direction_ref": {
     "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
@@ -10,17 +31,64 @@
   },
   "engineering_request": null,
   "evidence_set_sha256": "03e131b71d63db78ca5c13ffe497fa778a9ae23a6cc53e301bb0350797543ce0",
-  "last_checkpoint_sha": null,
+  "last_checkpoint_sha": "a3da214941f3163f21033991f6d5f2338e2d3b59f32c3ef32cb4dfcc1998f65a",
   "next_action": {
-    "input_refs": [],
-    "kind": "IDLE"
+    "input_refs": [
+      {
+        "path": "docs/research/portfolio/PORTFOLIO.md",
+        "sha256": "a3da214941f3163f21033991f6d5f2338e2d3b59f32c3ef32cb4dfcc1998f65a"
+      },
+      {
+        "path": "docs/research/portfolio/workflow/registry.json",
+        "sha256": "fb1c32ce91d10625f7e1117c4fe3cff9f031c9ce66a1b540880d38ce075d3089"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/DIRECTION.md",
+        "sha256": "f98b477bfb15f286f1b6a4fd798cb949713986f19911adb676b031829e0f71f2"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TARGET_BOUND_COMMITMENT_FRAGMENTATION_VALUE_SCIENCE_CARD.md",
+        "sha256": "86a0f5efd69d6b92482cb081973effa67972aad8421d3abd25305e50dc6c1fd8"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_IMMEDIATE_SUPERSEDING_LEASE_PORTFOLIO_EM_INTAKE_20260824.md",
+        "sha256": "0f2f4d1f9a36c0815cf3db89b95b0f47a38fc4640eb47926e0f3fe863f544a85"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_EXTERNAL_PRO_CLOSED_INTAKE.md",
+        "sha256": "6e6b9271c2309069eff8e19a03d50eb0bf76f80cf6782f423fcf0a97ebb88b7f"
+      },
+      {
+        "path": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_CURRENT_AUTHORITY_REACCEPTANCE_EVIDENCE_GAP_20260825.md",
+        "sha256": "51267e928f047230aa0c25b99770b73f2d698a2f08429003d34f2abab42ea362"
+      }
+    ],
+    "kind": "ROOT_RESTORE_RCLE_CURRENT_AUTHORITY_INPUTS",
+    "owner": "ROOT"
   },
-  "phase": "IDLE",
+  "phase": "WAITING",
   "question_sha256": "b02a61943ad67c19a55ebe4ca841d92917dd38825246be39ca78d5bd187e8e2b",
-  "registry_revision_seen": 1,
-  "revision": 1,
-  "schema_version": 1,
-  "updated_at": "2026-08-24T00:00:00Z",
-  "waiting_on": [],
+  "registry_revision_seen": 7,
+  "revision": 3,
+  "schema_version": 2,
+  "updated_at": "2026-08-25T11:56:36Z",
+  "waiting_on": [
+    {
+      "expected_terminal_states": [
+        "RESTORED",
+        "UNAVAILABLE"
+      ],
+      "kind": "ROOT_HISTORY_BYTES",
+      "ref": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_CURRENT_AUTHORITY_REACCEPTANCE_EVIDENCE_GAP_20260825.md#exact-technical-evidence-gap-and-resume-condition"
+    },
+    {
+      "expected_terminal_states": [
+        "FROZEN",
+        "DECLINED"
+      ],
+      "kind": "ROOT_SOLE_ADMISSION_GATE",
+      "ref": "docs/research/candidates/roster_consistent_latent_exploration/RCLE_TBCFV_R04_CURRENT_AUTHORITY_REACCEPTANCE_EVIDENCE_GAP_20260825.md#exact-technical-evidence-gap-and-resume-condition"
+    }
+  ],
   "writer": "EM-roster_consistent_latent_exploration"
 }
